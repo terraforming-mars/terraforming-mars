@@ -4,7 +4,7 @@
   
   "Icy Impactors": "凍結衝突体",
   "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "アクション：10M€支払い、このカード上に2小惑星追加. ※チタンでの支払い可能.",
-  "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "アクション：このカード上から1小惑星を除去し、海洋配置. 配置場所はその世代の1番手が決める.",
+  "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "アクション：このカード上から1小惑星を除去し、海洋配置. 配置場所は第1プレイヤーが決める.",
   
   "Floyd Continuum": "フロイド連続体",
   "Action: Gain 3 M€ per completed terraforming parameter.": "アクション：完了済みのグローバルパラメーター1つ毎に3MC獲得.",
@@ -24,7 +24,7 @@
   "Raise your TR 1 step.": "TR+1段階.",
   
   "Red Ships": "赤き船",
-  "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "アクション：海洋に隣接する都市タイルと特殊タイルの合計数分、1MC獲得.",
+  "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "アクション：海洋に隣接する都市と特殊タイルの合計数分、1MC獲得.",
   "Requires 4% oxygen.": "条件：酸素4%以上.",
   
   "Neptunian Power Consultants": "海王星電力コンサルタント",
@@ -61,7 +61,7 @@
   "RETURN UP TO 2 OF YOUR PLAYED EVENT CARDS TO YOUR HAND. THEY MAY NOT BE CARDS THAT PLACE SPECIAL TILES.": "プレイ済みのイベントカード2枚を手札に戻す. ※特殊タイルを配置するカードは不可.",
   
   "Aqueduct Systems": "水路システム",
-  "Requires you have a city next to an ocean. Draw 3 cards with a building tag.": "条件：海洋に隣接する都市タイルを所持. 土建タグカードを3枚入手.",
+  "Requires you have a city next to an ocean. Draw 3 cards with a building tag.": "条件：海洋に隣接する都市を所持. 土建タグカードを3枚入手.",
     
   "Directed Heat Usage": "誘導熱利用",
   "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "アクション：3温熱を支払い、4MC または 2植物獲得.",
@@ -195,11 +195,14 @@
   "Stanford Torus": "スタンフォード・トーラス",
   "Place a city tile IN SPACE, outside and separate from the planet.": "宇宙空間上に都市タイルを配置.",
 
-  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.": "温度+3段階. 4建材獲得. 都市タイルに隣接しないように特殊タイルを配置. 望むならプレイヤー1人から最大6植物除去..",
+  "Deimos Down": "ダイモス落とし",
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.": "温度+3段階. 4建材獲得. 都市タイルに隣接しないように特殊タイルを配置. 望むならプレイヤー1人から最大6植物除去.",
 
-  "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "条件：海洋4枚以上. 電力産出+2 海洋タイルに隣接させて特殊タイルを配置.",
+  "Great Dam": "水力発電",
+  "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "条件：海洋4枚以上. 電力産出+2. 海洋タイルに隣接させて特殊タイルを配置.",
 
-  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.": "電力産出-4し、植物産出+2. TR+3段階.",
+  "Magnetic Field Generators": "磁場発生装置",
+  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.": "電力産出-4し、植物産出+2. TR+3段階. 特殊タイルを配置.",
 
   "Requires 8 oceans. 1 VP for each animal on this card.": "条件：海洋8枚以上. このカード上の1動物毎に1VP.",
   "Requires 2 science tags.": "条件：科学タグ2つ以上.",
@@ -216,7 +219,7 @@
   "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "条件：緑地タイルを3枚以上所持. 12MC獲得.",
 
   "Outdoor Sports": "アウトドア・スポーツ",
-  "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "条件：海洋に隣接する都市タイルが存在. MC産出+2.",
+  "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "条件：海洋に隣接する都市が存在. MC産出+2.",
 
   "Saturn Surfing": "土星サーフィン",
   "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.": "アクション：このカード上の1浮遊体毎に1MC獲得(最大5MC)し、このカード上から1浮遊体除去.",

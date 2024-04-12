@@ -1,95 +1,138 @@
 {
-  "Discard 2 cards from hand. Gain 2 M€ per influence.": "",
-  "Gain 2 M€ per Venus tag (max 5) and influence.": "",
-  "Gain 1 plant per plant production (max 5) and influence.": "",
-  "Gain 1 M€ for each card in hand (no limit) and influence.": "",
-  "First player places an ocean tile. Gain 1 plant and 1 steel per influence.": "",
-  "Gain 1 titanium for each Jovian tag (max 5) and influence.": "",
-  "Gain 2 M€ for each event played (max 5) and influence.": "",
-  "Add a floater to each card that can collect floaters. Add 1 floater for each influence to a card.": "",
-  "Lose 2 floaters from a card or 10 M€. Draw 1 card for each influence.": "",
-  "Gain 10 M€ if you have 9 or more different tags. Influence counts as unique tags.": "",
-  "First player removes 1 ocean tile from the gameboard. Gain 1 standard resource per influence.": "",
-  "Lose all plants except 3 + influence.": "",
-  "Count your influence plus building tags and city tiles (no limits). The player with most (or 10 in solo) gains 2 TR, the 2nd (or 5 in solo) gains 1 TR (ties are friendly).": "",
-  "Gain 2 M€ for each influence and set of 5 TR over 15 (max 5 sets).": "",
-  "Lose all heat. Lose 2 M€ for each building tag (max 5, then reduced by influence).": "",
-  "Gain 2 M€ for each Earth tag (max 5) and influence.": "",
-  "Increase energy production 1 step per 2 power tags (no limit). Influence counts as power tags.": "",
-  "Gain 2 M€ for each space tag (max 5) and influence.": "",
-  "Increase M€ production 1 step for each colony. Gain 1 titanium for each influence.": "",
-  "Lose 1 titanium for each Jovian tag (max 5, then reduced by influence).": "",
-  "Lose 4 M€ for each tile adjacent to ocean (max 5, then reduced by influence).": "",
-  "Lose 3 M€ for each building tag (max 5, then reduced by influence).": "",
-  "Gain 1 steel for each steel production (max 5) and influence.": "",
-  "Lose 3 M€ for each set of 5 TR over 10 (max 5 sets). Increase M€ production 1 step per influence.": "",
-  "Count Earth tags and ADD(!) influence. The player(s) with most (at least 1) loses 2 TR, and 2nd most (at least 1) loses 1 TR. SOLO: Lose 2 TR if the sum is 4 or more.": "",
-  "Lose 4 M€ for each city tile (max 5, then reduced by influence).": "",
-  "Decrease steel and energy production 1 step each. Gain 1 steel per influence.": "",
-  "Decrease temperature 2 steps. Draw 1 card per influence.": "",
-  "Lose 3 M€ for each space tag (max 5, then reduced by influence).": "",
-  "Lose 3 M€ for each blue card (max 5, then reduced by influence).": "",
-  "Lose 3 M€ for each colony (max 5, then reduced by influence).": "",
-  "Gain 2 M€ for each science tag (max 5) and influence.": "",
-  "All cards with resources on them gain 1 resource. Draw 1 card for each influence.": "",
-  "Gain 2 M€ for each city tile (max 5) and influence.": "",
-  "Increase temperature 2 steps. Increase heat production 1 step per influence.": "",
-  "Reduce TR 4 steps. Each influence prevents 1 step.": "",
-  "Draw 1 card for each party leader (max 5) and influence.": "",
-  "Gain 2M€ for each Mars tag you have (max 5) and influence.": "",
-  "Increase your M€ production 1 step for every special tile you own (max 5.) Gain 1 energy for every influence you have": "",
-  "Pay 10M€, reduced by 1M€ per influence. Raise every planetary track 2 steps. Nobody gains the \"rising player\" bonus.": "",
-  "Lose 1 plant for each Earth tag you own (max 5) then reduced by influence.": "",
-  "Lower the temperature and oxygen 2 steps each. (-4C, -2% O2)": "",
-  "Pay 10M€. Add 2 data to EVERY data card. Add 1 data to any data card for each influence you have.": "",
-  "Diaspora": "",
-  "Sponsored Projects": "",
-  "Generous Funding": "",
-  "Successful Organisms": "",
-  "Productivity": "",
-  "Homeworld Support": "",
-  "Volcanic Eruptions": "",
-  "Diversity": "",
-  "Improved Energy Templates": "",
-  "Celebrity Leaders": "",
-  "Spin-Off Products": "",
-  "Election": "",
-  "Aquifer Released by Public Council": "",
-  "Scientific Community": "",
-  "Strong Society": "",
-  "Global Dust Storm": "",
-  "Eco Sabotage": "",
-  "Miners On Strike": "",
-  "Mud Slides": "",
-  "Revolution": "",
-  "Riots": "",
-  "Sabotage": "",
-  "Snow Cover": "",
-  "Pandemic": "",
-  "War on Earth": "",
-  "Paradigm Breakdown": "",
-  "Dry Deserts": "",
-  "Red Influence": "",
-  "Solarnet Shutdown": "",
-  "Solar Flare": "",
-  "Jovian Tax Rights": "",
-  "Microgravity Health Problems": "",
-  "Cloud Societies": "",
-  "Corrosive Rain": "",
-  "Venus Infrastructure": "",
-  "Leadership Summit": "",
-  "Balanced Development": "",
-  "Space Race to Mars": "",
-  "Constant Struggle": "",
-  "Tired Earth": "",
-  "Magnetic Field Stimulation Delays": "",
-  "Communication Boom": "",
-  "w/rsrs": "",
-  "over 15": "",
-  "1st:": "",
-  "2nd:": "",
-  "lose all": "",
-  "max 3": "",
-  "over 10": "",
-  "OR": ""
+  "Sponsored Projects": "スポンサーのあるプロジェクト",
+  "All cards with resources on them gain 1 resource. Draw 1 card for each influence.": "リソースがあるカードに1リソースずつ追加. 影響力の数分、1ドロー.",
+
+  "Generous Funding": "相応の出資",
+  "Gain 2 M€ for each influence and set of 5 TR over 15 (max 5 sets).": "15を超えるTR5毎に、2MC獲得(最大10MC). 影響力の数分、2MC獲得.",
+
+  "Successful Organisms": "成功した生命体",
+  "Gain 1 plant per plant production (max 5) and influence.": "植物産出量(最大5)+影響力の数分、1植物獲得.",
+
+  "Productivity": "生産性の向上",
+  "Gain 1 steel for each steel production (max 5) and influence.": "建材産出量(最大5)+影響力の数分、1建材獲得.",
+
+  "Homeworld Support": "故郷よりの支援",
+  "Gain 2 M€ for each Earth tag (max 5) and influence.": "地球タグ(最大5)+影響力の数分、2MC獲得.",
+
+  "Volcanic Eruptions": "火山噴火",
+  "Increase temperature 2 steps. Increase heat production 1 step per influence.": "温度+2段階. 影響力の数分、温熱産出+1.",
+
+  "Diversity": "多様性",
+  "Gain 10 M€ if you have 9 or more different tags. Influence counts as unique tags.": "プレイ済みのタグ種類+影響力が9以上の場合、10MC獲得. ",
+
+  "Improved Energy Templates": "エネルギー・テンプレートの向上",
+  "Increase energy production 1 step per 2 power tags (no limit). Influence counts as power tags.": "電力タグ+影響力の数2つ毎に、電力産出+1.",
+
+  "Celebrity Leaders": "セレブのリーダー",
+  "Gain 2 M€ for each event played (max 5) and influence.": "プレイ済みイベントカード(最大5)+影響力の数分、2MC獲得.",
+
+  "Spin-Off Products": "スピンオフ商品",
+  "Gain 2 M€ for each science tag (max 5) and influence.": "科学タグ(最大5)+影響力の数分、2MC獲得.",
+
+  "Election": "選挙",
+  "Count your influence plus building tags and city tiles (no limits). The player with most (or 10 in solo) gains 2 TR, the 2nd (or 5 in solo) gains 1 TR (ties are friendly).": "影響力+土建タグ+都市数を合計する. 1位(ソロなら10以上)はTR+2段階、2位(ソロなら5~9)はTR+1段階. 同点の場合は、その該当者全員のTRが上がる.",
+
+  "Aquifer Released by Public Council": "市民協議会による帯水層解放",
+  "First player places an ocean tile. Gain 1 plant and 1 steel per influence.": "第1プレイヤーが海洋1枚配置. 影響力の数分、植物と建材獲得.",
+
+  "Scientific Community": "自然科学コミュニティ",
+  "Gain 1 M€ for each card in hand (no limit) and influence.": "手札枚数+影響力の数分、1MC獲得.",
+
+  "Strong Society": "強力な社会組織",
+  "Gain 2 M€ for each city tile (max 5) and influence.": "都市数(最大5)+影響力の数分、2MC獲得.",
+
+  "Global Dust Storm": "惑星規模の砂塵嵐",
+  "Lose all heat. Lose 2 M€ for each building tag (max 5, then reduced by influence).": "全温熱を失う. 土建タグ(最大5)-影響力の数分、2MC支払う.",
+
+  "Eco Sabotage": "環境サボタージュ",
+  "Lose all plants except 3 + influence.": "3+影響力の数分以外、植物を失う.",
+
+  "Miners On Strike": "鉱夫のストライキ",
+  "Lose 1 titanium for each Jovian tag (max 5, then reduced by influence).": "木星タグ(最大5)-影響力の数分、1チタン支払う.",
+
+  "Mud Slides": "地滑り",
+  "Lose 4 M€ for each tile adjacent to ocean (max 5, then reduced by influence).": "海洋に隣接するタイル(最大5)-影響力の数分、4MC支払う.",
+
+  "Revolution": "革命",
+  "Count Earth tags and ADD(!) influence. The player(s) with most (at least 1) loses 2 TR, and 2nd most (at least 1) loses 1 TR. SOLO: Lose 2 TR if the sum is 4 or more.": "影響力+地球タグ数を合計する. 1位(ソロなら4以上)はTR-2段階、2位(ソロなら無視)はTR-1段階. 同点の場合は、その該当者全員のTRが下がる.",
+
+  "Riots": "暴動",
+  "Lose 4 M€ for each city tile (max 5, then reduced by influence).": "都市数(最大5)-影響力の数分、4MC支払う.",
+
+  "Sabotage": "サボタージュ",
+  "Decrease steel and energy production 1 step each. Gain 1 steel per influence.": "電力産出-1. 建材産出-1. 影響力の数分、1建材獲得.",
+
+  "Snow Cover": "積雪",
+  "Decrease temperature 2 steps. Draw 1 card per influence.": "温度-2段階. 影響力の数分、1ドロー.",
+
+  "Pandemic": "パンデミック",
+  "Lose 3 M€ for each building tag (max 5, then reduced by influence).": "土建タグ(最大5)-影響力の数分、3MC支払う.",
+
+  "War on Earth": "地球戦争",
+  "Reduce TR 4 steps. Each influence prevents 1 step.": "TR-4段階. 影響力の数分、TRの減少を軽減.",
+
+  "Paradigm Breakdown": "パラダイム崩壊",
+  "Discard 2 cards from hand. Gain 2 M€ per influence.": "手札を2枚捨てる. 影響力の数分、2MC獲得.",
+
+  "Dry Deserts": "砂漠化進行",
+  "First player removes 1 ocean tile from the gameboard. Gain 1 standard resource per influence.": "第1プレイヤーが海洋1枚除去. 影響力の数分、1標準リソース獲得.",
+
+  "Red Influence": "赤き影響",
+  "Lose 3 M€ for each set of 5 TR over 10 (max 5 sets). Increase M€ production 1 step per influence.": "10を超えるTR5毎に、3MC支払う(最大15MC). 影響力の数分、MC産出+1.",
+
+  "Solarnet Shutdown": "ソーラーネットのシャットダウン",
+  "Lose 3 M€ for each blue card (max 5, then reduced by influence).": "青色カード(最大5)-影響力の数分、3MC支払う.",
+
+  "Solar Flare": "太陽フレア",
+  "Lose 3 M€ for each space tag (max 5, then reduced by influence).": "宇宙タグ(最大5)-影響力の数分、3MC支払う.",
+
+  "Jovian Tax Rights": "木星税の設置",
+  "Increase M€ production 1 step for each colony. Gain 1 titanium for each influence.": "所有コロニーの数分、MC産出+1. 影響力の数分、1チタン獲得.",
+
+  "Microgravity Health Problems": "低重力健康問題",
+  "Lose 3 M€ for each colony (max 5, then reduced by influence).": "所有コロニー(最大5)-影響力の数分、3MC支払う.",
+
+  "Cloud Societies": "雲海共同体",
+  "Add a floater to each card that can collect floaters. Add 1 floater for each influence to a card.": "浮遊体を配置できるカードに1浮遊体ずつ追加. 影響力の数分、1浮遊体獲得.",
+
+  "Corrosive Rain": "腐蝕性の雨",
+  "Lose 2 floaters from a card or 10 M€. Draw 1 card for each influence.": "2浮遊体 もしくは 10MC 支払う. 影響力の数分、1ドロー.",
+
+  "Venus Infrastructure": "金星インフラ",
+  "Gain 2 M€ per Venus tag (max 5) and influence.": "金星タグ(最大5)+影響力の数分、2MC獲得.",
+
+  "Asteroid Mining": "小惑星採掘",
+  "Gain 1 titanium for each Jovian tag (max 5) and influence.": "木星タグ(最大5)+影響力の数分、1チタン獲得.",
+
+  "Interplanetary Trade": "惑星間通商",
+  "Gain 2 M€ for each space tag (max 5) and influence.": "宇宙タグ(最大5)+影響力の数分、2MC獲得.",
+
+  "Leadership Summit": "リーダーシップ・サミット",
+  "Draw 1 card for each party leader (max 5) and influence.": "党首(最大5)+影響力の数分、1ドロー.",
+
+  "Balanced Development": "バランスのとれた開発",
+  "Gain 2M€ for each Mars tag you have (max 5) and influence.": "火星タグ(最大5)+影響力の数分、2MC獲得.",
+
+  "Space Race to Mars": "新時代宇宙レース",
+  "Increase your M€ production 1 step for every special tile you own (max 5.) Gain 1 energy for every influence you have": "特殊タイルの数分、MC産出+1. 影響力の数分、1電力獲得.",
+
+  "Constant Struggle": "絶え間なく続く闘争",
+  "Pay 10M€, reduced by 1M€ per influence. Raise every planetary track 2 steps. Nobody gains the \"rising player\" bonus.": "10MC支払う. 影響力の数分、MCの支払いを軽減. 各惑星トラック+2段階.",
+
+  "Tired Earth": "疲れた地球",
+  "Lose 1 plant for each Earth tag you own (max 5) then reduced by influence.": "地球タグ(最大5)-影響力の数分、1植物支払う.",
+
+  "Magnetic Field Stimulation Delays": "磁界刺激遅延",
+  "Lower the temperature and oxygen 2 steps each. (-4C, -2% O2)": "温度-2段階. 酸素-2段階.",
+
+  "Communication Boom": "コミュニケーション・ブーム",
+  "Pay 10M€. Add 2 data to EVERY data card. Add 1 data to any data card for each influence you have.": "10MC支払う. データを配置できるカードに2データずつ追加. 影響力の数分、1データ獲得.",
+
+  "over 15": "15を超える",
+  "1st:": "1位",
+  "2nd:": "2位",
+  "lose all": "全て失う",
+  "max 3": "最大3",
+  "over 10": "10を超える",
+  "OR": "または"
 }

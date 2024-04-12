@@ -21,7 +21,7 @@
     "Action: Look at the top card and either buy it or discard it": "アクション：デッキトップを1枚確認し3MCで購入するか、そのまま捨てる.",
 
     "Martian Rails": "火星鉄道",
-    "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "アクション：1電力支払う. 火星上の都市数分、1MC獲得.",
+    "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "アクション：1電力支払う. 火星上の都市タイルの数分、1MC獲得.",
 
     "Capital": "首都",
     "2 Oceans": "海洋2枚",
@@ -29,7 +29,7 @@
     "4 Oceans": "海洋4枚",
     "5 Oceans": "海洋5枚",
     "6 Oceans": "海洋6枚",
-    "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "条件：海洋4枚以上. 電力産出-2し、MC産出+5.",
+    "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "条件：海洋4枚以上. 特殊タイルを配置. 電力産出-2し、MC産出+5.",
     "1 additional VP for each ocean tile adjacent to this city tile.": "首都に隣接する海洋1枚毎に1VP.",
 
     "Asteroid": "標準型小惑星",
@@ -131,7 +131,7 @@
     "Raise your terraforming rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 plant tags.": "TR+2段階. 温度+1段階. もし、植物タグ3つ以上であれば植物産出+4. それ以外の場合は植物産出+1.",
 
     "Rover Construction": "ローバー建設",
-    "Effect: When any city tile is placed, gain 2 M€.": "効果：都市1枚配置毎に2MC獲得.",
+    "Effect: When any city tile is placed, gain 2 M€.": "効果：都市タイル1枚配置毎に2MC獲得.",
 
     "Deimos Down": "ダイモス落とし",
     "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.": "温度+3段階. 4建材獲得. 望むならプレイヤー1人から最大8植物除去.",
@@ -412,11 +412,11 @@
 
     "Ecological Zone": "生態ゾーン",
     "(Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.)": "効果：植物タグ または 動物タグをプレイ時、このカード上に1動物追加.",
-    "(Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.)": "条件：緑地タイルを所持. 好きな緑地タイルに隣接するように特殊タイルを配置.",
+    "(Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.)": "条件：緑地を所持. 好きな緑地タイルに隣接するように特殊タイルを配置.",
     "1 VP per 2 animals on this card.": "このカード上の2動物毎に1VP.",
 
     "Zeppelins": "飛行船",
-    "Requires 5% oxygen. Increase your M€ production 1 step for each city tile ON MARS.": "条件：酸素5%以上. 火星上の都市数分、MC産出+1.",
+    "Requires 5% oxygen. Increase your M€ production 1 step for each city tile ON MARS.": "条件：酸素5%以上. 火星上の都市タイルの数分、MC産出+1.",
 
     "Worms": "ミミズ",
     "Requires 4% oxygen. Increase your plant production 1 step for every 2 microbe tags you have, including this.": "条件：酸素4%以上. 微生物タグ2つ毎に植物産出+1.",
@@ -538,7 +538,7 @@
     "Increase your heat production 1 step.": "温熱産出+1.",
 
     "Magnetic Field Generators": "磁場発生装置",
-    "(Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.)": "電力産出-4し、植物産出+2. TR+3段階.",
+    "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.": "電力産出-4し、植物産出+2. TR+3段階.",
 
     "Shuttles": "シャトル",
     "Requires 5% oxygen. Decrease your energy production 1 step and increase your M€ production 2 steps.": "条件：酸素5%以上. 電力産出-1し、MC産出+2.",
@@ -560,7 +560,7 @@
 
     "Pets": "愛玩動物",
     "Animals may not be removed from this card": "このカード上の動物は除去されない.",
-    "Effect: When any city tile is placed, add an animal to this card.": "効果：都市1枚配置毎にこのカード上に1動物追加.",
+    "Effect: When any city tile is placed, add an animal to this card.": "効果：都市タイル1枚配置毎にこのカード上に1動物追加.",
     "(Add 1 animal to this card.)": "このカード上に1動物追加.",
     "1 VP per 2 animals here.": "このカード上の2動物毎に1VP.",
 
@@ -607,7 +607,7 @@
     "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "効果：科学タグをプレイ時、このカード上に1科学リソース追加 または このカード上から1科学リソース除去し、1ドロー.",
 
     "Rad-Suits": "放射線防護服",
-    "Requires two cities in play. Increase your M€ production 1 step.": "条件：都市タイル2枚以上. MC産出+1.",
+    "Requires two cities in play. Increase your M€ production 1 step.": "条件：都市2枚以上. MC産出+1.",
 
     "Aquifer Pumping": "帯水層汲み上げ",
     "Action: Spend 8 M€ to place 1 ocean tile. STEEL MAY BE USED as if you were playing a building card.": "アクション：8MC支払い、海洋1枚配置. ※建材での支払い可能",
@@ -644,7 +644,7 @@
 
     "Immigration Shuttles": "移民シャトル",
     "Increase your M€ production 5 steps.": "MC産出+5.",
-    "1 VP for every 3rd City in play.": "都市タイル3枚毎に1VP.",
+    "1 VP for every 3rd City in play.": "都市3枚毎に1VP.",
 
     "Restricted Area": "立ち入り制限区",
     "Action: Spend 2 M€ to draw a card.": "アクション：2MC支払い、1ドロー.",
@@ -653,7 +653,7 @@
     "Place this tile.": "特殊タイルを配置.",
 
     "Immigrant City": "移民都市",
-    "Effect: When a city tile is placed, including this, increase your M€ production 1 step.": "効果：都市1枚配置毎にMC産出+1.",
+    "Effect: When a city tile is placed, including this, increase your M€ production 1 step.": "効果：都市タイル1枚配置毎にMC産出+1.",
     "Decrease your energy production 1 step and decrease your M€ production 2 steps. Place a city tile.": "電力産出-1. MC産出-2. 都市タイルを配置.",
 
     "Energy Tapping": "盗電",

@@ -13,7 +13,7 @@
     "Ecoline": "エコライン",
     "EcoLine": "エコライン",
     "You start with 2 plant production, 3 plants, and 36 M€.": "初期資源：36MC. 初期産出：植物産出+2.",
-    "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "効果：緑地タイルを配置するコストが8植物→7植物へ減る.",
+    "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "効果：緑地を配置するコストが8植物→7植物へ減る.",
 
     "HELION": "ヘリオン",
     "Helion": "ヘリオン",
@@ -40,8 +40,8 @@
     "THARSIS": "タルシス",
     "REPUBLIC": "共和国",
     "Tharsis Republic": "タルシス共和国",
-    "You start with 40 M€. As your first action in the game, place a city tile.": "初期資源：42MC. 1アクション目：都市配置.",
-    "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "効果：火星上への都市1枚配置毎にMC産出+1. 自身で都市1枚配置毎(火星外含む)に3MC.",
+    "You start with 40 M€. As your first action in the game, place a city tile.": "初期資源：42MC. 1アクション目：都市タイル配置.",
+    "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "効果：火星上への都市タイル1枚配置毎にMC産出+1. 自身で都市タイル1枚配置毎(火星外含む)に3MC.",
 
     "THORGATE": "トールゲート",
     "Thorgate": "トールゲート",

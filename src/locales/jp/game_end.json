@@ -10,8 +10,10 @@
 
     "You win!": "勝利！",
     "${0} won!": "${0}が勝利!",
+    "won!": "勝利!",
     "But it isn't the reason to stop making Mars better.": "しかし、火星開拓に終わりはない.",
-    "Try to win with expansions enabled": "いろんな拡張をプレイしてみよう.(動乱を除く公式拡張のみ翻訳済み)",
+    "Try to win with expansions enabled": "いろんな拡張をプレイしてみよう.",
+    "Try to win before the last generation": "最終世代よりはやくテラフォーミングしてみよう.",
     "Try to win before the last generation comes": "最終世代よりはやくテラフォーミングしてみよう.",
     "Can you get": "あなたは",
     "+ Victory Points?": " VP以上取れるかな？",
@@ -31,6 +33,7 @@
     "Timer": "時間",
     "Victory points details for": "VP詳細",
 
+    "Completed!": "完了!",
     "% completed": "% 完了",
     "Temperature": "温度",
     "Oxygen": "酸素",

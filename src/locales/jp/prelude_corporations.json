@@ -7,12 +7,12 @@
     
     "SAGITTA FRONTIER SERVICES": "サギタ・フロンティアサービス",
     "Sagitta Frontier Services": "サギタ・フロンティアサービス",
-    "You start with 28 M€. Increase energy production 1 step and M€ production 2 steps. Draw a card with no tags.": "初期資源：28MC. タグ無しカード1枚を入手. 初期産出：MC産出+2. 電力産出+1. ",
+    "You start with 28 M€. Increase energy production 1 step and M€ production 2 steps. Draw a card with no tags.": "初期資源：28MC. タグ無しカードを1枚入手. 初期産出：MC産出+2. 電力産出+1. ",
     "Effect: When you play a card with no tags, including this, gain 4 M€.": "効果：タグ無しカードをプレイ時、4MC獲得.",
     "Effect: When you play a card with EXACTLY 1 TAG, gain 1 M€.": "効果：1タグのみついたカードをプレイ時、1MC獲得.",
     
     "ECOTEC": "エコテック",
-    "Ecotec": "エコテック",
+    "EcoTec": "エコテック",
     "You start with 42 M€. Increase your plant production 1 step.": "初期資源：42MC. 初期産出：植物産出+1.",
     "Effect: When you play a microbe, plant, or animal tag, gain 1 plant or add a microbe to ANY card.": "効果：植物タグ または 微生物タグ または 動物タグをプレイ時、1植物獲得 または 1微生物獲得.",
     
@@ -22,8 +22,8 @@
     "Effect: When you play a space event, gain 1 titanium.": "効果：宇宙タグ付きイベントカードをプレイ時、1チタン獲得.",
     "Action: Spend 2 titanium to raise the temperature 1 step.": "アクション：2チタン支払い、温度+1段階.",
 
-    "NIGRAL ENTERPRISES": "ニグラル・エンタープライズ",
-    "Nigral Enterprises": "ニグラル・エンタープライズ",
+    "NIRGAL ENTERPRISES": "ニルガル・エンタープライズ",
+    "Nirgal Enterprises": "ニルガル・エンタープライズ",
     "You start with 33 M€. Raise your energy, plant, and steel production 1 step each.": "初期資源：33MC. 初期産出：建材産出+1. 電力産出+1. 植物産出+1.",
     "Effect: AWARDS and MILESTONES ALWAYS COST 0 M€ FOR YOU.": "効果：称号、褒賞の取得費用が0MC.",
     

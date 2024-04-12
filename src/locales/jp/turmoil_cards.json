@@ -1,55 +1,55 @@
 {
-  "Aerial Lenses": "",
-  "Requires that Kelvinists are ruling or that you have 2 delegates there. Remove up to 2 plants from any player. Increase your heat production 2 steps.": "",
+  "Aerial Lenses": "空中線レンズ",
+  "Requires that Kelvinists are ruling or that you have 2 delegates there. Remove up to 2 plants from any player. Increase your heat production 2 steps.": "条件：汎ケルビン党が与党か、そこに2議席ある. 望むならプレイヤー1人から最大3植物除去. 温熱産出+2.",
 
-  "Banned Delegate": "",
-  "Requires that you are Chairman. Remove any NON-LEADER delegate.": "",
+  "Banned Delegate": "代議員辞職",
+  "Requires that you are Chairman. Remove any NON-LEADER delegate.": "条件：あなたが議長. 党首でない代議員1名を除去.",
 
-  "Cultural Metropolis": "",
-  "Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile. Place 2 delegates in 1 party.": "",
+  "Cultural Metropolis": "文化的メトロポリス",
+  "Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile. Place 2 delegates in 1 party.": "太陽系融和党が与党か、そこに2議席ある. MC産出+3. 都市タイルを配置. 1つの政党に代議員を2名配置.",
 
-  "Diaspora Movement": "",
-  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1M€ for each Jovian tag in play, including this.": "",
+  "Diaspora Movement": "ディアスポラ運動",
+  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1M€ for each Jovian tag in play, including this.": "条件：赤き惑星党が与党か、そこに2議席ある. 木星タグの合計数分、1MC獲得.",
 
-  "Event Analysts": "",
-  "Effect: You have +1 influence.": "",
-  "Requires that Scientists are ruling or that you have 2 delegates there.": "",
+  "Event Analysts": "事象アナリスト",
+  "Effect: You have +1 influence.": "効果：影響力+1.",
+  "Requires that Scientists are ruling or that you have 2 delegates there.": "条件：科学万能党が与党か、そこに2議席ある.",
 
-  "GMO Contract": "",
-  "Effect: Each time you play a plant, animal or microbe tag, including this, gain 2 M€.": "",
-  "Requires that Greens are ruling or that you have 2 delegates there.": "",
+  "GMO Contract": "遺伝子組み換え契約",
+  "Effect: Each time you play a plant, animal or microbe tag, including this, gain 2 M€.": "効果：植物、微生物、動物タグをプレイ時、2MC獲得.",
+  "Requires that Greens are ruling or that you have 2 delegates there.": "条件：緑の党が与党か、そこに2議席ある.",
 
-  "Martian Media Center": "",
-  "Action: Pay 3 M€ to add a delegate to any party.": "",
-  "Requires that Mars First is ruling or that you have 2 delegates there. Increase your M€ production 2 steps.": "",
+  "Martian Media Center": "火星メディア・センター",
+  "Action: Pay 3 M€ to add a delegate to any party.": "アクション：3MCを支払い、任意の政党に代議員を1名配置.",
+  "Requires that Mars First is ruling or that you have 2 delegates there. Increase your M€ production 2 steps.": "条件：火星第一の党が与党か、そこに2議席ある.",
 
-  "Parliament Hall": "",
-  "Requires that Mars First are ruling or that you have 2 delegates there. Increase your M€ production 1 step for every 3 building tags you have, including this.": "",
+  "Parliament Hall": "議事堂",
+  "Requires that Mars First are ruling or that you have 2 delegates there. Increase your M€ production 1 step for every 3 building tags you have, including this.": "条件：火星第一の党が与党か、そこに2議席ある. 土建タグ3つ毎にMC産出+1",
 
-  "PR Office": "",
-  "Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 M€ for each Earth tag you have, including this.": "",
+  "Political Alliance": "政治的同盟",
+  "Requires that you have 2 party leaders. Gain 1 TR.": "あなたが党首2名を有する. TR+1段階.",
 
-  "Public Celebrations": "",
-  "Requires that you are Chairman.": "",
+  "PR Office": "PRオフィス",
+  "Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 M€ for each Earth tag you have, including this.": "条件：太陽系融和党が与党か、そこに2議席ある. 地球タグ1つ毎に1MC獲得.",
 
-  "Recruitment": "",
-  "Exchange one NEUTRAL NON-LEADER delegate with one of your own from the reserve.": "",
+  "Public Celebrations": "公的な祝祭",
+  "Requires that you are Chairman.": "条件：あなたが議長.",
 
-  "Red Tourism Wave": "",
-  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€ from each EMPTY AREA ADJACENT TO YOUR TILES": "",
+  "Recruitment": "リクルート",
+  "Exchange one NEUTRAL NON-LEADER delegate with one of your own from the reserve.": "党首ではない中立な代議員1名を、あなたの控えの代議員と交換.",
 
-  "Sponsored Mohole": "",
-  "Requires that Kelvinists are ruling or that you have 2 delegates there. Increase your heat production 2 steps.": "",
+  "Red Tourism Wave": "赤きツアー・ブーム",
+  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€ from each EMPTY AREA ADJACENT TO YOUR TILES": "条件：赤き惑星党が与党か、そこに2議席ある. タイルに隣接する空きマスの合計数分、1MC獲得.",
 
-  "Supported Research": "",
-  "Requires that Scientists are ruling or that you have 2 delegates there. Draw 2 cards.": "",
+  "Sponsored Mohole": "スポンサーつきモホール",
+  "Requires that Kelvinists are ruling or that you have 2 delegates there. Increase your heat production 2 steps.": "条件：汎ケルビン党が与党か、そこに2議席ある. 温熱産出+2.",
 
-  "Wildlife Dome": "",
-  "Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.": "",
+  "Supported Research": "支援を受けた研究",
+  "Requires that Scientists are ruling or that you have 2 delegates there. Draw 2 cards.": "条件：科学万能党が与党か、そこに2議席ある. カードを2枚ドロー.",
 
-  "Vote Of No Confidence": "",
-  "Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.": "",
+  "Wildlife Dome": "野生ドーム",
+  "Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.": "条件：緑の党が与党か、そこに2議席ある. 緑地タイルを配置.",
 
-  "Political Alliance": "",
-  "Requires that you have 2 party leaders. Gain 1 TR.": ""
+  "Vote Of No Confidence": "不信任投票",
+  "Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.": "条件：あなたがいずれかの党首で、議長が中立. 中立の議長をあなたの代議員と交代する. TR+1段階."
 }

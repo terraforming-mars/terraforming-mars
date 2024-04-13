@@ -15,12 +15,16 @@
     "Blue": "Blu",
     "Black": "Nero",
 
+
     "tharsis": "Tharsis",
     "hellas": "Hellas",
     "elysium": "Elysium",
     "random": "Casuale",
 
     "Prelude": "Prelude",
+    "Prelude 2(β)": "Prelude 2(β)",
+    "Pathfinders": "Pathfinders",
+    "CEOs": "CEO",
     "Venus Next": "Venus Next",
     "Custom Corporation list": "Lista Corporation Personalizzata",
     "World Government Terraforming": "Terraformazione del Governo Mondiale",
@@ -205,7 +209,6 @@
      "Take action": "Procedi",
      "Select": "Seleziona",
      "Take": "Prendi",
-     "Save": "Salva",
      "Pay":"Paga",
      "Remove floaters": "Rimuovi Galleggianti",
      "Add floater": "Aggiungi Galleggiante",
@@ -280,6 +283,7 @@
     "Fan-made": "Fan-made",
     "Community": "Community",
     "Exclude some cards": "Escludi alcune carte",
+    "Include some cards": "Includi alcune carte",
     "Custom Colonies list": "Lista Personalizzata Colonie",
     "Remove negative Global Events": "Rimuovi gli Eventi Globali negativi",
     "Fast mode": "Modalità rapida",
@@ -295,11 +299,7 @@
     "Filter": "Filtra",
     "TR Boost": "Aumenta TT",
     "Player ${0} name": "Nome del Giocatore ${0}",
-    "Multiplayer Options": "Opzioni Multigiocatore",
-    "Community": "Community"
-
-
-
+    "Multiplayer Options": "Opzioni Multigiocatore"
 
 
 }

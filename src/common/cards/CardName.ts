@@ -521,6 +521,7 @@ export enum CardName {
   TESLARACT = 'Teslaract',
   ICY_IMPACTORS = 'Icy Impactors',
   SOIL_ENRICHMENT = 'Soil Enrichment',
+  CITY_PARK = 'City Park',
   // End of promo cards
 
   // Community corps

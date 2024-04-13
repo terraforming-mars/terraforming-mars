@@ -287,12 +287,12 @@
                             <label for="bannedCards-checkbox">
                                 <span v-i18n>Exclude some cards</span>
                             </label>
-
+<!-- Temporarily disabled
                             <input type="checkbox" v-model="showIncludedCards" id="includedCards-checkbox">
                             <label for="includedCards-checkbox">
                                 <span v-i18n>Include some cards</span>
                             </label>
-
+ -->
                             <template v-if="colonies">
                                 <input type="checkbox" v-model="showColoniesList" id="customColonies-checkbox">
                                 <label for="customColonies-checkbox">

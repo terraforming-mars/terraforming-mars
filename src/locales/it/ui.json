@@ -1,6 +1,8 @@
 {
     "Terraforming Mars": "Terraforming Mars",
+    "Read our changelog to get the latest updates.": "Leggi il nostro changelog per conoscere gli ultimi aggiornamenti",
     "Create New Game": "Crea Nuova Partita",
+    "Looking for people to play with": "Sei alla ricerca di persone con cui giocare",
     "№ of Players": "Numero di Giocatori",
     "Expansions": "Espansioni",
     "Options": "Opzioni",
@@ -187,6 +189,8 @@
     "Base": "Base",
     "Agendas": "Politiche",
     "Random": "Casuale",
+    "random official": "Causale Ufficiali",
+    "random all": "Causale Tutte",    
     "The Moon": "The Moon",
     "Mandatory Moon Terraforming":"Terraformazione della Luna Obbligatoria",
     "Drafted cards": "Carte dopo la fase di Draft",
@@ -275,7 +279,12 @@
     "Sell": "Vendi",
     "Undo": "Annulla",
 
-    "All": "Tutto",
+    "All*": "Tutte*",
+    "None*": "Nessuna*",
+    "Invert*": "Inverti*",
+    "All": "Tutte",
+    "None": "Nessuna",
+    "Invert": "Inverti",
     "Corporate Era": "Corporate Era",
     "Randomize board tiles": "Randomizza tessere della plancia",
     "Set Predefined Game": "Imposta Gioco Predefinito",
@@ -294,12 +303,27 @@
     "Venus Milestone/Award": "Milestone/Riconoscimento di Venere",
     "Mandatory Venus Terraforming": "Terraformazione di Venere Obbligatoria",
     "63 TR solo mode": "Modalità in solitario a 63 TT",
-    "Cards to exclude from the game": "Carte da escludere dal gioco",
+    "Cards to exclude from the game": "Carte da escludere dalla partita",
     "Start typing the card name to exclude": "Inizia a digitare il nome della carta da escludere",
     "Filter": "Filtra",
     "TR Boost": "Aumenta TT",
     "Player ${0} name": "Nome del Giocatore ${0}",
-    "Multiplayer Options": "Opzioni Multigiocatore"
+    "Multiplayer Options": "Opzioni Multigiocatore",
+    "Hide discount on cards": "Nascondi lo sconto sulle carte",
+    "Hide sidebar notification": "Nascondi la barra laterale delle notifiche",
+    "After": "Dopo",
+    "Reduce": "Togli",
+    "VP every": "VP ogni",
+    "Plus": "Aggiungi ",
+    "seconds per action": "secondi per azione",
+    "min": "min",
+    "Player Settings": "Impostazioni Giocatore",
+    "Solo": "Solitario",
+    "Custom Preludes list": "Lista Preludes Personalizzata",
+    "Starting CEOs": "CEO iniziali",
 
+    "Cards to include in the game": "Carte da includere dalla partita",
+
+    " Not affiliated with FryxGames, Asmodee Digital or Steam in any way. ": " Non affiliato a FryxGames, Asmodee Digital o Steam in alcun modo. "
 
 }

@@ -22,7 +22,7 @@ export class SubterraneanHabitats extends Card implements IProjectCard {
         description: 'Spend 2 steel. Raise the habitat rate 1 step.',
         cardNumber: 'M36',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you build a habitat on The Moon, you spend 1 titanium less.', (eb) => {
+          b.effect('When you build a habitat on THE MOON, you spend 1 titanium less.', (eb) => {
             eb.startEffect.moonHabitat().colon().minus().titanium(1);
           });
           b.br;

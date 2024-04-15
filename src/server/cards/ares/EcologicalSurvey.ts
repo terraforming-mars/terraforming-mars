@@ -32,7 +32,7 @@ export class EcologicalSurvey extends SurveyCard {
     });
   }
 
-  public checkForBonuses(cardOwner: IPlayer, space: Space) {
+  protected checkForBonuses(cardOwner: IPlayer, space: Space) {
     super.testForStandardResource(cardOwner, space, Resource.PLANTS, SpaceBonus.PLANT);
     super.testForCardResource(cardOwner, space, CardResource.MICROBE, SpaceBonus.MICROBE);
     super.testForCardResource(cardOwner, space, CardResource.ANIMAL, SpaceBonus.ANIMAL);

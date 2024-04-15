@@ -22,7 +22,7 @@ export class UndergroundSmugglingRing extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U28',
         renderData: CardRenderer.builder((b) => {
-          b.corruption(1).wild(2, {digit});
+          b.corruption(1).wild(2, {digit}).asterix();
         }),
         description: 'Requires an excavation marker. Gain 1 corruption and 2 of the same standard resource.',
       },

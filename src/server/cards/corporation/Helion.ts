@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {multiplier} from '../Options';
 
 export class Helion extends CorporationCard {
   constructor() {
@@ -24,7 +23,7 @@ export class Helion extends CorporationCard {
           b.production((pb) => pb.heat(3)).nbsp.megacredits(42);
           b.corpBox('effect', (ce) => {
             ce.effect('You may use heat as M€. You may not use M€ as heat.', (eb) => {
-              eb.startEffect.text('x').heat(1).equals().megacredits(0, {multiplier});
+              eb.startEffect.text('x').heat(1).equals().megacredits(1, {text: 'x'});
             });
           });
         }),

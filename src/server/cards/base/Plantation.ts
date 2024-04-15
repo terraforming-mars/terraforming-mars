@@ -12,7 +12,6 @@ export class Plantation extends Card implements IProjectCard {
       name: CardName.PLANTATION,
       tags: [Tag.PLANT],
       cost: 15,
-      tr: {oxygen: 1},
 
       behavior: {
         greenery: {},

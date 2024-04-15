@@ -314,14 +314,14 @@ export class Server {
     gagarin: ReadonlyArray<SpaceId> = [],
     cathedrals: ReadonlyArray<SpaceId> = [],
     nomads: SpaceId | undefined = undefined): Array<SpaceModel> {
-    const volcanicSpaceIds = board.getVolcanicSpaceIds();
-    const noctisCitySpaceIds = board.getNoctisCitySpaceId();
+    const volcanicSpaceIds = board.volcanicSpaceIds;
+    const noctisCitySpaceId = board.noctisCitySpaceId;
 
     return board.spaces.map((space) => {
       let highlight: SpaceHighlight = undefined;
       if (volcanicSpaceIds.includes(space.id)) {
         highlight = 'volcanic';
-      } else if (noctisCitySpaceIds === space.id) {
+      } else if (noctisCitySpaceId === space.id) {
         highlight = 'noctis';
       }
 
@@ -362,6 +362,9 @@ export class Server {
       if (space.excavator !== undefined) {
         model.excavator = space.excavator.color;
       }
+      if (space.coOwner !== undefined) {
+        model.coOwner = space.coOwner.color;
+      }
 
       return model;
     });
@@ -373,6 +376,7 @@ export class Server {
       aresExtension: options.aresExtension,
       boardName: options.boardName,
       bannedCards: options.bannedCards,
+      includedCards: options.includedCards,
       ceoExtension: options.ceoExtension,
       coloniesExtension: options.coloniesExtension,
       communityCardsOption: options.communityCardsOption,

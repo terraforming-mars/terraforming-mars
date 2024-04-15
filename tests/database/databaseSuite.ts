@@ -9,6 +9,7 @@ import {TestPlayer} from '../TestPlayer';
 import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
 import {testGame} from '../TestGame';
 import {GameId} from '../../src/common/Types';
+import {statusCode} from '../../src/common/http/statusCode';
 
 /**
  * Describes a database test
@@ -217,13 +218,13 @@ export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
       expect(serialized0.players[0].megaCredits).eq(0);
 
       const serialized1 = await db.getGameVersion(game.id, 1);
-      expect(serialized1.players[0].megaCredits).eq(200);
+      expect(serialized1.players[0].megaCredits).eq(statusCode.ok);
 
       const serialized2 = await db.getGameVersion(game.id, 2);
       expect(serialized2.players[0].megaCredits).eq(300);
 
       const serialized3 = await db.getGameVersion(game.id, 3);
-      expect(serialized3.players[0].megaCredits).eq(400);
+      expect(serialized3.players[0].megaCredits).eq(statusCode.badRequest);
 
       await expect(db.getGameVersion('game-id-123', 0)).to.be.rejectedWith(/Game game-id-123 not found/);
     });

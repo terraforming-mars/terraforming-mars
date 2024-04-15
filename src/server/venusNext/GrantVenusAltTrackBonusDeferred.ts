@@ -1,6 +1,7 @@
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectCard} from '../inputs/SelectCard';
-import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
+import {DeferredAction} from '../deferredActions/DeferredAction';
+import {Priority} from '../deferredActions/Priority';
 import {IPlayer} from '../IPlayer';
 import {SelectResources} from '../inputs/SelectResources';
 import {message} from '../logs/MessageBuilder';

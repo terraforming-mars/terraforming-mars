@@ -1,7 +1,8 @@
 import {IPlayer} from '../IPlayer';
 import {SelectPayment} from '../inputs/SelectPayment';
 import {Payment} from '../../common/inputs/Payment';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 import {CardName} from '../../common/cards/CardName';
 import {Message} from '../../common/logs/Message';
 import {message} from '../logs/MessageBuilder';

@@ -8,7 +8,6 @@ import {Card} from '../Card';
 import {TileType} from '../../../common/TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonHabitatTile} from '../../moon/PlaceMoonHabitatTile';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {Space} from '../../boards/Space';
 import {MoonData} from '../../moon/MoonData';
 
@@ -22,17 +21,18 @@ export class LunaEcumenopolis extends Card {
       reserveUnits: {titanium: 2},
 
       metadata: {
+        cardNumber: 'M84',
+        hasExternalHelp: true,
         description: 'Spend 2 titanium. ' +
         'Place 2 habitat tiles adjacent to at least 2 other habitat tiles and raise habitat rate 2 steps. ' +
         'Increase your TR 1 step for each 2 steps of the habitat rate.',
-        cardNumber: 'M84',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(2).nbsp;
           b.text('2').moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE}).asterix().br;
           b.tr(1).slash().moonHabitatRate().moonHabitatRate();
         }),
       },
-      tilesBuilt: [TileType.MOON_HABITAT],
+      tilesBuilt: [TileType.MOON_HABITAT, TileType.MOON_HABITAT],
     });
   }
 
@@ -102,11 +102,10 @@ export class LunaEcumenopolis extends Card {
     // These all have the same priority: Default.
     player.game.defer(new CustomPlaceMoonTile(player));
     player.game.defer(new CustomPlaceMoonTile(player));
-    player.game.defer(new SimpleDeferredAction(player, () => {
+    player.defer(() => {
       const habitatRate = MoonExpansion.moonData(player.game).habitatRate;
       player.increaseTerraformRating(Math.floor(habitatRate / 2));
-      return undefined;
-    }));
+    });
     return undefined;
   }
 }

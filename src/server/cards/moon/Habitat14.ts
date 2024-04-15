@@ -2,7 +2,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {TileType} from '../../../common/TileType';
 import {Card} from '../Card';
 
 
@@ -31,7 +30,6 @@ export class Habitat14 extends Card {
           b.moonHabitat();
         }),
       },
-      tilesBuilt: [TileType.MOON_HABITAT],
     });
   }
 }

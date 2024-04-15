@@ -17,7 +17,6 @@
     "${0} spent ${1} titanium to trade with ${2}": "${0} 花了 ${1} 钛资源,在 ${2} 进行贸易",
     "${0} spent 1 floater to trade with ${1}": "${0} 花了 1 云资源,在 ${1} 进行贸易",
     "${0} used ${1} standard project": "${0} 执行了标准行动 - ${1} ",
-    "${0} used ${1} standard project,sold ${2} card(s)": "${0} 执行了标准行动 - ${1}, 出售了 ${2} 张卡",
     "${0} built a colony on ${1}": "${0} 在 ${1} 上建立了殖民地",
     "${0} bought ${1} card(s)": "${0} 购买了 ${1} 张计划卡",
     "${0} acted as World Government and increased Venus scale": "${0} 作为世界政府,提升了金星的改造度",
@@ -31,7 +30,6 @@
     "${0} copied ${1} production with ${2}": "${0} 用 ${2} 复制 ${1} 的产量 ",
     "${0} used ${1} action with ${2}": "${0} 用 ${2} 执行 ${1} 行动 ",
     "${0} is the new chairman and gains ${1} TR" : "${0} 成为了新的议会主席,并获得1点改造度(TR) (${1}) 提升",
-    "Turmoil phase has been resolved" : "动荡阶段结算完毕",
 
     "${0} gained ${1} ${2}":"${0} 获得了 ${1} ${2}",
     "titanium":"钛",

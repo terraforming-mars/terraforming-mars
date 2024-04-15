@@ -1,7 +1,8 @@
 import {IPlayer} from '../IPlayer';
 import {SelectColony} from '../inputs/SelectColony';
 import {IColony} from '../colonies/IColony';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 
 export class BuildColony extends DeferredAction<IColony> {
   constructor(

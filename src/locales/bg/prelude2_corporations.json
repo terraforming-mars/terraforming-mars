@@ -1,0 +1,34 @@
+{
+  "ECOTEC": "ECOTEC",
+  "Effect: When you play a microbe, plant, or animal tag, gain 1 plant or add a microbe to ANY card.": "Ефект: Когато разыграете карта с етикет микроби, растение или животни, спечелете 1 растение или добавете микроб към ЛЮБА карта.",
+  "You start with 42 M€. Increase your plant production 1 step.": "Започвате с 42 M€. Увеличете производството на растения с 1 стъпка.",
+  "You start with 35 M€ and 3 asteroid resources.": "Започвате с 35 M€ и 3 ресурса астероиди.",
+
+  "KUIPER COOPERATIVE": "KUIPER COOPERATIVE",
+  "Action: Add 1 asteroid here for every space tag you have.": "Действие: Добавете 1 астероид тук за всяка космическа етикет, която имате.",
+  "Effect: When you use the AQUIFER or ASTEROID standard projects, you can spend asteroids on card as 1M€ each.": "Ефект: Когато използвате стандартните проекти Аквифер или Астероид, можете да изразходвате астероиди от тази карта като 1M€ на брой.",
+  "You start with 33 M€. Increase titanium production 1 step.": "Започвате с 33 M€. Увеличете производството на титаниум с 1 стъпка.",
+
+  "TYCHO MAGNETICS": "TYCHO MAGNETICS",
+  "You start with 42 M€. Increase your energy production 1 step.": "Започвате с 42 M€. Увеличете производството на енергия с 1 стъпка.",
+  "Action: Spend any amount of energy to draw the that many cards. Keep 1 and discard the rest.": "Действие: Изразходвайте произволно количество енергия, за да изтеглите толкова карти. Запазете 1 и се откажете от останалите.",
+  "KEEP 1": "ЗАПАЗЕТЕ 1",
+
+  "AWARDS AND MILESTONES ALWAYS COST 0 M€ FOR YOU.": "НАГРАДИТЕ И ДОСТИЖЕНИЯТА ВИ ВИНАГИ СТОЙТ 0 M€.",
+  "You start with 33 M€. Raise your energy, plant, and steel production 1 step each. Draw a card with no tags.": "Започвате с 33 M€. Увеличете производствата на енергия, растения и стомана с по 1 стъпка. Изтеглете карта без етикети.",
+
+  "PALLADIN SHIPPING": "PALLADIN SHIPPING",
+  "Effect: When you play a space event, gain 1 titanium.": "Ефект: Когато разыграете космическо събитие, спечелете 1 титаниум.",
+  "Action: Spend 2 titanium to raise the temperature 1 step.": "Действие: Изразходвайте 2 титаниума, за да повишите температурата с 1 стъпка.",
+  "You start with 36 M€ and 5 titanium.": "Започвате с 36 M€ и 5 титаниум.",
+
+  "SAGITTA FRONTIER SERVICES": "SAGITTA FRONTIER SERVICES",
+  "Effect: When you play a card with no tags, including this, gain 4 M€.": "Ефект: Когато разыграете карта без етикети, включително тази, спечелете 4 M€.",
+  "Effect: When you play a card with EXACTLY 1 TAG, gain 1 M€.": "Ефект: Когато разыграете карта с ТОЧНО 1 ЕТИКЕТ, спечелете 1 M€.",
+  "You start with 28 M€. Increase energy production 1 step and M€ production 2 steps. Draw a card with no tags.": "Започвате с 28 M€. Увеличете производството на енергия с 1 стъпка и производството на M€ с 2 стъпки. Изтеглете карта без етикети.",
+
+  "SPIRE": "SPIRE",
+  "You start with 44 M€. As your first action, draw 4 cards, then discard 3 cards from your hand.": "Започвате с 44 M€. Като първо действие, изтеглете 4 карти, след което изхвърлете 3 карти от ръката си.",
+  "Effect: When you play a card with at least 2 tags, including this, add a science resource here.": "Ефект: Когато разыграете карта с поне 2 етикета, включително тази, добавете тук ресурс наука.",
+  "Effect: When you use a standard project, science resources here may be spent as 2 M€ each.": "Ефект: Когато използвате стандартен проект, ресурсите наука тук могат да бъдат изразходвани като 2 M€ на брой."
+}

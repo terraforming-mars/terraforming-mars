@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PriceWars} from '../../../src/server/cards/underworld/PriceWars';
 import {testGame} from '../../TestGame';
 import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
-
+import {deserializeProjectCard, serializeProjectCard} from '../../../src/server/cards/CardSerialization';
 
 describe('PriceWars', () => {
   it('canPlay', () => {
@@ -59,5 +59,24 @@ describe('PriceWars', () => {
 
     expect(player2.getSteelValue()).eq(2);
     expect(player2.getTitaniumValue()).eq(3);
+  });
+
+  it('Survives serialization', () => {
+    const card = new PriceWars();
+    const [game, player] = testGame(1, {underworldExpansion: true});
+    game.generation = 3;
+
+    const unplayed = serializeProjectCard(card);
+    expect(unplayed.generationUsed).is.undefined;
+    expect(deserializeProjectCard(unplayed).generationUsed).is.undefined;
+
+    player.playCard(card);
+    expect(card.generationUsed).eq(3);
+
+    const serialized = serializeProjectCard(card);
+    expect(serialized.generationUsed).eq(3);
+
+    const deserialized = deserializeProjectCard(serialized);
+    expect(deserialized.generationUsed).eq(3);
   });
 });

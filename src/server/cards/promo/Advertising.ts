@@ -26,7 +26,7 @@ export class Advertising extends Card implements IProjectCard {
 
   public onCardPlayed(player: IPlayer, card: IProjectCard) {
     if (card.cost >= 20) {
-      player.production.add(Resource.MEGACREDITS, 1);
+      player.production.add(Resource.MEGACREDITS, 1, {log: true});
     }
   }
 }

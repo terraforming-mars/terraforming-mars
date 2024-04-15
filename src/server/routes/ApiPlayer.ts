@@ -1,3 +1,4 @@
+import * as responses from './responses';
 import {isPlayerId} from '../../common/Types';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
@@ -15,25 +16,25 @@ export class ApiPlayer extends Handler {
   public override async get(req: Request, res: Response, ctx: Context): Promise<void> {
     const playerId = ctx.url.searchParams.get('id');
     if (playerId === null) {
-      ctx.route.badRequest(req, res, 'missing id parameter');
+      responses.badRequest(req, res, 'missing id parameter');
       return;
     }
     if (!isPlayerId(playerId)) {
-      ctx.route.badRequest(req, res, 'invalid player id');
+      responses.badRequest(req, res, 'invalid player id');
       return;
     }
     const game = await ctx.gameLoader.getGame(playerId);
     if (game === undefined) {
-      ctx.route.notFound(req, res);
+      responses.notFound(req, res);
       return;
     }
     try {
       ctx.ipTracker.addParticipant(playerId, ctx.ip);
       const player = game.getPlayerById(playerId);
-      ctx.route.writeJson(res, Server.getPlayerModel(player));
+      responses.writeJson(res, Server.getPlayerModel(player));
     } catch (err) {
       console.warn(`unable to find player ${playerId}`, err);
-      ctx.route.notFound(req, res);
+      responses.notFound(req, res);
       return;
     }
   }

@@ -23,14 +23,14 @@ describe('RemoveResources', function() {
 
   it('simple', function() {
     target.plants = 15;
-    new RemoveResources(player, target, Resource.PLANTS, 2).andThen(andThen).execute();
+    new RemoveResources(target, player, Resource.PLANTS, 2).andThen(andThen).execute();
     expect(removed).eq(2);
     expect(target.plants).eq(13);
   });
 
   it('not enough', function() {
     target.plants = 1;
-    new RemoveResources(player, target, Resource.PLANTS, 2).andThen(andThen).execute();
+    new RemoveResources(target, player, Resource.PLANTS, 2).andThen(andThen).execute();
     expect(removed).eq(1);
     expect(target.plants).eq(0);
   });
@@ -38,7 +38,7 @@ describe('RemoveResources', function() {
   it('Protected Habitats', function() {
     target.plants = 5;
     target.playedCards.push(new ProtectedHabitats());
-    new RemoveResources(player, target, Resource.PLANTS, 2).andThen(andThen).execute();
+    new RemoveResources(target, player, Resource.PLANTS, 2).andThen(andThen).execute();
     expect(removed).eq(0);
     expect(target.plants).eq(5);
   });
@@ -46,7 +46,7 @@ describe('RemoveResources', function() {
   it('Protected Habitats works only for plants', function() {
     target.steel = 5;
     target.playedCards.push(new ProtectedHabitats());
-    new RemoveResources(player, target, Resource.STEEL, 2).andThen(andThen).execute();
+    new RemoveResources(target, player, Resource.STEEL, 2).andThen(andThen).execute();
     expect(removed).eq(2);
     expect(target.steel).eq(3);
   });
@@ -54,7 +54,7 @@ describe('RemoveResources', function() {
   it('Botanical Experience', function() {
     target.plants = 5;
     target.playedCards.push(new BotanicalExperience());
-    new RemoveResources(player, target, Resource.PLANTS, 4).andThen(andThen).execute();
+    new RemoveResources(target, player, Resource.PLANTS, 4).andThen(andThen).execute();
     expect(removed).eq(2);
     expect(target.plants).eq(3);
   });
@@ -62,7 +62,7 @@ describe('RemoveResources', function() {
   it('Lunar Security Stations', function() {
     target.steel = 5;
     target.playedCards.push(new LunarSecurityStations());
-    new RemoveResources(player, target, Resource.STEEL, 2).andThen(andThen).execute();
+    new RemoveResources(target, player, Resource.STEEL, 2).andThen(andThen).execute();
     expect(removed).eq(0);
     expect(target.steel).eq(5);
   });
@@ -70,7 +70,7 @@ describe('RemoveResources', function() {
   it('Lunar Security Stations works only for alloys', function() {
     target.plants = 5;
     target.playedCards.push(new LunarSecurityStations());
-    new RemoveResources(player, target, Resource.PLANTS, 2).andThen(andThen).execute();
+    new RemoveResources(target, player, Resource.PLANTS, 2).andThen(andThen).execute();
     expect(removed).eq(2);
     expect(target.plants).eq(3);
   });

@@ -5,6 +5,7 @@ import {InputResponse, isSelectColonyResponse} from '../../common/inputs/InputRe
 import {SelectColonyModel} from '../../common/models/PlayerInputModel';
 import {coloniesToModel} from '../models/ModelUtils';
 import {IPlayer} from '../IPlayer';
+import {InputError} from './InputError';
 
 export class SelectColony extends BasePlayerInput<IColony> {
   // When true, show just the tile, and none of the cubes on top.
@@ -32,14 +33,14 @@ export class SelectColony extends BasePlayerInput<IColony> {
 
   public process(input: InputResponse) {
     if (!isSelectColonyResponse(input)) {
-      throw new Error('Not a valid SelectColonyResponse');
+      throw new InputError('Not a valid SelectColonyResponse');
     }
     if (input.colonyName === undefined) {
-      throw new Error('No colony selected');
+      throw new InputError('No colony selected');
     }
     const colony = this.colonies.find((c) => c.name === input.colonyName);
     if (colony === undefined) {
-      throw new Error(`Colony ${input.colonyName} not found`);
+      throw new InputError(`Colony ${input.colonyName} not found`);
     }
     return this.cb(colony);
   }

@@ -6,8 +6,6 @@ import {SerializedTimer} from '../common/SerializedTimer';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
 
 interface DeprecatedFields {
-  // TODO(kberg): remove after 2023-11-30
-  hasIncreasedTerraformRatingThisGeneration?: boolean;
 }
 
 export interface SerializedPlayer extends DeprecatedFields{
@@ -15,6 +13,7 @@ export interface SerializedPlayer extends DeprecatedFields{
     actionsTakenThisRound: number;
     actionsThisGeneration: Array<CardName>;
     beginner: boolean;
+    canUseCorruptionAsMegacredits: boolean;
     canUseHeatAsMegaCredits: boolean;
     canUseTitaniumAsMegacredits: boolean;
     canUsePlantsAsMegaCredits: boolean;
@@ -35,6 +34,7 @@ export interface SerializedPlayer extends DeprecatedFields{
     energyProduction: number;
     fleetSize: number;
     handicap: number;
+    hasIncreasedTerraformRatingThisGeneration: boolean;
     hasTurmoilScienceTagBonus: boolean;
     heat: number;
     heatProduction: number;

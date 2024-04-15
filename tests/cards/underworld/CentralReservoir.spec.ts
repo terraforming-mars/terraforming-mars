@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {CentralReservoir} from '../../../src/server/cards/underworld/CentralReservoir';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
@@ -9,9 +9,11 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 describe('CentralReservoir', () => {
   it('play', () => {
     const card = new CentralReservoir();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {underworldExpansion: true});
 
-    const selectSpace = cast(card.play(player), SelectSpace);
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     const spaces = selectSpace.spaces;
     const space = spaces[0];
     space.player = undefined;

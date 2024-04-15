@@ -5,6 +5,9 @@ import {Tag} from '../../common/cards/Tag';
 import {IProjectCard} from './IProjectCard';
 import {IPlayer} from '../IPlayer';
 import {GlobalParameter} from '../../common/GlobalParameter';
+import {Warning} from '../../common/cards/Warning';
+
+const EMPTY_SET: Readonly<Set<Warning>> = new Set();
 
 export class ProxyCard implements IProjectCard {
   public readonly name: CardName;
@@ -40,5 +43,11 @@ export class ProxyCard implements IProjectCard {
   }
   public getGlobalParameterRequirementBonus(_player: IPlayer, _parameter: GlobalParameter): number {
     return 0;
+  }
+  public get tilesBuilt() {
+    return [];
+  }
+  public get warnings() {
+    return EMPTY_SET;
   }
 }

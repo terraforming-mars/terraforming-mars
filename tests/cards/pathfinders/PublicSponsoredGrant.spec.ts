@@ -14,6 +14,7 @@ import {CardName} from '../../../src/common/cards/CardName';
 import {MonsInsurance} from '../../../src/server/cards/promo/MonsInsurance';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {cast} from '../../TestingUtils';
+import {CardType} from '../../../src/common/cards/CardType';
 
 describe('PublicSponsoredGrant', function() {
   let card: PublicSponsoredGrant;
@@ -43,11 +44,16 @@ describe('PublicSponsoredGrant', function() {
 
     const options = cast(card.play(player), OrOptions);
 
-    expect(player.megaCredits).eq(2);
+    expect(player.megaCredits).eq(4);
     expect(player2.megaCredits).eq(0);
     expect(player3.megaCredits).eq(0);
 
+    // Confirming that tags are filtered appropriately.
+    expect(options.options.map((o) => o.title)).to.contain(Tag.SPACE);
+    expect(options.options.map((o) => o.title)).to.not.contain(Tag.JOVIAN);
+
     expect(options.options[0].title).eq(Tag.BUILDING);
+
     expect(player.cardsInHand).is.empty;
 
     const scienceCard = new SearchForLife();
@@ -62,6 +68,17 @@ describe('PublicSponsoredGrant', function() {
     expect(game.projectDeck.discardPile.map((c) => c.name)).deep.eq([CardName.SEARCH_FOR_LIFE]);
   });
 
+  it('works with events', function() {
+    const options = cast(card.play(player), OrOptions);
+    const eventOption = options.options.find((o) => o.title === Tag.EVENT)!;
+
+    expect(player.cardsInHand).is.empty;
+
+    eventOption.cb();
+
+    expect(player.cardsInHand.map((c) => c.type)).deep.eq([CardType.EVENT, CardType.EVENT]);
+  });
+
   it('compatible with Mons Insurance', function() {
     player2.setCorporationForTest(new MonsInsurance());
     // This isn't very clean but it's necessary for the test.
@@ -74,7 +91,7 @@ describe('PublicSponsoredGrant', function() {
 
     // This is a great test, because player1 instigated the loss, so does not get an insurance
     // payout. Player 2 loses the payout and player 3 gets it.
-    expect(player.megaCredits).eq(8);
+    expect(player.megaCredits).eq(10);
     expect(player2.megaCredits).eq(5);
     expect(player3.megaCredits).eq(11);
   });

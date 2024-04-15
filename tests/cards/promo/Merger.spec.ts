@@ -37,6 +37,7 @@ import {Chimera} from '../../../src/server/cards/pathfinders/Chimera';
 import {PhoboLog} from '../../../src/server/cards/corporation/PhoboLog';
 import {ValleyTrust} from '../../../src/server/cards/prelude/ValleyTrust';
 import {InterplanetaryCinematics} from '../../../src/server/cards/corporation/InterplanetaryCinematics';
+import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 
 describe('Merger', function() {
   let merger: Merger;
@@ -269,6 +270,20 @@ describe('Merger', function() {
     player.playAdditionalCorporationCard(new Viron());
     runAllActions(game);
     expect(player.production.megacredits).eq(1);
+  });
+
+  it('Works with Aridor and another corporation card, Aridor goes second', function() {
+    player.playCorporationCard(new Viron());
+    runAllActions(game);
+    expect(player.production.megacredits).eq(0);
+
+    player.playAdditionalCorporationCard(new Aridor());
+    runAllActions(game);
+    expect(player.production.megacredits).eq(0);
+
+    player.playCard(new Tardigrades());
+    runAllActions(game);
+    expect(player.production.megacredits).eq(0);
   });
 
   describe('Mergability outliers for weird cases', () => {

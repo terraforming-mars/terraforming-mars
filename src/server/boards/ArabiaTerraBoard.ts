@@ -4,10 +4,8 @@ import {Random} from '../../common/utils/Random';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
 import {Space} from './Space';
-import {SerializedBoard} from './SerializedBoard';
 import {MarsBoard} from './MarsBoard';
 
 export class ArabiaTerraBoard extends MarsBoard {
@@ -43,20 +41,20 @@ export class ArabiaTerraBoard extends MarsBoard {
     builder.land().land().land().land().land(STEEL);
 
     if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng); // , SpaceName.HECATES_THOLUS, SpaceName.ELYSIUM_MONS, SpaceName.ARSIA_MONS_ELYSIUM, SpaceName.OLYMPUS_MONS);
+      builder.shuffle(rng, SpaceName.TIKHONAROV, SpaceName.LADON, SpaceName.FLAUGERGUES, SpaceName.CHARYBDIS);
     }
 
     const spaces = builder.build();
     return new ArabiaTerraBoard(spaces);
   }
 
-  public override getVolcanicSpaceIds() {
-    return [
+  public constructor(spaces: ReadonlyArray<Space>) {
+    super(spaces, undefined, [
       SpaceName.TIKHONAROV,
       SpaceName.LADON,
       SpaceName.FLAUGERGUES,
       SpaceName.CHARYBDIS,
-    ];
+    ]);
   }
 
   public override getSpaces(spaceType: SpaceType): Array<Space> {
@@ -73,9 +71,5 @@ export class ArabiaTerraBoard extends MarsBoard {
     // Nomads can be found on cove spaces
     return super.getAvailableSpacesForOcean(player)
       .filter((space) => space.id !== player.game.nomadSpace);
-  }
-
-  public static deserialize(board: SerializedBoard, players: Array<IPlayer>): ArabiaTerraBoard {
-    return new ArabiaTerraBoard(Board.deserializeSpaces(board.spaces, players));
   }
 }

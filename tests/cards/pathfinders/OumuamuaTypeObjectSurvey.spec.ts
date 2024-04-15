@@ -180,4 +180,23 @@ describe('OumuamuaTypeObjectSurvey', function() {
 
     expect(lunarObservationPost.resourceCount).eq(2);
   });
+
+  // it('Card has a science tag and data resources', () => {
+  //   const lunarObservationPost = new LunarObservationPost();
+  //   projectDeck.drawPile = [slug, lunarObservationPost, noTags];
+
+  //   card.play(player);
+
+  //   expect(projectDeck.drawPile).deep.eq([slug]);
+  //   expect(player.cardsInHand).deep.eq([noTags]);
+  //   expect(player.playedCards).deep.eq([lunarObservationPost]);
+  //   expect(player.production.energy).eq(0);
+  //   // played card doesn't cost anything.
+  //   expect(player.megaCredits).eq(100);
+
+  //   card.play(player);
+  //   runAllActions(game);
+
+  //   expect(lunarObservationPost.resourceCount).eq(2);
+  // });
 });

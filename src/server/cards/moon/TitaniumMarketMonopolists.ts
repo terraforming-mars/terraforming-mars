@@ -3,7 +3,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
 import {MarketCard} from './MarketCard';
-import {multiplier} from '../Options';
 
 export class TitaniumMarketMonopolists extends MarketCard {
   constructor() {
@@ -22,7 +21,7 @@ export class TitaniumMarketMonopolists extends MarketCard {
           cardNumber: 'M29',
           renderData: CardRenderer.builder((b) => {
             b.action('Spend 2X M€ to gain X titanium [max 8 M€]', (eb) => {
-              eb.megacredits(2, {multiplier}).startAction.text('X').titanium(1).asterix();
+              eb.megacredits(1, {text: '2x'}).startAction.text('X').titanium(1).asterix();
             }).br;
             b.or().br;
             b.action('Spend X titanium to gain 4X M€ [max 4 titanium].', (eb) => {

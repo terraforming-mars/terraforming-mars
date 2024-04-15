@@ -122,12 +122,12 @@ describe('UnderworldExpansion', function() {
   it('identifiable, identified', () => {
     const space = game.board.getAvailableSpacesOnLand(player1)[0];
 
-    expect(UnderworldExpansion.identifiableSpaces(game)).includes(space);
+    expect(UnderworldExpansion.identifiableSpaces(player1)).includes(space);
     expect(UnderworldExpansion.identifiedSpaces(game)).does.not.include(space);
 
     UnderworldExpansion.identify(game, space, player1);
 
-    expect(UnderworldExpansion.identifiableSpaces(game)).does.not.include(space);
+    expect(UnderworldExpansion.identifiableSpaces(player1)).does.not.include(space);
     expect(UnderworldExpansion.identifiedSpaces(game)).includes(space);
   });
 
@@ -366,6 +366,18 @@ describe('UnderworldExpansion', function() {
     expect(UnderworldExpansion.excavatableSpaces(player2)).does.not.include(space);
   });
 
+  it('excavatableSpaces - cannot afford ocean bonus', () => {
+    const space = UnderworldExpansion.identifiableSpaces(player1)[0];
+    space.undergroundResources = 'ocean';
+    player1.megaCredits = 3;
+
+    expect(UnderworldExpansion.excavatableSpaces(player1)).does.not.contain(space);
+
+    player1.megaCredits = 4;
+
+    expect(UnderworldExpansion.excavatableSpaces(player1)).contains(space);
+  });
+
   // TODO(kberg): Test excavatablespaces override
 
   it('excavate', () => {
@@ -511,11 +523,20 @@ describe('UnderworldExpansion', function() {
   });
 
   class MaybeBlockAttackTester {
+    // The target of the attack. If you want a different target, change this before calling run.
+    public target = player1;
+    // The perpetrator of the attack. If you want a different perpetrator, change this before calling run.
+    public perpetrator = player2;
+
+    // Will be true if the callback is invoked.
     public called: boolean = false;
+    // True if the caller did not block.
     public proceed: boolean = false;
+    // And player input the target must immediately resolve.
     public playerInput: PlayerInput | undefined = undefined;
+
     public run() {
-      this.playerInput = UnderworldExpansion.maybeBlockAttack(player1, player2, (proceed) => {
+      this.playerInput = UnderworldExpansion.maybeBlockAttack(this.target, this.perpetrator, (proceed) => {
         this.proceed = proceed;
         this.called = true;
         return undefined;
@@ -564,6 +585,24 @@ describe('UnderworldExpansion', function() {
   it('maybeBlockAttack - block', () => {
     player1.underworldData.corruption = 1;
     const tester = new MaybeBlockAttackTester();
+
+    tester.run();
+
+    expect(tester.called).is.false;
+
+    const orOptions = cast(tester.playerInput, OrOptions);
+    orOptions.options[0].cb();
+
+    expect(tester.called).is.true;
+    expect(tester.proceed).is.false;
+    expect(player1.underworldData.corruption).eq(0);
+  });
+
+  it('maybeBlockAttack - block self', () => {
+    player1.underworldData.corruption = 1;
+    const tester = new MaybeBlockAttackTester();
+    tester.perpetrator = player1;
+    tester.target = player1;
 
     tester.run();
 
@@ -633,11 +672,11 @@ describe('UnderworldExpansion', function() {
     expect(privateMilitaryContractor.resourceCount).eq(1);
   });
 
-  it('removeUnclaimedToken', () => {
+  it('removeAllUnclaimedTokens', () => {
     const board = game.board;
-    const space = board.getSpace('30');
-    const space2 = board.getSpace('31');
-    const space3 = board.getSpace('32');
+    const space = board.getSpaceOrThrow('30');
+    const space2 = board.getSpaceOrThrow('31');
+    const space3 = board.getSpaceOrThrow('32');
 
     space.undergroundResources = 'card1';
 
@@ -655,5 +694,29 @@ describe('UnderworldExpansion', function() {
     expect(space2.excavator).eq(player1);
     expect(space2.undergroundResources).eq('card2');
     expect(game.underworldData.tokens).to.have.members(['card1', 'corruption1']);
+  });
+
+  it('removeUnclaimedToken', () => {
+    const board = game.board;
+    const space = board.getSpaceOrThrow('30');
+    const space2 = board.getSpaceOrThrow('31');
+    const space3 = board.getSpaceOrThrow('32');
+
+    space.undergroundResources = 'card1';
+
+    space2.excavator = player1;
+    space2.undergroundResources = 'card2';
+
+    space3.undergroundResources = 'corruption1',
+    game.underworldData.tokens = [];
+
+    expect(UnderworldExpansion.identifiedSpaces(game)).to.have.members([space, space2, space3]);
+
+    UnderworldExpansion.removeUnclaimedToken(game, space);
+
+    expect(UnderworldExpansion.identifiedSpaces(game)).to.have.members([space2, space3]);
+    expect(space2.excavator).eq(player1);
+    expect(space2.undergroundResources).eq('card2');
+    expect(game.underworldData.tokens).to.have.members(['card1']);
   });
 });

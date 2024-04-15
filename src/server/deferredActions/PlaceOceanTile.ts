@@ -1,13 +1,18 @@
 import {IPlayer} from '../IPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 import {PlacementType} from '../boards/PlacementType';
 import {Space} from '../boards/Space';
+import {CardName} from '../../common/cards/CardName';
+import {Message} from '../../common/logs/Message';
 
 type Options = {
-  title?: string,
+  title?: string | Message,
   on?: PlacementType,
   spaces?: Array<Space>,
+  /** For Icy Impactors */
+  creditedPlayer?: IPlayer,
 };
 
 export class PlaceOceanTile extends DeferredAction<Space> {
@@ -19,6 +24,10 @@ export class PlaceOceanTile extends DeferredAction<Space> {
 
   public execute() {
     if (!this.player.game.canAddOcean()) {
+      const whales = this.player.playedCards.find((card) => card.name === CardName.WHALES);
+      if (whales !== undefined) {
+        this.player.addResourceTo(whales, {qty: 1, log: true});
+      }
       return undefined;
     }
 
@@ -34,8 +43,9 @@ export class PlaceOceanTile extends DeferredAction<Space> {
 
     return new SelectSpace(title, availableSpaces)
       .andThen((space) => {
-        this.player.game.addOcean(this.player, space);
-        this.cb(space);
+        const creditedPlayer = this.options.creditedPlayer ?? this.player;
+        creditedPlayer.game.addOcean(creditedPlayer, space);
+        creditedPlayer.defer(this.cb(space));
         return undefined;
       });
   }

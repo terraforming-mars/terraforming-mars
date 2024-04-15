@@ -42,7 +42,7 @@ export class EarthquakeMachine extends Card implements IProjectCard {
 
   public action(player: IPlayer) {
     player.stock.deduct(Resource.ENERGY, 1);
-    const spaces = UnderworldExpansion.excavatableSpaces(player, false).filter((space) => space.tile !== undefined);
+    const spaces = UnderworldExpansion.excavatableSpaces(player, true).filter((space) => space.tile === undefined);
     player.game.defer(new ExcavateSpaceDeferred(player, spaces));
     return undefined;
   }

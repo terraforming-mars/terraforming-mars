@@ -13,12 +13,12 @@ describe('BeamFromAThoriumAsteroid', function() {
   });
 
   it('Cannot play without a Jovian tag', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     player.playedCards.push(card);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.production.heat).to.eq(3);

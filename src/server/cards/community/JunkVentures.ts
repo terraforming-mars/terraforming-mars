@@ -1,10 +1,8 @@
 import {CardName} from '../../../common/cards/CardName';
 import {Size} from '../../../common/cards/render/Size';
 import {CorporationCard} from '../corporation/CorporationCard';
-import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {ChooseCards} from '../../deferredActions/ChooseCards';
-import {LogHelper} from '../../LogHelper';
 import {IPlayer} from '../../IPlayer';
 
 export class JunkVentures extends CorporationCard {
@@ -29,15 +27,10 @@ export class JunkVentures extends CorporationCard {
   }
 
   public initialAction(player: IPlayer) {
-    const discardedCards = new Set<CardName>();
-
-    for (let i = 0; i < 3; i++) {
-      const card = player.game.projectDeck.draw(player.game);
+    const cards = player.game.projectDeck.drawN(player.game, 3);
+    for (const card of cards) {
       player.game.projectDeck.discard(card);
-      discardedCards.add(card.name);
     }
-
-    LogHelper.logDiscardedCards(player.game, Array.from(discardedCards));
     return undefined;
   }
 
@@ -49,7 +42,7 @@ export class JunkVentures extends CorporationCard {
     const game = player.game;
     game.projectDeck.shuffleDiscardPile();
 
-    const cards: Array<IProjectCard> = [];
+    const cards = [];
     for (let idx = 0; idx < 3; idx++) {
       const card = player.game.projectDeck.discardPile.pop();
       if (card === undefined) {

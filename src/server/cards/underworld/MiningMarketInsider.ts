@@ -7,6 +7,7 @@ import {ActionCard} from '../ActionCard';
 import {all, digit} from '../Options';
 import {IPlayer} from '../../IPlayer';
 import {sum} from '../../../common/utils/utils';
+import {CardResource} from '../../../common/CardResource';
 
 export class MiningMarketInsider extends ActionCard implements IProjectCard {
   constructor() {
@@ -15,6 +16,7 @@ export class MiningMarketInsider extends ActionCard implements IProjectCard {
       name: CardName.MINING_MARKET_INSIDER,
       cost: 5,
       tags: [Tag.EARTH],
+      resourceType: CardResource.DATA,
 
       action: {
         spend: {resourcesHere: 4},
@@ -33,6 +35,7 @@ export class MiningMarketInsider extends ActionCard implements IProjectCard {
     });
   }
 
+  // Behavior is similar in Demetron labs
   // This doesn't need to be serialized. It ensures this is only evaluated once per action.
   // When the server restarts, the player has to take an action anyway.
   private lastActionId = -1;

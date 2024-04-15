@@ -3,6 +3,7 @@ import {IPlayer} from '../IPlayer';
 import {AresGlobalParametersResponse} from '../../common/inputs/AresGlobalParametersResponse';
 import {InputResponse, isAresGlobalParametersResponse, isShiftAresGlobalParametersResponse} from '../../common/inputs/InputResponse';
 import {ShiftAresGlobalParametersModel} from '../../common/models/PlayerInputModel';
+import {InputError} from './InputError';
 
 export class ShiftAresGlobalParameters extends BasePlayerInput<AresGlobalParametersResponse> {
   constructor() {
@@ -11,7 +12,7 @@ export class ShiftAresGlobalParameters extends BasePlayerInput<AresGlobalParamet
 
   public toModel(player: IPlayer): ShiftAresGlobalParametersModel {
     if (player.game.aresData === undefined) {
-      throw new Error('Ares is not defined');
+      throw new InputError('Ares is not defined');
     }
     return {
       title: this.title,
@@ -22,17 +23,17 @@ export class ShiftAresGlobalParameters extends BasePlayerInput<AresGlobalParamet
   }
   public process(input: InputResponse, _player: IPlayer) {
     if (!isShiftAresGlobalParametersResponse(input)) {
-      throw new Error('Not a valid ShiftAresGlobalParametersResponse');
+      throw new InputError('Not a valid ShiftAresGlobalParametersResponse');
     }
     if (!isAresGlobalParametersResponse(input.response)) {
-      throw new Error('Not a valid ShiftAresGlobalParametersResponse');
+      throw new InputError('Not a valid ShiftAresGlobalParametersResponse');
     }
 
     if (!this.inRange(input.response.lowOceanDelta) ||
       !this.inRange(input.response.highOceanDelta) ||
       !this.inRange(input.response.temperatureDelta) ||
       !this.inRange(input.response.oxygenDelta)) {
-      throw new Error('values out of range');
+      throw new InputError('values out of range');
     }
     this.cb(input.response);
     return undefined;

@@ -2,7 +2,7 @@
     <div class="player-tags">
         <div class="player-tags-main">
             <tag-count :tag="'vp'" :count="player.victoryPointsBreakdown.total" :size="'big'" :type="'main'" :hideCount="hideVpCount" />
-            <div v-if="isEscapeVelocityOn" class="tag-display" :class="tooltipCss" :data-tooltip="$t('Escape Velocity penalty')">
+            <div v-if="isEscapeVelocityOn" :class="tooltipCss" :data-tooltip="$t('Escape Velocity penalty')">
               <tag-count :tag="'escape'" :count="escapeVelocityPenalty" :size="'big'" :type="'main'"/>
             </div>
             <tag-count :tag="'tr'" :count="player.terraformRating" :size="'big'" :type="'main'"/>
@@ -76,7 +76,6 @@ const ORDER: Array<InterfaceTagsType> = [
 const isInGame = (tag: InterfaceTagsType, game: GameModel): boolean => {
   const gameOptions = game.gameOptions;
   if (game.turmoil === undefined && tag === SpecialTags.INFLUENCE) return false;
-  if (gameOptions.pathfindersExpansion === false && tag === Tag.MARS) return false;
   switch (tag) {
   case SpecialTags.COLONY_COUNT:
     return gameOptions.coloniesExtension !== false;
@@ -173,7 +172,7 @@ export default Vue.extend({
     }
 
     // Put them in order.
-    const tagsInOrder: Array<TagDetail> = [];
+    const tagsInOrder = [];
     for (const tag of ORDER) {
       const entry = details[tag];
       tagsInOrder.push(entry);

@@ -15,6 +15,9 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Board} from '../../boards/Board';
 
+/**
+ * Abstraction for cards that give rewards based on tile placement.  (e.g. Ecological Survey, Geological Survey.)
+ */
 export abstract class SurveyCard extends Card implements IProjectCard {
   constructor(properties: StaticCardProperties) {
     super(properties);
@@ -62,12 +65,7 @@ export abstract class SurveyCard extends Card implements IProjectCard {
       }
     }
     if (grant) {
-      cardOwner.game.defer(new GainResources(
-        cardOwner,
-        resource,
-        {
-          cb: () => this.log(cardOwner, resource),
-        }));
+      cardOwner.game.defer(new GainResources(cardOwner, resource).andThen(() => this.log(cardOwner, resource)));
     }
   }
 
@@ -77,9 +75,8 @@ export abstract class SurveyCard extends Card implements IProjectCard {
       cardOwner.game.defer(new AddResourcesToCard(
         cardOwner,
         resource,
-        {
-          log: () => this.log(cardOwner, resource),
-        }));
+        {log: false}))
+        .andThen(() => this.log(cardOwner, resource));
     }
   }
 }

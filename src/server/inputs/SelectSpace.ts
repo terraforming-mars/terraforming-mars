@@ -3,6 +3,7 @@ import {Space} from '../boards/Space';
 import {InputResponse, isSelectSpaceResponse} from '../../common/inputs/InputResponse';
 import {SelectSpaceModel} from '../../common/models/PlayerInputModel';
 import {BasePlayerInput} from '../PlayerInput';
+import {InputError} from './InputError';
 
 export class SelectSpace extends BasePlayerInput<Space> {
   constructor(
@@ -10,7 +11,7 @@ export class SelectSpace extends BasePlayerInput<Space> {
     public spaces: ReadonlyArray<Space>) {
     super('space', title);
     if (spaces.length === 0) {
-      throw new Error('No available spaces');
+      throw new InputError('No available spaces');
     }
   }
 
@@ -25,11 +26,11 @@ export class SelectSpace extends BasePlayerInput<Space> {
 
   public process(input: InputResponse) {
     if (!isSelectSpaceResponse(input)) {
-      throw new Error('Not a valid SelectSpaceResponse');
+      throw new InputError('Not a valid SelectSpaceResponse');
     }
     const space = this.spaces.find((space) => space.id === input.spaceId);
     if (space === undefined) {
-      throw new Error('Space not available');
+      throw new InputError('Space not available');
     }
     return this.cb(space);
   }

@@ -10,7 +10,6 @@ export class LakeMarineris extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
       name: CardName.LAKE_MARINERIS,
       cost: 18,
-      tr: {oceans: 2},
       requirements: {temperature: 0},
       victoryPoints: 2,
 

@@ -11,7 +11,7 @@ import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {TestPlayer} from '../../TestPlayer';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {Message} from '../../../src/common/logs/Message';
 
 describe('TitanFloatingLaunchPad', function() {
@@ -21,8 +21,7 @@ describe('TitanFloatingLaunchPad', function() {
 
   beforeEach(function() {
     card = new TitanFloatingLaunchPad();
-    // Second player is ignored.
-    [game, player] = testGame(2, {coloniesExtension: true});
+    [game, player/* , player2 */] = testGame(2, {coloniesExtension: true});
   });
 
   it('Should act', function() {
@@ -31,7 +30,7 @@ describe('TitanFloatingLaunchPad', function() {
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
-  it('Should play with single targets', function() {
+  it('action with single targets', function() {
     player.game.colonies = []; // A way to simulate that no colonies are available.
     player.playedCards.push(card);
     game.colonies = []; // A way to fake out that no colonies are available.
@@ -53,7 +52,7 @@ describe('TitanFloatingLaunchPad', function() {
     expect(card.resourceCount).to.eq(2);
   });
 
-  it('Should play with multiple targets', function() {
+  it('action with multiple targets', function() {
     player.game.colonies = []; // A way to simulate that no colonies are available.
 
     const card2 = new JupiterFloatingStation();
@@ -67,7 +66,7 @@ describe('TitanFloatingLaunchPad', function() {
     expect(card.resourceCount).to.eq(1);
   });
 
-  it('Should play with multiple targets and colonies', function() {
+  it('action with multiple targets and colonies', function() {
     game.colonies = [new Luna(), new Triton()];
 
     const card2 = new JupiterFloatingStation();
@@ -90,6 +89,21 @@ describe('TitanFloatingLaunchPad', function() {
     selectColony.cb(selectColony.colonies[0]);
     expect(card.resourceCount).to.eq(7);
     expect(player.megaCredits).to.eq(2);
+  });
+
+  it('Cannot take trade action during embargo #6348', function() {
+    player.game.tradeEmbargo = true;
+
+    game.colonies = [new Luna(), new Triton()];
+
+    player.playedCards.push(card);
+    player.addResourceTo(card, 7);
+
+    cast(card.action(player), undefined);
+    runAllActions(game);
+
+    expect(game.deferredActions).has.lengthOf(0);
+    expect(card.resourceCount).to.eq(8);
   });
 
   it('is available through standard trade action', () => {

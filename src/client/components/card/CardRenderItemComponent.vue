@@ -40,7 +40,7 @@ export default Vue.extend({
       return this.item.secondaryTag !== undefined ? 'card-resource--has-secondary-tag' : 'card-resource';
     },
     componentClasses(): ReadonlyArray<string> {
-      let classes: Array<string> = [];
+      let classes = [];
       switch (this.item.type) {
       case CardRenderItemType.TEMPERATURE:
         classes.push('card-global-requirement', 'card-temperature-global-requirement');
@@ -322,6 +322,9 @@ export default Vue.extend({
       case CardRenderItemType.ACTIVIST:
         classes.push(this.cardResource, 'card-resource-activist');
         break;
+      case CardRenderItemType.SUPPLY_CHAIN:
+        classes.push(this.cardResource, 'card-resource-supply-chain');
+        break;
       case CardRenderItemType.NEUTRAL_DELEGATE:
         classes.push('card-neutral-delegate');
         break;
@@ -330,6 +333,13 @@ export default Vue.extend({
         break;
       case CardRenderItemType.CORRUPTION_SHIELD:
         classes.push('card-corruption-shield');
+        break;
+      case CardRenderItemType.GEOSCAN_ICON:
+        classes.push('card-geoscan-icon');
+        break;
+      case CardRenderItemType.UNDERGROUND_SHELTERS:
+        classes.push('card-underground-shelters');
+        break;
       }
 
       if (this.item.secondaryTag === AltSecondaryTag.NO_PLANETARY_TAG) {
@@ -410,18 +420,17 @@ export default Vue.extend({
     itemHtmlContent(): string {
       let result = '';
       // in case of symbols inside
-      if (isICardRenderItem(this.item) && this.item.amountInside) {
-        if (this.item.questionMark === true) {
-          result += '?';
-        } else if (this.item.amount !== 0) {
-          result += this.item.amount.toString();
-        }
+      if (isICardRenderItem(this.item)) {
+        if (this.item.innerText) {
+          result += this.item.innerText;
+        } else if (this.item.amountInside) {
+          if (this.item.amount !== 0) {
+            result += this.item.amount.toString();
+          }
 
-        if (this.item.multiplier) {
-          result += 'X';
-        }
-        if (this.item.clone) {
-          result += '<div style="-webkit-filter: greyscale(100%);filter: grayscale(100%)">🪐</div>';
+          if (this.item.clone) {
+            result += '<div style="-webkit-filter: greyscale(100%);filter: grayscale(100%)">🪐</div>';
+          }
         }
       }
 
@@ -484,11 +493,13 @@ export default Vue.extend({
         return '<div class="board-cube--bronze"></div>';
       }
       // TODO(chosta): abstract once another case of cancel (X) on top of an item is needed
-      if (this.item.type === CardRenderItemType.TR && this.item.cancelled === true) {
-        result = '<div class="card-x">x</div>';
-      }
-      if (this.item.type === CardRenderItemType.WILD && this.item.cancelled === true) {
-        result = '<div class="card-x">✕</div>';
+      if (this.item.cancelled === true) {
+        switch (this.item.type) {
+        case CardRenderItemType.TR:
+        case CardRenderItemType.WILD:
+        case CardRenderItemType.UNDERGROUND_RESOURCES:
+          result = '<div class="card-x">x</div>';
+        }
       }
 
       return result;

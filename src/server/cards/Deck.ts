@@ -1,5 +1,5 @@
 import {SerializedDeck} from './SerializedDeck';
-import {CardFinder} from '../CardFinder';
+import {cardsFromJSON, ceosFromJSON, corporationCardsFromJSON, preludesFromJSON} from '../createCard';
 import {CardName} from '../../common/cards/CardName';
 import {LogHelper} from '../LogHelper';
 import {Random} from '../../common/utils/Random';
@@ -57,18 +57,56 @@ export class Deck<T extends ICard> {
     }
   }
 
-  public draw(logger: Logger, source: 'top' | 'bottom' = 'top'): T {
+  /**
+   * @deprecated use draw or drawOrThrow
+   */
+  public drawLegacy(logger: Logger, source: 'top' | 'bottom' = 'top'): T {
+    return this.drawOrThrow(logger, source);
+  }
+
+  public draw(logger: Logger, source: 'top' | 'bottom' = 'top'): T | undefined {
+    this.shuffleIfNecessary(logger);
     const card = source === 'top' ? this.drawPile.pop() : this.drawPile.shift();
+    this.shuffleIfNecessary(logger);
+    return card;
+  }
 
-    if (card === undefined) {
-      throw new Error(`Unexpected empty ${this.type} deck`);
+  public drawN(logger: Logger, count: number, source: 'top' | 'bottom' = 'top'): Array<T> {
+    const cards: Array<T> = [];
+    for (let idx = 0; idx < count; idx++) {
+      const card = this.draw(logger, source);
+      if (card === undefined) {
+        break;
+      }
+      cards.push(card);
     }
+    return cards;
+  }
 
-    if (this.drawPile.length === 0) {
+  drawNOrThrow(logger: Logger, count: number): Array<T> {
+    const cards: Array<T> = [];
+    for (let idx = 0; idx < count; idx++) {
+      cards.push(this.drawOrThrow(logger));
+    }
+    return cards;
+  }
+
+  public canDraw(count: number): boolean {
+    return this.drawPile.length + this.discardPile.length > count;
+  }
+
+  private shuffleIfNecessary(logger: Logger) {
+    if (this.drawPile.length === 0 && this.discardPile.length !== 0) {
       logger.log(`The ${this.type} discard pile has been shuffled to form a new deck.`);
       this.shuffle();
     }
+  }
 
+  public drawOrThrow(logger: Logger, source: 'top' | 'bottom' = 'top'): T {
+    const card = this.draw(logger, source);
+    if (card === undefined) {
+      throw new Error(`Unexpected empty ${this.type} deck`);
+    }
     return card;
   }
 
@@ -81,7 +119,7 @@ export class Deck<T extends ICard> {
         logger.log(`discarded every ${this.type} card without a match`);
         break;
       }
-      const projectCard = this.draw(logger);
+      const projectCard = this.drawLegacy(logger);
       if (include(projectCard)) {
         result.push(projectCard);
       } else {
@@ -119,10 +157,8 @@ export class CorporationDeck extends Deck<ICorporationCard> {
   }
 
   public static deserialize(d: SerializedDeck, random: Random): Deck<ICorporationCard> {
-    const cardFinder = new CardFinder();
-
-    const deck = cardFinder.corporationCardsFromJSON(d.drawPile);
-    const discarded = cardFinder.corporationCardsFromJSON(d.discardPile);
+    const deck = corporationCardsFromJSON(d.drawPile);
+    const discarded = corporationCardsFromJSON(d.discardPile);
     return new CorporationDeck(deck, discarded, random);
   }
 }
@@ -133,10 +169,8 @@ export class ProjectDeck extends Deck<IProjectCard> {
   }
 
   public static deserialize(d: SerializedDeck, random: Random): Deck<IProjectCard> {
-    const cardFinder = new CardFinder();
-
-    const deck = cardFinder.cardsFromJSON(d.drawPile);
-    const discarded = cardFinder.cardsFromJSON(d.discardPile);
+    const deck = cardsFromJSON(d.drawPile);
+    const discarded = cardsFromJSON(d.discardPile);
     return new ProjectDeck(deck, discarded, random);
   }
 }
@@ -157,10 +191,8 @@ export class PreludeDeck extends Deck<IPreludeCard> {
   }
 
   public static deserialize(d: SerializedDeck, random: Random): Deck<IPreludeCard> {
-    const cardFinder = new CardFinder();
-
-    const deck = <Array<IPreludeCard>>cardFinder.preludesFromJSON(d.drawPile);
-    const discarded = cardFinder.preludesFromJSON(d.discardPile);
+    const deck = preludesFromJSON(d.drawPile);
+    const discarded = preludesFromJSON(d.discardPile);
     return new PreludeDeck(deck, discarded, random);
   }
 }
@@ -171,10 +203,8 @@ export class CeoDeck extends Deck<ICeoCard> {
   }
 
   public static deserialize(d: SerializedDeck, random: Random): Deck<ICeoCard> {
-    const cardFinder = new CardFinder();
-
-    const deck = cardFinder.ceosFromJSON(d.drawPile);
-    const discarded = cardFinder.ceosFromJSON(d.discardPile);
+    const deck = ceosFromJSON(d.drawPile);
+    const discarded = ceosFromJSON(d.discardPile);
     return new CeoDeck(deck, discarded, random);
   }
 }

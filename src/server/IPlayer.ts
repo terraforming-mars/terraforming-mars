@@ -4,14 +4,14 @@ import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IGame, isIGame} from './IGame';
 import {Payment, PaymentOptions} from '../common/inputs/Payment';
 import {SpendableCardResource} from '../common/inputs/Spendable';
-import {ICard, IActionCard, DynamicTRSource} from './cards/ICard';
+import {ICard, IActionCard} from './cards/ICard';
 import {TRSource} from '../common/cards/TRSource';
 import {IProjectCard} from './cards/IProjectCard';
 import {PlayerInput} from './PlayerInput';
 import {Resource} from '../common/Resource';
 import {CardResource} from '../common/CardResource';
 import {SelectCard} from './inputs/SelectCard';
-import {Priority} from './deferredActions/DeferredAction';
+import {Priority} from './deferredActions/Priority';
 import {RobotCard} from './cards/promo/SelfReplicatingRobots';
 import {SerializedPlayer} from './SerializedPlayer';
 import {Timer} from '../common/Timer';
@@ -25,7 +25,7 @@ import {Tags} from './player/Tags';
 import {Colonies} from './player/Colonies';
 import {Production} from './player/Production';
 import {ICeoCard} from './cards/ceos/ICeoCard';
-import {IVictoryPointsBreakdown} from '..//common/game/IVictoryPointsBreakdown';
+import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
 import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Color} from '../common/Color';
@@ -38,7 +38,7 @@ export type ResourceSource = IPlayer | GlobalEventName | ICard;
 export type CanAffordOptions = Partial<PaymentOptions> & {
   cost: number,
   reserveUnits?: Units,
-  tr?: TRSource | DynamicTRSource,
+  tr?: TRSource,
 }
 
 /**
@@ -69,6 +69,9 @@ export interface IPlayer {
   // Used only during set-up
   pickedCorporationCard?: ICorporationCard;
 
+  // Terraforming Rating
+  hasIncreasedTerraformRatingThisGeneration: boolean;
+
   // Resources
   megaCredits: number;
   steel: number;
@@ -83,6 +86,8 @@ export interface IPlayer {
   canUseTitaniumAsMegacredits: boolean;
   // Martian Lumber Corp
   canUsePlantsAsMegacredits: boolean;
+  // Friends in High Places
+  canUseCorruptionAsMegacredits: boolean;
 
   // This generation / this round
   actionsTakenThisRound: number;
@@ -173,8 +178,15 @@ export interface IPlayer {
   hasProtectedHabitats(): boolean;
   plantsAreProtected(): boolean;
   alloysAreProtected(): boolean;
-  canReduceAnyProduction(resource: Resource, minQuantity?: number): boolean;
-  canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: IPlayer): void;
+  /**
+   * Returns true when this player can lose |minQuantity| units of production.
+   *
+   * This typically means they have the required units of production, and that production
+   * isn't protected.
+   */
+  canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: IPlayer): boolean;
+  maybeBlockAttack(perpetrator: IPlayer, cb: (proceed: boolean) => PlayerInput | undefined): void;
+
   /**
    * Return true if this player cannot have their production reduced.
    *
@@ -272,7 +284,7 @@ export interface IPlayer {
   availableHeat(): number;
   spendHeat(amount: number, cb?: () => (undefined | PlayerInput)) : PlayerInput | undefined;
 
-  playCard(selectedCard: IProjectCard, payment?: Payment, cardAction?: CardAction): undefined;
+  playCard(selectedCard: IProjectCard, payment?: Payment, cardAction?: CardAction): void;
   onCardPlayed(card: IProjectCard): void;
   playAdditionalCorporationCard(corporationCard: ICorporationCard): void;
   playCorporationCard(corporationCard: ICorporationCard): void;
@@ -286,7 +298,6 @@ export interface IPlayer {
   takeActionForFinalGreenery(): void;
   getPlayableCards(): Array<PlayableCard>;
   canPlay(card: IProjectCard): boolean | YesAnd;
-  simpleCanPlay(card: IProjectCard, canAffordOptions?: CanAffordOptions): boolean | YesAnd;
   canSpend(payment: Payment, reserveUnits?: Units): boolean;
   payingAmount(payment: Payment, options?: Partial<PaymentOptions>): number;
   /**
@@ -297,6 +308,7 @@ export interface IPlayer {
   canAfford(options: number | CanAffordOptions): boolean;
   getStandardProjectOption(): SelectCard<IStandardProjectCard>;
   takeAction(saveBeforeTakingAction?: boolean): void;
+  getOpponents(): ReadonlyArray<IPlayer>;
   /** Add `corp`'s initial action to the deferred action queue, if it has one. */
   deferInitialAction(corp: ICorporationCard): void;
   getActions(): OrOptions;
@@ -306,7 +318,7 @@ export interface IPlayer {
   setWaitingForSafely(input: PlayerInput, cb?: () => void): void;
   serialize(): SerializedPlayer;
   /** Shorthand for deferring evaluating a PlayerInput */
-  defer(input: PlayerInput | undefined, priority?: Priority): void;
+  defer(input: PlayerInput | undefined | void | (() => PlayerInput | undefined | void), priority?: Priority): void;
 }
 
 export function isIPlayer(object: any): object is IPlayer {

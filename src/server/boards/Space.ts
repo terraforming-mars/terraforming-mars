@@ -29,13 +29,7 @@ export type Space = {
   undergroundResources?: UndergroundResourceToken;
   /** Optional underworld player who excavated this resource token. */
   excavator?: IPlayer;
-}
 
-export function newSpace(
-  id: SpaceId,
-  spaceType: SpaceType,
-  x: number,
-  y: number,
-  bonus: Array<SpaceBonus>): Space {
-  return {id, spaceType, x, y, bonus};
+  /** This tile's co-owner. Used for The Moon's Hostile Takeover card. */
+  coOwner?: IPlayer;
 }

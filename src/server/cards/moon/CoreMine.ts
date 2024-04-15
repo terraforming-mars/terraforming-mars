@@ -4,7 +4,6 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {TileType} from '../../../common/TileType';
 
 export class CoreMine extends PreludeCard implements IProjectCard {
   constructor() {
@@ -16,7 +15,7 @@ export class CoreMine extends PreludeCard implements IProjectCard {
         production: {titanium: 1},
         moon: {mineTile: {}},
       },
-      tilesBuilt: [TileType.MOON_MINE],
+
       metadata: {
         description: 'Place a mine tile on The Moon and raise the mining rate 1 step. Increase your titanium production 1 step.',
         cardNumber: '',

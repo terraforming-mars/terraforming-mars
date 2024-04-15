@@ -2,12 +2,13 @@ import {Resource} from '../../common/Resource';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {IPlayer} from '../IPlayer';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 
 export class SelectResourceTypeDeferred extends DeferredAction<Resource> {
   constructor(
     player: IPlayer,
-    public resources: Array<Resource>,
+    public resources: ReadonlyArray<Resource>,
     public title: string,
   ) {
     super(player, Priority.DEFAULT);

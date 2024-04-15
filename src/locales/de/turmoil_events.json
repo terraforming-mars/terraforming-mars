@@ -1,4 +1,10 @@
 {
+  "Lose 1 M€ for each card in your hand over 6 (no limit) reduced by 2 M€ per influence (min 0M€). Draw 2 cards if your hand contains 6 cards or less.": "Verliere 1 M€ für jede Karte in Ihrer Hand über 6 (kein Limit), reduziert um 2 M€ pro Einfluss (min 0M€). Ziehe 2 Karten, wenn deine Hand 6 Karten oder weniger enthält.",
+  "Count corruption and ADD influence. Players with the most get 1 corruption and 3 M€ production. Players with 2nd most get 1 corruption and 1 M€ production. Min 1 to place. (SOLO: Place 1st with sum of 5 or more.)": "Zähle deinen Einfluss und addiere deine Korruption. Die Spieler mit dem höchsten Wert erhalten 1 Korruption und 3 M€ Produktion. Die Zweitplatzierten erhalten 1 Korruption und 1 M€ Produktion. Mindestens 1 zu platzieren. (SOLO: Platz 1 mit einer Summe von 5 oder mehr.)",
+  "Lose 3 M€ per corruption resource you have (max 5), minus influence. Players with 0 corruption gain 1 TR.": "Verliere 3 M€ pro Korruptionsressource (max. 5), abzüglich Einfluss. Spieler mit 0 Korruption erhalten 1 TW.",
+  "Gain 1 M€ production (max 5) for every 2 excavation markers you own. Each point of influence counts as an extra excavation marker.": "Erhalte 1 M€ Produktion (max. 5) für je 2 Ausgrabungsmarker, die du besitzt. Jeder Einflusspunkt zählt als ein zusätzlicher Ausgrabungsmarker.",
+  "Discard all unclaimed underground resources. Lose 2 M€ for each tile on Mars you own WITHOUT excavation markers (max 5) minus influence.": "Wirf alle nicht beanspruchten unterirdischen Ressourcen ab. Verliere 2 M€ für jedes Plättchen auf dem Mars, das du OHNE Ausgrabungsmarker besitzt (max. 5), abzüglich Einfluss.",
+  
   "Discard 2 cards from hand. Gain 2 M€ per influence.": "Wirf 2 Karten von deiner Hand ab. Erhalte 2 M€ pro Einfluss.",
   "Gain 2 M€ per Venus tag (max 5) and influence.": "Erhalte 2 M€ pro Venus-Symbol (max. 5) und Einfluss.",
   "Gain 1 plant per plant production (max 5) and influence.": "Erhalte 1 Pflanze pro Pflanzen-Produktion (max. 5) und Einfluss.",
@@ -42,6 +48,12 @@
   "Lose 1 plant for each Earth tag you own (max 5) then reduced by influence.": "Verliere 1 Pflanze für jedes Erdsymbol, das du besitzt (max. 5), vermindert um Einfluss.",
   "Lower the temperature and oxygen 2 steps each. (-4C, -2% O2)": "Senke die Temperatur um 4 °C und den Sauerstoffgehalt um 2%.",
   "Pay 10M€. Add 2 data to EVERY data card. Add 1 data to any data card for each influence you have.": "Zahle 10 M€. Füge JEDER Karte 2 Daten hinzu. Für 1 Daten für jeden Einfluss, den du hast, jeder Daten-Karte hinzu.",
+  
+  "Seismic Predictions": "Seismische Vorhersagen",
+  "Migration Underground": "Migration im Untergrund",
+  "Media Stir": "Medienwirbel",
+  "Lagging Regulation": "Verzögerte Regulierung",
+  "Fair Trade Complaint": "Beschwerde gegen fairen Handel",
   "Diaspora": "Diaspora",
   "Sponsored Projects": "Gesponsorte Projekte",
   "Generous Funding": "Großzügige Finanzierung",
@@ -84,12 +96,16 @@
   "Tired Earth": "Ermüdete Erde",
   "Magnetic Field Stimulation Delays": "Verzögerungen in der Magnetfeldstimulation",
   "Communication Boom": "Kommunikations-Aufschwung",
+  "x": "x",
   "w/rsrs": "m. Res.",
   "over 15": "über 15",
+  "over 10": "über 10",
+  "over 6": "über 6",
   "1st:": "1.:",
   "2nd:": "2.:",
+  "1st/2nd": "1./2.",
   "Lose all": "Verliere alle",
   "max 3": "max. 3",
-  "over 10": "über 10",
+  "MAX 6": "MAX 6",
   "OR": "ODER"
 }

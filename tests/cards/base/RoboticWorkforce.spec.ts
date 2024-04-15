@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
-import {ALL_MODULE_MANIFESTS} from '../../../src/server/cards/AllCards';
+import {ALL_MODULE_MANIFESTS} from '../../../src/server/cards/AllManifests';
 import {CapitalAres} from '../../../src/server/cards/ares/CapitalAres';
 import {SolarFarm} from '../../../src/server/cards/ares/SolarFarm';
 import {BiomassCombustors} from '../../../src/server/cards/base/BiomassCombustors';
@@ -256,6 +256,11 @@ describe('RoboticWorkforce', () => {
         }
 
         player.game.board.getAvailableSpacesOnLand(player)[0].excavator = player;
+        if (card.name === CardName.DEEPMINING) {
+          const space = player.game.board.getAvailableSpacesOnLand(player)[1];
+          space.undergroundResources = 'nothing';
+          space.bonus = [SpaceBonus.STEEL];
+        }
 
         if (isICorporationCard(card)) {
           player.playCorporationCard(card);

@@ -74,7 +74,7 @@ describe('LunaMiningHub', () => {
 
   it('getVictoryPoints', () => {
     // This space has room to surround it with mines.
-    const space = moonData.moon.getSpace('m15');
+    const space = moonData.moon.getSpaceOrThrow('m15');
     space.tile = {tileType: TileType.LUNA_MINING_HUB, card: card.name};
 
     expect(card.getVictoryPoints(player)).eq(0);

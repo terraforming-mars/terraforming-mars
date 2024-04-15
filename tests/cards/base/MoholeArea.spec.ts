@@ -15,7 +15,7 @@ describe('MoholeArea', function() {
     const space = action.spaces[0];
     action.cb(space);
 
-    expect(space.tile && space.tile.tileType).to.eq(TileType.MOHOLE_AREA);
+    expect(space.tile?.tileType).to.eq(TileType.MOHOLE_AREA);
     expect(player.production.heat).to.eq(4);
     expect(space.adjacency?.bonus).eq(undefined);
   });

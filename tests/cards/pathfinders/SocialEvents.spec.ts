@@ -41,7 +41,7 @@ describe('SocialEvents', function() {
     player.megaCredits = card.cost + 5;
     expect(player.canPlay(card)).is.false;
     player.megaCredits = card.cost + 6;
-    expect(player.canPlay(card)).is.true;
+    expect(player.canPlay(card)).deep.eq({redsCost: 6});
   });
 
   it('play', function() {

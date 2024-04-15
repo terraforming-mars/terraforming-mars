@@ -4,6 +4,7 @@ import {IPlayer} from '../IPlayer';
 import {NeutralPlayer} from '../turmoil/Turmoil';
 import {InputResponse, isSelectDelegateResponse} from '../../common/inputs/InputResponse';
 import {SelectDelegateModel} from '../../common/models/PlayerInputModel';
+import {InputError} from './InputError';
 
 export class SelectDelegate extends BasePlayerInput<IPlayer | NeutralPlayer> {
   constructor(
@@ -23,7 +24,7 @@ export class SelectDelegate extends BasePlayerInput<IPlayer | NeutralPlayer> {
 
   public process(input: InputResponse) {
     if (!isSelectDelegateResponse(input)) {
-      throw new Error('Not a valid SelectDelegateResponse');
+      throw new InputError('Not a valid SelectDelegateResponse');
     }
     for (const player of this.players) {
       if (player === 'NEUTRAL') {
@@ -37,6 +38,6 @@ export class SelectDelegate extends BasePlayerInput<IPlayer | NeutralPlayer> {
       }
       return this.cb(player);
     }
-    throw new Error('Player not available');
+    throw new InputError('Player not available');
   }
 }

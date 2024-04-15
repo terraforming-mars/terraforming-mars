@@ -1,10 +1,10 @@
 import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {SelectPlayer} from '../inputs/SelectPlayer';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 import {Message} from '../../common/logs/Message';
 import {message} from '../logs/MessageBuilder';
-import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 
 export type Options = {
   count: number,
@@ -25,13 +25,13 @@ export class DecreaseAnyProduction extends DeferredAction<boolean> {
   }
 
   private attack(target: IPlayer): void {
-    target.defer(UnderworldExpansion.maybeBlockAttack(target, this.player, (proceed: boolean) => {
+    target.maybeBlockAttack(this.player, (proceed: boolean) => {
       if (proceed) {
         target.production.add(this.resource, -this.options.count, {log: true, from: this.player, stealing: this.options.stealing});
       }
       this.cb(proceed);
       return undefined;
-    }));
+    });
   }
 
   public execute() {
@@ -39,7 +39,7 @@ export class DecreaseAnyProduction extends DeferredAction<boolean> {
       this.player.resolveInsuranceInSoloGame();
       this.cb(true);
     } else {
-      const targets: Array<IPlayer> = this.player.game.getPlayers().filter((p) => p.canHaveProductionReduced(this.resource, this.options.count, this.player));
+      const targets = this.player.game.getPlayers().filter((p) => p.canHaveProductionReduced(this.resource, this.options.count, this.player));
 
       if (targets.length === 0) {
         this.cb(false);

@@ -34,16 +34,16 @@ export class NoctisCity extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {
-    if (player.game.board.getNoctisCitySpaceId() !== undefined) {
+    if (player.game.board.noctisCitySpaceId !== undefined) {
       return true;
     } else {
       return player.game.board.getAvailableSpacesForCity(player).length > 0;
     }
   }
   public override bespokePlay(player: IPlayer) {
-    const noctisCitySpaceId = player.game.board.getNoctisCitySpaceId();
+    const noctisCitySpaceId = player.game.board.noctisCitySpaceId;
     if (noctisCitySpaceId !== undefined) {
-      const space = player.game.board.getSpace(noctisCitySpaceId);
+      const space = player.game.board.getSpaceOrThrow(noctisCitySpaceId);
       player.game.addCity(player, space);
       return undefined;
     }

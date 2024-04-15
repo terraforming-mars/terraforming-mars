@@ -6,7 +6,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {MoonExpansion} from '../../moon/MoonExpansion';
@@ -32,7 +31,7 @@ export class Playwrights extends CorporationCard {
           b.megacredits(38).production((pb) => pb.energy(1));
           b.corpBox('action', (cb) => {
             cb.action('Replay a played event from any player (INCLUDING events that place special tiles) by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.', (eb) => {
-              eb.megacredits(0, {questionMark: true}).startAction;
+              eb.megacredits(1, {text: '?'}).startAction;
               eb.text('replay', Size.SMALL, true);
               eb.nbsp.cards(1, {all, secondaryTag: Tag.EVENT});
             });
@@ -79,7 +78,7 @@ export class Playwrights extends CorporationCard {
                * If the card played is Law Suit we need to remove it from the newly sued player's played cards.
                * Needs to be deferred to happen after Law Suit's `play()` method.
                */
-                player.game.defer(new SimpleDeferredAction(player, () => {
+                player.defer(() => {
                   player.game.getPlayers().some((p) => {
                     const card = p.playedCards[p.playedCards.length - 1];
                     if (card?.name === selectedCard.name) {
@@ -89,7 +88,7 @@ export class Playwrights extends CorporationCard {
                     return false;
                   });
                   return undefined;
-                }));
+                });
               }
             });
           return undefined;
@@ -108,13 +107,17 @@ export class Playwrights extends CorporationCard {
     try {
       player.game.getPlayers().forEach((p) => {
         playedEvents.push(...p.playedCards.filter((card) => {
+          // Special case Price Wars, which is not easy to work with.
+          if (card.name === CardName.PRICE_WARS) {
+            return false;
+          }
           const canAffordOptions = {
             cost: player.getCardCost(card),
             reserveUnits: MoonExpansion.adjustedReserveCosts(player, card),
           };
           return card.type === CardType.EVENT &&
           // Can player.canPlay(card) replace this?
-          player.canAfford(canAffordOptions) && player.simpleCanPlay(card, canAffordOptions);
+          player.canAfford(canAffordOptions) && card.canPlay(player, canAffordOptions);
         }));
       });
     } finally {

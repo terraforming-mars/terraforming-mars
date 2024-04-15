@@ -13,7 +13,7 @@ import {Size} from '../../../common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.corruption().influence().colon();
-  b.text('1st/2nd', Size.SMALL).corruption().production((pb) => pb.megacredits(3)).slash().production((pb) => pb.megacredits(1));
+  b.text('1st/2nd', Size.SMALL).corruption().production((pb) => pb.megacredits(3).slash().megacredits(1));
 });
 
 export class LaggingRegulation extends GlobalEvent implements IGlobalEvent {

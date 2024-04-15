@@ -17,6 +17,10 @@ describe('SmallDutyRovers', () => {
     [game, player] = testGame(1, {moonExpansion: true});
     card = new SmallDutyRovers();
     moonData = MoonExpansion.moonData(game);
+    // remove space bonuses to keep this simple.
+    moonData.moon.spaces.forEach((space) => {
+      space.bonus = [];
+    });
   });
 
   it('can play', () => {
@@ -35,10 +39,6 @@ describe('SmallDutyRovers', () => {
     expect(player.getTerraformRating()).eq(14);
     player.titanium = 1;
     player.megaCredits = 0;
-    // remove space bonuses to keep this simple.
-    moonData.moon.spaces.forEach((space) => {
-      space.bonus = [];
-    });
 
     MoonExpansion.addTile(player, 'm04', {tileType: TileType.MOON_MINE});
     MoonExpansion.addTile(player, 'm05', {tileType: TileType.MOON_HABITAT});
@@ -53,6 +53,19 @@ describe('SmallDutyRovers', () => {
     expect(player.megaCredits).eq(6);
     expect(moonData.logisticRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
+  });
+
+  it('compatible with Lunar Mine Urbanization', () => {
+    expect(moonData.logisticRate).eq(0);
+    player.titanium = 1;
+    player.megaCredits = 0;
+
+    MoonExpansion.addTile(player, 'm06', {tileType: TileType.LUNAR_MINE_URBANIZATION});
+
+    card.play(player);
+
+    expect(player.titanium).eq(0);
+    expect(player.megaCredits).eq(2);
   });
 });
 

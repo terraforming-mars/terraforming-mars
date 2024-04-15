@@ -45,9 +45,11 @@
 
     <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :tileView="tileView"/>
 
+    <PlanetaryTracks v-if="game.gameOptions.pathfindersExpansion" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
+
     <div v-if="spectator.players.length > 1" class="player_home_block--milestones-and-awards">
         <Milestone :milestones="game.milestones" />
-        <Awards :awards="game.awards" />
+        <Awards :awards="game.awards" show-scores />
     </div>
 
     <!-- TODO(kberg): add the spectator tab. -->

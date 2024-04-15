@@ -124,6 +124,10 @@ export class Tags {
         return true;
       }
     }
+    if (target === Tag.EVENT && card.type === CardType.EVENT) {
+      return true;
+    }
+
     return false;
   }
 

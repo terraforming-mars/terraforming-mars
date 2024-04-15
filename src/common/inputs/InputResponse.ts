@@ -69,7 +69,7 @@ export function isSelectSpaceResponse(response: InputResponse): response is Sele
 
 export interface SelectPlayerResponse {
   type: 'player',
-  player: ColorWithNeutral | undefined;
+  player: ColorWithNeutral;
 }
 
 export function isSelectPlayerResponse(response: InputResponse): response is SelectPlayerResponse {
@@ -78,7 +78,7 @@ export function isSelectPlayerResponse(response: InputResponse): response is Sel
 
 export interface SelectPartyResponse {
   type: 'party',
-  partyName: PartyName | undefined;
+  partyName: PartyName;
 }
 
 export function isSelectPartyResponse(response: InputResponse): response is SelectPartyResponse {

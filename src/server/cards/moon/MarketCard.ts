@@ -7,7 +7,7 @@ import {Resource} from '../../../common/Resource';
 import {Card, StaticCardProperties} from '../Card';
 import {IActionCard} from '../ICard';
 import {message} from '../../logs/MessageBuilder';
-import {PathfindersExpansion} from '../..//pathfinders/PathfindersExpansion';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export interface Terms {
   from: number,

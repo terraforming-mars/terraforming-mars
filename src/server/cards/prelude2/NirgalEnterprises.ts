@@ -19,7 +19,10 @@ export class NirgalEnterprises extends CorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.br.br.br.br;
           b.megacredits(33).production((pb) => pb.energy(1).plants(1).steel(1)).br;
-          b.text('AWARDS AND MILESTONES ALWAYS COST 0 M€ FOR YOU.');
+          b.effect('AWARDS and MILESTONES ALWAYS COST 0 M€ FOR YOU.', (eb) => {
+            // TODO(kberg): replace with award().slash.milestone() when award and milestone can be stacked.
+            eb.plate('Awards and Milestones').startEffect.megacredits(1, {text: '0'});
+          });
         }),
         description: 'You start with 33 M€. Raise your energy, plant, and steel production 1 step each.',
       },

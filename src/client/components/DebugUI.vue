@@ -194,18 +194,17 @@ const moduleAbbreviations: Record<GameModule, string> = {
   ares: 'a',
   moon: 'm',
   pathfinders: 'P',
-  ceo: 'l', // ceo abbreviation is 'l' for leader, since both 'C' are already taken
+  ceo: 'l', // ceo abbreviation is 'l' for leader, since 'c' and 'C' are already taken
   starwars: 'w',
   underworld: 'u',
 };
 
-// TODO(kberg): make this use suffixModules.
-const ALL_MODULES = 'bcpvCt*ramPl2w';
+const ALL_MODULES = GAME_MODULES.map((m) => moduleAbbreviations[m]).join('');
 
 type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
 type TagOption = Tag | 'none';
 
-export interface DebugUIModel {
+type DebugUIModel = {
   filterText: string,
   fullFilter: boolean,
   expansions: Record<GameModule, boolean>,
@@ -296,9 +295,8 @@ export default (Vue as WithRefs<Refs>).extend({
   },
   data(): DebugUIModel {
     return {
-      filterText: '',
+      filterText: decodeURIComponent(window.location.hash).slice(1),
       fullFilter: false,
-      // TODO(kberg): remove this huge initializer with something like the toggle
       expansions: {
         base: true,
         corpera: true,
@@ -404,6 +402,13 @@ export default (Vue as WithRefs<Refs>).extend({
       return awardNames;
     },
   },
+  watch: {
+    filterText: function(val) {
+      setTimeout(() => {
+        window.location.hash = '#' + encodeURIComponent(val);
+      }, 10);
+    },
+  },
   methods: {
     updateUrl(search?: string) {
       if (window.history.pushState) {
@@ -467,20 +472,20 @@ export default (Vue as WithRefs<Refs>).extend({
       return OFFICIAL_COLONY_NAMES.concat(COMMUNITY_COLONY_NAMES).concat(PATHFINDERS_COLONY_NAMES);
     },
     filter(name: string, type: 'card' | 'globalEvent' | 'colony' | 'ma') {
-      const filterText = this.filterText.toLocaleUpperCase();
-      if (filterText.length === 0) {
+      const normalized = this.filterText.toLocaleUpperCase();
+      if (normalized.length === 0) {
         return true;
       }
       if (this.fullFilter) {
         const detail = this.searchIndex.get(`${type}:${name}`);
         if (detail !== undefined) {
-          if (detail.some((entry) => entry.includes(filterText))) {
+          if (detail.some((entry) => entry.includes(normalized))) {
             return true;
           }
         }
         return false;
       } else {
-        return name.toLocaleUpperCase().includes(filterText);
+        return name.toLocaleUpperCase().includes(normalized);
       }
     },
     expansionIconClass(expansion: GameModule): string {

@@ -1,6 +1,7 @@
 import {SelectResources} from '../inputs/SelectResources';
 import {IPlayer} from '../IPlayer';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 
 export class SelectResourcesDeferred extends DeferredAction {
   constructor(

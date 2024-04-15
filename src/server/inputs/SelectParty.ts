@@ -5,6 +5,7 @@ import {InputResponse, isSelectPartyResponse} from '../../common/inputs/InputRes
 import {IPlayer} from '../IPlayer';
 import {SelectPartyModel} from '../../common/models/PlayerInputModel';
 import {getTurmoilModel} from '../models/TurmoilModel';
+import {InputError} from './InputError';
 
 export class SelectParty extends BasePlayerInput<PartyName> {
   constructor(
@@ -18,7 +19,7 @@ export class SelectParty extends BasePlayerInput<PartyName> {
   public override toModel(player: IPlayer): SelectPartyModel {
     const turmoil = getTurmoilModel(player.game);
     if (turmoil === undefined) {
-      throw new Error('This game is not set up for Turmoil.');
+      throw new InputError('This game is not set up for Turmoil.');
     }
     return {
       title: this.title,
@@ -30,14 +31,14 @@ export class SelectParty extends BasePlayerInput<PartyName> {
 
   public process(input: InputResponse) {
     if (!isSelectPartyResponse(input)) {
-      throw new Error('Not a valid SelectPartyResponse');
+      throw new InputError('Not a valid SelectPartyResponse');
     }
     if (input.partyName === undefined) {
       // TODO(kberg): prevent click unless party is selected.
-      throw new Error('No party selected');
+      throw new InputError('No party selected');
     }
     if (!this.parties.includes(input.partyName)) {
-      throw new Error('Invalid party selected');
+      throw new InputError('Invalid party selected');
     }
     return this.cb(input.partyName);
   }

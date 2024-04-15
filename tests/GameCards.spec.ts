@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {COMMUNITY_CARD_MANIFEST} from '../src/server/cards/community/CommunityCardManifest';
-import {CardFinder} from '../src/server/CardFinder';
+import {newPrelude} from '../src/server/createCard';
 import {GameCards} from '../src/server/GameCards';
 import {CardName} from '../src/common/cards/CardName';
 import {CardManifest} from '../src/server/cards/ModuleManifest';
@@ -45,7 +45,7 @@ describe('GameCards', function() {
 
     const communityPreludes = CardManifest.keys(COMMUNITY_CARD_MANIFEST.preludeCards);
     communityPreludes.forEach((preludeName) => {
-      const preludeCard = new CardFinder().getPreludeByName(preludeName)!;
+      const preludeCard = newPrelude(preludeName)!;
       expect(preludeDeck.includes(preludeCard)).is.not.true;
     });
   });
@@ -74,6 +74,26 @@ describe('GameCards', function() {
     expect(ceoNames).to.contain(CardName.FLOYD); // Yes generic CEO
     expect(ceoNames).to.contain(CardName.KAREN); // Yes Prelude
     expect(ceoNames).not.to.contain(CardName.NEIL); // No Moon
+  });
+
+  it('correctly removes banned cards', function() {
+    const gameOptions: GameOptions = {
+      ...DEFAULT_GAME_OPTIONS,
+      corporateEra: true,
+      bannedCards: [CardName.SOLAR_WIND_POWER],
+    };
+    const names = new GameCards(gameOptions).getProjectCards().map((c) => c.name);
+    expect(names).to.not.contain(CardName.SOLAR_WIND_POWER);
+  });
+
+  it('correctly includes the included cards', function() {
+    const gameOptions: GameOptions = {
+      ...DEFAULT_GAME_OPTIONS,
+      corporateEra: true,
+      includedCards: [CardName.VENUSIAN_INSECTS],
+    };
+    const names = new GameCards(gameOptions).getProjectCards().map((c) => c.name);
+    expect(names).to.contain(CardName.VENUSIAN_INSECTS);
   });
 });
 

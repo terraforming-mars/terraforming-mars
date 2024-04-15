@@ -56,9 +56,8 @@ describe('Capital', () => {
     expect(citySpace.spaceType).to.eq(SpaceType.LAND);
     action.cb(citySpace);
 
-    expect(citySpace.tile).is.not.undefined;
     expect(citySpace.player).to.eq(player);
-    expect(citySpace.tile && citySpace.tile.tileType).to.eq(TileType.CAPITAL);
+    expect(citySpace.tile?.tileType).to.eq(TileType.CAPITAL);
     expect(card.getVictoryPoints(player)).to.eq(1);
     expect(citySpace.adjacency?.bonus).eq(undefined);
   });

@@ -1,3 +1,4 @@
+import * as responses from './responses';
 import {IPlayer} from '../IPlayer';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
@@ -10,6 +11,8 @@ import {Request} from '../Request';
 import {Response} from '../Response';
 import {runId} from '../utils/server-ids';
 import {AppError} from '../server/AppError';
+import {statusCode} from '../../common/http/statusCode';
+import {InputError} from '../inputs/InputError';
 
 export class PlayerInput extends Handler {
   public static readonly INSTANCE = new PlayerInput();
@@ -20,12 +23,12 @@ export class PlayerInput extends Handler {
   public override async post(req: Request, res: Response, ctx: Context): Promise<void> {
     const playerId = ctx.url.searchParams.get('id');
     if (playerId === null) {
-      ctx.route.badRequest(req, res, 'missing id parameter');
+      responses.badRequest(req, res, 'missing id parameter');
       return;
     }
 
     if (!isPlayerId(playerId)) {
-      ctx.route.badRequest(req, res, 'invalid player id');
+      responses.badRequest(req, res, 'invalid player id');
       return;
     }
 
@@ -34,7 +37,7 @@ export class PlayerInput extends Handler {
     // This is the exact same code as in `ApiPlayer`. I bet it's not the only place.
     const game = await ctx.gameLoader.getGame(playerId);
     if (game === undefined) {
-      ctx.route.notFound(req, res);
+      responses.notFound(req, res);
       return;
     }
     let player: IPlayer | undefined;
@@ -44,7 +47,7 @@ export class PlayerInput extends Handler {
       console.warn(`unable to find player ${playerId}`, err);
     }
     if (player === undefined) {
-      ctx.route.notFound(req, res);
+      responses.notFound(req, res);
       return;
     }
     return this.processInput(req, res, ctx, player);
@@ -77,10 +80,12 @@ export class PlayerInput extends Handler {
     } catch (err) {
       console.error(err);
     }
-    ctx.route.writeJson(res, Server.getPlayerModel(player));
+    responses.writeJson(res, Server.getPlayerModel(player));
   }
 
   private processInput(req: Request, res: Response, ctx: Context, player: IPlayer): Promise<void> {
+    // TODO(kberg): Find a better place for this optimization.
+    player.tableau.forEach((card) => card.warnings.clear());
     return new Promise((resolve) => {
       let body = '';
       req.on('data', (data) => {
@@ -94,15 +99,15 @@ export class PlayerInput extends Handler {
             await this.performUndo(req, res, ctx, player);
           } else {
             player.process(entity);
-            ctx.route.writeJson(res, Server.getPlayerModel(player));
+            responses.writeJson(res, Server.getPlayerModel(player));
           }
           resolve();
         } catch (e) {
-          if (!(e instanceof AppError)) {
+          if (!(e instanceof AppError || e instanceof InputError)) {
             console.warn('Error processing input from player', e);
           }
-          // TODO(kberg): use standard Route API, though that changes the output.
-          res.writeHead(400, {
+          // TODO(kberg): use responses.ts, though that changes the output.
+          res.writeHead(statusCode.badRequest, {
             'Content-Type': 'application/json',
           });
 

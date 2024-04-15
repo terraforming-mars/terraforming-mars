@@ -18,15 +18,15 @@ describe('RedTourismWave', function() {
   });
 
   it('Can play', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
     const reds = game.turmoil!.getPartyByName(PartyName.REDS);
     reds.delegates.add(player, 2);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('play', function() {
-    const tharsis = game.board.getSpace(SpaceName.THARSIS_THOLUS);
+    const tharsis = game.board.getSpaceOrThrow(SpaceName.THARSIS_THOLUS);
     const lands = game.board.getAdjacentSpaces(tharsis).filter((space) => space.spaceType === SpaceType.LAND);
     game.addCity(player, lands[0]);
     card.play(player);

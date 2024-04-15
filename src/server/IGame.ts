@@ -15,8 +15,8 @@ import {Phase} from '../common/Phase';
 import {IPlayer} from './IPlayer';
 import {PlayerId, GameId, SpectatorId, SpaceId, isGameId} from '../common/Types';
 import {CardResource} from '../common/CardResource';
-import {Resource} from '../common/Resource';
-import {AndThen, DeferredAction, Priority} from './deferredActions/DeferredAction';
+import {AndThen, DeferredAction} from './deferredActions/DeferredAction';
+import {Priority} from './deferredActions/Priority';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SerializedGame} from './SerializedGame';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
@@ -103,7 +103,7 @@ export interface IGame extends Logger {
   // Retrieve a player by it's id
   getPlayerById(id: PlayerId): IPlayer;
   // Return an array of players from an array of player ids
-  getPlayersById(ids: Array<PlayerId>): Array<IPlayer>;
+  getPlayersById(ids: Array<PlayerId>): ReadonlyArray<IPlayer>;
   defer<T>(action: DeferredAction<T>, priority?: Priority): AndThen<T>;
   milestoneClaimed(milestone: IMilestone): boolean;
   marsIsTerraformed(): boolean;
@@ -146,11 +146,21 @@ export interface IGame extends Logger {
   increaseTemperature(player: IPlayer, increments: -2 | -1 | 1 | 2 | 3): undefined;
   getTemperature(): number;
   getGeneration(): number;
-  getPassedPlayers():Array<Color>;
+  getPassedPlayers():ReadonlyArray<Color>;
   // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing
   // a tile on The Moon.
   addTile(player: IPlayer, space: Space, tile: Tile): void;
   simpleAddTile(player: IPlayer, space: Space, tile: Tile): void;
+  /**
+   * Gives all the bonuses a player may gain when placing a tile on a space.
+   *
+   * This includes bonuses on the map, from oceans, Ares tiles, Turmoil, Colonies, etc.
+   */
+  grantPlacementBonuses(player: IPlayer, space: Space, coveringExistingTile: boolean): void
+
+  /**
+   * Gives all the bonuses from a space on the map.
+   */
   grantSpaceBonuses(player: IPlayer, space: Space): void;
   grantSpaceBonus(player: IPlayer, spaceBonus: SpaceBonus, count?: number): void;
   addGreenery(player: IPlayer, space: Space, shouldRaiseOxygen?: boolean): void;
@@ -175,7 +185,6 @@ export interface IGame extends Logger {
   getCardsInHandByResource(player: IPlayer, resourceType: CardResource): void;
   getCardsInHandByType(player: IPlayer, cardType: CardType): void;
   log(message: string, f?: (builder: LogMessageBuilder) => void, options?: {reservedFor?: IPlayer}): void;
-  someoneCanHaveProductionReduced(resource: Resource, minQuantity?: number): boolean;
   discardForCost(cardCount: 1 | 2, toPlace: TileType): number;
   getSpaceByOffset(direction: -1 | 1, toPlace: TileType, cardCount?: 1 | 2): Space;
   expectedPurgeTimeMs(): number;

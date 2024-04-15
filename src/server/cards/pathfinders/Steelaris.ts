@@ -8,7 +8,7 @@ import {all} from '../Options';
 import {Space} from '../../boards/Space';
 import {TileType} from '../../../common/TileType';
 import {GainStock} from '../../deferredActions/GainStock';
-import {Priority} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 import {Size} from '../../../common/cards/render/Size';
 import {BoardType} from '../../boards/BoardType';
 import {SpaceType} from '../../../common/boards/SpaceType';

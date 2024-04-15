@@ -6,7 +6,22 @@
     "About us": "Chi Siamo",
     "Whats new?": "Novità",
     "Join us on Discord": "Unisciti su Discord",
-    "Create game": "Crea Partita"
-
-
+    "Create game": "Crea Partita",
+    "deployed": "Rilasciato",
+    "version": "versione",
+    " source code ": " codice sorgente ",
+    "Learner Mode (req. refresh)": "Modalità apprendista (fai refresh)",
+    "Show information that can be helpful to players who are still learning the games": "Mostra informazioni che possono essere di aiuto a giocatori che stanno imparando il gioco",
+    "Test out any possible new experimental UI features for feedback.": "Testa ogini nuova interfaccia sperimentale per dare feedback",
+    "Add information useful for development and debugging.": "Aggiungi informazioni utili per lo sviluppo e il debug",
+    "Report a bug": "Segnala un bug",
+    "Experimental UI": "Interfaccia sperimentale",
+    "Debug View": "Vista debug",
+    "Copy the text below and then paste it in": "Copia il testo qui sotto e incollalo in",
+    "a GitHub issue": "una issue GitHub",
+    "or the": "o nel",
+    "#bug-reports Discord channel": "canale Discord #bug-reports",
+    "Copied!": "Copiato!",
+    "Copy to Clipboard": "Copia negli appunti",
+    "Close": "Chiudi"
 }

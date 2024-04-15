@@ -1,4 +1,4 @@
-import {CardFinder} from '../CardFinder';
+import {newProjectCard} from '../createCard';
 import {SerializedCard} from '../SerializedCard';
 import {isCeoCard} from './ceos/ICeoCard';
 import {IProjectCard} from './IProjectCard';
@@ -19,6 +19,9 @@ export function serializeProjectCard(card: IProjectCard): SerializedCard {
   if (card.resourceCount !== undefined) {
     serialized.resourceCount = card.resourceCount;
   }
+  if (card.generationUsed !== undefined) {
+    serialized.generationUsed = card.generationUsed;
+  }
   if (card instanceof SelfReplicatingRobots) {
     serialized.targetCards = card.targetCards.map((t) => {
       return {
@@ -35,9 +38,6 @@ export function serializeProjectCard(card: IProjectCard): SerializedCard {
     if (card.opgActionIsActive !== undefined) {
       serialized.opgActionIsActive = card.opgActionIsActive;
     }
-    if (card.generationUsed !== undefined) {
-      serialized.generationUsed = card.generationUsed;
-    }
   }
   if (card.data !== undefined) {
     serialized.data = card.data;
@@ -45,8 +45,8 @@ export function serializeProjectCard(card: IProjectCard): SerializedCard {
   return serialized;
 }
 
-export function deserializeProjectCard(element: SerializedCard, cardFinder: CardFinder): IProjectCard {
-  const card = cardFinder.getProjectCardByName(element.name);
+export function deserializeProjectCard(element: SerializedCard): IProjectCard {
+  const card = newProjectCard(element.name);
   if (card === undefined) {
     throw new Error(`Card ${element.name} not found`);
   }
@@ -56,13 +56,16 @@ export function deserializeProjectCard(element: SerializedCard, cardFinder: Card
   if (card.hasOwnProperty('data')) {
     card.data = element.data;
   }
+  if (element.generationUsed !== undefined) {
+    card.generationUsed = element.generationUsed;
+  }
   if (isICloneTagCard(card) && element.cloneTag !== undefined) {
     card.cloneTag = element.cloneTag;
   }
   if (card instanceof SelfReplicatingRobots && element.targetCards !== undefined) {
     card.targetCards = [];
     element.targetCards.forEach((targetCard) => {
-      const foundTargetCard = cardFinder.getProjectCardByName(targetCard.card.name);
+      const foundTargetCard = newProjectCard(targetCard.card.name);
       if (foundTargetCard !== undefined) {
         card.targetCards.push({
           card: foundTargetCard,
@@ -82,9 +85,6 @@ export function deserializeProjectCard(element: SerializedCard, cardFinder: Card
     card.isDisabled = element.isDisabled;
     if (element.opgActionIsActive !== undefined) {
       card.opgActionIsActive = element.opgActionIsActive;
-    }
-    if (element.generationUsed !== undefined) {
-      card.generationUsed = element.generationUsed;
     }
   }
   return card;

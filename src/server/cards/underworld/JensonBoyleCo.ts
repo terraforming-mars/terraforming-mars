@@ -44,18 +44,16 @@ export class JensonBoyleCo extends ActiveCorporationCard {
 
       metadata: {
         cardNumber: 'UC03',
-        description: 'You start with 46M€ and 2 corruption.',
+        description: 'You start with 46 M€ and 2 corruption.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(46).corruption(2).br;
-          b.action('', (ab) => {
-            ab.corruption(1).startAction
-              .steel(4, {digit}).or()
-              .titanium(3, {digit});
-          }).br;
-          b.plainText('(Action: Pay 1 corruption to gain either 4 steel, 3 titanium, 3 plants or 6 heat.)').br;
+          b.megacredits(46).corruption(2).br.br;
+          b.corruption(1).arrow()
+            .steel(4, {digit}).or()
+            .titanium(3, {digit}).br;
           b.or()
             .plants(3, {digit}).or()
-            .heat(6, {digit});
+            .heat(6, {digit}).br;
+          b.plainText('(Action: Pay 1 corruption to gain either 4 steel, 3 titanium, 3 plants or 6 heat.)').br;
         }),
       },
     });

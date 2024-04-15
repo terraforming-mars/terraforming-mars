@@ -155,7 +155,7 @@
   "(Requires 4 science tags.)": "Musisz posiadać co najmniej 4 symbole Nauki.",
 
   "Orbital Laboratories": "Laboratoria Orbitalne",
-  "(Increase your plant production by 2. Gain 1 plant.)": "Podnieś swoją produkcję roślinności o 2 poziomy. Otrzymujesz 1 jednostkę roślinności.",
+  "(Increase your plant production 2 steps. Gain 1 plant.)": "Podnieś swoją produkcję roślinności o 2 poziomy. Otrzymujesz 1 jednostkę roślinności.",
 
   "Oumuamua Type Object Survey": "Przechwycenie Obiektu Typu Oumuamua",
   "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "Dobierz 2 odkryte karty. Jeśli pierwsza z nich posiada symbol Nauki lub Mikrobów zagraj ją za darmo ignorując wymagania. Jeśli nie, ale posiada symboli Przestrzeni Kosmicznej, podnieś swoją produkcję energii o 3 poziomy. Jeśli pierwsza karta nie posiada żadnego z wymienionych symboli zastosuj tą zasadę do drugiej karty.",
@@ -181,7 +181,7 @@
   "Opponents may not remove your basic resource production": "Efekt trwały: Przeciwnicy nie mogą obniżać twojej produkcji zasobów i M€.",
 
   "Public Sponsored Grant": "Publiczne Granty Badawcze",
-  "(Requires Scientists are ruling or that you have 2 delegates there. All players lose 2M€. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.)": "Naukowcy muszą być partią rządzącą lub musisz posiadać co najmniej 2 delegatów w tej partii. Każdy gracz traci 2 M€. Wybierz symbol (z wyjątkiem Miasta, Uniwersalnego i Planetarnego) i dobierz 2 karty z tym symbolem.",
+  "(Requires Scientists are ruling or that you have 2 delegates there. All other players lose 2M€. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.)": "Naukowcy muszą być partią rządzącą lub musisz posiadać co najmniej 2 delegatów w tej partii. Każdy pozostali gracz traci 2 M€. Wybierz symbol (z wyjątkiem Miasta, Uniwersalnego i Planetarnego) i dobierz 2 karty z tym symbolem.",
 
   "Rare-Earth Elements": "Metale Ziem Rzadkich",
   "(Increase your M€ production by 1 for every special tile you own on Mars.)": "Podnieś swoją produkcję M€ o 1 poziom za każdy posiadany obszar specjalny na planszy Marsa.",

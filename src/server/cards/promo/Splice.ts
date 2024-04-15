@@ -1,6 +1,5 @@
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {IProjectCard} from '../IProjectCard';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -12,6 +11,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {Resource} from '../../../common/Resource';
 import {all, played} from '../Options';
 import {message} from '../../logs/MessageBuilder';
+import {ICard} from '../ICard';
 
 export class Splice extends CorporationCard {
   constructor() {
@@ -47,15 +47,11 @@ export class Splice extends CorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    return this._onCardPlayed(player, card);
-  }
-
   public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
-    return this._onCardPlayed(player, card);
+    return this.onCardPlayed(player, card);
   }
 
-  private _onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard): OrOptions | undefined {
+  public onCardPlayed(player: IPlayer, card: ICard): OrOptions | undefined {
     if (card.tags.includes(Tag.MICROBE) === false) {
       return undefined;
     }

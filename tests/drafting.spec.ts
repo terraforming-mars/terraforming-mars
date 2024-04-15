@@ -1,4 +1,4 @@
-import {CardFinder} from '../src/server/CardFinder';
+import {cardsFromJSON} from '../src/server/createCard';
 import {CardName} from '../src/common/cards/CardName';
 import {cast, finishGeneration} from './TestingUtils';
 import {expect} from 'chai';
@@ -402,8 +402,7 @@ function getWaitingFor(player: IPlayer): SelectCard<IProjectCard> {
 }
 
 function unshiftCards(deck: Array<IProjectCard>, cards: Array<CardName>) {
-  const cardFinder = new CardFinder();
-  deck.unshift(...cardFinder.cardsFromJSON(cards));
+  deck.unshift(...cardsFromJSON(cards));
 }
 
 function cardNames(cards: ReadonlyArray<ICard>): Array<CardName> {

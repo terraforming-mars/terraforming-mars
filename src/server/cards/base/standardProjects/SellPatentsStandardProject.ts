@@ -4,7 +4,6 @@ import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
 import {SelectCard} from '../../../inputs/SelectCard';
 import {IProjectCard} from '../../IProjectCard';
-import {multiplier} from '../../Options';
 
 export class SellPatentsStandardProject extends StandardProjectCard {
   constructor() {
@@ -15,7 +14,7 @@ export class SellPatentsStandardProject extends StandardProjectCard {
         cardNumber: 'SP8',
         renderData: CardRenderer.builder((b) =>
           b.standardProject('Discard any number of cards to gain that amount of M€.', (eb) => {
-            eb.text('X').cards(1).startAction.megacredits(0, {multiplier});
+            eb.text('X').cards(1).startAction.megacredits(1, {text: 'x'});
           }),
         ),
       },

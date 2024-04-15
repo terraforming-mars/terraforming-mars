@@ -6,7 +6,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Resource} from '../../../common/Resource';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
@@ -35,12 +34,7 @@ export class GMOContract extends Card implements IProjectCard {
   public onCardPlayed(player: IPlayer, card: IProjectCard): void {
     const amount = player.tags.cardTagCount(card, [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE]);
     if (amount > 0) {
-      player.game.defer(
-        new SimpleDeferredAction(player, () => {
-          player.stock.add(Resource.MEGACREDITS, amount * 2, {log: true});
-          return undefined;
-        }),
-      );
+      player.defer(() => player.stock.add(Resource.MEGACREDITS, amount * 2, {log: true}));
     }
   }
 }

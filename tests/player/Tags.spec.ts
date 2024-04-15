@@ -6,6 +6,8 @@ import {Tags} from '../../src/server/player/Tags';
 import {isICorporationCard} from '../../src/server/cards/corporation/ICorporationCard';
 import {fakeCard} from '../TestingUtils';
 import {CardType} from '../../src/common/cards/CardType';
+import {CardName} from '../../src/common/cards/CardName';
+import {newCard} from '../../src/server/createCard';
 
 // Exposes rawCount available for testing.
 class TestableTags extends Tags {
@@ -47,7 +49,18 @@ describe('Tags', function() {
 
   // getAllTags
   // count(...)
-  // cardHasTag()
+
+  const cardHasTagRuns = [
+    {card: CardName.MICRO_MILLS, tag: Tag.ANIMAL, expected: false},
+    {card: CardName.BIRDS, tag: Tag.ANIMAL, expected: true},
+    {card: CardName.BRIBED_COMMITTEE, tag: Tag.EVENT, expected: true},
+  ] as const;
+  for (const run of cardHasTagRuns) {
+    it('cardHasTag ' + JSON.stringify(run), () => {
+      expect(tags.cardHasTag(newCard(run.card)!, run.tag)).eq(run.expected);
+    });
+  }
+
   // cardTagCount()
   // multipleCount
   // distinctCount

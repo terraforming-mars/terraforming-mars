@@ -8,11 +8,13 @@ import {PartyName} from '../turmoil/PartyName';
 import {SpaceId} from '../Types';
 import {PaymentOptions} from '../inputs/Payment';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
+import {Warning} from '../cards/Warning';
 
 export type BaseInputModel = {
   title: string | Message;
   buttonLabel: string;
 }
+
 export type AndOptionsModel = BaseInputModel & {
   type: 'and';
   options: Array<PlayerInputModel>;
@@ -21,6 +23,9 @@ export type AndOptionsModel = BaseInputModel & {
 export type OrOptionsModel = BaseInputModel & {
   type: 'or';
   options: Array<PlayerInputModel>;
+  // When set, initialIdx represents the option within `options` that should be
+  // shows as the default selection.
+  initialIdx?: number;
 }
 
 export type SelectInitialCardsModel = BaseInputModel & {
@@ -30,6 +35,7 @@ export type SelectInitialCardsModel = BaseInputModel & {
 
 export type SelectOptionModel = BaseInputModel & {
   type: 'option';
+  warnings?: Array<Warning>;
 }
 
 export type SelectProjectCardToPlayModel = BaseInputModel & {
@@ -42,6 +48,7 @@ export type SelectProjectCardToPlayModel = BaseInputModel & {
   seeds: number;
   graphene: number;
   kuiperAsteroids: number;
+  corruption: number;
 }
 
 export type SelectCardModel = BaseInputModel & {

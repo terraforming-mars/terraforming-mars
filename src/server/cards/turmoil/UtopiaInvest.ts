@@ -50,7 +50,7 @@ export class UtopiaInvest extends CorporationCard implements IActionCard {
     const result = new OrOptions();
     result.title = 'Select production to decrease one step and gain 4 resources';
 
-    const options: Array<SelectOption> = [];
+    const options = [];
 
     const reduceMegacredits = new SelectOption('Decrease M€ production', 'Decrease production').andThen(() => {
       player.production.add(Resource.MEGACREDITS, -1);

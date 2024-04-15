@@ -23,7 +23,7 @@ describe('GeologistTeam', () => {
 
     player.setTerraformRating(20);
     game.underworldData.tokens.push('corruption1');
-    const spaces = UnderworldExpansion.identifiableSpaces(game);
+    const spaces = UnderworldExpansion.identifiableSpaces(player);
     UnderworldExpansion.identify(game, spaces[0], player);
     expect(player.getTerraformRating()).eq(20);
 

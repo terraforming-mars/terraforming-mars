@@ -153,7 +153,7 @@
     "(Requires 4 science tags.)": "(Vereist 4 van je eigen wetenschapssymbolen.)",
 
     "Orbital Laboratories": "Orbitale tuinen",
-    "(Increase your plant production by 2. Gain 1 plant.)": "(Verhoog je plantproductie met 2. Ontvang 1 plant.)",
+    "(Increase your plant production 2 steps. Gain 1 plant.)": "(Verhoog je plantproductie met 2. Ontvang 1 plant.)",
 
     "Oumuamua Type Object Survey": "Oumuamua-onderzoek",
     "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "(Trek 2 kaarten. Als de eerste een wetenschaps- of microbesymbool heeft, speel deze dan (negeer de voorwaarden). Zo niet, en het heeft een ruimtesymbool, verhoog dan je energieproductie met 3. Als er niets van toepassing is, doe dan hetzelfde voor de 2e kaart.)",
@@ -180,7 +180,7 @@
     "NO": "NIET",
 
     "Public Sponsored Grant": "Overheidssubsidie",
-    "(Requires Scientists are ruling or that you have 2 delegates there. All players lose 2M€. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.)": "(Vereist regerende partij: ONDERZOEK of 2+ eigen afgevaardigden daar. Alle andere spelers verliezen 2 M€. Kies een symbool (behalve Jupiter, Stad, Joker en Planeet) en trek er 2 kaarten met die tag.)",
+    "(Requires Scientists are ruling or that you have 2 delegates there. All other players lose 2M€. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.)": "(Vereist regerende partij: ONDERZOEK of 2+ eigen afgevaardigden daar. Alle andere spelers verliezen 2 M€. Kies een symbool (behalve Jupiter, Stad, Joker en Planeet) en trek er 2 kaarten met die tag.)",
 
     "Rare-Earth Elements": "Zeldzame aardelementen",
     "(Increase your M€ production by 1 for every special tile you own on Mars.)": "(Verhoog je M€-productie met 1 voor elke speciale tegel die je bezit.)",

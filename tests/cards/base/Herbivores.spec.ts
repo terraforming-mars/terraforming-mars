@@ -20,19 +20,19 @@ describe('Herbivores', () => {
 
   it('Can not play if nobody has plant production', () => {
     setOxygenLevel(game, 8);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can not play if oxygen level too low', () => {
     setOxygenLevel(game, 7);
     player2.production.add(Resource.PLANTS, 1);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play - auto select if single target', () => {
     setOxygenLevel(game, 8);
     player2.production.add(Resource.PLANTS, 1);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     runAllActions(game);
@@ -77,7 +77,7 @@ describe('Herbivores', () => {
     setOxygenLevel(game, 8);
     player.production.add(Resource.PLANTS, 1);
 
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     card.play(player);
     expect(player.production.plants).to.eq(1); // should not decrease
   });

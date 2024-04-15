@@ -6,6 +6,7 @@ import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {IActionCard, ICard} from '../ICard';
+import {IStandardProjectCard} from '../IStandardProjectCard';
 
 export class StandardTechnology extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -18,8 +19,8 @@ export class StandardTechnology extends Card implements IActionCard, IProjectCar
       metadata: {
         cardNumber: 'U00',
         renderData: CardRenderer.builder((b) => {
-          b.action('Use a standard project that you\'ve already done this generation, with its cost reduced by 8 M€.', (ab) =>
-            ab.empty().startAction.text('REPEAT').plate('Standard projects').asterix().startEffect.megacredits(-6));
+          b.empty().startAction.text('REPEAT').br.plate('Standard projects').asterix().megacredits(-6);
+          b.plainText('Action: Use a standard project that you\'ve already done this generation, with its cost reduced by 8 M€.').br;
         }),
       },
     });
@@ -37,7 +38,7 @@ export class StandardTechnology extends Card implements IActionCard, IProjectCar
     this.data.gens[project.name] = player.game.generation;
   }
 
-  public override getCardDiscount(player: IPlayer, card?: IProjectCard | undefined): number {
+  public getStandardProjectDiscount(player: IPlayer, card: IStandardProjectCard): number {
     if (card && this.data.gens[card.name] === player.game.generation) {
       return 8;
     }

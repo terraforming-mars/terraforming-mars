@@ -27,7 +27,7 @@ export class PlantTax extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U67',
         renderData: CardRenderer.builder((b) => {
-          b.plants(-2, {all}).asterix().corruption().asterix();
+          b.minus().plants(2, {all}).asterix().corruption().asterix();
         }),
         description: 'ALL players lose 2 plants. Players can block this with corruption. Gain 1 corruption DURING THE PRODUCTION PHASE OF THIS GENERATION.',
       },
@@ -36,9 +36,9 @@ export class PlantTax extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
-    game.getPlayers().forEach((p) => {
-      player.game.defer(new RemoveResources(player, p, Resource.PLANTS, 2));
-    });
+    for (const target of game.getPlayers()) {
+      game.defer(new RemoveResources(target, player, Resource.PLANTS, 2));
+    }
     return undefined;
   }
 

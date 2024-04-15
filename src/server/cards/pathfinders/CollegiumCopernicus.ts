@@ -5,8 +5,7 @@ import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
-import {IProjectCard} from '../IProjectCard';
-import {IActionCard} from '../ICard';
+import {IActionCard, ICard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 import {SelectColony} from '../../inputs/SelectColony';
@@ -54,10 +53,9 @@ export class CollegiumCopernicus extends CorporationCard implements IActionCard 
 
   public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
     this.onCardPlayed(player, card);
-    return undefined;
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard): void {
+  public onCardPlayed(player: IPlayer, card: ICard): void {
     if (player.tags.cardHasTag(card, Tag.SCIENCE) && player.isCorporation(this.name)) {
       player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 1}));
     }

@@ -3,13 +3,14 @@ import {Wetlands} from '../../../src/server/cards/pathfinders/Wetlands';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {addCity, addGreenery, addOcean, cast, fakeCard, runAllActions, setOxygenLevel, setTemperature} from '../../TestingUtils';
+import {addCity, addGreenery, addOcean, cast, fakeCard, runAllActions, setOxygenLevel, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Space} from '../../../src/server/boards/Space';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
 import {CardName} from '../../../src/common/cards/CardName';
+import {testGame} from '../../TestGame';
 
 const toSpaceId = (space: Space): string => space.id;
 
@@ -20,12 +21,10 @@ describe('Wetlands', function() {
 
   beforeEach(function() {
     card = new Wetlands();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, {pathfindersExpansion: true});
+    [game, player/* , player2 */] = testGame( 2, {pathfindersExpansion: true});
     game.board = EmptyBoard.newInstance();
-    game.board.getSpace('15').spaceType = SpaceType.OCEAN;
-    game.board.getSpace('16').spaceType = SpaceType.OCEAN;
+    game.board.getSpaceOrThrow('15').spaceType = SpaceType.OCEAN;
+    game.board.getSpaceOrThrow('16').spaceType = SpaceType.OCEAN;
   });
 
   // Map looks like this
@@ -62,7 +61,7 @@ describe('Wetlands', function() {
     expect(player.canPlay(card)).is.true;
     expect(card.availableSpaces(player).map(toSpaceId)).deep.eq(['09', '23']);
 
-    game.simpleAddTile(player, game.board.getSpace('10'), {tileType: TileType.RED_CITY, card: CardName.RED_CITY});
+    game.simpleAddTile(player, game.board.getSpaceOrThrow('10'), {tileType: TileType.RED_CITY, card: CardName.RED_CITY});
     expect(player.canPlay(card)).is.true;
     expect(card.availableSpaces(player).map(toSpaceId)).deep.eq(['23']);
   });
@@ -81,12 +80,12 @@ describe('Wetlands', function() {
 
     expect(card.availableSpaces(player).map(toSpaceId)).deep.eq(['09', '23']);
 
-    game.board.getSpace('09').spaceType = SpaceType.OCEAN;
+    game.board.getSpaceOrThrow('09').spaceType = SpaceType.OCEAN;
 
     expect(card.canPlay(player)).is.true;
     expect(card.availableSpaces(player).map(toSpaceId)).deep.eq(['23']);
 
-    game.board.getSpace('23').spaceType = SpaceType.OCEAN;
+    game.board.getSpaceOrThrow('23').spaceType = SpaceType.OCEAN;
     expect(card.availableSpaces(player).map(toSpaceId)).deep.eq([]);
 
     expect(card.canPlay(player)).is.false;
@@ -133,12 +132,12 @@ describe('Wetlands', function() {
     addOcean(player, '15');
     addOcean(player, '16');
     expect(player.canPlay(fake)).is.false;
-    game.simpleAddTile(player, game.board.getSpace('09'), {tileType: TileType.WETLANDS});
+    game.simpleAddTile(player, game.board.getSpaceOrThrow('09'), {tileType: TileType.WETLANDS});
     expect(player.canPlay(fake)).is.true;
   });
 
   it('Wetlands counts as ocean for adjacency', function() {
-    const space = game.board.getSpace('15');
+    const space = game.board.getSpaceOrThrow('15');
     game.simpleAddTile(player, space, {tileType: TileType.WETLANDS});
 
     expect(player.megaCredits).eq(0);
@@ -147,7 +146,7 @@ describe('Wetlands', function() {
   });
 
   it('Wetlands counts for city-related VP', function() {
-    const space = game.board.getSpace('15');
+    const space = game.board.getSpaceOrThrow('15');
     game.simpleAddTile(player, space, {tileType: TileType.WETLANDS});
 
     expect(player.getVictoryPoints().city).eq(0);
@@ -161,7 +160,7 @@ describe('Wetlands', function() {
     player.plants = 7;
     addOcean(player, '15');
     addOcean(player, '16');
-    const claimedSpace = game.board.getSpace('09');
+    const claimedSpace = game.board.getSpaceOrThrow('09');
     claimedSpace.player = player;
 
     expect(card.canPlay(player)).is.true;
@@ -179,5 +178,16 @@ describe('Wetlands', function() {
     expect(space.id).eq(claimedSpace.id);
     selectSpace.cb(space);
     expect(space.tile?.tileType).eq(TileType.WETLANDS);
+  });
+
+  it('canPlay when Reds are in power', () => {
+    const [/* game */, player] = testGame(2, {turmoilExtension: true});
+
+    // Card requirements
+    player.plants = 4;
+    addOcean(player, '15');
+    addOcean(player, '16');
+
+    testRedsCosts(() => player.canPlay(card), player, card.cost, 6);
   });
 });

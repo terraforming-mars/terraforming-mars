@@ -34,7 +34,7 @@ describe('EstateDealer', function() {
     const game = Game.newInstance('gameid', [player, player2], player);
 
     addOcean(player2, '34');
-    game.board.getSpace('34').tile!.tileType = TileType.OCEAN_CITY; // Upgraded ocean tile
+    game.board.getSpaceOrThrow('34').tile!.tileType = TileType.OCEAN_CITY; // Upgraded ocean tile
 
     expect(award.getScore(player)).to.eq(0);
 

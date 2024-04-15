@@ -15,6 +15,7 @@
             </Card>
         </label>
         <div v-if="hasCardWarning()" class="card-warning">{{ $t(warning) }}</div>
+        <warnings-component :warnings="warnings"></warnings-component>
         <div v-if="showsave === true" class="nofloat">
             <AppButton :disabled="isOptionalToManyCards && cardsSelected() === 0" type="submit" @click="saveData" :title="buttonLabel()" />
             <AppButton :disabled="isOptionalToManyCards && cardsSelected() > 0" v-if="isOptionalToManyCards" @click="saveData" type="submit" :title="$t('Skip this action')" />
@@ -26,6 +27,7 @@
 
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
+import WarningsComponent from '@/client/components/WarningsComponent.vue';
 import {Color} from '@/common/Color';
 import {Message} from '@/common/logs/Message';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
@@ -37,6 +39,7 @@ import {CardName} from '@/common/cards/CardName';
 import {SelectCardModel} from '@/common/models/PlayerInputModel';
 import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
 import {SelectCardResponse} from '@/common/inputs/InputResponse';
+import {Warning} from '@/common/cards/Warning';
 
 type Owner = {
   name: string;
@@ -44,8 +47,10 @@ type Owner = {
 }
 
 type WidgetDataModel = {
+  // The selected item or items
   cards: VueModelRadio<CardModel> | VueModelCheckbox<Array<CardModel>>;
   warning: string | Message | undefined;
+  warnings: ReadonlyArray<Warning> | undefined;
   owners: Map<CardName, Owner>,
 }
 
@@ -75,10 +80,12 @@ export default Vue.extend({
       cards: [],
       warning: undefined,
       owners: new Map(),
+      warnings: undefined,
     };
   },
   components: {
     Card,
+    WarningsComponent,
     AppButton,
   },
   watch: {
@@ -121,9 +128,12 @@ export default Vue.extend({
     hasCardWarning() {
       if (Array.isArray(this.cards)) {
         return false;
-      } else if (typeof this.cards === 'object' && this.cards.warning !== undefined) {
-        this.warning = this.cards.warning;
-        return true;
+      } else if (typeof this.cards === 'object') {
+        this.warnings = this.cards.warnings;
+        if (this.cards.warning !== undefined) {
+          this.warning = this.cards.warning;
+          return true;
+        }
       }
       return false;
     },

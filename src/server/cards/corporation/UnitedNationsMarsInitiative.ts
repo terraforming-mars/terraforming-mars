@@ -32,18 +32,8 @@ export class UnitedNationsMarsInitiative extends CorporationCard implements IAct
     });
   }
 
-  public data = {
-    lastGenerationIncreasedTR: -1,
-  };
-
-  onIncreaseTerraformRating(player: IPlayer, cardOwner: IPlayer): void {
-    if (player === cardOwner) {
-      this.data.lastGenerationIncreasedTR = player.game.generation;
-    }
-  }
-
   public canAct(player: IPlayer): boolean {
-    return this.data.lastGenerationIncreasedTR === player.game.generation && player.canAfford({cost: ACTION_COST, tr: {tr: 1}});
+    return player.hasIncreasedTerraformRatingThisGeneration && player.canAfford({cost: ACTION_COST, tr: {tr: 1}});
   }
 
   public action(player: IPlayer) {

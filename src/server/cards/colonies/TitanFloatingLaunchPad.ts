@@ -53,17 +53,10 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard {
   }
 
   public action(player: IPlayer) {
-    const tradeableColonies = ColoniesHandler.tradeableColonies(player.game);
-
-    if (this.resourceCount === 0 || tradeableColonies.length === 0 || player.colonies.getFleetSize() <= player.colonies.tradesThisGeneration) {
-      player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {restrictedTag: Tag.JOVIAN, title: 'Add 1 floater to a Jovian card'}));
-      return undefined;
-    }
-
-    return new OrOptions(
+    const orOptions = new OrOptions(
       new SelectOption('Remove 1 floater on this card to trade for free', 'Remove floater').andThen(() => {
         player.defer(
-          new SelectColony('Select colony tile to trade with for free', 'Select', tradeableColonies)
+          new SelectColony('Select colony tile to trade with for free', 'Select', ColoniesHandler.tradeableColonies(player.game))
             .andThen((colony) => {
               this.resourceCount--;
               player.game.log('${0} spent 1 floater to trade with ${1}', (b) => b.player(player).colony(colony));
@@ -73,10 +66,14 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard {
         return undefined;
       }),
       new SelectOption('Add 1 floater to a Jovian card', 'Add floater').andThen(() => {
-        player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {restrictedTag: Tag.JOVIAN}));
+        player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {restrictedTag: Tag.JOVIAN, title: 'Add 1 floater to a Jovian card'}));
         return undefined;
       }),
     );
+    if (this.resourceCount === 0 || !player.colonies.canTrade()) {
+      return orOptions.options[1].cb();
+    }
+    return orOptions;
   }
 }
 

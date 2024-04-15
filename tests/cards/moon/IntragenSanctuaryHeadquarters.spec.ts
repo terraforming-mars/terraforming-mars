@@ -5,6 +5,8 @@ import {IntragenSanctuaryHeadquarters} from '../../../src/server/cards/moon/Intr
 import {expect} from 'chai';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {MartianZoo} from '../../../src/server/cards/colonies/MartianZoo';
+import {MeatIndustry} from '../../../src/server/cards/promo/MeatIndustry';
+import {Pets} from '../../../src/server/cards/base/Pets';
 
 describe('IntragenSanctuaryHeadquarters', () => {
   let player: TestPlayer;
@@ -64,6 +66,16 @@ describe('IntragenSanctuaryHeadquarters', () => {
 
     card.onCardPlayed(player2, new MartianZoo());
     expect(card.resourceCount).eq(1);
+  });
+
+  it('works with Meat Industry', () => {
+    player.setCorporationForTest(card);
+    const meatIndustry = new MeatIndustry();
+    player.playedCards.push(meatIndustry);
+    const pets = new Pets();
+    player.playCard(pets);
+    expect(card.resourceCount).eq(1);
+    expect(player.megaCredits).eq(2);
   });
 });
 

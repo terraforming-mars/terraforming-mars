@@ -27,18 +27,16 @@ export class KingdomofTauraro extends CorporationCard {
         cardNumber: 'UC06',
         description: 'You start with 50 M€ and 6 M€ production. All opponents gain 2 M€ production. As your first action, place a city.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(50).production((pb) => pb.megacredits(6)).production((pb) => pb.megacredits(2, {all})).br;
-          b.text('(Effect: You may place cities adjacent to other cities. You must always place cities adjacent to tiles you already own, if possible.)');
+          b.megacredits(50).production((pb) => pb.megacredits(6)).production((pb) => pb.megacredits(2, {all})).city().br;
+          b.plainText('(Effect: You may place cities adjacent to other cities. You must always place cities adjacent to tiles you already own, if possible.)');
         }),
       },
     });
   }
 
   public override bespokePlay(player: IPlayer) {
-    for (const p of player.game.getPlayers()) {
-      if (p.id !== player.id) {
-        p.production.add(Resource.MEGACREDITS, 2, {log: true});
-      }
+    for (const opponent of player.getOpponents()) {
+      opponent.production.add(Resource.MEGACREDITS, 2, {log: true});
     }
     return undefined;
   }

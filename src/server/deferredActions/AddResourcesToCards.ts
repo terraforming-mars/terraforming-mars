@@ -1,4 +1,5 @@
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';

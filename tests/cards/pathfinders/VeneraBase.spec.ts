@@ -47,7 +47,7 @@ describe('VeneraBase', function() {
 
   it('play', function() {
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
-    const space = game.board.getSpace(SpaceName.VENERA_BASE);
+    const space = game.board.getSpaceOrThrow(SpaceName.VENERA_BASE);
     expect(space.tile).is.undefined;
     expect(space.player).is.undefined;
 

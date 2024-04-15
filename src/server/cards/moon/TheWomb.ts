@@ -3,7 +3,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {TileType} from '../../../common/TileType';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
 export class TheWomb extends Card {
@@ -33,7 +32,6 @@ export class TheWomb extends Card {
           b.minus().titanium(2).moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE});
         }),
       },
-      tilesBuilt: [TileType.MOON_HABITAT],
     });
   }
 }

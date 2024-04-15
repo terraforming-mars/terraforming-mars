@@ -3,7 +3,8 @@ import {SelectCard} from '../inputs/SelectCard';
 import {CardResource} from '../../common/CardResource';
 import {ICard} from '../cards/ICard';
 import {Tag} from '../../common/cards/Tag';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 import {RobotCard} from '../cards/promo/SelfReplicatingRobots';
 import {LogHelper} from '../LogHelper';
 import {Message} from '../../common/logs/Message';
@@ -16,7 +17,7 @@ export type Options = {
   title?: string | Message;
   robotCards?: boolean;
   filter?(card: ICard): boolean;
-  log?(): void;
+  log?: boolean;
 }
 
 export class AddResourcesToCard extends DeferredAction {
@@ -135,8 +136,8 @@ export class AddResourcesToCard extends DeferredAction {
   }
 
   private addResource(card: ICard, qty: number) {
-    const autoLog = this.options.log === undefined;
+    const autoLog = this.options.log !== false;
     this.player.addResourceTo(card, {qty, log: autoLog});
-    this.options.log?.();
+    this.cb(undefined);
   }
 }

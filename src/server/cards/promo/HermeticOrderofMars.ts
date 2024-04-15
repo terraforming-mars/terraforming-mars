@@ -8,9 +8,9 @@ import {IPlayer} from '../../IPlayer';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {isHazardTileType} from '../../../common/AresTileType';
 import {Resource} from '../../../common/Resource';
-import {Space} from '../..//boards/Space';
+import {Space} from '../../boards/Space';
 
-export class HermeticOrderofMars extends Card implements IProjectCard {
+export class HermeticOrderOfMars extends Card implements IProjectCard {
   constructor() {
     super({
       type: CardType.AUTOMATED,
@@ -34,13 +34,13 @@ export class HermeticOrderofMars extends Card implements IProjectCard {
   }
 
   private hasTile(space: Space): boolean {
-    return space.spaceType !== SpaceType.RESTRICTED && space.tile !== undefined && !isHazardTileType(space.tile.tileType);
+    return space.tile !== undefined && !isHazardTileType(space.tile.tileType);
   }
 
   public override bespokePlay(player: IPlayer) {
     const board = player.game.board;
     const spaces = board.spaces.filter((space) => {
-      if (space.spaceType === SpaceType.COLONY || this.hasTile(space)) {
+      if (space.spaceType === SpaceType.COLONY || space.spaceType === SpaceType.RESTRICTED || this.hasTile(space)) {
         return false;
       }
       return board.getAdjacentSpaces(space).some((s) => s.player === player && this.hasTile(s));

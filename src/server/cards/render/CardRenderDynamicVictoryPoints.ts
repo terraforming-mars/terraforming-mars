@@ -5,6 +5,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
 
+// TODO(kberg): This doesn't just apply to VP, does it?
 const RESOURCE_TO_ITEM_TYPE: Record<CardResource, CardRenderItemType | undefined> = {
   [CardResource.MICROBE]: CardRenderItemType.MICROBES,
   [CardResource.ANIMAL]: CardRenderItemType.ANIMALS,
@@ -31,6 +32,7 @@ const RESOURCE_TO_ITEM_TYPE: Record<CardResource, CardRenderItemType | undefined
   [CardResource.WARE]: undefined,
   [CardResource.SCOOP]: undefined,
   [CardResource.ACTIVIST]: undefined,
+  [CardResource.SUPPLY_CHAIN]: undefined,
 };
 
 const TAG_TO_ITEM_TYPE = new Map<Tag, CardRenderItemType>([
@@ -42,6 +44,7 @@ const TAG_TO_ITEM_TYPE = new Map<Tag, CardRenderItemType>([
 export class CardRenderDynamicVictoryPoints implements ICardRenderDynamicVictoryPoints {
   public targetOneOrMore: boolean = false; // marking target to be one or more res (Search for Life)
   public anyPlayer: boolean = false; // Law Suit
+  public asterisk: boolean | undefined = undefined;
   constructor(public item: CardRenderItem | undefined, public points: number, public target: number) {}
 
   public static resource(type: CardResource, points: number, target: number): CardRenderDynamicVictoryPoints {
@@ -107,6 +110,11 @@ export class CardRenderDynamicVictoryPoints implements ICardRenderDynamicVictory
   public static any(points: number): CardRenderDynamicVictoryPoints {
     const item = new CardRenderDynamicVictoryPoints(undefined, points, points);
     item.anyPlayer = true;
+    return item;
+  }
+  public static undergroundShelters(): CardRenderDynamicVictoryPoints {
+    const item = new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.UNDERGROUND_SHELTERS), 1, 3);
+    item.asterisk = true;
     return item;
   }
 }

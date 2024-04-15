@@ -221,7 +221,7 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     [CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS]: {Factory: AdhaiHighOrbitConstructions, compatibility: 'colonies'},
   },
   preludeCards: {
-    [CardName.VENUS_FIRST_PATHFINDERS]: {Factory: VenusFirst, compatibility: 'venus'},
+    [CardName.VENUS_FIRST]: {Factory: VenusFirst, compatibility: 'venus'},
     [CardName.VALUABLE_GASES_PATHFINDERS]: {Factory: ValuableGases, compatibility: 'venus'},
     [CardName.CO2_REDUCERS]: {Factory: CO2Reducers, compatibility: 'venus'},
     [CardName.HYDROGEN_BOMBARDMENT]: {Factory: HydrogenBombardment, compatibility: 'venus'},
@@ -250,7 +250,6 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
   // Perhaps these community cards should just move to this manifest, but only if it becomes
   // generally easier to just add all the preludes that match what game someone's playing.
   cardsToRemove: [
-    CardName.VENUS_FIRST,
     CardName.RESEARCH_GRANT,
     CardName.VALUABLE_GASES,
   ],

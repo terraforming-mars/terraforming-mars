@@ -1,14 +1,11 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
-import {Board, SpaceCosts} from './Board';
-import {IPlayer} from '../IPlayer';
+import {SpaceCosts} from './Board';
 import {Space} from './Space';
 import {BoardBuilder} from './BoardBuilder';
-import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
 import {VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST} from '../../common/constants';
-import {SpaceId} from '../../common/Types';
 import {MarsBoard} from './MarsBoard';
 
 export class VastitasBorealisBoard extends MarsBoard {
@@ -42,15 +39,24 @@ export class VastitasBorealisBoard extends MarsBoard {
     builder.ocean(PLANT, PLANT).land().land(PLANT).land(PLANT, PLANT).land(STEEL, PLANT);
 
     if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng);
+      builder.shuffle(rng,
+        SpaceName.ELYSIUM_MONS_VASTITAS_BOREALIS,
+        SpaceName.ALBA_FOSSAE,
+        SpaceName.CERANIUS_FOSSAE,
+        SpaceName.ALBA_MONS);
     }
 
     const spaces = builder.build();
     return new VastitasBorealisBoard(spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<IPlayer>): VastitasBorealisBoard {
-    return new VastitasBorealisBoard(Board.deserializeSpaces(board.spaces, players));
+  public constructor(spaces: ReadonlyArray<Space>) {
+    super(spaces, undefined, [
+      SpaceName.ELYSIUM_MONS_VASTITAS_BOREALIS,
+      SpaceName.ALBA_FOSSAE,
+      SpaceName.CERANIUS_FOSSAE,
+      SpaceName.ALBA_MONS,
+    ]);
   }
 
   public override spaceCosts(space: Space): SpaceCosts {
@@ -60,14 +66,5 @@ export class VastitasBorealisBoard extends MarsBoard {
       costs.tr.oceans = 1;
     }
     return costs;
-  }
-
-  public override getVolcanicSpaceIds(): Array<SpaceId> {
-    return [
-      SpaceName.ELYSIUM_MONS_VASTITAS_BOREALIS,
-      SpaceName.ALBA_FOSSAE,
-      SpaceName.CERANIUS_FOSSAE,
-      SpaceName.ALBA_MONS,
-    ];
   }
 }

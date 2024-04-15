@@ -10,7 +10,6 @@ import {GameId} from '../Types';
 export type BoardNameType = BoardName | RandomBoardOption;
 
 export interface NewPlayerModel {
-  index: number;
   name: string;
   color: Color;
   beginner: boolean;
@@ -67,6 +66,7 @@ export interface NewGameConfig {
   soloTR: boolean; // Solo victory by getting TR 63 by game end
   customCorporationsList: Array<CardName>;
   bannedCards: Array<CardName>;
+  includedCards: Array<CardName>;
   customColoniesList: Array<ColonyName>;
   customPreludes: Array<CardName>;
   requiresMoonTrackCompletion: boolean; // Moon must be completed to end the game

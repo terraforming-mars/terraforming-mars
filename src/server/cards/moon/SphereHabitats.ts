@@ -3,7 +3,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {TileType} from '../../../common/TileType';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
 export class SphereHabitats extends Card {
@@ -29,7 +28,6 @@ export class SphereHabitats extends Card {
           b.moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE});
         }),
       },
-      tilesBuilt: [TileType.MOON_HABITAT],
     });
   }
 }

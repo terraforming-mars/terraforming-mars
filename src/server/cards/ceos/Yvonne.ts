@@ -3,8 +3,6 @@ import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {Size} from '../../../common/cards/render/Size';
 
 export class Yvonne extends CeoCard {
@@ -33,8 +31,8 @@ export class Yvonne extends CeoCard {
     this.isDisabled = true;
     player.game.colonies.forEach((colony) => {
       colony.colonies.filter((owner) => owner === player.id).forEach((owner) => {
-        player.game.defer(new SimpleDeferredAction(player, () => colony.giveColonyBonus(player.game.getPlayerById(owner))));
-        player.game.defer(new SimpleDeferredAction(player, () => colony.giveColonyBonus(player.game.getPlayerById(owner))));
+        player.defer(() => colony.giveColonyBonus(player.game.getPlayerById(owner)));
+        player.defer(() => colony.giveColonyBonus(player.game.getPlayerById(owner)));
       });
     });
     return undefined;

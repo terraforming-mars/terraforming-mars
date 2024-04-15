@@ -10,7 +10,6 @@ import {Resource} from '../../../common/Resource';
 import {Size} from '../../../common/cards/render/Size';
 // import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 // import {all, multiplier} from '../Options';
-import {multiplier} from '../Options';
 
 export class LunaTradeFederation extends CorporationCard {
   constructor() {
@@ -42,7 +41,7 @@ export class LunaTradeFederation extends CorporationCard {
           });
           b.br;
           b.effect('You may use titanium resources as 2M€ each.', (eb) => {
-            eb.startEffect.text('X').titanium(1).equals().megacredits(2, {multiplier});
+            eb.startEffect.text('X').titanium(1).equals().megacredits(1, {text: '2x'});
           });
         }),
       },

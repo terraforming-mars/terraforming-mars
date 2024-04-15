@@ -97,7 +97,7 @@ describe('Hygiea', () => {
     player.megaCredits = 10;
     player2.megaCredits = 10;
 
-    expect(player2.simpleCanPlay(lawSuit)).is.false;
+    expect(lawSuit.canPlay(player2)).is.false;
 
     hygiea.trade(player);
     runAllActions(game);
@@ -108,7 +108,7 @@ describe('Hygiea', () => {
     expect(player.megaCredits).to.eq(13);
     expect(player2.megaCredits).to.eq(7);
 
-    expect(player2.simpleCanPlay(lawSuit)).is.true;
+    expect(lawSuit.canPlay(player2)).is.true;
     const selectPlayer = cast(lawSuit.play(player2), SelectPlayer);
     selectPlayer.cb(player);
 

@@ -203,9 +203,10 @@ describe('Player', function() {
   it('serialization test', () => {
     const json: SerializedPlayer = {
       id: 'p-blue',
-      pickedCorporationCard: 'Tharsis Republic' as CardName,
+      pickedCorporationCard: CardName.THARSIS_REPUBLIC,
       terraformRating: 20,
       corporations: [],
+      hasIncreasedTerraformRatingThisGeneration: false,
       megaCredits: 1,
       megaCreditProduction: 2,
       steel: 3,
@@ -220,6 +221,7 @@ describe('Player', function() {
       heatProduction: 12,
       titaniumValue: 13,
       steelValue: 14,
+      canUseCorruptionAsMegacredits: false,
       canUseHeatAsMegaCredits: false,
       canUseTitaniumAsMegacredits: false,
       canUsePlantsAsMegaCredits: false,

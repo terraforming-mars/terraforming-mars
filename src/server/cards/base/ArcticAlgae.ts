@@ -6,7 +6,7 @@ import {IPlayer} from '../../IPlayer';
 import {Space} from '../../boards/Space';
 import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
-import {Priority} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 import {GainResources} from '../../deferredActions/GainResources';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, max} from '../Options';
@@ -39,14 +39,10 @@ export class ArcticAlgae extends Card implements IProjectCard {
   public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (Board.isUncoveredOceanSpace(space)) {
       cardOwner.game.defer(
-        new GainResources(cardOwner, Resource.PLANTS, {
-          count: 2,
-          cb: () => activePlayer.game.log(
-            '${0} gained 2 ${1} from ${2}',
-            (b) => b.player(cardOwner).string(Resource.PLANTS).cardName(this.name)),
-        }),
-        cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
-      );
+        new GainResources(cardOwner, Resource.PLANTS, {count: 2}).andThen(() => activePlayer.game.log(
+          '${0} gained 2 ${1} from ${2}',
+          (b) => b.player(cardOwner).string(Resource.PLANTS).cardName(this.name))),
+        cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined);
     }
   }
 }

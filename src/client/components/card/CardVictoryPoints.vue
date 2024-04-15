@@ -10,6 +10,8 @@
         *:3
       </div>
     </template>
+    <div v-if="victoryPoints.asterisk === true">
+    </div>
   </div>
   <div v-else :class="getClasses()">{{ victoryPoints }}</div>
 </template>

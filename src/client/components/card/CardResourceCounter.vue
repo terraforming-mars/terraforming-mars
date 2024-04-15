@@ -36,6 +36,7 @@ const cssClass: Record<CardResource, string> = {
   [CardResource.SCOOP]: 'card-resource-scoop',
   [CardResource.ACTIVIST]: 'card-resource-activist',
   [CardResource.JOURNALISM]: 'card-resource-journalism',
+  [CardResource.SUPPLY_CHAIN]: 'card-resource-supply-chain',
 };
 
 export default Vue.extend({

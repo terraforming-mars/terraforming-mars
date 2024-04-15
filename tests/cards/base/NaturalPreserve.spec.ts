@@ -44,7 +44,7 @@ describe('NaturalPreserve', () => {
     const space = action.spaces[0];
     action.cb(space);
     expect(player.production.megacredits).to.eq(1);
-    expect(space.tile && space.tile.tileType).to.eq(TileType.NATURAL_PRESERVE);
+    expect(space.tile?.tileType).to.eq(TileType.NATURAL_PRESERVE);
     expect(space.adjacency?.bonus).eq(undefined);
 
     expect(card.getVictoryPoints(player)).to.eq(1);

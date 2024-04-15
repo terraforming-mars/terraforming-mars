@@ -3,9 +3,10 @@ import {BasePlayerInput} from '../PlayerInput';
 import {IPlayer} from '../IPlayer';
 import {InputResponse, isSelectPlayerResponse} from '../../common/inputs/InputResponse';
 import {SelectPlayerModel} from '../../common/models/PlayerInputModel';
+import {InputError} from './InputError';
 
 export class SelectPlayer extends BasePlayerInput<IPlayer> {
-  constructor(public players: Array<IPlayer>, title: string | Message, buttonLabel: string = 'Save') {
+  constructor(public players: ReadonlyArray<IPlayer>, title: string | Message, buttonLabel: string = 'Save') {
     super('player', title);
     this.buttonLabel = buttonLabel;
   }
@@ -21,11 +22,11 @@ export class SelectPlayer extends BasePlayerInput<IPlayer> {
 
   public process(input: InputResponse) {
     if (!isSelectPlayerResponse(input)) {
-      throw new Error('Not a valid SelectPlayerResponse');
+      throw new InputError('Not a valid SelectPlayerResponse');
     }
     const foundPlayer = this.players.find((player) => player.color === input.player);
     if (foundPlayer === undefined) {
-      throw new Error('Player not available');
+      throw new InputError('Player not available');
     }
     return this.cb(foundPlayer);
   }

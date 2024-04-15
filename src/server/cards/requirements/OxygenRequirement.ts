@@ -5,6 +5,9 @@ import {GlobalParameter} from '../../../common/GlobalParameter';
 import {RequirementType} from '../../../common/cards/RequirementType';
 import {MAX_OXYGEN_LEVEL, MIN_OXYGEN_LEVEL} from '../../../common/constants';
 
+/**
+ * Evaluate whether the game's oxygel level is at least (or at most) a given value.
+ */
 export class OxygenRequirement extends GlobalParameterRequirement {
   public readonly type = RequirementType.OXYGEN;
   protected readonly parameter = GlobalParameter.OXYGEN;

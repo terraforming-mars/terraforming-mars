@@ -172,7 +172,7 @@
   "Action: Spend 3X M€ to gain 2X steel (max 9 M€)": "Akcja: Wydaj 3X M€ aby otrzymać 2X jednostek stali (max. 9 M€)",
   "Action: Spend X steel to gain 3X M€ (max 3 steel).": "Akcja: Wydaj X jednostek stali, aby otrzymać 3X M€ (max. 3 stali).",
   "Subterranean Habitats": "Podziemne Siedliska",
-  "Effect: When you build a habitat on The Moon, you spend 1 titanium less.": "Efekt trwały: Gdy umieszczasz obszar habitatu na planszy płacisz 1 jednostkę tytanu mniej.",
+  "Effect: When you build a habitat on THE MOON, you spend 1 titanium less.": "Efekt trwały: Gdy umieszczasz obszar habitatu na planszy płacisz 1 jednostkę tytanu mniej.",
   "Spend 2 steel. Raise the habitat rate 1 step.": "Wydaj 2 jednostki stali. Podnieś WK Księżyca o 1 poziom.",
   "Syndicate Pirate Raids": "Syndykatowe Naloty Piratów",
   "ALL OPPONENTS CANNOT RETRIEVE THEIR TRADE FLEETS THIS GENERATION": "Wszyscy przeciwnicy nie mogą odzyskać swoich flot handlowych w tym pokoleniu. Pozostają one na kaflach obiektów.",
@@ -204,8 +204,8 @@
   "(Effect: When playing a Moon tag, science resources here may be used as payment, and are worth 1M€ each.)": "Efekt trwały: Gdy zagrywasz kartę z symbolem Księżyca, jednostki nauki z tej karty mogą być użyte jako 1 M€ każda.",
   "An Offer You Can't Refuse": "Oferta nie do odrzucenia",
   "Exchange a NON-NEUTRAL NON-LEADER delegate with one of your own from the reserve. You may then move your delegate to another party.": "Wymień nie neutralnego, nie będącego liderem, delegata nie na swojego delegata z rezerwy. Następnie możesz przenieść swoich delegatów do innej partii.",
-  
-  
+
+
   "Steal": "Ukradnij",
   "habitat rate": "Współczynnik Kolonizacji (WK)",
   "Mining rate": "Współczynnik Górnictwa (WG)",

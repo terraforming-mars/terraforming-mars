@@ -62,7 +62,6 @@
     "${0} converted plants into a greenery": "${0} hat Pflanzen in eine Grünfläche umgewandelt",
     "${0} traded with ${1}": "${0} ha comerciado con ${1}",
     "${0} used ${1} standard project": "${0} usó el proyecto estándar ${1}",
-    "${0} used ${1} standard project,sold ${2} card(s)": "${0} ha usado el proyecto estándar ${1}, y ha vendido ${2} carta/s",
     "${0} built a colony on ${1}": "${0} ha construido una colonia en ${1}",
     "${0} bought ${1} card(s)": "${0} ha comprado ${1} carta/s)",
     "${0} acted as World Government and increased Venus scale": "${0} ha actuado como gobierno mundial y ha incrementado el valor de terraformación de Venus",
@@ -76,7 +75,6 @@
     "${0} copied ${1} production with ${2}": "${0} ha copiado la producción de ${1} con ${2}",
     "${0} used ${1} action with ${2}": "${0} ha realizado la acción ${1} con ${2}",
     "${0} is the new chairman and gains ${1} TR": "${0} es el nuevo president y ha ganado (${1}) VT",
-    "Turmoil phase has been resolved": "La fase de Conflictos ha terminado",
 
 
     "${0} drew ${1}":"${0} ha robado ${1}",

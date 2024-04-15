@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('SmallComet', function() {
@@ -49,4 +49,25 @@ describe('SmallComet', function() {
     expect(player3.plants).eq(398);
     expect(player.titanium).eq(1);
   });
+
+  const redsRuns = [
+    {oceans: 8, temperature: 6, oxygen: 13, expected: 9},
+    {oceans: 9, temperature: 6, oxygen: 13, expected: 6},
+    {oceans: 8, temperature: 8, oxygen: 13, expected: 6},
+    {oceans: 8, temperature: 6, oxygen: 14, expected: 6},
+    {oceans: 9, temperature: 8, oxygen: 13, expected: 3},
+    {oceans: 8, temperature: 8, oxygen: 14, expected: 3},
+    {oceans: 9, temperature: 6, oxygen: 14, expected: 3},
+    {oceans: 9, temperature: 8, oxygen: 14, expected: 0},
+  ] as const;
+
+  for (const run of redsRuns) {
+    it('Works with reds ' + JSON.stringify(run), () => {
+      const [game, player, player2] = testGame(2, {turmoilExtension: true});
+      maxOutOceans(player2, run.oceans);
+      setTemperature(game, run.temperature);
+      setOxygenLevel(game, run.oxygen);
+      testRedsCosts(() => player.canPlay(card), player, card.cost, run.expected);
+    });
+  }
 });

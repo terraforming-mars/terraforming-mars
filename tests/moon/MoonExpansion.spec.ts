@@ -30,7 +30,7 @@ describe('MoonExpansion', () => {
 
   it('addTile', () => {
     MoonExpansion.addTile(player, MoonSpaces.MARE_IMBRIUM, {tileType: TileType.LUNA_TRADE_STATION});
-    const space: Space = moonData.moon.getSpace(MoonSpaces.MARE_IMBRIUM);
+    const space: Space = moonData.moon.getSpaceOrThrow(MoonSpaces.MARE_IMBRIUM);
     expect(space.player).eq(player);
     expect(space.tile).deep.eq({tileType: TileType.LUNA_TRADE_STATION});
   });
@@ -45,7 +45,7 @@ describe('MoonExpansion', () => {
   });
 
   it('addTile fails occupied space', () => {
-    const space: Space = moonData.moon.getSpace(MoonSpaces.MARE_IMBRIUM);
+    const space: Space = moonData.moon.getSpaceOrThrow(MoonSpaces.MARE_IMBRIUM);
     space.tile = {tileType: TileType.MOON_MINE};
     expect(() => MoonExpansion.addTile(player, MoonSpaces.MARE_IMBRIUM, {tileType: TileType.LUNA_TRADE_STATION})).to.throw(/occupied/);
   });
@@ -109,15 +109,15 @@ describe('MoonExpansion', () => {
     MoonExpansion.addTile(player, 'm03', {tileType: TileType.MOON_HABITAT});
 
     // Reassign that road to the other player, and our player still gets credit for the colony;
-    moonData.moon.getSpace('m02').player = player2;
+    moonData.moon.getSpaceOrThrow('m02').player = player2;
     expect(computeVps()).eql({colonies: 1, mines: 0, roads: 0});
 
     // Put a mine in the adjacent space, and the score appropriately follows
-    moonData.moon.getSpace('m03').tile = {tileType: TileType.MOON_MINE};
+    moonData.moon.getSpaceOrThrow('m03').tile = {tileType: TileType.MOON_MINE};
     expect(computeVps()).eql({colonies: 0, mines: 1, roads: 0});
 
     // Remove the road, and the mine is worth nothing.
-    moonData.moon.getSpace('m03').tile = undefined;
+    moonData.moon.getSpaceOrThrow('m03').tile = undefined;
     expect(computeVps()).eql({colonies: 0, mines: 0, roads: 0});
   });
 

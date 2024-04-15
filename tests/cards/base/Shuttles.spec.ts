@@ -20,19 +20,19 @@ describe('Shuttles', function() {
 
   it('Can not play without energy production', function() {
     setOxygenLevel(game, 5);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can not play if oxygen level too low', function() {
     player.production.add(Resource.ENERGY, 1);
     setOxygenLevel(game, 4);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     setOxygenLevel(game, 5);
     player.production.add(Resource.ENERGY, 1);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.production.energy).to.eq(0);

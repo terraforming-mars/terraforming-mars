@@ -4,7 +4,7 @@ import {Awards} from '../awards/Awards';
 import {Milestones} from '../milestones/Milestones';
 
 // Higher synergies represent similar milestones or awards. For instance, Terraformer rewards for high TR
-// and the Benefactor award is given to the player with the highets TR. Their synergy weight is 9, very high.
+// and the Benefactor award is given to the player with the highest TR. Their synergy weight is 9, very high.
 
 const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName, number]> = [
   ['Terraformer', 'Benefactor', 9],
@@ -558,6 +558,9 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['Zoologist', 'Manufacturer', 1],
   ['Biologist', 'Zoologist', 6],
   ['Naturalist', 'Zoologist', 2],
+
+  ['Risktaker', 'Kingpin', 9],
+  ['Tunneler', 'EdgeLord', 8],
   ['EdgeLord', 'Edgedancer', 9],
 ];
 

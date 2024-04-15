@@ -24,11 +24,11 @@ export class UndergroundShelters extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U72',
         // TODO(kberg): Custom VP icon.
-        victoryPoints: CardRenderDynamicVictoryPoints.questionmark(1, 3),
+        victoryPoints: CardRenderDynamicVictoryPoints.undergroundShelters(),
         renderData: CardRenderer.builder((b) => {
           b.excavate(1);
         }),
-        description: 'Excavate an underground resource. At the end of the game, your cities score 1 VP per 3 excavation markers in the city space and adjacent spaces.',
+        description: 'Excavate an underground resource. At the end of the game, your cities score 1 VP per 3 excavation markers YOU have in that city space and adjacent spaces.',
       },
     });
   }

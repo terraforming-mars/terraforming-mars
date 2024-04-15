@@ -83,6 +83,8 @@ export class Asimov extends CeoCard {
     // NB: This makes no effort to maintain Award synergy.
     const gameOptions = player.game.gameOptions;
     const validAwards = ALL_AWARDS.filter((award) => {
+      // TODO(kberg): Centralize this so this card doesn't have to be updated.
+
       // Remove awards already in the game
       if (player.game.awards.includes(award)) return false;
       // Remove awards that require unused variants/expansions
@@ -91,6 +93,8 @@ export class Asimov extends CeoCard {
       if (!gameOptions.aresExtension && award.name === 'Entrepreneur') return false;
       if (!gameOptions.moonExpansion && award.name === 'Full Moon') return false;
       if (!gameOptions.moonExpansion && award.name === 'Lunar Magnate') return false;
+      if (!gameOptions.underworldExpansion && award.name === 'Kingpin') return false;
+      if (!gameOptions.underworldExpansion && award.name === 'EdgeLord') return false;
       return true;
     });
     if (validAwards.length === 0) throw new Error('getValidAwards award list is empty.');

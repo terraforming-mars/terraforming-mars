@@ -5,6 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {RoverDriversUnion} from '../../../src/server/cards/moon/RoverDriversUnion';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {MoonData} from '../../../src/server/moon/MoonData';
+import {testRedsCosts} from '../../TestingUtils';
 
 describe('RoverDriversUnion', () => {
   let game: IGame;
@@ -47,6 +48,18 @@ describe('RoverDriversUnion', () => {
     expect(moonData.logisticRate).eq(4);
     expect(player.getTerraformRating()).eq(16);
     expect(player.production.megacredits).eq(4);
+  });
+
+  it('canPlay when Reds are in power', () => {
+    const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true});
+    const moonData = MoonExpansion.moonData(game);
+
+    // Card requirements
+    moonData.logisticRate = 2;
+
+    testRedsCosts(() => player.canPlay(card), player, card.cost, 3);
+    moonData.logisticRate = 8;
+    testRedsCosts(() => player.canPlay(card), player, card.cost, 0);
   });
 });
 

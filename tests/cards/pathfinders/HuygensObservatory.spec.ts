@@ -21,7 +21,7 @@ describe('HuygensObservatory', function() {
     card = new HuygensObservatory();
     // By choosing 2 players I don't have to pay attention to the first action which
     // removes a colony tile.
-    [game, player] = testGame(2, {
+    [game, player/* , player2*/] = testGame(2, {
       coloniesExtension: true,
       customColoniesList: [
         ColonyName.GANYMEDE,
@@ -32,6 +32,50 @@ describe('HuygensObservatory', function() {
       ],
     });
     ganymede = game.colonies.find((colony) => colony.name === ColonyName.GANYMEDE)!;
+  });
+
+  it('can play, trade fleet home', () => {
+    expect(card.canPlay(player)).is.true;
+  });
+
+  it('can play, trade fleet on a colony tile', () => {
+    ganymede.trade(player);
+
+    expect(card.canPlay(player)).is.true;
+  });
+
+  it('Cannot play, cannot place a colony', () => {
+    for (const colony of player.game.colonies) {
+      colony.colonies = [player.id, player.id, player.id];
+    }
+
+    expect(card.canPlay(player)).is.false;
+  });
+
+  it('Can play even if you have a colony where you already have one.', () => {
+    for (const colony of player.game.colonies) {
+      colony.colonies = [player.id, player.id, player.id];
+    }
+
+    expect(card.canPlay(player)).is.false;
+
+    ganymede.colonies.pop();
+
+    expect(card.canPlay(player)).is.true;
+  });
+
+  it('Cannot play, cannot trade', () => {
+    for (const colony of player.game.colonies) {
+      expect(card.canPlay(player)).is.true;
+      colony.visitor = player.id;
+    }
+
+    expect(card.canPlay(player)).is.false;
+  });
+
+  it('Cannot play, trade embargo', () => {
+    player.game.tradeEmbargo = true;
+    expect(card.canPlay(player)).is.false;
   });
 
   it('play, simple case (place colony, trade with it)', function() {

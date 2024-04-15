@@ -1207,7 +1207,6 @@
                 background-image: url(./assets/resources/preservation.png);
             }
             .card-resource-data {
-                color: #0000 !important;
                 background-image: url(./assets/resources/data.png);
             }
             .card-resource-syndicate-fleet {
@@ -1267,61 +1266,73 @@
               width: 44px;
               background-size: 44px 44px;
               height: 44px;
-          }
-          .card-excavation {
-              background-image: url(./assets/underworld/excavate.png);
+            }
+            .card-excavation {
+                background-image: url(./assets/underworld/excavate.png);
+                width: 44px;
+                background-size: 44px 44px;
+                height: 44px;
+            }
+            .card-resource-corruption {
+                background-image: url(./assets/underworld/corruption.png);
+            }
+            // Is this even used?
+            .card-resource-tool {
+              background-image: url(./assets/underworld/card-resource-tool.png);
+            }
+            .card-resource-ware {
+              background-image: url(./assets/underworld/card-resource-ware.png);
+            }
+            .card-resource-scoop {
+              background-image: url(./assets/underworld/card-resource-scoop.png);
+            }
+            .card-resource-journalism {
+              background-image: url(./assets/underworld/card-resource-journalism.png);
+            }
+            .card-resource-activist {
+              background-image: url(./assets/underworld/card-resource-activist.png);
+            }
+            .card-resource-supply-chain {
+              background-image: url(./assets/underworld/card-resource-supply-chain.png);
+            }
+
+            .card-neutral-delegate {
+              .card-delegate;
+              background-image: url(./assets/underworld/neutral-delegate.png) !important;
+            }
+
+            .card-underground-resources {
               width: 44px;
               background-size: 44px 44px;
               height: 44px;
-              .req {
-
+              background-image: url("assets/underworld/underground-token-background.png");
+              .card-x {
+                color: black;
+                font-size: 69px;
+                font-weight: bold;
+                margin-top: 10px;
               }
-          }
-          .card-resource-corruption {
-              background-image: url(./assets/underworld/corruption.png);
-          }
-          // Is this even used?
-          .card-resource-tool {
-            background-image: url(./assets/underworld/card-resource-tool.png);
-          }
-          .card-resource-ware {
-            background-image: url(./assets/underworld/card-resource-ware.png);
-          }
-          .card-resource-scoop {
-            background-image: url(./assets/underworld/card-resource-scoop.png);
-          }
-          .card-resource-journalism {
-            background-image: url(./assets/underworld/card-resource-journalism.png);
-          }
-          .card-resource-activist {
-            background-image: url(./assets/underworld/card-resource-activist.png);
-          }
-
-          .card-neutral-delegate {
-            .card-delegate;
-            background-image: url(./assets/underworld/neutral-delegate.png) !important;
-          }
-
-          .card-underground-resources {
-            width: 44px;
-            background-size: 44px 44px;
-            height: 44px;
-            background-image: url("assets/underworld/underground-token-background.png");
-            .card-x {
-              color: black;
-              font-size: 69px;
-              font-weight: bold;
-              margin-top: 10px;
             }
-          }
 
-          .card-corruption-shield {
-            width: 44px;
-            background-size: 44px 44px;
-            height: 44px;
-            background-image: url("assets/underworld/corruption-block.png");
-          }
+            .card-corruption-shield {
+              width: 44px;
+              height: 44px;
+              background-size: 44px 44px;
+              background-image: url("assets/underworld/corruption-block.png");
+            }
 
+            .card-geoscan-icon {
+              width: 100px;
+              height: 87px;
+              background-size: 100px 87px;
+              background-image: url("assets/underworld/geoscan-icon.png");
+            }
+            .card-underground-shelters {
+              background-image: url(./assets/underworld/underground-shelters.png);
+              width: 44px;
+              background-size: 44px 44px;
+              height: 44px;
+            }
             /* CEO Assets */
             .card-arrow-opg {
                 display: inline-block;
@@ -2273,12 +2284,17 @@
                 right: 26px;
             } */
         }
+
         .card-cost-and-tags {
             display: flex;
             align-items: center;
             margin-left: -10px;
             margin-top: -10px;
             justify-content: space-between;
+            // Find a way to move this out.
+            .board-cube {
+              transform: scale(1.5);
+            }
             .card-cost, .card-old-cost {
                 float: left;
                 font-family: Prototype;
@@ -2500,9 +2516,13 @@ each(@parties, {
         background-image: url("./assets/resources/@{value}.png");
       }
     })
-    .card-resource-tool {
-      background-image: url(./assets/underworld/card-resource-tool.png);
-    }
+
+    @underworld_resource_types: tool, ware, scoop, activist, journalism, supply-chain;
+    each(@underworld_resource_types, {
+      .card-resource-@{value} {
+        background-image: url("./assets/underworld/card-resource-@{value}.png");
+      }
+    })
     .card-resource-cube {
       background-image: url("./assets/cube.png");
     }

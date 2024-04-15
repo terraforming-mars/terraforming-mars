@@ -1,7 +1,8 @@
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {CardName} from '../../common/cards/CardName';
 import {ColonyBenefit} from '../../common/colonies/ColonyBenefit';
-import {DeferredAction, Priority, SimpleDeferredAction} from '../deferredActions/DeferredAction';
+import {DeferredAction, SimpleDeferredAction} from '../deferredActions/DeferredAction';
+import {Priority} from '../deferredActions/Priority';
 import {DiscardCards} from '../deferredActions/DiscardCards';
 import {DrawCards} from '../deferredActions/DrawCards';
 import {GiveColonyBonus} from '../deferredActions/GiveColonyBonus';
@@ -92,7 +93,7 @@ export abstract class Colony implements IColony {
     // TODO(kberg): Time for an onNewColony hook.
 
     // Poseidon hook
-    const poseidon = player.game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON));
+    const poseidon = player.game.getCardPlayerOrUndefined(CardName.POSEIDON);
     if (poseidon !== undefined) {
       poseidon.production.add(Resource.MEGACREDITS, 1, {log: true});
     }
@@ -164,10 +165,9 @@ export abstract class Colony implements IColony {
 
     // !== false because default is true.
     if (options.decreaseTrackAfterTrade !== false) {
-      player.game.defer(new SimpleDeferredAction(player, () => {
+      player.defer(() => {
         this.trackPosition = this.colonies.length;
-        return undefined;
-      }), Priority.DECREASE_COLONY_TRACK_AFTER_TRADE);
+      }, Priority.DECREASE_COLONY_TRACK_AFTER_TRADE);
     }
   }
 
@@ -335,9 +335,9 @@ export abstract class Colony implements IColony {
     if (action !== undefined) {
       if (isGiveColonyBonus) {
         /*
-           * When this method is called from within the GiveColonyBonus deferred action
-           * we return the player input directly instead of deferring it
-           */
+         * When this method is called from within the GiveColonyBonus deferred action
+         * we return the player input directly instead of deferring it
+         */
         return action.execute(); // undefined | PlayerInput
       } else {
         game.defer(action);

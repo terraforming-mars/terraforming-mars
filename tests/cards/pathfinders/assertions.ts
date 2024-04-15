@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {IPlayer} from '../../../src/server/IPlayer';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {DeferredAction} from '../../../src/server//deferredActions/DeferredAction';
+import {IDeferredAction} from '../../../src/server//deferredActions/DeferredAction';
 import {SendDelegateToArea} from '../../../src/server//deferredActions/SendDelegateToArea';
 import {SelectParty} from '../../../src/server//inputs/SelectParty';
 import {cast} from '../../TestingUtils';
@@ -9,7 +9,8 @@ import {PlaceCityTile} from '../../../src/server/deferredActions/PlaceCityTile';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 
-export function assertSendDelegateToArea(player: IPlayer, action: DeferredAction) {
+// TODO(kberg): mix with Underworld assertions.
+export function assertSendDelegateToArea(player: IPlayer, action: IDeferredAction) {
   const sendDelegate = cast(action, SendDelegateToArea);
 
   const game = player.game;
@@ -26,7 +27,7 @@ export function assertSendDelegateToArea(player: IPlayer, action: DeferredAction
   expect(marsFirst.delegates.get(player)).eq(delegatesInParty + 1);
 }
 
-export function assertPlaceCityTile(player: IPlayer, action: DeferredAction) {
+export function assertPlaceCityTile(player: IPlayer, action: IDeferredAction) {
   const placeCityTile = cast(action, PlaceCityTile);
   const selectSpace = cast(placeCityTile.execute(), SelectSpace);
   const space = selectSpace.spaces[0];

@@ -24,7 +24,7 @@ export class GeoscanSatellite extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U02',
         renderData: CardRenderer.builder((b) => {
-          b.data({amount: 2}).text('TODO ICON');
+          b.data({amount: 2}).geoscan();
         }),
         description: 'Place 2 data on any card. Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces.',
       },
@@ -32,7 +32,7 @@ export class GeoscanSatellite extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: IPlayer) {
-    return UnderworldExpansion.identifiableSpaces(player.game).length > 0;
+    return UnderworldExpansion.identifiableSpaces(player).length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {

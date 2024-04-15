@@ -32,9 +32,9 @@ describe('Maria', function() {
     cast(card.action(player), undefined);
     runAllActions(player.game);
     const selectColony = cast(player.popWaitingFor(), SelectColony);
-    const builtColonyName = selectColony.colonies[0].name;
-    selectColony.cb(selectColony.colonies[0]);
-    expect(game.colonies.find((colony) => colony.name === builtColonyName)).is.not.undefined;
+    const selectedColony = selectColony.colonies[0];
+    selectColony.cb(selectedColony);
+    expect(game.colonies).to.contain(selectedColony);
     expect(game.colonies.length).to.eq(coloniesInPlay + 1);
   });
 

@@ -14,13 +14,12 @@ import {DELEGATES_FOR_NEUTRAL_PLAYER, DELEGATES_PER_PLAYER} from '../../common/c
 import {PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
 import {AgendaStyle} from '../../common/turmoil/Types';
 import {CardName} from '../../common/cards/CardName';
-import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {MultiSet} from 'mnemonist';
 import {IPlayer} from '../IPlayer';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {SelectParty} from '../inputs/SelectParty';
 import {Policy, PolicyId, policyDescription} from './Policy';
-import {PlayerId} from '@/common/Types';
+import {PlayerId} from '../../common/Types';
 
 export type NeutralPlayer = 'NEUTRAL';
 export type Delegate = IPlayer | NeutralPlayer;
@@ -294,7 +293,6 @@ export class Turmoil {
     // 4.c - Draw the new distant event and add neutral delegate
     this.distantGlobalEvent = this.globalEventDealer.draw();
     this.addNeutralDelegate(this.distantGlobalEvent?.revealedDelegate, game);
-    game.log('Turmoil phase has been resolved');
   }
 
   private addNeutralDelegate(partyName: PartyName | undefined, game: IGame) {
@@ -357,15 +355,14 @@ export class Turmoil {
       if (chairman.isCorporation(CardName.TEMPEST_CONSULTANCY)) steps += 1;
 
       // Raise TR
-      game.defer(new SimpleDeferredAction(chairman, () => {
+      chairman.defer(() => {
         if (steps > 0) {
           chairman.increaseTerraformRating(steps);
           game.log('${0} is the new chairman and gains ${1} TR', (b) => b.player(chairman).number(steps));
         } else {
           game.log('${0} is the new chairman', (b) => b.player(chairman));
         }
-        return undefined;
-      }));
+      });
     } else {
       game.log('A neutral delegate is the new chairman.');
     }
@@ -397,7 +394,7 @@ export class Turmoil {
 
   public getPlayerInfluence(player: IPlayer) {
     let influence = 0;
-    if (this.chairman !== undefined && this.chairman === player) influence++;
+    if (this.chairman === player) influence++;
 
     const dominantParty : IParty = this.dominantParty;
     const isPartyLeader = dominantParty.partyLeader === player;
@@ -439,19 +436,6 @@ export class Turmoil {
     }
   }
 
-  /**
-   * Return true if `player` can play a project card with `partyName`
-   * as a party requirement.
-   */
-  public canPlay(player: IPlayer, partyName : PartyName): boolean {
-    if (this.rulingParty.name === partyName) {
-      return true;
-    }
-
-    const party = this.getPartyByName(partyName);
-    return party.delegates.count(player) >= 2;
-  }
-
   /** Return the number of delegates for `delegate` in the reserve. */
   public getAvailableDelegateCount(delegate: Delegate): number {
     return this.delegateReserve.get(delegate);
@@ -462,9 +446,9 @@ export class Turmoil {
     return Array.from(new Set(this.delegateReserve));
   }
 
-  /** Return true if `playerId` has delegates in reserve. */
-  public hasDelegatesInReserve(playerId: Delegate): boolean {
-    return this.getAvailableDelegateCount(playerId) > 0;
+  /** Return true if `player` has delegates in reserve. */
+  public hasDelegatesInReserve(player: Delegate): boolean {
+    return this.getAvailableDelegateCount(player) > 0;
   }
 
   /**

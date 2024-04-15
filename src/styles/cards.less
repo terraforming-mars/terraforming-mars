@@ -300,7 +300,11 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .prelude2-icon:after {
   &:extend(.prelude-icon:after);
+  background-image: url("./assets/prelude2/prelude2-triangle16.png");
+  transform: rotate(0deg);
+  background-position: bottom 4px right 3px;
 }
+
 .venus-icon:after {
     position: absolute;
     border: 1px solid black;
@@ -670,7 +674,9 @@ input[type="radio"]:checked + .filterDiv::after {
 .tag-none {
     background-image: url("./assets/tags/tag-none.png");
 }
-
+.tag-asterisk {
+  background-image: url("./assets/underworld/asterisk-tag.png");
+}
 /************** Style the Content ************/
 .content {
     color: black;
@@ -2676,9 +2682,8 @@ input[type="radio"]:checked + .filterDiv::after {
     background-image: url(./assets/expansion_icons/expansion_icon_prelude.png);
 }
 
-// Create an icon with a 2, perhaps?
 .expansion-icon-prelude2 {
-    background-image: url(./assets/expansion_icons/expansion_icon_prelude.png);
+    background-image: url(./assets/expansion_icons/expansion_icon_prelude2.png);
 }
 
 .expansion-icon-colony {
@@ -2769,19 +2774,18 @@ input[type="radio"]:checked + .filterDiv::after {
             .card-help {
                 float: left;
                 font-family: Prototype;
-                font-size: 26px;
-                width: 30px;
-                height: 50px;
+                font-size: 20px;
+                width: 24px;
+                height: 24px;
                 margin-left: -20px;
-                line-height: 48px;
-                border-radius: 20px;
-
-                background-color: black;
-                color: white;
+                line-height: 24px;
+                border-radius: 24px;
+                background-color: #444;
                 text-align: center;
-            }
-            .card-help-inner a:visited {
-                color: #FFF;
+                a {
+                  color: #C33;
+                  text-decoration: none;
+                }
             }
             .card-tags {
                 display: flex;

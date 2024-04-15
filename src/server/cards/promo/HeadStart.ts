@@ -22,7 +22,7 @@ export class HeadStart extends PreludeCard {
         renderData: CardRenderer.builder((b) => {
           b.steel(2).br;
           b.text('GAIN 2 STEEL.', Size.TINY).br;
-          b.megacredits(0, {questionMark: true}).br;
+          b.megacredits(1, {text: '?'}).br;
           b.text('GAIN 2 M€ PER PROJECT CARD YOU HAVE IN HAND.', Size.TINY, true, false).br;
           b.arrow().arrow().br;
           b.text('IMMEDIATELY TAKE 2 ACTIONS.', Size.TINY, true, false).br;

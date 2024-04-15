@@ -30,7 +30,7 @@ import {HE3ProductionQuotas} from './HE3ProductionQuotas';
 import {HE3Refinery} from './HE3Refinery';
 import {HeavyDutyRovers} from './HeavyDutyRovers';
 import {HeliostatMirrorArray} from './HeliostatMirrorArray';
-// import {HostileTakeover} from './HostileTakeover';
+import {HostileTakeover} from './HostileTakeover';
 import {HypersensitiveSiliconChipFactory} from './HypersensitiveSiliconChipFactory';
 import {ImprovedMoonConcrete} from './ImprovedMoonConcrete';
 import {IntragenSanctuaryHeadquarters} from './IntragenSanctuaryHeadquarters';
@@ -178,7 +178,7 @@ export const MOON_CARD_MANIFEST = new ModuleManifest({
     // // [CardName.LUNAR_INDEPENDENCE_WAR]: {Factory: LunarIndependenceWar},
     [CardName.AN_OFFER_YOU_CANT_REFUSE]: {Factory: AnOfferYouCantRefuse, compatibility: 'turmoil'},
     [CardName.PRELIMINARY_DARKSIDE]: {Factory: PreliminaryDarkside},
-    //   [CardName.HOSTILE_TAKEOVER]: {Factory: HostileTakeover},
+    [CardName.HOSTILE_TAKEOVER]: {Factory: HostileTakeover},
     [CardName.SYNDICATE_PIRATE_RAIDS]: {Factory: SyndicatePirateRaids, compatibility: 'colonies'},
     [CardName.DARKSIDE_MINING_SYNDICATE]: {Factory: DarksideMiningSyndicate},
     //   // [CardName.HE3_PROPULSION]: {Factory: HE3Propulsion, compatibility: 'colonies'},

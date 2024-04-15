@@ -7,7 +7,6 @@ import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
 import {CardResource} from '../../../common/CardResource';
 import {Resource} from '../../../common/Resource';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -57,8 +56,7 @@ export class Ecotec extends CorporationCard {
     }
 
     for (let i = 0; i < resourceCount; i++) {
-      player.game.defer(new SimpleDeferredAction(
-        player,
+      player.defer(
         () => new OrOptions(
           new SelectCard(
             'Select card to gain a microbe',
@@ -74,7 +72,7 @@ export class Ecotec extends CorporationCard {
             return undefined;
           }),
         ),
-      ));
+      );
     }
     return undefined;
   }

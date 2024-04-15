@@ -7,10 +7,18 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {IActionCard} from '../ICard';
 import {Player} from '../../Player';
 import {intersection} from '../../../common/utils/utils';
-import {TileType} from '../../../common/TileType';
 import {message} from '../../logs/MessageBuilder';
-
 export class MarsNomads extends Card implements IActionCard {
+  /*
+   * A good page about this card: https://boardgamegeek.com/thread/3154812.
+   *
+   * 1. Arcadian Communities and Land Claim block Mars Nomads.
+   *  1a. Even if it's your AC.
+   * 2. Mining Guild and Philares cannot take advantage of it.
+   * 3. Placing next to an ocean tile gives a placement bonus.
+   *
+   * Ares: Adjacency bonuses are not placement bonuses.
+   */
   constructor() {
     super({
       type: CardType.ACTIVE,
@@ -32,16 +40,15 @@ export class MarsNomads extends Card implements IActionCard {
     });
   }
 
-
   public override bespokeCanPlay(player: IPlayer) {
-    const spaces = player.game.board.getAvailableSpacesOnLand(player);
+    const spaces = player.game.board.getNonReservedLandSpaces();
     return spaces.length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {
     return new SelectSpace(
       message('Select space for ${0}', (b) => b.card(this)),
-      player.game.board.getAvailableSpacesOnLand(player))
+      player.game.board.getNonReservedLandSpaces())
       .andThen((space) => {
         player.game.nomadSpace = space.id;
         return undefined;
@@ -56,7 +63,7 @@ export class MarsNomads extends Card implements IActionCard {
     }
 
     const availableSpaces = board.getAvailableSpacesOnLand(player);
-    const currentNomadSpace = board.getSpace(game.nomadSpace);
+    const currentNomadSpace = board.getSpaceOrThrow(game.nomadSpace);
     const adjacentSpaces = board.getAdjacentSpaces(currentNomadSpace);
     return intersection(availableSpaces, adjacentSpaces);
   }
@@ -73,9 +80,7 @@ export class MarsNomads extends Card implements IActionCard {
       spaces)
       .andThen((space) => {
         player.game.nomadSpace = space.id;
-        // Mars nomads is funny. The tile is temporarily placed so the card acts appropriate, but is then removed so it doesn't have post-placement impact.
-        player.game.addTile(player, space, {tileType: TileType.MARS_NOMADS});
-        player.game.removeTile(space.id);
+        player.game.grantPlacementBonuses(player, space, false);
 
         return undefined;
       });

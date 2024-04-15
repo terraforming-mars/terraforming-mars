@@ -29,7 +29,7 @@ export class ArboristCollective extends ActiveCorporationCard {
 
       metadata: {
         cardNumber: 'UC05',
-        description: 'You start with 36M€, 3 plants and 1 plant production.',
+        description: 'You start with 36 M€, 3 plants and 1 plant production.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(36).plants(3, {digit}).production((pb) => pb.plants(1)).br;
           b.effect('After you play an event card with a base cost of 14 or less, put an activist resource on this card.', (eb) => {

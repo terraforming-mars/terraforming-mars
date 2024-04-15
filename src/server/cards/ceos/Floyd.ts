@@ -4,7 +4,6 @@ import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
-import {multiplier} from '../Options';
 
 export class Floyd extends CeoCard {
   constructor() {
@@ -15,7 +14,7 @@ export class Floyd extends CeoCard {
         renderData: CardRenderer.builder((b) => {
           b.opgArrow().text('ACTIVATE THE BELOW ABILITY');
           b.br.br;
-          b.text('PLAY').cards(1).colon().megacredits(-13).megacredits(-2, {multiplier}).asterix();
+          b.text('PLAY').cards(1).colon().megacredits(-13).megacredits(1, {text: '-2x'}).asterix();
           b.br.br;
         }),
         description: 'Once per game, play a card from hand for 13 + 2X M€ less, where X is the current generation number.',

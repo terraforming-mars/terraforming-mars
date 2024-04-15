@@ -4,6 +4,7 @@ import {SelectAmount} from './SelectAmount';
 import {Units} from '../../common/Units';
 import {sum} from '../../common/utils/utils';
 import {Message} from '../../common/logs/Message';
+import {InputError} from './InputError';
 
 export class SelectResources extends AndOptions {
   private static makeOptions(count: number, units: Units) {
@@ -51,10 +52,10 @@ export class SelectResources extends AndOptions {
     this.andThen(() => {
       const array = Object.values(units);
       if (array.some((count) => count < 0)) {
-        throw new Error('All units must be positive');
+        throw new InputError('All units must be positive');
       }
       if (sum(array) !== this.count) {
-        throw new Error(`Select ${this.count} resources.`);
+        throw new InputError(`Select ${this.count} resources.`);
       }
 
       this.player.stock.addUnits(this.units, {log: true});

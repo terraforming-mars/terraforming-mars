@@ -2,7 +2,7 @@ import type * as pg from 'pg';
 import {IDatabase} from './IDatabase';
 import {IGame, Score} from '../IGame';
 import {GameOptions} from '../game/GameOptions';
-import {GameId, ParticipantId} from '../../common/Types';
+import {GameId, ParticipantId, isGameId, safeCast} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
 import {daysAgoToSeconds} from './utils';
 import {GameIdLedger} from './IDatabase';
@@ -274,7 +274,7 @@ export class PostgreSQL implements IDatabase {
   public async getParticipants(): Promise<Array<{gameId: GameId, participantIds: Array<ParticipantId>}>> {
     const res = await this.client.query('select game_id, participants from participants');
     return res.rows.map((row) => {
-      return {gameId: row.game_id as GameId, participantIds: row.participants as Array<ParticipantId>};
+      return {gameId: safeCast(row.game_id, isGameId), participantIds: row.participants as Array<ParticipantId>};
     });
   }
 

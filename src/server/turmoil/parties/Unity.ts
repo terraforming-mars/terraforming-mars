@@ -9,7 +9,6 @@ import {Policy} from '../Policy';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IPlayer} from '../../IPlayer';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -117,7 +116,7 @@ class UnityPolicy02 implements Policy {
 
         if (orOptions.options.length === 1) return orOptions.options[0].cb();
 
-        game.defer(new SimpleDeferredAction(player, () => orOptions));
+        player.defer(orOptions);
         return undefined;
       });
 

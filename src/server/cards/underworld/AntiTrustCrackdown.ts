@@ -4,7 +4,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
-import {max} from '../Options';
+import {all, max} from '../Options';
 import {IPlayer} from '../../IPlayer';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
@@ -22,7 +22,7 @@ export class AntiTrustCrackdown extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U64',
         renderData: CardRenderer.builder((b) => {
-          b.text('-2').corruption(1).br;
+          b.text('-2').corruption(1, {all}).asterix().br;
           b.plainText('Requires that you have no more than 0 corruption. ALL players lose 2 corruption each.');
         }),
       },

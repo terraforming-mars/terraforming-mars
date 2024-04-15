@@ -5,6 +5,7 @@ import {Units} from '../../common/Units';
 import {InputResponse, isSelectProductionToLoseResponse} from '../../common/inputs/InputResponse';
 import {sum} from '../../common/utils/utils';
 import {SelectProductionToLoseModel} from '../../common/models/PlayerInputModel';
+import {InputError} from './InputError';
 
 export class SelectProductionToLose extends BasePlayerInput<Units> {
   constructor(
@@ -32,20 +33,20 @@ export class SelectProductionToLose extends BasePlayerInput<Units> {
   // would take some work.
   public process(input: InputResponse, player: IPlayer) {
     if (!isSelectProductionToLoseResponse(input)) {
-      throw new Error('Not a valid SelectProductionToLoseResponse');
+      throw new InputError('Not a valid SelectProductionToLoseResponse');
     }
     if (!Units.isUnits(input.units)) {
-      throw new Error('not a units object');
+      throw new InputError('not a units object');
     }
     const array = Object.values(input.units);
     if (array.some((count) => count < 0)) {
-      throw new Error('All units must be positive');
+      throw new InputError('All units must be positive');
     }
     if (!player.production.canAdjust(Units.negative(input.units))) {
-      throw new Error('You do not have those units');
+      throw new InputError('You do not have those units');
     }
     if (sum(array) !== this.unitsToLose) {
-      throw new Error(`Select ${this.unitsToLose} steps of production.`);
+      throw new InputError(`Select ${this.unitsToLose} steps of production.`);
     }
     this.cb(input.units);
     return undefined;

@@ -5,7 +5,7 @@ import {SpaceType} from '../../../common/boards/SpaceType';
 import {Space} from '../../boards/Space';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
-import {Priority} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 import {GainResources} from '../../deferredActions/GainResources';
 import {GainProduction} from '../../deferredActions/GainProduction';
 import {Board} from '../../boards/Board';

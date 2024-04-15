@@ -1,4 +1,3 @@
-
 export enum KeyboardNavigation {
   GAMEBOARD = 'KeyA',
   PLAYERSOVERVIEW = 'KeyS',

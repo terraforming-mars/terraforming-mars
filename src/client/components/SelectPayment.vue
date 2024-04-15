@@ -1,3 +1,33 @@
+<template>
+<div class="payments_cont">
+  <section v-trim-whitespace>
+    <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
+
+    <template v-for="unit of SPENDABLE_RESOURCES">
+      <payment-unit-component
+        v-model.number="payment[unit]"
+        v-bind:key="unit"
+        v-if="canUse(unit) === true"
+        :unit="unit"
+        :description="descriptions[unit]"
+        @plus="addValue(unit)"
+        @minus="reduceValue(unit)"
+        @max="onMaxClicked(unit)">
+      </payment-unit-component>
+    </template>
+
+    <div v-if="hasWarning()" class="tm-warning">
+      <label class="label label-error">{{ $t(warning) }}</label>
+    </div>
+
+    <div v-if="showsave === true" class="payments_save">
+      <AppButton size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" data-test="save"/>
+    </div>
+
+  </section>
+</div>
+</template>
+
 <script lang="ts">
 import Vue from 'vue';
 import {Payment} from '@/common/inputs/Payment';
@@ -194,34 +224,4 @@ export default Vue.extend({
     },
   },
 });
-
 </script>
-<template>
-<div class="payments_cont">
-  <section v-trim-whitespace>
-    <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
-
-    <template v-for="unit of SPENDABLE_RESOURCES">
-      <payment-unit-component
-        v-model.number="payment[unit]"
-        v-bind:key="unit"
-        v-if="canUse(unit) === true"
-        :unit="unit"
-        :description="descriptions[unit]"
-        @plus="addValue(unit)"
-        @minus="reduceValue(unit)"
-        @max="onMaxClicked(unit)">
-      </payment-unit-component>
-    </template>
-
-    <div v-if="hasWarning()" class="tm-warning">
-      <label class="label label-error">{{ $t(warning) }}</label>
-    </div>
-
-    <div v-if="showsave === true" class="payments_save">
-      <AppButton size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" data-test="save"/>
-    </div>
-
-  </section>
-</div>
-</template>

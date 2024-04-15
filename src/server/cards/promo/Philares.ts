@@ -5,7 +5,7 @@ import {Space} from '../../boards/Space';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {AndOptions} from '../../inputs/AndOptions';
 import {CardName} from '../../../common/cards/CardName';
-import {SimpleDeferredAction, Priority} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {BoardType} from '../../boards/BoardType';
@@ -26,6 +26,7 @@ export class Philares extends CorporationCard {
 
       metadata: {
         cardNumber: 'R25',
+        hasExternalHelp: true,
         description: 'You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(47).nbsp.greenery();
@@ -121,12 +122,11 @@ export class Philares extends CorporationCard {
       adjacentSpacesWithPlayerTiles.filter((space) => space.player?.id === cardOwner.id);
 
     if (eligibleTiles.length > 0) {
-      cardOwner.game.defer(
-        new SimpleDeferredAction(cardOwner, () => {
-          cardOwner.game.log('${0} must select ${1} bonus resource(s) from ${2}\' ability', (b) => b.player(cardOwner).number(eligibleTiles.length).card(this));
-          return this.selectResources(cardOwner, eligibleTiles.length);
-        }),
-        cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : Priority.GAIN_RESOURCE_OR_PRODUCTION,
+      cardOwner.defer(() => {
+        cardOwner.game.log('${0} must select ${1} bonus resource(s) from ${2}\' ability', (b) => b.player(cardOwner).number(eligibleTiles.length).card(this));
+        return this.selectResources(cardOwner, eligibleTiles.length);
+      },
+      cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : Priority.GAIN_RESOURCE_OR_PRODUCTION,
       );
     }
   }

@@ -2,7 +2,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {Tag} from '../../../common/cards/Tag';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {TileType} from '../../../common/TileType';
 import {IProjectCard} from '../IProjectCard';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
@@ -11,7 +10,6 @@ export class FirstLunarSettlement extends PreludeCard implements IProjectCard {
     super({
       name: CardName.FIRST_LUNAR_SETTLEMENT,
       tags: [Tag.CITY, Tag.MOON],
-      tilesBuilt: [TileType.MOON_HABITAT],
 
       behavior: {
         production: {megacredits: 1},

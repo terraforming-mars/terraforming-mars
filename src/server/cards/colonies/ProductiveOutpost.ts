@@ -2,7 +2,6 @@ import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
@@ -27,7 +26,7 @@ export class ProductiveOutpost extends Card implements IProjectCard {
     player.game.colonies.forEach((colony) => {
       colony.colonies.filter((owner) => owner === player.id).forEach((owner) => {
         // Not using GiveColonyBonus deferred action because it's only for the active player
-        player.game.defer(new SimpleDeferredAction(player, () => colony.giveColonyBonus(player.game.getPlayerById(owner))));
+        player.defer(() => colony.giveColonyBonus(player.game.getPlayerById(owner)));
       });
     });
     return undefined;

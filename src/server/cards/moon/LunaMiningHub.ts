@@ -45,7 +45,6 @@ export class LunaMiningHub extends Card {
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.moonMiningTile(2, true),
       },
-      tilesBuilt: [TileType.LUNA_MINING_HUB],
     });
   }
 

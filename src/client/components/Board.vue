@@ -165,6 +165,48 @@
                   </g>
                 </template>
 
+                <template v-if="boardName === BoardName.VASTITAS_BOREALIS_NOVUS">
+                  <g id="hectates_tholius_vastitas_borealis_novus"  transform="translate(270, 70)">
+                      <text class="board-caption">
+                          <tspan dy="15">Hectates</tspan>
+                          <tspan x="5" dy="12">Tholius</tspan>
+                      </text>
+                  </g>
+
+                  <g id="elysium_mons_vastitas_borealis_novus" transform="translate(480, 145)">
+                      <text class="board-caption">
+                          <tspan x="-5" dy="15">Elysium</tspan>
+                          <tspan x="4" dy="12">Mons</tspan>
+                      </text>
+                  </g>
+
+                  <g id="alba_mons_vastitas_borealis_novus" transform="translate(105, 230)">
+                      <text class="board-caption">
+                          <tspan x="0" dy="15">Alba</tspan>
+                          <tspan x="-1" dy="12">Mons</tspan>
+                      </text>
+                  </g>
+
+                  <g id="viking_2_vastitas_borealis_novus" transform="translate(530, 235)">
+                      <text class="board-caption">
+                          <tspan x="-5" dy="15">Viking 2</tspan>
+                      </text>
+                  </g>
+
+                  <g id="uranius_tholus_vastitas_borealis_novus" transform="translate(115, 370)">
+                      <text class="board-caption">
+                          <tspan x="0" dy="0">Uranius</tspan>
+                          <tspan x="2" dy="12">Tholus</tspan>
+                      </text>
+                  </g>
+
+                  <g id="viking_1_vastitas_borealis_novus" transform="translate(164, 445)">
+                      <text class="board-caption">
+                          <tspan x="-5" dy="15">Viking 1</tspan>
+                      </text>
+                  </g>
+                </template>
+
                 <template v-if="boardName === BoardName.ARABIA_TERRA">
                   <g id="tikhonarov" transform="translate(487, 185)">
                       <text class="board-caption">
@@ -270,6 +312,8 @@
                           <tspan dy="15">Albor</tspan>
                           <tspan x="5" dy="12">Tholus</tspan>
                       </text>
+                      <line x1="38" y1="26" x2="63" y2="38" class="board-line"></line>
+                      <text x="61" y="41" class="board-caption board_caption--black">●</text>
                   </g>
                   <g id="apollinaris_mons" transform="translate(500, 210)">
                       <text class="board-caption">
@@ -385,7 +429,7 @@ export default Vue.extend({
       throw new Error('Board space not found by id \'' + spaceId + '\'');
     },
     getValuesForParameter(targetParameter: string): Array<GlobalParamLevel> {
-      const values: Array<GlobalParamLevel> = [];
+      const values = [];
       let startValue: number;
       let endValue: number;
       let step: number;

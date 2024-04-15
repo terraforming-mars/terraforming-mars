@@ -32,7 +32,7 @@ export class Manutech extends CorporationCard {
     });
   }
 
-  public static onProductionGain(player: IPlayer, resource: Resource, amount: number) {
+  public onProductionGain(player: IPlayer, resource: Resource, amount: number) {
     if (amount > 0) {
       player.stock.add(resource, amount);
     }

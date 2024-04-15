@@ -1,22 +1,22 @@
-import {DeferredAction} from './DeferredAction';
+import {IDeferredAction} from './DeferredAction';
 import {GiveColonyBonus} from './GiveColonyBonus';
 import {IPlayer} from '../IPlayer';
 
 export class DeferredActionsQueue {
   private insertId: number = 0;
-  private queue: Array<DeferredAction<any>> = [];
+  private queue: Array<IDeferredAction<any>> = [];
 
   get length(): number {
     return this.queue.length;
   }
 
-  public push(action: DeferredAction<any>): void {
+  public push(action: IDeferredAction<any>): void {
     action.queueId = this.insertId++;
     this.queue.push(action);
   }
 
   public runAllFor(player: IPlayer, cb: () => void): void {
-    let b: DeferredAction | undefined;
+    let b: IDeferredAction | undefined;
     let j = -1;
     for (let i = this.queue.length - 1; i >= 0; i--) {
       const a = this.queue[i];
@@ -33,7 +33,7 @@ export class DeferredActionsQueue {
     this.run(b, () => this.runAllFor(player, cb));
   }
 
-  private hasHigherPriority(a: DeferredAction, b: DeferredAction) {
+  private hasHigherPriority(a: IDeferredAction, b: IDeferredAction) {
     return a.priority < b.priority || (a.priority === b.priority && a.queueId < b.queueId);
   }
 
@@ -67,15 +67,15 @@ export class DeferredActionsQueue {
   }
 
   // The following methods are used in tests
-  public peek(): DeferredAction<any> | undefined {
+  public peek(): IDeferredAction<any> | undefined {
     return this.queue[this.nextItemIndex()];
   }
 
-  public pop(): DeferredAction<any> | undefined {
+  public pop(): IDeferredAction<any> | undefined {
     return this.queue.splice(this.nextItemIndex(), 1)[0];
   }
 
-  public run(action: DeferredAction, cb: () => void): void {
+  public run(action: IDeferredAction, cb: () => void): void {
     // Special hook for trade bonus deferred actions
     // So that they happen for all players at the same time
     if (action instanceof GiveColonyBonus) {

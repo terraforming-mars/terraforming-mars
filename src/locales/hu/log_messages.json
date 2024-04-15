@@ -71,7 +71,6 @@
     "${0} spent 1 floater to trade with ${1}": "${0} 1 flotát költött ${1}-vel való kereskedelemre",
     "${0} traded with ${1}": "${0} kereskedett ${1}-vel",
     "${0} used ${1} standard project": "${0} használt ${1} standard projektet",
-    "${0} used ${1} standard project,sold ${2} card(s)": "${0} használt ${1} standard projektet, eladott ${2} kártyát",
     "${0} built a colony on ${1}": "${0} kolóniát épített ${1}-en",
     "${0} increased ${1} colony track ${2} step(s)": "${0} ${1} kolónia pályát növelt ${2} lépéssel",
     "${0} bought ${1} card(s)": "${0} ${1} kártyát vásárolt",
@@ -86,7 +85,6 @@
     "${0} copied ${1} production with ${2}": "${0} másolta ${1} termelését ${2}-vel",
     "${0} used ${1} action with ${2}": "${0} használt ${1} akciót ${2}-vel",
     "${0} is the new chairman and gains ${1} TR": "${0} az új elnök és ${1} TR-t kap",
-    "Turmoil phase has been resolved": "A zűrzavar fázis megoldódott",
 
 
     "${0} drew ${1}": "${0} húzott ${1}",

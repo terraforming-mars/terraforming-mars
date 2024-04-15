@@ -1,0 +1,8 @@
+{
+    "Effect: When you play a Science tag, you pay 2M€ less for it.": "Ефект: Когато разыграете карта с етикет Наука, плащате с 2 M€ по-малко.",
+    "You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.": "Започвате с 37 M€. Като ваше първо действие изтеглете 3 прелюди карти и разиграйте една от тях. Другите две изхвърлете.",
+    "You start with 47 M€.": "Започвате с 47 M€.",
+    "Action: Spend 4 M€ to increase (one of) your LOWEST PRODUCTION 1 step.": "Действие: Изхарчете 4 M€, за да увеличите (едно от) вашето НАЙ-НИСКО производство с 1 стъпка.",
+    "${0} drew ${1} and ${2}": "${0} изтегли ${1} и ${2}"
+ }
+ 

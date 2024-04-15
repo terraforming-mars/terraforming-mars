@@ -1,7 +1,8 @@
 import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';
 import {Space} from '../boards/Space';
-import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
+import {DeferredAction} from '../deferredActions/DeferredAction';
+import {Priority} from '../deferredActions/Priority';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {UnderworldExpansion} from './UnderworldExpansion';
 
@@ -16,7 +17,7 @@ export class IdentifySpacesDeferred extends DeferredAction<Array<Space>> {
     const title = prefix + (this.count > 1 ? ` (${this.nth} of ${this.count})` : '');
     const selectedSpaces: Array<Space> = [];
 
-    const identifiableSpaces = UnderworldExpansion.identifiableSpaces(this.player.game);
+    const identifiableSpaces = UnderworldExpansion.identifiableSpaces(this.player);
     if (identifiableSpaces.length === 0) {
       return undefined;
     }

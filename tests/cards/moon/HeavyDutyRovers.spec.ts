@@ -32,9 +32,9 @@ describe('HeavyDutyRovers', () => {
     moonData.logisticRate = 0;
     expect(player.getTerraformRating()).eq(14);
 
-    moonData.moon.getSpace('m07')!.tile = {tileType: TileType.MOON_MINE};
-    moonData.moon.getSpace('m06')!.tile = {tileType: TileType.MOON_ROAD};
-    moonData.moon.getSpace('m02')!.tile = {tileType: TileType.MOON_MINE};
+    moonData.moon.getSpaceOrThrow('m07')!.tile = {tileType: TileType.MOON_MINE};
+    moonData.moon.getSpaceOrThrow('m06')!.tile = {tileType: TileType.MOON_ROAD};
+    moonData.moon.getSpaceOrThrow('m02')!.tile = {tileType: TileType.MOON_MINE};
 
     card.play(player);
 
@@ -48,8 +48,8 @@ describe('HeavyDutyRovers', () => {
     moonData = MoonExpansion.moonData(game);
 
     function addTile(spaceId: SpaceId, tileType: TileType, p: IPlayer = player) {
-      moonData.moon.getSpace(spaceId)!.tile = {tileType};
-      moonData.moon.getSpace(spaceId).player = p;
+      moonData.moon.getSpaceOrThrow(spaceId)!.tile = {tileType};
+      moonData.moon.getSpaceOrThrow(spaceId).player = p;
     }
 
     player.megaCredits = 0;

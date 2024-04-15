@@ -10,10 +10,10 @@ describe('GMOContract', function() {
     const turmoil = game.turmoil!;
 
     turmoil.rulingParty = turmoil.getPartyByName(PartyName.REDS);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
     const greens = turmoil.getPartyByName(PartyName.GREENS);
     greens.delegates.add(player, 2);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     card.play(player);
     card.onCardPlayed(player, card);
     game.deferredActions.runNext();

@@ -3,7 +3,6 @@ import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {MAX_COLONY_TRACK_POSITION} from '../../../common/constants';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -36,7 +35,7 @@ export class Naomi extends CeoCard {
     const activeColonies = game.colonies.filter((colony) => colony.isActive);
 
     activeColonies.forEach((colony) => {
-      game.defer(new SimpleDeferredAction(player, () => new OrOptions(
+      player.defer(() => new OrOptions(
         new SelectOption('Move the ' + colony.name + ' tile track marker to its HIGHEST value').andThen(() => {
           colony.trackPosition = MAX_COLONY_TRACK_POSITION;
           return undefined;
@@ -45,7 +44,7 @@ export class Naomi extends CeoCard {
           colony.trackPosition = colony.colonies.length;
           return undefined;
         }),
-      )));
+      ));
     });
     return undefined;
   }

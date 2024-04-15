@@ -63,13 +63,13 @@ describe('ArcadianCommunities', function() {
 
   it('available spaces do not include those where player already has token', () => {
     // Spaces 10 and 11 are valid, adjacent spaces.
-    const first = board.getSpace('10');
+    const first = board.getSpaceOrThrow('10');
     expect(first.spaceType).eq(SpaceType.LAND);
 
-    const second = board.getSpace('11');
+    const second = board.getSpaceOrThrow('11');
     expect(second.spaceType).eq(SpaceType.LAND);
 
-    const neighbor = board.getSpace('05');
+    const neighbor = board.getSpaceOrThrow('05');
     expect(neighbor.spaceType).eq(SpaceType.LAND);
 
     expect(board.getAdjacentSpaces(first)).contains(second);

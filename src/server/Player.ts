@@ -1,7 +1,7 @@
 import * as constants from '../common/constants';
 import {PlayerId} from '../common/Types';
 import {MILESTONE_COST, REDS_RULING_POLICY_COST} from '../common/constants';
-import {CardFinder} from './CardFinder';
+import {cardsFromJSON, ceosFromJSON, corporationCardsFromJSON, newCorporationCard} from './createCard';
 import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
 import {Color} from '../common/Color';
@@ -23,7 +23,8 @@ import {Resource} from '../common/Resource';
 import {CardResource} from '../common/CardResource';
 import {SelectCard} from './inputs/SelectCard';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
-import {Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
+import {SimpleDeferredAction} from './deferredActions/DeferredAction';
+import {Priority} from './deferredActions/Priority';
 import {SelectPaymentDeferred} from './deferredActions/SelectPaymentDeferred';
 import {SelectProjectCardToPlay} from './inputs/SelectProjectCardToPlay';
 import {SelectOption} from './inputs/SelectOption';
@@ -62,7 +63,7 @@ import {CeoExtension} from './CeoExtension';
 import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
 import {message} from './logs/MessageBuilder';
 import {calculateVictoryPoints} from './game/calculateVictoryPoints';
-import {IVictoryPointsBreakdown} from '..//common/game/IVictoryPointsBreakdown';
+import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
 import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
@@ -74,6 +75,7 @@ import {ChooseCards} from './deferredActions/ChooseCards';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {Counter} from './behavior/Counter';
+import {TRSource} from '../common/cards/TRSource';
 
 const THROW_WAITING_FOR = Boolean(process.env.THROW_WAITING_FOR);
 
@@ -95,6 +97,7 @@ export class Player implements IPlayer {
 
   // Terraforming Rating
   private terraformRating: number = 20;
+  public hasIncreasedTerraformRatingThisGeneration: boolean = false;
 
   public get megaCredits(): number {
     return this.stock.megacredits;
@@ -152,6 +155,8 @@ export class Player implements IPlayer {
   public canUsePlantsAsMegacredits: boolean = false;
   // Luna Trade Federation
   public canUseTitaniumAsMegacredits: boolean = false;
+  // Friends in High Places
+  public canUseCorruptionAsMegacredits: boolean = false;
 
   // This generation / this round
   public actionsTakenThisRound: number = 0;
@@ -303,6 +308,7 @@ export class Player implements IPlayer {
   public increaseTerraformRating(steps: number = 1, opts: {log?: boolean} = {}) {
     const raiseRating = () => {
       this.terraformRating += steps;
+      this.hasIncreasedTerraformRatingThisGeneration = true;
 
       if (opts.log === true) {
         this.game.log('${0} gained ${1} TR', (b) => b.player(this).number(steps));
@@ -410,19 +416,9 @@ export class Player implements IPlayer {
     return this.cardIsInEffect(CardName.LUNAR_SECURITY_STATIONS);
   }
 
-  public canReduceAnyProduction(resource: Resource, minQuantity: number = 1): boolean {
-    // in soloMode you don't have to decrease resources
-    const game = this.game;
-    if (game.isSoloMode()) return true;
-    return game.getPlayers().some((p) => p.canHaveProductionReduced(resource, minQuantity, this));
-  }
-
   public canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: IPlayer) {
-    if (resource === Resource.MEGACREDITS) {
-      if ((this.production[resource] + 5) < minQuantity) return false;
-    } else {
-      if (this.production[resource] < minQuantity) return false;
-    }
+    const reducable = this.production[resource] + (resource === Resource.MEGACREDITS ? 5 : 0);
+    if (reducable < minQuantity) return false;
 
     if (resource === Resource.STEEL || resource === Resource.TITANIUM) {
       if (this.alloysAreProtected()) return false;
@@ -431,6 +427,11 @@ export class Player implements IPlayer {
     // The pathfindersExpansion test is just an optimization for non-Pathfinders games.
     if (this.game.gameOptions.pathfindersExpansion && this.productionIsProtected(attacker)) return false;
     return true;
+  }
+
+
+  public maybeBlockAttack(perpetrator: IPlayer, cb: (proceed: boolean) => PlayerInput | undefined): void {
+    this.defer(UnderworldExpansion.maybeBlockAttack(this, perpetrator, cb));
   }
 
   public productionIsProtected(attacker: IPlayer): boolean {
@@ -706,9 +707,7 @@ export class Player implements IPlayer {
   }
 
   public dealForDraft(quantity: number, cards: Array<IProjectCard>): void {
-    for (let i = 0; i < quantity; i++) {
-      cards.push(this.game.projectDeck.draw(this.game, 'bottom'));
-    }
+    cards.push(...this.game.projectDeck.drawN(this.game, quantity, 'bottom'));
   }
 
   /**
@@ -840,6 +839,7 @@ export class Player implements IPlayer {
       auroraiData: card.type === CardType.STANDARD_PROJECT,
       graphene: card.tags.includes(Tag.CITY) || card.tags.includes(Tag.SPACE),
       kuiperAsteroids: card.name === CardName.AQUIFER_STANDARD_PROJECT || card.name === CardName.ASTEROID_STANDARD_PROJECT,
+      corruption: card.tags.includes(Tag.EARTH) && this.cardIsInEffect(CardName.FRIENDS_IN_HIGH_PLACES),
     };
   }
 
@@ -857,6 +857,15 @@ export class Player implements IPlayer {
         const cardsWithFloater = this.getCardsWithResources(CardResource.FLOATER);
         if (cardsWithFloater.length === 1) {
           throw new Error('Cannot spend all floaters to play Stratospheric Birds');
+        }
+      }
+    }
+
+    if (payment.microbes > 0) {
+      if (selectedCard.name === CardName.SOIL_ENRICHMENT && payment.microbes === this.getSpendable('microbes')) {
+        const cardsWithMicrobe = this.getCardsWithResources(CardResource.MICROBE);
+        if (cardsWithMicrobe.length === 1) {
+          throw new Error('Cannot spend all microbes to play Soil Enrichment');
         }
       }
     }
@@ -912,13 +921,16 @@ export class Player implements IPlayer {
     removeResourcesOnCard(CardName.SOYLENT_SEEDLING_SYSTEMS, payment.seeds);
     removeResourcesOnCard(CardName.AURORAI, payment.auroraiData);
     removeResourcesOnCard(CardName.KUIPER_COOPERATIVE, payment.kuiperAsteroids);
+    if (payment.corruption > 0) {
+      UnderworldExpansion.loseCorruption(this, payment.corruption);
+    }
 
     if (payment.megaCredits > 0 || payment.steel > 0 || payment.titanium > 0) {
       PathfindersExpansion.addToSolBank(this);
     }
   }
 
-  public playCard(selectedCard: IProjectCard, payment?: Payment, cardAction: CardAction = 'add'): undefined {
+  public playCard(selectedCard: IProjectCard, payment?: Payment, cardAction: CardAction = 'add'): void {
     if (payment !== undefined) {
       this.pay(payment);
     }
@@ -959,7 +971,7 @@ export class Player implements IPlayer {
 
     switch (cardAction) {
     case 'add':
-      if (selectedCard.name !== CardName.LAW_SUIT) {
+      if (selectedCard.name !== CardName.LAW_SUIT && selectedCard.name !== CardName.PRIVATE_INVESTIGATOR) {
         this.playedCards.push(selectedCard);
       }
       break;
@@ -967,7 +979,7 @@ export class Player implements IPlayer {
     case 'discard':
       this.discardPlayedCard(selectedCard);
       break;
-    // Do nothing. Good for fake cards.
+    // Do nothing. Good for fake cards and replaying events.
     case 'nothing':
       break;
     // Do nothing, used for Double Down.
@@ -975,7 +987,7 @@ export class Player implements IPlayer {
       break;
     }
 
-    // See DeclareCloneTag for why.
+    // See DeclareCloneTag for why this skips cards with clone tags.
     if (!selectedCard.tags.includes(Tag.CLONE) && cardAction !== 'action-only') {
       this.onCardPlayed(selectedCard);
     }
@@ -993,10 +1005,7 @@ export class Player implements IPlayer {
         if (corporation.onCorpCardPlayed === undefined) {
           continue;
         }
-        this.game.defer(
-          new SimpleDeferredAction(
-            this,
-            () => corporation.onCorpCardPlayed?.(this, playedCorporationCard, somePlayer)));
+        this.defer(corporation.onCorpCardPlayed(this, playedCorporationCard, somePlayer));
       }
     }
   }
@@ -1091,13 +1100,13 @@ export class Player implements IPlayer {
       const diff = this.cardsInHand.length * this.cardCost;
       this.stock.deduct(Resource.MEGACREDITS, diff);
     }
+    this.game.log('${0} played ${1}', (b) => b.player(this).card(corporationCard));
     // Calculating this before playing the corporation card, which might change the player's hand size.
     const numberOfCardInHand = this.cardsInHand.length;
     corporationCard.play(this);
     if (corporationCard.initialAction !== undefined || corporationCard.firstAction !== undefined) {
       this.pendingInitialActions.push(corporationCard);
     }
-    this.game.log('${0} played ${1}', (b) => b.player(this).card(corporationCard));
     if (additionalCorp === false) {
       this.game.log('${0} kept ${1} project cards', (b) => b.player(this).number(numberOfCardInHand));
     }
@@ -1306,6 +1315,7 @@ export class Player implements IPlayer {
 
     const playableCards: Array<PlayableCard> = [];
     for (const card of candidateCards) {
+      card.warnings.clear();
       const canPlay = this.canPlay(card);
       if (canPlay !== false) {
         playableCards.push({
@@ -1318,14 +1328,22 @@ export class Player implements IPlayer {
   }
 
   public affordOptionsForCard(card: IProjectCard): CanAffordOptions {
-    const trSource =
-      card.tr ||
-      (card.behavior !== undefined ?
-        getBehaviorExecutor().toTRSource(card.behavior, new Counter(this, card)) :
-        undefined);
+    let trSource: TRSource | undefined = undefined;
+    if (card.tr) {
+      trSource = card.tr;
+    } else {
+      const computedTr = card.computeTr?.(this);
+      if (computedTr !== undefined) {
+        trSource = computedTr;
+      } else if (card.behavior !== undefined) {
+        trSource = getBehaviorExecutor().toTRSource(card.behavior, new Counter(this, card));
+      }
+    }
+    const cost = this.getCardCost(card);
+    const paymentOptionsForCard = this.paymentOptionsForCard(card);
     return {
-      cost: this.getCardCost(card),
-      ...this.paymentOptionsForCard(card),
+      cost,
+      ...paymentOptionsForCard,
       reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
       tr: trSource,
     };
@@ -1333,19 +1351,22 @@ export class Player implements IPlayer {
 
   public canPlay(card: IProjectCard): boolean | YesAnd {
     const options = this.affordOptionsForCard(card);
-    if (!this.canAfford(options)) {
+    const canAfford = this.newCanAfford(options);
+    if (!canAfford.canAfford) {
       return false;
     }
-    return this.simpleCanPlay(card, options);
-  }
-
-  /**
-   * Verify if requirements for the card can be met, ignoring the project cost.
-   * Only made public for tests.
-   */
-  // TODO(kberg): use CanPlayResponse
-  public simpleCanPlay(card: IProjectCard, canAffordOptions?: CanAffordOptions): boolean | YesAnd {
-    return card.canPlay(this, canAffordOptions);
+    const canPlay = card.canPlay(this, options);
+    if (canPlay === false) {
+      return false;
+    }
+    if (canAfford.redsCost > 0) {
+      if (typeof canPlay === 'boolean') {
+        return {redsCost: canAfford.redsCost};
+      } else {
+        return {...canPlay, redsCost: canAfford.redsCost};
+      }
+    }
+    return canPlay;
   }
 
   private maxSpendable(reserveUnits: Units = Units.EMPTY): Payment {
@@ -1363,6 +1384,7 @@ export class Player implements IPlayer {
       auroraiData: this.getSpendable('auroraiData'),
       graphene: this.getSpendable('graphene'),
       kuiperAsteroids: this.getSpendable('kuiperAsteroids'),
+      corruption: this.underworldData.corruption,
     };
   }
 
@@ -1404,6 +1426,7 @@ export class Player implements IPlayer {
       auroraiData: options?.auroraiData ?? false,
       graphene: options?.graphene ?? false,
       kuiperAsteroids: options?.kuiperAsteroids ?? false,
+      corruption: options?.corruption ?? false,
     };
 
     // HOOK: Luna Trade Federation
@@ -1420,11 +1443,12 @@ export class Player implements IPlayer {
     return totalToPay;
   }
 
+  private static CANNOT_AFFORD = {canAfford: false, redsCost: 0} as const;
+
   /**
-   * Returns `true` if the player can afford to pay `options.cost` mc (possibly replaceable with steel, titanium etc.)
-   * and additionally pay the reserveUnits (no replaces here)
+   * Returns information about whether a player can afford to spend money with other costs and ways to pay taken into account.
    */
-  public canAfford(o: number | CanAffordOptions): boolean {
+  public newCanAfford(o: number | CanAffordOptions): {redsCost: number, canAfford: boolean} {
     const options: CanAffordOptions = typeof(o) === 'number' ? {cost: o} : {...o};
 
     // TODO(kberg): These are set both here and in SelectPayment. Consolidate, perhaps.
@@ -1436,14 +1460,14 @@ export class Player implements IPlayer {
       // Special-case heat
       const unitsWithoutHeat = {...reserveUnits, heat: 0};
       if (!this.stock.has(unitsWithoutHeat)) {
-        return false;
+        return Player.CANNOT_AFFORD;
       }
       if (this.availableHeat() < reserveUnits.heat) {
-        return false;
+        return Player.CANNOT_AFFORD;
       }
     } else {
       if (!this.stock.has(reserveUnits)) {
-        return false;
+        return Player.CANNOT_AFFORD;
       }
     }
 
@@ -1452,13 +1476,22 @@ export class Player implements IPlayer {
     if (redsCost > 0) {
       const usableForRedsCost = this.payingAmount(maxPayable, {});
       if (usableForRedsCost < redsCost) {
-        return false;
+        return Player.CANNOT_AFFORD;
       }
     }
 
     const usable = this.payingAmount(maxPayable, options);
 
-    return options.cost + redsCost <= usable;
+    const canAfford = options.cost + redsCost <= usable;
+    return {canAfford, redsCost};
+  }
+
+  /**
+   * Returns `true` if the player can afford to pay `options.cost` mc (possibly replaceable with steel, titanium etc.)
+   * and additionally pay the reserveUnits (no replaces here)
+   */
+  public canAfford(o: number | CanAffordOptions): boolean {
+    return this.newCanAfford(o).canAfford;
   }
 
   private getStandardProjects(): Array<IStandardProjectCard> {
@@ -1597,6 +1630,8 @@ export class Player implements IPlayer {
           message('Take first action of ${0} corporation', (b) => b.card(corp)),
           corp.initialActionText)
           .andThen(() => {
+            game.log('${0} took the first action of ${1} corporation', (b) => b.player(this).card(corp)),
+
             this.deferInitialAction(corp);
             this.pendingInitialActions.splice(this.pendingInitialActions.indexOf(corp), 1);
             return undefined;
@@ -1625,14 +1660,14 @@ export class Player implements IPlayer {
 
   // TODO(kberg): perhaps move to Card
   public deferInitialAction(corp: ICorporationCard) {
-    this.game.defer(new SimpleDeferredAction(this, () => {
+    this.defer(() => {
       if (corp.initialAction) {
         return corp.initialAction(this);
       } else if (corp.firstAction !== undefined) {
         getBehaviorExecutor().execute(corp.firstAction, this, corp);
       }
       return undefined;
-    }));
+    });
   }
 
   private incrementActionsTaken(): void {
@@ -1669,9 +1704,16 @@ export class Player implements IPlayer {
     // Convert Heat
     const convertHeat = new ConvertHeat();
     if (convertHeat.canAct(this)) {
-      action.options.push(new SelectOption('Convert 8 heat into temperature', 'Convert heat').andThen(() => {
+      const option = new SelectOption('Convert 8 heat into temperature', 'Convert heat').andThen(() => {
         return convertHeat.action(this);
-      }));
+      });
+      if (convertHeat.warnings.size > 0) {
+        option.warnings = Array.from(convertHeat.warnings);
+        if (convertHeat.warnings.has('maxtemp')) {
+          option.eligibleForDefault = false;
+        }
+      }
+      action.options.push(option);
     }
 
     const turmoilInput = TurmoilHandler.partyAction(this);
@@ -1818,6 +1860,7 @@ export class Player implements IPlayer {
       pickedCorporationCard: this.pickedCorporationCard?.name,
       // Terraforming Rating
       terraformRating: this.terraformRating,
+      hasIncreasedTerraformRatingThisGeneration: this.hasIncreasedTerraformRatingThisGeneration,
       // Resources
       megaCredits: this.megaCredits,
       megaCreditProduction: this.production.megacredits,
@@ -1840,6 +1883,8 @@ export class Player implements IPlayer {
       canUsePlantsAsMegaCredits: this.canUsePlantsAsMegacredits,
       // Luna Trade Federation
       canUseTitaniumAsMegacredits: this.canUseTitaniumAsMegacredits,
+      // This generation / this round
+      canUseCorruptionAsMegacredits: this.canUseCorruptionAsMegacredits,
       // This generation / this round
       actionsTakenThisRound: this.actionsTakenThisRound,
       actionsThisGeneration: Array.from(this.actionsThisGeneration),
@@ -1898,7 +1943,6 @@ export class Player implements IPlayer {
 
   public static deserialize(d: SerializedPlayer): Player {
     const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
-    const cardFinder = new CardFinder();
 
     player.actionsTakenThisGame = d.actionsTakenThisGame;
     player.actionsTakenThisRound = d.actionsTakenThisRound;
@@ -1909,10 +1953,11 @@ export class Player implements IPlayer {
     player.colonies.cardDiscount = d.cardDiscount;
     player.colonies.tradeDiscount = d.colonyTradeDiscount;
     player.colonies.tradeOffset = d.colonyTradeOffset;
+    player.colonies.setFleetSize(d.fleetSize);
     player.colonies.victoryPoints = d.colonyVictoryPoints;
     player.victoryPointsByGeneration = d.victoryPointsByGeneration;
     player.energy = d.energy;
-    player.colonies.setFleetSize(d.fleetSize);
+    player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
     player.hasTurmoilScienceTagBonus = d.hasTurmoilScienceTagBonus;
     player.heat = d.heat;
     player.megaCredits = d.megaCredits;
@@ -1943,12 +1988,12 @@ export class Player implements IPlayer {
     player.lastCardPlayed = d.lastCardPlayed;
 
     // Rebuild removed from play cards (Playwrights, Odyssey)
-    player.removedFromPlayCards = cardFinder.cardsFromJSON(d.removedFromPlayCards);
+    player.removedFromPlayCards = cardsFromJSON(d.removedFromPlayCards);
 
     player.actionsThisGeneration = new Set<CardName>(d.actionsThisGeneration);
 
     if (d.pickedCorporationCard !== undefined) {
-      player.pickedCorporationCard = cardFinder.getCorporationCardByName(d.pickedCorporationCard);
+      player.pickedCorporationCard = newCorporationCard(d.pickedCorporationCard);
     }
 
     // Rebuild corporation cards
@@ -1957,7 +2002,7 @@ export class Player implements IPlayer {
     // This shouldn't happen
     if (corporations !== undefined) {
       for (const corporation of corporations) {
-        const card = cardFinder.getCorporationCardByName(corporation.name);
+        const card = newCorporationCard(corporation.name);
         if (card === undefined) {
           continue;
         }
@@ -1969,17 +2014,17 @@ export class Player implements IPlayer {
       }
     }
 
-    player.pendingInitialActions = cardFinder.corporationCardsFromJSON(d.pendingInitialActions ?? []);
-    player.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);
-    player.dealtPreludeCards = cardFinder.cardsFromJSON(d.dealtPreludeCards);
-    player.dealtCeoCards = cardFinder.ceosFromJSON(d.dealtCeoCards);
-    player.dealtProjectCards = cardFinder.cardsFromJSON(d.dealtProjectCards);
-    player.cardsInHand = cardFinder.cardsFromJSON(d.cardsInHand);
+    player.pendingInitialActions = corporationCardsFromJSON(d.pendingInitialActions ?? []);
+    player.dealtCorporationCards = corporationCardsFromJSON(d.dealtCorporationCards);
+    player.dealtPreludeCards = cardsFromJSON(d.dealtPreludeCards);
+    player.dealtCeoCards = ceosFromJSON(d.dealtCeoCards);
+    player.dealtProjectCards = cardsFromJSON(d.dealtProjectCards);
+    player.cardsInHand = cardsFromJSON(d.cardsInHand);
     // I don't like "as IPreludeCard" but this is pretty safe.
-    player.preludeCardsInHand = cardFinder.cardsFromJSON(d.preludeCardsInHand) as Array<IPreludeCard>;
-    player.ceoCardsInHand = cardFinder.ceosFromJSON(d.ceoCardsInHand);
-    player.playedCards = d.playedCards.map((element: SerializedCard) => deserializeProjectCard(element, cardFinder));
-    player.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);
+    player.preludeCardsInHand = cardsFromJSON(d.preludeCardsInHand) as Array<IPreludeCard>;
+    player.ceoCardsInHand = ceosFromJSON(d.ceoCardsInHand);
+    player.playedCards = d.playedCards.map((element: SerializedCard) => deserializeProjectCard(element));
+    player.draftedCards = cardsFromJSON(d.draftedCards);
 
     player.timer = Timer.deserialize(d.timer);
 
@@ -1987,22 +2032,20 @@ export class Player implements IPlayer {
       player.underworldData = d.underworldData;
     }
 
-    if (d.hasIncreasedTerraformRatingThisGeneration === true) {
-      const card = player.playedCards.find((card) => card.name === CardName.UNITED_NATIONS_MARS_INITIATIVE);
-      card?.onIncreaseTerraformRating?.(player, player, 1);
-      const card2 = player.playedCards.find((card) => card.name === CardName.PRISTAR);
-      card2?.onIncreaseTerraformRating?.(player, player, 1);
-    }
-
     return player;
   }
 
+  public getOpponents(): Array<IPlayer> {
+    return this.game.getPlayers().filter((p) => p !== this);
+  }
+
   /* Shorthand for deferring things */
-  public defer(input: PlayerInput | undefined | void, priority: Priority = Priority.DEFAULT): void {
+  public defer(input: PlayerInput | undefined | void | (() => PlayerInput | undefined), priority: Priority = Priority.DEFAULT): void {
     if (input === undefined) {
       return;
     }
-    const action = new SimpleDeferredAction(this, () => input, priority);
+    const cb = typeof(input) === 'function' ? input : () => input;
+    const action = new SimpleDeferredAction(this, cb, priority);
     this.game.defer(action);
   }
 }

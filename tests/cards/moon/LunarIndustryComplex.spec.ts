@@ -41,7 +41,7 @@ describe('LunarIndustryComplex', () => {
     card.play(player);
 
     const placeMineTile = cast(game.deferredActions.pop(), PlaceMoonMineTile);
-    placeMineTile.execute()!.cb(moonData.moon.getSpace('m02'));
+    placeMineTile.execute()!.cb(moonData.moon.getSpaceOrThrow('m02'));
 
     expect(moonData.miningRate).eq(1);
     expect(player.getTerraformRating()).eq(15);

@@ -42,7 +42,7 @@ describe('LunaTradeFederation', () => {
 
   //   runAllActions(game);
   //   const selectSpace = cast(player.popWaitingFor(), SelectSpace);
-  //   selectSpace.cb(moonData.moon.getSpace('m02'));
+  //   selectSpace.cb(moonData.moon.getSpaceOrThrow('m02'));
   //   runAllActions(game);
 
   //   expect(moonData.miningRate).eq(1);

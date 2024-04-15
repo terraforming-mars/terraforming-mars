@@ -1,8 +1,9 @@
 <template>
   <div :class="getCardClasses(card)">
-      <div class="card-content-wrapper" v-i18n>
+      <div class="card-content-wrapper" v-i18n @mouseover="hovering = true" @mouseleave="hovering = false">
           <div v-if="!isStandardProject()" class="card-cost-and-tags">
               <CardCost :amount="getCost()" :newCost="getReducedCost()" />
+              <div v-if="showPlayerCube" :class="playerCubeClass"></div>
               <card-help v-show="hasHelp" :name="card.name" />
               <CardTags :tags="getTags()" />
           </div>
@@ -35,16 +36,8 @@ import {Tag} from '@/common/cards/Tag';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {CardResource} from '@/common/CardResource';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
-import {CardName} from '@/common/cards/CardName';
+import {Color} from '@/common/Color';
 import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
-
-const CARDS_WITH_EXTERNAL_DOCUMENTATION = [
-  CardName.BOTANICAL_EXPERIENCE,
-  CardName.LUNA_ECUMENOPOLIS,
-  CardName.ROBOTIC_WORKFORCE,
-  CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE,
-  CardName.SAGITTA_FRONTIER_SERVICES,
-];
 
 export default Vue.extend({
   name: 'Card',
@@ -72,6 +65,12 @@ export default Vue.extend({
       type: Object as () => CardModel | undefined,
       required: false,
     },
+    // Cube is only shown when actionUsed is true.
+    cubeColor: {
+      type: String as () => Color,
+      required: false,
+      default: Color.NEUTRAL,
+    },
   },
   data() {
     const cardName = this.card.name;
@@ -79,6 +78,7 @@ export default Vue.extend({
 
     return {
       cardInstance: card,
+      hovering: false,
     };
   },
   methods: {
@@ -113,9 +113,12 @@ export default Vue.extend({
       const classes = ['card-container', 'filterDiv', 'hover-hide-res'];
       classes.push('card-' + card.name.toLowerCase().replace(/ /g, '-'));
 
-      if (this.actionUsed || card.isDisabled) {
+      if (card.isDisabled) {
+        classes.push('card-unavailable');
+      } else if (!getPreferences().experimental_ui && this.actionUsed) {
         classes.push('card-unavailable');
       }
+
       if (this.isStandardProject()) {
         classes.push('card-standard-project');
       }
@@ -155,7 +158,13 @@ export default Vue.extend({
       return this.cardInstance.resourceType ?? CardResource.RESOURCE_CUBE;
     },
     hasHelp(): boolean {
-      return CARDS_WITH_EXTERNAL_DOCUMENTATION.includes(this.card.name) && getPreferences().experimental_ui;
+      return this.hovering && this.cardInstance.metadata.hasExternalHelp === true;
+    },
+    showPlayerCube(): boolean {
+      return getPreferences().experimental_ui && this.actionUsed;
+    },
+    playerCubeClass(): string {
+      return `board-cube board-cube--${this.cubeColor}`;
     },
   },
 });

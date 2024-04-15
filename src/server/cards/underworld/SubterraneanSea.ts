@@ -4,8 +4,8 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {IPlayer} from '../../IPlayer';
-import {SelectSpace} from '../../inputs/SelectSpace';
 import {Tag} from '../../../common/cards/Tag';
+import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 
 export class SubterraneanSea extends Card implements IProjectCard {
   constructor() {
@@ -37,14 +37,16 @@ export class SubterraneanSea extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: IPlayer) {
-    return player.game.canAddOcean() && this.availableSpaces(player).length > 0;
+    if (!player.game.canAddOcean()) {
+      this.warnings.add('maxoceans');
+    }
+    return this.availableSpaces(player).length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace('Select space for ocean tile', this.availableSpaces(player))
-      .andThen((space) => {
-        player.game.addOcean(player, space);
-        return undefined;
-      });
+    player.game.defer(new PlaceOceanTile(player, {
+      spaces: this.availableSpaces(player),
+    }));
+    return undefined;
   }
 }

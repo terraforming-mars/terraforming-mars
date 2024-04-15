@@ -1,3 +1,4 @@
+import * as responses from './responses';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
 import {Database} from '../database/Database';
@@ -11,20 +12,54 @@ import {Player} from '../Player';
 import {Server} from '../models/ServerModel';
 import {ServeAsset} from './ServeAsset';
 import {NewGameConfig} from '../../common/game/NewGameConfig';
-import {GameId, PlayerId, SpectatorId} from '../../common/Types';
+import {safeCast, isGameId, isSpectatorId, isPlayerId} from '../../common/Types';
 import {generateRandomId} from '../utils/server-ids';
 import {IGame} from '../IGame';
 import {Request} from '../Request';
 import {Response} from '../Response';
+import {QuotaConfig, QuotaHandler} from '../server/QuotaHandler';
+import {durationToMilliseconds} from '../utils/durations';
+
+function get(): QuotaConfig {
+  const defaultQuota = {limit: 1, perMs: 1}; // Effectively, no limit.
+  const val = process.env.GAME_QUOTA;
+  try {
+    if (val !== undefined) {
+      const struct = JSON.parse(val);
+      let {limit, per} = struct;
+      if (limit === undefined) {
+        throw new Error('limit is absent');
+      }
+      limit = Number.parseInt(limit);
+      if (isNaN(limit)) {
+        throw new Error('limit is invalid');
+      }
+      if (per === undefined) {
+        throw new Error('per is absent');
+      }
+      const perMs = durationToMilliseconds(per);
+      if (isNaN(perMs)) {
+        throw new Error('perMillis is invalid');
+      }
+      return {limit, perMs};
+    }
+    return defaultQuota;
+  } catch (e) {
+    console.warn('While initialzing quota:', (e instanceof Error ? e.message : e));
+    return defaultQuota;
+  }
+}
 
 // Oh, this could be called Game, but that would introduce all kinds of issues.
-
 // Calling get() feeds the game to the player (I think, and calling put creates a game.)
 // So, that should be fixed, you know.
 export class GameHandler extends Handler {
   public static readonly INSTANCE = new GameHandler();
-  private constructor() {
+  private quotaHandler;
+
+  private constructor(quotaConfig: QuotaConfig = get()) {
     super();
+    this.quotaHandler = new QuotaHandler(quotaConfig);
   }
 
   public static boardOptions(board: RandomBoardOption | BoardName): Array<BoardName> {
@@ -50,22 +85,28 @@ export class GameHandler extends Handler {
   // would be better.
   public override put(req: Request, res: Response, ctx: Context): Promise<void> {
     return new Promise((resolve) => {
+      if (this.quotaHandler.measure(ctx) === false) {
+        responses.quotaExceeded(req, res);
+        resolve();
+        return;
+      }
+
       let body = '';
       req.on('data', function(data) {
         body += data.toString();
       });
       req.once('end', async () => {
         try {
-          const gameReq: NewGameConfig = JSON.parse(body);
-          const gameId = generateRandomId('g') as GameId;
-          const spectatorId = generateRandomId('s') as SpectatorId;
+          const gameReq = JSON.parse(body) as NewGameConfig;
+          const gameId = safeCast(generateRandomId('g'), isGameId);
+          const spectatorId = safeCast(generateRandomId('s'), isSpectatorId);
           const players = gameReq.players.map((obj: any) => {
             return new Player(
               obj.name,
               obj.color,
               obj.beginner,
               Number(obj.handicap), // For some reason handicap is coming up a string.
-              generateRandomId('p') as PlayerId,
+              safeCast(generateRandomId('p'), isPlayerId),
             );
           });
           let firstPlayerIdx = 0;
@@ -114,6 +155,7 @@ export class GameHandler extends Handler {
             soloTR: gameReq.soloTR,
             customCorporationsList: gameReq.customCorporationsList,
             bannedCards: gameReq.bannedCards,
+            includedCards: gameReq.includedCards,
             customColoniesList: gameReq.customColoniesList,
             customPreludes: gameReq.customPreludes,
             requiresVenusTrackCompletion: gameReq.requiresVenusTrackCompletion,
@@ -142,12 +184,13 @@ export class GameHandler extends Handler {
             game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, seed, spectatorId);
           }
           GameLoader.getInstance().add(game);
-          ctx.route.writeJson(res, Server.getSimpleGameModel(game));
+          responses.writeJson(res, Server.getSimpleGameModel(game));
         } catch (error) {
-          ctx.route.internalServerError(req, res, error);
+          responses.internalServerError(req, res, error);
         }
         resolve();
       });
     });
   }
 }
+

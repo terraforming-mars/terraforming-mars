@@ -18,6 +18,7 @@ export class AstraMechanica extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: '',
+        hasExternalHelp: true,
         renderData: CardRenderer.builder((b) => {
           b.cards(2, {secondaryTag: Tag.EVENT}).asterix();
         }),
@@ -31,12 +32,23 @@ export class AstraMechanica extends Card implements IProjectCard {
       if (card.type !== CardType.EVENT) {
         return false;
       }
-      if ((card.tilesBuilt ?? []).some(isSpecialTile)) {
+      if (card.name === CardName.PATENT_MANIPULATION || card.name === CardName.RETURN_TO_ABANDONED_TECHNOLOGY) {
+        return false;
+      }
+      if (card.name === CardName.HOSTILE_TAKEOVER) {
+        return false;
+      }
+      if (card.tilesBuilt.some(isSpecialTile)) {
         return false;
       }
       return true;
     });
   }
+
+  public override bespokeCanPlay(player: IPlayer) {
+    return this.getCards(player).length > 0;
+  }
+
   public override bespokePlay(player: IPlayer) {
     const events = this.getCards(player);
     if (events.length === 0) {
@@ -53,6 +65,7 @@ export class AstraMechanica extends Card implements IProjectCard {
           for (const card of cards) {
             player.playedCards = player.playedCards.filter((c) => c.name !== card.name);
             player.cardsInHand.push(card);
+            card.onDiscard?.(player);
             player.game.log('${0} returned ${1} to their hand', (b) => b.player(player).card(card));
           }
           return undefined;

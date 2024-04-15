@@ -12,7 +12,7 @@ describe('MiningMarketInsider', () => {
     player.playedCards.push(card);
 
     function identify(player: IPlayer) {
-      UnderworldExpansion.identify(game, UnderworldExpansion.identifiableSpaces(game)[0], player);
+      UnderworldExpansion.identify(game, UnderworldExpansion.identifiableSpaces(player)[0], player);
     }
     function simulateFinishingAction(player: IPlayer) {
       player.actionsTakenThisGame++;

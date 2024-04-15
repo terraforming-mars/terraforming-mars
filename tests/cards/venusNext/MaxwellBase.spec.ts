@@ -6,11 +6,10 @@ import {StratosphericBirds} from '../../../src/server/cards/venusNext/Stratosphe
 import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Resource} from '../../../src/common/Resource';
-import {cast, churnAction, fakeCard, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
+import {cast, churnAction, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {Tag} from '../../../src/common/cards/Tag';
-import {CardResource} from '../../../src/common/CardResource';
 import {testGame} from '../../TestGame';
+import {FloaterUrbanism} from '../../../src/server/cards/pathfinders/FloaterUrbanism';
 
 describe('MaxwellBase', function() {
   let card: MaxwellBase;
@@ -24,19 +23,19 @@ describe('MaxwellBase', function() {
 
   it('Can not play without energy production', function() {
     setVenusScaleLevel(game, 12);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can not play if Venus requirement not met', function() {
     player.production.add(Resource.ENERGY, 1);
     setVenusScaleLevel(game, 10);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
     player.production.add(Resource.ENERGY, 1);
     setVenusScaleLevel(game, 12);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     cast(card.play(player), undefined);
     runAllActions(game);
@@ -70,16 +69,10 @@ describe('MaxwellBase', function() {
 
   // This may seem like a weird test, but it's just verifying that a change
   // removing legacy code works correctly.
-  //
-  // TODO(kberg): Replace this hand-made card with Floater Urbanism.
   it('can Play - for a Venus card with an unusual resource', function() {
     expect(card.canAct(player)).is.false;
 
-    const fake = fakeCard({
-      cost: 1,
-      tags: [Tag.VENUS],
-      resourceType: CardResource.SYNDICATE_FLEET,
-    });
+    const fake = new FloaterUrbanism();
     player.playedCards.push(fake);
 
     expect(card.canAct(player)).is.true;

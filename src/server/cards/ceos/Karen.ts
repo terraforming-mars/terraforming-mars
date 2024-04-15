@@ -3,7 +3,6 @@ import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {IPreludeCard} from '../prelude/IPreludeCard';
 import {PreludesExpansion} from '../../preludes/PreludesExpansion';
 
 export class Karen extends CeoCard {
@@ -20,13 +19,16 @@ export class Karen extends CeoCard {
     });
   }
 
+  public override canAct(player: IPlayer) {
+    if (!player.game.preludeDeck.canDraw(player.game.generation)) {
+      this.warnings.add('deckTooSmall');
+    }
+    return super.canAct(player);
+  }
   public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
     const game = player.game;
-    const cards: Array<IPreludeCard> = [];
-    for (let i = 0; i < game.generation; i++) {
-      cards.push(game.preludeDeck.draw(game));
-    }
+    const cards = game.preludeDeck.drawN(game, game.generation);
     return PreludesExpansion.playPrelude(player, cards);
   }
 }

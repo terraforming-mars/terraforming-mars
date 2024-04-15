@@ -1,4 +1,5 @@
-import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
+import {DeferredAction} from '../deferredActions/DeferredAction';
+import {Priority} from '../deferredActions/Priority';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {Tile} from '../Tile';
 import {IPlayer} from '../IPlayer';

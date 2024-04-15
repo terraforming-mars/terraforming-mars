@@ -45,7 +45,7 @@ describe('GeologicalExpedition', function() {
   it('City tile on a space colony, no bonus', () => {
     addCity(player, SpaceName.GANYMEDE_COLONY);
 
-    expect(game.board.getSpace(SpaceName.GANYMEDE_COLONY).tile?.tileType).eq(TileType.CITY);
+    expect(game.board.getSpaceOrThrow(SpaceName.GANYMEDE_COLONY).tile?.tileType).eq(TileType.CITY);
 
     expect(player.stock.asUnits()).deep.eq(Units.EMPTY);
     expect(microbeCard.resourceCount).eq(0);

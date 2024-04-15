@@ -10,7 +10,7 @@ import {LogMessageDataType} from '../../common/logs/LogMessageDataType';
 export class GameLogs {
   private getLogsForGeneration(messages: Array<LogMessage>, generation: number): Array<LogMessage> {
     let foundStart = generation === 1;
-    const newMessages: Array<LogMessage> = [];
+    const newMessages = [];
     for (const message of messages) {
       if (message.type === LogMessageType.NEW_GENERATION) {
         const value = Number(message.data[0]?.value);

@@ -1,7 +1,7 @@
 require('dotenv').config();
 import * as fs from 'fs';
 
-import {ALL_MODULE_MANIFESTS} from '../cards/AllCards';
+import {ALL_MODULE_MANIFESTS} from '../cards/AllManifests';
 import {CardManifest, GlobalEventManifest, ModuleManifest} from '../cards/ModuleManifest';
 import {ICard} from '../cards/ICard';
 import {GameModule} from '../../common/cards/GameModule';
@@ -66,8 +66,7 @@ class CardProcessor {
       type: card.type,
       requirements: card.requirements ?? [],
       metadata: card.metadata,
-      warning: card.warning,
-      productionBox: Units.isUnits(production) ? Units.of(production) : Units.EMPTY, // Dynamic units aren't used on on the client side.
+      productionBox: Units.isUnits(production) ? production : Units.EMPTY, // Dynamic units aren't used on on the client side.
       resourceType: card.resourceType,
       startingMegaCredits: startingMegaCredits,
       cardCost: cardCost,

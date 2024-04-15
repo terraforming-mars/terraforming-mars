@@ -1,10 +1,11 @@
 import {IPlayer} from '../IPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {Space} from '../boards/Space';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 import {PlacementType} from '../boards/PlacementType';
 
-export class PlaceCityTile extends DeferredAction {
+export class PlaceCityTile extends DeferredAction<Space | undefined> {
   constructor(
     player: IPlayer,
     private options?: {
@@ -21,11 +22,13 @@ export class PlaceCityTile extends DeferredAction {
     const title = this.options?.title ?? this.getTitle(type);
 
     if (spaces.length === 0) {
+      this.cb(undefined);
       return undefined;
     }
     return new SelectSpace(title, spaces)
       .andThen((space) => {
         this.player.game.addCity(this.player, space);
+        this.cb(space);
         return undefined;
       });
   }

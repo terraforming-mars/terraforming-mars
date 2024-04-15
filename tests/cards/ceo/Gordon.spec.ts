@@ -28,7 +28,7 @@ describe('Gordon', function() {
 
   it('Can place cities next to other cities', function() {
     const board = game.board;
-    const space = board.getSpace('35');
+    const space = board.getSpaceOrThrow('35');
     addCity(player, space.id);
     const availableSpacesForCity = board.getAvailableSpacesForCity(player);
     const spacesNextToCity = board.getAdjacentSpaces(space);

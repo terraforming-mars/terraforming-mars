@@ -28,7 +28,7 @@ describe('AsteroidDeflectionSystem', function() {
 
   it('Should act', function() {
     player.playedCards.push(card);
-    expect(card.canAct()).is.true;
+    expect(card.canAct(player)).is.true;
 
     while (player.game.projectDeck.discardPile.find((card) => card.tags.includes(Tag.SPACE)) === undefined) {
       card.action(player);

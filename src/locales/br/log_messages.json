@@ -69,7 +69,6 @@
     "${0} spent 1 floater to trade with ${1}": "${0} gastou 1 flutuador para negociar com ${1}",
     "${0} traded with ${1}": "${0} negociou com ${1}",
     "${0} used ${1} standard project": "${0} usou projeto-padrão ${1}",
-    "${0} used ${1} standard project,sold ${2} card(s)": "${0} usou projeto-padrão ${1}, e vendeu ${2} carta(s)",
     "${0} built a colony on ${1}": "${0} construiu uma colônia em ${1}",
     "${0} increased ${1} colony track ${2} step(s)": "${0} aumentou o marcador da colônia ${1} em ${2} nível(s)",
     "${0} bought ${1} card(s)": "${0} comprou ${1} carta(s)",
@@ -84,7 +83,6 @@
     "${0} copied ${1} production with ${2}": "${0} copiou a produção de ${1} com ${2}",
     "${0} used ${1} action with ${2}": "${0} fez a ação ${1} com ${2}",
     "${0} is the new chairman and gains ${1} TR": "${0} é o novo presidente e ganhou (${1}) IT",
-    "Turmoil phase has been resolved": "A fase de Reviravolta terminou",
 
 
     "${0} drew ${1}": "${0} comprou ${1}",

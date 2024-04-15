@@ -1,6 +1,8 @@
 {
     "Terraforming Mars": "Terraforming Mars",
+    "Read our changelog to get the latest updates.": "Leggi il nostro changelog per conoscere gli ultimi aggiornamenti",
     "Create New Game": "Crea Nuova Partita",
+    "Looking for people to play with": "Sei alla ricerca di persone con cui giocare",
     "№ of Players": "Numero di Giocatori",
     "Expansions": "Espansioni",
     "Options": "Opzioni",
@@ -15,12 +17,16 @@
     "Blue": "Blu",
     "Black": "Nero",
 
+
     "tharsis": "Tharsis",
     "hellas": "Hellas",
     "elysium": "Elysium",
     "random": "Casuale",
 
     "Prelude": "Prelude",
+    "Prelude 2(β)": "Prelude 2(β)",
+    "Pathfinders": "Pathfinders",
+    "CEOs": "CEO",
     "Venus Next": "Venus Next",
     "Custom Corporation list": "Lista Corporation Personalizzata",
     "World Government Terraforming": "Terraformazione del Governo Mondiale",
@@ -183,6 +189,8 @@
     "Base": "Base",
     "Agendas": "Politiche",
     "Random": "Casuale",
+    "random official": "Causale Ufficiali",
+    "random all": "Causale Tutte",    
     "The Moon": "The Moon",
     "Mandatory Moon Terraforming":"Terraformazione della Luna Obbligatoria",
     "Drafted cards": "Carte dopo la fase di Draft",
@@ -205,7 +213,6 @@
      "Take action": "Procedi",
      "Select": "Seleziona",
      "Take": "Prendi",
-     "Save": "Salva",
      "Pay":"Paga",
      "Remove floaters": "Rimuovi Galleggianti",
      "Add floater": "Aggiungi Galleggiante",
@@ -232,7 +239,7 @@
     "Sell Patents": "Vendita Brevetti",
     "(Discard any number of cards to gain that amount of M€.)": "(Scarta qualsiasi numero di carte per ottenere lo stesso ammontare di M€.)",
     "(Spend 11 M€ to increase your energy production 1 step.)": "(Spendi 11 M€ per incrementare la tua Produzione di Energia di 1 livello.)",
-    "(Spend 14 M€ to raise temperature 1 step.)":"(Spendi 14 M€ per incrementare la Temperatura di 1 livello.)",
+    "(Spend 14 M€ to raise the temperature 1 step.)":"(Spendi 14 M€ per incrementare la Temperatura di 1 livello.)",
     "(Spend 15 M€ to raise Venus 1 step.)": "(Spendi 15 M€ per incrementare Venere di 1 livello.)",
     "(Spend 17 M€ to place a colony.)":"(Spendi 17 M€ per collocare una Colonia.)",
     "(Spend 18 M€ to place an ocean tile.)":"(Spendi 18 M€ per collocare una tessera Oceano.)",
@@ -272,7 +279,12 @@
     "Sell": "Vendi",
     "Undo": "Annulla",
 
-    "All": "Tutto",
+    "All*": "Tutte*",
+    "None*": "Nessuna*",
+    "Invert*": "Inverti*",
+    "All": "Tutte",
+    "None": "Nessuna",
+    "Invert": "Inverti",
     "Corporate Era": "Corporate Era",
     "Randomize board tiles": "Randomizza tessere della plancia",
     "Set Predefined Game": "Imposta Gioco Predefinito",
@@ -280,6 +292,7 @@
     "Fan-made": "Fan-made",
     "Community": "Community",
     "Exclude some cards": "Escludi alcune carte",
+    "Include some cards": "Includi alcune carte",
     "Custom Colonies list": "Lista Personalizzata Colonie",
     "Remove negative Global Events": "Rimuovi gli Eventi Globali negativi",
     "Fast mode": "Modalità rapida",
@@ -290,16 +303,27 @@
     "Venus Milestone/Award": "Milestone/Riconoscimento di Venere",
     "Mandatory Venus Terraforming": "Terraformazione di Venere Obbligatoria",
     "63 TR solo mode": "Modalità in solitario a 63 TT",
-    "Cards to exclude from the game": "Carte da escludere dal gioco",
+    "Cards to exclude from the game": "Carte da escludere dalla partita",
     "Start typing the card name to exclude": "Inizia a digitare il nome della carta da escludere",
     "Filter": "Filtra",
     "TR Boost": "Aumenta TT",
     "Player ${0} name": "Nome del Giocatore ${0}",
     "Multiplayer Options": "Opzioni Multigiocatore",
-    "Community": "Community"
+    "Hide discount on cards": "Nascondi lo sconto sulle carte",
+    "Hide sidebar notification": "Nascondi la barra laterale delle notifiche",
+    "After": "Dopo",
+    "Reduce": "Togli",
+    "VP every": "VP ogni",
+    "Plus": "Aggiungi ",
+    "seconds per action": "secondi per azione",
+    "min": "min",
+    "Player Settings": "Impostazioni Giocatore",
+    "Solo": "Solitario",
+    "Custom Preludes list": "Lista Preludes Personalizzata",
+    "Starting CEOs": "CEO iniziali",
 
+    "Cards to include in the game": "Carte da includere dalla partita",
 
-
-
+    " Not affiliated with FryxGames, Asmodee Digital or Steam in any way. ": " Non affiliato a FryxGames, Asmodee Digital o Steam in alcun modo. "
 
 }

@@ -1,4 +1,3 @@
-
 <template>
     <div class="turmoil" v-trim-whitespace>
       <div class="events-board">

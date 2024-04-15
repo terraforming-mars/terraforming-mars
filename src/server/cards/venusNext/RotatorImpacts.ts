@@ -46,7 +46,7 @@ export class RotatorImpacts extends Card implements IActionCard {
   }
 
   public action(player: IPlayer) {
-    const opts: Array<SelectOption> = [];
+    const opts = [];
 
     const addResource = new SelectOption('Pay 6 M€ to add 1 asteroid to this card', 'Pay').andThen(() => this.addResource(player));
     const spendResource = new SelectOption('Remove 1 asteroid to raise Venus 1 step', 'Remove asteroid').andThen(() => this.spendResource(player));

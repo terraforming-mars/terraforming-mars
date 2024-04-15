@@ -21,7 +21,8 @@
   "Increase your M€ production 3 steps. Draw 3 event cards that do not have a space tag.": "Ziehe 3 Ereigniskarten ohne Weltraumsymbol. Erhöhe deine M€-Produktion um 3.",
 
   "Research Grant": "Forschungs-Bewilligung",
-  "Increase your energy production by 1. Gain 14 M€.": "Erhöhe deine Energie-Produktion um 1. Erhalte 14 M€.",
+  "Research Grant:Pathfinders": "Forschungs-Bewilligung",
+  "Increase your energy production 1 step. Gain 14 M€.": "Erhöhe deine Energie-Produktion um 1. Erhalte 14 M€.",
 
   "Strategic Base Planning": "Strategische Basisplannung",
   "Pay 8M€. Place a city. Place a colony.": "Zahle 8 M€. Errichte eine Kolonie. Platziere ein Stadtplättchen.",
@@ -33,9 +34,11 @@
   "REVEALED BEFORE ANY OTHER PRELUDE. You become starting player for the game. Choose and set a ruling policy for the first generation. Gain 12 M€.": "WIRD VOR JEDER ANDEREN PRELUDE-KARTE AUFGEDECKT. Du wirst zum Startspieler des Spiels. Bestimme die regierende Partei. Erhalte 12 M€.",
 
   "Valuable Gases": "Wertvolle Gase",
+  "Valuable Gases:Pathfinders": "Wertvolle Gase",
   "Gain 10 M€. Play an active floater card from hand, ignoring requirements, and add 5 floaters to it.": "Erhalte 10 M€. Spiele eine blaue Karte aus, die Schweber nutzt und ignoriere dabei ihre Bedingungen. Füge ihr 5 Schweber hinzu.",
 
-  "Venus first": "Venus First",
+  "Venus First": "Venus First",
+  "Venus First:Pathfinders": "Venus First",
   "Raise Venus 2 steps. Draw 2 Venus cards.": "Erhöhe Venus um 4%. Ziehe 2 Venuskarten.",
 
   "Vital Colony": "Grundlegende Kolonie",

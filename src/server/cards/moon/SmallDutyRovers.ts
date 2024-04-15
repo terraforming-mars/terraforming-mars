@@ -8,6 +8,7 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {Resource} from '../../../common/Resource';
 import {Size} from '../../../common/cards/render/Size';
+import {TileType} from '../../../common/TileType';
 import {all} from '../Options';
 import {Card} from '../Card';
 
@@ -40,8 +41,10 @@ export class SmallDutyRovers extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     const moonData = MoonExpansion.moonData(player.game);
-    const gain = moonData.moon.spaces.filter((s) => s.tile !== undefined && s.spaceType !== SpaceType.COLONY).length;
-
+    let gain = moonData.moon.spaces.filter((s) => s.tile !== undefined && s.spaceType !== SpaceType.COLONY).length;
+    if (moonData.moon.spaces.some((s) => s.tile?.tileType === TileType.LUNAR_MINE_URBANIZATION)) {
+      gain++;
+    }
     player.stock.add(Resource.MEGACREDITS, gain, {log: true});
 
     return undefined;

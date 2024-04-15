@@ -39,7 +39,7 @@ describe('MareNubiumMine', () => {
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.miningRate).eq(1);
 
-    const mareNubium = moonData.moon.getSpace(MoonSpaces.MARE_NUBIUM);
+    const mareNubium = moonData.moon.getSpaceOrThrow(MoonSpaces.MARE_NUBIUM);
     expect(mareNubium.player).eq(player);
     expect(mareNubium.tile!.tileType).eq(TileType.MOON_MINE);
   });

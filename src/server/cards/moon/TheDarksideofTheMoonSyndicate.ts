@@ -14,7 +14,6 @@ import {Size} from '../../../common/cards/render/Size';
 import {Phase} from '../../../common/Phase';
 import {all} from '../Options';
 import {Payment} from '../../../common/inputs/Payment';
-import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
 export class TheDarksideofTheMoonSyndicate extends CorporationCard {
   constructor() {
@@ -64,15 +63,13 @@ export class TheDarksideofTheMoonSyndicate extends CorporationCard {
     if (this.resourceCount > 0) {
       orOptions.options.push(new SelectOption('Remove 1 syndicate fleet from this card to steal 2M€ from every opponent.', 'Remove syndicate fleet').andThen(() => {
         player.removeResourceFrom(this);
-        const game = player.game;
-        for (const target of game.getPlayers()) {
-          if (target === player) continue;
-          target.defer(UnderworldExpansion.maybeBlockAttack(target, player, (proceed) => {
+        for (const target of player.getOpponents()) {
+          target.maybeBlockAttack(player, (proceed) => {
             if (proceed) {
               target.stock.steal(Resource.MEGACREDITS, 2, player);
             }
             return undefined;
-          }));
+          });
         }
         return undefined;
       }));

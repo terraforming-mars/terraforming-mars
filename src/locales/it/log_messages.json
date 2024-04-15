@@ -13,7 +13,6 @@
     "${0} spent ${1} titanium to trade with ${2}": "${0} ha speso ${1} Titanio per commerciare con ${2}",
     "${0} spent 1 floater to trade with ${1}": "${0} ha speso 1 Galleggiante per commerciare con ${1}",
     "${0} used ${1} standard project": "${0} ha usato il Progetto Standard ${1} ",
-    "${0} used ${1} standard project,sold ${2} card(s)": "${0} ha usato il Progetto Standard ${1} e ha venduto ${2} carta/e",
     "${0} built a colony on ${1}": "${0} ha costruito una Colonia su ${1}",
     "${0} bought ${1} card(s)": "${0} ha comprato ${1} carta/e",
     "${0} acted as World Government and increased Venus scale": "${0} ha agito come Governo Mondiale e ha incrementato Venere",
@@ -27,7 +26,6 @@
     "${0} copied ${1} production with ${2}": "${0} ha copiato la Produzione di ${1} usando ${2}",
     "${0} used ${1} action with ${2}": "${0} ha usato l'azione ${1} con ${2}",
     "${0} is the new chairman and gained ${1} TR" : "${0} è il nuovo Presidente e ha incrementato il suo TT di ${1}",
-    "Turmoil phase has been resolved" : "La fase di Turmoil è stata completata",
 
       "${0} gained ${1} ${2}":"${0} ha guadagnato ${1} ${2}",
         "titanium":"Titanio",

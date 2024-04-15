@@ -52,6 +52,9 @@ export default Vue.extend({
   },
   methods: {
     saveData() {
+      if (this.selectedParty === undefined) {
+        return;
+      }
       this.onsave({type: 'party', partyName: this.selectedParty});
     },
     isDominant(partyName: PartyName): boolean {

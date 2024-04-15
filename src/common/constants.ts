@@ -69,6 +69,9 @@ export const BONUS_SECONDS_PER_ACTION = 5;
 // Leaders/CEOs
 export const ASIMOV_AWARD_BONUS = 2;
 
+// Underworld
+export const CORRUPTION_VALUE = 10;
+
 export const ALL_LANGUAGES = [
 	'en',
 	'de',
@@ -83,6 +86,7 @@ export const ALL_LANGUAGES = [
 	'nl',
 	'hu',
 	'jp',
+	'bg',
 	'nb',
 ] as const;
 
@@ -100,6 +104,7 @@ export const LANGUAGES: Record<typeof ALL_LANGUAGES[number], string> = {
 	nl: 'Nederlands',
 	hu: 'Magyar',
 	jp: '日本語',
+  	bg: 'Български',
 	nb: 'Norsk',
 };
 

@@ -4,6 +4,7 @@ import {Game} from '../../src/server/Game';
 import {MockResponse} from './HttpMocks';
 import {TestPlayer} from '../TestPlayer';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
+import {statusCode} from '../../src/common/http/statusCode';
 
 describe('ApiGame', () => {
   let scaffolding: RouteTestScaffolding;
@@ -17,7 +18,7 @@ describe('ApiGame', () => {
   it('no parameter', async () => {
     scaffolding.url = '/api/game';
     await scaffolding.get(ApiGame.INSTANCE, res);
-    expect(res.statusCode).eq(400);
+    expect(res.statusCode).eq(statusCode.badRequest);
     expect(res.content).eq('Bad request: missing id parameter');
   });
 
@@ -26,7 +27,7 @@ describe('ApiGame', () => {
     scaffolding.ctx.gameLoader.add(Game.newInstance('game-valid-id', [player], player));
     scaffolding.url = '/api/game?id=invalidId';
     await scaffolding.get(ApiGame.INSTANCE, res);
-    expect(res.statusCode).eq(404);
+    expect(res.statusCode).eq(statusCode.notFound);
     expect(res.content).eq('Not found: game not found');
   });
 
@@ -57,6 +58,7 @@ describe('ApiGame', () => {
           'aresExtension': false,
           'boardName': 'tharsis',
           'bannedCards': [],
+          'includedCards': [],
           'ceoExtension': false,
           'coloniesExtension': false,
           'communityCardsOption': false,

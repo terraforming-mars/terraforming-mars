@@ -10,7 +10,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {message} from '../../logs/MessageBuilder';
-import {UnderworldExpansion} from '../../../server/underworld/UnderworldExpansion';
 
 export class HiredRaiders extends Card implements IProjectCard {
   constructor() {
@@ -39,21 +38,20 @@ export class HiredRaiders extends Card implements IProjectCard {
       );
     }
 
-    const availablePlayerTargets = player.game.getPlayers().filter((p) => p.id !== player.id);
     const availableActions = new OrOptions();
 
-    availablePlayerTargets.forEach((target) => {
+    player.getOpponents().forEach((target) => {
       if (target.megaCredits > 0) {
         const amountStolen = Math.min(amount, target.megaCredits);
         const optionTitle = message('Steal ${0} M€ from ${1}', (b) => b.number(amountStolen).player(target));
 
         availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
-          target.defer(UnderworldExpansion.maybeBlockAttack(target, player, (proceed) => {
+          target.maybeBlockAttack(player, (proceed) => {
             if (proceed) {
               target.stock.steal(Resource.MEGACREDITS, amountStolen, player);
             }
             return undefined;
-          }));
+          });
           return undefined;
         }));
       }

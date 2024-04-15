@@ -9,6 +9,7 @@ import {sum} from '../../../common/utils/utils';
 import {AndOptions} from '../../inputs/AndOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectResource} from '../../inputs/SelectResource';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export class FocusedOrganization extends PreludeCard implements IActionCard {
   constructor() {
@@ -48,6 +49,9 @@ export class FocusedOrganization extends PreludeCard implements IActionCard {
         }),
       new SelectResource('Select resource to discard', discardableStandardResources, (type) => {
         player.stock.deduct(Units.ResourceMap[type], 1, {log: true});
+        if (type === 'megacredits' || type === 'steel' || type === 'titanium') {
+          PathfindersExpansion.addToSolBank(player);
+        }
         return undefined;
       })).andThen(() => {
       player.drawCard();

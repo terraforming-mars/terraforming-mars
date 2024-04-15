@@ -69,7 +69,7 @@
   "Venus must be 10% or lower. Raise Venus 2 steps.": "条件：金星10％以下. 金星+2段階.",
 
   "Dirigibles": "金星飛行船団",
-  "Action: Add 1 floater to ANY card": "アクション；1浮遊体獲得.",
+  "Action: Add 1 floater to ANY card": "アクション：1浮遊体獲得.",
   "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.": "効果：金星タグプレイ時、このカード上の浮遊体を3MCとして支払ってもよい.",
 
   "Floating Habs": "浮遊ハブ",
@@ -87,7 +87,7 @@
   "Raise Venus 1 step. Increase your heat production 3 steps.": "金星+1段階. 温熱産出+3.",
 
   "Aerial Mappers": "大気図作成者",
-  "Action: Add floater to ANY card.": "アクション；浮遊体を獲得.",
+  "Action: Add floater to ANY card.": "アクション：浮遊体を獲得.",
   "Action: Spend one floater here to draw 1 card.": "アクション：このカード上から1浮遊体除去し、1ドロー.",
 
   "Aerosport Tournament": "空中スポーツトーナメント",
@@ -112,7 +112,7 @@
   "Remove floater": "浮遊体を除去",
 
   "Extractor Balloons": "抽出気球",
-  "Action: Remove 2 floaters here to raise Venus 1 step.": "アクション；このカード上から2浮遊体除去し、金星+1段階.",
+  "Action: Remove 2 floaters here to raise Venus 1 step.": "アクション：このカード上から2浮遊体除去し、金星+1段階.",
   "Add 3 floaters to this card": "このカード上に3浮遊体追加.",
 
   "Forced Precipitation": "強制沈降",
@@ -140,7 +140,7 @@
   "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.": "地球タグ1つ毎にMC産出+1. 火星外予定地「月ノ大都」に都市タイルを配置.",
 
   "Local Shading": "部分遮光",
-  "Action: Spend 1 floater here to raise your M€ production 1 step.": "アクション；このカード上から1浮遊体除去し、MC産出+1.",
+  "Action: Spend 1 floater here to raise your M€ production 1 step.": "アクション：このカード上から1浮遊体除去し、MC産出+1.",
 
   "Maxwell Base": "マックスウェル基地",
   "Action: Add 1 resource to ANOTHER VENUS CARD.": "アクション：金星タグカード上へ1リソース追加.",
@@ -174,9 +174,5 @@
   "Requires Venus 10%. Increase the Venus track 1 step.": "条件：金星10％以上. 金星+1段階.",
 
   "Orbital Reflectors": "起動反射板",
-  "Raise Venus 2 steps. Increase your heat production 2 steps.": "金星+2段階. 温熱産出+2.",
-
-  "Saturn Surfing": "土星サーフィン",
-  "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.": "アクション：このカード上の1浮遊体毎に1MC獲得(最大5MC)し、このカード上から1浮遊体除去.",
-  "Add 1 floater here for every Earth tag you have, including this.": "地球タグ1つ毎にこのカード上に1浮遊体追加."
+  "Raise Venus 2 steps. Increase your heat production 2 steps.": "金星+2段階. 温熱産出+2."
 }

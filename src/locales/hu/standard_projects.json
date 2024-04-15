@@ -1,8 +1,8 @@
 {
     "Buffer Gas": "Puffergáz",
-    "(Spend 16 M€ to increase your TR 1 step. Solo games only.)": 
+    "(Spend 16 M€ to increase your TR 1 step. Solo games only.)":
         "Költs el 16 M€-t, hogy növeld a TR-ed 1 lépéssel. Csak egyjátékos módban.",
-    "(Spend 25 M€ to place a city tile and increase your M€ production 1 step.)": 
+    "(Spend 25 M€ to place a city tile and increase your M€ production 1 step.)":
         "Költs el 25 M€-t, hogy elhelyezz egy várost és növeld a M€ termelésed 1 lépéssel.",
     "(Spend 17 M€ to place a colony.)": "Költs el 17 M€-t, hogy elhelyezz egy kolóniát.",
     "(Spend 23 M€ to place a greenery tile and raise oxygen 1 step.)": "Költs el 23 M€-t, hogy elhelyezz egy növényzetet és növeld az oxigén szinted 1 lépéssel.",
@@ -12,19 +12,19 @@
     "(Discard any number of cards to gain that amount of M€.)": "Dobj el bármennyi kártyát, hogy annyi M€-t szerezz.",
     "Asteroid": "Aszteroida",
     "asteroid": "aszteroida",
-    "(Spend 14 M€ to raise temperature 1 step.)": "Költs el 14 M€-t, hogy növeld a hőmérsékletet 1 lépéssel.",
+    "(Spend 14 M€ to raise the temperature 1 step.)": "Költs el 14 M€-t, hogy növeld a hőmérsékletet 1 lépéssel.",
     "Air Scrapping": "Légszűrés",
     "(Spend 15 M€ to raise Venus 1 step.)": "Költs el 15 M€-t, hogy növeld a Vénusz szintjét 1 lépéssel.",
     "(Spend 18 M€ to place an ocean tile.)": "Költs el 18 M€-t, hogy elhelyezz egy óceán lapkát.",
 
 
     "Build Moon Colony": "Építs Holdbázist",
-    "(Spend 22 M€ and 1 titanium to place a habitat on The Moon and raise your M€ production 1 step.)": 
+    "(Spend 22 M€ and 1 titanium to place a habitat on The Moon and raise your M€ production 1 step.)":
         "Költs el 22 M€-t és 1 titániumot, hogy elhelyezz egy bázist a Holdon és növeld a M€ termelésed 1 lépéssel.",
     "Build Moon Mine": "Építs Holdbányát",
-    "(Spend 20 M€ and 1 titanium to place a mine on the moon and raise steel production 1 step.)": 
+    "(Spend 20 M€ and 1 titanium to place a mine on the moon and raise steel production 1 step.)":
         "Költs el 20 M€-t és 1 titániumot, hogy elhelyezz egy bányát a Holdon és növeld az acél termelésed 1 lépéssel.",
     "Build Moon Road": "Építs Holdi Utat",
-    "(Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.)": 
+    "(Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.)":
         "Költs el 18 M€-t és 1 acélt, hogy elhelyezz egy utat a Holdon és növeld a Logisztikai Rátád 1 lépéssel."
 }

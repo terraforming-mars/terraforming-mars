@@ -34,7 +34,7 @@ export class CometForVenus extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    const venusTagPlayers = player.game.getPlayers().filter((otherPlayer) => otherPlayer.id !== player.id && otherPlayer.tags.count(Tag.VENUS, 'raw') > 0);
+    const venusTagPlayers = player.getOpponents().filter((opponent) => opponent.tags.count(Tag.VENUS, 'raw') > 0);
 
     if (player.game.isSoloMode()|| venusTagPlayers.length === 0) {
       return undefined;
@@ -46,8 +46,13 @@ export class CometForVenus extends Card implements IProjectCard {
           Array.from(venusTagPlayers),
           'Select player to remove up to 4 M€ from',
           'Remove M€')
-          .andThen((selectedPlayer) => {
-            selectedPlayer.stock.deduct(Resource.MEGACREDITS, 4, {log: true, from: player});
+          .andThen((target) => {
+            target.maybeBlockAttack(player, (proceed) => {
+              if (proceed) {
+                target.stock.deduct(Resource.MEGACREDITS, 4, {log: true, from: player});
+              }
+              return undefined;
+            });
             return undefined;
           }),
         new SelectOption('Do not remove M€'));

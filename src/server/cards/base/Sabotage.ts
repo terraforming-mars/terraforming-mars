@@ -37,10 +37,9 @@ export class Sabotage extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     if (player.game.isSoloMode()) return undefined;
 
-    const availablePlayerTargets = player.game.getPlayers().filter((p) => p.id !== player.id);
     const availableActions = new OrOptions();
 
-    availablePlayerTargets.forEach((target) => {
+    player.getOpponents().forEach((target) => {
       if (target.titanium > 0 && !target.alloysAreProtected()) {
         const amountRemoved = Math.min(3, target.titanium);
         const optionTitle = this.title(amountRemoved, 'titanium', target);

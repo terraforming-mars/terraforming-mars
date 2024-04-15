@@ -17,7 +17,7 @@ export type StaticPreludeProperties = {
   metadata: ICardMetadata;
   name: CardName;
   tags?: Array<Tag>;
-  tilesBuilt?: Array<TileType>,
+  tilesBuilt?: ReadonlyArray<TileType>,
   resourceType?: CardResource;
   startingMegacredits?: number,
   victoryPoints?: number | 'special' | IVictoryPoints,
@@ -38,6 +38,7 @@ export abstract class PreludeCard extends Card implements IPreludeCard {
       globalParameterRequirementBonus: properties.globalParameterRequirementBonus,
       metadata: properties.metadata,
       resourceType: properties.resourceType,
+      tilesBuilt: properties.tilesBuilt,
       victoryPoints: properties.victoryPoints,
     };
     if (startingMegaCredits !== undefined) {

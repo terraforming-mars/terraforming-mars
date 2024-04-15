@@ -5,9 +5,10 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {SubterraneanHabitats} from '../../../src/server/cards/moon/SubterraneanHabitats';
 import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
-import {TheWomb} from '../../../src/server/cards/moon/TheWomb';
 import {TestPlayer} from '../../TestPlayer';
 import {MoonHabitatStandardProject} from '../../../src/server/cards/moon/MoonHabitatStandardProject';
+import {newCard} from '../../../src/server/createCard';
+import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 
 describe('SubterraneanHabitats', () => {
   let game: IGame;
@@ -43,23 +44,33 @@ describe('SubterraneanHabitats', () => {
     expect(moonData.habitatRate).eq(1);
   });
 
-  it('effect', () => {
-    // This test and the next show that The Womb needs 2 titanium.
-    const theWomb = new TheWomb();
-    player.production.override({energy: 2});
-    player.titanium = 2;
-    player.megaCredits = 1000;
+  const effectRuns = [
+    {card: CardName.THE_WOMB, titanium: 2, played: false, expected: true},
+    {card: CardName.THE_WOMB, titanium: 1, played: false, expected: false},
+    {card: CardName.THE_WOMB, titanium: 1, played: true, expected: true},
+    {card: CardName.MOMENTUM_VIRUM_HABITAT, titanium: 1, played: false, expected: true},
+    {card: CardName.MOMENTUM_VIRUM_HABITAT, titanium: 0, played: false, expected: false},
+    {card: CardName.MOMENTUM_VIRUM_HABITAT, titanium: 0, played: true, expected: false},
+  ];
+  for (const run of effectRuns) {
+    it('effect ' + JSON.stringify(run), () => {
+      const cardUnderTest = newCard(run.card) as IProjectCard;
+      player.cardsInHand = [cardUnderTest];
 
-    player.cardsInHand = [theWomb];
-    expect(player.getPlayableCards().map((card) => card.card.name)).deep.eq([CardName.THE_WOMB]);
+      player.production.override({energy: 2}); // For The Womb
+      player.titanium = run.titanium;
+      player.megaCredits = 1000;
+      if (run.played) {
+        player.playedCards = [card];
+      }
 
-    player.titanium = 1;
-    expect(player.getPlayableCards().map((card) => card.card.name)).is.empty;
-
-    // And this one shows that with Subterranean Habitats, it needs one fewer unit of titanium.
-    player.playedCards = [card];
-    expect(player.getPlayableCards().map((card) => card.card.name)).deep.eq([CardName.THE_WOMB]);
-  });
+      if (run.expected) {
+        expect(player.getPlayableCards().map((card) => card.card.name)).deep.eq([run.card]);
+      } else {
+        expect(player.getPlayableCards().map((card) => card.card.name)).is.empty;
+      }
+    });
+  }
 
   it('applies to colony standard project', () => {
     player.titanium = 1;

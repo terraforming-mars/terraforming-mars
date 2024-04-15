@@ -1,0 +1,174 @@
+{
+  "Airliners": "Авиолинии",
+  "3 floaters": "3 летящи обекти",
+  "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.": "Изисква наличие на 3 летящи обекта. Увеличете производството на M€ с 2 стъпки. Добавете 2 летящи обекта към КОЯТО И ДА Е карта.",
+
+  "Air Raid": "Въздушно налетче",
+  "Requires that you lose 1 floater. Steal 5 M€ from any player.": "Изисква да загубите 1 летящ обект. Откраднете 5M€ от който и да е играч.",
+  "steal": "открадване",
+
+  "Atmo Collectors": "Събиране на атмосфера",
+  "Action: Add one floater here.": "Действие: Добавете един летящ обект тук.",
+  "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "Действие: Потребете 1 летящ обект тук, за да получите 2 титан, или 3 енергия, или 4 топлина.",
+  "Add 2 floaters to ANY card.": "Добавете 2 летящи обекта към КОЯТО И ДА Е карта.",
+
+  "Community Services": "Обществени услуги",
+  "Increase your M€ production 1 step per CARD WITH NO TAGS, including this.": "Увеличете производството си на M€ с 1 стъпка за ВСЯКА КАРТА БЕЗ ТЕГОВЕ, включително тази.",
+
+  "Conscription": "Консолидация",
+  "next card": "следваща карта",
+  "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "Изисква 2 Земни тага. Следващата карта, която играете този ход, струва с 16 M€ по-малко.",
+
+  "Corona Extractor": "Екстрактор на корона",
+  "Requires 4 science tags. Increase your energy production 4 steps.": "Изисква 4 тага за наука. Увеличете производството си на енергия с 4 стъпки.",
+
+  "Cryo-Sleep": "Крио-сън",
+  "Effect: When you trade, you pay 1 less resource for it.": "Ефект: Когато търгувате, плащате 1 по-малко ресурс за него.",
+
+  "Earth Elevator": "Земен лифт",
+  "Increase your titanium production 3 steps.": "Увеличете производството си на титан с 3 стъпки.",
+
+  "Ecology Research": "Екологични изследвания",
+  "Increase your plant production 1 step for each colony you own. Add 1 animal to ANOTHER card and 2 microbes to ANOTHER card.": "Увеличете производството си на растения с 1 стъпка за всяка колония, която притежавате. Добавете 1 животно към ДРУГА КАРТА и 2 микроби към ДРУГА КАРТА.",
+
+  "Floater Leasing": "Наемане на летящи обекти",
+  "Increase your M€ production 1 step PER 3 floaters you have.": "Увеличете производството си на M€ с 1 стъпка ЗА ВСЯКИ 3 летящи обекта, които притежавате.",
+
+  "Floater Prototypes": "Прототипи на летящи обекти",
+  "Add two floaters to ANOTHER card.": "Добавете 2 летящи обекта към ДРУГА КАРТА.",
+
+  "Floater Technology": "Технология на летящи обекти",
+  "Action: Add 1 floater to ANOTHER card.": "Действие: Добавете 1 летящ обект към ДРУГА КАРТА.",
+
+  "Galilean Waystation": "Станция Галилея",
+  "Increase your M€ production 1 step for every Jovian tag in play.": "Увеличете производството си на M€ с 1 стъпка за всяка Юпитер таг в играта.",
+
+  "Heavy Taxation": "Тежки данъци",
+  "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "Изисква 2 Земни тага. Увеличете производството си на M€ с 2 стъпки и спечелете 4 M€.",
+
+  "Ice Moon Colony": "Колония на ледения месец",
+  "Place 1 colony and 1 ocean tile.": "Поставете 1 колония и 1 океански плочка.",
+
+  "Impactor Swarm": "Рой от ударници",
+  "2 Jovian": "2 Юпитер",
+  "3 Jovian": "3 Юпитера",
+  "4 Jovian": "4 Юпитера",
+  "5 Jovian": "5 Юпитера",
+  "6 Jovian": "6 Юпитера",
+  "7 Jovian": "7 Юпитера",
+  "Requires 2 Jovian tags. Gain 12 heat. Remove up to 2 plants from any player.": "Изисква 2 Юпитер тага. Печалете 12 топлина. Премахнете до 2 растения от който и да е играч.",
+
+  "Interplanetary Colony Ship": "Междупланетен кораб за колонизация",
+  "Place a colony.": "Поставете колония.",
+
+  "Jovian Lanterns": "Юпитерски фенери",
+  "Action: Spend 1 titanium to add 2 floaters here.": "Действие: Потребете 1 титан, за да добавите 2 летящи обекта тук.",
+  "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.": "Изисква 1 Юпитер таг. Увеличете вашия TR с 1 стъпка. Добавете 2 летящи обекта към КОЯТО И ДА Е карта.",
+  "1 VP per 2 floaters here.": "1 ТП за всяко 2 летящи обекта тук.",
+
+  "Jupiter Floating Station": "Плаваща станция Юпитер",
+  "Action: Add 1 floater to a JOVIAN CARD.": "Действие: Добавете 1 летящ обект към ЮПИТЕРСКА КАРТА.",
+  "Action: Gain 1 M€ for every floater here [MAX 4].": "Действие: Получавате 1 M€ за всеки летящ обект тук [МАКС 4].",
+  "Requires 3 science tags.": "Изисква 3 тага за наука.",
+
+  "Luna Governor": "Управител на Луна",
+  "Requires 3 Earth tags. Increase your M€ production 2 steps.": "Изисква 3 Земни тага. Увеличете производството си на M€ с 2 стъпки.",
+
+  "Lunar Exports": "Лунен износ",
+  "Increase your plant production 2 steps, or your M€ production 5 steps.": "Увеличете производството си на растения с 2 стъпки или производството на M€ с 5 стъпки.",
+
+  "Lunar Mining": "Лунни мини",
+  "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": "Увеличете производството си на титан с 1 стъпка за всяка 2 Земни тага, които имате в играта, включително и този.",
+
+  "Market Manipulation": "Манипулация на пазара",
+  "Increase one colony tile track 1 step. Decrease another colony tile track 1 step.": "Увеличете една колония с 1 стъпка. Намалете друга колония с 1 стъпка.",
+
+  "Martian Zoo": "Марсиански зоопарк",
+  "Effect: When you play an Earth tag, place an animal here.": "Ефект: Когато разыгравате Земен таг, поставете животно тук.",
+  "Action: Gain 1M€ per animal here.": "Действие: Печалете 1M€ за всяко животно тук.",
+  "Requires 2 city tiles in play.": "Изисква 2 градски плочки в играта.",
+
+  "Mining Colony": "Шахтена колония",
+  "Increase your titanium production 1 step. Place a colony.": "Увеличете производството си на титан с 1 стъпка. Поставете колония.",
+
+  "Minority Refuge": "Пристанище за малцинства",
+  "Decrease your M€ production 2 steps. Place a colony.": "Намалете производството си на M€ с 2 стъпки. Поставете колония.",
+
+  "Molecular Printing": "Молекулно принтиране",
+  "Gain 1 M€ for each city tile in play. Gain 1 M€ for each colony in play.": "Печалете 1M€ за всеки градски плочка в играта. Печалете 1M€ за всяка колония в играта.",
+  "Nitrogen from Titan": "Азот от Титан",
+  "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.": "Увеличете вашия ТР с 2 стъпки. Добавете 2 летящи обекта към карта с етикет Юпитер.",
+
+  "Pioneer Settlement": "Пионерско поселение",
+  "Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.": "Изисква да нямате повече от 1 колония. Намалете производството на M€ с 2 стъпки. Поставете колония.",
+
+  "Productive Outpost": "Производствен аванпост",
+  "Gain all your colony bonuses.": "Спечелете всички бонуси от вашите колонии.",
+
+  "Quantum Communications": "Квантови комуникации",
+  "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.": "Изисква 4 тага за наука. Увеличете производството на M€ с 1 стъпка за всяка колония в играта.",
+
+  "Red Spot Observatory": "Обсерватория на Червения петно",
+  "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": "Действие: Добавете 1 летящ обект на тази карта или потребете 1 летящ обект от тук, за да изтеглите карта.",
+  "Requires 3 science tags. Draw 2 cards.": "Изисква 3 тага за наука. Изтеглете 2 карти.",
+
+  "Refugee Camps": "Лагери за бежанци",
+  "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "Действие: Намалете производството на M€ с 1 стъпка, за да добавите лагерен ресурс към тази карта.",
+  "1 VP for each camp resource on this card.": "1 ТП за всеки лагерен ресурс на тази карта.",
+
+  "Research Colony": "Изследователска колония",
+  "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.": "Поставете колония. МОЖЕ ДА СЕ ПОСТАВИ ТАМ, КЪДЕТО ВЕЧЕ ИМАТЕ КОЛОНИЯ. Изтеглете 2 карти.",
+
+  "Rim Freighters": "Ръбни товарачи",
+
+  "Sky Docks": "Небесни докове",
+  "Effect: When you play a card, you pay 1 M€ less for it.": "Ефект: Когато разыгравате карта, плащате за нея с 1 M€ по-малко.",
+  "Requires 2 Earth tags. Gain 1 Trade Fleet.": "Изисква 2 Земни тага. Спечелете 1 търговски флот.",
+
+  "Solar Probe": "Слънчев сондаж",
+  "Draw 1 card for every 3 science tags you have, including this.": "Изтеглете 1 карта за всеки 3 тага за наука, които имате, включително този.",
+
+  "Solar Reflectors": "Слънчеви отразители",
+  "Increase your heat production 5 steps.": "Увеличете производството на топлина с 5 стъпки.",
+
+  "Space Port": "Космически порт",
+  "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a city tile. Gain 1 Trade Fleet.": "Изисква 1 колония. Намалете производството на енергия с 1 стъпка и увеличете производството на M€ с 4 стъпки. Поставете градски плочка. Спечелете 1 търговски флот.",
+
+  "Space Port Colony": "Колония-космопорт",
+  "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.": "Изисква колония. Поставете колония. МОЖЕ ДА СЕ ПОСТАВИ НА КОЛОНИАЛЕН ТАЙЛ, КЪДЕТО ВЕЧЕ ИМАТЕ КОЛОНИЯ. Спечелете 1 търговски флот.",
+  "1VP per 2 colonies in play.": "1 ТП за всяка 2 колонии в играта.",
+
+  "Spin-off Department": "Отдел за разработване",
+  "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "Ефект: ПРИ РАЗЫГРАВАНЕТО НА КАРТА С ОСНОВНА ЦЕНА ОТ 20M€ ИЛИ ТП-ВИСОКО, изтеглете карта.",
+  "Increase your M€ production 2 steps.": "Увеличете производството на M€ с 2 стъпки.",
+
+  "Sub-zero Salt Fish": "Солена риба при минусови температури",
+  "Requires -6 C. Decrease any plant production 1 step.": "Изисква -6 C. Намалете производството на растения с 1 стъпка.",
+
+  "Titan Air-scrapping": "Почистване на въздуха на Титан",
+  "Action: Spend 2 floaters here to increase your TR 1 step.": "Действие: Потребете 2 летящи обекта оттук, за да увеличите вашия ТР с 1 стъпка.",
+
+  "Titan Floating Launch-pad": "Летяща платформа на Титан",
+  "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "Действие: Добавете 1 летящ обект на КОЯТО И ДА Е карта с етикет Юпитер или потребете 1 летящ обект оттук, за да търгувате безплатно.",
+  "Add two floaters to ANY JOVIAN CARD.": "Добавете два летящи обекта към КОЯТО И ДА Е карта с етикет Юпитер.",
+
+  "Titan Shuttles": "Челни с Титан",
+  "Action: Add 2 floaters to ANY JOVIAN CARD.": "Действие: Добавете 2 летящи обекта към КОЯТО И ДА Е карта с етикет Юпитер.",
+  "Action: Spend any number of floaters here to gain the same number of titanium.": "Действие: Потребете произволен брой летящи обекти оттук, за да спечелите същия брой титан.",
+
+  "Trade Envoys": "Търговски посланици",
+  "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "Ефект: При търговия може първо да увеличите трека на този колониален плочка с 1 стъпка.",
+
+  "Trading Colony": "Търговска колония",
+
+  "Urban Decomposers": "Градски разграждащи",
+  "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "Изисква наличие на 1 градски плочка и 1 колония. Увеличете производството на растения с 1 стъпка и добавете 2 микроба на ДРУГА карта.",
+
+  "Warp Drive": "Варп-двигател",
+  "Effect: When you play a space card, you pay 4 M€ less for it.": "Ефект: При разгряване на космическа карта, плащате с 4 M€ по-малко.",
+  "Requires 5 science tags.": "Изисква 5 тага за наука.",
+
+  "Colony City": "Колониален град",
+  "max 1 Colony": "макс. 1 Колония",
+  "2 Cities": "2 Града"
+}

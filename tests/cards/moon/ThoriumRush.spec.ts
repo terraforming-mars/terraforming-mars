@@ -37,9 +37,9 @@ describe('ThoriumRush', () => {
 
     card.play(player);
 
-    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpace('m02')),
-    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpace('m03')),
-    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpace('m04')),
+    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpaceOrThrow('m02')),
+    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpaceOrThrow('m03')),
+    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpaceOrThrow('m04')),
 
     expect(moonData.habitatRate).eq(1);
     expect(moonData.habitatRate).eq(1);
@@ -67,21 +67,21 @@ describe('ThoriumRush', () => {
     player.megaCredits = card.cost + 8;
     expect(player.canPlay(card)).is.false;
     player.megaCredits = card.cost + 9;
-    expect(player.canPlay(card)).is.true;
+    expect(player.canPlay(card)).deep.eq({redsCost: 9});
 
     moonData.miningRate = 8;
 
     player.megaCredits = card.cost + 5;
     expect(player.canPlay(card)).is.false;
     player.megaCredits = card.cost + 6;
-    expect(player.canPlay(card)).is.true;
+    expect(player.canPlay(card)).deep.eq({redsCost: 6});
 
     moonData.habitatRate = 8;
 
     player.megaCredits = card.cost + 2;
     expect(player.canPlay(card)).is.false;
     player.megaCredits = card.cost + 3;
-    expect(player.canPlay(card)).is.true;
+    expect(player.canPlay(card)).deep.eq({redsCost: 3});
 
     moonData.logisticRate = 8;
 

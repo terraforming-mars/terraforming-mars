@@ -25,6 +25,7 @@ export class BotanicalExperience extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: 'Pf50',
+        hasExternalHelp: true,
         renderData: CardRenderer.builder((b) => {
           b.greenery({size: Size.SMALL, withO2: false, any: true}).colon().data({size: Size.SMALL});
           b.nbsp;

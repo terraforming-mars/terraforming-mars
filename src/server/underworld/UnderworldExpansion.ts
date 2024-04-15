@@ -3,7 +3,7 @@ import {IPlayer} from '../IPlayer';
 import {Space} from '../boards/Space';
 import {UnderworldData, UnderworldPlayerData} from './UnderworldData';
 import {Random} from '../../common/utils/Random';
-import {UndergroundResourceToken, undergroundResourcerTokenDescription} from '../../common/underworld/UndergroundResourceToken';
+import {UndergroundResourceToken, undergroundResourceTokenDescription} from '../../common/underworld/UndergroundResourceToken';
 import {inplaceShuffle} from '../utils/shuffle';
 import {Resource} from '../../common/Resource';
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
@@ -16,9 +16,10 @@ import {PlayerInput} from '../PlayerInput';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {message} from '../logs/MessageBuilder';
-import {LogHelper} from '../LogHelper';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {Phase} from '../../common/Phase';
+import {Units} from '../../common/Units';
+import {LogHelper} from '../LogHelper';
 
 export class UnderworldExpansion {
   private constructor() {}
@@ -91,12 +92,25 @@ export class UnderworldExpansion {
     };
   }
 
-  /** Return the spaces that have not yet been identified. The opposite of `identifiedSpaces`. */
-  public static identifiableSpaces(game: IGame): ReadonlyArray<Space> {
-    return game.board.spaces.filter((space) => space.spaceType !== SpaceType.COLONY && space.undergroundResources === undefined);
+  /**
+   * Return the spaces that have not yet been identified.
+   *
+   * For the most part, the opposite of `identifiedSpaces`.
+   */
+  public static identifiableSpaces(player: IPlayer): ReadonlyArray<Space> {
+    const spaces = player.game.board.spaces.filter((space) => space.spaceType !== SpaceType.COLONY);
+    if (player.cardIsInEffect(CardName.NEUTRINOGRAPH)) {
+      return spaces.filter((space) => space.excavator === undefined);
+    } else {
+      return spaces.filter((space) => space.undergroundResources === undefined);
+    }
   }
 
-  /** Return the spaces that not yet been identified. The opposite of `identifiableSpaces`. */
+  /**
+   * Return the spaces that not yet been identified.
+   *
+   * For the most part, the opposite of `identifiableSpaces`.
+   */
   public static identifiedSpaces(game: IGame): ReadonlyArray<Space> {
     return game.board.spaces.filter(
       (space) => space.undergroundResources !== undefined,
@@ -104,12 +118,18 @@ export class UnderworldExpansion {
   }
 
   /** Identify the token at `space`, optionally trigger callbacks */
-  public static identify(game: IGame, space: Space, player: IPlayer | undefined): void {
+  public static identify(game: IGame, space: Space, player: IPlayer | undefined, fromExcavate: boolean = false): void {
     if (game.gameOptions.underworldExpansion !== true) {
       throw new Error('Underworld expansion not in this game');
     }
+
     if (space.undergroundResources !== undefined) {
-      return;
+      if (player?.cardIsInEffect(CardName.NEUTRINOGRAPH) && space.excavator === undefined) {
+        UnderworldExpansion.addTokens(game, [space.undergroundResources]);
+        space.undergroundResources = undefined;
+      } else {
+        return;
+      }
     }
     const undergroundResource = game.underworldData?.tokens.pop();
     if (undergroundResource === undefined) {
@@ -119,7 +139,7 @@ export class UnderworldExpansion {
     space.undergroundResources = undergroundResource;
     for (const p of game.getPlayersInGenerationOrder()) {
       for (const card of p.tableau) {
-        card.onIdentification?.(player, p, space);
+        card.onIdentification?.(player, p, space, fromExcavate);
       }
     }
   }
@@ -146,6 +166,11 @@ export class UnderworldExpansion {
       if (space.excavator !== undefined) {
         return false;
       }
+
+      if (space.undergroundResources === 'ocean' && !player.canAfford({cost: 4, tr: {oceans: 1}})) {
+        return false;
+      }
+
       return space.spaceType !== SpaceType.COLONY;
     });
 
@@ -177,12 +202,13 @@ export class UnderworldExpansion {
   }
 
   public static excavate(player: IPlayer, space: Space) {
-    if (player.game.gameOptions.underworldExpansion !== true) {
+    const game = player.game;
+    if (game.gameOptions.underworldExpansion !== true) {
       throw new Error('Underworld expansion not in this game');
     }
 
     if (space.undergroundResources === undefined) {
-      this.identify(player.game, space, player);
+      this.identify(player.game, space, player, /* fromExcavate= */ true);
     }
 
     const undergroundResource = space.undergroundResources;
@@ -190,17 +216,16 @@ export class UnderworldExpansion {
       throw new Error('No available identification tokens');
     }
 
+    LogHelper.logBoardTileAction(player, space, `${undergroundResourceTokenDescription[undergroundResource]}`, 'excavated');
     this.grant(player, undergroundResource);
-    LogHelper.logBoardTileAction(player, space, `(${undergroundResourcerTokenDescription[undergroundResource]})`, 'excavated');
 
     space.excavator = player;
     player.tableau.forEach((card) => card.onExcavation?.(player, space));
 
     // TODO(kberg): The identification is supposed to be resolved after the benefit.
-    const game = player.game;
     game.board
       .getAdjacentSpaces(space)
-      .forEach((s) => UnderworldExpansion.identify(game, s, player));
+      .forEach((s) => UnderworldExpansion.identify(game, s, player, /* fromExcavate= */ true));
     const leaser = game.getCardPlayerOrUndefined(CardName.EXCAVATOR_LEASING);
     if (leaser !== undefined) {
       leaser.stock.add(Resource.MEGACREDITS, 1, {log: true});
@@ -257,7 +282,7 @@ export class UnderworldExpansion {
       player.production.add(Resource.PLANTS, 1, {log: true});
       break;
     case 'titaniumandplant':
-      player.stock.addUnits({plants: 1, titanium: 1}, {log: true});
+      player.stock.addUnits(Units.of({plants: 1, titanium: 1}), {log: true});
       break;
     case 'energy1production':
       player.production.add(Resource.ENERGY, 1, {log: true});
@@ -275,9 +300,11 @@ export class UnderworldExpansion {
       player.increaseTerraformRating();
       break;
     case 'ocean':
-      if (player.game.canAddOcean() && player.canAfford({cost: 4, tr: {oceans: 1}})) {
-        player.game.defer(new SelectPaymentDeferred(player, 4, {title: message('Select how to pay 4 M€ for ocean bonus')}))
-          .andThen(() => player.game.defer(new PlaceOceanTile(player)));
+      if (player.canAfford({cost: 4, tr: {oceans: 1}})) {
+        if (player.game.canAddOcean() || player.cardIsInEffect(CardName.WHALES)) {
+          player.game.defer(new SelectPaymentDeferred(player, 4, {title: message('Select how to pay 4 M€ for ocean bonus')}))
+            .andThen(() => player.game.defer(new PlaceOceanTile(player)));
+        }
       }
       break;
     case 'data1pertemp':
@@ -285,19 +312,18 @@ export class UnderworldExpansion {
     case 'plant2pertemp':
     case 'steel2pertemp':
     case 'titanium1pertemp':
-      // TODO(kberg): viz
       player.underworldData.temperatureBonus = token;
-      player.game.log('For the rest of this generation, ${0} will gain ${1}', (b) => b.player(player).string(token));
+      player.game.log('For the rest of this generation, ${0} will gain ${1}', (b) => b.player(player).string(undergroundResourceTokenDescription[token]));
       break;
     default:
       throw new Error('Unknown reward: ' + token);
     }
   }
 
+  // TODO(kberg): turn into a deferred action?
   public static maybeBlockAttack(target: IPlayer, perpetrator: IPlayer, cb: (proceed: boolean) => PlayerInput | undefined): PlayerInput | undefined {
     if (target.game.gameOptions.underworldExpansion === false) {
-      cb(true);
-      return undefined;
+      return cb(true);
     }
     const privateMilitaryContractor = target.playedCards.find((card) => card.name === CardName.PRIVATE_MILITARY_CONTRACTOR);
     const militaryContractorFighters = privateMilitaryContractor?.resourceCount ?? 0;
@@ -369,27 +395,28 @@ export class UnderworldExpansion {
     game.log('All unidentified underground resources have been shuffled back into the pile.');
   }
 
-  //   static removeUnclaimedToken(game: IGame, space: Space) {
-  //     if (game.underworldData === undefined) {
-  //       return;
-  //     }
-  //     if (space.undergroundResources !== undefined && space.excavator === undefined) {
-  //       game.underworldData.tokens.push(space.undergroundResources);
-  //       space.undergroundResources = undefined;
-  //     } else {
-  //       throw new Error('Cannot reclaim that space');
-  //     }
-  //     inplaceShuffle(game.underworldData.tokens, game.rng);
-  //   }
+  static removeUnclaimedToken(game: IGame, space: Space) {
+    if (game.underworldData === undefined) {
+      return;
+    }
+    if (space.undergroundResources !== undefined && space.excavator === undefined) {
+      game.underworldData.tokens.push(space.undergroundResources);
+      space.undergroundResources = undefined;
+    } else {
+      throw new Error('Cannot reclaim that space');
+    }
+    inplaceShuffle(game.underworldData.tokens, game.rng);
+  }
 
+  /** Add the set of tokens to the pool, and then shuffle the pool */
+  static addTokens(game: IGame, tokens: Array<UndergroundResourceToken>) {
+    if (game.underworldData === undefined) {
+      return;
+    }
+    game.underworldData.tokens.push(...tokens);
+    inplaceShuffle(game.underworldData.tokens, game.rng);
+  }
 
-  //   static addTokens(game: IGame, tokens: Array<UndergroundResourceToken>) {
-  //     if (game.underworldData === undefined) {
-  //       return;
-  //     }
-  //     game.underworldData.tokens.push(...tokens);
-  //     inplaceShuffle(game.underworldData.tokens, game.rng);
-  //   }
   static excavationMarkerCount(player: IPlayer): number {
     return this.excavatedSpaces(player).length;
   }

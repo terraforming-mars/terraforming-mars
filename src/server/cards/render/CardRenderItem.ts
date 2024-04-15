@@ -1,5 +1,5 @@
 /*
-  Used to describe any distinct item on a card and prepare it for rendering in Vue
+  Describes any distinct item on a card and prepare it for rendering in Vue
   e.g. Any tag, tile, production cube, ocean, temperature, etc.
  */
 import {CardRenderItemType} from '../../../common/cards/render/CardRenderItemType';
@@ -15,11 +15,11 @@ export interface ItemOptions {
   digit?: boolean;
   played?: boolean;
   secondaryTag?: Tag | AltSecondaryTag;
-  multiplier?: boolean; /** Mark any amount to be a multiplier 'X' */
   clone?: boolean; /** Replace the amount with the clone tag */
   cancelled?: boolean;
   over?: number; /** Used for global events. */
   questionMark?: boolean;
+  text?: string;
 }
 
 export class CardRenderItem implements ICardRenderItem {
@@ -34,12 +34,10 @@ export class CardRenderItem implements ICardRenderItem {
   public isPlate?: boolean;
   public size?: Size;
   public secondaryTag?: Tag | AltSecondaryTag;
-  public multiplier?: boolean = false;
   public clone?: boolean = false;
   public cancelled?: boolean = false;
-  public questionMark?: boolean = false;
-
-  over?: number;
+  public innerText?: string;
+  public over?: number;
   constructor(public type: CardRenderItemType, public amount: number = -1, options?: ItemOptions) {
     switch (options?.digit) {
     case true:
@@ -62,11 +60,6 @@ export class CardRenderItem implements ICardRenderItem {
     this.isPlayed = options.played;
     this.secondaryTag = options.secondaryTag;
 
-    if (options.multiplier === true) {
-      this.amountInside = true;
-      this.multiplier = true;
-    }
-
     if (options.clone === true) {
       this.amountInside = false;
       this.clone = true;
@@ -74,7 +67,9 @@ export class CardRenderItem implements ICardRenderItem {
 
     this.cancelled = options.cancelled ?? false;
     this.over = options.over;
-    this.questionMark = options.questionMark;
+    if (options.text !== undefined) {
+      this.innerText = options.text;
+    }
 
     return this;
   }

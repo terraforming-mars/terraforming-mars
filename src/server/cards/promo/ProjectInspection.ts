@@ -26,7 +26,7 @@ export class ProjectInspection extends Card implements IProjectCard {
 
   // This matches Viron.getActionCards.
   private getActionCards(player: IPlayer): Array<IActionCard & ICard> {
-    const result: Array<IActionCard & ICard> = [];
+    const result = [];
 
     for (const playedCard of player.tableau) {
       if (playedCard === this) {

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../src/server/Game';
-import {ALL_MODULE_MANIFESTS} from '../../src/server/cards/AllCards';
+import {ALL_MODULE_MANIFESTS} from '../../src/server/cards/AllManifests';
 import {TestPlayer} from '../TestPlayer';
 import {CardManifest} from '../../src/server/cards/ModuleManifest';
 import {ICard} from '../../src/server/cards/ICard';

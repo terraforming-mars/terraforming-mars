@@ -25,7 +25,7 @@
 	"You have +2 score for all awards. Once per game, draw 10-X awards (min. 1), where X is the current generation number. You may put one into the game and fund it for free.": "褒賞のスコアを数えるとき、スコア+2. CEOアクション：10から世代数を引いた数(最低1)褒賞を見る. その内、1つゲームに追加し支援してもよい.",
 
 	"Bjorn": "ビョルン",
-	"Once per game, steal X+2 M€ from each player that has more M€ than you, where X is the current generation number.": "CEOアクション：自分よりMCを多く所持しているプレイヤーから、世代数に2を足した数MCを盗む.",
+	"Once per game, steal X+2 M€ from each player that has more M€ than you, where X is the current generation number.": "CEOアクション：自分よりMCを多く所持しているプレイヤーから、世代数に2を足した数MCを除去し、その合計分MC獲得.",
 	
 	"Caesar": "シーザー",
 	"Once per game, place X hazard tiles where X is the current generation number. Each opponent loses 1 unit of production of their choice, or 2 units if there are 6 or more hazard tiles.": "CEOアクション：世代数の数分、災害タイルを配置. 他プレイヤーは任意の産出-1(災害タイルが6枚以上ある場合は任意の産出-2).",
@@ -52,7 +52,7 @@
 	"Ignore placement restrictions for greenery and city tiles on Mars. Gain 2 M€ when you place a greenery or city tile on Mars.": "火星上の緑地タイルと都市タイルの配置制限を無視してもよい. 火星上に緑地タイルか都市タイルを配置した時、2MC獲得.",
 
 	"Greta": "グレタ",
-	"When you take an action or play a card that increases your TR THIS GENERATION (max 10 times), gain 4 M€.": "この世代中にTRを増加させるアクションやカードをプレイした時、4Mユーロを獲得(最大10回).",
+	"When you take an action or play a card that increases your TR THIS GENERATION (max 10 times), gain 4 M€.": "この世代中にTRを増加させるアクションやカードをプレイした時、4MCを獲得(最大10回).",
 
 	"HAL 9000": "HAL 9000",
 	"Once per game, decrease each of your productions 1 step to gain 4 of that resource.": "CEOアクション：それぞれの産出-1、同じ種類の資源を4つ獲得.",

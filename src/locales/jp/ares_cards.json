@@ -1,6 +1,6 @@
 {
     "Desperate Measures": "無鉄砲な災害対策",
-    "Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.": "任意の砂塵嵐タイルの上に銅キューブを置く. 酸素+1段階. この銅キューブが置かれた災害タイルは取り除かれない.",
+    "Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.": "任意の砂塵嵐タイルの上に銅キューブを置く、その場合酸素+1段階. もしくは任意の浸食タイルの上に銅キューブを置く、その場合温度+1段階. この銅キューブが置かれた災害タイルは取り除かれない.",
 
     "Mining Area": "採掘地帯",
     "Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "自身のタイルに隣接する配置ボーナスに建材 または チタンを含む空きマスに特殊タイルを配置. 入手した資材の産出+1.(2資源ボーナスでも産出+1. 実装都合：チタンと建材同時入手の場合は建材産出優先.). このタイルの隣接ボーナスはこうして生産量を挙げた資源となる.",

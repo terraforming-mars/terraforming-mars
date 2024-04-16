@@ -104,7 +104,7 @@ export const LANGUAGES: Record<typeof ALL_LANGUAGES[number], string> = {
   nl: 'Nederlands',
   hu: 'Magyar',
   jp: '日本語',
-    bg: 'Български',
+  bg: 'Български',
   nb: 'Norsk',
 };
 

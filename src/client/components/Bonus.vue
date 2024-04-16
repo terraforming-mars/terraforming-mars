@@ -39,7 +39,18 @@ export default Vue.extend({
   },
   methods: {
     getClass(idx: number, bonus: SpaceBonus): string {
-      return `board-space-bonus board-space-bonus--${css[bonus]} board-space-bonus-pos--${idx}`;
+      const doubleWideBonuses = [
+        SpaceBonus.OCEAN,
+        SpaceBonus.TEMPERATURE,
+        SpaceBonus.COLONY,
+      ];
+      // If only one bonus is present, center it.
+      // Except: some bonuses occupy 2 spaces.
+      let position: string | number = idx;
+      if (this.bonus.length === 1 && !doubleWideBonuses.includes(bonus)) {
+        position = 'only';
+      }
+      return `board-space-bonus board-space-bonus--${css[bonus]} board-space-bonus-pos--${position}`;
     },
   },
 });

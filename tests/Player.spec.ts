@@ -280,7 +280,7 @@ describe('Player', function() {
     expect(player.getSelfReplicatingRobotsTargetCards()).is.empty;
     const srr = new SelfReplicatingRobots();
     player.playedCards.push(srr);
-    srr.targetCards.push({card: new LunarBeam(), resourceCount: 0});
+    srr.targetCards.push(new LunarBeam());
     expect(player.getSelfReplicatingRobotsTargetCards().length).eq(1);
   });
 

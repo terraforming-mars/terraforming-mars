@@ -11,6 +11,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {ICard} from '../../../src/server/cards/ICard';
 import {testGame} from '../../TestGame';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
+import {CardName} from '../../../src/common/cards/CardName';
 
 describe('CEOsFavoriteProject', function() {
   let card: CEOsFavoriteProject;
@@ -72,7 +73,8 @@ describe('CEOsFavoriteProject', function() {
     const srr = new SelfReplicatingRobots();
     const birds = new Birds();
     player.playedCards.push(srr);
-    srr.targetCards.push({card: birds, resourceCount: 1});
+    srr.targetCards.push(birds);
+    birds.resourceCount = 1;
     cast(card.play(player), undefined);
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectCard<ICard>);
@@ -90,6 +92,7 @@ describe('CEOsFavoriteProject', function() {
     const action = cast(player.popWaitingFor(), SelectCard<ICard>);
     expect(action.cards).does.not.contain(birds);
     expect(action.cards).does.contain(securityFleet);
-    expect(() => action.cb([birds])).to.throw(Error, /Invalid card/);
+    // This line really just tests SelectCard, but that's OK.
+    expect(() => action.process({type: 'card', cards: [CardName.BIRDS]})).to.throw(Error, /Card Birds not found/);
   });
 });

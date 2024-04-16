@@ -29,7 +29,7 @@ import {SelectPaymentDeferred} from './deferredActions/SelectPaymentDeferred';
 import {SelectProjectCardToPlay} from './inputs/SelectProjectCardToPlay';
 import {SelectOption} from './inputs/SelectOption';
 import {SelectSpace} from './inputs/SelectSpace';
-import {RobotCard, SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
+import {SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
 import {SerializedCard} from './SerializedCard';
 import {SerializedPlayer} from './SerializedPlayer';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
@@ -283,8 +283,12 @@ export class Player implements IPlayer {
     }
   }
 
-  public getSelfReplicatingRobotsTargetCards(): Array<RobotCard> {
-    return (<SelfReplicatingRobots> this.playedCards.find((card) => card instanceof SelfReplicatingRobots))?.targetCards ?? [];
+  public getSelfReplicatingRobotsTargetCards(): Array<IProjectCard> {
+    const selfReplicatingRobots = this.playedCards.find((card) => card instanceof SelfReplicatingRobots);
+    if (selfReplicatingRobots instanceof SelfReplicatingRobots) {
+      return selfReplicatingRobots.targetCards;
+    }
+    return [];
   }
 
   public getSteelValue(): number {
@@ -957,15 +961,9 @@ export class Player implements IPlayer {
         this.preludeCardsInHand.splice(preludeCardIndex, 1);
       }
 
-      // Remove card from Self Replicating Robots
       const card = this.playedCards.find((card) => card.name === CardName.SELF_REPLICATING_ROBOTS);
       if (card instanceof SelfReplicatingRobots) {
-        for (const targetCard of card.targetCards) {
-          if (targetCard.card.name === selectedCard.name) {
-            const index = card.targetCards.indexOf(targetCard);
-            card.targetCards.splice(index, 1);
-          }
-        }
+        inplaceRemove(card.targetCards, selectedCard);
       }
     }
 
@@ -1308,9 +1306,7 @@ export class Player implements IPlayer {
     // Self Replicating robots check
     const card = this.playedCards.find((card) => card.name === CardName.SELF_REPLICATING_ROBOTS);
     if (card instanceof SelfReplicatingRobots) {
-      for (const targetCard of card.targetCards) {
-        candidateCards.push(targetCard.card);
-      }
+      candidateCards.push(...card.targetCards);
     }
 
     const playableCards: Array<PlayableCard> = [];

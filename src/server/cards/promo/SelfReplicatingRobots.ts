@@ -9,11 +9,6 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
-export interface RobotCard {
-  card: IProjectCard;
-  resourceCount: number;
-}
-
 export class SelfReplicatingRobots extends Card implements IProjectCard {
   constructor() {
     super({
@@ -36,15 +31,10 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
     });
   }
 
-  public targetCards: Array<RobotCard> = [];
+  public targetCards: Array<IProjectCard> = [];
 
   public override getCardDiscount(_player: IPlayer, card: IProjectCard): number {
-    for (const targetCard of this.targetCards) {
-      if (targetCard.card.name === card.name) {
-        return targetCard.resourceCount;
-      }
-    }
-    return 0;
+    return this.targetCards.find((c) => c.name === card.name)?.resourceCount ?? 0;
   }
 
   public canAct(player: IPlayer): boolean {
@@ -57,19 +47,13 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
     const selectableCards = player.cardsInHand.filter((card) => card.tags.some((tag) => tag === Tag.SPACE || tag === Tag.BUILDING));
 
     if (this.targetCards.length > 0) {
-      const robotCards = this.targetCards.map((targetCard) => targetCard.card);
       orOptions.options.push(new SelectCard(
-        'Select card to double robots resource', 'Double resource', robotCards, {played: CardName.SELF_REPLICATING_ROBOTS})
+        'Select card to double robots resource', 'Double resource', this.targetCards, {played: CardName.SELF_REPLICATING_ROBOTS})
         .andThen(([card]) => {
-          let resourceCount = 0;
-          for (const targetCard of this.targetCards) {
-            if (targetCard.card.name === card.name) {
-              resourceCount = targetCard.resourceCount;
-              targetCard.resourceCount *= 2;
-            }
-          }
+          const resourceCount = card.resourceCount;
+          card.resourceCount *= 2;
           player.game.log('${0} doubled resources on ${1} from ${2} to ${3}', (b) => {
-            b.player(player).card(card).number(resourceCount).number(resourceCount * 2);
+            b.player(player).card(card).number(resourceCount).number(card.resourceCount * 2);
           });
           return undefined;
         }));
@@ -83,12 +67,8 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
         ([card]) => {
           const projectCardIndex = player.cardsInHand.findIndex((c) => c.name === card.name);
           player.cardsInHand.splice(projectCardIndex, 1);
-          this.targetCards.push(
-            {
-              card: card,
-              resourceCount: 2,
-            },
-          );
+          this.targetCards.push(card);
+          card.resourceCount = 2;
           player.game.log('${0} linked ${1} with ${2}', (b) => b.player(player).card(card).card(this));
           return undefined;
         }));

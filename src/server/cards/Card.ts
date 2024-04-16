@@ -310,7 +310,7 @@ export abstract class Card implements ICard {
     case CardRenderItemType.RESOURCE_CUBE:
     case CardRenderItemType.SCIENCE:
     case CardRenderItemType.CAMPS:
-      units = this.resourceCount ?? 0;
+      units = this.resourceCount;
       break;
 
     case CardRenderItemType.JOVIAN:

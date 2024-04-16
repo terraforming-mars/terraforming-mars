@@ -1152,7 +1152,7 @@ export class Player implements IPlayer {
   }
 
   public availableHeat(): number {
-    const floaters = this.getCorporation(CardName.STORMCRAFT_INCORPORATED)?.resourceCount ?? 0;
+    const floaters = this.resourcesOnCard(CardName.STORMCRAFT_INCORPORATED);
     return this.heat + (floaters * 2);
   }
 

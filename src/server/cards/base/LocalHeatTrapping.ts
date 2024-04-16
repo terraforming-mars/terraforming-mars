@@ -45,7 +45,7 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
     const cardCost = player.getCardCost(this); // Would be nice to use precalculated value.
 
     let heat = player.heat;
-    let floaters = player.getCorporation(CardName.STORMCRAFT_INCORPORATED)?.resourceCount ?? 0;
+    let floaters = player.resourcesOnCard(CardName.STORMCRAFT_INCORPORATED);
 
     // If the card costs anything, determine where that 1MC can come from. Assume it can come from MC first.
     if (cardCost === 1 && player.megaCredits === 0) {

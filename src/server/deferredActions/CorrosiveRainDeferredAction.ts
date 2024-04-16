@@ -17,7 +17,7 @@ export class CorrosiveRainDeferredAction extends DeferredAction {
   }
 
   public execute() {
-    const floaterCards = this.player.getCardsWithResources(CardResource.FLOATER).filter((card) => (card.resourceCount ?? 0) >= 2);
+    const floaterCards = this.player.getCardsWithResources(CardResource.FLOATER).filter((card) => card.resourceCount >= 2);
 
     const selectAction = new OrOptions();
     const payMC = new SelectOption('Lose up to 10 M€', 'Lose M€').andThen(() => {

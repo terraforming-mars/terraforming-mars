@@ -12,6 +12,7 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {testGame} from '../../TestGame';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {CardName} from '../../../src/common/cards/CardName';
+import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 
 describe('CEOsFavoriteProject', function() {
   let card: CEOsFavoriteProject;
@@ -77,8 +78,7 @@ describe('CEOsFavoriteProject', function() {
     birds.resourceCount = 1;
     cast(card.play(player), undefined);
     runAllActions(player.game);
-    const action = cast(player.popWaitingFor(), SelectCard<ICard>);
-    action.cb([birds]);
+    cast(player.popWaitingFor(), undefined);
     expect(srr.targetCards[0].resourceCount).to.eq(2);
   });
 
@@ -86,12 +86,15 @@ describe('CEOsFavoriteProject', function() {
     const birds = new Birds();
     const securityFleet = new SecurityFleet();
     securityFleet.resourceCount++;
-    player.playedCards.push(securityFleet, birds);
+    const tardigrades = new Tardigrades();
+    tardigrades.resourceCount++;
+    player.playedCards.push(securityFleet, birds, tardigrades);
     cast(card.play(player), undefined);
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectCard<ICard>);
     expect(action.cards).does.not.contain(birds);
     expect(action.cards).does.contain(securityFleet);
+    expect(action.cards).does.contain(tardigrades);
     // This line really just tests SelectCard, but that's OK.
     expect(() => action.process({type: 'card', cards: [CardName.BIRDS]})).to.throw(Error, /Card Birds not found/);
   });

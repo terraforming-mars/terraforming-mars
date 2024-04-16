@@ -7,7 +7,6 @@ import {testGame} from '../../TestGame';
 import {Resource} from '../../../src/common/Resource';
 import {CardType} from '../../../src/common/cards/CardType';
 import {CEOsFavoriteProject} from '../../../src/server/cards/base/CEOsFavoriteProject';
-import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('CommunicationCenter', function() {
   let card: CommunicationCenter;
@@ -78,28 +77,16 @@ describe('CommunicationCenter', function() {
   });
 
   it('Work with CEOs favorite project', () => {
-    player.playedCards = [card];
-    player.cardsInHand = [];
-    const ceosFavoriteProject = new CEOsFavoriteProject();
-
-    expect(ceosFavoriteProject.canPlay(player)).is.false;
     card.resourceCount = 2;
-    expect(ceosFavoriteProject.canPlay(player)).is.true;
+    player.playedCards = [card];
 
+    const ceosFavoriteProject = new CEOsFavoriteProject();
     player.playCard(ceosFavoriteProject);
-    runAllActions(game);
-    expect(card.resourceCount).eq(2);
-    const selectCard = cast(player.popWaitingFor(), SelectCard);
-
-    expect(player.cardsInHand).has.length(0);
-
-    selectCard.cb([card]);
-
-    expect(card.resourceCount).eq(0);
-    expect(player.cardsInHand).has.length(1);
 
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
+
+    expect(player.cardsInHand).has.length(1);
     expect(card.resourceCount).eq(1);
   });
 

@@ -6,7 +6,6 @@ import {Tag} from '../../common/cards/Tag';
 import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
 import {Message} from '../../common/logs/Message';
-import {message} from '../logs/MessageBuilder';
 import {IProjectCard} from '../cards/IProjectCard';
 
 export type Options = {
@@ -72,55 +71,28 @@ export class AddResourcesToCard extends DeferredAction {
     return this.getCardsInPlay().length + this.getSelfReplicatingRobotCards().length;
   }
 
-  public getCards(): [Array<ICard>, Array<IProjectCard>] {
-    return [this.getCardsInPlay(), this.getSelfReplicatingRobotCards()];
+  public getCards(): Array<ICard> {
+    return [...this.getCardsInPlay(), ...this.getSelfReplicatingRobotCards()];
   }
 
   public execute() {
-    if (this.options.robotCards !== true) {
-      return this.execute1();
-    } else {
-      return this.execute2();
-    }
-  }
-
-  public execute1() {
-    const count = this.options.count ?? 1;
-    const title = this.options.title ??
-    message('Select card to add ${0} ${1}', (b) => b.number(count).string(this.resourceType || 'resources'));
-
-    const cards = this.getCardsInPlay();
+    const qty = this.options.count ?? 1;
+    const cards = this.getCards();
     if (cards.length === 0) {
       return undefined;
     }
 
     if (cards.length === 1) {
-      this.addResource(cards[0], count);
+      this.addResource(cards[0], qty);
       return undefined;
     }
 
     return new SelectCard(
-      title,
-      count === 1 ? 'Add resource' : 'Add resources',
-      cards)
-      .andThen(([card]) => {
-        this.addResource(card, count);
-        return undefined;
-      });
-  }
-
-
-  private execute2() {
-    const count = this.options.count ?? 1;
-    const cards = this.getCardsInPlay();
-    const robotCards = this.getSelfReplicatingRobotCards();
-    const allCards = [...cards, ...robotCards];
-    return new SelectCard(
       'Select card to add resource',
       'Add resource',
-      allCards)
+      cards)
       .andThen(([card]) => {
-        this.addResource(card, count);
+        this.addResource(card, qty);
         return undefined;
       });
   }

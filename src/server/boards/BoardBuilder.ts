@@ -120,15 +120,16 @@ export class BoardBuilder {
   // Shuffle the ocean spaces and bonus spaces. But protect the land spaces supplied by
   // |lands| so that those IDs most definitely have land spaces.
   public shuffle(rng: Random, ...preservedSpaceIds: Array<SpaceName>) {
+    const preservedSpaces = [...this.unshufflableSpaces];
     for (const spaceId of preservedSpaceIds) {
       const idx = Number(spaceId) - 3;
-      if (!this.unshufflableSpaces.includes(idx)) {
-        this.unshufflableSpaces.push(idx);
+      if (!preservedSpaces.includes(idx)) {
+        preservedSpaces.push(idx);
       }
     }
-    this.unshufflableSpaces.sort((a, b) => a - b);
-    preservingShuffle(this.spaceTypes, this.unshufflableSpaces, rng);
-    inplaceShuffle(this.bonuses, rng);
+    preservedSpaces.sort((a, b) => a - b);
+    preservingShuffle(this.spaceTypes, preservedSpaces, rng);
+    preservingShuffle(this.bonuses, this.unshufflableSpaces, rng);
     return;
   }
 

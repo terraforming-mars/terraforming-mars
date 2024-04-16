@@ -89,7 +89,7 @@ export const LANGUAGES: Record<typeof ALL_LANGUAGES[number], string> = {
   hu: 'Magyar',
   jp: '日本語',
   bg: 'Български',
-  nb: 'Norsk'
+  nb: 'Norsk',
 };
 
 export const APP_NAME = 'Terraforming Mars';

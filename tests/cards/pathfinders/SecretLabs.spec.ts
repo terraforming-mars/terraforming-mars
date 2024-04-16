@@ -9,6 +9,7 @@ import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
 import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
 import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {Whales} from '../../../src/server/cards/underworld/Whales';
 
 describe('SecretLabs', function() {
   let card: SecretLabs;
@@ -32,14 +33,13 @@ describe('SecretLabs', function() {
     player.tagsForTest = {jovian: 1, science: 0};
     expect(player.canPlay(card)).is.false;
 
-
     player.tagsForTest = {jovian: 0, science: 1};
     expect(player.canPlay(card)).is.false;
   });
 
   it('play - place an ocean tile', function() {
-    const options = cast(card.play(player), OrOptions);
-    const placeOcean = options.options[0];
+    const orOptions = cast(card.play(player), OrOptions);
+    const placeOcean = orOptions.options[0];
 
     placeOcean.cb();
     runAllActions(player.game);
@@ -51,8 +51,8 @@ describe('SecretLabs', function() {
   });
 
   it('play - raise temperature', function() {
-    const options = cast(card.play(player), OrOptions);
-    const raiseTemperature = options.options[1];
+    const orOptions = cast(card.play(player), OrOptions);
+    const raiseTemperature = orOptions.options[1];
 
     expect(player.game.getTemperature()).eq(-30);
 
@@ -64,8 +64,8 @@ describe('SecretLabs', function() {
   });
 
   it('play - raise oxygen', function() {
-    const options = cast(card.play(player), OrOptions);
-    const raiseOxygen = options.options[2];
+    const orOptions = cast(card.play(player), OrOptions);
+    const raiseOxygen = orOptions.options[2];
 
     expect(player.game.getOxygenLevel()).eq(0);
 
@@ -80,8 +80,23 @@ describe('SecretLabs', function() {
     player.megaCredits = card.cost;
     player.tagsForTest = {jovian: 1, science: 1};
     maxOutOceans(player);
-    const options = cast(card.play(player), OrOptions);
-    expect(options.options.length).eq(3);
-    expect(options.options[0].title).eq('Add 2 microbes to ANY card.');
+    const orOptions = cast(card.play(player), OrOptions);
+    expect(orOptions.options.length).eq(3);
+    expect(orOptions.options[0].title).eq('Add 2 microbes to ANY card.');
+  });
+
+  it('play, triggers Whales', () => {
+    const whales = new Whales();
+    player.playedCards.push(whales);
+    player.megaCredits = card.cost;
+    player.tagsForTest = {jovian: 1, science: 1};
+    maxOutOceans(player);
+    const orOptions = cast(card.play(player), OrOptions);
+    expect(orOptions.options[0].title).eq('Add 2 microbes to ANY card.');
+    const tr = player.getTerraformRating();
+    cast(orOptions.options[0].cb(), undefined);
+    runAllActions(player.game);
+    expect(player.getTerraformRating()).eq(tr);
+    expect(whales.resourceCount).eq(1);
   });
 });

@@ -127,8 +127,8 @@ export class Server {
     return player.getSelfReplicatingRobotsTargetCards().map((targetCard) => {
       const model: CardModel = {
         resources: targetCard.resourceCount,
-        name: targetCard.card.name,
-        calculatedCost: player.getCardCost(targetCard.card),
+        name: targetCard.name,
+        calculatedCost: player.getCardCost(targetCard),
         isSelfReplicatingRobotsCard: true,
       };
       return model;

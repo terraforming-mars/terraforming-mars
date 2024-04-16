@@ -5,10 +5,9 @@ import {ICard} from '../cards/ICard';
 import {Tag} from '../../common/cards/Tag';
 import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
-import {RobotCard} from '../cards/promo/SelfReplicatingRobots';
-import {LogHelper} from '../LogHelper';
 import {Message} from '../../common/logs/Message';
 import {message} from '../logs/MessageBuilder';
+import {IProjectCard} from '../cards/IProjectCard';
 
 export type Options = {
   count?: number;
@@ -46,7 +45,7 @@ export class AddResourcesToCard extends DeferredAction {
     return cards;
   }
 
-  private getSelfReplicatingRobotCards(): Array<RobotCard> {
+  private getSelfReplicatingRobotCards(): Array<IProjectCard> {
     if (this.options.robotCards !== true) {
       return [];
     }
@@ -73,7 +72,7 @@ export class AddResourcesToCard extends DeferredAction {
     return this.getCardsInPlay().length + this.getSelfReplicatingRobotCards().length;
   }
 
-  public getCards(): [Array<ICard>, Array<RobotCard>] {
+  public getCards(): [Array<ICard>, Array<IProjectCard>] {
     return [this.getCardsInPlay(), this.getSelfReplicatingRobotCards()];
   }
 
@@ -115,22 +114,13 @@ export class AddResourcesToCard extends DeferredAction {
     const count = this.options.count ?? 1;
     const cards = this.getCardsInPlay();
     const robotCards = this.getSelfReplicatingRobotCards();
+    const allCards = [...cards, ...robotCards];
     return new SelectCard(
       'Select card to add resource',
       'Add resource',
-      cards.concat(robotCards.map((c) => c.card)))
+      allCards)
       .andThen(([card]) => {
-        // if the user selected a robot card, handle it here:
-        const robotCard: RobotCard | undefined = robotCards.find((c) => c.card.name === card.name);
-        if (robotCard) {
-          robotCard.resourceCount++;
-          LogHelper.logAddResource(this.player, robotCard.card);
-        } else {
-          if (!cards.includes(card)) {
-            throw new Error('Invalid card selection');
-          }
-          this.addResource(card, count);
-        }
+        this.addResource(card, count);
         return undefined;
       });
   }

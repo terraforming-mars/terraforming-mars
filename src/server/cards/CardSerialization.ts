@@ -25,7 +25,7 @@ export function serializeProjectCard(card: IProjectCard): SerializedCard {
   if (card instanceof SelfReplicatingRobots) {
     serialized.targetCards = card.targetCards.map((t) => {
       return {
-        card: {name: t.card.name},
+        card: {name: t.name},
         resourceCount: t.resourceCount,
       };
     });
@@ -67,10 +67,8 @@ export function deserializeProjectCard(element: SerializedCard): IProjectCard {
     element.targetCards.forEach((targetCard) => {
       const foundTargetCard = newProjectCard(targetCard.card.name);
       if (foundTargetCard !== undefined) {
-        card.targetCards.push({
-          card: foundTargetCard,
-          resourceCount: targetCard.resourceCount,
-        });
+        foundTargetCard.resourceCount = targetCard.resourceCount;
+        card.targetCards.push(foundTargetCard);
       } else {
         console.warn('did not find card for SelfReplicatingRobots', targetCard);
       }

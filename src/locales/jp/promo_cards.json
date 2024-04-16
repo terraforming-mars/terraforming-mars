@@ -1,4 +1,7 @@
 {
+  "City Park": "都市公園",
+  "Requires 3 cities. Gain 2 plants.": "条件：都市3つ以上. 2植物獲得.",
+
   "Soil Enrichment": "土壌強化",
   "Spend 1 microbe from ANY of your cards to gain 5 plants": "1微生物を支払う. 5植物獲得.",
   
@@ -11,7 +14,7 @@
   "FAN NOTE: This will apply to Venus but not The Moon.": "拡張注記：酸素、温度、海洋、金星の4種のみ参照。ファン拡張パラメーターは除外.",
   
   "Martian Lumber Corp": "火星木材",
-  "Effect: When playing a building tag, plants may be used as 3 M€ each.": "効果：土建タグプレイ時、1植物を3MCとして支払ってもよい(複数OK).",
+  "Effect: When playing a building tag, plants may be used as 3 M€ each.": "効果：土建タグをプレイ時、1植物を3MCとして支払ってもよい(複数OK).",
   "Requires that you have 2 greenery tiles. Increase plant production 1 step.": "条件：緑地タイルを2枚以上所持. 植物産出+1.",
   
   "Solar Logistics": "太陽物流",
@@ -54,7 +57,7 @@
   
   "Carbon Nanosystems": "カーボンナノシステム",
   "Effect: When you play a science tag, including this, add a graphene resource here.": "効果：科学タグをプレイ時、このカード上に1グラフェン追加.",
-  "Effect: When playing a space or city tag, graphenes may be used as 4 M€ each.": "効果：宇宙タグ または 都市タグプレイ時、このカード上のグラフェンを4MCとして支払ってもよい.",
+  "Effect: When playing a space or city tag, graphenes may be used as 4 M€ each.": "効果：宇宙タグ または 都市タグをプレイ時、このカード上のグラフェンを4MCとして支払ってもよい.",
   
   "Astra Mechanica": "アストラメカニカ",
   "Fan note: You may not choose cards that return cards to your hand.": "ファン拡張：カードを手札に戻すカードを選ぶことはできない.",

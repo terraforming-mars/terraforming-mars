@@ -96,7 +96,7 @@
     "Requires that you have 5 science tags.": "条件：科学タグ5つ以上.",
 
     "Security Fleet": "警備艦隊",
-    "Action: Spend 1 titanium to add 1 fighter resource to this card.": "アクション：1チタンを支払い、このカード上に+1艦隊.",
+    "Action: Spend 1 titanium to add 1 fighter resource to this card.": "アクション：1チタンを支払い、このカード上に1艦隊追加.",
     "1 VP for each fighter resource on this card.": "このカード上の1艦隊毎に1VP.",
 
     "Cupola City": "ドーム都市",
@@ -140,7 +140,7 @@
     "Increase your titanium production 2 steps.": "チタン産出+2.",
 
     "Food Factory": "食料工場",
-    "Decrease your plant production 1 step and increase your M€ production 4 steps": "MC産出-1し、植物産出+4.",
+    "Decrease your plant production 1 step and increase your M€ production 4 steps.": "植物産出-1. MC産出+4.",
 
     "ArchaeBacteria": "古細菌",
     "It must be -18 C or colder. Increase your plant production 1 step.": "条件：温度-18℃以下. 植物産出+1.",
@@ -266,7 +266,7 @@
 
     "Ganymede Colony": "ガニメデ・コロニー",
     "Place a city tile ON THE RESERVED AREA.": "火星外予定地「ガニメデ・コロニー」に都市タイルを配置.",
-    "1 VP per Jovian tag you have.": " 木星タグ1つ毎に1VP.",
+    "1 VP per Jovian tag you have.": "木星タグ1つ毎に1VP.",
 
     "Callisto Penal Mines": "カリスト懲罰鉱山",
     "Increase your M€ production 3 steps.": "MC産出+3.",
@@ -648,7 +648,7 @@
 
     "Restricted Area": "立ち入り制限区",
     "Action: Spend 2 M€ to draw a card.": "アクション：2MC支払い、1ドロー.",
-    "Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each": "効果：金星タグプレイ時、このカード上の浮遊体を3MCとして支払ってもよい.",
+    "Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each": "効果：金星タグをプレイ時、このカード上の浮遊体を3MCとして支払ってもよい.",
 
     "Place this tile.": "特殊タイルを配置.",
 
@@ -690,7 +690,7 @@
   "HYDROGEN TO VENUS":"金星への水素",
 
   "Plant Microbe Animal":"植物タグ、微生物タグ、動物タグ.",
-  "Jovian":"木星タグ.",
+  "Jovian":"木星",
   "max 3 Oceans":"海洋3枚以下.",
   "Forest":"緑地タイル",
   "2 Power":"電力タグ2つ以上.",
@@ -705,7 +705,7 @@
   "Oxygen must be 4% or lower. Draw two cards.":"条件：酸素4%以下. 2ドロー.",
   "After being played, when you perform an action, the wild tag counts as any tag of your choice.":"プレイ後、？タグは任意のタグ1つとして扱う. ゲーム終了時にはカウントしない.",
   "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "電力産出-1し、MC産出+2. 火山地帯に都市タイル配置(都市隣接可). ※本環境では「ノクティス市」以外の白文字マス. ヘラス盤面のみ任意配置可能.",
-  "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.":"効果：植物タグプレイ時、このカード上の微生物を2MCとして支払ってもよい",
+  "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.":"効果：植物タグをプレイ時、このカード上の微生物を2MCとして支払ってもよい",
   "Temperature must be -20 C or lower.":"条件：温度-20℃以下.",
   "Increase your energy production 1 step": "電力産出+1.",
   "Increase your energy production 2 steps": "電力産出+2.",
@@ -713,6 +713,6 @@
   "Increase your plant production 1 step": "植物産出+1.",
   "Remove 2 microbes to raise temperature 1 step": "このカード上から2微生物除去し、温度+1段階.",
   "Select card to add 2 microbes": "2微生物獲得.",
-  "Add microbes": "1微生物獲得",
+  "Add microbes": "微生物獲得",
   "Select a space with a steel or titanium bonus adjacent to one of your tiles": "自身のタイルに隣接する配置ボーナスに建材 または チタンを含む空きマスを選択."
 }

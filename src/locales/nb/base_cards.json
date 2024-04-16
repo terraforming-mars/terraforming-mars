@@ -36,19 +36,19 @@
 
 	"Trade Advance": "Handelsforskudd",
 	"[ solo": "[ solo",
-	"Trade all colonies with": "Handle alle kolonier med",
+	"Trade all colonies with": "Handle med alle kolonier med",
 	"Gain 2 M€ [SOLO: Gain 10 M€]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.": "Få 2 M€ [SOLO: Få 10 M€]. Handle med alle aktive kolonier. Du kan øke koloni-sporet 1 steg før hver handel.",
 
 	"Valuable Gases": "Verdifulle gasser",
 	"Gain 6 M€. Play a Venus card from your hand and add 4 floaters to it.": "Få 6 M€. Spill et Venus kort fra hånden og legg til 4 svevere på det.",
 
-	"Venus First": "Venus først",
+	"Venus First": "Venus Først",
 	"Raise Venus 2 steps. Draw 2 Venus cards from the deck.": "Øk Venus 2 steg. Trekk 2 Venus kort fra kortstokken.",
 
 	"Inventors' Guild": "Oppfinnerlaug",
-	"Look at the top card and either buy it or discard it": "Se på det øverste kortet i kortstokken og enten kjøp det eller kast det.",
+	"Action: Look at the top card and either buy it or discard it": "Se på det øverste kortet i kortstokken og enten kjøp det eller kast det.",
 
-	"Martian Rails": "Togbane på Mars",
+	"Martian Rails": "Mars Jernbane",
 	"Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "Betal 1 energi for å få 1 M€ per by PÅ MARS.",
 
 	"Capital": "Hovedstad",
@@ -302,7 +302,7 @@
 	"Giant Space Mirror": "Gigantisk rom-solreflektor",
 	"Increase your energy production 3 steps.": "Øk din energiproduksjon med 3 trinn.",
 
-	"Trans-Neptune Probe": "Transneptunsonde",
+	"Trans-Neptune Probe": "Trans-Neptun-sonde",
 
 	"Commercial District": "Forretningsdistrikt",
 	"Place this tile. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Plasser denne brikken. Senk din energiproduksjon med 1 trinn og øk din M€-produksjon med 4 trinn.",
@@ -332,7 +332,7 @@
 	"Bushes": "Busker",
 	"Requires -10 C or warmer. Increase your plant production 2 steps. Gain 2 plants.": "Krever -10 °C eller varmere. Øk din planteproduksjon med 2 trinn. Få 2 planter.",
 
-	"Mass Converter": "Massomformer",
+	"Mass Converter": "Masseomformer",
 	"Requires 5 science tags. Increase your energy production 6 steps.": "Krever 5 vitenskapssymboler. Øk din energiproduksjon med 6 trinn.",
 
 	"Physics Complex": "Fysikkompleks",
@@ -727,7 +727,7 @@
 	"Steel production": "Stahl-produksjon",
 	"4 Science": "4 vitenskap",
 	"2 Cities": "2 byer",
-	"Standard projects": "Standardprojekter",
+	"Standard projects": "Standardprosjekter",
 
 	"Requires 2 Earth tags. Increase M€ production 4 steps.": "Krever 2 Jordsymboler. Øk M€-produksjonen din med 4 trinn.",
 	"Oxygen must be 4% or lower. Draw two cards.": "Oksygenivået må være 4% eller lavere. Trekk 2 kort.",

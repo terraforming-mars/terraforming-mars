@@ -777,6 +777,8 @@
 	"Leave as it is": "La det være som det er",
 	"Rotate Crashlanding": "Roter Kræsjlanding",
 	"Playing ${0} Consumes ${1} data from Think Tank": "Spiller ${0} bruker ${1} data fra Tenketank",
+	"Remove ${0} plants from": "Fjern ${0} planter fra",
+    "Remove ${0} plants from ${1}": "Fjern ${0} planter fra ${1}",
 
 	"Choose your resource bonus": "Velg din ressursbonus",
 	"Choose your wild resource bonus, after which you will gain ${0} more distinct standard resources.": "Få en valgfri ressursbonus, og deretter får du ${0} forskjellige standardressurser.",
@@ -784,7 +786,7 @@
 	"Gain 1 resources for your Venus track bonus.": "Få 1 ressurs som din Venus-spor bonus.",
 	"Gain 2 resources for your Venus track bonus.": "Få 2 ressurs som din Venus-spor bonus.",
 	"Gain 3 resources for your Venus track bonus.": "Få 3 ressurs som din Venus-spor bonus.",
-	"Gain 1 resource for your Planetary track bonus.": "Få 1 ressurs som din Planet-spor bonus.",
+	"Gain 1 resource for your Planetary track bonus.": "Få 1 ressurs som din planetspor-bonus.",
 	"Assign the clone tag for ${0}": "Tildel klone-symbolet for ${0}",
 	"Select an additional bonus from this space.": "Velg en ekstra bonus fra dette feltet.",
 	"Philares effect: select ${0} resource(s)": "Philares Effekt: Velg ${0} ressurs(er)",
@@ -792,6 +794,7 @@
 	"Philares effect: select 2 resource(s)": "Philares Effekt: Velg 2 ressurser",
 	"Philares effect: select 3 resource(s)": "Philares Effekt: Velg 3 ressurser",
 	"Philares effect: select 4 resource(s)": "Philares Effekt: Velg 4 ressurser",
+	" show tiles ": " vis brikker ",
 	"Global Event - Select 2 cards to discard": "Globalt hendelseskort - Velg 2 kort å kaste",
 	"Dry Deserts Global Event - Gain 1 resource(s) for influence": "Tørre ørkener global hendelse - Få 1 ressurs for innflytelse.",
 	"Dry Deserts Global Event - Gain 2 resource(s) for influence": "Tørre ørkener global hendelse - Få 2 ressurs for innflytelse.",
@@ -858,7 +861,8 @@
 	"Ares": "Ares",
 	"Fan-made": "Laget av fans",
 	"Community": "Samfunn",
-	"Pathfinders": "Pathfinders",
+	"Pathfinders": "Stifinnere",
+	"Underworld": "Underverden",
 	"Alt. Venus Board": "Alternativt Venus-brett",
 	"arabia terra": "Arabia Terra",
 	"vastitas borealis": "Vastitas Borealis",
@@ -963,7 +967,7 @@
 	"How to pay?": "Spilleveiledning",
 	"Some titanium is unavailable here in reserve for the project card.": "Noe titan er reservert for prosjektkortet og er ikke tilgjengelig her.",
 	"Some steel is unavailable here in reserve for the project card.": "Noe stål er reservert for prosjektkortet og er ikke tilgjengelig her.",
-	"Must select a space": "Må velge et område",
+	"Must select a space": "Velg et felt",
 	"[ toggle cards filters ]": "[ Aktiver/deaktiver kortfilter ]",
 	"[ toggle tags view ]": "[ Aktiver/deaktiver symbolfilter ]",
 	"[ toggle cards in hand ]": "[ Aktiver/deaktiver kort på hånden ]",
@@ -976,7 +980,6 @@
 	"Global Events": "Globale hendelser",
 	"Sort by ID (work in progress)": "Sorter etter ID (under utvikling)",
 	"event": "Hendelse",
-	"active": "aktivt",
 	"automated": "automatisert",
 	"standard_project": "Standardprosjekt",
 
@@ -1065,5 +1068,14 @@
 	"Increase energy production 1 step": "Øk energiproduksjon 1 steg",
 	"Increase heat production 1 step": "Øk varmeproduksjon 1 steg",
 
-	"Production count": "Produksjonsantall"
+	"Production count": "Produksjonsantall",
+	"Note: the temperature is already at its goal.": "Merk: Temperaturen har allerede nådd sitt mål.",
+    "Note: the oxygen level is already at its goal.": "Merk: Oksygennivået har allerede nådd sitt mål.",
+    "Note: all oceans are already on the board.": "Merk: Alle hav er allerede på brettet.",
+    "Note: Venus scale is already at its goal.": "Merk: Venus-skalaen har allerede nådd sitt mål.",
+    "Note: Moon habitat rate is already at its goal.": "Merk: Måne-habitatmengden har allerede nådd sitt mål.",
+    "Note: Moon mining rate is already at its goal.": "Merk: Måne-gruvedriften har allerede nådd sitt mål.",
+    "Note: Moon logistics rate is already at its goal.": "Merk: Måne-logistikken har allerede nådd sitt mål.",
+	"Yes": "Ja",
+	"No": "Nei"
 }

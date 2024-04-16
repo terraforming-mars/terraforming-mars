@@ -38,7 +38,7 @@ describe('BiofertilizerFacility', function() {
 
     // Initial expectations that will change after playing the card.
     expect(player.production.plants).is.eq(0);
-    expect(microbeHost.resourceCount || 0).is.eq(0);
+    expect(microbeHost.resourceCount).is.eq(0);
     expect(game.deferredActions).has.lengthOf(0);
 
     expect(card.canPlay(player)).is.true;

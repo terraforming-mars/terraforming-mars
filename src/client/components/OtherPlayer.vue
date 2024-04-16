@@ -1,7 +1,7 @@
 <template>
   <div v-show="isVisible()">
     <div :class="'player_translucent_bg_color_' + player.color" class="other_player_header">
-      <div class="player_name"> {{ player.name }} played cards </div>
+      <div class="player_name" v-i18n> {{ player.name }} played cards </div>
       <AppButton size="big" type="close" @click="hideMe" :disableOnServerBusy="false" align="right" />
     </div>
     <div class="other_player_cont menu">
@@ -22,7 +22,7 @@
             </div>
         </div>
         <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player_home_block">
-            <span> Self-Replicating Robots cards </span>
+            <span v-i18n> Self-Replicating Robots cards </span>
             <div>
                 <div v-for="card in player.selfReplicatingRobotsCards" :key="card.name" class="cardbox">
                     <Card :card="card" />

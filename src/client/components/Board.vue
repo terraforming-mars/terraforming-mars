@@ -88,7 +88,7 @@
             />
 
             <svg id="board_legend" height="550" width="630" class="board-legend">
-              <g v-for="(key, idx) of LEGENDS[thisBoardName]" :key="idx" :transform="`translate(${key.position[0]}, ${key.position[1]})`">
+              <g v-for="(key, idx) of LEGENDS[boardName]" :key="idx" :transform="`translate(${key.position[0]}, ${key.position[1]})`">
                 <text class="board-caption">
                   <tspan y="0">{{key.text[0]}}</tspan>
                   <tspan :x="key.secondRowX || 0" y="1.1em">{{key.text[1]}}</tspan>
@@ -387,7 +387,7 @@ export default Vue.extend({
       type: Boolean,
     },
     boardName: {
-      type: String,
+      type: String as () => BoardName,
     },
     oceans_count: {
       type: Number,
@@ -502,9 +502,6 @@ export default Vue.extend({
   computed: {
     BoardName(): typeof BoardName {
       return BoardName;
-    },
-    thisBoardName(): BoardName {
-      return this.boardName as BoardName;
     },
     LEGENDS(): typeof LEGENDS {
       return LEGENDS;

@@ -8,10 +8,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '18.x'
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
     - run: npm ci
     - run: npm run lint
     - run: npm run build
@@ -22,10 +20,8 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '18.x'
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
     - run: npm ci
     # - run: npm run lint
     - run: npm run build
@@ -36,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - run: docker build .
 
 

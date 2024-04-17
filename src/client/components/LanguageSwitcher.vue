@@ -4,7 +4,7 @@
     <div
       :key="lang"
       :class="`language-icon language-icon--${lang} language-icon-for-switcher`"
-      :title="LANGUAGES[lang]"
+      :title="title(lang)"
       @click="switchLanguageTo(lang)"
     />
     &nbsp;
@@ -26,6 +26,10 @@ export default Vue.extend({
     switchLanguageTo(langId: string) {
       PreferencesManager.INSTANCE.set('lang', langId);
       this.reloadWindow();
+    },
+    title(key: keyof typeof LANGUAGES) {
+      const lang = LANGUAGES[key];
+      return `${lang[0]} (${lang[1]})`;
     },
   },
   computed: {

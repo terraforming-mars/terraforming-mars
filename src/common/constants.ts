@@ -75,23 +75,23 @@ export const CORRUPTION_VALUE = 10;
 
 export const ALL_LANGUAGES = ['en', 'de', 'fr', 'ru', 'cn', 'pl', 'es', 'br', 'it', 'ko', 'nl', 'hu', 'jp', 'bg', 'nb', 'ua'] as const;
 
-export const LANGUAGES: Record<typeof ALL_LANGUAGES[number], string> = {
-  en: 'English',
-  de: 'Deutsch',
-  fr: 'Français',
-  ru: 'Русский',
-  cn: '华语',
-  pl: 'Polski',
-  es: 'Español',
-  br: 'Português Brasileiro',
-  it: 'Italiano',
-  ko: '한국어',
-  nl: 'Nederlands',
-  hu: 'Magyar',
-  jp: '日本語',
-  bg: 'Български',
-  nb: 'Norsk',
-  ua: 'Українська',
+export const LANGUAGES: Record<typeof ALL_LANGUAGES[number], [string, string]> = {
+  en: ['English', 'English'],
+  de: ['Deutsch', 'German'],
+  fr: ['Français', 'French'],
+  ru: ['Русский', 'Russian'],
+  cn: ['华语', 'Chinese'],
+  pl: ['Polski', 'Polish'],
+  es: ['Español', 'Spanish'],
+  br: ['Português Brasileiro', 'Brazilian Portugese'],
+  it: ['Italiano', 'Italian'],
+  ko: ['한국어', 'Korean'],
+  nl: ['Nederlands', 'Dutch'],
+  hu: ['Magyar', 'Hungarian'],
+  jp: ['日本語', 'Japanese'],
+  bg: ['Български', 'Bulgarian'],
+  nb: ['Norsk', 'Norwegian'],
+  ua: ['Українська', 'Ukrainian'],
 };
 
 export const APP_NAME = 'Terraforming Mars';

@@ -1,16 +1,22 @@
+import {expect} from 'chai';
 import {shallowMount} from '@vue/test-utils';
 import {ALL_LANGUAGES, LANGUAGES} from '@/common/constants';
-import {expect} from 'chai';
 import LanguageSwitcher from '@/client/components/LanguageSwitcher.vue';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 describe('LanguageSwitcher', () => {
-  it('renders all available languages', () => {
+  describe('renders all available languages', () => {
     const wrapper = shallowMount(LanguageSwitcher);
 
     ALL_LANGUAGES.forEach((lang) => {
-      const icon = wrapper.find(`.language-icon--${lang}`);
-      expect(icon.attributes('title')).to.be.eq(LANGUAGES[lang]);
+      it('render ' + lang, () => {
+        const icon = wrapper.find(`.language-icon--${lang}`);
+        const expected = icon.attributes('title') as string;
+        const e = LANGUAGES[lang];
+        expect(expected).to.be.a('string');
+        expect(expected).to.satisfy((title: string) => title.startsWith(e[0]));
+        expect(expected).to.satisfy((title: string) => title.indexOf(e[1], 1) > 0);
+      });
     });
   });
 

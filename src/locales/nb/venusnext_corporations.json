@@ -1,0 +1,30 @@
+{
+    "APHRODITE": "AFRODITE",
+    "Aphrodite": "Afrodite",
+    "You start with 1 plant production and 47 M€.": "Du starter med 1 planteproduksjon og 47 M€.",
+    "Whenever Venus is terraformed 1 step, you gain 2 M€.": "Du får 2 M€ for hver gang Venus blir terraformet 1 trinn.",
+
+    "CEL": "CEL",
+    "ES": "ES",
+    "TIC": "TIC",
+    "Celestic": "Celestic",
+    "You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.": "Du starter med 42 M€. Som din første handling, snu kort fra bunken til du har avslørt 2 kort med et sveversymbol på. Ta dem på hånden og kast resten.",
+    "Add a floater to ANY card. 1 VP per 3 floaters on this card.": "Legg til et sveverikon på ET VALGFRITT kort. 1 SP per 3 svevere på dette kortet.",
+
+    "MA": "MA",
+    "NUTECH": "NUTECH",
+    "Manutech": "Manutech",
+    "You start with 1 steel production, and 35 M€.": "Du starter med 1 stålproduksjon og 35 M€.",
+    "For each step you increase the production of a resource, including this, you also gain that resource.": "For hvert trinn du øker produksjonen av en ressurs, inkludert denne, får du også en av den ressursen.",
+
+    "MORNING STAR INC.": "MORNING STAR INC.",
+    "Morning Star Inc.": "Morning Star Inc.",
+    "You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.": "Du starter med 50 M€. Som din første handling, snu kort fra bunken til du har avslørt 3 Venus-kort. Ta dem på hånden og kast resten.",
+    "Your Venus requirements are +/- 2 steps, your choice in each case.": "Dine Venus-krav er +/- 2 trinn, ditt valg i hvert tilfelle.",
+    "Draw 3 cards with a Venus tag": "Trekk 3 kort med et Venus-symbol",
+
+    "VIRON": "VIRON",
+    "Viron": "Viron",
+    "You start with 48 M€.": "Du starter med 48 M€.",
+    "Use a blue card action that has already been used this generation.": "Gjør en handling fra et blått kort som allerede har blitt brukt denne generasjonen."
+}

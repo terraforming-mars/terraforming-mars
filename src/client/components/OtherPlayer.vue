@@ -22,7 +22,7 @@
             </div>
         </div>
         <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player_home_block">
-            <span> Self-Replicating Robots cards </span>
+            <span v-i18n> Self-Replicating Robots cards </span>
             <div>
                 <div v-for="card in player.selfReplicatingRobotsCards" :key="card.name" class="cardbox">
                     <Card :card="card" />

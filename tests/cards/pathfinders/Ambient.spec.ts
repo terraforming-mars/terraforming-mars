@@ -119,8 +119,8 @@ describe('Ambient', function() {
   });
 
   const redsRuns = [
-    // {heat: 8, mc: 3, expected: true},
-    // {heat: 11, mc: 0, expected: true},
+    {heat: 8, mc: 3, expected: true},
+    {heat: 11, mc: 0, expected: true},
     {heat: 8, mc: 0, expected: false},
   ];
   for (const run of redsRuns) {

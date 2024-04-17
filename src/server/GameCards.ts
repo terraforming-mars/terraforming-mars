@@ -122,8 +122,9 @@ export class GameCards {
         if (card === undefined) {
           // TODO(kberg): throw an error.
           console.warn(`Unknown card: ${cardName}`);
+        } else {
+          cards.push(<T> card);
         }
-        cards.push(<T> card);
       }
     }
     return cards;

@@ -8,6 +8,10 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {MAX_TEMPERATURE} from '../../../src/common/constants';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {Phase} from '../../../src/common/Phase';
+import {Turmoil} from '../../../src/server/turmoil/Turmoil';
+import {Reds} from '../../../src/server/turmoil/parties/Reds';
+import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 
 describe('Ambient', function() {
   let card: Ambient;
@@ -113,4 +117,25 @@ describe('Ambient', function() {
     runAllActions(game);
     expect(getBlueActions()).is.undefined;
   });
+
+  const redsRuns = [
+    {heat: 8, mc: 3, expected: true},
+    {heat: 11, mc: 0, expected: true},
+    {heat: 8, mc: 0, expected: false},
+  ];
+  for (const run of redsRuns) {
+    it('is compatible with Reds + Helion ' + JSON.stringify(run), () => {
+      [game, player, player2] = testGame(2, {turmoilExtension: true});
+      player.setCorporationForTest(card);
+      player.canUseHeatAsMegaCredits = true;
+      player.game.phase = Phase.ACTION;
+      const turmoil = Turmoil.getTurmoil(game);
+      turmoil.rulingParty = new Reds();
+      PoliticalAgendas.setNextAgenda(turmoil, player.game);
+      setTemperature(game, MAX_TEMPERATURE);
+      player.heat = run.heat;
+      player.megaCredits = run.mc;
+      expect(card.canAct(player)).eq(run.expected);
+    });
+  }
 });

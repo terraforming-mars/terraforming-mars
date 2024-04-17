@@ -82,15 +82,10 @@ export class GameCards {
       this.gameOptions.includedCards,
     );
     return cardsWithIncludedCards.filter((card) => {
-      if (!card) {
-        return false;
-      }
-      return (
-        card.type !== CardType.CORPORATION &&
-        card.type !== CardType.PRELUDE &&
-        card.type !== CardType.CEO &&
-        card.type !== CardType.STANDARD_PROJECT
-      );
+      return
+        card.type === CardType.AUTOMATED &&
+        card.type === CardType.ACTIVE &&
+        card.type === CardType.EVENT;
     });
   }
   public getStandardProjects() {

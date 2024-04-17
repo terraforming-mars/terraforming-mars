@@ -15,7 +15,7 @@ import {ICard} from './cards/ICard';
 import {isCompatibleWith} from './cards/ICardFactory';
 import {GameOptions} from './game/GameOptions';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
-import {IProjectCard} from './cards/IProjectCard';
+import {isIProjectCard, IProjectCard} from './cards/IProjectCard';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {newCard} from './createCard';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
@@ -75,7 +75,12 @@ export class GameCards {
   }
 
   public getProjectCards() {
-    return this.getCards<IProjectCard>('projectCards');
+    const cards = this.getCards<IProjectCard>('projectCards');
+    const cardsWithIncludedCards = this.addCustomCards(
+      cards,
+      this.gameOptions.includedCards,
+    );
+    return cardsWithIncludedCards.filter(isIProjectCard);
   }
   public getStandardProjects() {
     return this.getCards<IStandardProjectCard>('standardProjects');
@@ -117,8 +122,9 @@ export class GameCards {
         if (card === undefined) {
           // TODO(kberg): throw an error.
           console.warn(`Unknown card: ${cardName}`);
+        } else {
+          cards.push(<T> card);
         }
-        cards.push(<T> card);
       }
     }
     return cards;
@@ -133,7 +139,6 @@ export class GameCards {
     }
 
     cards = this.filterBannedCards(cards);
-    cards = this.addCustomCards(cards, this.gameOptions.includedCards);
     cards = this.filterReplacedCards(cards);
     return cards;
   }

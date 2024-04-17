@@ -68,17 +68,17 @@ describe('AnubisSecurities', () => {
   });
 
   const onProductionPhaseRuns = [
-    {corruptions: [0, 0], mc: [2, 10], tr: 21},
-    {corruptions: [1, 0], mc: [8, 10], tr: 21},
-    {corruptions: [2, 0], mc: [14, 10], tr: 21},
-    {corruptions: [0, 1], mc: [1, 9], tr: 20},
-    {corruptions: [0, 2], mc: [2, 8], tr: 20},
-    {corruptions: [0, 3], mc: [3, 7], tr: 20},
+    {corruptions: [0, 0], expected: {mc: [2, 10], tr: 21}},
+    {corruptions: [1, 0], expected: {mc: [8, 10], tr: 21}},
+    {corruptions: [2, 0], expected: {mc: [14, 10], tr: 21}},
+    {corruptions: [0, 1], expected: {mc: [1, 9], tr: 20}},
+    {corruptions: [0, 2], expected: {mc: [2, 8], tr: 20}},
+    {corruptions: [0, 3], expected: {mc: [3, 7], tr: 20}},
   ] as const;
   for (const run of onProductionPhaseRuns) {
     it('production phase ' + JSON.stringify(run), () => {
       const card = new AnubisSecurities();
-      const [/* game */, player, player2] = testGame(2);
+      const [game, player, player2] = testGame(2);
 
       player.setCorporationForTest(card);
       player.underworldData.corruption = run.corruptions[0];
@@ -88,10 +88,11 @@ describe('AnubisSecurities', () => {
       player2.megaCredits = 10;
 
       card.onProductionPhase(player);
+      runAllActions(game);
 
-      expect(player.megaCredits).eq(run.mc[0]);
-      expect(player2.megaCredits).eq(run.mc[1]);
-      expect(player.getTerraformRating()).eq(run.tr);
+      expect(player.megaCredits).eq(run.expected.mc[0]);
+      expect(player2.megaCredits).eq(run.expected.mc[1]);
+      expect(player.getTerraformRating()).eq(run.expected.tr);
     });
   }
 });

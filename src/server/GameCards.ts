@@ -11,6 +11,7 @@ import {PATHFINDERS_CARD_MANIFEST} from './cards/pathfinders/PathfindersCardMani
 import {CEO_CARD_MANIFEST} from './cards/ceos/CeoCardManifest';
 import {CardManifest, ModuleManifest} from './cards/ModuleManifest';
 import {CardName} from '../common/cards/CardName';
+import {CardType} from '../common/cards/CardType';
 import {ICard} from './cards/ICard';
 import {isCompatibleWith} from './cards/ICardFactory';
 import {GameOptions} from './game/GameOptions';
@@ -75,7 +76,22 @@ export class GameCards {
   }
 
   public getProjectCards() {
-    return this.getCards<IProjectCard>('projectCards');
+    const cards = this.getCards<IProjectCard>('projectCards');
+    const cardsWithIncludedCards = this.addCustomCards(
+      cards,
+      this.gameOptions.includedCards,
+    );
+    return cardsWithIncludedCards.filter((card) => {
+      if (!card) {
+        return false;
+      }
+      return (
+        card.type !== CardType.CORPORATION &&
+        card.type !== CardType.PRELUDE &&
+        card.type !== CardType.CEO &&
+        card.type !== CardType.STANDARD_PROJECT
+      );
+    });
   }
   public getStandardProjects() {
     return this.getCards<IStandardProjectCard>('standardProjects');
@@ -133,7 +149,6 @@ export class GameCards {
     }
 
     cards = this.filterBannedCards(cards);
-    cards = this.addCustomCards(cards, this.gameOptions.includedCards);
     cards = this.filterReplacedCards(cards);
     return cards;
   }

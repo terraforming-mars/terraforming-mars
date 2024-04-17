@@ -10,6 +10,7 @@ import {TileType} from '../../../common/TileType';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
+import {Resource} from '../../../common/Resource';
 
 export class HE3ProductionQuotas extends Card implements IProjectCard {
   constructor() {
@@ -47,8 +48,11 @@ export class HE3ProductionQuotas extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     const moonTiles = MoonExpansion.spaces(player.game, TileType.MOON_MINE, {surfaceOnly: true});
-    player.steel -= moonTiles.length;
-    player.heat += (4 * moonTiles.length);
+    const steelSpent = moonTiles.length;
+    const heatGained = moonTiles.length * 4;
+    player.stock.deduct(Resource.STEEL, steelSpent);
+    player.heat += heatGained;
+    player.game.log('Player spent ${0} steel and gained ${1} heat', (b) => b.number(steelSpent).number(heatGained));
     return undefined;
   }
 }

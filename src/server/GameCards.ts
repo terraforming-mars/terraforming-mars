@@ -16,6 +16,7 @@ import {ICard} from './cards/ICard';
 import {isCompatibleWith} from './cards/ICardFactory';
 import {GameOptions} from './game/GameOptions';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
+import {isIProjectCard} from './cards/corporation/IProjectCard';
 import {IProjectCard} from './cards/IProjectCard';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {newCard} from './createCard';
@@ -81,12 +82,7 @@ export class GameCards {
       cards,
       this.gameOptions.includedCards,
     );
-    return cardsWithIncludedCards.filter((card) => {
-      return
-        card.type === CardType.AUTOMATED &&
-        card.type === CardType.ACTIVE &&
-        card.type === CardType.EVENT;
-    });
+    return cardsWithIncludedCards.filter(isIProjectCard);
   }
   public getStandardProjects() {
     return this.getCards<IStandardProjectCard>('standardProjects');

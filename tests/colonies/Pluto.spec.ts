@@ -34,15 +34,42 @@ describe('Pluto', function() {
 
   it('Should give trade bonus', function() {
     pluto.addColony(player);
+    runAllActions(game); // Draw a card
+    expect(player.cardsInHand).has.lengthOf(2);
+
+    pluto.trade(player2);
+    runAllActions(game); // Draw a card
+    expect(player.cardsInHand).has.lengthOf(3);
+
+    const input = cast(player.getWaitingFor(), SelectCard<IProjectCard>);
+    input.cb([input.cards[0]]); // Discard a card
+
+    runAllActions(game);
+
+    expect(player.cardsInHand).has.lengthOf(2);
+    expect(player2.cardsInHand).has.lengthOf(1);
+  });
+
+  it('Reward in order #4536', () => {
+    pluto.addColony(player);
+    pluto.addColony(player);
+    runAllActions(game);
+    expect(player.cardsInHand).has.lengthOf(4);
 
     pluto.trade(player2);
 
     runAllActions(game);
 
-    const input = cast(player.getWaitingFor(), SelectCard<IProjectCard>);
-    input.cb([input.cards[0]]); // Discard a card
+    const selectCard = cast(player.popWaitingFor(), SelectCard<IProjectCard>);
+    expect(player.cardsInHand).has.lengthOf(5);
+    selectCard.cb([selectCard.cards[0]]); // Discard a card
+    expect(player.cardsInHand).has.lengthOf(4);
 
-    expect(player.cardsInHand).has.lengthOf(2);
-    expect(player2.cardsInHand).has.lengthOf(1);
+    runAllActions(game);
+
+    const selectCard2 = cast(player.popWaitingFor(), SelectCard<IProjectCard>);
+    expect(player.cardsInHand).has.lengthOf(5);
+    selectCard2.cb([selectCard2.cards[0]]); // Discard a card
+    expect(player.cardsInHand).has.lengthOf(4);
   });
 });

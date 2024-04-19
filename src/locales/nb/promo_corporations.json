@@ -1,0 +1,59 @@
+{
+  "Arcadian": "Arkadiske",
+  "Communities": "Samfunn",
+  "Arcadian Communities": "Arkadiske samfunn",
+  "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "Du starter med 40 M€ og 10 stål. SOM DIN FØRSTE HANDLING, PLASSER ET SAMFUNN [SPILLERMARKØR] PÅ ET IKKE-RESERVERT OMRÅDE.",
+  "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.": "HANDLING: PLASSER ET SAMFUNN (SPILLERMARKØR) PÅ ET IKKE-RESERVERT OMRÅDE SOM ER INNTIL EN AV DINE PLASSERTE BRIKKER ELLER MARKERTE OMRÅDER.",
+  "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.": "EFFEKT: MARKERTE OMRÅDER ER RESERVERT FOR DEG. NÅR DU PLASSERER ET PLASSERINGSBRIKKE DER, FÅR DU 3 M€.",
+
+  "Astrodrill": "Astrodrill",
+  "Astrodrill ENT": "Astrodrill",
+  "You start with 35 M€ and 3 asteroid resources.": "Du starter med 35 M€ og 3 asteroideressurser.",
+  "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "HANDLING: LEGG TIL EN ASTEROIDERESSURS TIL EN VALGFRI KORT ELLER FÅ EN STANDARDRESSURS, ELLER FJERN EN ASTEROIDERESSURS FRA DENNE KORTET FOR Å FÅ 3 TITAN.",
+
+  "FACTORUM": "FACTORUM",
+  "Factorum": "Factorum",
+  "You start with 37 M€. Increase your steel production 1 step.": "Du starter med 37 M€. Øk stålproduksjonen din med 1 trinn.",
+  "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "Handling: Øk energiproduksjonen din med 1 trinn hvis du ikke har noen energiressurser, eller bruk 3 M€ for å trekke et bygningskort.",
+
+  "KUIPER COOPERATIVE": "KUIPER SAMARBEID",
+  "Kuiper Cooperative": "Kuiper Samarbeid",
+  "You start with 33 M€. Increase titanium production 1 step.": "Du starter med 33 M€. Øk titanproduksjonen din med 1 trinn.",
+  "Action: Add 1 asteroid here for every space tag you have.": "Handling: Legg til 1 asteroide her for hvert romsymbol du har.",
+  "Effect: When you use the AQUIFER or ASTEROID standard projects, you can spend asteroids on card as 1M€ each.": "Effekt: Når du bruker AKVIFER eller ASTEROIDE standardprosjekter, kan du bruke asteroider på kortet som 1M€ hver.",
+
+  "mons": "Mons",
+  "INSURANCE": "FORSIKRING",
+  "Mons Insurance": "Mons Forsikring",
+  "You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "Du starter med 48 M€. Øk M€-produksjonen din med 4 trinn. ALLE MOTSTANDERE REDUSERER SIN M€-PRODUKSJON MED 2 TRINN. DETTE AKTIVERER IKKE EFFEKTEN NEDENFOR.",
+  "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.": "Effekt: Når en spiller får en annen spiller til å redusere produksjonen eller miste ressurser, betal 3M€ til offeret, eller så mye som mulig.",
+
+  "Pharmacy": "Apotek",
+  "Union": "Unionen",
+  "Pharmacy Union": "Apotek-unionen",
+  "You start with 54 M€ . Draw a Science card.": "Du starter med 54 M€. Trekk et vitenskapskort.",
+  "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "Effekt: Når et valgfritt mikrobesymbol spilles, legg til en sykdom her og mist 4 M€ eller så mye som mulig. Når du spiller et vitenskapssymbol, fjern en sykdom her og få 1 TR ELLER hvis det ikke er noen sykdommer her, KAN du legge dette kortet med forsiden ned i hendelsesbunken din for å få 3 TR.",
+
+  "PHIL": "PHIL",
+  "A": "A",
+  "RES": "RES",
+  "Philares": "Philares",
+  "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.": "Du starter med 47 M€. Som din første handling, plasser et skogområde og øk oksygenet med 1 trinn.",
+  "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "Effekt: Hver ny tilstøtende plassering mellom din brikke og en motstanders brikke gir deg en standardressurs av ditt valg [uavhengig av hvem som nettopp plasserte en brikke].",
+
+  "Recyclon": "Recyclon",
+  "You start with 38 M€ and 1 steel production.": "Du starter med 38 M€ og 1 stålproduksjon.",
+  "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "Effekt: Når du spiller et bygningssymbol, inkludert dette, legg til 1 mikrobe på dette kortet, eller fjern 2 mikrober her og øk planteproduksjonen din med 1 trinn.",
+
+  "Tycho Magnetics": "Tycho Magnetikk",
+  "You start with 42 M€. Increase your energy production 1 step.": "Du starter med 42 M€. Øk energiproduksjonen din med 1 trinn.",
+  "Action: Spend any amount of energy to draw the that many cards. Keep 1 and discard the rest.": "Handling: Bruk en valgfri mengde energi for å trekke et likt antall kort. Behold 1 og kast resten.",
+  
+  "SPLI": "SPLI",
+  "C": "C",
+  "E": "E",
+  "TACTICAL GENOMICS": "TAKTISK GENOMIKK",
+  "Splice": "Splice",
+  "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Du starter med 44 M€. Som din første handling, vis kort fra kortstokken til du har funnet et mikrobesymbol. Ta det og kast resten.",
+  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "Effekt: Når et mikrobesymbol spilles, inkl. dette, FÅR DEN SPILLEREN 2 M€, eller legger til en mikrobe på DETTE kortet, og du får 2 M€."
+}

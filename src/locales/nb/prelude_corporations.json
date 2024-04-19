@@ -1,0 +1,61 @@
+{
+    "SPIRE": "SPIRE",
+    "Spire": "Spire",
+    "You start with 44 M€. As your first action, draw 4 cards, then discard 3 cards from your hand.": "Du starter med 44 M€. Som din første handling, trekker du 4 kort, og kaster deretter 3 kort fra hånden din.",
+    "Effect: When you play a card with at least 2 tags. including this, add a science resource here.": "Effekt: Når du spiller et kort med minst 2 symboler, inkludert dette, legg til en vitenskapsressurs på dette kortet.",
+    "Effect: When you use a standard project, science resources here may be spent as 2 M€ each.": "Effekt: Når du bruker et standardprosjekt, kan vitenskapsressurser her brukes som 2 M€ hver.",
+    
+    "SAGITTA FRONTIER SERVICES": "SAGITTA GRENSETJENESTER",
+    "Sagitta Frontier Services": "Sagitta Grensetjenester",
+    "You start with 28 M€. Increase energy production 1 step and M€ production 2 steps. Draw a card with no tags.": "Du starter med 28 M€. Øk energiproduksjonen med 1 og M€-produksjonen med 2. Trekk et kort uten symboler.",
+    "Effect: When you play a card with no tags, gain 4 M€.": "Effekt: Du får 4 M€ når du spiller et kort uten symboler.",
+    "Effect: When you play a card with EXACTLY 1 TAG, gain 1 M€.": "Effekt: Du får 1 M€ når du spiller et kort med NØYAKTIG 1 symbol.",
+    
+    "ECOTEC": "ECOTEC",
+    "Ecotec": "Ecotec",
+    "You start with 42 M€. Increase your plant production 1 step.": "Du starter med 42 M€. Øk planteproduksjonen din med 1.",
+    "Effect: When you play a microbe, plant, or animal tag, gain 1 plant or add a microbe to ANY card.": "Effekt: Når du spiller et mikrobe-, plante- eller dyresymbol, får du 1 plante eller legger til en mikrobe på ET KORT.",
+    
+    "PALLADIN SHIPPING": "PALLADIN TRANSPORT",
+    "Palladin Shipping": "Palladin Transport",
+    "You start with 36 M€ and 5 titanium.": "Du starter med 36 M€ og 5 titan.",
+    "Effect: When you play a space event, gain 1 titanium.": "Effekt: Når du spiller en romhendelse, får du 1 titan.",
+    "Action: Spend 2 titanium to raise the temperature 1 step.": "Handling: Bruk 2 titan for å øke temperaturen med 1.",
+
+    "NIRGAL ENTERPRISES": "NIRGAL ENTERPRISES",
+    "Nirgal Enterprises": "Nirgal Enterprises",
+    "You start with 33 M€. Raise your energy, plant, and steel production 1 step each.": "Du starter med 33 M€. Øk energi-, plante- og stålproduksjonen din med 1 hver.",
+    "AWARDS AND MILESTONES ALWAYS COST 0 M€ FOR YOU.": "UTMERKELSER OG MILEPÆLER KOSTER ALLTID 0 M€ FOR DEG.",
+    
+    "Cheung Shing": "Cheung Shing",
+    "■■MARS■■": "■■MARS■■",
+    "Cheung Sing Mars": "Cheung Shing Mars",
+    "Cheung Shing Mars": "Cheung Shing Mars",
+    "Cheung Shing MARS": "Cheung Shing MARS",
+    "You start with 3 M€ production and 44 M€.": "Du starter med 3 M€-produksjon og 44 M€.",
+    "Effect: When you play a building tag, you pay 2 M€ less for it.": "Effekt: Når du spiller et bygningssymbol, betaler du 2 M€ mindre for det.",
+
+    "POINT LUNA": "POINT LUNA",
+    "Point Luna": "Point Luna",
+    "You start with 1 titanium production and 38 M€.": "Du starter med 1 titanproduksjon og 38 M€.",
+    "Effect: When you play an Earth tag, including this, draw a card.": "Effekt: Når du spiller et Jord-symbol, inkludert dette, trekker du et kort.",
+
+    "ROBINSON": "ROBINSON",
+    "INDUSTRIES": "INDUSTRI",
+    "Robinson Industries": "Robinson Industri",
+    "You start with 47 M€.": "Du starter med 47 M€.",
+    "Action: Spend 4 M€ to increase (one of) your LOWEST production 1 step.": "Handling: Bruk 4 M€ for å øke (en av) din LAVESTE produksjon med 1.",
+
+    "VALLEY": "VALLEY",
+    "TRUST": "TRUST",
+    "Valley Trust": "Valley Trust",
+    "You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.": "Du starter med 37 M€. Som din første handling, trekker du 3 Prelude-kort, og spiller ett av dem. Kast de to andre.",
+    "Effect: When you play a science tag, you pay 2M€ less for it.": "Effekt: Når du spiller et vitenskapssymbol, betaler du 2 M€ mindre for det.",
+
+    "VIT": "VIT",
+    "O": "O",
+    "R": "R",
+    "Vitor": "Vitor",
+    "You start with 45 M€. As your first action, fund an award for free.": "Du starter med 45 M€. Som din første handling, finansierer du en utmerkelse gratis.",
+    "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.": "Effekt: Når du spiller et kort med et IKKE-NEGATIVT SP-ikon, inkludert dette, får du 3 M€."
+}

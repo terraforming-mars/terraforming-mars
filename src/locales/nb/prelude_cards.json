@@ -1,0 +1,42 @@
+{
+    "Ceres Tech Market": "Ceres Tech-Markt",
+    "Discard any number of cards from your hand to gain 2 M€ for each discarded card.": "Kast et valgfritt antall kort fra hånden din for å få 2 M€ for hvert kastede kort.",
+    "Gain 2 M€ per colony you own.": "Få 2 M€ per koloni du eier.",
+    
+    "Ishtar Expedition": "Ishtar-ekspedisjonen",
+    "Requires Venus 10%. Gain 3 titanium and draw 2 Venus cards.": "Krever Venus 10%. Få 3 titan og trekk 2 Venus-kort.",
+
+    "L1 Trade Terminal": "L1 Handelsterminal",
+    "When you trade, first increase that colony tile track 2 steps.": "Når du handler, øk først sporet på koloniplaten med 2 trinn.",
+    "Add a resource to 3 different cards.": "Legg til en ressurs på 3 forskjellige kort.",
+
+    "Red Appeasement": "Rød forsoning",
+    "Requires that Reds are ruling or that you have 2 delegates there, AND THAT NO OTHER PLAYER HAS PASSED.": "Krever at De Røde regjerer eller at du har 2 delegater der, OG AT INGEN ANDRE SPILLER HAR SAGT PASS.",
+    "Increase M€ production 2 steps. This counts as passing. You get no other turns this generation.": "Øk M€-produksjonen med 2 trinn. Dette teller som å si pass. Du får ingen flere trekk denne generasjonen.",
+    "PASS": "PASS",
+
+    "Summit Logistics": "Toppmøte-logistikk",
+    "Requires that Scientists are ruling or that you have 2 delegates there. Gain 1 M€ per planet tag and colony you have. Draw 2 cards.": "Krever at Forskerne regjerer eller at du har 2 delegater der. Få 1 M€ per planetsymbol og koloni du har. Trekk 2 kort.",
+    
+    
+    "Psychrophiles": "Psykrofiler",
+    "When paying for a plant card, microbes here may be used as 2 M€ each.": "Når du betaler for et plantekort, kan mikrober her brukes som 2 M€ hver.",
+    "Temperature must be -20 C or lower.": "Temperaturen må være -20 C eller lavere.",
+
+    "Research Coordination": "Forskningskoordinering",
+
+    "SF Memorial": "SF-minnesmerke",
+    "Draw 1 card.": "Trekk 1 kort.",
+
+    "Martian Survey": "Mars-undersøkelse",
+    "Oxygen must be 4% or lower. Draw two cards.": "Oksygen må være 4% eller lavere. Trekk to kort.",
+
+    "House Printing": "Husprinting",
+    "Increase your steel production 1 step.": "Øk stålproduksjonen din med 1 trinn.",
+
+    "Space Hotels": "Romhoteller",
+    "Requires 2 Earth tags. Increase M€ production 4 steps.": "Krever 2 jord-symboler. Øk M€-produksjonen med 4 trinn.",
+
+    "Lava Tube Settlement": "Bosetning i lavatunnel",
+    "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "Reduser energiproduksjonen din med 1 trinn og øk M€-produksjonen din med 2 trinn. Plasser en by på et VULKANSK OMRÅDE uavhengig av tilstøtende byer."
+}

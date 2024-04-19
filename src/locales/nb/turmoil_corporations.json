@@ -1,0 +1,28 @@
+{
+  "LAKEFRONT": "LAKEFRONT",
+  "RESORTS": "FERIESTEDER",
+  "Lakefront Resorts": "Lakefront Feriesteder",
+  "You start with 54 M€.": "Du begynner med 54 M€.",
+  "Effect: When any ocean tile is placed, increase your M€ production 1 step. Your bonus for placing adjacent to oceans is 3M€ instead of 2 M€.": "Effekt: Når et hav spilles, øker du M€-produksjonen din med 1 trinn. Din bonus for å plassere ved siden av hav er 3M€ i stedet for 2 M€.",
+
+  "TERRALABS": "TERRALABS",
+  "RESEARCH": "FORSKNING",
+  "Terralabs Research": "Terralabs forskning",
+  "You start with 14 M€. Lower your TR 1 step.": "Du begynner med 14 M€. Senk din TR med 1 trinn.",
+  "Effect: Buying cards to hand costs 1 M€.": "Effekt: Å kjøpe kort til hånden koster 1 M€.",
+
+  "UTOPIA": "UTOPIA",
+  "INVEST": "INVEST",
+  "Utopia Invest": "Utopia Invest",
+  "You start with 40 M€. Increase your steel and titanium production 1 step each.": "Du begynner med 40 M€. Øk stål- og titanproduksjonen din med 1 trinn hver.",
+  "Action: Decrease any production to gain 4 resources of that kind.": "Handling: Senk en produksjon for å få 4 ressurser av den typen.",
+
+  "PRISTAR": "PRISTAR",
+  "Pristar": "Pristar",
+  "You start with 53 M€. Decrease your TR 2 steps. 1 VP per preservation resource here.": "Du begynner med 53 M€. Senk din TR med 2 trinn. 1 VP per bevaringsressurs her.",
+  "Effect: During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 M€.": "Effekt: I produksjonsfasen, hvis du ikke har fått TR så langt denne generasjonen, legg til en bevaringsressurs her og få 6 M€.",
+
+  "Septem Tribus": "Septem Tribus",
+  "You start with 36 M€. When you perform an action, the wild tag counts as any tag of your choice.": "Du begynner med 36 M€. Når du utfører en handling, teller ? som et valgfritt symbol.",
+  "Action: Gain 2 M€ for each party where you have at least 1 delegate.": "Handling: Få 2 M€ for hvert parti hvor du har minst 1 delegat."
+}

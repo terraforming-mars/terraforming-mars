@@ -1,0 +1,90 @@
+{
+  "Adhai High Orbit Constructions": "Adhai High Orbit Byggfirma",
+  "Effect: Whenever you play a card with a space tag BUT NO PLANETARY TAG (including this) add 1 orbital on this card.": "Effekt: Når du spiller et kort med et rom-symbol, MEN UTEN ET JORD-SYMBOL (inkludert dette), legg til 1 orbital på dette kortet.",
+  "Effect: For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1M€ less.": "Effekt: Kort med et rom-symbol og ingen planetsymboler, STANDARDPROSJEKTET 'Bygg koloni' og å handle med en koloni koster 1 M€ mindre for hver 2. orbital på dette kortet",
+  "You start with 43 M€.": "Du starter med 43 M€.",
+
+  "Ambient": "Ambient",
+  "Effect: When you play a card with a Venus tag (including this) increase your heat production 1 step.": "Effekt: Når du spiller et kort med et Venus-symbol (inkludert dette), øk din varmeproduksjon med 1.",
+  "Action: When temperature is maxed, spend 8 heat gain 1 TR. You may repeat this action like a standard project.": "Handling: Når temperaturen er maksimal, bruk 8 varme for å få i TR. Du kan gjenta denne handlingen som et standardprosjekt.",
+  "You start with 38 M€. As your first action, raise the Venus scale 2 steps.": "Du starter med 38 M€. Som din første handling, øk Venus-skalaen med 2 steg.",
+
+  "AURORAI": "AURORAI",
+  "Effect: Whenever you increase your terraform rating, add 1 data per step to ANY card.": "Effekt: Når du øker din terraforming-vurdering, legg til 1 data per steg på et valgfritt kort.",
+  "Effect: You can use data on this card as 3M€ each to pay for standard projects.": "Effekt: Du kan bruke data på dette kortet som 3M€ hver for å betale for standardprosjekter.",
+  "You start with 33 M€. and 2 data on this card": "Du starter med 33 M€. Legg til 2 data på dette kortet.",
+
+  "Bio-Sol": "Bio-Sol",
+  "Action: Add 1 microbe to ANY card": "Handling: Legg til 1 mikrobe på et valgfritt kort.",
+  "You start with 42 M€. As your first action, draw 2 cards with a microbe tag.": "Du starter med 42 M€. Som din første handling, trekk 2 kort med et mikrobe-symbol.",
+
+  "Chimera": "Chimera",
+  "Effect: When you perform an action, these wild tags count as any tags of your choice. For claiming milestones and funding awards, both symbols count as one. (Other wild tags still do not count toward awards.)": "Effekt: Når du utfører en handling, teller hvert av disse Joker-symbolene som et valgfritt symbol. For å kreve milepæler og finansieringspriser, teller begge symbolene som ett. (Andre Joker-symboler teller fortsatt ikke mot utmerkelser.)",
+  "You start with 36 M€, 1 steel, and 1 titanium.": "Du starter med 36 M€, 1 stål og 1 titan.",
+
+  "Collegium Copernicus": "Kollegium Kopernikus",
+  "Effect: When you play a card with a science tag (including this) Add 1 data to ANY card.": "Effekt: Når du spiller et kort med et vitenskap-symbol (inkludert dette), legg til 1 data på et valgfritt kort.",
+  "Action: Spend 3 data from this card to trade.": "Handling: Bruk 3 data fra dette kortet for å handle.",
+  "You start with 33 M€. As your first action, draw 2 cards with a science tag.": "Du starter med 33 M€. Som din første handling, trekk 2 kort med et vitenskap-symbol.",
+
+  "Habitat Marte": "Habitat Marte",
+  "Effect: Mars tags also count as science tags.": "Effekt: Mars-symboler teller også som vitenskap-symboler.",
+  "You start with 40 M€": "Du starter med 40 M€.",
+
+  "Mars Direct": "Mars Direkte",
+  "Effect: When you play a Mars tag, you pay 1 M€ less for each Mars tag you have.": "Effekt: Når du spiller et Mars-symbol, betaler du 1 M€ mindre for hvert Mars-symbol du har.",
+  "You start with 52 M€.": "Du starter med 52 M€.",
+  
+  "Mars Math": "Mars Matematikk",
+  "Effect: At the beginning of the Research phase, you draw 5 cards to choose from, but do not buy additional cards.": "Effekt: Ved begynnelsen av Forskningsfasen trekker du 5 kort å velge mellom, men kjøper ikke ekstra kort.",
+  "Action: Take another two actions this turn.": "Handling: Ta to ekstra handlinger denne runden.",
+  "You start with 40 M€. As your first action, draw 2 cards": "Du starter med 40 M€. Som din første handling, trekk 2 kort.",
+
+  "Martian Insurance Group": "Mars Forsikringsgruppe",
+  "Effect: Whenever you play an event card, raise your M€ production 1 step.": "Effekt: Når du spiller en hendelseskort, øk din M€-produksjon med 1.",
+  "You start with 42 M€ and 1 M€ production.": "Du starter med 42 M€ og 1 M€-produksjon.",
+
+  "MindSet Mars": "Tankesett Mars",
+  "Action: When you play a card with a building tag, add 1 agenda on this card.": "Effekt: Når du spiller et kort med et bygning-symbol, legg til 1 agenda på dette kortet.",
+  "Action: Spend 2 agenda resources to place 1 delegate in any party.": "Handling: Bruk 2 agendaer for å plassere 1 delegat i et valgfritt parti.",
+  "Action: Spend 5 agenda resources to place a city tile on Mars.": "Handling: Bruk 5 agendaer for å plassere en by-brikke på Mars.",
+  "You start with 44 M€ and 1 agenda resource to this card.": "Du starter med 44 M€ og 1 agenda-ressurs på dette kortet.",
+  
+  "GAGARIN MOBILE BASE": "Gagarin Mobil Base",
+  "move": "flytt",
+  "Action: Move the Base to ANY nearest empty area where it has not yet been. Collect the bonus.": "Handling: Flytt basen til et valgfritt nærmeste tomt område der den ikke har vært. Motta plasseringsbonusen (dersom feltet har en plasseringsbonus).",
+  "Effect: When another player places a tile where the Base is, move the Base.": "Effekt: Når en annen spiller plasserer en brikke der basen er, flytt basen.",
+  "You start with 42 M€. As your first action, put Gagarin Mobile Base on ANY area on Mars. Collect the bonus.": "Du starter med 42 M€. Som din første handling, plasser Gagarin Mobil Base på et valgfritt område på Mars. Motta plasseringsbonusen (dersom feltet har en plasseringsbonus).",
+
+  "Polaris": "Polaris",
+  "Effect: When any ocean tile is placed ON MARS, increase your M€ production 1 step. When you place an ocean tile, gain 4M€.": "Effekt: Når et hav plasseres PÅ MARS, øk din M€-produksjon med 1. Når du plasserer et hav, motta 4M€.",
+  "You start with 32 M€. As your first action, place an ocean tile.": "Du starter med 32 M€. Som din første handling, plasser et hav.",
+
+  "RingCom": "RingCom",
+  "Effect: When any player plays a card with a Jovian tag (including this) gain 1 titanium.": "Effekt: Når noen spiller et kort med et Jupiter-symbol (inkludert dette), motta 1 titan.",
+  "You start with 39 M€. and 3 M€ production. As your first action, draw 2 cards with a Jovian tag.": "Du starter med 39 M€ og 3 M€-produksjon. Som din første handling, trekk 2 kort med et Jupiter-symbol.",
+
+  "Robin Haulings": "Robin Transport",
+  "Effect: Whenever you play a card with a Venus tag add 1 floater to ANY card.": "Effekt: Når du spiller et kort med et Venus-symbol, legg til 1 svever på et valgfritt kort.",
+  "Action: Remove 3 floaters from this card to raise Venus 1 step or raise oxygen 1 step": "Handling: Fjern 3 svevere fra dette kortet for å øke Venus-skalaen med 1 eller oksygen-skalaen med 1.",
+  "You start with 39 M€.": "Du starter med 39 M€.",
+  
+  "Solbank": "Solbanken",
+  "Effect: Whenever you spend M€ (or steel or titanium) add 1 data to this card.": "Effekt: Når du bruker M€, stål eller titan, legg til 1 data på dette kortet.",
+  "Effect: During the production phase convert each data from this card into 1M€ each.": "Effekt: Under produksjonsfasen, konverter hver data på dette kortet til 1M€.",
+  "You start with 40 M€.": "Du starter med 40 M€.",
+
+  "Soylent Seedling Systems": "Soylent Frøplantesystemer",
+  "Effect: When you place a greenery tile, add 1 seed resource to this card.": "Effekt: Når du plasserer et skogområde, legg til 1 frø-ressurs på dette kortet.",
+  "Effect: When paying for a plant card, or the STANDARD GREENERY PROJECT, seeds here may be used as 5 M€ each.": "Effekt: Når du betaler for et plante-kort, eller STANDARDPROSJEKTET SKOGOMRÅDE, kan frø på dette kortet brukes som 5 M€ hver.",
+  "You start with 38M€ and 2 seeds on this card.": "Du starter med 38 M€ og 2 frø på dette kortet.",
+
+  "Steelaris": "Steelaris",
+  "Effect: When any city or special tile is placed ON MARS, gain 1 steel and 1 plant.": "Effekt: Når en by eller en spesialbrikke plasseres PÅ MARS, motta 1 stål og 1 plante.",
+  "You start with 42 M€.": "Du starter med 42 M€.",
+
+  "Odyssey": "Odyssey",
+  "Effect: Your event cards stay face up, and their tags are in use as if those were automated (green) cards.": "Effekt: Dine hendelseskort forblir åpne, og deres symboler er i bruk som om de var automatiserte (grønne) kort.",
+  "Action: Pay for and play an event card you have already played that has a base cost of 16M€ or less (INCLUDING events that place special tiles,) after which discard that card.": "Handling: Betal for og spill et hendelseskort du allerede har spilt som har en grunnkostnad på 16M€ eller mindre (INKLUDERT hendelser som plasserer spesialbrikker). Etterpå kaster du kortet.",
+  "You start with 33 M€.": "Du starter med 33 M€."
+}

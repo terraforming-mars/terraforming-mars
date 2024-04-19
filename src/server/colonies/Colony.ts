@@ -222,8 +222,10 @@ export abstract class Colony implements IColony {
       break;
 
     case ColonyBenefit.DRAW_CARDS_AND_DISCARD_ONE:
-      player.drawCard();
-      action = new DiscardCards(player, 1, 1, this.name + ' colony bonus. Select a card to discard');
+      player.defer(() => {
+        player.drawCard();
+        player.game.defer(new DiscardCards(player, 1, 1, this.name + ' colony bonus. Select a card to discard'), Priority.SUPERPOWER);
+      });
       break;
 
     case ColonyBenefit.DRAW_CARDS_AND_KEEP_ONE:
@@ -336,9 +338,11 @@ export abstract class Colony implements IColony {
       if (isGiveColonyBonus) {
         /*
          * When this method is called from within the GiveColonyBonus deferred action
-         * we return the player input directly instead of deferring it
+         * we return the player input directly instead of deferring it.
+         *
+         * TODO(kberg): why?
          */
-        return action.execute(); // undefined | PlayerInput
+        return action.execute();
       } else {
         game.defer(action);
         return undefined;

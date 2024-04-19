@@ -1,0 +1,260 @@
+{
+  "Advanced Power Grid": "Avansert strømnett",
+  "Increase your energy production 2 steps. Increase your M€ production 1 step per power tag you have, including this.": "Øk energiproduksjonen din med 2 trinn. Øk M€-produksjonen din med 1 trinn per energisymbol du har, inkludert dette.",
+
+  "Agro-Drones": "Agro-droner",
+  "Spend 1 steel and 1 energy to gain 3 plants.": "Bruk 1 stål og 1 energi for å få 3 planter.",
+  "Requires -18° C or warmer.": "Krever -18° C eller varmere.",
+
+  "Anthozoa": "Anthozoa",
+  "Spend 1 plant to add an animal to this card.": "Bruk 1 plante for å legge til et dyr på dette kortet.",
+  "Requires 3 oceans on Mars. 1 VP per 2 animals on this card.": "Krever 3 hav på Mars. 1 SP per 2 dyr på dette kortet.",
+
+  "Asteroid Resources": "Asteroide-ressurser",
+  "Spend 3 energy. Either increase your steel and titanium production one step, OR place an ocean, and gain 2 steel and one titanium.": "Bruk 3 energi. Enten øker du stål- og titanproduksjonen din med ett trinn, ELLER plasser et hav og få 2 stål og 1 titan.",
+
+  "Botanical Experience": "Botanisk erfaring",
+  "(EFFECT: Whenever a greenery tile is placed, add 1 data on this card.": "(EFFEKT: Når et skogområde blir plassert, legg til 1 data på dette kortet.",
+  "(EFFECT: Whenever this card has at least 3 data, automatically remove 3 data to raise your plant production 1 step.": "(EFFEKT: Når dette kortet har minst 3 data, fjern automatisk 3 data for å øke planteproduksjonen din 1 trinn.",
+  "(EFFECT: Players may remove your plants, but you only lose half, rounded up.)": "(EFFEKT: Spillere kan fjerne plantene dine, men du mister kun halvparten, rundet opp.)",
+  "Requires one greenery tile on Mars.": "Krever ett skogområde på Mars.",
+
+  "Breeding Farms": "Oppdrettsanlegg",
+  "Spend 1 plant to add 1 animal to ANY card.": "Bruk 1 plante for å legge til 1 dyr på et valgfritt kort.",
+  "Requires 1 science tag and 1 animal tag. Raise the temperature 1 step.": "Krever 1 vitenskapssymbol og 1 dyresymbol. Øk temperaturen 1 trinn.",
+
+  "Cassini Station": "Cassini stasjon",
+  "Increase your energy production 1 step for every colony in play. Add 2 floaters to ANY card OR add 3 data to ANY card.": "Øk energiproduksjonen din med 1 trinn for hver koloni i spillet. Legg til 2 svevere på et valgfritt kort ELLER legg til 3 data på et valgfritt kort.",
+
+  "Ceres Spaceport": "Ceres romhavn",
+  "Increase your M€ production 2 steps, and titanium production 1 step for every 2 Jovian tags (including these.) Draw a card. Place an ocean tile. Place a city tile ON THE RESERVED AREA.": "Øk M€-produksjonen din med 2 trinn, og titanproduksjonen din med 1 trinn for hvert 2 Jupitersymbol (inkludert dette). Trekk et kort. Plasser et hav. Plasser en bybrikke PÅ DET RESERVERTE OMRÅDET.",
+
+  "Charity Donation": "Veldedighetsdonasjon",
+  "Reveal cards from the deck equal to the player count plus 1.": "Vis frem kort fra bunken lik antall spillere pluss 1.",
+  "In player order starting with you, each player takes one card in hand. Discard the remaining card.":  "I spillerrekkefølge, starter med deg, tar hver spiller et kort i hånden. Kast det resterende kortet.",
+
+  "Communication Center": "Kommunikasjonssenter",
+  "(Effect: Whenever ANY PLAYER plays an event, add 1 data to this card.)": "(EFFEKT: Når NOEN spiller et handlingskort, legg til 1 data på dette kortet.)",
+  "(Effect: Remove 3 data to draw a card automatically.)": "(EFFEKT: Fjern 3 data for å trekke et kort automatisk.)",
+  "Decrease your energy production 1 step. Place 2 data on this card.": "(Senk energiproduksjonen din med 1 trinn. Legg 2 data på dette kortet.)",
+
+  "Controlled Bloom": "Kontrollert blomstring",
+  "Requires 3 oceans. Add 3 microbes to ANY card. Gain 3 plants.": "Krever 3 hav. Legg til 3 mikrober på et valgfritt kort. Få 3 planter.",
+
+  "Coordinated Raid": "Koordinert raid",
+  "Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.": "Krever minst 1 koloni i spillet. Send en av dine ubrukte handelsflåter til et valgfritt koloniområde. Motta handelsbonusen og kolonibonusen for hver koloni på dette området. Andre spillere får ikke kolonibonusene sine fra denne handlingen.",
+
+  "Crashlanding": "Nødlanding",
+  "(Place AND ORIENT this tile on a non-reserved space adjacent to no more than 1 city.": "(Plasser OG ORIENTER denne brikken på et ikke-reservert område som ikke grenser til mer enn 1 by.",
+  "Crashsite grants an ADJACENCY BONUS of 1 data, and either 1 steel or 1 titanium.": "Nødlandingen gir en NÆRHETSBONUS på 1 data, og enten 1 stål eller 1 titan.",
+  "When placing Crashsite, for each tile you own next it, gain those bonuses.": "Når du plasserer Nødlandingen, for hvert område du eier ved siden av den, får du disse bonusene.",
+  "Add 1 data to any card. Add 1 resource to any card.)": "Legg til 1 data på et valgfritt kort. Legg til 1 ressurs på et valgfritt kort.)",
+
+  "Cryptocurrency": "Kryptovaluta",
+  "Spend 1 energy to add 1 data to this card.": "Bruk 1 energi for å legge til 1 data på dette kortet.",
+  "Remove all data from this card to gain 3M€ per data removed.": "Fjern all data fra dette kortet for å få 3 M€ per data som fjernes.",
+
+  "Cultivation of Venus": "Dyrking av Venus",
+  "Spend 3 plants to raise Venus 1 step.": "Bruk 3 planter for å øke Venus med 1 trinn.",
+  "1 VP for every 2 Venus tags you own.": "1 SP per 2 Venus-symboler du eier.",
+
+  "Cyanobacteria": "Cyanobakterier",
+  "Raise the oxygen level 1%. For every ocean tile, add a microbe to ANY card.": "Øk oksygennivået med 1%. For hvert havområde, legg til en mikrobe på et valgfritt kort.",
+
+  "Data Leak": "Datalekkasje",
+  "Add 5 data to ANY card.": "Legg til 5 data på et valgfritt kort.",
+
+  "Declaration of Independence": "Uavhengighetserklæring",
+  "Requires that you have at least 6 Mars tags in play. Place 2 delegates in any party.": "Krever at du har minst 6 Marssymboler i spill. Plasser 2 delegater i et valgfritt parti.",
+
+  "Designed Organisms": "Designede organismer",
+  "Requires 5 science tags. Increase your plant production 2 steps. Gain 3 plants. Add 3 microbes to ANY card. Add 1 animal to ANY card.": "Krever 5 vitenskapssymboler. Øk planteproduksjonen din med 2 trinn. Få 3 planter. Legg til 3 mikrober på et valgfritt kort. Legg til 1 dyr på et valgfritt kort.",
+
+  "Dust Storm": "Støvstorm",
+  "Every player loses all energy. Raise the temperature 2 steps.": "Alle spillere mister all energi. Øk temperaturen 2 trinn.",
+
+  "Dyson Screens": "Dyson-skjermer",
+  "Pay 2 titanium to raise your heat and energy production 1 step each.": "Betal 2 titan for å øke varme- og energiproduksjonen din med 1 trinn hver.",
+  "Raise the temperature 1 step. Draw a card. Place a city tile ON THE RESERVED AREA. Raise your energy and heat production 2 steps.": "Øk temperaturen 1 trinn. Trekk et kort. Plasser en bybrikke PÅ DET RESERVERTE OMRÅDET. Øk energi- og varmeproduksjonen din med 2 trinn.",
+
+  "Early Expedition": "Tidlig ekspedisjon",
+  "Temperature must be -18 C or lower. Decrease your energy production 1 step and Raise your M€ production 3 steps. Add 1 data to ANY card. Place a city tile on Mars NEXT TO NO OTHER TILE.": "Temperaturen må være -18 C eller lavere. Senk energiproduksjonen din med 1 trinn og øk M€-produksjonen din med 3 trinn. Legg til 1 data på et valgfritt kort. Plasser en bybrikke på Mars (KAN IKKE PLASSERES VED SIDEN AV ANDRE BRIKKER).",
+
+  "Economic Espionage": "Økonomisk spionasje",
+  "Spend 2 M€ to Add 1 data to ANY card.": "Bruk 2 M€ for å legge til 1 data på et valgfritt kort.",
+  "1VP for every 3 data here.": "1 SP per 3 data her.",
+
+  "Economic Help": "Økonomisk hjelp",
+  "Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. Increase your M€ production 1 step": "Øk det laveste ikke-fullførte planetsporet med 3 trinn. Dersom to er like lave, øk alle de laveste sporene med 2 trinn. Øk M€-produksjonen din med 1 trinn.",
+
+  "Expedition to the Surface - Venus": "Ekspedisjon til overflaten - Venus",
+  "(Draw 2 cards. Raise Venus 1 step. Gain 1M€ for each of your Venus tags, including this.)": "Trekk 2 kort. Øk Venus med 1 trinn. Få 1 M€ for hvert av Venus-symbolene dine, inkludert dette.",
+
+  "Flat Mars Theory": "Flat Mars-teorien",
+  "GENERATION": "GENERASJON",
+  "(Requires maximum 1 science tag. Increase your M€ production 1 step for every generation played so far.)": "(Krever maks. 1 vitenskapssymbol. Øk M€-produksjonen din med 1 trinn for hver generasjon som har blitt spilt så langt.)",
+
+  "Floater-Urbanism": "Svever-urbanisme",
+  "(Action: Spend 1 floater from any card to add 1 Venusian habitat on this card.)": "Handling: Bruk 1 svever fra et valgfritt kort for å legge til 1 Venus-habitat på dette kortet.",
+  "1 VP for every Venusian habitat on this card.": "1 SP per Venus-habitat på dette kortet.",
+  "(Requires 4 Venus tags.)": "(Krever 4 Venus-symboler.)",
+
+  "Geological Expedition": "Geologisk Ekspedisjon",
+  "(Effect: When you place a tile ON MARS gain 1 additional resource on the space. If the space has no bonus, gain 1 steel.)": "Effekt: Når du plasserer en brikke på Mars, få 1 ekstra ressurs på området. Hvis området ikke har en bonus, få 1 stål.",
+
+  "High Temp. Superconductors": "Høytemperatur-superledere",
+  "(Effect: When playing a power card, THE STANDARD PROJECT POWER PLANT, OR THE KELVINIST RULING POLICY ACTION, pay 3M€ less.)": "Effekt: Når du spiller et energikort, STANDARDPROSJEKTET KRAFTVERK ELLER KELVINISTENES REGJERINGSHANDLING, betal 3M€ mindre.",
+  "(Requires Kelvinists are ruling or you have 2 delegates there. Increase your energy production 2 steps.)": "Krever at Kelvinistene styrer eller at du har 2 delegater der. Øk energiproduksjonen din med 2 trinn.",
+
+  "Huygens Observatory": "Huygens-observatoriet",
+  "(Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that is already on a colony tile, but you may not trade with the tile that fleet came from. Gain 1 TR.)": "Plasser en koloni. KAN PLASSERES PÅ ET KOLONIOMRÅDE HVOR DU ALLEREDE HAR EN KOLONI. Handle gratis med en koloni. Du kan bruke en handelsflåte som allerede er på et koloniområde, men du kan ikke handle med kolonien som flåten kom fra. Få 1 TR.",
+
+  "Hydrogen Processing Plant": "Hydrogenprosesseringsanlegg",
+  "(Oxygen level must be 3% or higher. Decrease oxygen level 1% Raise your energy production 1 step for every two ocean tiles on Mars.)": "Oksygennivået må være 3% eller høyere. Senk oksygennivået med 1%. Øk energiproduksjonen din med 1 trinn for hvert andre havområde på Mars.",
+
+  "Interplanetary Transport": "Interplanetarisk transport",
+  "(Increase your M€ production 1 step for every offworld city tile.)": "Øk M€-produksjonen din med 1 trinn for hvert byområde utenfor verden.",
+
+  "Kickstarter": "Kickstarter",
+  "(Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 3 steps in total.)": "Velg et planetsymbol. Dette kortet teller som om det har 1 av det symbolet. Øk det tilsvarende planetsporet med 3 trinn totalt.",
+
+  "Last Resort Ingenuity": "Genistrek i siste liten",
+  "The next card you play this generation can be paid for with steel or titanium despite its tags.": "Det neste kortet du spiller denne generasjonen kan betales med stål eller titan, uavhengig av symbolene.",
+
+  "Lobby Halls": "Lobbyhaller",
+  "(Increase your M€ production 2 steps. Place 1 delegate in any party. Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 1 step.)": "(Øk M€-produksjonen din med 2 trinn. Plasser 1 delegat i et valgfritt parti. Velg et planetsymbol. Dette kortet teller som om det har 1 av det symbolet. Øk det tilsvarende planetsporet med 1 trinn.)",
+
+  "Lunar Embassy": "Måneambassade",
+  "(Increase your M€ production 3 steps, and plant production 1 step for every 2 Earth tags (including this.) Draw a card. Place a city tile ON THE RESERVED AREA.)": "(Øk M€-produksjonen din med 3 trinn, og planteproduksjonen din med 1 trinn for hvert 2. Jord-symbol (inkludert dette). Trekk et kort. Plasser en bybrikke PÅ DET RESERVERTE OMRÅDET.)",
+
+  "Luxury Estate": "Luksusbolig",
+  "(Oxygen must be 7% or greater. Gain 1 titanium for each city tile and greenery tile you own.)": "(Oksygennivået må være 7% eller høyere. Få 1 titan for hver by- og skogområde du eier.)",
+
+  "Martian Culture": "Marskultur",
+  "(Action: Add 1 data to ANY card.)": "(Handling: Legg til 1 data på et valgfritt kort.)",
+  "(Requires any 2 Mars tags in play. 1 VP for every 2 data here.)": "(Krever 2 Marssymboler i spill. 1 SP per 2 data her.)",
+
+  "Martian Dust Processing Plant": "Støvprosesseringsanlegg på Mars",
+  "(Decrease your energy production 1 step, and raise your steel production 2 steps. Gain 1 TR.)": "(Senk energiproduksjonen din med 1 trinn, og øk stålproduksjonen din med 2 trinn. Få 1 TR.)",
+
+  "Martian Monuments": "Mars-monumenter",
+  "(Requires that you own a city ON MARS. Raise your M€ production 1 step for every Mars tag you own (including this.))": "(Krever at du eier en by PÅ MARS. Øk M€-produksjonen din med 1 trinn for hvert Marssymbol du eier (inkludert dette.))",
+
+  "Martian Nature Wonders": "Naturens underverker på Mars",
+  "(Place a neutral player cube on a non-reserved space. No tile can be placed on that space this game. Gather any bonus on that space, but no bonuses from adjacent spaces. Add 2 data to ANY card.)": "(Plasser en nøytral spillerkube på et ikke-reservert område. Ingen brikke kan plasseres på det området i dette spillet. Samle eventuelle bonuser på det området, men ikke bonuser fra tilstøtende områder. Legg til 2 data på et valgfritt kort.)",
+
+  "Martian Repository": "Mars-arkiv",
+  "(Effect: For every science or Mars tag you play (including these) add 1 data to this card.)": "(Effekt: For hvert vitenskapssymbol eller Marssymbol du spiller (inkludert disse), legg til 1 data på dette kortet.)",
+  "(Decrease your energy production 1 step. 1 VP for every 3 data here.)": "(Senk energiproduksjonen din med 1 trinn. 1 SP per 3 data her.)",
+
+  "Microbiology Patents": "Mikrobiologipatenter",
+  "(Effect: After you play a card with a microbe tag, increase your M€ production 1 step.)": "(Effekt: Etter at du har spilt et kort med et mikrobesymbol, øk M€-produksjonen din med 1 trinn.)",
+
+  "Museum of Early Colonisation": "Museum for tidlig kolonisering",
+  "(Requires 1 ocean, 1 city and one greenery on Mars. Decrease your energy production 1 step. Raise your steel, titanium, and plant production 1 step. Gain 1 TR.)": "(Krever 1 hav, 1 by og ett skogområde på Mars. Senk energiproduksjonen din med 1 trinn. Øk stål-, titan- og planteproduksjonen din med 1 trinn. Få 1 TR.)",
+
+  "New Venice": "Nye Venezia",
+  "(Requires 3 ocean tiles. Lose 2 plants. Increase your energy production 1 step and your M€ production 2 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.)": "(Krever 3 havområder. Mist 2 planter. Øk energiproduksjonen din med 1 trinn og M€-produksjonen din med 2 trinn. Plasser denne brikken oppå et eksisterende havområde, IGNORER NORMALE PLASSERINGSRESTRIKSJONER FOR BYER. Brikken teller både som en by og som et hav.)",
+
+  "Nobel Labs": "Nobel laboratorier",
+  "(Action: Add 2 microbes OR 2 data OR 2 floaters to ANY card.)": "(Handling: Legg til 2 mikrober ELLER 2 data ELLER 2 svevere på et valgfritt kort.)",
+
+  "Orbital Laboratories": "Orbital laboratorier",
+  "(Increase your plant production by 2. Gain 1 plant.)": "(Øk planteproduksjonen din med 2. Få 1 plante.)",
+
+  "Oumuamua Type Object Survey": "Oumuamua-type objektundersøkelse",
+  "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "Trekk 2 kort og vis dem frem. Hvis det første har et vitenskapssymbol eller mikrobesymbol, spill det umiddelbart, og ignorer krav og kostnader. Hvis ikke, og det har et romsymbol, få 3 energiproduksjon. Hvis det ikke har noen av disse, gjelder sjekken for det andre kortet.",
+  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card. )": "(Krever 1 romsymbol og 1 vitenskapssymbol. Legg til 2 data på et valgfritt kort.)",
+
+  "Ozone Generators": "Ozongeneratorer",
+  "(Action: Spend 3 energy to gain 1 TR.)": "(Handling: Bruk 3 energi for å få 1 TR.)",
+  "(Requires 6% Oxygen.)": "(Krever 6% oksygen.)",
+
+  "Pollinators": "Bestøvere",
+  "(Action: Add 1 animal on this card)": "(Handling: Legg til 1 dyr på dette kortet)",
+  "(Requires 3 plant tags. Raise your plant production 1 step and your M€ production 2 steps.)": "(Krever 3 plantesymboler. Øk planteproduksjonen din med 1 trinn og M€-produksjonen din med 2 trinn.)",
+
+  "Power Plant": "Varmekraftverk",
+  "(Increase your heat production 2 steps and your energy production 1 step.)": "(Øk varmeproduksjonen din med 2 trinn og energiproduksjonen din med 1 trinn.)",
+
+  "Prefabrication of Human Habitats": "Prefabrikasjon av habitater for mennesker",
+  "(Effect: Cards with a city tag cost 2M€ less.)": "(Effekt: Kort med et bysymbol koster 2M€ mindre.)",
+  "(Effect: The CITY STANDARD PROJECT costs 2M€ less. STEEL MAY BE USED as if you were playing a building card.)": "(Effekt: STANDARDPROSJEKTET BY koster 2M€ mindre. STÅL KAN BRUKES som om du spilte et bygingskort.)",
+  "(Requires that you have steel production.)": "(Krever at du har stålproduksjon.)",
+
+  "Private Security": "Livvakter",
+  "Opponents may not remove your basic resource production": "Motstandere kan ikke fjerne grunnleggende ressursproduksjon",
+  "NO": "NEI",
+
+  "Public Sponsored Grant": "Offentlig støttet stipend",
+  "(Requires Scientists are ruling or that you have 2 delegates there. All players lose 2M€. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.)": "(Krever at Forskerne styrer eller at du har 2 delegater der. Alle spillere mister 2M€. Velg et symbol (IKKE BY, ? ELLER PLANETSPOR) og trekk 2 kort med det symbolet.)",
+
+  "Rare-Earth Elements": "Sjeldne jordelementer",
+  "(Increase your M€ production by 1 for every special tile you own on Mars.)": "(Øk M€-produksjonen din med 1 for hvert spesialområde du eier på Mars.)",
+
+  "Red City": "Den Røde by",
+  "(Requires that Reds are ruling or that you have 2 delegates there. -1 energy prod, +2 M€ prod. Place the special tile on Mars ADJACENT TO NO GREENERY. NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space (or hazard) next to this tile.)": "(Krever at De Røde styrer eller at du har 2 delegater der. -1 energiproduksjon, +2 M€-produksjon. Plasser spesialområdet på Mars (KAN IKKE PLASSERED VED SIDEN AV SKOG, OG INGEN SKOG KAN PLASSERES VED SIDEN AV DETTE OMRÅDET). 1 SP for hvert tomme område (eller fare) ved siden av dette området.)",
+
+  "Return to Abandoned Technology": "Gjenoppliving av forlatt teknologi",
+  "Draw the top 4 cards from the discard pile. Choose 2 to keep and discard the rest.": "Trekk de 4 øverste kortene fra bunken med kastede kort. Velg 2 å beholde og kast resten.",
+
+  "Rich Deposits": "Rike forekomster",
+  "(Requires 2 science tags. Increase your steel production 3 steps.)": "(Krever 2 vitenskapssymboler. Øk stålproduksjonen din med 3 trinn.)",
+
+  "Secret Labs": "Hemmelige laboratorier",
+  "(Requires 1 science tag and 1 Jovian tag. Place an ocean tile. Add 2 microbes to ANY card. OR Raise temperature 1 step. Gain 3 plants. OR Raise oxygen level 1 step. Add 2 floaters to ANY card.)": "(Krever 1 vitenskapssymbol og 1 Jupitersymbol. Plasser et havområde. Legg til 2 mikrober på et valgfritt kort, ELLER øk temperaturen 1 trinn. Få 3 planter, ELLER øk oksygennivået 1 trinn. Legg til 2 svevere på et valgfritt kort.)",
+
+  "Small Comet": "Liten komet",
+  "(Every player loses 2 plants. Raise the temperature 1 step. Raise the oxygen 1 step. Place an ocean ON AN AREA NOT RESERVED FOR OCEAN. Gain 1 titanium.)": "(Alle spillere mister 2 planter. Øk temperaturen 1 trinn. Øk oksygennivået 1 trinn. Plasser et havområde PÅ ET OMRÅDE SOM IKKE ER RESERVERT FOR HAV. Få 1 titan.)",
+
+  "Small Open Pit Mine": "Liten åpen gruve",
+  "(Increase your steel production 2 steps OR increase your titanium production 1 step.)": "(Øk stålproduksjonen din med 2 trinn ELLER øk titanproduksjonen din med 1 trinn.)",
+
+  "Social Events": "Sosiale arrangementer",
+  "(Gain 1 TR for every 2 Mars tags you have (including this one.))": "(Få 1 TR for hvert 2. marssymbol du har (inkludert dette.))",
+
+  "Soil Detoxification": "Jordrensing",
+  "(Effect: Using the STANDARD GREENERY ACTION costs 1 plant less.)": "(Effekt: Bruk av STANDARDPROSJEKTET SKOGOMRÅDE koster 1 plante mindre.)",
+  "(Requires that Greens are ruling or you have 2 delegates there. Increase your plant production 1 step)": "(Krever at De Grønne styrer eller at du har 2 delegater der. Øk planteproduksjonen din med 1 trinn)",
+
+  "Solar Storm": "Solstorm",
+  "(Every player loses 2 plants. Remove up to 3 data from any player. Raise your heat production 1 step. Raise the temperature 1 step.)": "(Alle spillere mister 2 planter. Fjern opptil 3 data fra en spiller. Øk varmeproduksjonen din med 1 trinn. Øk temperaturen 1 trinn.)",
+
+  "Solarpedia": "Solarpedia",
+  "(Action: Add 2 data to ANY card.)": "(Handling: Legg til 2 data på et valgfritt kort.)",
+  "(Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.)": "(Krever 1 Venus-, Jord-, Mars- og Jupitersymbol. Legg til 2 data på et valgfritt kort. 1 SP per 6 data her.)",
+
+  "Space Debris Cleaning Operation": "Operasjon for fjerning av romsøppel",
+  "(Requires 4 space tags. Gain 3 titanium. Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) Add 1 data to ANY card. Draw 1 card.)": "(Krever 4 romsymboler. Få 3 titan. Legg til 1 ressurs på et valgfritt kort (ikke kort som krever DYR- eller VITENSKAPSressurser). Legg til 1 data på et valgfritt kort. Trekk 1 kort.)",
+
+  "Space Relay": "",
+  "(Effect: Whenever you play a card with a Jovian tag, including this, draw a card.)": "(Effekt: Når du spiller et kort med et Jupitersymbol, inkludert dette, trekker du et kort.)",
+  "Increase your M€ production 1 step.": "Øk M€-produksjonen din med 1 trinn.",
+
+
+  "Specialized Settlement": "Spesialisert bosetning",
+  "(Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile on Mars. Increase your production by 1 of a resource on the map gained by placement bonus.)": "(Senk energiproduksjonen din med 1 trinn og øk M€-produksjonen din med 3 trinn. Plasser en bybrikke på Mars. Øk produksjonen din av en ressurs på kartet som er oppnådd ved plasseringsbonus med 1.)",
+
+  "Terraforming Control Station": "Terraformingskontrollstasjon",
+  "(Effect: When you play a Venus or Mars tag, pay 2 M€ less.)": "(Effekt: Når du spiller et Venus- eller Marssymbol, betal 2 M€ mindre.)",
+  "(Raise your TR 2 steps.)": "(Øk TR med 2 trinn.)",
+
+  "Terraforming Robots": "Terraformingsroboter",
+  "(Effect: When you play a Mars tag, add 1 specialized robot on this card.)": "(Effekt: Når du spiller et Marssymbol, legg til 1 spesialisert robot på dette kortet.)",
+  "1 VP for every specialized robot on this card.": "1 SP per spesialiserte robot på dette kortet.",
+  "(Requires 4 science tags.)": "(Krever 4 vitenskapssymboler.)",
+  
+  "Think Tank": "Tenketank",
+  "(Action: Spend 2 M€ to place 1 data on any card.)": "(Handling: Bruk 2 M€ for å legge til 1 data på et valgfritt kort.)",
+  "+/-1 global parameter": "+/-1 globale parametre",
+  "(Effect: When playing a card, you can remove data from this card to change the card's global requirement by 1 step for every 1 data removed.)": "(Effekt: Når du spiller et kort, kan du fjerne data fra dette kortet for å endre kortets globale krav med 1 trinn for hver data som fjernes.)",
+
+  "Venera Base": "Venera-base",
+  "(Action: Add 1 floater to ANY Venus card)": "(Handling: Legg til 1 svever på et valgfritt Venus-kort)",
+  "1 VP per 2 Venus tags you have.": "1 SP per 2 Venus-symboler du har.",
+  "Requires Unity is ruling or that you have 2 delegates there. Raise your M€ production 3 steps and place a city tile ON THE RESERVED AREA.": "Krever at Samhold styrer eller at du har 2 delegater der. Øk M€-produksjonen din med 3 trinn og plasser en bybrikke PÅ DET RESERVERTE OMRÅDET.",
+
+  "Wetlands": "Våtmark",
+  "(Requires 2 ocean tiles. Lose 4 plants. Place this tile on an UNRESERVED SPACE ADJACENT TO AT LEAST 2 OCEANS. Raise oxygen 1 step. Gain 1 TR.)": "(Krever 2 havområder. Mist 4 planter. Plasser denne brikken på et IKKE-RESERVERT OMRÅDE VED SIDEN AV MINST 2 HAV. Øk oksygennivået 1 trinn. Få 1 TR.)",
+  "(Effect: Wetlands counts as a greenery tile and an ocean tile, except it can't be covered and is not one of the 9 oceans required to end the game.)": "(Effekt: Våtmark teller som et skogområde og et hav, men det kan ikke tildekkes og er ikke et av de 9 havområdene som kreves for å avslutte spillet.)"
+}

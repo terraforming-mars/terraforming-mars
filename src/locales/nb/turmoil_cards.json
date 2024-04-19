@@ -1,0 +1,55 @@
+{
+  "Aerial Lenses": "Luftlinser",
+  "Requires that Kelvinists are ruling or that you have 2 delegates there. Remove up to 2 plants from any player. Increase your heat production 2 steps.": "Krever at Kelvinistene styrer eller at du har 2 delegater der. Fjern opptil 2 planter fra en spiller. Øk varmeproduksjonen din med 2 trinn.",
+
+  "Banned Delegate": "Utestengt delegat",
+  "Requires that you are Chairman. Remove any NON-LEADER delegate.": "Krever at du er Styreleder. Fjern en delegat som ikke er leder for et parti.",
+
+  "Cultural Metropolis": "Kulturelt metropol",
+  "Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile. Place 2 delegates in 1 party.": "Krever at Samhold styrer eller at du har 2 delegater der. Senk energiproduksjonen din med 1 trinn og øk M€-produksjonen din med 3 trinn. Plasser en by. Plasser 2 delegater i 1 parti.",
+
+  "Diaspora Movement": "Diaspora-bevegelsen",
+  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1M€ for each Jovian tag in play, including this.": "Krever at De Røde styrer eller at du har 2 delegater der. Få 1 M€ for hvert Jupiter-symbol i spill, inkludert dette.",
+
+  "Event Analysts": "Hendelsesanalytikere",
+  "Effect: You have +1 influence.": "Effekt: Du har +1 innflytelse.",
+  "Requires that Scientists are ruling or that you have 2 delegates there.": "Krever at Forskerne styrer eller at du har 2 delegater der.",
+
+  "GMO Contract": "GMO-kontrakt",
+  "Effect: Each time you play a plant, animal or microbe tag, including this, gain 2 M€.": "Effekt: Hver gang du spiller et plante-, dyre- eller mikrobe-symbol, inkludert dette, få 2 M€.",
+  "Requires that Greens are ruling or that you have 2 delegates there.": "Krever at De Grønne styrer eller at du har 2 delegater der.",
+
+  "Martian Media Center": "Marsisk mediesenter",
+  "Action: Pay 3 M€ to add a delegate to any party.": "Handling: Betal 3 M€ for å legge til en delegat i et hvilket som helst parti.",
+  "Requires that Mars First is ruling or that you have 2 delegates there. Increase your M€ production 2 steps.": "Benötigt Regierungspartei: MARS FIRST oder 2+ eigene Delegierte dort. Erhöhe deine M€-Produktion um 2.",
+
+  "Parliament Hall": "Parlamentssal",
+  "Requires that Mars First are ruling or that you have 2 delegates there. Increase your M€ production 1 step for every 3 building tags you have, including this.": "Krever at Mars Først styrer eller at du har 2 delegater der. Øk M€-produksjonen din med 1 trinn for hvert 3. bygningssymbol du har, inkludert dette.",
+
+  "PR Office": "PR-byrå",
+  "Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 M€ for each Earth tag you have, including this.": "Krever at Samhold styrer eller at du har 2 delegater der. Få 1 TR. Få 1 M€ for hvert Jord-symbol du har, inkludert dette.",
+
+  "Public Celebrations": "Offentlige feiringer",
+  "Requires that you are Chairman.": "Krever at du er Styreleder.",
+
+  "Recruitment": "Rekruttering",
+  "Exchange one NEUTRAL NON-LEADER delegate with one of your own from the reserve.": "Bytt en NEUTRAL delegat som ikke er leder for et parti med en av dine egne fra reserveplassen.",
+
+  "Red Tourism Wave": "Rød turismebølge",
+  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€ from each EMPTY AREA ADJACENT TO YOUR TILES": "Krever at De Røde styrer eller at du har 2 delegater der. Få 1 M€ fra hvert TOMME OMRÅDE RUNDT DINE BRIKKER",
+
+  "Sponsored Mohole": "Sponset Mohole",
+  "Requires that Kelvinists are ruling or that you have 2 delegates there. Increase your heat production 2 steps.": "Krever at Kelvinistene styrer eller at du har 2 delegater der. Øk varmeproduksjonen din med 2 trinn.",
+
+  "Supported Research": "Støttet forskning",
+  "Requires that Scientists are ruling or that you have 2 delegates there. Draw 2 cards.": "Krever at Forskerne styrer eller at du har 2 delegater der. Trekk 2 kort.",
+
+  "Wildlife Dome": "Dyrelivskuppel",
+  "Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.": "Krever at De Grønne styrer eller at du har 2 delegater der. Plasser et skogområde og øk oksygenet med 1 trinn.",
+
+  "Vote Of No Confidence": "Mistillitsvotum",
+  "Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.": "Krever at du har en partileder i et parti og at den sittende Styrelederen er nøytral. Fjern den NØYTRALE Styrelederen og flytt din egen delegat (fra reserveplassen) dit i stedet. Få 1 TR.",
+
+  "Political Alliance": "Politisk allianse",
+  "Requires that you have 2 party leaders. Gain 1 TR.": "Krever at du har 2 partiledere. Få 1 TR."
+}

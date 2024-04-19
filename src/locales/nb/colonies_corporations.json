@@ -1,0 +1,32 @@
+{
+    "POLYPHEMOS": "POLYPHEMOS",
+    "Polyphemos": "Polyphemos",
+    "You start with 50 M€. Increase your M€ production 5 steps. Gain 5 titanium.": "Du starter med 50 M€. Øk din M€-produksjon 5 trinn. Få 5 titan.",
+    "When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.": "Når du kjøper et kort til hånden, betal 5M€ istedenfor 3, inkludert startkortene.",
+
+    "STORM": "STORM",
+    "CRAFT": "CRAFT",
+    "INCOR": "INCOR",
+    "PORATED": "PORATED",
+    "STORMCRAFT INCORPORATED": "STORMCRAFT INCORPORATED",
+    "Stormcraft Incorporated": "Stormcraft Incorporated",
+    "You start with 48 M€.": "Du starter med 48 M€.",
+    "Add a floater to ANY card.": "Legg til en svever på ET VALGFRITT kort.",
+    "Floaters on this card may be used as 2 heat each.": "Svevere på dette kortet kan brukes som 2 varme hver.",
+
+    "ARKLIGHT": "ARKLIGHT",
+    "Arklight": "Arklight",
+    "You start with 45 M€. Increase your M€ production 2 steps. 1 VP per 2 animals on this card.": "Du starter med 45 M€. Øk din M€-produksjon 2 trinn. 1 SP per 2 dyr på dette kortet.",
+    "When you play an animal or plant tag, including this, add 1 animal to this card.": "Når du spiller et dyr- eller plante-symbol, inkludert dette, legg til 1 dyr på dette kortet.",
+
+    "ARIDOR": "ARIDOR",
+    "Aridor": "Aridor",
+    "COLONY": "KOLONI",
+    "You start with 40 M€. As your first action, put an additional Colony Tile of your choice into play": "Du starter med 40 M€. Som din første handling, velg en ekstra koloni-plate som blir med i spillet",
+    "When you get a new type of tag in play [event cards do not count], increase your M€ production 1 step.": "Når du får et nytt symbol i spillet (hendelses-kort teller ikke), øk din M€-produksjon 1 trinn.",
+
+    "POSEIDON": "POSEIDON",
+    "Poseidon": "Poseidon",
+    "You start with 45 M€. As your first action, place a colony.": "Du starter med 45 M€. Som din første handling, plasser en koloni.",
+    "When any colony is placed, including this, raise your M€ production 1 step.": "Når en koloni blir plassert, inkludert denne, øk din M€-produksjon 1 trinn."
+}

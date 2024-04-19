@@ -1,0 +1,318 @@
+{
+  "Basic Infrastructure": "Grunnleggende Infrastruktur",
+  "Place a road tile on The Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.": "Plasser en veibrikke på Månen og øk logistikknivåen med 1. Få 1 handelsflåte.",
+  
+  "Core Mine": "Kjernegruve",
+  "Place a mine tile on The Moon and raise the mining rate 1 step. Increase your titanium production 1 step.": "Plasser en gruvebrikke på Månen og øk gruvenivået med 1. Øk titanproduksjonen din med 1.",
+  
+  "First Lunar Settlement": "Første månebosetning",
+  "Place a habitat tile on The Moon and raise the habitat rate 1 step. Increase your M€ production 1 step.": "Plasser en habitatbrikke på Månen og øk habitatnivået med 1. Øk M€-produksjonen din med 1.",
+  
+  "Lunar Planning Office": "Måneplanleggingskontor",
+  "Draw 2 cards with a Moon tag. Gain 6 steel.": "Trekk 2 kort med et månesymbol. Få 6 stål.",
+  
+  "Mining Complex": "Gruvekompleks",
+  "Place a mine tile on The Moon and raise the mining rate 1 step. Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. Pay 7 M€.": "Plasser en gruvebrikke på Månen og øk gruvenivået med 1. Plasser en veibrikke ved siden av den plasserte gruvebrikken og øk logistikknivåen med 1. Betal 7 M€.",
+  
+  "AI Controlled Mine Network": "KI-styrt gruvenettverk",
+  "Requires the logistic rate to be 2 or higher. Raise the logistic rate 1 step": "Krever at logistikknivåen er 2 eller høyere. Øk logistikknivåen med 1.",
+  
+  "Algae Bioreactors": "Algebioreaktorer",
+  "Decrease your plant production 1 step. Raise the habitat rate 1 step and oxygen 1%.": "Reduser planteproduksjonen din med 1. Øk habitatnivået med 1 og oksygen med 1%.",
+  
+  "An Offer You Can't Refuse": "Et tilbud du ikke kan si nei til",
+  "Exchange a NON-NEUTRAL opponent delegate with one of your own from the reserve. This exchange may not change the party leader. You may then move your delegate to another party.": "Bytt en delegat fra en MOTSTANDER med en av dine egne fra reserven. Dette byttet kan ikke endre partilederen. Du kan deretter flytte delegaten din til et annet parti.",
+  
+  "Ancient Shipyards": "Gamle skipsverft",
+  "Ancient Shipyards (Nerfed)": "Gamle skipsverft (Nerfed)",
+  "Action: Steal 2 M€ from each player and add a resource cube here.": "Handling: Stjel 2 M€ fra hver spiller og legg til en ressurskube på dette kortet.",
+  "Spend 3 titanium. -1 VP for every resource here.": "Bruk 3 titan. -1 SP for hver ressurs på dette kortet.",
+  
+  "Archimedes Hydroponics Station": "Arkimedes hydroponisk stasjon",
+  "Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.": "Reduser energiproduksjonen din med 1 og M€-produksjonen din med 1. Øk planteproduksjonen din med 2.",
+  
+  "Aristarchus Road Network": "Aristarchus veisystem",
+  "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Bruk 2 stål. Øk M€-produksjonen din med 2. Plasser en veibrikke på Månen og øk logistikknivåen med 1.",
+  
+  "Colonist Shuttles": "Koloniskyttel",
+  "Spend 1 titanium. Raise the habitat rate 1 step. Gain 2M€ for each habitat tile on The Moon.": "Bruk 1 titan. Øk habitatnivået med 1. Få 2 M€ for hvert habitatbrikke på Månen.",
+  
+  "Copernicus Solar Arrays": "Kopernikus solcellepaneler",
+  "Spend 1 titanium. Gain 2 heat. Incease your energy production 1 step.": "Bruk 1 titan. Få 2 varme. Øk energiproduksjonen din med 1.",
+  
+  "Copernicus Tower": "Kopernikus tårn",
+  "Requires you have 2 titanium production.": "Krever at du har 2 titanproduksjon.",
+  "Add 1 science resource here, or spend 1 science resource here to raise your TR 1 step.": "Legg til 1 vitenskapsressurs her, eller bruk 1 vitenskapsressurs her for å øke TR med 1.",
+  "1 VP PER MOON TAG YOU HAVE.": "1 SP PER MÅNESYMBOL DU HAR.",
+  
+  "Cosmic Radiation": "Kosmisk stråling",
+  "Requires 4 mining rate. All players pay 4M€ for each mining tile they own.": "Krever 4 gruvenivå. Alle spillere betaler 4 M€ for hver gruvebrikke de eier.",
+  
+  "Darkside Incubation Plant": "Darkside Inkubasjonsanlegg",
+  "Add 1 microbe here.": "Legg til 1 mikrobe her.",
+  "Spend 2 microbes to raise the habitat rate 1 step.": "Bruk 2 mikrober for å øke habitatnivået med 1.",
+  "Spend 1 titanium. 1 VP for every 2 microbes here.": "Bruk 1 titan. 1 SP for hver 2. mikrobe på dette kortet.",
+  
+  "Darkside Meteor Bombardment": "Darkside Meteorbombardement",
+  "Gain 2 steel and 2 titanium. Raise the mining rate 2 steps.": "Få 2 stål og 2 titan. Øk gruvenivået med 2.",
+  
+  "Darkside Mining Syndicate": "Darkside Gruvesyndikat",
+  "Increase your titanium production 2 steps, or 1 step if the mining rate is at least 2. And then raise the mining rate 1 step.": "Øk titanproduksjonen din med 2, eller 1 hvis gruvenivået er minst 2. Øk deretter gruvenivået med 1.",
+  
+  "Darkside Observatory": "Darkside Observatorium",
+  "Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.]": "Legg til 1 vitenskap på et valgfritt kort (UNNTATT de som gir 2 SP eller mer per vitenskapsressurs).",
+  "Add 2 data to ANY card.": "Legg til 2 data på et valgfritt kort.",
+  
+  "Darkside Smugglers' Union": "Darkside Smuglerforening",
+  "Perform a trade action.": "Utfør en handlingsaksjon.",
+  "Raise the logistics rate 1 step.": "Øk logistikknivåen med 1.",
+  
+  "Deep Lunar Mining": "Luna dypgruvedrift",
+  "Spend 1 titanium. Increase your titanium production 2 steps. Raise the mining rate 1 step.": "Bruk 1 titan. Øk titanproduksjonen din med 2. Øk gruvenivået med 1.",
+  
+  "Earth Embassy": "Jordambassade",
+  "After being played, when you perform an action, your Moon tags count as Earth tags, but not vice versa.": "Etter å ha blitt spilt, når du utfører en handling, teller dine Månesymboler som Jordsymboler, men ikke omvendt.",
+  
+  "Geodesic Tents": "Geodesiske telt",
+  "Decrease your energy production 1 step and increase your plant production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Reduser energiproduksjonen din med 1 og øk planteproduksjonen din med 1. Bruk 1 titan. Plasser en habitatbrikke på Månen og øk habitatnivået med 1.",
+  
+  "Grand Luna Academy": "Storslått Luna akademi",
+  "Draw 1 card per 2 Moon tags you have, including this.": "Trekk 1 kort per 2 Månesymboler du har, inkludert dette.",
+  
+  "HE3 Fusion Plant": "HE3 fusjonskraftverk",
+  "Requires the mining rate of 2 or higher. Increase your energy production 1 step for each mining tile on The Moon.": "Krever gruvenivå på 2 eller høyere. Øk energiproduksjonen din med 1 for hver gruvebrikke på Månen.",
+  
+  "HE3 Lobbyists": "HE3 lobbyister",
+  "Increase your M€ production 1 step for each Moon tag you have (including this).": "Øk M€-produksjonen din med 1 for hvert Månesymbol du har (inkludert dette).",
+  
+  "HE3 Production Quotas": "HE3 produksjonskvoter",
+  "Requires that Kelvinists are ruling or that you have 2 delegates there, and 1 mine tile on The Moon. Pay 1 steel per mine tile on The Moon to gain 4 heat per mine tile on The Moon. Raise the mining rate 1 step.": "Krever at Kelvinistene styrer eller at du har 2 delegater der, og 1 gruvebrikke på Månen. Betal 1 stål per gruvebrikke på Månen for å få 4 varme per gruvebrikke på Månen. Øk gruvenivået med 1.",
+  
+  "HE3 Refinery": "HE3 raffineri",
+  "Gain 1 M€ for each level of mining rate.": "Få 1 M€ for hver gruvenivå.",
+  
+  "Habitat 14": "Habitat 14",
+  "Decrease your energy production 1 step and your M€ production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Reduser energiproduksjonen din med 1 og M€-produksjonen din med 1. Bruk 1 titan. Plasser en habitatbrikke på Månen og øk habitatnivået med 1.",
+  
+  "Heavy Duty Rovers": "Tunglast-rovere",
+  "Gain 4 M€ for each mining tile adjacent to a road tile. Raise the logistic rate 1 step.": "Få 4 M€ for hver gruvebrikke ved siden av en veibrikke. Øk logistikknivåen med 1.",
+  
+  "Heliostat Mirror Array": "Heliostat speilfelt",
+  "Spend 1 titanium. Gain 1 heat. Increase your energy production 2 steps.": "Bruk 1 titan. Få 1 varme. Øk energiproduksjonen din med 2.",
+  
+  "Hypersensitive Silicon Chip Factory": "Hypersensitiv silisiumchip-fabrikk",
+  "Requires 2 mining tiles on The Moon. Spend 2 titanium. Increase your M€ production 4 steps.": "Krever 2 gruvebrikker på Månen. Bruk 2 titan. Øk M€-produksjonen din med 4.",
+  
+  "Improved Moon Concrete": "Forbedret månebetong",
+  "When you build a mine on The Moon, you spend 1 titanium less.": "Når du bygger en gruve på Månen, betaler du 1 titan mindre.",
+  "Spend 2 steel. Raise the mining rate 1 step.": "Bruk 2 stål. Øk gruvenivået med 1.",
+  
+  "Iron Extraction Center": "Jernutvinningsenter",
+  "Spend 1 titanium. Increase your steel production 1 step for every 2 raised steps of mining rate.": "Bruk 1 titan. Øk stålproduksjonen din med 1 for hver 2 økte gruvenivåer.",
+  
+  "L.T.F. Headquarters": "L.T.F. hovedkvarter",
+  "Raise the habitat rate 1 step. Place a colony. Gain 1 Trade Fleet.": "Øk habitatnivået med 1. Plasser en koloni. Få 1 handelsflåte.",
+  
+  "L.T.F. Privileges": "L.T.F. privilegier",
+  "When playing a Moon tag, you do not pay additional steel or titanium for playing it.": "Når du spiller et Månesymbol, betaler du ikke ekstra stål eller titan for å spille det.",
+  
+  "Luna Conference": "Lunakonferansen",
+  "Requires that Scientists are ruling or that you have 2 delegates there. Gain 2 M€ per road tile on The Moon. Gain 2M€ per habitat tile on The Moon.": "Krever at Forskerne styrer eller at du har 2 delegater der. Få 2 M€ per veibrikke på Månen. Få 2 M€ per habitatbrikke på Månen.",
+  
+  "Luna Mining Hub": "Luna gruvehub",
+  "Requires a mining rate of 5 or higher.": "Krever gruvenivå på 5 eller høyere.",
+  "Spend 1 steel and 1 titanium and raise your steel and titanium production 1 step.": "Bruk 1 stål og 1 titan og øk stål- og titanproduksjonen din med 1.",
+  "Place this tile on The Moon and raise the mining rate 1 step.": "Plasser denne brikken på Månen og øk gruvenivået med 1.",
+  "2 VP PER MINING TILE ADJACENT TO THIS TILE.": "2 SP PER GRUVEBRIKKE VED SIDEN AV DENNE BRIKKEN.",
+  
+  "Luna Political Institute": "Luna politisk institutt",
+  "Place one of your delegates in any party.": "Plasser en av dine delegater i et valgfritt parti.",
+  "Requires that you have 2 Moon tags.": "Krever at du har 2 Månesymboler.",
+  
+  "Luna Project Office": "Luna prosjektkontor",
+  "DRAW 5 CARDS DURING THE RESEARCH PHASE FOR THE NEXT 2 GENERATIONS.": "TREKK 5 KORT UNDER FORSKNINGSFASEN DE NESTE 2 GENERASJONENE.",
+  
+  "Luna Resort": "Luna feriested",
+  "Requires 2 habitats on The Moon. Spend 2 titanium. Decrease your energy production 1 step and increase your M€ production 3 steps. Raise the habitat rate 1 step.": "Krever 2 habitatbrikker på Månen. Bruk 2 titan. Reduser energiproduksjonen din med 1 og øk M€-produksjonen din med 3. Øk habitatnivået med 1.",
+  
+  "Luna Senate": "Luna senat",
+  "1 VP per Moon tag you have.": "1 SP per Månesymbol du har.",
+  "Requires that you have 3 Moon tags. Increase your M€ production 1 step per Moon tag in the game (including these.)": "Krever at du har 3 Månesymboler. Øk M€-produksjonen din med 1 per Månesymbol i spillet (inkludert disse).",
+  
+  "Luna Staging Station": "Luna oppskytningsstasjon",
+  "Requires the logistic rate to be 2 or higher. Spend 1 titanium. Raise the logistic rate 2 steps.": "Krever at logistikknivåen er 2 eller høyere. Bruk 1 titan. Øk logistikknivåen med 2.",
+  
+  "Luna Trade Station": "Luna handelsstasjon",
+  "Gain 2 M€ for each habitat tile on The Moon.": "Få 2 M€ for hver habitatbrikke på Månen.",
+  "Spend 2 titanium. Place this tile ON THE RESERVED AREA.": "Bruk 2 titan. Plasser denne brikken PÅ DET RESERVERTE OMRÅDET.",
+  
+  "Luna Train Station": "Luna togstasjon",
+  "Requires a logistic rate of 5 or higher. Spend 2 steel. Increase your M€ production 4 steps. Place this tile on The Moon and raise the logistic rate 1 step. 2 VP FOR EACH ROAD TILE ADJACENT TO THIS TILE.": "Krever logistikknivå på 5 eller høyere. Bruk 2 stål. Øk M€-produksjonen din med 4. Plasser denne brikken på Månen og øk logistikknivåen med 1. 2 SP FOR HVER VEIBRIKKE VED SIDEN AV DENNE BRIKKEN.",
+  
+  "Lunar Dust Processing Plant": "Luna støvbehandlingsanlegg",
+  "When you place a road tile on The Moon, you spend no steel on it.": "Du bruker ikke noe stål på å plassere en veibrikke på Månen.",
+  "Spend 1 titanium. Raise the logistic rate 1 step.": "Bruk 1 titan. Øk logistikknivåen med 1.",
+  
+  "Lunar Industry Complex": "Luna industrikompleks",
+  "Spend 2 titanium. Place a mine tile on The Moon and raise the mining rate 1 step. Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.": "Bruk 2 titan. Plasser en gruvebrikke på Månen og øk gruvenivået med 1. Øk stål-, titan- og varmeproduksjonen din med 1 hver. Øk energiproduksjonen din med 2.",
+  
+  "Lunar Mine Urbanization": "Luna gruveurbanisering",
+  "Requires you have 1 mine tile. Increase your M€ production 1 step. Replace one of your mine tiles with this special tile. Raise the habitat rate 1 step. This tile counts both as a habitat and a mine tile.": "Krever at du har 1 gruvebrikke. Øk M€-produksjonen din med 1. Erstatt en av gruvebrikkene dine med denne spesialbrikken. Øk habitatnivået med 1. Denne brikken teller både som en habitatbrikke og en gruvebrikke.",
+  
+  "Lunar Observation Post": "Luna observasjonspost",
+  "Add 1 data resource to ANY card": "Legg til 1 dataressurs på et valgfritt kort",
+  "Spend 1 titanium. 1 VP for every 3 data resources here.": "Bruk 1 titan. 1 SP for hver 3. dataressurs på dette kortet.",
+  
+  "Lunar Security Stations": "Luna sikkerhetsstasjoner",
+  "Requires 3 road tiles on The Moon. Raise the logistic rate 1 step.": "Krever 3 veibrikker på Månen. Øk logistikknivåen med 1.",
+  
+  "Lunar Steel": "Månestål",
+  "Your steel resources are worth 1 M€ extra.": "Stålressursene dine er verdt 1 M€ ekstra.",
+  
+  "Lunar Trade Fleet": "Luna handelsflåte",
+  "2 titanium production": "2 titanproduksjon",
+  "Requires that you have 2 titanium production. Increase your M€ production 1 step. Raise the logistic rate 1 step.": "Krever at du har 2 titanproduksjon. Øk M€-produksjonen din med 1. Øk logistikknivåen med 1.",
+  
+  "Mare Imbrium Mine": "Mare Imbrium Gruve",
+  "Spend 1 titanium. Increase your steel production 1 step and your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the mining rate 1 step.": "Bruk 1 titan. Øk stålproduksjonen din med 1 og titanproduksjonen din med 1. Plasser en gruvebrikke PÅ DET RESERVERTE OMRÅDET og øk gruvenivået med 1.",
+  
+  "Mare Nectaris Mine": "Mare Nectaris Gruve",
+  "Spend 1 titanium. Increase your steel production 1 step. Place a mine ON THE RESERVED AREA and raise the mining rate 1 step.": "Bruk 1 titan. Øk stålproduksjonen din med 1. Plasser en gruvebrikke PÅ DET RESERVERTE OMRÅDET og øk gruvenivået med 1.",
+  
+  "Mare Nubium Mine": "Mare Nubium Gruve",
+  "Spend 1 titanium. Increase your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the mining rate 1 step.": "Bruk 1 titan. Øk titanproduksjonen din med 1. Plasser en gruvebrikke PÅ DET RESERVERTE OMRÅDET og øk gruvenivået med 1.",
+  
+  "Mare Serenitatis Mine": "Mare Serenitatis Gruve",
+  "Spend 2 titanium and 1 steel. Increase your steel and titanium production 1 step. Place a mine ON THE RESERVED AREA and a road tile adjacent to it. Raise the mining rate 1 step and the logistic rate 1 step.": "Bruk 2 titan og 1 stål. Øk stål- og titanproduksjonen din med 1. Plasser en gruvebrikke PÅ DET RESERVERTE OMRÅDET og en veibrikke ved siden av den. Øk gruvenivået med 1 og logistikknivåen med 1.",
+  
+  "Microsingularity Plant": "Mikrosingularitetsanlegg",
+  "Requires 2 habitats on The Moon. Increase your energy production 2 steps.": "Krever 2 habitatbrikker på Månen. Øk energiproduksjonen din med 2.",
+  
+  "Mining Robots Manuf. Center": "Gruverobotfabrikk",
+  "Spend 1 titanium. Raise the mining rate 2 steps.": "Bruk 1 titan. Øk gruvenivået med 2.",
+  
+  "Momentum Virium Habitat": "Momentum-Virium-Habitat",
+  "Spend 1 titanium. Increase your heat production 2 steps and your M€ production 3 steps. Place a habitat tile ON THE RESERVED AREA and raise the habitat rate 1 step.": "Bruk 1 titan. Øk varmeproduksjonen din med 2 og M€-produksjonen din med 3. Plasser en habitatbrikke PÅ DET RESERVERTE OMRÅDET og øk habitatnivået med 1.",
+  
+  "Moon Tether": "Månefeste",
+  "When you play a card, you pay 2 M€ less for it.": "Når du spiller et kort, betaler du 2 M€ mindre for det.",
+  "Requires 6 space tags.": "Krever 6 Romsymboler.",
+  
+  "Mooncrate Block Factory": "Mooncrate kassefabrikk",
+  "Lunar standard projects": "Luna standardprosjekter",
+  "When you pay for a Lunar standard project, you spend 4M€ less.": "Når du betaler for et Luna standardprosjekt, bruker du 4 M€ mindre.",
+  "Requires 1 mine on The Moon.": "Krever 1 gruvebrikke på Månen.",
+  
+  "Mooncrate Convoys To Mars": "Mooncrate konvoier til Mars",
+  "Requires that Mars First are ruling or that you have 2 delegates there. Raise the logistic rate 1 step. All players may sell their steel resources for 3M€ each.": "Krever at Mars Først styrer eller at du har 2 delegater der. Øk logistikknivåen med 1. Alle spillere kan selge stålressursene sine for 3 M€ hver.",
+  
+  "New Colony Planning Initiaitives": "Initiativer for planlegging av nye kolonier",
+  "Requires the habitat rate to be 2 or higher. Raise the habitat rate 1 step.": "Krever at habitatnivået er 2 eller høyere. Øk habitatnivået med 1.",
+  
+  "Off-World City Living": "Byliv utenfor Jorden",
+  "Increase your M€ production 1 step per city tile NOT ON MARS. Increase habitat rate 1 step.": "Øk M€-produksjonen din med 1 per bybrikke IKKE PÅ MARS. Øk habitatnivået med 1.",
+  
+  "Orbital Power Grid": "Orbitalt kraftnett",
+  "Increase your energy production 1 step per city tile NOT ON MARS.": "Øk energiproduksjonen din med 1 per bybrikke IKKE PÅ MARS.",
+  
+  "Preliminary Darkside": "Preliminær Darkside",
+  "Gain 3 titanium or 4 steel. Raise the mining rate 1 step.": "Få 3 titan eller 4 stål. Øk gruvenivået med 1.",
+  
+  "Pride of the Earth Arkship": "Erkeskipet Jordens Stolthet",
+  "Science 2 Space": "Vitenskap 2 Rom",
+  "Add 1 science resource here per every 5 science tags you have.": "Legg til 1 vitenskapsressurs her for hver 5. vitenskapssymbol du har.",
+  "Requires 1 science and 2 space tags. Spend 2 titanium. 1 VP per science resource here.": "Krever 1 vitenskap og 2 romsymboler. Bruk 2 titan. 1 SP per vitenskapsressurs på dette kortet.",
+  
+  "Processor Factory": "Prosessorfabrikk",
+  "1 VP for every 3 data resources here.": "1 SP for hver 3. dataressurs på dette kortet.",
+  "Spend 1 steel to add 2 data resources to ANY card.": "Bruk 1 stål for å legge til 2 dataressurser på et valgfritt kort.",
+  
+  "Revolting Colonists": "Opprørende kolonister",
+  "Requires 4 habitat rate. All players pay 3M€ for each habitat tile they own.": "Krever 4 habitatnivå. Alle spillere betaler 3 M€ for hver habitatbrikke de eier.",
+  
+  "Road Piracy": "Landeveisrøveri",
+  "Requires 3 logistic rate. Steal up to 6 steel or 4 titanium from other players. (Resources may be stolen from more than 1 opponent.)": "Krever 3 logistikknivå. Stjel opptil 6 stål eller 4 titan fra andre spillere (ressurser kan stjeles fra mer enn 1 motstander).",
+  
+  "Rover Drivers Union": "Foreningen for roverførere",
+  "Requires 2 logistic rate. Raise the logistic rate 1 step. Increase your M€ production 1 step per logistic rate.": "Krever 2 logistikknivå. Øk logistikknivåen med 1. Øk M€-produksjonen din med 1 per logistikknivå.",
+  
+  "Rust Eating Bacteria": "Rustspisende bakterier",
+  "1 VP per 3 microbes here.": "1 SP per 3. mikrobe på dette kortet.",
+  "Spend 1 steel to add 2 microbes here.": "Bruk 1 stål for å legge til 2 mikrober på dette kortet.",
+  
+  "Sinus Iridium Road Network": "Sinus Iridium veinettverk",
+  "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Reduser energiproduksjonen din med 1 og øk M€-produksjonen din med 3. Bruk 1 stål. Plasser en veibrikke på Månen og øk logistikknivåen med 1.",
+  
+  "Small Duty Rovers": "Små lasterovere",
+  "Spend 1 titanium. Raise the logistic rate 1 step. Gain 1 M€ per habitat tile, mine tile and road tile on The Moon.": "Bruk 1 titan. Øk logistikknivåen med 1. Få 1 M€ per habitatbrikke, gruvebrikke og veibrikke på Månen.",
+  
+  "Solar Panel Foundry": "Solcellepanelstøperi",
+  "Spend 2 steel to increase your energy production 1 step.": "Bruk 2 stål for å øke energiproduksjonen din med 1.",
+  
+  "Sphere Habitats": "Sfærehabitater",
+  "Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Bruk 1 titan. Plasser en habitatbrikke på Månen og øk habitatnivået med 1.",
+  
+  "Staging Station \"Behemoth\"": "\"Behemoth\" Oppskytningsstasjon",
+  "Gain 2 Trade Fleets. Raise the logistic rate 1 step.": "Få 2 handelsflåter. Øk logistikknivåen med 1.",
+  
+  "Steel Market Monopolists": "Stålmarkedets monopolister",
+  "Requires the mining rate to be 3 or higher.": "Krever at gruvenivået er 3 eller høyere.",
+  "Spend 3X M€ to gain 2X steel (max 9 M€)": "Bruk 3X M€ for å få 2X stål (maks 9 M€)",
+  "Spend X steel to gain 3X M€ (max 3 steel).": "Bruk X stål for å få 3X M€ (maks 3 stål).",
+  
+  "Subterranean Habitats": "Underjordiske habitat",
+  "When you build a habitat on The Moon, you spend 1 titanium less.": "Du betaler 1 titan mindre når du bygger et habitat på Månen.",
+  "Spend 2 steel. Raise the habitat rate 1 step.": "Bruk 2 stål. Øk habitatnivået med 1.",
+  
+  "Syndicate Pirate Raids": "Syndikatpiratraid",
+  "ALL OPPONENTS CANNOT RETRIEVE THEIR TRADE FLEETS THIS GENERATION": "ALLE MOTSTANDERE KAN IKKE HENTE TILBAKE HANDLESFLÅTENE SINE DENNE GENERASJONEN",
+  
+  "The Womb": "Livmoren",
+  "Decrease your energy production 2 steps and increase your M€ production 4 steps. Spend 2 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Reduser energiproduksjonen din med 2 og øk M€-produksjonen din med 4. Bruk 2 titan. Plasser en habitatbrikke på Månen og øk habitatnivået med 1.",
+  
+  "Thorium Rush": "Toriumrush",
+  "Place 1 habitat tile, 1 mining tile and 1 road tile on The Moon. Raise the habitat rate, mining rate and logistic rate 1 step.": "Plasser 1 habitatbrikke, 1 gruvebrikke og 1 veibrikke på Månen. Øk habitatnivået, gruvenivået og logistikknivåen med 1.",
+  
+  "Titanium Extraction Center": "Senter for Titaniumutvinning",
+  "Spend 2 titanium. Increase your titanium production 1 step for every 2 raised steps of mining rate.": "Bruk 2 titan. Øk titanproduksjonen din med 1 for hver 2 økte gruvenivåer.",
+  
+  "Titanium Market Monopolists": "Monopolister i titanmarkedet",
+  "Spend 2X M€ to gain X titanium [max 8 M€]": "Bruk 2X M€ for å få X titan [maks 8 M€]",
+  "Spend X titanium to gain 4X M€ [max 4 titanium].": "Bruk X titan for å få 4X M€ [maks 4 titan].",
+  
+  "Tycho Road Network": "Tycho veinettverk",
+  "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Bruk 1 stål. Øk M€-produksjonen din med 1. Plasser en veibrikke på Månen og øk logistikknivåen med 1.",
+  
+  "Underground Detonators": "Underjordiske detonatorer",
+  "Gain 1 steel and 1 titanium. Raise the mining rate 1 step.": "Få 1 stål og 1 titan. Øk gruvenivået med 1.",
+  
+  "Undermoon Drug Lords Network": "Underjordisk narkoliga",
+  "Increase your M€ production 1 step per 2 steps of habitat rate.": "Øk M€-produksjonen din med 1 per 2 habitatnivå.",
+  
+  "Water Treatment Complex": "Vannbehandlingskompleks",
+  "Requires 1 habitat tile on The Moon. Spend 1 titanium. Raise the habitat rate 2 steps.": "Krever 1 habitatbrikke på Månen. Bruk 1 titan. Øk habitatnivået med 2.",
+  
+  "We Grow As One": "Vi vokser som én",
+  "Requires that Unity are ruling or that you have 2 delegates there. Increase ALL colony tile tracks 1 step. Increase each colony tile track 1 step if you have a colony on that colony tile.": "Krever at Samhold styrer eller at du har 2 delegater der. Øk sporet på ALLE koloniplater med 1. Øk i tillegg sporet på hver koloniplate med 1 hvis du har en koloni på den koloniplaten.",
+  
+  "Martian Embassy": "Marsambassade",
+  "Raise the Mars Planetary Track 1 step for every 3 Moon tags you have, including this.": "Øk planetsporet for Mars med 1 for hvert 3. Månesymbol du har, inkludert dette.",
+  
+  "Luna Archives": "Luna arkiv",
+  "Add 1 science resource here for each Moon tag you have.": "Legg til 1 vitenskapsressurs her for hvert Månesymbol du har.",
+  "When playing a Moon tag, science resources here may be used as payment, and are worth 1M€ each.": "Når du spiller et Månesymbol, kan vitenskapsressurser her brukes som betaling, og er verdt 1 M€ hver.",
+  
+  "Luna Ecumenopolis": "Luna økumenopolis",
+  "Spend 2 titanium. Place 2 habitat tiles adjacent to at least 2 other habitat tiles and raise habitat rate 2 steps. Increase your TR 1 step for each 2 steps of the habitat rate.": "Bruk 2 titan. Plasser 2 habitatbrikker ved siden av minst 2 andre habitatbrikker og øk habitatnivået med 2. Øk TR med 1 for hver 2 habitatnivå.",
+  
+  "Steal": "Stjel",
+  "Habitat rate": "Habitatnivå",
+  "Mining rate": "Gruvenivå",
+  "Logistic rate": "Logistikknivå",
+  "Colony tile": "Koloniplate",
+  "Colony tiles": "Koloniplater",
+  "Mine tile": "Gruvebrikke",
+  "Mine tiles": "Gruvebrikker",
+  "Road tile": "Veibrikke",
+  "Road tiles": "Veibrikker"
+}

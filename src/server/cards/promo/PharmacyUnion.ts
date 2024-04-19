@@ -89,7 +89,7 @@ export class PharmacyUnion extends CorporationCard {
             new SelectOption('Add a disease to it and lose up to 4 M€, then remove a disease to gain 1 TR').andThen(() => {
               const megaCreditsLost = Math.min(player.megaCredits, 4);
               player.increaseTerraformRating();
-              player.megaCredits -= megaCreditsLost;
+              player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
               game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
               game.log('${0} removed a disease from ${1} to gain 1 TR', (b) => b.player(player).card(this));
               return undefined;
@@ -146,7 +146,7 @@ export class PharmacyUnion extends CorporationCard {
         const player = game.getCardPlayerOrThrow(this.name);
         const megaCreditsLost = Math.min(player.megaCredits, microbeTagCount * 4);
         player.addResourceTo(this, microbeTagCount);
-        player.megaCredits -= megaCreditsLost;
+        player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
         game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
         return undefined;
       }, Priority.SUPERPOWER);

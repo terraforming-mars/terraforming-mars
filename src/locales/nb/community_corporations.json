@@ -1,0 +1,32 @@
+{
+    "Agricola Inc": "Agricola Inc",
+    "You start with 1 plant production, 1 M€ production, 1 heat production and 40 M€.": "Du starter med 1 planteproduksjon, 1 M€ produksjon, 1 varmeproduksjon og 40 M€.",
+    "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "Effekt: Ved spillslutt, score -2 / 0 / 1 / 2 SP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.",
+
+    "Project Workshop": "Prosjektverksted",
+    "You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.": "Du starter med 39 M€, 1 stål og 1 titan. Som din første handling, trekk et blått kort.",
+    "Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.": "Vend og kast et spilt blått kort for å konvertere alle SP på det til TR og trekk 2 kort, eller bruk 3 M€ for å trekke et blått kort.",
+
+    "Incite": "Oppvigle",
+    "You start with 32 M€. As your first action, place two delegates in one party.": "Du starter med 32 M€. Som din første handling, plasser to delegater i ett parti.",
+    "You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.": "Du har +1 innflytelse. Når du sender en delegat ved å bruke handlingen for lobbyvirksomhet, betaler du 2 M€ mindre for det.",
+
+    "Playwrights": "Dramatikere",
+    "You start with 38 M€ and 1 energy production.": "Du starter med 38 M€ og 1 energiproduksjon.",
+    "Replay a played event from any player (INCLUDING events that place special tiles) by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.": "Spill en spilt hendelse fra en hvilken som helst spiller (INKLUDERT hendelser som plasserer spesialplater) ved å betale kostnaden KUN i M€ (rabatter og refusjoner gjelder), og FJERN HENDELSEN FRA SPILLET.",
+
+    "Midas": "Midas",
+    "You start with 120 M€. Lower your TR 7 steps.": "Du starter med 120 M€. Senk din TR 7 trinn.",
+
+    "Curosity II": "Curosity II",
+    "You start with 40 M€ and 2 steel production.": "Du starter med 40 M€ og 2 stålproduksjon.",
+    "When you place a tile on an area that has a RESOURCE placement bonus, or on top of another tile, you may pay 2 M€ to draw a card.": "Når du plasserer en brikke på et område som gir deg en RESSURS som plasseringsbonus, eller på toppen av en annen plate, kan du betale 2 M€ for å trekke et kort.",
+
+    "Junk Ventures": "Søppelforetak",
+    "You start with 43 M€. As your first action, discard the top 3 cards of the deck.": "Du starter med 43 M€. Som din første handling, kast de øverste 3 kortene i kortstokken.",
+    "ACTION: SHUFFLE THE DISCARD PILE, THEN DRAW 3 CARDS FROM IT. KEEP 1 AND DISCARD THE OTHER 2.": "HANDLING: STOKK KASTEBUNKEN OG TREKK SÅ 3 KORT FRA DEN. BEHOLD 1 OG KAST DE ANDRE 2.",
+
+    "UNITED NATIONS MISSION ONE": "FORENTE NASJONER: OPPDRAG EN",
+    "You start with 39 M€. Increase your TR 1 step.": "Du starter med 39 M€. Øk din TR 1 trinn.",
+    "When any player takes an action or plays a card that increases TR, including this, gain 1 M€ for each step.": "Når en spiller tar en handling eller spiller et kort som øker TR, inkludert dette, få 1 M€ for hvert trinn."
+}

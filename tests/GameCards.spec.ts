@@ -95,5 +95,65 @@ describe('GameCards', function() {
     const names = new GameCards(gameOptions).getProjectCards().map((c) => c.name);
     expect(names).to.contain(CardName.VENUSIAN_INSECTS);
   });
+
+  it('should not include the included cards in the standard projects', function() {
+    const gameOptions: GameOptions = {
+      ...DEFAULT_GAME_OPTIONS,
+      corporateEra: true,
+      includedCards: [CardName.VENUSIAN_INSECTS],
+    };
+    const names = new GameCards(gameOptions).getStandardProjects().map((c) => c.name);
+    expect(names).to.not.contain(CardName.VENUSIAN_INSECTS);
+  });
+
+  it('should not include the included cards in the preludes', function() {
+    const gameOptions: GameOptions = {
+      ...DEFAULT_GAME_OPTIONS,
+      corporateEra: true,
+      includedCards: [CardName.VENUSIAN_INSECTS],
+    };
+    const names = new GameCards(gameOptions).getPreludeCards().map((c) => c.name);
+    expect(names).to.not.contain(CardName.VENUSIAN_INSECTS);
+  });
+
+  it('should not include the included cards in the corporation cards', function() {
+    const gameOptions: GameOptions = {
+      ...DEFAULT_GAME_OPTIONS,
+      corporateEra: true,
+      includedCards: [CardName.VENUSIAN_INSECTS],
+    };
+    const names = new GameCards(gameOptions).getCorporationCards().map((c) => c.name);
+    expect(names).to.not.contain(CardName.VENUSIAN_INSECTS);
+  });
+
+  it('should not include corporation cards in the included cards', function() {
+    const gameOptions: GameOptions = {
+      ...DEFAULT_GAME_OPTIONS,
+      corporateEra: true,
+      includedCards: [CardName.POINT_LUNA],
+    };
+    const names = new GameCards(gameOptions).getProjectCards().map((c) => c.name);
+    expect(names).to.not.contain(CardName.POINT_LUNA);
+  });
+
+  it('should not include prelude cards in the included cards', function() {
+    const gameOptions: GameOptions = {
+      ...DEFAULT_GAME_OPTIONS,
+      corporateEra: true,
+      includedCards: [CardName.DONATION],
+    };
+    const names = new GameCards(gameOptions).getProjectCards().map((c) => c.name);
+    expect(names).to.not.contain(CardName.DONATION);
+  });
+
+  it('should not include standard projects in the included cards', function() {
+    const gameOptions: GameOptions = {
+      ...DEFAULT_GAME_OPTIONS,
+      corporateEra: true,
+      includedCards: [CardName.GREENERY_STANDARD_PROJECT],
+    };
+    const names = new GameCards(gameOptions).getProjectCards().map((c) => c.name);
+    expect(names).to.not.contain(CardName.GREENERY_STANDARD_PROJECT);
+  });
 });
 

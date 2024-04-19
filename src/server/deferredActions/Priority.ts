@@ -10,8 +10,6 @@ export enum Priority {
 
   /** When you must discard before you can draw. Making a determination that Sponsored Academies should come before Mars U. */
   SPONSORED_ACADEMIES,
-  /** When you must discard before you can draw. Mars U, Ender (CEO). */
-  DISCARD_AND_DRAW,
   DRAW_CARDS,
   BUILD_COLONY,
   INCREASE_COLONY_TRACK,
@@ -21,6 +19,13 @@ export enum Priority {
 
   /** Anything that doesn't fit into another category. */
   DEFAULT,
+  /**
+   * When you must discard before you can draw. Mars U, Ender (CEO).
+   *
+   * Note: This used to be before DRAW_CARDS, and I don't know why it would be.
+   * Moving this just after DEFAULT. See #5488
+   */
+  DISCARD_AND_DRAW,
   /** Effects that make your opponents lose resources or production. */
   ATTACK_OPPONENT,
   /** Effects that make you lose resource or production "as much as possible". Pharmacy Union, Mons. */
@@ -29,5 +34,6 @@ export enum Priority {
   LOSE_RESOURCE_OR_PRODUCTION,
   DECREASE_COLONY_TRACK_AFTER_TRADE,
   DISCARD_CARDS,
+  ROBOTIC_WORKFORCE,
   BACK_OF_THE_LINE,
 }

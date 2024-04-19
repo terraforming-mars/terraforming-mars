@@ -12,14 +12,16 @@ import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce'
 import {Units} from '../../../src/common/Units';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {IGame} from '../../../src/server/IGame';
 
 describe('Gyropolis', function() {
   let card: Gyropolis;
+  let game: IGame;
   let player: TestPlayer;
 
   beforeEach(function() {
     card = new Gyropolis();
-    [/* game */, player] = testGame(2);
+    [game, player] = testGame(2);
   });
 
   it('Should play', function() {
@@ -70,7 +72,9 @@ describe('Gyropolis', function() {
     player.production.override(Units.of({energy: 2}));
     expect(roboticWorkforce.canPlay(player)).is.true;
 
-    const selectCard = cast(roboticWorkforce.play(player), SelectCard);
+    cast(roboticWorkforce.play(player), undefined);
+    runAllActions(game);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
     expect(selectCard.cards).deep.eq([card]);
     selectCard.cb([selectCard.cards[0]]);
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 2}));

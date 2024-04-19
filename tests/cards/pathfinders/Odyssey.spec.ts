@@ -25,7 +25,7 @@ import {Diversity} from '../../../src/server/turmoil/globalEvents/Diversity';
 import {Kelvinists} from '../../../src/server/turmoil/parties/Kelvinists';
 import {Anthozoa} from '../../../src/server/cards/pathfinders/Anthozoa';
 import {ControlledBloom} from '../../../src/server/cards/pathfinders/ControlledBloom';
-import { Ecologist } from '../../../src/server/milestones/Ecologist';
+import {Ecologist} from '../../../src/server/milestones/Ecologist';
 
 
 describe('Odyssey', () => {

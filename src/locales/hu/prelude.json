@@ -28,14 +28,14 @@
     "Increase your plant production 1 step. Place a city tile.": "Növeld a palántatermelésed 1 lépéssel. Helyezz le egy város lapkát.",
 
     "Ecology Experts": "Ökológiai szakértők",
-    "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": 
+    "Increase your plant production 1 step. PLAY A CARD FROM HAND, IGNORING GLOBAL REQUIREMENTS.":
         "Növeld a palántatermelésed 1 lépéssel. Játsz egy lapot a kezedből, figyelmen kívül hagyva a globális követelményeket.",
 
     "Eccentric Sponsor": "Különc szponzor",
     "Play a card from hand, reducing its cost by 25 M€": "JÁTSZ EGY LAPOT A KEZEDBŐL, 25 M€-el CSÖKKENTVE AZ ÁRÁT",
 
     "Experimental Forest": "Kísérleti erdő",
-    "Place 1 greenery tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": 
+    "Place 1 greenery tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.":
         "Helyezz le 1 növényzet lapkát és növeld az oxigént 1 lépéssel. Húzz 2 palánta ikonnal ellátott lapot",
 
     "Galilean Mining": "Galilei bányászat",
@@ -69,7 +69,7 @@
     "Increase your heat production 3 steps. Gain 3 heat.": "Növeld a hőtermelésed 3 lépéssel. Kapsz 3 hőt.",
 
     "Mohole Excavation": "Mohole ásatás",
-    "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": 
+    "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.":
         "Növeld az acéltermelésed 1 lépéssel és a hőtermelésed 2 lépéssel. Kapsz 2 hőt.",
 
     "Nitrogen Shipment": "Nitrogén szállítmány",
@@ -85,7 +85,7 @@
     "Increase your energy production 3 steps.": "Növeld az energiatermelésed 3 lépéssel.",
 
     "Research Network": "Kutatási hálózat",
-    "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": 
+    "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.":
         "Növeld a M€ termelésed 1 lépéssel. Húzz 3 lapot. Amikor végrehajtasz egy akciót, a kérdőjel ikon bármelyik ikonnak számít a választásod szerint.",
 
     "Self-Sufficient Settlement": "Önellátó település",
@@ -95,7 +95,7 @@
     "Raise oxygen 2 steps. Gain 5 steel.": "Növeld az oxigén szintet 2 lépéssel. Kapsz 5 acélt.",
 
     "Society Support": "Társadalmi támogatás",
-    "Increase your plant, energy and heat production 1 step. Decrease M€ production 1 step.": 
+    "Increase your plant, energy and heat production 1 step. Decrease M€ production 1 step.":
         "Növeld a palántatermelésed, az energiatermelésed és a hőtermelésed 1 lépéssel. Csökkentsd a M€ termelésed 1 lépéssel.",
 
     "Supplier": "Beszállító",
@@ -108,6 +108,6 @@
     "Increase your TR 3 steps. Draw a card.": "Növeld a TR-t 3 lépéssel. Húzz egy lapot.",
 
     "Acquired Space Agency": "Megvásárolt űrügynökség",
-    "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": 
+    "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.":
         "Kapsz 6 titánt. Húzz két űr ikonnal ellátott lapot"
 }

@@ -1,158 +1,158 @@
 {
 
-    "Applied Science": "Angewandte Wissenschaft",
-    "Action: Remove 1 resource here to gain 1 standard resource of your choice or add 1 resource on ANY CARD WITH A RESOURCE.": "AKTION: Entferne 1 Ressource hier, um 1 Standardressource deiner Wahl zu erhalten oder füge 1 Ressource auf einer beliebigen Karte mit einer Ressource hinzu.",
-    "Add 6 resources here.": "Füge hier 6 Ressourcen hinzu.",
+    "Applied Science": "Anvendt vitenskap",
+    "Action: Remove 1 resource here to gain 1 standard resource of your choice or add 1 resource on ANY CARD WITH A RESOURCE.": "Handling: Fjern 1 ressurs her for å få 1 valgfri standardressurs eller legg til 1 ressurs på ET VALGFRITT KORT SOM HAR EN RESSURS.",
+    "Add 6 resources here.": "Legg til 6 ressurser her.",
 
-    "Colony Trade Hub": "Kolonie Handelszentrum",
-    "Increase your energy production 1 step. Gain 3 titanium": "Erhöhe deine Energieproduktion um 1. Erhalte 3 Titan.",
-    "Effect: When a colony is placed, gain 2 M€": "Effekt: Wenn eine Kolonie platziert wird, erhalte 2 M€.",
+    "Colony Trade Hub": "Handelshub for kolonier",
+    "Increase your energy production 1 step. Gain 3 titanium": "Øk energiproduksjonen din med 1 trinn. Få 3 titan.",
+    "Effect: When a colony is placed, gain 2 M€": "Effekt: Når en koloni plasseres, få 2 M€",
 
-    "Focused Organization": "Zielgerichtete Organisation",
-    "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource": "AKTION: Wirf 1 Karte ab und gib 1 Standardressource aus, um 1 Karte zu ziehen und 1 Standardressource zu erhalten.",
-    "Draw 1 card and gain 1 standard resource.": "Ziehe 1 Karte und erhalte 1 Standardressource.",
+    "Focused Organization": "Fokusert organisasjon",
+    "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource": "Handling: Kast 1 kort og bruk 1 standardressurs for å trekke 1 kort og få 1 standardressurs",
+    "Draw 1 card and gain 1 standard resource.": "Trekk 1 kort og få 1 standardressurs.",
 
-    "Nobel Prize": "Nobelpreis",
-    "Gain 2 M€. Draw 2 cards with requirements.": "Erhalte 2 M€. Ziehe 2 Karten mit Vorausetzungen.",
+    "Nobel Prize": "Nobelpris",
+    "Gain 2 M€. Draw 2 cards with requirements.": "Få 2 M€. Trekk 2 kort som har krav til å spilles.",
 
-    "Old Mining Colony": "Alte Bergbaukolonie",
-    "Increase your titanium production 1 step. Place 1 colony. Discard 1 card.": "Erhöhe deine Titan-Produktion um 1. Platziere 1 Kolonie. Werfe 1 Karte ab.",
-
-
-    "Anti-desertification Techniques": "Anti-Wüstenbildungstechniken",
-    "Gain 3 M€. Increase your plant production 1 step and your steel production 1 step.": "Erhöhe deine Pfanzen- und Stahl-Produktion um 1. Erhalte 3 M€.",
-
-    "Corporate Archives": "Unternehmensarchiv",
-    "Look at the top 7 cards from the deck. Take 2 of them into hand and discard the other 5.": "Sieh dir die obersten 7 Karten des Stapels an. Nimm 2 von ihnen auf die Hand und lege die anderen 5 ab.",
-    "Look at the top 7 cards from the deck.": "Sieh dir die obersten 7 Karten des Stapels an.",
-    "Take 2 of them into hand and discard the other 5.": "Nimm 2 von ihnen auf die Hand und lege die anderen 5 ab.",
-    "Gain 13 M€": "Erhalte 13 M€",
-
-    "Double Down": "Doppelter Einsatz",
-    "Copy your other prelude's direct effect.": "Kopiere den direkten Effekt einer deiner anderen Präludiums.",
-
-    "Giant Solar Collector": "Riesiger Sonnenkollektor",
-    "Increase your energy production 2 steps. Raise Venus 1 step.": "Erhöhe die Energieproduktion um 2 Stufen. Erhöhe die Venuswertung um 2%.",
-
-    "Head Start": "Start Voraus",
-    "GAIN 2 STEEL.": "Erhalte 2 Stahl.",
-    "GAIN 2 M€ PER PROJECT CARD YOU HAVE IN HAND.": "Erhalte 2 M€ pro Projektkarte, die du auf der Hand hast.",
-    "IMMEDIATELY TAKE 2 ACTIONS.": "Führe sofort 2 Aktionen aus.",
-
-    "Merger": "Fusjon",
-    "Draw 4 corporation cards. Play one of them and discard the other 3. Then pay 42 M€.": "Ziehe 4 Konzern-Karten, spiele eine dieser Karten und wirf die anderen ab. Dann bezahle 42 M€",
-
-    "New Partner": "Neuer Partner",
-    "Raise your M€ production 1 step. Immediately draw 2 prelude cards. Play 1 of them, and discard the other.": "Erhöhe deine M€-Produktion um 1. Ziehe sofort 2 Präludium-Karten, spiele eine dieser Karten und wirf die andere ab.",
+    "Old Mining Colony": "Gammel gruvekoloni",
+    "Increase your titanium production 1 step. Place 1 colony. Discard 1 card.": "Øk titanproduksjonen din med 1 trinn. Plasser 1 koloni. Kast 1 kort.",
 
 
-    "Allied Bank": "Vereinigte Banken",
-    "Increase your M€ production 4 steps. Gain 3 M€.": "Erhöhe deine M€-Produktion um 4. Erhalte 3 M€.",
+    "Anti-desertification Techniques": "Antiørken-teknikker",
+    "Gain 3 M€. Increase your plant production 1 step and your steel production 1 step.": "Få 3 M€. Øk planteproduksjonen din med 1 trinn og stålproduksjonen din med 1 trinn.",
 
-    "Aquifer Turbines": "Grundwasserleiter-Turbinen",
-    "Place an ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "Platziere ein Ozeanplättchen. Erhöhe deine Energie-Produktion um 2. Zahle 3 M€.",
+    "Corporate Archives": "Konsernarkiv",
+    "Look at the top 7 cards from the deck. Take 2 of them into hand and discard the other 5.": "Se på de 7 øverste kortene i stokken. Ta 2 av dem på hånden og kast de andre 5.",
+    "Look at the top 7 cards from the deck.": "Se på de 7 øverste kortene i stokken.",
+    "Take 2 of them into hand and discard the other 5.": "Ta 2 av dem på hånden og kast de andre 5.",
+    "Gain 13 M€": "Få 13 M€",
 
-    "Biofuels": "Biotreibstoffe",
-    "Increase your energy and plant production 1 step. Gain 2 plants.": "Erhöhe deine Energie- und Pflanzenproduktion um 1. Erhalte 2 Pflanzen.",
+    "Double Down": "Dobbel innsats",
+    "Copy your other prelude's direct effect.": "Kopier den direkte effekten til et av dine andre preludium-kort.",
 
-    "Biolab": "Biolaboratorium",
-    "Increase your plant production 1 step. Draw 3 cards.": "Erhöhe deine Pflanzen-Produktion um 1. Ziehe 3 Karten.",
+    "Giant Solar Collector": "Enorme solfangere",
+    "Increase your energy production 2 steps. Raise Venus 1 step.": "Øk energiproduksjonen din med 2 trinn. Øk Venus med 1 trinn.",
 
-    "Biosphere Support": "Biosphären-Unterstützung",
-    "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "Erhöhe deine Pflanzen-Produktion um 2. Senke deine M€-Produktion um 1.",
+    "Head Start": "Forsprang",
+    "GAIN 2 STEEL.": "FÅ 2 STÅL.",
+    "GAIN 2 M€ PER PROJECT CARD YOU HAVE IN HAND.": "FÅ 2 M€ PER PROSJEKTKORT DU HAR PÅ HÅNDEN.",
+    "IMMEDIATELY TAKE 2 ACTIONS.": "TA 2 HANDLINGER UMIDDELBART.",
 
-    "Business Empire": "Geschäftsimperium",
-    "Increase your M€ production 6 steps. Pay 6 M€.": "Erhöhe deine M€-Produktion um 6. Zahle 6 M€.",
+    "Merger": "Sammenslåing",
+    "Draw 4 corporation cards. Play one of them and discard the other 3. Then pay 42 M€.": "Trekk 4 konsernkort. Spill ett av dem og kast de andre 3. Deretter betal 42 M€.",
 
-    "Dome Farming": "Kuppel-Ackerbau",
-    "Increase your M€ production 2 steps and plant production 1 step.": "Erhöhe deine M€-Produktion um 2 und deine Pflanzen-Produktion um 1.",
+    "New Partner": "Ny partner",
+    "Raise your M€ production 1 step. Immediately draw 2 prelude cards. Play 1 of them, and discard the other.": "Øk M€-produksjonen din med 1 trinn. Trekk umiddelbart 2 preludium-kort. Spill 1 av dem og kast det andre.",
 
-    "Donation": "Spende",
-    "Gain 21 M€.": "Erhalte 21 M€.",
 
-    "Early Settlement": "Frühe Siedlung",
-    "Increase your plant production 1 step. Place a city tile.": "Erhöhe deine Pflanzen-Produktion um 1. Platziere ein Stadtplättchen.",
+    "Allied Bank": "Alliert bank",
+    "Increase your M€ production 4 steps. Gain 3 M€.": "Øk M€-produksjonen din med 4 trinn. Få 3 M€.",
 
-    "Ecology Experts": "Ökologie-Experten",
-    "Increase your plant production 1 step. PLAY A CARD FROM HAND, IGNORING GLOBAL REQUIREMENTS.": "Erhöhe deine Pflanzen-Produktion um 1. Spiele eine Karte von deiner Hand und ignoriere dabei deren globale Bedingungen.",
+    "Aquifer Turbines": "Akvedukt-turbiner",
+    "Place an ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "Plasser et hav. Øk energiproduksjonen din med 2 trinn. Betal 3 M€.",
 
-    "Eccentric Sponsor": "Exzentrischer Sponsor",
-    "Play a card from hand, reducing its cost by 25 M€": "Spiele eine Karte von deiner Hand und reduziere ihre Kosten um 25 M€.",
+    "Biofuels": "Biobrensel",
+    "Increase your energy and plant production 1 step. Gain 2 plants.": "Øk energi- og planteproduksjonen din med 1 trinn. Få 2 planter.",
 
-    "Experimental Forest": "Experimentaler Wald",
-    "Place 1 greenery tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Platziere ein Grünflächenplättchen und erhöhe den Sauerstoffgehalt um 1%. Decke solange Karten auf, bis du zwei Karten mit einem Pflanzensymbol aufgedeckt hast. Nimm diese auf die Hand und wirf die anderen ab.",
+    "Biolab": "Biologisk laboratorium",
+    "Increase your plant production 1 step. Draw 3 cards.": "Øk planteproduksjonen din med 1 trinn. Trekk 3 kort.",
 
-    "Galilean Mining": "Galileischer Bergbau",
-    "Increase your titanium production 2 steps. Pay 5 M€.": "Erhöhe deine Titan-Produktion um 2. Zahle 5 M€.",
+    "Biosphere Support": "Biosfære-støtte",
+    "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "Øk planteproduksjonen din med 2 trinn. Senk M€-produksjonen din med 1 trinn.",
 
-    "Great Aquifer": "Großer Grundwasserleiter",
-    "Place 2 ocean tiles.": "Platziere 2 Ozeanplättchen.",
+    "Business Empire": "Forretningsimperium",
+    "Increase your M€ production 6 steps. Pay 6 M€.": "Øk M€-produksjonen din med 6 trinn. Betal 6 M€.",
 
-    "Huge Asteroid": "Riesiger Asteroid",
-    "Increase temperature 3 steps. Pay 5 M€.": "Erhöhe die Temperatur um 6 °C. Zahle 5 M€.",
+    "Dome Farming": "Kuppeljordbruk",
+    "Increase your M€ production 2 steps and plant production 1 step.": "Øk M€-produksjonen din med 2 trinn og planteproduksjonen din med 1 trinn.",
 
-    "Io Research Outpost": "Io-Forschungsposten",
-    "Increase your titanium production 1 step. Draw a card.": "Erhöhe deine Titan-Produktion um 1. Ziehe eine Karte.",
+    "Donation": "Donasjon",
+    "Gain 21 M€.": "Få 21 M€.",
 
-    "Loan": "Kredit",
-    "Gain 30 M€. Decrease your M€ production 2 steps.": "Erhalte 30 M€. Senke deine M€-Produktion um 2.",
+    "Early Settlement": "Tidlig bosetning",
+    "Increase your plant production 1 step. Place a city tile.": "Øk planteproduksjonen din med 1 trinn. Plasser et byplagg.",
 
-    "Martian Industries": "Mars-Industrien",
-    "Increase your energy and steel production 1 step. Gain 6 M€.": "Erhöhe deine Energie- und Stahlproduktion um 1. Erhalte 6 M€.",
+    "Ecology Experts": "Økologiekspertise",
+    "Increase your plant production 1 step. PLAY A CARD FROM HAND, IGNORING GLOBAL REQUIREMENTS.": "Øk planteproduksjonen din med 1 trinn. Spill et kort fra hånden din (ignorer globale krav).",
 
-    "Metal-Rich Asteroid": "Metallreicher Asteroid",
-    "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "Erhöhe die Temperatur um 2 °C. Erhalte 4 Titan und 4 Stahl.",
+    "Eccentric Sponsor": "Eksentrisk sponsor",
+    "Play a card from hand, reducing its cost by 25 M€": "Spill et kort fra hånden din, reduser kostnaden med 25 M€",
 
-    "Metals Company": "Metallgesellschaft",
-    "Increase your M€, steel and titanium production 1 step.": "Erhöhe deine M€-, Stahl- und Titan-Produktion um 1.",
+    "Experimental Forest": "Eksperimentell skog",
+    "Place 1 greenery tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Plasser 1 skogområde og øk oksygen med 1 trinn. Vis frem kort fra kortstokken til du har funnet to kort med plantesymboler på dem. Ta dem på hånden og kast de andre.",
 
-    "Mining Operations": "Bergbau-Betrieb",
-    "Increase your steel production 2 steps. Gain 4 steel.": "Erhöhe deine Stahlproduktion um 2. Erhalte 4 Stahl.",
+    "Galilean Mining": "Galileisk gruvedrift",
+    "Increase your titanium production 2 steps. Pay 5 M€.": "Øk titanproduksjonen din med 2 trinn. Betal 5 M€.",
+
+    "Great Aquifer": "Stor akvedukt",
+    "Place 2 ocean tiles.": "Plasser 2 hav.",
+
+    "Huge Asteroid": "Enorm asteroid",
+    "Increase temperature 3 steps. Pay 5 M€.": "Øk temperaturen med 3 trinn. Betal 5 M€.",
+
+    "Io Research Outpost": "Forskningsstasjon på Io",
+    "Increase your titanium production 1 step. Draw a card.": "Øk titanproduksjonen din med 1 trinn. Trekk et kort.",
+
+    "Loan": "Lån",
+    "Gain 30 M€. Decrease your M€ production 2 steps.": "Få 30 M€. Senk M€-produksjonen din med 2 trinn.",
+
+    "Martian Industries": "Marsindustri",
+    "Increase your energy and steel production 1 step. Gain 6 M€.": "Øk energi- og stålproduksjonen din med 1 trinn. Få 6 M€.",
+
+    "Metal-Rich Asteroid": "Metallrik asteroide",
+    "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "Øk temperaturen med 1 trinn. Få 4 titan og 4 stål.",
+
+    "Metals Company": "Metallfirma",
+    "Increase your M€, steel and titanium production 1 step.": "Øk M€-, stål- og titanproduksjonen din med 1 trinn.",
+
+    "Mining Operations": "Gruvedrift",
+    "Increase your steel production 2 steps. Gain 4 steel.": "Øk stålproduksjonen din med 2 trinn. Få 4 stål.",
 
     "Mohole": "Mohole",
-    "Increase your heat production 3 steps. Gain 3 heat.": "Erhöhe deine Wärme-Produktion um 3. Erhalte 3 Wärme.",
+    "Increase your heat production 3 steps. Gain 3 heat.": "Øk varmeproduksjonen din med 3 trinn. Få 3 varme.",
 
-    "Mohole Excavation": "Mohole-Ausgrabungsstätte",
-    "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": "Erhöhe deine Stahl-Produktion um 1 sowie deine Wärme-Produktion um 2. Erhalte 2 Wärme.",
+    "Mohole Excavation": "Mohole-utgraving",
+    "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": "Øk stålproduksjonen din med 1 trinn og varmeproduksjonen din med 2 trinn. Få 2 varme.",
 
-    "Nitrogen Shipment": "Stickstoff-Lieferung",
-    "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 M€.": "Erhöhe deine Pflanzen-Produktion um 1. Erhöhe deinen TV um 1. Erhalte 5 M€.",
+    "Nitrogen Shipment": "Nitrogensending",
+    "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 M€.": "Øk planteproduksjonen din med 1 trinn. Øk TR med 1 trinn. Få 5 M€.",
 
-    "Orbital Construction Yard": "Orbitale Raumschiffwerft",
-    "Increase your titanium production 1 step. Gain 4 titanium.": "Erhöhe deine Titan-Produktion um 1. Erhalte 4 Titan.",
+    "Orbital Construction Yard": "Skipsverft i bane",
+    "Increase your titanium production 1 step. Gain 4 titanium.": "Øk titanproduksjonen din med 1 trinn. Få 4 titan.",
 
-    "Polar Industries": "Polarindustrien",
-    "Increase your heat production 2 steps. Place an ocean tile.": "Erhöhe deine Wärme-Produktion um 2. Platziere ein Ozeanplättchen.",
+    "Polar Industries": "Polarindustri",
+    "Increase your heat production 2 steps. Place an ocean tile.": "Øk varmeproduksjonen din med 2 trinn. Plasser et hav.",
 
-    "Power Generation": "Stromerzeugung",
-    "Increase your energy production 3 steps.": "Erhöhe deine Energie-Produktion um 3.",
+    "Power Generation": "Kraftproduksjon",
+    "Increase your energy production 3 steps.": "Øk energiproduksjonen din med 3 trinn.",
 
-    "Research Network": "Forschungsnetzwerk",
-    "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Erhöhe deine M€-Produktion um 1. Ziehe 3 Karten. Wenn du eine Aktion durchführst, zählt das Joker-Symbol als ein Symbol deiner Wahl.",
+    "Research Network": "Forskningsnettverk",
+    "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Øk M€-produksjonen din med 1 trinn. Trekk 3 kort. Når du utfører en handling, teller dette symbolet som et valgfritt symbol.",
 
-    "Self-Sufficient Settlement": "Autarke Siedlung",
-    "Increase your M€ production 2 steps. Place a city tile.": "Erhöhe deine M€-Produktion um 2. Platziere ein Stadtplättchen.",
+    "Self-Sufficient Settlement": "Selvforsynt bosetning",
+    "Increase your M€ production 2 steps. Place a city tile.": "Øk M€-produksjonen din med 2 trinn. Plasser en by.",
 
-    "Smelting Plant": "Schmelzhütte",
-    "Raise oxygen 2 steps. Gain 5 steel.": "Erhöhe den Sauerstoffgehalt um 2%. Erhalte 5 Stahl.",
+    "Smelting Plant": "Smelteverk",
+    "Raise oxygen 2 steps. Gain 5 steel.": "Øk oksygen med 2 trinn. Få 5 stål.",
 
-    "Society Support": "Förderung der Gemeinschaft",
-    "Increase your plant, energy and heat production 1 step. Decrease M€ production 1 step.": "Erhöhe deine Pflanzen-, Energie- und Wärme-Produktion um 1. Senke deine M€-Produktion um 1.",
+    "Society Support": "Samfunnsstøtte",
+    "Increase your plant, energy and heat production 1 step. Decrease M€ production 1 step.": "Øk plante-, energi- og varmeproduksjonen din med 1 trinn. Senk M€-produksjonen din med 1 trinn.",
 
-    "Supplier": "Versorger",
-    "Increase your energy production 2 steps. Gain 4 steel.": "Erhöhe deine Energie-Produktion um 2. Erhalte 4 Stahl.",
+    "Supplier": "Leverandør",
+    "Increase your energy production 2 steps. Gain 4 steel.": "Øk energiproduksjonen din med 2 trinn. Få 4 stål.",
 
-    "Supply Drop": "Versorgungslieferung",
-    "Gain 3 titanium, 8 steel and 3 plants.": "Erhalte 3 Titan, 8 Stahl und 3 Pflanzen.",
+    "Supply Drop": "Forsyningsslipp",
+    "Gain 3 titanium, 8 steel and 3 plants.": "Få 3 titan, 8 stål og 3 planter.",
 
-    "UNMI Contractor": "UNMI-Vertragspartner",
-    "Increase your TR 3 steps. Draw a card.": "Erhöhe deinen TV um 3. Ziehe eine Karte.",
+    "UNMI Contractor": "UNMI-entreprenør",
+    "Increase your TR 3 steps. Draw a card.": "Øk TR med 3 trinn. Trekk et kort.",
 
-    "Acquired Space Agency": "Erworbene Raumfahrtbehörde",
-    "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Erhalte 6 Titan. Decke solange Karten auf, bis du zwei Karten mit einem Weltraumsymbol aufgedeckt hast. Nimm diese auf die Hand und wirf die anderen ab.",
+    "Acquired Space Agency": "Anskaffet romfartsbyrå",
+    "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Få 6 titan. Vis kort fra kortstokken til du har funnet to kort med romsymboler på dem. Ta dem på hånden og kast de andre.",
 
-    "Add resource to card GHG Producing Bacteria": "Eine Ressource der Karte CO₂ produzierende Bakterien hinzufügen",
-    "Add resource to card Fish": "Eine Ressource der Karte Raubfische hinzufügen",
-    "Add resource": "Ressource hinzufügen",
-    "Gain plant": "Pflanze erhalten"
+    "Add resource to card GHG Producing Bacteria": "Legg til en ressurs på kortet CO₂ produserende bakterier",
+    "Add resource to card Fish": "Legg til en ressurs på kortet Fisk",
+    "Add resource": "Legg til en ressurs",
+    "Gain plant": "Få en plante"
 }

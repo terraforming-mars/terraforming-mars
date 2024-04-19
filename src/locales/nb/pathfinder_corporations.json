@@ -20,7 +20,7 @@
 
   "Chimera": "Chimera",
   "Effect: When you perform an action, these wild tags count as any tags of your choice. For claiming milestones and funding awards, both symbols count as one. (Other wild tags still do not count toward awards.)": "Effekt: Når du utfører en handling, teller hvert av disse Joker-symbolene som et valgfritt symbol. For å kreve milepæler og finansieringspriser, teller begge symbolene som ett. (Andre Joker-symboler teller fortsatt ikke mot utmerkelser.)",
-  "You start with 36 M€, 1 steel, and 1 titanium.": "Du starter med 36 M€, 1 stål og 1 titanium.",
+  "You start with 36 M€, 1 steel, and 1 titanium.": "Du starter med 36 M€, 1 stål og 1 titan.",
 
   "Collegium Copernicus": "Kollegium Kopernikus",
   "Effect: When you play a card with a science tag (including this) Add 1 data to ANY card.": "Effekt: Når du spiller et kort med et vitenskap-symbol (inkludert dette), legg til 1 data på et valgfritt kort.",
@@ -61,7 +61,7 @@
   "You start with 32 M€. As your first action, place an ocean tile.": "Du starter med 32 M€. Som din første handling, plasser et hav.",
 
   "RingCom": "RingCom",
-  "Effect: When any player plays a card with a Jovian tag (including this) gain 1 titanium.": "Effekt: Når noen spiller et kort med et Jupiter-symbol (inkludert dette), motta 1 titanium.",
+  "Effect: When any player plays a card with a Jovian tag (including this) gain 1 titanium.": "Effekt: Når noen spiller et kort med et Jupiter-symbol (inkludert dette), motta 1 titan.",
   "You start with 39 M€. and 3 M€ production. As your first action, draw 2 cards with a Jovian tag.": "Du starter med 39 M€ og 3 M€-produksjon. Som din første handling, trekk 2 kort med et Jupiter-symbol.",
 
   "Robin Haulings": "Robin Transport",
@@ -70,7 +70,7 @@
   "You start with 39 M€.": "Du starter med 39 M€.",
   
   "Solbank": "Solbanken",
-  "Effect: Whenever you spend M€ (or steel or titanium) add 1 data to this card.": "Effekt: Når du bruker M€, stål eller titanium, legg til 1 data på dette kortet.",
+  "Effect: Whenever you spend M€ (or steel or titanium) add 1 data to this card.": "Effekt: Når du bruker M€, stål eller titan, legg til 1 data på dette kortet.",
   "Effect: During the production phase convert each data from this card into 1M€ each.": "Effekt: Under produksjonsfasen, konverter hver data på dette kortet til 1M€.",
   "You start with 40 M€.": "Du starter med 40 M€.",
 

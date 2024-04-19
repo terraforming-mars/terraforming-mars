@@ -20,6 +20,7 @@ export class CardListSearchIndex {
 
   build() {
     for (const card of getCards(() => true)) {
+      this.add(card.name);
       const metadata = card.metadata;
       const description = metadata.description;
       if (description !== undefined) {

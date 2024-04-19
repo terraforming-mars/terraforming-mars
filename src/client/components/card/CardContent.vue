@@ -2,7 +2,7 @@
   <div :class="getClasses()">
     <CardRequirementsComponent v-if="requirements.length > 0" :requirements="requirements"/>
     <CardRenderData v-if="metadata.renderData" :renderData="metadata.renderData" />
-    <CardDescription v-if="metadata.description" :item="metadata.description" />
+    <CardDescription v-if="metadata.description !== undefined" :item="metadata.description" />
     <CardVictoryPoints v-if="metadata.victoryPoints" :victoryPoints="metadata.victoryPoints" />
     <div class="padBottom" v-if="padBottom" style="padding-bottom: 22px;"></div>
   </div>

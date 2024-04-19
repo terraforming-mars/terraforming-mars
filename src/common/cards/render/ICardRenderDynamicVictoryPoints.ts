@@ -7,4 +7,5 @@ export interface ICardRenderDynamicVictoryPoints {
   targetOneOrMore: boolean;
   anyPlayer: boolean;
   asterisk: boolean | undefined;
+  asFraction: boolean | undefined;
 }

@@ -101,7 +101,9 @@ describe('MiningRights', () => {
     player.playedCards = [card];
 
     const roboticWorkforce = new RoboticWorkforce();
-    const selectCard = cast(roboticWorkforce.play(player), SelectCard);
+    cast(roboticWorkforce.play(player), undefined);
+    runAllActions(game);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
     expect(selectCard.cards).deep.eq([card]);
     selectCard.cb([selectCard.cards[0]]);
     runAllActions(game);

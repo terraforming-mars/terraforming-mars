@@ -6,6 +6,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {played} from '../Options';
 import {IPlayer} from '../../IPlayer';
+import {Priority} from '../../deferredActions/Priority';
 
 export class RoboticWorkforce extends RoboticWorkforceBase {
   constructor() {
@@ -27,6 +28,14 @@ export class RoboticWorkforce extends RoboticWorkforceBase {
   }
 
   public override bespokePlay(player: IPlayer) {
-    return this.selectBuildingCard(player, this.getPlayableBuildingCards(player), 'Select builder card to copy');
+    player.defer(
+      this.selectBuildingCard(
+        player,
+        this.getPlayableBuildingCards(player),
+        'Select builder card to copy',
+      ),
+      Priority.ROBOTIC_WORKFORCE,
+    );
+    return undefined;
   }
 }

@@ -167,18 +167,20 @@ export class Tags {
    * Tag substitutions are included, and not counted repeatedly.
     */
   public multipleCount(tags: Array<Tag>, mode: MultipleCountMode = 'default'): number {
+    const includeEvents = this.player.isCorporation(CardName.ODYSSEY);
+
     let tagCount = 0;
     tags.forEach((tag) => {
-      tagCount += this.rawCount(tag, false);
+      tagCount += this.rawCount(tag, includeEvents);
     });
 
     // This is repeated behavior from getTagCount, sigh, OK.
     if (tags.includes(Tag.EARTH) && !tags.includes(Tag.MOON) && this.player.cardIsInEffect(CardName.EARTH_EMBASSY)) {
-      tagCount += this.rawCount(Tag.MOON, false);
+      tagCount += this.rawCount(Tag.MOON, includeEvents);
     }
 
     if (mode !== 'award') {
-      tagCount += this.rawCount(Tag.WILD, false);
+      tagCount += this.rawCount(Tag.WILD, includeEvents);
       // Chimera has 2 wild tags but should only count as one for milestones.
       if (this.player.isCorporation(CardName.CHIMERA) && mode === 'milestone') tagCount--;
     } else {

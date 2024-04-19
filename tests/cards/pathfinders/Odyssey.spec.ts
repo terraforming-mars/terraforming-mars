@@ -23,6 +23,10 @@ import {SolarWindPower} from '../../../src/server/cards/base/SolarWindPower';
 import {ThoriumRush} from '../../../src/server/cards/moon/ThoriumRush';
 import {Diversity} from '../../../src/server/turmoil/globalEvents/Diversity';
 import {Kelvinists} from '../../../src/server/turmoil/parties/Kelvinists';
+import {Anthozoa} from '../../../src/server/cards/pathfinders/Anthozoa';
+import {ControlledBloom} from '../../../src/server/cards/pathfinders/ControlledBloom';
+import {Ecologist} from '../../../src/server/milestones/Ecologist';
+
 
 describe('Odyssey', () => {
   let odyssey: Odyssey;
@@ -142,6 +146,16 @@ describe('Odyssey', () => {
     player.playCard(deimosDown);
 
     expect(player.getCardCost(deimosDown)).to.eq(deimosDown.cost); // no more discount
+  });
+
+  it('Be compatible with milestones requiring tags', () => {
+    const anthozoa = new Anthozoa();
+    const controlledBloom = new ControlledBloom();
+    player.playedCards.push(anthozoa);
+    player.playedCards.push(controlledBloom);
+
+    const ecologist = new Ecologist();
+    expect(ecologist.canClaim(player)).to.be.true;
   });
 
   // This is a weird one.

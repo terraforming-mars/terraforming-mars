@@ -88,6 +88,17 @@
             />
 
             <svg id="board_legend" height="550" width="630" class="board-legend">
+              <g v-for="(key, idx) of LEGENDS[boardName]" :key="idx" :transform="`translate(${key.position[0]}, ${key.position[1]})`">
+                <text class="board-caption">
+                  <tspan y="0">{{key.text[0]}}</tspan>
+                  <tspan :x="key.secondRowX || 0" y="1.1em">{{key.text[1]}}</tspan>
+                </text>
+                <template v-if="key.line !== undefined">
+                  <line :x1="key.line.from[0]" :y1="key.line.from[1]" :x2="key.line.to[0]" :y2="key.line.to[1]" class="board-line"></line>
+                  <circle :cx="key.line.to[0]" :cy="key.line.to[1]" r="2" class="board-caption board_caption--black"/>
+                </template>
+              </g>
+
               <template v-if="boardName === BoardName.THARSIS">
                   <g id="ascraeus_mons" transform="translate(95, 192)">
                       <text class="board-caption">
@@ -353,6 +364,7 @@ import {SpaceType} from '@/common/boards/SpaceType';
 import {SpaceId} from '@/common/Types';
 import {TileView} from '@/client/components/board/TileView';
 import {BoardName} from '@/common/boards/BoardName';
+import {LEGENDS} from '@/client/components/Legends';
 
 class GlobalParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {
@@ -375,7 +387,7 @@ export default Vue.extend({
       type: Boolean,
     },
     boardName: {
-      type: String,
+      type: String as () => BoardName,
     },
     oceans_count: {
       type: Number,
@@ -490,6 +502,9 @@ export default Vue.extend({
   computed: {
     BoardName(): typeof BoardName {
       return BoardName;
+    },
+    LEGENDS(): typeof LEGENDS {
+      return LEGENDS;
     },
   },
 });

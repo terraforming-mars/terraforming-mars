@@ -10,8 +10,7 @@
         *:3
       </div>
     </template>
-    <div v-if="victoryPoints.asterisk === true">
-    </div>
+    <div v-if="victoryPoints.asterisk === true">*</div>
   </div>
   <div v-else :class="getClasses()">{{ victoryPoints }}</div>
 </template>
@@ -55,9 +54,20 @@ export default Vue.extend({
     points(): string {
       if (!this.isObject(this.victoryPoints)) return '';
       const vps = this.victoryPoints;
-      if (vps.item === undefined && vps.points === 0 && vps.target === 0) return '?';
-      if (vps.item === undefined) return `${vps.points}`;
-      if (vps.target === vps.points || vps.target === 1) return `${vps.points}/`;
+      if (vps.item === undefined && vps.points === 0 && vps.target === 0) {
+        return '?';
+      }
+      if (vps.item === undefined) {
+        return `${vps.points}`;
+      }
+      if (vps.target === vps.points || vps.target === 1) {
+        return `${vps.points}/`;
+      }
+      if (vps.asFraction) {
+        if (vps.target ===3 && vps.points === 1) {
+          return '⅓';
+        }
+      }
       return `${vps.points}/${vps.target}`;
     },
   },

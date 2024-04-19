@@ -1,6 +1,6 @@
 <template>
   <div id="game-end" class="game_end_cont">
-      <h1  v-i18n>{{ constants.APP_NAME }} - Game finished!</h1>
+      <h1 v-i18n>{{ constants.APP_NAME }} - Game finished!</h1>
       <div class="game_end">
           <div v-if="isSoloGame">
               <div v-if="game.isSoloModeWin">
@@ -144,7 +144,7 @@
                       <div v-for="v in p.victoryPointsBreakdown.detailsPlanetaryTracks" :key="v.tag">
                         <div class="game-end-column-row">
                           <div class="game-end-column-vp">{{v.points}}</div>
-                          <div class="game-end-column-text">Most tags on the {{v.tag}} track</div>
+                          <div class="game-end-column-text" v-i18n>Most tags on the {{v.tag}} track</div>
                         </div>
                       </div>
                   </div>
@@ -205,6 +205,7 @@ import {Color} from '@/common/Color';
 import {CardType} from '@/common/cards/CardType';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {GlobalParameter} from '@/common/GlobalParameter';
+import {$t} from '@/client/directives/i18n';
 
 function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | undefined): ViewModel {
   if (playerView !== undefined) return playerView;
@@ -290,16 +291,16 @@ export default Vue.extend({
         });
       }
 
-      dataset.push({label: 'Temperature', color: Color.RED, data: getValues(GlobalParameter.TEMPERATURE, -30, 8)});
-      dataset.push({label: 'Oxygen', color: Color.GREEN, data: getValues(GlobalParameter.OXYGEN, 0, 14)});
-      dataset.push({label: 'Oceans', color: Color.BLUE, data: getValues(GlobalParameter.OCEANS, 0, 9)});
+      dataset.push({label: $t('Temperature'), color: Color.RED, data: getValues(GlobalParameter.TEMPERATURE, -30, 8)});
+      dataset.push({label: $t('Oxygen'), color: Color.GREEN, data: getValues(GlobalParameter.OXYGEN, 0, 14)});
+      dataset.push({label: $t('Oceans'), color: Color.BLUE, data: getValues(GlobalParameter.OCEANS, 0, 9)});
       if (this.game.gameOptions.venusNextExtension === true) {
-        dataset.push({label: 'Venus', color: Color.YELLOW, data: getValues(GlobalParameter.VENUS, 0, 30)});
+        dataset.push({label: $t('Venus'), color: Color.YELLOW, data: getValues(GlobalParameter.VENUS, 0, 30)});
       }
       if (this.game.gameOptions.moonExpansion === true) {
-        dataset.push({label: 'L. Habitat', color: Color.ORANGE, data: getValues(GlobalParameter.MOON_HABITAT_RATE, 0, 8)});
-        dataset.push({label: 'L. Mining', color: Color.PINK, data: getValues(GlobalParameter.MOON_MINING_RATE, 0, 8)});
-        dataset.push({label: 'L. Logistics', color: Color.PURPLE, data: getValues(GlobalParameter.MOON_LOGISTICS_RATE, 0, 8)});
+        dataset.push({label: $t('L. Habitat'), color: Color.ORANGE, data: getValues(GlobalParameter.MOON_HABITAT_RATE, 0, 8)});
+        dataset.push({label: $t('L. Mining'), color: Color.PINK, data: getValues(GlobalParameter.MOON_MINING_RATE, 0, 8)});
+        dataset.push({label: $t('L. Logistics'), color: Color.PURPLE, data: getValues(GlobalParameter.MOON_LOGISTICS_RATE, 0, 8)});
       }
       return dataset;
     },

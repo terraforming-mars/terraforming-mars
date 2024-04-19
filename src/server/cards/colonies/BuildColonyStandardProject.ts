@@ -22,8 +22,7 @@ export class BuildColonyStandardProject extends StandardProjectCard {
   }
 
   protected override discount(player: IPlayer): number {
-    const adhai = player.getCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS);
-    const adhaiDiscount = Math.floor((adhai?.resourceCount ?? 0) / 2);
+    const adhaiDiscount = Math.floor(player.resourcesOnCard(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS) / 2);
     return adhaiDiscount + super.discount(player);
   }
 

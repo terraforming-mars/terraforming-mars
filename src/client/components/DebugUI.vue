@@ -155,7 +155,7 @@ import {CardType} from '@/common/cards/CardType';
 import {CardName} from '@/common/cards/CardName';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
-import {allGlobalEventNames, getGlobalEvent, getGlobalEventOrThrow} from '@/client/turmoil/ClientGlobalEventManifest';
+import {allGlobalEventNames, getGlobalEvent} from '@/client/turmoil/ClientGlobalEventManifest';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
 import {byType, getCard, getCards, toName} from '@/client/cards/ClientCardManifest';
 import Colony from '@/client/components/colonies/Colony.vue';
@@ -165,12 +165,8 @@ import {ColonyName} from '@/common/colonies/ColonyName';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import {GameModule, GAME_MODULES, MODULE_NAMES} from '@/common/cards/GameModule';
 import {Tag} from '@/common/cards/Tag';
-import {allColonyNames, getColony} from '@/client/colonies/ClientColonyManifest';
+import {getColony} from '@/client/colonies/ClientColonyManifest';
 import {ClientCard} from '@/common/cards/ClientCard';
-import {CardComponent} from '@/common/cards/render/CardComponent';
-import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
-import {isICardRenderCorpBoxAction, isICardRenderCorpBoxEffect, isICardRenderEffect, isICardRenderItem, isICardRenderProductionBox, isICardRenderRoot} from '@/common/cards/render/Types';
-import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {translateText} from '@/client/directives/i18n';
 import {MilestoneName, milestoneNames} from '@/common/ma/MilestoneName';
 import {AwardName, awardNames} from '@/common/ma/AwardName';
@@ -178,8 +174,8 @@ import Milestone from '@/client/components/Milestone.vue';
 import Award from '@/client/components/Award.vue';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
-import {allMaNames, getMilestoneAwardDescription} from '../MilestoneAwardManifest';
 import {WithRefs} from 'vue-typed-refs';
+import {CardListSearchIndex} from '@/client/components/CardListSearchIndex';
 
 const moduleAbbreviations: Record<GameModule, string> = {
   base: 'b',
@@ -210,73 +206,7 @@ type DebugUIModel = {
   expansions: Record<GameModule, boolean>,
   types: Record<TypeOption, boolean>,
   tags: Record<TagOption, boolean>,
-  searchIndex: Map<string, Array<string>>,
-}
-
-function buildSearchIndex(map: Map<string, Array<string>>) {
-  let entries: Array<string> = [];
-  function add(text: string) {
-    entries.push(translateText(text).toLocaleUpperCase());
-  }
-
-  function process(component: CardComponent) {
-    if (isICardRenderItem(component)) {
-      if (component.type === CardRenderItemType.TEXT && component.text !== undefined) {
-        add(component.text);
-      }
-    } else if (
-      isICardRenderRoot(component) ||
-      isICardRenderCorpBoxEffect(component) ||
-        isICardRenderCorpBoxAction(component) ||
-        isICardRenderEffect(component) ||
-        isICardRenderProductionBox(component)) {
-      component.rows.forEach((row) => {
-        row.forEach((item) => {
-          if (typeof(item) === 'string') {
-            add(item);
-          } else if (item !== undefined) {
-            process(item);
-          }
-        });
-      });
-    }
-  }
-
-  for (const card of getCards(() => true)) {
-    entries = [];
-    const metadata = card.metadata;
-    const description = metadata.description;
-    if (description !== undefined) {
-      const text = isIDescription(description) ? description.text : description;
-      add(text);
-    }
-    if (metadata.renderData) {
-      process(metadata.renderData);
-    }
-    map.set('card:' + card.name, [...entries]);
-  }
-
-  for (const colonyName of allColonyNames()) {
-    entries = [];
-    add(colonyName);
-    map.set('colony:' + colonyName, [...entries]);
-  }
-
-  for (const globalEventName of allGlobalEventNames()) {
-    entries = [];
-    const globalEvent = getGlobalEventOrThrow(globalEventName);
-    add(globalEvent.name);
-    add(globalEvent.description);
-    process(globalEvent.renderData);
-    map.set('globalEvent:' + globalEvent.name, [...entries]);
-  }
-
-  for (const maName of allMaNames()) {
-    entries = [];
-    add(maName);
-    add(getMilestoneAwardDescription(maName));
-    map.set('ma:' + maName, [...entries]);
-  }
+  searchIndex: CardListSearchIndex,
 }
 
 type Refs = {
@@ -348,7 +278,7 @@ export default (Vue as WithRefs<Refs>).extend({
         clone: true,
         none: true,
       },
-      searchIndex: new Map(),
+      searchIndex: new CardListSearchIndex(),
     };
   },
   mounted() {
@@ -361,7 +291,7 @@ export default (Vue as WithRefs<Refs>).extend({
     GAME_MODULES.forEach((module) => {
       return this.expansions[module] = modules.includes(moduleAbbreviations[module]);
     });
-    buildSearchIndex(this.searchIndex);
+    this.searchIndex.build();
     this.$refs.filter.focus();
   },
   computed: {
@@ -477,13 +407,7 @@ export default (Vue as WithRefs<Refs>).extend({
         return true;
       }
       if (this.fullFilter) {
-        const detail = this.searchIndex.get(`${type}:${name}`);
-        if (detail !== undefined) {
-          if (detail.some((entry) => entry.includes(normalized))) {
-            return true;
-          }
-        }
-        return false;
+        return this.searchIndex.matches(this.filterText, type, name);
       } else {
         return name.toLocaleUpperCase().includes(normalized);
       }

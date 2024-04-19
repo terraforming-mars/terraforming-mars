@@ -27,7 +27,7 @@
     "Increase your plant production 1 step. Place a city tile.": "Umieść na planszy obszar miasta. Podnieś swoją produkcję roślinności o 1 poziom.",
 
     "Ecology Experts": "Eksperci od Ekologii",
-    "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": "Podnieś swoją produkcję roślinności o 1 poziom. Zagraj kartę z ręki, ignorując jej wymagania dotyczące wskaźników globalnych.",
+    "Increase your plant production 1 step. PLAY A CARD FROM HAND, IGNORING GLOBAL REQUIREMENTS.": "Podnieś swoją produkcję roślinności o 1 poziom. Zagraj kartę z ręki, ignorując jej wymagania dotyczące wskaźników globalnych.",
 
     "Eccentric Sponsor": "Ekscentryczny Sponsor",
     "Play a card from hand, reducing its cost by 25 M€": "Zagraj kartę z ręki, obniżając jej koszt o 25 M€.",
@@ -103,7 +103,7 @@
 
     "Acquired Space Agency": "Zakup Agencji Kosmicznej",
     "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Otrzymujesz 6 jednostek tytanu. Dobierz 2 karty z symbolami Przestrzeni Kosmicznej.",
-	
+
 	"Add resource to card GHG Producing Bacteria": "Umieść jednostkę mikrobów na karcie \"Bakterie Produkujące Gazy Cieplarniane\"",
     "Add resource to card Fish": "Umieść jednostkę zwierząt na karcie Ryby",
     "Add resource": "Dodaj zasób",

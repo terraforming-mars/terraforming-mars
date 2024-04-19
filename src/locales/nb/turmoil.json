@@ -1,0 +1,42 @@
+{
+  "Turmoil": "Omveltning",
+  "Send a delegate in an area (from lobby)": "Send en delegat til et område (fra lobbyen)",
+  "Send a delegate in an area (5 M€)": "Send en delegat til et område (5 M€)",
+  "Send a delegate in an area (3 M€)": "Send en delegat til et område (3 M€)",
+  "Policies": "Politikk",
+  "No ruling Policy": "Ingen regjerende politikk",
+
+  "Mars First": "MARS FØRST",
+  "Scientists": "FORSKERNE",
+  "Unity": "SAMHOLD",
+  "Kelvinists": "KELVINISTENE",
+  "Reds": "DE RØDE",
+  "Greens": "DE GRØNNE",
+
+  "mars first": "MARS FØRST",
+  "scientists": "FORSKERNE",
+  "unity": "SAMHOLD",
+  "kelvinists": "KELVINISTENE",
+  "reds": "DE RØDE",
+  "greens": "DE GRØNNE",
+
+  "Chairman": "Styreleder",
+  "Party leader": "Partileder",
+  "2 Party leaders": "2 Partiledere",
+
+  "Mars First - (All players receive 1 M€ for each building tag they have.)": "MARS FØRST - (Alle spillere får 1 M€ for hvert bygningssymbol de har.)",
+  "Scientists - (All players receive 1 M€ for each science tag they have.)": "FORSKERNE - (Alle spillere får 1 M€ for hvert vitenskapssymbol de har.)",
+  "Unity - (All players receive 1 M€ for each Venus tag, Earth tag, and Jovian tag they have.)": "SAMHOLD - (Alle spillere får 1 M€ for hvert Venus-, Jord- og Jupitersymbol de har.)",
+  "Kelvinists - (All players receive 1 M€ for each heat production they have.)": "KELVINISTENE - (Alle spillere får 1 M€ for hver varmeproduksjon de har.)",
+  "Reds - (The player with the lowest TR gains 1 TR. Ties are friendly.)": "DE RØDE - (Spilleren(e) med lavest TR får 1 TR.)",
+  "Greens - (All players receive 1 M€ for each Plant tag, Microbe tag, and Animal tag they have.)": "DE GRØNNE - (Alle spillere får 1 M€ for hvert Plante-, Mikrobe- og Dyresymbol de har.)",
+
+
+  "Mars First (Focused on Martian development and independence.)": "MARS FØRST (Fokusert på utvikling og uavhengighet på Mars.)",
+  "Scientists (Tech is the door to the future, and Scientists will do anything to open it.)": "FORSKERNE (Teknologi er døren til fremtiden, og Forskerne vil gjøre hva som helst for å åpne den.)",
+  "Unity (Wants to see humanity prosper in the whole solar system.)": "SAMHOLD (Vil se menneskeheten blomstre i hele solsystemet.)",
+  "Greens (Want to see a new Earth as soon as possible.)": "DE GRØNNE (Vil se en ny Jord så snart som mulig.)",
+  "Reds (Wishes to preserve the red planet.)": "DE RØDE (Ønsker å bevare den røde planeten.)",
+  "Kelvinists (Pushes for rapid terraforming, usually employing a heat-first strategy.)": "KELVINISTENE (Presser på for rask terraforming, og bruker ofte en varme-først-strategi.)"
+
+}

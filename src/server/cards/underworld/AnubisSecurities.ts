@@ -7,6 +7,7 @@ import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
 import {Resource} from '../../../common/Resource';
 import {all} from '../Options';
 import {Size} from '../../../common/cards/render/Size';
+import {Priority} from '../../deferredActions/Priority';
 
 export class AnubisSecurities extends CorporationCard {
   constructor() {
@@ -58,30 +59,32 @@ export class AnubisSecurities extends CorporationCard {
   }
 
   public onProductionPhase(player: IPlayer) {
-    const corruption = player.underworldData.corruption;
-    const money = corruption * 6;
-    if (money > 0) {
-      player.stock.megacredits += money;
-      player.game.log('${0} discarded ${1} corruption and gained ${2} M€', (b) => b.player(player).number(corruption).number(money));
-      player.underworldData.corruption = 0;
-    }
+    player.defer(() => {
+      const corruption = player.underworldData.corruption;
+      const money = corruption * 6;
+      if (money > 0) {
+        player.stock.megacredits += money;
+        player.game.log('${0} discarded ${1} corruption and gained ${2} M€', (b) => b.player(player).number(corruption).number(money));
+        player.underworldData.corruption = 0;
+      }
 
-    let anyCorruptOpponents = false;
-    for (const opponent of player.game.getPlayersInGenerationOrder()) {
-      if (opponent === player) {
-        continue;
+      let anyCorruptOpponents = false;
+      for (const opponent of player.game.getPlayersInGenerationOrder()) {
+        if (opponent === player) {
+          continue;
+        }
+        const corruption = opponent.underworldData.corruption;
+        if (corruption > 0) {
+          anyCorruptOpponents = true;
+          opponent.stock.steal(Resource.MEGACREDITS, corruption, player, {log: false});
+          player.game.log('${0} was paid ${1} M€ from ${2}', (b) => b.player(player).number(corruption).player(opponent));
+        }
       }
-      const corruption = opponent.underworldData.corruption;
-      if (corruption > 0) {
-        anyCorruptOpponents = true;
-        opponent.stock.steal(Resource.MEGACREDITS, corruption, player, {log: false});
-        player.game.log('${0} was paid ${1} M€ from ${2}', (b) => b.player(player).number(corruption).player(opponent));
+      if (!anyCorruptOpponents) {
+        player.increaseTerraformRating(1);
+        player.game.log('${0} gained 1 TR since no opponent had any corruption', (b) => b.player(player));
       }
-    }
-    if (!anyCorruptOpponents) {
-      player.increaseTerraformRating(1);
-      player.game.log('${0} gained 1 TR since no opponent had any corruption', (b) => b.player(player));
-    }
-    return undefined;
+      return undefined;
+    }, Priority.BACK_OF_THE_LINE);
   }
 }

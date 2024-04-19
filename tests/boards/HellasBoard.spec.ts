@@ -5,9 +5,13 @@ import {TestPlayer} from '../TestPlayer';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {SpaceName} from '../../src/server/SpaceName';
 import {HellasBoard} from '../../src/server/boards/HellasBoard';
-import {cast} from '../TestingUtils';
+import {cast, runAllActions} from '../TestingUtils';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {SeededRandom} from '../../src/common/utils/Random';
+import {Manutech} from '../../src/server/cards/venusNext/Manutech';
+import {DomedCrater} from '../../src/server/cards/base/DomedCrater';
+import {Resource} from '../../src/common/Resource';
+import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 
 describe('HellasBoard', function() {
   let board: HellasBoard;
@@ -118,5 +122,16 @@ describe('HellasBoard', function() {
     player.megaCredits = 9;
     availableSpacesOnLand = board.getAvailableSpacesOnLand(player);
     expect(availableSpacesOnLand.map((s) => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
+  });
+
+  it('Cannot place on ocean space EVEN if Manutech can make up the difference - replicates #931', () => {
+    player.setCorporationForTest(new Manutech());
+    const domedCrater = new DomedCrater();
+    player.production.add(Resource.ENERGY, 1);
+    domedCrater.play(player);
+    runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    // This is still a bug because this ought to be true.
+    expect(selectSpace.spaces.map((s) => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
   });
 });

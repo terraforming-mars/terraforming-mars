@@ -28,8 +28,10 @@ export enum SpaceBonus {
     _RESTRICTED, // 14
     ASTEROID, // 15 // Used by Deimos Down Ares
 
-    // Terra Cimerria-specific
+    // Vastitas Borealis Novus-specific
     DELEGATE, // 16
+    // Terra Cimmeria Novus-specific
+    COLONY, // 17
 
 }
 
@@ -51,6 +53,7 @@ const TO_STRING_MAP: Record<SpaceBonus, string> = {
   [SpaceBonus._RESTRICTED]: 'UNUSED',
   [SpaceBonus.ASTEROID]: 'Asteroid',
   [SpaceBonus.DELEGATE]: 'Delegate',
+  [SpaceBonus.COLONY]: 'Colony',
 };
 
 export namespace SpaceBonus {

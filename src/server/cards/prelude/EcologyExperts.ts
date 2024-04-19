@@ -21,7 +21,7 @@ export class EcologyExperts extends PreludeCard {
           b.production((pb) => pb.plants(1)).br.br;
           b.projectRequirements();
         }),
-        description: 'Increase your plant production 1 step. Play a card from hand, ignoring global requirements.',
+        description: 'Increase your plant production 1 step. PLAY A CARD FROM HAND, IGNORING GLOBAL REQUIREMENTS.',
       },
     });
   }

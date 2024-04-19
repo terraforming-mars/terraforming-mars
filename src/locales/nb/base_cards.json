@@ -61,21 +61,21 @@
 	"1 additional VP for each ocean tile adjacent to this city tile.": "1 ekstra SP for hvert hav som grenser til denne by-brikken.",
 
 	"Asteroid": "Asteroide",
-	"Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player.": "Øk temperatur 1 steg og få 2 titanium. Fjern opp til 3 planter fra en spiller.",
+	"Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player.": "Øk temperatur 1 steg og få 2 titan. Fjern opp til 3 planter fra en spiller.",
 
 	"Comet": "Komet",
 	"Raise temperature 1 step and place an ocean tile. Remove up to 3 plants from any player.": "Øk temperatur 1 steg og plasser en hav-brikke. Fjern opp til 3 planter fra en spiller.",
 
 	"Big Asteroid": "Stor asteroide",
-	"Raise temperature 2 steps and gain 4 titanium. Remove up to 4 plants from any player.": "Øk temperatur 2 steg og få 4 titanium. Fjern opp til 4 planter fra en spiller.",
+	"Raise temperature 2 steps and gain 4 titanium. Remove up to 4 plants from any player.": "Øk temperatur 2 steg og få 4 titan. Fjern opp til 4 planter fra en spiller.",
 
 	"Water Import From Europa": "Vannimport fra Europa",
-	"Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a space card.": "Betal 12 M€ for å plassere en hav-brikke. TITANIUM KAN BLI BRUKT som om du spiller et kort med romsymbol.",
+	"Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a space card.": "Betal 12 M€ for å plassere en hav-brikke. TITAN KAN BRUKES som om du spiller et kort med romsymbol.",
 	"1 VP for each Jovian tag you have.": "1 SP for hvert Jupiter symbol du har.",
 
 	"Space Elevator": "Romheis",
 	"Spend 1 steel to gain 5 M€.": "Betal 1 stål, for å få 5 M€.",
-	"Increase your titanium production 1 step.": "Øk titanium-produksjonen din med 1 steg.",
+	"Increase your titanium production 1 step.": "Øk titan-produksjonen din med 1 steg.",
 
 	"Development Center": "Utviklingssenter",
 	"Spend 1 energy to draw a card.": "Bruk 1 energi for å trekke et kort.",
@@ -100,7 +100,7 @@
 	"Place a city tile NEXT TO NO OTHER TILE.": "Plasser en by-brikke (KAN IKKE PLASSERES VED SIDEN AV ANDRE BRIKKER)",
 
 	"Phobos Space Haven": "Phobos romhavn",
-	"Increase your titanium production 1 step and place a city tile ON THE RESERVED AREA.": "Øk din titanium-produksjon 1 steg og plasser en by-brikke PÅ DET RESERVERTE OMRÅDET.",
+	"Increase your titanium production 1 step and place a city tile ON THE RESERVED AREA.": "Øk din titan-produksjon 1 steg og plasser en by-brikke PÅ DET RESERVERTE OMRÅDET.",
 
 	"Black Polar Dust": "Sort Polarstøv",
 	"Place an ocean tile. Decrease your M€ production 2 steps and increase your heat production 3 steps.": "Plasser en hav-brikke. Reduser din M€-produksjon 2 steg og øk din varmeproduksjon 3 steg.",
@@ -124,7 +124,7 @@
 	"Requires that you have 5 science tags.": "Krever at du har 5 vitenskapssymboler.",
 
 	"Security Fleet": "Sikkerhetsflåte",
-	"Spend 1 titanium to add 1 fighter resource to this card.": "Bruk 1 titanium for å legge til 1 jagerfly på dette kortet.",
+	"Spend 1 titanium to add 1 fighter resource to this card.": "Bruk 1 titan for å legge til 1 jagerfly på dette kortet.",
 	"1 VP for each fighter resource on this card.": "1 SP per jagerfly på dette kortet.",
 
 	"Cupola City": "Kuppelby",
@@ -165,7 +165,7 @@
 	"Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.": "Øk temperatur 3 steg og få 4 stål. Fjern opp til 8 planter fra en spiller.",
 
 	"Asteroid Mining": "Asteroide-gruvedrift",
-	"Increase your titanium production 2 steps.": "Øk din titanium-produksjon 2 steg.",
+	"Increase your titanium production 2 steps.": "Øk din titan-produksjon 2 steg.",
 
 	"Food Factory": "Matfabrikk",
 	"Decrease your plant production 1 step and increase your M€ production 4 steps.": "Reduser din planteproduksjon 1 steg og øk din M€-produksjon 4 steg.",
@@ -182,7 +182,7 @@
 	"Nuclear Power": "Kjernekraft",
 	"Decrease your M€ production 2 steps and increase your energy production 3 steps.": "Reduser din M€-produksjon med 2 trinn og øk din energiproduksjon med 3 trinn.",
 
-	"Lightning Harvest": "Innhøsting av lynenergi",
+	"Lightning Harvest": "Høsting av lynenergi",
 	"Requires 3 science tags. Increase your energy production and your M€ production one step each.": "Krever 3 vitenskapssymboler. Øk din energiproduksjon og M€-produksjon med 1 trinn hver.",
 
 	"Algae": "Alger",
@@ -203,14 +203,14 @@
 
 	"Fish": "Fisk",
 	"Add 1 animal to this card.": "Legg til 1 dyr på dette kortet.",
-	"Requires +2 C° or warmer. Decrease any plant production 1 step.": "Krever en temperatur på +2 °C eller varmere. Senk en hvilken som helst planteproduksjon med 1 trinn.",
+	"Requires +2 C° or warmer. Decrease any plant production 1 step.": "Krever en temperatur på +2 °C eller varmere. Senk en valgfri spillers planteproduksjon med 1 trinn.",
 	"1 VP for each animal on this card.": "1 SP per dyr på dette kortet.",
 
 	"Lake Marineris": "Marineris-sjøen",
 	"Requires 0° C or warmer. Place 2 ocean tiles.": "Krever en temperatur på 0 °C eller varmere. Plasser 2 havbrikker.",
 
 	"Small Animals": "Små dyr",
-	"Requires 6% oxygen. Decrease any plant production 1 step.": "Krever en oksygenprosent på 6% eller høyere. Senk en hvilken som helst planteproduksjon med 1 trinn.",
+	"Requires 6% oxygen. Decrease any plant production 1 step.": "Krever 6% oksygen eller høyere. Senk en valgfri spillers planteproduksjon med 1 trinn.",
 
 	"Kelp Farming": "Tangdyrking",
 	"Requires 6 ocean tiles. Increase your M€ production 2 steps and your plant production 3 steps. Gain 2 plants.": "Krever 6 eller flere havbrikker. Øk din M€-produksjon med 2 trinn og din planteproduksjon med 3 trinn. Få 2 planter.",
@@ -239,7 +239,7 @@
 	"Raise oxygen 1 step. Remove 2 plants from any player. Gain 2 steel.": "Øk oksygen med 1 trinn. Fjern 2 planter fra en spiller. Få 2 stål.",
 
 	"Mining Area": "Gruveområde",
-	"Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.": "Plasser denne brikken på et område med stål- eller titaniumplasseringsbonus, ved siden av en annen av dine brikker. Øk din produksjon av denne ressursen med 1 trinn.",
+	"Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.": "Plasser denne brikken på et område med stål- eller titanplasseringsbonus, ved siden av en annen av dine brikker. Øk din produksjon av denne ressursen med 1 trinn.",
 
 	"Building Industries": "Byggeindustri",
 	"Decrease your energy production 1 step and increase your steel production 2 steps.": "Senk din energiproduksjon med 1 trinn og øk din stålproduksjon med 2 trinn.",
@@ -248,7 +248,7 @@
 	"Place your marker on a non-reserved area. Only you may place a tile there.": "Plasser markøren din på et ikke-reservert område. Kun du kan plassere en brikke der.",
 
 	"Mining Rights": "Bergverksrettigheter",
-	"Place this tile on an area with a steel or titanium placement bonus. Increase that production 1 step.": "Plasser denne brikken på et område med stål- eller titaniumplasseringsbonus. Øk produksjonen av denne ressursen med 1 trinn.",
+	"Place this tile on an area with a steel or titanium placement bonus. Increase that production 1 step.": "Plasser denne brikken på et område med stål- eller titanplasseringsbonus. Øk produksjonen av denne ressursen med 1 trinn.",
 
 	"Sponsors": "Sponsorer",
 	"Increase your M€ production 2 steps.": "Øk din M€-produksjon med 2 trinn.",
@@ -261,7 +261,7 @@
 	"Effect: When you play a card, you pay 2 M€ less for it.": "Effekt: Når du spiller et kort, betaler du 2 M€ mindre for det.",
 	
 	"Advanced Alloys": "Avanserte legeringer",
-	"Effect: Each titanium you have is worth 1 M€ extra.": "Effekt: Hver titanium du har er verdt 1 M€ ekstra.",
+	"Effect: Each titanium you have is worth 1 M€ extra.": "Effekt: Hver titan du har er verdt 1 M€ ekstra.",
 	"Effect: Each steel you have is worth 1 M€ extra.": "Effekt: Hver stål du har er verdt 1 M€ ekstra.",
 
 	"Birds": "Fugler",
@@ -281,7 +281,7 @@
 	"Spend 7 M€ to increase your energy production 1 step.": "Bruk 7 M€ for å øke din energiproduksjon med 1 trinn.",
 
 	"Solar Wind Power": "Solvindenergi",
-	"Increase your energy production 1 step and gain 2 titanium.": "Øk din energiproduksjon med 1 trinn og få 2 titanium.",
+	"Increase your energy production 1 step and gain 2 titanium.": "Øk din energiproduksjon med 1 trinn og få 2 titan.",
 
 	"Ice Asteroid": "Is-asteroide",
 	"Place 2 ocean tiles.": "Plasser 2 hav-brikker.",
@@ -327,7 +327,7 @@
 	"Requires 3 science tags. Increase your M€ production 2 steps.": "Krever 3 vitenskapssymboler. Øk din M€-produksjon med 2 trinn.",
 
 	"Io Mining Industries": "Io gruveindustrier",
-	"Increase your titanium production 2 steps and your M€ production 2 steps.": "Øk din titaniumproduksjon med 2 trinn og din M€-produksjon med 2 trinn.",
+	"Increase your titanium production 2 steps and your M€ production 2 steps.": "Øk din titanproduksjon med 2 trinn og din M€-produksjon med 2 trinn.",
 
 	"Bushes": "Busker",
 	"Requires -10 C or warmer. Increase your plant production 2 steps. Gain 2 plants.": "Krever -10 °C eller varmere. Øk din planteproduksjon med 2 trinn. Få 2 planter.",
@@ -365,7 +365,7 @@
 	"Spend 4 energy to gain 2 steel and increase oxygen 1 step.": "Bruk 4 energi for å få 2 stål og øke oksygenivået med 1 trinn.",
 
 	"Ore Processor": "Malmprosessor",
-	"Spend 4 energy to gain 1 titanium and increase oxygen 1 step.": "Bruk 4 energi for å få 1 titanium og øke oksygenivået med 1 trinn.",
+	"Spend 4 energy to gain 1 titanium and increase oxygen 1 step.": "Bruk 4 energi for å få 1 titan og øke oksygenivået med 1 trinn.",
 
 	"Earth Office": "Jordkontor",
 	"Effect: When you play an Earth tag, you pay 3 M€ less for it.": "Effekt: Når du spiller et Jordsymbol, betaler du 3 M€ mindre for det.",
@@ -415,7 +415,7 @@
 	"Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.": "Senk din energiproduksjon med 1 trinn og øk din M€-produksjon med 2 trinn. Plasser en by-brikke VED SIDEN AV MINST 2 ANDRE BY-BRIKKER.",
 
 	"Sabotage": "Sabotasje",
-	"Remove up to 3 titanium from any player, or 4 steel, or 7 M€.": "Fjern opptil 3 titanium, 4 stål eller 7 M€ fra en spiller.",
+	"Remove up to 3 titanium from any player, or 4 steel, or 7 M€.": "Fjern opptil 3 titan, 4 stål eller 7 M€ fra en spiller.",
 
 	"Moss": "Mose",
 	"Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.": "Krever 3 havbrikker og at du mister 1 plante. Øk din planteproduksjon med 1 trinn.",
@@ -476,7 +476,7 @@
 	"Increase your M€ production 1 step for each Earth tag you have, including this.": "Øk din M€-produksjon med 1 trinn for hvert Jordsymbol du har, inkludert dette.",
 
 	"Strip Mine": "Åpen gruve",
-	"Decrease your energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps.": "Senk din energiproduksjon med 2 trinn. Øk din stålproduksjon med 2 trinn og din titaniumproduksjon med 1 trinn. Øk oksygenivået med 2 trinn.",
+	"Decrease your energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps.": "Senk din energiproduksjon med 2 trinn. Øk din stålproduksjon med 2 trinn og din titanproduksjon med 1 trinn. Øk oksygenivået med 2 trinn.",
 
 	"Wave Power": "Bølgekraft",
 	"Requires 3 ocean tiles. Increase your energy production 1 step.": "Krever 3 havbrikker. Øk din energiproduksjon med 1 trinn.",
@@ -493,7 +493,7 @@
 	"Large Convoy": "Stor konvoi",
 	"Place an ocean tile and draw 2 cards. Gain 5 plants or add 4 animals to ANOTHER card.": "Plasser en havbrikke og trekk 2 kort. Få 5 planter eller legg til 4 dyr på ET ANNET kort.",
 
-	"Titanium Mine": "Titaniummine",
+	"Titanium Mine": "Titanmine",
 
 	"Tectonic Stress Power": "Tektonisk spenningskraft",
 	"Requires 2 science tags. Increase your energy production 3 steps.": "Krever 2 vitenskapssymboler. Øk din energiproduksjon med 3 trinn.",
@@ -613,7 +613,7 @@
 	"Decrease your energy production 1 step and increase your plant production 1 step.": "Senk din energiproduksjon med 1 trinn og øk din planteproduksjon med 1 trinn.",
 
 	"Fuel Factory": "Drivstoffabrikk",
-	"Decrease your energy production 1 step and increase your titanium and your M€ production 1 step each.": "Senk din energiproduksjon med 1 trinn og øk din titanium- og M€-produksjon med 1 trinn hver.",
+	"Decrease your energy production 1 step and increase your titanium and your M€ production 1 step each.": "Senk din energiproduksjon med 1 trinn og øk din titan- og M€-produksjon med 1 trinn hver.",
 
 	"Ice Cap Melting": "Smelting av iskappe",
 	"Requires +2 C or warmer. Place 1 ocean tile.": "Krever +2 °C eller varmere. Plasser 1 havbrikke.",
@@ -723,7 +723,7 @@
 	"Forest": "Skog",
 	"2 Power": "2 energi",
 	"7 Science": "7 vitenskap",
-	"Titanium production": "titanium-produksjon",
+	"Titanium production": "titan-produksjon",
 	"Steel production": "Stahl-produksjon",
 	"4 Science": "4 vitenskap",
 	"2 Cities": "2 byer",
@@ -742,5 +742,5 @@
 	"Remove 2 microbes to raise temperature 1 step": "Fjern 2 mikrober for å øke temperaturen med 1 trinn",
 	"Select card to add 2 microbes": "Velg kort for å legge til 2 mikrober",
 	"Add microbes": "Legg til mikrober",
-	"Select a space with a steel or titanium bonus adjacent to one of your tiles": "Velg et felt med en stål- eller titaniumbonus ved siden av en av brikkene dine"
+	"Select a space with a steel or titanium bonus adjacent to one of your tiles": "Velg et felt med en stål- eller titanbonus ved siden av en av brikkene dine"
 }

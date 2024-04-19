@@ -7,6 +7,7 @@ import {isICardRenderCorpBoxAction, isICardRenderCorpBoxEffect, isICardRenderEff
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {translateText} from '@/client/directives/i18n';
 import {allMaNames, getMilestoneAwardDescription} from '../MilestoneAwardManifest';
+import {CardName} from '@/common/cards/CardName';
 
 
 export class CardListSearchIndex {
@@ -53,8 +54,14 @@ export class CardListSearchIndex {
     }
   }
 
-  public get(type: string, name: string) {
-    return this.searchIndex.get(`${type}:${name}`);
+  public matches(text: string, type: string, name: string) {
+    if (name === CardName.PROJECT_WORKSHOP) {
+      console.log(this.searchIndex.get(`${type}:${name}`));
+    }
+
+    const normalized = this.normalize(text);
+    const entries = this.searchIndex.get(`${type}:${name}`);
+    return entries?.some((entry) => entry.includes(normalized)) ?? false;
   }
 
   private process(component: CardComponent) {
@@ -81,7 +88,11 @@ export class CardListSearchIndex {
   }
 
   private add(text: string) {
-    this.entries.push(translateText(text).toLocaleUpperCase());
+    this.entries.push(this.normalize(text));
+  }
+
+  private normalize(text: string): string {
+    return translateText(text).toLocaleUpperCase();
   }
 
   private store(type: string, name: string) {

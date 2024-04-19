@@ -407,13 +407,7 @@ export default (Vue as WithRefs<Refs>).extend({
         return true;
       }
       if (this.fullFilter) {
-        const detail = this.searchIndex.get(type, name);
-        if (detail !== undefined) {
-          if (detail.some((entry) => entry.includes(normalized))) {
-            return true;
-          }
-        }
-        return false;
+        return this.searchIndex.matches(this.filterText, type, name);
       } else {
         return name.toLocaleUpperCase().includes(normalized);
       }

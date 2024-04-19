@@ -6,7 +6,10 @@
           <label for="initial-draft" class="first"><span v-i18n>Initial Drafting (optional variant)</span></label>
             <ul>
               <li v-i18n>Draw 3 corporation cards</li>
-              <li v-i18n>Draw 4 prelude cards <div class="expansion-icon expansion-icon-prelude"></div></li>
+              <li>
+                <span v-i18n>Draw 4 prelude cards</span>
+                <div class="expansion-icon expansion-icon-prelude"></div>
+              </li>
               <li v-i18n>Draw 5 project cards. Draft. Pick one card and pass to the player above in turn order. Repeat until you have 5 cards.</li>
               <li v-i18n>Draw 5 more project cards. Draft and pass to the player below in turn order instead.</li>
               <li>

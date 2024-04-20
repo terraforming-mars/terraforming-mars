@@ -56,7 +56,7 @@ function getBuildMetadata() /* {head: string, date: string} */ {
     return {head, date: rest.join(' ')};
   } catch (error) {
     console.error('unable to generate app version', error);
-    throw error;
+    return {head: 'n/a', date: 'n/a'};
   }
 }
 

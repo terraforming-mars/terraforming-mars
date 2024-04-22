@@ -1,6 +1,5 @@
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {IPlayer} from '../../IPlayer';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
@@ -22,8 +21,9 @@ export class NewVenice extends Card implements IProjectCard {
           on: 'upgradeable-ocean',
         },
       },
-
+      reserveUnits: {plants: 2},
       requirements: {oceans: 3},
+
       metadata: {
         cardNumber: 'Pf3',
         renderData: CardRenderer.builder((b) => {
@@ -36,15 +36,5 @@ export class NewVenice extends Card implements IProjectCard {
             'Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.',
       },
     });
-  }
-
-  // TODO(kberg): use reserveUnits for plants.
-  public override bespokeCanPlay(player: IPlayer): boolean {
-    return player.plants >= 2;
-  }
-
-  public override bespokePlay(player: IPlayer) {
-    player.plants -= 2;
-    return undefined;
   }
 }

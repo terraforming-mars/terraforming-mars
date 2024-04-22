@@ -9,6 +9,7 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {addOcean, cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {MartianLumberCorp} from '../../../src/server/cards/promo/MartianLumberCorp';
 
 // There's a fair bit of code duplication from OceanCity. Rather a lot really.
 describe('NewVenice', function() {
@@ -24,20 +25,25 @@ describe('NewVenice', function() {
   });
 
   it('Can play', function() {
-    addOcean(player);
-    expect(card.canPlay(player)).is.false;
+    player.cardsInHand = [card];
+    player.megaCredits = card.cost;
 
     addOcean(player);
-    expect(card.canPlay(player)).is.false;
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    // expect(card.canPlay(player)).is.false;
 
     addOcean(player);
-    expect(card.canPlay(player)).is.false;
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
+
+    addOcean(player);
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.plants = 1;
-    expect(card.canPlay(player)).is.false;
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     player.plants = 2;
-    expect(card.canPlay(player)).is.true;
+    // expect(card.canPlay(player)).is.true;
+    expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
   it('play', function() {
@@ -179,5 +185,27 @@ describe('NewVenice', function() {
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);
     // Losing two plants as the rules of the card dictate, not gaining any.
     expect(player.plants).eq(2);
+  });
+
+  it('New Venice is compatible with Martian Lumber Corp', () => {
+    player.cardsInHand = [card];
+    player.megaCredits = card.cost;
+    player.steel = 0;
+    player.plants = 2;
+
+    const martianLumberCorp = new MartianLumberCorp();
+    addOcean(player);
+    addOcean(player);
+    addOcean(player);
+    expect(player.getPlayableCardsForTest()).does.include(card);
+
+    player.playCard(martianLumberCorp);
+    player.megaCredits = card.cost - 3;
+    player.plants = 3;
+    expect(player.getPlayableCardsForTest()).does.include(card);
+
+    player.plants = 2;
+    player.steel = 0;
+    expect(player.getPlayableCardsForTest()).does.not.include(card);
   });
 });

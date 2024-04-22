@@ -57,15 +57,10 @@ export class Wetlands extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions) {
-    if (!player.stock.has(this.reserveUnits)) {
-      return false;
-    }
     return this.availableSpaces(player, canAffordOptions).length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.stock.deductUnits(this.reserveUnits);
-
     return new SelectSpace(
       message('Select space for ${0}', (b) => b.card(this)),
       this.availableSpaces(player))

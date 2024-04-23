@@ -10,6 +10,7 @@ import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 import {isHazardTileType} from '../../../common/AresTileType';
 import {Size} from '../../../common/cards/render/Size';
 import {cancelled} from '../../cards/Options';
+import {SpaceType} from '../../../common/boards/SpaceType';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.text('ALL').undergroundResources(1, {cancelled}).nbsp.megacredits(-2).slash().emptyTile().asterix().influence({size: Size.SMALL});
@@ -31,7 +32,16 @@ export class SeismicPredictions extends GlobalEvent implements IGlobalEvent {
 
     game.getPlayersInGenerationOrder().forEach((player) => {
       const playerSpaces = player.game.board.spaces.filter((space) => {
-        return space.player === player && space.tile !== undefined && !isHazardTileType(space.tile?.tileType);
+        if (space.spaceType === SpaceType.COLONY) {
+          return false;
+        }
+        if (space.tile === undefined) {
+          return false;
+        }
+        if (space.player !== player) {
+          return false;
+        }
+        return !isHazardTileType(space.tile?.tileType);
       });
       const filtered = playerSpaces.filter(
         (space) => space.undergroundResources === undefined && space.excavator === undefined);

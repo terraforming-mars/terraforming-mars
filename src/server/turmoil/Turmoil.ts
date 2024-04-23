@@ -336,7 +336,7 @@ export class Turmoil {
 
   public setNewChairman(newChairman : Delegate, game: IGame, setAgenda: boolean = true, gainTR: boolean = true) {
     // Change the chairman
-    if (this.chairman) {
+    if (this.chairman && game.beholdTheEmperor !== true) {
       // Return the current Chairman to reserve
       this.delegateReserve.add(this.chairman);
     }

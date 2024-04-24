@@ -103,8 +103,8 @@ abstract class Builder<T> {
     return this;
   }
 
-  public temperature(amount: number): this {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.TEMPERATURE, amount));
+  public temperature(amount: number, options?: ItemOptions): this {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.TEMPERATURE, amount, options));
   }
 
   public oceans(amount: number, options?: ItemOptions): this {
@@ -115,8 +115,8 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
-  public oxygen(amount: number): this {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.OXYGEN, amount));
+  public oxygen(amount: number, options?: ItemOptions): this {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.OXYGEN, amount, options));
   }
 
   public venus(amount: number, options?: ItemOptions): this {

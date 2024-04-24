@@ -5,6 +5,7 @@ import {ActiveCorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
+import {floaterCards} from './floaterCards';
 
 export class Celestic extends ActiveCorporationCard {
   constructor() {
@@ -41,37 +42,9 @@ export class Celestic extends ActiveCorporationCard {
   }
 
 
-  // Public for testing
-  public static readonly floaterCards: Set<CardName> = new Set([
-    // Venus
-    CardName.AEROSPORT_TOURNAMENT,
-    CardName.AIR_SCRAPPING_EXPEDITION,
-    CardName.ATMOSCOOP,
-    CardName.HYDROGEN_TO_VENUS,
-    CardName.STRATOSPHERIC_BIRDS,
-
-    // Colonies
-    CardName.AIRLINERS,
-    CardName.AIR_RAID,
-    CardName.FLOATER_LEASING,
-    CardName.FLOATER_PROTOTYPES,
-    CardName.FLOATER_TECHNOLOGY,
-    CardName.NITROGEN_FROM_TITAN,
-
-    // // Pathfinders
-    CardName.CASSINI_STATION,
-    CardName.FLOATER_URBANISM,
-    CardName.NOBEL_LABS,
-    CardName.SECRET_LABS,
-    CardName.VENERA_BASE,
-
-    // Star Wars
-    CardName.CLOUD_CITY,
-  ]);
-
   public initialAction(player: IPlayer) {
     player.drawCard(2, {
-      include: (card) => Celestic.floaterCards.has(card.name) || card.resourceType === CardResource.FLOATER,
+      include: (card) => floaterCards.has(card.name) || card.resourceType === CardResource.FLOATER,
     });
     return undefined;
   }

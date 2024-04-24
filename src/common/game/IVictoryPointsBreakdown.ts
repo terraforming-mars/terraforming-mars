@@ -1,5 +1,7 @@
 import {Tag} from '../cards/Tag';
 
+type MADetail = {message: string, messageArgs?: Array<string>, victoryPoint: number};
+
 export interface IVictoryPointsBreakdown {
   terraformRating: number;
   milestones: number;
@@ -14,7 +16,7 @@ export interface IVictoryPointsBreakdown {
   victoryPoints: number;
   total: number;
   detailsCards: Array<{cardName: string, victoryPoint: number}>;
-  detailsMilestones: Array<{message: string, messageArgs?: Array<string>, victoryPoint: number}>;
-  detailsAwards: Array<{message: string, messageArgs?: Array<string>, victoryPoint: number}>;
+  detailsMilestones: Array<MADetail>;
+  detailsAwards: Array<MADetail>;
   detailsPlanetaryTracks: Array<{tag: Tag, points: number}>;
 }

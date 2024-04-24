@@ -3,12 +3,14 @@ import {SpaceType} from '../../src/common/boards/SpaceType';
 import {MoonBoard} from '../../src/server/moon/MoonBoard';
 import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
 import {SpaceId} from '../../src/common/Types';
+import {SeededRandom} from '../../src/common/utils/Random';
+import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 
 describe('MoonBoard', function() {
   let board: MoonBoard;
 
   beforeEach(function() {
-    board = MoonBoard.newInstance();
+    board = MoonBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
   });
 
   it('getSpace', () => {

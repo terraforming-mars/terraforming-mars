@@ -5,6 +5,8 @@ import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {MoonSpaces} from '../../common/moon/MoonSpaces';
 import {SpaceId, isSpaceId, safeCast} from '../../common/Types';
+import {GameOptions} from '../../server/game/GameOptions';
+import {Random} from '../../common/utils/Random';
 
 function mineSpace(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus>): Space {
   return {id, spaceType: SpaceType.LUNAR_MINE, x, y, bonus};
@@ -31,7 +33,7 @@ export class MoonBoard extends Board {
     return spaces;
   }
 
-  public static newInstance(): MoonBoard {
+  public static newInstance(gameOptions: GameOptions, rng: Random): MoonBoard {
     const STEEL = SpaceBonus.STEEL;
     const DRAW_CARD = SpaceBonus.DRAW_CARD;
     const TITANIUM = SpaceBonus.TITANIUM;
@@ -46,6 +48,15 @@ export class MoonBoard extends Board {
     b.row(1).land().land(STEEL).land(STEEL).land(DRAW_CARD, DRAW_CARD).land(STEEL);
     b.row(2).land(DRAW_CARD, DRAW_CARD).mine(TITANIUM).mine(TITANIUM, TITANIUM).land();
     b.colony();
+
+    if (gameOptions.shuffleMapOption!== undefined && gameOptions.shuffleMapOption) {
+      b.shuffle(rng, MoonSpaces.LUNA_TRADE_STATION,
+        MoonSpaces.MARE_IMBRIUM,
+        MoonSpaces.MARE_NECTARIS,
+        MoonSpaces.MARE_NUBIUM,
+        MoonSpaces.MARE_SERENITATIS,
+        MoonSpaces.MOMENTUM_VIRIUM);
+    }
     return new MoonBoard(b.spaces);
   }
 
@@ -72,6 +83,10 @@ class Builder {
     this.idx++;
     const strId = this.idx.toString().padStart(2, '0');
     return safeCast('m' + strId, isSpaceId);
+  }
+  public shuffle(rng: Random, ...preservedSpaceIds: Array<MoonSpaces>):boolean {
+    console.log(`Random seed {${rng}}, preservedSpaceIds: ${preservedSpaceIds}`);
+    return true;
   }
 }
 

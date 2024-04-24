@@ -206,6 +206,7 @@ import {GlobalParameter} from '@/common/GlobalParameter';
 import {$t, translateTextWithParams, translateMessage} from '@/client/directives/i18n';
 import {Message} from '@/common/logs/Message';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
+import {MADetail} from '@/common/game/IVictoryPointsBreakdown';
 
 function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | undefined): ViewModel {
   if (playerView !== undefined) return playerView;
@@ -332,12 +333,20 @@ export default Vue.extend({
         .map((card) => card.name);
       return corporationCards.length === 0 ? [''] : corporationCards;
     },
-    translateMilestoneDetails(data: {message: string, messageArgs?: Array<string>}): string {
+    translateMilestoneDetails(data: MADetail): string {
       const args = (data.messageArgs || []).map($t);
       return translateTextWithParams(data.message, args);
     },
-    translateAwardDetails(data: {message: string, messageArgs?: Array<string>}): string {
+    translateAwardDetails(data: MADetail): string {
       if ( ! data.messageArgs || data.messageArgs.length < 3) {
+        console.error( // data.message: ${0} place for ${1} award (funded by ${2})
+          `Award detail has not enought data.
+          It must contain at least 3 arguments:
+          1) a Player's place in the race for the award
+          2) translatable Award name
+          3) not translatable Player name
+          `,
+        );
         return this.translateMilestoneDetails(data);
       }
       const message: Message = {

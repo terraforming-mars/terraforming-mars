@@ -332,31 +332,34 @@ export default Vue.extend({
         .map((card) => card.name);
       return corporationCards.length === 0 ? [''] : corporationCards;
     },
-    translateMilestoneDetails(data: {message: string, messageArgs: Array<string>}): string {
-      const args = (data.messageArgs).map($t);
+    translateMilestoneDetails(data: {message: string, messageArgs?: Array<string>}): string {
+      const args = (data.messageArgs || []).map($t);
       return translateTextWithParams(data.message, args);
     },
-    translateAwardDetails(data: {message: string, messageArgs: Array<string>}): string {
+    translateAwardDetails(data: {message: string, messageArgs?: Array<string>}): string {
+      if ( ! data.messageArgs || data.messageArgs.length < 3) {
+        return this.translateMilestoneDetails(data);
+      }
       const message: Message = {
         message: data.message,
         data: [
-            {
-              type: LogMessageDataType.STRING,
-              value: data.messageArgs[0],
-            },
-            {
-              type: LogMessageDataType.AWARD,
-              value: data.messageArgs[1],
-            },
-            {
-              type: LogMessageDataType.PLAYER,
-              value: data.messageArgs[2],
-            },
+          {
+            type: LogMessageDataType.STRING,
+            value: data.messageArgs[0],
+          },
+          {
+            type: LogMessageDataType.AWARD,
+            value: data.messageArgs[1],
+          },
+          {
+            type: LogMessageDataType.PLAYER,
+            value: data.messageArgs[2],
+          },
         ],
       };
       return translateMessage(message);
-    }
-  }
+    },
+  },
 });
 
 </script>

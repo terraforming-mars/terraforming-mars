@@ -14,7 +14,7 @@ export interface IVictoryPointsBreakdown {
   victoryPoints: number;
   total: number;
   detailsCards: Array<{cardName: string, victoryPoint: number}>;
-  detailsMilestones: Array<string>;
-  detailsAwards: Array<string>;
+  detailsMilestones: Array<{message: string, messageArgs?: Array<string>, victoryPoint: number}>;
+  detailsAwards: Array<{message: string, messageArgs?: Array<string>, victoryPoint: number}>;
   detailsPlanetaryTracks: Array<{tag: Tag, points: number}>;
 }

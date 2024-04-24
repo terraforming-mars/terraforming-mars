@@ -1,7 +1,7 @@
 <template>
   <div v-show="isVisible()">
     <div :class="'player_translucent_bg_color_' + player.color" class="other_player_header">
-      <div class="player_name"> {{ player.name }} played cards </div>
+      <div class="player_name">{{ player.name }} <span v-i18n>played cards</span></div>
       <AppButton size="big" type="close" @click="hideMe" :disableOnServerBusy="false" align="right" />
     </div>
     <div class="other_player_cont menu">

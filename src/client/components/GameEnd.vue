@@ -129,16 +129,14 @@
                       </div>
                       <div v-for="v in p.victoryPointsBreakdown.detailsMilestones" :key="v">
                         <div class="game-end-column-row">
-                          <div class="game-end-column-vp">{{v.split(':', 2)[1]}}</div>
-                          <div class="game-end-column-text" v-i18n>{{v.split(':', 2)[0]}}</div>
+                          <div class="game-end-column-vp">{{v.victoryPoint}}</div>
+                          <div class="game-end-column-text">{{translateMilestoneDetails(v)}}</div>
                         </div>
                       </div>
                       <div v-for="v in p.victoryPointsBreakdown.detailsAwards" :key="v">
                         <div class="game-end-column-row">
-                          <div class="game-end-column-vp">{{v.split(':', 2)[1]}}</div>
-                          <div class="game-end-column-text">
-                            <span v-i18n>{{v.split('(')[0]}}</span><span>{{v.split('award')[1].split(':')[0]}}</span>
-                          </div>
+                          <div class="game-end-column-vp">{{v.victoryPoint}}</div>
+                          <div class="game-end-column-text">{{translateAwardDetails(v)}}</div>
                         </div>
                       </div>
                       <div v-for="v in p.victoryPointsBreakdown.detailsPlanetaryTracks" :key="v.tag">
@@ -205,7 +203,9 @@ import {Color} from '@/common/Color';
 import {CardType} from '@/common/cards/CardType';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {GlobalParameter} from '@/common/GlobalParameter';
-import {$t} from '@/client/directives/i18n';
+import {$t, translateTextWithParams, translateMessage} from '@/client/directives/i18n';
+import {Message} from '@/common/logs/Message';
+import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 
 function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | undefined): ViewModel {
   if (playerView !== undefined) return playerView;
@@ -332,7 +332,31 @@ export default Vue.extend({
         .map((card) => card.name);
       return corporationCards.length === 0 ? [''] : corporationCards;
     },
-  },
+    translateMilestoneDetails(data: {message: string, messageArgs: Array<string>}): string {
+      const args = (data.messageArgs).map($t);
+      return translateTextWithParams(data.message, args);
+    },
+    translateAwardDetails(data: {message: string, messageArgs: Array<string>}): string {
+      const message: Message = {
+        message: data.message,
+        data: [
+            {
+              type: LogMessageDataType.STRING,
+              value: data.messageArgs[0],
+            },
+            {
+              type: LogMessageDataType.AWARD,
+              value: data.messageArgs[1],
+            },
+            {
+              type: LogMessageDataType.PLAYER,
+              value: data.messageArgs[2],
+            },
+        ],
+      };
+      return translateMessage(message);
+    }
+  }
 });
 
 </script>

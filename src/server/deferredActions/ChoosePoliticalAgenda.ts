@@ -24,7 +24,7 @@ export class ChoosePoliticalAgenda extends DeferredAction {
     const bonuses: Array<SelectOption> = this.party.bonuses.map((bonus) => {
       const description = message(
         bonus.description + ' (${0})',
-        (b) => b.rawString(players.map((player) => player.name + ': ' + bonus.getScore(player)).join(' / '))
+        (b) => b.rawString(players.map((player) => player.name + ': ' + bonus.getScore(player)).join(' / ')),
       );
 
       return new SelectOption(description).andThen(() => {

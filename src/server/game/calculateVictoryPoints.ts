@@ -101,8 +101,8 @@ function maybeSetVP(thisPlayer: IPlayer, awardWinner: IPlayer, fundedAward: Fund
       'awards',
       vps,
       '${0} place for ${1} award (funded by ${2})',
-      [place, fundedAward.award.name, fundedAward.player.name]
-    )
+      [place, fundedAward.award.name, fundedAward.player.name],
+    );
   }
 }
 

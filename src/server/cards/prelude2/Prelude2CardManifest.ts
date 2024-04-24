@@ -13,6 +13,7 @@ import {OldMiningColony} from './OldMiningColony';
 import {PalladinShipping} from './PalladinShipping';
 import {RedAppeasement} from './RedAppeasement';
 import {SagittaFrontierServices} from './SagittaFrontierServices';
+import {SpaceCorridors} from './SpaceCorridors';
 import {Spire} from './Spire';
 import {SummitLogistics} from './SummitLogistics';
 
@@ -32,6 +33,7 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.COLONY_TRADE_HUB]: {Factory: ColonyTradeHub, compatibility: 'colonies'},
     [CardName.OLD_MINING_COLONY]: {Factory: OldMiningColony, compatibility: 'colonies'},
     [CardName.FOCUSED_ORGANIZATION]: {Factory: FocusedOrganization},
+    [CardName.SPACE_CORRIDORS]: {Factory: SpaceCorridors},
   },
 
   corporationCards: {

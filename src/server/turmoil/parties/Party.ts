@@ -1,7 +1,9 @@
+import {MultiSet} from 'mnemonist';
 import {IGame} from '../../IGame';
 import {IPlayer} from '../../IPlayer';
 import {Delegate, NeutralPlayer} from '../Turmoil';
-import {MultiSet} from 'mnemonist';
+import {CardName} from '../../../common/cards/CardName';
+import {Resource} from '../../../common/Resource';
 
 export abstract class Party {
   public partyLeader: undefined | Delegate = undefined;
@@ -19,15 +21,28 @@ export abstract class Party {
     this.checkPartyLeader(delegate, game);
   }
 
+  private setPartyLeader(delegate: Delegate, game: IGame) {
+    this.partyLeader = delegate;
+    const cardPlayer = game.getCardPlayerOrUndefined(CardName.CORRIDORS_OF_POWER);
+    if (cardPlayer === delegate) {
+      cardPlayer.stock.add(Resource.MEGACREDITS, 4);
+      game.log('${0} gained 4 MC when become a party leader.', (b) => b.player(cardPlayer));
+    }
+  }
+
   // Check if you are the new party leader
-  public checkPartyLeader(newPlayer: Delegate, game: IGame): void {
+  public checkPartyLeader(delegate: Delegate, game: IGame): void {
     const players = game.getPlayersInGenerationOrder();
     if (this.delegates.size === 0) {
       this.partyLeader = undefined;
       return;
     }
     if (this.partyLeader === undefined) {
-      this.partyLeader = newPlayer;
+      this.setPartyLeader(delegate, game);
+      if (this.partyLeader === undefined) {
+        // Satisfies Typescript
+        throw new Error('Assertion error, party leader is defined');
+      }
     }
 
     const max = this.delegates.top(1)[0][1];
@@ -59,7 +74,7 @@ export abstract class Party {
 
       playersToCheck.some((nextPlayer) => {
         if (this.delegates.get(nextPlayer) === max) {
-          this.partyLeader = nextPlayer;
+          this.setPartyLeader(nextPlayer, game);
           return true;
         }
         return false;

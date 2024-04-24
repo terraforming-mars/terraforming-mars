@@ -4,6 +4,7 @@ import {AppliedScience} from './AppliedScience';
 import {CeresTechMarket} from './CeresTechMarket';
 import {CloudTourism} from './CloudTourism';
 import {ColonyTradeHub} from './ColonyTradeHub';
+import {CorridorsOfPower} from './CorridorsOfPower';
 import {Ecotec} from './Ecotec';
 import {FocusedOrganization} from './FocusedOrganization';
 import {IshtarExpedition} from './IshtarExpedition';
@@ -39,7 +40,7 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.FOCUSED_ORGANIZATION]: {Factory: FocusedOrganization},
     [CardName.SPACE_CORRIDORS]: {Factory: SpaceCorridors},
     // [CardName.BOARD_OF_DIRECTORS]: {Factory: BoardOfDirectors},
-    // [CardName.CORRIDORS_OF_POWER]: {Factory: CorridorsOfPower},
+    [CardName.CORRIDORS_OF_POWER]: {Factory: CorridorsOfPower, compatibility: 'turmoil'},
     // [CardName.ATMOSPHERIC_ENHANCERS]: {Factory: AtmosphericEnhancers},
   },
 

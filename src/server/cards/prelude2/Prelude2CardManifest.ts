@@ -2,6 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {ModuleManifest} from '../ModuleManifest';
 import {AppliedScience} from './AppliedScience';
 import {CeresTechMarket} from './CeresTechMarket';
+import {CloudTourism} from './CloudTourism';
 import {ColonyTradeHub} from './ColonyTradeHub';
 import {Ecotec} from './Ecotec';
 import {FocusedOrganization} from './FocusedOrganization';
@@ -25,6 +26,9 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.CERES_TECH_MARKET]: {Factory: CeresTechMarket, compatibility: 'colonies'},
     [CardName.RED_APPEASEMENT]: {Factory: RedAppeasement, compatibility: 'turmoil'},
     [CardName.L1_TRADE_TERMINAL]: {Factory: L1TradeTerminal, compatibility: 'colonies'},
+    [CardName.CLOUD_TOURISM]: {Factory: CloudTourism, compatibility: 'venus'},
+    // [CardName.FLOATING_REFINERY]: {Factory: FloatingRefinery, compatibility: 'colonies'},
+    // [CardName.VENUS_TRADE_HUB]: {Factory: VenusTradeHub, compatibility: 'colonies'},
   },
 
   preludeCards: {
@@ -34,6 +38,9 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.OLD_MINING_COLONY]: {Factory: OldMiningColony, compatibility: 'colonies'},
     [CardName.FOCUSED_ORGANIZATION]: {Factory: FocusedOrganization},
     [CardName.SPACE_CORRIDORS]: {Factory: SpaceCorridors},
+    // [CardName.BOARD_OF_DIRECTORS]: {Factory: BoardOfDirectors},
+    // [CardName.CORRIDORS_OF_POWER]: {Factory: CorridorsOfPower},
+    // [CardName.ATMOSPHERIC_ENHANCERS]: {Factory: AtmosphericEnhancers},
   },
 
   corporationCards: {

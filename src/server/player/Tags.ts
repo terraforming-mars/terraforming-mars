@@ -12,7 +12,7 @@ import {OneOrArray} from '../../common/utils/types';
 
 export type CountingMode =
   'raw' | // Count face-up tags literally, including Leavitt Station.
-  'default' | // Like raw, but include the wild tags. Typical when performing an action.
+  'default' | // Like raw, but include the wild tags and other deafult substitutions. Typical when performing an action.
   'milestone' | // Like raw with special conditions for milestones (Chimera)
   'award' | // Like raw with special conditions for awards (Chimera)
   'raw-pf'; // Like raw, but includes Mars Tags when tag is Science (Habitat Marte)
@@ -163,7 +163,7 @@ export class Tags {
   }
 
   /**
-   * Return the total number of tags assocaited with these types.
+   * Return the total number of tags associated with these types.
    * Tag substitutions are included, and not counted repeatedly.
     */
   public multipleCount(tags: Array<Tag>, mode: MultipleCountMode = 'default'): number {

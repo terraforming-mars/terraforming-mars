@@ -1,6 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {ModuleManifest} from '../ModuleManifest';
 import {AppliedScience} from './AppliedScience';
+import {AtmosphericEnhancers} from './AtmosphericEnhancers';
 import {CeresTechMarket} from './CeresTechMarket';
 import {CloudTourism} from './CloudTourism';
 import {ColonyTradeHub} from './ColonyTradeHub';
@@ -41,7 +42,7 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.SPACE_CORRIDORS]: {Factory: SpaceCorridors},
     // [CardName.BOARD_OF_DIRECTORS]: {Factory: BoardOfDirectors},
     [CardName.CORRIDORS_OF_POWER]: {Factory: CorridorsOfPower, compatibility: 'turmoil'},
-    // [CardName.ATMOSPHERIC_ENHANCERS]: {Factory: AtmosphericEnhancers},
+    [CardName.ATMOSPHERIC_ENHANCERS]: {Factory: AtmosphericEnhancers, compatibility: 'venus'},
   },
 
   corporationCards: {

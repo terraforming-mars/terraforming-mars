@@ -9,14 +9,6 @@ import {GameOptions} from '../../server/game/GameOptions';
 import {Random} from '../../common/utils/Random';
 import {preservingShuffle} from '../../server/boards/BoardBuilder';
 
-/*
-function mineSpace(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus>): Space {
-  return {id, spaceType: SpaceType.LUNAR_MINE, x, y, bonus};
-}
-function surfaceSpace(id: SpaceId, x: number, y: number, bonus: Array<SpaceBonus>): Space {
-  return {id, spaceType: SpaceType.LAND, x, y, bonus};
-}
-*/
 function colonySpace(id: SpaceId): Space {
   return {id, spaceType: SpaceType.COLONY, x: -1, y: -1, bonus: []};
 }
@@ -43,7 +35,6 @@ export class MoonBoard extends Board {
     const TITANIUM = SpaceBonus.TITANIUM;
 
     const b = new Builder();
-    // b.colony(); // Luna Trade Station
     b.row(2).land().land(STEEL, DRAW_CARD).land().mine(TITANIUM);
     b.row(1).mine(TITANIUM, TITANIUM).mine(/* Mare Imbrium */).land(STEEL).land().land();
     b.row(0).mine().land(STEEL).land(STEEL, TITANIUM).mine(/* Mare Serenatis*/).mine(TITANIUM).land(STEEL, STEEL);
@@ -51,15 +42,13 @@ export class MoonBoard extends Board {
     b.row(0).land().mine(TITANIUM).mine(/* Mare Nubium */).land().mine(/* Mare Nectaris */).land(STEEL);
     b.row(1).land().land(STEEL).land(STEEL).land(DRAW_CARD, DRAW_CARD).land(STEEL);
     b.row(2).land(DRAW_CARD, DRAW_CARD).mine(TITANIUM).mine(TITANIUM, TITANIUM).land();
-    // b.colony();
 
     if (gameOptions.shuffleMapOption!== undefined && gameOptions.shuffleMapOption) {
-      b.shuffle(rng, MoonSpaces.LUNA_TRADE_STATION,
+      b.shuffle(rng,
         MoonSpaces.MARE_IMBRIUM,
         MoonSpaces.MARE_NECTARIS,
         MoonSpaces.MARE_NUBIUM,
-        MoonSpaces.MARE_SERENITATIS,
-        MoonSpaces.MOMENTUM_VIRIUM);
+        MoonSpaces.MARE_SERENITATIS);
     }
     const spaces = b.build();
     return new MoonBoard(spaces);
@@ -86,7 +75,6 @@ class Builder {
   public colony() {
     this.spaceTypes.push(SpaceType.COLONY);
     this.bonuses.push([]);
-    // this.spaces.push(colonySpace(this.nextId()));
   }
   public nextId(): SpaceId {
     this.idx++;
@@ -102,7 +90,7 @@ class Builder {
 
     for (let row = 0; row < tilesPerRow.length; row++) {
       const tilesInThisRow = tilesPerRow[row];
-      const xOffset = 6 - tilesInThisRow;
+      const xOffset = row === 3 ? 0 : 6 - tilesInThisRow; // Hack for central line 0-based x coord
       for (let i = 0; i < tilesInThisRow; i++) {
         const spaceId = idx + idOffset;
         const xCoordinate = xOffset + i;
@@ -124,8 +112,8 @@ class Builder {
   public shuffle(rng: Random, ...preservedSpaceIds: Array<MoonSpaces>) {
     const preservedSpaces = [];
     for (const spaceId of preservedSpaceIds) {
-      const idx = Number(spaceId.substring(1, 3)) - 1;
-      preservedSpaces.push(idx);
+      const idx = Number(spaceId.substring(1, 3));
+      preservedSpaces.push(idx - 2);
     }
     preservedSpaces.sort((a, b) => a - b);
     preservingShuffle(this.spaceTypes, preservedSpaces, rng);
@@ -148,16 +136,12 @@ class Row {
   land(...bonuses: SpaceBonus[]): this {
     this.builder.spaceTypes.push(SpaceType.LAND);
     this.builder.bonuses.push(bonuses);
-    // const space = surfaceSpace(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
-    // this.builder.spaces.push(space);
     return this;
   }
 
   mine(...bonuses: SpaceBonus[]): this {
     this.builder.spaceTypes.push(SpaceType.LUNAR_MINE);
     this.builder.bonuses.push(bonuses);
-    // const space = mineSpace(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
-    // this.builder.spaces.push(space);
     return this;
   }
 }

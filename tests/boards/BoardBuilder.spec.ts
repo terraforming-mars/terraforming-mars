@@ -106,13 +106,14 @@ describe('BoardBuilder', function() {
         shuffleMapOption: true,
       },
       new SeededRandom(seed));
-      const reservedSpaces = [
+      const reservedSpaces = [MoonSpaces.LUNA_TRADE_STATION,
         MoonSpaces.MARE_IMBRIUM,
         MoonSpaces.MARE_NECTARIS,
         MoonSpaces.MARE_NUBIUM,
         MoonSpaces.MARE_SERENITATIS,
+        MoonSpaces.MOMENTUM_VIRIUM,
       ].map((id) => board.getSpaceOrThrow(id).spaceType);
-      expect(reservedSpaces, `for seed ${seed}`).deep.eq([SpaceType.LUNAR_MINE, SpaceType.LUNAR_MINE, SpaceType.LUNAR_MINE, SpaceType.LUNAR_MINE]);
+      expect(reservedSpaces, `for seed ${seed}`).deep.eq([SpaceType.COLONY, SpaceType.LUNAR_MINE, SpaceType.LUNAR_MINE, SpaceType.LUNAR_MINE, SpaceType.LUNAR_MINE, SpaceType.COLONY]);
     }
   });
 });

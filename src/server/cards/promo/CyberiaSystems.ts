@@ -37,6 +37,11 @@ export class CyberiaSystems extends RoboticWorkforceBase {
     return super.getPlayableBuildingCards(player).filter((c) => c.name !== CardName.CYBERIA_SYSTEMS);
   }
 
+  public override bespokeCanPlay(player: IPlayer) {
+    // This is a pretty poor canPlay given how order of operations matters.
+    return this.getPlayableBuildingCards(player).length >= 2;
+  }
+
   public override bespokePlay(player: IPlayer) {
     const firstSet = this.getPlayableBuildingCards(player);
     const selectFirstCard = this.selectBuildingCard(player, firstSet, 'Select first builder card to copy', (card) => {

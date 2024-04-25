@@ -438,6 +438,8 @@ export enum CardName {
   RED_APPEASEMENT = 'Red Appeasement',
   SUMMIT_LOGISTICS = 'Summit Logistics',
   CERES_TECH_MARKET = 'Ceres Tech Market',
+  GHG_SHIPMENT = 'GHG Shipment',
+  SPONSORING_NATION = 'Sponsoring Nation',
 
   // Prelude 2 Preludes
   APPLIED_SCIENCE = 'Applied Science',

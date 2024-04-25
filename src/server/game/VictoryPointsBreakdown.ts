@@ -38,18 +38,18 @@ export class VictoryPointsBreakdown {
     this.points.total += this.points.victoryPoints;
   }
 
-  public setVictoryPoints(key: VictoryPoints, points: number, message?: string) {
+  public setVictoryPoints(key: VictoryPoints, points: number, message?: string, messageArgs?: Array<string>) {
     switch (key) {
     case 'terraformRating':
       this.points.terraformRating += points;
       break;
     case 'milestones':
       this.points.milestones += points;
-      if (message !== undefined) this.points.detailsMilestones.push(message+':'+points);
+      if (message !== undefined) this.points.detailsMilestones.push({message: message, victoryPoint: points, messageArgs: messageArgs});
       break;
     case 'awards':
       this.points.awards += points;
-      if (message !== undefined) this.points.detailsAwards.push(message+':'+points);
+      if (message !== undefined) this.points.detailsAwards.push({message: message, victoryPoint: points, messageArgs: messageArgs});
       break;
     case 'greenery':
       this.points.greenery += points;

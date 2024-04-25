@@ -32,7 +32,7 @@ export function calculateVictoryPoints(player: IPlayer) {
   // Victory points from milestones
   for (const milestone of player.game.claimedMilestones) {
     if (milestone.player !== undefined && milestone.player.id === player.id) {
-      victoryPointsBreakdown.setVictoryPoints('milestones', 5, 'Claimed '+milestone.milestone.name+' milestone');
+      victoryPointsBreakdown.setVictoryPoints('milestones', 5, 'Claimed ${0} milestone', [milestone.milestone.name]);
     }
   }
 
@@ -100,7 +100,9 @@ function maybeSetVP(thisPlayer: IPlayer, awardWinner: IPlayer, fundedAward: Fund
     vpb.setVictoryPoints(
       'awards',
       vps,
-      `${place} place for ${fundedAward.award.name} award (funded by ${fundedAward.player.name})`);
+      '${0} place for ${1} award (funded by ${2})',
+      [place, fundedAward.award.name, fundedAward.player.name],
+    );
   }
 }
 

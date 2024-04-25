@@ -14,16 +14,14 @@ export class CityPark extends Card implements IProjectCard {
       cost: 7,
       victoryPoints: 2,
 
-      requirements: {
-        cities: 3,
-      },
+      requirements: {cities: 3},
 
       behavior: {
         stock: {plants: 2},
       },
 
       metadata: {
-        description: 'Requires 3 cities. Gain 2 plants.',
+        description: 'Requires that you have 3 cities. Gain 2 plants.',
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.plants(2);

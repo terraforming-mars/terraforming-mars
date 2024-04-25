@@ -8,6 +8,7 @@ import {ColonyTradeHub} from './ColonyTradeHub';
 import {CorridorsOfPower} from './CorridorsOfPower';
 import {Ecotec} from './Ecotec';
 import {FocusedOrganization} from './FocusedOrganization';
+import {GhgShipment} from './GhgShipment';
 import {IshtarExpedition} from './IshtarExpedition';
 import {L1TradeTerminal} from './L1TradeTerminal';
 import {NirgalEnterprises} from './NirgalEnterprises';
@@ -18,6 +19,7 @@ import {RedAppeasement} from './RedAppeasement';
 import {SagittaFrontierServices} from './SagittaFrontierServices';
 import {SpaceCorridors} from './SpaceCorridors';
 import {Spire} from './Spire';
+import {SponsoringNation} from './SponsoringNation';
 import {SummitLogistics} from './SummitLogistics';
 
 export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
@@ -31,6 +33,8 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.CLOUD_TOURISM]: {Factory: CloudTourism, compatibility: 'venus'},
     // [CardName.FLOATING_REFINERY]: {Factory: FloatingRefinery, compatibility: 'colonies'},
     // [CardName.VENUS_TRADE_HUB]: {Factory: VenusTradeHub, compatibility: 'colonies'},
+    [CardName.GHG_SHIPMENT]: {Factory: GhgShipment, compatibility: 'turmoil'},
+    [CardName.SPONSORING_NATION]: {Factory: SponsoringNation, compatibility: 'turmoil'},
   },
 
   preludeCards: {

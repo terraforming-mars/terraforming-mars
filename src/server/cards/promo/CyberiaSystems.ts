@@ -39,19 +39,13 @@ export class CyberiaSystems extends RoboticWorkforceBase {
 
   public override bespokePlay(player: IPlayer) {
     const firstSet = this.getPlayableBuildingCards(player);
-    const selectFirstCard = this.selectBuildingCard(player, firstSet, 'Select first builder card to copy');
-    if (selectFirstCard === undefined) {
+    const selectFirstCard = this.selectBuildingCard(player, firstSet, 'Select first builder card to copy', (card) => {
+      const secondSet = this.getPlayableBuildingCards(player).filter((c) => c !== card);
+      player.defer(this.selectBuildingCard(player, secondSet, 'Select second card to copy'), Priority.ROBOTIC_WORKFORCE);
       return undefined;
-    }
+    });
 
-    player.defer(
-      selectFirstCard.andThen(([card]) => {
-        const secondSet = this.getPlayableBuildingCards(player).filter((c) => c !== card);
-        player.defer(this.selectBuildingCard(player, secondSet, 'Select second card to copy'), Priority.ROBOTIC_WORKFORCE);
-        return undefined;
-      }),
-      Priority.ROBOTIC_WORKFORCE,
-    );
+    player.defer(selectFirstCard, Priority.ROBOTIC_WORKFORCE);
     return undefined;
   }
 }

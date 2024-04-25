@@ -32,11 +32,13 @@ export interface PlayerInput {
     process(response: InputResponse, player: IPlayer): PlayerInput | undefined;
 }
 
+const NULL_FUNCTION = () => undefined;
+
 export abstract class BasePlayerInput<T> implements PlayerInput {
   public readonly type: PlayerInputType;
   public buttonLabel: string = 'Save';
   public title: string | Message;
-  public cb: (param: T) => PlayerInput | undefined = () => undefined;
+  public cb: (param: T) => PlayerInput | undefined = NULL_FUNCTION;
   public eligibleForDefault: boolean | undefined = undefined;
 
   public abstract toModel(player: IPlayer): PlayerInputModel;
@@ -48,6 +50,15 @@ export abstract class BasePlayerInput<T> implements PlayerInput {
   }
 
   public andThen(cb: (param: T) => PlayerInput | undefined): this {
+    if (this.cb !== NULL_FUNCTION) {
+      const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
+      if (THROW_STATE_ERRORS) {
+        throw new Error('andThen called twice');
+      } else {
+        console.error('andThen called twice');
+        return this;
+      }
+    }
     this.cb = cb;
     return this;
   }

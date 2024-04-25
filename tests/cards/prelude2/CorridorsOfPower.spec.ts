@@ -34,11 +34,11 @@ describe('CorridorsOfPower', () => {
 
   const effectRuns = [
     {playedCard: false, delegates: [], initialLeader: undefined, newDelegate: Color.BLUE, newLeader: Color.BLUE, expected: 0},
-    {playedCard: true, delegates: [], initialLeader: undefined, newDelegate: Color.BLUE, newLeader: Color.BLUE, expected: 4},
+    {playedCard: true, delegates: [], initialLeader: undefined, newDelegate: Color.BLUE, newLeader: Color.BLUE, expected: 1},
     {playedCard: true, delegates: [], initialLeader: undefined, newDelegate: Color.RED, newLeader: Color.RED, expected: 0},
     {playedCard: true, delegates: [], initialLeader: undefined, newDelegate: 'NEUTRAL', newLeader: 'NEUTRAL', expected: 0},
     {playedCard: true, delegates: [Color.BLUE], initialLeader: Color.BLUE, newDelegate: Color.BLUE, newLeader: Color.BLUE, expected: 0},
-    {playedCard: true, delegates: [Color.RED, Color.BLUE], initialLeader: Color.RED, newDelegate: Color.BLUE, newLeader: Color.BLUE, expected: 4},
+    {playedCard: true, delegates: [Color.RED, Color.BLUE], initialLeader: Color.RED, newDelegate: Color.BLUE, newLeader: Color.BLUE, expected: 1},
   ] as const;
   for (const run of effectRuns) {
     it('effect ' + JSON.stringify(run), () => {
@@ -56,7 +56,7 @@ describe('CorridorsOfPower', () => {
       unity.sendDelegate(getDelegate(run.newDelegate)!, game);
       expect(unity.partyLeader).eq(getDelegate(run.newLeader));
 
-      expect(player.megaCredits).eq(run.expected);
+      expect(player.cardsInHand).has.length(run.expected);
     });
   }
 });

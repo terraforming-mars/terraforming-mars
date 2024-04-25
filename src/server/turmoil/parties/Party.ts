@@ -3,7 +3,6 @@ import {IGame} from '../../IGame';
 import {IPlayer} from '../../IPlayer';
 import {Delegate, NeutralPlayer} from '../Turmoil';
 import {CardName} from '../../../common/cards/CardName';
-import {Resource} from '../../../common/Resource';
 
 export abstract class Party {
   public partyLeader: undefined | Delegate = undefined;
@@ -25,8 +24,7 @@ export abstract class Party {
     this.partyLeader = delegate;
     const cardPlayer = game.getCardPlayerOrUndefined(CardName.CORRIDORS_OF_POWER);
     if (cardPlayer === delegate) {
-      cardPlayer.stock.add(Resource.MEGACREDITS, 4);
-      game.log('${0} gained 4 MC when become a party leader.', (b) => b.player(cardPlayer));
+      cardPlayer.drawCard();
     }
   }
 

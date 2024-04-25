@@ -1,6 +1,7 @@
 {
     "SPIRE": "SPIRE",
     "Spire": "Spire",
+    "Standard Project": "Standard Projekt",
     "You start with 44 M€. As your first action, draw 4 cards, then discard 3 cards from your hand.": "Du beginnst mit 44 M€. Als erste Aktion ziehe 4 Karten und werfe dann 3 Karten von deiner Hand ab.",
     "Effect: When you play a card with at least 2 tags. including this, add a science resource here.": "EFFEKT: Wenn du eine Karte mit mindestens 2 Symbolen ausspielst, einschließlich dieser, füge hier eine Wissenschaft hinzu.",
     "Effect: When you use a standard project, science resources here may be spent as 2 M€ each.": "EFFEKT: Wenn du ein Standardprojekt verwendest, darfst du Wissenschaft hier für je 2 M€ einsetzen.",
@@ -14,18 +15,18 @@
     "ECOTEC": "ECOTEC",
     "Ecotec": "Ecotec",
     "You start with 42 M€. Increase your plant production 1 step.": "Du beginnst mit 42 M€ und einer Pflanzen-Produktion von 1.",
-    "Effect: When you play a microbe, plant, or animal tag, gain 1 plant or add a microbe to ANY card.": "Effekt: Wenn du ein Mikroben-, Pflanzen- oder Tiersymbol spielst, erhalte 1 Pflanze oder füge eine Mikrobe zu einer beliebigen Karte hinzu.",
+    "Effect: When you play a microbe, plant, or animal tag, gain 1 plant or add a microbe to ANY card.": "EFFEKT: Wenn du ein Mikroben-, Pflanzen- oder Tiersymbol spielst, erhalte 1 Pflanze oder füge eine Mikrobe zu einer beliebigen Karte hinzu.",
     
     "PALLADIN SHIPPING": "PALLADIN-VERSAND",
     "Palladin Shipping": "Palladin-Versand",
     "You start with 36 M€ and 5 titanium.": "Du beginnst mit 36 M€ und 5 Titan.",
-    "Effect: When you play a space event, gain 1 titanium.": "Effekt: Wenn du ein Weltraumereignis spielst, erhalte 1 Titan.",
+    "Effect: When you play a space event, gain 1 titanium.": "EFFEKT: Wenn du ein Weltraumereignis spielst, erhalte 1 Titan.",
     "Action: Spend 2 titanium to raise the temperature 1 step.": "AKTION: Bezahle 2 Titan, um die Temperatur um 2°C zu erhöhen.",
 
     "NIGRAL ENTERPRISES": "NIGRAL ENTERPRISES",
     "Nigral Enterprises": "Nigral Enterprises",
     "You start with 33 M€. Raise your energy, plant, and steel production 1 step each.": "Du beginnst mit 33 M€ und einer Energie-, Pflanzen- und Stahl-Produktion von 1.",
-    "AWARDS AND MILESTONES ALWAYS COST 0 M€ FOR YOU.": "AUSZEICHNUNGEN UND MEILENSTEINE KOSTEN FÜR DICH IMMER 0 M€.",
+    "Effect: AWARDS and MILESTONES ALWAYS COST 0 M€ FOR YOU.": "EFFEKT: AUSZEICHNUNGEN UND MEILENSTEINE KOSTEN FÜR DICH IMMER 0 M€.",
     
     "Cheung Shing": "Cheung Shing",
     "■■MARS■■": "■■MARS■■",
@@ -33,7 +34,7 @@
     "Cheung Shing Mars": "Cheung Shing Mars",
     "Cheung Shing MARS": "Cheung Shing MARS",
     "You start with 3 M€ production and 44 M€.": "Du beginnst mit 44 M€ und einer M€-Produktion von 3.",
-    "Effect: When you play a building tag, you pay 2 M€ less for it.": "Wenn du ein Gebäudesymbol spielst, zahlst du 2 M€ weniger.",
+    "Effect: When you play a building tag, you pay 2 M€ less for it.": "EFFEKT: Wenn du ein Gebäudesymbol spielst, zahlst du 2 M€ weniger.",
 
     "POINT LUNA": "POINT LUNA",
     "Point Luna": "Point Luna",

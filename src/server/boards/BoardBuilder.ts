@@ -104,6 +104,7 @@ export class BoardBuilder {
     return this.spaces;
   }
 
+  /*
   public shuffleArray(rng: Random, array: Array<unknown>): void {
     // Reversing the indexes so the elements are pulled from the right.
     // Reversing the result so elements are listed left to right.
@@ -116,6 +117,7 @@ export class BoardBuilder {
       array.splice(this.unshufflableSpaces[idx], 0, spliced[idx]);
     }
   }
+*/
 
   // Shuffle the ocean spaces and bonus spaces. But protect the land spaces supplied by
   // |lands| so that those IDs most definitely have land spaces.

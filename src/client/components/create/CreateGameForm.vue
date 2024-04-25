@@ -260,6 +260,14 @@
                                     <span v-i18n>Randomize board tiles</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#randomize-board-tiles" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
+                            <template v-if="moonExpansion">
+                              <input type="checkbox" v-model="shuffleMoonMapOption" id="shuffleMoonMap-checkbox">
+                              <label for="shuffleMoonMap-checkbox">
+                                      <div class="create-game-expansion-icon expansion-icon-themoon"></div>
+                                      <span v-i18n>Randomize Moon board tiles</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants" class="tooltip" target="_blank">&#9432;</a>
+                              </label>
+                            </template>
+
                             <input type="checkbox" v-model="seededGame" id="seeded-checkbox">
                             <label for="seeded-checkbox">
                                 <span v-i18n>Set Predefined Game</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#set-predefined-game" class="tooltip" target="_blank">&#9432;</a>
@@ -598,6 +606,7 @@ export default (Vue as WithRefs<Refs>).extend({
       seededGame: false,
       solarPhaseOption: false,
       shuffleMapOption: false,
+      shuffleMoonMapOption: false,
       promoCardsOption: false,
       communityCardsOption: false,
       aresExtension: false,
@@ -986,6 +995,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const turmoil = this.turmoil;
       const solarPhaseOption = this.solarPhaseOption;
       const shuffleMapOption = this.shuffleMapOption;
+      const shuffleMoonMapOption = this.shuffleMoonMapOption;
       const customColonies = this.customColonies;
       const customCorporations = this.customCorporations;
       const customPreludes = this.customPreludes;
@@ -1173,6 +1183,7 @@ export default (Vue as WithRefs<Refs>).extend({
         initialDraft,
         randomMA,
         shuffleMapOption,
+        shuffleMoonMapOption,
         // beginnerOption,
         randomFirstPlayer,
         requiresVenusTrackCompletion,

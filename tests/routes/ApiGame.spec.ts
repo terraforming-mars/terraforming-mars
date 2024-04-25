@@ -85,6 +85,7 @@ describe('ApiGame', () => {
           'showOtherPlayersVP': false,
           'showTimers': true,
           'shuffleMapOption': false,
+          'shuffleMoonMapOption': false,
           'solarPhaseOption': false,
           'soloTR': false,
           'randomMA': 'No randomization',

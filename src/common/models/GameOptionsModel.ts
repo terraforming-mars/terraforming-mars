@@ -33,6 +33,7 @@ export type GameOptionsModel = {
   showOtherPlayersVP: boolean,
   showTimers: boolean,
   shuffleMapOption: boolean,
+  shuffleMoonMapOption: boolean,
   solarPhaseOption: boolean,
   soloTR: boolean,
   randomMA: RandomMAOptionType,

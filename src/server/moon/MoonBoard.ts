@@ -43,7 +43,7 @@ export class MoonBoard extends Board {
     b.row(1).land().land(STEEL).land(STEEL).land(DRAW_CARD, DRAW_CARD).land(STEEL);
     b.row(2).land(DRAW_CARD, DRAW_CARD).mine(TITANIUM).mine(TITANIUM, TITANIUM).land();
 
-    if (gameOptions.shuffleMapOption!== undefined && gameOptions.shuffleMapOption) {
+    if (gameOptions.shuffleMoonMapOption!== undefined && gameOptions.shuffleMoonMapOption) {
       b.shuffle(rng,
         MoonSpaces.MARE_IMBRIUM,
         MoonSpaces.MARE_NECTARIS,

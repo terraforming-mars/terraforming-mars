@@ -32,6 +32,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {CardManifest} from '../../../src/server/cards/ModuleManifest';
 import {HeatTrappers} from '../../../src/server/cards/base/HeatTrappers';
 import {testGame} from '../../TestGame';
+import {SpecializedSettlement} from '../../../src/server/cards/pathfinders/SpecializedSettlement';
 
 describe('RoboticWorkforce', () => {
   let card: RoboticWorkforce;
@@ -225,12 +226,77 @@ describe('RoboticWorkforce', () => {
     expect(player2.production.asUnits()).deep.eq(Units.EMPTY);
   });
 
+  it('Should work with Specialized Settlement', () => {
+    const specializedSettlement = new SpecializedSettlement();
+    player.playedCards.push(specializedSettlement);
+    specializedSettlement.bonusResource = [Resource.HEAT];
+
+    expect(card.canPlay(player)).is.false;
+
+    player.production.override(Units.of({energy: 1}));
+
+    expect(card.canPlay(player)).is.true;
+
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+
+    expect(selectCard.cards).deep.eq([specializedSettlement]);
+
+    selectCard.cb([specializedSettlement]);
+    runAllActions(game);
+
+    expect(player.production.asUnits()).deep.eq(Units.of({heat: 1, megacredits: 3}));
+  });
+
+  it('Should work with Specialized Settlement, duplicate', () => {
+    const specializedSettlement = new SpecializedSettlement();
+    player.playedCards.push(specializedSettlement);
+    specializedSettlement.bonusResource = [Resource.MEGACREDITS];
+    player.production.override(Units.of({energy: 1}));
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+
+    expect(selectCard.cards).deep.eq([specializedSettlement]);
+
+    selectCard.cb([specializedSettlement]);
+    runAllActions(game);
+
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 4}));
+  });
+
+  it('Should work with Specialized Settlement, if when is energy', () => {
+    const specializedSettlement = new SpecializedSettlement();
+    player.playedCards.push(specializedSettlement);
+    expect(card.canPlay(player)).is.false;
+    specializedSettlement.bonusResource = [Resource.ENERGY];
+
+    expect(card.canPlay(player)).is.true;
+
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+
+    expect(selectCard.cards).deep.eq([specializedSettlement]);
+
+    selectCard.cb([specializedSettlement]);
+    runAllActions(game);
+
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3}));
+  });
+
   describe('test all cards', () => {
     ALL_MODULE_MANIFESTS.forEach((manifest) => {
       const cards: CardManifest<ICard> = {...manifest.projectCards, ...manifest.preludeCards, ...manifest.corporationCards};
       for (const [cardName, factory] of CardManifest.entries(cards)) {
         it(cardName, () => {
           const card = new factory!.Factory();
+          // Cards that are tough to test (and might even have tests above.)
+          if (card.name === CardName.SOLAR_FARM || card.name === CardName.SMALL_OPEN_PIT_MINE) {
+            return;
+          }
+
           testCard(card);
         });
       }
@@ -241,11 +307,6 @@ describe('RoboticWorkforce', () => {
 
       let include = false;
       if ((card.tags.includes(Tag.BUILDING) || card.tags.includes(Tag.WILD)) && card.play !== undefined) {
-        // Solar Farm is a pain to test so let's just say it's fine
-        if (card.name === CardName.SOLAR_FARM) {
-          return;
-        }
-
         // Create new players, set all productions to 2
         [game, player, player2] = testGame(2, {turmoilExtension: true, aresExtension: true, aresHazards: false, moonExpansion: true, underworldExpansion: true});
 
@@ -305,10 +366,10 @@ describe('RoboticWorkforce', () => {
         include = ALL_RESOURCES.filter((prod) => player.production[prod] !== 2).length > 0;
       }
 
-      console.log(`        ${card.name}: ${include}`);
-      // The card must have a productionBox or produce method.
+      console.log(`        ${card.name}: ${include ? 'eligible' : 'ineligible'}`);
+      // The card must have behavior, or a productionBox method.
       if (include) {
-        if (card.produce === undefined) {
+        if (card.productionBox === undefined) {
           const production = card.behavior?.production;
           if (production === undefined || (Units.isUnits(production) && Units.isEmpty(production))) {
             fail(card.name + ' should be registered for Robotic Workforce');

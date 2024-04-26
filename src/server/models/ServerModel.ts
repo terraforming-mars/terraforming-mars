@@ -401,7 +401,6 @@ export class Server {
       showOtherPlayersVP: options.showOtherPlayersVP,
       showTimers: options.showTimers,
       shuffleMapOption: options.shuffleMapOption,
-      shuffleMoonMapOption: options.shuffleMoonMapOption,
       solarPhaseOption: options.solarPhaseOption,
       soloTR: options.soloTR,
       randomMA: options.randomMA,

@@ -61,7 +61,6 @@ export interface NewGameConfig {
   // initialDraftVariant: boolean;
   startingCorporations: number;
   shuffleMapOption: boolean;
-  shuffleMoonMapOption: boolean;
   randomMA: RandomMAOptionType;
   includeFanMA: boolean,
   soloTR: boolean; // Solo victory by getting TR 63 by game end

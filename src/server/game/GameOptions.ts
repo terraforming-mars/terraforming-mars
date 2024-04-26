@@ -43,7 +43,6 @@ export type GameOptions = {
   // corporationsDraft: boolean;
   startingCorporations: number;
   shuffleMapOption: boolean;
-  shuffleMoonMapOption: boolean;
   randomMA: RandomMAOptionType;
   includeFanMA: boolean;
   soloTR: boolean; // Solo victory by getting TR 63 by game end
@@ -106,7 +105,6 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   showOtherPlayersVP: false,
   showTimers: true,
   shuffleMapOption: false,
-  shuffleMoonMapOption: false,
   solarPhaseOption: false,
   soloTR: false,
   startingCeos: 3,

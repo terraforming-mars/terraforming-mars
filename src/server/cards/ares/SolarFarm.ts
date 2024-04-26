@@ -2,7 +2,6 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {CanAffordOptions, IPlayer} from '../../IPlayer';
-import {Resource} from '../../../common/Resource';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
@@ -10,6 +9,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {message} from '../../logs/MessageBuilder';
+import {Units} from '../../../common/Units';
 
 export class SolarFarm extends Card implements IProjectCard {
   constructor() {
@@ -35,13 +35,13 @@ export class SolarFarm extends Card implements IProjectCard {
     return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions).length > 0;
   }
 
-  public produce(player: IPlayer) {
+  public productionBox(player: IPlayer) {
     const space = player.game.board.getSpaceByTileCard(this.name);
     if (space === undefined) {
       throw new Error('Solar Farm space not found');
     }
     const plantsOnSpace = space.bonus.filter((b) => b === SpaceBonus.PLANT).length;
-    player.production.add(Resource.ENERGY, plantsOnSpace, {log: true});
+    return Units.of({energy: plantsOnSpace});
   }
 
   public override bespokePlay(player: IPlayer) {
@@ -51,7 +51,7 @@ export class SolarFarm extends Card implements IProjectCard {
           tileType: TileType.SOLAR_FARM,
           card: this.name,
         });
-        this.produce(player);
+        player.production.adjust(this.productionBox(player), {log: true});
         space.adjacency = {bonus: [SpaceBonus.ENERGY, SpaceBonus.ENERGY]};
         return undefined;
       });

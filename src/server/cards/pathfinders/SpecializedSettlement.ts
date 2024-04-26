@@ -10,6 +10,7 @@ import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {SelectResourceTypeDeferred} from '../../deferredActions/SelectResourceTypeDeferred';
+import {Units} from '../../../common/Units';
 
 export class SpecializedSettlement extends Card implements IProjectCard {
   constructor() {
@@ -66,7 +67,7 @@ export class SpecializedSettlement extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    this.defaultProduce(player);
+    player.production.adjust(SpecializedSettlement.defaultProductionBox);
     return new SelectSpace(
       'Select space for city tile',
       player.game.board.getAvailableSpacesForCity(player))
@@ -93,16 +94,14 @@ export class SpecializedSettlement extends Card implements IProjectCard {
       );
   }
 
-  public produce(player: IPlayer) {
-    this.defaultProduce(player);
-    if (this.bonusResource && this.bonusResource.length === 1) {
-      player.production.add(this.bonusResource[0], 1, {log: true});
-    }
-  }
+  private static defaultProductionBox = Units.of({energy: -1, megacredits: 3});
 
-  private defaultProduce(player: IPlayer) {
-    player.production.add(Resource.ENERGY, -1);
-    player.production.add(Resource.MEGACREDITS, 3);
+  public productionBox() {
+    const units = {...SpecializedSettlement.defaultProductionBox};
+    if (this.bonusResource && this.bonusResource.length === 1) {
+      units[this.bonusResource[0]] += 1;
+    }
+    return units;
   }
 
   public produceForTile(player: IPlayer, bonusResources: Array<Resource>) {

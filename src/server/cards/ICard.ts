@@ -20,6 +20,7 @@ import {JSONValue} from '../../common/Types';
 import {IStandardProjectCard} from './IStandardProjectCard';
 import {Warning} from '../../common/cards/Warning';
 import {Resource} from '../../common/Resource';
+import {Units} from '../../common/Units';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -132,6 +133,24 @@ export interface ICard {
   warnings: Set<Warning>;
 
   behavior?: Behavior,
+
+  /**
+   * Returns the contents of the card's production box.
+   *
+   * Use with Robotic Workforce and Cyberia Systems.
+   *
+   * Prefer this to `produce` and prefer `behavior` to this.
+   */
+  productionBox?(player: IPlayer): Units;
+
+  /**
+   * Applies the production change for the card's production box.
+   *
+   * Use with Robotic Workforce and Cyberia Systems.
+   * (Special case for Small Open Pit Mine.)
+   *
+   * Prefer both `productionBox` and `behavior` over this.
+   */
   produce?(player: IPlayer): void;
 
   /** Terraform Rating predicted when this card is played */

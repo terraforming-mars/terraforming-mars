@@ -2,11 +2,11 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card, StaticCardProperties} from '../Card';
 import {IPlayer} from '../../IPlayer';
 import {SelectCard} from '../../inputs/SelectCard';
-import {CardName} from '../../../common/cards/CardName';
 import {ICard} from '../ICard';
 import {Behavior} from '../../behavior/Behavior';
 import {getBehaviorExecutor} from '../../behavior/BehaviorExecutor';
 import {PlayerInput} from '../../PlayerInput';
+import {CardName} from '../../../common/cards/CardName';
 
 export abstract class RoboticWorkforceBase extends Card {
   constructor(properties: StaticCardProperties) {
@@ -31,12 +31,15 @@ export abstract class RoboticWorkforceBase extends Card {
     if (!card.tags.includes(Tag.BUILDING) && !card.tags.includes(Tag.WILD)) {
       return false;
     }
-    if (card.name === CardName.SPECIALIZED_SETTLEMENT) {
-      return player.production.energy >= 1;
+
+    // Small Open Pit Mine allows a player to choose between two options. Both are
+    // positive production so accept it rather than dig deep.
+    if (card.name === CardName.SMALL_OPEN_PIT_MINE) {
+      return true;
     }
 
-    if (card.produce !== undefined) {
-      return true;
+    if (card.productionBox !== undefined) {
+      return player.production.canAdjust(card.productionBox(player));
     }
 
     if (card.behavior !== undefined) {
@@ -69,6 +72,8 @@ export abstract class RoboticWorkforceBase extends Card {
 
         if (card.produce) {
           card.produce(player);
+        } else if (card.productionBox) {
+          player.production.adjust(card.productionBox(player), {log: true});
         } else if (card.behavior !== undefined) {
           getBehaviorExecutor().execute(this.productionBehavior(card.behavior), player, card);
         }

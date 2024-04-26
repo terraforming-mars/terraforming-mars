@@ -34,7 +34,7 @@ export const BESPOKE_PRODUCTION_CARDS: ReadonlyArray<CardName> = [
   CardName.RARE_EARTH_ELEMENTS,
   CardName.MICROBIOLOGY_PATENTS,
   CardName.OUMUAMUA_TYPE_OBJECT_SURVEY,
-  CardName.RARE_EARTH_ELEMENTS,
+  CardName.SMALL_OPEN_PIT_MINE,
 ] as const;
 
 // Mapping from [CardName => boolean] indicating whether a card is eligible for Engineer.
@@ -62,7 +62,9 @@ export class Engineer implements IAward {
    * this award.
    */
   public static autoInclude(card: ICard) {
-    if (card.produce !== undefined) return true;
+    if (card.productionBox !== undefined) {
+      return true;
+    }
     const production = card.behavior?.production;
     if (production !== undefined) {
       return Object.keys(production).length > 0;

@@ -9,8 +9,6 @@ import {ArabiaTerraBoard} from '../../src/server/boards/ArabiaTerraBoard';
 import {preservingShuffle} from '../../src/server/boards/BoardBuilder';
 import {AmazonisBoard} from '../../src/server/boards/AmazonisBoard';
 import {TestPlayer} from '../TestPlayer';
-import {MoonBoard} from '../../src/server/moon/MoonBoard';
-import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
 
 describe('BoardBuilder', function() {
   const preservingRuns = [

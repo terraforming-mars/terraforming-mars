@@ -54,7 +54,7 @@ describe('MoonBoard', function() {
       {id: 'm37', spaceType: 'colony', x: -1, y: -1, bonus: []},
     ]);
   });
-  
+
   it('getSpace', () => {
     expect(() => board.getSpaceOrThrow('01').id).to.throw(Error, /Can't find space with id 01/);
     expect(board.getSpaceOrThrow('m01').spaceType).eq(SpaceType.COLONY);

@@ -44,7 +44,7 @@ export class IndustrialCenter extends ActionCard implements IProjectCard {
     return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions)
       .filter((space) => player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)));
   }
-  public override bespokeCanPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean {
+  public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
     return this.getAvailableSpaces(player, canAffordOptions).length > 0;
   }
   public override bespokePlay(player: IPlayer) {

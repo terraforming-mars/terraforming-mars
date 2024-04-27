@@ -39,20 +39,14 @@ export class AtmosphericEnhancers extends PreludeCard {
     });
   }
 
-  private adjustedOptions(options: CanAffordOptions, trSource: TRSource, cost?: number): CanAffordOptions {
-    const newOptions = {...options};
-    newOptions.tr = trSource;
-    if (cost !== undefined) {
-      newOptions.cost = cost;
-    }
-    return newOptions;
-  }
-
   public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions) {
+    function adjusted(trSource: TRSource) {
+      return {...canAffordOptions, tr: trSource};
+    }
     return (
-      player.canAfford(this.adjustedOptions(canAffordOptions, {oxygen: 2})) ||
-      player.canAfford(this.adjustedOptions(canAffordOptions, {temperature: 2})) ||
-      player.canAfford(this.adjustedOptions(canAffordOptions, {venus: 2}))
+      player.canAfford(adjusted({oxygen: 2})) ||
+      player.canAfford(adjusted({temperature: 2})) ||
+      player.canAfford(adjusted({venus: 2}))
     );
   }
 

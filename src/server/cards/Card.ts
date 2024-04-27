@@ -237,7 +237,7 @@ export abstract class Card implements ICard {
         return false;
       }
     }
-    const bespokeCanPlay = this.bespokeCanPlay(player, canAffordOptions);
+    const bespokeCanPlay = this.bespokeCanPlay(player, canAffordOptions ?? {cost: 0});
     if (bespokeCanPlay === false) {
       return false;
     }
@@ -248,7 +248,7 @@ export abstract class Card implements ICard {
     return true;
   }
 
-  public bespokeCanPlay(_player: IPlayer, _canAffordOptions?: CanAffordOptions): boolean {
+  public bespokeCanPlay(_player: IPlayer, _canAffordOptions: CanAffordOptions): boolean {
     return true;
   }
 

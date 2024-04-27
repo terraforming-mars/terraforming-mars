@@ -21,7 +21,9 @@ export type _Countable = {
   cities?: {where?: 'onmars' | 'offmars' | 'everywhere'},
   greeneries?: NoAttributes,
   oceans?: NoAttributes,
+  /** Count the number of resources on this card. */
   resourcesHere?: NoAttributes,
+  /** Count the number of floaters on all cards. */
   floaters?: NoAttributes,
   colonies?: {
     colonies?: {},

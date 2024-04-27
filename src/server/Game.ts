@@ -291,7 +291,7 @@ export class Game implements IGame, Logger {
     }
 
     if (gameOptions.moonExpansion) {
-      game.moonData = MoonExpansion.initialize();
+      game.moonData = MoonExpansion.initialize(gameOptions, rng);
     }
 
     if (gameOptions.pathfindersExpansion) {

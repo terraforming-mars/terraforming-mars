@@ -16,6 +16,8 @@ import {Phase} from '../../common/Phase';
 import {BoardType} from '../boards/BoardType';
 import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
 import {SpaceId} from '../../common/Types';
+import {Random} from '../../common/utils/Random';
+import {GameOptions} from '../game/GameOptions';
 
 export class MoonExpansion {
   public static readonly MOON_TILES: Set<TileType> = new Set([
@@ -63,9 +65,9 @@ export class MoonExpansion {
     throw new Error('Assertion error: Using a Moon feature when the Moon expansion is undefined.');
   }
 
-  public static initialize(): MoonData {
+  public static initialize(gameOptions: GameOptions, rng: Random): MoonData {
     return {
-      moon: MoonBoard.newInstance(),
+      moon: MoonBoard.newInstance(gameOptions, rng),
       habitatRate: 0,
       miningRate: 0,
       logisticRate: 0,

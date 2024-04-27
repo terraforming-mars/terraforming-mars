@@ -3,12 +3,56 @@ import {SpaceType} from '../../src/common/boards/SpaceType';
 import {MoonBoard} from '../../src/server/moon/MoonBoard';
 import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
 import {SpaceId} from '../../src/common/Types';
+import {SeededRandom} from '../../src/common/utils/Random';
+import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 
 describe('MoonBoard', function() {
   let board: MoonBoard;
 
   beforeEach(function() {
-    board = MoonBoard.newInstance();
+    board = MoonBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
+  });
+
+  it('sanity', () => {
+    expect(board.spaces).to.deep.eq([
+      {id: 'm01', spaceType: 'colony', x: -1, y: -1, bonus: []},
+      {id: 'm02', spaceType: 'land', x: 2, y: 0, bonus: []},
+      {id: 'm03', spaceType: 'land', x: 3, y: 0, bonus: [1, 3]},
+      {id: 'm04', spaceType: 'land', x: 4, y: 0, bonus: []},
+      {id: 'm05', spaceType: 'lunar_mine', x: 5, y: 0, bonus: [0]},
+      {id: 'm06', spaceType: 'lunar_mine', x: 1, y: 1, bonus: [0, 0]},
+      {id: 'm07', spaceType: 'lunar_mine', x: 2, y: 1, bonus: []},
+      {id: 'm08', spaceType: 'land', x: 3, y: 1, bonus: [1]},
+      {id: 'm09', spaceType: 'land', x: 4, y: 1, bonus: []},
+      {id: 'm10', spaceType: 'land', x: 5, y: 1, bonus: []},
+      {id: 'm11', spaceType: 'lunar_mine', x: 0, y: 2, bonus: []},
+      {id: 'm12', spaceType: 'land', x: 1, y: 2, bonus: [1]},
+      {id: 'm13', spaceType: 'land', x: 2, y: 2, bonus: [1, 0]},
+      {id: 'm14', spaceType: 'lunar_mine', x: 3, y: 2, bonus: []},
+      {id: 'm15', spaceType: 'lunar_mine', x: 4, y: 2, bonus: [0]},
+      {id: 'm16', spaceType: 'land', x: 5, y: 2, bonus: [1, 1]},
+      {id: 'm17', spaceType: 'land', x: 0, y: 3, bonus: [1]},
+      {id: 'm18', spaceType: 'land', x: 1, y: 3, bonus: []},
+      {id: 'm19', spaceType: 'land', x: 2, y: 3, bonus: []},
+      {id: 'm20', spaceType: 'lunar_mine', x: 3, y: 3, bonus: [0]},
+      {id: 'm21', spaceType: 'lunar_mine', x: 4, y: 3, bonus: [0]},
+      {id: 'm22', spaceType: 'land', x: 0, y: 4, bonus: []},
+      {id: 'm23', spaceType: 'lunar_mine', x: 1, y: 4, bonus: [0]},
+      {id: 'm24', spaceType: 'lunar_mine', x: 2, y: 4, bonus: []},
+      {id: 'm25', spaceType: 'land', x: 3, y: 4, bonus: []},
+      {id: 'm26', spaceType: 'lunar_mine', x: 4, y: 4, bonus: []},
+      {id: 'm27', spaceType: 'land', x: 5, y: 4, bonus: [1]},
+      {id: 'm28', spaceType: 'land', x: 1, y: 5, bonus: []},
+      {id: 'm29', spaceType: 'land', x: 2, y: 5, bonus: [1]},
+      {id: 'm30', spaceType: 'land', x: 3, y: 5, bonus: [1]},
+      {id: 'm31', spaceType: 'land', x: 4, y: 5, bonus: [3, 3]},
+      {id: 'm32', spaceType: 'land', x: 5, y: 5, bonus: [1]},
+      {id: 'm33', spaceType: 'land', x: 2, y: 6, bonus: [3, 3]},
+      {id: 'm34', spaceType: 'lunar_mine', x: 3, y: 6, bonus: [0]},
+      {id: 'm35', spaceType: 'lunar_mine', x: 4, y: 6, bonus: [0, 0]},
+      {id: 'm36', spaceType: 'land', x: 5, y: 6, bonus: []},
+      {id: 'm37', spaceType: 'colony', x: -1, y: -1, bonus: []},
+    ]);
   });
 
   it('getSpace', () => {
@@ -16,7 +60,6 @@ describe('MoonBoard', function() {
     expect(board.getSpaceOrThrow('m01').spaceType).eq(SpaceType.COLONY);
     expect(board.getSpaceOrThrow(MoonSpaces.LUNA_TRADE_STATION).id).eq('m01');
   });
-
 
   const testCases: Array<[SpaceId, Array<SpaceId>]> = [
     ['m01', []],
@@ -64,5 +107,24 @@ describe('MoonBoard', function() {
       const actual = board.getAdjacentSpaces(space).map((s) => s.id);
       expect(expected).to.eql(actual);
     });
+  });
+
+  it('Randomizes map for Moon', () => {
+    for (let idx = 0; idx < 4_000; idx++) {
+      const seed = Math.random();
+      const board = MoonBoard.newInstance({
+        ...DEFAULT_GAME_OPTIONS,
+        shuffleMapOption: true,
+      },
+      new SeededRandom(seed));
+      const reservedSpaces = [MoonSpaces.LUNA_TRADE_STATION,
+        MoonSpaces.MARE_IMBRIUM,
+        MoonSpaces.MARE_NECTARIS,
+        MoonSpaces.MARE_NUBIUM,
+        MoonSpaces.MARE_SERENITATIS,
+        MoonSpaces.MOMENTUM_VIRIUM,
+      ].map((id) => board.getSpaceOrThrow(id).spaceType);
+      expect(reservedSpaces, `for seed ${seed}`).deep.eq([SpaceType.COLONY, SpaceType.LUNAR_MINE, SpaceType.LUNAR_MINE, SpaceType.LUNAR_MINE, SpaceType.LUNAR_MINE, SpaceType.COLONY]);
+    }
   });
 });

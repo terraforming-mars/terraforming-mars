@@ -70,7 +70,7 @@
     "Place this tile which grants an ADJACENCY BONUS of 2 M€. Decrease your energy production 1 step and increase your M€ production 4 steps.": "2MCの隣接ボーナスがある特殊タイルを配置. 電力産出-1し、MC産出+4.",
 
     "Ocean City": "海上都市",
-    "Requires 6 ocean tiles. Decrease your energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "条件：海洋6枚以上. 電力産出-1し、MC産出+4. 特殊タイルを海洋上に配置(都市の配置制限は無視). このタイルは都市であり、海洋でもある.",
+    "Requires 6 ocean tiles. Decrease your energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "条件：海洋6枚以上. 電力産出-1し、MC産出+4. 特殊タイルを海洋上に配置(都市の配置制限は無視). このタイルは都市・海洋・特殊タイルとして数える.",
 
     "Lava Flows": "溶岩流",
     "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. This tile grants an ADJACENCY BONUS of 2 heat.": "温度+2段階. 火山地帯に特殊タイル配置. ※本環境では「ノクティス市」以外の白文字マス. ヘラス盤面のみ任意配置可能. このタイルは2温熱の隣接ボーナスがある.",

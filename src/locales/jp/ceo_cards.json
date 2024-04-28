@@ -12,7 +12,7 @@
 	"GAIN THESE RESOURCES": "以下のリソースを獲得",
 	"GAIN ALL YOUR COLONY BONUSES TWICE": "全ての所有しているコロニーから2回分コロニー・ボーナス獲得.",
 	"REPLACE ALL NEUTRAL": "全ての中立を交代",
-
+	"SWAP X+2": "X+2まで産出を交換",
 
 	"Co-leadership": "共同リーダーシップ",
 	"Draw 3 CEO cards and take one to your hand, it will be played on your first turn. Discard the other 2.": "CEOを3枚見る. その内、1枚を獲得し残りを捨て札にする.",
@@ -79,7 +79,7 @@
 	"When you build a colony, gain 2 energy and 3 M€. Once per game, move each colony tile track marker to its highest or lowest value.": "コロニー配置時、2電力と3MC獲得. CEOアクション：各コロニータイルのトラックを最高値か最低値に移動させる.",
 
 	"Neil": "ニール",
-	"Gain 1 M€ when any player plays a Moon tag. Once per game, increase your M€ production by the value of the LOWEST Moon rate.": "",
+	"Gain 1 M€ when any player plays a Moon tag. Once per game, increase your M€ production by the value of the LOWEST Moon rate.": "月タグがプレイされた時、1MC獲得. CEOアクション：最も低い月レートの数分、MC産出+1.",
 
 	"Oscar": "オスカー",
 	"You have +1 influence. Once per game, replace the Chairman with one of your delegates.": "影響力+1. CEOアクション：議長をあなたの代議員と交代する.",
@@ -97,7 +97,7 @@
 	"Once per game, swap up to X+2 units of production between two resources, where X is the current generation number.": "CEOアクション：世代数+2まで任意の生産を減らす. 減らした数分、任意の産出+1.",
 
 	"Shara": "シャラ",
-	"Once per game, choose a planet tag. This card counts as having immediately played 2 of that tag. Then gain M€ equal to that tags planety influence track.": "",
+	"Once per game, choose a planet tag. This card counts as having immediately played 2 of that tag. Then gain M€ equal to that tags planety influence track.": "CEOアクション：惑星タグを1つ選択. このカードはその選択したタグとして扱う. 選択した惑星の影響度+2段階. その惑星の影響度の数分、1MC獲得.",
 
 	"Stefan": "ステファン",
 	"Once per game, sell any number of cards from your hand for 3 M€ each.": "CEOアクション：手札から好きな枚数のカードを3MCで売却.",

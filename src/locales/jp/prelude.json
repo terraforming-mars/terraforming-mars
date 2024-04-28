@@ -1,4 +1,15 @@
 {
+    "Space Corridors": "宇宙回廊",
+    "Gain 3 titanium": "3チタン獲得",
+    "Effect: When you play a Jovian, Earth, or Venus tag, you pay 2 M€ less for it.": "効果：木星、地球、金星タグカードのプレイコスト-2MC.",
+
+    "Corridors of Power": "権力の回廊",
+    "Increase your TR one step. Gain 4 M€": "TR+1. 4MC獲得.",
+    "Effect: Whenever one of your delegates becomes a Party Leader, draw a card": "代議員が党首になった時、1ドロー.",
+
+    "Atmospheric Enhancers": "大気エンハンサ",
+    "Effect: Raise either the temperature or oxygen or Venus 2 steps. Reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take those 2 cards into hand and discard the rest.": "温度+2段階 または 酸素+2段階. 浮遊体を配置できるカードを2枚入手.",
+
     "Applied Science": "応用科学",
     "Action: Remove 1 resource here to gain 1 standard resource of your choice or add 1 resource on ANY CARD WITH A RESOURCE.": "アクション：このカード上から1科学リソース除去し、任意の1リソースを獲得.",
     "Add 6 resources here.": "このカード上に6科学リソース追加.",

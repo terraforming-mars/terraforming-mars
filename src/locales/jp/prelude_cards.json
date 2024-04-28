@@ -1,4 +1,14 @@
 {
+    "Sponsoring Nation": "主催国",
+    "Requires 4 Earth tags. Gain 3 TR. Place 2 delegates.": "条件：地球タグ4つ以上. TR+3段階. 代議員2名を配置.",
+
+    "GHG Shipment": "温室効果ガスの輸送",
+    "Requires that Kelvinists are in power or that you have 2 delegates there. Increase your heat production 1 step. Gain 1 heat for each floater you have.": "条件：汎ケルビン党が与党か、そこに2議席ある. 発熱産出+1. 1浮遊体毎に、1発熱獲得.",
+
+    "Cloud Tourism": "雲海旅行",
+    "Action: Add 1 floater to this card.": "アクション：このカード上に1浮遊体追加.",
+    "Increase your M€ production 1 step for each pair of Earth and Venus tags you own. 1 VP for every 3rd floater on this card.": "地球タグと金星タグの合計数分、MC産出+1. このカード上の3浮遊体毎に1VP",
+
     "Ceres Tech Market": "セレス技術市場",
     "Action: Discard any number of cards from your hand to gain 2 M€ for each discarded card.": "アクション：手札から任意枚数のカードを1枚2MCで売却.",
     "Gain 2 M€ per colony you own.": "コロニーの所持数×2MC獲得.",

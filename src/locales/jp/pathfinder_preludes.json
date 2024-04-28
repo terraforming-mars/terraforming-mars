@@ -1,0 +1,47 @@
+{
+  "CO² Reducers": "二酸化炭素還元者",
+  "Increase your M€ production 3 steps. Draw 2 cards with a microbe tag.": "MC産出+3. 微生物タグカードを2枚入手.",
+
+  "Crew Training": "クルートレーニング",
+  "Choose a planet tag. This card counts as having 2 of that tag. Raise the corresponding planetary track 2 steps. Gain 2 TR.": "惑星タグから好きなタグを1つ選択. その惑星タグが2つあるとして扱う. その惑星影響トラック+2段階. TR+2段階.",
+
+  "Deep Space Operations": "外宇宙探査",
+  "Gain 4 titanium. Draw 2 event cards with a space tag.": "4チタン獲得. 宇宙タグを含むイベントカードを2枚入手.",
+
+  "Design Company": "デザイン会社",
+  "Increase your steel production 1 step. Draw 3 cards with a building tag.": "建材産出+1. 土建タグカードを3枚入手.",
+
+  "Experienced Martians": "火星入植経験者",
+  "Place 1 delegate in any party. Draw 2 cards with a Mars tag. Increase your M€ production 2 steps.": "任意の政党に代議員を1名配置. 火星タグカードを2枚入手. MC産出+2.",
+
+  "Hydrogen Bombardment": "水素爆撃",
+  "Increase the Venus scale 1 step. Increase your titanium production 1 step. Gain 6 M€.": "金星+1段階. チタン産出+1. 6MC獲得.",
+
+  "Personal Agenda": "個人アジェンダ",
+  "Increase your M€ production 3 steps. Draw 3 event cards that do not have a space tag.": "MC産出+3. 宇宙タグを含まないイベントカードを3枚入手.",
+
+  "Research Grant": "研究助成金",
+  "Research Grant:Pathfinders": "研究助成金",
+  "Increase your energy production 1 step. Gain 14 M€.": "14MC獲得. 電力産出+1.",
+
+  "Strategic Base Planning": "戦略的基盤計画",
+  "Pay 8M€. Place a city. Place a colony.": "8MC支払う. 都市を1枚配置. コロニー1つ配置.",
+
+  "Survey Mission": "調査団",
+  "Gain 5 steel. Land-claim three non-reserved spaces in a triangle shape. Gain all placement bonuses. Only you may place tiles there, and will gain placement bonuses again.": "5建材獲得. 非予定地の空きマスに三角形になるようにプレイヤーマーカーを配置. そのマスの配置ボーナスを獲得. 他プレイヤーはそのマスに配置できない. タイルを配置した時、再度配置ボーナスを獲得できる.",
+
+  "The New Space Race": "新時代の宇宙レース",
+  "REVEALED BEFORE ANY OTHER PRELUDE. You become starting player for the game. Choose and set a ruling policy for the first generation. Gain 12 M€.": "他のプレリュードカードよりも先に公開. 第1プレイヤーになる. 政策タイルを1つ選び、それに入れ替える. 12MC獲得.",
+
+  "Valuable Gases": "貴重なガス",
+  "Valuable Gases:Pathfinders": "貴重なガス",
+  "Gain 10 M€. Play an active floater card from hand, ignoring requirements, and add 5 floaters to it.": "10MC獲得. 浮遊体を配置できるカード1枚を条件を無視してプレイし、そこに5浮遊体獲得.",
+
+  "Venus First": "金星第一主義",
+  "Venus First:Pathfinders": "金星第一主義",
+  "Raise Venus 2 steps. Draw 2 Venus cards.": "金星+2段階. 金星タグカードを2枚入手.",
+
+  "Vital Colony": "生命維持コロニー",
+  "2x bonus": "コロニー建設ボーナス2倍",
+  "Place a colony. Receive the placement bonus twice.": "コロニー1つ配置. このコロニー建設ボーナスは2倍になる."
+}

@@ -18,7 +18,7 @@
   "Requires the logistic rate to be 2 or higher. Raise the logistic rate 1 step": "条件：物流レート2以上. 物流レート+1段階.",
 
   "Algae Bioreactors": "藻類バイオリアクター",
-  "Decrease your plant production 1 step. Raise the habitat rate 1 step and oxygen 1%.": "植物産出-1. 居住地レート+1段階. 酸素濃度+1段階.",
+  "Decrease your plant production 1 step. Raise the habitat rate 1 step and oxygen 1%.": "植物産出-1. 居住地レート+1段階. 酸素+1段階.",
 
   "An Offer You Can't Refuse": "拒否できない申し出",
   "Exchange a NON-NEUTRAL opponent delegate with one of your own from the reserve. This exchange may not change the party leader. You may then move your delegate to another party.": "他プレイヤーの党首でない代議員1名を除去. 代議員を1名配置.",
@@ -57,10 +57,10 @@
   "Gain 2 steel and 2 titanium. Raise the mining rate 2 steps.": "2建材と2チタン獲得. 採掘レート+2段階.",
 
   "Darkside Mining Syndicate": "暗闇側の採掘組合",
-  "Increase your titanium production 2 steps, or 1 step if the mining rate is at least 2. And then raise the mining rate 1 step.": "チタン産出+2、または採掘レート2以上の場合はチタン産出+1. 採掘レート+1段階.",
+  "Increase your titanium production 2 steps, or 1 step if the mining rate is at least 2. And then raise the mining rate 1 step.": "チタン産出+2、採掘レート2以上の場合はチタン産出+1. 採掘レート+1段階.",
 
   "Darkside Observatory": "暗闇側の天文台",
-  "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.]": "アクション：1科学リソース獲得、ただし1科学リソース毎に2VPのカードには追加できない.",
+  "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.]": "アクション：1科学リソース獲得、ただし1科学リソース毎に2VP以上のカードには追加できない.",
   "Action: Add 2 data to ANY card.": "アクション：2データ獲得.",
 
   "Darkside Smugglers' Union": "暗闇側の密輸組織",
@@ -157,10 +157,10 @@
   "Spend 1 titanium. Raise the logistic rate 1 step.": "1チタン支払う. 物流レート+1段階.",
 
   "Lunar Industry Complex": "ルナ産業コンプレックス",
-  "Spend 2 titanium. Place a mine tile on The Moon and raise the mining rate 1 step. Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.": "2チタン支払う. ",
+  "Spend 2 titanium. Place a mine tile on The Moon and raise the mining rate 1 step. Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.": "2チタン支払う. 月に鉱山タイルを配置し、採掘レート+1段階. 建材産出+1. チタン産出+1. 発熱産出+1. 電力産出+2.",
 
   "Lunar Mine Urbanization": "ルナ・都市化鉱山",
-  "Requires you have 1 mine tile. Increase your M€ production 1 step. Replace one of your mine tiles with this special tile. Raise the habitat rate 1 step. This tile counts both as a habitat and a mine tile.": "条件：鉱山タイル1枚以上所持. MC産出+1. 所有している鉱山タイル1枚を特殊タイルに置き換える. このタイルは生息地タイルであり、鉱山タイルでもある. 居住地レート+1段階.",
+  "Requires you have 1 mine tile. Increase your M€ production 1 step. Replace one of your mine tiles with this special tile. Raise the habitat rate 1 step. This tile counts both as a habitat and a mine tile.": "条件：鉱山タイル1枚以上所持. MC産出+1. 所有している鉱山タイル1枚を特殊タイルに置き換える. このタイルは生息地・鉱山タイルとして数える. 居住地レート+1段階.",
 
   "Lunar Observation Post": "ルナ・観測部門",
   "Action: Add 1 data resource to ANY card": "アクション：1データ獲得.",
@@ -237,7 +237,7 @@
   "Requires 3 logistic rate. Steal up to 6 steel or 4 titanium from other players. (Resources may be stolen from more than 1 opponent.)": "条件：物流レート3以上. 望むならプレイヤー1人から最大6建材 または 4チタンを除去し、同じものを獲得.",
 
   "Rover Drivers Union": "ローバー操縦士組合",
-  "Requires 2 logistic rate. Raise the logistic rate 1 step. Increase your M€ production 1 step per logistic rate.": "物流レート+1段階. 物流レート1毎に、MC産業+1.",
+  "Requires 2 logistic rate. Raise the logistic rate 1 step. Increase your M€ production 1 step per logistic rate.": "物流レート+1段階. 物流レート1毎に、MC産出+1.",
 
   "Rust Eating Bacteria": "錆食金",
   "1 VP per 3 microbes here.": "このカード上の3微生物毎に1VP",
@@ -306,7 +306,7 @@
   "Effect: When playing a Moon tag, science resources here may be used as payment, and are worth 1M€ each.": "効果：月タグをプレイ時、このカード上の科学リソースを1MCとして支払ってもよい.",
 
   "Luna Ecumenopolis": "ルナ・エクメノポリス",
-  "Spend 2 titanium. Place 2 habitat tiles adjacent to at least 2 other habitat tiles and raise habitat rate 2 steps. Increase your TR 1 step for each 2 steps of the habitat rate.": "2チタン支払う.",
+  "Spend 2 titanium. Place 2 habitat tiles adjacent to at least 2 other habitat tiles and raise habitat rate 2 steps. Increase your TR 1 step for each 2 steps of the habitat rate.": "2チタン支払う. 生息地タイル2枚を他の生息地タイル2枚に隣接させて配置し、生息地レート+2段階. 生息地レート2毎にTR+1段階.",
 
   "Steal": "盗む",
   "Habitat rate": "居住地レート",

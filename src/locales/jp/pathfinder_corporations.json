@@ -1,0 +1,90 @@
+{
+  "Adhai High Orbit Constructions": "アドハイ高軌道建設",
+  "(Effect: Whenever you play a card with a space tag BUT NO PLANETARY TAG (including this) add 1 orbital on this card.)": "(効果：惑星タグがない宇宙タグをプレイ時、このカード上に1軌道拠点追加.)",
+  "(Effect: For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1M€ less.)": "(効果：惑星タグがない宇宙タグ または 標準プロジェクトのコロニー または 交易をプレイ時、このカード上の軌道拠点2つ毎に、プレイコスト-1MC.)",
+  "(You start with 43 M€.)": "(初期資源：43MC.)",
+
+  "Ambient": "アンビエント",
+  "(Effect: When you play a card with a Venus tag (including this) increase your heat production 1 step.)": "(効果：金星タグをプレイ時、温熱産出+1.)",
+  "(Action: When temperature is maxed, spend 8 heat gain 1 TR. You may repeat this action like a standard project.)": "(アクション：気温が最大の場合使用可能。8温熱支払い、TR+1段階. このアクションは可能な限り何度使用してもよい.)",
+  "(You start with 38 M€. As your first action, raise the Venus scale 2 steps.)": "(初期資源：38MC. 1アクション目：金星+2段階.)",
+
+  "AURORAI": "オーロライ",
+  "(Effect: Whenever you increase your terraform rating, add 1 data per step to ANY card.)": "(効果：TR+1段階する毎に、1データ獲得.)",
+  "(Effect: You can use data on this card as 3M€ each to pay for standard projects.)": "(効果：標準プロジェクトをプレイ時、このカード上のデータを3MCとして支払ってもよい.)",
+  "(You start with 33 M€. and 2 data on this card)": "(初期資源：33MC. このカード上に2データ追加.)",
+
+  "Bio-Sol": "バイオソル",
+  "(Action: Add 1 microbe to ANY card)": "(アクション：1微生物獲得.)",
+  "(You start with 42 M€. As your first action, draw 2 cards with a microbe tag.)": "(初期資源：42MC. 1アクション目：微生物タグカードを2枚入手. このカード上の3微生物毎に1VP.)",
+
+  "Chimera": "キメラ",
+  "(Effect: When you perform an action, these wild tags count as any tags of your choice. For claiming milestones and funding awards, both symbols count as one. (Other wild tags still do not count toward awards.))": "(効果：プレイ後、2つの任意のタグとして扱う. 称号獲得時 または 褒賞の参照時は両方で1つのタグとして扱う.)",
+  "(You start with 36 M€, 1 steel, and 1 titanium.)": "(初期資源：36MC. 1建材. 1チタン.)",
+
+  "Collegium Copernicus": "コペルニクス研究会",
+  "(Effect: When you play a card with a science tag (including this) Add 1 data to ANY card.)": "(効果：科学タグをプレイ時、1データ獲得.)",
+  "(Action: Spend 3 data from this card to trade.)": "(アクション：このカード上から3データ除去し、交易コスト無料で交易.)",
+  "(You start with 33 M€. As your first action, draw 2 cards with a science tag.)": "(初期資源：33MC. 1アクション目：科学タグカードを2枚入手.)",
+
+  "Habitat Marte": "マルテ生息地",
+  "(Effect: Mars tags also count as science tags.)": "(効果：火星タグは科学タグとしても数える.)",
+  "(You start with 40 M€)": "(初期資源：40MC.)",
+
+  "Mars Direct": "マーズ・ダイレクト",
+  "(Effect: When you play a Mars tag, you pay 1 M€ less for each Mars tag you have.)": "(効果：火星タグをプレイ時、火星タグの数分、プレイコスト-1MC.)",
+  "(You start with 52 M€.)": "(初期資源：52MC.)",
+
+  "Mars Math": "火星数学",
+  "(Effect: At the beginning of the Research phase, you draw 5 cards, but may STILL only buy 4 cards. If you are drafting, keep 2 cards for your first draft.)": "(効果：研究フェイズで5枚カードを見る(ドラフトの場合は最初に2枚キープ). ただし購入は4枚まで.)",
+  "(Action: Take another two actions this turn.)": "(アクション：2回アクションを行う(消費アクションは1回分).)",
+  "(You start with 40 M€. As your first action, draw 2 cards)": "(初期資源：40MC. 1アクション目：2ドロー.)",
+
+  "Martian Insurance Group": "火星保険",
+  "(Effect: Whenever you play an event card, raise your M€ production 1 step.)": "(効果：イベントカードをプレイ時、MC産出+1.)",
+  "(You start with 42 M€ and 1 M€ production.)": "(初期資源：42MC. 初期産出：MC産出+1.)",
+
+  "MindSet Mars": "マインドセット・マーズ",
+  "(Action: When you play a card with a building tag, add 1 agenda on this card.)": "(効果：土建タグをプレイ時、このカード上に1アジェンダ追加.)",
+  "(Action: Spend 2 agenda resources to place 1 delegate in any party.)": "(アクション：このカード上から2アジェンダ除去し、任意の政党に代議員を1名配置.)",
+  "(Action: Spend 5 agenda resources to place a city tile on Mars.)": "(アクション：このカード上から5アジェンダ除去し、都市タイルを配置.)",
+  "(You start with 44 M€ and 1 agenda resource to this card.)": "(初期資源：44MC. このカード上に1アジェンダ追加.)",
+
+  "GAGARIN MOBILE BASE": "ガガーリン移動基地",
+  "move": "移動",
+  "(Action: Move the Base to ANY nearest empty area where it has not yet been. Collect the bonus.)": "(アクション：ガガーリン基地マーカーを最も近い空きマスに移動(予定地可). そのマスの配置ボーナスを獲得. 元のマスに基地跡地マーカーを配置.)",
+  "(Effect: When another player places a tile where the Base is, move the Base.)": "(効果：他プレイヤーがガガーリン基地マーカーにタイルを配置した時、ガガーリン基地マーカーを最も近い空きマスに移動(予定地可). そのマスの配置ボーナスを獲得.)",
+  "(You start with 42 M€. As your first action, put Gagarin Mobile Base on ANY area on Mars. Collect the bonus.)": "(初期資源：42MC. 1アクション目：火星上にガガーリン基地マーカーを配置(予定地可). そのマスの配置ボーナスを獲得.)",
+
+  "Polaris": "ポラリス",
+  "(Effect: When any ocean tile is placed ON MARS, increase your M€ production 1 step. When you place an ocean tile, gain 4M€.)": "(効果：海洋タイル1枚配置される毎に、MC産出+1. 海洋タイル1枚配置する毎に、4MC獲得.)",
+  "(You start with 32 M€. As your first action, place an ocean tile.)": "(初期資源：32MC. 1アクション目：海洋タイルを1枚配置.)",
+
+  "RingCom": "リングコム",
+  "(Effect: When any player plays a card with a Jovian tag (including this) gain 1 titanium.)": "(効果：木星タグがプレイされた時、1チタン獲得.)",
+  "(You start with 39 M€. and 3 M€ production. As your first action, draw 2 cards with a Jovian tag.)": "(初期資源：39MC. 初期産出：MC産出+3. 1アクション目：木星タグカードを2枚入手.)",
+
+  "Robin Haulings": "ロビン・ホールディングス",
+  "(Effect: Whenever you play a card with a Venus tag add 1 floater to ANY card.)": "(効果：金星タグをプレイ時、1浮遊体獲得.)",
+  "(Action: Remove 3 floaters from this card to raise Venus 1 step or raise oxygen 1 step)": "(アクション：このカード上から3浮遊体除去し、金星+1段階 または 酸素+1段階.)",
+  "(You start with 39 M€.)": "(初期資源：39MC.)",
+
+  "Solbank": "ソルバンク",
+  "(Effect: Whenever you spend M€ (or steel or titanium) add 1 data to this card.)": "(効果：MC または 建材 または チタンを支払った時、このカード上に1データ追加.)",
+  "(Effect: During the production phase convert each data from this card into 1M€ each.)": "(効果：生産フェイズ時に、このカード上からxデータを除去し、xMC獲得.)",
+  "(You start with 40 M€.)": "(初期資源：40MC.)",
+
+  "Soylent Seedling Systems": "ソイレント苗木システム",
+  "(Effect: When you place a greenery tile, add 1 seed resource to this card.)": "(効果：緑地タイルを配置する毎に、このカード上に1種追加)",
+  "(Effect: When paying for a plant card, or the STANDARD GREENERY PROJECT, seeds here may be used as 5 M€ each.)": "(効果：植物タグ または 標準プロジェクトの緑地をプレイ時、このカード上の種を5MCとして支払ってもよい.)",
+  "(You start with 38M€ and 2 seeds on this card.)": "(初期資源：38MC. このカード上に2種追加.)",
+
+  "Steelaris": "スティラリス",
+  "(Effect: When any city or special tile is placed ON MARS, gain 1 steel and 1 plant.)": "(効果：火星上に都市 または 特殊タイルが配置された時、1建材と1植物獲得.)",
+  "(You start with 42 M€.)": "(初期資源：42MC.)",
+
+  "Odyssey": "オデッセイ",
+  "(Effect: Your event cards stay face up, and their tags are in use as if those were automated (green) cards.)": "(効果：プレイしたイベントカードのタグをゲーム中、参照できる.)",
+  "(Action: Pay for and play an event card you have already played that has a base cost of 16M€ or less (INCLUDING events that place special tiles,) after which discard that card.)": "(アクション：16MC以下のイベントカードを選び、再度プレイする. プレイ後は捨て札にする.)",
+  "(You start with 33 M€.)": "(初期資源：33MC.)"
+}

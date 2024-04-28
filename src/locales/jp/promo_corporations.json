@@ -54,6 +54,6 @@
   "E": "ス",
   "TACTICAL GENOMICS": "戦術ゲノム科学",
   "Splice": "スプライス戦術ゲノム科学",
-  "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "初期資源：44MC. 1アクション目：微生物カードを1枚入手.",
-  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "効果：微生物タグがプレイされる毎に、微生物カードをプレイしたプレイヤーは2MC または 1微生物獲得. さらにあなたは2MC獲得."
+  "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "初期資源：44MC. 1アクション目：微生物タグカードを1枚入手.",
+  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "効果：微生物タグがプレイされる毎に、それをプレイしたプレイヤーは2MC獲得 または そのカード上に1微生物追加. さらにあなたは2MC獲得."
 }

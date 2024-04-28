@@ -3,7 +3,7 @@
     "Spire": "スパイア",
     "You start with 44 M€. As your first action, draw 4 cards, then discard 3 cards from your hand.": "初期資源：44MC. 1アクション目：4ドロー. その後、手札から3枚捨てる",
     "Effect: When you play a card with at least 2 tags. including this, add a science resource here.": "効果：2種類以上のタグがついたカードをプレイ時、このカード上に1科学リソース追加.",
-    "Effect: When you use a standard project, science resources here may be spent as 2 M€ each.": "効果：標準プロジェクト実行時、このカード上の1リソースを2MCとして支払ってもよい",
+    "Effect: When you use a standard project, science resources here may be spent as 2 M€ each.": "効果：標準プロジェクト実行時、このカード上の科学リソースを2MCとして支払ってもよい.",
     
     "SAGITTA FRONTIER SERVICES": "サギタ・フロンティアサービス",
     "Sagitta Frontier Services": "サギタ・フロンティアサービス",

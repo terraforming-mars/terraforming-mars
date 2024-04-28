@@ -18,7 +18,7 @@
     "HELION": "ヘリオン",
     "Helion": "ヘリオン",
     "You start with 3 heat production and 42 M€.": "初期資源：42MC. 初期産出：温熱産出+3.",
-    "Effect: You may use heat as M€. You may not use M€ as heat.": "効果：温熱をMCとして扱ってもよい.(MCを温熱として扱えない)",
+    "Effect: You may use heat as M€. You may not use M€ as heat.": "効果：温熱を1MCとして支払ってもよい.",
 
     "INTERPLANETARY": "惑星間",
     "CINEMATICS": "シネマティック",
@@ -41,7 +41,7 @@
     "REPUBLIC": "共和国",
     "Tharsis Republic": "タルシス共和国",
     "You start with 40 M€. As your first action in the game, place a city tile.": "初期資源：42MC. 1アクション目：都市タイル配置.",
-    "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "効果：火星上への都市タイル1枚配置毎にMC産出+1. 自身で都市タイル1枚配置毎(火星外含む)に3MC.",
+    "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "効果：火星上への都市タイル1枚配置される毎に、MC産出+1. 火星外含む都市タイル1枚配置する毎に、3MC獲得.",
 
     "THORGATE": "トールゲート",
     "Thorgate": "トールゲート",

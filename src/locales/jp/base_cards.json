@@ -69,7 +69,7 @@
 
     "Research Outpost": "前哨研究基地",
     "Effect: When you play a card, you pay 1 M€ less for it.": "効果：カードのプレイコスト-1MC.",
-    "Place a city tile NEXT TO NO OTHER TILE.": "プレイ時：他タイルに隣接しないように都市タイルを配置.",
+    "Place a city tile NEXT TO NO OTHER TILE.": "他タイルに隣接しないように都市タイルを配置.",
 
     "Phobos Space Haven": "フォボス宇宙港",
     "Increase your titanium production 1 step and place a city tile ON THE RESERVED AREA.": "チタン産出+1. 火星外予定地「フォボス宇宙港」に都市タイルを配置.",
@@ -125,7 +125,7 @@
     "1 VP per 2 microbes on this card.": "このカード上の2微生物毎に1VP.",
 
     "Release of Inert Gases": "不活性ガスの開放",
-    "(Raise your terraforming rating 2 steps.)": "TR+2段階.",
+    "(Raise your terraforming rating 2 steps.)": "(TR+2段階.)",
 
     "Nitrogen-Rich Asteroid": "富窒素小惑星",
     "Raise your terraforming rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 plant tags.": "TR+2段階. 温度+1段階. もし、植物タグ3つ以上であれば植物産出+4. それ以外の場合は植物産出+1.",
@@ -705,7 +705,7 @@
   "Oxygen must be 4% or lower. Draw two cards.":"条件：酸素4%以下. 2ドロー.",
   "After being played, when you perform an action, the wild tag counts as any tag of your choice.":"プレイ後、？タグは任意のタグ1つとして扱う. ゲーム終了時にはカウントしない.",
   "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "電力産出-1し、MC産出+2. 火山地帯に都市タイル配置(都市隣接可). ※本環境では「ノクティス市」以外の白文字マス. ヘラス盤面のみ任意配置可能.",
-  "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.":"効果：植物タグをプレイ時、このカード上の微生物を2MCとして支払ってもよい",
+  "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.":"効果：植物タグをプレイ時、このカード上の微生物を2MCとして支払ってもよい.",
   "Temperature must be -20 C or lower.":"条件：温度-20℃以下.",
   "Increase your energy production 1 step": "電力産出+1.",
   "Increase your energy production 2 steps": "電力産出+2.",

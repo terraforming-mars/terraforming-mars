@@ -1,6 +1,6 @@
 {
   "City Park": "都市公園",
-  "Requires that you have 3 cities. Gain 2 plants.": "条件：都市を3つ以上所有している。 植物を2つ入手します。.",
+  "Requires that you have 3 cities. Gain 2 plants.": "条件：都市3つ以上所持. 2植物獲得.",
 
   "Soil Enrichment": "土壌強化",
   "Spend 1 microbe from ANY of your cards to gain 5 plants": "1微生物を支払う. 5植物獲得.",
@@ -14,7 +14,7 @@
   "FAN NOTE: This will apply to Venus but not The Moon.": "拡張注記：酸素、温度、海洋、金星の4種のみ参照。ファン拡張パラメーターは除外.",
 
   "Martian Lumber Corp": "火星木材",
-  "Effect: When playing a building tag, plants may be used as 3 M€ each.": "効果：土建タグをプレイ時、1植物を3MCとして支払ってもよい(複数OK).",
+  "Effect: When playing a building tag, plants may be used as 3 M€ each.": "効果：土建タグをプレイ時、植物を3MCとして支払ってもよい.",
   "Requires that you have 2 greenery tiles. Increase plant production 1 step.": "条件：緑地タイルを2枚以上所持. 植物産出+1.",
 
   "Solar Logistics": "太陽物流",

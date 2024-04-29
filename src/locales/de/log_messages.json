@@ -377,6 +377,7 @@
     "${0} cannot afford to use the ${1} effect": "${0} kann es sich nicht leisten, den ${1}-Effekt zu nutzen",
     "${0} declined to use the ${1} effect": "${0} entschied, den ${1}-Effekt nicht zu nutzen",
     "${0} has no fighter resource cards and gained 1 titanium.": "${0} hat keine Jäger-Ressourcen Karten und erhielt 1 Titan.",
+    "${0} has no science cards and gained 1 TR.": "${0} hat keine Wissenschafts-Ressourcen Karten und erhielt 1 TW.",
     "${0} had no collectable green or blue project cards": "${0} hatte keine sammelbaren grünen oder blauen Projektkarten",
     "${0} returned ${1} to their hand": "${0} nahm ${1} auf die Hand zurück",
     "${0} gained 1 TR since no opponent had any corruption": "${0} erhielt 1 TW, da kein Gegner eine Korruption hatte",

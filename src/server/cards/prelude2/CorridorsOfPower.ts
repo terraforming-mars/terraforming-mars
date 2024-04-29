@@ -18,7 +18,7 @@ export class CorridorsOfPower extends PreludeCard {
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.effect('Whenever one of your delegates becomes a Party Leader, draw a card', (ab) => {
-            ab.partyLeaders(1).startAction.cards(1);
+            ab.partyLeaders(1).startEffect.cards(1);
           }).br;
           b.tr(1).megacredits(4).br;
           b.plainText('Increase your TR one step. Gain 4 M€');

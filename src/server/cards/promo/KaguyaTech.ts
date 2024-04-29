@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -34,13 +34,19 @@ export class KaguyaTech extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: IPlayer): boolean {
+  private availableSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions) {
+    const greeneries = player.game.board.getGreeneries(player);
+    const filtered = greeneries.filter((space) => player.game.board.canAfford(player, space, canAffordOptions));
+    return filtered;
+  }
+
+  public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
     // TODO(kberg): Yes But, if the only greenery is Wetlands, warn the player.
-    return player.game.board.getGreeneries(player).length > 0;
+    return this.availableSpaces(player, canAffordOptions).length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {
-    const greeneries = player.game.board.getGreeneries(player);
+    const greeneries = this.availableSpaces(player);
     return new SelectSpace('Select a greenery to convert to a city.', greeneries)
       .andThen((space) => {
         player.game.removeTile(space.id);

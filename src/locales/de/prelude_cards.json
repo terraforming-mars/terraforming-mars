@@ -5,9 +5,9 @@
 
     "Cloud Tourism": "Wolkentourismus",
     "Increase your M€ production 1 step for each pair of Earth and Venus tags you own. 1 VP for every 3rd floater on this card.": "Erhöhe deine M€-Produktion um 1 für jedes Paar aus Erd- und Venus-Symbolen, das du besitzt. 1 VP für je 3 Schweber auf dieser Karte.",
-    
-    "Directed Heat Usage": "Direkte Wärmenutzung",
-    "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "AKTION: Bezahle 3 Wärme, um entweder 4 M€ oder 2 Pflanzen zu erhalten.",
+
+    "GHG Shipment": "Treibhausgasverfrachtung",
+    "Requires that Kelvinists are in power or that you have 2 delegates there. Increase your heat production 1 step. Gain 1 heat for each floater you have.": "Benötigt Regierungspartei: KELVINISTEN oder 2+ eigene Delegierte dort. Erhöhe deine Wärmeproduktion um 1. Du erhältst 1 Wärme für jeden Schweber, den du hast.",
     
     "Ishtar Expedition": "Ishtar-Expedition",
     "Requires Venus 10%. Gain 3 titanium and draw 2 Venus cards.": "Erfordert Venuswertung von 10%., erhalte 3 Titan und zieht 2 Venus-Karten.",
@@ -21,6 +21,9 @@
     "Increase M€ production 2 steps. This counts as passing. You get no other turns this generation.": "Erhöhe die M€-Produktion um 2. Dies zählt als Passen. Du bekommst keine weiteren Züge in dieser Generation.",
     "PASS": "PASSEN",
 
+    "Sponsoring Nation": "Fördernde Nation",
+    "Requires 4 Earth tags. Gain 3 TR. Place 2 delegates.": "Benötigt 4 Erdsymbole. Erhalte 3 TW. Platziere 2 Delegierte.",
+    
     "Summit Logistics": "Gipfel-Logistik",
     "Requires that Scientists are ruling or that you have 2 delegates there. Gain 1 M€ per planet tag and colony you have. Draw 2 cards.": "Benötigt, dass FORSCHUNG regieren oder dass du 2 Delegierte dort hast. Erhalte 1 M€ pro Planetensymbol und Kolonie, die du besitzt. Ziehe 2 Karten.",
     "FAN EXPANSION NOTE: This includes Mars but not The Moon.": "ANMERKUNG ZUR FANERWEITERUNG: Dies beinhaltet den Mars, aber nicht den Mond.",

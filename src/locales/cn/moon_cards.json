@@ -168,7 +168,7 @@
   "Spend 2 titanium. Place a mine tile on The Moon and raise the mining rate 1 step. Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.": "花费2钛。在月球上放置一个挖矿板块，并提高采矿速率1级。将钢、钛和热的产量分别增加1级。电产增加2级。",
 
   "Lunar Mine Urbanization" :"月球矿脉城市化",
-  "Requires you have 1 mine tile. Increase your M€ production 1 step. Replace one of your mine tiles with this special tile. Raise the habitat rate 1 step. This tile counts both as a habitat and a mine tile.": "要求你有1个矿板块。增加你的M€生产1级。用这种特殊的改造板块替换你的一个采矿板块。提高殖民效率1级。这个特殊板块既可以算作殖民地板块也可以算作采矿板块。",
+  "Requires you have 1 mine tile. Increase your M€ production 1 step. Remove 1 of your mine tiles (does not affect the mining rate.) Place a this special tile there, regardless of placement rules. Gain placement bonuses as usual.  Raise the habitat rate 1 step. This tile counts both as a habitat and a mine tile.": "要求你有1个矿板块。增加你的M€生产1级。用这种特殊的改造板块替换你的一个采矿板块。提高殖民效率1级。这个特殊板块既可以算作殖民地板块也可以算作采矿板块。",
 
   "Lunar Observation Post" :"月球观测站",
   "Action: Add 1 data resource to ANY card": "行动：向任意卡牌添加1个数据资源",

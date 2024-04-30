@@ -1,9 +1,9 @@
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TheGrandLunaCapitalGroup} from '../../../src/server/cards/moon/TheGrandLunaCapitalGroup';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {MoonData} from '../../../src/server/moon/MoonData';
+import {testGame} from '../../TestGame';
 
 describe('TheGrandLunaCapitalGroup', () => {
   let player: TestPlayer;
@@ -12,11 +12,9 @@ describe('TheGrandLunaCapitalGroup', () => {
   let moonData: MoonData;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    otherPlayer = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, otherPlayer], player, {moonExpansion: true});
+    [/* game */, player, otherPlayer] = testGame(2, {moonExpansion: true});
     card = new TheGrandLunaCapitalGroup();
-    moonData = MoonExpansion.moonData(game);
+    moonData = MoonExpansion.moonData(player.game);
   });
 
   it('effect', () => {

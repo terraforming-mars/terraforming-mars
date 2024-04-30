@@ -135,7 +135,7 @@
       </div>
 
       <div v-if="thisPlayer.selfReplicatingRobotsCards.length > 0" class="player_home_block">
-        <dynamic-title title="Self-Replicating Robots cards" :color="thisPlayer.color"/>
+        <dynamic-title title="Self-replicating Robots cards" :color="thisPlayer.color"/>
         <div>
           <div v-for="card in thisPlayer.selfReplicatingRobotsCards" :key="card.name" class="cardbox">
             <Card :card="card"/>

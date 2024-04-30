@@ -1,189 +1,189 @@
 {
-    
+
     "16 Psyche": "16 Psyche",
     "Increase titanium production 2 steps. Gain 3 titanium.": "Növeld a titánium termelésed 2 lépéssel. Szerezz 3 titániumot.",
     "(Increase titanium production 2 steps. Gain 3 titanium.)": "(Növeld a titánium termelésed 2 lépéssel. Szerezz 3 titániumot.)",
-    
+
     "Harvest": "Aratás",
     "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "Kijátszási feltétel: 3 növényzet lapka legyen játszva. Szerezz 12 M€-t.",
     "(Requires that you have 3 greenery tiles in play. Gain 12 M€.)": "(Kijátszási feltétel: 3 növényzet lapka legyen játszva. Szerezz 12 M€-t.)",
-  
+
     "Outdoor Sports": "Szabadtéri sportok",
-    "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": 
+    "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.":
       "Kijátszási feltétel: bármelyik város szomszédos legyen egy óceánnal. Növeld a M€ termelésed 2 lépéssel.",
-    "(Requires any city adjacent to an ocean. Increase your M€ production 2 steps.)": 
+    "(Requires any city adjacent to an ocean. Increase your M€ production 2 steps.)":
       "(Kijátszási feltétel: bármelyik város szomszédos legyen egy óceánnal. Növeld a M€ termelésed 2 lépéssel.)",
-  
+
     "Robot Pollinators": "Robot beporzók",
-    "Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.": 
+    "Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.":
       "Kijátszási feltétel: 4% oxigén. Növeld a palánta termelésed 1 lépéssel. Szerezz 1 palántát minden palánta ikonodért.",
-    "(Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.)": 
+    "(Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.)":
       "(Kijátszási feltétel: 4% oxigén. Növeld a palánta termelésed 1 lépéssel. Szerezz 1 palántát minden palánta ikonodért.)",
-  
+
     "Supercapacitors": "Szuperkondenzátorok",
     "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.":
       "HATÁS: AZ ENERGIA ÁTALAKÍTÁSA HŐVÉ A TERMELÉS SORÁN NEM KÖTELEZŐ MINDEN ENERGIA ERŐFORRÁS ESETÉN.",
     "increase M€ production 1 step": "növeld a M€ termelésed 1 lépéssel",
     "Increase M€ production 1 step.": "Növeld a M€ termelésed 1 lépéssel.",
-  
+
     "Comet Aiming": "Célzott üstökös",
     "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "Akció: költs el 1 titániumot, hogy 1 aszteroida erőforrást adj hozzá BÁRMELYIK KÁRTYÁDHOZ.",
     "Action: Remove 1 asteroid here to place an ocean.": "Akció: távolíts el 1 aszteroida erőforrást innen, hogy lehelyezz egy óceánt.",
-  
+
     "Cutting Edge Technology": "Csúcstechnológia",
-    "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": 
+    "Effect: When playing a card with a requirement, you pay 2 M€ less for it.":
       "Hatás: Ha egy kártyát játszol ki, aminek van kijátszási követelménye, akkor 2 M€-el kevesebbet kell fizetned érte.",
-  
+
     "Crash Site Cleanup": "Meteorit kitermelés",
-    "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": 
+    "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.":
       "Kijátszási feltétel: egy játékos eltávolította EGY MÁSIK JÁTÉKOS palántáit ebben a körben. Kapsz 1 titániumot vagy 2 acélt.",
-  
+
     "Directed Impactors": "Irányított ütközések",
-    "(Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).)": 
+    "(Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).)":
       "(Akció: költs el 6 M€-t, hogy 1 aszteroida erőforrást adj hozzá BÁRMELYIK KÁRTYÁDHOZ (titániumot is használhatsz a fizetéshez).)",
     "(Action: Remove 1 asteroid here to raise temperature 1 step.)": "(Akció: távolíts el 1 aszteroida erőforrást innen, hogy 1 fokkal növeld a hőmérsékletet.)",
-  
+
     "Field-Capped City": "Mezővel fedett város",
-    "(Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.)": 
+    "(Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.)":
       "(Növeld a M€ termelésed 2 lépéssel, növeld az energia termelésed 1 lépéssel, szerezz 3 palántát és helyezz el egy várost.)",
-  
+
     "Magnetic Shield": "Mágneses pajzs",
     "(Requires 3 power tags. Raise your TR 4 steps.)": "(Kijátszási feltétel: 3 energia ikon. Növeld az TR-ed 4 lépéssel.)",
     "Requires 3 power tags. Raise your TR 4 steps.": "Kijátszási feltétel: 3 energia ikon. Növeld az TR-ed 4 lépéssel.",
-  
+
     "Meltworks": "Olvasztókemence",
     "Action: Spend 5 heat to gain 3 steel.": "Akció: költs el 5 hőt, hogy 3 acélt szerezz.",
-  
+
     "Mohole Lake": "Moho-tó",
     "Action: Add a microbe or animal to ANOTHER card.": "Akció: adj hozzá egy mikróbát vagy állatot EGY MÁSIK KÁRTYÁHOZ.",
-    "(Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.)": 
+    "(Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.)":
       "(Szerezz 3 palántát. Növeld a hőmérsékletet 1 lépéssel és helyezz el 1 óceán lapkát.)",
-  
+
     "Diversity Support": "Diverzitás támogatás",
     "9 Resource types": "9 Erőforrás típus",
-    "(Requires that you have 9 different types of resources. Gain 1 TR.)": 
+    "(Requires that you have 9 different types of resources. Gain 1 TR.)":
       "(Kijátszási feltétel: 9 különböző típusú erőforrásod legyen. Szerezz 1 TR-t.)",
-  
+
     "Topsoil Contract": "Felsőföld szerződés",
     "(Effect: When you gain a microbe to ANY CARD, also gain 1 M€.)": "(Hatás: Ha mikróbát szerezel BÁRMELYIK KÁRTYÁDHOZ, szerezz 1 M€-t is.)",
     "Gain 3 plants.": "Szerezz 3 palántát.",
-  
+
     "Imported Nutrients": "Importált tápanyagok",
     "(Gain 4 plants and add 4 microbes to ANOTHER CARD.)": "(Szerezz 4 palántát és adj hozzá 4 mikróbát EGY MÁSIK KÁRTYÁHOZ.)",
-  
+
     "Asteroid Deflection System": "Aszteroida elterelő rendszer",
-    "(Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.)": 
+    "(Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.)":
       "(Akció: FEDD FEL ÉS DOBD EL a pakli tetején lévő kártyát. Ha van rajta űr ikon, adj hozzá egy aszteroida erőforrást ide.)",
     "opponents may not remove your plants": "az ellenfelek nem távolíthatják el a palántáidat",
-    "(Decrease your energy production 1 step. 1VP per asteroid on this card.)": 
+    "(Decrease your energy production 1 step. 1VP per asteroid on this card.)":
       "(Csökkentsd az energia termelésed 1 lépéssel. 1 GyP minden aszteroida erőforrásért ezen a kártyán.)",
-  
+
     "Jovian Embassy": "Jupiteri nagykövetség",
     "(Raise your TR 1 step.)": "(Növeld az TR-ed 1 lépéssel.)",
-  
+
     "Sub-Crust Measurements": "Felsőkéreg mérések",
     "Action: Draw a card.": "Akció: húzz egy kártyát.",
     "Requires 2 science tags.": "Kijátszási feltétel: 2 tudomány ikon.",
-  
+
     "Potatoes": "Krumpli",
     "Lose 2 plants. Increase your M€ production 2 steps.": "veszíts el 2 palántát. Növeld a M€ termelésed 2 lépéssel.",
-  
+
     "Meat Industry": "Húsfeldolgozás",
     "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "Hatás: Ha állatot szerezel BÁRMELYIK KÁRTYÁDHOZ, szerezz 2 M€-t.",
-  
-    "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps and place this tile.": 
+
+    "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps and place this tile.":
       "Csökkentsd az energia termelésed 4 lépéssel és növeld a palánta termelésed 2 lépéssel. Növeld az TR-ed 3 lépéssel és helyezd el ezt a lapkát.",
-  
+
     "Orbital Cleanup": "Orbitális takarítás",
     "Action: Gain 1 M€ per science tag you have.": "Akció: szerezz 1 M€-t minden tudomány ikonodért.",
     "Decrease your M€ production 2 steps.": "Csökkentsd a M€ termelésed 2 lépéssel.",
-  
+
     "Law Suit": "Per",
-    "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": 
+    "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.":
       "Lopj el 3 M€-t egy játékostól, aki ELTÁVOLÍTOTTA AZ ERŐFORRÁSAIDAT VAGY CSÖKKENTETTE A TERMELÉSED ebben a körben. Helyezd le ezt a kártyát LEFORDÍTVA AZ Ő ESEMÉNYPAKLIJÁBA.",
-  
+
     "Small Asteroid": "Kis aszteroida",
-    "Increase temperature 1 step. Remove up to 2 plants from any player.": 
+    "Increase temperature 1 step. Remove up to 2 plants from any player.":
       "Növeld a hőmérsékletet 1 lépéssel. Távolíts el legfeljebb 2 palántát bármelyik játékostól.",
-  
+
     "Asteroid Hollowing": "Aszteroida kitermelés",
-    "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": 
+    "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.":
       "Akció: költs el 1 titániumot, hogy 1 aszteroida erőforrást adj helyezz ide és növeld a M€ termelésed 1 lépéssel.",
     "1VP for each 2 asteroids on this card.": "1 GyP minden 2 aszteroida erőforrásért ezen a kártyán.",
-  
+
     "Advertising": "Hirdetés",
-    "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": 
+    "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.":
       "Hatás: Ha egy kártyát játszol ki, aminek az alap költsége 20 M€ vagy több, növeld a M€ termelésed 1 lépéssel.",
-  
+
     "Project Inspection": "Projekt ellenőrzés",
     "Use a card action that has been used this generation.": "Használj egy kártya akciót, ami már használatban volt ebben a körben.",
-  
+
     "Rego Plastics": "Rego műanyagok",
     "Effect: Your steel resources are worth 1 M€ extra.": "Hatás: A te acél erőforrásaid 1 M€-el többet érnek.",
-  
+
     "Interplanetary Trade": "Bolygóközi kereskedelem",
-    "Increase your M€ production 1 step per different tag you have in play, including this.": 
+    "Increase your M€ production 1 step per different tag you have in play, including this.":
       "Növeld a M€ termelésed 1 lépéssel minden különböző ikonért, amit játszottál ki, beleértve ezt is.",
-  
+
     "Penguins": "Pingvinek",
     "Action: Add 1 animal to this card.": "Akció: adj hozzá 1 állatot ehhez a kártyához.",
     "Requires 8 oceans.": "Kijátszási feltétel: 8 óceán.",
-  
+
     "Snow Algae": "Hó alga",
-    "Requires 2 oceans. Increase your plant production and your heat production 1 step each.": 
+    "Requires 2 oceans. Increase your plant production and your heat production 1 step each.":
       "Kijátszási feltétel: 2 óceán. Növeld a palánta és a hő termelésed 1 lépéssel mindegyiket.",
-  
+
     "Self-replicating Robots": "Önreplikáló robotok",
-    "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": 
+    "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.":
       "Akció: fedd fel és helyezz el egy ŰR VAGY ÉPÜLET kártyát a kezedből ide, és helyezz rá 2 erőforrást, VAGY duplázd meg az erőforrásokat a kártyán itt.",
     "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.":
       "Hatás: A kártya itt kijátszható, mintha a kezedből játszanád ki, a költsége csökkentve a rajta lévő erőforrások számával.",
     "Double resource": "Duplázd meg az erőforrást",
     "Select card to double robots resource": "Válaszd ki a kártyát, aminek meg akarod duplázni az erőforrását",
-    "Select card to link with Self-Replicating Robots": "Válaszd ki a kártyát, amit össze akarsz kötni az Önreplikáló robotokkal",
+    "Select card to link with Self-replicating Robots": "Válaszd ki a kártyát, amit össze akarsz kötni az Önreplikáló robotokkal",
     "Link card": "Kártya összekapcsolása",
-  
+
     "Dusk Laser Mining": "Alkonyati lézer bányászat",
-    "Requires 2 science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": 
+    "Requires 2 science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.":
       "Kijátszási feltétel: 2 tudomány ikon. Csökkentsd az energia termelésed 1 lépéssel és növeld a titánium termelésed 1 lépéssel. Szerezz 4 titániumot.",
-  
+
     "Hi-Tech Lab": "Csúcstechnológiás labor",
-    "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": 
+    "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.":
       "Akció: költs el bármennyi energiát, hogy húzz annyi kártyát. VÁLASSZ KI 1-ET A KEZEDBE ÉS DOBD EL A TÖBBIKET.",
-  
+
     "Mercurian Alloys": "Merkúriuszi ötvözetek",
     "Effect: Your titanium resources are worth 1 M€ extra.": "Hatás: A te titánium erőforrásaid 1 M€-el többet érnek.",
-  
+
     "Energy Market": "Energia piac",
     "Action: Spend 2X M€ to gain X energy.": "Akció: költs el 2X M€-t, hogy X energiát szerezz.",
     "Action: Decrease energy production 1 step to gain 8 M€.": "Akció: csökkentsd az energia termelésed 1 lépéssel, hogy 8 M€-t szerezz.",
-  
+
     "Asteroid Rights": "Aszteroida jogok",
     "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "Akció: költs el 1 M€-t, hogy 1 aszteroida erőforrást adj hozzá BÁRMELYIK KÁRTYÁDHOZ.",
-    "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": 
+    "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.":
       "Akció: költs el 1 aszteroida erőforrást innen, hogy növeld a M€ termelésed 1 lépéssel VAGY szerezz 2 titániumot.",
     "Add 2 asteroids to this card.": "Tegyél 2 aszteroida erőforrást erre a kártyára.",
-  
+
     "Stanford Torus": "Stanford Torus",
     "Place a city tile IN SPACE, outside and separate from the planet.": "Helyezz el egy város lapkát a ŰRBE, a bolygótól kívül és különállóan.",
-    
-    "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.": 
+
+    "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.":
       "Növeld a hőmérsékletet 3 lépéssel és szerezz 4 acélt. Helyezd el ezt a lapkát NEM SZOMSZÉDOSAN másik város lapkával. Távolíts el legfeljebb 6 palántát bármelyik játékostól.",
-  
-    "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": 
+
+    "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.":
       "Kijátszási feltétel: 4 óceán lapka. Növeld az energia termelésed 2 lépéssel. Helyezd el ezt a lapkát SZOMSZÉDOSAN egy óceán lapkához.",
-  
-    "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.": 
+
+    "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.":
       "Csökkentsd az energia termelésed 4 lépéssel és növeld a palánta termelésed 2 lépéssel. Növeld az TR-ed 3 lépéssel.",
-  
+
     "Requires 8 oceans. 1 VP for each animal on this card.": "Kijátszási feltétel: 8 óceán. 1 GyP minden állatért ezen a kártyán.",
     "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.":
       "Akció: költs el 2X M€-t, hogy X energiát szerezz, vagy csökkentsd az energia termelésed 1 lépéssel, hogy 8 M€-t szerezz.",
-  
+
     "Bactoviral Research": "Baktovírus kutatás",
-    "Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.": 
+    "Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.":
       "Húzz 1 kártyát. Válassz ki 1 játszott kártyát és adj hozzá 1 mikróbát minden tudomány ikonodért, beleértve ezt is.",
     "Select card to add ": "Válaszd ki a kártyát, amihez hozzá akarsz adni ",
     " microbe(s)": " mikróbát",
     "Add microbe(s)": "Mikróbák hozzáadása"
-}  
+}

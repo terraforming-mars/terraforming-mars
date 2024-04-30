@@ -294,7 +294,7 @@
     "${0} played cards": "${0}のプレイ済みカード",
     "Played Cards": "プレイ済みカード",
     "played cards": "プレイ済みカード",
-    "Self-Replicating Robots cards": "",
+    "Self-replicating Robots cards": "",
 
     "Select which cards to take into hand": "入手するカードを選択",
     "Not enough cards selected": "カードを選択してください",
@@ -411,7 +411,7 @@
     "Select amount of heat production to decrease": "温熱産出を下げる数値を選択",
     "Select card to discard": "捨て札枚数を選択",
     "Select card to take into hand": "購入数を選択",
-    "Select card to link with Self-Replicating Robots": "自己修復型ロボットに載せるカードを選択",
+    "Select card to link with Self-replicating Robots": "自己修復型ロボットに載せるカードを選択",
     "Link card": "載せる",
     "Select card to double robots resource": "自己修復型ロボットのリソースを2倍にするカードを選択",
     "Double resource": "リソース2倍",

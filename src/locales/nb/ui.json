@@ -274,7 +274,7 @@
 	"played cards": "spilte kort",
 	"SHOW TILES": "VIS BRIKKER",
 	" ${0} played cards ": "${0} spilte kort",
-	"Self-Replicating Robots cards": "Selvreplikerende roboter-kort",
+	"Self-replicating Robots cards": "Selvreplikerende roboter-kort",
 
 	"Select which cards to take into hand": "Velg hvilke kort å ta inn på hånd",
 	"Not enough cards selected": "Ikke nok kort valgt",
@@ -390,7 +390,7 @@
 	"Select amount of heat production to decrease": "Velg hvor mye varmeproduksjon du vil redusere",
 	"Select card to discard": "Velg kort å kaste",
 	"Select card to take into hand": "Velg kort å ta inn på hånd",
-	"Select card to link with Self-Replicating Robots": "Velg kort å linke med Selvreplikerende roboter",
+	"Select card to link with Self-replicating Robots": "Velg kort å linke med Selvreplikerende roboter",
 	"Link card": "Link kort",
 	"Select card to double robots resource": "Velg kort å doble robotressursen på",
 	"Double resource": "Doble ressurs",

@@ -61,7 +61,7 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
 
     if (selectableCards.length > 0) {
       orOptions.options.push(new SelectCard(
-        'Select card to link with Self-Replicating Robots',
+        'Select card to link with Self-replicating Robots',
         'Link card', selectableCards,
         {played: CardName.SELF_REPLICATING_ROBOTS}).andThen(
         ([card]) => {

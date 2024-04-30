@@ -63,6 +63,11 @@ export function cardsToModel(
     if (reserveUnits !== undefined) {
       model.reserveUnits = reserveUnits;
     }
+    const isSelfReplicatingRobotsCard = isIProjectCard(card) && player.getSelfReplicatingRobotsTargetCards().includes(card);
+    if (isSelfReplicatingRobotsCard) {
+      model.resources = card.resourceCount;
+      model.isSelfReplicatingRobotsCard = true;
+    }
     if (card.warnings.size > 0) {
       model.warnings = Array.from(card.warnings);
     }

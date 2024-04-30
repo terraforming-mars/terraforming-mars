@@ -9,6 +9,8 @@ import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {VictoryPointsBreakdown} from '../../../src/server/game/VictoryPointsBreakdown';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
+import {TheGrandLunaCapitalGroup} from '../../../src/server/cards/moon/TheGrandLunaCapitalGroup';
 
 describe('LunarMineUrbanization', () => {
   let game: IGame;
@@ -42,10 +44,12 @@ describe('LunarMineUrbanization', () => {
     const space = moonData.moon.getAvailableSpacesOnLand(player)[0];
     space.tile = {tileType: TileType.MOON_MINE};
     space.player = player;
+    space.bonus = [SpaceBonus.HEAT];
 
     player.production.override({megacredits: 0});
     moonData.habitatRate = 0;
     expect(player.getTerraformRating()).eq(14);
+    expect(player.heat).eq(0);
     player.titanium = 1;
 
     const action = cast(card.play(player), SelectSpace);
@@ -61,6 +65,7 @@ describe('LunarMineUrbanization', () => {
     expect(MoonExpansion.spaces(player.game, TileType.MOON_HABITAT)).eql([space]);
     expect(moonData.habitatRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
+    expect(player.heat).eq(1); // Ensures placement bonus.
   });
 
   it('can play, compatible with Odyssey', () => {
@@ -125,11 +130,41 @@ describe('LunarMineUrbanization', () => {
     }
 
     expect(computeVps()).eql({habitats: 0, mines: 0, roads: 0});
+
     MoonExpansion.addTile(player, 'm02', {tileType: TileType.MOON_ROAD});
     MoonExpansion.calculateVictoryPoints(player, vps);
+
     expect(computeVps()).eql({habitats: 0, mines: 0, roads: 1});
+
     MoonExpansion.addTile(player, 'm03', {tileType: TileType.LUNAR_MINE_URBANIZATION});
 
     expect(computeVps()).eql({habitats: 1, mines: 1, roads: 1});
+  });
+
+  it('Is compatible with the Grand Lunar Capital Group, #6648, place LMU', () => {
+    player.setCorporationForTest(new TheGrandLunaCapitalGroup());
+    MoonExpansion.addTile(player, 'm02', {tileType: TileType.MOON_HABITAT});
+    MoonExpansion.addTile(player, 'm03', {tileType: TileType.MOON_MINE});
+    card.play(player);
+    const selectSpace = cast(card.play(player), SelectSpace);
+    const space = selectSpace.spaces[0];
+
+    expect(space.id).eq('m03');
+    expect(player.megaCredits).eq(0);
+
+    selectSpace.cb(space);
+
+    expect(player.megaCredits).eq(2);
+  });
+
+  it('Is compatible with the Grand Lunar Capital Group, #6648, place next to LMU', () => {
+    player.setCorporationForTest(new TheGrandLunaCapitalGroup());
+    MoonExpansion.addTile(player, 'm02', {tileType: TileType.LUNAR_MINE_URBANIZATION});
+
+    expect(player.megaCredits).eq(0);
+
+    MoonExpansion.addTile(player, 'm03', {tileType: TileType.MOON_HABITAT});
+
+    expect(player.megaCredits).eq(2);
   });
 });

@@ -7,6 +7,7 @@ import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
 import {Message} from '../../common/logs/Message';
 import {IProjectCard} from '../cards/IProjectCard';
+import {message} from '../logs/MessageBuilder';
 
 export type Options = {
   count?: number;
@@ -87,10 +88,12 @@ export class AddResourcesToCard extends DeferredAction {
       return undefined;
     }
 
-    return new SelectCard(
-      'Select card to add resource',
-      'Add resource',
-      cards)
+    const count = this.options.count ?? 1;
+    const title = this.options.title ??
+      message('Select card to add ${0} ${1}', (b) => b.number(count).string(this.resourceType || 'resources'));
+    const buttonLabel = count === 1 ? 'Add resource' : 'Add resources';
+
+    return new SelectCard(title, buttonLabel, cards)
       .andThen(([card]) => {
         this.addResource(card, qty);
         return undefined;

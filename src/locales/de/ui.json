@@ -294,7 +294,7 @@
     "${0} played cards": "Gespielte Karten von ${0}",
     "Played Cards": "Gespielte Karten",
     "played cards": "gespielte Karten",
-    "Self-Replicating Robots cards": "Selbstreplizierende Roboter Karten",
+    "Self-replicating Robots cards": "Selbstreplizierende Roboter Karten",
 
     "Select which cards to take into hand": "Wähle, welche Karten du auf die Hand nehmen möchtest",
     "Not enough cards selected": "Nicht genügend Karten ausgewählt",
@@ -414,7 +414,7 @@
     "Select card to discard": "Wähle eine abzuwerfende Karte",
     "Select active card to discard": "Wähle eine aktive Karte zum Abwerfen",
     "Select card to take into hand": "Wähle eine aufzunehmende Karte",
-    "Select card to link with Self-Replicating Robots": "Wähle eine zuverlinkende Karte zu Selbstreplizierende Roboter",
+    "Select card to link with Self-replicating Robots": "Wähle eine zuverlinkende Karte zu Selbstreplizierende Roboter",
     "Link card": "Verlinke Karte",
     "Select card to double robots resource": "Wähle eine Karte um die Roboter Ressourcen zu verdoppeln",
     "Double resource": "Verdopple Ressourcen",

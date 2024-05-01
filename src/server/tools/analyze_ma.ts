@@ -97,6 +97,7 @@ function simpleGameOptions(): GameOptions {
     aresHazards: false,
     corporateEra: false,
     initialDraftVariant: false,
+    preludeDraftVariant: false,
     showTimers: false,
     startingCorporations: 0,
 

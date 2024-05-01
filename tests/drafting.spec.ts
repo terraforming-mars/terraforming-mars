@@ -395,6 +395,318 @@ describe('drafting', () => {
       'preludeCards': [],
     });
   });
+
+  it('2 player - initial draft + prelude - prelude draft', () => {
+    const shuffle = Deck.shuffle;
+    let player: TestPlayer;
+    let otherPlayer: TestPlayer;
+    try {
+      Deck.shuffle = function() {};
+      [/* game */, player, otherPlayer] = testGame(2, {draftVariant: true, initialDraftVariant: true, preludeExtension: true, preludeDraftVariant: false});
+    } finally {
+      Deck.shuffle = shuffle;
+    }
+
+    // First round
+
+    expect(draftSelection(player)).deep.eq([
+      CardName.ADAPTATION_TECHNOLOGY,
+      CardName.ADAPTED_LICHEN,
+      CardName.ADVANCED_ECOSYSTEMS,
+      CardName.AEROBRAKED_AMMONIA_ASTEROID,
+      CardName.ANTS]);
+
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.AQUIFER_PUMPING,
+      CardName.ALGAE,
+      CardName.ARCHAEBACTERIA,
+      CardName.ARCTIC_ALGAE,
+      CardName.ARTIFICIAL_LAKE]);
+
+    selectCard(player, CardName.ADAPTATION_TECHNOLOGY);
+    selectCard(otherPlayer, CardName.ALGAE);
+
+    selectCard(player, CardName.ARCTIC_ALGAE);
+    selectCard(otherPlayer, CardName.ANTS);
+
+    selectCard(player, CardName.AEROBRAKED_AMMONIA_ASTEROID);
+    selectCard(otherPlayer, CardName.AQUIFER_PUMPING);
+
+    selectCard(player, CardName.ARCHAEBACTERIA);
+    selectCard(otherPlayer, CardName.ADAPTED_LICHEN);
+
+    // And now starts the second draft.
+
+    expect(draftSelection(player)).deep.eq([
+      CardName.ARTIFICIAL_PHOTOSYNTHESIS,
+      CardName.ASTEROID,
+      CardName.ASTEROID_MINING,
+      CardName.BEAM_FROM_A_THORIUM_ASTEROID,
+      CardName.BIG_ASTEROID,
+    ]);
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.BIOMASS_COMBUSTORS,
+      CardName.BIRDS,
+      CardName.BLACK_POLAR_DUST,
+      CardName.BREATHING_FILTERS,
+      CardName.BUSHES,
+    ]);
+
+    selectCard(player, CardName.ASTEROID_MINING);
+    selectCard(otherPlayer, CardName.BUSHES);
+
+    selectCard(player, CardName.BLACK_POLAR_DUST);
+    selectCard(otherPlayer, CardName.ARTIFICIAL_PHOTOSYNTHESIS);
+
+    selectCard(player, CardName.ASTEROID);
+    selectCard(otherPlayer, CardName.BREATHING_FILTERS);
+
+    selectCard(player, CardName.BIRDS);
+    selectCard(otherPlayer, CardName.BEAM_FROM_A_THORIUM_ASTEROID);
+
+    // No longer drafted cards, they're just cards to buy.
+    expect(player.draftedCards).is.empty;
+    expect(otherPlayer.draftedCards).is.empty;
+
+    expect(initialCardSelection(player)).deep.eq({
+      'projectCards': [
+        CardName.ADAPTATION_TECHNOLOGY,
+        CardName.ARCTIC_ALGAE,
+        CardName.AEROBRAKED_AMMONIA_ASTEROID,
+        CardName.ARCHAEBACTERIA,
+        CardName.ADVANCED_ECOSYSTEMS,
+        CardName.ASTEROID_MINING,
+        CardName.BLACK_POLAR_DUST,
+        CardName.ASTEROID,
+        CardName.BIRDS,
+        CardName.BIG_ASTEROID,
+      ],
+      'corporationCards': [
+        CardName.VITOR,
+        CardName.VALLEY_TRUST,
+      ],
+      'preludeCards': [
+        CardName.EXPERIMENTAL_FOREST,
+        CardName.ECOLOGY_EXPERTS,
+        CardName.ECCENTRIC_SPONSOR,
+        CardName.RESEARCH_NETWORK,
+      ],
+    });
+
+    expect(initialCardSelection(otherPlayer)).deep.eq({
+      'projectCards': [
+        CardName.ALGAE,
+        CardName.ANTS,
+        CardName.AQUIFER_PUMPING,
+        CardName.ADAPTED_LICHEN,
+        CardName.ARTIFICIAL_LAKE,
+        CardName.BUSHES,
+        CardName.ARTIFICIAL_PHOTOSYNTHESIS,
+        CardName.BREATHING_FILTERS,
+        CardName.BEAM_FROM_A_THORIUM_ASTEROID,
+        CardName.BIOMASS_COMBUSTORS,
+      ],
+      'corporationCards': [
+        CardName.ROBINSON_INDUSTRIES,
+        CardName.POINT_LUNA,
+      ],
+      'preludeCards': [
+        CardName.ACQUIRED_SPACE_AGENCY,
+        CardName.ORBITAL_CONSTRUCTION_YARD,
+        CardName.METAL_RICH_ASTEROID,
+        CardName.MOHOLE,
+      ],
+    });
+  });
+
+
+  it('2 player - initial draft + prelude draft', () => {
+    const shuffle = Deck.shuffle;
+    let player: TestPlayer;
+    let otherPlayer: TestPlayer;
+    try {
+      Deck.shuffle = function() {};
+      [/* game */, player, otherPlayer] = testGame(2, {draftVariant: true, initialDraftVariant: true, preludeExtension: true, preludeDraftVariant: true});
+    } finally {
+      Deck.shuffle = shuffle;
+    }
+
+    // First round
+
+    expect(draftSelection(player)).deep.eq([
+      CardName.ADAPTATION_TECHNOLOGY,
+      CardName.ADAPTED_LICHEN,
+      CardName.ADVANCED_ECOSYSTEMS,
+      CardName.AEROBRAKED_AMMONIA_ASTEROID,
+      CardName.ANTS]);
+
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.AQUIFER_PUMPING,
+      CardName.ALGAE,
+      CardName.ARCHAEBACTERIA,
+      CardName.ARCTIC_ALGAE,
+      CardName.ARTIFICIAL_LAKE]);
+
+    selectCard(player, CardName.ADAPTATION_TECHNOLOGY);
+    selectCard(otherPlayer, CardName.ALGAE);
+
+    selectCard(player, CardName.ARCTIC_ALGAE);
+    selectCard(otherPlayer, CardName.ANTS);
+
+    selectCard(player, CardName.AEROBRAKED_AMMONIA_ASTEROID);
+    selectCard(otherPlayer, CardName.AQUIFER_PUMPING);
+
+    selectCard(player, CardName.ARCHAEBACTERIA);
+    selectCard(otherPlayer, CardName.ADAPTED_LICHEN);
+
+    // And now starts the second draft.
+
+    expect(draftSelection(player)).deep.eq([
+      CardName.ARTIFICIAL_PHOTOSYNTHESIS,
+      CardName.ASTEROID,
+      CardName.ASTEROID_MINING,
+      CardName.BEAM_FROM_A_THORIUM_ASTEROID,
+      CardName.BIG_ASTEROID,
+    ]);
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.BIOMASS_COMBUSTORS,
+      CardName.BIRDS,
+      CardName.BLACK_POLAR_DUST,
+      CardName.BREATHING_FILTERS,
+      CardName.BUSHES,
+    ]);
+
+    selectCard(player, CardName.ASTEROID_MINING);
+    selectCard(otherPlayer, CardName.BUSHES);
+
+    selectCard(player, CardName.BLACK_POLAR_DUST);
+    selectCard(otherPlayer, CardName.ARTIFICIAL_PHOTOSYNTHESIS);
+
+    selectCard(player, CardName.ASTEROID);
+    selectCard(otherPlayer, CardName.BREATHING_FILTERS);
+
+    selectCard(player, CardName.BIRDS);
+    selectCard(otherPlayer, CardName.BEAM_FROM_A_THORIUM_ASTEROID);
+
+    // Start of the prelude draft
+
+    expect(cardNames(player.draftedCards)).deep.eq([]);
+    expect(cardNames(otherPlayer.draftedCards)).deep.eq([]);
+
+    expect(draftSelection(player)).deep.eq([
+      CardName.EXPERIMENTAL_FOREST,
+      CardName.ECOLOGY_EXPERTS,
+      CardName.ECCENTRIC_SPONSOR,
+      CardName.RESEARCH_NETWORK]);
+
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.ACQUIRED_SPACE_AGENCY,
+      CardName.ORBITAL_CONSTRUCTION_YARD,
+      CardName.METAL_RICH_ASTEROID,
+      CardName.MOHOLE]);
+
+    selectCard(player, CardName.EXPERIMENTAL_FOREST);
+    selectCard(otherPlayer, CardName.ACQUIRED_SPACE_AGENCY);
+
+    expect(cardNames(player.draftedCards)).deep.eq([
+      CardName.EXPERIMENTAL_FOREST,
+    ]);
+    expect(cardNames(otherPlayer.draftedCards)).deep.eq([
+      CardName.ACQUIRED_SPACE_AGENCY,
+    ]);
+
+    // Second prelude card
+
+    expect(draftSelection(player)).deep.eq([
+      CardName.ORBITAL_CONSTRUCTION_YARD,
+      CardName.METAL_RICH_ASTEROID,
+      CardName.MOHOLE]);
+
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.ECOLOGY_EXPERTS,
+      CardName.ECCENTRIC_SPONSOR,
+      CardName.RESEARCH_NETWORK]);
+
+    selectCard(player, CardName.ORBITAL_CONSTRUCTION_YARD);
+    selectCard(otherPlayer, CardName.ECOLOGY_EXPERTS);
+
+    expect(cardNames(player.draftedCards)).deep.eq([
+      CardName.EXPERIMENTAL_FOREST,
+      CardName.ORBITAL_CONSTRUCTION_YARD,
+    ]);
+    expect(cardNames(otherPlayer.draftedCards)).deep.eq([
+      CardName.ACQUIRED_SPACE_AGENCY,
+      CardName.ECOLOGY_EXPERTS,
+    ]);
+
+    // Third prelude card
+
+    expect(draftSelection(player)).deep.eq([
+      CardName.ECCENTRIC_SPONSOR,
+      CardName.RESEARCH_NETWORK]);
+
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.METAL_RICH_ASTEROID,
+      CardName.MOHOLE]);
+
+    selectCard(player, CardName.RESEARCH_NETWORK);
+    selectCard(otherPlayer, CardName.MOHOLE);
+
+    expect(cardNames(player.draftedCards)).deep.eq([]);
+    expect(cardNames(otherPlayer.draftedCards)).deep.eq([]);
+
+    // End of draft
+
+    expect(initialCardSelection(player)).deep.eq({
+      'projectCards': [
+        CardName.ADAPTATION_TECHNOLOGY,
+        CardName.ARCTIC_ALGAE,
+        CardName.AEROBRAKED_AMMONIA_ASTEROID,
+        CardName.ARCHAEBACTERIA,
+        CardName.ADVANCED_ECOSYSTEMS,
+        CardName.ASTEROID_MINING,
+        CardName.BLACK_POLAR_DUST,
+        CardName.ASTEROID,
+        CardName.BIRDS,
+        CardName.BIG_ASTEROID,
+      ],
+      'corporationCards': [
+        CardName.VITOR,
+        CardName.VALLEY_TRUST,
+      ],
+      'preludeCards': [
+        CardName.EXPERIMENTAL_FOREST,
+        CardName.ORBITAL_CONSTRUCTION_YARD,
+        CardName.RESEARCH_NETWORK,
+        CardName.METAL_RICH_ASTEROID,
+      ],
+    });
+
+    expect(initialCardSelection(otherPlayer)).deep.eq({
+      'projectCards': [
+        CardName.ALGAE,
+        CardName.ANTS,
+        CardName.AQUIFER_PUMPING,
+        CardName.ADAPTED_LICHEN,
+        CardName.ARTIFICIAL_LAKE,
+        CardName.BUSHES,
+        CardName.ARTIFICIAL_PHOTOSYNTHESIS,
+        CardName.BREATHING_FILTERS,
+        CardName.BEAM_FROM_A_THORIUM_ASTEROID,
+        CardName.BIOMASS_COMBUSTORS,
+      ],
+      'corporationCards': [
+        CardName.ROBINSON_INDUSTRIES,
+        CardName.POINT_LUNA,
+      ],
+      'preludeCards': [
+        CardName.ACQUIRED_SPACE_AGENCY,
+        CardName.ECOLOGY_EXPERTS,
+        CardName.MOHOLE,
+        CardName.ECCENTRIC_SPONSOR,
+      ],
+    });
+  });
 });
 
 function getWaitingFor(player: IPlayer): SelectCard<IProjectCard> {

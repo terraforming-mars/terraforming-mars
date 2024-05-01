@@ -40,6 +40,7 @@ export interface CreateGameModel {
   playersCount: number;
   politicalAgendasExtension: AgendaStyle;
   prelude: boolean;
+  preludeDraftVariant: boolean | undefined;
   prelude2Expansion: boolean;
   promoCardsOption: boolean;
   randomFirstPlayer: boolean;

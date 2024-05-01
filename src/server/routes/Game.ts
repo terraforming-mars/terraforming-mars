@@ -151,6 +151,7 @@ export class GameHandler extends Handler {
             pathfindersExpansion: gameReq.pathfindersExpansion,
             politicalAgendasExtension: gameReq.politicalAgendasExtension,
             prelude2Expansion: gameReq.prelude2Expansion,
+            preludeDraftVariant: gameReq.preludeDraftVariant,
             preludeExtension: gameReq.prelude,
             promoCardsOption: gameReq.promoCardsOption,
             randomMA: gameReq.randomMA,

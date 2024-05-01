@@ -5,10 +5,10 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export class SinusIridiumRoadNetwork extends Card {
+export class SinusIrdiumRoadNetwork extends Card {
   constructor() {
     super({
-      name: CardName.SINUS_IRIDIUM_ROAD_NETWORK,
+      name: CardName.SINUS_IRDIUM_ROAD_NETWORK,
       type: CardType.AUTOMATED,
       tags: [Tag.MOON],
       cost: 15,

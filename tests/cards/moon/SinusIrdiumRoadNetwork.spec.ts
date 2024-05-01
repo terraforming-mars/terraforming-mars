@@ -1,17 +1,17 @@
 import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {SinusIridiumRoadNetwork} from '../../../src/server/cards/moon/SinusIridiumRoadNetwork';
+import {SinusIrdiumRoadNetwork} from '../../../src/server/cards/moon/SinusIrdiumRoadNetwork';
 import {expect} from 'chai';
 import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
 
-describe('SinusIridiumRoadNetwork', () => {
+describe('SinusIrdiumRoadNetwork', () => {
   let player: TestPlayer;
-  let card: SinusIridiumRoadNetwork;
+  let card: SinusIrdiumRoadNetwork;
 
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, {moonExpansion: true});
-    card = new SinusIridiumRoadNetwork();
+    card = new SinusIrdiumRoadNetwork();
   });
 
   it('can play', () => {

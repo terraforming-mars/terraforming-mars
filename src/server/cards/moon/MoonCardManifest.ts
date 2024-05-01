@@ -79,7 +79,7 @@ import {MoonRoadStandardProject} from './MoonRoadStandardProject';
 import {MoonRoadStandardProjectVariant2} from './MoonStandardProjectVariants';
 import {MoonTether} from './MoonTether';
 import {NanotechIndustries} from './NanotechIndustries';
-import {NewColonyPlanningInitiaitives} from './NewColonyPlanningInitiaitives';
+import {NewColonyPlanningInitiatives} from './NewColonyPlanningInitiaitives';
 import {OffWorldCityLiving} from './OffWorldCityLiving';
 import {PreliminaryDarkside} from './PreliminaryDarkside';
 import {OrbitalPowerGrid} from './OrbitalPowerGrid';
@@ -144,7 +144,7 @@ export const MOON_CARD_MANIFEST = new ModuleManifest({
     [CardName.STEEL_MARKET_MONOPOLISTS]: {Factory: SteelMarketMonopolists},
     [CardName.TITANIUM_MARKET_MONOPOLISTS]: {Factory: TitaniumMarketMonopolists},
     [CardName.LUNA_STAGING_STATION]: {Factory: LunaStagingStation},
-    [CardName.NEW_COLONY_PLANNING_INITIAITIVES]: {Factory: NewColonyPlanningInitiaitives},
+    [CardName.NEW_COLONY_PLANNING_INITIAITIVES]: {Factory: NewColonyPlanningInitiatives},
     [CardName.AI_CONTROLLED_MINE_NETWORK]: {Factory: AIControlledMineNetwork},
     [CardName.DARKSIDE_METEOR_BOMBARDMENT]: {Factory: DarksideMeteorBombardment},
     [CardName.UNDERGROUND_DETONATORS]: {Factory: UndergroundDetonators},

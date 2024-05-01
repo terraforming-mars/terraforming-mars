@@ -619,7 +619,7 @@ export enum CardName {
   STEEL_MARKET_MONOPOLISTS = 'Steel Market Monopolists',
   TITANIUM_MARKET_MONOPOLISTS = 'Titanium Market Monopolists',
   LUNA_STAGING_STATION = 'Luna Staging Station',
-  NEW_COLONY_PLANNING_INITIAITIVES = 'New Colony Planning Initiaitives',
+  NEW_COLONY_PLANNING_INITIAITIVES = 'New Colony Planning Initiatives',
   AI_CONTROLLED_MINE_NETWORK = 'AI Controlled Mine Network',
   DARKSIDE_METEOR_BOMBARDMENT = 'Darkside Meteor Bombardment',
   UNDERGROUND_DETONATORS = 'Underground Detonators',

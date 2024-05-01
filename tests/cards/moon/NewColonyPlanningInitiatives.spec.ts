@@ -2,19 +2,19 @@ import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
-import {NewColonyPlanningInitiaitives} from '../../../src/server/cards/moon/NewColonyPlanningInitiaitives';
+import {NewColonyPlanningInitiatives} from '../../../src/server/cards/moon/NewColonyPlanningInitiatives';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 
-describe('NewColonyPlanningInitiaitives', () => {
+describe('NewColonyPlanningInitiatives', () => {
   let game: IGame;
   let player: TestPlayer;
-  let card: NewColonyPlanningInitiaitives;
+  let card: NewColonyPlanningInitiatives;
   let moonData: MoonData;
 
   beforeEach(() => {
     [game, player] = testGame(1, {moonExpansion: true});
-    card = new NewColonyPlanningInitiaitives();
+    card = new NewColonyPlanningInitiatives();
     moonData = MoonExpansion.moonData(game);
   });
 

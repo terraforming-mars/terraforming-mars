@@ -5,7 +5,7 @@ import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 
-export class NewColonyPlanningInitiaitives extends Card implements IProjectCard {
+export class NewColonyPlanningInitiatives extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.NEW_COLONY_PLANNING_INITIAITIVES,

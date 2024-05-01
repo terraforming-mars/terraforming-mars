@@ -239,12 +239,13 @@ export class Game implements IGame, Logger {
 
     const activePlayer = firstPlayer.id;
 
-    // Single player game player starts with 14TR
     if (players.length === 1) {
       gameOptions.draftVariant = false;
       gameOptions.initialDraftVariant = false;
+      gameOptions.preludeDraftVariant = false;
       gameOptions.randomMA = RandomMAOptionType.NONE;
 
+      // Single player game player starts with 14TR
       players[0].setTerraformRating(14);
     }
 
@@ -325,11 +326,14 @@ export class Game implements IGame, Logger {
         // Bypass beginner choice if any extension is choosen
         gameOptions.ceoExtension ||
         gameOptions.preludeExtension ||
+        gameOptions.prelude2Expansion ||
         gameOptions.venusNextExtension ||
         gameOptions.coloniesExtension ||
         gameOptions.turmoilExtension ||
         gameOptions.initialDraftVariant ||
-        gameOptions.ceoExtension) {
+        gameOptions.preludeDraftVariant ||
+        gameOptions.underworldExpansion ||
+        gameOptions.moonExpansion) {
         player.dealtCorporationCards.push(...corporationDeck.drawN(game, gameOptions.startingCorporations));
         if (gameOptions.initialDraftVariant === false) {
           player.dealtProjectCards.push(...projectDeck.drawN(game, 10));
@@ -880,14 +884,12 @@ export class Game implements IGame, Logger {
       }
       player.needsToDraft = undefined;
 
-      if (type === 'initial') {
-        if (this.initialDraftIteration === 2) {
-          player.dealtProjectCards = player.draftedCards;
-          player.draftedCards = [];
-        } else if (this.initialDraftIteration === 3) {
-          player.dealtPreludeCards = player.draftedCards;
-          player.draftedCards = [];
-        }
+      if (type === 'initial' && this.initialDraftIteration === 2) {
+        player.dealtProjectCards = player.draftedCards;
+        player.draftedCards = [];
+      } else if (type === 'prelude' && this.initialDraftIteration === 3) {
+        player.dealtPreludeCards = player.draftedCards;
+        player.draftedCards = [];
       }
     });
 
@@ -900,7 +902,7 @@ export class Game implements IGame, Logger {
       this.initialDraftIteration++;
       this.draftRound = 1;
       this.runDraftRound('initial');
-    } else if (this.initialDraftIteration === 2 && this.gameOptions.preludeExtension) {
+    } else if (this.initialDraftIteration === 2 && this.gameOptions.preludeExtension && this.gameOptions.preludeDraftVariant) {
       this.initialDraftIteration++;
       this.draftRound = 1;
       this.runDraftRound('prelude');

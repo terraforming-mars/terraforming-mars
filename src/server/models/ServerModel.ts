@@ -393,6 +393,7 @@ export class Server {
       initialDraftVariant: options.initialDraftVariant,
       moonExpansion: options.moonExpansion,
       pathfindersExpansion: options.pathfindersExpansion,
+      preludeDraftVariant: options.preludeDraftVariant,
       preludeExtension: options.preludeExtension,
       prelude2Expansion: options.prelude2Expansion,
       promoCardsOption: options.promoCardsOption,

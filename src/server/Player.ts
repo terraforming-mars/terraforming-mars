@@ -964,6 +964,7 @@ export class Player implements IPlayer {
       const card = this.playedCards.find((card) => card.name === CardName.SELF_REPLICATING_ROBOTS);
       if (card instanceof SelfReplicatingRobots) {
         inplaceRemove(card.targetCards, selectedCard);
+        selectedCard.resourceCount = 0;
       }
     }
 

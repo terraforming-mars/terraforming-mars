@@ -23,7 +23,7 @@ import {ALL_MILESTONES} from './milestones/Milestones';
 import {ALL_AWARDS} from './awards/Awards';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {Phase} from '../common/Phase';
-import {IPlayer} from './IPlayer';
+import {DraftType, IPlayer} from './IPlayer';
 import {Player} from './Player';
 import {PlayerId, GameId, SpectatorId, SpaceId} from '../common/Types';
 import {PlayerInput} from './PlayerInput';
@@ -366,7 +366,7 @@ export class Game implements IGame, Logger {
     // Initial Draft
     if (this.gameOptions.initialDraftVariant) {
       this.phase = Phase.INITIALDRAFTING;
-      this.runDraftRound(true, false);
+      this.runDraftRound('initial');
     } else {
       this.gotoInitialResearchPhase();
     }
@@ -625,20 +625,20 @@ export class Game implements IGame, Logger {
     this.first = newFirstPlayer;
   }
 
-  private runDraftRound(initialDraft: boolean = false, preludeDraft: boolean = false): void {
+  private runDraftRound(type: DraftType = 'standard'): void {
     this.save();
     this.draftedPlayers.clear();
     this.players.forEach((player) => {
       player.needsToDraft = true;
-      if (this.draftRound === 1 && !preludeDraft) {
-        player.askPlayerToDraft(initialDraft, this.giveDraftCardsTo(player));
-      } else if (this.draftRound === 1 && preludeDraft) {
-        player.askPlayerToDraft(initialDraft, this.giveDraftCardsTo(player), player.dealtPreludeCards);
+      if (this.draftRound === 1 && type !== 'prelude') {
+        player.askPlayerToDraft(type, this.giveDraftCardsTo(player));
+      } else if (this.draftRound === 1 && type === 'prelude') {
+        player.askPlayerToDraft(type, this.giveDraftCardsTo(player), player.dealtPreludeCards);
       } else {
         const draftCardsFrom = this.getDraftCardsFrom(player).id;
         const cards = this.unDraftedCards.get(draftCardsFrom);
         this.unDraftedCards.delete(draftCardsFrom);
-        player.askPlayerToDraft(initialDraft, this.giveDraftCardsTo(player), cards);
+        player.askPlayerToDraft(type, this.giveDraftCardsTo(player), cards);
       }
     });
   }
@@ -856,7 +856,7 @@ export class Game implements IGame, Logger {
     });
   }
 
-  public playerIsFinishedWithDraftingPhase(initialDraft: boolean, player: IPlayer, cards : Array<IProjectCard>): void {
+  public playerIsFinishedWithDraftingPhase(type: DraftType, player: IPlayer, cards : Array<IProjectCard>): void {
     this.draftedPlayers.add(player.id);
     this.unDraftedCards.set(player.id, cards);
 
@@ -868,7 +868,7 @@ export class Game implements IGame, Logger {
     // If more than 1 card are to be passed to the next player, that means we're still drafting
     if (cards.length > 1) {
       this.draftRound++;
-      this.runDraftRound(initialDraft);
+      this.runDraftRound(type);
       return;
     }
 
@@ -880,7 +880,7 @@ export class Game implements IGame, Logger {
       }
       player.needsToDraft = undefined;
 
-      if (initialDraft) {
+      if (type === 'initial') {
         if (this.initialDraftIteration === 2) {
           player.dealtProjectCards = player.draftedCards;
           player.draftedCards = [];
@@ -891,7 +891,7 @@ export class Game implements IGame, Logger {
       }
     });
 
-    if (initialDraft === false) {
+    if (type === 'standard') {
       this.gotoResearchPhase();
       return;
     }
@@ -899,11 +899,11 @@ export class Game implements IGame, Logger {
     if (this.initialDraftIteration === 1) {
       this.initialDraftIteration++;
       this.draftRound = 1;
-      this.runDraftRound(true);
+      this.runDraftRound('initial');
     } else if (this.initialDraftIteration === 2 && this.gameOptions.preludeExtension) {
       this.initialDraftIteration++;
       this.draftRound = 1;
-      this.runDraftRound(true, true);
+      this.runDraftRound('prelude');
     } else {
       this.gotoInitialResearchPhase();
     }
@@ -1673,9 +1673,9 @@ export class Game implements IGame, Logger {
     if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {
       if (game.phase === Phase.INITIALDRAFTING) {
         if (game.initialDraftIteration === 3) {
-          game.runDraftRound(true, true);
+          game.runDraftRound('prelude');
         } else {
-          game.runDraftRound(true);
+          game.runDraftRound('initial');
         }
       } else {
         game.gotoInitialResearchPhase();

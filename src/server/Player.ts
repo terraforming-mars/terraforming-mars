@@ -67,7 +67,7 @@ import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
 import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
-import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
+import {CanAffordOptions, CardAction, DraftType, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {inplaceRemove, sum} from '../common/utils/utils';
 import {PreludesExpansion} from './preludes/PreludesExpansion';
@@ -714,21 +714,13 @@ export class Player implements IPlayer {
     cards.push(...this.game.projectDeck.drawN(this.game, quantity, 'bottom'));
   }
 
-  /**
-   * Ask the player to draft from a set of cards.
-   *
-   * @param initialDraft when true, this is part of the first generation draft.
-   * @param passTo  The player _this_ player passes remaining cards to.
-   * @param passedCards The cards received from the draw, or from the prior player. If empty, it's the first
-   *   step in the draft, and cards have to be dealt.
-   */
-  public askPlayerToDraft(initialDraft: boolean, passTo: IPlayer, passedCards?: Array<IProjectCard>): void {
+  public askPlayerToDraft(type: DraftType, passTo: IPlayer, passedCards?: Array<IProjectCard>): void {
     let cardsToDraw = 4;
     let cardsToKeep = 1;
 
     let cards: Array<IProjectCard> = [];
     if (passedCards === undefined) {
-      if (initialDraft) {
+      if (type === 'initial') {
         cardsToDraw = 5;
       } else {
         if (LunaProjectOffice.isActive(this)) {
@@ -759,7 +751,7 @@ export class Player implements IPlayer {
             this.draftedCards.push(card);
             cards = cards.filter((c) => c !== card);
           });
-          this.game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
+          this.game.playerIsFinishedWithDraftingPhase(type, this, cards);
           return undefined;
         }),
     );

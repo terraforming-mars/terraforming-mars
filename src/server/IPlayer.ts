@@ -40,6 +40,8 @@ export type CanAffordOptions = Partial<PaymentOptions> & {
   tr?: TRSource,
 }
 
+export type DraftType = 'initial' | 'prelude' | 'standard';
+
 /**
  * Behavior when playing a card:
  *   add it to the tableau
@@ -264,12 +266,12 @@ export interface IPlayer {
   /**
    * Ask the player to draft from a set of cards.
    *
-   * @param initialDraft when true, this is part of the first generation draft.
+   * @param type the type of draft being asked for.
    * @param passTo  The player _this_ player passes remaining cards to.
    * @param passedCards The cards received from the draw, or from the prior player. If empty, it's the first
    *   step in the draft, and this function will deal cards.
    */
-  askPlayerToDraft(initialDraft: boolean, passTo: IPlayer, passedCards?: Array<IProjectCard>): void;
+  askPlayerToDraft(type: DraftType, passTo: IPlayer, passedCards?: Array<IProjectCard>): void;
   runResearchPhase(draftVariant: boolean): void;
   getCardCost(card: IProjectCard): number;
 

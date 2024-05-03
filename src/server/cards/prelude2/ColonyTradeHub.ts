@@ -3,6 +3,8 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {all} from '../Options';
+import {IPlayer} from '../../IPlayer';
+import {Resource} from '../../../common/Resource';
 
 export class ColonyTradeHub extends PreludeCard {
   constructor() {
@@ -24,5 +26,9 @@ export class ColonyTradeHub extends PreludeCard {
         description: 'Increase your energy production 1 step. Gain 3 titanium',
       },
     });
+  }
+
+  onColonyAdded(_player: IPlayer, cardOwner: IPlayer) {
+    cardOwner.stock.add(Resource.MEGACREDITS, 2, {log: true});
   }
 }

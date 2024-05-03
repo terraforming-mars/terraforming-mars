@@ -122,6 +122,8 @@ export interface ICard {
   onProductionGain?(player: IPlayer, resource: Resource, amount: number): void;
   onProductionPhase?(player: IPlayer): void;
 
+  onColonyAdded?(player: IPlayer, cardOwner: IPlayer): void;
+
   cost?: number; /** Used with IProjectCard and PreludeCard. */
   type: CardType;
   requirements: Array<CardRequirementDescriptor>;

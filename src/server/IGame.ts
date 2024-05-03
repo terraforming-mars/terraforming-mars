@@ -12,7 +12,7 @@ import {Space} from './boards/Space';
 import {LogMessageBuilder} from './logs/LogMessageBuilder';
 import {LogMessage} from '../common/logs/LogMessage';
 import {Phase} from '../common/Phase';
-import {DraftType, IPlayer} from './IPlayer';
+import {IPlayer} from './IPlayer';
 import {PlayerId, GameId, SpectatorId, SpaceId, isGameId} from '../common/Types';
 import {CardResource} from '../common/CardResource';
 import {AndThen, DeferredAction} from './deferredActions/DeferredAction';
@@ -33,6 +33,7 @@ import {Tile} from './Tile';
 import {Logger} from './logs/Logger';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {UnderworldData} from './underworld/UnderworldData';
+import {Draft} from './Draft';
 
 export interface Score {
   corporation: String;
@@ -127,7 +128,7 @@ export interface IGame extends Logger {
   playerHasPassed(player: IPlayer): void;
   hasResearched(player: IPlayer): boolean;
   playerIsFinishedWithResearchPhase(player: IPlayer): void;
-  playerIsFinishedWithDraftingPhase(type: DraftType, player: IPlayer, cards : Array<IProjectCard>): void;
+  playerIsFinishedWithDraftingPhase(draft: Draft, player: IPlayer, cards : Array<IProjectCard>): void;
   playerIsFinishedTakingActions(): void;
   // Part of final greenery placement.
   canPlaceGreenery(player: IPlayer): boolean;

@@ -31,6 +31,7 @@ import {Color} from '../common/Color';
 import {OrOptions} from './inputs/OrOptions';
 import {Stock} from './player/Stock';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
+import {Draft} from './Draft';
 
 export type ResourceSource = IPlayer | GlobalEventName | ICard;
 
@@ -40,8 +41,6 @@ export type CanAffordOptions = Partial<PaymentOptions> & {
   tr?: TRSource,
 }
 
-export type DraftType = 'initial' | 'prelude' | 'standard';
-
 /**
  * Behavior when playing a card:
  *   add it to the tableau
@@ -49,7 +48,7 @@ export type DraftType = 'initial' | 'prelude' | 'standard';
  *   only play the card (used for replaying a card)
  *   or do nothing.
  */
-export type CardAction ='add' | 'discard' | 'nothing' | 'action-only';
+export type CardAction = 'add' | 'discard' | 'nothing' | 'action-only';
 
 export interface IPlayer {
   readonly id: PlayerId;
@@ -271,7 +270,7 @@ export interface IPlayer {
    * @param passedCards The cards received from the draw, or from the prior player. If empty, it's the first
    *   step in the draft, and this function will deal cards.
    */
-  askPlayerToDraft(type: DraftType, passTo: IPlayer, passedCards?: Array<IProjectCard>): void;
+  askPlayerToDraft(draft: Draft, passTo: IPlayer, passedCards?: Array<IProjectCard>): void;
   runResearchPhase(draftVariant: boolean): void;
   getCardCost(card: IProjectCard): number;
 

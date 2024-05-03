@@ -23,7 +23,7 @@ import {ALL_MILESTONES} from './milestones/Milestones';
 import {ALL_AWARDS} from './awards/Awards';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {Phase} from '../common/Phase';
-import {DraftType, IPlayer} from './IPlayer';
+import {IPlayer} from './IPlayer';
 import {Player} from './Player';
 import {PlayerId, GameId, SpectatorId, SpaceId} from '../common/Types';
 import {PlayerInput} from './PlayerInput';
@@ -74,6 +74,7 @@ import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {SpaceType} from '../common/boards/SpaceType';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {BuildColony} from './deferredActions/BuildColony';
+import {Draft, newInitialDraft, newPreludeDraft, newStandardDraft} from './Draft';
 
 export class Game implements IGame, Logger {
   public readonly id: GameId;
@@ -370,7 +371,7 @@ export class Game implements IGame, Logger {
     // Initial Draft
     if (this.gameOptions.initialDraftVariant) {
       this.phase = Phase.INITIALDRAFTING;
-      this.runDraftRound('initial');
+      this.runDraftRound(newInitialDraft());
     } else {
       this.gotoInitialResearchPhase();
     }
@@ -629,20 +630,20 @@ export class Game implements IGame, Logger {
     this.first = newFirstPlayer;
   }
 
-  private runDraftRound(type: DraftType = 'standard'): void {
+  private runDraftRound(draft: Draft): void {
     this.save();
     this.draftedPlayers.clear();
     this.players.forEach((player) => {
       player.needsToDraft = true;
-      if (this.draftRound === 1 && type !== 'prelude') {
-        player.askPlayerToDraft(type, this.giveDraftCardsTo(player));
-      } else if (this.draftRound === 1 && type === 'prelude') {
-        player.askPlayerToDraft(type, this.giveDraftCardsTo(player), player.dealtPreludeCards);
+      if (this.draftRound === 1 && draft.type !== 'prelude') {
+        player.askPlayerToDraft(draft, this.giveDraftCardsTo(player));
+      } else if (this.draftRound === 1 && draft.type === 'prelude') {
+        player.askPlayerToDraft(draft, this.giveDraftCardsTo(player), player.dealtPreludeCards);
       } else {
         const draftCardsFrom = this.getDraftCardsFrom(player).id;
         const cards = this.unDraftedCards.get(draftCardsFrom);
         this.unDraftedCards.delete(draftCardsFrom);
-        player.askPlayerToDraft(type, this.giveDraftCardsTo(player), cards);
+        player.askPlayerToDraft(draft, this.giveDraftCardsTo(player), cards);
       }
     });
   }
@@ -675,7 +676,7 @@ export class Game implements IGame, Logger {
   private gotoDraftPhase(): void {
     this.phase = Phase.DRAFTING;
     this.draftRound = 1;
-    this.runDraftRound();
+    this.runDraftRound(newStandardDraft());
   }
 
   public gameIsOver(): boolean {
@@ -860,7 +861,7 @@ export class Game implements IGame, Logger {
     });
   }
 
-  public playerIsFinishedWithDraftingPhase(type: DraftType, player: IPlayer, cards : Array<IProjectCard>): void {
+  public playerIsFinishedWithDraftingPhase(draft: Draft, player: IPlayer, cards : Array<IProjectCard>): void {
     this.draftedPlayers.add(player.id);
     this.unDraftedCards.set(player.id, cards);
 
@@ -872,7 +873,7 @@ export class Game implements IGame, Logger {
     // If more than 1 card are to be passed to the next player, that means we're still drafting
     if (cards.length > 1) {
       this.draftRound++;
-      this.runDraftRound(type);
+      this.runDraftRound(draft);
       return;
     }
 
@@ -884,16 +885,16 @@ export class Game implements IGame, Logger {
       }
       player.needsToDraft = undefined;
 
-      if (type === 'initial' && this.initialDraftIteration === 2) {
+      if (draft.type === 'initial' && this.initialDraftIteration === 2) {
         player.dealtProjectCards = player.draftedCards;
         player.draftedCards = [];
-      } else if (type === 'prelude' && this.initialDraftIteration === 3) {
+      } else if (draft.type === 'prelude' && this.initialDraftIteration === 3) {
         player.dealtPreludeCards = player.draftedCards;
         player.draftedCards = [];
       }
     });
 
-    if (type === 'standard') {
+    if (draft.type === 'standard') {
       this.gotoResearchPhase();
       return;
     }
@@ -901,11 +902,11 @@ export class Game implements IGame, Logger {
     if (this.initialDraftIteration === 1) {
       this.initialDraftIteration++;
       this.draftRound = 1;
-      this.runDraftRound('initial');
+      this.runDraftRound(newInitialDraft());
     } else if (this.initialDraftIteration === 2 && this.gameOptions.preludeExtension && this.gameOptions.preludeDraftVariant) {
       this.initialDraftIteration++;
       this.draftRound = 1;
-      this.runDraftRound('prelude');
+      this.runDraftRound(newPreludeDraft());
     } else {
       this.gotoInitialResearchPhase();
     }
@@ -1675,15 +1676,15 @@ export class Game implements IGame, Logger {
     if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {
       if (game.phase === Phase.INITIALDRAFTING) {
         if (game.initialDraftIteration === 3) {
-          game.runDraftRound('prelude');
+          game.runDraftRound(newPreludeDraft());
         } else {
-          game.runDraftRound('initial');
+          game.runDraftRound(newInitialDraft());
         }
       } else {
         game.gotoInitialResearchPhase();
       }
     } else if (game.phase === Phase.DRAFTING) {
-      game.runDraftRound();
+      game.runDraftRound(newStandardDraft());
     } else if (game.phase === Phase.RESEARCH) {
       game.gotoResearchPhase();
     } else if (game.phase === Phase.END) {

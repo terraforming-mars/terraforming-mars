@@ -7,6 +7,7 @@ import {MAX_COLONY_TRACK_POSITION} from '../../../common/constants';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
+import {Resource} from '../../../common/Resource';
 
 export class Naomi extends CeoCard {
   constructor() {
@@ -47,5 +48,12 @@ export class Naomi extends CeoCard {
       ));
     });
     return undefined;
+  }
+
+  public onColonyAdded(player: IPlayer, cardOwner: IPlayer) {
+    if (player === cardOwner) {
+      player.stock.add(Resource.ENERGY, 2, {log: true});
+      player.stock.add(Resource.MEGACREDITS, 3, {log: true});
+    }
   }
 }

@@ -5,10 +5,10 @@ import {TestPlayer} from '../../TestPlayer';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-
 import {Naomi} from '../../../src/server/cards/ceos/Naomi';
 import {Callisto} from '../../../src/server/colonies/Callisto';
 import {Ceres} from '../../../src/server/colonies/Ceres';
+import {Units} from '../../../src/common/Units';
 
 
 describe('Naomi', function() {
@@ -24,25 +24,26 @@ describe('Naomi', function() {
     game.colonies = [new Callisto(), new Ceres()];
   });
 
-  it('Gains 2 energy and 2 M€ when building a colony', function() {
-    player.playedCards.push(card);
-    expect(player.energy).to.eq(0);
-    expect(player.megaCredits).to.eq(0);
-    game.colonies[0].addColony(player);
-    expect(player.energy).to.eq(2);
-    expect(player.megaCredits).to.eq(3);
-    game.colonies[1].addColony(player);
-    expect(player.energy).to.eq(4);
-    expect(player.megaCredits).to.eq(6);
+  const onColonyAddedRuns = [
+    {player: 0, colony: 0, expected: [[2, 3], [0, 0]]},
+    {player: 0, colony: 1, expected: [[2, 3], [0, 0]]},
+    {player: 1, colony: 0, expected: [[0, 0], [0, 0]]},
+    {player: 1, colony: 1, expected: [[0, 0], [0, 0]]},
+  ] as const;
+  for (const run of onColonyAddedRuns) {
+    it('Gains 2 energy and 2 M€ when building a colony ' + JSON.stringify(run), function() {
+      const players = game.getPlayers();
+      players[0].playedCards.push(card);
 
-    // Player2 here is just a sanity check, _and_ is necessary for the colony count
-    game.colonies[0].addColony(player2);
-    expect(player2.energy).to.eq(0);
-    expect(player2.megaCredits).to.eq(0);
-    game.colonies[1].addColony(player2);
-    expect(player2.energy).to.eq(0);
-    expect(player2.megaCredits).to.eq(0);
-  });
+      expect(player.stock.asUnits()).deep.eq(Units.of({}));
+      expect(player2.stock.asUnits()).deep.eq(Units.of({}));
+
+      game.colonies[run.colony].addColony(players[run.player]);
+
+      expect(players[0].stock.asUnits()).deep.eq(Units.of({energy: run.expected[0][0], megacredits: run.expected[0][1]}));
+      expect(players[1].stock.asUnits()).deep.eq(Units.of({energy: run.expected[1][0], megacredits: run.expected[1][1]}));
+    });
+  }
 
   it('Takes action', function() {
     card.action(player);

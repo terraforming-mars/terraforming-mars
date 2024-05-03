@@ -1,5 +1,4 @@
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
-import {CardName} from '../../common/cards/CardName';
 import {ColonyBenefit} from '../../common/colonies/ColonyBenefit';
 import {DeferredAction, SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {Priority} from '../deferredActions/Priority';
@@ -90,24 +89,10 @@ export abstract class Colony implements IColony {
       this.trackPosition = this.colonies.length;
     }
 
-    // TODO(kberg): Time for an onNewColony hook.
-
-    // Poseidon hook
-    const poseidon = player.game.getCardPlayerOrUndefined(CardName.POSEIDON);
-    if (poseidon !== undefined) {
-      poseidon.production.add(Resource.MEGACREDITS, 1, {log: true});
-    }
-
-    // CEO Naomi hook
-    if (player.cardIsInEffect(CardName.NAOMI)) {
-      player.stock.add(Resource.ENERGY, 2, {log: true});
-      player.stock.add(Resource.MEGACREDITS, 3, {log: true});
-    }
-
-    // Colony Trade Hub hook
-    const colonyTradeHub = player.game.getPlayers().find((player) => player.cardIsInEffect(CardName.COLONY_TRADE_HUB));
-    if (colonyTradeHub !== undefined) {
-      colonyTradeHub.stock.add(Resource.MEGACREDITS, 2, {log: true});
+    for (const cardOwner of player.game.getPlayers()) {
+      for (const card of cardOwner.tableau) {
+        card.onColonyAdded?.(player, cardOwner);
+      }
     }
   }
 

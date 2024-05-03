@@ -2,6 +2,8 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
+import {IPlayer} from '../../IPlayer';
+import {Resource} from '../../../common/Resource';
 
 export class Poseidon extends CorporationCard {
   constructor() {
@@ -28,5 +30,11 @@ export class Poseidon extends CorporationCard {
         }),
       },
     });
+  }
+
+  public onColonyAdded(player: IPlayer, cardOwner: IPlayer) {
+    if (player === cardOwner) {
+      player.production.add(Resource.MEGACREDITS, 1, {log: true});
+    }
   }
 }

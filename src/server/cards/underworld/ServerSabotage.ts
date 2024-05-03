@@ -26,7 +26,7 @@ export class ServerSabotage extends Card implements IProjectCard {
           // TODO(kberg): Use icon.
           b.corruption(1).minus().data({amount: 2, digit, all}).br.text('ALL').undergroundResources(1, {cancelled});
         }),
-        description: 'Gain 1 corruption. Remove 2 data from any player. Remove all unclaimed underground resources ' +
+        description: 'Gain 1 corruption. Remove up to 2 data fromany player. Remove all unclaimed underground resources ' +
           'from the board back into the pile. Their spaces can be identified again.',
       },
     });

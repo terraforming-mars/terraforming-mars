@@ -822,6 +822,7 @@
     "Skip removing plants": "Ignoriere die Entfernung der Pflanzen",
     "Remove plants": "Entferne Pflanzen",
     "Remove ${0} ${1} from ${2}": "Entferne ${0} ${1} von ${2}",
+    "Select player to discard a card": "Wähle einen Spieler, damit dieser eine Karte abwerfen muss",
     "Select player to decrease ${0} production by ${1} step(s)": "Wähle einen Spieler, um seine ${0}-Produktion um ${1} zu reduzieren",
     "Decrease": "Reduziere",
     "Select player to remove up to 4 M€ from": "Wähle einen Spieler und entferne bis zu 4 M€",

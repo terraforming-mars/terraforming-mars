@@ -716,23 +716,12 @@ export class Player implements IPlayer {
   }
 
   public askPlayerToDraft(draft: Draft, passTo: IPlayer, passedCards?: Array<IProjectCard>): void {
-    let cardsToDraw = 4;
-    let cardsToKeep = 1;
+    const cardsToDraw = draft.cardsToDraw(this);
+    const cardsToKeep = draft.cardsToKeep(this);
 
     let cards: Array<IProjectCard> = [];
+
     if (passedCards === undefined) {
-      if (draft.type === 'initial') {
-        cardsToDraw = 5;
-      } else {
-        if (LunaProjectOffice.isActive(this)) {
-          cardsToDraw = 5;
-          cardsToKeep = 2;
-        }
-        if (this.isCorporation(CardName.MARS_MATHS)) {
-          cardsToDraw = 5;
-          cardsToKeep = 2;
-        }
-      }
       this.dealForDraft(cardsToDraw, cards);
     } else {
       cards = passedCards;

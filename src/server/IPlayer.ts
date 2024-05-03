@@ -260,7 +260,6 @@ export interface IPlayer {
   runProductionPhase(): void;
   finishProductionPhase(): void;
   worldGovernmentTerraforming(): void;
-  dealForDraft(quantity: number, cards: Array<IProjectCard>): void;
 
   /**
    * Ask the player to draft from a set of cards.

@@ -43,7 +43,6 @@ import {MoonExpansion} from './moon/MoonExpansion';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
-import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {LogHelper} from './LogHelper';
 import {UndoActionOption} from './inputs/UndoActionOption';
@@ -76,7 +75,7 @@ import {UnderworldPlayerData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {Counter} from './behavior/Counter';
 import {TRSource} from '../common/cards/TRSource';
-import {Draft} from './Draft';
+import {Draft, newNonDraft, newStandardDraft} from './Draft';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 
@@ -711,21 +710,15 @@ export class Player implements IPlayer {
     });
   }
 
-  public dealForDraft(quantity: number, cards: Array<IProjectCard>): void {
-    cards.push(...this.game.projectDeck.drawN(this.game, quantity, 'bottom'));
+  private dealForDraft(quantity: number) {
+    return this.game.projectDeck.drawN(this.game, quantity, 'bottom');
   }
 
   public askPlayerToDraft(draft: Draft, passTo: IPlayer, passedCards?: Array<IProjectCard>): void {
     const cardsToDraw = draft.cardsToDraw(this);
     const cardsToKeep = draft.cardsToKeep(this);
 
-    let cards: Array<IProjectCard> = [];
-
-    if (passedCards === undefined) {
-      this.dealForDraft(cardsToDraw, cards);
-    } else {
-      cards = passedCards;
-    }
+    const cards = passedCards ?? this.dealForDraft(cardsToDraw);
 
     const messageTitle = cardsToKeep === 1 ?
       'Select a card to keep and pass the rest to ${0}' :
@@ -739,7 +732,7 @@ export class Player implements IPlayer {
         .andThen((selected) => {
           selected.forEach((card) => {
             this.draftedCards.push(card);
-            cards = cards.filter((c) => c !== card);
+            inplaceRemove(cards, card);
           });
           this.game.playerIsFinishedWithDraftingPhase(draft, this, cards);
           return undefined;
@@ -759,25 +752,13 @@ export class Player implements IPlayer {
   }
 
   public runResearchPhase(draftVariant: boolean): void {
-    let dealtCards: Array<IProjectCard> = [];
-    if (draftVariant) {
-      dealtCards = this.draftedCards;
-      this.draftedCards = [];
-    } else {
-      let cardsToDraw = 4;
-      if (this.isCorporation(CardName.MARS_MATHS)) {
-        cardsToDraw = 5;
-      }
-      if (LunaProjectOffice.isActive(this)) {
-        cardsToDraw = 5;
-      }
-      this.dealForDraft(cardsToDraw, dealtCards);
-    }
+    const draft = draftVariant ? newStandardDraft(this.game) : newNonDraft(this.game);
+    const cardsToDraw = draft.cardsToDraw(this);
+    const cardsToKeep = draft.cardsToKeep(this);
 
-    let cardsToKeep = 4;
-    if (LunaProjectOffice.isActive(this)) {
-      // If Luna Project is active, they get to keep the 5 cards they drafted
-      cardsToKeep = 5;
+    const dealtCards: Array<IProjectCard> = draftVariant ? this.draftedCards : this.dealForDraft(cardsToDraw);
+    if (draftVariant) {
+      this.draftedCards = [];
     }
 
     // TODO(kberg): Using .execute to rely on directly calling setWaitingFor is not great.

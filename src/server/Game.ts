@@ -371,7 +371,7 @@ export class Game implements IGame, Logger {
     // Initial Draft
     if (this.gameOptions.initialDraftVariant) {
       this.phase = Phase.INITIALDRAFTING;
-      this.runDraftRound(newInitialDraft());
+      this.runDraftRound(newInitialDraft(this));
     } else {
       this.gotoInitialResearchPhase();
     }
@@ -676,7 +676,7 @@ export class Game implements IGame, Logger {
   private gotoDraftPhase(): void {
     this.phase = Phase.DRAFTING;
     this.draftRound = 1;
-    this.runDraftRound(newStandardDraft());
+    this.runDraftRound(newStandardDraft(this));
   }
 
   public gameIsOver(): boolean {
@@ -902,11 +902,11 @@ export class Game implements IGame, Logger {
     if (this.initialDraftIteration === 1) {
       this.initialDraftIteration++;
       this.draftRound = 1;
-      this.runDraftRound(newInitialDraft());
+      this.runDraftRound(newInitialDraft(this));
     } else if (this.initialDraftIteration === 2 && this.gameOptions.preludeExtension && this.gameOptions.preludeDraftVariant) {
       this.initialDraftIteration++;
       this.draftRound = 1;
-      this.runDraftRound(newPreludeDraft());
+      this.runDraftRound(newPreludeDraft(this));
     } else {
       this.gotoInitialResearchPhase();
     }
@@ -1676,15 +1676,15 @@ export class Game implements IGame, Logger {
     if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {
       if (game.phase === Phase.INITIALDRAFTING) {
         if (game.initialDraftIteration === 3) {
-          game.runDraftRound(newPreludeDraft());
+          game.runDraftRound(newPreludeDraft(game));
         } else {
-          game.runDraftRound(newInitialDraft());
+          game.runDraftRound(newInitialDraft(game));
         }
       } else {
         game.gotoInitialResearchPhase();
       }
     } else if (game.phase === Phase.DRAFTING) {
-      game.runDraftRound(newStandardDraft());
+      game.runDraftRound(newStandardDraft(game));
     } else if (game.phase === Phase.RESEARCH) {
       game.gotoResearchPhase();
     } else if (game.phase === Phase.END) {

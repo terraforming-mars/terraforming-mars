@@ -1,35 +1,37 @@
+import {IGame} from './IGame';
+
 export type DraftType = 'initial' | 'prelude' | 'standard';
 
 export abstract class Draft {
-  constructor(public readonly type: DraftType) {}
+  constructor(public readonly type: DraftType, protected readonly game: IGame) {}
 }
 
 class StandardDraft extends Draft {
-  constructor() {
-    super('standard');
+  constructor(game: IGame) {
+    super('standard', game);
   }
 }
 
 class InitialDraft extends Draft {
-  constructor() {
-    super('initial');
+  constructor(game: IGame) {
+    super('initial', game);
   }
 }
 
 class PreludeDraft extends Draft {
-  constructor() {
-    super('prelude');
+  constructor(game: IGame) {
+    super('prelude', game);
   }
 }
 
-export function newStandardDraft() {
-  return new StandardDraft();
+export function newStandardDraft(game: IGame) {
+  return new StandardDraft(game);
 }
 
-export function newInitialDraft() {
-  return new InitialDraft();
+export function newInitialDraft(game: IGame) {
+  return new InitialDraft(game);
 }
 
-export function newPreludeDraft() {
-  return new PreludeDraft();
+export function newPreludeDraft(game: IGame) {
+  return new PreludeDraft(game);
 }

@@ -96,7 +96,7 @@ describe('SolBank', () => {
   });
 
   it('paying for research cards', () => {
-    player.runResearchPhase(false);
+    player.runResearchPhase();
     runAllActions(game);
     const selectCard = cast(player.popWaitingFor(), SelectCard);
     selectCard.cb([selectCard.cards[1], selectCard.cards[2]]);

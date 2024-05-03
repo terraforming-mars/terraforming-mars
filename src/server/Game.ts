@@ -118,8 +118,17 @@ export class Game implements IGame, Logger {
   public first: IPlayer;
 
   // Drafting
+
+  /**
+   * When drafting n cards, this counts the each step in the draft.
+   * When players get all the cards, this is 1. After everybody drafts a card,
+   * this is round 2.
+   */
   private draftRound: number = 1;
-  // Used when drafting the first 10 project cards.
+  /**
+   * When drafting before the first generation, iteration 1 is the first 5 cards,
+   * iteration 2 is the next 5 cards, and iteration 3 is for Prelude, if necessary.
+   **/
   private initialDraftIteration: number = 1;
   private unDraftedCards: Map<PlayerId, Array<IProjectCard>> = new Map();
 
@@ -432,12 +441,7 @@ export class Game implements IGame, Logger {
       tradeEmbargo: this.tradeEmbargo,
       underworldData: this.underworldData,
       undoCount: this.undoCount,
-      unDraftedCards: Array.from(this.unDraftedCards.entries()).map((a) => {
-        return [
-          a[0],
-          a[1].map((c) => c.name),
-        ];
-      }),
+      unDraftedCards: Array.from(this.unDraftedCards.entries()).map(([playerId, cards]) => [playerId, cards.map((c) => c.name)]),
       venusScaleLevel: this.venusScaleLevel,
     };
     if (this.aresData !== undefined) {
@@ -670,7 +674,7 @@ export class Game implements IGame, Logger {
     this.researchedPlayers.clear();
     this.save();
     this.players.forEach((player) => {
-      player.runResearchPhase(this.gameOptions.draftVariant);
+      player.runResearchPhase();
     });
   }
 
@@ -862,7 +866,7 @@ export class Game implements IGame, Logger {
     });
   }
 
-  public playerIsFinishedWithDraftingPhase(draft: Draft, player: IPlayer, cards : Array<IProjectCard>): void {
+  public playerIsFinishedWithDraftingRound(draft: Draft, player: IPlayer, cards : Array<IProjectCard>): void {
     this.draftedPlayers.add(player.id);
     this.unDraftedCards.set(player.id, cards);
 
@@ -1646,10 +1650,9 @@ export class Game implements IGame, Logger {
     game.researchedPlayers = new Set<PlayerId>(d.researchedPlayers);
     game.draftedPlayers = new Set<PlayerId>(d.draftedPlayers);
 
-    // Reinit undrafted cards map
-    game.unDraftedCards = new Map<PlayerId, IProjectCard[]>();
-    d.unDraftedCards.forEach((unDraftedCard) => {
-      game.unDraftedCards.set(unDraftedCard[0], cardsFromJSON(unDraftedCard[1]));
+    game.unDraftedCards = new Map();
+    d.unDraftedCards.forEach(([playerId, cardNames]) => {
+      game.unDraftedCards.set(playerId, cardsFromJSON(cardNames));
     });
 
     game.lastSaveId = d.lastSaveId;

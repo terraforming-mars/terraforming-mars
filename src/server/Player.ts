@@ -729,7 +729,7 @@ export class Player implements IPlayer {
             this.draftedCards.push(card);
             inplaceRemove(cards, card);
           });
-          this.game.playerIsFinishedWithDraftingPhase(draft, this, cards);
+          this.game.playerIsFinishedWithDraftingRound(draft, this, cards);
           return undefined;
         }),
     );
@@ -746,10 +746,13 @@ export class Player implements IPlayer {
     return total;
   }
 
-  public runResearchPhase(draftVariant: boolean): void {
-    const draft = draftVariant ? newStandardDraft(this.game) : newNonDraft(this.game);
+  public runResearchPhase(): void {
+    const draftVariant = this.game.gameOptions.draftVariant;
 
+    // Even without the draft, using this to compute the number of cards to keep.
+    const draft = draftVariant ? newStandardDraft(this.game) : newNonDraft(this.game);
     const dealtCards: Array<IProjectCard> = draftVariant ? this.draftedCards : draft.draw(this);
+
     if (draftVariant) {
       this.draftedCards = [];
     }

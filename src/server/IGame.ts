@@ -128,7 +128,14 @@ export interface IGame extends Logger {
   playerHasPassed(player: IPlayer): void;
   hasResearched(player: IPlayer): boolean;
   playerIsFinishedWithResearchPhase(player: IPlayer): void;
-  playerIsFinishedWithDraftingPhase(draft: Draft, player: IPlayer, cards : Array<IProjectCard>): void;
+  /**
+   * Called after a player drafts.
+   *
+   * @param draft The type of draft
+   * @param player The player who drafted
+   * @param cards The cards the player didn't draft, which they will pass to the next player.
+   */
+  playerIsFinishedWithDraftingRound(draft: Draft, player: IPlayer, cards : Array<IProjectCard>): void;
   playerIsFinishedTakingActions(): void;
   // Part of final greenery placement.
   canPlaceGreenery(player: IPlayer): boolean;

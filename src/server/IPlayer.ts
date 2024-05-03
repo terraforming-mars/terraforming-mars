@@ -269,7 +269,7 @@ export interface IPlayer {
    * @param passedCards The cards received from the draw, or from the prior player.
    */
   askPlayerToDraft(draft: Draft, passTo: IPlayer, passedCards: Array<IProjectCard> | undefined): void;
-  runResearchPhase(draftVariant: boolean): void;
+  runResearchPhase(): void;
   getCardCost(card: IProjectCard): number;
 
   /** The number of resources on this card for this player, or 0 if the player does not have this card. */

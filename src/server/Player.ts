@@ -709,7 +709,7 @@ export class Player implements IPlayer {
     });
   }
 
-  public dealForDraft(quantity: number, cards: Array<IProjectCard>): void {
+  private dealForDraft(quantity: number, cards: Array<IProjectCard>): void {
     cards.push(...this.game.projectDeck.drawN(this.game, quantity, 'bottom'));
   }
 

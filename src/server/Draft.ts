@@ -1,6 +1,7 @@
 import {CardName} from '../common/cards/CardName';
 import {IGame} from './IGame';
 import {IPlayer} from './IPlayer';
+import {IProjectCard} from './cards/IProjectCard';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
 
 export type DraftType = 'none' | 'initial' | 'prelude' | 'standard';
@@ -10,14 +11,22 @@ export abstract class Draft {
 
   abstract cardsToDraw(player: IPlayer): number;
   abstract cardsToKeep(player: IPlayer): number;
+  abstract draw(player: IPlayer): Array<IProjectCard>;
 }
 
 /**
  * Special case where a player isn't drafting cards.
+ *
+ * This commingles the concepts of the draft phase and research phase. But for now this is OK. Code is simpler.
  */
 class NonDraft extends Draft {
   constructor(game: IGame) {
     super('standard', game);
+  }
+
+  override draw(player: IPlayer) {
+    const cardsToDraw = this.cardsToDraw(player);
+    return this.game.projectDeck.drawN(this.game, cardsToDraw, 'bottom');
   }
 
   override cardsToDraw(player: IPlayer): number {
@@ -43,6 +52,11 @@ class NonDraft extends Draft {
 class StandardDraft extends Draft {
   constructor(game: IGame) {
     super('standard', game);
+  }
+
+  override draw(player: IPlayer) {
+    const cardsToDraw = this.cardsToDraw(player);
+    return this.game.projectDeck.drawN(this.game, cardsToDraw, 'bottom');
   }
 
   override cardsToDraw(player: IPlayer): number {
@@ -73,6 +87,11 @@ class InitialDraft extends Draft {
     super('initial', game);
   }
 
+  override draw(player: IPlayer) {
+    const cardsToDraw = this.cardsToDraw(player);
+    return this.game.projectDeck.drawN(this.game, cardsToDraw, 'bottom');
+  }
+
   override cardsToDraw(_player: IPlayer): number {
     return 5;
   }
@@ -85,6 +104,10 @@ class InitialDraft extends Draft {
 class PreludeDraft extends Draft {
   constructor(game: IGame) {
     super('prelude', game);
+  }
+
+  override draw(_player: IPlayer): never {
+    throw new Error('Not implemented');
   }
 
   override cardsToDraw(_player: IPlayer): number {

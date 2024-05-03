@@ -636,7 +636,8 @@ export class Game implements IGame, Logger {
     this.players.forEach((player) => {
       player.needsToDraft = true;
       if (this.draftRound === 1 && draft.type !== 'prelude') {
-        player.askPlayerToDraft(draft, this.giveDraftCardsTo(player));
+        const cards = draft.draw(player);
+        player.askPlayerToDraft(draft, this.giveDraftCardsTo(player), cards);
       } else if (this.draftRound === 1 && draft.type === 'prelude') {
         player.askPlayerToDraft(draft, this.giveDraftCardsTo(player), player.dealtPreludeCards);
       } else {

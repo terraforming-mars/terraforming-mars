@@ -710,15 +710,10 @@ export class Player implements IPlayer {
     });
   }
 
-  private dealForDraft(quantity: number) {
-    return this.game.projectDeck.drawN(this.game, quantity, 'bottom');
-  }
-
-  public askPlayerToDraft(draft: Draft, passTo: IPlayer, passedCards?: Array<IProjectCard>): void {
-    const cardsToDraw = draft.cardsToDraw(this);
+  public askPlayerToDraft(draft: Draft, passTo: IPlayer, passedCards: Array<IProjectCard>): void {
     const cardsToKeep = draft.cardsToKeep(this);
 
-    const cards = passedCards ?? this.dealForDraft(cardsToDraw);
+    const cards = [...passedCards];
 
     const messageTitle = cardsToKeep === 1 ?
       'Select a card to keep and pass the rest to ${0}' :
@@ -753,15 +748,14 @@ export class Player implements IPlayer {
 
   public runResearchPhase(draftVariant: boolean): void {
     const draft = draftVariant ? newStandardDraft(this.game) : newNonDraft(this.game);
-    const cardsToDraw = draft.cardsToDraw(this);
-    const cardsToKeep = draft.cardsToKeep(this);
 
-    const dealtCards: Array<IProjectCard> = draftVariant ? this.draftedCards : this.dealForDraft(cardsToDraw);
+    const dealtCards: Array<IProjectCard> = draftVariant ? this.draftedCards : draft.draw(this);
     if (draftVariant) {
       this.draftedCards = [];
     }
 
     // TODO(kberg): Using .execute to rely on directly calling setWaitingFor is not great.
+    const cardsToKeep = draft.cardsToKeep(this);
     const action = new ChooseCards(this, dealtCards, {paying: true, keepMax: cardsToKeep}).execute();
     this.setWaitingFor(action, () => this.game.playerIsFinishedWithResearchPhase(this));
   }

@@ -264,12 +264,11 @@ export interface IPlayer {
   /**
    * Ask the player to draft from a set of cards.
    *
-   * @param type the type of draft being asked for.
+   * @param draft the type of draft being asked for.
    * @param passTo  The player _this_ player passes remaining cards to.
-   * @param passedCards The cards received from the draw, or from the prior player. If empty, it's the first
-   *   step in the draft, and this function will deal cards.
+   * @param passedCards The cards received from the draw, or from the prior player.
    */
-  askPlayerToDraft(draft: Draft, passTo: IPlayer, passedCards?: Array<IProjectCard>): void;
+  askPlayerToDraft(draft: Draft, passTo: IPlayer, passedCards: Array<IProjectCard> | undefined): void;
   runResearchPhase(draftVariant: boolean): void;
   getCardCost(card: IProjectCard): number;
 

@@ -65,6 +65,7 @@
     "The id of this game is ${0}": "Die ID dieses Spiels ist ${0}",
     "Good luck ${0}!": "Viel Glück, ${0}!",
     "Final greenery placement": "Finale Platzierung der Grünflächen",
+    "Final greenery phase is skipped since you did not complete the win condition.": "Die letzte Grünflächenphase wird übersprungen, da du die Siegbedingung nicht erfüllt hast.",
     "This game id was ${0}": "Die Spiel-ID war ${0}",
 
     "${0} gained ${1}": "${0} erhielt ${1}",

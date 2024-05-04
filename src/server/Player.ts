@@ -76,6 +76,7 @@ import {UnderworldPlayerData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {Counter} from './behavior/Counter';
 import {TRSource} from '../common/cards/TRSource';
+import {PolicyId} from './turmoil/Policy';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 
@@ -86,6 +87,7 @@ export class Player implements IPlayer {
   public game: IGame;
   public tags: Tags;
   public colonies: Colonies;
+  public alliedPolicy?: PolicyId;
   public readonly production: Production;
   public readonly stock: Stock;
 

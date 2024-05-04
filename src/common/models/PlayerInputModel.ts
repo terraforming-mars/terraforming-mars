@@ -9,6 +9,7 @@ import {SpaceId} from '../Types';
 import {PaymentOptions} from '../inputs/Payment';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
 import {Warning} from '../cards/Warning';
+import {PolicyId} from '../turmoil/Types';
 
 export type BaseInputModel = {
   title: string | Message;
@@ -118,6 +119,11 @@ export type SelectGlobalEventModel = BaseInputModel & {
   globalEventNames: Array<GlobalEventName>;
 }
 
+export type SelectPolicyModel = BaseInputModel & {
+  type: 'policy';
+  policies: Array<PolicyId>;
+}
+
 export type PlayerInputModel =
   AndOptionsModel |
   OrOptionsModel |
@@ -136,4 +142,5 @@ export type PlayerInputModel =
   SelectProjectCardToPlayModel |
   SelectSpaceModel |
   ShiftAresGlobalParametersModel |
-  SelectGlobalEventModel;
+  SelectGlobalEventModel |
+  SelectPolicyModel;

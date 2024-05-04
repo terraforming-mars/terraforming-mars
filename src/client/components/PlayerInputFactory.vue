@@ -49,6 +49,7 @@ const typeToComponentName: Record<PlayerInputType, string> = {
   'productionToLose': 'select-production-to-lose',
   'aresGlobalParameters': 'shift-ares-global-parameters',
   'globalEvent': 'select-global-event',
+  'policy': 'select-policy',
 };
 
 export default Vue.component('player-input-factory', {

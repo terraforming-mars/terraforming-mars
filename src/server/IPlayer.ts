@@ -31,6 +31,7 @@ import {Color} from '../common/Color';
 import {OrOptions} from './inputs/OrOptions';
 import {Stock} from './player/Stock';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
+import {PolicyId} from '../server/turmoil/Policy';
 
 export type ResourceSource = IPlayer | GlobalEventName | ICard;
 
@@ -52,6 +53,7 @@ export type DraftType = 'initial' | 'prelude' | 'standard';
 export type CardAction ='add' | 'discard' | 'nothing' | 'action-only';
 
 export interface IPlayer {
+  alliedPolicy?: PolicyId;
   readonly id: PlayerId;
   name: string;
   color: Color;

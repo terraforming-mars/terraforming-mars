@@ -10,6 +10,8 @@ import {PlayCardMetadata} from '../inputs/SelectProjectCardToPlay';
 import {IColony} from '../colonies/IColony';
 import {CardName} from '../../common/cards/CardName';
 import {Tag} from '../../common/cards/Tag';
+import {PolicyId} from '../../common/turmoil/Types';
+import {Policy} from '../turmoil/Policy';
 
 export function cardsToModel(
   player: IPlayer,
@@ -93,4 +95,8 @@ export function coloniesToModel(game: IGame, colonies: Array<IColony>, showTileO
           game.getPlayerById(colony.visitor).color,
     }),
   );
+}
+
+export function policiesToModel(policies: Array<Policy>): Array<PolicyId> {
+  return policies.map((p) => p.id);
 }

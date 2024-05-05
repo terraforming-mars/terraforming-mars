@@ -39,7 +39,7 @@
   "PLACE THE NOMADS on a non-reserved, empty area on the game board.": "遊牧民を空きマスに配置. ※遊牧民がいるマスに配置できない",
 
   "Kaguya Tech": "カグヤテック",
-  "Increase M€ production 2 steps. Draw 1 card. Remove 1 of your greenery tiles (does not affect oxygen.) Place a city tile there, regardless of placement rules. Gain placement bonuses as usual.": "MC産出+2. 1ドロー. 自身の緑地タイル1つを都市タイルと置き換える. この時、配置ルールは全て無視し、配置ボーナスを獲得.",
+  "Increase M€ production 2 steps. Draw 1 card. Remove 1 of your greenery tiles (does not affect oxygen.) Place a city tile there, regardless of placement rules. Gain placement bonuses as usual.": "MC産出+2. 1ドロー. 自身の緑地タイル1つを都市タイルと置き換える. この時、配置制限は全て無視し、配置ボーナスを獲得.",
 
   "Homeostasis Bureau": "恒常性事務局",
   "Effect: When you raise the temperature, gain 3 M€.": "効果：温度+1段階する毎に3MC獲得.",
@@ -49,7 +49,7 @@
   "Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.": "条件：酸素4%以下. MC産出+2. 所有するタイルに隣接する空きマス毎に1MC獲得.",
 
   "St. Joseph of Cupertino Mission": "クパチーノ聖ヨゼフ伝道所",
-  "Action: Pay 5 M€ (STEEL MAY BE USED) to build 1 Cathedral in a city. Max 1 per city. City owner can pay 2 M€ to draw 1 card.": "アクション：5MCを支払い(※建材での支払い可能)、任意の都市上に大聖堂を1つ配置. 配置された都市の所有者は2MC支払い、1ドローしてもよい. 同一都市上には大聖堂1つ迄配置可能. ",
+  "Action: Pay 5 M€ (STEEL MAY BE USED) to build 1 Cathedral in a city. Max 1 per city. City owner can pay 2 M€ to draw 1 card.": "アクション：5MCを支払い(※建材での支払い可能)、任意の都市上に大聖堂を1つ配置. 配置された都市の所有者は2MC支払い、1ドローしてもよい. 大聖堂は同一都市に1つまで配置可能. ",
   "1 VP per City with a Cathedral in it.": "配置した大聖堂1つ毎に1VP.",
 
   "Cyberia Systems": "サイベリア・システム",
@@ -145,7 +145,7 @@
   "Decrease your M€ production 2 steps.": "MC産出-2.",
 
   "Law Suit": "民事訴訟",
-  "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "この世代中にあなたのリソースまたは産出を除去したプレイヤー1人から3MC除去し、3MC獲得. またこのカードをそのプレイヤーのプレイ済みカードとする.",
+  "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "この世代中にあなたのリソースまたは産出を除去したプレイヤー1人から3MC盗む. またこのカードをそのプレイヤーのプレイ済みカードとする.",
 
   "Small Asteroid": "小型小惑星",
   "Increase temperature 1 step. Remove up to 2 plants from any player.": "温度+1段階. 望むならプレイヤー1人から最大2植物除去.",
@@ -226,5 +226,6 @@
 
   "Saturn Surfing": "土星サーフィン",
   "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.": "アクション：このカード上の1浮遊体毎に1MC獲得(最大5MC)し、このカード上から1浮遊体除去.",
-  "Add 1 floater here for every Earth tag you have, including this.": "地球タグ1つ毎にこのカード上に1浮遊体追加."
+  "Add 1 floater here for every Earth tag you have, including this.": "地球タグ1つ毎にこのカード上に1浮遊体追加.",
+  "max 5": "最大5"
 }

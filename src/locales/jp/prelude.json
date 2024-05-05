@@ -138,7 +138,7 @@
     "Increase your energy production 3 steps.": "電力産出+3.",
 
     "Research Network": "研究ネットワーク",
-    "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "MC産出+1. 3ドロー.プレイ後、？タグは任意のタグ1つとして扱う. ゲーム終了時にはカウントしない.",
+    "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "MC産出+1. 3ドロー.プレイ後、ワイルドタグは任意のタグ1つとして扱う. ゲーム終了時にはカウントしない.",
 
     "Self-Sufficient Settlement": "自給自足型開拓地",
     "Increase your M€ production 2 steps. Place a city tile.": "都市タイルを配置. MC産出+2.",
@@ -163,6 +163,6 @@
 
     "Add resource to card GHG Producing Bacteria": "温室効果ガス生成バクテリアに1リソース追加",
     "Add resource to card Fish": "捕食獣に1リソース追加",
-    "Add resource": "1リソース追加",
+    "Add resource": "リソース追加",
     "Gain plant": "植物獲得"
 }

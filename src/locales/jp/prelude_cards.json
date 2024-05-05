@@ -3,7 +3,7 @@
     "Requires 4 Earth tags. Gain 3 TR. Place 2 delegates.": "条件：地球タグ4つ以上. TR+3段階. 代議員2名を配置.",
 
     "GHG Shipment": "温室効果ガスの輸送",
-    "Requires that Kelvinists are in power or that you have 2 delegates there. Increase your heat production 1 step. Gain 1 heat for each floater you have.": "条件：汎ケルビン党が与党か、そこに2議席ある. 発熱産出+1. 1浮遊体毎に、1発熱獲得.",
+    "Requires that Kelvinists are in power or that you have 2 delegates there. Increase your heat production 1 step. Gain 1 heat for each floater you have.": "条件：汎ケルビン党が与党か、そこに2議席ある. 温熱産出+1. 1浮遊体毎に、1温熱獲得.",
 
     "Cloud Tourism": "雲海旅行",
     "Action: Add 1 floater to this card.": "アクション：このカード上に1浮遊体追加.",
@@ -17,7 +17,7 @@
     "Requires Venus 10%. Gain 3 titanium and draw 2 Venus cards.": "条件：金星10%以上. 3チタン獲得. 金星タグカードを2枚入手",
 
     "L1 Trade Terminal": "L1交易ターミナル",
-    "Effect: When you trade, first increase that colony tile track 2 steps.": "効果：交易するコロニータイルのトラックを+2段階してもよい(+1段階も可)",
+    "Effect: When you trade, first increase that colony tile track 2 steps.": "効果：交易する天体のトラックを+2段階してもよい(+1段階も可)",
     "Add a resource to 3 different cards.": "異なる3枚までのカード上にそれぞれ1リソース追加.",
 
     "Red Appeasement": "赤き宥和",
@@ -35,7 +35,7 @@
     "Temperature must be -20 C or lower.": "条件：温度-20℃以下.",
 
     "Research Coordination": "共同研究",
-    "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "プレイ後、？タグは任意のタグ1つとして扱う. ゲーム終了時にはカウントしない.",
+    "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "プレイ後、ワイルドタグは任意のタグ1つとして扱う. ゲーム終了時にはカウントしない.",
 
     "SF Memorial": "SF記念碑",
     "Draw 1 card.": "1ドロー.",

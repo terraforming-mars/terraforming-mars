@@ -35,6 +35,8 @@
   "(Effect: When you play a Mars tag, you pay 1 M€ less for each Mars tag you have.)": "(効果：火星タグをプレイ時、火星タグの数分、プレイコスト-1MC.)",
   "(You start with 52 M€.)": "(初期資源：52MC.)",
 
+  "MARS": "MARS",
+  "MATHS": "MATHS",
   "Mars Math": "火星数学",
   "(Effect: At the beginning of the Research phase, you draw 5 cards, but may STILL only buy 4 cards. If you are drafting, keep 2 cards for your first draft.)": "(効果：研究フェイズで5枚カードを見る(ドラフトの場合は最初に2枚キープ). ただし購入は4枚まで.)",
   "(Action: Take another two actions this turn.)": "(アクション：2回アクションを行う(消費アクションは1回分).)",
@@ -69,6 +71,7 @@
   "(Action: Remove 3 floaters from this card to raise Venus 1 step or raise oxygen 1 step)": "(アクション：このカード上から3浮遊体除去し、金星+1段階 または 酸素+1段階.)",
   "(You start with 39 M€.)": "(初期資源：39MC.)",
 
+  "SOLBANK": "SOLBANK",
   "Solbank": "ソルバンク",
   "(Effect: Whenever you spend M€ (or steel or titanium) add 1 data to this card.)": "(効果：MC または 建材 または チタンを支払った時、このカード上に1データ追加.)",
   "(Effect: During the production phase convert each data from this card into 1M€ each.)": "(効果：生産フェイズ時に、このカード上からxデータを除去し、xMC獲得.)",

@@ -1,0 +1,67 @@
+{
+    "AERON GENOMICS": "AERON GENOMICS",
+    "Aeron Genomics": "アーロンゲノミクス",
+    "Effect: After you excavate an underground resource, put an animal on this card.": "効果：地下資源を採掘した時、このカード上に1動物追加.",
+    "Action: Spend 1 M€ to move an animal from here to another card.": "アクション：1MC支払い、このカード上の動物を他のカードに移動する.",
+    "You start with 35 M€, 5 steel, and 1 animal resource on this card. 1 VP per 3 animals on this card.": "初期資源：35MC. 5建材. このカード上に1動物追加. このカード上の3動物毎に1VP",
+
+    "ANUBIS SECURITIES": "ANUBIS SECURITIES",
+    "Anubis Securities": "アヌビス証券",
+    "Effect: When any player increases their TR by 1, they gain 2 M€.": "効果：TRが上昇された時、そのプレイヤーは2MC獲得.",
+    "PAYS": "支払う",
+    "At the end of the production phase, discard all your corruption and gain 6 M€ for each unit discarded. Then, each player must pay you 1 M€ per unit of corruption they have. If no one has any, gain 1 TR instead.": "産出フェイズ終了時、汚職を全て除去し、その数分6MC獲得. 全プレイヤーは汚職の数分、1MC支払う. 誰も汚職がない場合、TR+1段階.",
+    "You start with 42 M€. As your first action, play a card ignoring global requirements.": "初期資源：42MC. 1アクション目：グローバルパラメーター参照の条件を無視してカード1枚をプレイ.",
+
+    "ARBORIST COLLECTIVE": "ARBORIST COLLECTIVE",
+    "Arborist Collective": "アーボリスト共同体",
+    "Effect: After you play an event card with a base cost of 14 or less, put an activist resource on this card.": "効果：14MC以下のイベントカードをプレイ時、このカード上に1活動家追加.",
+    "Action: Spend 2 activists here to increase your plant production 1 step and gain 2 plants.": "アクション：このカード上から2活動家除去し、2植物獲得. 植物産出+1.",
+    "You start with 36 M€, 3 plants and 1 plant production.": "初期資源：36MC. 3植物. 初期産出：植物産出+1.",
+
+    "DEMETRON LABS": "DEMETRON LABS",
+    "Demetron Labs": "デメトロン研究所",
+    "Placement Bonus": "配置ボーナス",
+    "Effect: After you identify 1 or more underground resources in a single action EXCEPT BY EXCAVATING, put 1 data on ANY card": "効果：採掘を除く地下資源を調査するアクションをした時、1データ獲得.",
+    "Action: Spend 3 data here and pick a space on Mars with no tile. Gain its placement bonus, and no adjacency bonuses.": "アクション：このカード上から2データ除去し、火星上の空きマスを1つ選ぶ. そこの配置ボーナスを獲得(隣接ボーナスは含まない).",
+    "You start with 45 M€ and 3 data on this card.": "初期資源：45MC. このカード上に3データ追加.",
+
+    "HADESPHERE": "HADESPHERE",
+    "Hadesphere": "ハデスフィア",
+    "Action: Excavate an underground resource.": "アクション：地下資源を採掘する.",
+    "You start with 36 M€ and 5 steel. As your first action, identify any 3 underground resources on Mars.": "初期資源：36MC. 5建材. 1アクション目：3回地下資源を調査する.",
+
+    "HECATE SPEDITIONS": "HECATE SPEDITIONS",
+    "Hecate Speditions": "ヘカテー探検隊",
+    "planetary tag": "惑星タグ",
+    "Effect: When you play an Earth, Mars, Venus, Moon, or Jovian tag, including this, put 1 supply chain resource on this card.": "効果：惑星タグをプレイ時、このカード上に1サプライチェーン追加.",
+    "(Effect: Spend 2 supply chain resources (min. 1) to trade.) (Action: Spend 5 supply chain resources to gain a trade fleet.)": "(効果：このカード上から2サプライチェーン除去し、無料で交易(軽減されても0以下にならない).) (アクション：このカード上から5サプライチェーン除去し、1交易艦隊獲得.)",
+    "You start with 38 M€. As your first action, place a colony.": "初期資源：38MC. 1アクション目：コロニー1つ配置.",
+
+    "HENKEI GENETICS": "HENKEI GENETICS",
+    "Henkei Genetics": "ヘンケイ遺伝学",
+    "Effect: After you play a microbe card that can hold microbes, add 2 microbes to it.": "効果：微生物を配置できるカードをプレイした時、そのカード上に2微生物追加.",
+    "Action: Pay 1 corruption to draw a card with a microbe tag.": "アクション：1汚職支払い、微生物タグカードを1枚入手.",
+    "You start with 47 M€ and 1 corruption.": "初期資源：47MC. 1汚職.",
+
+    "JENSON-BOYLE & CO": "JENSON-BOYLE & CO",
+    "Jenson-Boyle & Co": "ジェンソン・ボイル",
+    "Action: Pay 1 corruption to gain either 4 steel, 3 titanium, 3 plants or 6 heat.": "アクション：1汚職支払い、4建材 または 3チタン または 3植物 または 6温熱獲得.",
+    "You start with 46 M€ and 2 corruption.": "初期資源：46MC. 2汚職.",
+
+    "KEPLERTEC": "KEPLERTEC",
+    "Keplertec": "ケプラーテック",
+    "Action: Spend 1 titanium to put a fighter resource on ANY card.": "アクション：1チタンを支払い、1戦闘機獲得.",
+    "Effect: When you place a fighter resource on this card, draw 4 random underground resource tokens. Pick one of them and claim the reward on it. Then shuffle the tokens back into the pile.": "効果：このカード上に戦闘機が追加された時、地下資源トークンを4枚見る. その内、1枚の資源を獲得し残りを山札に戻す.",
+    "You start with 33 M€, 3 titanium, and 1 titanium production.": "初期資源：33MC. 3チタン. 初期産出：チタン産出+1.",
+
+    "KINGDOM OF TAURARO": "KINGDOM OF TAURARO",
+    "Kingdom of Tauraro": "タウラロ王国",
+    "Effect: You may place cities adjacent to other cities. You must always place cities adjacent to tiles you already own, if possible.": "効果：都市を配置時、他の都市に隣接して配置できる. 可能であれば、すでに所有しているタイルに隣接しなければならない.",
+    "You start with 50 M€ and 6 M€ production. All opponents gain 2 M€ production. As your first action, place a city.": "初期資源：50MC. 初期産出：MC産出+6. 他の全プレイヤーはMC産出+2. 1アクション目：都市1枚配置.",
+
+    "VOLTAGON": "VOLTAGON",
+    "Voltagon": "ボルタゴン",
+    "Effect: After you excavate an underground resource, gain 2 energy.": "効果：地下資源が採掘した時、2電力獲得.",
+    "Action: Spend 8 energy to increase oxygen or Venus 1 step.": "アクション：8電力支払い、酸素濃度+1段階 または 金星+1段階.",
+    "You start with 38 M€ and 1 energy production.": "初期資源：38MC. 初期産出：電力産出+1."
+}

@@ -64,12 +64,12 @@
     "Pay 1 M€ less for cards this generation": "この世代カードのプレイコスト-1MC",
 
     "Mercury": "水星",
-    "Gain the trade bonus of any colony tile. (This does not move the markers.)": "いずれかのコロニータイルの交易収入を得る.(交易マーカーは動かさない)",
+    "Gain the trade bonus of any colony tile. (This does not move the markers.)": "いずれかの天体の交易収入を得る.(交易マーカーは動かさない)",
     "Gain 1 unit of production of the type below the track marker": "指定の資源の産出+1",
 
     "Hygiea": "ヒギエア",
     "Choose opponent to discard 1 card": "他プレイヤーを1人選び、そのプレイヤーは手札を1枚捨てる",
-    "Steal 3 units of the listed type": "望むならプレイヤー1人から指示された資源を最大3つ除去し、同じものを獲得",
+    "Steal 3 units of the listed type": "望むならプレイヤー1人から指示された資源を最大3つ盗む",
     "Gain 3 M€": "3MC獲得",
 
     "Titania": "チタニア",
@@ -91,13 +91,14 @@
     "Gain +1 influence": "影響力+1",
     "Place n delegates": "代議員X名配置",
     "Gain 1 M€ for each delegate in any party": "配置している代議員1名につき1MC獲得",
+    "/ party": "/ 配置している",
 
     "Iapetus II": "イアペトゥス II",
     "Add 3 data to ANY card": "3データ獲得",
     "Add n data to ANY card": "Xデータ獲得",
     "Add 1 data to ANY card": "1データ獲得",
 
-    "Select colony tile to remove": "取り除くコロニータイルを選択してください.",
+    "Select colony tile to remove": "取り除く天体を選択してください.",
     "Bonus": "コロニー・ボーナス",
     "Colony Bonus": "コロニー・ボーナス",
     "Trade Income": "交易収入",
@@ -109,7 +110,7 @@
     "REVEAL TOP CARD OF DECK.": "デッキトップを1枚確認する.",
     "BUY OR DISCARD IT.": "3MCで購入するか、そのまま捨てる.",
     "Trade Income: Draw X cards and keep 1": "デッキの上からX枚を見る.その内、1枚を獲得し残りを捨て札にする.",
-    "Trade Income: Steal 3 indicated resources": "望むならプレイヤー1人から指示された資源を最大3つ除去し、同じものを獲得",
+    "Trade Income: Steal 3 indicated resources": "望むならプレイヤー1人から指示された資源を最大3つ盗む",
     "Copy Trade": "コピー",
     "Party": "議会",
 

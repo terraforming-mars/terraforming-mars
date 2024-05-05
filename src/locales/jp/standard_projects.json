@@ -1,5 +1,5 @@
 {
-    "Buffer Gas": "",
+    "Buffer Gas": "緩衝ガスの導入",
     "Spend 16 M€ to increase your TR 1 step. Solo games only.": "ソロ専用：16MC支払い、TR+1段階.",
     "Spend 25 M€ to place a city tile and increase your M€ production 1 step.": "25MC支払い、都市タイルを配置. MC産出+1.",
     "Spend 17 M€ to place a colony.": "17MC支払い、コロニー1つ配置.",
@@ -17,6 +17,11 @@
     "Spend 15M€, less 1M€ per Venus tag you have, to raise Venus 1 step.": "15MC支払い、金星+1段階. この時、所持している金星タグに付きコスト-1MC.",
     "max -5M€": "最大-5MCまで.",
     "Spend 18 M€ to place an ocean tile.": "18MC支払い、海洋配置.",
+
+    "Collusion": "癒着",
+    "Spend 1 corruption to convert 1 or 2 neutral delegates into your own delegates.": "1汚職支払い、最大2名の中立の代議員をあなたの代議員と交代する",
+    "Excavate": "地下資源の採掘",
+    "Spend 7 M€ (steel may be used) to excavate a space.": "7MC支払い、地下資源を採掘する(建材での支払い可能).",
 
     "Build Moon Colony": "",
     "Lunar Habitat": "月のコロニー",

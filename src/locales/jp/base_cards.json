@@ -96,8 +96,8 @@
     "Requires that you have 5 science tags.": "条件：科学タグ5つ以上.",
 
     "Security Fleet": "警備艦隊",
-    "Action: Spend 1 titanium to add 1 fighter resource to this card.": "アクション：1チタンを支払い、このカード上に1艦隊追加.",
-    "1 VP for each fighter resource on this card.": "このカード上の1艦隊毎に1VP.",
+    "Action: Spend 1 titanium to add 1 fighter resource to this card.": "アクション：1チタンを支払い、このカード上に1戦闘機追加.",
+    "1 VP for each fighter resource on this card.": "このカード上の1戦闘機毎に1VP.",
 
     "Cupola City": "ドーム都市",
     "Oxygen must be 9% or less. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "条件：酸素9%以下. 都市タイルを配置. 電力産出-1し、MC産出+3.",
@@ -398,11 +398,10 @@
     "Place this tile adjacent to a city tile.": "都市タイルに隣接するように特殊タイルを配置.",
 
     "Hired Raiders": "雇われ襲撃者",
-    "Steal up to 2 steel, or 3 M€ from any player.": "望むならプレイヤー1人から最大2建材 または 3MCを除去し、同じものを獲得.",
+    "Steal up to 2 steel, or 3 M€ from any player.": "望むならプレイヤー1人から最大2建材 または 3MC盗む.",
 
     "Hackers": "ハッカー集団",
-    "Decrease your energy production 1 step and any M€ production 2 steps. Increase your M€ production 2 steps.":
-     "電力産出-1. プレイヤー1人のMC産出-2. MC産出+2.",
+    "Decrease your energy production 1 step and any M€ production 2 steps. Increase your M€ production 2 steps.": "電力産出-1. プレイヤー1人のMC産出-2. MC産出+2.",
 
     "GHG Factories": "温室効果ガス工場",
     "Decrease your energy production 1 step and increase your heat production 4 steps.": "電力産出-1し、温熱産出+4.",
@@ -505,7 +504,7 @@
     "It must be -14 C or colder. Increase your plant production 2 steps.": "条件：温度-14℃以下. 植物産出+2.",
 
     "Standard Technology": "標準テクノロジー",
-    "Effect: After you pay for a standard project, except selling patents, you gain 3 M€.": "効果：標準プロジェクト実行後、3MC獲得.",
+    "Effect: After you pay for a standard project, except selling patents, you gain 3 M€.": "効果：「カード売却」以外の標準プロジェクト実行後、3MC獲得.",
 
     "Nitrite Reducing Bacteria": "脱窒菌",
     "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "アクション：このカード上に1微生物追加 または このカード上から3微生物除去し、TR+1段階.",
@@ -613,7 +612,7 @@
     "Action: Spend 8 M€ to place 1 ocean tile. STEEL MAY BE USED as if you were playing a building card.": "アクション：8MC支払い、海洋1枚配置. ※建材での支払い可能",
 
     "Flooding": "洪水",
-    "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 M€ FROM THE OWNER OF ONE OF THOSE TILES.": "海洋1枚配置. 配置した海洋タイルに隣接するタイルがある場合、望むならその所有プレイヤーから最大3MC除去.",
+    "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 M€ FROM THE OWNER OF ONE OF THOSE TILES.": "海洋1枚配置. 配置した海洋タイルに隣接するタイルがある場合、望むならその所有プレイヤーから最大4MC除去.",
 
     "Energy Saving": "省エネルギー対策",
     "Increase your energy production 1 step for each city tile in play.": "配置済みの全都市タイル1枚毎に電力産出+1.",
@@ -703,7 +702,7 @@
 
   "Requires 2 Earth tags. Increase M€ production 4 steps.":"条件：地球タグ2つ以上. MC産出+4.",
   "Oxygen must be 4% or lower. Draw two cards.":"条件：酸素4%以下. 2ドロー.",
-  "After being played, when you perform an action, the wild tag counts as any tag of your choice.":"プレイ後、？タグは任意のタグ1つとして扱う. ゲーム終了時にはカウントしない.",
+  "After being played, when you perform an action, the wild tag counts as any tag of your choice.":"プレイ後、ワイルドタグは任意のタグ1つとして扱う. ゲーム終了時にはカウントしない.",
   "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "電力産出-1し、MC産出+2. 火山地帯に都市タイル配置(都市隣接可). ※本環境では「ノクティス市」以外の白文字マス. ヘラス盤面のみ任意配置可能.",
   "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.":"効果：植物タグをプレイ時、このカード上の微生物を2MCとして支払ってもよい.",
   "Temperature must be -20 C or lower.":"条件：温度-20℃以下.",

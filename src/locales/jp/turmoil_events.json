@@ -128,11 +128,29 @@
   "Communication Boom": "コミュニケーション・ブーム",
   "Pay 10M€. Add 2 data to EVERY data card. Add 1 data to any data card for each influence you have.": "10MC支払う. データを配置できるカードに2データずつ追加. 影響力の数分、1データ獲得.",
 
-  "over 15": "15を超える",
+  "Fair Trade Complaint": "フェアトレードへの苦情",
+  "Lose 1 M€ for each card in your hand over 6 (no limit) reduced by 2 M€ per influence (min 0M€). Draw 2 cards if your hand contains 6 cards or less.": "6を超える手札の枚数分、1MC支払う. 影響力の数分、2MC軽減. 手札が6枚以下の場合、2ドロー.",
+
+  "Lagging Regulation": "規制の遅れ",
+  "Count corruption and ADD influence. Players with the most get 1 corruption and 3 M€ production. Players with 2nd most get 1 corruption and 1 M€ production. Min 1 to place. (SOLO: Place 1st with sum of 5 or more.)": "汚職数+影響力を合計する. 1以上で1位(ソロなら5以上)は1汚職獲得、MC産出+3. 1以上で2位(ソロなら無視)は1汚職獲得、MC産出+1. ",
+
+  "Media Stir": "メディアの煽動",
+  "Lose 3 M€ per corruption resource you have (max 5), minus influence. Players with 0 corruption gain 1 TR.": "汚職数(最大5)-影響力の数分、3MC支払う. 汚職が0のプレイヤーはTR+1段階.",
+
+  "Migration Underground": "地下移住",
+  "Gain 1 M€ production (max 5) for every 2 excavation markers you own. Each point of influence counts as an extra excavation marker.": "地下採掘回数+影響力の数2つ毎に、MC産出+1.(最大5)",
+
+  "Seismic Predictions": "地震予知",
+  "Discard all unclaimed underground resources. Lose 2 M€ for each tile on Mars you own WITHOUT excavation markers (max 5) minus influence.": "採掘されていない資源トークンを全て除去する. 地下採掘していない所有するタイル(最大5)-影響力の数分、2MC支払う.",
+
   "1st:": "1位",
   "2nd:": "2位",
+  "1st/2nd": "1位/2位",
   "Lose all": "全て失う",
   "max 3": "最大3",
+  "MAX 6": "最大6",
+  "over 6": "6を超える",
   "over 10": "10を超える",
+  "over 15": "15を超える",
   "OR": "または"
 }

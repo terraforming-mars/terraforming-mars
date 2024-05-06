@@ -11,6 +11,7 @@ import {digit} from '../Options';
 import {sum} from '../../../common/utils/utils';
 import {Space} from '../../boards/Space';
 import {CardResource} from '../../../common/CardResource';
+import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 
 export class DemetronLabs extends CorporationCard implements IActionCard {
   constructor() {
@@ -73,7 +74,7 @@ export class DemetronLabs extends CorporationCard implements IActionCard {
     }
     const actionId = sum(identifyingPlayer.game.getPlayers().map((p) => p.actionsTakenThisGame));
     if (this.lastActionId !== actionId) {
-      cardOwner.addResourceTo(this);
+      cardOwner.game.defer(new AddResourcesToCard(cardOwner, CardResource.DATA));
       this.lastActionId = actionId;
     }
   }

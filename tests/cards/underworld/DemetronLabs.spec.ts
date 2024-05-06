@@ -36,11 +36,13 @@ describe('DemetronLabs', () => {
     identify(player);
 
     simulateFinishingAction(player);
+    runAllActions(game);
     expect(card.resourceCount).eq(1);
 
     identify(player);
 
     simulateFinishingAction(player);
+    runAllActions(game);
     expect(card.resourceCount).eq(2);
 
     const excavatableSpaces = UnderworldExpansion.excavatableSpaces(player);
@@ -53,6 +55,7 @@ describe('DemetronLabs', () => {
     expect(space.undergroundResources).is.not.undefined;
 
     simulateFinishingAction(player);
+    runAllActions(game);
 
     expect(card.resourceCount).eq(2);
   });

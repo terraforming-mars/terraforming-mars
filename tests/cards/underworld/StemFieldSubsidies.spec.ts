@@ -7,6 +7,7 @@ import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {CardResource} from '../../../src/common/CardResource';
+import {assertIsAddResourceToCard} from '../../assertions';
 
 describe('StemFieldSubsidies', () => {
   let card: StemFieldSubsidies;
@@ -62,7 +63,7 @@ describe('StemFieldSubsidies', () => {
     runAllActions(game);
     UnderworldTestHelper.assertIsIdentificationAction(player, player.popWaitingFor());
     runAllActions(game);
-    UnderworldTestHelper.assertIsAddResourceToCard(player.popWaitingFor(), 1, [card, otherCard], card);
+    assertIsAddResourceToCard(player.popWaitingFor(), 1, [card, otherCard], card);
     cast(player.popWaitingFor(), undefined);
     runAllActions(game);
     expect(card.resourceCount).eq(1);

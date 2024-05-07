@@ -4,7 +4,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
 import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceCity} from '../../assertions';
 
 describe('CorporateStronghold', function() {
   let card: CorporateStronghold;
@@ -26,7 +26,7 @@ describe('CorporateStronghold', function() {
     expect(card.play(player)).is.undefined;
     runAllActions(player.game);
 
-    UnderworldTestHelper.assertPlaceCity(player, player.popWaitingFor());
+    assertPlaceCity(player, player.popWaitingFor());
 
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(3);

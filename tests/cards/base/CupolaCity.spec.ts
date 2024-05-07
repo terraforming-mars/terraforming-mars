@@ -5,7 +5,7 @@ import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceCity} from '../../assertions';
 
 describe('CupolaCity', function() {
   let card: CupolaCity;
@@ -34,7 +34,7 @@ describe('CupolaCity', function() {
     cast(card.play(player), undefined);
     runAllActions(player.game);
 
-    UnderworldTestHelper.assertPlaceCity(player, player.popWaitingFor());
+    assertPlaceCity(player, player.popWaitingFor());
 
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(3);

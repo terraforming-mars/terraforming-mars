@@ -8,7 +8,7 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {cast, maxOutOceans, runAllActions, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceOcean} from '../../assertions';
 
 describe('ArtificialLake', function() {
   let card: ArtificialLake;
@@ -33,7 +33,7 @@ describe('ArtificialLake', function() {
       expect(space.spaceType).to.eq(SpaceType.LAND);
     });
 
-    UnderworldTestHelper.assertPlaceOcean(player, selectSpace);
+    assertPlaceOcean(player, selectSpace);
 
     expect(card.getVictoryPoints(player)).to.eq(1);
   });

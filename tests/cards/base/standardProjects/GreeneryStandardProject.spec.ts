@@ -9,7 +9,7 @@ import {Phase} from '../../../../src/common/Phase';
 import {MAX_OXYGEN_LEVEL} from '../../../../src/common/constants';
 import {TileType} from '../../../../src/common/TileType';
 import {testGame} from '../../../TestGame';
-import {UnderworldTestHelper} from '../../../underworld/UnderworldTestHelper';
+import {assertPlaceTile} from '../../../assertions';
 
 describe('GreeneryStandardProject', function() {
   let card: GreeneryStandardProject;
@@ -33,7 +33,7 @@ describe('GreeneryStandardProject', function() {
     player.setTerraformRating(20);
     expect(game.getOxygenLevel()).eq(0);
 
-    UnderworldTestHelper.assertPlaceTile(player, churnAction(card, player), TileType.GREENERY);
+    assertPlaceTile(player, churnAction(card, player), TileType.GREENERY);
 
     expect(player.megaCredits).eq(0);
     expect(player.getTerraformRating()).eq(21);

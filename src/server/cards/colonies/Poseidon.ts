@@ -32,9 +32,7 @@ export class Poseidon extends CorporationCard {
     });
   }
 
-  public onColonyAdded(player: IPlayer, cardOwner: IPlayer) {
-    if (player === cardOwner) {
-      player.production.add(Resource.MEGACREDITS, 1, {log: true});
-    }
+  public onColonyAdded(_player: IPlayer, cardOwner: IPlayer) {
+    cardOwner.production.add(Resource.MEGACREDITS, 1, {log: true});
   }
 }

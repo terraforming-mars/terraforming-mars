@@ -9,7 +9,7 @@ import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {Tag} from '../../../src/common/cards/Tag';
 import {IDeferredAction} from '../../../src/server//deferredActions/DeferredAction';
 import {cast} from '../../TestingUtils';
-import {assertAddDelegateAction} from '../../turmoil/TurmoilTestHelper';
+import {assertAddDelegateAction} from '../../turmoil/turmoilAssertions';
 
 describe('LobbyHalls', function() {
   let card: LobbyHalls;

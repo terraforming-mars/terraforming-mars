@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {SponsoringNation} from '../../../src/server/cards/prelude2/SponsoringNation';
 import {cast, runAllActions} from '../../TestingUtils';
-import {assertAddDelegateAction} from '../../turmoil/TurmoilTestHelper';
+import {assertAddDelegateAction} from '../../turmoil/turmoilAssertions';
 
 describe('SponsoringNation', () => {
   it('canPlay', () => {

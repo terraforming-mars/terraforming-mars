@@ -1882,6 +1882,7 @@ export class Player implements IPlayer {
     player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
     player.canUsePlantsAsMegacredits = d.canUsePlantsAsMegaCredits;
     player.canUseTitaniumAsMegacredits = d.canUseTitaniumAsMegacredits;
+    player.canUseCorruptionAsMegacredits = d.canUseCorruptionAsMegacredits;
     player.cardCost = d.cardCost;
     player.colonies.cardDiscount = d.cardDiscount;
     player.colonies.tradeDiscount = d.colonyTradeDiscount;

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Neutrinograph} from '../../../src/server/cards/underworld/Neutrinograph';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {assertIsIdentificationAction} from '../../underworld/UnderworldTestHelper';
+import {assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 import {IdentifySpacesDeferred} from '../../../src/server/underworld/IdentifySpacesDeferred';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';

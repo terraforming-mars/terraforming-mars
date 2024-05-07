@@ -6,7 +6,7 @@ import {CardName} from '../../../src/common/cards/CardName';
 import {Tag} from '../../../src/common/cards/Tag';
 import {BiomassCombustors} from '../../../src/server/cards/base/BiomassCombustors';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
-import {assertIsExcavationAction} from '../../underworld/UnderworldTestHelper';
+import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {ColonizerTrainingCamp} from '../../../src/server/cards/base/ColonizerTrainingCamp';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';

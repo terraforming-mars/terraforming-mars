@@ -7,7 +7,7 @@ import {SelectResource} from '../../../src/server/inputs/SelectResource';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
-import {assertIsMaybeBlock} from '../../underworld/UnderworldTestHelper';
+import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
 
 describe('Monopoly', () => {
   let card: Monopoly;

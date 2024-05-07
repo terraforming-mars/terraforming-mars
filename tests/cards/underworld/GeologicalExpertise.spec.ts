@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {GeologicalExpertise} from '../../../src/server/cards/underworld/GeologicalExpertise';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {assertIsIdentificationAction} from '../../underworld/UnderworldTestHelper';
+import {assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 import {Tag} from '../../../src/common/cards/Tag';
 
 describe('GeologicalExpertise', () => {

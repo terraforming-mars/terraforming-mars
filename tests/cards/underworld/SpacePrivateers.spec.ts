@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SpacePrivateers} from '../../../src/server/cards/underworld/SpacePrivateers';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {assertIsMaybeBlock} from '../../underworld/UnderworldTestHelper';
+import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
 
 describe('SpacePrivateers', () => {
   it('canPlay', () => {

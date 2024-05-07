@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {RobotMoles} from '../../../src/server/cards/underworld/RobotMoles';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {assertIsIdentificationAction} from '../../underworld/UnderworldTestHelper';
+import {assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 
 describe('RobotMoles', () => {
   it('canAct', () => {

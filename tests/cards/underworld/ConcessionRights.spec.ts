@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ConcessionRights} from '../../../src/server/cards/underworld/ConcessionRights';
 import {testGame} from '../../TestGame';
 import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
-import {assertIsExcavationAction} from '../../underworld/UnderworldTestHelper';
+import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
 
 describe('ConcessionRights', () => {

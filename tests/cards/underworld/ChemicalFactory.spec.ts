@@ -4,7 +4,7 @@ import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {assertIsExcavationAction} from '../../underworld/UnderworldTestHelper';
+import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 
 describe('ChemicalFactory', () => {
   let card: ChemicalFactory;

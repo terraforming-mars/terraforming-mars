@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Microgravimetry} from '../../../src/server/cards/underworld/Microgravimetry';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {assertIsIdentificationAction} from '../../underworld/UnderworldTestHelper';
+import {assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';

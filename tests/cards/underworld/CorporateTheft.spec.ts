@@ -5,7 +5,7 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {CardName} from '../../../src/common/cards/CardName';
 import {newProjectCard} from '../../../src/server/createCard';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {assertIsMaybeBlock} from '../../underworld/UnderworldTestHelper';
+import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
 
 function toCard(e: readonly [CardName, number] | CardName) {
   const [cardName, count] = typeof(e) === 'string' ? [e, 0] : e;

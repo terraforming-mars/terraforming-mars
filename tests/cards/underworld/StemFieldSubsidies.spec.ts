@@ -3,7 +3,7 @@ import {StemFieldSubsidies} from '../../../src/server/cards/underworld/StemField
 import {testGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
-import {assertIsIdentificationAction} from '../../underworld/UnderworldTestHelper';
+import {assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {CardResource} from '../../../src/common/CardResource';

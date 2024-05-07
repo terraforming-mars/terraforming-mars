@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
-import {assertIsExcavationAction} from '../../underworld/UnderworldTestHelper';
+import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 
 describe('TunnelBoringMachine', () => {
   let game: IGame;

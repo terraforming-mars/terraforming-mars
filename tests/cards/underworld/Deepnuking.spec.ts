@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
-import {assertIsExcavationAction} from '../../underworld/UnderworldTestHelper';
+import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 describe('Deepnuking', () => {

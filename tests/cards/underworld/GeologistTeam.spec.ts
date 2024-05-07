@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {GeologistTeam} from '../../../src/server/cards/underworld/GeologistTeam';
 import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
-import {assertIsIdentificationAction} from '../../underworld/UnderworldTestHelper';
+import {assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
 
 describe('GeologistTeam', () => {

@@ -3,7 +3,7 @@ import {TitanManufacturingColony} from '../../../src/server/cards/underworld/Tit
 import {testGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
-import {assertIsExcavationAction} from '../../underworld/UnderworldTestHelper';
+import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 
 describe('TitanManufacturingColony', () => {
   it('onCardPlayed', () => {

@@ -11,11 +11,11 @@ export function assertAddDelegateAction(player: IPlayer, action: PlayerInput | u
   const turmoil = Turmoil.getTurmoil(player.game);
   const marsFirst = turmoil.getPartyByName(PartyName.MARS);
 
-  expect(turmoil.getAvailableDelegateCount(player)).eq(7);
-  expect(marsFirst.delegates.get(player)).eq(0);
+  const delegatesInReserve = turmoil.getAvailableDelegateCount(player);
+  const delegatesInParty = marsFirst.delegates.get(player);
 
   selectParty.cb(marsFirst.name);
 
-  expect(turmoil.getAvailableDelegateCount(player)).eq(7 - count);
-  expect(marsFirst.delegates.get(player)).eq(count);
+  expect(turmoil.getAvailableDelegateCount(player)).eq(delegatesInReserve - count);
+  expect(marsFirst.delegates.get(player)).eq(delegatesInParty + count);
 }

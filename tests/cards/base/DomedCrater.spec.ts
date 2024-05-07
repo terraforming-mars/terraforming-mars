@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
 import {runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceCity} from '../../assertions';
 
 describe('DomedCrater', function() {
   let card: DomedCrater;
@@ -34,7 +34,7 @@ describe('DomedCrater', function() {
     expect(card.play(player)).is.undefined;
     runAllActions(player.game);
 
-    UnderworldTestHelper.assertPlaceCity(player, player.popWaitingFor());
+    assertPlaceCity(player, player.popWaitingFor());
 
     expect(player.plants).to.eq(3);
     expect(player.production.energy).to.eq(0);

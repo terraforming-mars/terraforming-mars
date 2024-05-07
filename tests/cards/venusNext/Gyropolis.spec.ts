@@ -11,7 +11,7 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {Units} from '../../../src/common/Units';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceCity} from '../../assertions';
 import {IGame} from '../../../src/server/IGame';
 
 describe('Gyropolis', function() {
@@ -35,7 +35,7 @@ describe('Gyropolis', function() {
     expect(card.play(player)).is.undefined;
     runAllActions(player.game);
 
-    UnderworldTestHelper.assertPlaceCity(player, player.popWaitingFor());
+    assertPlaceCity(player, player.popWaitingFor());
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(3);
   });

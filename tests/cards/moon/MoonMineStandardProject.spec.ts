@@ -9,7 +9,7 @@ import {MoonMineStandardProject} from '../../../src/server/cards/moon/MoonMineSt
 import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectPaymentDeferred';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
 import {Payment} from '../../../src/common/inputs/Payment';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceTile} from '../../assertions';
 import {TileType} from '../../../src/common/TileType';
 
 describe('MoonMineStandardProject', () => {
@@ -65,7 +65,7 @@ describe('MoonMineStandardProject', () => {
     expect(moonData.miningRate).eq(0);
 
     runAllActions(game);
-    UnderworldTestHelper.assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_MINE);
+    assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_MINE);
 
     expect(moonData.miningRate).eq(1);
     expect(player.getTerraformRating()).eq(15);

@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
 import {runAllActions, setOxygenLevel, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceTile} from '../../assertions';
 
 describe('Mangrove', function() {
   let card: Mangrove;
@@ -29,7 +29,7 @@ describe('Mangrove', function() {
     expect(card.play(player)).is.undefined;
     runAllActions(game);
 
-    UnderworldTestHelper.assertPlaceTile(player, player.popWaitingFor(), TileType.GREENERY);
+    assertPlaceTile(player, player.popWaitingFor(), TileType.GREENERY);
 
     expect(card.getVictoryPoints(player)).to.eq(1);
   });

@@ -7,7 +7,7 @@ import {TileType} from '../../../src/common/TileType';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {BoardName} from '../../../src/common/boards/BoardName';
 import {SpaceName} from '../../../src/server/SpaceName';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceOcean} from '../../assertions';
 
 describe('KaguyaTech', () => {
   it('canPlay', () => {
@@ -72,6 +72,6 @@ describe('KaguyaTech', () => {
 
     runAllActions(game);
 
-    UnderworldTestHelper.assertPlaceOcean(player, player.popWaitingFor());
+    assertPlaceOcean(player, player.popWaitingFor());
   });
 });

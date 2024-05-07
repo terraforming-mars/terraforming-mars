@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {UndergroundShelters} from '../../../src/server/cards/underworld/UndergroundShelters';
 import {testGame} from '../../TestGame';
 import {addCity, cast, runAllActions} from '../../TestingUtils';
-import {assertIsExcavationAction} from '../../underworld/UnderworldTestHelper';
+import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 
 describe('UndergroundShelters', () => {
   it('Should play', () => {

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {MicroprobingTechnology} from '../../../src/server/cards/underworld/MicroprobingTechnology';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {assertIsIdentificationAction} from '../../underworld/UnderworldTestHelper';
+import {assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 import {Cryptocurrency} from '../../../src/server/cards/pathfinders/Cryptocurrency';
 import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';

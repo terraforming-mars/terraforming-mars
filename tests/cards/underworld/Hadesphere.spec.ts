@@ -4,7 +4,7 @@ import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {assertIsExcavationAction, assertIsIdentificationAction} from '../../underworld/UnderworldTestHelper';
+import {assertIsExcavationAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 
 describe('Hadesphere', () => {
   let card: Hadesphere;

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TunnelingOperation} from '../../../src/server/cards/underworld/TunnelingOperation';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {assertIsExcavationAction, assertIsIdentificationAction} from '../../underworld/UnderworldTestHelper';
+import {assertIsExcavationAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 
 describe('TunnelingOperation', () => {
   it('Should play', () => {

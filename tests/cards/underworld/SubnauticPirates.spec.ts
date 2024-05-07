@@ -6,7 +6,7 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {assertIsMaybeBlock} from '../../underworld/UnderworldTestHelper';
+import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
 
 describe('SubnauticPirates', () => {
   let card: SubnauticPirates;

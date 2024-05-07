@@ -4,7 +4,7 @@ import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {assertIsIdentificationAction} from '../../underworld/UnderworldTestHelper';
+import {assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
 
 describe('GeologicalSurvey', () => {

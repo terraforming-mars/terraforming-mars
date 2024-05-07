@@ -6,7 +6,7 @@ import {SpaceName} from '../../../src/server/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {resetBoard, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceCity} from '../../assertions';
 
 describe('LavaTubeSettlement', function() {
   let card: LavaTubeSettlement;
@@ -43,6 +43,6 @@ describe('LavaTubeSettlement', function() {
     card.play(player);
     runAllActions(game);
 
-    UnderworldTestHelper.assertPlaceCity(player, player.popWaitingFor());
+    assertPlaceCity(player, player.popWaitingFor());
   });
 });

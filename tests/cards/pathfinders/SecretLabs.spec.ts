@@ -8,7 +8,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
 import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceOcean} from '../../assertions';
 import {Whales} from '../../../src/server/cards/underworld/Whales';
 
 describe('SecretLabs', function() {
@@ -44,7 +44,7 @@ describe('SecretLabs', function() {
     placeOcean.cb();
     runAllActions(player.game);
 
-    UnderworldTestHelper.assertPlaceOcean(player, player.popWaitingFor());
+    assertPlaceOcean(player, player.popWaitingFor());
 
     runAllActions(player.game);
     expect(microbeCard.resourceCount).eq(2);

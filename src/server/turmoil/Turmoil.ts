@@ -373,6 +373,9 @@ export class Turmoil {
   public onAgendaSelected(game: IGame): void {
     const rulingParty = this.rulingParty;
 
+    // TODO: put here the choice of the allied party if Mars Frontier Alliance is in play
+    //      ruling bonus should be chosen between global or allied party if MFA is in play
+
     // Resolve Ruling Bonus
     const bonusId = PoliticalAgendas.currentAgenda(this).bonusId;
     const bonus = rulingParty.bonuses.find((b) => b.id === bonusId);

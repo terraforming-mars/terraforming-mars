@@ -76,7 +76,7 @@ import {UnderworldPlayerData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {Counter} from './behavior/Counter';
 import {TRSource} from '../common/cards/TRSource';
-import {PolicyId} from './turmoil/Policy';
+import {PathfindersPlayerData} from './pathfinders/PathfindersData';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 
@@ -87,7 +87,6 @@ export class Player implements IPlayer {
   public game: IGame;
   public tags: Tags;
   public colonies: Colonies;
-  public alliedPolicy?: PolicyId;
   public readonly production: Production;
   public readonly stock: Stock;
 
@@ -204,6 +203,9 @@ export class Player implements IPlayer {
 
   // Underworld
   public underworldData: UnderworldPlayerData = UnderworldExpansion.initializePlayer();
+
+  // Pathfinders
+  public pathfindersData: PathfindersPlayerData = {};
 
   // The number of actions a player can take this round.
   // It's almost always 2, but certain cards can change this value (Mars Maths, Tool with the First Order)

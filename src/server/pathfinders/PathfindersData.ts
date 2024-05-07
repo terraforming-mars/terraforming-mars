@@ -1,6 +1,8 @@
 import {PlayerId} from '../../common/Types';
 import {Tag} from '../../common/cards/Tag';
 import {SerializedPathfindersData} from './SerializedPathfindersData';
+import {BonusId, PolicyId} from '../../common/turmoil/Types';
+import {PartyName} from '../../common/turmoil/PartyName';
 
 /**
  * The possible tags with planetary tracks.
@@ -18,6 +20,18 @@ export function isPlanetaryTag(tag: Tag): tag is PlanetaryTag {
 export type PathfindersData = Record<PlanetaryTag, number> & {
   vps: Array<{id: PlayerId, tag: PlanetaryTag, points: number}>;
 }
+
+
+type AlliedParty = {
+  name: PartyName,
+  bonus: BonusId,
+  policy: PolicyId
+}
+
+export type PathfindersPlayerData = {
+  alliedParty?: AlliedParty
+}
+
 
 export namespace PathfindersData {
   export function serialize(pathfindersData: PathfindersData | undefined): SerializedPathfindersData | undefined {

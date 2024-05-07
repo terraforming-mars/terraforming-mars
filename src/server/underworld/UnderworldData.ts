@@ -6,7 +6,8 @@ export type UnderworldData = {
 
 type TemperatureBonuses = 'data1pertemp' | 'microbe1pertemp' | 'plant2pertemp' | 'steel2pertemp' | 'titanium1pertemp';
 
+
 export type UnderworldPlayerData = {
   corruption: number;
-  temperatureBonus?: TemperatureBonuses,
+  temperatureBonus?: TemperatureBonuses
 }

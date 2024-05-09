@@ -71,11 +71,18 @@ export type RecursivePartial<T> = {
 
 /**
  * Remove the `element` from `array`.
+ *
+ * Returns true if the element was removed from the array, false otherwise.
  */
 export function inplaceRemove<T>(array: Array<T>, element: T): boolean {
   return inplaceRemoveIf(array, (e) => e === element) !== undefined;
 }
 
+/**
+ * Remove the first element that satisfies the predicate from the array
+ *.
+ * Returns the removed element, or undefined if no element was removed.
+ */
 export function inplaceRemoveIf<T>(array: Array<T>, predicate: (e: T) => boolean): T | undefined {
   const idx = array.findIndex(predicate);
   if (idx === -1) {

@@ -952,10 +952,11 @@ export class Player implements IPlayer {
         this.preludeCardsInHand.splice(preludeCardIndex, 1);
       }
 
-      const card = this.playedCards.find((card) => card.name === CardName.SELF_REPLICATING_ROBOTS);
-      if (card instanceof SelfReplicatingRobots) {
-        inplaceRemove(card.targetCards, selectedCard);
-        selectedCard.resourceCount = 0;
+      const selfReplicatingRobots = this.playedCards.find((card) => card.name === CardName.SELF_REPLICATING_ROBOTS);
+      if (selfReplicatingRobots instanceof SelfReplicatingRobots) {
+        if (inplaceRemove(selfReplicatingRobots.targetCards, selectedCard)) {
+          selectedCard.resourceCount = 0;
+        }
       }
     }
 

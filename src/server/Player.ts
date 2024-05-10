@@ -938,6 +938,17 @@ export class Player implements IPlayer {
     }
 
     // Play the card
+    //
+    // IMPORTANT: This is the wrong place to take the play card action.
+    // It should be played after putting the card into the playedCards array.
+    // That makes sense because every card that has an "including this" behavior is
+    // actually hacked to +1 things. That's too bad. It means all our code and tests are
+    // a little busted.
+    //
+    // This issue is evident when playing New Partner, and drawing Double Down.
+    // The issue is fixed in Double Down for the time being. But the right fix is to move this block
+    // down. As I say, that's going to break a lot of things, many of which are not evident
+    // in tests (because they use card.play instad of player.playCard).
     const action = selectedCard.play(this);
     this.defer(action, Priority.DEFAULT);
 
@@ -977,6 +988,8 @@ export class Player implements IPlayer {
     case 'action-only':
       break;
     }
+
+    // See comment above regarding
 
     // See DeclareCloneTag for why this skips cards with clone tags.
     if (!selectedCard.tags.includes(Tag.CLONE) && cardAction !== 'action-only') {

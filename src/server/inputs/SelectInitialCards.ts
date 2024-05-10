@@ -1,6 +1,5 @@
 import {AndOptions} from './AndOptions';
 import {ICorporationCard} from '../cards/corporation/ICorporationCard';
-import {IProjectCard} from '../cards/IProjectCard';
 import {IPlayer} from '../IPlayer';
 import {SelectCard} from './SelectCard';
 import {Merger} from '../cards/promo/Merger';
@@ -39,7 +38,7 @@ export class SelectInitialCards extends AndOptions {
     if (player.game.gameOptions.preludeExtension) {
       this.options.push(
         new SelectCard(titles.SELECT_PRELUDE_TITLE, undefined, player.dealtPreludeCards, {min: 2, max: 2})
-          .andThen( (preludeCards: Array<IProjectCard>) => {
+          .andThen((preludeCards) => {
             if (preludeCards.length !== 2) {
               throw new InputError('Only select 2 preludes');
             }

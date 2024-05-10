@@ -4,7 +4,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {PreludesExpansion} from '../../preludes/PreludesExpansion';
-import {isPreludeCard} from '../prelude/IPreludeCard';
+import {IPreludeCard, isPreludeCard} from '../prelude/IPreludeCard';
 
 export class DoubleDown extends PreludeCard {
   constructor() {
@@ -22,9 +22,17 @@ export class DoubleDown extends PreludeCard {
   }
 
   private cloneablePreludes(player: IPlayer) {
-    return player.playedCards.filter(isPreludeCard)
+    const cards = player.playedCards.filter(isPreludeCard)
       .filter((card) => card.name !== this.name)
       .filter((card) => card.canPlay(player));
+    if (player.lastCardPlayed === CardName.NEW_PARTNER) {
+      // This is a super unfortunate hack. See player.playCard for details.
+      const newPartner = player.preludeCardsInHand.filter((card) => card.name === CardName.NEW_PARTNER)[0];
+      if (newPartner !== undefined) {
+        cards.push(newPartner as IPreludeCard);
+      }
+    }
+    return cards;
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {

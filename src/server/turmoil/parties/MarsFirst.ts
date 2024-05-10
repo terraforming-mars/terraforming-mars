@@ -77,15 +77,23 @@ class MarsFirstPolicy03 implements Policy {
   readonly id = 'mfp03' as const;
   readonly description = 'Your steel resources are worth 1 M€ extra';
 
-  onPolicyStart(game: IGame): void {
-    game.getPlayersInGenerationOrder().forEach((player) => {
+  onPolicyStart(game: IGame, player?: IPlayer): void {
+    if (player !== undefined) {
       player.increaseSteelValue();
-    });
+    } else {
+      game.getPlayersInGenerationOrder().forEach((player) => {
+        player.increaseSteelValue();
+      });
+    }
   }
-  onPolicyEnd(game: IGame): void {
-    game.getPlayersInGenerationOrder().forEach((player) => {
+  onPolicyEnd(game: IGame, player?: IPlayer): void {
+    if (player !== undefined) {
       player.decreaseSteelValue();
-    });
+    } else {
+      game.getPlayersInGenerationOrder().forEach((player) => {
+        player.decreaseSteelValue();
+      });
+    }
   }
 }
 

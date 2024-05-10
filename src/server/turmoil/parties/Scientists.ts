@@ -24,10 +24,18 @@ class ScientistsBonus01 implements Bonus {
     return player.tags.count(Tag.SCIENCE, 'raw-pf');
   }
 
-  grant(game: IGame) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
+  grant(game: IGame, player?: IPlayer) {
+    if (player !== undefined) {
       player.stock.add(Resource.MEGACREDITS, this.getScore(player));
-    });
+    } else {
+      game.getPlayersInGenerationOrder()
+        .filter((p) => {
+          p.pathfindersData?.alliedParty === undefined;
+        })
+        .forEach((p) => {
+          p.stock.add(Resource.MEGACREDITS, this.getScore(p));
+        });
+    }
   }
 }
 
@@ -81,16 +89,24 @@ class ScientistsPolicy04 implements Policy {
   readonly id = 'sp04' as const;
   readonly description = 'Cards with Science tag requirements may be played with 1 less Science tag';
 
-  onPolicyStart(game: IGame) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
+  onPolicyStart(game: IGame, player?: IPlayer) {
+    if (player !== undefined) {
       player.hasTurmoilScienceTagBonus = true;
-    });
+    } else {
+      game.getPlayersInGenerationOrder().forEach((player) => {
+        player.hasTurmoilScienceTagBonus = true;
+      });
+    }
   }
 
-  onPolicyEnd(game: IGame) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      player.hasTurmoilScienceTagBonus = false;
-    });
+  onPolicyEnd(game: IGame, player?: IPlayer) {
+    if (player !== undefined) {
+      player.hasTurmoilScienceTagBonus = true;
+    } else {
+      game.getPlayersInGenerationOrder().forEach((player) => {
+        player.hasTurmoilScienceTagBonus = false;
+      });
+    }
   }
 }
 

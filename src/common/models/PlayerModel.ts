@@ -8,6 +8,8 @@ import {GameModel} from './GameModel';
 import {PlayerId, ParticipantId} from '../Types';
 import {CardName} from '../cards/CardName';
 import {Resource} from '../Resource';
+import {Agenda} from '../turmoil/Types';
+import {PartyName} from '../turmoil/PartyName';
 
 export interface ViewModel {
   game: GameModel;
@@ -21,6 +23,11 @@ export interface ViewModel {
 // 'on': Resources (or production) are protected.
 // 'half': Half resources are protected when targeted. Applies to Botanical Experience.
 export type Protection = 'off' | 'on' | 'half';
+
+export type AlliedParty = {
+  partyName: PartyName,
+  agenda: Agenda,
+}
 
 /** The public information about a player */
 export type PublicPlayerModel = {
@@ -69,6 +76,7 @@ export type PublicPlayerModel = {
   tradesThisGeneration: number;
   victoryPointsBreakdown: IVictoryPointsBreakdown;
   victoryPointsByGeneration: Array<number>;
+  alliedParty?: AlliedParty;
 }
 
 /** A player's view of the game, including their secret information. */

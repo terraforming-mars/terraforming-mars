@@ -51,7 +51,7 @@ export class MarsFrontierAlliance extends CorporationCard {
         policy: p.policies[0].id,
       };
       const alliedPolicy = player.game.turmoil?.getPartyByName(p.name).policies.find((t) => t.id === p.policies[0].id);
-      if (alliedPolicy !== undefined) alliedPolicy.onPolicyStart?.(player.game);
+      if (alliedPolicy !== undefined) alliedPolicy.onPolicyStart?.(player.game, player);
     }));
     return undefined;
   }

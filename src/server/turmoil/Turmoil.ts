@@ -20,6 +20,9 @@ import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {SelectParty} from '../inputs/SelectParty';
 import {Policy, PolicyId, policyDescription} from './Policy';
 import {PlayerId} from '../../common/Types';
+// import { MarsFrontierAlliance } from '../cards/pathfinders/MarsFrontierAlliance';
+// import { ChoosePoliticalAgenda } from '../deferredActions/ChoosePoliticalAgenda';
+import {ChoosePolicyBonus} from '../deferredActions/ChoosePolicyBonus';
 
 export type NeutralPlayer = 'NEUTRAL';
 export type Delegate = IPlayer | NeutralPlayer;
@@ -302,13 +305,25 @@ export class Turmoil {
     }
   }
 
+  private executeAlliedOnPolicyEnd(game: IGame, player: IPlayer | undefined): void {
+    if (player?.pathfindersData?.alliedParty) {
+      const {alliedParty} = player.pathfindersData;
+      const alliedPolicy = player.game.turmoil?.getPartyByName(alliedParty.name)?.policies.find((p) => p.id === alliedParty.policy);
+      alliedPolicy?.onPolicyEnd?.(game, player);
+    }
+  }
+
   /**
    * Set the next ruling party as part of the Turmoil phase.
    */
   public setRulingParty(game: IGame): void {
     this.rulingPolicy().onPolicyEnd?.(game);
 
-    // Behond the Emperor Hook prevents changing the ruling party.
+    // Mars Frontier Alliance ends allied party policy
+    const alliedPlayer = game.getPlayers().find((p) => p.pathfindersData.alliedParty !== undefined);
+    this.executeAlliedOnPolicyEnd(game, alliedPlayer);
+
+    // Behold the Emperor Hook prevents changing the ruling party.
     if (game.beholdTheEmperor !== true) {
       this.rulingParty = this.dominantParty;
     }
@@ -376,6 +391,46 @@ export class Turmoil {
     // TODO: put here the choice of the allied party if Mars Frontier Alliance is in play
     //      ruling bonus should be chosen between global or allied party if MFA is in play
 
+    const alliedPlayer: IPlayer | undefined = game.getPlayers().find((p) => p.pathfindersData?.alliedParty !== undefined);
+
+    // I have to find the second party after the dominant one
+    // This is copy&paste of setNextPartyAsDominant: find a way to avoid duplication
+    if (game.turmoil !== undefined && alliedPlayer !== undefined) {
+      const currentDominantParty = game.turmoil.dominantParty;
+      const sortParties = [...this.parties].sort(
+        (p1, p2) => p2.delegates.size - p1.delegates.size,
+      );
+      const second = sortParties[1].delegates.size;
+
+      const currentIndex = this.parties.indexOf(currentDominantParty);
+
+      let partiesToCheck = [];
+      // Manage if it's the first party or the last
+      if (currentIndex === 0) {
+        partiesToCheck = this.parties.slice(currentIndex + 1);
+      } else if (currentIndex === this.parties.length - 1) {
+        partiesToCheck = this.parties.slice(0, currentIndex);
+      } else {
+        const left = this.parties.slice(0, currentIndex);
+        const right = this.parties.slice(currentIndex + 1);
+        partiesToCheck = right.concat(left);
+      }
+
+      // Take the clockwise order
+      const partiesOrdered = partiesToCheck.reverse();
+      partiesOrdered.some((p) => {
+        if (p.delegates.size === second) {
+          alliedPlayer.pathfindersData.alliedParty = {
+            name: p.name,
+            bonus: p.bonuses[0].id,
+            policy: p.policies[0].id,
+          };
+          return true;
+        }
+        return false;
+      });
+    }
+
     // Resolve Ruling Bonus
     const bonusId = PoliticalAgendas.currentAgenda(this).bonusId;
     const bonus = rulingParty.bonuses.find((b) => b.id === bonusId);
@@ -383,6 +438,15 @@ export class Turmoil {
       throw new Error(`Bonus id ${bonusId} not found in party ${rulingParty.name}`);
     }
     game.log('The ruling bonus is: ${0}', (b) => b.string(bonus.description));
+
+    // Mars Frontier Alliance
+    if (alliedPlayer !== undefined) {
+      game.defer(new ChoosePolicyBonus(alliedPlayer, [], (bonusId) => {
+        const bonus = this.parties.flatMap((p) => p.bonuses).find((b) => b.id === bonusId);
+        console.log(bonus);
+        // bonus?.grant(game, alliedPlayer);
+      }));
+    }
     bonus.grant(game);
 
     const policyId = PoliticalAgendas.currentAgenda(this).policyId;

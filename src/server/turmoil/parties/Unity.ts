@@ -32,10 +32,18 @@ class UnityBonus01 implements Bonus {
     return sum(tags.map((tag) => player.tags.count(tag, 'raw')));
   }
 
-  grant(game: IGame) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
+  grant(game: IGame, player?: IPlayer) {
+    if (player !== undefined) {
       player.stock.add(Resource.MEGACREDITS, this.getScore(player));
-    });
+    } else {
+      game.getPlayersInGenerationOrder()
+        .filter((p) => {
+          p.pathfindersData?.alliedParty === undefined;
+        })
+        .forEach((p) => {
+          p.stock.add(Resource.MEGACREDITS, this.getScore(p));
+        });
+    }
   }
 }
 
@@ -58,15 +66,23 @@ class UnityPolicy01 implements Policy {
   id = 'up01' as const;
   description = 'Your titanium resources are worth 1 M€ extra';
 
-  onPolicyStart(game: IGame): void {
-    game.getPlayersInGenerationOrder().forEach((player) => {
+  onPolicyStart(game: IGame, player?: IPlayer): void {
+    if (player !== undefined) {
       player.increaseTitaniumValue();
-    });
+    } else {
+      game.getPlayersInGenerationOrder().forEach((player) => {
+        player.increaseTitaniumValue();
+      });
+    }
   }
-  onPolicyEnd(game: IGame): void {
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      player.decreaseTitaniumValue();
-    });
+  onPolicyEnd(game: IGame, player?: IPlayer): void {
+    if (player !== undefined) {
+      player.increaseTitaniumValue();
+    } else {
+      game.getPlayersInGenerationOrder().forEach((player) => {
+        player.decreaseTitaniumValue();
+      });
+    }
   }
 }
 

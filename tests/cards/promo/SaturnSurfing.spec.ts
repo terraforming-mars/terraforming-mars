@@ -5,12 +5,12 @@ import {SaturnSurfing} from '../../../src/server/cards/promo/SaturnSurfing';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 
 describe('SaturnSurfing', function() {
   let card: SaturnSurfing;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new SaturnSurfing();

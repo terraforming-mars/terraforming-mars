@@ -1,18 +1,18 @@
 import {expect} from 'chai';
 import {Penguins} from '../../../src/server/cards/promo/Penguins';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {maxOutOceans, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
 describe('Penguins', function() {
   let card: Penguins;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Penguins();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
   });
 
   it('Cannot play', function() {

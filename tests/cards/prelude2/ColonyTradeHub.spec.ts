@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {ColonyTradeHub} from '../../../src/server/cards/prelude2/ColonyTradeHub';
@@ -12,7 +12,7 @@ describe('ColonyTradeHub', function() {
   let card: ColonyTradeHub;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new ColonyTradeHub();

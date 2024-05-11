@@ -7,7 +7,7 @@ import {Donation} from '../../../src/server/cards/prelude/Donation';
 import {GalileanMining} from '../../../src/server/cards/prelude/GalileanMining';
 import {PowerGeneration} from '../../../src/server/cards/prelude/PowerGeneration';
 import {ICard} from '../../../src/server/cards/ICard';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {Arklight} from '../../../src/server/cards/colonies/Arklight';
 import {BiosphereSupport} from '../../../src/server/cards/prelude/BiosphereSupport';
@@ -16,7 +16,7 @@ import {NewPartner} from '../../../src/server/cards/promo/NewPartner';
 describe('DoubleDown', () => {
   let doubleDown: DoubleDown;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     doubleDown = new DoubleDown();

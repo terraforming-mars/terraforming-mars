@@ -3,7 +3,6 @@ import {RestrictedArea} from '../../../src/server/cards/base/RestrictedArea';
 import {ProjectInspection} from '../../../src/server/cards/promo/ProjectInspection';
 import {IndenturedWorkers} from '../../../src/server/cards/base/IndenturedWorkers';
 import {Playwrights} from '../../../src/server/cards/community/Playwrights';
-import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
 import {ICard} from '../../../src/server/cards/ICard';
@@ -11,7 +10,7 @@ import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {Odyssey} from '../../../src/server/cards/pathfinders/Odyssey';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, testGame} from '../../TestingUtils';
 import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('ProjectInspection', function() {
@@ -21,8 +20,7 @@ describe('ProjectInspection', function() {
 
   beforeEach(function() {
     card = new ProjectInspection();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    [/* game */, player] = testGame(1);
     restrictedArea = new RestrictedArea();
   });
 

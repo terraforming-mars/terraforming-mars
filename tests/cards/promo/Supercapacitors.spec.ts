@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Supercapacitors} from '../../../src/server/cards/promo/Supercapacitors';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, doWait, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -10,7 +10,7 @@ import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 describe('Supercapacitors', () => {
   let card: Supercapacitors;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Supercapacitors();

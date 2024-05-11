@@ -2,13 +2,13 @@ import {expect} from 'chai';
 import {BufferGasStandardProject} from '../../../src/server/cards/prelude/BufferGasStandardProject';
 import {runAllActions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
 
 describe('BufferGasStandardProject', function() {
   let card: BufferGasStandardProject;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new BufferGasStandardProject();

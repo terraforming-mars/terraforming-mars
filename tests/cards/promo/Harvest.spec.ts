@@ -1,13 +1,13 @@
 import {expect} from 'chai';
 import {Harvest} from '../../../src/server/cards/promo/Harvest';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
 describe('Harvest', function() {
   let card: Harvest;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Harvest();

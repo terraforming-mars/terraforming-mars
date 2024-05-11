@@ -1,9 +1,8 @@
 import {expect} from 'chai';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, testGame} from '../../TestingUtils';
 import {ICard} from '../../../src/server/cards/ICard';
 import {Astrodrill} from '../../../src/server/cards/promo/Astrodrill';
 import {CometAiming} from '../../../src/server/cards/promo/CometAiming';
-import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
@@ -15,13 +14,10 @@ describe('Astrodrill', function() {
 
   beforeEach(function() {
     card = new Astrodrill();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, redPlayer], player);
-
+    [/* game */, player/* , player2 */] = testGame(2);
     player.setCorporationForTest(card);
     card.play(player);
-    runAllActions(game);
+    runAllActions(player.game);
   });
 
   it('Starts with 3 asteroid resources', function() {

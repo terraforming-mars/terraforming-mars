@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Faraday} from '../../../src/server/cards/ceos/Faraday';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -10,11 +10,10 @@ import {CardType} from '../../../src/common/cards/CardType';
 import {CrewTraining} from '../../../src/server/cards/pathfinders/CrewTraining';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 
-
 describe('Faraday', function() {
   let card: Faraday;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   const CARD_DRAW_COST = 3;
   const PLAYER_INITIALMC = 10;
   beforeEach(() => {

@@ -3,7 +3,7 @@ import {CardType} from '../../../src/common/cards/CardType';
 import {IPreludeCard} from '../../../src/server/cards/prelude/IPreludeCard';
 import {Karen} from '../../../src/server/cards/ceos/Karen';
 import {GalileanMining} from '../../../src/server/cards/prelude/GalileanMining';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -12,7 +12,7 @@ import {testGame} from '../../TestGame';
 describe('Karen', function() {
   let card: Karen;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Karen();

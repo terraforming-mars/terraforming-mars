@@ -1,17 +1,16 @@
 import {expect} from 'chai';
 import {ICard} from '../../../src/server/cards/ICard';
 import {Stefan} from '../../../src/server/cards/ceos/Stefan';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {forceGenerationEnd, fakeCard} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-
 describe('Stefan', function() {
   let card: Stefan;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Stefan();

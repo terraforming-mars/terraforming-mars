@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Ender} from '../../../src/server/cards/ceos/Ender';
@@ -11,7 +11,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 describe('Ender', function() {
   let card: Ender;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Ender();

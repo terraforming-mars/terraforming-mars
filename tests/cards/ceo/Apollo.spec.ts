@@ -1,11 +1,9 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-
 import {Apollo} from '../../../src/server/cards/ceos/Apollo';
-
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 
@@ -13,7 +11,7 @@ describe('Apollo', function() {
   let card: Apollo;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let moonData: MoonData;
 
   beforeEach(() => {

@@ -4,7 +4,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Predators} from '../../../src/server/cards/base/Predators';
 import {ResearchOutpost} from '../../../src/server/cards/base/ResearchOutpost';
 import {Aridor} from '../../../src/server/cards/colonies/Aridor';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Venus} from '../../../src/server/cards/community/Venus';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -16,7 +16,7 @@ import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
 
 let card: Aridor;
-let game: Game;
+let game: IGame;
 let player: TestPlayer;
 let player2: TestPlayer;
 

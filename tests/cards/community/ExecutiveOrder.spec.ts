@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {ExecutiveOrder} from '../../../src/server/cards/community/ExecutiveOrder';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
@@ -11,7 +11,7 @@ import {testGame} from '../../TestGame';
 describe('ExecutiveOrder', function() {
   let card: ExecutiveOrder;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new ExecutiveOrder();

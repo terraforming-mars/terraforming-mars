@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Venus} from '../../../src/server/cards/community/Venus';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {TerraformingControlStation} from '../../../src/server/cards/pathfinders/TerraformingControlStation';
@@ -12,7 +12,7 @@ describe('Venus', function() {
   let venus: Venus;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let localShading: LocalShading;
 
 

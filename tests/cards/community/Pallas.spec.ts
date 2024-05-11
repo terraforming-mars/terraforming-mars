@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Pallas} from '../../../src/server/cards/community/Pallas';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
@@ -14,7 +14,7 @@ describe('Pallas', function() {
   let pallas: Pallas;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
   let greens: IParty;
   let scientists: IParty;

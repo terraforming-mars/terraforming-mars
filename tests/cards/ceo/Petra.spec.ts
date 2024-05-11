@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
@@ -10,11 +10,10 @@ import {testGame} from '../../TestGame';
 import {Petra} from '../../../src/server/cards/ceos/Petra';
 import {Politician} from '../../../src/server/awards/terraCimmeria/Politician';
 
-
 describe('Petra', function() {
   let card: Petra;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
   let mars: IParty;
   let unity: IParty;

@@ -1,19 +1,17 @@
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {testGame} from '../../TestGame';
 import {addGreenery, addCity, runAllActions} from '../../TestingUtils';
-
 import {Gordon} from '../../../src/server/cards/ceos/Gordon';
-
 
 describe('Gordon', function() {
   let card: Gordon;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Gordon();

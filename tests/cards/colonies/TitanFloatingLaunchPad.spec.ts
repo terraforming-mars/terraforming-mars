@@ -4,7 +4,7 @@ import {TitanFloatingLaunchPad} from '../../../src/server/cards/colonies/TitanFl
 import {ICard} from '../../../src/server/cards/ICard';
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Triton} from '../../../src/server/colonies/Triton';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
@@ -17,7 +17,7 @@ import {Message} from '../../../src/common/logs/Message';
 describe('TitanFloatingLaunchPad', function() {
   let card: TitanFloatingLaunchPad;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new TitanFloatingLaunchPad();

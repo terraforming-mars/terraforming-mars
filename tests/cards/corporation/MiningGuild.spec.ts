@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {MiningGuild} from '../../../src/server/cards/corporation/MiningGuild';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Phase} from '../../../src/common/Phase';
@@ -16,7 +16,7 @@ describe('MiningGuild', () => {
   let card: MiningGuild;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new MiningGuild();

@@ -8,6 +8,7 @@ import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {MartianSurvey} from '../../../src/server/cards/prelude/MartianSurvey';
 import {LawSuit} from '../../../src/server/cards/promo/LawSuit';
 import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
@@ -22,7 +23,7 @@ describe('Playwrights', () => {
   let card: Playwrights;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Playwrights();

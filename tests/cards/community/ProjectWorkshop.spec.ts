@@ -5,7 +5,7 @@ import {CardType} from '../../../src/common/cards/CardType';
 import {ProjectWorkshop} from '../../../src/server/cards/community/ProjectWorkshop';
 import {ICard} from '../../../src/server/cards/ICard';
 import {Extremophiles} from '../../../src/server/cards/venusNext/Extremophiles';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
@@ -24,7 +24,7 @@ import {Payment} from '../../../src/common/inputs/Payment';
 describe('ProjectWorkshop', function() {
   let card: ProjectWorkshop;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let advancedAlloys : AdvancedAlloys;
 
   beforeEach(function() {

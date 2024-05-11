@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {HeatTrappers} from '../../../src/server/cards/base/HeatTrappers';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
@@ -11,7 +11,7 @@ describe('HeatTrappers', function() {
   let card: HeatTrappers;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new HeatTrappers();
@@ -19,7 +19,7 @@ describe('HeatTrappers', function() {
   });
 
   it('Should be playable in solo mode', function() {
-    game = Game.newInstance('gameid', [player], player);
+    const [/* game */, player] = testGame(1);
     player.production.add(Resource.HEAT, 1);
 
     expect(card.canPlay(player)).is.true;

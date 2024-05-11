@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {cast, runAllActions} from '../../TestingUtils';
 import {ResearchOutpost} from '../../../src/server/cards/base/ResearchOutpost';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -9,7 +9,7 @@ import {testGame} from '../../TestGame';
 describe('ResearchOutpost', function() {
   let card: ResearchOutpost;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new ResearchOutpost();

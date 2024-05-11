@@ -3,7 +3,7 @@ import {cast} from '../../TestingUtils';
 import {MarsUniversity} from '../../../src/server/cards/base/MarsUniversity';
 import {Pets} from '../../../src/server/cards/base/Pets';
 import {Research} from '../../../src/server/cards/base/Research';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {OlympusConference} from '../../../src/server/cards/base/OlympusConference';
@@ -16,7 +16,7 @@ import {testGame} from '../../TestGame';
 describe('MarsUniversity', function() {
   let card: MarsUniversity;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new MarsUniversity();

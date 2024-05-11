@@ -1,13 +1,13 @@
 import {expect} from 'chai';
 import {OreProcessor} from '../../../src/server/cards/base/OreProcessor';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
 describe('OreProcessor', function() {
   let card: OreProcessor;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new OreProcessor();

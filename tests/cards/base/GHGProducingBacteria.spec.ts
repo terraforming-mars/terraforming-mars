@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
@@ -9,7 +9,7 @@ import {testGame} from '../../TestGame';
 describe('GHGProducingBacteria', () => {
   let card: GHGProducingBacteria;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new GHGProducingBacteria();

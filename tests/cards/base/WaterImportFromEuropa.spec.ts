@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {WaterImportFromEuropa} from '../../../src/server/cards/base/WaterImportFromEuropa';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -9,7 +9,7 @@ import {testGame} from '../../TestGame';
 describe('WaterImportFromEuropa', function() {
   let card: WaterImportFromEuropa;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new WaterImportFromEuropa();

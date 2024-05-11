@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {churnAction, cast, churn} from '../../TestingUtils';
 import {NitriteReducingBacteria} from '../../../src/server/cards/base/NitriteReducingBacteria';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -9,7 +9,7 @@ import {testGame} from '../../TestGame';
 describe('NitriteReducingBacteria', function() {
   let card: NitriteReducingBacteria;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new NitriteReducingBacteria();

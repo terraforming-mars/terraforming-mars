@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Asteroid} from '../../../src/server/cards/base/Asteroid';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
@@ -10,7 +10,7 @@ describe('Asteroid', function() {
   let card: Asteroid;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Asteroid();

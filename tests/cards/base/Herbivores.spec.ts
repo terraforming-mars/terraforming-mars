@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Herbivores} from '../../../src/server/cards/base/Herbivores';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {Resource} from '../../../src/common/Resource';
 import {addGreenery, cast, runAllActions, runNextAction, setOxygenLevel} from '../../TestingUtils';
@@ -11,7 +11,7 @@ describe('Herbivores', () => {
   let card: Herbivores;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Herbivores();

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 import {Tag} from '../../../src/common/cards/Tag';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {fakeCard, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -9,7 +9,7 @@ import {testGame} from '../../TestGame';
 describe('SearchForLife', function() {
   let card: SearchForLife;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new SearchForLife();

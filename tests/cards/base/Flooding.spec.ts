@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Flooding} from '../../../src/server/cards/base/Flooding';
 import {LandClaim} from '../../../src/server/cards/base/LandClaim';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -14,7 +14,7 @@ describe('Flooding', function() {
   let card: Flooding;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Flooding();

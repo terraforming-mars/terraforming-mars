@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {GreatEscarpmentConsortium} from '../../../src/server/cards/base/GreatEscarpmentConsortium';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
@@ -11,7 +11,7 @@ describe('GreatEscarpmentConsortium', function() {
   let card: GreatEscarpmentConsortium;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new GreatEscarpmentConsortium();

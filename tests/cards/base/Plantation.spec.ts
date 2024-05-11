@@ -3,14 +3,14 @@ import {expect} from 'chai';
 import {cast, runAllActions, setOxygenLevel, testRedsCosts} from '../../TestingUtils';
 import {InventorsGuild} from '../../../src/server/cards/base/InventorsGuild';
 import {Plantation} from '../../../src/server/cards/base/Plantation';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
 describe('Plantation', function() {
   let card: Plantation;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Plantation();

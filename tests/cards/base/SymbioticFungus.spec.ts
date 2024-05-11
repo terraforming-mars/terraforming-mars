@@ -4,14 +4,14 @@ import {churnAction, cast, runAllActions, setTemperature} from '../../TestingUti
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {SymbioticFungus} from '../../../src/server/cards/base/SymbioticFungus';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
 describe('SymbioticFungus', function() {
   let card: SymbioticFungus;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new SymbioticFungus();

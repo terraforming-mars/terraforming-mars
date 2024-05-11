@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {setOxygenLevel} from '../../TestingUtils';
 import {ColonizerTrainingCamp} from '../../../src/server/cards/base/ColonizerTrainingCamp';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
 describe('ColonizerTrainingCamp', function() {
   let card: ColonizerTrainingCamp;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new ColonizerTrainingCamp();

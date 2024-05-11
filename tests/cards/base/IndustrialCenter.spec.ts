@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {IndustrialCenter} from '../../../src/server/cards/base/IndustrialCenter';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {addCity, cast} from '../../TestingUtils';
@@ -10,7 +10,7 @@ import {testGame} from '../../TestGame';
 describe('IndustrialCenter', function() {
   let card: IndustrialCenter;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new IndustrialCenter();

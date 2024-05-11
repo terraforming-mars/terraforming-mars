@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {setOxygenLevel} from '../../TestingUtils';
 import {Zeppelins} from '../../../src/server/cards/base/Zeppelins';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
 describe('Zeppelins', function() {
   let card: Zeppelins;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Zeppelins();

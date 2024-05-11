@@ -1,24 +1,22 @@
 import {expect} from 'chai';
 import {Comet} from '../../../src/server/cards/base/Comet';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {cast, maxOutOceans} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
 describe('Comet', function() {
   let card: Comet;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Comet();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    player3 = TestPlayer.YELLOW.newPlayer();
-    game = Game.newInstance('gameid', [player, player2, player3], player);
+    [game, player, player2, player3] = testGame(3);
   });
 
   it('Should play', function() {
@@ -51,7 +49,7 @@ describe('Comet', function() {
   });
 
   it('Works fine in solo mode', function() {
-    Game.newInstance('gameid', [player], player);
+    testGame(1);
     player.plants = 8;
 
     cast(card.play(player), undefined);

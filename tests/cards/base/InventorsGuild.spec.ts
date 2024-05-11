@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {churnAction, cast} from '../../TestingUtils';
 import {InventorsGuild} from '../../../src/server/cards/base/InventorsGuild';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -9,7 +9,7 @@ import {testGame} from '../../TestGame';
 describe('InventorsGuild', function() {
   let card: InventorsGuild;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new InventorsGuild();

@@ -2,14 +2,14 @@ import {expect} from 'chai';
 import {setVenusScaleLevel} from '../../TestingUtils';
 import {Research} from '../../../src/server/cards/base/Research';
 import {VenusianAnimals} from '../../../src/server/cards/venusNext/VenusianAnimals';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
 describe('VenusianAnimals', function() {
   let card: VenusianAnimals;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new VenusianAnimals();

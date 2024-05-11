@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {CorrosiveRain} from '../../src/server/turmoil/globalEvents/CorrosiveRain';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -17,7 +17,7 @@ describe('CorrosiveRain', function() {
   let card: CorrosiveRain;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
 
   beforeEach(() => {

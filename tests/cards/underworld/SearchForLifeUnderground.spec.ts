@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {SearchforLifeUnderground} from '../../../src/server/cards/underworld/SearchforLifeUnderground';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions, setOxygenLevel, setTemperature} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -9,7 +9,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 describe('SearchForLifeUnderground', function() {
   let card: SearchforLifeUnderground;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new SearchforLifeUnderground();

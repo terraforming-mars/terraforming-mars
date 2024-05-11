@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SeismicPredictions} from '../../../src/server/cards/underworld/SeismicPredictions';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../../TestPlayer';
@@ -11,7 +11,7 @@ import {SpaceName} from '../../../src/server/SpaceName';
 describe('SeismicPredictions', function() {
   let card: SeismicPredictions;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
 
   beforeEach(() => {

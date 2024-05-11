@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {cast, runAllActions, setRulingParty, addGreenery} from '../../TestingUtils';
 import {REDS_BONUS_1, REDS_BONUS_2, REDS_POLICY_3} from '../../../src/server/turmoil/parties/Reds';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
@@ -11,7 +11,7 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 describe('Reds', function() {
   let player: TestPlayer;
   let secondPlayer: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     [game, player, secondPlayer] = testGame(2, {turmoilExtension: true});

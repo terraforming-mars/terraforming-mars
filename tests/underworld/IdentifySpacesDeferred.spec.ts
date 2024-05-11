@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {cast, runAllActions} from '../TestingUtils';
 import {Phase} from '../../src/common/Phase';
 import {IdentifySpacesDeferred} from '../../src/server/underworld/IdentifySpacesDeferred';
@@ -9,7 +9,7 @@ import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 
 describe('IdentifySpacesDeferred', () => {
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     [game, player] = testGame(1, {underworldExpansion: true});

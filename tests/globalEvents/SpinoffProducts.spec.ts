@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Research} from '../../src/server/cards/base/Research';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {SpinoffProducts} from '../../src/server/turmoil/globalEvents/SpinoffProducts';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -11,7 +11,7 @@ import {DesignedOrganisms} from '../../src/server/cards/pathfinders/DesignedOrga
 
 describe('SpinoffProducts', function() {
   let card: SpinoffProducts;
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let player2: TestPlayer;
   let turmoil: Turmoil;

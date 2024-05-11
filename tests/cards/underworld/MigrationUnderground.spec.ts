@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {MigrationUnderground} from '../../../src/server/cards/underworld/MigrationUnderground';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../../TestPlayer';
@@ -9,7 +9,7 @@ import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpa
 describe('MigrationUnderground', function() {
   let card: MigrationUnderground;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
 
   beforeEach(() => {

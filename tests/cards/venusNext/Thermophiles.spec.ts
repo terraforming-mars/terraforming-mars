@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {cast, churnAction, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {Thermophiles} from '../../../src/server/cards/venusNext/Thermophiles';
 import {VenusianInsects} from '../../../src/server/cards/venusNext/VenusianInsects';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
@@ -11,7 +11,7 @@ import {testGame} from '../../TestGame';
 describe('Thermophiles', function() {
   let card: Thermophiles;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Thermophiles();

@@ -2,7 +2,6 @@
 // including the altVenusBoard
 
 import {expect} from 'chai';
-import {Game} from '../../src/server/Game';
 import {IGame} from '../../src/server/IGame';
 import {cast, setVenusScaleLevel} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
@@ -11,7 +10,7 @@ import {testGame} from '../TestGame';
 
 describe('AltVenusTrackBonuses', function() {
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     [game, player] = testGame(1, {altVenusBoard: true});

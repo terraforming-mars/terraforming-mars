@@ -2,14 +2,14 @@ import {expect} from 'chai';
 import {setVenusScaleLevel} from '../../TestingUtils';
 import {MorningStarInc} from '../../../src/server/cards/venusNext/MorningStarInc';
 import {SpinInducingAsteroid} from '../../../src/server/cards/venusNext/SpinInducingAsteroid';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
 describe('SpinInducingAsteroid', function() {
   let card: SpinInducingAsteroid;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new SpinInducingAsteroid();

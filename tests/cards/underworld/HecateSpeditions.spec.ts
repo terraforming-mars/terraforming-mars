@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {HecateSpeditions} from '../../../src/server/cards/underworld/HecateSpeditions';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
@@ -12,7 +12,7 @@ describe('HecateSpeditions', function() {
   let card: HecateSpeditions;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new HecateSpeditions();

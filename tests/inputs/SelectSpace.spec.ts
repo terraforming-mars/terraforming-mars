@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {Space} from '../../src/server/boards/Space';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {testGame} from '../TestGame';
 
 describe('SelectSpace', () => {
-  let game: Game;
+  let game: IGame;
   let selected: Space | undefined;
 
   const cb = (cards: Space) => {

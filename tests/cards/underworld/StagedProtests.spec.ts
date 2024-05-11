@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {StagedProtests} from '../../../src/server/cards/underworld/StagedProtests';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {finishGeneration} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -8,7 +8,7 @@ import {IMilestone} from '../../../src/server/milestones/IMilestone';
 
 describe('StagedProtests', () => {
   let card: StagedProtests;
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let terraformer: IMilestone;
 

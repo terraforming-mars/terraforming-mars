@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {AirScrappingStandardProject} from '../../../src/server/cards/venusNext/AirScrappingStandardProject';
 import {cast, runAllActions, setVenusScaleLevel, testRedsCosts} from '../../TestingUtils';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {MAX_VENUS_SCALE} from '../../../src/common/constants';
 import {testGame} from '../../TestGame';
@@ -9,7 +9,7 @@ import {testGame} from '../../TestGame';
 describe('AirScrappingStandardProject', function() {
   let card: AirScrappingStandardProject;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new AirScrappingStandardProject();

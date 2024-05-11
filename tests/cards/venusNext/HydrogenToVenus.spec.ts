@@ -6,7 +6,7 @@ import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {DeuteriumExport} from '../../../src/server/cards/venusNext/DeuteriumExport';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {HydrogenToVenus} from '../../../src/server/cards/venusNext/HydrogenToVenus';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
@@ -15,7 +15,7 @@ import {testGame} from '../../TestGame';
 describe('HydrogenToVenus', function() {
   let card: HydrogenToVenus;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let venusCard1: IProjectCard;
   let venusCard2: IProjectCard;
   let jovianTagCard1: IProjectCard;

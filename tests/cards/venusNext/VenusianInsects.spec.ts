@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {cast, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {VenusianInsects} from '../../../src/server/cards/venusNext/VenusianInsects';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
 describe('VenusianInsects', () => {
   let card: VenusianInsects;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new VenusianInsects();

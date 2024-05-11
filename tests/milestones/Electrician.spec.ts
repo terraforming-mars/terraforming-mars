@@ -4,9 +4,9 @@ import {SolarPower} from '../../src/server/cards/base/SolarPower';
 import {SpaceMirrors} from '../../src/server/cards/base/SpaceMirrors';
 import {ResearchCoordination} from '../../src/server/cards/prelude/ResearchCoordination';
 import {FieldCappedCity} from '../../src/server/cards/promo/FieldCappedCity';
-import {Game} from '../../src/server/Game';
 import {Electrician} from '../../src/server/milestones/Electrician';
 import {TestPlayer} from '../TestPlayer';
+import {testGame} from '../TestingUtils';
 
 describe('Electrician', () => {
   let milestone: Electrician;
@@ -14,8 +14,7 @@ describe('Electrician', () => {
 
   beforeEach(() => {
     milestone = new Electrician();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    [/* game */, player] = testGame(1);
 
     player.playedCards.push(new SolarPower(), new PowerPlant(), new SpaceMirrors());
   });

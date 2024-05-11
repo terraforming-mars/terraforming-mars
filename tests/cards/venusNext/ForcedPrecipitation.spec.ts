@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
 import {ForcedPrecipitation} from '../../../src/server/cards/venusNext/ForcedPrecipitation';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -9,7 +9,7 @@ import {testGame} from '../../TestGame';
 describe('ForcedPrecipitation', function() {
   let card: ForcedPrecipitation;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new ForcedPrecipitation();

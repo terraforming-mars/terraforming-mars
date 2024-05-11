@@ -1,27 +1,23 @@
 import {expect} from 'chai';
 import {Sponsors} from '../../src/server/cards/base/Sponsors';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {Revolution} from '../../src/server/turmoil/globalEvents/Revolution';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
+import {testGame} from '../TestingUtils';
 
 describe('Revolution', function() {
   let card: Revolution;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new Revolution();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-
-    game = Game.newInstance('gameid', [player, player2], player);
-    turmoil = Turmoil.newInstance(game);
-
-    turmoil.initGlobalEvent(game);
+    [game, player, player2] = testGame(2, {turmoilExtension: true});
+    turmoil = game.turmoil!;
     turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2;

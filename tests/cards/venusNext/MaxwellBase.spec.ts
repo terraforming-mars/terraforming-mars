@@ -3,7 +3,7 @@ import {Birds} from '../../../src/server/cards/base/Birds';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {MaxwellBase} from '../../../src/server/cards/venusNext/MaxwellBase';
 import {StratosphericBirds} from '../../../src/server/cards/venusNext/StratosphericBirds';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Resource} from '../../../src/common/Resource';
 import {cast, churnAction, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
@@ -14,7 +14,7 @@ import {FloaterUrbanism} from '../../../src/server/cards/pathfinders/FloaterUrba
 describe('MaxwellBase', function() {
   let card: MaxwellBase;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new MaxwellBase();

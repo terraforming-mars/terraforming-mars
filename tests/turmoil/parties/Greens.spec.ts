@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Space} from '../../../src/server/boards/Space';
 import {cast, setRulingParty, addGreenery} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -15,7 +15,7 @@ import {testGame} from '../../TestGame';
 
 describe('Greens', function() {
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     [game, player] = testGame(2, {turmoilExtension: true});

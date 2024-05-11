@@ -2,9 +2,8 @@ import {expect} from 'chai';
 import {Research} from '../../../src/server/cards/base/Research';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {Stratopolis} from '../../../src/server/cards/venusNext/Stratopolis';
-import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast, churnAction, runAllActions} from '../../TestingUtils';
+import {cast, churnAction, runAllActions, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Stratopolis', function() {
@@ -13,9 +12,7 @@ describe('Stratopolis', function() {
 
   beforeEach(function() {
     card = new Stratopolis();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player, {venusNextExtension: true});
+    [/* game */, player/* , player2 */] = testGame(2, {venusNextExtension: true});
   });
 
   it('Can not play', function() {

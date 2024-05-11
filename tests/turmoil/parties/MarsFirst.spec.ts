@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {setRulingParty, addGreenery} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MARS_FIRST_BONUS_1, MARS_FIRST_BONUS_2, MARS_FIRST_POLICY_4} from '../../../src/server/turmoil/parties/MarsFirst';
@@ -10,7 +10,7 @@ import {testGame} from '../../TestGame';
 
 describe('MarsFirst', function() {
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     [game, player] = testGame(2, {turmoilExtension: true});

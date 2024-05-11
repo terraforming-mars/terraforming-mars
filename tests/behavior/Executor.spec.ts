@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {IPlayer} from '../../src/server/IPlayer';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
@@ -44,7 +44,7 @@ function asUnits(player: IPlayer): Units {
 }
 
 describe('Executor', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;

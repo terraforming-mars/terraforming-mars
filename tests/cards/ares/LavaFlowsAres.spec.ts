@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TileType} from '../../../src/common/TileType';
 import {cast, resetBoard, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -11,7 +11,7 @@ import {testGame} from '../../TestGame';
 describe('LavaFlowsAres', function() {
   let card: LavaFlowsAres;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new LavaFlowsAres();

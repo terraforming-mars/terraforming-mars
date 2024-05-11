@@ -4,7 +4,7 @@ import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {UrbanDecomposers} from '../../../src/server/cards/colonies/UrbanDecomposers';
 import {ICard} from '../../../src/server/cards/ICard';
 import {Luna} from '../../../src/server/colonies/Luna';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
@@ -14,7 +14,7 @@ import {testGame} from '../../TestGame';
 describe('UrbanDecomposers', function() {
   let card: UrbanDecomposers;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let luna: Luna;
 
   beforeEach(function() {

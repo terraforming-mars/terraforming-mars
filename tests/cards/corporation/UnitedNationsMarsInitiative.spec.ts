@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {UnitedNationsMarsInitiative} from '../../../src/server/cards/corporation/UnitedNationsMarsInitiative';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {cast, churnAction, runAllActions} from '../../TestingUtils';
@@ -11,7 +11,7 @@ import {testGame} from '../../TestGame';
 describe('UnitedNationsMarsInitiative', function() {
   let card: UnitedNationsMarsInitiative;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new UnitedNationsMarsInitiative();

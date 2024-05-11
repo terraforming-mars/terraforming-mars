@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, forceGenerationEnd, churnAction} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -8,7 +8,7 @@ import {Clarke} from '../../../src/server/cards/ceos/Clarke';
 describe('Clarke', function() {
   let card: Clarke;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Clarke();

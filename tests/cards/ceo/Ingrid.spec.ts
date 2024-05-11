@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Ingrid} from '../../../src/server/cards/ceos/Ingrid';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Phase} from '../../../src/common/Phase';
 import {addGreenery, addOcean, addCity, forceGenerationEnd, cast} from '../../TestingUtils';
 import {SpaceName} from '../../../src/server/SpaceName';
@@ -13,7 +13,7 @@ import {TileType} from '../../../src/common/TileType';
 describe('Ingrid', function() {
   let card: Ingrid;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Ingrid();

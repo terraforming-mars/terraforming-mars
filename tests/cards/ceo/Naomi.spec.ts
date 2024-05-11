@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {MAX_COLONY_TRACK_POSITION} from '../../../src/common/constants';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {forceGenerationEnd} from '../../TestingUtils';
@@ -10,12 +10,11 @@ import {Callisto} from '../../../src/server/colonies/Callisto';
 import {Ceres} from '../../../src/server/colonies/Ceres';
 import {Units} from '../../../src/common/Units';
 
-
 describe('Naomi', function() {
   let card: Naomi;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Naomi();

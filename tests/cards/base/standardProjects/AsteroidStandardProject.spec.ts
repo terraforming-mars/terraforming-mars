@@ -2,14 +2,14 @@ import {expect} from 'chai';
 import {AsteroidStandardProject} from '../../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
 import {cast, runAllActions, setTemperature, testRedsCosts} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
-import {Game} from '../../../../src/server/Game';
+import {IGame} from '../../../../src/server/IGame';
 import {MAX_TEMPERATURE} from '../../../../src/common/constants';
 import {testGame} from '../../../TestGame';
 
 describe('AsteroidStandardProject', function() {
   let card: AsteroidStandardProject;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new AsteroidStandardProject();

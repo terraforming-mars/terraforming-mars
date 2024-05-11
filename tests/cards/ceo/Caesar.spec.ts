@@ -1,11 +1,10 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 import {cast, runAllActions} from '../../TestingUtils';
 import {Resource} from '../../../src/common/Resource';
-
 import {SelectProductionToLose} from '../../../src/server/inputs/SelectProductionToLose';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {AresTestHelper} from '../../ares/AresTestHelper';
@@ -16,7 +15,7 @@ describe('Caesar', function() {
   let card: Caesar;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
   const startingPlants = 7;
 
   beforeEach(() => {

@@ -1,8 +1,7 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-
 import {Xavier} from '../../../src/server/cards/ceos/Xavier';
 import {Cartel} from '../../../src/server/cards/base/Cartel';
 import {GeneRepair} from '../../../src/server/cards/base/GeneRepair';
@@ -16,7 +15,7 @@ import {forceGenerationEnd} from '../../TestingUtils';
 describe('Xavier', function() {
   let card: Xavier;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Xavier();

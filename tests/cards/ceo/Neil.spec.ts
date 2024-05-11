@@ -1,22 +1,19 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-
 import {Neil} from '../../../src/server/cards/ceos/Neil';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-
 import {LTFPrivileges} from '../../../src/server/cards/moon/LTFPrivileges';
 import {ThoriumRush} from '../../../src/server/cards/moon/ThoriumRush';
-
 
 describe('Neil', function() {
   let card: Neil;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let moonData: MoonData;
 
   beforeEach(() => {

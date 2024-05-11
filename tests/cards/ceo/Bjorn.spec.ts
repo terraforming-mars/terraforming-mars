@@ -1,11 +1,10 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Bjorn} from '../../../src/server/cards/ceos/Bjorn';
 import {LawSuit} from '../../../src/server/cards/promo/LawSuit';
-
 
 describe('Bjorn', function() {
   let card: Bjorn;
@@ -13,7 +12,7 @@ describe('Bjorn', function() {
   let player2: TestPlayer;
   let player3: TestPlayer;
   let player4: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let stealValue: number;
 
   beforeEach(() => {

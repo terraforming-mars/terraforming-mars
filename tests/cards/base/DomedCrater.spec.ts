@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {DomedCrater} from '../../../src/server/cards/base/DomedCrater';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
 import {runAllActions, setOxygenLevel} from '../../TestingUtils';
@@ -10,7 +10,7 @@ import {assertPlaceCity} from '../../assertions';
 describe('DomedCrater', function() {
   let card: DomedCrater;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new DomedCrater();

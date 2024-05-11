@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CommercialDistrict} from '../../../src/server/cards/base/CommercialDistrict';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resource} from '../../../src/common/Resource';
 import {TileType} from '../../../src/common/TileType';
@@ -11,7 +11,7 @@ import {testGame} from '../../TestGame';
 describe('CommercialDistrict', function() {
   let card: CommercialDistrict;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new CommercialDistrict();

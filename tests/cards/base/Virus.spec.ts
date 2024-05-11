@@ -3,7 +3,6 @@ import {cast} from '../../TestingUtils';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {Predators} from '../../../src/server/cards/base/Predators';
 import {Virus} from '../../../src/server/cards/base/Virus';
-import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -12,11 +11,10 @@ describe('Virus', function() {
   let card: Virus;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
 
   beforeEach(function() {
     card = new Virus();
-    [game, player, player2] = testGame(2);
+    [/* game */, player, player2] = testGame(2);
   });
 
   it('Should play', function() {
@@ -43,7 +41,7 @@ describe('Virus', function() {
   });
 
   it('Works in solo mode', function() {
-    game = Game.newInstance('gameid', [player], player);
+    const [game, player] = testGame(1);
     expect(card.canPlay(player)).is.true;
     expect(card.play(player)).is.undefined;
     expect(game.someoneHasRemovedOtherPlayersPlants).is.true;

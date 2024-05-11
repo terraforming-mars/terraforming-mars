@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {WaterSplittingPlant} from '../../../src/server/cards/base/WaterSplittingPlant';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {maxOutOceans, setOxygenLevel, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -8,7 +8,7 @@ import {testGame} from '../../TestGame';
 describe('WaterSplittingPlant', function() {
   let card: WaterSplittingPlant;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new WaterSplittingPlant();

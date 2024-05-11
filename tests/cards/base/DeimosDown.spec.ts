@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
 import {DeimosDown} from '../../../src/server/cards/base/DeimosDown';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -10,7 +10,7 @@ describe('DeimosDown', function() {
   let card: DeimosDown;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new DeimosDown();
@@ -31,7 +31,7 @@ describe('DeimosDown', function() {
   });
 
   it('Works fine in solo mode', function() {
-    const game = Game.newInstance('gameid', [player], player);
+    const [game, player] = testGame(1);
 
     player.plants = 15;
     card.play(player);

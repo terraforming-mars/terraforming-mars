@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {setTemperature} from '../../TestingUtils';
 import {Bushes} from '../../../src/server/cards/base/Bushes';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
 describe('Bushes', function() {
   let card: Bushes;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Bushes();

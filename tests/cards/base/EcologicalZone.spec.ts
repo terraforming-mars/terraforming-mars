@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {EcologicalZone} from '../../../src/server/cards/base/EcologicalZone';
 import {EcologyExperts} from '../../../src/server/cards/prelude/EcologyExperts';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Phase} from '../../../src/common/Phase';
 import {TileType} from '../../../src/common/TileType';
@@ -12,7 +12,7 @@ import {testGame} from '../../TestGame';
 describe('EcologicalZone', function() {
   let card: EcologicalZone;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new EcologicalZone();

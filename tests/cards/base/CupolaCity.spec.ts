@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CupolaCity} from '../../../src/server/cards/base/CupolaCity';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
@@ -10,7 +10,7 @@ import {assertPlaceCity} from '../../assertions';
 describe('CupolaCity', function() {
   let card: CupolaCity;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new CupolaCity();

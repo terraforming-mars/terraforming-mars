@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {LavaFlows} from '../../../src/server/cards/base/LavaFlows';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {cast, resetBoard, runAllActions} from '../../TestingUtils';
@@ -12,7 +12,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 describe('LavaFlows', function() {
   let card: LavaFlows;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new LavaFlows();

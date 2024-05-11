@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {setOxygenLevel} from '../../TestingUtils';
 import {BreathingFilters} from '../../../src/server/cards/base/BreathingFilters';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
 describe('BreathingFilters', function() {
   let card: BreathingFilters;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new BreathingFilters();

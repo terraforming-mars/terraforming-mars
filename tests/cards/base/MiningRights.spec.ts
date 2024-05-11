@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {MiningRights} from '../../../src/server/cards/base/MiningRights';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
@@ -16,7 +16,7 @@ import {testGame} from '../../TestGame';
 describe('MiningRights', () => {
   let card: MiningRights;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new MiningRights();

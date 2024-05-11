@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {ElectroCatapult} from '../../../src/server/cards/base/ElectroCatapult';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
@@ -10,7 +10,7 @@ import {testGame} from '../../TestGame';
 describe('ElectroCatapult', () => {
   let card: ElectroCatapult;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new ElectroCatapult();

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {PermafrostExtraction} from '../../../src/server/cards/base/PermafrostExtraction';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {runAllActions, cast, setTemperature} from '../../TestingUtils';
@@ -9,7 +9,7 @@ import {testGame} from '../../TestGame';
 describe('PermafrostExtraction', function() {
   let card: PermafrostExtraction;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new PermafrostExtraction();

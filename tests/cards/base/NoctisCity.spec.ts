@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {NoctisCity} from '../../../src/server/cards/base/NoctisCity';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {TileType} from '../../../src/common/TileType';
@@ -13,7 +13,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 describe('NoctisCity', function() {
   let card: NoctisCity;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new NoctisCity();

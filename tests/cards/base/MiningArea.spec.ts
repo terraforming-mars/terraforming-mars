@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {MiningArea} from '../../../src/server/cards/base/MiningArea';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
@@ -11,7 +11,7 @@ import {testGame} from '../../TestGame';
 describe('MiningArea', function() {
   let card: MiningArea;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new MiningArea();

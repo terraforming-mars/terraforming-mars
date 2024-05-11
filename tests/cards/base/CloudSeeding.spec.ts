@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CloudSeeding} from '../../../src/server/cards/base/CloudSeeding';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {Resource} from '../../../src/common/Resource';
 import {cast, maxOutOceans} from '../../TestingUtils';
@@ -11,7 +11,7 @@ describe('CloudSeeding', () => {
   let card: CloudSeeding;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new CloudSeeding();

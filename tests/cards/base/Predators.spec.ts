@@ -7,7 +7,7 @@ import {Predators} from '../../../src/server/cards/base/Predators';
 import {ProtectedHabitats} from '../../../src/server/cards/base/ProtectedHabitats';
 import {SmallAnimals} from '../../../src/server/cards/base/SmallAnimals';
 import {ICard} from '../../../src/server/cards/ICard';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -16,7 +16,7 @@ describe('Predators', function() {
   let card: Predators;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Predators();

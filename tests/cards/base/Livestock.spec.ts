@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Livestock} from '../../../src/server/cards/base/Livestock';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, setOxygenLevel} from '../../TestingUtils';
@@ -9,7 +9,7 @@ import {testGame} from '../../TestGame';
 describe('Livestock', function() {
   let card: Livestock;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Livestock();

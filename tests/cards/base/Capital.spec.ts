@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Capital} from '../../../src/server/cards/base/Capital';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -13,7 +13,7 @@ import {testGame} from '../../TestGame';
 describe('Capital', () => {
   let card: Capital;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Capital();

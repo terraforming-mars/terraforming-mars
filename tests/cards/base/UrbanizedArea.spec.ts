@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {UrbanizedArea} from '../../../src/server/cards/base/UrbanizedArea';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Space} from '../../../src/server/boards/Space';
 import {Resource} from '../../../src/common/Resource';
 import {SpaceName} from '../../../src/server/SpaceName';
@@ -13,7 +13,7 @@ import {testGame} from '../../TestGame';
 describe('UrbanizedArea', function() {
   let card: UrbanizedArea;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let lands: Space[];
 
   beforeEach(function() {

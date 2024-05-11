@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {GiantIceAsteroid} from '../../../src/server/cards/base/GiantIceAsteroid';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
@@ -12,7 +12,7 @@ describe('GiantIceAsteroid', function() {
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new GiantIceAsteroid();

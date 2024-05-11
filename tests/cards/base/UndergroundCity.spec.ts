@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {UndergroundCity} from '../../../src/server/cards/base/UndergroundCity';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -10,7 +10,7 @@ import {testGame} from '../../TestGame';
 describe('UndergroundCity', function() {
   let card: UndergroundCity;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new UndergroundCity();

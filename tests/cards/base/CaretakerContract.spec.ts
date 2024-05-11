@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CaretakerContract} from '../../../src/server/cards/base/CaretakerContract';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Phase} from '../../../src/common/Phase';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
@@ -14,7 +14,7 @@ import {setTemperature} from '../../TestingUtils';
 describe('CaretakerContract', function() {
   let card: CaretakerContract;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new CaretakerContract();

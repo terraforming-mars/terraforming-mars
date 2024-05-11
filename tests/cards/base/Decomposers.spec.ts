@@ -3,7 +3,7 @@ import {Algae} from '../../../src/server/cards/base/Algae';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {EcologyExperts} from '../../../src/server/cards/prelude/EcologyExperts';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Phase} from '../../../src/common/Phase';
 import {TestPlayer} from '../../TestPlayer';
 import {setOxygenLevel} from '../../TestingUtils';
@@ -12,7 +12,7 @@ import {testGame} from '../../TestGame';
 describe('Decomposers', function() {
   let card: Decomposers;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Decomposers();

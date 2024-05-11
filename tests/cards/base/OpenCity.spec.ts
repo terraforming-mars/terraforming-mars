@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {OpenCity} from '../../../src/server/cards/base/OpenCity';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -10,7 +10,7 @@ import {testGame} from '../../TestGame';
 describe('OpenCity', function() {
   let card: OpenCity;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new OpenCity();

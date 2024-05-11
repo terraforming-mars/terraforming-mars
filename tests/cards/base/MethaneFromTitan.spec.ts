@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {setOxygenLevel} from '../../TestingUtils';
 import {MethaneFromTitan} from '../../../src/server/cards/base/MethaneFromTitan';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
 describe('MethaneFromTitan', function() {
   let card: MethaneFromTitan;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new MethaneFromTitan();

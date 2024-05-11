@@ -5,13 +5,13 @@ import {OpenCity} from '../../../src/server/cards/base/OpenCity';
 import {Resource} from '../../../src/common/Resource';
 import {setOxygenLevel} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {GlobalParameter} from '../../../src/common/GlobalParameter';
 
 describe('AdaptationTechnology', function() {
   let adaptationTechnology: AdaptationTechnology;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     adaptationTechnology = new AdaptationTechnology();

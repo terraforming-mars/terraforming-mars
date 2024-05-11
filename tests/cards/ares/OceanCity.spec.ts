@@ -1,4 +1,4 @@
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
 import {expect} from 'chai';
 import {Resource} from '../../../src/common/Resource';
@@ -14,7 +14,7 @@ import {testGame} from '../../TestGame';
 describe('OceanCity', function() {
   let card: OceanCity;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new OceanCity();

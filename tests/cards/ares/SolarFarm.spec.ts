@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {AresHandler} from '../../../src/server/ares/AresHandler';
 import {SolarFarm} from '../../../src/server/cards/ares/SolarFarm';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
@@ -12,7 +12,7 @@ import {testGame} from '../../TestGame';
 describe('SolarFarm', function() {
   let card: SolarFarm;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new SolarFarm();

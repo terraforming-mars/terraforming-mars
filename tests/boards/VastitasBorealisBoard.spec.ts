@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {VastitasBorealisBoard} from '../../src/server/boards/VastitasBorealisBoard';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayer} from '../TestPlayer';
@@ -12,7 +12,7 @@ import {SeededRandom} from '../../src/common/utils/Random';
 
 describe('VastitasBorealisBoard', function() {
   let board: VastitasBorealisBoard;
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
 
   beforeEach(function() {

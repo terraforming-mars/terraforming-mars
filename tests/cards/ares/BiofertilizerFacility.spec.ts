@@ -3,7 +3,7 @@ import {AICentral} from '../../../src/server/cards/base/AICentral';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {BiofertilizerFacility} from '../../../src/server/cards/ares/BiofertilizerFacility';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
@@ -14,7 +14,7 @@ import {cast, runAllActions} from '../../TestingUtils';
 describe('BiofertilizerFacility', function() {
   let card: BiofertilizerFacility;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   let scienceTagCard: IProjectCard = new AICentral();
   let microbeHost: IProjectCard = new Ants();

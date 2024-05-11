@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {SpaceRelay} from '../../../src/server/cards/pathfinders/SpaceRelay';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Tag} from '../../../src/common/cards/Tag';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
 describe('SpaceRelay', function() {
   let card: SpaceRelay;
@@ -11,9 +11,7 @@ describe('SpaceRelay', function() {
 
   beforeEach(function() {
     card = new SpaceRelay();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
-    player.playedCards.push(card);
+    [/* game */, player] = testGame(1);
   });
 
   it('play', function() {

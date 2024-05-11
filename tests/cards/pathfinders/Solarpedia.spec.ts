@@ -1,21 +1,20 @@
 import {expect} from 'chai';
 import {Solarpedia} from '../../../src/server/cards/pathfinders/Solarpedia';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast} from '../../TestingUtils';
+import {cast, testGame} from '../../TestingUtils';
 
 describe('Solarpedia', function() {
   let card: Solarpedia;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let lunarObservationPost: LunarObservationPost;
 
   beforeEach(function() {
     card = new Solarpedia();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
     lunarObservationPost = new LunarObservationPost();
   });
 

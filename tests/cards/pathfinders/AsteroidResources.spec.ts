@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {AsteroidResources} from '../../../src/server/cards/pathfinders/AsteroidResources';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
@@ -13,7 +13,7 @@ import {cast, runAllActions} from '../../TestingUtils';
 describe('AsteroidResources', function() {
   let card: AsteroidResources;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new AsteroidResources();

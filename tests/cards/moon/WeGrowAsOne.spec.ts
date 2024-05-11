@@ -1,4 +1,4 @@
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {WeGrowAsOne} from '../../../src/server/cards/moon/WeGrowAsOne';
 import {expect} from 'chai';
@@ -8,7 +8,7 @@ import {testGame} from '../../TestGame';
 
 describe('WeGrowAsOne', () => {
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let card: WeGrowAsOne;
 
   beforeEach(() => {

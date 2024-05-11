@@ -5,7 +5,7 @@ import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
@@ -14,7 +14,7 @@ import {IColony} from '../../../src/server/colonies/IColony';
 describe('HuygensObservatory', function() {
   let card: HuygensObservatory;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let ganymede: IColony;
 
   beforeEach(function() {

@@ -1,4 +1,4 @@
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TempestConsultancy} from '../../../src/server/cards/moon/TempestConsultancy';
 import {expect} from 'chai';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
@@ -13,7 +13,7 @@ import {testGame} from '../../TestGame';
 
 describe('TempestConsultancy', () => {
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let card: TempestConsultancy;
   let turmoil: Turmoil;
 

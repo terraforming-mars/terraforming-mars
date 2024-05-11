@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {ThinkTank} from '../../../src/server/cards/pathfinders/ThinkTank';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {addOcean, runAllActions, setOxygenLevel, setTemperature} from '../../TestingUtils';
@@ -16,7 +16,7 @@ import {range} from '../../../src/common/utils/utils';
 describe('ThinkTank', () => {
   let thinkTank: ThinkTank;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     thinkTank = new ThinkTank();

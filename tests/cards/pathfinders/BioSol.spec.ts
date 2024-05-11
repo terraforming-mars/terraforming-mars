@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {BioSol} from '../../../src/server/cards/pathfinders/BioSol';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -9,7 +9,7 @@ import {runAllActions} from '../../TestingUtils';
 describe('BioSol', function() {
   let card: BioSol;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new BioSol();

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {ControlledBloom} from '../../../src/server/cards/pathfinders/ControlledBloom';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
@@ -11,7 +11,7 @@ import {CardResource} from '../../../src/common/CardResource';
 describe('ControlledBloom', function() {
   let card: ControlledBloom;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new ControlledBloom();

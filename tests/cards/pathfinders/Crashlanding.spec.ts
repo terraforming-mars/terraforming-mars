@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Crashlanding} from '../../../src/server/cards/pathfinders/Crashlanding';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
@@ -27,7 +27,7 @@ import {EmptyBoard} from '../../ares/EmptyBoard';
 describe('Crashlanding', () => {
   let card: Crashlanding;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let dataCard: IProjectCard;
   let microbeCard: IProjectCard;
   let animalCard: IProjectCard;

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Steelaris} from '../../../src/server/cards/pathfinders/Steelaris';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {TileType} from '../../../src/common/TileType';
@@ -11,7 +11,7 @@ describe('Steelaris', function() {
   let card: Steelaris;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Steelaris();

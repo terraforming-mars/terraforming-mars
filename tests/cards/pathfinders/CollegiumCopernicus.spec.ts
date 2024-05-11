@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {CollegiumCopernicus} from '../../../src/server/cards/pathfinders/CollegiumCopernicus';
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Triton} from '../../../src/server/colonies/Triton';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
@@ -20,7 +20,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 describe('CollegiumCopernicus', function() {
   let card: CollegiumCopernicus;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new CollegiumCopernicus();

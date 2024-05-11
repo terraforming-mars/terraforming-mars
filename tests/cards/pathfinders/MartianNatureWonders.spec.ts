@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {MartianNatureWonders} from '../../../src/server/cards/pathfinders/MartianNatureWonders';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
@@ -12,7 +12,7 @@ import {testGame} from '../../TestGame';
 describe('MartianNatureWonders', function() {
   let card: MartianNatureWonders;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new MartianNatureWonders();

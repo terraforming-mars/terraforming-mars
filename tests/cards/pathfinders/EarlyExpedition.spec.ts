@@ -1,21 +1,20 @@
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
 import {expect} from 'chai';
 import {EarlyExpedition} from '../../../src/server/cards/pathfinders/EarlyExpedition';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
-import {cast, runAllActions, setTemperature} from '../../TestingUtils';
+import {cast, runAllActions, setTemperature, testGame} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('EarlyExpedition', function() {
   let card: EarlyExpedition;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new EarlyExpedition();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
     player.playedCards.push(card);
   });
 

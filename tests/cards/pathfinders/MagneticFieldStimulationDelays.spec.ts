@@ -1,19 +1,17 @@
 import {expect} from 'chai';
 import {setTemperature, setOxygenLevel} from '../../TestingUtils';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {MagneticFieldStimulationDelays} from '../../../src/server/cards/pathfinders/MagneticFieldStimulationDelays';
-import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
 describe('MagneticFieldStimulationDelays', function() {
   let card: MagneticFieldStimulationDelays;
-  let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new MagneticFieldStimulationDelays();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game/* , player */] = testGame(1);
   });
 
   it('resolve play', function() {

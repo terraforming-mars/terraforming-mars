@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 import {OumuamuaTypeObjectSurvey} from '../../../src/server/cards/pathfinders/OumuamuaTypeObjectSurvey';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
-import {fakeCard, runAllActions, setTemperature} from '../../TestingUtils';
+import {fakeCard, runAllActions, setTemperature, testGame} from '../../TestingUtils';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -12,7 +12,7 @@ import {ProjectDeck} from '../../../src/server/cards/Deck';
 describe('OumuamuaTypeObjectSurvey', function() {
   let card: OumuamuaTypeObjectSurvey;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let projectDeck: ProjectDeck;
 
   const noTags = fakeCard({
@@ -58,8 +58,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
 
   beforeEach(function() {
     card = new OumuamuaTypeObjectSurvey();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
     projectDeck = game.projectDeck;
     projectDeck.discardPile = [];
     player.megaCredits = 100;

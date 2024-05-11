@@ -1,21 +1,20 @@
 import {expect} from 'chai';
 import {DesignedOrganisms} from '../../../src/server/cards/pathfinders/DesignedOrganisms';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {Penguins} from '../../../src/server/cards/promo/Penguins';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
-import {runAllActions} from '../../TestingUtils';
+import {runAllActions, testGame} from '../../TestingUtils';
 
 describe('DesignedOrganisms', function() {
   let card: DesignedOrganisms;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new DesignedOrganisms();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
     player.playedCards.push(card);
   });
 

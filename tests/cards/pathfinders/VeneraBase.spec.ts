@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {VeneraBase} from '../../../src/server/cards/pathfinders/VeneraBase';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
 import {testGame} from '../../TestGame';
@@ -20,7 +20,7 @@ import {cast, churnAction} from '../../TestingUtils';
 describe('VeneraBase', function() {
   let card: VeneraBase;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let nonVenusFloater: IProjectCard;
   let venusFloater: IProjectCard;
   let venusFloater2: IProjectCard;

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {DesperateMeasures} from '../../../src/server/cards/ares/DesperateMeasures';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TileType} from '../../../src/common/TileType';
 import {AresTestHelper} from '../../ares/AresTestHelper';
 import {TestPlayer} from '../../TestPlayer';
@@ -11,7 +11,7 @@ import {testGame} from '../../TestGame';
 describe('DesperateMeasures', function() {
   let card: DesperateMeasures;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new DesperateMeasures();

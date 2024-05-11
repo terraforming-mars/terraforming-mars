@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {testGame} from '../TestGame';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {SpaceName} from '../../src/server/SpaceName';
@@ -15,7 +15,7 @@ import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 
 describe('HellasBoard', function() {
   let board: HellasBoard;
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
 
   beforeEach(function() {

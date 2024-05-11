@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {CapitalAres} from '../../../src/server/cards/ares/CapitalAres';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resource} from '../../../src/common/Resource';
@@ -13,7 +13,7 @@ import {testGame} from '../../TestGame';
 describe('CapitalAres', function() {
   let card: CapitalAres;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new CapitalAres();

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {MagneticFieldGeneratorsAres} from '../../../src/server/cards/ares/MagneticFieldGeneratorsAres';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
@@ -12,7 +12,7 @@ import {CardResource} from '../../../src/common/CardResource';
 describe('MagneticFieldGeneratorsAres', function() {
   let card: MagneticFieldGeneratorsAres;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new MagneticFieldGeneratorsAres();

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {MetallicAsteroid} from '../../../src/server/cards/ares/MetallicAsteroid';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
@@ -12,7 +12,7 @@ describe('MetallicAsteroid', function() {
   let card: MetallicAsteroid;
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new MetallicAsteroid();

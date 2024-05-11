@@ -3,7 +3,7 @@ import {PreludeDeck, CeoDeck, ProjectDeck} from '../../src/server/cards/Deck';
 import {GameCards} from '../../src/server/GameCards';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {ICard} from '../../src/server/cards/ICard';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {CardName} from '../../src/common/cards/CardName';
 import {ConstRandom, UnseededRandom} from '../../src/common/utils/Random';
@@ -118,7 +118,7 @@ describe('CeoDeck', function() {
 
 describe('draw()', function() {
   let deck: ProjectDeck;
-  let game: Game;
+  let game: IGame;
   let drawnCard: IProjectCard | undefined;
   let originalLength: number;
   let topCard: IProjectCard | undefined;

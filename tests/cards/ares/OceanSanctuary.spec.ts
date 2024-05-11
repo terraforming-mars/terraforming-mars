@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {OceanSanctuary} from '../../../src/server/cards/ares/OceanSanctuary';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
@@ -14,7 +14,7 @@ describe('OceanSanctuary', function() {
   let card: OceanSanctuary;
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new OceanSanctuary();

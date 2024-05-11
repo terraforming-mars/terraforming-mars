@@ -1,4 +1,4 @@
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OceanFarm} from '../../../src/server/cards/ares/OceanFarm';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
@@ -13,7 +13,7 @@ describe('OceanFarm', () => {
   let card: OceanFarm;
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new OceanFarm();

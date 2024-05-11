@@ -1,18 +1,18 @@
 import {expect} from 'chai';
 import {setTemperature} from '../../TestingUtils';
 import {AgroDrones} from '../../../src/server/cards/pathfinders/AgroDrones';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
 describe('AgroDrones', function() {
   let card: AgroDrones;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new AgroDrones();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
     player.playedCards.push(card);
   });
 

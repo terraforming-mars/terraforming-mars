@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {cast} from '../../TestingUtils';
@@ -11,7 +11,7 @@ import {MarsFirst} from '../../../src/server/turmoil/parties/MarsFirst';
 import {testGame} from '../../TestGame';
 
 describe('MooncrateConvoysToMars', () => {
-  let game: Game;
+  let game: IGame;
   let player1: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;

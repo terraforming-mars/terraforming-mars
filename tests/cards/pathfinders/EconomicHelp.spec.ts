@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {EconomicHelp} from '../../../src/server/cards/pathfinders/EconomicHelp';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 
 describe('EconomicHelp', function() {
   let card: EconomicHelp;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new EconomicHelp();

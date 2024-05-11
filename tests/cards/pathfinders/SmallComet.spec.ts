@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {SmallComet} from '../../../src/server/cards/pathfinders/SmallComet';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
@@ -13,7 +13,7 @@ describe('SmallComet', function() {
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new SmallComet();

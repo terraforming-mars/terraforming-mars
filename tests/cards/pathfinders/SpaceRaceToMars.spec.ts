@@ -3,13 +3,13 @@ import {SpaceRaceToMars} from '../../../src/server/cards/pathfinders/SpaceRaceTo
 import {Kelvinists} from '../../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../../TestGame';
 import {TileType} from '../../../src/common/TileType';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {Space} from '../../../src/server/boards/Space';
 
 let card: SpaceRaceToMars;
-let game: Game;
+let game: IGame;
 let player: TestPlayer;
 let player2: TestPlayer;
 let turmoil: Turmoil;

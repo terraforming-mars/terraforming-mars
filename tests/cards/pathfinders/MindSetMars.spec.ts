@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {MindSetMars} from '../../../src/server/cards/pathfinders/MindSetMars';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
@@ -18,7 +18,7 @@ describe('MindSetMars', function() {
   let card: MindSetMars;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
 
   beforeEach(function() {

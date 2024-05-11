@@ -1,16 +1,15 @@
 import {UndermoonDrugLordsNetwork} from '../../../src/server/cards/moon/UndermoonDrugLordsNetwork';
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {testGame} from '../../TestingUtils';
 
 describe('UndermoonDrugLordsNetwork', () => {
   let player: TestPlayer;
   let card: UndermoonDrugLordsNetwork;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [/* game */, player] = testGame(1, {moonExpansion: true});
     card = new UndermoonDrugLordsNetwork();
   });
 

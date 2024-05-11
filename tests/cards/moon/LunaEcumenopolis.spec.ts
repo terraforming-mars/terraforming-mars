@@ -143,7 +143,7 @@ describe('LunaEcumenopolis', () => {
 
   // it('canPlay when Reds are in power', () => {
   //   const player = TestPlayer.BLUE.newPlayer();
-  //   const game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
+  //   const game = testGame(1, {moonExpansion: true});
   //   const moonData = MoonExpansion.moonData(game);
 
   //   // Card requirements

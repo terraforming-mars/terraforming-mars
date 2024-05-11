@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Kickstarter} from '../../../src/server/cards/pathfinders/Kickstarter';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -10,7 +10,7 @@ import {cast} from '../../TestingUtils';
 
 describe('Kickstarter', function() {
   let card: Kickstarter;
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
 
   beforeEach(function() {

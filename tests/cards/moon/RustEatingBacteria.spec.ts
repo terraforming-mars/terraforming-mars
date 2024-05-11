@@ -1,5 +1,4 @@
-import {Game} from '../../../src/server/Game';
-import {runAllActions} from '../../TestingUtils';
+import {runAllActions, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {RustEatingBacteria} from '../../../src/server/cards/moon/RustEatingBacteria';
 import {expect} from 'chai';
@@ -9,8 +8,7 @@ describe('RustEatingBacteria', () => {
   let card: RustEatingBacteria;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [/* game */, player] = testGame(1, {moonExpansion: true});
     card = new RustEatingBacteria();
   });
 

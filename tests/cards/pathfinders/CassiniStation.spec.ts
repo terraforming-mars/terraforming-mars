@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CassiniStation} from '../../../src/server/cards/pathfinders/CassiniStation';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {Leavitt} from '../../../src/server/cards/community/Leavitt';
@@ -19,7 +19,7 @@ describe('CassiniStation', function() {
   let card: CassiniStation;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   let floater1: IProjectCard;
   let floater2: IProjectCard;

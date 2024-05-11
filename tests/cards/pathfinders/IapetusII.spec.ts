@@ -3,7 +3,7 @@ import {IapetusII} from '../../../src/server/cards/pathfinders/IapetusII';
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
 import {EconomicEspionage} from '../../../src/server/cards/pathfinders/EconomicEspionage';
 import {AddResourcesToCard} from '../../../src/server/deferredActions/AddResourcesToCard';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
@@ -13,7 +13,7 @@ describe('IapetusII', function() {
   let lunarObservationPost: LunarObservationPost;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     iapetusII = new IapetusII();

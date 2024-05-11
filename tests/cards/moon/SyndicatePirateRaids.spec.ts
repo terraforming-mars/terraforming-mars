@@ -1,4 +1,4 @@
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
@@ -8,7 +8,7 @@ import {SyndicatePirateRaids} from '../../../src/server/cards/moon/SyndicatePira
 describe('SyndicatePirateRaids', () => {
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let card: SyndicatePirateRaids;
 
   beforeEach(() => {

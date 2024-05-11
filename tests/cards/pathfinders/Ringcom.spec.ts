@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Ringcom} from '../../../src/server/cards/pathfinders/Ringcom';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
@@ -11,7 +11,7 @@ describe('Ringcom', function() {
   let card: Ringcom;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Ringcom();

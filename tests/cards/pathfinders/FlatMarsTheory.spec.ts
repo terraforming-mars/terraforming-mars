@@ -1,18 +1,18 @@
 import {expect} from 'chai';
 import {FlatMarsTheory} from '../../../src/server/cards/pathfinders/FlatMarsTheory';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
+import {testGame} from '../../TestingUtils';
 
 describe('FlatMarsTheory', function() {
   let card: FlatMarsTheory;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new FlatMarsTheory();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
   });
 
   it('canPlay', function() {

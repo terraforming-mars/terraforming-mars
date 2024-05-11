@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {TheNewSpaceRace} from '../../../src/server/cards/pathfinders/TheNewSpaceRace';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {cast, doWait, runAllActions, setRulingParty} from '../../TestingUtils';
@@ -20,7 +20,7 @@ describe('TheNewSpaceRace', function() {
   let player1: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new TheNewSpaceRace();

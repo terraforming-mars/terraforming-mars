@@ -5,7 +5,7 @@ import {Research} from '../../../src/server/cards/base/Research';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {ICard} from '../../../src/server/cards/ICard';
 import {BactoviralResearch} from '../../../src/server/cards/promo/BactoviralResearch';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {SecurityFleet} from '../../../src/server/cards/base/SecurityFleet';
@@ -15,7 +15,7 @@ import {testGame} from '../../TestGame';
 describe('BactoviralResearch', function() {
   let card: BactoviralResearch;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new BactoviralResearch();

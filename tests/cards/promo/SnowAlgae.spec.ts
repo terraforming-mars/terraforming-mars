@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {SnowAlgae} from '../../../src/server/cards/promo/SnowAlgae';
-import {Game} from '../../../src/server/Game';
-import {maxOutOceans} from '../../TestingUtils';
+import {maxOutOceans, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('SnowAlgae', function() {
@@ -10,8 +9,7 @@ describe('SnowAlgae', function() {
 
   beforeEach(function() {
     card = new SnowAlgae();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can not play', function() {

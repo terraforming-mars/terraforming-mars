@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CloudCity} from '../../../src/server/cards/starwars/CloudCity';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {runAllActions, setVenusScaleLevel} from '../../TestingUtils';
@@ -9,7 +9,7 @@ import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns'
 describe('CloudCity', () => {
   let card: CloudCity;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new CloudCity();

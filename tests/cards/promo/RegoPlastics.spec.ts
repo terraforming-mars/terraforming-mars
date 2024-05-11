@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {RegoPlastics} from '../../../src/server/cards/promo/RegoPlastics';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestingUtils';
 
 describe('RegoPlastics', function() {
   let card: RegoPlastics;
@@ -9,8 +9,7 @@ describe('RegoPlastics', function() {
 
   beforeEach(function() {
     card = new RegoPlastics();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    [/* game */, player] = testGame(1);
   });
 
   it('Should play', function() {

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {cast, runAllActions} from '../../TestingUtils';
 import {DeimosDownPromo} from '../../../src/server/cards/promo/DeimosDownPromo';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
@@ -11,7 +11,7 @@ describe('DeimosDownPromo', function() {
   let card: DeimosDownPromo;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new DeimosDownPromo();
@@ -47,7 +47,7 @@ describe('DeimosDownPromo', function() {
   });
 
   it('Works fine in solo mode', function() {
-    game = Game.newInstance('gameid', [player], player);
+    const [game, player] = testGame(1);
 
     player.plants = 15;
     expect(card.play(player)).is.undefined;

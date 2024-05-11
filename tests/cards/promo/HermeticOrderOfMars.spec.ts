@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {HermeticOrderOfMars} from '../../../src/server/cards/promo/HermeticOrderofMars';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {MarsBoard} from '../../../src/server/boards/MarsBoard';
@@ -11,7 +11,7 @@ import {TileType} from '../../../src/common/TileType';
 describe('HermeticOrderOfMars', function() {
   let card: HermeticOrderOfMars;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let board: MarsBoard;
 
   beforeEach(function() {

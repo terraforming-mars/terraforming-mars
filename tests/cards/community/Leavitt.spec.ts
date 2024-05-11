@@ -3,6 +3,7 @@ import {Leavitt} from '../../../src/server/cards/community/Leavitt';
 import {Vitor} from '../../../src/server/cards/prelude/Vitor';
 import {SelfReplicatingRobots} from '../../../src/server/cards/promo/SelfReplicatingRobots';
 import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Tag} from '../../../src/common/cards/Tag';
 import {cast, runAllActions} from '../../TestingUtils';
@@ -13,7 +14,7 @@ describe('Leavitt', function() {
   let leavitt: Leavitt;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     leavitt = new Leavitt();

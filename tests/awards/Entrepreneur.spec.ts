@@ -1,8 +1,7 @@
 import {expect} from 'chai';
-import {Game} from '../../src/server/Game';
 import {Entrepreneur} from '../../src/server/awards/Entrepreneur';
 import {TileType} from '../../src/common/TileType';
-import {TestPlayer} from '../TestPlayer';
+import {testGame} from '../TestGame';
 import {IPlayer} from '../../src/server/IPlayer';
 import {SpaceId} from '../../src/common/Types';
 import {AdjacencyBonus} from '../../src/server/ares/AdjacencyBonus';
@@ -19,9 +18,7 @@ function addAdjacencyBonus(player: IPlayer, spaceId: SpaceId, adjacency: Adjacen
 describe('Entrepreneur', function() {
   it('Correctly counts ocean tiles', function() {
     const award = new Entrepreneur();
-    const player = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player);
+    const [/* game */, player/* , player2 */] = testGame(2);
 
     expect(award.getScore(player)).to.eq(0);
 

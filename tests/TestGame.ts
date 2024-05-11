@@ -34,8 +34,7 @@ function createPlayers(count: number, idSuffix: string): Array<TestPlayer> {
  *
  * Test game has a return type with a spread array operator.
  */
-// TODO(kberg): return IGame instead of Game
-export function testGame(count: number, customOptions?: Partial<TestGameOptions>, idSuffix = ''): [Game, ...Array<TestPlayer>] {
+export function testGame(count: number, customOptions?: Partial<TestGameOptions>, idSuffix = ''): [IGame, ...Array<TestPlayer>] {
   const players = createPlayers(count, idSuffix);
 
   const copy = {...customOptions};

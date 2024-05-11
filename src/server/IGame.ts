@@ -72,7 +72,7 @@ export interface IGame extends Logger {
   aresData: AresData | undefined;
   moonData: MoonData | undefined;
   pathfindersData: PathfindersData | undefined;
-  underworldData: UnderworldData | undefined;
+  underworldData: UnderworldData;
 
   // Card-specific data
   // Mons Insurance promo corp

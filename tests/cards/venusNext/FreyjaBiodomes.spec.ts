@@ -3,7 +3,7 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {Extremophiles} from '../../../src/server/cards/venusNext/Extremophiles';
 import {FreyjaBiodomes} from '../../../src/server/cards/venusNext/FreyjaBiodomes';
 import {VenusianAnimals} from '../../../src/server/cards/venusNext/VenusianAnimals';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
@@ -13,7 +13,7 @@ import {testGame} from '../../TestGame';
 describe('FreyjaBiodomes', function() {
   let card: FreyjaBiodomes;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new FreyjaBiodomes();

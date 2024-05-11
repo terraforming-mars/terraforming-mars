@@ -3,7 +3,7 @@ import {IColony} from '../../src/server/colonies/IColony';
 import {Pluto} from '../../src/server/colonies/Pluto';
 import {DustSeals} from '../../src/server/cards/base/DustSeals';
 import {IPlayer} from '../../src/server/IPlayer';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {AndOptions} from '../../src/server/inputs/AndOptions';
 import {SelectColony} from '../../src/server/inputs/SelectColony';
@@ -45,7 +45,7 @@ describe('Colony', function() {
   let player2: TestPlayer;
   let player3: TestPlayer;
   let player4: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     [game, player, player2, player3, player4] = testGame(4, {

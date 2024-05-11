@@ -5,7 +5,7 @@ import {EcologicalSurvey} from '../../src/server/cards/ares/EcologicalSurvey';
 import {GeologicalSurvey} from '../../src/server/cards/ares/GeologicalSurvey';
 import {LunaMiningHub} from '../../src/server/cards/moon/LunaMiningHub';
 import {Philares} from '../../src/server/cards/promo/Philares';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {MoonData} from '../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
@@ -14,17 +14,16 @@ import {TileType} from '../../src/common/TileType';
 import {TestPlayer} from '../TestPlayer';
 import {Phase} from '../../src/common/Phase';
 import {VictoryPointsBreakdown} from '../../src/server/game/VictoryPointsBreakdown';
+import {testGame} from '../TestingUtils';
 
 describe('MoonExpansion', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let player2: TestPlayer;
   let moonData: MoonData;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.PINK.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player, {moonExpansion: true});
+    [game, player, player2] = testGame(2, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
   });
 

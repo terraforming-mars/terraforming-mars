@@ -1,19 +1,13 @@
 import {expect} from 'chai';
-import {Game} from '../../src/server/Game';
 import {GenerousFunding} from '../../src/server/turmoil/globalEvents/GenerousFunding';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/server/turmoil/Turmoil';
-import {TestPlayer} from '../TestPlayer';
+import {testGame} from '../TestingUtils';
 
 describe('GenerousFunding', function() {
   it('resolve play', function() {
     const card = new GenerousFunding();
-    const player = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, player2], player);
-    const turmoil = Turmoil.newInstance(game);
-
-    turmoil.initGlobalEvent(game);
+    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const turmoil = game.turmoil!;
     turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2;
@@ -32,12 +26,8 @@ describe('GenerousFunding', function() {
 
   it('no negative mc give out if TR lower than 15', function() {
     const card = new GenerousFunding();
-    const player = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, player2], player);
-    const turmoil = Turmoil.newInstance(game);
-
-    turmoil.initGlobalEvent(game);
+    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const turmoil = game.turmoil!;
     turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2;

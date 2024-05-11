@@ -6,7 +6,7 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {Atmoscoop} from '../../../src/server/cards/venusNext/Atmoscoop';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
@@ -17,7 +17,7 @@ import {testGame} from '../../TestGame';
 describe('Atmoscoop', function() {
   let card: Atmoscoop;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let dirigibles: Dirigibles;
   let floatingHabs: FloatingHabs;
 

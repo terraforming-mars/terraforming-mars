@@ -9,13 +9,13 @@ import {DiscardCards} from '../../../src/server/deferredActions/DiscardCards';
 import {DrawCards} from '../../../src/server/deferredActions/DrawCards';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 describe('SponsoredAcademies', function() {
   let card: SponsoredAcademies;
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let player2: TestPlayer;
   let tardigrades: IProjectCard;

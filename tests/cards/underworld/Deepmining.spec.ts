@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Deepmining} from '../../../src/server/cards/underworld/Deepmining';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
@@ -10,7 +10,7 @@ import {testGame} from '../../TestGame';
 describe('Deepmining', function() {
   let card: Deepmining;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Deepmining();

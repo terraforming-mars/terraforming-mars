@@ -3,7 +3,7 @@ import {AerialMappers} from '../../src/server/cards/venusNext/AerialMappers';
 import {Dirigibles} from '../../src/server/cards/venusNext/Dirigibles';
 import {Titan} from '../../src/server/colonies/Titan';
 import {AddResourcesToCard} from '../../src/server/deferredActions/AddResourcesToCard';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
 import {cast, runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
@@ -13,7 +13,7 @@ describe('Titan', function() {
   let aerialMappers: AerialMappers;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     titan = new Titan();

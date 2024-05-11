@@ -1,9 +1,8 @@
 import {expect} from 'chai';
-import {Game} from '../../src/server/Game';
 import {Resource} from '../../src/common/Resource';
 import {Player} from '../../src/server/Player';
 import {Color} from '../../src/common/Color';
-import {formatLogMessage} from '../TestingUtils';
+import {formatLogMessage, testGame} from '../TestingUtils';
 import {Units} from '../../src/common/Units';
 import {GlobalEventName} from '../../src/common/turmoil/globalEvents/GlobalEventName';
 
@@ -208,8 +207,7 @@ describe('Stock', function() {
   });
 
   it('adds resources', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    Game.newInstance('gameid', [player], player);
+    const [/* game */, player] = testGame(1);
     player.megaCredits = 10;
     // adds any positive amount
     player.stock.add(Resource.MEGACREDITS, 12);
@@ -229,8 +227,7 @@ describe('Stock', function() {
   });
 
   it('addResource logging', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const game = Game.newInstance('gameid', [player], player);
+    const [game, player] = testGame(1);
 
     const log = game.gameLog;
     log.length = 0; // Empty it out.
@@ -244,9 +241,7 @@ describe('Stock', function() {
   });
 
   it('addResource logging from player', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const player2 = new Player('red', Color.RED, false, 0, 'p-red');
-    const game = Game.newInstance('gameid', [player, player2], player);
+    const [game, player, player2] = testGame(2);
 
     player.megaCredits = 5;
     player.stock.add(Resource.MEGACREDITS, -5, {log: true, from: player2});
@@ -257,8 +252,7 @@ describe('Stock', function() {
   });
 
   it('addResource logging from global event', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const game = Game.newInstance('gameid', [player], player);
+    const [game, player] = testGame(1);
 
     player.stock.add(Resource.MEGACREDITS, 12, {log: true, from: GlobalEventName.ASTEROID_MINING});
 
@@ -268,8 +262,7 @@ describe('Stock', function() {
   });
 
   it('addResource logs error when deducting too much', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    Game.newInstance('gameid', [player], player);
+    const [/* game */, player] = testGame(1);
 
     player.megaCredits = 10;
     const warn = console.warn;
@@ -284,15 +277,15 @@ describe('Stock', function() {
     expect(consoleLog[0][0]).eq('Illegal state: Adjusting -12 megacredits when player has 10');
     expect(JSON.parse(consoleLog[0][1])).deep.eq(
       {
-        'gameId': 'gameid',
+        'gameId': 'game-id',
         'lastSaveId': 0,
         'logAge': 7,
-        'currentPlayer': 'p-blue',
+        'currentPlayer': 'p-player1-id',
         'metadata': {
           'player': {
             'color': 'blue',
-            'id': 'p-blue',
-            'name': 'blue',
+            'id': 'p-player1-id',
+            'name': 'player1',
           },
           'resource': 'megacredits',
           'amount': -12,

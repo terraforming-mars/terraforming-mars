@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Ganymede} from '../../src/server/colonies/Ganymede';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
@@ -9,7 +9,7 @@ describe('Ganymede', function() {
   let ganymede: Ganymede;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     ganymede = new Ganymede();

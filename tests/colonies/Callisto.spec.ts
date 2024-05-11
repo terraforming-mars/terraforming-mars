@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Callisto} from '../../src/server/colonies/Callisto';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
@@ -9,7 +9,7 @@ describe('Callisto', function() {
   let callisto: Callisto;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     callisto = new Callisto();

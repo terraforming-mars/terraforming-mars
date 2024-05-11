@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Hygiea} from '../../../src/server/cards/community/Hygiea';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -15,7 +15,7 @@ describe('Hygiea', () => {
   let hygiea: Hygiea;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     hygiea = new Hygiea();

@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {Conscription} from '../../../src/server/cards/colonies/Conscription';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, testGame} from '../../TestingUtils';
 
 describe('Conscription', function() {
   let card: Conscription;
@@ -11,8 +10,7 @@ describe('Conscription', function() {
 
   beforeEach(() => {
     card = new Conscription();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player, TestPlayer.RED.newPlayer()], player);
+    [/* game */, player] = testGame(2);
   });
 
   it('play', () => {

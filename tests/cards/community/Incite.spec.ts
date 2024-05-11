@@ -1,24 +1,23 @@
 import {expect} from 'chai';
 import {Incite} from '../../../src/server/cards/community/Incite';
 import {EventAnalysts} from '../../../src/server/cards/turmoil/EventAnalysts';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast, getSendADelegateOption, runAllActions} from '../../TestingUtils';
+import {cast, getSendADelegateOption, runAllActions, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 
 describe('Incite', function() {
   let card: Incite;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new Incite();
-    player = TestPlayer.BLUE.newPlayer();
 
-    game = Game.newInstance('gameid', [player], player, {turmoilExtension: true});
+    [game, player] = testGame(1, {turmoilExtension: true});
 
     card.play(player);
     player.setCorporationForTest(card);

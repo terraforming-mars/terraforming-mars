@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {cast} from '../../TestingUtils';
 import {ImpactorSwarm} from '../../../src/server/cards/colonies/ImpactorSwarm';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -10,7 +10,7 @@ describe('ImpactorSwarm', function() {
   let card: ImpactorSwarm;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new ImpactorSwarm();

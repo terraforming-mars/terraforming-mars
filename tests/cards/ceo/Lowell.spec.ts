@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {LightningHarvest} from '../../../src/server/cards/base/LightningHarvest';
 import {CardType} from '../../../src/common/cards/CardType';
 import {ICard} from '../../../src/server/cards/ICard';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {forceGenerationEnd, fakeCard} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -13,7 +13,7 @@ import {testGame} from '../../TestGame';
 describe('Lowell', function() {
   let card: Lowell;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Lowell();

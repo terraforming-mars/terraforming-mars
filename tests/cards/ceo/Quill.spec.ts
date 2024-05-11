@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {ICard} from '../../../src/server/cards/ICard';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -8,14 +8,12 @@ import {testGame} from '../../TestGame';
 import {runAllActions, cast} from '../../TestingUtils';
 import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
-
 import {Quill} from '../../../src/server/cards/ceos/Quill';
-
 
 describe('Quill', function() {
   let card: Quill;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Quill();

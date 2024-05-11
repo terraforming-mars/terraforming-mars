@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -9,13 +9,12 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {Tag} from '../../../src/common/cards/Tag';
-
 import {Tate} from '../../../src/server/cards/ceos/Tate';
 
 describe('Tate', function() {
   let card: Tate;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Tate();

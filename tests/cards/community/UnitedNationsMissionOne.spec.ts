@@ -5,14 +5,14 @@ import {Phase} from '../../../src/common/Phase';
 import {Mine} from '../../../src/server/cards/base/Mine';
 import {UnitedNationsMissionOne} from '../../../src/server/cards/community/UnitedNationsMissionOne';
 import {UNMIContractor} from '../../../src/server/cards/prelude/UNMIContractor';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Election} from '../../../src/server/turmoil/globalEvents/Election';
 
 describe('UnitedNationsMissionOne', function() {
   let card: UnitedNationsMissionOne;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new UnitedNationsMissionOne();

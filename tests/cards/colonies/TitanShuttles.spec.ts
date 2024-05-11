@@ -3,7 +3,7 @@ import {cast} from '../../TestingUtils';
 import {TitanFloatingLaunchPad} from '../../../src/server/cards/colonies/TitanFloatingLaunchPad';
 import {TitanShuttles} from '../../../src/server/cards/colonies/TitanShuttles';
 import {ICard} from '../../../src/server/cards/ICard';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
@@ -12,7 +12,7 @@ import {testGame} from '../../TestGame';
 describe('TitanShuttles', function() {
   let card: TitanShuttles;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new TitanShuttles();

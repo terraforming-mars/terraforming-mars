@@ -4,16 +4,15 @@ import {IshtarMining} from '../../../src/server/cards/venusNext/IshtarMining';
 import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {VenusGovernor} from '../../../src/server/cards/venusNext/VenusGovernor';
 import {VenusianAnimals} from '../../../src/server/cards/venusNext/VenusianAnimals';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-
 describe('Rogers', function() {
   let card: Rogers;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Rogers();

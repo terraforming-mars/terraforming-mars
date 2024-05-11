@@ -2,16 +2,12 @@ import {expect} from 'chai';
 import {ProductiveOutpost} from '../../../src/server/cards/colonies/ProductiveOutpost';
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Triton} from '../../../src/server/colonies/Triton';
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {runAllActions} from '../../TestingUtils';
+import {runAllActions, testGame} from '../../TestingUtils';
 
 describe('ProductiveOutpost', function() {
   it('Should play', function() {
     const card = new ProductiveOutpost();
-    const player = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player);
+    const [/* game */, player/* , player2 */] = testGame(2);
     const colony1 = new Luna();
     const colony2 = new Triton();
 

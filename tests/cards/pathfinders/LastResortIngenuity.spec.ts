@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {LastResortIngenuity} from '../../../src/server/cards/pathfinders/LastResortIngenuity';
 import {AsteroidMiningConsortium} from '../../../src/server/cards/base/AsteroidMiningConsortium';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
 describe('LastResortIngenuity', function() {
   let card: LastResortIngenuity;
@@ -10,8 +10,7 @@ describe('LastResortIngenuity', function() {
 
   beforeEach(function() {
     card = new LastResortIngenuity();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    [/* game */, player] = testGame(1);
   });
 
   it('play', function() {

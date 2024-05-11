@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 import {PrefabricationofHumanHabitats} from '../../../src/server/cards/pathfinders/PrefabricationofHumanHabitats';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {ImmigrantCity} from '../../../src/server/cards/base/ImmigrantCity';
 import {CityStandardProject} from '../../../src/server/cards/base/standardProjects/CityStandardProject';
+import {testGame} from '../../TestingUtils';
 
 describe('PrefabricationofHumanHabitats', function() {
   let card: PrefabricationofHumanHabitats;
@@ -11,8 +11,7 @@ describe('PrefabricationofHumanHabitats', function() {
 
   beforeEach(function() {
     card = new PrefabricationofHumanHabitats();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    [/* game */, player] = testGame(1);
     player.playedCards.push(card);
   });
 

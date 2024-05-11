@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {SocialEvents} from '../../../src/server/cards/pathfinders/SocialEvents';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Phase} from '../../../src/common/Phase';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -14,7 +14,7 @@ import {runAllActions} from '../../TestingUtils';
 describe('SocialEvents', function() {
   let card: SocialEvents;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
 
   beforeEach(function() {

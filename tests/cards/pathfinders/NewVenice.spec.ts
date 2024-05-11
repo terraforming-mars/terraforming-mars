@@ -1,4 +1,4 @@
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {NewVenice} from '../../../src/server/cards/pathfinders/NewVenice';
 import {expect} from 'chai';
 import {Resource} from '../../../src/common/Resource';
@@ -6,7 +6,7 @@ import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Capital} from '../../../src/server/cards/base/Capital';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {addOcean, cast, runAllActions} from '../../TestingUtils';
+import {addOcean, cast, runAllActions, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {MartianLumberCorp} from '../../../src/server/cards/promo/MartianLumberCorp';
@@ -15,13 +15,11 @@ import {MartianLumberCorp} from '../../../src/server/cards/promo/MartianLumberCo
 describe('NewVenice', function() {
   let card: NewVenice;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new NewVenice();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, {pathfindersExpansion: true});
+    [game, player/* , player2 */] = testGame(2, {pathfindersExpansion: true});
   });
 
   it('Can play', function() {

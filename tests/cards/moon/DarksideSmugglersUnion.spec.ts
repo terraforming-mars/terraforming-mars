@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {DarksideSmugglersUnion} from '../../../src/server/cards/moon/DarksideSmugglersUnion';
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Triton} from '../../../src/server/colonies/Triton';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {TestPlayer} from '../../TestPlayer';
@@ -14,7 +14,7 @@ import {Message} from '../../../src/common/logs/Message';
 describe('DarksideSmugglersUnion', function() {
   let card: DarksideSmugglersUnion;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new DarksideSmugglersUnion();

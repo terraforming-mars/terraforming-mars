@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {StrategicBasePlanning} from '../../../src/server/cards/pathfinders/StrategicBasePlanning';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {assertPlaceCity} from '../../assertions';
 import {assertBuildColony} from '../../colonies/coloniesAssertions';
@@ -10,7 +10,7 @@ import {assertBuildColony} from '../../colonies/coloniesAssertions';
 describe('StrategicBasePlanning', function() {
   let card: StrategicBasePlanning;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new StrategicBasePlanning();

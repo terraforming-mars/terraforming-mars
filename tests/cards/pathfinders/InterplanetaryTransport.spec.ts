@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {InterplanetaryTransport} from '../../../src/server/cards/pathfinders/InterplanetaryTransport';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {TileType} from '../../../src/common/TileType';
@@ -9,7 +9,7 @@ import {SpaceName} from '../../../src/server/SpaceName';
 describe('InterplanetaryTransport', function() {
   let card: InterplanetaryTransport;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new InterplanetaryTransport();

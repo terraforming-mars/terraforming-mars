@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {GagarinMobileBase} from '../../../src/server/cards/pathfinders/GagarinMobileBase';
@@ -12,7 +12,7 @@ import {UnseededRandom} from '../../../src/common/utils/Random';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 
 describe('GagarinMobileBase', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let player2: TestPlayer;
   let card: GagarinMobileBase;

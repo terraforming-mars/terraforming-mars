@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Ambient} from '../../../src/server/cards/pathfinders/Ambient';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions, setTemperature} from '../../TestingUtils';
@@ -17,7 +17,7 @@ describe('Ambient', function() {
   let card: Ambient;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Ambient();

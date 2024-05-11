@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CharityDonation} from '../../../src/server/cards/pathfinders/CharityDonation';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {AcquiredCompany} from '../../../src/server/cards/base/AcquiredCompany';
 import {BeamFromAThoriumAsteroid} from '../../../src/server/cards/base/BeamFromAThoriumAsteroid';
@@ -15,7 +15,7 @@ describe('CharityDonation', function() {
   let player1: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new CharityDonation();

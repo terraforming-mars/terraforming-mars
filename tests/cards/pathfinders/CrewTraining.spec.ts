@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {CrewTraining} from '../../../src/server/cards/pathfinders/CrewTraining';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Tag} from '../../../src/common/cards/Tag';
 import {TestPlayer} from '../../TestPlayer';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
@@ -11,7 +11,7 @@ import {cast} from '../../TestingUtils';
 describe('CrewTraining', function() {
   let card: CrewTraining;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new CrewTraining();

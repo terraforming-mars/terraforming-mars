@@ -4,7 +4,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Tag} from '../../../src/common/cards/Tag';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
@@ -14,7 +14,7 @@ import {CardName} from '../../../src/common/cards/CardName';
 
 describe('ExperiencedMartians', function() {
   let card: ExperiencedMartians;
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let turmoil: Turmoil;
 

@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {CeresSpaceport} from '../../../src/server/cards/pathfinders/CeresSpaceport';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {PlaceOceanTile} from '../../../src/server/deferredActions/PlaceOceanTile';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {Units} from '../../../src/common/Units';
+import {testGame} from '../../TestingUtils';
 
 describe('CeresSpaceport', function() {
   let card: CeresSpaceport;
@@ -12,8 +12,7 @@ describe('CeresSpaceport', function() {
 
   beforeEach(function() {
     card = new CeresSpaceport();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, {pathfindersExpansion: true});
+    [/* game */, player] = testGame(1, {pathfindersExpansion: true});
   });
 
   it('play', function() {

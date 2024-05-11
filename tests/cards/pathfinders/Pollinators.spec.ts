@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Pollinators} from '../../../src/server/cards/pathfinders/Pollinators';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
@@ -9,7 +9,7 @@ import {runAllActions} from '../../TestingUtils';
 describe('Pollinators', function() {
   let card: Pollinators;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Pollinators();

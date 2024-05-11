@@ -7,11 +7,11 @@ import {TileType} from '../../../src/common/TileType';
 import {SpaceId} from '../../../src/common/Types';
 import {IPlayer} from '../../../src/server/IPlayer';
 import {testGame} from '../../TestGame';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 
 describe('HeavyDutyRovers', () => {
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let card: HeavyDutyRovers;
   let moonData: MoonData;
 

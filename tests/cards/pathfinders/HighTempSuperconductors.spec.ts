@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {HighTempSuperconductors} from '../../../src/server/cards/pathfinders/HighTempSuperconductors';
 import {Thorgate} from '../../../src/server/cards/corporation/Thorgate';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
@@ -16,7 +16,7 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 describe('HighTempSuperconductors', function() {
   let card: HighTempSuperconductors;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
 
   beforeEach(function() {

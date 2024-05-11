@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {NobelLabs} from '../../../src/server/cards/pathfinders/NobelLabs';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
@@ -14,7 +14,7 @@ import {cast} from '../../TestingUtils';
 describe('NobelLabs', function() {
   let card: NobelLabs;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let floater: IProjectCard;
   let microbe: IProjectCard;
   let data: IProjectCard;

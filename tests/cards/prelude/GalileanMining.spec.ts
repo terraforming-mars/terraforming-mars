@@ -1,17 +1,17 @@
 import {expect} from 'chai';
 import {GalileanMining} from '../../../src/server/cards/prelude/GalileanMining';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
 describe('GalileanMining', function() {
   let card: GalileanMining;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new GalileanMining();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
   });
 
   it('Can not play', function() {

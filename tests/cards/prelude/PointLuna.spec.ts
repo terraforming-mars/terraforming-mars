@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {EarthCatapult} from '../../../src/server/cards/base/EarthCatapult';
 import {PointLuna} from '../../../src/server/cards/prelude/PointLuna';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
 describe('PointLuna', function() {
   let card: PointLuna;
@@ -11,8 +11,7 @@ describe('PointLuna', function() {
 
   beforeEach(function() {
     card = new PointLuna();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    [/* game */, player] = testGame(1);
     player.setCorporationForTest(card);
   });
 

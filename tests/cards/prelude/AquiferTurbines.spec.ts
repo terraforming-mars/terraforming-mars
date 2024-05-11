@@ -1,17 +1,17 @@
 import {expect} from 'chai';
 import {AquiferTurbines} from '../../../src/server/cards/prelude/AquiferTurbines';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
 describe('AquiferTurbines', function() {
   let card: AquiferTurbines;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new AquiferTurbines();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
   });
 
   it('Can not play', function() {

@@ -1,5 +1,5 @@
 import {Philares} from '../../../src/server/cards/promo/Philares';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {TileType} from '../../../src/common/TileType';
@@ -19,7 +19,7 @@ describe('Philares', () => {
   let card: Philares;
   let philaresPlayer : TestPlayer;
   let otherPlayer: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let space: Space;
   let adjacentSpace: Space;
   let adjacentSpace2: Space;

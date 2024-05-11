@@ -10,7 +10,7 @@ import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
 import {PharmacyUnion} from '../../../src/server/cards/promo/PharmacyUnion';
 import {Tag} from '../../../src/common/cards/Tag';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectInitialCards} from '../../../src/server/inputs/SelectInitialCards';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
@@ -23,18 +23,17 @@ describe('PharmacyUnion', function() {
   let card: PharmacyUnion;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new PharmacyUnion();
     [game, player, player2] = testGame(2);
-
     player.setCorporationForTest(card);
   });
 
   it('Should play', function() {
     player.corporations.length = 0; // Resetting so when setting the corproation it doesn't do anything flaky.
-    Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1, {skipInitialCardSelection: false});
     const pi = cast(player.getWaitingFor(), SelectInitialCards);
     pi.options[0].cb([card]);
     pi.options[1].cb([]);

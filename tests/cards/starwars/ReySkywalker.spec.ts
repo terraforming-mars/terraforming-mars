@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {ReySkywalker} from '../../../src/server/cards/starwars/ReySkywalker';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
@@ -11,7 +11,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 describe('ReySkywalker', () => {
   let card: ReySkywalker;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new ReySkywalker();

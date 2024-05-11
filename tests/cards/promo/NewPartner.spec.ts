@@ -4,7 +4,7 @@ import {GalileanMining} from '../../../src/server/cards/prelude/GalileanMining';
 import {HugeAsteroid} from '../../../src/server/cards/prelude/HugeAsteroid';
 import {NewPartner} from '../../../src/server/cards/promo/NewPartner';
 import {SmeltingPlant} from '../../../src/server/cards/prelude/SmeltingPlant';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -14,7 +14,7 @@ import {IPreludeCard, isPreludeCard} from '../../../src/server/cards/prelude/IPr
 describe('NewPartner', function() {
   let card: NewPartner;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let smeltingPlant: IPreludeCard;
   let donation: IPreludeCard;
   let hugeAsteroid: IPreludeCard;

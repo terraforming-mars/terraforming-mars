@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {RedTourismWave} from '../../../src/server/cards/turmoil/RedTourismWave';
-import {Game} from '../../../src//server/Game';
+import {IGame} from '../../../src//server/IGame';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {testGame} from '../../TestGame';
-import {TestPlayer} from 'tests/TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 
 describe('RedTourismWave', function() {
   let card: RedTourismWave;
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
 
   beforeEach(() => {

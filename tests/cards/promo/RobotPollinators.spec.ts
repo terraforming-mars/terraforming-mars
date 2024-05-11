@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {RobotPollinators} from '../../../src/server/cards/promo/RobotPollinators';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {fakeCard, setOxygenLevel} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Tag} from '../../../src/common/cards/Tag';
@@ -9,7 +9,7 @@ import {Tag} from '../../../src/common/cards/Tag';
 describe('Robot Pollinators', function() {
   let card: RobotPollinators;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new RobotPollinators();

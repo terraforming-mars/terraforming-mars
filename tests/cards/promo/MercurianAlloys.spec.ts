@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {Research} from '../../../src/server/cards/base/Research';
 import {MercurianAlloys} from '../../../src/server/cards/promo/MercurianAlloys';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
 describe('MercurianAlloys', function() {
   let card: MercurianAlloys;
@@ -10,8 +10,7 @@ describe('MercurianAlloys', function() {
 
   beforeEach(function() {
     card = new MercurianAlloys();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    [/* game */, player] = testGame(1);
   });
 
   it('Can not play if not enough science tags available', function() {

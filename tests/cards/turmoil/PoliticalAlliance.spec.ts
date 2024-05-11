@@ -1,21 +1,20 @@
 import {expect} from 'chai';
 import {PoliticalAlliance} from '../../../src/server/cards/turmoil/PoliticalAlliance';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
 describe('PoliticalAlliance', function() {
   let card: PoliticalAlliance;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new PoliticalAlliance();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, {turmoilExtension: true});
+    [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
     turmoil = game.turmoil!;
   });
 

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {HeadStart} from '../../../src/server/cards/promo/HeadStart';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, doWait, fakeCard, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -15,7 +15,7 @@ import {Donation} from '../../../src/server/cards/prelude/Donation';
 
 describe('HeadStart', function() {
   let headStart: HeadStart;
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let player2: TestPlayer;
 

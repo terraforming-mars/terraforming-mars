@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {RobinsonIndustries} from '../../../src/server/cards/prelude/RobinsonIndustries';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, testGame} from '../../TestingUtils';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
@@ -12,12 +12,11 @@ import {Payment} from '../../../src/common/inputs/Payment';
 describe('RobinsonIndustries', function() {
   let card: RobinsonIndustries;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new RobinsonIndustries();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
     player.setCorporationForTest(card);
   });
 

@@ -1,26 +1,24 @@
 import {expect} from 'chai';
 import {BannedDelegate} from '../../../src/server/cards/turmoil/BannedDelegate';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectDelegate} from '../../../src/server/inputs/SelectDelegate';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
 describe('Banned Delegate', function() {
   let card: BannedDelegate;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
 
   beforeEach(function() {
     card = new BannedDelegate();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-
-    game = Game.newInstance('gameid', [player, player2], player, {turmoilExtension: true});
+    [game, player, player2] = testGame(2, {turmoilExtension: true});
     turmoil = game.turmoil!;
   });
 

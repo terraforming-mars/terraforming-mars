@@ -2,12 +2,11 @@ import {expect} from 'chai';
 import {ICard} from '../../../src/server/cards/ICard';
 import {AsteroidRights} from '../../../src/server/cards/promo/AsteroidRights';
 import {CometAiming} from '../../../src/server/cards/promo/CometAiming';
-import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, testGame} from '../../TestingUtils';
 
 describe('AsteroidRights', function() {
   let card: AsteroidRights;
@@ -15,13 +14,11 @@ describe('AsteroidRights', function() {
 
   beforeEach(function() {
     card = new AsteroidRights();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, redPlayer], player);
+    [/* game */, player/* , player2 */] = testGame(2);
 
     player.playedCards.push(card);
     card.play(player);
-    runAllActions(game);
+    runAllActions(player.game);
   });
 
   it('Should play', function() {

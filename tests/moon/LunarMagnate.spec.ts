@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 import {LunarMagnate} from '../../src/server/moon/LunarMagnate';
-import {Game} from '../../src/server/Game';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {TestPlayer} from '../TestPlayer';
 import {TileType} from '../../src/common/TileType';
+import {testGame} from '../TestGame';
 
 describe('LunarMagnate', function() {
   let player: TestPlayer;
@@ -12,7 +12,7 @@ describe('LunarMagnate', function() {
   beforeEach(() => {
     player = TestPlayer.BLUE.newPlayer();
     otherPlayer = TestPlayer.PINK.newPlayer();
-    Game.newInstance('gameid', [player, otherPlayer], player, {moonExpansion: true});
+    [/* game */, player, otherPlayer] = testGame(2, {moonExpansion: true});
   });
 
   it('Basic test', function() {

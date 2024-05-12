@@ -1,4 +1,4 @@
-import * as responses from './responses';
+import * as responses from '../server/responses';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {Context} from './IHandler';

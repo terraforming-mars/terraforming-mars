@@ -128,8 +128,8 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     case BoardName.UTOPIA_PLANITIA:
     case BoardName.VASTITAS_BOREALIS_NOVUS:
     case BoardName.TERRA_CIMMERIA_NOVUS:
-      drawnMilestonesAndAwards = getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
-      break;
+      // There's no need to add more milestones and awards for these boards, so it returns.
+      return getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
     }
     if (includeVenus) {
       push(VENUS_MILESTONES, VENUS_AWARDS);

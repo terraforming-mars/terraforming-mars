@@ -29,7 +29,7 @@ async function main() {
     for (let idx = lastIdx; idx < gameLog.length; idx++) {
       const logEntry = gameLog[idx];
       const text = Log.applyData(logEntry, (datum) => datum.value);
-      console.log(idx, text);
+      console.log(`[${saveId}/${idx}]: ${text}`);
     }
     lastIdx = gameLog.length;
   }

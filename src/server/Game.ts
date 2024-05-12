@@ -113,7 +113,6 @@ export class Game implements IGame, Logger {
   private donePlayers = new Set<PlayerId>();
   private passedPlayers = new Set<PlayerId>();
   private researchedPlayers = new Set<PlayerId>();
-  private draftedPlayers = new Set<PlayerId>();
   // The first player of this generation.
   public first: IPlayer;
 
@@ -130,7 +129,8 @@ export class Game implements IGame, Logger {
    * iteration 2 is the next 5 cards, and iteration 3 is for Prelude, if necessary.
    **/
   /* private */ public initialDraftIteration: number = 1;
-  unDraftedCards: Map<PlayerId, Array<IProjectCard>> = new Map();
+  /* private */ public unDraftedCards: Map<PlayerId, Array<IProjectCard>> = new Map();
+  /* private */ public draftedPlayers = new Set<PlayerId>();
 
   // Milestones and awards
   public claimedMilestones: Array<ClaimedMilestone> = [];
@@ -645,7 +645,7 @@ export class Game implements IGame, Logger {
       } else if (this.draftRound === 1 && draft.type === 'prelude') {
         draft.askPlayerToDraft(player, player.dealtPreludeCards);
       } else {
-        const draftCardsFrom = draft.getCardsFrom(player).id;
+        const draftCardsFrom = draft.draftingFrom(player).id;
         // ?? [] should never happen.
         const cards = this.unDraftedCards.get(draftCardsFrom) ?? [];
         this.unDraftedCards.delete(draftCardsFrom);
@@ -833,22 +833,9 @@ export class Game implements IGame, Logger {
     return this.researchedPlayers.has(player.id);
   }
 
-  private hasDrafted(player: IPlayer): boolean {
-    return this.draftedPlayers.has(player.id);
-  }
-
   private allPlayersHaveFinishedResearch(): boolean {
     for (const player of this.players) {
       if (!this.hasResearched(player)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  private allPlayersHaveFinishedDraft(): boolean {
-    for (const player of this.players) {
-      if (!this.hasDrafted(player)) {
         return false;
       }
     }
@@ -865,42 +852,6 @@ export class Game implements IGame, Logger {
         this.startActionsForPlayer(this.first);
       }
     });
-  }
-
-  public playerIsFinishedWithDraftingRound(draft: Draft, player: IPlayer, cards : Array<IProjectCard>): void {
-    this.draftedPlayers.add(player.id);
-    this.unDraftedCards.set(player.id, cards);
-
-    player.needsToDraft = false;
-    if (this.allPlayersHaveFinishedDraft() === false) {
-      return;
-    }
-
-    // If more than 1 card are to be passed to the next player, that means we're still drafting
-    if (cards.length > 1) {
-      this.draftRound++;
-      this.runDraftRound(draft);
-      return;
-    }
-
-    // Push last card for each player
-    for (const player of this.players) {
-      const lastCards = this.unDraftedCards.get(draft.getCardsFrom(player).id);
-      if (lastCards !== undefined) {
-        player.draftedCards.push(...lastCards);
-      }
-      player.needsToDraft = undefined;
-
-      if (draft.type === 'initial' && this.initialDraftIteration === 2) {
-        player.dealtProjectCards = player.draftedCards;
-        player.draftedCards = [];
-      } else if (draft.type === 'prelude' && this.initialDraftIteration === 3) {
-        player.dealtPreludeCards = player.draftedCards;
-        player.draftedCards = [];
-      }
-    }
-
-    draft.onEndDrafting();
   }
 
   public getPlayerBefore(player: IPlayer): IPlayer {

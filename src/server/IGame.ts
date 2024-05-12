@@ -131,14 +131,6 @@ export interface IGame extends Logger {
   playerHasPassed(player: IPlayer): void;
   hasResearched(player: IPlayer): boolean;
   playerIsFinishedWithResearchPhase(player: IPlayer): void;
-  /**
-   * Called after a player drafts.
-   *
-   * @param draft The type of draft
-   * @param player The player who drafted
-   * @param cards The cards the player didn't draft, which they will pass to the next player.
-   */
-  playerIsFinishedWithDraftingRound(draft: Draft, player: IPlayer, cards : Array<IProjectCard>): void;
   playerIsFinishedTakingActions(): void;
   // Part of final greenery placement.
   canPlaceGreenery(player: IPlayer): boolean;
@@ -207,6 +199,8 @@ export interface IGame extends Logger {
   runDraftRound(draft: Draft): void;
   getPlayerAfter(player: IPlayer): IPlayer;
   getPlayerBefore(player: IPlayer): IPlayer;
+  unDraftedCards: Map<PlayerId, Array<IProjectCard>>;
+  draftedPlayers: Set<PlayerId>;
 }
 
 export function isIGame(object: any): object is IGame {

@@ -12,10 +12,10 @@ export type DraftType = 'none' | 'initial' | 'prelude' | 'standard';
 /*
  * Drafting terminology:
  *
- * Draft round: A single pass through the players, where each player gets to pick a card.
  * Draft iteration: A complete cycle of draft rounds. In the standard draft, there are 4 draft rounds in a draft iteration.
  *  In the initial draft, there are 2 iterations, or up to 3 with preludes.
- */
+ * Draft round: A single pass through the players, where each player gets to pick a card.
+*/
 
 /**
  * Implements a specific draft.
@@ -29,11 +29,11 @@ export abstract class Draft {
   abstract draftDirection(): 'before' | 'after';
   abstract onEndDrafting(): void;
 
-  getCardsFrom(player: IPlayer): IPlayer {
+  draftingFrom(player: IPlayer): IPlayer {
     return this.draftDirection() === 'before' ? this.game.getPlayerBefore(player) : this.game.getPlayerAfter(player);
   }
 
-  giveCardsTo(player: IPlayer): IPlayer {
+  draftingTo(player: IPlayer): IPlayer {
     return this.draftDirection() === 'after' ? this.game.getPlayerBefore(player) : this.game.getPlayerAfter(player);
   }
 
@@ -43,7 +43,7 @@ export abstract class Draft {
    * @param passedCards The cards received from the draw, or from the prior player.
    */
   public askPlayerToDraft(player: IPlayer, passedCards: Array<IProjectCard>): void {
-    const passTo = this.giveCardsTo(player);
+    const passTo = this.draftingTo(player);
     const cardsToKeep = this.cardsToKeep(player);
 
     const cards = [...passedCards];
@@ -62,10 +62,58 @@ export abstract class Draft {
             player.draftedCards.push(card);
             inplaceRemove(cards, card);
           }
-          this.game.playerIsFinishedWithDraftingRound(this, player, cards);
+          this.playerIsFinishedWithDraftingRound(player, cards);
           return undefined;
         }),
     );
+  }
+
+  /**
+   * Called after a player drafts.
+   *
+   * @param player The player who drafted
+   * @param cards The cards the player didn't draft, which they will pass to the next player.
+   */
+  public playerIsFinishedWithDraftingRound(player: IPlayer, cards : Array<IProjectCard>): void {
+    this.game.draftedPlayers.add(player.id);
+    this.game.unDraftedCards.set(player.id, cards);
+
+    player.needsToDraft = false;
+    if (this.allPlayersHaveFinishedDraft() === false) {
+      return;
+    }
+
+    // If more than 1 card are to be passed to the next player, that means we're still drafting
+    if (cards.length > 1) {
+      this.game.draftRound++;
+      this.game.runDraftRound(this);
+      return;
+    }
+
+    // Push last card for each player
+    for (const player of this.game.getPlayers()) {
+      const lastCards = this.game.unDraftedCards.get(this.draftingFrom(player).id);
+      if (lastCards !== undefined) {
+        player.draftedCards.push(...lastCards);
+      }
+      player.needsToDraft = undefined;
+    }
+
+    this.onEndDrafting();
+  }
+
+  private hasDrafted(player: IPlayer): boolean {
+    return this.game.draftedPlayers.has(player.id);
+  }
+
+
+  private allPlayersHaveFinishedDraft(): boolean {
+    for (const player of this.game.getPlayers()) {
+      if (!this.hasDrafted(player)) {
+        return false;
+      }
+    }
+    return true;
   }
 }
 
@@ -184,6 +232,10 @@ class InitialDraft extends Draft {
       this.game.runDraftRound(this);
       break;
     case 3:
+      for (const player of this.game.getPlayers()) {
+        player.dealtProjectCards = player.draftedCards;
+        player.draftedCards = [];
+      }
       if (this.game.gameOptions.preludeExtension && this.game.gameOptions.preludeDraftVariant) {
         this.game.runDraftRound(newPreludeDraft(this.game));
       } else {
@@ -216,6 +268,11 @@ class PreludeDraft extends Draft {
   }
 
   override onEndDrafting() {
+    for (const player of this.game.getPlayers()) {
+      player.dealtPreludeCards = player.draftedCards;
+      player.draftedCards = [];
+    }
+
     this.game.gotoInitialResearchPhase();
   }
 }

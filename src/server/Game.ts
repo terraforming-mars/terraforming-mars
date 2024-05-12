@@ -641,14 +641,14 @@ export class Game implements IGame, Logger {
       player.needsToDraft = true;
       if (this.draftRound === 1 && draft.type !== 'prelude') {
         const cards = draft.draw(player);
-        player.askPlayerToDraft(draft, this.giveDraftCardsTo(player), cards);
+        player.askPlayerToDraft(draft, draft.giveDraftCardsTo(player), cards);
       } else if (this.draftRound === 1 && draft.type === 'prelude') {
-        player.askPlayerToDraft(draft, this.giveDraftCardsTo(player), player.dealtPreludeCards);
+        player.askPlayerToDraft(draft, draft.giveDraftCardsTo(player), player.dealtPreludeCards);
       } else {
-        const draftCardsFrom = this.getDraftCardsFrom(player).id;
+        const draftCardsFrom = draft.getDraftCardsFrom(player).id;
         const cards = this.unDraftedCards.get(draftCardsFrom);
         this.unDraftedCards.delete(draftCardsFrom);
-        player.askPlayerToDraft(draft, this.giveDraftCardsTo(player), cards);
+        player.askPlayerToDraft(draft, draft.giveDraftCardsTo(player), cards);
       }
     });
   }
@@ -884,7 +884,7 @@ export class Game implements IGame, Logger {
 
     // Push last card for each player
     for (const player of this.players) {
-      const lastCards = this.unDraftedCards.get(this.getDraftCardsFrom(player).id);
+      const lastCards = this.unDraftedCards.get(draft.getDraftCardsFrom(player).id);
       if (lastCards !== undefined) {
         player.draftedCards.push(...lastCards);
       }
@@ -902,25 +902,7 @@ export class Game implements IGame, Logger {
     draft.onEndDrafting();
   }
 
-  private getDraftCardsFrom(player: IPlayer): IPlayer {
-    // Special-case for the initial draft direction on second iteration
-    if (this.generation === 1 && this.initialDraftIteration === 2) {
-      return this.getPlayerBefore(player);
-    }
-
-    return this.generation % 2 === 0 ? this.getPlayerBefore(player) : this.getPlayerAfter(player);
-  }
-
-  private giveDraftCardsTo(player: IPlayer): IPlayer {
-    // Special-case for the initial draft direction on second iteration
-    if (this.initialDraftIteration === 2 && this.generation === 1) {
-      return this.getPlayerAfter(player);
-    }
-
-    return this.generation % 2 === 0 ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
-  }
-
-  private getPlayerBefore(player: IPlayer): IPlayer {
+  public getPlayerBefore(player: IPlayer): IPlayer {
     const playerIndex = this.players.indexOf(player);
     if (playerIndex === -1) {
       throw new Error(`Player ${player.id} not in game ${this.id}`);
@@ -930,7 +912,7 @@ export class Game implements IGame, Logger {
     return this.players[(playerIndex === 0) ? this.players.length - 1 : playerIndex - 1];
   }
 
-  private getPlayerAfter(player: IPlayer): IPlayer {
+  public getPlayerAfter(player: IPlayer): IPlayer {
     const playerIndex = this.players.indexOf(player);
 
     if (playerIndex === -1) {

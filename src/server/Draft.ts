@@ -12,7 +12,16 @@ export abstract class Draft {
   abstract cardsToDraw(player: IPlayer): number;
   abstract cardsToKeep(player: IPlayer): number;
   abstract draw(player: IPlayer): Array<IProjectCard>;
+  abstract draftDirection(): 'before' | 'after';
   abstract onEndDrafting(): void;
+
+  getDraftCardsFrom(player: IPlayer): IPlayer {
+    return this.draftDirection() === 'before' ? this.game.getPlayerBefore(player) : this.game.getPlayerAfter(player);
+  }
+
+  giveDraftCardsTo(player: IPlayer): IPlayer {
+    return this.draftDirection() === 'after' ? this.game.getPlayerBefore(player) : this.game.getPlayerAfter(player);
+  }
 }
 
 /**
@@ -47,6 +56,10 @@ class NonDraft extends Draft {
     }
 
     return 4;
+  }
+
+  override draftDirection(): never {
+    throw new Error('Method not implemented.');
   }
 
   override onEndDrafting(): never {
@@ -86,6 +99,10 @@ class StandardDraft extends Draft {
     return 1;
   }
 
+  override draftDirection() {
+    return this.game.generation % 2 === 0 ? 'before' : 'after';
+  }
+
   override onEndDrafting() {
     this.game.gotoResearchPhase();
   }
@@ -107,6 +124,10 @@ class InitialDraft extends Draft {
 
   override cardsToKeep(_player: IPlayer): number {
     return 1;
+  }
+
+  override draftDirection() {
+    return this.game.initialDraftIteration === 2 ? 'before' : 'after';
   }
 
   override onEndDrafting() {
@@ -143,6 +164,10 @@ class PreludeDraft extends Draft {
 
   override cardsToKeep(_player: IPlayer): number {
     return 1;
+  }
+
+  override draftDirection(): 'after' {
+    return 'after';
   }
 
   override onEndDrafting() {

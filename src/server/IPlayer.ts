@@ -31,7 +31,6 @@ import {Color} from '../common/Color';
 import {OrOptions} from './inputs/OrOptions';
 import {Stock} from './player/Stock';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
-import {Draft} from './Draft';
 
 export type ResourceSource = IPlayer | GlobalEventName | ICard;
 
@@ -261,14 +260,6 @@ export interface IPlayer {
   finishProductionPhase(): void;
   worldGovernmentTerraforming(): void;
 
-  /**
-   * Ask the player to draft from a set of cards.
-   *
-   * @param draft the type of draft being asked for.
-   * @param passTo  The player _this_ player passes remaining cards to.
-   * @param passedCards The cards received from the draw, or from the prior player.
-   */
-  askPlayerToDraft(draft: Draft, passTo: IPlayer, passedCards: Array<IProjectCard> | undefined): void;
   runResearchPhase(): void;
   getCardCost(card: IProjectCard): number;
 

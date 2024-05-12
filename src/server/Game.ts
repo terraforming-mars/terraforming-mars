@@ -641,14 +641,15 @@ export class Game implements IGame, Logger {
       player.needsToDraft = true;
       if (this.draftRound === 1 && draft.type !== 'prelude') {
         const cards = draft.draw(player);
-        player.askPlayerToDraft(draft, draft.giveDraftCardsTo(player), cards);
+        draft.askPlayerToDraft(player, cards);
       } else if (this.draftRound === 1 && draft.type === 'prelude') {
-        player.askPlayerToDraft(draft, draft.giveDraftCardsTo(player), player.dealtPreludeCards);
+        draft.askPlayerToDraft(player, player.dealtPreludeCards);
       } else {
-        const draftCardsFrom = draft.getDraftCardsFrom(player).id;
-        const cards = this.unDraftedCards.get(draftCardsFrom);
+        const draftCardsFrom = draft.getCardsFrom(player).id;
+        // ?? [] should never happen.
+        const cards = this.unDraftedCards.get(draftCardsFrom) ?? [];
         this.unDraftedCards.delete(draftCardsFrom);
-        player.askPlayerToDraft(draft, draft.giveDraftCardsTo(player), cards);
+        draft.askPlayerToDraft(player, cards);
       }
     });
   }
@@ -884,7 +885,7 @@ export class Game implements IGame, Logger {
 
     // Push last card for each player
     for (const player of this.players) {
-      const lastCards = this.unDraftedCards.get(draft.getDraftCardsFrom(player).id);
+      const lastCards = this.unDraftedCards.get(draft.getCardsFrom(player).id);
       if (lastCards !== undefined) {
         player.draftedCards.push(...lastCards);
       }
@@ -922,7 +923,6 @@ export class Game implements IGame, Logger {
     // Go to the beginning of the array if we reached the end
     return this.players[(playerIndex + 1 >= this.players.length) ? 0 : playerIndex + 1];
   }
-
 
   public playerIsFinishedTakingActions(): void {
     if (this.deferredActions.length > 0) {

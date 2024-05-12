@@ -1,11 +1,25 @@
+import {inplaceRemove} from '../common/utils/utils';
 import {CardName} from '../common/cards/CardName';
 import {IGame} from './IGame';
 import {IPlayer} from './IPlayer';
 import {IProjectCard} from './cards/IProjectCard';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
+import {SelectCard} from './inputs/SelectCard';
+import {message} from './logs/MessageBuilder';
 
 export type DraftType = 'none' | 'initial' | 'prelude' | 'standard';
 
+/*
+ * Drafting terminology:
+ *
+ * Draft round: A single pass through the players, where each player gets to pick a card.
+ * Draft iteration: A complete cycle of draft rounds. In the standard draft, there are 4 draft rounds in a draft iteration.
+ *  In the initial draft, there are 2 iterations, or up to 3 with preludes.
+ */
+
+/**
+ * Implements a specific draft.
+ */
 export abstract class Draft {
   constructor(public readonly type: DraftType, protected readonly game: IGame) {}
 
@@ -15,12 +29,43 @@ export abstract class Draft {
   abstract draftDirection(): 'before' | 'after';
   abstract onEndDrafting(): void;
 
-  getDraftCardsFrom(player: IPlayer): IPlayer {
+  getCardsFrom(player: IPlayer): IPlayer {
     return this.draftDirection() === 'before' ? this.game.getPlayerBefore(player) : this.game.getPlayerAfter(player);
   }
 
-  giveDraftCardsTo(player: IPlayer): IPlayer {
+  giveCardsTo(player: IPlayer): IPlayer {
     return this.draftDirection() === 'after' ? this.game.getPlayerBefore(player) : this.game.getPlayerAfter(player);
+  }
+
+  /**
+   * Ask the player to draft from a set of cards.
+   *
+   * @param passedCards The cards received from the draw, or from the prior player.
+   */
+  public askPlayerToDraft(player: IPlayer, passedCards: Array<IProjectCard>): void {
+    const passTo = this.giveCardsTo(player);
+    const cardsToKeep = this.cardsToKeep(player);
+
+    const cards = [...passedCards];
+
+    const messageTitle = cardsToKeep === 1 ?
+      'Select a card to keep and pass the rest to ${0}' :
+      'Select two cards to keep and pass the rest to ${0}';
+    player.setWaitingFor(
+      new SelectCard(
+        message(messageTitle, (b) => b.player(passTo)),
+        'Keep',
+        cards,
+        {min: cardsToKeep, max: cardsToKeep, played: false})
+        .andThen((selected) => {
+          for (const card of selected) {
+            player.draftedCards.push(card);
+            inplaceRemove(cards, card);
+          }
+          this.game.playerIsFinishedWithDraftingRound(this, player, cards);
+          return undefined;
+        }),
+    );
   }
 }
 

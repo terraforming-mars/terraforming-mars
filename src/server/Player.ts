@@ -75,7 +75,7 @@ import {UnderworldPlayerData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {Counter} from './behavior/Counter';
 import {TRSource} from '../common/cards/TRSource';
-import {Draft, newNonDraft, newStandardDraft} from './Draft';
+import {newNonDraft, newStandardDraft} from './Draft';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 
@@ -708,31 +708,6 @@ export class Player implements IPlayer {
     this.setWaitingFor(action, () => {
       this.doneWorldGovernmentTerraforming();
     });
-  }
-
-  public askPlayerToDraft(draft: Draft, passTo: IPlayer, passedCards: Array<IProjectCard>): void {
-    const cardsToKeep = draft.cardsToKeep(this);
-
-    const cards = [...passedCards];
-
-    const messageTitle = cardsToKeep === 1 ?
-      'Select a card to keep and pass the rest to ${0}' :
-      'Select two cards to keep and pass the rest to ${0}';
-    this.setWaitingFor(
-      new SelectCard(
-        message(messageTitle, (b) => b.player(passTo)),
-        'Keep',
-        cards,
-        {min: cardsToKeep, max: cardsToKeep, played: false})
-        .andThen((selected) => {
-          for (const card of selected) {
-            this.draftedCards.push(card);
-            inplaceRemove(cards, card);
-          }
-          this.game.playerIsFinishedWithDraftingRound(draft, this, cards);
-          return undefined;
-        }),
-    );
   }
 
   /**

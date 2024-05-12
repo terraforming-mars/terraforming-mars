@@ -175,7 +175,6 @@ export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initia
     PoliticalAgendas.setNextAgenda(turmoil, player.game);
     player.megaCredits = initialMegacredits + passingDelta;
     if (passingDelta > 0) {
-      // TODO(kberg): Change to is.true
       expect(cb(), 'Reds in power, can afford').is.not.false;
     }
   }

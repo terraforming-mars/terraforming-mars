@@ -636,22 +636,7 @@ export class Game implements IGame, Logger {
 
   /* private */ public runDraftRound(draft: Draft): void {
     this.save();
-    this.draftedPlayers.clear();
-    this.players.forEach((player) => {
-      player.needsToDraft = true;
-      if (this.draftRound === 1 && draft.type !== 'prelude') {
-        const cards = draft.draw(player);
-        draft.askPlayerToDraft(player, cards);
-      } else if (this.draftRound === 1 && draft.type === 'prelude') {
-        draft.askPlayerToDraft(player, player.dealtPreludeCards);
-      } else {
-        const draftCardsFrom = draft.draftingFrom(player).id;
-        // ?? [] should never happen.
-        const cards = this.unDraftedCards.get(draftCardsFrom) ?? [];
-        this.unDraftedCards.delete(draftCardsFrom);
-        draft.askPlayerToDraft(player, cards);
-      }
-    });
+    draft.startRound();
   }
 
   public gotoInitialResearchPhase(): void {

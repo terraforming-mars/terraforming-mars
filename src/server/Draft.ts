@@ -27,7 +27,18 @@ export abstract class Draft {
   abstract cardsToKeep(player: IPlayer): number;
   abstract draw(player: IPlayer): Array<IProjectCard>;
   abstract draftDirection(): 'before' | 'after';
-  abstract onEndDrafting(): void;
+  abstract endRound(): void;
+
+  startRound() {
+    this.game.draftedPlayers.clear();
+    for (const player of this.game.getPlayers()) {
+      player.needsToDraft = true;
+      const draftCardsFrom = this.draftingFrom(player).id;
+      const cards = this.game.draftRound === 1 ? this.draw(player) : (this.game.unDraftedCards.get(draftCardsFrom) ?? []);
+      this.game.unDraftedCards.delete(draftCardsFrom);
+      this.askPlayerToDraft(player, cards);
+    }
+  }
 
   draftingFrom(player: IPlayer): IPlayer {
     return this.draftDirection() === 'before' ? this.game.getPlayerBefore(player) : this.game.getPlayerAfter(player);
@@ -99,7 +110,7 @@ export abstract class Draft {
       player.needsToDraft = undefined;
     }
 
-    this.onEndDrafting();
+    this.endRound();
   }
 
   private hasDrafted(player: IPlayer): boolean {
@@ -155,7 +166,7 @@ class NonDraft extends Draft {
     throw new Error('Method not implemented.');
   }
 
-  override onEndDrafting(): never {
+  override endRound(): never {
     throw new Error('Not implemented');
   }
 }
@@ -196,7 +207,7 @@ class StandardDraft extends Draft {
     return this.game.generation % 2 === 0 ? 'before' : 'after';
   }
 
-  override onEndDrafting() {
+  override endRound() {
     this.game.gotoResearchPhase();
   }
 }
@@ -223,8 +234,9 @@ class InitialDraft extends Draft {
     return this.game.initialDraftIteration === 2 ? 'before' : 'after';
   }
 
-  override onEndDrafting() {
+  override endRound() {
     this.game.initialDraftIteration++;
+    // TODO(kberg): Move this to runDraftRound.
     this.game.draftRound = 1;
 
     switch (this.game.initialDraftIteration) {
@@ -251,8 +263,8 @@ class PreludeDraft extends Draft {
     super('prelude', game);
   }
 
-  override draw(_player: IPlayer): never {
-    throw new Error('Not implemented');
+  override draw(player: IPlayer) {
+    return player.dealtPreludeCards;
   }
 
   override cardsToDraw(_player: IPlayer): number {
@@ -267,7 +279,7 @@ class PreludeDraft extends Draft {
     return 'after';
   }
 
-  override onEndDrafting() {
+  override endRound() {
     for (const player of this.game.getPlayers()) {
       player.dealtPreludeCards = player.draftedCards;
       player.draftedCards = [];

@@ -725,10 +725,10 @@ export class Player implements IPlayer {
         cards,
         {min: cardsToKeep, max: cardsToKeep, played: false})
         .andThen((selected) => {
-          selected.forEach((card) => {
+          for (const card of selected) {
             this.draftedCards.push(card);
             inplaceRemove(cards, card);
-          });
+          }
           this.game.playerIsFinishedWithDraftingRound(draft, this, cards);
           return undefined;
         }),

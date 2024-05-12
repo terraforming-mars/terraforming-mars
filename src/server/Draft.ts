@@ -12,6 +12,7 @@ export abstract class Draft {
   abstract cardsToDraw(player: IPlayer): number;
   abstract cardsToKeep(player: IPlayer): number;
   abstract draw(player: IPlayer): Array<IProjectCard>;
+  abstract onEndDrafting(): void;
 }
 
 /**
@@ -47,6 +48,10 @@ class NonDraft extends Draft {
 
     return 4;
   }
+
+  override onEndDrafting(): never {
+    throw new Error('Not implemented');
+  }
 }
 
 class StandardDraft extends Draft {
@@ -80,6 +85,10 @@ class StandardDraft extends Draft {
 
     return 1;
   }
+
+  override onEndDrafting() {
+    this.game.gotoResearchPhase();
+  }
 }
 
 class InitialDraft extends Draft {
@@ -99,6 +108,24 @@ class InitialDraft extends Draft {
   override cardsToKeep(_player: IPlayer): number {
     return 1;
   }
+
+  override onEndDrafting() {
+    this.game.initialDraftIteration++;
+    this.game.draftRound = 1;
+
+    switch (this.game.initialDraftIteration) {
+    case 2:
+      this.game.runDraftRound(this);
+      break;
+    case 3:
+      if (this.game.gameOptions.preludeExtension && this.game.gameOptions.preludeDraftVariant) {
+        this.game.runDraftRound(newPreludeDraft(this.game));
+      } else {
+        this.game.gotoInitialResearchPhase();
+      }
+      break;
+    }
+  }
 }
 
 class PreludeDraft extends Draft {
@@ -116,6 +143,10 @@ class PreludeDraft extends Draft {
 
   override cardsToKeep(_player: IPlayer): number {
     return 1;
+  }
+
+  override onEndDrafting() {
+    this.game.gotoInitialResearchPhase();
   }
 }
 

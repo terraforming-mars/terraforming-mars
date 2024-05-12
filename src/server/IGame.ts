@@ -97,6 +97,9 @@ export interface IGame extends Logger {
   readonly tags: ReadonlyArray<Tag>;
   // Function use to properly start the game: with project draft or with research phase
   gotoInitialPhase(): void;
+  /** Initiates the first research phase, which is when a player chooses their starting hand, corps and preludes. */
+  gotoInitialResearchPhase(): void;
+  gotoResearchPhase(): void;
   save(): void;
   toJSON(): string;
   serialize(): SerializedGame;
@@ -197,6 +200,11 @@ export interface IGame extends Logger {
   getSpaceByOffset(direction: -1 | 1, toPlace: TileType, cardCount?: 1 | 2): Space;
   expectedPurgeTimeMs(): number;
   logIllegalState(description: string, metadata: {}): void;
+
+  // Temporarily exposed while drafting is being refactored.
+  initialDraftIteration: number;
+  draftRound: number;
+  runDraftRound(draft: Draft): void;
 }
 
 export function isIGame(object: any): object is IGame {

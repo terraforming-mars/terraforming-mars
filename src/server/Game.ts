@@ -124,13 +124,13 @@ export class Game implements IGame, Logger {
    * When players get all the cards, this is 1. After everybody drafts a card,
    * this is round 2.
    */
-  private draftRound: number = 1;
+  /* private */ public draftRound: number = 1;
   /**
    * When drafting before the first generation, iteration 1 is the first 5 cards,
    * iteration 2 is the next 5 cards, and iteration 3 is for Prelude, if necessary.
    **/
-  private initialDraftIteration: number = 1;
-  private unDraftedCards: Map<PlayerId, Array<IProjectCard>> = new Map();
+  /* private */ public initialDraftIteration: number = 1;
+  unDraftedCards: Map<PlayerId, Array<IProjectCard>> = new Map();
 
   // Milestones and awards
   public claimedMilestones: Array<ClaimedMilestone> = [];
@@ -634,7 +634,7 @@ export class Game implements IGame, Logger {
     this.first = newFirstPlayer;
   }
 
-  private runDraftRound(draft: Draft): void {
+  /* private */ public runDraftRound(draft: Draft): void {
     this.save();
     this.draftedPlayers.clear();
     this.players.forEach((player) => {
@@ -653,7 +653,7 @@ export class Game implements IGame, Logger {
     });
   }
 
-  private gotoInitialResearchPhase(): void {
+  public gotoInitialResearchPhase(): void {
     this.phase = Phase.RESEARCH;
 
     this.save();
@@ -669,7 +669,7 @@ export class Game implements IGame, Logger {
     }
   }
 
-  private gotoResearchPhase(): void {
+  public gotoResearchPhase(): void {
     this.phase = Phase.RESEARCH;
     this.researchedPlayers.clear();
     this.save();
@@ -883,7 +883,7 @@ export class Game implements IGame, Logger {
     }
 
     // Push last card for each player
-    this.players.forEach((player) => {
+    for (const player of this.players) {
       const lastCards = this.unDraftedCards.get(this.getDraftCardsFrom(player).id);
       if (lastCards !== undefined) {
         player.draftedCards.push(...lastCards);
@@ -897,24 +897,9 @@ export class Game implements IGame, Logger {
         player.dealtPreludeCards = player.draftedCards;
         player.draftedCards = [];
       }
-    });
-
-    if (draft.type === 'standard') {
-      this.gotoResearchPhase();
-      return;
     }
 
-    if (this.initialDraftIteration === 1) {
-      this.initialDraftIteration++;
-      this.draftRound = 1;
-      this.runDraftRound(newInitialDraft(this));
-    } else if (this.initialDraftIteration === 2 && this.gameOptions.preludeExtension && this.gameOptions.preludeDraftVariant) {
-      this.initialDraftIteration++;
-      this.draftRound = 1;
-      this.runDraftRound(newPreludeDraft(this));
-    } else {
-      this.gotoInitialResearchPhase();
-    }
+    draft.onEndDrafting();
   }
 
   private getDraftCardsFrom(player: IPlayer): IPlayer {

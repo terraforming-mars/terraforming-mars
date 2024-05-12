@@ -1,6 +1,5 @@
-// TODO(kberg): move up a level? Or to something like server/http
 import {escape} from 'html-escaper';
-import {Context} from './IHandler';
+import {Context} from '../routes/IHandler';
 import {Request} from '../Request';
 import {Response} from '../Response';
 import {statusCode} from '../../common/http/statusCode';

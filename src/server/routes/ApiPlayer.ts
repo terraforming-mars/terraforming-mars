@@ -1,4 +1,4 @@
-import * as responses from './responses';
+import * as responses from '../server/responses';
 import {isPlayerId} from '../../common/Types';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';

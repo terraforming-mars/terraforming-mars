@@ -2,7 +2,7 @@ require('dotenv').config();
 
 import * as http from 'http';
 import * as fs from 'fs';
-import * as responses from '../routes/responses';
+import * as responses from '../server/responses';
 
 import {chooseMilestonesAndAwards} from '../ma/MilestoneAwardSelector';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../game/GameOptions';

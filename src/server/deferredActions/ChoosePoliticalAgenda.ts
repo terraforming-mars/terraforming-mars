@@ -34,7 +34,6 @@ export class ChoosePoliticalAgenda extends DeferredAction {
     });
 
     const orBonuses = new OrOptions(...bonuses);
-    // TODO(replace)
     orBonuses.title = message('Select a ${0} bonus', (b) => b.party(this.party));
 
     const policies = this.party.policies.map((policy) => {

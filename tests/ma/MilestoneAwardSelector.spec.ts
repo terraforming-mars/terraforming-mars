@@ -7,6 +7,7 @@ import {IMilestone} from '../../src/server/milestones/IMilestone';
 import {RandomMAOptionType} from '../../src/common/ma/RandomMAOptionType';
 import {intersection} from '../../src/common/utils/utils';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptions';
+import {BoardName} from '../../src/common/boards/BoardName';
 
 function toNames(list: Array<IMilestone | IAward>): Array<string> {
   return list.map((e) => e.name);
@@ -141,6 +142,20 @@ describe('MilestoneAwardSelector', () => {
     }
   });
 
+  it('novus maps with no randomness render correctly', () => {
+    const mas = chooseMilestonesAndAwards({
+      ...DEFAULT_GAME_OPTIONS,
+      'aresExtension': true,
+      'boardName': BoardName.TERRA_CIMMERIA_NOVUS,
+      'includeVenusMA': true,
+      'includeFanMA': false,
+      'pathfindersExpansion': true,
+      'randomMA': RandomMAOptionType.NONE,
+      'venusNextExtension': true,
+    });
+    expect(mas.milestones).to.have.length(6);
+    expect(mas.awards).to.have.length(6);
+  });
   function choose(options: Partial<GameOptions>) {
     return chooseMilestonesAndAwards({...DEFAULT_GAME_OPTIONS, ...options});
   }

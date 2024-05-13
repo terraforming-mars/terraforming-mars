@@ -23,13 +23,13 @@ export type DraftType = 'none' | 'initial' | 'prelude' | 'standard';
 export abstract class Draft {
   constructor(public readonly type: DraftType, protected readonly game: IGame) {}
 
-  abstract cardsToDraw(player: IPlayer): number;
-  abstract cardsToKeep(player: IPlayer): number;
-  abstract draw(player: IPlayer): Array<IProjectCard>;
-  abstract draftDirection(): 'before' | 'after';
-  abstract endRound(): void;
+  protected abstract cardsToDraw(player: IPlayer): number;
+  protected abstract cardsToKeep(player: IPlayer): number;
+  protected abstract draw(player: IPlayer): Array<IProjectCard>;
+  protected abstract draftDirection(): 'before' | 'after';
+  protected abstract endRound(): void;
 
-  startRound() {
+  public startRound() {
     this.game.draftedPlayers.clear();
     for (const player of this.game.getPlayers()) {
       player.needsToDraft = true;
@@ -40,20 +40,20 @@ export abstract class Draft {
     }
   }
 
-  draftingFrom(player: IPlayer): IPlayer {
+  private draftingFrom(player: IPlayer): IPlayer {
     return this.draftDirection() === 'before' ? this.game.getPlayerBefore(player) : this.game.getPlayerAfter(player);
   }
 
-  draftingTo(player: IPlayer): IPlayer {
+  private draftingTo(player: IPlayer): IPlayer {
     return this.draftDirection() === 'after' ? this.game.getPlayerBefore(player) : this.game.getPlayerAfter(player);
   }
 
   /**
-   * Ask the player to draft from a set of cards.
+   * Ask the player to choose from a set of cards.
    *
    * @param passedCards The cards received from the draw, or from the prior player.
    */
-  public askPlayerToDraft(player: IPlayer, passedCards: Array<IProjectCard>): void {
+  private askPlayerToDraft(player: IPlayer, passedCards: Array<IProjectCard>): void {
     const passTo = this.draftingTo(player);
     const cardsToKeep = this.cardsToKeep(player);
 
@@ -72,25 +72,18 @@ export abstract class Draft {
           for (const card of selected) {
             player.draftedCards.push(card);
             inplaceRemove(cards, card);
+            this.game.unDraftedCards.set(player.id, cards);
           }
-          this.playerIsFinishedWithDraftingRound(player, cards);
+          this.onCardChosen(player, cards);
           return undefined;
         }),
     );
   }
 
-  /**
-   * Called after a player drafts.
-   *
-   * @param player The player who drafted
-   * @param cards The cards the player didn't draft, which they will pass to the next player.
-   */
-  public playerIsFinishedWithDraftingRound(player: IPlayer, cards : Array<IProjectCard>): void {
+  private onCardChosen(player: IPlayer, cards : Array<IProjectCard>): void {
     this.game.draftedPlayers.add(player.id);
-    this.game.unDraftedCards.set(player.id, cards);
-
     player.needsToDraft = false;
-    if (this.allPlayersHaveFinishedDraft() === false) {
+    if (this.game.draftedPlayers.size < this.game.getPlayers().length) {
       return;
     }
 
@@ -111,20 +104,6 @@ export abstract class Draft {
     }
 
     this.endRound();
-  }
-
-  private hasDrafted(player: IPlayer): boolean {
-    return this.game.draftedPlayers.has(player.id);
-  }
-
-
-  private allPlayersHaveFinishedDraft(): boolean {
-    for (const player of this.game.getPlayers()) {
-      if (!this.hasDrafted(player)) {
-        return false;
-      }
-    }
-    return true;
   }
 }
 

@@ -103,7 +103,6 @@ export interface IPlayer {
   ceoCardsInHand: Array<IProjectCard>;
   playedCards: Array<IProjectCard>;
   draftedCards: Array<IProjectCard>;
-  draftedCorporations: Array<ICorporationCard>;
   cardCost: number;
   needsToDraft?: boolean;
 

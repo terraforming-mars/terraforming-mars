@@ -239,6 +239,14 @@ export function finishGeneration(game: IGame): void {
   }
 }
 
+
+export function startGenerationEnd(game: IGame): void {
+  game.getPlayersInGenerationOrder().forEach((player) => {
+    game.playerHasPassed(player);
+    game.playerIsFinishedTakingActions();
+  });
+}
+
 export function getSendADelegateOption(player: IPlayer) {
   return player.getActions().options.find(
     (option) => option.title.toString().startsWith('Send a delegate'));

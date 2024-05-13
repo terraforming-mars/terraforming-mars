@@ -38,7 +38,7 @@ class UnityBonus01 implements Bonus {
     } else {
       game.getPlayersInGenerationOrder()
         .filter((p) => {
-          p.pathfindersData?.alliedParty === undefined;
+          return p.pathfindersData?.alliedParty === undefined;
         })
         .forEach((p) => {
           p.stock.add(Resource.MEGACREDITS, this.getScore(p));

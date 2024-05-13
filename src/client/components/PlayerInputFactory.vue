@@ -50,6 +50,7 @@ const typeToComponentName: Record<PlayerInputType, string> = {
   'aresGlobalParameters': 'shift-ares-global-parameters',
   'globalEvent': 'select-global-event',
   'policy': 'select-policy',
+  'bonus': 'select-bonus',
 };
 
 export default Vue.component('player-input-factory', {

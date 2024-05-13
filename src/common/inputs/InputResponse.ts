@@ -3,7 +3,7 @@ import {ColonyName} from '../colonies/ColonyName';
 import {ColorWithNeutral} from '../Color';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../turmoil/PartyName';
-import {PolicyId} from '../turmoil/Types';
+import {BonusId, PolicyId} from '../turmoil/Types';
 import {SpaceId} from '../Types';
 import {Units} from '../Units';
 import {twoWayDifference} from '../utils/utils';
@@ -164,6 +164,16 @@ export function isSelectPolicyResponse(response: InputResponse): response is Sel
   return response.type === 'policy' && matches(response, ['type', 'policyId']);
 }
 
+export interface SelectBonusResponse {
+  type: 'bonus',
+  bonusId: BonusId;
+}
+
+export function isSelectBonusResponse(response: InputResponse): response is SelectBonusResponse {
+  const isResponseMatching = matches(response, ['type', 'bonusId']);
+  return response.type === 'bonus' && isResponseMatching;
+}
+
 export type InputResponse =
   AndOptionsResponse |
   OrOptionsResponse |
@@ -180,4 +190,5 @@ export type InputResponse =
   SelectSpaceResponse |
   ShiftAresGlobalParametersResponse |
   SelectGlobalEventResponse |
-  SelectPolicyResponse;
+  SelectPolicyResponse |
+  SelectBonusResponse;

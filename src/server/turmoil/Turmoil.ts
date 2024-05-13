@@ -400,7 +400,7 @@ export class Turmoil {
       const sortParties = [...this.parties].sort(
         (p1, p2) => p2.delegates.size - p1.delegates.size,
       );
-      const second = sortParties[1].delegates.size;
+      const first = sortParties[0].delegates.size;
 
       const currentIndex = this.parties.indexOf(currentDominantParty);
 
@@ -416,10 +416,11 @@ export class Turmoil {
         partiesToCheck = right.concat(left);
       }
 
+      // Va fatto prima!!!!
       // Take the clockwise order
       const partiesOrdered = partiesToCheck.reverse();
       partiesOrdered.some((p) => {
-        if (p.delegates.size === second) {
+        if (p.delegates.size === first) {
           alliedPlayer.pathfindersData.alliedParty = {
             name: p.name,
             bonus: p.bonuses[0].id,
@@ -431,6 +432,16 @@ export class Turmoil {
       });
     }
 
+    /*
+    if (alliedPlayer !== undefined) {
+      alliedPlayer.pathfindersData.alliedParty = {
+        name: this.dominantParty.name,
+        bonus: this.dominantParty.bonuses[0].id,
+        policy: this.dominantParty.policies[0].id,
+      };
+    }
+    */
+
     // Resolve Ruling Bonus
     const bonusId = PoliticalAgendas.currentAgenda(this).bonusId;
     const bonus = rulingParty.bonuses.find((b) => b.id === bonusId);
@@ -440,12 +451,15 @@ export class Turmoil {
     game.log('The ruling bonus is: ${0}', (b) => b.string(bonus.description));
 
     // Mars Frontier Alliance
-    if (alliedPlayer !== undefined) {
-      game.defer(new ChoosePolicyBonus(alliedPlayer, [], (bonusId) => {
-        const bonus = this.parties.flatMap((p) => p.bonuses).find((b) => b.id === bonusId);
-        console.log(bonus);
-        // bonus?.grant(game, alliedPlayer);
-      }));
+    if (alliedPlayer !== undefined && alliedPlayer.pathfindersData.alliedParty !== undefined) {
+      const alliedParty = this.parties.find((p) => p.name === alliedPlayer.pathfindersData.alliedParty?.name);
+      if (alliedParty !== undefined) {
+        game.defer(new ChoosePolicyBonus(alliedPlayer, [bonus, alliedParty.bonuses[0]], (bonusId) => {
+          const bonus = this.parties.flatMap((p) => p.bonuses).find((b) => b.id === bonusId);
+          console.log(bonus);
+          // bonus?.grant(game, alliedPlayer);
+        }));
+      }
     }
     bonus.grant(game);
 

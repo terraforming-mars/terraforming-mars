@@ -28,13 +28,13 @@ class ScientistsBonus01 implements Bonus {
     if (player !== undefined) {
       player.stock.add(Resource.MEGACREDITS, this.getScore(player));
     } else {
-      game.getPlayersInGenerationOrder()
+      const players = game.getPlayersInGenerationOrder()
         .filter((p) => {
-          p.pathfindersData?.alliedParty === undefined;
-        })
-        .forEach((p) => {
-          p.stock.add(Resource.MEGACREDITS, this.getScore(p));
+          return p.pathfindersData.alliedParty === undefined;
         });
+      players.forEach((p) => {
+        p.stock.add(Resource.MEGACREDITS, this.getScore(p));
+      });
     }
   }
 }

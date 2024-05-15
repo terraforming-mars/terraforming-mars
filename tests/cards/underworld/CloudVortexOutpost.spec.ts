@@ -6,7 +6,7 @@ import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns'
 import {AtmoCollectors} from '../../../src/server/cards/colonies/AtmoCollectors';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
-import {deserializeProjectCard, serializeProjectCard} from '../../../src/server/cards/CardSerialization';
+import {deserializeProjectCard, serializeProjectCard} from '../../../src/server/cards/cardSerialization';
 
 describe('CloudVortexOutpost', () => {
   it('play', () => {

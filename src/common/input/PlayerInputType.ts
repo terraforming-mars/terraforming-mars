@@ -15,5 +15,4 @@ export type PlayerInputType =
     'productionToLose' |
     'aresGlobalParameters' |
     'globalEvent' |
-    'policy' |
-    'bonus';
+    'policy';

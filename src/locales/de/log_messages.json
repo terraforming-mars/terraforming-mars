@@ -159,6 +159,7 @@
     "activist(s)": "Aktivist(en)",
     "tool(s)": "Werkzeug(e)",
     "ware(s)": "Ware(n)",
+    "selected": "Auswahl",
     "1 corruption": "1 Koruption",
     "2 corruption": "2 Koruption",
 
@@ -207,9 +208,11 @@
     "${0} gained 2 titanium": "${0} erhielt 2 Titan",
     "${0} gained ${1} corruption": "${0} erhielt ${1} Korruption",
     "${0} spent ${1} corruption": "${0} bezahlte ${1} Korruption",
+    "${0} spent 8 energy to increase oxygen 1 step.": "${0} hat 8 Energie ausgegeben, um den Sauerstoffgehalt um 1% zu erhöhen.",
+    "${0} spent 8 energy to increase Venus 1 step.": "${0} hat 8 Energie ausgegeben, um die Venuswertung um 2% zu erhöhen.",
     "${0} decreased temperature 1 step": "${0} senkte die Temperatur um 2 °C",
     "${0} decreased oxygen level 1 step": "${0} senkte den Sauerstoffgehalt um 1%",
-    "${0} decreased Venus scale level 1 step": "${0} senkte die Venuswertung um 1",
+    "${0} decreased Venus scale level 1 step": "${0} senkte die Venuswertung um 2%",
 
     "${0} kept ${1} project cards": "${0} behielt ${1} Projektkarten",
     "${0} drew ${1}": "${0} zog(st) ${1}",
@@ -259,6 +262,7 @@
     "Bio-Fertilizer Facility tile": "Plättchen Bio-Dünger-Anlage",
     "Mohole Area tile": "Plättchen Mohole-Bohrung",
     "Mars Nomads tile": "Plättchen Mars-Normaden",
+    "Man-made Volcano tile": "Plättchen Künstlicher Vulkan",
     "Rey ... Skywalker?! (IX) tile": "Plättchen Rey ... Skywalker?! (IX)",
     "Mild Erosion tile": "Plättchen Leichte Erosion",
     "Severe Erosion tile": "Plättchen Schwere Erosion",
@@ -399,6 +403,8 @@
     "${0} spent 1 corruption to block an attack by ${1}": "${0} gab 1 Korruption aus, um den Angriff von ${1} zu blocken",
     "${0} spent 1 fighter on ${1} to block an attack by ${2}": "${0} hat 1 Jäger für ${1} ausgegeben, um einen Angriff von ${2} zu blockieren",
     "For the rest of this generation, ${0} will gain ${1}": "Für den Rest dieser Generation wird ${0} ${1} erhalten",
+    "${0} is in effect for the rest of this generation": "${0} ist für den Rest dieser Generation in Kraft",
+    "Steel and titanium are worth 1 M€ less, except for ${0}, whose steel and titanium are worth 1 M€ more.": "Stahl und Titan sind 1 M€ weniger wert, mit Ausnahme von ${0}, dessen Stahl und Titan 1 M€ mehr wert sind.",
 
     "${0} searched for ${1} tags": "${0} suchte nach ${1}-Symbol",
     "earth": "Erde",

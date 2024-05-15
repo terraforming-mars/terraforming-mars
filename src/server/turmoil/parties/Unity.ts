@@ -77,7 +77,7 @@ class UnityPolicy01 implements Policy {
   }
   onPolicyEnd(game: IGame, player?: IPlayer): void {
     if (player !== undefined) {
-      player.increaseTitaniumValue();
+      player.decreaseTitaniumValue();
     } else {
       game.getPlayersInGenerationOrder().forEach((player) => {
         player.decreaseTitaniumValue();

@@ -77,6 +77,7 @@ import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {Counter} from './behavior/Counter';
 import {TRSource} from '../common/cards/TRSource';
 import {PathfindersPlayerData} from './pathfinders/PathfindersData';
+import {IParty} from './turmoil/parties/IParty';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 
@@ -236,6 +237,16 @@ export class Player implements IPlayer {
     this.colonies = new Colonies(this);
     this.production = new Production(this);
     this.stock = new Stock(this);
+  }
+
+  setAlliedParty(p: IParty): void {
+    this.pathfindersData.alliedParty = {
+      name: p.name,
+      bonus: p.bonuses[0].id,
+      policy: p.policies[0].id,
+    };
+    const alliedPolicy = this.game.turmoil?.getPartyByName(p.name).policies.find((t) => t.id === p.policies[0].id);
+    if (alliedPolicy !== undefined) alliedPolicy.onPolicyStart?.(this.game, this);
   }
 
   public static initialize(
@@ -1925,6 +1936,7 @@ export class Player implements IPlayer {
       victoryPointsByGeneration: this.victoryPointsByGeneration,
       totalDelegatesPlaced: this.totalDelegatesPlaced,
       underworldData: this.underworldData,
+      pathfindersData: this.pathfindersData,
     };
 
     if (this.lastCardPlayed !== undefined) {
@@ -2022,6 +2034,9 @@ export class Player implements IPlayer {
 
     if (d.underworldData !== undefined) {
       player.underworldData = d.underworldData;
+    }
+    if (d.pathfindersData !== undefined) {
+      player.pathfindersData = d.pathfindersData;
     }
 
     return player;

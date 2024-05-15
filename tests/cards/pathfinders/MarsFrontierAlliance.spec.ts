@@ -1,26 +1,33 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {MarsFrontierAlliance} from '../../../src/server/cards/pathfinders/MarsFrontierAlliance';
-import {cast, startGenerationEnd} from '../../TestingUtils';
+import {addGreenery, cast, runNextAction, startGenerationEnd} from '../../TestingUtils';
 import {IPlayer} from '../../../src/server/IPlayer';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {SelectPolicyBonus} from '../../../src/server/inputs/SelectPolicyBonus';
+import {SponsoredMohole} from '../../../src/server/cards/turmoil/SponsoredMohole';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {addOcean} from '../../TestingUtils';
+import {Phase} from '../../../src/common/Phase';
+import {TestPlayer} from 'tests/TestPlayer';
+import {IGame} from '@/server/IGame';
 
 describe('MarsFrontierAlliance', function() {
   let card: MarsFrontierAlliance;
   let turmoil: Turmoil;
+  let player: TestPlayer;
+  let game: IGame;
 
   beforeEach(() => {
     card = new MarsFrontierAlliance();
-  });
-
-  it('New generation - switch of allied party', function() {
-    const [game, player] = testGame(1, {
+    [game, player] = testGame(1, {
       pathfindersExpansion: true,
       turmoilExtension: true,
     });
     player.setCorporationForTest(card);
+  });
+
+  it('New generation - switch of allied party', function() {
     game.generation = 10;
     turmoil = game.turmoil!;
 
@@ -33,63 +40,67 @@ describe('MarsFrontierAlliance', function() {
     turmoil.sendDelegateToParty(player, unity.name, game);
     turmoil.sendDelegateToParty(player, unity.name, game);
 
-    player.pathfindersData!.alliedParty! = {
-      name: reds.name,
-      bonus: reds.bonuses[0].id,
-      policy: reds.policies[0].id,
-    };
+    player.setAlliedParty(reds);
 
     startGenerationEnd(game);
-    const selectBonus: SelectPolicyBonus = getWaitingFor(player);
-    expect(selectBonus.bonuses.length).to.eq(2);
-    selectBonus.process({type: 'bonus', bonusId: unity.bonuses[0].id});
-    // expect(game.getGeneration()).to.eq(11);
+    const selectBonus: OrOptions = getWaitingFor(player);
+    expect(selectBonus.options.length).to.eq(2);
+    player.process({type: 'or', index: 0, response: {type: 'option'}});
+    expect(game.getGeneration()).to.eq(11);
     expect(game.turmoil!.rulingParty).to.eq(reds);
-    expect(player.pathfindersData.alliedParty.name).to.eq(unity.name);
+    expect(player.pathfindersData.alliedParty?.name).to.eq(unity.name);
   });
 
-/*
-  it('play - 2 player - draft', function() {
-    const [game, player, player2] = testGame(2, {
-      pathfindersExpansion: true,
-      draftVariant: true,
-      turmoilExtension: false,
-    });
-    player.setCorporationForTest(card);
-    game.generation = 10;
+  it('A card having ruling party as requirement should be playable', () => {
+    const sponsoredMohole = new SponsoredMohole();
+    expect(sponsoredMohole.canPlay(player)).is.not.true;
 
-    // End the generation. Player will draw 5 cards
-    finishGeneration(game);
-    expect(game.getGeneration()).to.eq(11);
-
-    expect(getWaitingFor(player).cards).has.length(5);
-    expect(getWaitingFor(player).config.min).eq(2);
-    expect(getWaitingFor(player).config.max).eq(2);
-    expect(getWaitingFor(player2).cards).has.length(4);
+    const kelvinists = game.turmoil!.getPartyByName(PartyName.KELVINISTS);
+    player.setAlliedParty(kelvinists);
+    expect(sponsoredMohole.canPlay(player)).is.true;
   });
 
-  it('play - 2 player - no draft', function() {
-    const [game, player, player2] = testGame(2, {
-      pathfindersExpansion: true,
-      draftVariant: false,
-      turmoilExtension: false,
-    });
-    player.setCorporationForTest(card);
-    game.generation = 10;
+  it('Passive effect from Unity party should be applied', () => {
+    game.phase = Phase.ACTION;
+    const unity = game.turmoil!.getPartyByName(PartyName.UNITY);
+    player.setAlliedParty(unity);
+    expect(player.getTitaniumValue()).to.equal(4);
+  });
 
-    player.playedCards = [card];
+  it('Passive effect from Mars First party should be applied', () => {
+    game.phase = Phase.ACTION;
+    const marsFirst = game.turmoil!.getPartyByName(PartyName.MARS);
+    player.setAlliedParty(marsFirst);
+    player.steel = 0;
+    const space = addOcean(player);
+    const steelBonus = space.bonus.filter((b) => b === 1).reduce((a, b) => a+b);
+    expect(player.steel).to.equal(1 + steelBonus);
+  });
 
-    // End the generation. Player will draw 5 cards
-    finishGeneration(game);
-    expect(game.getGeneration()).to.eq(11);
+  it('Passive effect from Reds party should be applied', () => {
+    game.phase = Phase.ACTION;
+    const reds = game.turmoil!.getPartyByName(PartyName.REDS);
+    player.setAlliedParty(reds);
+    player.megaCredits = 3;
+    const tr = player.getTerraformRating();
+    addOcean(player);
+    runNextAction(game);
+    expect(player.getTerraformRating()).to.equal(tr + 1);
+    expect(player.megaCredits).to.equal(0);
+    addOcean(player);
+    expect(player.getTerraformRating()).to.equal(tr + 1);
+  });
 
-    expect(getWaitingFor(player).cards).has.length(5);
-    expect(getWaitingFor(player).config.min).eq(0);
-    expect(getWaitingFor(player).config.max).eq(4);
-    expect(getWaitingFor(player2).cards).has.length(4);
-  });*/
+  it('Passive effect from Greens party should be applied', () => {
+    game.phase = Phase.ACTION;
+    const greens = game.turmoil!.getPartyByName(PartyName.GREENS);
+    player.setAlliedParty(greens);
+    player.megaCredits = 0;
+    addGreenery(player);
+    expect(player.megaCredits).to.equal(4);
+  });
 });
 
-function getWaitingFor(player: IPlayer): SelectPolicyBonus {
-  return cast(player.getWaitingFor(), SelectPolicyBonus);
+function getWaitingFor(player: IPlayer): OrOptions {
+  return cast(player.getWaitingFor(), OrOptions);
 }

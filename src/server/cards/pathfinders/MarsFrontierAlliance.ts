@@ -37,21 +37,10 @@ export class MarsFrontierAlliance extends CorporationCard {
     const availableParties: Array<IParty> = [];
 
     for (const party of turmoil.parties) {
-      // if (turmoil.politicalAgendasData.agendaStyle === AgendaStyle.CHAIRMAN) {
-      //   const toAdd = party.policies.filter((p) => p.id !== turmoil.rulingPolicy().id);
-      //   availablePolicies = availablePolicies.concat(toAdd);
-      // } else {
       availableParties.push(party);
-      // }
     }
     game.defer(new ChooseAlliedParty(player, availableParties, (p) => {
-      player.pathfindersData.alliedParty = {
-        name: p.name,
-        bonus: p.bonuses[0].id,
-        policy: p.policies[0].id,
-      };
-      const alliedPolicy = player.game.turmoil?.getPartyByName(p.name).policies.find((t) => t.id === p.policies[0].id);
-      if (alliedPolicy !== undefined) alliedPolicy.onPolicyStart?.(player.game, player);
+      player.setAlliedParty(p);
     }));
     return undefined;
   }

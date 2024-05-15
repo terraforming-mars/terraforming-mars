@@ -32,6 +32,7 @@ import {OrOptions} from './inputs/OrOptions';
 import {Stock} from './player/Stock';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
 import {PathfindersPlayerData} from './pathfinders/PathfindersData';
+import {IParty} from './turmoil/parties/IParty';
 
 export type ResourceSource = IPlayer | GlobalEventName | ICard;
 
@@ -53,6 +54,7 @@ export type DraftType = 'initial' | 'prelude' | 'standard';
 export type CardAction ='add' | 'discard' | 'nothing' | 'action-only';
 
 export interface IPlayer {
+
   readonly id: PlayerId;
   name: string;
   color: Color;
@@ -321,6 +323,7 @@ export interface IPlayer {
   serialize(): SerializedPlayer;
   /** Shorthand for deferring evaluating a PlayerInput */
   defer(input: PlayerInput | undefined | void | (() => PlayerInput | undefined | void), priority?: Priority): void;
+  setAlliedParty(p: IParty): void;
 }
 
 export function isIPlayer(object: any): object is IPlayer {

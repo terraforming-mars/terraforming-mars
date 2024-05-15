@@ -5,6 +5,7 @@ import {SerializedCard} from './SerializedCard';
 import {SerializedTimer} from '../common/SerializedTimer';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
 import {PartyName} from '../common/turmoil/PartyName';
+import {PathfindersPlayerData} from './pathfinders/PathfindersData';
 
 interface DeprecatedFields {
 }
@@ -48,6 +49,7 @@ export interface SerializedPlayer extends DeprecatedFields{
     name: string;
     needsToDraft: boolean | undefined;
     oceanBonus: number;
+    pathfindersData: PathfindersPlayerData;
     pendingInitialActions: Array<CardName> | undefined;
     pickedCorporationCard: CardName | undefined;
     plantProduction: number;

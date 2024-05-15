@@ -20,8 +20,6 @@ import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {SelectParty} from '../inputs/SelectParty';
 import {Policy, PolicyId, policyDescription} from './Policy';
 import {PlayerId} from '../../common/Types';
-// import { MarsFrontierAlliance } from '../cards/pathfinders/MarsFrontierAlliance';
-// import { ChoosePoliticalAgenda } from '../deferredActions/ChoosePoliticalAgenda';
 import {ChoosePolicyBonus} from '../deferredActions/ChoosePolicyBonus';
 
 export type NeutralPlayer = 'NEUTRAL';
@@ -457,7 +455,7 @@ export class Turmoil {
         game.defer(new ChoosePolicyBonus(alliedPlayer, [bonus, alliedParty.bonuses[0]], (bonusId) => {
           const bonus = this.parties.flatMap((p) => p.bonuses).find((b) => b.id === bonusId);
           console.log(bonus);
-          // bonus?.grant(game, alliedPlayer);
+          bonus?.grant(game, alliedPlayer);
         }));
       }
     }

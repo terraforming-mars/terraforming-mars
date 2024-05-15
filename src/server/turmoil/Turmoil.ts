@@ -414,31 +414,16 @@ export class Turmoil {
         partiesToCheck = right.concat(left);
       }
 
-      // Va fatto prima!!!!
       // Take the clockwise order
       const partiesOrdered = partiesToCheck.reverse();
       partiesOrdered.some((p) => {
         if (p.delegates.size === first) {
-          alliedPlayer.pathfindersData.alliedParty = {
-            name: p.name,
-            bonus: p.bonuses[0].id,
-            policy: p.policies[0].id,
-          };
+          alliedPlayer.setAlliedParty(p);
           return true;
         }
         return false;
       });
     }
-
-    /*
-    if (alliedPlayer !== undefined) {
-      alliedPlayer.pathfindersData.alliedParty = {
-        name: this.dominantParty.name,
-        bonus: this.dominantParty.bonuses[0].id,
-        policy: this.dominantParty.policies[0].id,
-      };
-    }
-    */
 
     // Resolve Ruling Bonus
     const bonusId = PoliticalAgendas.currentAgenda(this).bonusId;
@@ -454,7 +439,6 @@ export class Turmoil {
       if (alliedParty !== undefined) {
         game.defer(new ChoosePolicyBonus(alliedPlayer, [bonus, alliedParty.bonuses[0]], (bonusId) => {
           const bonus = this.parties.flatMap((p) => p.bonuses).find((b) => b.id === bonusId);
-          console.log(bonus);
           bonus?.grant(game, alliedPlayer);
         }));
       }

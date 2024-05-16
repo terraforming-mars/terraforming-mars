@@ -99,6 +99,28 @@ describe('MarsFrontierAlliance', function() {
     addGreenery(player);
     expect(player.megaCredits).to.equal(4);
   });
+
+  it('Active effect from Kelvinists party should not be applicable', () => {
+    game.phase = Phase.ACTION;
+    turmoil = game.turmoil!;
+    const kelvinists = game.turmoil!.getPartyByName(PartyName.KELVINISTS);
+    player.setAlliedParty(kelvinists);
+    player.megaCredits = 10;
+    const availableActions = player.getActions();
+    const scientistsAction = availableActions.options.filter((o) => o.title === kelvinists.policies[0].description);
+    expect(scientistsAction).to.be.empty;
+  });
+
+  it('Active effect from Scientists party should not be applicable', () => {
+    game.phase = Phase.ACTION;
+    turmoil = game.turmoil!;
+    const scientists = game.turmoil!.getPartyByName(PartyName.SCIENTISTS);
+    player.setAlliedParty(scientists);
+    player.megaCredits = 10;
+    const availableActions = player.getActions();
+    const scientistsAction = availableActions.options.filter((o) => o.title === scientists.policies[0].description);
+    expect(scientistsAction).to.be.empty;
+  });
 });
 
 function getWaitingFor(player: IPlayer): OrOptions {

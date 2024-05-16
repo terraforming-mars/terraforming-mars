@@ -1,6 +1,6 @@
 <template>
     <div class="player-allied-party">
-        <div v-if="player.alliedParty" class='policy-block'>
+        <div v-if="player.alliedParty" class='allied-policy-block'>
             <div :class="'party-name party-name--'+partyNameToCss(player.alliedParty.partyName)" v-i18n>{{player.alliedParty.partyName}}</div>
             <agendas type="policy-bonus" :id="player.alliedParty.agenda.policyId"></agendas>
         </div>

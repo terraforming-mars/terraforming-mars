@@ -58,6 +58,11 @@ as they're the clearest instructions.)
 ## ⬤ I want to run a copy of the server on Docker
 Check out our [Docker setup wiki page](https://github.com/bafolts/terraforming-mars/wiki/Docker-Setup)
 
+## ⬤ I want to run a copy of my YunoHost server
+Install it in one click [![Install Terraforming Mars  with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=terraforming-mars)
+
+Check out the Yunohost [app package code](https://github.com/YunoHost-Apps/terraforming-mars_ynh)
+
 ## ⬤ I want to report a bug or feature request
 Add it to our [issues tab](https://github.com/bafolts/terraforming-mars/issues/new).
 

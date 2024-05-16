@@ -31,7 +31,7 @@ import {Color} from '../common/Color';
 import {OrOptions} from './inputs/OrOptions';
 import {Stock} from './player/Stock';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
-import {PathfindersPlayerData} from './pathfinders/PathfindersData';
+import {AlliedParty} from '../common/models/PlayerModel';
 import {IParty} from './turmoil/parties/IParty';
 
 export type ResourceSource = IPlayer | GlobalEventName | ICard;
@@ -145,7 +145,7 @@ export interface IPlayer {
   totalDelegatesPlaced: number;
 
   underworldData: UnderworldPlayerData;
-  pathfindersData: PathfindersPlayerData;
+  readonly alliedParty?: AlliedParty;
 
   tearDown(): void;
   tableau: Array<ICorporationCard | IProjectCard>;
@@ -323,7 +323,7 @@ export interface IPlayer {
   serialize(): SerializedPlayer;
   /** Shorthand for deferring evaluating a PlayerInput */
   defer(input: PlayerInput | undefined | void | (() => PlayerInput | undefined | void), priority?: Priority): void;
-  setAlliedParty(p: IParty): void;
+  setAlliedParty(party: IParty): void;
 }
 
 export function isIPlayer(object: any): object is IPlayer {

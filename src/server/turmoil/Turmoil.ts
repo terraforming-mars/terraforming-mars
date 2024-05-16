@@ -304,9 +304,9 @@ export class Turmoil {
   }
 
   private executeAlliedOnPolicyEnd(game: IGame, player: IPlayer | undefined): void {
-    if (player?.pathfindersData?.alliedParty) {
-      const {alliedParty} = player.pathfindersData;
-      const alliedPolicy = player.game.turmoil?.getPartyByName(alliedParty.name)?.policies.find((p) => p.id === alliedParty.policy);
+    if (player?.alliedParty) {
+      const {alliedParty} = player;
+      const alliedPolicy = player.game.turmoil?.getPartyByName(alliedParty.partyName)?.policies.find((p) => p.id === alliedParty.agenda.policyId);
       alliedPolicy?.onPolicyEnd?.(game, player);
     }
   }
@@ -318,7 +318,7 @@ export class Turmoil {
     this.rulingPolicy().onPolicyEnd?.(game);
 
     // Mars Frontier Alliance ends allied party policy
-    const alliedPlayer = game.getPlayers().find((p) => p.pathfindersData.alliedParty !== undefined);
+    const alliedPlayer = game.getPlayers().find((p) => p.alliedParty !== undefined);
     this.executeAlliedOnPolicyEnd(game, alliedPlayer);
 
     // Behold the Emperor Hook prevents changing the ruling party.
@@ -389,7 +389,7 @@ export class Turmoil {
     // TODO: put here the choice of the allied party if Mars Frontier Alliance is in play
     //      ruling bonus should be chosen between global or allied party if MFA is in play
 
-    const alliedPlayer: IPlayer | undefined = game.getPlayers().find((p) => p.pathfindersData?.alliedParty !== undefined);
+    const alliedPlayer: IPlayer | undefined = game.getPlayers().find((p) => p.alliedParty !== undefined);
 
     // I have to find the second party after the dominant one
     // This is copy&paste of setNextPartyAsDominant: find a way to avoid duplication
@@ -434,8 +434,8 @@ export class Turmoil {
     game.log('The ruling bonus is: ${0}', (b) => b.string(bonus.description));
 
     // Mars Frontier Alliance
-    if (alliedPlayer !== undefined && alliedPlayer.pathfindersData.alliedParty !== undefined) {
-      const alliedParty = this.parties.find((p) => p.name === alliedPlayer.pathfindersData.alliedParty?.name);
+    if (alliedPlayer !== undefined && alliedPlayer.alliedParty !== undefined) {
+      const alliedParty = this.parties.find((p) => p.name === alliedPlayer.alliedParty?.partyName);
       if (alliedParty !== undefined) {
         game.defer(new ChoosePolicyBonus(alliedPlayer, [bonus, alliedParty.bonuses[0]], (bonusId) => {
           const bonus = this.parties.flatMap((p) => p.bonuses).find((b) => b.id === bonusId);

@@ -247,13 +247,7 @@ export class Server {
       victoryPointsByGeneration: player.victoryPointsByGeneration,
       corruption: player.underworldData.corruption,
       excavations: UnderworldExpansion.excavationMarkerCount(player),
-      alliedParty: player.pathfindersData.alliedParty === undefined ? undefined : {
-        partyName: player.pathfindersData.alliedParty?.name,
-        agenda: {
-          policyId: player.pathfindersData.alliedParty?.policy,
-          bonusId: player.pathfindersData.alliedParty?.bonus,
-        },
-      },
+      alliedParty: player.alliedParty,
     };
   }
 

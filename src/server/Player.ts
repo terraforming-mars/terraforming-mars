@@ -78,6 +78,7 @@ import {Counter} from './behavior/Counter';
 import {TRSource} from '../common/cards/TRSource';
 import {PathfindersPlayerData} from './pathfinders/PathfindersData';
 import {IParty} from './turmoil/parties/IParty';
+import {AlliedParty} from '../common/models/PlayerModel';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 
@@ -124,6 +125,10 @@ export class Player implements IPlayer {
     return this.stock.heat;
   }
 
+  public get alliedParty(): AlliedParty | undefined {
+    return this.pathfindersData?.alliedParty;
+  }
+
   public set megaCredits(megacredits: number) {
     this.stock.megacredits = megacredits;
   }
@@ -147,6 +152,19 @@ export class Player implements IPlayer {
   public set heat(heat: number) {
     this.stock.heat = heat;
   }
+
+  public setAlliedParty(p: IParty) {
+    this.pathfindersData.alliedParty = {
+      partyName: p.name,
+      agenda: {
+        bonusId: p.bonuses[0].id,
+        policyId: p.policies[0].id,
+      },
+    };
+    const alliedPolicy = this.game.turmoil?.getPartyByName(p.name).policies.find((t) => t.id === p.policies[0].id);
+    if (alliedPolicy !== undefined) alliedPolicy.onPolicyStart?.(this.game, this);
+  }
+
 
   // Resource values
   private titaniumValue: number = 3;
@@ -237,16 +255,6 @@ export class Player implements IPlayer {
     this.colonies = new Colonies(this);
     this.production = new Production(this);
     this.stock = new Stock(this);
-  }
-
-  setAlliedParty(p: IParty): void {
-    this.pathfindersData.alliedParty = {
-      name: p.name,
-      bonus: p.bonuses[0].id,
-      policy: p.policies[0].id,
-    };
-    const alliedPolicy = this.game.turmoil?.getPartyByName(p.name).policies.find((t) => t.id === p.policies[0].id);
-    if (alliedPolicy !== undefined) alliedPolicy.onPolicyStart?.(this.game, this);
   }
 
   public static initialize(

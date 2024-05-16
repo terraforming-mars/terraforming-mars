@@ -20,7 +20,7 @@ export class PartyRequirement extends CardRequirement {
 
   public satisfies(player: IPlayer): boolean {
     const turmoil = Turmoil.getTurmoil(player.game);
-    if (turmoil.rulingParty.name === this.party || player.pathfindersData.alliedParty?.name === this.party ) {
+    if (turmoil.rulingParty.name === this.party || player.alliedParty?.partyName === this.party ) {
       return true;
     }
 

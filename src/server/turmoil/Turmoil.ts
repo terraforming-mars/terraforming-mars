@@ -386,13 +386,11 @@ export class Turmoil {
   public onAgendaSelected(game: IGame): void {
     const rulingParty = this.rulingParty;
 
-    // TODO: put here the choice of the allied party if Mars Frontier Alliance is in play
-    //      ruling bonus should be chosen between global or allied party if MFA is in play
-
+    // Ruling bonus should be chosen between global or allied party if MFA is in play
     const alliedPlayer: IPlayer | undefined = game.getPlayers().find((p) => p.alliedParty !== undefined);
 
     // I have to find the second party after the dominant one
-    // This is copy&paste of setNextPartyAsDominant: find a way to avoid duplication
+    // TODO (ryoku) This is copy&paste of setNextPartyAsDominant: find a way to avoid duplication
     if (game.turmoil !== undefined && alliedPlayer !== undefined) {
       const currentDominantParty = game.turmoil.dominantParty;
       const sortParties = [...this.parties].sort(

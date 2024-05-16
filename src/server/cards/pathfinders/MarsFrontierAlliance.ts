@@ -4,7 +4,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IPlayer} from '../../../server/IPlayer';
 import {PlayerInput} from '../../../server/PlayerInput';
 import {Turmoil} from '../../turmoil/Turmoil';
-import {IParty} from '../../../server/turmoil/parties/IParty';
 import {ChooseAlliedParty} from '../../../server/deferredActions/ChooseAlliedParty';
 
 export class MarsFrontierAlliance extends CorporationCard {
@@ -34,13 +33,10 @@ export class MarsFrontierAlliance extends CorporationCard {
   public override bespokePlay(player: IPlayer): PlayerInput | undefined {
     const game = player.game;
     const turmoil = Turmoil.getTurmoil(game);
-    const availableParties: Array<IParty> = [];
+    const availableParties = [...turmoil.parties];
 
-    for (const party of turmoil.parties) {
-      availableParties.push(party);
-    }
-    game.defer(new ChooseAlliedParty(player, availableParties, (p) => {
-      player.setAlliedParty(p);
+    game.defer(new ChooseAlliedParty(player, availableParties, (selectedParty) => {
+      player.setAlliedParty(selectedParty);
     }));
     return undefined;
   }

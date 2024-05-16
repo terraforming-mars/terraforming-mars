@@ -33,16 +33,18 @@ class UnityBonus01 implements Bonus {
   }
 
   grant(game: IGame, player?: IPlayer) {
-    if (player !== undefined) {
-      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
+    const grantToPlayer = (p: IPlayer): void => {
+      p.stock.add(Resource.MEGACREDITS, this.getScore(p));
+    };
+
+    if (player) {
+      grantToPlayer(player);
     } else {
       game.getPlayersInGenerationOrder()
         .filter((p) => {
           return p.alliedParty === undefined;
         })
-        .forEach((p) => {
-          p.stock.add(Resource.MEGACREDITS, this.getScore(p));
-        });
+        .forEach(grantToPlayer);
     }
   }
 }
@@ -67,7 +69,7 @@ class UnityPolicy01 implements Policy {
   description = 'Your titanium resources are worth 1 M€ extra';
 
   onPolicyStart(game: IGame, player?: IPlayer): void {
-    if (player !== undefined) {
+    if (player) {
       player.increaseTitaniumValue();
     } else {
       game.getPlayersInGenerationOrder().forEach((player) => {
@@ -76,7 +78,7 @@ class UnityPolicy01 implements Policy {
     }
   }
   onPolicyEnd(game: IGame, player?: IPlayer): void {
-    if (player !== undefined) {
+    if (player) {
       player.decreaseTitaniumValue();
     } else {
       game.getPlayersInGenerationOrder().forEach((player) => {

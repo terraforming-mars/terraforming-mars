@@ -78,7 +78,7 @@ class MarsFirstPolicy03 implements Policy {
   readonly description = 'Your steel resources are worth 1 M€ extra';
 
   onPolicyStart(game: IGame, player?: IPlayer): void {
-    if (player !== undefined) {
+    if (player) {
       player.increaseSteelValue();
     } else {
       game.getPlayersInGenerationOrder().forEach((player) => {
@@ -87,7 +87,7 @@ class MarsFirstPolicy03 implements Policy {
     }
   }
   onPolicyEnd(game: IGame, player?: IPlayer): void {
-    if (player !== undefined) {
+    if (player) {
       player.decreaseSteelValue();
     } else {
       game.getPlayersInGenerationOrder().forEach((player) => {

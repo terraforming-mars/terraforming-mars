@@ -224,7 +224,7 @@ export class Player implements IPlayer {
   public underworldData: UnderworldPlayerData = UnderworldExpansion.initializePlayer();
 
   // Pathfinders
-  public pathfindersData: PathfindersPlayerData = {};
+  pathfindersData: PathfindersPlayerData = {};
 
   // The number of actions a player can take this round.
   // It's almost always 2, but certain cards can change this value (Mars Maths, Tool with the First Order)

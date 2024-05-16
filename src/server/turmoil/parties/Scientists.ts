@@ -25,16 +25,18 @@ class ScientistsBonus01 implements Bonus {
   }
 
   grant(game: IGame, player?: IPlayer) {
-    if (player !== undefined) {
-      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
+    const grantToPlayer = (p: IPlayer): void => {
+      p.stock.add(Resource.MEGACREDITS, this.getScore(p));
+    };
+
+    if (player) {
+      grantToPlayer(player);
     } else {
       const players = game.getPlayersInGenerationOrder()
         .filter((p) => {
           return p.alliedParty === undefined;
         });
-      players.forEach((p) => {
-        p.stock.add(Resource.MEGACREDITS, this.getScore(p));
-      });
+      players.forEach(grantToPlayer);
     }
   }
 }
@@ -90,7 +92,7 @@ class ScientistsPolicy04 implements Policy {
   readonly description = 'Cards with Science tag requirements may be played with 1 less Science tag';
 
   onPolicyStart(game: IGame, player?: IPlayer) {
-    if (player !== undefined) {
+    if (player) {
       player.hasTurmoilScienceTagBonus = true;
     } else {
       game.getPlayersInGenerationOrder().forEach((player) => {
@@ -100,7 +102,7 @@ class ScientistsPolicy04 implements Policy {
   }
 
   onPolicyEnd(game: IGame, player?: IPlayer) {
-    if (player !== undefined) {
+    if (player) {
       player.hasTurmoilScienceTagBonus = true;
     } else {
       game.getPlayersInGenerationOrder().forEach((player) => {

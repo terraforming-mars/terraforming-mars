@@ -6,6 +6,7 @@ import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
 import {message} from '../logs/MessageBuilder';
 import {IParty} from '../turmoil/parties/IParty';
+import { policyDescription } from '../turmoil/Policy';
 
 export class ChooseAlliedParty extends DeferredAction {
   constructor(
@@ -32,6 +33,7 @@ export class ChooseAlliedParty extends DeferredAction {
   }
 
   private partyDescription(party: IParty, _player: IPlayer) {
-    return `[${party.name}] - Bonus: ${party.bonuses[0].description} -  Policy: ${party.policies[0].description}`;
+    const description = policyDescription(party.policies[0], undefined);
+    return `[${party.name}] - Bonus: ${party.bonuses[0].description} -  Policy: ${description}`;
   }
 }

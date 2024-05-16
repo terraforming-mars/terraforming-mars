@@ -4,7 +4,6 @@ import {Color} from '../common/Color';
 import {SerializedCard} from './SerializedCard';
 import {SerializedTimer} from '../common/SerializedTimer';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
-import {PartyName} from '../common/turmoil/PartyName';
 import {PathfindersPlayerData} from './pathfinders/PathfindersData';
 
 interface DeprecatedFields {
@@ -14,7 +13,6 @@ export interface SerializedPlayer extends DeprecatedFields{
     actionsTakenThisGame: number;
     actionsTakenThisRound: number;
     actionsThisGeneration: Array<CardName>;
-    alliedParty?: PartyName
     beginner: boolean;
     canUseCorruptionAsMegacredits: boolean;
     canUseHeatAsMegaCredits: boolean;

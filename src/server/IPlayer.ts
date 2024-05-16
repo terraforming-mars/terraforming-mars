@@ -102,8 +102,13 @@ export interface IPlayer {
   preludeCardsInHand: Array<IProjectCard>;
   ceoCardsInHand: Array<IProjectCard>;
   playedCards: Array<IProjectCard>;
-  draftedCards: Array<IProjectCard>;
   cardCost: number;
+
+  /** Cards this player did not draft that will be passed to the next player */
+  undraftedCards: Array<IProjectCard>;
+  /** Cards this player has already chosen during this draft round */
+  draftedCards: Array<IProjectCard>;
+  /** true when this player is drafting, false when player is not, undefined when there is no draft phase. */
   needsToDraft?: boolean;
 
   timer: Timer;

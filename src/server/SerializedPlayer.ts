@@ -69,5 +69,6 @@ export interface SerializedPlayer extends DeprecatedFields{
     tradesThisGeneration: number;
     turmoilPolicyActionUsed: boolean;
     underworldData: UnderworldPlayerData;
+    undraftedCards: Array<CardName>,
     victoryPointsByGeneration: Array<number>;
 }

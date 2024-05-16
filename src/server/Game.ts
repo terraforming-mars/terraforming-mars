@@ -129,7 +129,6 @@ export class Game implements IGame, Logger {
    * iteration 2 is the next 5 cards, and iteration 3 is for Prelude, if necessary.
    **/
   /* private */ public initialDraftIteration: number = 1;
-  /* private */ public unDraftedCards: Map<PlayerId, Array<IProjectCard>> = new Map();
   /* private */ public draftedPlayers = new Set<PlayerId>();
 
   // Milestones and awards
@@ -441,7 +440,6 @@ export class Game implements IGame, Logger {
       tradeEmbargo: this.tradeEmbargo,
       underworldData: this.underworldData,
       undoCount: this.undoCount,
-      unDraftedCards: Array.from(this.unDraftedCards.entries()).map(([playerId, cards]) => [playerId, cards.map((c) => c.name)]),
       venusScaleLevel: this.venusScaleLevel,
     };
     if (this.aresData !== undefined) {
@@ -1553,10 +1551,15 @@ export class Game implements IGame, Logger {
     game.researchedPlayers = new Set<PlayerId>(d.researchedPlayers);
     game.draftedPlayers = new Set<PlayerId>(d.draftedPlayers);
 
-    game.unDraftedCards = new Map();
-    d.unDraftedCards.forEach(([playerId, cardNames]) => {
-      game.unDraftedCards.set(playerId, cardsFromJSON(cardNames));
-    });
+    if (d.unDraftedCards) {
+      d.unDraftedCards.forEach(([playerId, cardNames]) => {
+        const player = players.find((p) => p.id === playerId);
+        if (player === undefined) {
+          throw new Error('Unexpected undefined player when deserializing undrafted cards');
+        }
+        player.undraftedCards = cardsFromJSON(cardNames);
+      });
+    }
 
     game.lastSaveId = d.lastSaveId;
     game.clonedGamedId = d.clonedGamedId;

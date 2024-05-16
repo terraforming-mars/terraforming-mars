@@ -1,4 +1,4 @@
-import {inplaceRemove} from '../common/utils/utils';
+import {inplaceRemove, copyAndClear as copyAndEmpty} from '../common/utils/utils';
 import {CardName} from '../common/cards/CardName';
 import {IGame} from './IGame';
 import {IPlayer} from './IPlayer';
@@ -33,9 +33,8 @@ export abstract class Draft {
     this.game.draftedPlayers.clear();
     for (const player of this.game.getPlayers()) {
       player.needsToDraft = true;
-      const draftCardsFrom = this.draftingFrom(player).id;
-      const cards = this.game.draftRound === 1 ? this.draw(player) : (this.game.unDraftedCards.get(draftCardsFrom) ?? []);
-      this.game.unDraftedCards.delete(draftCardsFrom);
+      const draftCardsFrom = this.draftingFrom(player);
+      const cards = this.game.draftRound === 1 ? this.draw(player) : copyAndEmpty(draftCardsFrom.undraftedCards);
       this.askPlayerToDraft(player, cards);
     }
   }
@@ -72,15 +71,15 @@ export abstract class Draft {
           for (const card of selected) {
             player.draftedCards.push(card);
             inplaceRemove(cards, card);
-            this.game.unDraftedCards.set(player.id, cards);
+            player.undraftedCards = cards;
           }
-          this.onCardChosen(player, cards);
+          this.onCardChosen(player);
           return undefined;
         }),
     );
   }
 
-  private onCardChosen(player: IPlayer, cards : Array<IProjectCard>): void {
+  private onCardChosen(player: IPlayer): void {
     this.game.draftedPlayers.add(player.id);
     player.needsToDraft = false;
     if (this.game.draftedPlayers.size < this.game.getPlayers().length) {
@@ -88,7 +87,7 @@ export abstract class Draft {
     }
 
     // If more than 1 card are to be passed to the next player, that means we're still drafting
-    if (cards.length > 1) {
+    if (player.undraftedCards.length > 1) {
       this.game.draftRound++;
       this.game.runDraftRound(this);
       return;
@@ -96,10 +95,7 @@ export abstract class Draft {
 
     // Push last card for each player
     for (const player of this.game.getPlayers()) {
-      const lastCards = this.game.unDraftedCards.get(this.draftingFrom(player).id);
-      if (lastCards !== undefined) {
-        player.draftedCards.push(...lastCards);
-      }
+      player.draftedCards.push(...copyAndEmpty(this.draftingFrom(player).undraftedCards));
       player.needsToDraft = undefined;
     }
 

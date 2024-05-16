@@ -199,7 +199,6 @@ export interface IGame extends Logger {
   runDraftRound(draft: Draft): void;
   getPlayerAfter(player: IPlayer): IPlayer;
   getPlayerBefore(player: IPlayer): IPlayer;
-  unDraftedCards: Map<PlayerId, Array<IProjectCard>>;
   draftedPlayers: Set<PlayerId>;
 }
 

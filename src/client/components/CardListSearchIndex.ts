@@ -8,7 +8,7 @@ import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {translateText} from '@/client/directives/i18n';
 import {allMaNames, getMilestoneAwardDescription} from '../MilestoneAwardManifest';
 import {CardName} from '@/common/cards/CardName';
-
+import {copyAndClear} from '@/common/utils/utils';
 
 export class CardListSearchIndex {
   private searchIndex: Map<string, Array<string>>;
@@ -96,7 +96,6 @@ export class CardListSearchIndex {
   }
 
   private store(type: string, name: string) {
-    this.searchIndex.set(`${type}:${name}`, [...this.entries]);
-    this.entries.length = 0;
+    this.searchIndex.set(`${type}:${name}`, copyAndClear(this.entries));
   }
 }

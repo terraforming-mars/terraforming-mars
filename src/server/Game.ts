@@ -374,7 +374,7 @@ export class Game implements IGame, Logger {
     return game;
   }
 
-  // Function use to properly start the game: with project draft or with research phase
+  /** Properly starts the game with the project draft, or initial research phase. */
   public gotoInitialPhase(): void {
     // Initial Draft
     if (this.gameOptions.initialDraftVariant) {
@@ -506,7 +506,7 @@ export class Game implements IGame, Logger {
     if (this.players.length === 1 && this.gameOptions.venusNextExtension) {
       return globalParametersMaxed && venusMaxed;
     }
-    // new option "requiresVenusTrackCompletion" also makes maximizing Venus a game-end requirement
+    // Option "requiresVenusTrackCompletion" also makes maximizing Venus a game-end requirement
     if (this.gameOptions.venusNextExtension && this.gameOptions.requiresVenusTrackCompletion) {
       return globalParametersMaxed && venusMaxed;
     }

@@ -33,7 +33,6 @@ export type SerializedGame = {
     createdTimeMs: number;
     deferredActions: Array<DeferredAction>;
     donePlayers: Array<PlayerId>;
-    draftedPlayers: Array<PlayerId>;
     draftRound: number;
     first: PlayerId;
     fundedAwards: Array<SerializedFundedAward>;

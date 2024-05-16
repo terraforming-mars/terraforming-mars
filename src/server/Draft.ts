@@ -30,7 +30,6 @@ export abstract class Draft {
   protected abstract endRound(): void;
 
   public startRound() {
-    this.game.draftedPlayers.clear();
     for (const player of this.game.getPlayers()) {
       player.needsToDraft = true;
       const draftCardsFrom = this.draftingFrom(player);
@@ -80,9 +79,10 @@ export abstract class Draft {
   }
 
   private onCardChosen(player: IPlayer): void {
-    this.game.draftedPlayers.add(player.id);
     player.needsToDraft = false;
-    if (this.game.draftedPlayers.size < this.game.getPlayers().length) {
+
+    // If anybody still needs to draft, stop here.
+    if (this.game.getPlayers().some((p) => p.needsToDraft === true)) {
       return;
     }
 

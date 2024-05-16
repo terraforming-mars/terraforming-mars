@@ -199,7 +199,6 @@ export interface IGame extends Logger {
   runDraftRound(draft: Draft): void;
   getPlayerAfter(player: IPlayer): IPlayer;
   getPlayerBefore(player: IPlayer): IPlayer;
-  draftedPlayers: Set<PlayerId>;
 }
 
 export function isIGame(object: any): object is IGame {

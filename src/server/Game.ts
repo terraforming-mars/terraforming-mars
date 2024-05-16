@@ -110,10 +110,11 @@ export class Game implements IGame, Logger {
 
   // Player data
   public activePlayer: PlayerId;
+  /** Players that are done with the game after final greenery placement. */
   private donePlayers = new Set<PlayerId>();
   private passedPlayers = new Set<PlayerId>();
   private researchedPlayers = new Set<PlayerId>();
-  // The first player of this generation.
+  /** The first player of this generation. */
   public first: IPlayer;
 
   // Drafting
@@ -129,7 +130,6 @@ export class Game implements IGame, Logger {
    * iteration 2 is the next 5 cards, and iteration 3 is for Prelude, if necessary.
    **/
   /* private */ public initialDraftIteration: number = 1;
-  /* private */ public draftedPlayers = new Set<PlayerId>();
 
   // Milestones and awards
   public claimedMilestones: Array<ClaimedMilestone> = [];
@@ -407,7 +407,6 @@ export class Game implements IGame, Logger {
       currentSeed: this.rng.current,
       deferredActions: [],
       donePlayers: Array.from(this.donePlayers),
-      draftedPlayers: Array.from(this.draftedPlayers),
       draftRound: this.draftRound,
       first: this.first.id,
       fundedAwards: serializeFundedAwards(this.fundedAwards),
@@ -1549,7 +1548,6 @@ export class Game implements IGame, Logger {
     game.passedPlayers = new Set<PlayerId>(d.passedPlayers);
     game.donePlayers = new Set<PlayerId>(d.donePlayers);
     game.researchedPlayers = new Set<PlayerId>(d.researchedPlayers);
-    game.draftedPlayers = new Set<PlayerId>(d.draftedPlayers);
 
     if (d.unDraftedCards) {
       d.unDraftedCards.forEach(([playerId, cardNames]) => {

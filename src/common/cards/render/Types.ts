@@ -19,6 +19,7 @@ export interface ICardRenderSymbol extends CardComponent {
   type: CardRenderSymbolType;
   size: Size;
   isIcon: boolean;
+  isSuperscript: boolean;
   readonly is: 'symbol';
 }
 
@@ -107,8 +108,10 @@ export interface ICardRenderItem extends CardComponent {
   cancelled?: boolean;
   /** over is used for rendering under TR for global events. */
   over?: number
-  // Used for unknown values (currently just megacredits, fwiw)
+  /** Used for unknown values (currently just megacredits, fwiw) */
   questionMark?: boolean;
+  /** When true show the item in superscript */
+  isSuperscript?: boolean;
 }
 
 export function isICardRenderItem(item: ItemType): item is ICardRenderItem {

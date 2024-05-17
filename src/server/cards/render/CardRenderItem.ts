@@ -8,19 +8,20 @@ import {Tag} from '../../../common/cards/Tag';
 import {ICardRenderItem} from '../../../common/cards/render/Types';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
-export interface ItemOptions {
-  size?: Size;
-  amount?: number;
-  all?: boolean;
-  digit?: boolean;
-  played?: boolean;
-  secondaryTag?: Tag | AltSecondaryTag;
-  clone?: boolean; /** Replace the amount with the clone tag */
-  cancelled?: boolean;
-  over?: number; /** Used for global events. */
-  questionMark?: boolean;
-  text?: string;
-}
+export type ItemOptions = Partial<{
+  size: Size;
+  amount: number;
+  all: boolean;
+  digit: boolean;
+  played: boolean;
+  secondaryTag: Tag | AltSecondaryTag;
+  clone: boolean; /** Replace the amount with the clone tag */
+  cancelled: boolean;
+  over: number; /** Used for global events. */
+  questionMark: boolean;
+  text: string;
+  superscript: boolean;
+}>
 
 export class CardRenderItem implements ICardRenderItem {
   public readonly is = 'item';
@@ -37,7 +38,9 @@ export class CardRenderItem implements ICardRenderItem {
   public clone?: boolean = false;
   public cancelled?: boolean = false;
   public innerText?: string;
+  public isSuperscript?: boolean;
   public over?: number;
+
   constructor(public type: CardRenderItemType, public amount: number = -1, options?: ItemOptions) {
     switch (options?.digit) {
     case true:
@@ -69,6 +72,9 @@ export class CardRenderItem implements ICardRenderItem {
     this.over = options.over;
     if (options.text !== undefined) {
       this.innerText = options.text;
+    }
+    if (options.superscript === true) {
+      this.isSuperscript = true;
     }
 
     return this;

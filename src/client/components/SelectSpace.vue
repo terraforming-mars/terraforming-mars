@@ -77,7 +77,6 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     animateSpaces(tiles: Array<Element>) {
       tiles.forEach((tile: Element) => {
-        // TODO(kberg): Replace Element / HTMLElement with `typeof BoardSpace`
         const spaceId = tile.getAttribute('data_space_id') as SpaceId;
         if (spaceId !== null && this.spaces.has(spaceId)) {
           this.animateSpace(tile, true);
@@ -115,9 +114,9 @@ export default (Vue as WithRefs<Refs>).extend({
       });
     },
     getSelectableSpaces(): Array<HTMLElement> {
-      const spaces = [];
+      const spaces: Array<HTMLElement> = [];
 
-      const regions = ['main_board', 'moon_board', 'colony_spaces'];
+      const regions = ['main_board', 'moon_board', 'colony_spaces', 'moon_board_outer_spaces'];
       for (const region of regions) {
         const board = document.getElementById(region);
         if (board !== null) {
@@ -158,8 +157,7 @@ export default (Vue as WithRefs<Refs>).extend({
     const tiles = this.getSelectableSpaces();
     this.animateSpaces(tiles);
     for (let i = 0, length = tiles.length; i < length; i++) {
-      const tile: HTMLElement = tiles[i] as HTMLElement;
-      // TODO(kberg): Replace Element / HTMLElement with `typeof BoardSpace`
+      const tile = tiles[i];
       const spaceId = tile.getAttribute('data_space_id') as SpaceId;
 
       if (spaceId === null || this.spaces.has(spaceId) === false) {

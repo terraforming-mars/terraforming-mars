@@ -1,5 +1,8 @@
 <template>
-  <div :class="getClasses()">{{ getContent() }}</div>
+  <div>
+  <div v-if="item.isSuperscript === true" :class="classes"><sup>{{ content }}</sup></div>
+  <div v-else :class="classes">{{ content }}</div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -41,8 +44,8 @@ export default Vue.extend({
       required: true,
     },
   },
-  methods: {
-    getClasses(): string {
+  computed: {
+    classes(): string {
       const type: CardRenderSymbolType = this.item.type;
       const size: Size = this.item.size;
       const classes: Array<string> = ['card-special'];
@@ -64,7 +67,7 @@ export default Vue.extend({
 
       return classes.join(' ');
     },
-    getContent(): string {
+    content(): string {
       return this.item.isIcon ? '' : this.item.type;
     },
   },

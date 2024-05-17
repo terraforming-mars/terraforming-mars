@@ -14,7 +14,7 @@ export class ExcavateStandardProject extends StandardProjectCard {
       cardNumber: '',
       renderData: CardRenderer.builder((b) =>
         b.standardProject('Spend 7 M€ (steel may be used) to excavate a space.', (eb) => {
-          eb.megacredits(7).openBrackets.steel(1).closeBrackets.startAction.excavate();
+          eb.megacredits(7).super((b) => b.steel(1)).startAction.excavate();
         }),
       ),
     },

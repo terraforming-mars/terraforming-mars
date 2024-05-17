@@ -37,10 +37,19 @@ export default Vue.extend({
   },
   computed: {
     cardResource(): string {
-      return this.item.secondaryTag !== undefined ? 'card-resource--has-secondary-tag' : 'card-resource';
+      if (this.item.secondaryTag) {
+        return 'card-resource--has-secondary-tag';
+      }
+      if (this.item.isSuperscript) {
+        return 'card-resource--superscript';
+      }
+      return 'card-resource';
     },
     componentClasses(): ReadonlyArray<string> {
       let classes = [];
+      if (this.item.isSuperscript) {
+        classes.push('card-superscript');
+      }
       switch (this.item.type) {
       case CardRenderItemType.TEMPERATURE:
         classes.push('card-global-requirement', 'card-temperature-global-requirement');
@@ -156,7 +165,7 @@ export default Vue.extend({
         classes.push('card-influence', `card-influence--size-${this.item.size}`);
         break;
       case CardRenderItemType.NO_TAGS:
-        classes.push('card-resource-tag', 'card-community-services');
+        classes.push('card-resource-tag', 'card-no-tags');
         break;
       case CardRenderItemType.EMPTY_TAG:
         classes.push('card-resource-tag', 'card-tag-empty');
@@ -302,7 +311,7 @@ export default Vue.extend({
         classes.push('card-identification');
         break;
       case CardRenderItemType.EXCAVATE:
-        classes.push('card-excavation');
+        classes.push(this.item.isSuperscript ? 'card-excavation--superscript' : 'card-excavation');
         break;
       case CardRenderItemType.CORRUPTION:
         classes.push(this.cardResource, 'card-resource-corruption');
@@ -448,7 +457,7 @@ export default Vue.extend({
       if (this.item.isPlate || this.item.text !== undefined) {
         result += this.item.text || 'n/a';
       }
-      if (this.item.type === CardRenderItemType.NO_TAGS || this.item.type === CardRenderItemType.MULTIPLIER_WHITE) {
+      if (this.item.type === CardRenderItemType.MULTIPLIER_WHITE) {
         result = 'X';
       } else if (this.item.type === CardRenderItemType.IGNORE_GLOBAL_REQUIREMENTS) {
         result += '<div class="card-project-requirements">';

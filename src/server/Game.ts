@@ -1241,13 +1241,14 @@ export class Game implements IGame, Logger {
     // Part 3. Setup for bonuses
     const initialTileTypeForAres = space.tile?.tileType;
     const coveringExistingTile = space.tile !== undefined;
+    const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
 
     // Part 4. Place the tile
     this.simpleAddTile(player, space, tile);
 
     // Part 5. Collect the bonuses
     if (this.phase !== Phase.SOLAR) {
-      this.grantPlacementBonuses(player, space, coveringExistingTile);
+      this.grantPlacementBonuses(player, space, coveringExistingTile, arcadianCommunityBonus);
 
       AresHandler.ifAres(this, (aresData) => {
         AresHandler.maybeIncrementMilestones(aresData, player, space);
@@ -1273,7 +1274,7 @@ export class Game implements IGame, Logger {
     }
   }
 
-  public grantPlacementBonuses(player: IPlayer, space: Space, coveringExistingTile: boolean) {
+  public grantPlacementBonuses(player: IPlayer, space: Space, coveringExistingTile: boolean, arcadianCommunityBonus: boolean = false) {
     if (!coveringExistingTile) {
       this.grantSpaceBonuses(player, space);
     }
@@ -1291,7 +1292,6 @@ export class Game implements IGame, Logger {
 
       TurmoilHandler.resolveTilePlacementBonuses(player, space.spaceType);
 
-      const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
       if (arcadianCommunityBonus) {
         this.defer(new GainResources(player, Resource.MEGACREDITS, {count: 3}));
       }

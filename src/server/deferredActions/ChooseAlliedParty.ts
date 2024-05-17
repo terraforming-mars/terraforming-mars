@@ -6,7 +6,7 @@ import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
 import {message} from '../logs/MessageBuilder';
 import {IParty} from '../turmoil/parties/IParty';
-import { policyDescription } from '../turmoil/Policy';
+import {policyDescription} from '../turmoil/Policy';
 
 export class ChooseAlliedParty extends DeferredAction {
   constructor(

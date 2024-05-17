@@ -12,6 +12,9 @@
         left: 8px;
         margin: 0px;
     }
+    .card-superscript {
+      vertical-align: super;
+    }
     .card-content-wrapper {
         position: relative;
         .card-requirements {
@@ -1137,6 +1140,14 @@
                     margin-top: 8px;
                     margin-bottom: 8px;
                 }
+                &--superscript:extend(.card-container .card-content-wrapper .card-content .card-resource) {
+                  height: 16px;
+                  width: 16px;
+                  background-size: 16px;
+                  margin-left: 1px;
+                  margin-right: 1px;
+                  margin-bottom: 12px;
+                }
             }
             .card-resource-trade-discount {
                 background: white;
@@ -1264,14 +1275,23 @@
             .card-identification {
               background-image: url(./assets/underworld/identify.png);
               width: 44px;
-              background-size: 44px 44px;
+              background-size: 44px;
               height: 44px;
             }
             .card-excavation {
                 background-image: url(./assets/underworld/excavate.png);
                 width: 44px;
-                background-size: 44px 44px;
+                background-size: 44px;
                 height: 44px;
+                &--superscript {
+                  background-image: url(./assets/underworld/excavate.png);
+                  height: 22px;
+                  width: 22px;
+                  background-size: 22px;
+                  margin-left: 0px;
+                  margin-right: 0px;
+                  margin-bottom: 15px;
+                }
             }
             .card-resource-corruption {
                 background-image: url(./assets/underworld/corruption.png);
@@ -1664,10 +1684,15 @@
             .card-tag-diverse {
                 background: linear-gradient(to bottom right, green, yellow, red);
             }
-            .card-community-services {
-                font-size: 42px;
-                vertical-align: middle;
-                background:white;
+            .card-no-tags {
+              font-size: 42px;
+              vertical-align: middle;
+              background:white;
+            }
+            .card-no-tags:after {
+              content: "X";
+              position: relative;
+              top: 1px;
             }
             .card-private-security {
                 .card-x {
@@ -1730,6 +1755,18 @@
                 box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
                 content: "\25b2";
                 transform: rotate(180deg);
+            }
+            .card-tag-no_tags {
+              background:white;
+              font-size: 30px;
+              vertical-align: middle;
+              font-weight: normal
+            }
+            .card-tag-no_tags:after {
+              content: "X";
+              position: relative;
+              top: 1px;
+              left: 1px;
             }
             /* special case Project requirements */
             .card-project-requirements {

@@ -40,7 +40,7 @@
       </g>
     </svg>
 
-    <div class="board-outer-spaces">
+    <div id="moon_board_outer_spaces" class="board-outer-spaces">
       <MoonSpace :space="getSpaceById('m01')" text="Luna Trade Station"></MoonSpace>
       <MoonSpace :space="getSpaceById('m37')" text="Momentum Virium Habitat"></MoonSpace>
     </div>

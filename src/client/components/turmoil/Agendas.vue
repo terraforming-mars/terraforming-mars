@@ -1,7 +1,5 @@
 <template>
   <div :class="getClass">
-
-
     <template v-if="id === 'mb01'">
       <div class="resource money party-resource">1</div> /
       <div class="resource-tag tag-building party-resource-tag"></div>
@@ -192,7 +190,7 @@ export default Vue.extend({
   name: 'agenda',
   props: {
     type: {
-      type: String as () => 'dominant-bonus' | 'policy-bonus' | 'party-bonus' | 'allied-bonus',
+      type: String as () => 'dominant-bonus' | 'policy-bonus' | 'party-bonus',
     },
     id: {
       type: String as () => string | undefined,
@@ -207,15 +205,6 @@ export default Vue.extend({
         return 'party-bonus';
       }
       return '';
-    },
-  },
-  methods: {
-    partyNameToCss(party: string | undefined): string {
-      if (party === undefined) {
-        console.warn('no party provided');
-        return '';
-      }
-      return party.toLowerCase().split(' ').join('_');
     },
   },
 });

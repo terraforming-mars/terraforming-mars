@@ -54,7 +54,6 @@ export type DraftType = 'initial' | 'prelude' | 'standard';
 export type CardAction ='add' | 'discard' | 'nothing' | 'action-only';
 
 export interface IPlayer {
-
   readonly id: PlayerId;
   name: string;
   color: Color;

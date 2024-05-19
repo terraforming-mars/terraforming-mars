@@ -1,8 +1,7 @@
 <template>
     <div class="player-allied-party">
         <div v-if="player.alliedParty" class='allied-policy-block'>
-            <div :class="'party-name party-name--'+partyNameToCss(player.alliedParty.partyName)" v-i18n>{{player.alliedParty.partyName}}</div>
-            <agendas type="policy-bonus" :id="player.alliedParty.agenda.policyId"></agendas>
+            <agendas :id="player.alliedParty.agenda.policyId" :partyName="player.alliedParty.partyName"></agendas>
         </div>
     </div>
 </template>
@@ -11,8 +10,7 @@
 
 import Vue from 'vue';
 import {vueRoot} from '@/client/components/vueRoot';
-import Agendas from '@/client/components/turmoil/Agendas.vue';
-import {PartyName} from '@/common/turmoil/PartyName';
+import Agendas from '@/client/components/turmoil/AlliedPartyAgenda.vue';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 
 export default Vue.extend({
@@ -23,13 +21,6 @@ export default Vue.extend({
     },
   },
   methods: {
-    partyNameToCss(party: PartyName | undefined): string {
-      if (party === undefined) {
-        console.warn('no party provided');
-        return '';
-      }
-      return party.toLowerCase().split(' ').join('_');
-    },
     toggleMe() {
       const currentState: boolean = this.isVisible();
       vueRoot(this).setVisibilityState('allied_party', ! currentState);

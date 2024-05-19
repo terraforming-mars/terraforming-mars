@@ -10,8 +10,8 @@
 
 import Vue from 'vue';
 import {vueRoot} from '@/client/components/vueRoot';
-import Agendas from '@/client/components/turmoil/AlliedPartyAgenda.vue';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
+import AlliedPartyAgenda from '@/client/components/turmoil/AlliedPartyAgenda.vue';
 
 export default Vue.extend({
   name: 'playerAlliedParty',
@@ -30,7 +30,7 @@ export default Vue.extend({
     },
   },
   components: {
-    'agendas': Agendas,
+    'agendas': AlliedPartyAgenda,
   },
 });
 

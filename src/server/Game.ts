@@ -74,7 +74,7 @@ import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {SpaceType} from '../common/boards/SpaceType';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {BuildColony} from './deferredActions/BuildColony';
-import {Draft, newInitialDraft, newPreludeDraft, newStandardDraft} from './Draft';
+import {newInitialDraft, newPreludeDraft, newStandardDraft} from './Draft';
 
 export class Game implements IGame, Logger {
   public readonly id: GameId;
@@ -119,17 +119,8 @@ export class Game implements IGame, Logger {
 
   // Drafting
 
-  /**
-   * When drafting n cards, this counts the each step in the draft.
-   * When players get all the cards, this is 1. After everybody drafts a card,
-   * this is round 2.
-   */
-  /* private */ public draftRound: number = 1;
-  /**
-   * When drafting before the first generation, iteration 1 is the first 5 cards,
-   * iteration 2 is the next 5 cards, and iteration 3 is for Prelude, if necessary.
-   **/
-  /* private */ public initialDraftIteration: number = 1;
+  public draftRound: number = 1;
+  public initialDraftIteration: number = 1;
 
   // Milestones and awards
   public claimedMilestones: Array<ClaimedMilestone> = [];
@@ -379,7 +370,7 @@ export class Game implements IGame, Logger {
     // Initial Draft
     if (this.gameOptions.initialDraftVariant) {
       this.phase = Phase.INITIALDRAFTING;
-      this.runDraftRound(newInitialDraft(this));
+      newInitialDraft(this).startRound();
     } else {
       this.gotoInitialResearchPhase();
     }
@@ -631,11 +622,6 @@ export class Game implements IGame, Logger {
     this.first = newFirstPlayer;
   }
 
-  /* private */ public runDraftRound(draft: Draft): void {
-    this.save();
-    draft.startRound();
-  }
-
   public gotoInitialResearchPhase(): void {
     this.phase = Phase.RESEARCH;
 
@@ -664,7 +650,7 @@ export class Game implements IGame, Logger {
   private gotoDraftPhase(): void {
     this.phase = Phase.DRAFTING;
     this.draftRound = 1;
-    this.runDraftRound(newStandardDraft(this));
+    newStandardDraft(this).startRound();
   }
 
   public gameIsOver(): boolean {
@@ -1584,15 +1570,15 @@ export class Game implements IGame, Logger {
     if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {
       if (game.phase === Phase.INITIALDRAFTING) {
         if (game.initialDraftIteration === 3) {
-          game.runDraftRound(newPreludeDraft(game));
+          newPreludeDraft(game).startRound();
         } else {
-          game.runDraftRound(newInitialDraft(game));
+          newInitialDraft(game).startRound();
         }
       } else {
         game.gotoInitialResearchPhase();
       }
     } else if (game.phase === Phase.DRAFTING) {
-      game.runDraftRound(newStandardDraft(game));
+      newStandardDraft(game).startRound();
     } else if (game.phase === Phase.RESEARCH) {
       game.gotoResearchPhase();
     } else if (game.phase === Phase.END) {

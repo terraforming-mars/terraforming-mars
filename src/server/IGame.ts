@@ -33,12 +33,12 @@ import {Tile} from './Tile';
 import {Logger} from './logs/Logger';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {UnderworldData} from './underworld/UnderworldData';
-import {Draft} from './Draft';
 
 export interface Score {
   corporation: String;
   playerScore: number;
 }
+
 export interface IGame extends Logger {
   readonly id: GameId;
   readonly gameOptions: Readonly<GameOptions>;
@@ -193,10 +193,21 @@ export interface IGame extends Logger {
   expectedPurgeTimeMs(): number;
   logIllegalState(description: string, metadata: {}): void;
 
-  // Temporarily exposed while drafting is being refactored.
+  /**
+   * Drafting before the first generation goes through 3 iterations:
+   * 1. first 5 project cards,
+   * 2. second 5 project cards
+   * 3. [optional] preludes.
+   *
+   * This works, but makes it hard to add a CEO draft.
+   */
   initialDraftIteration: number;
+  /**
+   * When drafting n cards, this counts the each step in the draft.
+   * When players get all the cards, this is 1. After everybody drafts a card,
+   * this is round 2.
+   */
   draftRound: number;
-  runDraftRound(draft: Draft): void;
   getPlayerAfter(player: IPlayer): IPlayer;
   getPlayerBefore(player: IPlayer): IPlayer;
 }

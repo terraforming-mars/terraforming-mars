@@ -30,6 +30,7 @@ export abstract class Draft {
   protected abstract endRound(): void;
 
   public startRound() {
+    this.game.save();
     for (const player of this.game.getPlayers()) {
       player.needsToDraft = true;
       const draftCardsFrom = this.draftingFrom(player);
@@ -89,7 +90,7 @@ export abstract class Draft {
     // If more than 1 card are to be passed to the next player, that means we're still drafting
     if (player.undraftedCards.length > 1) {
       this.game.draftRound++;
-      this.game.runDraftRound(this);
+      this.startRound();
       return;
     }
 
@@ -216,7 +217,7 @@ class InitialDraft extends Draft {
 
     switch (this.game.initialDraftIteration) {
     case 2:
-      this.game.runDraftRound(this);
+      this.startRound();
       break;
     case 3:
       for (const player of this.game.getPlayers()) {
@@ -224,7 +225,8 @@ class InitialDraft extends Draft {
         player.draftedCards = [];
       }
       if (this.game.gameOptions.preludeExtension && this.game.gameOptions.preludeDraftVariant) {
-        this.game.runDraftRound(newPreludeDraft(this.game));
+        const newDraft = newPreludeDraft(this.game);
+        newDraft.startRound();
       } else {
         this.game.gotoInitialResearchPhase();
       }

@@ -1,7 +1,6 @@
 import {PlayerId} from '../../common/Types';
 import {Tag} from '../../common/cards/Tag';
 import {SerializedPathfindersData} from './SerializedPathfindersData';
-import {AlliedParty} from '../../common/models/PlayerModel';
 
 /**
  * The possible tags with planetary tracks.
@@ -19,11 +18,6 @@ export function isPlanetaryTag(tag: Tag): tag is PlanetaryTag {
 export type PathfindersData = Record<PlanetaryTag, number> & {
   vps: Array<{id: PlayerId, tag: PlanetaryTag, points: number}>;
 }
-
-export type PathfindersPlayerData = {
-  alliedParty?: AlliedParty
-}
-
 
 export namespace PathfindersData {
   export function serialize(pathfindersData: PathfindersData | undefined): SerializedPathfindersData | undefined {

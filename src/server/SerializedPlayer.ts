@@ -4,7 +4,7 @@ import {Color} from '../common/Color';
 import {SerializedCard} from './SerializedCard';
 import {SerializedTimer} from '../common/SerializedTimer';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
-import {PathfindersPlayerData} from './pathfinders/PathfindersData';
+import {AlliedParty} from '../common/models/PlayerModel';
 
 interface DeprecatedFields {
 }
@@ -13,6 +13,7 @@ export interface SerializedPlayer extends DeprecatedFields{
     actionsTakenThisGame: number;
     actionsTakenThisRound: number;
     actionsThisGeneration: Array<CardName>;
+    alliedParty: AlliedParty | undefined;
     beginner: boolean;
     canUseCorruptionAsMegacredits: boolean;
     canUseHeatAsMegaCredits: boolean;
@@ -47,7 +48,6 @@ export interface SerializedPlayer extends DeprecatedFields{
     name: string;
     needsToDraft: boolean | undefined;
     oceanBonus: number;
-    pathfindersData: PathfindersPlayerData;
     pendingInitialActions: Array<CardName> | undefined;
     pickedCorporationCard: CardName | undefined;
     plantProduction: number;

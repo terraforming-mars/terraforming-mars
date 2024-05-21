@@ -76,7 +76,6 @@ import {UnderworldPlayerData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {Counter} from './behavior/Counter';
 import {TRSource} from '../common/cards/TRSource';
-import {PathfindersPlayerData} from './pathfinders/PathfindersData';
 import {IParty} from './turmoil/parties/IParty';
 import {AlliedParty} from '../common/models/PlayerModel';
 
@@ -91,6 +90,7 @@ export class Player implements IPlayer {
   public colonies: Colonies;
   public readonly production: Production;
   public readonly stock: Stock;
+  private _alliedParty: AlliedParty | undefined;
 
   // Corporate identity
   public corporations: Array<ICorporationCard> = [];
@@ -126,7 +126,7 @@ export class Player implements IPlayer {
   }
 
   public get alliedParty(): AlliedParty | undefined {
-    return this.pathfindersData?.alliedParty;
+    return this._alliedParty;
   }
 
   public set megaCredits(megacredits: number) {
@@ -154,7 +154,7 @@ export class Player implements IPlayer {
   }
 
   public setAlliedParty(p: IParty) {
-    this.pathfindersData.alliedParty = {
+    this._alliedParty = {
       partyName: p.name,
       agenda: {
         bonusId: p.bonuses[0].id,
@@ -222,9 +222,6 @@ export class Player implements IPlayer {
 
   // Underworld
   public underworldData: UnderworldPlayerData = UnderworldExpansion.initializePlayer();
-
-  // Pathfinders
-  pathfindersData: PathfindersPlayerData = {};
 
   // The number of actions a player can take this round.
   // It's almost always 2, but certain cards can change this value (Mars Maths, Tool with the First Order)
@@ -1944,7 +1941,7 @@ export class Player implements IPlayer {
       victoryPointsByGeneration: this.victoryPointsByGeneration,
       totalDelegatesPlaced: this.totalDelegatesPlaced,
       underworldData: this.underworldData,
-      pathfindersData: this.pathfindersData,
+      alliedParty: this._alliedParty,
     };
 
     if (this.lastCardPlayed !== undefined) {
@@ -2043,8 +2040,8 @@ export class Player implements IPlayer {
     if (d.underworldData !== undefined) {
       player.underworldData = d.underworldData;
     }
-    if (d.pathfindersData !== undefined) {
-      player.pathfindersData = d.pathfindersData;
+    if (d.alliedParty !== undefined) {
+      player._alliedParty = d.alliedParty;
     }
 
     return player;

@@ -48,7 +48,7 @@ describe('MarsFrontierAlliance', function() {
     player.process({type: 'or', index: 0, response: {type: 'option'}});
     expect(game.getGeneration()).to.eq(11);
     expect(game.turmoil!.rulingParty).to.eq(reds);
-    expect(player.pathfindersData.alliedParty?.partyName).to.eq(unity.name);
+    expect(player.alliedParty?.partyName).to.eq(unity.name);
   });
 
   it('A card having ruling party as requirement should be playable', () => {

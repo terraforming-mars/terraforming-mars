@@ -24,6 +24,7 @@ export interface ViewModel {
 // 'half': Half resources are protected when targeted. Applies to Botanical Experience.
 export type Protection = 'off' | 'on' | 'half';
 
+/** When player has Mars Frontier Alliance, this is their political party alliance. */
 export type AlliedParty = {
   partyName: PartyName,
   agenda: Agenda,

@@ -370,7 +370,7 @@ export class Game implements IGame, Logger {
     // Initial Draft
     if (this.gameOptions.initialDraftVariant) {
       this.phase = Phase.INITIALDRAFTING;
-      newInitialDraft(this).startRound();
+      newInitialDraft(this).startDraft();
     } else {
       this.gotoInitialResearchPhase();
     }
@@ -650,7 +650,7 @@ export class Game implements IGame, Logger {
   private gotoDraftPhase(): void {
     this.phase = Phase.DRAFTING;
     this.draftRound = 1;
-    newStandardDraft(this).startRound();
+    newStandardDraft(this).startDraft();
   }
 
   public gameIsOver(): boolean {
@@ -1570,15 +1570,15 @@ export class Game implements IGame, Logger {
     if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {
       if (game.phase === Phase.INITIALDRAFTING) {
         if (game.initialDraftIteration === 3) {
-          newPreludeDraft(game).startRound();
+          newPreludeDraft(game).restoreDraft();
         } else {
-          newInitialDraft(game).startRound();
+          newInitialDraft(game).restoreDraft();
         }
       } else {
         game.gotoInitialResearchPhase();
       }
     } else if (game.phase === Phase.DRAFTING) {
-      newStandardDraft(game).startRound();
+      newStandardDraft(game).restoreDraft();
     } else if (game.phase === Phase.RESEARCH) {
       game.gotoResearchPhase();
     } else if (game.phase === Phase.END) {

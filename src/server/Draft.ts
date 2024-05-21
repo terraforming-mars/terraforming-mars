@@ -29,7 +29,7 @@ export abstract class Draft {
   protected abstract draftDirection(): 'before' | 'after';
   protected abstract endRound(): void;
 
-  public startRound() {
+  public startDraft() {
     this.game.save();
     for (const player of this.game.getPlayers()) {
       player.needsToDraft = true;
@@ -37,6 +37,10 @@ export abstract class Draft {
       const cards = this.game.draftRound === 1 ? this.draw(player) : copyAndEmpty(draftCardsFrom.draftHand);
       this.askPlayerToDraft(player, cards);
     }
+  }
+
+  public restoreDraft() {
+    this.startDraft();
   }
 
   private draftingFrom(player: IPlayer): IPlayer {
@@ -90,7 +94,7 @@ export abstract class Draft {
     // If more than 1 card are to be passed to the next player, that means we're still drafting
     if (player.draftHand.length > 1) {
       this.game.draftRound++;
-      this.startRound();
+      this.startDraft();
       return;
     }
 
@@ -217,7 +221,7 @@ class InitialDraft extends Draft {
 
     switch (this.game.initialDraftIteration) {
     case 2:
-      this.startRound();
+      this.startDraft();
       break;
     case 3:
       for (const player of this.game.getPlayers()) {
@@ -226,7 +230,7 @@ class InitialDraft extends Draft {
       }
       if (this.game.gameOptions.preludeExtension && this.game.gameOptions.preludeDraftVariant) {
         const newDraft = newPreludeDraft(this.game);
-        newDraft.startRound();
+        newDraft.startDraft();
       } else {
         this.game.gotoInitialResearchPhase();
       }

@@ -15,6 +15,7 @@ export interface Policy {
   onCardPlayed?(player: IPlayer, card: IProjectCard): void;
   action?(player: IPlayer): PlayerInput | undefined;
   canAct?(player: IPlayer): boolean;
+  // Optional player parameter is used to apply the polici to a specific player only (corp MFA)
   onPolicyStart?(game: IGame, player?: IPlayer): void;
   onPolicyEnd?(game: IGame, player?: IPlayer): void;
 }

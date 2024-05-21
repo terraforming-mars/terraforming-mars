@@ -73,7 +73,7 @@ export const ASIMOV_AWARD_BONUS = 2;
 // Underworld
 export const CORRUPTION_VALUE = 10;
 
-export const ALL_LANGUAGES = ['en', 'de', 'fr', 'ru', 'cn', 'pl', 'es', 'br', 'it', 'ko', 'nl', 'hu', 'jp', 'bg', 'nb'] as const;
+export const ALL_LANGUAGES = ['en', 'de', 'fr', 'ru', 'cn', 'pl', 'es', 'br', 'it', 'ko', 'nl', 'hu', 'jp', 'bg', 'nb', 'ua'] as const;
 
 export const LANGUAGES: Record<typeof ALL_LANGUAGES[number], string> = {
   en: 'English',
@@ -91,6 +91,7 @@ export const LANGUAGES: Record<typeof ALL_LANGUAGES[number], string> = {
   jp: '日本語',
   bg: 'Български',
   nb: 'Norsk',
+  ua: 'Українська',
 };
 
 export const APP_NAME = 'Terraforming Mars';

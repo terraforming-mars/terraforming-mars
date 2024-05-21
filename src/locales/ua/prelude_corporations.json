@@ -1,0 +1,62 @@
+{
+  "SPIRE": "SPIRE",
+  "Spire": "Spire",
+  "Standard Project": "Стандартний проект",
+  "You start with 44 M€. As your first action, draw 4 cards, then discard 3 cards from your hand.": "Ви починаєте з 44 M€. Як вашу першу дію, витягніть 4 картки, потім відкиньте 3 картки з вашої руки.",
+  "Effect: When you play a card with at least 2 tags. including this, add a science resource here.": "Ефект: Коли ви граєте карту з принаймні 2 символами, включаючи цю, додайте тут науковий ресурс.",
+  "Effect: When you use a standard project, science resources here may be spent as 2 M€ each.": "Ефект: Коли ви використовуєте стандартний проект, наукові ресурси тут можуть бути витрачені по 2 M€ кожен.",
+
+  "SAGITTA FRONTIER SERVICES": "SAGITTA FRONTIER SERVICES",
+  "Sagitta Frontier Services": "Sagitta Frontier Services",
+  "You start with 28 M€. Increase energy production 1 step and M€ production 2 steps. Draw a card with no tags.": "Ви починаєте з 28 M€. Збільште виробництво енергії на 1 крок і виробництво M€ на 2 кроки. Витягніть картку без символів.",
+  "Effect: When you play a card with no tags, including this, gain 4 M€.": "Ефект: Коли ви граєте карту без символів, включаючи цю, отримайте 4 M€.",
+  "Effect: When you play a card with EXACTLY 1 TAG, gain 1 M€.": "Ефект: Коли ви граєте карту з ТОЧНО 1 символом, отримайте 1 M€.",
+
+  "ECOTEC": "ECOTEC",
+  "Ecotec": "Ecotec",
+  "You start with 42 M€. Increase your plant production 1 step.": "Ви починаєте з 42 M€. Збільште виробництво рослин на 1 крок.",
+  "Effect: When you play a microbe, plant, or animal tag, gain 1 plant or add a microbe to ANY card.": "Ефект: Коли ви граєте карту з мікробом, рослиною або твариною, отримайте 1 рослину або додайте мікроба до БУДЬ-ЯКОЇ карти.",
+
+  "PALLADIN SHIPPING": "PALLADIN SHIPPING",
+  "Palladin Shipping": "Palladin Shipping",
+  "You start with 36 M€ and 5 titanium.": "Ви починаєте з 36 M€ і 5 титану.",
+  "Effect: When you play a space event, gain 1 titanium.": "Ефект: Коли ви граєте космічну подію, отримайте 1 титан.",
+  "Action: Spend 2 titanium to raise the temperature 1 step.": "Дія: Витратити 2 титану, щоб підняти температуру на 1 крок.",
+
+  "NIGRAL ENTERPRISES": "NIGRAL ENTERPRISES",
+  "Nigral Enterprises": "Nigral Enterprises",
+  "You start with 33 M€. Raise your energy, plant, and steel production 1 step each.": "Ви починаєте з 33 M€. Підвищте виробництво енергії, рослин і сталі на 1 крок кожне.",
+  "Effect: AWARDS and MILESTONES ALWAYS COST 0 M€ FOR YOU.": "Ефект: ВИГРАШІ та ВІДМІТНІ ПОДІЇ ЗАВЖДИ КОШТУЮТЬ 0 M€ ДЛЯ ВАС.",
+
+  "Cheung Shing": "Cheung Shing",
+  "■■MARS■■": "■■MARS■■",
+  "Cheung Sing Mars": "Cheung Shing Mars",
+  "Cheung Shing Mars": "Cheung Shing Mars",
+  "Cheung Shing MARS": "Cheung Shing MARS",
+  "You start with 3 M€ production and 44 M€.": "Ви починаєте з виробництва 3 M€ та 44 M€.",
+  "Effect: When you play a building tag, you pay 2 M€ less for it.": "Ефект: Коли ви граєте карту з символом будівлі, ви платите на 2 M€ менше за неї.",
+
+  "POINT LUNA": "POINT LUNA",
+  "Point Luna": "Point Luna",
+  "You start with 1 titanium production and 38 M€.": "Ви починаєте з виробництва 1 титану та 38 M€.",
+  "Effect: When you play an Earth tag, including this, draw a card.": "Ефект: Коли ви граєте карту з символом Землі, включаючи цю, витягніть карту.",
+
+  "ROBINSON": "ROBINSON",
+  "INDUSTRIES": "INDUSTRIES",
+  "Robinson Industries": "Robinson Industries",
+  "You start with 47 M€.": "Ви починаєте з 47 M€.",
+  "Action: Spend 4 M€ to increase (one of) your LOWEST production 1 step.": "Дія: Витратити 4 M€, щоб підвищити (одне з) вашого НАЙНИЖЧОГО виробництва на 1 крок.",
+
+  "VALLEY": "VALLEY",
+  "TRUST": "TRUST",
+  "Valley Trust": "Valley Trust",
+  "You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.": "Ви починаєте з 37 M€. Як вашу першу дію, витягніть 3 картки Прелюдії та зіграйте одну з них. Відкиньте інші дві.",
+  "Effect: When you play a science tag, you pay 2M€ less for it.": "Ефект: Коли ви граєте карту з символом науки, ви платите на 2M€ менше за неї.",
+
+  "VIT": "VIT",
+  "O": "O",
+  "R": "R",
+  "Vitor": "Vitor",
+  "You start with 45 M€. As your first action, fund an award for free.": "Ви починаєте з 45 M€. Як вашу першу дію, фінансуйте нагороду безкоштовно.",
+  "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.": "Ефект: Коли ви граєте карту з символом НЕГАТИВНОГО VP, включаючи цю, отримайте 3 M€."
+}

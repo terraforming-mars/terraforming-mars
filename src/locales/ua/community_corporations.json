@@ -1,0 +1,32 @@
+{
+  "Agricola Inc": "Agricola Inc",
+  "You start with 1 plant production, 1 M€ production, 1 heat production and 40 M€.": "Ви починаєте з виробництва 1 рослини, виробництва 1 M€, виробництва 1 тепла та 40 M€.",
+  "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "Ефект: В кінці гри отримуйте -2 / 0 / 1 / 2 ПО ЗА ТИП ТЕГУ за 0 / 1-2 / 3-4 / 5+ тегів.",
+
+  "Project Workshop": "Проектна майстерня",
+  "You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.": "Ви починаєте з 39 M€, 1 сталі та 1 титану. Як вашу першу дію, витягніть синю карту.",
+  "Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.": "Дія: Переверніть та відкиньте зіграну синю карту, щоб перетворити будь-які ПО на неї в РТ та витягнути 2 карти, або витратити 3 M€, щоб витягнути синю карту.",
+
+  "Incite": "Підбурювати",
+  "You start with 32 M€. As your first action, place two delegates in one party.": "Ви починаєте з 32 M€. Як вашу першу дію, розмістіть двох делегатів в одній партії.",
+  "Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.": "Ефект: У вас є +1 вплив. Коли ви відправляєте делегата за допомогою лобіювання, ви платите на 2 M€ менше.",
+
+  "Playwrights": "Драматурги",
+  "You start with 38 M€ and 1 energy production.": "Ви починаєте з 38 M€ та виробництва 1 енергії.",
+  "Action: Replay a played event from any player (INCLUDING events that place special tiles) by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.": "Дія: Повторіть зіграну подію від будь-якого гравця (ВКЛЮЧАЮЧИ події, які розміщують спеціальні плитки), заплативши її вартість ТІЛЬКИ в M€ (застосовуються знижки та знижки), а потім ВИДАЛИТИ ЇЇ З ГРИ.",
+
+  "Midas": "Мідас",
+  "You start with 120 M€. Lower your TR 7 steps.": "Ви починаєте з 120 M€. Знизьте свій РТ на 7 кроків.",
+
+  "Curosity II": "Цікавість II",
+  "You start with 40 M€ and 2 steel production.": "Ви починаєте з 40 M€ та виробництва 2 сталі.",
+  "Effect: When you place a tile on an area that has a RESOURCE placement bonus, or on top of another tile, you may pay 2 M€ to draw a card.": "Ефект: Коли ви розміщуєте плитку на області, яка має бонус за розміщення РЕСУРСУ або на верхній частині іншої плитки, ви можете заплатити 2 M€, щоб витягнути карту.",
+
+  "Junk Ventures": "Шрот-венчури",
+  "You start with 43 M€. As your first action, discard the top 3 cards of the deck.": "Ви починаєте з 43 M€. Як вашу першу дію, відкиньте верхні 3 карти з колоди.",
+  "ACTION: SHUFFLE THE DISCARD PILE, THEN DRAW 3 CARDS FROM IT. KEEP 1 AND DISCARD THE OTHER 2.": "ДІЯ: ПЕРЕМІШАЙТЕ ВІДКИДНУ КУПУ, ПОТІМ ВИТЯГНІТЬ З НЕЇ 3 КАРТИ. ЗБЕРЕЖІТЬ 1 І ВІДКИНЬТЕ ІНШІ 2.",
+
+  "UNITED NATIONS MISSION ONE": "МІСІЯ ОБ'ЄДНАНИХ НАЦІЙ ОДИН",
+  "You start with 39 M€. Increase your TR 1 step.": "Ви починаєте з 39 M€. Збільште свій РТ на 1 крок.",
+  "Effect: When any player takes an action or plays a card that increases TR, including this, gain 1 M€ for each step.": "Ефект: Коли будь-який гравець виконує дію або грає карту, яка збільшує РТ, включаючи цю, отримуйте 1 M€ за кожен крок."
+}

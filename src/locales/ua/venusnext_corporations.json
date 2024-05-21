@@ -1,0 +1,30 @@
+{
+  "APHRODITE": "АФРОДИТА",
+  "Aphrodite": "Афродита",
+  "You start with 1 plant production and 47 M€.": "Ви починаєте з виробництва 1 рослини та 47 млн євро.",
+  "Effect: Whenever Venus is terraformed 1 step, you gain 2 M€.": "Ефект: Кожного разу, коли Венера терраформується на 1 крок, ви отримуєте 2 млн євро.",
+
+  "CEL": "CEL",
+  "ES": "ES",
+  "TIC": "TIC",
+  "Celestic": "Celestic",
+  "You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.": "Ви починаєте з 42 млн євро. Як вашу першу дію, розкрийте карти з колоди, поки не розкриєте 2 карти з плаваючим значком на них. Візьміть їх у руку та відкиньте решту.",
+  "Action: Add a floater to ANY card. 1 VP per 3 floaters on this card.": "Дія: Додайте плаваючий значок до БУДЬ-ЯКОЇ карти. 1 ПО за кожні 3 плаваючих значки на цій карті.",
+
+  "MA": "MA",
+  "NUTECH": "NUTECH",
+  "Manutech": "Manutech",
+  "You start with 1 steel production, and 35 M€.": "Ви починаєте з виробництва 1 сталі та 35 млн євро.",
+  "Effect: For each step you increase the production of a resource, including this, you also gain that resource.": "Ефект: За кожен крок, на який ви збільшуєте виробництво ресурсу, включаючи цей, ви також отримуєте цей ресурс.",
+
+  "MORNING STAR INC.": "MORNING STAR INC.",
+  "Morning Star Inc.": "Morning Star Inc.",
+  "You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.": "Ви починаєте з 50 млн євро. Як вашу першу дію, розкрийте карти з колоди, поки не розкриєте 3 карти з позначкою Венера. Візьміть їх у руку та відкиньте решту.",
+  "Effect: Your Venus requirements are +/- 2 steps, your choice in each case.": "Ефект: Ваші вимоги Венери +/- 2 кроки, на ваш вибір у кожному випадку.",
+  "Draw 3 cards with a Venus tag": "Витягніть 3 карти з позначкою Венера",
+
+  "VIRON": "VIRON",
+  "Viron": "Viron",
+  "You start with 48 M€.": "Ви починаєте з 48 млн євро.",
+  "Action: Use a blue card action that has already been used this generation.": "Дія: Використовуйте дію синьої карти, яка вже була використана в цьому поколінні."
+}

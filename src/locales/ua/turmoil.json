@@ -1,0 +1,40 @@
+{
+  "Turmoil": "Турбулентність",
+  "Send a delegate in an area (from lobby)": "Відправити делегата в область (з фойє)",
+  "Send a delegate in an area (5 M€)": "Відправити делегата в область (5 M€)",
+  "Send a delegate in an area (3 M€)": "Відправити делегата в область (3 M€)",
+  "Policies": "Політики",
+  "No ruling Policy": "Немає правлячої політики",
+
+  "Mars First": "Марс Першим",
+  "Scientists": "Вчені",
+  "Unity": "Єдність",
+  "Kelvinists": "Кельвіністи",
+  "Reds": "Червоні",
+  "Greens": "Зелені",
+
+  "mars first": "Марс Першим",
+  "scientists": "Вчені",
+  "unity": "Єдність",
+  "kelvinists": "Кельвіністи",
+  "reds": "Червоні",
+  "greens": "Зелені",
+
+  "Chairman": "Голова",
+  "Party leader": "Лідер партії",
+  "2 Party leaders": "2 лідери партій",
+
+  "Mars First - (All players receive 1 M€ for each building tag they have.)": "Марс Першим - (Всі гравці отримують 1 M€ за кожен символ будівлі, який вони мають.)",
+  "Scientists - (All players receive 1 M€ for each science tag they have.)": "Вчені - (Всі гравці отримують 1 M€ за кожен символ науки, який вони мають.)",
+  "Unity - (All players receive 1 M€ for each Venus tag, Earth tag, and Jovian tag they have.)": "Єдність - (Всі гравці отримують 1 M€ за кожен символ Венери, Землі та Юпітера, який вони мають.)",
+  "Kelvinists - (All players receive 1 M€ for each heat production they have.)": "Кельвіністи - (Всі гравці отримують 1 M€ за кожен символ виробництва тепла, який вони мають.)",
+  "Reds - (The player with the lowest TR gains 1 TR. Ties are friendly.)": "Червоні - (Гравець з найнижчим РТ отримує 1 РТ. Рівні результати є дружніми.)",
+  "Greens - (All players receive 1 M€ for each Plant tag, Microbe tag, and Animal tag they have.)": "Зелені - (Всі гравці отримують 1 M€ за кожен символ рослин, мікробів та тварин, який вони мають.)",
+
+  "Mars First (Focused on Martian development and independence.)": "Марс Першим (Сконцентрований на розвитку та незалежності Марсу.)",
+  "Scientists (Tech is the door to the future, and Scientists will do anything to open it.)": "Вчені (Технологія - це двері в майбутнє, і вчені зроблять все, щоб їх відкрити.)",
+  "Unity (Wants to see humanity prosper in the whole solar system.)": "Єдність (Хоче бачити процвітання людства в усій Сонячній системі.)",
+  "Greens (Want to see a new Earth as soon as possible.)": "Зелені (Хочуть побачити нову Землю якомога швидше.)",
+  "Reds (Wishes to preserve the red planet.)": "Червоні (Бажають зберегти червону планету.)",
+  "Kelvinists (Pushes for rapid terraforming, usually employing a heat-first strategy.)": "Кельвіністи (Намагаються прискорити терраформування, зазвичай використовуючи стратегію з пріоритетом на нагрівання.)"
+}

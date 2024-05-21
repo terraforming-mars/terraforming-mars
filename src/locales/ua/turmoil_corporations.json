@@ -1,0 +1,28 @@
+{
+  "LAKEFRONT": "МОРСЬКИЙ БЕРЕГ",
+  "RESORTS": "КУРОРТИ",
+  "Lakefront Resorts": "Морський берег курорти",
+  "You start with 54 M€.": "Ви починаєте з 54 M€.",
+  "Effect: When any ocean tile is placed, increase your M€ production 1 step. Your bonus for placing adjacent to oceans is 3M€ instead of 2 M€.": "Ефект: Коли будь-яка океанська плитка розміщується, збільште вашу виробництво M€ на 1 крок. Ваш бонус за розміщення поруч з океанами становить 3M€ замість 2 M€.",
+
+  "TERRALABS": "ТЕРРАЛАБС",
+  "RESEARCH": "ДОСЛІДЖЕННЯ",
+  "Terralabs Research": "Терралабс дослідження",
+  "You start with 14 M€. Lower your TR 1 step.": "Ви починаєте з 14 M€. Знизьте ваш TR на 1 крок.",
+  "Effect: Buying cards to hand costs 1 M€.": "Ефект: Покупка карт на руку коштує 1 M€.",
+
+  "UTOPIA": "УТОПІЯ",
+  "INVEST": "ІНВЕСТУВАТИ",
+  "Utopia Invest": "Утопія інвестиції",
+  "You start with 40 M€. Increase your steel and titanium production 1 step each.": "Ви починаєте з 40 M€. Збільште ваше виробництво сталі та титану на 1 крок кожне.",
+  "Action: Decrease any production to gain 4 resources of that kind.": "Дія: Зменште будь-яке виробництво, щоб отримати 4 ресурси цього виду.",
+
+  "PRISTAR": "ПРІСТАР",
+  "Pristar": "Пристар",
+  "You start with 53 M€. Decrease your TR 2 steps. 1 VP per preservation resource here.": "Ви починаєте з 53 M€. Знизьте ваш TR на 2 кроки. 1 VP за кожен ресурс збереження тут.",
+  "Effect: During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 M€.": "Ефект: Під час фази виробництва, якщо ви до цього моменту не отримали TR, додайте один ресурс збереження тут і отримайте 6 M€.",
+
+  "Septem Tribus": "Septem Tribus",
+  "You start with 36 M€. When you perform an action, the wild tag counts as any tag of your choice.": "Ви починаєте з 36 M€. Коли ви виконуєте дію, дикий тег вважається будь-яким тегом за вашим вибором.",
+  "Action: Gain 2 M€ for each party where you have at least 1 delegate.": "Дія: Отримайте 2 M€ за кожну партію, в якій у вас є принаймні 1 делегат."
+}

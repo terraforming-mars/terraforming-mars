@@ -1,0 +1,90 @@
+{
+  "Adhai High Orbit Constructions": "Адхай Високоорбітальні Конструкції",
+  "(Effect: Whenever you play a card with a space tag BUT NO PLANETARY TAG (including this) add 1 orbital on this card.)": "(Ефект: Кожного разу, коли ви граєте карту з космічним тегом, АЛЕ БЕЗ ПЛАНЕТНОГО ТЕГУ (включаючи цю карту), додайте 1 орбіталь на цю карту.)",
+  "(Effect: For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1M€ less.)": "(Ефект: За кожні 2 орбіталі на цій карті, карти з космічним тегом, але без планетного тегу або СТАНДАРТНИЙ ПРОЕКТ КОЛОНІЇ або ТОРГОВЕЛЬНА ДІЯ коштують на 1M€ менше.)",
+  "(You start with 43 M€.)": "(Ви починаєте з 43 M€.)",
+
+  "Ambient": "Амбієнт",
+  "(Effect: When you play a card with a Venus tag (including this) increase your heat production 1 step.)": "(Ефект: Коли ви граєте карту з тегом Венера (включаючи цю карту), збільшуйте вашу виробництво тепла на 1 крок.)",
+  "(Action: When temperature is maxed, spend 8 heat gain 1 TR. You may repeat this action like a standard project.)": "(Дія: Коли температура досягає максимуму, витратьте 8 тепла, отримайте 1 РТ. Ви можете повторити цю дію, як стандартний проект.)",
+  "(You start with 38 M€. As your first action, raise the Venus scale 2 steps.)": "(Ви починаєте з 38 M€. Як ваша перша дія, підніміть шкалу Венера на 2 кроки.)",
+
+  "AURORAI": "AURORAI",
+  "(Effect: Whenever you increase your terraform rating, add 1 data per step to ANY card.)": "(Ефект: Кожного разу, коли ви збільшуєте ваш рейтинг терраформування, додайте 1 дані за кожен крок до БУДЬ-ЯКОЇ карти.)",
+  "(Effect: You can use data on this card as 3M€ each to pay for standard projects.)": "(Ефект: Ви можете використовувати дані на цій карті як 3M€ кожна, щоб оплатити стандартні проекти.)",
+  "(You start with 33 M€. and 2 data on this card)": "(Ви починаєте з 33 M€. і 2 дані на цій карті.)",
+
+  "Bio-Sol": "Біо-Сол",
+  "(Action: Add 1 microbe to ANY card)": "(Дія: Додайте 1 мікроб до БУДЬ-ЯКОЇ карти.)",
+  "(You start with 42 M€. As your first action, draw 2 cards with a microbe tag.)": "(Ви починаєте з 42 M€. Як ваша перша дія, витягніть 2 карти з тегом мікроба.)",
+
+  "Chimera": "Хімера",
+  "(Effect: When you perform an action, these wild tags count as any tags of your choice. For claiming milestones and funding awards, both symbols count as one. (Other wild tags still do not count toward awards.))": "(Ефект: Коли ви виконуєте дію, ці дикі теги вважаються будь-якими тегами за вашим вибором. Для претендування на досягнення і нагороди за фінансування, обидва символи вважаються одним. (Інші дикі теги все ще не враховуються при нагородах.))",
+  "(You start with 36 M€, 1 steel, and 1 titanium.)": "(Ви починаєте з 36 M€, 1 сталі та 1 титану.)",
+
+  "Collegium Copernicus": "Колегіум Копернікус",
+  "(Effect: When you play a card with a science tag (including this) Add 1 data to ANY card.)": "(Ефект: Коли ви граєте карту з тегом науки (включаючи цю карту), додайте 1 дані до БУДЬ-ЯКОЇ карти.)",
+  "(Action: Spend 3 data from this card to trade.)": "(Дія: Витратити 3 дані з цієї карти для торгівлі.)",
+  "(You start with 33 M€. As your first action, draw 2 cards with a science tag.)": "(Ви починаєте з 33 M€. Як ваша перша дія, витягніть 2 карти з тегом науки.)",
+
+  "Habitat Marte": "Житловий модуль Марс",
+  "(Effect: Mars tags also count as science tags.)": "(Ефект: Теги Марса також вважаються тегами науки.)",
+  "(You start with 40 M€)": "(Ви починаєте з 40 M€.)",
+
+  "Mars Dierct": "Марс Дірект",
+  "(Effect: When you play a Mars tag, you pay 1 M€ less for each Mars tag you have.)": "(Ефект: Коли ви граєте карту з тегом Марса, ви платите на 1 M€ менше за кожен тег Марса, який у вас є.)",
+  "(You start with 52 M€.)": "(Ви починаєте з 52 M€.)",
+
+  "Mars Math": "Марс Математика",
+  "(Effect: At the beginning of the Research phase, you draw 5 cards, but may STILL only buy 4 cards. If you are drafting, keep 2 cards for your first draft.)": "(Ефект: На початку фази Дослідження, ви витягуєте 5 карт, але все ще можете купити лише 4 картки. Якщо ви проводите драфт, залиште 2 картки для вашого першого драфту.)",
+  "(Action: Take another two actions this turn.)": "(Дія: Виконайте ще дві дії в цьому ході.)",
+  "(You start with 40 M€. As your first action, draw 2 cards)": "(Ви починаєте з 40 M€. Як ваша перша дія, витягніть 2 карти.)",
+
+  "Martian Insurance Group": "Марсіанська Страхова Група",
+  "(Effect: Whenever you play an event card, raise your M€ production 1 step.)": "(Ефект: Кожного разу, коли ви граєте карту події, підвищуйте ваше виробництво M€ на 1 крок.)",
+  "(You start with 42 M€ and 1 M€ production.)": "(Ви починаєте з 42 M€ і виробництвом 1 M€.)",
+
+  "MindSet Mars": "Ментальність Марса",
+  "(Action: When you play a card with a building tag, add 1 agenda on this card.)": "(Дія: Коли ви граєте карту з тегом будівлі, додайте 1 порядок на цю карту.)",
+  "(Action: Spend 2 agenda resources to place 1 delegate in any party.)": "(Дія: Витратити 2 ресурси порядку, щоб розмістити 1 делегата в будь-якій партії.)",
+  "(Action: Spend 5 agenda resources to place a city tile on Mars.)": "(Дія: Витратити 5 ресурсів порядку, щоб розмістити міське плитку на Марсі.)",
+  "(You start with 44 M€ and 1 agenda resource to this card.)": "(Ви починаєте з 44 M€ і 1 ресурсом порядку на цій карті.)",
+
+  "GAGARIN MOBILE BASE": "ГАГАРІН МОБІЛЬНА БАЗА",
+  "move": "перемістити",
+  "(Action: Move the Base to ANY nearest empty area where it has not yet been. Collect the bonus.)": "(Дія: Перемістіть Базу в БУДЬ-ЯКУ найближчу порожню область, де вона ще не була. Збережіть бонус.)",
+  "(Effect: When another player places a tile where the Base is, move the Base.)": "(Ефект: Коли інший гравець розміщує плитку там, де знаходиться База, перемістіть Базу.)",
+  "(You start with 42 M€. As your first action, put Gagarin Mobile Base on ANY area on Mars. Collect the bonus.)": "(Ви починаєте з 42 M€. Як ваша перша дія, розмістіть Мобільну Базу Гагаріна в БУДЬ-ЯКІЙ області на Марсі. Збережіть бонус.)",
+
+  "Polaris": "Полярис",
+  "(Effect: When any ocean tile is placed ON MARS, increase your M€ production 1 step. When you place an ocean tile, gain 4M€.)": "(Ефект: Коли будь-яка океанська плитка розміщується НА МАРСІ, збільшуйте ваше виробництво M€ на 1 крок. Коли ви розміщуєте океанську плитку, отримайте 4M€.)",
+  "(You start with 32 M€. As your first action, place an ocean tile.)": "(Ви починаєте з 40 M€. Як ваша перша дія в грі, розмістіть океанську плитку.)",
+
+  "RingCom": "RingCom",
+  "(Effect: When any player plays a card with a Jovian tag (including this) gain 1 titanium.)": "(Ефект: Коли будь-який гравець грає карту з тегом Юпітера (включаючи цю карту), отримайте 1 титан.)",
+  "(You start with 39 M€. and 3 M€ production. As your first action, draw 2 cards with a Jovian tag.)": "(Ви починаєте з 39 M€. і виробництвом 3 M€. Як ваша перша дія, витягніть 2 карти з тегом Юпітера.)",
+
+  "Robin Haulings": "Робін Холінгс",
+  "(Effect: Whenever you play a card with a Venus tag add 1 floater to ANY card.)": "(Ефект: Кожного разу, коли ви граєте карту з тегом Венера, додайте 1 плавунець до БУДЬ-ЯКОЇ карти.)",
+  "(Action: Remove 3 floaters from this card to raise Venus 1 step or raise oxygen 1 step)": "(Дія: Видаліть 3 плавунці з цієї карти, щоб підняти Венера на 1 крок або підняти кисень на 1 крок.)",
+  "(You start with 39 M€.)": "(Ви починаєте з 39 M€.)",
+
+  "Solbank": "Сонячний Банк",
+  "(Effect: Whenever you spend M€ (or steel or titanium) add 1 data to this card.)": "(Ефект: Кожного разу, коли ви витрачаєте M€ (або сталь або титан), додайте 1 дані на цю карту.)",
+  "(Effect: During the production phase convert each data from this card into 1M€ each.)": "(Ефект: Протягом фази виробництва, перетворюйте кожні дані з цієї карти в 1M€ кожна.)",
+  "(You start with 40 M€.)": "(Ви починаєте з 40 M€.)",
+
+  "Soylent Seedling Systems": "Системи Сойлент Сідлінг",
+  "(Effect: When you place a greenery tile, add 1 seed resource to this card.)": "(Ефект: Коли ви розміщуєте плитку зеленого насадження, додайте 1 ресурс насіння на цю карту.)",
+  "(Effect: When paying for a plant card, or the STANDARD GREENERY PROJECT, seeds here may be used as 5 M€ each.)": "(Ефект: При оплаті за карту рослини або СТАНДАРТНИЙ ПРОЕКТ ЗЕЛЕНОГО НАСАДЖЕННЯ, насіння тут може використовуватися як 5 M€ кожне.)",
+  "(You start with 38M€ and 2 seeds on this card.)": "(Ви починаєте з 38 M€ і 2 насіння на цій карті.)",
+
+  "Steelaris": "Стіларіс",
+  "(Effect: When any city or special tile is placed ON MARS, gain 1 steel and 1 plant.)": "(Ефект: Коли будь-яка міська або спеціальна плитка розміщується НА МАРСІ, отримайте 1 сталь і 1 рослину.)",
+  "(You start with 42 M€.)": "(Ви починаєте з 42 M€.)",
+
+  "Odyssey": "Одіссея",
+  "(Effect: Your event cards stay face up, and their tags are in use as if those were automated (green) cards.)": "(Ефект: Ваші карти подій залишаються відкритими, і їх теги використовуються так, ніби це автоматизовані (зелені) карти.)",
+  "(Action: Pay for and play an event card you have already played that has a base cost of 16M€ or less (INCLUDING events that place special tiles,) after which discard that card.)": "(Дія: Оплатіть та зіграйте карту події, яку ви вже грали, і яка має базову вартість 16M€ або менше (ВКЛЮЧАЮЧИ події, які розміщують спеціальні плитки), після чого відкиньте цю карту.)",
+  "(You start with 33 M€.)": "(Ви починаєте з 33 M€.)"
+}

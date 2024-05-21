@@ -174,7 +174,7 @@ export class Player implements IPlayer {
   public ceoCardsInHand: Array<IProjectCard> = [];
   public playedCards: Array<IProjectCard> = [];
   public draftedCards: Array<IProjectCard> = [];
-  public undraftedCards: Array<IProjectCard> = [];
+  public draftHand: Array<IProjectCard> = [];
   public cardCost: number = constants.CARD_COST;
   public needsToDraft?: boolean;
 
@@ -1865,7 +1865,7 @@ export class Player implements IPlayer {
       victoryPointsByGeneration: this.victoryPointsByGeneration,
       totalDelegatesPlaced: this.totalDelegatesPlaced,
       underworldData: this.underworldData,
-      undraftedCards: this.undraftedCards.map((c) => c.name),
+      draftHand: this.draftHand.map((c) => c.name),
     };
 
     if (this.lastCardPlayed !== undefined) {
@@ -1965,7 +1965,7 @@ export class Player implements IPlayer {
       player.underworldData = d.underworldData;
     }
 
-    player.undraftedCards = cardsFromJSON(d.undraftedCards);
+    player.draftHand = cardsFromJSON(d.draftHand);
 
     return player;
   }

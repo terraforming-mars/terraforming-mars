@@ -34,7 +34,7 @@ export abstract class Draft {
     for (const player of this.game.getPlayers()) {
       player.needsToDraft = true;
       const draftCardsFrom = this.draftingFrom(player);
-      const cards = this.game.draftRound === 1 ? this.draw(player) : copyAndEmpty(draftCardsFrom.undraftedCards);
+      const cards = this.game.draftRound === 1 ? this.draw(player) : copyAndEmpty(draftCardsFrom.draftHand);
       this.askPlayerToDraft(player, cards);
     }
   }
@@ -71,7 +71,7 @@ export abstract class Draft {
           for (const card of selected) {
             player.draftedCards.push(card);
             inplaceRemove(cards, card);
-            player.undraftedCards = cards;
+            player.draftHand = cards;
           }
           this.onCardChosen(player);
           return undefined;
@@ -88,7 +88,7 @@ export abstract class Draft {
     }
 
     // If more than 1 card are to be passed to the next player, that means we're still drafting
-    if (player.undraftedCards.length > 1) {
+    if (player.draftHand.length > 1) {
       this.game.draftRound++;
       this.startRound();
       return;
@@ -96,7 +96,7 @@ export abstract class Draft {
 
     // Push last card for each player
     for (const player of this.game.getPlayers()) {
-      player.draftedCards.push(...copyAndEmpty(this.draftingFrom(player).undraftedCards));
+      player.draftedCards.push(...copyAndEmpty(this.draftingFrom(player).draftHand));
       player.needsToDraft = undefined;
     }
 

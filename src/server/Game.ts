@@ -1541,7 +1541,7 @@ export class Game implements IGame, Logger {
         if (player === undefined) {
           throw new Error('Unexpected undefined player when deserializing undrafted cards');
         }
-        player.undraftedCards = cardsFromJSON(cardNames);
+        player.draftHand = cardsFromJSON(cardNames);
       });
     }
 

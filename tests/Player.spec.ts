@@ -271,7 +271,7 @@ describe('Player', function() {
       totalDelegatesPlaced: 0,
       victoryPointsByGeneration: [],
       underworldData: {corruption: 0},
-      undraftedCards: [],
+      draftHand: [],
     };
 
     const newPlayer = Player.deserialize(json);

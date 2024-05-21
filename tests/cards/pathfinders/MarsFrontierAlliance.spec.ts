@@ -77,7 +77,7 @@ describe('MarsFrontierAlliance', function() {
     expect(player.steel).to.equal(1 + steelBonus);
   });
 
-  it('Passive effect from Reds party should be applied', () => {
+  it('Passive effect from Reds party should not be applied', () => {
     game.phase = Phase.ACTION;
     const reds = game.turmoil!.getPartyByName(PartyName.REDS);
     player.setAlliedParty(reds);
@@ -86,9 +86,10 @@ describe('MarsFrontierAlliance', function() {
     addOcean(player);
     runNextAction(game);
     expect(player.getTerraformRating()).to.equal(tr + 1);
-    expect(player.megaCredits).to.equal(0);
+    expect(player.megaCredits).to.equal(3);
+    player.megaCredits = 0;
     addOcean(player);
-    expect(player.getTerraformRating()).to.equal(tr + 1);
+    expect(player.getTerraformRating()).to.equal(tr + 2);
   });
 
   it('Passive effect from Greens party should be applied', () => {

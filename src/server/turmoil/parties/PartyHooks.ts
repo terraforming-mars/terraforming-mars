@@ -38,7 +38,7 @@ export class PartyHooks {
         return false;
       }
 
-      if (policyId === player.alliedParty?.agenda.policyId) return true;
+      if (policyId === player.alliedParty?.agenda.policyId && player.alliedParty?.partyName !== PartyName.REDS) return true;
       const currentPolicyId = PoliticalAgendas.currentAgenda(turmoil).policyId;
       return turmoil.rulingParty.name === partyName && currentPolicyId === policyId;
     }, () => false);

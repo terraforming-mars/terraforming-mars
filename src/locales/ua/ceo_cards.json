@@ -1,0 +1,127 @@
+{
+  "ACTIVATE THE BELOW ABILITY": "АКТИВУЙТЕ НИЖЧЕ ЗАЗНАЧЕНУ ЗДАТНІСТЬ",
+  "CHANGE LEADER": "ЗМІНИТИ ЛІДЕРА",
+  "STEAL": "ВИКРАСТИ",
+  "EACH": "КОЖЕН",
+  "SET ALL": "ВСТАНОВИТИ ВСІ",
+  "SWAP": "ОБМІН",
+  "SELL": "ПРОДАТИ",
+  "GAIN": "ОТРИМАТИ",
+  "ALL": "ВСІ",
+  "MILESTONES": "ВІДМІТКИ",
+  "GAIN THESE RESOURCES": "ОТРИМАТИ ЦІ РЕСУРСИ",
+  "GAIN ALL YOUR COLONY BONUSES TWICE": "ОТРИМАТИ ВСІ БОНУСИ КОЛОНІЙ ДВІЧІ",
+  "REPLACE ALL NEUTRAL": "ЗАМІНИТИ ВСІ НЕЙТРАЛЬНІ",
+
+  "Co-leadership": "Спільне керівництво",
+  "Draw 3 CEO cards and take one to your hand, it will be played on your first turn. Discard the other 2.": "Витягніть 3 картки CEO і візьміть одну на руку, вона буде зіграна у ваш перший хід. Відкиньте інші 2.",
+
+  "Apollo": "Аполлон",
+  "Once per game, gain 3 M€ for each tile on The Moon.": "Один раз за гру отримайте 3 M€ за кожну плитку на Місяці",
+
+  "Asimov": "Азімов",
+  "You have +2 score for all awards. Once per game, draw 10-X awards (min. 1), where X is the current generation number. You may put one into the game and fund it for free.": "У вас +2 бали за всі нагороди. Один раз за гру витягніть 10-X нагород (мін. 1), де X - це поточний номер покоління. Ви можете внести одну в гру і фінансувати її безкоштовно.",
+
+  "Bjorn": "Бьорн",
+  "Once per game, steal X+2 M€ from each player that has more M€ than you, where X is the current generation number.": "Один раз за гру викрадіть X+2 M€ у кожного гравця, у якого більше M€, ніж у вас, де X - це поточний номер покоління.",
+
+  "Caesar": "Цезар",
+  "Once per game, place X hazard tiles where X is the current generation number. Each opponent loses 1 unit of production of their choice, or 2 units if there are 6 or more hazard tiles.": "Один раз за гру розмістіть X плиток небезпеки, де X - це поточний номер покоління. Кожен супротивник втрачає 1 одиницю виробництва за своїм вибором, або 2 одиниці, якщо є 6 або більше плиток небезпеки.",
+
+  "Clarke": "Кларк",
+  "Once per game, increase your plant and heat production 1 step each. Gain plants and heat equal to your production +4.": "Один раз за гру збільште вашу виробництво рослин і тепла на 1 крок кожне. Отримайте рослини і тепло, рівні вашому виробництву +4.",
+
+  "Duncan": "Дункан",
+  "Once per game, gain 7-X VP and 4X M€, where X is the current generation number.": "Один раз за гру отримайте 7-X VP і 4X M€, де X - це поточний номер покоління.",
+
+  "Ender": "Ендер",
+  "Once per game, discard any number of cards up to twice the current generation number to draw that many cards.": "Один раз за гру відкиньте будь-яку кількість карток до двічі поточного номера покоління, щоб витягнути стільки ж карток.",
+
+  "Faraday": "Фарадей",
+  "When you gain a multiple of 5 for any tag type IN PLAY, you may pay 3 M€ to draw a card with that tag. Wild tags do not count for this effect.": "Коли ви отримуєте кратне 5 для будь-якого типу тегів В ГРІ, ви можете заплатити 3 M€, щоб витягнути картку з цим тегом. Дикі теги не враховуються для цього ефекту.",
+
+  "Floyd": "Флойд",
+  "Once per game, play a card from hand for 13 + 2X M€ less, where X is the current generation number.": "Один раз за гру зіграйте картку з руки на 13 + 2X M€ менше, де X - це поточний номер покоління.",
+
+  "Gaia": "Гая",
+  "Once per game, gain the Ares adjacency bonuses of all player-owned tiles on Mars.": "Один раз за гру отримайте бонуси сусідства Ares всіх плиток, що належать гравцям, на Марсі.",
+
+  "Gordon": "Гордон",
+  "Ignore placement restrictions for greenery and city tiles on Mars. Gain 2 M€ when you place a greenery or city tile on Mars.": "Ігноруйте обмеження на розміщення зелених і міських плиток на Марсі. Отримайте 2 M€, коли ви розміщуєте зелену або міську плитку на Марсі.",
+
+  "Greta": "Грета",
+  "When you take an action or play a card that increases your TR THIS GENERATION (max 10 times), gain 4 M€.": "Коли ви виконуєте дію або граєте картку, яка збільшує ваш РТ У ЦЬОМУ ПОКОЛІННІ (максимум 10 разів), отримайте 4 M€.",
+
+  "HAL 9000": "HAL 9000",
+  "Once per game, decrease each of your productions 1 step to gain 4 of that resource.": "Один раз за гру зменште кожне зі своїх виробництв на 1 крок, щоб отримати 4 одиниці цього ресурсу.",
+
+  "Ingrid": "Інгрід",
+  "When you take an action that places a tile on Mars THIS GENERATION, draw a card.": "Коли ви виконуєте дію, яка розміщує плитку на Марсі У ЦЬОМУ ПОКОЛІННІ, витягніть картку.",
+
+  "Jansson": "Янссон",
+  "Once per game, gain all placement bonuses under your tiles on Mars.": "Один раз за гру отримайте всі бонуси розміщення під вашими плитками на Марсі.",
+
+  "Karen": "Карен",
+  "Once per game, draw Prelude cards equal to the current generation number and choose one to play, and discard the rest.": "Один раз за гру витягніть картки Прелюдіїв, рівні поточному номеру покоління, і виберіть одну для гри, а решту відкиньте.",
+
+  "Lowell": "Лоуелл",
+  "Once per game, pay 8 M€ to draw 3 CEO cards and choose one to play. Discard this card.": "Один раз за гру заплатіть 8 M€, щоб витягнути 3 картки CEO і вибрати одну для гри. Відкиньте цю картку.",
+
+  "Maria": "Марія",
+  "Once per game, draw colony tiles equal to the current generation number. Put one into play and build a colony on it for free if possible.": "Один раз за гру витягніть колоніальні плитки, рівні поточному номеру покоління. Поставте одну в гру і, якщо це можливо, побудуйте на ній колонію безкоштовно.",
+
+  "Musk": "Маск",
+  "Once per game, discard any number of Earth cards to draw that many space cards, and gain that many units of titanium, plus 6.": "Один раз за гру відкиньте будь-яку кількість карток Землі, щоб витягнути стільки ж карток космосу і отримати стільки ж одиниць титану, плюс 6.",
+
+  "Naomi": "Наомі",
+  "When you build a colony, gain 2 energy and 3 M€. Once per game, move each colony tile track marker to its highest or lowest value.": "Коли ви будуєте колонію, отримайте 2 одиниці енергії і 3 M€. Один раз за гру перемістіть кожен маркер треку колонійної плитки на його найвище або найнижче значення.",
+
+  "Neil": "Ніл",
+  "Gain 1 M€ when any player plays a Moon tag. Once per game, increase your M€ production by the value of the LOWEST Moon rate.": "Отримайте 1 M€, коли будь-який гравець грає картку з тегом Місяця. Один раз за гру збільште вашу виробництво M€ на величину НАЙНИЖЧОЇ ставки Місяця.",
+
+  "Oscar": "Оскар",
+  "You have +1 influence. Once per game, replace the Chairman with one of your delegates.": "У вас +1 вплив. Один раз за гру замініть Голову одним зі своїх делегатів.",
+
+  "Petra": "Петра",
+  "Once per game, replace all Neutral delegates with your delegates. Gain 3 M€ for each delegate replaced this way. Place 3 Neutral delegates.": "Один раз за гру замініть всіх нейтральних делегатів своїми делегатами. Отримайте 3 M€ за кожного делегата, заміненого таким чином. Розмістіть 3 нейтральних делегата.",
+
+  "Quill": "Квілл",
+  "Once per game, add 2 floaters to each of your cards that collect floaters, then add 2 floaters to ANY card. Gain 1 M€ for every 2 floaters added this way.": "Один раз за гру додайте 2 плаваючих до кожної з ваших карток, які збирають плаваючі, а потім додайте 2 плаваючих до БУДЬ-ЯКОЇ картки. Отримайте 1 M€ за кожні 2 плаваючих, доданих таким чином.",
+
+  "Rogers": "Роджерс",
+  "Ignore global requirements for your Venus cards THIS GENERATION. When you play a Venus tag THIS GENERATION, you pay 3 M€ less for it.": "Ігноруйте глобальні вимоги для ваших карток Венери В ЦЬОМУ ПОКОЛІННІ. Коли ви граєте картку з тегом Венери В ЦЬОМУ ПОКОЛІННІ, ви платите на 3 M€ менше за неї.",
+
+  "Ryu": "Рю",
+  "Once per game, swap up to X+2 units of production between two resources, where X is the current generation number.": "Один раз за гру обмінюйте до X+2 одиниць виробництва між двома ресурсами, де X - це поточний номер покоління.",
+
+  "Shara": "Шара",
+  "Once per game, choose a planet tag. This card counts as having immediately played 2 of that tag. Then gain M€ equal to that tags planety influence track.": "Один раз за гру оберіть тег планети. Ця карта вважається, що ви відразу зіграли 2 таких теги. Потім отримайте M€, рівне впливу планети цього тегу.",
+
+  "Stefan": "Штефан",
+  "Once per game, sell any number of cards from your hand for 3 M€ each.": "Один раз за гру продайте будь-яку кількість карток з руки за 3 M€ кожну.",
+
+  "Tate": "Тейт",
+  "Once per game, name a tag. Reveal cards from the deck until you find 5 cards with that tag. BUY up to 2 cards and discard the rest.": "Один раз за гру назвіть тег. Розкрийте карти з колоди, поки не знайдете 5 карток з цим тегом. КУПІТЬ до 2 карток і відкиньте решту.",
+
+  "Ulrich": "Ульріх",
+  "Once per game, gain 4 M€ for each ocean placed. If all oceans are aleady placed, gain only 15 M€.": "Один раз за гру отримайте 4 M€ за кожен розміщений океан. Якщо всі океани вже розміщені, отримайте лише 15 M€.",
+
+  "Van Allen": "Ван Аллен",
+  "You may claim milestones for free (you must still meet the requirements). When any milestone is claimed, gain 3 M€.": "Ви можете безкоштовно претендувати на віхи (ви все ще повинні відповідати вимогам). Коли будь-яка віха претендується, отримайте 3 M€.",
+
+  "Will": "Вілл",
+  "Once per game, add the following resources to your cards: 2 animals, 2 microbes, 2 floaters, 2 wild.": "Один раз за гру додайте наступні ресурси до ваших карток: 2 тварини, 2 мікроби, 2 плаваючих, 2 дикі.",
+
+  "Xavier": "Ксав'єр",
+  "Once per game, gain 2 wild tags for THIS GENERATION.": "Один раз за гру отримайте 2 дикі теги для ЦЬОГО ПОКОЛІННЯ.",
+  "Effect: AFTER this action has been used, when playing a card with a requirement, you pay 1 M€ less for it.": "Ефект: ПІСЛЯ того, як ця дія була використана, коли граєте картку з вимогою, ви платите на 1 M€ менше за неї.",
+
+  "Xu": "Сю",
+  "Once per game, gain 2 M€ for each Venus tag in play. Gain an additional 8 M€ if you Have the most Venus tags in play.": "Один раз за гру отримайте 2 M€ за кожен тег Венери в грі. Отримайте додатково 8 M€, якщо у вас є найбільше тегів Венери в грі.",
+
+  "Yvonne": "Івонна",
+  "Once per game, gain all your colony bonuses twice.": "Один раз за гру отримайте всі бонуси вашої колонії вдвічі.",
+
+  "Zan": "Зан",
+  "You are immune to Reds' ruling policy. Once per game, place all of your available delegates in Reds. Gain 1 M€ for each delegate placed this way.": "Ви не піддаєтесь політиці правління Червоних. Один раз за гру розмістіть всі свої доступні делегати в Червоних. Отримайте 1 M€ за кожного делегата, розміщеного таким чином."
+}

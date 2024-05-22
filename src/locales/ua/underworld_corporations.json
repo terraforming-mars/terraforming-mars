@@ -1,0 +1,67 @@
+{
+  "AERON GENOMICS": "Aeron Генетика",
+  "Aeron Genomics": "Aeron Генетика",
+  "Effect: After you excavate an underground resource, put an animal on this card.": "Ефект: Після того, як ви розкопаєте підземний ресурс, покладіть тварину на цю карту.",
+  "Action: Spend 1 M€ to move an animal from here to another card.": "Дія: Витратити 1 M€, щоб перемістити тварину звідси на іншу карту.",
+  "You start with 35 M€, 5 steel, and 1 animal resource on this card. 1 VP per 3 animals on this card.": "Ви починаєте з 35 M€, 5 сталі та 1 ресурсу тварини на цій карті. 1 VP за кожні 3 тварини на цій карті.",
+
+  "ANUBIS SECURITIES": "Anubis Цінні папери",
+  "Anubis Securities": "Anubis Цінні папери",
+  "Effect: When any player increases their TR by 1, they gain 2 M€.": "Ефект: Коли будь-який гравець збільшує свій РТ на 1, він отримує 2 M€.",
+  "PAYS": "Платить",
+  "At the end of the production phase, discard all your corruption and gain 6 M€ for each unit discarded. Then, each player must pay you 1 M€ per unit of corruption they have. If no one has any, gain 1 TR instead.": "В кінці фази виробництва ви викидаєте всю свою корупцію і отримуєте 6 M€ за кожну викинуту одиницю. Потім кожен гравець повинен заплатити вам 1 M€ за кожну одиницю корупції, яку вони мають. Якщо ніхто не має корупції, замість цього отримайте 1 РТ.",
+  "You start with 42 M€. As your first action, play a card ignoring global requirements.": "Ви починаєте з 42 M€. Як вашу першу дію, зіграйте карту, ігноруючи глобальні вимоги.",
+
+  "ARBORIST COLLECTIVE": "Арбористичний Колектив",
+  "Arborist Collective": "Арбористичний Колектив",
+  "Effect: After you play an event card with a base cost of 14 or less, put an activist resource on this card.": "Ефект: Після того, як ви зіграєте карту події з базовою вартістю 14 або менше, покладіть активіста на цю карту.",
+  "Action: Spend 2 activists here to increase your plant production 1 step and gain 2 plants.": "Дія: Витратити 2 активістів тут, щоб збільшити вашу виробництво рослин на 1 крок і отримати 2 рослини.",
+  "You start with 36 M€, 3 plants and 1 plant production.": "Ви починаєте з 36 M€, 3 рослин і виробництвом рослин на 1 крок.",
+
+  "DEMETRON LABS": "Demetron Лабораторії",
+  "Demetron Labs": "Demetron Лабораторії",
+  "Placement Bonus": "Бонус за розміщення",
+  "Effect: After you identify 1 or more underground resources in a single action EXCEPT BY EXCAVATING, put 1 data on ANY card": "Ефект: Після того, як ви визначите 1 або більше підземних ресурсів за одну дію, КРІМ ВИКОПУВАННЯ, покладіть 1 дані на БУДЬ-ЯКУ карту.",
+  "Action: Spend 3 data here and pick a space on Mars with no tile. Gain its placement bonus, and no adjacency bonuses.": "Дія: Витратити 3 дані тут і вибрати простір на Марсі без плитки. Отримайте його бонус за розміщення, а також жодних бонусів за сусідство.",
+  "You start with 45 M€ and 3 data on this card.": "Ви починаєте з 45 M€ і 3 дані на цій карті.",
+
+  "HADESPHERE": "Сфера Гадеса",
+  "Hadesphere": "Сфера Гадеса",
+  "Action: Excavate an underground resource.": "Дія: Розкопати підземний ресурс.",
+  "You start with 36 M€ and 5 steel. As your first action, identify any 3 underground resources on Mars.": "Ви починаєте з 36 M€ і 5 сталі. Як вашу першу дію, визначте будь-які 3 підземні ресурси на Марсі.",
+
+  "HECATE SPEDITIONS": "Hecate Експедиції",
+  "Hecate Speditions": "Hecate Експедиції",
+  "planetary tag": "планетний символ",
+  "Effect: When you play an Earth, Mars, Venus, Moon, or Jovian tag, including this, put 1 supply chain resource on this card.": "Ефект: Коли ви граєте карту з позначкою Земля, Марс, Венера, Місяць або Юпітер, включаючи цю, покладіть 1 ресурс ланцюга постачання на цю карту.",
+  "(Effect: Spend 2 supply chain resources (min. 1) to trade.) (Action: Spend 5 supply chain resources to gain a trade fleet.)": "(Ефект: Витратити 2 ресурси ланцюга постачання (мін. 1) для торгівлі.) (Дія: Витратити 5 ресурсів ланцюга постачання, щоб отримати торговий флот.)",
+  "You start with 38 M€. As your first action, place a colony.": "Ви починаєте з 38 M€. Як вашу першу дію, розмістіть колонію.",
+
+  "HENKEI GENETICS": "Henkei Генетика",
+  "Henkei Genetics": "Henkei Генетика",
+  "Effect: After you play a microbe card that can hold microbes, add 2 microbes to it.": "Ефект: Після того, як ви зіграєте карту мікробів, яка може утримувати мікробів, додайте до неї 2 мікроби.",
+  "Action: Pay 1 corruption to draw a card with a microbe tag.": "Дія: Заплатити 1 корупцію, щоб витягнути карту з позначкою мікробів.",
+  "You start with 47 M€ and 1 corruption.": "Ви починаєте з 47 M€ і 1 корупцією.",
+
+  "JENSON-BOYLE & CO": "Jenson-Boyle & Co",
+  "Jenson-Boyle & Co": "Jenson-Boyle & Co",
+  "Action: Pay 1 corruption to gain either 4 steel, 3 titanium, 3 plants or 6 heat.": "Дія: Заплатити 1 корупцію, щоб отримати або 4 сталі, 3 титану, 3 рослини або 6 тепла.",
+  "You start with 46 M€ and 2 corruption.": "Ви починаєте з 46 M€ і 2 корупцією.",
+
+  "KEPLERTEC": "KeplerTec",
+  "Keplertec": "KeplerTec",
+  "Action: Spend 1 titanium to put a fighter resource on ANY card.": "Дія: Витратити 1 титан, щоб покласти ресурс бійця на БУДЬ-ЯКУ карту.",
+  "Effect: When you place a fighter resource on this card, draw 4 random underground resource tokens. Pick one of them and claim the reward on it. Then shuffle the tokens back into the pile.": "Ефект: Коли ви розміщуєте ресурс бійця на цій карті, витягніть 4 випадкові токени підземних ресурсів. Виберіть один з них і отримайте на ньому винагороду. Потім перемішайте токени назад у стопку.",
+  "You start with 33 M€, 3 titanium, and 1 titanium production.": "Ви починаєте з 33 M€, 3 титану і виробництвом титану на 1 крок.",
+
+  "KINGDOM OF TAURARO": "Королівство Тауаро",
+  "Kingdom of Tauraro": "Королівство Тауаро",
+  "Effect: You may place cities adjacent to other cities. You must always place cities adjacent to tiles you already own, if possible.": "Ефект: Ви можете розміщувати міста поруч з іншими містами. Ви завжди повинні розміщувати міста поруч з плитками, які ви вже володієте, якщо це можливо.",
+  "You start with 50 M€ and 6 M€ production. All opponents gain 2 M€ production. As your first action, place a city.": "Ви починаєте з 50 M€ і 6 M€ виробництва. Всі супротивники отримують 2 M€ виробництва. Як вашу першу дію, розмістіть місто.",
+
+  "VOLTAGON": "Voltagon",
+  "Voltagon": "Voltagon",
+  "Effect: After you excavate an underground resource, gain 2 energy.": "Ефект: Після того, як ви розкопаєте підземний ресурс, отримайте 2 одиниці енергії.",
+  "Action: Spend 8 energy to increase oxygen or Venus 1 step.": "Дія: Витратити 8 одиниць енергії, щоб збільшити кисень або Венеру на 1 крок.",
+  "You start with 38 M€ and 1 energy production.": "Ви починаєте з 38 M€ і виробництвом енергії на 1 крок."
+}

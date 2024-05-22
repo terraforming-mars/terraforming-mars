@@ -33,9 +33,8 @@ export class MarsFrontierAlliance extends CorporationCard {
   public override bespokePlay(player: IPlayer): PlayerInput | undefined {
     const game = player.game;
     const turmoil = Turmoil.getTurmoil(game);
-    const availableParties = [...turmoil.parties];
 
-    game.defer(new ChooseAlliedParty(player, availableParties, (selectedParty) => {
+    game.defer(new ChooseAlliedParty(player, turmoil.parties, (selectedParty) => {
       player.setAlliedParty(selectedParty);
     }));
     return undefined;

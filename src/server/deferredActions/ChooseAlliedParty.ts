@@ -11,7 +11,7 @@ import {policyDescription} from '../turmoil/Policy';
 export class ChooseAlliedParty extends DeferredAction {
   constructor(
     player: IPlayer,
-    public parties: Array<IParty>,
+    public parties: ReadonlyArray<IParty>,
     public partyCb: (party: IParty) => void,
   ) {
     super(player, Priority.DEFAULT);

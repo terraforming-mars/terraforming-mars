@@ -8,7 +8,7 @@ import {Bonus} from '../Bonus';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {Space} from '../../boards/Space';
 import {IPlayer} from '../../IPlayer';
-import {Policy} from '../Policy';
+import {BasePolicy, Policy} from '../Policy';
 import {Phase} from '../../../common/Phase';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IProjectCard} from '../../cards/IProjectCard';
@@ -73,27 +73,16 @@ class MarsFirstPolicy02 implements Policy {
   }
 }
 
-class MarsFirstPolicy03 implements Policy {
+class MarsFirstPolicy03 extends BasePolicy {
   readonly id = 'mfp03' as const;
   readonly description = 'Your steel resources are worth 1 M€ extra';
 
-  onPolicyStart(game: IGame, player?: IPlayer): void {
-    if (player) {
-      player.increaseSteelValue();
-    } else {
-      game.getPlayersInGenerationOrder().forEach((player) => {
-        player.increaseSteelValue();
-      });
-    }
+  override onPolicyStartForPlayer(player: IPlayer): void {
+    player.increaseSteelValue();
   }
-  onPolicyEnd(game: IGame, player?: IPlayer): void {
-    if (player) {
-      player.decreaseSteelValue();
-    } else {
-      game.getPlayersInGenerationOrder().forEach((player) => {
-        player.decreaseSteelValue();
-      });
-    }
+
+  override onPolicyEndForPlayer(player: IPlayer): void {
+    player.decreaseSteelValue();
   }
 }
 

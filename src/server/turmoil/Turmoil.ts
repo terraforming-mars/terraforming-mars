@@ -303,11 +303,11 @@ export class Turmoil {
     }
   }
 
-  private executeAlliedOnPolicyEnd(game: IGame, player: IPlayer | undefined): void {
+  private executeAlliedOnPolicyEnd(player: IPlayer | undefined): void {
     if (player?.alliedParty) {
       const {alliedParty} = player;
       const alliedPolicy = player.game.turmoil?.getPartyByName(alliedParty.partyName)?.policies.find((p) => p.id === alliedParty.agenda.policyId);
-      alliedPolicy?.onPolicyEnd?.(game, player);
+      alliedPolicy?.onPolicyEndForPlayer?.(player);
     }
   }
 
@@ -319,7 +319,7 @@ export class Turmoil {
 
     // Mars Frontier Alliance ends allied party policy
     const alliedPlayer = game.getPlayers().find((p) => p.alliedParty !== undefined);
-    this.executeAlliedOnPolicyEnd(game, alliedPlayer);
+    this.executeAlliedOnPolicyEnd(alliedPlayer);
 
     // Behold the Emperor Hook prevents changing the ruling party.
     if (game.beholdTheEmperor !== true) {

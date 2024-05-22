@@ -5,7 +5,7 @@ import {IGame} from '../../IGame';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
 import {Bonus} from '../Bonus';
-import {Policy} from '../Policy';
+import {BasePolicy, Policy} from '../Policy';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IPlayer} from '../../IPlayer';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
@@ -64,27 +64,15 @@ class UnityBonus02 implements Bonus {
   }
 }
 
-class UnityPolicy01 implements Policy {
+class UnityPolicy01 extends BasePolicy {
   id = 'up01' as const;
   description = 'Your titanium resources are worth 1 M€ extra';
 
-  onPolicyStart(game: IGame, player?: IPlayer): void {
-    if (player) {
-      player.increaseTitaniumValue();
-    } else {
-      game.getPlayersInGenerationOrder().forEach((player) => {
-        player.increaseTitaniumValue();
-      });
-    }
+  override onPolicyStartForPlayer(player: IPlayer): void {
+    player.increaseTitaniumValue();
   }
-  onPolicyEnd(game: IGame, player?: IPlayer): void {
-    if (player) {
-      player.decreaseTitaniumValue();
-    } else {
-      game.getPlayersInGenerationOrder().forEach((player) => {
-        player.decreaseTitaniumValue();
-      });
-    }
+  override onPolicyEndForPlayer(player: IPlayer): void {
+    player.decreaseTitaniumValue();
   }
 }
 

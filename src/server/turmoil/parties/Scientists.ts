@@ -7,7 +7,7 @@ import {Resource} from '../../../common/Resource';
 import {Bonus} from '../Bonus';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IPlayer} from '../../IPlayer';
-import {Policy} from '../Policy';
+import {BasePolicy, Policy} from '../Policy';
 import {TITLES} from '../../inputs/titles';
 
 export class Scientists extends Party implements IParty {
@@ -87,28 +87,16 @@ class ScientistsPolicy03 implements Policy {
   readonly description = 'When you raise a global parameter, draw a card per step raised';
 }
 
-class ScientistsPolicy04 implements Policy {
+class ScientistsPolicy04 extends BasePolicy {
   readonly id = 'sp04' as const;
   readonly description = 'Cards with Science tag requirements may be played with 1 less Science tag';
 
-  onPolicyStart(game: IGame, player?: IPlayer) {
-    if (player) {
-      player.hasTurmoilScienceTagBonus = true;
-    } else {
-      game.getPlayersInGenerationOrder().forEach((player) => {
-        player.hasTurmoilScienceTagBonus = true;
-      });
-    }
+  override onPolicyStartForPlayer(player: IPlayer) {
+    player.hasTurmoilScienceTagBonus = true;
   }
 
-  onPolicyEnd(game: IGame, player?: IPlayer) {
-    if (player) {
-      player.hasTurmoilScienceTagBonus = true;
-    } else {
-      game.getPlayersInGenerationOrder().forEach((player) => {
-        player.hasTurmoilScienceTagBonus = false;
-      });
-    }
+  override onPolicyEndForPlayer(player: IPlayer) {
+    player.hasTurmoilScienceTagBonus = false;
   }
 }
 

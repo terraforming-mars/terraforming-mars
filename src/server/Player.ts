@@ -162,7 +162,7 @@ export class Player implements IPlayer {
       },
     };
     const alliedPolicy = this.game.turmoil?.getPartyByName(p.name).policies.find((t) => t.id === p.policies[0].id);
-    if (alliedPolicy !== undefined) alliedPolicy.onPolicyStart?.(this.game, this);
+    alliedPolicy?.onPolicyStart?.(this.game, this);
   }
 
 

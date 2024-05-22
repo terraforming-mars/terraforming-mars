@@ -20,7 +20,7 @@ export class MarsFrontierAlliance extends CorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(40).nbsp.policy().br;
           b.effect(
-            'after new ruling party is chosen, place the political program tile of the second most popular party on this card (you may use its ef fect as a passive effect of your corporation or as ruling party this generation)',
+            'After new ruling party is chosen, place the political program tile of the second most popular party on this card (you may use its effect as a passive effect of your corporation or as ruling party this generation)',
             (eb) => {
               eb.empty().startEffect.plus().policy().asterix();
             },

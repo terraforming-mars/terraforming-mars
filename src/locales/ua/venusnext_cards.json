@@ -1,0 +1,180 @@
+{
+  "% Venus": "% Венера",
+
+  "Stratospheric Birds": "Стратосферні птахи",
+  "Action: Add 1 animal to this card.": "Дія: Додати 1 тварину на цю карту.",
+  "Requires Venus 12% and that you spend 1 floater from any card.": "Вимагає 12% Венери та витрати 1 плаваючого з будь-якої карти.",
+
+  "Venusian Plants": "Венерійські рослини",
+  "Requires Venus 16%. Raise Venus 1 step. Add 1 microbe or 1 animal to ANOTHER VENUS CARD": "Вимагає 16% Венери. Підвищити Венеру на 1 крок. Додати 1 мікроб або 1 тварину на ІНШУ КАРТУ ВЕНЕРИ",
+
+  "Extremophiles": "Екстремофіли",
+  "Action: Add 1 microbe to ANY card.": "Дія: Додати 1 мікроба на БУДЬ-ЯКУ карту.",
+  "1 VP for every 3rd Microbe on this card.": "1 ПО за кожного 3-го мікроба на цій карті.",
+  "Requires 2 science tags.": "Вимагає 2 наукових тегів.",
+
+  "Mining Quota": "Квота на видобуток",
+  "Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps.": "Вимагає тегів Венери, Землі та Юпітера. Збільшити виробництво сталі на 2 кроки.",
+
+  "Corroder Suits": "Корозійні костюми",
+  "Increase your M€ production 2 steps. Add 1 resource to ANY Venus CARD.": "Збільшити виробництво M€ на 2 кроки. Додати 1 ресурс на БУДЬ-ЯКУ карту Венери.",
+
+  "Venusian Insects": "Венерійські комахи",
+  "Action: add 1 Microbe to this card.": "Дія: Додати 1 мікроба на цю карту.",
+  "1 VP for every 2nd Microbe on this card.": "1 ПО за кожного 2-го мікроба на цій карті.",
+  "Requires Venus 12%.": "Вимагає 12% Венери.",
+
+  "Sulphur-Eating Bacteria": "Бактерії, що їдять сірку",
+  "Action: Spend any number of microbes here to gain triple amount of M€.": "Дія: Витратити будь-яку кількість мікробів тут, щоб отримати потрійну суму M€.",
+  "Requires Venus 6%": "Вимагає 6% Венери",
+
+  "Venus Waystation": "Венерійська зупинка",
+  "Effect: When you play a Venus tag, you pay 2 M€ less for it.": "Ефект: Коли ви граєте тег Венери, ви платите на 2 M€ менше.",
+
+  "Thermophiles": "Термофіли",
+  "Action: Add 1 microbe to ANY Venus CARD.": "Дія: Додати 1 мікроба на БУДЬ-ЯКУ карту Венери.",
+  "Action: Spend 2 microbes here to raise Venus 1 step.": "Дія: Витратити 2 мікробів тут, щоб підвищити Венеру на 1 крок.",
+
+  "Sponsored Academies": "Спонсоровані академії",
+  "Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card.": "Відкинути 1 карту з вашої руки, А ПОТІМ взяти 3 карти. Всі СУПЕРНИКИ беруть 1 карту.",
+
+  "Sulphur Exports": "Експорт сірки",
+  "Increase Venus 1 step. Increase your M€ production 1 step for each Venus tag you have, including this.": "Підвищити Венеру на 1 крок. Збільшити виробництво M€ на 1 крок за кожен тег Венери, який у вас є, включаючи цей.",
+
+  "Venus Soils": "Венерійські грунти",
+  "Raise Venus 1 step. Increase your plant production 1 step. Add 2 microbes to ANOTHER card": "Підвищити Венеру на 1 крок. Збільшити виробництво рослин на 1 крок. Додати 2 мікробів на ІНШУ карту",
+
+  "Terraforming Contract": "Контракт на терраформування",
+  "Requires that you have at least 25 TR. Increase your M€ production 4 steps.": "Вимагає, щоб у вас було щонайменше 25 РТ. Збільшити виробництво M€ на 4 кроки.",
+
+  "Solarnet": "Сонячна мережа",
+  "Requires Venus, Earth and Jovian tags. Draw 2 cards.": "Вимагає тегів Венери, Землі та Юпітера. Взяти 2 карти.",
+
+  "Atalanta Planitia Lab": "Лабораторія Аталанта Планітія",
+  "Requires 3 science tags. Draw 2 cards.": "Вимагає 3 наукових тегів. Взяти 2 карти.",
+  "Rotator Impacts": "Ротаторний удар",
+  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "Дія: Витратити 6 M€, щоб додати ресурс астероїда на цю карту [МОЖНА ВИКОРИСТОВУВАТИ ТИТАН].",
+  "Action: Spend 1 resource from this card to increase Venus 1 step.": "Дія: Витратити 1 ресурс з цієї карти, щоб підвищити Венеру на 1 крок.",
+  "Venus must be 14% or lower": "Венера повинна бути 14% або менше",
+
+  "Omnicourt": "Омнікорт",
+  "Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.": "Вимагає тегів Венери, Землі та Юпітера. Збільшити РТ на 2 кроки.",
+
+  "Jet Stream Microscrappers": "Мікроштампувальники зі струмом Джет",
+  "Action: Spend 1 titanium to add 2 floaters here": "Дія: Витратити 1 титан, щоб додати 2 плаваючих сфери сюди.",
+  "Action: Spend 2 floaters here to raise Venus 1 step": "Дія: Витратити 2 плаваючі сфери тут, щоб підвищити Венеру на 1 крок.",
+
+  "Spin-Inducing Asteroid": "Астероїд, що викликає обертання",
+  "Venus must be 10% or lower. Raise Venus 2 steps.": "Венера повинна бути 10% або менше. Підвищити Венеру на 2 кроки.",
+
+  "Dirigibles": "Дирижаблі",
+  "Action: Add 1 floater to ANY card": "Дія: Додати 1 плаваючу сферу на БУДЬ-ЯКУ карту.",
+  "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.": "Ефект: При грі з тегом Венери, плаваючі сфери тут можуть бути використані як платіж, і кожна з них варта 3M€.",
+
+  "Floating Habs": "Плаваючі житла",
+  "Action: Spend 2 M€ to add 1 floater to ANY card": "Дія: Витратити 2 M€, щоб додати 1 плаваючу сферу на БУДЬ-ЯКУ карту.",
+  "1 VP for every 2nd Floater on this card.": "1 ПО за кожну 2-гу плаваючу сферу на цій карті.",
+  "Requires 2 science tags. 1 VP for every 2nd Floater on this card": "Вимагає 2 наукових тегів. 1 ПО за кожну 2-гу плаваючу сферу на цій карті.",
+
+  "Hydrogen to Venus": "Водень на Венеру",
+  "Raise Venus 1 step. Add 1 floater to A VENUS CARD for each Jovian tag you have.": "Підвищити Венеру на 1 крок. Додати 1 плаваючу сферу на КАРТУ ВЕНЕРИ за кожен тег Юпітера, який у вас є.",
+
+  "Water to Venus": "Вода на Венеру",
+  "Raise Venus 1 step.": "Підвищити Венеру на 1 крок.",
+
+  "GHG Import From Venus": "Імпорт парникових газів з Венери",
+  "Raise Venus 1 step. Increase your heat production 3 steps.": "Підвищити Венеру на 1 крок. Збільшити виробництво тепла на 3 кроки.",
+
+  "Aerial Mappers": "Повітряні картографи",
+  "Action: Add floater to ANY card.": "Дія: Додати плаваючу сферу на БУДЬ-ЯКУ карту.",
+  "Action: Spend one floater here to draw 1 card.": "Дія: Витратити одну плаваючу сферу тут, щоб взяти 1 карту.",
+
+  "Aerosport Tournament": "Аероспортивний турнір",
+  "Requires that you have 5 floaters. Gain 1 M€ per each city tile in play.": "Вимагає, щоб у вас було 5 плаваючих сфер. Отримати 1 M€ за кожен стадіон у грі.",
+
+  "Air-Scrapping Expedition": "Експедиція з очищення повітря",
+  "Raise Venus 1 step. Add 3 floaters to ANY Venus CARD.": "Підвищити Венеру на 1 крок. Додати 3 плаваючі сфери на БУДЬ-ЯКУ карту Венери.",
+
+  "Atmoscoop": "Атмоскоп",
+  "Requires 3 science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 floaters to ANY card.": "Вимагає 3 наукових тегів. Або підвищити температуру на 2 кроки, або підвищити Венеру на 2 кроки. Додати 2 плаваючі сфери на БУДЬ-ЯКУ карту.",
+
+  "Comet for Venus": "Комета для Венери",
+  "Raise Venus 1 step. Remove up to 4M€ from any player WITH A VENUS TAG IN PLAY.": "Підвищити Венеру на 1 крок. Вилучити до 4 M€ від будь-якого гравця, ЯКИЙ МАЄ ТЕГ ВЕНЕРИ В ГРІ.",
+
+  "Dawn City": "Місто Ранку",
+  "Requires 4 science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a city tile on the RESERVED AREA.": "Вимагає 4 наукових тегів. Зменшити виробництво енергії на 1 крок. Збільшити виробництво титану на 1 крок. Покласти стадіон на ЗАРЕЗЕРВОВАНУ ОБЛАСТЬ.",
+
+  "Deuterium Export": "Експорт дейтерію",
+  "Action: Add 1 floater to this card.": "Дія: Додати 1 плаваючу сферу на цю карту.",
+  "Action: Spend 1 floater here to increase your energy production 1 step.": "Дія: Витратити 1 плаваючу сферу тут, щоб збільшити виробництво енергії на 1 крок.",
+  "Remove 1 floater to raise energy production 1 step": "Вилучити 1 плаваючу сферу, щоб збільшити виробництво енергії на 1 крок",
+  "Remove floater": "Вилучити плаваючу сферу",
+
+  "Extractor Balloons": "Екстракторні кулі",
+  "Action: Remove 2 floaters here to raise Venus 1 step.": "Дія: Вилучити 2 плаваючі сфери тут, щоб підвищити Венеру на 1 крок.",
+  "Add 3 floaters to this card": "Додати 3 плаваючі сфери на цю карту",
+
+  "Forced Precipitation": "Примусове опадання",
+  "Action: Spend 2 M€ to add 1 floater to THIS card.": "Дія: Витратити 2 M€, щоб додати 1 плаваючу сферу на ЦЮ карту.",
+  "Action: Spend 2 floaters here to increase Venus 1 step.": "Дія: Витратити 2 плаваючі сфери тут, щоб підвищити Венеру на 1 крок.",
+
+  "Freyja Biodomes": "Фрейя Біодоми",
+  "10% Venus": "10% Венера",
+  "Requires 10% on the Venus track. Add 2 microbes or 2 animals to another Venus card. Production: energy -1, M€ +2.": "Вимагає 10% на треку Венери. Додати 2 мікроби або 2 тварини на іншу карту Венери. Виробництво: енергія -1, M€ +2.",
+
+  "Giant Solar Shade": "Величезна сонячна затінювальна система",
+  "Raise Venus 3 steps.": "Підвищити Венеру на 3 кроки.",
+  "Gyropolis": "Гірополіс",
+  "Decrease your energy production 2 steps. Increase your M€ production 1 step for each Venus and Earth tag you have. Place a city tile.": "Зменшити виробництво енергії на 2 кроки. Збільшити виробництво M€ на 1 крок за кожен тег Венери та Землі, який у вас є. Покласти стадіон.",
+
+  "Io Sulphur Research": "Дослідження сульфуру на Іо",
+  "Draw 1 card, or draw 3 if you have at least 3 Venus tags.": "Взяти 1 карту, або взяти 3 карти, якщо у вас є принаймні 3 теги Венери.",
+
+  "Ishtar Mining": "Іштарський розробник",
+  "8% Venus": "8% Венера",
+  "Requires Venus 8%. Increase your titanium production 1 step.": "Вимагає 8% Венери. Збільшити виробництво титану на 1 крок.",
+
+  "Luna Metropolis": "Луна Метрополіс",
+  "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.": "Збільшити виробництво M€ на 1 крок за кожен тег Землі, який у вас є (включаючи цей). Покласти стадіон на ЗАРЕЗЕРВОВАНУ ОБЛАСТЬ.",
+
+  "Local Shading": "Місцеве затінення",
+  "Action: Spend 1 floater here to raise your M€ production 1 step.": "Дія: Витратити 1 плаваючу сферу тут, щоб збільшити виробництво M€ на 1 крок.",
+
+  "Maxwell Base": "Максвеллівська база",
+  "Action: Add 1 resource to ANOTHER VENUS CARD.": "Дія: Додати 1 ресурс на ІНШУ КАРТУ ВЕНЕРИ.",
+  "Requires Venus 12%. Decrease your energy production 1 step. Place a city tile ON THE RESERVED AREA.": "Вимагає 12% Венери. Зменшити виробництво енергії на 1 крок. Покласти стадіон на ЗАРЕЗЕРВОВАНУ ОБЛАСТЬ.",
+
+  "Sister Planet Support": "Підтримка сестринської планети",
+  "Venus Earth": "Венера Земля",
+  "Requires Venus and Earth tags. Increase your M€ production 3 steps.": "Вимагає тегів Венери та Землі. Збільшити виробництво M€ на 3 кроки.",
+
+  "Stratopolis": "Стратополіс",
+  "Action: Add 2 floaters to ANY VENUS CARD.": "Дія: Додати 2 плаваючі сфери на БУДЬ-ЯКУ КАРТУ ВЕНЕРИ.",
+  "1 VP for every 3rd Floater on this card.": "1 ПО за кожну 3-ю плаваючу сферу на цій карті.",
+  "Requires 2 science tags. Increase your M€ production 2 steps. Place a city tile ON THE RESERVED AREA": "Вимагає 2 наукових тегів. Збільшити виробництво M€ на 2 кроки. Покласти стадіон на ЗАРЕЗЕРВОВАНУ ОБЛАСТЬ.",
+
+  "Venus Governor": "Губернатор Венери",
+  "Requires 2 Venus tags. Increase your M€ production 2 steps.": "Вимагає 2 теги Венери. Збільшити виробництво M€ на 2 кроки.",
+
+  "Venusian Animals": "Венерійські тварини",
+  "18% Venus": "18% Венера",
+  "Effect: When you play a science tag, including this, add 1 animal to this card.": "Ефект: Коли ви граєте карту з науковим тегом, включаючи цю, додайте 1 тварину на цю карту.",
+  "Requires Venus 18%": "Вимагає 18% Венери",
+
+  "Venus Magnetizer": "Магнетизатор Венери",
+  "Action: Decrease your energy production 1 step to raise Venus 1 step.": "Дія: Зменшити виробництво енергії на 1 крок, щоб підвищити Венеру на 1 крок.",
+  "Requires Venus 10%.": "Вимагає 10% Венери.",
+
+  "Luxury Foods": "Розкішна їжа",
+  "(Requires that you have a Venus tag, an Earth tag and a Jovian tag.)": "(Вимагає наявності тегу Венери, тегу Землі та тегу Юпітера.)",
+
+  "Neutralizer Factory": "Фабрика нейтралізаторів",
+  "Requires Venus 10%. Increase the Venus track 1 step.": "Вимагає 10% Венери. Збільшити трек Венери на 1 крок.",
+
+  "Orbital Reflectors": "Орбітальні відбивачі",
+  "Raise Venus 2 steps. Increase your heat production 2 steps.": "Підвищити Венеру на 2 кроки. Збільшити виробництво тепла на 2 кроки.",
+
+  "Saturn Surfing": "Сатурнське серфінг",
+  "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.": "Дія: Витратити 1 плаваючу сферу звідси, щоб отримати 1 M€ за кожну плаваючу сферу тут, ВКЛЮЧАЮЧИ ВИТРАЧЕНУ ПЛАВАЮЧУ СФЕРУ. Максимум 5 M€.",
+  "Add 1 floater here for every Earth tag you have, including this.": "Додати 1 плаваючу сферу сюди за кожен тег Землі, який у вас є (включаючи цей)."
+}

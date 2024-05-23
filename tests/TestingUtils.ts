@@ -229,10 +229,7 @@ export async function sleep(ms: number): Promise<void> {
 
 export function finishGeneration(game: IGame): void {
   const priorGeneration = game.generation;
-  game.getPlayersInGenerationOrder().forEach((player) => {
-    game.playerHasPassed(player);
-    game.playerIsFinishedTakingActions();
-  });
+  startGenerationEnd(game);
   const currentGeneration = game.generation;
   if (currentGeneration !== priorGeneration + 1) {
     throw new Error('expected new generation');

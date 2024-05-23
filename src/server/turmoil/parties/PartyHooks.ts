@@ -38,7 +38,12 @@ export class PartyHooks {
         return false;
       }
 
-      if (policyId === player.alliedParty?.agenda.policyId && player.alliedParty?.partyName !== PartyName.REDS) return true;
+      // Mars Alliance hook, always apply a policy when player is allied.
+      // Reds policy is excluded as its passive effect is negative and its application is optional.
+      const alliedPartyPolicy = player.alliedParty?.agenda.policyId;
+      if (policyId === alliedPartyPolicy && player.alliedParty?.partyName !== PartyName.REDS) {
+        return true;
+      }
       const currentPolicyId = PoliticalAgendas.currentAgenda(turmoil).policyId;
       return turmoil.rulingParty.name === partyName && currentPolicyId === policyId;
     }, () => false);

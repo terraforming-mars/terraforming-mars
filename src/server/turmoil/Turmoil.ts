@@ -381,11 +381,11 @@ export class Turmoil {
     }
   }
 
-  // Helper function to find the second dominant party
+  // Returns the second-most dominant party. Used for Mars Frontier Alliance
   private findSecondDominantParty(currentDominantParty: IParty): IParty | undefined {
     const currentIndex = this.parties.indexOf(currentDominantParty);
 
-    let partiesToCheck: IParty[] = [];
+    let partiesToCheck: Array<IParty> = [];
     if (currentIndex === 0) {
       partiesToCheck = this.parties.slice(1);
     } else if (currentIndex === this.parties.length - 1) {

@@ -23,7 +23,7 @@ import {ALL_MILESTONES} from './milestones/Milestones';
 import {ALL_AWARDS} from './awards/Awards';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {Phase} from '../common/Phase';
-import {DraftType, IPlayer} from './IPlayer';
+import {IPlayer} from './IPlayer';
 import {Player} from './Player';
 import {PlayerId, GameId, SpectatorId, SpaceId} from '../common/Types';
 import {PlayerInput} from './PlayerInput';
@@ -74,6 +74,7 @@ import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {SpaceType} from '../common/boards/SpaceType';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {BuildColony} from './deferredActions/BuildColony';
+import {newInitialDraft, newPreludeDraft, newStandardDraft} from './Draft';
 
 export class Game implements IGame, Logger {
   public readonly id: GameId;
@@ -109,18 +110,17 @@ export class Game implements IGame, Logger {
 
   // Player data
   public activePlayer: PlayerId;
+  /** Players that are done with the game after final greenery placement. */
   private donePlayers = new Set<PlayerId>();
   private passedPlayers = new Set<PlayerId>();
   private researchedPlayers = new Set<PlayerId>();
-  private draftedPlayers = new Set<PlayerId>();
-  // The first player of this generation.
+  /** The first player of this generation. */
   public first: IPlayer;
 
   // Drafting
-  private draftRound: number = 1;
-  // Used when drafting the first 10 project cards.
-  private initialDraftIteration: number = 1;
-  private unDraftedCards: Map<PlayerId, Array<IProjectCard>> = new Map();
+
+  public draftRound: number = 1;
+  public initialDraftIteration: number = 1;
 
   // Milestones and awards
   public claimedMilestones: Array<ClaimedMilestone> = [];
@@ -365,12 +365,12 @@ export class Game implements IGame, Logger {
     return game;
   }
 
-  // Function use to properly start the game: with project draft or with research phase
+  /** Properly starts the game with the project draft, or initial research phase. */
   public gotoInitialPhase(): void {
     // Initial Draft
     if (this.gameOptions.initialDraftVariant) {
       this.phase = Phase.INITIALDRAFTING;
-      this.runDraftRound('initial');
+      newInitialDraft(this).startDraft();
     } else {
       this.gotoInitialResearchPhase();
     }
@@ -398,7 +398,6 @@ export class Game implements IGame, Logger {
       currentSeed: this.rng.current,
       deferredActions: [],
       donePlayers: Array.from(this.donePlayers),
-      draftedPlayers: Array.from(this.draftedPlayers),
       draftRound: this.draftRound,
       first: this.first.id,
       fundedAwards: serializeFundedAwards(this.fundedAwards),
@@ -431,12 +430,6 @@ export class Game implements IGame, Logger {
       tradeEmbargo: this.tradeEmbargo,
       underworldData: this.underworldData,
       undoCount: this.undoCount,
-      unDraftedCards: Array.from(this.unDraftedCards.entries()).map((a) => {
-        return [
-          a[0],
-          a[1].map((c) => c.name),
-        ];
-      }),
       venusScaleLevel: this.venusScaleLevel,
     };
     if (this.aresData !== undefined) {
@@ -504,7 +497,7 @@ export class Game implements IGame, Logger {
     if (this.players.length === 1 && this.gameOptions.venusNextExtension) {
       return globalParametersMaxed && venusMaxed;
     }
-    // new option "requiresVenusTrackCompletion" also makes maximizing Venus a game-end requirement
+    // Option "requiresVenusTrackCompletion" also makes maximizing Venus a game-end requirement
     if (this.gameOptions.venusNextExtension && this.gameOptions.requiresVenusTrackCompletion) {
       return globalParametersMaxed && venusMaxed;
     }
@@ -629,25 +622,7 @@ export class Game implements IGame, Logger {
     this.first = newFirstPlayer;
   }
 
-  private runDraftRound(type: DraftType = 'standard'): void {
-    this.save();
-    this.draftedPlayers.clear();
-    this.players.forEach((player) => {
-      player.needsToDraft = true;
-      if (this.draftRound === 1 && type !== 'prelude') {
-        player.askPlayerToDraft(type, this.giveDraftCardsTo(player));
-      } else if (this.draftRound === 1 && type === 'prelude') {
-        player.askPlayerToDraft(type, this.giveDraftCardsTo(player), player.dealtPreludeCards);
-      } else {
-        const draftCardsFrom = this.getDraftCardsFrom(player).id;
-        const cards = this.unDraftedCards.get(draftCardsFrom);
-        this.unDraftedCards.delete(draftCardsFrom);
-        player.askPlayerToDraft(type, this.giveDraftCardsTo(player), cards);
-      }
-    });
-  }
-
-  private gotoInitialResearchPhase(): void {
+  public gotoInitialResearchPhase(): void {
     this.phase = Phase.RESEARCH;
 
     this.save();
@@ -663,19 +638,19 @@ export class Game implements IGame, Logger {
     }
   }
 
-  private gotoResearchPhase(): void {
+  public gotoResearchPhase(): void {
     this.phase = Phase.RESEARCH;
     this.researchedPlayers.clear();
     this.save();
     this.players.forEach((player) => {
-      player.runResearchPhase(this.gameOptions.draftVariant);
+      player.runResearchPhase();
     });
   }
 
   private gotoDraftPhase(): void {
     this.phase = Phase.DRAFTING;
     this.draftRound = 1;
-    this.runDraftRound();
+    newStandardDraft(this).startDraft();
   }
 
   public gameIsOver(): boolean {
@@ -826,22 +801,9 @@ export class Game implements IGame, Logger {
     return this.researchedPlayers.has(player.id);
   }
 
-  private hasDrafted(player: IPlayer): boolean {
-    return this.draftedPlayers.has(player.id);
-  }
-
   private allPlayersHaveFinishedResearch(): boolean {
     for (const player of this.players) {
       if (!this.hasResearched(player)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  private allPlayersHaveFinishedDraft(): boolean {
-    for (const player of this.players) {
-      if (!this.hasDrafted(player)) {
         return false;
       }
     }
@@ -860,76 +822,7 @@ export class Game implements IGame, Logger {
     });
   }
 
-  public playerIsFinishedWithDraftingPhase(type: DraftType, player: IPlayer, cards : Array<IProjectCard>): void {
-    this.draftedPlayers.add(player.id);
-    this.unDraftedCards.set(player.id, cards);
-
-    player.needsToDraft = false;
-    if (this.allPlayersHaveFinishedDraft() === false) {
-      return;
-    }
-
-    // If more than 1 card are to be passed to the next player, that means we're still drafting
-    if (cards.length > 1) {
-      this.draftRound++;
-      this.runDraftRound(type);
-      return;
-    }
-
-    // Push last card for each player
-    this.players.forEach((player) => {
-      const lastCards = this.unDraftedCards.get(this.getDraftCardsFrom(player).id);
-      if (lastCards !== undefined) {
-        player.draftedCards.push(...lastCards);
-      }
-      player.needsToDraft = undefined;
-
-      if (type === 'initial' && this.initialDraftIteration === 2) {
-        player.dealtProjectCards = player.draftedCards;
-        player.draftedCards = [];
-      } else if (type === 'prelude' && this.initialDraftIteration === 3) {
-        player.dealtPreludeCards = player.draftedCards;
-        player.draftedCards = [];
-      }
-    });
-
-    if (type === 'standard') {
-      this.gotoResearchPhase();
-      return;
-    }
-
-    if (this.initialDraftIteration === 1) {
-      this.initialDraftIteration++;
-      this.draftRound = 1;
-      this.runDraftRound('initial');
-    } else if (this.initialDraftIteration === 2 && this.gameOptions.preludeExtension && this.gameOptions.preludeDraftVariant) {
-      this.initialDraftIteration++;
-      this.draftRound = 1;
-      this.runDraftRound('prelude');
-    } else {
-      this.gotoInitialResearchPhase();
-    }
-  }
-
-  private getDraftCardsFrom(player: IPlayer): IPlayer {
-    // Special-case for the initial draft direction on second iteration
-    if (this.generation === 1 && this.initialDraftIteration === 2) {
-      return this.getPlayerBefore(player);
-    }
-
-    return this.generation % 2 === 0 ? this.getPlayerBefore(player) : this.getPlayerAfter(player);
-  }
-
-  private giveDraftCardsTo(player: IPlayer): IPlayer {
-    // Special-case for the initial draft direction on second iteration
-    if (this.initialDraftIteration === 2 && this.generation === 1) {
-      return this.getPlayerAfter(player);
-    }
-
-    return this.generation % 2 === 0 ? this.getPlayerAfter(player) : this.getPlayerBefore(player);
-  }
-
-  private getPlayerBefore(player: IPlayer): IPlayer {
+  public getPlayerBefore(player: IPlayer): IPlayer {
     const playerIndex = this.players.indexOf(player);
     if (playerIndex === -1) {
       throw new Error(`Player ${player.id} not in game ${this.id}`);
@@ -939,7 +832,7 @@ export class Game implements IGame, Logger {
     return this.players[(playerIndex === 0) ? this.players.length - 1 : playerIndex - 1];
   }
 
-  private getPlayerAfter(player: IPlayer): IPlayer {
+  public getPlayerAfter(player: IPlayer): IPlayer {
     const playerIndex = this.players.indexOf(player);
 
     if (playerIndex === -1) {
@@ -949,7 +842,6 @@ export class Game implements IGame, Logger {
     // Go to the beginning of the array if we reached the end
     return this.players[(playerIndex + 1 >= this.players.length) ? 0 : playerIndex + 1];
   }
-
 
   public playerIsFinishedTakingActions(): void {
     if (this.deferredActions.length > 0) {
@@ -1642,13 +1534,16 @@ export class Game implements IGame, Logger {
     game.passedPlayers = new Set<PlayerId>(d.passedPlayers);
     game.donePlayers = new Set<PlayerId>(d.donePlayers);
     game.researchedPlayers = new Set<PlayerId>(d.researchedPlayers);
-    game.draftedPlayers = new Set<PlayerId>(d.draftedPlayers);
 
-    // Reinit undrafted cards map
-    game.unDraftedCards = new Map<PlayerId, IProjectCard[]>();
-    d.unDraftedCards.forEach((unDraftedCard) => {
-      game.unDraftedCards.set(unDraftedCard[0], cardsFromJSON(unDraftedCard[1]));
-    });
+    if (d.unDraftedCards && d.unDraftedCards.length > 0) {
+      d.unDraftedCards.forEach(([playerId, cardNames]) => {
+        const player = players.find((p) => p.id === playerId);
+        if (player === undefined) {
+          throw new Error('Unexpected undefined player when deserializing undrafted cards');
+        }
+        player.draftHand = cardsFromJSON(cardNames);
+      });
+    }
 
     game.lastSaveId = d.lastSaveId;
     game.clonedGamedId = d.clonedGamedId;
@@ -1675,15 +1570,15 @@ export class Game implements IGame, Logger {
     if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {
       if (game.phase === Phase.INITIALDRAFTING) {
         if (game.initialDraftIteration === 3) {
-          game.runDraftRound('prelude');
+          newPreludeDraft(game).restoreDraft();
         } else {
-          game.runDraftRound('initial');
+          newInitialDraft(game).restoreDraft();
         }
       } else {
         game.gotoInitialResearchPhase();
       }
     } else if (game.phase === Phase.DRAFTING) {
-      game.runDraftRound();
+      newStandardDraft(game).restoreDraft();
     } else if (game.phase === Phase.RESEARCH) {
       game.gotoResearchPhase();
     } else if (game.phase === Phase.END) {

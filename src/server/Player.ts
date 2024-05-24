@@ -43,7 +43,6 @@ import {MoonExpansion} from './moon/MoonExpansion';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
-import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {LogHelper} from './LogHelper';
 import {UndoActionOption} from './inputs/UndoActionOption';
@@ -67,7 +66,7 @@ import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
 import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
-import {CanAffordOptions, CardAction, DraftType, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
+import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {inplaceRemove, sum} from '../common/utils/utils';
 import {PreludesExpansion} from './preludes/PreludesExpansion';
@@ -76,6 +75,7 @@ import {UnderworldPlayerData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {Counter} from './behavior/Counter';
 import {TRSource} from '../common/cards/TRSource';
+import {newNonDraft, newStandardDraft} from './Draft';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 
@@ -174,6 +174,7 @@ export class Player implements IPlayer {
   public ceoCardsInHand: Array<IProjectCard> = [];
   public playedCards: Array<IProjectCard> = [];
   public draftedCards: Array<IProjectCard> = [];
+  public draftHand: Array<IProjectCard> = [];
   public cardCost: number = constants.CARD_COST;
   public needsToDraft?: boolean;
 
@@ -709,53 +710,6 @@ export class Player implements IPlayer {
     });
   }
 
-  private dealForDraft(quantity: number, cards: Array<IProjectCard>): void {
-    cards.push(...this.game.projectDeck.drawN(this.game, quantity, 'bottom'));
-  }
-
-  public askPlayerToDraft(type: DraftType, passTo: IPlayer, passedCards?: Array<IProjectCard>): void {
-    let cardsToDraw = 4;
-    let cardsToKeep = 1;
-
-    let cards: Array<IProjectCard> = [];
-    if (passedCards === undefined) {
-      if (type === 'initial') {
-        cardsToDraw = 5;
-      } else {
-        if (LunaProjectOffice.isActive(this)) {
-          cardsToDraw = 5;
-          cardsToKeep = 2;
-        }
-        if (this.isCorporation(CardName.MARS_MATHS)) {
-          cardsToDraw = 5;
-          cardsToKeep = 2;
-        }
-      }
-      this.dealForDraft(cardsToDraw, cards);
-    } else {
-      cards = passedCards;
-    }
-
-    const messageTitle = cardsToKeep === 1 ?
-      'Select a card to keep and pass the rest to ${0}' :
-      'Select two cards to keep and pass the rest to ${0}';
-    this.setWaitingFor(
-      new SelectCard(
-        message(messageTitle, (b) => b.player(passTo)),
-        'Keep',
-        cards,
-        {min: cardsToKeep, max: cardsToKeep, played: false})
-        .andThen((selected) => {
-          selected.forEach((card) => {
-            this.draftedCards.push(card);
-            cards = cards.filter((c) => c !== card);
-          });
-          this.game.playerIsFinishedWithDraftingPhase(type, this, cards);
-          return undefined;
-        }),
-    );
-  }
-
   /**
    * @return {number} the number of avaialble megacredits. Which is just a shorthand for megacredits,
    * plus any units of heat available thanks to Helion (and Stormcraft, by proxy).
@@ -767,29 +721,19 @@ export class Player implements IPlayer {
     return total;
   }
 
-  public runResearchPhase(draftVariant: boolean): void {
-    let dealtCards: Array<IProjectCard> = [];
-    if (draftVariant) {
-      dealtCards = this.draftedCards;
-      this.draftedCards = [];
-    } else {
-      let cardsToDraw = 4;
-      if (this.isCorporation(CardName.MARS_MATHS)) {
-        cardsToDraw = 5;
-      }
-      if (LunaProjectOffice.isActive(this)) {
-        cardsToDraw = 5;
-      }
-      this.dealForDraft(cardsToDraw, dealtCards);
-    }
+  public runResearchPhase(): void {
+    const draftVariant = this.game.gameOptions.draftVariant;
 
-    let cardsToKeep = 4;
-    if (LunaProjectOffice.isActive(this)) {
-      // If Luna Project is active, they get to keep the 5 cards they drafted
-      cardsToKeep = 5;
+    // Even without the draft, using this to compute the number of cards to keep.
+    const draft = draftVariant ? newStandardDraft(this.game) : newNonDraft(this.game);
+    const dealtCards: Array<IProjectCard> = draftVariant ? [...this.draftedCards] : draft.draw(this);
+
+    if (draftVariant) {
+      this.draftedCards = [];
     }
 
     // TODO(kberg): Using .execute to rely on directly calling setWaitingFor is not great.
+    const cardsToKeep = draft.cardsToKeep(this);
     const action = new ChooseCards(this, dealtCards, {paying: true, keepMax: cardsToKeep}).execute();
     this.setWaitingFor(action, () => this.game.playerIsFinishedWithResearchPhase(this));
   }
@@ -1935,6 +1879,7 @@ export class Player implements IPlayer {
       victoryPointsByGeneration: this.victoryPointsByGeneration,
       totalDelegatesPlaced: this.totalDelegatesPlaced,
       underworldData: this.underworldData,
+      draftHand: this.draftHand.map((c) => c.name),
     };
 
     if (this.lastCardPlayed !== undefined) {
@@ -2034,6 +1979,8 @@ export class Player implements IPlayer {
     if (d.underworldData !== undefined) {
       player.underworldData = d.underworldData;
     }
+
+    player.draftHand = cardsFromJSON(d.draftHand);
 
     return player;
   }

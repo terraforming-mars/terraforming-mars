@@ -12,7 +12,7 @@ import {Space} from './boards/Space';
 import {LogMessageBuilder} from './logs/LogMessageBuilder';
 import {LogMessage} from '../common/logs/LogMessage';
 import {Phase} from '../common/Phase';
-import {DraftType, IPlayer} from './IPlayer';
+import {IPlayer} from './IPlayer';
 import {PlayerId, GameId, SpectatorId, SpaceId, isGameId} from '../common/Types';
 import {CardResource} from '../common/CardResource';
 import {AndThen, DeferredAction} from './deferredActions/DeferredAction';
@@ -38,6 +38,7 @@ export interface Score {
   corporation: String;
   playerScore: number;
 }
+
 export interface IGame extends Logger {
   readonly id: GameId;
   readonly gameOptions: Readonly<GameOptions>;
@@ -96,6 +97,9 @@ export interface IGame extends Logger {
   readonly tags: ReadonlyArray<Tag>;
   // Function use to properly start the game: with project draft or with research phase
   gotoInitialPhase(): void;
+  /** Initiates the first research phase, which is when a player chooses their starting hand, corps and preludes. */
+  gotoInitialResearchPhase(): void;
+  gotoResearchPhase(): void;
   save(): void;
   toJSON(): string;
   serialize(): SerializedGame;
@@ -127,7 +131,6 @@ export interface IGame extends Logger {
   playerHasPassed(player: IPlayer): void;
   hasResearched(player: IPlayer): boolean;
   playerIsFinishedWithResearchPhase(player: IPlayer): void;
-  playerIsFinishedWithDraftingPhase(type: DraftType, player: IPlayer, cards : Array<IProjectCard>): void;
   playerIsFinishedTakingActions(): void;
   // Part of final greenery placement.
   canPlaceGreenery(player: IPlayer): boolean;
@@ -189,6 +192,24 @@ export interface IGame extends Logger {
   getSpaceByOffset(direction: -1 | 1, toPlace: TileType, cardCount?: 1 | 2): Space;
   expectedPurgeTimeMs(): number;
   logIllegalState(description: string, metadata: {}): void;
+
+  /**
+   * Drafting before the first generation goes through 3 iterations:
+   * 1. first 5 project cards,
+   * 2. second 5 project cards
+   * 3. [optional] preludes.
+   *
+   * This works, but makes it hard to add a CEO draft.
+   */
+  initialDraftIteration: number;
+  /**
+   * When drafting n cards, this counts the each step in the draft.
+   * When players get all the cards, this is 1. After everybody drafts a card,
+   * this is round 2.
+   */
+  draftRound: number;
+  getPlayerAfter(player: IPlayer): IPlayer;
+  getPlayerBefore(player: IPlayer): IPlayer;
 }
 
 export function isIGame(object: any): object is IGame {

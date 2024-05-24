@@ -30,6 +30,7 @@ export interface SerializedPlayer extends DeprecatedFields{
     dealtPreludeCards: Array<CardName>;
     dealtProjectCards: Array<CardName>;
     draftedCards: Array<CardName>;
+    draftHand: Array<CardName>,
     energy: number;
     energyProduction: number;
     fleetSize: number;

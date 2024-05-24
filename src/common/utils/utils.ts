@@ -146,3 +146,11 @@ export function deNull<T>(array: ReadonlyArray<T | undefined>): Array<T> {
   }
   return output;
 }
+
+// Makes a copy of array, but then empties it.
+// Useful for moving contents.
+export function copyAndClear<T>(array: Array<T>): Array<T> {
+  const copy = [...array];
+  array.length = 0;
+  return copy;
+}

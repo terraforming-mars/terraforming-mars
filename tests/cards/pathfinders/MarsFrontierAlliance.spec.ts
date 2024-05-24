@@ -24,6 +24,7 @@ describe('MarsFrontierAlliance', function() {
       pathfindersExpansion: true,
       turmoilExtension: true,
     });
+    turmoil = game.turmoil!;
   });
 
   it('Asks for allied company at game start', () => {
@@ -37,7 +38,6 @@ describe('MarsFrontierAlliance', function() {
   it('New generation - switch of allied party', function() {
     player.setCorporationForTest(card);
     game.generation = 10;
-    turmoil = game.turmoil!;
 
     const reds = game.turmoil!.getPartyByName(PartyName.REDS);
     const unity = game.turmoil!.getPartyByName(PartyName.UNITY);
@@ -71,12 +71,23 @@ describe('MarsFrontierAlliance', function() {
     expect(sponsoredMohole.canPlay(player)).is.true;
   });
 
-  it('Passive effect from Unity party should be applied', () => {
+  it('Passive effect from Unity policy', () => {
     player.setCorporationForTest(card);
     game.phase = Phase.ACTION;
     const unity = game.turmoil!.getPartyByName(PartyName.UNITY);
     player.setAlliedParty(unity);
     expect(player.getTitaniumValue()).to.equal(4);
+
+    const reds = game.turmoil!.getPartyByName(PartyName.REDS);
+    const greens = game.turmoil!.getPartyByName(PartyName.GREENS);
+    turmoil.sendDelegateToParty(player, reds.name, game);
+    turmoil.sendDelegateToParty(player, reds.name, game);
+    turmoil.sendDelegateToParty(player, greens.name, game);
+    turmoil.sendDelegateToParty(player, greens.name, game);
+
+    game.phase = Phase.SOLAR;
+    turmoil.endGeneration(game);
+    expect(player.getTitaniumValue()).to.equal(3);
   });
 
   it('Passive effect from Mars First party should be applied', () => {

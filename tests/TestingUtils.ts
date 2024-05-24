@@ -229,19 +229,14 @@ export async function sleep(ms: number): Promise<void> {
 
 export function finishGeneration(game: IGame): void {
   const priorGeneration = game.generation;
-  startGenerationEnd(game);
-  const currentGeneration = game.generation;
-  if (currentGeneration !== priorGeneration + 1) {
-    throw new Error('expected new generation');
-  }
-}
-
-
-export function startGenerationEnd(game: IGame): void {
   game.getPlayersInGenerationOrder().forEach((player) => {
     game.playerHasPassed(player);
     game.playerIsFinishedTakingActions();
   });
+  const currentGeneration = game.generation;
+  if (currentGeneration !== priorGeneration + 1) {
+    throw new Error('expected new generation');
+  }
 }
 
 export function getSendADelegateOption(player: IPlayer) {

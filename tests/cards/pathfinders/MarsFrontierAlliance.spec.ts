@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {MarsFrontierAlliance} from '../../../src/server/cards/pathfinders/MarsFrontierAlliance';
-import {addGreenery, cast, runAllActions, runNextAction, startGenerationEnd} from '../../TestingUtils';
+import {addGreenery, cast, runAllActions, runNextAction} from '../../TestingUtils';
 import {IPlayer} from '../../../src/server/IPlayer';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
@@ -50,11 +50,13 @@ describe('MarsFrontierAlliance', function() {
 
     player.setAlliedParty(reds);
 
-    startGenerationEnd(game);
+    game.phase = Phase.SOLAR;
+    turmoil.endGeneration(game);
+    runAllActions(game);
+
     const selectBonus: OrOptions = getWaitingFor(player);
     expect(selectBonus.options.length).to.eq(2);
     player.process({type: 'or', index: 0, response: {type: 'option'}});
-    expect(game.getGeneration()).to.eq(11);
     expect(game.turmoil!.rulingParty).to.eq(reds);
     expect(player.alliedParty?.partyName).to.eq(unity.name);
   });

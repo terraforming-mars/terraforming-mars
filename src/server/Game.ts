@@ -1535,7 +1535,7 @@ export class Game implements IGame, Logger {
     game.donePlayers = new Set<PlayerId>(d.donePlayers);
     game.researchedPlayers = new Set<PlayerId>(d.researchedPlayers);
 
-    if (d.unDraftedCards) {
+    if (d.unDraftedCards && d.unDraftedCards.length > 0) {
       d.unDraftedCards.forEach(([playerId, cardNames]) => {
         const player = players.find((p) => p.id === playerId);
         if (player === undefined) {

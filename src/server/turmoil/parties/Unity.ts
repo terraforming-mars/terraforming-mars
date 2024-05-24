@@ -1,10 +1,9 @@
 import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
-import {Bonus} from '../Bonus';
+import {BaseBonus} from '../Bonus';
 import {BasePolicy, Policy} from '../Policy';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IPlayer} from '../../IPlayer';
@@ -23,7 +22,7 @@ export class Unity extends Party implements IParty {
   policies = [UNITY_POLICY_1, UNITY_POLICY_2, UNITY_POLICY_3, UNITY_POLICY_4];
 }
 
-class UnityBonus01 implements Bonus {
+class UnityBonus01 extends BaseBonus {
   id = 'ub01' as const;
   description = 'Gain 1 M€ for each Venus, Earth and Jovian tag you have';
 
@@ -32,24 +31,12 @@ class UnityBonus01 implements Bonus {
     return sum(tags.map((tag) => player.tags.count(tag, 'raw')));
   }
 
-  grant(game: IGame, player?: IPlayer) {
-    const grantToPlayer = (p: IPlayer): void => {
-      p.stock.add(Resource.MEGACREDITS, this.getScore(p));
-    };
-
-    if (player) {
-      grantToPlayer(player);
-    } else {
-      game.getPlayersInGenerationOrder()
-        .filter((p) => {
-          return p.alliedParty === undefined;
-        })
-        .forEach(grantToPlayer);
-    }
+  grantForPlayer(player: IPlayer) {
+    player.stock.add(Resource.MEGACREDITS, this.getScore(player));
   }
 }
 
-class UnityBonus02 implements Bonus {
+class UnityBonus02 extends BaseBonus {
   id = 'ub02' as const;
   description = 'Gain 1 M€ for each Space tag you have';
 
@@ -57,10 +44,8 @@ class UnityBonus02 implements Bonus {
     return player.tags.count(Tag.SPACE, 'raw');
   }
 
-  grant(game: IGame) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
-    });
+  grantForPlayer(player: IPlayer) {
+    player.stock.add(Resource.MEGACREDITS, this.getScore(player));
   }
 }
 

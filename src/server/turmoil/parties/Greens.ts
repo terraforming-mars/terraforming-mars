@@ -1,10 +1,9 @@
 import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
-import {Bonus} from '../Bonus';
+import {BaseBonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {Space} from '../../boards/Space';
 import {IPlayer} from '../../IPlayer';
@@ -26,7 +25,7 @@ export class Greens extends Party implements IParty {
   readonly policies = [GREENS_POLICY_1, GREENS_POLICY_2, GREENS_POLICY_3, GREENS_POLICY_4];
 }
 
-class GreensBonus01 implements Bonus {
+class GreensBonus01 extends BaseBonus {
   readonly id = 'gb01' as const;
   readonly description = 'Gain 1 M€ for each Plant, Microbe and Animal tag you have';
 
@@ -36,14 +35,12 @@ class GreensBonus01 implements Bonus {
       player.tags.count(Tag.ANIMAL, 'raw');
   }
 
-  grant(game: IGame) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
-    });
+  grantForPlayer(player: IPlayer): void {
+    player.stock.add(Resource.MEGACREDITS, this.getScore(player));
   }
 }
 
-class GreensBonus02 implements Bonus {
+class GreensBonus02 extends BaseBonus {
   readonly id = 'gb02' as const;
   readonly description = 'Gain 2 M€ for each greenery tile you have';
 
@@ -53,10 +50,8 @@ class GreensBonus02 implements Bonus {
     return count * 2;
   }
 
-  grant(game: IGame) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
-    });
+  grantForPlayer(player: IPlayer): void {
+    player.stock.add(Resource.MEGACREDITS, this.getScore(player));
   }
 }
 

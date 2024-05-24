@@ -2,7 +2,7 @@ import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {IGame} from '../../IGame';
-import {Bonus} from '../Bonus';
+import {IBonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IPlayer} from '../../IPlayer';
@@ -21,7 +21,7 @@ export class Reds extends Party implements IParty {
   readonly policies = [REDS_POLICY_1, REDS_POLICY_2, REDS_POLICY_3, REDS_POLICY_4];
 }
 
-class RedsBonus01 implements Bonus {
+class RedsBonus01 implements IBonus {
   readonly id = 'rb01' as const;
   readonly description = 'The player(s) with the lowest TR gains 1 TR';
 
@@ -50,7 +50,7 @@ class RedsBonus01 implements Bonus {
   }
 }
 
-class RedsBonus02 implements Bonus {
+class RedsBonus02 implements IBonus {
   readonly id = 'rb02' as const;
   readonly description = 'The player(s) with the highest TR loses 1 TR';
 

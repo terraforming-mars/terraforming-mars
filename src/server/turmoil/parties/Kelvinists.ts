@@ -1,9 +1,8 @@
 import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
 import {Resource} from '../../../common/Resource';
-import {Bonus} from '../Bonus';
+import {BaseBonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {IPlayer} from '../../IPlayer';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
@@ -17,7 +16,7 @@ export class Kelvinists extends Party implements IParty {
   readonly policies = [KELVINISTS_POLICY_1, KELVINISTS_POLICY_2, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4];
 }
 
-class KelvinistsBonus01 implements Bonus {
+class KelvinistsBonus01 extends BaseBonus {
   readonly id = 'kb01' as const;
   readonly description = 'Gain 1 M€ for each heat production you have';
 
@@ -25,14 +24,12 @@ class KelvinistsBonus01 implements Bonus {
     return player.production.heat;
   }
 
-  grant(game: IGame) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
-    });
+  grantForPlayer(player: IPlayer): void {
+    player.stock.add(Resource.MEGACREDITS, this.getScore(player));
   }
 }
 
-class KelvinistsBonus02 implements Bonus {
+class KelvinistsBonus02 extends BaseBonus {
   readonly id = 'kb02' as const;
   readonly description = 'Gain 1 heat for each heat production you have';
 
@@ -40,10 +37,8 @@ class KelvinistsBonus02 implements Bonus {
     return player.production.heat;
   }
 
-  grant(game: IGame) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      player.stock.add(Resource.HEAT, this.getScore(player));
-    });
+  grantForPlayer(player: IPlayer): void {
+    player.stock.add(Resource.HEAT, this.getScore(player));
   }
 }
 

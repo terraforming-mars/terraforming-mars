@@ -1,10 +1,9 @@
 import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
-import {Bonus} from '../Bonus';
+import {BaseBonus} from '../Bonus';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IPlayer} from '../../IPlayer';
 import {BasePolicy, Policy} from '../Policy';
@@ -16,7 +15,7 @@ export class Scientists extends Party implements IParty {
   readonly policies = [SCIENTISTS_POLICY_1, SCIENTISTS_POLICY_2, SCIENTISTS_POLICY_3, SCIENTISTS_POLICY_4];
 }
 
-class ScientistsBonus01 implements Bonus {
+class ScientistsBonus01 extends BaseBonus {
   readonly id = 'sb01' as const;
   readonly description = 'Gain 1 M€ for each science tag you have';
 
@@ -24,24 +23,12 @@ class ScientistsBonus01 implements Bonus {
     return player.tags.count(Tag.SCIENCE, 'raw-pf');
   }
 
-  grant(game: IGame, player?: IPlayer) {
-    const grantToPlayer = (p: IPlayer): void => {
-      p.stock.add(Resource.MEGACREDITS, this.getScore(p));
-    };
-
-    if (player) {
-      grantToPlayer(player);
-    } else {
-      const players = game.getPlayersInGenerationOrder()
-        .filter((p) => {
-          return p.alliedParty === undefined;
-        });
-      players.forEach(grantToPlayer);
-    }
+  grantForPlayer(player: IPlayer) {
+    player.stock.add(Resource.MEGACREDITS, this.getScore(player));
   }
 }
 
-class ScientistsBonus02 implements Bonus {
+class ScientistsBonus02 extends BaseBonus {
   readonly id = 'sb02' as const;
   readonly description = 'Gain 1 M€ for every 3 cards in hand';
 
@@ -49,10 +36,8 @@ class ScientistsBonus02 implements Bonus {
     return Math.floor(player.cardsInHand.length / 3);
   }
 
-  grant(game: IGame) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
-    });
+  grantForPlayer(player: IPlayer) {
+    player.stock.add(Resource.MEGACREDITS, this.getScore(player));
   }
 }
 

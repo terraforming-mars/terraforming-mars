@@ -28,14 +28,12 @@ export abstract class BasePolicy implements Policy {
   abstract readonly description: string | ((player: IPlayer | undefined) => string);
 
   public onPolicyStart(game: IGame): void {
-    for (const player of game.getPlayersInGenerationOrder()) {
-      this.onPolicyStartForPlayer(player);
-    }
+    game.getPlayersInGenerationOrder().filter((p) => {
+      return p.alliedParty === undefined;
+    }).forEach((p) => this.onPolicyStartForPlayer?.(p));
   }
 
-  public onPolicyStartForPlayer(_player: IPlayer): void {
-    // Default implementation does nothing
-  }
+  public abstract onPolicyStartForPlayer(_player: IPlayer): void;
 
   public onPolicyEnd(game: IGame): void {
     for (const player of game.getPlayersInGenerationOrder()) {
@@ -43,9 +41,7 @@ export abstract class BasePolicy implements Policy {
     }
   }
 
-  public onPolicyEndForPlayer(_player: IPlayer): void {
-    // Default implementation does nothing
-  }
+  public abstract onPolicyEndForPlayer(_player: IPlayer): void;
 }
 
 export function policyDescription(policy: Policy, player: IPlayer | undefined): string {

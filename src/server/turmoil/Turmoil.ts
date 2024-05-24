@@ -438,7 +438,7 @@ export class Turmoil {
         const bonuses = [bonus, alliedParty.bonuses[0]];
         game.defer(new ChoosePolicyBonus(alliedPlayer, bonuses, (bonusId) => {
           const chosenBonus = this.parties.flatMap((p) => p.bonuses).find((b) => b.id === bonusId);
-          chosenBonus?.grant(game, alliedPlayer);
+          chosenBonus?.grantForPlayer?.(alliedPlayer);
         }));
       }
     }

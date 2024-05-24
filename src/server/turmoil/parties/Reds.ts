@@ -2,8 +2,8 @@ import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {IGame} from '../../IGame';
-import {IBonus} from '../Bonus';
-import {Policy} from '../Policy';
+import {Bonus, IBonus} from '../Bonus';
+import {IPolicy} from '../Policy';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
@@ -21,7 +21,7 @@ export class Reds extends Party implements IParty {
   readonly policies = [REDS_POLICY_1, REDS_POLICY_2, REDS_POLICY_3, REDS_POLICY_4];
 }
 
-class RedsBonus01 implements IBonus {
+class RedsBonus01 extends Bonus {
   readonly id = 'rb01' as const;
   readonly description = 'The player(s) with the lowest TR gains 1 TR';
 
@@ -38,7 +38,7 @@ class RedsBonus01 implements IBonus {
     return 0;
   }
 
-  grant(game: IGame) {
+  override grant(game: IGame) {
     const players = game.getPlayersInGenerationOrder();
     const scores = players.map((player) => this.getScore(player));
 
@@ -47,6 +47,12 @@ class RedsBonus01 implements IBonus {
         player.increaseTerraformRating(1, {log: true});
       }
     });
+  }
+
+  grantForPlayer(player: IPlayer): void {
+    if (this.getScore(player) > 0) {
+      player.increaseTerraformRating(1, {log: true});
+    }
   }
 }
 
@@ -77,12 +83,12 @@ class RedsBonus02 implements IBonus {
   }
 }
 
-class RedsPolicy01 implements Policy {
+class RedsPolicy01 implements IPolicy {
   readonly id = 'rp01' as const;
   readonly description = 'When you take an action that raises TR, you MUST pay 3 M€ per step raised';
 }
 
-class RedsPolicy02 implements Policy {
+class RedsPolicy02 implements IPolicy {
   readonly id = 'rp02' as const;
   readonly description = 'When you place a tile, pay 3 M€ or as much as possible';
 
@@ -97,7 +103,7 @@ class RedsPolicy02 implements Policy {
   }
 }
 
-class RedsPolicy03 implements Policy {
+class RedsPolicy03 implements IPolicy {
   readonly id = 'rp03' as const;
   readonly description = 'Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
 
@@ -237,7 +243,7 @@ class RedsPolicy03 implements Policy {
   }
 }
 
-class RedsPolicy04 implements Policy {
+class RedsPolicy04 implements IPolicy {
   readonly id = 'rp04' as const;
   readonly description = 'When you raise a global parameter, decrease your M€ production 1 step per step raised if possible';
 }

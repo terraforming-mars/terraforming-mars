@@ -3,8 +3,8 @@ import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
-import {BaseBonus} from '../Bonus';
-import {BasePolicy, Policy} from '../Policy';
+import {Bonus} from '../Bonus';
+import {Policy, IPolicy} from '../Policy';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IPlayer} from '../../IPlayer';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
@@ -22,7 +22,7 @@ export class Unity extends Party implements IParty {
   policies = [UNITY_POLICY_1, UNITY_POLICY_2, UNITY_POLICY_3, UNITY_POLICY_4];
 }
 
-class UnityBonus01 extends BaseBonus {
+class UnityBonus01 extends Bonus {
   id = 'ub01' as const;
   description = 'Gain 1 M€ for each Venus, Earth and Jovian tag you have';
 
@@ -36,7 +36,7 @@ class UnityBonus01 extends BaseBonus {
   }
 }
 
-class UnityBonus02 extends BaseBonus {
+class UnityBonus02 extends Bonus {
   id = 'ub02' as const;
   description = 'Gain 1 M€ for each Space tag you have';
 
@@ -49,7 +49,7 @@ class UnityBonus02 extends BaseBonus {
   }
 }
 
-class UnityPolicy01 extends BasePolicy {
+class UnityPolicy01 extends Policy {
   id = 'up01' as const;
   description = 'Your titanium resources are worth 1 M€ extra';
 
@@ -61,7 +61,7 @@ class UnityPolicy01 extends BasePolicy {
   }
 }
 
-class UnityPolicy02 implements Policy {
+class UnityPolicy02 implements IPolicy {
   id = 'up02' as const;
   description = 'Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)';
 
@@ -115,7 +115,7 @@ class UnityPolicy02 implements Policy {
   }
 }
 
-class UnityPolicy03 implements Policy {
+class UnityPolicy03 implements IPolicy {
   id = 'up03' as const;
   description = 'Spend 4 M€ to draw a Space card (Turmoil Unity)';
 
@@ -135,7 +135,7 @@ class UnityPolicy03 implements Policy {
   }
 }
 
-class UnityPolicy04 implements Policy {
+class UnityPolicy04 implements IPolicy {
   id = 'up04' as const;
   description = 'Cards with Space tags cost 2 M€ less to play';
 }

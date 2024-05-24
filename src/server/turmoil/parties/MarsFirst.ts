@@ -3,11 +3,11 @@ import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
-import {BaseBonus} from '../Bonus';
+import {Bonus} from '../Bonus';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {Space} from '../../boards/Space';
 import {IPlayer} from '../../IPlayer';
-import {BasePolicy, Policy} from '../Policy';
+import {Policy, IPolicy} from '../Policy';
 import {Phase} from '../../../common/Phase';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IProjectCard} from '../../cards/IProjectCard';
@@ -21,7 +21,7 @@ export class MarsFirst extends Party implements IParty {
 }
 
 // TODO(nwai90): Mars First bonus IDs start with 'm' and policies start with 'mp'.
-class MarsFirstBonus01 extends BaseBonus {
+class MarsFirstBonus01 extends Bonus {
   readonly id = 'mb01' as const;
   readonly description = 'Gain 1 M€ for each building tag you have';
 
@@ -34,7 +34,7 @@ class MarsFirstBonus01 extends BaseBonus {
   }
 }
 
-class MarsFirstBonus02 extends BaseBonus {
+class MarsFirstBonus02 extends Bonus {
   readonly id = 'mb02' as const;
   readonly description = 'Gain 1 M€ for each tile you have ON MARS';
 
@@ -48,7 +48,7 @@ class MarsFirstBonus02 extends BaseBonus {
   }
 }
 
-class MarsFirstPolicy01 implements Policy {
+class MarsFirstPolicy01 implements IPolicy {
   readonly id = 'mfp01' as const;
   readonly description = 'When you place a tile ON MARS, gain 1 steel';
 
@@ -59,7 +59,7 @@ class MarsFirstPolicy01 implements Policy {
   }
 }
 
-class MarsFirstPolicy02 implements Policy {
+class MarsFirstPolicy02 implements IPolicy {
   readonly id = 'mfp02' as const;
   readonly description = 'When you play a building tag, gain 2 M€';
 
@@ -68,7 +68,7 @@ class MarsFirstPolicy02 implements Policy {
   }
 }
 
-class MarsFirstPolicy03 extends BasePolicy {
+class MarsFirstPolicy03 extends Policy {
   readonly id = 'mfp03' as const;
   readonly description = 'Your steel resources are worth 1 M€ extra';
 
@@ -81,7 +81,7 @@ class MarsFirstPolicy03 extends BasePolicy {
   }
 }
 
-class MarsFirstPolicy04 implements Policy {
+class MarsFirstPolicy04 implements IPolicy {
   readonly id = 'mfp04' as const;
   readonly description = 'Spend 4 M€ to draw a Building card (Turmoil Mars First)';
 

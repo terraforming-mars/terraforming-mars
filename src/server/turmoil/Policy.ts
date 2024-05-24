@@ -9,7 +9,7 @@ type Suffix = 'p01' | 'p02' | 'p03' | 'p04';
 export type PolicyId = `${Party}${Suffix}`
 
 // TODO(kberg): Rename to IPolicy
-export interface Policy {
+export interface IPolicy {
   id: PolicyId;
   description: string | ((player: IPlayer | undefined) => string);
   onTilePlaced?(player: IPlayer, space: Space): void;
@@ -23,7 +23,7 @@ export interface Policy {
   }
 
 // TODO(kberg): Rename to Policy
-export abstract class BasePolicy implements Policy {
+export abstract class Policy implements IPolicy {
   abstract readonly id: PolicyId;
   abstract readonly description: string | ((player: IPlayer | undefined) => string);
 
@@ -44,6 +44,6 @@ export abstract class BasePolicy implements Policy {
   public abstract onPolicyEndForPlayer(_player: IPlayer): void;
 }
 
-export function policyDescription(policy: Policy, player: IPlayer | undefined): string {
+export function policyDescription(policy: IPolicy, player: IPlayer | undefined): string {
   return typeof(policy.description) === 'string' ? policy.description : policy.description(player);
 }

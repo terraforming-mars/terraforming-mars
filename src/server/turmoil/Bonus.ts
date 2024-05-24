@@ -3,7 +3,7 @@ import {IPlayer} from '../IPlayer';
 import {BonusId} from '../../common/turmoil/Types';
 
 // TODO(ryoku): Rename to IBonus
-export interface Bonus {
+export interface IBonus {
   id: BonusId;
   description: string;
   grantForPlayer?(player: IPlayer): void;
@@ -12,7 +12,7 @@ export interface Bonus {
 }
 
 // TODO(ryoku): Rename to Bonus
-export abstract class BaseBonus implements Bonus {
+export abstract class Bonus implements IBonus {
   abstract id: BonusId;
   abstract description: string;
   public abstract grantForPlayer(player: IPlayer): void;

@@ -726,7 +726,7 @@ export class Player implements IPlayer {
 
     // Even without the draft, using this to compute the number of cards to keep.
     const draft = draftVariant ? newStandardDraft(this.game) : newNonDraft(this.game);
-    const dealtCards: Array<IProjectCard> = draftVariant ? this.draftedCards : draft.draw(this);
+    const dealtCards: Array<IProjectCard> = draftVariant ? [...this.draftedCards] : draft.draw(this);
 
     if (draftVariant) {
       this.draftedCards = [];

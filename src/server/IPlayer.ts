@@ -104,7 +104,7 @@ export interface IPlayer {
   playedCards: Array<IProjectCard>;
   cardCost: number;
 
-  /** Cards this player did not draft that will be passed to the next player */
+  /** Cards this player has in their draft hand. Player chooses from them, and passes them to the next player */
   draftHand: Array<IProjectCard>;
   /** Cards this player has already chosen during this draft round */
   draftedCards: Array<IProjectCard>;

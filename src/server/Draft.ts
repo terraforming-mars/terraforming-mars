@@ -1,4 +1,4 @@
-import {inplaceRemove, copyAndClear as copyAndEmpty} from '../common/utils/utils';
+import {inplaceRemove, copyAndClear as copyAndEmpty, zip} from '../common/utils/utils';
 import {CardName} from '../common/cards/CardName';
 import {IGame} from './IGame';
 import {IPlayer} from './IPlayer';
@@ -31,16 +31,34 @@ export abstract class Draft {
 
   public startDraft() {
     this.game.save();
-    for (const player of this.game.getPlayers()) {
+
+    const arrays: Array<Array<IProjectCard>> = [];
+    if (this.game.draftRound === 1) {
+      for (const player of this.game.getPlayers()) {
+        arrays.push(this.draw(player));
+      }
+    } else {
+      arrays.push(...this.game.getPlayers().map((player) => player.draftHand));
+      if (this.draftDirection() === 'after') {
+        arrays.unshift(arrays.pop()!); // eslint-disable-line @typescript-eslint/no-non-null-assertion
+      } else {
+        arrays.push(arrays.shift()!); // eslint-disable-line @typescript-eslint/no-non-null-assertion
+      }
+    }
+
+    for (const [player, draftHand] of zip(this.game.getPlayers(), arrays)) {
+      player.draftHand = draftHand;
       player.needsToDraft = true;
-      const draftCardsFrom = this.draftingFrom(player);
-      const cards = this.game.draftRound === 1 ? this.draw(player) : copyAndEmpty(draftCardsFrom.draftHand);
-      this.askPlayerToDraft(player, cards);
+      this.askPlayerToDraft(player);
     }
   }
 
   public restoreDraft() {
-    this.startDraft();
+    for (const player of this.game.getPlayers()) {
+      if (player.needsToDraft) {
+        this.askPlayerToDraft(player);
+      }
+    }
   }
 
   private draftingFrom(player: IPlayer): IPlayer {
@@ -53,14 +71,10 @@ export abstract class Draft {
 
   /**
    * Ask the player to choose from a set of cards.
-   *
-   * @param passedCards The cards received from the draw, or from the prior player.
    */
-  private askPlayerToDraft(player: IPlayer, passedCards: Array<IProjectCard>): void {
+  private askPlayerToDraft(player: IPlayer): void {
     const passTo = this.draftingTo(player);
     const cardsToKeep = this.cardsToKeep(player);
-
-    const cards = [...passedCards];
 
     const messageTitle = cardsToKeep === 1 ?
       'Select a card to keep and pass the rest to ${0}' :
@@ -69,13 +83,12 @@ export abstract class Draft {
       new SelectCard(
         message(messageTitle, (b) => b.player(passTo)),
         'Keep',
-        cards,
+        player.draftHand,
         {min: cardsToKeep, max: cardsToKeep, played: false})
         .andThen((selected) => {
           for (const card of selected) {
             player.draftedCards.push(card);
-            inplaceRemove(cards, card);
-            player.draftHand = cards;
+            inplaceRemove(player.draftHand, card);
           }
           this.onCardChosen(player);
           return undefined;
@@ -88,6 +101,9 @@ export abstract class Draft {
 
     // If anybody still needs to draft, stop here.
     if (this.game.getPlayers().some((p) => p.needsToDraft === true)) {
+      // if (this.game.gameOptions.incrementalDraft) {
+      this.game.save();
+      // }
       return;
     }
 
@@ -98,7 +114,7 @@ export abstract class Draft {
       return;
     }
 
-    // Push last card for each player
+    // Push last cards for each player
     for (const player of this.game.getPlayers()) {
       player.draftedCards.push(...copyAndEmpty(this.draftingFrom(player).draftHand));
       player.needsToDraft = undefined;
@@ -229,8 +245,7 @@ class InitialDraft extends Draft {
         player.draftedCards = [];
       }
       if (this.game.gameOptions.preludeExtension && this.game.gameOptions.preludeDraftVariant) {
-        const newDraft = newPreludeDraft(this.game);
-        newDraft.startDraft();
+        newPreludeDraft(this.game).startDraft();
       } else {
         this.game.gotoInitialResearchPhase();
       }

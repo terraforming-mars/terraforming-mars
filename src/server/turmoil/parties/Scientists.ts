@@ -3,10 +3,10 @@ import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
-import {Bonus} from '../Bonus';
+import {BaseBonus} from '../Bonus';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IPlayer} from '../../IPlayer';
-import {Policy, IPolicy} from '../Policy';
+import {BasePolicy, Policy} from '../Policy';
 import {TITLES} from '../../inputs/titles';
 
 export class Scientists extends Party implements IParty {
@@ -15,7 +15,7 @@ export class Scientists extends Party implements IParty {
   readonly policies = [SCIENTISTS_POLICY_1, SCIENTISTS_POLICY_2, SCIENTISTS_POLICY_3, SCIENTISTS_POLICY_4];
 }
 
-class ScientistsBonus01 extends Bonus {
+class ScientistsBonus01 extends BaseBonus {
   readonly id = 'sb01' as const;
   readonly description = 'Gain 1 M€ for each science tag you have';
 
@@ -28,7 +28,7 @@ class ScientistsBonus01 extends Bonus {
   }
 }
 
-class ScientistsBonus02 extends Bonus {
+class ScientistsBonus02 extends BaseBonus {
   readonly id = 'sb02' as const;
   readonly description = 'Gain 1 M€ for every 3 cards in hand';
 
@@ -41,7 +41,7 @@ class ScientistsBonus02 extends Bonus {
   }
 }
 
-class ScientistsPolicy01 implements IPolicy {
+class ScientistsPolicy01 implements Policy {
   readonly id = 'sp01' as const;
   readonly description = 'Pay 10 M€ to draw 3 cards (Turmoil Scientists)';
 
@@ -62,17 +62,17 @@ class ScientistsPolicy01 implements IPolicy {
   }
 }
 
-class ScientistsPolicy02 implements IPolicy {
+class ScientistsPolicy02 implements Policy {
   readonly id = 'sp02' as const;
   readonly description = 'Your global requirements are +/- 2 steps';
 }
 
-class ScientistsPolicy03 implements IPolicy {
+class ScientistsPolicy03 implements Policy {
   readonly id = 'sp03' as const;
   readonly description = 'When you raise a global parameter, draw a card per step raised';
 }
 
-class ScientistsPolicy04 extends Policy {
+class ScientistsPolicy04 extends BasePolicy {
   readonly id = 'sp04' as const;
   readonly description = 'Cards with Science tag requirements may be played with 1 less Science tag';
 

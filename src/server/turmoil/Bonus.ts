@@ -2,8 +2,8 @@ import {IGame} from '../IGame';
 import {IPlayer} from '../IPlayer';
 import {BonusId} from '../../common/turmoil/Types';
 
-// TODO(ryoku): Rename to IBonus
-export interface IBonus {
+// TODO(kberg): Rename to IBonus
+export interface Bonus {
   id: BonusId;
   description: string;
   grantForPlayer?(player: IPlayer): void;
@@ -11,8 +11,8 @@ export interface IBonus {
   getScore(player: IPlayer): number;
 }
 
-// TODO(ryoku): Rename to Bonus
-export abstract class Bonus implements IBonus {
+// TODO(kberg): Rename to Bonus
+export abstract class BaseBonus implements Bonus {
   abstract id: BonusId;
   abstract description: string;
   public abstract grantForPlayer(player: IPlayer): void;

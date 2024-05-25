@@ -14,7 +14,7 @@ import {PartyName} from '../../common/turmoil/PartyName';
 import {REDS_POLICY_2} from './parties/Reds';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {TRSource} from '../../common/cards/TRSource';
-import {IPolicy, policyDescription} from './Policy';
+import {Policy, policyDescription} from './Policy';
 
 export class TurmoilHandler {
   private constructor() {}
@@ -24,7 +24,7 @@ export class TurmoilHandler {
     if (turmoil === undefined) {
       return undefined;
     }
-    const policy: IPolicy = turmoil.rulingPolicy();
+    const policy: Policy = turmoil.rulingPolicy();
     if (policy.canAct?.(player)) {
       return new SelectOption(policyDescription(policy, player), 'Pay').andThen(() => policy.action?.(player));
     }

@@ -1,9 +1,9 @@
 import {ChoosePoliticalAgenda} from '../deferredActions/ChoosePoliticalAgenda';
 import {IGame} from '../IGame';
-import {IBonus} from './Bonus';
+import {Bonus} from './Bonus';
 import {IParty} from './parties/IParty';
 import {PartyName} from '../../common/turmoil/PartyName';
-import {IPolicy} from './Policy';
+import {Policy} from './Policy';
 import {Turmoil} from './Turmoil';
 import {Agenda, AgendaStyle} from '../../common/turmoil/Types';
 
@@ -40,8 +40,8 @@ export class PoliticalAgendas {
   }
 
   private static getRandomAgenda(party: IParty): Agenda {
-    const bonus: IBonus = PoliticalAgendas.randomElement(party.bonuses);
-    const policy: IPolicy = PoliticalAgendas.randomElement(party.policies);
+    const bonus: Bonus = PoliticalAgendas.randomElement(party.bonuses);
+    const policy: Policy = PoliticalAgendas.randomElement(party.policies);
 
     return {bonusId: bonus.id, policyId: policy.id};
   }

@@ -8,8 +8,8 @@ import {GameModel} from './GameModel';
 import {PlayerId, ParticipantId} from '../Types';
 import {CardName} from '../cards/CardName';
 import {Resource} from '../Resource';
-import {Agenda} from '../turmoil/Types';
 import {PartyName} from '../turmoil/PartyName';
+import {Agenda} from '../turmoil/Types';
 
 export interface ViewModel {
   game: GameModel;
@@ -19,16 +19,15 @@ export interface ViewModel {
   runId: string;
 }
 
+type AlliedPartyModel = {
+  partyName: PartyName;
+  agenda: Agenda;
+};
+
 // 'off': Resources (or production) are unprotected.
 // 'on': Resources (or production) are protected.
 // 'half': Half resources are protected when targeted. Applies to Botanical Experience.
 export type Protection = 'off' | 'on' | 'half';
-
-/** When player has Mars Frontier Alliance, this is their political party alliance. */
-export type AlliedParty = {
-  partyName: PartyName,
-  agenda: Agenda,
-}
 
 /** The public information about a player */
 export type PublicPlayerModel = {
@@ -77,7 +76,7 @@ export type PublicPlayerModel = {
   tradesThisGeneration: number;
   victoryPointsBreakdown: IVictoryPointsBreakdown;
   victoryPointsByGeneration: Array<number>;
-  alliedParty?: AlliedParty;
+  alliedParty?: AlliedPartyModel;
 }
 
 /** A player's view of the game, including their secret information. */

@@ -4,7 +4,7 @@ import {Color} from '../common/Color';
 import {SerializedCard} from './SerializedCard';
 import {SerializedTimer} from '../common/SerializedTimer';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
-import {AlliedParty} from '../common/models/PlayerModel';
+import {AlliedParty} from './turmoil/AlliedParty';
 
 interface DeprecatedFields {
 }

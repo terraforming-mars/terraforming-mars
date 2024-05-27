@@ -77,7 +77,7 @@ import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {Counter} from './behavior/Counter';
 import {TRSource} from '../common/cards/TRSource';
 import {IParty} from './turmoil/parties/IParty';
-import {AlliedParty} from '../common/models/PlayerModel';
+import {AlliedParty} from './turmoil/AlliedParty';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 

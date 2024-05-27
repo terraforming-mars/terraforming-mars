@@ -31,7 +31,7 @@ import {Color} from '../common/Color';
 import {OrOptions} from './inputs/OrOptions';
 import {Stock} from './player/Stock';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
-import {AlliedParty} from '../common/models/PlayerModel';
+import {AlliedParty} from './turmoil/AlliedParty';
 import {IParty} from './turmoil/parties/IParty';
 
 export type ResourceSource = IPlayer | GlobalEventName | ICard;

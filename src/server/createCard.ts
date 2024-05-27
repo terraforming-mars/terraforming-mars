@@ -59,7 +59,7 @@ export function newCeo(cardName: CardName): ICeoCard | undefined {
 
 export function preludesFromJSON(cards: Array<CardName>): Array<IPreludeCard> {
   if (cards === undefined) {
-    console.warn('missing cards calling cardsFromJSON');
+    console.warn('missing cards calling preludesFromJSON');
     return [];
   }
   const result: Array<IPreludeCard> = [];

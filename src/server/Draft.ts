@@ -23,12 +23,17 @@ export type DraftType = 'none' | 'initial' | 'prelude' | 'standard';
 export abstract class Draft {
   constructor(public readonly type: DraftType, protected readonly game: IGame) {}
 
-  protected abstract cardsToDraw(player: IPlayer): number;
-  protected abstract cardsToKeep(player: IPlayer): number;
+  /** draw cards into hand at the start of the iteration. */
   protected abstract draw(player: IPlayer): Array<IProjectCard>;
-  protected abstract draftDirection(): 'before' | 'after';
+  /** The number of cards the player will choose in this draft round. Almost always 1. */
+  protected abstract cardsToKeep(player: IPlayer): number;
+  /** The direction in which cards are passed. Either to the player before (right) or after (left). */
+  protected abstract passDirection(): 'before' | 'after';
+  /** Called when all cards are drafted. */
   protected abstract endRound(): void;
 
+  /** Start an entire draft iteration (or draft round). Saves the game, sets all the cards up, and asks players to make their first choice. */
+  // TODO(kberg): Create a startDraft() which draws, and a continueDraft() which uses the cards a player is handed.
   public startDraft() {
     this.game.save();
 
@@ -39,7 +44,7 @@ export abstract class Draft {
       }
     } else {
       arrays.push(...this.game.getPlayers().map((player) => player.draftHand));
-      if (this.draftDirection() === 'after') {
+      if (this.passDirection() === 'after') {
         arrays.unshift(arrays.pop()!); // eslint-disable-line @typescript-eslint/no-non-null-assertion
       } else {
         arrays.push(arrays.shift()!); // eslint-disable-line @typescript-eslint/no-non-null-assertion
@@ -53,27 +58,36 @@ export abstract class Draft {
     }
   }
 
+  /**
+   * Called when the game is reloaded from disk. Restores the draft state.
+   */
   public restoreDraft() {
     for (const player of this.game.getPlayers()) {
       if (player.needsToDraft) {
         this.askPlayerToDraft(player);
       }
     }
+
+    if (!this.game.getPlayers().some((p) => p.needsToDraft)) {
+      this.endRound();
+    }
   }
 
-  private draftingFrom(player: IPlayer): IPlayer {
-    return this.draftDirection() === 'before' ? this.game.getPlayerBefore(player) : this.game.getPlayerAfter(player);
+  /** The player this player is taking their cards from when everybody passes their draft hands */
+  private takingFrom(player: IPlayer): IPlayer {
+    return this.passDirection() === 'before' ? this.game.getPlayerBefore(player) : this.game.getPlayerAfter(player);
   }
 
-  private draftingTo(player: IPlayer): IPlayer {
-    return this.draftDirection() === 'after' ? this.game.getPlayerBefore(player) : this.game.getPlayerAfter(player);
+  /** The player this player is givign their cards to when everybody passes their draft hands */
+  private givingTo(player: IPlayer): IPlayer {
+    return this.passDirection() === 'after' ? this.game.getPlayerBefore(player) : this.game.getPlayerAfter(player);
   }
 
   /**
    * Ask the player to choose from a set of cards.
    */
   private askPlayerToDraft(player: IPlayer): void {
-    const passTo = this.draftingTo(player);
+    const giveTo = this.givingTo(player);
     const cardsToKeep = this.cardsToKeep(player);
 
     const messageTitle = cardsToKeep === 1 ?
@@ -81,7 +95,7 @@ export abstract class Draft {
       'Select two cards to keep and pass the rest to ${0}';
     player.setWaitingFor(
       new SelectCard(
-        message(messageTitle, (b) => b.player(passTo)),
+        message(messageTitle, (b) => b.player(giveTo)),
         'Keep',
         player.draftHand,
         {min: cardsToKeep, max: cardsToKeep, played: false})
@@ -90,13 +104,14 @@ export abstract class Draft {
             player.draftedCards.push(card);
             inplaceRemove(player.draftHand, card);
           }
-          this.onCardChosen(player);
+          this.onCardDrafted(player);
           return undefined;
         }),
     );
   }
 
-  private onCardChosen(player: IPlayer): void {
+  /** Called when a player has chosen a card to draft. */
+  private onCardDrafted(player: IPlayer): void {
     player.needsToDraft = false;
 
     // If anybody still needs to draft, stop here.
@@ -116,54 +131,11 @@ export abstract class Draft {
 
     // Push last cards for each player
     for (const player of this.game.getPlayers()) {
-      player.draftedCards.push(...copyAndEmpty(this.draftingFrom(player).draftHand));
+      player.draftedCards.push(...copyAndEmpty(this.takingFrom(player).draftHand));
       player.needsToDraft = undefined;
     }
 
     this.endRound();
-  }
-}
-
-/**
- * Special case where a player isn't drafting cards.
- *
- * This commingles the concepts of the draft phase and research phase. But for now this is OK. Code is simpler.
- */
-class NonDraft extends Draft {
-  constructor(game: IGame) {
-    super('standard', game);
-  }
-
-  override draw(player: IPlayer) {
-    const cardsToDraw = this.cardsToDraw(player);
-    return this.game.projectDeck.drawN(this.game, cardsToDraw, 'bottom');
-  }
-
-  override cardsToDraw(player: IPlayer): number {
-    if (LunaProjectOffice.isActive(player)) {
-      return 5;
-    }
-    if (player.isCorporation(CardName.MARS_MATHS)) {
-      return 5;
-    }
-
-    return 4;
-  }
-
-  override cardsToKeep(player: IPlayer): number {
-    if (LunaProjectOffice.isActive(player)) {
-      return 5;
-    }
-
-    return 4;
-  }
-
-  override draftDirection(): never {
-    throw new Error('Method not implemented.');
-  }
-
-  override endRound(): never {
-    throw new Error('Not implemented');
   }
 }
 
@@ -177,7 +149,7 @@ class StandardDraft extends Draft {
     return this.game.projectDeck.drawN(this.game, cardsToDraw, 'bottom');
   }
 
-  override cardsToDraw(player: IPlayer): number {
+  private cardsToDraw(player: IPlayer): number {
     if (LunaProjectOffice.isActive(player)) {
       return 5;
     }
@@ -199,7 +171,7 @@ class StandardDraft extends Draft {
     return 1;
   }
 
-  override draftDirection() {
+  override passDirection() {
     return this.game.generation % 2 === 0 ? 'before' : 'after';
   }
 
@@ -213,20 +185,15 @@ class InitialDraft extends Draft {
     super('initial', game);
   }
 
-  override draw(player: IPlayer) {
-    const cardsToDraw = this.cardsToDraw(player);
-    return this.game.projectDeck.drawN(this.game, cardsToDraw, 'bottom');
-  }
-
-  override cardsToDraw(_player: IPlayer): number {
-    return 5;
+  override draw(_player: IPlayer) {
+    return this.game.projectDeck.drawN(this.game, 5, 'bottom');
   }
 
   override cardsToKeep(_player: IPlayer): number {
     return 1;
   }
 
-  override draftDirection() {
+  override passDirection() {
     return this.game.initialDraftIteration === 2 ? 'before' : 'after';
   }
 
@@ -263,15 +230,11 @@ class PreludeDraft extends Draft {
     return player.dealtPreludeCards;
   }
 
-  override cardsToDraw(_player: IPlayer): number {
-    return 4;
-  }
-
   override cardsToKeep(_player: IPlayer): number {
     return 1;
   }
 
-  override draftDirection(): 'after' {
+  override passDirection(): 'after' {
     return 'after';
   }
 
@@ -283,10 +246,6 @@ class PreludeDraft extends Draft {
 
     this.game.gotoInitialResearchPhase();
   }
-}
-
-export function newNonDraft(game: IGame) {
-  return new NonDraft(game);
 }
 
 export function newStandardDraft(game: IGame) {

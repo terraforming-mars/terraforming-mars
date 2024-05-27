@@ -68,14 +68,14 @@ import {PlayableCard} from './cards/IProjectCard';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
 import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
-import {inplaceRemove, sum} from '../common/utils/utils';
+import {copyAndClear, inplaceRemove, sum} from '../common/utils/utils';
 import {PreludesExpansion} from './preludes/PreludesExpansion';
 import {ChooseCards} from './deferredActions/ChooseCards';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {Counter} from './behavior/Counter';
 import {TRSource} from '../common/cards/TRSource';
-import {newNonDraft, newStandardDraft} from './Draft';
+import {newStandardDraft} from './Draft';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 
@@ -722,19 +722,19 @@ export class Player implements IPlayer {
   }
 
   public runResearchPhase(): void {
-    const draftVariant = this.game.gameOptions.draftVariant;
+    if (!this.game.gameOptions.draftVariant || this.game.isSoloMode()) {
+      this.draftedCards = newStandardDraft(this.game).draw(this);
+    }
 
-    // Even without the draft, using this to compute the number of cards to keep.
-    const draft = draftVariant ? newStandardDraft(this.game) : newNonDraft(this.game);
-    const dealtCards: Array<IProjectCard> = draftVariant ? [...this.draftedCards] : draft.draw(this);
-
-    if (draftVariant) {
-      this.draftedCards = [];
+    let selectable = this.draftedCards.length;
+    if (this.isCorporation(CardName.MARS_MATHS) && !this.isCorporation(CardName.LUNA_PROJECT_OFFICE)) {
+      selectable--;
     }
 
     // TODO(kberg): Using .execute to rely on directly calling setWaitingFor is not great.
-    const cardsToKeep = draft.cardsToKeep(this);
-    const action = new ChooseCards(this, dealtCards, {paying: true, keepMax: cardsToKeep}).execute();
+    // It's because each player is drafting at the same time. Once again, the server isn't ideal
+    // when it comes to handling multiple players at once.
+    const action = new ChooseCards(this, copyAndClear(this.draftedCards), {paying: true, keepMax: selectable}).execute();
     this.setWaitingFor(action, () => this.game.playerIsFinishedWithResearchPhase(this));
   }
 

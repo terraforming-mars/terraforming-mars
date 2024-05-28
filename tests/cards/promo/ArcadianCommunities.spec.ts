@@ -6,15 +6,18 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast, runAllActions} from '../../TestingUtils';
 import {MarsBoard} from '../../../src/server/boards/MarsBoard';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
+import {TileType} from '../../../src/common/TileType';
+import {IGame} from '../../../src/server/IGame';
 
 describe('ArcadianCommunities', function() {
   let card: ArcadianCommunities;
   let player: TestPlayer;
+  let game: IGame;
   let board: MarsBoard;
 
   beforeEach(() => {
     card = new ArcadianCommunities();
-    [/* game */, player] = testGame(2);
+    [game, player] = testGame(2);
     player.setCorporationForTest(card);
     board = player.game.board;
   });
@@ -56,8 +59,8 @@ describe('ArcadianCommunities', function() {
     expect(player.megaCredits).to.eq(0);
 
     // This describes the effect.
-    player.game.addCity(player, space);
-    runAllActions(player.game);
+    game.addCity(player, space);
+    runAllActions(game);
     expect(player.megaCredits).to.eq(3);
   });
 
@@ -85,5 +88,16 @@ describe('ArcadianCommunities', function() {
 
     expect(cast(card.action(player), SelectSpace).spaces).does.not.contain(first);
     expect(cast(card.action(player), SelectSpace).spaces).does.contain(second);
+  });
+
+  // Verifies that a regression does not recoccur.
+  it('Not granting when it should not', () => {
+    const oceanSpace = board.getAvailableSpacesForOcean(player)[0];
+    oceanSpace.bonus = []; // Just to make sure.
+    expect(player.megaCredits).to.eq(0);
+    game.addTile(player, oceanSpace, {tileType: TileType.MOHOLE_AREA});
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
+    expect(player.megaCredits).to.eq(0);
   });
 });

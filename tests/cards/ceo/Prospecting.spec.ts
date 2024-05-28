@@ -1,10 +1,9 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
-
 import {Prospecting} from '../../../src/server/cards/underworld/Prospecting';
 import {Venus} from '../../../src/server/cards/community/Venus';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
@@ -12,7 +11,7 @@ import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 describe('Prospecting', function() {
   let card: Prospecting;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Prospecting();

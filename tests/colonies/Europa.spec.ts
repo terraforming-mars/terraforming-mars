@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Europa} from '../../src/server/colonies/Europa';
 import {PlaceOceanTile} from '../../src/server/deferredActions/PlaceOceanTile';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
@@ -10,7 +10,7 @@ describe('Europa', function() {
   let europa: Europa;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     europa = new Europa();

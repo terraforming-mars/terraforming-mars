@@ -6,7 +6,7 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
 
 describe('SubnauticPirates', () => {
   let card: SubnauticPirates;
@@ -109,9 +109,9 @@ describe('SubnauticPirates', () => {
     runAllActions(game);
 
     cast(player.popWaitingFor(), undefined);
-    UnderworldTestHelper.assertIsMaybeBlock(player2, player2.popWaitingFor(), 'corruption');
+    assertIsMaybeBlock(player2, player2.popWaitingFor(), 'corruption');
     runAllActions(game);
-    UnderworldTestHelper.assertIsMaybeBlock(player3, player3.popWaitingFor(), 'do not block');
+    assertIsMaybeBlock(player3, player3.popWaitingFor(), 'do not block');
 
     expect(player.megaCredits).eq(6);
     expect(player2.megaCredits).eq(6);

@@ -1,16 +1,16 @@
 import {expect} from 'chai';
 import {CupolaCity} from '../../../src/server/cards/base/CupolaCity';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceCity} from '../../assertions';
 
 describe('CupolaCity', function() {
   let card: CupolaCity;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new CupolaCity();
@@ -34,7 +34,7 @@ describe('CupolaCity', function() {
     cast(card.play(player), undefined);
     runAllActions(player.game);
 
-    UnderworldTestHelper.assertPlaceCity(player, player.popWaitingFor());
+    assertPlaceCity(player, player.popWaitingFor());
 
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(3);

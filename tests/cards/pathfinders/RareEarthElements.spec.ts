@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {RareEarthElements} from '../../../src/server/cards/pathfinders/RareEarthElements';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
 import {testGame} from '../../TestGame';
@@ -13,7 +13,7 @@ describe('RareEarthElements', function() {
   let card: RareEarthElements;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new RareEarthElements();

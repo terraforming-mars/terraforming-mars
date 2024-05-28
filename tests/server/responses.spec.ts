@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import * as responses from '../../src/server/routes/responses';
-import {MockResponse} from './HttpMocks';
-import {RouteTestScaffolding} from './RouteTestScaffolding';
+import * as responses from '../../src/server/server/responses';
+import {MockResponse} from '../routes/HttpMocks';
+import {RouteTestScaffolding} from '../routes/RouteTestScaffolding';
 import {statusCode} from '../../src/common/http/statusCode';
 
 describe('Route', () => {

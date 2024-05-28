@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {MartianRepository} from '../../../src/server/cards/pathfinders/MartianRepository';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Tag} from '../../../src/common/cards/Tag';
+import {testGame} from '../../TestingUtils';
 
 describe('MartianRepository', function() {
   let card: MartianRepository;
@@ -12,8 +12,7 @@ describe('MartianRepository', function() {
 
   beforeEach(function() {
     card = new MartianRepository();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    [/* game */, player] = testGame(1);
   });
 
   it('can play', function() {

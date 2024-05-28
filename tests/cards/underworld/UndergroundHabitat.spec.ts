@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {UndergroundHabitat} from '../../../src/server/cards/underworld/UndergroundHabitat';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {Penguins} from '../../../src/server/cards/promo/Penguins';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
@@ -19,7 +19,7 @@ describe('UndergroundHabitat', () => {
     expect(player.production.plants).eq(1);
     runAllActions(game);
 
-    UnderworldTestHelper.assertIsExcavationAction(player, player.popWaitingFor());
+    assertIsExcavationAction(player, player.popWaitingFor());
     runAllActions(game);
 
     const selectCard = cast(player.popWaitingFor(), SelectCard);

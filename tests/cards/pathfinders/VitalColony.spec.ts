@@ -3,14 +3,14 @@ import {testGame} from '../../TestGame';
 import {VitalColony} from '../../../src/server/cards/pathfinders/VitalColony';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('VitalColony', function() {
   let card: VitalColony;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new VitalColony();

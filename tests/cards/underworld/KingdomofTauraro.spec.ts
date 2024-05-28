@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {KingdomofTauraro} from '../../../src/server/cards/underworld/KingdomofTauraro';
 import {testGame} from '../../TestGame';
 import {addCity, addGreenery, runAllActions} from '../../TestingUtils';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceCity} from '../../assertions';
 
 describe('KingdomofTauraro', () => {
   it('Should play', () => {
@@ -22,7 +22,7 @@ describe('KingdomofTauraro', () => {
 
     player.deferInitialAction(card);
     runAllActions(game);
-    UnderworldTestHelper.assertPlaceCity(player, player.popWaitingFor());
+    assertPlaceCity(player, player.popWaitingFor());
   });
 
   it('May place next to own cities', () => {

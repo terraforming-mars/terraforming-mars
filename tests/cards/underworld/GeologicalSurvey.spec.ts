@@ -4,7 +4,7 @@ import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
 
 describe('GeologicalSurvey', () => {
@@ -23,9 +23,9 @@ describe('GeologicalSurvey', () => {
     cast(card.play(player), undefined);
     runAllActions(game);
 
-    UnderworldTestHelper.assertIsIdentificationAction(player, player.popWaitingFor());
+    assertIsIdentificationAction(player, player.popWaitingFor());
     runAllActions(game);
-    UnderworldTestHelper.assertIsIdentificationAction(player, player.popWaitingFor());
+    assertIsIdentificationAction(player, player.popWaitingFor());
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
     expect(communicationCenter.resourceCount).eq(1);

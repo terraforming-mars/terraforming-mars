@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {BuildingIndustries} from '../../../src/server/cards/base/BuildingIndustries';
 import {CheungShingMARS} from '../../../src/server/cards/prelude/CheungShingMARS';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
 describe('CheungShingMARS', function() {
   let card: CheungShingMARS;
@@ -11,8 +11,7 @@ describe('CheungShingMARS', function() {
 
   beforeEach(function() {
     card = new CheungShingMARS();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    [/* game */, player] = testGame(1);
   });
 
   it('Gets card discount', function() {

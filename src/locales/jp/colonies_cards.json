@@ -3,7 +3,7 @@
     "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.": "条件：浮遊体3つ以上. MC産出+2. 2浮遊体獲得",
 
     "Air Raid": "空賊",
-    "Requires that you lose 1 floater. Steal 5 M€ from any player.": "1浮遊体を支払い、望むならプレイヤー1人から最大5MCを除去し、同じものを獲得.",
+    "Requires that you lose 1 floater. Steal 5 M€ from any player.": "1浮遊体を支払い、望むならプレイヤー1人から最大5MC盗む.",
 
     "Atmo Collectors": "大気収集施設",
     "Action: Add one floater here.": "アクション：このカード上に1浮遊体追加.",
@@ -60,6 +60,7 @@
     "Action: Add 1 floater to a JOVIAN CARD.": "アクション：木星タグカード上に1浮遊体追加.",
     "Action: Gain 1 M€ for every floater here [MAX 4].": "このカード上の浮遊体毎に1MC獲得.(最大4MC)",
     "Requires 3 science tags.": "条件：科学タグ3つ以上.",
+    "[max 4]": "(最大4)",
 
     "Luna Governor": "月の総督",
     "Requires 3 Earth tags. Increase your M€ production 2 steps.": "条件：地球タグ3つ以上. MC産出+2.",
@@ -71,7 +72,7 @@
     "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": "地球タグ2つ毎に植物産出+1.",
 
     "Market Manipulation": "市場操作",
-    "Increase one colony tile track 1 step. Decrease another colony tile track 1 step.": "コロニータイル1つの交易マーカ+1段階. 別のコロニータイル1つの交易マーカ-1段階.",
+    "Increase one colony tile track 1 step. Decrease another colony tile track 1 step.": "天体1つの交易マーカ+1段階. 別の天体1つの交易マーカ-1段階.",
 
     "Martian Zoo": "火星動物園",
     "Effect: When you play an Earth tag, place an animal here.": "効果：地球タグをプレイ時、このカード上に1動物追加.",
@@ -108,7 +109,7 @@
     "1 VP for each camp resource on this card.": "このカード上の1キャンプリソース毎に1VP",
 
     "Research Colony": "研究コロニー",
-    "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.": "コロニー1つ配置(既に配置済みのコロニータイルでも可). 2ドロー.",
+    "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.": "コロニー1つ配置(既に配置済みの天体でも可). 2ドロー.",
 
     "Rim Freighters": "外縁貨物便",
 
@@ -126,7 +127,7 @@
     "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a city tile. Gain 1 Trade Fleet.": "条件：所有コロニー1つ以上. 電力産出-1し、MC産出+4. 都市タイルを配置. 1交易艦隊獲得.",
 
     "Space Port Colony": "宇宙港コロニー",
-    "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.": "条件：所有コロニー1つ以上. コロニー1つ配置(既に配置済みのコロニータイルでも可). 1交易艦隊獲得.",
+    "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.": "条件：所有コロニー1つ以上. コロニー1つ配置(既に配置済みの天体でも可). 1交易艦隊獲得.",
     "1VP per 2 colonies in play.": "配置済みの全コロニー2つ毎に1VP.",
 
     "Spin-off Department": "スピンオフ部門",
@@ -153,7 +154,7 @@
     "Trade Envoys": "交易大使",
 
     "Trading Colony": "交易コロニー",
-    "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "効果：交易するコロニータイルのトラックを+1段階してもよい.",
+    "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "効果：交易する天体のトラックを+1段階してもよい.",
     "Place a colony": "コロニー1つ配置.",
 
     "Urban Decomposers": "都市棲の分解者",

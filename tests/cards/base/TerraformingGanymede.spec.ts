@@ -1,23 +1,20 @@
 import {expect} from 'chai';
 import {TerraformingGanymede} from '../../../src/server/cards/base/TerraformingGanymede';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Phase} from '../../../src/common/Phase';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {TestPlayer} from '../../TestPlayer';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
-import {cast} from '../../TestingUtils';
+import {cast, testGame} from '../../TestingUtils';
 
 describe('TerraformingGanymede', function() {
   let card: TerraformingGanymede;
   let player: TestPlayer;
-  let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new TerraformingGanymede();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player, {turmoilExtension: true});
+    [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
   });
 
   it('Should play', function() {

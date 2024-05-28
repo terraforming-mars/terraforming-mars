@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {PlantTax} from '../../../src/server/cards/underworld/PlantTax';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {finishGeneration, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -10,7 +10,7 @@ describe('PlantTax', function() {
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new PlantTax();

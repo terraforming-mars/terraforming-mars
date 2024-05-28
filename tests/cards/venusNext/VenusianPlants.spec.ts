@@ -3,7 +3,7 @@ import {cast, setVenusScaleLevel} from '../../TestingUtils';
 import {Thermophiles} from '../../../src/server/cards/venusNext/Thermophiles';
 import {VenusianAnimals} from '../../../src/server/cards/venusNext/VenusianAnimals';
 import {VenusianPlants} from '../../../src/server/cards/venusNext/VenusianPlants';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -11,7 +11,7 @@ import {testGame} from '../../TestGame';
 describe('VenusianPlants', function() {
   let card: VenusianPlants;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new VenusianPlants();

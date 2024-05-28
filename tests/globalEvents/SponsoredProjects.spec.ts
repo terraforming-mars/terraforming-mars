@@ -2,20 +2,15 @@ import {expect} from 'chai';
 import {Ants} from '../../src/server/cards/base/Ants';
 import {Fish} from '../../src/server/cards/base/Fish';
 import {SecurityFleet} from '../../src/server/cards/base/SecurityFleet';
-import {Game} from '../../src/server/Game';
 import {SponsoredProjects} from '../../src/server/turmoil/globalEvents/SponsoredProjects';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/server/turmoil/Turmoil';
-import {TestPlayer} from '../TestPlayer';
+import {testGame} from '../TestingUtils';
 
 describe('SponsoredProjects', function() {
   it('resolve play', function() {
     const card = new SponsoredProjects();
-    const player = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, player2], player);
-    const turmoil = Turmoil.newInstance(game);
-
+    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const turmoil = game.turmoil!;
     player.playedCards.push(new Ants());
     if (player.playedCards[0].resourceCount !== undefined) {
       player.playedCards[0].resourceCount++;

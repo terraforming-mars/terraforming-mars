@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {InfrastructureOverload} from '../../../src/server/cards/underworld/InfrastructureOverload';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
@@ -9,7 +9,7 @@ import {testGame} from '../../TestGame';
 
 describe('InfrastructureOverload', () => {
   let card: InfrastructureOverload;
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;

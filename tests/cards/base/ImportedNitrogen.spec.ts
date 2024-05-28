@@ -6,7 +6,7 @@ import {ImportedNitrogen} from '../../../src/server/cards/base/ImportedNitrogen'
 import {Pets} from '../../../src/server/cards/base/Pets';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {ICard} from '../../../src/server/cards/ICard';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -14,7 +14,7 @@ import {testGame} from '../../TestGame';
 describe('ImportedNitrogen', function() {
   let card: ImportedNitrogen;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new ImportedNitrogen();

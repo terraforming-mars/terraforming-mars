@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SpacePrivateers} from '../../../src/server/cards/underworld/SpacePrivateers';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
 
 describe('SpacePrivateers', () => {
   it('canPlay', () => {
@@ -46,9 +46,9 @@ describe('SpacePrivateers', () => {
     card.resourceCount = 2;
     cast(card.action(player), undefined);
     runAllActions(game);
-    UnderworldTestHelper.assertIsMaybeBlock(player2, player2.popWaitingFor(), 'do not block');
+    assertIsMaybeBlock(player2, player2.popWaitingFor(), 'do not block');
     runAllActions(game);
-    UnderworldTestHelper.assertIsMaybeBlock(player3, player3.popWaitingFor(), 'do not block');
+    assertIsMaybeBlock(player3, player3.popWaitingFor(), 'do not block');
     runAllActions(game);
 
     expect(player.megaCredits).eq(4);
@@ -72,9 +72,9 @@ describe('SpacePrivateers', () => {
     card.resourceCount = 2;
     cast(card.action(player), undefined);
     runAllActions(game);
-    UnderworldTestHelper.assertIsMaybeBlock(player2, player2.popWaitingFor(), 'corruption');
+    assertIsMaybeBlock(player2, player2.popWaitingFor(), 'corruption');
     runAllActions(game);
-    UnderworldTestHelper.assertIsMaybeBlock(player3, player3.popWaitingFor(), 'do not block');
+    assertIsMaybeBlock(player3, player3.popWaitingFor(), 'do not block');
     runAllActions(game);
 
     expect(player.megaCredits).eq(2);
@@ -98,9 +98,9 @@ describe('SpacePrivateers', () => {
     card.resourceCount = 2;
     cast(card.action(player), undefined);
     runAllActions(game);
-    UnderworldTestHelper.assertIsMaybeBlock(player2, player2.popWaitingFor(), 'corruption');
+    assertIsMaybeBlock(player2, player2.popWaitingFor(), 'corruption');
     runAllActions(game);
-    UnderworldTestHelper.assertIsMaybeBlock(player3, player3.popWaitingFor(), 'corruption');
+    assertIsMaybeBlock(player3, player3.popWaitingFor(), 'corruption');
     runAllActions(game);
 
     expect(player.megaCredits).eq(0);

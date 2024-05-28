@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {setTemperature} from '../../TestingUtils';
 import {DesignedMicroOrganisms} from '../../../src/server/cards/base/DesignedMicroOrganisms';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
 describe('DesignedMicroOrganisms', function() {
   let card: DesignedMicroOrganisms;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new DesignedMicroOrganisms();

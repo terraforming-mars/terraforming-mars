@@ -5,22 +5,21 @@ import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {EcologyResearch} from '../../../src/server/cards/colonies/EcologyResearch';
 import {ICard} from '../../../src/server/cards/ICard';
 import {Luna} from '../../../src/server/colonies/Luna';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
 describe('EcologyResearch', function() {
   let card: EcologyResearch;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let colony1: Luna;
 
   beforeEach(function() {
     card = new EcologyResearch();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, {coloniesExtension: true});
+    [game, player/* , player2 */] = testGame(2, {coloniesExtension: true});
 
     colony1 = new Luna();
     colony1.colonies.push(player.id);

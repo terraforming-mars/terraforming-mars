@@ -1,4 +1,4 @@
-import * as responses from './responses';
+import * as responses from '../server/responses';
 import {IHandler, Context} from './IHandler';
 import {Request} from '../Request';
 import {Response} from '../Response';

@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as responses from './responses';
+import * as responses from '../server/responses';
 
 import {Context} from './IHandler';
 import {BufferCache} from './BufferCache';

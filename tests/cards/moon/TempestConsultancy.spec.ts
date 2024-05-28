@@ -1,4 +1,4 @@
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TempestConsultancy} from '../../../src/server/cards/moon/TempestConsultancy';
 import {expect} from 'chai';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
@@ -9,18 +9,16 @@ import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
 import {cast, runAllActions} from '../../TestingUtils';
 import {VoteOfNoConfidence} from '../../../src/server/cards/turmoil/VoteOfNoConfidence';
+import {testGame} from '../../TestGame';
 
 describe('TempestConsultancy', () => {
   let player: TestPlayer;
-  let otherPlayer: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let card: TempestConsultancy;
   let turmoil: Turmoil;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    otherPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, otherPlayer], player, {turmoilExtension: true});
+    [game, player/* , otherPlayer */] = testGame(2, {turmoilExtension: true});
     card = new TempestConsultancy();
     turmoil = game.turmoil!;
   });

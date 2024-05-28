@@ -7,7 +7,7 @@ import {SelectResource} from '../../../src/server/inputs/SelectResource';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
 
 describe('Monopoly', () => {
   let card: Monopoly;
@@ -92,11 +92,11 @@ describe('Monopoly', () => {
     selectResource.options[0].cb(); // Megacredits
 
     runAllActions(game);
-    UnderworldTestHelper.assertIsMaybeBlock(opponent1, opponent1.popWaitingFor(), 'do not block');
+    assertIsMaybeBlock(opponent1, opponent1.popWaitingFor(), 'do not block');
     runAllActions(game);
-    UnderworldTestHelper.assertIsMaybeBlock(opponent2, opponent2.popWaitingFor(), 'corruption');
+    assertIsMaybeBlock(opponent2, opponent2.popWaitingFor(), 'corruption');
     runAllActions(game);
-    UnderworldTestHelper.assertIsMaybeBlock(opponent3, opponent3.popWaitingFor(), 'do not block');
+    assertIsMaybeBlock(opponent3, opponent3.popWaitingFor(), 'do not block');
     runAllActions(game);
 
     expect(player.production.megacredits).eq(2);

@@ -3,7 +3,7 @@ import {testGame} from '../../TestGame';
 import {MinorityRefuge} from '../../../src/server/cards/colonies/MinorityRefuge';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, churnPlay, runAllActions} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
@@ -13,7 +13,7 @@ import {Luna} from '../../../src/server/colonies/Luna';
 describe('MinorityRefuge', function() {
   let card: MinorityRefuge;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let triton: IColony;
 
   beforeEach(function() {

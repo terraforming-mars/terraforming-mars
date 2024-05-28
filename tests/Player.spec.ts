@@ -224,7 +224,7 @@ describe('Player', function() {
       heatProduction: 12,
       titaniumValue: 13,
       steelValue: 14,
-      canUseCorruptionAsMegacredits: false,
+      canUseCorruptionAsMegacredits: true,
       canUseHeatAsMegaCredits: false,
       canUseTitaniumAsMegacredits: false,
       canUsePlantsAsMegaCredits: false,
@@ -272,12 +272,14 @@ describe('Player', function() {
       victoryPointsByGeneration: [],
       underworldData: {corruption: 0},
       alliedParty: {agenda: {bonusId: 'gb01', policyId: 'gp01'}, partyName: PartyName.GREENS},
+      draftHand: [],
     };
 
     const newPlayer = Player.deserialize(json);
 
     expect(newPlayer.color).eq(Color.PURPLE);
     expect(newPlayer.colonies.tradesThisGeneration).eq(100);
+    expect(newPlayer.canUseCorruptionAsMegacredits).eq(true);
   });
   it('pulls self replicating robots target cards', function() {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');

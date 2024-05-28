@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../src/common/turmoil/PartyName';
-import {SelectParty} from '../../src/server//inputs/SelectParty';
+import {SelectParty} from '../../src/server/inputs/SelectParty';
 import {cast} from '../TestingUtils';
 import {IPlayer} from '../../src/server/IPlayer';
 import {PlayerInput} from '../../src/server/PlayerInput';
@@ -11,11 +11,11 @@ export function assertAddDelegateAction(player: IPlayer, action: PlayerInput | u
   const turmoil = Turmoil.getTurmoil(player.game);
   const marsFirst = turmoil.getPartyByName(PartyName.MARS);
 
-  expect(turmoil.getAvailableDelegateCount(player)).eq(7);
-  expect(marsFirst.delegates.get(player)).eq(0);
+  const delegatesInReserve = turmoil.getAvailableDelegateCount(player);
+  const delegatesInParty = marsFirst.delegates.get(player);
 
   selectParty.cb(marsFirst.name);
 
-  expect(turmoil.getAvailableDelegateCount(player)).eq(7 - count);
-  expect(marsFirst.delegates.get(player)).eq(count);
+  expect(turmoil.getAvailableDelegateCount(player)).eq(delegatesInReserve - count);
+  expect(marsFirst.delegates.get(player)).eq(delegatesInParty + count);
 }

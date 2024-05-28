@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Space} from '../../../src/server/boards/Space';
 import {cast, setRulingParty} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -14,7 +14,7 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 
 describe('Kelvinists', function() {
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     [game, player] = testGame(1, {turmoilExtension: true});

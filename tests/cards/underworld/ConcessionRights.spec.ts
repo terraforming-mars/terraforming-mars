@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ConcessionRights} from '../../../src/server/cards/underworld/ConcessionRights';
 import {testGame} from '../../TestGame';
 import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
 
 describe('ConcessionRights', () => {
@@ -25,7 +25,7 @@ describe('ConcessionRights', () => {
 
     runAllActions(game);
 
-    UnderworldTestHelper.assertIsExcavationAction(player, player.popWaitingFor(), true);
+    assertIsExcavationAction(player, player.popWaitingFor(), true);
 
     expect(UnderworldExpansion.excavatableSpaces(player)).has.length(59);
     forceGenerationEnd(game);

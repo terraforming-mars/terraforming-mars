@@ -25,7 +25,7 @@
 
   "Ancient Shipyards": "古代の造船所",
   "Ancient Shipyards (Nerfed)": "古代の造船所",
-  "Action: Steal 2 M€ from each player and add a resource cube here.": "アクション：他の全プレイヤーから2MC除去し、その合計分MC獲得. このカード上に1リソースキューブ追加.",
+  "Action: Steal 2 M€ from each player and add a resource cube here.": "アクション：他の全プレイヤーから2MC盗む. このカード上に1リソースキューブ追加.",
   "Spend 3 titanium. -1 VP for every resource here.": "3チタン支払う. このカード上の1リソースキューブ毎に-1VP.",
 
   "Archimedes Hydroponics Station": "アルキメデス水耕栽培基地",
@@ -46,7 +46,7 @@
   "1 VP PER MOON TAG YOU HAVE.": "月タグ1つ毎に1VP.",
 
   "Cosmic Radiation": "宇宙線",
-  "Requires 4 mining rate. All players pay 4M€ for each mining tile they own.": "条件：採掘レート4以上. 全プレイヤーは鉱山タイル1枚毎に、4MC除去.",
+  "Requires 4 mining rate. All players pay 4M€ for each mining tile they own.": "条件：採掘レート4以上. 全プレイヤーは所有する鉱山タイル1枚毎に、4MC除去.",
 
   "Darkside Incubation Plant": "暗闇側の培養プラント",
   "Action: Add 1 microbe here.": "アクション：このカード上に1微生物追加.",
@@ -83,10 +83,10 @@
   "Requires the mining rate of 2 or higher. Increase your energy production 1 step for each mining tile on The Moon.": "条件：採掘レート2以上. 鉱山タイル1枚毎に、電力産出+1.",
 
   "HE3 Lobbyists": "HE-3関係のロビー活動家",
-  "Increase your M€ production 1 step for each Moon tag you have (including this).": "月タグの数分、1MC獲得.",
+  "Increase your M€ production 1 step for each Moon tag you have (including this).": "月タグの数分、MC産出+1.",
 
   "HE3 Production Quotas": "HE-3生産の割当",
-  "Requires that Kelvinists are ruling or that you have 2 delegates there, and 1 mine tile on The Moon. Pay 1 steel per mine tile on The Moon to gain 4 heat per mine tile on The Moon. Raise the mining rate 1 step.": "条件：汎ケルビン党が与党か、そこに2議席ある. 鉱山タイル1枚以上. 鉱山タイル1枚毎に、1建材支払い、4温熱獲得 もしくは 月に鉱山タイルを配置.",
+  "Requires that Kelvinists are ruling or that you have 2 delegates there, and 1 mine tile on The Moon. Pay 1 steel per mine tile on The Moon to gain 4 heat per mine tile on The Moon. Raise the mining rate 1 step.": "条件：汎ケルビン党が与党か、そこに2議席ある. 鉱山タイル1枚以上. 鉱山タイル1枚毎に1建材支払い、4温熱獲得. 採掘レート+1段階.",
 
   "HE3 Refinery": "HE-3精製所",
   "Action: Gain 1 M€ for each level of mining rate.": "アクション：採掘レート1毎に、1MC獲得.",
@@ -157,10 +157,10 @@
   "Spend 1 titanium. Raise the logistic rate 1 step.": "1チタン支払う. 物流レート+1段階.",
 
   "Lunar Industry Complex": "ルナ産業コンプレックス",
-  "Spend 2 titanium. Place a mine tile on The Moon and raise the mining rate 1 step. Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.": "2チタン支払う. 月に鉱山タイルを配置し、採掘レート+1段階. 建材産出+1. チタン産出+1. 発熱産出+1. 電力産出+2.",
+  "Spend 2 titanium. Place a mine tile on The Moon and raise the mining rate 1 step. Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.": "2チタン支払う. 月に鉱山タイルを配置し、採掘レート+1段階. 建材産出+1. チタン産出+1. 温熱産出+1. 電力産出+2.",
 
   "Lunar Mine Urbanization": "ルナ・都市化鉱山",
-  "Requires you have 1 mine tile. Increase your M€ production 1 step. Remove 1 of your mine tiles (does not affect the mining rate.) Place this special tile there, regardless of placement rules. Gain placement bonuses as usual.  Raise the habitat rate 1 step. This tile counts both as a habitat and a mine tile.": "条件：鉱山タイル1枚以上所持. MC産出+1. 所有している鉱山タイル1枚を特殊タイルに置き換える. このタイルは生息地・鉱山タイルとして数える. 居住地レート+1段階.",
+  "Requires you have 1 mine tile. Increase your M€ production 1 step. Remove 1 of your mine tiles (does not affect the mining rate.) Place this special tile there, regardless of placement rules. Gain placement bonuses as usual.  Raise the habitat rate 1 step. This tile counts both as a habitat and a mine tile.": "条件：鉱山タイル1枚以上所持. MC産出+1. 所有している鉱山タイル1枚を特殊タイルに置き換え配置ボーナスを獲得. このタイルは生息地・鉱山タイルとして数える. 居住地レート+1段階.",
 
   "Lunar Observation Post": "ルナ・観測部門",
   "Action: Add 1 data resource to ANY card": "アクション：1データ獲得.",
@@ -231,10 +231,10 @@
   "Action: Spend 1 steel to add 2 data resources to ANY card.": "アクション：1建材支払い、2データ獲得.",
 
   "Revolting Colonists": "月生息地騒乱",
-  "Requires 4 habitat rate. All players pay 3M€ for each habitat tile they own.": "条件：居住地レート4以上. 全プレイヤーは生息地タイル1枚毎に、3MC除去.",
+  "Requires 4 habitat rate. All players pay 3M€ for each habitat tile they own.": "条件：居住地レート4以上. 全プレイヤーは所有する生息地タイル1枚毎に、3MC除去.",
 
   "Road Piracy": "路上強盗",
-  "Requires 3 logistic rate. Steal up to 6 steel or 4 titanium from other players. (Resources may be stolen from more than 1 opponent.)": "条件：物流レート3以上. 望むならプレイヤー1人から最大6建材 または 4チタンを除去し、同じものを獲得.",
+  "Requires 3 logistic rate. Steal up to 6 steel or 4 titanium from other players. (Resources may be stolen from more than 1 opponent.)": "条件：物流レート3以上. 望むならプレイヤー1人から最大6建材 または 4チタン盗む.",
 
   "Rover Drivers Union": "ローバー操縦士組合",
   "Requires 2 logistic rate. Raise the logistic rate 1 step. Increase your M€ production 1 step per logistic rate.": "物流レート+1段階. 物流レート1毎に、MC産出+1.",
@@ -296,7 +296,7 @@
   "Requires 1 habitat tile on The Moon. Spend 1 titanium. Raise the habitat rate 2 steps.": "条件：生息地タイル1枚以上. 1チタン支払う. 居住地レート+2段階.",
 
   "We Grow As One": "成長する私たちは一つ",
-  "Requires that Unity are ruling or that you have 2 delegates there. Increase ALL colony tile tracks 1 step. Increase each colony tile track 1 step if you have a colony on that colony tile.": "条件：太陽系融和党が与党か、そこに2議席ある. 全てのコロニータイルの交易マーカ+1段階. コロニーがある全てのコロニータイルの交易マーカ+1段階.",
+  "Requires that Unity are ruling or that you have 2 delegates there. Increase ALL colony tile tracks 1 step. Increase each colony tile track 1 step if you have a colony on that colony tile.": "条件：太陽系融和党が与党か、そこに2議席ある. 全ての天体の交易マーカ+1段階. コロニーがある全ての天体の交易マーカ+1段階.",
 
   "Martian Embassy": "火星大使館",
   "Raise the Mars Planetary Track 1 step for every 3 Moon tags you have, including this.": "月タグ3つ毎に、火星の影響度+1段階.",

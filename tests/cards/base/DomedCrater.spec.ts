@@ -1,16 +1,16 @@
 import {expect} from 'chai';
 import {DomedCrater} from '../../../src/server/cards/base/DomedCrater';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
 import {runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceCity} from '../../assertions';
 
 describe('DomedCrater', function() {
   let card: DomedCrater;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new DomedCrater();
@@ -34,7 +34,7 @@ describe('DomedCrater', function() {
     expect(card.play(player)).is.undefined;
     runAllActions(player.game);
 
-    UnderworldTestHelper.assertPlaceCity(player, player.popWaitingFor());
+    assertPlaceCity(player, player.popWaitingFor());
 
     expect(player.plants).to.eq(3);
     expect(player.production.energy).to.eq(0);

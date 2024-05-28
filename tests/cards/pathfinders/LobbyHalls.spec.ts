@@ -4,16 +4,16 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {Tag} from '../../../src/common/cards/Tag';
 import {IDeferredAction} from '../../../src/server//deferredActions/DeferredAction';
 import {cast} from '../../TestingUtils';
-import {assertAddDelegateAction} from '../../turmoil/TurmoilTestHelper';
+import {assertAddDelegateAction} from '../../turmoil/turmoilAssertions';
 
 describe('LobbyHalls', function() {
   let card: LobbyHalls;
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let turmoil: Turmoil;
 

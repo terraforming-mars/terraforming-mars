@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {BeholdTheEmperor} from '../../../src/server/cards/starwars/BeholdTheEmperor';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
@@ -12,7 +12,7 @@ describe('BeholdTheEmperor', () => {
   let card: BeholdTheEmperor;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
 
   beforeEach(() => {

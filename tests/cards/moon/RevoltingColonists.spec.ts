@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {IPlayer} from '../../../src/server/IPlayer';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
@@ -10,7 +10,7 @@ import {TileType} from '../../../src/common/TileType';
 import {testGame} from '../../TestGame';
 
 describe('RevoltingColonists', () => {
-  let game: Game;
+  let game: IGame;
   let player1: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {GeologicalExpertise} from '../../../src/server/cards/underworld/GeologicalExpertise';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 import {Tag} from '../../../src/common/cards/Tag';
 
 describe('GeologicalExpertise', () => {
@@ -13,13 +13,13 @@ describe('GeologicalExpertise', () => {
     cast(card.play(player), undefined);
     runAllActions(game);
 
-    UnderworldTestHelper.assertIsIdentificationAction(player, player.popWaitingFor());
+    assertIsIdentificationAction(player, player.popWaitingFor());
     runAllActions(game);
-    UnderworldTestHelper.assertIsIdentificationAction(player, player.popWaitingFor());
+    assertIsIdentificationAction(player, player.popWaitingFor());
     runAllActions(game);
-    UnderworldTestHelper.assertIsIdentificationAction(player, player.popWaitingFor());
+    assertIsIdentificationAction(player, player.popWaitingFor());
     runAllActions(game);
-    UnderworldTestHelper.assertIsIdentificationAction(player, player.popWaitingFor());
+    assertIsIdentificationAction(player, player.popWaitingFor());
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
     expect(player.cardsInHand).has.length(2);

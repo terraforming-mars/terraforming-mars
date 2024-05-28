@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -12,7 +12,7 @@ describe('CommunicationCenter', function() {
   let card: CommunicationCenter;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new CommunicationCenter();

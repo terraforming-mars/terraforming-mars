@@ -1,0 +1,59 @@
+{
+  "Arcadian": "Аркадійська",
+  "Communities": "Спільноти",
+  "Arcadian Communities": "Аркадійські спільноти",
+  "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "Ви починаєте з 40 M€ та 10 сталі. ЯК ПЕРШУ ДІЮ, ПОМІСТІТЬ СПІЛЬНОТУ [ГРАВЦЕВИЙ МАРКЕР] НА НЕЗАБЕЗПЕЧЕНУ ОБЛАСТЬ.",
+  "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.": "ДІЯ: Помістіть спільноту (гравцевий маркер) на незабезпечену область, прилеглу до одного з ваших плиток або позначених областей.",
+  "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.": "ЕФЕКТ: Позначені області зарезервовані для вас. Коли ви поміщаєте плитку туди, отримайте 3 M€.",
+
+  "Astrodrill": "Астродриль",
+  "Astrodrill ENT": "Астродриль",
+  "You start with 35 M€ and 3 asteroid resources.": "Ви починаєте з 35 M€ та 3 астероїдними ресурсами.",
+  "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "ДІЯ: Додайте астероїдний ресурс до БУДЬ-ЯКОЇ карти АБО отримайте будь-який стандартний ресурс, АБО видаліть астероїдний ресурс з цієї карти, щоб отримати 3 титану.",
+
+  "FACTORUM": "ФАКТОРУМ",
+  "Factorum": "Факторум",
+  "You start with 37 M€. Increase your steel production 1 step.": "Ви починаєте з 37 M€. Збільште вашу виробництво сталі на 1 крок.",
+  "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "ДІЯ: Збільште ваше виробництво енергії на 1 крок, ЯКЩО У ВАС НЕМАЄ ЕНЕРГЕТИЧНИХ РЕСУРСІВ, або витратте 3M€, щоб витягнути карту будівлі.",
+
+  "KUIPER COOPERATIVE": "КУЙПЕРСЬКА КООПЕРАЦІЯ",
+  "Kuiper Cooperative": "Куйперська кооперація",
+  "You start with 33 M€. Increase titanium production 1 step.": "Ви починаєте з 33 M€. Збільште ваше виробництво титану на 1 крок.",
+  "Action: Add 1 asteroid here for every space tag you have.": "ДІЯ: Додайте 1 астероїд тут за кожним вашим космічним символом.",
+  "Effect: When you use the AQUIFER or ASTEROID standard projects, you can spend asteroids on card as 1M€ each.": "ЕФЕКТ: Коли ви використовуєте стандартні проекти AQUIFER або ASTEROID, ви можете витрачати астероїди на карті по 1M€ за кожен.",
+
+  "mons": "Монс",
+  "INSURANCE": "СТРАХУВАННЯ",
+  "Mons Insurance": "Монс Страхування",
+  "You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "Ви починаєте з 48 M€. Збільште ваше виробництво M€ на 4 кроки. ВСІ СУПЕРНИКИ ЗМЕНШУЮТЬ СВОЄ ВИРОБНИЦТВО M€ НА 2 КРОКИ. ЦЕ НЕ ЗАПУСКАЄ ЕФЕКТ НИЖЧЕ.",
+  "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.": "ЕФЕКТ: Коли гравець змушує іншого гравця зменшити виробництво або втратити ресурси, заплатіть 3M€ жертві або якомога більше.",
+
+  "Pharmacy": "Фармація",
+  "Union": "Союз",
+  "Pharmacy Union": "Фармацевтичний союз",
+  "You start with 54 M€ . Draw a Science card.": "Ви починаєте з 54 M€. Витягніть карту науки.",
+  "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "ЕФЕКТ: Коли ГРАВЕЦЬ грає будь-який мікробний символ, додайте сюди хворобу і втратте 4 M€ або якомога більше. Коли ви граєте науковий символ, видаліть хворобу звідси і отримайте 1 РТ АБО якщо тут немає хвороб, ВИ МОЖЕТЕ покласти цю карту рубашкою вниз у вашу стопку ПОДІЙ, щоб отримати 3 РТ.",
+
+  "PHIL": "ФІЛ",
+  "A": "А",
+  "RES": "РЕС",
+  "Philares": "Філарес",
+  "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.": "Ви починаєте з 47 M€. Як вашу першу дію, помістіть плитку зелених насаджень і підвищте рівень кисню на 1 крок.",
+  "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "ЕФЕКТ: Кожне нове сусідство між вашою плиткою і плиткою суперника дає вам стандартний ресурс за вашим вибором [незалежно від того, хто щойно помістив плитку].",
+
+  "Recyclon": "Рециклон",
+  "You start with 38 M€ and 1 steel production.": "Ви починаєте з 38 M€ та 1 виробництвом сталі.",
+  "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "ЕФЕКТ: Коли ви граєте карту з символом будівлі, включаючи цю, отримайте 1 мікроб на цю карту, або видаліть 2 мікроби звідси і підвищте ваше виробництво рослин на 1 крок.",
+
+  "Tycho Magnetics": "Тихо Магнетік",
+  "You start with 42 M€. Increase your energy production 1 step.": "Ви починаєте з 42 M€. Збільште ваше виробництво енергії на 1 крок.",
+  "Action: Spend any amount of energy to draw the that many cards. Keep 1 and discard the rest.": "ДІЯ: Витратте будь-яку кількість енергії, щоб витягнути стільки карт. Залиште 1 і відкиньте решту.",
+
+  "SPLI": "СПЛІ",
+  "C": "С",
+  "E": "Е",
+  "TACTICAL GENOMICS": "ТАКТИЧНА ГЕНОМІКА",
+  "Splice": "Сплайс",
+  "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Ви починаєте з 44 M€. Як вашу першу дію, розкрийте карти, поки не розкриєте символ мікробу. Візьміть його і відкиньте решту.",
+  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "ЕФЕКТ: Коли гравець грає символ мікробу, включаючи цей, ТОЙ ГРАВЕЦЬ отримує 2 M€, або додає мікроба на ТУ КАРТУ, і ви отримуєте 2 M€."
+}

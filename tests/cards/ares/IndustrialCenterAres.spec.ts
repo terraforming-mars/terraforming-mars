@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TileType} from '../../../src/common/TileType';
 import {IndustrialCenterAres} from '../../../src/server/cards/ares/IndustrialCenterAres';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
@@ -11,7 +11,7 @@ import {testGame} from '../../TestGame';
 describe('IndustrialCenterAres', function() {
   let card: IndustrialCenterAres;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new IndustrialCenterAres();

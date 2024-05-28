@@ -9,8 +9,6 @@ import {IProjectCard} from '../IProjectCard';
 import {CardResource} from '../../../common/CardResource';
 
 export class CloudVortexOutpost extends PreludeCard {
-  public isDisabled: boolean = false;
-
   constructor() {
     super({
       name: CardName.CLOUD_VORTEX_OUTPOST,
@@ -32,18 +30,20 @@ export class CloudVortexOutpost extends PreludeCard {
     });
   }
 
+  public data: {isDisabled: boolean} = {isDisabled: false};
+
   private validCard(card: IProjectCard) {
     return card.resourceType === CardResource.FLOATER &&
       (card.type === CardType.EVENT || card.type === CardType.AUTOMATED || card.type === CardType.ACTIVE);
   }
 
   onCardPlayed(player: IPlayer, card: IProjectCard) {
-    if (this.isDisabled) {
+    if (this.data.isDisabled) {
       return;
     }
     if (this.validCard(card)) {
       player.addResourceTo(card, {qty: 3, log: true});
-      this.isDisabled = true;
+      this.data.isDisabled = true;
     }
   }
 }

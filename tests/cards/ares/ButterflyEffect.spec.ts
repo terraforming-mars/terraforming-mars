@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {ShiftAresGlobalParameters} from '../../../src/server/inputs/ShiftAresGlobalParameters';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {cast, churnPlay} from '../../TestingUtils';
 import {HAZARD_CONSTRAINTS} from '../../../src/common/ares/AresData';
 import {AresHandler} from '../../../src/server/ares/AresHandler';
@@ -11,7 +11,7 @@ import {AresHandler} from '../../../src/server/ares/AresHandler';
 describe('ButterflyEffect', function() {
   let card: ButterflyEffect;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new ButterflyEffect();

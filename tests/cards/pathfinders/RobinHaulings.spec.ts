@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {RobinHaulings} from '../../../src/server/cards/pathfinders/RobinHaulings';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
@@ -11,7 +11,7 @@ describe('RobinHaulings', function() {
   let card: RobinHaulings;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new RobinHaulings();

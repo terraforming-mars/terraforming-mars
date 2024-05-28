@@ -1,0 +1,221 @@
+{
+  "City Park": "Стадіон",
+  "Requires that you have 3 cities. Gain 2 plants.": "Вимагає наявності 3 міст. Отримайте 2 рослини.",
+
+  "Soil Enrichment": "Збагачення грунту",
+  "Spend 1 microbe from ANY of your cards to gain 5 plants": "Витратити 1 мікроб з БУДЬ-ЯКОЇ з ваших карт, щоб отримати 5 рослин",
+
+  "Icy Impactors": "Льодові імпактори",
+  "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "Дія: Витратити 10 M€ (можна використовувати титан) для додавання 2 астероїдів тут.",
+  "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "Дія: Витратити 1 астероїд тут, щоб розмістити океанську плитку. ПЕРШИЙ ГРАВЕЦЬ ВИБИРАЄ МІСЦЕ, ДЕ ВИ ПОВИННІ РОЗМІСТИТИ ЙОГО.",
+
+  "Floyd Continuum": "Флойд Континуум",
+  "Action: Gain 3 M€ per completed terraforming parameter.": "Дія: Отримайте 3 M€ за кожен завершений параметр терраформування.",
+
+  "Martian Lumber Corp": "Марсіанська Деревообробна Корпорація",
+  "Effect: When playing a building tag, plants may be used as 3 M€ each.": "Ефект: При грі зі значком будівлі, рослини можна використовувати по 3 M€ кожна.",
+  "Requires that you have 2 greenery tiles. Increase plant production 1 step.": "Вимагає наявності 2 зелених плиток. Збільшити виробництво рослин на 1 крок.",
+
+  "Solar Logistics": "Сонячна логістика",
+  "Effect: When you play an Earth tag, you pay 2 M€ less.": "Ефект: Коли ви граєте карту зі значком Землі, ви платите на 2 M€ менше.",
+  "Effect: When any player plays a space event, draw a card.": "Ефект: Коли будь-який гравець грає космічну подію, витягніть карту.",
+  "Gain 2 titanium.": "Отримайте 2 титану.",
+
+  "Teslaract": "Тесларакт",
+  "Action: Spend 1 energy production to gain 1 plant production.": "Дія: Витратити 1 виробництво енергії, щоб отримати 1 виробництво рослин.",
+  "Raise your TR 1 step.": "Підвищте ваш РТ на 1 крок.",
+
+  "Red Ships": "Червоні кораблі",
+  "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "Дія: Отримайте 1 M€ за кожне МІСТО І СПЕЦІАЛЬНЕ ПЛИТКА, прилеглі до океану.",
+  "Requires 4% oxygen.": "Вимагає 4% кисню або менше.",
+
+  "Neptunian Power Consultants": "Нептунійські енергетичні консультанти",
+  "Effect: When any ocean is placed, you MAY pay 5 M€ (steel may be used), to raise energy production 1 step and add 1 hydroelectric resource to this card.": "Ефект: Коли будь-який океан розміщується, ВИ МОЖЕТЕ заплатити 5 M€ (можна використовувати сталь), щоб підвищити виробництво енергії на 1 крок і додати 1 гідроелектричний ресурс на цю карту.",
+  "1 VP per hydroelectric resource on this card": "1 ПО за кожен гідроелектричний ресурс на цій карті",
+
+  "Mars Nomads": "Марські кочівники",
+  "Action: MOVE THE NOMADS to an adjacent, non-reserved empty area and collect THE PLACEMENT BONUS as if placing a special tile there. No tiles may be placed on the Nomad area.": "Дія: ПЕРЕМІСТИТИ КОЧІВНИКІВ на сусідню, не зарезервовану порожню область і зібрати БОНУС ЗА РОЗМІЩЕННЯ, якщо б там було розміщено спеціальну плитку. На область кочівників не можна розміщувати плитки.",
+  "PLACE THE NOMADS on a non-reserved, empty area on the game board.": "РОЗМІСТИТИ КОЧІВНИКІВ на не зарезервовану, порожню область на ігровій дошці.",
+
+  "Kaguya Tech": "Кагуя Технології",
+  "Increase M€ production 2 steps. Draw 1 card. Remove 1 of your greenery tiles (does not affect oxygen.) Place a city tile there, regardless of placement rules. Gain placement bonuses as usual.": "Збільшити виробництво M€ на 2 кроки. Витягнути 1 карту. Видалити 1 з ваших зелених плиток (не впливає на кисень). Розмістити там міську плитку, незалежно від правил розміщення. Отримати бонуси за розміщення, як зазвичай.",
+
+  "Homeostasis Bureau": "Бюро гомеостазу",
+  "Effect: When you raise the temperature, gain 3 M€.": "Ефект: При підвищенні температури отримайте 3 M€.",
+  "Increase your heat production 2 steps.": "Збільшити виробництво тепла на 2 кроки.",
+
+  "Hermetic Order of Mars": "Герметичний Орден Марсу",
+  "Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.": "Кисень повинен бути 4% або менше. Збільшити виробництво M€ на 2 кроки. Отримайте 1 M€ за кожну порожню область, прилеглу до ваших плиток.",
+
+  "St. Joseph of Cupertino Mission": "Місія святого Йосифа Купертіно",
+  "Action: Pay 5 M€ (STEEL MAY BE USED) to build 1 Cathedral in a city. Max 1 per city. City owner can pay 2 M€ to draw 1 card.": "Дія: Заплатіть 5 M€ (МОЖНА ВИКОРИСТОВУВАТИ СТАЛЬ), щоб побудувати 1 кафедральний собор у місті. Максимум 1 на місто. Власник міста може заплатити 2 M€, щоб витягнути 1 карту.",
+  "1 VP per City with a Cathedral in it.": "1 ПО за кожне місто з кафедральним собором в ньому.",
+
+  "Cyberia Systems": "Кіберія Системи",
+  "Raise your steel production 1 step. Copy the production boxes of 2 of your other cards with building tags.": "Підвищте виробництво сталі на 1 крок. Скопіюйте виробничі блоки 2 з ваших інших карт зі значками будівлі.",
+
+  "Carbon Nanosystems": "Карбонові наносистеми",
+  "Effect: When you play a science tag, including this, add a graphene resource here.": "Ефект: Коли ви граєте карту зі значком науки, включаючи цю, додайте графеновий ресурс сюди.",
+  "Effect: When playing a space or city tag, graphenes may be used as 4 M€ each.": "Ефект: Коли ви граєте карту зі значком космосу або міста, графен можна використовувати по 4 M€ кожен.",
+
+  "Astra Mechanica": "Астра Механіка",
+  "RETURN UP TO 2 OF YOUR PLAYED EVENT CARDS TO YOUR HAND. THEY MAY NOT BE CARDS THAT PLACE SPECIAL TILES.": "ПОВЕРНІТЬ ДО 2 ЗІГРАНИХ КАРТ ПОДІЙ НА СВОЮ РУКУ. ЦЕ НЕ МОЖУТЬ БУТИ КАРТИ, ЩО РОЗМІЩУЮТЬ СПЕЦІАЛЬНІ ПЛИТКИ.",
+
+  "Aqueduct Systems": "Акведукт Системи",
+  "Requires you have a city next to an ocean. Draw 3 cards with a building tag.": "Вимагає наявності міста поруч з океаном. Витягніть 3 карти зі значком будівлі.",
+
+  "Directed Heat Usage": "Направлене використання тепла",
+  "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "Дія: Витратити 3 тепла, щоб отримати або 4 M€ або 2 рослини.",
+  "Supercapacitors": "Суперконденсатори",
+  "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.": "ЕФЕКТ: ПЕРЕТВОРЕННЯ ЕНЕРГІЇ В ТЕПЛО ПІД ЧАС ВИРОБНИЦТВА Є ОПЦІОНАЛЬНИМ ДЛЯ КОЖНОЇ ЕНЕРГЕТИЧНОЇ РЕСУРСУ.",
+  "Increase M€ production 1 step.": "Збільшити виробництво M€ на 1 крок.",
+
+  "Robot Pollinators": "Роботи-опилювачі",
+  "Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.": "Вимагає 4% кисню або менше. Збільшити виробництво рослин на 1 крок. Отримайте 1 рослину за кожен значок рослини, який у вас є.",
+
+  "16 Psyche": "16 Психея",
+  "Increase titanium production 2 steps. Gain 3 titanium.": "Збільшити виробництво титану на 2 кроки. Отримайте 3 титану.",
+
+  "Comet Aiming": "Наведення комети",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "Дія: Витратити 1 титану, щоб додати 1 астероїдний ресурс до БУДЬ-ЯКОЇ КАРТИ.",
+  "Action: Remove 1 asteroid here to place an ocean.": "Дія: Видалити 1 астероїд тут, щоб розмістити океан.",
+
+  "Cutting Edge Technology": "Сучасні технології",
+  "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "Ефект: Коли граєте карту з вимогами, ви платите на 2 M€ менше за неї.",
+
+  "Crash Site Cleanup": "Прибирання місця катастрофи",
+  "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "Вимагає, щоб гравець видалив рослини ІНШОГО ГРАВЦЯ цього покоління. Отримайте 1 титан або 2 сталі.",
+
+  "Directed Impactors": "Направлені імпактори",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "Дія: Витратити 6 M€, щоб додати 1 астероїд до БУДЬ-ЯКОЇ КАРТИ (можна використовувати титан для оплати).",
+  "Action: Remove 1 asteroid here to raise temperature 1 step.": "Дія: Видалити 1 астероїд тут, щоб підвищити температуру на 1 крок.",
+
+  "Field-Capped City": "Місто з полем-кришкою",
+  "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Збільшити виробництво M€ на 2 кроки, збільшити виробництво енергії на 1 крок, отримати 3 рослини і розмістити міську плитку.",
+
+  "Great Dam": "Велика дамба",
+  "Requires 4 ocean tiles. Increase your energy production 2 steps.": "Вимагає 4 океанських плиток. Збільшити виробництво енергії на 2 кроки.",
+
+  "Magnetic Shield": "Магнітний щит",
+  "3 Power": "3 Енергії",
+  "Requires 3 power tags. Raise your TR 4 steps.": "Вимагає 3 значки енергії. Підвищте ваш РТ на 4 кроки.",
+
+  "Meltworks": "Плавильний завод",
+  "Action: Spend 5 heat to gain 3 steel.": "Дія: Витратити 5 тепла, щоб отримати 3 сталі.",
+  "Mohole Lake": "Мохольське озеро",
+  "Action: Add a microbe or animal to ANOTHER card.": "Дія: Додати мікроб або тварину на ІНШУ карту.",
+  "Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.": "Отримати 3 рослини. Підвищити температуру на 1 крок і розмістити 1 океанську плитку.",
+
+  "Diversity Support": "Підтримка різноманітності",
+  "9 Resource types": "9 типів ресурсів",
+  "Requires that you have 9 different types of resources. Gain 1 TR.": "Вимагає, щоб у вас було 9 різних типів ресурсів. Отримайте 1 РТ.",
+
+  "Topsoil Contract": "Контракт на верхній шар ґрунту",
+  "Effect: When you gain a microbe to ANY CARD, also gain 1 M€.": "Ефект: Коли ви отримуєте мікроба на БУДЬ-ЯКУ КАРТУ, також отримайте 1 M€.",
+  "Gain 3 plants.": "Отримати 3 рослини.",
+
+  "Imported Nutrients": "Імпортовані поживні речовини",
+  "Gain 4 plants and add 4 microbes to ANOTHER CARD.": "Отримати 4 рослини і додати 4 мікробів на ІНШУ КАРТУ.",
+
+  "Asteroid Deflection System": "Система відхилення астероїдів",
+  "Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.": "Дія: РОЗКРИТИ І ВИКЛАСТИ верхню карту з колоди. Якщо вона має значок космосу, додати астероїд сюди.",
+  "opponents may not remove your plants": "супротивники не можуть видаляти ваші рослини",
+  "Decrease your energy production 1 step. 1VP per asteroid on this card.": "Зменшити виробництво енергії на 1 крок. 1 ПО за кожен астероїд на цій карті.",
+
+  "Jovian Embassy": "Юпітерське посольство",
+  "Raise your TR 1 step.": "Підвищити ваш РТ на 1 крок.",
+
+  "Sub-Crust Measurements": "Вимірювання підшорсткового шару",
+  "Action: Draw a card.": "Дія: Витягнути карту.",
+  "Requires 2 science tags.": "Вимагає 2 значки науки.",
+
+  "Potatoes": "Картопля",
+  "Lose 2 plants. Increase your M€ production 2 steps.": "Втратити 2 рослини. Збільшити виробництво M€ на 2 кроки.",
+
+  "Meat Industry": "М'ясна промисловість",
+  "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "Ефект: Коли ви отримуєте тварину на БУДЬ-ЯКУ КАРТУ, отримайте 2 M€.",
+
+  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps and place this tile.": "Зменшити виробництво енергії на 4 кроки і збільшити виробництво рослин на 2 кроки. Підвищити ваш РТ на 3 кроки і розмістити цю плитку.",
+
+  "Orbital Cleanup": "Орбітальне прибирання",
+  "Action: Gain 1 M€ per science tag you have.": "Дія: Отримати 1 M€ за кожен значок науки, який у вас є.",
+  "Decrease your M€ production 2 steps.": "Зменшити виробництво M€ на 2 кроки.",
+
+  "Law Suit": "Судова справа",
+  "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "Вкрасти 3 M€ у гравця, який ВИДАЛИВ ВАШІ РЕСУРСИ АБО ЗМЕНШИВ ВАШЕ ВИРОБНИЦТВО цього покоління. Покласти цю карту рубашкою в стопку ПОДІЙ ТОГО ГРАВЦЯ.",
+
+  "Small Asteroid": "Малий астероїд",
+  "Increase temperature 1 step. Remove up to 2 plants from any player.": "Підвищити температуру на 1 крок. Видалити до 2 рослин у будь-якого гравця.",
+
+  "Asteroid Hollowing": "Видобування астероїдів",
+  "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "Дія: Витратити 1 титану, щоб додати 1 астероїдний ресурс сюди і збільшити виробництво M€ на 1 крок.",
+  "1VP for each 2 asteroids on this card.": "1 ПО за кожні 2 астероїди на цій карті.",
+
+  "Advertising": "Реклама",
+  "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "Ефект: Коли ви граєте карту з базовою вартістю 20 M€ або більше, збільште виробництво M€ на 1 крок.",
+
+  "Project Inspection": "Перевірка проекту",
+  "Use a card action that has been used this generation.": "Використовуйте дію карти, яка була використана цього покоління.",
+
+  "Rego Plastics": "Рего-пластики",
+  "Effect: Your steel resources are worth 1 M€ extra.": "Ефект: Ваші сталеві ресурси варто на 1 M€ більше.",
+
+  "Interplanetary Trade": "Міжпланетна торгівля",
+  "Increase your M€ production 1 step per different tag you have in play, including this.": "Збільшити виробництво M€ на 1 крок за кожен різний значок, який у вас є в грі, включаючи цей.",
+
+  "Penguins": "Пінгвіни",
+  "Action: Add 1 animal to this card.": "Дія: Додати 1 тварину на цю карту.",
+  "Requires 8 oceans.": "Вимагає 8 океанських плиток.",
+  "Snow Algae": "Сніжна водорість",
+  "Requires 2 oceans. Increase your plant production and your heat production 1 step each.": "Вимагає 2 океанських плиток. Збільште виробництво рослин і виробництво тепла на 1 крок кожне.",
+
+  "Self-replicating Robots": "Самовідтворюючі роботи",
+  "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "Дія: Розкрийте і розмістіть карту КОСМОСУ АБО БУДІВЛІ з руки тут, і розмістіть на ній 2 ресурси, АБО подвійте ресурси на карті тут.",
+  "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "Ефект: Карта тут може бути зіграна, наче з руки, зі зниженою вартістю на кількість ресурсів на ній.",
+
+  "Dusk Laser Mining": "Видобування променем вечірнього сяйва",
+  "Requires 2 science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "Вимагає 2 значки науки. Зменшити виробництво енергії на 1 крок і збільшити виробництво титану на 1 крок. Отримати 4 титану.",
+
+  "Hi-Tech Lab": "Високотехнологічна лабораторія",
+  "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "Дія: Витратити будь-яку кількість енергії, щоб витягнути таку ж кількість карт. ВЗЯТИ 1 В РУКУ І ВІДКЛАСТИ РЕШТУ.",
+
+  "Magnetic Field Generators": "Генератори магнітного поля",
+  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.": "Зменшити виробництво енергії на 4 кроки і збільшити виробництво рослин на 2 кроки. Підвищити ваш РТ на 3 кроки. Розмістити цю плитку.",
+
+  "Mercurian Alloys": "Меркурійські сплави",
+  "Effect: Your titanium resources are worth 1 M€ extra.": "Ефект: Ваші титанові ресурси варто на 1 M€ більше.",
+
+  "Energy Market": "Енергетичний ринок",
+  "Action: Spend 2X M€ to gain X energy.": "Дія: Витратити 2X M€, щоб отримати X енергії.",
+  "Action: Decrease energy production 1 step to gain 8 M€.": "Дія: Зменшити виробництво енергії на 1 крок, щоб отримати 8 M€.",
+
+  "Asteroid Rights": "Права на астероїди",
+  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "Дія: Витратити 1 M€, щоб додати 1 астероїд на БУДЬ-ЯКУ карту.",
+  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Дія: Витратити 1 астероїд тут, щоб збільшити виробництво M€ на 1 крок АБО отримати 2 титану.",
+  "Add 2 asteroids to this card.": "Додати 2 астероїди на цю карту.",
+
+  "Stanford Torus": "Стенфордський торус",
+  "Place a city tile IN SPACE, outside and separate from the planet.": "Розмістити плитку міста В КОСМОСІ, поза і окремо від планети.",
+
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.": "Підвищити температуру на 3 кроки і отримати 4 сталі. Розмістити цю плитку НЕ ПРИЛЕГЛО до жодної іншої плитки міста. Видалити до 6 рослин у будь-якого гравця.",
+
+  "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Вимагає 4 океанських плиток. Збільшити виробництво енергії на 2 кроки. Розмістити цю плитку ПРИЛЕГЛО до океанської плитки.",
+
+  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.": "Зменшити виробництво енергії на 4 кроки і збільшити виробництво рослин на 2 кроки. Підвищити ваш РТ на 3 кроки.",
+
+  "Requires 8 oceans. 1 VP for each animal on this card.": "Вимагає 8 океанських плиток. 1 РТ за кожну тварину на цій карті.",
+  "Requires 2 science tags.": "Вимагає 2 значки науки.",
+  "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "Дія: Витратити 2X M€, щоб отримати X енергії, або зменшити виробництво енергії на 1 крок, щоб отримати 8 M€.",
+
+  "Bactoviral Research": "Бактовірусні дослідження",
+  "Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.": "Витягнути 1 карту. Вибрати 1 зі своїх зіграних карт і додати до неї 1 мікроба за кожним значком науки, яким ви володієте, включаючи цей.",
+
+  "Bio Printing Facility": "Біопринтована установка",
+  "Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.": "Дія: Витратити 2 енергії, щоб отримати 2 рослини АБО додати 1 тварину на ІНШУ карту.",
+
+  "Harvest": "Збір врожаю",
+  "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "Вимагає, щоб у вас було 3 плитки зеленого грунту в грі. Отримати 12 M€.",
+
+  "Outdoor Sports": "Спорт на відкритому повітрі",
+  "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "Вимагає будь-яке місто, що прилягає до океану. Збільшити виробництво M€ на 2 кроки."
+}

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {RedCity} from '../../../src/server/cards/pathfinders/RedCity';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
@@ -17,7 +17,7 @@ describe('RedCity', function() {
   let card: RedCity;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
   let board: MarsBoard;
 

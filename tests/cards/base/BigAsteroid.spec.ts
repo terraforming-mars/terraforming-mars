@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {BigAsteroid} from '../../../src/server/cards/base/BigAsteroid';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
@@ -10,7 +10,7 @@ describe('BigAsteroid', function() {
   let card: BigAsteroid;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new BigAsteroid();
@@ -33,7 +33,7 @@ describe('BigAsteroid', function() {
   });
 
   it('Works fine in solo', function() {
-    game = Game.newInstance('gameid', [player], player);
+    const [game, player] = testGame(1);
     player.plants = 5;
     card.play(player);
     expect(game.deferredActions).has.lengthOf(1);

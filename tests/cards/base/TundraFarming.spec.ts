@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {setTemperature} from '../../TestingUtils';
 import {TundraFarming} from '../../../src/server/cards/base/TundraFarming';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
 describe('TundraFarming', function() {
   let card: TundraFarming;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new TundraFarming();

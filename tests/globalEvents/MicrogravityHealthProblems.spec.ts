@@ -1,19 +1,15 @@
 import {expect} from 'chai';
 import {Luna} from '../../src/server/colonies/Luna';
 import {Triton} from '../../src/server/colonies/Triton';
-import {Game} from '../../src/server/Game';
 import {MicrogravityHealthProblems} from '../../src/server/turmoil/globalEvents/MicrogravityHealthProblems';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/server/turmoil/Turmoil';
-import {TestPlayer} from '../TestPlayer';
+import {testGame} from '../TestingUtils';
 
 describe('MicrogravityHealthProblems', function() {
   it('resolve play', function() {
     const card = new MicrogravityHealthProblems();
-    const player = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, player2], player);
-    const turmoil = Turmoil.newInstance(game);
+    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const turmoil = game.turmoil!;
     const colony1 = new Luna();
     const colony2 = new Triton();
     colony1.colonies.push(player.id);

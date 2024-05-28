@@ -1,16 +1,16 @@
 import {expect} from 'chai';
 import {Mangrove} from '../../../src/server/cards/base/Mangrove';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
 import {runAllActions, setOxygenLevel, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceTile} from '../../assertions';
 
 describe('Mangrove', function() {
   let card: Mangrove;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Mangrove();
@@ -29,7 +29,7 @@ describe('Mangrove', function() {
     expect(card.play(player)).is.undefined;
     runAllActions(game);
 
-    UnderworldTestHelper.assertPlaceTile(player, player.popWaitingFor(), TileType.GREENERY);
+    assertPlaceTile(player, player.popWaitingFor(), TileType.GREENERY);
 
     expect(card.getVictoryPoints(player)).to.eq(1);
   });

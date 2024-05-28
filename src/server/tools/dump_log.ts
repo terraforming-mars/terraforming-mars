@@ -23,13 +23,13 @@ async function main() {
     throw new Error('game ids start with \'g\'');
   }
   const saveIds = await db.getSaveIds(gameId);
-  let lastIdx = -1;
+  let lastIdx = 0;
   for (const saveId of saveIds) {
     const {gameLog} = await db.getGameVersion(gameId, saveId);
-    for (let idx = lastIdx + 1; idx < gameLog.length; idx++) {
+    for (let idx = lastIdx; idx < gameLog.length; idx++) {
       const logEntry = gameLog[idx];
       const text = Log.applyData(logEntry, (datum) => datum.value);
-      console.log(idx, text);
+      console.log(`[${saveId}/${idx}]: ${text}`);
     }
     lastIdx = gameLog.length;
   }

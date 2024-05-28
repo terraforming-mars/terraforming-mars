@@ -4,7 +4,7 @@ import {LavaFlows} from '../../../src/server/cards/base/LavaFlows';
 import {DustSeals} from '../../../src/server/cards/base/DustSeals';
 import {Vitor} from '../../../src/server/cards/prelude/Vitor';
 import {AncientShipyards} from '../../../src/server/cards/moon/AncientShipyards';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
@@ -13,7 +13,7 @@ import {testGame} from '../../TestGame';
 describe('Vitor', function() {
   let card: Vitor;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Vitor();
@@ -32,7 +32,7 @@ describe('Vitor', function() {
   });
 
   it('No initial action for solo games', function() {
-    Game.newInstance('gameid', [player], player);
+    testGame(1);
     const action = player.deferInitialAction(card);
     cast(action, undefined);
   });

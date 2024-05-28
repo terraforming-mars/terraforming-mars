@@ -4,7 +4,7 @@ import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns'
 import {NitrogenFromTitan} from '../../../src/server/cards/colonies/NitrogenFromTitan';
 import {TitanFloatingLaunchPad} from '../../../src/server/cards/colonies/TitanFloatingLaunchPad';
 import {ICard} from '../../../src/server/cards/ICard';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -12,7 +12,7 @@ import {testGame} from '../../TestGame';
 describe('NitrogenFromTitan', function() {
   let card: NitrogenFromTitan;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new NitrogenFromTitan();

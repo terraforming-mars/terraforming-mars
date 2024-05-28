@@ -4,14 +4,14 @@ import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {runAllActions} from '../../TestingUtils';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
 
 describe('AeronGenomics', function() {
   let card: AeronGenomics;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let animalHost: IProjectCard;
 
   beforeEach(function() {

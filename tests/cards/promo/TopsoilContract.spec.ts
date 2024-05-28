@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TopsoilContract} from '../../../src/server/cards/promo/TopsoilContract';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {Ants} from '../../../src/server/cards/base/Ants';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {AerobrakedAmmoniaAsteroid} from '../../../src/server/cards/base/AerobrakedAmmoniaAsteroid';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
@@ -12,7 +12,7 @@ describe('TopsoilContract', function() {
   let card: TopsoilContract;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new TopsoilContract();

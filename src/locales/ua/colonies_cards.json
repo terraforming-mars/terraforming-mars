@@ -1,0 +1,165 @@
+{
+  "Airliners": "Пасажирські літаки",
+  "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.": "Вимагає наявності 3 плавучих. Збільште виробництво M€ на 2 кроки. Додайте 2 плавучих до БУДЬ-ЯКОЇ карти.",
+
+  "Air Raid": "Повітряна атака",
+  "Requires that you lose 1 floater. Steal 5 M€ from any player.": "Вимагає втрати 1 плавучого. Вкрадіть 5 M€ у будь-якого гравця.",
+
+  "Atmo Collectors": "Атмосферні колектори",
+  "Action: Add one floater here.": "Дія: Додайте одного плавучого сюди.",
+  "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "Дія: Витратити 1 плавучого тут, щоб отримати 2 титану, або 3 енергії, або 4 тепла.",
+  "Add 2 floaters to ANY card.": "Додайте 2 плавучих до БУДЬ-ЯКОЇ карти.",
+
+  "Community Services": "Соціальні служби",
+  "Increase your M€ production 1 step per CARD WITH NO TAGS, including this.": "Збільште виробництво M€ на 1 крок за КАЖДУ КАРТУ БЕЗ СИМВОЛІВ, включаючи цю.",
+
+  "Conscription": "Мобілізація",
+  "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "Вимагає 2 земних символів. Вартість наступної карти, яку ви граєте в цьому поколінні, зменшується на 16 M€.",
+
+  "Corona Extractor": "Корона-екстрактор",
+  "Requires 4 science tags. Increase your energy production 4 steps.": "Вимагає 4 наукових символів. Збільште виробництво енергії на 4 кроки.",
+
+  "Cryo-Sleep": "Кріо-сон",
+  "Effect: When you trade, you pay 1 less resource for it.": "Ефект: При торгівлі ви платите на 1 ресурс менше.",
+  "Earth Elevator": "Космічний ліфт",
+  "Increase your titanium production 3 steps.": "Збільште виробництво титану на 3 кроки.",
+
+  "Ecology Research": "Дослідження екології",
+  "Increase your plant production 1 step for each colony you own. Add 1 animal to ANOTHER card and 2 microbes to ANOTHER card.": "Збільште виробництво рослин на 1 крок за кожну колонію, яку ви володієте. Додайте 1 тварину на ІНШУ карту і 2 мікроби на ІНШУ карту.",
+
+  "Floater Leasing": "Оренда плавучих",
+  "Increase your M€ production 1 step PER 3 floaters you have.": "Збільште виробництво M€ на 1 крок за КОЖНІ 3 плавучих, які у вас є.",
+
+  "Floater Prototypes": "Прототипи плавучих",
+  "Add two floaters to ANOTHER card.": "Додайте два плавучих на ІНШУ карту.",
+
+  "Floater Technology": "Технологія плавучих",
+  "Action: Add 1 floater to ANOTHER card.": "Дія: Додайте 1 плавучого на ІНШУ карту.",
+
+  "Galilean Waystation": "Галілейська зупинка",
+  "Increase your M€ production 1 step for every Jovian tag in play.": "Збільште виробництво M€ на 1 крок за кожен Юпітерський символ у грі.",
+
+  "Heavy Taxation": "Важке оподаткування",
+  "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "Вимагає 2 земних символів. Збільште виробництво M€ на 2 кроки і отримайте 4 M€.",
+
+  "Ice Moon Colony": "Колонія на льодовому місяці",
+  "Place 1 colony and 1 ocean tile.": "Розмістіть 1 колонію і 1 океанську плитку.",
+
+  "Impactor Swarm": "Рої імпакторів",
+  "Requires 2 Jovian tags. Gain 12 heat. Remove up to 2 plants from any player.": "Вимагає 2 Юпітерських символів. Отримайте 12 тепла. Видаліть до 2 рослин у будь-якого гравця.",
+
+  "Interplanetary Colony Ship": "Міжпланетний колонізаційний корабель",
+  "Place a colony.": "Розмістіть колонію.",
+
+  "Jovian Lanterns": "Юпітерські ліхтарі",
+  "1 VP per 2 floaters here.": "1 ПО за кожні 2 плавучих тут.",
+  "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.": "Вимагає 1 Юпітерського символу. Збільште РТ на 1 крок. Додайте 2 плавучих на БУДЬ-ЯКУ карту.",
+
+  "Jupiter Floating Station": "Плавуча станція Юпітера",
+  "Action: Add 1 floater to a JOVIAN CARD.": "Дія: Додайте 1 плавучого на карту Юпітера.",
+  "Action: Gain 1 M€ for every floater here [MAX 4].": "Дія: Отримайте 1 M€ за кожного плавучого тут [МАКС 4].",
+  "Requires 3 science tags.": "Вимагає 3 наукових символів.",
+
+  "Luna Governor": "Губернатор Луни",
+  "Requires 3 Earth tags. Increase your M€ production 2 steps.": "Вимагає 3 земних символів. Збільште виробництво M€ на 2 кроки.",
+
+  "Lunar Exports": "Лунний експорт",
+  "Increase your plant production 2 steps, or your M€ production 5 steps.": "Збільште виробництво рослин на 2 кроки або виробництво M€ на 5 кроків.",
+
+  "Lunar Mining": "Лунний розробник",
+  "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": "Збільште виробництво титану на 1 крок за кожні 2 земних символи, які у вас є в грі, включаючи цей.",
+
+  "Market Manipulation": "Маніпуляція на ринку",
+  "Increase one colony tile track 1 step. Decrease another colony tile track 1 step.": "Збільште одну колонію на 1 крок. Зменште іншу колонію на 1 крок.",
+
+  "Martian Zoo": "Марсіанський зоопарк",
+  "Effect: When you play an Earth tag, place an animal here.": "Ефект: Коли ви граєте карту земного символу, помістіть тварину сюди.",
+  "Action: Gain 1M€ per animal here.": "Дія: Отримайте 1 M€ за кожну тварину тут.",
+  "Requires 2 city tiles in play.": "Вимагає 2 міських плиток у грі.",
+
+  "Mining Colony": "Рудникова колонія",
+  "Increase your titanium production 1 step. Place a colony.": "Збільште виробництво титану на 1 крок. Розмістіть колонію.",
+
+  "Minority Refuge": "Меншиновий притулок",
+  "Decrease your M€ production 2 steps. Place a colony.": "Зменште виробництво M€ на 2 кроки. Розмістіть колонію.",
+
+  "Molecular Printing": "Молекулярний друк",
+  "Gain 1 M€ for each city tile in play. Gain 1 M€ for each colony in play.": "Отримайте 1 M€ за кожну міську плитку у грі. Отримайте 1 M€ за кожну колонію у грі.",
+
+  "Nitrogen from Titan": "Азот з Титану",
+  "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.": "Збільште РТ на 2 кроки. Додайте 2 плавучих на карту Юпітера.",
+
+  "Pioneer Settlement": "Піонерське поселення",
+  "Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.": "Вимагає, щоб у вас було не більше 1 колонії. Зменште виробництво M€ на 2 кроки. Розмістіть колонію.",
+
+  "Productive Outpost": "Продуктивний передовий пост",
+  "Gain all your colony bonuses.": "Отримайте всі бонуси від вашої колонії.",
+
+  "Quantum Communications": "Квантова комунікація",
+  "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.": "Вимагає 4 наукових символи. Збільште виробництво M€ на 1 крок за кожну колонію у грі.",
+
+  "Red Spot Observatory": "Обсерваторія Червоної плями",
+  "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": "Дія: Додайте 1 плавучого на цю карту або витратьте 1 плавучого тут, щоб взяти карту.",
+  "Requires 3 science tags. Draw 2 cards.": "Вимагає 3 наукових символи. Візьміть 2 карти.",
+
+  "Refugee Camps": "Табори біженців",
+  "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "Дія: Зменште виробництво M€ на 1 крок, щоб додати ресурс табору на цю карту.",
+  "1 VP for each camp resource on this card.": "1 ПО за кожний ресурс табору на цій карті.",
+
+  "Research Colony": "Дослідницька колонія",
+  "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.": "Розмістіть колонію. МОЖЕ БУТИ РОЗМІЩЕНА ТАМ, ДЕ ВИ ВЖЕ МАЄТЕ КОЛОНІЮ. Візьміть 2 карти.",
+
+  "Rim Freighters": "Римські вантажівки",
+
+  "Sky Docks": "Небесні доки",
+  "Effect: When you play a card, you pay 1 M€ less for it.": "Ефект: Коли ви граєте карту, ви платите на 1 M€ менше.",
+  "Requires 2 Earth tags. Gain 1 Trade Fleet.": "Вимагає 2 земних символи. Отримайте 1 торговий флот.",
+
+  "Solar Probe": "Сонячна зонда",
+  "Draw 1 card for every 3 science tags you have, including this.": "Візьміть 1 карту за кожні 3 наукових символи, які у вас є, включаючи цей.",
+
+  "Solar Reflectors": "Сонячні відбивачі",
+  "Increase your heat production 5 steps.": "Збільште виробництво тепла на 5 кроків.",
+
+  "Space Port": "Космічний порт",
+  "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a city tile. Gain 1 Trade Fleet.": "Вимагає 1 колонію. Зменште виробництво енергії на 1 крок і збільште виробництво M€ на 4 кроки. Розмістіть міську плитку. Отримайте 1 торговий флот.",
+
+  "Space Port Colony": "Колонія космічного порту",
+  "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.": "Вимагає колонію. Розмістіть колонію. МОЖЕ БУТИ РОЗМІЩЕНА НА ПЛИТЦІ КОЛОНІЇ, ДЕ ВИ ВЖЕ МАЄТЕ КОЛОНІЮ. Отримайте 1 торговий флот.",
+  "1VP per 2 colonies in play.": "1 ПО за кожні 2 колонії у грі.",
+
+  "Spin-off Department": "Відділ відгалуження",
+  "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "Ефект: ПРИ ГРАННІ КАРТИ З БАЗОВОЮ ВАРТІСТЮ 20 M€ АБО БІЛЬШЕ, візьміть карту.",
+
+  "Increase your M€ production 2 steps.": "Збільште виробництво M€ на 2 кроки.",
+
+  "Sub-zero Salt Fish": "Екстремально солоний рибний продукт",
+  "Action: Add 1 animal to this card.": "Дія: Додайте 1 тварину на цю карту.",
+  "1 VP per 2 animals on this card.": "1 ПО за кожні 2 тварини на цій карті.",
+  "Requires -6 C. Decrease any plant production 1 step.": "Вимагає -6 C. Зменште виробництво будь-яких рослин на 1 крок.",
+
+  "Titan Air-scrapping": "Вилучення повітря з Титану",
+  "Action: Spend 1 titanium to add 2 floaters here.": "Дія: Витратити 1 титан, щоб додати 2 плавучих сюди.",
+  "Action: Spend 2 floaters here to increase your TR 1 step.": "Дія: Витратити 2 плавучих сюди, щоб збільшити РТ на 1 крок.",
+
+  "Titan Floating Launch-pad": "Плавуча стартова платформа на Титані",
+  "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "Дія: Додайте 1 плавучого на БУДЬ-ЯКУ карту Юпітера або витратіть 1 плавучого тут, щоб торгувати безкоштовно.",
+  "Add two floaters to ANY JOVIAN CARD.": "Додайте два плавучих на БУДЬ-ЯКУ карту Юпітера.",
+
+  "Titan Shuttles": "Титанські шатли",
+  "Action: Add 2 floaters to ANY JOVIAN CARD.": "Дія: Додайте 2 плавучих на БУДЬ-ЯКУ карту Юпітера.",
+  "Action: Spend any number of floaters here to gain the same number of titanium.": "Дія: Витратити будь-яку кількість плавучих тут, щоб отримати таку ж кількість титану.",
+
+  "Trade Envoys": "Торгові посла",
+
+  "Trading Colony": "Торгова колонія",
+  "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "Ефект: Коли ви торгуєте, ви можете спочатку збільшити шлях колонії на 1 крок.",
+  "Place a colony": "Розмістіть колонію.",
+
+  "Urban Decomposers": "Міські розкладачі",
+  "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "Вимагає, щоб у вас було 1 міське плитка і 1 колонія в грі. Збільште виробництво рослин на 1 крок і додайте 2 мікроби на ІНШУ карту.",
+
+  "Warp Drive": "Прискорювач простору",
+  "Effect: When you play a space card, you pay 4 M€ less for it.": "Ефект: Коли ви граєте карту космосу, ви платите на 4 M€ менше за неї.",
+  "Requires 5 science tags.": "Вимагає 5 наукових символів."
+}

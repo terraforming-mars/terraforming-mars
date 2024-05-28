@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {ToolWithTheFirstOrder} from '../../../src/server/cards/starwars/ToolWithTheFirstOrder';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
@@ -17,7 +17,7 @@ describe('ToolWithTheFirstOrder', () => {
   let card: ToolWithTheFirstOrder;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new ToolWithTheFirstOrder();

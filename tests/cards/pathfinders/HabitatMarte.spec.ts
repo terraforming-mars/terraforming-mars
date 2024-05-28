@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {HabitatMarte} from '../../../src/server/cards/pathfinders/HabitatMarte';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
@@ -12,7 +12,7 @@ import {InterstellarColonyShip} from '../../../src/server/cards/base/Interstella
 describe('HabitatMarte', () => {
   let card: HabitatMarte;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new HabitatMarte();

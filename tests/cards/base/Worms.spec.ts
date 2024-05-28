@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Worms} from '../../../src/server/cards/base/Worms';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {setOxygenLevel} from '../../TestingUtils';
@@ -9,7 +9,7 @@ import {testGame} from '../../TestGame';
 describe('Worms', function() {
   let card: Worms;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new Worms();

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {cast, setRulingParty} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {UNITY_BONUS_1, UNITY_BONUS_2, UNITY_POLICY_2, UNITY_POLICY_3} from '../../../src/server/turmoil/parties/Unity';
@@ -13,7 +13,7 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 
 describe('Unity', function() {
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     [game, player] = testGame(1, {turmoilExtension: true});

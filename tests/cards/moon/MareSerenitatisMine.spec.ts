@@ -8,7 +8,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {MareSerenitatisMine} from '../../../src/server/cards/moon/MareSerenitatisMine';
 import {MoonSpaces} from '../../../src/common/moon/MoonSpaces';
 import {TileType} from '../../../src/common/TileType';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceTile} from '../../assertions';
 
 describe('MareSerenitatisMine', () => {
   let game: IGame;
@@ -50,7 +50,7 @@ describe('MareSerenitatisMine', () => {
     runAllActions(game);
     expect(moonData.logisticRate).eq(0);
 
-    UnderworldTestHelper.assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
+    assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
 
     expect(moonData.logisticRate).eq(1);
     expect(player.getTerraformRating()).eq(16);

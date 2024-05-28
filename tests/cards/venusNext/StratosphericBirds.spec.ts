@@ -4,7 +4,7 @@ import {DeuteriumExport} from '../../../src/server/cards/venusNext/DeuteriumExpo
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {ExtractorBalloons} from '../../../src/server/cards/venusNext/ExtractorBalloons';
 import {StratosphericBirds} from '../../../src/server/cards/venusNext/StratosphericBirds';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {Payment} from '../../../src/common/inputs/Payment';
@@ -16,7 +16,7 @@ import {testGame} from '../../TestGame';
 describe('StratosphericBirds', () => {
   let card: StratosphericBirds;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let deuteriumExport: DeuteriumExport;
 
   beforeEach(() => {

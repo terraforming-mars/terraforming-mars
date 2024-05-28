@@ -21,6 +21,21 @@ import {PartyName} from '../src/common/turmoil/PartyName';
 import {IPlayer} from '../src/server/IPlayer';
 import {CardRequirements} from '../src/server/cards/requirements/CardRequirements';
 import {Warning} from '../src/common/cards/Warning';
+import {testGame as testGameProxy} from './TestGame';
+
+/**
+ * Creates a new game for testing. Has some hidden behavior for testing:
+ *
+ * 1. If aresExtension is true, and the player has not specifically enabled hazards, disable ares hazards.
+ *    Hazard placement is non-deterministic.
+ * 2. If skipInitialCardSelection is true, then the game ignores initial card selection. It's still
+ *    in an intermediate state, but the game is testable.
+ *
+ * Players are returned in player order, so the first player returned is the first player.
+ *
+ * Test game has a return type with a spread array operator.
+ */
+export const testGame = testGameProxy;
 
 // Returns the oceans created during this operation which may not reflect all oceans.
 export function maxOutOceans(player: IPlayer, toValue: number = constants.MAX_OCEAN_TILES): Array<Space> {
@@ -160,7 +175,6 @@ export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initia
     PoliticalAgendas.setNextAgenda(turmoil, player.game);
     player.megaCredits = initialMegacredits + passingDelta;
     if (passingDelta > 0) {
-      // TODO(kberg): Change to is.true
       expect(cb(), 'Reds in power, can afford').is.not.false;
     }
   }

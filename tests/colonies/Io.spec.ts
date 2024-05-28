@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Io} from '../../src/server/colonies/Io';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
@@ -9,7 +9,7 @@ describe('Io', function() {
   let io: Io;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     io = new Io();

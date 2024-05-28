@@ -3,14 +3,14 @@ import {cast, churnAction, runAllActions, testRedsCosts} from '../../../TestingU
 import {AquiferStandardProject} from '../../../../src/server/cards/base/standardProjects/AquiferStandardProject';
 import {maxOutOceans} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
-import {Game} from '../../../../src/server/Game';
+import {IGame} from '../../../../src/server/IGame';
 import {testGame} from '../../../TestGame';
-import {UnderworldTestHelper} from '../../../underworld/UnderworldTestHelper';
+import {assertPlaceOcean} from '../../../assertions';
 
 describe('AquiferStandardProject', function() {
   let card: AquiferStandardProject;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new AquiferStandardProject();
@@ -29,7 +29,7 @@ describe('AquiferStandardProject', function() {
     player.setTerraformRating(20);
     expect(game.board.getOceanSpaces()).is.empty;
 
-    UnderworldTestHelper.assertPlaceOcean(player, churnAction(card, player));
+    assertPlaceOcean(player, churnAction(card, player));
 
     expect(player.getTerraformRating()).eq(21);
     expect(game.board.getOceanSpaces()).has.length(1);

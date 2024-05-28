@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 
 describe('OrbitalLaserDrill', () => {
   let game: IGame;
@@ -32,11 +32,11 @@ describe('OrbitalLaserDrill', () => {
 
     runAllActions(game);
 
-    UnderworldTestHelper.assertIsExcavationAction(player, player.popWaitingFor(), true);
+    assertIsExcavationAction(player, player.popWaitingFor(), true);
 
     runAllActions(game);
 
-    UnderworldTestHelper.assertIsExcavationAction(player, player.popWaitingFor(), true);
+    assertIsExcavationAction(player, player.popWaitingFor(), true);
 
     runAllActions(game);
 

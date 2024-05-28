@@ -2,14 +2,15 @@ import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {StrategicBasePlanning} from '../../../src/server/cards/pathfinders/StrategicBasePlanning';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceCity} from '../../assertions';
+import {assertBuildColony} from '../../colonies/coloniesAssertions';
 
 describe('StrategicBasePlanning', function() {
   let card: StrategicBasePlanning;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new StrategicBasePlanning();
@@ -34,7 +35,7 @@ describe('StrategicBasePlanning', function() {
     expect(player.megaCredits).to.eq(92);
 
     // Expecting build colony before place city
-    UnderworldTestHelper.assertBuildColony(player, game.deferredActions.pop()!.execute());
-    UnderworldTestHelper.assertPlaceCity(player, game.deferredActions.pop()!.execute());
+    assertBuildColony(player, game.deferredActions.pop()!.execute());
+    assertPlaceCity(player, game.deferredActions.pop()!.execute());
   });
 });

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {LandSpecialist} from '../../src/server/milestones/LandSpecialist';
 import {TestPlayer} from '../TestPlayer';
 import {BoardName} from '../../src/common/boards/BoardName';
@@ -7,20 +7,19 @@ import {Board} from '../../src/server/boards/Board';
 import {Space} from '../../src/server/boards/Space';
 import {TileType} from '../../src/common/TileType';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
+import {testGame} from '../TestingUtils';
 
 describe('LandSpecialist', function() {
   let milestone: LandSpecialist;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let board: Board;
   let spaces: ReadonlyArray<Space>;
 
   beforeEach(function() {
     milestone = new LandSpecialist();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player, {boardName: BoardName.ARABIA_TERRA, moonExpansion: true});
+    [game, player, player2] = testGame(2, {boardName: BoardName.ARABIA_TERRA, moonExpansion: true});
     board = game.board;
     spaces = board.getAvailableSpacesOnLand(player);
   });

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Counter} from '../../src/server/behavior/Counter';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
 import {Tag} from '../../src/common/cards/Tag';
@@ -14,7 +14,7 @@ import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {Wetlands} from '../../src/server/cards/pathfinders/Wetlands';
 
 describe('Counter', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
@@ -236,7 +236,7 @@ describe('Counter', () => {
 
 
 describe('Counter for Moon', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let fake: IProjectCard;
 
@@ -325,7 +325,7 @@ describe('Counter for Moon', () => {
 });
 
 describe('Counter for Underworld', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let player2: TestPlayer;
   let fake: IProjectCard;

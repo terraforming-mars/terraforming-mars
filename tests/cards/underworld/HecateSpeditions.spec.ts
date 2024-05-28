@@ -1,18 +1,18 @@
 import {expect} from 'chai';
 import {HecateSpeditions} from '../../../src/server/cards/underworld/HecateSpeditions';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertBuildColony, assertNoTradeAction, assertTradeAction} from '../../colonies/coloniesAssertions';
 
 describe('HecateSpeditions', function() {
   let card: HecateSpeditions;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new HecateSpeditions();
@@ -30,7 +30,7 @@ describe('HecateSpeditions', function() {
   it('initial action', function() {
     player.deferInitialAction(card);
     runAllActions(game);
-    UnderworldTestHelper.assertBuildColony(player, player.popWaitingFor());
+    assertBuildColony(player, player.popWaitingFor());
   });
 
   it('when you play a jovian tag', function() {
@@ -61,14 +61,14 @@ describe('HecateSpeditions', function() {
   });
 
   it('trade', () => {
-    UnderworldTestHelper.assertNoTradeAction(player);
+    assertNoTradeAction(player);
 
     player.setCorporationForTest(card);
     card.resourceCount = 1;
-    UnderworldTestHelper.assertNoTradeAction(player);
+    assertNoTradeAction(player);
 
     card.resourceCount = 2;
-    UnderworldTestHelper.assertTradeAction(player, 'Pay 2 supply chain resources (use Hecate Speditions action)');
+    assertTradeAction(player, 'Pay 2 supply chain resources (use Hecate Speditions action)');
     expect(card.resourceCount).eq(0);
   });
 });

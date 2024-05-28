@@ -3,7 +3,7 @@ import {Pets} from '../../src/server/cards/base/Pets';
 import {Predators} from '../../src/server/cards/base/Predators';
 import {Miranda} from '../../src/server/colonies/Miranda';
 import {AddResourcesToCard} from '../../src/server/deferredActions/AddResourcesToCard';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
 import {cast, runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
@@ -13,7 +13,7 @@ describe('Miranda', function() {
   let pets: Pets;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     miranda = new Miranda();

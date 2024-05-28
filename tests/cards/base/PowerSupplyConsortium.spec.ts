@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {PowerSupplyConsortium} from '../../../src/server/cards/base/PowerSupplyConsortium';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
@@ -11,7 +11,7 @@ describe('PowerSupplyConsortium', function() {
   let card: PowerSupplyConsortium;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new PowerSupplyConsortium();

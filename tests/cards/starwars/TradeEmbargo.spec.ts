@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {TradeEmbargo} from '../../../src/server/cards/starwars/TradeEmbargo';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {forceGenerationEnd} from '../../TestingUtils';
@@ -9,7 +9,7 @@ describe('TradeEmbargo', () => {
   let card: TradeEmbargo;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new TradeEmbargo();

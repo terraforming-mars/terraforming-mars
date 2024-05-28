@@ -1,7 +1,7 @@
 import {EarlySettlement} from '../../../src/server/cards/prelude/EarlySettlement';
 import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceCity} from '../../assertions';
 
 describe('EarlySettlement', function() {
   it('Should play', function() {
@@ -11,6 +11,6 @@ describe('EarlySettlement', function() {
     card.play(player);
     runAllActions(game);
 
-    UnderworldTestHelper.assertPlaceCity(player, player.popWaitingFor());
+    assertPlaceCity(player, player.popWaitingFor());
   });
 });

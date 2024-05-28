@@ -1,7 +1,7 @@
 import {VolunteerMiningInitiative} from '../../../src/server/cards/underworld/VolunteerMiningInitiative';
 import {testGame} from '../../TestGame';
 import {addCity, cast, runAllActions} from '../../TestingUtils';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 
 describe('VolunteerMiningInitiative', () => {
   const runs = [
@@ -29,7 +29,7 @@ describe('VolunteerMiningInitiative', () => {
       runAllActions(game);
 
       for (let idx = 0; idx < run.excavations; idx++) {
-        UnderworldTestHelper.assertIsExcavationAction(player, player.popWaitingFor());
+        assertIsExcavationAction(player, player.popWaitingFor());
         runAllActions(game);
       }
 

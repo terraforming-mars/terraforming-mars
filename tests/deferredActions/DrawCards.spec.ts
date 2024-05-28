@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {DrawCards} from '../../src/server/deferredActions/DrawCards';
 import {TestPlayer} from '../TestPlayer';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {CardType} from '../../src/common/cards/CardType';
 import {Tag} from '../../src/common/cards/Tag';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
@@ -10,7 +10,7 @@ import {cast, formatLogMessage, runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
 
 describe('DrawCards', function() {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let projectDeck: ProjectDeck;
 

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {RobotMoles} from '../../../src/server/cards/underworld/RobotMoles';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 
 describe('RobotMoles', () => {
   it('canAct', () => {
@@ -25,9 +25,9 @@ describe('RobotMoles', () => {
     cast(card.action(player), undefined);
 
     runAllActions(game);
-    UnderworldTestHelper.assertIsIdentificationAction(player, player.popWaitingFor());
+    assertIsIdentificationAction(player, player.popWaitingFor());
     runAllActions(game);
-    UnderworldTestHelper.assertIsIdentificationAction(player, player.popWaitingFor());
+    assertIsIdentificationAction(player, player.popWaitingFor());
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
     expect(card.resourceCount).eq(1);

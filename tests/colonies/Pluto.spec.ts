@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {cast} from '../TestingUtils';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {Pluto} from '../../src/server/colonies/Pluto';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
@@ -12,7 +12,7 @@ describe('Pluto', function() {
   let pluto: Pluto;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     pluto = new Pluto();

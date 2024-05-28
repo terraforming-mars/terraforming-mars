@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SoilExport} from '../../../src/server/cards/underworld/SoilExport';
 import {testGame} from '../../TestGame';
 import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 
 describe('SoilExport', () => {
   it('Should play', () => {
@@ -17,7 +17,7 @@ describe('SoilExport', () => {
     cast(card.play(player), undefined);
     runAllActions(game);
 
-    UnderworldTestHelper.assertIsExcavationAction(player, player.popWaitingFor());
+    assertIsExcavationAction(player, player.popWaitingFor());
 
     player.playedCards.push(card);
 

@@ -7,7 +7,7 @@ import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AristarchusRoadNetwork} from '../../../src/server/cards/moon/AristarchusRoadNetwork';
 import {TileType} from '../../../src/common/TileType';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceTile} from '../../assertions';
 
 describe('AristarchusRoadNetwork', () => {
   let game: IGame;
@@ -43,7 +43,7 @@ describe('AristarchusRoadNetwork', () => {
 
     runAllActions(game);
     expect(moonData.logisticRate).eq(0);
-    UnderworldTestHelper.assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
+    assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
 
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.logisticRate).eq(1);

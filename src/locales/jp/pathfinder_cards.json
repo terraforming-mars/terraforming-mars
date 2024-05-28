@@ -40,7 +40,7 @@
   "(Requires 3 oceans. Add 3 microbes to ANY card. Gain 3 plants.)": "(条件：海洋3枚以上. 3微生物獲得. 3植物獲得.)",
 
   "Coordinated Raid": "組織的襲撃",
-  "(Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.)": "(条件：所有コロニー1つ以上. 未使用の交易艦隊で交易をする(すでに交易されているコロニータイルでも可). これで発生する他のプレイヤーのコロニー・ボーナスを代わりに獲得する.)",
+  "(Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.)": "(条件：所有コロニー1つ以上. 未使用の交易艦隊で交易をする(すでに交易されている天体でも可). これで発生する他のプレイヤーのコロニー・ボーナスを代わりに獲得する.)",
 
   "Crashlanding": "不時着",
   "(Place AND ORIENT this tile on a non-reserved space adjacent to no more than 1 city.": "(特殊タイルを非予定地かつ都市の隣接数が1つ以下にするように配置.",
@@ -72,8 +72,8 @@
   "(Every player loses all energy. Raise the temperature 2 steps.)": "(全プレイヤーは電力を全て失う. 温度+2段階.)",
 
   "Dyson Screens": "ダイソンスクリーン",
-  "(Action: Pay 2 titanium to raise your heat and energy production 1 step each.)": "(アクション：2チタン支払い、発熱産出+1. 電力産出+1.)",
-  "(Raise the temperature 1 step. Draw a card. Place a city tile ON THE RESERVED AREA. Raise your energy and heat production 2 steps.)": "(温度+1段階. 1ドロー. 予定地に都市タイルを配置. 発熱産出+2. 電力産出+2.)",
+  "(Action: Pay 2 titanium to raise your heat and energy production 1 step each.)": "(アクション：2チタン支払い、温熱産出+1. 電力産出+1.)",
+  "(Raise the temperature 1 step. Draw a card. Place a city tile ON THE RESERVED AREA. Raise your energy and heat production 2 steps.)": "(温度+1段階. 1ドロー. 予定地に都市タイルを配置. 温熱産出+2. 電力産出+2.)",
 
   "Early Expedition": "先発調査隊",
   "(Temperature must be -18 C or lower. Decrease your energy production 1 step and Raise your M€ production 3 steps. Add 1 data to ANY card. Place a city tile on Mars NEXT TO NO OTHER TILE.)": "(条件：-18℃以下. 電力産出-1. MC産出+3. 1データ獲得. 他タイルに隣接しないように都市タイルを配置.)",
@@ -88,7 +88,7 @@
   "Expedition to the Surface - Venus": "金星の地表調査",
   "(Draw 2 cards. Raise Venus 1 step. Gain 1M€ for each of your Venus tags, including this.)": "(2ドロー. 金星+1段階. 金星タグ1つ毎に、1MC獲得.)",
 
-  "Flat Mars Theory": "火星兵面接",
+  "Flat Mars Theory": "火星平面説",
   "GENERATION": "世代数",
   "(Requires maximum 1 science tag. Increase your M€ production 1 step for every generation played so far.)": "(条件：科学タグ1つ以下. 世代数の数分、MC産出+1.)",
 
@@ -105,7 +105,7 @@
   "(Requires Kelvinists are ruling or you have 2 delegates there. Increase your energy production 2 steps.)": "(条件：汎ケルビン党が与党か、そこに2議席ある. 電力産出+2.)",
 
   "Huygens Observatory": "ホイヘンス天文台",
-  "(Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that is already on a colony tile, but you may not trade with the tile that fleet came from. Gain 1 TR.)": "(コロニー1つ配置(既に配置済みのコロニータイルでも可). 無料で交易する(すでに使用した交易艦隊の使用可). TR+1段階.)",
+  "(Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that is already on a colony tile, but you may not trade with the tile that fleet came from. Gain 1 TR.)": "(コロニー1つ配置(既に配置済みの天体でも可). 無料で交易する(すでに使用した交易艦隊の使用可). TR+1段階.)",
 
   "Hydrogen Processing Plant": "水素処理プラント",
   "(Oxygen level must be 3% or higher. Decrease oxygen level 1% Raise your energy production 1 step for every two ocean tiles on Mars.)": "(条件：酸素3%以上. 海洋タイル2枚毎に、電力産出+1. 酸素濃度-1段階.)",
@@ -162,6 +162,7 @@
   "(Increase your plant production 2 steps. Gain 1 plant.)": "(植物産出+2. 1植物獲得.)",
 
   "Oumuamua Type Object Survey": "恒星間小惑星の形状調査",
+  "play ": "プレイ ",
   "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "2ドローし、それを公開する. 1枚目に科学 もしくは 微生物タグがある場合、条件とコストを無視してプレイ. そうでなく宇宙タグがある場合、電力産出+3. いずれのタグもない場合、2枚目で同様の処理をする.",
   "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card. )": "(条件：宇宙タグ1つ以上、科学タグ1つ以上. 2データ獲得)",
 
@@ -174,7 +175,7 @@
   "(Requires 3 plant tags. Raise your plant production 1 step and your M€ production 2 steps.)": "(条件：植物タグ3つ以上. 植物産出+1. MC産出+2.)",
 
   "Power Plant": "火力発電",
-  "(Increase your heat production 2 steps and your energy production 1 step.)": "(発熱産出+2. 電力産出+1.)",
+  "(Increase your heat production 2 steps and your energy production 1 step.)": "(温熱産出+2. 電力産出+1.)",
 
   "Prefabrication of Human Habitats": "仮設住宅",
   "(Effect: Cards with a city tag cost 2M€ less.)": "(効果：都市タグカードのプレイコスト-2MC)",
@@ -185,7 +186,7 @@
   "Opponents may not remove your basic resource production": "効果：他のプレイヤーは、あなたの産出を下げられない.",
 
   "Public Sponsored Grant": "公的助成金",
-  "(Requires Scientists are ruling or that you have 2 delegates there. All players lose 2M€. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.)": "(条件：科学万能党が与党か、そこに2議席ある. 他の全プレイヤーは2MC除去. 都市、？、惑星タグ以外のタグを選択し、そのタグのカードを2枚獲得.)",
+  "(Requires Scientists are ruling or that you have 2 delegates there. All players lose 2M€. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.)": "(条件：科学万能党が与党か、そこに2議席ある. 他の全プレイヤーは2MC除去. 都市、ワイルド、惑星タグ以外のタグを選択し、そのタグのカードを2枚獲得.)",
 
   "Rare-Earth Elements": "希土類元素",
   "(Increase your M€ production by 1 for every special tile you own on Mars.)": "(所有する火星上の特殊タイル数分、MC産出+1.)",
@@ -216,7 +217,7 @@
   "(Requires that Greens are ruling or you have 2 delegates there. Increase your plant production 1 step)": "(条件：緑の党が与党か、そこに2議席ある. 植物産出+1.)",
 
   "Solar Storm": "太陽フレア",
-  "(Every player loses 2 plants. Remove up to 3 data from any player. Raise your heat production 1 step. Raise the temperature 1 step.)": "(全プレイヤーは2植物除去. 望むならプレイヤー1人から最大3データ除去. 発熱産出+1. 気温+1段階.)",
+  "(Every player loses 2 plants. Remove up to 3 data from any player. Raise your heat production 1 step. Raise the temperature 1 step.)": "(全プレイヤーは2植物除去. 望むならプレイヤー1人から最大3データ除去. 温熱産出+1. 気温+1段階.)",
 
   "Solarpedia": "ソーラーペディア",
   "(Action: Add 2 data to ANY card.)": "(アクション：2データ獲得.)",

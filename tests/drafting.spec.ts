@@ -10,6 +10,8 @@ import {SelectCard} from '../src/server/inputs/SelectCard';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 import {TestPlayer} from './TestPlayer';
 import {Deck} from '../src/server/cards/Deck';
+import {Game} from '../src/server/Game';
+import {Database} from '../src/server/database/Database';
 
 // Tests for drafting
 describe('drafting', () => {
@@ -737,10 +739,39 @@ function draftSelection(player: IPlayer) {
   return getWaitingFor(player).cards.map((card) => card.name);
 }
 
-function selectCard(player: TestPlayer, cardName: CardName) {
+async function selectCard(player: TestPlayer, cardName: CardName) {
   const selectCard = cast(player.popWaitingFor(), SelectCard);
   const cards = selectCard.cards;
   const card = cards.find((c) => c.name === cardName);
   if (card === undefined) throw new Error(`${cardName} isn't in list`);
   selectCard.cb([card]);
+
+  validateState(player);
+}
+
+// This is a helper function to validate the state of the game after each action.
+// In ensures that after serializing and deserializing the game,
+// the state is the same, including the deferred actions.
+async function validateState(player: TestPlayer) {
+  const game = player.game;
+
+  const serialized = await Database.getInstance().getGameVersion(game.id, game.lastSaveId);
+  const restored = Game.deserialize(serialized);
+
+  expect(game.deferredActions.length).eq(0);
+  expect(restored.deferredActions.length).eq(0);
+
+  for (const id of game.getPlayers().map((p) => p.id)) {
+    const livePlayer = game.getPlayerById(id);
+    const restoredPlayer = restored.getPlayerById(id);
+
+    expect(livePlayer.needsToDraft).eq(restoredPlayer.needsToDraft);
+    expect(livePlayer.getWaitingFor()?.type).eq(restoredPlayer.getWaitingFor()?.type);
+
+    if (livePlayer.getWaitingFor() instanceof SelectCard) {
+      const liveCards = cast(livePlayer.getWaitingFor(), SelectCard).cards;
+      const restoredCards = cast(restoredPlayer.getWaitingFor(), SelectCard).cards;
+      expect(liveCards.map((c) => c.name)).deep.eq(restoredCards.map((c) => c.name));
+    }
+  }
 }

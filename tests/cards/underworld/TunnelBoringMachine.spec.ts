@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 
 describe('TunnelBoringMachine', () => {
   let game: IGame;
@@ -39,9 +39,9 @@ describe('TunnelBoringMachine', () => {
     runAllActions(game);
 
     expect(player.energy).eq(0);
-    UnderworldTestHelper.assertIsExcavationAction(player, player.popWaitingFor());
+    assertIsExcavationAction(player, player.popWaitingFor());
     runAllActions(game);
-    UnderworldTestHelper.assertIsExcavationAction(player, player.popWaitingFor());
+    assertIsExcavationAction(player, player.popWaitingFor());
     runAllActions(game);
     expect(player.popWaitingFor()).is.undefined;
   });

@@ -3,13 +3,13 @@ import {testGame} from '../../TestGame';
 import {Airliners} from '../../../src/server/cards/colonies/Airliners';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 
 describe('Airliners', function() {
   let card: Airliners;
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
 
   beforeEach(() => {

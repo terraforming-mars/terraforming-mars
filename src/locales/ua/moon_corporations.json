@@ -1,0 +1,48 @@
+{
+  "Crescent Research Association": "Асоціація Кресцент Досліджень",
+  "Effect: When you play a Moon tag, you pay 1 M€ less for each Moon tag you have.": "Ефект: Коли ви граєте карту з позначкою Місяця, ви платите на 1 M€ менше за кожну карту з позначкою Місяця, яку у вас є.",
+  "You start with 50 M€. 1 VP for every 3 Moon tags you have.": "Ви починаєте з 50 M€. 1 ПО за кожні 3 карти з позначкою Місяця, які у вас є.",
+
+  "Intragen Sanctuary Headquarters": "Штаб-квартира Святилища Інтраген",
+  "(Effect: When any player plays an animal tag (including this), add 1 animal on this card.)": "(Ефект: Коли будь-який гравець грає карту з позначкою Тварини (включаючи цю), додайте 1 тварину на цю карту.)",
+  "You start with 38 M€. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step. 1 VP for every 2 animals on this card.": "Ви починаєте з 38 M€. Як вашу першу дію, розмістіть плитку місця проживання на Місяці і підвищте рейтинг місця проживання на 1 крок. 1 ПО за кожні 2 тварини на цій карті.",
+
+  "Luna First Incorporated": "Луна Перша Інкорпорейтед",
+  "Effect: When you raise any Moon Rate, increase your M€ production 1 step per step.": "Ефект: Коли ви підвищуєте будь-який рейтинг Місяця, збільшуйте вашу виробництво M€ на 1 крок за кожен крок.",
+  "Effect: When any player raises any Moon Rate, gain 1M€ per step.": "Ефект: Коли будь-який гравець підвищує будь-який рейтинг Місяця, отримуйте 1 M€ за кожен крок.",
+  "You start with 40 M€, 1 steel, and 1 titanium.": "Ви починаєте з 40 M€, 1 сталлю і 1 титаном.",
+
+  "Luna Hyperloop Corporation": "Луна Гіперлуп Корпорейшн",
+  "Action: Gain 1 M€ for each road tile on The Moon.": "Дія: Отримайте 1 M€ за кожну дорожню плитку на Місяці.",
+  "1 VP for each road tile on The Moon.": "1 ПО за кожну дорожню плитку на Місяці.",
+  "You start with 38 M€ and 4 steel.": "Ви починаєте з 38 M€ і 4 сталлю.",
+
+  "Nanotech Industries": "Нанотехнологічні Промисловості",
+  "Action: Add 1 science resource to ANY card [except those giving 2 or more VP per 1 science resource.]": "Дія: Додайте 1 науковий ресурс до БУДЬ-ЯКОЇ карти [крім тих, що дають 2 або більше ПО за 1 науковий ресурс].",
+  "You start with 42 M€. As your first action, draw 3 cards. Take 2 of them into hand, and discard the rest. 1 VP for every 2 science resources here.": "Ви починаєте з 42 M€. Як вашу першу дію, візьміть 3 карти. Візьміть 2 з них в руку, а решту відкиньте. 1 ПО за кожні 2 наукових ресурси тут.",
+
+  "Tempest Consultancy": "Темпест Консалтинг",
+  "Action: Place 1 delegate in any party for every 5 Moon tags you have [max 3.]": "Дія: Розмістіть 1 делегата в будь-якій партії за кожні 5 карти з позначкою Місяця, які у вас є [максимум 3].",
+  "Effect: When your delegate becomes the chairman, increase your TR 1 step.": "Ефект: Коли ваш делегат стає головою, збільште ваш РТ на 1 крок.",
+  "You start with 37 M€. As your first action, place 2 delegates in one party.": "Ви починаєте з 37 M€. Як вашу першу дію, розмістіть 2 делегати в одній партії.",
+
+  "The Archaic Foundation Institute": "Інститут Архаїчних Фундацій",
+  "Effect: When you play a Moon tag, including these, add a cube to this card.": "Ефект: Коли ви граєте карту з позначкою Місяця, включаючи ці, додайте кубик на цю карту.",
+  "Effect: Automatically remove 3 cubes here and gain 1 TR.": "Ефект: Автоматично видаліть всі 3 кубики тут і отримайте 1 РТ.",
+  "You start with 55 M€.": "Ви починаєте з 55 M€.",
+
+  "Luna Trade Federation": "Луна Торгова Федерація",
+  "Effect: When you place a mine tile on The Moon, raise your titanium production 1 step.": "Ефект: Коли ви розміщуєте шахтну плитку на Місяці, підвищуйте ваше виробництво титану на 1 крок.",
+  "Effect: You may use titanium resources as 2M€ each.": "Ефект: Ви можете використовувати ресурси титану як 2 M€ кожен.",
+  "You start with 15 M€ and 10 titanium.": "Ви починаєте з 15 M€ і 10 титану.",
+
+  "The Darkside of The Moon Syndicate": "Синдикат Темної Сторони Місяця",
+  "Action: Spend 1 titanium to add 1 syndicate fleet on this card OR remove 1 syndicate fleet from this card to steal 2M€ from every opponent.": "Дія: Витратити 1 титан, щоб додати 1 синдикатний флот на цю карту АБО видалити 1 синдикатний флот з цієї карти, щоб вкрасти 2 M€ у кожного суперника.",
+  "You start with 40 M€ and 2 syndicate fleets on this card.": "Ви починаєте з 40 M€ і 2 синдикатними флотами на цій карті.",
+  "Effect: When you place a tile on The Moon, steal 2 M€ from opponents for each of their tiles next to yours.": "Ефект: Коли ви розміщуєте плитку на Місяці, вкрадіть 2 M€ у суперників за кожну їхню плитку поруч з вашою.",
+
+  "The Grand Luna Capital Group": "Гранд Луна Капітал Груп",
+  "Effect: When you place a habitat tile, gain 2 M€ for each adjacent habitat tile.": "Ефект: Коли ви розміщуєте плитку місця проживання, отримайте 2 M€ за кожну сусідню плитку місця проживання.",
+  "1 VP for each habitat tile adjacent to your habitat tiles.": "1 ПО за кожну плитку місця проживання, що прилягає до ваших плиток місця проживання.",
+  "You start with 32 M€ and 1 titanium. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step.": "Ви починаєте з 32 M€ і 1 титану. Як вашу першу дію, розмістіть плитку місця проживання на Місяці і підвищте рейтинг місця проживання на 1 крок."
+}

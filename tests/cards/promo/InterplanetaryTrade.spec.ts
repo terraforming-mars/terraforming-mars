@@ -10,19 +10,19 @@ import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCo
 import {InterplanetaryTrade} from '../../../src/server/cards/promo/InterplanetaryTrade';
 import {MaxwellBase} from '../../../src/server/cards/venusNext/MaxwellBase';
 import {DeclarationOfIndependence} from '../../../src/server/cards/pathfinders/DeclarationOfIndependence';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {GameOptions} from '../../../src/server/game/GameOptions';
+import {testGame} from '../../TestingUtils';
 
 describe('InterplanetaryTrade', function() {
   let card: InterplanetaryTrade;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new InterplanetaryTrade();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
   });
 
   it('Should play', function() {

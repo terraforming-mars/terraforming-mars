@@ -1,0 +1,51 @@
+{
+  "Select a ${0} bonus": "Виберіть бонус ${0}",
+  "Select a ${0} policy": "Виберіть політику ${0}",
+
+  "Gain 1 M€ for each building tag you have": "Отримайте 1 M€ за кожен будівельний тег, який у вас є",
+  "Gain 1 M€ for each tile you have ON MARS": "Отримайте 1 M€ за кожну плитку, яку у вас є НА МАРСІ",
+
+  "When you place a tile ON MARS, gain 1 steel": "Коли ви розміщуєте плитку НА МАРСІ, отримайте 1 сталь",
+  "When you play a building tag, gain 2 M€": "Коли ви граєте будівельний тег, отримайте 2 M€",
+  "Your steel resources are worth 1 M€ extra": "Ваші сталеві ресурси варто на 1 M€ більше",
+  "Spend 4 M€ to draw a Building card (Turmoil Mars First)": "Витратити 4 M€, щоб витягнути карту будівлі (Турбулентність: Марс Перший)",
+
+  "Gain 1 M€ for each science tag you have": "Отримайте 1 M€ за кожен науковий тег, який у вас є",
+  "Gain 1 M€ for every 3 cards in hand": "Отримайте 1 M€ за кожні 3 карти в руці",
+
+  "Your global requirements are +/- 2 steps": "Ваші глобальні вимоги збільшуються/зменшуються на 2 кроки",
+  "When you raise a global parameter, draw a card per step raised": "Коли ви підвищуєте глобальний параметр, витягніть карту за кожен підвищений крок",
+  "Cards with Science tag requirements may be played with 1 less Science tag": "Карти з вимогами наукового тегу можна грати з 1 меншим науковим тегом",
+
+  "Gain 1 M€ for each Venus, Earth and Jovian tag you have": "Отримайте 1 M€ за кожен тег Венери, Землі та Юпітера, який у вас є",
+  "Gain 1 M€ for each Space tag you have": "Отримайте 1 M€ за кожен космічний тег, який у вас є",
+
+  "Your titanium resources are worth 1 M€ extra": "Ваші титанові ресурси варто на 1 M€ більше",
+  "Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)": "Витратити 4 M€, щоб отримати 2 титану або додати 2 плаваючих до БУДЬ-ЯКОЇ карти (Турбулентність: Єдність)",
+  "Spend 4 M€ to draw a Space card (Turmoil Unity)": "Витратити 4 M€, щоб витягнути космічну карту (Турбулентність: Єдність)",
+  "Cards with Space tags cost 2 M€ less to play": "Карти з космічними тегами коштують на 2 M€ менше для гри",
+
+  "Gain 1 M€ for each Plant, Microbe and Animal tag you have": "Отримайте 1 M€ за кожен тег Рослини, Мікроба та Тварини, який у вас є",
+  "Gain 2 M€ for each greenery tile you have": "Отримайте 2 M€ за кожну плитку зеленого насадження, яку у вас є",
+
+  "When you place a greenery tile, gain 4 M€": "Коли ви розміщуєте плитку зеленого насадження, отримайте 4 M€",
+  "When you place a tile, gain 1 plant": "Коли ви розміщуєте плитку, отримайте 1 рослину",
+  "When you play an animal, plant or microbe tag, gain 2 M€": "Коли ви граєте тег тварини, рослини або мікроба, отримайте 2 M€",
+  "Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)": "Витратити 5 M€, щоб отримати 3 рослини або додати 2 мікробів до БУДЬ-ЯКОЇ карти (Турбулентність: Зелені)",
+
+  "The player(s) with the lowest TR gains 1 TR": "Гравець(гравці) з найнижчим РТ отримує(отримують) 1 РТ",
+  "The player(s) with the highest TR loses 1 TR": "Гравець(гравці) з найвищим РТ втрачає(втрачають) 1 РТ",
+
+  "When you take an action that raises TR, you MUST pay 3 M€ per step raised": "Коли ви виконуєте дію, яка підвищує РТ, ВИ МУСИТЕ заплатити 3 M€ за кожен підвищений крок",
+  "When you place a tile, pay 3 M€ or as much as possible": "Коли ви розміщуєте плитку, заплатіть 3 M€ або якомога більше",
+  "Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)": "Заплатити 4 M€, щоб зменшити не максимальний глобальний параметр на 1 крок (не отримувати жодних бонусів за трек)",
+  "When you raise a global parameter, decrease your M€ production 1 step per step raised if possible": "Коли ви підвищуєте глобальний параметр, зменште вашу виробництво M€ на 1 крок за кожен підвищений крок, якщо це можливо",
+
+  "Gain 1 M€ for each heat production you have": "Отримайте 1 M€ за кожен пункт вашої виробництва тепла",
+  "Gain 1 heat for each heat production you have": "Отримайте 1 тепло за кожен пункт вашої виробництва тепла",
+
+  "Pay 10 M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)": "Заплатити 10 M€, щоб збільшити вашу виробництво енергії та тепла на 1 крок (Турбулентність: Кельвіністи)",
+  "When you raise temperature, gain 3 M€ per step raised": "Коли ви підвищуєте температуру, отримайте 3 M€ за кожен підвищений крок",
+  "Convert 6 heat into temperature (Turmoil Kelvinists)": "Перетворити 6 тепла в температуру (Турбулентність: Кельвіністи)",
+  "When you place a tile, gain 2 heat": "Коли ви розміщуєте плитку, отримайте 2 тепла"
+}

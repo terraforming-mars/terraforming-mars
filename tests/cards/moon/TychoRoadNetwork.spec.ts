@@ -6,7 +6,7 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TychoRoadNetwork} from '../../../src/server/cards/moon/TychoRoadNetwork';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceTile} from '../../assertions';
 import {TileType} from '../../../src/common/TileType';
 
 describe('TychoRoadNetwork', () => {
@@ -43,7 +43,7 @@ describe('TychoRoadNetwork', () => {
 
     runAllActions(game);
 
-    UnderworldTestHelper.assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
+    assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
 
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.logisticRate).eq(1);

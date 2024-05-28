@@ -3,7 +3,7 @@ import {ProtectedValley} from '../../../src/server/cards/base/ProtectedValley';
 import {testGame} from '../../TestGame';
 import {TileType} from '../../../src/common/TileType';
 import {runAllActions, setOxygenLevel, testRedsCosts} from '../../TestingUtils';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceTile} from '../../assertions';
 
 describe('ProtectedValley', function() {
   it('Should play', function() {
@@ -12,7 +12,7 @@ describe('ProtectedValley', function() {
     expect(card.play(player)).is.undefined;
     runAllActions(game);
 
-    UnderworldTestHelper.assertPlaceTile(player, player.popWaitingFor(), TileType.GREENERY);
+    assertPlaceTile(player, player.popWaitingFor(), TileType.GREENERY);
 
     expect(player.production.megacredits).to.eq(2);
     expect(game.getOxygenLevel()).to.eq(1);

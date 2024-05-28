@@ -4,13 +4,13 @@ import {AtmoCollectors} from '../../../src/server/cards/colonies/AtmoCollectors'
 import {testGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Units} from '../../../src/common/Units';
 
 describe('AtmoCollectors', function() {
   let card: AtmoCollectors;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new AtmoCollectors();

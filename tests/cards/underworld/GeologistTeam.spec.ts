@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {GeologistTeam} from '../../../src/server/cards/underworld/GeologistTeam';
 import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
 
 describe('GeologistTeam', () => {
@@ -12,7 +12,7 @@ describe('GeologistTeam', () => {
 
     card.action(player);
     runAllActions(game);
-    UnderworldTestHelper.assertIsIdentificationAction(player, player.popWaitingFor());
+    assertIsIdentificationAction(player, player.popWaitingFor());
   });
 
   it('Should play', () => {

@@ -3,7 +3,7 @@ import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {JunkVentures} from '../../../src/server/cards/community/JunkVentures';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {Ants} from '../../../src/server/cards/base/Ants';
@@ -13,7 +13,7 @@ import {Capital} from '../../../src/server/cards/base/Capital';
 describe('JunkVentures', function() {
   let card: JunkVentures;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new JunkVentures();

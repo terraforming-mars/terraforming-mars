@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {MicroGeodesics} from '../../../src/server/cards/underworld/MicroGeodesics';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Ants} from '../../../src/server/cards/base/Ants';
@@ -38,7 +38,7 @@ describe('MicroGeodesics', () => {
     runAllActions(game);
     expect(player.plants).eq(3);
 
-    UnderworldTestHelper.assertIsExcavationAction(player, player.popWaitingFor());
+    assertIsExcavationAction(player, player.popWaitingFor());
     runAllActions(game);
 
     expect(ants.resourceCount).eq(0);

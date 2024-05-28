@@ -5,7 +5,7 @@ import {Birds} from '../../../src/server/cards/base/Birds';
 import {EcologicalZone} from '../../../src/server/cards/base/EcologicalZone';
 import {Moss} from '../../../src/server/cards/base/Moss';
 import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -13,7 +13,7 @@ import {testGame} from '../../TestGame';
 describe('ViralEnhancers', function() {
   let card: ViralEnhancers;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new ViralEnhancers();

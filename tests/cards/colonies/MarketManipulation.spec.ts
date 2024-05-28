@@ -9,7 +9,7 @@ import {Miranda} from '../../../src/server/colonies/Miranda';
 import {Europa} from './../../../src/server/colonies/Europa';
 import {Pluto} from '../../../src/server/colonies/Pluto';
 import {Callisto} from '../../../src/server/colonies/Callisto';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {cast} from '../../TestingUtils';
@@ -17,7 +17,7 @@ import {cast} from '../../TestingUtils';
 describe('MarketManipulation', function() {
   let card: MarketManipulation;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new MarketManipulation();

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {MindSetMars} from '../../../src/server/cards/pathfinders/MindSetMars';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
@@ -8,14 +8,17 @@ import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
-import {assertPlaceCityTile, assertSendDelegateToArea} from './assertions';
+import {assertPlaceCity} from '../../assertions';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {PlaceCityTile} from '../../../src/server/deferredActions/PlaceCityTile';
+import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
+import {assertAddDelegateAction} from '../../turmoil/turmoilAssertions';
 
 describe('MindSetMars', function() {
   let card: MindSetMars;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
 
   beforeEach(function() {
@@ -65,7 +68,8 @@ describe('MindSetMars', function() {
     turmoil.delegateReserve.add(player, 3);
     cast(card.action(player), SelectOption).cb(undefined);
     expect(game.deferredActions.length).eq(1);
-    assertSendDelegateToArea(player, game.deferredActions.pop()!);
+    const sendDelegate = cast(game.deferredActions.pop(), SendDelegateToArea);
+    assertAddDelegateAction(player, sendDelegate.execute());
     expect(card.resourceCount).eq(1);
   });
 
@@ -75,7 +79,9 @@ describe('MindSetMars', function() {
     turmoil.delegateReserve.clear();
     cast(card.action(player), SelectOption).cb(undefined);
     expect(game.deferredActions.length).eq(1);
-    assertPlaceCityTile(player, game.deferredActions.pop()!);
+    const placeCityTile = cast(game.deferredActions.pop(), PlaceCityTile);
+    assertPlaceCity(player, placeCityTile.execute());
+
     expect(card.resourceCount).eq(2);
   });
 
@@ -90,7 +96,8 @@ describe('MindSetMars', function() {
     options.options[0].cb();
 
     expect(game.deferredActions.length).eq(1);
-    assertSendDelegateToArea(player, game.deferredActions.pop()!);
+    const sendDelegate = cast(game.deferredActions.pop(), SendDelegateToArea);
+    assertAddDelegateAction(player, sendDelegate.execute());
     expect(card.resourceCount).eq(5);
   });
 
@@ -105,7 +112,8 @@ describe('MindSetMars', function() {
     options.options[1].cb();
 
     expect(game.deferredActions.length).eq(1);
-    assertPlaceCityTile(player, game.deferredActions.pop()!);
+    const placeCityTile = cast(game.deferredActions.pop(), PlaceCityTile);
+    assertPlaceCity(player, placeCityTile.execute());
     expect(card.resourceCount).eq(2);
   });
 });

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {ForestMoon} from '../../../src/server/cards/starwars/ForestMoon';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {addGreenery, cast, runAllActions} from '../../TestingUtils';
@@ -12,7 +12,7 @@ describe('ForestMoon', () => {
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new ForestMoon();

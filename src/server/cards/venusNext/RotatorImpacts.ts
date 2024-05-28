@@ -27,7 +27,7 @@ export class RotatorImpacts extends Card implements IActionCard {
         cardNumber: '243',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].', (eb) => {
-            eb.megacredits(6).openBrackets.titanium(1).closeBrackets.startAction.asteroids(1);
+            eb.megacredits(6).super((b) => b.titanium(1)).startAction.asteroids(1);
           }).br;
           b.action('Spend 1 resource from this card to increase Venus 1 step.', (eb) => {
             eb.or().asteroids(1).startAction.venus(1);

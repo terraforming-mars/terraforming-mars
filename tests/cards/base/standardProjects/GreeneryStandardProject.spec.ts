@@ -2,19 +2,19 @@ import {expect} from 'chai';
 import {churnAction, setOxygenLevel} from '../../../TestingUtils';
 import {GreeneryStandardProject} from '../../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {TestPlayer} from '../../../TestPlayer';
-import {Game} from '../../../../src/server/Game';
+import {IGame} from '../../../../src/server/IGame';
 import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/server/turmoil/parties/Reds';
 import {Phase} from '../../../../src/common/Phase';
 import {MAX_OXYGEN_LEVEL} from '../../../../src/common/constants';
 import {TileType} from '../../../../src/common/TileType';
 import {testGame} from '../../../TestGame';
-import {UnderworldTestHelper} from '../../../underworld/UnderworldTestHelper';
+import {assertPlaceTile} from '../../../assertions';
 
 describe('GreeneryStandardProject', function() {
   let card: GreeneryStandardProject;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new GreeneryStandardProject();
@@ -33,7 +33,7 @@ describe('GreeneryStandardProject', function() {
     player.setTerraformRating(20);
     expect(game.getOxygenLevel()).eq(0);
 
-    UnderworldTestHelper.assertPlaceTile(player, churnAction(card, player), TileType.GREENERY);
+    assertPlaceTile(player, churnAction(card, player), TileType.GREENERY);
 
     expect(player.megaCredits).eq(0);
     expect(player.getTerraformRating()).eq(21);

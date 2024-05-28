@@ -42,8 +42,6 @@ export type CanAffordOptions = Partial<PaymentOptions> & {
   tr?: TRSource,
 }
 
-export type DraftType = 'initial' | 'prelude' | 'standard';
-
 /**
  * Behavior when playing a card:
  *   add it to the tableau
@@ -51,7 +49,7 @@ export type DraftType = 'initial' | 'prelude' | 'standard';
  *   only play the card (used for replaying a card)
  *   or do nothing.
  */
-export type CardAction ='add' | 'discard' | 'nothing' | 'action-only';
+export type CardAction = 'add' | 'discard' | 'nothing' | 'action-only';
 
 export interface IPlayer {
   readonly id: PlayerId;
@@ -106,8 +104,13 @@ export interface IPlayer {
   preludeCardsInHand: Array<IProjectCard>;
   ceoCardsInHand: Array<IProjectCard>;
   playedCards: Array<IProjectCard>;
-  draftedCards: Array<IProjectCard>;
   cardCost: number;
+
+  /** Cards this player has in their draft hand. Player chooses from them, and passes them to the next player */
+  draftHand: Array<IProjectCard>;
+  /** Cards this player has already chosen during this draft round */
+  draftedCards: Array<IProjectCard>;
+  /** true when this player is drafting, false when player is not, undefined when there is no draft phase. */
   needsToDraft?: boolean;
 
   timer: Timer;
@@ -263,18 +266,8 @@ export interface IPlayer {
   runProductionPhase(): void;
   finishProductionPhase(): void;
   worldGovernmentTerraforming(): void;
-  dealForDraft(quantity: number, cards: Array<IProjectCard>): void;
 
-  /**
-   * Ask the player to draft from a set of cards.
-   *
-   * @param type the type of draft being asked for.
-   * @param passTo  The player _this_ player passes remaining cards to.
-   * @param passedCards The cards received from the draw, or from the prior player. If empty, it's the first
-   *   step in the draft, and this function will deal cards.
-   */
-  askPlayerToDraft(type: DraftType, passTo: IPlayer, passedCards?: Array<IProjectCard>): void;
-  runResearchPhase(draftVariant: boolean): void;
+  runResearchPhase(): void;
   getCardCost(card: IProjectCard): number;
 
   /** The number of resources on this card for this player, or 0 if the player does not have this card. */

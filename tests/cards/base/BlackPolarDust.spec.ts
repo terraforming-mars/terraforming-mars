@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {BlackPolarDust} from '../../../src/server/cards/base/BlackPolarDust';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {cast, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
@@ -10,7 +10,7 @@ import {testGame} from '../../TestGame';
 describe('BlackPolarDust', function() {
   let card: BlackPolarDust;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new BlackPolarDust();

@@ -4,7 +4,7 @@ import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 
 describe('ChemicalFactory', () => {
   let card: ChemicalFactory;
@@ -32,6 +32,6 @@ describe('ChemicalFactory', () => {
     cast(card.action(player), undefined);
     runAllActions(game);
     expect(player.plants).eq(0);
-    UnderworldTestHelper.assertIsExcavationAction(player, player.popWaitingFor());
+    assertIsExcavationAction(player, player.popWaitingFor());
   });
 });

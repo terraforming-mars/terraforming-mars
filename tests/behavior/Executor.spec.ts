@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {IPlayer} from '../../src/server/IPlayer';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
@@ -10,7 +10,7 @@ import {Resource} from '../../src/common/Resource';
 import {CardResource} from '../../src/common/CardResource';
 import {Tag} from '../../src/common/cards/Tag';
 import {CardType} from '../../src/common/cards/CardType';
-import {cast, fakeCard, runAllActions} from '../TestingUtils';
+import {cast, fakeCard, formatLogMessage, runAllActions} from '../TestingUtils';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {SelectPlayer} from '../../src/server/inputs/SelectPlayer';
 import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
@@ -44,7 +44,7 @@ function asUnits(player: IPlayer): Units {
 }
 
 describe('Executor', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
@@ -612,4 +612,31 @@ describe('Executor', () => {
     executor.execute({spend: {corruption: 2}}, player, fake);
     expect(player.underworldData.corruption).eq(1);
   });
+
+  const logRuns = [
+    {log: 'Hello', expected: {message: 'Hello', formatted: 'Hello'}},
+    {
+      log: 'Hello, ${player}',
+      expected: {message: 'Hello, ${0}', formatted: 'Hello, blue'},
+    },
+    {
+      log: 'Hello, ${card}',
+      expected: {message: 'Hello, ${1}', formatted: 'Hello, Fake Card'},
+    },
+    {
+      log: '${player} took the ${card} action to gain 1 TR',
+      expected: {
+        message: '${0} took the ${1} action to gain 1 TR',
+        formatted: 'blue took the Fake Card action to gain 1 TR',
+      },
+    },
+  ];
+  for (const run of logRuns) {
+    it('log: ' + run.log, () => {
+      executor.execute({log: run.log}, player, fake);
+      const logMessage = game.gameLog.pop()!;
+      expect(logMessage.message).eq(run.expected.message);
+      expect(formatLogMessage(logMessage)).eq(run.expected.formatted);
+    });
+  }
 });

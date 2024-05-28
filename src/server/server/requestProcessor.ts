@@ -1,5 +1,5 @@
 import * as prometheus from 'prom-client';
-import * as responses from '../routes/responses';
+import * as responses from './responses';
 
 import {paths} from '../../common/app/paths';
 

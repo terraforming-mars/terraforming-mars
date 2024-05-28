@@ -25,7 +25,7 @@
 	"You have +2 score for all awards. Once per game, draw 10-X awards (min. 1), where X is the current generation number. You may put one into the game and fund it for free.": "褒賞のスコアを数えるとき、スコア+2. CEOアクション：10から世代数を引いた数(最低1)褒賞を見る. その内、1つゲームに追加し支援してもよい.",
 
 	"Bjorn": "ビョルン",
-	"Once per game, steal X+2 M€ from each player that has more M€ than you, where X is the current generation number.": "CEOアクション：自分よりMCを多く所持しているプレイヤーから、世代数に2を足した数MCを除去し、その合計分MC獲得.",
+	"Once per game, steal X+2 M€ from each player that has more M€ than you, where X is the current generation number.": "CEOアクション：自分よりMCを多く所持しているプレイヤーから、世代数に2を足した数分、1MC盗む.",
 	
 	"Caesar": "シーザー",
 	"Once per game, place X hazard tiles where X is the current generation number. Each opponent loses 1 unit of production of their choice, or 2 units if there are 6 or more hazard tiles.": "CEOアクション：世代数の数分、災害タイルを配置. 他プレイヤーは任意の産出-1(災害タイルが6枚以上ある場合は任意の産出-2).",
@@ -70,13 +70,13 @@
 	"Once per game, pay 8 M€ to draw 3 CEO cards and choose one to play. Discard this card.": "CEOアクション：8MC支払い、CEOカードを3枚見る. その内、1枚をプレイする. このカードを捨てる.",
 
 	"Maria": "マリア",
-	"Once per game, draw colony tiles equal to the current generation number. Put one into play and build a colony on it for free if possible.": "CEOアクション：現在の世代数と同じ数のコロニータイルを見る. その内、1枚を出す. 可能であればそのコロニータイルにコロニー1つ配置.",
+	"Once per game, draw colony tiles equal to the current generation number. Put one into play and build a colony on it for free if possible.": "CEOアクション：現在の世代数と同じ数の天体を見る. その内、1枚を出す. 可能であればその天体にコロニー1つ配置.",
 
 	"Musk": "マスク",
 	"Once per game, discard any number of Earth cards to draw that many space cards, and gain that many units of titanium, plus 6.": "CEOアクション：好きな数の地球タグカードを捨てる. 捨てた枚数と同じ数分、宇宙タグカードを1枚入手. 捨てた枚数+6チタン獲得.",
 
 	"Naomi": "ナオミ",
-	"When you build a colony, gain 2 energy and 3 M€. Once per game, move each colony tile track marker to its highest or lowest value.": "コロニー配置時、2電力と3MC獲得. CEOアクション：各コロニータイルのトラックを最高値か最低値に移動させる.",
+	"When you build a colony, gain 2 energy and 3 M€. Once per game, move each colony tile track marker to its highest or lowest value.": "コロニー配置時、2電力と3MC獲得. CEOアクション：各天体のトラックを最高値か最低値に移動させる.",
 
 	"Neil": "ニール",
 	"Gain 1 M€ when any player plays a Moon tag. Once per game, increase your M€ production by the value of the LOWEST Moon rate.": "月タグがプレイされた時、1MC獲得. CEOアクション：最も低い月レートの数分、MC産出+1.",
@@ -115,7 +115,7 @@
 	"Once per game, add the following resources to your cards: 2 animals, 2 microbes, 2 floaters, 2 wild.": "CEOアクション：2動物獲得. 2微生物獲得. 2浮遊体獲得. カード上に2リソース追加.",
 
 	"Xavier": "ザビエル",
-	"Once per game, gain 2 wild tags for THIS GENERATION.": "CEOアクション：この世代中、？タグを2つ獲得.",
+	"Once per game, gain 2 wild tags for THIS GENERATION.": "CEOアクション：この世代中、ワイルドタグを2つ獲得.",
 	"Effect: AFTER this action has been used, when playing a card with a requirement, you pay 1 M€ less for it.": "効果：このCEOアクションのあと、条件付きカードのプレイコスト-1MC.",
 
 	"Xu": "シェイ",

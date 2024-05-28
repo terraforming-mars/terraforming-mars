@@ -24,11 +24,13 @@ export class Voltagon extends ActiveCorporationCard {
               spend: {energy: 8},
               global: {oxygen: 1},
               title: 'Spend 8 energy to increase oxygen 1 step.',
+              log: '${player} spent 8 energy to increase oxygen 1 step.',
             },
             {
               spend: {energy: 8},
               global: {venus: 1},
               title: 'Spend 8 energy to increase Venus 1 step.',
+              log: '${player} spent 8 energy to increase Venus 1 step.',
             },
           ],
         },

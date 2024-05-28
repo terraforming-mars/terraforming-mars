@@ -5,7 +5,7 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {CardName} from '../../../src/common/cards/CardName';
 import {newProjectCard} from '../../../src/server/createCard';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
 
 function toCard(e: readonly [CardName, number] | CardName) {
   const [cardName, count] = typeof(e) === 'string' ? [e, 0] : e;
@@ -67,7 +67,7 @@ describe('CorporateTheft', () => {
       runAllActions(game);
 
       if (run.opponent.corruption > 0) {
-        UnderworldTestHelper.assertIsMaybeBlock(opponent, opponent.popWaitingFor(), run.block ? 'corruption' : 'do not block');
+        assertIsMaybeBlock(opponent, opponent.popWaitingFor(), run.block ? 'corruption' : 'do not block');
       }
       if (run.block === true) {
         expect(player.underworldData.corruption).eq(run.player.corruption + 1);

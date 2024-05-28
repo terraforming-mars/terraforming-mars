@@ -91,7 +91,8 @@ export default Vue.extend({
       case 'All': return this.allColonies;
       case 'colonies': return this.officialColonies;
       case 'community': return this.communityColonies;
-      default: return [];
+      case 'pathfinders': return this.pathfindersColonies;
+      default: throw new Error(`Unknown group: ${group}`);
       }
     },
     selectAll(group: Group) {

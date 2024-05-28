@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {SmallAnimals} from '../../../src/server/cards/base/SmallAnimals';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, setOxygenLevel} from '../../TestingUtils';
@@ -10,7 +10,7 @@ describe('SmallAnimals', function() {
   let card: SmallAnimals;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(function() {
     card = new SmallAnimals();

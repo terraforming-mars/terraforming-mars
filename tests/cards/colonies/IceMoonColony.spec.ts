@@ -2,7 +2,8 @@ import {IceMoonColony} from '../../../src/server/cards/colonies/IceMoonColony';
 import {testGame} from '../../TestGame';
 import {cast, maxOutOceans, runAllActions, testRedsCosts} from '../../TestingUtils';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertPlaceOcean} from '../../assertions';
+import {assertBuildColony} from '../../colonies/coloniesAssertions';
 
 describe('IceMoonColony', () => {
   it('play', () => {
@@ -22,11 +23,11 @@ describe('IceMoonColony', () => {
     cast(card.play(player), undefined);
     runAllActions(game);
 
-    UnderworldTestHelper.assertBuildColony(player, player.popWaitingFor());
+    assertBuildColony(player, player.popWaitingFor());
 
     runAllActions(game);
 
-    UnderworldTestHelper.assertPlaceOcean(player, player.popWaitingFor());
+    assertPlaceOcean(player, player.popWaitingFor());
 
     runAllActions(game);
 

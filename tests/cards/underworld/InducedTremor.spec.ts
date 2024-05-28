@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {InducedTremor} from '../../../src/server/cards/underworld/InducedTremor';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('InducedTremor', () => {
@@ -18,7 +18,7 @@ describe('InducedTremor', () => {
     expect(space.undergroundResources).is.undefined;
     expect(neighbor.undergroundResources).is.undefined;
 
-    UnderworldTestHelper.assertIsExcavationAction(player, player.popWaitingFor(), /* ignorePlacementRestrictions=*/false, space);
+    assertIsExcavationAction(player, player.popWaitingFor(), /* ignorePlacementRestrictions=*/false, space);
     runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     expect(selectSpace.spaces).includes(neighbor);

@@ -3,7 +3,7 @@ import {TitanManufacturingColony} from '../../../src/server/cards/underworld/Tit
 import {testGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
-import {UnderworldTestHelper} from '../../underworld/UnderworldTestHelper';
+import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 
 describe('TitanManufacturingColony', () => {
   it('onCardPlayed', () => {
@@ -44,7 +44,7 @@ describe('TitanManufacturingColony', () => {
 
     runAllActions(game);
     expect(card.resourceCount).eq(0);
-    UnderworldTestHelper.assertIsExcavationAction(player, player.popWaitingFor());
+    assertIsExcavationAction(player, player.popWaitingFor());
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
   });

@@ -30,7 +30,7 @@ export class NeptunianPowerConsultants extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.oceans(1, {all, size: Size.SMALL}).asterix()
             .colon()
-            .minus().megacredits(5).openBrackets.steel(1).closeBrackets;
+            .minus().megacredits(5).super((b) => b.steel(1));
           b.br;
           b.nbsp.nbsp.plus().production((pb) => pb.energy(1)).plus().hydroelectricResource(1);
           b.br;

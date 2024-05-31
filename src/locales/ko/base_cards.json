@@ -16,6 +16,34 @@
     "3 VPs if you have one or more science resources here.": "이 카드에 과학 자원 하나라도 있다면 3점.",
     "Oxygen must be 6% or less.": "조건: 산소 농도 6% 이하.",
 
+    "Aerospace Mission": "",
+    "Place 2 colonies. Pay 14 M€.": "개척기지 2개 배치. 14 M€ 획득.",
+
+    "Executive Order": "",
+    "PLAY": "추진",
+    "Draw 4 global events. Play 1 as the CURRENT GLOBAL EVENT and discard the rest. Place 2 delegates in any party. Gain 10 M€.": "행성계 사건 카드 4장 뽑아서 그 중 1장을 현재 행성계 사건으로 놓고 나머지는 버림. 아무 정당에 의원 2명 배치. 10 M€ 획득.",
+
+    "By-Election": "",
+    "set ruling party": "집권당 선택",
+    "Set the ruling party to one of your choice. Gain 1 influence.": "당신이 원하는 정당을 집권당으로 변경. 영향력 1 획득.",
+
+    "Political Uprising": "",
+    "Place 4 delegates in any parties. Draw a Turmoil card.": "아무 정당에 의원 4명 배치. 격동 카드 1장 뽑기.",
+
+    "Research Grant": "",
+    "Gain 8 M€.": "8 M€ 획득.",
+
+    "Trade Advance": "",
+    "[ solo": "[도전 TR왕",
+    "Trade all colonies with": "모든 개척기지를 다음과 무역사업 수행:",
+    "Gain 2 M€ [SOLO: Gain 10 M€]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.": "2 M€ 획득 [도전 TR왕: 대신 10 M€ 획득]. 모든 활성 개척기지와 즉시 무역사업 수행.각 무역사업을 수행하기 전에 개척기지 타일의 트랙을 1단계 증가시킬 수 있음.",
+
+    "Valuable Gases": "",
+    "Gain 6 M€. Play a Venus card from your hand and add 4 floaters to it.": "6 M€ 획득. 당신의 손에 있는 금성 카드 1장을 추진하고 그 카드에 부양체 자원을 4개 추가.",
+
+    "Venus First": "",
+    "Raise Venus 2 steps. Draw 2 Venus cards from the deck.": "금성개척률 2단계 상승. 덱에서 금성 카드 2장 뽑기.",
+
     "Inventors' Guild": "발명가 협회",
     "Action: Look at the top card and either buy it or discard it": "행동: 프로젝트 덱 최상단 카드 1장 확인하고, 구입하거나 버림.",
 
@@ -201,7 +229,7 @@
     "Requires -4 C or warmer. Increase your plant production 3 steps. Gain 1 plant.": "조건: 기온 -4℃ 이상. \n 식물 생산력 3 증가. 식물 자원 1개 획득.",
 
     "Great Escarpment Consortium": "단애 채굴 컨소시엄",
-    "Requires that you have steel production. Decrease any steel production 1 step and increase your own 1 step.": "조건: 보유한 강철 생산량 1 이상.) (아무 1명의 강철 생산력 1 감소. 자신의 강철 생산력 1 증가.",
+    "Requires that you have steel production. Decrease any steel production 1 step and increase your own 1 step.": "조건: 보유한 강철 생산력 1 이상.) (아무 1명의 강철 생산력 1 감소. 자신의 강철 생산력 1 증가.",
 
     "Mineral Deposit": "광물 매장층",
     "Gain 5 steel.": "강철 자원 5개 획득.",
@@ -315,6 +343,7 @@
 
     "Nuclear Zone": "핵무기 기폭지대",
     "Place this tile and raise temperature 2 steps.": "기온 2단계 상승. 빈 구역 한 곳에 타일 배치.",
+    "Nuclear Zone tile": "핵무기 기폭지대 타일",
 
     "Tropical Resort": "열대 리조트",
     "Reduce your heat production 2 steps and increase your M€ production 3 steps.": "열 생산력 2 감소. 메가크레딧 생산력 3 증가.",
@@ -397,6 +426,7 @@
 
     "Hired Raiders": "무장강도단 고용",
     "Steal up to 2 steel, or 3 M€ from any player.": "아무 1명의 강철 자원 2개까지 또는 3 M€까지 제거하고, 제거한 해당 자원을 자신이 획득.",
+    "Do not steal": "훔치지 않음",
 
     "Hackers": "해커",
     "Decrease your energy production 1 step and any M€ production 2 steps. Increase your M€ production 2 steps.": "자신의 에너지 생산력 1 감소. 아무 1명의 메가크레딧 생산력 2 감소. 자신의 메가크레딧 생산력 2 증가.",
@@ -436,6 +466,7 @@
     "It must be -10 C or colder.": "조건: 기온 -10℃ 이하.",
 
     "Advanced Ecosystems": "발달된 생태계",
+    "Plant Animal Microbe": "식물/동물/미생물",
     "Requires a plant tag, a microbe tag, and an animal tag.": "조건: 보유한 식물/미생물/동물 태그 각 1개 이상.",
 
     "Great Dam": "대형 댐",
@@ -454,7 +485,6 @@
     "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.": "기온 2단계 상승. 화산 구역 중 빈 구역 한 곳에 타일 배치.",
 
     "Power Plant": "발전소",
-    "Increase your energy production 1 step.": "에너지 생산력 1 증가.",
 
     "Mohole Area": "모홀 지역",
     "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.": "열 생산력 4 증가. 빈 해양 전용 구역 한 곳에 타일 배치.",
@@ -507,6 +537,11 @@
     "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "행동: 이 카드에 미생물 자원 1개 추가, 또는 이 카드에 미생물 자원 3개 소비해서 테라포밍 등급 1TR 상승.",
     "Action: Remove 3 microbes to increase your TR 1 step.": "행동: 이 카드에 미생물 자원 3개 소비해서 테라포밍 등급 1TR 상승.",
     "Add 3 microbes to this card.": "이 카드에 미생물 자원 3개 추가.",
+    "Remove 3 microbes to increase your terraform rating 1 step": "미생물 자원 2개를 제거해서 테라포밍 등급 1TR 상승.",
+    "Remove microbes": "미생물 자원 제거",
+    "Add 1 microbe to this card": "이 카드에 미생물 자원 1개 추가.",
+    "Add microbe":"미생물 자원 추가",
+
 
     "Industrial Microbes": "공업용 미생물",
     "Increase your energy production and your steel production 1 step each.": "에너지 생산력 1 증가. 강철 생산력 1 증가.",
@@ -583,6 +618,8 @@
 
     "Ice Cap Melting": "극관 해빙",
     "Requires +2 C or warmer. Place 1 ocean tile.": "조건: 기온 +2℃ 이상.) (해양 타일 1장 배치.",
+    "Gain 5 plants": "식물 자원 5개 획득.",
+    "Add 4 animals to Fish": "물고기에 동물 자원 4개 추가",
 
     "Corporate Stronghold": "사유화 도시",
     "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile.": "에너지 생산력 1 감소. 메가크레딧 생산력 3 증가. 도시 타일 1장 배치.",
@@ -638,6 +675,8 @@
 
     "Restricted Area": "제한구역",
     "Action: Spend 2 M€ to draw a card.": "행동: 2 M€ 소비해서 카드 1장 획득.",
+    "Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.": "지속효과: 금성 태그 카드 사용시, 이 카드에 부양체 자원 1개당 3M€ 가치로 지불 가능.",
+
     "Place this tile.": "타일 배치.",
 
     "Immigrant City": "이민자 도시",
@@ -667,5 +706,39 @@
 
     "AI Central": "중앙 인공지능 센터",
     "Action: Draw 2 cards.": "행동: 카드 2장 획득.",
-    "Requires 3 science tags to play. Decrease your energy production 1 step.": "조건: 보유한 과학 태그 3개 이상.) (에너지 생산력 1 감소."
+    "2 Science": "과학 태그 2개 이상",
+    "3 Science": "과학 태그 3개 이상",
+    "5 Science": "과학 태그 5개 이상",
+    "Effect: Draw 2 cards.": "지속 효과: 카드 2장 획득.",
+
+    "Requires 3 science tags to play. Decrease your energy production 1 step.": "조건: 보유한 과학 태그 3개 이상.) (에너지 생산력 1 감소.",
+
+  "HYDROGEN TO VENUS": "금성으로 수소 수송",
+
+  "Plant Microbe Animal": "식물 미생물 동물 태그 각각 1개 이상",
+  "Jovian": "목성 태그 1개 이상",
+  "max 3 Oceans": "최대 해양 타일 3개",
+  "Forest": "녹지 타일 1개 이상",
+  "2 Power": "전기 태그 2개 이상",
+  "7 Science": "과학 태그 7개 이상",
+  "Titanium production": "티타늄 생산력 1 이상",
+  "Steel production": "강철 생산력 1 이상",
+  "4 Science": "과학 태그 4개 이상",
+  "2 Cities": "도시 타일 2개 이상",
+  "Standard projects": "일반 프로젝트",
+
+  "Requires 2 Earth tags. Increase M€ production 4 steps.": "",
+  "Oxygen must be 4% or lower. Draw two cards.": "",
+  "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "",
+  "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "",
+  "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "",
+  "Temperature must be -20 C or lower.": "",
+  "Increase your energy production 1 step": "",
+  "Increase your energy production 2 steps": "",
+  "Increase your energy production 3 steps": "",
+  "Increase your plant production 1 step": "",
+  "Remove 2 microbes to raise temperature 1 step": "",
+  "Select card to add 2 microbes": "",
+  "Add microbes": "",
+  "Select a space with a steel or titanium bonus adjacent to one of your tiles": ""
 }

@@ -48,5 +48,8 @@
   "Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.": "조건: 녹색당이 집권, 또는 녹색당에 자기 의원이 2명 이상.) (녹지 타일 1장 배치.",
 
   "Vote Of No Confidence": "불신임 투표",
-  "Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.": "조건:아무 정당의 당대표를 보유, 그리고 의장이 중립 의원.) (중립 의장을 제거하고, 의원 대기실에서 가져온 자기 의원을 의장석에 배치, 테라포밍 등급 1TR 상승."
+  "Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.": "조건:아무 정당의 당대표를 보유, 그리고 의장이 중립 의원.) (중립 의장을 제거하고, 의원 대기실에서 가져온 자기 의원을 의장석에 배치, 테라포밍 등급 1TR 상승.",
+
+  "Political Alliance": "정치 동맹",
+  "Requires that you have 2 party leaders. Gain 1 TR.": "조건: 보유한 당대표 2명 이상) (테라포밍 등급 1TR 상승."
 }

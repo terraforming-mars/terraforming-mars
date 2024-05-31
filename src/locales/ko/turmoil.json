@@ -1,7 +1,8 @@
 {
   "Turmoil": "격동",
-  "Send a delegate in an area (from lobby)": "로비 층에서 의원석으로 의원 1명 보내기 (공짜)",
+  "Send a delegate in an area (from lobby)": "로비 층에서 의원석으로 의원 1명 보내기 (비용 없음)",
   "Send a delegate in an area (5 M€)": "의원 대기실에서 의원석으로 의원 1명 보내기 (5 M€)",
+  "Send a delegate in an area (3 M€)": "의원 대기실에서 의원석으로 의원 1명 보내기 (3 M€)",
   "Policies": "정책",
   "No ruling Policy": "정책 규칙 없음",
 
@@ -26,9 +27,9 @@
   "Mars First - (All players receive 1 M€ for each building tag they have.)": "화성중심당 - (모든 플레이어는 자신의 건물 태그 수만큼 메가크레딧 획득.)",
   "Scientists - (All players receive 1 M€ for each science tag they have.)": "과학당 - (모든 플레이어는 자신의 과학 태그 수만큼 메가크레딧 획득.)",
   "Unity - (All players receive 1 M€ for each Venus tag, Earth tag, and Jovian tag they have.)": "통합당 - (모든 플레이어는 자신의 금성 · 지구 · 목성 태그 수만큼 메가크레딧 획득.)",
-  "Greens - (All players receive 1 M€ for each Plant tag, Microbe tag, and Animal tag they have.)": "녹색당 - (모든 플레이어는 자신의 식물 · 미생물 · 동물 태그 수만큼 메가크레딧 획득.)",
-  "Reds - (The player with the lowest TR gains 1 TR. Ties are friendly.)": "적색당 - (테라포밍 등급이 가장 낮은 플레이어(들)의 테라포밍 등급 1 TR 상승.)",
   "Kelvinists - (All players receive 1 M€ for each heat production they have.)": "켈빈당 - (모든 플레이어는 자신의 열 생산력 1마다 1 M€ 획득.)",
+  "Reds - (The player with the lowest TR gains 1 TR. Ties are friendly.)": "적색당 - (테라포밍 등급이 가장 낮은 플레이어(들)의 테라포밍 등급 1 TR 상승.)",
+  "Greens - (All players receive 1 M€ for each Plant tag, Microbe tag, and Animal tag they have.)": "녹색당 - (모든 플레이어는 자신의 식물 · 미생물 · 동물 태그 수만큼 메가크레딧 획득.)",
 
 
   "Mars First (Focused on Martian development and independence.)": "화성중심당 (화성 발전과 화성 독립에 최고 우선순위를 두는 정당입니다.)",

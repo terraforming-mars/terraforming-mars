@@ -108,6 +108,7 @@ export class Server {
       thisPlayer: thisPlayer,
       waitingFor: this.getWaitingFor(player, player.getWaitingFor()),
       players: players,
+      autopass: player.autopass,
     };
     return rv;
   }

@@ -503,33 +503,57 @@ describe('Player', function() {
     expect(player.megaCredits).eq(15);
     expect(player.preludeCardsInHand).deep.eq([alliedBanks]);
   });
+
+  it('autopass', () => {
+    const [game, player, player2] = testGame(2);
+
+    game.phase = Phase.ACTION;
+
+    player.autopass = true;
+    player.takeAction();
+    expect(game.activePlayer).eq(player2.id);
+  });
+});
+
+it('everybody autopasses', () => {
+  const [game, player, player2] = testGame(2);
+
+  game.phase = Phase.ACTION;
+
+  player.autopass = true;
+  player2.autopass = true;
+  player.takeAction();
+
+  expect(game.phase).eq(Phase.RESEARCH);
+  expect(player.autopass).is.false;
+  expect(player2.autopass).is.false;
 });
 
 function waitingForGlobalParameters(player: Player): Array<GlobalParameter> {
+  function titlesToGlobalParameter(title: string): GlobalParameter {
+    if (title.includes('temperature')) {
+      return GlobalParameter.TEMPERATURE;
+    }
+    if (title.includes('ocean')) {
+      return GlobalParameter.OCEANS;
+    }
+    if (title.includes('oxygen')) {
+      return GlobalParameter.OXYGEN;
+    }
+    if (title.includes('Venus')) {
+      return GlobalParameter.VENUS;
+    }
+    if (title.includes('habitat')) {
+      return GlobalParameter.MOON_HABITAT_RATE;
+    }
+    if (title.includes('mining')) {
+      return GlobalParameter.MOON_MINING_RATE;
+    }
+    if (title.includes('logistics')) {
+      return GlobalParameter.MOON_LOGISTICS_RATE;
+    }
+    throw new Error('title does not match any description: ' + title);
+  }
   return cast(player.getWaitingFor(), OrOptions).options.map((o) => o.title as string).map(titlesToGlobalParameter);
 }
 
-function titlesToGlobalParameter(title: string): GlobalParameter {
-  if (title.includes('temperature')) {
-    return GlobalParameter.TEMPERATURE;
-  }
-  if (title.includes('ocean')) {
-    return GlobalParameter.OCEANS;
-  }
-  if (title.includes('oxygen')) {
-    return GlobalParameter.OXYGEN;
-  }
-  if (title.includes('Venus')) {
-    return GlobalParameter.VENUS;
-  }
-  if (title.includes('habitat')) {
-    return GlobalParameter.MOON_HABITAT_RATE;
-  }
-  if (title.includes('mining')) {
-    return GlobalParameter.MOON_MINING_RATE;
-  }
-  if (title.includes('logistics')) {
-    return GlobalParameter.MOON_LOGISTICS_RATE;
-  }
-  throw new Error('title does not match any description: ' + title);
-}

@@ -16,9 +16,6 @@ import {InputError} from '../inputs/InputError';
 
 export class PlayerInput extends Handler {
   public static readonly INSTANCE = new PlayerInput();
-  private constructor() {
-    super();
-  }
 
   public override async post(req: Request, res: Response, ctx: Context): Promise<void> {
     const playerId = ctx.url.searchParams.get('id');

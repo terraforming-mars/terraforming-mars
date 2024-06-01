@@ -50,17 +50,15 @@
     "Lunar Habitat": "月のコロニー",
     "Lunar Habitat (var.)": "月のコロニー(ヴァリアント)",
     "Spend 22 M€ and 1 titanium to place a habitat on The Moon and raise your M€ production 1 step.": "22MCと1チタン支払い、月に生息地タイルを配置. 居住地レート+1段階. MC産出+1.",
-    "Spend 26 M€ place a habitat on The Moon and raise your M€ production 1 step.": "26MC支払い、月に生息地タイルを配置し、居住地レート+1段階. MC産出+1.",
-
+    "Spend 26 M€ to place a habitat on The Moon and raise your M€ production 1 step.": "26MC支払い、月に生息地タイルを配置し、居住地レート+1段階. MC産出+1.",
     "Build Moon Mine": "",
     "Lunar Mine": "月の鉱山",
     "Lunar Mine (var.)": "月の鉱山(ヴァリアント)",
     "Spend 20 M€ and 1 titanium to place a mine on the moon, raise the mining rate 1 step, and raise steel production 1 step.": "20MCと1チタン支払い、月に鉱山タイルを配置. 採掘レート+1段階. 建材産出+1.",
-    "Spend 23 M€ to place a mine on the moon, raise the mining rate 1 step, and raise steel production 1 step.": "23MC支払い、月に鉱山タイルを配置. 採掘レート+1段階. 建材産出+1.",
-
+    "Spend 23 M€ to place a mine on The Moon, raise the mining rate 1 step, and raise steel production 1 step.": "23MC支払い、月に鉱山タイルを配置. 採掘レート+1段階. 建材産出+1.",
     "Build Moon Road": "",
     "Road Infrastructure": "月の道路",
     "Road Infrastructure (var.)": "月の道路(ヴァリアント)",
-    "Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.": "18MCと1建材支払い、月に道路タイルを配置. 物流レート+1段階.",
-    "Spend 21 M€ place a road on the moon and raise the Logistics Rate 1 step.": "21MC支払い、月に道路タイルを配置. 物流レート+1段階."
+    "Spend 18 M€ and 1 steel to place a road on The Moon and raise the Logistics Rate 1 step.": "18MCと1建材支払い、月に道路タイルを配置. 物流レート+1段階.",
+    "Spend 21 M€ to place a road on The Moon and raise the Logistics Rate 1 step.": "21MC支払い、月に道路タイルを配置. 物流レート+1段階."
 }

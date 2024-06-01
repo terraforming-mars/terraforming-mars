@@ -18,7 +18,7 @@ export class MoonRoadStandardProject extends StandardProjectCard {
     metadata: {
       cardNumber: '',
       renderData: CardRenderer.builder((b) =>
-        b.standardProject('Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.', (eb) => {
+        b.standardProject('Spend 18 M€ and 1 steel to place a road on The Moon and raise the Logistics Rate 1 step.', (eb) => {
           eb.megacredits(18).steel(1).startAction.moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTICS_RATE});
         }),
       ),

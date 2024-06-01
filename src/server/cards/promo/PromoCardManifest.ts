@@ -77,6 +77,7 @@ import {StanfordTorus} from './StanfordTorus';
 import {StJosephOfCupertinoMission} from './StJosephOfCupertinoMission';
 import {SubCrustMeasurements} from './SubCrustMeasurements';
 import {Supercapacitors} from './Supercapacitors';
+import {Supermarkets} from './Supermarkets';
 import {Teslaract} from './Teslaract';
 import {TopsoilContract} from './TopsoilContract';
 import {TychoMagnetics} from './TychoMagnetics';
@@ -147,6 +148,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.ICY_IMPACTORS]: {Factory: IcyImpactors},
     [CardName.SOIL_ENRICHMENT]: {Factory: SoilEnrichment},
     [CardName.CITY_PARK]: {Factory: CityPark},
+    [CardName.SUPERMARKETS]: {Factory: Supermarkets},
   },
 
   preludeCards: {

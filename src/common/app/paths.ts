@@ -11,6 +11,7 @@ export const paths = {
   API_SPECTATOR: 'api/spectator',
   API_STATS: 'api/stats',
   API_WAITING_FOR: 'api/waitingfor',
+  AUTOPASS: 'autopass',
   CARDS: 'cards',
   GAME: 'game',
   GAMES_OVERVIEW: 'games-overview',

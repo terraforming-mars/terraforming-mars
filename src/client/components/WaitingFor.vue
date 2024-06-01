@@ -1,6 +1,21 @@
 <template>
   <div v-if="waitingfor === undefined">{{ $t('Not your turn to take any actions') }}</div>
   <div v-else class="wf-root">
+    <template v-if="playerView.game.phase === Phase.ACTION && playerView.players.length !== 1">
+      <!--
+        Autopass is only available when you are taking actions because of how autopass is stored.
+        It's connected with when the player takes actions, and is saved along with the rest of the
+        game. This means that if you are waiting for someone else to take actions, you can't change
+        your autopass setting.
+
+        If there was another database table that stored autopass and other settings, this could be
+        changed to be available at all times.
+      -->
+      <input type="checkbox" name="autopass" id="autopass-checkbox" v-model="autopass" v-on:change="updateAutopass">
+      <label for="autopass-checkbox">
+          <span v-i18n>Automatically pass</span>
+      </label>
+    </template>
     <!-- <template v-if="waitingfor !== undefined && waitingfor.showReset && playerView.players.length === 1">
       <div @click="reset">Reset This Action <span class="reset" >(experimental)</span></div>
     </template> -->
@@ -16,15 +31,15 @@
 <script lang="ts">
 
 import Vue from 'vue';
+import * as constants from '@/common/constants';
+import * as raw_settings from '@/genfiles/settings.json';
 import {vueRoot} from '@/client/components/vueRoot';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
-import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
+import {PublicPlayerModel, PlayerViewModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {WaitingForModel} from '@/common/models/WaitingForModel';
-
-import * as constants from '@/common/constants';
-import * as raw_settings from '@/genfiles/settings.json';
+import {Phase} from '@/common/Phase';
 import {paths} from '@/common/app/paths';
 import {statusCode} from '@/common/http/statusCode';
 import {isPlayerId} from '@/common/Types';
@@ -38,7 +53,7 @@ export default Vue.extend({
   name: 'waiting-for',
   props: {
     playerView: {
-      type: Object as () => ViewModel,
+      type: Object as () => PlayerViewModel,
     },
     players: {
       type: Array as () => Array<PublicPlayerModel>,
@@ -53,6 +68,7 @@ export default Vue.extend({
   data() {
     return {
       waitingForTimeout: this.settings.waitingForTimeout as typeof raw_settings.waitingForTimeout,
+      autopass: this.playerView.autopass,
     };
   },
   methods: {
@@ -122,6 +138,24 @@ export default Vue.extend({
       xhr.onload = () => {
         this.loadPlayerViewResponse(xhr);
       };
+      xhr.send();
+      xhr.onerror = function() {
+        // todo(kberg): Report error to caller
+        root.isServerSideRequestInProgress = false;
+      };
+    },
+    updateAutopass() {
+      const xhr = new XMLHttpRequest();
+      const root = vueRoot(this);
+      if (root.isServerSideRequestInProgress) {
+        console.warn('Server request in progress');
+        return;
+      }
+      xhr.onload = () => {
+        root.isServerSideRequestInProgress = true;
+      };
+      xhr.open('GET', paths.AUTOPASS + '?id=' + this.playerView.id + '&autopass=' + this.autopass);
+      xhr.responseType = 'json';
       xhr.send();
       xhr.onerror = function() {
         // todo(kberg): Report error to caller
@@ -224,6 +258,11 @@ export default Vue.extend({
     if (this.playerView.players.length > 1 && this.waitingfor !== undefined) {
       documentTitleTimer = window.setInterval(() => this.animateTitle(), 1000);
     }
+  },
+  computed: {
+    Phase(): typeof Phase {
+      return Phase;
+    },
   },
 });
 

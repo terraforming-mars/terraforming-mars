@@ -31,6 +31,7 @@ import {getHerokuIpAddress} from './heroku';
 import {Request} from '../Request';
 import {Response} from '../Response';
 import {Clock} from '../../common/Timer';
+import {Autopass} from '../routes/Autopass';
 
 const metrics = {
   count: new prometheus.Counter({
@@ -69,6 +70,7 @@ const handlers: Map<string, IHandler> = new Map(
     [paths.API_STATS, ApiStats.INSTANCE],
     [paths.API_SPECTATOR, ApiSpectator.INSTANCE],
     [paths.API_WAITING_FOR, ApiWaitingFor.INSTANCE],
+    [paths.AUTOPASS, Autopass.INSTANCE],
     [paths.CARDS, ServeApp.INSTANCE],
     ['favicon.ico', ServeAsset.INSTANCE],
     [paths.GAME, GameHandler.INSTANCE],

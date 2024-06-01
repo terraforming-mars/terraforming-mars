@@ -1,9 +1,11 @@
 {
    "Select a ${0} bonus": "Wähle einen ${0}-Bonus",
    "Select a ${0} policy": "Wähle eine ${0}-Politik",
-   
+
    "Gain 1 M€ for each building tag you have": "Erhalte 1 M€ für jedes Gebäudesymbol, das du besitzt",
    "Gain 1 M€ for each tile you have ON MARS": "Erhalte 1 M€ für jedes Plättchen, das du AUF DEM MARS besitzt",
+   "Gain 1 M€ for each building tag you have (${0})": "Erhalte 1 M€ für jedes Gebäudesymbol, das du besitzt (${0})",
+   "Gain 1 M€ for each tile you have ON MARS (${0})": "Erhalte 1 M€ für jedes Plättchen, das du AUF DEM MARS besitzt (${0})",
 
    "When you place a tile ON MARS, gain 1 steel": "Wenn du ein Plättchen AUF DEM MARS ablegst, erhalte 1 Stahl",
    "When you play a building tag, gain 2 M€": "Wenn du ein Gebäudesymbol spielst, erhalte 2 M€",
@@ -12,6 +14,8 @@
 
    "Gain 1 M€ for each science tag you have": "Erhalte 1 M€ für jedes Wissenschaftssymbol, das du besitzt",
    "Gain 1 M€ for every 3 cards in hand": "Erhalte 1 M€ für jede dritte Karte in deiner Hand",
+   "Gain 1 M€ for each science tag you have (${0})": "Erhalte 1 M€ für jedes Wissenschaftssymbol, das du besitzt (${0})",
+   "Gain 1 M€ for every 3 cards in hand (${0})": "Erhalte 1 M€ für jede dritte Karte in deiner Hand (${0})",
 
    "Your global requirements are +/- 2 steps": "Deine globalen Bedinungen erhöhen/vermindern sich um 2 Stufen",
    "When you raise a global parameter, draw a card per step raised": "Wenn du einen globalen Parameter erhöhst, ziehe eine Karte pro erhöhtem Schritt",
@@ -19,6 +23,8 @@
 
    "Gain 1 M€ for each Venus, Earth and Jovian tag you have": "Erhalte 1 M€ für jedes Venus-, Erde- und Jupitersymbol, das du besitzt",
    "Gain 1 M€ for each Space tag you have": "Erhalte 1 M€ für jedes Weltraumsymbol, das du besitzt",
+   "Gain 1 M€ for each Venus, Earth and Jovian tag you have (${0})": "Erhalte 1 M€ für jedes Venus-, Erde- und Jupitersymbol, das du besitzt (${0})",
+   "Gain 1 M€ for each Space tag you have (${0})": "Erhalte 1 M€ für jedes Weltraumsymbol, das du besitzt (${0})",
 
    "Your titanium resources are worth 1 M€ extra": "Deine Titan-Ressourcen sind jeweils 1 M€ mehr wert",
    "Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)": "Zahle 4 M€, um entweder 2 Titan zu erhalten oder 2 Schweber einer beliebigen Karte hinzuzufügen (EINIGKEIT-Aufruhr)",
@@ -27,6 +33,8 @@
 
    "Gain 1 M€ for each Plant, Microbe and Animal tag you have": "Erhalte 1 M€ für jedes Pflanzen-, Mikroben- und Tiersymbol, das du besitzt",
    "Gain 2 M€ for each greenery tile you have": "Erhalte 2 M€ für jedes Grünflächenplättchen, das du besitzt",
+   "Gain 1 M€ for each Plant, Microbe and Animal tag you have (${0})": "Erhalte 1 M€ für jedes Pflanzen-, Mikroben- und Tiersymbol, das du besitzt (${0})",
+   "Gain 2 M€ for each greenery tile you have (${0})": "Erhalte 2 M€ für jedes Grünflächenplättchen, das du besitzt (${0})",
 
    "When you place a greenery tile, gain 4 M€": "Wenn du ein Grünflächenplättchen platzierst, erhalte 4 M€",
    "When you place a tile, gain 1 plant": "Wenn du ein beliebiges Plättchen platzierst, erhalte 1 Pflanze",
@@ -35,6 +43,8 @@
 
    "The player(s) with the lowest TR gains 1 TR": "Der/die Spieler mit dem niedrigsten Terraformwert erhält/erhalten 1 TW",
    "The player(s) with the highest TR loses 1 TR": "Der/die Spieler mit dem höchsten Terraformwert verliert/verlieren 1 TW",
+   "The player(s) with the lowest TR gains 1 TR (${0})": "Der/die Spieler mit dem niedrigsten Terraformwert erhält/erhalten 1 TW (${0})",
+   "The player(s) with the highest TR loses 1 TR (${0})": "Der/die Spieler mit dem höchsten Terraformwert verliert/verlieren 1 TW (${0})",
 
    "When you take an action that raises TR, you MUST pay 3 M€ per step raised": "Wenn du eine Aktion durchführst, die den Terraformwert erhöhen, MUSST du 3 M€ pro erhöhtem TW zahlen",
    "When you place a tile, pay 3 M€ or as much as possible": "Wenn du ein beliebiges Plättchen spielst, zahle 3 M€ oder so viel wie möglich",
@@ -43,6 +53,8 @@
 
    "Gain 1 M€ for each heat production you have": "Erhalte 1 M€ für jeden Punkt deiner Wärme-Produktion",
    "Gain 1 heat for each heat production you have": "Erhalte 1 Wärme für jeden Punkt deiner Wärme-Produktion",
+   "Gain 1 M€ for each heat production you have (${0})": "Erhalte 1 M€ für jeden Punkt deiner Wärme-Produktion (${0})",
+   "Gain 1 heat for each heat production you have (${0})": "Erhalte 1 Wärme für jeden Punkt deiner Wärme-Produktion (${0})",
 
    "Pay 10 M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)": "Zahle 10 M€, um deine Energie- und Wärme-Produktion um 1 zu erhöhen (KELVINISTEN-Aufruhr)",
    "When you raise temperature, gain 3 M€ per step raised": "Wenn du die Temperatur erhöhst, erhalte 3 M€ pro erhöhtem Schritt",

@@ -41,7 +41,8 @@ export class CloudTourism extends ActionCard {
     // This does its own calculation because player.tags isn't robust enough at the moment
     const counts = {
       earth: player.tags.count(Tag.EARTH, 'raw'),
-      venus: player.tags.count(Tag.VENUS, 'raw'),
+      // The +1 is "including this"
+      venus: player.tags.count(Tag.VENUS, 'raw') + 1,
     };
     if (player.cardIsInEffect(CardName.EARTH_EMBASSY)) {
       counts.earth += player.tags.count(Tag.MOON, 'raw');

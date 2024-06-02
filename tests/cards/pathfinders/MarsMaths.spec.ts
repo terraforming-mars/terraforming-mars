@@ -1,10 +1,8 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {MarsMaths} from '../../../src/server/cards/pathfinders/MarsMaths';
-import {cast, finishGeneration} from '../../TestingUtils';
+import {cast, finishGeneration, runAllActions} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {IProjectCard} from '../../../src/server/cards/IProjectCard';
-import {IPlayer} from '../../../src/server/IPlayer';
 
 describe('MarsMaths', function() {
   let card: MarsMaths;
@@ -31,7 +29,8 @@ describe('MarsMaths', function() {
     // End the generation. Player will draw 5 cards
     finishGeneration(game);
     expect(game.getGeneration()).to.eq(11);
-    expect(getWaitingFor(player).cards).has.length(5);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    expect(selectCard.cards).has.length(5);
   });
 
   it('play - 2 player - draft', function() {
@@ -47,10 +46,26 @@ describe('MarsMaths', function() {
     finishGeneration(game);
     expect(game.getGeneration()).to.eq(11);
 
-    expect(getWaitingFor(player).cards).has.length(5);
-    expect(getWaitingFor(player).config.min).eq(2);
-    expect(getWaitingFor(player).config.max).eq(2);
-    expect(getWaitingFor(player2).cards).has.length(4);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    expect(selectCard.cards).has.length(5);
+    expect(selectCard.config.min).eq(2);
+    expect(selectCard.config.max).eq(2);
+
+    const selectCard2 = cast(player2.popWaitingFor(), SelectCard);
+    expect(selectCard2.cards).has.length(4);
+
+    selectCard.cb([selectCard.cards[0], selectCard.cards[1]]);
+    selectCard2.cb([selectCard2.cards[0]]);
+
+    runAllActions(game);
+
+    const selectCardb = cast(player.popWaitingFor(), SelectCard);
+    expect(selectCardb.cards).has.length(3);
+    expect(selectCardb.config.min).eq(1);
+    expect(selectCardb.config.max).eq(1);
+
+    const selectCardb2 = cast(player2.popWaitingFor(), SelectCard);
+    expect(selectCardb2.cards).has.length(3);
   });
 
   it('play - 2 player - no draft', function() {
@@ -68,13 +83,11 @@ describe('MarsMaths', function() {
     finishGeneration(game);
     expect(game.getGeneration()).to.eq(11);
 
-    expect(getWaitingFor(player).cards).has.length(5);
-    expect(getWaitingFor(player).config.min).eq(0);
-    expect(getWaitingFor(player).config.max).eq(4);
-    expect(getWaitingFor(player2).cards).has.length(4);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    expect(selectCard.cards).has.length(5);
+    expect(selectCard.config.min).eq(0);
+    expect(selectCard.config.max).eq(4);
+    const selectCard2 = cast(player2.popWaitingFor(), SelectCard);
+    expect(selectCard2.cards).has.length(4);
   });
 });
-
-function getWaitingFor(player: IPlayer): SelectCard<IProjectCard> {
-  return cast(player.getWaitingFor(), SelectCard<IProjectCard>);
-}

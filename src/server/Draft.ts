@@ -177,11 +177,13 @@ class StandardDraft extends Draft {
   }
 
   override cardsToKeep(player: IPlayer): number {
-    if (LunaProjectOffice.isActive(player)) {
-      return 2;
-    }
-    if (player.isCorporation(CardName.MARS_MATHS)) {
-      return 2;
+    if (this.game.draftRound === 1) {
+      if (LunaProjectOffice.isActive(player)) {
+        return 2;
+      }
+      if (player.isCorporation(CardName.MARS_MATHS)) {
+        return 2;
+      }
     }
 
     return 1;

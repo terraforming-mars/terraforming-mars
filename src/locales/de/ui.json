@@ -313,6 +313,7 @@
     "Please Login with right user": "Bitte logge dich mit dem richtigen Benutzer ein",
     "Undoing, Please refresh or wait seconds": "Rückgängig, bitte aktualisiere or warte einige Sekunden",
     "Pass": "Passen",
+    "Automatically pass": "Automatisch Passen",
     "Pay for a Standard Project": "Bezahle für ein Standardprojekt",
     "Play project card": "Karte ausspielen",
     "Fund an award (${0} M€)": "Auszeichnung finanzieren (${0} M€)",
@@ -900,6 +901,7 @@
     "Philares effect: select 3 resource(s)": "Philares Effekt: Wähle 3 Ressource(n)",
     "Philares effect: select 4 resource(s)": "Philares Effekt: Wähle 4 Ressource(n)",
     "Global Event - Select 2 cards to discard": "Globales Ereignis - 2 Karten zum Abwerfen auswählen",
+    "Dry Deserts Global Event - Remove an Ocean tile from the board": "Globales Ereignis: Trockene Wüsten - Entferne ein Ozean vom Spielbrett",
     "Dry Deserts Global Event - Gain 1 resource(s) for influence": "Globales Ereignis: Trockene Wüsten - Erhalte 1 Ressource für deinen Einfluss",
     "Dry Deserts Global Event - Gain 2 resource(s) for influence": "Globales Ereignis: Trockene Wüsten - Erhalte 2 Ressource für deinen Einfluss",
     "Dry Deserts Global Event - Gain 3 resource(s) for influence": "Globales Ereignis: Trockene Wüsten - Erhalte 3 Ressource für deinen Einfluss",
@@ -1249,7 +1251,11 @@
 
     "Select how to pay for the ${0} standard project": "Wähle aus, wie du für das Standardprojekt ${0} bezahlen möchtest",
     "Excavate:SP": "Ausgraben",
+    "Power Plant:SP": "Kraftwerk",
     "Asteroid:SP": "Asteroid",
+    "Ocean:SP": "Ozean",
+    "Greenery:SP": "Grünfläche",
+    "City:SP": "Stadt",
     "Select space for ocean from temperature increase": "Wähle ein Feld für einen Ozean, der aufgrund des Temperaturanstiegs platziert wird",
 
     "Select production to decrease one step and gain 4 resources": "Wähle eine Produktion, um einen Schritt zu reduzieren und 4 Ressourcen zu erhalten",

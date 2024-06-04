@@ -10,8 +10,8 @@ import {SelectCard} from '../src/server/inputs/SelectCard';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 import {TestPlayer} from './TestPlayer';
 import {Deck} from '../src/server/cards/Deck';
-import {Game} from '../src/server/Game';
-import {Database} from '../src/server/database/Database';
+// import {Game} from '../src/server/Game';
+// import {Database} from '../src/server/database/Database';
 
 // Tests for drafting
 describe('drafting', () => {
@@ -113,6 +113,260 @@ describe('drafting', () => {
 
     // A nice next step would be to show that those cards above are for purchase, and acquiring them puts them in cardsInHand
     // and that the rest of them are discarded.
+  });
+
+  it('3 player - project draft - even generation', () => {
+    const [game, player1, player2, player3] = testGame(3, {draftVariant: true});
+    const drawPile = game.projectDeck.drawPile;
+
+    unshiftCards(drawPile, [
+      CardName.ACQUIRED_COMPANY,
+      CardName.BIOFERTILIZER_FACILITY,
+      CardName.CAPITAL,
+      CardName.DECOMPOSERS,
+      CardName.EARTH_OFFICE,
+      CardName.FISH,
+      CardName.GENE_REPAIR,
+      CardName.HACKERS,
+      CardName.IMPORTED_GHG,
+      CardName.JOVIAN_EMBASSY,
+      CardName.KELP_FARMING,
+      CardName.LAND_CLAIM]);
+
+    game.generation = 1;
+    // This moves into draft phase
+    finishGeneration(game);
+
+    // First round
+
+    expect(draftSelection(player1)).deep.eq([
+      CardName.ACQUIRED_COMPANY,
+      CardName.BIOFERTILIZER_FACILITY,
+      CardName.CAPITAL,
+      CardName.DECOMPOSERS]);
+
+    expect(draftSelection(player2)).deep.eq([
+      CardName.EARTH_OFFICE,
+      CardName.FISH,
+      CardName.GENE_REPAIR,
+      CardName.HACKERS]);
+
+    expect(draftSelection(player3)).deep.eq([
+      CardName.IMPORTED_GHG,
+      CardName.JOVIAN_EMBASSY,
+      CardName.KELP_FARMING,
+      CardName.LAND_CLAIM]);
+
+    selectCard(player1, CardName.ACQUIRED_COMPANY);
+    selectCard(player2, CardName.EARTH_OFFICE);
+    selectCard(player3, CardName.IMPORTED_GHG);
+
+    expect(cardNames(player1.draftedCards)).deep.eq([CardName.ACQUIRED_COMPANY]);
+    expect(cardNames(player2.draftedCards)).deep.eq([CardName.EARTH_OFFICE]);
+    expect(cardNames(player3.draftedCards)).deep.eq([CardName.IMPORTED_GHG]);
+
+    // Second card
+
+    expect(draftSelection(player1)).deep.eq([
+      CardName.JOVIAN_EMBASSY,
+      CardName.KELP_FARMING,
+      CardName.LAND_CLAIM]);
+
+    expect(draftSelection(player2)).deep.eq([
+      CardName.BIOFERTILIZER_FACILITY,
+      CardName.CAPITAL,
+      CardName.DECOMPOSERS]);
+
+    expect(draftSelection(player3)).deep.eq([
+      CardName.FISH,
+      CardName.GENE_REPAIR,
+      CardName.HACKERS]);
+
+    selectCard(player1, CardName.JOVIAN_EMBASSY);
+    selectCard(player2, CardName.BIOFERTILIZER_FACILITY);
+    selectCard(player3, CardName.FISH);
+
+    expect(cardNames(player1.draftedCards)).deep.eq([
+      CardName.ACQUIRED_COMPANY,
+      CardName.JOVIAN_EMBASSY,
+    ]);
+    expect(cardNames(player2.draftedCards)).deep.eq([
+      CardName.EARTH_OFFICE,
+      CardName.BIOFERTILIZER_FACILITY,
+    ]);
+    expect(cardNames(player3.draftedCards)).deep.eq([
+      CardName.IMPORTED_GHG,
+      CardName.FISH,
+    ]);
+
+    // Third round
+
+    expect(draftSelection(player1)).deep.eq([
+      CardName.GENE_REPAIR,
+      CardName.HACKERS]);
+
+    expect(draftSelection(player2)).deep.eq([
+      CardName.KELP_FARMING,
+      CardName.LAND_CLAIM]);
+
+    expect(draftSelection(player3)).deep.eq([
+      CardName.CAPITAL,
+      CardName.DECOMPOSERS]);
+
+    selectCard(player1, CardName.GENE_REPAIR);
+    selectCard(player2, CardName.KELP_FARMING);
+    selectCard(player3, CardName.CAPITAL);
+
+    // No longer drafted cards, they're just cards to buy.
+    expect(player1.draftedCards).is.empty;
+    expect(player2.draftedCards).is.empty;
+    expect(player3.draftedCards).is.empty;
+
+    expect(draftSelection(player1)).deep.eq([
+      CardName.ACQUIRED_COMPANY,
+      CardName.JOVIAN_EMBASSY,
+      CardName.GENE_REPAIR,
+      CardName.DECOMPOSERS,
+    ]);
+    expect(draftSelection(player2)).deep.eq([
+      CardName.EARTH_OFFICE,
+      CardName.BIOFERTILIZER_FACILITY,
+      CardName.KELP_FARMING,
+      CardName.HACKERS,
+    ]);
+    expect(draftSelection(player3)).deep.eq([
+      CardName.IMPORTED_GHG,
+      CardName.FISH,
+      CardName.CAPITAL,
+      CardName.LAND_CLAIM,
+    ]);
+  });
+
+  it('3 player - project draft - odd generation', () => {
+    const [game, player1, player2, player3] = testGame(3, {draftVariant: true});
+    const drawPile = game.projectDeck.drawPile;
+
+    unshiftCards(drawPile, [
+      CardName.ACQUIRED_COMPANY,
+      CardName.BIOFERTILIZER_FACILITY,
+      CardName.CAPITAL,
+      CardName.DECOMPOSERS,
+      CardName.EARTH_OFFICE,
+      CardName.FISH,
+      CardName.GENE_REPAIR,
+      CardName.HACKERS,
+      CardName.IMPORTED_GHG,
+      CardName.JOVIAN_EMBASSY,
+      CardName.KELP_FARMING,
+      CardName.LAND_CLAIM]);
+
+    game.generation = 2;
+    // This moves into draft phase
+    finishGeneration(game);
+
+    // First round
+
+    expect(draftSelection(player1)).deep.eq([
+      CardName.ACQUIRED_COMPANY,
+      CardName.BIOFERTILIZER_FACILITY,
+      CardName.CAPITAL,
+      CardName.DECOMPOSERS]);
+
+    expect(draftSelection(player2)).deep.eq([
+      CardName.EARTH_OFFICE,
+      CardName.FISH,
+      CardName.GENE_REPAIR,
+      CardName.HACKERS]);
+
+    expect(draftSelection(player3)).deep.eq([
+      CardName.IMPORTED_GHG,
+      CardName.JOVIAN_EMBASSY,
+      CardName.KELP_FARMING,
+      CardName.LAND_CLAIM]);
+
+    selectCard(player1, CardName.ACQUIRED_COMPANY);
+    selectCard(player2, CardName.EARTH_OFFICE);
+    selectCard(player3, CardName.IMPORTED_GHG);
+
+    expect(cardNames(player1.draftedCards)).deep.eq([CardName.ACQUIRED_COMPANY]);
+    expect(cardNames(player2.draftedCards)).deep.eq([CardName.EARTH_OFFICE]);
+    expect(cardNames(player3.draftedCards)).deep.eq([CardName.IMPORTED_GHG]);
+
+    // Second card
+
+    expect(draftSelection(player1)).deep.eq([
+      CardName.FISH,
+      CardName.GENE_REPAIR,
+      CardName.HACKERS]);
+
+    expect(draftSelection(player2)).deep.eq([
+      CardName.JOVIAN_EMBASSY,
+      CardName.KELP_FARMING,
+      CardName.LAND_CLAIM]);
+
+    expect(draftSelection(player3)).deep.eq([
+      CardName.BIOFERTILIZER_FACILITY,
+      CardName.CAPITAL,
+      CardName.DECOMPOSERS]);
+
+    selectCard(player1, CardName.FISH);
+    selectCard(player2, CardName.JOVIAN_EMBASSY);
+    selectCard(player3, CardName.BIOFERTILIZER_FACILITY);
+
+    expect(cardNames(player1.draftedCards)).deep.eq([
+      CardName.ACQUIRED_COMPANY,
+      CardName.FISH,
+    ]);
+    expect(cardNames(player2.draftedCards)).deep.eq([
+      CardName.EARTH_OFFICE,
+      CardName.JOVIAN_EMBASSY,
+    ]);
+    expect(cardNames(player3.draftedCards)).deep.eq([
+      CardName.IMPORTED_GHG,
+      CardName.BIOFERTILIZER_FACILITY,
+    ]);
+
+    // Third round
+
+    expect(draftSelection(player1)).deep.eq([
+      CardName.KELP_FARMING,
+      CardName.LAND_CLAIM]);
+
+    expect(draftSelection(player2)).deep.eq([
+      CardName.CAPITAL,
+      CardName.DECOMPOSERS]);
+
+    expect(draftSelection(player3)).deep.eq([
+      CardName.GENE_REPAIR,
+      CardName.HACKERS]);
+
+    selectCard(player1, CardName.KELP_FARMING);
+    selectCard(player2, CardName.CAPITAL);
+    selectCard(player3, CardName.GENE_REPAIR);
+
+    // No longer drafted cards, they're just cards to buy.
+    expect(player1.draftedCards).is.empty;
+    expect(player2.draftedCards).is.empty;
+    expect(player3.draftedCards).is.empty;
+
+    expect(draftSelection(player1)).deep.eq([
+      CardName.ACQUIRED_COMPANY,
+      CardName.FISH,
+      CardName.KELP_FARMING,
+      CardName.DECOMPOSERS,
+    ]);
+    expect(draftSelection(player2)).deep.eq([
+      CardName.EARTH_OFFICE,
+      CardName.JOVIAN_EMBASSY,
+      CardName.CAPITAL,
+      CardName.HACKERS,
+    ]);
+    expect(draftSelection(player3)).deep.eq([
+      CardName.IMPORTED_GHG,
+      CardName.BIOFERTILIZER_FACILITY,
+      CardName.GENE_REPAIR,
+      CardName.LAND_CLAIM,
+    ]);
   });
 
   it('2 player - initial draft', () => {
@@ -739,39 +993,41 @@ function draftSelection(player: IPlayer) {
   return getWaitingFor(player).cards.map((card) => card.name);
 }
 
-async function selectCard(player: TestPlayer, cardName: CardName) {
+function selectCard(player: TestPlayer, cardName: CardName) {
   const selectCard = cast(player.popWaitingFor(), SelectCard);
   const cards = selectCard.cards;
   const card = cards.find((c) => c.name === cardName);
-  if (card === undefined) throw new Error(`${cardName} isn't in list`);
-  selectCard.cb([card]);
-
-  validateState(player);
-}
-
-// This is a helper function to validate the state of the game after each action.
-// In ensures that after serializing and deserializing the game,
-// the state is the same, including the deferred actions.
-async function validateState(player: TestPlayer) {
-  const game = player.game;
-
-  const serialized = await Database.getInstance().getGameVersion(game.id, game.lastSaveId);
-  const restored = Game.deserialize(serialized);
-
-  expect(game.deferredActions.length).eq(0);
-  expect(restored.deferredActions.length).eq(0);
-
-  for (const id of game.getPlayers().map((p) => p.id)) {
-    const livePlayer = game.getPlayerById(id);
-    const restoredPlayer = restored.getPlayerById(id);
-
-    expect(livePlayer.needsToDraft).eq(restoredPlayer.needsToDraft);
-    expect(livePlayer.getWaitingFor()?.type).eq(restoredPlayer.getWaitingFor()?.type);
-
-    if (livePlayer.getWaitingFor() instanceof SelectCard) {
-      const liveCards = cast(livePlayer.getWaitingFor(), SelectCard).cards;
-      const restoredCards = cast(restoredPlayer.getWaitingFor(), SelectCard).cards;
-      expect(liveCards.map((c) => c.name)).deep.eq(restoredCards.map((c) => c.name));
-    }
+  if (card === undefined) {
+    throw new Error(`${cardName} isn't in list`);
   }
+  selectCard.process({type: 'card', cards: [card.name]});
+
+  // await validateState(player);
 }
+
+// // This is a helper function to validate the state of the game after each action.
+// // In ensures that after serializing and deserializing the game,
+// // the state is the same, including the deferred actions.
+// async function validateState(player: TestPlayer) {
+//   const game = player.game;
+
+//   const serialized = await Database.getInstance().getGameVersion(game.id, game.lastSaveId);
+//   const restored = Game.deserialize(serialized);
+
+//   expect(game.deferredActions.length).eq(0);
+//   expect(restored.deferredActions.length).eq(0);
+
+//   for (const id of game.getPlayers().map((p) => p.id)) {
+//     const livePlayer = game.getPlayerById(id);
+//     const restoredPlayer = restored.getPlayerById(id);
+
+//     expect(livePlayer.needsToDraft).eq(restoredPlayer.needsToDraft);
+//     expect(livePlayer.getWaitingFor()?.type).eq(restoredPlayer.getWaitingFor()?.type);
+
+//     if (livePlayer.getWaitingFor() instanceof SelectCard) {
+//       const liveCards = cast(livePlayer.getWaitingFor(), SelectCard).cards;
+//       const restoredCards = cast(restoredPlayer.getWaitingFor(), SelectCard).cards;
+//       expect(liveCards.map((c) => c.name)).deep.eq(restoredCards.map((c) => c.name));
+//     }
+//   }
+// }

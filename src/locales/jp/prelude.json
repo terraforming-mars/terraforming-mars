@@ -5,10 +5,10 @@
 
     "Corridors of Power": "権力の回廊",
     "Increase your TR one step. Gain 4 M€": "TR+1. 4MC獲得.",
-    "Effect: Whenever one of your delegates becomes a Party Leader, draw a card": "代議員が党首になった時、1ドロー.",
+    "Effect: Whenever one of your delegates becomes a Party Leader, draw a card": "効果：代議員が党首になった時、1ドロー.",
 
     "Atmospheric Enhancers": "大気エンハンサ",
-    "Effect: Raise either the temperature or oxygen or Venus 2 steps. Reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take those 2 cards into hand and discard the rest.": "温度+2段階 または 酸素+2段階. 浮遊体を配置できるカードを2枚入手.",
+    "Effect: Raise either the temperature or oxygen or Venus 2 steps. Reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take those 2 cards into hand and discard the rest.": "温度+2段階 または 酸素+2段階. 浮遊体アイコンがあるカードを2枚入手.",
 
     "Applied Science": "応用科学",
     "Action: Remove 1 resource here to gain 1 standard resource of your choice or add 1 resource on ANY CARD WITH A RESOURCE.": "アクション：このカード上から1科学リソース除去し、任意の1リソースを獲得.",
@@ -16,7 +16,7 @@
 
     "Colony Trade Hub": "コロニー交易拠点",
     "Increase your energy production 1 step. Gain 3 titanium": "電力産出+1. 3チタン獲得.",
-    "Effect: When a colony is placed, gain 2 M€": "効果：コロニー配置時、2MC獲得.",
+    "Effect: When a colony is placed, gain 2 M€": "効果：コロニーが配置された時、2MC獲得.",
 
     "Focused Organization": "重点的な組織",
     "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource": "アクション：手札を1枚捨て、さらに1標準リリースを支払い、1ドローと1標準リソース獲得.",
@@ -26,7 +26,7 @@
     "Gain 2 M€. Draw 2 cards with requirements.": "2MC獲得. 条件付きカードを2枚入手.",
 
     "Old Mining Colony": "旧鉱業コロニー",
-    "Increase your titanium production 1 step. Place 1 colony. Discard 1 card.": "チタン産出+1. コロニー1つ配置. 手札を1枚捨てる",
+    "Increase your titanium production 1 step. Place 1 colony. Discard 1 card.": "チタン産出+1. コロニー1つ配置. 手札を1枚捨てる.",
 
 
     "Anti-desertification Techniques": "砂漠化防止技術",

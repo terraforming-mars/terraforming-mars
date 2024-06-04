@@ -11,7 +11,7 @@
 	"MILESTONES": "称号",
 	"GAIN THESE RESOURCES": "以下のリソースを獲得",
 	"GAIN ALL YOUR COLONY BONUSES TWICE": "全ての所有しているコロニーから2回分コロニー・ボーナス獲得.",
-	"REPLACE ALL NEUTRAL": "全ての中立を交代",
+	"REPLACE ALL NEUTRAL": "全ての中立の代議員を交代",
 	"SWAP X+2": "X+2まで産出を交換",
 
 	"Co-leadership": "共同リーダーシップ",
@@ -37,7 +37,7 @@
 	"Once per game, gain 7-X VP and 4X M€, where X is the current generation number.": "CEOアクション：7から世代数を引いた数分、VP獲得. 世代数の数分、4MC獲得.",
 
 	"Ender": "エンダー",
-	"Once per game, discard any number of cards up to twice the current generation number to draw that many cards.": "CEOアクション：世代数の2倍までカードを枚数捨てる. 捨てた枚数と同じ数ドロー.",
+	"Once per game, discard any number of cards up to twice the current generation number to draw that many cards.": "CEOアクション：世代数の2倍までの枚数、カードを捨てる. 捨てた枚数と同じ数ドロー.",
 
 	"Faraday": "ファラデー",
 	"When you gain a multiple of 5 for any tag type IN PLAY, you may pay 3 M€ to draw a card with that tag. Wild tags do not count for this effect.": "ある種類の獲得したタグの数が5の倍数になったとき、3MC支払い、そのタグのカードを1枚入手してもよい.",

@@ -1,14 +1,13 @@
 import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
-import {Bonus} from '../Bonus';
+import {BaseBonus} from '../Bonus';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {Space} from '../../boards/Space';
 import {IPlayer} from '../../IPlayer';
-import {Policy} from '../Policy';
+import {BasePolicy, Policy} from '../Policy';
 import {Phase} from '../../../common/Phase';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {IProjectCard} from '../../cards/IProjectCard';
@@ -22,7 +21,7 @@ export class MarsFirst extends Party implements IParty {
 }
 
 // TODO(nwai90): Mars First bonus IDs start with 'm' and policies start with 'mp'.
-class MarsFirstBonus01 implements Bonus {
+class MarsFirstBonus01 extends BaseBonus {
   readonly id = 'mb01' as const;
   readonly description = 'Gain 1 M€ for each building tag you have';
 
@@ -30,14 +29,12 @@ class MarsFirstBonus01 implements Bonus {
     return player.tags.count(Tag.BUILDING, 'raw');
   }
 
-  grant(game: IGame) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
-    });
+  grantForPlayer(player: IPlayer): void {
+    player.stock.add(Resource.MEGACREDITS, this.getScore(player));
   }
 }
 
-class MarsFirstBonus02 implements Bonus {
+class MarsFirstBonus02 extends BaseBonus {
   readonly id = 'mb02' as const;
   readonly description = 'Gain 1 M€ for each tile you have ON MARS';
 
@@ -46,10 +43,8 @@ class MarsFirstBonus02 implements Bonus {
     return boardSpaces.filter((space) => space.tile !== undefined && space.player === player && space.spaceType !== SpaceType.COLONY).length;
   }
 
-  grant(game: IGame) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      player.stock.add(Resource.MEGACREDITS, this.getScore(player));
-    });
+  grantForPlayer(player: IPlayer): void {
+    player.stock.add(Resource.MEGACREDITS, this.getScore(player));
   }
 }
 
@@ -73,19 +68,16 @@ class MarsFirstPolicy02 implements Policy {
   }
 }
 
-class MarsFirstPolicy03 implements Policy {
+class MarsFirstPolicy03 extends BasePolicy {
   readonly id = 'mfp03' as const;
   readonly description = 'Your steel resources are worth 1 M€ extra';
 
-  onPolicyStart(game: IGame): void {
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      player.increaseSteelValue();
-    });
+  override onPolicyStartForPlayer(player: IPlayer): void {
+    player.increaseSteelValue();
   }
-  onPolicyEnd(game: IGame): void {
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      player.decreaseSteelValue();
-    });
+
+  override onPolicyEndForPlayer(player: IPlayer): void {
+    player.decreaseSteelValue();
   }
 }
 

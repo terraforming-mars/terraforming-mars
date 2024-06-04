@@ -4,6 +4,7 @@ import {Color} from '../common/Color';
 import {SerializedCard} from './SerializedCard';
 import {SerializedTimer} from '../common/SerializedTimer';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
+import {AlliedParty} from './turmoil/AlliedParty';
 
 interface DeprecatedFields {
 }
@@ -12,6 +13,7 @@ export interface SerializedPlayer extends DeprecatedFields{
     actionsTakenThisGame: number;
     actionsTakenThisRound: number;
     actionsThisGeneration: Array<CardName>;
+    alliedParty: AlliedParty | undefined;
     // TODO(kberg): remove ? by 2024-10-01
     autoPass?: boolean;
     beginner: boolean;

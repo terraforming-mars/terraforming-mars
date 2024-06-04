@@ -268,6 +268,49 @@
     }
 }
 
+.party-badge {
+    clip-path: polygon(0 0, 80% 0%, 100% 20%, 100% 100%, 20% 100%, 0% 80%);
+    font-family: Prototype;
+    position: relative;
+    display: inline-block;
+    margin-top: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-bottom: 10px;
+    width: 30px;
+    height: 30px;
+    font-size: 22px;
+    line-height: 30px;
+    background-size: 30px;
+    filter: drop-shadow(0px 0px 1px black);
+    vertical-align: middle;
+
+    &.party-badge--greens {
+        background: #16b215;
+    }
+
+    &.party-badge--scientists {
+        background: #fff;
+        color: #222;
+    }
+
+    &.party-badge--mars_first {
+        background: #c97e23;
+    }
+
+    &.party-badge--unity {
+        background: #108ff0;
+    }
+
+    &.party-badge--reds {
+        background: #e65b5a;
+    }
+
+    &.party-badge--kelvinists {
+        background: #5d4d4d;
+    }
+}
+
 .party-name {
     height: 31px;
     line-height: 32px;
@@ -582,7 +625,6 @@
 .policies-clickable:visited {
     color: #303030;
 }
-
 
 .policy-block {
     background-color: #313131;

@@ -75,6 +75,8 @@ import {UnderworldPlayerData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {Counter} from './behavior/Counter';
 import {TRSource} from '../common/cards/TRSource';
+import {IParty} from './turmoil/parties/IParty';
+import {AlliedParty} from './turmoil/AlliedParty';
 import {newStandardDraft} from './Draft';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
@@ -88,6 +90,7 @@ export class Player implements IPlayer {
   public colonies: Colonies;
   public readonly production: Production;
   public readonly stock: Stock;
+  private _alliedParty: AlliedParty | undefined;
 
   // Corporate identity
   public corporations: Array<ICorporationCard> = [];
@@ -122,6 +125,10 @@ export class Player implements IPlayer {
     return this.stock.heat;
   }
 
+  public get alliedParty(): AlliedParty | undefined {
+    return this._alliedParty;
+  }
+
   public set megaCredits(megacredits: number) {
     this.stock.megacredits = megacredits;
   }
@@ -144,6 +151,19 @@ export class Player implements IPlayer {
 
   public set heat(heat: number) {
     this.stock.heat = heat;
+  }
+
+  public setAlliedParty(p: IParty) {
+    this._alliedParty = {
+      partyName: p.name,
+      agenda: {
+        bonusId: p.bonuses[0].id,
+        policyId: p.policies[0].id,
+      },
+    };
+    const alliedPolicy = this.game.turmoil?.getPartyByName(p.name).policies.find((t) => t.id === p.policies[0].id);
+
+    alliedPolicy?.onPolicyStartForPlayer?.(this);
   }
 
   // Resource values
@@ -1884,6 +1904,7 @@ export class Player implements IPlayer {
       victoryPointsByGeneration: this.victoryPointsByGeneration,
       totalDelegatesPlaced: this.totalDelegatesPlaced,
       underworldData: this.underworldData,
+      alliedParty: this._alliedParty,
       draftHand: this.draftHand.map((c) => c.name),
       autoPass: this.autopass,
     };
@@ -1985,6 +2006,9 @@ export class Player implements IPlayer {
 
     if (d.underworldData !== undefined) {
       player.underworldData = d.underworldData;
+    }
+    if (d.alliedParty !== undefined) {
+      player._alliedParty = d.alliedParty;
     }
 
     player.draftHand = cardsFromJSON(d.draftHand);

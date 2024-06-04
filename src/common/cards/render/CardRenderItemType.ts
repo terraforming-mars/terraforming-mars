@@ -75,6 +75,7 @@ export enum CardRenderItemType {
   GLOBAL_EVENT = 'global-event',
   FIRST_PLAYER = '1p',
   RULING_PARTY = 'ruling-party',
+  POLICY = 'policy',
   CATHEDRAL = 'cathedral',
   GRAPHENE = 'graphene',
   NOMADS = 'nomads',

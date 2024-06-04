@@ -275,6 +275,10 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.CHAIRMAN, -1, options));
   }
 
+  public policy() {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.POLICY));
+  }
+
   public globalEvent() {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.GLOBAL_EVENT));
   }

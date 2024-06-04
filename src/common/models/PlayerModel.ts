@@ -8,6 +8,8 @@ import {GameModel} from './GameModel';
 import {PlayerId, ParticipantId} from '../Types';
 import {CardName} from '../cards/CardName';
 import {Resource} from '../Resource';
+import {PartyName} from '../turmoil/PartyName';
+import {Agenda} from '../turmoil/Types';
 
 export interface ViewModel {
   game: GameModel;
@@ -16,6 +18,11 @@ export interface ViewModel {
   thisPlayer: PublicPlayerModel | undefined;
   runId: string;
 }
+
+type AlliedPartyModel = {
+  partyName: PartyName;
+  agenda: Agenda;
+};
 
 // 'off': Resources (or production) are unprotected.
 // 'on': Resources (or production) are protected.
@@ -69,6 +76,7 @@ export type PublicPlayerModel = {
   tradesThisGeneration: number;
   victoryPointsBreakdown: IVictoryPointsBreakdown;
   victoryPointsByGeneration: Array<number>;
+  alliedParty?: AlliedPartyModel;
 }
 
 /** A player's view of the game, including their secret information. */

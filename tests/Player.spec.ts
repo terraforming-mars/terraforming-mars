@@ -271,6 +271,7 @@ describe('Player', function() {
       totalDelegatesPlaced: 0,
       victoryPointsByGeneration: [],
       underworldData: {corruption: 0},
+      alliedParty: {agenda: {bonusId: 'gb01', policyId: 'gp01'}, partyName: PartyName.GREENS},
       draftHand: [],
     };
 

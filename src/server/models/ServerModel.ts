@@ -249,6 +249,7 @@ export class Server {
       victoryPointsByGeneration: player.victoryPointsByGeneration,
       corruption: player.underworldData.corruption,
       excavations: UnderworldExpansion.excavationMarkerCount(player),
+      alliedParty: player.alliedParty,
     };
   }
 

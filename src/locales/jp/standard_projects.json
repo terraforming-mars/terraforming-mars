@@ -1,26 +1,49 @@
 {
     "Buffer Gas": "緩衝ガスの導入",
+    "Buffer Gas (16 M€)": "TR+1段階(16 М€)",
     "Spend 16 M€ to increase your TR 1 step. Solo games only.": "ソロ専用：16MC支払い、TR+1段階.",
+
+    "City": "都市化",
+    "City (25 M€)": "都市配置(25 M€)",
     "Spend 25 M€ to place a city tile and increase your M€ production 1 step.": "25MC支払い、都市タイルを配置. MC産出+1.",
+
+    "Colony": "コロニー",
+    "Build colony (17 M€)": "コロニー1つ配置(17 М€)",
     "Spend 17 M€ to place a colony.": "17MC支払い、コロニー1つ配置.",
+
+    "Greenery": "緑化",
+    "Greenery (23 M€)": "緑地配置(23 M€)",
     "Spend 23 M€ to place a greenery tile and raise oxygen 1 step.": "23MC支払い、緑地タイルを配置.",
+
+    "Power Plant:SP": "発電所の設置",
+    "Power plant (11 M€)": "電力産出+1(11 M€)",
     "Spend 11 M€ to increase your energy production 1 step.": "11MC支払い、電力産出+1.",
+
     "Sell Patents": "カード売却",
     "Sell patents": "カード売却",
     "Discard any number of cards to gain that amount of M€.": "手札から任意枚数のカードを1枚1MCで売却.",
-    "Asteroid": "温度上昇",
-    "asteroid": "温度上昇",
+
+    "Asteroid:SP": "温度上昇",
+    "Asteroid (14 M€)": "温度+1段階(14 M€)",
     "Spend 14 M€ to raise the temperature 1 step.": "14MC支払い、温度+1段階.",
+
     "Air Scrapping": "大気減圧",
     "Air Scrapping (Var)": "大気減圧(ヴァリアント)",
+    "Air scrapping (15 M€)": "金星+1段階(15 М€)",
     "Spend 15 M€ to raise Venus 1 step.": "15MC支払い、金星+1段階.",
     "Spend 15M€, less 1M€ per Venus tag you have, to raise Venus 1 step.": "15MC支払い、金星+1段階. この時、所持している金星タグに付きコスト-1MC.",
     "max -5M€": "最大-5MCまで.",
+
+    "Aquifer": "海洋配置",
+    "Aquifer (18 M€)": "海洋配置(18 M€)",
     "Spend 18 M€ to place an ocean tile.": "18MC支払い、海洋配置.",
 
     "Collusion": "癒着",
+    "Collusion:SP": "癒着",
     "Spend 1 corruption to convert 1 or 2 neutral delegates into your own delegates.": "1汚職支払い、最大2名の中立の代議員をあなたの代議員と交代する",
+
     "Excavate": "地下資源の採掘",
+    "Excavate:SP": "地下資源の採掘",
     "Spend 7 M€ (steel may be used) to excavate a space.": "7MC支払い、地下資源を採掘する(建材での支払い可能).",
 
     "Build Moon Colony": "",
@@ -28,11 +51,13 @@
     "Lunar Habitat (var.)": "月のコロニー(ヴァリアント)",
     "Spend 22 M€ and 1 titanium to place a habitat on The Moon and raise your M€ production 1 step.": "22MCと1チタン支払い、月に生息地タイルを配置. 居住地レート+1段階. MC産出+1.",
     "Spend 26 M€ place a habitat on The Moon and raise your M€ production 1 step.": "26MC支払い、月に生息地タイルを配置し、居住地レート+1段階. MC産出+1.",
+
     "Build Moon Mine": "",
     "Lunar Mine": "月の鉱山",
     "Lunar Mine (var.)": "月の鉱山(ヴァリアント)",
     "Spend 20 M€ and 1 titanium to place a mine on the moon, raise the mining rate 1 step, and raise steel production 1 step.": "20MCと1チタン支払い、月に鉱山タイルを配置. 採掘レート+1段階. 建材産出+1.",
     "Spend 23 M€ to place a mine on the moon, raise the mining rate 1 step, and raise steel production 1 step.": "23MC支払い、月に鉱山タイルを配置. 採掘レート+1段階. 建材産出+1.",
+
     "Build Moon Road": "",
     "Road Infrastructure": "月の道路",
     "Road Infrastructure (var.)": "月の道路(ヴァリアント)",

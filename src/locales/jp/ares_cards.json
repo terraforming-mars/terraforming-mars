@@ -2,10 +2,10 @@
     "Desperate Measures": "無鉄砲な災害対策",
     "Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.": "任意の砂塵嵐タイルの上に銅キューブを置く、その場合酸素+1段階. もしくは任意の浸食タイルの上に銅キューブを置く、その場合温度+1段階. この銅キューブが置かれた災害タイルは取り除かれない.",
 
-    "Mining Area": "採掘地帯",
+    "Mining Area:ares": "採掘地帯",
     "Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "自身のタイルに隣接する配置ボーナスに建材 または チタンを含む空きマスに特殊タイルを配置. 入手した資材の産出+1.(2資源ボーナスでも産出+1. 実装都合：チタンと建材同時入手の場合は建材産出優先.). このタイルの隣接ボーナスはこうして生産量を挙げた資源となる.",
 
-    "Industrial Center": "工業地帯",
+    "Industrial Center:ares": "工業地帯",
     "Action: Spend 7 M€ to increase your steel production 1 step.": "アクション：7MC支払い、建材産出+1.",
     "Place this tile adjacent to a city tile. This tile grants an ADJACENCY BONUS of 1 steel.": "都市タイルに隣接するように特殊タイルを配置. このタイルは1建材の隣接ボーナスがある.",
 
@@ -31,27 +31,27 @@
     "Effect: When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain.": "効果：タイルの配置により、植物、動物、微生物を得る時、それらをそれぞれ1個ずつまで追加で得る.",
     "Requires 3 greeneries on Mars.": "条件：緑地3枚以上.",
 
-    "Mining Rights": "鉱山採掘権",
+    "Mining Rights:ares": "鉱山採掘権",
     "Place one of these tiles on an area with a steel or titanium placement bonus. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "配置ボーナスに建材 または チタンを含む空きマスに特殊タイルを配置. 入手した資材の産出+1.(2資源ボーナスでも産出+1. 実装都合：チタンと建材同時入手の場合は建材産出優先.). このタイルの隣接ボーナスはこうして生産量を挙げた資源となる.",
 
-    "Natural Preserve": "自然保護区",
+    "Natural Preserve:ares": "自然保護区",
     "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an ADJACENCY BONUS of of 1 M€. Increase your M€ production 1 step.": "条件：酸素4%以下. 他タイルに隣接しないように特殊タイルを配置. このタイルは1MCの隣接ボーナスがある. MC産出+1. ",
 
     "Ocean Sanctuary": "海洋生物保護区",
     "1 VP per animal on this card.": "このカード上の1動物毎に1VP.",
     "Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 animal. Add 1 animal to this card.": "条件：海洋5枚以上. 特殊タイルを海洋上に配置. このタイルは1動物の隣接ボーナスがある.",
 
-    "Nuclear Zone": "核実験場",
+    "Nuclear Zone:ares": "核実験場",
     "Raise the temperature two steps. Place this tile. Players must pay an additional 2M€ when they place a tile with their player marker on it ADJACENT to the Nuclear Zone.": "温度+2段階. 特殊タイルを配置. 所有権のあるタイルをこのタイルに隣接して配置する場合、追加で2MCを支払う.",
 
-    "Restricted Area": "立ち入り制限区",
+    "Restricted Area:ares": "立ち入り制限区",
     "Action: Spend 2 M€ to draw a card.": "アクション：2MC支払い、1ドロー.",
     "Place this tile which grants an ADJACENCY BONUS of 1 card.": "1ドローの隣接ボーナスがある特殊タイルを配置.",
 
     "Solar Farm": "太陽光発電所",
     "Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your energy production 1 step for each plant resource on the area where you place the tile.": "2電力の隣接ボーナスがある特殊タイルを配置. これを配置した場所の植物配置ボーナス分、電力産出+1.",
 
-    "Ecological Zone": "生態ゾーン",
+    "Ecological Zone:ares": "生態ゾーン",
     "Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.": "効果：植物タグ または 動物タグをプレイ時、このカード上に1動物追加.",
     "The tile grants an ADJACENCY BONUS of 1 animal. 1 VP per 2 animals on this card.": "このタイルは1動物の隣接ボーナスがある. このカード上の2動物毎に1VP.",
     "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "条件：緑地を所持. 好きな緑地タイルに隣接するように特殊タイルを配置.",
@@ -65,30 +65,30 @@
     "Ocean Farm": "海上農場",
     "Requires 4 ocean tiles. Increase your heat production 1 step and increase your plant production 1 step. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 plant.": "条件：海洋4枚以上. 温熱産出+1. 植物産出+1. 特殊タイルを海洋上に配置. このタイルは1植物の隣接ボーナスがある.",
 
-    "Commercial District": "商業特区",
+    "Commercial District:ares": "商業特区",
     "1 VP per adjacent city tile.": "この特殊タイルに隣接する都市タイル1枚毎に1VP.",
     "Place this tile which grants an ADJACENCY BONUS of 2 M€. Decrease your energy production 1 step and increase your M€ production 4 steps.": "2MCの隣接ボーナスがある特殊タイルを配置. 電力産出-1し、MC産出+4.",
 
     "Ocean City": "海上都市",
     "Requires 6 ocean tiles. Decrease your energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "条件：海洋6枚以上. 電力産出-1し、MC産出+4. 特殊タイルを海洋上に配置(都市の配置制限は無視). このタイルは都市・海洋・特殊タイルとして数える.",
 
-    "Lava Flows": "溶岩流",
+    "Lava Flows:ares": "溶岩流",
     "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. This tile grants an ADJACENCY BONUS of 2 heat.": "温度+2段階. 火山地帯に特殊タイル配置. ※本環境では「ノクティス市」以外の白文字マス. ヘラス盤面のみ任意配置可能. このタイルは2温熱の隣接ボーナスがある.",
 
-    "Mohole Area": "モホール掘削エリア",
+    "Mohole Area:ares": "モホール掘削エリア",
     "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN. The tile grants an ADJACENCY BONUS of 2 heat.": "温熱産出+4. 海洋予定地に特殊タイルを配置. このタイルは2温熱の隣接ボーナスがある.",
 
-    "Capital": "首都",
+    "Capital:ares": "首都",
     "1 additional VP for each ocean tile adjacent to this city tile.": "首都に隣接する海洋1枚毎に1VP.",
     "Requires 4 ocean tiles. Place tile with ADJACENCY BONUS of 2 M€. Energy prod -2 and M€ prod +5.": "条件：海洋4枚以上. 2MCの隣接ボーナスがある特殊タイルを配置. 電力産出-2し、MC産出+5.",
     "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.": "条件：海洋4枚以上. 電力産出-2し、MC産出+5.",
 
-    "Magnetic Field Generators": "磁場発生装置",
+    "Magnetic Field Generators:ares": "磁場発生装置",
     "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile. It provides adjacency bonus of 1 plant and 1 microbe.": "電力産出-4し、植物産出+2. TR+3段階. 特殊タイルを配置. このタイルは1植物と1微生物の隣接ボーナスがある.",
 
-    "Deimos Down": "ダイモス落とし",
+    "Deimos Down:ares": "ダイモス落とし",
     "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. It provides adjacency bonus of 1 asteroid and 1 steel.": "温度+3段階. 4建材獲得. 都市タイルに隣接しないように特殊タイルを配置. 望むならプレイヤー1人から最大6植物除去. このタイルは1小惑星と1建材の隣接ボーナスがある.",
 
-    "Great Dam": "水力発電",
+    "Great Dam:ares": "水力発電",
     "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile. The tile grants an ADJACENCY BONUS of 2 Energy.": "条件：海洋4枚以上. 電力産出+2. 海洋タイルに隣接させて特殊タイルを配置. このタイルは2電力の隣接ボーナスがある."
 }

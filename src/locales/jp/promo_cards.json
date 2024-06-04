@@ -1,4 +1,7 @@
 {
+  "Supermarkets": "スーパーマーケット",
+  "Requires two cities in play. Increase your M€ production 2 steps.": "条件：都市2つ以上. MC産出+2.",
+
   "City Park": "都市公園",
   "Requires that you have 3 cities. Gain 2 plants.": "条件：都市3つ以上所持. 2植物獲得.",
 
@@ -19,7 +22,7 @@
 
   "Solar Logistics": "太陽物流",
   "Effect: When you play an Earth tag, you pay 2 M€ less.": "効果：地球タグカードのプレイコスト-2MC.",
-  "Effect: When any player plays a space event, draw a card.": "効果：宇宙タグ付きイベントカードがプレイされる毎に1ドロー.",
+  "Effect: When any player plays a space event, draw a card.": "効果：宇宙タグ付きイベントカードがプレイされた時、1ドロー.",
   "Gain 2 titanium.": "2チタン獲得.",
 
   "Teslaract": "テスラ制御技術",
@@ -198,13 +201,13 @@
   "Stanford Torus": "スタンフォード・トーラス",
   "Place a city tile IN SPACE, outside and separate from the planet.": "宇宙空間上に都市タイルを配置.",
 
-  "Deimos Down": "ダイモス落とし",
+  "Deimos Down:promo": "ダイモス落とし",
   "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.": "温度+3段階. 4建材獲得. 都市タイルに隣接しないように特殊タイルを配置. 望むならプレイヤー1人から最大6植物除去.",
 
-  "Great Dam": "水力発電",
+  "Great Dam:promo": "水力発電",
   "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "条件：海洋4枚以上. 電力産出+2. 海洋タイルに隣接させて特殊タイルを配置.",
 
-  "Magnetic Field Generators": "磁場発生装置",
+  "Magnetic Field Generators:promo": "磁場発生装置",
   "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.": "電力産出-4し、植物産出+2. TR+3段階. 特殊タイルを配置.",
 
   "Requires 8 oceans. 1 VP for each animal on this card.": "条件：海洋8枚以上. このカード上の1動物毎に1VP.",

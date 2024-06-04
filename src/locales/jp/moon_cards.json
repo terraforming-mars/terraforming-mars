@@ -160,7 +160,7 @@
   "Spend 2 titanium. Place a mine tile on The Moon and raise the mining rate 1 step. Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.": "2チタン支払う. 月に鉱山タイルを配置し、採掘レート+1段階. 建材産出+1. チタン産出+1. 温熱産出+1. 電力産出+2.",
 
   "Lunar Mine Urbanization": "ルナ・都市化鉱山",
-  "Requires you have 1 mine tile. Increase your M€ production 1 step. Remove 1 of your mine tiles (does not affect the mining rate.) Place this special tile there, regardless of placement rules. Gain placement bonuses as usual.  Raise the habitat rate 1 step. This tile counts both as a habitat and a mine tile.": "条件：鉱山タイル1枚以上所持. MC産出+1. 所有している鉱山タイル1枚を特殊タイルに置き換え配置ボーナスを獲得. このタイルは生息地・鉱山タイルとして数える. 居住地レート+1段階.",
+  "Requires you have 1 mine tile. Increase your M€ production 1 step. Remove 1 of your mine tiles (does not affect the mining rate.) Place this special tile there, regardless of placement rules. Gain placement bonuses as usual. This tile counts both as a habitat and a mine tile.": "条件：鉱山タイル1枚以上所持. MC産出+1. 所有している鉱山タイル1枚を特殊タイルに置き換え配置ボーナスを獲得. このタイルは生息地・鉱山タイルとして数える. 居住地レート+1段階.",
 
   "Lunar Observation Post": "ルナ・観測部門",
   "Action: Add 1 data resource to ANY card": "アクション：1データ獲得.",
@@ -296,7 +296,7 @@
   "Requires 1 habitat tile on The Moon. Spend 1 titanium. Raise the habitat rate 2 steps.": "条件：生息地タイル1枚以上. 1チタン支払う. 居住地レート+2段階.",
 
   "We Grow As One": "成長する私たちは一つ",
-  "Requires that Unity are ruling or that you have 2 delegates there. Increase ALL colony tile tracks 1 step. Increase each colony tile track 1 step if you have a colony on that colony tile.": "条件：太陽系融和党が与党か、そこに2議席ある. 全ての天体の交易マーカ+1段階. コロニーがある全ての天体の交易マーカ+1段階.",
+  "Requires that Unity are ruling or that you have 2 delegates there. Increase ALL colony tile tracks 1 step. Increase each colony tile track 1 step if you have a colony on that colony tile.": "条件：太陽系融和党が与党か、そこに2議席ある. 全ての天体の交易マーカー+1段階. コロニーがある全ての天体の交易マーカー+1段階.",
 
   "Martian Embassy": "火星大使館",
   "Raise the Mars Planetary Track 1 step for every 3 Moon tags you have, including this.": "月タグ3つ毎に、火星の影響度+1段階.",

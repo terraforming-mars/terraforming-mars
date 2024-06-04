@@ -8,14 +8,14 @@ describe('CloudTourism', () => {
   const playTests = [
     {earth: 0, venus: 0, wild: 0, expected: 0},
     {earth: 0, venus: 1, wild: 0, expected: 0},
-    {earth: 1, venus: 0, wild: 0, expected: 0},
+    {earth: 1, venus: 0, wild: 0, expected: 1},
     {earth: 1, venus: 1, wild: 0, expected: 1},
-    {earth: 2, venus: 1, wild: 0, expected: 1},
+    {earth: 2, venus: 1, wild: 0, expected: 2},
     {earth: 2, venus: 2, wild: 0, expected: 2},
     {earth: 2, venus: 1, wild: 1, expected: 2},
-    {earth: 3, venus: 1, wild: 1, expected: 2},
+    {earth: 3, venus: 1, wild: 1, expected: 3},
     {earth: 3, venus: 1, wild: 2, expected: 3},
-    {earth: 3, venus: 1, wild: 3, expected: 3},
+    {earth: 3, venus: 1, wild: 3, expected: 4},
     {earth: 3, venus: 1, wild: 4, expected: 4},
   ] as const;
   for (const run of playTests) {
@@ -39,7 +39,7 @@ describe('CloudTourism', () => {
     {earth: 0, venus: 4, played: true, moon: 4, expected: 4},
     {earth: 2, venus: 4, played: true, moon: 1, expected: 3},
     {earth: 2, venus: 4, played: true, moon: 2, expected: 4},
-    {earth: 2, venus: 4, played: true, moon: 3, expected: 4},
+    {earth: 2, venus: 4, played: true, moon: 3, expected: 5},
   ] as const;
   for (const run of earthEmbassyPlayTests) {
     it('play, compatible with earth embassy ' + JSON.stringify(run), () => {

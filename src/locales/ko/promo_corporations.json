@@ -16,6 +16,12 @@
   "You start with 37 M€. Increase your steel production 1 step.": "37 M€과 강철 생산력 1을 가지고 게임 시작.",
   "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "행동: 만약 현재 보유한 에너지 자원이 없을 경우 에너지 생산력 1 증가, 또는 3 M€ 소비해서 건물 카드 1장 획득.",
 
+  "KUIPER COOPERATIVE": "",
+  "Kuiper Cooperative": "",
+  "You start with 33 M€. Increase titanium production 1 step.": "33 M€, 티타늄 생산력 1.",
+  "Action: Add 1 asteroid here for every space tag you have.": "행동: 보유한 우주 태그의 수만큼 이 카드 위에 소행성 자원 획득.",
+  "Effect: When you use the AQUIFER or ASTEROID standard projects, you can spend asteroids on card as 1M€ each.": "지속 효과: 일반 프로젝트의 추진비용을 지불할 때, 이 카드 위의 소행성 자원을 1개당 1M€ 가치로 사용 가능.",
+
   "mons": "몬스",
   "INSURANCE": "손해보험",
   "Mons Insurance": "몬스 손해보험",
@@ -39,6 +45,10 @@
   "You start with 38 M€ and 1 steel production.": "38 M€ 및 강철 생산력 1을 가지고 게임 시작.",
   "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "지속 효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 건물 태그 1개마다, 이 카드에 미생물 자원 1개 추가 또는 이 카드의 미생물 자원 2개 제거해서 식물 생산력 1 증가 중 하나를 수행.",
 
+  "Tycho Magnetics": "",
+  "You start with 42 M€. Increase your energy production 1 step.": "42 M€, 에너지 생산력 1.",
+  "Action: Spend any amount of energy to draw the that many cards. Keep 1 and discard the rest.": "행동: 에너지 자원을 X개 제거하고, 카드를 X장 뽑아 그 중 1장만 획득하고 나머지는 버림.",
+  
   "SPLI": "스플라",
   "C": "이",
   "E": "스",

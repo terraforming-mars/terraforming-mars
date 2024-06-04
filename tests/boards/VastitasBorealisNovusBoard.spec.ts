@@ -7,6 +7,7 @@ import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {SelectParty} from '../../src/server/inputs/SelectParty';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {SeededRandom} from '../../src/common/utils/Random';
+import {TileType} from '../../src/common/TileType';
 
 describe('VastitasBorealisNovusBoard', function() {
   it('sanity test', function() {
@@ -99,5 +100,24 @@ describe('VastitasBorealisNovusBoard', function() {
     addGreenery(player, delegateSpace.id);
     runAllActions(game);
     cast(player.popWaitingFor(), SelectParty);
+  });
+
+  it('Grants temperature bonus', () => {
+    const [game, player] = testGame(2, {boardName: BoardName.VASTITAS_BOREALIS_NOVUS});
+    const board = cast(game.board, VastitasBorealisNovusBoard);
+    const space = board.spaces.find((space) => space.bonus.includes(SpaceBonus.TEMPERATURE))!;
+
+    player.megaCredits = 2;
+    expect(board.getAvailableSpacesOnLand(player).map((space) => space.id)).does.not.include(space.id);
+
+    player.megaCredits = 3;
+    expect(board.getAvailableSpacesOnLand(player).map((space) => space.id)).includes(space.id);
+    expect(game.getTemperature()).eq(-30);
+
+    game.addTile(player, space, {tileType: TileType.CITY});
+    runAllActions(game);
+
+    expect(player.megaCredits).eq(0);
+    expect(game.getTemperature()).eq(-28);
   });
 });

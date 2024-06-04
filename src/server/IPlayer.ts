@@ -289,6 +289,8 @@ export interface IPlayer {
   discardPlayedCard(card: IProjectCard): void;
   discardCardFromHand(card: IProjectCard, options?: {log?: boolean}): void;
 
+  /** Player has prestated they want to pass on their next turn */
+  autopass: boolean;
   /** Player is done taking actions this generation. */
   pass(): void;
   takeActionForFinalGreenery(): void;

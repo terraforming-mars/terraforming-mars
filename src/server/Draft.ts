@@ -35,8 +35,13 @@ export abstract class Draft {
   /** Start an entire draft iteration (or draft round). Saves the game, sets all the cards up, and asks players to make their first choice. */
   // TODO(kberg): Create a startDraft() which draws, and a continueDraft() which uses the cards a player is handed.
   public startDraft() {
+    // Might be better to save the game after the draft, given how draft state is
+    // restored now.
     this.game.save();
+    this._startDraft();
+  }
 
+  private _startDraft() {
     const arrays: Array<Array<IProjectCard>> = [];
     if (this.game.draftRound === 1) {
       for (const player of this.game.getPlayers()) {
@@ -60,15 +65,26 @@ export abstract class Draft {
 
   /**
    * Called when the game is reloaded from disk. Restores the draft state.
+   *
+   * Games are stored after every selection, whereas historically it was
+   * stored after round. So restoring the draft is a bit tricky.
    */
   public restoreDraft() {
-    for (const player of this.game.getPlayers()) {
+    const players = this.game.getPlayers();
+
+    // When restoring drafting, it might be that nothing was dealt yet.
+    if (!players.some((p) => p.needsToDraft !== undefined)) {
+      this._startDraft();
+      return;
+    }
+
+    for (const player of players) {
       if (player.needsToDraft) {
         this.askPlayerToDraft(player);
       }
     }
 
-    if (!this.game.getPlayers().some((p) => p.needsToDraft)) {
+    if (!players.some((p) => p.needsToDraft)) {
       this.endRound();
     }
   }
@@ -161,11 +177,13 @@ class StandardDraft extends Draft {
   }
 
   override cardsToKeep(player: IPlayer): number {
-    if (LunaProjectOffice.isActive(player)) {
-      return 2;
-    }
-    if (player.isCorporation(CardName.MARS_MATHS)) {
-      return 2;
+    if (this.game.draftRound === 1) {
+      if (LunaProjectOffice.isActive(player)) {
+        return 2;
+      }
+      if (player.isCorporation(CardName.MARS_MATHS)) {
+        return 2;
+      }
     }
 
     return 1;

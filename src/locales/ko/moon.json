@@ -1,15 +1,9 @@
 {
-   "Place a habitat tile on The Moon": "",
-   "Place a mine tile on The Moon": "",
-   "Place a road tile on The Moon": "",
-   "Select a space on The Moon for a habitat tile.": "",
-   "Select a space on The Moon for a mining tile.": "",
-   "Select a space on The Moon for a road tile.": "",
-   "Lunar Habitat": "",
-   "Spend 22 M€ and 1 titanium to place a habitat on The Moon and raise your M€ production 1 step.": "",
-   "Lunar Mine": "",
-   "Spend 20 M€ and 1 titanium to place a mine on the moon, raise the mining rate 1 step, and raise steel production 1 step.": "",
-   "Road Infrastructure": "",
-   "Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.": ""
+   "Place a habitat tile on The Moon": "달에 월면 기지 타일 놓기",
+   "Place a mine tile on The Moon": "달에 월면 광산 타일 놓기",
+   "Place a road tile on The Moon": "달에 월면 도로 타일 놓기",
+   "Select a space on The Moon for a habitat tile.": "달에 월면 기지 타일을 놓을 위치 선택",
+   "Select a space on The Moon for a mining tile.": "달에 월면 광산 타일을 놓을 위치 선택",
+   "Select a space on The Moon for a road tile.": "달에 월면 도로 타일을 놓을 위치 선택"
 }
 

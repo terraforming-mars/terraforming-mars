@@ -403,9 +403,12 @@
     "${0} spent 1 corruption to block an attack by ${1}": "${0} gab 1 Korruption aus, um den Angriff von ${1} zu blocken",
     "${0} spent 1 fighter on ${1} to block an attack by ${2}": "${0} hat 1 Jäger für ${1} ausgegeben, um einen Angriff von ${2} zu blockieren",
     "For the rest of this generation, ${0} will gain ${1}": "Für den Rest dieser Generation wird ${0} ${1} erhalten",
-    "${0} is in effect for the rest of this generation": "${0} ist für den Rest dieser Generation in Kraft",
+    "${0} is in effect for the rest of this generation.": "${0} ist für den Rest dieser Generation in Kraft.",
     "Steel and titanium are worth 1 M€ less, except for ${0}, whose steel and titanium are worth 1 M€ more.": "Stahl und Titan sind 1 M€ weniger wert, mit Ausnahme von ${0}, dessen Stahl und Titan 1 M€ mehr wert sind.",
-
+    "${0} blackmailed the neutral player and was paid 10 M€.": "${0} hat den neutralen Spieler erpresst und 10 M€ erhalten.",
+    "${0} blackmailed ${1} who lost 2 corruption.": "${0} hat ${1} erpresst, der 2 Korruption verloren hat.",
+    "${0} blackmailed ${1} and was paid 10 M€.": "${0} erpresste ${1} und erhielt 10 M€.",
+    
     "${0} searched for ${1} tags": "${0} suchte nach ${1}-Symbol",
     "earth": "Erde",
     "venus": "Venus",

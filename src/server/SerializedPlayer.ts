@@ -14,6 +14,8 @@ export interface SerializedPlayer extends DeprecatedFields{
     actionsTakenThisRound: number;
     actionsThisGeneration: Array<CardName>;
     alliedParty: AlliedParty | undefined;
+    // TODO(kberg): remove ? by 2024-10-01
+    autoPass?: boolean;
     beginner: boolean;
     canUseCorruptionAsMegacredits: boolean;
     canUseHeatAsMegaCredits: boolean;

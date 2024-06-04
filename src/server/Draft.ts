@@ -91,12 +91,12 @@ export abstract class Draft {
 
   /** The player this player is taking their cards from when everybody passes their draft hands */
   private takingFrom(player: IPlayer): IPlayer {
-    return this.passDirection() === 'before' ? this.game.getPlayerBefore(player) : this.game.getPlayerAfter(player);
+    return this.passDirection() === 'after' ? this.game.getPlayerBefore(player) : this.game.getPlayerAfter(player);
   }
 
   /** The player this player is givign their cards to when everybody passes their draft hands */
   private givingTo(player: IPlayer): IPlayer {
-    return this.passDirection() === 'after' ? this.game.getPlayerBefore(player) : this.game.getPlayerAfter(player);
+    return this.passDirection() === 'after' ? this.game.getPlayerAfter(player) : this.game.getPlayerBefore(player);
   }
 
   /**
@@ -132,13 +132,11 @@ export abstract class Draft {
 
     // If anybody still needs to draft, stop here.
     if (this.game.getPlayers().some((p) => p.needsToDraft === true)) {
-      // if (this.game.gameOptions.incrementalDraft) {
       this.game.save();
-      // }
       return;
     }
 
-    // If more than 1 card are to be passed to the next player, that means we're still drafting
+    // If more than 1 card is to be passed to the next player, that means we're still drafting
     if (player.draftHand.length > 1) {
       this.game.draftRound++;
       this.startDraft();
@@ -189,8 +187,9 @@ class StandardDraft extends Draft {
     return 1;
   }
 
+  /** Return whether passing this round goes to the player after (right, +1) or before (left, -1) */
   override passDirection() {
-    return this.game.generation % 2 === 0 ? 'before' : 'after';
+    return this.game.generation % 2 === 0 ? 'after' : 'before';
   }
 
   override endRound() {

@@ -1,47 +1,47 @@
 {
-  "CO² Reducers": "",
-  "Increase your M€ production 3 steps. Draw 2 cards with a microbe tag.": "",
+  "CO² Reducers": "이산화탄소 저감기",
+  "Increase your M€ production 3 steps. Draw 2 cards with a microbe tag.": "메가크레딧 생산력 3 상승. 생물 태그가 있는 카드 2장 획득.",
 
-  "Crew Training": "",
-  "Choose a planet tag. This card counts as having 2 of that tag. Raise the corresponding planetary track 2 steps. Gain 2 TR.": "",
+  "Crew Training": "집단 훈련",
+  "Choose a planet tag. This card counts as having 2 of that tag. Raise the corresponding planetary track 2 steps. Gain 2 TR.": "행성 태그를 하나 선택. 이 카드는 선택한 태그가 2개 있는 것으로 간주. 해당 행성 트랙 2 상승. 테라포밍 등급 2 TR 상승.",
 
-  "Deep Space Operations": "",
-  "Gain 4 titanium. Draw 2 event cards with a space tag.": "",
+  "Deep Space Operations": "우주 채굴 작전",
+  "Gain 4 titanium. Draw 2 event cards with a space tag.": "티타늄 자원 4개 획득. 우주 태그가 있는 사건형 카드 2장 획득.",
 
-  "Design Company": "",
-  "Increase your steel production 1 step. Draw 3 cards with a building tag.": "",
+  "Design Company": "디자인 회사",
+  "Increase your steel production 1 step. Draw 3 cards with a building tag.": "강철 생산력 1 상승. 건물 태그가 있는 카드 3장 획득.",
 
-  "Experienced Martians": "",
-  "Place 1 delegate in any party. Draw 2 cards with a Mars tag. Increase your M€ production 2 steps.": "",
+  "Experienced Martians": "숙련 화성인",
+  "Place 1 delegate in any party. Draw 2 cards with a Mars tag. Increase your M€ production 2 steps.": "아무 정당에 의원 1명 배치. 화성 태그가 있는 카드 2장 획득. 메가크레딧 생산력 2 상승.",
 
-  "Hydrogen Bombardment": "",
-  "Increase the Venus scale 1 step. Increase your titanium production 1 step. Gain 6 M€.": "",
+  "Hydrogen Bombardment": "수소 폭격",
+  "Increase the Venus scale 1 step. Increase your titanium production 1 step. Gain 6 M€.": "금성 지표 1단계 상승. 티타늄 생산력 1 상승. 6 M€ 획득.",
 
-  "Personal Agenda": "",
-  "Increase your M€ production 3 steps. Draw 3 event cards that do not have a space tag.": "",
+  "Personal Agenda": "개인적인 의제",
+  "Increase your M€ production 3 steps. Draw 3 event cards that do not have a space tag.": "메가크레딧 생산력 3 상승. 우주 태그가 없는 사건형 카드 3장 획득.",
 
-  "Research Grant": "",
-  "Research Grant:Pathfinders": "",
-  "Increase your energy production 1 step. Gain 14 M€.": "",
+  "Research Grant": "연구비",
+  "Research Grant:Pathfinders": "연구비 (패스파인더)",
+  "Increase your energy production 1 step. Gain 14 M€.": "에너지 생산력 1 상승. 14 M€ 획득.",
 
-  "Strategic Base Planning": "",
-  "Pay 8M€. Place a city. Place a colony.": "",
+  "Strategic Base Planning": "전략적 기지 계획",
+  "Pay 8M€. Place a city. Place a colony.": "8 M€ 지불. 도시 타일 배치. 개척기지 배치.",
 
-  "Survey Mission": "",
-  "Gain 5 steel. Land-claim three non-reserved spaces in a triangle shape. Gain all placement bonuses. Only you may place tiles there, and will gain placement bonuses again.": "",
+  "Survey Mission": "임무 조사",
+  "Gain 5 steel. Land-claim three non-reserved spaces in a triangle shape. Gain all placement bonuses. Only you may place tiles there, and will gain placement bonuses again.": "강철 자원 5개 획득. 삼각형 모양으로 전용 구역이 아닌 구역에 영토 소유권 주장으로서 플레이어 마커 3개 배치. 모든 배치 보너스 획득. 자신만 해당 구역에 타일을 배치할 수 있으며, 배치 보너스를 다시 받을 수 있음.",
 
-  "The New Space Race": "",
-  "REVEALED BEFORE ANY OTHER PRELUDE. You become starting player for the game. Choose and set a ruling policy for the first generation. Gain 12 M€.": "",
+  "The New Space Race": "새 우주 경쟁",
+  "REVEALED BEFORE ANY OTHER PRELUDE. You become starting player for the game. Choose and set a ruling policy for the first generation. Gain 12 M€.": "다른 서곡 카드 전에 공개. 게임에서 시작 플레이가 됨. 첫 번째 세대의 집권당을 고름. 12 M€ 획득.",
 
-  "Valuable Gases": "",
-  "Valuable Gases:Pathfinders": "",
-  "Gain 10 M€. Play an active floater card from hand, ignoring requirements, and add 5 floaters to it.": "",
+  "Valuable Gases": "소중한 가스",
+  "Valuable Gases:Pathfinders": "소중한 가스 (패스파인더)",
+  "Gain 10 M€. Play an active floater card from hand, ignoring requirements, and add 5 floaters to it.": "10 M€ 획득. 손에 있는 카드 중 부양체가 그려진 활동형 카드를 추진 조건을 모두 무시하고 추진. 그 카드에 부양체 자원 5개 추가.",
 
-  "Venus First": "",
-  "Venus First:Pathfinders": "",
-  "Raise Venus 2 steps. Draw 2 Venus cards.": "",
+  "Venus First": "금성으로의 첫 걸음",
+  "Venus First:Pathfinders": "금성으로의 첫 걸음 (패스파인더)",
+  "Raise Venus 2 steps. Draw 2 Venus cards.": "금성 지표 2단계 상승. 금성 카드 2장 획득.",
 
-  "Vital Colony": "",
-  "2x bonus": "",
-  "Place a colony. Receive the placement bonus twice.": ""
+  "Vital Colony": "핵심 개척기지",
+  "2x bonus": "보너스 2배",
+  "Place a colony. Receive the placement bonus twice.": "개척기지 배치. 배치 보너스를 2번 받음."
 }

@@ -1,9 +1,11 @@
 {
    "Select a ${0} bonus": "${0} 집권 보너스 선택",
    "Select a ${0} policy": "${0} 집권당 정책 선택",
-   
+
    "Gain 1 M€ for each building tag you have": "모든 플레이어는 자신의 건물 태그 수만큼 메가크레딧 획득",
    "Gain 1 M€ for each tile you have ON MARS": "모든 플레이어는 화성에 놓인 자신 소유의 타일만큼 메가크레딧 획득",
+   "Gain 1 M€ for each building tag you have (${0})": "모든 플레이어는 자신의 건물 태그 수만큼 메가크레딧 획득 (${0})",
+   "Gain 1 M€ for each tile you have ON MARS (${0})": "모든 플레이어는 화성에 놓인 자신 소유의 타일만큼 메가크레딧 획득 (${0})",
 
    "When you place a tile ON MARS, gain 1 steel": "아무 타일이나 화성에 1장 놓을 때마다 강철 자원 1개 획득",
    "When you play a building tag, gain 2 M€": "건물 태그가 있는 카드를 추진할 때마다 2 M€ 획득",
@@ -12,6 +14,8 @@
 
    "Gain 1 M€ for each science tag you have": "모든 플레이어는 자신의 과학 태그 수만큼 메가크레딧 획득",
    "Gain 1 M€ for every 3 cards in hand": "모든 플레이어는 자신의 손에 있는 카드 3장마다 메가크레딧 획득",
+   "Gain 1 M€ for each science tag you have (${0})": "모든 플레이어는 자신의 과학 태그 수만큼 메가크레딧 획득 (${0})",
+   "Gain 1 M€ for every 3 cards in hand (${0})": "모든 플레이어는 자신의 손에 있는 카드 3장마다 메가크레딧 획득 (${0})",
 
    "Your global requirements are +/- 2 steps": "추진 조건 중 행성 지표에는 ±2단계 중 원하는 것을 적용",
    "When you raise a global parameter, draw a card per step raised": "행성 지표를 상승시킬 때마다, 상승시킨 단계당 카드 1장 획득",
@@ -19,6 +23,8 @@
 
    "Gain 1 M€ for each Venus, Earth and Jovian tag you have": "모든 플레이어는 자신의 행성(금성 · 지구 · 목성 등) 태그 수만큼 메가크레딧 획득",
    "Gain 1 M€ for each Space tag you have": "모든 플레이어는 자신의 우주 태그 수만큼 메가크레딧 획득",
+   "Gain 1 M€ for each Venus, Earth and Jovian tag you have (${0})": "모든 플레이어는 자신의 행성(금성 · 지구 · 목성 등) 태그 수만큼 메가크레딧 획득 (${0})",
+   "Gain 1 M€ for each Space tag you have (${0})": "모든 플레이어는 자신의 우주 태그 수만큼 메가크레딧 획득 (${0})",
 
    "Your titanium resources are worth 1 M€ extra": "각 티타늄 자원의 가치 1 M€ 상승",
    "Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)": "4 M€을 소비하여 티타늄 자원 2개를 획득하거나 아무 카드에 부양체 자원 2개 추가",
@@ -27,6 +33,8 @@
 
    "Gain 1 M€ for each Plant, Microbe and Animal tag you have": "모든 플레이어는 자신의 식물 · 미생물 · 동물 태그 수만큼 메가크레딧 획득",
    "Gain 2 M€ for each greenery tile you have": "모든 플레이어는 자신의 녹지 타일 수만큼 2 M€ 획득",
+   "Gain 1 M€ for each Plant, Microbe and Animal tag you have (${0})": "모든 플레이어는 자신의 식물 · 미생물 · 동물 태그 수만큼 메가크레딧 획득 (${0})",
+   "Gain 2 M€ for each greenery tile you have (${0})": "모든 플레이어는 자신의 녹지 타일 수만큼 2 M€ 획득 (${0})",
 
    "When you place a greenery tile, gain 4 M€": "녹지 타일을 1장 놓을 때마다 4 M€ 획득",
    "When you place a tile, gain 1 plant": "아무 타일을 1장 놓을 때마다 식물 자원 1개 획득",
@@ -35,6 +43,8 @@
 
    "The player(s) with the lowest TR gains 1 TR": "테라포밍 등급이 가장 낮은 플레이어(들)의 테라포밍 등급 1 TR 상승",
    "The player(s) with the highest TR loses 1 TR": "테라포밍 등급이 가장 높은 플레이어(들)의 테라포밍 등급 1 TR 감소",
+   "The player(s) with the lowest TR gains 1 TR (${0})": "테라포밍 등급이 가장 낮은 플레이어(들)의 테라포밍 등급 1 TR 상승 (${0})",
+   "The player(s) with the highest TR loses 1 TR (${0})": "테라포밍 등급이 가장 높은 플레이어(들)의 테라포밍 등급 1 TR 감소 (${0})",
 
    "When you take an action that raises TR, you MUST pay 3 M€ per step raised": "자신의 테라포밍 등급이 1 TR 상승할 때마다 3 M€ 상실 및 보유한 메가크레딧이 3 M€ 미만인 경우에는 테라포밍 등급을 올리기 불가",
    "When you place a tile, pay 3 M€ or as much as possible": "아무 타일을 1장 놓을 때마다 3 M€까지 가능한 만큼 메가크레딧 상실",
@@ -43,6 +53,8 @@
 
    "Gain 1 M€ for each heat production you have": "모든 플레이어는 자신의 열 생산력 1마다 1 M€ 획득",
    "Gain 1 heat for each heat production you have": "모든 플레이어는 자신의 열 생산력 1마다 열 자원 1개 획득",
+   "Gain 1 M€ for each heat production you have (${0})": "모든 플레이어는 자신의 열 생산력 1마다 1 M€ 획득 (${0})",
+   "Gain 1 heat for each heat production you have (${0})": "모든 플레이어는 자신의 열 생산력 1마다 열 자원 1개 획득 (${0})",
 
    "Pay 10 M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)": "10 M€을 소비하여 자신의 열 생산력 및 에너지 생산력을 1씩 증가(플레이어당 사용 횟수 제한은 없음)",
    "When you raise temperature, gain 3 M€ per step raised": "기온을 상승시킬 때마다 올린 단계당 3 M€ 획득",

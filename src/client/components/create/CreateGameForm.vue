@@ -547,11 +547,15 @@ type Refs = {
   file: HTMLInputElement,
 }
 
+type FormModel = {
+  preludeToggled: boolean;
+  uploading: boolean;
+};
+
 export default (Vue as WithRefs<Refs>).extend({
   name: 'CreateGameForm',
-  data(): CreateGameModel & {constants: typeof constants} {
+  data(): CreateGameModel & FormModel {
     return {
-      constants,
       firstIndex: 1,
       playersCount: 1,
       players: [
@@ -637,6 +641,9 @@ export default (Vue as WithRefs<Refs>).extend({
       starWarsExpansion: false,
       underworldExpansion: false,
       preludeDraftVariant: undefined,
+
+      preludeToggled: false,
+      uploading: false,
     };
   },
   components: {
@@ -675,6 +682,12 @@ export default (Vue as WithRefs<Refs>).extend({
         this.preludeDraftVariant = true;
       }
     },
+    prelude2Expansion(value: boolean) {
+      if (value === true && this.preludeToggled === false && this.uploading === false) {
+        this.prelude = true;
+        this.preludeToggled = true;
+      }
+    },
     playersCount(value: number) {
       if (value === 1) {
         this.corporateEra = true;
@@ -687,6 +700,9 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     RandomMAOptionType(): typeof RandomMAOptionType {
       return RandomMAOptionType;
+    },
+    constants(): typeof constants {
+      return constants;
     },
   },
   methods: {
@@ -707,11 +723,12 @@ export default (Vue as WithRefs<Refs>).extend({
       const reader = new FileReader();
       const component: CreateGameModel = this;
 
-      reader.addEventListener('load', function() {
+      reader.addEventListener('load', () => {
         const warnings = [];
         try {
           const readerResults = reader.result;
           if (typeof(readerResults) === 'string') {
+            this.uploading = true;
             const results = JSON.parse(readerResults);
 
             const players = results['players'];
@@ -776,6 +793,7 @@ export default (Vue as WithRefs<Refs>).extend({
                 if (!component.seededGame) component.seed = Math.random();
                 // set to alter after any watched properties
                 component.solarPhaseOption = Boolean(capturedSolarPhaseOption);
+                this.uploading = false;
               } catch (e) {
                 window.alert('Error reading JSON ' + e);
               }

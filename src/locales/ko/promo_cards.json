@@ -1,4 +1,16 @@
 {
+  "Supermarkets": "",
+  "Requires two cities in play. Increase your M€ production 2 steps.": "조건: 아무 도시 타일 2장 이상.) (메가크레딧 생산력 2 증가.",
+  
+  "City Park": "",
+  "Requires that you have 3 cities. Gain 2 plants.": "조건: 보유한 도시 타일 3장 이상.) (식물 자원 2개 획득.",
+
+  "City Parks": "",
+  "Requires that you have 3 city tiles. Gain 2 plants.": "조건: 보유한 도시 타일 3장 이상.) (식물 자원 2개 획득.",
+
+  "Soil Enrichment": "",
+  "Action: Remove 1 microbe from your any card to gain 5 plants.": "자신의 아무 카드 위의 미생물 자원 1개를 제거하고, 식물 자원 5개 획득.",
+
   "Icy Impactors": "",
   "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "행동: 10 M€(티타늄 자원으로 지불 가능)를 제거하고, 이 카드 위에 소행성 자원 2개 추가.",
   "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "행동: 이 카드 위의 소행성 자원 1개를 제거하고, 해양 타일 1장 배치(배치 위치는 선마커를 가지고 있는 플레이어가 결정)",
@@ -45,12 +57,6 @@
   "St. Joseph of Cupertino Mission": "",
   "Action: Pay 5 M€ (STEEL MAY BE USED) to build 1 Cathedral in a city. Max 1 per city. City owner can pay 2 M€ to draw 1 card.": "행동: 5 M€(강철 자원 사용 가능)을 제거하고, 대성당(은색 큐브) 1개를 도시 타일 1장 위에 배치(도시 타일 1장당 최대 1개까지). 해당 도시 타일의 소유자는 2 M€을 제거하고, 카드 1장 획득 가능.",
   "1 VP per City with a Cathedral in it.": "배치된 성당 1개당 승점 1점.",
-
-  "Soil Enrichment": "",
-  "Action: Remove 1 microbe from your any card to gain 5 plants.": "자신의 아무 카드 위의 미생물 자원 1개를 제거하고, 식물 자원 5개 획득.",
-
-  "City Parks": "",
-  "Requires that you have 3 city tiles. Gain 2 plants.": "조건: 보유한 도시 타일 3장 이상.) (식물 자원 2개 획득.",
   
   "Cyberia Systems": "",
   "Raise your steel production 1 step. Copy the production boxes of 2 of your other cards with building tags.": "강철 생산력 1 상승. 다른 건물 카드 2장의 생산력 증감사항을 각각 다시 한 번 적용.",

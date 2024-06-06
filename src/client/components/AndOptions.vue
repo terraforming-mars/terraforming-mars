@@ -53,9 +53,6 @@ export default Vue.extend({
     AppButton,
   },
   data(): DataModel {
-    if (this.playerinput.options === undefined) {
-      throw new Error('options must be defined');
-    }
     return {
       responded: this.playerinput.options.map(() => undefined),
     };

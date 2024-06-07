@@ -2,10 +2,16 @@
     "Ceres Tech Market": "",
     "Action: Discard any number of cards from your hand to gain 2 M€ for each discarded card.": "행동: 카드 X장을 버리고, 2X M€ 획득.",
     "Gain 2 M€ per colony you own.": "보유한 개척기지 1개당 2 M€ 획득.",
-    
+
+    "Cloud Tourism": "",
+    "Increase your M€ production 1 step for each pair of Earth and Venus tags you own. 1 VP for every 3rd floater on this card.": "보유한 금성 및 지구 태그마다 메가크레딧 생산력 1씩 증가.) (게임 종료 시, 이 카드 위의 부양체 자원 3개당 승점 1점.",
+
     "Directed Heat Usage": "",
     "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "행동: 열 자원 3개를 제거하고, 4 M€ 획득 또는 식물 자원 2개 획득.",
-    
+
+    "GHG Shipment": "",
+    "Requires that Kelvinists are in power or that you have 2 delegates there. Increase your heat production 1 step. Gain 1 heat for each floater you have.": "조건: 켈빈당이 집권/켈빈당에 자신의 의원 2명 이상 배치.) (열 에너지 생산력 1 증가. 보유한 부양체 자원마다 열 에너지 획득.",
+
     "Ishtar Expedition": "",
     "Requires Venus 10%. Gain 3 titanium and draw 2 Venus cards.": "조건: 금성 개척률 10% 이상) (티타늄 자원 3개 획득. 금성 카드 2장 획득.",
 
@@ -18,12 +24,16 @@
     "Increase M€ production 2 steps. This counts as passing. You get no other turns this generation.": "메가크레딧 생산력 2 증가. 그 후 이 세대를 패스한 것으로 취급.",
     "PASS": "패스",
 
+    "Sponsoring Nation": "",
+    "Requires 4 Earth tags. Gain 3 TR. Place 2 delegates.": "조건: 지구 태그 4개 이상.) (테라포밍 등급 3 TR 상승. 의원 2명 배치.",
+
     "Summit Logistics": "",
-    "Requires that Scientists are ruling or that you have 2 delegates there. Gain 1 M€ per planet tag and colony you have. Draw 2 cards.": "조건: 과학당이 집권/과학당에 자신의 의원 2명 이상 배치) (자신의 목성/지구/금성 태그 수와 개척기지 수만큼 메가크레딧 획득. 카드 2장 획득.",
+    "Requires that Scientists are ruling or that you have 2 delegates there. Gain 1 M€ per planet tag and colony you have. Draw 2 cards.": "조건: 과학당이 집권/과학당에 자신의 의원 2명 이상 배치.) (자신의 목성/지구/금성 태그 수와 개척기지 수만큼 메가크레딧 획득. 카드 2장 획득.",
+    "FAN EXPANSION NOTE: This includes Mars but not The Moon.": "주의 사항: 화성 태그는 포함되지만, 달 태그는 포함되지 않음.",
     
     "Psychrophiles": "호냉성 미생물",
     "Action: Add 1 microbe to this card.": "행동: 이 카드에 미생물 자원 1개 추가.",
-    "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "지속효과: 식물 태그 카드 사용시, 이 카드에 있는 미생물 자원 1개당 2 M€ 가치로 지불.",
+    "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "지속 효과: 식물 태그 카드 사용시, 이 카드에 있는 미생물 자원 1개당 2 M€ 가치로 지불.",
     "Temperature must be -20 C or lower.": "조건: 기온 -20℃ 이하.",
 
     "Research Coordination": "연구 조직화",

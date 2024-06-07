@@ -16,11 +16,11 @@ export class MarsFrontierAlliance extends CorporationCard {
       metadata: {
         cardNumber: 'PfCXXX',
         description:
-          'Start the game with 40 M€. When you reveal this card, select any remaining political program tile (you may use its effect as a passive effect of your corporation or as ruling party this generation).',
+          'You start with 40 M€. When you reveal this card, select any remaining political program tile (you may use its effect as a passive effect of your corporation or as ruling party this generation).',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(40).nbsp.policy().br;
           b.effect(
-            'After new ruling party is chosen, place the political program tile of the second most popular party on this card (you may use its effect as a passive effect of your corporation or as ruling party this generation)',
+            'After new ruling party is chosen, place the political program tile of the second most popular party on this card (you may use its effect as a passive effect of your corporation or as ruling party this generation).',
             (eb) => {
               eb.empty().startEffect.plus().policy().asterix();
             },

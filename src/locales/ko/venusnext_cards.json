@@ -29,10 +29,11 @@
   "Requires Venus 6%": "조건: 금성개척률 6% 이상.",
 
   "Venus Waystation": "금성 중간기착지",
-  "Effect: When you play a Venus tag, you pay 2 M€ less for it.": "지속효과: 금성 카드 사용 시, 금성 태그 1개마다 2M€ 할인.",
+  "Effect: When you play a Venus tag, you pay 2 M€ less for it.": "지속 효과: 금성 카드 사용 시, 금성 태그 1개마다 2M€ 할인.",
 
   "Thermophiles": "호열성 미생물",
   "Action: Add 1 microbe to ANY Venus CARD.": "행동: 자신의 아무 금성 카드 1장에 미생물 자원 1개 추가.",
+  "Action: Remove 2 microbes to raise Venus 1 step": "행동: 이 카드에 미생물 자원 2개 소비해서 금성 개척률 1단계 상승.",
   "Action: Spend 2 microbes here to raise Venus 1 step.": "행동: 이 카드에 미생물 자원 2개 소비해서 금성 개척률 1단계 상승.",
 
   "Sponsored Academies": "대학 후원",
@@ -70,7 +71,7 @@
 
   "Dirigibles": "비행선",
   "Action: Add 1 floater to ANY card": "행동: 자신의 아무 카드 1장에 부양체 자원 1개 추가.",
-  "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.": "지속효과: 금성 태그 카드 사용시, 이 카드에 부양체 자원 1개당 3M€ 가치로 지불 가능.",
+  "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.": "지속 효과: 금성 태그 카드 사용시, 이 카드에 부양체 자원 1개당 3M€ 가치로 지불 가능.",
 
   "Floating Habs": "공중 주거구역",
   "Action: Spend 2 M€ to add 1 floater to ANY card": "행동: 2M€ 소비해서 자신의 아무 카드 1장에 부양체 자원 1개 추가.",
@@ -160,7 +161,7 @@
 
   "Venusian Animals": "금성 동물",
   "18% Venus": "조건: 금성개척률 18% 이상.",
-  "Effect: When you play a science tag, including this, add 1 animal to this card.": "지속효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 과학 태그 수만큼 이 카드에 동물 자원 추가.",
+  "Effect: When you play a science tag, including this, add 1 animal to this card.": "지속 효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 과학 태그 수만큼 이 카드에 동물 자원 추가.",
   "Requires Venus 18%": "조건: 금성개척률 18% 이상.",
 
   "Venus Magnetizer": "금성 자기장 형성기",

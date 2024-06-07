@@ -95,7 +95,7 @@
     "Gain 3 plants, or add 3 microbes or 2 animals to ANOTHER card. Place an ocean tile.": "식물 자원 3개 획득 또는 미생물 자원 3개나 동물 자원 2개를 자신의 다른 카드 1장에 추가. 해양 타일 1장 배치.",
 
     "Research Outpost": "연구 전진기지",
-    "Effect: When you play a card, you pay 1 M€ less for it.": "지속효과: 모든 카드의 추진 비용 1 M€ 할인.",
+    "Effect: When you play a card, you pay 1 M€ less for it.": "지속 효과: 모든 카드의 추진 비용 1 M€ 할인.",
     "Place a city tile NEXT TO NO OTHER TILE.": "다른 타일과 인접하지 않은 빈 구역 한 곳에 도시 타일 1장 배치.",
 
     "Phobos Space Haven": "포보스 우주휴게소",
@@ -105,7 +105,7 @@
     "Place an ocean tile. Decrease your M€ production 2 steps and increase your heat production 3 steps.": "해양 타일 1장 배치. 메가크레딧 생산력 2 감소. 열 생산력 3 증가.",
 
     "Arctic Algae": "극지 미세조류",
-    "Effect: When anyone places an ocean tile, gain 2 plants.": "지속효과: 아무나 해양 타일을 1장 놓을 때마다, 자신의 식물 자원 2개 획득.",
+    "Effect: When anyone places an ocean tile, gain 2 plants.": "지속 효과: 아무나 해양 타일을 1장 놓을 때마다, 자신의 식물 자원 2개 획득.",
     "It must be -12 C or colder to play. Gain 1 plant.": "조건: 기온 -12℃ 이하.) (식물 자원 1개 획득.",
 
     "Predators": "포식동물",
@@ -114,7 +114,7 @@
     "Requires 11% oxygen.": "조건: 산소 농도 11% 이상.",
 
     "Space Station": "우주정거장",
-    "Effect: When you play a space card, you pay 2 M€ less for it.": "지속효과: 우주 카드 사용 시, 우주 태그 1개마다 2 M€ 할인.",
+    "Effect: When you play a space card, you pay 2 M€ less for it.": "지속 효과: 우주 카드 사용 시, 우주 태그 1개마다 2 M€ 할인.",
 
     "Eos Chasma National Park": "에오스 협곡 국립공원",
     "Requires -12 C or warmer. Add 1 animal TO ANY ANIMAL CARD. Gain 3 plants. Increase your M€ production 2 steps.": "조건: 기온 -12℃ 이상.) (자신의 아무 카드 1장에 동물 자원 1개 추가. 식물 자원 3개 획득. 메가크레딧 생산력 2 증가.",
@@ -133,7 +133,7 @@
     "Decrease your M€ production 2 steps and increase your heat production and energy production 2 steps each.": "메가크레딧 생산력 2 감소. 열 생산력 2 증가. 에너지 생산력 2 증가.",
 
     "Optimal Aerobraking": "첨단 대기권제동기술",
-    "Effect: When you play a space event, you gain 3 M€ and 3 heat.": "지속효과: 우주 사건형 카드 사용 시, 3 M€과 열 자원 3개 획득.",
+    "Effect: When you play a space event, you gain 3 M€ and 3 heat.": "지속 효과: 우주 사건형 카드 사용 시, 3 M€과 열 자원 3개 획득.",
 
     "Underground City": "지하 도시",
     "Place a city tile. Decrease your energy production 2 steps and increase your steel production 2 steps.": "에너지 생산력 2 감소. 강철 생산력 2 증가. 도시 타일 1장 배치.",
@@ -158,7 +158,7 @@
     "Raise your terraforming rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 plant tags.": "보유한 식물 태그가 3개 이상이면 식물 생산력 4 증가. 그렇지 않으면 식물 생산력 1 증가. 테라포밍 등급 2TR 상승. 기온 1단계 상승.",
 
     "Rover Construction": "로버 공장",
-    "Effect: When any city tile is placed, gain 2 M€.": "지속효과: 아무 도시 타일이 1장 놓일 때마다 자신이 2 M€ 획득.",
+    "Effect: When any city tile is placed, gain 2 M€.": "지속 효과: 아무 도시 타일이 1장 놓일 때마다 자신이 2 M€ 획득.",
 
     "Deimos Down": "데이모스 추락",
     "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.": "기온 3단계 상승. 강철 자원 4개 획득. 아무 1명의 식물 자원 8개까지 제거.",
@@ -167,7 +167,7 @@
     "Increase your titanium production 2 steps.": "티타늄 생산력 2 증가.",
 
     "Food Factory": "식량 공장",
-    "Decrease your plant production 1 step and increase your M€ production 4 steps": "식물 생산력 1 감소. 메가크레딧 생산력 4 증가.",
+    "Decrease your plant production 1 step and increase your M€ production 4 steps.": "식물 생산력 1 감소. 메가크레딧 생산력 4 증가.",
 
     "ArchaeBacteria": "고세균",
     "It must be -18 C or colder. Increase your plant production 1 step.": "조건: 기온 -18℃ 이하.) (식물 생산력 1 증가.",
@@ -257,21 +257,21 @@
     "Oxygen must be 8% or less. Decrease your energy production 1 step.": "조건: 산소 농도 8% 이하.) (에너지 생산력 1 감소.",
 
     "Earth Catapult": "지구 우주발사기지",
-    "Effect: When you play a card, you pay 2 M€ less for it.": "지속효과: 모든 카드의 추진 비용 2 M€ 할인.",
+    "Effect: When you play a card, you pay 2 M€ less for it.": "지속 효과: 모든 카드의 추진 비용 2 M€ 할인.",
 
     "Advanced Alloys": "첨단 합금",
-    "Effect: Each titanium you have is worth 1 M€ extra.": "지속효과: 보유한 각 티타늄 자원의 가치 1 M€ 상승.",
-    "Effect: Each steel you have is worth 1 M€ extra.": "지속효과: 보유한 각 강철 자원의 가치 1 M€ 상승.",
+    "Effect: Each titanium you have is worth 1 M€ extra.": "지속 효과: 보유한 각 티타늄 자원의 가치 1 M€ 상승.",
+    "Effect: Each steel you have is worth 1 M€ extra.": "지속 효과: 보유한 각 강철 자원의 가치 1 M€ 상승.",
 
     "Birds": "새",
     "Action: Add an animal to this card.": "행동: 이 카드에 동물 자원 1개 추가.",
     "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "조건: 산소 농도 13% 이상.) (아무 1명의 식물 생산력 2 감소. 이 카드의 동물 자원 1개당 승점 1점.",
 
     "Mars University": "화성 대학교",
-    "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "지속효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 과학 태그 1개마다 손에 든 카드 1장 버리고, 새로운 카드 1장 획득.",
+    "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "지속 효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 과학 태그 1개마다 손에 든 카드 1장 버리고, 새로운 카드 1장 획득.",
 
     "Viral Enhancers": "바이러스 벡터",
-    "Effect: When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "지속효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 식물/미생물/동물 태그 1개마다, 식물 자원 1개 획득, 또는 사용한 그 카드에 자원 1개 추가.",
+    "Effect: When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "지속 효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 식물/미생물/동물 태그 1개마다, 식물 자원 1개 획득, 또는 사용한 그 카드에 자원 1개 추가.",
 
     "Towing A Comet": "혜성 견인",
     "Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.": "산소 농도 1% 상승. 해양 타일 1장 배치. 식물 자원 2개 획득.",
@@ -367,7 +367,7 @@
     "Action: Spend 4 energy to gain 1 titanium and increase oxygen 1 step.": "행동: 에너지 자원 4개 소비해서 티타늄 자원 1개 획득 및 산소 농도 1% 상승.",
 
     "Earth Office": "지구 지사",
-    "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "지속효과: 지구 카드 사용 시, 지구 태그 1개마다 3 M€ 할인.",
+    "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "지속 효과: 지구 카드 사용 시, 지구 태그 1개마다 3 M€ 할인.",
     "When you play an Earth tag, you pay 3 M€ less for it.": "지구 카드 사용 시, 지구 태그 1개마다 3 M€ 할인.",
 
     "Acquired Company": "합병 회사",
@@ -379,7 +379,7 @@
     "Requires 12% oxygen. Gain 2 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 4 steps.": "조건: 산소 농도 12% 이상.) (에너지 생산력 1 감소. 메가크레딧 생산력 4 증가. 식물 자원 2개 획득. 도시 타일 1장 배치.",
 
     "Media Group": "미디어 그룹",
-    "Effect: After you play an event card, you gain 3 M€.": "지속효과: 사건형 카드 사용 시, 3 M€ 획득.",
+    "Effect: After you play an event card, you gain 3 M€.": "지속 효과: 사건형 카드 사용 시, 3 M€ 획득.",
 
     "Business Network": "비즈니스 네트워크",
     "Decrease your M€ production 1 step.": "메가크레딧 생산력 1 감소.",
@@ -438,7 +438,7 @@
     "Place 1 ocean tile.": "해양 타일 1장 배치.",
 
     "Ecological Zone": "자연 생태 형성지",
-    "Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.": "지속효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 동물/식물 태그 수만큼 이 카드에 동물 자원 추가.",
+    "Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.": "지속 효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 동물/식물 태그 수만큼 이 카드에 동물 자원 추가.",
     "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "조건: 보유한 녹지 타일 1장 이상.) (아무 녹지 타일과 인접한 빈 구역 한 곳에 타일 배치.",
     "1 VP per 2 animals on this card.": "이 카드의 동물 자원 2개당 승점 1점.",
 
@@ -449,7 +449,7 @@
     "Requires 4% oxygen. Increase your plant production 1 step for every 2 microbe tags you have, including this.": "조건: 산소 농도 4% 이상.) (이 카드도 포함해서, 보유한 미생물 태그 2개당 식물 생산력 1 증가.",
 
     "Decomposers": "분해자 생물",
-    "Effect: When you play an animal, plant, or microbe tag, including this, add a microbe to this card.": "지속효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 동물/식물/미생물 태그 수만큼, 이 카드에 미생물 자원 추가.",
+    "Effect: When you play an animal, plant, or microbe tag, including this, add a microbe to this card.": "지속 효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 동물/식물/미생물 태그 수만큼, 이 카드에 미생물 자원 추가.",
     "Requires 3% oxygen.": "조건: 산소 농도 3% 이상.",
     "1 VP per 3 microbes on this card.": "이 카드의 미생물 자원 3개당 승점 1점.",
 
@@ -501,7 +501,7 @@
     "Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.": "조건: 해양 타일 3장 이상.) (식물 자원 2개 제거. 식물 생산력 2 증가.",
 
     "Herbivores": "초식동물",
-    "Effect: When you place a greenery tile, add an animal to this card.": "지속효과: 자신의 녹지 타일을 1장 놓을 때마다 이 카드에 동물 자원 1개 추가.",
+    "Effect: When you place a greenery tile, add an animal to this card.": "지속 효과: 자신의 녹지 타일을 1장 놓을 때마다 이 카드에 동물 자원 1개 추가.",
     "Requires 8% oxygen. +1 animal to this card. -1 any plant production": "조건: 산소 농도 8% 이상.) (아무 1명의 식물 생산력 1 감소. 이 카드에 동물 자원 1개 추가.",
 
     "Insects": "곤충",
@@ -521,7 +521,7 @@
 
     "Adaptation Technology": "적응기술",
     "Global requirements": "행성 지표",
-    "Effect: Your global requirements are +2 or -2 steps, your choice in each case.": "지속효과: 카드 사용 시, 추진 조건 중 행성 지표에는 +/- 2단계 중 원하는 것을 적용.",
+    "Effect: Your global requirements are +2 or -2 steps, your choice in each case.": "지속 효과: 카드 사용 시, 추진 조건 중 행성 지표에는 +/- 2단계 중 원하는 것을 적용.",
 
     "Caretaker Contract": "항온 관리 계약",
     "Action: Spend 8 heat to increase your terraform rating 1 step.": "행동: 열 자원 8개 소비해서 테라포밍 등급 1TR 상승.",
@@ -531,7 +531,7 @@
     "It must be -14 C or colder. Increase your plant production 2 steps.": "조건: 기온 -14℃ 이하.) (식물 생산력 2 증가.",
 
     "Standard Technology": "표준 기술",
-    "Effect: After you pay for a standard project, except selling patents, you gain 3 M€.": "지속효과: 특허권 매각을 제외한, 다른 일반 프로젝트의 추진 비용 지불 시 3 M€ 획득.",
+    "Effect: After you pay for a standard project, except selling patents, you gain 3 M€.": "지속 효과: 특허권 매각을 제외한, 다른 일반 프로젝트의 추진 비용 지불 시 3 M€ 획득.",
 
     "Nitrite Reducing Bacteria": "질산환원균",
     "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "행동: 이 카드에 미생물 자원 1개 추가, 또는 이 카드에 미생물 자원 3개 소비해서 테라포밍 등급 1TR 상승.",
@@ -587,7 +587,7 @@
 
     "Pets": "애완동물",
     "Animals may not be removed from this card": "이 카드의 동물 자원은 제거 불가.",
-    "Effect: When any city tile is placed, add an animal to this card.": "지속효과: 아무 도시 타일이 1장 놓일 때마다 이 카드에 동물 자원 1개 추가.",
+    "Effect: When any city tile is placed, add an animal to this card.": "지속 효과: 아무 도시 타일이 1장 놓일 때마다 이 카드에 동물 자원 1개 추가.",
     "Add 1 animal to this card.": "이 카드에 동물 자원 1개 획득.",
     "1 VP per 2 animals here.": "이 카드의 동물 자원 2개당 승점 1점.",
 
@@ -631,7 +631,7 @@
     "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "조건: 산소 농도 9% 이상.) (식물 생산력 1 감소. 메가크레딧 생산력 2 M€ 증가.",
 
     "Olympus Conference": "올림푸스 컨퍼런스",
-    "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "지속효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 과학 태그 1개마다, 이 카드에 과학 자원 1개 추가하거나, 또는 이 카드에서 과학 자원 1개 제거해서 카드 1장 획득.",
+    "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "지속 효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 과학 태그 1개마다, 이 카드에 과학 자원 1개 추가하거나, 또는 이 카드에서 과학 자원 1개 제거해서 카드 1장 획득.",
 
     "Rad-Suits": "방사선 안전복",
     "Requires two cities in play. Increase your M€ production 1 step.": "조건: 아무 도시 타일 2장 이상.) (메가크레딧 생산력 1 증가.",
@@ -675,12 +675,12 @@
 
     "Restricted Area": "제한구역",
     "Action: Spend 2 M€ to draw a card.": "행동: 2 M€ 소비해서 카드 1장 획득.",
-    "Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.": "지속효과: 금성 태그 카드 사용시, 이 카드에 부양체 자원 1개당 3M€ 가치로 지불 가능.",
+    "Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.": "지속 효과: 금성 태그 카드 사용시, 이 카드에 부양체 자원 1개당 3M€ 가치로 지불 가능.",
 
     "Place this tile.": "타일 배치.",
 
     "Immigrant City": "이민자 도시",
-    "Effect: When a city tile is placed, including this, increase your M€ production 1 step.": "지속효과: 이 카드도 포함해서 아무 도시타일이 1장 놓일 때, 메가크레딧 생산력 1 증가.",
+    "Effect: When a city tile is placed, including this, increase your M€ production 1 step.": "지속 효과: 이 카드도 포함해서 아무 도시타일이 1장 놓일 때, 메가크레딧 생산력 1 증가.",
     "Decrease your energy production 1 step and decrease your M€ production 2 steps. Place a city tile.": "도시 타일 1장 배치. 에너지 생산력 1 감소. 메가크레딧 생산력 2 감소.",
 
     "Energy Tapping": "전기 도둑질",

@@ -90,7 +90,7 @@
   "Action: Remove 1 asteroid here to place an ocean.": "행동: 이 카드에 소행성 자원 1개 소비해서 해양 타일 1장 배치.",
 
   "Cutting Edge Technology": "최첨단 기술",
-  "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "지속효과: 추진 조건을 포함한 카드를 추진 시 2MC 할인.",
+  "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "지속 효과: 추진 조건을 포함한 카드를 추진 시 2MC 할인.",
 
   "Crash Site Cleanup": "충돌지점 재개발 사업",
   "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "조건: 이번 세대에 한 플레이어가 다른 플레이어의 식물 자원 1개 이상 제거.) (티타늄 자원 1개 또는 강철 자원 2개 획득.",
@@ -121,7 +121,7 @@
   "Requires that you have 9 different types of resources. Gain 1 TR.": "조건: 보유한 기본, 특수 자원 총 9종류 이상.) (테라포밍 등급 1TR 상승.",
 
   "Topsoil Contract": "표토 공급 계약",
-  "Effect: When you gain a microbe to ANY CARD, also gain 1 M€.": "지속효과: 자신의 아무 카드 1장에 미생물 자원을 추가할 때마다, 추가한 미생물 자원 1개당 1MC 획득.",
+  "Effect: When you gain a microbe to ANY CARD, also gain 1 M€.": "지속 효과: 자신의 아무 카드 1장에 미생물 자원을 추가할 때마다, 추가한 미생물 자원 1개당 1MC 획득.",
   "Gain 3 plants.": "식물 자원 3개 획득.",
 
   "Imported Nutrients": "영양분 수입",
@@ -142,7 +142,7 @@
   "Lose 2 plants. Increase your M€ production 2 steps.": "식물 자원 2개 제거. 메가크레딧 생산력 2증가.",
 
   "Meat Industry": "육류 가공 공장",
-  "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "지속효과: 자신의 아무 카드 1장에 동물 자원을 추가할 때마다, 추가한 동물 자원 1개당 2MC 획득.",
+  "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "지속 효과: 자신의 아무 카드 1장에 동물 자원을 추가할 때마다, 추가한 동물 자원 1개당 2MC 획득.",
 
   "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps and place this tile.": "에너지 생산력 4감소. 식물 생산력 2증가. 테라포밍 등급 3TR 상승. 빈 구역 한 곳에 타일 배치.",
 
@@ -161,13 +161,13 @@
   "1VP for each 2 asteroids on this card.": "이 카드의 소행성 자원 2개당 승점 1점.",
 
   "Advertising": "광고",
-  "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "지속효과: 추진 비용의 기본값이 20MC 이상인 카드를 사용할 때마다, 메가크레딧 생산력 1증가.",
+  "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "지속 효과: 추진 비용의 기본값이 20MC 이상인 카드를 사용할 때마다, 메가크레딧 생산력 1증가.",
 
   "Project Inspection": "프로젝트 감독",
   "Use a card action that has been used this generation.": "자신의 카드 행동 중, 이번 세대에 이미 수행 된 것 하나를 다시 한 번 수행.",
 
   "Rego Plastics": "표토 플라스틱",
-  "Effect: Your steel resources are worth 1 M€ extra.": "지속효과: 보유한 각 강철 자원의 가치 1MC 상승.",
+  "Effect: Your steel resources are worth 1 M€ extra.": "지속 효과: 보유한 각 강철 자원의 가치 1MC 상승.",
 
   "Interplanetary Trade": "행성간 무역",
   "Increase your M€ production 1 step per different tag you have in play, including this.": "이 카드도 포함해서 보유한 태그 종류 하나당 메가크레딧 생산력 1증가.",
@@ -181,7 +181,7 @@
 
   "Self-replicating Robots": "자가복제 로봇",
   "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "행동: 손에 든 우주 또는 건물 카드 1장을 이 카드 위에 앞면으로 얹고 그 위에 자원 2개를 추가하거나, 또는 이 카드에 얹힌 카드 중 1장의 자원을 2배로 불림.",
-  "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "지속효과: 여기 얹힌 카드들의 추진 비용은 각 카드 위에 놓인 자원 개수만큼 할인됨.",
+  "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "지속 효과: 여기 얹힌 카드들의 추진 비용은 각 카드 위에 놓인 자원 개수만큼 할인됨.",
 
   "Dusk Laser Mining": "저물녘 레이저 채굴",
   "Requires 2 science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "조건: 보유한 과학 태그 2개 이상.) (에너지 생산력 1감소. 티타늄 생산력 1증가. 티타늄 자원 4개 획득.",
@@ -193,7 +193,7 @@
   "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.": "에너지 생산력 4감소. 식물 생산력 2증가. 테라포밍 등급 3TR 상승. 빈 구역 한 곳에 타일 배치.",
   
   "Mercurian Alloys": "수성합금",
-  "Effect: Your titanium resources are worth 1 M€ extra.": "지속효과: 보유한 각 티타늄 자원의 가치 1MC 상승.",
+  "Effect: Your titanium resources are worth 1 M€ extra.": "지속 효과: 보유한 각 티타늄 자원의 가치 1MC 상승.",
 
   "Energy Market": "에너지 시장",
   "Action: Spend 2X M€ to gain X energy.": "행동: 2X MC을 소비해서 에너지 자원 X개 획득.",

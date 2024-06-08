@@ -62,9 +62,6 @@ export default Vue.extend({
     AppButton,
   },
   data() {
-    if (this.playerinput.options === undefined) {
-      throw new Error('no options provided for OrOptions');
-    }
     const displayedOptions = this.playerinput.options.filter((option) => {
       if (option.type !== 'card') {
         return true;

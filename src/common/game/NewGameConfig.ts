@@ -75,6 +75,7 @@ export interface NewGameConfig {
   requiresMoonTrackCompletion: boolean; // Moon must be completed to end the game
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
   moonStandardProjectVariant: boolean;
+  moonStandardProjectVariant1: boolean;
   altVenusBoard: boolean;
   escapeVelocityMode: boolean;
   escapeVelocityThreshold: number | undefined;

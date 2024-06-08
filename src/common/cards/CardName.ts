@@ -698,9 +698,12 @@ export enum CardName {
   MOON_ROAD_STANDARD_PROJECT = 'Road Infrastructure',
   MOON_MINE_STANDARD_PROJECT = 'Lunar Mine',
   MOON_HABITAT_STANDARD_PROJECT = 'Lunar Habitat',
-  MOON_ROAD_STANDARD_PROJECT_V2 = 'Road Infrastructure (var.)',
-  MOON_MINE_STANDARD_PROJECT_V2 = 'Lunar Mine (var.)',
-  MOON_HABITAT_STANDARD_PROJECT_V2 = 'Lunar Habitat (var.)',
+  MOON_ROAD_STANDARD_PROJECT_VARIANT_1 = 'Road Infrastructure (var. 1)',
+  MOON_MINE_STANDARD_PROJECT_VARIANT_1 = 'Lunar Mine (var. 1)',
+  MOON_HABITAT_STANDARD_PROJECT_VARIANT_1 = 'Lunar Habitat (var. 1)',
+  MOON_ROAD_STANDARD_PROJECT_VARIANT_2 = 'Road Infrastructure (var. 2)',
+  MOON_MINE_STANDARD_PROJECT_VARIANT_2 = 'Lunar Mine (var. 2)',
+  MOON_HABITAT_STANDARD_PROJECT_VARIANT_2 = 'Lunar Habitat (var. 2)',
 
   // Pathfinders
   BREEDING_FARMS = 'Breeding Farms',

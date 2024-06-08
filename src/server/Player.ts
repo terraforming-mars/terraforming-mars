@@ -1478,10 +1478,14 @@ export class Player implements IPlayer {
           return gameOptions.altVenusBoard === false;
         case CardName.AIR_SCRAPPING_STANDARD_PROJECT_VARIANT:
           return gameOptions.altVenusBoard === true;
-        case CardName.MOON_HABITAT_STANDARD_PROJECT_V2:
-        case CardName.MOON_MINE_STANDARD_PROJECT_V2:
-        case CardName.MOON_ROAD_STANDARD_PROJECT_V2:
+        case CardName.MOON_HABITAT_STANDARD_PROJECT_VARIANT_2:
+        case CardName.MOON_MINE_STANDARD_PROJECT_VARIANT_2:
+        case CardName.MOON_ROAD_STANDARD_PROJECT_VARIANT_2:
           return gameOptions.moonStandardProjectVariant === true;
+        case CardName.MOON_HABITAT_STANDARD_PROJECT_VARIANT_1:
+        case CardName.MOON_MINE_STANDARD_PROJECT_VARIANT_1:
+        case CardName.MOON_ROAD_STANDARD_PROJECT_VARIANT_1:
+          return gameOptions.moonStandardProjectVariant1 === true;
         case CardName.EXCAVATE_STANDARD_PROJECT:
           return gameOptions.underworldExpansion === true;
         case CardName.COLLUSION_STANDARD_PROJECT:

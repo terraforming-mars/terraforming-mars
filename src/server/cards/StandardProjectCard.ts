@@ -75,6 +75,7 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
     return player.canAfford(this.canPlayOptions(player));
   }
 
+  // TODO(kberg): Replace with abstract method.
   public canPayWith(_player: IPlayer): StandardProjectCanPayWith {
     return {};
   }

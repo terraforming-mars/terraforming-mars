@@ -148,6 +148,7 @@ export class GameHandler extends Handler {
             initialDraftVariant: gameReq.initialDraft,
             moonExpansion: gameReq.moonExpansion,
             moonStandardProjectVariant: gameReq.moonStandardProjectVariant,
+            moonStandardProjectVariant1: gameReq.moonStandardProjectVariant1,
             pathfindersExpansion: gameReq.pathfindersExpansion,
             politicalAgendasExtension: gameReq.politicalAgendasExtension,
             prelude2Expansion: gameReq.prelude2Expansion,

@@ -11,7 +11,7 @@ import {TileType} from '../../../common/TileType';
 export class MoonHabitatStandardProjectVariant2 extends MoonHabitatStandardProject {
   constructor() {
     super({
-      name: CardName.MOON_HABITAT_STANDARD_PROJECT_V2,
+      name: CardName.MOON_HABITAT_STANDARD_PROJECT_VARIANT_2,
       cost: 26,
       reserveUnits: Units.EMPTY,
       tr: {moonHabitat: 1},
@@ -20,7 +20,7 @@ export class MoonHabitatStandardProjectVariant2 extends MoonHabitatStandardProje
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 26 M€ place a habitat on The Moon and raise your M€ production 1 step.', (eb) => {
+          b.standardProject('Spend 26 M€ to place a habitat on The Moon and raise your M€ production 1 step.', (eb) => {
             eb.megacredits(26).startAction.moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE}).production((pb) => pb.megacredits(1));
           }),
         ),
@@ -36,7 +36,7 @@ export class MoonHabitatStandardProjectVariant2 extends MoonHabitatStandardProje
 export class MoonMineStandardProjectVariant2 extends MoonMineStandardProject {
   constructor() {
     super({
-      name: CardName.MOON_MINE_STANDARD_PROJECT_V2,
+      name: CardName.MOON_MINE_STANDARD_PROJECT_VARIANT_2,
       cost: 23,
       reserveUnits: Units.EMPTY,
       tr: {moonMining: 1},
@@ -45,7 +45,7 @@ export class MoonMineStandardProjectVariant2 extends MoonMineStandardProject {
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 23 M€ to place a mine on the moon, raise the mining rate 1 step, and raise steel production 1 step.', (eb) => {
+          b.standardProject('Spend 23 M€ to place a mine on The Moon, raise the mining rate 1 step, and raise steel production 1 step.', (eb) => {
             eb.megacredits(23).startAction.moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).production((pb) => pb.steel(1));
           }),
         ),
@@ -61,7 +61,7 @@ export class MoonMineStandardProjectVariant2 extends MoonMineStandardProject {
 export class MoonRoadStandardProjectVariant2 extends MoonRoadStandardProject {
   constructor() {
     super({
-      name: CardName.MOON_ROAD_STANDARD_PROJECT_V2,
+      name: CardName.MOON_ROAD_STANDARD_PROJECT_VARIANT_2,
       cost: 21,
       reserveUnits: Units.EMPTY,
       tr: {moonLogistics: 1},
@@ -70,7 +70,7 @@ export class MoonRoadStandardProjectVariant2 extends MoonRoadStandardProject {
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 21 M€ place a road on the moon and raise the Logistics Rate 1 step.', (eb) => {
+          b.standardProject('Spend 21 M€ to place a road on The Moon and raise the Logistics Rate 1 step.', (eb) => {
             eb.megacredits(21).startAction.moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTICS_RATE});
           }),
         ),

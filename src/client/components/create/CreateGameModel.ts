@@ -5,7 +5,7 @@ import {GameId} from '@/common/Types';
 import {AgendaStyle} from '@/common/turmoil/Types';
 import {BoardNameType, NewPlayerModel} from '@/common/game/NewGameConfig';
 
-export interface CreateGameModel {
+export type CreateGameModel = {
   allOfficialExpansions: boolean;
   altVenusBoard: boolean;
   aresExtension: boolean;
@@ -35,6 +35,7 @@ export interface CreateGameModel {
   initialDraft: boolean;
   moonExpansion: boolean;
   moonStandardProjectVariant: boolean;
+  moonStandardProjectVariant1: boolean;
   pathfindersExpansion: boolean;
   players: Array<NewPlayerModel>;
   playersCount: number;

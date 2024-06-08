@@ -20,8 +20,7 @@ export class DeepSpaceOperations extends PreludeCard {
         cardNumber: 'P08',
         renderData: CardRenderer.builder((b) => {
           b.titanium(4).br;
-          // TODO(kberg): allow more than one secondary tag.
-          b.cards(2, {secondaryTag: Tag.EVENT}).text('(').space({played}).text(')');
+          b.cards(2, {secondaryTag: Tag.EVENT}).super((sb) => sb.space({played}));
         }),
         description: 'Gain 4 titanium. Draw 2 event cards with a space tag.',
       },

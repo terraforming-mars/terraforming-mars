@@ -70,13 +70,12 @@ import {MiningComplex} from './MiningComplex';
 import {MiningRobotsManufCenter} from './MiningRobotsManufCenter';
 import {MomentumViriumHabitat} from './MomentumViriumHabitat';
 import {MoonHabitatStandardProject} from './MoonHabitatStandardProject';
-import {MoonHabitatStandardProjectVariant2} from './MoonStandardProjectVariants';
+import {MoonHabitatStandardProjectVariant1, MoonMineStandardProjectVariant1, MoonRoadStandardProjectVariant1} from './MoonStandardProjectVariants1';
+import {MoonHabitatStandardProjectVariant2, MoonMineStandardProjectVariant2, MoonRoadStandardProjectVariant2} from './MoonStandardProjectVariants2';
 import {MooncrateBlockFactory} from './MooncrateBlockFactory';
 import {MooncrateConvoysToMars} from './MooncrateConvoysToMars';
 import {MoonMineStandardProject} from './MoonMineStandardProject';
-import {MoonMineStandardProjectVariant2} from './MoonStandardProjectVariants';
 import {MoonRoadStandardProject} from './MoonRoadStandardProject';
-import {MoonRoadStandardProjectVariant2} from './MoonStandardProjectVariants';
 import {MoonTether} from './MoonTether';
 import {NanotechIndustries} from './NanotechIndustries';
 import {NewColonyPlanningInitiatives} from './NewColonyPlanningInitiatives';
@@ -220,11 +219,14 @@ export const MOON_CARD_MANIFEST = new ModuleManifest({
   },
   standardProjects: {
     [CardName.MOON_HABITAT_STANDARD_PROJECT]: {Factory: MoonHabitatStandardProject},
-    [CardName.MOON_HABITAT_STANDARD_PROJECT_V2]: {Factory: MoonHabitatStandardProjectVariant2},
+    [CardName.MOON_HABITAT_STANDARD_PROJECT_VARIANT_1]: {Factory: MoonHabitatStandardProjectVariant1},
+    [CardName.MOON_HABITAT_STANDARD_PROJECT_VARIANT_2]: {Factory: MoonHabitatStandardProjectVariant2},
     [CardName.MOON_MINE_STANDARD_PROJECT]: {Factory: MoonMineStandardProject},
-    [CardName.MOON_MINE_STANDARD_PROJECT_V2]: {Factory: MoonMineStandardProjectVariant2},
+    [CardName.MOON_MINE_STANDARD_PROJECT_VARIANT_1]: {Factory: MoonMineStandardProjectVariant1},
+    [CardName.MOON_MINE_STANDARD_PROJECT_VARIANT_2]: {Factory: MoonMineStandardProjectVariant2},
     [CardName.MOON_ROAD_STANDARD_PROJECT]: {Factory: MoonRoadStandardProject},
-    [CardName.MOON_ROAD_STANDARD_PROJECT_V2]: {Factory: MoonRoadStandardProjectVariant2},
+    [CardName.MOON_ROAD_STANDARD_PROJECT_VARIANT_1]: {Factory: MoonRoadStandardProjectVariant1},
+    [CardName.MOON_ROAD_STANDARD_PROJECT_VARIANT_2]: {Factory: MoonRoadStandardProjectVariant2},
   },
   preludeCards: {
     [CardName.FIRST_LUNAR_SETTLEMENT]: {Factory: FirstLunarSettlement, compatibility: 'moon'},

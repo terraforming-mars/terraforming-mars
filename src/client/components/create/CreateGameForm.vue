@@ -98,9 +98,14 @@
                                   <span v-i18n>Mandatory Moon Terraforming</span>
                               </label>
 
-                              <input type="checkbox" v-model="moonStandardProjectVariant" id="moonStandardProjectVariant-checkbox">
-                              <label for="moonStandardProjectVariant-checkbox">
-                                  <span v-i18n>Standard Project Variant</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#moon-standard-project-variant" class="tooltip" target="_blank">&#9432;</a>
+                              <input type="checkbox" v-model="moonStandardProjectVariant" id="moonStandardProjectVariant2-checkbox">
+                              <label for="moonStandardProjectVariant2-checkbox">
+                                  <span v-i18n>Standard Project Variant #2</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#moon-standard-project-variant" class="tooltip" target="_blank">&#9432;</a>
+                              </label>
+
+                              <input type="checkbox" v-model="moonStandardProjectVariant1" id="moonStandardProjectVariant1-checkbox">
+                              <label for="moonStandardProjectVariant1-checkbox">
+                                  <span v-i18n>Standard Project Variant #1</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#moon-standard-project-variant" class="tooltip" target="_blank">&#9432;</a>
                               </label>
                             </template>
 
@@ -628,6 +633,7 @@ export default (Vue as WithRefs<Refs>).extend({
       requiresVenusTrackCompletion: false,
       requiresMoonTrackCompletion: false,
       moonStandardProjectVariant: false,
+      moonStandardProjectVariant1: false,
       altVenusBoard: false,
       escapeVelocityMode: false,
       escapeVelocityThreshold: constants.DEFAULT_ESCAPE_VELOCITY_THRESHOLD,
@@ -892,6 +898,7 @@ export default (Vue as WithRefs<Refs>).extend({
       if (this.moonExpansion === false) {
         this.requiresMoonTrackCompletion = false;
         this.moonStandardProjectVariant = false;
+        this.moonStandardProjectVariant1 = false;
       }
     },
     getBoardColorClass(boardName: BoardName | BoardNameType): string {
@@ -1215,6 +1222,7 @@ export default (Vue as WithRefs<Refs>).extend({
         requiresVenusTrackCompletion,
         requiresMoonTrackCompletion: this.requiresMoonTrackCompletion,
         moonStandardProjectVariant: this.moonStandardProjectVariant,
+        moonStandardProjectVariant1: this.moonStandardProjectVariant1,
         altVenusBoard: this.altVenusBoard,
         escapeVelocityMode,
         escapeVelocityThreshold,

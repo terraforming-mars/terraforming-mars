@@ -30,7 +30,7 @@ export class VeneraBase extends ActionCard {
       metadata: {
         cardNumber: 'Pf67',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 floater to ANY Venus card', (ab) => ab.empty().startAction.floaters(1, {secondaryTag: Tag.VENUS}).asterix());
+          b.action('Add 1 floater to ANY Venus card', (ab) => ab.empty().startAction.resource(CardResource.FLOATER, {secondaryTag: Tag.VENUS}).asterix());
           b.br;
           b.production((pb) => pb.megacredits(3)).nbsp.city({secondaryTag: Tag.SPACE}).asterix();
           b.br;

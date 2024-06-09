@@ -15,8 +15,8 @@ export class Will extends CeoCard {
         cardNumber: 'L23',
         renderData: CardRenderer.builder((b) => {
           b.opgArrow().text('GAIN THESE RESOURCES').br;
-          b.animals(1).animals(1).microbes(1).microbes(1).br;
-          b.floaters(1).floaters(1).wild(1).wild(1);
+          b.resource(CardResource.ANIMAL).resource(CardResource.ANIMAL).resource(CardResource.MICROBE).resource(CardResource.MICROBE).br;
+          b.resource(CardResource.FLOATER).resource(CardResource.FLOATER).wild(1).wild(1);
           b.br;
         }),
         description: 'Once per game, add the following resources to your cards: 2 animals, 2 microbes, 2 floaters, 2 wild.',

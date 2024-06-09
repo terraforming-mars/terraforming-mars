@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 
 export class Insects extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +21,7 @@ export class Insects extends Card implements IProjectCard {
       metadata: {
         cardNumber: '148',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.plants(1).slash().plants(1, {played}));
+          b.production((pb) => pb.plants(1).slash().tag(Tag.PLANT));
         }),
         description: 'Requires 6% oxygen. Increase your plant production 1 step for each plant tag you have.',
       },

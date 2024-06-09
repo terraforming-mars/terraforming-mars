@@ -23,7 +23,7 @@ export class GeologicalSurvey extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U81',
         renderData: CardRenderer.builder((b) => {
-          b.data({amount: 1}).asterix().identify(2, {digit});
+          b.resource(CardResource.DATA).asterix().identify(2, {digit});
         }),
         description: 'Add 1 data resource to ANOTHER card. Identify any 2 underground resources on Mars.',
       },

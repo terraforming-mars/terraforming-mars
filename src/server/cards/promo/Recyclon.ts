@@ -9,7 +9,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {digit, played} from '../Options';
+import {digit} from '../Options';
 
 export class Recyclon extends CorporationCard {
   constructor() {
@@ -32,8 +32,8 @@ export class Recyclon extends CorporationCard {
           b.megacredits(38).nbsp.production((pb) => pb.steel(1));
           b.corpBox('effect', (ce) => {
             ce.effect('When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.', (eb) => {
-              eb.building(1, {played}).colon().microbes(1).or();
-              eb.microbes(2, {digit}).startEffect.production((pb) => pb.plants(1));
+              eb.tag(Tag.BUILDING).colon().resource(CardResource.MICROBE).or();
+              eb.resource(CardResource.MICROBE, {amount: 2, digit}).startEffect.production((pb) => pb.plants(1));
             });
           });
         }),

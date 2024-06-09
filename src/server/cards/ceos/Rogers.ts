@@ -7,7 +7,6 @@ import {CeoCard} from './CeoCard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {GlobalParameter} from '../../../common/GlobalParameter';
-import {played} from '../Options';
 
 export class Rogers extends CeoCard {
   constructor() {
@@ -18,9 +17,9 @@ export class Rogers extends CeoCard {
         renderData: CardRenderer.builder((b) => {
           b.opgArrow().text('ACTIVATE THE BELOW ABILITY');
           b.br;
-          b.venus(1, {played}).colon().projectRequirements();
+          b.tag(Tag.VENUS).colon().projectRequirements();
           b.br;
-          b.venus(1, {played}).colon().megacredits(-3);
+          b.tag(Tag.VENUS).colon().megacredits(-3);
         }),
         description: 'Ignore global requirements for your Venus cards THIS GENERATION. When you play a Venus tag THIS GENERATION, you pay 3 M€ less for it.',
       },

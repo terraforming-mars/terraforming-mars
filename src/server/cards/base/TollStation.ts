@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {all, played} from '../Options';
+import {all} from '../Options';
 
 export class TollStation extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +22,7 @@ export class TollStation extends Card implements IProjectCard {
         cardNumber: '099',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.megacredits(1).slash().space({played, all}).asterix();
+            pb.megacredits(1).slash().tag(Tag.SPACE, {all}).asterix();
           });
         }),
         description: 'Increase your M€ production 1 step for each space tag your OPPONENTS have.',

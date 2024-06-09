@@ -29,12 +29,12 @@ export class AeronGenomics extends ActiveCorporationCard {
         cardNumber: 'UC05',
         description: 'You start with 35 M€, 5 steel, and 1 animal resource on this card. 1 VP per 3 animals on this card.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(35).steel(5, {digit}).animals(1).br;
+          b.megacredits(35).steel(5, {digit}).resource(CardResource.ANIMAL).br;
           b.effect('After you excavate an underground resource, put an animal on this card.', (eb) => {
-            eb.excavate(1).startEffect.animals(1);
+            eb.excavate(1).startEffect.resource(CardResource.ANIMAL);
           }).br;
           b.action('Spend 1 M€ to move an animal from here to another card.', (ab) => {
-            ab.megacredits(1).animals(1).startAction.animals(1).asterix();
+            ab.megacredits(1).resource(CardResource.ANIMAL).startAction.resource(CardResource.ANIMAL).asterix();
           });
         }),
       },

@@ -6,7 +6,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
-import {played} from '../Options';
 
 export class TerraformingRobots extends Card implements IProjectCard {
   constructor() {
@@ -23,7 +22,7 @@ export class TerraformingRobots extends Card implements IProjectCard {
         cardNumber: 'PfT12',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a Mars tag, add 1 specialized robot on this card.', (eb) => {
-            eb.mars(1, {played}).startEffect.specializedRobot(1);
+            eb.tag(Tag.MARS).startEffect.resource(CardResource.SPECIALIZED_ROBOT);
           }).br;
           b.vpText('1 VP for every specialized robot on this card.');
         }),

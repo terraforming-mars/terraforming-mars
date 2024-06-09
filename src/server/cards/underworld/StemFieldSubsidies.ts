@@ -1,7 +1,6 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {played} from '../Options';
 import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
 import {CardResource} from '../../../common/CardResource';
@@ -24,7 +23,7 @@ export class StemFieldSubsidies extends Card implements IProjectCard {
         cardNumber: 'U43',
         renderData: CardRenderer.builder((b) => {
           b.effect('Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.',
-            (eb) => eb.science(1, {played}).startEffect.data().asterix().identify(1));
+            (eb) => eb.tag(Tag.SCIENCE).startEffect.resource(CardResource.DATA).asterix().identify(1));
         }),
         description: '1 VP per 3 data resources on this card.',
       },

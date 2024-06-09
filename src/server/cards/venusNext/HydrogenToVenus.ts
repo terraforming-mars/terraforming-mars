@@ -4,7 +4,6 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {played} from '../Options';
 import {IProjectCard} from '../IProjectCard';
 
 export class HydrogenToVenus extends Card implements IProjectCard {
@@ -24,7 +23,7 @@ export class HydrogenToVenus extends Card implements IProjectCard {
         cardNumber: '231',
         renderData: CardRenderer.builder((b) => {
           b.venus(1).br.br; // double br is intentional for visual appeal
-          b.floaters(1, {secondaryTag: Tag.VENUS}).slash().jovian({played});
+          b.resource(CardResource.FLOATER, {secondaryTag: Tag.VENUS}).slash().tag(Tag.JOVIAN);
         }),
         description: 'Raise Venus 1 step. Add 1 floater to A VENUS CARD for each Jovian tag you have.',
       },

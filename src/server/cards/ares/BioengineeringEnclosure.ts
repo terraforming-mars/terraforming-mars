@@ -29,9 +29,9 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
         cardNumber: 'A01',
         renderData: CardRenderer.builder((b) => {
           b.action('Remove 1 animal from THIS card to add 1 animal to ANOTHER card.', (eb) => {
-            eb.animals(1).asterix().startAction.animals(1).asterix();
+            eb.resource(CardResource.ANIMAL).asterix().startAction.resource(CardResource.ANIMAL).asterix();
           }).br;
-          b.animals(2);
+          b.resource(CardResource.ANIMAL, 2);
         }),
       },
     });

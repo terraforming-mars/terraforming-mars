@@ -30,10 +30,10 @@ export class PrivateMilitaryContractor extends ActionCard implements IProjectCar
           b.effect(
             'When blocking damage from other players, you can use fighters here as if they were corruption ' +
             'resources. You cannot use them for score bribing or collusion.',
-            (eb) => eb.corruptionShield().startEffect.fighter().equals().corruption().asterix()).br;
+            (eb) => eb.corruptionShield().startEffect.resource(CardResource.FIGHTER).equals().corruption().asterix()).br;
           b.action('Spend 1 titanium to add 1 fighter resource to this card.',
-            (ab) => ab.titanium(1).startAction.fighter(1)).br;
-          b.fighter();
+            (ab) => ab.titanium(1).startAction.resource(CardResource.FIGHTER)).br;
+          b.resource(CardResource.FIGHTER);
         }),
         description: 'Add 1 fighter resource to this card.',
       },

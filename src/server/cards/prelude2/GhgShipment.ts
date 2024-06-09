@@ -4,6 +4,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardType} from '../../../common/cards/CardType';
 import {Card} from '../Card';
 import {PartyName} from '../../../common/turmoil/PartyName';
+import {CardResource} from '../../../common/CardResource';
 
 export class GhgShipment extends Card {
   constructor() {
@@ -26,7 +27,7 @@ export class GhgShipment extends Card {
          'Increase your heat production 1 step. Gain 1 heat for each floater you have.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.heat(1)).br;
-          b.heat(1).slash().floaters(1);
+          b.heat(1).slash().resource(CardResource.FLOATER);
         }),
       },
     });

@@ -28,8 +28,8 @@ export class SecretLabs extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf26',
         renderData: CardRenderer.builder((b) => {
-          b.oceans(1).microbes(2, {digit}).asterix().or().temperature(1).br;
-          b.plants(3, {digit}).or().oxygen(1).floaters(2, {digit}).asterix().br;
+          b.oceans(1).resource(CardResource.MICROBE, {amount: 2, digit}).asterix().or().temperature(1).br;
+          b.plants(3, {digit}).or().oxygen(1).resource(CardResource.FLOATER, {amount: 2, digit}).asterix().br;
         }),
         description: 'Requires 1 science tag and 1 Jovian tag. ' +
           'Place an ocean tile. Add 2 microbes to ANY card. ' +

@@ -24,7 +24,7 @@ export class GeoscanSatellite extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U02',
         renderData: CardRenderer.builder((b) => {
-          b.data({amount: 2}).geoscan();
+          b.resource(CardResource.DATA, 2).geoscan();
         }),
         description: 'Place 2 data on any card. Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces.',
       },

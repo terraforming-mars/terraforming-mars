@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {played} from '../Options';
 
 export class WarpDrive extends Card implements IProjectCard {
   constructor() {
@@ -21,7 +20,7 @@ export class WarpDrive extends Card implements IProjectCard {
         cardNumber: 'C49',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a space card, you pay 4 M€ less for it.', (eb) => {
-            eb.space({played}).startEffect.megacredits(-4);
+            eb.tag(Tag.SPACE).startEffect.megacredits(-4);
           });
         }),
         description: 'Requires 5 science tags.',

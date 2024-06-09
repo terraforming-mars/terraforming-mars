@@ -3,7 +3,6 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 import {Tag} from '../../../common/cards/Tag';
 
 export class RobotPollinators extends Card implements IProjectCard {
@@ -21,7 +20,7 @@ export class RobotPollinators extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'X45',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.plants(1)).br.plants(1).slash().plants(1, {played});
+          b.production((pb) => pb.plants(1)).br.plants(1).slash().tag(Tag.PLANT);
         }),
         description: 'Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.',
       },

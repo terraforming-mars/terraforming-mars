@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 
 export class Satellites extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +21,7 @@ export class Satellites extends Card implements IProjectCard {
         cardNumber: '175',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.megacredits(1).slash().space({played});
+            pb.megacredits(1).slash().tag(Tag.SPACE);
           });
         }),
         description: 'Increase your M€ production 1 step for each space tag you have, including this one.',

@@ -28,7 +28,7 @@ export class Pollinators extends ActionCard implements IProjectCard {
       metadata: {
         cardNumber: '...',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 animal on this card', (ab) => ab.empty().startAction.animals(1)).br;
+          b.action('Add 1 animal on this card', (ab) => ab.empty().startAction.resource(CardResource.ANIMAL)).br;
           b.production((pb) => pb.plants(1).megacredits(2));
           b.vpText('1 VP per animal on this card.');
         }),

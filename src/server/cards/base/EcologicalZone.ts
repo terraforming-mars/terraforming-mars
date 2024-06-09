@@ -12,7 +12,6 @@ import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {ICardMetadata} from '../../../common/cards/ICardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Phase} from '../../../common/Phase';
-import {played} from '../Options';
 import {Board} from '../../boards/Board';
 
 export class EcologicalZone extends Card implements IProjectCard {
@@ -28,7 +27,7 @@ export class EcologicalZone extends Card implements IProjectCard {
       cardNumber: '128',
       renderData: CardRenderer.builder((b) => {
         b.effect('When you play an animal or plant tag INCLUDING THESE, add an animal to this card.', (eb) => {
-          eb.animals(1, {played}).slash().plants(1, {played}).startEffect.animals(1);
+          eb.tag(Tag.ANIMAL).slash().tag(Tag.PLANT).startEffect.resource(CardResource.ANIMAL);
         }).br;
         b.vpText('1 VP per 2 animals on this card.').tile(TileType.ECOLOGICAL_ZONE, true).asterix();
       }),

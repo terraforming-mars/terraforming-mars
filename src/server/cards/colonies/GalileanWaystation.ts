@@ -4,7 +4,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {all, played} from '../Options';
+import {all} from '../Options';
 
 export class GalileanWaystation extends Card implements IProjectCard {
   constructor() {
@@ -23,7 +23,7 @@ export class GalileanWaystation extends Card implements IProjectCard {
         description: 'Increase your M€ production 1 step for every Jovian tag in play.',
         cardNumber: 'C13',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.megacredits(1).slash().jovian({played, all}));
+          b.production((pb) => pb.megacredits(1).slash().tag(Tag.JOVIAN, {all}));
         }),
       },
     });

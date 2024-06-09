@@ -20,7 +20,7 @@ export class CrescentResearchAssociation extends CorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(50).br;
           b.effect('When you play a Moon tag, you pay 1 M€ less for each Moon tag you have.', (eb) => {
-            eb.moon().startEffect.megacredits(1).slash().moon();
+            eb.tag(Tag.MOON).startEffect.megacredits(1).slash().tag(Tag.MOON);
           });
         }),
       },

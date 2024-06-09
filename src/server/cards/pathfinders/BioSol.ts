@@ -29,7 +29,7 @@ export class BioSol extends ActiveCorporationCard {
           b.megacredits(42).cards(2, {secondaryTag: Tag.MICROBE}).br;
           b.corpBox('action', (corpbox) => corpbox.action(
             'Add 1 microbe to ANY card',
-            (ab) => ab.empty().startAction.microbes(1).asterix()));
+            (ab) => ab.empty().startAction.resource(CardResource.MICROBE).asterix()));
         }),
       },
     });

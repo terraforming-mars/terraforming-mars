@@ -25,8 +25,8 @@ export class CassiniStation extends Card implements IProjectCard {
         cardNumber: 'Pf62',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(1).slash().colonies(1, {all})).br;
-          b.floaters(2).asterix().or().br;
-          b.data({amount: 3}).asterix();
+          b.resource(CardResource.FLOATER, 2).asterix().or().br;
+          b.resource(CardResource.DATA, 3).asterix();
         }),
         description: 'Increase your energy production 1 step for every colony in play. ' +
           'Add 2 floaters to ANY card OR add 3 data to ANY card.',

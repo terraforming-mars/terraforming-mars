@@ -11,7 +11,7 @@ import {Priority} from '../../deferredActions/Priority';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Resource} from '../../../common/Resource';
-import {all, digit, played} from '../Options';
+import {all, digit} from '../Options';
 import {SerializedCard} from '../../SerializedCard';
 
 export class PharmacyUnion extends CorporationCard {
@@ -35,11 +35,11 @@ export class PharmacyUnion extends CorporationCard {
           b.corpBox('effect', (ce) => {
             ce.vSpace(Size.LARGE);
             ce.effect(undefined, (eb) => {
-              eb.microbes(1, {all, played}).startEffect.disease().megacredits(-4);
+              eb.tag(Tag.MICROBE, {all}).startEffect.resource(CardResource.DISEASE).megacredits(-4);
             });
             ce.vSpace();
             ce.effect('When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.', (eb) => {
-              eb.science(1, {played}).startEffect.minus().disease();
+              eb.tag(Tag.SCIENCE).startEffect.minus().resource(CardResource.DISEASE);
               eb.tr(1, {size: Size.SMALL}).slash().tr(3, {size: Size.SMALL, digit});
             });
           });

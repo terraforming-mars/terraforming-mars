@@ -8,10 +8,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {played} from '../../cards/Options';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().titanium(1).slash().jovian({played}).influence({size: Size.SMALL});
+  b.minus().titanium(1).slash().tag(Tag.JOVIAN).influence({size: Size.SMALL});
 });
 
 export class MinersOnStrike extends GlobalEvent implements IGlobalEvent {

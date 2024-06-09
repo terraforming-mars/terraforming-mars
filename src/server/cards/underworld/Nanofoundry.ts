@@ -4,7 +4,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
-import {digit, played} from '../Options';
+import {digit} from '../Options';
 
 export class Nanofoundry extends Card implements IProjectCard {
   constructor() {
@@ -25,7 +25,7 @@ export class Nanofoundry extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U74',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.minus().energy(5, {digit})).cards(1).slash().energy(1, {played});
+          b.production((pb) => pb.minus().energy(5, {digit})).cards(1).slash().tag(Tag.POWER);
         }),
         description: 'Requires 2 science tags. Reduce your energy production 5 steps. ' +
           'Draw 1 card for every power tag you have, including this.',

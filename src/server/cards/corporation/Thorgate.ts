@@ -2,7 +2,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CorporationCard} from './CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 
 export class Thorgate extends CorporationCard {
   constructor() {
@@ -24,7 +23,7 @@ export class Thorgate extends CorporationCard {
           b.production((pb) => pb.energy(1)).nbsp.megacredits(48);
           b.corpBox('effect', (ce) => {
             ce.effect('When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.', (eb) => {
-              eb.energy(1, {played}).asterix().startEffect.megacredits(-3);
+              eb.tag(Tag.POWER).asterix().startEffect.megacredits(-3);
             });
           });
         }),

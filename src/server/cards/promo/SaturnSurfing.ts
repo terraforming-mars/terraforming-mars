@@ -8,7 +8,6 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 
 export class SaturnSurfing extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -28,10 +27,10 @@ export class SaturnSurfing extends Card implements IActionCard, IProjectCard {
         cardNumber: 'X11',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.', (eb) => {
-            eb.floaters(1).startAction.megacredits(1).slash().floaters(1);
+            eb.resource(CardResource.FLOATER).startAction.megacredits(1).slash().resource(CardResource.FLOATER);
             eb.asterix().text('max 5');
           }).br;
-          b.floaters(1).slash().earth(1, {played});
+          b.resource(CardResource.FLOATER).slash().tag(Tag.EARTH);
         }),
         description: 'Add 1 floater here for every Earth tag you have, including this.',
       },

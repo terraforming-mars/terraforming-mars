@@ -24,7 +24,7 @@ export class AirScrappingExpedition extends Card implements IProjectCard {
         cardNumber: '215',
         description: 'Raise Venus 1 step. Add 3 floaters to ANY Venus CARD.',
         renderData: CardRenderer.builder((b) => {
-          b.venus(1).floaters(3, {secondaryTag: Tag.VENUS});
+          b.venus(1).resource(CardResource.FLOATER, {amount: 3, secondaryTag: Tag.VENUS});
         }),
       },
     });

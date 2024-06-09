@@ -6,7 +6,7 @@ import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
-import {all, played} from '../Options';
+import {all} from '../Options';
 import {sum} from '../../../common/utils/utils';
 
 export class MediaArchives extends Card implements IProjectCard {
@@ -20,7 +20,7 @@ export class MediaArchives extends Card implements IProjectCard {
       metadata: {
         cardNumber: '107',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(1).slash().event({played, all});
+          b.megacredits(1).slash().tag(Tag.EVENT, {all});
         }),
         description: 'Gain 1 M€ for each event EVER PLAYED by all players.',
       },

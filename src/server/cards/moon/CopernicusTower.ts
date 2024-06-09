@@ -41,7 +41,7 @@ export class CopernicusTower extends ActionCard {
         renderData: CardRenderer.builder((b) => {
           b.text('Requires you have 2 titanium production.', Size.TINY, false, false).br;
           b.action('Add 1 science resource here, or spend 1 science resource here to raise your TR 1 step.', (eb) => {
-            eb.empty().startAction.science(1).nbsp.slash().nbsp.science(1).arrow().tr(1);
+            eb.empty().startAction.resource(CardResource.SCIENCE).nbsp.slash().nbsp.resource(CardResource.SCIENCE).arrow().tr(1);
           });
           b.br;
           b.vpText('1 VP PER MOON TAG YOU HAVE.');

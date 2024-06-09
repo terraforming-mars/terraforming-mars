@@ -27,12 +27,12 @@ export class JupiterFloatingStation extends Card implements IProjectCard {
         cardNumber: 'C19',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 floater to a JOVIAN CARD.', (eb) => {
-            eb.empty().startAction.floaters(1, {secondaryTag: Tag.JOVIAN});
+            eb.empty().startAction.resource(CardResource.FLOATER, {secondaryTag: Tag.JOVIAN});
           }).br;
           b.or().br;
           b.action('Gain 1 M€ for every floater here [MAX 4].', (eb) => {
             eb.empty().startAction;
-            eb.megacredits(1).slash().floaters(1).text('[max 4]', Size.SMALL);
+            eb.megacredits(1).slash().resource(CardResource.FLOATER).text('[max 4]', Size.SMALL);
           });
         }),
         description: {

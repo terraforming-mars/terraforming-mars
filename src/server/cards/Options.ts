@@ -10,7 +10,6 @@
 export const all = true;
 export const clone = true;
 export const digit = true;
-export const played = true;
 export const max = true;
 export const nextTo = true;
 export const cancelled = true;

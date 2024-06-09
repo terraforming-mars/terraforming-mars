@@ -9,7 +9,6 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../../common/cards/CardName';
 import {Priority} from '../../deferredActions/Priority';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 
 export class MarsUniversity extends Card implements IProjectCard {
   constructor() {
@@ -24,7 +23,7 @@ export class MarsUniversity extends Card implements IProjectCard {
         cardNumber: '073',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a science tag, including this, you may discard a card from hand to draw a card.', (eb) => {
-            eb.science(1, {played}).startEffect.minus().cards(1).nbsp.plus().cards(1);
+            eb.tag(Tag.SCIENCE).startEffect.minus().cards(1).nbsp.plus().cards(1);
           });
         }),
       },

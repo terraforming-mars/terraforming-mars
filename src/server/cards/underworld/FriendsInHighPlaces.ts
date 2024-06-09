@@ -3,7 +3,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
-import {played} from '../Options';
 import {IPlayer} from '@/server/IPlayer';
 
 export class FriendsInHighPlaces extends Card {
@@ -25,7 +24,7 @@ export class FriendsInHighPlaces extends Card {
         description: 'Requires 1 corruption and 1 Earth tag. Gain 1 corruption.',
         renderData: CardRenderer.builder((b) => {
           b.effect('When paying for Earth cards, corruption resources may be spent as 10 M€ each.',
-            (eb) => eb.earth(1, {played}).startEffect.corruption().equals().megacredits(10)).br;
+            (eb) => eb.tag(Tag.EARTH).startEffect.corruption().equals().megacredits(10)).br;
 
           b.corruption().br;
         }),

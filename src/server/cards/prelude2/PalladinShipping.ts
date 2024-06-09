@@ -3,7 +3,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {digit, played} from '../Options';
+import {digit} from '../Options';
 import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
 import {Resource} from '../../../common/Resource';
@@ -27,7 +27,7 @@ export class PalladinShipping extends CorporationCard implements IActionCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(36).titanium(5, {digit}).br;
           b.effect('When you play a space event, gain 1 titanium.', (eb) => {
-            eb.space({played}).event({played}).startEffect.titanium(1);
+            eb.tag(Tag.SPACE).tag(Tag.EVENT).startEffect.titanium(1);
           });
           b.br;
           b.action('Spend 2 titanium to raise the temperature 1 step.', (ab) => {

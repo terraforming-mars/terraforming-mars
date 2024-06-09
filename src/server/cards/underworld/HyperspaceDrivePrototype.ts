@@ -21,8 +21,8 @@ export class HyperspaceDrivePrototype extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U52',
         renderData: CardRenderer.builder((b) => {
-          b.fighter(1).or().titanium(1).asterix().br;
-          b.science(1).or().tr(1).asterix().br;
+          b.resource(CardResource.FIGHTER).or().titanium(1).asterix().br;
+          b.resource(CardResource.SCIENCE).or().tr(1).asterix().br;
         }),
         description: 'Requires that 3 science tags. ' +
         'Put a fighter resource on a card you own, or gain 1 titanium if you have no suitable card. ' +

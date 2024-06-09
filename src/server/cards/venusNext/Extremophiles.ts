@@ -25,7 +25,7 @@ export class Extremophiles extends ActionCard {
         description: 'Requires 2 science tags.',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 microbe to ANY card.', (eb) => {
-            eb.empty().startAction.microbes(1).asterix();
+            eb.empty().startAction.resource(CardResource.MICROBE).asterix();
           }).br;
           b.vpText('1 VP for every 3rd Microbe on this card.');
         }),

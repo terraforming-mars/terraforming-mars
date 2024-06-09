@@ -32,7 +32,7 @@ export class SearchforLifeUnderground extends Card implements IActionCard, IProj
         description: 'Temperature must -18° C or colder.',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 M€ to identify an underground resource. If it depicts at least 1 microbe, add a science resource here.', (eb) => {
-            eb.megacredits(1).startAction.identify().nbsp.text(',').microbes(1).asterix().colon().nbsp.science();
+            eb.megacredits(1).startAction.identify().nbsp.text(',').resource(CardResource.MICROBE).asterix().colon().nbsp.resource(CardResource.SCIENCE);
           }).br;
           b.vpText('3 VPs if you have one or more science resources here.');
         }),

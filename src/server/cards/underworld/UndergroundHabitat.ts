@@ -23,7 +23,7 @@ export class UndergroundHabitat extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U71',
         renderData: CardRenderer.builder((b) => {
-          b.excavate(1).production((pb) => pb.plants(1)).animals(1).asterix();
+          b.excavate(1).production((pb) => pb.plants(1)).resource(CardResource.ANIMAL).asterix();
         }),
         description: 'Excavate an underground resource. Increase your plant production 1 step. Add 1 animal on another card.',
       },

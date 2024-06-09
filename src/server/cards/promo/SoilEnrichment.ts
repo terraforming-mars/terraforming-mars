@@ -22,7 +22,7 @@ export class SoilEnrichment extends Card implements IProjectCard {
         description: 'Spend 1 microbe from ANY of your cards to gain 5 plants',
         cardNumber: 'X67',
         renderData: CardRenderer.builder((b) => {
-          b.minus().microbes(1).asterix().nbsp.plus().plants(5, {digit});
+          b.minus().resource(CardResource.MICROBE).asterix().nbsp.plus().plants(5, {digit});
         }),
       },
     });

@@ -27,7 +27,7 @@ export class FreyjaBiodomes extends Card implements IProjectCard {
       metadata: {
         cardNumber: '227',
         renderData: CardRenderer.builder((b) => {
-          b.microbes(2, {secondaryTag: Tag.VENUS}).or().animals(2, {secondaryTag: Tag.VENUS}).br;
+          b.resource(CardResource.MICROBE, {amount: 2, secondaryTag: Tag.VENUS}).or().resource(CardResource.ANIMAL, {amount: 2, secondaryTag: Tag.VENUS}).br;
           b.production((pb) => pb.minus().energy(1).nbsp.plus().megacredits(2));
         }),
         description: {

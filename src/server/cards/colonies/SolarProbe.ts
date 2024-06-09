@@ -4,7 +4,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {digit, played} from '../Options';
+import {digit} from '../Options';
 
 export class SolarProbe extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +22,7 @@ export class SolarProbe extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'C37',
         renderData: CardRenderer.builder((b) => {
-          b.cards(1).slash().science(3, {digit, played});
+          b.cards(1).slash().tag(Tag.SCIENCE, {amount: 3, digit});
         }),
         description: 'Draw 1 card for every 3 science tags you have, including this.',
       },

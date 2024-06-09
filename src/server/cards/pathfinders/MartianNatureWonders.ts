@@ -26,8 +26,8 @@ export class MartianNatureWonders extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf10',
         renderData: CardRenderer.builder((b) => {
-          b.resourceCube().asterix().br;
-          b.data({amount: 2}).asterix();
+          b.resource(CardResource.RESOURCE_CUBE).asterix().br;
+          b.resource(CardResource.DATA, 2).asterix();
         }),
         description: 'Place a neutral player cube on a non-reserved space. No tile can be placed on that space this game. ' +
         'Gather any bonus on that space, but no bonuses from adjacent spaces. Add 2 data to ANY card.',

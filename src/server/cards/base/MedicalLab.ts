@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 
 export class MedicalLab extends Card implements IProjectCard {
   constructor() {
@@ -23,7 +22,7 @@ export class MedicalLab extends Card implements IProjectCard {
         cardNumber: '207',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.megacredits(1).slash().building(2, {played});
+            pb.megacredits(1).slash().tag(Tag.BUILDING, 2);
           });
         }),
         description: 'Increase your M€ production 1 step for every 2 building tags you have, including this.',

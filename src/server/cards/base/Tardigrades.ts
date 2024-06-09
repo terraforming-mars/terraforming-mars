@@ -25,7 +25,7 @@ export class Tardigrades extends ActionCard implements IProjectCard {
         cardNumber: '049',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 microbe to this card.', (eb) => {
-            eb.empty().startAction.microbes(1);
+            eb.empty().startAction.resource(CardResource.MICROBE);
           }).br;
           b.vpText('1 VP per 4 Microbes on this card.');
         }),

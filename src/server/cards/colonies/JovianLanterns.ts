@@ -29,9 +29,9 @@ export class JovianLanterns extends Card implements IProjectCard {
         cardNumber: 'C18',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 titanium to add 2 floaters here.', (eb) => {
-            eb.titanium(1).startAction.floaters(2);
+            eb.titanium(1).startAction.resource(CardResource.FLOATER, 2);
           }).br;
-          b.tr(1).floaters(2).asterix().br;
+          b.tr(1).resource(CardResource.FLOATER, 2).asterix().br;
           b.vpText('1 VP per 2 floaters here.');
         }),
         description: {

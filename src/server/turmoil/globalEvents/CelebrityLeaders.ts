@@ -8,10 +8,10 @@ import {Turmoil} from '../Turmoil';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {played} from '../../cards/Options';
+import {Tag} from '../../../common/cards/Tag';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(2).slash().event({played}).influence({size: Size.SMALL});
+  b.megacredits(2).slash().tag(Tag.EVENT).influence({size: Size.SMALL});
 });
 
 export class CelebrityLeaders extends GlobalEvent implements IGlobalEvent {

@@ -30,7 +30,7 @@ export class Livestock extends ActionCard implements IProjectCard {
         cardNumber: '184',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 animal to this card.', (eb) => {
-            eb.empty().startAction.animals(1);
+            eb.empty().startAction.resource(CardResource.ANIMAL);
           }).br;
           b.production((pb) => {
             pb.minus().plants(1).nbsp.plus().megacredits(2);

@@ -7,7 +7,6 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Phase} from '../../../common/Phase';
-import {played} from '../Options';
 
 export class Decomposers extends Card implements IProjectCard {
   constructor() {
@@ -26,10 +25,10 @@ export class Decomposers extends Card implements IProjectCard {
         description: 'Requires 3% oxygen.',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play an animal, plant, or microbe tag, including this, add a microbe to this card.', (be) => {
-            be.animals(1, {played}).slash();
-            be.plants(1, {played}).slash();
-            be.microbes(1, {played});
-            be.startEffect.microbes(1);
+            be.tag(Tag.ANIMAL).slash();
+            be.tag(Tag.PLANT).slash();
+            be.tag(Tag.MICROBE);
+            be.startEffect.resource(CardResource.MICROBE);
           }).br;
           b.vpText('1 VP per 3 microbes on this card.');
         }),

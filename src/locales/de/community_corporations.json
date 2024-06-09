@@ -3,24 +3,32 @@
     "You start with 1 plant production, 1 M€ production, 1 heat production and 40 M€.": "Du beginnst mit einer Pflanzen-Produktion von 1, M€-Produktion von 1, Wärme-Produktion von 1 und 40 M€.",
     "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "EFFEKT: Am Ende des Spieles erhältst du -2 / 0 / 1 / 2 SP pro Symboltyp für jeweils 0 / 1-2 / 3-4 / 5+ Symbole.",
 
-    "Project Workshop": "Projekt-Werkstatt",
-    "You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.": "Du beginnst mit 39 M€, 1 Stahl und 1 Titan. As deine erste Aktion, ziehe eine blaue Karte.",
-    "Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.": "AKTION: Drehe und entferne eine gespielte blaue Karte, um sämtliche SP auf ihr in TW umzuwandeln und ziehe 2 Karten oder zahle 3 M€, um eine blaue Karte zu ziehen.",
+    "Athena": "Athena",
+    "You start with 62 M€. As your first action, place 2 hazard tiles adjacent to no other tiles.": "Du beginnst mit 62 M€. Als erste Aktion platziere 2 Gefahrenplättchen, die an keine anderen Plättchen angrenzen dürfen.",
+    "Effect: You do not lose production when placing adjacent to hazard tiles.": "EFFEKT: Du verlierst keine Produktion, wenn du angrenzend an Gefahrenplättchen platzierst.",
+
+    "Curosity II": "Curosity II",
+    "You start with 40 M€ and 2 steel production.": "Du beginnst mit 40 M€ und einer Stahl-Produktion von 2.",
+    "Effect: When you place a tile on an area that has a RESOURCE placement bonus, or on top of another tile, you may pay 2 M€ to draw a card.": "EFFEKT: Wenn du ein Plättchen auf ein Gebiet platzierst, das einen RESSOURCEN-Platzierungsbonus hat, oder auf ein anderes Plättchen, darfst du 2 M€ zahlen, um eine Karte zu ziehen.",
+
+    "Eris": "Eris",
+    "You start with 46 M€. As your first action, draw an Ares card.": "Du beginnst mit 46 M€. Als erste Aktion ziehst du eine Ares-Karte.",
+    "Action: Place a new hazard tile adjacent to NO OTHER TILE, OR remove a hazard tile to gain 1 TR.": "AKTION: Platziere ein neues Gefahrenplättchen neben KEIN anderes Plättchen ODER entferne ein Gefahrenplättchen und erhalte 1 TW.",
 
     "Incite": "Incite",
     "You start with 32 M€. As your first action, place two delegates in one party.": "Du beginnst mit 32 M€. Als deine erste Aktion, platziere 2 Deligierte in eine Partei.",
     "Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.": "EFFEKT: Du hast +1 Einfluss. Wenn du einen Deligierten per Lobby-Aktion einbringst, zahle 2 M€ weniger.",
 
+    "Midas": "Midas",
+    "You start with 120 M€. Lower your TR 7 steps.": "Du beginnst mit 120 M€. Senke deine TW um 7.",
+    
     "Playwrights": "Dramaturgen",
     "You start with 38 M€ and 1 energy production.": "Du beginnst mit 38 M€ und einer Energie-Produktion von 1.",
     "Action: Replay a played event from any player (INCLUDING events that place special tiles) by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.": "AKTION: Spiele ein gespieltes Ereignis eines beliebigen Spielers noch einmal (inklusive Ereignisse, die Spezialplättchen legen), indem du die Kosten NUR in M€ zahlst (Abzüge und Rabatte gelten), dann ENTFERNE SIE AUS DEM SPIEL.",
 
-    "Midas": "Midas",
-    "You start with 120 M€. Lower your TR 7 steps.": "Du beginnst mit 120 M€. Senke deine TW um 7.",
-
-    "Curosity II": "Curosity II",
-    "You start with 40 M€ and 2 steel production.": "Du beginnst mit 40 M€ und einer Stahl-Produktion von 2.",
-    "Effect: When you place a tile on an area that has a RESOURCE placement bonus, or on top of another tile, you may pay 2 M€ to draw a card.": "EFFEKT: Wenn du ein Plättchen auf ein Gebiet platzierst, das einen RESSOURCEN-Platzierungsbonus hat, oder auf ein anderes Plättchen, darfst du 2 M€ zahlen, um eine Karte zu ziehen.",
+    "Project Workshop": "Projekt-Werkstatt",
+    "You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.": "Du beginnst mit 39 M€, 1 Stahl und 1 Titan. As deine erste Aktion, ziehe eine blaue Karte.",
+    "Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.": "AKTION: Drehe und entferne eine gespielte blaue Karte, um sämtliche SP auf ihr in TW umzuwandeln und ziehe 2 Karten oder zahle 3 M€, um eine blaue Karte zu ziehen.",
 
     "Junk Ventures": "Schrott-Ventures",
     "You start with 43 M€. As your first action, discard the top 3 cards of the deck.": "Du beginnst mit 43 M€. Als erste Aktion legst du die obersten 3 Karten des Stapels ab.",

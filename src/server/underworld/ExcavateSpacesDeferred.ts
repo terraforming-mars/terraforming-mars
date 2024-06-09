@@ -1,40 +1,29 @@
 import {IPlayer} from '../IPlayer';
-import {DeferredAction} from '../deferredActions/DeferredAction';
 import {Priority} from '../deferredActions/Priority';
+import {RunNTimes} from '../deferredActions/RunNTimes';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 
-export class ExcavateSpacesDeferred extends DeferredAction {
-  private nth: number = 1;
+export class ExcavateSpacesDeferred extends RunNTimes<void> {
   constructor(
     player: IPlayer,
-    public count: number,
+    count: number,
     private ignorePlacementRestrictions: boolean = false,
   ) {
-    super(player, Priority.EXCAVATE_UNDERGROUND_RESOURCE);
+    super(player, count, Priority.EXCAVATE_UNDERGROUND_RESOURCE);
   }
 
-  private selectSpace(): void {
-    const prefix = 'Select space to excavate';
-    const title = prefix + (this.count > 1 ? ` (${this.nth} of ${this.count})` : '');
+  protected run() {
+    const title = 'Select space to excavate' + this.titleSuffix();
     this.player.defer(() => {
       return new SelectSpace(title,
         UnderworldExpansion.excavatableSpaces(this.player, this.ignorePlacementRestrictions))
         .andThen((space) => {
           UnderworldExpansion.excavate(this.player, space);
-          this.nth++;
-          if (this.nth <= this.count) {
-            this.selectSpace();
-          }
+          this.next();
           return undefined;
         });
     });
-  }
-
-  public execute(): undefined {
-    if (this.count > 0) {
-      this.selectSpace();
-    }
     return undefined;
   }
 }

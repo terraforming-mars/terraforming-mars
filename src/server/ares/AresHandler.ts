@@ -142,7 +142,12 @@ export class AresHandler {
     return hazardSeverity(space.tile?.tileType) !== HazardSeverity.NONE;
   }
 
-  private static computeAdjacencyCosts(game: IGame, space: Space, subjectToHazardAdjacency: boolean): AdjacencyCost {
+  private static computeAdjacencyCosts(player: IPlayer, space: Space, subjectToHazardAdjacency: boolean): AdjacencyCost {
+    if (player.isCorporation(CardName.ATHENA)) {
+      subjectToHazardAdjacency = false;
+    }
+
+    const game = player.game;
     // Summing up production cost isn't really the way to do it, because each tile could
     // reduce different production costs. Oh well.
     let megaCreditCost = 0;
@@ -179,7 +184,7 @@ export class AresHandler {
     if (player.game.phase === Phase.SOLAR) {
       return {megacredits: 0, production: 0};
     }
-    const cost = AresHandler.computeAdjacencyCosts(player.game, space, subjectToHazardAdjacency);
+    const cost = AresHandler.computeAdjacencyCosts(player, space, subjectToHazardAdjacency);
 
     // Make this more sophisticated, a player can pay for different adjacencies
     // with different production units, and, a severe hazard can't split payments.

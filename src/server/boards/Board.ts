@@ -7,7 +7,7 @@ import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {CardName} from '../../common/cards/CardName';
 import {AresHandler} from '../ares/AresHandler';
 import {Units} from '../../common/Units';
-import {HazardSeverity, hazardSeverity} from '../../common/AresTileType';
+import {HazardSeverity, hazardSeverity, isHazardTileType} from '../../common/AresTileType';
 import {TRSource} from '../../common/cards/TRSource';
 import {sum} from '../../common/utils/utils';
 
@@ -287,6 +287,10 @@ export abstract class Board {
 
   public static spaceOwnedBy(space: Space, player: IPlayer): boolean {
     return Board.ownedBy(player)(space);
+  }
+
+  public getHazards(): ReadonlyArray<Space> {
+    return this.spaces.filter((space) => space.tile && isHazardTileType(space.tile.tileType));
   }
 
   public serialize(): SerializedBoard {

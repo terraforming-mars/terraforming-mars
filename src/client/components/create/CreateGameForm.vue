@@ -480,6 +480,7 @@
                   v-bind:turmoil="turmoil"
                   v-bind:pathfinders="pathfindersExpansion"
                   v-bind:communityCardsOption="communityCardsOption"
+                  v-bind:ares="aresExtension"
               ></ColoniesFilter>
             </div>
 

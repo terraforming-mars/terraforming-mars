@@ -13,8 +13,7 @@ export enum ColonyName {
 
     // Community
     // If you add a community colony, update
-    // GameSetup.includesCommunityColonies
-    // ColonyDescription
+    // ColonyDealer.includesCommunityColonies
     IAPETUS = 'Iapetus',
     MERCURY = 'Mercury',
     HYGIEA = 'Hygiea',
@@ -22,9 +21,11 @@ export enum ColonyName {
     VENUS = 'Venus',
     LEAVITT = 'Leavitt',
     PALLAS = 'Pallas',
+    DEIMOS = 'Deimos',
 
     // Pathfinders
     LEAVITT_II = 'Leavitt II',
     IAPETUS_II = 'Iapetus II',
 
+    // WHEN ADDING A NEW COLONY, ADD IT TO AllColonies.ts
 }

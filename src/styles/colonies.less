@@ -395,6 +395,37 @@
     &:extend(.Leavitt-title);
 }
 
+.Deimos-title {
+    text-transform: uppercase;
+    background: linear-gradient(to right,rgb(141, 47, 3), transparent);
+}
+
+.Deimos-background {
+    background-image: url("./assets/colonies-planets/deimos.jpg");
+    background-size: 170px;
+    background-position: top -14px right -10px;
+    box-shadow: inset 0 0 4px 4px rgb(180, 71, 8), 0 0 2px 1px black;
+}
+
+.deimos-colony-bonus {
+    display: inline-block;
+}
+
+.deimos-colony-bonus-text {
+    position: relative;
+    top: -3px;
+    left: -3px;
+}
+
+.hazard-tile {
+  background-image: url("./assets/tiles/hazard.png");
+  background-size: 42px 42px;
+  height: 42px;
+  width: 42px;
+  filter: contrast(1.25);
+  margin-top: 3px;
+}
+
 input[type="radio"]:checked + .colonies.filterDiv {
     box-shadow: inset 0 0 4px 4px #c97e23, 0 0 2px 1px black;
 }

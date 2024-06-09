@@ -43,6 +43,9 @@
   <div v-else-if="metadata.buildType === ColonyBenefit.PLACE_OCEAN_TILE">
     <div class="tile ocean-tile ocean-tile-colony"></div>
   </div>
+  <div v-else-if="metadata.buildType === ColonyBenefit.PLACE_HAZARD_TILE">
+    <div class="tile hazard-tile"></div>
+  </div>
 </template>
 <script lang="ts">
 

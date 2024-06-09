@@ -356,7 +356,7 @@ describe('Hazard tests', () => {
     addOcean(player);
 
     let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
-    expect(tiles.get(TileType.EROSION_MILD)).has.lengthOf(0);
+    expect(tiles.get(TileType.EROSION_MILD)).is.undefined;
 
     addOcean(player);
 
@@ -373,14 +373,14 @@ describe('Hazard tests', () => {
 
     let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     expect(tiles.get(TileType.DUST_STORM_MILD)).has.lengthOf(3);
-    expect(tiles.get(TileType.DUST_STORM_SEVERE)).has.lengthOf(0);
+    expect(tiles.get(TileType.DUST_STORM_SEVERE)).is.undefined;
     const prior = player.getTerraformRating();
 
     addOcean(player);
 
     tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
-    expect(tiles.get(TileType.DUST_STORM_MILD)).has.lengthOf(0);
-    expect(tiles.get(TileType.DUST_STORM_SEVERE)).has.lengthOf(0);
+    expect(tiles.get(TileType.DUST_STORM_MILD)).is.undefined;
+    expect(tiles.get(TileType.DUST_STORM_SEVERE)).is.undefined;
     expect(player.getTerraformRating()).eq(prior + 2); // One for the ocean, once for the dust storm event.
   });
 
@@ -393,7 +393,7 @@ describe('Hazard tests', () => {
 
     let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     expect(tiles.get(TileType.DUST_STORM_MILD)).has.lengthOf(3);
-    expect(tiles.get(TileType.DUST_STORM_SEVERE)).has.lengthOf(0);
+    expect(tiles.get(TileType.DUST_STORM_SEVERE)).is.undefined;
 
     // The key two lines
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
@@ -405,7 +405,7 @@ describe('Hazard tests', () => {
 
     tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     expect(tiles.get(TileType.DUST_STORM_MILD)).has.lengthOf(1);
-    expect(tiles.get(TileType.DUST_STORM_SEVERE)).has.lengthOf(0);
+    expect(tiles.get(TileType.DUST_STORM_SEVERE)).is.undefined;
     expect(player.getTerraformRating()).eq(priorTr + 2); // One for the ocean, once for the dust storm event.
   });
 
@@ -416,12 +416,12 @@ describe('Hazard tests', () => {
 
     let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     expect(tiles.get(TileType.DUST_STORM_MILD)).has.lengthOf(3);
-    expect(tiles.get(TileType.DUST_STORM_SEVERE)).has.lengthOf(0);
+    expect(tiles.get(TileType.DUST_STORM_SEVERE)).is.undefined;
 
     game.increaseOxygenLevel(player, 1);
 
     tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
-    expect(tiles.get(TileType.DUST_STORM_MILD)).has.lengthOf(0);
+    expect(tiles.get(TileType.DUST_STORM_MILD)).is.undefined;
     expect(tiles.get(TileType.DUST_STORM_SEVERE)).has.lengthOf(3);
   });
 
@@ -432,14 +432,14 @@ describe('Hazard tests', () => {
 
     let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     expect(tiles.get(TileType.DUST_STORM_MILD)).has.lengthOf(3);
-    expect(tiles.get(TileType.DUST_STORM_SEVERE)).has.lengthOf(0);
+    expect(tiles.get(TileType.DUST_STORM_SEVERE)).is.undefined;
     const protectedTile = tiles.get(TileType.DUST_STORM_MILD)![0];
     protectedTile.tile!.protectedHazard = true;
 
     game.increaseOxygenLevel(player, 1);
 
     tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
-    expect(tiles.get(TileType.DUST_STORM_MILD)).has.lengthOf(0);
+    expect(tiles.get(TileType.DUST_STORM_MILD)).is.undefined;
     expect(tiles.get(TileType.DUST_STORM_SEVERE)).has.lengthOf(3);
     expect(protectedTile.tile!.protectedHazard).is.true;
   });
@@ -454,12 +454,12 @@ describe('Hazard tests', () => {
 
     let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     expect(tiles.get(TileType.EROSION_MILD)).has.lengthOf(2);
-    expect(tiles.get(TileType.EROSION_SEVERE)).has.lengthOf(0);
+    expect(tiles.get(TileType.EROSION_SEVERE)).is.undefined;
 
     game.increaseTemperature(player, 1);
 
     tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
-    expect(tiles.get(TileType.EROSION_MILD)).has.lengthOf(0);
+    expect(tiles.get(TileType.EROSION_MILD)).is.undefined;
     expect(tiles.get(TileType.EROSION_SEVERE)).has.lengthOf(2);
   });
 
@@ -471,18 +471,18 @@ describe('Hazard tests', () => {
     addOcean(player);
 
     let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
-    expect(tiles.get(TileType.EROSION_MILD)).has.lengthOf(0);
-    expect(tiles.get(TileType.EROSION_SEVERE)).has.lengthOf(0);
+    expect(tiles.get(TileType.EROSION_MILD)).is.undefined;
+    expect(tiles.get(TileType.EROSION_SEVERE)).is.undefined;
 
     game.increaseTemperature(player, 1);
 
-    expect(tiles.get(TileType.EROSION_MILD)).has.lengthOf(0);
-    expect(tiles.get(TileType.EROSION_SEVERE)).has.lengthOf(0);
+    expect(tiles.get(TileType.EROSION_MILD)).is.undefined;
+    expect(tiles.get(TileType.EROSION_SEVERE)).is.undefined;
 
     addOcean(player);
 
     tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
-    expect(tiles.get(TileType.EROSION_MILD)).has.lengthOf(0);
+    expect(tiles.get(TileType.EROSION_MILD)).is.undefined;
     expect(tiles.get(TileType.EROSION_SEVERE)).has.lengthOf(2);
   });
 });

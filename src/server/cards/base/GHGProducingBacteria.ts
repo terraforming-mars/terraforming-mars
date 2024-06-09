@@ -39,11 +39,11 @@ export class GHGProducingBacteria extends ActionCard {
         cardNumber: '034',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 microbe to this card.', (eb) => {
-            eb.empty().startAction.microbes(1);
+            eb.empty().startAction.resource(CardResource.MICROBE);
           }).br;
           b.or().br;
           b.action('Remove 2 microbes to raise temperature 1 step.', (eb) => {
-            eb.microbes(2).startAction.temperature(1);
+            eb.resource(CardResource.MICROBE, 2).startAction.temperature(1);
           });
         }),
       },

@@ -3,7 +3,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {RoboticWorkforceBase} from '../base/RoboticWorkforceBase';
-import {played} from '../Options';
 import {Size} from '../../../common/cards/render/Size';
 import {IPlayer} from '../../IPlayer';
 import {ICard} from '../ICard';
@@ -24,8 +23,8 @@ export class CyberiaSystems extends RoboticWorkforceBase {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.steel(1));
           b.text('Copy', Size.SMALL, true)
-            .production((pb) => pb.building(1, {played}))
-            .production((pb) => pb.building(1, {played}))
+            .production((pb) => pb.tag(Tag.BUILDING))
+            .production((pb) => pb.tag(Tag.BUILDING))
             .br;
         }),
         description: 'Raise your steel production 1 step. Copy the production boxes of 2 of your other cards with building tags.',

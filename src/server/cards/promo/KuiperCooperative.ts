@@ -5,7 +5,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {IActionCard} from '../ICard';
-import {played} from '../Options';
 import {Size} from '../../../common/cards/render/Size';
 
 export class KuiperCooperative extends CorporationCard implements IActionCard {
@@ -26,10 +25,10 @@ export class KuiperCooperative extends CorporationCard implements IActionCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(33).production((pb) => pb.titanium(1)).br;
           b.action('Add 1 asteroid here for every space tag you have.', (ab) => {
-            ab.empty().startAction.asteroids(1).slash().space({played});
+            ab.empty().startAction.resource(CardResource.ASTEROID).slash().tag(Tag.SPACE);
           }).br;
           b.effect('When you use the AQUIFER or ASTEROID standard projects, you can spend asteroids on card as 1M€ each.', (eb) => {
-            eb.plate('Standard Project', {size: Size.SMALL}).asterix().startEffect.asteroids(1).equals().megacredits(1);
+            eb.plate('Standard Project', {size: Size.SMALL}).asterix().startEffect.resource(CardResource.ASTEROID).equals().megacredits(1);
           });
         }),
       },

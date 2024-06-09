@@ -9,10 +9,9 @@ import {Turmoil} from '../Turmoil';
 
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {played} from '../../cards/Options';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.titanium(1).slash().jovian({played}).influence({size: Size.SMALL});
+  b.titanium(1).slash().tag(Tag.JOVIAN).influence({size: Size.SMALL});
 });
 
 export class AsteroidMining extends GlobalEvent implements IGlobalEvent {

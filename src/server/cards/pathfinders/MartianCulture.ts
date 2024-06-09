@@ -25,7 +25,7 @@ export class MartianCulture extends ActionCard implements IProjectCard {
       metadata: {
         cardNumber: 'Pf35',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 data to ANY card.', (eb) => eb.empty().startAction.data({amount: 1}).asterix());
+          b.action('Add 1 data to ANY card.', (eb) => eb.empty().startAction.resource(CardResource.DATA).asterix());
         }),
         description: 'Requires any 2 Mars tags in play.  1 VP for every 2 data here.',
       },

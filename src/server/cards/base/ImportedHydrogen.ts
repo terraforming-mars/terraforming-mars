@@ -31,8 +31,8 @@ export class ImportedHydrogen extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.plants(3, {digit});
           b.or();
-          b.microbes(3, {digit}).asterix().or();
-          b.animals(2, {digit}).asterix().br;
+          b.resource(CardResource.MICROBE, {amount: 3, digit}).asterix().or();
+          b.resource(CardResource.ANIMAL, {amount: 2, digit}).asterix().br;
           b.oceans(1);
         }),
         description: 'Gain 3 plants, or add 3 microbes or 2 animals to ANOTHER card. Place an ocean tile.',

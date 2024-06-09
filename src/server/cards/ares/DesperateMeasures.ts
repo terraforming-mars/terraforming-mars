@@ -8,6 +8,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../../common/TileType';
 import {AresHandler} from '../../ares/AresHandler';
 import {CardRenderer} from '../render/CardRenderer';
+import {CardResource} from '../../../common/CardResource';
 
 export class DesperateMeasures extends Card implements IProjectCard {
   constructor() {
@@ -21,7 +22,7 @@ export class DesperateMeasures extends Card implements IProjectCard {
         cardNumber: 'A04',
         description: 'Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.',
         renderData: CardRenderer.builder((b) => {
-          b.resourceCube().asterix().br;
+          b.resource(CardResource.RESOURCE_CUBE).asterix().br;
           b.temperature(1).slash().oxygen(1);
         }),
       },

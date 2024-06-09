@@ -4,7 +4,7 @@ import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {all, played} from '../Options';
+import {all} from '../Options';
 import {IProjectCard} from '../IProjectCard';
 
 export class SolarLogistics extends Card implements IProjectCard {
@@ -25,10 +25,10 @@ export class SolarLogistics extends Card implements IProjectCard {
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play an Earth tag, you pay 2 M€ less.',
-            (eb) => eb.earth(1, {played}).startEffect.megacredits(-2));
+            (eb) => eb.tag(Tag.EARTH).startEffect.megacredits(-2));
           b.br;
           b.effect('When any player plays a space event, draw a card.',
-            (eb) => eb.space({played, all}).event({played, all}).startEffect.cards(1));
+            (eb) => eb.tag(Tag.SPACE, {all}).tag(Tag.EVENT, {all}).startEffect.cards(1));
           b.br;
           b.titanium(2);
         }),

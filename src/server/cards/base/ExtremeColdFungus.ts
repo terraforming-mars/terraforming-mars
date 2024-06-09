@@ -32,7 +32,7 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
           }).br;
           b.or().br;
           b.action('Add 2 microbes to ANOTHER card.', (eb) => {
-            eb.empty().startAction.microbes(2).asterix();
+            eb.empty().startAction.resource(CardResource.MICROBE, 2).asterix();
           });
         }),
       },

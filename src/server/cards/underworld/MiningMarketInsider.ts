@@ -27,9 +27,9 @@ export class MiningMarketInsider extends ActionCard implements IProjectCard {
         cardNumber: 'U46',
         renderData: CardRenderer.builder((b) => {
           b.effect('After any player identifies 1 or more underground spaces (at once), add 1 data resource to this card.',
-            (ab) => ab.identify(1, {all}).startEffect.data()).br;
+            (ab) => ab.identify(1, {all}).startEffect.resource(CardResource.DATA)).br;
           b.action('Spend 4 data resources on this card to draw a card.',
-            (ab) => ab.data({amount: 4, digit}).startAction.cards(1));
+            (ab) => ab.resource(CardResource.DATA, {amount: 4, digit}).startAction.cards(1));
         }),
       },
     });

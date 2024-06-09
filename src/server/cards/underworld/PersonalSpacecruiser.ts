@@ -26,8 +26,8 @@ export class PersonalSpacecruiser extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.effect('During the production phase, if there is at least 1 fighter resource on this card, ' +
             'gain 2 M€ for each corruption resource you have.',
-          (eb) => eb.fighter().startEffect.megacredits(2).slash().corruption().asterix).br;
-          b.fighter(1).corruption(1).br;
+          (eb) => eb.resource(CardResource.FIGHTER).startEffect.megacredits(2).slash().corruption().asterix).br;
+          b.resource(CardResource.FIGHTER).corruption(1).br;
         }),
         description: 'Put 1 fighter resource on this card. Gain 1 corruption.',
       },

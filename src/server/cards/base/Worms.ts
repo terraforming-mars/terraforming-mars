@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 
 export class Worms extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +21,7 @@ export class Worms extends Card implements IProjectCard {
       metadata: {
         cardNumber: '129',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.plants(1).slash().microbes(2, {played}));
+          b.production((pb) => pb.plants(1).slash().tag(Tag.MICROBE, 2));
         }),
         description: 'Requires 4% oxygen. Increase your plant production 1 step for every 2 microbe tags you have, including this.',
       },

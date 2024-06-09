@@ -25,7 +25,7 @@ export class EconomicEspionage extends ActionCard implements IProjectCard {
         cardNumber: 'Pf37',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 2 M€ to Add 1 data to ANY card.', (eb) => {
-            eb.megacredits(2).startAction.data({amount: 1}).asterix();
+            eb.megacredits(2).startAction.resource(CardResource.DATA).asterix();
           }).br;
         }),
         description: '1VP for every 3 data here.',

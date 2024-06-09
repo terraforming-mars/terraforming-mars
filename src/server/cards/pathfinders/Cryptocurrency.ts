@@ -24,10 +24,10 @@ export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
         cardNumber: 'Pf51',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 energy to add 1 data to this card.', (eb) => {
-            eb.energy(1).startAction.data({amount: 1}).or();
+            eb.energy(1).startAction.resource(CardResource.DATA).or();
           }).br;
           b.action('Remove all data from this card to gain 3M€ per data removed.', (eb) => {
-            eb.text('x').data({amount: 1}).startAction.text('x').megacredits(3);
+            eb.text('x').resource(CardResource.DATA).startAction.text('x').megacredits(3);
           });
         }),
       },

@@ -25,7 +25,7 @@ export class EcologicalSurvey extends SurveyCard {
         renderData: CardRenderer.builder((b) => {
           b.effect('When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain.', (eb) => {
             eb.emptyTile().startEffect;
-            eb.plus().plants(1).animals(1).microbes(1);
+            eb.plus().plants(1).resource(CardResource.ANIMAL).resource(CardResource.MICROBE);
           });
         }),
       },

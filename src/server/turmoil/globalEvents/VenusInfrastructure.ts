@@ -8,10 +8,9 @@ import {Turmoil} from '../Turmoil';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {played} from '../../cards/Options';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(2).slash().venus(1, {played}).influence({size: Size.SMALL});
+  b.megacredits(2).slash().tag(Tag.VENUS).influence({size: Size.SMALL});
 });
 
 export class VenusInfrastructure extends GlobalEvent implements IGlobalEvent {

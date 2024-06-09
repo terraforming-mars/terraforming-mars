@@ -33,7 +33,7 @@ export class LargeConvoy extends Card implements IProjectCard {
         cardNumber: '143',
         renderData: CardRenderer.builder((b) => {
           b.oceans(1).cards(2).br;
-          b.plants(5, {digit}).or(Size.MEDIUM).animals(4, {digit}).asterix();
+          b.plants(5, {digit}).or(Size.MEDIUM).resource(CardResource.ANIMAL, {amount: 4, digit}).asterix();
         }),
         description: 'Place an ocean tile and draw 2 cards. Gain 5 plants or add 4 animals to ANOTHER card.',
       },

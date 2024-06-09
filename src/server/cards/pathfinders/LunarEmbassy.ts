@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {SpaceName} from '../../SpaceName';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 
 export class LunarEmbassy extends Card implements IProjectCard {
   constructor() {
@@ -26,7 +25,7 @@ export class LunarEmbassy extends Card implements IProjectCard {
         cardNumber: 'Pf16',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(3))
-            .production((pb) => pb.plants(1).slash().earth(2, {played}))
+            .production((pb) => pb.plants(1).slash().tag(Tag.EARTH, 2))
             .br
             .cards(1).city().asterix().br;
         }),

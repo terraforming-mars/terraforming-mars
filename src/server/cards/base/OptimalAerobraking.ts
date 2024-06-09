@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 import {Resource} from '../../../common/Resource';
 
 export class OptimalAerobraking extends Card implements IProjectCard {
@@ -19,7 +18,7 @@ export class OptimalAerobraking extends Card implements IProjectCard {
       metadata: {
         cardNumber: '031',
         renderData: CardRenderer.builder((b) => b.effect('When you play a space event, you gain 3 M€ and 3 heat.', (be) => {
-          be.space({played}).event({played}).startEffect.megacredits(3).heat(3);
+          be.tag(Tag.SPACE).tag(Tag.EVENT).startEffect.megacredits(3).heat(3);
         })),
       },
     });

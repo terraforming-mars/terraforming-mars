@@ -8,10 +8,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {played} from '../../cards/Options';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(2).slash().space({played}).influence({size: Size.SMALL});
+  b.megacredits(2).slash().tag(Tag.SPACE).influence({size: Size.SMALL});
 });
 
 export class InterplanetaryTrade extends GlobalEvent implements IGlobalEvent {

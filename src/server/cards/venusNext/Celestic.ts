@@ -32,7 +32,7 @@ export class Celestic extends ActiveCorporationCard {
           b.megacredits(42).nbsp.cards(2, {secondaryTag: AltSecondaryTag.FLOATER});
           b.corpBox('action', (ce) => {
             ce.action('Add a floater to ANY card. 1 VP per 3 floaters on this card.', (eb) => {
-              eb.empty().startAction.floaters(1).asterix();
+              eb.empty().startAction.resource(CardResource.FLOATER).asterix();
             });
             ce.vSpace(); // to offset the description to the top a bit so it can be readable
           });

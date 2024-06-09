@@ -2,7 +2,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {played} from '../Options';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
@@ -15,7 +14,7 @@ export class Xavier extends CeoCard {
       metadata: {
         cardNumber: 'L24',
         renderData: CardRenderer.builder((b) => {
-          b.opgArrow().text('GAIN').wild(2, {played}).asterix();
+          b.opgArrow().text('GAIN').tag(Tag.WILD, 2).asterix();
           b.br;
           b.plainText('Once per game, gain 2 wild tags for THIS GENERATION.');
           b.br.br;

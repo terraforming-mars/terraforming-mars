@@ -25,7 +25,7 @@ export class VenusianInsects extends ActionCard implements IActionCard {
         cardNumber: '260',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 microbe to this card.', (eb)=> {
-            eb.empty().startAction.microbes(1);
+            eb.empty().startAction.resource(CardResource.MICROBE);
           }).br;
           b.vpText('1 VP for every 2nd Microbe on this card.');
         }),

@@ -2,7 +2,6 @@ import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {played} from '../Options';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {CardResource} from '../../../common/CardResource';
 import {Space} from '../../boards/Space';
@@ -23,12 +22,12 @@ export class SoylentSeedlingSystems extends CorporationCard {
       metadata: {
         cardNumber: 'PfC8',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(38).seed().seed().br;
+          b.megacredits(38).resource(CardResource.SEED, 2).br;
           b.effect('When you place a greenery tile, add 1 seed resource to this card.', (eb) => {
-            eb.greenery().startEffect.seed();
+            eb.greenery().startEffect.resource(CardResource.SEED);
           }).br;
           b.effect('When paying for a plant card, or the STANDARD GREENERY PROJECT, seeds here may be used as 5 M€ each.', (eb) => {
-            eb.plants(1, {played}).slash().greenery().startEffect.seed().equals().megacredits(5);
+            eb.tag(Tag.PLANT).slash().greenery().startEffect.resource(CardResource.SEED).equals().megacredits(5);
           }).br;
         }),
         description: 'You start with 38M€ and 2 seeds on this card.',

@@ -8,6 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../../common/TileType';
 import {message} from '../../logs/MessageBuilder';
+import {CardResource} from '../../../common/CardResource';
 
 export class ReySkywalker extends Card implements IProjectCard {
   constructor() {
@@ -28,7 +29,7 @@ export class ReySkywalker extends Card implements IProjectCard {
         cardNumber: 'SW09',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(4)).nbsp;
-          b.emptyTile().resourceCube().asterix();
+          b.emptyTile().resource(CardResource.RESOURCE_CUBE).asterix();
         }),
         description: 'Raise your M€ production 4 steps. Place a bronze cube on an empty unreserved space on Mars. No tile may be placed on that space for the rest of the game.',
       },

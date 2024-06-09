@@ -4,7 +4,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
 import {ActionCard} from '../ActionCard';
-import {played} from '../Options';
 
 export class BatteryFactory extends ActionCard implements IProjectCard {
   constructor() {
@@ -23,7 +22,7 @@ export class BatteryFactory extends ActionCard implements IProjectCard {
         cardNumber: 'U75',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 energy to gain 1 M€ for each power tag you have.',
-            (ab) => ab.energy(1).startAction.megacredits(1).slash().energy(1, {played}));
+            (ab) => ab.energy(1).startAction.megacredits(1).slash().tag(Tag.POWER));
         }),
       },
     });

@@ -3,7 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {all, played} from '../Options';
+import {all} from '../Options';
 import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
 import {MoonExpansion} from '../../moon/MoonExpansion';
@@ -16,7 +16,7 @@ export class Neil extends CeoCard {
       metadata: {
         cardNumber: 'L34',
         renderData: CardRenderer.builder((b) => {
-          b.moon(1, {played, all}).colon().megacredits(1);
+          b.tag(Tag.MOON, {all}).colon().megacredits(1);
           b.br.br;
           b.opgArrow().production((pb) => pb.megacredits(1, {text: '?'})).asterix();
         }),

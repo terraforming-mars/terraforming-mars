@@ -5,7 +5,7 @@ import {CorporationCard} from './CorporationCard';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {all, played} from '../Options';
+import {all} from '../Options';
 import {ICard} from '../ICard';
 
 export class SaturnSystems extends CorporationCard {
@@ -28,7 +28,7 @@ export class SaturnSystems extends CorporationCard {
           b.production((pb) => pb.titanium(1)).nbsp.megacredits(42);
           b.corpBox('effect', (ce) => {
             ce.effect('Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.', (eb) => {
-              eb.jovian({played, all}).startEffect.production((pb) => pb.megacredits(1));
+              eb.tag(Tag.JOVIAN, {all}).startEffect.production((pb) => pb.megacredits(1));
             });
           });
         }),

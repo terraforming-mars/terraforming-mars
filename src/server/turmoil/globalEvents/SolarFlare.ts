@@ -8,10 +8,9 @@ import {Turmoil} from '../Turmoil';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {played} from '../../cards/Options';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().megacredits(3).slash().space({played}).influence({size: Size.SMALL});
+  b.minus().megacredits(3).slash().tag(Tag.SPACE).influence({size: Size.SMALL});
 });
 
 export class SolarFlare extends GlobalEvent implements IGlobalEvent {

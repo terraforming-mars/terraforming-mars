@@ -10,7 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(2).slash().mars(1, {played: true}).influence({size: Size.SMALL});
+  b.megacredits(2).slash().tag(Tag.MARS).influence({size: Size.SMALL});
 });
 
 export class BalancedDevelopment extends GlobalEvent implements IGlobalEvent {

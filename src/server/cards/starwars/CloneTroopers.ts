@@ -30,7 +30,7 @@ export class CloneTroopers extends Card implements IActionCard, IProjectCard {
       metadata: {
         cardNumber: 'SW02',
         renderData: CardRenderer.builder((b) => {
-          b.arrow(Size.SMALL).cloneTrooper().or().cloneTrooper().arrow(Size.SMALL).text('STEAL', Size.SMALL).wild(1, {all});
+          b.arrow(Size.SMALL).resource(CardResource.CLONE_TROOPER).or().resource(CardResource.CLONE_TROOPER).arrow(Size.SMALL).text('STEAL', Size.SMALL).wild(1, {all});
           b.br;
           b.text('(Action: Add one Clone Trooper to this card OR remove one Clone Trooper from this card to steal one standard resource from any player.)', Size.TINY, false, false);
         }),

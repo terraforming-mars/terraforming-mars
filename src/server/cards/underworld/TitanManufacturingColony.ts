@@ -4,7 +4,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
 import {ActionCard} from '../ActionCard';
-import {played} from '../Options';
 import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 
@@ -26,9 +25,9 @@ export class TitanManufacturingColony extends ActionCard implements IProjectCard
         cardNumber: 'U44',
         renderData: CardRenderer.builder((b) => {
           b.effect('Whenever you play a Jovian tag, (including this one), add 1 tool resource on this card.',
-            (ab) => ab.jovian({played}).startEffect.tool()).br;
+            (ab) => ab.tag(Tag.JOVIAN).startEffect.resource(CardResource.TOOL)).br;
           b.action('Spend 1 tool resource on this card to excavate an underground resource.',
-            (ab) => ab.tool(1).startAction.excavate(1));
+            (ab) => ab.resource(CardResource.TOOL).startAction.excavate(1));
         }),
       },
     });

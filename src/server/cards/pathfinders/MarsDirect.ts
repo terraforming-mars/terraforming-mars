@@ -2,7 +2,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {IProjectCard} from '../IProjectCard';
-import {played} from '../Options';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 
@@ -23,7 +22,7 @@ export class MarsDirect extends CorporationCard {
           b.megacredits(52).br;
           b.corpBox('effect', (ce) => {
             ce.effect('When you play a Mars tag, you pay 1 M€ less for each Mars tag you have.', (eb) => {
-              eb.mars(1, {played}).startEffect.megacredits(1).slash().mars(1, {played});
+              eb.tag(Tag.MARS).startEffect.megacredits(1).slash().tag(Tag.MARS);
             });
           });
         }),

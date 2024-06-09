@@ -17,9 +17,9 @@ export class SolBank extends CorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(40).br;
           b.effect('Whenever you spend M€ (or steel or titanium) add 1 data to this card.', (eb) =>
-            eb.minus().megacredits(1).slash().steel(1).slash().titanium(1).startEffect.data());
+            eb.minus().megacredits(1).slash().steel(1).slash().titanium(1).startEffect.resource(CardResource.DATA));
           b.br;
-          b.effect('During the production phase convert each data from this card into 1M€ each.', (eb) => eb.data().asterix().startEffect.megacredits(1));
+          b.effect('During the production phase convert each data from this card into 1M€ each.', (eb) => eb.resource(CardResource.DATA).asterix().startEffect.megacredits(1));
         }),
       },
     });

@@ -3,7 +3,7 @@ import {PlayerInput} from '../../PlayerInput';
 import {IPlayer} from '../../IPlayer';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
-import {played, all} from '../Options';
+import {all} from '../Options';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
 import {sum} from '../../../common/utils/utils';
@@ -17,7 +17,7 @@ export class Xu extends CeoCard {
       metadata: {
         cardNumber: 'L37',
         renderData: CardRenderer.builder((b) => {
-          b.opgArrow().venus(1, {played, all}).colon().megacredits(2).megacredits(8).asterix();
+          b.opgArrow().tag(Tag.VENUS, {all}).colon().megacredits(2).megacredits(8).asterix();
           b.br.br;
         }),
         description: 'Once per game, gain 2 M€ for each Venus tag in play. Gain an additional 8 M€ if you Have the most Venus tags in play.',

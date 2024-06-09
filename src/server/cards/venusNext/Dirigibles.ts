@@ -5,7 +5,6 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
-import {played} from '../Options';
 
 export class Dirigibles extends ActionCard implements IActionCard {
   constructor() {
@@ -24,10 +23,10 @@ export class Dirigibles extends ActionCard implements IActionCard {
         cardNumber: '222',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 floater to ANY card', (eb) => {
-            eb.empty().startAction.floaters(1).asterix();
+            eb.empty().startAction.resource(CardResource.FLOATER).asterix();
           }).br;
           b.effect('When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.', (eb) => {
-            eb.venus(1, {played}).startEffect.floaters(1).equals().megacredits(3);
+            eb.tag(Tag.VENUS).startEffect.resource(CardResource.FLOATER).equals().megacredits(3);
           });
         }),
       },

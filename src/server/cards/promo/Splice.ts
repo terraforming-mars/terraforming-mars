@@ -9,7 +9,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Resource} from '../../../common/Resource';
-import {all, played} from '../Options';
+import {all} from '../Options';
 import {message} from '../../logs/MessageBuilder';
 import {ICard} from '../ICard';
 
@@ -33,12 +33,12 @@ export class Splice extends CorporationCard {
           b.corpBox('effect', (ce) => {
             ce.vSpace(Size.LARGE);
             ce.effect(undefined, (eb) => {
-              eb.microbes(1, {played, all}).startEffect;
-              eb.megacredits(2, {all}).or().microbes(1, {all}).asterix();
+              eb.tag(Tag.MICROBE, {all}).startEffect;
+              eb.megacredits(2, {all}).or().resource(CardResource.MICROBE, {all}).asterix();
             });
             ce.vSpace();
             ce.effect('when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.', (eb) => {
-              eb.microbes(1, {played, all}).startEffect;
+              eb.tag(Tag.MICROBE, {all}).startEffect;
               eb.megacredits(2);
             });
           });

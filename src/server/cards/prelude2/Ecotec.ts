@@ -2,7 +2,6 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {played} from '../Options';
 import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
 import {CardResource} from '../../../common/CardResource';
@@ -28,7 +27,7 @@ export class Ecotec extends CorporationCard {
           b.br.br.br;
           b.megacredits(42).production((pb) => pb.plants(1)).br;
           b.effect('When you play a microbe, plant, or animal tag, gain 1 plant or add a microbe to ANY card.',
-            (eb) => eb.microbes(1, {played}).plants(1, {played}).animals(1, {played}).startEffect.plants(1).slash().microbes(1).asterix());
+            (eb) => eb.tag(Tag.MICROBE).tag(Tag.PLANT).tag(Tag.ANIMAL).startEffect.plants(1).slash().resource(CardResource.MICROBE).asterix());
         }),
         description: 'You start with 42 M€. Increase your plant production 1 step.',
       },

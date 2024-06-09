@@ -25,7 +25,7 @@ export class ControlledBloom extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'PFTmp',
         renderData: CardRenderer.builder((b) => {
-          b.microbes(3).asterix().br;
+          b.resource(CardResource.MICROBE, 3).asterix().br;
           b.plants(3);
         }),
         description: 'Requires 3 oceans. Add 3 microbes to ANY card. Gain 3 plants.',

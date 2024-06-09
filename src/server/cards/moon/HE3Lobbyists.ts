@@ -21,7 +21,7 @@ export class HE3Lobbyists extends Card implements IProjectCard {
         description: 'Increase your M€ production 1 step for each Moon tag you have (including this).',
         cardNumber: 'M50',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.megacredits(1)).slash().moon();
+          b.production((pb) => pb.megacredits(1)).slash().tag(Tag.MOON);
         }),
       },
     });

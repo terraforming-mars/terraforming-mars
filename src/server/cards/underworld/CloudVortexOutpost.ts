@@ -23,7 +23,7 @@ export class CloudVortexOutpost extends PreludeCard {
           b.venus(2).br;
           b.plainText('Raise Venus 2 steps').br;
           b.effect('After you play your FIRST project card that can hold floaters, put 3 floaters on it.',
-            (eb) => eb.cards(1, {secondaryTag: AltSecondaryTag.FLOATER}).asterix().startEffect.floaters(3));
+            (eb) => eb.cards(1, {secondaryTag: AltSecondaryTag.FLOATER}).asterix().startEffect.resource(CardResource.FLOATER, 3));
         }),
       },
     });

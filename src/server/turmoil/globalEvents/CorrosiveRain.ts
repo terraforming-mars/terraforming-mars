@@ -6,9 +6,10 @@ import {IGame} from '../../IGame';
 import {Turmoil} from '../Turmoil';
 import {CorrosiveRainDeferredAction} from '../../deferredActions/CorrosiveRainDeferredAction';
 import {CardRenderer} from '../../cards/render/CardRenderer';
+import {CardResource} from '../../../common/CardResource';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().floaters(2).or().megacredits(-10).nbsp.nbsp.cards(1).slash().influence();
+  b.minus().resource(CardResource.FLOATER, 2).or().megacredits(-10).nbsp.nbsp.cards(1).slash().influence();
 });
 
 export class CorrosiveRain extends GlobalEvent implements IGlobalEvent {

@@ -28,7 +28,7 @@ export class BreedingFarms extends ActionCard implements IProjectCard {
         cardNumber: 'Pf01',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 plant to add 1 animal to ANY card.', (eb) => {
-            eb.plants(1).startAction.animals(1);
+            eb.plants(1).startAction.resource(CardResource.ANIMAL);
           });
           b.br;
           b.temperature(1);

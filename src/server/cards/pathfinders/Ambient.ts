@@ -5,7 +5,7 @@ import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {digit, played} from '../Options';
+import {digit} from '../Options';
 import {ICard} from '../ICard';
 import {MAX_TEMPERATURE} from '../../../common/constants';
 import {Size} from '../../../common/cards/render/Size';
@@ -30,7 +30,7 @@ export class Ambient extends CorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(38).venus(2, {size: Size.SMALL}).br;
           b.effect('When you play a card with a Venus tag (including this) increase your heat production 1 step.', (eb) => {
-            eb.venus(1, {played}).startEffect.production((pb) => pb.heat(1));
+            eb.tag(Tag.VENUS).startEffect.production((pb) => pb.heat(1));
           }).br;
           b.action('When temperature is maxed, spend 8 heat gain 1 TR. ' +
             'You may repeat this action like a standard project.', (ab) => {

@@ -24,7 +24,7 @@ export class SymbioticFungus extends ActionCard implements IProjectCard {
         cardNumber: '133',
         renderData: CardRenderer.builder((b) => {
           b.action('Add a microbe to ANOTHER card.', (eb) => {
-            eb.empty().startAction.microbes(1).asterix();
+            eb.empty().startAction.resource(CardResource.MICROBE).asterix();
           });
         }),
         description: 'Requires -14 C° or warmer.',

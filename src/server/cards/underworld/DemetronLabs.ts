@@ -29,15 +29,15 @@ export class DemetronLabs extends CorporationCard implements IActionCard {
         cardNumber: 'UC02',
         description: 'You start with 45 M€ and 3 data on this card.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(45).data({amount: 3});
+          b.megacredits(45).resource(CardResource.DATA, 3);
           b.br;
           b.effect('After you identify 1 or more underground resources in a single action ' +
             'EXCEPT BY EXCAVATING, put 1 data on ANY card',
-          (eb) => eb.text('X').identify().asterix().startEffect.data().asterix());
+          (eb) => eb.text('X').identify().asterix().startEffect.resource(CardResource.DATA).asterix());
           b.br;
           b.action('Spend 3 data here and pick a space on Mars with no tile. ' +
             'Gain its placement bonus, and no adjacency bonuses.',
-          (ab) => ab.data({amount: 3, digit}).startAction.text('Placement Bonus').asterix());
+          (ab) => ab.resource(CardResource.DATA, {amount: 3, digit}).startAction.text('Placement Bonus').asterix());
         }),
       },
     });

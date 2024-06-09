@@ -27,7 +27,7 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.', (eb) => {
             eb.energy(2, {digit}).startAction.plants(2);
-            eb.or().animals(1).asterix();
+            eb.or().resource(CardResource.ANIMAL).asterix();
           });
         }),
       },

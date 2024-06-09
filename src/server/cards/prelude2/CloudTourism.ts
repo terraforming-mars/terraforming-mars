@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {ActionCard} from '../ActionCard';
 import {CardResource} from '../../../common/CardResource';
-import {played} from '../Options';
 import {Resource} from '../../../common/Resource';
 
 export class CloudTourism extends ActionCard {
@@ -27,10 +26,10 @@ export class CloudTourism extends ActionCard {
         description: 'Increase your M€ production 1 step for each pair of Earth and Venus tags you own. 1 VP for every 3rd floater on this card.',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 floater to this card.', (eb) => {
-            eb.empty().startAction.floaters(1);
+            eb.empty().startAction.resource(CardResource.FLOATER);
           }).br;
           b.production((pb) => {
-            pb.megacredits(1).slash().earth(1, {played}).venus(1, {played});
+            pb.megacredits(1).slash().tag(Tag.EARTH).tag(Tag.VENUS);
           });
         }),
       },

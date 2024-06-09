@@ -28,7 +28,7 @@ export class DesignedOrganisms extends Card implements IProjectCard {
         cardNumber: 'Pf23',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(2)).plants(3).br;
-          b.microbes(3).asterix().animals(1).asterix();
+          b.resource(CardResource.MICROBE, 3).asterix().resource(CardResource.ANIMAL).asterix();
         }),
         description: 'Requires 5 science tags. Increase your plant production 2 steps. Gain 3 plants. ' +
           'Add 3 microbes to ANY card. Add 1 animal to ANY card.',

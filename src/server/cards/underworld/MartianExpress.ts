@@ -23,9 +23,9 @@ export class MartianExpress extends Card implements IActionCard {
         cardNumber: 'U78',
         renderData: CardRenderer.builder((b) => {
           b.effect('This card can receive any resource that can be placed on ANY card. Resources placed here get converted to wares resources.',
-            (ab) => ab.wild(1).asterix().startEffect.ware(1)).br;
+            (ab) => ab.wild(1).asterix().startEffect.resource(CardResource.WARE)).br;
           b.action('Remove all wares from here and gain 1 M€ for each ware removed.',
-            (ab) => ab.text('x').ware(1).startAction.text('x').megacredits(1));
+            (ab) => ab.text('x').resource(CardResource.WARE).startAction.text('x').megacredits(1));
         }),
         description: 'Requires 1 city in play.',
       },

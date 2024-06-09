@@ -6,7 +6,7 @@ import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {digit, played} from '../Options';
+import {digit} from '../Options';
 
 export class NitrogenRichAsteroid extends Card implements IProjectCard {
   constructor() {
@@ -26,7 +26,7 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.plants(1).nbsp.or().br;
-            pb.plants(3, {played, digit}).colon().nbsp.plants(4, {digit});
+            pb.tag(Tag.PLANT, {amount: 3, digit}).colon().nbsp.plants(4, {digit});
           }).br;
           b.tr(2).temperature(1);
         }),

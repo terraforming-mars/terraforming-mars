@@ -2,7 +2,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 import {Card} from '../Card';
 
 export class TakondaCastle extends Card {
@@ -20,7 +19,7 @@ export class TakondaCastle extends Card {
       metadata: {
         cardNumber: 'SW07',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(1).slash().microbes(1, {played}).animals(1, {played});
+          b.megacredits(1).slash().tag(Tag.MICROBE).tag(Tag.ANIMAL);
         }),
         description: 'Gain 1 M€ for each of your microbe tags and animal tags.',
       },

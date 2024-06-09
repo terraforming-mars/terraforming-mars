@@ -6,7 +6,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {all, played} from '../Options';
+import {all, digit} from '../Options';
 import {Size} from '../../../common/cards/render/Size';
 import {ICard} from '../ICard';
 import {Priority} from '../../deferredActions/Priority';
@@ -28,10 +28,10 @@ export class CommunicationCenter extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf28',
         renderData: CardRenderer.builder((b) => {
-          b.event({all, played}).colon().data({amount: 1}).nbsp.data({amount: 3, digit: true}).colon().cards(1).br;
+          b.tag(Tag.EVENT, {all}).colon().resource(CardResource.DATA).nbsp.resource(CardResource.DATA, {amount: 3, digit}).colon().cards(1).br;
           b.text('(Effect: Whenever ANY PLAYER plays an event, add 1 data to this card.)', Size.TINY, false, false).br;
           b.text('(Effect: Remove 3 data to draw a card automatically.)', Size.TINY, false, false).br;
-          b.minus().production((pb) => pb.energy(1)).data({amount: 2});
+          b.minus().production((pb) => pb.energy(1)).resource(CardResource.DATA, 2);
         }),
         description: 'Decrease your energy production 1 step. Place 2 data on this card.',
       },

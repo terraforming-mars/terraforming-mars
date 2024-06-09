@@ -4,7 +4,6 @@ import {SpaceName} from '../../SpaceName';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {played} from '../Options';
 import {IProjectCard} from '../IProjectCard';
 
 export class LunaMetropolis extends Card implements IProjectCard {
@@ -24,7 +23,7 @@ export class LunaMetropolis extends Card implements IProjectCard {
       metadata: {
         cardNumber: '236',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.megacredits(1).slash().earth(1, {played})).br;
+          b.production((pb) => pb.megacredits(1).slash().tag(Tag.EARTH)).br;
           b.city().asterix();
         }),
         description: 'Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.',

@@ -5,7 +5,6 @@ import {IActionCard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
-import {played} from '../Options';
 
 export class PrideoftheEarthArkship extends ActionCard implements IActionCard {
   constructor() {
@@ -29,7 +28,7 @@ export class PrideoftheEarthArkship extends ActionCard implements IActionCard {
         cardNumber: 'M24',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 science resource here per every 5 science tags you have.', (eb) => {
-            eb.empty().startAction.science(1).slash().text('5').science(1, {played});
+            eb.empty().startAction.resource(CardResource.SCIENCE).slash().text('5').tag(Tag.SCIENCE);
           }).br;
           b.minus().titanium(2);
         }),

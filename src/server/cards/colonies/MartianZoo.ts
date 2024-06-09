@@ -7,7 +7,7 @@ import {CardResource} from '../../../common/CardResource';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
-import {all, played} from '../Options';
+import {all} from '../Options';
 
 export class MartianZoo extends Card implements IProjectCard {
   constructor() {
@@ -24,10 +24,10 @@ export class MartianZoo extends Card implements IProjectCard {
         cardNumber: 'C24',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play an Earth tag, place an animal here.', (eb) => {
-            eb.earth(1, {played}).startEffect.animals(1);
+            eb.tag(Tag.EARTH).startEffect.resource(CardResource.ANIMAL);
           }).br;
           b.action('Gain 1M€ per animal here.', (eb) => {
-            eb.empty().startAction.megacredits(1).slash().animals(1);
+            eb.empty().startAction.megacredits(1).slash().resource(CardResource.ANIMAL);
           });
         }),
         description: {

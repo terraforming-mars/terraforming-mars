@@ -27,7 +27,7 @@ export class FloatingHabs extends ActionCard implements IActionCard {
         cardNumber: '225',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 2 M€ to add 1 floater to ANY card', (eb) => {
-            eb.megacredits(2).startAction.floaters(1).asterix();
+            eb.megacredits(2).startAction.resource(CardResource.FLOATER).asterix();
           }).br;
           b.vpText('1 VP for every 2nd Floater on this card.');
         }),

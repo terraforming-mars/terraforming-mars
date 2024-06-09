@@ -27,9 +27,9 @@ export class Spire extends CorporationCard implements ICorporationCard {
               'then discard 3 cards from your hand.').br;
 
           b.effect('When you play a card with at least 2 tags. including this, add a science resource here.',
-            (eb) => eb.emptyTag(2).asterix().startEffect.science()).br;
+            (eb) => eb.emptyTag(2).asterix().startEffect.resource(CardResource.SCIENCE)).br;
           b.effect('When you use a standard project, science resources here may be spent as 2 M€ each.',
-            (eb) => eb.plate('Standard Project').startEffect.science().equals().megacredits(2)).br;
+            (eb) => eb.plate('Standard Project').startEffect.resource(CardResource.SCIENCE).equals().megacredits(2)).br;
         }),
       },
     });

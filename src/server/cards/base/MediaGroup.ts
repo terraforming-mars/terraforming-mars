@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 import {GainResources} from '../../deferredActions/GainResources';
 import {Resource} from '../../../common/Resource';
 
@@ -21,7 +20,7 @@ export class MediaGroup extends Card implements IProjectCard {
         cardNumber: '109',
         renderData: CardRenderer.builder((b) => {
           b.effect('After you play an event card, you gain 3 M€.', (eb) => {
-            eb.event({played}).startEffect.megacredits(3);
+            eb.tag(Tag.EVENT).startEffect.megacredits(3);
           });
         }),
       },

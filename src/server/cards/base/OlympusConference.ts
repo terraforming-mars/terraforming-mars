@@ -9,7 +9,6 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {Priority} from '../../deferredActions/Priority';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 
 export class OlympusConference extends Card implements IProjectCard {
   constructor() {
@@ -24,9 +23,9 @@ export class OlympusConference extends Card implements IProjectCard {
       metadata: {
         cardNumber: '185',
         renderData: CardRenderer.builder((b) => {
-          b.science(1, {played}).colon().science().br;
+          b.tag(Tag.SCIENCE).colon().resource(CardResource.SCIENCE).br;
           b.or().br;
-          b.minus().science().plus().cards(1);
+          b.minus().resource(CardResource.SCIENCE).plus().cards(1);
         }),
         description: 'When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.',
       },

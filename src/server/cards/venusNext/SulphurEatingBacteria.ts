@@ -24,11 +24,11 @@ export class SulphurEatingBacteria extends Card implements IActionCard {
         cardNumber: '251',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 microbe to this card.', (eb) => {
-            eb.empty().startAction.microbes(1);
+            eb.empty().startAction.resource(CardResource.MICROBE);
           }).br;
           b.or().br;
           b.action('Spend any number of microbes here to gain triple amount of M€.', (eb) => {
-            eb.text('x').microbes(1).startAction.megacredits(1, {text: '3x'});
+            eb.text('x').resource(CardResource.MICROBE).startAction.megacredits(1, {text: '3x'});
           });
         }),
         description: 'Requires Venus 6%',

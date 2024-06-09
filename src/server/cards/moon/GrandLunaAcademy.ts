@@ -4,7 +4,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {digit, played} from '../Options';
+import {digit} from '../Options';
 
 export class GrandLunaAcademy extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +22,7 @@ export class GrandLunaAcademy extends Card implements IProjectCard {
         description: 'Draw 1 card per 2 Moon tags you have, including this.',
         cardNumber: 'M83',
         renderData: CardRenderer.builder((b) => {
-          b.cards(1).slash().moon(2, {digit, played});
+          b.cards(1).slash().tag(Tag.MOON, {amount: 2, digit});
         }),
       },
     });

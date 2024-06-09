@@ -3,7 +3,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {played} from '../Options';
 import {IPlayer} from '../../IPlayer';
 
 export class MartianLumberCorp extends Card {
@@ -24,7 +23,7 @@ export class MartianLumberCorp extends Card {
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.effect('When playing a building tag, plants may be used as 3 M€ each.',
-            (eb) => eb.building(1, {played}).startEffect.plants(1).equals().megacredits(3)).br;
+            (eb) => eb.tag(Tag.BUILDING).startEffect.plants(1).equals().megacredits(3)).br;
           b.production((pb) => pb.plants(1)).br;
           b.plainText('(Requires that you have 2 greenery tiles. Increase plant production 1 step.)').br;
         }),

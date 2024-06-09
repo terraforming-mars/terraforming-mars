@@ -2,7 +2,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActiveCorporationCard} from '../corporation/CorporationCard';
-import {played} from '../Options';
 import {CardResource} from '../../../common/CardResource';
 import {IPlayer} from '../../IPlayer';
 import {IProjectCard} from '../IProjectCard';
@@ -29,7 +28,7 @@ export class HenkeiGenetics extends ActiveCorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(47).corruption(1).br;
           b.effect('After you play a microbe card that can hold microbes, add 2 microbes to it.', (eb) => {
-            eb.microbes(1, {played}).startEffect.microbes(2);
+            eb.tag(Tag.MICROBE).startEffect.resource(CardResource.MICROBE, 2);
           }).br;
           b.action('Pay 1 corruption to draw a card with a microbe tag.', (ab) => {
             ab.corruption(1).startAction.cards(1, {secondaryTag: Tag.MICROBE});

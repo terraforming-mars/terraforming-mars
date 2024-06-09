@@ -8,7 +8,6 @@ import {isPlanetaryTag, PlanetaryTag} from '../../pathfinders/PathfindersData';
 import {PathfindersExpansion, TRACKS} from '../../pathfinders/PathfindersExpansion';
 import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
-import {played} from '../Options';
 import {PathfindersData} from '../../pathfinders/PathfindersData';
 
 export class EconomicHelp extends Card implements IProjectCard {
@@ -26,11 +25,11 @@ export class EconomicHelp extends Card implements IProjectCard {
         cardNumber: 'Pf42',
         renderData: CardRenderer.builder((b) => {
           b.planetaryTrack().text('3').or().text('2')
-            .venus(1, {played}).or(Size.SMALL)
-            .earth(1, {played}).or(Size.SMALL).br;
-          b.mars(1, {played}).or(Size.SMALL)
-            .jovian({amount: 1, played}).or(Size.SMALL)
-            .moon(1, {played}).br;
+            .tag(Tag.VENUS).or(Size.SMALL)
+            .tag(Tag.EARTH).or(Size.SMALL).br;
+          b.tag(Tag.MARS).or(Size.SMALL)
+            .tag(Tag.JOVIAN).or(Size.SMALL)
+            .tag(Tag.MOON).br;
           b.production((pb) => pb.megacredits(1));
         }),
         description: 'Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. ' +

@@ -158,6 +158,12 @@
     <template v-else-if="title === CardName.KUIPER_COOPERATIVE">
       <div class="card-kuiper-logo">Kuiper<br/>Cooperative</div>
     </template>
+    <template v-else-if="title === CardName.ERIS">
+      <div class="card-eris-logo">Eris</div>
+    </template>
+    <template v-else-if="title === CardName.ATHENA">
+      <div class="card-athena-logo">Athena</div>
+    </template>
     <template v-else>
       <div :class="logoClass">{{capsTitle}}</div>
     </template>

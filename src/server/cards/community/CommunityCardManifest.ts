@@ -1,16 +1,17 @@
-import {CardName} from '../../../common/cards/CardName';
-import {ModuleManifest} from '../ModuleManifest';
-import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
-
 import {AerospaceMission} from './AerospaceMission';
 import {AgricolaInc} from './AgricolaInc';
+import {Athena} from './Athena';
 import {ByElection} from './ByElection';
+import {CardName} from '../../../common/cards/CardName';
 import {CuriosityII} from './CuriosityII';
+import {Eris} from './Eris';
 import {ExecutiveOrder} from './ExecutiveOrder';
+import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 import {Incite} from './Incite';
 import {JunkVentures} from './JunkVentures';
 import {LeadershipSummit} from './LeadershipSummit';
 import {Midas} from './Midas';
+import {ModuleManifest} from '../ModuleManifest';
 import {Playwrights} from './Playwrights';
 import {PoliticalUprising} from './PoliticalUprising';
 import {ProjectWorkshop} from './ProjectWorkshop';
@@ -31,6 +32,8 @@ export const COMMUNITY_CARD_MANIFEST = new ModuleManifest({
     [CardName.MIDAS]: {Factory: Midas},
     [CardName.UNITED_NATIONS_MISSION_ONE]: {Factory: UnitedNationsMissionOne},
     [CardName.JUNK_VENTURES]: {Factory: JunkVentures},
+    [CardName.ERIS]: {Factory: Eris, compatibility: 'ares'},
+    [CardName.ATHENA]: {Factory: Athena, compatibility: 'ares'},
   },
   preludeCards: {
     [CardName.RESEARCH_GRANT]: {Factory: ResearchGrant},

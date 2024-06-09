@@ -27,6 +27,9 @@ import {colonyMetadata, IColonyMetadata, IInputColonyMetadata} from '../../commo
 import {ColonyName} from '../../common/colonies/ColonyName';
 import {sum} from '../../common/utils/utils';
 import {message} from '../logs/MessageBuilder';
+import {PlaceHazardTile} from '../deferredActions/PlaceHazardTile';
+import {TileType} from '../../../src/common/TileType';
+import {ErodeSpacesDeferred} from '../underworld/ErodeSpacesDeferred';
 
 export enum ShouldIncreaseTrack { YES, NO, ASK }
 export abstract class Colony implements IColony {
@@ -102,9 +105,9 @@ export abstract class Colony implements IColony {
     * Before passing off the trade, this determines whether the track should advance prior to trading, and then
     * hands off the real work to `handleTrade`.
     *
-    * @param bonusTradeOffset an offset that allows a player to increase the colony tile track marker before trading.
-    * @param usesTradeFleet when false, the player can trade without an available trade fleet.
-    * @param decreaseTrackAfterTrade when false, the track does not decrease after trading.
+    * ../..param bonusTradeOffset an offset that allows a player to increase the colony tile track marker before trading.
+    * ../..param usesTradeFleet when false, the player can trade without an available trade fleet.
+    * ../..param decreaseTrackAfterTrade when false, the track does not decrease after trading.
     */
   public trade(player: IPlayer, tradeOptions: TradeOptions = {}, bonusTradeOffset = 0): void {
     const tradeOffset = player.colonies.tradeOffset + bonusTradeOffset;
@@ -266,6 +269,25 @@ export abstract class Colony implements IColony {
         const partyDelegateCount = sum(turmoil.parties.map((party) => party.delegates.get(player)));
         player.stock.add(Resource.MEGACREDITS, partyDelegateCount, {log: true});
       });
+      break;
+
+    case ColonyBenefit.PLACE_HAZARD_TILE:
+      const spaces = game.board.getAvailableSpacesOnLand(player)
+        .filter(((space) => space.tile === undefined))
+        .filter((space) => {
+          const adjacentSpaces = game.board.getAdjacentSpaces(space);
+          return adjacentSpaces.filter((space) => space.tile !== undefined).length === 0;
+        });
+
+      game.defer(new PlaceHazardTile(player, TileType.EROSION_MILD, {title: 'Select space next to no other tile for hazard', spaces}));
+      break;
+
+    case ColonyBenefit.ERODE_SPACES_ADJACENT_TO_HAZARDS:
+      game.defer(new ErodeSpacesDeferred(player, quantity));
+      break;
+
+    case ColonyBenefit.GAIN_MC_PER_HAZARD_TILE:
+      player.stock.megacredits += game.board.getHazards().length;
       break;
 
     case ColonyBenefit.GAIN_TR:

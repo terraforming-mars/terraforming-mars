@@ -15,7 +15,7 @@
               <a href="#" v-i18n v-on:click.prevent="invertSelection(module)">Invert</a>
             <label class="form-checkbox" v-for="colony in getColonies(module)" v-bind:key="colony">
                 <input type="checkbox" v-model="selectedColonies" :value="colony">
-                <i class="form-icon"></i><span v-i18n>{{ colony }} - ({{ description(colony) }})</span>
+                <i class="form-icon"></i><span v-i18n>{{ colony }} - ({{ COLONY_DESCRIPTIONS[colony] }})</span>
             </label>
         </div>
     </div>
@@ -53,6 +53,9 @@ export default Vue.extend({
     pathfinders: {
       type: Boolean,
     },
+    ares: {
+      type: Boolean,
+    },
   },
   data() {
     const officialColonies = [...OFFICIAL_COLONY_NAMES].sort();
@@ -82,9 +85,6 @@ export default Vue.extend({
           this.selectedColonies.push(colony);
         }
       }
-    },
-    description(colonyName: ColonyName): string {
-      return COLONY_DESCRIPTIONS.get(colonyName) ?? 'unknown';
     },
     getItemsByGroup(group: Group): Array<ColonyName> {
       switch (group) {
@@ -139,6 +139,11 @@ export default Vue.extend({
       return [];
     },
   },
+  computed: {
+    COLONY_DESCRIPTIONS(): typeof COLONY_DESCRIPTIONS {
+      return COLONY_DESCRIPTIONS;
+    },
+  },
   watch: {
     selectedColonies(value: Array<ColonyName>) {
       const colonyNames: Array<ColonyName> = [...value];
@@ -149,6 +154,7 @@ export default Vue.extend({
         this.selectedColonies = OFFICIAL_COLONY_NAMES.concat(COMMUNITY_COLONY_NAMES).slice();
         if (this.venusNext === false) this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.VENUS);
         if (this.turmoil === false) this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.PALLAS);
+        if (this.ares === false) this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.DEIMOS);
       } else {
         this.selectedColonies = OFFICIAL_COLONY_NAMES.slice();
       }
@@ -168,6 +174,15 @@ export default Vue.extend({
           this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.PALLAS);
         } else if (!this.selectedColonies.includes(ColonyName.PALLAS)) {
           this.selectedColonies.push(ColonyName.PALLAS);
+        }
+      }
+    },
+    ares(enabled) {
+      if (this.communityCardsOption && Array.isArray(this.selectedColonies)) {
+        if (enabled === false) {
+          this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.DEIMOS);
+        } else if (!this.selectedColonies.includes(ColonyName.DEIMOS)) {
+          this.selectedColonies.push(ColonyName.DEIMOS);
         }
       }
     },

@@ -20,6 +20,7 @@ import {Leavitt} from '../cards/community/Leavitt';
 import {Pallas} from '../cards/community/Pallas';
 import {GameModule} from '../../common/cards/GameModule';
 import {IapetusII} from '../cards/pathfinders/IapetusII';
+import {Deimos} from './Deimos';
 // import {LeavittII} from '../cards/pathfinders/LeavittII';
 
 export interface IColonyFactory<T> {
@@ -49,6 +50,7 @@ export const COMMUNITY_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
   {colonyName: ColonyName.VENUS, Factory: Venus},
   {colonyName: ColonyName.LEAVITT, Factory: Leavitt},
   {colonyName: ColonyName.PALLAS, Factory: Pallas},
+  {colonyName: ColonyName.DEIMOS, Factory: Deimos},
 ];
 
 export const PATHFINDERS_COLONIES_TILES: Array<IColonyFactory<Colony>> = [

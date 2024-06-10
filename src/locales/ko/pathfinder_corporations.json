@@ -1,7 +1,7 @@
 {
   "Adhai High Orbit Constructions": "",
-  "(Effect: Whenever you play a card with a space tag BUT NO PLANETARY TAG (including this) add 1 orbital on this card.)": "(지속 효과: 이 카드를 포함해서 행성 태그가 없는 우주 태그를 가진 카드를 추진할 때마다 orbital 자원 1개를 추가.)",
-  "(Effect: For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1M€ less.)": "(지속 효과: 이 카드의 orbitals 자원 2개마다, 이 카드를 포함해서 행성 태그가 없는 우주 태그를 가진 카드를 추진하거나 개척기지 일반 프로젝트를 추진하거나 무역사업 행동을 수행할 때마다 1 M€씩 할인.)",
+  "(Effect: Whenever you play a card with a space tag BUT NO PLANETARY TAG (including this) add 1 orbital on this card.)": "(지속 효과: 이 카드를 포함해서 행성 태그가 없는 우주 태그를 가진 카드를 추진할 때마다 궤도 자원 1개를 추가.)",
+  "(Effect: For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1M€ less.)": "(지속 효과: 이 카드의 궤도 자원 2개마다, 이 카드를 포함해서 행성 태그가 없는 우주 태그를 가진 카드를 추진하거나 개척기지 일반 프로젝트를 추진하거나 무역사업 행동을 수행할 때마다 1 M€씩 할인.)",
   "(You start with 43 M€.)": "(43 M€을 가지고 게임 시작.)",
 
   "Ambient": "",
@@ -40,7 +40,7 @@
   "(You start with 40 M€. When you reveal this card, select any remaining political program tile (you may use its effect as a passive effect of your corporation or as ruling party this generation).)": "(40 M€을 가지고 게임 시작. 이 카드를 공개할 때, 남아있는 아무 정책 타일을 선택. 자신은 이 기업의 지속 효과나 이번 세대의 집권당으로서 선택한 정당의 효과를 사용할 수 있음.)",
 
   "Mars Math": "",
-  "(Effect: At the beginning of the Research phase, you draw 5 cards to choose from, but do not buy additional cards.)": "(지속 효과: 새로운 세대가 시작할 때, 4장이 아닌 5장의 카드를 뽑아, 최대 4장까지 구매할 수 있음.)",
+  "(Effect: At the beginning of the Research phase, you draw 5 cards, but may STILL only buy 4 cards. If you are drafting, keep 2 cards for your first draft.)": "(지속 효과: 새로운 세대가 시작할 때, 4장이 아닌 5장의 카드를 뽑아, 최대 4장까지 구매할 수 있음. 드래프트 규칙 사용 시, 첫 번째 드래프트 때 1장이 아닌 2장을 골라야 함.)",
   "(Action: Take another two actions this turn.)": "(행동: 이번 차례에 2번의 행동을 추가로 수행.)",
   "(You start with 40 M€. As your first action, draw 2 cards)": "(게임 첫 행동으로서 카드 2장 획득. 40 M€을 가지고 게임 시작.)",
 

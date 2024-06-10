@@ -48,7 +48,7 @@
     "No party selected": "선택이 불가능한 정당",
     "Select action for World Government Terraforming": "세계정부 테라포밍 행동 선택",
     "Confirm": "확인",
-    "Increase temperature": "온도 상승",
+    "Increase temperature": "기온 상승",
     "Increase oxygen": "산소 농도 상승",
     "Increase Venus scale": "금성개척률 상승",
     "Increase": "상승",
@@ -210,7 +210,7 @@
     "${0} spent ${1} corruption": "${0} 플레이어는 corruption 자원 ${1}개 소비",
     "${0} spent 8 energy to increase oxygen 1 step.": "${0} 플레이어는 에너지 자원 8개를 소비해서 산소 농도 1단계 상승",
     "${0} spent 8 energy to increase Venus 1 step.": "${0} 플레이어는 에너지 자원 8개를 소비해서 금성개척률 1단계 상승",
-    "${0} decreased temperature 1 step": "${0} 플레이어는 온도를 1단계 낮춤",
+    "${0} decreased temperature 1 step": "${0} 플레이어는 기온을 1단계 낮춤",
     "${0} decreased oxygen level 1 step": "${0} 플레이어는 산소 농도를 1단계 낮춤",
     "${0} decreased Venus scale level 1 step": "${0} 플레이어는 금성개척률을 1단계 낮춤",
 
@@ -434,7 +434,7 @@
     "gain ${0} M€": "${0} M€ 획득",
 
     "raise the habitat rate": "월면 기지 등급 상승",
-    "raise temperature 1 step": "온도 1단계 상승",
+    "raise temperature 1 step": "기온 1단계 상승",
     "${0} increased ${1} colony track ${2} step(s)": "${0} 플레이어가 ${1} 위성 트랙을 ${2}단계 올림",
     "${0} decreased ${1} colony track 1 step": "${0} 플레이어가 ${1} 위성 트랙을 1단계 내림",
     "'${0} kept ${1} project cards": "${0} 플레이어가 프로젝트 카드 ${1}장 보관",

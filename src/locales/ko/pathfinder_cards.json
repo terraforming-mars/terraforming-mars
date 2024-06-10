@@ -159,7 +159,7 @@
   "(Requires 4 science tags.)": "(조건: 과학 태그 4개 이상.)",
 
   "Orbital Laboratories": "궤도상 실험실",
-  "(Increase your plant production by 2. Gain 1 plant.)": "(식물 생산력 2 증가. 식물 자원 1개 획득.)",
+  "(Increase your plant production 2 steps. Gain 1 plant.)": "(식물 생산력 2 증가. 식물 자원 1개 획득.)",
 
   "Oumuamua Type Object Survey": "오무아무아 혜성 조사작업",
   "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "카드를 앞면으로 2장 펼쳐, 첫 번째 카드가 과학 또는 미생물 태그를 가진 경우, 추진 조건을 무시하고 그 카드를 추진. 그렇지 않고 우주 태그라면, 에너지 생산력 3 증가. 이러한 태그가 3개 모두에도 없다면 두 번째 카드에도 동일하게 적용. 나머지 카드는 모두 손으로 가져옴.",
@@ -224,7 +224,7 @@
   "(Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.)": "(조건: 금성, 지구, 화성, 목성 태그 각 1개 이상.) (아무 카드에 데이터 자원 2개 추가.) (게임 종료 시, 이 카드에 놓인 데이터 자원 6개당 승점 1점.)",
 
   "Space Debris Cleaning Operation": "우주 잔해 청소 작업",
-  "(Requires 4 space tags. Gain 3 titanium. Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) Add 1 data to ANY card. Draw 1 card.)": "(조건: 우주 태그 4개 이상.) (티타늄 자원 3개 추가 아무 카드에 과학 자원이나 동물 자원이 아닌 아무 자원 1개 추가. 카드 1장 획득.)",
+  "(Requires any 4 space tags in play. Gain 3 titanium. Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) Add 1 data to ANY card. Draw 1 card.)": "(조건: 아무 우주 태그 4개 이상.) (티타늄 자원 3개 추가. 아무 카드에 과학 자원이나 동물 자원이 아닌 아무 자원 1개 추가. 카드 1장 획득.)",
 
   "Space Relay": "우주 릴레이",
   "(Effect: Whenever you play a card with a Jovian tag, including this, draw a card.)": "(지속 효과: 이 카드도 포함해서 목성 태그를 추진할 때마다 카드 1장 획득.)",

@@ -46,18 +46,6 @@ describe('CardRenderer', function() {
     expect(item.type).to.equal(CardRenderItemType.PLANTS);
     expect(item.amount).to.equal(-5);
   });
-  it('microbes: success', () => {
-    const renderer = CardRenderer.builder((b) => b.resource(CardResource.MICROBE, 2));
-    const item = renderer.rows[0][0] as CardRenderItem;
-    expect(item.type).to.equal(CardRenderItemType.MICROBES);
-    expect(item.amount).to.equal(2);
-  });
-  it('animals: success', () => {
-    const renderer = CardRenderer.builder((b) => b.resource(CardResource.ANIMAL, 2));
-    const item = renderer.rows[0][0] as CardRenderItem;
-    expect(item.type).to.equal(CardRenderItemType.ANIMALS);
-    expect(item.amount).to.equal(2);
-  });
   it('heat: success', () => {
     const renderer = CardRenderer.builder((b) => b.heat(2));
     const item = renderer.rows[0][0] as CardRenderItem;
@@ -131,52 +119,46 @@ describe('CardRenderer', function() {
     expect(item.type).to.equal(CardRenderItemType.CARDS);
     expect(item.amount).to.equal(3);
   });
-  it('floaters: success', () => {
-    const renderer = CardRenderer.builder((b) => b.resource(CardResource.FLOATER, 3));
-    const item = renderer.rows[0][0] as CardRenderItem;
-    expect(item.type).to.equal(CardRenderItemType.FLOATERS);
-    expect(item.amount).to.equal(3);
-  });
-  it('asteroids: success', () => {
-    const renderer = CardRenderer.builder((b) => b.resource(CardResource.ASTEROID));
-    const item = renderer.rows[0][0] as CardRenderItem;
-    expect(item.type).to.equal(CardRenderItemType.ASTEROIDS);
-    expect(item.amount).to.equal(-1);
-  });
   it('event: success', () => {
     const renderer = CardRenderer.builder((b) => b.tag(Tag.EVENT));
     const item = renderer.rows[0][0] as CardRenderItem;
-    expect(item.type).to.equal(CardRenderItemType.EVENT);
+    expect(item.type).to.equal(CardRenderItemType.TAG);
+    expect(item.tag).to.equal(Tag.EVENT);
     expect(item.amount).to.equal(-1);
   });
   it('space: success', () => {
     const renderer = CardRenderer.builder((b) => b.tag(Tag.SPACE));
     const item = renderer.rows[0][0] as CardRenderItem;
-    expect(item.type).to.equal(CardRenderItemType.SPACE);
+    expect(item.type).to.equal(CardRenderItemType.TAG);
+    expect(item.tag).to.equal(Tag.SPACE);
     expect(item.amount).to.equal(-1);
   });
   it('earth: success', () => {
     const renderer = CardRenderer.builder((b) => b.tag(Tag.EARTH));
     const item = renderer.rows[0][0] as CardRenderItem;
-    expect(item.type).to.equal(CardRenderItemType.EARTH);
+    expect(item.type).to.equal(CardRenderItemType.TAG);
+    expect(item.tag).to.equal(Tag.EARTH);
     expect(item.amount).to.equal(-1);
   });
   it('building: success', () => {
     const renderer = CardRenderer.builder((b) => b.tag(Tag.BUILDING, 2));
     const item = renderer.rows[0][0] as CardRenderItem;
-    expect(item.type).to.equal(CardRenderItemType.BUILDING);
+    expect(item.type).to.equal(CardRenderItemType.TAG);
+    expect(item.tag).to.equal(Tag.BUILDING);
     expect(item.amount).to.equal(2);
   });
   it('jovian: success', () => {
     const renderer = CardRenderer.builder((b) => b.tag(Tag.JOVIAN));
     const item = renderer.rows[0][0] as CardRenderItem;
-    expect(item.type).to.equal(CardRenderItemType.JOVIAN);
+    expect(item.type).to.equal(CardRenderItemType.TAG);
+    expect(item.tag).to.equal(Tag.JOVIAN);
     expect(item.amount).to.equal(-1);
   });
   it('science: success', () => {
     const renderer = CardRenderer.builder((b) => b.resource(CardResource.SCIENCE, 3));
     const item = renderer.rows[0][0] as CardRenderItem;
-    expect(item.type).to.equal(CardRenderItemType.SCIENCE);
+    expect(item.type).to.equal(CardRenderItemType.RESOURCE);
+    expect(item.resource).to.equal(CardResource.SCIENCE);
     expect(item.amount).to.equal(3);
   });
   it('trade: success', () => {
@@ -279,7 +261,8 @@ describe('CardRenderer', function() {
   it('preservation: success', () => {
     const renderer = CardRenderer.builder((b) => b.resource(CardResource.PRESERVATION));
     const item = renderer.rows[0][0] as CardRenderItem;
-    expect(item.type).to.equal(CardRenderItemType.PRESERVATION);
+    expect(item.type).to.equal(CardRenderItemType.RESOURCE);
+    expect(item.resource).to.equal(CardResource.PRESERVATION);
     expect(item.amount).to.equal(-1);
   });
   it('diverseTag: success', () => {
@@ -288,16 +271,11 @@ describe('CardRenderer', function() {
     expect(item.type).to.equal(CardRenderItemType.DIVERSE_TAG);
     expect(item.amount).to.equal(1);
   });
-  it('fighter: success', () => {
-    const renderer = CardRenderer.builder((b) => b.resource(CardResource.FIGHTER));
-    const item = renderer.rows[0][0] as CardRenderItem;
-    expect(item.type).to.equal(CardRenderItemType.FIGHTER);
-    expect(item.amount).to.equal(-1);
-  });
   it('camps: success', () => {
     const renderer = CardRenderer.builder((b) => b.resource(CardResource.CAMP));
     const item = renderer.rows[0][0] as CardRenderItem;
-    expect(item.type).to.equal(CardRenderItemType.CAMPS);
+    expect(item.type).to.equal(CardRenderItemType.RESOURCE);
+    expect(item.resource).to.equal(CardResource.CAMP);
     expect(item.amount).to.equal(-1);
   });
   it('selfReplicatingRobots: success', () => {
@@ -339,7 +317,8 @@ describe('CardRenderer', function() {
   it('disease: success', () => {
     const renderer = CardRenderer.builder((b) => b.resource(CardResource.DISEASE));
     const item = renderer.rows[0][0] as CardRenderItem;
-    expect(item.type).to.equal(CardRenderItemType.DISEASE);
+    expect(item.type).to.equal(CardRenderItemType.RESOURCE);
+    expect(item.resource).to.equal(CardResource.DISEASE);
     expect(item.amount).to.equal(-1);
   });
   it('multiplierWhite: success', () => {

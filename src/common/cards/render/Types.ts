@@ -5,6 +5,7 @@ import {CardComponent} from './CardComponent';
 import {CardRenderItemType} from './CardRenderItemType';
 import {CardRenderSymbolType} from './CardRenderSymbolType';
 import {Size} from './Size';
+import {CardResource} from '../../CardResource';
 
 export interface ICardRenderRoot extends CardComponent {
   readonly is: 'root';
@@ -86,8 +87,6 @@ export interface ICardRenderItem extends CardComponent {
   showDigit?: boolean;
   /** show the amount for the item in its container */
   amountInside?: boolean;
-  /** used to mark an item as 'played' e.g. event tags */
-  isPlayed?: boolean;
   /** used text instead of integers in some cases */
   text?: string;
   /** used inside MC typically */
@@ -112,6 +111,10 @@ export interface ICardRenderItem extends CardComponent {
   questionMark?: boolean;
   /** When true show the item in superscript */
   isSuperscript?: boolean;
+  /** Has a value when type is CardRenderItemType.RESOURCE. Renders a card resource */
+  resource?: CardResource;
+  /** Has a value when type is CardRenderItemType.TAG. Renders a tag */
+  tag?: Tag;
 }
 
 export function isICardRenderItem(item: ItemType): item is ICardRenderItem {

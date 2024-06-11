@@ -23,7 +23,7 @@ describe('floaterCards', function() {
         if (renderData === undefined) return;
 
         const string = JSON.stringify(renderData);
-        if (string.includes('floater')) {
+        if (string.toLowerCase().includes('floater')) {
           found.push(card.name);
         } else if (card.requirements?.some((req) => req.floaters !== undefined)) {
           found.push(card.name);

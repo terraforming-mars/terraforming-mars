@@ -114,16 +114,22 @@ export abstract class Card implements ICard {
         throw new Error(`${name} must have a cost property`);
       }
     }
+    let step = 0;
     try {
       // TODO(kberg): apply these changes in CardVictoryPoints.vue and remove this conditional altogether.
       Card.autopopulateMetadataVictoryPoints(external);
 
+      step = 1;
       validateBehavior(external.behavior, name);
+      step = 2;
       validateBehavior(external.firstAction, name);
+      step = 3;
       validateBehavior(external.action, name);
+      step = 4;
       Card.validateTilesBuilt(external);
+      step = 5;
     } catch (e) {
-      throw new Error(`Cannot validate ${name}: ${e}`);
+      throw new Error(`Cannot validate ${name} (${step}): ${e}`);
     }
 
     const translatedRequirements = asArray(external.requirements ?? []).map((req) => populateCount(req));
@@ -300,24 +306,14 @@ export abstract class Card implements ICard {
     let units: number | undefined = 0;
 
     switch (vps.item?.type) {
-    case CardRenderItemType.MICROBES:
-    case CardRenderItemType.ANIMALS:
-    case CardRenderItemType.FIGHTER:
-    case CardRenderItemType.FLOATERS:
-    case CardRenderItemType.ASTEROIDS:
-    case CardRenderItemType.PRESERVATION:
-    case CardRenderItemType.DATA_RESOURCE:
-    case CardRenderItemType.RESOURCE_CUBE:
-    case CardRenderItemType.SCIENCE:
-    case CardRenderItemType.CAMPS:
+    case CardRenderItemType.RESOURCE:
       units = this.resourceCount;
       break;
-
-    case CardRenderItemType.JOVIAN:
-      units = player?.tags.count(Tag.JOVIAN, 'raw');
-      break;
-    case CardRenderItemType.MOON:
-      units = player?.tags.count(Tag.MOON, 'raw');
+    case CardRenderItemType.TAG:
+      if (vps.item.tag === undefined) {
+        throw new Error('tag attribute missing');
+      }
+      units = player.tags.count(vps.item.tag, 'raw');
       break;
     }
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // Generates the files settings.json and translations.json, stored in src/genfiles
 
 require('dotenv').config();
@@ -46,7 +47,7 @@ function getBuildMetadata() /* {head: string, date: string} */ {
   // assumes SOURCE_VERSION is git hash
   if (process.env.SOURCE_VERSION) {
     return {
-      head: process.env.SOURCE_VERSION.substring(0, 7),
+      head: process.env.SOURCE_VERSION.substring(0, 7), // eslint-disable-line no-undef
       date: new Date().toUTCString().replace(/ \(.+\)/, ''),
     };
   }

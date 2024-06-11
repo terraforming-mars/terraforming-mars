@@ -251,77 +251,24 @@ abstract class Builder<T> {
 
   public diverseTag(amount: number = 1) {
     const item = new CardRenderItem(CardRenderItemType.DIVERSE_TAG, amount);
-    item.isPlayed = true;
     return this._appendToRow(item);
   }
 
   public tag(tag: Tag, options?: number | ItemOptions) {
-    const item: Record<Tag, CardRenderItemType> = {
-      [Tag.ANIMAL]: CardRenderItemType.ANIMALS,
-      [Tag.MICROBE]: CardRenderItemType.MICROBES,
-      [Tag.SCIENCE]: CardRenderItemType.SCIENCE,
-      [Tag.BUILDING]: CardRenderItemType.BUILDING,
-      [Tag.SPACE]: CardRenderItemType.SPACE,
-      [Tag.POWER]: CardRenderItemType.ENERGY,
-      [Tag.EARTH]: CardRenderItemType.EARTH,
-      [Tag.JOVIAN]: CardRenderItemType.JOVIAN,
-      [Tag.VENUS]: CardRenderItemType.VENUS,
-      [Tag.PLANT]: CardRenderItemType.PLANTS,
-      [Tag.CITY]: CardRenderItemType.CITY,
-      [Tag.MOON]: CardRenderItemType.MOON,
-      [Tag.MARS]: CardRenderItemType.MARS,
-      [Tag.WILD]: CardRenderItemType.WILD,
-      [Tag.EVENT]: CardRenderItemType.EVENT,
-      [Tag.CLONE]: CardRenderItemType.PLANTS,
-    };
-
-    let opts: ItemOptions;
-    if (typeof(options) === 'number') {
-      opts = {amount: options};
-    } else {
-      opts = {...options, played: true};
-    }
-    return this._appendToRow(new CardRenderItem(item[tag], opts.amount, opts));
+    const opts: ItemOptions = typeof(options) === 'number' ? {amount: options} : {...options};
+    opts.tag = tag;
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.TAG, opts.amount, opts));
   }
 
   public resource(resource: CardResource, options?: number | ItemOptions) {
-    const item: Record<CardResource, CardRenderItemType> = {
-      [CardResource.ANIMAL]: CardRenderItemType.ANIMALS,
-      [CardResource.MICROBE]: CardRenderItemType.MICROBES,
-      [CardResource.FIGHTER]: CardRenderItemType.FIGHTER,
-      [CardResource.SCIENCE]: CardRenderItemType.SCIENCE,
-      [CardResource.FLOATER]: CardRenderItemType.FLOATERS,
-      [CardResource.ASTEROID]: CardRenderItemType.ASTEROIDS,
-      [CardResource.PRESERVATION]: CardRenderItemType.PRESERVATION,
-      [CardResource.CAMP]: CardRenderItemType.CAMPS,
-      [CardResource.DISEASE]: CardRenderItemType.DISEASE,
-      [CardResource.RESOURCE_CUBE]: CardRenderItemType.RESOURCE_CUBE,
-      [CardResource.DATA]: CardRenderItemType.DATA_RESOURCE,
-      [CardResource.SYNDICATE_FLEET]: CardRenderItemType.SYNDICATE_FLEET,
-      [CardResource.VENUSIAN_HABITAT]: CardRenderItemType.VENUSIAN_HABITAT,
-      [CardResource.SPECIALIZED_ROBOT]: CardRenderItemType.SPECIALIZED_ROBOT,
-      [CardResource.SEED]: CardRenderItemType.SEED,
-      [CardResource.AGENDA]: CardRenderItemType.AGENDA,
-      [CardResource.ORBITAL]: CardRenderItemType.ORBITAL,
-      [CardResource.GRAPHENE]: CardRenderItemType.GRAPHENE,
-      [CardResource.HYDROELECTRIC_RESOURCE]: CardRenderItemType.HYDROELECTRIC_RESOURCE,
-      [CardResource.CLONE_TROOPER]: CardRenderItemType.CLONE_TROOPER,
-      [CardResource.TOOL]: CardRenderItemType.TOOL,
-      [CardResource.WARE]: CardRenderItemType.WARE,
-      [CardResource.SCOOP]: CardRenderItemType.SCOOP,
-      [CardResource.JOURNALISM]: CardRenderItemType.JOURNALISM,
-      [CardResource.ACTIVIST]: CardRenderItemType.ACTIVIST,
-      [CardResource.SUPPLY_CHAIN]: CardRenderItemType.SUPPLY_CHAIN,
-    };
-
     let opts: ItemOptions;
     if (typeof(options) === 'number') {
       opts = {amount: options};
     } else {
       opts = {...options};
     }
-
-    return this._appendToRow(new CardRenderItem(item[resource], -1, opts));
+    opts.resource = resource;
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.RESOURCE, -1, opts));
   }
 
   public selfReplicatingRobots() {
@@ -391,10 +338,6 @@ abstract class Builder<T> {
 
   public moonMiningRate(options?: ItemOptions): this {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_MINING_RATE, 1, options));
-  }
-
-  public syndicateFleet(amount: number = 1): this {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.SYNDICATE_FLEET, amount));
   }
 
   public planetaryTrack(): this {

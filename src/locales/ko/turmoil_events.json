@@ -46,7 +46,7 @@
   "Increase your M€ production 1 step for every special tile you own (max 5.) Gain 1 energy for every influence you have": "각자 보유한 특수 타일 수마다 메가크레딧 생산력 1 상승. 각자 영향력만큼 에너지 자원 획득.",
   "Pay 10M€, reduced by 1M€ per influence. Raise every planetary track 2 steps. Nobody gains the \"rising player\" bonus.": "각자 10M€ 제거하되 보유한 영양력만큼 덜 제거. 모든 행성계 트랙 2단계 상승. 아무도 \"올린 플레이어\" 보너스를 획득하지 않음.",
   "Lose 1 plant for each Earth tag you own (max 5) then reduced by influence.": "각자 보유한[지구 태그 수 (최대5) - 영향력] 1마다 식물 자원 제거.",
-  "Lower the temperature and oxygen 2 steps each. (-4C, -2% O2)": "온도와 산소 농도를 각각 2단계 하락. (온도 -4℃, 산소 농도 -2%)",
+  "Lower the temperature and oxygen 2 steps each. (-4C, -2% O2)": "기온과 산소 농도를 각각 2단계 하락. (기온 -4℃, 산소 농도 -2%)",
   "Pay 10M€. Add 2 data to EVERY data card. Add 1 data to any data card for each influence you have.": "각자 10M€ 제거. 모든 데이터 자원이 있는 카드에 데이터 자원 2개 추가. 데이터 자원이 있는 카드에 각자 영향력만큼 데이터 자원 추가.",
   
   "Seismic Predictions": "",

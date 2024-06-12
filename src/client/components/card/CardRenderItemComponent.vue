@@ -15,14 +15,6 @@ import {Size} from '@/common/cards/render/Size';
 import {Tag} from '@/common/cards/Tag';
 import {ICardRenderItem, isICardRenderItem} from '@/common/cards/render/Types';
 
-// microbe, animal and plant tag could be used both as a resource and played tag
-const RESOURCE_AND_TAG_TYPES = [
-  CardRenderItemType.ANIMALS,
-  CardRenderItemType.PLANTS,
-  CardRenderItemType.MICROBES,
-  CardRenderItemType.SCIENCE,
-  CardRenderItemType.CITY];
-
 export default Vue.extend({
   name: 'CardRenderItemComponent',
   props: {
@@ -45,8 +37,20 @@ export default Vue.extend({
       }
       return 'card-resource';
     },
+    resourceClass(): string {
+      if (this.item.resource === undefined) {
+        return '';
+      }
+      return 'card-resource-' + this.item.resource.toLowerCase().replaceAll(' ', '-');
+    },
+    tagClass(): string {
+      if (this.item.tag === undefined) {
+        return '';
+      }
+      return 'card-resource-' + this.item.tag.toLowerCase().replaceAll(' ', '-');
+    },
     componentClasses(): ReadonlyArray<string> {
-      let classes = [];
+      const classes: Array<string> = [];
       if (this.item.isSuperscript) {
         classes.push('card-superscript');
       }
@@ -96,38 +100,14 @@ export default Vue.extend({
       case CardRenderItemType.CARDS:
         classes.push(this.cardResource, 'card-card');
         break;
-      case CardRenderItemType.FLOATERS:
-        classes.push(this.cardResource, 'card-resource-floater');
-        break;
-      case CardRenderItemType.ASTEROIDS:
-        classes.push(this.cardResource, 'card-resource-asteroid');
-        break;
-      case CardRenderItemType.MICROBES:
-        classes.push(this.cardResource, 'card-resource-microbe');
-        break;
-      case CardRenderItemType.ANIMALS:
-        classes.push(this.cardResource, 'card-resource-animal');
-        break;
       case CardRenderItemType.WILD:
         classes.push(this.cardResource, 'card-resource-wild');
         if (this.item.cancelled === true) {
           classes.push('card-private-security');
         }
         break;
-      case CardRenderItemType.PRESERVATION:
-        classes.push(this.cardResource, 'card-resource-preservation');
-        break;
-      case CardRenderItemType.FIGHTER:
-        classes.push(this.cardResource, 'card-resource-fighter');
-        break;
-      case CardRenderItemType.CAMPS:
-        classes.push(this.cardResource, 'card-resource-camp');
-        break;
       case CardRenderItemType.DIVERSE_TAG:
         classes.push(this.cardResource, 'card-resource-diverse');
-        break;
-      case CardRenderItemType.SCIENCE:
-        classes.push(this.cardResource, 'card-resource-science');
         break;
       case CardRenderItemType.TRADE:
         classes.push('card-resource-trade');
@@ -149,9 +129,6 @@ export default Vue.extend({
       case CardRenderItemType.TRADE_FLEET:
         classes.push('card-resource-trade-fleet');
         break;
-      case CardRenderItemType.SYNDICATE_FLEET:
-        classes.push(this.cardResource, 'card-resource-syndicate-fleet');
-        break;
       case CardRenderItemType.CHAIRMAN:
         classes.push('card-chairman');
         break;
@@ -169,11 +146,6 @@ export default Vue.extend({
         break;
       case CardRenderItemType.EMPTY_TAG:
         classes.push('card-resource-tag', 'card-tag-empty');
-        break;
-      case CardRenderItemType.CITY:
-        if (this.item.isPlayed !== true) {
-          classes.push('card-tile', `city-tile--${this.item.size}`);
-        }
         break;
       case CardRenderItemType.GREENERY:
         classes.push('card-tile');
@@ -205,30 +177,6 @@ export default Vue.extend({
         break;
       case CardRenderItemType.COMMUNITY:
         classes.push(this.cardResource, 'card-resource-community');
-        break;
-      case CardRenderItemType.DISEASE:
-        classes.push(this.cardResource, 'card-resource-disease');
-        break;
-      case CardRenderItemType.DATA_RESOURCE:
-        classes.push(this.cardResource, 'card-resource-data');
-        break;
-      case CardRenderItemType.RESOURCE_CUBE:
-        classes.push(this.cardResource, 'card-resource-cube');
-        break;
-      case CardRenderItemType.VENUSIAN_HABITAT:
-        classes.push(this.cardResource, 'card-resource-venusian-habitat');
-        break;
-      case CardRenderItemType.SPECIALIZED_ROBOT:
-        classes.push(this.cardResource, 'card-resource-specialized-robot');
-        break;
-      case CardRenderItemType.SEED:
-        classes.push(this.cardResource, 'card-resource-seed');
-        break;
-      case CardRenderItemType.ORBITAL:
-        classes.push(this.cardResource, 'card-resource-orbital');
-        break;
-      case CardRenderItemType.AGENDA:
-        classes.push(this.cardResource, 'card-resource-agenda');
         break;
       case CardRenderItemType.MOON_HABITAT:
         if (this.item.secondaryTag === AltSecondaryTag.MOON_HABITAT_RATE) {
@@ -264,9 +212,6 @@ export default Vue.extend({
           classes.push('card-hazard-tile');
         }
         break;
-      case CardRenderItemType.CLONE_TROOPER:
-        classes.push(this.cardResource, 'card-resource-clone-trooper');
-        break;
       case CardRenderItemType.MOON_HABITAT_RATE:
         classes.push('card-colony-rate');
         if (this.item.size !== undefined) {
@@ -301,14 +246,8 @@ export default Vue.extend({
       case CardRenderItemType.CATHEDRAL:
         classes.push(this.cardResource, 'card-resource-cathedral');
         break;
-      case CardRenderItemType.GRAPHENE:
-        classes.push(this.cardResource, 'card-resource-graphene');
-        break;
       case CardRenderItemType.NOMADS:
         classes.push(this.cardResource, 'card-resource-nomads');
-        break;
-      case CardRenderItemType.HYDROELECTRIC_RESOURCE:
-        classes.push(this.cardResource, 'card-resource-hydroelectric-resource');
         break;
       case CardRenderItemType.IDENTIFY:
         classes.push('card-identification');
@@ -319,23 +258,11 @@ export default Vue.extend({
       case CardRenderItemType.CORRUPTION:
         classes.push(this.cardResource, 'card-resource-corruption');
         break;
-      case CardRenderItemType.TOOL:
-        classes.push(this.cardResource, 'card-resource-tool');
+      case CardRenderItemType.RESOURCE:
+        classes.push(this.cardResource, this.resourceClass);
         break;
-      case CardRenderItemType.WARE:
-        classes.push(this.cardResource, 'card-resource-ware');
-        break;
-      case CardRenderItemType.SCOOP:
-        classes.push(this.cardResource, 'card-resource-scoop');
-        break;
-      case CardRenderItemType.JOURNALISM:
-        classes.push(this.cardResource, 'card-resource-journalism');
-        break;
-      case CardRenderItemType.ACTIVIST:
-        classes.push(this.cardResource, 'card-resource-activist');
-        break;
-      case CardRenderItemType.SUPPLY_CHAIN:
-        classes.push(this.cardResource, 'card-resource-supply-chain');
+      case CardRenderItemType.TAG:
+        classes.push('card-tag', this.tagClass);
         break;
       case CardRenderItemType.NEUTRAL_DELEGATE:
         classes.push('card-neutral-delegate');
@@ -359,34 +286,6 @@ export default Vue.extend({
       }
 
       const type = this.item.type;
-      // round tags
-      if (this.item.isPlayed) {
-        // override resource behavior
-        if (RESOURCE_AND_TAG_TYPES.includes(type)) {
-          classes = classes.filter((c) => c !== this.cardResource);
-        }
-        classes.push('card-resource-tag');
-        if (type === CardRenderItemType.EVENT) {
-          classes.push('card-tag-event');
-        } else if (type === CardRenderItemType.SPACE) {
-          classes.push('card-tag-space');
-        } else if (type === CardRenderItemType.SCIENCE) {
-          classes.push('card-tag-science');
-        } else if (type === CardRenderItemType.JOVIAN) {
-          classes.push('card-tag-jovian');
-        } else if (type === CardRenderItemType.VENUS) {
-          classes.push('card-tag-venus');
-        } else if (type === CardRenderItemType.EARTH) {
-          classes.push('card-tag-earth');
-        } else if (type === CardRenderItemType.BUILDING) {
-          classes.push('card-tag-building');
-        } else if (type === CardRenderItemType.CITY) {
-          classes.push('card-tag tag-city');
-        } else if (this.item.type === CardRenderItemType.MARS) {
-          classes.push('card-tag tag-mars');
-        }
-      }
-
       // act upon any player
       if (this.item.anyPlayer === true) {
         if (type === CardRenderItemType.DELEGATES) {
@@ -497,12 +396,6 @@ export default Vue.extend({
       }
       if (this.item.type === CardRenderItemType.MEGACREDITS && this.item.amount === undefined) {
         result = '?';
-      }
-      if (this.item.type === CardRenderItemType.MOON) {
-        return '<div class="card-tag-moon-on-card"></div>';
-      }
-      if (this.item.type === CardRenderItemType.RESOURCE_CUBE) {
-        return '<div class="board-cube--bronze"></div>';
       }
       // TODO(chosta): abstract once another case of cancel (X) on top of an item is needed
       if (this.item.cancelled === true) {

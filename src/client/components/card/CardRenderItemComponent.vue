@@ -147,11 +147,6 @@ export default Vue.extend({
       case CardRenderItemType.EMPTY_TAG:
         classes.push('card-resource-tag', 'card-tag-empty');
         break;
-      // case CardRenderItemType.CITY:
-      //   if (this.item.isPlayed !== true) {
-      //     classes.push('card-tile', `city-tile--${this.item.size}`);
-      //   }
-      //   break;
       case CardRenderItemType.GREENERY:
         classes.push('card-tile');
         if (this.item.secondaryTag === AltSecondaryTag.OXYGEN) {
@@ -402,12 +397,6 @@ export default Vue.extend({
       if (this.item.type === CardRenderItemType.MEGACREDITS && this.item.amount === undefined) {
         result = '?';
       }
-      // // if (this.item.type === CardRenderItemType.MOON) {
-      // //   return '<div class="card-tag-moon-on-card"></div>';
-      // // }
-      // if (this.item.resource === CardResource.RESOURCE_CUBE) {
-      //   return '<div class="board-cube--bronze"></div>';
-      // }
       // TODO(chosta): abstract once another case of cancel (X) on top of an item is needed
       if (this.item.cancelled === true) {
         switch (this.item.type) {

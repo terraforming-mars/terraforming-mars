@@ -105,9 +105,9 @@ export abstract class Colony implements IColony {
     * Before passing off the trade, this determines whether the track should advance prior to trading, and then
     * hands off the real work to `handleTrade`.
     *
-    * ../..param bonusTradeOffset an offset that allows a player to increase the colony tile track marker before trading.
-    * ../..param usesTradeFleet when false, the player can trade without an available trade fleet.
-    * ../..param decreaseTrackAfterTrade when false, the track does not decrease after trading.
+    * @param bonusTradeOffset an offset that allows a player to increase the colony tile track marker before trading.
+    * @param usesTradeFleet when false, the player can trade without an available trade fleet.
+    * @param decreaseTrackAfterTrade when false, the track does not decrease after trading.
     */
   public trade(player: IPlayer, tradeOptions: TradeOptions = {}, bonusTradeOffset = 0): void {
     const tradeOffset = player.colonies.tradeOffset + bonusTradeOffset;

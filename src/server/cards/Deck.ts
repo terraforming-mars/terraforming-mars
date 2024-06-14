@@ -91,8 +91,12 @@ export class Deck<T extends ICard> {
     return cards;
   }
 
+  public size(): number {
+    return this.drawPile.length + this.discardPile.length;
+  }
+
   public canDraw(count: number): boolean {
-    return this.drawPile.length + this.discardPile.length > count;
+    return this.size() >= count;
   }
 
   private shuffleIfNecessary(logger: Logger) {

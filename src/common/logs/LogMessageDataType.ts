@@ -8,7 +8,7 @@ export enum LogMessageDataType {
   AWARD, // 4
   MILESTONE, // 5
   COLONY, // 6
-  STANDARD_PROJECT, // 7
+  _STANDARD_PROJECT, // 7 // NO LONGER USED
   PARTY, // 8
   TILE_TYPE, // 9
   SPACE_BONUS, // 10

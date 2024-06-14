@@ -4,11 +4,12 @@ import {getPreferences} from '@/client/utils/PreferencesManager';
 import {LogMessageData} from '@/common/logs/LogMessageData';
 import {Log} from '@/common/logs/Log';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
-import {TileType, tileTypeToString} from '@/common/TileType';
+import {tileTypeToString} from '@/common/TileType';
+import {Color} from '@/common/Color';
 
 type Context = {
   playerView: PlayerViewModel | undefined;
-  players: Map<string /* Color */, string>;
+  players: Map<Color, string>;
 }
 
 const context: Context = {
@@ -31,19 +32,12 @@ export function translateMessage(message: Message): string {
       return '';
     }
     switch (datum.type) {
-    case LogMessageDataType.RAW_STRING:
-      return datum.value;
     case LogMessageDataType.PLAYER:
       return context.players.get(datum.value) ?? datum.value;
     case LogMessageDataType.TILE_TYPE:
-      return tileTypeToString[datum.value as unknown as TileType];
-    case LogMessageDataType.CARD:
-    case LogMessageDataType.GLOBAL_EVENT:
-    case LogMessageDataType.STRING:
-    case LogMessageDataType.PARTY:
-      return translateText(datum.value);
+      return tileTypeToString[datum.value];
     default:
-      return translateText(datum.value);
+      return translateText(datum.value.toString());
     }
   });
 }

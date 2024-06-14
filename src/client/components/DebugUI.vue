@@ -1,63 +1,70 @@
 <template>
   <div class="debug-ui-container" :class="getLanguageCssClass()">
-      <h1 v-i18n>Cards List</h1>
+    <h1 v-i18n>Cards List</h1>
 
       <!-- start filters -->
 
-      <div class="form-group">
-        <input ref="filter" class="form-input form-input-line" :placeholder="$t('filter')" v-model="filterText">
-      </div>
-      <input type="checkbox" name="fullFilter" id="fullFilter-checkbox" v-model="fullFilter">
-      <label for="fullFilter-checkbox">
-          <span v-i18n>Full filter</span>
-      </label>
-
-      <!-- expansions -->
-      <div class="create-game-page-column">
-        <button id="toggle-checkbox" v-on:click="invertExpansions()">
-            <span v-i18n>Invert</span>
+      <div class="search-container">
+        <input ref="filter" class="filter" :placeholder="$t('filter')" v-model="filterText">
+        <button id="namesOnlyToggle" name="namesOnly" v-on:click="toggleNamesOnly()">
+            <span v-if="namesOnly === true" v-i18n>Names only</span>
+            <span v-else v-i18n>Full text</span>
         </button>
 
-        <span v-for="expansion in allModules" :key="expansion">
-          <input type="checkbox" :name="expansion" :id="`${expansion}-checkbox`" v-model="expansions[expansion]">
-          <label :for="`${expansion}-checkbox`" class="expansion-button">
-            <div class='create-game-expansion-icon' :class="expansionIconClass(expansion)"></div>
-            <span v-i18n>{{MODULE_NAMES[expansion]}}</span>
-          </label>
-        </span>
-      </div>
-
-      <!-- types -->
-      <div class="create-game-page-column">
-        <button id="toggle-checkbox" v-on:click="invertTypes()">
-            <span v-i18n>Invert</span>
+        <button id="advanced-search-collapser" v-on:click="toggleAdvancedSearch()">
+            <span v-if="showAdvanced === true" v-i18n>Advanced «</span>
+            <span v-else v-i18n>Advanced »</span>
         </button>
-
-        <span v-for="type in allTypes" :key="type">
-          <input type="checkbox" :name="`${type}-cardType`" :id="`${type}-cardType-checkbox`" v-model="types[type]">
-          <label :for="`${type}-cardType-checkbox`" class="expansion-button">
-              <span v-if="type === 'colonyTiles'" v-i18n>Colony Tiles</span>
-              <span v-else-if="type === 'globalEvents'" v-i18n>Global Events</span>
-              <span v-else v-i18n>{{type}}</span>
-          </label>
-        </span>
       </div>
 
-      <!-- tags -->
-      <div class="create-game-page-column">
-        <button id="toggle-checkbox" v-on:click="invertTags()">
-            <span v-i18n>Invert</span>
-        </button>
-        <span v-for="tag in allTags" :key="tag">
-          <input v-if="tag === 'event'" type="checkbox" :name="`${tag}-cardType`" :id="`${tag}-tag-checkbox`" v-model="types.event">
-          <input v-else type="checkbox" :name="`${tag}-cardType`" :id="`${tag}-tag-checkbox`" v-model="tags[tag]">
-          <label :for="`${tag}-tag-checkbox`" class="expansion-button">
-            <!-- a terrible hack, using create-game-expansion-icon because card-tag isn't enough to show the tag.-->
-            <div :class="`create-game-expansion-icon card-tag tag-${tag}`"></div>
-          </label>
-        </span>
-      </div>
+      <div id="selections" v-show="showAdvanced">
+        <!-- expansions -->
+        <div class="create-game-page-column">
+          <button id="toggle-checkbox" v-on:click="invertExpansions()">
+              <span v-i18n>Invert</span>
+          </button>
 
+          <span v-for="expansion in allModules" :key="expansion">
+            <input type="checkbox" :name="expansion" :id="`${expansion}-checkbox`" v-model="expansions[expansion]">
+            <label :for="`${expansion}-checkbox`" class="expansion-button">
+              <div class='create-game-expansion-icon' :class="expansionIconClass(expansion)"></div>
+              <span v-i18n>{{MODULE_NAMES[expansion]}}</span>
+            </label>
+          </span>
+        </div>
+
+        <!-- types -->
+        <div class="create-game-page-column">
+          <button id="toggle-checkbox" v-on:click="invertTypes()">
+              <span v-i18n>Invert</span>
+          </button>
+
+          <span v-for="type in allTypes" :key="type">
+            <input type="checkbox" :name="`${type}-cardType`" :id="`${type}-cardType-checkbox`" v-model="types[type]">
+            <label :for="`${type}-cardType-checkbox`" class="expansion-button">
+                <span v-if="type === 'colonyTiles'" v-i18n>Colony Tiles</span>
+                <span v-else-if="type === 'globalEvents'" v-i18n>Global Events</span>
+                <span v-else v-i18n>{{type}}</span>
+            </label>
+          </span>
+        </div>
+
+        <!-- tags -->
+        <div class="create-game-page-column">
+          <button id="toggle-checkbox" v-on:click="invertTags()">
+              <span v-i18n>Invert</span>
+          </button>
+          <span v-for="tag in allTags" :key="tag">
+            <input v-if="tag === 'event'" type="checkbox" :name="`${tag}-cardType`" :id="`${tag}-tag-checkbox`" v-model="types.event">
+            <input v-else type="checkbox" :name="`${tag}-cardType`" :id="`${tag}-tag-checkbox`" v-model="tags[tag]">
+            <label :for="`${tag}-tag-checkbox`" class="expansion-button">
+              <!-- a terrible hack, using create-game-expansion-icon because card-tag isn't enough to show the tag.-->
+              <div :class="`create-game-expansion-icon card-tag tag-${tag}`"></div>
+            </label>
+          </span>
+        </div>
+
+      </div>
       <!-- start cards -->
 
       <section class="debug-ui-cards-list">
@@ -202,11 +209,12 @@ type TagOption = Tag | 'none';
 
 type DebugUIModel = {
   filterText: string,
-  fullFilter: boolean,
+  namesOnly: boolean,
   expansions: Record<GameModule, boolean>,
   types: Record<TypeOption, boolean>,
   tags: Record<TagOption, boolean>,
   searchIndex: CardListSearchIndex,
+  showAdvanced: boolean;
 }
 
 type Refs = {
@@ -226,7 +234,7 @@ export default (Vue as WithRefs<Refs>).extend({
   data(): DebugUIModel {
     return {
       filterText: decodeURIComponent(window.location.hash).slice(1),
-      fullFilter: false,
+      namesOnly: true,
       expansions: {
         base: true,
         corpera: true,
@@ -279,6 +287,7 @@ export default (Vue as WithRefs<Refs>).extend({
         none: true,
       },
       searchIndex: new CardListSearchIndex(),
+      showAdvanced: false,
     };
   },
   mounted() {
@@ -406,10 +415,10 @@ export default (Vue as WithRefs<Refs>).extend({
       if (normalized.length === 0) {
         return true;
       }
-      if (this.fullFilter) {
-        return this.searchIndex.matches(this.filterText, type, name);
-      } else {
+      if (this.namesOnly) {
         return name.toLocaleUpperCase().includes(normalized);
+      } else {
+        return this.searchIndex.matches(this.filterText, type, name);
       }
     },
     expansionIconClass(expansion: GameModule): string {
@@ -489,6 +498,12 @@ export default (Vue as WithRefs<Refs>).extend({
     // experimentalUI might not be used at the moment, but it's fine to just leave it here.
     experimentalUI(): boolean {
       return getPreferences().experimental_ui;
+    },
+    toggleNamesOnly(): void {
+      this.namesOnly = !this.namesOnly;
+    },
+    toggleAdvancedSearch(): void {
+      this.showAdvanced = !this.showAdvanced;
     },
   },
 });

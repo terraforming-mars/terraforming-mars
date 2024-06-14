@@ -18,9 +18,9 @@ export function cardsToModel(
     showResources?: boolean,
     showCalculatedCost?: boolean,
     extras?: Map<CardName, PlayCardMetadata>,
-    enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
+    enabled?: ReadonlyArray<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
   } = {},
-): Array<CardModel> {
+): ReadonlyArray<CardModel> {
   return cards.map((card, index) => {
     let discount = card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]);
 

@@ -14,7 +14,7 @@ import {PlayerInput} from '../PlayerInput';
  * But there are cases, like, selecting spaces, where you don't want to
  * make the same space eligible in a series of selections.
  */
-export abstract class RunNTimes<T> extends DeferredAction<Array<T>> {
+export abstract class RunNTimes<T> extends DeferredAction<ReadonlyArray<T>> {
   private nth: number = 1;
   protected collection: Array<T> = [];
 

@@ -4,7 +4,6 @@ import {IPlayer} from '../IPlayer';
 import {SelectCard} from './SelectCard';
 import {Merger} from '../cards/promo/Merger';
 import {CardName} from '../../common/cards/CardName';
-import {ICeoCard} from '../cards/ceos/ICeoCard';
 import * as titles from '../../common/inputs/SelectInitialCards';
 import {SelectInitialCardsModel} from '../../common/models/PlayerInputModel';
 import {InputError} from './InputError';
@@ -49,7 +48,7 @@ export class SelectInitialCards extends AndOptions {
 
     if (player.game.gameOptions.ceoExtension) {
       this.options.push(
-        new SelectCard(titles.SELECT_CEO_TITLE, undefined, player.dealtCeoCards, {min: 1, max: 1}).andThen((ceoCards: Array<ICeoCard>) => {
+        new SelectCard(titles.SELECT_CEO_TITLE, undefined, player.dealtCeoCards, {min: 1, max: 1}).andThen((ceoCards) => {
           if (ceoCards.length !== 1) {
             throw new InputError('Only select 1 CEO');
           }

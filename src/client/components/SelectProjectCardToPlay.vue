@@ -105,7 +105,7 @@ export default Vue.extend({
   },
   data(): SelectProjectCardToPlayDataModel {
     let card: CardModel | undefined;
-    let cards: Array<CardModel> = [];
+    let cards: ReadonlyArray<CardModel> = [];
     if (this.playerinput !== undefined &&
             this.playerinput.cards !== undefined &&
             this.playerinput.cards.length > 0) {

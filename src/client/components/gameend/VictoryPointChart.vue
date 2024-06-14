@@ -33,7 +33,7 @@ const COLOR_CODES: Record<Color, string> = {
 
 interface ChartDataSet {
   label: string,
-  data: Array<number>,
+  data: ReadonlyArray<number>,
   fill: boolean,
   backgroundColor: string,
   borderColor: string,
@@ -43,7 +43,7 @@ interface ChartDataSet {
 
 export type DataSet = {
   label: string;
-  data: Array<number>,
+  data: ReadonlyArray<number>,
   color: Color,
 };
 

@@ -40,7 +40,7 @@ export type SelectOptionModel = BaseInputModel & {
 
 export type SelectProjectCardToPlayModel = BaseInputModel & {
   type: 'projectCard';
-  cards: Array<CardModel>;
+  cards: ReadonlyArray<CardModel>;
   paymentOptions: Partial<PaymentOptions>,
   microbes: number;
   floaters: number;
@@ -53,7 +53,7 @@ export type SelectProjectCardToPlayModel = BaseInputModel & {
 
 export type SelectCardModel = BaseInputModel & {
   type: 'card';
-  cards: Array<CardModel>;
+  cards: ReadonlyArray<CardModel>;
   max: number;
   min: number;
   showOnlyInLearnerMode: boolean;
@@ -63,7 +63,7 @@ export type SelectCardModel = BaseInputModel & {
 
 export type SelectColonyModel = BaseInputModel & {
   type: 'colony';
-  coloniesModel: Array<ColonyModel>;
+  coloniesModel: ReadonlyArray<ColonyModel>;
 }
 
 export type SelectPaymentModel = BaseInputModel & {
@@ -78,12 +78,12 @@ export type SelectPaymentModel = BaseInputModel & {
 
 export type SelectPlayerModel = BaseInputModel & {
   type: 'player';
-  players: Array<Color>;
+  players: ReadonlyArray<Color>;
 }
 
 export type SelectSpaceModel = BaseInputModel & {
   type: 'space';
-  spaces: Array<SpaceId>;
+  spaces: ReadonlyArray<SpaceId>;
 }
 
 export type SelectAmountModel = BaseInputModel & {

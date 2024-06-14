@@ -16,7 +16,7 @@ export type DrawOptions = {
 
 export type AllOptions = DrawOptions & ChooseOptions;
 
-export class DrawCards extends DeferredAction<Array<IProjectCard>> {
+export class DrawCards extends DeferredAction<ReadonlyArray<IProjectCard>> {
   // Visible for tests.
   public constructor(
     player: IPlayer,

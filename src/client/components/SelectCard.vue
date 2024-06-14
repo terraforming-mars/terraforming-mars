@@ -102,8 +102,8 @@ export default Vue.extend({
       }
       return 1;
     },
-    getOrderedCards(): Array<CardModel> {
-      let cards: Array<CardModel> = [];
+    getOrderedCards(): ReadonlyArray<CardModel> {
+      let cards: ReadonlyArray<CardModel> = [];
       if (this.playerinput.cards !== undefined) {
         if (this.playerinput.selectBlueCardAction) {
           cards = sortActiveCards(this.playerinput.cards);

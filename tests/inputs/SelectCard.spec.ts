@@ -10,8 +10,8 @@ describe('SelectCard', function() {
   let aquiferPumping: ICard;
   let roboticWorkforce: ICard;
   let ioMiningIndustries: ICard;
-  let selected: Array<ICard>;
-  const cb = (cards: Array<ICard>) => {
+  let selected: ReadonlyArray<ICard>;
+  const cb = (cards: ReadonlyArray<ICard>) => {
     selected = cards;
     return undefined;
   };

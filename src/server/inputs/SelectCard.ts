@@ -15,13 +15,13 @@ export type Options = {
   /** Default is false. When true, ??? */
   selectBlueCardAction: boolean,
   /** When provided, then the cards with false in `enabled` are not selectable and grayed out */
-  enabled: Array<boolean> | undefined,
+  enabled: ReadonlyArray<boolean> | undefined,
   /** Default is true. If true, then shows resources on those cards. If false than shows discounted price. */
   played: boolean | CardName.SELF_REPLICATING_ROBOTS
   /** Default is false. If true then show the name of the card owner below. */
   showOwner: boolean,
 }
-export class SelectCard<T extends ICard> extends BasePlayerInput<Array<T>> {
+export class SelectCard<T extends ICard> extends BasePlayerInput<ReadonlyArray<T>> {
   public config: Options;
 
   constructor(

@@ -23,7 +23,7 @@ type Types = {
   type: LogMessageDataType.PLAYER,
   value: Color,
 } | {
-  type: LogMessageDataType.CARD | LogMessageDataType.STANDARD_PROJECT,
+  type: LogMessageDataType.CARD,
   value: CardName,
 } | {
   type: LogMessageDataType.AWARD,

@@ -5,22 +5,36 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('TychoMagnetics', function() {
+describe('TychoMagnetics', () => {
   let card: TychoMagnetics;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new TychoMagnetics();
-    [/* game */, player] = testGame(1);
+    [/* game */, player] = testGame(2);
   });
 
-  it('Can not act if no energy resources available', function() {
+  it('Can not act if no energy resources available', () => {
     expect(card.canAct(player)).is.not.true;
     player.energy = 1;
     expect(card.canAct(player)).is.true;
   });
 
-  it('Should act', function() {
+  it('cannot act with empty deck', () => {
+    player.energy = 10;
+    player.game.projectDeck.drawPile.length = 0;
+    expect(card.canAct(player)).is.false;
+  });
+
+  it('can act with small deck', () => {
+    player.energy = 10;
+    player.game.projectDeck.drawPile.length = 8;
+    expect(card.canAct(player)).is.true;
+    const selectAmount = cast(card.action(player), SelectAmount);
+    expect(selectAmount.max).eq(8);
+  });
+
+  it('Should act', () => {
     player.energy = 5;
     expect(card.canAct(player)).is.true;
 

@@ -245,12 +245,20 @@ describe('draw()', function() {
     expect(() => game.projectDeck.drawNOrThrow(game, 3)).to.throw();
   });
 
+  it('size', () => {
+    const [game] = testGame(2);
+    game.projectDeck.drawPile.length = 2;
+    expect(game.projectDeck.size()).eq(2);
+    game.projectDeck.discardPile.push(fakeCard());
+    expect(game.projectDeck.size()).eq(3);
+  });
+
   it('canDraw', () => {
     const [game] = testGame(2);
     expect(game.projectDeck.canDraw(3)).is.true;
     game.projectDeck.drawPile.length = 2;
     expect(game.projectDeck.canDraw(3)).is.false;
     game.projectDeck.discardPile.push(fakeCard());
-    expect(game.projectDeck.canDraw(3)).is.false;
+    expect(game.projectDeck.canDraw(3)).is.true;
   });
 });

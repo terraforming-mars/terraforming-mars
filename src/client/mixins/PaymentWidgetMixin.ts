@@ -19,7 +19,7 @@ export type SelectPaymentDataModel = {
 
 export type SelectProjectCardToPlayDataModel = SelectPaymentDataModel & {
   // The cards to select from
-  cards: Array<CardModel>;
+  cards: ReadonlyArray<CardModel>;
 
   // Information about the currently selected card
   cardName: CardName;

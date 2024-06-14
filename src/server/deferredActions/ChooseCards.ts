@@ -23,7 +23,7 @@ export type ChooseOptions = {
 export class ChooseCards extends DeferredAction {
   public constructor(
     player: IPlayer,
-    public cards: Array<IProjectCard>,
+    public cards: ReadonlyArray<IProjectCard>,
     public options: ChooseOptions = {},
   ) {
     super(player, Priority.DRAW_CARDS);
@@ -55,7 +55,7 @@ export class ChooseCards extends DeferredAction {
     const min = options.paying ? 0 : options.keepMax;
 
     const button = max === 0 ? 'Ok' : (options.paying ? 'Buy' : 'Select');
-    const cb = (selected: Array<IProjectCard>) => {
+    const cb = (selected: ReadonlyArray<IProjectCard>) => {
       if (selected.length > max) {
         throw new Error('Selected too many cards');
       }

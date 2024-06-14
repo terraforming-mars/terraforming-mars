@@ -272,7 +272,7 @@ export default Vue.extend({
     isSoloGame(): boolean {
       return this.players.length === 1;
     },
-    vpDataset(): Array<DataSet> {
+    vpDataset(): ReadonlyArray<DataSet> {
       return this.players.map((player) => {
         return {
           label: player.name,
@@ -281,11 +281,11 @@ export default Vue.extend({
         };
       });
     },
-    globalsDataset(): Array<DataSet> {
+    globalsDataset(): ReadonlyArray<DataSet> {
       const dataset = [];
 
       const gpg = this.game.globalsPerGeneration;
-      function getValues(param: GlobalParameter, min: number, max: number): Array<number> {
+      function getValues(param: GlobalParameter, min: number, max: number): ReadonlyArray<number> {
         return gpg.map((entry) => {
           const val = entry[param] ?? min;
           return 100 * (val - min) / (max - min);

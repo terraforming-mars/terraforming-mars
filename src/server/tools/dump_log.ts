@@ -28,7 +28,7 @@ async function main() {
     const {gameLog} = await db.getGameVersion(gameId, saveId);
     for (let idx = lastIdx; idx < gameLog.length; idx++) {
       const logEntry = gameLog[idx];
-      const text = Log.applyData(logEntry, (datum) => datum.value);
+      const text = Log.applyData(logEntry, (datum) => datum.value.toString());
       console.log(`[${saveId}/${idx}]: ${text}`);
     }
     lastIdx = gameLog.length;

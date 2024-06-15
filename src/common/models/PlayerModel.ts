@@ -32,8 +32,7 @@ export type Protection = 'off' | 'on' | 'half';
 /** The public information about a player */
 export type PublicPlayerModel = {
   actionsTakenThisRound: number;
-  // TODO(kberg): Replace string with CardName.
-  actionsThisGeneration: ReadonlyArray<string /* CardName */>;
+  actionsThisGeneration: ReadonlyArray<CardName>;
   actionsTakenThisGame: number;
   availableBlueCardActionCount: number;
   cardCost: number;

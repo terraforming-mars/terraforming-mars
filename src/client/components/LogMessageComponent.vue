@@ -11,12 +11,9 @@ import {LogMessageType} from '@/common/logs/LogMessageType';
 import {LogMessageData, LogMessageDataAttrs} from '@/common/logs/LogMessageData';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
-import {CardName} from '@/common/cards/CardName';
-import {TileType, tileTypeToString} from '@/common/TileType';
-import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
+import {tileTypeToString} from '@/common/TileType';
 import {Log} from '@/common/logs/Log';
 import {getCard} from '@/client/cards/ClientCardManifest';
-import {ColonyName} from '@/common/colonies/ColonyName';
 import {ClientCard} from '@/common/cards/ClientCard';
 
 const cardTypeToCss: Record<CardType, string | undefined> = {
@@ -30,16 +27,6 @@ const cardTypeToCss: Record<CardType, string | undefined> = {
   standard_action: 'background-color-standard-project',
   proxy: undefined,
 };
-
-const translatableMessageDataTypes = new Set([
-  LogMessageDataType.STRING,
-  LogMessageDataType.STANDARD_PROJECT,
-  LogMessageDataType.MILESTONE,
-  LogMessageDataType.AWARD,
-  LogMessageDataType.COLONY,
-  LogMessageDataType.PARTY,
-  LogMessageDataType.TILE_TYPE,
-  LogMessageDataType.GLOBAL_EVENT]);
 
 export default Vue.extend({
   name: 'LogMessageComponent',
@@ -85,33 +72,29 @@ export default Vue.extend({
         break;
 
       case LogMessageDataType.CARD:
-        const cardName = data.value as CardName;
-        const card = getCard(cardName);
+        const card = getCard(data.value);
         if (card !== undefined) {
           return this.cardToHtml(card, data.attrs);
         } else {
-          console.log(`Cannot render ${cardName}`);
+          console.log(`Cannot render ${data.value}`);
         }
         break;
 
       case LogMessageDataType.GLOBAL_EVENT:
-        const globalEventName = data.value as GlobalEventName;
-        return '<span class="log-card background-color-global-event">' + this.$t(globalEventName) + '</span>';
+        return '<span class="log-card background-color-global-event">' + this.$t(data.value) + '</span>';
 
       case LogMessageDataType.TILE_TYPE:
-        const tileType: TileType = Number(data.value);
-        return this.$t(tileTypeToString[tileType]);
+        return this.$t(tileTypeToString[data.value]);
 
       case LogMessageDataType.COLONY:
-        const colonyName = data.value as ColonyName;
-        return '<span class="log-card background-color-colony">' + this.$t(colonyName) + '</span>';
+        return '<span class="log-card background-color-colony">' + this.$t(data.value) + '</span>';
 
       default:
-        if (translatableMessageDataTypes.has(data.type)) {
+        if (data.type !== LogMessageDataType.RAW_STRING) {
           return this.$t(data.value);
         }
       }
-      return data.value;
+      return data.value.toString();
     },
     // Called in the event that a bad log message comes down. Does its best to return something.
     safeMessage(message: LogMessage) {

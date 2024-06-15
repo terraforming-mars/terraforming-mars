@@ -63,7 +63,7 @@ export class GameLogs {
       case LogMessageDataType.TILE_TYPE:
       case LogMessageDataType.COLONY:
       default:
-        return datum.value;
+        return datum.value.toString();
       }
     }));
   }

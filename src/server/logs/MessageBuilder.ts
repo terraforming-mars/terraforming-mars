@@ -76,15 +76,8 @@ export class MessageBuilder {
     this.message.data.push({type: LogMessageDataType.COLONY, value: value.name});
     return this;
   }
-
-  public standardProject(value: string): this {
-    this.message.data.push({type: LogMessageDataType.STANDARD_PROJECT, value});
-    return this;
-  }
-
   public party(value: IParty): this {
-    this.message.data.push({type: LogMessageDataType.PARTY, value: value.name});
-    return this;
+    return this.partyName(value.name);
   }
 
   public partyName(value: PartyName): this {
@@ -93,12 +86,12 @@ export class MessageBuilder {
   }
 
   public tileType(value: TileType): this {
-    this.message.data.push({type: LogMessageDataType.TILE_TYPE, value: value.toString()});
+    this.message.data.push({type: LogMessageDataType.TILE_TYPE, value: value});
     return this;
   }
 
   public spaceBonus(value: SpaceBonus): this {
-    this.message.data.push({type: LogMessageDataType.SPACE_BONUS, value: value.toString()});
+    this.message.data.push({type: LogMessageDataType.SPACE_BONUS, value: value});
     return this;
   }
 
@@ -107,7 +100,7 @@ export class MessageBuilder {
   }
 
   public globalEventName(value: GlobalEventName): this {
-    this.message.data.push({type: LogMessageDataType.GLOBAL_EVENT, value: value.toString()});
+    this.message.data.push({type: LogMessageDataType.GLOBAL_EVENT, value: value});
     return this;
   }
 

@@ -131,7 +131,7 @@ export function forceGenerationEnd(game: IGame) {
 
 /** Provides a readable version of a log message for easier testing. */
 export function formatLogMessage(message: Message): string {
-  return Log.applyData(message, (datum) => datum.value);
+  return Log.applyData(message, (datum) => datum.value.toString());
 }
 
 /** Provides a readable version of a message for easier testing. */
@@ -139,7 +139,7 @@ export function formatMessage(message: Message | string): string {
   if (typeof message === 'string') {
     return message;
   }
-  return Log.applyData(message, (datum) => datum.value);
+  return Log.applyData(message, (datum) => datum.value.toString());
 }
 
 /**

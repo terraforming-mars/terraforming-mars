@@ -107,7 +107,7 @@ export default Vue.extend({
         }
         break;
       case CardRenderItemType.DIVERSE_TAG:
-        classes.push(this.cardResource, 'card-resource-diverse');
+        classes.push('card-resource-tag', 'card-resource-diverse');
         break;
       case CardRenderItemType.TRADE:
         classes.push('card-resource-trade');

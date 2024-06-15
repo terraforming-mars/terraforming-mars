@@ -16,6 +16,7 @@ import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {SelectProductionToLoseDeferred} from '../deferredActions/SelectProductionToLoseDeferred';
 import {_AresHazardPlacement} from './AresHazards';
 import {CrashlandingBonus} from '../pathfinders/CrashlandingBonus';
+import {Board} from '../boards/Board';
 
 export class AresHandler {
   private constructor() {}
@@ -269,5 +270,9 @@ export class AresHandler {
     }
     player.increaseTerraformRating(steps);
     player.game.log('${0}\'s TR increases ${1} step(s) for removing ${2}', (b) => b.player(player).number(steps).tileType(initialTileType));
+  }
+
+  public static anyAdjacentSpaceGivesBonus(board: Board, space: Space, bonus: SpaceBonus): boolean {
+    return board.getAdjacentSpaces(space).some((adj) => adj.adjacency?.bonus.includes(bonus));
   }
 }

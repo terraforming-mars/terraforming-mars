@@ -47,7 +47,7 @@ export default Vue.extend({
       if (this.item.tag === undefined) {
         return '';
       }
-      return 'card-resource-' + this.item.tag.toLowerCase().replaceAll(' ', '-');
+      return 'card-tag-' + this.item.tag.toLowerCase().replaceAll(' ', '-');
     },
     componentClasses(): ReadonlyArray<string> {
       const classes: Array<string> = [];
@@ -146,6 +146,9 @@ export default Vue.extend({
         break;
       case CardRenderItemType.EMPTY_TAG:
         classes.push('card-resource-tag', 'card-tag-empty');
+        break;
+      case CardRenderItemType.CITY:
+        classes.push('card-tile', `city-tile--${this.item.size}`);
         break;
       case CardRenderItemType.GREENERY:
         classes.push('card-tile');
@@ -262,7 +265,7 @@ export default Vue.extend({
         classes.push(this.cardResource, this.resourceClass);
         break;
       case CardRenderItemType.TAG:
-        classes.push('card-tag', this.tagClass);
+        classes.push('card-resource-tag', this.tagClass);
         break;
       case CardRenderItemType.NEUTRAL_DELEGATE:
         classes.push('card-neutral-delegate');

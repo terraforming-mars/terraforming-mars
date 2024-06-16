@@ -97,6 +97,11 @@
     "Add n data to ANY card": "Erhalte n Daten auf eine beliebige Karte",
     "Add 1 data to ANY card": "Erhalte 1 Datum auf eine beliebige Karte",
 
+    "Deimos": "Deimos",
+    "Place a hazard tile next to no other tile": "Platziere ein Gefahrenplättchen neben keinem anderen Plättchen",
+    "Erode n spaces adjacent to hazard tiles": "Erodiere n Feldern, die an Gefahrenfelder angrenzen",
+    "Gain 1 M€ per hazard tile on Mars": "Erhalte 1 M€ pro Gefahrenkachel auf dem Mars",
+
     "Select colony tile to remove": "Wähle ein zu entfernendes Kolonie-Plättchen",
     "Colony Bonus": "Koloniebonus",
     "Trade Income": "Einkommen",
@@ -131,5 +136,6 @@
     "Iapetus - (TR)": "Iapetus - (TW)",
     "Mercury - (Production)": "Merkur - (Produktion)",
     "Pallas - (Politics)": "Pallas - (Politik)",
-    "Iapetus II - (Data)": "Iapetus II - (Daten)"
+    "Iapetus II - (Data)": "Iapetus II - (Daten)",
+    "Deimos - (Hazards)": "Deimos - (Gefahr)"
 }

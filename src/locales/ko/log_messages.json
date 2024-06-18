@@ -317,6 +317,7 @@
     "All players except ${0} may not retrieve their trade fleets this generation.": "",
     "All global parameters are high enough that there is no point in changing any of them.": "",
     "${0} decreased ${1} production 1 step to gain 4 ${2}": "",
+    "${0} replaced ${1} neutral delegate(s) in ${2} area": "",
     "${0} removed neutral delegate from ${1}": "",
     "${0} removed ${1}'s delegate from ${2}": "",
     "${0} was discarded as ${1} could not play it.": "",

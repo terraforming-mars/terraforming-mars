@@ -1,5 +1,5 @@
 <template>
-  <div class="debug-ui-container" :class="getLanguageCssClass()">
+  <div class="card-list-container" :class="getLanguageCssClass()">
     <h1 v-i18n>Cards List</h1>
 
       <!-- start filters -->
@@ -67,42 +67,42 @@
       </div>
       <!-- start cards -->
 
-      <section class="debug-ui-cards-list">
+      <section class="card-list-cards-list">
           <h2 v-i18n>Project Cards</h2>
           <div class="cardbox" v-for="card in getAllProjectCards()" :key="card">
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
       <br>
-      <section class="debug-ui-cards-list">
+      <section class="card-list-cards-list">
           <h2 v-i18n>Corporations</h2>
           <div class="cardbox" v-for="card in getAllCorporationCards()" :key="card">
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
       <br>
-      <section class="debug-ui-cards-list">
+      <section class="card-list-cards-list">
           <h2 v-i18n>Preludes</h2>
           <div class="cardbox" v-for="card in getAllPreludeCards()" :key="card">
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
       <br>
-      <section class="debug-ui-cards-list">
+      <section class="card-list-cards-list">
           <h2 v-i18n>CEOs</h2>
           <div class="cardbox" v-for="card in getAllCeoCards()" :key="card">
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
       <br>
-      <section class="debug-ui-cards-list">
+      <section class="card-list-cards-list">
         <h2 v-i18n>Standard Projects</h2>
         <div class="cardbox" v-for="card in getAllStandardProjectCards()" :key="card">
             <Card v-if="showCard(card)" :card="{'name': card}" />
         </div>
       </section>
 
-      <section class="debug-ui-cards-list">
+      <section class="card-list-cards-list">
         <h2 v-i18n>Global Events</h2>
         <template v-if="types.globalEvents">
           <div class="cardbox" v-for="globalEventName in getAllGlobalEvents()" :key="globalEventName">
@@ -207,7 +207,7 @@ const ALL_MODULES = GAME_MODULES.map((m) => moduleAbbreviations[m]).join('');
 type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
 type TagOption = Tag | 'none';
 
-type DebugUIModel = {
+type CardListModel = {
   filterText: string,
   namesOnly: boolean,
   expansions: Record<GameModule, boolean>,
@@ -222,7 +222,7 @@ type Refs = {
 };
 
 export default (Vue as WithRefs<Refs>).extend({
-  name: 'debug-ui',
+  name: 'card-list',
   components: {
     Card,
     GlobalEvent,
@@ -231,7 +231,7 @@ export default (Vue as WithRefs<Refs>).extend({
     Award,
     PreferencesIcon,
   },
-  data(): DebugUIModel {
+  data(): CardListModel {
     return {
       filterText: decodeURIComponent(window.location.hash).slice(1),
       namesOnly: true,

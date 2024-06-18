@@ -8,7 +8,7 @@ import SpectatorHome from '@/client/components/SpectatorHome.vue';
 import {ViewModel, PlayerViewModel} from '@/common/models/PlayerModel';
 import StartScreen from '@/client/components/StartScreen.vue';
 import LoadGameForm from '@/client/components/LoadGameForm.vue';
-import DebugUI from '@/client/components/DebugUI.vue';
+import CardList from '@/client/components/CardList.vue';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import Help from '@/client/components/help/Help.vue';
 import AdminHome from '@/client/components/admin/AdminHome.vue';
@@ -90,7 +90,7 @@ export const mainAppSettings = {
     'spectator-home': SpectatorHome,
     'game-end': GameEnd,
     'games-overview': GamesOverview,
-    'debug-ui': DebugUI,
+    'card-list': CardList,
     'help': Help,
     'admin-home': AdminHome,
   },

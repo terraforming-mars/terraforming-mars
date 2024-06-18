@@ -192,7 +192,7 @@
   "(Increase your M€ production by 1 for every special tile you own on Mars.)": "(화성에 배치한 자신 소유의 특수 타일 1장당 메가크레딧 생산력 1 증가.)",
 
   "Red City": "붉은 도시",
-  "(Requires that Reds are ruling or that you have 2 delegates there. -1 energy prod, +2 M€ prod. Place the special tile on Mars ADJACENT TO NO GREENERY. NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space (or hazard) next to this tile.)": "(조건: 적색당이 집권, 또는 적색당에 자기 의원이 2명 이상.) (에너지 생산력 1 감소. 메가크레딧 생산력 2 증가. 녹지 타일에 인접하지 않은 화성의 빈 구역에 붉은 도시 특수 타일 배치. 이 타일에 인접한 구역에는 녹지 타일을 배치할 수 없음.) (게임 종료 시, 이 타일에 인접한 빈 구역이나 위험 지역당 승점 1점.)",
+  "(Requires that Reds are ruling or that you have 2 delegates there. -1 energy prod, +2 M€ prod. Place the special tile on Mars ADJACENT TO NO GREENERY. NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space (or hazard) next to this tile.)": "(조건: 적색당이 집권, 또는 적색당에 자기 의원이 2명 이상.) (에너지 생산력 1 감소. 메가크레딧 생산력 2 증가. 녹지 타일에 인접하지 않은 화성의 빈 구역에 붉은 도시 특수 타일 배치. 이 타일에 인접한 구역에는 녹지 타일을 배치할 수 없음.) (게임 종료 시, 이 타일에 인접한 빈 구역이나 위험 구역당 승점 1점.)",
 
   "Return to Abandoned Technology": "버린 기술로의 회귀",
   "Draw the top 4 cards from the discard pile. Choose 2 to keep and discard the rest.": "버린 카드 더미의 최상단 카드 4장을 확인한 후, 그 중 2장을 획득하고 나머지는 버림.",

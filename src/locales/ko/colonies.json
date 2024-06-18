@@ -97,6 +97,11 @@
     "Add n data to ANY card": "아무 카드에 데이터 자원 n개 추가",
     "Add 1 data to ANY card": "아무 카드에 데이터 자원 3개 추가",
 
+    "Deimos": "데이모스",
+    "Place a hazard tile next to no other tile": "인접한 곳이 모두 비어있는 구역에 위험 타일 배치",
+    "Erode n spaces adjacent to hazard tiles": "위험 타일에 인접한 n개의 구역 침식",
+    "Gain 1 M€ per hazard tile on Mars": "화성에 있는 위험 타일마다 1 M€ 획득",
+
     "Select colony tile to remove": "제거할 개척기치 타일 선택",
     "Bonus": "개척기지 보너스",
     "Colony Bonus": "개척기지 보너스",
@@ -152,5 +157,6 @@
     "Iapetus (TR)": "이아페투스 (TR)",
     "Mercury (Production)": "수성 (생산력)",
     "Pallas (Politics)": "팔라스 (정책)",
-    "Iapetus II (Data)": "이아페투스 II (데이터)"
+    "Iapetus II (Data)": "이아페투스 II (데이터)",
+    "Deimos - (Hazards)": "데이모스 - (위험)"
 }

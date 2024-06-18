@@ -29,13 +29,12 @@ describe('Neil', function() {
   it('Gains 1 M€ when any player plays a Moon tag', function() {
     player.playedCards.push(card);
 
-    card.onCardPlayed(player, new LTFPrivileges());
+    player.playCard(new LTFPrivileges());
     expect(player.megaCredits).eq(1);
 
-    card.onCardPlayed(player2, new ThoriumRush());
+    player2.playCard(new ThoriumRush());
     expect(player.megaCredits).eq(2);
   });
-
 
   it('Takes action: Gains M€ production equal to lowest Moon rate', function() {
     moonData.habitatRate = 5;

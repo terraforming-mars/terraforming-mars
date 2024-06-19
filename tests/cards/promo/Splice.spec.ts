@@ -5,7 +5,7 @@ import {PharmacyUnion} from '../../../src/server/cards/promo/PharmacyUnion';
 import {Recyclon} from '../../../src/server/cards/promo/Recyclon';
 import {Splice} from '../../../src/server/cards/promo/Splice';
 import {testGame} from '../../TestGame';
-import {AndOptions} from '../../../src/server/inputs/AndOptions';
+import {SelectInitialCards} from '../../../src/server/inputs/SelectInitialCards';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
@@ -57,12 +57,12 @@ describe('Splice', function() {
   it('Should grant Recyclon a Microbe or 2MC', function() {
     const card2 = new Recyclon();
     // Player 1 picks Splice
-    const pi = cast(player.getWaitingFor(), AndOptions);
+    const pi = cast(player.getWaitingFor(), SelectInitialCards);
     pi.options[0].cb([card]);
     pi.options[1].cb([]);
     pi.cb(undefined);
     // Player 2 picks Recyclon
-    const pi2 = cast(player2.getWaitingFor(), AndOptions);
+    const pi2 = cast(player2.getWaitingFor(), SelectInitialCards);
     pi2.options[0].cb([card2]);
     pi2.options[1].cb([]);
     pi2.cb(undefined);

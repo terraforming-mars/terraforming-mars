@@ -31,7 +31,7 @@ describe('SelectInitialCards', () => {
 
   it('fail, no corporations', () => {
     expect(() =>
-      selectInitialCards.process({type: 'and', responses: [
+      selectInitialCards.process({type: 'initialCards', responses: [
         {type: 'card', cards: []},
         {type: 'card', cards: []},
       ]}, player))
@@ -40,7 +40,7 @@ describe('SelectInitialCards', () => {
 
   it('fail, invalid corporation', () => {
     expect(() =>
-      selectInitialCards.process({type: 'and', responses: [
+      selectInitialCards.process({type: 'initialCards', responses: [
         {type: 'card', cards: [CardName.THARSIS_REPUBLIC]},
         {type: 'card', cards: []},
       ]}, player))
@@ -49,7 +49,7 @@ describe('SelectInitialCards', () => {
 
   it('fail, too many corporations', () => {
     expect(() =>
-      selectInitialCards.process({type: 'and', responses: [
+      selectInitialCards.process({type: 'initialCards', responses: [
         {type: 'card', cards: [CardName.INVENTRIX, CardName.HELION]},
         {type: 'card', cards: []},
       ]}, player))
@@ -60,7 +60,7 @@ describe('SelectInitialCards', () => {
     player.game.projectDeck.discardPile.length = 0; // Emptying the discard pile, which has 4 cards setting up the solo opponent.
     expect(player.game.corporationDeck.discardPile).is.empty;
 
-    selectInitialCards.process({type: 'and', responses: [
+    selectInitialCards.process({type: 'initialCards', responses: [
       {type: 'card', cards: [CardName.INVENTRIX]},
       {type: 'card', cards: [CardName.ANTS]},
     ]}, player);

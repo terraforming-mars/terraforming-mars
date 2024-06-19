@@ -40,6 +40,15 @@ export function isAndOptionsResponse(response: InputResponse): response is AndOp
   return response.type === 'and' && matches(response, ['type', 'responses']);
 }
 
+export interface SelectInitialCardsResponse {
+  type: 'initialCards',
+  responses: Array<InputResponse>;
+}
+
+export function isSelectInitialCardsResponse(response: InputResponse): response is SelectInitialCardsResponse {
+  return response.type === 'initialCards' && matches(response, ['type', 'responses']);
+}
+
 export interface SelectCardResponse {
   type: 'card',
   cards: Array<CardName>;
@@ -167,6 +176,7 @@ export function isSelectPolicyResponse(response: InputResponse): response is Sel
 export type InputResponse =
   AndOptionsResponse |
   OrOptionsResponse |
+  SelectInitialCardsResponse |
   SelectAmountResponse |
   SelectCardResponse |
   SelectColonyResponse |

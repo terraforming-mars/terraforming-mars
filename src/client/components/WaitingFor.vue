@@ -1,7 +1,7 @@
 <template>
   <div v-if="waitingfor === undefined">{{ $t('Not your turn to take any actions') }}</div>
   <div v-else class="wf-root">
-    <template v-if="playerView.game.phase === Phase.ACTION && playerView.players.length !== 1">
+    <template v-if="preferences().experimental_ui && playerView.game.phase === Phase.ACTION && playerView.players.length !== 1">
       <!--
         Autopass is only available when you are taking actions because of how autopass is stored.
         It's connected with when the player takes actions, and is saved along with the rest of the
@@ -262,6 +262,9 @@ export default Vue.extend({
   computed: {
     Phase(): typeof Phase {
       return Phase;
+    },
+    preferences(): typeof getPreferences {
+      return getPreferences;
     },
   },
 });

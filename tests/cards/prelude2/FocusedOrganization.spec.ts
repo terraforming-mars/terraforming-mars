@@ -63,15 +63,16 @@ describe('FocusedOrganization', () => {
     player.plants = 3;
 
     const andOptions: AndOptions = card.action(player);
-    const selectCard = cast(andOptions.options[0], SelectCard);
 
+    const selectResource = cast(andOptions.options[0], SelectResource);
+    const selectCard = cast(andOptions.options[1], SelectCard);
+
+    expect(selectResource.options.length).eq(2);
     expect(selectCard.cards).to.have.members([firstCard, secondCard]);
 
+    selectResource.options[1].cb();
     selectCard.cb([firstCard]);
 
-    const selectResource = cast(andOptions.options[1], SelectResource);
-    expect(selectResource.options.length).eq(2);
-    selectResource.options[1].cb();
     const selectNewResource = cast(andOptions.cb(undefined), SelectResource);
 
     expect(player.cardsInHand).does.not.contain(firstCard);
@@ -98,13 +99,14 @@ describe('FocusedOrganization', () => {
     player.plants = 3;
 
     const andOptions: AndOptions = card.action(player);
-    const selectCard = cast(andOptions.options[0], SelectCard);
+    const selectCard = cast(andOptions.options[1], SelectCard);
+    const selectResource = cast(andOptions.options[0], SelectResource);
+
+    expect(selectResource.options.length).eq(2);
 
     selectCard.cb([firstCard]);
-
-    const selectResource = cast(andOptions.options[1], SelectResource);
-    expect(selectResource.options.length).eq(2);
     selectResource.options[1].cb(); // plants
+
     runAllActions(game);
     expect(solBank.resourceCount).eq(0);
     selectResource.options[0].cb(); // MC

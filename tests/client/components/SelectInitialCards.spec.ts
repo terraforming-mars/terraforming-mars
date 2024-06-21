@@ -3,7 +3,7 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import SelectInitialCards from '@/client/components/SelectInitialCards.vue';
-import {AndOptionsResponse, InputResponse} from '@/common/inputs/InputResponse';
+import {SelectInitialCardsResponse, InputResponse} from '@/common/inputs/InputResponse';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {Preferences} from '@/client/utils/PreferencesManager';
 import * as titles from '@/common/inputs/SelectInitialCards';
@@ -36,7 +36,7 @@ describe('SelectInitialCards', function() {
 
     await button.trigger('click');
 
-    expect(savedData).to.deep.eq({type: 'and', responses: [
+    expect(savedData).to.deep.eq({type: 'initialCards', responses: [
       {type: 'card', cards: [CardName.ECOLINE]},
       {type: 'card', cards: [CardName.ANTS]},
     ]});
@@ -84,7 +84,7 @@ describe('SelectInitialCards', function() {
 
     await button.trigger('click');
 
-    expect(savedData).to.deep.eq({type: 'and', responses: [
+    expect(savedData).to.deep.eq({type: 'initialCards', responses: [
       {type: 'card', cards: [CardName.ECOLINE]},
       {type: 'card', cards: [CardName.ALLIED_BANK, CardName.SUPPLY_DROP]},
       {type: 'card', cards: [CardName.ANTS]},
@@ -221,7 +221,7 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
         title: 'selectInitialCards',
         options,
       },
-      onsave: function(data: AndOptionsResponse) {
+      onsave: function(data: SelectInitialCardsResponse) {
         savedData = data;
       },
       showsave: true,

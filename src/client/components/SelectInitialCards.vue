@@ -43,7 +43,7 @@ import SelectCard from '@/client/components/SelectCard.vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {getPreferences, Preferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {Tag} from '@/common/cards/Tag';
-import {AndOptionsResponse} from '@/common/inputs/InputResponse';
+import {SelectInitialCardsResponse} from '@/common/inputs/InputResponse';
 import {CardType} from '@/common/cards/CardType';
 import Colony from '@/client/components/colonies/Colony.vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
@@ -76,7 +76,7 @@ export default (Vue as WithRefs<Refs>).extend({
       type: Object as () => SelectInitialCardsModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: AndOptionsResponse) => void,
+      type: Function as unknown as () => (out: SelectInitialCardsResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -215,8 +215,8 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     saveData() {
       // SelectInitialCards should have its own response type.
-      const result: AndOptionsResponse = {
-        type: 'and',
+      const result: SelectInitialCardsResponse = {
+        type: 'initialCards',
         responses: [],
       };
 

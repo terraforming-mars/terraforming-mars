@@ -214,7 +214,6 @@ export default (Vue as WithRefs<Refs>).extend({
       }
     },
     saveData() {
-      // SelectInitialCards should have its own response type.
       const result: SelectInitialCardsResponse = {
         type: 'initialCards',
         responses: [],

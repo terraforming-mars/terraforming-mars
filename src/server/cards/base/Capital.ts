@@ -7,7 +7,7 @@ import {TileType} from '../../../common/TileType';
 import {CardName} from '../../../common/cards/CardName';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {Board} from '../../boards/Board';
-import {ICardMetadata} from '../../../common/cards/ICardMetadata';
+import {CardMetadata} from '../../../common/cards/CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
@@ -15,7 +15,7 @@ export class Capital extends Card implements IProjectCard {
   constructor(
     name = CardName.CAPITAL,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
-    metadata: ICardMetadata = {
+    metadata: CardMetadata = {
       cardNumber: '008',
       description: {
         text: 'Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.',

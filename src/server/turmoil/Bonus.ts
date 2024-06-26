@@ -2,8 +2,8 @@ import {IGame} from '../IGame';
 import {IPlayer} from '../IPlayer';
 import {BonusId} from '../../common/turmoil/Types';
 
-// TODO(kberg): Rename to IBonus
-export interface Bonus {
+// Represents a Turmoil Chairman bonus.
+export interface IBonus {
   id: BonusId;
   description: string;
   grantForPlayer?(player: IPlayer): void;
@@ -11,16 +11,17 @@ export interface Bonus {
   getScore(player: IPlayer): number;
 }
 
-// TODO(kberg): Rename to Bonus
-export abstract class BaseBonus implements Bonus {
+export abstract class Bonus implements IBonus {
   abstract id: BonusId;
   abstract description: string;
   public abstract grantForPlayer(player: IPlayer): void;
   public abstract getScore(player: IPlayer): number;
 
   public grant(game: IGame): void {
-    game.getPlayersInGenerationOrder().filter((p) => {
-      return p.alliedParty === undefined;
-    }).forEach((p) => this.grantForPlayer?.(p));
+    for (const player of game.getPlayersInGenerationOrder()) {
+      if (player.alliedParty === undefined) {
+        this.grantForPlayer?.(player);
+      }
+    }
   }
 }

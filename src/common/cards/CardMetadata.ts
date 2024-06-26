@@ -3,7 +3,7 @@ import {ICardRenderDescription} from './render/ICardRenderDescription';
 import {CardComponent} from './render/CardComponent';
 
 // TODO(kberg): make type CardMetadata.
-export interface ICardMetadata {
+export type CardMetadata = {
   cardNumber?: string;
   /* When true, there's external text on the wiki. Render the card so it leads there. */
   hasExternalHelp?: true;

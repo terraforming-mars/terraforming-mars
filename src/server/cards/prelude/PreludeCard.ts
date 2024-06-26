@@ -1,6 +1,6 @@
 import {Card, StaticCardProperties} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {ICardMetadata} from '../../../common/cards/ICardMetadata';
+import {CardMetadata} from '../../../common/cards/CardMetadata';
 import {CardName} from '../../../common/cards/CardName';
 import {Tag} from '../../../common/cards/Tag';
 import {TileType} from '../../../common/TileType';
@@ -15,7 +15,7 @@ export type StaticPreludeProperties = {
   action?: Behavior;
   behavior?: Partial<Behavior>,
   globalParameterRequirementBonus?: GlobalParameterRequirementBonus;
-  metadata: ICardMetadata;
+  metadata: CardMetadata;
   name: CardName;
   tags?: Array<Tag>;
   tilesBuilt?: ReadonlyArray<TileType>,

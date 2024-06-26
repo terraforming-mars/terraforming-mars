@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {ICardMetadata} from '../../../common/cards/ICardMetadata';
+import {CardMetadata} from '../../../common/cards/CardMetadata';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
@@ -23,7 +23,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
   constructor(
     name: CardName,
     cost: number,
-    metadata: ICardMetadata) {
+    metadata: CardMetadata) {
     super({
       type: CardType.AUTOMATED,
       name,

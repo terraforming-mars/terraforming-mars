@@ -3,7 +3,7 @@ import {Units} from '../Units';
 import {CardName} from './CardName';
 import {CardType} from './CardType';
 import {GameModule} from './GameModule';
-import {ICardMetadata} from './ICardMetadata';
+import {CardMetadata} from './CardMetadata';
 import {CardRequirementDescriptor} from './CardRequirementDescriptor';
 import {IVictoryPoints} from './IVictoryPoints';
 import {Tag} from './Tag';
@@ -19,7 +19,7 @@ export type ClientCard = {
   cost?: number;
   type: CardType;
   requirements: Array<CardRequirementDescriptor>;
-  metadata: ICardMetadata;
+  metadata: CardMetadata;
   productionBox?: Units; // Replace with behavior?
   resourceType?: CardResource;
   startingMegaCredits?: number; // Corporation and Prelude

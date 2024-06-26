@@ -11,7 +11,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {ICardMetadata} from '@/common/cards/ICardMetadata';
+import {CardMetadata} from '@/common/cards/CardMetadata';
 import CardRequirementsComponent from './CardRequirementsComponent.vue';
 import CardVictoryPoints from './CardVictoryPoints.vue';
 import CardDescription from './CardDescription.vue';
@@ -22,7 +22,7 @@ export default Vue.extend({
   name: 'CardContent',
   props: {
     metadata: {
-      type: Object as () => ICardMetadata,
+      type: Object as () => CardMetadata,
       required: true,
     },
     requirements: {

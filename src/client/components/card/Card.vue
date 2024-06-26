@@ -31,7 +31,7 @@ import CardTags from './CardTags.vue';
 import {CardType} from '@/common/cards/CardType';
 import CardContent from './CardContent.vue';
 import CardHelp from './CardHelp.vue';
-import {ICardMetadata} from '@/common/cards/ICardMetadata';
+import {CardMetadata} from '@/common/cards/CardMetadata';
 import {Tag} from '@/common/cards/Tag';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {CardResource} from '@/common/CardResource';
@@ -128,7 +128,7 @@ export default Vue.extend({
       }
       return classes.join(' ');
     },
-    getCardMetadata(): ICardMetadata {
+    getCardMetadata(): CardMetadata {
       return this.cardInstance.metadata;
     },
     getCardRequirements(): Array<CardRequirementDescriptor> {

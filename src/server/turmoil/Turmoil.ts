@@ -18,7 +18,7 @@ import {MultiSet} from 'mnemonist';
 import {IPlayer} from '../IPlayer';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {SelectParty} from '../inputs/SelectParty';
-import {Policy, PolicyId, policyDescription} from './Policy';
+import {IPolicy, PolicyId, policyDescription} from './Policy';
 import {PlayerId} from '../../common/Types';
 import {ChoosePolicyBonus} from '../deferredActions/ChoosePolicyBonus';
 
@@ -140,7 +140,7 @@ export class Turmoil {
     return party;
   }
 
-  rulingPolicy(): Policy {
+  rulingPolicy(): IPolicy {
     const rulingParty = this.rulingParty;
     const rulingPolicyId: PolicyId = PoliticalAgendas.currentAgenda(this).policyId;
     const policy = rulingParty.policies.find((policy) => policy.id === rulingPolicyId);

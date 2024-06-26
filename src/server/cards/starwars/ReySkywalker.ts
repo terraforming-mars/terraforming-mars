@@ -9,6 +9,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../../common/TileType';
 import {message} from '../../logs/MessageBuilder';
 import {CardResource} from '../../../common/CardResource';
+import {AresHandler} from '../../ares/AresHandler';
 
 export class ReySkywalker extends Card implements IProjectCard {
   constructor() {
@@ -39,7 +40,7 @@ export class ReySkywalker extends Card implements IProjectCard {
   public override bespokePlay(player: Player) {
     return new SelectSpace(
       message('Select space for ${0}', (b) => b.card(this)),
-      player.game.board.getAvailableSpacesOnLand(player))
+      player.game.board.getAvailableSpacesOnLand(player).filter((space) => !AresHandler.hasHazardTile(space)))
       .andThen((space) => {
         player.game.simpleAddTile(player, space, {tileType: TileType.REY_SKYWALKER});
         return undefined;

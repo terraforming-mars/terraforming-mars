@@ -1,24 +1,17 @@
 import {expect} from 'chai';
 import {ReySkywalker} from '../../../src/server/cards/starwars/ReySkywalker';
-import {IGame} from '../../../src/server/IGame';
-import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
-import {TileType} from '../../../src/common/TileType';
+import {HAZARD_TILES, TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {intersection} from '../../../src/common/utils/utils';
 
 describe('ReySkywalker', () => {
-  let card: ReySkywalker;
-  let player: TestPlayer;
-  let game: IGame;
-
-  beforeEach(() => {
-    card = new ReySkywalker();
-    [game, player] = testGame(2, {starWarsExpansion: true});
-  });
-
   it('Play', () => {
+    const card = new ReySkywalker();
+    const [game, player] = testGame(2, {starWarsExpansion: true});
+
     maxOutOceans(player);
 
     // Pick a tile next to an ocean to show that the player does not gain the 2MC bonus.
@@ -38,5 +31,18 @@ describe('ReySkywalker', () => {
     expect(player.steel).eq(0);
     expect(player.megaCredits).eq(0);
     expect(game.board.getAvailableSpacesOnLand(player).map((s) => s.id)).not.contains(space.id);
+  });
+
+  it('Cannot play on Hazard tiles', () => {
+    const card = new ReySkywalker();
+    const [game, player] = testGame(2, {starWarsExpansion: true, aresExtension: true});
+
+    player.megaCredits = 8; // Necessary for this test to be valid due to hazard costs.
+
+    const hazardSpaces = game.board.spaces.filter((space) => space.tile?.tileType && HAZARD_TILES.has(space.tile?.tileType));
+    expect(hazardSpaces).has.lengthOf(3);
+    const {spaces} = cast(card.play(player), SelectSpace);
+    expect(spaces).has.lengthOf(45);
+    expect(intersection(spaces, hazardSpaces)).is.empty;
   });
 });

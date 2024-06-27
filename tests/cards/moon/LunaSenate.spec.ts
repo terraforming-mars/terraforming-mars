@@ -31,7 +31,7 @@ describe('LunaSenate', () => {
 
     card.play(player);
 
-    expect(player.production.megacredits).eq(9);
+    expect(player.production.megacredits).eq(4);
   });
 
   it('does not count opponent wild tags', () => {
@@ -41,12 +41,13 @@ describe('LunaSenate', () => {
 
     card.play(player);
 
-    expect(player.production.megacredits).eq(8);
+    expect(player.production.megacredits).eq(3);
   });
 
   it('getVictoryPoints', () => {
     player.playedCards.push(card);
     player.tagsForTest = {moon: 3};
+    player2.tagsForTest = {moon: 1};
     expect(card.getVictoryPoints(player)).eq(3);
 
     player.tagsForTest = {moon: 4};

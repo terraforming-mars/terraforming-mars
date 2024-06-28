@@ -82,13 +82,6 @@ export function addCity(player: IPlayer, spaceId?: SpaceId): Space {
   return space;
 }
 
-export function resetBoard(game: IGame): void {
-  game.board.spaces.forEach((space) => {
-    space.player = undefined;
-    space.tile = undefined;
-  });
-}
-
 export function setRulingParty(game: IGame, partyName: PartyName, policyId?: PolicyId) {
   const turmoil = Turmoil.getTurmoil(game);
   const party = turmoil.getPartyByName(partyName);

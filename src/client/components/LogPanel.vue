@@ -20,15 +20,15 @@
           </div>
           <div class='debugid'>(debugid {{step}})</div>
         </div>
-        <div class="card-panel" v-if="cardNames.length + globalEventNames.length + colonyNames.length > 0">
+        <div class="card-panel" v-if="cardNames.size + globalEventNames.size + colonyNames.size > 0">
           <AppButton size="big" type="close" :disableOnServerBusy="false" @click="hideMe" align="right"/>
-          <div id="log_panel_card" class="cardbox" v-for="cardName in cardNames.elements" :key="cardName">
+          <div id="log_panel_card" class="cardbox" v-for="cardName in cardNames" :key="cardName">
             <Card :card="{name: cardName, isSelfReplicatingRobotsCard: isSelfReplicatingRobotsCard(cardName), resources: getResourcesOnCard(cardName)}"/>
           </div>
-          <div id="log_panel_card" class="cardbox" v-for="globalEventName in globalEventNames.elements" :key="globalEventName">
+          <div id="log_panel_card" class="cardbox" v-for="globalEventName in globalEventNames" :key="globalEventName">
             <global-event :globalEventName="globalEventName" type="prior" :showIcons="false"></global-event>
           </div>
-          <div id="log_panel_card" class="cardbox" v-for="colonyName in colonyNames.elements" :key="colonyName">
+          <div id="log_panel_card" class="cardbox" v-for="colonyName in colonyNames" :key="colonyName">
             <colony :colony="getColony(colonyName)"></colony>
           </div>
         </div>
@@ -61,23 +61,13 @@ import {ColonyModel} from '@/common/models/ColonyModel';
 
 let logRequest: XMLHttpRequest | undefined;
 
-class ToggleSet<T> {
-  public elements: Array<T> = [];
+class ToggleSet<T> extends Set<T> {
   public toggle(item: T) {
-    const index = this.elements.indexOf(item);
-    if (index === -1) {
-      this.elements.push(item);
+    if (this.has(item)) {
+      this.delete(item);
     } else {
-      this.elements.splice(index, 1);
+      this.add(item);
     }
-  }
-
-  public get length() {
-    return this.elements.length;
-  }
-
-  public clear() {
-    return this.elements = [];
   }
 }
 
@@ -144,11 +134,11 @@ export default Vue.extend({
           return;
         }
         if (data.type === LogMessageDataType.CARD) {
-          this.cardNames.toggle(data.value as CardName);
+          this.cardNames.toggle(data.value);
         } else if (data.type === LogMessageDataType.GLOBAL_EVENT) {
-          this.globalEventNames.toggle(data.value as GlobalEventName);
+          this.globalEventNames.toggle(data.value);
         } else if (data.type === LogMessageDataType.COLONY) {
-          this.colonyNames.toggle(data.value as ColonyName);
+          this.colonyNames.toggle(data.value);
         }
       });
     },

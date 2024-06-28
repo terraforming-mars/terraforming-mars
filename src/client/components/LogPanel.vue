@@ -138,7 +138,6 @@ export default Vue.extend({
       }
     },
     messageClicked(message: LogMessage) {
-      // TODO(kberg): add global event here, too.
       const datas = message.data;
       datas.forEach((data: LogMessageData) => {
         if (data.value === undefined) {

@@ -395,7 +395,7 @@ export abstract class Card implements ICard {
       return 0;
     }
     let sum = 0;
-    const discounts = Array.isArray(this.cardDiscount) ? this.cardDiscount : [this.cardDiscount];
+    const discounts = asArray(this.cardDiscount);
     for (const discount of discounts) {
       if (discount.tag === undefined) {
         sum += discount.amount;

@@ -5,6 +5,7 @@ import {IProjectCard} from './IProjectCard';
 import {isICloneTagCard} from './pathfinders/ICloneTagCard';
 import {SelfReplicatingRobots} from './promo/SelfReplicatingRobots';
 import {CardType} from '../../common/cards/CardType';
+import {asArray} from '../../common/utils/utils';
 
 export function serializeProjectCard(card: IProjectCard): SerializedCard {
   const serialized: SerializedCard = {
@@ -76,7 +77,7 @@ export function deserializeProjectCard(element: SerializedCard): IProjectCard {
   }
   if (!(card instanceof SelfReplicatingRobots)) {
     if (element.bonusResource !== undefined) {
-      card.bonusResource = Array.isArray(element.bonusResource) ? element.bonusResource : [element.bonusResource];
+      card.bonusResource = asArray(element.bonusResource);
     }
   }
   if (isCeoCard(card)) {

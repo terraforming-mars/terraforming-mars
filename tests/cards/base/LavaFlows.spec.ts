@@ -3,7 +3,7 @@ import {LavaFlows} from '../../../src/server/cards/base/LavaFlows';
 import {IGame} from '../../../src/server/IGame';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {TileType} from '../../../src/common/TileType';
-import {cast, resetBoard, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {BoardName} from '../../../src/common/boards/BoardName';
@@ -12,12 +12,12 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 describe('LavaFlows', function() {
   let card: LavaFlows;
   let player: TestPlayer;
+  let otherPlayer: TestPlayer;
   let game: IGame;
 
   beforeEach(function() {
     card = new LavaFlows();
-    [game, player] = testGame(2);
-    resetBoard(game);
+    [game, player, otherPlayer] = testGame(2);
   });
 
   it('Cannot play if no available spaces', function() {
@@ -27,8 +27,7 @@ describe('LavaFlows', function() {
 
     expect(card.canPlay(player)).is.true;
 
-    const anotherPlayer = TestPlayer.RED.newPlayer();
-    game.board.getSpaceOrThrow(SpaceName.ASCRAEUS_MONS).player = anotherPlayer; // land claim
+    game.board.getSpaceOrThrow(SpaceName.ASCRAEUS_MONS).player = otherPlayer; // land claim
     expect(card.canPlay(player)).is.not.true;
   });
 

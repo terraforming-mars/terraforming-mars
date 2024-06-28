@@ -8,7 +8,7 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {EmptyBoard} from '../../ares/EmptyBoard';
-import {addGreenery, resetBoard, setRulingParty, runAllActions, cast, forceGenerationEnd, maxOutOceans, setOxygenLevel, setTemperature} from '../../TestingUtils';
+import {addGreenery, setRulingParty, runAllActions, cast, forceGenerationEnd, maxOutOceans, setOxygenLevel, setTemperature} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -132,21 +132,17 @@ describe('GeologicalSurvey', () => {
   });
 
   it('Works with Mars First policy', () => {
-    [game, player] = testGame(1, {turmoilExtension: true});
+    [game, player] = testGame(2, {turmoilExtension: true});
 
     player.playedCards.push(card);
     game.phase = Phase.ACTION; // Policies are only active in the ACTION phase
-
-    resetBoard(game);
 
     addGreenery(player, '11');
     runAllActions(game);
     expect(player.steel).eq(0);
 
-    resetBoard(game);
-
     setRulingParty(game, PartyName.MARS);
-    addGreenery(player, '11');
+    addGreenery(player, '12');
     runAllActions(game);
     expect(player.steel).eq(2);
   });

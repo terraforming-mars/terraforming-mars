@@ -15,7 +15,7 @@ import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {ALL_RESOURCES, Resource} from '../../../src/common/Resource';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {resetBoard, runNextAction, cast, runAllActions, addCity, addOcean} from '../../TestingUtils';
+import {runNextAction, cast, runAllActions, addCity, addOcean} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {ICard} from '../../../src/server/cards/ICard';
 import {TestPlayer} from '../../TestPlayer';
@@ -318,8 +318,6 @@ describe('RoboticWorkforce', () => {
         game.moonData!.habitatRate = 3;
         game.moonData!.logisticRate = 3;
 
-        // place some tiles
-        resetBoard(game);
         addCity(player, '17');
         addCity(player, '19');
         addOcean(player, '32');

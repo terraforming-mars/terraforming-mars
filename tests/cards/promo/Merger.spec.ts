@@ -41,6 +41,7 @@ import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {Inventrix} from '../../../src/server/cards/corporation/Inventrix';
 import {Ambient} from '../../../src/server/cards/pathfinders/Ambient';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {asArray} from '../../../src/common/utils/utils';
 
 describe('Merger', () => {
   let merger: Merger;
@@ -291,7 +292,7 @@ describe('Merger', () => {
 
   describe('Mergability outliers for weird cases', () => {
     function testMergability(currentCorp: ICorporationCard | [ICorporationCard, ICorporationCard], candidate: ICorporationCard, megacredits: number, pass: boolean) {
-      const corporations = Array.isArray(currentCorp) ? currentCorp : [currentCorp];
+      const corporations = asArray(currentCorp);
       const corpNames = corporations.map((c) => c.name).join(', ');
 
       it(`(${corpNames}, ${candidate.name}, ${megacredits})`, () => {

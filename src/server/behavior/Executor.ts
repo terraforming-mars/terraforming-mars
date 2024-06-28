@@ -36,6 +36,7 @@ import {RemoveResourcesFromCard} from '../deferredActions/RemoveResourcesFromCar
 import {isIProjectCard} from '../cards/IProjectCard';
 import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '../../common/constants';
 import {CardName} from '../../common/cards/CardName';
+import {asArray} from '../../common/utils/utils';
 
 export class Executor implements BehaviorExecutor {
   public canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions) {
@@ -408,7 +409,7 @@ export class Executor implements BehaviorExecutor {
     }
 
     if (behavior.addResourcesToAnyCard) {
-      const array = Array.isArray(behavior.addResourcesToAnyCard) ? behavior.addResourcesToAnyCard : [behavior.addResourcesToAnyCard];
+      const array = asArray(behavior.addResourcesToAnyCard);
       for (const arctac of array) {
         const count = ctx.count(arctac.count);
         if (count > 0) {

@@ -11,7 +11,7 @@ describe('Arklight', function() {
     expect(play).is.undefined;
     runAllActions(game);
     expect(card.resourceCount).to.eq(1);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     card.onCardPlayed(player, new Predators());
     expect(card.resourceCount).to.eq(2);
     expect(card.getVictoryPoints(player)).to.eq(1);

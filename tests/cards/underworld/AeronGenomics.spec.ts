@@ -29,7 +29,7 @@ describe('AeronGenomics', function() {
   });
 
   it('onExcavate', () => {
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     card.resourceCount = 0;
     const spaces = UnderworldExpansion.excavatableSpaces(player);
     spaces[0].undergroundResources = 'nothing';

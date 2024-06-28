@@ -26,7 +26,7 @@ describe('JensonBoyleCo', () => {
   });
 
   it('canAct', () => {
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
 
     expect(card.canAct(player)).is.false;
 

@@ -16,7 +16,7 @@ describe('Polaris', function() {
   beforeEach(function() {
     card = new Polaris();
     [game, player, player2] = testGame(2);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
   });
 
   it('initial action', function() {

@@ -11,7 +11,7 @@ describe('MorningStarInc', function() {
     const min8Card = new IshtarMining();
     const max10Card = new SpinInducingAsteroid();
     const [game, player] = testGame(2);
-    player.setCorporationForTest(corp);
+    player.corporations.push(corp);
 
     setVenusScaleLevel(game, 2);
     expect(min8Card.canPlay(player)).is.false;

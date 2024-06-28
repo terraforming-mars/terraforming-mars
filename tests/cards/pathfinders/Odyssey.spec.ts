@@ -36,7 +36,7 @@ describe('Odyssey', () => {
   beforeEach(() => {
     odyssey = new Odyssey();
     [game, player] = testGame(1);
-    player.setCorporationForTest(odyssey);
+    player.corporations.push(odyssey);
   });
 
   it('events count for tags', () => {
@@ -220,7 +220,7 @@ describe('Odyssey', () => {
     expect(player.megaCredits).to.eq(0);
 
     // Now there will be enough tags, with the event.
-    player.setCorporationForTest(odyssey);
+    player.corporations.push(odyssey);
     diversity.resolve(game, turmoil);
 
     expect(player.megaCredits).to.eq(10);

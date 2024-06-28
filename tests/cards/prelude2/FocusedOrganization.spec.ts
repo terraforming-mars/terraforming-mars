@@ -90,7 +90,7 @@ describe('FocusedOrganization', () => {
     const card = new FocusedOrganization();
     const solBank = new SolBank();
     const [game, player] = testGame(1, {pathfindersExpansion: true});
-    player.setCorporationForTest(solBank);
+    player.corporations.push(solBank);
 
     const firstCard = game.projectDeck.drawOrThrow(game);
     const secondCard = game.projectDeck.drawOrThrow(game);

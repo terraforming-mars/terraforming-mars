@@ -55,7 +55,7 @@ describe('NitrophilicMoss', function() {
 
   it('Should play', function() {
     maxOutOceans(player, 3);
-    player.setCorporationForTest(new Manutech());
+    player.corporations.push(new Manutech());
     expect(card.canPlay(player)).is.true;
   });
 });

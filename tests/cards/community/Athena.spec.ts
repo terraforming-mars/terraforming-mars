@@ -17,7 +17,7 @@ describe('Athena', () => {
     card = new Athena();
     [game, player/* , player2 */] = testGame(2, {aresExtension: true, aresHazards: true});
     card.play(player);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
   });
 
   it('Initial action', () => {

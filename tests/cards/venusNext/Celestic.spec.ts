@@ -10,7 +10,7 @@ describe('Celestic', function() {
     const play = card.play(player);
     expect(play).is.undefined;
 
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
 
     expect(churnAction(card, player)).is.undefined;
     expect(card.resourceCount).to.eq(1);

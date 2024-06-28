@@ -88,7 +88,7 @@ describe('TempestConsultancy', () => {
   });
 
   it('new chairman', () => {
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     turmoil.dominantParty = new Greens();
     turmoil.dominantParty.partyLeader = player;
     expect(player.getTerraformRating()).eq(20);
@@ -101,7 +101,7 @@ describe('TempestConsultancy', () => {
   });
 
   it('With Vote of No Confidence', () => {
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     turmoil.chairman = 'NEUTRAL';
 
     const greens = turmoil.getPartyByName(PartyName.GREENS);

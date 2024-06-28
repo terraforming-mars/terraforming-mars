@@ -125,7 +125,7 @@ describe('HellasBoard', function() {
   });
 
   it('Cannot place on ocean space EVEN if Manutech can make up the difference - replicates #931', () => {
-    player.setCorporationForTest(new Manutech());
+    player.corporations.push(new Manutech());
     const domedCrater = new DomedCrater();
     player.production.add(Resource.ENERGY, 1);
     domedCrater.play(player);

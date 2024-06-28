@@ -21,7 +21,7 @@ describe('DemetronLabs', () => {
     const card = new DemetronLabs();
     const [game, player/* , player2 */] = testGame(2, {underworldExpansion: true});
 
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
 
     function identify(player: IPlayer) {
       UnderworldExpansion.identify(game, UnderworldExpansion.identifiableSpaces(player)[0], player);

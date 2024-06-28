@@ -30,7 +30,7 @@ describe('Playwrights', () => {
     [game, player, player2] = testGame(2);
 
     card.play(player);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
   });
 
   it('Cannot act without any played events', () => {

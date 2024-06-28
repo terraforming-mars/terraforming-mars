@@ -20,7 +20,7 @@ describe('CuriosityII', function() {
     [game, player, player2] = testGame(2, {aresExtension: true, aresHazards: false});
     game.phase = Phase.ACTION;
 
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     player.megaCredits = 2;
   });
 

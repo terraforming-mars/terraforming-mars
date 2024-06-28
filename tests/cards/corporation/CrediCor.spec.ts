@@ -20,7 +20,7 @@ describe('CrediCor', function() {
 
   it('Should play', function() {
     cast(card.play(player), undefined);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     card.onStandardProject(player, new AsteroidStandardProject());
     card.onStandardProject(player, new CityStandardProject());
     card.onStandardProject(player, new GreeneryStandardProject());
@@ -28,7 +28,7 @@ describe('CrediCor', function() {
   });
 
   it('Runs onCardPlayed', function() {
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     expect(player.megaCredits).to.eq(0);
     card.onCardPlayed(player, new GiantIceAsteroid());
     expect(player.megaCredits).to.eq(4);

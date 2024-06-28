@@ -33,7 +33,7 @@ describe('ProjectWorkshop', function() {
     [game, player] = testGame(1);
 
     card.play(player);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
   });
 
   it('Starts with correct resources', function() {
@@ -126,7 +126,7 @@ describe('ProjectWorkshop', function() {
   it('Project Workshop and Reds taxes', () => {
     [game, player] = testGame(1, {turmoilExtension: true});
     card.play(player);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     player.game.phase = Phase.ACTION;
 
     const turmoil = game.turmoil!;

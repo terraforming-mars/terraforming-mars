@@ -13,7 +13,7 @@ describe('Poseidon', function() {
 
     cast(card.play(player), undefined);
 
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     const ceres = new Ceres();
     ceres.addColony(player);
 

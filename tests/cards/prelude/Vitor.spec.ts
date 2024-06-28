@@ -38,7 +38,7 @@ describe('Vitor', function() {
   });
 
   it('Give megacredits when card played', function() {
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
 
     // Dust Seals has victory points
     card.onCardPlayed(player, new DustSeals());

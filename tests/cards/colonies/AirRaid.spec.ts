@@ -20,7 +20,7 @@ describe('AirRaid', function() {
     [/* game */, player, player2] = testGame(3);
 
     stormcraftIncorporated = new StormCraftIncorporated();
-    player.setCorporationForTest(stormcraftIncorporated);
+    player.corporations.push(stormcraftIncorporated);
   });
 
   it('Can not play', function() {

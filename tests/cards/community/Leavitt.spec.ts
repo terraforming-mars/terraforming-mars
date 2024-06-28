@@ -111,7 +111,7 @@ describe('Leavitt', function() {
     // This test verifies that a regression doesn't reoccur.
     // Merely completing these is sufficient because
     // it doesn't throw an Error.
-    player.setCorporationForTest(new Vitor());
+    player.corporations.push(new Vitor());
     expect(player.tags.count(Tag.SCIENCE)).to.eq(0);
     leavitt.addColony(player);
     expect(player.tags.count(Tag.SCIENCE)).to.eq(1);

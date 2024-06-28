@@ -25,7 +25,7 @@ describe('MiningGuild', () => {
       aresHazards: false,
     });
 
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
   });
 
   it('Should play', () => {

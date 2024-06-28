@@ -11,7 +11,7 @@ describe('Thorgate', function() {
     const card = new Thorgate();
     const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     expect(player.production.energy).to.eq(1);
     expect(card.getCardDiscount(player, new EnergySaving())).to.eq(3);
     expect(card.getCardDiscount(player, new Pets())).to.eq(0);

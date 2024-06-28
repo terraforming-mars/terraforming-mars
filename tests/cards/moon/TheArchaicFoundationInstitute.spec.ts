@@ -21,7 +21,7 @@ describe('TheArchaicFoundationInstitute', () => {
   beforeEach(() => {
     [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true});
     card = new TheArchaicFoundationInstitute();
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
   });
 
   it('effect', () => {

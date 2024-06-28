@@ -25,7 +25,7 @@ describe('HenkeiGenetics', () => {
   });
 
   it('canAct', () => {
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
 
     expect(card.canAct(player)).is.false;
 
@@ -35,7 +35,7 @@ describe('HenkeiGenetics', () => {
   });
 
   it('action', () => {
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     player.underworldData.corruption = 1;
 
     cast(card.action(player), undefined);
@@ -48,7 +48,7 @@ describe('HenkeiGenetics', () => {
   });
 
   it('onCardPlayed', () => {
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     const tardigrades = new Tardigrades();
     card.onCardPlayed(player, tardigrades);
     runAllActions(game);

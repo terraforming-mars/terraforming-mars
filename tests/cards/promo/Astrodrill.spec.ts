@@ -15,7 +15,7 @@ describe('Astrodrill', function() {
   beforeEach(function() {
     card = new Astrodrill();
     [/* game */, player/* , player2 */] = testGame(2);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     card.play(player);
     runAllActions(player.game);
   });

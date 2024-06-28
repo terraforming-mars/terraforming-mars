@@ -16,7 +16,7 @@ describe('Ringcom', function() {
   beforeEach(function() {
     card = new Ringcom();
     [game, player, player2] = testGame(2);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
   });
 
   it('play', () => {

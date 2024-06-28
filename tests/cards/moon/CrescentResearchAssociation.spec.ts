@@ -28,7 +28,7 @@ describe('CrescentResearchAssociation', () => {
     setOxygenLevel(game, 14);
 
     player.cardsInHand = [mareNectarisMine, predators];
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
 
     player.tagsForTest = {moon: 0};
     player.megaCredits = 14;

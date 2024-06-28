@@ -3,7 +3,7 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {Stefan} from '../../../src/server/cards/ceos/Stefan';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {forceGenerationEnd, fakeCard} from '../../TestingUtils';
+import {forceGenerationEnd, fakeCard, cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
@@ -27,7 +27,7 @@ describe('Stefan', function() {
     player.cardsInHand.push(fake1, fake2);
     expect(card.canAct(player)).is.true;
 
-    const selectCard = card.action(player) as SelectCard<ICard>;
+    const selectCard = cast(card.action(player), SelectCard<ICard>);
     game.deferredActions.runNext();
     selectCard.cb([fake1, fake2]);
     game.deferredActions.runAll(() => {});
@@ -41,7 +41,7 @@ describe('Stefan', function() {
     player.cardsInHand.push(fake1, fake2);
     expect(card.canAct(player)).is.true;
 
-    const selectCard = card.action(player) as SelectCard<ICard>;
+    const selectCard = cast(card.action(player), SelectCard<ICard>);
     game.deferredActions.runNext();
     selectCard.cb([fake1]);
     game.deferredActions.runAll(() => {});
@@ -53,7 +53,7 @@ describe('Stefan', function() {
     const fake1 = fakeCard({tags: []});
     player.cardsInHand.push(fake1);
 
-    const selectCard = card.action(player) as SelectCard<ICard>;
+    const selectCard = cast(card.action(player), SelectCard<ICard>);
     game.deferredActions.runNext();
     selectCard.cb([fake1]);
     forceGenerationEnd(game);

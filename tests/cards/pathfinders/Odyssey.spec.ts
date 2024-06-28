@@ -43,7 +43,7 @@ describe('Odyssey', () => {
     const event = fakeCard({type: CardType.EVENT, tags: [Tag.JOVIAN]});
     player.playedCards.push(event);
     expect(player.tags.count(Tag.JOVIAN)).eq(1);
-    player.setCorporationForTest(undefined);
+    player.corporations = [];
     expect(player.tags.count(Tag.JOVIAN)).eq(0);
   });
 

@@ -69,7 +69,7 @@ describe('IntragenSanctuaryHeadquarters', () => {
   });
 
   it('works with Meat Industry', () => {
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     const meatIndustry = new MeatIndustry();
     player.playedCards.push(meatIndustry);
     const pets = new Pets();

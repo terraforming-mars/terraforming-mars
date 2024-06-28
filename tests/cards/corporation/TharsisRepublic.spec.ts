@@ -18,7 +18,7 @@ describe('TharsisRepublic', function() {
     card = new TharsisRepublic();
     [game, player, player2] = testGame(2);
 
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
   });
 
   it('Should take initial action', function() {

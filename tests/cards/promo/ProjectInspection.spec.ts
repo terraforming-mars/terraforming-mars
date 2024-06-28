@@ -49,7 +49,7 @@ describe('ProjectInspection', function() {
 
   it('Can not play with Playwrights if there is no other card to chain', function() {
     const playwrights = new Playwrights();
-    player.setCorporationForTest(playwrights);
+    player.corporations.push(playwrights);
 
     player.addActionThisGeneration(playwrights.name);
     expect(card.canPlay(player)).is.false; // PI -> PW -> ???
@@ -58,7 +58,7 @@ describe('ProjectInspection', function() {
   it('Can be used to play Playwrights into another available event card', function() {
     const playwrights = new Playwrights();
     const indenturedWorkers = new IndenturedWorkers();
-    player.setCorporationForTest(playwrights);
+    player.corporations.push(playwrights);
     player.playedCards.push(indenturedWorkers);
     player.addActionThisGeneration(playwrights.name);
     expect(card.canPlay(player)).is.true; // PI -> PW -> PI -> PW -> IW
@@ -88,7 +88,7 @@ describe('ProjectInspection', function() {
   it('Can be used to play Odyssey into another available event card', function() {
     const odyssey = new Odyssey();
     const indenturedWorkers = new IndenturedWorkers();
-    player.setCorporationForTest(odyssey);
+    player.corporations.push(odyssey);
     player.playedCards.push(indenturedWorkers);
     player.addActionThisGeneration(odyssey.name);
     expect(card.canPlay(player)).is.true; // PI -> OD -> PI -> OD -> IW
@@ -118,7 +118,7 @@ describe('ProjectInspection', function() {
 
   it('Can be played by Playwrights into different blue card', function() {
     const playwrights = new Playwrights();
-    player.setCorporationForTest(playwrights);
+    player.corporations.push(playwrights);
     player.playedCards.push(card);
     player.playedCards.push(restrictedArea);
     player.addActionThisGeneration(restrictedArea.name);
@@ -140,7 +140,7 @@ describe('ProjectInspection', function() {
   it('Can be played by Playwrights into Playwrights into another available event card', function() {
     const playwrights = new Playwrights();
     const indenturedWorkers = new IndenturedWorkers();
-    player.setCorporationForTest(playwrights);
+    player.corporations.push(playwrights);
     player.playedCards.push(card);
     player.playedCards.push(indenturedWorkers);
     player.addActionThisGeneration(playwrights.name);

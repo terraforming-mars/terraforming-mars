@@ -28,7 +28,7 @@ describe('PharmacyUnion', function() {
   beforeEach(function() {
     card = new PharmacyUnion();
     [game, player, player2] = testGame(2);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
   });
 
   it('Should play', function() {

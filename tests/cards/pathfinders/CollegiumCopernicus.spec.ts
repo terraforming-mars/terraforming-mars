@@ -25,7 +25,7 @@ describe('CollegiumCopernicus', function() {
   beforeEach(function() {
     card = new CollegiumCopernicus();
     [game, player] = testGame(2, {coloniesExtension: true, pathfindersExpansion: true});
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     // Looks as though when Enceladus is first, the test fails. So removing flakiness by defining colonies.
     game.colonies = [
       new Europa(),

@@ -32,7 +32,7 @@ describe('ArboristCollective', () => {
   });
 
   it('action', () => {
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
 
     card.resourceCount = 3;
 
@@ -44,7 +44,7 @@ describe('ArboristCollective', () => {
   });
 
   it('onCardPlayed', () => {
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
 
     expect(card.resourceCount).eq(0);
 

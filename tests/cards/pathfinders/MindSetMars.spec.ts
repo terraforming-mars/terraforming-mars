@@ -24,7 +24,7 @@ describe('MindSetMars', function() {
   beforeEach(function() {
     card = new MindSetMars();
     [game, player, player2] = testGame(3, {turmoilExtension: true});
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     turmoil = game.turmoil!;
   });
 

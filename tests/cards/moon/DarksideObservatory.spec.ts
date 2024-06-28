@@ -51,13 +51,13 @@ describe('DarksideObservatory', () => {
     expect(card.canAct(player)).is.true;
 
     player.playedCards = [];
-    player.setCorporationForTest(nanotechIndustries);
+    player.corporations.push(nanotechIndustries);
     expect(card.canAct(player)).is.true;
   });
 
   it('act', () => {
     player.playedCards = [physicsComplex, searchForLife, olympusConference, prideoftheEarthArkship, processorFactory];
-    player.setCorporationForTest(nanotechIndustries);
+    player.corporations.push(nanotechIndustries);
     const input = card.action(player);
 
     expect(input.cards).has.members([olympusConference, prideoftheEarthArkship, processorFactory, nanotechIndustries]);

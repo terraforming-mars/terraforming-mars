@@ -16,7 +16,7 @@ describe('RobinHaulings', function() {
   beforeEach(function() {
     card = new RobinHaulings();
     [game, player, player2] = testGame(2);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
   });
 
   it('play', () => {

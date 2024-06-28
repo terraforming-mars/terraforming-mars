@@ -29,7 +29,7 @@ describe('NanotechIndustries', () => {
   });
 
   it('act', () => {
-    player.setCorporationForTest(nanotechIndustries);
+    player.corporations.push(nanotechIndustries);
     player.playedCards = [physicsComplex, searchForLife, olympusConference, prideoftheEarthArkship];
     nanotechIndustries.action(player);
 

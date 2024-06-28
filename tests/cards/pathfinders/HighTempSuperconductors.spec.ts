@@ -68,7 +68,7 @@ describe('HighTempSuperconductors', function() {
 
   it('double-discount with Thorgate', function() {
     player.playedCards.push(card);
-    player.setCorporationForTest(new Thorgate());
+    player.corporations.push(new Thorgate());
 
     const powerPlant = new PowerPlantStandardProject();
     player.megaCredits = powerPlant.cost - 7;

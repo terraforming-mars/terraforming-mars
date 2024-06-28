@@ -34,7 +34,7 @@ describe('HecateSpeditions', function() {
   });
 
   it('when you play a jovian tag', function() {
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     const a = fakeCard({name: 'A' as CardName, tags: [Tag.JOVIAN]});
     expect(card.resourceCount).eq(0);
     player.playCard(a);
@@ -42,7 +42,7 @@ describe('HecateSpeditions', function() {
   });
 
   it('when opponent plays a building tag', function() {
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     const a = fakeCard({name: 'A' as CardName, tags: [Tag.BUILDING]});
     expect(card.resourceCount).eq(0);
     player2.playCard(a);
@@ -63,7 +63,7 @@ describe('HecateSpeditions', function() {
   it('trade', () => {
     assertNoTradeAction(player);
 
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     card.resourceCount = 1;
     assertNoTradeAction(player);
 

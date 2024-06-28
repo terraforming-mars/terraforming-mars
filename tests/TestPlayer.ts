@@ -3,7 +3,6 @@ import {PlayerInput} from '../src/server/PlayerInput';
 import {Color} from '../src/common/Color';
 import {Tag} from '../src/common/cards/Tag';
 import {InputResponse} from '../src/common/inputs/InputResponse';
-import {ICorporationCard} from '../src/server/cards/corporation/ICorporationCard';
 import {Tags} from '../src/server/player/Tags';
 import {IProjectCard} from '../src/server/cards/IProjectCard';
 import {PlayerId} from '../src/common/Types';
@@ -78,11 +77,6 @@ export class TestPlayer extends Player {
     this.waitingFor = undefined;
     this.waitingForCb = undefined;
     return waitingFor;
-  }
-
-  // TODO(remove)
-  public setCorporationForTest(card: ICorporationCard) {
-    this.corporations = [card];
   }
 
   public getPlayableCardsForTest(): Array<IProjectCard> {

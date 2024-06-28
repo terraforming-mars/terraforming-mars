@@ -18,10 +18,10 @@ describe('SoylentSeedlingSystems', function() {
   beforeEach(function() {
     soylent = new SoylentSeedlingSystems();
     [/* game */, player, player2] = testGame(2);
-    player.setCorporationForTest(soylent);
+    player.corporations.push(soylent);
     // Giving it a corporation card that stores resources to show it doesn't have any.
     celestic = new Celestic();
-    player2.setCorporationForTest(celestic);
+    player2.corporations.push(celestic);
   });
 
   it('on greenery placed', () => {

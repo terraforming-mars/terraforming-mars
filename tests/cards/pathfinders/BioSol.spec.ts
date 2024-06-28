@@ -14,7 +14,7 @@ describe('BioSol', function() {
   beforeEach(function() {
     card = new BioSol();
     [game, player] = testGame(1);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
   });
 
   it('initialAction', function() {

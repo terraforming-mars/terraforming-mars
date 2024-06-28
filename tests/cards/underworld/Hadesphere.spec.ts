@@ -41,7 +41,7 @@ describe('Hadesphere', () => {
   });
 
   it('action', () => {
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
 
     cast(card.action(player), undefined);
     runAllActions(game);

@@ -31,7 +31,7 @@ describe('Scientists', function() {
   });
 
   it('Ruling bonus 1: Gain 1 M€ for each science tag you have, with Habitat Marte', function() {
-    player.setCorporationForTest(new HabitatMarte());
+    player.corporations.push(new HabitatMarte());
     player.playedCards.push(new SearchForLife(), new DesignedOrganisms());
 
     const bonus = SCIENTISTS_BONUS_1;

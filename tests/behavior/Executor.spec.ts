@@ -510,7 +510,7 @@ describe('Executor', () => {
 
   it('spend - heat - Stormcraft', () => {
     const stormcraft = new StormCraftIncorporated();
-    player.setCorporationForTest(stormcraft);
+    player.corporations.push(stormcraft);
     const behavior = {spend: {heat: 3}};
     expect(executor.canExecute(behavior, player, fake)).is.false;
     stormcraft.resourceCount = 1;

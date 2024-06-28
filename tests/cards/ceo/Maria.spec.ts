@@ -60,7 +60,7 @@ describe('Maria', function() {
   });
 
   it('Takes action - chooses Venus, which is activated', () => {
-    player2.setCorporationForTest(new Celestic());
+    player2.corporations.push(new Celestic());
     const venus = new Venus();
     game.discardedColonies = [];
     game.discardedColonies.push(venus);
@@ -89,7 +89,7 @@ describe('Maria', function() {
   });
 
   it('Takes action - chooses Ieptus II, which is activated', () => {
-    player2.setCorporationForTest(new CollegiumCopernicus());
+    player2.corporations.push(new CollegiumCopernicus());
     const iapetusii = new IapetusII();
     game.discardedColonies = [];
     game.discardedColonies.push(iapetusii);

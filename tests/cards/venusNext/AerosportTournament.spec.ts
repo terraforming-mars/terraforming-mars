@@ -17,7 +17,7 @@ describe('AerosportTournament', function() {
   it('Can play', function() {
     const corp = new Celestic();
     const [/* game */, player] = testGame(2);
-    player.setCorporationForTest(corp);
+    player.corporations.push(corp);
     corp.resourceCount = 4;
     expect(card.canPlay(player)).is.not.true;
     corp.resourceCount = 5;

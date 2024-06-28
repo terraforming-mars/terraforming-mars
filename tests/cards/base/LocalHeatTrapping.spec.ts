@@ -73,7 +73,7 @@ describe('LocalHeatTrapping', () => {
 
   it('Cannot play as Helion if not enough heat left after paying for card', () => {
     helion.play(player);
-    player.setCorporationForTest(helion);
+    player.corporations.push(helion);
 
     player.megaCredits = 0;
     player.heat = 5; // have to pay for card with 1 heat
@@ -86,7 +86,7 @@ describe('LocalHeatTrapping', () => {
   it('Helion / Stormcraft merger canPlay', () => {
     const stormcraft = new StormCraftIncorporated();
     helion.play(player);
-    player.setCorporationForTest(helion);
+    player.corporations.push(helion);
     player.corporations.push(stormcraft);
     player.cardsInHand = [card];
 

@@ -17,7 +17,7 @@ describe('Aurorai', function() {
   beforeEach(function() {
     card = new Aurorai();
     [game, player] = testGame(1);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
   });
 
   it('on TR bump', () => {

@@ -13,7 +13,7 @@ describe('StormCraftIncorporated', function() {
   beforeEach(function() {
     card = new StormCraftIncorporated();
     [/* game */, player] = testGame(2);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
   });
 
   it('Should play', function() {

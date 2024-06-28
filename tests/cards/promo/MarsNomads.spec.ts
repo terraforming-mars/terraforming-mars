@@ -177,7 +177,7 @@ describe('MarsNomads', () => {
     beforeEach(() => {
       game.board = EmptyBoard.newInstance();
       philares = new Philares();
-      player2.setCorporationForTest(philares);
+      player2.corporations.push(philares);
     });
 
     it('Placement does not trigger Philares', () => {
@@ -218,7 +218,7 @@ describe('MarsNomads', () => {
     beforeEach(() => {
       game.board = EmptyBoard.newInstance();
       miningGuild = new MiningGuild();
-      player.setCorporationForTest(miningGuild);
+      player.corporations.push(miningGuild);
     });
 
     it('Placement does not trigger Mining Guild', () => {

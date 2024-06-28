@@ -21,7 +21,7 @@ describe('Viron', function() {
 
     cast(action, undefined);
 
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     const restrictedArea = new RestrictedArea();
     player.playedCards.push(restrictedArea);
     player.addActionThisGeneration(restrictedArea.name);
@@ -39,7 +39,7 @@ describe('Viron', function() {
   it('Cannot act once Viron is used', function() {
     card.play(player);
 
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     const restrictedArea = new RestrictedArea();
     player.playedCards.push(restrictedArea);
     player.addActionThisGeneration(restrictedArea.name);
@@ -52,7 +52,7 @@ describe('Viron', function() {
   it('Works with active preludes', () => {
     card.play(player);
 
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     const focusedOrganization = new FocusedOrganization();
 
     expect(focusedOrganization.canAct(player)).is.false;

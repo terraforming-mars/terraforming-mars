@@ -12,7 +12,7 @@ describe('PointLuna', function() {
   beforeEach(function() {
     card = new PointLuna();
     [/* game */, player] = testGame(1);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
   });
 
   it('Gets card when earth tag played', function() {

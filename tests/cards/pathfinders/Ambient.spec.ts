@@ -22,7 +22,7 @@ describe('Ambient', function() {
   beforeEach(function() {
     card = new Ambient();
     [game, player, player2] = testGame(2);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
   });
 
   it('initialAction', function() {
@@ -126,7 +126,7 @@ describe('Ambient', function() {
   for (const run of redsRuns) {
     it('is compatible with Reds + Helion ' + JSON.stringify(run), () => {
       [game, player, player2] = testGame(2, {turmoilExtension: true});
-      player.setCorporationForTest(card);
+      player.corporations.push(card);
       player.canUseHeatAsMegaCredits = true;
       player.game.phase = Phase.ACTION;
       const turmoil = Turmoil.getTurmoil(game);

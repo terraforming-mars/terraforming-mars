@@ -159,7 +159,7 @@ describe('RoboticWorkforce', () => {
 
   it('Should play with corporation cards', () => {
     const corporationCard = new UtopiaInvest();
-    player.setCorporationForTest(corporationCard);
+    player.corporations.push(corporationCard);
 
 
     cast(card.play(player), undefined);

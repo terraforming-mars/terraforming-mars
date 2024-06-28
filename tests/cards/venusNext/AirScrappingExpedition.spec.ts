@@ -21,7 +21,7 @@ describe('AirScrappingExpedition', function() {
     const card = new AirScrappingExpedition();
     const corp = new Celestic(); // Stores floaters, has Venus tag.
     const [game, player] = testGame(2);
-    player.setCorporationForTest(corp);
+    player.corporations.push(corp);
 
     expect(card.play(player)).is.undefined;
 
@@ -34,7 +34,7 @@ describe('AirScrappingExpedition', function() {
     const celestic = new Celestic(); // Stores floaters. has Venus tag
     const jsr = new JetStreamMicroscrappers(); // Stores floaters, has Venus tag.
     const [game, player] = testGame(2);
-    player.setCorporationForTest(celestic);
+    player.corporations.push(celestic);
     player.playedCards.push(jsr);
 
     const selectCard = cast(card.play(player), SelectCard<ICard>);

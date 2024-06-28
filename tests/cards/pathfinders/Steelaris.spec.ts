@@ -16,7 +16,7 @@ describe('Steelaris', function() {
   beforeEach(function() {
     card = new Steelaris();
     [game, player, player2] = testGame(2);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     game.board = EmptyBoard.newInstance();
   });
 

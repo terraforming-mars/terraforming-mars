@@ -14,7 +14,7 @@ describe('CommunityServices', function() {
     const researchCoordination = new ResearchCoordination();
     const [/* game*/, player] = testGame(1);
     player.playedCards.push(prelude, researchCoordination);
-    player.setCorporationForTest(corp);
+    player.corporations.push(corp);
     cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(1);
     expect(player.production.megacredits).to.eq(4);
@@ -27,7 +27,7 @@ describe('CommunityServices', function() {
     const researchCoordination = new ResearchCoordination();
     const [/* game*/, player] = testGame(1);
     player.playedCards.push(prelude, researchCoordination);
-    player.setCorporationForTest(septumTribus);
+    player.corporations.push(septumTribus);
     cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(1);
     expect(player.production.megacredits).to.eq(4);

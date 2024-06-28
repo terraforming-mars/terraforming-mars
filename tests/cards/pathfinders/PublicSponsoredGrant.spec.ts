@@ -80,7 +80,7 @@ describe('PublicSponsoredGrant', function() {
   });
 
   it('compatible with Mons Insurance', function() {
-    player2.setCorporationForTest(new MonsInsurance());
+    player2.corporations.push(new MonsInsurance());
     // This isn't very clean but it's necessary for the test.
     game.monsInsuranceOwner = player2.id;
     player.megaCredits = 10;

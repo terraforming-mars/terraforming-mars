@@ -17,7 +17,7 @@ describe('RobinsonIndustries', function() {
   beforeEach(function() {
     card = new RobinsonIndustries();
     [game, player] = testGame(1);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
   });
 
   it('Can not act', function() {

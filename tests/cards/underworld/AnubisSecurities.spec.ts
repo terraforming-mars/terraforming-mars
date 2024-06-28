@@ -40,7 +40,7 @@ describe('AnubisSecurities', () => {
     const card = new AnubisSecurities();
     const [/* game */, player] = testGame(2);
 
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     player.megaCredits = 0;
 
     player.increaseTerraformRating(1);
@@ -54,7 +54,7 @@ describe('AnubisSecurities', () => {
     const card = new AnubisSecurities();
     const [/* game */, player, player2] = testGame(2);
 
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     player.megaCredits = 0;
     player2.megaCredits = 0;
 
@@ -80,7 +80,7 @@ describe('AnubisSecurities', () => {
       const card = new AnubisSecurities();
       const [game, player, player2] = testGame(2);
 
-      player.setCorporationForTest(card);
+      player.corporations.push(card);
       player.underworldData.corruption = run.corruptions[0];
       player2.underworldData.corruption = run.corruptions[1];
 

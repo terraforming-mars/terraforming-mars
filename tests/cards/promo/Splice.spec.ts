@@ -25,7 +25,7 @@ describe('Splice', function() {
     const play = card.play(player);
     expect(play).is.undefined;
 
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
 
     player2.playedCards.push(card2);
     const action = cast(card.onCardPlayed(player2, card2), OrOptions);
@@ -42,9 +42,9 @@ describe('Splice', function() {
     player.popWaitingFor(); // Select initial cards
     const card2 = new PharmacyUnion();
     const play = card.play(player);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     const play2 = card2.play(player);
-    player2.setCorporationForTest(card2);
+    player2.corporations.push(card2);
     expect(play).is.undefined;
     expect(play2).is.undefined;
 

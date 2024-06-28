@@ -57,7 +57,7 @@ describe('Voltagon', () => {
   });
 
   it('onExcavate', () => {
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     player.energy = 0;
     const spaces = UnderworldExpansion.excavatableSpaces(player);
     spaces[0].undergroundResources = 'nothing';

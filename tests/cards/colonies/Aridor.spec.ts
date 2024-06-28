@@ -26,7 +26,7 @@ describe('Aridor', function() {
     // 2-player so as to not bother with pre-game action that drops a colony.
     [game, player, player2] = testGame(2, {coloniesExtension: true});
 
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
   });
 
   it('Should play', function() {
@@ -86,7 +86,7 @@ describe('Aridor', function() {
   });
 
   it('initialAction - chooses Venus, which is activated', () => {
-    player2.setCorporationForTest(new Celestic());
+    player2.corporations.push(new Celestic());
     const venus = new Venus();
     game.discardedColonies.push(venus);
     player.deferInitialAction(card);

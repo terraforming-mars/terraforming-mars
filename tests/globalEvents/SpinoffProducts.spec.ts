@@ -39,7 +39,7 @@ describe('SpinoffProducts', function() {
   });
 
   it('resolve play, with Habitat Marte', function() {
-    player.setCorporationForTest(new HabitatMarte());
+    player.corporations.push(new HabitatMarte());
     player.playedCards.push(new Research(), new DesignedOrganisms());
 
     turmoil.chairman = player2;

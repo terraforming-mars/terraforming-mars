@@ -65,7 +65,7 @@ export type SerializedGame = {
     tradeEmbargo?: boolean;
     turmoil?: SerializedTurmoil;
     undoCount: number;
-    underworldData?: UnderworldData; // TODO(kberg): remove ? anytime.
+    underworldData: UnderworldData;
     // TODO(kberg): remove unDraftedCards after 2024-08-01
     unDraftedCards?: Array<[PlayerId, Array<CardName>]>;
     venusScaleLevel: number;

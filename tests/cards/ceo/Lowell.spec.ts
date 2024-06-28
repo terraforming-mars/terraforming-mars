@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {LightningHarvest} from '../../../src/server/cards/base/LightningHarvest';
 import {CardType} from '../../../src/common/cards/CardType';
-import {ICard} from '../../../src/server/cards/ICard';
+import {ICeoCard} from '../../../src/server/cards/ceos/ICeoCard';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {forceGenerationEnd, fakeCard} from '../../TestingUtils';
+import {forceGenerationEnd, fakeCard, cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Tag} from '../../../src/common/cards/Tag';
 import {Lowell} from '../../../src/server/cards/ceos/Lowell';
@@ -29,7 +29,6 @@ describe('Lowell', function() {
     expect(player.tags.count(Tag.SCIENCE)).eq(1);
     expect(player.tags.count(Tag.SCIENCE, 'raw')).eq(0);
 
-
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE]}));
     const lightningHarvest = new LightningHarvest();
     expect(lightningHarvest.canPlay(player)).is.true;
@@ -41,10 +40,12 @@ describe('Lowell', function() {
   });
 
   it('Takes OPG action', function() {
-    const selectCard = card.action(player) as SelectCard<ICard>;
-    game.deferredActions.runNext();
+    cast(card.action(player), undefined);
+    runAllActions(game);
 
+    const selectCard = cast(player.popWaitingFor(), SelectCard<ICeoCard>);
     selectCard.cb([selectCard.cards[0]]);
+
     expect(player.playedCards.filter((card) => card.type === CardType.CEO).length).eq(1);
     expect(player.playedCards.includes(card)).is.false;
     expect(player.megaCredits).eq(0);

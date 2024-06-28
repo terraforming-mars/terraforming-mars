@@ -80,12 +80,9 @@ export class TestPlayer extends Player {
     return waitingFor;
   }
 
-  public setCorporationForTest(card: ICorporationCard | undefined) {
-    if (card === undefined) {
-      this.corporations = [];
-    } else {
-      this.corporations = [card];
-    }
+  // TODO(remove)
+  public setCorporationForTest(card: ICorporationCard) {
+    this.corporations = [card];
   }
 
   public getPlayableCardsForTest(): Array<IProjectCard> {

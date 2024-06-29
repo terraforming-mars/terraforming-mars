@@ -129,7 +129,6 @@ describe('PlayerInputFactory', function() {
 
 // function runTest(playerInput: Omit<PlayerInputModel, 'title' | 'buttonLabel'>) {
 function runTest(playerInput: Partial<PlayerInputModel>) {
-  // TODO(kberg): this no longer needs to be partial, but needs all the invocations above to change.
   const fullInput: Partial<PlayerInputModel> = {
     title: 'test input',
     buttonLabel: 'save',

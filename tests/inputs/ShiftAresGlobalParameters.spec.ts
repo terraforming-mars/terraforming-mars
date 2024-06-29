@@ -5,7 +5,6 @@ import {TestPlayer} from '../TestPlayer';
 import {AresGlobalParametersResponse} from '@/common/inputs/AresGlobalParametersResponse';
 import {InputResponse} from '@/common/inputs/InputResponse';
 
-// TODO(kberg): Add preludes
 describe('ShiftAresGlobalParameters', () => {
   let player: TestPlayer;
   let resp: AresGlobalParametersResponse | undefined = undefined;

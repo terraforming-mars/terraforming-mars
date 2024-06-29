@@ -7,6 +7,7 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {Space} from '../../../src/server/boards/Space';
+import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 
 let card: SpaceRaceToMars;
 let game: IGame;
@@ -15,7 +16,6 @@ let player2: TestPlayer;
 let turmoil: Turmoil;
 let spaces: ReadonlyArray<Space>;
 
-// TODO(kberg): Include the Moon.
 describe('SpaceRaceToMars', function() {
   beforeEach(() => {
     card = new SpaceRaceToMars();
@@ -80,6 +80,30 @@ describe('SpaceRaceToMars', function() {
 
     expect(player.production.megacredits).eq(0);
     expect(player2.production.megacredits).eq(1);
+  });
+
+  it('Moon ordinary tiles do not count', () => {
+    [game, player, player2] = testGame(2, {turmoilExtension: true, moonExpansion: true});
+
+    const space = MoonExpansion.moonData(game).moon.getSpaceOrThrow('m07');
+    MoonExpansion.addRoadTile(player, space.id);
+
+    card.resolve(game, turmoil);
+
+    expect(player.production.megacredits).eq(0);
+    expect(player2.production.megacredits).eq(0);
+  });
+
+  it('Moon special tiles count', () => {
+    [game, player, player2] = testGame(2, {turmoilExtension: true, moonExpansion: true});
+
+    const space = MoonExpansion.moonData(game).moon.getSpaceOrThrow('m07');
+    MoonExpansion.addTile(player, space.id, {tileType: TileType.LUNA_TRADE_STATION});
+
+    card.resolve(game, turmoil);
+
+    expect(player.production.megacredits).eq(1);
+    expect(player2.production.megacredits).eq(0);
   });
 
   it('Energy bump', function() {

@@ -350,10 +350,8 @@ export class Executor implements BehaviorExecutor {
             message('Gain ${0} standard resources', (b) => b.number(count))));
       } else {
         player.defer(
-          new SelectResource(
-            message('Gain ${0} units of a standard resource', (b) => b.number(count)),
-            Units.keys,
-            (unit) => {
+          new SelectResource(message('Gain ${0} units of a standard resource', (b) => b.number(count)))
+            .andThen((unit) => {
               player.stock.add(Units.ResourceMap[unit], count, {log: true});
               return undefined;
             }));

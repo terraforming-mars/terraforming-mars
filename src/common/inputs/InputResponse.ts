@@ -173,6 +173,15 @@ export function isSelectPolicyResponse(response: InputResponse): response is Sel
   return response.type === 'policy' && matches(response, ['type', 'policyId']);
 }
 
+export interface SelectResourceResponse {
+  type: 'resource',
+  resource: keyof Units,
+}
+
+export function isSelectResourceResponse(response: InputResponse): response is SelectResourceResponse {
+  return response.type === 'resource' && matches(response, ['type', 'resource']);
+}
+
 export type InputResponse =
   AndOptionsResponse |
   OrOptionsResponse |
@@ -190,4 +199,5 @@ export type InputResponse =
   SelectSpaceResponse |
   ShiftAresGlobalParametersResponse |
   SelectGlobalEventResponse |
-  SelectPolicyResponse;
+  SelectPolicyResponse |
+  SelectResourceResponse;

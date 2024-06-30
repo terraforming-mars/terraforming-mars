@@ -30,6 +30,7 @@ import SelectColony from '@/client/components/SelectColony.vue';
 import SelectProductionToLose from '@/client/components/SelectProductionToLose.vue';
 import ShiftAresGlobalParameters from '@/client/components/ShiftAresGlobalParameters.vue';
 import SelectGlobalEvent from '@/client/components/SelectGlobalEvent.vue';
+import SelectResource from '@/client/components/SelectResource.vue';
 import {InputResponse} from '@/common/inputs/InputResponse';
 
 const typeToComponentName: Record<PlayerInputType, string> = {
@@ -50,6 +51,7 @@ const typeToComponentName: Record<PlayerInputType, string> = {
   'aresGlobalParameters': 'shift-ares-global-parameters',
   'globalEvent': 'select-global-event',
   'policy': 'select-policy',
+  'resource': 'select-resource',
 };
 
 export default Vue.component('player-input-factory', {
@@ -90,6 +92,7 @@ export default Vue.component('player-input-factory', {
     SelectProductionToLose,
     ShiftAresGlobalParameters,
     SelectGlobalEvent,
+    'select-resource': SelectResource,
   },
   methods: {
     saveData() {

@@ -3,10 +3,9 @@ import {FocusedOrganization} from '../../../src/server/cards/prelude2/FocusedOrg
 import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 import {cast, runAllActions} from '../../TestingUtils';
-import {SelectResources} from '../../../src/server/inputs/SelectResources';
+import {SelectResource} from '../../../src/server/inputs/SelectResource';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {SelectResource} from '../../../src/server/inputs/SelectResource';
 import {SolBank} from '../../../src/server/cards/pathfinders/SolBank';
 
 describe('FocusedOrganization', () => {
@@ -18,15 +17,9 @@ describe('FocusedOrganization', () => {
     runAllActions(game);
     expect(player.cardsInHand).has.length(1);
 
-    const selectResources = cast(player.popWaitingFor(), SelectResources);
+    const selectResources = cast(player.popWaitingFor(), SelectResource);
     expect(selectResources.options).has.length(6);
-    selectResources.options[0].cb(0);
-    selectResources.options[1].cb(0);
-    selectResources.options[2].cb(0);
-    selectResources.options[3].cb(1);
-    selectResources.options[4].cb(0);
-    selectResources.options[5].cb(0);
-    selectResources.cb(undefined);
+    selectResources.options[3].cb();
     expect(player.stock.asUnits()).deep.eq(Units.of({plants: 1}));
 
     runAllActions(game);

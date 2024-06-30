@@ -52,7 +52,12 @@ export type Behavior = {
   stock?: Partial<CountableUnits>;
 
   /** Gain n standard resources */
-  standardResource?: number | {count: number, same?: boolean};
+  standardResource?: number | {
+    /** Number of resources to gain. */
+    count: number,
+    /** Must all resources be the same type? Default is true. */
+    same?: boolean,
+  };
 
   /** Add resources to this card itself */
   addResources?: Countable;

@@ -434,22 +434,33 @@ describe('Executor', () => {
     executor.execute({standardResource: 2}, player, fake);
     runAllActions(game);
 
-    const selectResources = cast(player.popWaitingFor(), SelectResources);
-    selectResources.options[2].cb(1);
-    selectResources.options[3].cb(1);
+    const selectResources = cast(player.popWaitingFor(), SelectResource);
+    selectResources.options[2].cb();
     selectResources.cb(undefined);
 
-    expect(player.stock.asUnits()).deep.eq(Units.of({titanium: 1, plants: 1}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({titanium: 2}));
   });
 
   it('standard resource, same', () => {
-    executor.execute({standardResource: {count: 3, same: true}}, player, fake);
+    executor.execute({standardResource: {count: 3}}, player, fake);
     runAllActions(game);
 
     const selectResources = cast(player.popWaitingFor(), SelectResource);
     selectResources.options[5].cb();
 
     expect(player.stock.asUnits()).deep.eq(Units.of({heat: 3}));
+  });
+
+  it('standard resource, different', () => {
+    executor.execute({standardResource: {count: 3, same: false}}, player, fake);
+    runAllActions(game);
+
+    const selectResources = cast(player.popWaitingFor(), SelectResources);
+    selectResources.options[2].cb(2);
+    selectResources.options[3].cb(1);
+    selectResources.cb(undefined);
+
+    expect(player.stock.asUnits()).deep.eq(Units.of({titanium: 2, plants: 1}));
   });
 
   it('spend - steel', () => {

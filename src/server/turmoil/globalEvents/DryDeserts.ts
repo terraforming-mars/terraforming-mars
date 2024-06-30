@@ -7,6 +7,7 @@ import {Turmoil} from '../Turmoil';
 import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
 import {SelectResourcesDeferred} from '../../deferredActions/SelectResourcesDeferred';
 import {CardRenderer} from '../../cards/render/CardRenderer';
+import {message} from '../../logs/MessageBuilder';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.minus().oceans(1).nbsp.nbsp.wild(1).slash().influence();
@@ -33,7 +34,7 @@ export class DryDeserts extends GlobalEvent implements IGlobalEvent {
         game.defer(new SelectResourcesDeferred(
           player,
           count,
-          'Dry Deserts Global Event - Gain ' + count + ' resource(s) for influence',
+          message('Dry Deserts Global Event - Gain ${0} resource(s) for influence', (b) => b.number(count)),
         ));
       }
     });

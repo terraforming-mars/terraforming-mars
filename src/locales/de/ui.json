@@ -909,11 +909,7 @@
     "Philares effect: select ${0} resource(s)": "Philares Effekt: Wähle ${0} Ressource(n)",
     "Global Event - Select 2 cards to discard": "Globales Ereignis - 2 Karten zum Abwerfen auswählen",
     "Dry Deserts Global Event - Remove an Ocean tile from the board": "Globales Ereignis: Trockene Wüsten - Entferne ein Ozean vom Spielbrett",
-    "Dry Deserts Global Event - Gain 1 resource(s) for influence": "Globales Ereignis: Trockene Wüsten - Erhalte 1 Ressource für deinen Einfluss",
-    "Dry Deserts Global Event - Gain 2 resource(s) for influence": "Globales Ereignis: Trockene Wüsten - Erhalte 2 Ressource für deinen Einfluss",
-    "Dry Deserts Global Event - Gain 3 resource(s) for influence": "Globales Ereignis: Trockene Wüsten - Erhalte 3 Ressource für deinen Einfluss",
-    "Dry Deserts Global Event - Gain 4 resource(s) for influence": "Globales Ereignis: Trockene Wüsten - Erhalte 4 Ressource für deinen Einfluss",
-    "Dry Deserts Global Event - Gain 5 resource(s) for influence": "Globales Ereignis: Trockene Wüsten - Erhalte 5 Ressource für deinen Einfluss",
+    "Dry Deserts Global Event - Gain ${0} resource(s) for influence": "Globales Ereignis: Trockene Wüsten - Erhalte ${0} Ressource für deinen Einfluss",
 
     "Choose 1 unit(s) of production to lose": "Wähle 1 Einheit Produktion, die verloren geht",
     "Choose 2 unit(s) of production to lose": "Wähle 2 Einheit Produktion, die verloren geht",

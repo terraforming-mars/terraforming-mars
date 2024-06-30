@@ -905,11 +905,7 @@
     "Philares effect: select ${0} resource(s)": "필레어스 지속 효과: 자원 ${0}개 선택",
     "Global Event - Select 2 cards to discard": "행성계 사건 - 버릴 카드 2장 선택",
     "Dry Deserts Global Event - Remove an Ocean tile from the board": "마른 사막 행성계 사건 - 해양 타일을 1장 제거합니다.",
-    "Dry Deserts Global Event - Gain 1 resource(s) for influence": "마른 사막 행성계 사건 - 영향력 자원 1개를 획득합니다.",
-    "Dry Deserts Global Event - Gain 2 resource(s) for influence": "마른 사막 행성계 사건 - 영향력 자원 2개를 획득합니다.",
-    "Dry Deserts Global Event - Gain 3 resource(s) for influence": "마른 사막 행성계 사건 - 영향력 자원 3개를 획득합니다.",
-    "Dry Deserts Global Event - Gain 4 resource(s) for influence": "마른 사막 행성계 사건 - 영향력 자원 4개를 획득합니다.",
-    "Dry Deserts Global Event - Gain 5 resource(s) for influence": "마른 사막 행성계 사건 - 영향력 자원 5개를 획득합니다.",
+    "Dry Deserts Global Event - Gain ${0} resource(s) for influence": "마른 사막 행성계 사건 - 영향력 자원 ${0}개를 획득합니다.",
 
     "Choose 1 unit(s) of production to lose": "생산력을 잃을 1가지 선택",
     "Choose 2 unit(s) of production to lose": "생산력을 잃을 2가지 선택",

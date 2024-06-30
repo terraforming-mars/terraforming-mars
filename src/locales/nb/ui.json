@@ -790,11 +790,7 @@
 	"Philares effect: select ${0} resource(s)": "Philares Effekt: Velg ${0} ressurs(er)",
 	" show tiles ": " vis brikker ",
 	"Global Event - Select 2 cards to discard": "Globalt hendelseskort - Velg 2 kort å kaste",
-	"Dry Deserts Global Event - Gain 1 resource(s) for influence": "Tørre ørkener global hendelse - Få 1 ressurs for innflytelse.",
-	"Dry Deserts Global Event - Gain 2 resource(s) for influence": "Tørre ørkener global hendelse - Få 2 ressurs for innflytelse.",
-	"Dry Deserts Global Event - Gain 3 resource(s) for influence": "Tørre ørkener global hendelse - Få 3 ressurs for innflytelse.",
-	"Dry Deserts Global Event - Gain 4 resource(s) for influence": "Tørre ørkener global hendelse - Få 4 ressurs for innflytelse.",
-	"Dry Deserts Global Event - Gain 5 resource(s) for influence": "Tørre ørkener global hendelse - Få 5 ressurs for innflytelse.",
+	"Dry Deserts Global Event - Gain ${0} resource(s) for influence": "Tørre ørkener global hendelse - Få ${0} ressurs for innflytelse.",
 
 	"Choose 1 unit(s) of production to lose": "Velg 1 enhet produksjon som skal mistes",
 	"Choose 2 unit(s) of production to lose": "Velg 2 enheter produksjon som skal mistes",

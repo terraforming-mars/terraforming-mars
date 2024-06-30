@@ -64,7 +64,7 @@ describe('SelectResources', function() {
       {type: 'amount', amount: 1},
       {type: 'amount', amount: 0},
       {type: 'amount', amount: 0},
-    ]}, player)).to.throw(/Select 2 resources/);
+    ]}, player)).to.throw('Select 2 resource(s)');
   });
 
   it('Selected too much', function() {
@@ -76,6 +76,6 @@ describe('SelectResources', function() {
       {type: 'amount', amount: 1},
       {type: 'amount', amount: 0},
       {type: 'amount', amount: 0},
-    ]}, player)).to.throw(/Select 2 resources/);
+    ]}, player)).to.throw('Select 2 resource(s)');
   });
 });

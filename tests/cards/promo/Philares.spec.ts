@@ -104,7 +104,7 @@ describe('Philares', () => {
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
     andOptions.options[0].cb(1);
     andOptions.options[1].cb(1);
-    expect(() => andOptions.cb(undefined)).to.throw('Need to select 1 resource(s)');
+    expect(() => andOptions.cb(undefined)).to.throw('Select 1 resource(s)');
   });
 
   it('Multiple bonuses when placing next to multiple tiles', () => {
@@ -150,7 +150,7 @@ describe('Philares', () => {
     options.options[0].cb(1);
     options.options[1].cb(1);
     options.options[2].cb(1);
-    expect(() => options.cb(undefined)).to.throw('Need to select 2 resource(s)');
+    expect(() => options.cb(undefined)).to.throw('Select 2 resource(s)');
   });
 
   it('Should take initial action', function() {

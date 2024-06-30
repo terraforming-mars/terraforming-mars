@@ -6,6 +6,7 @@ import {sum} from '../../common/utils/utils';
 import {Message} from '../../common/logs/Message';
 import {InputError} from './InputError';
 
+// TODO(kberg): Rename to something like 'select-and-add', which you know should be split in two.
 export class SelectResources extends AndOptions {
   private static makeOptions(count: number, units: Units) {
     const selectMegacredits = new SelectAmount('Megacredits', 'Select', 0, count)
@@ -55,7 +56,7 @@ export class SelectResources extends AndOptions {
         throw new InputError('All units must be positive');
       }
       if (sum(array) !== this.count) {
-        throw new InputError(`Select ${this.count} resources.`);
+        throw new InputError(`Select ${this.count} resource(s)`);
       }
 
       this.player.stock.addUnits(this.units, {log: true});

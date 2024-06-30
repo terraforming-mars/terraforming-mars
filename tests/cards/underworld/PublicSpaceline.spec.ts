@@ -32,5 +32,6 @@ describe('PublicSpaceline', () => {
       {tag: 'mars', count: 2},
       {tag: 'event', count: 0},
     ]);
+    expect(player.production.megacredits).eq(2);
   });
 });

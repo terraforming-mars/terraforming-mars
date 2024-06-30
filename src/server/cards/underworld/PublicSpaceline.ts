@@ -15,10 +15,15 @@ export class PublicSpaceline extends Card implements IProjectCard {
 
       requirements: {tag: Tag.SPACE, count: 5},
 
+      behavior: {
+        production: {megacredits: 2},
+      },
+
       metadata: {
         cardNumber: 'U77',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(2)).br;
+          b.plainText('Increase your M€ production 2 steps').br;
           b.tag(Tag.EARTH).tag(Tag.EARTH).tag(Tag.JOVIAN).tag(Tag.JOVIAN).br;
           b.tag(Tag.VENUS).tag(Tag.VENUS).tag(Tag.MARS).tag(Tag.MARS);
         }),

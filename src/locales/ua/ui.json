@@ -883,11 +883,7 @@
   "Select an additional bonus from this space.": "Виберіть додатковий бонус з цього простору.",
   "Philares effect: select ${0} resource(s)": "Ефект Philares: виберіть ${0} ресурс(и)",
   "Global Event - Select 2 cards to discard": "Глобальна подія - Виберіть 2 карти для викидання",
-  "Dry Deserts Global Event - Gain 1 resource(s) for influence": "Глобальна подія Сухі пустелі - Отримати 1 ресурс(и) за вплив",
-  "Dry Deserts Global Event - Gain 2 resource(s) for influence": "Глобальна подія Сухі пустелі - Отримати 2 ресурс(и) за вплив",
-  "Dry Deserts Global Event - Gain 3 resource(s) for influence": "Глобальна подія Сухі пустелі - Отримати 3 ресурс(и) за вплив",
-  "Dry Deserts Global Event - Gain 4 resource(s) for influence": "Глобальна подія Сухі пустелі - Отримати 4 ресурс(и) за вплив",
-  "Dry Deserts Global Event - Gain 5 resource(s) for influence": "Глобальна подія Сухі пустелі - Отримати 5 ресурс(и) за вплив",
+  "Dry Deserts Global Event - Gain ${0} resource(s) for influence": "Глобальна подія Сухі пустелі - Отримати ${0} ресурс(и) за вплив",
 
   "Choose 1 unit(s) of production to lose": "Виберіть 1 одиницю виробництва, яку втратити",
   "Choose 2 unit(s) of production to lose": "Виберіть 2 одиниці виробництва, які втратити",

@@ -800,11 +800,7 @@
     "Select an additional bonus from this space.": "ボーナスを選択",
     "Philares effect: select ${0} resource(s)": "フィラレス企業効果: ${0}リソースを選択",
     "Global Event - Select 2 cards to discard": "世界的命題：カードを2枚捨てる",
-    "Dry Deserts Global Event - Gain 1 resource(s) for influence": "世界的命題：1標準リソースを獲得",
-    "Dry Deserts Global Event - Gain 2 resource(s) for influence": "世界的命題：2標準リソースを獲得",
-    "Dry Deserts Global Event - Gain 3 resource(s) for influence": "世界的命題：3標準リソースを獲得",
-    "Dry Deserts Global Event - Gain 4 resource(s) for influence": "世界的命題：4標準リソースを獲得",
-    "Dry Deserts Global Event - Gain 5 resource(s) for influence": "世界的命題：5標準リソースを獲得",
+    "Dry Deserts Global Event - Gain ${0} resource(s) for influence": "世界的命題：${0}標準リソースを獲得",
 
     "Choose 1 unit(s) of production to lose": "-1段階する生産を選択",
     "Choose 2 unit(s) of production to lose": "-2段階する生産を選択",

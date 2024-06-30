@@ -11,6 +11,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {BoardType} from '../../boards/BoardType';
 import {Resource} from '../../../common/Resource';
 import {all} from '../Options';
+import {message} from '../../logs/MessageBuilder';
 
 export class Philares extends CorporationCard {
   constructor() {
@@ -100,7 +101,7 @@ export class Philares extends CorporationCard {
         philaresPlayer.stock.add(Resource.HEAT, heatAmount, {log: true});
         return undefined;
       } );
-    selectResources.title = 'Philares effect: select ' + resourceCount + ' resource(s)';
+    selectResources.title = message('Philares effect: select ${0} resource(s)', (b) => b.number(resourceCount));
 
     return selectResources;
   }

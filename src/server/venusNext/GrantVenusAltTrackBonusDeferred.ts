@@ -19,7 +19,7 @@ export class GrantVenusAltTrackBonusDeferred extends DeferredAction {
     return new SelectResources(
       this.player,
       count,
-      `Gain ${count} resources for your Venus track bonus.`,
+      message('Gain ${0} resource(s) for your Venus track bonus', (b) => b.number(count)),
     );
   }
 

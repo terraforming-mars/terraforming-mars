@@ -619,7 +619,7 @@
     "Choose your resource bonus": "Kies uw grondstofbonus",
     "Choose your wild resource bonus, after which you will gain ${0} more distinct standard resources.": "Kies je wilde grondstofbonus, waarna je nog ${0} afzonderlijke standaard grondstof krijgt.",
     "Gain 1 standard resource.": "Ontvang 1 standaard grondstof.",
-    "Gain 1 resources for your Venus track bonus.": "Ontvang 1 grondstof voor je Venus-spoorbonus.",
+    "Gain ${0} resource(s) for your Venus track bonus.": "Ontvang ${0} grondstof voor je Venus-spoorbonus.",
     "Gain 1 resource for your Planetary track bonus.": "Ontvang 1 grondstof voor je Planetaire spoorbonus.",
     "Philares effect: select ${0} resource(s)": "Philares-effect: selecteer ${0} resource(s)",
 

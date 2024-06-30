@@ -150,7 +150,7 @@
     "Terraformer": "테라포머",
     "Have a terraform rating of 35 (or 26 with Turmoil.)": "테라포밍 등급이 35 TR 이상(《격동》확장 사용 시 26TR 이상).",
     "Terran": "지구인",
-    
+
     "Terra Pioneer": "지구 개척자",
     "Own 5 tiles on Mars": "화성에 자기 소유의 타일이 5장 이상.",
     "Tradesman": "무역업자",
@@ -218,7 +218,7 @@
     "Engineer": "기술기업상",
     "Have the most cards in play that directly alter your own production": "자신의 생산력을 직접적으로 올리거나 낮추는 카드에 대해 자신이 소유한 것이 제일 많은 플레이어.",
     "Historian": "역사기업상",
-    
+
     "Tourist": "관광기업상",
     "Have the most empty spaces adjacent to your tiles": "자기 소유의 타일에 인접한 빈 공간이 제일 많은 플레이어.",
     "A. Zoologist": "A. 동물기업상",
@@ -618,7 +618,7 @@
     "Add 2 microbes to Nitrite Reducing Bacteria": "‘질산환원균’ 카드에 미생물 자원 2개 추가",
     "Add 2 microbes to Thermophile": "‘호열성 미생물’ 카드에 미생물 자원 2개 추가",
     "Add 2 microbes to Darkside Incubation Plant": "‘Darkside Incubation Plant’ 카드에 미생물 자원 2개 추가",
-    
+
     "Add 3 microbes to a card": "이 카드에 미생물 자원 3개 추가",
     "Add 3 microbes to ${0}": "‘${0}’ 카드에 미생물 자원 3개 추가",
     "Add 3 microbes to Psychrophiles": "‘호냉성 미생물’ 카드에 미생물 자원 3개 추가",
@@ -708,7 +708,7 @@
     "Place 2 delegates in one party": "정당 하나에 의원 2명을 배치",
     "Gagarin Mobile Base": "Gagarin Mobile 기지",
     "Place Gagarin Mobile Base on ANY space ON MARS": "화성의 아무 공간에 Gagarin Mobile 기지 타일 배치",
-    
+
     "Select new ruling party": "새로운 집권당 선택",
     "ARIDOR": "아리도르",
     "These are the colony tiles Aridor may choose from:": "아리도르가 선택할 수 있는 위성 타일:",
@@ -789,7 +789,7 @@
     "Remove all data from this card to gain 3M€ per data removed.": "이 카드의 모든 데이터 자원을 제거하여 제거한 데이터 자원 1개마다 3M€ 획득",
     "Remove any number of microbes to gain 3 M€ per microbe removed": "이 카드의 미생물 자원을 제거하여 제거한 미생물 자원 1개마다 3M€ 획득",
     "TERRAFORMING": "테라포밍",
-    
+
     "Remove 1 syndicate fleet from this card to steal 2M€ from every opponent.": "이 카드에서 syndicate fleet 자원을 1개 제거하여 다른 모든 플레이어에게서 2 M€ 훔치기",
     "Remove syndicate fleet": "syndicate fleet 자원 제거",
     "Remove 1 floater to raise energy production 1 step": "부양체 자원 1개를 제거하여 에너지 생산력 1 증가",
@@ -898,9 +898,7 @@
     "Choose your wild resource bonus, after which you will gain ${0} more distinct standard resources.": "아무 자원 보너스를 선택하고, 그 후 기본 자원 ${0}개 획득",
     "Gain ${0} standard resources": "기본 자원 ${0}개 획득.",
     "Gain ${0} units of a standard resource": "기본 자원 ${0}개 획득",
-    "Gain 1 resources for your Venus track bonus.": "금성개척률 트랙 보너스 효과로 기본 자원 1개를 획득",
-    "Gain 2 resources for your Venus track bonus.": "금성개척률 트랙 보너스 효과로 기본 자원 2개를 획득",
-    "Gain 3 resources for your Venus track bonus.": "금성개척률 트랙 보너스 효과로 기본 자원 3개를 획득",
+    "Gain ${0} resource(s) for your Venus track bonus.": "금성개척률 트랙 보너스 효과로 기본 자원 ${0}개를 획득",
     "Gain 1 resource for your Planetary track bonus.": "행성 트랙 보너스 효과로 기본 자원 1개를 획득",
     "Assign the clone tag for ${0}": "${0}에 대한 복제 태그 할당",
     "Select an additional bonus from this space.": "해당 타일의 추가 보너스 선택",
@@ -1046,7 +1044,7 @@
     "TR Boost": "추가 TR",
     "Player ${0} name": "플레이어 이름: ${0}",
     "Multiplayer Options": "멀티플레이어 선택사항",
-    
+
     "Tags Overview": "태그 개요",
     "Must select at least ${0} corporations": "최소 기업 ${0}개를 선택해야 합니다.",
     "corporation": "기업",
@@ -1055,7 +1053,7 @@
     "Learner Mode (req. refresh)": "학습 모드 (새로고침 필요)",
     "The id of this game is ${0}" : "게임 ID: ${0}",
     "Good luck ${0}!" : "${0}, 행운을 빕니다!",
-    
+
     "Select how to pay for action": "행동에 대한 지불 방법 선택",
     "Game Setup Details": "게임 설정 세부사항",
 
@@ -1177,7 +1175,7 @@
     "plant": "식물",
     "microbe": "미생물",
     "animal": "동물",
-    
+
     "none": "없음",
     "wild": "만능",
     "city-count": "도시 수",
@@ -1253,7 +1251,7 @@
     "Select how to pay for St. Joseph of Cupertino Mission action": "",
     "Select how to pay for Excavate": "‘굴착’ 행동의 수행 비용에 대한 지불 방법 선택",
     "Select how to pay 4 M€ for ocean bonus": "해양 타일 보너스에 대한 4 M€의 지불 방법 선택",
-    
+
     "Select how to spend ${0} heat": "열 자원 ${0} 비용에 대한 지불 방법 선택",
     "Stormcraft Incorporated Floaters (2 heat each)": "스톰크래프트의 부양체 자원 (하나당 열 자원 2개)",
     "Play a card, ignoring global requirements": "행성 지표 추진 조건을 무시하고 카드 1장 추진",
@@ -1265,7 +1263,7 @@
     "Ocean:SP": "",
     "Greenery:SP": "",
     "City:SP": "",
-    
+
 
     "Select production to decrease one step and gain 4 resources": "수치를 1 낮춰서 해당 자원 4개를 얻을 생산력 선택",
     "Decrease M€ production": "메가크레딧 생산력 감소",

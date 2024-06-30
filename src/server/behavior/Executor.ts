@@ -341,7 +341,7 @@ export class Executor implements BehaviorExecutor {
     if (behavior.standardResource) {
       const entry = behavior.standardResource;
       const count = typeof(entry) === 'number' ? entry : entry.count;
-      const same = typeof(entry) === 'number' ? false : entry.same ?? false;
+      const same = typeof(entry) === 'number' ? true : entry.same ?? true;
       if (same === false) {
         player.defer(
           new SelectResources(

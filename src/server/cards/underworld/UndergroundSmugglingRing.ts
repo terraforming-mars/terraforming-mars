@@ -16,7 +16,7 @@ export class UndergroundSmugglingRing extends Card implements IProjectCard {
 
       behavior: {
         underworld: {corruption: 1},
-        standardResource: {count: 2, same: true},
+        standardResource: 2,
       },
 
       metadata: {

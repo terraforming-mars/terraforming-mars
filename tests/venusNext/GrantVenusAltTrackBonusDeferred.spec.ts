@@ -43,7 +43,7 @@ describe('GrantVenusAltTrackBonusDeferred', function() {
     input.options[0].cb(0);
     input.options[5].cb(3);
 
-    expect(() => input.cb(undefined)).to.throw('Select 2 resources.');
+    expect(() => input.cb(undefined)).to.throw('Select 2 resource(s)');
 
     player.heat = 0;
     input.options[5].cb(2);

@@ -434,9 +434,8 @@ describe('Executor', () => {
     executor.execute({standardResource: 2}, player, fake);
     runAllActions(game);
 
-    const selectResources = cast(player.popWaitingFor(), SelectResource);
-    selectResources.options[2].cb();
-    selectResources.cb(undefined);
+    const selectResource = cast(player.popWaitingFor(), SelectResource);
+    selectResource.cb('titanium');
 
     expect(player.stock.asUnits()).deep.eq(Units.of({titanium: 2}));
   });
@@ -445,8 +444,8 @@ describe('Executor', () => {
     executor.execute({standardResource: {count: 3}}, player, fake);
     runAllActions(game);
 
-    const selectResources = cast(player.popWaitingFor(), SelectResource);
-    selectResources.options[5].cb();
+    const selectResource = cast(player.popWaitingFor(), SelectResource);
+    selectResource.cb('heat');
 
     expect(player.stock.asUnits()).deep.eq(Units.of({heat: 3}));
   });

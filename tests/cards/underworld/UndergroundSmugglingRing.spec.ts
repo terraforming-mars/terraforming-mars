@@ -31,7 +31,7 @@ describe('UndergroundSmugglingRing', () => {
     runAllActions(game);
     const selectResource = cast(player.popWaitingFor(), SelectResource);
     expect(selectResource.include).to.have.members(Units.keys);
-    selectResource.options[0].cb(0);
+    selectResource.cb('megacredits');
     expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 2}));
   });
 });

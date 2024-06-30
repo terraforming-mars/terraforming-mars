@@ -55,7 +55,7 @@ describe('Monopoly', () => {
 
     const selectResource = cast(card.play(player), SelectResource);
     expect(selectResource.include).deep.eq([Resource.MEGACREDITS, Resource.STEEL, Resource.HEAT]);
-    selectResource.options[1].cb(); // steel
+    selectResource.cb('steel');
     runAllActions(game);
 
     expect(player.production.steel).eq(2);
@@ -70,7 +70,7 @@ describe('Monopoly', () => {
     setup(opponent3, {}, 1);
 
     const selectResource = cast(card.play(player), SelectResource);
-    selectResource.options[1].cb(); // steel
+    selectResource.cb('steel');
     runAllActions(game);
     expect(opponent1.popWaitingFor()).is.undefined;
     expect(opponent2.popWaitingFor()).is.undefined;
@@ -89,7 +89,7 @@ describe('Monopoly', () => {
 
     const selectResource = cast(card.play(player), SelectResource);
     expect(selectResource.include).deep.eq([Resource.MEGACREDITS]);
-    selectResource.options[0].cb(); // Megacredits
+    selectResource.cb('megacredits');
 
     runAllActions(game);
     assertIsMaybeBlock(opponent1, opponent1.popWaitingFor(), 'do not block');

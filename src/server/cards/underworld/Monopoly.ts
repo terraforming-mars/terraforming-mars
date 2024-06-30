@@ -43,8 +43,8 @@ export class Monopoly extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     return new SelectResource(
       'Select which resource type to steal from all other players.',
-      this.availableProductions(player),
-      (unitKey) => {
+      this.availableProductions(player))
+      .andThen((unitKey) => {
         const resource = Units.ResourceMap[unitKey];
         if (player.game.isSoloMode()) {
           player.production.add(resource, 1, {log: true});

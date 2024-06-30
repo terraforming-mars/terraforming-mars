@@ -18,8 +18,8 @@ describe('FocusedOrganization', () => {
     expect(player.cardsInHand).has.length(1);
 
     const selectResources = cast(player.popWaitingFor(), SelectResource);
-    expect(selectResources.options).has.length(6);
-    selectResources.options[3].cb();
+    expect(selectResources.include).has.length(6);
+    selectResources.cb('plants');
     expect(player.stock.asUnits()).deep.eq(Units.of({plants: 1}));
 
     runAllActions(game);
@@ -60,10 +60,11 @@ describe('FocusedOrganization', () => {
     const selectResource = cast(andOptions.options[0], SelectResource);
     const selectCard = cast(andOptions.options[1], SelectCard);
 
-    expect(selectResource.options.length).eq(2);
+    expect(selectResource.include.length).eq(2);
     expect(selectCard.cards).to.have.members([firstCard, secondCard]);
+    expect(selectResource.include).deep.eq(['megacredits', 'plants']);
 
-    selectResource.options[1].cb();
+    selectResource.cb('plants');
     selectCard.cb([firstCard]);
 
     const selectNewResource = cast(andOptions.cb(undefined), SelectResource);
@@ -75,7 +76,7 @@ describe('FocusedOrganization', () => {
 
     expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 5, plants: 2}));
 
-    selectNewResource.options[2].cb();
+    selectNewResource.cb('titanium');
     expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 5, titanium: 1, plants: 2}));
   });
 
@@ -95,14 +96,14 @@ describe('FocusedOrganization', () => {
     const selectCard = cast(andOptions.options[1], SelectCard);
     const selectResource = cast(andOptions.options[0], SelectResource);
 
-    expect(selectResource.options.length).eq(2);
+    expect(selectResource.include.length).eq(2);
 
     selectCard.cb([firstCard]);
-    selectResource.options[1].cb(); // plants
+    selectResource.cb('plants');
 
     runAllActions(game);
     expect(solBank.resourceCount).eq(0);
-    selectResource.options[0].cb(); // MC
+    selectResource.cb('megacredits');
     runAllActions(game);
     expect(solBank.resourceCount).eq(1);
   });

@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {BoardType} from '../../boards/BoardType';
 import {all} from '../Options';
-import {SelectResources} from '../../inputs/SelectResources';
+import {GainResources} from '../../inputs/GainResources';
 import {message} from '../../logs/MessageBuilder';
 
 export class Philares extends CorporationCard {
@@ -59,7 +59,7 @@ export class Philares extends CorporationCard {
     if (eligibleTiles.length > 0) {
       cardOwner.defer(() => {
         cardOwner.game.log('${0} must select ${1} bonus resource(s) from ${2}\' ability', (b) => b.player(cardOwner).number(eligibleTiles.length).card(this));
-        return new SelectResources(cardOwner, eligibleTiles.length,
+        return new GainResources(cardOwner, eligibleTiles.length,
           message('Philares effect: select ${0} resource(s)', (b) => b.number(eligibleTiles.length)));
       },
       cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : Priority.GAIN_RESOURCE_OR_PRODUCTION,

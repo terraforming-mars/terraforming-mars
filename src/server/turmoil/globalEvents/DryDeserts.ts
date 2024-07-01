@@ -5,7 +5,7 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {IGame} from '../../IGame';
 import {Turmoil} from '../Turmoil';
 import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
-import {SelectResourcesDeferred} from '../../deferredActions/SelectResourcesDeferred';
+import {GainResourcesDeferred} from '../../deferredActions/GainResourcesDeferred';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {message} from '../../logs/MessageBuilder';
 
@@ -31,7 +31,7 @@ export class DryDeserts extends GlobalEvent implements IGlobalEvent {
     game.getPlayersInGenerationOrder().forEach((player) => {
       const count = turmoil.getPlayerInfluence(player);
       if (count > 0) {
-        game.defer(new SelectResourcesDeferred(
+        game.defer(new GainResourcesDeferred(
           player,
           count,
           message('Dry Deserts Global Event - Gain ${0} resource(s) for influence', (b) => b.number(count)),

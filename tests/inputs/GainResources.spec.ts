@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {testGame} from '../TestGame';
-import {SelectResources} from '../../src/server/inputs/SelectResources';
+import {GainResources} from '../../src/server/inputs/GainResources';
 import {TestPlayer} from '../TestPlayer';
 import {Units} from '../../src/common/Units';
 
-describe('SelectResources', function() {
+describe('GainResources', function() {
   let player: TestPlayer;
 
   beforeEach(() => {
@@ -12,10 +12,10 @@ describe('SelectResources', function() {
   });
 
   it('Simple', function() {
-    const selectResources = new SelectResources(player, 2, '');
+    const gainResources = new GainResources(player, 2, '');
 
     expect(player.stock.asUnits()).deep.eq(Units.EMPTY);
-    selectResources.process({type: 'and', responses: [
+    gainResources.process({type: 'and', responses: [
       {type: 'amount', amount: 1},
       {type: 'amount', amount: 0},
       {type: 'amount', amount: 0},
@@ -27,13 +27,13 @@ describe('SelectResources', function() {
   });
 
   it('No options', function() {
-    const selectResources = new SelectResources(player, 2, '');
-    expect(() => selectResources.process({type: 'and', responses: []}, player)).to.throw(/Incorrect options provided/);
+    const gainResources = new GainResources(player, 2, '');
+    expect(() => gainResources.process({type: 'and', responses: []}, player)).to.throw(/Incorrect options provided/);
   });
 
   it('Not enough options', function() {
-    const selectResources = new SelectResources(player, 2, '');
-    expect(() => selectResources.process({type: 'and', responses: [
+    const gainResources = new GainResources(player, 2, '');
+    expect(() => gainResources.process({type: 'and', responses: [
       {type: 'amount', amount: 0},
       {type: 'amount', amount: 0},
       {type: 'amount', amount: 1},
@@ -43,8 +43,8 @@ describe('SelectResources', function() {
   });
 
   it('Too many options', function() {
-    const selectResources = new SelectResources(player, 2, '');
-    expect(() => selectResources.process({type: 'and', responses: [
+    const gainResources = new GainResources(player, 2, '');
+    expect(() => gainResources.process({type: 'and', responses: [
       {type: 'amount', amount: 0},
       {type: 'amount', amount: 0},
       {type: 'amount', amount: 0},
@@ -56,8 +56,8 @@ describe('SelectResources', function() {
   });
 
   it('Did not select enough', function() {
-    const selectResources = new SelectResources(player, 2, '');
-    expect(() => selectResources.process({type: 'and', responses: [
+    const gainResources = new GainResources(player, 2, '');
+    expect(() => gainResources.process({type: 'and', responses: [
       {type: 'amount', amount: 0},
       {type: 'amount', amount: 0},
       {type: 'amount', amount: 0},
@@ -68,8 +68,8 @@ describe('SelectResources', function() {
   });
 
   it('Selected too much', function() {
-    const selectResources = new SelectResources(player, 2, '');
-    expect(() => selectResources.process({type: 'and', responses: [
+    const gainResources = new GainResources(player, 2, '');
+    expect(() => gainResources.process({type: 'and', responses: [
       {type: 'amount', amount: 1},
       {type: 'amount', amount: 1},
       {type: 'amount', amount: 0},

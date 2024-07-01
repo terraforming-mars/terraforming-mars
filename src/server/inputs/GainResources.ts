@@ -6,8 +6,7 @@ import {sum} from '../../common/utils/utils';
 import {Message} from '../../common/logs/Message';
 import {InputError} from './InputError';
 
-// TODO(kberg): Rename to something like 'select-and-add', which you know should be split in two.
-export class SelectResources extends AndOptions {
+export class GainResources extends AndOptions {
   private static makeOptions(count: number, units: Units) {
     const selectMegacredits = new SelectAmount('Megacredits', 'Select', 0, count)
       .andThen((amount) => {
@@ -49,7 +48,7 @@ export class SelectResources extends AndOptions {
     // is kind of strangely structured. If you can refactor this,
     // please do.
     private units = Units.of({})) {
-    super(...SelectResources.makeOptions(count, units));
+    super(...GainResources.makeOptions(count, units));
     this.andThen(() => {
       const array = Object.values(units);
       if (array.some((count) => count < 0)) {

@@ -15,7 +15,7 @@ import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {CardResource} from '../../common/CardResource';
 import {Reward} from '../../common/pathfinders/Reward';
-import {SelectResourcesDeferred} from '../deferredActions/SelectResourcesDeferred';
+import {GainResourcesDeferred} from '../deferredActions/GainResourcesDeferred';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Tag} from '../../common/cards/Tag';
 import {Turmoil} from '../turmoil/Turmoil';
@@ -204,7 +204,7 @@ export class PathfindersExpansion {
       player.production.add(Resource.PLANTS, 1, {log: true});
       break;
     case 'resource':
-      game.defer(new SelectResourcesDeferred(player, 1, 'Gain 1 resource for your Planetary track bonus.'));
+      game.defer(new GainResourcesDeferred(player, 1, 'Gain 1 resource for your Planetary track bonus.'));
       break;
     case 'steel':
       player.stock.add(Resource.STEEL, 1, {log: true});

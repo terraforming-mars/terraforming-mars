@@ -1,38 +1,27 @@
 <template>
-      <div class="log-container">
-        <div class="log-generations">
-          <h2 :class="getTitleClasses()">
-              <span v-i18n>Game log</span>
-          </h2>
-          <div class="log-gen-title"  v-i18n>Gen: </div>
-          <div class="log-gen-numbers">
-            <div v-for="n in getGenerationsRange()" :key="n" :class="getClassesGenIndicator(n)" v-on:click.prevent="selectGeneration(n)">
-              {{ n }}
-            </div>
-          </div>
-          <span class="label-additional" v-if="players.length === 1"><span :class="lastGenerationClass" v-i18n>of {{this.lastSoloGeneration}}</span></span>
-        </div>
-        <div class="panel log-panel">
-          <div id="logpanel-scrollable" class="panel-body">
-            <ul v-if="messages">
-              <log-message-component v-for="(message, index) in messages" :key="index" :message="message" :players="players" v-on:click="messageClicked(message)"></log-message-component>
-            </ul>
-          </div>
-          <div class='debugid'>(debugid {{step}})</div>
-        </div>
-        <div class="card-panel" v-if="cardNames.size + globalEventNames.size + colonyNames.size > 0">
-          <AppButton size="big" type="close" :disableOnServerBusy="false" @click="hideCards" align="right"/>
-          <div id="log_panel_card" class="cardbox" v-for="cardName in cardNames" :key="cardName">
-            <Card :card="{name: cardName, isSelfReplicatingRobotsCard: isSelfReplicatingRobotsCard(cardName), resources: getResourcesOnCard(cardName)}"/>
-          </div>
-          <div id="log_panel_card" class="cardbox" v-for="globalEventName in globalEventNames" :key="globalEventName">
-            <global-event :globalEventName="globalEventName" type="prior" :showIcons="false"></global-event>
-          </div>
-          <div id="log_panel_card" class="cardbox" v-for="colonyName in colonyNames" :key="colonyName">
-            <colony :colony="getColony(colonyName)"></colony>
-          </div>
+  <div class="log-container">
+    <div class="log-generations">
+      <h2 :class="getTitleClasses()">
+          <span v-i18n>Game log</span>
+      </h2>
+      <div class="log-gen-title"  v-i18n>Gen: </div>
+      <div class="log-gen-numbers">
+        <div v-for="n in getGenerationsRange()" :key="n" :class="getClassesGenIndicator(n)" v-on:click.prevent="selectGeneration(n)">
+          {{ n }}
         </div>
       </div>
+      <span class="label-additional" v-if="players.length === 1"><span :class="lastGenerationClass" v-i18n>of {{this.lastSoloGeneration}}</span></span>
+    </div>
+    <div class="panel log-panel">
+      <div id="logpanel-scrollable" class="panel-body">
+        <ul v-if="messages">
+          <log-message-component v-for="(message, index) in messages" :key="index" :message="message" :players="players" v-on:click="messageClicked(message)"></log-message-component>
+        </ul>
+      </div>
+      <div class='debugid'>(debugid {{step}})</div>
+    </div>
+    <card-panel :message="selectedMessage" :players="players" v-on:hide="selectedMessage = undefined"></card-panel>
+  </div>
 </template>
 
 <script lang="ts">
@@ -41,43 +30,21 @@ import Vue from 'vue';
 import {paths} from '@/common/app/paths';
 import {statusCode} from '@/common/http/statusCode';
 import {LogMessage} from '@/common/logs/LogMessage';
-import {LogMessageData} from '@/common/logs/LogMessageData';
-import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
-import {CardName} from '@/common/cards/CardName';
 import {playerColorClass} from '@/common/utils/utils';
 import {Color} from '@/common/Color';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {getPreferences} from '@/client/utils/PreferencesManager';
-import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import {ParticipantId} from '@/common/Types';
-import {ColonyName} from '@/common/colonies/ColonyName';
-import {ColonyModel} from '@/common/models/ColonyModel';
-import Card from '@/client/components/card/Card.vue';
-import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
-import AppButton from '@/client/components/common/AppButton.vue';
 import LogMessageComponent from '@/client/components/logpanel/LogMessageComponent.vue';
-import Colony from '@/client/components/colonies/Colony.vue';
+import CardPanel from '@/client/components/logpanel/CardPanel.vue';
 
 let logRequest: XMLHttpRequest | undefined;
 
-class ToggleSet<T> extends Set<T> {
-  public toggle(item: T) {
-    if (this.has(item)) {
-      this.delete(item);
-    } else {
-      this.add(item);
-    }
-  }
-}
-
 type LogPanelModel = {
-  // temporary storage used when showing cards on the log line.
-  cardNames: ToggleSet<CardName>,
-  globalEventNames: ToggleSet<GlobalEventName>,
-  colonyNames: ToggleSet<ColonyName>,
   messages: Array<LogMessage>,
   selectedGeneration: number,
+  selectedMessage: LogMessage | undefined,
 };
 
 export default Vue.extend({
@@ -106,48 +73,18 @@ export default Vue.extend({
   },
   data(): LogPanelModel {
     return {
-      cardNames: new ToggleSet(),
-      globalEventNames: new ToggleSet(),
-      colonyNames: new ToggleSet(),
       messages: [],
       selectedGeneration: this.generation,
+      selectedMessage: undefined,
     };
   },
   components: {
-    AppButton,
-    Card,
-    Colony,
-    GlobalEvent,
     LogMessageComponent,
+    CardPanel,
   },
   methods: {
-    scrollToEnd() {
-      const scrollablePanel = document.getElementById('logpanel-scrollable');
-      if (scrollablePanel !== null) {
-        scrollablePanel.scrollTop = scrollablePanel.scrollHeight;
-      }
-    },
     messageClicked(message: LogMessage) {
-      const datas = message.data;
-      datas.forEach((data: LogMessageData) => {
-        if (data.value === undefined) {
-          return;
-        }
-        if (data.type === LogMessageDataType.CARD) {
-          this.cardNames.toggle(data.value);
-        } else if (data.type === LogMessageDataType.GLOBAL_EVENT) {
-          this.globalEventNames.toggle(data.value);
-        } else if (data.type === LogMessageDataType.COLONY) {
-          this.colonyNames.toggle(data.value);
-        }
-        this.$forceUpdate();
-      });
-    },
-    hideCards() {
-      this.cardNames.clear();
-      this.globalEventNames.clear();
-      this.colonyNames.clear();
-      this.$forceUpdate();
+      this.selectedMessage = message;
     },
     selectGeneration(gen: number): void {
       if (gen !== this.selectedGeneration) {
@@ -187,6 +124,12 @@ export default Vue.extend({
       xhr.responseType = 'json';
       xhr.send();
     },
+    scrollToEnd() {
+      const scrollablePanel = document.getElementById('logpanel-scrollable');
+      if (scrollablePanel !== null) {
+        scrollablePanel.scrollTop = scrollablePanel.scrollHeight;
+      }
+    },
     getClassesGenIndicator(gen: number): string {
       const classes = ['log-gen-indicator'];
       if (gen === this.selectedGeneration) {
@@ -208,38 +151,6 @@ export default Vue.extend({
     },
     lastGenerationClass(): string {
       return this.lastSoloGeneration === this.generation ? 'last-generation blink-animation' : '';
-    },
-    // TODO(kberg): getColony could have the actual game colony by changing this component's properties.
-    getColony(colonyName: ColonyName): ColonyModel {
-      return {
-        colonies: [],
-        isActive: false,
-        name: colonyName,
-        trackPosition: 0,
-        visitor: undefined,
-      };
-    },
-    isSelfReplicatingRobotsCard(cardName: CardName) {
-      for (const player of this.players) {
-        if (player.selfReplicatingRobotsCards.some((card) => card.name === cardName)) {
-          return true;
-        }
-      }
-      return false;
-    },
-    getResourcesOnCard(cardName: CardName) {
-      for (const player of this.players) {
-        const playedCard = player.tableau.find((card) => card.name === cardName);
-        if (playedCard !== undefined) {
-          return playedCard.resources;
-        }
-        const srrCard = player.selfReplicatingRobotsCards.find((card) => card.name === cardName);
-        if (srrCard !== undefined) {
-          return srrCard.resources;
-        }
-      }
-
-      return undefined;
     },
   },
   mounted() {

@@ -87,7 +87,7 @@ import Board from '@/client/components/Board.vue';
 import Colony from '@/client/components/colonies/Colony.vue';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import DynamicTitle from '@/client/components/common/DynamicTitle.vue';
-import LogPanel from '@/client/components/LogPanel.vue';
+import LogPanel from '@/client/components/logpanel/LogPanel.vue';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import Milestone from '@/client/components/Milestones.vue';
 import Sidebar from '@/client/components/Sidebar.vue';

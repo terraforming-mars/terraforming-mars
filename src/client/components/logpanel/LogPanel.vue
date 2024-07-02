@@ -44,20 +44,20 @@ import {LogMessage} from '@/common/logs/LogMessage';
 import {LogMessageData} from '@/common/logs/LogMessageData';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
-import Card from '@/client/components/card/Card.vue';
 import {CardName} from '@/common/cards/CardName';
 import {playerColorClass} from '@/common/utils/utils';
 import {Color} from '@/common/Color';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
-import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
-import AppButton from '@/client/components/common/AppButton.vue';
-import LogMessageComponent from '@/client/components/LogMessageComponent.vue';
 import {ParticipantId} from '@/common/Types';
 import {ColonyName} from '@/common/colonies/ColonyName';
-import Colony from '@/client/components/colonies/Colony.vue';
 import {ColonyModel} from '@/common/models/ColonyModel';
+import Card from '@/client/components/card/Card.vue';
+import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
+import AppButton from '@/client/components/common/AppButton.vue';
+import LogMessageComponent from '@/client/components/logpanel/LogMessageComponent.vue';
+import Colony from '@/client/components/colonies/Colony.vue';
 
 let logRequest: XMLHttpRequest | undefined;
 

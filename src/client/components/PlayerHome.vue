@@ -273,7 +273,7 @@ import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
 import Sidebar from '@/client/components/Sidebar.vue';
 import Colony from '@/client/components/colonies/Colony.vue';
-import LogPanel from '@/client/components/LogPanel.vue';
+import LogPanel from '@/client/components/logpanel/LogPanel.vue';
 import Turmoil from '@/client/components/turmoil/Turmoil.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';

@@ -8,7 +8,7 @@
       v-on:input="$emit('input', $event.target.value)"
     />
     <AppButton type="plus" @click="$emit('plus')" />
-    <AppButton type="max" @click="$emit('max')" title="MAX" />
+    <AppButton type="max" @click="$emit('max')" title="MAX" v-if="showMax" />
   </div>
 </template>
 
@@ -29,6 +29,11 @@ export default Vue.extend({
     },
     description: {
       type: String,
+    },
+    showMax: {
+      type: Boolean,
+      default: true,
+      required: false,
     },
   },
   components: {

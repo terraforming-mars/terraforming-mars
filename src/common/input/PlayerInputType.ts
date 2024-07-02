@@ -16,4 +16,5 @@ export type PlayerInputType =
     'aresGlobalParameters' |
     'globalEvent' |
     'policy' |
-    'resource';
+    'resource' |
+    'resources';

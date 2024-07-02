@@ -25,7 +25,7 @@ import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {Payment} from '../../common/inputs/Payment';
-import {GainResources} from '../inputs/GainResources';
+import {SelectResources} from '../inputs/SelectResources';
 import {TITLES} from '../inputs/titles';
 import {message} from '../logs/MessageBuilder';
 import {IdentifySpacesDeferred} from '../underworld/IdentifySpacesDeferred';
@@ -344,10 +344,11 @@ export class Executor implements BehaviorExecutor {
       const same = typeof(entry) === 'number' ? true : entry.same ?? true;
       if (same === false) {
         player.defer(
-          new GainResources(
-            player,
-            count,
-            message('Gain ${0} standard resources', (b) => b.number(count))));
+          new SelectResources(message('Gain ${0} standard resources', (b) => b.number(count)), count)
+            .andThen((units) => {
+              player.stock.addUnits(units, {log: true});
+              return undefined;
+            }));
       } else {
         player.defer(
           new SelectResource(message('Gain ${0} units of a standard resource', (b) => b.number(count)))

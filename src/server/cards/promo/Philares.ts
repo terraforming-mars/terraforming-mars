@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {BoardType} from '../../boards/BoardType';
 import {all} from '../Options';
-import {GainResources} from '../../inputs/GainResources';
+import {SelectResources} from '../../inputs/SelectResources';
 import {message} from '../../logs/MessageBuilder';
 
 export class Philares extends CorporationCard {
@@ -56,11 +56,15 @@ export class Philares extends CorporationCard {
       adjacentSpacesWithPlayerTiles.filter((space) => space.player?.id !== cardOwner.id) :
       adjacentSpacesWithPlayerTiles.filter((space) => space.player?.id === cardOwner.id);
 
-    if (eligibleTiles.length > 0) {
+    const count = eligibleTiles.length;
+    if (count > 0) {
       cardOwner.defer(() => {
-        cardOwner.game.log('${0} must select ${1} bonus resource(s) from ${2}\' ability', (b) => b.player(cardOwner).number(eligibleTiles.length).card(this));
-        return new GainResources(cardOwner, eligibleTiles.length,
-          message('Philares effect: select ${0} resource(s)', (b) => b.number(eligibleTiles.length)));
+        cardOwner.game.log('${0} must select ${1} bonus resource(s) from ${2}\' ability', (b) => b.player(cardOwner).number(count).card(this));
+        return new SelectResources(message('Gain ${0} standard resources', (b) => b.number(count)), count)
+          .andThen((units) => {
+            cardOwner.stock.addUnits(units, {log: true});
+            return undefined;
+          });
       },
       cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : Priority.GAIN_RESOURCE_OR_PRODUCTION,
       );

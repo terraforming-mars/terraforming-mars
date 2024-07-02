@@ -29,7 +29,7 @@ import {StormCraftIncorporated} from '../../src/server/cards/colonies/StormCraft
 import {AndOptions} from '../../src/server/inputs/AndOptions';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {UnderworldExpansion} from '../../src/server/underworld/UnderworldExpansion';
-import {GainResources} from '../../src/server/inputs/GainResources';
+import {SelectResources} from '../../src/server/inputs/SelectResources';
 import {SelectResource} from '../../src/server/inputs/SelectResource';
 
 function asUnits(player: IPlayer): Units {
@@ -454,10 +454,8 @@ describe('Executor', () => {
     executor.execute({standardResource: {count: 3, same: false}}, player, fake);
     runAllActions(game);
 
-    const gainResources = cast(player.popWaitingFor(), GainResources);
-    gainResources.options[2].cb(2);
-    gainResources.options[3].cb(1);
-    gainResources.cb(undefined);
+    const selectResources = cast(player.popWaitingFor(), SelectResources);
+    selectResources.cb(Units.of({titanium: 2, plants: 1}));
 
     expect(player.stock.asUnits()).deep.eq(Units.of({titanium: 2, plants: 1}));
   });

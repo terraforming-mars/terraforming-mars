@@ -124,6 +124,11 @@ export type SelectResourceModel = BaseInputModel & {
   include: ReadonlyArray<keyof Units>;
 }
 
+export type SelectResourcesModel = BaseInputModel & {
+  type: 'resources';
+  count: number;
+}
+
 export type PlayerInputModel =
   AndOptionsModel |
   OrOptionsModel |
@@ -143,4 +148,5 @@ export type PlayerInputModel =
   SelectSpaceModel |
   ShiftAresGlobalParametersModel |
   SelectGlobalEventModel |
-  SelectResourceModel;
+  SelectResourceModel |
+  SelectResourcesModel;

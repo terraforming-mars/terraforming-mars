@@ -6,7 +6,7 @@ import {TileType} from '../../../src/common/TileType';
 import {Space} from '../../../src/server/boards/Space';
 import {expect} from 'chai';
 import {Phase} from '../../../src/common/Phase';
-import {AndOptions} from '../../../src/server/inputs/AndOptions';
+import {SelectResources} from '../../../src/server/inputs/SelectResources';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
@@ -48,7 +48,7 @@ describe('Philares', () => {
     expect(game.deferredActions).has.length(0);
     game.addTile(philaresPlayer, adjacentSpace, {tileType: TileType.GREENERY});
     runAllActions(game);
-    cast(philaresPlayer.popWaitingFor(), AndOptions);
+    cast(philaresPlayer.popWaitingFor(), SelectResources);
   });
 
   it('bonus when opponent places next to you', () => {
@@ -56,7 +56,7 @@ describe('Philares', () => {
     expect(game.deferredActions).has.length(0);
     game.addTile(otherPlayer, adjacentSpace, {tileType: TileType.GREENERY});
     runAllActions(game);
-    cast(philaresPlayer.popWaitingFor(), AndOptions);
+    cast(philaresPlayer.popWaitingFor(), SelectResources);
   });
 
   it('placing ocean tile does not grant bonus', () => {
@@ -87,11 +87,9 @@ describe('Philares', () => {
     game.addTile(philaresPlayer, space, {tileType: TileType.GREENERY});
     game.addTile(otherPlayer, adjacentSpace, {tileType: TileType.GREENERY});
     runAllActions(game);
-    const andOptions = cast(philaresPlayer.popWaitingFor(), AndOptions);
-    // Options are ordered 0-5, MC to heat.
+    const selectResources = cast(philaresPlayer.popWaitingFor(), SelectResources);
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
-    andOptions.options[0].cb(1);
-    andOptions.cb(undefined);
+    selectResources.cb(Units.of({megacredits: 1}));
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.of({megacredits: 1}));
   });
 
@@ -99,12 +97,10 @@ describe('Philares', () => {
     game.addTile(philaresPlayer, space, {tileType: TileType.GREENERY});
     game.addTile(otherPlayer, adjacentSpace, {tileType: TileType.GREENERY});
     runAllActions(game);
-    const andOptions = cast(philaresPlayer.popWaitingFor(), AndOptions);
-    // Options are ordered 0-5, MC to heat.
-    expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
-    andOptions.options[0].cb(1);
-    andOptions.options[1].cb(1);
-    expect(() => andOptions.cb(undefined)).to.throw('Select 1 resource(s)');
+    const selectResources = cast(philaresPlayer.popWaitingFor(), SelectResources);
+    expect(() =>
+      selectResources.process({type: 'resources', units: Units.of({megacredits: 1, steel: 1})}),
+    ).to.throw('Select 1 resource(s)');
   });
 
   it('Multiple bonuses when placing next to multiple tiles', () => {
@@ -114,12 +110,9 @@ describe('Philares', () => {
     game.addTile(philaresPlayer, space, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(1);
     runAllActions(game);
-    const andOptions = cast(philaresPlayer.popWaitingFor(), AndOptions);
-    // Options are ordered 0-5, MC to heat.
+    const selectResources = cast(philaresPlayer.popWaitingFor(), SelectResources);
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
-    andOptions.options[0].cb(1);
-    andOptions.options[1].cb(1);
-    andOptions.cb(undefined);
+    selectResources.cb(Units.of({megacredits: 1, steel: 1}));
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.of({megacredits: 1, steel: 1}));
   });
 
@@ -130,12 +123,9 @@ describe('Philares', () => {
     game.addTile(otherPlayer, space, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(1);
     runAllActions(game);
-    const andOptions = cast(philaresPlayer.popWaitingFor(), AndOptions);
-    // Options are ordered 0-5, MC to heat.
+    const selectResources = cast(philaresPlayer.popWaitingFor(), SelectResources);
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
-    andOptions.options[0].cb(1);
-    andOptions.options[1].cb(1);
-    andOptions.cb(undefined);
+    selectResources.cb(Units.of({megacredits: 1, steel: 1}));
     expect(philaresPlayer.stock.asUnits()).deep.eq(Units.of({megacredits: 1, steel: 1}));
   });
 
@@ -144,13 +134,10 @@ describe('Philares', () => {
     game.addTile(otherPlayer, adjacentSpace2, {tileType: TileType.GREENERY});
     game.addTile(philaresPlayer, space, {tileType: TileType.GREENERY});
     const action = game.deferredActions.pop();
-    const options = cast(action?.execute(), AndOptions);
-    // Options are ordered 0-5, MC to heat.
-    expect(philaresPlayer.stock.asUnits()).deep.eq(Units.EMPTY);
-    options.options[0].cb(1);
-    options.options[1].cb(1);
-    options.options[2].cb(1);
-    expect(() => options.cb(undefined)).to.throw('Select 2 resource(s)');
+    const selectResources = cast(action?.execute(), SelectResources);
+    expect(() =>
+      selectResources.process({type: 'resources', units: Units.of({megacredits: 1, steel: 2})}),
+    ).to.throw('Select 2 resource(s)');
   });
 
   it('Should take initial action', function() {
@@ -184,10 +171,8 @@ describe('Philares', () => {
 
     // Philares player gains plant and can subsequently place a greenery
     // philaresPlayer.takeActionForFinalGreenery();
-    const philaresPlayerResourceSelection = cast(philaresPlayer.popWaitingFor(), AndOptions);
-    // Option 3 is plants.
-    philaresPlayerResourceSelection.options[3].cb(1);
-    philaresPlayerResourceSelection.cb(undefined);
+    const philaresPlayerResourceSelection = cast(philaresPlayer.popWaitingFor(), SelectResources);
+    philaresPlayerResourceSelection.cb(Units.of({plants: 1}));
     expect(philaresPlayer.plants).to.eq(8);
     expect(philaresPlayer.getWaitingFor()).is.undefined;
 

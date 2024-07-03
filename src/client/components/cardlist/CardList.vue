@@ -157,19 +157,15 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import Card from '@/client/components/card/Card.vue';
 import {CardType} from '@/common/cards/CardType';
 import {CardName} from '@/common/cards/CardName';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import {allGlobalEventNames, getGlobalEvent} from '@/client/turmoil/ClientGlobalEventManifest';
-import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
 import {byType, getCard, getCards, toName} from '@/client/cards/ClientCardManifest';
-import Colony from '@/client/components/colonies/Colony.vue';
 import {COMMUNITY_COLONY_NAMES, OFFICIAL_COLONY_NAMES, PATHFINDERS_COLONY_NAMES} from '@/common/colonies/AllColonies';
 import {ColonyModel} from '@/common/models/ColonyModel';
 import {ColonyName} from '@/common/colonies/ColonyName';
-import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import {GameModule, GAME_MODULES, MODULE_NAMES} from '@/common/cards/GameModule';
 import {Tag} from '@/common/cards/Tag';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
@@ -177,12 +173,16 @@ import {ClientCard} from '@/common/cards/ClientCard';
 import {translateText} from '@/client/directives/i18n';
 import {MilestoneName, milestoneNames} from '@/common/ma/MilestoneName';
 import {AwardName, awardNames} from '@/common/ma/AwardName';
-import Milestone from '@/client/components/Milestone.vue';
-import Award from '@/client/components/Award.vue';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {WithRefs} from 'vue-typed-refs';
-import {CardListSearchIndex} from '@/client/components/CardListSearchIndex';
+import {CardListSearchIndex} from '@/client/components/cardlist/CardListSearchIndex';
+import Card from '@/client/components/card/Card.vue';
+import Colony from '@/client/components/colonies/Colony.vue';
+import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
+import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
+import Milestone from '@/client/components/Milestone.vue';
+import Award from '@/client/components/Award.vue';
 
 const moduleAbbreviations: Record<GameModule, string> = {
   base: 'b',

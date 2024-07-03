@@ -6,7 +6,7 @@ import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
 import {isICardRenderCorpBoxAction, isICardRenderCorpBoxEffect, isICardRenderEffect, isICardRenderItem, isICardRenderProductionBox, isICardRenderRoot} from '@/common/cards/render/Types';
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {translateText} from '@/client/directives/i18n';
-import {allMaNames, getMilestoneAwardDescription} from '../MilestoneAwardManifest';
+import {allMaNames, getMilestoneAwardDescription} from '../../MilestoneAwardManifest';
 import {copyAndClear} from '@/common/utils/utils';
 
 export class CardListSearchIndex {

@@ -21,7 +21,7 @@
           <div class='debugid'>(debugid {{step}})</div>
         </div>
         <div class="card-panel" v-if="cardNames.size + globalEventNames.size + colonyNames.size > 0">
-          <AppButton size="big" type="close" :disableOnServerBusy="false" @click="hideMe" align="right"/>
+          <AppButton size="big" type="close" :disableOnServerBusy="false" @click="hideCards" align="right"/>
           <div id="log_panel_card" class="cardbox" v-for="cardName in cardNames" :key="cardName">
             <Card :card="{name: cardName, isSelfReplicatingRobotsCard: isSelfReplicatingRobotsCard(cardName), resources: getResourcesOnCard(cardName)}"/>
           </div>
@@ -140,12 +140,14 @@ export default Vue.extend({
         } else if (data.type === LogMessageDataType.COLONY) {
           this.colonyNames.toggle(data.value);
         }
+        this.$forceUpdate();
       });
     },
-    hideMe() {
+    hideCards() {
       this.cardNames.clear();
       this.globalEventNames.clear();
       this.colonyNames.clear();
+      this.$forceUpdate();
     },
     selectGeneration(gen: number): void {
       if (gen !== this.selectedGeneration) {

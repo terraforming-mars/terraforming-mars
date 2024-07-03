@@ -138,7 +138,6 @@ export class AresHandler {
     }
   }
 
-  // TODO(kberg): replace with isHazardTileType?
   public static hasHazardTile(space: Space): boolean {
     return hazardSeverity(space.tile?.tileType) !== HazardSeverity.NONE;
   }

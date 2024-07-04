@@ -63,8 +63,7 @@ export class Aridor extends CorporationCard {
       const currentSize = this.allTags.size;
       this.allTags.add(tag);
       if (this.allTags.size > currentSize) {
-        // TODO(kberg): Replace with M€
-        player.game.log('${0} gained 1 MC production from ${1} for ${2}', (b) => b.player(player).card(this).string(tag));
+        player.game.log('${0} gained 1 M€ production from ${1} for ${2}', (b) => b.player(player).card(this).string(tag));
         player.production.add(Resource.MEGACREDITS, 1, {log: true});
       }
     }

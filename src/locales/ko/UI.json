@@ -56,6 +56,7 @@
 
     "prel": "서곡",
     "Prelude": "서곡",
+    "Prelude 2": "서곡 2",
     "Prelude 2(β)": "서곡 2 (β)",
     "Venus Next": "비너스 넥스트",
     "Underworld": "지하 세계",
@@ -65,6 +66,7 @@
     "Custom Preludes list": "커스텀 서곡 목록",
     "World Government Terraforming": "세계정부 테라포밍",
     "Draft variant": "드래프트 변형 규칙",
+    "Prelude Draft variant": "서곡 드래프트 변형 규칙",
     "Initial Draft variant": "초기 카드 드래프트 변형 규칙",
     "Initial Draft rounds": "초기 카드 드래프트 라운드",
     "Corporations Draft": "기업 카드 드래프트",
@@ -370,7 +372,8 @@
     "Random": "무작위",
     "The Moon": "달",
     "Mandatory Moon Terraforming": "게임 종료 조건에 달개척률 달성 추가",
-    "Standard Project Variant": "일반 프로젝트 변형 규칙",
+    "Standard Project Variant #1": "일반 프로젝트 변형 규칙 #1",
+    "Standard Project Variant #2": "일반 프로젝트 변형 규칙 #2",
     "Drafted cards": "드래프트 카드",
     "Draw 3 cards and keep 2.": "카드 3장을 뽑고 그 중 2장을 선택.",
     "Select 2 card(s) to keep": "보관할 카드 2장을 선택",
@@ -1283,7 +1286,6 @@
 
     "Official": "공식",
     "Promo": "프로모",
-    "Prelude 2": "서곡 2",
     "Star Wars": "스타워즈",
     "Underworld (β)": "지하 세계 (β)",
     "ceo": "경영인",

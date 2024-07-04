@@ -104,39 +104,7 @@ export class PharmacyUnion extends CorporationCard {
 
     if (isPharmacyUnion && hasScienceTag) {
       const scienceTags = player.tags.cardTagCount(card, Tag.SCIENCE);
-      for (let i = 0; i < scienceTags; i++) {
-        player.defer(() => {
-          if (this.isDisabled) return undefined;
-
-          if (this.resourceCount > 0) {
-            if (player.canAfford({cost: 0, tr: {tr: 1}}) === false) {
-              // TODO (Lynesth): Remove this when #1670 is fixed
-              game.log('${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
-            } else {
-              this.resourceCount--;
-              player.increaseTerraformRating();
-              game.log('${0} removed a disease from ${1} to gain 1 TR', (b) => b.player(player).card(this));
-            }
-            return undefined;
-          }
-
-          if (player.canAfford({cost: 0, tr: {tr: 3}}) === false) {
-            // TODO (Lynesth): Remove this when #1670 is fixed
-            game.log('${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
-            return undefined;
-          }
-
-          return new OrOptions(
-            new SelectOption('Turn this card face down and gain 3 TR', 'Gain TR').andThen(() => {
-              this.isDisabled = true;
-              player.increaseTerraformRating(3);
-              game.log('${0} turned ${1} face down to gain 3 TR', (b) => b.player(player).card(this));
-              return undefined;
-            }),
-            new SelectOption('Do nothing', 'Do nothing'),
-          );
-        }, -1); // Make it a priority
-      }
+      this.onScienceTagAdded(player, scienceTags);
     }
 
 
@@ -150,6 +118,46 @@ export class PharmacyUnion extends CorporationCard {
         game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
         return undefined;
       }, Priority.SUPERPOWER);
+    }
+  }
+
+  public onColonyAddedToLeavitt(player: IPlayer) {
+    this.onScienceTagAdded(player, 1);
+  }
+  public onScienceTagAdded(player: IPlayer, count: number) {
+    const game = player.game;
+    for (let i = 0; i < count; i++) {
+      player.defer(() => {
+        if (this.isDisabled) return undefined;
+
+        if (this.resourceCount > 0) {
+          if (player.canAfford({cost: 0, tr: {tr: 1}}) === false) {
+            // TODO (Lynesth): Remove this when #1670 is fixed
+            game.log('${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
+          } else {
+            this.resourceCount--;
+            player.increaseTerraformRating();
+            game.log('${0} removed a disease from ${1} to gain 1 TR', (b) => b.player(player).card(this));
+          }
+          return undefined;
+        }
+
+        if (player.canAfford({cost: 0, tr: {tr: 3}}) === false) {
+          // TODO (Lynesth): Remove this when #1670 is fixed
+          game.log('${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
+          return undefined;
+        }
+
+        return new OrOptions(
+          new SelectOption('Turn this card face down and gain 3 TR', 'Gain TR').andThen(() => {
+            this.isDisabled = true;
+            player.increaseTerraformRating(3);
+            game.log('${0} turned ${1} face down to gain 3 TR', (b) => b.player(player).card(this));
+            return undefined;
+          }),
+          new SelectOption('Do nothing', 'Do nothing'),
+        );
+      }, -1); // Make it a priority
     }
   }
 

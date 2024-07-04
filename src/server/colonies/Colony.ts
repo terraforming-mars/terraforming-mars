@@ -97,6 +97,12 @@ export abstract class Colony implements IColony {
         card.onColonyAdded?.(player, cardOwner);
       }
     }
+
+    if (this.name === ColonyName.LEAVITT) {
+      for (const card of player.tableau) {
+        card.onColonyAddedToLeavitt?.(player);
+      }
+    }
   }
 
   /*

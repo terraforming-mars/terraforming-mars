@@ -8,6 +8,7 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {CardResource} from '../../../src/common/CardResource';
 import {assertIsAddResourceToCard} from '../../assertions';
+import {Leavitt} from '../../../src/server/cards/community/Leavitt';
 
 describe('StemFieldSubsidies', () => {
   let card: StemFieldSubsidies;
@@ -64,6 +65,18 @@ describe('StemFieldSubsidies', () => {
     assertIsIdentificationAction(player, player.popWaitingFor());
     runAllActions(game);
     assertIsAddResourceToCard(player.popWaitingFor(), 1, [card, otherCard], card);
+    cast(player.popWaitingFor(), undefined);
+    runAllActions(game);
+    expect(card.resourceCount).eq(1);
+  });
+
+  it('Compatible with Leavitt #6349', () => {
+    const leavitt = new Leavitt();
+    leavitt.addColony(player);
+
+    runAllActions(game);
+    assertIsIdentificationAction(player, player.popWaitingFor());
+    runAllActions(game);
     cast(player.popWaitingFor(), undefined);
     runAllActions(game);
     expect(card.resourceCount).eq(1);

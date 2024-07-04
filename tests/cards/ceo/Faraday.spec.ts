@@ -9,6 +9,7 @@ import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {CardType} from '../../../src/common/cards/CardType';
 import {CrewTraining} from '../../../src/server/cards/pathfinders/CrewTraining';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
+import {Leavitt} from '../../../src/server/cards/community/Leavitt';
 
 describe('Faraday', function() {
   let card: Faraday;
@@ -185,5 +186,22 @@ describe('Faraday', function() {
     expect(player.megaCredits).to.eq(PLAYER_INITIALMC - CARD_DRAW_COST);
     expect(player.cardsInHand).has.length(1);
     expect(player.cardsInHand[0].tags.includes(Tag.EARTH)).is.true;
+  });
+
+  it('Compatible with Leavitt #6349', () => {
+    player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
+
+    const leavitt = new Leavitt();
+    leavitt.addColony(player);
+
+    runAllActions(game);
+
+    // Now that it's Science tags, we should be prompted to draw an Science card
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+    orOptions.options[0].cb();
+    runAllActions(game);
+    expect(player.megaCredits).to.eq(PLAYER_INITIALMC - CARD_DRAW_COST);
+    expect(player.cardsInHand).has.length(1);
+    expect(player.cardsInHand[0].tags.includes(Tag.SCIENCE)).is.true;
   });
 });

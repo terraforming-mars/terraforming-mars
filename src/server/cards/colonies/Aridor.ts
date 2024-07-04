@@ -58,22 +58,31 @@ export class Aridor extends CorporationCard {
     return undefined;
   }
 
+  private processTags(player: IPlayer, tags: ReadonlyArray<Tag>) {
+    for (const tag of tags) {
+      const currentSize = this.allTags.size;
+      this.allTags.add(tag);
+      if (this.allTags.size > currentSize) {
+        // TODO(kberg): Replace with M€
+        player.game.log('${0} gained 1 MC production from ${1} for ${2}', (b) => b.player(player).card(this).string(tag));
+        player.production.add(Resource.MEGACREDITS, 1, {log: true});
+      }
+    }
+  }
+
   public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
     return this.onCardPlayed(player, card);
+  }
+
+  public onColonyAddedToLeavitt(player: IPlayer) {
+    this.processTags(player, [Tag.SCIENCE]);
   }
 
   public onCardPlayed(player: IPlayer, card: ICard) {
     if (!player.isCorporation(this.name)) {
       return;
     }
-    for (const tag of this.tagsForCard(card)) {
-      const currentSize = this.allTags.size;
-      this.allTags.add(tag);
-      if (this.allTags.size > currentSize) {
-        player.game.log('${0} gained 1 MC production from ${1} for ${2}', (b) => b.player(player).card(this).string(tag));
-        player.production.add(Resource.MEGACREDITS, 1, {log: true});
-      }
-    }
+    this.processTags(player, this.tagsForCard(card));
   }
 
   public serialize(serialized: SerializedCard) {

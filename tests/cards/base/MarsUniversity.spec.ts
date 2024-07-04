@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {MarsUniversity} from '../../../src/server/cards/base/MarsUniversity';
 import {Pets} from '../../../src/server/cards/base/Pets';
 import {Research} from '../../../src/server/cards/base/Research';
@@ -12,6 +12,7 @@ import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
+import {Leavitt} from '../../../src/server/cards/community/Leavitt';
 
 describe('MarsUniversity', function() {
   let card: MarsUniversity;
@@ -30,10 +31,10 @@ describe('MarsUniversity', function() {
 
     player.cardsInHand.push(card);
     card.onCardPlayed(player, card);
-    expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions = cast(game.deferredActions.peek()!.execute(), OrOptions);
-    game.deferredActions.pop();
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+
     orOptions.options[0].cb([card]);
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.cardsInHand[0]).not.to.eq(card);
@@ -50,17 +51,18 @@ describe('MarsUniversity', function() {
   it('Runs twice for multiple science tags', function() {
     player.cardsInHand.push(card, card);
     card.onCardPlayed(player, new Research());
-    expect(game.deferredActions).has.lengthOf(2);
 
-    const orOptions = cast(game.deferredActions.peek()!.execute(), OrOptions);
-    game.deferredActions.pop();
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
     orOptions.options[1].cb();
 
-    const orOptions2 = cast(game.deferredActions.peek()!.execute(), OrOptions);
-    game.deferredActions.pop();
+
+    runAllActions(game);
+    const orOptions2 = cast(player.popWaitingFor(), OrOptions);
     orOptions2.options[1].cb();
 
-    expect(game.deferredActions).has.lengthOf(0);
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
   });
 
   // https://github.com/terraforming-mars/terraforming-mars/issues/3251
@@ -91,5 +93,15 @@ describe('MarsUniversity', function() {
     expect(roboticWorkforceAction.title).to.match(/Select builder card/);
 
     expect(game.deferredActions.pop()).is.undefined;
+  });
+
+  it('Compatible with Leavitt #6349', () => {
+    player.cardsInHand = [new EarthOffice()];
+    player.playedCards.push(card);
+    const leavitt = new Leavitt();
+    leavitt.addColony(player);
+
+    runAllActions(game);
+    cast(player.popWaitingFor(), OrOptions);
   });
 });

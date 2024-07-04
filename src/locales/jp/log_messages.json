@@ -376,7 +376,7 @@
     "${0} discarded ${1} corruption and gained ${2} M€": "${0}は${1}汚職支払い、${2}MC獲得",
     "${0} used the ${1} action to convert ${2} wares into ${2} M€": "${0}は${1}のアクションで${2}品物支払い、${2}MC獲得",
     "${0} gained ${1} M€ from the ${2} corp effect": "${0}は${2}の効果で${1}MC獲得",
-    "${0} gained 1 MC production from ${1} for ${2}": "${0}は${2}タグをプレイし、MC産出+1(${1}の効果).",
+    "${0} gained 1 M€ production from ${1} for ${2}": "${0}は${2}タグをプレイし、MC産出+1(${1}の効果).",
     "${0} gained 4 M€ for playing a card with no tags.": "${0}はタグ無しカードをプレイし、4MC獲得.",
     "${0} gained 4 M€ for playing ${1}, which has no tags.": "${0}はタグ無しカード(${1})をプレイし、4MC獲得.",
     "${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.": "${0}は1タグのみついたカード(${1})をプレイし、1MC獲得.",

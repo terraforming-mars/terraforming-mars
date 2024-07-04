@@ -195,7 +195,6 @@
     "A neutral delegate was added to the ${0} party": "Ein neutraler Deligierter wurde der Partei ${0} hinzugefügt.",
     "The ruling bonus is: ${0}": "Der herrschende Bonus ist: ${0}",
     "The ruling policy is: ${0}": "Das herrschende Gesetz ist: ${0}",
-    "${0} gained 4 MC when become a party leader.": "${0} erhielt 4 M€, als er Parteiführer wurde.",
     "${0} used Turmoil ${1} action": "${0} führte die ${1}-Aktion aus",
     "${0} used Turmoil Mars First action": "${0} führte die Mars Zuerst Aktion aus",
     "${0} used Turmoil Scientists action": "${0} führte die Forschung Aktion aus",
@@ -392,7 +391,7 @@
     "${0} discarded ${1} corruption and gained ${2} M€": "${0} warf ${1} Korruption ab und erhielt ${2} M€",
     "${0} used the ${1} action to convert ${2} wares into ${2} M€": "${0} hat die ${1} Aktion benutzt, um ${2} Waren in ${2} M€ umzuwandeln",
     "${0} gained ${1} M€ from the ${2} corp effect": "${0} erhielt ${1} M€ aus dem ${2} Konzern-Effekt.",
-    "${0} gained 1 MC production from ${1} for ${2}": "${0} erhielt 1 MC Produktion von ${1} für ${2}",
+    "${0} gained 1 M€ production from ${1} for ${2}": "${0} erhielt 1 MC Produktion von ${1} für ${2}",
     "${0} gained ${1} from ${2}": "${0} erhielt ${1} von ${2}",
     "${0} gained 2 ${1} from ${2}": "${0} erhielt 2 ${1} von ${2}",
     "${0} gained 4 M€ for playing a card with no tags.": "${0} erhielt 4 M€ für das Ausspielen einer Karte, die kein Symbol hat.",
@@ -410,7 +409,7 @@
     "${0} blackmailed the neutral player and was paid 10 M€.": "${0} hat den neutralen Spieler erpresst und 10 M€ erhalten.",
     "${0} blackmailed ${1} who lost 2 corruption.": "${0} hat ${1} erpresst, der 2 Korruption verloren hat.",
     "${0} blackmailed ${1} and was paid 10 M€.": "${0} erpresste ${1} und erhielt 10 M€.",
-    
+
     "${0} searched for ${1} tags": "${0} suchte nach ${1} Symbol",
     "earth": "Erde",
     "venus": "Venus",

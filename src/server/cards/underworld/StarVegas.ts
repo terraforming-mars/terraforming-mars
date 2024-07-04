@@ -63,7 +63,7 @@ export class StarVegas extends Card {
           b.production((pb) => pb.megacredits(1).slash().city({all}));
         }),
         description: 'Requires any 3 cities in play. Place a city on a space reserved for a different space city. ' +
-        'Gain 2 corruption. Increase your MC production one step for each city in play.',
+        'Gain 2 corruption. Increase your M€ production one step for each city in play.',
       },
     });
   }

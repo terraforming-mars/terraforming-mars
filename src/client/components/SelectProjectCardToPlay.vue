@@ -106,9 +106,7 @@ export default Vue.extend({
   data(): SelectProjectCardToPlayDataModel {
     let card: CardModel | undefined;
     let cards: ReadonlyArray<CardModel> = [];
-    if (this.playerinput !== undefined &&
-            this.playerinput.cards !== undefined &&
-            this.playerinput.cards.length > 0) {
+    if ((this.playerinput?.cards?.length ?? 0) > 0) {
       cards = CardOrderStorage.getOrdered(
         CardOrderStorage.getCardOrder(this.playerView.id),
         this.playerinput.cards,
@@ -167,9 +165,17 @@ export default Vue.extend({
         this.payment[target] = 0;
       }
 
+      // Automatically use as many MC as possible, saving the rest for special resources.
+      //
+      // If the player wanted to maximize all standard resources / card resources, that line would have to be
+      // let megacreditBalance = this.cost;
+      // along with the last line in the function setting the MC value.
+      //
       let megacreditBalance = Math.max(this.cost - this.thisPlayer.megaCredits, 0);
 
-      // Calcualtes the optimal number of units to use given the unit value.
+      // console.log(this.cost, this.thisPlayer.megaCredits, megacreditBalance);
+
+      // Calculates the optimal number of units to use given the unit value.
       //
       // It reads `megacreditBalance` as the remaining balance, and deducts the
       // consumed balance as part of this method.
@@ -186,6 +192,8 @@ export default Vue.extend({
         const _tmp = megacreditBalance / unitValue;
         const balanceAsUnits = overpay ? Math.ceil(_tmp) : Math.floor(_tmp);
         const contributingUnits = Math.min(availableUnits, balanceAsUnits);
+
+        // console.log(megacreditBalance, unitValue, availableUnits, overpay, '-', _tmp, balanceAsUnits, contributingUnits);
 
         megacreditBalance -= contributingUnits * unitValue;
         return contributingUnits;
@@ -253,6 +261,8 @@ export default Vue.extend({
           this.payment[key] -= saveOverspendingUnits(this.payment[key], this.getResourceRate(key));
         }
       }
+      // See top that sets megacreditBalance
+      // this.payment['megaCredits'] = megacreditBalance;
     },
     canUseTitaniumRegularly(): boolean {
       return this.tags.includes(Tag.SPACE) ||

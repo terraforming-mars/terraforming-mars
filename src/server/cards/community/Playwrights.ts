@@ -54,7 +54,7 @@ export class Playwrights extends CorporationCard {
     const replayableEvents = this.getReplayableEvents(player);
 
     return new SelectCard<IProjectCard>(
-      'Select event card to replay at cost in M€ and remove from play', 'Select', replayableEvents)
+      'Select event card to replay at cost in M€ and remove from play', 'Select', replayableEvents, {played: false})
       .andThen(
         ([card]) => {
           const selectedCard: IProjectCard = card;

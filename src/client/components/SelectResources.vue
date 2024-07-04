@@ -58,7 +58,7 @@ export default Vue.extend({
   },
   methods: {
     saveData() {
-      this.onsave({type: 'resources', units: Units.EMPTY});
+      this.onsave({type: 'resources', units: this.units});
     },
     /**
      * Reduce `unit` by one.

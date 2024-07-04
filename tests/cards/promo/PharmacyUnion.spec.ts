@@ -18,6 +18,7 @@ import {Virus} from '../../../src/server/cards/base/Virus';
 import {cast, runAllActions} from '../../TestingUtils';
 import {Player} from '../../../src/server/Player';
 import {testGame} from '../../TestGame';
+import {Leavitt} from '../../../src/server/cards/community/Leavitt';
 
 describe('PharmacyUnion', function() {
   let card: PharmacyUnion;
@@ -32,7 +33,7 @@ describe('PharmacyUnion', function() {
   });
 
   it('Should play', function() {
-    player.corporations.length = 0; // Resetting so when setting the corproation it doesn't do anything flaky.
+    player.corporations.length = 0; // Resetting so when setting the corporation it doesn't do anything flaky.
     [game, player] = testGame(1, {skipInitialCardSelection: false});
     const pi = cast(player.getWaitingFor(), SelectInitialCards);
     pi.options[0].cb([card]);
@@ -213,5 +214,17 @@ describe('PharmacyUnion', function() {
     const reserializedPlayer = Player.deserialize(serializedPlayer);
     const reserializedPharmacyUnion = cast(reserializedPlayer.corporations?.[0], PharmacyUnion);
     expect(reserializedPharmacyUnion.isDisabled).is.true;
+  });
+
+  it('Compatible with Leavitt #6349', () => {
+    card.resourceCount = 2;
+
+    const leavitt = new Leavitt();
+    leavitt.addColony(player);
+
+    runAllActions(game);
+
+    expect(card.resourceCount).to.eq(1);
+    expect(player.getTerraformRating()).to.eq(21);
   });
 });

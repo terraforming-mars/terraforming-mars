@@ -10,6 +10,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {Leavitt} from '../../../src/server/cards/community/Leavitt';
 
 describe('OlympusConference', function() {
   let card: OlympusConference;
@@ -32,17 +33,15 @@ describe('OlympusConference', function() {
 
     // No resource
     card.onCardPlayed(player, card);
-    expect(game.deferredActions).has.lengthOf(1);
-    const input = game.deferredActions.peek()!.execute();
-    game.deferredActions.pop();
-    expect(input).is.undefined;
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
     expect(card.resourceCount).to.eq(1);
 
     // Resource available
     card.onCardPlayed(player, card);
-    expect(game.deferredActions).has.lengthOf(1);
+    runAllActions(game);
 
-    const orOptions = cast(game.deferredActions.peek()!.execute(), OrOptions);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
     game.deferredActions.pop();
     orOptions.options[1].cb();
     expect(card.resourceCount).to.eq(2);
@@ -125,5 +124,15 @@ describe('OlympusConference', function() {
     game.deferredActions.pop();
     orOptions2.options[1].cb();
     expect(card.resourceCount).to.eq(2);
+  });
+
+  it('Compatible with Leavitt #6349', () => {
+    player.playedCards.push(card);
+    const leavitt = new Leavitt();
+    leavitt.addColony(player);
+
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
+    expect(card.resourceCount).to.eq(1);
   });
 });

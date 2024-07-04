@@ -30,7 +30,10 @@ export class CarbonNanosystems extends Card implements IProjectCard {
 
   public onCardPlayed(player: IPlayer, card: IProjectCard) {
     const tags = card.tags.filter((tag) => tag === Tag.SCIENCE).length;
-    player.addResourceTo(this, tags);
+    player.addResourceTo(this, {qty: tags, log: true});
     return undefined;
+  }
+  public onColonyAddedToLeavitt(player: IPlayer): void {
+    player.addResourceTo(this, {qty: 1, log: true});
   }
 }

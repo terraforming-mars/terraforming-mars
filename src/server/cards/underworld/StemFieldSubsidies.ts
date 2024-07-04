@@ -32,6 +32,12 @@ export class StemFieldSubsidies extends Card implements IProjectCard {
 
   public onCardPlayed(player: IPlayer, card: IProjectCard) {
     const count = player.tags.cardTagCount(card, Tag.SCIENCE);
+    this.onScienceTagAdded(player, count);
+  }
+  public onColonyAddedToLeavitt(player: IPlayer): void {
+    this.onScienceTagAdded(player, 1);
+  }
+  public onScienceTagAdded(player: IPlayer, count: number) {
     if (count > 0) {
       player.game.defer(new IdentifySpacesDeferred(player, count));
     }

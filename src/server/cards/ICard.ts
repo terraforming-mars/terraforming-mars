@@ -122,7 +122,10 @@ export interface ICard {
   onProductionGain?(player: IPlayer, resource: Resource, amount: number): void;
   onProductionPhase?(player: IPlayer): void;
 
+  /** Optional callback when ANY player adds a colony. */
   onColonyAdded?(player: IPlayer, cardOwner: IPlayer): void;
+  /** Optional callback when `player` adds a colony to Leavitt. */
+  onColonyAddedToLeavitt?(player: IPlayer): void;
 
   cost?: number; /** Used with IProjectCard and PreludeCard. */
   type: CardType;

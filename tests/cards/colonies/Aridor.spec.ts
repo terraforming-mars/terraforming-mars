@@ -14,6 +14,7 @@ import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {InputResponse} from '../../../src/common/inputs/InputResponse';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
+import {Leavitt} from '../../../src/server/cards/community/Leavitt';
 
 let card: Aridor;
 let game: IGame;
@@ -116,5 +117,17 @@ describe('Aridor', function() {
     const reserializedAridor = cast(reserializedPlayer.corporations?.[0], Aridor);
 
     expect(Array.from(reserializedAridor.allTags)).deep.eq([Tag.ANIMAL, Tag.SCIENCE, Tag.CITY, Tag.BUILDING]);
+  });
+
+  it('Compatible with Leavitt #6349', () => {
+    player.corporations.push(card);
+
+    expect(player.production.megacredits).eq(0);
+
+    const leavitt = new Leavitt();
+    leavitt.addColony(player);
+
+    runAllActions(game);
+    expect(player.production.megacredits).eq(1);
   });
 });

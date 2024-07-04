@@ -9,6 +9,7 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {cast, runAllActions} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
+import {VenusianAnimals} from '../../../src/server/cards/venusNext/VenusianAnimals';
 
 describe('Leavitt', function() {
   let leavitt: Leavitt;
@@ -124,5 +125,17 @@ describe('Leavitt', function() {
     expect(player.tags.count(Tag.SCIENCE)).to.eq(0);
     leavitt.addColony(player);
     expect(player.tags.count(Tag.SCIENCE)).to.eq(1);
+  });
+
+  // #6349
+  it('Leavitt is compatible with Venusian Animals', () => {
+    const venusianAnimals = new VenusianAnimals();
+    player.playedCards.push(venusianAnimals);
+
+    expect(venusianAnimals.resourceCount).eq(0);
+
+    leavitt.addColony(player);
+
+    expect(venusianAnimals.resourceCount).eq(1);
   });
 });

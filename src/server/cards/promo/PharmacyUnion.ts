@@ -97,7 +97,7 @@ export class PharmacyUnion extends CorporationCard {
           );
           orOptions.title = 'Choose the order of tag resolution for Pharmacy Union';
           return orOptions;
-        }, -1); // Make it a priority
+        }, Priority.SUPERPOWER); // Make it a priority
         return undefined;
       }
     }
@@ -157,7 +157,7 @@ export class PharmacyUnion extends CorporationCard {
           }),
           new SelectOption('Do nothing', 'Do nothing'),
         );
-      }, -1); // Make it a priority
+      }, Priority.SUPERPOWER); // Make it a priority
     }
   }
 

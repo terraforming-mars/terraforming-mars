@@ -1119,8 +1119,9 @@
     "Why?": "Warum?",
 
     "How to pay?": "Bezahlung",
-    "Some titanium are unavailable here in reserve for the project card.": "Etwas Titan ist hier nicht verfügbar und ist reserviert für die Projektkarte",
-    "Some steel are unavailable here in reserve for the project card.": "Etwas Stahl ist hier nicht verfügbar und ist reserviert für die Projektkarte",
+    "Some ${0} are unavailable here in reserve for the project card.": "Etwas ${0} ist hier nicht verfügbar und ist reserviert für die Projektkarte.",
+    "Some titanium are unavailable here in reserve for the project card.": "Etwas Titan ist hier nicht verfügbar und ist reserviert für die Projektkarte.",
+    "Some steel are unavailable here in reserve for the project card.": "Etwas Stahl ist hier nicht verfügbar und ist reserviert für die Projektkarte.",
     "Must select a space": "Suche ein Feld aus",
     "[ toggle cards filters ]": "[ Kartenfilter aktivieren/deaktivieren ]",
     "[ toggle tags view ]": "[ Symbolsichtfilter aktivieren/deaktivieren ]",

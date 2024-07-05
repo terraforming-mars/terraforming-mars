@@ -895,7 +895,7 @@ export class Player implements IPlayer {
       this.pay(payment);
     }
 
-    ColoniesHandler.onCardPlayed(this.game, selectedCard);
+    ColoniesHandler.maybeActivateColonies(this.game, selectedCard);
 
     if (selectedCard.type !== CardType.PROXY) {
       this.lastCardPlayed = selectedCard.name;
@@ -1081,7 +1081,7 @@ export class Player implements IPlayer {
     }
 
     this.triggerOtherCorpEffects(corporationCard);
-    ColoniesHandler.onCardPlayed(this.game, corporationCard);
+    ColoniesHandler.maybeActivateColonies(this.game, corporationCard);
     PathfindersExpansion.onCardPlayed(this, corporationCard);
 
     if (!additionalCorp) {

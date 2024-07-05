@@ -582,6 +582,7 @@ export class Game implements IGame, Logger {
   }
 
   private playerHasPickedCorporationCard(player: IPlayer, corporationCard: ICorporationCard): void {
+    // TODO(kberg): I think we can get rid of this weird validation at a later time.
     player.pickedCorporationCard = corporationCard;
     if (this.players.every((p) => p.pickedCorporationCard !== undefined)) {
       for (const somePlayer of this.getPlayersInGenerationOrder()) {

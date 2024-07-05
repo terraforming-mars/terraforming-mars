@@ -22,7 +22,7 @@ export class ColoniesHandler {
     return game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
   }
 
-  public static onCardPlayed(game: IGame, card: ICard) {
+  public static maybeActivateColonies(game: IGame, card: ICard) {
     if (!game.gameOptions.coloniesExtension) return;
     game.colonies.forEach((colony) => {
       if (colony.isActive === false && ColoniesHandler.cardActivatesColony(colony, card)) {

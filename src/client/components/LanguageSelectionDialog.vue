@@ -4,9 +4,9 @@
       <div class="preferences_panel_langs">
         <label class="form-radio" v-for="lang in ALL_LANGUAGES" :key="lang">
           <div
-            :key="LANGUAGES[lang]"
+            :key="lang"
             :class="`language-icon language-icon-for-switcher language-icon--${lang}`"
-            :title="LANGUAGES[lang]"
+            :title="LANGUAGES[lang][1]"
             @click="switchLanguageTo(lang)"
           />
           <span class="language-text" @click="switchLanguageTo(lang)">{{ LANGUAGES[lang] }}</span>

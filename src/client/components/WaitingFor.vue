@@ -1,5 +1,11 @@
 <template>
-  <div v-if="waitingfor === undefined">{{ $t('Not your turn to take any actions') }}</div>
+  <div>
+  <template v-if="waitingfor === undefined">
+    {{ $t('Not your turn to take any actions') }}
+    <template v-if="playersWaitingFor.length > 0">
+      (⌛ <span v-for="color in playersWaitingFor" :style="'color:' + color" :key="color">&#9632;</span>)
+    </template>
+  </template>
   <div v-else class="wf-root">
     <template v-if="preferences().experimental_ui && playerView.game.phase === Phase.ACTION && playerView.players.length !== 1">
       <!--
@@ -25,6 +31,7 @@
                           :onsave="onsave"
                           :showsave="true"
                           :showtitle="true" />
+    </div>
   </div>
 </template>
 
@@ -45,9 +52,16 @@ import {statusCode} from '@/common/http/statusCode';
 import {isPlayerId} from '@/common/Types';
 import {InputResponse} from '@/common/inputs/InputResponse';
 import {INVALID_RUN_ID} from '@/common/app/AppErrorId';
+import {Color} from '@/common/Color';
 
 let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;
+
+type DataModel = {
+  waitingForTimeout: typeof raw_settings.waitingForTimeout,
+  autopass: boolean,
+  playersWaitingFor: Array<Color>
+}
 
 export default Vue.extend({
   name: 'waiting-for',
@@ -65,10 +79,11 @@ export default Vue.extend({
       type: Object as () => PlayerInputModel | undefined,
     },
   },
-  data() {
+  data(): DataModel {
     return {
-      waitingForTimeout: this.settings.waitingForTimeout as typeof raw_settings.waitingForTimeout,
+      waitingForTimeout: this.settings.waitingForTimeout,
       autopass: this.playerView.autopass,
+      playersWaitingFor: [],
     };
   },
   methods: {
@@ -194,38 +209,11 @@ export default Vue.extend({
         xhr.onload = () => {
           if (xhr.status === statusCode.ok) {
             const result = xhr.response as WaitingForModel;
+            this.playersWaitingFor = result.waitingFor;
             if (result.result === 'GO') {
               // Will only apply to player, not spectator.
               root.updatePlayer();
-
-              if (Notification.permission !== 'granted') {
-                Notification.requestPermission();
-              } else if (Notification.permission === 'granted') {
-                const notificationOptions = {
-                  icon: 'favicon.ico',
-                  body: 'It\'s your turn!',
-                };
-                const notificationTitle = constants.APP_NAME;
-                try {
-                  new Notification(notificationTitle, notificationOptions);
-                } catch (e) {
-                  // ok so the native Notification doesn't work which will happen
-                  // try to use the service worker if we can
-                  if (!window.isSecureContext || !navigator.serviceWorker) {
-                    return;
-                  }
-                  navigator.serviceWorker.ready.then((registration) => {
-                    registration.showNotification(notificationTitle, notificationOptions);
-                  }).catch((err) => {
-                    // avoid promise going uncaught
-                    console.warn('Failed to display notification with serviceWorker', err);
-                  });
-                }
-              }
-
-              const soundsEnabled = getPreferences().enable_sounds;
-              if (soundsEnabled) SoundManager.playActivePlayerSound();
-
+              this.notify();
               // We don't need to wait anymore - it's our turn
               return;
             } else if (result.result === 'REFRESH') {
@@ -247,6 +235,36 @@ export default Vue.extend({
         xhr.send();
       };
       ui_update_timeout_id = window.setTimeout(askForUpdate, this.waitingForTimeout);
+    },
+    notify() {
+      if (getPreferences().enable_sounds) {
+        SoundManager.playActivePlayerSound();
+      }
+
+      if (Notification.permission !== 'granted') {
+        Notification.requestPermission();
+      } else if (Notification.permission === 'granted') {
+        const notificationOptions = {
+          icon: 'favicon.ico',
+          body: 'It\'s your turn!',
+        };
+        const notificationTitle = constants.APP_NAME;
+        try {
+          new Notification(notificationTitle, notificationOptions);
+        } catch (e) {
+          // ok so the native Notification doesn't work which will happen
+          // try to use the service worker
+          if (!window.isSecureContext || !navigator.serviceWorker) {
+            return;
+          }
+          navigator.serviceWorker.ready.then((registration) => {
+            registration.showNotification(notificationTitle, notificationOptions);
+          }).catch((err) => {
+            // avoid promise going uncaught
+            console.warn('Failed to display notification with serviceWorker', err);
+          });
+        }
+      }
     },
   },
   mounted() {

@@ -223,7 +223,7 @@ export function cast<T>(obj: any, klass: ConstructorOf<T> | undefined): T | unde
     return undefined;
   }
   if (!(obj instanceof klass)) {
-    throw new Error(`Not an instance of ${klass.name}: ${obj.constructor.name}`);
+    throw new Error(`Not an instance of ${klass.name}: ${obj?.constructor?.name}`);
   }
   return obj;
 }

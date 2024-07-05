@@ -24,7 +24,7 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
       tr: {moonHabitat: 1},
 
       metadata: {
-        description: 'Requires you have 1 mine tile. Increase your M€ production 1 step. ' +
+        description: 'Requires you have 1 mine tile. Increase your M€ production 1 step. Raise the habitat rate 1 step. ' +
         'Remove 1 of your mine tiles (does not affect the mining rate.) ' +
         'Place this special tile there, regardless of placement rules. ' +
         'Gain placement bonuses as usual. This tile counts both as a habitat and a mine tile.',

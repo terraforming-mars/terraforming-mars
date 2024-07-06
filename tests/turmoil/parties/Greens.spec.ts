@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {Space} from '../../../src/server/boards/Space';
-import {cast, setRulingParty, addGreenery} from '../../TestingUtils';
+import {cast, setRulingParty, addGreenery, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {GREENS_BONUS_1, GREENS_BONUS_2, GREENS_POLICY_4} from '../../../src/server/turmoil/parties/Greens';
 import {Lichen} from '../../../src/server/cards/base/Lichen';
@@ -58,8 +58,8 @@ describe('Greens', function() {
   it('Ruling policy 3: When you play an animal, plant or microbe tag, gain 2 MC', function() {
     setRulingParty(game, PartyName.GREENS, 'gp03');
 
-    const lichen = new Lichen();
-    player.playCard(lichen);
+    player.playCard(new Lichen());
+    runAllActions(game);
     expect(player.megaCredits).to.eq(2);
   });
 

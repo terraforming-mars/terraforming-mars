@@ -15,10 +15,18 @@ import {SelectInitialCards} from '../../../src/server/inputs/SelectInitialCards'
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {Virus} from '../../../src/server/cards/base/Virus';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, setRulingParty} from '../../TestingUtils';
 import {Player} from '../../../src/server/Player';
 import {testGame} from '../../TestGame';
 import {Leavitt} from '../../../src/server/cards/community/Leavitt';
+import {Splice} from '../../../src/server/cards/promo/Splice';
+import {Merger} from '../../../src/server/cards/promo/Merger';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {ICorporationCard} from '../../../src/server/cards/corporation/ICorporationCard';
+import {GMOContract} from '../../../src/server/cards/turmoil/GMOContract';
+import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
+import {SymbioticFungus} from '../../../src/server/cards/base/SymbioticFungus';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
 
 describe('PharmacyUnion', function() {
   let card: PharmacyUnion;
@@ -226,5 +234,106 @@ describe('PharmacyUnion', function() {
 
     expect(card.resourceCount).to.eq(1);
     expect(player.getTerraformRating()).to.eq(21);
+  });
+
+  describe('Prioritize effect order', () => {
+    it('Compatible with Splice', () => {
+      const card = new PharmacyUnion();
+      const [/* game */, player, player2] = testGame(2);
+
+      player2.playCorporationCard(new Splice());
+
+      expect(player2.megaCredits).eq(48);
+
+      player.playCorporationCard(card);
+
+      // PU starts with 46, gains 4 from Splice
+      expect(player.megaCredits).eq(50);
+      // Splice starts with 48, gains 4 from PU
+      expect(player2.megaCredits).eq(52);
+    });
+
+    it('Merge with Splice', () => {
+      const card = new PharmacyUnion();
+      const [game, player/* , player2 */] = testGame(2);
+
+      player.playCorporationCard(new Splice());
+
+      // Splice starts with 48
+      expect(player.megaCredits).eq(48);
+
+      player.playCard(new Merger());
+      runAllActions(game);
+
+      const selectCorp = cast(player.popWaitingFor(), SelectCard<ICorporationCard>);
+      selectCorp.cb([card]);
+      runAllActions(game);
+
+      //   48      // Splice value
+      // - 42 = 6  // Merger cost
+      // + 46 = 52 // Pharmacy Union MC
+      // +  8 = 60 // Splice rewards.
+      // PU costs already taken accounted for. See card for details.
+      expect(player.megaCredits).eq(60);
+    });
+  });
+
+  it('Splice + PU during gameplay', () => {
+    const card = new PharmacyUnion();
+    const [game, player/* , player2 */] = testGame(2);
+
+    // The test should have Splice first. I think it's not vital, but
+    // that's how onCardPlayed actions are resolved.
+    player.corporations.push(new Splice(), card);
+
+    player.megaCredits = 1;
+    // Symbiotic Fungus has a microbe tag, and doesn't hold microbes, which simplifies Splice's decision.
+    // And is actually the case where Pharmacy Union was not working out.
+    player.playCard(new SymbioticFungus());
+
+    // Expect this to be the PU action.
+    game.deferredActions.runNext();
+    expect(player.megaCredits).eq(0);
+    cast(player.popWaitingFor(), undefined);
+
+    game.deferredActions.runNext();
+    cast(player.popWaitingFor(), undefined);
+
+    game.deferredActions.runNext();
+    cast(player.popWaitingFor(), undefined);
+
+    expect(game.deferredActions.length).eq(0);
+
+    expect(player.megaCredits).eq(4);
+  });
+
+  it('Compatible with GMO Contract', () => {
+    const card = new PharmacyUnion();
+    const [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
+
+    player.corporations.push(card);
+    player.playedCards.push(new GMOContract());
+    player.megaCredits = 2;
+    player.playCard(new Tardigrades());
+
+    runAllActions(game);
+
+    // Gained 2MC from GMO which it did not lose because PU went first.
+    expect(player.megaCredits).eq(2);
+  });
+
+  it('Compatible with Greens policy gp03', () => {
+    const card = new PharmacyUnion();
+    const [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
+
+    player.corporations.push(card);
+    setRulingParty(game, PartyName.GREENS, 'gp03');
+    player.megaCredits = 2;
+    player.playCard(new Tardigrades());
+
+    runAllActions(game);
+
+    // Gained 2MC from gp03 which it did not lose because PU went first.
+    expect(player.megaCredits).eq(2);
   });
 });

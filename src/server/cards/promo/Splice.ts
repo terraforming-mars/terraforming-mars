@@ -12,6 +12,7 @@ import {Resource} from '../../../common/Resource';
 import {all} from '../Options';
 import {message} from '../../logs/MessageBuilder';
 import {ICard} from '../ICard';
+import {GainResources} from '../../deferredActions/GainResources';
 
 export class Splice extends CorporationCard {
   constructor() {
@@ -51,36 +52,38 @@ export class Splice extends CorporationCard {
     return this.onCardPlayed(player, card);
   }
 
-  public onCardPlayed(player: IPlayer, card: ICard): OrOptions | undefined {
-    if (card.tags.includes(Tag.MICROBE) === false) {
-      return undefined;
+  public onCardPlayed(player: IPlayer, card: ICard): undefined {
+    const game = player.game;
+    const microbeTags = player.tags.cardTagCount(card, Tag.MICROBE);
+    if (microbeTags === 0) {
+      return;
     }
-    const gainPerMicrobe = 2;
-    const microbeTagsCount = player.tags.cardTagCount(card, Tag.MICROBE);
-    const megacreditsGain = microbeTagsCount * gainPerMicrobe;
 
-    const addResource = new SelectOption('Add a microbe resource to this card', 'Add microbe').andThen(() => {
+    const gain = microbeTags * 2;
+
+    const gainResource = new SelectOption('Add a microbe resource to this card', 'Add microbe').andThen(() => {
       player.addResourceTo(card);
       return undefined;
     });
 
-    const getMegacredits = new SelectOption(
-      message('Gain ${0} M€', (b)=>b.number(megacreditsGain)),
+    const gainMC = new SelectOption(
+      message('Gain ${0} M€', (b) => b.number(gain)),
       'Gain M€')
       .andThen(() => {
-        player.stock.add(Resource.MEGACREDITS, megacreditsGain, {log: true});
+        game.defer(new GainResources(player, Resource.MEGACREDITS, {count: gain, log: true}));
         return undefined;
       });
 
-    // Splice owner get 2M€ per microbe tag
-    player.game.getCardPlayerOrThrow(this.name).stock.add(Resource.MEGACREDITS, megacreditsGain, {log: true});
+    // Splice owner gets 2M€ per microbe tag
+    const cardPlayer = game.getCardPlayerOrThrow(this.name);
+    game.defer(new GainResources(cardPlayer, Resource.MEGACREDITS, {count: gain, log: true}));
 
-    // Card player choose between 2 M€ and a microbe on card, if possible
     if (card.resourceType === CardResource.MICROBE) {
-      return new OrOptions(addResource, getMegacredits);
+      // Card player chooses between 2 M€ and a microbe on card, if possible
+      player.defer(new OrOptions(gainResource, gainMC));
     } else {
-      player.stock.add(Resource.MEGACREDITS, megacreditsGain, {log: true});
-      return undefined;
+      gainMC.cb(undefined);
     }
+    return undefined;
   }
 }

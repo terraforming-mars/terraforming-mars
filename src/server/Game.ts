@@ -76,6 +76,14 @@ import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {BuildColony} from './deferredActions/BuildColony';
 import {newInitialDraft, newPreludeDraft, newStandardDraft} from './Draft';
 
+// Can be overridden by tests
+
+let createGameLog: () => Array<LogMessage> = () => [];
+
+export function setGameLog(f: () => Array<LogMessage>) {
+  createGameLog = f;
+}
+
 export class Game implements IGame, Logger {
   public readonly id: GameId;
   public readonly gameOptions: Readonly<GameOptions>;
@@ -89,7 +97,7 @@ export class Game implements IGame, Logger {
   public deferredActions: DeferredActionsQueue = new DeferredActionsQueue();
   public createdTime: Date = new Date(0);
   public gameAge: number = 0; // Each log event increases it
-  public gameLog: Array<LogMessage> = [];
+  public gameLog: Array<LogMessage> = createGameLog();
   public undoCount: number = 0; // Each undo increases it
   public inputsThisRound = 0;
   public resettable: boolean = false;

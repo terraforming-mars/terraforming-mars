@@ -18,7 +18,7 @@ export class PharmacyUnion extends CorporationCard {
   constructor() {
     super({
       name: CardName.PHARMACY_UNION,
-      startingMegaCredits: 46, // 54 minus 8 for the 2 deseases
+      startingMegaCredits: 46, // 54 minus 8 for the 2 diseases
       resourceType: CardResource.DISEASE,
 
       behavior: {

@@ -83,7 +83,7 @@ class GreensPolicy03 implements IPolicy {
     const tags = [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE];
     const tagCount = card.tags.filter((tag) => tags.includes(tag)).length;
 
-    player.stock.add(Resource.MEGACREDITS, tagCount * 2);
+    player.defer(() => player.stock.add(Resource.MEGACREDITS, tagCount * 2));
   }
 }
 

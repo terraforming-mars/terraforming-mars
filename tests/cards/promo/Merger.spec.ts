@@ -137,9 +137,17 @@ describe('Merger', () => {
     expect(player.isCorporation(CardName.SATURN_SYSTEMS)).is.true;
 
     player2.playCard(new VestaShipyard());
-    expect(player.production.megacredits).to.eq(1); // Saturn Sys
+    runAllActions(game);
+
+    expect(player.production.megacredits).to.eq(1); // Saturn Systems
 
     player2.playCard(new Ants());
+
+    runAllActions(game);
+    const orOptions = cast(player2.popWaitingFor(), OrOptions);
+    orOptions.options[1].cb(); // Gain MC.
+    runAllActions(game);
+
     expect(player.megaCredits).to.eq(2); // Splice
   });
 

@@ -10,7 +10,7 @@ import {Resource} from '../../src/common/Resource';
 import {CardResource} from '../../src/common/CardResource';
 import {Tag} from '../../src/common/cards/Tag';
 import {CardType} from '../../src/common/cards/CardType';
-import {cast, fakeCard, formatLogMessage, runAllActions} from '../TestingUtils';
+import {cast, fakeCard, formatMessage, runAllActions} from '../TestingUtils';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {SelectPlayer} from '../../src/server/inputs/SelectPlayer';
 import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
@@ -644,7 +644,7 @@ describe('Executor', () => {
       executor.execute({log: run.log}, player, fake);
       const logMessage = game.gameLog.pop()!;
       expect(logMessage.message).eq(run.expected.message);
-      expect(formatLogMessage(logMessage)).eq(run.expected.formatted);
+      expect(formatMessage(logMessage)).eq(run.expected.formatted);
     });
   }
 });

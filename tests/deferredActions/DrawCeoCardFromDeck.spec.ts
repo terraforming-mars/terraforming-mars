@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ICeoCard} from '../../src/server/cards/ceos/ICeoCard';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
-import {formatLogMessage, cast, runAllActions} from '../TestingUtils';
+import {formatMessage, cast, runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
 import {CeoCard} from '../../src/server/cards/ceos/CeoCard';
 import {CardName} from '../../src/common/cards/CardName';
@@ -63,6 +63,6 @@ describe('DrawCeoCardFromDeck', () => {
 
     expect(card).is.undefined;
     expect(game.ceoDeck.discardPile.length).eq(3);
-    expect(formatLogMessage(game.gameLog[game.gameLog.length - 1])).matches(/drew no playable CEO cards/);
+    expect(formatMessage(game.gameLog[game.gameLog.length - 1])).matches(/drew no playable CEO cards/);
   });
 });

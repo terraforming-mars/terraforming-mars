@@ -15,7 +15,7 @@ import {SelectInitialCards} from '../../../src/server/inputs/SelectInitialCards'
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {Virus} from '../../../src/server/cards/base/Virus';
-import {cast, runAllActions, setRulingParty} from '../../TestingUtils';
+import {cast, runAllActions, runNextAction, setOxygenLevel, setRulingParty} from '../../TestingUtils';
 import {Player} from '../../../src/server/Player';
 import {testGame} from '../../TestGame';
 import {Leavitt} from '../../../src/server/cards/community/Leavitt';
@@ -27,6 +27,8 @@ import {GMOContract} from '../../../src/server/cards/turmoil/GMOContract';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {SymbioticFungus} from '../../../src/server/cards/base/SymbioticFungus';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
+import {Payment} from '../../../src/common/inputs/Payment';
 
 describe('PharmacyUnion', function() {
   let card: PharmacyUnion;
@@ -335,5 +337,58 @@ describe('PharmacyUnion', function() {
 
     // Gained 2MC from gp03 which it did not lose because PU went first.
     expect(player.megaCredits).eq(2);
+  });
+
+  it('Pharmacy Union, Splice, Reds, Microbe tag, Science tag #3126', () => {
+    const pharmacyUnion = new PharmacyUnion();
+    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+
+    player.corporations.push(pharmacyUnion);
+    player.megaCredits = 12;
+    pharmacyUnion.resourceCount = 1;
+
+    player2.corporations.push(new Splice());
+
+    setRulingParty(game, PartyName.REDS);
+
+    const ghgProducingBacteria = new GHGProducingBacteria();
+    player.cardsInHand.push(ghgProducingBacteria);
+    setOxygenLevel(game, 4); // GHG Producing Bacteria requirement
+
+    // writeFileSync('db/files/game-id.json', JSON.stringify(game.serialize()));
+
+    // Play GHG Producing Bacteria, triggering the effects.
+    expect(player.canPlay(ghgProducingBacteria)).is.true;
+    player.playCard(ghgProducingBacteria, Payment.of({megaCredits: 8}));
+    expect(player.megaCredits).eq(4);
+
+    // Pharmacy Union science tag benefit.
+    runNextAction(game);
+    expect(player.megaCredits).eq(4);
+    expect(player.getTerraformRating()).eq(20);
+
+    // Pay for the reds cost and gain TR benefit
+    runNextAction(game);
+    expect(player.megaCredits).eq(1);
+    expect(player.getTerraformRating()).eq(21);
+
+    // Plays the microbe tag cost, costs 4MC, player no longer has money
+    runNextAction(game);
+    expect(player.megaCredits).eq(0);
+
+    // Start Splice benefit
+    expect(player2.megaCredits).eq(0);
+    // Player can put a resource on GHG Producing Bacteria, but instead gets the money.
+    const orOptions = cast(runNextAction(game), OrOptions);
+    orOptions.options[1].cb();
+
+    // Players gain MC from Splice
+    runNextAction(game);
+    runNextAction(game);
+    expect(player2.megaCredits).eq(2);
+    expect(player.megaCredits).eq(2);
+
+    // And that's it.
+    expect(game.deferredActions.length).eq(0);
   });
 });

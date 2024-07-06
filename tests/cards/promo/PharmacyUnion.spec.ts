@@ -29,28 +29,29 @@ import {SymbioticFungus} from '../../../src/server/cards/base/SymbioticFungus';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
 import {Payment} from '../../../src/common/inputs/Payment';
+import {AdvancedAlloys} from '../../../src/server/cards/base/AdvancedAlloys';
 
 describe('PharmacyUnion', function() {
-  let card: PharmacyUnion;
+  let pharmacyUnion: PharmacyUnion;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
   beforeEach(function() {
-    card = new PharmacyUnion();
+    pharmacyUnion = new PharmacyUnion();
     [game, player, player2] = testGame(2);
-    player.corporations.push(card);
+    player.corporations.push(pharmacyUnion);
   });
 
   it('Should play', function() {
     player.corporations.length = 0; // Resetting so when setting the corporation it doesn't do anything flaky.
     [game, player] = testGame(1, {skipInitialCardSelection: false});
     const pi = cast(player.getWaitingFor(), SelectInitialCards);
-    pi.options[0].cb([card]);
+    pi.options[0].cb([pharmacyUnion]);
     pi.options[1].cb([]);
     pi.cb(undefined);
 
-    expect(card.resourceCount).to.eq(2);
+    expect(pharmacyUnion.resourceCount).to.eq(2);
     // Should not pay for the free Science card
     expect(player.megaCredits).to.eq(46);
     expect(player.cardsInHand).has.lengthOf(1);
@@ -60,72 +61,72 @@ describe('PharmacyUnion', function() {
   it('Gains diseases and removes MC when ANY player plays microbe cards', function() {
     player.megaCredits = 8;
     player2.megaCredits = 8;
-    card.play(player);
+    pharmacyUnion.play(player);
     runAllActions(game);
 
     const ants = new Ants();
     player.playedCards.push(ants);
-    card.onCardPlayed(player, ants);
+    pharmacyUnion.onCardPlayed(player, ants);
     player.game.deferredActions.runNext(); // Add microbe and lose 4 MC
-    expect(card.resourceCount).to.eq(3);
+    expect(pharmacyUnion.resourceCount).to.eq(3);
     expect(player.megaCredits).to.eq(4);
 
     const viralEnhancers = new ViralEnhancers();
     player2.playedCards.push(viralEnhancers);
-    card.onCardPlayed(player2, viralEnhancers);
+    pharmacyUnion.onCardPlayed(player2, viralEnhancers);
     player.game.deferredActions.runNext(); // Add microbe and lose 4 MC
     expect(player2.megaCredits).to.eq(8); // should not change
-    expect(card.resourceCount).to.eq(4);
+    expect(pharmacyUnion.resourceCount).to.eq(4);
     expect(player.megaCredits).to.eq(0);
   });
 
   it('Removes diseases and gives TR only when corp owner plays science cards', function() {
-    card.play(player);
+    pharmacyUnion.play(player);
     runAllActions(game);
 
     const searchForLife = new SearchForLife();
     player.playedCards.push(searchForLife);
-    card.onCardPlayed(player, searchForLife);
+    pharmacyUnion.onCardPlayed(player, searchForLife);
     expect(player.game.deferredActions).has.lengthOf(1);
     expect(player.game.deferredActions.peek()!.execute()).is.undefined;
     player.game.deferredActions.pop();
 
-    expect(card.resourceCount).to.eq(1);
+    expect(pharmacyUnion.resourceCount).to.eq(1);
     expect(player.getTerraformRating()).to.eq(21);
 
     const lagrangeObservatory = new LagrangeObservatory();
     player2.playedCards.push(lagrangeObservatory);
-    card.onCardPlayed(player2, lagrangeObservatory);
+    pharmacyUnion.onCardPlayed(player2, lagrangeObservatory);
     expect(player.game.deferredActions).has.lengthOf(0);
-    expect(card.resourceCount).to.eq(1);
+    expect(pharmacyUnion.resourceCount).to.eq(1);
     expect(player.getTerraformRating()).to.eq(21);
   });
 
   it('Works correctly with Research', function() {
-    card.play(player);
+    pharmacyUnion.play(player);
     runAllActions(game);
 
-    expect(card.resourceCount).to.eq(2);
+    expect(pharmacyUnion.resourceCount).to.eq(2);
 
     const research = new Research();
     player.playedCards.push(research);
-    card.onCardPlayed(player, research);
+    pharmacyUnion.onCardPlayed(player, research);
     expect(player.game.deferredActions).has.lengthOf(2);
     expect(player.game.deferredActions.peek()!.execute()).is.undefined;
     player.game.deferredActions.pop();
     expect(player.game.deferredActions.peek()!.execute()).is.undefined;
     player.game.deferredActions.pop();
 
-    expect(card.resourceCount).to.eq(0);
+    expect(pharmacyUnion.resourceCount).to.eq(0);
     expect(player.getTerraformRating()).to.eq(22);
   });
 
   it('Can turn card face down once per game to gain 3 TR if no diseases on card', function() {
-    card.resourceCount = 0;
+    pharmacyUnion.resourceCount = 0;
 
     const searchForLife = new SearchForLife();
     player.playedCards.push(searchForLife);
-    card.onCardPlayed(player, searchForLife);
+    pharmacyUnion.onCardPlayed(player, searchForLife);
     expect(player.game.deferredActions).has.lengthOf(1);
     expect(player.getPlayedEventsCount()).to.eq(0);
 
@@ -134,11 +135,11 @@ describe('PharmacyUnion', function() {
     orOptions.options[0].cb();
 
     expect(player.getTerraformRating()).to.eq(23);
-    expect(card.isDisabled).is.true;
+    expect(pharmacyUnion.isDisabled).is.true;
     expect(player.getPlayedEventsCount()).to.eq(1); // Counts as a played event
 
     // Cannot trigger once per game effect a second time
-    card.onCardPlayed(player, searchForLife);
+    pharmacyUnion.onCardPlayed(player, searchForLife);
     expect(player.game.deferredActions).has.lengthOf(0);
     expect(player.getTerraformRating()).to.eq(23);
   });
@@ -150,12 +151,12 @@ describe('PharmacyUnion', function() {
     player.playedCards.push(new Lichen());
     expect(advancedEcosystems.canPlay(player)).is.true;
 
-    card.resourceCount = 0;
-    card.onCardPlayed(player, new SearchForLife());
+    pharmacyUnion.resourceCount = 0;
+    pharmacyUnion.onCardPlayed(player, new SearchForLife());
 
     const orOptions = cast(player.game.deferredActions.peek()!.execute(), OrOptions);
     orOptions.options[0].cb();
-    expect(card.isDisabled).is.true;
+    expect(pharmacyUnion.isDisabled).is.true;
     expect(player.tags.count(Tag.MICROBE)).to.eq(0);
     expect(advancedEcosystems.canPlay(player)).is.not.true;
   });
@@ -168,29 +169,29 @@ describe('PharmacyUnion', function() {
     const viralEnhancers = new ViralEnhancers();
 
     // Another player playing a Science/Microbes card and Pharmacy Union has no resource
-    card.resourceCount = 0;
+    pharmacyUnion.resourceCount = 0;
     player2.playedCards.push(viralEnhancers);
-    card.onCardPlayed(player2, viralEnhancers);
+    pharmacyUnion.onCardPlayed(player2, viralEnhancers);
     player.game.deferredActions.runNext(); // Add microbe and lose 4 MC
-    expect(card.resourceCount).to.eq(1);
+    expect(pharmacyUnion.resourceCount).to.eq(1);
     expect(player.megaCredits).to.eq(8);
     expect(player.game.deferredActions).has.lengthOf(0);
 
 
     // PU player playing a Science/Microbes card and Pharmacy Union has no resource
-    card.resourceCount = 0;
+    pharmacyUnion.resourceCount = 0;
     player.playedCards.push(viralEnhancers);
-    card.onCardPlayed(player, viralEnhancers);
+    pharmacyUnion.onCardPlayed(player, viralEnhancers);
     expect(player.game.deferredActions).has.lengthOf(1);
 
     const orOptions = cast(player.game.deferredActions.peek()!.execute(), OrOptions);
     orOptions.options[1].cb(); // Add disease then remove it
-    expect(card.resourceCount).to.eq(0);
+    expect(pharmacyUnion.resourceCount).to.eq(0);
     expect(player.megaCredits).to.eq(4);
 
     orOptions.options[0].cb(); // Turn face down then lose 4MC
-    expect(card.isDisabled).is.true;
-    expect(card.resourceCount).to.eq(0);
+    expect(pharmacyUnion.isDisabled).is.true;
+    expect(pharmacyUnion.resourceCount).to.eq(0);
     expect(player.megaCredits).to.eq(0);
   });
 
@@ -204,8 +205,8 @@ describe('PharmacyUnion', function() {
   });
 
   it('serialization test for Player with Pharmacy Union, when false', () => {
-    card.play(player);
-    card.isDisabled = false;
+    pharmacyUnion.play(player);
+    pharmacyUnion.isDisabled = false;
     const serializedPlayer = player.serialize();
 
     expect(serializedPlayer.corporations?.[0].isDisabled).is.false;
@@ -216,7 +217,7 @@ describe('PharmacyUnion', function() {
   });
 
   it('serialization test for Player with Pharmacy Union, when true', () => {
-    card.isDisabled = true;
+    pharmacyUnion.isDisabled = true;
     const serializedPlayer = player.serialize();
 
     expect(serializedPlayer.corporations?.[0].isDisabled).is.true;
@@ -227,14 +228,14 @@ describe('PharmacyUnion', function() {
   });
 
   it('Compatible with Leavitt #6349', () => {
-    card.resourceCount = 2;
+    pharmacyUnion.resourceCount = 2;
 
     const leavitt = new Leavitt();
     leavitt.addColony(player);
 
     runAllActions(game);
 
-    expect(card.resourceCount).to.eq(1);
+    expect(pharmacyUnion.resourceCount).to.eq(1);
     expect(player.getTerraformRating()).to.eq(21);
   });
 
@@ -358,7 +359,7 @@ describe('PharmacyUnion', function() {
     // writeFileSync('db/files/game-id.json', JSON.stringify(game.serialize()));
 
     // Play GHG Producing Bacteria, triggering the effects.
-    expect(player.canPlay(ghgProducingBacteria)).is.true;
+    expect(player.canPlay(ghgProducingBacteria)).deep.eq({redsCost: 3});
     player.playCard(ghgProducingBacteria, Payment.of({megaCredits: 8}));
     expect(player.megaCredits).eq(4);
 
@@ -387,6 +388,45 @@ describe('PharmacyUnion', function() {
     runNextAction(game);
     expect(player2.megaCredits).eq(2);
     expect(player.megaCredits).eq(2);
+
+    // And that's it.
+    expect(game.deferredActions.length).eq(0);
+  });
+
+  it('Reds + Science, #1670', () => {
+    const pharmacyUnion = new PharmacyUnion();
+    const [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
+    pharmacyUnion.resourceCount = 2;
+    player.corporations = [pharmacyUnion];
+
+    player.megaCredits = 12;
+
+    const advancedAlloys = new AdvancedAlloys();
+
+    player.megaCredits = 9; // advanced alloys cost.
+    expect(player.canPlay(advancedAlloys)).is.true;
+
+    setRulingParty(game, PartyName.REDS);
+
+    expect(player.canPlay(advancedAlloys)).is.false;
+
+    player.megaCredits += 4;
+
+    expect(player.canPlay(advancedAlloys)).deep.eq({redsCost: 3});
+
+    player.playCard(advancedAlloys, Payment.of({megaCredits: 9}));
+
+    expect(player.megaCredits).eq(4);
+
+    // Pharmacy Union science tag benefit lines up the TR bump.
+    runNextAction(game);
+    expect(player.megaCredits).eq(4);
+    expect(player.getTerraformRating()).eq(20);
+
+    // // Pay for the reds cost and gain TR benefit
+    runNextAction(game);
+    expect(player.megaCredits).eq(1);
+    expect(player.getTerraformRating()).eq(21);
 
     // And that's it.
     expect(game.deferredActions.length).eq(0);

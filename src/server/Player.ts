@@ -1296,7 +1296,7 @@ export class Player implements IPlayer {
   }
 
   public affordOptionsForCard(card: IProjectCard): CanAffordOptions {
-    let trSource: TRSource | undefined = undefined;
+    let trSource: TRSource = {};
     if (card.tr) {
       trSource = card.tr;
     } else {
@@ -1307,6 +1307,12 @@ export class Player implements IPlayer {
         trSource = getBehaviorExecutor().toTRSource(card.behavior, new Counter(this, card));
       }
     }
+
+    const pharmacyUnion = this.getCorporation(CardName.PHARMACY_UNION);
+    if ((pharmacyUnion?.resourceCount ?? 0 > 0) && this.tags.cardHasTag(card, Tag.SCIENCE)) {
+      trSource.tr = (trSource.tr ?? 0) + 1;
+    }
+
     const cost = this.getCardCost(card);
     const paymentOptionsForCard = this.paymentOptionsForCard(card);
     return {

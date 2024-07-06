@@ -6,7 +6,7 @@ import {CardType} from '../../src/common/cards/CardType';
 import {Tag} from '../../src/common/cards/Tag';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {ProjectDeck} from '../../src/server/cards/Deck';
-import {cast, formatLogMessage, runAllActions} from '../TestingUtils';
+import {cast, formatMessage, runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
 
 describe('DrawCards', function() {
@@ -79,10 +79,10 @@ describe('DrawCards', function() {
 
     // Since the gameLog has two entries, these two filters account for both of them.
     const privateMessage = game.gameLog.filter((entry) => entry.playerId === player.id)[0];
-    expect(formatLogMessage(privateMessage)).matches(/You drew .*/);
+    expect(formatMessage(privateMessage)).matches(/You drew .*/);
 
     const publicMessage = game.gameLog.filter((entry) => entry.playerId === undefined)[0];
-    expect(formatLogMessage(publicMessage)).eq('blue drew 1 card(s)');
+    expect(formatMessage(publicMessage)).eq('blue drew 1 card(s)');
   });
 
   it('drawn cards are privately logged, even with options, if undefined', () => {
@@ -93,10 +93,10 @@ describe('DrawCards', function() {
 
     // Since the gameLog has two entries, these two filters account for both of them.
     const privateMessage = game.gameLog.filter((entry) => entry.playerId === player.id)[0];
-    expect(formatLogMessage(privateMessage)).matches(/You drew .* and .*/);
+    expect(formatMessage(privateMessage)).matches(/You drew .* and .*/);
 
     const publicMessage = game.gameLog.filter((entry) => entry.playerId === undefined)[0];
-    expect(formatLogMessage(publicMessage)).eq('blue drew 2 card(s)');
+    expect(formatMessage(publicMessage)).eq('blue drew 2 card(s)');
   });
 
   it('drawn cards are publicly logged, when options are defined', () => {
@@ -106,9 +106,9 @@ describe('DrawCards', function() {
     expect(game.gameLog).has.length(2);
 
     const discardMessage = game.gameLog[0];
-    expect(formatLogMessage(discardMessage)).matches(/.* card\(s\) were discarded/);
+    expect(formatMessage(discardMessage)).matches(/.* card\(s\) were discarded/);
 
     const publicMessage = game.gameLog[1];
-    expect(formatLogMessage(publicMessage)).matches(/blue drew .* and .*/);
+    expect(formatMessage(publicMessage)).matches(/blue drew .* and .*/);
   });
 });

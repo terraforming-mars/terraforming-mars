@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Resource} from '../../src/common/Resource';
 import {Player} from '../../src/server/Player';
 import {Color} from '../../src/common/Color';
-import {formatLogMessage, testGame} from '../TestingUtils';
+import {formatMessage, testGame} from '../TestingUtils';
 import {Units} from '../../src/common/Units';
 import {GlobalEventName} from '../../src/common/turmoil/globalEvents/GlobalEventName';
 
@@ -237,7 +237,7 @@ describe('Stock', function() {
 
     player.stock.add(Resource.MEGACREDITS, 12, {log: true});
     const logEntry = log[0];
-    expect(formatLogMessage(logEntry)).eq('blue\'s megacredits amount increased by 12');
+    expect(formatMessage(logEntry)).eq('blue\'s megacredits amount increased by 12');
   });
 
   it('addResource logging from player', () => {
@@ -248,7 +248,7 @@ describe('Stock', function() {
 
     const log = game.gameLog;
     const logEntry = log[log.length - 1];
-    expect(formatLogMessage(logEntry)).eq('blue\'s megacredits amount decreased by 5 by red');
+    expect(formatMessage(logEntry)).eq('blue\'s megacredits amount decreased by 5 by red');
   });
 
   it('addResource logging from global event', () => {
@@ -258,7 +258,7 @@ describe('Stock', function() {
 
     const log = game.gameLog;
     const logEntry = log[log.length - 1];
-    expect(formatLogMessage(logEntry)).eq('blue\'s megacredits amount increased by 12 by Asteroid Mining');
+    expect(formatMessage(logEntry)).eq('blue\'s megacredits amount increased by 12 by Asteroid Mining');
   });
 
   it('addResource logs error when deducting too much', () => {

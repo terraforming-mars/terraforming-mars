@@ -22,6 +22,7 @@ import {IPlayer} from '../src/server/IPlayer';
 import {CardRequirements} from '../src/server/cards/requirements/CardRequirements';
 import {Warning} from '../src/common/cards/Warning';
 import {testGame as testGameProxy} from './TestGame';
+import {LogMessage} from '../src/common/logs/LogMessage';
 
 /**
  * Creates a new game for testing. Has some hidden behavior for testing:
@@ -122,17 +123,15 @@ export function forceGenerationEnd(game: IGame) {
   game.playerIsFinishedTakingActions();
 }
 
-/** Provides a readable version of a log message for easier testing. */
-export function formatLogMessage(message: Message): string {
-  return Log.applyData(message, (datum) => datum.value.toString());
-}
-
 /** Provides a readable version of a message for easier testing. */
 export function formatMessage(message: Message | string): string {
   if (typeof message === 'string') {
     return message;
   }
-  return Log.applyData(message, (datum) => datum.value.toString());
+  const text = Log.applyData(message, (datum) => datum.value.toString());
+  const prefix = (message instanceof LogMessage && message.playerId) ?
+    `(${message.playerId}): ` : '';
+  return prefix + text;
 }
 
 /**

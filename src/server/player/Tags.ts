@@ -53,7 +53,7 @@ export class Tags {
    * Excludes Clone tags.
    */
   public countAllTags(): Array<TagCount> {
-    const counts = Tags.COUNTED_TAGS.map((tag) => {
+    const counts: Array<TagCount> = Tags.COUNTED_TAGS.map((tag) => {
       return {tag, count: this.count(tag, 'raw')};
     }).filter((tag) => tag.count > 0);
     counts.push({tag: Tag.EVENT, count: this.player.getPlayedEventsCount()});

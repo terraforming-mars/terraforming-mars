@@ -104,7 +104,8 @@ export function runAllActions(game: IGame) {
 }
 
 export function runNextAction(game: IGame) {
-  return game.deferredActions.pop()?.execute();
+  const action = game.deferredActions.pop();
+  return action?.execute();
 }
 
 // Use churnAction instead.

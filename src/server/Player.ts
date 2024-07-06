@@ -1652,7 +1652,6 @@ export class Player implements IPlayer {
     this.actionsTakenThisGame++;
   }
 
-  // Return possible mid-game actions like play a card and fund an award, but not play prelude card.
   public getActions() {
     const action = new OrOptions();
     action.title = this.actionsTakenThisRound === 0 ?
@@ -1693,30 +1692,35 @@ export class Player implements IPlayer {
       action.options.push(option);
     }
 
+    // Turmoil
     const turmoilInput = TurmoilHandler.partyAction(this);
     if (turmoilInput !== undefined) {
       action.options.push(turmoilInput);
     }
 
+    // Action cards
     if (this.getPlayableActionCards().length > 0) {
       action.options.push(this.playActionCard());
     }
 
+    // CEO cards
     if (CeoExtension.ceoActionIsUsable(this)) {
       action.options.push(this.playCeoOPGAction());
     }
 
+    // Playable cards
     const playableCards = this.getPlayableCards();
     if (playableCards.length !== 0) {
       action.options.push(new SelectProjectCardToPlay(this, playableCards));
     }
 
+    // Trade with colonies
     const coloniesTradeAction = this.colonies.coloniesTradeAction();
     if (coloniesTradeAction !== undefined) {
       action.options.push(coloniesTradeAction);
     }
 
-    // If you can pay to add a delegate to a party.
+    // Add delegates
     Turmoil.ifTurmoil(this.game, (turmoil) => {
       const input = turmoil.getSendDelegateInput(this);
       if (input !== undefined) {
@@ -1724,6 +1728,7 @@ export class Player implements IPlayer {
       }
     });
 
+    // End turn
     if (this.game.getPlayers().length > 1 &&
       this.actionsTakenThisRound > 0 &&
       !this.game.gameOptions.fastModeOption &&
@@ -1731,6 +1736,7 @@ export class Player implements IPlayer {
       action.options.push(this.endTurnOption());
     }
 
+    // Fund award
     const fundingCost = this.awardFundingCost();
     if (this.canAfford(fundingCost) && !this.game.allAwardsFunded()) {
       const remainingAwards = new OrOptions();
@@ -1742,8 +1748,10 @@ export class Player implements IPlayer {
       action.options.push(remainingAwards);
     }
 
+    // Standard Projects
     action.options.push(this.getStandardProjectOption());
 
+    // Pass
     action.options.push(this.passOption());
 
     // Sell patents

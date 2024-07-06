@@ -5,6 +5,8 @@ export enum Priority {
   DECLARE_CLONE_TAG,
   /** Cost of a blue card action, or paying Reds costs. Must happen before the effects. */
   COST,
+  /** Pharmacy Union special case, players typically prefer to resolve this early. */
+  PHARMACY_UNION,
   /** Any effect from one of your opponent's card that triggers during your turn. */
   OPPONENT_TRIGGER,
 

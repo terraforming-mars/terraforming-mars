@@ -61,6 +61,13 @@ export class PharmacyUnion extends CorporationCard {
     this.onCardPlayed(player, card);
   }
 
+  private addDisease(player: IPlayer, count: number) {
+    const megaCreditsLost = Math.min(player.megaCredits, count * 4);
+    player.addResourceTo(this, count);
+    player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
+    player.game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
+  }
+
   public onCardPlayed(player: IPlayer, card: ICard): void {
     if (this.isDisabled) {
       return;
@@ -79,9 +86,9 @@ export class PharmacyUnion extends CorporationCard {
         player.defer(() => {
           const orOptions = new OrOptions(
             new SelectOption('Turn it face down to gain 3 TR and lose up to 4 M€').andThen(() => {
-              const megaCreditsLost = Math.min(player.megaCredits, 4);
               this.isDisabled = true;
               player.increaseTerraformRating(3);
+              const megaCreditsLost = Math.min(player.megaCredits, 4);
               player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
               game.log('${0} turned ${1} face down to gain 3 TR and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
               return undefined;
@@ -97,7 +104,7 @@ export class PharmacyUnion extends CorporationCard {
           );
           orOptions.title = 'Choose the order of tag resolution for Pharmacy Union';
           return orOptions;
-        }, Priority.SUPERPOWER); // Make it a priority
+        }, Priority.PHARMACY_UNION);
         return undefined;
       }
     }
@@ -112,12 +119,9 @@ export class PharmacyUnion extends CorporationCard {
       player.defer(() => {
         const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tag.MICROBE).length;
         const player = game.getCardPlayerOrThrow(this.name);
-        const megaCreditsLost = Math.min(player.megaCredits, microbeTagCount * 4);
-        player.addResourceTo(this, microbeTagCount);
-        player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
-        game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
+        this.addDisease(player, microbeTagCount);
         return undefined;
-      }, Priority.SUPERPOWER);
+      }, Priority.PHARMACY_UNION);
     }
   }
 
@@ -135,7 +139,7 @@ export class PharmacyUnion extends CorporationCard {
             // TODO (Lynesth): Remove this when #1670 is fixed
             game.log('${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
           } else {
-            this.resourceCount--;
+            player.removeResourceFrom(this, 1);
             player.increaseTerraformRating();
             game.log('${0} removed a disease from ${1} to gain 1 TR', (b) => b.player(player).card(this));
           }

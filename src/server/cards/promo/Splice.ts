@@ -70,13 +70,13 @@ export class Splice extends CorporationCard {
       message('Gain ${0} M€', (b) => b.number(gain)),
       'Gain M€')
       .andThen(() => {
-        game.defer(new GainResources(player, Resource.MEGACREDITS, {count: gain, log: true}));
+        game.defer(new GainResources(player, Resource.MEGACREDITS, {count: gain, log: true, from: this}));
         return undefined;
       });
 
     // Splice owner gets 2M€ per microbe tag
     const cardPlayer = game.getCardPlayerOrThrow(this.name);
-    game.defer(new GainResources(cardPlayer, Resource.MEGACREDITS, {count: gain, log: true}));
+    game.defer(new GainResources(cardPlayer, Resource.MEGACREDITS, {count: gain, log: true, from: this}));
 
     if (card.resourceType === CardResource.MICROBE) {
       // Card player chooses between 2 M€ and a microbe on card, if possible

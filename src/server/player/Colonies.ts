@@ -115,11 +115,17 @@ export class Colonies {
         if (!allowDuplicate && colony.colonies.includes(this.player.id)) {
           return false;
         }
-        if (colony.name === ColonyName.VENUS && ! this.player.canAfford({cost: cost, tr: {venus: 1}})) {
+        if (colony.name === ColonyName.VENUS && !this.player.canAfford({cost: cost, tr: {venus: 1}})) {
           return false;
         }
-        if (colony.name === ColonyName.EUROPA && ! this.player.canAfford({cost: cost, tr: {oceans: 1}})) {
+        if (colony.name === ColonyName.EUROPA && !this.player.canAfford({cost: cost, tr: {oceans: 1}})) {
           return false;
+        }
+        if (colony.name === ColonyName.LEAVITT) {
+          const pharmacyUnion = this.player.getCorporation(CardName.PHARMACY_UNION);
+          if ((pharmacyUnion?.resourceCount ?? 0) > 0 && !this.player.canAfford({cost: cost, tr: {tr: 1}})) {
+            return false;
+          }
         }
         return true;
       });

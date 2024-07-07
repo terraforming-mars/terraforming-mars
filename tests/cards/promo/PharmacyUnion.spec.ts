@@ -30,6 +30,8 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {AdvancedAlloys} from '../../../src/server/cards/base/AdvancedAlloys';
+import {BuildColonyStandardProject} from '../../../src/server/cards/colonies/BuildColonyStandardProject';
+import {SelectColony} from '../../../src/server/inputs/SelectColony';
 
 describe('PharmacyUnion', function() {
   let pharmacyUnion: PharmacyUnion;
@@ -430,5 +432,41 @@ describe('PharmacyUnion', function() {
 
     // And that's it.
     expect(game.deferredActions.length).eq(0);
+  });
+
+  it('Reds + Leavitt + Pharmacy Union, #1670', () => {
+    const pharmacyUnion = new PharmacyUnion();
+    const leavitt = new Leavitt();
+    const [game, player/* , player2 */] = testGame(2, {coloniesExtension: true, turmoilExtension: true});
+    pharmacyUnion.resourceCount = 2;
+    player.corporations = [pharmacyUnion];
+
+    game.colonies.push(leavitt);
+
+    player.megaCredits = 17;
+    setRulingParty(game, PartyName.REDS);
+
+    const buildColonyStandardProject = new BuildColonyStandardProject();
+    buildColonyStandardProject.action(player);
+    runAllActions(game);
+
+    expect(cast(player.popWaitingFor(), SelectColony).colonies).does.not.include(leavitt);
+
+    player.megaCredits = 20;
+    buildColonyStandardProject.action(player);
+    runAllActions(game);
+
+    expect(player.tags.count(Tag.SCIENCE)).eq(0);
+
+    const selectColony = cast(player.popWaitingFor(), SelectColony);
+    expect(selectColony.colonies).includes(leavitt);
+    selectColony.cb(leavitt);
+
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
+
+    expect(player.tags.count(Tag.SCIENCE)).eq(1);
+    expect(player.megaCredits).eq(0);
+    expect(player.getTerraformRating()).eq(21);
   });
 });

@@ -10,7 +10,7 @@ import {SelectColony} from '../../src/server/inputs/SelectColony';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {MAX_COLONY_TRACK_POSITION} from '../../src/common/constants';
-import {cast, runAllActions} from '../TestingUtils';
+import {cast, runAllActions, setRulingParty} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {CardName} from '../../src/common/cards/CardName';
 import {Pallas} from '../../src/server/cards/community/Pallas';
@@ -19,6 +19,8 @@ import {Europa} from '../../src/server/colonies/Europa';
 import {ColonyName} from '../../src/common/colonies/ColonyName';
 import {ColonyDeserializer} from '../../src/server/colonies/ColonyDeserializer';
 import {testGame} from '../TestGame';
+import {Venus} from '../../src/server/cards/community/Venus';
+import {PartyName} from '../../src/common/turmoil/PartyName';
 
 function isBuildColonyStandardProjectAvailable(player: TestPlayer) {
   const options = cast(player.getStandardProjectOption(), SelectCard);
@@ -259,6 +261,46 @@ describe('Colony', function() {
     luna.addColony(player4);
     expect(luna.isFull()).to.be.true;
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
+  });
+
+  it('Should let players build on Venus when Reds are in power.', () => {
+    [game, player, player2] = testGame(2, {coloniesExtension: true, venusNextExtension: true, turmoilExtension: true});
+    const venus = new Venus();
+    game.colonies = [venus];
+    game.colonies.push(venus);
+    venus.isActive = true;
+
+    player.megaCredits = 17;
+
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
+
+    setRulingParty(game, PartyName.REDS);
+
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
+
+    player.megaCredits = 20;
+
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
+  });
+
+  it('Should let players build on Europa when Reds are in power.', () => {
+    [game, player, player2] = testGame(2, {coloniesExtension: true, venusNextExtension: true, turmoilExtension: true});
+    const europa = new Europa();
+    game.colonies = [europa];
+    game.colonies.push(europa);
+    europa.isActive = true;
+
+    player.megaCredits = 17;
+
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
+
+    setRulingParty(game, PartyName.REDS);
+
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
+
+    player.megaCredits = 20;
+
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
   });
 
   it('Should let players trade only if they can afford it', function() {

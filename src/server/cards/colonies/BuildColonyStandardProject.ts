@@ -2,7 +2,6 @@ import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {StandardProjectCard} from '../StandardProjectCard';
-import {ColonyName} from '../../../common/colonies/ColonyName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 
 export class BuildColonyStandardProject extends StandardProjectCard {
@@ -26,22 +25,8 @@ export class BuildColonyStandardProject extends StandardProjectCard {
     return adhaiDiscount + super.discount(player);
   }
 
-  private getOpenColonies(player: IPlayer) {
-    let openColonies = player.game.colonies.filter((colony) => !colony.isFull() &&
-      colony.colonies.includes(player.id) === false &&
-      colony.isActive);
-
-    // TODO(kberg): Europa sometimes costs additional 3.
-    const canAffordVenus = player.canAfford({cost: this.cost, tr: {venus: 1}});
-    if (!canAffordVenus) {
-      openColonies = openColonies.filter((colony) => colony.name !== ColonyName.VENUS);
-    }
-
-    return openColonies;
-  }
-
   public override canAct(player: IPlayer): boolean {
-    return super.canAct(player) && this.getOpenColonies(player).length > 0;
+    return super.canAct(player) && player.colonies.getPlayableColonies(/* allowDuplicate= */ false, this.cost).length > 0;
   }
 
   actionEssence(player: IPlayer): void {

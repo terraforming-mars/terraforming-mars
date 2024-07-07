@@ -3,8 +3,10 @@ import {Europa} from '../../src/server/colonies/Europa';
 import {PlaceOceanTile} from '../../src/server/deferredActions/PlaceOceanTile';
 import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
-import {runAllActions} from '../TestingUtils';
+import {cast, runAllActions, setRulingParty} from '../TestingUtils';
 import {testGame} from '../TestGame';
+import {PartyName} from '../../src/common/turmoil/PartyName';
+import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 
 describe('Europa', function() {
   let europa: Europa;
@@ -24,6 +26,32 @@ describe('Europa', function() {
     const action = game.deferredActions.pop()!;
     expect(action).to.be.an.instanceof(PlaceOceanTile);
     expect(action.player).to.eq(player);
+  });
+
+  it('Should build, reds', function() {
+    [game, player, player2] = testGame(2, {coloniesExtension: true, venusNextExtension: true, turmoilExtension: true});
+    game.colonies.push(europa);
+
+    expect(player.colonies.getPlayableColonies()).includes(europa);
+
+    setRulingParty(game, PartyName.REDS);
+
+    expect(player.colonies.getPlayableColonies()).does.not.include(europa);
+
+    player.megaCredits = 3;
+
+    expect(player.colonies.getPlayableColonies()).includes(europa);
+
+    europa.addColony(player);
+
+    runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    selectSpace.cb(selectSpace.spaces[0]);
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
+
+    expect(player.getTerraformRating()).eq(21);
+    expect(player.megaCredits).eq(0);
   });
 
   it('Should trade', function() {

@@ -112,7 +112,7 @@ Thanks goes to these wonderful people:
     </tr>
     <tr>
       <td><img src="https://avatars1.githubusercontent.com/u/413481?s=460&v=4" width="50px;" alt=""/></td>
-      <td><b><a href="https://github.com/kberg">Robert Konigsberg</b></a>: Ares fan expansion, The Moon fan expansion, infrastructure cleanup, code reviews, two opinions too many.</a> </td>
+      <td><b><a href="https://github.com/kberg">Robert Konigsberg</b></a>: Fan expansions: Ares, The Moon, Pathfinders, Underworld. Prelude 2. Infrastructure cleanup, code reviews, two opinions too many.</a> </td>
     </tr>
     <tr>
       <td><img src="https://avatars.githubusercontent.com/u/836179?s=460&v=4" width="50px;" alt=""/></td>
@@ -125,6 +125,14 @@ Thanks goes to these wonderful people:
     <tr>
       <td><img src="https://avatars.githubusercontent.com/u/15874357?s=460&v=4" width="50px;" alt=""/><br />
       <td><a href="https://github.com/derornos"><b>푸른이(derornos)</b></a>: 한국어화 옮긴이(Korean translator)<br>&emsp;<a href="mailto:derornos@gmail.com">메일(email): derornos@gmail.com</a> / <a href="https://open.kakao.com/me/derornos">카카오톡(KakaoTalk, Messenger): link</a></td>
+    </tr>
+    <tr>
+      <td><img src="https://avatars.githubusercontent.com/u/105346182?s=460&v=4" width="50px;" alt=""/><br />
+      <td><a href="https://github.com/Borbarad2"><b>Borbarad</b></a>: Translation</a> </td>
+    </tr>
+    <tr>
+      <td><img src="https://avatars.githubusercontent.com/u/2050250?s=460&v=4" width="50px;" alt=""/><br />
+      <td><a href="https://github.com/d-little"><b>d-little</b></a>: CEOs</a> </td>
     </tr>
   </tdata>
 </table>

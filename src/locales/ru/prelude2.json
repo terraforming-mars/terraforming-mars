@@ -1,13 +1,13 @@
 {
     "Applied Science": "Научный подход",
-    "Action: Remove 1 resource here to gain 1 standard resource of your choice or add 1 resource on ANY CARD WITH A RESOURCE.": "Действие: Удалите 1 ресурс с этой карты, чтобы получить 1 любой стандартный ресурс ИЛИ добавить 1 ресурс на ЛЮБУЮ КАРТУ С УЖЕ ИМЕЮЩИМИСЯ НА НЕЙ РЕСУРСАМИ",
+    "Action: Remove 1 resource here to either add 1 resource to ANY CARD WITH A RESOURCE or gain 1 standard resource.": "Действие: Удалите 1 ресурс с этой карты, чтобы получить 1 любой стандартный ресурс ИЛИ добавить 1 ресурс на ЛЮБУЮ КАРТУ С УЖЕ ИМЕЮЩИМИСЯ НА НЕЙ РЕСУРСАМИ",
     "Spend 1 science resource here to gain 1 standard resource": "Снять 1 ресурс с карты и получить 1 ресурс на другую карту с ресурсами на ней",
     "Spend 1 science resource here to gain 1 resource on ANY CARD WITH A RESOURCE.": "Снять 1 ресурс с карты и добавить 1 ресурс на ЛЮБУЮ КАРТУ С УЖЕ ИМЕЮЩИМИСЯ НА НЕЙ РЕСУРСАМИ",
-    "Add 6 resources here.": "Добавить на карту 6 ресурсов",
+    "Add 6 science resources here.": "Добавить на карту 6 ресурсов",
 
     "Colony Trade Hub": "Торговый хаб",
-    "Effect: When a colony is placed, gain 2 M€": "Каждый раз когда кто-то строит колонию получите 2 M€",
-    "Increase your energy production 1 step. Gain 3 titanium": "Увеличьте свое производство энергии на 1. Получите 3 титана",
+    "Effect: When any colony is placed, gain 2 M€.": "Каждый раз когда кто-то строит колонию получите 2 M€",
+    "Increase your energy production 1 step. Gain 2 titanium": "Увеличьте свое производство энергии на 1. Получите 3 титана",
     "Focused Organization": "Точная организация",
     "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource": "Действие: Сбросьте 1 карту и потратьте 1 стандартный ресурс, чтобы добрать 1 карту и получить 1 стандартный ресурс",
     "Draw 1 card and gain 1 standard resource.": "Доберите 1 карту и получите 1 стандартный ресурс",

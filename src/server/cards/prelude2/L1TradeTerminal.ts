@@ -29,10 +29,14 @@ export class L1TradeTerminal extends Card {
           b.effect('When you trade, first increase that colony tile track 2 steps.', (eb) =>
             eb.trade().startEffect.text('+2')).br;
           b.text('3').diverseTag().asterix().br;
-          b.plainText('(Add a resource to 3 different cards.)').br;
+          b.plainText('(Add a resource to 3 different cards that already have resources.)').br;
         }),
       },
     });
+  }
+
+  public override bespokeCanPlay(player: IPlayer): boolean {
+    return player.getCardsWithResources().length >= 3;
   }
 
   public override bespokePlay(player: IPlayer): PlayerInput | undefined {
@@ -42,8 +46,8 @@ export class L1TradeTerminal extends Card {
       }
     }
 
-    const cards = player.getResourceCards();
-    if (cards.length <= 3) {
+    const cards = player.getCardsWithResources();
+    if (cards.length === 3) {
       addResources(cards);
       return undefined;
     }

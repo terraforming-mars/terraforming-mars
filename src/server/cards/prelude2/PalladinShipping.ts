@@ -34,7 +34,7 @@ export class PalladinShipping extends CorporationCard implements IActionCard {
             ab.titanium(2).startAction.temperature(1);
           });
         }),
-        description: 'You start with 36 M€ and 5 titanium.',
+        description: 'You start with 36 M€. Gain 5 titanium.',
       },
     });
   }

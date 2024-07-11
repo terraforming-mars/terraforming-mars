@@ -3,10 +3,10 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {PreludeCard} from '../prelude/PreludeCard';
 
-export class SpaceCorridors extends PreludeCard {
+export class SpaceLanes extends PreludeCard {
   constructor() {
     super({
-      name: CardName.SPACE_CORRIDORS,
+      name: CardName.SPACE_LANES,
       tags: [Tag.SPACE],
 
       cardDiscount: [

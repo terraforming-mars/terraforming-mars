@@ -447,7 +447,7 @@ export enum CardName {
   OLD_MINING_COLONY = 'Old Mining Colony',
   NOBEL_PRIZE = 'Nobel Prize',
   COLONY_TRADE_HUB = 'Colony Trade Hub',
-  SPACE_CORRIDORS = 'Space Corridors',
+  SPACE_LANES = 'Space Lanes',
 
   // Prelude 2 Corps
   NIRGAL_ENTERPRISES = 'Nirgal Enterprises',

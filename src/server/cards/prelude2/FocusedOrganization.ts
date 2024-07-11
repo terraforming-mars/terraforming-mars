@@ -1,4 +1,3 @@
-import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {PreludeCard} from '../prelude/PreludeCard';
@@ -15,7 +14,6 @@ export class FocusedOrganization extends PreludeCard implements IActionCard {
   constructor() {
     super({
       name: CardName.FOCUSED_ORGANIZATION,
-      tags: [Tag.SPACE],
 
       behavior: {
         drawCard: 1,

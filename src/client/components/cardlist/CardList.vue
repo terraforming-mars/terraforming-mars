@@ -410,7 +410,7 @@ export default (Vue as WithRefs<Refs>).extend({
     getAllColonyNames() {
       return OFFICIAL_COLONY_NAMES.concat(COMMUNITY_COLONY_NAMES).concat(PATHFINDERS_COLONY_NAMES);
     },
-    filter(name: string, type: 'card' | 'globalEvent' | 'colony' | 'ma') {
+    include(name: string, type: 'card' | 'globalEvent' | 'colony' | 'ma') {
       const normalized = this.filterText.toLocaleUpperCase();
       if (normalized.length === 0) {
         return true;
@@ -442,7 +442,7 @@ export default (Vue as WithRefs<Refs>).extend({
       return matches;
     },
     showCard(cardName: CardName): boolean {
-      if (!this.filter(cardName, 'card')) return false;
+      if (!this.include(cardName, 'card')) return false;
 
       const card = getCard(cardName);
       if (card === undefined) {
@@ -454,17 +454,17 @@ export default (Vue as WithRefs<Refs>).extend({
       return this.expansions[card.module] === true;
     },
     showGlobalEvent(name: GlobalEventName): boolean {
-      if (!this.filter(name, 'globalEvent')) return false;
+      if (!this.include(name, 'globalEvent')) return false;
       const globalEvent = getGlobalEvent(name);
       return globalEvent !== undefined && this.expansions[globalEvent.module] === true;
     },
     showColony(name: ColonyName): boolean {
-      if (!this.filter(name, 'colony')) return false;
+      if (!this.include(name, 'colony')) return false;
       const colony = getColony(name);
       return colony !== undefined && this.expansions[colony.module ?? 'base'] === true;
     },
     showMA(name: MilestoneName | AwardName): boolean {
-      return this.filter(name, 'ma');
+      return this.include(name, 'ma');
     },
     getLanguageCssClass() {
       const language = getPreferences().lang;

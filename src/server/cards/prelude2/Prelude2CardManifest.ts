@@ -2,6 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {ModuleManifest} from '../ModuleManifest';
 import {AppliedScience} from './AppliedScience';
 import {AtmosphericEnhancers} from './AtmosphericEnhancers';
+import {BoardOfDirectors} from './BoardOfDirectors';
 import {CeresTechMarket} from './CeresTechMarket';
 import {CloudTourism} from './CloudTourism';
 import {ColonyTradeHub} from './ColonyTradeHub';
@@ -54,7 +55,7 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
   preludeCards: {
     [CardName.APPLIED_SCIENCE]: {Factory: AppliedScience},
     [CardName.ATMOSPHERIC_ENHANCERS]: {Factory: AtmosphericEnhancers, compatibility: 'venus'},
-    // [CardName.BOARD_OF_DIRECTORS]: {Factory: BoardOfDirectors},
+    [CardName.BOARD_OF_DIRECTORS]: {Factory: BoardOfDirectors},
     [CardName.COLONY_TRADE_HUB]: {Factory: ColonyTradeHub, compatibility: 'colonies'},
     [CardName.CORRIDORS_OF_POWER]: {Factory: CorridorsOfPower, compatibility: 'turmoil'},
     // [CardName.FLOATING_TRADE_HUB]: {Factory: FloatingTradeHub, compatibility: 'venus'},

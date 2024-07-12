@@ -4,19 +4,19 @@
     "Effect: When you play a Jovian, Earth, or Venus tag, you pay 2 M€ less for it.": "効果：木星、地球、金星タグカードのプレイコスト-2MC.",
 
     "Corridors of Power": "権力の回廊",
-    "Increase your TR one step. Gain 4 M€": "TR+1. 4MC獲得.",
-    "Effect: Whenever one of your delegates becomes a Party Leader, draw a card": "効果：代議員が党首になった時、1ドロー.",
+    "Raise your TR 1 step and gain 4 M€": "TR+1. 4MC獲得.",
+    "Effect: Each time you become party leader, draw 1 card.": "効果：代議員が党首になった時、1ドロー.",
 
     "Atmospheric Enhancers": "大気エンハンサ",
-    "Effect: Raise either the temperature or oxygen or Venus 2 steps. Reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take those 2 cards into hand and discard the rest.": "温度+2段階 または 酸素+2段階. 浮遊体アイコンがあるカードを2枚入手.",
+    "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "温度+2段階 または 酸素+2段階. 浮遊体アイコンがあるカードを2枚入手.",
 
     "Applied Science": "応用科学",
-    "Action: Remove 1 resource here to gain 1 standard resource of your choice or add 1 resource on ANY CARD WITH A RESOURCE.": "アクション：このカード上から1科学リソース除去し、任意の1リソースを獲得.",
-    "Add 6 resources here.": "このカード上に6科学リソース追加.",
+    "Action: Remove 1 resource here to either add 1 resource to ANY CARD WITH A RESOURCE or gain 1 standard resource.": "アクション：このカード上から1科学リソース除去し、任意の1リソースを獲得.",
+    "Add 6 science resources here.": "このカード上に6科学リソース追加.",
 
     "Colony Trade Hub": "コロニー交易拠点",
-    "Increase your energy production 1 step. Gain 3 titanium": "電力産出+1. 3チタン獲得.",
-    "Effect: When a colony is placed, gain 2 M€": "効果：コロニーが配置された時、2MC獲得.",
+    "Increase your energy production 1 step. Gain 2 titanium": "電力産出+1. 3チタン獲得.",
+    "Effect: When any colony is placed, gain 2 M€.": "効果：コロニーが配置された時、2MC獲得.",
 
     "Focused Organization": "重点的な組織",
     "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource": "アクション：手札を1枚捨て、さらに1標準リリースを支払い、1ドローと1標準リソース獲得.",

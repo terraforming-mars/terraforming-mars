@@ -1,41 +1,41 @@
 {
     "ECOTEC": "ECOTEC",
-    "Effect: When you play a microbe, plant, or animal tag, gain 1 plant or add a microbe to ANY card.": 
+    "Effect: When you play a bio tag, gain 1 plant or add a microbe to ANY card.":
     "Эффект: Разыгрывая карты с метками микробов, растений или животных, получайте 1 растение или добавляйте 1 микроб на ЛЮБУЮ карту",
     "You start with 42 M€. Increase your plant production 1 step.": "Вы начинаете с 42 M€. Увеличьте ваше производство растений на 1",
     "You start with 35 M€ and 3 asteroid resources.": "Вы начинаете с 35 M€ и 3 ресурсами астероидов на этой карте",
 
     "KUIPER COOPERATIVE": "KUIPER COOPERATIVE",
     "Action: Add 1 asteroid here for every space tag you have.": "Действие: Добавьте 1 астероид на эту карту за каждую вашу метку космоса",
-    "Effect: When you use the AQUIFER or ASTEROID standard projects, you can spend asteroids on card as 1M€ each.": 
+    "Effect: When you use the AQUIFER or ASTEROID standard projects, you can spend asteroids on card as 1M€ each.":
     "Эффект: Выкладывая стандартным проектом океан или повышая стандартным проектом температуру, можете тратить астероиды с этой карты по 1 M€ за штуку",
     "You start with 33 M€. Increase titanium production 1 step.": "Вы начинаете с 33 M€. Увеличьте ваше производство титана на 1",
 
     "TYCHO MAGNETICS": "TYCHO MAGNETICS",
     "You start with 42 M€. Increase your energy production 1 step.": "Вы начинаете с 42 M€. Увеличьте ваше производство энергии на 1",
-    "Action: Spend any amount of energy to draw the that many cards. Keep 1 and discard the rest.": 
+    "Action: Spend any amount of energy to draw the that many cards. Keep 1 and discard the rest.":
     "Действие: Потратьте любое количество энергии, чтобы добрать такое же количество карт. Оставьте 1 из них и сбросьте остальные",
     "KEEP 1": "ОСТАВЬТЕ 1",
 
     "AWARDS AND MILESTONES ALWAYS COST 0 M€ FOR YOU.": "НАГРАДЫ И ДОСТИЖЕНИЯ ДЛЯ ВАС ВСЕГДА БЕСПЛАТНЫ",
-    "You start with 33 M€. Raise your energy, plant, and steel production 1 step each.": "Вы начинаете с 33 M€. Увеличьте ваши уровни производства энергии, растений и стали на 1 каждый",
-    
+    "You start with 30 M€. Raise your energy, plant, and steel production 1 step each.": "Вы начинаете с 33 M€. Увеличьте ваши уровни производства энергии, растений и стали на 1 каждый",
+
     "PALLADIN SHIPPING": "PALLADIN SHIPPING",
     "Effect: When you play a space event, gain 1 titanium.": "Эффект: Разыгрывая события с меткой космоса, получайте 1 титан",
     "Action: Spend 2 titanium to raise the temperature 1 step.": "Действие: Потратьте 2 титана, чтобы поднять температуру на 1 шаг",
-    "You start with 36 M€ and 5 titanium.": "Вы начинаете с 36 M€ и 5 титана",
+    "You start with 36 M€. Gain 5 titanium.": "Вы начинаете с 36 M€ и 5 титана",
 
     "SAGITTA FRONTIER SERVICES": "SAGITTA FRONTIER SERVICES",
     "Effect: When you play a card with no tags, including this, gain 4 M€.": "Эффект: Разыгрывая карты без тегов, включая эту, получайте 4 M€",
     "Effect: When you play a card with EXACTLY 1 TAG, gain 1 M€.": "Эффект: Разыгрывая карты с ЕДИНСВЕННЫМ тегом, получайте 1 M€",
-    "You start with 28 M€. Increase energy production 1 step and M€ production 2 steps. Draw a card with no tags.": 
-    "Вы начинаете с 28 M€. Увеличьте ваше производство энергии на 1 и производство M€ на 2. Доберите карту без метки",
+    "You start with 31 M€. Increase energy production 1 step and M€ production 2 steps. Draw a card that has no tag.":
+    "Вы начинаете с 31 M€. Увеличьте ваше производство энергии на 1 и производство M€ на 2. Доберите карту без метки",
 
     "SPIRE": "SPIRE",
-    "You start with 44 M€. As your first action, draw 4 cards, then discard 3 cards from your hand.": 
+    "You start with 50 M€. As your first action, draw 4 cards, then discard 3 cards from your hand.":
     "Вы начинаете с 44 M€. В качестве первого действия в игре, доберите 4 карты, затем сбросьте любые 3 карты с руки",
-    "Effect: When you play a card with at least 2 tags. including this, add a science resource here.": 
+    "Effect: When you play a card with at least 2 tags. including this, add 1 science resource here.":
     "Эффект: Разыгрывая карты с как минимум 2 метками, включая эту, добавьте ресурс науки на эту карту",
-    "Effect: When you use a standard project, science resources here may be spent as 2 M€ each.": 
+    "Effect: When you pay for a standard project, science resources here may be used as 2 M€ each.":
     "Эффект: Оплачивая стандартные проекты, можете тратить ресурсы науки с этой карты по цене 2 M€ каждый"
 }

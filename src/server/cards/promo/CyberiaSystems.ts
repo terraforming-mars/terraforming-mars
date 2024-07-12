@@ -14,7 +14,7 @@ export class CyberiaSystems extends RoboticWorkforceBase {
       type: CardType.AUTOMATED,
       name: CardName.CYBERIA_SYSTEMS,
       tags: [Tag.BUILDING],
-      cost: 17,
+      cost: 16,
 
       behavior: {production: {steel: 1}},
 
@@ -27,7 +27,7 @@ export class CyberiaSystems extends RoboticWorkforceBase {
             .production((pb) => pb.tag(Tag.BUILDING))
             .br;
         }),
-        description: 'Raise your steel production 1 step. Copy the production boxes of 2 of your other cards with building tags.',
+        description: 'Increase your steel production 1 step. Copy the PRODUCTION BOXES of 2 of your cards with building tags.',
       },
     });
   }

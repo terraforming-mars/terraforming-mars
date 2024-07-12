@@ -23,7 +23,7 @@ describe('ColonyTradeHub', function() {
 
   it('play', () => {
     card.play(player);
-    expect(player.stock.asUnits()).deep.eq(Units.of({titanium: 3}));
+    expect(player.stock.asUnits()).deep.eq(Units.of({titanium: 2}));
     expect(player.production.asUnits()).deep.eq(Units.of({energy: 1}));
   });
 

@@ -1,19 +1,19 @@
 {
 
     "Applied Science": "",
-    "Action: Remove 1 resource here to gain 1 standard resource of your choice or add 1 resource on ANY CARD WITH A RESOURCE.": "행동: 이 카드 위의 과학 자원 1개를 제거하고, 기본 자원 1개 획득하거나 자원이 놓여 있는 아무 카드 위에 그 자원 1개 추가",
-    "Add 6 resources here.": "이 카드 위에 과학 자원 6개 추가.",
+    "Action: Remove 1 resource here to either add 1 resource to ANY CARD WITH A RESOURCE or gain 1 standard resource.": "행동: 이 카드 위의 과학 자원 1개를 제거하고, 기본 자원 1개 획득하거나 자원이 놓여 있는 아무 카드 위에 그 자원 1개 추가",
+    "Add 6 science resources here.": "이 카드 위에 과학 자원 6개 추가.",
 
     "Atmospheric Enhancers": "",
-    "Effect: Raise either the temperature or oxygen or Venus 2 steps. Reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take those 2 cards into hand and discard the rest.": "기온, 산소 농도, 금성 지표 중 하나를 골라 2단계 상승. 부양체 자원이 그려진 카드 2장이 공개될 때까지 더미에서 카드를 공개. 손으로 그 카드 2장을 가져오고 나머지는 버림.",
+    "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "기온, 산소 농도, 금성 지표 중 하나를 골라 2단계 상승. 부양체 자원이 그려진 카드 2장이 공개될 때까지 더미에서 카드를 공개. 손으로 그 카드 2장을 가져오고 나머지는 버림.",
 
     "Colony Trade Hub": "",
-    "Increase your energy production 1 step. Gain 3 titanium": "에너지 생산력 1 증가. 티타늄 자원 3개 획득.",
-    "Effect: When a colony is placed, gain 2 M€": "지속 효과: 아무 개척기지가 배치될 때마다, 자신은 2 M€ 획득.",
+    "Increase your energy production 1 step. Gain 2 titanium": "에너지 생산력 1 증가. 티타늄 자원 3개 획득.",
+    "Effect: When any colony is placed, gain 2 M€.": "지속 효과: 아무 개척기지가 배치될 때마다, 자신은 2 M€ 획득.",
 
     "Corridors of Power": "",
-    "Effect: Whenever one of your delegates becomes a Party Leader, draw a card": "지속 효과: 자신의 의원이 의장이 될 때마다 카드를 1장 뽑음.",
-    "Increase your TR one step. Gain 4 M€": "테라포밍 등급 1 TR 상승. 4 M€ 획득.",
+    "Effect: Each time you become party leader, draw 1 card.": "지속 효과: 자신의 의원이 의장이 될 때마다 카드를 1장 뽑음.",
+    "Raise your TR 1 step and gain 4 M€": "테라포밍 등급 1 TR 상승. 4 M€ 획득.",
 
     "Focused Organization": "",
     "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource": "행동: 카드 1장을 버리고 기본 자원 1개를 제거해서, 카드 1장과 기본 자원 1개 획득.",

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {SpaceCorridors} from '../../../src/server/cards/prelude2/SpaceCorridors';
+import {SpaceLanes} from '../../../src/server/cards/prelude2/SpaceLanes';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Ants} from '../../../src/server/cards/base/Ants';
@@ -8,12 +8,12 @@ import {IoMiningIndustries} from '../../../src/server/cards/base/IoMiningIndustr
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 import {PublicSpaceline} from '../../../src/server/cards/underworld/PublicSpaceline';
 
-describe('SpaceCorridors', function() {
-  let card: SpaceCorridors;
+describe('SpaceLanes', function() {
+  let card: SpaceLanes;
   let player: TestPlayer;
 
   beforeEach(function() {
-    card = new SpaceCorridors();
+    card = new SpaceLanes();
     [/* game */, player] = testGame(2);
   });
 

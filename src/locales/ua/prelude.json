@@ -1,18 +1,18 @@
 {
   "Applied Science": "Прикладна наука",
-  "Action: Remove 1 resource here to gain 1 standard resource of your choice or add 1 resource on ANY CARD WITH A RESOURCE.": "Дія: Видалити 1 ресурс тут, щоб отримати 1 стандартний ресурс за вашим вибором або додати 1 ресурс на БУДЬ-ЯКУ КАРТКУ З РЕСУРСОМ.",
-  "Add 6 resources here.": "Додайте 6 ресурсів тут.",
+  "Action: Remove 1 resource here to either add 1 resource to ANY CARD WITH A RESOURCE or gain 1 standard resource.": "Дія: Видалити 1 ресурс тут, щоб отримати 1 стандартний ресурс за вашим вибором або додати 1 ресурс на БУДЬ-ЯКУ КАРТКУ З РЕСУРСОМ.",
+  "Add 6 science resources here.": "Додайте 6 ресурсів тут.",
 
   "Atmospheric Enhancers": "Атмосферні покращувачі",
-  "Effect: Raise either the temperature or oxygen or Venus 2 steps. Reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take those 2 cards into hand and discard the rest.": "Ефект: Підвищте температуру, кисень або Венеру на 2 кроки. Розкрийте карти з колоди, поки не розкриєте 2 карти з плаваючим значком. Візьміть ці 2 карти в руку і відкиньте решту.",
+  "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "Ефект: Підвищте температуру, кисень або Венеру на 2 кроки. Розкрийте карти з колоди, поки не розкриєте 2 карти з плаваючим значком. Візьміть ці 2 карти в руку і відкиньте решту.",
 
   "Colony Trade Hub": "Торговий центр колонії",
-  "Increase your energy production 1 step. Gain 3 titanium": "Підвищте виробництво енергії на 1 крок. Отримайте 3 титану.",
-  "Effect: When a colony is placed, gain 2 M€": "Ефект: Коли розміщується колонія, отримайте 2 M€.",
+  "Increase your energy production 1 step. Gain 2 titanium": "Підвищте виробництво енергії на 1 крок. Отримайте 3 титану.",
+  "Effect: When any colony is placed, gain 2 M€.": "Ефект: Коли розміщується колонія, отримайте 2 M€.",
 
   "Corridors of Power": "Коридори влади",
-  "Effect: Whenever one of your delegates becomes a Party Leader, draw a card": "Ефект: Кожного разу, коли один з ваших делегатів стає лідером партії, візьміть карту.",
-  "Increase your TR one step. Gain 4 M€": "Підвищте ваш TR на один крок. Отримайте 4 M€.",
+  "Effect: Each time you become party leader, draw 1 card.": "Ефект: Кожного разу, коли один з ваших делегатів стає лідером партії, візьміть карту.",
+  "Raise your TR 1 step and gain 4 M€": "Підвищте ваш TR на один крок. Отримайте 4 M€.",
 
   "Focused Organization": "Спрямована організація",
   "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource": "Дія: Відкиньте 1 карту і витратте 1 стандартний ресурс, щоб взяти 1 карту і отримати 1 стандартний ресурс.",

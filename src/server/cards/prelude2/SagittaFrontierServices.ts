@@ -14,7 +14,7 @@ export class SagittaFrontierServices extends CorporationCard {
   constructor() {
     super({
       name: CardName.SAGITTA_FRONTIER_SERVICES,
-      startingMegaCredits: 28,
+      startingMegaCredits: 31,
 
       behavior: {
         production: {energy: 1, megacredits: 2},
@@ -25,11 +25,11 @@ export class SagittaFrontierServices extends CorporationCard {
         hasExternalHelp: true,
         renderData: CardRenderer.builder((b) => {
           // TODO(kberg): provide reasonable secondary tag. It's not rendered on CardRenderItemComponent.
-          b.megacredits(28).production((pb) => pb.energy(1).megacredits(2)).cards(1, {secondaryTag: AltSecondaryTag.NO_TAGS}).br;
+          b.megacredits(31).production((pb) => pb.energy(1).megacredits(2)).cards(1, {secondaryTag: AltSecondaryTag.NO_TAGS}).br;
           b.effect('When you play a card with no tags, including this, gain 4 M€.', (eb) => eb.noTags().startEffect.megacredits(4)).br;
-          b.effect('When you play a card with EXACTLY 1 TAG, gain 1 M€.', (eb) => eb.emptyTag().asterix().startEffect.megacredits(1)).br;
+          b.effect('When you play a card with EXACTLY 1 TAG, you gain 1 M€.', (eb) => eb.emptyTag().asterix().startEffect.megacredits(1)).br;
         }),
-        description: 'You start with 28 M€. Increase energy production 1 step and M€ production 2 steps. Draw a card with no tags.',
+        description: 'You start with 31 M€. Increase energy production 1 step and M€ production 2 steps. Draw a card that has no tag.',
       },
     });
   }

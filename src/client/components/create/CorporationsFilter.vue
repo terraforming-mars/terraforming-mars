@@ -1,14 +1,12 @@
 <template>
     <div class="corporations-filter">
-      <div class="search-container">
-        <input ref="filter" class="filter" :placeholder="$t('filter')" v-model="filterText">
-      </div>
         <div class="corporations-filter-toolbox-cont">
             <h2 v-i18n>Corporations</h2>
             <div class="corporations-filter-toolbox corporations-filter-toolbox--topmost">
                 <a href="#" v-i18n v-on:click.prevent="selectAll('All')">All*</a> |
                 <a href="#" v-i18n v-on:click.prevent="selectNone('All')">None*</a> |
                 <a href="#" v-i18n v-on:click.prevent="invertSelection('All')">Invert*</a>
+                <input ref="filter" class="filter" :placeholder="$t('filter')" v-model="filterText">
             </div>
         </div>
         <br/>

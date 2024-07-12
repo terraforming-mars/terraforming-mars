@@ -1,14 +1,12 @@
 <template>
     <div class="colonies-filter">
-      <div class="search-container">
-        <input ref="filter" class="filter" :placeholder="$t('filter')" v-model="filterText">
-      </div>
         <div>
             <h2 v-i18n>Colonies</h2>
             <div class="corporations-filter-toolbox corporations-filter-toolbox--topmost">
                 <a href="#" v-i18n v-on:click.prevent="selectAll('All')">All*</a> |
                 <a href="#" v-i18n v-on:click.prevent="selectNone('All')">None*</a> |
                 <a href="#" v-i18n v-on:click.prevent="invertSelection('All')">Invert*</a>
+                <input :placeholder="$t('filter')" v-model="filterText">
             </div>
         </div>
         <div class="colonies-filter-list" v-for="module in modules" v-bind:key="module">

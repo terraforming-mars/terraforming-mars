@@ -6,6 +6,7 @@
                 <a href="#" v-i18n v-on:click.prevent="selectAll('All')">All*</a> |
                 <a href="#" v-i18n v-on:click.prevent="selectNone('All')">None*</a> |
                 <a href="#" v-i18n v-on:click.prevent="invertSelection('All')">Invert*</a>
+                <input :placeholder="$t('filter')" v-model="filterText">
             </div>
         </div>
         <div class="colonies-filter-list" v-for="module in modules" v-bind:key="module">
@@ -13,7 +14,7 @@
               <a href="#" v-i18n v-on:click.prevent="selectAll(module)">All</a> |
               <a href="#" v-i18n v-on:click.prevent="selectNone(module)">None</a> |
               <a href="#" v-i18n v-on:click.prevent="invertSelection(module)">Invert</a>
-            <label class="form-checkbox" v-for="colony in getColonies(module)" v-bind:key="colony">
+            <label class="form-checkbox" v-for="colony in getColonies(module)" v-bind:key="colony" v-show="include(colony)">
                 <input type="checkbox" v-model="selectedColonies" :value="colony">
                 <i class="form-icon"></i><span v-i18n>{{ colony }} - ({{ COLONY_DESCRIPTIONS[colony] }})</span>
             </label>
@@ -28,6 +29,7 @@ import {COLONY_DESCRIPTIONS} from '@/common/colonies/ColonyDescription';
 import {OFFICIAL_COLONY_NAMES, COMMUNITY_COLONY_NAMES, PATHFINDERS_COLONY_NAMES} from '@/common/colonies/AllColonies';
 
 type Data = {
+  filterText: string,
   allColonies: Array<ColonyName>,
   officialColonies: Array<ColonyName>,
   communityColonies: Array<ColonyName>,
@@ -63,6 +65,7 @@ export default Vue.extend({
     const pathfindersColonies = [...PATHFINDERS_COLONY_NAMES].sort();
 
     const data: Data = {
+      filterText: '',
       allColonies: officialColonies.concat(communityColonies),
       officialColonies,
       communityColonies,
@@ -137,6 +140,13 @@ export default Vue.extend({
       if (module === 'community') return this.communityColonies;
       if (module === 'pathfinders') return this.pathfindersColonies;
       return [];
+    },
+    include(name: string) {
+      const normalized = this.filterText.toLocaleUpperCase();
+      if (normalized.length === 0) {
+        return true;
+      }
+      return name.toLocaleUpperCase().includes(normalized);
     },
   },
   computed: {

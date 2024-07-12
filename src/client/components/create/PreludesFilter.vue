@@ -6,6 +6,7 @@
                 <a href="#" v-i18n v-on:click.prevent="selectAll('All')">All*</a> |
                 <a href="#" v-i18n v-on:click.prevent="selectNone('All')">None*</a> |
                 <a href="#" v-i18n v-on:click.prevent="invertSelection('All')">Invert*</a>
+                <input ref="filter" class="filter" :placeholder="$t('filter')" v-model="filterText">
             </div>
         </div>
         <br/>
@@ -19,7 +20,7 @@
                     <a href="#" v-i18n v-on:click.prevent="invertSelection(module)">Invert</a>
                 </div>
             </div>
-            <div v-for="prelude in cardsByModule[module]" v-bind:key="prelude">
+            <div v-for="prelude in cardsByModule[module]" v-bind:key="prelude" v-show="include(prelude)">
                 <label class="form-checkbox">
                     <input type="checkbox" v-model="selectedPreludes" :value="prelude"/>
                     <i class="form-icon"></i><span v-i18n>{{ prelude }}</span>
@@ -75,6 +76,7 @@ export default Vue.extend({
     GAME_MODULES.forEach((module) => cardsByModule[module].sort());
 
     return {
+      filterText: '',
       cardsByModule: cardsByModule,
       customPreludesList: false,
       selectedPreludes: [
@@ -161,6 +163,13 @@ export default Vue.extend({
       case 'pathfinders': return 'Pathfinders';
       }
       return '';
+    },
+    include(name: string) {
+      const normalized = this.filterText.toLocaleUpperCase();
+      if (normalized.length === 0) {
+        return true;
+      }
+      return name.toLocaleUpperCase().includes(normalized);
     },
   },
   watch: {

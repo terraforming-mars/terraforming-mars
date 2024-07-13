@@ -3,9 +3,9 @@ import {cast} from '../../TestingUtils';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import { SpecialPermit } from '../../../src/server/cards/prelude2/SpecialPermit';
+import {SpecialPermit} from '../../../src/server/cards/prelude2/SpecialPermit';
 
-describe('HiredRaiders', function() {
+describe('SpecialPermit', function() {
   let card: SpecialPermit;
   let player: TestPlayer;
   let player2: TestPlayer;

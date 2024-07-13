@@ -17,7 +17,7 @@ describe('SpecialPermit', function() {
     [/* game */, player, player2] = testGame(4); // Ensure testGame returns TestPlayer instances
   });
 
-it('Steals resources correctly', () => {
+  it('Steals resources correctly', () => {
     // This part sets up player2 as a target
     player.removingPlayers.push(player2.id);
     // Targertnow has has 4 plants

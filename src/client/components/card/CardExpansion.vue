@@ -12,6 +12,7 @@
 
 import Vue from 'vue';
 import {GameModule} from '@/common/cards/GameModule';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 
 const MODULE_TO_CSS: Omit<Record<GameModule, string>, 'base'> = {
   corpera: 'corporate-icon',

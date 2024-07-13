@@ -19,7 +19,6 @@ export class StratosphericExpedition extends Card implements IProjectCard {
         addResourcesToAnyCard: {count: 2, type: CardResource.FLOATER},
         drawCard: {count: 2, tag: Tag.VENUS},
       },
-    
       metadata: {
         cardNumber: 'P84',
         renderData: CardRenderer.builder((b) => {

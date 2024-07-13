@@ -1,6 +1,10 @@
 import {expect} from 'chai';
-import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
+import {Resource} from '../../../src/common/Resource';
+import {TestPlayer} from '../../TestPlayer';
+import {cast} from '../../TestingUtils';
+
 import {SpecialPermit} from '../../../src/server/cards/prelude2/SpecialPermit';
 
 describe('SpecialPermit', function() {
@@ -10,18 +14,18 @@ describe('SpecialPermit', function() {
 
   beforeEach(function() {
     card = new SpecialPermit();
-    [, player, player2] = testGame(3); // Ensure testGame returns TestPlayer instances
+    [/* game */, player, player2] = testGame(4); // Ensure testGame returns TestPlayer instances
   });
 
-  it('Steals resources correctly', () => {
-    player.plants = 0;
-    player2.plants = 4; // Set player2's initial plants to 4 for the test
+it('Steals resources correctly', () => {
+    // This part sets up player2 as a target
     player.removingPlayers.push(player2.id);
-    // Call bespokePlay directly to initiate the action
-    card.bespokePlay(player);
-    stealAction.execute(player2);
-    // Assert that the resources have been transferred correctly
-    expect(player.plants).to.equal(4); // Player should have stolen 4 plants
-    expect(player2.plants).to.equal(0); // Player2 should have lost 4 plants
+    // Targertnow has has 4 plants
+    player2.plants = 4;
+    player.plants = 0;
+    const play = cast(card.play(player), SelectPlayer);
+    play.cb(player2);
+    expect(player.plants).eq(4);
+    expect(player2.plantss).eq(0);
   });
 });

@@ -12,7 +12,7 @@ describe('SpecialPermit', function() {
 
   beforeEach(function() {
     card = new SpecialPermit();
-    [player, player2] = testGame(2); // Skipping unused game variable
+    [, player, player2] = testGame(2); // Ensure testGame returns TestPlayer instances
   });
 
   it('Steals resources correctly', () => {

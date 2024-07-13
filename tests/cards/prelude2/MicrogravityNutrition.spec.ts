@@ -5,9 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestingUtils';
 
 describe('MicrogravityNutrition', function() {
-  let card: MicrogravityNutrition;
   let player: TestPlayer;
-  let game: IGame;
   let colony1: Luna;
 
   beforeEach(function() {

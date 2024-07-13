@@ -7,7 +7,7 @@ import {cast} from '../../TestingUtils';
 import {expect} from 'chai';
 
 describe('MicrogravityNutrition', function() {
-  card: MicrogravityNutrition;
+  let card: MicrogravityNutrition;
   let player: TestPlayer;
   let game: IGame;
   let colony1: Luna;

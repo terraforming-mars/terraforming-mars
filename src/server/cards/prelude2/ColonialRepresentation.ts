@@ -15,22 +15,22 @@ export class ColonialRepresentation extends Card implements IProjectCard {
         turmoil: {influenceBonus: 1},
         stock: {
           megacredits: {
-          colonies: {colonies: {}},
-          each: 3,
+            colonies: {colonies: {}},
+            each: 3,
           },
+        },
       },
-    },
 
       metadata: {
         cardNumber: 'P71',
         renderData: CardRenderer.builder((b) => {
-            b.effect('You have +1 influence.', (eb) => {
-                eb.startEffect.influence();
-            }).br;
-            b.megacredits(3).slash().colonies();
+          b.effect('You have +1 influence.', (eb) => {
+            eb.startEffect.influence();
+          }).br;
+          b.megacredits(3).slash().colonies();
         }),
         description: 'Gain 3 M€ per colony you have.',
-        },
+      },
     });
   }
 }

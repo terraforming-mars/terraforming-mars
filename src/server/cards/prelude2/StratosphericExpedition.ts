@@ -24,7 +24,7 @@ export class StratosphericExpedition extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.resource(CardResource.FLOATER, 2).cards(2, {secondaryTag: Tag.VENUS});
         }),
-        description: 'Add to floaters to ANY CARD. Draw 2 Venus cards.',
+        description: 'Add two floaters to ANY CARD. Draw 2 Venus cards.',
       },
     });
   }

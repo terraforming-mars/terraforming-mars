@@ -29,7 +29,7 @@ import {Spire} from './Spire';
 import {SponsoringNation} from './SponsoringNation';
 import {StratosphericExpedition} from './StratosphericExpedition';
 import {SummitLogistics} from './SummitLogistics';
-import { UnexpectedApplication} from './UnexpectedApplication';
+import {UnexpectedApplication} from './UnexpectedApplication';
 
 export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
   module: 'prelude2',

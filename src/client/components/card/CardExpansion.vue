@@ -6,6 +6,7 @@
 
 import Vue from 'vue';
 import {GameModule} from '@/common/cards/GameModule';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 
 const MODULE_TO_CSS: Omit<Record<GameModule, string>, 'base'> = {
   corpera: 'corporate-icon',
@@ -44,6 +45,8 @@ export default Vue.extend({
       }
       if (this.isCorporation) {
         classes.push('card-corporation-expansion');
+      } else if (getPreferences().experimental_ui) {
+        classes.push('card-standard-expansion');
       }
 
       return classes.join(' ');

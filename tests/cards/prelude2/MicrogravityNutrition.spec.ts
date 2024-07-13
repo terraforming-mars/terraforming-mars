@@ -5,17 +5,18 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestingUtils';
 
 describe('MicrogravityNutrition', function() {
-  let card: MicrogravityNutrition;
+  // let card: MicrogravityNutrition;
   let player: TestPlayer;
   let game: IGame;
   let colony1: Luna;
 
   beforeEach(function() {
-    card = new MicrogravityNutrition();
+    // card = new MicrogravityNutrition();
     [game, player/* , player2 */] = testGame(2, {coloniesExtension: true});
 
     colony1 = new Luna();
     colony1.colonies.push(player.id);
     player.game.colonies.push(colony1);
   });
+
 });

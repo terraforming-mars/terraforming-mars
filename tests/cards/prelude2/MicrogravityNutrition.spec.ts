@@ -3,6 +3,8 @@ import {Luna} from '../../../src/server/colonies/Luna';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
+import {expect} from 'chai';
 
 describe('MicrogravityNutrition', function() {
   card: MicrogravityNutrition;
@@ -19,7 +21,7 @@ describe('MicrogravityNutrition', function() {
     player.game.colonies.push(colony1);
   });
 
-    it('Should play without targets', function() {
+  it('Should play without targets', function() {
     cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(1);
   });

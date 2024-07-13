@@ -28,10 +28,8 @@ export class SoilStudies extends Card {
         cardNumber: 'P81',
         renderData: CardRenderer.builder((b) => {
           b.plants(1).slash().tag(Tag.VENUS).tag(Tag.PLANT).colonies(1).br;
-          b.plainText('(Gain 1 plant per Venus tag. plant tag and colony you have.)');
-          b.br;
-          b.plainText('(Temperature must be -4 C or lower.)');
         }),
+        description: 'Requires that temperature is -4 C or lower. Gain 1 plant per Venus tag, plant tag, and colony you have.',
       },
     });
   }

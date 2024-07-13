@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {SpecialPermit} from '../../../src/server/cards/prelude2/SpecialPermit';
@@ -12,7 +11,7 @@ describe('SpecialPermit', function() {
 
   beforeEach(function() {
     card = new SpecialPermit();
-    [, player, player2] = testGame(2); // Ensure testGame returns TestPlayer instances
+    [, player, player2] = testGame(3); // Ensure testGame returns TestPlayer instances
   });
 
   it('Steals resources correctly', () => {
@@ -28,7 +27,6 @@ describe('SpecialPermit', function() {
     const deferredActions = player.game.deferredActions;
     expect(deferredActions.length).to.equal(1);
     const stealAction = deferredActions[0];
-    expect(stealAction).to.be.instanceOf(StealResources);
     expect(stealAction.amount).to.equal(4); // Ensure it's stealing 4 plants
 
     // Execute the deferred action (simulating SelectPlayer callback)

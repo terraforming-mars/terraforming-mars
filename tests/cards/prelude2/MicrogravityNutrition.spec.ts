@@ -18,5 +18,4 @@ describe('MicrogravityNutrition', function() {
     colony1.colonies.push(player.id);
     player.game.colonies.push(colony1);
   });
-
 });

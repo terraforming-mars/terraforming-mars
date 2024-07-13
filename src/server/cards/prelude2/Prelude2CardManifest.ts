@@ -24,9 +24,12 @@ import {RedAppeasement} from './RedAppeasement';
 import {SagittaFrontierServices} from './SagittaFrontierServices';
 import {SoilStudies} from './SoilStudies';
 import {SpaceLanes} from './SpaceLanes';
+import {SpecialPermit} from './SpecialPermit';
 import {Spire} from './Spire';
 import {SponsoringNation} from './SponsoringNation';
+import {StratosphericExpedition} from './StratosphericExpedition';
 import {SummitLogistics} from './SummitLogistics';
+import { UnexpectedApplication} from './UnexpectedApplication';
 
 export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
   module: 'prelude2',
@@ -42,14 +45,14 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.COLONIAL_REPRESENTATION]: {Factory: ColonialRepresentation, compatibility: 'turmoil'},
     [CardName.ENVOYS_FROM_VENUS]: {Factory: EnvoysFromVenus, compatibility: ['turmoil', 'venus']},
     // [CardName.COLONIAL_ENVOYS]: {Factory: ColonialEnvoys, compatibility: ['colonies', 'turmoil']},
-    // [CardName.SPECIAL_PERMIT]: {Factory: SpecialPermit, compatibility: 'turmoil'},
+    [CardName.SPECIAL_PERMIT]: {Factory: SpecialPermit, compatibility: 'turmoil'},
     // [CardName.FLOATING_REFINERY]: {Factory: FloatingRefinery, compatibility: 'venus'},
     // [CardName.FRONTIER_TOWN]: {Factory: FrontierTown, compatibility: 'turmoil'},
     [CardName.JOVIAN_ENVOYS]: {Factory: JovianEnvoys, compatibility: 'turmoil'},
     [CardName.MICROGRAVITY_NUTRITION]: {Factory: MicrogravityNutrition, compatibility: 'colonies'},
     [CardName.SOIL_STUDIES]: {Factory: SoilStudies, compatibility: ['venus', 'colonies']},
-    // [CardName.STRATOSPHERIC_EXPEDITION]: {Factory: StratosphericExpedition, compatibility: 'venus'},
-    // [CardName.UNEXPECTED_APPLICATION]: {Factory: UnexpectedApplication, compatibility: 'venus'},
+    [CardName.STRATOSPHERIC_EXPEDITION]: {Factory: StratosphericExpedition, compatibility: 'venus'},
+    [CardName.UNEXPECTED_APPLICATION]: {Factory: UnexpectedApplication, compatibility: 'venus'},
     // [CardName.VENUS_ALLIES]: {Factory: VenusAllies, compatibility: ['venus', 'colonies']},
     // [CardName.VENUS_ORBITAL_SURVEY]: {Factory: VenusOrbitalSurvey, compatibility: 'venus'},
     // [CardName.VENUS_SHUTTLES]: {Factory: VenusShuttles, compatibility: 'venus'},

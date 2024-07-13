@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
-import {StrategicBasePlanning} from '../../../src/server/cards/pathfinders/StrategicBasePlanning';
+import {StrategicBasePlanning} from '../../../src/server/cards/promo/StrategicBasePlanning';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
@@ -32,7 +32,7 @@ describe('StrategicBasePlanning', function() {
 
     player.megaCredits = 100;
     card.play(player);
-    expect(player.megaCredits).to.eq(92);
+    expect(player.megaCredits).to.eq(97);
 
     // Expecting build colony before place city
     assertBuildColony(player, game.deferredActions.pop()!.execute());

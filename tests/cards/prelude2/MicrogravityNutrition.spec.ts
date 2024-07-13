@@ -9,7 +9,7 @@ import {expect} from 'chai';
 describe('MicrogravityNutrition', function() {
   let card: MicrogravityNutrition;
   let player: TestPlayer;
-  //let game: IGame;
+  // let game: IGame;
   let colony1: Luna;
 
   beforeEach(function() {

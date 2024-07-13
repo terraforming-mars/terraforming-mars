@@ -1,10 +1,8 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
-import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
-
 import {SpecialPermit} from '../../../src/server/cards/prelude2/SpecialPermit';
 
 describe('SpecialPermit', function() {
@@ -26,6 +24,6 @@ describe('SpecialPermit', function() {
     const play = cast(card.play(player), SelectPlayer);
     play.cb(player2);
     expect(player.plants).eq(4);
-    expect(player2.plantss).eq(0);
+    expect(player2.plants).eq(0);
   });
 });

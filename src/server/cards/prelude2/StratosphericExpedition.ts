@@ -15,12 +15,11 @@ export class StratosphericExpedition extends Card implements IProjectCard {
       type: CardType.EVENT,
       victoryPoints: 1,
 
-
       behavior: {
         addResourcesToAnyCard: {count: 2, type: CardResource.FLOATER},
         drawCard: {count: 2, tag: Tag.VENUS},
       },
-      
+    
       metadata: {
         cardNumber: 'P84',
         renderData: CardRenderer.builder((b) => {

@@ -9,16 +9,16 @@ import {expect} from 'chai';
 describe('MicrogravityNutrition', function() {
   let card: MicrogravityNutrition;
   let player: TestPlayer;
-  // let game: IGame;
+  let game: IGame;
   let colony1: Luna;
 
   beforeEach(function() {
     card = new MicrogravityNutrition();
-    [player/* , player2 */] = testGame(2, {coloniesExtension: true});
+    [game, player/* , player2 */] = testGame(2, {coloniesExtension: true});
 
     colony1 = new Luna();
     colony1.colonies.push(player.id);
-    player.game.colonies.push(colony1);
+    game.colonies.push(colony1);
   });
 
   it('Should play without targets', function() {

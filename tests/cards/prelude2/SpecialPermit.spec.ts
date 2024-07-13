@@ -16,11 +16,9 @@ describe('SpecialPermit', function() {
   });
 
   it('Steals resources correctly', () => {
-    // This part sets up player2 as a thief whom you will sue.
-    player.removingPlayers.push(player2.id);
-    // This thief now has has 2 plants
     player.plants = 0;
     player2.plants = 2;
+    player.removingPlayers.push(player2.id);
     const play = cast(card.play(player), SelectPlayer);
     play.cb(player2);
     expect(player.plants).eq(2);

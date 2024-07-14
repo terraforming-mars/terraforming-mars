@@ -19,7 +19,6 @@ export const BESPOKE_PRODUCTION_CARDS: ReadonlyArray<CardName> = [
   CardName.POWER_SUPPLY_CONSORTIUM,
   // Colonies
   CardName.COMMUNITY_SERVICES,
-  CardName.ECOLOGY_RESEARCH,
   CardName.LUNAR_EXPORTS,
   CardName.MINORITY_REFUGE,
   CardName.PIONEER_SETTLEMENT,

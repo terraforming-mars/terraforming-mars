@@ -92,7 +92,7 @@ export function ceosFromJSON(cards: Array<CardName>): Array<ICeoCard> {
 
 export function cardsFromJSON(cards: Array<CardName>): Array<IProjectCard> {
   if (cards === undefined) {
-    console.warn('missing cards calling cardsFromJSON');
+    console.warn('parameter of array of cards is undefined when calling cardsFromJSON');
     return [];
   }
   const result: Array<IProjectCard> = [];

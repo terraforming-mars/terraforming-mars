@@ -10,8 +10,6 @@ import {SelectCard} from '../src/server/inputs/SelectCard';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 import {TestPlayer} from './TestPlayer';
 import {Deck} from '../src/server/cards/Deck';
-// import {Game} from '../src/server/Game';
-// import {Database} from '../src/server/database/Database';
 
 // Tests for drafting
 describe('drafting', () => {

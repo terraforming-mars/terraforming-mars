@@ -123,6 +123,7 @@ export class GameLoader implements IGameLoader {
   public async restoreGameAt(gameId: GameId, saveId: number): Promise<IGame> {
     const current = await this.getGame(gameId);
     if (current === undefined) {
+      console.error('GameLoader cannot find game ' + gameId);
       throw new Error('Cannot find game');
     }
     const currentSaveId = current.lastSaveId;

@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Size} from '../../../common/cards/render/Size';

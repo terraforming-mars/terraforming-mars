@@ -40,7 +40,9 @@ export class VenusOrbitalSurvey extends Card implements IActionCard {
     player.game.defer(new DrawCards(player, 2).andThen((cards) => {
       const message = '${0} revealed ${1} and ${2}';
       player.game.log(message, (b) => {
-        b.player(player).card(cards[0]).card(cards[1]);
+        b.player(player)
+          .card(cards[0], {tags: true})
+          .card(cards[1], {tags: true});
       });
 
       const venus = cards.filter(isVenus);

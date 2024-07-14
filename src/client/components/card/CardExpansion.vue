@@ -1,18 +1,13 @@
 <template>
   <div :class="templateClasses()">
     <div :class="iconClasses(expansion)"></div>
-    <template v-for="x in compatibility">
-      <template v-if="x !== expansion">
-        <div :class="iconClasses(x)"></div>
-      </template>
-    </template>
+    <div v-for="module in modules()" :class="iconClasses(module)" :key="module"></div>
   </div>
 </template>
 <script lang="ts">
 
 import Vue from 'vue';
 import {GameModule} from '@/common/cards/GameModule';
-import {getPreferences} from '@/client/utils/PreferencesManager';
 
 const MODULE_TO_CSS: Omit<Record<GameModule, string>, 'base'> = {
   corpera: 'corporate-icon',
@@ -52,10 +47,13 @@ export default Vue.extend({
     },
   },
   methods: {
-    iconClasses(ex: GameModule): string {
+    modules(): ReadonlyArray<GameModule> {
+      return this.compatibility.filter((e) => e !== this.expansion);
+    },
+    iconClasses(module: GameModule): string {
       const classes = ['card-expansion, project-icon'];
-      if (ex !== 'base') {
-        classes.push(MODULE_TO_CSS[ex]);
+      if (module !== 'base') {
+        classes.push(MODULE_TO_CSS[module]);
       }
       return classes.join(' ');
     },

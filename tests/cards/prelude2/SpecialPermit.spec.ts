@@ -12,7 +12,7 @@ describe('SpecialPermit', function() {
 
   beforeEach(function() {
     card = new SpecialPermit();
-    [/*game*/, player, player2] = testGame(2);
+    [/* game */, player, player2] = testGame(2);
   });
 
   it('Play', function() {

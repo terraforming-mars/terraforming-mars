@@ -31,31 +31,17 @@ export class VenusOrbitalSurvey extends Card implements IActionCard {
   }
 
   public canAct(player: IPlayer): boolean {
-    if (!player.game.projectDeck.canDraw(2)) {
-      this.warnings.add('deckTooSmall');
-    }
-    return true;
+    return player.game.projectDeck.canDraw(2);
   }
 
   public action(player: IPlayer) {
     const isVenus = (card: IProjectCard) => player.tags.cardHasTag(card, Tag.VENUS);
 
     player.game.defer(new DrawCards(player, 2).andThen((cards) => {
-      let message = '${0} revealed ';
-      if (cards.length === 0) {
-        message += 'no cards';
-      } else {
-        message += '${1}';
-        if (cards.length === 2) {
-          message += ' and ${2}';
-        }
-      }
+      const message = '${0} revealed ${1} and ${2}';
       player.game.log(message, (b) => {
-        b.player(player);
-        for (const card of cards) {
-          b.card(card);
-        }
-      }, {});
+        b.player(player).card(cards[0]).card(cards[1]);
+      });
 
       const venus = cards.filter(isVenus);
       if (venus.length > 0) {

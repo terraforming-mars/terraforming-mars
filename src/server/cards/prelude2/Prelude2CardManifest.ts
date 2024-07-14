@@ -22,6 +22,7 @@ import {SpaceLanes} from './SpaceLanes';
 import {Spire} from './Spire';
 import {SponsoringNation} from './SponsoringNation';
 import {SummitLogistics} from './SummitLogistics';
+import {VenusOrbitalSurvey} from './VenusOrbitalSurvey';
 
 export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
   module: 'prelude2',
@@ -46,7 +47,7 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     // [CardName.STRATOSPHERIC_EXPEDITION]: {Factory: StratosphericExpedition, compatibility: 'venus'},
     // [CardName.UNEXPECTED_APPLICATION]: {Factory: UnexpectedApplication, compatibility: 'venus'},
     // [CardName.VENUS_ALLIES]: {Factory: VenusAllies, compatibility: ['venus', 'colonies']},
-    // [CardName.VENUS_ORBITAL_SURVEY]: {Factory: VenusOrbitalSurvey, compatibility: 'venus'},
+    [CardName.VENUS_ORBITAL_SURVEY]: {Factory: VenusOrbitalSurvey, compatibility: 'venus'},
     // [CardName.VENUS_SHUTTLES]: {Factory: VenusShuttles, compatibility: 'venus'},
     // [CardName.VENUS_TRADE_HUB]: {Factory: VenusTradeHub, compatibility: 'colonies'},
     // [CardName.WG_PROJECT]: {Factory: WGProject, compatibility: 'turmoil'},

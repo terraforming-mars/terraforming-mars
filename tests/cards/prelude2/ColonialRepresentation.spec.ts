@@ -8,14 +8,13 @@ import {Luna} from '../../../src/server/colonies/Luna';
 import {Pluto} from '../../../src/server/colonies/Pluto';
 
 describe('ColonialRepresentation', function() {
-    let card: ColonialRepresentation; 
-    let player: TestPlayer; 
-    let game: IGame;
-    
-    beforeEach(() => {
-        card = new ColonialRepresentation();
-        [game, player] = testGame(1, {turmoilExtension: true});
-      });
+  let card: ColonialRepresentation;
+  let player: TestPlayer;
+  let game: IGame;    
+  beforeEach(() => {
+    card = new ColonialRepresentation();
+    [game, player] = testGame(1, {turmoilExtension: true});
+  });
 
   it('Influence check', function() {
     game.turmoil!.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
@@ -36,5 +35,4 @@ describe('ColonialRepresentation', function() {
     card.play(player);
     expect(player.megaCredits).eq(6);
   });
-
 });

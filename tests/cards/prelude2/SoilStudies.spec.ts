@@ -7,8 +7,8 @@ import {Luna} from '../../../src/server/colonies/Luna';
 import {testGame} from '../../TestGame';
 
 describe('SoilStudies', function() {
-  let card: SoilStudies; 
-  let player: TestPlayer; 
+  let card: SoilStudies;
+  let player: TestPlayer;
   let game: IGame;
 
   beforeEach(() => {

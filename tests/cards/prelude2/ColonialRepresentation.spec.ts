@@ -10,7 +10,7 @@ import {Pluto} from '../../../src/server/colonies/Pluto';
 describe('ColonialRepresentation', function() {
   let card: ColonialRepresentation;
   let player: TestPlayer;
-  let game: IGame;    
+  let game: IGame;
   beforeEach(() => {
     card = new ColonialRepresentation();
     [game, player] = testGame(1, {turmoilExtension: true});

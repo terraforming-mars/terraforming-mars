@@ -24,6 +24,7 @@ import {SponsoringNation} from './SponsoringNation';
 import {SummitLogistics} from './SummitLogistics';
 import {VenusOrbitalSurvey} from './VenusOrbitalSurvey';
 import {PlanetaryAlliance} from './PlanetaryAlliance';
+import {MainBeltAsteroids} from './MainBeltAsteroids';
 
 export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
   module: 'prelude2',
@@ -64,7 +65,7 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.FOCUSED_ORGANIZATION]: {Factory: FocusedOrganization},
     // [CardName.HIGH_CIRCLES]: {Factory: HighCircles, compatibility: 'turmoil'},
     // [CardName.INDUSTRIAL_COMPLEX]: {Factory: IndustrialComplex},
-    // [CardName.MAIN_BELT_ASTEROIDS]: {Factory: MainBeltAsteroids},
+    [CardName.MAIN_BELT_ASTEROIDS]: {Factory: MainBeltAsteroids},
     [CardName.NOBEL_PRIZE]: {Factory: NobelPrize},
     [CardName.OLD_MINING_COLONY]: {Factory: OldMiningColony, compatibility: 'colonies'},
     [CardName.PLANETARY_ALLIANCE]: {Factory: PlanetaryAlliance, compatibility: 'venus'},

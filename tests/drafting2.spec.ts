@@ -1,10 +1,64 @@
-import {CardName} from '../src/common/cards/CardName';
-import {cast} from './TestingUtils';
+// Tests for drafts that get reserialized partway through the game.
+
 import {expect} from 'chai';
-import {Game} from '../src/server/Game';
-import {SerializedGame} from '../src/server/SerializedGame';
-import {SelectCard} from '../src/server/inputs/SelectCard';
+import {CardName} from '../src/common/cards/CardName';
 import {Phase} from '../src/common/Phase';
+import {Database} from '../src/server/database/Database';
+import {Game} from '../src/server/Game';
+import {SelectCard} from '../src/server/inputs/SelectCard';
+import {SerializedGame} from '../src/server/SerializedGame';
+import {testGame} from './TestGame';
+import {InMemoryDatabase} from './testing/InMemoryDatabase';
+import {cast, finishGeneration} from './TestingUtils';
+import {restoreTestDatabase, setTestDatabase} from './utils/setup';
+
+// Tests for deserializing a game at the start of the drafting phase.
+describe('drafting and serialization', () => {
+  let db: InMemoryDatabase;
+
+  beforeEach(() => {
+    db = new InMemoryDatabase();
+    setTestDatabase(db);
+  });
+
+  afterEach(async () => {
+    restoreTestDatabase();
+  });
+
+  it('2 player - project draft', () => {
+    const game = Game.deserialize(stored as unknown as SerializedGame);
+    const [p1, p2] = game.getPlayers();
+    const p1w = cast(p1.getWaitingFor(), SelectCard);
+    const p2w = cast(p2.getWaitingFor(), SelectCard);
+    expect(game.phase).eq(Phase.DRAFTING);
+    expect(game.draftRound).eq(1);
+    expect(p1w.cards).has.length(4);
+    expect(p2w.cards).has.length(4);
+    expect(p1w.cards.map((c) => c.name)).to.have.members([CardName.FISH, CardName.MINE, CardName.OPTIMAL_AEROBRAKING, CardName.SABOTAGE]);
+    expect(p2w.cards.map((c) => c.name)).to.have.members([CardName.COMMERCIAL_DISTRICT, CardName.BIOMASS_COMBUSTORS, CardName.DOMED_CRATER, CardName.BUSINESS_CONTACTS]);
+  });
+
+  it('2 player - project draft - server reset between phases', async () => {
+    const [game, player1, player2] = testGame(2, {draftVariant: true});
+
+    game.generation = 1;
+    // This moves into draft phase
+    finishGeneration(game);
+
+    const selectCard = cast(player1.popWaitingFor(), SelectCard);
+    selectCard.process({type: 'card', cards: [selectCard.cards[0].name]});
+    const selectCard2 = cast(player2.popWaitingFor(), SelectCard);
+    selectCard2.process({type: 'card', cards: [selectCard2.cards[0].name]});
+
+    expect(game.draftRound).eq(2);
+
+    const serializedGame = await Database.getInstance().getGameVersion(game.id, game.lastSaveId - 1);
+    const game2 = Game.deserialize(serializedGame);
+
+    expect(game2.phase).eq(Phase.DRAFTING);
+    expect(game2.draftRound).eq(2);
+  });
+});
 
 const stored = {
   'activePlayer': 'p3c86909cda90',
@@ -722,6 +776,7 @@ const stored = {
         'Development Center',
         'Space Elevator',
       ],
+      'draftHand': [],
       'cardsInHand': [
         'Lake Marineris',
       ],
@@ -803,6 +858,7 @@ const stored = {
       ],
       'dealtPreludeCards': [],
       'dealtCeoCards': [],
+      'draftHand': [],
       'dealtProjectCards': [
         'Great Escarpment Consortium',
         'Building Industries',
@@ -891,20 +947,3 @@ const stored = {
   'unDraftedCards': [],
   'venusScaleLevel': 0,
 };
-
-
-// Tests for deserializing a game at the start of the drafting phase.
-describe('drafting2', () => {
-  it('2 player - project draft', () => {
-    const game = Game.deserialize(stored as unknown as SerializedGame);
-    const [p1, p2] = game.getPlayers();
-    const p1w = cast(p1.getWaitingFor(), SelectCard);
-    const p2w = cast(p2.getWaitingFor(), SelectCard);
-    expect(game.phase).eq(Phase.DRAFTING);
-    expect(game.draftRound).eq(1);
-    expect(p1w.cards).has.length(4);
-    expect(p2w.cards).has.length(4);
-    expect(p1w.cards.map((c) => c.name)).to.have.members([CardName.FISH, CardName.MINE, CardName.OPTIMAL_AEROBRAKING, CardName.SABOTAGE]);
-    expect(p2w.cards.map((c) => c.name)).to.have.members([CardName.COMMERCIAL_DISTRICT, CardName.BIOMASS_COMBUSTORS, CardName.DOMED_CRATER, CardName.BUSINESS_CONTACTS]);
-  });
-});

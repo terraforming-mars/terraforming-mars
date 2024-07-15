@@ -35,12 +35,21 @@ export abstract class Draft {
   /** Start an entire draft iteration (or draft round). Saves the game, sets all the cards up, and asks players to make their first choice. */
   // TODO(kberg): Create a startDraft() which draws, and a continueDraft() which uses the cards a player is handed.
   public startDraft() {
+    // Fixes #6810. Clearly there's a structural problem elsewhere, but
+    // let's start here.
+    for (const player of this.game.getPlayers()) {
+      player.needsToDraft = true;
+    }
+
     // Might be better to save the game after the draft, given how draft state is
     // restored now.
+    //
+    // (And how now the hack above is included.)
     this.game.save();
     this._startDraft();
   }
 
+  /* Internal implementation of starting a draft round, compatbile with both an active game and a restored game. */
   private _startDraft() {
     const arrays: Array<Array<IProjectCard>> = [];
     if (this.game.draftRound === 1) {
@@ -131,7 +140,7 @@ export abstract class Draft {
     player.needsToDraft = false;
 
     // If anybody still needs to draft, stop here.
-    if (this.game.getPlayers().some((p) => p.needsToDraft === true)) {
+    if (this.game.getPlayers().some((p) => p.needsToDraft)) {
       this.game.save();
       return;
     }

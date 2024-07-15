@@ -15,7 +15,6 @@
     "html-escaper": "^3.0.3",
     "mnemonist": "^0.39.3",
     "prom-client": "^14.0.1",
-    "run": "^1.5.0",
     "vti": "^0.1.7",
     "vue": "2.6.10",
     "vue-template-compiler": "2.6.10",

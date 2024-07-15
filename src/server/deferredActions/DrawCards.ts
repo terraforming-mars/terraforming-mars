@@ -29,7 +29,7 @@ export class DrawCards extends DeferredAction<ReadonlyArray<IProjectCard>> {
   public execute(): undefined {
     this.player.game.resettable = false;
     const game = this.player.game;
-    const cards = game.projectDeck.drawByCondition(game, this.count, (card) => {
+    const cards = game.projectDeck.drawByConditionLegacy(game, this.count, (card) => {
       if (this.options.resource !== undefined && this.options.resource !== card.resourceType) {
         return false;
       }

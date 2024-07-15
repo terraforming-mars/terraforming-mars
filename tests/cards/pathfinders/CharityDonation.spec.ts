@@ -22,6 +22,19 @@ describe('CharityDonation', function() {
     [game, player1, player2, player3] = testGame(3);
   });
 
+  const canPlayRuns = [
+    {deck: 2, expected: false},
+    {deck: 3, expected: false},
+    {deck: 4, expected: true},
+  ] as const;
+  for (const run of canPlayRuns) {
+    it('canPlay: ' + JSON.stringify(run), () => {
+      game.projectDeck.drawPile.length = run.deck;
+
+      expect(card.canPlay(player1)).eq(run.expected);
+    });
+  }
+
   it('play', function() {
     const acquiredCompany = new AcquiredCompany();
     const beamFromAThoriumAsteroid = new BeamFromAThoriumAsteroid();

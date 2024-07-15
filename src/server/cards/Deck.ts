@@ -57,13 +57,6 @@ export class Deck<T extends ICard> {
     }
   }
 
-  /**
-   * @deprecated use draw or drawOrThrow
-   */
-  public drawLegacy(logger: Logger, source: 'top' | 'bottom' = 'top'): T {
-    return this.drawOrThrow(logger, source);
-  }
-
   public draw(logger: Logger, source: 'top' | 'bottom' = 'top'): T | undefined {
     this.shuffleIfNecessary(logger);
     const card = source === 'top' ? this.drawPile.pop() : this.drawPile.shift();
@@ -114,7 +107,14 @@ export class Deck<T extends ICard> {
     return card;
   }
 
-  public drawByCondition(logger: Logger, total: number, include: (card: T) => boolean) {
+  /**
+   * @deprecated use drawByConditionOrThrow, or create a safer version of drawByCondition
+   */
+  public drawByConditionLegacy(logger: Logger, total: number, include: (card: T) => boolean) {
+    return this.drawByConditionOrThrow(logger, total, include);
+  }
+
+  public drawByConditionOrThrow(logger: Logger, total: number, include: (card: T) => boolean) {
     const result: Array<T> = [];
     const discardedCards = new Set<CardName>();
 
@@ -123,7 +123,7 @@ export class Deck<T extends ICard> {
         logger.log(`discarded every ${this.type} card without a match`);
         break;
       }
-      const projectCard = this.drawLegacy(logger);
+      const projectCard = this.drawOrThrow(logger);
       if (include(projectCard)) {
         result.push(projectCard);
       } else {

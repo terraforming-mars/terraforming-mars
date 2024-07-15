@@ -17,7 +17,7 @@ export class SoilStudies extends Card {
 
       behavior: {
         stock: {
-          megacredits: {
+          plants: {
             tag: [Tag.VENUS, Tag.PLANT],
             colonies: {colonies: {}},
           },

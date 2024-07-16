@@ -14,8 +14,8 @@
 
     "L1 Trade Terminal": "L1 Handelsterminal",
     "Effect: When you trade, first increase that colony tile track 2 steps.": "EFFEKT: Wenn du Handel treibst, erhöhe zuerst die Leiste der Kolonieplättchen um 2 Schritte.",
-    "Add a resource to 3 different cards.": "Füge eine Ressource zu 3 verschiedenen Karten hinzu.",
-
+    "Add a resource to 3 different cards that already have resources.": "Füge bis zu 3 verschiedenen Karten, auf der bereits mindestens 1 Ressource ist, 1 weitere Ressource hinzu.",
+    
     "Red Appeasement": "Rote Beschwichtigungspolitik",
     "Requires that Reds are ruling or that you have 2 delegates there, AND THAT NO OTHER PLAYER HAS PASSED.": "Benötigt, dass die ROTEN regieren oder dass du 2 Delegierte dort hast, und dass kein anderer Spieler gepasst hat.",
     "Increase M€ production 2 steps. This counts as passing. You get no other turns this generation.": "Erhöhe die M€-Produktion um 2. Dies zählt als Passen. Du bekommst keine weiteren Züge in dieser Generation.",
@@ -28,6 +28,10 @@
     "Requires that Scientists are ruling or that you have 2 delegates there. Gain 1 M€ per planet tag and colony you have. Draw 2 cards.": "Benötigt, dass FORSCHUNG regieren oder dass du 2 Delegierte dort hast. Erhalte 1 M€ pro Planetensymbol und Kolonie, die du besitzt. Ziehe 2 Karten.",
     "FAN EXPANSION NOTE: This includes Mars but not The Moon.": "ANMERKUNG ZUR FANERWEITERUNG: Dies beinhaltet den Mars, aber nicht den Mond.",
 
+    "Venus Orbital Survey": "Venus Orbitale Vermessung",
+    "Action: Reveal the top 2 cards, take any venus cards to hand for free. Any other card you either buy or discard": "AKTION: Schaue Dir die obersten 2 Karten an, nehme eine beliebige Venuskarte kostenlos auf die Hand. Jede andere Karte kannst du entweder kaufen oder abwerfen.",
+
+    
     "Psychrophiles": "Psychrophilen",
     "Action: Add 1 microbe to this card.": "AKTION: Füge dieser Karte 1 Mikrobe hinzu.",
     "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "EFFEKT: Wenn du eine Pflanzenkarte bezahlst, darfst Du Mikroben von dieser Karte für je 2 M€ verwenden.",

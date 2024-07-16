@@ -7,6 +7,12 @@
     "Atmospheric Enhancers": "Atmosphärische Verstärker",
     "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "Effekt: Erhöhe entweder die Temperatur oder den Sauerstoffsgehalt oder die Venus um 2. Decke Karten vom Stapel auf, bis du 2 Karten mit Schwebersymbol aufgedeckt hast. Nimm diese 2 Karten auf die Hand und wirf den Rest ab.",
 
+    "Board of Directors": "Direktorium",
+    "ACTION:": "AKTION:",
+    "DRAW 1 PRELUDE CARD: EITHER DISCARD IT, OR PAY 12 M€ AND REMOVE 1 DIRECTOR RESOURCE HERE TO PLAY IT.": "Ziehe 1 Präludium-Karte: Entweder du wirfst sie ab, oder du zahlst 12 M€ und entfernst 1 Direktorressource, um sie auszuspielen.",
+    "This is not the director icon yet.": "Dies ist noch nicht das Symbol des Direktors.",
+    "Add 4 director resources here.": "Füge hier 4 Direktor-Ressourcen hinzu.",
+    
     "Colony Trade Hub": "Kolonie Handelszentrum",
     "Increase your energy production 1 step. Gain 2 titanium": "Erhöhe deine Energieproduktion um 1. Erhalte 3 Titan.",
     "Effect: When any colony is placed, gain 2 M€.": "EFFEKT: Wenn eine Kolonie platziert wird, erhalte 2 M€.",
@@ -20,15 +26,21 @@
     "Draw 1 card and gain 1 standard resource.": "Ziehe 1 Karte und erhalte 1 Standardressource.",
 
     "Nobel Prize": "Nobelpreis",
-    "Gain 2 M€. Draw 2 cards with requirements.": "Erhalte 2 M€. Ziehe 2 Karten mit Vorausetzungen.",
+    "Gain 5 M€. Draw 2 cards with requirements.": "Erhalte 5 M€. Ziehe 2 Karten mit Vorausetzungen.",
 
-    "Space Corridors": "Weltraum-Korridore",
+    "Planetary Alliance": "Planetarische Allianz",
+    "Raise your TR 2 steps. Draw 1 Jovian card and 1 Venus card.": "Erhöhe deinen TW um 2. Ziehe 1 Jupiter-Karte und 1 Venus-Karte.",
+
+    "Space Lanes": "Weltraum-Linien",
     "Effect: When you play a Jovian, Earth, or Venus tag, you pay 2 M€ less for it.": "EFFEKT: Wenn du ein Jupiter-, Erd- oder Venus-Symbol spielst, zahlst du 2 M€ weniger dafür.",
 
     "Old Mining Colony": "Alte Bergbaukolonie",
     "Increase your titanium production 1 step. Place 1 colony. Discard 1 card.": "Erhöhe deine Titan-Produktion um 1. Platziere 1 Kolonie. Werfe 1 Karte ab.",
 
 
+    "Strategic Base Planning": "Strategische Basisplannung",
+    "Pay 3M€. Place a city. Place a colony.": "Zahle 3 M€. Errichte eine Kolonie. Platziere ein Stadtplättchen.",
+    
     "Anti-desertification Techniques": "Anti-Wüstenbildungstechniken",
     "Gain 3 M€. Increase your plant production 1 step and your steel production 1 step.": "Erhöhe deine Pfanzen- und Stahl-Produktion um 1. Erhalte 3 M€.",
 

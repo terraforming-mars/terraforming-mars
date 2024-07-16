@@ -409,6 +409,7 @@
     "${0} blackmailed the neutral player and was paid 10 M€.": "",
     "${0} blackmailed ${1} who lost 2 corruption.": "",
     "${0} blackmailed ${1} and was paid 10 M€.": "",
+    "${0} sued ${1} who had ${2} M€.": "",
 
     "${0} searched for ${1} tags": "${0} 플레이어가 ${1} 태그가 있는 카드를 찾음",
     "earth": "지구",

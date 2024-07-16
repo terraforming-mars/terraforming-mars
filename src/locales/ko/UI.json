@@ -6,6 +6,7 @@
     "Solo": "나 홀로 화성에",
     "Expansions": "확장",
     "Options": "선택사항",
+    "Promo": "프로모",
     "Promos": "프로모",
     "Starting Corporations": "장씩 초기 기업 카드 분배",
     "Starting CEOs": "장씩 초기 경영인 카드 분배",
@@ -616,12 +617,14 @@
     "Add 1 microbe to ${0}": "‘${0}’ 카드에 미생물 자원 1개 추가",
     "Add 2 microbe to ${0}": "‘${0}’ 카드에 미생물 자원 2개 추가",
     "Add 3 microbe to ${0}": "‘${0}’ 카드에 미생물 자원 3개 추가",
+    "Add ${0} microbes to ${1}": "‘${1}’ 카드에 미생물 자원 ${0}개 추가",
     "Add 2 microbes to Regolith Eaters": "‘표토 섭식 미생물’ 카드에 미생물 자원 2개 추가",
     "Add 2 microbes to Rust Eating Bacteria": "‘Rust Eating Bacteria’ 카드에 미생물 자원 2개 추가",
     "Add 2 microbes to Nitrite Reducing Bacteria": "‘질산환원균’ 카드에 미생물 자원 2개 추가",
     "Add 2 microbes to Thermophile": "‘호열성 미생물’ 카드에 미생물 자원 2개 추가",
     "Add 2 microbes to Darkside Incubation Plant": "‘Darkside Incubation Plant’ 카드에 미생물 자원 2개 추가",
 
+    "Add 2 microbes to Extremophile": "‘극한성 생물’ 카드에 미생물 자원 2개 추가",
     "Add 3 microbes to a card": "이 카드에 미생물 자원 3개 추가",
     "Add 3 microbes to ${0}": "‘${0}’ 카드에 미생물 자원 3개 추가",
     "Add 3 microbes to Psychrophiles": "‘호냉성 미생물’ 카드에 미생물 자원 3개 추가",
@@ -1118,6 +1121,7 @@
     "Why?": "이유?",
 
     "How to pay?": "지불 방법 선택",
+    "Some ${0} are unavailable here in reserve for the project card.": "일부 ${0} 자원은 프로젝트 카드를 위해 예비로 사용할 수 없습니다.",
     "Some titanium are unavailable here in reserve for the project card.": "일부 티타늄 자원은 프로젝트 카드를 위해 예비로 사용할 수 없습니다.",
     "Some steel are unavailable here in reserve for the project card.": "일부 강철 자원은 프로젝트 카드를 위해 예비로 사용할 수 없습니다.",
     "Must select a space": "위치를 반드시 선택해야 함",
@@ -1175,6 +1179,7 @@
     "wild": "만능",
     "city-count": "도시 수",
     "colony-count": "개척기지 수",
+    "Influence-Count": "영향력 수치",
     "Excavation-Count": "발굴 수",
     "Corruption-Count": "Corruption 수",
     "nothing": "없음",
@@ -1285,7 +1290,6 @@
 
 
     "Official": "공식",
-    "Promo": "프로모",
     "Star Wars": "스타워즈",
     "Underworld (β)": "지하 세계 (β)",
     "ceo": "경영인",

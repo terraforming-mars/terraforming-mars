@@ -9,6 +9,8 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {message} from '../../logs/MessageBuilder';
 import {PreludesExpansion} from '../../preludes/PreludesExpansion';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {LogHelper} from '../../LogHelper';
+import {IPreludeCard} from '../prelude/IPreludeCard';
 
 export class BoardOfDirectors extends PreludeCard implements IActionCard {
   constructor() {
@@ -35,12 +37,22 @@ export class BoardOfDirectors extends PreludeCard implements IActionCard {
   }
 
   public canAct(player: IPlayer) {
+    if (!player.canAfford(12)) {
+      this.warnings.add('cannotAffordBoardOfDirectors');
+    }
     return this.resourceCount > 0 && player.game.preludeDeck.canDraw(1);
+  }
+
+  private discard(player: IPlayer, prelude: IPreludeCard) {
+    player.game.log('${0} drew and discarded a prelude', (b) => b.player(player));
+    player.game.preludeDeck.discard(prelude);
   }
 
   public action(player: IPlayer) {
     const game = player.game;
     const prelude = game.preludeDeck.drawOrThrow(player.game);
+
+    LogHelper.logDrawnCards(player, [prelude], true);
 
     if (player.canAfford(12)) {
       return new SelectCard(
@@ -58,13 +70,14 @@ export class BoardOfDirectors extends PreludeCard implements IActionCard {
             return undefined;
           });
         } else {
-          game.preludeDeck.discard(prelude);
+          this.discard(player, prelude);
         }
         return undefined;
       });
+    } else {
+      this.discard(player, prelude);
     }
 
-    game.preludeDeck.discard(prelude);
     return undefined;
   }
 }

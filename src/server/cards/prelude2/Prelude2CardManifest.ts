@@ -31,6 +31,7 @@ import {StratosphericExpedition} from './StratosphericExpedition';
 import {SummitLogistics} from './SummitLogistics';
 import {UnexpectedApplication} from './UnexpectedApplication';
 import {VenusOrbitalSurvey} from './VenusOrbitalSurvey';
+import {PlanetaryAlliance} from './PlanetaryAlliance';
 
 export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
   module: 'prelude2',
@@ -74,7 +75,7 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     // [CardName.MAIN_BELT_ASTEROIDS]: {Factory: MainBeltAsteroids},
     [CardName.NOBEL_PRIZE]: {Factory: NobelPrize},
     [CardName.OLD_MINING_COLONY]: {Factory: OldMiningColony, compatibility: 'colonies'},
-    // [CardName.PLANETARY_ALLIANCE]: {Factory: PlanetaryAlliance, compatibility: 'venus'},
+    [CardName.PLANETARY_ALLIANCE]: {Factory: PlanetaryAlliance, compatibility: 'venus'},
     // [CardName.PRESERVATION_PROGRAM]: {Factory: PreservationProgram}, // Make turmoil reds compatible
     // [CardName.PROJECT_EDEN]: {Factory: ProjectEden}, // Just difficult, requires ordering.
     // [CardName.RECESSION]: {Factory: Recession}, // Everybody loses money. Oof.

@@ -91,4 +91,15 @@ describe('SearchForLife', function() {
     expect(player.megaCredits).to.eq(0);
     expect(card.resourceCount).eq(1);
   });
+
+  it('Cannot act when the deck is empty', () => {
+    player.megaCredits = 1;
+    game.projectDeck.drawPile.length = 1;
+
+    expect(card.canAct(player)).is.true;
+
+    game.projectDeck.drawPile.length = 0;
+
+    expect(card.canAct(player)).is.false;
+  });
 });

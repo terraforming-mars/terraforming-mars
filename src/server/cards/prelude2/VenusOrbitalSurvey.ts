@@ -24,7 +24,7 @@ export class VenusOrbitalSurvey extends Card implements IActionCard {
         cardNumber: 'P88',
         renderData: CardRenderer.builder((b) => {
           b.action(undefined, (ab) =>
-            ab.empty().startAction.empty()).text('Action: Reveal the top 2 cards, take any venus cards to hand for free. Any other card you either buy or discard', Size.TINY, true);
+            ab.empty().startAction.empty()).br.text('Action: Reveal the top 2 cards, take any venus cards to hand for free. Any other card you either buy or discard', Size.SMALL, true);
         }),
       },
     });

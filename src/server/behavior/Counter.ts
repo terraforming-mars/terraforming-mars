@@ -1,12 +1,11 @@
+import * as utils from '../../common/utils/utils'; // Since there's already a sum variable.
 import {Units} from '../../common/Units';
 import {TileType} from '../../common/TileType';
 import {ICard} from '../cards/ICard';
 import {IPlayer} from '../IPlayer';
 import {Countable, CountableUnits} from './Countable';
-import {hasIntersection} from '../../common/utils/utils';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {CardResource} from '../../common/CardResource';
-import * as utils from '../../common/utils/utils'; // Since there's already a sum variable.
 
 /**
  * Counts things in game state.
@@ -84,14 +83,14 @@ export class Counter {
       if (Array.isArray(tag)) { // Multiple tags
         // These two error cases could be coded up, but they don't have a case just yet, and if they do come
         // up, better for the code to error than silently ignore it.
-        if (this.cardIsUnplayed && hasIntersection(tag, card.tags)) {
-          throw new Error(`Not supporting the case counting tags ${tag} when played card tags are ${card.tags}`);
-        }
         if (countable.others === true) {
           throw new Error('Not counting others\' multiple Tags.');
         }
 
         sum += player.tags.multipleCount(tag);
+        if (this.cardIsUnplayed) { // And include the card itself if it isn't already on the tableau.
+          sum += player.tags.cardTagCount(card, tag);
+        }
       } else { // Single tag
         if (countable.others !== true) { // Just count player's own tags.
           sum += player.tags.count(tag, context === 'vps' ? 'raw' : context);

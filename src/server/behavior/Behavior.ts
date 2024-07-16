@@ -32,6 +32,9 @@ export type Spend = Units & {
 
   /** corruption from your personal supply. */
   corruption: number,
+
+  /** discard cards from your hand */
+  cards: number,
 }
 
 /** A set of steps that an action can perform in any specific order. */

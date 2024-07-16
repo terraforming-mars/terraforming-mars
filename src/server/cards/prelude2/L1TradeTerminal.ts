@@ -48,7 +48,7 @@ export class L1TradeTerminal extends Card {
       return undefined;
     }
 
-    return new SelectCard('Select 3 cards to gain 1 resource each', 'Add Resources', cards, {min: 3, max: 3})
+    return new SelectCard('Select up to 3 cards to gain 1 resource each', 'Add Resources', cards, {min: 0, max: 3})
       .andThen((cards) => {
         addResources(cards);
         return undefined;

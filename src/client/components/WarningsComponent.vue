@@ -24,6 +24,7 @@ const descriptions: Record<Warning, string> = {
   'preludeFizzle': 'This prelude is not playable, so you will discard it and gain 15 M€.',
   'underworldMustExcavateEnergy': 'You will be limited to excavating a space that gives 1 energy production.',
   'deckTooSmall': 'There are not enough cards to complete this action. You will draw fewer cards than expected.',
+  'cannotAffordBoardOfDirectors': 'Warning: you do not have the 12 M€ required to act on a prelude.',
 };
 
 export default Vue.extend({

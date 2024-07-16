@@ -13,7 +13,6 @@ export class CyberiaSystems extends RoboticWorkforceBase {
     super({
       type: CardType.AUTOMATED,
       name: CardName.CYBERIA_SYSTEMS,
-      tags: [Tag.BUILDING],
       cost: 16,
 
       behavior: {production: {steel: 1}},

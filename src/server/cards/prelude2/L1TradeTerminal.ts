@@ -35,10 +35,6 @@ export class L1TradeTerminal extends Card {
     });
   }
 
-  public override bespokeCanPlay(player: IPlayer): boolean {
-    return player.getCardsWithResources().length >= 3;
-  }
-
   public override bespokePlay(player: IPlayer): PlayerInput | undefined {
     function addResources(cards: ReadonlyArray<ICard>): void {
       for (const card of cards) {

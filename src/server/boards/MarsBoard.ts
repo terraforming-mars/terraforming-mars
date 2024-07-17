@@ -45,6 +45,7 @@ export class MarsBoard extends Board {
     case 'ocean': return this.getAvailableSpacesForOcean(player);
     case 'greenery': return this.getAvailableSpacesForGreenery(player, canAffordOptions);
     case 'city': return this.getAvailableSpacesForCity(player, canAffordOptions);
+    case 'away-from-cities': return this.getSpacesAwayFromCities(player, canAffordOptions);
     case 'isolated': return this.getAvailableIsolatedSpaces(player, canAffordOptions);
     case 'volcanic': return this.getAvailableVolcanicSpaces(player, canAffordOptions);
     case 'upgradeable-ocean': return this.getOceanSpaces({upgradedOceans: false});
@@ -90,6 +91,14 @@ export class MarsBoard extends Board {
       return (spacesNextToMySpaces.length > 0) ? spacesNextToMySpaces : spacesOnLand;
     }
     // A city cannot be adjacent to another city
+    return spacesOnLand.filter(
+      (space) => this.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)) === false,
+    );
+  }
+
+  public getSpacesAwayFromCities(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
+    const spacesOnLand = this.getAvailableSpacesOnLand(player, canAffordOptions);
+
     return spacesOnLand.filter(
       (space) => this.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)) === false,
     );

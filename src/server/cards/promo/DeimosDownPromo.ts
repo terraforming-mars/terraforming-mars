@@ -34,7 +34,7 @@ export class DeimosDownPromo extends Card implements IProjectCard {
         removeAnyPlants: 6,
         tile: {
           type: TileType.DEIMOS_DOWN,
-          on: 'city',
+          on: 'away-from-cities',
           adjacencyBonus: adjacencyBonus,
         },
       },

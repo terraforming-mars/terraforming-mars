@@ -1,9 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {Priority} from '../../deferredActions/Priority';
-import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
@@ -17,6 +14,7 @@ export class UnexpectedApplication extends Card implements IProjectCard {
       cost: 4,
 
       behavior: {
+        spend: {cards: 1},
         global: {venus: 1},
       },
 
@@ -28,12 +26,5 @@ export class UnexpectedApplication extends Card implements IProjectCard {
         description: 'Discard 1 card to terraform Venus 1 step.',
       },
     });
-  }
-  public override bespokeCanPlay(player: IPlayer) {
-    return player.cardsInHand.length > 0;
-  }
-  public override bespokePlay(player: IPlayer) {
-    player.game.defer(new DiscardCards(player, 1), Priority.DISCARD_CARDS);
-    return undefined;
   }
 }

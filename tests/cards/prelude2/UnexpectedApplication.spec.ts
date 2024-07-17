@@ -29,13 +29,35 @@ describe('UnexpectedApplication', function() {
     expect(card.canPlay(player)).is.true;
 
     player.playCard(card);
-    const discardCard = cast(game.deferredActions.pop()!.execute(), SelectCard<IProjectCard>);
+    const selectCard = cast(game.deferredActions.pop()!.execute(), SelectCard<IProjectCard>);
 
-    // No SponsoredAcademies itself suggested to discard
-    expect(discardCard.cards.filter((c) => c.name === card.name)).has.lengthOf(0);
+    expect(selectCard.cards).to.not.include(card);
 
-    discardCard.cb([housePrinting]);
+    selectCard.cb([housePrinting]);
     runAllActions(game); // Draw cards
-    expect(player.cardsInHand).has.lengthOf(1);
+    expect(player.cardsInHand).does.not.contain(housePrinting);
+    expect(game.projectDeck.discardPile).contains(housePrinting);
+  });
+
+  it('Does not expect itself to be the discarded card', function() {
+    player.cardsInHand.push(card);
+
+    expect(card.canPlay(player)).is.false;
+
+    player.cardsInHand.push(tardigrades);
+
+    expect(card.canPlay(player)).is.true;
+
+    player.playCard(card);
+    const selectCard = cast(game.deferredActions.pop()!.execute(), SelectCard<IProjectCard>);
+
+    expect(selectCard.cards).to.not.include(card);
+
+    selectCard.cb([tardigrades]);
+
+    runAllActions(game);
+
+    expect(player.cardsInHand).does.not.contain(tardigrades);
+    expect(game.projectDeck.discardPile).contains(tardigrades);
   });
 });

@@ -7,6 +7,12 @@
     "Atmospheric Enhancers": "",
     "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "기온, 산소 농도, 금성 지표 중 하나를 골라 2단계 상승. 부양체 자원이 그려진 카드 2장이 공개될 때까지 더미에서 카드를 공개. 손으로 그 카드 2장을 가져오고 나머지는 버림.",
 
+    "Board of Directors": "",
+    "ACTION:": "행동:",
+    "DRAW 1 PRELUDE CARD: EITHER DISCARD IT, OR PAY 12 M€ AND REMOVE 1 DIRECTOR RESOURCE HERE TO PLAY IT.": "서곡 카드 1장 획득. 그 카드를 버리거나 12 M€을 지불하고 이 카드에서 director 자원 1개를 제거하여 그 카드를 추진.",
+    "This is not the director icon yet.": "아직 director 아이콘이 없음.",
+    "Add 4 director resources here.": "이 카드에 director 자원 4개 추가.",
+
     "Colony Trade Hub": "",
     "Increase your energy production 1 step. Gain 2 titanium": "에너지 생산력 1 증가. 티타늄 자원 3개 획득.",
     "Effect: When any colony is placed, gain 2 M€.": "지속 효과: 아무 개척기지가 배치될 때마다, 자신은 2 M€ 획득.",
@@ -20,13 +26,20 @@
     "Draw 1 card and gain 1 standard resource.": "카드 1장 획득. 기본 자원 1개 획득.",
 
     "Nobel Prize": "",
-    "Gain 2 M€. Draw 2 cards with requirements.": "2 M€ 획득. 추진 조건이 있는 카드 2장 획득.",
+    "Gain 5 M€. Draw 2 cards with requirements.": "5 M€ 획득. 추진 조건이 있는 카드 2장 획득.",
+
+    "Planetary Alliance": "",
+    "Raise your TR 2 steps. Draw 1 Jovian card and 1 Venus card.": "테라포밍 등급 2 TR 상승. 목성 카드 1장과 금성 카드 1장 획득.",
+
+    "Space Lanes": "",
+    "Effect: When you play a Jovian, Earth, or Venus tag, you pay 2 M€ less for it.": "지속 효과: 금성, 지구, 목성 카드 사용 시, 2 M€ 할인.",
 
     "Old Mining Colony": "",
     "Increase your titanium production 1 step. Place 1 colony. Discard 1 card.": "티타늄 생산력 1 증가. 개척기지 1개 배치. 카드 1장 버림.",
 
-    "Space Corridors": "",
-    "Effect: When you play a Jovian, Earth, or Venus tag, you pay 2 M€ less for it.": "지속 효과: 금성, 지구, 목성 카드 사용 시, 2 M€ 할인.",
+
+    "Strategic Base Planning": "",
+    "Pay 3M€. Place a city. Place a colony.": "3 M€ 지불. 도시 1개 배치. 개척지기 1개 배치.",
 
     "Anti-desertification Techniques": "",
     "Gain 3 M€. Increase your plant production 1 step and your steel production 1 step.": "3 M€ 획득. 식물 생산력 1 증가. 강철 생산력 1 증가.",
@@ -53,6 +66,7 @@
 
     "New Partner": "새로운 파트너",
     "Raise your M€ production 1 step. Immediately draw 2 prelude cards. Play 1 of them, and discard the other.": "메가크레딧 생산력 1 증가. 서곡 카드 2장을 뽑아 1장은 사용하고 나머지는 버림.",
+
 
     "Allied Bank": "연합 은행",
     "Increase your M€ production 4 steps. Gain 3 M€.": "메가크레딧 생산력 4 증가. 3 M€ 획득.",

@@ -66,7 +66,7 @@
     "The id of this game is ${0}": "게임 고유 번호는 ${0} 입니다.",
     "Good luck ${0}!": "${0}, 행운을 빕니다!",
     "Final greenery placement": "최종 녹지 타일 배치",
-    "Final greenery phase is skipped since you did not complete the win condition.": "",
+    "Final greenery phase is skipped since you did not complete the win condition.": "승리 조건을 충족하지 않아, 최종 녹지 타일 배치 단계를 건너뜁니다.",
     "This game id was ${0}": "게임 고유 번호는 ${0} 입니다.",
 
     "${0} gained ${1}": "${0} 플레이어가 ${1} 획득",

@@ -99,7 +99,7 @@ describe('Gaia', function() {
 
   it('Can only act once per game', function() {
     card.action(player);
-    game.deferredActions.runAll(() => {});
+    runAllActions(game);
 
     forceGenerationEnd(game);
     expect(card.isDisabled).is.true;

@@ -102,7 +102,7 @@ describe('Reds', function() {
 
     expect(redsPolicy.canAct(player)).to.be.true;
     redsPolicy.action(player);
-    game.deferredActions.runAll(() => {});
+    runAllActions(game);
 
     const options = cast(player.getWaitingFor(), OrOptions);
 

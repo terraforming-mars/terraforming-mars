@@ -235,7 +235,7 @@ describe('Merger', () => {
     const handSize = player.cardsInHand.length;
 
     player.playAdditionalCorporationCard(new Teractor());
-    game.deferredActions.runAll(() => {});
+    runAllActions(game);
     expect(player.cardsInHand.length).to.eq(handSize + 1);
   });
 

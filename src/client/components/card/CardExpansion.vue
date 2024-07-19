@@ -51,7 +51,7 @@ export default Vue.extend({
       return this.compatibility.filter((e) => e !== this.expansion);
     },
     iconClasses(module: GameModule): string {
-      const classes = ['card-expansion, project-icon'];
+      const classes = ['card-expansion', 'project-icon'];
       if (module !== 'base') {
         classes.push(MODULE_TO_CSS[module]);
       }

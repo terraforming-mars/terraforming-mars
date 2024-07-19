@@ -299,10 +299,20 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 
 .prelude2-icon:after {
-  &:extend(.prelude-icon:after);
-  background-image: url("./assets/prelude2/prelude2-triangle16.png");
-  transform: rotate(0deg);
-  background-position: bottom 4px right 3px;
+  position: absolute;
+  border: 1px solid black;
+  font-family: Prototype;
+  background-color: rgb(235, 118, 171);
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 16px;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  color: white;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+  content: "2";
 }
 
 .venus-icon:after {

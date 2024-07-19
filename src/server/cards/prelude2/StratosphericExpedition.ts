@@ -22,7 +22,7 @@ export class StratosphericExpedition extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'P84',
         renderData: CardRenderer.builder((b) => {
-          b.resource(CardResource.FLOATER, 2).cards(2, {secondaryTag: Tag.VENUS});
+          b.resource(CardResource.FLOATER, 2).asterix().cards(2, {secondaryTag: Tag.VENUS});
         }),
         description: 'Add two floaters to ANY CARD. Draw 2 Venus cards.',
       },

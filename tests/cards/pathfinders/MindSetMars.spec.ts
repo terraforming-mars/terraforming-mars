@@ -62,12 +62,12 @@ describe('MindSetMars', function() {
 
     turmoil.delegateReserve.clear();
     card.action(player);
-    expect(game.deferredActions.length).eq(0);
+    expect(game.deferredActions).has.length(0);
 
     turmoil.delegateReserve.clear();
     turmoil.delegateReserve.add(player, 3);
     cast(card.action(player), SelectOption).cb(undefined);
-    expect(game.deferredActions.length).eq(1);
+    expect(game.deferredActions).has.length(1);
     const sendDelegate = cast(game.deferredActions.pop(), SendDelegateToArea);
     assertAddDelegateAction(player, sendDelegate.execute());
     expect(card.resourceCount).eq(1);
@@ -78,7 +78,7 @@ describe('MindSetMars', function() {
 
     turmoil.delegateReserve.clear();
     cast(card.action(player), SelectOption).cb(undefined);
-    expect(game.deferredActions.length).eq(1);
+    expect(game.deferredActions).has.length(1);
     const placeCityTile = cast(game.deferredActions.pop(), PlaceCityTile);
     assertPlaceCity(player, placeCityTile.execute());
 
@@ -95,7 +95,7 @@ describe('MindSetMars', function() {
     // First option places delegates
     options.options[0].cb();
 
-    expect(game.deferredActions.length).eq(1);
+    expect(game.deferredActions).has.length(1);
     const sendDelegate = cast(game.deferredActions.pop(), SendDelegateToArea);
     assertAddDelegateAction(player, sendDelegate.execute());
     expect(card.resourceCount).eq(5);
@@ -111,7 +111,7 @@ describe('MindSetMars', function() {
     // Second option places a city
     options.options[1].cb();
 
-    expect(game.deferredActions.length).eq(1);
+    expect(game.deferredActions).has.length(1);
     const placeCityTile = cast(game.deferredActions.pop(), PlaceCityTile);
     assertPlaceCity(player, placeCityTile.execute());
     expect(card.resourceCount).eq(2);

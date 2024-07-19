@@ -60,7 +60,7 @@ describe('FocusedOrganization', () => {
     const selectResource = cast(andOptions.options[0], SelectResource);
     const selectCard = cast(andOptions.options[1], SelectCard);
 
-    expect(selectResource.include.length).eq(2);
+    expect(selectResource.include).has.length(2);
     expect(selectCard.cards).to.have.members([firstCard, secondCard]);
     expect(selectResource.include).deep.eq(['megacredits', 'plants']);
 
@@ -96,7 +96,7 @@ describe('FocusedOrganization', () => {
     const selectCard = cast(andOptions.options[1], SelectCard);
     const selectResource = cast(andOptions.options[0], SelectResource);
 
-    expect(selectResource.include.length).eq(2);
+    expect(selectResource.include).has.length(2);
 
     selectCard.cb([firstCard]);
     selectResource.cb('plants');

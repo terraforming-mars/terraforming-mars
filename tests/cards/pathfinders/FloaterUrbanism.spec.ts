@@ -59,7 +59,7 @@ describe('FloaterUrbanism', function() {
     other.resourceCount = 1;
 
     const options = cast(card.action(player), SelectCard);
-    expect(options.cards.length).eq(2);
+    expect(options.cards).has.length(2);
     options.cb([options.cards[0]]);
     expect(floater1.resourceCount).eq(0);
     expect(floater2.resourceCount).eq(1);

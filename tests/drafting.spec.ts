@@ -1012,8 +1012,8 @@ function selectCard(player: TestPlayer, cardName: CardName) {
 //   const serialized = await Database.getInstance().getGameVersion(game.id, game.lastSaveId);
 //   const restored = Game.deserialize(serialized);
 
-//   expect(game.deferredActions.length).eq(0);
-//   expect(restored.deferredActions.length).eq(0);
+//   expect(game.deferredActions).has.length(0);
+//   expect(restored.deferredActions).has.length(0);
 
 //   for (const id of game.getPlayers().map((p) => p.id)) {
 //     const livePlayer = game.getPlayerById(id);

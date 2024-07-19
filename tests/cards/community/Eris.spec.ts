@@ -38,14 +38,14 @@ describe('Eris', () => {
     runAllActions(game);
     const placeHazard = cast(player.popWaitingFor(), SelectSpace);
     placeHazard.cb(placeHazard.spaces[0]);
-    expect(game.board.getHazards().length).eq(initialHazardsCount + 1);
+    expect(game.board.getHazards()).has.length(initialHazardsCount + 1);
     expect(placeHazard.spaces[0].tile?.tileType).eq(TileType.EROSION_MILD);
 
     // Remove a hazard tile to gain 1 TR
     const removeHazard = cast(action.options[1].cb(), SelectSpace);
     removeHazard.cb(removeHazard.spaces[0]);
     expect(removeHazard.spaces[0].tile).is.undefined;
-    expect(game.board.getHazards().length).eq(initialHazardsCount);
+    expect(game.board.getHazards()).has.length(initialHazardsCount);
     expect(player.getTerraformRating()).eq(initialTR + 1);
   });
 
@@ -64,7 +64,7 @@ describe('Eris', () => {
     runAllActions(game);
     const placeHazard = cast(player.popWaitingFor(), SelectSpace);
     placeHazard.cb(placeHazard.spaces[0]);
-    expect(game.board.getHazards().length).eq(initialHazardsCount + 1);
+    expect(game.board.getHazards()).has.length(initialHazardsCount + 1);
 
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);

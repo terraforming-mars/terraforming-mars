@@ -30,7 +30,6 @@ import {Naturalist} from './Naturalist';
 import {Voyager} from './Voyager';
 import {Curator} from './amazonisPlanitia/Curator';
 import {Engineer} from './amazonisPlanitia/Engineer';
-import {Historian} from './amazonisPlanitia/Historian';
 import {Tourist} from './amazonisPlanitia/Tourist';
 import {Biologist} from './terraCimmeria/Biologist';
 import {Economizer2} from './terraCimmeria/Economizer2';
@@ -89,7 +88,7 @@ export const MOON_AWARDS = [
 export const AMAZONIS_PLANITIA_AWARDS = [
   new Curator(),
   new Engineer(),
-  new Historian(),
+  new Coordinator(),
   new Tourist(),
   new Zoologist2(),
 ];

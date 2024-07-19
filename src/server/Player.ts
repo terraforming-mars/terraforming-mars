@@ -1541,7 +1541,9 @@ export class Player implements IPlayer {
       return;
     }
 
-    if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) game.save();
+    if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) {
+      game.save();
+    }
     // if (saveBeforeTakingAction) game.save();
 
     if (this.autopass) {

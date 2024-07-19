@@ -58,6 +58,27 @@ describe('drafting and serialization', () => {
     expect(game2.phase).eq(Phase.DRAFTING);
     expect(game2.draftRound).eq(2);
   });
+
+  it('2 player - project draft - server reset between phases', async () => {
+    const [game, player1, player2] = testGame(2, {draftVariant: true});
+
+    game.generation = 1;
+    // This moves into draft phase
+    finishGeneration(game);
+
+    expect(game.draftRound).eq(1);
+
+    const serializedGame = await Database.getInstance().getGameVersion(game.id, game.lastSaveId - 1);
+    const game2 = Game.deserialize(serializedGame);
+
+    expect(game2.phase).eq(Phase.DRAFTING);
+    expect(game2.draftRound).eq(1);
+
+    const selectCard = cast(player1.popWaitingFor(), SelectCard);
+    selectCard.process({type: 'card', cards: [selectCard.cards[0].name]});
+    const selectCard2 = cast(player2.popWaitingFor(), SelectCard);
+    selectCard2.process({type: 'card', cards: [selectCard2.cards[0].name]});
+  });
 });
 
 const stored = {

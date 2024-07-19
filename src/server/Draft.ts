@@ -77,7 +77,7 @@ export abstract class Draft {
     const players = this.game.getPlayers();
 
     // When restoring drafting, it might be that nothing was dealt yet.
-    if (players.every((p) => p.needsToDraft === undefined)) {
+    if (!players.some((p) => p.needsToDraft !== undefined)) {
       this._startDraft();
       return;
     }

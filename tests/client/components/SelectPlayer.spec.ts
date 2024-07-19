@@ -46,7 +46,7 @@ describe('SelectPlayer', () => {
     await wrapper.vm.$nextTick();
 
     const inputs = wrapper.findAll('input');
-    expect(inputs.length).eq(4);
+    expect(inputs).has.length(4);
     expect(inputs.at(0).element.getAttribute('value')).eq('red');
     expect(inputs.at(1).element.getAttribute('value')).eq('yellow');
     expect(inputs.at(2).element.getAttribute('value')).eq('green');

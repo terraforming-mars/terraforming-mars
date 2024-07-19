@@ -287,7 +287,7 @@ describe('Player', function() {
     const srr = new SelfReplicatingRobots();
     player.playedCards.push(srr);
     srr.targetCards.push(new LunarBeam());
-    expect(player.getSelfReplicatingRobotsTargetCards().length).eq(1);
+    expect(player.getSelfReplicatingRobotsTargetCards()).has.length(1);
   });
   it('removes tags from card played from self replicating robots', () => {
     const player = TestPlayer.BLUE.newPlayer();
@@ -330,7 +330,7 @@ describe('Player', function() {
     expect(log).is.empty;
 
     player.addResourceTo(card, {qty: 3, log: true});
-    expect(log.length).eq(1);
+    expect(log).has.length(1);
     const logEntry = log[0];
     expect(logEntry.data[1].value).eq('3');
     expect(logEntry.data[3].value).eq('Pets');
@@ -365,26 +365,26 @@ describe('Player', function() {
     card.resourceCount = 6;
     player.removeResourceFrom(card);
     expect(card.resourceCount).eq(5);
-    expect(log.length).eq(1);
+    expect(log).has.length(1);
     expect(log[0].data[1].value).eq('1');
     expect(log[0].data[3].value).eq('Pets');
 
     log.length = 0;
     player.removeResourceFrom(card, 1);
     expect(card.resourceCount).eq(4);
-    expect(log.length).eq(1);
+    expect(log).has.length(1);
     expect(log[0].data[1].value).eq('1');
 
     log.length = 0;
     player.removeResourceFrom(card, 3);
-    expect(log.length).eq(1);
+    expect(log).has.length(1);
     expect(log[0].data[1].value).eq('3');
 
     log.length = 0;
     card.resourceCount = 4;
     player.removeResourceFrom(card, 5);
     expect(card.resourceCount).eq(0);
-    expect(log.length).eq(1);
+    expect(log).has.length(1);
     expect(log[0].data[1].value).eq('4');
   });
 

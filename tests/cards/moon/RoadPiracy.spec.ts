@@ -33,7 +33,7 @@ describe('RoadPiracy', () => {
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
 
-    expect(orOptions.options.length).eq(2);
+    expect(orOptions.options).has.length(2);
 
     const steel = cast(orOptions.options[0], AndOptions);
     steel.process({
@@ -56,7 +56,7 @@ describe('RoadPiracy', () => {
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
 
-    expect(orOptions.options.length).eq(2);
+    expect(orOptions.options).has.length(2);
 
     const titanium = cast(orOptions.options[0], AndOptions);
     titanium.process({
@@ -79,7 +79,7 @@ describe('RoadPiracy', () => {
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
 
-    expect(orOptions.options.length).eq(2);
+    expect(orOptions.options).has.length(2);
 
     const titanium = cast(orOptions.options[0], AndOptions);
 
@@ -112,7 +112,7 @@ describe('RoadPiracy', () => {
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
 
-    expect(orOptions.options.length).eq(2);
+    expect(orOptions.options).has.length(2);
     const titanium = cast(orOptions.options[0], AndOptions);
     expect(() => titanium.process({
       type: 'and',
@@ -143,7 +143,7 @@ describe('RoadPiracy', () => {
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
 
-    expect(orOptions.options.length).eq(2);
+    expect(orOptions.options).has.length(2);
     orOptions.options[1].cb();
     expect(player.titanium).eq(0);
     expect(player2.titanium).eq(2);
@@ -168,7 +168,7 @@ describe('RoadPiracy', () => {
     const orOptions = cast(player.popWaitingFor(), OrOptions);
     const steel = cast(orOptions.options[0], AndOptions);
 
-    expect(steel.options.length).eq(2);
+    expect(steel.options).has.length(2);
     expect(cast(steel.options[0], SelectAmount).max).eq(1);
     expect(cast(steel.options[1], SelectAmount).max).eq(4);
   });

@@ -46,7 +46,7 @@ describe('Lowell', function() {
     const selectCard = cast(player.popWaitingFor(), SelectCard<ICeoCard>);
     selectCard.cb([selectCard.cards[0]]);
 
-    expect(player.playedCards.filter((card) => card.type === CardType.CEO).length).eq(1);
+    expect(player.playedCards.filter((card) => card.type === CardType.CEO)).has.length(1);
     expect(player.playedCards.includes(card)).is.false;
     expect(player.megaCredits).eq(0);
   });

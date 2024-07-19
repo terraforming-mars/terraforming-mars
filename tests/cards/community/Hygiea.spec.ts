@@ -59,7 +59,7 @@ describe('Hygiea', () => {
     hygiea.trade(player);
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
-    expect(orOptions.options.length).eq(2);
+    expect(orOptions.options).has.length(2);
     orOptions.options[0].cb();
 
     expect(player.megaCredits).to.eq(13);
@@ -73,7 +73,7 @@ describe('Hygiea', () => {
     hygiea.trade(player);
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
-    expect(orOptions.options.length).eq(2);
+    expect(orOptions.options).has.length(2);
     orOptions.options[1].cb();
 
     expect(player.megaCredits).to.eq(10);
@@ -102,7 +102,7 @@ describe('Hygiea', () => {
     hygiea.trade(player);
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);
-    expect(orOptions.options.length).eq(2);
+    expect(orOptions.options).has.length(2);
     orOptions.options[0].cb();
 
     expect(player.megaCredits).to.eq(13);

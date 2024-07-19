@@ -273,7 +273,7 @@ describe('Stock', function() {
     player.stock.add(Resource.MEGACREDITS, -12);
     console.warn = warn;
 
-    expect(consoleLog.length).eq(1);
+    expect(consoleLog).has.length(1);
     expect(consoleLog[0][0]).eq('Illegal state: Adjusting -12 megacredits when player has 10');
     expect(JSON.parse(consoleLog[0][1])).deep.eq(
       {

@@ -38,7 +38,7 @@ describe('drafting and serialization', () => {
     expect(p2w.cards.map((c) => c.name)).to.have.members([CardName.COMMERCIAL_DISTRICT, CardName.BIOMASS_COMBUSTORS, CardName.DOMED_CRATER, CardName.BUSINESS_CONTACTS]);
   });
 
-  it('2 player - project draft - server reset between phases', async () => {
+  it('2 player - project draft - server after partial draft', async () => {
     const [game, player1, player2] = testGame(2, {draftVariant: true});
 
     game.generation = 1;
@@ -59,8 +59,8 @@ describe('drafting and serialization', () => {
     expect(game2.draftRound).eq(2);
   });
 
-  it('2 player - project draft - server reset between phases', async () => {
-    const [game, player1, player2] = testGame(2, {draftVariant: true});
+  it('2 player - project draft - server reset during first draft round', async () => {
+    const [game] = testGame(2, {draftVariant: true});
 
     game.generation = 1;
     // This moves into draft phase
@@ -73,10 +73,11 @@ describe('drafting and serialization', () => {
 
     expect(game2.phase).eq(Phase.DRAFTING);
     expect(game2.draftRound).eq(1);
+    const players2 = game2.getPlayers();
 
-    const selectCard = cast(player1.popWaitingFor(), SelectCard);
+    const selectCard = cast(players2[0].getWaitingFor(), SelectCard);
     selectCard.process({type: 'card', cards: [selectCard.cards[0].name]});
-    const selectCard2 = cast(player2.popWaitingFor(), SelectCard);
+    const selectCard2 = cast(players2[1].getWaitingFor(), SelectCard);
     selectCard2.process({type: 'card', cards: [selectCard2.cards[0].name]});
   });
 });

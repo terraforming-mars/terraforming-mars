@@ -7,7 +7,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, toName} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 import {IColony} from '../../../src/server/colonies/IColony';
 
@@ -124,7 +124,7 @@ describe('HuygensObservatory', function() {
 
     const selectColony = cast(player.popWaitingFor(), SelectColony);
     expect(selectColony.colonies).has.length(5);
-    expect(selectColony.colonies.map((c) => c.name)).contains(ColonyName.GANYMEDE);
+    expect(selectColony.colonies.map(toName)).contains(ColonyName.GANYMEDE);
 
     // Gain plant production
     selectColony.cb(ganymede);
@@ -185,7 +185,7 @@ describe('HuygensObservatory', function() {
     const tradeDestination = cast(player.popWaitingFor(), SelectColony);
 
     expect(tradeDestination.colonies).has.length(4);
-    expect(tradeDestination.colonies.map((c) => c.name)).does.not.contain(ColonyName.GANYMEDE);
+    expect(tradeDestination.colonies.map(toName)).does.not.contain(ColonyName.GANYMEDE);
     expect(tradeDestination.title).eq('Select colony tile to trade with for free');
   });
 

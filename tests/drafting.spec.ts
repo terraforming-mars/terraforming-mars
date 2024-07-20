@@ -1025,7 +1025,7 @@ function selectCard(player: TestPlayer, cardName: CardName) {
 //     if (livePlayer.getWaitingFor() instanceof SelectCard) {
 //       const liveCards = cast(livePlayer.getWaitingFor(), SelectCard).cards;
 //       const restoredCards = cast(restoredPlayer.getWaitingFor(), SelectCard).cards;
-//       expect(liveCards.map((c) => c.name)).deep.eq(restoredCards.map((c) => c.name));
+//       expect(liveCards.map(toName)).deep.eq(restoredCards.map(toName);
 //     }
 //   }
 // }

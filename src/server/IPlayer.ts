@@ -7,6 +7,7 @@ import {SpendableCardResource} from '../common/inputs/Spendable';
 import {ICard, IActionCard} from './cards/ICard';
 import {TRSource} from '../common/cards/TRSource';
 import {IProjectCard} from './cards/IProjectCard';
+import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {PlayerInput} from './PlayerInput';
 import {Resource} from '../common/Resource';
 import {CardResource} from '../common/CardResource';
@@ -97,7 +98,7 @@ export interface IPlayer {
 
   // Cards
   dealtCorporationCards: Array<ICorporationCard>;
-  dealtPreludeCards: Array<IProjectCard>;
+  dealtPreludeCards: Array<IPreludeCard>;
   dealtCeoCards: Array<ICeoCard>;
   dealtProjectCards: Array<IProjectCard>;
   cardsInHand: Array<IProjectCard>;

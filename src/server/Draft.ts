@@ -6,6 +6,7 @@ import {IProjectCard} from './cards/IProjectCard';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
 import {SelectCard} from './inputs/SelectCard';
 import {message} from './logs/MessageBuilder';
+import {IPreludeCard} from './cards/prelude/IPreludeCard';
 
 export type DraftType = 'none' | 'initial' | 'prelude' | 'standard';
 
@@ -257,7 +258,8 @@ class PreludeDraft extends Draft {
 
   override endRound() {
     for (const player of this.game.getPlayers()) {
-      player.dealtPreludeCards = player.draftedCards;
+      // TODO(kberg): player.draftedCards is not ideal here.
+      player.dealtPreludeCards = player.draftedCards as Array<IPreludeCard>;
       player.draftedCards = [];
     }
 

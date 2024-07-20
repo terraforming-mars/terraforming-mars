@@ -3,15 +3,10 @@ import {testGame} from '../TestGame';
 import {SelectInitialCards} from '../../src/server/inputs/SelectInitialCards';
 import {TestPlayer} from '../TestPlayer';
 import {CardName} from '../../src/common/cards/CardName';
-import {Inventrix} from '../../src/server/cards/corporation/Inventrix';
-import {Helion} from '../../src/server/cards/corporation/Helion';
-import {Ants} from '../../src/server/cards/base/Ants';
-import {BactoviralResearch} from '../../src/server/cards/promo/BactoviralResearch';
-import {CometAiming} from '../../src/server/cards/promo/CometAiming';
-import {Dirigibles} from '../../src/server/cards/venusNext/Dirigibles';
 import {ICorporationCard} from '../../src/server/cards/corporation/ICorporationCard';
+import {cardsFromJSON, ceosFromJSON, corporationCardsFromJSON, preludesFromJSON} from '../../src/server/createCard';
+import {toName} from '../TestingUtils';
 
-// TODO(kberg): Add preludes
 describe('SelectInitialCards', () => {
   let player: TestPlayer;
   let corp: ICorporationCard | undefined = undefined;
@@ -24,8 +19,8 @@ describe('SelectInitialCards', () => {
 
   beforeEach(() => {
     [/* game */, player] = testGame(1);
-    player.dealtCorporationCards = [new Inventrix(), new Helion()];
-    player.dealtProjectCards = [new Ants(), new BactoviralResearch(), new CometAiming(), new Dirigibles()];
+    player.dealtCorporationCards = corporationCardsFromJSON([CardName.INVENTRIX, CardName.HELION]);
+    player.dealtProjectCards = cardsFromJSON([CardName.ANTS, CardName.BACTOVIRAL_RESEARCH, CardName.COMET_AIMING, CardName.DIRIGIBLES]);
     selectInitialCards = new SelectInitialCards(player, cb);
   });
 
@@ -58,7 +53,7 @@ describe('SelectInitialCards', () => {
 
   it('Simple', () => {
     player.game.projectDeck.discardPile.length = 0; // Emptying the discard pile, which has 4 cards setting up the solo opponent.
-    expect(player.game.corporationDeck.discardPile).is.empty;
+    // player.game.corporationDeck.discardPile.length = 0;
 
     selectInitialCards.process({type: 'initialCards', responses: [
       {type: 'card', cards: [CardName.INVENTRIX]},
@@ -67,10 +62,38 @@ describe('SelectInitialCards', () => {
 
     expect(player.corporations).has.length(0); // This input object doesn't set the player's corporation card
     expect(corp!.name).eq(CardName.INVENTRIX);
-    expect(player.cardsInHand).has.length(1); // But it does set their cards in hand.
-    expect(player.cardsInHand[0].name).eq(CardName.ANTS);
+    expect(player.cardsInHand.map(toName)).to.have.members([CardName.ANTS]); // But it does set their cards in hand.
 
-    expect(player.game.projectDeck.discardPile.map((c) => c.name)).has.members([CardName.BACTOVIRAL_RESEARCH, CardName.COMET_AIMING, CardName.DIRIGIBLES]);
-    expect(player.game.corporationDeck.discardPile.map((c) => c.name)).has.members([CardName.HELION]);
+    expect(player.game.projectDeck.discardPile.map(toName)).to.have.members([CardName.BACTOVIRAL_RESEARCH, CardName.COMET_AIMING, CardName.DIRIGIBLES]);
+    expect(player.game.corporationDeck.discardPile.map(toName)).to.have.members([CardName.HELION]);
+  });
+
+  it('Full', () => {
+    const [/* game */, player] = testGame(1, {ceoExtension: true, preludeExtension: true});
+    player.game.projectDeck.discardPile.length = 0; // Emptying the discard pile, which has 4 cards setting up the solo opponent.
+    player.game.corporationDeck.discardPile.length = 0;
+    player.dealtCorporationCards = corporationCardsFromJSON([CardName.INVENTRIX, CardName.HELION]);
+    player.dealtProjectCards = cardsFromJSON([CardName.ANTS, CardName.BACTOVIRAL_RESEARCH, CardName.COMET_AIMING, CardName.DIRIGIBLES]);
+    player.dealtPreludeCards = preludesFromJSON([CardName.LOAN, CardName.BIOLAB, CardName.DONATION, CardName.SUPPLIER]);
+    player.dealtCeoCards = ceosFromJSON([CardName.ASIMOV, CardName.MUSK]);
+    selectInitialCards = new SelectInitialCards(player, cb);
+
+    selectInitialCards.process({type: 'initialCards', responses: [
+      {type: 'card', cards: [CardName.INVENTRIX]},
+      {type: 'card', cards: [CardName.LOAN, CardName.BIOLAB]},
+      {type: 'card', cards: [CardName.ASIMOV]},
+      {type: 'card', cards: [CardName.ANTS]},
+    ]}, player);
+
+    expect(player.corporations).has.length(0); // This input object doesn't set the player's corporation card
+    expect(corp!.name).eq(CardName.INVENTRIX);
+    expect(player.cardsInHand.map(toName)).to.have.members([CardName.ANTS]); // But it does set their cards in hand.
+    expect(player.ceoCardsInHand.map(toName)).to.have.members([CardName.ASIMOV]);
+    expect(player.preludeCardsInHand.map(toName)).to.have.members([CardName.LOAN, CardName.BIOLAB]);
+
+    expect(player.game.projectDeck.discardPile.map(toName)).to.have.members([CardName.BACTOVIRAL_RESEARCH, CardName.COMET_AIMING, CardName.DIRIGIBLES]);
+    expect(player.game.corporationDeck.discardPile.map(toName)).to.have.members([CardName.HELION]);
+    expect(player.game.ceoDeck.discardPile.map(toName)).to.have.members([CardName.MUSK]);
+    expect(player.game.preludeDeck.discardPile.map(toName)).to.have.members([CardName.DONATION, CardName.SUPPLIER]);
   });
 });

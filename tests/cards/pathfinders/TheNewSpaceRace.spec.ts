@@ -3,7 +3,7 @@ import {TheNewSpaceRace} from '../../../src/server/cards/pathfinders/TheNewSpace
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast, doWait, runAllActions, setRulingParty} from '../../TestingUtils';
+import {cast, doWait, runAllActions, setRulingParty, toName} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {AlliedBanks} from '../../../src/server/cards/prelude/AlliedBanks';
 import {BiosphereSupport} from '../../../src/server/cards/prelude/BiosphereSupport';
@@ -91,7 +91,7 @@ describe('TheNewSpaceRace', function() {
     // Player2 is up, and will play its other prelude first.
     const next = cast(player2.getWaitingFor(), SelectCard);
     expect(player2.actionsTakenThisRound).eq(0);
-    expect(next.cards.map((c) => c.name)).deep.eq([CardName.AQUIFER_TURBINES]);
+    expect(next.cards.map(toName)).deep.eq([CardName.AQUIFER_TURBINES]);
   });
 
   it('Play during late game (e.g. Karen CEO)', function() {

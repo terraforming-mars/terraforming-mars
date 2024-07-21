@@ -10,16 +10,19 @@ import {ColonyTradeHub} from './ColonyTradeHub';
 import {CorridorsOfPower} from './CorridorsOfPower';
 import {Ecotec} from './Ecotec';
 import {EnvoysFromVenus} from './EnvoysFromVenus';
+import {FloatingTradeHub} from './FloatingTradeHub';
 import {FocusedOrganization} from './FocusedOrganization';
 import {GhgShipment} from './GhgShipment';
 import {IshtarExpedition} from './IshtarExpedition';
 import {JovianEnvoys} from './JovianEnvoys';
 import {L1TradeTerminal} from './L1TradeTerminal';
+import {MainBeltAsteroids} from './MainBeltAsteroids';
 import {MicrogravityNutrition} from './MicrogravityNutrition';
 import {NirgalEnterprises} from './NirgalEnterprises';
 import {NobelPrize} from './NobelPrize';
 import {OldMiningColony} from './OldMiningColony';
 import {PalladinShipping} from './PalladinShipping';
+import {PlanetaryAlliance} from './PlanetaryAlliance';
 import {RedAppeasement} from './RedAppeasement';
 import {SagittaFrontierServices} from './SagittaFrontierServices';
 import {SoilStudies} from './SoilStudies';
@@ -31,8 +34,6 @@ import {StratosphericExpedition} from './StratosphericExpedition';
 import {SummitLogistics} from './SummitLogistics';
 import {UnexpectedApplication} from './UnexpectedApplication';
 import {VenusOrbitalSurvey} from './VenusOrbitalSurvey';
-import {PlanetaryAlliance} from './PlanetaryAlliance';
-import {MainBeltAsteroids} from './MainBeltAsteroids';
 
 export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
   module: 'prelude2',
@@ -69,7 +70,7 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.BOARD_OF_DIRECTORS]: {Factory: BoardOfDirectors},
     [CardName.COLONY_TRADE_HUB]: {Factory: ColonyTradeHub, compatibility: 'colonies'},
     [CardName.CORRIDORS_OF_POWER]: {Factory: CorridorsOfPower, compatibility: 'turmoil'},
-    // [CardName.FLOATING_TRADE_HUB]: {Factory: FloatingTradeHub, compatibility: 'venus'},
+    [CardName.FLOATING_TRADE_HUB]: {Factory: FloatingTradeHub, compatibility: 'venus'},
     [CardName.FOCUSED_ORGANIZATION]: {Factory: FocusedOrganization},
     // [CardName.HIGH_CIRCLES]: {Factory: HighCircles, compatibility: 'turmoil'},
     // [CardName.INDUSTRIAL_COMPLEX]: {Factory: IndustrialComplex},

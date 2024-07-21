@@ -6,6 +6,8 @@ import {InputResponse, isSelectResourceResponse} from '../../common/inputs/Input
 import {InputError} from './InputError';
 
 export class SelectResource extends BasePlayerInput<keyof Units> {
+  public selected: keyof Units = 'megacredits';
+
   constructor(
     public override title: string | Message,
     public include: ReadonlyArray<keyof Units> = Units.keys,
@@ -30,6 +32,7 @@ export class SelectResource extends BasePlayerInput<keyof Units> {
     if (!this.include.includes(input.resource)) {
       throw new InputError('Not a valid unit');
     }
+    this.selected = input.resource;
     return this.cb(input.resource);
   }
 }

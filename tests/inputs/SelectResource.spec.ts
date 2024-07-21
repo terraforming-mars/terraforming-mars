@@ -18,6 +18,7 @@ describe('SelectResource', () => {
     expect(selectResource.include).deep.eq(['megacredits', 'steel', 'titanium', 'plants', 'energy', 'heat']);
     selectResource.process({type: 'resource', resource: 'plants'});
     expect(selected).eq('plants');
+    expect(selectResource.selected).eq('plants');
   });
 
   it('limited set', () => {
@@ -25,6 +26,7 @@ describe('SelectResource', () => {
     expect(selectResource.include).deep.eq(['heat', 'plants']);
     selectResource.process({type: 'resource', resource: 'heat'});
     expect(selected).eq('heat');
+    expect(selectResource.selected).eq('heat');
   });
 
   it('Not a resource', () => {

@@ -8,6 +8,7 @@ import {CloudTourism} from './CloudTourism';
 import {ColonialRepresentation} from './ColonialRepresentation';
 import {ColonyTradeHub} from './ColonyTradeHub';
 import {CorridorsOfPower} from './CorridorsOfPower';
+import {EarlyColonization} from './EarlyColonization';
 import {Ecotec} from './Ecotec';
 import {EnvoysFromVenus} from './EnvoysFromVenus';
 import {FloatingTradeHub} from './FloatingTradeHub';
@@ -25,6 +26,7 @@ import {PalladinShipping} from './PalladinShipping';
 import {PlanetaryAlliance} from './PlanetaryAlliance';
 import {RedAppeasement} from './RedAppeasement';
 import {SagittaFrontierServices} from './SagittaFrontierServices';
+import {SoilBacteria} from './SoilBacteria';
 import {SoilStudies} from './SoilStudies';
 import {SpaceLanes} from './SpaceLanes';
 import {SpecialPermit} from './SpecialPermit';
@@ -34,6 +36,7 @@ import {StratosphericExpedition} from './StratosphericExpedition';
 import {SummitLogistics} from './SummitLogistics';
 import {UnexpectedApplication} from './UnexpectedApplication';
 import {VenusOrbitalSurvey} from './VenusOrbitalSurvey';
+import {VenusL1Shade} from './VenusL1Shade';
 
 export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
   module: 'prelude2',
@@ -70,6 +73,7 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.BOARD_OF_DIRECTORS]: {Factory: BoardOfDirectors},
     [CardName.COLONY_TRADE_HUB]: {Factory: ColonyTradeHub, compatibility: 'colonies'},
     [CardName.CORRIDORS_OF_POWER]: {Factory: CorridorsOfPower, compatibility: 'turmoil'},
+    [CardName.EARLY_COLONIZATION]: {Factory: EarlyColonization, compatibility: 'colonies'},
     [CardName.FLOATING_TRADE_HUB]: {Factory: FloatingTradeHub, compatibility: 'venus'},
     [CardName.FOCUSED_ORGANIZATION]: {Factory: FocusedOrganization},
     // [CardName.HIGH_CIRCLES]: {Factory: HighCircles, compatibility: 'turmoil'},
@@ -82,13 +86,13 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     // [CardName.PROJECT_EDEN]: {Factory: ProjectEden}, // Just difficult, requires ordering.
     // [CardName.RECESSION]: {Factory: Recession}, // Everybody loses money. Oof.
     // [CardName.RISE_TO_POWER]: {Factory: RiseToPower, compatibility: 'turmoil'},
-    // [CardName.SOIL_BACTERIA]: {Factory: SoilBacteria},
+    [CardName.SOIL_BACTERIA]: {Factory: SoilBacteria},
     [CardName.SPACE_LANES]: {Factory: SpaceLanes},
     // [CardName.STRATEGIC_BASE_PLANNING]: {Factory: StrategicBasePlanning}, // UPDATE FROM PROMO
     // [CardName.SUITABLE_INFRASTRUCTURE]: {Factory: SuitableInfrastructure},
     // [CardName.TERRAFORMING_DEAL]: {Factory: TerraformingDeal},
     // [CardName.VENUS_CONTRACT]: {Factory: VenusContract, compatibility: 'venus'},
-    // [CardName.VENUS_L1_SHADE]: {Factory: VenusL1Shade, compatibility: 'venus'},
+    [CardName.VENUS_L1_SHADE]: {Factory: VenusL1Shade, compatibility: 'venus'},
     // [CardName.WORLD_GOVERNMENT_ADVISOR]: {Factory: WorldGovernmentAdvisor},
   },
 

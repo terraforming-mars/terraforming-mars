@@ -18,7 +18,7 @@ export class EarlyColonization extends PreludeCard {
       },
 
       metadata: {
-        cardNumber: 'P??',
+        cardNumber: 'P48',
         description: 'Place a colony. Gain 3 energy.',
         renderData: CardRenderer.builder((b) => {
           b.colonyTile({all}).text('+2').br;

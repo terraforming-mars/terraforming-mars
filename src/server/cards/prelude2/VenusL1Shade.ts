@@ -13,7 +13,7 @@ export class VenusL1Shade extends PreludeCard {
       },
 
       metadata: {
-        cardNumber: 'P??',
+        cardNumber: 'P66',
         renderData: CardRenderer.builder((b) => {
           b.venus(3);
         }),

@@ -14,13 +14,14 @@ describe('EarlyColonization', () => {
   });
 
   it('play', () => {
-    player.game.colonies[2].colonies.push(player.id);
+    const game = player.game;
+    game.colonies[2].colonies.push(player.id);
 
-    expect(player.game.colonies.map((c) => c.trackPosition)).deep.eq([1, 1, 1, 1]);
+    expect(game.colonies.map((c) => c.trackPosition)).deep.eq([1, 1, 1, 1]);
 
     card.play(player);
 
-    expect(player.game.colonies.map((c) => c.trackPosition)).deep.eq([3, 3, 3, 3]);
+    expect(game.colonies.map((c) => c.trackPosition)).deep.eq([3, 3, 3, 3]);
     expect(player.energy).eq(3);
     assertBuildColony(player, game.deferredActions.pop()!.execute());
   });

@@ -349,5 +349,7 @@ export class PostgreSQL implements IDatabase {
 }
 
 function logForUndo(gameId: string, ...message: any[]) {
-  console.error(['TRACKING:', gameId, ...message]);
+  if (process.env.LOG_FOR_UNDO) {
+    console.error(['TRACKING:', gameId, ...message]);
+  }
 }

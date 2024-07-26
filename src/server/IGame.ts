@@ -112,7 +112,6 @@ export interface IGame extends Logger {
   gotoInitialResearchPhase(): void;
   gotoResearchPhase(): void;
   save(): void;
-  toJSON(): string;
   serialize(): SerializedGame;
   isSoloMode() :boolean;
   // Retrieve a player by it's id

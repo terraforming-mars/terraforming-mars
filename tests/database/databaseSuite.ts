@@ -14,21 +14,21 @@ import {statusCode} from '../../src/common/http/statusCode';
 /**
  * Describes a database test
  */
-export type DatabaseTestDescriptor = {
+export type DatabaseTestDescriptor<T extends ITestDatabase> = {
   name: string,
-  constructor: () => ITestDatabase,
+  constructor: () => T,
   stats: any,
   omit?: Partial<{
     purgeUnfinishedGames: boolean,
     markFinished: boolean,
     moreCleaning: boolean,
   }>,
-  otherTests?(dbFunction: () => ITestDatabase): void,
+  otherTests?(dbFactory: () => T): void,
 };
 
-export function describeDatabaseSuite(dtor: DatabaseTestDescriptor) {
+export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTestDescriptor<T>) {
   describe(dtor.name, () => {
-    let db: ITestDatabase;
+    let db: T;
     beforeEach(() => {
       db = dtor.constructor();
       setTestDatabase(db);

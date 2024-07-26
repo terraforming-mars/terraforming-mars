@@ -54,10 +54,33 @@ export class PostgreSQL implements IDatabase {
     this._client = new Pool(this.config);
 
     const sql = `
-    CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default 'running', created_time timestamp default now(), PRIMARY KEY (game_id, save_id));
-    CREATE TABLE IF NOT EXISTS participants(game_id varchar, participants varchar[], PRIMARY KEY (game_id));
-    CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id));
-    CREATE TABLE IF NOT EXISTS completed_game(game_id varchar not null, completed_time timestamp default now(), PRIMARY KEY (game_id));
+    CREATE TABLE IF NOT EXISTS games(
+      game_id varchar,
+      players integer,
+      save_id integer,
+      game text,
+      status text default 'running',
+      created_time timestamp default now(),
+      PRIMARY KEY (game_id, save_id));
+
+    CREATE TABLE IF NOT EXISTS participants(
+      game_id varchar,
+      participants varchar[],
+      PRIMARY KEY (game_id));
+
+    CREATE TABLE IF NOT EXISTS game_results(
+      game_id varchar not null,
+      seed_game_id varchar,
+      players integer,
+      generations integer,
+      game_options text,
+      scores text,
+      PRIMARY KEY (game_id));
+
+    CREATE TABLE IF NOT EXISTS completed_game(
+      game_id varchar not null,
+      completed_time timestamp default now(),
+      PRIMARY KEY (game_id));
 
     CREATE INDEX IF NOT EXISTS games_i1 on games(save_id);
     CREATE INDEX IF NOT EXISTS games_i2 on games(created_time);

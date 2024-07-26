@@ -63,6 +63,18 @@ export class PostgreSQL implements IDatabase {
       created_time timestamp default now(),
       PRIMARY KEY (game_id, save_id));
 
+    /* A single game, storing the log and the options. Normalizing out some of the game state. */
+    CREATE TABLE IF NOT EXISTS game(
+      game_id varchar NOT NULL,
+      /* One log entry per save id */
+      log text[] NOT NULL,
+      /* The game's GameOptions */
+      options text NOT NULL,
+      status text default 'running' NOT NULL,
+      created_time timestamp default now() NOT NULL,
+      PRIMARY KEY (game_id));
+
+    /* A list of the players and spectator IDs, which optimizes loading unloaded for a specific player. */
     CREATE TABLE IF NOT EXISTS participants(
       game_id varchar,
       participants varchar[],

@@ -811,12 +811,7 @@ export class Game implements IGame, Logger {
   }
 
   private allPlayersHaveFinishedResearch(): boolean {
-    for (const player of this.players) {
-      if (!this.hasResearched(player)) {
-        return false;
-      }
-    }
-    return true;
+    return !this.players.some((p) => !this.hasResearched(p));
   }
 
   public playerIsFinishedWithResearchPhase(player: IPlayer): void {

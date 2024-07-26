@@ -54,20 +54,34 @@ export class PostgreSQL implements IDatabase {
     this._client = new Pool(this.config);
 
     const sql = `
+    /* A single save of the game. */
     CREATE TABLE IF NOT EXISTS games(
       game_id varchar,
-      players integer,
       save_id integer,
+      players integer,
       game text,
-      status text default 'running',
+      status text default 'running', /* In theory this is removable */
       created_time timestamp default now(),
       PRIMARY KEY (game_id, save_id));
 
+    /* A single game, storing the log and the options. Normalizing out some of the game state. */
+    CREATE TABLE IF NOT EXISTS game(
+      game_id varchar,
+      /* One log entry per save id */
+      log text[],
+      /* The game's GameOptions */
+      options text,
+      status text default 'running',
+      created_time timestamp default now(),
+      PRIMARY KEY (game_id));
+
+    /* A list of the players and spectator IDs, which optimizes loading unloaded for a specific player. */
     CREATE TABLE IF NOT EXISTS participants(
       game_id varchar,
       participants varchar[],
       PRIMARY KEY (game_id));
 
+    /* game state at its conclusion. Never deleted. */
     CREATE TABLE IF NOT EXISTS game_results(
       game_id varchar not null,
       seed_game_id varchar,
@@ -77,6 +91,7 @@ export class PostgreSQL implements IDatabase {
       scores text,
       PRIMARY KEY (game_id));
 
+    /* Games that were recently completed. Used to keep games alive for a couple of days after they're done. */
     CREATE TABLE IF NOT EXISTS completed_game(
       game_id varchar not null,
       completed_time timestamp default now(),
@@ -201,6 +216,8 @@ export class PostgreSQL implements IDatabase {
       console.log(`Purged ${deleteGamesResult.rowCount} rows from games`);
       const deleteParticipantsResult = await this.client.query('DELETE FROM participants WHERE game_id = ANY($1)', [gameIds]);
       console.log(`Purged ${deleteParticipantsResult.rowCount} rows from participants`);
+      const deleteGameResult = await this.client.query('DELETE FROM game WHERE game_id = ANY($1)', [gameIds]);
+      console.log(`Purged ${deleteGameResult.rowCount} rows from game`);
     }
     return gameIds;
   }
@@ -319,15 +336,17 @@ export class PostgreSQL implements IDatabase {
 
     const dbsizes = await this.client.query(`
     SELECT
-      pg_size_pretty(pg_total_relation_size('games')) as game_size,
+      pg_size_pretty(pg_total_relation_size('games')) as games_size,
       pg_size_pretty(pg_total_relation_size('game_results')) as game_results_size,
       pg_size_pretty(pg_total_relation_size('participants')) as participants_size,
+      pg_size_pretty(pg_total_relation_size('game')) as game_size,
       pg_size_pretty(pg_database_size($1)) as db_size
     `, [this.databaseName]);
 
-    map['size-bytes-games'] = dbsizes.rows[0].game_size;
+    map['size-bytes-games'] = dbsizes.rows[0].games_size;
     map['size-bytes-game-results'] = dbsizes.rows[0].game_results_size;
     map['size-bytes-participants'] = dbsizes.rows[0].participants_size;
+    map['size-bytes-game'] = dbsizes.rows[0].game_size;
     map['size-bytes-database'] = dbsizes.rows[0].db_size;
 
     // Using count(*) is inefficient, but the estimates from here
@@ -340,7 +359,7 @@ export class PostgreSQL implements IDatabase {
     // VACUUM (VERBOSE) shows a fairly reasonable vacumm (no rows locked, for instance),
     // so it's not clear why those wrong. But these select count(*) commands seem pretty quick
     // in testing. :fingers-crossed:
-    for (const table of ['games', 'game_results', 'participants']) {
+    for (const table of ['games', 'game_results', 'participants', 'game']) {
       const result = await this.client.query('select count(*) as rowcount from ' + table);
       map['rows-' + table] = result.rows[0].rowcount;
     }

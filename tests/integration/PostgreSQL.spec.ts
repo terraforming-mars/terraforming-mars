@@ -47,14 +47,17 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
     response['size-bytes-game-results'] = 'any';
     response['size-bytes-database'] = 'any';
     response['size-bytes-participants'] = 'any';
+    response['size-bytes-game'] = 'any';
 
     return response;
   }
 
   public async afterEach() {
-    await this.client.query('DROP TABLE games');
-    await this.client.query('DROP TABLE game_results');
-    await this.client.query('DROP TABLE participants');
+    await this.client.query(`
+      DROP TABLE games;
+      DROP TABLE game_results;
+      DROP TABLE participants;
+      DROP TABLE game`);
   }
 
   public getStatistics() {
@@ -107,10 +110,12 @@ describeDatabaseSuite({
     'pool-waiting-count': 0,
     'rows-game_results': '0',
     'rows-games': '0',
+    'rows-game': '0',
     'rows-participants': '0',
     'size-bytes-games': 'any',
     'size-bytes-game-results': 'any',
     'size-bytes-database': 'any',
+    'size-bytes-game': 'any',
     'save-conflict-normal-count': 0,
     'save-conflict-undo-count': 0,
     'save-count': 0,

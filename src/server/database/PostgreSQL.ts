@@ -233,7 +233,7 @@ export class PostgreSQL implements IDatabase {
   }
 
   async saveGame(game: IGame): Promise<void> {
-    const gameJSON = game.toJSON();
+    const gameJSON = JSON.stringify(game.serialize());
     this.statistics.saveCount++;
     if (game.gameOptions.undoOption) logForUndo(game.id, 'start save', game.lastSaveId);
     try {

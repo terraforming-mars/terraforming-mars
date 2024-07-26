@@ -117,9 +117,9 @@ describeDatabaseSuite({
     'size-bytes-participants': 'any',
   },
 
-  otherTests: (dbFunction: () => ITestDatabase) => {
+  otherTests: (dbFactory: () => TestPostgreSQL) => {
     it('saveGame with the same saveID', async () => {
-      const db = dbFunction() as TestPostgreSQL;
+      const db = dbFactory();
       const player = TestPlayer.BLACK.newPlayer();
       const game = Game.newInstance('game-id-1212', [player], player);
       await db.lastSaveGamePromise;
@@ -151,7 +151,7 @@ describeDatabaseSuite({
 
     // When sqlite does the same thing this can go into the suite.
     it('getGames - returns in order of last saved', async () => {
-      const db = dbFunction() as TestPostgreSQL;
+      const db = dbFactory() as TestPostgreSQL;
       const player = TestPlayer.BLACK.newPlayer();
       const game1 = Game.newInstance('game-id-1111', [player], player);
       await db.lastSaveGamePromise;
@@ -180,7 +180,7 @@ describeDatabaseSuite({
 
     it('test save id count with undo', async () => {
       // Set up a simple game.
-      const db = dbFunction() as TestPostgreSQL;
+      const db = dbFactory() as TestPostgreSQL;
       const player = TestPlayer.BLACK.newPlayer({beginner: true});
       const player2 = TestPlayer.RED.newPlayer({beginner: true});
       const game = Game.newInstance('gameid', [player, player2], player, {draftVariant: false, undoOption: true});
@@ -255,7 +255,7 @@ describeDatabaseSuite({
     });
 
     it('undo works in multiplayer, other players have passed', async () => {
-      const db = dbFunction() as TestPostgreSQL;
+      const db = dbFactory() as TestPostgreSQL;
       const player = TestPlayer.BLACK.newPlayer({beginner: true});
       const player2 = TestPlayer.RED.newPlayer({beginner: true});
       const game = Game.newInstance('gameid', [player, player2], player2, {draftVariant: false, undoOption: true});
@@ -347,7 +347,7 @@ describeDatabaseSuite({
     });
 
     it('undo works in solo', async () => {
-      const db = dbFunction() as TestPostgreSQL;
+      const db = dbFactory() as TestPostgreSQL;
       const player = TestPlayer.BLACK.newPlayer({beginner: true});
       const game = Game.newInstance('gameid', [player], player, {undoOption: true});
       await db.awaitAllSaves();

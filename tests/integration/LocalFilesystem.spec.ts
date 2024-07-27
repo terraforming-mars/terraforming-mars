@@ -29,7 +29,7 @@ class TestLocalFilesystem extends LocalFilesystem implements ITestDatabase {
   }
 
   public async afterEach() {
-    fs.rmdirSync(this.dbFolder, {recursive: true});
+    fs.rmSync(this.dbFolder, {recursive: true});
   }
 
   public override async stats(): Promise<{[key: string]: string | number}> {

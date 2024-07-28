@@ -253,15 +253,12 @@ describeDatabaseSuite({
 
       // Notice how save-count was 3 and is now 5. It saved twice.
       expect(await db.getStat('save-count')).eq(5);
-      // If save count is 5, why are only four versions saved?
-      expect(await db.getSaveIds(game.id)).deep.eq([0, 1, 2, 3]);
-      // That's because one of those saves was an update instead of an insert.
-      // Version 3 was saved twice.
-      expect(await db.getStat('save-conflict-undo-count')).eq(1);
+      expect(await db.getSaveIds(game.id)).deep.eq([0, 1, 2, 3, 4]);
+      expect(await db.getStat('save-conflict-undo-count')).eq(0);
 
       // Of all the steps in this test, this is the one which will verify the broken undo
       // is repaired correctly. When it was broken, this was 5.
-      expect(game.lastSaveId).eq(4);
+      expect(game.lastSaveId).eq(5);
     });
 
     it('undo works in multiplayer, other players have passed', async () => {

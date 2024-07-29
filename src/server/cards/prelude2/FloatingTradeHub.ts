@@ -22,7 +22,7 @@ export class FloatingTradeHub extends PreludeCard implements IActionCard {
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 2 floaters to ANY card', (ab) => ab.startAction.resource(CardResource.FLOATER, 2).asterix()).br;
+          b.action('Add 2 floaters to ANY card.', (ab) => ab.startAction.resource(CardResource.FLOATER, 2).asterix()).br;
           b.action('Remove any number of floaters here to gain that many of one standard resource.', (ab) => {
             ab.text('X').resource(CardResource.FLOATER).startAction.text('X').wild(1);
           }).br;

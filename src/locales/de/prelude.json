@@ -21,6 +21,14 @@
     "Effect: Each time you become party leader, draw 1 card.": "EFFEKT: Immer wenn einer deiner Delegierten ein Parteiführer wird, ziehe eine Karte.",
     "Raise your TR 1 step and gain 4 M€": "Erhöhe dein TR um 1. Erhalte 4 M€.",
 
+    "Early Colonization": "Frühe Kolonisierung",
+    "INCREASE ALL COLONY TRACKS 2 STEPS": "ERHÖHE ALLE KOLONIEWERTUNGEN UM 2",
+    "Place a colony. Gain 3 energy.": "Platziere eine Kolonie. Erhalte 3 Energie.",
+
+    "Floating Trade Hub": "Schwebender Handelsplatz",
+    "Action: Add 2 floaters to ANY card.": "AKTION: Füge 2 Schweber zu einer beliebigen Karte hinzu.",
+    "Action: Remove any number of floaters here to gain that many of one standard resource.": "AKTION: Entferne hier eine beliebige Anzahl von Schwebern, um so viele von einer Standardressource zu erhalten.",
+
     "Focused Organization": "Zielgerichtete Organisation",
     "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource": "AKTION: Wirf 1 Karte ab und gib 1 Standardressource aus, um 1 Karte zu ziehen und 1 Standardressource zu erhalten.",
     "Draw 1 card and gain 1 standard resource.": "Ziehe 1 Karte und erhalte 1 Standardressource.",
@@ -33,14 +41,22 @@
     "Nobel Prize": "Nobelpreis",
     "Gain 5 M€. Draw 2 cards with requirements.": "Erhalte 5 M€. Ziehe 2 Karten mit Vorausetzungen.",
 
+    "Old Mining Colony": "Alte Bergbaukolonie",
+    "Increase your titanium production 1 step. Place 1 colony. Discard 1 card.": "Erhöhe deine Titan-Produktion um 1. Platziere 1 Kolonie. Werfe 1 Karte ab.",
+    
     "Planetary Alliance": "Planetarische Allianz",
     "Raise your TR 2 steps. Draw 1 Jovian card and 1 Venus card.": "Erhöhe deinen TW um 2. Ziehe 1 Jupiter-Karte und 1 Venus-Karte.",
 
+    "Soil Bacteria": "Bodenbakterien",
+    "Effect: When playing a plant tag or a microbe tag, including this, gain 1 plant.": "EFFEKT: Wenn du einen Pflanzen- oder Mikroben-Symbol spielst, einschließlich dieses, erhalte 1 Pflanze.",
+    "Draw 2 microbe cards and gain 3 plants.": "Ziehe 2 Mikrobenkarten und erhalte 3 Pflanzen.",
+    
     "Space Lanes": "Weltraum-Linien",
     "Effect: When you play a Jovian, Earth, or Venus tag, you pay 2 M€ less for it.": "EFFEKT: Wenn du ein Jupiter-, Erd- oder Venus-Symbol spielst, zahlst du 2 M€ weniger dafür.",
+    "Gain 3 titanium.": "Erhalte 3 Titan.",
 
-    "Old Mining Colony": "Alte Bergbaukolonie",
-    "Increase your titanium production 1 step. Place 1 colony. Discard 1 card.": "Erhöhe deine Titan-Produktion um 1. Platziere 1 Kolonie. Werfe 1 Karte ab.",
+    "Venus L1 Shade": "Venus L1 Schatten",
+    "Raise Venus 3 steps.": "Erhöhe die Venuswertung um 6%.",
 
 
     "Strategic Base Planning": "Strategische Basisplannung",

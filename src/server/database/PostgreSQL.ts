@@ -134,10 +134,16 @@ export class PostgreSQL implements IDatabase {
   private compose(game: string, log: string, options: string): SerializedGame {
     const stored: StoredSerializedGame = JSON.parse(game);
     const {logLength, ...remainder} = stored;
-    const gameLog = JSON.parse(log);
-    gameLog.length = logLength;
-    const gameOptions = JSON.parse(options);
-    return {...remainder, gameOptions, gameLog};
+    // console.log(log, options, stored.logLength);
+    // TODO(kberg): Remove the outer join, and the else of this conditional by 2025-01-01
+    if (stored.logLength !== undefined) {
+      const gameLog = JSON.parse(log);
+      gameLog.length = logLength;
+      const gameOptions = JSON.parse(options);
+      return {...remainder, gameOptions, gameLog};
+    } else {
+      return remainder as SerializedGame;
+    }
   }
 
   public async getGameId(participantId: ParticipantId): Promise<GameId> {
@@ -169,9 +175,9 @@ export class PostgreSQL implements IDatabase {
         games.game as game,
         game.log as log,
         game.options as options
-      FROM games, game
-      WHERE games.game_id = game.game_id
-      AND games.game_id = $1
+      FROM games
+      LEFT JOIN game on game.game_id = games.game_id
+      WHERE games.game_id = $1
       ORDER BY save_id DESC LIMIT 1`,
       [gameId],
     );
@@ -188,9 +194,9 @@ export class PostgreSQL implements IDatabase {
         games.game as game,
         game.log as log,
         game.options as options
-      FROM games, game
-      WHERE games.game_id = game.game_id
-      AND games.game_id = $1
+      FROM games
+      LEFT JOIN game on game.game_id = games.game_id
+      WHERE games.game_id = $1
       AND games.save_id = $2`,
       [gameId, saveId],
     );

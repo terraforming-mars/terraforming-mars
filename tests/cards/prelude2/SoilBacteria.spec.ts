@@ -18,7 +18,7 @@ describe('SoilBacteria', function() {
 
   it('Should play', function() {
     card.play(player);
-    expect(player.plants).to.eq(4);
+    expect(player.plants).to.eq(3);
     expect(player.cardsInHand).has.lengthOf(2);
     player.cardsInHand.forEach((card) => expect(card.tags.indexOf(Tag.MICROBE)).not.to.eq(-1));
   });
@@ -26,6 +26,6 @@ describe('SoilBacteria', function() {
     card.play(player);
     card.onCardPlayed(player, new Ants());
     game.deferredActions.runNext();
-    expect(player.stock.plants).to.eq(5);
+    expect(player.stock.plants).to.eq(4);
   });
 });

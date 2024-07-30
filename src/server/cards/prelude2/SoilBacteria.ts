@@ -13,7 +13,7 @@ export class SoilBacteria extends PreludeCard {
       tags: [Tag.MICROBE],
 
       behavior: {
-        stock: {plants: 4}, // Gain 3 plants based on card description +1 from play itself.
+        stock: {plants: 3},
         drawCard: {count: 2, tag: Tag.MICROBE},
       },
 

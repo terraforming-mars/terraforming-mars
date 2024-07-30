@@ -599,9 +599,12 @@ export class Player implements IPlayer {
 
   public getPlayableActionCards(): Array<ICard & IActionCard> {
     const result: Array<ICard & IActionCard> = [];
-    for (const playedCard of this.tableau) {
-      if (isIActionCard(playedCard) && !this.actionsThisGeneration.has(playedCard.name) && !isCeoCard(playedCard) && playedCard.canAct(this)) {
-        result.push(playedCard);
+    for (const card of this.tableau) {
+      if (isIActionCard(card) && !this.actionsThisGeneration.has(card.name) && !isCeoCard(card)) {
+        card.warnings.clear();
+        if (card.canAct(this)) {
+          result.push(card);
+        }
       }
     }
     return result;

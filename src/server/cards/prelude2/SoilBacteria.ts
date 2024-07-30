@@ -13,7 +13,7 @@ export class SoilBacteria extends PreludeCard {
       tags: [Tag.MICROBE],
 
       behavior: {
-        stock: {plants: 3}, // Looks like card can already proc own tag
+        stock: {plants: 3},
         drawCard: {count: 2, tag: Tag.MICROBE},
       },
 

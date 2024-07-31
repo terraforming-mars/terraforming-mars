@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Urbanist} from '../../../src/server/awards/terraCimmeria/Urbanist';
 import {testGame} from '../../TestGame';
-import {addCity, addGreenery, cast, churnPlay, maxOutOceans} from '../../TestingUtils';
+import {addCity, addGreenery, cast, churn, maxOutOceans} from '../../TestingUtils';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Capital} from '../../../src/server/cards/base/Capital';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -35,7 +35,7 @@ describe('Urbanist', () => {
     const [game, player] = testGame(2);
     const oceanSpaces = maxOutOceans(player);
     const capital = new Capital();
-    const selectSpace = cast(churnPlay(capital, player), SelectSpace);
+    const selectSpace = cast(churn(capital.play(player), player), SelectSpace);
     player.playedCards.push(capital);
     const citySpace = game.board.getAdjacentSpaces(oceanSpaces[0])[1];
     expect(citySpace.spaceType).to.eq(SpaceType.LAND);
@@ -56,7 +56,7 @@ describe('Urbanist', () => {
   it('Score with Red City', () => {
     const [/* game */, player] = testGame(2);
     const redCity = new RedCity();
-    const selectSpace = cast(churnPlay(redCity, player), SelectSpace);
+    const selectSpace = cast(churn(redCity.play(player), player), SelectSpace);
     player.playedCards.push(redCity);
     const citySpace = selectSpace.spaces[0];
 

@@ -8,7 +8,7 @@ import * as constants from '../src/common/constants';
 import {Birds} from '../src/server/cards/base/Birds';
 import {WaterImportFromEuropa} from '../src/server/cards/base/WaterImportFromEuropa';
 import {Phase} from '../src/common/Phase';
-import {addCity, addGreenery, addOcean, cast, forceGenerationEnd, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel} from './TestingUtils';
+import {addCity, addGreenery, addOcean, cast, forceGenerationEnd, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, setVenusScaleLevel, toName} from './TestingUtils';
 import {TestPlayer} from './TestPlayer';
 import {SaturnSystems} from '../src/server/cards/corporation/SaturnSystems';
 import {Resource} from '../src/common/Resource';
@@ -497,19 +497,19 @@ describe('Game', () => {
     const player4 = new Player('p4', Color.RED, false, 0, 'p4-id');
     const game = Game.newInstance('gto', [player1, player2, player3, player4], player3);
 
-    expect(game.getPlayersInGenerationOrder().map((p) => p.name)).deep.eq(['p3', 'p4', 'p1', 'p2']);
+    expect(game.getPlayersInGenerationOrder().map(toName)).deep.eq(['p3', 'p4', 'p1', 'p2']);
 
     game.incrementFirstPlayer();
-    expect(game.getPlayersInGenerationOrder().map((p) => p.name)).deep.eq(['p4', 'p1', 'p2', 'p3']);
+    expect(game.getPlayersInGenerationOrder().map(toName)).deep.eq(['p4', 'p1', 'p2', 'p3']);
 
     game.incrementFirstPlayer();
-    expect(game.getPlayersInGenerationOrder().map((p) => p.name)).deep.eq(['p1', 'p2', 'p3', 'p4']);
+    expect(game.getPlayersInGenerationOrder().map(toName)).deep.eq(['p1', 'p2', 'p3', 'p4']);
 
     game.incrementFirstPlayer();
-    expect(game.getPlayersInGenerationOrder().map((p) => p.name)).deep.eq(['p2', 'p3', 'p4', 'p1']);
+    expect(game.getPlayersInGenerationOrder().map(toName)).deep.eq(['p2', 'p3', 'p4', 'p1']);
 
     game.incrementFirstPlayer();
-    expect(game.getPlayersInGenerationOrder().map((p) => p.name)).deep.eq(['p3', 'p4', 'p1', 'p2']);
+    expect(game.getPlayersInGenerationOrder().map(toName)).deep.eq(['p3', 'p4', 'p1', 'p2']);
   });
 
   it('Gets card player for corporation card', () => {
@@ -549,13 +549,13 @@ describe('Game', () => {
     const gameOptions = {boardName: BoardName.HELLAS, randomMA: RandomMAOptionType.UNLIMITED};
     const game = Game.newInstance('gameid', [player, player2], player, gameOptions);
 
-    const prevMilestones = game.milestones.map((m) => m.name).sort();
-    const prevAwards = game.awards.map((a) => a.name).sort();
+    const prevMilestones = game.milestones.map(toName).sort();
+    const prevAwards = game.awards.map(toName).sort();
 
     const game2 = Game.newInstance('game-foobar2', [player, player2], player, gameOptions);
 
-    const milestones = game2.milestones.map((m) => m.name).sort();
-    const awards = game2.awards.map((a) => a.name).sort();
+    const milestones = game2.milestones.map(toName).sort();
+    const awards = game2.awards.map(toName).sort();
 
     expect(prevMilestones).to.not.eq(milestones);
     expect(prevAwards).to.not.eq(awards);
@@ -617,7 +617,7 @@ describe('Game', () => {
     Game.newInstance('gameid', [player, player2], player, gameOptions);
 
     const corpsAssignedToPlayers =
-            [...player.dealtCorporationCards, ...player2.dealtCorporationCards].map((c) => c.name);
+            [...player.dealtCorporationCards, ...player2.dealtCorporationCards].map(toName);
 
     expect(corpsAssignedToPlayers).has.members(corpsFromTurmoil);
   });
@@ -639,7 +639,7 @@ describe('Game', () => {
     Game.newInstance('gameid', [player, player2], player, gameOptions);
 
     const assignedPreludes =
-            [...player.dealtPreludeCards, ...player2.dealtPreludeCards].map((c) => c.name);
+            [...player.dealtPreludeCards, ...player2.dealtPreludeCards].map(toName);
 
     expect(assignedPreludes).has.members(customPreludes);
   });

@@ -68,7 +68,7 @@ import {PlayableCard} from './cards/IProjectCard';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
 import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
-import {copyAndClear, inplaceRemove, sum} from '../common/utils/utils';
+import {copyAndClear, inplaceRemove, sum, toName} from '../common/utils/utils';
 import {PreludesExpansion} from './preludes/PreludesExpansion';
 import {ChooseCards} from './deferredActions/ChooseCards';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
@@ -1884,17 +1884,17 @@ export class Player implements IPlayer {
       // This generation / this round
       actionsTakenThisRound: this.actionsTakenThisRound,
       actionsThisGeneration: Array.from(this.actionsThisGeneration),
-      pendingInitialActions: this.pendingInitialActions.map((c) => c.name),
+      pendingInitialActions: this.pendingInitialActions.map(toName),
       // Cards
-      dealtCorporationCards: this.dealtCorporationCards.map((c) => c.name),
-      dealtPreludeCards: this.dealtPreludeCards.map((c) => c.name),
-      dealtCeoCards: this.dealtCeoCards.map((c) => c.name),
-      dealtProjectCards: this.dealtProjectCards.map((c) => c.name),
-      cardsInHand: this.cardsInHand.map((c) => c.name),
-      preludeCardsInHand: this.preludeCardsInHand.map((c) => c.name),
-      ceoCardsInHand: this.ceoCardsInHand.map((c) => c.name),
+      dealtCorporationCards: this.dealtCorporationCards.map(toName),
+      dealtPreludeCards: this.dealtPreludeCards.map(toName),
+      dealtCeoCards: this.dealtCeoCards.map(toName),
+      dealtProjectCards: this.dealtProjectCards.map(toName),
+      cardsInHand: this.cardsInHand.map(toName),
+      preludeCardsInHand: this.preludeCardsInHand.map(toName),
+      ceoCardsInHand: this.ceoCardsInHand.map(toName),
       playedCards: this.playedCards.map(serializeProjectCard),
-      draftedCards: this.draftedCards.map((c) => c.name),
+      draftedCards: this.draftedCards.map(toName),
       cardCost: this.cardCost,
       needsToDraft: this.needsToDraft,
       cardDiscount: this.colonies.cardDiscount,
@@ -1918,7 +1918,7 @@ export class Player implements IPlayer {
       // Lawsuit
       removingPlayers: this.removingPlayers,
       // Playwrights
-      removedFromPlayCards: this.removedFromPlayCards.map((c) => c.name),
+      removedFromPlayCards: this.removedFromPlayCards.map(toName),
       name: this.name,
       color: this.color,
       beginner: this.beginner,
@@ -1930,7 +1930,7 @@ export class Player implements IPlayer {
       totalDelegatesPlaced: this.totalDelegatesPlaced,
       underworldData: this.underworldData,
       alliedParty: this._alliedParty,
-      draftHand: this.draftHand.map((c) => c.name),
+      draftHand: this.draftHand.map(toName),
       autoPass: this.autopass,
     };
 

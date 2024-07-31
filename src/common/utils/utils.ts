@@ -147,10 +147,19 @@ export function deNull<T>(array: ReadonlyArray<T | undefined>): Array<T> {
   return output;
 }
 
-// Makes a copy of array, but then empties it.
-// Useful for moving contents.
+/**
+ * Makes a copy of array, but then empties it.
+ * Useful for moving contents.
+ */
 export function copyAndClear<T>(array: Array<T>): Array<T> {
   const copy = [...array];
   array.length = 0;
   return copy;
+}
+
+/**
+ * Returns the name of any named item. Ideal for iterating with the Array.map and other iterative functions.
+ */
+export function toName<T>(item: {name: T}): T {
+  return item.name;
 }

@@ -10,6 +10,7 @@ import {inplaceShuffle} from '../utils/shuffle';
 import {Logger} from '../logs/Logger';
 import {IPreludeCard} from './prelude/IPreludeCard';
 import {ICeoCard} from './ceos/ICeoCard';
+import {toName} from '../../common/utils/utils';
 
 /**
  * A deck of cards to draw from, and also its discard pile.
@@ -149,8 +150,8 @@ export class Deck<T extends ICard> {
 
   public serialize(): SerializedDeck {
     return {
-      drawPile: this.drawPile.map((c) => c.name),
-      discardPile: this.discardPile.map((c) => c.name),
+      drawPile: this.drawPile.map(toName),
+      discardPile: this.discardPile.map(toName),
     };
   }
 }

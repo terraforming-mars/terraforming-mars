@@ -3,7 +3,7 @@ import {CardName} from '../src/common/cards/CardName';
 import {cast, finishGeneration} from './TestingUtils';
 import {expect} from 'chai';
 import {testGame} from './TestGame';
-import {ICard} from '../src/server/cards/ICard';
+import {toName} from '../src/common/utils/utils';
 import {IProjectCard} from '../src/server/cards/IProjectCard';
 import {IPlayer} from '../src/server/IPlayer';
 import {SelectCard} from '../src/server/inputs/SelectCard';
@@ -49,8 +49,8 @@ describe('drafting', () => {
     cast(player.getWaitingFor(), undefined);
     selectCard(otherPlayer, CardName.GENE_REPAIR);
 
-    expect(cardNames(player.draftedCards)).deep.eq([CardName.BIOFERTILIZER_FACILITY]);
-    expect(cardNames(otherPlayer.draftedCards)).deep.eq([CardName.GENE_REPAIR]);
+    expect(player.draftedCards.map(toName)).deep.eq([CardName.BIOFERTILIZER_FACILITY]);
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([CardName.GENE_REPAIR]);
 
     // Second card
 
@@ -69,11 +69,11 @@ describe('drafting', () => {
     cast(player.getWaitingFor(), undefined);
     selectCard(otherPlayer, CardName.ACQUIRED_COMPANY);
 
-    expect(cardNames(player.draftedCards)).deep.eq([
+    expect(player.draftedCards.map(toName)).deep.eq([
       CardName.BIOFERTILIZER_FACILITY,
       CardName.FISH,
     ]);
-    expect(cardNames(otherPlayer.draftedCards)).deep.eq([
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([
       CardName.GENE_REPAIR,
       CardName.ACQUIRED_COMPANY,
     ]);
@@ -159,9 +159,9 @@ describe('drafting', () => {
     selectCard(player2, CardName.EARTH_OFFICE);
     selectCard(player3, CardName.IMPORTED_GHG);
 
-    expect(cardNames(player1.draftedCards)).deep.eq([CardName.ACQUIRED_COMPANY]);
-    expect(cardNames(player2.draftedCards)).deep.eq([CardName.EARTH_OFFICE]);
-    expect(cardNames(player3.draftedCards)).deep.eq([CardName.IMPORTED_GHG]);
+    expect(player1.draftedCards.map(toName)).deep.eq([CardName.ACQUIRED_COMPANY]);
+    expect(player2.draftedCards.map(toName)).deep.eq([CardName.EARTH_OFFICE]);
+    expect(player3.draftedCards.map(toName)).deep.eq([CardName.IMPORTED_GHG]);
 
     // Second card
 
@@ -184,15 +184,15 @@ describe('drafting', () => {
     selectCard(player2, CardName.BIOFERTILIZER_FACILITY);
     selectCard(player3, CardName.FISH);
 
-    expect(cardNames(player1.draftedCards)).deep.eq([
+    expect(player1.draftedCards.map(toName)).deep.eq([
       CardName.ACQUIRED_COMPANY,
       CardName.JOVIAN_EMBASSY,
     ]);
-    expect(cardNames(player2.draftedCards)).deep.eq([
+    expect(player2.draftedCards.map(toName)).deep.eq([
       CardName.EARTH_OFFICE,
       CardName.BIOFERTILIZER_FACILITY,
     ]);
-    expect(cardNames(player3.draftedCards)).deep.eq([
+    expect(player3.draftedCards.map(toName)).deep.eq([
       CardName.IMPORTED_GHG,
       CardName.FISH,
     ]);
@@ -286,9 +286,9 @@ describe('drafting', () => {
     selectCard(player2, CardName.EARTH_OFFICE);
     selectCard(player3, CardName.IMPORTED_GHG);
 
-    expect(cardNames(player1.draftedCards)).deep.eq([CardName.ACQUIRED_COMPANY]);
-    expect(cardNames(player2.draftedCards)).deep.eq([CardName.EARTH_OFFICE]);
-    expect(cardNames(player3.draftedCards)).deep.eq([CardName.IMPORTED_GHG]);
+    expect(player1.draftedCards.map(toName)).deep.eq([CardName.ACQUIRED_COMPANY]);
+    expect(player2.draftedCards.map(toName)).deep.eq([CardName.EARTH_OFFICE]);
+    expect(player3.draftedCards.map(toName)).deep.eq([CardName.IMPORTED_GHG]);
 
     // Second card
 
@@ -311,15 +311,15 @@ describe('drafting', () => {
     selectCard(player2, CardName.JOVIAN_EMBASSY);
     selectCard(player3, CardName.BIOFERTILIZER_FACILITY);
 
-    expect(cardNames(player1.draftedCards)).deep.eq([
+    expect(player1.draftedCards.map(toName)).deep.eq([
       CardName.ACQUIRED_COMPANY,
       CardName.FISH,
     ]);
-    expect(cardNames(player2.draftedCards)).deep.eq([
+    expect(player2.draftedCards.map(toName)).deep.eq([
       CardName.EARTH_OFFICE,
       CardName.JOVIAN_EMBASSY,
     ]);
-    expect(cardNames(player3.draftedCards)).deep.eq([
+    expect(player3.draftedCards.map(toName)).deep.eq([
       CardName.IMPORTED_GHG,
       CardName.BIOFERTILIZER_FACILITY,
     ]);
@@ -398,8 +398,8 @@ describe('drafting', () => {
     cast(player.getWaitingFor(), undefined);
     selectCard(otherPlayer, CardName.ALGAE);
 
-    expect(cardNames(player.draftedCards)).deep.eq([CardName.ADAPTATION_TECHNOLOGY]);
-    expect(cardNames(otherPlayer.draftedCards)).deep.eq([CardName.ALGAE]);
+    expect(player.draftedCards.map(toName)).deep.eq([CardName.ADAPTATION_TECHNOLOGY]);
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([CardName.ALGAE]);
 
     // Second card
 
@@ -419,11 +419,11 @@ describe('drafting', () => {
     cast(player.getWaitingFor(), undefined);
     selectCard(otherPlayer, CardName.ANTS);
 
-    expect(cardNames(player.draftedCards)).deep.eq([
+    expect(player.draftedCards.map(toName)).deep.eq([
       CardName.ADAPTATION_TECHNOLOGY,
       CardName.ARCTIC_ALGAE]);
 
-    expect(cardNames(otherPlayer.draftedCards)).deep.eq([
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([
       CardName.ALGAE,
       CardName.ANTS]);
 
@@ -443,12 +443,12 @@ describe('drafting', () => {
     cast(player.getWaitingFor(), undefined);
     selectCard(otherPlayer, CardName.AQUIFER_PUMPING);
 
-    expect(cardNames(player.draftedCards)).deep.eq([
+    expect(player.draftedCards.map(toName)).deep.eq([
       CardName.ADAPTATION_TECHNOLOGY,
       CardName.ARCTIC_ALGAE,
       CardName.AEROBRAKED_AMMONIA_ASTEROID]);
 
-    expect(cardNames(otherPlayer.draftedCards)).deep.eq([
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([
       CardName.ALGAE,
       CardName.ANTS,
       CardName.AQUIFER_PUMPING]);
@@ -467,14 +467,14 @@ describe('drafting', () => {
     selectCard(otherPlayer, CardName.ADAPTED_LICHEN);
 
     // Selecting the fourth card automatically gives you the fifth card that was passed.
-    expect(cardNames(player.draftedCards)).deep.eq([
+    expect(player.draftedCards.map(toName)).deep.eq([
       CardName.ADAPTATION_TECHNOLOGY,
       CardName.ARCTIC_ALGAE,
       CardName.AEROBRAKED_AMMONIA_ASTEROID,
       CardName.ARCHAEBACTERIA,
       CardName.ADVANCED_ECOSYSTEMS]);
 
-    expect(cardNames(otherPlayer.draftedCards)).deep.eq([
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([
       CardName.ALGAE,
       CardName.ANTS,
       CardName.AQUIFER_PUMPING,
@@ -503,7 +503,7 @@ describe('drafting', () => {
     selectCard(player, CardName.ASTEROID_MINING);
     selectCard(otherPlayer, CardName.BUSHES);
 
-    expect(cardNames(player.draftedCards)).deep.eq([
+    expect(player.draftedCards.map(toName)).deep.eq([
       CardName.ADAPTATION_TECHNOLOGY,
       CardName.ARCTIC_ALGAE,
       CardName.AEROBRAKED_AMMONIA_ASTEROID,
@@ -511,7 +511,7 @@ describe('drafting', () => {
       CardName.ADVANCED_ECOSYSTEMS,
       CardName.ASTEROID_MINING]);
 
-    expect(cardNames(otherPlayer.draftedCards)).deep.eq([
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([
       CardName.ALGAE,
       CardName.ANTS,
       CardName.AQUIFER_PUMPING,
@@ -537,7 +537,7 @@ describe('drafting', () => {
     selectCard(player, CardName.BLACK_POLAR_DUST);
     selectCard(otherPlayer, CardName.ARTIFICIAL_PHOTOSYNTHESIS);
 
-    expect(cardNames(player.draftedCards)).deep.eq([
+    expect(player.draftedCards.map(toName)).deep.eq([
       CardName.ADAPTATION_TECHNOLOGY,
       CardName.ARCTIC_ALGAE,
       CardName.AEROBRAKED_AMMONIA_ASTEROID,
@@ -546,7 +546,7 @@ describe('drafting', () => {
       CardName.ASTEROID_MINING,
       CardName.BLACK_POLAR_DUST]);
 
-    expect(cardNames(otherPlayer.draftedCards)).deep.eq([
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([
       CardName.ALGAE,
       CardName.ANTS,
       CardName.AQUIFER_PUMPING,
@@ -571,7 +571,7 @@ describe('drafting', () => {
     selectCard(player, CardName.ASTEROID);
     selectCard(otherPlayer, CardName.BREATHING_FILTERS);
 
-    expect(cardNames(player.draftedCards)).deep.eq([
+    expect(player.draftedCards.map(toName)).deep.eq([
       CardName.ADAPTATION_TECHNOLOGY,
       CardName.ARCTIC_ALGAE,
       CardName.AEROBRAKED_AMMONIA_ASTEROID,
@@ -581,7 +581,7 @@ describe('drafting', () => {
       CardName.BLACK_POLAR_DUST,
       CardName.ASTEROID]);
 
-    expect(cardNames(otherPlayer.draftedCards)).deep.eq([
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([
       CardName.ALGAE,
       CardName.ANTS,
       CardName.AQUIFER_PUMPING,
@@ -844,8 +844,8 @@ describe('drafting', () => {
 
     // Start of the prelude draft
 
-    expect(cardNames(player.draftedCards)).deep.eq([]);
-    expect(cardNames(otherPlayer.draftedCards)).deep.eq([]);
+    expect(player.draftedCards.map(toName)).deep.eq([]);
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([]);
 
     expect(draftSelection(player)).deep.eq([
       CardName.EXPERIMENTAL_FOREST,
@@ -862,10 +862,10 @@ describe('drafting', () => {
     selectCard(player, CardName.EXPERIMENTAL_FOREST);
     selectCard(otherPlayer, CardName.ACQUIRED_SPACE_AGENCY);
 
-    expect(cardNames(player.draftedCards)).deep.eq([
+    expect(player.draftedCards.map(toName)).deep.eq([
       CardName.EXPERIMENTAL_FOREST,
     ]);
-    expect(cardNames(otherPlayer.draftedCards)).deep.eq([
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([
       CardName.ACQUIRED_SPACE_AGENCY,
     ]);
 
@@ -884,11 +884,11 @@ describe('drafting', () => {
     selectCard(player, CardName.ORBITAL_CONSTRUCTION_YARD);
     selectCard(otherPlayer, CardName.ECOLOGY_EXPERTS);
 
-    expect(cardNames(player.draftedCards)).deep.eq([
+    expect(player.draftedCards.map(toName)).deep.eq([
       CardName.EXPERIMENTAL_FOREST,
       CardName.ORBITAL_CONSTRUCTION_YARD,
     ]);
-    expect(cardNames(otherPlayer.draftedCards)).deep.eq([
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([
       CardName.ACQUIRED_SPACE_AGENCY,
       CardName.ECOLOGY_EXPERTS,
     ]);
@@ -906,8 +906,8 @@ describe('drafting', () => {
     selectCard(player, CardName.RESEARCH_NETWORK);
     selectCard(otherPlayer, CardName.MOHOLE);
 
-    expect(cardNames(player.draftedCards)).deep.eq([]);
-    expect(cardNames(otherPlayer.draftedCards)).deep.eq([]);
+    expect(player.draftedCards.map(toName)).deep.eq([]);
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([]);
 
     // End of draft
 
@@ -971,24 +971,20 @@ function unshiftCards(deck: Array<IProjectCard>, cards: Array<CardName>) {
   deck.unshift(...cardsFromJSON(cards));
 }
 
-function cardNames(cards: ReadonlyArray<ICard>): Array<CardName> {
-  return cards.map((card) => card.name);
-}
-
 function initialCardSelection(player: IPlayer) {
   const selectInitialCards = cast(player.getWaitingFor(), SelectInitialCards);
   const corporationCards = cast(selectInitialCards.options[0], SelectCard);
   const preludeCards = selectInitialCards.options.length === 3 ? cast(selectInitialCards.options[1], SelectCard) : undefined;
   const projectCards = cast(selectInitialCards.options.length === 3 ? selectInitialCards.options[2] : selectInitialCards.options[1], SelectCard);
   return {
-    corporationCards: cardNames(corporationCards.cards),
-    preludeCards: cardNames(preludeCards?.cards ?? []),
-    projectCards: cardNames(projectCards.cards),
+    corporationCards: corporationCards.cards.map(toName),
+    preludeCards: preludeCards?.cards.map(toName) ?? [],
+    projectCards: projectCards.cards.map(toName),
   };
 }
 
 function draftSelection(player: IPlayer) {
-  return getWaitingFor(player).cards.map((card) => card.name);
+  return getWaitingFor(player).cards.map(toName);
 }
 
 function selectCard(player: TestPlayer, cardName: CardName) {

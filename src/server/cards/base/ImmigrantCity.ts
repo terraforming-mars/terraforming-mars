@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {Space} from '../../boards/Space';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {Priority} from '../../deferredActions/Priority';
@@ -53,12 +53,10 @@ export class ImmigrantCity extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player))
-      .andThen((space) => {
-        player.game.addCity(player, space);
-        player.game.defer(new LoseProduction(player, Resource.ENERGY, {count: 1}));
-        player.game.defer(new LoseProduction(player, Resource.MEGACREDITS, {count: 2}));
-        return undefined;
-      });
+    player.game.defer(new PlaceCityTile(player)).andThen(() => {
+      player.game.defer(new LoseProduction(player, Resource.ENERGY, {count: 1}));
+      player.game.defer(new LoseProduction(player, Resource.MEGACREDITS, {count: 2}));
+    });
+    return undefined;
   }
 }

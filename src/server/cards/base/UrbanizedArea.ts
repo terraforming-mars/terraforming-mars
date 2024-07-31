@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {Space} from '../../boards/Space';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardName} from '../../../common/cards/CardName';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
@@ -41,10 +41,10 @@ export class UrbanizedArea extends Card implements IProjectCard {
     return this.getAvailableSpaces(player, canAffordOptions).length > 0;
   }
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace('Select space next to at least 2 other city tiles', this.getAvailableSpaces(player))
-      .andThen((space) => {
-        player.game.addCity(player, space);
-        return undefined;
-      });
+    player.game.defer(new PlaceCityTile(player, {
+      title: 'Select space next to at least 2 other city tiles',
+      spaces: this.getAvailableSpaces(player),
+    }));
+    return undefined;
   }
 }

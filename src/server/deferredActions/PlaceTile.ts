@@ -13,7 +13,7 @@ export class PlaceTile extends DeferredAction<Space> {
     player: IPlayer,
     private options: {
       tile: Tile,
-      on: PlacementType | (() => Array<Space>),
+      on: PlacementType | (() => ReadonlyArray<Space>),
       title: string | Message,
       adjacencyBonus?: AdjacencyBonus;
     }) {

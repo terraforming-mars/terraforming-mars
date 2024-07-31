@@ -3,7 +3,7 @@ import {ImmigrantCity} from '../../../src/server/cards/base/ImmigrantCity';
 import {TharsisRepublic} from '../../../src/server/cards/corporation/TharsisRepublic';
 import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
-import {cast, runAllActions, runNextAction} from '../../TestingUtils';
+import {cast, churn, runAllActions, runNextAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
@@ -24,8 +24,8 @@ describe('ImmigrantCity', function() {
 
   it('Should play', function() {
     player.production.add(Resource.ENERGY, 1);
-    const action = cast(card.play(player), SelectSpace);
-    action.cb(action.spaces[0]);
+    const selectSpace = cast(churn(card.play(player), player), SelectSpace);
+    selectSpace.cb(selectSpace.spaces[0]);
     runAllActions(game);
 
     expect(player.production.energy).to.eq(0);
@@ -42,8 +42,8 @@ describe('ImmigrantCity', function() {
     player.production.add(Resource.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.true;
 
-    const action = cast(card.play(player), SelectSpace);
-    action.cb(action.spaces[0]);
+    const selectSpace = cast(churn(card.play(player), player), SelectSpace);
+    selectSpace.cb(selectSpace.spaces[0]);
     runAllActions(game);
 
     expect(player.production.energy).to.eq(0);
@@ -62,8 +62,8 @@ describe('ImmigrantCity', function() {
     player.production.add(Resource.MEGACREDITS, -5);
     expect(card.canPlay(player)).is.true;
 
-    const action = cast(card.play(player), SelectSpace);
-    action.cb(action.spaces[0]);
+    const selectSpace = cast(churn(card.play(player), player), SelectSpace);
+    selectSpace.cb(selectSpace.spaces[0]);
     runAllActions(game);
 
     expect(player.production.energy).to.eq(0);

@@ -3,7 +3,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 import {intersection} from '../../../common/utils/utils';
 
@@ -34,12 +34,14 @@ export class UndergroundSettlement extends PreludeCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace('Select space for city tile', this.availableSpaces(player))
-      .andThen((space) => {
-        player.game.addCity(player, space);
+    player.game.defer(new PlaceCityTile(player, {
+      spaces: this.availableSpaces(player),
+    })).andThen((space) => {
+      if (space) {
         UnderworldExpansion.excavate(player, space);
-        return undefined;
-      });
+      }
+    });
+    return undefined;
   }
 }
 

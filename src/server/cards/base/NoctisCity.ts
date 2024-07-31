@@ -3,7 +3,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {message} from '../../logs/MessageBuilder';
@@ -45,12 +45,13 @@ export class NoctisCity extends Card implements IProjectCard {
     if (noctisCitySpaceId !== undefined) {
       const space = player.game.board.getSpaceOrThrow(noctisCitySpaceId);
       player.game.addCity(player, space);
-      return undefined;
+    } else {
+      player.game.defer(
+        new PlaceCityTile(player, {
+          title: message('Select space for ${0}', (b) => b.card(this)),
+        }),
+      );
     }
-    return new SelectSpace(message('Select space for ${0}', (b) => b.card(this)), player.game.board.getAvailableSpacesForCity(player))
-      .andThen((space) => {
-        player.game.addCity(player, space);
-        return undefined;
-      });
+    return undefined;
   }
 }

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {UndergroundSettlement} from '../../../src/server/cards/underworld/UndergroundSettlement';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast, churn} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 
@@ -10,7 +10,7 @@ describe('UndergroundSettlement', () => {
     const card = new UndergroundSettlement();
     const [/* game */, player] = testGame(2, {underworldExpansion: true});
 
-    const selectSpace = cast(card.play(player), SelectSpace);
+    const selectSpace = cast(churn(card.play(player), player), SelectSpace);
     const space = selectSpace.spaces[0];
     space.player = undefined;
     space.undergroundResources = 'plant1';

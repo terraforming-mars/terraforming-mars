@@ -5,7 +5,7 @@ import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {EcologicalZoneAres} from '../../../src/server/cards/ares/EcologicalZoneAres';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('EcologicalZoneAres', function() {
@@ -19,14 +19,17 @@ describe('EcologicalZoneAres', function() {
   });
 
   it('Should play', function() {
+    expect(card.canPlay(player)).is.false;
     const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
     game.addGreenery(player, landSpace);
     expect(card.canPlay(player)).is.true;
 
-    const action = cast(card.play(player), SelectSpace);
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
 
-    const adjacentSpace = action.spaces[0];
-    action.cb(adjacentSpace);
+    const adjacentSpace = selectSpace.spaces[0];
+    selectSpace.cb(adjacentSpace);
     expect(adjacentSpace.tile?.tileType).to.eq(TileType.ECOLOGICAL_ZONE);
 
     card.onCardPlayed(player, card);

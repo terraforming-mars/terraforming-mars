@@ -52,7 +52,6 @@ export class StJosephOfCupertinoMission extends Card implements IActionCard {
 
     player.game.defer(new SelectPaymentDeferred(player, 5, {canUseSteel: true, title: TITLES.payForCardAction(this.name)}))
       .andThen(() => {
-        // TODO(kberg): get player.defer to return AndThen<Space>
         player.defer(new SelectSpace(
           message('Select new space for ${0}', (b) => b.card(this)),
           cities)

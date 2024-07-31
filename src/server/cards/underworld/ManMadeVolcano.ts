@@ -7,7 +7,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {PlaceTile} from '../../deferredActions/PlaceTile';
 import {message} from '../../logs/MessageBuilder';
 import {digit} from '../Options';
 
@@ -50,15 +50,12 @@ export class ManMadeVolcano extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer): PlayerInput | undefined {
-    player.defer(new SelectSpace(
-      message('Select space for ${0}', (b) => b.tileType(TileType.MAN_MADE_VOLCANO)),
-      this.availableSpaces(player))
-      .andThen((space) => {
-        player.game.addTile(player, space, {
-          tileType: TileType.MAN_MADE_VOLCANO,
-          card: this.name,
-        });
-        return undefined;
+    player.game.defer(
+      new PlaceTile(player, {
+        tile: {tileType: TileType.MAN_MADE_VOLCANO, card: this.name},
+        on: () => this.availableSpaces(player),
+        title: message('Select space for ${0}', (b) => b.tileType(TileType.MAN_MADE_VOLCANO)),
+        adjacencyBonus: this.adjacencyBonus,
       }));
     return undefined;
   }

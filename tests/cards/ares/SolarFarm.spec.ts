@@ -6,7 +6,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('SolarFarm', function() {
@@ -34,10 +34,15 @@ describe('SolarFarm', function() {
       SpaceBonus.PLANT,
     ];
 
-    const action = cast(card.play(player), SelectSpace);
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const selectSpcae = cast(player.popWaitingFor(), SelectSpace);
+
     expect(player.production.energy).eq(0);
+
     const citySpace = game.board.getAvailableSpacesOnLand(player).filter((s) => !AresHandler.hasHazardTile(s))[0];
-    action.cb(citySpace);
+    selectSpcae.cb(citySpace);
+
     expect(citySpace.player).to.eq(player);
     expect(citySpace.tile!.tileType).to.eq(TileType.SOLAR_FARM);
     expect(citySpace.adjacency).to.deep.eq({

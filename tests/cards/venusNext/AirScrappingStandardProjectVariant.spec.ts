@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
 import {AirScrappingStandardProjectVariant} from '../../../src/server/cards/venusNext/AirScrappingStandardProjectVariant';
-import {runAllActions, setVenusScaleLevel, testRedsCosts} from '../../TestingUtils';
+import {runAllActions, setVenusScaleLevel, testRedsCosts, toName} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -20,14 +20,14 @@ describe('AirScrappingStandardProjectVariant', function() {
     // Building another game without the alt venus board.
     const [/* game */, player] = testGame(1, {venusNextExtension: true, altVenusBoard: false});
     const cards = player.getStandardProjectOption().cards;
-    const names = cards.map((card) => card.name);
+    const names = cards.map(toName);
     expect(names).to.include(CardName.AIR_SCRAPPING_STANDARD_PROJECT);
     expect(names).to.not.include(CardName.AIR_SCRAPPING_STANDARD_PROJECT_VARIANT);
   });
 
   it('option available for alt venus board', async function() {
     const cards = player.getStandardProjectOption().cards;
-    const names: Array<CardName> = cards.map((card) => card.name);
+    const names: Array<CardName> = cards.map(toName);
     expect(names).to.include(CardName.AIR_SCRAPPING_STANDARD_PROJECT_VARIANT);
     expect(names).to.not.include(CardName.AIR_SCRAPPING_STANDARD_PROJECT);
   });

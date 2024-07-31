@@ -268,6 +268,7 @@ export function doWait<T>(player: TestPlayer, klass: new (...args: any[]) => T, 
 /**
  * Returns the name of any named item. Ideal for iterating with the Array.map and other iterative functions.
  */
+// Use common/utils/utils/toName
 export function toName<T>(item: {name: T}): T {
   return item.name;
 }

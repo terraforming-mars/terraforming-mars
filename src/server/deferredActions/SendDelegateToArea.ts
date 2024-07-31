@@ -4,6 +4,7 @@ import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
 import {SelectPaymentDeferred} from './SelectPaymentDeferred';
 import {Delegate, Turmoil} from '../turmoil/Turmoil';
+import {toName} from '../../common/utils/utils';
 
 export type Options = {
   /** The number of delegates to replace. Default is 1. */
@@ -42,7 +43,7 @@ export class SendDelegateToArea extends DeferredAction {
       });
     }
 
-    return parties.map((party) => party.name);
+    return parties.map(toName);
   }
 
   public execute() {

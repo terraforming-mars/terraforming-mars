@@ -5,7 +5,8 @@ import {SerializedGlobalEventDealer} from './SerializedGlobalEventDealer';
 import {GlobalEventManifest, ModuleManifest} from '../../cards/ModuleManifest';
 import {isCompatibleWith} from '../../cards/ICardFactory';
 import {inplaceShuffle} from '../../utils/shuffle';
-import {GameModule} from '@/common/cards/GameModule';
+import {GameModule} from '../../../common/cards/GameModule';
+import {toName} from '../../../common/utils/utils';
 
 // When renaming, add the rename here and add a TODO (like the example below)
 // And remember to add a test in GlobalEventDealer.spec.ts
@@ -99,8 +100,8 @@ export class GlobalEventDealer {
 
   public serialize(): SerializedGlobalEventDealer {
     return {
-      deck: this.deck.map((card) => card.name),
-      discarded: this.discards.map((card) => card.name),
+      deck: this.deck.map(toName),
+      discarded: this.discards.map(toName),
     };
   }
 

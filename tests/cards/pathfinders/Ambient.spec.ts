@@ -12,6 +12,7 @@ import {Phase} from '../../../src/common/Phase';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
+import {toName} from '../../../src/common/utils/utils';
 
 describe('Ambient', function() {
   let card: Ambient;
@@ -93,7 +94,7 @@ describe('Ambient', function() {
       return option === undefined ? undefined : cast(option, SelectCard);
     };
 
-    expect(getBlueActions()!.cards.map((c) => (c as any).name)).deep.eq([card.name]);
+    expect(getBlueActions()!.cards.map(toName)).deep.eq([card.name]);
 
     expect(player.getTerraformRating()).eq(20);
 
@@ -105,7 +106,7 @@ describe('Ambient', function() {
 
     expect(getBlueActions()).is.undefined;
     runAllActions(game);
-    expect(getBlueActions()!.cards.map((c) => (c as any).name)).deep.eq([card.name]);
+    expect(getBlueActions()!.cards.map(toName)).deep.eq([card.name]);
 
     getBlueActions()!.cb([card]);
 

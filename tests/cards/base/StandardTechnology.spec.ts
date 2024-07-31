@@ -4,7 +4,7 @@ import {SellPatentsStandardProject} from '../../../src/server/cards/base/standar
 import {StandardTechnology} from '../../../src/server/cards/base/StandardTechnology';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast, churnAction, churn} from '../../TestingUtils';
+import {cast, churn} from '../../TestingUtils';
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
@@ -41,7 +41,7 @@ describe('StandardTechnology', function() {
 
     const greeneryStandardProject = new GreeneryStandardProject();
 
-    const selectSpace = cast(churnAction(greeneryStandardProject, player), SelectSpace);
+    const selectSpace = cast(churn(greeneryStandardProject.action(player), player), SelectSpace);
     const availableSpace = selectSpace.spaces[0];
 
     selectSpace?.cb(availableSpace);

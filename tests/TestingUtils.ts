@@ -108,7 +108,6 @@ export function runNextAction(game: IGame) {
   return action?.execute();
 }
 
-// Use churnAction instead.
 export function cardAction(card: IActionCard, player: TestPlayer): PlayerInput | undefined {
   const input = card.action(player);
   if (input !== undefined) {
@@ -249,16 +248,6 @@ export function finishGeneration(game: IGame): void {
 export function getSendADelegateOption(player: IPlayer) {
   return player.getActions().options.find(
     (option) => option.title.toString().startsWith('Send a delegate'));
-}
-
-/**
- * Simulate the behavior of a card action run through the deferred action queue, returning the
- * next input the player must supply.
- *
- * ../srcsee churn.
- */
-export function churnAction(card: IActionCard, player: TestPlayer) {
-  return churn(() => card.action(player), player);
 }
 
 /**

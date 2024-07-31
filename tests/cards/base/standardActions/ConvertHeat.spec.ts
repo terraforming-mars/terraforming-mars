@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ConvertHeat} from '../../../../src/server/cards/base/standardActions/ConvertHeat';
 import {Phase} from '../../../../src/common/Phase';
-import {cast, churnAction, setTemperature} from '../../../TestingUtils';
+import {cast, churn, setTemperature} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
 import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/server/turmoil/parties/Reds';
@@ -40,7 +40,7 @@ describe('ConvertHeat', function() {
   it('Should play', function() {
     player.heat = 8;
     expect(card.canAct(player)).eq(true);
-    expect(churnAction(card, player)).eq(undefined);
+    expect(churn(card.action(player), player)).eq(undefined);
     expect(game.getTemperature()).eq(-28);
   });
 

@@ -3,7 +3,7 @@ import {UnitedNationsMarsInitiative} from '../../../src/server/cards/corporation
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
-import {cast, churnAction, runAllActions} from '../../TestingUtils';
+import {cast, churn, runAllActions} from '../../TestingUtils';
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
 import {testGame} from '../../TestGame';
@@ -56,7 +56,7 @@ describe('UnitedNationsMarsInitiative', function() {
     // Setting a larger amount of heat just to make the test results more interesting
     player.heat = 5;
 
-    const selectPayment = cast(churnAction(card, player), SelectPayment);
+    const selectPayment = cast(churn(card.action(player), player), SelectPayment);
     selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
     expect(player.getTerraformRating()).to.eq(22);
     expect(player.megaCredits).to.eq(1);

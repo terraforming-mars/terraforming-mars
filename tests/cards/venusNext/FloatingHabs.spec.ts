@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {churnAction, cast, runAllActions} from '../../TestingUtils';
+import {churn, cast, runAllActions} from '../../TestingUtils';
 import {Research} from '../../../src/server/cards/base/Research';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
@@ -41,7 +41,7 @@ describe('FloatingHabs', function() {
   it('Should act - multiple targets', function() {
     player.playedCards.push(card, new Dirigibles());
     player.megaCredits = 10;
-    const selectCard = cast(churnAction(card, player), SelectCard);
+    const selectCard = cast(churn(card.action(player), player), SelectCard);
     selectCard.cb([card]);
     game.deferredActions.runNext();
     expect(card.resourceCount).to.eq(1);

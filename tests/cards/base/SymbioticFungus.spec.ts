@@ -1,6 +1,6 @@
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {expect} from 'chai';
-import {churnAction, cast, runAllActions, setTemperature} from '../../TestingUtils';
+import {churn, cast, runAllActions, setTemperature} from '../../TestingUtils';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {SymbioticFungus} from '../../../src/server/cards/base/SymbioticFungus';
@@ -40,7 +40,7 @@ describe('SymbioticFungus', function() {
 
   it('Should act - multiple targets', function() {
     player.playedCards.push(new Ants(), new Decomposers());
-    const selectCard = cast(churnAction(card, player), SelectCard);
+    const selectCard = cast(churn(card.action(player), player), SelectCard);
 
     selectCard.cb([player.playedCards[0]]);
     expect(player.playedCards[0].resourceCount).to.eq(1);

@@ -3,7 +3,7 @@ import {Research} from '../../../src/server/cards/base/Research';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {Stratopolis} from '../../../src/server/cards/venusNext/Stratopolis';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast, churnAction, runAllActions, testGame} from '../../TestingUtils';
+import {cast, churn, runAllActions, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('Stratopolis', function() {
@@ -38,7 +38,7 @@ describe('Stratopolis', function() {
     const card2 = new AerialMappers();
     player.playedCards.push(card, card2);
 
-    const selectCard = cast(churnAction(card, player), SelectCard);
+    const selectCard = cast(churn(card.action(player), player), SelectCard);
     selectCard.cb([card2]);
 
     expect(card2.resourceCount).to.eq(2);

@@ -4,7 +4,7 @@ import {ShiftAresGlobalParameters} from '../../../src/server/inputs/ShiftAresGlo
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
-import {cast, churnPlay} from '../../TestingUtils';
+import {cast, churn} from '../../TestingUtils';
 import {HAZARD_CONSTRAINTS} from '../../../src/common/ares/AresData';
 import {AresHandler} from '../../../src/server/ares/AresHandler';
 
@@ -24,7 +24,7 @@ describe('ButterflyEffect', function() {
   it('play', function() {
     const priorTerraformingRating = player.getTerraformRating();
 
-    const input = cast(churnPlay(card, player), ShiftAresGlobalParameters);
+    const input = cast(churn(card.play(player), player), ShiftAresGlobalParameters);
     expect(player.getTerraformRating()).eq(priorTerraformingRating + 1);
 
     const originalHazardData = game.aresData!.hazardData;
@@ -58,7 +58,7 @@ describe('ButterflyEffect', function() {
 
     const priorTerraformingRating = player.getTerraformRating();
 
-    expect(churnPlay(card, player)).is.undefined;
+    expect(churn(card.play(player), player)).is.undefined;
     expect(player.getTerraformRating()).eq(priorTerraformingRating + 1);
   });
 });

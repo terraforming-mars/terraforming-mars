@@ -252,16 +252,6 @@ export function getSendADelegateOption(player: IPlayer) {
 }
 
 /**
- * Simulate the behavior of a playing a project card run through the deferred action queue, returning the
- * next input the player must supply.
- *
- * ../srcsee churn.
- */
-export function churnPlay(card: IProjectCard, player: TestPlayer) {
-  return churn(() => card.play(player), player);
-}
-
-/**
  * Simulate the behavior of a card action run through the deferred action queue, returning the
  * next input the player must supply.
  *

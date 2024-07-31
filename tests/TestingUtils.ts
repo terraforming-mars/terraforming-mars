@@ -15,7 +15,6 @@ import {CardName} from '../src/common/cards/CardName';
 import {CardType} from '../src/common/cards/CardType';
 import {SpaceId} from '../src/common/Types';
 import {PlayerInput} from '../src/server/PlayerInput';
-import {IActionCard} from '../src/server/cards/ICard';
 import {TestPlayer} from './TestPlayer';
 import {PartyName} from '../src/common/turmoil/PartyName';
 import {IPlayer} from '../src/server/IPlayer';
@@ -106,15 +105,6 @@ export function runAllActions(game: IGame) {
 export function runNextAction(game: IGame) {
   const action = game.deferredActions.pop();
   return action?.execute();
-}
-
-export function cardAction(card: IActionCard, player: TestPlayer): PlayerInput | undefined {
-  const input = card.action(player);
-  if (input !== undefined) {
-    return input;
-  }
-  runAllActions(player.game);
-  return player.popWaitingFor();
 }
 
 export function forceGenerationEnd(game: IGame) {

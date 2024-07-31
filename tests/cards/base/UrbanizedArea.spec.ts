@@ -7,7 +7,7 @@ import {SpaceName} from '../../../src/server/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {cast} from '../../TestingUtils';
+import {cast, churn} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('UrbanizedArea', function() {
@@ -41,10 +41,10 @@ describe('UrbanizedArea', function() {
     player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
-    const action = cast(card.play(player), SelectSpace);
-    expect(action.spaces).has.lengthOf(1);
+    const selectSpace = cast(churn(card.play(player), player), SelectSpace);
+    expect(selectSpace.spaces).has.lengthOf(1);
 
-    action.cb(action.spaces[0]);
+    selectSpace.cb(selectSpace.spaces[0]);
     expect(game.board.getCities()).has.length(3);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(2);

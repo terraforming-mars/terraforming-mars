@@ -6,7 +6,7 @@ import {SpaceName} from '../../../src/server/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast, churn} from '../../TestingUtils';
 import {BoardName} from '../../../src/common/boards/BoardName';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
@@ -28,8 +28,8 @@ describe('NoctisCity', function() {
     // With two players, there's no solo setup, so all spaces will be available.
     const [game, player] = testGame(2, {boardName: BoardName.HELLAS});
 
-    const action = cast(card.play(player), SelectSpace);
-    expect(action.spaces).deep.eq(game.board.getAvailableSpacesForCity(player));
+    const selectSpace = cast(churn(card.play(player), player), SelectSpace);
+    expect(selectSpace.spaces).deep.eq(game.board.getAvailableSpacesForCity(player));
   });
 
   it('Should play', function() {

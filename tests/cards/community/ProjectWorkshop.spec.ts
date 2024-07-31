@@ -11,7 +11,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {TestPlayer} from '../../TestPlayer';
 import {AncientShipyards} from '../../../src/server/cards/moon/AncientShipyards';
-import {cast, churn, churnAction, runAllActions} from '../../TestingUtils';
+import {cast, churn, runAllActions} from '../../TestingUtils';
 import {Phase} from '../../../src/common/Phase';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
@@ -55,7 +55,7 @@ describe('ProjectWorkshop', function() {
     player.megaCredits = 3;
 
     expect(card.canAct(player)).is.true;
-    const selectOption = cast(churnAction(card, player), SelectOption);
+    const selectOption = cast(churn(card.action(player), player), SelectOption);
     expect(churn(() => selectOption.cb(undefined), player)).is.undefined;
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.cardsInHand[0].type).to.eq(CardType.ACTIVE);
@@ -187,7 +187,7 @@ describe('ProjectWorkshop', function() {
     // Setting a larger amount of heat just to make the test results more interesting
     player.heat = 5;
 
-    const selectOption = cast(churnAction(card, player), SelectOption);
+    const selectOption = cast(churn(card.action(player), player), SelectOption);
     const selectPayment = cast(churn(() => selectOption.cb(undefined), player), SelectPayment);
     selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
     expect(player.megaCredits).to.eq(1);

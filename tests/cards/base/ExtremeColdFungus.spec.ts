@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, churnAction, setTemperature} from '../../TestingUtils';
+import {cast, churn, setTemperature} from '../../TestingUtils';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {ExtremeColdFungus} from '../../../src/server/cards/base/ExtremeColdFungus';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
@@ -36,7 +36,7 @@ describe('ExtremeColdFungus', () => {
     const tardigrades = new Tardigrades();
     player.playedCards.push(tardigrades);
 
-    const action = cast(churnAction(card, player), OrOptions);
+    const action = cast(churn(card.action(player), player), OrOptions);
     expect(action.options).has.lengthOf(2);
 
     action.options[0].cb();
@@ -51,7 +51,7 @@ describe('ExtremeColdFungus', () => {
     const ants = new Ants();
     player.playedCards.push(tardigrades, ants);
 
-    const action = cast(churnAction(card, player), OrOptions);
+    const action = cast(churn(card.action(player), player), OrOptions);
     expect(action.options).has.lengthOf(2);
 
     action.options[0].cb([tardigrades]);

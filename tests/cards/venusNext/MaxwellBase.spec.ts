@@ -6,7 +6,7 @@ import {StratosphericBirds} from '../../../src/server/cards/venusNext/Stratosphe
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Resource} from '../../../src/common/Resource';
-import {cast, churnAction, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
+import {cast, churn, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {FloaterUrbanism} from '../../../src/server/cards/pathfinders/FloaterUrbanism';
@@ -62,7 +62,7 @@ describe('MaxwellBase', function() {
     player.playedCards.push(card, card2, card3);
     expect(card.canAct(player)).is.true;
 
-    const action = cast(churnAction(card, player), SelectCard);
+    const action = cast(churn(card.action(player), player), SelectCard);
     action.cb([card2]);
     expect(card2.resourceCount).to.eq(1);
   });

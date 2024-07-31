@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {churnAction, setOxygenLevel} from '../../../TestingUtils';
+import {churn, setOxygenLevel} from '../../../TestingUtils';
 import {GreeneryStandardProject} from '../../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {TestPlayer} from '../../../TestPlayer';
 import {IGame} from '../../../../src/server/IGame';
@@ -33,7 +33,7 @@ describe('GreeneryStandardProject', function() {
     player.setTerraformRating(20);
     expect(game.getOxygenLevel()).eq(0);
 
-    assertPlaceTile(player, churnAction(card, player), TileType.GREENERY);
+    assertPlaceTile(player, churn(card.action(player), player), TileType.GREENERY);
 
     expect(player.megaCredits).eq(0);
     expect(player.getTerraformRating()).eq(21);

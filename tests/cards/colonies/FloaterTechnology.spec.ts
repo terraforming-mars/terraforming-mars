@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {churnAction, cast} from '../../TestingUtils';
+import {churn, cast} from '../../TestingUtils';
 import {FloaterTechnology} from '../../../src/server/cards/colonies/FloaterTechnology';
 import {ICard} from '../../../src/server/cards/ICard';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
@@ -26,7 +26,7 @@ describe('FloaterTechnology', function() {
 
   it('Can act without targets', function() {
     expect(card.canAct(player)).is.true;
-    expect(churnAction(card, player)).is.undefined;
+    expect(churn(card.action(player), player)).is.undefined;
   });
 
   it('Acts automatically with single targets', function() {
@@ -45,7 +45,7 @@ describe('FloaterTechnology', function() {
     const floatingHabs = new FloatingHabs();
     player.playedCards.push(dirigibles, floatingHabs);
 
-    const selectCard = cast(churnAction(card, player), SelectCard<ICard>);
+    const selectCard = cast(churn(card.action(player), player), SelectCard<ICard>);
     selectCard.cb([floatingHabs]);
     expect(floatingHabs.resourceCount).to.eq(1);
     expect(dirigibles.resourceCount).to.eq(0);

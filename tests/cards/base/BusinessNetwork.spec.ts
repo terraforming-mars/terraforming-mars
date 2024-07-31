@@ -4,7 +4,7 @@ import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
-import {churnAction, cast} from '../../TestingUtils';
+import {churn, cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('BusinessNetwork', function() {
@@ -34,7 +34,7 @@ describe('BusinessNetwork', function() {
 
   it('Cannot buy card if cannot pay', function() {
     player.megaCredits = 2;
-    const selectCard = cast(churnAction(card, player), SelectCard);
+    const selectCard = cast(churn(card.action(player), player), SelectCard);
     expect(selectCard.config.max).to.eq(0);
 
     selectCard.cb([]);
@@ -45,7 +45,7 @@ describe('BusinessNetwork', function() {
 
   it('Should action as not helion', function() {
     player.megaCredits = 3;
-    const selectCard = cast(churnAction(card, player), SelectCard);
+    const selectCard = cast(churn(card.action(player), player), SelectCard);
     selectCard.cb([]);
     expect(game.projectDeck.discardPile).has.lengthOf(1);
     expect(player.megaCredits).to.eq(3);

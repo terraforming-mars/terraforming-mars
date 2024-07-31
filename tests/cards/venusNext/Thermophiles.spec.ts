@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, churnAction, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
+import {cast, churn, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {Thermophiles} from '../../../src/server/cards/venusNext/Thermophiles';
 import {VenusianInsects} from '../../../src/server/cards/venusNext/VenusianInsects';
 import {IGame} from '../../../src/server/IGame';
@@ -41,7 +41,7 @@ describe('Thermophiles', function() {
 
     player.addResourceTo(card);
 
-    const orOptions = cast(churnAction(card, player), OrOptions);
+    const orOptions = cast(churn(card.action(player), player), OrOptions);
     orOptions.options[0].cb();
     expect(card.resourceCount).to.eq(0);
     expect(game.getVenusScaleLevel()).to.eq(2);
@@ -58,7 +58,7 @@ describe('Thermophiles', function() {
 
     player.addResourceTo(card);
 
-    const orOptions = cast(churnAction(card, player), OrOptions);
+    const orOptions = cast(churn(card.action(player), player), OrOptions);
     orOptions.options[0].cb();
     expect(card.resourceCount).to.eq(0);
     expect(game.getVenusScaleLevel()).to.eq(2);

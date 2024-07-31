@@ -3,7 +3,7 @@ import {MainBeltAsteroids} from '../../../src/server/cards/prelude2/MainBeltAste
 import {CometAiming} from '../../../src/server/cards/promo/CometAiming';
 import {CEOsFavoriteProject} from '../../../src/server/cards/base/CEOsFavoriteProject';
 import {testGame} from '../../TestGame';
-import {cast, churnAction, runNextAction} from '../../TestingUtils';
+import {cast, churn, runNextAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
@@ -100,7 +100,7 @@ describe('MainBeltAsteroids', () => {
     const cometAiming = new CometAiming();
     player.playCard(cometAiming);
 
-    const choice = cast(churnAction(card, player), SelectCard);
+    const choice = cast(churn(card.action(player), player), SelectCard);
     choice.cb([cometAiming]);
 
     expect(card.resourceCount).to.eq(0);

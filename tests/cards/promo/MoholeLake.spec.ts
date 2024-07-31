@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, churnAction} from '../../TestingUtils';
+import {cast, churn} from '../../TestingUtils';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Fish} from '../../../src/server/cards/base/Fish';
 import {ICard} from '../../../src/server/cards/ICard';
@@ -33,7 +33,7 @@ describe('MoholeLake', function() {
 
   it('Can act - no target', function() {
     expect(card.canAct()).is.true;
-    expect(churnAction(card, player)).is.undefined;
+    expect(churn(card.action(player), player)).is.undefined;
   });
 
   it('Can act - single target', function() {

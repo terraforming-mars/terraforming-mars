@@ -34,7 +34,7 @@ describe('WGProject', function() {
 
   it('Should play', function() {
     expect(card.canPlay(player)).is.not.true;
-
+    // TODO(kberg): don't allow this to be played if the prelude deck doesn't have three cards.
     game.turmoil!.chairman = player;
     expect(card.canPlay(player)).is.true;
     card.play(player);

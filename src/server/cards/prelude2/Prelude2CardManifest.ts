@@ -14,6 +14,7 @@ import {EnvoysFromVenus} from './EnvoysFromVenus';
 import {FloatingTradeHub} from './FloatingTradeHub';
 import {FocusedOrganization} from './FocusedOrganization';
 import {GhgShipment} from './GhgShipment';
+import {HighCircles} from './HighCircles';
 import {IshtarExpedition} from './IshtarExpedition';
 import {JovianEnvoys} from './JovianEnvoys';
 import {L1TradeTerminal} from './L1TradeTerminal';
@@ -77,7 +78,7 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.EARLY_COLONIZATION]: {Factory: EarlyColonization, compatibility: 'colonies'},
     [CardName.FLOATING_TRADE_HUB]: {Factory: FloatingTradeHub, compatibility: 'venus'},
     [CardName.FOCUSED_ORGANIZATION]: {Factory: FocusedOrganization},
-    // [CardName.HIGH_CIRCLES]: {Factory: HighCircles, compatibility: 'turmoil'},
+    [CardName.HIGH_CIRCLES]: {Factory: HighCircles, compatibility: 'turmoil'},
     // [CardName.INDUSTRIAL_COMPLEX]: {Factory: IndustrialComplex},
     [CardName.MAIN_BELT_ASTEROIDS]: {Factory: MainBeltAsteroids},
     [CardName.NOBEL_PRIZE]: {Factory: NobelPrize},

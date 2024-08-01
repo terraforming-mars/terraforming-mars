@@ -35,5 +35,4 @@ export class HighCircles extends PreludeCard implements ICard {
     player.drawCard(1, {include: ((card) =>card.requirements?.some((req) => req.party !== undefined))});
     return undefined;
   }
-
 }

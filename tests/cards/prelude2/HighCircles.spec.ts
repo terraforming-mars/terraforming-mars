@@ -49,5 +49,4 @@ describe('HighCircles', function() {
     expect(player.cardsInHand).has.length(1);
     expect(player.cardsInHand.every((card) => card.requirements.some((req) => req.party !== undefined)));
   });
-
 });

@@ -14,6 +14,7 @@ import {EnvoysFromVenus} from './EnvoysFromVenus';
 import {FloatingTradeHub} from './FloatingTradeHub';
 import {FocusedOrganization} from './FocusedOrganization';
 import {GhgShipment} from './GhgShipment';
+import {HighCircles} from './HighCircles';
 import {IshtarExpedition} from './IshtarExpedition';
 import {JovianEnvoys} from './JovianEnvoys';
 import {L1TradeTerminal} from './L1TradeTerminal';
@@ -24,6 +25,7 @@ import {NobelPrize} from './NobelPrize';
 import {OldMiningColony} from './OldMiningColony';
 import {PalladinShipping} from './PalladinShipping';
 import {PlanetaryAlliance} from './PlanetaryAlliance';
+import {RiseToPower} from './RiseToPower';
 import {RedAppeasement} from './RedAppeasement';
 import {SagittaFrontierServices} from './SagittaFrontierServices';
 import {SoilBacteria} from './SoilBacteria';
@@ -76,7 +78,7 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.EARLY_COLONIZATION]: {Factory: EarlyColonization, compatibility: 'colonies'},
     [CardName.FLOATING_TRADE_HUB]: {Factory: FloatingTradeHub, compatibility: 'venus'},
     [CardName.FOCUSED_ORGANIZATION]: {Factory: FocusedOrganization},
-    // [CardName.HIGH_CIRCLES]: {Factory: HighCircles, compatibility: 'turmoil'},
+    [CardName.HIGH_CIRCLES]: {Factory: HighCircles, compatibility: 'turmoil'},
     // [CardName.INDUSTRIAL_COMPLEX]: {Factory: IndustrialComplex},
     [CardName.MAIN_BELT_ASTEROIDS]: {Factory: MainBeltAsteroids},
     [CardName.NOBEL_PRIZE]: {Factory: NobelPrize},
@@ -85,7 +87,7 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     // [CardName.PRESERVATION_PROGRAM]: {Factory: PreservationProgram}, // Make turmoil reds compatible
     // [CardName.PROJECT_EDEN]: {Factory: ProjectEden}, // Just difficult, requires ordering.
     // [CardName.RECESSION]: {Factory: Recession}, // Everybody loses money. Oof.
-    // [CardName.RISE_TO_POWER]: {Factory: RiseToPower, compatibility: 'turmoil'},
+    [CardName.RISE_TO_POWER]: {Factory: RiseToPower, compatibility: 'turmoil'},
     [CardName.SOIL_BACTERIA]: {Factory: SoilBacteria},
     [CardName.SPACE_LANES]: {Factory: SpaceLanes},
     // [CardName.STRATEGIC_BASE_PLANNING]: {Factory: StrategicBasePlanning}, // UPDATE FROM PROMO

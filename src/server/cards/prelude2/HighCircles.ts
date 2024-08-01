@@ -32,7 +32,7 @@ export class HighCircles extends PreludeCard implements ICard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.drawCard(1, {include: ((card) =>card.requirements?.some((req) => req.party !== undefined))});
+    player.drawCard(1, {include: ((card) => card.requirements?.some((req) => req.party !== undefined))});
     return undefined;
   }
 }

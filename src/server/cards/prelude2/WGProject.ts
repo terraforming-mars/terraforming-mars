@@ -19,7 +19,7 @@ export class WGProject extends Card implements IProjectCard {
       requirements: {chairman: true},
 
       metadata: {
-        description: 'Requires that you are Chairman. DRAW 3 PRELUDE CARD AND PLAY 1 OF THEM, Discard the other 2.',
+        description: 'Requires that you are Chairman. DRAW 3 PRELUDE CARDS AND PLAY 1 OF THEM, Discard the other 2.',
         cardNumber: 'P91',
         renderData: CardRenderer.builder((b) => b.prelude().asterix()),
       },

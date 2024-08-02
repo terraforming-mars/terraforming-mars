@@ -135,6 +135,12 @@ export interface IPlayer {
   // removedFromPlayCards is a bit of a misname: it's a temporary storage for
   // cards that provide 'next card' discounts. This will clear between turns.
   removedFromPlayCards: Array<IProjectCard>;
+  /**
+   * When true, Preservation Program is in effect, and the player has not triggered a TR gain this generation.
+   *
+   * False when the player does not have Preservation Program, or after the first TR in the action phase.
+   */
+  preservationProgram: boolean;
 
   // The number of actions a player can take this round.
   // It's almost always 2, but certain cards can change this value.

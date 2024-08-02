@@ -91,7 +91,6 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.RISE_TO_POWER]: {Factory: RiseToPower, compatibility: 'turmoil'},
     [CardName.SOIL_BACTERIA]: {Factory: SoilBacteria},
     [CardName.SPACE_LANES]: {Factory: SpaceLanes},
-    // [CardName.STRATEGIC_BASE_PLANNING]: {Factory: StrategicBasePlanning}, // UPDATE FROM PROMO
     // [CardName.SUITABLE_INFRASTRUCTURE]: {Factory: SuitableInfrastructure},
     // [CardName.TERRAFORMING_DEAL]: {Factory: TerraformingDeal},
     // [CardName.VENUS_CONTRACT]: {Factory: VenusContract, compatibility: 'venus'},

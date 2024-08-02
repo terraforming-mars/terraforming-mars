@@ -25,8 +25,8 @@ import {NobelPrize} from './NobelPrize';
 import {OldMiningColony} from './OldMiningColony';
 import {PalladinShipping} from './PalladinShipping';
 import {PlanetaryAlliance} from './PlanetaryAlliance';
-import {RiseToPower} from './RiseToPower';
 import {RedAppeasement} from './RedAppeasement';
+import {RiseToPower} from './RiseToPower';
 import {SagittaFrontierServices} from './SagittaFrontierServices';
 import {SoilBacteria} from './SoilBacteria';
 import {SoilStudies} from './SoilStudies';
@@ -37,8 +37,9 @@ import {SponsoringNation} from './SponsoringNation';
 import {StratosphericExpedition} from './StratosphericExpedition';
 import {SummitLogistics} from './SummitLogistics';
 import {UnexpectedApplication} from './UnexpectedApplication';
-import {VenusOrbitalSurvey} from './VenusOrbitalSurvey';
 import {VenusL1Shade} from './VenusL1Shade';
+import {VenusOrbitalSurvey} from './VenusOrbitalSurvey';
+import {VenusTradeHub} from './VenusTradeHub';
 import {WGProject} from './WGProject';
 
 export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
@@ -66,7 +67,7 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     // [CardName.VENUS_ALLIES]: {Factory: VenusAllies, compatibility: ['venus', 'colonies']},
     [CardName.VENUS_ORBITAL_SURVEY]: {Factory: VenusOrbitalSurvey, compatibility: 'venus'},
     // [CardName.VENUS_SHUTTLES]: {Factory: VenusShuttles, compatibility: 'venus'},
-    // [CardName.VENUS_TRADE_HUB]: {Factory: VenusTradeHub, compatibility: 'colonies'},
+    [CardName.VENUS_TRADE_HUB]: {Factory: VenusTradeHub, compatibility: ['colonies', 'venus']},
     [CardName.WG_PROJECT]: {Factory: WGProject, compatibility: 'turmoil'},
   },
 

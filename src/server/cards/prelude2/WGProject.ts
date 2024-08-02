@@ -26,9 +26,13 @@ export class WGProject extends Card implements IProjectCard {
     });
   }
 
+  public override bespokeCanPlay(player: IPlayer): boolean {
+    return player.game.preludeDeck.canDraw(3);
+  }
+
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
-    const cards = game.preludeDeck.drawN(game, 3);
-    return PreludesExpansion.playPrelude(player, cards);
+    const cards = game.preludeDeck.drawNOrThrow(game, 3);
+    return PreludesExpansion.selectPreludeToPlay(player, cards, 'discard');
   }
 }

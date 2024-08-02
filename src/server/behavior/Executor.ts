@@ -645,6 +645,8 @@ export class Executor implements BehaviorExecutor {
         tr = ctx.count(behavior.tr);
       }
     }
+
+    // TODO(kberg): Use undefined instead of 0.
     const trSource: TRSource = {
       tr: tr,
       temperature: behavior.global?.temperature,

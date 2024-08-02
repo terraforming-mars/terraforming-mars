@@ -221,7 +221,7 @@ export class Player implements IPlayer {
   // removedFromPlayCards is a bit of a misname: it's a temporary storage for
   // cards that provide 'next card' discounts. This will clear between turns.
   public removedFromPlayCards: Array<IProjectCard> = [];
-
+  public preservationProgram = false;
   // Underworld
   public underworldData: UnderworldPlayerData = UnderworldExpansion.initializePlayer();
 
@@ -331,6 +331,14 @@ export class Player implements IPlayer {
   }
 
   public increaseTerraformRating(steps: number = 1, opts: {log?: boolean} = {}) {
+    if (this.preservationProgram === true && this.game.phase === Phase.ACTION) {
+      steps--;
+      this.game.log('${0} for ${1} is blocking 1 TR', (b) => b.cardName(CardName.PRESERVATION_PROGRAM).player(this));
+      this.preservationProgram = false;
+      if (steps === 0) {
+        return;
+      }
+    }
     const raiseRating = () => {
       this.terraformRating += steps;
       this.hasIncreasedTerraformRatingThisGeneration = true;
@@ -1881,6 +1889,7 @@ export class Player implements IPlayer {
       canUseTitaniumAsMegacredits: this.canUseTitaniumAsMegacredits,
       // This generation / this round
       canUseCorruptionAsMegacredits: this.canUseCorruptionAsMegacredits,
+      preservationProgram: this.preservationProgram,
       // This generation / this round
       actionsTakenThisRound: this.actionsTakenThisRound,
       actionsThisGeneration: Array.from(this.actionsThisGeneration),
@@ -2026,6 +2035,7 @@ export class Player implements IPlayer {
     player.playedCards = d.playedCards.map((element: SerializedCard) => deserializeProjectCard(element));
     player.draftedCards = cardsFromJSON(d.draftedCards);
     player.autopass = d.autoPass ?? false;
+    player.preservationProgram = d.preservationProgram ?? false;
 
     player.timer = Timer.deserialize(d.timer);
 

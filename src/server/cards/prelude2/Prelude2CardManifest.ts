@@ -25,6 +25,7 @@ import {NobelPrize} from './NobelPrize';
 import {OldMiningColony} from './OldMiningColony';
 import {PalladinShipping} from './PalladinShipping';
 import {PlanetaryAlliance} from './PlanetaryAlliance';
+import {PreservationProgram} from './PreservationProgram';
 import {Recession} from './Recession';
 import {RedAppeasement} from './RedAppeasement';
 import {RiseToPower} from './RiseToPower';
@@ -87,7 +88,7 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.NOBEL_PRIZE]: {Factory: NobelPrize},
     [CardName.OLD_MINING_COLONY]: {Factory: OldMiningColony, compatibility: 'colonies'},
     [CardName.PLANETARY_ALLIANCE]: {Factory: PlanetaryAlliance, compatibility: 'venus'},
-    // [CardName.PRESERVATION_PROGRAM]: {Factory: PreservationProgram}, // Make turmoil reds compatible
+    [CardName.PRESERVATION_PROGRAM]: {Factory: PreservationProgram},
     // [CardName.PROJECT_EDEN]: {Factory: ProjectEden}, // Just difficult, requires ordering.
     [CardName.RECESSION]: {Factory: Recession},
     [CardName.RISE_TO_POWER]: {Factory: RiseToPower, compatibility: 'turmoil'},

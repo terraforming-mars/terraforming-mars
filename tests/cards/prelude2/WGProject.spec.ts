@@ -9,7 +9,7 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {IPreludeCard, isPreludeCard} from '../../../src/server/cards/prelude/IPreludeCard';
+import {IPreludeCard} from '../../../src/server/cards/prelude/IPreludeCard';
 import {BusinessEmpire} from '../../../src/server/cards/prelude/BusinessEmpire';
 
 describe('WGProject', function() {
@@ -32,12 +32,16 @@ describe('WGProject', function() {
     businessEmpire = new BusinessEmpire();
   });
 
-  it('Should play', function() {
+  it('canPlay', function() {
     expect(card.canPlay(player)).is.not.true;
-    // TODO(kberg): don't allow this to be played if the prelude deck doesn't have three cards.
     game.turmoil!.chairman = player;
     expect(card.canPlay(player)).is.true;
-    card.play(player);
+  });
+
+  it('canPlay - not enough preludes', function() {
+    game.turmoil!.chairman = player;
+    game.preludeDeck.drawPile.length = 2;
+    expect(card.canPlay(player)).is.false;
   });
 
   it('Should play with at least 1 playable prelude', function() {
@@ -46,9 +50,11 @@ describe('WGProject', function() {
     const selectCard = cast(card.play(player), SelectCard<IPreludeCard>);
 
     expect(selectCard.cards).deep.eq([donation, businessEmpire, smeltingPlant]);
-    selectCard.cb([selectCard.cards[0]]);
 
-    expect(player.playedCards.every((card) => isPreludeCard(card))).is.true;
+    selectCard.cb([donation]);
+
+    expect(player.playedCards).deep.eq([donation]);
+    expect(game.preludeDeck.discardPile).to.have.members([businessEmpire, smeltingPlant]);
   });
 
   it('Can play with no playable preludes drawn', function() {
@@ -58,9 +64,13 @@ describe('WGProject', function() {
     game.preludeDeck.drawPile.push(hugeAsteroid, businessEmpire, galileanMining);
 
     const selectCard = cast(card.play(player), SelectCard<IPreludeCard>);
+
     expect(selectCard.cards).deep.eq([galileanMining, businessEmpire, hugeAsteroid]);
-    selectCard.cb([selectCard.cards[0]]);
+
+    selectCard.cb([galileanMining]);
     runAllActions(game);
+
     expect(player.megaCredits).eq(15);
+    expect(game.preludeDeck.discardPile).to.have.members([businessEmpire, hugeAsteroid]);
   });
 });

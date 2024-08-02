@@ -1559,7 +1559,7 @@ export class Player implements IPlayer {
       if (this.preludeCardsInHand.length > 0) {
         game.phase = Phase.PRELUDES;
 
-        const selectPrelude = PreludesExpansion.playPrelude(this, this.preludeCardsInHand);
+        const selectPrelude = PreludesExpansion.selectPreludeToPlay(this, this.preludeCardsInHand);
 
         this.setWaitingFor(selectPrelude, () => {
           if (this.preludeCardsInHand.length === 0 && !this.headStartIsInEffect()) {

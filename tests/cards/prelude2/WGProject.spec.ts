@@ -71,6 +71,7 @@ describe('WGProject', function() {
     runAllActions(game);
 
     expect(player.megaCredits).eq(15);
-    expect(game.preludeDeck.discardPile).to.have.members([businessEmpire, hugeAsteroid]);
+    expect(player.playedCards).is.empty;
+    expect(game.preludeDeck.discardPile).to.have.members([galileanMining, businessEmpire, hugeAsteroid]);
   });
 });

@@ -8,14 +8,19 @@ import {ValleyTrust} from '../../../src/server/cards/prelude/ValleyTrust';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {IPreludeCard, isPreludeCard} from '../../../src/server/cards/prelude/IPreludeCard';
+import {IGame} from '../../../src/server/IGame';
+import {Loan} from '../../../src/server/cards/prelude/Loan';
+import {HugeAsteroid} from '../../../src/server/cards/prelude/HugeAsteroid';
+import {MetalRichAsteroid} from '../../../src/server/cards/prelude/MetalRichAsteroid';
 
 describe('ValleyTrust', function() {
   let card: ValleyTrust;
   let player: TestPlayer;
+  let game: IGame;
 
   beforeEach(function() {
     card = new ValleyTrust();
-    [/* game */, player] = testGame(1, {preludeExtension: true});
+    [game, player] = testGame(1, {preludeExtension: true});
   });
 
   it('Does not get card discount for other tags', function() {
@@ -32,10 +37,17 @@ describe('ValleyTrust', function() {
   });
 
   it('initial action', () => {
-    const selectCard = cast(card.initialAction(player), SelectCard<IPreludeCard>);
+    const loan = new Loan();
+    const hugeAsteroid = new HugeAsteroid();
+    const metalRichAsteroid = new MetalRichAsteroid();
 
-    expect(selectCard.cards).has.length(3);
-    expect(selectCard.cards.every((c) => isPreludeCard(c))).is.true;
+    game.preludeDeck.drawPile.push(loan, hugeAsteroid, metalRichAsteroid);
+    const selectCard = cast(card.initialAction(player), SelectCard<IPreludeCard>);
+    expect(selectCard.cards).to.have.members([loan, hugeAsteroid, metalRichAsteroid]);
+
+    selectCard.cb([loan]);
+    expect(player.playedCards).includes(loan);
+    expect(game.preludeDeck.discardPile).to.have.members([hugeAsteroid, metalRichAsteroid]);
   });
 
   it('Card works even without prelude expansion enabled', () => {

@@ -40,6 +40,6 @@ export class ValleyTrust extends CorporationCard {
   public initialAction(player: IPlayer) {
     const game = player.game;
     const cards = game.preludeDeck.drawN(game, 3);
-    return PreludesExpansion.playPrelude(player, cards);
+    return PreludesExpansion.selectPreludeToPlay(player, cards, 'discard');
   }
 }

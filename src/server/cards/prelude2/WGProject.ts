@@ -33,6 +33,6 @@ export class WGProject extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
     const cards = game.preludeDeck.drawNOrThrow(game, 3);
-    return PreludesExpansion.playPrelude(player, cards);
+    return PreludesExpansion.selectPreludeToPlay(player, cards, 'discard');
   }
 }

@@ -29,6 +29,6 @@ export class Karen extends CeoCard {
     this.isDisabled = true;
     const game = player.game;
     const cards = game.preludeDeck.drawN(game, game.generation);
-    return PreludesExpansion.playPrelude(player, cards);
+    return PreludesExpansion.selectPreludeToPlay(player, cards, 'discard');
   }
 }

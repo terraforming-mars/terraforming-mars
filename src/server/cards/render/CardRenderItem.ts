@@ -16,9 +16,11 @@ export type ItemOptions = Partial<{
   digit: boolean;
   played: boolean;
   secondaryTag: Tag | AltSecondaryTag;
-  clone: boolean; /** Replace the amount with the clone tag */
+  /** Replace the amount with the clone tag */
+  clone: boolean;
   cancelled: boolean;
-  over: number; /** Used for global events. */
+  /** Used for global events. */
+  over: number;
   questionMark: boolean;
   text: string;
   superscript: boolean;

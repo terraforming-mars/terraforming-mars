@@ -45,7 +45,7 @@ export class GaiaCity extends Card implements IProjectCard {
       spaces: this.availableSpaces(player),
     })).andThen((space) => {
       if (space) {
-        player.game.grantPlacementBonuses(player, space, /* coveringExistingTile= */false);
+        player.game.grantPlacementBonuses(player, space);
       }
     });
     return undefined;

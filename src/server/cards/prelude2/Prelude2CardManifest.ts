@@ -13,6 +13,7 @@ import {Ecotec} from './Ecotec';
 import {EnvoysFromVenus} from './EnvoysFromVenus';
 import {FloatingTradeHub} from './FloatingTradeHub';
 import {FocusedOrganization} from './FocusedOrganization';
+import {FrontierTown} from './FrontierTown';
 import {GhgShipment} from './GhgShipment';
 import {HighCircles} from './HighCircles';
 import {IshtarExpedition} from './IshtarExpedition';
@@ -61,7 +62,7 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     // [CardName.COLONIAL_ENVOYS]: {Factory: ColonialEnvoys, compatibility: ['colonies', 'turmoil']},
     [CardName.SPECIAL_PERMIT]: {Factory: SpecialPermit, compatibility: 'turmoil'},
     // [CardName.FLOATING_REFINERY]: {Factory: FloatingRefinery, compatibility: 'venus'},
-    // [CardName.FRONTIER_TOWN]: {Factory: FrontierTown, compatibility: 'turmoil'},
+    [CardName.FRONTIER_TOWN]: {Factory: FrontierTown, compatibility: 'turmoil'},
     [CardName.JOVIAN_ENVOYS]: {Factory: JovianEnvoys, compatibility: 'turmoil'},
     [CardName.MICROGRAVITY_NUTRITION]: {Factory: MicrogravityNutrition, compatibility: 'colonies'},
     [CardName.SOIL_STUDIES]: {Factory: SoilStudies, compatibility: ['venus', 'colonies']},

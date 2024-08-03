@@ -187,7 +187,7 @@ export interface IGame extends Logger {
    *
    * This includes bonuses on the map, from oceans, Ares tiles, Turmoil, Colonies, etc.
    */
-  grantPlacementBonuses(player: IPlayer, space: Space, coveringExistingTile: boolean): void
+  grantPlacementBonuses(player: IPlayer, space: Space, coveringExistingTile?: boolean): void
 
   /**
    * Gives all the bonuses from a space on the map.

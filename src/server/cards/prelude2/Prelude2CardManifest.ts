@@ -25,6 +25,7 @@ import {NobelPrize} from './NobelPrize';
 import {OldMiningColony} from './OldMiningColony';
 import {PalladinShipping} from './PalladinShipping';
 import {PlanetaryAlliance} from './PlanetaryAlliance';
+import {PreservationProgram} from './PreservationProgram';
 import {Recession} from './Recession';
 import {RedAppeasement} from './RedAppeasement';
 import {RiseToPower} from './RiseToPower';
@@ -37,6 +38,7 @@ import {Spire} from './Spire';
 import {SponsoringNation} from './SponsoringNation';
 import {StratosphericExpedition} from './StratosphericExpedition';
 import {SummitLogistics} from './SummitLogistics';
+import {TerraformingDeal} from './TerraformingDeal';
 import {UnexpectedApplication} from './UnexpectedApplication';
 import {VenusAllies} from './VenusAllies';
 import {VenusL1Shade} from './VenusL1Shade';
@@ -88,15 +90,14 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.NOBEL_PRIZE]: {Factory: NobelPrize},
     [CardName.OLD_MINING_COLONY]: {Factory: OldMiningColony, compatibility: 'colonies'},
     [CardName.PLANETARY_ALLIANCE]: {Factory: PlanetaryAlliance, compatibility: 'venus'},
-    // [CardName.PRESERVATION_PROGRAM]: {Factory: PreservationProgram}, // Make turmoil reds compatible
+    [CardName.PRESERVATION_PROGRAM]: {Factory: PreservationProgram},
     // [CardName.PROJECT_EDEN]: {Factory: ProjectEden}, // Just difficult, requires ordering.
     [CardName.RECESSION]: {Factory: Recession},
     [CardName.RISE_TO_POWER]: {Factory: RiseToPower, compatibility: 'turmoil'},
     [CardName.SOIL_BACTERIA]: {Factory: SoilBacteria},
     [CardName.SPACE_LANES]: {Factory: SpaceLanes},
-    // [CardName.STRATEGIC_BASE_PLANNING]: {Factory: StrategicBasePlanning}, // UPDATE FROM PROMO
     // [CardName.SUITABLE_INFRASTRUCTURE]: {Factory: SuitableInfrastructure},
-    // [CardName.TERRAFORMING_DEAL]: {Factory: TerraformingDeal},
+    [CardName.TERRAFORMING_DEAL]: {Factory: TerraformingDeal},
     // [CardName.VENUS_CONTRACT]: {Factory: VenusContract, compatibility: 'venus'},
     [CardName.VENUS_L1_SHADE]: {Factory: VenusL1Shade, compatibility: 'venus'},
     // [CardName.WORLD_GOVERNMENT_ADVISOR]: {Factory: WorldGovernmentAdvisor},

@@ -31,7 +31,8 @@ export class VenusShuttles extends Card implements IActionCard {
         description: 'Add 2 floaters to ANY VENUS CARD.',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 12 MC to raide Venus 1 step. This cost is REDUCED BY 1 FOR EACH VENUS TAG you have.', (eb) =>
-            eb.megacredits(12).text('(').megacredits(-1).slash().tag(Tag.VENUS).text(')').startAction.venus(1));
+            eb.megacredits(12).text('(').megacredits(-1).slash().tag(Tag.VENUS).text(')').startAction.venus(1)).BR;
+          b.venus(1).resource(CardResource.FLOATER, {amount: 2, secondaryTag: Tag.VENUS});
         }),
       },
     });

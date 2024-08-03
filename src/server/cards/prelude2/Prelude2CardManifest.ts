@@ -40,6 +40,7 @@ import {StratosphericExpedition} from './StratosphericExpedition';
 import {SummitLogistics} from './SummitLogistics';
 import {TerraformingDeal} from './TerraformingDeal';
 import {UnexpectedApplication} from './UnexpectedApplication';
+import {VenusContract} from './VenusContract';
 import {VenusL1Shade} from './VenusL1Shade';
 import {VenusOrbitalSurvey} from './VenusOrbitalSurvey';
 import {VenusTradeHub} from './VenusTradeHub';
@@ -97,7 +98,7 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.SPACE_LANES]: {Factory: SpaceLanes},
     // [CardName.SUITABLE_INFRASTRUCTURE]: {Factory: SuitableInfrastructure},
     [CardName.TERRAFORMING_DEAL]: {Factory: TerraformingDeal},
-    // [CardName.VENUS_CONTRACT]: {Factory: VenusContract, compatibility: 'venus'},
+    [CardName.VENUS_CONTRACT]: {Factory: VenusContract, compatibility: 'venus'},
     [CardName.VENUS_L1_SHADE]: {Factory: VenusL1Shade, compatibility: 'venus'},
     // [CardName.WORLD_GOVERNMENT_ADVISOR]: {Factory: WorldGovernmentAdvisor},
   },

@@ -1019,6 +1019,7 @@ export class Game implements IGame, Logger {
           this.defer(new GrantVenusAltTrackBonusDeferred(player, standardResourcesGranted, grantWildResource));
         }
       }
+      player.playedCards.forEach((card) => card.onGlobalParameterIncrease?.(player, GlobalParameter.VENUS, steps));
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.VENUS, steps);
       player.increaseTerraformRating(steps);
     }

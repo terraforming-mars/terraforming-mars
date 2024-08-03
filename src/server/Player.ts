@@ -346,14 +346,11 @@ export class Player implements IPlayer {
       if (opts.log === true) {
         this.game.log('${0} gained ${1} TR', (b) => b.player(this).number(steps));
       }
-      this.game.getPlayersInGenerationOrder().forEach((player) => {
-        player.corporations.forEach((corp) => {
-          corp.onIncreaseTerraformRating?.(this, player, steps);
-        });
-        player.playedCards.filter((card: IProjectCard) => card.type === CardType.CEO).forEach((ceo) => {
-          ceo.onIncreaseTerraformRating?.(this, player, steps);
-        });
-      });
+      for (const player of this.game.getPlayersInGenerationOrder()) {
+        for (const card of player.tableau) {
+          card.onIncreaseTerraformRating?.(this, player, steps);
+        }
+      }
     };
 
     if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, 'rp01')) {

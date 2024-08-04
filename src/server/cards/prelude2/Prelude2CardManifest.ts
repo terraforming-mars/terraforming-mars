@@ -11,7 +11,7 @@ import {CorridorsOfPower} from './CorridorsOfPower';
 import {EarlyColonization} from './EarlyColonization';
 import {Ecotec} from './Ecotec';
 import {EnvoysFromVenus} from './EnvoysFromVenus';
-import {FloatingRefinery} from './FloaterRefinery';
+import {FloatingRefinery} from './FloatingRefinery';
 import {FloatingTradeHub} from './FloatingTradeHub';
 import {FocusedOrganization} from './FocusedOrganization';
 import {FrontierTown} from './FrontierTown';

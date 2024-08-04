@@ -7,8 +7,6 @@ import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 
-// TODO(kberg): Ares compatibility. Arcadian Communities compatibility?
-
 describe('FrontierTown', () => {
   const canPlayRuns = [
     {energyProduction: 0, party: PartyName.GREENS, expected: false},
@@ -44,5 +42,26 @@ describe('FrontierTown', () => {
 
     expect(space.tile?.tileType).eq(TileType.CITY);
     expect(player.plants).eq(3);
+  });
+
+  it('Does not apply to oceans ', () => {
+    const card = new FrontierTown();
+    const [game, player] = testGame(2);
+
+    player.production.override({energy: 1});
+
+    const selectSpace = cast(churn(card.play(player), player), SelectSpace);
+
+    expect(player.production.energy).eq(0);
+
+    const space = selectSpace.spaces[0];
+    const oceanSpace = game.board.getAdjacentSpaces(space)[0];
+    game.simpleAddTile(player, oceanSpace, {tileType: TileType.OCEAN});
+    space.bonus = [SpaceBonus.PLANT];
+    selectSpace.cb(space);
+
+    expect(space.tile?.tileType).eq(TileType.CITY);
+    expect(player.plants).eq(3);
+    expect(player.megaCredits).eq(2); // 2, not 6.
   });
 });

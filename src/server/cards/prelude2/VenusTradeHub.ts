@@ -18,7 +18,7 @@ export class VenusTradeHub extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'P90',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you trade, gain 3 M€', (eb) => eb.trade().startEffect.megacredits(3));
+          b.effect('When you trade, gain 3 M€.', (eb) => eb.trade().startEffect.megacredits(3));
         }),
         description: 'Requires 2 Venus tags.',
       },

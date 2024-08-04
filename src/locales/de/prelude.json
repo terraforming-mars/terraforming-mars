@@ -30,8 +30,12 @@
     "Action: Remove any number of floaters here to gain that many of one standard resource.": "AKTION: Entferne hier eine beliebige Anzahl von Schwebern, um so viele von einer Standardressource zu erhalten.",
 
     "Focused Organization": "Zielgerichtete Organisation",
-    "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource": "AKTION: Wirf 1 Karte ab und gib 1 Standardressource aus, um 1 Karte zu ziehen und 1 Standardressource zu erhalten.",
+    "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource.": "AKTION: Wirf 1 Karte ab und gib 1 Standardressource aus, um 1 Karte zu ziehen und 1 Standardressource zu erhalten.",
     "Draw 1 card and gain 1 standard resource.": "Ziehe 1 Karte und erhalte 1 Standardressource.",
+
+    "High Circles": "Hohe Kreise",
+    "Raise your TR 1 step and draw 1 card with PARTY REQUIREMENT. Place 2 delegates in one party.": "Erhöhe deinen TW um 1 und ziehe 1 Karte mit Partei-Bedingungen. Platziere 2 Delegierte in einer Partei.",
+    "Effect: You have +1 influence.": "EFFEKT: Du erhältst 1 Einfluss.",
 
     "Main Belt Asteroids": "Asteroiden des Hauptgürtels",
     "Action: Gain 1 asteroid to ANY CARD.": "AKTION: Erhalte 1 Asteroiden zu einer beliebigen Karte.",
@@ -47,6 +51,16 @@
     "Planetary Alliance": "Planetarische Allianz",
     "Raise your TR 2 steps. Draw 1 Jovian card and 1 Venus card.": "Erhöhe deinen TW um 2. Ziehe 1 Jupiter-Karte und 1 Venus-Karte.",
 
+    "Preservation Program": "Bewahrungsprogramm",
+    "Effect: SKIP THE FIRST TR YOU GAIN IN EACH GENERATION'S ACTION PHASE.": "Effekt: ÜBERSPRINGE DEN ERSTEN TW, DEN DU IN DER AKTIONSPHASE JEDER GENERATION ERHÄLTST.",
+    "Raise your TR 5 steps.": "Erhöhe dein TW um 5.",
+
+    "Recession": "Rezession",
+    "EACH OPPONENT loses 5 M€ and decreases their M€ production 1 step. You gain 10 M€.": "Alle Mitspieler verlieren 5 M€ und reduzieren ihre M€-Produktion um 1. Du erhälst 10 M€.",
+
+    "Rise To Power": "Aufstieg zur Macht",
+    "Increase your M€ production 3 steps and place 3 delegates. YOU MAY PLACE THEM IN SEPARATE PARTIES.": "Erhöhe deine M€-Produktion um 3 und platziere 3 Delegierte. DU DARFST SIE IN GETRENNTEN PARTEIEN PLATZIEREN.",
+
     "Soil Bacteria": "Bodenbakterien",
     "Effect: When playing a plant tag or a microbe tag, including this, gain 1 plant.": "EFFEKT: Wenn du einen Pflanzen- oder Mikroben-Symbol spielst, einschließlich dieses, erhalte 1 Pflanze.",
     "Draw 2 microbe cards and gain 3 plants.": "Ziehe 2 Mikrobenkarten und erhalte 3 Pflanzen.",
@@ -54,6 +68,12 @@
     "Space Lanes": "Weltraum-Linien",
     "Effect: When you play a Jovian, Earth, or Venus tag, you pay 2 M€ less for it.": "EFFEKT: Wenn du ein Jupiter-, Erd- oder Venus-Symbol spielst, zahlst du 2 M€ weniger dafür.",
     "Gain 3 titanium.": "Erhalte 3 Titan.",
+
+    "Terraforming Deal": "Terraforming-Abkommen",
+    "Effect: Each step your TR is raised, you gain 2 M€.": "EFFEKT: Mit jedem Schritt, mit dem dein TW erhöht wird, erhältst du 2 M€.",
+
+    "Venus Contract": "Venus-Vertrag",
+    "Effect: Each step you raise Venus, gain 3 M€.": "EFFEKT: Mit jedem Schritt, den du die Venus erhöhst, erhalte 3 M€.",
 
     "Venus L1 Shade": "Venus L1 Schatten",
     "Raise Venus 3 steps.": "Erhöhe die Venuswertung um 6%.",

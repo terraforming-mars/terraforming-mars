@@ -19,6 +19,7 @@ export const floaterCards: ReadonlySet<CardName> = new Set([
   // Prelude 2
   CardName.GHG_SHIPMENT,
   CardName.STRATOSPHERIC_EXPEDITION,
+  CardName.VENUS_SHUTTLES,
 
   // Pathfinders
   CardName.CASSINI_STATION,

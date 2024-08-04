@@ -17,7 +17,7 @@ export class PreservationProgram extends PreludeCard {
       metadata: {
         cardNumber: 'P57',
         renderData: CardRenderer.builder((b) => {
-          b.effect('SKIP THE FIRST TR YOU GAIN IN EACH GENERATION\'S ACTION PHASE', (eb) => {
+          b.effect('SKIP THE FIRST TR YOU GAIN IN EACH GENERATION\'S ACTION PHASE.', (eb) => {
             eb.empty().startEffect.tr(1, {size: Size.SMALL, cancelled});
           }).br;
           b.tr(5, {digit});

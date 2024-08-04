@@ -30,7 +30,7 @@ export class VenusShuttles extends Card implements IActionCard {
         cardNumber: 'P89',
         description: 'Add 2 floaters to ANY VENUS CARD.',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 12 MC to raise Venus 1 step. This cost is REDUCED BY 1 FOR EACH VENUS TAG you have.', (eb) =>
+          b.action('Spend 12 M€ to raise Venus 1 step. This cost is REDUCED BY 1 FOR EACH VENUS TAG you have.', (eb) =>
             eb.megacredits(12).text('(').megacredits(-1).slash().tag(Tag.VENUS).text(')').startAction.venus(1));
           b.resource(CardResource.FLOATER, {amount: 2, secondaryTag: Tag.VENUS});
         }),
@@ -38,20 +38,21 @@ export class VenusShuttles extends Card implements IActionCard {
     });
   }
 
+  private actionCost(player: IPlayer) {
+    return Math.max(12 - player.tags.count(Tag.VENUS), 0);
+  }
+
   public canAct(player: IPlayer) {
-    let tagCount = player.tags.count(Tag.VENUS);
-    tagCount = Math.min(tagCount, 12);
     if (player.game.getVenusScaleLevel() >= constants.MAX_VENUS_SCALE) {
       this.warnings.add('maxvenus');
     }
-    return player.canAfford(12-tagCount);
+    return player.canAfford({cost: this.actionCost(player), tr: {venus: 1}});
   }
 
   public action(player: IPlayer) {
-    let tagCount = player.tags.count(Tag.VENUS);
-    tagCount = Math.min(tagCount, 12);
-    player.game.defer(new SelectPaymentDeferred(player, 12-tagCount));
-    player.game.increaseVenusScaleLevel(player, 1);
+    player.game.defer(
+      new SelectPaymentDeferred(player, this.actionCost(player)))
+      .andThen(() => player.game.increaseVenusScaleLevel(player, 1));
     return undefined;
   }
 }

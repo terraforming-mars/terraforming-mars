@@ -15,7 +15,7 @@ describe('VenusShuttles', function() {
 
   beforeEach(function() {
     card = new VenusShuttles();
-    [game, player] = testGame(2, {venusNextExtension: true});
+    [game, player] = testGame(1, {venusNextExtension: true});
   });
 
   it('Should play, no cards', function() {
@@ -48,33 +48,42 @@ describe('VenusShuttles', function() {
     expect(celestic.resourceCount).to.eq(2);
   });
 
-  it('Should act without venus tags', function() {
-    player.megaCredits = 11;
-    expect(card.canAct(player)).is.false;
-    const celestic = new Celestic(); // Stores floaters. has Venus tag
-    player.corporations.push(celestic);
-    expect(card.canAct(player)).is.true;
+  const canActRuns = [
+    {mc: 11, tags: 0, expected: false},
+    {mc: 12, tags: 0, expected: true},
+    {mc: 6, tags: 5, expected: false},
+    {mc: 7, tags: 5, expected: true},
+    {mc: 0, tags: 12, expected: true},
+  ] as const;
+  for (const run of canActRuns) {
+    it('canAct ' + JSON.stringify(run), function() {
+      player.megaCredits = run.mc;
+      player.tagsForTest = {venus: run.tags};
+      expect(card.canAct(player)).eq(run.expected);
+    });
+  }
+
+  it('action', () => {
+    player.megaCredits = 13;
+    expect(player.getTerraformRating()).eq(14);
+    expect(game.getVenusScaleLevel()).eq(0);
+
+    cast(card.action(player), undefined);
+
+    runAllActions(game);
+
+    expect(player.megaCredits).eq(1);
+    expect(game.getVenusScaleLevel()).eq(2);
+    expect(player.getTerraformRating()).eq(15);
   });
 
-  it('Should act with 5 venus tags', function() {
-    player.tagsForTest = {venus: 5};
-    player.megaCredits = 6;
-    expect(card.canAct(player)).is.false;
-    player.megaCredits = 7;
-    expect(card.canAct(player)).is.true;
-  });
-
-  it('Should act with 12 venus tags', function() {
-    player.tagsForTest = {venus: 12};
-    player.megaCredits = 0;
-    expect(card.canAct(player)).is.true;
-  });
-
-  it('Should act with 15 venus tags', function() {
+  it('Action 15 venus tags', function() {
+    expect(game.getVenusScaleLevel()).eq(0);
     player.tagsForTest = {venus: 15};
     player.megaCredits = 0;
-    expect(card.canAct(player)).is.true;
+
     card.action(player);
+
     expect(player.megaCredits).eq(0);
   });
 });

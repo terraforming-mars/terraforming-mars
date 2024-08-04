@@ -20,7 +20,6 @@ export class FrontierTown extends Card implements IProjectCard {
 
       behavior: {production: {energy: -1}},
 
-      // TODO(kberg): Add an Ares variant that is the same, but just says "including adjacencies?"
       metadata: {
         cardNumber: 'P74',
         renderData: CardRenderer.builder((b) => {
@@ -36,8 +35,8 @@ export class FrontierTown extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     player.game.defer(new PlaceCityTile(player)).andThen((space) => {
       if (space) {
-        player.game.grantPlacementBonuses(player, space);
-        player.game.grantPlacementBonuses(player, space);
+        player.game.grantSpaceBonuses(player, space);
+        player.game.grantSpaceBonuses(player, space);
       }
     });
     return undefined;

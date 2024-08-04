@@ -388,6 +388,7 @@
     "${0} had no collectable green or blue project cards": "${0} hatte keine sammelbaren grünen oder blauen Projektkarten",
     "${0} returned ${1} to their hand": "${0} nahm ${1} auf die Hand zurück",
     "${0} gained 1 TR since no opponent had any corruption": "${0} erhielt 1 TW, da kein Gegner eine Korruption hatte",
+    "${0} for ${1} is blocking 1 TR": "Das ${0} ist die Blockierung von 1 TW für ${1}",
     "${0} was paid ${1} M€ from ${2}": "${0} wurde ${1} M€ von ${2} gezahlt",
     "${0} discarded ${1} corruption and gained ${2} M€": "${0} warf ${1} Korruption ab und erhielt ${2} M€",
     "${0} used the ${1} action to convert ${2} wares into ${2} M€": "${0} hat die ${1} Aktion benutzt, um ${2} Waren in ${2} M€ umzuwandeln",

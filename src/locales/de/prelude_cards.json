@@ -12,6 +12,9 @@
 
     "Envoys From Venus": "Abgesandte der Venus",
     "Requires 3 Venus tags. Place 2 delegates in 1 party.": "Benötigt 3 Venussymbole. Platziere 2 Delegierte in eine Partei.",
+
+    "Frontier Town": "Grenzstadt",
+    "Requires that Mars First is ruling or that you have 2 delegates there. Decrease your energy production one step. Place a city tile. GAIN THE PRINTED PLACEMENT BONUS 2 ADDITIONAL TIMES.": "Benötigt Regierungspartei: MARS FIRST oder 2+ eigene Delegierte dort. Reduziere deine Energieproduktion um 1. Platziere ein Stadtplättchen. ERHALTE DEN AUFGEDRUCKTEN PLATZIERUNGSBONUS 2 WEITERE MALE.",
     
     "GHG Shipment": "Treibhausgasverfrachtung",
     "Requires that Kelvinists are in power or that you have 2 delegates there. Increase your heat production 1 step. Gain 1 heat for each floater you have.": "Benötigt Regierungspartei: KELVINISTEN oder 2+ eigene Delegierte dort. Erhöhe deine Wärmeproduktion um 1. Du erhältst 1 Wärme für jeden Schweber, den du hast.",
@@ -39,7 +42,7 @@
     "Requires that temperature is -4 C or lower. Gain 1 plant per Venus tag, plant tag, and colony you have.": "Temperatur muss -4 °C oder kälter sein. Du erhältst 1 Pflanze pro Venussymbol, Pflanzensymbol und Kolonie, die du hast.",
 
     "Special Permit": "Sondergenehmigung",
-    "Requires that Greens are ruling or that you have 2 delegates there. Steal 4 plants from any player.": "Benötigt Regierungspartei: DIE GRÜNEN oder 2+ eigene Delegierte dort.. Stehle 4 Pflanzen von einem beliebigen Spieler.",
+    "Requires that Greens are ruling or that you have 2 delegates there. Steal 4 plants from any player.": "Benötigt Regierungspartei: DIE GRÜNEN oder 2+ eigene Delegierte dort. Stehle 4 Pflanzen von einem beliebigen Spieler.",
     
     "Sponsoring Nation": "Fördernde Nation",
     "Requires 4 Earth tags. Gain 3 TR. Place 2 delegates.": "Benötigt 4 Erdsymbole. Erhalte 3 TW. Platziere 2 Delegierte in eine Partei.",
@@ -55,11 +58,15 @@
     "Discard 1 card to terraform Venus 1 step.": "Werfe 1 Karte ab, um die Venuswertung um 2% zu erhöhen.",
 
     "Venus Allies": "Venus Verbündete",
-    "Raise Venus 2 steps. Gain 4 M€ per colony you have.": "Erhöhe die Venuswertung um 2%. Erhalte 4 M€ pro Kolonie, die du hast.",
+    "Raise Venus 2 steps. Gain 4 M€ per colony you have.": "Erhöhe die Venuswertung um 4%. Erhalte 4 M€ pro Kolonie, die du hast.",
 
     "Venus Orbital Survey": "Venus Orbitale Vermessung",
     "Action: Reveal the top 2 cards, take any venus cards to hand for free. Any other card you either buy or discard": "AKTION: Schaue Dir die obersten 2 Karten an, nehme eine beliebige Venuskarte kostenlos auf die Hand. Jede andere Karte kannst du entweder kaufen oder abwerfen.",
 
+    "Venus Shuttles": "Venus-Shuttles",
+    "Action: Spend 12 M€ to raise Venus 1 step. This cost is REDUCED BY 1 FOR EACH VENUS TAG you have.": "AKTION: Bezahle 12 M€, um die Venuswertung um 2% zu erhöhen. Diese Kosten werden für jedes Venussymbol, das du hast, um 1 reduziert.",
+    "Add 2 floaters to ANY VENUS CARD.": "Füge 2 Schweber zu einer beliebigen Venuskarte hinzu.",
+    
     "Venus Trade Hub": "Venus Handelszentrum",
     "Effect: When you trade, gain 3 M€.": "EFFEKT: Wenn du handelst, erhalte 3 M€.",
     "Requires 2 Venus tags.": "Benötigt 2 Venussymbole.",

@@ -5,7 +5,7 @@
     "Add 6 science resources here.": "Füge hier 6 Ressourcen hinzu.",
 
     "Atmospheric Enhancers": "Atmosphärische Verstärker",
-    "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "Effekt: Erhöhe entweder die Temperatur oder den Sauerstoffsgehalt oder die Venus um 2. Decke Karten vom Stapel auf, bis du 2 Karten mit Schwebersymbol aufgedeckt hast. Nimm diese 2 Karten auf die Hand und wirf den Rest ab.",
+    "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "Effekt: Erhöhe entweder die Temperatur um 4°C oder den Sauerstoffsgehalt um 2% oder die Venuswertung um 4%. Decke Karten vom Stapel auf, bis du 2 Karten mit Schwebersymbol aufgedeckt hast. Nimm diese 2 Karten auf die Hand und wirf den Rest ab.",
 
     "Board of Directors": "Direktorium",
     "ACTION:": "AKTION:",
@@ -69,11 +69,16 @@
     "Effect: When you play a Jovian, Earth, or Venus tag, you pay 2 M€ less for it.": "EFFEKT: Wenn du ein Jupiter-, Erd- oder Venus-Symbol spielst, zahlst du 2 M€ weniger dafür.",
     "Gain 3 titanium.": "Erhalte 3 Titan.",
 
+    "Suitable Infrastructure": "Geeignete Infrastruktur",
+    "Effect: Once per action you take, gain 2 M€ if you increase any productions.": "EFFEKT: Einmal pro Aktion erhältst du 2 M€, wenn du eine Produktion erhöht hast.",
+    "Gain 5 steel.": "Erhalte 5 Stahl.",
+
     "Terraforming Deal": "Terraforming-Abkommen",
-    "Effect: Each step your TR is raised, you gain 2 M€.": "EFFEKT: Mit jedem Schritt, mit dem dein TW erhöht wird, erhältst du 2 M€.",
+    "Effect: Each step your TR is raised, you gain 2 M€.": "EFFEKT: Für jedem Schritt, den du deinen TW erhöht hast, erhältst du 2 M€.",
 
     "Venus Contract": "Venus-Vertrag",
-    "Effect: Each step you raise Venus, gain 3 M€.": "EFFEKT: Mit jedem Schritt, den du die Venus erhöhst, erhalte 3 M€.",
+    "Effect: Each step you raise Venus, gain 3 M€.": "EFFEKT: Immer wenn Du die Venuswertung erhöhst, erhalte 3 M€.",
+    "Draw 1 Venus card. Raise your TR 1 step.": "Ziehe 1 Venuskarte. Erhöhe deinen TW um 1.",
 
     "Venus L1 Shade": "Venus L1 Schatten",
     "Raise Venus 3 steps.": "Erhöhe die Venuswertung um 6%.",

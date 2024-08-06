@@ -6,7 +6,7 @@ on:
     branches:
       - main
 jobs:
-  deploy:
+  deployment:
     name: Deploy app
     runs-on: ubuntu-latest
     concurrency: deploy-group    # optional: ensure only one action runs at a time

@@ -1,4 +1,6 @@
-# <a name="README"> Terraforming Mars Open-source
+![fly-deploy workflow](https://github.com/samijuvaste/terraforming-mars/actions/workflows/fly-deploy.yml/badge.svg)
+
+# <a name="README"> Terraforming Mars Open-source CRUISE EDITION
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_corporateEra.png">

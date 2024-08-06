@@ -1,6 +1,6 @@
 name: CI
 
-on: [pull_request, push]
+on: [pull_request]
 
 jobs:
   build-linux:
@@ -15,24 +15,3 @@ jobs:
     - run: npm run build
     - run: npm run build:tests
     - run: npm test
-
-  build-windows:
-    runs-on: windows-latest
-
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-    - run: npm ci
-    # - run: npm run lint
-    - run: npm run build
-    # - run: npm run build:tests
-    # - run: npm test
-
-  build-docker:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v4
-    - run: docker build .
-
-

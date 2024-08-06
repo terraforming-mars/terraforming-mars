@@ -579,16 +579,6 @@ export class Player implements IPlayer {
     return result;
   }
 
-  public getCardsWith2Resources(resource?: CardResource): Array<ICard> {
-    let result = this.tableau.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount >= 2);
-
-    if (resource !== undefined) {
-      result = result.filter((card) => card.resourceType === resource);
-    }
-
-    return result;
-  }
-
   public getResourceCards(resource?: CardResource): Array<ICard> {
     let result = this.tableau.filter((card) => card.resourceType !== undefined);
 

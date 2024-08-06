@@ -22,7 +22,7 @@ describe('FloatingTradeHub', function() {
     player.playedCards.push(card);
   });
 
-  it('Add resources, simple', () => {
+  it('Add resources', () => {
     const selectCard = cast(card.action(player), SelectCard);
     expect(selectCard.cards).deep.eq([card]);
     selectCard.cb([card]);

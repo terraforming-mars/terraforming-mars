@@ -36,13 +36,14 @@ export class FloatingTradeHub extends PreludeCard implements IActionCard {
   }
 
   public action(player: IPlayer) {
-    const add2Floaters = new SelectCard('', undefined, player.getResourceCards(CardResource.FLOATER)).andThen(([card]) => {
+    const add2Floaters = new SelectCard('Select card to gain 2 floaters', undefined, player.getResourceCards(CardResource.FLOATER)).andThen(([card]) => {
       player.addResourceTo(card, {qty: 2, log: true});
       return undefined;
     });
     const selectResource = new SelectResource('Select resource to gain');
     const selectAmount = new SelectAmount('Select amount of floaters to remove', undefined, 1, this.resourceCount, true);
     const removeFloaters = new AndOptions(selectAmount, selectResource);
+    removeFloaters.title = 'Convert floaters to standard resources';
     removeFloaters.andThen(() => {
       // TODO(kberg): Add a better log message.
       player.removeResourceFrom(this, selectAmount.selected, {log: true});

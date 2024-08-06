@@ -2,8 +2,8 @@
 <div class="start-screen">
   <div v-i18n class="start-screen-links">
     <div class="start-screen-header start-screen-link--title">
-      <div class="start-screen-title-top">TERRAFORMING</div>
-      <div class="start-screen-title-bottom">MARS</div>
+      <div class="start-screen-title-top">TERRAFORMING MARS</div>
+      <div class="start-screen-title-bottom">CRUISE EDITION</div>
     </div>
     <a class="start-screen-link start-screen-link--new-game" href="new-game" v-i18n>New game</a>
     <a class="start-screen-link start-screen-link--how-to-play" href="https://github.com/terraforming-mars/terraforming-mars/wiki/Rulebooks" target="_blank" v-i18n>How to Play</a>
@@ -19,7 +19,7 @@
         <div class="nowrap start-screen-version"><span v-i18n>version</span>: {{raw_settings.head}}</div>
       </div>
       <div class="source-code">
-        <a href="https://github.com/terraforming-mars/terraforming-mars" target="_blank" class="source-code-text">
+        <a href="https://github.com/samijuvaste/cruise-terraforming-mars" target="_blank" class="source-code-text">
         <img src="assets/misc/github.png" class="source-code-img">
           source code
         </a>

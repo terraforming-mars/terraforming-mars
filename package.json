@@ -1,7 +1,7 @@
 {
-  "name": "terraforming-mars",
+  "name": "cruise-terraforming-mars",
   "version": "1.0.0",
-  "description": "Terraforming Mars Game",
+  "description": "Terraforming Mars CRUISE EDITION",
   "engines": {
     "node": ">=16.x <=20.x"
   },
@@ -98,12 +98,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/terraforming-mars/terraforming-mars.git"
+    "url": "git+https://github.com/samijuvaste/cruise-terraforming-mars"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/terraforming-mars/terraforming-mars/issues"
+    "url": "https://github.com/samijuvaste/cruise-terraforming-mars/issues"
   },
-  "homepage": "https://github.com/terraforming-mars/terraforming-mars#readme"
+  "homepage": "https://github.com/samijuvaste/cruise-terraforming-mars#readme"
 }

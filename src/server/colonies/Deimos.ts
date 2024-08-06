@@ -7,7 +7,7 @@ export class Deimos extends Colony {
     super({
       description: [
         'Place a hazard tile next to no other tile',
-        'Erode n spaces adjacent to hazard tiles',
+        'Erode n spaces adjacent to hazard tiles (gaining placement bonuses)',
         'Gain 1 M€ per hazard tile on Mars',
       ],
       //  public description = 'Hazards';

@@ -254,6 +254,7 @@ export interface IPlayer {
    * If `resource` is absent, include cards that collect any resource.
    */
   getCardsWithResources(resource?: CardResource): Array<ICard>;
+
   /**
    * Return the cards that collect `resource`.
    *

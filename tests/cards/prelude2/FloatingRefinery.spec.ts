@@ -42,7 +42,7 @@ describe('FloatingRefinery', function() {
   it('Add resources', () => {
     player.playedCards.push(card);
     const orOptions = cast(churn(card.action(player), player), OrOptions);
-    orOptions.options[0].cb();
+    orOptions.options[1].cb();
     expect(card.resourceCount).to.eq(1);
   });
 
@@ -51,7 +51,7 @@ describe('FloatingRefinery', function() {
     card.resourceCount = 3;
     const orOptions = cast(card.action(player), OrOptions);
     cast(card.action(player), OrOptions);
-    const selectCard = cast(orOptions.options[1].cb(), SelectCard<ICard>);
+    const selectCard = cast(orOptions.options[0].cb(), SelectCard<ICard>);
     expect(selectCard.cards.map(toName)).deep.eq([card.name]);
     selectCard.cb([card]);
     expect(player.stock.titanium).to.eq(1);
@@ -67,7 +67,7 @@ describe('FloatingRefinery', function() {
 
     const orOptions = cast(card.action(player), OrOptions);
     cast(card.action(player), OrOptions);
-    const selectCard = cast(orOptions.options[1].cb(), SelectCard<ICard>);
+    const selectCard = cast(orOptions.options[0].cb(), SelectCard<ICard>);
     expect(selectCard.cards).has.length(2);
     selectCard.cb([selectCard.cards[0]]);
     expect(floater1.resourceCount).eq(0);
@@ -86,7 +86,7 @@ describe('FloatingRefinery', function() {
 
     const orOptions = cast(card.action(player), OrOptions);
     cast(card.action(player), OrOptions);
-    const selectCard = cast(orOptions.options[1].cb(), SelectCard<ICard>);
+    const selectCard = cast(orOptions.options[0].cb(), SelectCard<ICard>);
     expect(selectCard.cards).has.length(2);
     selectCard.cb([selectCard.cards[1]]);
     expect(floater1.resourceCount).eq(2);

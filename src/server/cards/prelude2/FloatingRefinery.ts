@@ -46,7 +46,7 @@ export class FloatingRefinery extends Card implements IProjectCard, IActionCard 
   }
 
   public action(player: IPlayer) {
-    const Floater2Cards = player.tableau.filter((card) => card.resourceType === CardResource.FLOATER && card.resourceCount >= 2);
+    const floater2Cards = player.tableau.filter((card) => card.resourceType === CardResource.FLOATER && card.resourceCount >= 2);
     const addFloater = new SelectOption('Add 1 floater to this card',
       'Add floater',
     ).andThen(() => {
@@ -60,7 +60,7 @@ export class FloatingRefinery extends Card implements IProjectCard, IActionCard 
     ).andThen(() => {
       return new SelectCard('Remove 2 floaters from ANY CARD to gain 1 titanium and 2 M€',
         'Choose a card to spend 2 floaters from, to gain 1 titanium and 2 M€.',
-        Floater2Cards,
+        floater2Cards,
       ).andThen(
         ([card]) => {
           player.removeResourceFrom(card, 2);
@@ -69,6 +69,6 @@ export class FloatingRefinery extends Card implements IProjectCard, IActionCard 
           return undefined;
         });
     });
-    return new OrOptions(addFloater, remove2floaters);
+    return new OrOptions(remove2floaters, addFloater);
   }
 }

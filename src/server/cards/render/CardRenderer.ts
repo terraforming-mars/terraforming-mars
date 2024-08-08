@@ -249,6 +249,10 @@ abstract class Builder<T> {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.WILD, amount, options));
   }
 
+  public one(amount: number, options?: ItemOptions) {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.ONE, amount, options));
+  }
+
   public diverseTag(amount: number = 1) {
     const item = new CardRenderItem(CardRenderItemType.DIVERSE_TAG, amount);
     return this._appendToRow(item);

@@ -59,6 +59,7 @@ export enum CardRenderItemType {
   CATHEDRAL = 'cathedral',
   NOMADS = 'nomads',
   CITY_OR_SPECIAL_TILE = 'city-or-special-tile',
+  ONE = 'one',
 
   // CEO Extension:
   ARROW_OPG = 'arrow-opg',

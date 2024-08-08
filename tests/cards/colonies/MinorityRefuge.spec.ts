@@ -5,7 +5,7 @@ import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, churnPlay, runAllActions} from '../../TestingUtils';
+import {cast, churn, runAllActions} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 import {IColony} from '../../../src/server/colonies/IColony';
 import {Luna} from '../../../src/server/colonies/Luna';
@@ -42,7 +42,7 @@ describe('MinorityRefuge', function() {
 
   it('play)', () => {
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
-    const selectColony = cast(churnPlay(card, player), SelectColony);
+    const selectColony = cast(churn(card.play(player), player), SelectColony);
     expect(selectColony.colonies).has.length(5);
     expect(selectColony.title).eq('Select colony for Minority Refuge');
 
@@ -64,7 +64,7 @@ describe('MinorityRefuge', function() {
     expect(card.canPlay(player)).is.false;
     game.colonies[0] = luna;
     expect(card.canPlay(player)).is.true;
-    const selectColony = cast(churnPlay(card, player), SelectColony);
+    const selectColony = cast(churn(card.play(player), player), SelectColony);
 
     // Gain plant production
     selectColony.cb(luna);

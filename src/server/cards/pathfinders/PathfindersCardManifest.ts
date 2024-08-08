@@ -102,7 +102,6 @@ import {SpaceRaceToMars} from './SpaceRaceToMars';
 import {SpaceRelay} from './SpaceRelay';
 import {SpecializedSettlement} from './SpecializedSettlement';
 import {Steelaris} from './Steelaris';
-import {StrategicBasePlanning} from './StrategicBasePlanning';
 import {SurveyMission} from './SurveyMission';
 import {TerraformingControlStation} from './TerraformingControlStation';
 import {TerraformingRobots} from './TerraformingRobots';
@@ -233,7 +232,6 @@ export const PATHFINDERS_CARD_MANIFEST = new ModuleManifest({
     // [CardName.CONSOLIDATION]: {Factory: Consolidation},
     [CardName.PERSONAL_AGENDA]: {Factory: PersonalAgenda},
     [CardName.VITAL_COLONY]: {Factory: VitalColony, compatibility: 'colonies'},
-    [CardName.STRATEGIC_BASE_PLANNING]: {Factory: StrategicBasePlanning, compatibility: 'colonies'},
     [CardName.DEEP_SPACE_OPERATIONS]: {Factory: DeepSpaceOperations},
     [CardName.EXPERIENCED_MARTIANS]: {Factory: ExperiencedMartians, compatibility: ['turmoil', 'pathfinders']},
     [CardName.THE_NEW_SPACE_RACE]: {Factory: TheNewSpaceRace, compatibility: 'turmoil'},

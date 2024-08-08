@@ -29,11 +29,15 @@ export class CharityDonation extends Card implements IProjectCard {
     });
   }
 
+  public override bespokeCanPlay(player: IPlayer): boolean {
+    return player.game.projectDeck.canDraw(player.game.getPlayers().length + 1);
+  }
+
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
     const players = game.getPlayersInGenerationOrder();
     const thisIdx = players.findIndex((p) => p === player);
-    const cards = game.projectDeck.drawByCondition(game, players.length + 1, () => true);
+    const cards = game.projectDeck.drawByConditionOrThrow(game, players.length + 1, () => true);
     LogHelper.logDrawnCards(player, cards);
     game.defer(new SelectCharityDonationCard(players, thisIdx, thisIdx, cards));
     return undefined;

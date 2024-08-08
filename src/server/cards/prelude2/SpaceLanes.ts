@@ -21,7 +21,7 @@ export class SpaceLanes extends PreludeCard {
 
       metadata: {
         cardNumber: '',
-        description: 'Gain 3 titanium',
+        description: 'Gain 3 titanium.',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a Jovian, Earth, or Venus tag, you pay 2 M€ less for it.', (eb) => {
             eb.tag(Tag.JOVIAN).tag(Tag.EARTH).tag(Tag.VENUS).startEffect.megacredits(-2);

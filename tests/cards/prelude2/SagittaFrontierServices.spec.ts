@@ -24,7 +24,7 @@ describe('SagittaFrontierServices', () => {
     expect(player.production.asUnits()).deep.eq(Units.of({energy: 1, megacredits: 2}));
     expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 35})); // +4 for playing this card.
     expect(player.cardsInHand).has.lengthOf(1);
-    expect(player.cardsInHand[0].tags.length).eq(0);
+    expect(player.cardsInHand[0].tags).has.length(0);
   });
 
   it('Zero tags, gain 4 M€', () => {

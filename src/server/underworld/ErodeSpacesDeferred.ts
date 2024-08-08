@@ -5,6 +5,8 @@ import {RunNTimes} from '../deferredActions/RunNTimes';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {LogHelper} from '../LogHelper';
+import {_AresHazardPlacement} from '../ares/AresHazards';
+import {TileType} from '../../common/TileType';
 
 export class ErodeSpacesDeferred extends RunNTimes<Space> {
   constructor(player: IPlayer, count: number) {
@@ -29,9 +31,9 @@ export class ErodeSpacesDeferred extends RunNTimes<Space> {
 
     return new SelectSpace('Select space to erode' + this.titleSuffix(), Array.from(spaces))
       .andThen((space) => {
-        space.bonus.forEach((spaceBonus) => game.grantSpaceBonus(this.player, spaceBonus));
-        // game.erodedSpaces.push(space.id);
+        _AresHazardPlacement.putHazardAt(space, TileType.EROSION_MILD);
         LogHelper.logBoardTileAction(this.player, space, 'space', 'eroded');
+        game.grantSpaceBonuses(this.player, space);
         return this.next();
       });
   }

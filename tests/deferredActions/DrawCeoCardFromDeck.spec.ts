@@ -31,7 +31,7 @@ describe('DrawCeoCardFromDeck', () => {
     selectCard.cb([selected]);
 
     expect(card).eq(selected);
-    expect(game.ceoDeck.discardPile.length).eq(2);
+    expect(game.ceoDeck.discardPile).has.length(2);
   });
 
   it('one unplauable CEO', () => {
@@ -42,12 +42,12 @@ describe('DrawCeoCardFromDeck', () => {
 
     const selectCard = cast(action.execute(), SelectCard<ICeoCard>);
     expect(selectCard.cards).has.length(2);
-    expect(game.ceoDeck.discardPile.length).eq(1);
+    expect(game.ceoDeck.discardPile).has.length(1);
     const selected = selectCard.cards[0];
     selectCard.cb([selected]);
 
     expect(card).eq(selected);
-    expect(game.ceoDeck.discardPile.length).eq(2);
+    expect(game.ceoDeck.discardPile).has.length(2);
   });
 
   it('No playable CEOs', () => {
@@ -62,7 +62,7 @@ describe('DrawCeoCardFromDeck', () => {
     runAllActions(game);
 
     expect(card).is.undefined;
-    expect(game.ceoDeck.discardPile.length).eq(3);
+    expect(game.ceoDeck.discardPile).has.length(3);
     expect(formatMessage(game.gameLog[game.gameLog.length - 1])).matches(/drew no playable CEO cards/);
   });
 });

@@ -41,7 +41,7 @@ describe('LobbyHalls', function() {
 
     card.play(player);
 
-    expect(game.deferredActions.length).eq(2);
+    expect(game.deferredActions).has.length(2);
 
     // First action is define a clone tag
     assertCloneTagAction(game.deferredActions.pop()!);

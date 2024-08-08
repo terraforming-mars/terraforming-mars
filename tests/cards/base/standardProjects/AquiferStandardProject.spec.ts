@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, churnAction, runAllActions, testRedsCosts} from '../../../TestingUtils';
+import {cast, churn, runAllActions, testRedsCosts} from '../../../TestingUtils';
 import {AquiferStandardProject} from '../../../../src/server/cards/base/standardProjects/AquiferStandardProject';
 import {maxOutOceans} from '../../../TestingUtils';
 import {TestPlayer} from '../../../TestPlayer';
@@ -29,7 +29,7 @@ describe('AquiferStandardProject', function() {
     player.setTerraformRating(20);
     expect(game.board.getOceanSpaces()).is.empty;
 
-    assertPlaceOcean(player, churnAction(card, player));
+    assertPlaceOcean(player, churn(card.action(player), player));
 
     expect(player.getTerraformRating()).eq(21);
     expect(game.board.getOceanSpaces()).has.length(1);

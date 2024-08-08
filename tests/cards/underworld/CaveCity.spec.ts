@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {CaveCity} from '../../../src/server/cards/underworld/CaveCity';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast, churn} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 
@@ -35,7 +35,7 @@ describe('CaveCity', () => {
     space1.excavator = player;
     space2.excavator = player;
 
-    const selectSpace = cast(card.play(player), SelectSpace);
+    const selectSpace = cast(churn(card.play(player), player), SelectSpace);
 
     expect(selectSpace.spaces).to.have.members([space1, space2]);
 

@@ -72,7 +72,7 @@ describe('MiningRights', () => {
 
     action.cb(space);
 
-    expect(game.deferredActions.length).eq(1);
+    expect(game.deferredActions).has.length(1);
 
     const deferredAction = game.deferredActions.pop();
 

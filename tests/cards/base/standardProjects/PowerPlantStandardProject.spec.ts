@@ -18,9 +18,9 @@ describe('PowerPlantStandardProjects', function() {
   it('Should act', function() {
     player.megaCredits = 11;
     player.playedCards.push(new StandardTechnology());
-    expect(game.deferredActions.length).eq(0);
+    expect(game.deferredActions).has.length(0);
     card.action(player);
-    expect(game.deferredActions.length).eq(1);
+    expect(game.deferredActions).has.length(1);
     expect(player.megaCredits).eq(11);
     game.deferredActions.runNext();
     expect(player.production.energy).eq(1);

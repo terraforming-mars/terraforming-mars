@@ -307,7 +307,7 @@ describe('PharmacyUnion', function() {
     game.deferredActions.runNext();
     cast(player.popWaitingFor(), undefined);
 
-    expect(game.deferredActions.length).eq(0);
+    expect(game.deferredActions).has.length(0);
 
     expect(player.megaCredits).eq(4);
   });
@@ -392,7 +392,7 @@ describe('PharmacyUnion', function() {
     expect(player.megaCredits).eq(2);
 
     // And that's it.
-    expect(game.deferredActions.length).eq(0);
+    expect(game.deferredActions).has.length(0);
   });
 
   it('Reds + Science, #1670', () => {
@@ -431,7 +431,7 @@ describe('PharmacyUnion', function() {
     expect(player.getTerraformRating()).eq(21);
 
     // And that's it.
-    expect(game.deferredActions.length).eq(0);
+    expect(game.deferredActions).has.length(0);
   });
 
   it('Reds + Leavitt + Pharmacy Union, #1670', () => {

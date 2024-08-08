@@ -30,7 +30,7 @@ describe('Shara', function() {
 
     card.action(player);
 
-    expect(game.deferredActions.length).eq(1);
+    expect(game.deferredActions).has.length(1);
 
     const action = cast(game.deferredActions.pop(), DeclareCloneTag);
     const options = cast(action.execute(), OrOptions);

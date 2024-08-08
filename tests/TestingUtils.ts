@@ -15,7 +15,6 @@ import {CardName} from '../src/common/cards/CardName';
 import {CardType} from '../src/common/cards/CardType';
 import {SpaceId} from '../src/common/Types';
 import {PlayerInput} from '../src/server/PlayerInput';
-import {IActionCard} from '../src/server/cards/ICard';
 import {TestPlayer} from './TestPlayer';
 import {PartyName} from '../src/common/turmoil/PartyName';
 import {IPlayer} from '../src/server/IPlayer';
@@ -106,16 +105,6 @@ export function runAllActions(game: IGame) {
 export function runNextAction(game: IGame) {
   const action = game.deferredActions.pop();
   return action?.execute();
-}
-
-// Use churnAction instead.
-export function cardAction(card: IActionCard, player: TestPlayer): PlayerInput | undefined {
-  const input = card.action(player);
-  if (input !== undefined) {
-    return input;
-  }
-  runAllActions(player.game);
-  return player.popWaitingFor();
 }
 
 export function forceGenerationEnd(game: IGame) {
@@ -252,26 +241,6 @@ export function getSendADelegateOption(player: IPlayer) {
 }
 
 /**
- * Simulate the behavior of a playing a project card run through the deferred action queue, returning the
- * next input the player must supply.
- *
- * ../srcsee churn.
- */
-export function churnPlay(card: IProjectCard, player: TestPlayer) {
-  return churn(() => card.play(player), player);
-}
-
-/**
- * Simulate the behavior of a card action run through the deferred action queue, returning the
- * next input the player must supply.
- *
- * ../srcsee churn.
- */
-export function churnAction(card: IActionCard, player: TestPlayer) {
-  return churn(() => card.action(player), player);
-}
-
-/**
  * Simulate the behavior of a block run through the deferred action queue, returning the next input
  * the player must supply.
  *
@@ -294,4 +263,12 @@ export function doWait<T>(player: TestPlayer, klass: new (...args: any[]) => T, 
   const [waitingFor, cb] = player.popWaitingFor2();
   f(cast(waitingFor, klass));
   cb?.();
+}
+
+/**
+ * Returns the name of any named item. Ideal for iterating with the Array.map and other iterative functions.
+ */
+// Use common/utils/utils/toName
+export function toName<T>(item: {name: T}): T {
+  return item.name;
 }

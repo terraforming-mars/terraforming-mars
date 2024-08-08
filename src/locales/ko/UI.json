@@ -6,6 +6,7 @@
     "Solo": "나 홀로 화성에",
     "Expansions": "확장",
     "Options": "선택사항",
+    "Promo": "프로모",
     "Promos": "프로모",
     "Starting Corporations": "장씩 초기 기업 카드 분배",
     "Starting CEOs": "장씩 초기 경영인 카드 분배",
@@ -276,6 +277,7 @@
     "You selected too many preludes": "너무 많은 서곡 카드를 선택하였습니다.",
     "Select prelude card to play": "추진할 서곡 카드 선택",
     "Draw 3 Prelude cards, and play one of them": "서곡 카드 3장을 뽑고 그 중 1장을 추진",
+    "Would you like pay 12 M€ and one Director to play ${0}": "12 M€을 지불하고 Director 자원 1개를 제거하여, ${0} 카드를 추진하시겠습니까?",
     "This Prelude will fizzle. Playing it will give you 15M€.": "조건이 맞지 않아 효과를 적용하는 대신, 15M€을 획득하도록 이 서곡 카드를 추진합니다.",
 
     "Game details": "게임 세부사항",
@@ -616,12 +618,14 @@
     "Add 1 microbe to ${0}": "‘${0}’ 카드에 미생물 자원 1개 추가",
     "Add 2 microbe to ${0}": "‘${0}’ 카드에 미생물 자원 2개 추가",
     "Add 3 microbe to ${0}": "‘${0}’ 카드에 미생물 자원 3개 추가",
+    "Add ${0} microbes to ${1}": "‘${1}’ 카드에 미생물 자원 ${0}개 추가",
     "Add 2 microbes to Regolith Eaters": "‘표토 섭식 미생물’ 카드에 미생물 자원 2개 추가",
     "Add 2 microbes to Rust Eating Bacteria": "‘Rust Eating Bacteria’ 카드에 미생물 자원 2개 추가",
     "Add 2 microbes to Nitrite Reducing Bacteria": "‘질산환원균’ 카드에 미생물 자원 2개 추가",
     "Add 2 microbes to Thermophile": "‘호열성 미생물’ 카드에 미생물 자원 2개 추가",
     "Add 2 microbes to Darkside Incubation Plant": "‘Darkside Incubation Plant’ 카드에 미생물 자원 2개 추가",
 
+    "Add 2 microbes to Extremophile": "‘극한성 생물’ 카드에 미생물 자원 2개 추가",
     "Add 3 microbes to a card": "이 카드에 미생물 자원 3개 추가",
     "Add 3 microbes to ${0}": "‘${0}’ 카드에 미생물 자원 3개 추가",
     "Add 3 microbes to Psychrophiles": "‘호냉성 미생물’ 카드에 미생물 자원 3개 추가",
@@ -804,7 +808,7 @@
     "Steal 6 steel": "강철 자원 6개 훔치기",
     "Steal 4 titanium": "티타늄 자원 6개 훔치기",
     "Do not steal": "훔치기 하지 않음",
-    "Select 3 cards to gain 1 resource each": "자원을 1개씩 획득할 카드 최대 3장 선택",
+    "Select up to 3 cards to gain 1 resource each": "자원을 1개씩 획득할 카드 최대 3장 선택",
     "Select 1 card to discard": "버릴 카드 1장 선택",
     "Select 2 cards to discard": "버릴 카드 2장 선택",
     "Select 3 cards to discard": "버릴 카드 3장 선택",
@@ -1118,6 +1122,7 @@
     "Why?": "이유?",
 
     "How to pay?": "지불 방법 선택",
+    "Some ${0} are unavailable here in reserve for the project card.": "일부 ${0} 자원은 프로젝트 카드를 위해 예비로 사용할 수 없습니다.",
     "Some titanium are unavailable here in reserve for the project card.": "일부 티타늄 자원은 프로젝트 카드를 위해 예비로 사용할 수 없습니다.",
     "Some steel are unavailable here in reserve for the project card.": "일부 강철 자원은 프로젝트 카드를 위해 예비로 사용할 수 없습니다.",
     "Must select a space": "위치를 반드시 선택해야 함",
@@ -1133,6 +1138,7 @@
     "Note: Moon logistics rate is already at its goal.": "참고: 월면 물류 등급이 이미 목표치에 도달함.",
     "Warning: you are the only player that can lose production.": "경고: 당신 외에 생산력을 잃을 수 있는 플레이어가 없음.",
     "Warning: this will remove your own plants": "경고: 당신의 식물 자원이 제거됨.",
+    "Warning: you do not have the 12 M€ required to act on a prelude.": "경고: 서곡 카드를 추진할 최소 보유 메가크레딧이 12 M€ 미만입니다.",
     "You will only be able to build the colony on Luna.": "달에만 개척기지를 건설할 수 있음.",
     "This prelude is not playable, so you will discard it and gain 15 M€.": "해당 서곡 카드를 추진할 수 없음. 해당 카드를 자동으로 버리고 15 M€을 획득하게 됨.",
     "You will be limited to excavating a space that gives 1 energy production.": "",
@@ -1175,6 +1181,7 @@
     "wild": "만능",
     "city-count": "도시 수",
     "colony-count": "개척기지 수",
+    "Influence-Count": "영향력 수치",
     "Excavation-Count": "발굴 수",
     "Corruption-Count": "Corruption 수",
     "nothing": "없음",
@@ -1285,7 +1292,6 @@
 
 
     "Official": "공식",
-    "Promo": "프로모",
     "Star Wars": "스타워즈",
     "Underworld (β)": "지하 세계 (β)",
     "ceo": "경영인",
@@ -1307,6 +1313,11 @@
     "max": "최대",
     "Max": "최대",
 
+    "Select up to ${0} card(s) to buy": "구입할 카드를 ${0}장까지 선택",
+    "Select up to 1 card(s) to buy": "구입할 카드를 1장까지 선택",
+
+    "Add 1 floater to ${0}": "‘${0}’ 카드에 부양체 자원 1개 추가",
+    "Add ${0} floaters to ${1}": "‘${1}’ 카드에 부양체 자원 ${0}개 추가",
     "Spend 2 M€ and select card to add 1 floater": "2 M€을 소비하여 부양체 자원 하나를 추가할 카드 선택",
 
     "Increase your M€ production by 5": "메가크레딧 생산력 5 증가",

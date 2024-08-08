@@ -35,10 +35,6 @@ export class L1TradeTerminal extends Card {
     });
   }
 
-  public override bespokeCanPlay(player: IPlayer): boolean {
-    return player.getCardsWithResources().length >= 3;
-  }
-
   public override bespokePlay(player: IPlayer): PlayerInput | undefined {
     function addResources(cards: ReadonlyArray<ICard>): void {
       for (const card of cards) {
@@ -52,7 +48,7 @@ export class L1TradeTerminal extends Card {
       return undefined;
     }
 
-    return new SelectCard('Select 3 cards to gain 1 resource each', 'Add Resources', cards, {min: 3, max: 3})
+    return new SelectCard('Select up to 3 cards to gain 1 resource each', 'Add Resources', cards, {min: 0, max: 3})
       .andThen((cards) => {
         addResources(cards);
         return undefined;

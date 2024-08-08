@@ -4,7 +4,7 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
-import {addOcean, cast, fakeCard} from '../../TestingUtils';
+import {addOcean, cast, fakeCard, toName} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {CardResource} from '../../../src/common/CardResource';
 
@@ -39,7 +39,7 @@ describe('ControlledBloom', function() {
     expect(player.plants).eq(3);
 
     const addResourcesToCard = cast(game.deferredActions.pop()!.execute()!, SelectCard);
-    expect(addResourcesToCard.cards.map((c) => c.name)).has.members(['A', 'C']);
+    expect(addResourcesToCard.cards.map(toName)).has.members(['A', 'C']);
     addResourcesToCard.cb([a]);
     expect(a.resourceCount).eq(3);
   });

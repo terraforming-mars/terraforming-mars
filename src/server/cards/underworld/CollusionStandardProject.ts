@@ -8,6 +8,7 @@ import {AndOptions} from '../../inputs/AndOptions';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {all} from '../Options';
+import {toName} from '../../../common/utils/utils';
 
 export class CollusionStandardProject extends StandardProjectCard {
   constructor(properties = {
@@ -49,7 +50,7 @@ export class CollusionStandardProject extends StandardProjectCard {
   }
 
   private getParties(turmoil: Turmoil) {
-    return turmoil.parties.filter((party) => party.delegates.get('NEUTRAL') > 0).map((party) => party.name);
+    return turmoil.parties.filter((party) => party.delegates.get('NEUTRAL') > 0).map(toName);
   }
 
   public execute(player: IPlayer) {

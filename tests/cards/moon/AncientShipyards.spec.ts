@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
-import {churnAction} from '../../TestingUtils';
+import {churn} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AncientShipyards} from '../../../src/server/cards/moon/AncientShipyards';
 
@@ -39,7 +39,7 @@ describe('AncientShipyards', () => {
     player2.megaCredits = 10;
     player3.megaCredits = 7;
 
-    expect(churnAction(card, player)).is.undefined;
+    expect(churn(card.action(player), player)).is.undefined;
 
     expect(player.megaCredits).eq(4);
     expect(player2.megaCredits).eq(8);
@@ -53,7 +53,7 @@ describe('AncientShipyards', () => {
     expect(card.resourceCount).eq(0);
     player.megaCredits = 10;
 
-    expect(churnAction(card, player)).is.undefined;
+    expect(churn(card.action(player), player)).is.undefined;
 
     expect(player.megaCredits).eq(12);
     expect(card.resourceCount).eq(1);

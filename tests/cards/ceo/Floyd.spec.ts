@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
-import {forceGenerationEnd, runAllActions, cast, churnAction} from '../../TestingUtils';
+import {forceGenerationEnd, runAllActions, cast, churn} from '../../TestingUtils';
 import {Floyd} from '../../../src/server/cards/ceos/Floyd';
 import {AsteroidMining} from '../../../src/server/cards/base/AsteroidMining';
 import {testGame} from '../../TestGame';
@@ -34,7 +34,7 @@ describe('Floyd', function() {
     expect(player.getCardCost(asteroidMining)).eq(30);
     expect(player.canPlay(asteroidMining)).is.false;
 
-    const selectProjectCardToPlay = cast(churnAction(card, player), SelectProjectCardToPlay);
+    const selectProjectCardToPlay = cast(churn(card.action(player), player), SelectProjectCardToPlay);
     expect(selectProjectCardToPlay.cards).deep.eq([asteroidMining]);
 
     expect(player.getCardCost(asteroidMining)).eq(5);

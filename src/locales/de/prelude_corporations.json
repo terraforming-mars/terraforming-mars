@@ -2,7 +2,7 @@
     "SPIRE": "SPIRE",
     "Spire": "Spire",
     "Standard Project": "Standard Projekt",
-    "You start with 50 M€. As your first action, draw 4 cards, then discard 3 cards from your hand.": "Du beginnst mit 44 M€. Als erste Aktion ziehe 4 Karten und werfe dann 3 Karten von deiner Hand ab.",
+    "You start with 50 M€. As your first action, draw 4 cards, then discard 3 cards from your hand.": "Du beginnst mit 50 M€. Als erste Aktion ziehe 4 Karten und werfe dann 3 Karten von deiner Hand ab.",
     "Effect: When you play a card with at least 2 tags. including this, add 1 science resource here.": "EFFEKT: Wenn du eine Karte mit mindestens 2 Symbolen ausspielst, einschließlich dieser, füge hier eine Wissenschaft hinzu.",
     "Effect: When you pay for a standard project, science resources here may be used as 2 M€ each.": "EFFEKT: Wenn du ein Standardprojekt verwendest, darfst du Wissenschaft hier für je 2 M€ einsetzen.",
 
@@ -10,7 +10,7 @@
     "Sagitta Frontier Services": "Sagitta Grenzdienste",
     "You start with 31 M€. Increase energy production 1 step and M€ production 2 steps. Draw a card that has no tag.": "Du beginnst mit 31 M€. Erhöhe die Energieproduktion um 1 und die M€-Produktion um 2. Ziehen Sie eine Karte ohne Symbol.",
     "Effect: When you play a card with no tags, including this, gain 4 M€.": "EFFEKT: Wenn du eine Karte ohne Symbol ausspielst, einschließlich diese, erhalte 4 M€.",
-    "Effect: When you play a card with EXACTLY 1 TAG, gain 1 M€.": "EFFEKT: Wenn du eine Karte mit EXAKT 1 Symbol spielst, erhalte 1 M€.",
+    "Effect: When you play a card with EXACTLY 1 TAG, you gain 1 M€.": "EFFEKT: Wenn du eine Karte mit EXAKT 1 Symbol spielst, erhalte 1 M€.",
 
     "ECOTEC": "ECOTEC",
     "Ecotec": "Ecotec",
@@ -19,13 +19,13 @@
 
     "PALLADIN SHIPPING": "PALLADIN-VERSAND",
     "Palladin Shipping": "Palladin-Versand",
-    "You start with 36 M€. Gain 5 titanium.": "Du beginnst mit 36 M€ und 5 Titan.",
+    "You start with 36 M€. Gain 5 titanium.": "Du beginnst mit 36 M€. Erhalte 5 Titan.",
     "Effect: When you play a space event, gain 1 titanium.": "EFFEKT: Wenn du ein Weltraumereignis spielst, erhalte 1 Titan.",
     "Action: Spend 2 titanium to raise the temperature 1 step.": "AKTION: Bezahle 2 Titan, um die Temperatur um 2°C zu erhöhen.",
 
     "NIGRAL ENTERPRISES": "NIGRAL ENTERPRISES",
     "Nigral Enterprises": "Nigral Enterprises",
-    "You start with 30 M€. Raise your energy, plant, and steel production 1 step each.": "Du beginnst mit 33 M€ und einer Energie-, Pflanzen- und Stahl-Produktion von 1.",
+    "You start with 30 M€. Increase your energy, plant, and steel production 1 step each.": "Du beginnst mit 30 M€. Erhöhe deine Energie-, Pflanzen- und Stahl-Produktion von 1.",
     "Effect: AWARDS and MILESTONES ALWAYS COST 0 M€ FOR YOU.": "EFFEKT: Auszeichnungen und Meilensteine kosten für dich immer 0 M€.",
 
     "Cheung Shing": "Cheung Shing",

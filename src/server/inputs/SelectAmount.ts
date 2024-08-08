@@ -5,6 +5,8 @@ import {SelectAmountModel} from '../../common/models/PlayerInputModel';
 import {InputError} from './InputError';
 
 export class SelectAmount extends BasePlayerInput<number> {
+  public selected: number = -1;
+
   constructor(
     title: string | Message,
     buttonLabel: string = 'Save',
@@ -40,6 +42,7 @@ export class SelectAmount extends BasePlayerInput<number> {
     if (input.amount < this.min) {
       throw new InputError('Amount provided too low (min ' + String(this.min) + ')');
     }
+    this.selected = input.amount;
     return this.cb(input.amount);
   }
 }

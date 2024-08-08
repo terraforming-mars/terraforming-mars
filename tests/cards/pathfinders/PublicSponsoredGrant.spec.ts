@@ -13,7 +13,7 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {CardName} from '../../../src/common/cards/CardName';
 import {MonsInsurance} from '../../../src/server/cards/promo/MonsInsurance';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {cast} from '../../TestingUtils';
+import {cast, toName} from '../../TestingUtils';
 import {CardType} from '../../../src/common/cards/CardType';
 
 describe('PublicSponsoredGrant', function() {
@@ -64,8 +64,8 @@ describe('PublicSponsoredGrant', function() {
 
     options.options[0].cb();
 
-    expect(player.cardsInHand.map((c) => c.name)).has.members([CardName.BIOMASS_COMBUSTORS, CardName.COLONIZER_TRAINING_CAMP]);
-    expect(game.projectDeck.discardPile.map((c) => c.name)).deep.eq([CardName.SEARCH_FOR_LIFE]);
+    expect(player.cardsInHand.map(toName)).has.members([CardName.BIOMASS_COMBUSTORS, CardName.COLONIZER_TRAINING_CAMP]);
+    expect(game.projectDeck.discardPile.map(toName)).deep.eq([CardName.SEARCH_FOR_LIFE]);
   });
 
   it('works with events', function() {

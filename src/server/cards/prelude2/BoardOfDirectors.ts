@@ -9,6 +9,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {message} from '../../logs/MessageBuilder';
 import {PreludesExpansion} from '../../preludes/PreludesExpansion';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {IPreludeCard} from '../prelude/IPreludeCard';
 
 export class BoardOfDirectors extends PreludeCard implements IActionCard {
   constructor() {
@@ -24,11 +25,10 @@ export class BoardOfDirectors extends PreludeCard implements IActionCard {
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
-          b.action('', (ab) => {
-            ab.empty().startAction.text('DRAW 1 PRELUDE CARD: EITHER DISCARD IT, OR PAY 12 M€ AND REMOVE 1 DIRECTOR RESOURCE HERE TO PLAY IT');
-          }).br;
+          b.plainText('ACTION: ').arrow().br;
+          b.plainText('DRAW 1 PRELUDE CARD: EITHER DISCARD IT, OR PAY 12 M€ AND REMOVE 1 DIRECTOR RESOURCE HERE TO PLAY IT.').br;
           b.resource(CardResource.DIRECTOR, 4);
-          b.br.plainText('(This card is using another icon for now. Please don\'t report a bug.)');
+          b.br.plainText('This is not the director icon yet.');
         }),
         description: 'Add 4 director resources here.',
       },
@@ -36,7 +36,15 @@ export class BoardOfDirectors extends PreludeCard implements IActionCard {
   }
 
   public canAct(player: IPlayer) {
+    if (!player.canAfford(12)) {
+      this.warnings.add('cannotAffordBoardOfDirectors');
+    }
     return this.resourceCount > 0 && player.game.preludeDeck.canDraw(1);
+  }
+
+  private discard(player: IPlayer, prelude: IPreludeCard) {
+    player.game.log('${0} drew and discarded a prelude', (b) => b.player(player));
+    player.game.preludeDeck.discard(prelude);
   }
 
   public action(player: IPlayer) {
@@ -59,13 +67,14 @@ export class BoardOfDirectors extends PreludeCard implements IActionCard {
             return undefined;
           });
         } else {
-          game.preludeDeck.discard(prelude);
+          this.discard(player, prelude);
         }
         return undefined;
       });
+    } else {
+      this.discard(player, prelude);
     }
 
-    game.preludeDeck.discard(prelude);
     return undefined;
   }
 }

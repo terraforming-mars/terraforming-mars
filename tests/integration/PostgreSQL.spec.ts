@@ -8,11 +8,12 @@ import {PostgreSQL} from '../../src/server/database/PostgreSQL';
 import {TestPlayer} from '../TestPlayer';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {Phase} from '../../src/common/Phase';
-import {runAllActions} from '../TestingUtils';
+import {cast, runAllActions} from '../TestingUtils';
 import {IPlayer} from '../../src/server/IPlayer';
 import {GameLoader} from '../../src/server/database/GameLoader';
 import {GameId} from '../../src/common/Types';
 import {QueryResult} from 'pg';
+import {SelectInitialCards} from '../../src/server/inputs/SelectInitialCards';
 
 dotenv.config({path: 'tests/integration/.env', debug: true});
 
@@ -117,11 +118,12 @@ describeDatabaseSuite({
     'size-bytes-participants': 'any',
   },
 
-  otherTests: (dbFunction: () => ITestDatabase) => {
+  otherTests: (dbFactory: () => TestPostgreSQL) => {
     it('saveGame with the same saveID', async () => {
-      const db = dbFunction() as TestPostgreSQL;
+      const db = dbFactory();
       const player = TestPlayer.BLACK.newPlayer();
       const game = Game.newInstance('game-id-1212', [player], player);
+      cast(player.popWaitingFor(), SelectInitialCards);
       await db.lastSaveGamePromise;
 
       await db.saveGame(game);
@@ -151,13 +153,15 @@ describeDatabaseSuite({
 
     // When sqlite does the same thing this can go into the suite.
     it('getGames - returns in order of last saved', async () => {
-      const db = dbFunction() as TestPostgreSQL;
+      const db = dbFactory();
       const player = TestPlayer.BLACK.newPlayer();
       const game1 = Game.newInstance('game-id-1111', [player], player);
       await db.lastSaveGamePromise;
-      const game2 = Game.newInstance('game-id-2222', [player], player);
+      const player2 = TestPlayer.RED.newPlayer();
+      const game2 = Game.newInstance('game-id-2222', [player2], player2);
       await db.lastSaveGamePromise;
-      const game3 = Game.newInstance('game-id-3333', [player], player);
+      const player3 = TestPlayer.BLUE.newPlayer();
+      const game3 = Game.newInstance('game-id-3333', [player3], player3);
       await db.lastSaveGamePromise;
 
       expect(await db.getGameIds()).deep.eq(['game-id-3333', 'game-id-2222', 'game-id-1111']);
@@ -179,11 +183,11 @@ describeDatabaseSuite({
     });
 
     it('test save id count with undo', async () => {
-      // Set up a simple game.
-      const db = dbFunction() as TestPostgreSQL;
-      const player = TestPlayer.BLACK.newPlayer({beginner: true});
-      const player2 = TestPlayer.RED.newPlayer({beginner: true});
+      const db = dbFactory();
+      const player = TestPlayer.BLACK.newPlayer();
+      const player2 = TestPlayer.RED.newPlayer();
       const game = Game.newInstance('gameid', [player, player2], player, {draftVariant: false, undoOption: true});
+
       await db.awaitAllSaves();
 
       expect(await db.getStat('save-count')).eq(1);
@@ -191,6 +195,7 @@ describeDatabaseSuite({
 
       // Move into the action phase by having both players complete their research.
       // This triggers another save.
+      expect(game.phase).eq(Phase.RESEARCH);
       game.playerIsFinishedWithResearchPhase(player);
       game.playerIsFinishedWithResearchPhase(player2);
       expect(game.phase).eq(Phase.ACTION);
@@ -255,12 +260,16 @@ describeDatabaseSuite({
     });
 
     it('undo works in multiplayer, other players have passed', async () => {
-      const db = dbFunction() as TestPostgreSQL;
-      const player = TestPlayer.BLACK.newPlayer({beginner: true});
-      const player2 = TestPlayer.RED.newPlayer({beginner: true});
+      const db = dbFactory();
+      const player = TestPlayer.BLACK.newPlayer();
+      const player2 = TestPlayer.RED.newPlayer();
       const game = Game.newInstance('gameid', [player, player2], player2, {draftVariant: false, undoOption: true});
+      // Adding to the GameLoader because this is manually managed by the Game route, which is the real place responsible for
+      // creating new games.
+      GameLoader.getInstance().add(game);
       await db.awaitAllSaves();
 
+      expect(game.phase).eq(Phase.RESEARCH);
       // Move into the action phase by having both players complete their research.
       // This triggers another save.
       game.playerIsFinishedWithResearchPhase(player);
@@ -338,8 +347,9 @@ describeDatabaseSuite({
 
       // Trigger an undo
       // This is embedded in routes/PlayerInput, and should be moved out of there.
-      const lastSaveId = game.lastSaveId - 2;
-      const newGame = await GameLoader.getInstance().restoreGameAt(player.game.id, lastSaveId);
+      const restorePoint = game.lastSaveId - 2;
+      const gameLoader = GameLoader.getInstance();
+      const newGame = await gameLoader.restoreGameAt(player.game.id, restorePoint);
       await db.awaitAllSaves();
       const revisedPlayer = newGame.getPlayerById(player.id);
       expect(revisedPlayer.megaCredits).eq(4);
@@ -347,8 +357,8 @@ describeDatabaseSuite({
     });
 
     it('undo works in solo', async () => {
-      const db = dbFunction() as TestPostgreSQL;
-      const player = TestPlayer.BLACK.newPlayer({beginner: true});
+      const db = dbFactory();
+      const player = TestPlayer.BLACK.newPlayer();
       const game = Game.newInstance('gameid', [player], player, {undoOption: true});
       await db.awaitAllSaves();
 
@@ -357,7 +367,7 @@ describeDatabaseSuite({
       expect(game.phase).eq(Phase.ACTION);
       await db.awaitAllSaves();
 
-      // Player.takeAction sets waitingFor and waitingForCb. This overrides it
+      // Player.takeAction sets waitingFor and waitingForCb. This overrides it%
       // with a custom option (gain one mc), and then mimics the waitingForCb behavior at
       // the end of Player.takeAction
       function takeAction(p: IPlayer) {
@@ -419,8 +429,8 @@ describeDatabaseSuite({
 
       // Trigger an undo
       // This is embedded in routes/PlayerInput, and should be moved out of there.
-      const lastSaveId = game.lastSaveId - 2;
-      const newGame = await GameLoader.getInstance().restoreGameAt(player.game.id, lastSaveId);
+      const restorePoint = game.lastSaveId - 2;
+      const newGame = await GameLoader.getInstance().restoreGameAt(player.game.id, restorePoint);
       await db.awaitAllSaves();
       const revisedPlayer = newGame.getPlayerById(player.id);
       expect(revisedPlayer.megaCredits).eq(4);

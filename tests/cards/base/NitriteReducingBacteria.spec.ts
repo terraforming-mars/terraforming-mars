@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {churnAction, cast, churn} from '../../TestingUtils';
+import {cast, churn} from '../../TestingUtils';
 import {NitriteReducingBacteria} from '../../../src/server/cards/base/NitriteReducingBacteria';
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
@@ -26,11 +26,11 @@ describe('NitriteReducingBacteria', function() {
   it('Should act', function() {
     player.playedCards.push(card);
 
-    expect(churnAction(card, player)).is.undefined;
+    expect(churn(card.action(player), player)).is.undefined;
     expect(card.resourceCount).to.eq(1);
 
     player.addResourceTo(card, 3);
-    const orOptions = cast(churnAction(card, player), OrOptions);
+    const orOptions = cast(churn(card.action(player), player), OrOptions);
 
     expect(churn(() => orOptions.options[1].cb(), player)).is.undefined;
     expect(card.resourceCount).to.eq(5);

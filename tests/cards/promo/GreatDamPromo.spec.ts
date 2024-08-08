@@ -3,7 +3,7 @@ import {GreatDamPromo} from '../../../src/server/cards/promo/GreatDamPromo';
 import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
-import {cast, churnPlay, maxOutOceans} from '../../TestingUtils';
+import {cast, churn, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('GreatDamPromo', function() {
@@ -22,7 +22,7 @@ describe('GreatDamPromo', function() {
   it('Should play', function() {
     maxOutOceans(player, 4);
 
-    cast(churnPlay(card, player), SelectSpace);
+    cast(churn(card.play(player), player), SelectSpace);
     expect(player.production.energy).to.eq(2);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
@@ -30,7 +30,7 @@ describe('GreatDamPromo', function() {
   it('Works with Ares', function() {
     maxOutOceans(player, 4).forEach((space) => space.tile = {tileType: TileType.OCEAN_CITY});
 
-    cast(churnPlay(card, player), SelectSpace);
+    cast(churn(card.play(player), player), SelectSpace);
     expect(player.production.energy).to.eq(2);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });

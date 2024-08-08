@@ -7,6 +7,7 @@ import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {CardName} from '../../src/common/cards/CardName';
 import {Payment} from '../../src/common/inputs/Payment';
 import {testGame} from '../TestGame';
+import {toName} from '../TestingUtils';
 
 describe('SelectProjectCardToPlay', function() {
   let player: TestPlayer;
@@ -56,6 +57,6 @@ describe('SelectProjectCardToPlay', function() {
     });
     expect(called).is.true;
     expect(player.megaCredits).eq(2);
-    expect(player.playedCards.map((c) => c.name)).deep.eq([CardName.AQUIFER_PUMPING]);
+    expect(player.playedCards.map(toName)).deep.eq([CardName.AQUIFER_PUMPING]);
   });
 });

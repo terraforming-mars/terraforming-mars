@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {GaiaCity} from '../../../src/server/cards/underworld/GaiaCity';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast, churn} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
@@ -58,7 +58,7 @@ describe('GaiaCity', () => {
     space1.excavator = player;
     space2.excavator = player;
 
-    const selectSpace = cast(card.play(player), SelectSpace);
+    const selectSpace = cast(churn(card.play(player), player), SelectSpace);
 
     expect(player.production.megacredits).eq(2);
     expect(player.production.energy).eq(0);

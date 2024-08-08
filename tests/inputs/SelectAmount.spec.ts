@@ -17,10 +17,13 @@ describe('', () => {
     const selectAmount = new SelectAmount('', '', 3, 100, true).andThen(cb);
     selectAmount.process({type: 'amount', amount: 3});
     expect(selected).eq(3);
+    expect(selectAmount.selected).eq(3);
     selectAmount.process({type: 'amount', amount: 20});
     expect(selected).eq(20);
+    expect(selectAmount.selected).eq(20);
     selectAmount.process({type: 'amount', amount: 100});
     expect(selected).eq(100);
+    expect(selectAmount.selected).eq(100);
   });
 
   it('Cannot select invalid amount', () => {

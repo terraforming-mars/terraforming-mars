@@ -78,7 +78,7 @@ describe('CassiniStation', function() {
     player.playedCards = [floater1, floater2, data1, data2, other];
     const options = cast(card.play(player), SelectCard);
 
-    expect(options?.cards.length).eq(4);
+    expect(options?.cards).has.length(4);
 
     options?.cb([options.cards[0]]);
     expect(floater1.resourceCount).eq(2);

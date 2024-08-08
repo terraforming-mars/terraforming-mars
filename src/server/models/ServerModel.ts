@@ -32,6 +32,7 @@ import {SpaceId} from '../../common/Types';
 import {cardsToModel, coloniesToModel} from './ModelUtils';
 import {runId} from '../utils/server-ids';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
+import {toName} from '../../common/utils/utils';
 
 export class Server {
   public static getSimpleGameModel(game: IGame): SimpleGameModel {
@@ -59,7 +60,7 @@ export class Server {
       awards: this.getAwards(game),
       colonies: coloniesToModel(game, game.colonies, false, true),
       deckSize: game.projectDeck.drawPile.length,
-      discardedColonies: game.discardedColonies.map((c) => c.name),
+      discardedColonies: game.discardedColonies.map(toName),
       expectedPurgeTimeMs: game.expectedPurgeTimeMs(),
       gameAge: game.gameAge,
       gameOptions: this.getGameOptionsAsModel(game.gameOptions),

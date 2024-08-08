@@ -23,7 +23,7 @@ export class FocusedOrganization extends PreludeCard implements IActionCard {
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
-          b.action('Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource', (ab) => {
+          b.action('Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource.', (ab) => {
             ab.cards(1).wild(1).startAction.cards(1).wild(1);
           }).br;
           b.cards(1).wild(1).br;

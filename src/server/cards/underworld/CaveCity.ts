@@ -4,7 +4,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {IPlayer} from '../../IPlayer';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {Tag} from '../../../common/cards/Tag';
 
 export class CaveCity extends Card implements IProjectCard {
@@ -43,12 +43,7 @@ export class CaveCity extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace(
-      'Select space for a city tile',
-      this.availableSpaces(player))
-      .andThen((space) => {
-        player.game.addCity(player, space);
-        return undefined;
-      });
+    player.game.defer(new PlaceCityTile(player, {spaces: this.availableSpaces(player)}));
+    return undefined;
   }
 }

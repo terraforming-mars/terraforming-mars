@@ -1,16 +1,36 @@
 @import "./variables.less";
 .card-corporation-expansion {
     position: absolute;
-    top: 75px;
-    right: 33px;
+    top: 38px;
+    right: -11px;
+}
+
+.card-standard-expansion {
+  position: absolute;
+  top: 90px;
+  right: 33px;
 }
 
 .card-container {
+    .project-icon-expansion-container {
+        flex-direction: row;
+        display: flex;
+        bottom: 5px;
+        left: 5px;
+        position: absolute;
+    }
+    .resource-card-icon-expansion-container {
+        flex-direction: row;
+        display: flex;
+        bottom: 38px;
+        left: 5px;
+        position: absolute;
+    }
     .project-icon:after,
     .preludeCard-icon:after {
-        bottom: 8px;
-        left: 8px;
-        margin: 0px;
+        position: relative;
+        margin: 3px;
+        display: block;
     }
     .card-superscript {
       vertical-align: super;
@@ -1294,6 +1314,9 @@
             .card-resource-hydroelectric-resource {
                 background-image: url(./assets/resources/hydroelectric-resource.png);
             }
+            .card-resource-one {
+              background-image: url(./assets/resources/one.png);
+            }
             .card-resource-clone-trooper {
                 background-image: url(./assets/resources/clone-trooper.png);
             }
@@ -1341,6 +1364,9 @@
             }
             .card-resource-supply-chain {
               background-image: url(./assets/underworld/card-resource-supply-chain.png);
+            }
+            .card-resource-director {
+              background-image: url("./assets/resources/clone-trooper.png");
             }
 
             .card-neutral-delegate {

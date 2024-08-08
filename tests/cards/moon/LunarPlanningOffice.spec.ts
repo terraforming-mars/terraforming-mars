@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, toName} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarPlanningOffice} from '../../../src/server/cards/moon/LunarPlanningOffice';
 import {MareNectarisMine} from '../../../src/server/cards/moon/MareNectarisMine';
@@ -38,8 +38,8 @@ describe('LunarPlanningOffice', () => {
     expect(player.steel).eq(6);
 
     cast(player.popWaitingFor(), undefined);
-    expect(player.cardsInHand.map((c) => c.name)).has.members([CardName.MARE_NECTARIS_MINE, CardName.MARE_IMBRIUM_MINE]);
-    expect(game.projectDeck.discardPile.map((c) => c.name)).has.members([CardName.MICRO_MILLS]);
+    expect(player.cardsInHand.map(toName)).has.members([CardName.MARE_NECTARIS_MINE, CardName.MARE_IMBRIUM_MINE]);
+    expect(game.projectDeck.discardPile.map(toName)).has.members([CardName.MICRO_MILLS]);
 
     // Robotic Workforce is at the top of the deck.
     expect(game.projectDeck.draw(game)?.name).eq(CardName.ROBOTIC_WORKFORCE);

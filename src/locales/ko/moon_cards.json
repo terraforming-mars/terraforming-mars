@@ -100,6 +100,9 @@
   "Heliostat Mirror Array": "",
   "Spend 1 titanium. Gain 1 heat. Increase your energy production 2 steps.": "",
   
+  "Hostile Takeover": "",
+  "Requires a habitat rate of 2 or higher, and a mining rate of 4 or higher. Add your player marker to a habitat tile and a mining tile owned by any opponent. Those now also count as yours. Increase your M€ production 2 steps.": "",
+
   "Hypersensitive Silicon Chip Factory": "",
   "Requires 2 mining tiles on The Moon. Spend 2 titanium. Increase your M€ production 4 steps.": "",
   
@@ -157,7 +160,7 @@
   "Spend 2 titanium. Place a mine tile on The Moon and raise the mining rate 1 step. Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.": "",
   
   "Lunar Mine Urbanization": "",
-  "Requires you have 1 mine tile. Increase your M€ production 1 step. Remove 1 of your mine tiles (does not affect the mining rate.) Place this special tile there, regardless of placement rules. Gain placement bonuses as usual.  Raise the habitat rate 1 step. This tile counts both as a habitat and a mine tile.": "",
+  "Requires you have 1 mine tile. Increase your M€ production 1 step. Raise the habitat rate 1 step. Remove 1 of your mine tiles (does not affect the mining rate.) Place this special tile there, regardless of placement rules. Gain placement bonuses as usual. This tile counts both as a habitat and a mine tile.": "",
 
   "Lunar Observation Post": "",
   "Action: Add 1 data resource to ANY card": "",

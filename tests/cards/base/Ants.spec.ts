@@ -8,7 +8,7 @@ import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
-import {runAllActions, cast, churnAction, setOxygenLevel} from '../../TestingUtils';
+import {runAllActions, cast, churn, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('Ants', function() {
@@ -49,7 +49,7 @@ describe('Ants', function() {
 
     expect(card.canAct(player)).is.true;
 
-    const selectCard = cast(churnAction(card, player), SelectCard);
+    const selectCard = cast(churn(card.action(player), player), SelectCard);
     expect(selectCard.cards).has.lengthOf(2);
     selectCard.cb([selectCard.cards[0]]);
     runAllActions(game);
@@ -82,7 +82,7 @@ describe('Ants', function() {
     player2.addResourceTo(fish);
     player2.addResourceTo(securityFleet);
 
-    expect(churnAction(card, player)).is.undefined;
+    expect(churn(card.action(player), player)).is.undefined;
 
     expect(card.resourceCount).to.eq(1);
     expect(tardigrades.resourceCount).to.eq(0);

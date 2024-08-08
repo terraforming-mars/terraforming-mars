@@ -1,10 +1,12 @@
 // Exports a game locally for debugging.
 // See README.md for instructions.
 
+import {writeFileSync} from 'fs';
 import {GameId, isGameId, isPlayerId, isSpectatorId} from '../../common/Types';
 import {Database} from '../database/Database';
 import {IDatabase} from '../database/IDatabase';
 import {LocalFilesystem} from '../database/LocalFilesystem';
+import {exportLogs} from './exportLogs';
 
 const args = process.argv.slice(2);
 const id = args[0];
@@ -49,9 +51,6 @@ async function load(gameId: GameId) {
   let errors = 0;
   let writes = 0;
 
-  // The output might not be returned in order, because the
-  // inner call is async, but it is faster than forcing the
-  // results to come in order.
   const saveIds = await db.getSaveIds(gameId);
   for (const saveId of saveIds) {
     try {
@@ -64,6 +63,11 @@ async function load(gameId: GameId) {
       errors++;
     }
   }
+
+  const logs = await exportLogs(localDb, gameId);
+  const logFilename = `logs/${gameId}.log`;
+  writeFileSync(logFilename, logs.join('\n'));
+  console.log(`Log at ${logFilename}`);
   console.log(`Wrote ${writes} records and had ${errors} failures.`);
   console.log(`id: ${gameId}`);
 }

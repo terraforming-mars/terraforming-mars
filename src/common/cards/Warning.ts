@@ -11,4 +11,5 @@ export type Warning =
  'buildOnLuna' |
  'preludeFizzle' |
  'underworldMustExcavateEnergy' |
- 'deckTooSmall';
+ 'deckTooSmall' |
+ 'cannotAffordBoardOfDirectors';

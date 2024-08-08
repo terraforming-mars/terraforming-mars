@@ -110,6 +110,9 @@ export default Vue.extend({
           classes.push('card-private-security');
         }
         break;
+      case CardRenderItemType.ONE:
+        classes.push(this.cardResource, 'card-resource-one');
+        break;
       case CardRenderItemType.DIVERSE_TAG:
         classes.push('card-resource-tag', 'card-resource-diverse');
         break;

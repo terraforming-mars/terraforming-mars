@@ -20,7 +20,7 @@ import {AwardName} from '../../common/ma/AwardName';
 import {MilestoneName} from '../../common/ma/MilestoneName';
 import {CardType} from '../../common/cards/CardType';
 import {OneOrArray} from '../../common/utils/types';
-import {initializeGlobalEventDealer} from '../turmoil/globalEvents/GlobalEventDealer';
+import {globalInitialize} from '../globalInitialize';
 
 class CardProcessor {
   public static json: Array<ClientCard> = [];
@@ -166,7 +166,7 @@ if (!fs.existsSync('src/genfiles')) {
   fs.mkdirSync('src/genfiles');
 }
 
-initializeGlobalEventDealer(ALL_MODULE_MANIFESTS);
+globalInitialize();
 CardProcessor.makeJson();
 GlobalEventProcessor.makeJson();
 ColoniesProcessor.makeJson();

@@ -75,6 +75,7 @@ import {SpaceType} from '../common/boards/SpaceType';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {BuildColony} from './deferredActions/BuildColony';
 import {newInitialDraft, newPreludeDraft, newStandardDraft} from './Draft';
+import {toName} from '../common/utils/utils';
 
 // Can be overridden by tests
 
@@ -395,7 +396,7 @@ export class Game implements IGame, Logger {
   public serialize(): SerializedGame {
     const result: SerializedGame = {
       activePlayer: this.activePlayer,
-      awards: this.awards.map((a) => a.name),
+      awards: this.awards.map(toName),
       beholdTheEmperor: this.beholdTheEmperor,
       board: this.board.serialize(),
       claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
@@ -420,7 +421,7 @@ export class Game implements IGame, Logger {
       id: this.id,
       initialDraftIteration: this.initialDraftIteration,
       lastSaveId: this.lastSaveId,
-      milestones: this.milestones.map((m) => m.name),
+      milestones: this.milestones.map(toName),
       moonData: MoonData.serialize(this.moonData),
       oxygenLevel: this.oxygenLevel,
       passedPlayers: Array.from(this.passedPlayers),
@@ -775,6 +776,9 @@ export class Game implements IGame, Logger {
 
     this.players.forEach((player) => {
       player.hasIncreasedTerraformRatingThisGeneration = false;
+      if (player.cardIsInEffect(CardName.PRESERVATION_PROGRAM)) {
+        player.preservationProgram = true;
+      }
     });
 
     if (this.gameOptions.draftVariant) {
@@ -810,19 +814,11 @@ export class Game implements IGame, Logger {
     return this.researchedPlayers.has(player.id);
   }
 
-  private allPlayersHaveFinishedResearch(): boolean {
-    for (const player of this.players) {
-      if (!this.hasResearched(player)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
   public playerIsFinishedWithResearchPhase(player: IPlayer): void {
     this.deferredActions.runAllFor(player, () => {
       this.researchedPlayers.add(player.id);
-      if (this.allPlayersHaveFinishedResearch()) {
+      if (this.researchedPlayers.size === this.players.length) {
+        this.researchedPlayers.clear();
         this.phase = Phase.ACTION;
         this.passedPlayers.clear();
         TheNewSpaceRace.potentiallyChangeFirstPlayer(this);
@@ -888,7 +884,7 @@ export class Game implements IGame, Logger {
 
     const scores: Array<Score> = [];
     this.players.forEach((player) => {
-      const corporation = player.corporations.map((c) => c.name).join('|');
+      const corporation = player.corporations.map(toName).join('|');
       const vpb = player.getVictoryPoints();
       scores.push({corporation: corporation, playerScore: vpb.total});
     });
@@ -1023,6 +1019,7 @@ export class Game implements IGame, Logger {
           this.defer(new GrantVenusAltTrackBonusDeferred(player, standardResourcesGranted, grantWildResource));
         }
       }
+      player.playedCards.forEach((card) => card.onGlobalParameterIncrease?.(player, GlobalParameter.VENUS, steps));
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.VENUS, steps);
       player.increaseTerraformRating(steps);
     }
@@ -1173,7 +1170,7 @@ export class Game implements IGame, Logger {
     }
   }
 
-  public grantPlacementBonuses(player: IPlayer, space: Space, coveringExistingTile: boolean, arcadianCommunityBonus: boolean = false) {
+  public grantPlacementBonuses(player: IPlayer, space: Space, coveringExistingTile: boolean = false, arcadianCommunityBonus: boolean = false) {
     if (!coveringExistingTile) {
       this.grantSpaceBonuses(player, space);
     }
@@ -1184,6 +1181,8 @@ export class Game implements IGame, Logger {
       }
     });
 
+    // TODO(kberg): these might not apply for some bonuses, e.g. Frontier Town.
+    // https://boardgamegeek.com/thread/3344366/article/44658730#44658730
     if (space.tile !== undefined) {
       AresHandler.ifAres(this, () => {
         AresHandler.earnAdjacencyBonuses(player, space);

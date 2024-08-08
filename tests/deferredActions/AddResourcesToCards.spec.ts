@@ -44,7 +44,7 @@ describe('AddResourcesToCards', function() {
 
     const options = cast(new AddResourcesToCards(player, CardResource.MICROBE, 9).execute(), AndOptions);
 
-    expect(options.options.length).eq(3);
+    expect(options.options).has.length(3);
     options.options[0].cb(1);
     options.options[1].cb(3);
     options.options[2].cb(5);
@@ -60,7 +60,7 @@ describe('AddResourcesToCards', function() {
 
     const options = cast(new AddResourcesToCards(player, CardResource.MICROBE, 9).execute(), AndOptions);
 
-    expect(options.options.length).eq(3);
+    expect(options.options).has.length(3);
 
     options.options[0].cb(1);
     options.options[1].cb(3);

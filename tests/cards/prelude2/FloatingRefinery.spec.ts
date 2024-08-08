@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {cast, churn, toName} from '../../TestingUtils';
+import {cast, toName} from '../../TestingUtils';
 import {FloatingRefinery} from '../../../src/server/cards/prelude2/FloatingRefinery';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
@@ -41,8 +41,7 @@ describe('FloatingRefinery', function() {
 
   it('Add resources', () => {
     player.playedCards.push(card);
-    const orOptions = cast(churn(card.action(player), player), OrOptions);
-    orOptions.options[1].cb();
+    cast(card.action(player), undefined);
     expect(card.resourceCount).to.eq(1);
   });
 

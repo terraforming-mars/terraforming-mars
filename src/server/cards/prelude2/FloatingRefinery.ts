@@ -69,6 +69,12 @@ export class FloatingRefinery extends Card implements IProjectCard, IActionCard 
           return undefined;
         });
     });
-    return new OrOptions(remove2floaters, addFloater);
+
+    if (floater2Cards.length > 0) {
+      return new OrOptions(remove2floaters, addFloater);
+    } else {
+      player.addResourceTo(this, {log: true});
+      return undefined;
+    }
   }
 }

@@ -143,7 +143,7 @@ export type Behavior = {
   turmoil?: {
     influenceBonus?: 1,
     sendDelegates?: {
-      count: number,
+      count: Countable,
       manyParties?: boolean,
     },
   },

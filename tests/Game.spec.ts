@@ -1,10 +1,10 @@
+import * as constants from '../src/common/constants';
 import {expect} from 'chai';
 import {Game} from '../src/server/Game';
 import {SpaceName} from '../src/server/SpaceName';
 import {Mayor} from '../src/server/milestones/Mayor';
 import {Banker} from '../src/server/awards/Banker';
 import {Thermalist} from '../src/server/awards/Thermalist';
-import * as constants from '../src/common/constants';
 import {Birds} from '../src/server/cards/base/Birds';
 import {WaterImportFromEuropa} from '../src/server/cards/base/WaterImportFromEuropa';
 import {Phase} from '../src/common/Phase';
@@ -29,6 +29,7 @@ import {IColony} from '../src/server/colonies/IColony';
 import {IAward} from '../src/server/awards/IAward';
 import {SerializedGame} from '../src/server/SerializedGame';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
+import {GlobalParameter} from '../src/common/GlobalParameter';
 
 describe('Game', () => {
   it('should initialize with right defaults', () => {
@@ -873,6 +874,43 @@ describe('Game', () => {
     expect(deserialized.colonies.map(toName)).has.members(colonyNames);
     expect(deserialized.discardedColonies.map(toName)).has.members(discardedColonyNames);
   });
+
+  it('wgt includes all parameters at the game start', () => {
+    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
+    const game = Game.newInstance('gameid', [player], player, {venusNextExtension: false});
+    game.worldGovernmentTerraforming(player);
+    const parameters = waitingForGlobalParameters(player);
+    expect(parameters).to.have.members([
+      GlobalParameter.OXYGEN,
+      GlobalParameter.TEMPERATURE,
+      GlobalParameter.OCEANS]);
+  });
+
+  it('wgt includes all parameters at the game start, with Venus', () => {
+    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
+    const game = Game.newInstance('gameid', [player], player, {venusNextExtension: true});
+    game.worldGovernmentTerraforming(player);
+    const parameters = waitingForGlobalParameters(player);
+    expect(parameters).to.have.members([
+      GlobalParameter.OXYGEN,
+      GlobalParameter.TEMPERATURE,
+      GlobalParameter.OCEANS,
+      GlobalParameter.VENUS]);
+  });
+
+  it('wgt includes all parameters at the game start, with The Moon', () => {
+    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
+    const game = Game.newInstance('gameid', [player], player, {venusNextExtension: false, moonExpansion: true});
+    game.worldGovernmentTerraforming(player);
+    const parameters = waitingForGlobalParameters(player);
+    expect(parameters).to.have.members([
+      GlobalParameter.OXYGEN,
+      GlobalParameter.TEMPERATURE,
+      GlobalParameter.OCEANS,
+      GlobalParameter.MOON_MINING_RATE,
+      GlobalParameter.MOON_HABITAT_RATE,
+      GlobalParameter.MOON_LOGISTICS_RATE]);
+  });
 });
 
 function assertIsJSON(serialized: any) {
@@ -887,4 +925,32 @@ function assertIsJSON(serialized: any) {
       }
     }
   }
+}
+
+function waitingForGlobalParameters(player: Player): Array<GlobalParameter> {
+  function titlesToGlobalParameter(title: string): GlobalParameter {
+    if (title.includes('temperature')) {
+      return GlobalParameter.TEMPERATURE;
+    }
+    if (title.includes('ocean')) {
+      return GlobalParameter.OCEANS;
+    }
+    if (title.includes('oxygen')) {
+      return GlobalParameter.OXYGEN;
+    }
+    if (title.includes('Venus')) {
+      return GlobalParameter.VENUS;
+    }
+    if (title.includes('habitat')) {
+      return GlobalParameter.MOON_HABITAT_RATE;
+    }
+    if (title.includes('mining')) {
+      return GlobalParameter.MOON_MINING_RATE;
+    }
+    if (title.includes('logistics')) {
+      return GlobalParameter.MOON_LOGISTICS_RATE;
+    }
+    throw new Error('title does not match any description: ' + title);
+  }
+  return cast(player.getWaitingFor(), OrOptions).options.map((o) => o.title as string).map(titlesToGlobalParameter);
 }

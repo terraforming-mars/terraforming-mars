@@ -9,7 +9,6 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {message} from '../../logs/MessageBuilder';
 import {PreludesExpansion} from '../../preludes/PreludesExpansion';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {LogHelper} from '../../LogHelper';
 import {IPreludeCard} from '../prelude/IPreludeCard';
 
 export class BoardOfDirectors extends PreludeCard implements IActionCard {
@@ -51,8 +50,6 @@ export class BoardOfDirectors extends PreludeCard implements IActionCard {
   public action(player: IPlayer) {
     const game = player.game;
     const prelude = game.preludeDeck.drawOrThrow(player.game);
-
-    LogHelper.logDrawnCards(player, [prelude], true);
 
     if (player.canAfford(12)) {
       return new SelectCard(

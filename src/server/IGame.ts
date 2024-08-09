@@ -33,6 +33,7 @@ import {Tile} from './Tile';
 import {Logger} from './logs/Logger';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {UnderworldData} from './underworld/UnderworldData';
+import {PlayerInput} from './PlayerInput';
 
 export interface Score {
   corporation: String;
@@ -161,6 +162,9 @@ export interface IGame extends Logger {
    * If nobody can add a greenery, end the game.
    */
   /* for testing */ takeNextFinalGreeneryAction(): void;
+  /* for testing */ worldGovernmentTerraforming(player: IPlayer): void;
+  /* for World Government Advisor */
+  worldGovernmentTerraformingInput(player: IPlayer): PlayerInput;
   increaseOxygenLevel(player: IPlayer, increments: -2 | -1 | 1 | 2): void;
   getOxygenLevel(): number;
   increaseVenusScaleLevel(player: IPlayer, increments: -1 | 1 | 2 | 3): number;

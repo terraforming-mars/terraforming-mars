@@ -76,6 +76,9 @@ import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {BuildColony} from './deferredActions/BuildColony';
 import {newInitialDraft, newPreludeDraft, newStandardDraft} from './Draft';
 import {toName} from '../common/utils/utils';
+import {OrOptions} from './inputs/OrOptions';
+import {SelectOption} from './inputs/SelectOption';
+import {SelectSpace} from './inputs/SelectSpace';
 
 // Can be overridden by tests
 
@@ -789,7 +792,83 @@ export class Game implements IGame, Logger {
   }
 
   private gotoWorldGovernmentTerraforming() {
-    this.first.worldGovernmentTerraforming();
+    this.worldGovernmentTerraforming(this.first);
+  }
+
+  public worldGovernmentTerraforming(player: IPlayer): void {
+    const action = new OrOptions();
+    action.title = 'Select action for World Government Terraforming';
+    action.buttonLabel = 'Confirm';
+    if (this.getTemperature() < constants.MAX_TEMPERATURE) {
+      action.options.push(
+        new SelectOption('Increase temperature', 'Increase').andThen(() => {
+          this.increaseTemperature(player, 1);
+          this.log('${0} acted as World Government and increased temperature', (b) => b.player(player));
+          return undefined;
+        }),
+      );
+    }
+    if (this.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL) {
+      action.options.push(
+        new SelectOption('Increase oxygen', 'Increase').andThen(() => {
+          this.increaseOxygenLevel(player, 1);
+          this.log('${0} acted as World Government and increased oxygen level', (b) => b.player(player));
+          return undefined;
+        }),
+      );
+    }
+    if (this.canAddOcean()) {
+      action.options.push(
+        new SelectSpace('Add an ocean', this.board.getAvailableSpacesForOcean(player))
+          .andThen((space) => {
+            this.addOcean(player, space);
+            this.log('${0} acted as World Government and placed an ocean', (b) => b.player(player));
+            return undefined;
+          }),
+      );
+    }
+    if (this.getVenusScaleLevel() < constants.MAX_VENUS_SCALE && this.gameOptions.venusNextExtension) {
+      action.options.push(
+        new SelectOption('Increase Venus scale', 'Increase').andThen(() => {
+          this.increaseVenusScaleLevel(player, 1);
+          this.log('${0} acted as World Government and increased Venus scale', (b) => b.player(player));
+          return undefined;
+        }),
+      );
+    }
+
+    MoonExpansion.ifMoon(this, (moonData) => {
+      if (moonData.habitatRate < constants.MAXIMUM_HABITAT_RATE) {
+        action.options.push(
+          new SelectOption('Increase the Moon habitat rate', 'Increase').andThen(() => {
+            MoonExpansion.raiseHabitatRate(player, 1);
+            return undefined;
+          }),
+        );
+      }
+
+      if (moonData.miningRate < constants.MAXIMUM_MINING_RATE) {
+        action.options.push(
+          new SelectOption('Increase the Moon mining rate', 'Increase').andThen(() => {
+            MoonExpansion.raiseMiningRate(player, 1);
+            return undefined;
+          }),
+        );
+      }
+
+      if (moonData.logisticRate < constants.MAXIMUM_LOGISTICS_RATE) {
+        action.options.push(
+          new SelectOption('Increase the Moon logistics rate', 'Increase').andThen(() => {
+            MoonExpansion.raiseLogisticRate(player, 1);
+            return undefined;
+          }),
+        );
+      }
+    });
+
+    player.setWaitingFor(action, () => {
+      this.doneWorldGovernmentTerraforming();
+    });
   }
 
   public doneWorldGovernmentTerraforming() {

@@ -161,6 +161,7 @@ export interface IGame extends Logger {
    * If nobody can add a greenery, end the game.
    */
   /* for testing */ takeNextFinalGreeneryAction(): void;
+  /* for testing */ worldGovernmentTerraforming(player: IPlayer): void;
   increaseOxygenLevel(player: IPlayer, increments: -2 | -1 | 1 | 2): void;
   getOxygenLevel(): number;
   increaseVenusScaleLevel(player: IPlayer, increments: -1 | 1 | 2 | 3): number;

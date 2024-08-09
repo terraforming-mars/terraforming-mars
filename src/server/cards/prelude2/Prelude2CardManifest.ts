@@ -5,6 +5,7 @@ import {AtmosphericEnhancers} from './AtmosphericEnhancers';
 import {BoardOfDirectors} from './BoardOfDirectors';
 import {CeresTechMarket} from './CeresTechMarket';
 import {CloudTourism} from './CloudTourism';
+import {ColonialEnvoys} from './ColonialEnvoys';
 import {ColonialRepresentation} from './ColonialRepresentation';
 import {ColonyTradeHub} from './ColonyTradeHub';
 import {CorridorsOfPower} from './CorridorsOfPower';
@@ -66,7 +67,7 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.SPONSORING_NATION]: {Factory: SponsoringNation, compatibility: 'turmoil'},
     [CardName.COLONIAL_REPRESENTATION]: {Factory: ColonialRepresentation, compatibility: ['colonies', 'turmoil']},
     [CardName.ENVOYS_FROM_VENUS]: {Factory: EnvoysFromVenus, compatibility: ['turmoil', 'venus']},
-    // [CardName.COLONIAL_ENVOYS]: {Factory: ColonialEnvoys, compatibility: ['colonies', 'turmoil']},
+    [CardName.COLONIAL_ENVOYS]: {Factory: ColonialEnvoys, compatibility: ['colonies', 'turmoil']},
     [CardName.SPECIAL_PERMIT]: {Factory: SpecialPermit, compatibility: 'turmoil'},
     [CardName.FLOATING_REFINERY]: {Factory: FloatingRefinery, compatibility: 'venus'},
     [CardName.FRONTIER_TOWN]: {Factory: FrontierTown, compatibility: 'turmoil'},

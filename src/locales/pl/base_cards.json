@@ -387,6 +387,8 @@
 
 	"Artificial Photosynthesis": "Sztuczna Fotosynteza",
     "Increase your plant production 1 step or your energy production 2 steps.": "Podnieś swoją produkcję roślinności o 1 poziom lub produkcję energii o 2 poziomy.",
+    "Increase your energy production 2 steps": "Podnieś swoją produkcję energii o 2 poziomy",
+    "Increase your plant production 1 step": "Podnieś swoją produkcję roślinności o 1 poziom",
 
 	"Artificial Lake": "Sztuczne Jezioro",
     "Requires -6 C or warmer. Place 1 ocean tile ON AN AREA NOT RESERVED FOR OCEAN.": "Temperatura musi wynosić co najmniej -6°C. Umieść obszar oceanu na polu, które nie jest zarezerwowane na oceany.",
@@ -554,7 +556,7 @@
     "Increase your heat production 1 step.": "Podnieś swoją produkcję ciepła o 1 poziom.",
 
 	"Magnetic Field Generators": "Generatory Pola Magnetycznego",
-    "(Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.)": "Obniż swoją produkcję energii o 4 poziomy. Podnieś swoją produkcję roślinności o 2 poziomy. Podnieś swój WT o 3 poziomy.",
+    "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.": "Obniż swoją produkcję energii o 4 poziomy oraz podnieś swoją produkcję roślinności o 2 poziomy. Podnieś swój WT o 3 poziomy. Umieść ten kafelek.",
 
 	"Shuttles": "Promy",
     "Requires 5% oxygen. Decrease your energy production 1 step and increase your M€ production 2 steps.": "Poziom tlenu musi wynosić co najmniej 5%. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 2 poziomy.",
@@ -690,5 +692,7 @@
     "Increase your M€ production 1 step for every 2 building tags you have, including this.": "Podnieś swoją produkcję M€ o 1 poziom za każde 2 posiadane symbole Budowli (z tym włącznie).",
 
 	"AI Central": "Centrala SI",
-    "Action: Draw 2 cards.": "Akcja: Dobierz 2 karty."
+    "Action: Draw 2 cards.": "Akcja: Dobierz 2 karty.",
+    "Requires 3 science tags to play. Decrease your energy production 1 step.": "Wymaga 3 znaczników nauki. Obniż swoją produkcję energii o 1 poziom."
+    
 }

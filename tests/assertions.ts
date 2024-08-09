@@ -24,6 +24,10 @@ export function assertPlaceOcean(player: IPlayer, input: PlayerInput | undefined
   assertPlaceTile(player, input, TileType.OCEAN, idx);
 }
 
+export function assertPlaceGreenery(player: IPlayer, input: PlayerInput | undefined, idx: number = 0) {
+  assertPlaceTile(player, input, TileType.GREENERY, idx);
+}
+
 export function assertPlaceTile(player: IPlayer, input: PlayerInput | undefined, tileType: TileType, idx: number = 0) {
   const selectSpace = cast(input, SelectSpace);
   const space = selectSpace.spaces[idx];

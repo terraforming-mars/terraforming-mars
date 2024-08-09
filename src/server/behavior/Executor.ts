@@ -215,8 +215,10 @@ export class Executor implements BehaviorExecutor {
     // }
 
     if (behavior.turmoil) {
+      const turmoil = Turmoil.getTurmoil(game);
       if (behavior.turmoil.sendDelegates) {
-        if (Turmoil.getTurmoil(game).getAvailableDelegateCount(player) < behavior.turmoil.sendDelegates.count) {
+        const count = ctx.count(behavior.turmoil.sendDelegates.count);
+        if (turmoil.getAvailableDelegateCount(player) < count) {
           return false;
         }
       }
@@ -525,12 +527,13 @@ export class Executor implements BehaviorExecutor {
 
       if (behavior.turmoil.sendDelegates) {
         const sendDelegates = behavior.turmoil.sendDelegates;
+        const count = ctx.count(sendDelegates.count);
         if (sendDelegates.manyParties) {
-          for (let i = 0; i < sendDelegates.count; i++) {
+          for (let i = 0; i < count; i++) {
             player.game.defer(new SendDelegateToArea(player, 'Select where to send delegate'));
           }
         } else {
-          player.game.defer(new SendDelegateToArea(player, `Select where to send ${sendDelegates.count} delegates`, {count: sendDelegates.count}));
+          player.game.defer(new SendDelegateToArea(player, `Select where to send ${sendDelegates.count} delegates`, {count: count}));
         }
       }
     }

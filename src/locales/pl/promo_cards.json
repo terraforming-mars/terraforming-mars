@@ -1,5 +1,5 @@
 {
-    "Corporate Archives": "Archiwa Korporacji",
+  "Corporate Archives": "Archiwa Korporacji",
     "Look at the top 7 cards from the deck. Take 2 of them into hand and discard the other 5.": "Dobierz 7 kart. Zatrzymaj 2 z nich a pozostałe 5 odrzuć.",
     "Gain 13 M€": "Otrzymujesz 13 M€.",
     
@@ -69,7 +69,7 @@
     "Action: Gain 1 M€ per science tag you have.": "Akcja: Otrzymujesz 1 M€ za każdy posiadany symbol Nauki.",
     "Decrease your M€ production 2 steps.": "Obniż swoją produkcję M€ o 2 poziomy.",
 	
-    "Law Suit": "Pozew",
+  "Law Suit": "Pozew",
     "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "Ukradnij 3 M€ graczowi, który podczas tego pokolenia obniżył Twoją produkcję lub usunął Twoje zasoby. Umieść tę kartę na stosie wydarzeń tego gracza.",
     
 	"Small Asteroid": "Mała Asteroida",
@@ -82,7 +82,7 @@
 	"Advertising": "Reklama",
     "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "Efekt trwały: Gdy zagrywasz kartę o podstawowym koszcie wynoszącym 20 M€ lub więcej, podnieś swoją produkcję M€ o 1 poziom.",
 	
-    "Project Inspection": "Kontrola Projektu",
+  "Project Inspection": "Kontrola Projektu",
     "Use a card action that has been used this generation.": "Wykonaj ponownie akcję z aktywnej karty, z której skorzystałeś już podczas tego pokolenia.",
     
 	"Rego Plastics": "Regoplastik",
@@ -130,14 +130,23 @@
     "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "Akcja: Wydaj 2*X M€, aby otrzymać X jednostek energii lub obniż swoją produkcję energii o 1 poziom, aby otrzymać 8 M€.",
     
 	"Bactoviral Research": "Badania Baktowirusowe",
-    "(Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.)": "Pociągnij 1 kartę. Wybierz 1 z zagranych kart i dodaj na nią 1 jednostkę mikrobów za każdy posiadany symbol Nauki, ten włącznie.",
+    "Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.": "Pociągnij 1 kartę. Wybierz 1 z zagranych kart i dodaj na nią 1 jednostkę mikrobów za każdy posiadany symbol Nauki, ten włącznie.",
     
 	"Bio Printing Facility": "Ośrodek bio drukowania",
-    "(Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.)": "Akcja: Wydaj 2 jednostki energii by otrzymac 2 jednostki roślinności lub dodaj jednostkę zwierząt na inną kartę.",
+    "Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.": "Akcja: Wydaj 2 jednostki energii by otrzymac 2 jednostki roślinności lub dodaj jednostkę zwierząt na inną kartę.",
     
 	"Harvest": "Żniwa",
-    "(Requires that you have 3 greenery tiles in play. Gain 12 M€.)": "Musisz mieć co najmniej 3 kafelki zieleni. Otrzymujesz 12 M€.",
+    "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "Musisz mieć co najmniej 3 kafelki zieleni. Otrzymujesz 12 M€.",
     
 	"Outdoor Sports": "Sport pod gołym niebem",
-    "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "Musisz mieć co najmniej jedno miasto przylegające do oceanu. Podnieś swój poziom produkcji M€ o 2."
+    "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "Musisz mieć co najmniej jedno miasto przylegające do oceanu. Podnieś swój poziom produkcji M€ o 2.",
+    
+  "16 Psyche": "16 Psyche",
+    "Increase titanium production 2 steps. Gain 3 titanium.": "Zwiększ produkcję tytanu 2 poziomy. Otrzymaj 3 jednostki tytanu.",
+  
+  "Supermarkets": "Supermarkety",
+    "Requires two cities in play. Increase your M€ production 2 steps.": "Wymaga 2 miast w grze. Zwiększ swoją produkcję M€ o 2 poziomy.",
+  
+  "Homeostasis Bureau": "Biuro Homeostazy",
+    "Effect: When you raise the temperature, gain 3 M€.": "Efekt: Kiedy podnosisz temperaturę, otrzymaj 3 M€."
 }

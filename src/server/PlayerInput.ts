@@ -19,6 +19,8 @@ export interface PlayerInput {
 
     cb(...item: any): PlayerInput | undefined;
 
+    andThen(cb: () => PlayerInput | undefined): this;
+
     /**
      * Converts this PlayerInput to the model received by the UI.
      */

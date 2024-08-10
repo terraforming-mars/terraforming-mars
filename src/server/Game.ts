@@ -870,10 +870,10 @@ export class Game implements IGame, Logger {
   }
 
   public worldGovernmentTerraforming(player: IPlayer): void {
-    const input = this.worldGovernmentTerraformingInput(player);
-    player.setWaitingFor(input, () => {
+    player.defer(this.worldGovernmentTerraformingInput(player).andThen(() => {
       this.doneWorldGovernmentTerraforming();
-    });
+      return undefined;
+    }));
   }
 
   public doneWorldGovernmentTerraforming() {

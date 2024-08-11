@@ -1,24 +1,137 @@
 {
-    "Psychrophiles": "Psychrofile",
+  "Psychrophiles": "Psychrofile",
     "Action: Add 1 microbe to this card.": "Akcja: Umieść na tej karcie 1 jednostkę mikrobów.",
     "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Roślinności, możesz wydać jednostki mikrobów znajdujące się na tej karcie. Każda z nich jest warta 2 M€.",
     "Temperature must be -20 C or lower.": "Temperatura wynosi co najwyżej -20°C.",
 
-    "Research Coordination": "Badania Interdyscyplinarne",
+  "Research Coordination": "Badania Interdyscyplinarne",
     "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Gdy wykonujesz akcję, traktujesz symbol Uniwersalny jak dowolny wybrany symbol.",
 
-    "SF Memorial": "Pomnik Twórców Science Fiction",
+  "SF Memorial": "Pomnik Twórców Science Fiction",
     "Draw 1 card.": "Dobierz 1 kartę.",
 
-    "Martian Survey": "Misja Badawcza",
+  "Martian Survey": "Misja Badawcza",
     "Oxygen must be 4% or lower. Draw two cards.": "Poziom tlenu wynosi co najwyżej 4%. Dobierz 2 karty.",
 
-    "House Printing": "Drukowane Domy",
+  "House Printing": "Drukowane Domy",
     "Increase your steel production 1 step.": "Podnieś swoją produkcję stali o 1 poziom.",
 
-    "Space Hotels": "Hotele Kosmiczne",
+  "Space Hotels": "Hotele Kosmiczne",
     "Requires 2 Earth tags. Increase M€ production 4 steps.": "Musisz posiadać co najmniej 2 symbole Ziemi. Podnieś swoją produkcję M€ o 4 poziomy.",
 
-    "Lava Tube Settlement": "Osadnictwo Jaskiń Lawowych",
-    "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 2 poziomy. Umieść obszar miasta na obszarze wulkanicznym bez względu na ograniczenia umieszczania miast."
+  "Lava Tube Settlement": "Osadnictwo Jaskiń Lawowych",
+    "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 2 poziomy. Umieść obszar miasta na obszarze wulkanicznym bez względu na ograniczenia umieszczania miast.",
+  
+  "Industrial Complex": "Kompleks industrialny",
+    "Lose 18 M€. INCREASE ALL YOUR PRODUCTIONS THAT ARE LOWER THAN 1, TO 1.": "Zapłać 18 M€. Zwiększ wszystkie twoje produkcje mniejsze niż 1 do 1.",
+  
+  "Soil Bacteria": "Bakteria glebowa",
+    "Effect: When playing a plant tag or a microbe tag, including this, gain 1 plant.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Roślinności lub Mikroby, w tym tę kartę, otrzymujesz 1 roślinę.",
+    "Draw 2 microbe cards and gain 3 plants.": "Dobierz 2 karty mikrobów i otrzymaj 3 rośliny.",
+  
+  "Preservation Program": "Program Ochrony",
+    "Effect: SKIP THE FIRST TR YOU GAIN IN EACH GENERATION'S ACTION PHASE.": "Efekt trwały: pomiń pierwszy punkt terraformacji, który otrzymujesz w fazie akcji każdej generacji.",
+    "Raise your TR 5 steps.": "Zwiększ swój Wskaźnik Terraformacji o 5 poziomów.",
+  
+  "Venus L1 Shade": "Cień na Venus L1",
+  
+  "Old Mining Colony": "Stara Kolonia Górnicza",
+    "Increase your titanium production 1 step. Place 1 colony. Discard 1 card.": "Podnieś swoją produkcję tytanu o 1 poziom. Umieść 1 kolonię. Odrzuć 1 kartę.",
+    
+  "Colonial Representation": "Reprezentacja Kolonialna",
+    "Gain 3 M€ per colony you have.": "Otrzymujesz 3 M€ za każdą twoją kolonię.",
+    
+  "Envoys From Venus": "Poselstwo z Wenus",
+    "Requires 3 Venus tags. Place 2 delegates in 1 party.": "Musisz posiadać co najmniej 3 symbole Wenus. Umieść 2 delegatów w jednej partii.",
+    
+  "Colonial Envoys": "Poselstwa kolonialne",
+    "Requires that Unity is ruling or that you have 2 delegates there. Place 1 delegate for each colony you have. YOU MAY PLACE THEM IN SEPERATE PARTIES.": "Wymaga Jedność jako partię rządzącą lub co najmniej 2 twoich delegatów w niej. Umieść 1 delegata za każdą swoją posiadaną kolonię. MOŻESZ UMIEŚCIĆ ICH W RÓŻNYCH PARTIACH.",
+    
+  "Jovian Envoys": "Poselstwo z Jowisza",
+    "Requires 2 Jovian tags. Place 2 delegates in 1 party.": "Wymaga co najmniej 2 symboli Jowisza. Umieść 2 delegatów w jednej partii.",
+    
+  "Microgravity Nutrition": "Odżywianie w Mikrograwitacji",
+    "Increase your M€ production 1 step for each colony you have.": "Podnieś swoją produkcję M€ o 1 poziom za każdą swoją kolonię.",
+    
+  "Sponsoring Nation": "Państwo Sponsorskie",
+    "Requires 4 Earth tags. Gain 3 TR. Place 2 delegates.": "Wymaga co najmniej 4 symboli Ziemi. Zwiększ swój Wskaźnik Terraformacji o 3 poziomy. Umieść 2 delegatów.",
+    
+  "Stratospheric Expedition": "Ekspedycja Stratosferyczna",
+    "Add two floaters to ANY CARD. Draw 2 Venus cards.": "Umieść 2 dryfowce na dowolnej karcie. Dobierz 2 karty Wenus.",
+    
+  "Summit Logistics": "Logistyka Szczytowa",
+    "Requires that Scientists are ruling or that you have 2 delegates there. Gain 1 M€ per planet tag and colony you have. Draw 2 cards.": "Wymaga Naukowców jako partii rządzącej lub co najmniej 2 twoich delegatów w niej. Otrzymujesz 1 M€ za każdy symbol planety i kolonię, którą posiadasz. Dobierz 2 karty.",
+  
+  "Terraforming Deal": "Umowa Terraformacyjna",
+    "Effect: Each step your TR is raised, you gain 2 M€.": "Efekt: Za każde podniesienie twojego Wskaźnika Terraformacji, otrzymujesz 2 M€.",
+    
+  "Venus Contract": "Kontrakt Wenus",
+    "Effect: Each step you raise Venus, gain 3 M€.": "Efekt: Za każde podniesienie Wenus, otrzymujesz 3 M€.",
+    "Draw 1 Venus card. Raise your TR 1 step.": "Dobierz 1 kartę Wenus. Zwiększ swój Wskaźnik Terraformacji o 1 poziom.",
+  
+  "Project Eden": "Projekt Eden",
+    "Place 1 ocean tile, 1 city tile, and 1 greenery tile. Discard 3 cards.": "Umieść 1 ocean, 1 miasto i 1 las na mapie. Odrzuć 3 karty.",
+    
+  "Planetary Alliance": "Sojusz Planetarny",
+    "Raise your TR 2 steps. Draw 1 Jovian card and 1 Venus card.": "Zwiększ swój Wskaźnik Terraformacji o 2 poziomy. Dobierz 1 kartę Jowisza i 1 kartę Wenus.",
+    
+  "Recession": "Recesja",
+    "EACH OPPONENT loses 5 M€ and decreases their M€ production 1 step. You gain 10 M€.": "KAŻDY przeciwnik traci 5 M€ i obniża swoją produkcję M€ o 1 poziom. Otrzymujesz 10 M€.",
+
+  "Nobel Prize": "Nagroda Nobla",
+    "Gain 5 M€. Draw 2 cards with requirements.": "Otrzymujesz 5 M€. Dobierz 2 karty z wymaganiami.",
+
+  "Rise To Power": "Dojście do Władzy",
+    "Increase your M€ production 3 steps and place 3 delegates. YOU MAY PLACE THEM IN SEPARATE PARTIES.": "Podnieś swoją produkcję M€ o 3 poziomy i umieść 3 delegatów. Możesz ich umieścić w różnych partiach.",
+
+  "Space Lanes": "Trasy Kosmiczne",
+    "Effect: When you play a Jovian, Earth, or Venus tag, you pay 2 M€ less for it.": "Efekt: Gdy zagrasz kartę z symbolem Jowisza, Ziemi lub Wenus, płacisz za nią o 2 M€ mniej.",
+    "Gain 3 titanium.": "Otrzymujesz 3 tytanu.",
+  
+  "World Government Advisor": "Doradca Rządu Światowego",
+    "Action: RAISE 1 GLOBAL PARAMETER WITHOUT GETTING ANY TR OR OTHER BONUSES.": "Akcja: Podnieś 1 parametr globalny bez otrzymywania jakichkolwiek bonusów.",
+    "Raise your TR 2 steps. Draw 1 card.": "Zwiększ swój Wskaźnik Terraformacji o 2 poziomy. Dobierz 1 kartę.",
+  
+  "Main Belt Asteroids": "Asteroidy z Pasa Głównego",
+    "Action: Gain 1 asteroid to ANY CARD.": "Akcja: Dodaj 1 asteroidę do dowolnej karty.",
+    "Effect: When gaining an asteroid HERE, gain 1 titanium.": "Efekt: Gdy dodajesz asteroidę do tej karty, otrzymujesz 1 tytan.",
+    "Lose 5 M€. 1 VP per 2 asteroids here.": "Zapłać 5 M€. Każde 2 asteroidy na tej karcie są warte 1 Punkt Zwycięstwa.",
+
+  "Colony Trade Hub": "Centrum Handlu Kolonialnego",
+    "Effect: When any colony is placed, gain 2 M€.": "Efekt: Gdy ktokolwiek zakłada kolonię, otrzymujesz 2 M€.",
+    "Increase your energy production 1 step. Gain 2 titanium": "Podnieś swoją produkcję energii o 1 poziom. Otrzymujesz 2 tytanu.",
+    
+  "Applied Science": "Nauka Stosowana",
+    "Action: Remove 1 resource here to either add 1 resource to ANY CARD WITH A RESOURCE or gain 1 standard resource.": "Akcja: Usuń 1 zasób z tej karty, aby dodać 1 zasób do dowolnej karty z zasobem lub otrzymać 1 standardowy zasób.",
+    "Add 6 science resources here.": "Dodaj 6 zasobów nauki do tej karty.",
+ 
+  "Atmospheric Enhancers": "Wzmacniacze Atmosferyczne",
+    "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "Zwiększ temperaturę o 2 poziomy, lub zwiększ tlen o 2 poziomy, lub zwiększ Wenus o 2 poziomy. Dobierz 2 karty z symbolem dryfowców.",
+
+  "Board of Directors": "Rada Dyrektorów",
+    "ACTION: ": "AKCJA: ",
+    "DRAW 1 PRELUDE CARD: EITHER DISCARD IT, OR PAY 12 M€ AND REMOVE 1 DIRECTOR RESOURCE HERE TO PLAY IT.": "Dobierz 1 kartę Preludium: albo odrzuć ją, albo zapłać 12 M€ i usuń 1 zasób dyrektora z tej karty, aby ją zagrać.",
+    "Add 4 director resources here.": "Dodaj 4 zasoby dyrektora do tej karty.",
+  
+  "Floating Trade Hub": "Podniebne Centrum Handlowe",
+    "Action: Add 2 floaters to ANY card.": "Akcja: Dodaj 2 dryfowce do dowolnej karty.",
+    "Action: Remove any number of floaters here to gain that many of one standard resource.": "Akcja: Usuń dowolną liczbę dryfowców z tej karty, aby otrzymać tyle standardowych zasobów.",
+  
+  "Early Colonization": "Wczesna Kolonizacja",
+    "INCREASE ALL COLONY TRACKS 2 STEPS": "Przesuń postęp na wszystkich koloniach o 2 kroki",
+    "Place a colony. Gain 3 energy.": "Załóż kolonię. Otrzymujesz 3 energii.",
+  
+  "Corridors of Power": "Korytarze Władzy",
+    "Effect: Each time you become party leader, draw 1 card.": "Efekt: Za każdym razem, gdy zostajesz liderem partii, dobierz 1 kartę.",
+    "Raise your TR 1 step and gain 4 M€": "Zwiększ swój Wskaźnik Terraformacji o 1 poziom i otrzymaj 4 M€",
+  
+  "Focused Organization": "Skoncentrowana Organizacja",
+    "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource.": "Akcja: Odrzuć 1 kartę i wydaj 1 zasób standardowy, aby dobrać 1 kartę i otrzymać 1 zasób standardowy.",
+    "Draw 1 card and gain 1 standard resource.": "Dobierz 1 kartę i otrzymaj 1 zasób standardowy.",
+  
+  "Suitable Infrastructure": "Odpowiednia Infrastruktura",
+    "Effect: Once per action you take, gain 2 M€ if you increase any productions.": "Efekt: Raz na wykonaną akcję, otrzymujesz 2 M€, jeśli zwiększasz jakąkolwiek produkcję.",
+  
+  "High Circles": "Wysokie Kręgi",
+    "Raise your TR 1 step and draw 1 card with PARTY REQUIREMENT. Place 2 delegates in one party.": "Zwiększ swój Wskaźnik Terraformacji o 1 poziom i dobierz 1 kartę z WYMAGANIEM PARTII. Umieść 2 delegatów w jednej partii."
 }

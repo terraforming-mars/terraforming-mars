@@ -12,5 +12,25 @@
     "Effect: When you play a science tag, you pay 2M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Nauki, płacisz za nią o 2 M€ mniej.",
 
     "You start with 45 M€. As your first action, fund an award for free.": "Rozpoczynasz grę z 45 M€. W ramach swojej pierwszej akcji w grze ufunduj za darmo jedną nagrodę.",
-    "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.": "Efekt trwały: Kiedy zagrywasz kartę z symbolem PZ, który nie jest negatywny (z tą włącznie), otrzymujesz 3 M€."
+    "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.": "Efekt trwały: Kiedy zagrywasz kartę z symbolem PZ, który nie jest negatywny (z tą włącznie), otrzymujesz 3 M€.",
+    
+    "Effect: When you play a bio tag, gain 1 plant or add a microbe to ANY card.": "Efekt: Gdy zagrywasz kartę z zielonym symbolem, otrzymujesz 1 roślinę lub dodajesz mikroba na dowolną kartę.",
+    "You start with 42 M€. Increase your plant production 1 step.": "Zaczynasz z 42 M€. Zwiększ produkcję roślin o 1 poziom.",
+    
+    "Awards and Milestones": "Nagrody i Tytuły",
+    "Effect: AWARDS and MILESTONES ALWAYS COST 0 M€ FOR YOU.": "Efekt: Nagrody i Tytuły zawsze kosztują ciebie 0 M€.",
+    "You start with 30 M€. Increase your energy, plant, and steel production 1 step each.": "Zaczynasz z 30 M€. Zwiększ produkcję energii, roślin i stali o 1 poziom każde.",
+    
+    "Effect: When you play a space event, gain 1 titanium.": "Efekt: Gdy zagrywasz kartę wydarzenia z symbolem kosmosu, otrzymujesz 1 tytan.",
+    "Action: Spend 2 titanium to raise the temperature 1 step.": "Akcja: Wydaj 2 jedn. tytanu, aby podnieść temperaturę o 1 poziom.",
+    "You start with 36 M€. Gain 5 titanium.": "Zaczynasz z 36 M€. Otrzymujesz 5 tytanu.",
+    
+    "Effect: When you play a card with no tags, including this, gain 4 M€.": "Efekt: Gdy zagrywasz kartę bez symboli (wliczając tę), otrzymujesz 4 M€.",
+    "Effect: When you play a card with EXACTLY 1 TAG, you gain 1 M€.": "Efekt: Gdy zagrywasz kartę z dokładnie 1 symbolem, otrzymujesz 1 M€.",
+    "You start with 31 M€. Increase energy production 1 step and M€ production 2 steps. Draw a card that has no tag.": "Zaczynasz z 31 M€. Zwiększ produkcję energii o 1 poziom i produkcję M€ o 2 poziomy. Dobierz kartę bez symbolu.",
+    
+    "Standard Project": "Projekt standardowy",
+    "You start with 50 M€. As your first action, draw 4 cards, then discard 3 cards from your hand.": "Rozpoczynasz grę z 50 M€. Jako swoją pierwszą akcję dobierz 4 karty, następnie odrzuć 3 karty ze swojej ręki.",
+    "Effect: When you play a card with at least 2 tags. including this, add 1 science resource here.": "Efekt: Kiedy zagrywasz kartę z przynajmniej 2 symbolami (wliczając tę) dodaj 1 znacznik nauki na tę kartę.",
+    "Effect: When you pay for a standard project, science resources here may be used as 2 M€ each.": "Efekt: Kiedy płacisz za projekt standardowy, znaczniki nauki z tej karty mogą być użyte jako 2 M€ każdy."
 }

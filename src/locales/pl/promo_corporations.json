@@ -45,5 +45,15 @@
     "TACTICAL GENOMICS": "TACTICAL GENOMICS",
     "Splice": "Splice",
     "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Warunki początkowe: Rozpoczynasz grę z 44 M€. W ramach swojej pierwszej akcji odkrywaj karty z wierzchu talii projektów, dopóki nie odkryjesz karty z symbolem Mikrobów. Weź tę kartę do ręki, resztę odrzuć.",
-    "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "Efekt trwały: Gdy którykolwiek z graczy zagra kartę z symbolem Mikrobów (z tą włącznie), ten gracz otrzymuje 2 M€ lub umieszcza 1 jednostkę mikrobów na zagranej karcie, a Ty dodatkowo otrzymujesz 2 M€ za każdy symbol Mikrobów na zagranej karcie."
+    "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "Efekt: Gdy którykolwiek z graczy zagra kartę z symbolem Mikrobów (z tą włącznie), ten gracz otrzymuje 2 M€ lub umieszcza 1 jednostkę mikrobów na zagranej karcie, a Ty dodatkowo otrzymujesz 2 M€ za każdy symbol Mikrobów na zagranej karcie.",
+  
+  "Kuiper": "Kuiper",
+    "Action: Add 1 asteroid here for every space tag you have.": "Akcja: Umieść na tej karcie 1 asteroid za każdy symbol Kosmosu, który posiadasz.",
+    "Effect: When you use the AQUIFER or ASTEROID standard projects, you can spend asteroids on card as 1M€ each.": "Efekt: Gdy używasz projektów standardowych NAWODNIENIE lub ASTEROIDA, możesz wydać asteroidy z tej karty jako 1M€ za każdą jednostkę.",
+    "You start with 33 M€. Increase titanium production 1 step.": "Rozpoczynasz grę z 33 M€. Zwiększ produkcję tytanu o 1 poziom.",
+  
+  "TYCHO": "TYCHO",
+    "You start with 42 M€. Increase your energy production 1 step.": "Rozpoczynasz grę z 42 M€. Zwiększ produkcję energii o 1 poziom.",
+    "KEEP 1": "ZATRZ. 1",
+    "Action: Spend any amount of energy to draw the that many cards. Keep 1 and discard the rest.": "Akcja: Wydaj dowolną ilość energii, aby dobrać tyle kart. Wybierz jedną z nich, a pozostałe odrzuć."
 }

@@ -26,7 +26,7 @@ export class VenusContract extends PreludeCard {
             eb.venus(1).startEffect.megacredits(3);
           });
           b.br;
-          b.cards(1, {tag: Tag.VENUS}).tr(1);
+          b.cards(1, {secondaryTag: Tag.VENUS}).tr(1);
         }),
       },
     });

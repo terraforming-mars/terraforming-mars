@@ -4,11 +4,12 @@ import {testGame} from '../../TestGame';
 import {Phase} from '../../../src/common/Phase';
 import {WorldGovernmentAdvisor} from '../../../src/server/cards/prelude2/WorldGovernmentAdvisor';
 import {IGame} from '../../../src/server/IGame';
-import {cast, runAllActions, setTemperature} from '../../TestingUtils';
+import {cast, maxOutOceans, runAllActions, setOxygenLevel, setTemperature} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {assertPlaceOcean} from '../../assertions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
+import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
 
 describe('WorldGovernmentAdvisor', () => {
   let card: WorldGovernmentAdvisor;
@@ -99,5 +100,22 @@ describe('WorldGovernmentAdvisor', () => {
 
     cast(player.popWaitingFor(), undefined);
     expect(player.getTerraformRating()).eq(14);
+  });
+
+  it('canAct - game is at maximum', () => {
+    setTemperature(game, MAX_TEMPERATURE);
+    setOxygenLevel(game, MAX_OXYGEN_LEVEL);
+    maxOutOceans(player);
+
+    expect(card.canAct(player)).is.true;
+    expect(card.warnings.has('marsIsTerraformed')).is.true;
+  });
+
+  it('action - game is at maximum', () => {
+    setTemperature(game, MAX_TEMPERATURE);
+    setOxygenLevel(game, MAX_OXYGEN_LEVEL);
+    maxOutOceans(player);
+
+    cast(card.action(player), undefined);
   });
 });

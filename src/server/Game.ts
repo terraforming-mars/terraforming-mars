@@ -795,7 +795,7 @@ export class Game implements IGame, Logger {
     this.worldGovernmentTerraforming(this.first);
   }
 
-  public worldGovernmentTerraformingInput(player: IPlayer): PlayerInput {
+  public worldGovernmentTerraformingInput(player: IPlayer): OrOptions {
     const orOptions = new OrOptions();
     orOptions.title = 'Select action for World Government Terraforming';
     orOptions.buttonLabel = 'Confirm';

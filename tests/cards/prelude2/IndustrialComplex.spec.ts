@@ -18,7 +18,7 @@ describe('IndustrialComplex', () => {
 
   beforeEach(() => {
     card = new IndustrialComplex();
-    [game, player] = testGame(1);
+    [game, player] = testGame(2);
   });
 
   const runs = [
@@ -53,6 +53,12 @@ describe('IndustrialComplex', () => {
       canPlay: true,
       payment: {megacredits: 16, titanium: 1},
       expected: {production: {}, stock: {megacredits: 1}},
+    },
+    {
+      stock: {megacredits: 18}, production: {megacredits: -5}, corps: [],
+      canPlay: true,
+      payment: undefined,
+      expected: {production: {}, stock: {}},
     },
   ] as const;
 

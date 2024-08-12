@@ -32,8 +32,11 @@ export class WorldGovernmentAdvisor extends PreludeCard implements IActionCard {
     });
   }
 
-  public canAct() {
-    // TODO(kberg): Add warning if all global parameters are at maximum.
+  public canAct(player: IPlayer) {
+    const orOptions = player.game.worldGovernmentTerraformingInput(player);
+    if (orOptions.options.length === 0) {
+      this.warnings.add('marsIsTerraformed');
+    }
     return true;
   }
 
@@ -49,6 +52,7 @@ export class WorldGovernmentAdvisor extends PreludeCard implements IActionCard {
       return undefined;
     }), Priority.BACK_OF_THE_LINE);
 
-    return game.worldGovernmentTerraformingInput(player);
+    const orOptions = game.worldGovernmentTerraformingInput(player);
+    return (orOptions.options.length === 0) ? undefined : orOptions;
   }
 }

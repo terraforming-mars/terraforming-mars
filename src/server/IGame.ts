@@ -33,7 +33,7 @@ import {Tile} from './Tile';
 import {Logger} from './logs/Logger';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {UnderworldData} from './underworld/UnderworldData';
-import {PlayerInput} from './PlayerInput';
+import {OrOptions} from './inputs/OrOptions';
 
 export interface Score {
   corporation: String;
@@ -164,7 +164,7 @@ export interface IGame extends Logger {
   /* for testing */ takeNextFinalGreeneryAction(): void;
   /* for testing */ worldGovernmentTerraforming(player: IPlayer): void;
   /* for World Government Advisor */
-  worldGovernmentTerraformingInput(player: IPlayer): PlayerInput;
+  worldGovernmentTerraformingInput(player: IPlayer): OrOptions;
   increaseOxygenLevel(player: IPlayer, increments: -2 | -1 | 1 | 2): void;
   getOxygenLevel(): number;
   increaseVenusScaleLevel(player: IPlayer, increments: -1 | 1 | 2 | 3): number;

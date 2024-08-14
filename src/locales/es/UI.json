@@ -291,7 +291,7 @@
     "seconds per action": "segundos por acción",
     "Reduce": "Reduce",
     "VP every": "PV cada",
-    "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per turn.)": "Después de ${0} min, reduce ${1} PV cada ${2} min. (${3} segundos de bonificación por turno)",
+    "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per action.)": "Después de ${0} min, reduce ${1} PV cada ${2} min. (${3} segundos de bonificación por acción)",
     "Exclude some cards": "Excluir algunas cartas",
     "Custom Colonies list": "Personalizar lista de colonias",
     "Remove negative Global Events": "Quitar eventos globales negativos",

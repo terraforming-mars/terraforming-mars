@@ -987,7 +987,7 @@
   "seconds per action": "секунд на дію",
   "Reduce": "Зменшити",
   "VP every": "Очки за кожні",
-  "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per turn.)": "Після ${0} хвилин, зменшити ${1} очок кожні ${2} хвилини. (${3} бонусних секунд на хід.)",
+  "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per action.)": "Після ${0} хвилин, зменшити ${1} очок кожні ${2} хвилини. (${3} бонусних секунд на дію.)",
   "Exclude some cards": "Виключити деякі карти",
   "Include some cards": "Додати деякі карти",
   "Custom Colonies list": "Список власних колоній",

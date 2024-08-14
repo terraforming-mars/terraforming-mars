@@ -906,7 +906,7 @@
     "seconds per action": "秒 / アクション",
     "Reduce": "-",
     "VP every": "VP /",
-    "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per turn.)": "${0}分経過後、${2}分毎に-${1}VP(1アクション毎に${3}秒猶予が増える).",
+    "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per action.)": "${0}分経過後、${2}分毎に-${1}VP(1アクション毎に${3}秒猶予が増える).",
     "Exclude some cards": "除外カード",
     "Custom Colonies list": "カスタム：コロニーリスト",
     "Remove negative Global Events": "マイナスの世界的命題を削除",

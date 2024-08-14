@@ -23,7 +23,7 @@ export class BoardOfDirectors extends PreludeCard implements IActionCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'P45',
         renderData: CardRenderer.builder((b) => {
           b.plainText('ACTION: ').arrow().br;
           b.plainText('DRAW 1 PRELUDE CARD: EITHER DISCARD IT, OR PAY 12 M€ AND REMOVE 1 DIRECTOR RESOURCE HERE TO PLAY IT.').br;

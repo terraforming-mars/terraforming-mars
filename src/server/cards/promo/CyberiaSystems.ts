@@ -18,7 +18,7 @@ export class CyberiaSystems extends RoboticWorkforceBase {
       behavior: {production: {steel: 1}},
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'X53',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.steel(1));
           b.text('Copy', Size.SMALL, true)

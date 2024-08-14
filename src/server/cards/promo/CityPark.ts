@@ -21,8 +21,8 @@ export class CityPark extends Card implements IProjectCard {
       },
 
       metadata: {
+        cardNumber: 'X71',
         description: 'Requires that you have 3 cities. Gain 2 plants.',
-        cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.plants(2);
         }),

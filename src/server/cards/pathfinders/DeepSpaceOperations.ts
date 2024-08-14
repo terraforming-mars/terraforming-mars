@@ -16,7 +16,7 @@ export class DeepSpaceOperations extends PreludeCard {
       },
 
       metadata: {
-        cardNumber: 'P08',
+        cardNumber: 'PfP12',
         renderData: CardRenderer.builder((b) => {
           b.titanium(4).br;
           b.cards(2, {secondaryTag: Tag.EVENT}).super((sb) => sb.tag(Tag.SPACE));

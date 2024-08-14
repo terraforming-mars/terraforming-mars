@@ -34,7 +34,7 @@ export class CollegiumCopernicus extends CorporationCard implements IActionCard 
       },
 
       metadata: {
-        cardNumber: 'PfC4',
+        cardNumber: 'PfC16',
         description: 'You start with 33 M€. As your first action, draw 2 cards with a science tag.',
         renderData: CardRenderer.builder((b) => {
           b.br;

@@ -16,7 +16,7 @@ export class GanymedeTradingCompany extends PreludeCard {
       },
 
       metadata: {
-        cardNumber: 'UP02',
+        cardNumber: 'UP08',
         renderData: CardRenderer.builder((b) => {
           b.corruption().titanium(3).tradeFleet();
         }),

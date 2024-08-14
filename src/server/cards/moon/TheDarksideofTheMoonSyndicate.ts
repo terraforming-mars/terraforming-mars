@@ -28,7 +28,7 @@ export class TheDarksideofTheMoonSyndicate extends CorporationCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'MC3',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(40).resource(CardResource.SYNDICATE_FLEET, 2).br;
           b.text('You start with 40 M€ and 2 syndicate fleets on this card.', Size.SMALL, false, false).br;

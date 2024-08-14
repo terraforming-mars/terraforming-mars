@@ -21,7 +21,7 @@ export class SagittaFrontierServices extends CorporationCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'PC03', // Renumber
         hasExternalHelp: true,
         renderData: CardRenderer.builder((b) => {
           // TODO(kberg): provide reasonable secondary tag. It's not rendered on CardRenderItemComponent.

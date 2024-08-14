@@ -15,7 +15,7 @@ export class CorridorsOfPower extends PreludeCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'P47',
         renderData: CardRenderer.builder((b) => {
           b.effect('Each time you become party leader, draw 1 card.', (ab) => {
             ab.partyLeaders(1).startEffect.cards(1);

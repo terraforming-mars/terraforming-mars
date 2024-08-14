@@ -21,6 +21,7 @@ export class FloaterUrbanism extends Card implements IProjectCard, IActionCard {
       victoryPoints: {resourcesHere: {}},
 
       metadata: {
+        cardNumber: 'Pf59',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 floater from any card to add 1 Venusian habitat on this card.', (ab) => {
             ab.minus().resource(CardResource.FLOATER).startAction.resource(CardResource.VENUSIAN_HABITAT);

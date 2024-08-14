@@ -20,7 +20,7 @@ export class Spire extends CorporationCard implements ICorporationCard {
       resourceType: CardResource.SCIENCE,
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'PC05', // Renumber
         renderData: CardRenderer.builder((b) => {
           b.megacredits(50).plus().cards(4, {digit}).minus().cards(3, {digit}).br,
           b.plainText('You start with 50 M€. As your first action, draw 4 cards, ' +

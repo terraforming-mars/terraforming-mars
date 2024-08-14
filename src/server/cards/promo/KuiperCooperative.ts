@@ -20,7 +20,7 @@ export class KuiperCooperative extends CorporationCard implements IActionCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'XC01', // Rename
         description: 'You start with 33 M€. Increase titanium production 1 step.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(33).production((pb) => pb.titanium(1)).br;

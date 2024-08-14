@@ -20,7 +20,7 @@ export class Teslaract extends Card implements IActionCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'X66',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 energy production to gain 1 plant production.',
             (ab) => ab.production((pb) => pb.energy(1)).startAction.production((pb) => pb.plants(1)));

@@ -17,7 +17,7 @@ export class MarsMaths extends CorporationCard {
       },
 
       metadata: {
-        cardNumber: 'PfCXX',
+        cardNumber: 'PfC10',
         description: 'You start with 40 M€. As your first action, draw 2 cards',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(40).nbsp.cards(2).br;

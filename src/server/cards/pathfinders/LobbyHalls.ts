@@ -21,7 +21,7 @@ export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
       },
 
       metadata: {
-        cardNumber: 'PfTBD',
+        cardNumber: 'PfT1',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(2)).delegates(1);
         }),

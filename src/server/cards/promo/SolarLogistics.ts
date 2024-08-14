@@ -22,7 +22,7 @@ export class SolarLogistics extends Card implements IProjectCard {
       cardDiscount: {tag: Tag.EARTH, amount: 2},
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'X63',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play an Earth tag, you pay 2 M€ less.',
             (eb) => eb.tag(Tag.EARTH).startEffect.megacredits(-2));

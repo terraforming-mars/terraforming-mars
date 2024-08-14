@@ -21,7 +21,7 @@ export class SpecialPermit extends Card implements IProjectCard {
       requirements: {party: PartyName.GREENS},
 
       metadata: {
-        cardNumber: 'C02',
+        cardNumber: 'P82',
         description: 'Requires that Greens are ruling or that you have 2 delegates there. Steal 4 plants from any player.',
         renderData: CardRenderer.builder((b) => {
           b.text('steal', Size.MEDIUM, true).plants(4, {all, digit});

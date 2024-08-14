@@ -15,7 +15,7 @@ export class DesignCompany extends PreludeCard {
       },
 
       metadata: {
-        cardNumber: 'P08',
+        cardNumber: 'PfP08',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.steel(1)).br;
           b.cards(3, {secondaryTag: Tag.BUILDING});

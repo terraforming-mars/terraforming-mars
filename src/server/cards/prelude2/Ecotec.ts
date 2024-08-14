@@ -22,7 +22,7 @@ export class Ecotec extends CorporationCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'PC04', // Renumber
         renderData: CardRenderer.builder((b) => {
           b.br.br.br;
           b.megacredits(42).production((pb) => pb.plants(1)).br;

@@ -19,7 +19,7 @@ export class CarbonNanosystems extends Card implements IProjectCard {
       resourceType: CardResource.GRAPHENE,
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'X52',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a science tag, including this, add a graphene resource here.', (eb) => eb.tag(Tag.SCIENCE).startEffect.resource(CardResource.GRAPHENE)).br;
           b.effect('When playing a space or city tag, graphenes may be used as 4 M€ each.', (eb) => eb.tag(Tag.SPACE).or().tag(Tag.CITY, {size: Size.MEDIUM}).startEffect.resource(CardResource.GRAPHENE).equals().megacredits(4)).br;

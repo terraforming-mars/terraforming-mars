@@ -16,7 +16,7 @@ export class TunnelingSubcontractor extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U07',
+        cardNumber: 'U18',
         renderData: CardRenderer.builder((b) => {
           b.corruption(1).excavate(1);
         }),

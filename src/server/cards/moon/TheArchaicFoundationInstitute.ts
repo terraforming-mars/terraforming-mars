@@ -24,7 +24,7 @@ export class TheArchaicFoundationInstitute extends CorporationCard {
 
       metadata: {
         hasExternalHelp: true,
-        cardNumber: '',
+        cardNumber: 'MC10',
         description: 'You start with 55 M€.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(55).nbsp;

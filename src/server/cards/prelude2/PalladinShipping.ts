@@ -23,7 +23,7 @@ export class PalladinShipping extends CorporationCard implements IActionCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'PC02', // Renumber
         renderData: CardRenderer.builder((b) => {
           b.megacredits(36).titanium(5, {digit}).br;
           b.effect('When you play a space event, gain 1 titanium.', (eb) => {

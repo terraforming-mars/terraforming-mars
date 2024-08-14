@@ -14,7 +14,7 @@ export class NewPartner extends PreludeCard {
       },
 
       metadata: {
-        cardNumber: 'P43',
+        cardNumber: 'X42',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1)).prelude().asterix();
         }),

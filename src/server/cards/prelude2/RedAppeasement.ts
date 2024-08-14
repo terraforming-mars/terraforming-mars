@@ -18,7 +18,7 @@ export class RedAppeasement extends Card {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'P80',
         renderData: CardRenderer.builder((b) => {
           b.plainText('Requires that Reds are ruling or that you have 2 delegates there, ' +
           'AND THAT NO OTHER PLAYER HAS PASSED.').br;

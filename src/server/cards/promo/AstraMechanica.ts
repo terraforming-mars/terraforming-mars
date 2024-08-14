@@ -17,7 +17,7 @@ export class AstraMechanica extends Card implements IProjectCard {
       cost: 7,
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'X51',
         hasExternalHelp: true,
         renderData: CardRenderer.builder((b) => {
           b.cards(2, {secondaryTag: Tag.EVENT}).asterix();

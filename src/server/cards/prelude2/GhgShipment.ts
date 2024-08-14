@@ -22,7 +22,7 @@ export class GhgShipment extends Card {
       requirements: {party: PartyName.KELVINISTS},
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'P75',
         description: 'Requires that Kelvinists are in power or that you have 2 delegates there. ' +
          'Increase your heat production 1 step. Gain 1 heat for each floater you have.',
         renderData: CardRenderer.builder((b) => {

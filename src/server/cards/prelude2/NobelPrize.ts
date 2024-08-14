@@ -17,7 +17,7 @@ export class NobelPrize extends PreludeCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'P54',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(5).cards(2, {secondaryTag: AltSecondaryTag.REQ});
         }),

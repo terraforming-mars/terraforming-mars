@@ -18,7 +18,7 @@ export class PatentManipulation extends Card implements IProjectCard {
       victoryPoints: -2,
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'U26',
         renderData: CardRenderer.builder((b) => {
           b.cards(1).asterix(); // TODO(kberg): add altsecondarytag.green, and show both blue and green tags.
         }),

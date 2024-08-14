@@ -22,7 +22,7 @@ export class SurveyMission extends PreludeCard {
       },
 
       metadata: {
-        cardNumber: 'P07',
+        cardNumber: 'PfP07',
         renderData: CardRenderer.builder((b) => {
           b.steel(5, {digit});
           b.br;

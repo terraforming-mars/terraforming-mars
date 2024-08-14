@@ -24,7 +24,7 @@ export class L1TradeTerminal extends Card {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'P78',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you trade, first increase that colony tile track 2 steps.', (eb) =>
             eb.trade().startEffect.text('+2')).br;

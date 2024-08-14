@@ -17,7 +17,7 @@ export class TychoMagnetics extends CorporationCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'XC02', // Rename
         description: 'You start with 42 M€. Increase your energy production 1 step.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;

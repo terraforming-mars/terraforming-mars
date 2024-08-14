@@ -21,7 +21,7 @@ export class KaguyaTech extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'X58',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(2)).cards(1).br;
           b.minus().greenery({withO2: false}).plus().city().asterix().br;

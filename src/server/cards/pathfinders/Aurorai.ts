@@ -20,7 +20,7 @@ export class Aurorai extends CorporationCard {
       },
 
       metadata: {
-        cardNumber: 'PfC9',
+        cardNumber: 'PfC15',
         description: 'You start with 33 M€. and 2 data on this card',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(33).resource(CardResource.DATA, 2).br;

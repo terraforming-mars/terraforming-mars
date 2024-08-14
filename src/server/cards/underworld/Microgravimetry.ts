@@ -22,7 +22,7 @@ export class Microgravimetry extends Card implements IProjectCard {
       victoryPoints: {resourcesHere: {}, per: 4},
 
       metadata: {
-        cardNumber: 'X42',
+        cardNumber: 'U42',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend any amount of energy to identify that many underground resources on the board ' +
             'and put the same number of data on this card.', (eb) => {

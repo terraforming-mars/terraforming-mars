@@ -17,7 +17,7 @@ export class MarsDirect extends CorporationCard {
 
       metadata: {
         description: 'You start with 52 M€.',
-        cardNumber: '',
+        cardNumber: 'PFC11',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(52).br;
           b.corpBox('effect', (ce) => {

@@ -26,7 +26,7 @@ export class AtmosphericEnhancers extends PreludeCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'P44',
         renderData: CardRenderer.builder((b) => {
           b.temperature(2, {digit}).slash().oxygen(2, {digit}).br.slash().venus(2, {digit}).br;
           b.cards(2, {secondaryTag: AltSecondaryTag.FLOATER});

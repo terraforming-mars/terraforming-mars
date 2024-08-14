@@ -24,7 +24,7 @@ export class StJosephOfCupertinoMission extends Card implements IActionCard {
       victoryPoints: 'special',
 
       metadata: {
-        cardNumber: 'X29',
+        cardNumber: 'X64',
         renderData: CardRenderer.builder((b) => {
           b.action('Pay 5 M€ (STEEL MAY BE USED) to build  1 Cathedral in a city. Max 1 per city. City owner can pay 2 M€  to draw 1 card.', (eb) => {
             eb.megacredits(5).super((b) => b.steel(1)).startAction.cathedral().asterix();

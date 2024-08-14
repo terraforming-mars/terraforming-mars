@@ -21,7 +21,7 @@ export class FloydContinuum extends Card implements IProjectCard, IActionCard {
       type: CardType.ACTIVE,
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'X-1',
         hasExternalHelp: true,
         renderData: CardRenderer.builder((b) => {
           b.action('Gain 3 M€ per completed terraforming parameter.', (eb) => {

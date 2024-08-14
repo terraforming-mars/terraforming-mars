@@ -17,7 +17,7 @@ export class SuitableInfrastructure extends PreludeCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'P63',
         description: 'Gain 5 steel.',
         renderData: CardRenderer.builder((b) => {
           b.effect('Once per action you take, gain 2 M€ if you increase any productions.', (eb) => {

@@ -20,7 +20,7 @@ export class GagarinMobileBase extends CorporationCard implements IActionCard {
       initialActionText: 'Place Gagarin Mobile Base on ANY space ON MARS',
 
       metadata: {
-        cardNumber: 'PfC13',
+        cardNumber: 'PfC19',
         description: 'You start with 42 M€. As your first action, put Gagarin Mobile Base on ANY area on Mars. Collect the bonus.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(42).br;

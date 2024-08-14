@@ -22,7 +22,7 @@ export class CloudTourism extends ActionCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'P69',
         description: 'Increase your M€ production 1 step for each pair of Earth and Venus tags you own. 1 VP for every 3rd floater on this card.',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 floater to this card.', (eb) => {

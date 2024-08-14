@@ -26,7 +26,7 @@ export class CuriosityII extends CorporationCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'Y07',
         description: 'You start with 40 M€ and 2 steel production.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;

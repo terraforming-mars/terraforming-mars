@@ -26,7 +26,7 @@ export class AeronGenomics extends ActiveCorporationCard {
       },
 
       metadata: {
-        cardNumber: 'UC05',
+        cardNumber: 'UC07',
         description: 'You start with 35 M€, 5 steel, and 1 animal resource on this card. 1 VP per 3 animals on this card.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(35).steel(5, {digit}).resource(CardResource.ANIMAL).br;

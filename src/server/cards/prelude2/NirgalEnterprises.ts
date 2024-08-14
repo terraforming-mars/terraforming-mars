@@ -15,7 +15,7 @@ export class NirgalEnterprises extends CorporationCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'PC01', // Renumber
         renderData: CardRenderer.builder((b) => {
           b.br.br.br.br;
           b.megacredits(30).production((pb) => pb.energy(1).plants(1).steel(1)).br;

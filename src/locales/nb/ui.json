@@ -904,7 +904,7 @@
 
 	"Claim a milestone": "Gjør krav på milepæl",
 	"Build colony": "Bygg koloni",
-	"After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per turn.)": "Etter ${0} minutter, trekk fra ${1} SP hvert ${2}. min. (${3} bonus sek. per tur.)",
+	"After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per action.)": "Etter ${0} minutter, trekk fra ${1} SP hvert ${2}. min. (${3} bonus sek. per handling.)",
 
 	"Place any final greenery from plants": "Plasser eventuelle siste skogområder fra planter",
 	"Don't place a greenery": "Ikke plasser et skogområde",

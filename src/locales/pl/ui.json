@@ -467,7 +467,7 @@
   "seconds per action": "sekund za akcję",
   "Reduce": "Zmniejsz",
   "VP every": "Wszystkie PZ",
-  "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per turn.)": "Po ${0} min zmniejszaj ${1} PZ co ${2} min (${3} dodatkowych sekund na turę)",
+  "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per action.)": "Po ${0} min zmniejszaj ${1} PZ co ${2} min (${3} dodatkowych sekund za akcję)",
 
   "Exclude some cards": "Wyklucz karty",
   "Custom Colonies list": "Niestandardowa lista kolonii",

@@ -1023,7 +1023,7 @@
     "seconds per action": "초 (매 행동마다)",
     "Reduce": "감소량: ",
     "VP every": "점 x",
-    "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per turn.)": "${0}분 후, ${2}분마다 ${1}점씩 감소시킵니다. (차례마다 ${3}초씩 잔여 시간이 늘어납니다.)",
+    "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per action.)": "${0}분 후, ${2}분마다 ${1}점씩 감소시킵니다. (차례마다 ${3}초씩 잔여 시간이 늘어납니다.)",
     "Exclude some cards": "일부 카드 제외",
     "Include some cards": "일부 카드 포함",
     "Custom Colonies list": "커스텀 개척기지 목록",

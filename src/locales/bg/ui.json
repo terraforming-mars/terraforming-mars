@@ -292,7 +292,7 @@
   "seconds per action": "секунди на действие",
   "Reduce": "Намалете",
   "VP every": "ТП на всеки",
-  "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per turn.)": "След ${0} мин, намалявайте с ${1} ТП на всеки ${2} мин. (${3} бонус сек. на ход)",
+  "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per action.)": "След ${0} мин, намалявайте с ${1} ТП на всеки ${2} мин. (${3} бонус сек. на действие)",
   "Venus Milestone/Award": "Венера Мийлстоун/Награда",
   "Mandatory Venus Terraforming": "Задължително тераформиране на Венера",
   "corporation": "корпорация",

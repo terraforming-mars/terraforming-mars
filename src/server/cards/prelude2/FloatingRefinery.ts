@@ -27,6 +27,7 @@ export class FloatingRefinery extends Card implements IProjectCard, IActionCard 
       },
 
       metadata: {
+        cardNumber: 'P73',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 floater here.', (ab) => {
             ab.empty().startAction.resource(CardResource.FLOATER);

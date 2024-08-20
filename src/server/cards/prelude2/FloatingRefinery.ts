@@ -42,7 +42,7 @@ export class FloatingRefinery extends Card implements IProjectCard, IActionCard 
   }
 
   public canAct() {
-    return true
+    return true;
   }
 
   public action(player: IPlayer) {

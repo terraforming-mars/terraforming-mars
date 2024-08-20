@@ -27,7 +27,6 @@ export class FloatingRefinery extends Card implements IProjectCard, IActionCard 
       },
 
       metadata: {
-        cardNumber: 'P73',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 floater here.', (ab) => {
             ab.empty().startAction.resource(CardResource.FLOATER);
@@ -40,6 +39,10 @@ export class FloatingRefinery extends Card implements IProjectCard, IActionCard 
         description: 'Add 1 floater here for each Venus tag you have.',
       },
     });
+  }
+
+  public canAct() {
+    return true
   }
 
   public action(player: IPlayer) {

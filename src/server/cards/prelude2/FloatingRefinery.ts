@@ -42,10 +42,6 @@ export class FloatingRefinery extends Card implements IProjectCard, IActionCard 
     });
   }
 
-  public canAct(player: IPlayer) {
-    return player.getResourceCount(CardResource.FLOATER) > 0;
-  }
-
   public action(player: IPlayer) {
     const floater2Cards = player.tableau.filter((card) => card.resourceType === CardResource.FLOATER && card.resourceCount >= 2);
     const addFloater = new SelectOption('Add 1 floater to this card',

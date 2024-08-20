@@ -77,7 +77,7 @@ describe('FloatingRefinery', function() {
     expect(player.stock.megacredits).to.eq(2);
   });
 
-  it('act - two cards with 2 floaters - select 1st', function() {
+  it('act - two cards with 2 floaters - select 2nd', function() {
     card.resourceCount = 1;
     floater1.resourceCount = 2;
     floater2.resourceCount = 2;

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PatentManipulation} from '../../../src/server/cards/underworld/PatentManipulation';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
-import {cardsFromJSON} from '../../../src/server/createCard';
+import {cardsFromJSON, newProjectCard} from '../../../src/server/createCard';
 import {CardName} from '../../../src/common/cards/CardName';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
@@ -50,5 +50,23 @@ describe('PatentManipulation', () => {
 
     expect(player.playedCards).to.have.members([aiCentral, bribedCommittee, moholeArea, astraMechanica]);
     expect(player.cardsInHand).to.have.members([microMills]);
+  });
+
+  it('Fixes #6934', () => {
+    const card = new PatentManipulation();
+    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const tardigrades = newProjectCard(CardName.TARDIGRADES)!;
+    player.playedCards = [tardigrades];
+    tardigrades.resourceCount = 5;
+    player.cardsInHand = [];
+    const selectCard = cast(card.play(player), SelectCard);
+
+    expect(selectCard.cards).to.have.members([tardigrades]);
+
+    selectCard.cb([tardigrades]);
+
+    expect(player.cardsInHand).to.have.members([tardigrades]);
+    expect(player.playedCards).to.be.empty;
+    expect(tardigrades.resourceCount).eq(0);
   });
 });

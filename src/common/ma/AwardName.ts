@@ -34,8 +34,6 @@ export const awardNames = [
   // NB: the fifth award for Amazonis Plantia is Coordinator, also part of Arabia Terra.
   'Curator',
   'Engineer',
-  // TODO(kberg): Remove Historian by 2024-09-01. Remove all the icons and translations, too.
-  'Historian',
   'Tourist',
   'A. Zoologist',
 

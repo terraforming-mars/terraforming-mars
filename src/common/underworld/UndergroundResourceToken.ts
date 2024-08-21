@@ -38,7 +38,7 @@ export const undergroundResourceTokenDescription: Record<UndergroundResourceToke
   plant2: '2 plants',
   plant3: '3 plants',
   plant1production: '1 plant production',
-  titaniumandplant: '1 titanium production',
+  titaniumandplant: '1 titanium and 1 plant',
   energy1production: '1 energy production',
   heat2production: '2 heat production',
   microbe1: '1 microbe',

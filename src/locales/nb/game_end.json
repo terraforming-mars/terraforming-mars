@@ -29,7 +29,7 @@
     "Total": "Totalt",
     "Timer": "Stoppeklokke",
     "Victory points details for": "Detaljer om seierspoeng for",
-    
+
     "% completed": "% fullført",
     "Temperature": "Temperatur",
     "Oxygen": "Oksygen",
@@ -38,10 +38,10 @@
     "L. Habitat": "Habitat på Månen",
     "L. Mining": "Gruvedrift på Månen",
     "L. Logistics": "Logistikk på Månen",
-	
+
     "Final situation on the board": "Endelig situasjon på spillebrettet",
     "Final game log": "Logg over avsluttet spill",
-    
+
     "Most tags on the earth track": "Flest symboler på jordsporet",
     "Most tags on the venus track": "Flest symboler på Venus-sporet",
     "Most tags on the jovian track": "Flest symboler på Jupiter-sporet",
@@ -61,7 +61,7 @@
     "Actions taken this game": "Handlinger i dette spillet",
     "Escape Velocity penalty": "Minuspoeng for Unnslipningshastighet (Escape Velocity)",
     "Download game log": "Last ned spillelogg",
-	
+
     "1st place for Landlord award ": "1. plass for Grunneier-utmerkelsen",
     "1st place for Banker award ": "1. plass for Bankmann-utmerkelsen",
     "1st place for Scientist award ": "1. plass for Forsker-utmerkelsen",
@@ -83,7 +83,6 @@
     "1st place for Lunar Magnate award ": "1. plass for Månemagnat",
     "1st place for Curator award ": "1. plass for Kurator-utmerkelsen",
     "1st place for Engineer award ": "1. plass for Ingeniør-utmerkelsen",
-    "1st place for Historian award ": "1. plass for Historiker-utmerkelsen",
     "1st place for Tourist award ": "1. plass for Turist-utmerkelsen",
     "1st place for A. Zoologist award ": "1. plass for A. Zoologist-utmerkelsen",
     "1st place for Cosmic Settler award ": "1. plass for Kosmisk bebygger-utmerkelsen",
@@ -101,7 +100,7 @@
     "1st place for Hoarder award ": "1. plass for Hamster-utmerkelsen",
     "1st place for Naturalist award ": "1. plass for Naturvern-utmerkelsen",
     "1st place for Voyager award ": "1. plass for Reisende-utmerkelsen",
-	
+
     "Claimed Builder milestone": "Gjorde krav på Bygger-milepæl",
     "Claimed Diversifier milestone": "Gjorde krav på Diversifiserer-milepæl",
     "Claimed Ecologist milestone": "Gjorde krav på Økolog-milepæl",
@@ -119,9 +118,9 @@
     "Claimed Terraformer milestone": "Gjorde krav på Terraformer-milepæl",
     "Claimed Tycoon milestone": "Gjorde krav på Forretningsmagnat-milepæl",
     "Claimed Businessperson milestone": "Gjorde krav på Forretningsmann-milepæl",
-    "Claimed Capitalist milestone": "Gjorde krav på Kapitalist-milepæl", 
-    "Claimed Colonizer milestone": "Gjorde krav på Kolonisator-milepæl", 
-    "Claimed Collector milestone": "Gjorde krav på Samler-milepæl", 
+    "Claimed Capitalist milestone": "Gjorde krav på Kapitalist-milepæl",
+    "Claimed Colonizer milestone": "Gjorde krav på Kolonisator-milepæl",
+    "Claimed Collector milestone": "Gjorde krav på Samler-milepæl",
     "Claimed Electrician milestone": "Gjorde krav på Elektriker-milepæl",
     "Claimed Economizer milestone": "Gjorde krav på Økonomist-milepæl",
     "Claimed Farmer milestone": "Gjorde krav på Bonde-milepæl",
@@ -134,7 +133,7 @@
     "Claimed Minimalist milestone": "Gjorde krav på Minimalist-milepæl",
     "Claimed Networker milestone": "Gjorde krav på Netzwerker-milepæl",
     "Claimed One Giant Step milestone": "Gjorde krav på Schritt-milepæl",
-    "Claimed Pioneer milestone": "Gjorde krav på Pionér-milepæl", 
+    "Claimed Pioneer milestone": "Gjorde krav på Pionér-milepæl",
     "Claimed Smith milestone": "Gjorde krav på Smed-milepæl",
     "Claimed Spacefarer milestone": "Gjorde krav på Romfarer-milepæl",
     "Claimed Terran milestone": "Gjorde krav på Jordboer-milepæl",

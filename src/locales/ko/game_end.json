@@ -40,7 +40,7 @@
     "Ecological Zone:ares": "자연 생태 형성지 (아레스)",
     "Commercial District:ares": "상업지구 (아레스)",
     "Underworld Corruption Bribe": "",
-    
+
     "Completed!": "완료됨!",
     "% completed": "% 완료됨",
     "Temperature": "기온",
@@ -50,7 +50,7 @@
     "L. Habitat": "월면 기지",
     "L. Mining": "월면 광산",
     "L. Logistics": "월면 물류",
-	
+
     "Final situation on the board": "보드의 최종 상황",
     "Final game log": "최종 게임 기록",
 
@@ -73,7 +73,7 @@
     "Actions taken this game": "이 게임에서 수행한 행동",
     "Escape Velocity penalty": "탈주 페널티",
     "Download game log": "게임 로그 다운로드",
-	
+
     "1st place for Landlord award ": "개척기업상 1등 수상 ",
     "1st place for Banker award ": "금융기업상 1등 수상 ",
     "1st place for Scientist award ": "과학기업상 1등 수상 ",
@@ -95,7 +95,6 @@
     "1st place for Lunar Magnate award ": "월면거대기업상 1등 수상 ",
     "1st place for Curator award ": "기획기업상 1등 수상 ",
     "1st place for Engineer award ": "기술기업상 1등 수상 ",
-    "1st place for Historian award ": "역사기업상 1등 수상 ",
     "1st place for Tourist award ": "관광기업상 1등 수상 ",
     "1st place for A. Zoologist award ": "동물기업상(A) 1등 수상 ",
     "1st place for Cosmic Settler award ": "우주정착기업상 1등 수상 ",
@@ -135,7 +134,6 @@
     "2st place for Lunar Magnate award ": "월면거대기업상 2등 수상 ",
     "2st place for Curator award ": "기획기업상 2등 수상 ",
     "2st place for Engineer award ": "기술기업상 2등 수상 ",
-    "2st place for Historian award ": "역사기업상 2등 수상 ",
     "2st place for Tourist award ": "관광기업상 2등 수상 ",
     "2st place for A. Zoologist award ": "동물기업상(A) 2등 수상 ",
     "2st place for Cosmic Settler award ": "우주정착기업상 2등 수상 ",
@@ -153,7 +151,7 @@
     "2st place for Hoarder award ": "비축기업상 2등 수상 ",
     "2st place for Naturalist award ": "자연주의기업상 2등 수상 ",
     "2st place for Voyager award ": "운송기업상 2등 수상 ",
-	
+
     "Claimed Builder milestone": "건축가 업적 달성",
     "Claimed Diversifier milestone": "분산투자자 업적 달성",
     "Claimed Ecologist milestone": "생태학자 업적 달성",
@@ -171,9 +169,9 @@
     "Claimed Terraformer milestone": "테라포머 업적 달성",
     "Claimed Tycoon milestone": "거물 업적 달성",
     "Claimed Businessperson milestone": "사업가 업적 달성",
-    "Claimed Capitalist milestone": "캐피털리스트 업적 달성", 
-    "Claimed Colonizer milestone": "위성 개척자 업적 달성", 
-    "Claimed Collector milestone": "수집가 업적 달성", 
+    "Claimed Capitalist milestone": "캐피털리스트 업적 달성",
+    "Claimed Colonizer milestone": "위성 개척자 업적 달성",
+    "Claimed Collector milestone": "수집가 업적 달성",
     "Claimed Electrician milestone": "전기기술자 업적 달성",
     "Claimed Economizer milestone": "절약가 업적 달성",
     "Claimed Farmer milestone": "농부 업적 달성",
@@ -186,12 +184,12 @@
     "Claimed Minimalist milestone": "미니멀리스트 업적 달성",
     "Claimed Networker milestone": "마당발 업적 달성",
     "Claimed One Giant Step milestone": "진일보 업적 달성",
-    "Claimed Pioneer milestone": "개척자 업적 달성", 
+    "Claimed Pioneer milestone": "개척자 업적 달성",
     "Claimed Smith milestone": "대장장이 업적 달성",
     "Claimed Spacefarer milestone": "우주 비행사 업적 달성",
     "Claimed Terran milestone": "지구인 업적 달성",
     "Claimed Terra Pioneer milestone": "지구 개척자 업적 달성",
     "Claimed Tradesman milestone": "무역업자 업적 달성",
     "Claimed Tropicalist milestone": "트로피컬리스트 업적 달성"
-        
+
 }

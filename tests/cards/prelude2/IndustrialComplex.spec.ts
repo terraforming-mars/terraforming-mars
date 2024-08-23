@@ -33,6 +33,12 @@ describe('IndustrialComplex', () => {
       expected: {production: {}, stock: {}},
     },
     {
+      stock: {megacredits: 18}, production: {steel: 1}, corps: [],
+      canPlay: true,
+      payment: undefined,
+      expected: {production: {}, stock: {}},
+    },
+    {
       stock: {megacredits: 17}, production: {}, corps: [CardName.MANUTECH],
       canPlay: true,
       payment: undefined,

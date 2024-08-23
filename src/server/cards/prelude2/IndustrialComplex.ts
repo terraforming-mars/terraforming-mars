@@ -46,10 +46,12 @@ export class IndustrialComplex extends PreludeCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    const production = {...player.production.asUnits()};
+    const production = {...Units.EMPTY};
     for (const key of Units.keys) {
-      const diff = 1 - production[key];
-      production[key] = Math.max(diff, 1);
+      if (player.production[key] <= 0) {
+        const diff = 1 - player.production[key];
+        production[key] = Math.max(diff, 1);
+      }
     }
     player.production.adjust(production, {log: true});
 

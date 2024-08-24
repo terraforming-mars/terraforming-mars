@@ -278,6 +278,7 @@ describe('Game', () => {
   it('Solo player should place final greeneries if victory condition met', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('game-solo2', [player], player);
+    /* Removes SelectInitialCards. The cast verifies that it's popping the right thing. */
     cast(player.popWaitingFor(), SelectInitialCards);
 
     // Set up end-game conditions
@@ -318,6 +319,7 @@ describe('Game', () => {
   it('Solo player should place final greeneries in TR 63 mode if victory condition is met', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('game-solo2', [player], player, {soloTR: true});
+    /* Removes SelectInitialCards. The cast verifies that it's popping the right thing. */
     cast(player.popWaitingFor(), SelectInitialCards);
 
     // Set up end-game conditions
@@ -874,11 +876,9 @@ describe('Game', () => {
   });
 
   it('wgt includes all parameters at the game start', () => {
-    const player = TestPlayer.BLUE.newPlayer();
+    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
     const game = Game.newInstance('gameid', [player], player, {venusNextExtension: false});
-    cast(player.popWaitingFor(), SelectInitialCards);
     game.worldGovernmentTerraforming(player);
-    runAllActions(game);
     const parameters = waitingForGlobalParameters(player);
     expect(parameters).to.have.members([
       GlobalParameter.OXYGEN,
@@ -887,11 +887,9 @@ describe('Game', () => {
   });
 
   it('wgt includes all parameters at the game start, with Venus', () => {
-    const player = TestPlayer.BLUE.newPlayer();
+    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
     const game = Game.newInstance('gameid', [player], player, {venusNextExtension: true});
-    cast(player.popWaitingFor(), SelectInitialCards);
     game.worldGovernmentTerraforming(player);
-    runAllActions(game);
     const parameters = waitingForGlobalParameters(player);
     expect(parameters).to.have.members([
       GlobalParameter.OXYGEN,
@@ -901,12 +899,9 @@ describe('Game', () => {
   });
 
   it('wgt includes all parameters at the game start, with The Moon', () => {
-    const player = TestPlayer.BLUE.newPlayer();
+    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
     const game = Game.newInstance('gameid', [player], player, {venusNextExtension: false, moonExpansion: true});
-    cast(player.popWaitingFor(), SelectInitialCards);
-
     game.worldGovernmentTerraforming(player);
-    runAllActions(game);
     const parameters = waitingForGlobalParameters(player);
     expect(parameters).to.have.members([
       GlobalParameter.OXYGEN,

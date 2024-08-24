@@ -139,6 +139,16 @@ export default Vue.extend({
     getData(): Array<CardName> {
       return Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name];
     },
+    canSave() {
+      const len = this.getData().length;
+      if (len > this.playerinput.min) {
+        return false;
+      }
+      if (len < this.playerinput.max) {
+        return false;
+      }
+      return true;
+    },
     saveData() {
       this.onsave({type: 'card', cards: this.getData()});
     },

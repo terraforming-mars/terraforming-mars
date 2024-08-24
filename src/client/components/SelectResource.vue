@@ -47,6 +47,9 @@ export default Vue.extend({
     AppButton,
   },
   methods: {
+    canSave() {
+      return this.unit !== undefined;
+    },
     saveData() {
       if (this.unit === undefined) {
         return;

@@ -182,7 +182,6 @@ describe('Turmoil', function() {
     game.phase = Phase.SOLAR;
 
     game.worldGovernmentTerraforming(player);
-    runAllActions(game);
     const action = cast(player.getWaitingFor(), OrOptions);
     const placeOcean = cast(action.options.find((option) => option.title === 'Add an ocean'), SelectSpace);
     const steelSpace = placeOcean.spaces.find((space) => space.bonus.includes(SpaceBonus.STEEL));

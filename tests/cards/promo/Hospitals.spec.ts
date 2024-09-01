@@ -23,7 +23,7 @@ describe('Hospitals', function() {
     card = new Hospitals();
     pharmacy = new PharmacyUnion();
     other = new MartianCulture();
-    [game, player, player2] = testGame(2);
+    [/* game */, player, player2] = testGame(2);
   });
 
   it('Add resources', () => {

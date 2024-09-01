@@ -7,7 +7,6 @@ import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {ICard} from '../../../src/server/cards/ICard';
 import {addCity} from '../../TestingUtils';
-import {IGame} from '../../../src/server/IGame';
 import {PharmacyUnion} from '../../../src/server/cards/promo/PharmacyUnion';
 import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCulture';
 
@@ -15,7 +14,6 @@ describe('Hospitals', function() {
   let card: Hospitals;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: IGame;
   let pharmacy: PharmacyUnion;
   let other: IProjectCard;
 

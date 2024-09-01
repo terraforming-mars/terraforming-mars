@@ -82,6 +82,7 @@ import {Teslaract} from './Teslaract';
 import {TopsoilContract} from './TopsoilContract';
 import {TychoMagnetics} from './TychoMagnetics';
 import {StrategicBasePlanning} from './StrategicBasePlanning';
+import {Hospitals} from './Hospitals';
 
 export const PROMO_CARD_MANIFEST = new ModuleManifest({
   module: 'promo',
@@ -150,6 +151,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.SOIL_ENRICHMENT]: {Factory: SoilEnrichment},
     [CardName.CITY_PARK]: {Factory: CityPark},
     [CardName.SUPERMARKETS]: {Factory: Supermarkets},
+    [CardName.HOSPITALS]: {Factory: Hospitals},
   },
 
   preludeCards: {

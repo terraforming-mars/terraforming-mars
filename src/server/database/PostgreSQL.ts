@@ -52,15 +52,42 @@ export class PostgreSQL implements IDatabase {
   public async initialize(): Promise<void> {
     const {Pool} = await import('pg');
     this._client = new Pool(this.config);
-    await this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))');
-    await this.client.query('CREATE TABLE IF NOT EXISTS participants(game_id varchar, participants varchar[], PRIMARY KEY (game_id))');
-    await this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
-    await this.client.query('CREATE TABLE IF NOT EXISTS completed_game(game_id varchar not null, completed_time timestamp default now(), PRIMARY KEY (game_id))');
 
-    await this.client.query('CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)');
-    await this.client.query('CREATE INDEX IF NOT EXISTS games_i2 on games(created_time)');
-    await this.client.query('CREATE INDEX IF NOT EXISTS participants_idx_ids on participants USING GIN (participants)');
-    await this.client.query('CREATE INDEX IF NOT EXISTS completed_game_idx_completed_time on completed_game(completed_time)');
+    const sql = `
+    CREATE TABLE IF NOT EXISTS games(
+      game_id varchar,
+      players integer,
+      save_id integer,
+      game text,
+      status text default 'running',
+      created_time timestamp default now(),
+      PRIMARY KEY (game_id, save_id));
+
+    CREATE TABLE IF NOT EXISTS participants(
+      game_id varchar,
+      participants varchar[],
+      PRIMARY KEY (game_id));
+
+    CREATE TABLE IF NOT EXISTS game_results(
+      game_id varchar not null,
+      seed_game_id varchar,
+      players integer,
+      generations integer,
+      game_options text,
+      scores text,
+      PRIMARY KEY (game_id));
+
+    CREATE TABLE IF NOT EXISTS completed_game(
+      game_id varchar not null,
+      completed_time timestamp default now(),
+      PRIMARY KEY (game_id));
+
+    CREATE INDEX IF NOT EXISTS games_i1 on games(save_id);
+    CREATE INDEX IF NOT EXISTS games_i2 on games(created_time);
+    CREATE INDEX IF NOT EXISTS participants_idx_ids on participants USING GIN (participants);
+    CREATE INDEX IF NOT EXISTS completed_game_idx_completed_time on completed_game(completed_time);
+    `;
+    await this.client.query(sql);
   }
 
   public async getPlayerCount(gameId: GameId): Promise<number> {
@@ -206,7 +233,7 @@ export class PostgreSQL implements IDatabase {
   }
 
   async saveGame(game: IGame): Promise<void> {
-    const gameJSON = game.toJSON();
+    const gameJSON = JSON.stringify(game.serialize());
     this.statistics.saveCount++;
     if (game.gameOptions.undoOption) logForUndo(game.id, 'start save', game.lastSaveId);
     try {
@@ -322,5 +349,7 @@ export class PostgreSQL implements IDatabase {
 }
 
 function logForUndo(gameId: string, ...message: any[]) {
-  console.error(['TRACKING:', gameId, ...message]);
+  if (process.env.LOG_FOR_UNDO) {
+    console.error(['TRACKING:', gameId, ...message]);
+  }
 }

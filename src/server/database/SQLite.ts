@@ -185,7 +185,7 @@ export class SQLite implements IDatabase {
   }
 
   async saveGame(game: IGame): Promise<void> {
-    const gameJSON = game.toJSON();
+    const gameJSON = JSON.stringify(game.serialize());
     // Insert
     await this.runQuietly(
       'INSERT INTO games (game_id, save_id, game, players) VALUES (?, ?, ?, ?) ON CONFLICT (game_id, save_id) DO UPDATE SET game = ?',

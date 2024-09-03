@@ -19,7 +19,7 @@
       -->
       <input type="checkbox" name="autopass" id="autopass-checkbox" v-model="autopass" v-on:change="updateAutopass">
       <label for="autopass-checkbox">
-          <span v-i18n>Automatically pass</span>
+          <span v-i18n>Automatically pass on your next action</span>
       </label>
     </template>
     <!-- <template v-if="waitingfor !== undefined && waitingfor.showReset && playerView.players.length === 1">

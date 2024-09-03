@@ -107,23 +107,15 @@ export class Tags {
   }
 
   /**
-   * Returns true if `card` has `tag`. This does not include wild tags, but it includes
-   * Habitat Marte and Earth Embassy exceptions.
+   * Returns true if `card` has `tag`. This includes Habitat Marte, but not wild tags and
+   * not Earth Embassy.
    */
-  // TODO(kberg): this performs the same if the card is drawn or played, and that's not
-  // always correct, specifically for Earth Embassy. For instance, you should not be able to
-  // draw a card with an Earth tag and get a card with a Moon card (and no Earth tags.)
   public cardHasTag(card: ICard, target: Tag): boolean {
     for (const tag of card.tags) {
       if (tag === target) return true;
       if (tag === Tag.MARS &&
         target === Tag.SCIENCE &&
         this.player.isCorporation(CardName.HABITAT_MARTE)) {
-        return true;
-      }
-      if (tag === Tag.MOON &&
-        target === Tag.EARTH &&
-        this.player.cardIsInEffect(CardName.EARTH_EMBASSY)) {
         return true;
       }
     }
@@ -143,9 +135,6 @@ export class Tags {
         count++;
       } else if (tag === Tag.MARS && target === Tag.SCIENCE &&
         this.player.isCorporation(CardName.HABITAT_MARTE)) {
-        count++;
-      } else if (tag === Tag.MOON && target === Tag.EARTH &&
-        this.player.cardIsInEffect(CardName.EARTH_EMBASSY)) {
         count++;
       }
     }
@@ -168,7 +157,7 @@ export class Tags {
   /**
    * Return the total number of tags associated with these types.
    * Tag substitutions are included, and not counted repeatedly.
-    */
+   */
   public multipleCount(tags: Array<Tag>, mode: MultipleCountMode = 'default'): number {
     const includeEvents = this.player.isCorporation(CardName.ODYSSEY);
 

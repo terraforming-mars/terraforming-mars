@@ -52,9 +52,9 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
   }
 
   public async afterEach() {
-    await this.client.query('DROP TABLE games');
-    await this.client.query('DROP TABLE game_results');
-    await this.client.query('DROP TABLE participants');
+    await this.client.query('DROP TABLE IF EXISTS games');
+    await this.client.query('DROP TABLE IF EXISTS game_results');
+    await this.client.query('DROP TABLE IF EXISTS participants');
   }
 
   public getStatistics() {
@@ -428,9 +428,7 @@ describeDatabaseSuite({
       expect(player.actionsTakenThisRound).eq(5);
 
       // Trigger an undo
-      // This is embedded in routes/PlayerInput, and should be moved out of there.
-      const restorePoint = game.lastSaveId - 2;
-      const newGame = await GameLoader.getInstance().restoreGameAt(player.game.id, restorePoint);
+      const newGame = await GameLoader.getInstance().restoreGameAt(player.game.id, 4);
       await db.awaitAllSaves();
       const revisedPlayer = newGame.getPlayerById(player.id);
       expect(revisedPlayer.megaCredits).eq(4);

@@ -316,7 +316,7 @@
     "Please Login with right user": "Bitte logge dich mit dem richtigen Benutzer ein",
     "Undoing, Please refresh or wait seconds": "Rückgängig, bitte aktualisiere or warte einige Sekunden",
     "Pass": "Passen",
-    "Automatically pass on your next action": "Automatisch Passen",
+    "Automatically pass after this action": "Automatisch Passen",
     "Pay for a Standard Project": "Bezahle für ein Standardprojekt",
     "Play project card": "Karte ausspielen",
     "Fund an award (${0} M€)": "Auszeichnung finanzieren (${0} M€)",

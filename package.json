@@ -41,6 +41,7 @@
     "eslint": "^8.20.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-vue": "^9.2.0",
+    "fast-json-patch": "^3.1.1",
     "fork-ts-checker-webpack-plugin": "^6.2.13",
     "jsdom": "^22.1.0",
     "less": "^3.10.3",

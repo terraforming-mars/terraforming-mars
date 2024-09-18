@@ -7,6 +7,7 @@ import {SerializedGame} from '../SerializedGame';
 import {daysAgoToSeconds} from './utils';
 import {GameIdLedger} from './IDatabase';
 import {oneWayDifference} from '../../common/utils/utils';
+import { applyPatch, compare } from 'fast-json-patch';
 
 type StoredSerializedGame = Omit<SerializedGame, 'gameOptions' | 'gameLog'> & {logLength: number};
 
@@ -166,24 +167,49 @@ export class PostgreSQL implements IDatabase {
   }
 
   public async getGame(gameId: GameId): Promise<SerializedGame> {
-    // Retrieve last save from database
-    const res = await this.client.query(
-      `SELECT
-        games.game as game,
-        game.log as log,
-        game.options as options
-      FROM games
-      LEFT JOIN game on game.game_id = games.game_id
-      WHERE games.game_id = $1
-      ORDER BY save_id DESC LIMIT 1`,
-      [gameId],
+    // Load the initial game state with save_id = 0
+    const initialGameState = await this.client.query(
+      `SELECT game AS full_game_state
+       FROM games
+       LEFT JOIN game ON game.game_id = games.game_id
+       WHERE games.game_id = $1 AND games.save_id = 0 LIMIT 1`,
+      [gameId]
     );
-    if (res.rows.length === 0 || res.rows[0] === undefined) {
-      throw new Error(`Game ${gameId} not found`);
+
+    if (initialGameState.rows.length === 0 || initialGameState.rows[0] === undefined) {
+      throw new Error(`Initial game state for ${gameId} not found`);
     }
-    const row = res.rows[0];
-    return this.compose(row.game, row.log, row.options);
+
+    const initialGameJSON = initialGameState.rows[0].full_game_state;
+    if (!initialGameJSON) {
+      throw new Error(`No initial game JSON found for ${gameId}`);
+    }
+
+    // Load the latest game state (patch) with the maximum save_id
+    const latestGameStatePatch = await this.client.query(
+      `SELECT game AS patch, log AS latest_log, options AS latest_options
+       FROM games
+       LEFT JOIN game ON game.game_id = games.game_id
+       WHERE games.game_id = $1
+       AND games.save_id = (
+         SELECT MAX(save_id) FROM games WHERE game_id = $1
+       ) LIMIT 1`,
+      [gameId]
+    );
+
+    if (latestGameStatePatch.rows.length === 0 || latestGameStatePatch.rows[0] === undefined) {
+      throw new Error(`Latest game state for ${gameId} not found`);
+    }
+
+    const latestRow = latestGameStatePatch.rows[0];
+    const latestPatch = latestRow.patch;
+    const latestLog = latestRow.latest_log;
+    const latestOptions = latestRow.latest_options;
+    const finalGame = applyPatch(JSON.parse(initialGameJSON), JSON.parse(latestPatch)).newDocument;
+
+  return this.compose(JSON.stringify(finalGame), latestLog, latestOptions);
   }
+
 
   async getGameVersion(gameId: GameId, saveId: number): Promise<SerializedGame> {
     const res = await this.client.query(
@@ -295,16 +321,20 @@ export class PostgreSQL implements IDatabase {
     if (game.gameOptions.undoOption) logForUndo(game.id, 'start save', game.lastSaveId);
     try {
       await this.client.query('BEGIN');
-
       // Holding onto a value avoids certain race conditions where saveGame is called twice in a row.
       const thisSaveId = game.lastSaveId;
+
+      const { rows } = await this.client.query(`SELECT game FROM games WHERE game_id = $1 AND save_id = 0 LIMIT 1`, [game.id]);
+      const initGameJsonOrDiff = rows[0]?.game
+        ? JSON.stringify(compare(JSON.parse(rows[0].game), JSON.parse(gameJSON)))
+        : gameJSON;
       // xmax = 0 is described at https://stackoverflow.com/questions/39058213/postgresql-upsert-differentiate-inserted-and-updated-rows-using-system-columns-x
       const res = await this.client.query(
         `INSERT INTO games (game_id, save_id, game, players)
         VALUES ($1, $2, $3, $4)
         ON CONFLICT (game_id, save_id) DO UPDATE SET game = $3
         RETURNING (xmax = 0) AS inserted`,
-        [game.id, game.lastSaveId, gameJSON, game.getPlayers().length]);
+        [game.id, game.lastSaveId, initGameJsonOrDiff, game.getPlayers().length]);
 
       await this.client.query(
         `INSERT INTO game (game_id, log, options)

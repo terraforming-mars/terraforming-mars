@@ -112,7 +112,6 @@
     "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.": "Umieść 1 kolonię na kaflu obiektu. Możesz ją umieścić na obiekcie, na którym masz już kolonię. Dobierz 2 karty.",
 
     "Rim Freighters": "Przewoźnicy Rubieży",
-    "Effect: When you trade, you pay 1 less resource for it.": "Efekt trwały: Gdy wykonujesz akcję handlu z obiektem, płacisz o 1 jednostkę zasobów mniej.",
 
     "Sky Docks": "Podniebna Stacja Przeładunkowa",
     "Effect: When you play a card, you pay 1 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę, płacisz za nią o 1 M€ mniej.",
@@ -141,7 +140,6 @@
     "Requires -6 C. Decrease any plant production 1 step.": "Temperatura musi wynosić co najmniej -6°C. Obniż produkcję roślinności dowolnego gracza o 1 poziom.",
 
     "Titan Air-scrapping": "Zagarnianie Atmosfery na Tytanie",
-    "Action: Spend 1 titanium to add 2 floaters here.": "Akcja: Wydaj 1 jednostkę tytanu, aby umieścić na tej karcie 2 jednostki dryfowców.",
     "Action: Spend 2 floaters here to increase your TR 1 step.": "Akcja: Wydaj 2 jednostki dryfowców z tej karty, aby podnieść swój WT o 1 poziom.",
 
     "Titan Floating Launch-pad": "Dryfujące Lądowisko na Tytanie",
@@ -156,7 +154,6 @@
     "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "Efekt trwały: Gdy wykonujesz akcję handlu z obiektem, możesz najpierw przesunąć biały znacznik obiektu o 1 pole w prawo na torze kolonii.",
 
     "Trading Colony": "Kolonia Handlowa",
-    "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "Efekt trwały: Gdy wykonujesz akcję handlu z obiektem, możesz najpierw przesunąć biały znacznik obiektu o 1 pole w prawo na torze kolonii.",
     "Place a colony": "Umieść 1 kolonię na kaflu obiektu.",
 
     "Urban Decomposers": "Miejscy Reducenci",

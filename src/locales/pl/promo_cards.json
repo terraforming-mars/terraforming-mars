@@ -20,8 +20,8 @@
     "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "Możesz zagrać te kartę, jeśli którykolwiek z graczy spowodował, że inny gracz musiał stracić w tym pokoleniu jednostki roślinności. Otrzymujesz 1 jednostkę tytanu lub 2 jednostki stali.",
     
 	"Directed Impactors": "Sterowane Uderzenia",
-    "(Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).)": "Akcja: Wydaj 6 M€ (możesz użyć jednostek tytanu), aby umieścić 1 jednostkę asteroid na dowolnej karcie.",
-    "(Action: Remove 1 asteroid here to raise temperature 1 step.)": "Akcja: Wydaj 1 jednostkę asteroid z tej karty, aby podnieść temperaturę o 1 poziom.)",
+    "(Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).)": "Akcja: Wydaj 6 M€ (można użyć tytanu), aby umieścić 1 jednostkę asteroid na dowolnej karcie.",
+    "(Action: Remove 1 asteroid here to raise temperature 1 step.)": "Akcja: Wydaj 1 jednostkę asteroid z tej karty, aby podnieść temperaturę o 1 poziom.",
     
 	"Field-Capped City": "Miasto pod Kopułą",
     "(Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.)": "Podnieś swoją produkcję M€ o 2 poziomy. Podnieś swoją produkcję energii o 1 poziom. Otrzymujesz 3 jednostki roślinności. Umieść na planszy obszar miasta.",
@@ -133,13 +133,13 @@
     "Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.": "Dobierz 1 kartę. Wybierz 1 z zagranych kart i dodaj na nią 1 jednostkę mikrobów za każdy posiadany symbol Nauki, ten włącznie.",
     
 	"Bio Printing Facility": "Ośrodek bio drukowania",
-    "Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.": "Akcja: Wydaj 2 jednostki energii by otrzymac 2 jednostki roślinności lub dodaj jednostkę zwierząt na inną kartę.",
+    "Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.": "Akcja: Wydaj 2 jednostki energii aby otrzymać 2 jednostki roślinności lub dodaj jednostkę zwierząt na inną kartę.",
     
 	"Harvest": "Żniwa",
     "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "Musisz mieć co najmniej 3 kafelki zieleni. Otrzymujesz 12 M€.",
     
 	"Outdoor Sports": "Sport pod gołym niebem",
-    "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "Musisz mieć co najmniej jedno miasto przylegające do oceanu. Podnieś swój poziom produkcji M€ o 2.",
+    "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "Na planszy musi być co najmniej jedno miasto przylegające do oceanu. Podnieś swój poziom produkcji M€ o 2.",
     
   "16 Psyche": "16 Psyche",
     "Increase titanium production 2 steps. Gain 3 titanium.": "Zwiększ produkcję tytanu 2 poziomy. Otrzymaj 3 jednostki tytanu.",

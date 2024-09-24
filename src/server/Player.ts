@@ -455,17 +455,14 @@ export class Player implements IPlayer {
     }
 
     // The pathfindersExpansion test is just an optimization for non-Pathfinders games.
-    if (this.game.gameOptions.pathfindersExpansion && this.productionIsProtected(attacker)) return false;
+    if (attacker !== this && this.cardIsInEffect(CardName.PRIVATE_SECURITY)) {
+      return false;
+    }
     return true;
   }
 
-
   public maybeBlockAttack(perpetrator: IPlayer, cb: (proceed: boolean) => PlayerInput | undefined): void {
     this.defer(UnderworldExpansion.maybeBlockAttack(this, perpetrator, cb));
-  }
-
-  public productionIsProtected(attacker: IPlayer): boolean {
-    return attacker !== this && this.cardIsInEffect(CardName.PRIVATE_SECURITY);
   }
 
   public resolveInsurance() {

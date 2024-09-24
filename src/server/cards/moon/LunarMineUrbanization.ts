@@ -51,7 +51,7 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
         if (space.tile === undefined) {
           throw new Error(`Space ${space.id} should have a tile, how doesn't it?`);
         }
-        // #6892, make compatible with Hostile Takeover
+        // #6982, make compatible with Hostile Takeover
         const owner = space.player;
         const coOwner = space.coOwner;
 

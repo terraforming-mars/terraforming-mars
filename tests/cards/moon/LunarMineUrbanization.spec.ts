@@ -169,7 +169,7 @@ describe('LunarMineUrbanization', () => {
     expect(player.megaCredits).eq(2);
   });
 
-  it('Can be played on Hostile Takeover space, #6892', () => {
+  it('Can be played on Hostile Takeover space, #6982', () => {
     const space = moonData.moon.getAvailableSpacesOnLand(player)[0];
     space.tile = {tileType: TileType.MOON_MINE};
     space.player = player2;

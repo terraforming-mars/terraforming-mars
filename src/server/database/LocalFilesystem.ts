@@ -12,6 +12,7 @@ export class LocalFilesystem implements IDatabase {
   protected readonly dbFolder: string;
   private readonly historyFolder: string;
   private readonly completedFolder: string;
+  public static quiet: boolean = false;
 
   constructor(dbFolder: string = defaultDbFolder) {
     this.dbFolder = dbFolder;
@@ -98,7 +99,7 @@ export class LocalFilesystem implements IDatabase {
 
   getGameVersion(gameId: GameId, saveId: number): Promise<SerializedGame> {
     try {
-      console.log(`Loading ${gameId} at ${saveId}`);
+      if (!LocalFilesystem.quiet) console.log(`Loading ${gameId} at ${saveId}`);
       const text = readFileSync(this.historyFilename(gameId, saveId));
       const serializedGame = JSON.parse(text.toString());
       return Promise.resolve(serializedGame);

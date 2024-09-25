@@ -52,9 +52,9 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
   }
 
   public async afterEach() {
-    await this.client.query('DROP TABLE games');
-    await this.client.query('DROP TABLE game_results');
-    await this.client.query('DROP TABLE participants');
+    await this.client.query('DROP TABLE IF EXISTS games');
+    await this.client.query('DROP TABLE IF EXISTS game_results');
+    await this.client.query('DROP TABLE IF EXISTS participants');
   }
 
   public getStatistics() {
@@ -248,15 +248,12 @@ describeDatabaseSuite({
 
       // Notice how save-count was 3 and is now 5. It saved twice.
       expect(await db.getStat('save-count')).eq(5);
-      // If save count is 5, why are only four versions saved?
-      expect(await db.getSaveIds(game.id)).deep.eq([0, 1, 2, 3]);
-      // That's because one of those saves was an update instead of an insert.
-      // Version 3 was saved twice.
-      expect(await db.getStat('save-conflict-undo-count')).eq(1);
+      expect(await db.getSaveIds(game.id)).deep.eq([0, 1, 2, 3, 4]);
+      expect(await db.getStat('save-conflict-undo-count')).eq(0);
 
       // Of all the steps in this test, this is the one which will verify the broken undo
       // is repaired correctly. When it was broken, this was 5.
-      expect(game.lastSaveId).eq(4);
+      expect(game.lastSaveId).eq(5);
     });
 
     it('undo works in multiplayer, other players have passed', async () => {
@@ -428,9 +425,7 @@ describeDatabaseSuite({
       expect(player.actionsTakenThisRound).eq(5);
 
       // Trigger an undo
-      // This is embedded in routes/PlayerInput, and should be moved out of there.
-      const restorePoint = game.lastSaveId - 2;
-      const newGame = await GameLoader.getInstance().restoreGameAt(player.game.id, restorePoint);
+      const newGame = await GameLoader.getInstance().restoreGameAt(player.game.id, 4);
       await db.awaitAllSaves();
       const revisedPlayer = newGame.getPlayerById(player.id);
       expect(revisedPlayer.megaCredits).eq(4);

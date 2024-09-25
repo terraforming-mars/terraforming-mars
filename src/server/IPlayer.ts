@@ -201,12 +201,6 @@ export interface IPlayer {
   maybeBlockAttack(perpetrator: IPlayer, cb: (proceed: boolean) => PlayerInput | undefined): void;
 
   /**
-   * Return true if this player cannot have their production reduced.
-   *
-   * It can if this player is attacking themselves, or if this player has played Private Security.
-   */
-  productionIsProtected(attacker: IPlayer): boolean;
-  /**
    * In the multiplayer game, after an attack, the attacked player makes a claim
    * for insurance. If Mons Insurance is in the game, the claimant will receive
    * as much as possible from the insurer.

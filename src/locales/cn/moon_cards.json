@@ -71,7 +71,7 @@
   "Spend 1 titanium. Increase your titanium production 2 steps. Raise the mining rate 1 step.":"花1钛。增加你的钛产量2级。提高采矿效率1级。",
 
   "Earth Embassy":"地球大使馆",
-  "Effect: After being played, when you perform an action, your Moon tags count as Earth tags, but not vice versa.":"效果：在打出后，当你执行一个动作时，你的月球标签算作地球标签，但反向不成立。",
+  "Effect: When you perform an action, your PLAYED Moon tags count as Earth tags, but not vice versa.":"效果：在打出后，当你执行一个动作时，你的月球标签算作地球标签，但反向不成立。",
 
   "Geodesic Tents": "测量营地",
   "Decrease your energy production 1 step and increase your plant production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "降低电产和植物产量 1。花费1个钛。 在月球上放置一块殖民地砖，并提高 殖民效率 1级。",

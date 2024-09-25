@@ -8,6 +8,8 @@ import {daysAgoToSeconds} from './utils';
 import {GameIdLedger} from './IDatabase';
 import {oneWayDifference} from '../../common/utils/utils';
 
+type StoredSerializedGame = Omit<SerializedGame, 'gameOptions' | 'gameLog'> & {logLength: number};
+
 export class PostgreSQL implements IDatabase {
   private databaseName: string | undefined = undefined; // Use this only for stats.
 
@@ -63,6 +65,16 @@ export class PostgreSQL implements IDatabase {
       created_time timestamp default now(),
       PRIMARY KEY (game_id, save_id));
 
+    /* A single game, storing the log and the options. Normalizing out some of the game state. */
+    CREATE TABLE IF NOT EXISTS game(
+      game_id varchar NOT NULL,
+      log text NOT NULL,
+      options text NOT NULL,
+      status text default 'running' NOT NULL,
+      created_time timestamp default now() NOT NULL,
+      PRIMARY KEY (game_id));
+
+    /* A list of the players and spectator IDs, which optimizes loading unloaded for a specific player. */
     CREATE TABLE IF NOT EXISTS participants(
       game_id varchar,
       participants varchar[],
@@ -116,14 +128,19 @@ export class PostgreSQL implements IDatabase {
     return res.rows.map((row) => row.game_id);
   }
 
-  public async getGame(gameId: GameId): Promise<SerializedGame> {
-    // Retrieve last save from database
-    const res = await this.client.query('SELECT game game FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT 1', [gameId]);
-    if (res.rows.length === 0 || res.rows[0] === undefined) {
-      throw new Error(`Game ${gameId} not found`);
+  private compose(game: string, log: string, options: string): SerializedGame {
+    const stored: StoredSerializedGame = JSON.parse(game);
+    const {logLength, ...remainder} = stored;
+    // console.log(log, options, stored.logLength);
+    // TODO(kberg): Remove the outer join, and the else of this conditional by 2025-01-01
+    if (stored.logLength !== undefined) {
+      const gameLog = JSON.parse(log);
+      gameLog.length = logLength;
+      const gameOptions = JSON.parse(options);
+      return {...remainder, gameOptions, gameLog};
+    } else {
+      return remainder as SerializedGame;
     }
-    const json = JSON.parse(res.rows[0].game);
-    return json;
   }
 
   public async getGameId(participantId: ParticipantId): Promise<GameId> {
@@ -148,12 +165,44 @@ export class PostgreSQL implements IDatabase {
     return Promise.resolve(allSaveIds);
   }
 
+  public async getGame(gameId: GameId): Promise<SerializedGame> {
+    // Retrieve last save from database
+    const res = await this.client.query(
+      `SELECT
+        games.game as game,
+        game.log as log,
+        game.options as options
+      FROM games
+      LEFT JOIN game on game.game_id = games.game_id
+      WHERE games.game_id = $1
+      ORDER BY save_id DESC LIMIT 1`,
+      [gameId],
+    );
+    if (res.rows.length === 0 || res.rows[0] === undefined) {
+      throw new Error(`Game ${gameId} not found`);
+    }
+    const row = res.rows[0];
+    return this.compose(row.game, row.log, row.options);
+  }
+
   async getGameVersion(gameId: GameId, saveId: number): Promise<SerializedGame> {
-    const res = await this.client.query('SELECT game game FROM games WHERE game_id = $1 and save_id = $2', [gameId, saveId]);
+    const res = await this.client.query(
+      `SELECT
+        games.game as game,
+        game.log as log,
+        game.options as options
+      FROM games
+      LEFT JOIN game on game.game_id = games.game_id
+      WHERE games.game_id = $1
+      AND games.save_id = $2`,
+      [gameId, saveId],
+    );
+
     if (res.rowCount === 0) {
       throw new Error(`Game ${gameId} not found at save_id ${saveId}`);
     }
-    return JSON.parse(res.rows[0].game);
+    const row = res.rows[0];
+    return this.compose(row.game, row.log, row.options);
   }
 
   saveGameResults(gameId: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
@@ -233,10 +282,20 @@ export class PostgreSQL implements IDatabase {
   }
 
   async saveGame(game: IGame): Promise<void> {
-    const gameJSON = JSON.stringify(game.serialize());
+    const serialized = game.serialize();
+    const options = JSON.stringify(serialized.gameOptions);
+    const log = JSON.stringify(serialized.gameLog);
+
+    const storedSerialized: StoredSerializedGame = {...serialized, logLength: game.gameLog.length};
+    (storedSerialized as any).gameLog = [];
+    (storedSerialized as any).gameOptions = {};
+    const gameJSON = JSON.stringify(storedSerialized);
+
     this.statistics.saveCount++;
     if (game.gameOptions.undoOption) logForUndo(game.id, 'start save', game.lastSaveId);
     try {
+      await this.client.query('BEGIN');
+
       // Holding onto a value avoids certain race conditions where saveGame is called twice in a row.
       const thisSaveId = game.lastSaveId;
       // xmax = 0 is described at https://stackoverflow.com/questions/39058213/postgresql-upsert-differentiate-inserted-and-updated-rows-using-system-columns-x
@@ -246,6 +305,13 @@ export class PostgreSQL implements IDatabase {
         ON CONFLICT (game_id, save_id) DO UPDATE SET game = $3
         RETURNING (xmax = 0) AS inserted`,
         [game.id, game.lastSaveId, gameJSON, game.getPlayers().length]);
+
+      await this.client.query(
+        `INSERT INTO game (game_id, log, options)
+        VALUES ($1, $2, $3)
+        ON CONFLICT (game_id)
+        DO UPDATE SET log = $2`,
+        [game.id, log, options]);
 
       game.lastSaveId = thisSaveId + 1;
 
@@ -273,7 +339,10 @@ export class PostgreSQL implements IDatabase {
       }
 
       if (game.gameOptions.undoOption) logForUndo(game.id, 'increment save id, now', game.lastSaveId);
+
+      await this.client.query('COMMIT');
     } catch (err) {
+      await this.client.query('ROLLBACK');
       this.statistics.saveErrorCount++;
       console.error('PostgreSQL:saveGame', err);
     }

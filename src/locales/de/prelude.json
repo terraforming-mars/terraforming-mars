@@ -8,13 +8,13 @@
     "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "Effekt: Erhöhe entweder die Temperatur um 4°C oder den Sauerstoffsgehalt um 2% oder die Venuswertung um 4%. Decke Karten vom Stapel auf, bis du 2 Karten mit Schwebersymbol aufgedeckt hast. Nimm diese 2 Karten auf die Hand und wirf den Rest ab.",
 
     "Board of Directors": "Direktorium",
-    "ACTION:": "AKTION:",
+    "ACTION: ": "AKTION: ",
     "DRAW 1 PRELUDE CARD: EITHER DISCARD IT, OR PAY 12 M€ AND REMOVE 1 DIRECTOR RESOURCE HERE TO PLAY IT.": "Ziehe 1 Präludium-Karte: Entweder du wirfst sie ab, oder du zahlst 12 M€ und entfernst 1 Direktorressource, um sie auszuspielen.",
     "This is not the director icon yet.": "Dies ist noch nicht das Symbol des Direktors.",
     "Add 4 director resources here.": "Füge hier 4 Direktor-Ressourcen hinzu.",
     
     "Colony Trade Hub": "Kolonie Handelszentrum",
-    "Increase your energy production 1 step. Gain 2 titanium": "Erhöhe deine Energieproduktion um 1. Erhalte 3 Titan.",
+    "Increase your energy production 1 step. Gain 2 titanium": "Erhöhe deine Energieproduktion um 1. Erhalte 2 Titan.",
     "Effect: When any colony is placed, gain 2 M€.": "EFFEKT: Wenn eine Kolonie platziert wird, erhalte 2 M€.",
 
     "Corridors of Power": "Korridore der Macht",
@@ -37,6 +37,9 @@
     "Raise your TR 1 step and draw 1 card with PARTY REQUIREMENT. Place 2 delegates in one party.": "Erhöhe deinen TW um 1 und ziehe 1 Karte mit Partei-Bedingungen. Platziere 2 Delegierte in einer Partei.",
     "Effect: You have +1 influence.": "EFFEKT: Du erhältst 1 Einfluss.",
 
+    "Industrial Complex": "Industriekomplex",
+    "Lose 18 M€. INCREASE ALL YOUR PRODUCTIONS THAT ARE LOWER THAN 1, TO 1.": "Verliere 18 M€. ERHÖHE ALLE DEINE PRODUKTIONEN, DIE KLEINER ALS 1 SIND, AUF 1.",
+
     "Main Belt Asteroids": "Asteroiden des Hauptgürtels",
     "Action: Gain 1 asteroid to ANY CARD.": "AKTION: Erhalte 1 Asteroiden zu einer beliebigen Karte.",
     "Effect: When gaining an asteroid HERE, gain 1 titanium.": "EFFEKT: Wenn du einen Asteroiden auf dieser Karte platzierst, erhalte 1 Titan.",
@@ -54,6 +57,9 @@
     "Preservation Program": "Bewahrungsprogramm",
     "Effect: SKIP THE FIRST TR YOU GAIN IN EACH GENERATION'S ACTION PHASE.": "Effekt: ÜBERSPRINGE DEN ERSTEN TW, DEN DU IN DER AKTIONSPHASE JEDER GENERATION ERHÄLTST.",
     "Raise your TR 5 steps.": "Erhöhe dein TW um 5.",
+
+    "Project Eden": "Projekt Eden",
+    "Place 1 ocean tile, 1 city tile, and 1 greenery tile. Discard 3 cards.": "Platziere 1 Ozean, 1 Stadtplätchen und 1 Grünfläche. Werfe 3 Karten ab.",
 
     "Recession": "Rezession",
     "EACH OPPONENT loses 5 M€ and decreases their M€ production 1 step. You gain 10 M€.": "Alle Mitspieler verlieren 5 M€ und reduzieren ihre M€-Produktion um 1. Du erhälst 10 M€.",
@@ -82,6 +88,10 @@
 
     "Venus L1 Shade": "Venus L1 Schatten",
     "Raise Venus 3 steps.": "Erhöhe die Venuswertung um 6%.",
+
+    "World Government Advisor": "Berater der Weltregierung",
+    "Action: RAISE 1 GLOBAL PARAMETER WITHOUT GETTING ANY TR OR OTHER BONUSES.": "AKTION: 1 GLOBALEN PARAMETER ERHÖHEN, OHNE EINEN TW ODER ANDERE BONI ZU ERHALTEN.",
+    "Raise your TR 2 steps. Draw 1 card.": "Erhöhe deinen TW um 2. Ziehe 1 Karte.",
 
 
     "Strategic Base Planning": "Strategische Basisplannung",

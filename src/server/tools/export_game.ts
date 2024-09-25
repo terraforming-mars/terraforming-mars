@@ -1,7 +1,7 @@
 // Exports a game locally for debugging.
 // See README.md for instructions.
 
-import {writeFileSync} from 'fs';
+import {mkdirSync, writeFileSync} from 'fs';
 import {GameId, isGameId, isPlayerId, isSpectatorId} from '../../common/Types';
 import {Database} from '../database/Database';
 import {IDatabase} from '../database/IDatabase';
@@ -20,6 +20,7 @@ if (process.env.LOCAL_FS_DB !== undefined) {
 
 const db: IDatabase = Database.getInstance();
 const localDb = new LocalFilesystem();
+LocalFilesystem.quiet = true;
 
 async function getGameId(id: string): Promise<GameId | undefined> {
   if (isGameId(id)) {
@@ -42,6 +43,24 @@ async function main() {
   await load(gameId);
 }
 
+function showProgressBar(current: number, total: number, width: number = process.stdout.columns ?? 40) {
+  const bar = '█';
+  const emptyBar = ' ';
+
+  // reserve space for the end
+  width = width - 10;
+
+  const filledLength = Math.floor((current / total) * width);
+  const emptyLength = width - filledLength;
+
+  const progressString = bar.repeat(filledLength) + emptyBar.repeat(emptyLength);
+
+  const percentage = Math.round((current / total) * 100);
+
+  const ansiEscapeCode = `\x1b[0G${progressString} ${percentage}% ${current}`;
+  process.stdout.write(ansiEscapeCode);
+}
+
 async function load(gameId: GameId) {
   await localDb.initialize();
   console.log(`Loading game ${gameId}`);
@@ -55,7 +74,7 @@ async function load(gameId: GameId) {
   for (const saveId of saveIds) {
     try {
       const serialized = await db.getGameVersion(gameId, saveId);
-      console.log(`Storing version ${saveId}`);
+      showProgressBar(saveId, game.lastSaveId);
       localDb.saveSerializedGame(serialized);
       writes++;
     } catch (err) {
@@ -64,8 +83,17 @@ async function load(gameId: GameId) {
     }
   }
 
+  console.log(); // Necessary because of the ANSI output above.
+
+  try {
+    mkdirSync('logs');
+  } catch (_) {
+    // ignored. Most of the time this isn't a problem.
+  }
+
   const logs = await exportLogs(localDb, gameId);
   const logFilename = `logs/${gameId}.log`;
+
   writeFileSync(logFilename, logs.join('\n'));
   console.log(`Log at ${logFilename}`);
   console.log(`Wrote ${writes} records and had ${errors} failures.`);

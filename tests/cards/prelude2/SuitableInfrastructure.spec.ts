@@ -3,6 +3,13 @@ import {SuitableInfrastructure} from '../../../src/server/cards/prelude2/Suitabl
 import {testGame} from '../../TestGame';
 import {IPlayer} from '../../../src/server/IPlayer';
 import {Resource} from '../../../src/common/Resource';
+import {PowerPlantStandardProject} from '../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
+import {cast, runAllActions} from '../../TestingUtils';
+
+function simulateFinishingAction(player: IPlayer) {
+  player.actionsTakenThisGame++;
+  player.actionsTakenThisRound++;
+}
 
 describe('SuitableInfrastructure', () => {
   it('effect', () => {
@@ -10,11 +17,6 @@ describe('SuitableInfrastructure', () => {
     const [/* game */, player] = testGame(1);
 
     player.playedCards.push(card);
-
-    function simulateFinishingAction(player: IPlayer) {
-      player.actionsTakenThisGame++;
-      player.actionsTakenThisRound++;
-    }
 
     expect(player.stock.megacredits).eq(0);
     player.production.add(Resource.ENERGY, 1);
@@ -30,5 +32,21 @@ describe('SuitableInfrastructure', () => {
     expect(player.stock.megacredits).eq(4);
 
     simulateFinishingAction(player);
+  });
+
+  it('works with Power Plant standard project', () => {
+    const card = new SuitableInfrastructure();
+    const [game, player] = testGame(1);
+
+    player.playedCards.push(card);
+    player.megaCredits = 11;
+    cast(new PowerPlantStandardProject().action(player), undefined);
+    runAllActions(game);
+
+    expect(player.stock.megacredits).eq(2);
+
+    simulateFinishingAction(player);
+
+    expect(player.stock.megacredits).eq(2);
   });
 });

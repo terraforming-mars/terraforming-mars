@@ -24,7 +24,7 @@ export class PostgreSQL implements IDatabase {
 
   protected get client(): pg.Pool {
     if (this._client === undefined) {
-      throw new Error('attempt to get client before intialized');
+      throw new Error('attempt to get client before initialized');
     }
     return this._client;
   }
@@ -166,49 +166,35 @@ export class PostgreSQL implements IDatabase {
     return Promise.resolve(allSaveIds);
   }
 
-  public async getGame(gameId: GameId): Promise<SerializedGame> {
-    // Load the initial game state with save_id = 0
-    const initialGameState = await this.client.query(
-      `SELECT game AS full_game_state
-       FROM games
-       LEFT JOIN game ON game.game_id = games.game_id
-       WHERE games.game_id = $1 AND games.save_id = 0 LIMIT 1`,
-      [gameId]
-    );
+public async getGame(gameId: GameId): Promise<SerializedGame> {
+  const allGameStates = await this.client.query(
+    `SELECT game AS patch, log, options, save_id
+     FROM games
+     LEFT JOIN game ON game.game_id = games.game_id
+     WHERE games.game_id = $1
+     ORDER BY games.save_id`,
+    [gameId]
+  );
 
-    if (initialGameState.rows.length === 0 || initialGameState.rows[0] === undefined) {
-      throw new Error(`Initial game state for ${gameId} not found`);
-    }
-
-    const initialGameJSON = initialGameState.rows[0].full_game_state;
-    if (!initialGameJSON) {
-      throw new Error(`No initial game JSON found for ${gameId}`);
-    }
-
-    // Load the latest game state (patch) with the maximum save_id
-    const latestGameStatePatch = await this.client.query(
-      `SELECT game AS patch, log AS latest_log, options AS latest_options
-       FROM games
-       LEFT JOIN game ON game.game_id = games.game_id
-       WHERE games.game_id = $1
-       AND games.save_id = (
-         SELECT MAX(save_id) FROM games WHERE game_id = $1
-       ) LIMIT 1`,
-      [gameId]
-    );
-
-    if (latestGameStatePatch.rows.length === 0 || latestGameStatePatch.rows[0] === undefined) {
-      throw new Error(`Latest game state for ${gameId} not found`);
-    }
-
-    const latestRow = latestGameStatePatch.rows[0];
-    const latestPatch = latestRow.patch;
-    const latestLog = latestRow.latest_log;
-    const latestOptions = latestRow.latest_options;
-    const finalGame = applyPatch(JSON.parse(initialGameJSON), JSON.parse(latestPatch)).newDocument;
-
-  return this.compose(JSON.stringify(finalGame), latestLog, latestOptions);
+  if (allGameStates.rows.length === 0) {
+    throw new Error(`No game states found for ${gameId}`);
   }
+
+  let currentGameState = null;
+  latestLog = "";
+  latestOptions = "";
+
+  for (const { save_id, patch, log, options } of allGameStates.rows) {
+    currentGameState = save_id === 0 ? JSON.parse(patch) : applyPatch(currentGameState, JSON.parse(patch)).newDocument;
+    latestLog = log;
+    latestOptions = options;
+  }
+
+  if (!currentGameState) {
+      throw new Error(`Failed to reconstruct game state for ${gameId}`);
+  }
+  return this.compose(JSON.stringify(currentGameState), latestLog, latestOptions);
+}
 
 
   async getGameVersion(gameId: GameId, saveId: number): Promise<SerializedGame> {
@@ -324,9 +310,12 @@ export class PostgreSQL implements IDatabase {
       // Holding onto a value avoids certain race conditions where saveGame is called twice in a row.
       const thisSaveId = game.lastSaveId;
 
-      const { rows } = await this.client.query(`SELECT game FROM games WHERE game_id = $1 AND save_id = 0 LIMIT 1`, [game.id]);
-      const initGameJsonOrDiff = rows[0]?.game
-        ? JSON.stringify(compare(JSON.parse(rows[0].game), JSON.parse(gameJSON)))
+      const { rows } = await this.client.query(`SELECT game, save_id FROM games WHERE game_id = $1 ORDER BY save_id ASC`, [game.id]);
+      const reconstructedLatestGameState = rows.reduce((acc, { game, save_id }) => save_id === 0
+          ? JSON.parse(game)
+          : applyPatch(acc, JSON.parse(game)).newDocument, null);
+      const initGameJsonOrDiff = reconstructedLatestGameState
+        ? JSON.stringify(compare(reconstructedLatestGameState, JSON.parse(gameJSON)))
         : gameJSON;
       // xmax = 0 is described at https://stackoverflow.com/questions/39058213/postgresql-upsert-differentiate-inserted-and-updated-rows-using-system-columns-x
       const res = await this.client.query(

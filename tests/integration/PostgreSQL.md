@@ -29,6 +29,7 @@ sudo nano /etc/postgresql/16/main/pg_hba.conf
 And add this line to the bottom
 
 ```
+# Integration testing for terraforming-mars
 local   all             tfmtest                                 md5
 ```
 
@@ -60,7 +61,7 @@ Now you can run the postgresql test.
 npm run test:integration
 ```
 
-or juts
+or just
 
 ```
 npm run test:postgresql

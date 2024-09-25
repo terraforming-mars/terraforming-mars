@@ -436,5 +436,68 @@ describeDatabaseSuite({
       expect(revisedPlayer.megaCredits).eq(4);
       expect(revisedPlayer.actionsTakenThisRound).eq(4);
     });
+
+    it('saveIds 2', async () => {
+      const db = dbFactory();
+
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-1212', [player], player);
+      await db.lastSaveGamePromise;
+      expect(game.lastSaveId).eq(1);
+
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3, 4, 5]);
+
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
+
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]);
+
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
+
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]);
+
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]);
+
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]);
+    });
   },
 });

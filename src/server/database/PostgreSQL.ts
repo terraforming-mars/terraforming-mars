@@ -344,6 +344,18 @@ export class PostgreSQL implements IDatabase {
       this.statistics.saveErrorCount++;
       console.error('PostgreSQL:saveGame', err);
     }
+    this.trim(game);
+  }
+
+  async trim(game: IGame) {
+    const count = 10;
+    if (game.lastSaveId % count === 0) {
+      const maxSaveId = game.lastSaveId - 10;
+      const res = await this.client.query(
+        'DELETE FROM games WHERE game_id = $1 AND save_id > 0 AND save_id < $2', [game.id, maxSaveId]);
+      console.log(res);
+    }
+    return Promise.resolve();
   }
 
   async deleteGameNbrSaves(gameId: GameId, rollbackCount: number): Promise<void> {

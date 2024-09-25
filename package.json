@@ -7,6 +7,8 @@
   },
   "private": true,
   "dependencies": {
+    "@types/ansi-escape-sequences": "^4.0.4",
+    "ansi-escape-sequences": "^6.2.2",
     "chart.js": "^3.7.0",
     "console-stamp": "3.0.0-rc4.2",
     "cross-env": "^7.0.3",

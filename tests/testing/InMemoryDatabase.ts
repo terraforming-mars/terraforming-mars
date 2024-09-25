@@ -5,7 +5,7 @@ import {GameIdLedger, IDatabase} from '../../src/server/database/IDatabase';
 import {GameId, ParticipantId} from '../../src/common/Types';
 
 export class InMemoryDatabase implements IDatabase {
-  public data: Map<GameId, Array<SerializedGame>> = new Map();
+  public data: Map<GameId, Array<SerializedGame | undefined>> = new Map();
   protected completedGames: Map<GameId, Date> = new Map();
 
   initialize(): Promise<unknown> {
@@ -63,8 +63,8 @@ export class InMemoryDatabase implements IDatabase {
     const gameId = game.id;
     const row = this.data.get(gameId) || [];
     this.data.set(gameId, row);
-    while (row.length < game.lastSaveId) {
-      row.push();
+    while (row.length <= game.lastSaveId) {
+      row.push(undefined);
     }
     row[game.lastSaveId] = game.serialize();
     game.lastSaveId++;
@@ -111,9 +111,12 @@ export class InMemoryDatabase implements IDatabase {
   async getParticipants(): Promise<Array<GameIdLedger>> {
     const entries: Array<GameIdLedger> = [];
     this.data.forEach((games, gameId) => {
-      const firstSave = games[0];
-      const participantIds: Array<ParticipantId> = firstSave.players.map((p) => p.id);
-      if (firstSave.spectatorId) participantIds.push(firstSave.spectatorId);
+      // Last save is always defined
+      const lastSave = games[games.length - 1]!;
+      const participantIds: Array<ParticipantId> = lastSave.players.map((p) => p.id);
+      if (lastSave.spectatorId) {
+        participantIds.push(lastSave.spectatorId);
+      }
       entries.push({gameId, participantIds});
     });
     return entries;

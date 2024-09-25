@@ -6,9 +6,10 @@ import {GameId, ParticipantId, isGameId, safeCast} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
 import {daysAgoToSeconds} from './utils';
 import {GameIdLedger} from './IDatabase';
-import {oneWayDifference} from '../../common/utils/utils';
 
 type StoredSerializedGame = Omit<SerializedGame, 'gameOptions' | 'gameLog'> & {logLength: number};
+
+export const POSTGRESQL_TABLES = ['game', 'games', 'game_results', 'participants', 'completed_game'] as const;
 
 export class PostgreSQL implements IDatabase {
   private databaseName: string | undefined = undefined; // Use this only for stats.
@@ -292,7 +293,6 @@ export class PostgreSQL implements IDatabase {
     const gameJSON = JSON.stringify(storedSerialized);
 
     this.statistics.saveCount++;
-    if (game.gameOptions.undoOption) logForUndo(game.id, 'start save', game.lastSaveId);
     try {
       await this.client.query('BEGIN');
 
@@ -338,8 +338,6 @@ export class PostgreSQL implements IDatabase {
         await this.storeParticipants({gameId: game.id, participantIds: participantIds});
       }
 
-      if (game.gameOptions.undoOption) logForUndo(game.id, 'increment save id, now', game.lastSaveId);
-
       await this.client.query('COMMIT');
     } catch (err) {
       await this.client.query('ROLLBACK');
@@ -354,13 +352,7 @@ export class PostgreSQL implements IDatabase {
       // Should this be an error?
       return;
     }
-    logForUndo(gameId, 'deleting', rollbackCount, 'saves');
-    const first = await this.getSaveIds(gameId);
-    const res = await this.client.query('DELETE FROM games WHERE ctid IN (SELECT ctid FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT $2)', [gameId, rollbackCount]);
-    logForUndo(gameId, 'deleted', res?.rowCount, 'rows');
-    const second = await this.getSaveIds(gameId);
-    logForUndo(gameId, 'second', second);
-    logForUndo(gameId, 'Rollback difference', oneWayDifference(first, second));
+    await this.client.query('DELETE FROM games WHERE ctid IN (SELECT ctid FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT $2)', [gameId, rollbackCount]);
   }
 
   public async storeParticipants(entry: GameIdLedger): Promise<void> {
@@ -386,17 +378,14 @@ export class PostgreSQL implements IDatabase {
       'save-conflict-undo-count': this.statistics.saveConflictUndoCount,
     };
 
-    const dbsizes = await this.client.query(`
-    SELECT
-      pg_size_pretty(pg_total_relation_size('games')) as game_size,
-      pg_size_pretty(pg_total_relation_size('game_results')) as game_results_size,
-      pg_size_pretty(pg_total_relation_size('participants')) as participants_size,
-      pg_size_pretty(pg_database_size($1)) as db_size
-    `, [this.databaseName]);
+    const columns = POSTGRESQL_TABLES.map((table_name) => `pg_size_pretty(pg_total_relation_size('${table_name}')) as ${table_name}_size`);
+    const dbsizes = await this.client.query(`SELECT ${columns.join(', ')}, pg_size_pretty(pg_database_size('${this.databaseName}')) as db_size`);
 
-    map['size-bytes-games'] = dbsizes.rows[0].game_size;
-    map['size-bytes-game-results'] = dbsizes.rows[0].game_results_size;
-    map['size-bytes-participants'] = dbsizes.rows[0].participants_size;
+    function varz(x: string) {
+      return x.replaceAll('_', '-');
+    }
+
+    POSTGRESQL_TABLES.forEach((table) => map['size-bytes-' + varz(table)] = dbsizes.rows[0][table + '_size']);
     map['size-bytes-database'] = dbsizes.rows[0].db_size;
 
     // Using count(*) is inefficient, but the estimates from here
@@ -409,16 +398,10 @@ export class PostgreSQL implements IDatabase {
     // VACUUM (VERBOSE) shows a fairly reasonable vacumm (no rows locked, for instance),
     // so it's not clear why those wrong. But these select count(*) commands seem pretty quick
     // in testing. :fingers-crossed:
-    for (const table of ['games', 'game_results', 'participants']) {
+    for (const table of POSTGRESQL_TABLES) {
       const result = await this.client.query('select count(*) as rowcount from ' + table);
-      map['rows-' + table] = result.rows[0].rowcount;
+      map['rows-' + varz(table)] = result.rows[0].rowcount;
     }
     return map;
-  }
-}
-
-function logForUndo(gameId: string, ...message: any[]) {
-  if (process.env.LOG_FOR_UNDO) {
-    console.error(['TRACKING:', gameId, ...message]);
   }
 }

@@ -4,7 +4,7 @@ import {describeDatabaseSuite} from '../database/databaseSuite';
 import {ITestDatabase, Status} from '../database/ITestDatabase';
 import {IGame} from '../../src/server/IGame';
 import {Game} from '../../src/server/Game';
-import {PostgreSQL} from '../../src/server/database/PostgreSQL';
+import {PostgreSQL, POSTGRESQL_TABLES} from '../../src/server/database/PostgreSQL';
 import {TestPlayer} from '../TestPlayer';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {Phase} from '../../src/common/Phase';
@@ -48,13 +48,18 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
     response['size-bytes-database'] = 'any';
     response['size-bytes-participants'] = 'any';
 
+    const extraFields = ['rows-game', 'size-bytes-game', 'rows-completed-game', 'size-bytes-completed-game'];
+    for (const field of extraFields) {
+      expect(response[field], 'For ' + field).is.not.undefined;
+      delete response[field];
+    }
     return response;
   }
 
   public async afterEach() {
-    await this.client.query('DROP TABLE IF EXISTS games');
-    await this.client.query('DROP TABLE IF EXISTS game_results');
-    await this.client.query('DROP TABLE IF EXISTS participants');
+    for (const table of POSTGRESQL_TABLES) {
+      await this.client.query('DROP TABLE IF EXISTS ' + table);
+    }
   }
 
   public getStatistics() {
@@ -105,7 +110,7 @@ describeDatabaseSuite({
     'pool-total-count': 1,
     'pool-idle-count': 1,
     'pool-waiting-count': 0,
-    'rows-game_results': '0',
+    'rows-game-results': '0',
     'rows-games': '0',
     'rows-participants': '0',
     'size-bytes-games': 'any',

@@ -23,7 +23,7 @@ sudo -u postgres psql -U postgres
 Edit the authoriation rules configuration file
 
 ```
-sudo nano /etc/postgresql/12/main/pg_hba.conf
+sudo nano /etc/postgresql/16/main/pg_hba.conf
 ```
 
 And add this line to the bottom
@@ -58,4 +58,10 @@ Now you can run the postgresql test.
 
 ```
 npm run test:integration
+```
+
+or juts
+
+```
+npm run test:postgresql
 ```

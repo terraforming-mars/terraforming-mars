@@ -90,6 +90,7 @@
     "test": "npm run test:server && npm run test:client",
     "test:server": "ts-mocha -p tests/tsconfig.json -r tests/utils/setup.ts \"tests/*.spec.ts\" \"tests/!(client|integration)/**/*.spec.ts\"",
     "test:integration": "ts-mocha -p tests/tsconfig.json \"tests/integration/**/*.spec.ts\"",
+    "test:postgresql": "ts-mocha -p tests/tsconfig.json \"tests/integration/PostgreSQL.spec.ts\"",
     "test:client": "cross-env NODE_ENV=development mochapack --require tests/client/components/setup.ts \"tests/client/**/*.spec.ts\"",
     "test:client:watch": "cross-env NODE_ENV=development mochapack --watch --require tests/client/components/setup.ts \"tests/client/**/*.spec.ts\"",
     "cover": "nyc ts-mocha -p tests/tsconfig.json -r tests/utils/setup.ts \"tests/*.spec.ts\" \"tests/!(client)/**/*.spec.ts\"",

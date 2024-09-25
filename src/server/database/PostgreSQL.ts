@@ -7,6 +7,7 @@ import {SerializedGame} from '../SerializedGame';
 import {daysAgoToSeconds} from './utils';
 import {GameIdLedger} from './IDatabase';
 import {oneWayDifference} from '../../common/utils/utils';
+import { applyPatch, compare } from 'fast-json-patch';
 
 type StoredSerializedGame = Omit<SerializedGame, 'gameOptions' | 'gameLog'> & {logLength: number};
 
@@ -23,7 +24,7 @@ export class PostgreSQL implements IDatabase {
 
   protected get client(): pg.Pool {
     if (this._client === undefined) {
-      throw new Error('attempt to get client before intialized');
+      throw new Error('attempt to get client before initialized');
     }
     return this._client;
   }
@@ -165,25 +166,36 @@ export class PostgreSQL implements IDatabase {
     return Promise.resolve(allSaveIds);
   }
 
-  public async getGame(gameId: GameId): Promise<SerializedGame> {
-    // Retrieve last save from database
-    const res = await this.client.query(
-      `SELECT
-        games.game as game,
-        game.log as log,
-        game.options as options
-      FROM games
-      LEFT JOIN game on game.game_id = games.game_id
-      WHERE games.game_id = $1
-      ORDER BY save_id DESC LIMIT 1`,
-      [gameId],
-    );
-    if (res.rows.length === 0 || res.rows[0] === undefined) {
-      throw new Error(`Game ${gameId} not found`);
-    }
-    const row = res.rows[0];
-    return this.compose(row.game, row.log, row.options);
+public async getGame(gameId: GameId): Promise<SerializedGame> {
+  const allGameStates = await this.client.query(
+    `SELECT game AS patch, log, options, save_id
+     FROM games
+     LEFT JOIN game ON game.game_id = games.game_id
+     WHERE games.game_id = $1
+     ORDER BY games.save_id`,
+    [gameId]
+  );
+
+  if (allGameStates.rows.length === 0) {
+    throw new Error(`No game states found for ${gameId}`);
   }
+
+  let currentGameState = null;
+  latestLog = "";
+  latestOptions = "";
+
+  for (const { save_id, patch, log, options } of allGameStates.rows) {
+    currentGameState = save_id === 0 ? JSON.parse(patch) : applyPatch(currentGameState, JSON.parse(patch)).newDocument;
+    latestLog = log;
+    latestOptions = options;
+  }
+
+  if (!currentGameState) {
+      throw new Error(`Failed to reconstruct game state for ${gameId}`);
+  }
+  return this.compose(JSON.stringify(currentGameState), latestLog, latestOptions);
+}
+
 
   async getGameVersion(gameId: GameId, saveId: number): Promise<SerializedGame> {
     const res = await this.client.query(
@@ -295,16 +307,23 @@ export class PostgreSQL implements IDatabase {
     if (game.gameOptions.undoOption) logForUndo(game.id, 'start save', game.lastSaveId);
     try {
       await this.client.query('BEGIN');
-
       // Holding onto a value avoids certain race conditions where saveGame is called twice in a row.
       const thisSaveId = game.lastSaveId;
+
+      const { rows } = await this.client.query(`SELECT game, save_id FROM games WHERE game_id = $1 ORDER BY save_id ASC`, [game.id]);
+      const reconstructedLatestGameState = rows.reduce((acc, { game, save_id }) => save_id === 0
+          ? JSON.parse(game)
+          : applyPatch(acc, JSON.parse(game)).newDocument, null);
+      const initGameJsonOrDiff = reconstructedLatestGameState
+        ? JSON.stringify(compare(reconstructedLatestGameState, JSON.parse(gameJSON)))
+        : gameJSON;
       // xmax = 0 is described at https://stackoverflow.com/questions/39058213/postgresql-upsert-differentiate-inserted-and-updated-rows-using-system-columns-x
       const res = await this.client.query(
         `INSERT INTO games (game_id, save_id, game, players)
         VALUES ($1, $2, $3, $4)
         ON CONFLICT (game_id, save_id) DO UPDATE SET game = $3
         RETURNING (xmax = 0) AS inserted`,
-        [game.id, game.lastSaveId, gameJSON, game.getPlayers().length]);
+        [game.id, game.lastSaveId, initGameJsonOrDiff, game.getPlayers().length]);
 
       await this.client.query(
         `INSERT INTO game (game_id, log, options)

@@ -568,6 +568,7 @@ export enum CardName {
 
   // Promo from contest
   FLOYD_CONTINUUM = 'Floyd Continuum',
+  CASINOS = 'Casinos',
 
   // End of promo cards
 

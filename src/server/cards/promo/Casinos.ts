@@ -6,6 +6,7 @@ import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
 // Note: Casinos comes from WSBG.
+// https://boardgamegeek.com/thread/3375070/wsbg-promo-card
 
 export class Casinos extends Card implements IProjectCard {
   constructor() {

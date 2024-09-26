@@ -31,7 +31,7 @@ export class Hospitals extends Card implements IProjectCard, IActionCard {
       metadata: {
         cardNumber: 'X69',
         renderData: CardRenderer.builder((b) => {
-          b.effect('Each time a city is placed gain a disease here.', (eb) => {
+          b.effect('Each time a city is placed, gain a disease here.', (eb) => {
             eb.city({size: Size.SMALL, all}).startEffect.resource(CardResource.DISEASE);
           }).br;
           b.action('Remove a disease from ANY OF YOUR CARDS to gain 1 M€ per city in play.', (ab) => {

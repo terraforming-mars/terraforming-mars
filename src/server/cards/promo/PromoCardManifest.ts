@@ -12,6 +12,7 @@ import {Astrodrill} from './Astrodrill';
 import {BactoviralResearch} from './BactoviralResearch';
 import {BioPrintingFacility} from './BioPrintingFacility';
 import {CarbonNanosystems} from './CarbonNanosystems';
+import {Casinos} from './Casinos';
 import {CityPark} from './CityPark';
 import {CometAiming} from './CometAiming';
 import {CorporateArchives} from './CorporateArchives';
@@ -152,6 +153,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.CITY_PARK]: {Factory: CityPark},
     [CardName.SUPERMARKETS]: {Factory: Supermarkets},
     [CardName.HOSPITALS]: {Factory: Hospitals},
+    [CardName.CASINOS]: {Factory: Casinos},
   },
 
   preludeCards: {

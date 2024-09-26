@@ -1,7 +1,10 @@
 {
+  "Casinos": "Casino",
+  "Requires that you have a city. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Benötigt ein eigenes Stadtplättchen. Reduziere deine Energieproduktion um 1 und erhöhe deine M€-Produktion um 4.",
+  
   "Hospitals": "Krankenhäuser",
   "Effect: Each time a city is placed, gain a disease here.": "EFFEKT: Jedes Mal, wenn eine Stadt platziert wird, erhälst du hier eine Krankheit.",
-  "Action: Remove a disease from ANY OF YOUR cards to gain 1 M€ per city in play.": "AKTION: Entferne eine Krankheit von EINER DEINER Karten und erhalte 1 M€ pro Stadt im Spiel.",
+  "Action: Remove a disease from ANY OF YOUR CARDS to gain 1 M€ per city in play.": "AKTION: Entferne eine Krankheit von EINER DEINER Karten und erhalte 1 M€ pro Stadt im Spiel.",
   "Decrease your energy production 1 step.": "Reduziere deine Energieproduktion um 1.",
   
   "Supermarkets": "Supermarkt",

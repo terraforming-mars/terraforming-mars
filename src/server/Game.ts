@@ -65,7 +65,7 @@ import {DEFAULT_GAME_OPTIONS, GameOptions} from './game/GameOptions';
 import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
 import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
-import {addDays, dayStringToDays} from './database/utils';
+import {addDays, stringToNumber} from './database/utils';
 import {ALL_TAGS, Tag} from '../common/cards/Tag';
 import {IGame, Score} from './IGame';
 import {MarsBoard} from './boards/MarsBoard';
@@ -1537,7 +1537,7 @@ export class Game implements IGame, Logger {
     if (this.createdTime.getTime() === 0) {
       return 0;
     }
-    const days = dayStringToDays(process.env.MAX_GAME_DAYS, 10);
+    const days = stringToNumber(process.env.MAX_GAME_DAYS, 10);
     return addDays(this.createdTime, days).getTime();
   }
 

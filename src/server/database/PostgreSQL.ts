@@ -4,15 +4,18 @@ import {IGame, Score} from '../IGame';
 import {GameOptions} from '../game/GameOptions';
 import {GameId, ParticipantId, isGameId, safeCast} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
-import {daysAgoToSeconds} from './utils';
+import {daysAgoToSeconds, stringToNumber} from './utils';
 import {GameIdLedger} from './IDatabase';
 
 type StoredSerializedGame = Omit<SerializedGame, 'gameOptions' | 'gameLog'> & {logLength: number};
 
 export const POSTGRESQL_TABLES = ['game', 'games', 'game_results', 'participants', 'completed_game'] as const;
 
+const POSTGRES_TRIM_COUNT = stringToNumber(process.env.POSTGRES_TRIM_COUNT, 10);
+
 export class PostgreSQL implements IDatabase {
   private databaseName: string | undefined = undefined; // Use this only for stats.
+  protected trimCount = POSTGRES_TRIM_COUNT;
 
   protected statistics = {
     saveCount: 0,
@@ -347,13 +350,14 @@ export class PostgreSQL implements IDatabase {
     this.trim(game);
   }
 
-  async trim(game: IGame) {
-    const count = 10;
-    if (game.lastSaveId % count === 0) {
-      const maxSaveId = game.lastSaveId - 10;
-      const res = await this.client.query(
+  private async trim(game: IGame) {
+    if (this.trimCount <= 0) {
+      return;
+    }
+    if (game.lastSaveId % this.trimCount === 0) {
+      const maxSaveId = game.lastSaveId - this.trimCount;
+      await this.client.query(
         'DELETE FROM games WHERE game_id = $1 AND save_id > 0 AND save_id < $2', [game.id, maxSaveId]);
-      console.log(res);
     }
     return Promise.resolve();
   }

@@ -1,15 +1,13 @@
 import {expect} from 'chai';
-import {addOcean, cast, churn, runAllActions} from '../../TestingUtils';
-import {Ants} from '../../../src/server/cards/base/Ants';
-import {Fish} from '../../../src/server/cards/base/Fish';
-import {ICard} from '../../../src/server/cards/ICard';
+import {addOcean, cast, runAllActions} from '../../TestingUtils';
 import {NeptunianPowerConsultants} from '../../../src/server/cards/promo/NeptunianPowerConsultants';
-import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Payment} from '../../../src/common/inputs/Payment';
+import {IceAsteroid} from '../../../src/server/cards/base/IceAsteroid';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('NeptunianPowerConsultants', () => {
   let card: NeptunianPowerConsultants;
@@ -66,5 +64,23 @@ describe('NeptunianPowerConsultants', () => {
     expect(player.production.energy).eq(1);
     expect(player.megaCredits).eq(0);
     expect(player.steel).eq(0);
+  });
+
+  it('Plays in correct priority order', () => {
+    player.megaCredits = 6;
+    const iceAsteroid = new IceAsteroid();
+    iceAsteroid.play(player2);
+    runAllActions(game);
+
+    const selectSpace = cast(player2.popWaitingFor(), SelectSpace);
+    selectSpace.cb(selectSpace.spaces[0]);
+    runAllActions(game);
+    cast(player2.popWaitingFor(), undefined);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+    orOptions.options[0].cb(Payment.of({megaCredits: 5, steel: 0}));
+
+    runAllActions(game);
+
+    cast(player2.popWaitingFor(), SelectSpace);
   });
 });

@@ -19,6 +19,7 @@
     "${0} took the first action of ${1} corporation": "${0} hat die erste Aktion des ${1}-Konzerns durchgeführt",
     "Take first action of ${0} corporation": "Führe die erste Aktion des ${0}-Konzerns aus",
     "Don\u2019t place a greenery": "Platziere KEINE Grünfläche",
+    "All players lose 1 TR.": "Alle Spieler verlieren 1 TW.",
 
     "increased": "erhöht",
     "decreased": "vermindert",
@@ -157,6 +158,8 @@
     "graphene(s)": "Karbon",
     "1 graphene(s)": "1 Karbon",
     "hydroelectric resource(s)": "hydroelektrische Ressource(n)",
+    "director(s)": "Direktor(en)",
+    "disease(s)": "Krankheit(en)",
     "supply chain(s)": "Lieferketten Ressource(n)",
     "supply chain resources": "Lieferketten Ressource",
     "clone trooper(s)": "Klonkrieger",
@@ -415,6 +418,8 @@
     "${0} blackmailed ${1} who lost 2 corruption.": "${0} hat ${1} erpresst, der 2 Korruption verloren hat.",
     "${0} blackmailed ${1} and was paid 10 M€.": "${0} erpresste ${1} und erhielt 10 M€.",
     "${0} sued ${1} who had ${2} M€.": "${0} beklagt ${1}, der ${2} M€ hatte.",
+    "${0} selected Global Event ${1} for the current global event": "${0} wählte globales Ereignis ${1} für das aktuelle globale Ereignis aus",
+    "Neutral delegate added to ${0}": "Neutrale Delegierte zu ${0} hinzugefügt",
 
     "${0} searched for ${1} tags": "${0} suchte nach ${1} Symbol",
     "earth": "Erde",
@@ -445,6 +450,6 @@
     "raise temperature 1 step": "Temperatur um 2°C erhöhen",
     "${0} increased ${1} colony track ${2} step(s)": "${0} erhöhte ${1}-Koloniewertung um ${2} Schritt(e)",
     "${0} decreased ${1} colony track 1 step": "${0} senkte ${1}-Koloniewertung um 1 Schritt",
-    "'${0} kept ${1} project cards": "${0} behielt ${1} Projektkarten",
+    "${0} kept ${1} project cards": "${0} behielt ${1} Projektkarten",
     "Unable to perform undo operation. Error retrieving game from database. Please try again.": "Konnte Aktion nicht rückgängig machen. Es trat ein Fehler beim Laden des Spieles aus der Datenbank auf. Bitte versuche es noch einmal."
 }

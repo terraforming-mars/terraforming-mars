@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, churn, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {MarsNomads} from '../../../src/server/cards/promo/MarsNomads';
 import {Networker} from '../../../src/server/milestones/Networker';
@@ -14,6 +14,7 @@ import {Philares} from '../../../src/server/cards/promo/Philares';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {LandClaim} from '../../../src/server/cards/base/LandClaim';
 import {MiningGuild} from '../../../src/server/cards/corporation/MiningGuild';
+import {intersection} from '../../../src/common/utils/utils';
 
 describe('MarsNomads', () => {
   let card: MarsNomads;
@@ -156,19 +157,38 @@ describe('MarsNomads', () => {
     expect(player.getTerraformRating()).eq(20);
   });
 
-  it('Compatible with Land Claim', () => {
+  it('Compatible with Land Claim on placement', () => {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
 
     expect(cast(card.play(player), SelectSpace).spaces).to.include(space);
 
     const landClaim = new LandClaim();
-    const claimLand = cast(landClaim.play(player), SelectSpace);
+    const selectSpace = cast(landClaim.play(player), SelectSpace);
 
-    expect(claimLand.spaces).to.include(space);
+    expect(selectSpace.spaces).to.include(space);
 
-    claimLand.cb(space);
+    selectSpace.cb(space);
 
-    expect(cast(card.play(player), SelectSpace).spaces).to.not.include(space);
+    const spaces = cast(card.play(player), SelectSpace).spaces;
+    expect(spaces).to.not.include(space);
+
+    const adjacentSpace = intersection(game.board.getAdjacentSpaces(space), spaces)[0];
+    game.nomadSpace = adjacentSpace.id;
+  });
+
+  it('Compatible with Land Claim movement', () => {
+    const availableSpaces = game.board.getAvailableSpacesOnLand(player);
+    const space = availableSpaces[0];
+    const adjacentSpace = intersection(game.board.getAdjacentSpaces(space), availableSpaces)[0];
+    game.nomadSpace = space.id;
+    const selectSpace = cast(churn(card.action(player), player), SelectSpace);
+
+    expect(selectSpace.spaces).includes(adjacentSpace);
+
+    adjacentSpace.player = player;
+    const selectSpace2 = cast(churn(card.action(player), player), SelectSpace);
+
+    expect(selectSpace2.spaces).to.not.include(adjacentSpace);
   });
 
   describe('Compatible with Philares', () => {

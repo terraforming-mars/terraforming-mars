@@ -54,6 +54,7 @@ export type GameOptions = {
   customPreludes: Array<CardName>;
   customCeos: Array<CardName>;
   startingCeos: number;
+  startingPreludes: number;
   /** Moon must be completed to end the game */
   requiresMoonTrackCompletion: boolean;
   /** Venus must be completed to end the game */
@@ -117,6 +118,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   soloTR: false,
   startingCeos: 3,
   startingCorporations: 2,
+  startingPreludes: 4,
   starWarsExpansion: false,
   turmoilExtension: false,
   underworldExpansion: false,

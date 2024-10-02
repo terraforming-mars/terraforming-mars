@@ -352,7 +352,7 @@ export class Game implements IGame, Logger {
         }
         if (gameOptions.preludeExtension) {
           if (gameOptions.startingPreludes !== undefined) {
-          player.dealtPreludeCards.push(...preludeDeck.drawN(game, gameOptions.startingPreludes));
+            player.dealtPreludeCards.push(...preludeDeck.drawN(game, gameOptions.startingPreludes));
           }
         }
         if (gameOptions.ceoExtension) {

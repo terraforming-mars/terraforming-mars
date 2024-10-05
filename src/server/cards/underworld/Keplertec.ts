@@ -59,16 +59,8 @@ export class Keplertec extends ActiveCorporationCard {
     }
     const tokens: Array<UndergroundResourceToken> = [];
     for (let i = 0; i < 4; i++) {
-      const token = game.underworldData.tokens.pop();
-      if (token === undefined) {
-        // TODO(kberg): handle
-        break;
-      }
+      const token = UnderworldExpansion.drawExcavationToken(game);
       tokens.push(token);
-    }
-    if (tokens.length === 0) {
-      // TODO(kberg): handle
-      return;
     }
 
     const orOptions = new OrOptions();

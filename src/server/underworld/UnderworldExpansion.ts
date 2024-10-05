@@ -131,11 +131,7 @@ export class UnderworldExpansion {
         return;
       }
     }
-    const undergroundResource = game.underworldData?.tokens.pop();
-    if (undergroundResource === undefined) {
-      // TODO(kberg): collect tokens from all players
-      throw new Error('Cannot identify excavation space, no available tokens.');
-    }
+    const undergroundResource = this.drawExcavationToken(game);
     space.undergroundResources = undergroundResource;
     for (const p of game.getPlayersInGenerationOrder()) {
       for (const card of p.tableau) {
@@ -429,7 +425,7 @@ export class UnderworldExpansion {
     game.getPlayersInGenerationOrder().forEach((player) => player.underworldData.temperatureBonus = undefined);
   }
 
-  //   // TODO(kberg): add viz for temperature bonus.
+  //   // TODOc(kberg): add viz for temperature bonus.
   static onTemperatureChange(game: IGame, steps: number) {
     if (game.phase !== Phase.ACTION) {
       return;
@@ -458,5 +454,13 @@ export class UnderworldExpansion {
         throw new Error('Unknown temperatore bonus: ' + player.underworldData.temperatureBonus);
       }
     });
+  }
+
+  public static drawExcavationToken(game: IGame): UndergroundResourceToken {
+    const token = game.underworldData?.tokens.pop();
+    if (token === undefined) {
+      throw new Error('No underground resource token!');
+    }
+    return token;
   }
 }

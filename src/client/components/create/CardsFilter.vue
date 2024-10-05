@@ -12,7 +12,7 @@
         </div>
         <div class="cards-filter-input">
             <div>
-                <input class="form-input" :placeholder="$t('Start typing the card name to exclude')" v-model="searchTerm" />
+                <input class="form-input" :placeholder="$t(this.hint)" v-model="searchTerm" />
             </div>
             <div class="cards-filter-suggest" v-if="foundCardNames.length">
                 <div class="cards-filter-suggest-item" v-for="cardName in foundCardNames" v-bind:key="cardName">
@@ -52,6 +52,10 @@ export default Vue.extend({
   name: 'CardsFilter',
   props: {
     title: {
+      type: String,
+      required: true,
+    },
+    hint: {
       type: String,
       required: true,
     },

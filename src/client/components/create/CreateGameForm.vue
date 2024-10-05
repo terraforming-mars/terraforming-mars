@@ -191,6 +191,14 @@
                                 <span v-i18n>Starting Corporations</span>
                             </label>
 
+                            <template v-if="prelude">
+                              <label for="startingPreludeENum-checkbox">
+                              <div class="create-game-expansion-icon expansion-icon-prelude"></div>
+                              <input type="number" class="create-game-corporations-count" value="4" min="4" :max="8" v-model="startingPreludes" id="startingPreludeNum-checkbox">
+                                  <span v-i18n>Starting Preludes</span>
+                              </label>
+                            </template>
+
                             <template v-if="ceoExtension">
                               <label for="startingCEONum-checkbox">
                               <div class="create-game-expansion-icon expansion-icon-ceo"></div>
@@ -645,6 +653,7 @@ export default (Vue as WithRefs<Refs>).extend({
       ceoExtension: false,
       customCeos: [],
       startingCeos: 3,
+      startingPreludes: 4,
       starWarsExpansion: false,
       underworldExpansion: false,
       preludeDraftVariant: undefined,
@@ -1063,6 +1072,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const ceoExtension = this.ceoExtension;
       const customCeos = this.customCeos;
       const startingCeos = this.startingCeos;
+      const startingPreludes = this.startingPreludes;
       let clonedGamedId: undefined | GameId = undefined;
 
       // Check custom colony count
@@ -1128,7 +1138,7 @@ export default (Vue as WithRefs<Refs>).extend({
       // TODO(kberg): this is a direct copy of the code right above.
       // Check custom prelude count
       if (this.showPreludesList && customPreludes.length > 0) {
-        const requiredPreludeCount = players.length * constants.PRELUDE_CARDS_DEALT_PER_PLAYER;
+        const requiredPreludeCount = players.length * startingPreludes;
         if (customPreludes.length < requiredPreludeCount) {
           window.alert(translateTextWithParams('Must select at least ${0} Preludes', [requiredPreludeCount.toString()]));
           return;
@@ -1234,6 +1244,7 @@ export default (Vue as WithRefs<Refs>).extend({
         ceoExtension,
         customCeos,
         startingCeos,
+        startingPreludes,
         starWarsExpansion: this.starWarsExpansion,
         underworldExpansion: this.underworldExpansion,
       };

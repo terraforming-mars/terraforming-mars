@@ -26,8 +26,9 @@ export default Vue.extend({
       const p = this.party.toLowerCase().replace(' ', '-');
       switch (this.size) {
       case 'card':
-        // TODO(kberg): remove card-description if it turns out to not be necessary.
-        return 'card-description card-party--' + p;
+        // TODO(kberg): remove card-description if it turns out to not be necessary by 2024-12-01
+        // return 'card-description card-party--' + p;
+        return 'card-party--' + p;
       case 'req':
         return 'card-party--' + p + '-req';
       }

@@ -35,12 +35,13 @@ export class SuitableInfrastructure extends PreludeCard {
   // When the server restarts, the player has to take an action anyway.
   private lastActionId = -1;
   public onProductionGain(player: IPlayer, _resource: Resource, amount: number) {
-    if (amount > 0) {
-      const actionId = sum(player.game.getPlayers().map((p) => p.actionsTakenThisGame));
-      if (this.lastActionId !== actionId) {
-        player.stock.add(Resource.MEGACREDITS, 2);
-        this.lastActionId = actionId;
-      }
+    if (player.game.activePlayer !== player.id || amount === 0) {
+      return;
+    }
+    const actionId = sum(player.game.getPlayers().map((p) => p.actionsTakenThisGame));
+    if (this.lastActionId !== actionId) {
+      player.stock.add(Resource.MEGACREDITS, 2);
+      this.lastActionId = actionId;
     }
   }
 }

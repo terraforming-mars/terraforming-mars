@@ -435,7 +435,11 @@ describeDatabaseSuite({
       expect(player.actionsTakenThisRound).eq(5);
 
       // Trigger an undo
-      const newGame = await GameLoader.getInstance().restoreGameAt(player.game.id, 4);
+      // This is embedded in routes/PlayerInput, and should be moved out of there.
+      const restorePoint = game.lastSaveId - 2;
+      expect(restorePoint).eq(5);
+      expect(game.lastSaveId).eq(7);
+      const newGame = await GameLoader.getInstance().restoreGameAt(player.game.id, restorePoint);
       await db.awaitAllSaves();
       const revisedPlayer = newGame.getPlayerById(player.id);
       expect(revisedPlayer.megaCredits).eq(4);

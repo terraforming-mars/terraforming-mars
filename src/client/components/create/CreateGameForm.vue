@@ -508,6 +508,7 @@
                   ref="cardsFilter"
                   v-on:cards-list-changed="updateBannedCards"
                   :title="'Cards to exclude from the game'"
+                  :hint="'Start typing the card name to exclude'"
               ></CardsFilter>
             </div>
 
@@ -516,6 +517,7 @@
                   ref="cardsFilter2"
                   v-on:cards-list-changed="updateIncludedCards"
                   :title="'Cards to include in the game'"
+                  :hint="'Start typing the card name to include'"
               ></CardsFilter>
             </div>
           <preferences-icon></preferences-icon>

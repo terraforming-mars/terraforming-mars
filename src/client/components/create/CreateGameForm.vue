@@ -12,14 +12,12 @@
                     <div class="create-game-page-container">
                         <div class="create-game-page-column">
                             <h4 v-i18n>№ of Players</h4>
-                            <template v-for="pCount in [1,2,3,4,5,6]">
-                              <div v-bind:key="pCount">
-                                <input type="radio" :value="pCount" name="playersCount" v-model="playersCount" :id="pCount+'-radio'">
-                                <label :for="pCount+'-radio'">
-                                    {{ getPlayersCountText(pCount) }}
-                                </label>
-                              </div>
-                            </template>
+                            <div v-for="pCount in [1,2,3,4,5,6]" v-bind:key="pCount">
+                              <input type="radio" :value="pCount" name="playersCount" v-model="playersCount" :id="pCount+'-radio'">
+                              <label :for="pCount+'-radio'">
+                                  {{ getPlayersCountText(pCount) }}
+                              </label>
+                            </div>
                         </div>
 
                         <div class="create-game-page-column">
@@ -168,19 +166,17 @@
                         <div class="create-game-page-column">
                             <h4 v-i18n>Board</h4>
 
-                            <template v-for="boardName in boards">
-                              <div v-bind:key="boardName">
-                                <div v-if="boardName==='utopia planitia'" class="create-game-subsection-label" v-i18n>Fan-made</div>
-                                <input type="radio" :value="boardName" name="board" v-model="board" :id="boardName+'-checkbox'">
-                                <label :for="boardName+'-checkbox'" class="expansion-button">
-                                    <span :class="getBoardColorClass(boardName)">&#x2B22;</span>
-                                    <span class="capitalized" v-i18n>{{ boardName }}</span>
-                                    <template v-if="boardName !== RandomBoardOption.OFFICIAL && boardName !== RandomBoardOption.ALL">
-                                      &nbsp;<a :href="boardHref(boardName)" class="tooltip" target="_blank">&#9432;</a>
-                                    </template>
-                                </label>
-                              </div>
-                            </template>
+                            <div v-for="boardName in boards" v-bind:key="boardName">
+                              <div v-if="boardName==='utopia planitia'" class="create-game-subsection-label" v-i18n>Fan-made</div>
+                              <input type="radio" :value="boardName" name="board" v-model="board" :id="boardName+'-checkbox'">
+                              <label :for="boardName+'-checkbox'" class="expansion-button">
+                                  <span :class="getBoardColorClass(boardName)">&#x2B22;</span>
+                                  <span class="capitalized" v-i18n>{{ boardName }}</span>
+                                  <template v-if="boardName !== RandomBoardOption.OFFICIAL && boardName !== RandomBoardOption.ALL">
+                                    &nbsp;<a :href="boardHref(boardName)" class="tooltip" target="_blank">&#9432;</a>
+                                  </template>
+                              </label>
+                            </div>
                         </div>
 
                         <div class="create-game-page-column">
@@ -500,6 +496,7 @@
                   v-bind:communityCardsOption="communityCardsOption"
                   v-bind:moonExpansion="moonExpansion"
                   v-bind:pathfindersExpansion="pathfindersExpansion"
+                  v-bind:prelude2Expansion="prelude2Expansion"
               ></PreludesFilter>
             </div>
 

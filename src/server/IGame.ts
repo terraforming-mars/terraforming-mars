@@ -137,7 +137,6 @@ export interface IGame extends Logger {
   readonly first: IPlayer;
   gameIsOver(): boolean;
   isDoneWithFinalProduction(): boolean;
-  doneWorldGovernmentTerraforming(): void;
   playerHasPassed(player: IPlayer): void;
   hasResearched(player: IPlayer): boolean;
   playerIsFinishedWithResearchPhase(player: IPlayer): void;
@@ -161,7 +160,7 @@ export interface IGame extends Logger {
    * If nobody can add a greenery, end the game.
    */
   /* for testing */ takeNextFinalGreeneryAction(): void;
-  /* for testing */ worldGovernmentTerraforming(player: IPlayer): void;
+  /* for testing */ worldGovernmentTerraforming(): void;
   /* for World Government Advisor */
   worldGovernmentTerraformingInput(player: IPlayer): OrOptions;
   increaseOxygenLevel(player: IPlayer, increments: -2 | -1 | 1 | 2): void;

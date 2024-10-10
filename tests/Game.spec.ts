@@ -29,7 +29,10 @@ import {IColony} from '../src/server/colonies/IColony';
 import {IAward} from '../src/server/awards/IAward';
 import {SerializedGame} from '../src/server/SerializedGame';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
+import {SelectSpace} from '../src/server/inputs/SelectSpace';
 import {GlobalParameter} from '../src/common/GlobalParameter';
+import {assertPlaceOcean} from './assertions';
+import {TiredEarth} from '../src/server/cards/pathfinders/TiredEarth';
 
 describe('Game', () => {
   it('should initialize with right defaults', () => {
@@ -650,7 +653,7 @@ describe('Game', () => {
     const player2 = new Player('name', Color.RED, false, 0, 'p-id3');
     expect(
       () => Game.newInstance('gameid', [player1, player2], player1))
-      .to.throw(Error, /Duplicate player found: p-id3,p-id3/);
+      .to.throw(Error, /Duplicate player found: \[p-id3,p-id3\]/);
   });
 
   it('fails when first player is absent from the list of players.', () => {
@@ -878,7 +881,7 @@ describe('Game', () => {
   it('wgt includes all parameters at the game start', () => {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
     const game = Game.newInstance('gameid', [player], player, {venusNextExtension: false});
-    game.worldGovernmentTerraforming(player);
+    game.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);
     expect(parameters).to.have.members([
       GlobalParameter.OXYGEN,
@@ -889,7 +892,7 @@ describe('Game', () => {
   it('wgt includes all parameters at the game start, with Venus', () => {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
     const game = Game.newInstance('gameid', [player], player, {venusNextExtension: true});
-    game.worldGovernmentTerraforming(player);
+    game.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);
     expect(parameters).to.have.members([
       GlobalParameter.OXYGEN,
@@ -901,7 +904,7 @@ describe('Game', () => {
   it('wgt includes all parameters at the game start, with The Moon', () => {
     const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
     const game = Game.newInstance('gameid', [player], player, {venusNextExtension: false, moonExpansion: true});
-    game.worldGovernmentTerraforming(player);
+    game.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);
     expect(parameters).to.have.members([
       GlobalParameter.OXYGEN,
@@ -911,6 +914,41 @@ describe('Game', () => {
       GlobalParameter.MOON_HABITAT_RATE,
       GlobalParameter.MOON_LOGISTICS_RATE]);
   });
+});
+
+it('Arctic Algae works during WGT', () => {
+  const player = TestPlayer.BLUE.newPlayer();
+  const player2 = TestPlayer.RED.newPlayer();
+  player.playedCards.push(new ArcticAlgae());
+  // player2 is first player, and will resolve WGT.
+  const game = Game.newInstance('gameid', [player, player2], player2, {venusNextExtension: true});
+  game.worldGovernmentTerraforming();
+  const orOptions = cast(player2.popWaitingFor(), OrOptions);
+  const oceanAction = cast(orOptions.options.filter((o) => o.title.toString() === 'Add an ocean')[0], SelectSpace);
+  assertPlaceOcean(player2, oceanAction);
+  expect(player.plants).to.eq(0);
+  runAllActions(game);
+  expect(player.plants).to.eq(2);
+});
+
+it('Arctic Algae works during WGT before Turmoil', () => {
+  const player = TestPlayer.BLUE.newPlayer();
+  const player2 = TestPlayer.RED.newPlayer();
+  player.playedCards.push(new ArcticAlgae());
+  // player2 is first player, and will resolve WGT.
+  const game = Game.newInstance('gameid', [player, player2], player2, {venusNextExtension: true, turmoilExtension: true});
+
+  game.turmoil!.currentGlobalEvent = new TiredEarth(); // Lose one plant for each earth tag you have.
+  player.tagsForTest = {earth: 1};
+
+  game.worldGovernmentTerraforming();
+  const [input, cb] = player2.popWaitingFor2();
+  const orOptions = cast(input, OrOptions);
+  const oceanAction = cast(orOptions.options.filter((o) => o.title.toString() === 'Add an ocean')[0], SelectSpace);
+  assertPlaceOcean(player2, oceanAction);
+  cb?.(); // Will gain 2 plants and lose 1 plant.
+
+  expect(player.plants).to.eq(1);
 });
 
 function assertIsJSON(serialized: any) {

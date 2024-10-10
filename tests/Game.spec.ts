@@ -921,7 +921,7 @@ describe('Game', () => {
   it('Deal preludes when starting preludes is defined, 3', () => {
     const player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, {preludeExtension: true, startingPreludes: 3});
-    expect(player.dealtPreludeCards).has.lengthOf(3);
+    expect(player.dealtPreludeCards).has.lengthOf(4);
   });
 
   it('Deal preludes when starting preludes is defined, 6', () => {
@@ -939,7 +939,7 @@ describe('Game', () => {
   it('Deal CEOs when starting CEOs is undefined', () => {
     const player = TestPlayer.BLUE.newPlayer();
     Game.newInstance('gameid', [player], player, {ceoExtension: true, startingCeos: undefined});
-    expect(player.dealtCeoCards).has.lengthOf(1);
+    expect(player.dealtCeoCards).has.lengthOf(3);
   });
 
   it('Deal CEOs when starting CEOs is defined, 4', () => {

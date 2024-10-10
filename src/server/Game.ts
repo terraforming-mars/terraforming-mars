@@ -351,15 +351,11 @@ export class Game implements IGame, Logger {
           player.dealtProjectCards.push(...projectDeck.drawN(game, 10));
         }
         if (gameOptions.preludeExtension) {
-          if (gameOptions.startingPreludes === undefined || gameOptions.startingPreludes < 2) {
-            gameOptions.startingPreludes = 4;
-          }
+          gameOptions.startingPreludes = Math.max(gameOptions.startingPreludes ?? 0, constants.PRELUDE_CARDS_DEALT_PER_PLAYER);
           player.dealtPreludeCards.push(...preludeDeck.drawN(game, gameOptions.startingPreludes));
         }
         if (gameOptions.ceoExtension) {
-          if (gameOptions.startingCeos === undefined || gameOptions.startingCeos < 1) {
-            gameOptions.startingCeos = 1;
-          }
+          gameOptions.startingCeos = Math.max(gameOptions.startingCeos ?? 0, constants.CEO_CARDS_DEALT_PER_PLAYER);
           player.dealtCeoCards.push(...ceoDeck.drawN(game, gameOptions.startingCeos));
         }
       } else {

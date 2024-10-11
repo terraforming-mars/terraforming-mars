@@ -124,11 +124,11 @@
         <div v-for="card in getCardsByType(thisPlayer.tableau, [CardType.CEO])" :key="card.name" class="cardbox">
             <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color"/>
         </div>
-        <div v-show="isVisible('ACTIVE')" v-for="card in sortActiveCards(getCardsByType(thisPlayer.tableau, [CardType.ACTIVE]))" :key="card.name" class="cardbox">
+        <div v-show="isVisible('ACTIVE')" v-for="card in sortActiveCards(getCardsByType(thisPlayer.tableau, [CardType.ACTIVE, CardType.PRELUDE]).filter(isActive))" :key="card.name" class="cardbox">
             <Card :card="card" :actionUsed="isCardActivated(card, thisPlayer)" :cubeColor="thisPlayer.color"/>
         </div>
 
-        <stacked-cards v-show="isVisible('AUTOMATED')" :cards="getCardsByType(thisPlayer.tableau, [CardType.AUTOMATED, CardType.PRELUDE])" ></stacked-cards>
+        <stacked-cards v-show="isVisible('AUTOMATED')" :cards="getCardsByType(thisPlayer.tableau, [CardType.AUTOMATED, CardType.PRELUDE]).filter(isNotActive)" ></stacked-cards>
 
         <stacked-cards v-show="isVisible('EVENT')" :cards="getCardsByType(thisPlayer.tableau, [CardType.EVENT])" ></stacked-cards>
 
@@ -264,6 +264,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import * as raw_settings from '@/genfiles/settings.json';
 
 import Board from '@/client/components/Board.vue';
 import Card from '@/client/components/card/Card.vue';
@@ -293,7 +294,8 @@ import {nextTileView, TileView} from './board/TileView';
 import {getCardsByType, isCardActivated} from '@/client/utils/CardUtils';
 import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
 
-import * as raw_settings from '@/genfiles/settings.json';
+import {CardModel} from '@/common/models/CardModel';
+import {getCardOrThrow} from '../cards/ClientCardManifest';
 
 export interface PlayerHomeModel {
   showHand: boolean;
@@ -492,6 +494,12 @@ export default Vue.extend({
       } else {
         return '';
       }
+    },
+    isActive(card: CardModel): boolean {
+      return getCardOrThrow(card.name).hasAction;
+    },
+    isNotActive(card: CardModel): boolean {
+      return !getCardOrThrow(card.name).hasAction;
     },
   },
   destroyed() {

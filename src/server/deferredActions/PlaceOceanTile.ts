@@ -24,7 +24,7 @@ export class PlaceOceanTile extends DeferredAction<Space> {
 
   public execute() {
     if (!this.player.game.canAddOcean()) {
-      const whales = this.player.playedCards.find((card) => card.name === CardName.WHALES);
+      const whales = this.player.getPlayedCard(CardName.WHALES);
       if (whales !== undefined) {
         this.player.addResourceTo(whales, {qty: 1, log: true});
       }

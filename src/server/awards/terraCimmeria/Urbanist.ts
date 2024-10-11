@@ -46,10 +46,14 @@ export class Urbanist implements IAward {
   }
 
   private getVictoryPoints(player: IPlayer, space: Space) {
-    const card = player.playedCards.find((c) => c.name === space?.tile?.card);
-    if (card !== undefined) {
-      return card.getVictoryPoints(player);
+    const cardName = space?.tile?.card;
+    if (cardName === undefined) {
+      return 0;
     }
-    return 0;
+    const card = player.getPlayedCard(cardName);
+    if (card === undefined) {
+      return 0;
+    }
+    return card.getVictoryPoints(player);
   }
 }

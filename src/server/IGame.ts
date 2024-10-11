@@ -82,9 +82,10 @@ export interface IGame extends Logger {
   underworldData: UnderworldData;
 
   // Card-specific data
-  // Mons Insurance promo corp
+
+  /* An optimization to see if anyone owns Mons Insurance */
   monsInsuranceOwner?: PlayerId; // Not serialized
-  // Crash Site promo project
+  /* For the promo Crash Site. */
   someoneHasRemovedOtherPlayersPlants: boolean;
   // Syndicate Pirate Raids
   syndicatePirateRaider?: PlayerId;

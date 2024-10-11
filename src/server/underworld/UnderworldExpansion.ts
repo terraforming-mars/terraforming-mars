@@ -174,7 +174,7 @@ export class UnderworldExpansion {
       return anyExcavatableSpaces;
     }
 
-    const concessionRights = player.playedCards.find((card) => card.name === CardName.CONCESSION_RIGHTS);
+    const concessionRights = player.getPlayedCard(CardName.CONCESSION_RIGHTS);
     if (concessionRights?.generationUsed === player.game.generation) {
       if (ignoreConcsesionRights === false) {
         return anyExcavatableSpaces;
@@ -321,7 +321,7 @@ export class UnderworldExpansion {
     if (target.game.gameOptions.underworldExpansion === false) {
       return cb(true);
     }
-    const privateMilitaryContractor = target.playedCards.find((card) => card.name === CardName.PRIVATE_MILITARY_CONTRACTOR);
+    const privateMilitaryContractor = target.getPlayedCard(CardName.PRIVATE_MILITARY_CONTRACTOR);
     const militaryContractorFighters = privateMilitaryContractor?.resourceCount ?? 0;
     if (target.underworldData.corruption === 0 && militaryContractorFighters === 0) {
       return cb(true);

@@ -81,7 +81,7 @@ export class TradeWithTitanFloatingLaunchPad implements IColonyTrader {
   private titanFloatingLaunchPad: TitanFloatingLaunchPad | undefined;
 
   constructor(private player: IPlayer) {
-    const card = player.playedCards.find((card) => card.name === CardName.TITAN_FLOATING_LAUNCHPAD);
+    const card = player.getPlayedCard(CardName.TITAN_FLOATING_LAUNCHPAD);
     this.titanFloatingLaunchPad = card === undefined ? undefined : (card as TitanFloatingLaunchPad);
   }
 

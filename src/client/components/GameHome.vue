@@ -40,6 +40,7 @@ import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import GameSetupDetail from '@/client/components/GameSetupDetail.vue';
 import {ParticipantId} from '@/common/Types';
+import {Color} from '@/common/Color';
 
 // taken from https://stackoverflow.com/a/46215202/83336
 // The solution to copying to the clipboard in this case is
@@ -96,8 +97,8 @@ export default Vue.extend({
     setCopiedIdToDefault() {
       this.urlCopiedPlayerId = DEFAULT_COPIED_PLAYER_ID;
     },
-    getPlayerCubeColorClass(color: string): string {
-      return playerColorClass(color.toLowerCase(), 'bg');
+    getPlayerCubeColorClass(color: Color): string {
+      return playerColorClass(color, 'bg');
     },
     getHref(playerId: ParticipantId): string {
       if (playerId === this.game.spectatorId) {

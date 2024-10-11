@@ -321,8 +321,8 @@ export default Vue.extend({
     VictoryPointChart,
   },
   methods: {
-    getEndGamePlayerRowColorClass(color: string): string {
-      return playerColorClass(color.toLowerCase(), 'bg_transparent');
+    getEndGamePlayerRowColorClass(color: Color): string {
+      return playerColorClass(color, 'bg_transparent');
     },
     getTimer(p: PublicPlayerModel): string {
       return Timer.toString(p.timer);

@@ -146,7 +146,7 @@ export default Vue.extend({
     },
     getTitleClasses(): string {
       const classes = ['log-title'];
-      classes.push(playerColorClass(this.color.toLowerCase(), 'shadow'));
+      classes.push(playerColorClass(this.color, 'shadow'));
       return classes.join(' ');
     },
     lastGenerationClass(): string {

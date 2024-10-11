@@ -38,15 +38,18 @@ export class CometAiming extends Card implements IActionCard, IProjectCard {
     });
   }
 
-  private canPlaceOcean(player: IPlayer) {
-    return player.game.canAddOcean() && player.canAfford({cost: 0, tr: {oceans: 1}});
+  private canAffordOcean(player: IPlayer) {
+    return player.canAfford({cost: 0, tr: {oceans: 1}});
   }
 
   public canAct(player: IPlayer): boolean {
     if (player.titanium > 0) {
       return true;
     }
-    return this.resourceCount > 0 && this.canPlaceOcean(player);
+    if (this.resourceCount > 0 && this.canAffordOcean(player)) {
+      return true;
+    }
+    return false;
   }
 
   public action(player: IPlayer) {
@@ -76,16 +79,21 @@ export class CometAiming extends Card implements IActionCard, IProjectCard {
     };
 
     if (this.resourceCount === 0) {
-      if (asteroidCards.length === 1) return addAsteroidToSelf();
-      return addAsteroidToCard;
+      return asteroidCards.length === 1 ? addAsteroidToSelf() : addAsteroidToCard;
     }
 
-    if (player.titanium === 0) return spendAsteroidResource();
+    if (player.titanium === 0) {
+      return spendAsteroidResource();
+    }
 
     const availableActions = [];
 
-    if (this.canPlaceOcean(player)) {
-      availableActions.push(new SelectOption('Remove an asteroid resource to place an ocean', 'Remove asteroid').andThen(spendAsteroidResource));
+    if (this.canAffordOcean(player)) {
+      const placeOceanOption = new SelectOption('Remove an asteroid resource to place an ocean', 'Remove asteroid').andThen(spendAsteroidResource);
+      if (!player.game.canAddOcean()) {
+        placeOceanOption.warnings = ['maxoceans'];
+      }
+      availableActions.push(placeOceanOption);
     }
 
     if (asteroidCards.length === 1) {

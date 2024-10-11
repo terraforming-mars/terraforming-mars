@@ -430,8 +430,7 @@ export class Player implements IPlayer {
   }
 
   public cardIsInEffect(cardName: CardName): boolean {
-    return this.playedCards.some(
-      (playedCard) => playedCard.name === cardName);
+    return this.playedCards.some((playedCard) => playedCard.name === cardName);
   }
 
   public hasProtectedHabitats(): boolean {

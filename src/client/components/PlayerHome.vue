@@ -495,11 +495,12 @@ export default Vue.extend({
         return '';
       }
     },
-    isActive(card: CardModel): boolean {
-      return getCardOrThrow(card.name).hasAction;
+    isActive(cardModel: CardModel): boolean {
+      const card = getCardOrThrow(cardModel.name);
+      return card.type === CardType.ACTIVE || card.hasAction;
     },
-    isNotActive(card: CardModel): boolean {
-      return !getCardOrThrow(card.name).hasAction;
+    isNotActive(cardModel: CardModel): boolean {
+      return !getCardOrThrow(cardModel.name).hasAction;
     },
   },
   destroyed() {

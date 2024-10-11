@@ -25,4 +25,5 @@ export type ClientCard = {
   startingMegaCredits?: number; // Corporation and Prelude
   cardCost?: number; // Corporation
   compatibility: Array<GameModule>;
+  hasAction: boolean; // For Prelude 2 preludes with actions. Can be used for more, of course.
 }

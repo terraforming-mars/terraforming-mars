@@ -30,9 +30,18 @@ export class Gordon extends CeoCard {
   }
 
   public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) {
-    if (cardOwner.id !== activePlayer.id) return;
-    if (boardType !== BoardType.MARS || space.spaceType !== SpaceType.LAND) return;
-    if (cardOwner.game.phase === Phase.SOLAR) return;
+    if (cardOwner.id !== activePlayer.id) {
+      return;
+    }
+    if (boardType !== BoardType.MARS) {
+      return;
+    }
+    if (space.spaceType === SpaceType.COLONY) {
+      return;
+    }
+    if (cardOwner.game.phase === Phase.SOLAR) {
+      return;
+    }
 
     if (Board.isCitySpace(space) || Board.isGreenerySpace(space)) {
       cardOwner.game.defer(new GainResources(cardOwner, Resource.MEGACREDITS, {count: 2, log: true}));

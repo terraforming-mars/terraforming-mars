@@ -168,7 +168,9 @@ export class Executor implements BehaviorExecutor {
     }
 
     if (behavior.greenery !== undefined) {
-      if (game.board.getAvailableSpacesForType(player, behavior.greenery.on ?? 'greenery', canAffordOptions).length === 0) {
+      const spaces = game.board.getAvailableSpacesForType(player, behavior.greenery.on ?? 'greenery', canAffordOptions);
+      const filtered = game.board.filterSpacesAroundRedCity(spaces);
+      if (filtered.length === 0) {
         return false;
       }
     }

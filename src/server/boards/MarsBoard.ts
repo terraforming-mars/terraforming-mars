@@ -7,6 +7,7 @@ import {PlacementType} from './PlacementType';
 import {AresHandler} from '../ares/AresHandler';
 import {CardName} from '../../common/cards/CardName';
 import {SpaceId} from '../../common/Types';
+import {oneWayDifference} from '../../common/utils/utils';
 
 export class MarsBoard extends Board {
   private readonly edges: ReadonlyArray<Space>;
@@ -104,16 +105,21 @@ export class MarsBoard extends Board {
     );
   }
 
+  public filterSpacesAroundRedCity(spaces: ReadonlyArray<Space>): ReadonlyArray<Space> {
+    const redCity = this.getSpaceByTileCard(CardName.RED_CITY);
+    if (redCity === undefined) {
+      return spaces;
+    }
+    const adjacentSpaces = this.getAdjacentSpaces(redCity);
+    return oneWayDifference(spaces, adjacentSpaces);
+  }
+
   public getAvailableSpacesForGreenery(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
     let spacesOnLand = this.getAvailableSpacesOnLand(player, canAffordOptions);
     // Gordon CEO can ignore placement restrictions for Cities+Greenery
     if (player.cardIsInEffect(CardName.GORDON)) return spacesOnLand;
-    // Spaces next to Red City are always unavialable.
-    if (player.game.gameOptions.pathfindersExpansion === true) {
-      spacesOnLand = spacesOnLand.filter((space) => {
-        return !this.getAdjacentSpaces(space).some((neighbor) => neighbor.tile?.tileType === TileType.RED_CITY);
-      });
-    }
+    // Spaces next to Red City are always unavialable for Greeneries.
+    spacesOnLand = this.filterSpacesAroundRedCity(spacesOnLand);
 
     const spacesForGreenery = spacesOnLand
       .filter((space) => this.getAdjacentSpaces(space).find((adj) => adj.tile !== undefined && adj.player === player && adj.tile.tileType !== TileType.OCEAN) !== undefined);

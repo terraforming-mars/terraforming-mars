@@ -71,6 +71,7 @@ describe('ApiGame', () => {
           'fastModeOption': false,
           'includedCards': [],
           'includeFanMA': false,
+          'includeNewMA': false,
           'includeVenusMA': true,
           'initialDraftVariant': false,
           'moonExpansion': false,

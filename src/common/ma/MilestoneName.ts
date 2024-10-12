@@ -61,6 +61,22 @@ export const milestoneNames = [
   // Underworld
   'Tunneler',
   'Risktaker',
+
+  // New
+  // 'Hydrologist',
+  'Merchant',
+  'Geologist',
+  // 'Thawer',
+  'Planetologist',
+  'Producer',
+  'Philantropist',
+  'Fundraiser',
+  'ThermoEngineer',
+  'Lobbyist',
+  'Briber',
+  'Sponsor',
+  'Landshaper',
+
 ] as const;
 
 export type MilestoneName = typeof milestoneNames[number];

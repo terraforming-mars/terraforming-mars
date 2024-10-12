@@ -40,6 +40,18 @@ import {Spacefarer} from './terraCimmeria/Spacefarer';
 import {TerraPioneer} from './terraCimmeria/TerraPioneer';
 import {Risktaker} from './underworld/Risktaker';
 import {Tunneler} from './underworld/Tunneler';
+import {Planetologist} from './newMilestones/Planetologist';
+import {Producer} from './newMilestones/Producer';
+import {Philantropist} from './newMilestones/Philantropist';
+import {Fundraiser} from './newMilestones/Fundraiser';
+import {ThermoEngineer} from './newMilestones/ThermoEngineer';
+import {Sponsor} from './newMilestones/Sponsor';
+import {Landshaper} from './newMilestones/Landshaper';
+import {Lobbyist} from './newMilestones/Lobbyist';
+import {Merchant} from './newMilestones/Merchant';
+import {Briber} from './newMilestones/Briber';
+import {Geologist} from './newMilestones/Geologist';
+// import {Thawer} from './newMilestones/Thawer';
 
 export const THARSIS_MILESTONES = [
   new Terraformer(),
@@ -123,6 +135,22 @@ export const UNDERWORLD_MILESTONES = [
   new Tunneler(),
 ];
 
+export const NEW_MILESTONES = [
+  // new Hydrologist(),
+  new Merchant(),
+  new Geologist(),
+  // new Thawer(),
+  new Planetologist(),
+  new Producer(),
+  new Philantropist(),
+  new Fundraiser(),
+  new ThermoEngineer(), // Engineer title already in use
+  new Lobbyist(),
+  new Briber(),
+  new Sponsor(),
+  new Landshaper(),
+];
+
 export const ALL_MILESTONES = [
   ...THARSIS_MILESTONES,
   ...ELYSIUM_MILESTONES,
@@ -136,6 +164,7 @@ export const ALL_MILESTONES = [
   ...TERRA_CIMMERIA_MILESTONES,
   ...VASTITAS_BOREALIS_MILESTONES,
   ...UNDERWORLD_MILESTONES,
+  ...NEW_MILESTONES,
 ];
 
 // Remove namespace and rename function

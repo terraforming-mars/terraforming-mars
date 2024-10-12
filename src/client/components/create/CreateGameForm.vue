@@ -382,6 +382,12 @@
                                   <span v-i18n>Include fan Milestones/Awards</span>
                               </label>
                             </template>
+                            <template v-if="randomMA !== RandomMAOptionType.NONE">
+                              <input type="checkbox" v-model="includeNewMA" id="newMA-checkbox">
+                              <label for="newMA-checkbox">
+                                  <span v-i18n>Include new Official Milestones/Awards</span>
+                              </label>
+                            </template>
 
                             <input type="checkbox" name="showOtherPlayersVP" v-model="showOtherPlayersVP" id="realTimeVP-checkbox">
                             <label for="realTimeVP-checkbox">
@@ -627,6 +633,7 @@ export default (Vue as WithRefs<Refs>).extend({
       removeNegativeGlobalEventsOption: false,
       includeVenusMA: true,
       includeFanMA: false,
+      includeNewMA: false,
       startingCorporations: 2,
       soloTR: false,
       clonedGameId: undefined,
@@ -1049,6 +1056,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const removeNegativeGlobalEventsOption = this.removeNegativeGlobalEventsOption;
       const includeVenusMA = this.includeVenusMA;
       const includeFanMA = this.includeFanMA;
+      const includeNewMA = this.includeNewMA;
       const startingCorporations = this.startingCorporations;
       const soloTR = this.soloTR;
       // const beginnerOption = this.beginnerOption;
@@ -1210,6 +1218,7 @@ export default (Vue as WithRefs<Refs>).extend({
         fastModeOption,
         removeNegativeGlobalEventsOption,
         includeVenusMA,
+        includeNewMA,
         includeFanMA,
         startingCorporations,
         soloTR,

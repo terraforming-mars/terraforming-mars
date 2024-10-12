@@ -31,6 +31,7 @@ export type CreateGameModel = {
   firstIndex: number;
   includedCards: Array<CardName>;
   includeFanMA: boolean;
+  includeNewMA: boolean;
   includeVenusMA: boolean;
   initialDraft: boolean;
   moonExpansion: boolean;

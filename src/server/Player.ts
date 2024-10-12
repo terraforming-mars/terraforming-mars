@@ -78,6 +78,8 @@ import {TRSource} from '../common/cards/TRSource';
 import {IParty} from './turmoil/parties/IParty';
 import {AlliedParty} from './turmoil/AlliedParty';
 import {newStandardDraft} from './Draft';
+import {MilestoneName} from '../common/ma/MilestoneName';
+
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 
@@ -1065,11 +1067,19 @@ export class Player implements IPlayer {
     if (this.game.allMilestonesClaimed()) {
       return [];
     }
-    if ((this.canAfford(this.milestoneCost()) || this.cardIsInEffect(CardName.VANALLEN))) {
-      return this.game.milestones
-        .filter((milestone) => !this.game.milestoneClaimed(milestone) && milestone.canClaim(this));
-    }
-    return [];
+
+    return this.game.milestones
+      .filter((milestone) => {
+        // Ensure the milestone is not already claimed
+        if (this.game.milestoneClaimed(milestone)) {
+          return false;
+        }
+
+        // Pass the milestone name to milestoneCost
+        const milestoneCost = this.milestoneCost(milestone.name);
+        return (this.canAfford(milestoneCost) || this.cardIsInEffect(CardName.VANALLEN)) &&
+               milestone.canClaim(this);
+      });
   }
 
   private claimMilestone(milestone: IMilestone) {
@@ -1080,13 +1090,14 @@ export class Player implements IPlayer {
       player: this,
       milestone: milestone,
     });
+
     // VanAllen CEO Hook for Milestones
     const vanAllen = this.game.getCardPlayerOrUndefined(CardName.VANALLEN);
     if (vanAllen !== undefined) {
       vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: this});
     }
-    if (!this.cardIsInEffect(CardName.VANALLEN)) { // Why isn't this an else clause to the statement above?
-      const cost = this.milestoneCost();
+    if (!this.cardIsInEffect(CardName.VANALLEN)) {
+      const cost = this.milestoneCost(milestone.name);
       this.game.defer(new SelectPaymentDeferred(this, cost, {title: 'Select how to pay for milestone'}));
     }
     this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
@@ -1101,10 +1112,15 @@ export class Player implements IPlayer {
     return stagedProtests?.generationUsed === this.game.generation;
   }
 
-  private milestoneCost() {
+  private milestoneCost(milestoneName: MilestoneName): number {
+    // I have hope that will take all the edge cases. I assumed Briber with Nirgal should cost 12.
     if (this.isCorporation(CardName.NIRGAL_ENTERPRISES)) {
-      return 0;
+      return Math.max(MILESTONE_COST - 8, 0);
     }
+    if (milestoneName === 'Briber') {
+      return MILESTONE_COST + 12;
+    }
+
     return this.isStagedProtestsActive() ? MILESTONE_COST + 8 : MILESTONE_COST;
   }
 

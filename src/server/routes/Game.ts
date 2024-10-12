@@ -144,6 +144,7 @@ export class GameHandler extends Handler {
             fastModeOption: gameReq.fastModeOption,
             includedCards: gameReq.includedCards,
             includeFanMA: gameReq.includeFanMA,
+            includeNewMA: gameReq.includeNewMA,
             includeVenusMA: gameReq.includeVenusMA,
             initialDraftVariant: gameReq.initialDraft,
             moonExpansion: gameReq.moonExpansion,

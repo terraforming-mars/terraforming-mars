@@ -6,6 +6,7 @@ import {
   ELYSIUM_AWARDS,
   HELLAS_AWARDS,
   MOON_AWARDS,
+  NEW_AWARDS,
   TERRA_CIMMERIA_AWARDS,
   THARSIS_AWARDS,
   UNDERWORLD_AWARDS,
@@ -25,6 +26,7 @@ import {
   HELLAS_MILESTONES,
   Milestones,
   MOON_MILESTONES,
+  NEW_MILESTONES,
   TERRA_CIMMERIA_MILESTONES,
   THARSIS_MILESTONES,
   UNDERWORLD_MILESTONES,
@@ -200,6 +202,11 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
   if (gameOptions.underworldExpansion) {
     candidateMilestones.push(...UNDERWORLD_MILESTONES.map(toName));
     candidateAwards.push(...UNDERWORLD_AWARDS.map(toName));
+  }
+
+  if (gameOptions.includeNewMA) {
+    candidateMilestones.push(...NEW_MILESTONES.map(toName));
+    candidateAwards.push(...NEW_AWARDS.map(toName));
   }
 
   if (gameOptions.includeFanMA) {

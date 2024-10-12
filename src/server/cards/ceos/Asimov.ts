@@ -95,6 +95,7 @@ export class Asimov extends CeoCard {
       if (!gameOptions.moonExpansion && award.name === 'Lunar Magnate') return false;
       if (!gameOptions.underworldExpansion && award.name === 'Kingpin') return false;
       if (!gameOptions.underworldExpansion && award.name === 'EdgeLord') return false;
+      if (!gameOptions.turmoilExtension && award.name === 'Statesman') return false;
       return true;
     });
     if (validAwards.length === 0) throw new Error('getValidAwards award list is empty.');

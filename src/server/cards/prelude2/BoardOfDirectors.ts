@@ -52,6 +52,12 @@ export class BoardOfDirectors extends PreludeCard implements IActionCard {
     const prelude = game.preludeDeck.drawOrThrow(player.game);
 
     if (player.canAfford(12)) {
+      const canPlay = prelude.canPlay?.(player, {cost: 12});
+      console.log(canPlay);
+      if (canPlay === false) {
+        prelude.warnings.add('preludeFizzle');
+      }
+
       return new SelectCard(
         message('Would you like pay 12 M€ and one Director to play ${0}', (b)=> b.card(prelude)),
         'Buy', [prelude], {min: 0, max: 1}).andThen((selected) => {

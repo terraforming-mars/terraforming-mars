@@ -125,7 +125,15 @@ export default Vue.extend({
       return cards;
     },
     hasCardWarning() {
+      // This is pretty clunky, to be honest.
       if (Array.isArray(this.cards)) {
+        if (this.cards.length === 1) {
+          this.warnings = this.cards[0].warnings;
+          if (this.cards[0].warning !== undefined) {
+            this.warning = this.cards[0].warning;
+            return true;
+          }
+        }
         return false;
       } else if (typeof this.cards === 'object') {
         this.warnings = this.cards.warnings;

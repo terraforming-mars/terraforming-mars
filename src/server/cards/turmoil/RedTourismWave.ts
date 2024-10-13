@@ -48,6 +48,9 @@ export class RedTourismWave extends Card implements IProjectCard {
       if (space.spaceType === SpaceType.COLONY) {
         return false;
       }
+      if (space.spaceType === SpaceType.RESTRICTED) {
+        return false;
+      }
       if (this.hasRealTile(space)) {
         return false;
       }

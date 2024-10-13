@@ -22,11 +22,12 @@
 	"Once per game, gain 3 M€ for each tile on The Moon.": "CEOアクション：月面のタイルの合計数分、3MC獲得.",
 
 	"Asimov": "アシモフ",
-	"You have +2 score for all awards. Once per game, draw 10-X awards (min. 1), where X is the current generation number. You may put one into the game and fund it for free.": "褒賞のスコアを数えるとき、スコア+2. CEOアクション：10から世代数を引いた数(最低1)褒賞を見る. その内、1つゲームに追加し支援してもよい.",
+	"Effect: You have +2 score for all awards.": "",
+  "Once per game, draw 10-X awards (min. 1), where X is the current generation number. You may put one into the game and fund it for free.": "褒賞のスコアを数えるとき、スコア+2. CEOアクション：10から世代数を引いた数(最低1)褒賞を見る. その内、1つゲームに追加し支援してもよい.",
 
 	"Bjorn": "ビョルン",
 	"Once per game, steal X+2 M€ from each player that has more M€ than you, where X is the current generation number.": "CEOアクション：自分よりMCを多く所持しているプレイヤーから、世代数に2を足した数分、1MC盗む.",
-	
+
 	"Caesar": "シーザー",
 	"Once per game, place X hazard tiles where X is the current generation number. Each opponent loses 1 unit of production of their choice, or 2 units if there are 6 or more hazard tiles.": "CEOアクション：世代数の数分、災害タイルを配置. 他プレイヤーは任意の産出-1(災害タイルが6枚以上ある場合は任意の産出-2).",
 
@@ -49,7 +50,8 @@
 	"Once per game, gain the Ares adjacency bonuses of all player-owned tiles on Mars.": "CEOアクション：火星上の全ての隣接ボーナスを得る特殊タイルから、隣接ボーナスを獲得.",
 
 	"Gordon": "ゴードン",
-	"Ignore placement restrictions for greenery and city tiles on Mars. Gain 2 M€ when you place a greenery or city tile on Mars.": "火星上の緑地タイルと都市タイルの配置制限を無視してもよい. 火星上に緑地タイルか都市タイルを配置した時、2MC獲得.",
+	"Effect: Ignore placement restrictions for greenery and city tiles on Mars.": "",
+  "Effect: Gain 2 M€ when you place a greenery or city tile on Mars.": "火星上の緑地タイルと都市タイルの配置制限を無視してもよい. 火星上に緑地タイルか都市タイルを配置した時、2MC獲得.",
 
 	"Greta": "グレタ",
 	"When you take an action or play a card that increases your TR THIS GENERATION (max 10 times), gain 4 M€.": "この世代中にTRを増加させるアクションやカードをプレイした時、4MCを獲得(最大10回).",
@@ -76,13 +78,15 @@
 	"Once per game, discard any number of Earth cards to draw that many space cards, and gain that many units of titanium, plus 6.": "CEOアクション：好きな数の地球タグカードを捨てる. 捨てた枚数と同じ数分、宇宙タグカードを1枚入手. 捨てた枚数+6チタン獲得.",
 
 	"Naomi": "ナオミ",
-	"When you build a colony, gain 2 energy and 3 M€. Once per game, move each colony tile track marker to its highest or lowest value.": "コロニー配置時、2電力と3MC獲得. CEOアクション：各天体のトラックを最高値か最低値に移動させる.",
+	"Effect: When you build a colony, gain 2 energy and 3 M€.": "",
+  "Once per game, move each colony tile track marker to its highest or lowest value.": "コロニー配置時、2電力と3MC獲得. CEOアクション：各天体のトラックを最高値か最低値に移動させる.",
 
 	"Neil": "ニール",
-	"Gain 1 M€ when any player plays a Moon tag. Once per game, increase your M€ production by the value of the LOWEST Moon rate.": "月タグがプレイされた時、1MC獲得. CEOアクション：最も低い月レートの数分、MC産出+1.",
+	"Effect: Gain 1 M€ when any player plays a Moon tag.": "",
+  "Once per game, increase your M€ production by the value of the LOWEST Moon rate.": "月タグがプレイされた時、1MC獲得. CEOアクション：最も低い月レートの数分、MC産出+1.",
 
 	"Oscar": "オスカー",
-	"You have +1 influence. Once per game, replace the Chairman with one of your delegates.": "影響力+1. CEOアクション：議長をあなたの代議員と交代する.",
+	"Once per game, replace the Chairman with one of your delegates.": "影響力+1. CEOアクション：議長をあなたの代議員と交代する.",
 
 	"Petra": "ペトラ",
 	"Once per game, replace all Neutral delegates with your delegates. Gain 3 M€ for each delegate replaced this way. Place 3 Neutral delegates.": "CEOアクション：全ての中立の代議員をあなたの代議員と交代する. 配置した代議員の数分、3MC獲得. 中立の代議員を3名配置.",
@@ -109,7 +113,8 @@
 	"Once per game, gain 4 M€ for each ocean placed. If all oceans are aleady placed, gain only 15 M€.": "CEOアクション：海洋の数分、4MC獲得. ただし、海洋が全て配置されている場合は15MC獲得.",
 
 	"Van Allen": "ヴァン・アレン",
-	"You may claim milestones for free (you must still meet the requirements). When any milestone is claimed, gain 3 M€.": "称号を無料で獲得. 称号が獲得された時、3MC獲得.",
+	"Effect: MILESTONES ALWAYS COST 0 M€ FOR YOU.": "",
+"Effect: When any milestone is claimed, gain 3 M€.": "称号を無料で獲得. 称号が獲得された時、3MC獲得.",
 
 	"Will": "ウィル",
 	"Once per game, add the following resources to your cards: 2 animals, 2 microbes, 2 floaters, 2 wild.": "CEOアクション：2動物獲得. 2微生物獲得. 2浮遊体獲得. カード上に2リソース追加.",
@@ -119,11 +124,12 @@
 	"Effect: AFTER this action has been used, when playing a card with a requirement, you pay 1 M€ less for it.": "効果：このCEOアクションのあと、条件付きカードのプレイコスト-1MC.",
 
 	"Xu": "シェイ",
-	"Once per game, gain 2 M€ for each Venus tag in play. Gain an additional 8 M€ if you Have the most Venus tags in play.": "CEOアクション：全プレイヤーの金星タグの合計数分、1MC獲得. 金星タグを一番多く所持している場合、8MC獲得.",
+	"Once per game, gain 2 M€ for each Venus tag in play. Gain an additional 8 M€ if you have the most Venus tags in play.": "CEOアクション：全プレイヤーの金星タグの合計数分、1MC獲得. 金星タグを一番多く所持している場合、8MC獲得.",
 
 	"Yvonne": "イボンヌ",
 	"Once per game, gain all your colony bonuses twice.": "CEOアクション：全ての所有しているコロニーから2回分コロニー・ボーナス獲得.",
 
 	"Zan": "ザン",
-	"You are immune to Reds' ruling policy. Once per game, place all of your available delegates in Reds. Gain 1 M€ for each delegate placed this way.": "赤き惑星党の与党政策を無視する. CEOアクション：まだ配置していない代議員を全て赤き惑星党に配置. 配置した代議員の数分、1MC獲得."
+	"Effect: You are immune to Reds' ruling policy.": "",
+  "Once per game, place all of your available delegates in Reds. Gain 1 M€ for each delegate placed this way.": "赤き惑星党の与党政策を無視する. CEOアクション：まだ配置していない代議員を全て赤き惑星党に配置. 配置した代議員の数分、1MC獲得."
 }

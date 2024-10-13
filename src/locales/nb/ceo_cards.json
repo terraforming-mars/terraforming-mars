@@ -23,11 +23,12 @@
 	"Once per game, gain 3 M€ for each tile on The Moon.": "En gang per spill, få 3 M€ for hvert brikke på Månen.",
 
 	"Asimov": "Asimov",
-	"You have +2 score for all awards. Once per game, draw 10-X awards (min. 1), where X is the current generation number. You may put one into the game and fund it for free.": "Du har +2 poeng for alle utmerkelser. En gang per spill, trekk (10 - X) utmerkelser (min. 1), hvor X er gjeldende generasjonsnummer. Du velge å spille en av dem uten kostnad.",
+	"Effect: You have +2 score for all awards.": "",
+  "Once per game, draw 10-X awards (min. 1), where X is the current generation number. You may put one into the game and fund it for free.": "Du har +2 poeng for alle utmerkelser. En gang per spill, trekk (10 - X) utmerkelser (min. 1), hvor X er gjeldende generasjonsnummer. Du velge å spille en av dem uten kostnad.",
 
 	"Bjorn": "Bjørn",
 	"Once per game, steal X+2 M€ from each player that has more M€ than you, where X is the current generation number.": "En gang per spill, stjel X+2 M€ fra hver spiller som har mer M€ enn deg, hvor X er gjeldende generasjonsnummer.",
-	
+
 	"Caesar": "Cæsar",
 	"Once per game, place X hazard tiles where X is the current generation number. Each opponent loses 1 unit of production of their choice, or 2 units if there are 6 or more hazard tiles.": "En gang per spill, plasser X fare-brikker hvor X er gjeldende generasjonsnummer. Hver motstander mister 1 produksjon av eget valg, eller 2 produksjon hvis det er 6 eller flere fare-brikker.",
 
@@ -50,7 +51,8 @@
 	"Once per game, gain the Ares adjacency bonuses of all player-owned tiles on Mars.": "En gang per spill, få Ares nærhetsbonusen til alle spiller-eide brikker på Mars.",
 
 	"Gordon": "Gordon",
-	"Ignore placement restrictions for greenery and city tiles on Mars. Gain 2 M€ when you place a greenery or city tile on Mars.": "Effekt: Ignorer plasseringsrestriksjoner for skogområder og by-brikker på Mars. Få 2 M€ når du plasserer et skogområde eller en by-brikke på Mars.",
+	"Effect: Ignore placement restrictions for greenery and city tiles on Mars.": "",
+  "Effect: Gain 2 M€ when you place a greenery or city tile on Mars.": "Effekt: Ignorer plasseringsrestriksjoner for skogområder og by-brikker på Mars. Få 2 M€ når du plasserer et skogområde eller en by-brikke på Mars.",
 
 	"Greta": "Greta",
 	"When you take an action or play a card that increases your TR THIS GENERATION (max 10 times), gain 4 M€.": "Effekt: Når du tar en handling eller spiller et kort som øker din TR denne generasjonen (maks 10 ganger), få 4 M€.",
@@ -77,13 +79,15 @@
 	"Once per game, discard any number of Earth cards to draw that many space cards, and gain that many units of titanium, plus 6.": "En gang per spill, kast et valgfritt antall Jord-kort for å trekke like mange rom-kort, og få like mange enheter med titan, pluss 6.",
 
 	"Naomi": "Naomi",
-	"When you build a colony, gain 2 energy and 3 M€. Once per game, move each colony tile track marker to its highest or lowest value.": "Effekt: Når du bygger en koloni, få 2 energi og 3 M€. En gang per spill, flytt sporet på hver koloni-plate til høyeste eller laveste verdi.",
+	"Effect: When you build a colony, gain 2 energy and 3 M€.": "",
+  "Once per game, move each colony tile track marker to its highest or lowest value.": "Effekt: Når du bygger en koloni, få 2 energi og 3 M€. En gang per spill, flytt sporet på hver koloni-plate til høyeste eller laveste verdi.",
 
 	"Neil": "Neil",
-	"Gain 1 M€ when any player plays a Moon tag. Once per game, increase your M€ production by the value of the LOWEST Moon rate.": "Effekt: Få 1 M€ når noen spiller et Måne-symbol. En gang per spill, øk din M€-produksjon med verdien av den LAVESTE Måne-verdien.",
+	"Effect: Gain 1 M€ when any player plays a Moon tag.": "",
+  "Once per game, increase your M€ production by the value of the LOWEST Moon rate.": "Effekt: Få 1 M€ når noen spiller et Måne-symbol. En gang per spill, øk din M€-produksjon med verdien av den LAVESTE Måne-verdien.",
 
 	"Oscar": "Oscar",
-	"You have +1 influence. Once per game, replace the Chairman with one of your delegates.": "Effekt: Du har +1 innflytelse. En gang per spill, erstatt Styrelederen med en av dine delegater.",
+	"Once per game, replace the Chairman with one of your delegates.": "Effekt: Du har +1 innflytelse. En gang per spill, erstatt Styrelederen med en av dine delegater.",
 
 	"Petra": "Petra",
 	"Once per game, replace all Neutral delegates with your delegates. Gain 3 M€ for each delegate replaced this way. Place 3 Neutral delegates.": "En gang per spill, erstatt alle nøytrale delegater med dine delegater. Få 3 M€ for hver delegat som erstattes på denne måten. Plasser 3 nøytrale delegater.",
@@ -110,7 +114,8 @@
 	"Once per game, gain 4 M€ for each ocean placed. If all oceans are aleady placed, gain only 15 M€.": "En gang per spill, få 4 M€ for hvert hav som er plassert. Dersom alle hav allerede er plassert får du bare 15 M€.",
 
 	"Van Allen": "Van Allen",
-	"You may claim milestones for free (you must still meet the requirements). When any milestone is claimed, gain 3 M€.": "Effekt: Du kan gjøre krav på milepæler gratis (du må fortsatt oppfylle kravene). Når en milepæl gjøres krav på, få 3 M€.",
+	"Effect: MILESTONES ALWAYS COST 0 M€ FOR YOU.": "",
+"Effect: When any milestone is claimed, gain 3 M€.": "Effekt: Du kan gjøre krav på milepæler gratis (du må fortsatt oppfylle kravene). Når en milepæl gjøres krav på, få 3 M€.",
 
 	"Will": "Will",
 	"Once per game, add the following resources to your cards: 2 animals, 2 microbes, 2 floaters, 2 wild.": "En gang per spill, legg til følgende ressurser på dine kort: 2 dyr, 2 mikrober, 2 svevere, 2 valgfri.",
@@ -120,11 +125,12 @@
 	"Effect: AFTER this action has been used, when playing a card with a requirement, you pay 1 M€ less for it.": "Effekt: ETTER at denne handlingen har blitt brukt, når du spiller et kort med et krav, betaler du 1 M€ mindre for det.",
 
 	"Xu": "Xu",
-	"Once per game, gain 2 M€ for each Venus tag in play. Gain an additional 8 M€ if you Have the most Venus tags in play.": "En gang per spill, få 2 M€ for hvert Venus-symbol i spill. Få ytterligere 8 M€ hvis du har flest Venus-symboler i spill.",
+	"Once per game, gain 2 M€ for each Venus tag in play. Gain an additional 8 M€ if you have the most Venus tags in play.": "En gang per spill, få 2 M€ for hvert Venus-symbol i spill. Få ytterligere 8 M€ hvis du har flest Venus-symboler i spill.",
 
 	"Yvonne": "Yvonne",
 	"Once per game, gain all your colony bonuses twice.": "En gang per spill, få alle dine koloni-bonuser to ganger.",
 
 	"Zan": "Zan",
-	"You are immune to Reds' ruling policy. Once per game, place all of your available delegates in Reds. Gain 1 M€ for each delegate placed this way.": "Effekt: Du er immun mot De Rødes regjerende politikk. En gang per spill, plasser alle dine tilgjengelige delegater hos De Røde. Få 1 M€ for hver delegat som plasseres på denne måten."
+	"Effect: You are immune to Reds' ruling policy.": "",
+  "Once per game, place all of your available delegates in Reds. Gain 1 M€ for each delegate placed this way.": "Effekt: Du er immun mot De Rødes regjerende politikk. En gang per spill, plasser alle dine tilgjengelige delegater hos De Røde. Få 1 M€ for hver delegat som plasseres på denne måten."
 }

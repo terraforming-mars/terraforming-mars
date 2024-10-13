@@ -52,9 +52,7 @@ export class BoardOfDirectors extends PreludeCard implements IActionCard {
     const prelude = game.preludeDeck.drawOrThrow(player.game);
 
     if (player.canAfford(12)) {
-      const canPlay = prelude.canPlay?.(player, {cost: 12});
-      console.log(canPlay);
-      if (canPlay === false) {
+      if (prelude.canPlay?.(player, {cost: 12}) === false) {
         prelude.warnings.add('preludeFizzle');
       }
 

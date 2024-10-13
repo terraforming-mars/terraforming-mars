@@ -13,11 +13,11 @@ export class Oscar extends CeoCard {
       metadata: {
         cardNumber: 'L15',
         renderData: CardRenderer.builder((b) => {
-          b.plus().influence();
+          b.effect('You have +1 influence', (eb) => eb.startEffect.influence());
           b.br.br;
           b.opgArrow().chairman();
         }),
-        description: 'You have +1 influence. Once per game, replace the Chairman with one of your delegates.',
+        description: 'Once per game, replace the Chairman with one of your delegates.',
       },
     });
   }

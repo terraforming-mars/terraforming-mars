@@ -17,10 +17,12 @@ export class Gordon extends CeoCard {
       metadata: {
         cardNumber: 'L07',
         renderData: CardRenderer.builder((b) => {
-          b.greenery().city().colon().megacredits(2).asterix();
-          b.br.br;
+          b.effect('Ignore placement restrictions for greenery and city tiles on Mars.',
+            (eb) => eb.greenery().city().startEffect.asterix());
+          b.br;
+          b.effect('Gain 2 M€ when you place a greenery or city tile on Mars.',
+            (eb) => eb.greenery().city().startEffect.megacredits(2));
         }),
-        description: 'Ignore placement restrictions for greenery and city tiles on Mars. Gain 2 M€ when you place a greenery or city tile on Mars.',
       },
     });
   }

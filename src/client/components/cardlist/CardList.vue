@@ -183,6 +183,7 @@ import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import Milestone from '@/client/components/Milestone.vue';
 import Award from '@/client/components/Award.vue';
+import {MACompatibility} from '@/common/ma/compatibilities';
 
 const moduleAbbreviations: Record<GameModule, string> = {
   base: 'b',
@@ -464,7 +465,10 @@ export default (Vue as WithRefs<Refs>).extend({
       return colony !== undefined && this.expansions[colony.module ?? 'base'] === true;
     },
     showMA(name: MilestoneName | AwardName): boolean {
-      return this.include(name, 'ma');
+      if (!this.include(name, 'ma')) {
+        return false;
+      }
+      return this.expansions[MACompatibility[name].compatibility ?? 'base'] === true;
     },
     getLanguageCssClass() {
       const language = getPreferences().lang;

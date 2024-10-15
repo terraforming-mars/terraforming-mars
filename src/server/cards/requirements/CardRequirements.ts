@@ -48,7 +48,7 @@ export class CardRequirements {
     if (tags.length > 1 && !player.tags.playerHas(tags)) {
       return false;
     }
-    const thinkTankResources = player.playedCards.find((c) => c.name === CardName.THINK_TANK)?.resourceCount;
+    const thinkTankResources = player.getPlayedCard(CardName.THINK_TANK)?.resourceCount;
     let result: boolean | YesAnd = true;
     for (const requirement of this.requirements) {
       const satisfies = requirement.satisfies(player, thinkTankResources);

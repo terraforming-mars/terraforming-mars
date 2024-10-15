@@ -4,7 +4,7 @@ import {describeDatabaseSuite} from '../database/databaseSuite';
 import {ITestDatabase, Status} from '../database/ITestDatabase';
 import {IGame} from '../../src/server/IGame';
 import {Game} from '../../src/server/Game';
-import {PostgreSQL} from '../../src/server/database/PostgreSQL';
+import {PostgreSQL, POSTGRESQL_TABLES} from '../../src/server/database/PostgreSQL';
 import {TestPlayer} from '../TestPlayer';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {Phase} from '../../src/common/Phase';
@@ -14,6 +14,7 @@ import {GameLoader} from '../../src/server/database/GameLoader';
 import {GameId} from '../../src/common/Types';
 import {QueryResult} from 'pg';
 import {SelectInitialCards} from '../../src/server/inputs/SelectInitialCards';
+import {range} from '../../src/common/utils/utils';
 
 dotenv.config({path: 'tests/integration/.env', debug: true});
 
@@ -48,13 +49,22 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
     response['size-bytes-database'] = 'any';
     response['size-bytes-participants'] = 'any';
 
+    const extraFields = ['rows-game', 'size-bytes-game', 'rows-completed-game', 'size-bytes-completed-game'];
+    for (const field of extraFields) {
+      expect(response[field], 'For ' + field).is.not.undefined;
+      delete response[field];
+    }
     return response;
   }
 
+  public setTrimCount(trimCount: number) {
+    this.trimCount = trimCount;
+  }
+
   public async afterEach() {
-    await this.client.query('DROP TABLE games');
-    await this.client.query('DROP TABLE game_results');
-    await this.client.query('DROP TABLE participants');
+    for (const table of POSTGRESQL_TABLES) {
+      await this.client.query('DROP TABLE IF EXISTS ' + table);
+    }
   }
 
   public getStatistics() {
@@ -105,7 +115,7 @@ describeDatabaseSuite({
     'pool-total-count': 1,
     'pool-idle-count': 1,
     'pool-waiting-count': 0,
-    'rows-game_results': '0',
+    'rows-game-results': '0',
     'rows-games': '0',
     'rows-participants': '0',
     'size-bytes-games': 'any',
@@ -248,15 +258,12 @@ describeDatabaseSuite({
 
       // Notice how save-count was 3 and is now 5. It saved twice.
       expect(await db.getStat('save-count')).eq(5);
-      // If save count is 5, why are only four versions saved?
-      expect(await db.getSaveIds(game.id)).deep.eq([0, 1, 2, 3]);
-      // That's because one of those saves was an update instead of an insert.
-      // Version 3 was saved twice.
-      expect(await db.getStat('save-conflict-undo-count')).eq(1);
+      expect(await db.getSaveIds(game.id)).deep.eq([0, 1, 2, 3, 4]);
+      expect(await db.getStat('save-conflict-undo-count')).eq(0);
 
       // Of all the steps in this test, this is the one which will verify the broken undo
       // is repaired correctly. When it was broken, this was 5.
-      expect(game.lastSaveId).eq(4);
+      expect(game.lastSaveId).eq(5);
     });
 
     it('undo works in multiplayer, other players have passed', async () => {
@@ -430,11 +437,225 @@ describeDatabaseSuite({
       // Trigger an undo
       // This is embedded in routes/PlayerInput, and should be moved out of there.
       const restorePoint = game.lastSaveId - 2;
+      expect(restorePoint).eq(5);
+      expect(game.lastSaveId).eq(7);
       const newGame = await GameLoader.getInstance().restoreGameAt(player.game.id, restorePoint);
       await db.awaitAllSaves();
       const revisedPlayer = newGame.getPlayerById(player.id);
       expect(revisedPlayer.megaCredits).eq(4);
       expect(revisedPlayer.actionsTakenThisRound).eq(4);
+    });
+
+    it('trim', async () => {
+      const db = dbFactory();
+
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-1212', [player], player);
+      await db.lastSaveGamePromise;
+      expect(game.lastSaveId).eq(1);
+
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3, 4, 5]);
+
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
+
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]);
+
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
+
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]);
+
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]);
+
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]);
+    });
+
+    it('trim at 5', async () => {
+      const db = dbFactory();
+      db.setTrimCount(5);
+
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-1212', [player], player);
+      await db.lastSaveGamePromise;
+      expect(game.lastSaveId).eq(1);
+
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3, 4]);
+
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3, 4, 5]);
+
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+      await db.saveGame(game);
+
+      expect(await db.getSaveIds(game.id)).has.members([0, 5, 6, 7, 8, 9, 10]);
+    });
+
+    it('trim at 2', async () => {
+      const db = dbFactory();
+      db.setTrimCount(2);
+
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-1212', [player], player);
+      await db.lastSaveGamePromise;
+      expect(game.lastSaveId).eq(1);
+
+      expect(await db.getSaveIds(game.id)).has.members(range(1));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(2));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(3));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(4));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members([0, 2, 3, 4]);
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members([0, 2, 3, 4, 5]);
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members([0, 4, 5, 6]);
+    });
+
+    it('trim at 0', async () => {
+      const db = dbFactory();
+      db.setTrimCount(0);
+
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-1212', [player], player);
+      await db.lastSaveGamePromise;
+      expect(game.lastSaveId).eq(1);
+
+      expect(await db.getSaveIds(game.id)).has.members(range(1));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(2));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(3));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(4));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(5));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(6));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(7));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(8));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(9));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(10));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(11));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(12));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(13));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(14));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(15));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(16));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(17));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(18));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(19));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(20));
+    });
+
+    it('trim at -1', async () => {
+      const db = dbFactory();
+      db.setTrimCount(-1);
+
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-1212', [player], player);
+      await db.lastSaveGamePromise;
+      expect(game.lastSaveId).eq(1);
+
+      expect(await db.getSaveIds(game.id)).has.members(range(1));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(2));
+
+      await db.saveGame(game);
+      expect(await db.getSaveIds(game.id)).has.members(range(3));
     });
   },
 });

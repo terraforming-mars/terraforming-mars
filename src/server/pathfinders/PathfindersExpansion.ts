@@ -106,22 +106,22 @@ export class PathfindersExpansion {
             PathfindersExpansion.grant(reward, from, tag);
           });
         }
-        rewards.everyone.forEach((reward) => {
-          game.getPlayers().forEach((p) => {
+      }
+      rewards.everyone.forEach((reward) => {
+        game.getPlayers().forEach((p) => {
+          PathfindersExpansion.grant(reward, p, tag);
+        });
+      });
+      if (rewards.mostTags.length > 0) {
+        const players = PathfindersExpansion.playersWithMostTags(
+          tag,
+          game.getPlayers().slice(),
+          (typeof(from) === 'object') ? from : undefined);
+        rewards.mostTags.forEach((reward) => {
+          players.forEach((p) => {
             PathfindersExpansion.grant(reward, p, tag);
           });
         });
-        if (rewards.mostTags.length > 0) {
-          const players = PathfindersExpansion.playersWithMostTags(
-            tag,
-            game.getPlayers().slice(),
-            (typeof(from) === 'object') ? from : undefined);
-          rewards.mostTags.forEach((reward) => {
-            players.forEach((p) => {
-              PathfindersExpansion.grant(reward, p, tag);
-            });
-          });
-        }
       }
       // game.indentation--;
     }

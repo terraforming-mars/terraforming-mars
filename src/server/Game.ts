@@ -65,7 +65,7 @@ import {DEFAULT_GAME_OPTIONS, GameOptions} from './game/GameOptions';
 import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
 import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
-import {addDays, dayStringToDays} from './database/utils';
+import {addDays, stringToNumber} from './database/utils';
 import {ALL_TAGS, Tag} from '../common/cards/Tag';
 import {IGame, Score} from './IGame';
 import {MarsBoard} from './boards/MarsBoard';
@@ -187,17 +187,17 @@ export class Game implements IGame, Logger {
     this.players = players;
     const playerIds = players.map((p) => p.id);
     if (playerIds.includes(first.id) === false) {
-      throw new Error('Cannot find first player ' + first.id + ' in ' + playerIds);
+      throw new Error('Cannot find first player ' + first.id + ' in [' + playerIds + ']');
     }
     if (playerIds.includes(activePlayer) === false) {
-      throw new Error('Cannot find active player ' + activePlayer + ' in ' + playerIds);
+      throw new Error('Cannot find active player ' + activePlayer + ' in [' + playerIds + ']');
     }
     if (new Set(playerIds).size !== players.length) {
-      throw new Error('Duplicate player found: ' + playerIds);
+      throw new Error('Duplicate player found: [' + playerIds + ']');
     }
     const colors = players.map((p) => p.color);
     if (new Set(colors).size !== players.length) {
-      throw new Error('Duplicate color found: ' + colors);
+      throw new Error('Duplicate color found: [' + colors + ']');
     }
 
     this.activePlayer = activePlayer;
@@ -351,9 +351,11 @@ export class Game implements IGame, Logger {
           player.dealtProjectCards.push(...projectDeck.drawN(game, 10));
         }
         if (gameOptions.preludeExtension) {
-          player.dealtPreludeCards.push(...preludeDeck.drawN(game, constants.PRELUDE_CARDS_DEALT_PER_PLAYER));
+          gameOptions.startingPreludes = Math.max(gameOptions.startingPreludes ?? 0, constants.PRELUDE_CARDS_DEALT_PER_PLAYER);
+          player.dealtPreludeCards.push(...preludeDeck.drawN(game, gameOptions.startingPreludes));
         }
         if (gameOptions.ceoExtension) {
+          gameOptions.startingCeos = Math.max(gameOptions.startingCeos ?? 0, constants.CEO_CARDS_DEALT_PER_PLAYER);
           player.dealtCeoCards.push(...ceoDeck.drawN(game, gameOptions.startingCeos));
         }
       } else {
@@ -390,10 +392,6 @@ export class Game implements IGame, Logger {
 
   public save(): void {
     GameLoader.getInstance().saveGame(this);
-  }
-
-  public toJSON(): string {
-    return JSON.stringify(this.serialize());
   }
 
   public serialize(): SerializedGame {
@@ -726,6 +724,11 @@ export class Game implements IGame, Logger {
   }
 
   private gotoEndGeneration() {
+    if (this.deferredActions.length > 0) {
+      this.deferredActions.runAll(() => this.gotoEndGeneration());
+      return;
+    }
+
     this.endGenerationForColonies();
 
     Turmoil.ifTurmoil(this, (turmoil) => {
@@ -792,7 +795,7 @@ export class Game implements IGame, Logger {
   }
 
   private gotoWorldGovernmentTerraforming() {
-    this.worldGovernmentTerraforming(this.first);
+    this.worldGovernmentTerraforming();
   }
 
   public worldGovernmentTerraformingInput(player: IPlayer): OrOptions {
@@ -869,16 +872,12 @@ export class Game implements IGame, Logger {
     return orOptions;
   }
 
-  public worldGovernmentTerraforming(player: IPlayer): void {
+  public worldGovernmentTerraforming(): void {
+    const player = this.first;
     const input = this.worldGovernmentTerraformingInput(player);
     player.setWaitingFor(input, () => {
-      this.doneWorldGovernmentTerraforming();
+      this.gotoEndGeneration();
     });
-  }
-
-  public doneWorldGovernmentTerraforming() {
-    // Carry on to next phase
-    this.gotoEndGeneration();
   }
 
   private allPlayersHavePassed(): boolean {
@@ -1541,7 +1540,7 @@ export class Game implements IGame, Logger {
     if (this.createdTime.getTime() === 0) {
       return 0;
     }
-    const days = dayStringToDays(process.env.MAX_GAME_DAYS, 10);
+    const days = stringToNumber(process.env.MAX_GAME_DAYS, 10);
     return addDays(this.createdTime, days).getTime();
   }
 

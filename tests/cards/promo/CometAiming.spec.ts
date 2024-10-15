@@ -5,27 +5,30 @@ import {testGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, maxOutOceans} from '../../TestingUtils';
+import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
+import {IGame} from '../../../src/server/IGame';
 
-describe('CometAiming', function() {
+describe('CometAiming', () => {
   let card: CometAiming;
+  let game: IGame;
   let player: TestPlayer;
+  let player2: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CometAiming();
-    [/* game */, player] = testGame(2);
+    [game, player, player2] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     expect(card.play(player)).is.undefined;
   });
 
-  it('Can not act', function() {
+  it('Can not act', () => {
     player.playedCards.push(card);
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act - single action choice, single target', function() {
+  it('Should act - single action choice, single target', () => {
     player.playedCards.push(card);
     player.titanium = 1;
     expect(card.canAct(player)).is.true;
@@ -41,7 +44,7 @@ describe('CometAiming', function() {
     expect(player.getTerraformRating()).to.eq(21);
   });
 
-  it('Should act - multiple action choices, multiple targets', function() {
+  it('Should act - multiple action choices, multiple targets', () => {
     const card2 = new RotatorImpacts();
     player.playedCards.push(card, card2);
 
@@ -54,18 +57,18 @@ describe('CometAiming', function() {
     expect(player.titanium).to.eq(0);
   });
 
-  it('Cannot spend resource to place ocean if oceans are maxed', function() {
+  it('Can spend resource to place ocean if oceans are maxed', () => {
     player.playedCards.push(card);
     card.resourceCount = 1;
-    maxOutOceans(player);
-    expect(card.canAct(player)).is.not.true;
+    maxOutOceans(player2);
 
-    player.titanium = 1;
     expect(card.canAct(player)).is.true;
+    expect(player.getTerraformRating()).eq(20);
 
     card.action(player);
-    expect(player.game.deferredActions).has.lengthOf(0);
-    expect(player.titanium).to.eq(0);
-    expect(card.resourceCount).to.eq(2);
+    runAllActions(game);
+
+    expect(card.resourceCount).to.eq(0);
+    expect(player.getTerraformRating()).eq(20);
   });
 });

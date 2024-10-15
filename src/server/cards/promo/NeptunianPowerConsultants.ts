@@ -14,6 +14,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectPayment} from '../../inputs/SelectPayment';
 import {Size} from '../../../common/cards/render/Size';
+import {Priority} from '../../deferredActions/Priority';
 
 export class NeptunianPowerConsultants extends Card implements IProjectCard {
   constructor() {
@@ -60,7 +61,7 @@ export class NeptunianPowerConsultants extends Card implements IProjectCard {
           game.log('${0} declined to use the ${1} effect', (b) => b.player(cardOwner).card(this));
           return undefined;
         }));
-        cardOwner.defer(orOptions);
+        cardOwner.defer(orOptions, Priority.OPPONENT_TRIGGER);
       } else {
         game.log('${0} cannot afford to use the ${1} effect', (b) => b.player(cardOwner).card(this));
       }

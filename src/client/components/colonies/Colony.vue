@@ -101,8 +101,8 @@
           v-i18n>Trade Income: Steal 3 indicated resources</span>
         <span v-else-if="colony.name === ColonyName.LEAVITT" class="colony-background-color" style="margin-left: 3px;"
           v-i18n>Trade Income: Draw X cards and keep 1</span>
-        <span v-else-if="colony.name === ColonyName.DEIMOS" class="colony-background-color" style="margin-left: 3px;">
-          Trade Income: Erode X adjacent spaces</span>
+        <span v-else-if="colony.name === ColonyName.DEIMOS" class="colony-background-color" style="margin-left: 3px;"
+          v-i18n>Trade Income: Erode X adjacent spaces</span>
         <span v-else class="colony-background-color" v-i18n>Trade Income</span>
       </template>
 

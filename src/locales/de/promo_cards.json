@@ -1,4 +1,12 @@
 {
+  "Casinos": "Casino",
+  "Requires that you have a city. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Benötigt ein eigenes Stadtplättchen. Reduziere deine Energieproduktion um 1 und erhöhe deine M€-Produktion um 4.",
+  
+  "Hospitals": "Krankenhäuser",
+  "Effect: Each time a city is placed, gain a disease here.": "EFFEKT: Jedes Mal, wenn eine Stadt platziert wird, erhälst du hier eine Krankheit.",
+  "Action: Remove a disease from ANY OF YOUR CARDS to gain 1 M€ per city in play.": "AKTION: Entferne eine Krankheit von EINER DEINER Karten und erhalte 1 M€ pro Stadt im Spiel.",
+  "Decrease your energy production 1 step.": "Reduziere deine Energieproduktion um 1.",
+  
   "Supermarkets": "Supermarkt",
   "Requires two cities in play. Increase your M€ production 2 steps.": "Benötigt 2 Städte im Spiel. Erhöhe deine M€-Produktion um 2.",
 
@@ -196,8 +204,8 @@
   "Action: Decrease energy production 1 step to gain 8 M€.": "AKTION: Senke deine Energie-Produktion um 1, um 8 M€ zu erhalten.",
 
   "Asteroid Rights": "Asteroidenrechte",
-  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "AKTION: Zahle 1 M€, um einer BELIEBIGEN Karte 1 Asteroid hinzuzufügen.",
-  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "AKTION: Zahle 1 Asteroid von dieser Karte, um deine M€-Produktion um 1 zu erhöhen ODER 2 Titan zu erhalten.",
+  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "AKTION: Bezahle 1 M€, um einer BELIEBIGEN Karte 1 Asteroiden hinzuzufügen.",
+  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "AKTION: Verbrauche hier 1 Asteroiden, um deine M€-Produktion um 1 zu erhöhen oder 2 Titan zu erhalten.",
   "Add 2 asteroids to this card.": "Füge dieser Karte 2 Asteroiden hinzu.",
 
   "Stanford Torus": "Stanford-Torus",
@@ -214,15 +222,15 @@
   "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "AKTION: Zahle 2X M€, um X Energie zu erhalten oder senke deine Energie-Produktion um 1, um 8 M€ zu erhalten.",
 
   "Bactoviral Research": "Baktovirale Forschung",
-  "Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.": "Ziehe 1 Karte. Wähle 1 deiner ausgespielten Karten und füge für jedes eigene Wissenschaftssymbol, einschließlich diesem, 1 Mikrobe hinzu.",
+  "Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.": "Ziehe 1 Karte. Wähle 1 deiner gespielten Karten und füge ihr je eigenes Wissenschaftssymbol (einschließlich dieses) 1 Mikrobe hinzu.",
 
   "Bio Printing Facility": "Bio-Druckanlage",
-  "Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.": "AKTION: Entferne 2 Energie, um 2 Pflanzen zu erhalten ODER um 1 Tier zu einer ANDEREN Karte hinzuzufügen.",
+  "Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.": "AKTION: Verbrauche 2 Energie, um 2 Pflanzen zu erhalten ODER um einer ANDEREN Karte 1 Tier hinzuzufügen.",
 
   "Harvest": "Ernte",
-  "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "Benötigt 3 eigene Grünflächenplättchen im Spiel und erhalte 12 M€.",
+  "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "Benötigt 3 eigene Grünflächenplättchen im Spiel. Erhalte 12 M€.",
 
   "Outdoor Sports": "Sport im Freien",
-  "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "Benötigt 1 Stadt, die an einen Ozean angrenzt. Erhöhe deine M€-Produktion um 2."
+  "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "Benötigt eine beliebige Stadt angrenzend an ein Ozeanplättchen. Erhöhe deine M€-Produktion um 2."
 
 }

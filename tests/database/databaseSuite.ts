@@ -1,7 +1,8 @@
-import {expect} from 'chai';
-import {use} from 'chai';
+import {expect, use} from 'chai';
 import chaiAsPromised = require('chai-as-promised');
 use(chaiAsPromised);
+import chaiDeepEqualIgnoreUndefined from 'chai-deep-equal-ignore-undefined';
+use(chaiDeepEqualIgnoreUndefined);
 
 import {ITestDatabase} from './ITestDatabase';
 import {Game} from '../../src/server/Game';
@@ -199,6 +200,24 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
         expect(postPurgeEntry).is.undefined;
       });
     }
+
+    it('getGame', async () => {
+      const player = TestPlayer.BLACK.newPlayer();
+      const game = Game.newInstance('game-id-1212', [player], player, {underworldExpansion: true});
+      await db.lastSaveGamePromise;
+      expect(game.lastSaveId).eq(1);
+
+      player.megaCredits = 200;
+      game.log('databaseSuite.getGame test');
+
+      const expected = game.serialize();
+      await db.saveGame(game);
+
+      const actual = await db.getGame(game.id);
+      expect(actual.gameLog[actual.gameLog.length -1].message).eq('databaseSuite.getGame test');
+      expect(actual.gameOptions.underworldExpansion).eq(true);
+      expect(actual).deepEqualIgnoreUndefined(expected);
+    });
 
     it('getGameVersion', async () => {
       const player = TestPlayer.BLACK.newPlayer();

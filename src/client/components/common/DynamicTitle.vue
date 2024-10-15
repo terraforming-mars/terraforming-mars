@@ -5,6 +5,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {playerColorClass} from '@/common/utils/utils';
+import {Color} from '@/common/Color';
 
 export default Vue.extend({
   name: 'DynamicTitle',
@@ -14,7 +15,7 @@ export default Vue.extend({
       required: true,
     },
     color: {
-      type: String,
+      type: String as () => Color,
       required: true,
     },
     withAdditional: {

@@ -12,8 +12,9 @@ import {MarsBoard} from '../../../src/server/boards/MarsBoard';
 import {Units} from '../../../src/common/Units';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast, runAllActions} from '../../TestingUtils';
+import {Mangrove} from '../../../src/server/cards/base/Mangrove';
 
-describe('RedCity', function() {
+describe('RedCity', () => {
   let card: RedCity;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -21,7 +22,7 @@ describe('RedCity', function() {
   let turmoil: Turmoil;
   let board: MarsBoard;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new RedCity();
     [game, player, player2] = testGame(2, {pathfindersExpansion: true, turmoilExtension: true});
     turmoil = game.turmoil!;
@@ -83,7 +84,7 @@ describe('RedCity', function() {
     expect(player.canPlay(card)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     const redCitySpace = board.getSpaceOrThrow('53');
     player.production.override({energy: 1});
     cast(card.play(player), undefined);
@@ -98,7 +99,7 @@ describe('RedCity', function() {
     expect(redCitySpace.player).eq(player);
   });
 
-  it('vps', function() {
+  it('vps', () => {
     const redCitySpace = board.getSpaceOrThrow('53');
     player.production.override({energy: 1});
     card.play(player);
@@ -120,7 +121,7 @@ describe('RedCity', function() {
     expect(card.getVictoryPoints(player)).eq(1);
   });
 
-  it('cannot place greenery next to red city', function() {
+  it('cannot place greenery next to red city', () => {
     const redCitySpace = board.getSpaceOrThrow('53');
     player.production.override({energy: 1});
     card.play(player);
@@ -132,10 +133,26 @@ describe('RedCity', function() {
     board.getAvailableSpacesForGreenery(player).forEach((space) => {
       expect(adjacentSpaces).does.not.contain(space);
     });
-
     // Even other players.
     board.getAvailableSpacesForGreenery(player2).forEach((space) => {
       expect(adjacentSpaces).does.not.contain(space);
     });
+  });
+
+  it('Cannot use Mangrove next to Red City #6523', () => {
+    const redCitySpace = board.getSpaceOrThrow('53');
+    player.production.override({energy: 1});
+    card.play(player);
+    runAllActions(game);
+    cast(player.popWaitingFor(), SelectSpace).cb(redCitySpace);
+    const adjacentSpaces = board.getAdjacentSpaces(redCitySpace);
+    const oceanSpace = adjacentSpaces[0];
+    oceanSpace.spaceType = SpaceType.OCEAN;
+
+    const mangrove = new Mangrove();
+    mangrove.play(player);
+    runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    expect(selectSpace.spaces).does.not.contain(oceanSpace);
   });
 });

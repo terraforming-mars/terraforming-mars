@@ -1,6 +1,7 @@
+import {Color} from '../Color';
 import {OneOrArray} from './types';
 
-export const playerColorClass = (color: string, type: 'shadow' | 'bg' | 'bg_transparent'): string => {
+export const playerColorClass = (color: Color, type: 'shadow' | 'bg' | 'bg_transparent'): string => {
   const prefix = {
     shadow: 'player_shadow_color_',
     bg_transparent: 'player_translucent_bg_color_',

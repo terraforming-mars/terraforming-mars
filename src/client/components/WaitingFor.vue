@@ -3,7 +3,7 @@
   <template v-if="waitingfor === undefined">
     {{ $t('Not your turn to take any actions') }}
     <template v-if="playersWaitingFor.length > 0">
-      (⌛ <span v-for="color in playersWaitingFor" :style="'color:' + color" :key="color">&#9632;</span>)
+      (⌛ <span v-for="color in playersWaitingFor" :style="'color:' + playerColorClass(color, 'shadow')" :key="color">&#9632;</span>)
     </template>
   </template>
   <div v-else class="wf-root">
@@ -19,7 +19,7 @@
       -->
       <input type="checkbox" name="autopass" id="autopass-checkbox" v-model="autopass" v-on:change="updateAutopass">
       <label for="autopass-checkbox">
-          <span v-i18n>Automatically pass</span>
+          <span v-i18n>Automatically pass after this action</span>
       </label>
     </template>
     <!-- <template v-if="waitingfor !== undefined && waitingfor.showReset && playerView.players.length === 1">
@@ -42,6 +42,7 @@ import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
 import {vueRoot} from '@/client/components/vueRoot';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {playerColorClass} from '@/common/utils/utils';
 import {PublicPlayerModel, PlayerViewModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {SoundManager} from '@/client/utils/SoundManager';
@@ -283,6 +284,9 @@ export default Vue.extend({
     },
     preferences(): typeof getPreferences {
       return getPreferences;
+    },
+    playerColorClass(): typeof playerColorClass {
+      return playerColorClass;
     },
   },
 });

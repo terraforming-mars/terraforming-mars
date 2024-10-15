@@ -55,6 +55,8 @@ export type GameOptions = {
   customPreludes: Array<CardName>;
   customCeos: Array<CardName>;
   startingCeos: number;
+  // TODO(maserion): Remove '?' by 2025-01-01
+  startingPreludes?: number;
   /** Moon must be completed to end the game */
   requiresMoonTrackCompletion: boolean;
   /** Venus must be completed to end the game */
@@ -117,8 +119,9 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   shuffleMapOption: false,
   solarPhaseOption: false,
   soloTR: false,
-  startingCeos: 3,
-  startingCorporations: 2,
+  startingCeos: constants.CEO_CARDS_DEALT_PER_PLAYER,
+  startingCorporations: constants.CORPORATION_CARDS_DEALT_PER_PLAYER,
+  startingPreludes: constants.PRELUDE_CARDS_DEALT_PER_PLAYER,
   starWarsExpansion: false,
   turmoilExtension: false,
   underworldExpansion: false,

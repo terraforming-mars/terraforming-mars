@@ -62,7 +62,7 @@ describe('CorporateTheft', () => {
       runAllActions(game);
       const selectCard = cast(player.popWaitingFor(), SelectCard);
 
-      const selected = opponent.playedCards.find((c) => c.name === run.selection)!;
+      const selected = opponent.getPlayedCard(run.selection)!;
       selectCard.cb([selected]);
       runAllActions(game);
 
@@ -83,7 +83,7 @@ describe('CorporateTheft', () => {
 
         if (run.match !== undefined) {
           // const selectCard = cast(player.popWaitingFor(), SelectCard);
-          const playedCard = player.playedCards.find((c) => c.name === run.match)!;
+          const playedCard = player.getPlayedCard(run.match)!;
           // selectCard.cb([playedCard]);
           expect(playedCard.resourceCount).eq(1);
         }

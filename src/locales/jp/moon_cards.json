@@ -71,7 +71,7 @@
   "Spend 1 titanium. Increase your titanium production 2 steps. Raise the mining rate 1 step.": "1チタン支払う. チタン産出+2, 採掘レート+1段階.",
 
   "Earth Embassy": "地球大使館",
-  "Effect: After being played, when you perform an action, your Moon tags count as Earth tags, but not vice versa.": "効果：月タグは地球タグとしても数える.",
+  "Effect: When you perform an action, your PLAYED Moon tags count as Earth tags, but not vice versa.": "効果：月タグは地球タグとしても数える.",
 
   "Geodesic Tents": "ジオデシックテント",
   "Decrease your energy production 1 step and increase your plant production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "電力産出-1. 植物産出+1. 1チタン支払う. 月に生息地タイルを配置し、居住地レート+1段階.",

@@ -12,14 +12,12 @@
                     <div class="create-game-page-container">
                         <div class="create-game-page-column">
                             <h4 v-i18n>№ of Players</h4>
-                            <template v-for="pCount in [1,2,3,4,5,6]">
-                              <div v-bind:key="pCount">
-                                <input type="radio" :value="pCount" name="playersCount" v-model="playersCount" :id="pCount+'-radio'">
-                                <label :for="pCount+'-radio'">
-                                    {{ getPlayersCountText(pCount) }}
-                                </label>
-                              </div>
-                            </template>
+                            <div v-for="pCount in [1,2,3,4,5,6]" v-bind:key="pCount">
+                              <input type="radio" :value="pCount" name="playersCount" v-model="playersCount" :id="pCount+'-radio'">
+                              <label :for="pCount+'-radio'">
+                                  {{ getPlayersCountText(pCount) }}
+                              </label>
+                            </div>
                         </div>
 
                         <div class="create-game-page-column">
@@ -168,19 +166,17 @@
                         <div class="create-game-page-column">
                             <h4 v-i18n>Board</h4>
 
-                            <template v-for="boardName in boards">
-                              <div v-bind:key="boardName">
-                                <div v-if="boardName==='utopia planitia'" class="create-game-subsection-label" v-i18n>Fan-made</div>
-                                <input type="radio" :value="boardName" name="board" v-model="board" :id="boardName+'-checkbox'">
-                                <label :for="boardName+'-checkbox'" class="expansion-button">
-                                    <span :class="getBoardColorClass(boardName)">&#x2B22;</span>
-                                    <span class="capitalized" v-i18n>{{ boardName }}</span>
-                                    <template v-if="boardName !== RandomBoardOption.OFFICIAL && boardName !== RandomBoardOption.ALL">
-                                      &nbsp;<a :href="boardHref(boardName)" class="tooltip" target="_blank">&#9432;</a>
-                                    </template>
-                                </label>
-                              </div>
-                            </template>
+                            <div v-for="boardName in boards" v-bind:key="boardName">
+                              <div v-if="boardName==='utopia planitia'" class="create-game-subsection-label" v-i18n>Fan-made</div>
+                              <input type="radio" :value="boardName" name="board" v-model="board" :id="boardName+'-checkbox'">
+                              <label :for="boardName+'-checkbox'" class="expansion-button">
+                                  <span :class="getBoardColorClass(boardName)">&#x2B22;</span>
+                                  <span class="capitalized" v-i18n>{{ boardName }}</span>
+                                  <template v-if="boardName !== RandomBoardOption.OFFICIAL && boardName !== RandomBoardOption.ALL">
+                                    &nbsp;<a :href="boardHref(boardName)" class="tooltip" target="_blank">&#9432;</a>
+                                  </template>
+                              </label>
+                            </div>
                         </div>
 
                         <div class="create-game-page-column">
@@ -190,6 +186,14 @@
                             <input type="number" class="create-game-corporations-count" value="2" min="1" :max="6" v-model="startingCorporations" id="startingCorpNum-checkbox">
                                 <span v-i18n>Starting Corporations</span>
                             </label>
+
+                            <template v-if="prelude">
+                              <label for="startingPreludeENum-checkbox">
+                              <div class="create-game-expansion-icon expansion-icon-prelude"></div>
+                              <input type="number" class="create-game-corporations-count" value="4" min="4" :max="8" v-model="startingPreludes" id="startingPreludeNum-checkbox">
+                                  <span v-i18n>Starting Preludes</span>
+                              </label>
+                            </template>
 
                             <template v-if="ceoExtension">
                               <label for="startingCEONum-checkbox">
@@ -410,9 +414,9 @@
                                               <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(index)" v-model="newPlayer.name" />
                                           </div>
                                           <div class="create-game-page-color-row">
-                                              <template v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple', 'Orange', 'Pink']">
+                                              <template v-for="color in PLAYER_COLORS">
                                                 <div v-bind:key="color">
-                                                  <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + (index + 1)" v-model="newPlayer.color" :id="'radioBox' + color + (index + 1)">
+                                                  <input type="radio" :value="color" :name="'playerColor' + (index + 1)" v-model="newPlayer.color" :id="'radioBox' + color + (index + 1)">
                                                   <label :for="'radioBox' + color + (index + 1)">
                                                       <div :class="'create-game-colorbox '+getPlayerCubeColorClass(color)"></div>
                                                   </label>
@@ -498,6 +502,7 @@
                   v-bind:communityCardsOption="communityCardsOption"
                   v-bind:moonExpansion="moonExpansion"
                   v-bind:pathfindersExpansion="pathfindersExpansion"
+                  v-bind:prelude2Expansion="prelude2Expansion"
               ></PreludesFilter>
             </div>
 
@@ -506,6 +511,7 @@
                   ref="cardsFilter"
                   v-on:cards-list-changed="updateBannedCards"
                   :title="'Cards to exclude from the game'"
+                  :hint="'Start typing the card name to exclude'"
               ></CardsFilter>
             </div>
 
@@ -514,6 +520,7 @@
                   ref="cardsFilter2"
                   v-on:cards-list-changed="updateIncludedCards"
                   :title="'Cards to include in the game'"
+                  :hint="'Start typing the card name to include'"
               ></CardsFilter>
             </div>
           <preferences-icon></preferences-icon>
@@ -652,6 +659,7 @@ export default (Vue as WithRefs<Refs>).extend({
       ceoExtension: false,
       customCeos: [],
       startingCeos: 3,
+      startingPreludes: 4,
       starWarsExpansion: false,
       underworldExpansion: false,
       preludeDraftVariant: undefined,
@@ -717,6 +725,9 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     constants(): typeof constants {
       return constants;
+    },
+    PLAYER_COLORS(): typeof PLAYER_COLORS {
+      return PLAYER_COLORS;
     },
   },
   methods: {
@@ -933,11 +944,11 @@ export default (Vue as WithRefs<Refs>).extend({
         return 'create-game-board-hexagon create-game-random';
       }
     },
-    getPlayerCubeColorClass(color: string): string {
-      return playerColorClass(color.toLowerCase(), 'bg');
+    getPlayerCubeColorClass(color: Color): string {
+      return playerColorClass(color, 'bg');
     },
-    getPlayerContainerColorClass(color: string): string {
-      return playerColorClass(color.toLowerCase(), 'bg_transparent');
+    getPlayerContainerColorClass(color: Color): string {
+      return playerColorClass(color, 'bg_transparent');
     },
     isEnabled(module: GameModule): boolean {
       const model: CreateGameModel = this;
@@ -1071,6 +1082,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const ceoExtension = this.ceoExtension;
       const customCeos = this.customCeos;
       const startingCeos = this.startingCeos;
+      const startingPreludes = this.startingPreludes;
       let clonedGamedId: undefined | GameId = undefined;
 
       // Check custom colony count
@@ -1136,7 +1148,7 @@ export default (Vue as WithRefs<Refs>).extend({
       // TODO(kberg): this is a direct copy of the code right above.
       // Check custom prelude count
       if (this.showPreludesList && customPreludes.length > 0) {
-        const requiredPreludeCount = players.length * constants.PRELUDE_CARDS_DEALT_PER_PLAYER;
+        const requiredPreludeCount = players.length * startingPreludes;
         if (customPreludes.length < requiredPreludeCount) {
           window.alert(translateTextWithParams('Must select at least ${0} Preludes', [requiredPreludeCount.toString()]));
           return;
@@ -1243,6 +1255,7 @@ export default (Vue as WithRefs<Refs>).extend({
         ceoExtension,
         customCeos,
         startingCeos,
+        startingPreludes,
         starWarsExpansion: this.starWarsExpansion,
         underworldExpansion: this.underworldExpansion,
       };

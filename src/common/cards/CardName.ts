@@ -564,9 +564,11 @@ export enum CardName {
   SOIL_ENRICHMENT = 'Soil Enrichment',
   CITY_PARK = 'City Park',
   SUPERMARKETS = 'Supermarkets',
+  HOSPITALS = 'Hospitals',
 
   // Promo from contest
   FLOYD_CONTINUUM = 'Floyd Continuum',
+  CASINOS = 'Casinos',
 
   // End of promo cards
 

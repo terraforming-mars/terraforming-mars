@@ -292,6 +292,10 @@ export class Player implements IPlayer {
     return corporation;
   }
 
+  public getPlayedCard(cardName: CardName): ICard | undefined {
+    return this.playedCards.find((card) => card.name === cardName);
+  }
+
   public getTitaniumValue(): number {
     return this.titaniumValue;
   }
@@ -307,7 +311,7 @@ export class Player implements IPlayer {
   }
 
   public getSelfReplicatingRobotsTargetCards(): Array<IProjectCard> {
-    const selfReplicatingRobots = this.playedCards.find((card) => card instanceof SelfReplicatingRobots);
+    const selfReplicatingRobots = this.getPlayedCard(CardName.SELF_REPLICATING_ROBOTS);
     if (selfReplicatingRobots instanceof SelfReplicatingRobots) {
       return selfReplicatingRobots.targetCards;
     }
@@ -432,8 +436,7 @@ export class Player implements IPlayer {
   }
 
   public cardIsInEffect(cardName: CardName): boolean {
-    return this.playedCards.some(
-      (playedCard) => playedCard.name === cardName);
+    return this.playedCards.some((playedCard) => playedCard.name === cardName);
   }
 
   public hasProtectedHabitats(): boolean {
@@ -457,17 +460,14 @@ export class Player implements IPlayer {
     }
 
     // The pathfindersExpansion test is just an optimization for non-Pathfinders games.
-    if (this.game.gameOptions.pathfindersExpansion && this.productionIsProtected(attacker)) return false;
+    if (attacker !== this && this.cardIsInEffect(CardName.PRIVATE_SECURITY)) {
+      return false;
+    }
     return true;
   }
 
-
   public maybeBlockAttack(perpetrator: IPlayer, cb: (proceed: boolean) => PlayerInput | undefined): void {
     this.defer(UnderworldExpansion.maybeBlockAttack(this, perpetrator, cb));
-  }
-
-  public productionIsProtected(attacker: IPlayer): boolean {
-    return attacker !== this && this.cardIsInEffect(CardName.PRIVATE_SECURITY);
   }
 
   public resolveInsurance() {
@@ -857,7 +857,7 @@ export class Player implements IPlayer {
         this.preludeCardsInHand.splice(preludeCardIndex, 1);
       }
 
-      const selfReplicatingRobots = this.playedCards.find((card) => card.name === CardName.SELF_REPLICATING_ROBOTS);
+      const selfReplicatingRobots = this.getPlayedCard(CardName.SELF_REPLICATING_ROBOTS);
       if (selfReplicatingRobots instanceof SelfReplicatingRobots) {
         if (inplaceRemove(selfReplicatingRobots.targetCards, selectedCard)) {
           selectedCard.resourceCount = 0;
@@ -1108,7 +1108,7 @@ export class Player implements IPlayer {
     if (owner === undefined) {
       return false;
     }
-    const stagedProtests = owner.playedCards.find((card) => card.name === CardName.STAGED_PROTESTS);
+    const stagedProtests = owner.getPlayedCard(CardName.STAGED_PROTESTS);
     return stagedProtests?.generationUsed === this.game.generation;
   }
 
@@ -1219,7 +1219,7 @@ export class Player implements IPlayer {
   public getPlayableCards(): Array<PlayableCard> {
     const candidateCards: Array<IProjectCard> = [...this.cardsInHand];
     // Self Replicating robots check
-    const card = this.playedCards.find((card) => card.name === CardName.SELF_REPLICATING_ROBOTS);
+    const card = this.getPlayedCard(CardName.SELF_REPLICATING_ROBOTS);
     if (card instanceof SelfReplicatingRobots) {
       candidateCards.push(...card.targetCards);
     }

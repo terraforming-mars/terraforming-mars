@@ -42,10 +42,8 @@ describe('Warmonger', () => {
     const failures = [];
     for (const cardName of Warmonger.attackCards) {
       const card = newCard(cardName);
-      // TODO(kberg): Remove === undefined by 2024-02-01
-      if (card === undefined) {
-        console.log('Skipping ' + cardName);
-        continue;
+      if (!card) {
+        throw new Error('Missing card ' + cardName);
       }
       if (card.type === CardType.EVENT) {
         failures.push(cardName);

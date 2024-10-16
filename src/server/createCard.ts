@@ -12,8 +12,7 @@ const CARD_RENAMES = new Map<string, CardName>([
   // And remember to add a test in spec.ts.
 
   // TODO(yournamehere): remove after 2021-04-05
-  // TODO(kberg): remove after 2024-09-01
-  ['Space Corridors', CardName.SPACE_LANES],
+  // ['Space Corridors', CardName.SPACE_LANES],
 ]);
 
 function _createCard<T extends ICard>(cardName: CardName, cardManifestNames: Array<keyof ModuleManifest>): T | undefined {

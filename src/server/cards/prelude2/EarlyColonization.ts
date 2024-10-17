@@ -30,7 +30,9 @@ export class EarlyColonization extends PreludeCard {
   }
   public override bespokePlay(player: IPlayer) {
     player.game.colonies.forEach((colony) => {
-      colony.increaseTrack(2);
+      if (colony.isActive) {
+        colony.increaseTrack(2);
+      }
     });
     return undefined;
   }

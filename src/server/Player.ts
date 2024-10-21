@@ -1501,14 +1501,15 @@ export class Player implements IPlayer {
 
         const selectPrelude = PreludesExpansion.selectPreludeToPlay(this, this.preludeCardsInHand);
 
-        this.setWaitingFor(selectPrelude, () => {
+        this.setWaitingFor(selectPrelude, this.runWhenEmpty(() => {
           if (this.preludeCardsInHand.length === 0 && !this.headStartIsInEffect()) {
             game.playerIsFinishedTakingActions();
             return;
           }
 
           this.takeAction();
-        });
+        }));
+
         return;
       }
 
@@ -1995,5 +1996,16 @@ export class Player implements IPlayer {
     const cb = typeof(input) === 'function' ? input : () => input;
     const action = new SimpleDeferredAction(this, cb, priority);
     this.game.defer(action);
+  }
+
+  public runWhenEmpty(cb: () => void): () => void {
+    const f = () => {
+      if (this.game.deferredActions.length === 0) {
+        cb();
+        return;
+      }
+      this.game.deferredActions.runAll(() => f());
+    };
+    return f;
   }
 }

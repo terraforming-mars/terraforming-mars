@@ -710,7 +710,9 @@ describe('Game', () => {
       'createdTime',
       'inputsThisRound',
       'resettable',
-      'tags'];
+      'tags',
+      'inDoubleDown',
+    ];
     const serializedValuesNotInGame: Array<keyof SerializedGame> = [
       'seed',
       'currentSeed',

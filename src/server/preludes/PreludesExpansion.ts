@@ -34,6 +34,9 @@ export class PreludesExpansion {
       if (!card.canPlay(player)) {
         card.warnings.add('preludeFizzle');
       }
+      if (card.behavior?.addResources && player.game.inDoubleDown) {
+        card.warnings.add('ineffectiveDoubleDown');
+      }
     }
 
     return new SelectCard(

@@ -204,7 +204,7 @@ export interface IGame extends Logger {
   addOcean(player: IPlayer, space: Space): void;
   removeTile(spaceId: string): void;
   getPlayers(): ReadonlyArray<IPlayer>;
-  // Players returned in play order starting with first player this generation.
+  /* Players returned in play order starting with first player this generation. */
   getPlayersInGenerationOrder(): ReadonlyArray<IPlayer>;
   /**
    * Returns the Player holding this card, or throws.

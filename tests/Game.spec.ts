@@ -704,12 +704,13 @@ describe('Game', () => {
     const serializedKeys = Object.keys(serialized);
 
     const unserializedFieldsInGame: Array<keyof Game> = [
-      'rng',
-      'discardedColonies',
-      'monsInsuranceOwner',
       'createdTime',
+      'discardedColonies',
       'inputsThisRound',
+      'playersInGenerationOrder',
+      'monsInsuranceOwner',
       'resettable',
+      'rng',
       'tags'];
     const serializedValuesNotInGame: Array<keyof SerializedGame> = [
       'seed',

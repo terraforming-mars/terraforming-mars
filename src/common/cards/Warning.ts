@@ -13,4 +13,5 @@ export type Warning =
  'underworldMustExcavateEnergy' |
  'deckTooSmall' |
  'cannotAffordBoardOfDirectors' |
- 'marsIsTerraformed';
+ 'marsIsTerraformed' |
+ 'ineffectiveDoubleDown';

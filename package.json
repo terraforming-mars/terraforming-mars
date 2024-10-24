@@ -17,7 +17,7 @@
     "mnemonist": "^0.39.3",
     "prom-client": "^14.0.1",
     "vti": "^0.1.7",
-    "vue": "2.6.10",
+    "vue": "3.5.12",
     "vue-template-compiler": "2.6.10",
     "webpack": "^5.94.0",
     "webpack-cli": "^4.5.0"
@@ -34,7 +34,7 @@
     "@types/sqlite3": "^3.1.6",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
-    "@vue/test-utils": "^1.1.1",
+    "@vue/test-utils": "^2.4.6",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "chai-deep-equal-ignore-undefined": "^1.1.1",

@@ -63,7 +63,10 @@ export function calculateVictoryPoints(player: IPlayer) {
     }
   });
 
-  player.colonies.calculateVictoryPoints(victoryPointsBreakdown);
+  const coloniesVP = player.colonies.getVictoryPoints();
+  if (coloniesVP > 0) {
+    victoryPointsBreakdown.setVictoryPoints('victoryPoints', coloniesVP, 'Colony VP');
+  }
   MoonExpansion.calculateVictoryPoints(player, victoryPointsBreakdown);
   PathfindersExpansion.calculateVictoryPoints(player, victoryPointsBreakdown);
 

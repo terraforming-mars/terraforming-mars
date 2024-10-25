@@ -320,8 +320,10 @@ export abstract class Colony implements IColony {
       break;
 
     case ColonyBenefit.LOSE_RESOURCES:
-      if (resource === undefined) throw new Error('Resource cannot be undefined');
-      player.stock.deduct(resource, quantity);
+      if (resource === undefined) {
+        throw new Error('Resource cannot be undefined');
+      }
+      player.stock.deduct(resource, Math.min(player.stock.get(resource), quantity), {log: true});
       break;
 
     case ColonyBenefit.OPPONENT_DISCARD:

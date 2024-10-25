@@ -9,7 +9,7 @@
       <div v-i18n>These are the colony tiles Aridor may choose from:</div>
       <div class="discarded-colonies-for-aridor">
         <div class="player_home_colony small_colony" v-for="colonyName in playerView.game.discardedColonies" :key="colonyName">
-          <colony :colony="getColony(colonyName)"></colony>
+          <colony :colony="getColony(colonyName)" :active="getColony(colonyName).isActive"></colony>
         </div>
       </div>
     </div>

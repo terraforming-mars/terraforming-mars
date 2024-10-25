@@ -251,7 +251,7 @@
       </div>
       <div class="player_home_colony_cont">
         <div class="player_home_colony" v-for="colony in game.colonies" :key="colony.name">
-          <colony :colony="colony"></colony>
+          <colony :colony="colony" :active="colony.isActive"></colony>
         </div>
       </div>
     </div>

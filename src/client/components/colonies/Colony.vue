@@ -1,4 +1,5 @@
 <template>
+    <div :class="recedeIfInactive">
     <div class="filterDiv colony-card colonies tooltip tooltip-bottom" :class="backgroundClass" :data-tooltip="tooltip" v-i18n>
     <div v-if="colony.visitor !== undefined" class="colony-spaceship">
       <div :class="'colonies-fleet colonies-fleet-'+ colony.visitor"></div>
@@ -110,6 +111,7 @@
     <colony-trade-row :metadata="metadata"></colony-trade-row>
   </div>
 </div>
+</div>
 
 </template>
 
@@ -132,6 +134,10 @@ export default Vue.extend({
   props: {
     colony: {
       type: Object as () => ColonyModel,
+    },
+    active: {
+      type: Boolean,
+      default: true,
     },
   },
   components: {
@@ -189,6 +195,9 @@ export default Vue.extend({
     colonyResourceClass(): string {
       const resource = this.metadata.cardResource;
       return resource?.toString()?.toLowerCase() ?? '';
+    },
+    recedeIfInactive(): string {
+      return this.active === false ? 'inactiveColony' : '';
     },
     backgroundClass(): string {
       return this.colony.name.replace(' ', '-') + '-background';

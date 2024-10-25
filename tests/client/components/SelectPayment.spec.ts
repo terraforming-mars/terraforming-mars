@@ -183,7 +183,6 @@ describe('SelectPayment', () => {
 
     tester.expectIsAvailable('heat');
     tester.expectPayment({heat: 7, megaCredits: 3});
-    console.log(';click save');
     await tester.clickSave();
   });
 

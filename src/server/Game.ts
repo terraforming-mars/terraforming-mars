@@ -170,8 +170,14 @@ export class Game implements IGame, Logger {
   // Double Down
   public inDoubleDown: boolean = false;
 
-  // The set of tags available in this game.
+  /* The set of tags available in this game. */
   public readonly tags: ReadonlyArray<Tag>;
+
+  /*
+   * An optimized list of the players, in generation order. This is erased every time first placer changes,
+   * and refilled on calls to getPlayersInGenerationOrder
+   */
+  playersInGenerationOrder: Array<IPlayer> = [];
 
   private constructor(
     id: GameId,
@@ -626,6 +632,7 @@ export class Game implements IGame, Logger {
     }
     firstIndex = (firstIndex + 1) % this.players.length;
     this.first = this.players[firstIndex];
+    this.playersInGenerationOrder.length = 0;
   }
 
   // Only used in the prelude The New Space Race.
@@ -634,6 +641,7 @@ export class Game implements IGame, Logger {
       throw new Error(`player ${newFirstPlayer.id} is not part of this game`);
     }
     this.first = newFirstPlayer;
+    this.playersInGenerationOrder.length = 0;
   }
 
   public gotoInitialResearchPhase(): void {
@@ -1428,17 +1436,12 @@ export class Game implements IGame, Logger {
 
   // Players returned in play order starting with first player this generation.
   public getPlayersInGenerationOrder(): ReadonlyArray<IPlayer> {
-    const ret: Array<IPlayer> = [];
-    let insertIdx = 0;
-    for (const p of this.players) {
-      if (p.id === this.first.id || insertIdx > 0) {
-        ret.splice(insertIdx, 0, p);
-        insertIdx ++;
-      } else {
-        ret.push(p);
-      }
+    if (this.playersInGenerationOrder.length === 0) {
+      const e = [...this.players, ...this.players];
+      const idx = e.findIndex((p) => p.id === this.first.id);
+      this.playersInGenerationOrder = e.slice(idx, idx + this.players.length);
     }
-    return ret;
+    return this.playersInGenerationOrder;
   }
 
   /**

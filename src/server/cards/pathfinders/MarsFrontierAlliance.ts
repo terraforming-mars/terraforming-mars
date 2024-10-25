@@ -15,6 +15,7 @@ export class MarsFrontierAlliance extends CorporationCard {
 
       metadata: {
         cardNumber: 'PfC20',
+        hasExternalHelp: true,
         description:
           'You start with 40 M€. When you reveal this card, select any remaining political program tile (you may use its effect as a passive effect of your corporation or as ruling party this generation).',
         renderData: CardRenderer.builder((b) => {

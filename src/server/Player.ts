@@ -606,7 +606,6 @@ export class Player implements IPlayer {
     const result: Array<ICard & IActionCard> = [];
     for (const card of this.tableau) {
       if (isIActionCard(card) && !this.actionsThisGeneration.has(card.name) && !isCeoCard(card)) {
-        card.warnings.clear();
         if (card.canAct(this)) {
           result.push(card);
         }
@@ -877,14 +876,14 @@ export class Player implements IPlayer {
     case 'nothing':
       break;
     // Do nothing, used for Double Down.
-    case 'action-only':
+    case 'double-down':
       break;
     }
 
     // See comment above regarding
 
     // See DeclareCloneTag for why this skips cards with clone tags.
-    if (!selectedCard.tags.includes(Tag.CLONE) && cardAction !== 'action-only') {
+    if (!selectedCard.tags.includes(Tag.CLONE) && cardAction !== 'double-down') {
       this.onCardPlayed(selectedCard);
     }
 
@@ -1473,10 +1472,12 @@ export class Player implements IPlayer {
     }
     // if (saveBeforeTakingAction) game.save();
 
+
     if (this.autopass) {
       this.passOption().cb();
     }
     const headStartIsInEffect = this.headStartIsInEffect();
+    this.game.inDoubleDown = false;
 
     if (!headStartIsInEffect) {
       // Prelude cards have to be played first

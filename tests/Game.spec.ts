@@ -706,12 +706,14 @@ describe('Game', () => {
     const unserializedFieldsInGame: Array<keyof Game> = [
       'createdTime',
       'discardedColonies',
+      'inDoubleDown',
       'inputsThisRound',
       'playersInGenerationOrder',
       'monsInsuranceOwner',
       'resettable',
       'rng',
-      'tags'];
+      'tags',
+    ];
     const serializedValuesNotInGame: Array<keyof SerializedGame> = [
       'seed',
       'currentSeed',

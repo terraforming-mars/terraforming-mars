@@ -26,6 +26,7 @@ const descriptions: Record<Warning, string> = {
   'deckTooSmall': 'There are not enough cards to complete this action. You will draw fewer cards than expected.',
   'cannotAffordBoardOfDirectors': 'Warning: you do not have the 12 M€ required to act on a prelude.',
   'marsIsTerraformed': 'Note: all global parameters are at their goals.',
+  'ineffectiveDoubleDown': 'Behavior in this card will apply to Double Down, and so have no effect.',
 };
 
 export default Vue.extend({

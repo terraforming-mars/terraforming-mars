@@ -50,7 +50,7 @@ export type CanAffordOptions = Partial<PaymentOptions> & {
  *   only play the card (used for replaying a card)
  *   or do nothing.
  */
-export type CardAction = 'add' | 'discard' | 'nothing' | 'action-only';
+export type CardAction = 'add' | 'discard' | 'nothing' | 'double-down';
 
 export interface IPlayer {
   readonly id: PlayerId;
@@ -102,7 +102,7 @@ export interface IPlayer {
   dealtCeoCards: Array<ICeoCard>;
   dealtProjectCards: Array<IProjectCard>;
   cardsInHand: Array<IProjectCard>;
-  preludeCardsInHand: Array<IProjectCard>;
+  preludeCardsInHand: Array<IPreludeCard>;
   ceoCardsInHand: Array<IProjectCard>;
   playedCards: Array<IProjectCard>;
   cardCost: number;

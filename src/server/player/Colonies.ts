@@ -13,7 +13,6 @@ import {SelectOption} from '../inputs/SelectOption';
 import {SelectColony} from '../inputs/SelectColony';
 import {IColonyTrader} from '../colonies/IColonyTrader';
 import {TradeWithCollegiumCopernicus} from '../cards/pathfinders/CollegiumCopernicus';
-import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
 import {message} from '../logs/MessageBuilder';
 import {TradeWithDarksideSmugglersUnion} from '../cards/moon/DarksideSmugglersUnion';
 import {Payment} from '../../common/inputs/Payment';
@@ -131,11 +130,8 @@ export class Colonies {
       });
   }
 
-  public calculateVictoryPoints(victoryPointsBreakdown: VictoryPointsBreakdown) {
-    // Titania Colony VP
-    if (this.player.colonies.victoryPoints > 0) {
-      victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.victoryPoints, 'Colony VP');
-    }
+  public getVictoryPoints(): number {
+    return this.player.colonies.victoryPoints;
   }
 
   public getFleetSize(): number {

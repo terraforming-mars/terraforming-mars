@@ -45,6 +45,7 @@ export class DoubleDown extends PreludeCard {
       PreludesExpansion.fizzle(player, this);
       return undefined;
     }
-    return PreludesExpansion.selectPreludeToPlay(player, preludes, undefined, 'action-only');
+    player.game.inDoubleDown = true;
+    return PreludesExpansion.selectPreludeToPlay(player, preludes, undefined, 'double-down');
   }
 }

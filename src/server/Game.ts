@@ -1,3 +1,4 @@
+
 import * as constants from '../common/constants';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {Board} from './boards/Board';
@@ -166,6 +167,8 @@ export class Game implements IGame, Logger {
   public tradeEmbargo: boolean = false;
   // Behold The Emperor
   public beholdTheEmperor: boolean = false;
+  // Double Down
+  public inDoubleDown: boolean = false;
 
   /* The set of tags available in this game. */
   public readonly tags: ReadonlyArray<Tag>;

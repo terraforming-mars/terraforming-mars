@@ -12,6 +12,10 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {Arklight} from '../../../src/server/cards/colonies/Arklight';
 import {BiosphereSupport} from '../../../src/server/cards/prelude/BiosphereSupport';
 import {NewPartner} from '../../../src/server/cards/promo/NewPartner';
+import {BoardOfDirectors} from '../../../src/server/cards/prelude2/BoardOfDirectors';
+import {Server} from '../../../src/server/models/ServerModel';
+import {SelectCardModel} from '../../../src/common/models/PlayerInputModel';
+import {CardName} from '../../../src/common/cards/CardName';
 
 describe('DoubleDown', () => {
   let doubleDown: DoubleDown;
@@ -166,5 +170,30 @@ describe('DoubleDown', () => {
     expect(player.production.megacredits).to.eq(2);
     expect(player.preludeCardsInHand).is.empty;
     expect(player.playedCards).deep.eq([newPartner, doubleDown]);
+  });
+
+  it('Make compatible with Board of Directors', () => {
+    // https://boardgamegeek.com/thread/3331165/article/44559570#44559570
+    const boardOfDirectors = new BoardOfDirectors();
+    player.preludeCardsInHand.push(doubleDown);
+    player.playedCards.push(boardOfDirectors);
+    boardOfDirectors.resourceCount = 4;
+
+    player.playCard(doubleDown);
+    runAllActions(game);
+
+    // Save the model for later. popWaitingFor removes it.
+    const model = Server.getPlayerModel(player);
+
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    expect(selectCard.cards).deep.eq([boardOfDirectors]);
+    expect(Array.from(boardOfDirectors.warnings)).includes('ineffectiveDoubleDown');
+
+    expect(boardOfDirectors.resourceCount).eq(4);
+    expect(player.playedCards).deep.eq([boardOfDirectors, doubleDown]);
+
+    const modelCard = (<SelectCardModel>model.waitingFor).cards[0];
+    expect(modelCard.name).eq(CardName.BOARD_OF_DIRECTORS);
+    expect(modelCard.warnings).deep.eq(['ineffectiveDoubleDown', 'cannotAffordBoardOfDirectors']);
   });
 });

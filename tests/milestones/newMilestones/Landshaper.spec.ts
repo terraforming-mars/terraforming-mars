@@ -11,13 +11,12 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 describe('Landshaper', function() {
   let milestone: Landshaper;
   let player: TestPlayer;
-  let player2: TestPlayer;
   let game: IGame;
   let spaces: ReadonlyArray<Space>;
 
   beforeEach(function() {
     milestone = new Landshaper();
-    [game, player, player2] = testGame(2, {boardName: BoardName.ARABIA_TERRA, moonExpansion: true});
+    [game, player] = testGame(2, {boardName: BoardName.ARABIA_TERRA, moonExpansion: true});
     spaces = game.board.getAvailableSpacesOnLand(player);
   });
 

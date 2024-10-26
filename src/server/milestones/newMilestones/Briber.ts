@@ -5,7 +5,7 @@ export class Briber extends BaseMilestone {
   constructor() {
     super(
       'Briber',
-      'To get this Milestone, pay 12 MC, in addition to the normal claim cost of 8 MC (so, 20 MC in total).',
+      'To get this Milestone, pay 12 MC, in addition to the normal claim cost of 8 MC (so, 20 MC in total)',
       0,
     );
   }

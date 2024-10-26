@@ -40,6 +40,7 @@ import {Spacefarer} from './terraCimmeria/Spacefarer';
 import {TerraPioneer} from './terraCimmeria/TerraPioneer';
 import {Risktaker} from './underworld/Risktaker';
 import {Tunneler} from './underworld/Tunneler';
+
 import {Planetologist} from './newMilestones/Planetologist';
 import {Producer} from './newMilestones/Producer';
 import {Philantropist} from './newMilestones/Philantropist';
@@ -51,6 +52,8 @@ import {Lobbyist} from './newMilestones/Lobbyist';
 import {Merchant} from './newMilestones/Merchant';
 import {Briber} from './newMilestones/Briber';
 import {Geologist} from './newMilestones/Geologist';
+import {Breeder} from './newMilestones/Breeder';
+import {Researcher} from './newMilestones/Researcher';
 // import {Thawer} from './newMilestones/Thawer';
 
 export const THARSIS_MILESTONES = [
@@ -149,6 +152,8 @@ export const NEW_MILESTONES = [
   new Briber(),
   new Sponsor(),
   new Landshaper(),
+  new Breeder(),
+  new Researcher(),
 ];
 
 export const ALL_MILESTONES = [

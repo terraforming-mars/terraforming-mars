@@ -7,7 +7,7 @@ export class Landshaper extends BaseMilestone {
   constructor() {
     super(
       'Landshaper',
-      'Have 1 city tile, 1 greenery and 1 special tile.',
+      'Have 1 city tile, 1 greenery and 1 special tile',
       3);
   }
   public getScore(player: IPlayer): number {

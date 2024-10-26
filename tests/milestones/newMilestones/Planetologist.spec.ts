@@ -10,6 +10,9 @@ describe('Planetologist', () => {
 
     player.tagsForTest = {earth: 1, jovian: 2, venus: 2};
     expect(milestone.canClaim(player)).is.not.true;
+
+    player.tagsForTest = {jovian: 2, venus: 2};
+    expect(milestone.canClaim(player)).is.not.true;
   });
 
   it('Standard test, can play', () => {

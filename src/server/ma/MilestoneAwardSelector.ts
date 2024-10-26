@@ -207,6 +207,17 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
   if (gameOptions.includeNewMA) {
     candidateMilestones.push(...NEW_MILESTONES.map(toName));
     candidateAwards.push(...NEW_AWARDS.map(toName));
+
+    if (!gameOptions.venusNextExtension) {
+      inplaceRemove(candidateMilestones, 'Planetologist');
+    }
+    if (!gameOptions.coloniesExtension) {
+      inplaceRemove(candidateMilestones, 'Constructor');
+    }
+    if (!gameOptions.turmoilExtension) {
+      inplaceRemove(candidateAwards, 'Statesman');
+      inplaceRemove(candidateMilestones, 'Lobbyist');
+    }
   }
 
   if (gameOptions.includeFanMA) {
@@ -225,6 +236,7 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
     if (!gameOptions.pathfindersExpansion) {
       inplaceRemove(candidateMilestones, 'Martian');
     }
+
     if (!gameOptions.coloniesExtension) {
       inplaceRemove(candidateMilestones, 'Colonizer');
       inplaceRemove(candidateMilestones, 'Pioneer');

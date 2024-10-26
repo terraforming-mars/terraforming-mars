@@ -23,6 +23,9 @@ describe('Investor', () => {
 
     player.playedCards.push(fakeCard({tags: [Tag.EARTH]}));
     expect(award.getScore(player)).to.eq(2);
+
+    player.playedCards.push(fakeCard({tags: [Tag.JOVIAN]}));
+    expect(award.getScore(player)).to.eq(2);
   });
 
   it('Does count wild tags', () => {

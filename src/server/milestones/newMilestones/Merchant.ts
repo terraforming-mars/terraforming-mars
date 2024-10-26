@@ -4,12 +4,12 @@ import {Resource} from '../../../common/Resource';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 
 export class Merchant extends BaseMilestone {
-  private readonly CLAIM_COST = 8; // Claim cost in MegaCredits
+  private readonly CLAIM_COST = 8;
 
   constructor() {
     super(
       'Merchant',
-      'Having 2 of each standard resource after paying the claim cost.',
+      'Having 2 of each standard resource after paying the claim cost',
       12,
     );
   }

@@ -6,7 +6,7 @@ export class Geologist extends BaseMilestone {
   constructor() {
     super(
       'Geologist',
-      'Own 3 tiles on or adjacent to volcanic areas.',
+      'Own 3 tiles ON or ADJACENT to volcanic areas',
       3,
     );
   }

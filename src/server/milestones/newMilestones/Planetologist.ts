@@ -18,7 +18,7 @@ export class Planetologist extends BaseMilestone {
     const earthTags = player.tags.count(Tag.EARTH) - wildTags;
     const venusTags = player.tags.count(Tag.VENUS) - wildTags;
     const jovianTags = player.tags.count(Tag.JOVIAN) - wildTags;
-    // I am glad I am not IT, othweriwse I feel I should be ashamed for code below...
+    // I feel I should be ashamed for code below...
     // Earth tags
     if (earthTags >= 2) {
       score += 2;

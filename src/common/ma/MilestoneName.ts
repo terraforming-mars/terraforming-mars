@@ -76,6 +76,8 @@ export const milestoneNames = [
   'Briber',
   'Sponsor',
   'Landshaper',
+  'Breeder',
+  'Researcher',
 
 ] as const;
 

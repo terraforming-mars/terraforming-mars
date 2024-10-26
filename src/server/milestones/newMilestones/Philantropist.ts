@@ -1,12 +1,11 @@
 import {BaseMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
-import {CardType} from '../../../common/cards/CardType'; // Assuming this is where CardType is defined
-
+import {CardType} from '../../../common/cards/CardType';
 export class Philantropist extends BaseMilestone {
   constructor() {
     super(
       'Philantropist',
-      'Have at least 5 cards with VPs among your cards.',
+      'Have at least 5 cards with VPs among your cards',
       5,
     );
   }

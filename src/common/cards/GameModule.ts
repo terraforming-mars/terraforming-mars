@@ -14,7 +14,7 @@ export const GAME_MODULES = [
   'ceo',
   'starwars',
   'underworld',
-  'newMA'
+  'newMA',
 ] as const;
 export type GameModule = typeof GAME_MODULES[number];
 

@@ -97,9 +97,7 @@
                           <td class="game-end-mc">
                             <div>{{ p.megaCredits }}</div>
                           </td>
-                          <td>
-                            <div v-if="game.gameOptions.showTimers" class="game-end-timer">{{ getTimer(p) }}</div>
-                          </td>
+                          <td v-if="game.gameOptions.showTimers"><div class="game-end-timer">{{ getTimer(p) }}</div></td>
                           <td><div class="game-end-timer">{{ p.actionsTakenThisGame }}</div></td>
                       </tr>
                   </tbody>

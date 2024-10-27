@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {LogHelper} from '../../LogHelper';
 import {SelectCard} from '../../inputs/SelectCard';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {Priority} from '../../deferredActions/Priority';
@@ -37,8 +36,7 @@ export class CharityDonation extends Card implements IProjectCard {
     const game = player.game;
     const players = game.getPlayersInGenerationOrder();
     const thisIdx = players.findIndex((p) => p === player);
-    const cards = game.projectDeck.drawByConditionOrThrow(game, players.length + 1, () => true);
-    LogHelper.logDrawnCards(player, cards);
+    const cards = game.projectDeck.drawByConditionOrThrow(player, players.length + 1, () => true);
     game.defer(new SelectCharityDonationCard(players, thisIdx, thisIdx, cards));
     return undefined;
   }

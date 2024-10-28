@@ -66,6 +66,9 @@ export default Vue.extend({
     ceoExtension: {
       type: Boolean,
     },
+    underworldExpansion: {
+      type: Boolean,
+    },
     prelude2Expansion: {
       type: Boolean,
     },
@@ -93,6 +96,7 @@ export default Vue.extend({
         ...this.moonExpansion ? preludeCardNames('moon') : [],
         ...this.pathfindersExpansion ? preludeCardNames('pathfinders') : [],
         ...this.ceoExtension ? preludeCardNames('ceo') : [],
+        ...this.underworldExpansion ? preludeCardNames('underworld') : [],
         ...this.prelude2Expansion ? preludeCardNames('prelude2') : [],
       ],
       GAME_MODULES: GAME_MODULES,
@@ -170,6 +174,7 @@ export default Vue.extend({
       case 'moon': return 'The Moon';
       case 'pathfinders': return 'Pathfinders';
       case 'ceo': return 'CEOs';
+      case 'underworld': return 'Underworld';
       }
       return '';
     },
@@ -202,6 +207,9 @@ export default Vue.extend({
     },
     ceoExtension(enabled) {
       this.watchSelect('ceo', enabled);
+    },
+    underworldExpansion(enabled) {
+      this.watchSelect('underworld', enabled);
     },
     prelude2Expansion(enabled) {
       this.watchSelect('prelude2', enabled);

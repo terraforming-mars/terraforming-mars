@@ -175,6 +175,7 @@ export default Vue.extend({
       case 'pathfinders': return 'Pathfinders';
       case 'ceo': return 'CEOs';
       case 'underworld': return 'Underworld';
+      case 'prelude2': return 'Prelude 2';
       }
       return '';
     },

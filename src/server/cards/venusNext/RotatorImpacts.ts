@@ -39,8 +39,11 @@ export class RotatorImpacts extends Card implements IActionCard {
   }
 
   public canAct(player: IPlayer): boolean {
-    const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-    const canSpendResource = this.resourceCount > 0 && !venusMaxed;
+    if (player.game.getVenusScaleLevel() === MAX_VENUS_SCALE) {
+      this.warnings.add('maxvenus');
+    }
+    const canSpendResource = this.resourceCount > 0;
+
 
     return player.canAfford({cost: 6, titanium: true}) || (canSpendResource && player.canAfford({cost: 0, tr: {venus: 1}}));
   }

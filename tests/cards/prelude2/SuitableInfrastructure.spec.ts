@@ -7,6 +7,7 @@ import {PowerPlantStandardProject} from '../../../src/server/cards/base/standard
 import {cast, runAllActions} from '../../TestingUtils';
 import {SaturnSystems} from '../../../src/server/cards/corporation/SaturnSystems';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
+import {RefugeeCamps} from '../../../src/server/cards/colonies/RefugeeCamps';
 
 function simulateFinishingAction(player: IPlayer) {
   player.actionsTakenThisGame++;
@@ -69,5 +70,21 @@ describe('SuitableInfrastructure', () => {
     game.activePlayer = player.id;
     saturnSystems.onCardPlayed(player2, jovianLanterns);
     expect(player.stock.megacredits).eq(2);
+  });
+
+  it('Suitable Infrastructure does not work when production goes down', () => {
+    const card = new SuitableInfrastructure();
+    // Refugee camps: Decrease MC production 1 step to put a resource on self.
+    const refugeeCamps = new RefugeeCamps();
+    const [game, player] = testGame(1);
+
+    const saturnSystems = new SaturnSystems();
+    player.playedCards.push(card, refugeeCamps);
+    player.corporations.push(saturnSystems);
+
+    refugeeCamps.action(player);
+    runAllActions(game);
+    expect(player.production.megacredits).eq(-1);
+    expect(player.megaCredits).eq(0);
   });
 });

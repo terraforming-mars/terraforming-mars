@@ -3,7 +3,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {ProjectEden} from '../../../src/server/cards/prelude2/ProjectEden';
 import {IGame} from '../../../src/server/IGame';
-import {cast, fakeCard, runAllActions} from '../../TestingUtils';
+import {cast, fakeCard, maxOutOceans, runAllActions} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {assertPlaceCity, assertPlaceGreenery, assertPlaceOcean} from '../../assertions';
 import {ArcticAlgae} from '../../../src/server/cards/base/ArcticAlgae';
@@ -101,5 +101,18 @@ describe('ProjectEden', () => {
 
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
+  });
+
+
+  it('play, oceans are at maximum', () => {
+    maxOutOceans(player);
+
+    cast(card.play(player), undefined);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+
+    expect(orOptions.options.map((option) => option.title)).deep.eq([
+      'Place a city', 'Place a greenery', 'Discard 3 cards',
+    ]);
   });
 });

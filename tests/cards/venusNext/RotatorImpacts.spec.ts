@@ -83,6 +83,7 @@ describe('RotatorImpacts', () => {
     card.resourceCount = 1;
 
     setVenusScaleLevel(game, MAX_VENUS_SCALE);
-    expect(card.canAct(player)).is.not.true;
+    expect(card.canAct(player)).is.true;
+    expect(Array.from(card.warnings)).contains('maxvenus');
   });
 });

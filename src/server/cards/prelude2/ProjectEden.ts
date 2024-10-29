@@ -27,13 +27,22 @@ export class ProjectEden extends PreludeCard {
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {
-    return player.cardsInHand.length >= 3 && player.canAfford({cost: 0, tr: {oceans: 1, oxygen: 1}});
+    if (player.cardsInHand.length >= 3 && player.canAfford({cost: 0, tr: {oceans: 1, oxygen: 1}})) {
+      if (!player.game.canAddOcean()) {
+        this.warnings.add('maxoceans');
+      }
+      return true;
+    }
+    return false;
   }
 
   private selected: Array<'ocean' | 'city' | 'greenery' | 'discard'> = [];
   private selectNextAction(player: IPlayer): void {
     const options: Array<SelectOption> = [];
 
+    if (!player.game.canAddOcean()) {
+      this.selected.push('ocean');
+    }
     if (!this.selected.includes('ocean')) {
       options.push(
         new SelectOption('Place an ocean').andThen(() => {

@@ -94,6 +94,7 @@ export class ProjectEden extends PreludeCard {
   }
 
   public override play(player: IPlayer) {
+    this.selected = []; // Make compatible with double down
     this.selectNextAction(player);
     return undefined;
   }

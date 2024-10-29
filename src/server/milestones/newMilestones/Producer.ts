@@ -5,7 +5,7 @@ export class Producer extends BaseMilestone {
   constructor() {
     super(
       'Producer',
-      'Have a total of 16 total production',
+      'Have a combined total production of at least 16',
       16);
   }
 

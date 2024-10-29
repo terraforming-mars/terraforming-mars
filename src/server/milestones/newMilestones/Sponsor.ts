@@ -7,7 +7,7 @@ export class Sponsor extends BaseMilestone {
   constructor() {
     super(
       'Sponsor',
-      '3 cards that have cost of 20 MC or more',
+      'Have 3 cards that have cost of 20 MC or more',
       3);
   }
   public getScore(player: IPlayer): number {

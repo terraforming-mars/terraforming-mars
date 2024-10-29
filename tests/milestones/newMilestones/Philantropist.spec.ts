@@ -17,7 +17,7 @@ describe('Philantropist', () => {
 
   beforeEach(() => {
     milestone = new Philantropist();
-    [/* game */, player] = testGame(2, {underworldExpansion: true});
+    [/* game */, player] = testGame(2);
   });
 
   it('Can claim', () => {

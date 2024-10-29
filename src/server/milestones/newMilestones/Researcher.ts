@@ -6,7 +6,7 @@ export class Researcher extends BaseMilestone {
   constructor() {
     super(
       'Researcher',
-      'Have 4 science tags in play',
+      'Have 4 science tags in  play',
       4);
   }
 

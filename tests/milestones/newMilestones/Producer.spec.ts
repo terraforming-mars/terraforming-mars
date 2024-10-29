@@ -51,7 +51,7 @@ describe('Producer', () => {
   });
 
   it('Can claim when MC production is less than 0', () => {
-    player.production.add(Resource.MEGACREDITS, -3);
+    player.production.add(Resource.MEGACREDITS, -2);
     player.production.add(Resource.STEEL, 3);
     player.production.add(Resource.TITANIUM, 3);
     player.production.add(Resource.PLANTS, 3);

@@ -5,7 +5,7 @@ export class Philantropist extends BaseMilestone {
   constructor() {
     super(
       'Philantropist',
-      'Have at least 5 cards with VPs among your cards',
+      'Have 5 cards with non-negative VP',
       5,
     );
   }

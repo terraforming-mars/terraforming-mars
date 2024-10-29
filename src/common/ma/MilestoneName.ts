@@ -62,21 +62,21 @@ export const milestoneNames = [
   'Tunneler',
   'Risktaker',
 
-  // New
+  // milestoneAwardExpansion
   // 'Hydrologist',
-  'Merchant',
-  'Geologist',
+  // 'Merchant',
+  // 'Geologist',
   // 'Thawer',
-  'Planetologist',
+  // 'Planetologist',
   'Producer',
   'Philantropist',
   'Fundraiser',
-  'ThermoEngineer',
-  'Lobbyist',
-  'Briber',
+  // 'ThermoEngineer',
+  // 'Lobbyist',
+  // 'Briber',
   'Sponsor',
-  'Landshaper',
-  'Breeder',
+  // 'Landshaper',
+  // 'Breeder',
   'Researcher',
 
 ] as const;

@@ -5,7 +5,7 @@ export class Fundraiser extends BaseMilestone {
   constructor() {
     super(
       'Fundraiser',
-      'Have 12 Megacredits production',
+      'Have 12 MC production',
       12);
   }
   public getScore(player: IPlayer): number {

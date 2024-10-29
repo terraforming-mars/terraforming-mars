@@ -29,7 +29,7 @@ describe('Fundraiser', () => {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('Can claim with more than 12 prroduction', () => {
+  it('Can claim with more than 12 production', () => {
     player.production.add(Resource.MEGACREDITS, 15);
 
     expect(milestone.canClaim(player)).is.true;

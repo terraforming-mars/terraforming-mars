@@ -62,20 +62,20 @@ export const awardNames = [
   'Kingpin',
   'EdgeLord',
 
-  // NewAwards
+  // milestoneAwardExpansion
   'Administrator',
-  'Metropolist',
-  'Founder',
+  // 'Metropolist',
+  // 'Founder',
   'Investor',
   'Mogul',
-  'Sparky', // Electrician is already used for Milestone
+  // 'Sparky', // Electrician is already used for Milestone
   'Constructor',
-  'Fabricator', // 'Manufacturer' name is already in use
+  // 'Fabricator', // 'Manufacturer' name is already in use
   'Traveller',
-  'Gatherer', // Collector is already in use
-  'Statesman', // Politician name is already in use
-  'Highlander',
-  'Landscaper',
+  // 'Gatherer', // Collector is already in use
+  // 'Statesman', // Politician name is already in use
+  // 'Highlander',
+  // 'Landscaper',
 
 
 ] as const;

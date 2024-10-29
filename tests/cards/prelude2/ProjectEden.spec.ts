@@ -12,23 +12,27 @@ import {Comet} from '../../../src/server/cards/base/Comet';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {toName} from '../../../src/common/utils/utils';
+import {DoubleDown} from '../../../src/server/cards/promo/DoubleDown';
+import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
+import {FieldCappedCity} from '../../../src/server/cards/promo/FieldCappedCity';
+import {GanymedeColony} from '../../../src/server/cards/base/GanymedeColony';
 
 describe('ProjectEden', () => {
-  let card: ProjectEden;
+  let projectEden: ProjectEden;
   let player: TestPlayer;
   let game: IGame;
 
   beforeEach(() => {
-    card = new ProjectEden();
+    projectEden = new ProjectEden();
     [game, player] = testGame(2);
   });
 
   it('canPlay', () => {
     player.cardsInHand.push(fakeCard());
     player.cardsInHand.push(fakeCard());
-    expect(card.canPlay(player)).is.false;
+    expect(projectEden.canPlay(player)).is.false;
     player.cardsInHand.push(fakeCard());
-    expect(card.canPlay(player)).is.true;
+    expect(projectEden.canPlay(player)).is.true;
   });
 
   it('play', () => {
@@ -39,7 +43,7 @@ describe('ProjectEden', () => {
 
     player.cardsInHand.push(a, b, c, d);
 
-    cast(card.play(player), undefined);
+    cast(projectEden.play(player), undefined);
     runAllActions(game);
     let orOptions = cast(player.popWaitingFor(), OrOptions);
 
@@ -102,4 +106,93 @@ describe('ProjectEden', () => {
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
   });
+
+
+  it('Make compatible with Double Down', () => {
+    const doubleDown = new DoubleDown();
+    player.preludeCardsInHand.push(doubleDown, projectEden);
+    player.cardsInHand.push(
+      new ArcticAlgae(),
+      new BiomassCombustors(),
+      new Comet(),
+      new Decomposers(),
+      new EarthOffice(),
+      new FieldCappedCity(),
+      new GanymedeColony());
+
+    player.playCard(projectEden);
+    runAllActions(game);
+
+    playProjectEden();
+
+    expect(player.canPlay(doubleDown)).is.true;
+    player.playCard(doubleDown);
+    runAllActions(game);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    expect(selectCard.cards[0]).deep.eq(projectEden);
+    selectCard.cb([projectEden]);
+    runAllActions(game);
+    playProjectEden();
+  });
+
+  function playProjectEden() {
+    runAllActions(game);
+    let orOptions = cast(player.popWaitingFor(), OrOptions);
+
+    expect(orOptions.options.map((option) => option.title)).deep.eq([
+      'Place an ocean', 'Place a city', 'Place a greenery', 'Discard 3 cards',
+    ]);
+
+    orOptions.options[0].cb();
+    runAllActions(game);
+
+    assertPlaceOcean(player, player.popWaitingFor());
+
+    runAllActions(game);
+
+    orOptions = cast(player.popWaitingFor(), OrOptions);
+
+    expect(orOptions.options.map((option) => option.title)).deep.eq([
+      'Place a city', 'Place a greenery', 'Discard 3 cards',
+    ]);
+
+    orOptions.options[1].cb();
+    runAllActions(game);
+
+    assertPlaceGreenery(player, player.popWaitingFor());
+
+    runAllActions(game);
+
+    orOptions = cast(player.popWaitingFor(), OrOptions);
+
+    expect(orOptions.options.map((option) => option.title)).deep.eq([
+      'Place a city', 'Discard 3 cards',
+    ]);
+
+    orOptions.options[0].cb();
+    runAllActions(game);
+
+    assertPlaceCity(player, player.popWaitingFor());
+
+    runAllActions(game);
+
+    orOptions = cast(player.popWaitingFor(), OrOptions);
+
+    expect(orOptions.options.map((option) => option.title)).deep.eq([
+      'Discard 3 cards',
+    ]);
+
+    orOptions.options[0].cb();
+    runAllActions(game);
+
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+
+    expect(selectCard.config.min).eq(3);
+    expect(selectCard.config.max).eq(3);
+
+    selectCard.cb([player.cardsInHand[0], player.cardsInHand[1], player.cardsInHand[2]]);
+
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
+  }
 });

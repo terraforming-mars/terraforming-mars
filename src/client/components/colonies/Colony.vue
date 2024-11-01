@@ -1,5 +1,5 @@
 <template>
-    <div :class="recedeIfInactive">
+    <!-- <div :class="recedeIfInactive"> -->
     <div class="filterDiv colony-card colonies tooltip tooltip-bottom" :class="backgroundClass" :data-tooltip="tooltip" v-i18n>
     <div v-if="colony.visitor !== undefined" class="colony-spaceship">
       <div :class="'colonies-fleet colonies-fleet-'+ colony.visitor"></div>
@@ -110,7 +110,7 @@
     <colony-row :metadata="metadata"></colony-row>
     <colony-trade-row :metadata="metadata"></colony-trade-row>
   </div>
-</div>
+<!-- </div> -->
 </div>
 
 </template>

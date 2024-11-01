@@ -61,6 +61,14 @@ export const milestoneNames = [
   // Underworld
   'Tunneler',
   'Risktaker',
+
+  // Modular Milestones
+  'Fundraiser',
+  'Philantropist', // Name - 'Philantropist' on tile, but 'Filantrope' in rulebook
+  'Producer',
+  'Researcher',
+  'Sponsor',
+
 ] as const;
 
 export type MilestoneName = typeof milestoneNames[number];

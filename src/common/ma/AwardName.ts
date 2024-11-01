@@ -61,6 +61,14 @@ export const awardNames = [
   // Underworld
   'Kingpin',
   'EdgeLord',
+
+  // Modular awards
+  'Administrator',
+  'Constructor',
+  'Investor',
+  'Mogul',
+  'Traveller',
+
 ] as const;
 
 export type AwardName = typeof awardNames[number];

@@ -496,6 +496,8 @@
                   v-bind:communityCardsOption="communityCardsOption"
                   v-bind:moonExpansion="moonExpansion"
                   v-bind:pathfindersExpansion="pathfindersExpansion"
+                  v-bind:ceoExtension="ceoExtension"
+                  v-bind:underworldExpansion="underworldExpansion"
                   v-bind:prelude2Expansion="prelude2Expansion"
               ></PreludesFilter>
             </div>

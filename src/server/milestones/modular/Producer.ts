@@ -1,5 +1,7 @@
 import {BaseMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
+import {sum} from '../../../common/utils/utils';
+import {Units} from '../../../common/Units';
 
 export class Producer extends BaseMilestone {
   constructor() {
@@ -10,6 +12,6 @@ export class Producer extends BaseMilestone {
   }
 
   public getScore(player: IPlayer): number {
-    return player.production.megacredits + player.production.steel + player.production.titanium + player.production.plants + player.production.energy + player.production.heat;
+    return sum(Units.values(player.production.asUnits()));
   }
 }

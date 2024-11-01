@@ -29,7 +29,7 @@ describe('Traveller', () => {
     expect(award.getScore(player)).to.eq(5);
   });
 
-  it('Does count wild tags', () => {
+  it('Does NOT count wild tags', () => {
     expect(award.getScore(player)).to.eq(0);
 
     player.playedCards.push(fakeCard({tags: [Tag.JOVIAN, Tag.BUILDING]}));

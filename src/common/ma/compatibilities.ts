@@ -91,4 +91,5 @@ export const MACompatibility: Record<AwardName | MilestoneName, Details> = {
   'Capitalist': {map: BoardName.VASTITAS_BOREALIS},
   'Tunneler': {compatibility: 'underworld'},
   'Risktaker': {compatibility: 'underworld'},
+  'Administrator': {},
 };

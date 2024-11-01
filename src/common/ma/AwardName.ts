@@ -61,6 +61,23 @@ export const awardNames = [
   // Underworld
   'Kingpin',
   'EdgeLord',
+
+  // NewAwards
+  'Administrator',
+  'Metropolist',
+  'Founder',
+  'Investor',
+  'Mogul',
+  'Sparky', // Electrician is already used for Milestone
+  'Constructor',
+  'Fabricator', // 'Manufacturer' name is already in use
+  'Traveller',
+  'Gatherer', // Collector is already in use
+  'Statesman', // Politician name is already in use
+  'Highlander',
+  'Landscaper',
+
+
 ] as const;
 
 export type AwardName = typeof awardNames[number];

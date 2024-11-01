@@ -698,6 +698,7 @@ const stored = {
     'fastModeOption': false,
     'includeVenusMA': true,
     'includeFanMA': false,
+    'includeNewMa': false,
     'initialDraftVariant': false,
     'moonExpansion': false,
     'moonStandardProjectVariant': false,

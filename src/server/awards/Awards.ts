@@ -39,6 +39,19 @@ import {Warmonger} from './terraCimmeria/Warmonger';
 import {Zoologist2} from './amazonisPlanitia/Zoologist';
 import {Kingpin} from './underworld/Kingpin';
 import {EdgeLord} from './underworld/EdgeLord';
+import {Administrator} from './newAwards/Administrator';
+import {Metropolist} from './newAwards/Metropolist';
+import {Investor} from './newAwards/Investor';
+import {Mogul} from './newAwards/Mogul';
+import {Sparky} from './newAwards/Sparky';
+import {Constructor} from './newAwards/Constructor';
+import {Fabricator} from './newAwards/Fabricator';
+import {Traveller} from './newAwards/Traveller';
+import {Statesman} from './newAwards/Statesman';
+import {Highlander} from './newAwards/Highlander';
+import {Founder} from './newAwards/Founder';
+import {Gatherer} from './newAwards/Gatherer';
+import {Landscaper} from './newAwards/Landscaper';
 
 export const THARSIS_AWARDS = [
   new Landlord(),
@@ -122,6 +135,22 @@ export const UNDERWORLD_AWARDS = [
   new EdgeLord(),
 ];
 
+export const NEW_AWARDS = [
+  new Administrator(),
+  new Metropolist(),
+  new Founder(),
+  new Investor(),
+  new Mogul(),
+  new Sparky(), // Electrician is already used for Milestone
+  new Constructor(),
+  new Fabricator(), // Manufacturer name is already in use
+  new Traveller(),
+  new Gatherer(),
+  new Statesman(), // Politician already in use
+  new Highlander(),
+  new Landscaper(),
+];
+
 export const ALL_AWARDS = [
   ...THARSIS_AWARDS,
   ...ELYSIUM_AWARDS,
@@ -135,6 +164,7 @@ export const ALL_AWARDS = [
   ...TERRA_CIMMERIA_AWARDS,
   ...VASTITAS_BOREALIS_AWARDS,
   ...UNDERWORLD_AWARDS,
+  ...NEW_AWARDS,
 ];
 
 // Remove namespace and rename function

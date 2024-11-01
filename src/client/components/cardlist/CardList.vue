@@ -201,6 +201,7 @@ const moduleAbbreviations: Record<GameModule, string> = {
   ceo: 'l', // ceo abbreviation is 'l' for leader, since 'c' and 'C' are already taken
   starwars: 'w',
   underworld: 'u',
+  newMA: 'n', // both m and a already in use
 };
 
 const ALL_MODULES = GAME_MODULES.map((m) => moduleAbbreviations[m]).join('');
@@ -252,6 +253,7 @@ export default (Vue as WithRefs<Refs>).extend({
         ceo: true,
         starwars: true,
         underworld: true,
+        newMA: true,
       },
       types: {
         event: true,

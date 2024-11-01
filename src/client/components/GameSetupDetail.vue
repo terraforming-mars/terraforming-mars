@@ -38,6 +38,7 @@
               <div v-if="gameOptions.randomMA === RandomMAOptionType.UNLIMITED" class="game-config generic" v-i18n>Full randomized</div>
               <div v-if="gameOptions.venusNextExtension && gameOptions.includeVenusMA" class="game-config generic" v-i18n>Venus Milestone/Award</div>
               <div v-if="gameOptions.randomMA !== RandomMAOptionType.NONE && gameOptions.includeFanMA" class="game-config generic" v-i18n>Include fan Milestones/Awards</div>
+              <div v-if="gameOptions.randomMA !== RandomMAOptionType.NONE && gameOptions.includeNewMA" class="game-config generic" v-i18n>Include new Official Milestones/Awards</div>
             </li>
 
             <li v-if="playerNumber > 1">

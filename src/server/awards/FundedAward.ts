@@ -9,8 +9,8 @@ export type FundedAward = {
 }
 
 export type SerializedFundedAward = {
-  name?: AwardName;
-  playerId?: PlayerId;
+  name: AwardName;
+  playerId: PlayerId;
 }
 
 export function serializeFundedAwards(fundedAwards: Array<FundedAward>) : Array<SerializedFundedAward> {

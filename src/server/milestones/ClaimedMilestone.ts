@@ -2,7 +2,7 @@
 import {IPlayer} from '../IPlayer';
 import {PlayerId} from '../../common/Types';
 import {IMilestone} from './IMilestone';
-import {MilestoneName} from '../../common/ma/MilestoneName';
+import {maybeRenamedMilestone, MilestoneName} from '../../common/ma/MilestoneName';
 
 export type ClaimedMilestone = {
   milestone: IMilestone;
@@ -50,7 +50,7 @@ export function deserializeClaimedMilestones(
   }
 
   return filtered.map((element) => {
-    const milestoneName = element.name;
+    const milestoneName = maybeRenamedMilestone(element.name);
     const milestone: IMilestone | undefined = milestones.find((milestone) => milestone.name === milestoneName);
     if (milestone === undefined) {
       throw new Error(`Milestone ${milestoneName} not found when rebuilding Claimed Milestone`);

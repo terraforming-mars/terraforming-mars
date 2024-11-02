@@ -121,7 +121,7 @@ describe('MilestoneAwardSelector', () => {
     const avoidedAwards: Array<AwardName> = [...VENUS_AWARDS, ...ARES_AWARDS, ...MOON_AWARDS].map(toName);
     const avoidedMilestones = [...VENUS_MILESTONES, ...ARES_MILESTONES, ...MOON_MILESTONES].map(toName);
     avoidedMilestones.push('Pioneer', 'Martian', 'Colonizer');
-    avoidedAwards.push('Politician');
+    avoidedAwards.push('T. Politician');
     for (let idx = 0; idx < 10000; idx++) {
       const mas = choose({
         randomMA: RandomMAOptionType.LIMITED,

@@ -5,7 +5,7 @@ import {Tag} from '../../common/cards/Tag';
 export class Electrician extends BaseMilestone {
   constructor() {
     super(
-      'Electrician',
+      'V. Electrician',
       'Have 4 power tags in play',
       4);
   }

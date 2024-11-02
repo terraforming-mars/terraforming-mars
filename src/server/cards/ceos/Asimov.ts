@@ -90,7 +90,7 @@ export class Asimov extends CeoCard {
       if (player.game.awards.includes(award)) return false;
       // Remove awards that require unused variants/expansions
       if (!gameOptions.venusNextExtension && award.name === 'Venuphile') return false;
-      if (!gameOptions.turmoilExtension && award.name === 'Politician') return false;
+      if (!gameOptions.turmoilExtension && award.name === 'T. Politician') return false;
       if (!gameOptions.aresExtension && award.name === 'Entrepreneur') return false;
       if (!gameOptions.moonExpansion && award.name === 'Full Moon') return false;
       if (!gameOptions.moonExpansion && award.name === 'Lunar Magnate') return false;

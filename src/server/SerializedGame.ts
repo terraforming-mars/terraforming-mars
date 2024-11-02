@@ -17,6 +17,7 @@ import {SerializedDeck} from './cards/SerializedDeck';
 import {UnderworldData} from './underworld/UnderworldData';
 import {AwardName} from '../common/ma/AwardName';
 import {GlobalParameter} from '../common/GlobalParameter';
+import {MilestoneName} from '../common/ma/MilestoneName';
 
 export type SerializedGame = {
     activePlayer: PlayerId;
@@ -45,7 +46,7 @@ export type SerializedGame = {
     id: GameId;
     initialDraftIteration: number;
     lastSaveId: number;
-    milestones: Array<string>;
+    milestones: Array<MilestoneName>;
     moonData: SerializedMoonData | undefined;
     nomadSpace: SpaceId | undefined;
     pathfindersData: SerializedPathfindersData | undefined;

@@ -34,7 +34,7 @@ export default Vue.extend({
   },
   computed: {
     nameCss(): string {
-      return 'ma-name ma-name--' + this.milestone.name.replace(/ /g, '-').toLowerCase();
+      return 'ma-name ma-name--' + this.milestone.name.replace(/ /g, '-').replace(/\./g, '').toLowerCase();
     },
     description(): string {
       return getMilestoneAwardDescription(this.milestone.name);

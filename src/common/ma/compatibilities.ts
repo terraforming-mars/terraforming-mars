@@ -5,8 +5,12 @@ import {BoardName} from '../boards/BoardName';
 import {OneOrArray} from '../utils/types';
 
 export type Details = {
+  /* Components this MA needs to fucntion*/
   compatibility?: GameModule,
+  /* Map or maps this is assigned to */
   map?: OneOrArray<BoardName>,
+  /* If true, this is a modular MA. */
+  modular?: boolean,
 };
 
 export const MACompatibility: Record<AwardName | MilestoneName, Details> = {
@@ -91,14 +95,14 @@ export const MACompatibility: Record<AwardName | MilestoneName, Details> = {
   'Capitalist': {map: BoardName.VASTITAS_BOREALIS},
   'Tunneler': {compatibility: 'underworld'},
   'Risktaker': {compatibility: 'underworld'},
-  'Administrator': {},
-  'Constructor': {},
-  'Investor': {},
-  'Mogul': {},
-  'Traveller': {},
-  'Fundraiser': {},
-  'Philantropist': {},
-  'Producer': {},
-  'Researcher': {},
-  'Sponsor': {},
+  'Administrator': {modular: true},
+  'Constructor': {modular: true},
+  'Investor': {modular: true},
+  'Mogul': {modular: true},
+  'Traveller': {modular: true},
+  'Fundraiser': {modular: true},
+  'Philantropist': {modular: true},
+  'Producer': {modular: true},
+  'Researcher': {modular: true},
+  'Sponsor': {modular: true},
 };

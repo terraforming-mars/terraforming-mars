@@ -49,7 +49,6 @@ type DrawnMilestonesAndAwards = {
   awards: Array<IAward>
 }
 
-
 // Function to compute max synergy of a given set of milestones and awards.
 // Exported for testing
 export function maximumSynergy(names: Array<string>) : number {

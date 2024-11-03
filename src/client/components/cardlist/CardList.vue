@@ -176,7 +176,6 @@ import {AwardName, awardNames} from '@/common/ma/AwardName';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {WithRefs} from 'vue-typed-refs';
-import {CardListSearchIndex} from '@/client/components/cardlist/CardListSearchIndex';
 import Card from '@/client/components/card/Card.vue';
 import Colony from '@/client/components/colonies/Colony.vue';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
@@ -184,39 +183,7 @@ import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import Milestone from '@/client/components/Milestone.vue';
 import Award from '@/client/components/Award.vue';
 import {MACompatibility} from '@/common/ma/compatibilities';
-
-const moduleAbbreviations: Record<GameModule, string> = {
-  base: 'b',
-  corpera: 'c',
-  prelude: 'p',
-  prelude2: '2',
-  venus: 'v',
-  colonies: 'C',
-  turmoil: 't',
-  community: '*',
-  promo: 'r',
-  ares: 'a',
-  moon: 'm',
-  pathfinders: 'P',
-  ceo: 'l', // ceo abbreviation is 'l' for leader, since 'c' and 'C' are already taken
-  starwars: 'w',
-  underworld: 'u',
-};
-
-const ALL_MODULES = GAME_MODULES.map((m) => moduleAbbreviations[m]).join('');
-
-type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
-type TagOption = Tag | 'none';
-
-type CardListModel = {
-  filterText: string,
-  namesOnly: boolean,
-  expansions: Record<GameModule, boolean>,
-  types: Record<TypeOption, boolean>,
-  tags: Record<TagOption, boolean>,
-  searchIndex: CardListSearchIndex,
-  showAdvanced: boolean;
-}
+import {TypeOption, CardListModel, hashToModel, modelToHash} from '@/client/components/cardlist/CardListModel';
 
 type Refs = {
   filter: HTMLInputElement,
@@ -233,76 +200,12 @@ export default (Vue as WithRefs<Refs>).extend({
     PreferencesIcon,
   },
   data(): CardListModel {
-    return {
-      filterText: decodeURIComponent(window.location.hash).slice(1),
-      namesOnly: true,
-      expansions: {
-        base: true,
-        corpera: true,
-        prelude: true,
-        prelude2: true,
-        venus: true,
-        colonies: true,
-        turmoil: true,
-        community: true,
-        ares: true,
-        moon: true,
-        promo: true,
-        pathfinders: true,
-        ceo: true,
-        starwars: true,
-        underworld: true,
-      },
-      types: {
-        event: true,
-        active: true,
-        automated: true,
-        prelude: true,
-        corporation: true,
-        standard_project: true,
-        standard_action: false,
-        proxy: false,
-        globalEvents: true,
-        colonyTiles: true,
-        milestones: true,
-        awards: true,
-        ceo: true,
-      },
-      tags: {
-        building: true,
-        space: true,
-        science: true,
-        power: true,
-        earth: true,
-        jovian: true,
-        venus: true,
-        plant: true,
-        microbe: true,
-        animal: true,
-        city: true,
-        moon: true,
-        mars: true,
-        wild: true,
-        event: true,
-        clone: true,
-        none: true,
-      },
-      searchIndex: new CardListSearchIndex(),
-      showAdvanced: false,
-    };
+    return hashToModel(window.location.hash);
   },
   mounted() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const searchString = urlParams.get('search');
-    if (searchString) {
-      this.filterText = searchString;
-    }
-    const modules = urlParams.get('m') || ALL_MODULES;
-    GAME_MODULES.forEach((module) => {
-      return this.expansions[module] = modules.includes(moduleAbbreviations[module]);
-    });
     this.searchIndex.build();
     this.$refs.filter.focus();
+    this.delayedSetLocationHash();
   },
   computed: {
     allModules(): ReadonlyArray<GameModule> {
@@ -342,31 +245,18 @@ export default (Vue as WithRefs<Refs>).extend({
       return awardNames;
     },
   },
-  watch: {
-    filterText: function(val) {
-      setTimeout(() => {
-        window.location.hash = '#' + encodeURIComponent(val);
-      }, 10);
-    },
-  },
   methods: {
-    updateUrl(search?: string) {
-      if (window.history.pushState) {
-        let url = window.location.protocol + '//' + window.location.host + window.location.pathname;
-        if (search) {
-          url = url + '?search=' + search;
-        }
-
-        let m = GAME_MODULES.map((module) => {
-          return this.expansions[module] ? moduleAbbreviations[module] : '';
-        }).join('');
-        if (m === '') m = '-'; // - means no modules.
-
-        if (m !== ALL_MODULES) {
-          url = url + '?m=' + m;
-        }
-        window.history.pushState({path: url}, '', url);
-      }
+    delayedSetLocationHash(delayms: number = 200) {
+      setTimeout(() => {
+        const changed = this.setLocationHash();
+        this.delayedSetLocationHash(changed ? 10 : 100);
+      }, delayms);
+    },
+    setLocationHash(): boolean {
+      const hash = modelToHash(this);
+      const changed = hash !== window.location.hash;
+      window.location.hash = hash;
+      return changed;
     },
     invertExpansions() {
       GAME_MODULES.forEach((module) => this.expansions[module] = !this.expansions[module]);

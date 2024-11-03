@@ -36,7 +36,7 @@ import {TiredEarth} from '../src/server/cards/pathfinders/TiredEarth';
 import {Electrician} from '../src/server/milestones/Electrician';
 import {Collector} from '../src/server/milestones/terraCimmeria/Collector';
 import {Politician} from '../src/server/awards/terraCimmeria/Politician';
-import {Manufacturer} from '../src/server/awards/Manufacturer';
+import {Manufacturer} from '../src/server/awards/arabiaTerra/Manufacturer';
 
 describe('Game', () => {
   it('should initialize with right defaults', () => {

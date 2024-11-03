@@ -1,6 +1,6 @@
-import {IAward} from './IAward';
-import {IPlayer} from '../IPlayer';
-import {CardType} from '../../common/cards/CardType';
+import {IAward} from '../IAward';
+import {IPlayer} from '../../IPlayer';
+import {CardType} from '../../../common/cards/CardType';
 
 export class Manufacturer implements IAward {
   public readonly name = 'A. Manufacturer';

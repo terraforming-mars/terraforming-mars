@@ -1,7 +1,7 @@
-import {BaseMilestone} from './IMilestone';
-import {IPlayer} from '../IPlayer';
-import {isSpecialTileSpace, playerTileFn} from '../boards/Board';
-import {MoonExpansion} from '../moon/MoonExpansion';
+import {BaseMilestone} from '../IMilestone';
+import {IPlayer} from '../../IPlayer';
+import {isSpecialTileSpace, playerTileFn} from '../../boards/Board';
+import {MoonExpansion} from '../../moon/MoonExpansion';
 
 export class LandSpecialist extends BaseMilestone {
   constructor() {

@@ -26,7 +26,7 @@ export class UndergroundSettlement extends PreludeCard {
   private availableSpaces(player: IPlayer) {
     return intersection(
       player.game.board.getAvailableSpacesForCity(player),
-      UnderworldExpansion.excavatableSpaces(player));
+      UnderworldExpansion.excavatableSpaces(player, {ignorePlacementRestrictions: true}));
   }
 
   public override bespokeCanPlay(player: IPlayer) {

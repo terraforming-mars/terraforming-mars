@@ -154,7 +154,7 @@ export class UnderworldExpansion {
    *
    * If a player played Concession Rights this generation, they automatically ignore placement restrictions.
    */
-  public static excavatableSpaces(player: IPlayer, ignorePlacementRestrictions: boolean = false, ignoreConcsesionRights: boolean = false) {
+  public static excavatableSpaces(player: IPlayer, options?: {ignorePlacementRestrictions?: boolean, ignoreConcsesionRights?: boolean}) {
     const board = player.game.board;
 
     // Compute any space that any player can excavate.
@@ -170,13 +170,13 @@ export class UnderworldExpansion {
       return space.spaceType !== SpaceType.COLONY;
     });
 
-    if (ignorePlacementRestrictions === true) {
+    if (options?.ignorePlacementRestrictions === true) {
       return anyExcavatableSpaces;
     }
 
     const concessionRights = player.getPlayedCard(CardName.CONCESSION_RIGHTS);
     if (concessionRights?.generationUsed === player.game.generation) {
-      if (ignoreConcsesionRights === false) {
+      if (options?.ignoreConcsesionRights !== true) {
         return anyExcavatableSpaces;
       }
     }

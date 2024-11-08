@@ -15,7 +15,7 @@ describe('Landscaper Award with Board Setup', () => {
 
   beforeEach(() => {
     [game, player, player2] = testGame(2);
-    game.board = EmptyBoard.newInstance(); //assuming that will crease empty board
+    game.board = EmptyBoard.newInstance(); // Assuming that will crease empty board
     award = new Landscaper();
   });
 
@@ -40,6 +40,5 @@ describe('Landscaper Award with Board Setup', () => {
 
     game.simpleAddTile(player2, landSpaces[6], {tileType: TileType.CITY});
     expect(award.getScore(player2)).eq(1);
-
   });
 });

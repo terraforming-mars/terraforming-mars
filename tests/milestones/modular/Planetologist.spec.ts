@@ -42,7 +42,4 @@ describe('Planetologist', () => {
     player.tagsForTest = {earth: 1, jovian: 1, venus: 1, wild: 1};
     expect(milestone.canClaim(player)).is.not.true;
   });
-
-
-  
 });

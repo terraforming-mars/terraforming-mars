@@ -7,6 +7,7 @@ import {intersection, toName} from '../../src/common/utils/utils';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptions';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {AwardName} from '../../src/common/ma/AwardName';
+import {MACompatibility} from '../../src/common/ma/compatibilities';
 
 describe('MilestoneAwardSelector', () => {
   // These aren't particularly excellent tests as much as they help demonstrate
@@ -120,7 +121,7 @@ describe('MilestoneAwardSelector', () => {
     const avoidedAwards: Array<AwardName> = [...VENUS_AWARDS, ...ARES_AWARDS, ...MOON_AWARDS].map(toName);
     const avoidedMilestones = [...VENUS_MILESTONES, ...ARES_MILESTONES, ...MOON_MILESTONES].map(toName);
     avoidedMilestones.push('Pioneer', 'Martian', 'Colonizer');
-    avoidedAwards.push('Politician');
+    avoidedAwards.push('T. Politician');
     for (let idx = 0; idx < 10000; idx++) {
       const mas = choose({
         randomMA: RandomMAOptionType.LIMITED,
@@ -151,6 +152,24 @@ describe('MilestoneAwardSelector', () => {
     expect(mas.milestones).to.have.length(6);
     expect(mas.awards).to.have.length(6);
   });
+
+  it('No modular milestones and awards by default', () => {
+    for (let idx = 0; idx < 10000; idx++) {
+      const mas = choose({
+        randomMA: RandomMAOptionType.UNLIMITED,
+        venusNextExtension: true,
+        aresExtension: true,
+        moonExpansion: true,
+        coloniesExtension: true,
+        turmoilExtension: true,
+        includeFanMA: true,
+      });
+
+      expect(mas.awards.map((e) => MACompatibility[e.name].modular)).does.not.contain(true);
+      expect(mas.milestones.map((e) => MACompatibility[e.name].modular)).does.not.contain(true);
+    }
+  });
+
   function choose(options: Partial<GameOptions>) {
     return chooseMilestonesAndAwards({...DEFAULT_GAME_OPTIONS, ...options});
   }

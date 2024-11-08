@@ -1,5 +1,5 @@
-import {BaseMilestone} from './IMilestone';
-import {IPlayer} from '../IPlayer';
+import {BaseMilestone} from '../IMilestone';
+import {IPlayer} from '../../IPlayer';
 
 export class Economizer extends BaseMilestone {
   constructor() {

@@ -49,7 +49,6 @@ type DrawnMilestonesAndAwards = {
   awards: Array<IAward>
 }
 
-
 // Function to compute max synergy of a given set of milestones and awards.
 // Exported for testing
 export function maximumSynergy(names: Array<string>) : number {
@@ -223,7 +222,7 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
       inplaceRemove(candidateMilestones, 'Pioneer');
     }
     if (!gameOptions.turmoilExtension) {
-      inplaceRemove(candidateAwards, 'Politician');
+      inplaceRemove(candidateAwards, 'T. Politician');
     }
     // Special-case Terran and Businessperson, which are exactly the same.
     if (candidateMilestones.includes('Terran') && candidateMilestones.includes('Businessperson')) {

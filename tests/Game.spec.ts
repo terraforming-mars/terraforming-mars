@@ -33,6 +33,10 @@ import {SelectSpace} from '../src/server/inputs/SelectSpace';
 import {GlobalParameter} from '../src/common/GlobalParameter';
 import {assertPlaceOcean} from './assertions';
 import {TiredEarth} from '../src/server/cards/pathfinders/TiredEarth';
+import {Electrician} from '../src/server/milestones/Electrician';
+import {Collector} from '../src/server/milestones/terraCimmeria/Collector';
+import {Politician} from '../src/server/awards/terraCimmeria/Politician';
+import {Manufacturer} from '../src/server/awards/arabiaTerra/Manufacturer';
 
 describe('Game', () => {
   it('should initialize with right defaults', () => {
@@ -772,6 +776,45 @@ describe('Game', () => {
     expect(deserialized.fundedAwards[0].player.id).eq('p-blue-id');
   });
 
+  it('deserializing a game with renamed awards', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
+    const game = Game.newInstance('gameid', [player, player2], player);
+    const manufacturer = new Manufacturer();
+    const politician = new Politician();
+
+    game.awards.unshift(manufacturer, politician);
+
+    game.fundedAwards.push({
+      award: manufacturer,
+      player: player,
+    });
+    game.fundedAwards.push({
+      award: politician,
+      player: player,
+    });
+
+    const serialized = game.serialize();
+    expect(serialized.awards[0]).eq('A. Manufacturer');
+    expect(serialized.fundedAwards[0].name).eq('A. Manufacturer');
+    expect(serialized.awards[1]).eq('T. Politician');
+    expect(serialized.fundedAwards[1].name).eq('T. Politician');
+
+    serialized.awards[0] = 'Manufacturer' as any;
+    serialized.fundedAwards[0].name = 'Manufacturer' as any;
+    serialized.awards[1] = 'Politician' as any;
+    serialized.fundedAwards[1].name = 'Politician' as any;
+
+    const deserialized = Game.deserialize(serialized);
+    expect(deserialized.awards[0]).deep.eq(manufacturer);
+    expect(deserialized.awards[1]).deep.eq(politician);
+    expect(deserialized.fundedAwards).has.length(2);
+    expect(deserialized.fundedAwards[0].award.name).eq('A. Manufacturer');
+    expect(deserialized.fundedAwards[0].player.id).eq('p-blue-id');
+    expect(deserialized.fundedAwards[1].award.name).eq('T. Politician');
+    expect(deserialized.fundedAwards[1].player.id).eq('p-blue-id');
+  });
+
   // https://github.com/terraforming-mars/terraforming-mars/issues/5572
   it('dealing with awards accidentally funded twice', () => {
     const player = TestPlayer.BLUE.newPlayer();
@@ -823,12 +866,45 @@ describe('Game', () => {
       name: 'Terraformer',
       playerId: 'p-blue-id',
     }]);
+  });
+
+  it('deserializing a game with renamed milestones', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
+    const game = Game.newInstance('gameid', [player, player2], player);
+    const electrician = new Electrician();
+    const collector = new Collector();
+
+    game.milestones.unshift(electrician, collector);
+
+    game.claimedMilestones.push({
+      milestone: electrician,
+      player: player,
+    });
+    game.claimedMilestones.push({
+      milestone: collector,
+      player: player,
+    });
+
+    const serialized = game.serialize();
+    expect(serialized.milestones[0]).eq('V. Electrician');
+    expect(serialized.claimedMilestones[0].name).eq('V. Electrician');
+    expect(serialized.milestones[1]).eq('T. Collector');
+    expect(serialized.claimedMilestones[1].name).eq('T. Collector');
+
+    serialized.milestones[0] = 'Electrician' as any;
+    serialized.claimedMilestones[0].name = 'Electrician' as any;
+    serialized.milestones[1] = 'Collector' as any;
+    serialized.claimedMilestones[1].name = 'Collector' as any;
 
     const deserialized = Game.deserialize(serialized);
-    expect(deserialized.milestones).deep.eq(game.milestones);
-    expect(deserialized.claimedMilestones).has.length(1);
-    expect(deserialized.claimedMilestones[0].milestone.name).eq('Terraformer');
+    expect(deserialized.milestones[0]).deep.eq(electrician);
+    expect(deserialized.milestones[1]).deep.eq(collector);
+    expect(deserialized.claimedMilestones).has.length(2);
+    expect(deserialized.claimedMilestones[0].milestone.name).eq('V. Electrician');
     expect(deserialized.claimedMilestones[0].player.id).eq('p-blue-id');
+    expect(deserialized.claimedMilestones[1].milestone.name).eq('T. Collector');
+    expect(deserialized.claimedMilestones[1].player.id).eq('p-blue-id');
   });
 
   // https://github.com/terraforming-mars/terraforming-mars/issues/5572

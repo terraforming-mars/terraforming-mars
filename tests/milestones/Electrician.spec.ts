@@ -8,7 +8,7 @@ import {Electrician} from '../../src/server/milestones/Electrician';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestingUtils';
 
-describe('Electrician', () => {
+describe('V. Electrician', () => {
   let milestone: Electrician;
   let player: TestPlayer;
 

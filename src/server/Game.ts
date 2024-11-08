@@ -80,6 +80,8 @@ import {toName} from '../common/utils/utils';
 import {OrOptions} from './inputs/OrOptions';
 import {SelectOption} from './inputs/SelectOption';
 import {SelectSpace} from './inputs/SelectSpace';
+import {maybeRenamedMilestone} from '../common/ma/MilestoneName';
+import {maybeRenamedAward} from '../common/ma/AwardName';
 
 // Can be overridden by tests
 
@@ -1575,8 +1577,8 @@ export class Game implements IGame, Logger {
     game.createdTime = new Date(d.createdTimeMs);
 
     const milestones: Array<IMilestone> = [];
-    d.milestones.forEach((element: IMilestone | string) => {
-      const milestoneName = typeof element === 'string' ? element : element.name;
+    d.milestones.forEach((milestoneName) => {
+      milestoneName = maybeRenamedMilestone(milestoneName);
       const foundMilestone = ALL_MILESTONES.find((milestone) => milestone.name === milestoneName);
       if (foundMilestone !== undefined) {
         milestones.push(foundMilestone);
@@ -1587,8 +1589,8 @@ export class Game implements IGame, Logger {
     game.claimedMilestones = deserializeClaimedMilestones(d.claimedMilestones, players, milestones);
 
     const awards: Array<IAward> = [];
-    d.awards.forEach((element: IAward | string) => {
-      const awardName = typeof element === 'string' ? element : element.name;
+    d.awards.forEach((awardName) => {
+      awardName = maybeRenamedAward(awardName);
       const foundAward = ALL_AWARDS.find((award) => award.name === awardName);
       if (foundAward !== undefined) {
         awards.push(foundAward);

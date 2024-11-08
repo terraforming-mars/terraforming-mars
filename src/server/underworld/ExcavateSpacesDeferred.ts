@@ -17,7 +17,7 @@ export class ExcavateSpacesDeferred extends RunNTimes<void> {
     const title = 'Select space to excavate' + this.titleSuffix();
     this.player.defer(() => {
       return new SelectSpace(title,
-        UnderworldExpansion.excavatableSpaces(this.player, this.ignorePlacementRestrictions))
+        UnderworldExpansion.excavatableSpaces(this.player, {ignorePlacementRestrictions: this.ignorePlacementRestrictions}))
         .andThen((space) => {
           UnderworldExpansion.excavate(this.player, space);
           this.next();

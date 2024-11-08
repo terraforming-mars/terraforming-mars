@@ -1,7 +1,7 @@
 import {IAward} from './IAward';
 import {IPlayer} from '../IPlayer';
 import {PlayerId} from '../../common/Types';
-import {AwardName} from '../../common/ma/AwardName';
+import {AwardName, maybeRenamedAward} from '../../common/ma/AwardName';
 
 export type FundedAward = {
   award: IAward;
@@ -9,8 +9,8 @@ export type FundedAward = {
 }
 
 export type SerializedFundedAward = {
-  name?: AwardName;
-  playerId?: PlayerId;
+  name: AwardName;
+  playerId: PlayerId;
 }
 
 export function serializeFundedAwards(fundedAwards: Array<FundedAward>) : Array<SerializedFundedAward> {
@@ -49,7 +49,7 @@ export function deserializeFundedAwards(
   }
 
   return filtered.map((element: SerializedFundedAward) => {
-    const awardName = element.name;
+    const awardName = maybeRenamedAward(element.name);
     const award: IAward | undefined = awards.find((award) => award.name === awardName);
     if (award === undefined) {
       throw new Error(`Award ${awardName} not found when rebuilding Funded Award`);

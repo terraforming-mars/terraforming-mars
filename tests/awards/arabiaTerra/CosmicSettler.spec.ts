@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {IGame} from '../../src/server/IGame';
-import {CosmicSettler} from '../../src/server/awards/CosmicSettler';
-import {SpaceType} from '../../src/common/boards/SpaceType';
-import {TestPlayer} from '../TestPlayer';
-import {Board} from '../../src/server/boards/Board';
-import {TileType} from '../../src/common/TileType';
-import {testGame} from '../TestGame';
+import {IGame} from '../../../src/server/IGame';
+import {CosmicSettler} from '../../../src/server/awards/arabiaTerra/CosmicSettler';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
+import {TestPlayer} from '../../TestPlayer';
+import {Board} from '../../../src/server/boards/Board';
+import {TileType} from '../../../src/common/TileType';
+import {testGame} from '../../TestGame';
 
 describe('CosmicSettler', function() {
   let award : CosmicSettler;

@@ -21,7 +21,7 @@ describe('ServerSabotage', function() {
   });
 
   it('play', () => {
-    const spaces = UnderworldExpansion.excavatableSpaces(player, true);
+    const spaces = UnderworldExpansion.excavatableSpaces(player, {ignorePlacementRestrictions: true});
     for (const space of spaces) {
       space.undergroundResources = 'card1';
     }

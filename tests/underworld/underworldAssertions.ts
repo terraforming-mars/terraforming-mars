@@ -13,7 +13,7 @@ export function assertIsExcavationAction(player: TestPlayer, input: PlayerInput 
   const candidateSpaces = selectSpace.spaces;
 
   if (ignorePlacementRestrictions) {
-    const strictlyExcavatableSpaces = UnderworldExpansion.excavatableSpaces(player, false, true);
+    const strictlyExcavatableSpaces = UnderworldExpansion.excavatableSpaces(player, {ignoreConcsesionRights: true});
     expect(oneWayDifference(candidateSpaces, strictlyExcavatableSpaces)).is.not.empty;
   }
 

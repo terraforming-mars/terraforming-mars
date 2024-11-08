@@ -1,6 +1,7 @@
 import {BaseMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
 import {Turmoil} from '../../turmoil/Turmoil';
+import {IParty} from '../../turmoil/parties/IParty';
 
 export class Lobbyist extends BaseMilestone {
   constructor() {
@@ -11,7 +12,19 @@ export class Lobbyist extends BaseMilestone {
   }
   public getScore(player: IPlayer): number {
     const game = player.game;
-    const delegateCount = Turmoil.getTurmoil(game).getAvailableDelegateCount(player);
-    return (7 - delegateCount);
+    const turmoil = Turmoil.getTurmoil(game);
+    let delegateCount = 0;
+
+    turmoil.parties.forEach((party: IParty) => {
+      if (party.delegates.has(player)) {
+        delegateCount += party.delegates.get(player);
+      }
+    });
+
+    if (turmoil.chairman === player) {
+      delegateCount++;
+    }
+
+    return delegateCount;
   }
 }

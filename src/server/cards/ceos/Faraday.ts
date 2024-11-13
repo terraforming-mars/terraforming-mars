@@ -85,7 +85,7 @@ export class Faraday extends CeoCard {
   public effectOptions(player: IPlayer, tag: Tag) {
     if (!player.canAfford(3)) return;
     return new OrOptions(
-      new SelectOption(message('Pay 3 M€ to draw a ${1} card', (b) => b.string(tag))).andThen(() => {
+      new SelectOption(message('Pay 3 M€ to draw a ${0} card', (b) => b.string(tag))).andThen(() => {
         player.game.defer(new SelectPaymentDeferred(player, 3, {title: TITLES.payForCardAction(this.name)}))
           .andThen(() => player.drawCard(1, {tag: tag}));
         return undefined;

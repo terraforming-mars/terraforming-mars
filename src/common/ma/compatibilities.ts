@@ -107,7 +107,7 @@ export const MACompatibility: Record<AwardName | MilestoneName, Details> = {
   'Fundraiser': {modular: true},
   'Geologist': {modular: true},
   'Landshaper': {modular: true},
-  'Lobbyist': {modular: true},
+  'Lobbyist': {compatibility: 'turmoil', modular: true},
   'Philantropist': {modular: true},
   'Planetologist': {modular: true},
   'Producer': {modular: true},

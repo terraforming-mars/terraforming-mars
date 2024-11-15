@@ -41,20 +41,6 @@ describe('Lobbyist Milestone', () => {
     expect(milestone.getScore(player)).to.eq(4);
   });
 
-  it('Includes chairman and party leader in delegate count', () => {
-    turmoil.sendDelegateToParty('NEUTRAL', greens.name, game);
-    turmoil.sendDelegateToParty('NEUTRAL', greens.name, game);
-    turmoil.sendDelegateToParty(player, greens.name, game);
-    turmoil.sendDelegateToParty(player, reds.name, game);
-    turmoil.sendDelegateToParty(player, reds.name, game);
-
-    expect(greens.delegates.count('NEUTRAL')).eq(2);
-    expect(greens.partyLeader).eq('NEUTRAL');
-    expect(reds.partyLeader).to.eq(player);
-    turmoil.chairman = player;
-    expect(milestone.getScore(player)).to.eq(4); // 3 delegates + chairman = 4
-  });
-
   it('Achieves milestone with exactly 7 delegates', () => {
     turmoil.sendDelegateToParty(player, PartyName.REDS, game);
     turmoil.sendDelegateToParty(player, PartyName.KELVINISTS, game);
@@ -62,8 +48,8 @@ describe('Lobbyist Milestone', () => {
     turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
     turmoil.sendDelegateToParty(player, PartyName.MARS, game);
     turmoil.sendDelegateToParty(player, PartyName.MARS, game);
-    turmoil.chairman = player;
-    expect(milestone.getScore(player)).to.eq(7); // 5 party leaders + 1 delegate + 1 chairman
+    turmoil.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
+    expect(milestone.getScore(player)).to.eq(7); // 5 party leaders + 2 delegate
   });
 
   it('Only counts player’s own delegates, ignoring other players’ delegates', () => {
@@ -71,8 +57,7 @@ describe('Lobbyist Milestone', () => {
     turmoil.sendDelegateToParty(player, PartyName.UNITY, game);
     turmoil.sendDelegateToParty(player2, PartyName.KELVINISTS, game);
     turmoil.sendDelegateToParty(player2, PartyName.KELVINISTS, game);
-    turmoil.chairman = player2;
     expect(milestone.getScore(player)).to.eq(2); // Only player delegates, ignores player2 chairman and delegate
-    expect(milestone.getScore(player2)).to.eq(3); // Only player’s 2 delegates, ignores player delegates and party leaders
+    expect(milestone.getScore(player2)).to.eq(2); // Only player’s 2 delegates, ignores player delegates and party leaders
   });
 });

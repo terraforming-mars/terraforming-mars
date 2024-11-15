@@ -64,6 +64,10 @@ export const milestoneNames = [
 
   // Modular Milestones
   'Fundraiser',
+  'Geologist',
+  'Landshaper',
+  'Lobbyist',
+  'Planetologist',
   'Philantropist', // Name - 'Philantropist' on tile, but 'Filantrope' in rulebook
   'Producer',
   'Researcher',

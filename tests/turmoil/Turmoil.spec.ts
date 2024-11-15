@@ -177,6 +177,20 @@ describe('Turmoil', function() {
     expect(turmoil.dominantParty).to.eq(turmoil.getPartyByName(PartyName.GREENS));
   });
 
+  it('Player that is chairman has one fewer delegate avaialble ', function() {
+    turmoil.sendDelegateToParty(player, PartyName.REDS, game);
+    turmoil.sendDelegateToParty(player, PartyName.REDS, game);
+
+    expect(turmoil.getAvailableDelegateCount(player)).eq(5);
+
+    game.phase = Phase.SOLAR;
+    turmoil.endGeneration(game);
+    runAllActions(game);
+
+    expect(turmoil.chairman).to.eq(player);
+    expect(turmoil.getAvailableDelegateCount(player)).eq(6);
+  });
+
   it('Does not give Mars First bonus for World Government terraforming', function() {
     setRulingParty(turmoil, game, new MarsFirst());
     game.phase = Phase.SOLAR;

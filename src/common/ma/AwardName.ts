@@ -65,7 +65,11 @@ export const awardNames = [
   // Modular awards
   'Administrator',
   'Constructor',
+  'Founder',
   'Investor',
+  'Highlander',
+  'Landscaper',
+  'Metropolist',
   'Mogul',
   'Traveller',
 

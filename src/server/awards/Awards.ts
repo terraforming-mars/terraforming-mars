@@ -39,6 +39,15 @@ import {Warmonger} from './terraCimmeria/Warmonger';
 import {Zoologist2} from './amazonisPlanitia/Zoologist';
 import {Kingpin} from './underworld/Kingpin';
 import {EdgeLord} from './underworld/EdgeLord';
+import {Administrator} from './modular/Administrator';
+import {Constructor} from './modular/Constructor';
+import {Founder} from './modular/Founder';
+import {Highlander} from './modular/Highlander';
+import {Investor} from './modular/Investor';
+import {Landscaper} from './modular/Landscaper';
+import {Metropolist} from './modular/Metropolist';
+import {Mogul} from './modular/Mogul';
+import {Traveller} from './modular/Traveller';
 
 export const THARSIS_AWARDS = [
   new Landlord(),
@@ -122,6 +131,18 @@ export const UNDERWORLD_AWARDS = [
   new EdgeLord(),
 ];
 
+export const MODULAR_AWARDS = [
+  new Administrator(),
+  new Constructor(),
+  new Founder(),
+  new Highlander(),
+  new Investor(),
+  new Landscaper(),
+  new Metropolist(),
+  new Mogul(),
+  new Traveller(),
+];
+
 export const ALL_AWARDS = [
   ...THARSIS_AWARDS,
   ...ELYSIUM_AWARDS,
@@ -135,6 +156,7 @@ export const ALL_AWARDS = [
   ...TERRA_CIMMERIA_AWARDS,
   ...VASTITAS_BOREALIS_AWARDS,
   ...UNDERWORLD_AWARDS,
+  ...MODULAR_AWARDS,
 ];
 
 // Remove namespace and rename function

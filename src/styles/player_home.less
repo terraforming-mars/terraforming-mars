@@ -616,6 +616,19 @@
           }
         })
 
+        @ma-name-modular:
+          administrator, constructor, founder, highlander, investor,
+          landscaper, metropolist, mogul, traveller,
+
+          fundraiser, geologist, landshaper, lobbyist, philantropist,
+          planetologist, producer, researcher, sponsor
+        ;
+        each(@ma-name-modular, {
+          .ma-name--@{value} {
+            background-image: url("assets/ma/modular/@{value}.png");
+          }
+        })
+
         // TODO(kberg): Set better background sizes.
         // Underworld
         .ma-name--kingpin {

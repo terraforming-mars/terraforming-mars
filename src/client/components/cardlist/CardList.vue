@@ -358,7 +358,12 @@ export default (Vue as WithRefs<Refs>).extend({
       if (!this.include(name, 'ma')) {
         return false;
       }
-      return this.expansions[MACompatibility[name].compatibility ?? 'base'] === true;
+      const compatibility = MACompatibility[name];
+      console.log(name, JSON.stringify(compatibility));
+      if (compatibility.modular === true) {
+        return true;
+      }
+      return this.expansions[compatibility.compatibility ?? 'base'] === true;
     },
     getLanguageCssClass() {
       const language = getPreferences().lang;

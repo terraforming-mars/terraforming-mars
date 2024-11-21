@@ -40,6 +40,15 @@ import {Spacefarer} from './terraCimmeria/Spacefarer';
 import {TerraPioneer} from './terraCimmeria/TerraPioneer';
 import {Risktaker} from './underworld/Risktaker';
 import {Tunneler} from './underworld/Tunneler';
+import {Fundraiser} from './modular/Fundraiser';
+import {Geologist} from './modular/Geologist';
+import {Landshaper} from './modular/Landshaper';
+import {Philantropist} from './modular/Philantropist';
+import {Planetologist} from './modular/Planetologist';
+import {Producer} from './modular/Producer';
+import {Researcher} from './modular/Researcher';
+import {Sponsor} from './modular/Sponsor';
+import {Lobbyist} from './modular/Lobbyist';
 
 export const THARSIS_MILESTONES = [
   new Terraformer(),
@@ -123,6 +132,18 @@ export const UNDERWORLD_MILESTONES = [
   new Tunneler(),
 ];
 
+export const MODULAR_MILESTONES = [
+  new Fundraiser(),
+  new Geologist(),
+  new Landshaper(),
+  new Lobbyist(),
+  new Philantropist(),
+  new Planetologist(),
+  new Producer(),
+  new Researcher(),
+  new Sponsor(),
+];
+
 export const ALL_MILESTONES = [
   ...THARSIS_MILESTONES,
   ...ELYSIUM_MILESTONES,
@@ -136,6 +157,7 @@ export const ALL_MILESTONES = [
   ...TERRA_CIMMERIA_MILESTONES,
   ...VASTITAS_BOREALIS_MILESTONES,
   ...UNDERWORLD_MILESTONES,
+  ...MODULAR_MILESTONES,
 ];
 
 // Remove namespace and rename function

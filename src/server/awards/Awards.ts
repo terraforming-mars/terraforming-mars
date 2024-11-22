@@ -22,7 +22,7 @@ import {CosmicSettler} from './arabiaTerra/CosmicSettler';
 import {Botanist} from './arabiaTerra/Botanist';
 import {Coordinator} from './arabiaTerra/Coordinator';
 import {Zoologist} from './arabiaTerra/Zoologist';
-import {Manufacturer} from './arabiaTerra/Manufacturer';
+import {Manufacturer as AManufacturer} from './arabiaTerra/Manufacturer';
 import {Adapter} from './Adapter';
 import {Edgedancer} from './Edgedancer';
 import {Hoarder} from './Hoarder';
@@ -33,7 +33,7 @@ import {Engineer} from './amazonisPlanitia/Engineer';
 import {Tourist} from './amazonisPlanitia/Tourist';
 import {Biologist} from './terraCimmeria/Biologist';
 import {Economizer2} from './terraCimmeria/Economizer2';
-import {Politician} from './terraCimmeria/Politician';
+import {Politician as TPolitician} from './terraCimmeria/Politician';
 import {Urbanist} from './terraCimmeria/Urbanist';
 import {Warmonger} from './terraCimmeria/Warmonger';
 import {Zoologist2} from './amazonisPlanitia/Zoologist';
@@ -48,6 +48,10 @@ import {Landscaper} from './modular/Landscaper';
 import {Metropolist} from './modular/Metropolist';
 import {Mogul} from './modular/Mogul';
 import {Traveller} from './modular/Traveller';
+import {Electrician} from './modular/Electrician';
+import {Collector} from './modular/Collector';
+import {Politician} from './modular/Politician';
+import {Manufacturer} from './modular/Manufacturer';
 
 export const THARSIS_AWARDS = [
   new Landlord(),
@@ -107,13 +111,13 @@ export const ARABIA_TERRA_AWARDS = [
   new Botanist(),
   new Coordinator(),
   new Zoologist(),
-  new Manufacturer(),
+  new AManufacturer(),
 ];
 
 export const TERRA_CIMMERIA_AWARDS = [
   new Biologist(),
   new Economizer2(),
-  new Politician(),
+  new TPolitician(),
   new Urbanist(),
   new Warmonger(),
 ];
@@ -133,13 +137,17 @@ export const UNDERWORLD_AWARDS = [
 
 export const MODULAR_AWARDS = [
   new Administrator(),
+  new Collector(),
   new Constructor(),
+  new Electrician(),
   new Founder(),
   new Highlander(),
   new Investor(),
   new Landscaper(),
+  new Manufacturer(),
   new Metropolist(),
   new Mogul(),
+  new Politician(),
   new Traveller(),
 ];
 

@@ -64,15 +64,18 @@ export const awardNames = [
 
   // Modular awards
   'Administrator',
+  'Collector',
   'Constructor',
+  'Electrician',
   'Founder',
-  'Investor',
   'Highlander',
+  'Investor',
   'Landscaper',
+  'Manufacturer', // Fabricator
   'Metropolist',
   'Mogul',
+  'Politician', // Statesman
   'Traveller',
-
 ] as const;
 
 export type AwardName = typeof awardNames[number];

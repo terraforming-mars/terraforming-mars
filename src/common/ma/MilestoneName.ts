@@ -63,16 +63,21 @@ export const milestoneNames = [
   'Risktaker',
 
   // Modular Milestones
+  'Breeder',
+  'Briber',
   'Fundraiser',
   'Geologist',
+  'Hydrologist', // Not implemented Place 4 oceans
   'Landshaper',
   'Lobbyist',
-  'Planetologist',
+  'Merchant',
   'Philantropist', // Name - 'Philantropist' on tile, but 'Filantrope' in rulebook
+  'Planetologist',
   'Producer',
   'Researcher',
   'Sponsor',
-
+  'Thawer', // Not implemented Raise the temperature 5 times
+  'ThermoEngineer',
 ] as const;
 
 export type MilestoneName = typeof milestoneNames[number];

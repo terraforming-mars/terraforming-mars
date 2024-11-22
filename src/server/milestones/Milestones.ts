@@ -49,6 +49,10 @@ import {Producer} from './modular/Producer';
 import {Researcher} from './modular/Researcher';
 import {Sponsor} from './modular/Sponsor';
 import {Lobbyist} from './modular/Lobbyist';
+// import {Breeder} from './modular/Breeder';
+import {Briber} from './modular/Briber';
+// import {ThermoEngineer} from './modular/ThermoEngineer';
+import {Merchant} from './modular/Merchant';
 
 export const THARSIS_MILESTONES = [
   new Terraformer(),
@@ -133,15 +137,19 @@ export const UNDERWORLD_MILESTONES = [
 ];
 
 export const MODULAR_MILESTONES = [
+  // new Breeder(),
+  new Briber(),
   new Fundraiser(),
   new Geologist(),
   new Landshaper(),
   new Lobbyist(),
+  new Merchant(),
   new Philantropist(),
   new Planetologist(),
   new Producer(),
   new Researcher(),
   new Sponsor(),
+  // new ThermoEngineer(),
 ];
 
 export const ALL_MILESTONES = [

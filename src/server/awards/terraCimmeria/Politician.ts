@@ -1,7 +1,7 @@
 import {IPlayer} from '../../IPlayer';
 import {IAward} from '../IAward';
 
-export class Politician implements IAward {
+export class TPolitician implements IAward {
   public readonly name = 'T. Politician';
   public readonly description = 'Place the most delegates';
 

@@ -14,6 +14,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {ALL_AWARDS} from '../../awards/Awards';
 import {AwardScorer} from '../../awards/AwardScorer';
 import {message} from '../../logs/MessageBuilder';
+import {MACompatibility} from '../../../common/ma/compatibilities';
 
 export class Asimov extends CeoCard {
   constructor() {
@@ -89,13 +90,14 @@ export class Asimov extends CeoCard {
       // Remove awards already in the game
       if (player.game.awards.includes(award)) return false;
       // Remove awards that require unused variants/expansions
-      if (!gameOptions.venusNextExtension && award.name === 'Venuphile') return false;
-      if (!gameOptions.turmoilExtension && award.name === 'T. Politician') return false;
-      if (!gameOptions.aresExtension && award.name === 'Entrepreneur') return false;
-      if (!gameOptions.moonExpansion && award.name === 'Full Moon') return false;
-      if (!gameOptions.moonExpansion && award.name === 'Lunar Magnate') return false;
-      if (!gameOptions.underworldExpansion && award.name === 'Kingpin') return false;
-      if (!gameOptions.underworldExpansion && award.name === 'EdgeLord') return false;
+      switch (MACompatibility[award.name].compatibility) {
+      case 'venus': return gameOptions.venusNextExtension;
+      case 'ares': return gameOptions.aresExtension;
+      case 'turmoil': return gameOptions.turmoilExtension;
+      case 'moon': return gameOptions.moonExpansion;
+      case 'underworld': return gameOptions.underworldExpansion;
+      }
+
       return true;
     });
     if (validAwards.length === 0) throw new Error('getValidAwards award list is empty.');

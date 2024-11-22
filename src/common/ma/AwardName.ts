@@ -71,10 +71,10 @@ export const awardNames = [
   'Highlander',
   'Investor',
   'Landscaper',
-  'Manufacturer', // Fabricator
+  'Manufacturer',
   'Metropolist',
   'Mogul',
-  'Politician', // Statesman
+  'Politician',
   'Traveller',
 ] as const;
 

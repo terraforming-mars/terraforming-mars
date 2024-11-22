@@ -5,7 +5,7 @@ import {forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {Oscar} from '../../../src/server/cards/ceos/Oscar';
-import {Politician} from '../../../src/server/awards/terraCimmeria/Politician';
+import {TPolitician} from '../../../src/server/awards/terraCimmeria/Politician';
 import {TempestConsultancy} from '../../../src/server/cards/moon/TempestConsultancy';
 
 describe('Oscar', function() {
@@ -87,7 +87,7 @@ describe('Oscar', function() {
   });
 
   it('OPG Counts for POLITICAN Award', function() {
-    const politician = new Politician();
+    const politician = new TPolitician();
     game.awards = [];
     game.awards.push(politician);
     const preOPGScore = game.awards[0].getScore(player);

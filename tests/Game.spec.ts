@@ -35,8 +35,8 @@ import {assertPlaceOcean} from './assertions';
 import {TiredEarth} from '../src/server/cards/pathfinders/TiredEarth';
 import {Electrician} from '../src/server/milestones/Electrician';
 import {Collector} from '../src/server/milestones/terraCimmeria/Collector';
-import {Politician} from '../src/server/awards/terraCimmeria/Politician';
-import {Manufacturer} from '../src/server/awards/arabiaTerra/Manufacturer';
+import {TPolitician} from '../src/server/awards/terraCimmeria/Politician';
+import {AManufacturer} from '../src/server/awards/arabiaTerra/Manufacturer';
 
 describe('Game', () => {
   it('should initialize with right defaults', () => {
@@ -780,8 +780,8 @@ describe('Game', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, player2], player);
-    const manufacturer = new Manufacturer();
-    const politician = new Politician();
+    const manufacturer = new AManufacturer();
+    const politician = new TPolitician();
 
     game.awards.unshift(manufacturer, politician);
 

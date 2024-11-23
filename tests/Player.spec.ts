@@ -243,253 +243,253 @@ describe('Player', function() {
     expect(newPlayer.color).eq(Color.PURPLE);
     expect(newPlayer.colonies.tradesThisGeneration).eq(100);
     expect(newPlayer.canUseCorruptionAsMegacredits).eq(true);
-  });
-  it('pulls self replicating robots target cards', function() {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    expect(player.getSelfReplicatingRobotsTargetCards()).is.empty;
-    const srr = new SelfReplicatingRobots();
-    player.playedCards.push(srr);
-    srr.targetCards.push(new LunarBeam());
-    expect(player.getSelfReplicatingRobotsTargetCards()).has.length(1);
-  });
-  it('removes tags from card played from self replicating robots', () => {
-    const player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
-    const srr = new SelfReplicatingRobots();
-    player.stock.megacredits = 10;
-    player.playedCards.push(srr);
-    const physicsComplex = new PhysicsComplex();
-    player.cardsInHand.push(physicsComplex);
-    const action = cast(srr.action(player), OrOptions);
-    action.options[0].cb([cast(action.options[0], SelectCard<IProjectCard>).cards[0]]);
-    expect(srr.targetCards[0].resourceCount).to.eq(2);
-    player.playCard(physicsComplex, Payment.of({'megaCredits': 10}));
-    expect(player.playedCards).to.contain(physicsComplex);
-    expect(physicsComplex.resourceCount).to.eq(0);
-  });
-
-  it('addResourceTo', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const game = Game.newInstance('gameid', [player], player);
-
-    const log = game.gameLog;
-
-    log.length = 0; // Empty it out.
-
-    const card = new Pets();
-    expect(card.resourceCount).eq(0);
-    expect(log).is.empty;
-
-    player.addResourceTo(card);
-    expect(card.resourceCount).eq(1);
-    expect(log).is.empty;
-
-    player.addResourceTo(card, 1);
-    expect(card.resourceCount).eq(2);
-    expect(log).is.empty;
-
-    player.addResourceTo(card, 3);
-    expect(card.resourceCount).eq(5);
-    expect(log).is.empty;
-
-    player.addResourceTo(card, {qty: 3, log: true});
-    expect(log).has.length(1);
-    const logEntry = log[0];
-    expect(logEntry.data[1].value).eq('3');
-    expect(logEntry.data[3].value).eq('Pets');
-  });
-
-  it('addResourceTo with Mons Insurance hook does not remove when no credits', () => {
-    const player1 = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const player2 = new Player('red', Color.RED, false, 0, 'p-red');
-    const game = Game.newInstance('gameid', [player1, player2], player1);
-    player1.megaCredits = 0;
-    player1.production.add(Resource.MEGACREDITS, -5);
-    player2.megaCredits = 3;
-    game.monsInsuranceOwner = player2.id;
-    player1.stock.add(Resource.MEGACREDITS, -3, {from: player2, log: false});
-    expect(player2.megaCredits).eq(3);
-    player1.production.add(Resource.MEGACREDITS, -3, {from: player2, log: false});
-    expect(player2.megaCredits).eq(3);
-  });
-
-  it('removeResourcesFrom', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
-    const game = Game.newInstance('gameid', [player], player);
-
-    const log = game.gameLog;
-    log.length = 0; // Empty it out.
-
-    const card = new Pets();
-    expect(card.resourceCount).eq(0);
-    expect(log).is.empty;
-
-    log.length = 0;
-    card.resourceCount = 6;
-    player.removeResourceFrom(card);
-    expect(card.resourceCount).eq(5);
-    expect(log).has.length(1);
-    expect(log[0].data[1].value).eq('1');
-    expect(log[0].data[3].value).eq('Pets');
-
-    log.length = 0;
-    player.removeResourceFrom(card, 1);
-    expect(card.resourceCount).eq(4);
-    expect(log).has.length(1);
-    expect(log[0].data[1].value).eq('1');
-
-    log.length = 0;
-    player.removeResourceFrom(card, 3);
-    expect(log).has.length(1);
-    expect(log[0].data[1].value).eq('3');
-
-    log.length = 0;
-    card.resourceCount = 4;
-    player.removeResourceFrom(card, 5);
-    expect(card.resourceCount).eq(0);
-    expect(log).has.length(1);
-    expect(log[0].data[1].value).eq('4');
-  });
-
-  it('Turmoil player action', () => {
-    const player = TestPlayer.BLUE.newPlayer();
-
-    const game = Game.newInstance('gameid', [player], player, {turmoilExtension: true});
-
-    const turmoil = game.turmoil!;
-
-    expect(turmoil.usedFreeDelegateAction.has(player)).is.false;
-
-    const freeLobbyAction = cast(getSendADelegateOption(player), SelectParty);
-
-    expect(freeLobbyAction.title).eq('Send a delegate in an area (from lobby)');
-    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player)).eq(0);
-
-    freeLobbyAction.cb(PartyName.KELVINISTS);
-    runAllActions(game);
-
-    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player)).eq(1);
-
-    // Now the free lobby action is used, only the 5MC option is available.
-    player.megaCredits = 4;
-    expect(turmoil.usedFreeDelegateAction.has(player)).is.true;
-    expect(getSendADelegateOption(player)).is.undefined;
-
-    player.megaCredits = 5;
-    const selectParty = cast(getSendADelegateOption(player), SelectParty);
-
-    expect(selectParty.title).eq('Send a delegate in an area (5 M€)');
-
-    selectParty.cb(PartyName.KELVINISTS);
-    runAllActions(game);
-
-    expect(player.megaCredits).eq(0);
-    expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player)).eq(2);
-  });
-
-  it('Prelude action cycle', () => {
-    const [game, player1, player2] = testGame(2, {preludeExtension: true});
-
-    // None of these preludes require additional user input, so they're good for this test.
-    const alliedBanks = new AlliedBanks();
-    const biofuels = new Biofuels();
-    const co2Reducers = new CO2Reducers();
-    const donation = new Donation();
-
-    game.phase = Phase.PRELUDES;
-    player1.preludeCardsInHand = [alliedBanks, biofuels];
-    player2.preludeCardsInHand = [co2Reducers, donation];
-
-    expect(player1.actionsTakenThisRound).eq(0);
-    expect(game.activePlayer).eq(player1.id);
-
-    player1.takeAction();
-
-    doWait(player1, SelectCard, (firstPrelude) => {
-      expect(firstPrelude!.title).eq('Select prelude card to play');
-      firstPrelude.cb([alliedBanks]);
+    it('pulls self replicating robots target cards', function() {
+      const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
+      expect(player.getSelfReplicatingRobotsTargetCards()).is.empty;
+      const srr = new SelfReplicatingRobots();
+      player.playedCards.push(srr);
+      srr.targetCards.push(new LunarBeam());
+      expect(player.getSelfReplicatingRobotsTargetCards()).has.length(1);
     });
-    runAllActions(game);
-
-    expect(game.activePlayer).eq(player1.id);
-    expect(player2.getWaitingFor()).is.undefined;
-
-    doWait(player1, SelectCard, (selectCard) => {
-      expect(selectCard.title).eq('Select prelude card to play');
-      selectCard.cb([biofuels]);
-    });
-    runAllActions(game);
-
-    expect(game.activePlayer).eq(player2.id);
-    expect(player1.getWaitingFor()).is.undefined;
-
-    doWait(player2, SelectCard, (firstPrelude) => {
-      expect(firstPrelude!.title).eq('Select prelude card to play');
-      firstPrelude.cb([co2Reducers]);
-    });
-    runAllActions(game);
-
-    expect(game.activePlayer).eq(player2.id);
-    expect(player1.getWaitingFor()).is.undefined;
-
-    doWait(player2, SelectCard, (selectCard) => {
-      expect(selectCard.title).eq('Select prelude card to play');
-      selectCard.cb([donation]);
+    it('removes tags from card played from self replicating robots', () => {
+      const player = TestPlayer.BLUE.newPlayer();
+      Game.newInstance('gameid', [player], player);
+      const srr = new SelfReplicatingRobots();
+      player.stock.megacredits = 10;
+      player.playedCards.push(srr);
+      const physicsComplex = new PhysicsComplex();
+      player.cardsInHand.push(physicsComplex);
+      const action = cast(srr.action(player), OrOptions);
+      action.options[0].cb([cast(action.options[0], SelectCard<IProjectCard>).cards[0]]);
+      expect(srr.targetCards[0].resourceCount).to.eq(2);
+      player.playCard(physicsComplex, Payment.of({'megaCredits': 10}));
+      expect(player.playedCards).to.contain(physicsComplex);
+      expect(physicsComplex.resourceCount).to.eq(0);
     });
 
-    runAllActions(game);
+    it('addResourceTo', () => {
+      const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
+      const game = Game.newInstance('gameid', [player], player);
 
-    expect(game.phase).eq(Phase.ACTION);
-    expect(game.activePlayer).eq(player1.id);
-    expect(player2.getWaitingFor()).is.undefined;
+      const log = game.gameLog;
+
+      log.length = 0; // Empty it out.
+
+      const card = new Pets();
+      expect(card.resourceCount).eq(0);
+      expect(log).is.empty;
+
+      player.addResourceTo(card);
+      expect(card.resourceCount).eq(1);
+      expect(log).is.empty;
+
+      player.addResourceTo(card, 1);
+      expect(card.resourceCount).eq(2);
+      expect(log).is.empty;
+
+      player.addResourceTo(card, 3);
+      expect(card.resourceCount).eq(5);
+      expect(log).is.empty;
+
+      player.addResourceTo(card, {qty: 3, log: true});
+      expect(log).has.length(1);
+      const logEntry = log[0];
+      expect(logEntry.data[1].value).eq('3');
+      expect(logEntry.data[3].value).eq('Pets');
+    });
+
+    it('addResourceTo with Mons Insurance hook does not remove when no credits', () => {
+      const player1 = new Player('blue', Color.BLUE, false, 0, 'p-blue');
+      const player2 = new Player('red', Color.RED, false, 0, 'p-red');
+      const game = Game.newInstance('gameid', [player1, player2], player1);
+      player1.megaCredits = 0;
+      player1.production.add(Resource.MEGACREDITS, -5);
+      player2.megaCredits = 3;
+      game.monsInsuranceOwner = player2.id;
+      player1.stock.add(Resource.MEGACREDITS, -3, {from: player2, log: false});
+      expect(player2.megaCredits).eq(3);
+      player1.production.add(Resource.MEGACREDITS, -3, {from: player2, log: false});
+      expect(player2.megaCredits).eq(3);
+    });
+
+    it('removeResourcesFrom', () => {
+      const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
+      const game = Game.newInstance('gameid', [player], player);
+
+      const log = game.gameLog;
+      log.length = 0; // Empty it out.
+
+      const card = new Pets();
+      expect(card.resourceCount).eq(0);
+      expect(log).is.empty;
+
+      log.length = 0;
+      card.resourceCount = 6;
+      player.removeResourceFrom(card);
+      expect(card.resourceCount).eq(5);
+      expect(log).has.length(1);
+      expect(log[0].data[1].value).eq('1');
+      expect(log[0].data[3].value).eq('Pets');
+
+      log.length = 0;
+      player.removeResourceFrom(card, 1);
+      expect(card.resourceCount).eq(4);
+      expect(log).has.length(1);
+      expect(log[0].data[1].value).eq('1');
+
+      log.length = 0;
+      player.removeResourceFrom(card, 3);
+      expect(log).has.length(1);
+      expect(log[0].data[1].value).eq('3');
+
+      log.length = 0;
+      card.resourceCount = 4;
+      player.removeResourceFrom(card, 5);
+      expect(card.resourceCount).eq(0);
+      expect(log).has.length(1);
+      expect(log[0].data[1].value).eq('4');
+    });
+
+    it('Turmoil player action', () => {
+      const player = TestPlayer.BLUE.newPlayer();
+
+      const game = Game.newInstance('gameid', [player], player, {turmoilExtension: true});
+
+      const turmoil = game.turmoil!;
+
+      expect(turmoil.usedFreeDelegateAction.has(player)).is.false;
+
+      const freeLobbyAction = cast(getSendADelegateOption(player), SelectParty);
+
+      expect(freeLobbyAction.title).eq('Send a delegate in an area (from lobby)');
+      expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player)).eq(0);
+
+      freeLobbyAction.cb(PartyName.KELVINISTS);
+      runAllActions(game);
+
+      expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player)).eq(1);
+
+      // Now the free lobby action is used, only the 5MC option is available.
+      player.megaCredits = 4;
+      expect(turmoil.usedFreeDelegateAction.has(player)).is.true;
+      expect(getSendADelegateOption(player)).is.undefined;
+
+      player.megaCredits = 5;
+      const selectParty = cast(getSendADelegateOption(player), SelectParty);
+
+      expect(selectParty.title).eq('Send a delegate in an area (5 M€)');
+
+      selectParty.cb(PartyName.KELVINISTS);
+      runAllActions(game);
+
+      expect(player.megaCredits).eq(0);
+      expect(turmoil.getPartyByName(PartyName.KELVINISTS).delegates.get(player)).eq(2);
+    });
+
+    it('Prelude action cycle', () => {
+      const [game, player1, player2] = testGame(2, {preludeExtension: true});
+
+      // None of these preludes require additional user input, so they're good for this test.
+      const alliedBanks = new AlliedBanks();
+      const biofuels = new Biofuels();
+      const co2Reducers = new CO2Reducers();
+      const donation = new Donation();
+
+      game.phase = Phase.PRELUDES;
+      player1.preludeCardsInHand = [alliedBanks, biofuels];
+      player2.preludeCardsInHand = [co2Reducers, donation];
+
+      expect(player1.actionsTakenThisRound).eq(0);
+      expect(game.activePlayer).eq(player1.id);
+
+      player1.takeAction();
+
+      doWait(player1, SelectCard, (firstPrelude) => {
+        expect(firstPrelude!.title).eq('Select prelude card to play');
+        firstPrelude.cb([alliedBanks]);
+      });
+      runAllActions(game);
+
+      expect(game.activePlayer).eq(player1.id);
+      expect(player2.getWaitingFor()).is.undefined;
+
+      doWait(player1, SelectCard, (selectCard) => {
+        expect(selectCard.title).eq('Select prelude card to play');
+        selectCard.cb([biofuels]);
+      });
+      runAllActions(game);
+
+      expect(game.activePlayer).eq(player2.id);
+      expect(player1.getWaitingFor()).is.undefined;
+
+      doWait(player2, SelectCard, (firstPrelude) => {
+        expect(firstPrelude!.title).eq('Select prelude card to play');
+        firstPrelude.cb([co2Reducers]);
+      });
+      runAllActions(game);
+
+      expect(game.activePlayer).eq(player2.id);
+      expect(player1.getWaitingFor()).is.undefined;
+
+      doWait(player2, SelectCard, (selectCard) => {
+        expect(selectCard.title).eq('Select prelude card to play');
+        selectCard.cb([donation]);
+      });
+
+      runAllActions(game);
+
+      expect(game.phase).eq(Phase.ACTION);
+      expect(game.activePlayer).eq(player1.id);
+      expect(player2.getWaitingFor()).is.undefined;
+    });
+
+    it('Prelude fizzle', () => {
+      const [game, player] = testGame(1, {preludeExtension: true});
+
+      const alliedBanks = new AlliedBanks();
+      const loan = new Loan();
+
+      game.phase = Phase.PRELUDES;
+      player.preludeCardsInHand = [alliedBanks, loan];
+
+      player.production.override({megacredits: -5});
+
+      player.takeAction();
+      runAllActions(game);
+
+      const selectCard = cast(player.popWaitingFor(), SelectCard<IPreludeCard>);
+      expect(selectCard.cards).deep.eq([alliedBanks, loan]);
+      expect(loan.canPlay(player)).is.false;
+      selectCard.cb([loan]);
+      runAllActions(game);
+
+      expect(player.megaCredits).eq(15);
+      expect(player.preludeCardsInHand).deep.eq([alliedBanks]);
+    });
+
+    it('autopass', () => {
+      const [game, player, player2] = testGame(2);
+
+      game.phase = Phase.ACTION;
+
+      player.autopass = true;
+      player.takeAction();
+      expect(game.activePlayer).eq(player2.id);
+    });
   });
 
-  it('Prelude fizzle', () => {
-    const [game, player] = testGame(1, {preludeExtension: true});
-
-    const alliedBanks = new AlliedBanks();
-    const loan = new Loan();
-
-    game.phase = Phase.PRELUDES;
-    player.preludeCardsInHand = [alliedBanks, loan];
-
-    player.production.override({megacredits: -5});
-
-    player.takeAction();
-    runAllActions(game);
-
-    const selectCard = cast(player.popWaitingFor(), SelectCard<IPreludeCard>);
-    expect(selectCard.cards).deep.eq([alliedBanks, loan]);
-    expect(loan.canPlay(player)).is.false;
-    selectCard.cb([loan]);
-    runAllActions(game);
-
-    expect(player.megaCredits).eq(15);
-    expect(player.preludeCardsInHand).deep.eq([alliedBanks]);
-  });
-
-  it('autopass', () => {
+  it('everybody autopasses', () => {
     const [game, player, player2] = testGame(2);
 
     game.phase = Phase.ACTION;
 
     player.autopass = true;
+    player2.autopass = true;
     player.takeAction();
-    expect(game.activePlayer).eq(player2.id);
+
+    expect(game.phase).eq(Phase.RESEARCH);
+    expect(player.autopass).is.false;
+    expect(player2.autopass).is.false;
   });
-});
-
-it('everybody autopasses', () => {
-  const [game, player, player2] = testGame(2);
-
-  game.phase = Phase.ACTION;
-
-  player.autopass = true;
-  player2.autopass = true;
-  player.takeAction();
-
-  expect(game.phase).eq(Phase.RESEARCH);
-  expect(player.autopass).is.false;
-  expect(player2.autopass).is.false;
 });
 

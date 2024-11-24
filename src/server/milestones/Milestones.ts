@@ -52,6 +52,8 @@ import {Lobbyist} from './modular/Lobbyist';
 import {Breeder} from './modular/Breeder';
 // import {Briber} from './modular/Briber';
 import {ThermoEngineer} from './modular/ThermoEngineer';
+import {Hydrologist} from './modular/Hydrologist';
+import {Thawer} from './modular/Thawer';
 // import {Merchant} from './modular/Merchant';
 
 export const THARSIS_MILESTONES = [
@@ -141,6 +143,7 @@ export const MODULAR_MILESTONES = [
   // new Briber(),
   new Fundraiser(),
   new Geologist(),
+  new Hydrologist(),
   new Landshaper(),
   new Lobbyist(),
   // new Merchant(),
@@ -149,6 +152,7 @@ export const MODULAR_MILESTONES = [
   new Producer(),
   new Researcher(),
   new Sponsor(),
+  new Thawer(),
   new ThermoEngineer(),
 ];
 

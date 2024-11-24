@@ -120,6 +120,7 @@ export interface IPlayer {
   turmoilPolicyActionUsed: boolean;
   politicalAgendasActionUsedCount: number;
 
+  /** Lakefront Resorts increases ocean adjacency to 3 MC  */
   oceanBonus: number;
 
   // Custom cards
@@ -238,6 +239,11 @@ export interface IPlayer {
    * player has thanks to played cards, Turmoil policies, etcetera.
    */
   getGlobalParameterRequirementBonus(parameter: GlobalParameter): number;
+  /**
+   * Called when this player is responsible for increasing a global parameter.
+   */
+  onGlobalParameterIncrease(parameter: GlobalParameter, steps: number): void;
+  readonly globalParameterSteps: Record<GlobalParameter, number>;
   /**
    * Remove resources from this player's played card
    */

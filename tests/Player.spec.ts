@@ -34,6 +34,7 @@ import {IPreludeCard} from '../src/server/cards/prelude/IPreludeCard';
 import {OrOptions} from '../src/server/inputs/OrOptions';
 import {Payment} from '../src/common/inputs/Payment';
 import {PhysicsComplex} from '../src/server/cards/base/PhysicsComplex';
+import {GlobalParameter} from '../src/common/GlobalParameter';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -236,6 +237,15 @@ describe('Player', function() {
       underworldData: {corruption: 0},
       alliedParty: {agenda: {bonusId: 'gb01', policyId: 'gp01'}, partyName: PartyName.GREENS},
       draftHand: [],
+      globalParameterSteps: {
+        [GlobalParameter.OCEANS]: 0,
+        [GlobalParameter.OXYGEN]: 0,
+        [GlobalParameter.TEMPERATURE]: 0,
+        [GlobalParameter.VENUS]: 0,
+        [GlobalParameter.MOON_HABITAT_RATE]: 0,
+        [GlobalParameter.MOON_MINING_RATE]: 0,
+        [GlobalParameter.MOON_LOGISTICS_RATE]: 0,
+      },
     };
 
     const newPlayer = Player.deserialize(json);
@@ -490,6 +500,56 @@ describe('Player', function() {
     expect(game.phase).eq(Phase.RESEARCH);
     expect(player.autopass).is.false;
     expect(player2.autopass).is.false;
+  });
+
+  it('Increasing temperature sets globalParameterSteps', () => {
+    const [game, player, player2] = testGame(2, {solarPhaseOption: true});
+
+    game.phase = Phase.ACTION;
+    game.increaseTemperature(player, 1);
+    expect(player.globalParameterSteps[GlobalParameter.TEMPERATURE]).eq(1);
+
+    game.increaseTemperature(player, 2);
+    expect(player.globalParameterSteps[GlobalParameter.TEMPERATURE]).eq(3);
+
+    game.increaseTemperature(player, -1);
+    expect(player.globalParameterSteps[GlobalParameter.TEMPERATURE]).eq(3);
+    expect(player2.globalParameterSteps[GlobalParameter.TEMPERATURE]).eq(0);
+
+    game.phase = Phase.SOLAR;
+
+    game.increaseTemperature(player2, 2);
+    expect(player2.globalParameterSteps[GlobalParameter.TEMPERATURE]).eq(0);
+
+    game.phase = Phase.ACTION;
+
+    game.increaseTemperature(player2, 2);
+    expect(player2.globalParameterSteps[GlobalParameter.TEMPERATURE]).eq(2);
+  });
+
+  it('Increasing oxygen sets globalParameterSteps', () => {
+    const [game, player, player2] = testGame(2, {solarPhaseOption: true});
+
+    game.phase = Phase.ACTION;
+    game.increaseOxygenLevel(player, 1);
+    expect(player.globalParameterSteps[GlobalParameter.OXYGEN]).eq(1);
+
+    game.increaseOxygenLevel(player, 2);
+    expect(player.globalParameterSteps[GlobalParameter.OXYGEN]).eq(3);
+
+    game.increaseOxygenLevel(player, -1);
+    expect(player.globalParameterSteps[GlobalParameter.OXYGEN]).eq(3);
+    expect(player2.globalParameterSteps[GlobalParameter.OXYGEN]).eq(0);
+
+    game.phase = Phase.SOLAR;
+
+    game.increaseOxygenLevel(player2, 2);
+    expect(player2.globalParameterSteps[GlobalParameter.OXYGEN]).eq(0);
+
+    game.phase = Phase.ACTION;
+
+    game.increaseOxygenLevel(player2, 2);
+    expect(player2.globalParameterSteps[GlobalParameter.OXYGEN]).eq(2);
   });
 });
 

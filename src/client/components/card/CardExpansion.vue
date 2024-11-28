@@ -7,9 +7,11 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {GameModule} from '@/common/cards/GameModule';
+import {Expansion, GameModule} from '@/common/cards/GameModule';
 
-const MODULE_TO_CSS: Omit<Record<GameModule, string>, 'base'> = {
+// TODO(kberg): replace corporate-icon with corpera-icon, and
+// this can be replaced with a template string.
+const MODULE_TO_CSS: Record<Expansion, string> = {
   corpera: 'corporate-icon',
   promo: 'promo-icon',
   venus: 'venus-icon',

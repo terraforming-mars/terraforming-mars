@@ -5,6 +5,7 @@ import Board from '@/client/components/Board.vue';
 import BoardSpace from '@/client/components/BoardSpace.vue';
 import {SpaceModel} from '@/common/models/SpaceModel';
 import {SpaceType} from '@/common/boards/SpaceType';
+import {DEFAULT_EXPANSIONS} from '@/common/cards/GameModule';
 
 const spaces: SpaceModel[] = [
   {
@@ -54,7 +55,7 @@ describe('Board', () => {
   it('has visible tiles on the board', () => {
     const wrapper = shallowMount(Board, {
       localVue: getLocalVue(),
-      propsData: {spaces, tileView: 'hide'},
+      propsData: {spaces, expansions: DEFAULT_EXPANSIONS, tileView: 'hide'},
     });
 
     const boardSpacesWrappers = wrapper.findAllComponents(BoardSpace).wrappers.filter((wrapper) => {
@@ -69,7 +70,7 @@ describe('Board', () => {
   it('has hidden tiles on the board', () => {
     const wrapper = shallowMount(Board, {
       localVue: getLocalVue(),
-      propsData: {spaces, tileView: 'show'},
+      propsData: {spaces, expansions: DEFAULT_EXPANSIONS, tileView: 'show'},
     });
 
     const boardSpacesWrappers = wrapper.findAllComponents(BoardSpace).wrappers.filter((wrapper) => {
@@ -84,7 +85,7 @@ describe('Board', () => {
   it('emits toggleTileView on toggle button click', async () => {
     const wrapper = shallowMount(Board, {
       localVue: getLocalVue(),
-      propsData: {spaces},
+      propsData: {spaces, expansions: DEFAULT_EXPANSIONS},
     });
 
     await wrapper.find('[data-test=hide-tiles-button]').trigger('click');
@@ -94,7 +95,7 @@ describe('Board', () => {
   it('renders "show tiles" in toggle button if tiles are hidden', () => {
     const wrapper = shallowMount(Board, {
       localVue: getLocalVue(),
-      propsData: {spaces, tileView: 'show'},
+      propsData: {spaces, expansions: DEFAULT_EXPANSIONS, tileView: 'show'},
     });
 
     expect(wrapper.find('[data-test=hide-tiles-button]').text()).to.be.eq('show tiles');
@@ -103,7 +104,7 @@ describe('Board', () => {
   it('renders "hide tiles" in toggle button if tiles are visible', () => {
     const wrapper = shallowMount(Board, {
       localVue: getLocalVue(),
-      propsData: {spaces, tileView: 'hide'},
+      propsData: {spaces, expansions: DEFAULT_EXPANSIONS, tileView: 'hide'},
     });
 
     expect(wrapper.find('[data-test=hide-tiles-button]').text()).to.be.eq('hide tiles');

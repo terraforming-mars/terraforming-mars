@@ -31,6 +31,7 @@ export type CreateGameModel = {
   includeFanMA: boolean;
   includeVenusMA: boolean;
   initialDraft: boolean;
+  modularMA: boolean;
   moonStandardProjectVariant: boolean;
   moonStandardProjectVariant1: boolean;
   players: Array<NewPlayerModel>;

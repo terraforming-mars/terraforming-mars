@@ -54,6 +54,7 @@ export interface NewGameConfig {
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
   includeVenusMA: boolean;
+  modularMA: boolean;
   moonExpansion: boolean;
   pathfindersExpansion: boolean;
   ceoExtension: boolean;

@@ -367,10 +367,16 @@
                                     <span v-i18n>{{ getRandomMaOptionType('full') }}</span>
                                 </label>
                                 </div>
+                                <div>
+                                  <input type="checkbox" name="modularMA" id="modularMA-checkbox">
+                                   <label for="modularMA-checkbox">
+                                    <span v-i18n>Official Random β</span>
+                                </label>
+                                <i>this is always fully random for now.</i>
+                                </div>
                             </div>
-
                             <template v-if="expansions.venus">
-                                <input type="checkbox" v-model="includeVenusMA" id="venusMA-checkbox">
+                              <input type="checkbox" v-model="includeVenusMA" id="venusMA-checkbox">
                                 <label for="venusMA-checkbox">
                                     <span v-i18n>Venus Milestone/Award</span>
                                 </label>
@@ -568,6 +574,7 @@ export default (Vue as WithRefs<Refs>).extend({
       draftVariant: true,
       initialDraft: false,
       randomMA: RandomMAOptionType.NONE,
+      modularMA: false,
       randomFirstPlayer: true,
       showOtherPlayersVP: false,
       // beginnerOption: false,
@@ -1206,6 +1213,7 @@ export default (Vue as WithRefs<Refs>).extend({
         removeNegativeGlobalEventsOption,
         includeVenusMA,
         includeFanMA,
+        modularMA: this.modularMA,
         startingCorporations,
         soloTR,
         clonedGamedId,

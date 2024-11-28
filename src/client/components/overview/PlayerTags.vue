@@ -78,18 +78,18 @@ const isInGame = (tag: InterfaceTagsType, game: GameModel): boolean => {
   if (game.turmoil === undefined && tag === SpecialTags.INFLUENCE) return false;
   switch (tag) {
   case SpecialTags.COLONY_COUNT:
-    return gameOptions.coloniesExtension !== false;
+    return gameOptions.expansions.colonies !== false;
   case SpecialTags.INFLUENCE:
     return game.turmoil !== undefined;
   case SpecialTags.EXCAVATIONS:
   case SpecialTags.CORRUPTION:
-    return gameOptions.underworldExpansion !== false;
+    return gameOptions.expansions.underworld !== false;
   case Tag.VENUS:
-    return game.gameOptions.venusNextExtension !== false;
+    return game.gameOptions.expansions.venus !== false;
   case Tag.MOON:
-    return game.gameOptions.moonExpansion !== false;
+    return game.gameOptions.expansions.moon !== false;
   case Tag.MARS:
-    return (gameOptions.pathfindersExpansion || gameOptions.underworldExpansion);
+    return (gameOptions.expansions.pathfinders || gameOptions.expansions.underworld);
   }
   return true;
 };

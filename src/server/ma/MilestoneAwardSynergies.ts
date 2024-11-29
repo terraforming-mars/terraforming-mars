@@ -1,7 +1,7 @@
 import {MilestoneName} from '../../common/ma/MilestoneName';
 import {AwardName} from '../../common/ma/AwardName';
-import {Awards} from '../awards/Awards';
-import {Milestones} from '../milestones/Milestones';
+import {ALL_AWARDS} from '../awards/Awards';
+import {ALL_MILESTONES} from '../milestones/Milestones';
 
 // Higher synergies represent similar milestones or awards. For instance, Terraformer rewards for high TR
 // and the Benefactor award is given to the player with the highest TR. Their synergy weight is 9, very high.
@@ -581,11 +581,11 @@ class SynergyMap {
 
 export const synergies: SynergyMap = new SynergyMap();
 
-Milestones.ALL.forEach((ma) => {
+ALL_MILESTONES.forEach((ma) => {
   // synergies.set(ma.name, 'Gambler', 1);
   synergies.set(ma.name, ma.name, 1000);
 });
-Awards.ALL.forEach((ma) => {
+ALL_AWARDS.forEach((ma) => {
   // synergies.set(ma.name, 'Gambler', 1);
   synergies.set(ma.name, ma.name, 1000);
 });

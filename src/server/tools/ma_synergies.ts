@@ -3,14 +3,14 @@ require('dotenv').config();
 import {synergies} from '../ma/MilestoneAwardSynergies';
 import {MilestoneName, milestoneNames} from '../../common/ma/MilestoneName';
 import {AwardName, awardNames} from '../../common/ma/AwardName';
-import {Milestones} from '../milestones/Milestones';
-import {Awards} from '../awards/Awards';
+import {getMilestoneByNameOrThrow} from '../milestones/Milestones';
+import {getAwardByNameOrThrow} from '../awards/Awards';
 
 function get(name: MilestoneName | AwardName) {
   try {
-    return Milestones.getByName(name);
+    return getMilestoneByNameOrThrow(name);
   } catch (err) {
-    return Awards.getByName(name);
+    return getAwardByNameOrThrow(name);
   }
 }
 const manames = [...milestoneNames, ...awardNames];

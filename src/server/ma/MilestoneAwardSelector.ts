@@ -2,8 +2,8 @@ import {
   AMAZONIS_PLANITIA_AWARDS,
   ARABIA_TERRA_AWARDS,
   ARES_AWARDS,
-  Awards,
   ELYSIUM_AWARDS,
+  getAwardByNameOrThrow,
   HELLAS_AWARDS,
   MOON_AWARDS,
   TERRA_CIMMERIA_AWARDS,
@@ -22,8 +22,8 @@ import {
   ARABIA_TERRA_MILESTONES,
   ARES_MILESTONES,
   ELYSIUM_MILESTONES,
+  getMilestoneByNameOrThrow,
   HELLAS_MILESTONES,
-  Milestones,
   MOON_MILESTONES,
   TERRA_CIMMERIA_MILESTONES,
   THARSIS_MILESTONES,
@@ -260,8 +260,8 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
   }
 
   return {
-    milestones: accum.milestones.map((name) => Milestones.getByName(name)),
-    awards: accum.awards.map((name) => Awards.getByName(name)),
+    milestones: accum.milestones.map((name) => getMilestoneByNameOrThrow(name)),
+    awards: accum.awards.map((name) => getAwardByNameOrThrow(name)),
   };
 }
 

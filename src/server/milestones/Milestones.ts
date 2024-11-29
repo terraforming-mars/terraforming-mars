@@ -173,14 +173,14 @@ export const ALL_MILESTONES = [
 ];
 
 // Remove namespace and rename function
-export namespace Milestones {
-  export const ALL = ALL_MILESTONES;
+export function getMilestoneByName(name: string): IMilestone | undefined {
+  return ALL_MILESTONES.find((m) => m.name === name);
+}
 
-  export function getByName(name: string): IMilestone {
-    const milestone = ALL_MILESTONES.find((m) => m.name === name);
-    if (milestone) {
-      return milestone;
-    }
-    throw new Error(`Milestone ${name} not found.`);
+export function getMilestoneByNameOrThrow(name: string): IMilestone {
+  const milestone = getMilestoneByName(name);
+  if (milestone) {
+    return milestone;
   }
+  throw new Error(`Milestone ${name} not found.`);
 }

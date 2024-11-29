@@ -168,14 +168,14 @@ export const ALL_AWARDS = [
 ];
 
 // Remove namespace and rename function
-export namespace Awards {
-  export const ALL = ALL_AWARDS;
+export function getAwardByName(name: string): IAward | undefined {
+  return ALL_AWARDS.find((a) => a.name === name);
+}
 
-  export function getByName(name: string): IAward {
-    const award = ALL_AWARDS.find((a) => a.name === name);
-    if (award) {
-      return award;
-    }
-    throw new Error(`Award ${name} not found.`);
+export function getAwardByNameOrThrow(name: string): IAward {
+  const award = getAwardByName(name);
+  if (award) {
+    return award;
   }
+  throw new Error(`Award ${name} not found.`);
 }

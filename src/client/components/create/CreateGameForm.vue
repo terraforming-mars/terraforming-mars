@@ -367,14 +367,14 @@
                                     <span v-i18n>{{ getRandomMaOptionType('full') }}</span>
                                 </label>
                                 </div>
-
-                                <div>
+                                <!-- Temporarily disabled -->
+                                <!-- <div>
                                   <input type="checkbox" name="modularMA" id="modularMA-checkbox">
                                    <label for="modularMA-checkbox">
                                     <span v-i18n>Official Random α</span>
                                 </label>
                                 <i>this is always fully random for now.</i>
-                                </div>
+                                </div> -->
                             </div>
                             <template v-if="venusNext">
                                 <input type="checkbox" v-model="includeVenusMA" id="venusMA-checkbox">

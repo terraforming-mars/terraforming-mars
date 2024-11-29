@@ -92,8 +92,9 @@ export class Asimov extends CeoCard {
       // Remove awards that require unused variants/expansions
       switch (MACompatibility[award.name].compatibility) {
       case 'venus': return gameOptions.venusNextExtension;
-      case 'ares': return gameOptions.aresExtension;
+      case 'colonies': return gameOptions.coloniesExtension;
       case 'turmoil': return gameOptions.turmoilExtension;
+      case 'ares': return gameOptions.aresExtension;
       case 'moon': return gameOptions.moonExpansion;
       case 'underworld': return gameOptions.underworldExpansion;
       }

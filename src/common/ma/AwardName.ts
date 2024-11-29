@@ -33,7 +33,7 @@ export const awardNames = [
   // Amazonis Planitia
   // NB: the fifth award for Amazonis Plantia is Coordinator, also part of Arabia Terra.
   'Curator',
-  'Engineer',
+  'A. Engineer',
   'Tourist',
   'A. Zoologist',
 
@@ -85,9 +85,8 @@ export const AWARD_RENAMES = new Map<string, AwardName>([
   // And remember to add a test in spec.ts.
 
   // TODO(yournamehere): remove after 2021-04-05
-  // TODO(kberg): remove after 2024-11-15
-  ['Manufacturer', 'A. Manufacturer'],
-  ['Politician', 'T. Politician'],
+  // TODO(kberg): remove after 2024-12-15
+  ['Engineer', 'A. Engineer'],
 ]);
 
 export function maybeRenamedAward(name: string): AwardName {

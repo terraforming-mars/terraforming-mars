@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
-import {BESPOKE_PRODUCTION_CARDS, Engineer} from '../../../src/server/awards/amazonisPlanitia/Engineer';
+import {BESPOKE_PRODUCTION_CARDS, AmazonisEngineer} from '../../../src/server/awards/amazonisPlanitia/AmazonisEngineer';
 import {TestPlayer} from '../../TestPlayer';
 import {newCard} from '../../../src/server/createCard';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
@@ -9,12 +9,12 @@ import {Cartel} from '../../../src/server/cards/base/Cartel';
 import {DarksideMiningSyndicate} from '../../../src/server/cards/moon/DarksideMiningSyndicate';
 import {SpecializedSettlement} from '../../../src/server/cards/pathfinders/SpecializedSettlement';
 
-describe('Engineer', () => {
-  let award: Engineer;
+describe('AmazonisEngineer', () => {
+  let award: AmazonisEngineer;
   let player: TestPlayer;
 
   beforeEach(() => {
-    award = new Engineer();
+    award = new AmazonisEngineer();
     [/* game */, player] = testGame(2);
   });
 
@@ -38,7 +38,7 @@ describe('Engineer', () => {
     const failures = [];
     for (const cardName of BESPOKE_PRODUCTION_CARDS) {
       const card = newCard(cardName)!;
-      if (Engineer.autoInclude(card)) {
+      if (AmazonisEngineer.autoInclude(card)) {
         failures.push(cardName);
       }
     }

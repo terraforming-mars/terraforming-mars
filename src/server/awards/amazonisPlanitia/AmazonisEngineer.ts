@@ -43,8 +43,8 @@ export const BESPOKE_PRODUCTION_CARDS: ReadonlyArray<CardName> = [
 // This map serves as a lazy cache, evaluated as new cards come in.
 const map = new Map<CardName, boolean>(BESPOKE_PRODUCTION_CARDS.map((name) => [name, true]));
 
-export class Engineer implements IAward {
-  public readonly name = 'Engineer';
+export class AmazonisEngineer implements IAward {
+  public readonly name = 'A. Engineer';
   public readonly description = 'Have the most cards in play that directly alter your own production';
 
   public getScore(player: IPlayer): number {
@@ -53,7 +53,7 @@ export class Engineer implements IAward {
       if (eligible !== undefined) {
         return eligible;
       }
-      const val = Engineer.autoInclude(card);
+      const val = AmazonisEngineer.autoInclude(card);
       map.set(card.name, val);
       return val;
     }).length;

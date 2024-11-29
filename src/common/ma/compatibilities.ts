@@ -34,7 +34,7 @@ export const MACompatibility: Record<AwardName | MilestoneName, Details> = {
   'Full Moon': {compatibility: 'moon'},
   'Lunar Magnate': {compatibility: 'moon'},
   'Curator': {map: BoardName.AMAZONIS},
-  'Engineer': {map: BoardName.AMAZONIS},
+  'A. Engineer': {map: BoardName.AMAZONIS},
   'Coordinator': {map: [BoardName.AMAZONIS, BoardName.ARABIA_TERRA]},
   'Tourist': {map: BoardName.AMAZONIS},
   'A. Zoologist': {map: BoardName.AMAZONIS},

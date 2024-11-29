@@ -29,7 +29,7 @@ import {Hoarder} from './Hoarder';
 import {Naturalist} from './Naturalist';
 import {Voyager} from './Voyager';
 import {Curator} from './amazonisPlanitia/Curator';
-import {Engineer} from './amazonisPlanitia/Engineer';
+import {AmazonisEngineer} from './amazonisPlanitia/AmazonisEngineer';
 import {Tourist} from './amazonisPlanitia/Tourist';
 import {Biologist} from './terraCimmeria/Biologist';
 import {Economizer2} from './terraCimmeria/Economizer2';
@@ -100,7 +100,7 @@ export const MOON_AWARDS = [
 
 export const AMAZONIS_PLANITIA_AWARDS = [
   new Curator(),
-  new Engineer(),
+  new AmazonisEngineer(),
   new Coordinator(),
   new Tourist(),
   new Zoologist2(),

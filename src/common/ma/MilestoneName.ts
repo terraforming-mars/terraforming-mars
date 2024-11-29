@@ -64,19 +64,19 @@ export const milestoneNames = [
 
   // Modular Milestones
   'Breeder',
-  'Briber',
+  // 'Briber', // Nopt implemented yet.
   'Fundraiser',
   'Geologist',
-  'Hydrologist', // Not implemented Place 4 oceans
+  'Hydrologist',
   'Landshaper',
   'Lobbyist',
-  'Merchant',
+  // 'Merchant', // Not implemented yet.
   'Philantropist', // Name - 'Philantropist' on tile, but 'Filantrope' in rulebook
   'Planetologist',
   'Producer',
   'Researcher',
   'Sponsor',
-  'Thawer', // Not implemented Raise the temperature 5 times
+  'Thawer',
   'ThermoEngineer',
 ] as const;
 

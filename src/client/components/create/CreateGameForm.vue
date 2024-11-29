@@ -369,11 +369,10 @@
                                 </div>
                                 <!-- Temporarily disabled -->
                                 <!-- <div>
-                                  <input type="checkbox" name="modularMA" id="modularMA-checkbox">
+                                  <input type="checkbox" name="modularMA" v-model="modularMA" id="modularMA-checkbox">
                                    <label for="modularMA-checkbox">
                                     <span v-i18n>Official Random α</span>
                                 </label>
-                                <i>this is always fully random for now.</i>
                                 </div> -->
                             </div>
                             <template v-if="venusNext">

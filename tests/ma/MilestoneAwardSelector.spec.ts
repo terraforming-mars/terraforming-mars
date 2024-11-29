@@ -8,6 +8,7 @@ import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptio
 import {BoardName} from '../../src/common/boards/BoardName';
 import {AwardName} from '../../src/common/ma/AwardName';
 import {MACompatibility} from '../../src/common/ma/compatibilities';
+import {fail} from 'assert';
 
 describe('MilestoneAwardSelector', () => {
   // These aren't particularly excellent tests as much as they help demonstrate
@@ -165,8 +166,31 @@ describe('MilestoneAwardSelector', () => {
         includeFanMA: true,
       });
 
-      expect(mas.awards.map((e) => MACompatibility[e.name].modular)).does.not.contain(true);
-      expect(mas.milestones.map((e) => MACompatibility[e.name].modular)).does.not.contain(true);
+      for (const e of [...mas.awards, ...mas.milestones]) {
+        if (MACompatibility[e.name].modular === true) {
+          fail(`${e.name} is included`);
+        }
+      }
+    }
+  });
+
+  it('Choose modular milestones and awards', () => {
+    for (let idx = 0; idx < 10000; idx++) {
+      const mas = choose({
+        randomMA: RandomMAOptionType.UNLIMITED,
+        venusNextExtension: true,
+        aresExtension: true,
+        moonExpansion: true,
+        coloniesExtension: true,
+        turmoilExtension: true,
+        modularMA: true,
+      });
+
+      for (const e of [...mas.awards, ...mas.milestones]) {
+        if (MACompatibility[e.name].modular === false) {
+          fail(`${e.name} is included`);
+        }
+      }
     }
   });
 

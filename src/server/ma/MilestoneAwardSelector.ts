@@ -5,10 +5,8 @@ import {
   Awards,
   ELYSIUM_AWARDS,
   HELLAS_AWARDS,
-  MOON_AWARDS,
   TERRA_CIMMERIA_AWARDS,
   THARSIS_AWARDS,
-  UNDERWORLD_AWARDS,
   // UTOPIA_PLANITIA_AWARDS,
   VASTITAS_BOREALIS_AWARDS,
   VENUS_AWARDS,
@@ -24,10 +22,8 @@ import {
   ELYSIUM_MILESTONES,
   HELLAS_MILESTONES,
   Milestones,
-  MOON_MILESTONES,
   TERRA_CIMMERIA_MILESTONES,
   THARSIS_MILESTONES,
-  UNDERWORLD_MILESTONES,
   // UTOPIA_PLANITIA_MILESTONES,
   VASTITAS_BOREALIS_MILESTONES,
   VENUS_MILESTONES,
@@ -39,10 +35,11 @@ import {OneGiantStep} from '../moon/OneGiantStep';
 import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
 import {inplaceShuffle} from '../utils/shuffle';
 import {UnseededRandom} from '../../common/utils/Random';
-import {MilestoneName} from '../../common/ma/MilestoneName';
-import {AwardName} from '../../common/ma/AwardName';
+import {MilestoneName, milestoneNames} from '../../common/ma/MilestoneName';
+import {AwardName, awardNames} from '../../common/ma/AwardName';
 import {inplaceRemove} from '../../common/utils/utils';
 import {synergies} from './MilestoneAwardSynergies';
+import {MACompatibility} from '../../common/ma/compatibilities';
 
 type DrawnMilestonesAndAwards = {
   milestones: Array<IMilestone>,
@@ -100,33 +97,23 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
   const includeVenus = gameOptions.venusNextExtension && gameOptions.includeVenusMA;
   const requiredQty = includeVenus ? 6 : 5;
 
+  const boardAwards: Record<BoardName, [Array<IMilestone>, Array<IAward>]> = {
+    [BoardName.THARSIS]: [THARSIS_MILESTONES, THARSIS_AWARDS],
+    [BoardName.HELLAS]: [HELLAS_MILESTONES, HELLAS_AWARDS],
+    [BoardName.ELYSIUM]: [ELYSIUM_MILESTONES, ELYSIUM_AWARDS],
+    [BoardName.ARABIA_TERRA]: [ARABIA_TERRA_MILESTONES, ARABIA_TERRA_AWARDS],
+    [BoardName.AMAZONIS]: [AMAZONIS_PLANITIA_MILESTONES, AMAZONIS_PLANITIA_AWARDS],
+    [BoardName.TERRA_CIMMERIA]: [TERRA_CIMMERIA_MILESTONES, TERRA_CIMMERIA_AWARDS],
+    [BoardName.VASTITAS_BOREALIS]: [VASTITAS_BOREALIS_MILESTONES, VASTITAS_BOREALIS_AWARDS],
+    [BoardName.UTOPIA_PLANITIA]: [[], []],
+    [BoardName.VASTITAS_BOREALIS_NOVUS]: [[], []],
+    [BoardName.TERRA_CIMMERIA_NOVUS]: [[], []],
+  };
   switch (gameOptions.randomMA) {
   case RandomMAOptionType.NONE:
-    switch (gameOptions.boardName) {
-    case BoardName.THARSIS:
-      push(THARSIS_MILESTONES, THARSIS_AWARDS);
-      break;
-    case BoardName.HELLAS:
-      push(HELLAS_MILESTONES, HELLAS_AWARDS);
-      break;
-    case BoardName.ELYSIUM:
-      push(ELYSIUM_MILESTONES, ELYSIUM_AWARDS);
-      break;
-    case BoardName.ARABIA_TERRA:
-      push(ARABIA_TERRA_MILESTONES, ARABIA_TERRA_AWARDS);
-      break;
-    case BoardName.AMAZONIS:
-      push(AMAZONIS_PLANITIA_MILESTONES, AMAZONIS_PLANITIA_AWARDS);
-      break;
-    case BoardName.TERRA_CIMMERIA:
-      push(TERRA_CIMMERIA_MILESTONES, TERRA_CIMMERIA_AWARDS);
-      break;
-    case BoardName.VASTITAS_BOREALIS:
-      push(VASTITAS_BOREALIS_MILESTONES, VASTITAS_BOREALIS_AWARDS);
-      break;
-    case BoardName.UTOPIA_PLANITIA:
-    case BoardName.VASTITAS_BOREALIS_NOVUS:
-    case BoardName.TERRA_CIMMERIA_NOVUS:
+    const entries = boardAwards[gameOptions.boardName];
+    push(entries[0], entries[1]);
+    if (entries[0].length === 0) {
       // There's no need to add more milestones and awards for these boards, so it returns.
       return getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
     }
@@ -155,7 +142,6 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
   default:
     throw new Error('Unknown milestone/award type: ' + gameOptions.randomMA);
   }
-
   return drawnMilestonesAndAwards;
 }
 
@@ -176,58 +162,55 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
     throw new Error('No limited synergy milestones and awards set was generated after ' + maxAttempts + ' attempts. Please try again.');
   }
 
-  function toName<T>(e: {name: T}): T {
-    return e.name;
-  }
+  function include(name: MilestoneName | AwardName): boolean {
+    const compatibility = MACompatibility[name];
 
-  const candidateMilestones: Array<MilestoneName> = [...THARSIS_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
-  const candidateAwards: Array<AwardName> = [...THARSIS_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
-
-  if (gameOptions.venusNextExtension && gameOptions.includeVenusMA) {
-    candidateMilestones.push(...VENUS_MILESTONES.map(toName));
-    candidateAwards.push(...VENUS_AWARDS.map(toName));
-  }
-  if (gameOptions.aresExtension) {
-    candidateMilestones.push(...ARES_MILESTONES.map(toName));
-    candidateAwards.push(...ARES_AWARDS.map(toName));
-  }
-  if (gameOptions.moonExpansion) {
-    candidateMilestones.push(...MOON_MILESTONES.map(toName));
-    candidateAwards.push(...MOON_AWARDS.map(toName));
-  }
-
-  if (gameOptions.underworldExpansion) {
-    candidateMilestones.push(...UNDERWORLD_MILESTONES.map(toName));
-    candidateAwards.push(...UNDERWORLD_AWARDS.map(toName));
-  }
-
-  if (gameOptions.includeFanMA) {
-    candidateMilestones.push(
-      ...ARABIA_TERRA_MILESTONES.map(toName),
-      ...AMAZONIS_PLANITIA_MILESTONES.map(toName),
-      ...TERRA_CIMMERIA_MILESTONES.map(toName),
-      ...VASTITAS_BOREALIS_MILESTONES.map(toName));
-
-    candidateAwards.push(
-      ...ARABIA_TERRA_AWARDS.map(toName),
-      ...AMAZONIS_PLANITIA_AWARDS.map(toName),
-      ...TERRA_CIMMERIA_AWARDS.map(toName),
-      ...VASTITAS_BOREALIS_AWARDS.map(toName));
-
-    if (!gameOptions.pathfindersExpansion) {
-      inplaceRemove(candidateMilestones, 'Martian');
+    if ((compatibility.modular ?? false) !== (gameOptions.modularMA ?? false)) {
+      return false;
     }
-    if (!gameOptions.coloniesExtension) {
-      inplaceRemove(candidateMilestones, 'Colonizer');
-      inplaceRemove(candidateMilestones, 'Pioneer');
+    if (!gameOptions.modularMA) {
+      switch (compatibility.map) {
+      case BoardName.THARSIS:
+      case BoardName.ELYSIUM:
+      case BoardName.HELLAS:
+        return true;
+      default:
+        if (compatibility.map !== undefined && gameOptions.includeFanMA === false) {
+          return false;
+        }
+      }
     }
-    if (!gameOptions.turmoilExtension) {
-      inplaceRemove(candidateAwards, 'T. Politician');
+    if (compatibility.compatibility === 'venus') {
+      if (!gameOptions.venusNextExtension || !gameOptions.includeVenusMA) {
+        return false;
+      }
     }
-    // Special-case Terran and Businessperson, which are exactly the same.
-    if (candidateMilestones.includes('Terran') && candidateMilestones.includes('Businessperson')) {
-      inplaceRemove(candidateMilestones, 'Terran');
+    if (compatibility.compatibility === 'colonies' && !gameOptions.coloniesExtension) {
+      return false;
     }
+    if (compatibility.compatibility === 'turmoil' && !gameOptions.turmoilExtension) {
+      return false;
+    }
+    if (compatibility.compatibility === 'ares' && !gameOptions.aresExtension) {
+      return false;
+    }
+    if (compatibility.compatibility === 'moon' && !gameOptions.moonExpansion) {
+      return false;
+    }
+    if (compatibility.compatibility === 'pathfinders' && !gameOptions.pathfindersExpansion) {
+      return false;
+    }
+    if (compatibility.compatibility === 'underworld' && !gameOptions.underworldExpansion) {
+      return false;
+    }
+    return true;
+  }
+  const candidateMilestones: Array<MilestoneName> = milestoneNames.filter(include);
+  const candidateAwards: Array<AwardName> = awardNames.filter(include);
+
+  // Special-case Terran and Businessperson, which are exactly the same.
+  if (candidateMilestones.includes('Terran') && candidateMilestones.includes('Businessperson')) {
+    inplaceRemove(candidateMilestones, 'Terran');
   }
 
   inplaceShuffle(candidateMilestones, UnseededRandom.INSTANCE);
@@ -260,8 +243,8 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
   }
 
   return {
-    milestones: accum.milestones.map((name) => Milestones.getByName(name)),
-    awards: accum.awards.map((name) => Awards.getByName(name)),
+    milestones: accum.milestones.map(Milestones.getByNameOrThrow),
+    awards: accum.awards.map(Awards.getByNameOrThrow),
   };
 }
 

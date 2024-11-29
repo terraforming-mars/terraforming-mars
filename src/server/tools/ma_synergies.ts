@@ -8,9 +8,9 @@ import {Awards} from '../awards/Awards';
 
 function get(name: MilestoneName | AwardName) {
   try {
-    return Milestones.getByName(name);
+    return Milestones.getByNameOrThrow(name);
   } catch (err) {
-    return Awards.getByName(name);
+    return Awards.getByNameOrThrow(name);
   }
 }
 const manames = [...milestoneNames, ...awardNames];

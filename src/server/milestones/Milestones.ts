@@ -176,8 +176,12 @@ export const ALL_MILESTONES = [
 export namespace Milestones {
   export const ALL = ALL_MILESTONES;
 
-  export function getByName(name: string): IMilestone {
-    const milestone = ALL_MILESTONES.find((m) => m.name === name);
+  export function getByName(name: string): IMilestone | undefined {
+    return ALL_MILESTONES.find((m) => m.name === name);
+  }
+
+  export function getByNameOrThrow(name: string): IMilestone {
+    const milestone = getByName(name);
     if (milestone) {
       return milestone;
     }

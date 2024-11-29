@@ -171,8 +171,12 @@ export const ALL_AWARDS = [
 export namespace Awards {
   export const ALL = ALL_AWARDS;
 
-  export function getByName(name: string): IAward {
-    const award = ALL_AWARDS.find((a) => a.name === name);
+  export function getByName(name: string): IAward | undefined {
+    return ALL_AWARDS.find((m) => m.name === name);
+  }
+
+  export function getByNameOrThrow(name: string): IAward {
+    const award = getByName(name);
     if (award) {
       return award;
     }

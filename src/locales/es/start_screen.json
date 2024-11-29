@@ -1,4 +1,6 @@
 {
+    "TERRAFORMING": "TERRAFORMING",
+    "MARS": "MARS",
     "New game": "Nuevo juego",
     "How to Play": "Cómo jugar",
     "Cards list": "Lista de cartas",
@@ -10,5 +12,6 @@
     "Looking for people to play with": "¿Buscas a gente con la que jugar",
     "Your name": "Tu nombre",
     "version": "Versión",
-    "deployed": "Desplegado"
+    "deployed": "Desplegado",
+    " Not affiliated with FryxGames, Asmodee Digital or Steam in any way. ": "No afiliado con FryxGames, Asmodee Digital o Steam de ninguna manera."
 }

@@ -2,6 +2,7 @@
     "Terraforming Mars": "Terraforming Mars",
     "Create New Game": "Crear nueva partida",
     "№ of Players": "Número de jugadores",
+    "Solo": "Solo",
     "Expansions": "Expansiones",
     "Options": "Opciones",
     "Promos": "Promocionales",
@@ -16,6 +17,8 @@
     "Blue": "Azul",
     "Black": "Negro",
     "Purple": "Morado",
+    "Orange": "Naranja",
+    "Pink": "Rosa",
 
     "victoryPoints": "Puntos de victoria",
     "terraformRating": "Valor de terraformación",
@@ -28,10 +31,19 @@
     "tharsis": "Tharsis",
     "hellas": "Hellas",
     "elysium": "Elysium",
+    "t. cimmeria": "T. Cimmeria",
     "random": "Aleatorio",
+    "random official": "Aleatorio (oficial)",
+    "random all": "Aleatorio (todo)",
+
+    "Player Settings": "Ajustes del Jugador",
 
     "Prelude": "Preludio",
+    "Prelude 2(β)": "Preludio 2(β)",
     "Venus Next": "Venus Next",
+    "Underworld": "Underworld",
+    "Star Wars (β)": "Star Wars (β)",
+    "CEOs": "CEOs",
     "Custom Corporation list": "Lista personalizada de corporaciones",
     "World Government Terraforming": "Terraformando con gobierno mundial",
     "Draft variant": "Variante por descartes",
@@ -284,6 +296,13 @@
     "Ares": "Ares",
     "Fan-made": "Fans",
     "Community": "Comunidad",
+    "Pathfinders": "Pathfinders",
+    "utopia planitia": "Utopia Planitia",
+    "vastitas borealis novus": "Vastitas Borealis Novus",
+    "terra cimmeria novus": "Terra Cimmeria Novus",
+    "arabia terra": "Arabia Terra",
+    "amazonis p.": "Amazonis P.",
+    "vastitas borealis": "Vastitas Borealis",
     "Escape Velocity": "Velocidad de escape",
     "After": "Después de",
     "min": "min.",
@@ -293,6 +312,7 @@
     "VP every": "PV cada",
     "After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per action.)": "Después de ${0} min, reduce ${1} PV cada ${2} min. (${3} segundos de bonificación por acción)",
     "Exclude some cards": "Excluir algunas cartas",
+    "Include some cards": "Incluir algunas cartas",
     "Custom Colonies list": "Personalizar lista de colonias",
     "Remove negative Global Events": "Quitar eventos globales negativos",
     "Fast mode": "Modo rápido",
@@ -309,7 +329,9 @@
     "TR Boost": "Aumentar VT",
     "Player ${0} name": "Nombre del jugador ${0}",
     "Multiplayer Options": "Opciones multijugador",
-
+    "Hide discount on cards": "Ocultar el descuento en las cartas",
+    "Hide sidebar notification": "Ocultar notificaciones de la barra lateral",
+    "Learner Mode (req. refresh)": "Modo principiante (requiere actualizacion)",
 
     "Turmoil": "Conflictos",
 
@@ -327,5 +349,11 @@
 
     "City: 1 VP per adjacent greenery": "Ciudad: 1 PV por loseta de vegetación adyacente",
     "Greenery: 1 VP": "Vegetación: 1 PV",
-    "Commercial District: 1 VP per adjacent city tile": "Distrito comercial: 1 PV por loseta de ciudad adyacente"
+    "Commercial District: 1 VP per adjacent city tile": "Distrito comercial: 1 PV por loseta de ciudad adyacente",
+
+    "Show information that can be helpful to players who are still learning the games": "Mostrar información que podría ser útil\npara nuevos jugadores",
+    "Test out any possible new experimental UI features for feedback.": "Pruebe nuevas funciones experimentales de interfaz\npara proporcionar comentarios",
+
+    "Warning: This server automatically purges unfinished games. Try to complete this game by ${0}.": "Advertencia: este servidor limpia automáticamente las partidas no terminadas. Complete esta partida antes de ${0}.",
+    "Why?": "Por qué?"
 }

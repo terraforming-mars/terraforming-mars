@@ -7,6 +7,6 @@ describe('Milestones and Awards', () => {
   it('Award names and Milestone names are distinct', () => {
     const counts: MultiSet<MilestoneName | AwardName> = MultiSet.from([...awardNames, ...milestoneNames]);
     const filtered = Array.from(counts.multiplicities()).filter((e) => e[1] > 1);
-    expect(filtered).to.deep.eq([]);
+    expect(filtered.map((e) => e[0])).to.deep.eq([]);
   });
 });

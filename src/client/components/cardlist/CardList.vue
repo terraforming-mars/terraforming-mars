@@ -128,7 +128,7 @@
           <div class="player_home_colony_cont">
             <div class="player_home_colony" v-for="milestoneName in allMilestoneNames" :key="milestoneName">
               <div class="milestones"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
-                <milestone v-if="showMA(milestoneName)" :milestone="milestoneModel(milestoneName)" :showDescription="true"></milestone>
+                <milestone v-if="showMilestone(milestoneName)" :milestone="milestoneModel(milestoneName)" :showDescription="true"></milestone>
               </div>
             </div>
           </div>
@@ -141,7 +141,7 @@
           <div class="player_home_colony_cont">
             <div class="player_home_colony" v-for="awardName in allAwardNames" :key="awardName">
               <div class="awards"> <!-- This div is necessary for the CSS. Perhaps find a way to remove that?-->
-                <award v-if="showMA(awardName)" :award="awardModel(awardName)" :showDescription="true"></award>
+                <award v-if="showAward(awardName)" :award="awardModel(awardName)" :showDescription="true"></award>
               </div>
             </div>
           </div>
@@ -182,7 +182,7 @@ import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import Milestone from '@/client/components/Milestone.vue';
 import Award from '@/client/components/Award.vue';
-import {MACompatibility} from '@/common/ma/compatibilities';
+import {AWARD_COMPATIBILITY, CompatibilityDetails, MILESTONE_COMPATIBILITY} from '@/common/ma/compatibilities';
 import {TypeOption, CardListModel, hashToModel, modelToHash} from '@/client/components/cardlist/CardListModel';
 
 type Refs = {
@@ -354,16 +354,23 @@ export default (Vue as WithRefs<Refs>).extend({
       const colony = getColony(name);
       return colony !== undefined && this.expansions[colony.module ?? 'base'] === true;
     },
-    showMA(name: MilestoneName | AwardName): boolean {
-      if (!this.include(name, 'ma')) {
-        return false;
-      }
-      const compatibility = MACompatibility[name];
-      console.log(name, JSON.stringify(compatibility));
+    isCompatible(compatibility: CompatibilityDetails): boolean {
       if (compatibility.modular === true) {
         return true;
       }
       return this.expansions[compatibility.compatibility ?? 'base'] === true;
+    },
+    showMilestone(name: MilestoneName): boolean {
+      if (!this.include(name, 'ma')) {
+        return false;
+      }
+      return this.isCompatible(MILESTONE_COMPATIBILITY[name]);
+    },
+    showAward(name: AwardName): boolean {
+      if (!this.include(name, 'ma')) {
+        return false;
+      }
+      return this.isCompatible(AWARD_COMPATIBILITY[name]);
     },
     getLanguageCssClass() {
       const language = getPreferences().lang;

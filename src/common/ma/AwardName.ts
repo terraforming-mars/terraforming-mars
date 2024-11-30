@@ -31,7 +31,7 @@ export const awardNames = [
   'Lunar Magnate',
 
   // Amazonis Planitia
-  // NB: the fifth award for Amazonis Plantia is Coordinator, also part of Arabia Terra.
+  // NB: the fifth award for Amazonis Plantia is Promoter, also part of Arabia Terra.
   'Curator',
   'A. Engineer',
   'Tourist',
@@ -40,7 +40,7 @@ export const awardNames = [
   // Arabia Terra
   'Cosmic Settler',
   'Botanist',
-  'Coordinator',
+  'Coordinator', // TODO(kberg): Rename to Promoter
   'A. Manufacturer',
   'Zoologist',
 
@@ -52,9 +52,9 @@ export const awardNames = [
   'Warmonger',
 
   // Vastitas Borealis
-  'Adapter',
+  'Adapter', // TODO(kberg): Rename to Forecaster
   'Edgedancer',
-  'Hoarder',
+  'Hoarder', // TODO(kberg): Rename to Visionary
   'Naturalist',
   'Voyager',
 
@@ -62,20 +62,23 @@ export const awardNames = [
   'Kingpin',
   'EdgeLord',
 
-  // Modular awards
+  // Modular
   'Administrator',
   'Collector',
   'Constructor',
   'Electrician',
   'Founder',
   'Highlander',
+  // 'Incorporator', // NEW Most cards costing 10MC or less
   'Investor',
   'Landscaper',
   'Manufacturer',
   'Metropolist',
   'Mogul',
   'Politician',
+  // 'Suburbian', // NEW Most tiles on areas along the edges of the map.
   'Traveller',
+  // 'Zoologist', // Most animal and microbe resources. Currently Zoologist2
 ] as const;
 
 export type AwardName = typeof awardNames[number];

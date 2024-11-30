@@ -32,7 +32,7 @@ export const milestoneNames = [
 
   // Amazonis Planitia
   'Colonizer',
-  'Farmer',
+  'Farmer', // TODO(kberg): Rename to Forester.
   'Minimalist',
   'Terran',
   'Tropicalist',
@@ -48,7 +48,7 @@ export const milestoneNames = [
   'T. Collector',
   'Firestarter',
   'Terra Pioneer',
-  'Spacefarer',
+  'Spacefarer', // TODO(kberg): Rename to T. Spacefarer
   'Gambler',
 
   // Vastitas Borealis
@@ -62,22 +62,36 @@ export const milestoneNames = [
   'Tunneler',
   'Risktaker',
 
-  // Modular Milestones
+  // Modular
   'Breeder',
   'Briber',
+  // 'Builder', // But 7 building tags
+  // 'Coastguard', // NEW 3 tiles adjacent to oceans
+  // 'Engineer', // Currently it is ThermoEngineer, with a name conflict.
+  // 'Farmer', // Cuirrently it is Breeder.
+  // 'Forester', // T's Farmer should be renamed Forester.
   'Fundraiser',
   'Geologist',
-  'Hydrologist', // Not implemented Place 4 oceans
+  'Hydrologist',
   'Landshaper',
+  // 'Legend', // But 4 events
   'Lobbyist',
   'Merchant',
-  'Philantropist', // Name - 'Philantropist' on tile, but 'Filantrope' in rulebook
+  // 'Metallurgist', // Smith, but 6
+  'Philantropist',
+  // 'Pioneer', // But 4 colonies
   'Planetologist',
   'Producer',
   'Researcher',
+  // 'Spacefarer', // But 4 space tags
   'Sponsor',
-  'Thawer', // Not implemented Raise the temperature 5 times
-  'ThermoEngineer',
+  // 'Tactician', // but 4 cards with requirements
+  // 'Terraformer', // but 29 TR
+  // 'Terran', // But 5 Earth tags.
+  'Thawer',
+  'ThermoEngineer', // TODO(kberg): Rename to Engineer after the Engineer rename TODO is removed.
+  // 'Trader', // NEW 3 types of resources on cards.
+  // 'Tycoon', // But, 10 Green and Blue cards combined.
 ] as const;
 
 export type MilestoneName = typeof milestoneNames[number];

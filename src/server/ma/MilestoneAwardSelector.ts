@@ -41,7 +41,7 @@ import {inplaceShuffle} from '../utils/shuffle';
 import {UnseededRandom} from '../../common/utils/Random';
 import {MilestoneName} from '../../common/ma/MilestoneName';
 import {AwardName} from '../../common/ma/AwardName';
-import {inplaceRemove} from '../../common/utils/utils';
+import {inplaceRemove, toName} from '../../common/utils/utils';
 import {synergies} from './MilestoneAwardSynergies';
 
 type DrawnMilestonesAndAwards = {
@@ -159,27 +159,14 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
   return drawnMilestonesAndAwards;
 }
 
-// Selects |numberMARequested| milestones and |numberMARequested| awards from all available awards and milestones (optionally including
-// Venusian.) It does this by following these rules:
-// 1) No pair with synergy above |maxSynergyAllowed|.
-// 2) Total synergy is |totalSynergyAllowed| or below.
-// 3) Limited a number of pair with synergy at |highThreshold| or above to |numberOfHighAllowed| or below.
-function getRandomMilestonesAndAwards(gameOptions: GameOptions,
-  numberMARequested: number,
-  constraints: Constraints,
-  attempt: number = 1): DrawnMilestonesAndAwards {
-  // 5 is a fine number of attempts. A sample of 100,000 runs showed that this algorithm
-  // didn't get past 3.
-  // https://github.com/terraforming-mars/terraforming-mars/pull/1637#issuecomment-711411034
-  const maxAttempts = 5;
-  if (attempt > maxAttempts) {
-    throw new Error('No limited synergy milestones and awards set was generated after ' + maxAttempts + ' attempts. Please try again.');
-  }
-
-  function toName<T>(e: {name: T}): T {
-    return e.name;
-  }
-
+/**
+ * Return the list of possible milestones and awards for a given game. Only meant to work with random selection.
+ *
+ * Isn't meant to work with RandomMAOptionType.NONE
+ *
+ * exported for tests
+ */
+export function getCandidates(gameOptions: GameOptions): [Array<MilestoneName>, Array<AwardName>] {
   const candidateMilestones: Array<MilestoneName> = [...THARSIS_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
   const candidateAwards: Array<AwardName> = [...THARSIS_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
 
@@ -229,6 +216,27 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
       inplaceRemove(candidateMilestones, 'Terran');
     }
   }
+  return [candidateMilestones, candidateAwards];
+}
+
+// Selects |numberMARequested| milestones and |numberMARequested| awards from all available awards and milestones (optionally including
+// Venusian.) It does this by following these rules:
+// 1) No pair with synergy above |maxSynergyAllowed|.
+// 2) Total synergy is |totalSynergyAllowed| or below.
+// 3) Limited a number of pair with synergy at |highThreshold| or above to |numberOfHighAllowed| or below.
+function getRandomMilestonesAndAwards(gameOptions: GameOptions,
+  numberMARequested: number,
+  constraints: Constraints,
+  attempt: number = 1): DrawnMilestonesAndAwards {
+  // 5 is a fine number of attempts. A sample of 100,000 runs showed that this algorithm
+  // didn't get past 3.
+  // https://github.com/terraforming-mars/terraforming-mars/pull/1637#issuecomment-711411034
+  const maxAttempts = 5;
+  if (attempt > maxAttempts) {
+    throw new Error('No limited synergy milestones and awards set was generated after ' + maxAttempts + ' attempts. Please try again.');
+  }
+
+  const [candidateMilestones, candidateAwards] = getCandidates(gameOptions);
 
   inplaceShuffle(candidateMilestones, UnseededRandom.INSTANCE);
   inplaceShuffle(candidateAwards, UnseededRandom.INSTANCE);

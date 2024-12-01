@@ -1,13 +1,12 @@
 import {expect} from 'chai';
-import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, TERRA_CIMMERIA_AWARDS, THARSIS_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from '../../src/server/awards/Awards';
-import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, MOON_MILESTONES, TERRA_CIMMERIA_MILESTONES, THARSIS_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from '../../src/server/milestones/Milestones';
-import {chooseMilestonesAndAwards, LIMITED_SYNERGY, maximumSynergy, verifySynergyRules} from '../../src/server/ma/MilestoneAwardSelector';
+import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, MODULAR_AWARDS, MOON_AWARDS, TERRA_CIMMERIA_AWARDS, THARSIS_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from '../../src/server/awards/Awards';
+import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, MODULAR_MILESTONES, MOON_MILESTONES, TERRA_CIMMERIA_MILESTONES, THARSIS_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from '../../src/server/milestones/Milestones';
+import {chooseMilestonesAndAwards, getCandidates, LIMITED_SYNERGY, maximumSynergy, verifySynergyRules} from '../../src/server/ma/MilestoneAwardSelector';
 import {RandomMAOptionType} from '../../src/common/ma/RandomMAOptionType';
 import {intersection, toName} from '../../src/common/utils/utils';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptions';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {AwardName} from '../../src/common/ma/AwardName';
-import {AWARD_COMPATIBILITY, MILESTONE_COMPATIBILITY} from '../../src/common/ma/compatibilities';
 
 describe('MilestoneAwardSelector', () => {
   // These aren't particularly excellent tests as much as they help demonstrate
@@ -154,20 +153,18 @@ describe('MilestoneAwardSelector', () => {
   });
 
   it('No modular milestones and awards by default', () => {
-    for (let idx = 0; idx < 10000; idx++) {
-      const mas = choose({
-        randomMA: RandomMAOptionType.UNLIMITED,
-        venusNextExtension: true,
-        aresExtension: true,
-        moonExpansion: true,
-        coloniesExtension: true,
-        turmoilExtension: true,
-        includeFanMA: true,
-      });
+    const mas = getCandidates({...DEFAULT_GAME_OPTIONS,
+      randomMA: RandomMAOptionType.UNLIMITED,
+      venusNextExtension: true,
+      aresExtension: true,
+      moonExpansion: true,
+      coloniesExtension: true,
+      turmoilExtension: true,
+      includeFanMA: true,
+    });
 
-      expect(mas.awards.map((e) => AWARD_COMPATIBILITY[e.name].modular)).does.not.contain(true);
-      expect(mas.milestones.map((e) => MILESTONE_COMPATIBILITY[e.name].modular)).does.not.contain(true);
-    }
+    expect(intersection(mas[0], MODULAR_MILESTONES.map(toName))).deep.eq([]);
+    expect(intersection(mas[1], MODULAR_AWARDS.map(toName))).deep.eq([]);
   });
 
   function choose(options: Partial<GameOptions>) {

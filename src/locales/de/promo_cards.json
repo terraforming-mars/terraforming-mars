@@ -1,4 +1,7 @@
 {
+  "Public Baths": "Öffentliches Bad",
+  "Requires 6 oceans. Gain 6 M€.": "Benötigt 6 oder mehr Ozeanplättchen im Spiel. Erhalte 6 M€.",
+  
   "Casinos": "Casino",
   "Requires that you have a city. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Benötigt ein eigenes Stadtplättchen. Reduziere deine Energieproduktion um 1 und erhöhe deine M€-Produktion um 4.",
   
@@ -17,7 +20,7 @@
   "Spend 1 microbe from ANY of your cards to gain 5 plants": "Bezahle 1 Mikrobe von EINER deiner Karten, um 5 Pflanzen zu erhalten.",
 
   "Icy Impactors": "Eisige Impaktoren",
-  "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "AKTION: Gib 10 M€ aus (Titan kann verwendet werden), um hier 2 Asteroiden hinzuzufügen.",
+  "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "AKTION: Gib 10 M€ aus (Titan darf benutzt werden), um hier 2 Asteroiden hinzuzufügen.",
   "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "AKTION: Gib 1 Asteroid von hier aus, um ein Ozeanplättchen zu platzieren. DER ERSTE SPIELER WÄHLT, WO DU ES PLATZIEREN MUSST.",
 
   "Floyd Continuum": "Floyd Continuum",
@@ -98,8 +101,8 @@
   "Crash Site Cleanup": "Säuberung der Absturzstelle",
   "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "Erfordert, dass ein Spieler in dieser Generation eine Pflanze EINES ANDEREN SPIELERS entfernt hat. Erhalte 1 Titan oder 2 Stahl.",
 
-  "Directed Impactors": "Gerichtete Impaktoren",
-  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "AKTION: Zahle 6 M€, um einer BELIEBIGEN KARTE 1 Asteroid hinzuzufügen (Titan kann zur Zahlung verwendet werden).",
+  "Directed Impactors": "Gezielte Impaktoren",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "AKTION: Bezahle 6 M€, um einer BELIEBIGEN KARTE 1 Asteroid hinzuzufügen (Titan darf benutzt werden).",
   "Action: Remove 1 asteroid here to raise temperature 1 step.": "AKTION: Entferne 1 Asteroiden von dieser Karte, um die Temperatur um 2 °C zu erhöhen.",
 
   "Field-Capped City": "Schutzschild-Stadt",
@@ -148,8 +151,6 @@
   "Meat Industry": "Fleischindustrie",
   "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "EFFEKT: Wenn IRGENDEINE deiner Karten ein Tier erhält, erhalte zusätzlich 2 M€.",
 
-  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps and place this tile.": "Senke deine Energie-Produktion um 4 und erhöhe deine Pflanzen-Produktion um 2. Erhöhe deinen TW um 3 und plaziere dieses Plättchen.",
-
   "Orbital Cleanup": "Orbitalsäuberung",
   "Action: Gain 1 M€ per science tag you have.": "AKTION: Erhalte 1 M€ für jedes Wissenschaftssymbol, das du besitzt.",
   "Decrease your M€ production 2 steps.": "Senke deine M€-Produktion um 2 M€.",
@@ -184,8 +185,8 @@
   "Requires 2 oceans. Increase your plant production and your heat production 1 step each.": "Erfordert 2 Ozeane. Erhöhe deine Pflanzen- und Wärme-Produktion um jeweils 1.",
 
   "Self-replicating Robots": "Selbstreplizierende Roboter",
-  "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "AKTION: Decke und spiele eine WELTRAUM- oder GEBÄUDE-KARTE aus deiner Hand und platziere 2 Ressourcen auf sie ODER verdoppele die Ressourcen auf dieser Karte.",
-  "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "EFFEKT: Diese Karte darf wie von der Hand gespielt werden. Ihre Kosten sind um die Anzahl der auf ihr liegenden Ressourcen reduziert.",
+  "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "AKTION: Lege hier offen eine WELTRAUM- oder GEBÄUDEKARTE aus deiner Hand ab und lege 2 Ressourcenmarker auf diese ODER verdoppele die Anzahl Ressourcenmarker auf einer Karte, die hier bereits liegt.",
+  "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "EFFEKT: Karten, die hier liegen, können wie Handkarten ausgespielt werden. Ihre Kosten sind um die Anzahl an Ressourcenmarker auf Ihnen reduziert.",
 
   "Dusk Laser Mining": "Dämmerungs-Laser-Bergbau",
   "Requires 2 science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "Erfordert 2 Wissenschaftssymbole. Senke deine Energie-Produktion um 1 und erhöhe deine Titan-Produktion um 1. Erhalte 4 Titan.",
@@ -195,7 +196,7 @@
 
   "Magnetic Field Generators": "Magnetfeld-Generatoren",
   "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.": "Senke deine Energie-Produktion um 4. Erhöhe deine Pflanzen-Produktion um 2. Erhöhe deinen Terraformwert um 3. Platziere dieses Plättchen.",
-
+  
   "Mercurian Alloys": "Merkur-Legierungen",
   "Effect: Your titanium resources are worth 1 M€ extra.": "EFFEKT: Deine Titan-Ressourcen sind 1 M€ mehr wert.",
 
@@ -211,7 +212,8 @@
   "Stanford Torus": "Stanford-Torus",
   "Place a city tile IN SPACE, outside and separate from the planet.": "Platziere ein Stadtplättchen IM WELTRAUM, außerhalb und separat des Planeten.",
 
-  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.": "Erhöhe die Temperatur um 6 °C und erhalte 4 Stahl. Platziere dieses Plättchen NICHT ANGRENZEND an ein anderes Stadtplättchen. Entferne 6 Pflanzen eines beliebigen Spielers.",
+  "Deimos Down": "Absturz des Daimos",
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.": "Erhöhe die Temperatur um 6 °C und erhalte 4 Stahl. Platziere dieses Plättchen NICHT ANGRENZEND an ein Stadtplättchen. Entferne bis zu 6 Pflanzen eines beliebigen Spielers.",
 
   "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Erfordert 4 Ozeanplättchen. Erhöhe deine Energie-Produktion um 2. Platziere dieses Plättchen NEBEN einem Ozeanplättchen.",
 

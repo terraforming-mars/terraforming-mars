@@ -153,7 +153,7 @@ describe('MilestoneAwardSelector', () => {
   });
 
   it('No modular milestones and awards by default', () => {
-    const mas = getCandidates({...DEFAULT_GAME_OPTIONS,
+    const [milestones, awards] = getCandidates({...DEFAULT_GAME_OPTIONS,
       randomMA: RandomMAOptionType.UNLIMITED,
       venusNextExtension: true,
       aresExtension: true,
@@ -163,8 +163,11 @@ describe('MilestoneAwardSelector', () => {
       includeFanMA: true,
     });
 
-    expect(intersection(mas[0], MODULAR_MILESTONES.map(toName))).deep.eq([]);
-    expect(intersection(mas[1], MODULAR_AWARDS.map(toName))).deep.eq([]);
+    expect(intersection(milestones, MODULAR_MILESTONES.map(toName))).deep.eq([]);
+    expect(intersection(awards, MODULAR_AWARDS.map(toName))).deep.eq([]);
+
+    // Landlord is listed as modular, but should be included here.
+    expect(awards).to.contain('Landlord');
   });
 
   function choose(options: Partial<GameOptions>) {

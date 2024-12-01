@@ -75,7 +75,7 @@ export const awardNames = [
   'Manufacturer',
   'Metropolist',
   'Mogul',
-  'Politician',
+  'Politician', // New Most party leaders and influence compbined
   // 'Suburbian', // NEW Most tiles on areas along the edges of the map.
   'Traveller',
   // 'Zoologist', // Most animal and microbe resources. Currently Zoologist2

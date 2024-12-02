@@ -121,20 +121,18 @@ describe('MilestoneAwardSelector', () => {
     const avoidedMilestones = [...VENUS_MILESTONES, ...ARES_MILESTONES, ...MOON_MILESTONES].map(toName);
     avoidedMilestones.push('Pioneer', 'Martian', 'Colonizer');
     avoidedAwards.push('T. Politician');
-    for (let idx = 0; idx < 10000; idx++) {
-      const mas = choose({
-        randomMA: RandomMAOptionType.LIMITED,
-        venusNextExtension: false,
-        aresExtension: false,
-        moonExpansion: false,
-        coloniesExtension: false,
-        turmoilExtension: false,
-        includeFanMA: true,
-      });
+    const [milestones, awards] = getCandidates({...DEFAULT_GAME_OPTIONS,
+      randomMA: RandomMAOptionType.LIMITED,
+      venusNextExtension: false,
+      aresExtension: false,
+      moonExpansion: false,
+      coloniesExtension: false,
+      turmoilExtension: false,
+      includeFanMA: true,
+    });
 
-      expect(intersection(mas.awards.map(toName), avoidedAwards)).is.empty;
-      expect(intersection(mas.milestones.map(toName), avoidedMilestones)).is.empty;
-    }
+    expect(intersection(awards, avoidedAwards)).is.empty;
+    expect(intersection(milestones, avoidedMilestones)).is.empty;
   });
 
   it('novus maps with no randomness render correctly', () => {

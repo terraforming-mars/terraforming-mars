@@ -64,7 +64,7 @@ export const milestoneNames = [
 
   // Modular
   'Breeder',
-  'Briber',
+  // 'Briber',
   // 'Builder', // But 7 building tags
   // 'Coastguard', // NEW 3 tiles adjacent to oceans
   // 'Engineer', // Currently it is ThermoEngineer, with a name conflict.
@@ -76,7 +76,7 @@ export const milestoneNames = [
   'Landshaper',
   // 'Legend', // But 4 events
   'Lobbyist',
-  'Merchant',
+  // 'Merchant',
   // 'Metallurgist', // Smith, but 6
   'Philantropist',
   // 'Pioneer', // But 4 colonies

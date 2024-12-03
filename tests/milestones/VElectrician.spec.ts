@@ -4,16 +4,16 @@ import {SolarPower} from '../../src/server/cards/base/SolarPower';
 import {SpaceMirrors} from '../../src/server/cards/base/SpaceMirrors';
 import {ResearchCoordination} from '../../src/server/cards/prelude/ResearchCoordination';
 import {FieldCappedCity} from '../../src/server/cards/promo/FieldCappedCity';
-import {Electrician} from '../../src/server/milestones/Electrician';
+import {VElectrician} from '../../src/server/milestones/VElectrician';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestingUtils';
 
 describe('V. Electrician', () => {
-  let milestone: Electrician;
+  let milestone: VElectrician;
   let player: TestPlayer;
 
   beforeEach(() => {
-    milestone = new Electrician();
+    milestone = new VElectrician();
     [/* game */, player] = testGame(1);
 
     player.playedCards.push(new SolarPower(), new PowerPlant(), new SpaceMirrors());

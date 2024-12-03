@@ -24,7 +24,7 @@ import {LandSpecialist} from './arabiaTerra/LandSpecialist';
 import {Martian} from './arabiaTerra/Martian';
 import {Businessperson} from './arabiaTerra/Businessperson';
 import {Capitalist} from './Capitalist';
-import {Electrician} from './Electrician';
+import {VElectrician} from './VElectrician';
 import {Irrigator} from './Irrigator';
 import {Smith} from './Smith';
 import {Tradesman} from './Tradesman';
@@ -126,7 +126,7 @@ export const TERRA_CIMMERIA_MILESTONES = [
 ];
 
 export const VASTITAS_BOREALIS_MILESTONES = [
-  new Electrician(),
+  new VElectrician(),
   new Smith(),
   new Tradesman(),
   new Irrigator(),

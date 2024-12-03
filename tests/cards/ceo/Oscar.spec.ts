@@ -5,7 +5,7 @@ import {forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {Oscar} from '../../../src/server/cards/ceos/Oscar';
-import {TPolitician} from '../../../src/server/awards/terraCimmeria/Politician';
+import {TPolitician} from '../../../src/server/awards/terraCimmeria/TPolitician';
 import {TempestConsultancy} from '../../../src/server/cards/moon/TempestConsultancy';
 
 describe('Oscar', function() {

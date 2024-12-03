@@ -47,7 +47,7 @@ type DrawnMilestonesAndAwards = {
 
 // Function to compute max synergy of a given set of milestones and awards.
 // Exported for testing
-export function maximumSynergy(names: Array<string>) : number {
+export function maximumSynergy(names: ReadonlyArray<MilestoneName | AwardName>) : number {
   let max = 0;
   for (let i = 0; i < names.length - 1; i++) {
     for (let j = i + 1; j < names.length; j++) {

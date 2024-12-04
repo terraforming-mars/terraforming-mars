@@ -367,13 +367,15 @@
                                     <span v-i18n>{{ getRandomMaOptionType('full') }}</span>
                                 </label>
                                 </div>
-                                <!-- Temporarily disabled -->
-                                <!-- <div>
+                                <div>
                                   <input type="checkbox" name="modularMA" v-model="modularMA" id="modularMA-checkbox">
                                    <label for="modularMA-checkbox">
                                     <span v-i18n>Official Random α</span>
                                 </label>
-                                </div> -->
+                                </div>
+                            </div>
+                            <div v-if="modularMA">
+                              The new Milestones and Awards are still in active development.<br/>Please don't report anything but functional issues.
                             </div>
                             <template v-if="venusNext">
                                 <input type="checkbox" v-model="includeVenusMA" id="venusMA-checkbox">

@@ -69,7 +69,7 @@ export const awardNames = [
   'Electrician',
   'Founder',
   'Highlander',
-  // 'Incorporator', // NEW Most cards costing 10MC or less
+  'Incorporator',
   'Investor',
   'Landscaper',
   'Manufacturer',

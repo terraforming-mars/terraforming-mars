@@ -292,6 +292,8 @@
     "Have the most tiles adjacent to special tiles.": "Die meisten Plättchen, die angrenzend zu Spezial-Plättchen liegen.",
     "Highlander": "Hochländer",
     "Own the most tiles that are NOT adjacent to ocean tiles": "Die meisten Plättchen, die NICHT an Ozean-Felder angrenzen.",
+    "Incorporator": "Firmeninhaber",
+    "Have the most project cards in play with a base cost of at most 10 M€ (not events.)": "Die meisten Projektkarten mit Grundkosten von 10 M€ oder weniger im Spiel (keine Ereignisse).",
     "Investor": "Investor",
     "Have the most Earth tags in play": "Die meisten Erd-Symbole im Spiel (Ereigniskarten zählen nicht).",
     "Landscaper": "Landschaftsarchitekt",

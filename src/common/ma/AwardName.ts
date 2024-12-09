@@ -40,7 +40,7 @@ export const awardNames = [
   // Arabia Terra
   'Cosmic Settler',
   'Botanist',
-  'Coordinator', // TODO(kberg): Rename to Promoter
+  'Promoter',
   'A. Manufacturer',
   'Zoologist',
 
@@ -94,6 +94,7 @@ export const AWARD_RENAMES = new Map<string, AwardName>([
   // TODO(kberg): remove after 2025-01-01
   ['Adapter', 'Forecaster'],
   ['Hoarder', 'Visionary'],
+  ['Coordinator', 'Promoter'],
 ]);
 
 export function maybeRenamedAward(name: string): AwardName {

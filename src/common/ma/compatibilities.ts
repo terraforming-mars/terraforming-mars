@@ -107,7 +107,7 @@ export const AWARD_COMPATIBILITY: Record<AwardName, CompatibilityDetails> = {
   'T. Politician': {map: BoardName.TERRA_CIMMERIA, compatibility: 'turmoil'},
   'Urbanist': {map: BoardName.TERRA_CIMMERIA},
   'Warmonger': {map: BoardName.TERRA_CIMMERIA},
-  'Adapter': {map: BoardName.VASTITAS_BOREALIS, modular: true},
+  'Forecaster': {map: BoardName.VASTITAS_BOREALIS, modular: true},
   'Edgedancer': {map: BoardName.VASTITAS_BOREALIS},
   'Hoarder': {map: BoardName.VASTITAS_BOREALIS, modular: true},
   'Naturalist': {map: BoardName.VASTITAS_BOREALIS},

@@ -54,7 +54,7 @@ export const awardNames = [
   // Vastitas Borealis
   'Forecaster',
   'Edgedancer',
-  'Hoarder', // TODO(kberg): Rename to Visionary
+  'Visionary',
   'Naturalist',
   'Voyager',
 
@@ -90,8 +90,10 @@ export const AWARD_RENAMES = new Map<string, AwardName>([
   // TODO(yournamehere): remove after 2021-04-05
   // TODO(kberg): remove after 2024-12-15
   ['Engineer', 'A. Engineer'],
+
   // TODO(kberg): remove after 2025-01-01
   ['Adapter', 'Forecaster'],
+  ['Hoarder', 'Visionary'],
 ]);
 
 export function maybeRenamedAward(name: string): AwardName {

@@ -25,7 +25,7 @@ import {Zoologist} from './arabiaTerra/Zoologist';
 import {AManufacturer} from './arabiaTerra/Manufacturer';
 import {Forecaster} from './Forecaster';
 import {Edgedancer} from './Edgedancer';
-import {Hoarder} from './Hoarder';
+import {Visionary} from './Visionary';
 import {Naturalist} from './Naturalist';
 import {Voyager} from './Voyager';
 import {Curator} from './amazonisPlanitia/Curator';
@@ -126,7 +126,7 @@ export const TERRA_CIMMERIA_AWARDS = [
 export const VASTITAS_BOREALIS_AWARDS = [
   new Forecaster(),
   new Edgedancer(),
-  new Hoarder(),
+  new Visionary(),
   new Naturalist(),
   new Voyager(),
 ];

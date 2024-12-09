@@ -20,7 +20,7 @@ import {FullMoon} from '../moon/FullMoon';
 import {LunarMagnate} from '../moon/LunarMagnate';
 import {CosmicSettler} from './arabiaTerra/CosmicSettler';
 import {Botanist} from './arabiaTerra/Botanist';
-import {Coordinator} from './arabiaTerra/Coordinator';
+import {Promoter} from './arabiaTerra/Promoter';
 import {Zoologist} from './arabiaTerra/Zoologist';
 import {AManufacturer} from './arabiaTerra/Manufacturer';
 import {Forecaster} from './Forecaster';
@@ -102,7 +102,7 @@ export const MOON_AWARDS = [
 export const AMAZONIS_PLANITIA_AWARDS = [
   new Curator(),
   new AmazonisEngineer(),
-  new Coordinator(),
+  new Promoter(),
   new Tourist(),
   new Zoologist2(),
 ];
@@ -110,7 +110,7 @@ export const AMAZONIS_PLANITIA_AWARDS = [
 export const ARABIA_TERRA_AWARDS = [
   new CosmicSettler(),
   new Botanist(),
-  new Coordinator(),
+  new Promoter(),
   new Zoologist(),
   new AManufacturer(),
 ];

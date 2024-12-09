@@ -95,7 +95,7 @@ export const AWARD_COMPATIBILITY: Record<AwardName, CompatibilityDetails> = {
   'Lunar Magnate': {compatibility: 'moon'},
   'Curator': {map: BoardName.AMAZONIS},
   'A. Engineer': {map: BoardName.AMAZONIS},
-  'Coordinator': {map: [BoardName.AMAZONIS, BoardName.ARABIA_TERRA], modular: true},
+  'Promoter': {map: [BoardName.AMAZONIS, BoardName.ARABIA_TERRA], modular: true},
   'Tourist': {map: BoardName.AMAZONIS},
   'A. Zoologist': {map: BoardName.AMAZONIS, modular: true},
   'Cosmic Settler': {map: BoardName.ARABIA_TERRA},

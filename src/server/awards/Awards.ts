@@ -20,12 +20,12 @@ import {FullMoon} from '../moon/FullMoon';
 import {LunarMagnate} from '../moon/LunarMagnate';
 import {CosmicSettler} from './arabiaTerra/CosmicSettler';
 import {Botanist} from './arabiaTerra/Botanist';
-import {Coordinator} from './arabiaTerra/Coordinator';
+import {Promoter} from './arabiaTerra/Promoter';
 import {Zoologist} from './arabiaTerra/Zoologist';
 import {AManufacturer} from './arabiaTerra/Manufacturer';
-import {Adapter} from './Adapter';
+import {Forecaster} from './Forecaster';
 import {Edgedancer} from './Edgedancer';
-import {Hoarder} from './Hoarder';
+import {Visionary} from './Visionary';
 import {Naturalist} from './Naturalist';
 import {Voyager} from './Voyager';
 import {Curator} from './amazonisPlanitia/Curator';
@@ -102,7 +102,7 @@ export const MOON_AWARDS = [
 export const AMAZONIS_PLANITIA_AWARDS = [
   new Curator(),
   new AmazonisEngineer(),
-  new Coordinator(),
+  new Promoter(),
   new Tourist(),
   new Zoologist2(),
 ];
@@ -110,7 +110,7 @@ export const AMAZONIS_PLANITIA_AWARDS = [
 export const ARABIA_TERRA_AWARDS = [
   new CosmicSettler(),
   new Botanist(),
-  new Coordinator(),
+  new Promoter(),
   new Zoologist(),
   new AManufacturer(),
 ];
@@ -124,9 +124,9 @@ export const TERRA_CIMMERIA_AWARDS = [
 ];
 
 export const VASTITAS_BOREALIS_AWARDS = [
-  new Adapter(),
+  new Forecaster(),
   new Edgedancer(),
-  new Hoarder(),
+  new Visionary(),
   new Naturalist(),
   new Voyager(),
 ];

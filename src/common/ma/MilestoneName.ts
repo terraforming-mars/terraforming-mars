@@ -32,7 +32,6 @@ export const milestoneNames = [
 
   // Amazonis Planitia
   'Colonizer',
-  'Farmer', // TODO(kberg): Rename to Forester.
   'Minimalist',
   'Terran',
   'Tropicalist',
@@ -68,8 +67,8 @@ export const milestoneNames = [
   // 'Builder', // But 7 building tags
   // 'Coastguard', // NEW 3 tiles adjacent to oceans
   // 'Engineer', // Currently it is ThermoEngineer, with a name conflict.
-  // 'Farmer', // Cuirrently it is Breeder.
-  // 'Forester', // T's Farmer should be renamed Forester.
+  // 'Farmer', // Cuirrently it is Breeder. TODO(kberg): RENAME AFTER 1/1
+  'Forester',
   'Fundraiser',
   'Geologist',
   'Hydrologist',
@@ -102,6 +101,9 @@ const MILESTONE_RENAMES = new Map<string, MilestoneName>([
 
   // TODO(yournamehere): remove after 2021-04-05
   // ['Electrician', 'V. Electrician'],
+
+  // TODO(yournamehere): remove after 2021-04-05
+  ['Farmer', 'Forester'],
 ]);
 
 export function maybeRenamedMilestone(name: string): MilestoneName {

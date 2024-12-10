@@ -35,7 +35,7 @@ export const MILESTONE_COMPATIBILITY: Record<MilestoneName, CompatibilityDetails
   'One Giant Step': {compatibility: 'moon'},
   'Lunarchitect': {compatibility: 'moon'},
   'Colonizer': {map: BoardName.AMAZONIS, compatibility: 'colonies'},
-  'Farmer': {map: BoardName.AMAZONIS},
+  'Forester': {map: BoardName.AMAZONIS, modular: true},
   'Minimalist': {map: BoardName.AMAZONIS},
   'Terran': {map: BoardName.AMAZONIS},
   'Tropicalist': {map: BoardName.AMAZONIS},

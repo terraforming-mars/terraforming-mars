@@ -29,7 +29,6 @@ import {Irrigator} from './Irrigator';
 import {Smith} from './Smith';
 import {Tradesman} from './Tradesman';
 import {Colonizer} from './amazonisPlanitia/Colonizer';
-import {Farmer} from './amazonisPlanitia/Farmer';
 import {Minimalist} from './amazonisPlanitia/Minimalist';
 import {Terran} from './amazonisPlanitia/Terran';
 import {Tropicalist} from './amazonisPlanitia/Tropicalist';
@@ -40,6 +39,7 @@ import {Spacefarer} from './terraCimmeria/Spacefarer';
 import {TerraPioneer} from './terraCimmeria/TerraPioneer';
 import {Risktaker} from './underworld/Risktaker';
 import {Tunneler} from './underworld/Tunneler';
+import {Forester} from './modular/Forester';
 import {Fundraiser} from './modular/Fundraiser';
 import {Geologist} from './modular/Geologist';
 import {Landshaper} from './modular/Landshaper';
@@ -103,7 +103,7 @@ export const MOON_MILESTONES = [
 
 export const AMAZONIS_PLANITIA_MILESTONES = [
   new Colonizer(),
-  new Farmer(),
+  new Forester(),
   new Minimalist(),
   new Terran(),
   new Tropicalist(),

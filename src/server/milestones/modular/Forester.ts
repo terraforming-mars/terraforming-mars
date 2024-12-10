@@ -1,10 +1,10 @@
 import {BaseMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
 
-export class Farmer extends BaseMilestone {
+export class Forester extends BaseMilestone {
   constructor() {
     super(
-      'Farmer',
+      'Forester',
       'Have 4 plant production',
       4);
   }

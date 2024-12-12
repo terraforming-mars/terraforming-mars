@@ -1,6 +1,6 @@
 import {BaseMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
-import {isHazardTileType} from '../../../common/AresTileType';
+import {Board} from '../../boards/Board';
 
 export class Geologist extends BaseMilestone {
   constructor() {
@@ -15,12 +15,12 @@ export class Geologist extends BaseMilestone {
     const board = player.game.board;
     const volcanicSpaceIds = board.volcanicSpaceIds;
 
-    return player.game.board.spaces.filter((space) =>
-      space.player === player &&
-      space.tile !== undefined &&
-      isHazardTileType(space.tile.tileType) === false &&
-      (volcanicSpaceIds.includes(space.id) ||
-       board.getAdjacentSpaces(space).some((adjSpace) => volcanicSpaceIds.includes(adjSpace.id))),
-    ).length;
+    return player.game.board.spaces
+      .filter(Board.ownedBy(player))
+      .filter(Board.hasRealTile)
+      .filter((space) =>
+        volcanicSpaceIds.includes(space.id) ||
+       board.getAdjacentSpaces(space).some((adjSpace) => volcanicSpaceIds.includes(adjSpace.id)),
+      ).length;
   }
 }

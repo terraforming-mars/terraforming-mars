@@ -7,10 +7,10 @@ import {Resource} from '../../../common/Resource';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
-import {isHazardTileType} from '../../../common/AresTileType';
 import {Size} from '../../../common/cards/render/Size';
 import {cancelled} from '../../cards/Options';
 import {SpaceType} from '../../../common/boards/SpaceType';
+import {Board} from '../../boards/Board';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.text('ALL').undergroundResources(1, {cancelled}).nbsp.megacredits(-2).slash().emptyTile().asterix().influence({size: Size.SMALL});
@@ -31,18 +31,10 @@ export class SeismicPredictions extends GlobalEvent implements IGlobalEvent {
     UnderworldExpansion.removeAllUnclaimedTokens(game);
 
     game.getPlayersInGenerationOrder().forEach((player) => {
-      const playerSpaces = player.game.board.spaces.filter((space) => {
-        if (space.spaceType === SpaceType.COLONY) {
-          return false;
-        }
-        if (space.tile === undefined) {
-          return false;
-        }
-        if (space.player !== player) {
-          return false;
-        }
-        return !isHazardTileType(space.tile?.tileType);
-      });
+      const playerSpaces = player.game.board.spaces
+        .filter(Board.ownedBy(player))
+        .filter(Board.hasRealTile)
+        .filter((space) => space.spaceType !== SpaceType.COLONY);
       const filtered = playerSpaces.filter(
         (space) => space.undergroundResources === undefined && space.excavator === undefined);
       const penalty = Math.min(5, filtered.length) - turmoil.getPlayerInfluence(player);

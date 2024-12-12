@@ -53,6 +53,7 @@ import {Collector} from './modular/Collector';
 import {Politician} from './modular/Politician';
 import {Manufacturer} from './modular/Manufacturer';
 import {Incorporator} from './modular/Incorporator';
+import {Suburbian} from './modular/Suburbian';
 
 export const THARSIS_AWARDS = [
   new Landlord(),
@@ -150,6 +151,7 @@ export const MODULAR_AWARDS = [
   new Metropolist(),
   new Mogul(),
   new Politician(),
+  new Suburbian(),
   new Traveller(),
 ];
 

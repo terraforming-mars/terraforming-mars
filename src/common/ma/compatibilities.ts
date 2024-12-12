@@ -127,5 +127,6 @@ export const AWARD_COMPATIBILITY: Record<AwardName, CompatibilityDetails> = {
   'Collector': {modular: true},
   'Electrician': {modular: true},
   'Manufacturer': {modular: true},
+  'Suburbian': {modular: true},
   'Politician': {compatibility: 'turmoil', modular: true},
 };

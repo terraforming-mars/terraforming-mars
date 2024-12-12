@@ -9,7 +9,7 @@ import {SponsoredProjects} from '../../../src/server/turmoil/globalEvents/Sponso
 import {SuccessfulOrganisms} from '../../../src/server/turmoil/globalEvents/SuccessfulOrganisms';
 import {WarOnEarth} from '../../../src/server/turmoil/globalEvents/WarOnEarth';
 import {testGame} from '../../TestGame';
-import {GameOptions} from '@/server/game/GameOptions';
+import {GameOptions} from '../../../src/server/game/GameOptions';
 
 describe('GlobalEventDealer', () => {
   it('serialize/deserialize - empty', () => {

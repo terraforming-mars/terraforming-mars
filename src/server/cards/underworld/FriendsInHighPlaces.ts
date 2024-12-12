@@ -3,7 +3,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
-import {IPlayer} from '@/server/IPlayer';
+import {IPlayer} from '../../IPlayer';
 
 export class FriendsInHighPlaces extends Card {
   constructor() {

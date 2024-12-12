@@ -293,6 +293,12 @@ export abstract class Board {
     return this.spaces.filter((space) => space.tile && isHazardTileType(space.tile.tileType));
   }
 
+  /** Hazard tiles don't really count as tiles. */
+  public static hasRealTile(space: Space) {
+    return space.tile !== undefined &&
+      isHazardTileType(space.tile.tileType) === false;
+  }
+
   public serialize(): SerializedBoard {
     return {
       spaces: this.spaces.map((space) => {
@@ -362,10 +368,6 @@ export abstract class Board {
     const spaces = board.spaces.map((space) => Board.deserializeSpace(space, players));
     return {spaces};
   }
-}
-
-export function playerTileFn(player: IPlayer) {
-  return (space: Space) => space.player?.id === player.id;
 }
 
 export function isSpecialTile(tileType: TileType | undefined): boolean {

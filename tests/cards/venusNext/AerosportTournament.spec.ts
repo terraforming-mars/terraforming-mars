@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {addCity} from '../../TestingUtils';
+import {addCity, cast} from '../../TestingUtils';
 import {AerosportTournament} from '../../../src/server/cards/venusNext/AerosportTournament';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {testGame} from '../../TestGame';
@@ -25,13 +25,13 @@ describe('AerosportTournament', function() {
   });
   it('Play', function() {
     addCity(player, '03');
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
 
     expect(player.megaCredits).to.eq(1);
 
     player.megaCredits = 0;
     addCity(player, '05');
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.megaCredits).to.eq(2);
   });
 });

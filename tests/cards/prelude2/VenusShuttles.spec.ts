@@ -37,7 +37,7 @@ describe('VenusShuttles', function() {
     const jsr = new JetStreamMicroscrappers(); // Stores floaters, has Venus tag.
     player.corporations.push(celestic);
     player.playedCards.push(jsr);
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
 
     const selectCard = cast(player.popWaitingFor(), SelectCard);

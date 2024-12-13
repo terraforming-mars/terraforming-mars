@@ -22,7 +22,7 @@ describe('DirectedImpactors', function() {
   });
 
   it('Should play', function() {
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Should act - single action choice, single target', function() {

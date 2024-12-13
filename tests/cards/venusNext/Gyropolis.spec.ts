@@ -32,7 +32,7 @@ describe('Gyropolis', function() {
     player.production.add(Resource.ENERGY, 2);
 
     expect(card.canPlay(player)).is.true;
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(player.game);
 
     assertPlaceCity(player, player.popWaitingFor());

@@ -39,7 +39,7 @@ describe('FreyjaBiodomes', function() {
     setVenusScaleLevel(game, 10);
     expect(card.canPlay(player)).is.true;
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(2);
     expect(card2.resourceCount).to.eq(2);

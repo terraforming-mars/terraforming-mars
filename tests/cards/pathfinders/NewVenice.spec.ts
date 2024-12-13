@@ -49,7 +49,7 @@ describe('NewVenice', function() {
     player.plants = 2;
     player.production.override({energy: 0, megacredits: 0});
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
     expect(player.plants).eq(0);
@@ -70,7 +70,7 @@ describe('NewVenice', function() {
   it('Cannot place a city next to New Venice', function() {
     const oceanSpace = addOcean(player);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
     action.cb(oceanSpace);
@@ -94,7 +94,7 @@ describe('NewVenice', function() {
       .filter((space) => space.spaceType === SpaceType.LAND)[0];
     game.addCity(player, citySpace);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
     action.cb(oceanSpace);
@@ -104,7 +104,7 @@ describe('NewVenice', function() {
 
   it('New Venice counts as ocean for adjacency', function() {
     const oceanSpace = addOcean(player);
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
     action.cb(oceanSpace);
@@ -121,7 +121,7 @@ describe('NewVenice', function() {
 
   it('New Venice counts for city-related VP', function() {
     const oceanSpace = addOcean(player);
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
     action.cb(oceanSpace);
@@ -156,7 +156,7 @@ describe('NewVenice', function() {
 
     // And now adds the tile.
     game.addOcean(player, oceanSpace);
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
     action.cb(oceanSpace);
@@ -174,7 +174,7 @@ describe('NewVenice', function() {
     game.addOcean(player, oceanSpace);
     expect(player.plants).eq(4);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
     action.cb(oceanSpace);

@@ -29,7 +29,7 @@ describe('DeimosDownAres', function() {
 
   // Identical to the Deimos Down Promo test
   it('Should play without plants', function() {
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     cast(player.popWaitingFor(), SelectSpace);
     expect(player.game.getTemperature()).to.eq(-24);
@@ -42,7 +42,7 @@ describe('DeimosDownAres', function() {
   it('Can remove plants', function() {
     player2.plants = 5;
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     cast(player.popWaitingFor(), SelectSpace);
     expect(player.game.getTemperature()).to.eq(-24);
@@ -62,7 +62,7 @@ describe('DeimosDownAres', function() {
     const [game, player] = testGame(1);
 
     player.plants = 15;
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     cast(player.popWaitingFor(), SelectSpace);
 

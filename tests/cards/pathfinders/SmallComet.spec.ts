@@ -27,7 +27,7 @@ describe('SmallComet', function() {
     player2.plants = 15;
     player3.plants = 400;
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 

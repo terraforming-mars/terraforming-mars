@@ -12,7 +12,7 @@ describe('AirScrappingExpedition', function() {
     const card = new AirScrappingExpedition();
     const [game, player] = testGame(2);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
 
     expect(game.getVenusScaleLevel()).to.eq(2);
   });
@@ -23,7 +23,7 @@ describe('AirScrappingExpedition', function() {
     const [game, player] = testGame(2);
     player.corporations.push(corp);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
 
     expect(corp.resourceCount).to.eq(3);
     expect(game.getVenusScaleLevel()).to.eq(2);

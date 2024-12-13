@@ -41,7 +41,7 @@ describe('CorroderSuits', function() {
     const dirigibles = new Dirigibles(); // Venus tag with Floaters
     player.playedCards.push(aerialMappers, dirigibles);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
 
     const selectCard = cast(player.popWaitingFor(), SelectCard);
@@ -70,7 +70,7 @@ describe('CorroderSuits', function() {
     const nitriteReducingBacteria = new NitriteReducingBacteria(); // Microbe tag with microbes
     player.playedCards.push(aerialMappers, dirigibles, nitriteReducingBacteria);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
 
     const selectCard = cast(player.popWaitingFor(), SelectCard);

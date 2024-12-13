@@ -33,7 +33,7 @@ describe('HydrogenToVenus', function() {
   it('Should play with multiple venus cards', function() {
     player.playedCards.push(venusCard1, jovianTagCard1, venusCard2);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
 
     const action = cast(player.popWaitingFor(), SelectCard<ICard>);
@@ -45,7 +45,7 @@ describe('HydrogenToVenus', function() {
   it('Should play with multiple jovian tag cards', function() {
     player.playedCards.push(venusCard1, jovianTagCard1, jovianTagCard2);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     expect(venusCard1.resourceCount).to.eq(2);
     expect(game.getVenusScaleLevel()).to.eq(2);
@@ -54,7 +54,7 @@ describe('HydrogenToVenus', function() {
   it('Should play with single venus card', function() {
     player.playedCards.push(venusCard1, jovianTagCard1);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
     expect(venusCard1.resourceCount).to.eq(1);

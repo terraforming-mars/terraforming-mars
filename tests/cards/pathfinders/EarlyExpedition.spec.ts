@@ -37,7 +37,7 @@ describe('EarlyExpedition', function() {
     const lunarObservationPost = new LunarObservationPost(); // Holds data.
     player.playedCards = [lunarObservationPost];
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
 

@@ -2,14 +2,14 @@ import {expect} from 'chai';
 import {ProtectedValley} from '../../../src/server/cards/base/ProtectedValley';
 import {testGame} from '../../TestGame';
 import {TileType} from '../../../src/common/TileType';
-import {runAllActions, setOxygenLevel, testRedsCosts} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel, testRedsCosts} from '../../TestingUtils';
 import {assertPlaceTile} from '../../assertions';
 
 describe('ProtectedValley', function() {
   it('Should play', function() {
     const card = new ProtectedValley();
     const [game, player] = testGame(2);
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
 
     assertPlaceTile(player, player.popWaitingFor(), TileType.GREENERY);

@@ -25,7 +25,7 @@ describe('ArtificialLake', function() {
   });
 
   it('Should play', function() {
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
 
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);

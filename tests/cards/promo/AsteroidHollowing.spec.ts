@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {churn} from '../../TestingUtils';
+import {cast, churn} from '../../TestingUtils';
 import {AsteroidHollowing} from '../../../src/server/cards/promo/AsteroidHollowing';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -14,7 +14,7 @@ describe('AsteroidHollowing', function() {
   });
 
   it('Should play', function() {
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Can not act', function() {

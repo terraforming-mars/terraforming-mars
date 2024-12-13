@@ -25,7 +25,7 @@ describe('Plantation', function() {
     player.playedCards.push(new InventorsGuild(), new InventorsGuild());
     expect(card.canPlay(player)).is.true;
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
     action.cb(action.spaces[0]);

@@ -3,7 +3,7 @@ import {Mangrove} from '../../../src/server/cards/base/Mangrove';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
-import {runAllActions, setOxygenLevel, setTemperature, testRedsCosts} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {assertPlaceTile} from '../../assertions';
 
@@ -26,7 +26,7 @@ describe('Mangrove', function() {
   });
 
   it('Should play', function() {
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
 
     assertPlaceTile(player, player.popWaitingFor(), TileType.GREENERY);

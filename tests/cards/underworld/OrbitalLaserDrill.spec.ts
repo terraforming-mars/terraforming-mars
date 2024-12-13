@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {OrbitalLaserDrill} from '../../../src/server/cards/underworld/OrbitalLaserDrill';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 
@@ -28,7 +28,7 @@ describe('OrbitalLaserDrill', () => {
   });
 
   it('play', () => {
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
 
     runAllActions(game);
 

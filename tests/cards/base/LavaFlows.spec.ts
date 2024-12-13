@@ -35,7 +35,7 @@ describe('LavaFlows', function() {
     // With two players, there's no solo setup, so all spaces will be available.
     [game, player] = testGame(2, {boardName: BoardName.HELLAS});
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
     expect(action.spaces).deep.eq(game.board.getAvailableSpacesOnLand(player));
@@ -69,7 +69,7 @@ describe('LavaFlows', function() {
   });
 
   it('Should play', function() {
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
     const space = action.spaces[0];

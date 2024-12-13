@@ -13,7 +13,7 @@ describe('CorporateArchives', function() {
     expect(discarded).is.empty;
     expect(player.megaCredits).eq(0);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
 
     const action = cast(player.popWaitingFor(), SelectCard<IProjectCard>);

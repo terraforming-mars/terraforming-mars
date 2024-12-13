@@ -36,14 +36,14 @@ describe('Virus', function() {
 
   it('Can play when no other player has resources', function() {
     player.plants = 5;
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.plants).to.eq(5);
   });
 
   it('Works in solo mode', function() {
     const [game, player] = testGame(1);
     expect(card.canPlay(player)).is.true;
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     expect(game.someoneHasRemovedOtherPlayersPlants).is.true;
   });
 });

@@ -37,7 +37,7 @@ describe('SpacePort', function() {
     player.game.colonies[0].colonies.push(player.id);
     expect(card.canPlay(player)).is.true;
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 

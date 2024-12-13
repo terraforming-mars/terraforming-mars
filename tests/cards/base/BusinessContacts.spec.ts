@@ -10,7 +10,7 @@ describe('BusinessContacts', function() {
     const card = new BusinessContacts();
     const [game, player] = testGame(2);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
 
     const action = cast(player.popWaitingFor(), SelectCard<IProjectCard>);

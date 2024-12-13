@@ -3,7 +3,7 @@ import {CloudCity} from '../../../src/server/cards/starwars/CloudCity';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {runAllActions, setVenusScaleLevel} from '../../TestingUtils';
+import {cast, runAllActions, setVenusScaleLevel} from '../../TestingUtils';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
 
 describe('CloudCity', () => {
@@ -31,7 +31,7 @@ describe('CloudCity', () => {
     player.playedCards.push(jovianLanterns);
     setVenusScaleLevel(game, 4);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
 
     runAllActions(game);
 

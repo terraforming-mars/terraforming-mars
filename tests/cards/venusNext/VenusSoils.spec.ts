@@ -22,7 +22,7 @@ describe('VenusSoils', function() {
   it('Should play - single target', function() {
     const card2 = new Thermophiles();
     player.playedCards.push(card2);
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
 
@@ -36,7 +36,7 @@ describe('VenusSoils', function() {
     const card3 = new VenusianInsects();
     player.playedCards.push(card2, card3);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectCard<ICard>);
     action.cb([card2]);

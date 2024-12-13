@@ -39,7 +39,7 @@ describe('ForestMoon', () => {
     player.production.override({energy: 2});
     player2.production.override({energy: 1});
     player3.production.override({energy: 2});
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
 
@@ -58,7 +58,7 @@ describe('ForestMoon', () => {
     const fish = new Fish();
     player.playedCards.push(fish);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
 
     runAllActions(game);
     expect(player.popWaitingFor()).is.undefined;

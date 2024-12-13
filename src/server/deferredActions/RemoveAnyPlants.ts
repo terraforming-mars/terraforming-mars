@@ -33,12 +33,7 @@ export class RemoveAnyPlants extends DeferredAction {
 
     return new SelectOption(
       message, 'Remove plants').andThen(() => {
-      target.maybeBlockAttack(this.player, (proceed) => {
-        if (proceed === true) {
-          target.stock.deduct(Resource.PLANTS, qtyToRemove, {log: true, from: this.player});
-        }
-        return undefined;
-      });
+      target.attack(this.player, Resource.PLANTS, qtyToRemove, {log: true});
       return undefined;
     });
   }
@@ -87,12 +82,7 @@ export class RemoveAnyPlants extends DeferredAction {
           buttonLabel: 'Remove plants',
           warnings: (target === player) ? ['removeOwnPlants'] : undefined,
         }).andThen(() => {
-        target.maybeBlockAttack(player, (proceed) => {
-          if (proceed === true) {
-            target.stock.deduct(Resource.PLANTS, qtyToRemove, {log: true, from: this.player});
-          }
-          return undefined;
-        });
+        target.attack(player, Resource.PLANTS, qtyToRemove, {log: true});
         return undefined;
       });
     }));

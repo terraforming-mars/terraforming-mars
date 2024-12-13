@@ -49,13 +49,7 @@ export class StealResources extends DeferredAction {
         message('Steal ${0} ${1} from ${2}', (b) => b.number(qtyToSteal).string(this.resource).player(target)),
         'Steal')
         .andThen(() => {
-          target.maybeBlockAttack(this.player, (proceed) => {
-            if (proceed) {
-              target.stock.deduct(this.resource, qtyToSteal, {log: true, from: this.player, stealing: true});
-              this.player.stock.add(this.resource, qtyToSteal);
-            }
-            return undefined;
-          });
+          target.attack(this.player, this.resource, qtyToSteal, {log: true, stealing: true});
           return undefined;
         });
     });

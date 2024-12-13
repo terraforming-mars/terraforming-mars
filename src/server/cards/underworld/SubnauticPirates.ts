@@ -49,12 +49,7 @@ export class SubnauticPirates extends Card implements IProjectCard {
         }
 
         set.forEach((target) => {
-          target.maybeBlockAttack(player, (proceed) => {
-            if (proceed) {
-              target.stock.steal(Resource.MEGACREDITS, 6, player);
-            }
-            return undefined;
-          });
+          target.attack(player, Resource.MEGACREDITS, 6, {stealing: true, log: true});
         });
         return undefined;
       });

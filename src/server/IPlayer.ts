@@ -34,6 +34,7 @@ import {Stock} from './player/Stock';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
 import {AlliedParty} from './turmoil/AlliedParty';
 import {IParty} from './turmoil/parties/IParty';
+import {Message} from '../common/logs/Message';
 
 export type ResourceSource = IPlayer | GlobalEventName | ICard;
 
@@ -204,7 +205,12 @@ export interface IPlayer {
    * isn't protected.
    */
   canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: IPlayer): boolean;
-  maybeBlockAttack(perpetrator: IPlayer, cb: (proceed: boolean) => PlayerInput | undefined): void;
+  /**
+   * Give this player a chance to block an attack made by `perpetrator`. Call `cb` with true if the attack
+   * is not blocked.
+   */
+  maybeBlockAttack(perpetrator: IPlayer, message: Message | string, cb: (proceed: boolean) => PlayerInput | undefined): void;
+  attack(perpetrator: IPlayer, type: Resource, count: number, options?: {log?: boolean, stealing?: boolean}): void;
 
   /**
    * In the multiplayer game, after an attack, the attacked player makes a claim

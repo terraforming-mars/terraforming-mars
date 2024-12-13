@@ -8,6 +8,7 @@ import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
 import {Message} from '../../common/logs/Message';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
+import {message} from '../logs/MessageBuilder';
 
 export type Source = 'self' | 'opponents' | 'all';
 export type Response = {card: ICard, owner: IPlayer, proceed: boolean} | {card: undefined, owner: undefined, proceed: boolean};
@@ -97,13 +98,14 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
     //   this.cb(true);
     //   return;
     // }
-    target.defer(UnderworldExpansion.maybeBlockAttack(target, this.player, ((proceed) => {
+    const msg = message('${0} ${1} from ${2}', (b) => b.number(this.count).string(card.resourceType || 'resources').card(card));
+    target.defer(UnderworldExpansion.maybeBlockAttack(target, this.player, msg, (proceed) => {
       if (proceed) {
         target.removeResourceFrom(card, this.count, {removingPlayer: this.player});
       }
       this.cb({card: card, owner: target, proceed: proceed});
       return undefined;
-    })));
+    }));
   }
 
   public static getAvailableTargetCards(player: IPlayer, resourceType: CardResource | undefined, source: Source = 'all'): Array<ICard> {

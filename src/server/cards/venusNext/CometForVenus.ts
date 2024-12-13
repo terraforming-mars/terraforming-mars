@@ -47,12 +47,7 @@ export class CometForVenus extends Card implements IProjectCard {
           'Select player to remove up to 4 M€ from',
           'Remove M€')
           .andThen((target) => {
-            target.maybeBlockAttack(player, (proceed) => {
-              if (proceed) {
-                target.stock.deduct(Resource.MEGACREDITS, 4, {log: true, from: player});
-              }
-              return undefined;
-            });
+            target.attack(player, Resource.MEGACREDITS, 4, {log: true});
             return undefined;
           }),
         new SelectOption('Do not remove M€'));

@@ -13,6 +13,7 @@ import {Units} from '../Units';
 
 export type BaseInputModel = {
   title: string | Message;
+  warning?: string | Message;
   buttonLabel: string;
 }
 

@@ -65,15 +65,9 @@ export class RoadPiracy extends Card implements IProjectCard {
         throw new Error(`You may only steal up to ${limit} ${resource} from all players`);
       }
       for (const [target, count] of ledger) {
-        if (count === 0) {
-          continue;
+        if (count > 0) {
+          target.attack(player, resource, count, {stealing: true});
         }
-        target.maybeBlockAttack(player, (proceed) => {
-          if (proceed) {
-            target.stock.steal(resource, count, player);
-          }
-          return undefined;
-        });
       }
       return undefined;
     };

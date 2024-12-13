@@ -37,12 +37,7 @@ export class PublicSponsoredGrant extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     player.getOpponents().forEach((target) => {
-      target.maybeBlockAttack(player, (proceed) => {
-        if (proceed) {
-          target.stock.deduct(Resource.MEGACREDITS, Math.min(target.megaCredits, 2), {log: true, from: player});
-        }
-        return undefined;
-      });
+      target.attack(player, Resource.MEGACREDITS, Math.min(target.megaCredits, 2), {log: true});
     });
 
     const tags = [...ALL_TAGS];

@@ -78,6 +78,7 @@ import {TRSource} from '../common/cards/TRSource';
 import {IParty} from './turmoil/parties/IParty';
 import {AlliedParty} from './turmoil/AlliedParty';
 import {newStandardDraft} from './Draft';
+import {Message} from '../common/logs/Message';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 const DEFAULT_GLOBAL_PARAMETER_STEPS = {
@@ -474,8 +475,22 @@ export class Player implements IPlayer {
     return true;
   }
 
-  public maybeBlockAttack(perpetrator: IPlayer, cb: (proceed: boolean) => PlayerInput | undefined): void {
-    this.defer(UnderworldExpansion.maybeBlockAttack(this, perpetrator, cb));
+  public maybeBlockAttack(perpetrator: IPlayer, msg: Message | string, cb: (proceed: boolean) => PlayerInput | undefined): void {
+    this.defer(UnderworldExpansion.maybeBlockAttack(this, perpetrator, msg, cb));
+  }
+
+  public attack(perpetrator: IPlayer, resource: Resource, count: number, options?: {log?: boolean, stealing?: boolean}): void {
+    const msg = message('Lose ${0} ${1}', (b) => b.number(count).string(resource));
+    this.maybeBlockAttack(perpetrator, msg, (proceed) => {
+      if (proceed) {
+        if (options?.stealing) {
+          this.stock.steal(resource, count, perpetrator, {log: options?.log});
+        } else {
+          this.stock.deduct(resource, count, {log: options?.log, from: perpetrator});
+        }
+      }
+      return undefined;
+    });
   }
 
   public resolveInsurance() {
@@ -672,7 +687,7 @@ export class Player implements IPlayer {
   }
 
   /**
-   * @return {number} the number of avaialble megacredits. Which is just a shorthand for megacredits,
+   * ../..return {number} the number of avaialble megacredits. Which is just a shorthand for megacredits,
    * plus any units of heat available thanks to Helion (and Stormcraft, by proxy).
    */
   public spendableMegacredits(): number {
@@ -1315,9 +1330,9 @@ export class Player implements IPlayer {
    * For example, if the payment is 3M€ and 2 steel, given that steel by default is
    * worth 2M€, this will return 7.
    *
-   * @param {Payment} payment the resources being paid.
-   * @param {PaymentOptions} options any configuration defining the accepted form of payment.
-   * @return {number} a number representing the value of payment in M€.
+   * ../..param {Payment} payment the resources being paid.
+   * ../..param {PaymentOptions} options any configuration defining the accepted form of payment.
+   * ../..return {number} a number representing the value of payment in M€.
    */
   public payingAmount(payment: Payment, options?: Partial<PaymentOptions>): number {
     const multiplier = {
@@ -1468,7 +1483,7 @@ export class Player implements IPlayer {
    *
    * This method indicates the avalilable actions by setting the `waitingFor` attribute of this player.
    *
-   * @param {boolean} saveBeforeTakingAction when true, the game state is saved. Default is `true`. This
+   * ../..param {boolean} saveBeforeTakingAction when true, the game state is saved. Default is `true`. This
    * should only be false in testing and when this method is called during game deserialization. In other
    * words, don't set this value unless you know what you're doing.
    */

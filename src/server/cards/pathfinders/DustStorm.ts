@@ -34,12 +34,7 @@ export class DustStorm extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     player.game.getPlayers().forEach((target) => {
-      target.maybeBlockAttack(player, (proceed) => {
-        if (proceed) {
-          target.stock.deduct(Resource.ENERGY, target.energy, {log: true});
-        }
-        return undefined;
-      });
+      target.attack(player, Resource.ENERGY, target.energy, {log: true});
     });
     return undefined;
   }

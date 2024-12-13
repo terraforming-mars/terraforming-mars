@@ -41,7 +41,8 @@ export class RevoltingColonists extends Card implements IProjectCard {
         const owes = Math.min(bill, target.spendableMegacredits());
 
         if (owes > 0) {
-          target.maybeBlockAttack(player, (proceed) => {
+          const msg = message('${0} MC', (b) => b.number(owes));
+          target.maybeBlockAttack(player, msg, (proceed) => {
             if (proceed) {
               game.defer(new SelectPaymentDeferred(target, owes, {
                 title: message('You must spend ${0} M€ for ${1} habitat tiles', (b) => b.number(owes).number(owned))}))

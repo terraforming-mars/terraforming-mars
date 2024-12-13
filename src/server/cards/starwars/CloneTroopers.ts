@@ -65,13 +65,8 @@ export class CloneTroopers extends Card implements IActionCard, IProjectCard {
               // TODO(kberg): Included protected resources
               options.options.push(new SelectOption(
                 message('Steal 1 ${0} from ${1}', (b) => b.string(resource).player(target)), 'steal').andThen(() => {
-                target.maybeBlockAttack(player, (proceed) => {
-                  if (proceed) {
-                    target.stock.steal(resource, 1, player);
-                    player.removeResourceFrom(this, 1);
-                  }
-                  return undefined;
-                });
+                player.removeResourceFrom(this, 1);
+                target.attack(player, resource, 1, {log: true, stealing: true});
                 return undefined;
               }));
             }

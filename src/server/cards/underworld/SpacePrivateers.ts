@@ -66,7 +66,7 @@ export class SpacePrivateers extends Card implements IProjectCard, IActionCard {
     const targets = player.getOpponents();
     const waitingFor = new Set(targets);
     for (const target of targets) {
-      target.maybeBlockAttack(player, (proceed) => {
+      target.maybeBlockAttack(player, 'Lose 2 M€', (proceed) => {
         if (proceed) {
           target.stock.steal(Resource.MEGACREDITS, 2, player, {log: true});
           target.resolveInsurance();

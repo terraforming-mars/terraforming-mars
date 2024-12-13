@@ -9,6 +9,7 @@ export interface PlayerInput {
     type: PlayerInputType;
     buttonLabel: string;
     title: string | Message;
+    warning?: string | Message;
     /**
      * When false, this input should not be the default selected PlayerInput.
      * When unset or true, this input may be the default selected PlayerInput.
@@ -38,6 +39,7 @@ export abstract class BasePlayerInput<T> implements PlayerInput {
   public readonly type: PlayerInputType;
   public buttonLabel: string = 'Save';
   public title: string | Message;
+  public warning?: string | Message;
   public cb: (param: T) => PlayerInput | undefined = NULL_FUNCTION;
   public eligibleForDefault: boolean | undefined = undefined;
 

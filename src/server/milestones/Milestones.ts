@@ -22,7 +22,6 @@ import {Economizer} from './arabiaTerra/Economizer';
 import {Pioneer} from './arabiaTerra/Pioneer';
 import {LandSpecialist} from './arabiaTerra/LandSpecialist';
 import {Martian} from './arabiaTerra/Martian';
-import {Businessperson} from './arabiaTerra/Businessperson';
 import {Capitalist} from './Capitalist';
 import {VElectrician} from './VElectrician';
 import {Irrigator} from './Irrigator';
@@ -114,7 +113,7 @@ export const ARABIA_TERRA_MILESTONES = [
   new Pioneer(),
   new LandSpecialist(),
   new Martian(),
-  new Businessperson(),
+  new Terran(), // Duplicate of Amazonis Planitia
 ];
 
 export const TERRA_CIMMERIA_MILESTONES = [

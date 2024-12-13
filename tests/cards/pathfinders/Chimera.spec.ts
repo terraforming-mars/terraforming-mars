@@ -9,7 +9,7 @@ import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {fakeCard} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
-import {Businessperson} from '../../../src/server/milestones/arabiaTerra/Businessperson';
+import {Terran} from '../../../src/server/milestones/amazonisPlanitia/Terran';
 import {Scientist} from '../../../src/server/awards/Scientist';
 import {Ecologist} from '../../../src/server/milestones/Ecologist';
 import {Algae} from '../../../src/server/cards/base/Algae';
@@ -55,8 +55,8 @@ describe('Chimera', function() {
   });
 
   it('as milestone, single tag count', function() {
-    // Businessperson: Have at least 6 Earth tags in play
-    const milestone = new Businessperson();
+    // Terran: Have at least 6 Earth tags in play
+    const milestone = new Terran();
     player.playedCards = [new BusinessNetwork(), new EarthCatapult(), new Cartel()];
     expect(milestone.getScore(player)).eq(4);
   });

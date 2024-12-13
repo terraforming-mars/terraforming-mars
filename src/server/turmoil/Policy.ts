@@ -22,7 +22,6 @@ export interface IPolicy {
   onPolicyEndForPlayer?(player: IPlayer): void;
   }
 
-// TODO(kberg): Rename to Policy
 export abstract class Policy implements IPolicy {
   abstract readonly id: PolicyId;
   abstract readonly description: string | ((player: IPlayer | undefined) => string);

@@ -11,7 +11,7 @@ import {MarsBoard} from '../../../src/server/boards/MarsBoard';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Philares} from '../../../src/server/cards/promo/Philares';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 import {LandClaim} from '../../../src/server/cards/base/LandClaim';
 import {MiningGuild} from '../../../src/server/cards/corporation/MiningGuild';
 import {intersection} from '../../../src/common/utils/utils';

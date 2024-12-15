@@ -281,6 +281,11 @@ export class PostgreSQL implements IDatabase {
     const maxSaveId = await this.getMaxSaveId(gameId);
     return this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [gameId, maxSaveId])
       .then(() => {
+        // TODO(kberg): this isn't enough. After some period of time we always wind up with extras that have to be
+        // cleaned with this command
+        //
+        // delete from completed_game where game_id in (select a.game_id from completed_game a left join games b on b.game_id = a.game_id where b.game_id is null);
+        //
         return this.client.query('DELETE FROM completed_game where game_id = $1', [gameId]);
       });
   }

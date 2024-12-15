@@ -8,6 +8,7 @@ import {isICorporationCard} from '../cards/corporation/ICorporationCard';
 import {ICard} from '../cards/ICard';
 import {IPlayer} from '../IPlayer';
 import {OneOrArray} from '../../common/utils/types';
+import {intersection} from '../../common/utils/utils';
 
 export type CountingMode =
   'raw' | // Count face-up tags literally, including Leavitt Station.
@@ -182,23 +183,18 @@ export class Tags {
     return tagCount;
   }
 
-  // TODO(kberg): it might be more correct to count all the tags
-  // in a game regardless of expansion? But if that happens it needs
-  // to be done once, during set-up so that this operation doesn't
-  // always go through every player every time.
   private _tagsInGame = 0;
   /**
    * Return the number of tags in this game, excluding events, wild, and clone tags.
    *
    * This is also the maximum value that distinctTagCount can return.
    */
+  // Public for testing
   public tagsInGame(): number {
+    const tags = this.player.game.tags;
     if (this._tagsInGame === 0) {
-      this._tagsInGame = 10;
-      const game = this.player.game;
-      if (game.gameOptions.venusNextExtension) this._tagsInGame++;
-      if (game.gameOptions.moonExpansion) this._tagsInGame++;
-      if (game.gameOptions.pathfindersExpansion) this._tagsInGame++;
+      const i = intersection(tags, [Tag.EVENT, Tag.CLONE, Tag.WILD]);
+      this._tagsInGame = tags.length - i.length;
     }
     return this._tagsInGame;
   }

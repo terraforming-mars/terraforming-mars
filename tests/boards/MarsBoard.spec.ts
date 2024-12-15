@@ -6,6 +6,9 @@ import {TestPlayer} from '../TestPlayer';
 import {MarsBoard} from '../../src/server/boards/MarsBoard';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptions';
+import {ArcadianCommunities} from '../../src/server/cards/promo/ArcadianCommunities';
+import {testGame} from '../TestGame';
+import {AresHandler} from '../../src/server/ares/AresHandler';
 
 describe('MarsBoard', function() {
   let board: MarsBoard;
@@ -98,5 +101,15 @@ describe('MarsBoard', function() {
         '53', '58',
         '59', '60', '61', '62', '63',
       ]);
+  });
+
+  it('Do not include land claimed hazard spaces for Arcadian Communities', () => {
+    const card = new ArcadianCommunities();
+    const [/* game */, player] = testGame(2, {aresExtension: true, aresHazards: true});
+    player.corporations.push(card);
+    const board = player.game.board;
+    const space = board.spaces.find(AresHandler.hasHazardTile);
+    space!.player = player;
+    expect(board.getAvailableSpacesForGreenery(player).length).eq(45);
   });
 });

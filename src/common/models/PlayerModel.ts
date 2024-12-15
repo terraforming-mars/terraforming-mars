@@ -1,7 +1,6 @@
 import {CardModel} from './CardModel';
 import {Color} from '../Color';
 import {IVictoryPointsBreakdown} from '../game/IVictoryPointsBreakdown';
-import {TagCount} from '../cards/TagCount';
 import {PlayerInputModel} from './PlayerInputModel';
 import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
@@ -10,6 +9,7 @@ import {CardName} from '../cards/CardName';
 import {Resource} from '../Resource';
 import {PartyName} from '../turmoil/PartyName';
 import {Agenda} from '../turmoil/Types';
+import {Tag} from '../cards/Tag';
 
 export interface ViewModel {
   game: GameModel;
@@ -67,7 +67,7 @@ export type PublicPlayerModel = {
   steel: number;
   steelProduction: number;
   steelValue: number;
-  tags: ReadonlyArray<TagCount>;
+  tags: Record<Tag, number>
   terraformRating: number;
   timer: TimerModel;
   titanium: number;

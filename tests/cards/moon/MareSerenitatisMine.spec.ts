@@ -22,9 +22,21 @@ describe('MareSerenitatisMine', () => {
     card = new MareSerenitatisMine();
   });
 
-  it('can play', () => {
-    // TODO(kberg): Ensuring resources is going to require changes coming later.
-  });
+  const canPlayRuns = [
+    {steel: 0, titanium: 0, expected: false},
+    {steel: 1, titanium: 1, expected: false},
+    {steel: 0, titanium: 2, expected: false},
+    {steel: 1, titanium: 2, expected: true},
+  ] as const;
+  for (const run of canPlayRuns) {
+    it('can play ' +JSON.stringify(run), () => {
+      player.megaCredits = card.cost;
+      player.steel = run.steel;
+      player.titanium = run.titanium;
+
+      expect(player.canPlay(card)).eq(run.expected);
+    });
+  }
 
   it('play', () => {
     player.titanium = 3;

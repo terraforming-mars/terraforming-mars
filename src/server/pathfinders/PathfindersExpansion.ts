@@ -29,6 +29,7 @@ export class PathfindersExpansion {
   private constructor() {
   }
 
+  // TODO(kberg): Make VenusNext and Moon reference the tags in game.tags and not the expansions.
   public static initialize(gameOptions: GameOptions): PathfindersData {
     return {
       venus: gameOptions.venusNextExtension ? 0 : -1,

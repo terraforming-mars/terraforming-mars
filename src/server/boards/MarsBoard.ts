@@ -121,8 +121,13 @@ export class MarsBoard extends Board {
     // Spaces next to Red City are always unavialable for Greeneries.
     spacesOnLand = this.filterSpacesAroundRedCity(spacesOnLand);
 
-    const spacesForGreenery = spacesOnLand
-      .filter((space) => this.getAdjacentSpaces(space).find((adj) => adj.tile !== undefined && adj.player === player && adj.tile.tileType !== TileType.OCEAN) !== undefined);
+    const spacesForGreenery = spacesOnLand.filter((space) => {
+      return this.getAdjacentSpaces(space).some((adj) => {
+        // TODO(kberg): I think "adj.tile.tileTypep !== TileType.OCEAN" can be removed. Probably doesn't work
+        // for ocean city.
+        return MarsBoard.hasRealTile(adj) && adj.player === player && adj.tile?.tileType !== TileType.OCEAN;
+      });
+    });
 
     // Spaces next to tiles you own
     if (spacesForGreenery.length > 0) {

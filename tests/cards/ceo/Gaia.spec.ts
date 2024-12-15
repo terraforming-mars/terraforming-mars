@@ -6,7 +6,7 @@ import {addGreenery, addCity, cast, forceGenerationEnd, runAllActions} from '../
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Gaia} from '../../../src/server/cards/ceos/Gaia';
 import {NaturalPreserveAres} from '../../../src/server/cards/ares/NaturalPreserveAres';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Networker} from '../../../src/server/milestones/Networker';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';

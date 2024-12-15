@@ -8,7 +8,7 @@ import {Resource} from '../../../src/common/Resource';
 import {SelectProductionToLose} from '../../../src/server/inputs/SelectProductionToLose';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {AresTestHelper} from '../../ares/AresTestHelper';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Caesar} from '../../../src/server/cards/ceos/Caesar';
 
 describe('Caesar', function() {

@@ -3,7 +3,7 @@ import {GeologicalExpedition} from '../../../src/server/cards/pathfinders/Geolog
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Space} from '../../../src/server/boards/Space';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';

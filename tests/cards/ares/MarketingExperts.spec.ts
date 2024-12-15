@@ -3,7 +3,7 @@ import {IGame} from '../../../src/server/IGame';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 

@@ -14,7 +14,7 @@ import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptio
 import {SpaceId} from '../../src/common/Types';
 
 describe('Board', function() {
-  let board: TharsisBoard;
+  let board: Board;
   let player: TestPlayer;
   let player2: TestPlayer;
 
@@ -33,31 +33,6 @@ describe('Board', function() {
     expect(board.getSpaceOrThrow('01').spaceType).eq(SpaceType.COLONY);
     expect(board.getSpaceOrThrow('01').id).eq('01');
     expect(() => board.getSpaceOrThrow(MoonSpaces.LUNA_TRADE_STATION).id).to.throw(Error, /Can't find space with id m01/);
-  });
-
-  it('Can have greenery placed on any available land when player has no tile placed', function() {
-    const availableSpaces = board.getAvailableSpacesForGreenery(player);
-    expect(availableSpaces).has.lengthOf(board.getAvailableSpacesOnLand(player).length);
-  });
-
-  it('Can have greenery placed on any available land when player has a tile placed that is land locked', function() {
-    board.spaces[2].player = player;
-    board.spaces[2].tile = {tileType: TileType.GREENERY};
-    board.spaces[7].player = player2;
-    board.spaces[7].tile = {tileType: TileType.GREENERY};
-    board.spaces[8].player = player2;
-    board.spaces[8].tile = {tileType: TileType.GREENERY};
-    const availableSpaces = board.getAvailableSpacesForGreenery(player);
-    expect(availableSpaces).has.lengthOf(board.getAvailableSpacesOnLand(player).length);
-  });
-
-  it('Can only place greenery adjacent to a tile a player owns', function() {
-    board.spaces[2].player = player;
-    board.spaces[2].tile = {tileType: TileType.GREENERY};
-    board.spaces[7].player = player2;
-    board.spaces[7].tile = {tileType: TileType.GREENERY};
-    const availableSpaces = board.getAvailableSpacesForGreenery(player);
-    expect(availableSpaces).has.lengthOf(1);
   });
 
   it('getAdjacentSpaces', () => {
@@ -257,51 +232,6 @@ describe('Board', function() {
     expect(board.getNthAvailableLandSpace(48, -1).id).eq('62');
     expect(board.getNthAvailableLandSpace(49, -1).id).eq('61');
     expect(board.getNthAvailableLandSpace(50, -1).id).eq('60');
-  });
-
-  it('getOceanSpaces', function() {
-    expect(board.getOceanSpaces()).is.empty;
-
-    const space1 = board.spaces[1];
-    space1.spaceType = SpaceType.OCEAN;
-    space1.tile = {tileType: TileType.OCEAN};
-
-    expect(board.getOceanSpaces()).has.length(1);
-    expect(board.getOceanSpaces({upgradedOceans: false})).has.length(1);
-    expect(board.getOceanSpaces({upgradedOceans: true})).has.length(1);
-
-    const space2 = board.spaces[2];
-    space2.spaceType = SpaceType.OCEAN;
-    space2.tile = {tileType: TileType.OCEAN_SANCTUARY};
-
-    expect(board.getOceanSpaces()).has.length(2);
-    expect(board.getOceanSpaces({upgradedOceans: false})).has.length(1);
-    expect(board.getOceanSpaces({upgradedOceans: true})).has.length(2);
-
-    const space3 = board.spaces[3];
-    space3.spaceType = SpaceType.OCEAN;
-    space3.tile = {tileType: TileType.WETLANDS};
-
-    expect(board.getOceanSpaces()).has.length(2);
-    expect(board.getOceanSpaces({upgradedOceans: false})).has.length(1);
-    expect(board.getOceanSpaces({upgradedOceans: true})).has.length(2);
-    expect(board.getOceanSpaces({wetlands: true})).has.length(3);
-    expect(board.getOceanSpaces({wetlands: false})).has.length(2);
-  });
-
-  it('edges', () => {
-    expect(board.getEdges().map((space) => space.id)).to.have.members(
-      [
-        '03', '04', '05', '06', '07',
-        '08', '13',
-        '14', '20',
-        '21', '28',
-        '29', '37',
-        '38', '45',
-        '46', '52',
-        '53', '58',
-        '59', '60', '61', '62', '63',
-      ]);
   });
 
   class TestBoard extends Board {

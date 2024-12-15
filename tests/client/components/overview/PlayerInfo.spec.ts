@@ -19,7 +19,7 @@ describe('PlayerInfo', function() {
       victoryPointsBreakdown: {
         total: 1,
       },
-      tags: [],
+      tags: {},
     };
     const playerView: RecursivePartial<PlayerViewModel> = {
       thisPlayer: thisPlayer,

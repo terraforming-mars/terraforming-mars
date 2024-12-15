@@ -2,7 +2,6 @@
 
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
-import {TagCount} from '../../common/cards/TagCount';
 import {ALL_TAGS, Tag} from '../../common/cards/Tag';
 import {isICorporationCard} from '../cards/corporation/ICorporationCard';
 import {ICard} from '../cards/ICard';
@@ -40,8 +39,6 @@ export type MultipleCountMode =
  *
  */
 export class Tags {
-  private static COUNTED_TAGS = ALL_TAGS.filter((tag) => tag !== Tag.CLONE && tag !== Tag.EVENT);
-
   private player: IPlayer;
   constructor(player: IPlayer) {
     this.player = player;
@@ -49,14 +46,16 @@ export class Tags {
 
   /**
    * Returns a count of tags on face-up cards, plus a count of events.
-   *
-   * Excludes Clone tags.
    */
-  public countAllTags(): Array<TagCount> {
-    const counts: Array<TagCount> = Tags.COUNTED_TAGS.map((tag) => {
-      return {tag, count: this.count(tag, 'raw')};
-    }).filter((tag) => tag.count > 0);
-    counts.push({tag: Tag.EVENT, count: this.player.getPlayedEventsCount()});
+  public countAllTags(): Record<Tag, number> {
+    const counts: Record<Tag, number> = {} as Record<Tag, number>;
+    for (const tag of ALL_TAGS) {
+      if (tag === Tag.EVENT) {
+        continue;
+      }
+      counts[tag] = this.count(tag, 'raw');
+    }
+    counts[Tag.EVENT] = this.player.getPlayedEventsCount();
     return counts;
   }
 

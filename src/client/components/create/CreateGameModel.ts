@@ -9,6 +9,7 @@ export type CreateGameModel = {
   allOfficialExpansions: boolean;
   altVenusBoard: boolean;
   aresExtension: boolean;
+  aresExtremeVariant: boolean;
   bannedCards: Array<CardName>;
   board: BoardNameType;
   boards: Array<BoardNameType>;

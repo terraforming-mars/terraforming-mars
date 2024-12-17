@@ -50,6 +50,7 @@ export interface NewGameConfig {
   communityCardsOption: boolean;
   aresExtension: boolean;
   // aresHazards: boolean;
+  aresExtremeVariant: boolean;
   politicalAgendasExtension: AgendaStyle;
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;

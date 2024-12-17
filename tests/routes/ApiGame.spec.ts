@@ -56,6 +56,7 @@ describe('ApiGame', () => {
         'gameOptions': {
           'altVenusBoard': false,
           'aresExtension': false,
+          'aresExtremeVariant': false,
           'bannedCards': [],
           'boardName': 'tharsis',
           'ceoExtension': false,

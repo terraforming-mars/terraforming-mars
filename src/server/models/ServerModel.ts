@@ -380,6 +380,7 @@ export class Server {
     return {
       altVenusBoard: options.altVenusBoard,
       aresExtension: options.aresExtension,
+      aresExtremeVariant: options.aresExtremeVariant,
       boardName: options.boardName,
       bannedCards: options.bannedCards,
       includedCards: options.includedCards,

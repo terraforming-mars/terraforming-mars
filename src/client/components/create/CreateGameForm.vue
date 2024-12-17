@@ -78,6 +78,14 @@
                                 <span v-i18n>Ares</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Ares" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
+                            <template v-if="aresExtension">
+                                <input type="checkbox" v-model="aresExtremeVariant" id="aresExtremeVariantVariant-checkbox">
+                                <label for="aresExtremeVariantVariant-checkbox">
+                                    <div class="create-game-expansion-icon expansion-icon-ares"></div>
+                                    <span v-i18n>Extreme</span> &nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Ares-Extreme" class="tooltip" target="_blank">&#9432;</a>
+                                </label>
+                            </template>
+
                             <input type="checkbox" name="community" id="communityCards-checkbox" v-model="communityCardsOption">
                             <label for="communityCards-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-community"></div>
@@ -636,6 +644,7 @@ export default (Vue as WithRefs<Refs>).extend({
       promoCardsOption: false,
       communityCardsOption: false,
       aresExtension: false,
+      aresExtremeVariant: false,
       politicalAgendasExtension: AgendaStyle.STANDARD,
       moonExpansion: false,
       pathfindersExpansion: false,
@@ -1225,6 +1234,7 @@ export default (Vue as WithRefs<Refs>).extend({
         promoCardsOption,
         communityCardsOption,
         aresExtension: aresExtension,
+        aresExtremeVariant: this.aresExtremeVariant,
         politicalAgendasExtension: politicalAgendasExtension,
         moonExpansion: moonExpansion,
         pathfindersExpansion: pathfindersExpansion,

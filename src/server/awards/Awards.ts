@@ -53,6 +53,7 @@ import {Collector} from './modular/Collector';
 import {Politician} from './modular/Politician';
 import {Manufacturer} from './modular/Manufacturer';
 import {Incorporator} from './modular/Incorporator';
+import {Rugged} from './Rugged';
 
 export const THARSIS_AWARDS = [
   new Landlord(),
@@ -92,6 +93,7 @@ export const HELLAS_AWARDS = [
 
 export const ARES_AWARDS = [
   new Entrepreneur(),
+  new Rugged(),
 ];
 
 export const MOON_AWARDS = [

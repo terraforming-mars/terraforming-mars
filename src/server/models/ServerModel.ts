@@ -395,7 +395,6 @@ export class Server {
       escapeVelocityPenalty: options.escapeVelocityPenalty,
       fastModeOption: options.fastModeOption,
       includeFanMA: options.includeFanMA,
-      includeVenusMA: options.includeVenusMA,
       initialDraftVariant: options.initialDraftVariant,
       moonExpansion: options.moonExpansion,
       pathfindersExpansion: options.pathfindersExpansion,

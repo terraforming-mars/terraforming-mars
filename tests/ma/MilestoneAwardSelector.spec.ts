@@ -129,7 +129,6 @@ describe('MilestoneAwardSelector', () => {
       ...DEFAULT_GAME_OPTIONS,
       'aresExtension': true,
       'boardName': BoardName.TERRA_CIMMERIA_NOVUS,
-      'includeVenusMA': true,
       'includeFanMA': false,
       'pathfindersExpansion': true,
       'randomMA': RandomMAOptionType.NONE,

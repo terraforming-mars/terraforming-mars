@@ -22,7 +22,14 @@ describe('MareImbriumMine', () => {
   });
 
   it('can play', () => {
-    // TODO(kberg): Ensuring resources is going to require changes coming later.
+    player.megaCredits = card.cost;
+    player.titanium = 0;
+
+    expect(player.canPlay(card)).is.false;
+
+    player.titanium = 1;
+
+    expect(player.canPlay(card)).is.true;
   });
 
   it('play', () => {

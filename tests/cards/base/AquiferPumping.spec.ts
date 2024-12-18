@@ -20,7 +20,7 @@ describe('AquiferPumping', function() {
   });
 
   it('Should play', function() {
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Should act', function() {

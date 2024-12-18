@@ -3,7 +3,7 @@ import {VenusMagnetizer} from '../../../src/server/cards/venusNext/VenusMagnetiz
 import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
-import {setVenusScaleLevel} from '../../TestingUtils';
+import {cast, setVenusScaleLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('VenusMagnetizer', function() {
@@ -24,7 +24,7 @@ describe('VenusMagnetizer', function() {
   it('Should play', function() {
     setVenusScaleLevel(game, 10);
     expect(card.canPlay(player)).is.true;
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Should act', function() {

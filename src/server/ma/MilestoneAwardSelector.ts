@@ -2,14 +2,11 @@ import {
   AMAZONIS_PLANITIA_AWARDS,
   ARABIA_TERRA_AWARDS,
   ARES_AWARDS,
-  Awards,
   ELYSIUM_AWARDS,
+  getAwardByNameOrThrow,
   HELLAS_AWARDS,
-  MOON_AWARDS,
   TERRA_CIMMERIA_AWARDS,
   THARSIS_AWARDS,
-  UNDERWORLD_AWARDS,
-  // UTOPIA_PLANITIA_AWARDS,
   VASTITAS_BOREALIS_AWARDS,
   VENUS_AWARDS,
 } from '../awards/Awards';
@@ -22,13 +19,10 @@ import {
   ARABIA_TERRA_MILESTONES,
   ARES_MILESTONES,
   ELYSIUM_MILESTONES,
+  getMilestoneByNameOrThrow,
   HELLAS_MILESTONES,
-  Milestones,
-  MOON_MILESTONES,
   TERRA_CIMMERIA_MILESTONES,
   THARSIS_MILESTONES,
-  UNDERWORLD_MILESTONES,
-  // UTOPIA_PLANITIA_MILESTONES,
   VASTITAS_BOREALIS_MILESTONES,
   VENUS_MILESTONES,
 } from '../milestones/Milestones';
@@ -39,10 +33,11 @@ import {OneGiantStep} from '../moon/OneGiantStep';
 import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
 import {inplaceShuffle} from '../utils/shuffle';
 import {UnseededRandom} from '../../common/utils/Random';
-import {MilestoneName} from '../../common/ma/MilestoneName';
-import {AwardName} from '../../common/ma/AwardName';
-import {inplaceRemove} from '../../common/utils/utils';
+import {MilestoneName, milestoneNames} from '../../common/ma/MilestoneName';
+import {AwardName, awardNames} from '../../common/ma/AwardName';
 import {synergies} from './MilestoneAwardSynergies';
+import {AWARD_COMPATIBILITY, CompatibilityDetails, MILESTONE_COMPATIBILITY} from '../../common/ma/compatibilities';
+import {Expansion, EXPANSIONS} from '../../common/cards/GameModule';
 
 type DrawnMilestonesAndAwards = {
   milestones: Array<IMilestone>,
@@ -51,7 +46,7 @@ type DrawnMilestonesAndAwards = {
 
 // Function to compute max synergy of a given set of milestones and awards.
 // Exported for testing
-export function maximumSynergy(names: Array<string>) : number {
+export function maximumSynergy(names: ReadonlyArray<MilestoneName | AwardName>) : number {
   let max = 0;
   for (let i = 0; i < names.length - 1; i++) {
     for (let j = i + 1; j < names.length; j++) {
@@ -97,8 +92,7 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     drawnMilestonesAndAwards.awards.push(...awards);
   }
 
-  const includeVenus = gameOptions.venusNextExtension && gameOptions.includeVenusMA;
-  const requiredQty = includeVenus ? 6 : 5;
+  const requiredQty = gameOptions.venusNextExtension ? 6 : 5;
 
   switch (gameOptions.randomMA) {
   case RandomMAOptionType.NONE:
@@ -130,7 +124,7 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
       // There's no need to add more milestones and awards for these boards, so it returns.
       return getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
     }
-    if (includeVenus) {
+    if (gameOptions.venusNextExtension) {
       push(VENUS_MILESTONES, VENUS_AWARDS);
     }
     if (gameOptions.aresExtension) {
@@ -159,6 +153,64 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
   return drawnMilestonesAndAwards;
 }
 
+/**
+ * Return the list of possible milestones and awards for a given game. Only meant to work with random selection.
+ *
+ * Isn't meant to work with RandomMAOptionType.NONE
+ *
+ * exported for tests
+ */
+export function getCandidates(gameOptions: GameOptions): [Array<MilestoneName>, Array<AwardName>] {
+  function include(compatibility: CompatibilityDetails): boolean {
+    if (!gameOptions.modularMA) {
+      switch (compatibility.map) {
+      case BoardName.THARSIS:
+      case BoardName.ELYSIUM:
+      case BoardName.HELLAS:
+        return true;
+      case undefined:
+        return false;
+      default:
+        if (compatibility.map !== undefined && gameOptions.includeFanMA === false) {
+          return false;
+        }
+      }
+    } else {
+      if (compatibility.modular !== true) {
+        return false;
+      }
+    }
+    const foo: Record<Expansion, keyof GameOptions> = {
+      corpera: 'corporateEra',
+      promo: 'promoCardsOption',
+      venus: 'venusNextExtension',
+      colonies: 'coloniesExtension',
+      prelude: 'preludeExtension',
+      prelude2: 'prelude2Expansion',
+      turmoil: 'turmoilExtension',
+      community: 'communityCardsOption',
+      ares: 'aresExtension',
+      moon: 'moonExpansion',
+      pathfinders: 'pathfindersExpansion',
+      ceo: 'ceoExtension',
+      starwars: 'starWarsExpansion',
+      underworld: 'underworldExpansion',
+    };
+    for (const expansion of EXPANSIONS) {
+      if (compatibility.compatibility === expansion) {
+        if (gameOptions[foo[expansion]] !== true) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+  const candidateMilestones: Array<MilestoneName> = milestoneNames.filter((name) => include(MILESTONE_COMPATIBILITY[name]));
+  const candidateAwards: Array<AwardName> = awardNames.filter((name) => include(AWARD_COMPATIBILITY[name]));
+
+  return [candidateMilestones, candidateAwards];
+}
+
 // Selects |numberMARequested| milestones and |numberMARequested| awards from all available awards and milestones (optionally including
 // Venusian.) It does this by following these rules:
 // 1) No pair with synergy above |maxSynergyAllowed|.
@@ -176,59 +228,7 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
     throw new Error('No limited synergy milestones and awards set was generated after ' + maxAttempts + ' attempts. Please try again.');
   }
 
-  function toName<T>(e: {name: T}): T {
-    return e.name;
-  }
-
-  const candidateMilestones: Array<MilestoneName> = [...THARSIS_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
-  const candidateAwards: Array<AwardName> = [...THARSIS_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
-
-  if (gameOptions.venusNextExtension && gameOptions.includeVenusMA) {
-    candidateMilestones.push(...VENUS_MILESTONES.map(toName));
-    candidateAwards.push(...VENUS_AWARDS.map(toName));
-  }
-  if (gameOptions.aresExtension) {
-    candidateMilestones.push(...ARES_MILESTONES.map(toName));
-    candidateAwards.push(...ARES_AWARDS.map(toName));
-  }
-  if (gameOptions.moonExpansion) {
-    candidateMilestones.push(...MOON_MILESTONES.map(toName));
-    candidateAwards.push(...MOON_AWARDS.map(toName));
-  }
-
-  if (gameOptions.underworldExpansion) {
-    candidateMilestones.push(...UNDERWORLD_MILESTONES.map(toName));
-    candidateAwards.push(...UNDERWORLD_AWARDS.map(toName));
-  }
-
-  if (gameOptions.includeFanMA) {
-    candidateMilestones.push(
-      ...ARABIA_TERRA_MILESTONES.map(toName),
-      ...AMAZONIS_PLANITIA_MILESTONES.map(toName),
-      ...TERRA_CIMMERIA_MILESTONES.map(toName),
-      ...VASTITAS_BOREALIS_MILESTONES.map(toName));
-
-    candidateAwards.push(
-      ...ARABIA_TERRA_AWARDS.map(toName),
-      ...AMAZONIS_PLANITIA_AWARDS.map(toName),
-      ...TERRA_CIMMERIA_AWARDS.map(toName),
-      ...VASTITAS_BOREALIS_AWARDS.map(toName));
-
-    if (!gameOptions.pathfindersExpansion) {
-      inplaceRemove(candidateMilestones, 'Martian');
-    }
-    if (!gameOptions.coloniesExtension) {
-      inplaceRemove(candidateMilestones, 'Colonizer');
-      inplaceRemove(candidateMilestones, 'Pioneer');
-    }
-    if (!gameOptions.turmoilExtension) {
-      inplaceRemove(candidateAwards, 'T. Politician');
-    }
-    // Special-case Terran and Businessperson, which are exactly the same.
-    if (candidateMilestones.includes('Terran') && candidateMilestones.includes('Businessperson')) {
-      inplaceRemove(candidateMilestones, 'Terran');
-    }
-  }
+  const [candidateMilestones, candidateAwards] = getCandidates(gameOptions);
 
   inplaceShuffle(candidateMilestones, UnseededRandom.INSTANCE);
   inplaceShuffle(candidateAwards, UnseededRandom.INSTANCE);
@@ -260,8 +260,8 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
   }
 
   return {
-    milestones: accum.milestones.map((name) => Milestones.getByName(name)),
-    awards: accum.awards.map((name) => Awards.getByName(name)),
+    milestones: accum.milestones.map((name) => getMilestoneByNameOrThrow(name)),
+    awards: accum.awards.map((name) => getAwardByNameOrThrow(name)),
   };
 }
 

@@ -50,7 +50,7 @@ describe('AerobrakedAmmoniaAsteroid', function() {
     const otherMicrobeCard = new Decomposers();
     player.playedCards.push(selectedCard, otherMicrobeCard);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
 
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectCard);

@@ -2,7 +2,7 @@ import {BaseMilestone} from './IMilestone';
 import {IPlayer} from '../IPlayer';
 import {Tag} from '../../common/cards/Tag';
 
-export class Electrician extends BaseMilestone {
+export class VElectrician extends BaseMilestone {
   constructor() {
     super(
       'V. Electrician',

@@ -5,7 +5,7 @@ import {testGame} from '../TestGame';
 import {addGreenery, addCity, cast, runAllActions} from '../TestingUtils';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {NaturalPreserveAres} from '../../src/server/cards/ares/NaturalPreserveAres';
-import {EmptyBoard} from '../ares/EmptyBoard';
+import {EmptyBoard} from '../testing/EmptyBoard';
 import {Networker} from '../../src/server/milestones/Networker';
 
 describe('Networker', () => {

@@ -28,7 +28,7 @@ describe('BactoviralResearch', function() {
     const card4 = new Tardigrades();
     player.playedCards.push(card2, card3, card4);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectCard<ICard>);
     action.cb([card3]);
@@ -39,7 +39,7 @@ describe('BactoviralResearch', function() {
   it('Should play with single microbe card', function() {
     const microbeCard = new RegolithEaters();
     player.playedCards.push(microbeCard);
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
 
     runAllActions(game);
 
@@ -48,7 +48,7 @@ describe('BactoviralResearch', function() {
   });
 
   it('Should play with no microbe cards', function() {
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
 
     expect(player.cardsInHand.length).to.eq(1);
@@ -57,7 +57,7 @@ describe('BactoviralResearch', function() {
   it('Should ignore non-microbe cards', () => {
     const securityFleetCard = new SecurityFleet();
     player.playedCards.push(securityFleetCard);
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
 
     runAllActions(game);
 
@@ -68,7 +68,7 @@ describe('BactoviralResearch', function() {
   it('Should ignore cards with microbe tags but does not collect microbe resources.', () => {
     const pharmacyUnion = new PharmacyUnion();
     player.corporations.push(pharmacyUnion);
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
 
     runAllActions(game);
 

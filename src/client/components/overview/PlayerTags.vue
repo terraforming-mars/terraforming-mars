@@ -108,8 +108,12 @@ const getTagCount = (tagName: InterfaceTagsType, player: PublicPlayerModel): num
     return player.excavations;
   case SpecialTags.CORRUPTION:
     return player.corruption;
+  case 'all':
+  case 'separator':
+    return -1;
+  default:
+    return player.tags[tagName];
   }
-  return player.tags.find((tag) => tag.tag === tagName)?.count ?? 0;
 };
 
 export default Vue.extend({

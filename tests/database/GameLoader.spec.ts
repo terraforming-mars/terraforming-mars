@@ -8,7 +8,7 @@ import {TestPlayer} from '../TestPlayer';
 import {Color} from '../../src/common/Color';
 import {GameIdLedger} from '../../src/server/database/IDatabase';
 import {GameId, PlayerId} from '../../src/common/Types';
-import {restoreTestDatabase, restoreTestGameLoader, setTestDatabase, setTestGameLoader} from '../utils/setup';
+import {restoreTestDatabase, restoreTestGameLoader, setTestDatabase, setTestGameLoader} from '../testing/setup';
 import {sleep} from '../TestingUtils';
 import {InMemoryDatabase} from '../testing/InMemoryDatabase';
 import {FakeClock} from '../common/FakeClock';

@@ -25,7 +25,8 @@ export class DecreaseAnyProduction extends DeferredAction<boolean> {
   }
 
   private attack(target: IPlayer): void {
-    target.maybeBlockAttack(this.player, (proceed: boolean) => {
+    const msg = message('lose ${0} ${1} production', (b) => b.number(this.options.count).string(this.resource));
+    target.maybeBlockAttack(this.player, msg, (proceed: boolean) => {
       if (proceed) {
         target.production.add(this.resource, -this.options.count, {log: true, from: this.player, stealing: this.options.stealing});
       }

@@ -7,7 +7,7 @@ import {Zan} from '../../../src/server/cards/ceos/Zan';
 import {ReleaseOfInertGases} from '../../../src/server/cards/base/ReleaseOfInertGases';
 import {forceGenerationEnd, setRulingParty, runAllActions} from '../../TestingUtils';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {TPolitician} from '../../../src/server/awards/terraCimmeria/Politician';
+import {TPolitician} from '../../../src/server/awards/terraCimmeria/TPolitician';
 
 describe('Zan', function() {
   let card: Zan;

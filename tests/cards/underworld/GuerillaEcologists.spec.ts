@@ -3,7 +3,7 @@ import {GuerillaEcologists} from '../../../src/server/cards/underworld/GuerillaE
 import {testGame} from '../../TestGame';
 import {addGreenery, cast, runAllActions} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
 

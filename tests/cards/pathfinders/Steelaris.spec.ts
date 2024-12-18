@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {TileType} from '../../../src/common/TileType';
 import {runAllActions} from '../../TestingUtils';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 
 describe('Steelaris', function() {
   let card: Steelaris;

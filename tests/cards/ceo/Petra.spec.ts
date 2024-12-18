@@ -8,7 +8,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
 import {testGame} from '../../TestGame';
 import {Petra} from '../../../src/server/cards/ceos/Petra';
-import {TPolitician} from '../../../src/server/awards/terraCimmeria/Politician';
+import {TPolitician} from '../../../src/server/awards/terraCimmeria/TPolitician';
 
 describe('Petra', function() {
   let card: Petra;

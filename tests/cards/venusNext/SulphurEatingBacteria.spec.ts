@@ -24,7 +24,7 @@ describe('SulphurEatingBacteria', function() {
   it('Should play', function() {
     setVenusScaleLevel(game, 6);
     expect(card.canPlay(player)).is.true;
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Should act - both actions available', function() {

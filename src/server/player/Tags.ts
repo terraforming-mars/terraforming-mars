@@ -2,13 +2,12 @@
 
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
-import {TagCount} from '../../common/cards/TagCount';
 import {ALL_TAGS, Tag} from '../../common/cards/Tag';
-import {ICorporationCard, isICorporationCard} from '../cards/corporation/ICorporationCard';
+import {isICorporationCard} from '../cards/corporation/ICorporationCard';
 import {ICard} from '../cards/ICard';
-import {IProjectCard} from '../cards/IProjectCard';
 import {IPlayer} from '../IPlayer';
 import {OneOrArray} from '../../common/utils/types';
+import {intersection} from '../../common/utils/utils';
 
 export type CountingMode =
   'raw' | // Count face-up tags literally, including Leavitt Station.
@@ -40,8 +39,6 @@ export type MultipleCountMode =
  *
  */
 export class Tags {
-  private static COUNTED_TAGS = ALL_TAGS.filter((tag) => tag !== Tag.CLONE && tag !== Tag.EVENT);
-
   private player: IPlayer;
   constructor(player: IPlayer) {
     this.player = player;
@@ -49,14 +46,16 @@ export class Tags {
 
   /**
    * Returns a count of tags on face-up cards, plus a count of events.
-   *
-   * Excludes Clone tags.
    */
-  public countAllTags(): Array<TagCount> {
-    const counts: Array<TagCount> = Tags.COUNTED_TAGS.map((tag) => {
-      return {tag, count: this.count(tag, 'raw')};
-    }).filter((tag) => tag.count > 0);
-    counts.push({tag: Tag.EVENT, count: this.player.getPlayedEventsCount()});
+  public countAllTags(): Record<Tag, number> {
+    const counts: Record<Tag, number> = {} as Record<Tag, number>;
+    for (const tag of ALL_TAGS) {
+      if (tag === Tag.EVENT) {
+        continue;
+      }
+      counts[tag] = this.count(tag, 'raw');
+    }
+    counts[Tag.EVENT] = this.player.getPlayedEventsCount();
     return counts;
   }
 
@@ -145,11 +144,11 @@ export class Tags {
   protected rawCount(tag: Tag, includeEventsTags: boolean) {
     let tagCount = 0;
 
-    this.player.tableau.forEach((card: IProjectCard | ICorporationCard) => {
-      if (!includeEventsTags && card.type === CardType.EVENT) return;
-      if (isICorporationCard(card) && card.isDisabled) return;
+    for (const card of this.player.tableau) {
+      if (!includeEventsTags && card.type === CardType.EVENT) continue;
+      if (isICorporationCard(card) && card.isDisabled) continue;
       tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
-    });
+    }
 
     return tagCount;
   }
@@ -183,6 +182,22 @@ export class Tags {
     return tagCount;
   }
 
+  private _tagsInGame = 0;
+  /**
+   * Return the number of tags in this game, excluding events, wild, and clone tags.
+   *
+   * This is also the maximum value that distinctTagCount can return.
+   */
+  // Public for testing
+  public tagsInGame(): number {
+    const tags = this.player.game.tags;
+    if (this._tagsInGame === 0) {
+      const i = intersection(tags, [Tag.EVENT, Tag.CLONE, Tag.WILD]);
+      this._tagsInGame = tags.length - i.length;
+    }
+    return this._tagsInGame;
+  }
+
   /**
    * Counts the number of distinct tags the player has.
    *
@@ -191,34 +206,28 @@ export class Tags {
    */
   public distinctCount(mode: DistinctCountMode, extraTag?: Tag): number {
     const uniqueTags = new Set<Tag>();
+    const playerIsOdyssey = this.player.isCorporation(CardName.ODYSSEY);
     let wildTagCount = 0;
 
-    const addTag = (tag: Tag) => {
-      if (tag === Tag.WILD) {
-        wildTagCount++;
-      } else {
-        uniqueTags.add(tag);
+    for (const card of this.player.tableau) {
+      if (card.isDisabled) {
+        continue;
       }
-    };
-
-    for (const card of this.player.corporations) {
-      if (!card.isDisabled) {
-        card.tags.forEach(addTag);
-      }
-    }
-    for (const card of this.player.playedCards) {
-      if (card.type !== CardType.EVENT) {
-        card.tags.forEach(addTag);
-      }
-    }
-    if (this.player.isCorporation(CardName.ODYSSEY)) {
-      for (const card of this.player.playedCards) {
-        if (card.type === CardType.EVENT) {
-          card.tags.forEach(addTag);
+      if (playerIsOdyssey || card.type !== CardType.EVENT) {
+        for (const tag of card.tags) {
+          if (tag === Tag.WILD) {
+            wildTagCount++;
+          } else {
+            uniqueTags.add(tag);
+          }
         }
       }
+      if (playerIsOdyssey && card.type === CardType.EVENT) {
+        uniqueTags.add(Tag.EVENT);
+      }
     }
 
+    // This isn't an issue right now, but if extraTag is Tag.WILD, this won't work correctly.
     if (extraTag !== undefined) {
       uniqueTags.add(extraTag);
     }
@@ -231,16 +240,9 @@ export class Tags {
 
     if (mode === 'milestone' && this.player.isCorporation(CardName.CHIMERA)) wildTagCount--;
 
-    // TODO(kberg): it might be more correct to count all the tags
-    // in a game regardless of expansion? But if that happens it needs
-    // to be done once, during set-up so that this operation doesn't
-    // always go through every tag every time.
-    let maxTagCount = 10;
-    const game = this.player.game;
-    if (game.gameOptions.venusNextExtension) maxTagCount++;
-    if (game.gameOptions.moonExpansion) maxTagCount++;
-    if (game.gameOptions.pathfindersExpansion) maxTagCount++;
-    return Math.min(uniqueTags.size + wildTagCount, maxTagCount);
+    let maximum = this.tagsInGame();
+    if (playerIsOdyssey) maximum++;
+    return Math.min(uniqueTags.size + wildTagCount, maximum);
   }
 
   // Return true if this player has all the tags in `tags` showing.

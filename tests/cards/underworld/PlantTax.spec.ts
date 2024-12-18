@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PlantTax} from '../../../src/server/cards/underworld/PlantTax';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {finishGeneration, runAllActions} from '../../TestingUtils';
+import {cast, finishGeneration, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
 describe('PlantTax', function() {
@@ -22,7 +22,7 @@ describe('PlantTax', function() {
     player2.plants = 15;
     player3.plants = 400;
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
 
     runAllActions(game);
 

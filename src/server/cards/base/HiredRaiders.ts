@@ -52,13 +52,7 @@ export class HiredRaiders extends Card implements IProjectCard {
         const optionTitle = message('Steal ${0} steel from ${1}', (b) => b.number(amountStolen).player(target).getMessage());
 
         availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
-          target.maybeBlockAttack(player, (proceed) => {
-            if (proceed) {
-              target.stock.deduct(Resource.STEEL, 2, {log: true, from: player, stealing: true});
-              player.steel += amountStolen;
-            }
-            return undefined;
-          });
+          target.attack(player, Resource.STEEL, 2, {stealing: true, log: true});
           return undefined;
         }));
       }
@@ -68,13 +62,7 @@ export class HiredRaiders extends Card implements IProjectCard {
         const optionTitle = message('Steal ${0} M€ from ${1}', (b) => b.number(amountStolen).player(target));
 
         availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
-          target.maybeBlockAttack(player, (proceed) => {
-            if (proceed) {
-              player.megaCredits += amountStolen;
-              target.stock.deduct(Resource.MEGACREDITS, 3, {log: true, from: player, stealing: true});
-            }
-            return undefined;
-          });
+          target.attack(player, Resource.MEGACREDITS, 3, {log: true, stealing: true});
           return undefined;
         }));
       }

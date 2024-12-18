@@ -48,7 +48,7 @@ describe('OceanCity', function() {
     const oceanSpace = addOcean(player);
     player.production.add(Resource.ENERGY, 1);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 
@@ -70,7 +70,7 @@ describe('OceanCity', function() {
     const oceanSpace = addOcean(player);
     player.production.add(Resource.ENERGY, 1);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 
@@ -95,7 +95,7 @@ describe('OceanCity', function() {
       .filter((space) => space.spaceType === SpaceType.LAND)[0];
     game.addCity(player, citySpace);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 
@@ -104,11 +104,9 @@ describe('OceanCity', function() {
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);
   });
 
-  // TODO(kberg): Add a test where cards that get points for adjacent oceans get credit
-
   it('Ocean City counts as ocean for adjacency', function() {
     const oceanSpace = addOcean(player);
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
     action.cb(oceanSpace);
@@ -125,7 +123,7 @@ describe('OceanCity', function() {
 
   it('Ocean City counts for city-related VP', function() {
     const oceanSpace = addOcean(player);
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
     action.cb(oceanSpace);
@@ -179,7 +177,7 @@ describe('OceanCity', function() {
     game.addOcean(player, oceanSpace);
     expect(player.plants).eq(1);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 

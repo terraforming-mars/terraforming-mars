@@ -1,57 +1,52 @@
 import {expect} from 'chai';
-import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, TERRA_CIMMERIA_AWARDS, THARSIS_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from '../../src/server/awards/Awards';
-import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, MOON_MILESTONES, TERRA_CIMMERIA_MILESTONES, THARSIS_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from '../../src/server/milestones/Milestones';
-import {chooseMilestonesAndAwards, LIMITED_SYNERGY, maximumSynergy, verifySynergyRules} from '../../src/server/ma/MilestoneAwardSelector';
+import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, MODULAR_AWARDS, MOON_AWARDS, TERRA_CIMMERIA_AWARDS, THARSIS_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from '../../src/server/awards/Awards';
+import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, MODULAR_MILESTONES, MOON_MILESTONES, TERRA_CIMMERIA_MILESTONES, THARSIS_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from '../../src/server/milestones/Milestones';
+import {chooseMilestonesAndAwards, getCandidates, LIMITED_SYNERGY, maximumSynergy, verifySynergyRules} from '../../src/server/ma/MilestoneAwardSelector';
 import {RandomMAOptionType} from '../../src/common/ma/RandomMAOptionType';
 import {intersection, toName} from '../../src/common/utils/utils';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptions';
 import {BoardName} from '../../src/common/boards/BoardName';
 import {AwardName} from '../../src/common/ma/AwardName';
-import {MACompatibility} from '../../src/common/ma/compatibilities';
+import {IMilestone} from '../../src/server/milestones/IMilestone';
+import {IAward} from '../../src/server/awards/IAward';
 
 describe('MilestoneAwardSelector', () => {
-  // These aren't particularly excellent tests as much as they help demonstrate
-  // what the original maps, if selected in full, would have as a synergy.
-
-  it('Tharsis milestones and awards have high synergy', () => {
+  const maximumSynergyRuns = [
     // Gardener / Landlord have synergy 6.
-    expect(maximumSynergy([...THARSIS_MILESTONES, ...THARSIS_AWARDS].map(toName))).eq(6);
-  });
-
-  it('Elysium milestones and awards have high synergy', () => {
+    {mas: [...THARSIS_MILESTONES, ...THARSIS_AWARDS], expected: 6},
     // DesertSettler / Estate Dealer has synergy 5.
-    expect(maximumSynergy([...ELYSIUM_MILESTONES, ...ELYSIUM_AWARDS].map(toName))).eq(5);
-  });
-  it('Hellas milestones and awards have high synergy', () => {
+    {mas: [...ELYSIUM_MILESTONES, ...ELYSIUM_AWARDS], expected: 5},
     // Both pairs Polar Explorer / Cultivator and Rim Settler / Space Baron
     // have synergy 3.
-    expect(maximumSynergy([...HELLAS_MILESTONES, ...HELLAS_AWARDS].map(toName))).eq(3);
-  });
-  it('Venus milestones and awards have high synergy', () => {
+    {mas: [...HELLAS_MILESTONES, ...HELLAS_AWARDS], expected: 3},
     // Hoverlord / Venuphine have synergy 5.
-    expect(maximumSynergy([...VENUS_MILESTONES, ...VENUS_AWARDS].map(toName))).eq(5);
+    {mas: [...VENUS_MILESTONES, ...VENUS_AWARDS], expected: 5},
+  ] as const;
+  // These aren't particularly excellent tests as much as they help demonstrate
+  // what the original maps, if selected in full, would have as a synergy.
+  maximumSynergyRuns.forEach((run, idx) => {
+    it('Compute maximum synergy ' + idx, () => {
+      const mas: ReadonlyArray<IMilestone | IAward> = run.mas;
+      expect(maximumSynergy(mas.map(toName))).to.eq(run.expected);
+    });
   });
 
-  it('Tharsis milestones and awards break limited synergy rules', () => {
+  const verifySynergyRuns = [
     // Tharsis milestones and awards has total synergy of 21 and break the rules.
-    expect(verifySynergyRules(
-      [...THARSIS_MILESTONES, ...THARSIS_AWARDS].map(toName),
-      LIMITED_SYNERGY)).eq(false);
-  });
-
-  it('Elysium milestones and awards do not break limited synergy rules', () => {
+    {mas: [...THARSIS_MILESTONES, ...THARSIS_AWARDS], expected: false},
     // Elysium milestones and awards has total synergy of 13 and two high pairs of 4 and 5.
     // This set does not break the rules.
-    expect(verifySynergyRules(
-      [...ELYSIUM_MILESTONES, ...ELYSIUM_AWARDS].map(toName),
-      LIMITED_SYNERGY)).eq(true);
-  });
-
-  it('Hellas milestones and awards do not break limited synergy rules', () => {
+    {mas: [...ELYSIUM_MILESTONES, ...ELYSIUM_AWARDS], expected: true},
     // Hellas milestones and awards has total synergy of 11 and no high pair. It does not break the rules.
-    expect(verifySynergyRules(
-      [...HELLAS_MILESTONES, ...HELLAS_AWARDS].map(toName),
-      LIMITED_SYNERGY)).eq(true);
+    {mas: [...HELLAS_MILESTONES, ...HELLAS_AWARDS], expected: true},
+  ] as const;
+  // These aren't particularly excellent tests as much as they help demonstrate
+  // what the original maps, if selected in full, would have as a synergy.
+  verifySynergyRuns.forEach((run, idx) => {
+    it('Verify limited synergy ' + idx, () => {
+      const mas: ReadonlyArray<IMilestone | IAward> = run.mas;
+      expect(verifySynergyRules(mas.map(toName), LIMITED_SYNERGY)).to.eq(run.expected);
+    });
   });
 
   it('Hellas milestones and awards break stringent limited synergy rules', () => {
@@ -66,29 +61,22 @@ describe('MilestoneAwardSelector', () => {
       })).eq(false);
   });
 
-  it('Main entrance point', () => {
-    // These tests don't test results, they just make sure these calls don't fail.
-    choose({randomMA: RandomMAOptionType.NONE});
-  });
-  it('Main entrance point - limited', () => {
-    choose({randomMA: RandomMAOptionType.LIMITED});
-  });
-  it('Main entrance point - unlimited', () => {
-    choose({randomMA: RandomMAOptionType.UNLIMITED});
-    choose({randomMA: RandomMAOptionType.NONE, moonExpansion: true});
-    choose({randomMA: RandomMAOptionType.LIMITED, moonExpansion: true});
-    choose({randomMA: RandomMAOptionType.UNLIMITED, moonExpansion: true});
-  });
-
-  it('Main entrance point, Ares & Moon enabled', () => {
-    // These tests don't test results, they just make sure these calls don't fail.
-    choose({randomMA: RandomMAOptionType.NONE, aresExtension: true, moonExpansion: true});
-  });
-  it('Main entrance point, Ares & Moon enabled - limited', () => {
-    choose({randomMA: RandomMAOptionType.LIMITED, aresExtension: true, moonExpansion: true});
-  });
-  it('Main entrance point, Ares & Moon enabled - unlimited', () => {
-    choose({randomMA: RandomMAOptionType.UNLIMITED, aresExtension: true, moonExpansion: true});
+  const sanityTestRuns = [
+    {options: {randomMA: RandomMAOptionType.NONE}},
+    {options: {randomMA: RandomMAOptionType.LIMITED}},
+    {options: {randomMA: RandomMAOptionType.UNLIMITED}},
+    {options: {randomMA: RandomMAOptionType.NONE, moonExpansion: true}},
+    {options: {randomMA: RandomMAOptionType.LIMITED, moonExpansion: true}},
+    {options: {randomMA: RandomMAOptionType.UNLIMITED, moonExpansion: true}},
+    {options: {randomMA: RandomMAOptionType.NONE, aresExtension: true, moonExpansion: true}},
+    {options: {randomMA: RandomMAOptionType.LIMITED, aresExtension: true, moonExpansion: true}},
+    {options: {randomMA: RandomMAOptionType.UNLIMITED, aresExtension: true, moonExpansion: true}},
+  ] as const;
+  sanityTestRuns.forEach((run, idx) => {
+    it('sanity test run ' + idx, () => {
+      // These tests don't test results, they just make sure these calls don't fail.
+      choose(run.options);
+    });
   });
 
   it('Do not select fan milestones or awards when that feature is disabled', () => {
@@ -122,20 +110,18 @@ describe('MilestoneAwardSelector', () => {
     const avoidedMilestones = [...VENUS_MILESTONES, ...ARES_MILESTONES, ...MOON_MILESTONES].map(toName);
     avoidedMilestones.push('Pioneer', 'Martian', 'Colonizer');
     avoidedAwards.push('T. Politician');
-    for (let idx = 0; idx < 10000; idx++) {
-      const mas = choose({
-        randomMA: RandomMAOptionType.LIMITED,
-        venusNextExtension: false,
-        aresExtension: false,
-        moonExpansion: false,
-        coloniesExtension: false,
-        turmoilExtension: false,
-        includeFanMA: true,
-      });
+    const [milestones, awards] = getCandidates({...DEFAULT_GAME_OPTIONS,
+      randomMA: RandomMAOptionType.LIMITED,
+      venusNextExtension: false,
+      aresExtension: false,
+      moonExpansion: false,
+      coloniesExtension: false,
+      turmoilExtension: false,
+      includeFanMA: true,
+    });
 
-      expect(intersection(mas.awards.map(toName), avoidedAwards)).is.empty;
-      expect(intersection(mas.milestones.map(toName), avoidedMilestones)).is.empty;
-    }
+    expect(intersection(awards, avoidedAwards)).is.empty;
+    expect(intersection(milestones, avoidedMilestones)).is.empty;
   });
 
   it('novus maps with no randomness render correctly', () => {
@@ -143,7 +129,6 @@ describe('MilestoneAwardSelector', () => {
       ...DEFAULT_GAME_OPTIONS,
       'aresExtension': true,
       'boardName': BoardName.TERRA_CIMMERIA_NOVUS,
-      'includeVenusMA': true,
       'includeFanMA': false,
       'pathfindersExpansion': true,
       'randomMA': RandomMAOptionType.NONE,
@@ -154,20 +139,21 @@ describe('MilestoneAwardSelector', () => {
   });
 
   it('No modular milestones and awards by default', () => {
-    for (let idx = 0; idx < 10000; idx++) {
-      const mas = choose({
-        randomMA: RandomMAOptionType.UNLIMITED,
-        venusNextExtension: true,
-        aresExtension: true,
-        moonExpansion: true,
-        coloniesExtension: true,
-        turmoilExtension: true,
-        includeFanMA: true,
-      });
+    const [milestones, awards] = getCandidates({...DEFAULT_GAME_OPTIONS,
+      randomMA: RandomMAOptionType.UNLIMITED,
+      venusNextExtension: true,
+      aresExtension: true,
+      moonExpansion: true,
+      coloniesExtension: true,
+      turmoilExtension: true,
+      includeFanMA: true,
+    });
 
-      expect(mas.awards.map((e) => MACompatibility[e.name].modular)).does.not.contain(true);
-      expect(mas.milestones.map((e) => MACompatibility[e.name].modular)).does.not.contain(true);
-    }
+    expect(intersection(milestones, MODULAR_MILESTONES.map(toName))).deep.eq([]);
+    expect(intersection(awards, MODULAR_AWARDS.map(toName))).deep.eq([]);
+
+    // Landlord is listed as modular, but should be included here.
+    expect(awards).to.contain('Landlord');
   });
 
   function choose(options: Partial<GameOptions>) {

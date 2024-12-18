@@ -22,14 +22,12 @@ import {Economizer} from './arabiaTerra/Economizer';
 import {Pioneer} from './arabiaTerra/Pioneer';
 import {LandSpecialist} from './arabiaTerra/LandSpecialist';
 import {Martian} from './arabiaTerra/Martian';
-import {Businessperson} from './arabiaTerra/Businessperson';
 import {Capitalist} from './Capitalist';
-import {Electrician} from './Electrician';
+import {VElectrician} from './VElectrician';
 import {Irrigator} from './Irrigator';
 import {Smith} from './Smith';
 import {Tradesman} from './Tradesman';
 import {Colonizer} from './amazonisPlanitia/Colonizer';
-import {Farmer} from './amazonisPlanitia/Farmer';
 import {Minimalist} from './amazonisPlanitia/Minimalist';
 import {Terran} from './amazonisPlanitia/Terran';
 import {Tropicalist} from './amazonisPlanitia/Tropicalist';
@@ -40,6 +38,7 @@ import {Spacefarer} from './terraCimmeria/Spacefarer';
 import {TerraPioneer} from './terraCimmeria/TerraPioneer';
 import {Risktaker} from './underworld/Risktaker';
 import {Tunneler} from './underworld/Tunneler';
+import {Forester} from './modular/Forester';
 import {Fundraiser} from './modular/Fundraiser';
 import {Geologist} from './modular/Geologist';
 import {Landshaper} from './modular/Landshaper';
@@ -103,7 +102,7 @@ export const MOON_MILESTONES = [
 
 export const AMAZONIS_PLANITIA_MILESTONES = [
   new Colonizer(),
-  new Farmer(),
+  new Forester(),
   new Minimalist(),
   new Terran(),
   new Tropicalist(),
@@ -114,7 +113,7 @@ export const ARABIA_TERRA_MILESTONES = [
   new Pioneer(),
   new LandSpecialist(),
   new Martian(),
-  new Businessperson(),
+  new Terran(), // Duplicate of Amazonis Planitia
 ];
 
 export const TERRA_CIMMERIA_MILESTONES = [
@@ -126,7 +125,7 @@ export const TERRA_CIMMERIA_MILESTONES = [
 ];
 
 export const VASTITAS_BOREALIS_MILESTONES = [
-  new Electrician(),
+  new VElectrician(),
   new Smith(),
   new Tradesman(),
   new Irrigator(),
@@ -173,14 +172,14 @@ export const ALL_MILESTONES = [
 ];
 
 // Remove namespace and rename function
-export namespace Milestones {
-  export const ALL = ALL_MILESTONES;
+export function getMilestoneByName(name: string): IMilestone | undefined {
+  return ALL_MILESTONES.find((m) => m.name === name);
+}
 
-  export function getByName(name: string): IMilestone {
-    const milestone = ALL_MILESTONES.find((m) => m.name === name);
-    if (milestone) {
-      return milestone;
-    }
-    throw new Error(`Milestone ${name} not found.`);
+export function getMilestoneByNameOrThrow(name: string): IMilestone {
+  const milestone = getMilestoneByName(name);
+  if (milestone) {
+    return milestone;
   }
+  throw new Error(`Milestone ${name} not found.`);
 }

@@ -3,7 +3,7 @@ import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {IGame} from '../../src/server/IGame';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {AresTestHelper} from './AresTestHelper';
-import {EmptyBoard} from './EmptyBoard';
+import {EmptyBoard} from '../testing/EmptyBoard';
 import {TileType} from '../../src/common/TileType';
 import {Tile} from '../../src/server/Tile';
 import {SpaceType} from '../../src/common/boards/SpaceType';

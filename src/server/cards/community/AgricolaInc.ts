@@ -2,7 +2,6 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
-import {TagCount} from '../../../common/cards/TagCount';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
@@ -41,17 +40,17 @@ export class AgricolaInc extends CorporationCard {
     inplaceRemove(scorableTags, Tag.EVENT);
     inplaceRemove(scorableTags, Tag.CLONE);
 
-    const playerTags : TagCount[] = player.tags.countAllTags();
+    const counts = player.tags.countAllTags();
     let points = 0;
 
     scorableTags.forEach((tag) => {
-      const tagData = playerTags.find((data) => data.tag === tag);
+      const count = counts[tag];
 
-      if (tagData === undefined) {
+      if (count === 0) {
         points -= 2;
-      } else if (tagData.count === 3 || tagData.count === 4) {
+      } else if (count === 3 || count === 4) {
         points += 1;
-      } else if (tagData.count > 4) {
+      } else if (count > 4) {
         points += 2;
       }
     });

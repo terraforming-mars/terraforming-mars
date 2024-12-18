@@ -40,7 +40,7 @@ describe('WildlifeDome', function() {
     player.megaCredits = 15;
     expect(player.canPlay(card)).is.true;
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 

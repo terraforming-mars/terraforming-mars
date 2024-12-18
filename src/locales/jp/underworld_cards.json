@@ -15,7 +15,7 @@
     "Requires at least 1 city tile in play. Gain 1 corruption. Increase your M€ production 2 steps.": "条件：都市タイル1枚以上. 1汚職獲得. MC産出+2.",
 
     "Cave City": "洞窟都市",
-    "Requires 1 excavation marker. Increase your M€ production 1 step. Place a city in a space where YOU have an excavation marker. Regular placement restrictions still apply.": "条件：地下採掘1回以上. MC産出+1. あなたが地下採掘した空きマスに都市を1枚配置.",
+    "Requires 1 excavation marker. Increase your M€ production 1 step. Place a city in a space where YOU have an excavation marker. Regular placement restrictions still apply.": "条件：地下採掘1回以上. MC産出+1. あなたが地下採掘した空きマスに都市を1枚配置. 通常の配置制限は引き続き適用されます。",
 
     "Chemical Factory": "化学工場",
     "Action: Spend 1 plant to excavate an underground resource.": "アクション：1植物を支払い、地下資源を採掘する.",
@@ -69,7 +69,7 @@
 
     "Gaia City": "ガイアシティ",
     "Placement Bonus x2": "配置ボーナス2倍",
-    "Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (including adjacencies.)": "電力産出-1. MC産出+2. 採掘された空きマスに都市を配置. 配置ボーナスおよび隣接ボーナスを倍獲得.",
+    "Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (including adjacencies.) Regular placement restriction still apply.": "電力産出-1. MC産出+2. 採掘された空きマスに都市を配置. 配置ボーナスおよび隣接ボーナスを倍獲得. 通常の配置制限は引き続き適用されます。",
 
     "Geological Survey:underworld": "地質学的調査",
     "Add 1 data resource to ANOTHER card. Identify any 2 underground resources on Mars.": "1データ獲得. 2回火星上の地下資源を調査する.",

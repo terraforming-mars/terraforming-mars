@@ -62,7 +62,7 @@
 "Requires an excavation marker. Gain 1 plant for every excavation marker you have.": "",
 
 "Gaia City": "",
-"Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (incluing adjacencies.)": "",
+"Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (incluing adjacencies.) Regular placement restriction still apply.": "",
 
 "Geological Survey": "",
 "Add 1 data resource to ANOTHER card. Identify any 2 underground resources on Mars.": "",
@@ -110,7 +110,7 @@
 "Labor Trafficking": "",
 "FIRST": "",
 "Effect: The first standard project action you take each generation, except selling patents, costs 6 M€ less.": "",
-  
+
 "Landfill": "",
 "Increase your M€ production 1 step for each different TYPE of production you have at least 1 step of.": "",
 
@@ -141,7 +141,7 @@
 
 "Monopoly": "",
 "Requires 3 corruption. Choose a standard production type. Steal 1 unit of that production from EACH OTHER player. They can block this with corruption.": "",
-  
+
 "Nanofoundry": "",
 "Requires 2 science tags. Reduce your energy production 5 steps. Draw 1 card for every power tag you have, including this.": "",
 
@@ -209,7 +209,7 @@
 
 "Server Sabotage": "",
 "Gain 1 corruption. Remove 2 data from any player. Remove all unclaimed underground resources from the board back into the pile. Their spaces can be identified again.": "",
-  
+
 "Soil Export": "",
 "Excavate an underground resource.": "",
 "At the end of this generation only, during the production phase, gain 12 M€.": "",
@@ -273,5 +273,5 @@
 
 "Volunteer Mining Initiative": "",
 "Excavate 1 underground resource for every 3 cities in play.": ""
-  
+
 }

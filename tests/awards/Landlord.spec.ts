@@ -3,7 +3,7 @@ import {Landlord} from '../../src/server/awards/Landlord';
 import {SpaceName} from '../../src/server/SpaceName';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
-import {EmptyBoard} from '../ares/EmptyBoard';
+import {EmptyBoard} from '../testing/EmptyBoard';
 import {_AresHazardPlacement} from '../../src/server/ares/AresHazards';
 import {TileType} from '../../src/common/TileType';
 import {LandClaim} from '../../src/server/cards/base/LandClaim';

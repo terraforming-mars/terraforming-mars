@@ -198,7 +198,10 @@ export class Server {
     if (waitingFor === undefined) {
       return undefined;
     }
-    return waitingFor.toModel(player);
+    // TODO(kberg): in theory this should be in all the other toModel calls.
+    const model = waitingFor.toModel(player);
+    model.warning = waitingFor.warning;
+    return model;
     // showReset: player.game.inputsThisRound > 0 && player.game.resettable === true && player.game.phase === Phase.ACTION,
   }
 
@@ -403,7 +406,6 @@ export class Server {
       fastModeOption: options.fastModeOption,
       includedCards: options.includedCards,
       includeFanMA: options.includeFanMA,
-      includeVenusMA: options.includeVenusMA,
       initialDraftVariant: options.initialDraftVariant,
       preludeDraftVariant: options.preludeDraftVariant,
       politicalAgendasExtension: options.politicalAgendasExtension,

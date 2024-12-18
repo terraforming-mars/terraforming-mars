@@ -26,7 +26,7 @@ describe('UndergroundCity', function() {
     player.production.add(Resource.ENERGY, 2);
     expect(card.canPlay(player)).is.true;
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 

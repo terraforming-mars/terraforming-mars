@@ -8,7 +8,7 @@ import {Preferences} from '@/client/utils/PreferencesManager';
 
 describe('Milestones', function() {
   const mockMilestone: ClaimedMilestoneModel = {
-    name: 'Farmer',
+    name: 'Forester',
     playerName: 'foo',
     playerColor: 'blue',
     scores: [],
@@ -27,7 +27,7 @@ describe('Milestones', function() {
     await toggler.trigger('click');
     const test = milestone.find('div[class*="ma-name--milestones');
     expect(test.classes()).to.contain('ma-name');
-    expect(test.classes()).to.contain('ma-name--farmer');
+    expect(test.classes()).to.contain('ma-name--forester');
   });
 
   it('milestones show details if previously set to show details', async () => {

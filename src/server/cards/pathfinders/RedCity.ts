@@ -13,7 +13,6 @@ import {IProjectCard} from '../IProjectCard';
 import {message} from '../../logs/MessageBuilder';
 import {Space} from '../../boards/Space';
 import {SpaceType} from '../../../common/boards/SpaceType';
-import {isHazardTileType} from '../../../common/AresTileType';
 
 export class RedCity extends Card implements IProjectCard {
   constructor() {
@@ -74,6 +73,6 @@ export class RedCity extends Card implements IProjectCard {
   }
 
   private isEmpty(space: Space): boolean {
-    return space.spaceType === SpaceType.RESTRICTED || space.tile === undefined || isHazardTileType(space.tile.tileType);
+    return space.spaceType === SpaceType.RESTRICTED ||Board.hasRealTile(space) === false;
   }
 }

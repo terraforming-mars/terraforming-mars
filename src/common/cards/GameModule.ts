@@ -1,5 +1,4 @@
-export const GAME_MODULES = [
-  'base',
+export const EXPANSIONS = [
   'corpera',
   'promo',
   'venus',
@@ -14,6 +13,12 @@ export const GAME_MODULES = [
   'ceo',
   'starwars',
   'underworld',
+] as const;
+export type Expansion = typeof EXPANSIONS[number];
+
+export const GAME_MODULES = [
+  'base',
+  ...EXPANSIONS,
 ] as const;
 export type GameModule = typeof GAME_MODULES[number];
 

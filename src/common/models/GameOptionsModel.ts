@@ -18,7 +18,6 @@ export type GameOptionsModel = {
   fastModeOption: boolean,
   includedCards: Array<CardName>;
   includeFanMA: boolean,
-  includeVenusMA: boolean,
   initialDraftVariant: boolean,
   preludeDraftVariant: boolean,
   politicalAgendasExtension: AgendaStyle,

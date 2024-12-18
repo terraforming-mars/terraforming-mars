@@ -6,7 +6,7 @@ import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {Space} from '../../boards/Space';
-import {isHazardTileType} from '../../../common/AresTileType';
+import {Board} from '../../boards/Board';
 import {BoardType} from '../../boards/BoardType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 
@@ -35,10 +35,7 @@ export class ExpeditionVehicles extends Card implements IProjectCard {
     if (cardOwner === activePlayer) {
       const game = activePlayer.game;
       const board = boardType === BoardType.MARS ? game.board : MoonExpansion.moonData(game).moon;
-      const adjacentSpacesWithTiles = board.getAdjacentSpaces(space)
-        .filter((space) => {
-          return space.tile !== undefined && !isHazardTileType(space.tile.tileType);
-        });
+      const adjacentSpacesWithTiles = board.getAdjacentSpaces(space).filter(Board.hasRealTile);
       if (adjacentSpacesWithTiles.length === 0) {
         cardOwner.drawCard(1);
       }

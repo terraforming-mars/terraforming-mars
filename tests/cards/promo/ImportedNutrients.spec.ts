@@ -40,7 +40,7 @@ describe('ImportedNutrients', function() {
     const decomposers = new Decomposers();
     player.playedCards.push(ants, decomposers);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectCard);
 

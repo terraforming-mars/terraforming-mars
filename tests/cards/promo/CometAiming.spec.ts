@@ -20,7 +20,7 @@ describe('CometAiming', () => {
   });
 
   it('Should play', () => {
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('Can not act', () => {

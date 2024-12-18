@@ -537,7 +537,7 @@ describe('UnderworldExpansion', function() {
     public playerInput: PlayerInput | undefined = undefined;
 
     public run() {
-      this.playerInput = UnderworldExpansion.maybeBlockAttack(this.target, this.perpetrator, (proceed) => {
+      this.playerInput = UnderworldExpansion.maybeBlockAttack(this.target, this.perpetrator, '', (proceed) => {
         this.proceed = proceed;
         this.called = true;
         return undefined;

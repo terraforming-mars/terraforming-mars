@@ -5,7 +5,7 @@ import {testGame} from '../../TestGame';
 import {addGreenery, addCity, cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {NaturalPreserve} from '../../../src/server/cards/base/NaturalPreserve';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Founder} from '../../../src/server/awards/modular/Founder';
 
 describe('Founder', () => {

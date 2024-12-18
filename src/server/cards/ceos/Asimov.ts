@@ -14,7 +14,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {ALL_AWARDS} from '../../awards/Awards';
 import {AwardScorer} from '../../awards/AwardScorer';
 import {message} from '../../logs/MessageBuilder';
-import {MACompatibility} from '../../../common/ma/compatibilities';
+import {AWARD_COMPATIBILITY} from '../../../common/ma/compatibilities';
 
 export class Asimov extends CeoCard {
   constructor() {
@@ -90,10 +90,11 @@ export class Asimov extends CeoCard {
       // Remove awards already in the game
       if (player.game.awards.includes(award)) return false;
       // Remove awards that require unused variants/expansions
-      switch (MACompatibility[award.name].compatibility) {
+      switch (AWARD_COMPATIBILITY[award.name].compatibility) {
       case 'venus': return gameOptions.venusNextExtension;
-      case 'ares': return gameOptions.aresExtension;
+      case 'colonies': return gameOptions.coloniesExtension;
       case 'turmoil': return gameOptions.turmoilExtension;
+      case 'ares': return gameOptions.aresExtension;
       case 'moon': return gameOptions.moonExpansion;
       case 'underworld': return gameOptions.underworldExpansion;
       }

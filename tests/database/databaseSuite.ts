@@ -7,7 +7,7 @@ use(chaiDeepEqualIgnoreUndefined);
 import {ITestDatabase} from './ITestDatabase';
 import {Game} from '../../src/server/Game';
 import {TestPlayer} from '../TestPlayer';
-import {restoreTestDatabase, setTestDatabase} from '../utils/setup';
+import {restoreTestDatabase, setTestDatabase} from '../testing/setup';
 import {testGame} from '../TestGame';
 import {GameId} from '../../src/common/Types';
 import {statusCode} from '../../src/common/http/statusCode';

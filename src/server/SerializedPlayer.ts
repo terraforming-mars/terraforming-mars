@@ -77,5 +77,6 @@ export interface SerializedPlayer extends DeprecatedFields{
     turmoilPolicyActionUsed: boolean;
     underworldData: UnderworldPlayerData;
     victoryPointsByGeneration: Array<number>;
-    globalParameterSteps: Record<GlobalParameter, number>;
+    // TODO(kberg): remove '?' by 2024-12-15
+    globalParameterSteps?: Record<GlobalParameter, number>;
 }

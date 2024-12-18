@@ -40,7 +40,7 @@ describe('PlayerTags', function() {
           name: CardName.LUNA_SENATE,
         },
       ],
-      tags: [],
+      tags: {},
       victoryPointsBreakdown: {
         total: 1,
       },

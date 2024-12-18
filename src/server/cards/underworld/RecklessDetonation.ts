@@ -48,12 +48,7 @@ export class RecklessDetonation extends Card implements IProjectCard {
         const amountRemoved = Math.min(2, target.titanium);
         const optionTitle = this.title(amountRemoved, 'titanium', target);
         availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
-          target.maybeBlockAttack(player, (proceed) => {
-            if (proceed) {
-              target.stock.deduct(Resource.TITANIUM, 2, {log: true, from: player});
-            }
-            return undefined;
-          });
+          target.attack(player, Resource.TITANIUM, 2, {log: true});
           return undefined;
         }));
       }
@@ -62,12 +57,7 @@ export class RecklessDetonation extends Card implements IProjectCard {
         const amountRemoved = Math.min(3, target.steel);
         const optionTitle = this.title(amountRemoved, 'steel', target);
         availableActions.options.push(new SelectOption(optionTitle).andThen(() => {
-          target.maybeBlockAttack(player, (proceed) => {
-            if (proceed) {
-              target.stock.deduct(Resource.STEEL, 3, {log: true, from: player});
-            }
-            return undefined;
-          });
+          target.attack(player, Resource.STEEL, 3, {log: true});
           return undefined;
         }));
       }

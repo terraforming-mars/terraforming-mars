@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {CorporateStronghold} from '../../../src/server/cards/base/CorporateStronghold';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {assertPlaceCity} from '../../assertions';
 
@@ -23,7 +23,7 @@ describe('CorporateStronghold', function() {
     player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(player.game);
 
     assertPlaceCity(player, player.popWaitingFor());

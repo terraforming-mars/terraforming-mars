@@ -59,7 +59,7 @@ describe('Cyanobacteria', function() {
   it('play, many microbe cards', function() {
     player.playedCards = [ghgProducingBacteria, tardigrades, ants];
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
 
     const options = cast(player.game.deferredActions.peek()!.execute(), AndOptions);
 

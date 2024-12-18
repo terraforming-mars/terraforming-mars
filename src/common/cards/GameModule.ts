@@ -14,7 +14,6 @@ export const EXPANSIONS = [
   'starwars',
   'underworld',
 ] as const;
-export type Expansion = typeof EXPANSIONS[number];
 
 export const GAME_MODULES = [
   'base',

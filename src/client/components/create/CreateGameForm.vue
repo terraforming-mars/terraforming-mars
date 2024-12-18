@@ -378,8 +378,7 @@
                             <div v-if="modularMA">
                               The new Milestones and Awards are still in active development.<br/>Please don't report anything but functional issues.
                             </div>
-                            <template v-if="venusNext">
-
+                            <template v-if="expansions.venus">
                                 <input type="checkbox" v-model="requiresVenusTrackCompletion" id="requiresVenusTrackCompletion-checkbox">
                                 <label for="requiresVenusTrackCompletion-checkbox">
                                     <span v-i18n>Mandatory Venus Terraforming</span> &nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#venus-terraforming" class="tooltip" target="_blank">&#9432;</a>
@@ -632,7 +631,6 @@ export default (Vue as WithRefs<Refs>).extend({
       startingCeos: 3,
       startingPreludes: 4,
       preludeDraftVariant: undefined,
-
       preludeToggled: false,
       uploading: false,
     };

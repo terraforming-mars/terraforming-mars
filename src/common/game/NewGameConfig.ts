@@ -53,7 +53,6 @@ export interface NewGameConfig {
   politicalAgendasExtension: AgendaStyle;
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
-  includeVenusMA: boolean;
   modularMA: boolean;
   moonExpansion: boolean;
   pathfindersExpansion: boolean;

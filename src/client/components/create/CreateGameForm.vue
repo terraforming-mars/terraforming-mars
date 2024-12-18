@@ -378,10 +378,6 @@
                               The new Milestones and Awards are still in active development.<br/>Please don't report anything but functional issues.
                             </div>
                             <template v-if="venusNext">
-                                <input type="checkbox" v-model="includeVenusMA" id="venusMA-checkbox">
-                                <label for="venusMA-checkbox">
-                                    <span v-i18n>Venus Milestone/Award</span>
-                                </label>
                                 <input type="checkbox" v-model="requiresVenusTrackCompletion" id="requiresVenusTrackCompletion-checkbox">
                                 <label for="requiresVenusTrackCompletion-checkbox">
                                     <span v-i18n>Mandatory Venus Terraforming</span> &nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#venus-terraforming" class="tooltip" target="_blank">&#9432;</a>
@@ -643,7 +639,6 @@ export default (Vue as WithRefs<Refs>).extend({
       showTimers: true,
       fastModeOption: false,
       removeNegativeGlobalEventsOption: false,
-      includeVenusMA: true,
       includeFanMA: false,
       startingCorporations: 2,
       soloTR: false,
@@ -1069,7 +1064,6 @@ export default (Vue as WithRefs<Refs>).extend({
       const showTimers = this.showTimers;
       const fastModeOption = this.fastModeOption;
       const removeNegativeGlobalEventsOption = this.removeNegativeGlobalEventsOption;
-      const includeVenusMA = this.includeVenusMA;
       const includeFanMA = this.includeFanMA;
       const startingCorporations = this.startingCorporations;
       const soloTR = this.soloTR;
@@ -1232,7 +1226,6 @@ export default (Vue as WithRefs<Refs>).extend({
         showTimers,
         fastModeOption,
         removeNegativeGlobalEventsOption,
-        includeVenusMA,
         includeFanMA,
         modularMA: this.modularMA,
         startingCorporations,

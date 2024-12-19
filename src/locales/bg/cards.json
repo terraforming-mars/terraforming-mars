@@ -483,6 +483,5 @@
   "Select prelude card to play": "Изберете карта Пролог, която да разыграте",
   "Select space for ocean tile": "Изберете място за океански плочка",
   "Select space adjacent to a city tile": "Изберете място, съседно на плочки на града",
-  "Venus Milestone/Award": "Венера - Постигане/Награда",
   "${0} placed ${1} tile on (${2}, ${3}": "${0} постави плочка \"${1}\" на координати (${2}, ${3})"
 }

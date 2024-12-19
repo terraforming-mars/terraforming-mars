@@ -92,8 +92,7 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     drawnMilestonesAndAwards.awards.push(...awards);
   }
 
-  const includeVenus = gameOptions.venusNextExtension && gameOptions.includeVenusMA;
-  const requiredQty = includeVenus ? 6 : 5;
+  const requiredQty = gameOptions.venusNextExtension ? 6 : 5;
 
   switch (gameOptions.randomMA) {
   case RandomMAOptionType.NONE:
@@ -125,7 +124,7 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
       // There's no need to add more milestones and awards for these boards, so it returns.
       return getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
     }
-    if (includeVenus) {
+    if (gameOptions.venusNextExtension) {
       push(VENUS_MILESTONES, VENUS_AWARDS);
     }
     if (gameOptions.aresExtension) {

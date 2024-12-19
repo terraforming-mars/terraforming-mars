@@ -44,6 +44,8 @@ export class Merger extends PreludeCard {
     player.defer(() => {
       return new SelectCard('Choose corporation card to play', 'Play', dealtCorps, {enabled: enabled})
         .andThen(([card]) => {
+          // Allow merged corps to add resources to themselves.
+          player.game.inDoubleDown = false;
           player.playAdditionalCorporationCard(card);
           dealtCorps.forEach((corp) => {
             if (corp.name !== card.name) {

@@ -26,14 +26,12 @@
     <a name="board" class="player_home_anchor"></a>
     <board
       :spaces="game.spaces"
-      :venusNextExtension="game.gameOptions.venusNextExtension"
+      :expansions="game.gameOptions.expansions"
       :venusScaleLevel="game.venusScaleLevel"
       :boardName ="game.gameOptions.boardName"
       :oceans_count="game.oceans"
       :oxygen_level="game.oxygenLevel"
       :temperature="game.temperature"
-      :aresExtension="game.gameOptions.aresExtension"
-      :pathfindersExpansion="game.gameOptions.pathfindersExpansion"
       :altVenusBoard="game.gameOptions.altVenusBoard"
       :aresData="game.aresData"
       :tileView="tileView"
@@ -43,9 +41,9 @@
 
     <turmoil v-if="game.turmoil" :turmoil="game.turmoil"/>
 
-    <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :tileView="tileView"/>
+    <MoonBoard v-if="game.gameOptions.expansions.moon" :model="game.moon" :tileView="tileView"/>
 
-    <PlanetaryTracks v-if="game.gameOptions.pathfindersExpansion" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
+    <PlanetaryTracks v-if="game.gameOptions.expansions.pathfinders" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
 
     <div v-if="spectator.players.length > 1" class="player_home_block--milestones-and-awards">
         <Milestone :milestones="game.milestones" />
@@ -66,7 +64,7 @@
             <colony :colony="colony" :active="colony.isActive"></colony>
         </div>
       </div>
-        <div v-if="game.gameOptions.pathfindersExpansion">
+        <div v-if="game.gameOptions.expansions.pathfinders">
           <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
         </div>
     </div>

@@ -24,6 +24,6 @@ export type ClientCard = {
   resourceType?: CardResource;
   startingMegaCredits?: number; // Corporation and Prelude
   cardCost?: number; // Corporation
-  compatibility: Array<GameModule>;
+  compatibility: Array<GameModule>; // TODO(kberg): Replace with Expansion
   hasAction: boolean; // For Prelude 2 preludes with actions. Can be used for more, of course.
 }

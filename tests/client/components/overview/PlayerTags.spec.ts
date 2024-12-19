@@ -50,6 +50,22 @@ describe('PlayerTags', function() {
       id: 'playerid-foo',
       game: {
         gameOptions: {
+          expansions: {
+            corpera: true,
+            promo: false,
+            venus: true,
+            colonies: false,
+            prelude: false,
+            prelude2: false,
+            turmoil: false,
+            community: false,
+            ares: false,
+            moon: false,
+            pathfinders: false,
+            ceo: false,
+            starwars: false,
+            underworld: false,
+          },
           showTimers: false,
         },
       },
@@ -73,14 +89,28 @@ describe('PlayerTags', function() {
     wrapper.vm.$data.conciseView = false;
   });
 
-  it('tag discounts', function() {
-    const test = function(tag: Tag | 'all', value: number) {
-      const elem = wrapper.find(`[data-test="discount-${tag}"]`);
-      expect(elem.attributes()['amount']).to.eq(`${value}`);
-    };
-    test(Tag.MICROBE, 3);
-    test(Tag.VENUS, 1);
-    expect(() => test(Tag.EARTH, 0)).to.throw(/find did not return/);
-    test('all', 4);
+  function elem(tag: Tag | 'all'): any {
+    const newLocal: Wrapper<any> = wrapper.find(`[data-test="discount-${tag}"]`);
+    return newLocal;
+  }
+
+  function amount(e: Wrapper<any>): string {
+    return e.attributes()['amount'];
+  }
+
+  it('tag discounts - microbe', () => {
+    expect(amount(elem(Tag.MICROBE))).to.eq('3');
+  });
+
+  it('tag discounts - venus', () => {
+    expect(amount(elem(Tag.VENUS))).to.eq('1');
+  });
+
+  it('tag discounts - all', () => {
+    expect(amount(elem('all'))).to.eq('4');
+  });
+
+  it('tag discounts - earth', () => {
+    expect(elem(Tag.EARTH).exists()).to.eq(false);
   });
 });

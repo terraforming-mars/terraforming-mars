@@ -45,7 +45,6 @@ function calc(params: URLSearchParams): string {
 
   if (params.get('venus') === 'true') {
     options.venusNextExtension = true;
-    options.includeVenusMA = true;
   }
 
   if (params.get('ares') === 'true') {
@@ -105,7 +104,6 @@ function simpleGameOptions(): GameOptions {
     boardName: BoardName.THARSIS,
     venusNextExtension: false,
     aresExtension: false,
-    includeVenusMA: false,
     moonExpansion: false,
     pathfindersExpansion: false,
     includeFanMA: false,

@@ -696,7 +696,6 @@ const stored = {
     'escapeVelocityMode': false,
     'escapeVelocityBonusSeconds': 2,
     'fastModeOption': false,
-    'includeVenusMA': true,
     'includeFanMA': false,
     'initialDraftVariant': false,
     'moonExpansion': false,

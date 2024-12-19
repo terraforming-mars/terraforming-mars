@@ -2,12 +2,12 @@ import {Space} from './Space';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {PlayerId, SpaceId} from '../../common/Types';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {BASE_OCEAN_TILES, CITY_TILES, GREENERY_TILES, OCEAN_TILES, TileType} from '../../common/TileType';
+import {BASE_OCEAN_TILES, CITY_TILES, GREENERY_TILES, HAZARD_TILES, OCEAN_TILES, TileType} from '../../common/TileType';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {CardName} from '../../common/cards/CardName';
 import {AresHandler} from '../ares/AresHandler';
 import {Units} from '../../common/Units';
-import {HazardSeverity, hazardSeverity, isHazardTileType} from '../../common/AresTileType';
+import {HazardSeverity, hazardSeverity} from '../../common/AresTileType';
 import {TRSource} from '../../common/cards/TRSource';
 import {sum} from '../../common/utils/utils';
 
@@ -290,13 +290,12 @@ export abstract class Board {
   }
 
   public getHazards(): ReadonlyArray<Space> {
-    return this.spaces.filter((space) => space.tile && isHazardTileType(space.tile.tileType));
+    return this.spaces.filter((space) => space.tile && HAZARD_TILES.has(space.tile.tileType));
   }
 
   /** Hazard tiles don't really count as tiles. */
   public static hasRealTile(space: Space) {
-    return space.tile !== undefined &&
-      isHazardTileType(space.tile.tileType) === false;
+    return space.tile !== undefined && HAZARD_TILES.has(space.tile.tileType) === false;
   }
 
   public serialize(): SerializedBoard {

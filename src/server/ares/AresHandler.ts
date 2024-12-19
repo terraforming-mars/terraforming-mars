@@ -5,7 +5,7 @@ import {Space} from '../boards/Space';
 import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {HazardSeverity, hazardSeverity} from '../../common/AresTileType';
+import {HAZARD_STEPS, HazardSeverity, hazardSeverity} from '../../common/AresTileType';
 import {OCEAN_UPGRADE_TILES, TileType, tileTypeToString} from '../../common/TileType';
 import {Tile} from '../Tile';
 import {AresData, MilestoneCount} from '../../common/ares/AresData';
@@ -124,17 +124,22 @@ export class AresHandler {
     }
   }
 
-  public static maybeIncrementMilestones(aresData: AresData, player: IPlayer, space: Space) {
+  public static maybeIncrementMilestones(aresData: AresData, player: IPlayer, space: Space, hazardSeverity: HazardSeverity) {
     const hasAdjacencyBonus = player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => {
       return (adjacentSpace.adjacency?.bonus?? []).length > 0;
     });
 
+    const entry : MilestoneCount | undefined = aresData.milestoneResults.find((e) => e.id === player.id);
+    if (entry === undefined) {
+      throw new Error('Player ID not in the Ares milestone results map: ' + player.id);
+    }
+
     if (hasAdjacencyBonus) {
-      const entry : MilestoneCount | undefined = aresData.milestoneResults.find((e) => e.id === player.id);
-      if (entry === undefined) {
-        throw new Error('Player ID not in the Ares milestone results map: ' + player.id);
-      }
       entry.count++;
+    }
+    if (hazardSeverity !== HazardSeverity.NONE) {
+      // TODO(kberg): remove ?? 0 by 2025-02-01
+      entry.purifierCount = (entry.purifierCount ?? 0) + 1;
     }
   }
 
@@ -156,26 +161,12 @@ export class AresHandler {
       megaCreditCost += adjacentSpace.adjacency?.cost || 0;
       if (subjectToHazardAdjacency === true) {
         const severity = hazardSeverity(adjacentSpace.tile?.tileType);
-        switch (severity) {
-        case HazardSeverity.MILD:
-          productionCost += 1;
-          break;
-        case HazardSeverity.SEVERE:
-          productionCost += 2;
-          break;
-        }
+        productionCost += HAZARD_STEPS[severity];
       }
     });
 
     const severity = hazardSeverity(space.tile?.tileType);
-    switch (severity) {
-    case HazardSeverity.MILD:
-      megaCreditCost += 8;
-      break;
-    case HazardSeverity.SEVERE:
-      megaCreditCost += 16;
-      break;
-    }
+    megaCreditCost += HAZARD_STEPS[severity] * 8;
 
     return {megacredits: megaCreditCost, production: productionCost};
   }
@@ -248,27 +239,15 @@ export class AresHandler {
     _AresHazardPlacement.onOxygenChange(game, aresData);
   }
 
-  public static grantBonusForRemovingHazard(player: IPlayer, initialTileType: TileType | undefined) {
+  public static grantBonusForRemovingHazard(player: IPlayer, initialTileType: TileType) {
     if (player.game.phase === Phase.SOLAR) {
       return;
     }
-    let steps: number;
-    switch (initialTileType) {
-    case TileType.DUST_STORM_MILD:
-    case TileType.EROSION_MILD:
-      steps = 1;
-      break;
-
-    case TileType.DUST_STORM_SEVERE:
-    case TileType.EROSION_SEVERE:
-      steps = 2;
-      break;
-
-    default:
-      return;
+    const steps = HAZARD_STEPS[hazardSeverity(initialTileType)];
+    if (steps > 0) {
+      player.increaseTerraformRating(steps);
+      player.game.log('${0}\'s TR increases ${1} step(s) for removing ${2}', (b) => b.player(player).number(steps).tileType(initialTileType));
     }
-    player.increaseTerraformRating(steps);
-    player.game.log('${0}\'s TR increases ${1} step(s) for removing ${2}', (b) => b.player(player).number(steps).tileType(initialTileType));
   }
 
   public static anyAdjacentSpaceGivesBonus(board: Board, space: Space, bonus: SpaceBonus): boolean {

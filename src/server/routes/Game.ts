@@ -124,6 +124,7 @@ export class GameHandler extends Handler {
             altVenusBoard: gameReq.altVenusBoard,
             aresExtension: gameReq.aresExtension,
             aresHazards: true, // Not a runtime option.
+            aresExtremeVariant: gameReq.aresExtremeVariant,
             bannedCards: gameReq.bannedCards,
             boardName: gameReq.board,
             ceoExtension: gameReq.ceoExtension,

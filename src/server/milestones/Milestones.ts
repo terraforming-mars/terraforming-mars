@@ -53,6 +53,7 @@ import {Breeder} from './modular/Breeder';
 import {ThermoEngineer} from './modular/ThermoEngineer';
 import {Hydrologist} from './modular/Hydrologist';
 import {Thawer} from './modular/Thawer';
+import {Purifier} from './Purifier';
 // import {Merchant} from './modular/Merchant';
 
 export const THARSIS_MILESTONES = [
@@ -93,6 +94,7 @@ export const HELLAS_MILESTONES = [
 
 export const ARES_MILESTONES = [
   new Networker(),
+  new Purifier(),
 ];
 
 export const MOON_MILESTONES = [

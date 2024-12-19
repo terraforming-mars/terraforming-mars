@@ -10,6 +10,8 @@ export type CreateGameModel = {
   /* A checkbox when selected selects all official expansions */
   allOfficialExpansions: boolean;
   altVenusBoard: boolean;
+  aresExtension: boolean;
+  aresExtremeVariant: boolean;
   bannedCards: Array<CardName>;
   board: BoardNameType;
   boards: Array<BoardNameType>;

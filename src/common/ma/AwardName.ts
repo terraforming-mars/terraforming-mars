@@ -62,6 +62,9 @@ export const awardNames = [
   'Kingpin',
   'EdgeLord',
 
+  // Ares Extreme
+  'Rugged',
+
   // Modular
   'Administrator',
   'Collector',

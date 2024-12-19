@@ -70,6 +70,7 @@ export const MILESTONE_COMPATIBILITY: Record<MilestoneName, CompatibilityDetails
   'ThermoEngineer': {modular: true},
   'Hydrologist': {modular: true},
   'Thawer': {modular: true},
+  'Purifier': {compatibility: 'ares'},
 };
 
 export const AWARD_COMPATIBILITY: Record<AwardName, CompatibilityDetails> = {
@@ -127,4 +128,5 @@ export const AWARD_COMPATIBILITY: Record<AwardName, CompatibilityDetails> = {
   'Electrician': {modular: true},
   'Manufacturer': {modular: true},
   'Politician': {compatibility: 'turmoil', modular: true},
+  'Rugged': {compatibility: 'ares'},
 };

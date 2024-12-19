@@ -60,6 +60,9 @@ export const milestoneNames = [
   'Tunneler',
   'Risktaker',
 
+  // Ares Extreme
+  'Purifier',
+
   // Modular
   'Breeder',
   // 'Briber',

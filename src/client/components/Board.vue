@@ -9,13 +9,13 @@
             <board-space :space="getSpaceById('01')" text="Ganymede Colony" :tileView="tileView"></board-space>
             <board-space :space="getSpaceById('02')" text="Phobos Space Haven" :tileView="tileView"></board-space>
             <board-space :space="getSpaceById('69')" text="Stanford Torus" :tileView="tileView"></board-space>
-            <template v-if="venusNextExtension">
+            <template v-if="expansions.venus">
               <board-space :space="getSpaceById('70')" text="Luna Metropolis" :tileView="tileView"></board-space>
               <board-space :space="getSpaceById('71')" text="Dawn City" :tileView="tileView"></board-space>
               <board-space :space="getSpaceById('72')" text="Stratopolis" :tileView="tileView"></board-space>
               <board-space :space="getSpaceById('73')" text="Maxwell Base" :tileView="tileView"></board-space>
             </template>
-            <template v-if="pathfindersExpansion">
+            <template v-if="expansions.pathfinders">
               <!-- <board-space :space="getSpaceById('74')" text="Martian Transhipment Station" :tileView="tileView"></board-space> -->
               <board-space :space="getSpaceById('75')" text="Ceres Spaceport" :tileView="tileView"></board-space>
               <board-space :space="getSpaceById('76')" text="Dyson Screens" :tileView="tileView"></board-space>
@@ -33,7 +33,7 @@
                 <div :class="getScaleCSS(lvl)" v-for="(lvl, idx) in getValuesForParameter('oxygen')" :key="idx">{{ lvl.strValue }}</div>
             </div>
 
-            <div class="global-numbers-venus" v-if="venusNextExtension">
+            <div class="global-numbers-venus" v-if="expansions.venus">
                 <div :class="getScaleCSS(lvl)" v-for="(lvl, idx) in getValuesForParameter('venus')" :key="idx">{{ lvl.strValue }}</div>
             </div>
 
@@ -46,7 +46,7 @@
               </span>
             </div>
 
-            <div v-if="aresExtension && aresData !== undefined">
+            <div v-if="expansions.ares && aresData !== undefined">
                 <div v-if="aresData.hazardData.erosionOceanCount.available">
                     <div class="global-ares-erosions-icon"></div>
                     <div class="global-ares-erosions-val">{{aresData.hazardData.erosionOceanCount.threshold}}</div>
@@ -82,7 +82,7 @@
               v-for="curSpace in getAllSpacesOnMars()"
               :key="curSpace.id"
               :space="curSpace"
-              :aresExtension="aresExtension"
+              :aresExtension="expansions.ares"
               :tileView="tileView"
               data-test="board-space"
             />
@@ -365,6 +365,7 @@ import {SpaceId} from '@/common/Types';
 import {TileView} from '@/client/components/board/TileView';
 import {BoardName} from '@/common/boards/BoardName';
 import {LEGENDS} from '@/client/components/Legends';
+import {Expansion} from '@/common/cards/GameModule';
 
 class GlobalParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {
@@ -376,9 +377,6 @@ export default Vue.extend({
   props: {
     spaces: {
       type: Array as () => Array<SpaceModel>,
-    },
-    venusNextExtension: {
-      type: Boolean,
     },
     venusScaleLevel: {
       type: Number,
@@ -398,11 +396,8 @@ export default Vue.extend({
     temperature: {
       type: Number,
     },
-    aresExtension: {
-      type: Boolean,
-    },
-    pathfindersExpansion: {
-      type: Boolean,
+    expansions: {
+      type: Object as () => Record<Expansion, boolean>,
     },
     aresData: {
       type: Object as () => AresData | undefined,
@@ -496,7 +491,7 @@ export default Vue.extend({
       }
     },
     getGameBoardClassName(): string {
-      return this.venusNextExtension ? 'board-cont board-with-venus' : 'board-cont board-without-venus';
+      return this.expansions.venus ? 'board-cont board-with-venus' : 'board-cont board-without-venus';
     },
   },
   computed: {

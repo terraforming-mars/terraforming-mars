@@ -16,6 +16,10 @@ import {BoardOfDirectors} from '../../../src/server/cards/prelude2/BoardOfDirect
 import {Server} from '../../../src/server/models/ServerModel';
 import {SelectCardModel} from '../../../src/common/models/PlayerInputModel';
 import {CardName} from '../../../src/common/cards/CardName';
+import {Merger} from '../../../src/server/cards/promo/Merger';
+import {Astrodrill} from '../../../src/server/cards/promo/Astrodrill';
+import {Helion} from '../../../src/server/cards/corporation/Helion';
+import {toName} from '../../../src/common/utils/utils';
 
 describe('DoubleDown', () => {
   let doubleDown: DoubleDown;
@@ -175,10 +179,10 @@ describe('DoubleDown', () => {
   it('Make compatible with Board of Directors', () => {
     // https://boardgamegeek.com/thread/3331165/article/44559570#44559570
     const boardOfDirectors = new BoardOfDirectors();
-    player.preludeCardsInHand.push(doubleDown);
     player.playedCards.push(boardOfDirectors);
     boardOfDirectors.resourceCount = 4;
 
+    player.preludeCardsInHand.push(doubleDown);
     player.playCard(doubleDown);
     runAllActions(game);
 
@@ -195,5 +199,34 @@ describe('DoubleDown', () => {
     const modelCard = (<SelectCardModel>model.waitingFor).cards[0];
     expect(modelCard.name).eq(CardName.BOARD_OF_DIRECTORS);
     expect(modelCard.warnings).deep.eq(['ineffectiveDoubleDown', 'cannotAffordBoardOfDirectors']);
+  });
+
+  it('Make compatible with Merger + Corp with resources', () => {
+    // Merger doesn't work without at least one starting corporation
+    player.corporations.push(new Helion());
+    // player needs some MC to help pay for Merger.
+    player.megaCredits = 100;
+
+    const merger = new Merger();
+    player.playedCards.push(merger);
+
+    player.preludeCardsInHand.push(doubleDown);
+    player.playCard(doubleDown);
+    runAllActions(game);
+
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    expect(selectCard.cards).deep.eq([merger]);
+    expect(Array.from(merger.warnings)).does.not.include('ineffectiveDoubleDown');
+    selectCard.cb([merger]);
+
+    runAllActions(game);
+    const astroDrill = new Astrodrill();
+    game.corporationDeck.drawPile.push(astroDrill);
+
+    const selectCorp = cast(player.popWaitingFor(), SelectCard);
+    selectCorp.cb([astroDrill]);
+    runAllActions(game);
+    expect(astroDrill.resourceCount).eq(3);
+    expect(player.tableau.map(toName)).deep.eq([CardName.HELION, CardName.ASTRODRILL, CardName.MERGER, CardName.DOUBLE_DOWN]);
   });
 });

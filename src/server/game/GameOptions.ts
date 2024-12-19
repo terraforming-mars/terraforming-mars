@@ -31,7 +31,6 @@ export type GameOptions = {
   politicalAgendasExtension: AgendaStyle;
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
-  includeVenusMA: boolean;
   moonExpansion: boolean;
   pathfindersExpansion: boolean;
   ceoExtension: boolean;
@@ -99,7 +98,6 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD, // VP a player loses for every `escapeVelocityPenalty` minutes after `escapeVelocityThreshold`.
   escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
   fastModeOption: false,
-  includeVenusMA: true,
   includeFanMA: false,
   initialDraftVariant: false,
   modularMA: false,

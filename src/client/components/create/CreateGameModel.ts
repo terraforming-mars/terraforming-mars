@@ -4,20 +4,17 @@ import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 import {GameId} from '@/common/Types';
 import {AgendaStyle} from '@/common/turmoil/Types';
 import {BoardNameType, NewPlayerModel} from '@/common/game/NewGameConfig';
+import {Expansion} from '@/common/cards/GameModule';
 
 export type CreateGameModel = {
+  /* A checkbox when selected selects all official expansions */
   allOfficialExpansions: boolean;
   altVenusBoard: boolean;
-  aresExtension: boolean;
   aresExtremeVariant: boolean;
   bannedCards: Array<CardName>;
   board: BoardNameType;
   boards: Array<BoardNameType>;
-  ceoExtension: boolean;
   clonedGameId: GameId | undefined;
-  colonies: boolean;
-  communityCardsOption: boolean;
-  corporateEra: boolean;
   customCeos: Array<CardName>;
   customColonies: Array<ColonyName>;
   customCorporations: Array<CardName>;
@@ -28,24 +25,19 @@ export type CreateGameModel = {
   escapeVelocityPenalty: number;
   escapeVelocityPeriod: number;
   escapeVelocityThreshold: number;
+  expansions: Record<Expansion, boolean>,
   fastModeOption: boolean;
   firstIndex: number;
   includedCards: Array<CardName>;
   includeFanMA: boolean;
-  includeVenusMA: boolean;
   initialDraft: boolean;
   modularMA: boolean;
-  moonExpansion: boolean;
   moonStandardProjectVariant: boolean;
   moonStandardProjectVariant1: boolean;
-  pathfindersExpansion: boolean;
   players: Array<NewPlayerModel>;
   playersCount: number;
   politicalAgendasExtension: AgendaStyle;
-  prelude: boolean;
   preludeDraftVariant: boolean | undefined;
-  prelude2Expansion: boolean;
-  promoCardsOption: boolean;
   randomFirstPlayer: boolean;
   randomMA: RandomMAOptionType;
   removeNegativeGlobalEventsOption: boolean;
@@ -66,10 +58,6 @@ export type CreateGameModel = {
   startingCeos: number;
   startingCorporations: number;
   startingPreludes: number;
-  starWarsExpansion: boolean,
-  turmoil: boolean;
   twoCorpsVariant: boolean;
-  underworldExpansion: boolean,
   undoOption: boolean;
-  venusNext: boolean;
 }

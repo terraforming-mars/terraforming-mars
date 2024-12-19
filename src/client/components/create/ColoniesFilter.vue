@@ -27,6 +27,7 @@ import Vue from 'vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {COLONY_DESCRIPTIONS} from '@/common/colonies/ColonyDescription';
 import {OFFICIAL_COLONY_NAMES, COMMUNITY_COLONY_NAMES, PATHFINDERS_COLONY_NAMES} from '@/common/colonies/AllColonies';
+import {Expansion} from '@/common/cards/GameModule';
 
 type Data = {
   filterText: string,
@@ -43,21 +44,7 @@ type Group = ColonyModule | 'All';
 export default Vue.extend({
   name: 'ColoniesFilter',
   props: {
-    communityCardsOption: {
-      type: Boolean,
-    },
-    venusNext: {
-      type: Boolean,
-    },
-    turmoil: {
-      type: Boolean,
-    },
-    pathfinders: {
-      type: Boolean,
-    },
-    ares: {
-      type: Boolean,
-    },
+    expansions: Object as () => Record<Expansion, boolean>,
   },
   data() {
     const officialColonies = [...OFFICIAL_COLONY_NAMES].sort();
@@ -72,8 +59,8 @@ export default Vue.extend({
       pathfindersColonies,
       selectedColonies: [
         ...officialColonies,
-        ...this.communityCardsOption ? communityColonies: [],
-        ...this.pathfinders ? pathfindersColonies: [],
+        ...this.expansions.community ? communityColonies: [],
+        ...this.expansions.pathfinders ? pathfindersColonies: [],
       ],
       modules: ['colonies', 'community', 'pathfinders'],
     };
@@ -162,15 +149,15 @@ export default Vue.extend({
     communityCardsOption(enabled) {
       if (enabled) {
         this.selectedColonies = OFFICIAL_COLONY_NAMES.concat(COMMUNITY_COLONY_NAMES).slice();
-        if (this.venusNext === false) this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.VENUS);
-        if (this.turmoil === false) this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.PALLAS);
-        if (this.ares === false) this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.DEIMOS);
+        if (this.expansions.venus === false) this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.VENUS);
+        if (this.expansions.turmoil === false) this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.PALLAS);
+        if (this.expansions.ares === false) this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.DEIMOS);
       } else {
         this.selectedColonies = OFFICIAL_COLONY_NAMES.slice();
       }
     },
     venusNext(enabled) {
-      if (this.communityCardsOption && Array.isArray(this.selectedColonies)) {
+      if (this.expansions.community && Array.isArray(this.selectedColonies)) {
         if (enabled === false) {
           this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.VENUS);
         } else if (!this.selectedColonies.includes(ColonyName.VENUS)) {
@@ -179,7 +166,7 @@ export default Vue.extend({
       }
     },
     turmoil(enabled) {
-      if (this.communityCardsOption && Array.isArray(this.selectedColonies)) {
+      if (this.expansions.community && Array.isArray(this.selectedColonies)) {
         if (enabled === false) {
           this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.PALLAS);
         } else if (!this.selectedColonies.includes(ColonyName.PALLAS)) {
@@ -188,7 +175,7 @@ export default Vue.extend({
       }
     },
     ares(enabled) {
-      if (this.communityCardsOption && Array.isArray(this.selectedColonies)) {
+      if (this.expansions.community && Array.isArray(this.selectedColonies)) {
         if (enabled === false) {
           this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.DEIMOS);
         } else if (!this.selectedColonies.includes(ColonyName.DEIMOS)) {

@@ -2,17 +2,13 @@ import {BoardName} from '../boards/BoardName';
 import {RandomMAOptionType} from '../ma/RandomMAOptionType';
 import {AgendaStyle} from '../turmoil/Types';
 import {CardName} from '../cards/CardName';
+import {Expansion} from '../cards/GameModule';
 
 export type GameOptionsModel = {
-  aresExtension: boolean,
   altVenusBoard: boolean,
   boardName: BoardName,
   bannedCards: Array<CardName>;
-  includedCards: Array<CardName>;
-  ceoExtension: boolean,
-  coloniesExtension: boolean,
-  communityCardsOption: boolean,
-  corporateEra: boolean,
+  expansions: Record<Expansion, boolean>,
   draftVariant: boolean,
   escapeVelocityMode: boolean,
   escapeVelocityThreshold?: number,
@@ -20,14 +16,10 @@ export type GameOptionsModel = {
   escapeVelocityPeriod?: number,
   escapeVelocityPenalty?: number,
   fastModeOption: boolean,
+  includedCards: Array<CardName>;
   includeFanMA: boolean,
   initialDraftVariant: boolean,
-  moonExpansion: boolean,
-  pathfindersExpansion: boolean,
-  prelude2Expansion: boolean,
   preludeDraftVariant: boolean,
-  preludeExtension: boolean,
-  promoCardsOption: boolean,
   politicalAgendasExtension: AgendaStyle,
   removeNegativeGlobalEvents: boolean,
   showOtherPlayersVP: boolean,
@@ -38,9 +30,6 @@ export type GameOptionsModel = {
   randomMA: RandomMAOptionType,
   requiresMoonTrackCompletion: boolean,
   requiresVenusTrackCompletion: boolean,
-  turmoilExtension: boolean,
   twoCorpsVariant: boolean,
-  venusNextExtension: boolean,
   undoOption: boolean,
-  underworldExpansion: boolean;
 }

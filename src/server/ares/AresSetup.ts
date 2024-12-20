@@ -2,7 +2,7 @@ import {IPlayer} from '../IPlayer';
 import {AresData} from '../../common/ares/AresData';
 import {IGame} from '../IGame';
 import {TileType} from '../../common/TileType';
-import {_AresHazardPlacement} from './AresHazards';
+import {AresHazards} from './AresHazards';
 
 export class AresSetup {
   private constructor() {}
@@ -29,14 +29,14 @@ export class AresSetup {
     // don't take solo into account, nor if you played with more than
     // five players.
     if (playerCount >= 5) {
-      _AresHazardPlacement.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1, 2);
+      AresHazards.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1, 2);
     } else if (playerCount === 4) {
-      _AresHazardPlacement.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1);
-      _AresHazardPlacement.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, -1);
+      AresHazards.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1);
+      AresHazards.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, -1);
     } else if (playerCount <= 3) {
-      _AresHazardPlacement.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1, 2);
-      _AresHazardPlacement.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1);
-      _AresHazardPlacement.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, -1);
+      AresHazards.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1, 2);
+      AresHazards.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1);
+      AresHazards.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, -1);
     }
   }
 }

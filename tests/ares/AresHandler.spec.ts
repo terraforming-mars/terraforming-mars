@@ -15,7 +15,7 @@ import {Decomposers} from '../../src/server/cards/base/Decomposers';
 import {EnergyTapping} from '../../src/server/cards/base/EnergyTapping';
 import {Phase} from '../../src/common/Phase';
 import {TestPlayer} from '../TestPlayer';
-import {_AresHazardPlacement} from '../../src/server/ares/AresHazards';
+import {AresHazards} from '../../src/server/ares/AresHazards';
 import {AresSetup} from '../../src/server/ares/AresSetup';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {Units} from '../../src/common/Units';
@@ -176,7 +176,7 @@ describe('AresHandler', function() {
 
   it('Pay adjacent hazard costs - mild', function() {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    _AresHazardPlacement.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
+    AresHazards.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
 
     // No resources available to play the tile.
     player.production.add(Resource.MEGACREDITS, -5);
@@ -197,7 +197,7 @@ describe('AresHandler', function() {
 
   it('pay adjacent hazard costs - severe', function() {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    _AresHazardPlacement.putHazardAt(firstSpace, TileType.DUST_STORM_SEVERE);
+    AresHazards.putHazardAt(firstSpace, TileType.DUST_STORM_SEVERE);
 
     // No resources available to play the tile.
     player.production.add(Resource.MEGACREDITS, -5);
@@ -221,7 +221,7 @@ describe('AresHandler', function() {
 
   it('Adjacenct hazard costs do not apply to oceans', function() {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    _AresHazardPlacement.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
+    AresHazards.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
 
     const before = player.production.asUnits();
 
@@ -235,7 +235,7 @@ describe('AresHandler', function() {
 
   it('cover mild hazard', function() {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
-    _AresHazardPlacement.putHazardAt(space, TileType.EROSION_MILD);
+    AresHazards.putHazardAt(space, TileType.EROSION_MILD);
     player.megaCredits = 8;
     expect(player.getTerraformRating()).eq(20);
 
@@ -249,7 +249,7 @@ describe('AresHandler', function() {
 
   it('cover severe hazard', function() {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
-    _AresHazardPlacement.putHazardAt(space, TileType.EROSION_SEVERE);
+    AresHazards.putHazardAt(space, TileType.EROSION_SEVERE);
     player.megaCredits = 16;
     expect(player.getTerraformRating()).eq(20);
 
@@ -316,7 +316,7 @@ describe('AresHandler', function() {
 
   it('No adjacency hazard costs during WGT', function() {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    _AresHazardPlacement.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
+    AresHazards.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
     game.phase = Phase.SOLAR;
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
@@ -328,7 +328,7 @@ describe('AresHandler', function() {
 
   it('No hazard coverage cost or bonus during WGT', function() {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
-    _AresHazardPlacement.putHazardAt(space, TileType.EROSION_SEVERE);
+    AresHazards.putHazardAt(space, TileType.EROSION_SEVERE);
     player.megaCredits = 8;
     expect(player.getTerraformRating()).eq(20);
     game.phase = Phase.SOLAR;

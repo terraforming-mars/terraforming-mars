@@ -83,7 +83,7 @@ import {SelectSpace} from './inputs/SelectSpace';
 import {maybeRenamedMilestone} from '../common/ma/MilestoneName';
 import {maybeRenamedAward} from '../common/ma/AwardName';
 import {Eris} from './cards/community/Eris';
-import {_AresHazardPlacement} from './ares/AresHazards';
+import {AresHazards} from './ares/AresHazards';
 import {hazardSeverity} from '../common/AresTileType';
 
 // Can be overridden by tests
@@ -732,7 +732,7 @@ export class Game implements IGame, Logger {
       const direction = Math.floor(this.rng.nextInt(2)) === 0 ? 1 : -1;
       const tileType = this.board.getOceanSpaces().length >= 3 ? TileType.EROSION_MILD : TileType.DUST_STORM_MILD;
 
-      _AresHazardPlacement.randomlyPlaceHazard(this, tileType, direction);
+      AresHazards.randomlyPlaceHazard(this, tileType, direction);
     }
 
     if (this.gameOptions.solarPhaseOption && ! this.marsIsTerraformed()) {

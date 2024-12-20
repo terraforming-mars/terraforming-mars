@@ -14,7 +14,7 @@ import {MultiSet} from 'mnemonist';
 import {Phase} from '../../common/Phase';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {SelectProductionToLoseDeferred} from '../deferredActions/SelectProductionToLoseDeferred';
-import {_AresHazardPlacement} from './AresHazards';
+import {AresHazards} from './AresHazards';
 import {CrashlandingBonus} from '../pathfinders/CrashlandingBonus';
 import {Board} from '../boards/Board';
 
@@ -228,15 +228,15 @@ export class AresHandler {
   }
 
   public static onTemperatureChange(game: IGame, aresData: AresData) {
-    _AresHazardPlacement.onTemperatureChange(game, aresData);
+    AresHazards.onTemperatureChange(game, aresData);
   }
 
   public static onOceanPlaced(aresData: AresData, player: IPlayer) {
-    _AresHazardPlacement.onOceanPlaced(aresData, player);
+    AresHazards.onOceanPlaced(aresData, player);
   }
 
   public static onOxygenChange(game: IGame, aresData: AresData) {
-    _AresHazardPlacement.onOxygenChange(game, aresData);
+    AresHazards.onOxygenChange(game, aresData);
   }
 
   public static grantBonusForRemovingHazard(player: IPlayer, initialTileType: TileType) {

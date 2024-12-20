@@ -5,6 +5,7 @@ import {CardName} from '../cards/CardName';
 import {Expansion} from '../cards/GameModule';
 
 export type GameOptionsModel = {
+  aresExtremeVariant: boolean,
   altVenusBoard: boolean,
   boardName: BoardName,
   bannedCards: Array<CardName>;

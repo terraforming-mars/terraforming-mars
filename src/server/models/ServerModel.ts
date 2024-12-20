@@ -379,6 +379,7 @@ export class Server {
   public static getGameOptionsAsModel(options: GameOptions): GameOptionsModel {
     return {
       altVenusBoard: options.altVenusBoard,
+      aresExtremeVariant: options.aresExtremeVariant,
       boardName: options.boardName,
       bannedCards: options.bannedCards,
       draftVariant: options.draftVariant,

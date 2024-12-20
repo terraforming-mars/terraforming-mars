@@ -1,13 +1,9 @@
-import {HAZARD_TILES, TileType} from './TileType';
+import {TileType} from './TileType';
 
 export enum HazardSeverity {
   NONE,
   MILD,
   SEVERE
-}
-
-export function isHazardTileType(type: TileType): boolean {
-  return HAZARD_TILES.has(type);
 }
 
 export function hazardSeverity(type: TileType | undefined): HazardSeverity {
@@ -24,3 +20,9 @@ export function hazardSeverity(type: TileType | undefined): HazardSeverity {
     return HazardSeverity.NONE;
   }
 }
+
+export const HAZARD_STEPS: Record<HazardSeverity, number> = {
+  [HazardSeverity.NONE]: 0,
+  [HazardSeverity.MILD]: 1,
+  [HazardSeverity.SEVERE]: 2,
+} as const;

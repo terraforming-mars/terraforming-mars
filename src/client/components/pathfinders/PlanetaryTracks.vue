@@ -35,9 +35,8 @@
     <div class="track track-background-moon" v-if="gameOptions.expansions.moon">
       <div class="track-tag track-tag-moon"></div>
       <table class="track-moon">
-        <!-- TODO(kberg): remove the v-if in these cases. -->
-        <PlanetaryTrack type='risingPlayer' v-if="gameOptions.expansions.moon" :val="tracks.moon" :rewards="rewards.moon" :gameOptions="gameOptions" />
-        <PlanetaryTrack type='everyone' v-if="gameOptions.expansions.moon" :val="tracks.moon" :rewards="rewards.moon" :gameOptions="gameOptions" />
+        <PlanetaryTrack type='risingPlayer' :val="tracks.moon" :rewards="rewards.moon" :gameOptions="gameOptions" />
+        <PlanetaryTrack type='everyone' :val="tracks.moon" :rewards="rewards.moon" :gameOptions="gameOptions" />
       </table>
     </div>
 

@@ -117,7 +117,6 @@ export class ProjectWorkshop extends CorporationCard {
 
   private convertCardPointsToTR(player: IPlayer, card: ICard) {
     const steps = card.getVictoryPoints(player);
-    // TODO(kberg): this doesn't reduce VPs below 0. What to do?
     if (steps > 0) {
       player.increaseTerraformRating(steps, {log: true});
     } else if (steps < 0) {

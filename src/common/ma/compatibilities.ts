@@ -1,4 +1,4 @@
-import {GameModule} from '../cards/GameModule';
+import {Expansion} from '../cards/GameModule';
 import {AwardName} from './AwardName';
 import {MilestoneName} from './MilestoneName';
 import {BoardName} from '../boards/BoardName';
@@ -7,7 +7,7 @@ import {OneOrArray} from '../utils/types';
 export type CompatibilityDetails = {
   /* Components this MA needs to function */
   // TODO(kberg): Rename to module (modules?)
-  compatibility?: GameModule,
+  compatibility?: Expansion,
   /* Map or maps this is assigned to */
   map?: OneOrArray<BoardName>,
   /* If true, this is a modular MA. */

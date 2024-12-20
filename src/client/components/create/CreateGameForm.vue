@@ -540,7 +540,7 @@ import {GameId} from '@/common/Types';
 import {AgendaStyle} from '@/common/turmoil/Types';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import {getCard} from '@/client/cards/ClientCardManifest';
-import {DEFAULT_EXPANSIONS, Expansion, GameModule} from '@/common/cards/GameModule';
+import {DEFAULT_EXPANSIONS, Expansion} from '@/common/cards/GameModule';
 import {BoardNameType, NewGameConfig, NewPlayerModel} from '@/common/game/NewGameConfig';
 import {vueRoot} from '@/client/components/vueRoot';
 import {CreateGameModel} from './CreateGameModel';
@@ -964,13 +964,9 @@ export default (Vue as WithRefs<Refs>).extend({
     getPlayerContainerColorClass(color: Color): string {
       return playerColorClass(color, 'bg_transparent');
     },
-    isEnabled(module: GameModule): boolean {
-      // TODO(kberg): use type Expansion which eliminates 'base'.
+    isEnabled(expansion: Expansion): boolean {
       const model: CreateGameModel = this;
-      if (module === 'base') {
-        return true;
-      }
-      return model.expansions[module];
+      return model.expansions[expansion];
     },
     boardHref(boardName: BoardName | RandomBoardOption) {
       const options: Record<BoardName | RandomBoardOption, string> = {

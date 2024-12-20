@@ -1,5 +1,4 @@
 import {CorporationCard} from '../corporation/CorporationCard';
-import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -9,6 +8,10 @@ export class Midas extends CorporationCard {
     super({
       name: CardName.MIDAS,
       startingMegaCredits: 120,
+
+      behavior: {
+        tr: -7,
+      },
 
       metadata: {
         cardNumber: 'R41',
@@ -20,10 +23,5 @@ export class Midas extends CorporationCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: IPlayer) {
-    player.decreaseTerraformRating(7);
-    return undefined;
   }
 }

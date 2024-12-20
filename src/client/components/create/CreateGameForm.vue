@@ -1028,16 +1028,10 @@ export default (Vue as WithRefs<Refs>).extend({
         return player;
       });
 
-      const corporateEra = this.expansions.corpera;
-      const prelude = this.expansions.prelude;
-      const prelude2Expansion = this.expansions.prelude2;
       const draftVariant = this.draftVariant;
       const initialDraft = this.initialDraft;
       const randomMA = this.randomMA;
       const showOtherPlayersVP = this.showOtherPlayersVP;
-      const venusNext = this.expansions.venus;
-      const colonies = this.expansions.colonies;
-      const turmoil = this.expansions.turmoil;
       const solarPhaseOption = this.solarPhaseOption;
       const shuffleMapOption = this.shuffleMapOption;
       const customColonies = this.customColonies;
@@ -1047,12 +1041,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const includedCards = this.includedCards;
       const board = this.board;
       const seed = this.seed;
-      const promoCardsOption = this.expansions.promo;
-      const communityCardsOption = this.expansions.community;
-      const aresExtension = this.expansions.ares;
       const politicalAgendasExtension = this.politicalAgendasExtension;
-      const moonExpansion = this.expansions.moon;
-      const pathfindersExpansion = this.expansions.pathfinders;
       const undoOption = this.undoOption;
       const showTimers = this.showTimers;
       const fastModeOption = this.fastModeOption;
@@ -1069,7 +1058,6 @@ export default (Vue as WithRefs<Refs>).extend({
       const escapeVelocityPeriod = this.escapeVelocityMode ? this.escapeVelocityPeriod : undefined;
       const escapeVelocityPenalty = this.escapeVelocityMode ? this.escapeVelocityPenalty : undefined;
       const twoCorpsVariant = this.twoCorpsVariant;
-      const ceoExtension = this.expansions.ceo;
       const customCeos = this.customCeos;
       const startingCeos = this.startingCeos;
       const startingPreludes = this.startingPreludes;
@@ -1091,7 +1079,7 @@ export default (Vue as WithRefs<Refs>).extend({
         }
       }
 
-      if (players.length === 1 && corporateEra === false) {
+      if (players.length === 1 && this.expansions.corpera === false) {
         const confirm = window.confirm(translateText(
           'We do not recommend playing a solo game without the Corporate Era. Press OK if you want to play without it.'));
         if (confirm === false) return;
@@ -1193,14 +1181,9 @@ export default (Vue as WithRefs<Refs>).extend({
 
       const dataToSend: NewGameConfig = {
         players,
-        corporateEra,
-        prelude,
-        prelude2Expansion,
+        expansions: this.expansions,
         draftVariant,
         showOtherPlayersVP,
-        venusNext,
-        colonies,
-        turmoil,
         customCorporationsList: customCorporations,
         customColoniesList: customColonies,
         customPreludes,
@@ -1209,12 +1192,7 @@ export default (Vue as WithRefs<Refs>).extend({
         board,
         seed,
         solarPhaseOption,
-        promoCardsOption,
-        communityCardsOption,
-        aresExtension: aresExtension,
         politicalAgendasExtension: politicalAgendasExtension,
-        moonExpansion: moonExpansion,
-        pathfindersExpansion: pathfindersExpansion,
         undoOption,
         showTimers,
         fastModeOption,
@@ -1241,12 +1219,9 @@ export default (Vue as WithRefs<Refs>).extend({
         escapeVelocityPeriod,
         escapeVelocityPenalty,
         twoCorpsVariant,
-        ceoExtension,
         customCeos,
         startingCeos,
         startingPreludes,
-        starWarsExpansion: this.expansions.starwars,
-        underworldExpansion: this.expansions.underworld,
       };
       return JSON.stringify(dataToSend, undefined, 4);
     },

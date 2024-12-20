@@ -6,6 +6,7 @@ import {Color} from '../Color';
 import {RandomMAOptionType} from '../ma/RandomMAOptionType';
 import {AgendaStyle} from '../turmoil/Types';
 import {GameId} from '../Types';
+import {Expansion} from '../cards/GameModule';
 
 export type BoardNameType = BoardName | RandomBoardOption;
 
@@ -22,10 +23,7 @@ export interface NewPlayerModel {
  */
 export interface NewGameConfig {
   players: Array<NewPlayerModel>;
-  prelude: boolean;
-  venusNext: boolean;
-  colonies: boolean;
-  turmoil: boolean;
+  expansions: Record<Expansion, boolean>,
   board: BoardNameType;
   seed: number;
   randomFirstPlayer: boolean;
@@ -40,23 +38,11 @@ export interface NewGameConfig {
   showOtherPlayersVP: boolean;
 
   // Extensions
-  corporateEra: boolean;
-  // venusNextExtension: boolean;
-  // coloniesExtension: boolean;
-  // preludeExtension: boolean;
-  // turmoilExtension: boolean;
-  prelude2Expansion: boolean;
-  promoCardsOption: boolean;
-  communityCardsOption: boolean;
-  aresExtension: boolean;
   // aresHazards: boolean;
   politicalAgendasExtension: AgendaStyle;
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
   modularMA: boolean;
-  moonExpansion: boolean;
-  pathfindersExpansion: boolean;
-  ceoExtension: boolean;
 
   // Variants
   draftVariant: boolean;
@@ -86,6 +72,4 @@ export interface NewGameConfig {
   customCeos: Array<CardName>;
   startingCeos: number;
   startingPreludes: number;
-  starWarsExpansion: boolean,
-  underworldExpansion: boolean,
 }

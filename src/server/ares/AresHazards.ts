@@ -7,9 +7,9 @@ import {TileType} from '../../common/TileType';
 import {AresData, HazardConstraint} from '../../common/ares/AresData';
 
 /**
- * Package-private support for placing and upgrading hazard tiles.
+ * Support for placing and upgrading hazard tiles.
  */
-export class _AresHazardPlacement {
+export class AresHazards {
   public static putHazardAt(space: Space, tileType: TileType) {
     space.tile = {tileType: tileType, protectedHazard: false};
   }

@@ -2,7 +2,7 @@ import {IPlayer} from '../IPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
-import {_AresHazardPlacement} from '../ares/AresHazards';
+import {AresHazards} from '../ares/AresHazards';
 import {TileType} from '../../common/TileType';
 import {Message} from '../../common/logs/Message';
 import {message} from '../logs/MessageBuilder';
@@ -30,7 +30,7 @@ export class PlaceHazardTile extends DeferredAction<Space> {
 
     return new SelectSpace(title, availableSpaces)
       .andThen((space) => {
-        _AresHazardPlacement.putHazardAt(space, hazardType);
+        AresHazards.putHazardAt(space, hazardType);
         LogHelper.logTilePlacement(this.player, space, this.hazardType);
         this.cb(space);
         return undefined;

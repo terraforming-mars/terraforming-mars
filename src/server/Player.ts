@@ -1998,7 +1998,6 @@ export class Player implements IPlayer {
     if (d.globalParameterSteps) {
       player.globalParameterSteps = {...DEFAULT_GLOBAL_PARAMETER_STEPS, ...d.globalParameterSteps};
     }
-
     return player;
   }
 

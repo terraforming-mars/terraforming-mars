@@ -1,9 +1,9 @@
 import {PlayerId} from '../Types';
 
 export type AresData = {
-    includeHazards: boolean;
-    hazardData: HazardData;
-    milestoneResults: Array<MilestoneCount>;
+  includeHazards: boolean;
+  hazardData: HazardData;
+  milestoneResults: Array<MilestoneCount>;
 }
 
 export type HazardConstraint = {
@@ -32,4 +32,5 @@ export type HazardData = Record<typeof HAZARD_CONSTRAINTS[number], HazardConstra
 export type MilestoneCount = {
     id: PlayerId;
     count: number;
+    purifierCount: number;
 }

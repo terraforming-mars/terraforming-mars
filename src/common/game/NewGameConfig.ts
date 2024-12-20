@@ -39,6 +39,7 @@ export interface NewGameConfig {
 
   // Extensions
   // aresHazards: boolean;
+  aresExtremeVariant: boolean;
   politicalAgendasExtension: AgendaStyle;
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;

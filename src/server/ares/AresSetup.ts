@@ -17,7 +17,8 @@ export class AresSetup {
         severeDustStormOxygen: {threshold: 5, available: true}, // oxygen: severe dust storms
       },
       milestoneResults: players.map((p) => {
-        return {id: p.id, count: 0};
+        // TODO(kberg): rename count to networkerCount
+        return {id: p.id, count: 0, purifierCount: 0};
       }),
     };
   }

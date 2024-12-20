@@ -78,6 +78,14 @@
                                 <span v-i18n>Ares</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Ares" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
+                            <template v-if="expansions.ares">
+                                <input type="checkbox" v-model="aresExtremeVariant" id="aresExtremeVariantVariant-checkbox">
+                                <label for="aresExtremeVariantVariant-checkbox">
+                                    <div class="create-game-expansion-icon expansion-icon-ares"></div>
+                                    <span v-i18n>Extreme</span> &nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Ares-Extreme" class="tooltip" target="_blank">&#9432;</a>
+                                </label>
+                            </template>
+
                             <input type="checkbox" name="community" id="communityCards-checkbox" v-model="expansions.community">
                             <label for="communityCards-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-community"></div>
@@ -606,6 +614,7 @@ export default (Vue as WithRefs<Refs>).extend({
       seededGame: false,
       solarPhaseOption: false,
       shuffleMapOption: false,
+      aresExtremeVariant: false,
       politicalAgendasExtension: AgendaStyle.STANDARD,
       undoOption: false,
       showTimers: true,
@@ -1192,6 +1201,7 @@ export default (Vue as WithRefs<Refs>).extend({
         board,
         seed,
         solarPhaseOption,
+        aresExtremeVariant: this.aresExtremeVariant,
         politicalAgendasExtension: politicalAgendasExtension,
         undoOption,
         showTimers,

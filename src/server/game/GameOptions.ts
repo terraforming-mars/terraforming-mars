@@ -27,6 +27,7 @@ export type GameOptions = {
   communityCardsOption: boolean;
   aresExtension: boolean;
   aresHazards: boolean;
+  aresExtremeVariant: boolean;
   politicalAgendasExtension: AgendaStyle;
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
@@ -77,6 +78,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   altVenusBoard: false,
   aresExtension: false,
   aresHazards: true,
+  aresExtremeVariant: false,
   boardName: BoardName.THARSIS,
   bannedCards: [],
   includedCards: [],

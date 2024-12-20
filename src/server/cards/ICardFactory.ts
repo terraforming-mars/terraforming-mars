@@ -1,4 +1,4 @@
-import {GameModule} from '../../common/cards/GameModule';
+import {Expansion, GameModule} from '../../common/cards/GameModule';
 import {OneOrArray} from '../../common/utils/types';
 import {asArray} from '../../common/utils/utils';
 import {GameOptions} from '../game/GameOptions';
@@ -11,7 +11,7 @@ export type CardFactorySpec<T> = {
   // Creates a new instance of this card.
   Factory: new () => T;
   // Returns the required modules for this card.
-  compatibility?: OneOrArray<GameModule>;
+  compatibility?: OneOrArray<Expansion>;
   // False when the card should not be instantiated. It's reserved for fake and proxy cards.
   instantiate?: boolean;
   // Used for Turmoil's global events. When true, classifeid as a "negative" global event.

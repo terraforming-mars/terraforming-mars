@@ -428,7 +428,12 @@ export class Executor implements BehaviorExecutor {
     }
 
     if (behavior.tr !== undefined) {
-      player.increaseTerraformRating(ctx.count(behavior.tr));
+      const count = ctx.count(behavior.tr);
+      if (count >= 0) {
+        player.increaseTerraformRating(count);
+      } else {
+        player.decreaseTerraformRating(-count);
+      }
     }
     const addResources = behavior.addResources;
     if (addResources !== undefined) {

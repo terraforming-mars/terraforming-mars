@@ -684,6 +684,18 @@ export default (Vue as WithRefs<Refs>).extend({
     },
   },
   computed: {
+    venusNext() {
+      return this.expansions.venus;
+    },
+    turmoil() {
+      return this.expansions.turmoil;
+    },
+    prelude() {
+      return this.expansions.prelude;
+    },
+    prelude2Expansion() {
+      return this.expansions.prelude2;
+    },
     RandomBoardOption(): typeof RandomBoardOption {
       return RandomBoardOption;
     },

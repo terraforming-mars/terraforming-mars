@@ -2,7 +2,7 @@ import {CardResource} from '../CardResource';
 import {Units} from '../Units';
 import {CardName} from './CardName';
 import {CardType} from './CardType';
-import {GameModule} from './GameModule';
+import {Expansion, GameModule} from './GameModule';
 import {CardMetadata} from './CardMetadata';
 import {CardRequirementDescriptor} from './CardRequirementDescriptor';
 import {IVictoryPoints} from './IVictoryPoints';
@@ -24,6 +24,6 @@ export type ClientCard = {
   resourceType?: CardResource;
   startingMegaCredits?: number; // Corporation and Prelude
   cardCost?: number; // Corporation
-  compatibility: Array<GameModule>; // TODO(kberg): Replace with Expansion
+  compatibility: Array<Expansion>;
   hasAction: boolean; // For Prelude 2 preludes with actions. Can be used for more, of course.
 }

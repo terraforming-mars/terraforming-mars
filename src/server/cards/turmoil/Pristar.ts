@@ -15,6 +15,10 @@ export class Pristar extends CorporationCard {
 
       victoryPoints: {resourcesHere: {}},
 
+      behavior: {
+        tr: -2,
+      },
+
       metadata: {
         cardNumber: 'R07',
         description: 'You start with 53 M€. Decrease your TR 2 steps. 1 VP per preservation resource here.',
@@ -30,11 +34,6 @@ export class Pristar extends CorporationCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: IPlayer) {
-    player.decreaseTerraformRating(2);
-    return undefined;
   }
 
   public onProductionPhase(player: IPlayer) {

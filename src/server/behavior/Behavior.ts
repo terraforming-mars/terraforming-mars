@@ -43,7 +43,7 @@ export type Behavior = {
   or?: OrBehavior;
 
   /**
-   * Spend one of resources before taking the action.
+   * Spend one of resources bdecreaseTerraformRatingefore taking the action.
    *
    * This is specifically designed to spend only one resource type.
    */
@@ -75,8 +75,7 @@ export type Behavior = {
   decreaseAnyProduction?: DecreaseAnyProduction;
   removeAnyPlants?: number,
 
-  /** Gain units of TR */
-  // TODO(kberg) permit losing TR for TerralabsResearch
+  /** Gain or lose units of TR */
   tr?: Countable;
 
   /** Raise certain global parameters. */

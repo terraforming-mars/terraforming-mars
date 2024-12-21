@@ -965,7 +965,6 @@ export default (Vue as WithRefs<Refs>).extend({
       return playerColorClass(color, 'bg_transparent');
     },
     isEnabled(expansion: Expansion): boolean {
-      // TODO(kberg): use type Expansion which eliminates 'base'.
       const model: CreateGameModel = this;
       return model.expansions[expansion];
     },

@@ -91,7 +91,7 @@ describe('SuitableInfrastructure', () => {
 
   it('Works when player has other cards with onProductionGain #7140', () => {
     const card = new SuitableInfrastructure();
-    const [game, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
 
     // Manutech: also has an onProductionGain() method
     const manutech = new Manutech();

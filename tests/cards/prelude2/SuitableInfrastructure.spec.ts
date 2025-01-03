@@ -6,6 +6,7 @@ import {Resource} from '../../../src/common/Resource';
 import {PowerPlantStandardProject} from '../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
 import {cast, runAllActions} from '../../TestingUtils';
 import {SaturnSystems} from '../../../src/server/cards/corporation/SaturnSystems';
+import {Manutech} from '../../../src/server/cards/venusNext/Manutech';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
 import {RefugeeCamps} from '../../../src/server/cards/colonies/RefugeeCamps';
 
@@ -86,5 +87,21 @@ describe('SuitableInfrastructure', () => {
     runAllActions(game);
     expect(player.production.megacredits).eq(-1);
     expect(player.megaCredits).eq(0);
+  });
+
+  it('Works when player has other cards with onProductionGain #7140', () => {
+    const card = new SuitableInfrastructure();
+    const [/* game */, player] = testGame(1);
+
+    // Manutech: also has an onProductionGain() method
+    const manutech = new Manutech();
+    player.corporations.push(manutech);
+    player.playedCards.push(card);
+
+    expect(player.stock.megacredits).eq(0);
+
+    player.production.add(Resource.ENERGY, 1);
+
+    expect(player.stock.megacredits).eq(2);
   });
 });

@@ -23,8 +23,7 @@ describe('Splice', function() {
 
   it('Should play', function() {
     const tardigrades = new Tardigrades();
-    const play = card.play(player);
-    expect(play).is.undefined;
+    cast(card.play(player), undefined);
 
     player.corporations.push(card);
 

@@ -36,8 +36,7 @@ describe('ArcadianCommunities', function() {
   });
 
   it('play', () => {
-    const play = card.play(player);
-    expect(play).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.steel).to.eq(10);
   });
 

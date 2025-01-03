@@ -89,8 +89,7 @@ describe('SuitableInfrastructure', () => {
     expect(player.megaCredits).eq(0);
   });
 
-  // #7140
-  it('Works when player has other cards with onProductionGain()', () => {
+  it('Works when player has other cards with onProductionGain #7140', () => {
     const card = new SuitableInfrastructure();
     const [game, player] = testGame(1);
 
@@ -102,7 +101,7 @@ describe('SuitableInfrastructure', () => {
     expect(player.stock.megacredits).eq(0);
 
     player.production.add(Resource.ENERGY, 1);
-    
+
     expect(player.stock.megacredits).eq(2);
   });
 });

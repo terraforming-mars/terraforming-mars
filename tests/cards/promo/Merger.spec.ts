@@ -236,7 +236,7 @@ describe('Merger', () => {
 
     player.playAdditionalCorporationCard(new Teractor());
     runAllActions(game);
-    expect(player.cardsInHand.length).to.eq(handSize + 1);
+    expect(player.cardsInHand).has.length(handSize + 1);
   });
 
   it('Playing next corp card does not charge for cards', () => {

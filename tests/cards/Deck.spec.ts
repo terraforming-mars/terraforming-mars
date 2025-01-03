@@ -142,7 +142,7 @@ describe('draw()', function() {
       });
 
       it('should remove the card from the draw pile', () => {
-        expect(deck.drawPile.length).to.equal(originalLength - 1);
+        expect(deck.drawPile).has.length(originalLength - 1);
       });
     });
 
@@ -157,7 +157,7 @@ describe('draw()', function() {
       });
 
       it('should remove the card from the draw pile', () => {
-        expect(deck.drawPile.length).to.equal(originalLength - 1);
+        expect(deck.drawPile).has.length(originalLength - 1);
       });
     });
   });
@@ -181,8 +181,8 @@ describe('draw()', function() {
     });
 
     it('should shuffle the discard pile back into the draw pile', () => {
-      expect(deck.drawPile.length).to.equal(originalLength - 1);
-      expect(deck.discardPile.length).to.equal(0);
+      expect(deck.drawPile).has.length(originalLength - 1);
+      expect(deck.discardPile).has.length(0);
     });
   });
 
@@ -202,7 +202,7 @@ describe('draw()', function() {
     });
 
     it('should have an empty discard pile', () => {
-      expect(deck.discardPile.length).to.equal(0);
+      expect(deck.discardPile).has.length(0);
     });
 
     it('the drawn card should be undefined', function() {
@@ -221,11 +221,11 @@ describe('draw()', function() {
       });
 
       it('should empty the discard pile', () => {
-        expect(deck.discardPile.length).to.equal(0);
+        expect(deck.discardPile).has.length(0);
       });
 
       it('should have the correct number of remaining cards in the draw pile', () => {
-        expect(deck.drawPile.length).to.equal(10);
+        expect(deck.drawPile).has.length(10);
       });
     });
   });

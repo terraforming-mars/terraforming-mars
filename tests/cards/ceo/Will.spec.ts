@@ -59,7 +59,7 @@ describe('Will', function() {
 
     // Sanity
     expect(comms.resourceCount).eq(2);
-    expect(player.cardsInHand.length).to.eq(0);
+    expect(player.cardsInHand).has.length(0);
 
     // Action
     card.action(player);
@@ -71,6 +71,6 @@ describe('Will', function() {
 
     // We should have drawn a card here AND added another science to Comms
     expect(comms.resourceCount).eq(1);
-    expect(player.cardsInHand.length).to.eq(1);
+    expect(player.cardsInHand).has.length(1);
   });
 });

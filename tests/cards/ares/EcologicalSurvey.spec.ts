@@ -183,7 +183,7 @@ describe('EcologicalSurvey', () => {
     runAllActions(game);
 
     const msg = game.gameLog.pop()!;
-    expect(msg.data.length).to.eq(3);
+    expect(msg.data).has.length(3);
     expect(msg.data[0].value).to.eq(player.color);
     expect(msg.data[1].value).to.eq('Microbe');
     expect(msg.data[2].value).to.eq(card.name);

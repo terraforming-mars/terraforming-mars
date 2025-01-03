@@ -17,8 +17,7 @@ describe('StormCraftIncorporated', function() {
   });
 
   it('Should play', function() {
-    const play = card.play(player);
-    expect(play).is.undefined;
+    cast(card.play(player), undefined);
 
     expect(churn(card.action(player), player)).is.undefined;
 

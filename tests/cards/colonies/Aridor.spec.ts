@@ -26,13 +26,11 @@ describe('Aridor', function() {
     card = new Aridor();
     // 2-player so as to not bother with pre-game action that drops a colony.
     [game, player, player2] = testGame(2, {coloniesExtension: true});
-
     player.corporations.push(card);
   });
 
   it('Should play', function() {
-    const play = card.play(player);
-    expect(play).is.undefined;
+    cast(card.play(player), undefined);
 
     // Predators has an Animal tag
     card.onCardPlayed(player, new Predators());

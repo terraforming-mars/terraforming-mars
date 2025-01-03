@@ -23,8 +23,7 @@ describe('Factorum', function() {
   });
 
   it('Should play', function() {
-    const play = card.play(player);
-    expect(play).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.steel).to.eq(1);
     player.megaCredits = 10;
 
@@ -43,8 +42,7 @@ describe('Factorum', function() {
   });
 
   it('Only offer building card if player has energy', function() {
-    const play = card.play(player);
-    expect(play).is.undefined;
+    cast(card.play(player), undefined);
     player.megaCredits = 10;
     player.energy = 1;
 

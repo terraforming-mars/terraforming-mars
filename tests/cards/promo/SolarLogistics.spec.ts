@@ -33,13 +33,13 @@ describe('Solar Logistics', function() {
 
   it('Card Effects Work - card draw', function() {
     card.play(player);
-    expect(player.cardsInHand.length).to.eq(0);
+    expect(player.cardsInHand).has.length(0);
     expect(card.onCardPlayedFromAnyPlayer(player, player, card)).is.undefined;
     // I play space event
     expect(card.onCardPlayedFromAnyPlayer(player, player, new BigAsteroid())).is.undefined;
-    expect(player.cardsInHand.length).to.eq(1);
+    expect(player.cardsInHand).has.length(1);
     // Other player plays space event
     expect(card.onCardPlayedFromAnyPlayer(player, player2, new BigAsteroid())).is.undefined;
-    expect(player.cardsInHand.length).to.eq(2);
+    expect(player.cardsInHand).has.length(2);
   });
 });

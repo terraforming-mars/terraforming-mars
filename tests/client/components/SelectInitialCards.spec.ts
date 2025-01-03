@@ -25,7 +25,7 @@ describe('SelectInitialCards', function() {
     expect(button.attributes().disabled).eq('disabled');
 
     const selectCards = component.findAllComponents({name: 'select-card'});
-    expect(selectCards.length).to.eq(2);
+    expect(selectCards).has.length(2);
     selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
 
     await component.vm.$nextTick();
@@ -47,7 +47,7 @@ describe('SelectInitialCards', function() {
     expect(component).not.is.undefined;
 
     const selectCards = component.findAllComponents({name: 'select-card'});
-    expect(selectCards.length).to.eq(3);
+    expect(selectCards).has.length(3);
     selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
     selectCards.at(1).vm.$emit('cardschanged', [CardName.ALLIED_BANK]);
     selectCards.at(2).vm.$emit('cardschanged', [CardName.ANTS]);
@@ -68,7 +68,7 @@ describe('SelectInitialCards', function() {
     expect(button.attributes().disabled).eq('disabled');
 
     const selectCards = component.findAllComponents({name: 'select-card'});
-    expect(selectCards.length).to.eq(3);
+    expect(selectCards).has.length(3);
 
     selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
     await component.vm.$nextTick();
@@ -135,7 +135,7 @@ describe('SelectInitialCards', function() {
     expect(component).not.is.undefined;
 
     const selectCards = component.findAllComponents({name: 'select-card'});
-    expect(selectCards.length).to.eq(3);
+    expect(selectCards).has.length(3);
     selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
     selectCards.at(1).vm.$emit('cardschanged', [CardName.FLOYD, CardName.HAL9000]);
     selectCards.at(2).vm.$emit('cardschanged', [CardName.ANTS]);

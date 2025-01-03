@@ -30,7 +30,7 @@ describe('Prospecting', function() {
     const selectedColony = selectColony.colonies[0];
     selectColony.cb(selectedColony);
     expect(game.colonies).to.contain(selectedColony);
-    expect(game.colonies.length).to.eq(coloniesInPlay + 1);
+    expect(game.colonies).has.length(coloniesInPlay + 1);
   });
 
   it('Venus cannot be activated, so is not selectable', () => {

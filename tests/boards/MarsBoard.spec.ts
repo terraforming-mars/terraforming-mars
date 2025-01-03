@@ -110,6 +110,6 @@ describe('MarsBoard', function() {
     const board = player.game.board;
     const space = board.spaces.find(AresHandler.hasHazardTile);
     space!.player = player;
-    expect(board.getAvailableSpacesForGreenery(player).length).eq(45);
+    expect(board.getAvailableSpacesForGreenery(player)).has.length(45);
   });
 });

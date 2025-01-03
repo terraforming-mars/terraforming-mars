@@ -32,7 +32,7 @@ describe('MarsFrontierAlliance', function() {
     player.playCorporationCard(card);
     runAllActions(game);
     const selectParty = getWaitingFor(player);
-    expect(selectParty.options.length).to.equal(6);
+    expect(selectParty.options).has.length(6);
   });
 
   it('New generation - switch of allied party', function() {
@@ -55,7 +55,7 @@ describe('MarsFrontierAlliance', function() {
     runAllActions(game);
 
     const selectBonus: OrOptions = getWaitingFor(player);
-    expect(selectBonus.options.length).to.eq(2);
+    expect(selectBonus.options).has.length(2);
     player.process({type: 'or', index: 0, response: {type: 'option'}});
     expect(game.turmoil!.rulingParty).to.eq(reds);
     expect(player.alliedParty?.partyName).to.eq(unity.name);

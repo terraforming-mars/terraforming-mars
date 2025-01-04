@@ -6,8 +6,8 @@ import {IGame, Score} from '../IGame';
 import {GameOptions} from '../game/GameOptions';
 import {GameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
-
 import type * as sqlite3 from 'sqlite3';
+import {Database} from 'sqlite3';
 
 import {daysAgoToSeconds} from './utils';
 import {MultiMap} from 'mnemonist';
@@ -27,7 +27,6 @@ export class SQLite implements IDatabase {
   }
 
   public async initialize(): Promise<void> {
-    const {Database} = await import('sqlite3');
     const dbFolder = path.resolve(process.cwd(), './db');
     const dbPath = path.resolve(dbFolder, 'game.db');
     if (this.filename === undefined) {

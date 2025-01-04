@@ -10,6 +10,7 @@ export const paths = {
   API_PLAYER: 'api/player',
   API_SPECTATOR: 'api/spectator',
   API_STATS: 'api/stats',
+  API_STATS_PAGE: 'api/statspage',
   API_WAITING_FOR: 'api/waitingfor',
   AUTOPASS: 'autopass',
   CARDS: 'cards',

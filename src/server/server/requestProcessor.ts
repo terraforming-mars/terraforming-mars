@@ -10,6 +10,7 @@ import {ApiGame} from '../routes/ApiGame';
 import {ApiGameHistory} from '../routes/ApiGameHistory';
 import {ApiPlayer} from '../routes/ApiPlayer';
 import {ApiStats} from '../routes/ApiStats';
+import {ApiStatsPage} from '../routes/ApiStatsPage';
 import {ApiMetrics} from '../routes/ApiMetrics';
 import {ApiSpectator} from '../routes/ApiSpectator';
 import {ApiWaitingFor} from '../routes/ApiWaitingFor';
@@ -68,6 +69,7 @@ const handlers: Map<string, IHandler> = new Map(
     [paths.API_METRICS, ApiMetrics.INSTANCE],
     [paths.API_PLAYER, ApiPlayer.INSTANCE],
     [paths.API_STATS, ApiStats.INSTANCE],
+    [paths.API_STATS_PAGE, ApiStatsPage.INSTANCE],
     [paths.API_SPECTATOR, ApiSpectator.INSTANCE],
     [paths.API_WAITING_FOR, ApiWaitingFor.INSTANCE],
     [paths.AUTOPASS, Autopass.INSTANCE],

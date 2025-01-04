@@ -15,8 +15,7 @@ export interface SerializedPlayer extends DeprecatedFields{
   actionsTakenThisRound: number;
   actionsThisGeneration: Array<CardName>;
   alliedParty: AlliedParty | undefined;
-  // TODO(kberg): remove ? by 2024-10-01
-  autoPass?: boolean;
+  autoPass: boolean;
   beginner: boolean;
   canUseCorruptionAsMegacredits: boolean;
   canUseHeatAsMegaCredits: boolean;
@@ -77,6 +76,5 @@ export interface SerializedPlayer extends DeprecatedFields{
   turmoilPolicyActionUsed: boolean;
   underworldData: UnderworldPlayerData;
   victoryPointsByGeneration: Array<number>;
-  // TODO(kberg): remove '?' by 2024-12-15
-  globalParameterSteps?: Record<GlobalParameter, number>;
+  globalParameterSteps: Record<GlobalParameter, number>;
 }

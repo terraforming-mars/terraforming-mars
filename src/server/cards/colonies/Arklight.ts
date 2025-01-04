@@ -2,7 +2,8 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {IProjectCard} from '../IProjectCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {ICard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -36,7 +37,11 @@ export class Arklight extends CorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard): void {
+  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
+    this.onCardPlayed(player, card);
+  }
+
+  public onCardPlayed(player: IPlayer, card: ICard): void {
     if (player.isCorporation(CardName.ARKLIGHT)) {
       player.addResourceTo(this, {qty: card.tags.filter((cardTag) => cardTag === Tag.ANIMAL || cardTag === Tag.PLANT).length, log: true});
     }

@@ -29,7 +29,7 @@ describe('CuriosityII', function() {
     game.addCity(player, nonEmptySpace);
     player.cardsInHand = [];
 
-    expect(game.deferredActions.length).to.eq(1);
+    expect(game.deferredActions).has.length(1);
     const orOptions = cast(game.deferredActions.pop()!.execute(), OrOptions);
 
     orOptions.options[1].cb(); // Do nothing

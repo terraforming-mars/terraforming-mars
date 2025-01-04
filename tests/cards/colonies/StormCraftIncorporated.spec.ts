@@ -17,8 +17,7 @@ describe('StormCraftIncorporated', function() {
   });
 
   it('Should play', function() {
-    const play = card.play(player);
-    expect(play).is.undefined;
+    cast(card.play(player), undefined);
 
     expect(churn(card.action(player), player)).is.undefined;
 
@@ -29,7 +28,7 @@ describe('StormCraftIncorporated', function() {
     player.heat = 10;
     card.resourceCount = 10;
     const options = card.spendHeat(player, constants.HEAT_FOR_TEMPERATURE);
-    expect(options.options.length).to.eq(2);
+    expect(options.options).has.length(2);
     const heatOption = cast(options.options[0], SelectAmount);
     expect(heatOption.max).to.eq(constants.HEAT_FOR_TEMPERATURE);
     const floaterOption = cast(options.options[1], SelectAmount);

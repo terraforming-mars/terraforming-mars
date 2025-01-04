@@ -33,7 +33,7 @@ describe('Maria', function() {
     const selectedColony = selectColony.colonies[0];
     selectColony.cb(selectedColony);
     expect(game.colonies).to.contain(selectedColony);
-    expect(game.colonies.length).to.eq(coloniesInPlay + 1);
+    expect(game.colonies).has.length(coloniesInPlay + 1);
   });
 
   it('Takes action in Generation 4', function() {

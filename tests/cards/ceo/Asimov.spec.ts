@@ -76,7 +76,7 @@ describe('Asimov', () => {
     const action = cast(card.action(player), OrOptions);
     action.options[0].cb();
     // Make sure there's a new award, and that it has been funded
-    expect(game.awards.length).is.eq(preActionAwardCount + 1);
+    expect(game.awards).has.length(preActionAwardCount + 1);
     expect(game.hasBeenFunded(game.awards[game.awards.length - 1])).is.true;
   });
 

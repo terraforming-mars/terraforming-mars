@@ -69,7 +69,7 @@
     "sqlite3": "^5.1.7"
   },
   "scripts": {
-    "start": "node build/src/server/server.js",
+    "start": "PORT=8081 node build/src/server/server.js",
     "start:prof": "node --prof build/src/server/server.js",
     "build": "npm run make:static && npm run build:server && npm run build:client",
     "build:client": "npm run make:cards && cross-env NODE_ENV=production webpack",

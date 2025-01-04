@@ -242,7 +242,7 @@ export class SQLite implements IDatabase {
     // Sequence of [game_id, id] pairs.
     const values: Array<GameId | ParticipantId> = entry.participantIds.map((participant) => [entry.gameId, participant]).flat();
 
-    await this.asyncRun('INSERT INTO participants (game_id, participant) VALUES ' + placeholders, values);
+    await this.asyncRun('INSERT INTO participants (game_id, participant) VALUES ' + placeholders + ' ON CONFLICT DO NOTHING', values);
   }
 
   public async getParticipants(): Promise<Array<GameIdLedger>> {
@@ -273,6 +273,10 @@ export class SQLite implements IDatabase {
         expirationTimeMillis: row.expiration_time * 1000,
       };
     });
+  }
+
+  public async getCompletedGames(): Promise<Array<any>> {
+    return this.asyncAll('SELECT * FROM completed_game');
   }
 
   protected asyncRun(sql: string, params?: any): Promise<sqlite3.RunResult> {

@@ -22,7 +22,7 @@ export class Database {
         Database.instance = new LocalStorage();
       } else {
         console.log('Connecting to SQLite database.');
-        Database.instance = new SQLite();
+        Database.instance = new SQLite(process.env.SQLITE_FILE_NAME);
       }
     }
     return Database.instance;

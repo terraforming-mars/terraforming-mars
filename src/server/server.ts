@@ -1,4 +1,4 @@
-require('dotenv').config();
+import 'dotenv/config';
 require('console-stamp')(
   console,
   {format: ':date(yyyy-mm-dd HH:MM:ss Z)'},
@@ -99,7 +99,6 @@ async function start() {
   console.log(`Starting server on port ${port}`);
 
   server.listen(port);
-
   if (!process.env.SERVER_ID) {
     console.log(`The secret serverId for this server is ${ansi.style.bold}${serverId}${ansi.style.reset}.`);
     console.log(`Administrative routes can be found at admin?serverId=${serverId}`);

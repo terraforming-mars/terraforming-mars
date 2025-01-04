@@ -566,11 +566,11 @@ export default (Vue as WithRefs<Refs>).extend({
   data(): CreateGameModel & FormModel {
     return {
       firstIndex: 1,
-      playersCount: 1,
+      playersCount: 2,
       players: [
-        {name: '', color: Color.RED, beginner: false, handicap: 0, first: false},
-        {name: '', color: Color.GREEN, beginner: false, handicap: 0, first: false},
-        {name: '', color: Color.YELLOW, beginner: false, handicap: 0, first: false},
+        {name: 'Howard', color: Color.RED, beginner: false, handicap: 0, first: false},
+        {name: 'Yvonne', color: Color.GREEN, beginner: false, handicap: 0, first: false},
+        {name: 'Aredy', color: Color.YELLOW, beginner: false, handicap: 0, first: false},
         {name: '', color: Color.BLUE, beginner: false, handicap: 0, first: false},
         {name: '', color: Color.BLACK, beginner: false, handicap: 0, first: false},
         {name: '', color: Color.PURPLE, beginner: false, handicap: 0, first: false},
@@ -578,7 +578,7 @@ export default (Vue as WithRefs<Refs>).extend({
         {name: '', color: Color.PINK, beginner: false, handicap: 0, first: false},
       ],
       expansions: {...DEFAULT_EXPANSIONS},
-      draftVariant: true,
+      draftVariant: false,
       initialDraft: false,
       randomMA: RandomMAOptionType.NONE,
       modularMA: false,
@@ -595,7 +595,7 @@ export default (Vue as WithRefs<Refs>).extend({
       customPreludes: [],
       bannedCards: [],
       includedCards: [],
-      board: BoardName.THARSIS,
+      board: RandomBoardOption.OFFICIAL,
       boards: [
         BoardName.THARSIS,
         BoardName.HELLAS,
@@ -621,7 +621,7 @@ export default (Vue as WithRefs<Refs>).extend({
       fastModeOption: false,
       removeNegativeGlobalEventsOption: false,
       includeFanMA: false,
-      startingCorporations: 2,
+      startingCorporations: 3,
       soloTR: false,
       clonedGameId: undefined,
       allOfficialExpansions: false,

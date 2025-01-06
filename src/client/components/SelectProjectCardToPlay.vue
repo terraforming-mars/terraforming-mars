@@ -25,8 +25,8 @@
           @minus="reduceValue(unit)"
           @max="setMaxValue(unit)">
         </payment-unit-component>
-        <div v-if="showReserveWarning(unit)" class="card-warning" v-i18n>
-        (Some {{unit}} are unavailable here in reserve for the project card.)
+        <div v-if="showReserveWarning(unit)" class="card-warning" v-i18n="$t(unit)">
+        (Some ${0} are unavailable here in reserve for the project card.)
         </div>
       </div>
     </template>

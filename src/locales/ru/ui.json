@@ -345,7 +345,6 @@
     "Sort by ID (work in progress)": "Сортировать по ID (в разработке)",
     "Corporations": "Корпорации",
     "Base": "База",
-    "CEOs": "Директора",
     "Preludes": "Прологи",
 
     "Increase production": "Увеличить производство",
@@ -394,5 +393,10 @@
     "Select resource to discard": "Выберите ресурс, который потратится",
     "Select resource to gain": "Выберите ресурс, который получите",
     "Select ${0} cards to discard": "Выберите ${0} карт(ы) чтобы сбросить",
-    "Select between ${0} and ${1} cards to discard": "Выберите от ${0} до ${1} карт чтобы сбросить"
+    "Select between ${0} and ${1} cards to discard": "Выберите от ${0} до ${1} карт чтобы сбросить",
+    "city-count": "Города",
+    "colony-count": "Колонии",
+    "corruption-count": "Коррупция",
+    "influence-count": "Влияние",
+    "excavation-count": "Раскопки"
 }

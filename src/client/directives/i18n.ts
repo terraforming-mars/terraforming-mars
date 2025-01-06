@@ -128,7 +128,7 @@ function translateChildren(node: Node, params: string[] | undefined) {
 }
 
 export function translateTextNode(el: HTMLElement, binding: any) {
-  var params: string[] | undefined = undefined;
+  let params: string[] | undefined = undefined;
   if (binding?.value) {
     params = binding.value instanceof Array ? binding.value : [binding.value];
   }

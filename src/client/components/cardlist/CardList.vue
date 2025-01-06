@@ -204,7 +204,7 @@ export default (Vue as WithRefs<Refs>).extend({
   },
   mounted() {
     this.searchIndex.build();
-    this.$refs.filter?.focus();
+    this.$refs.filter.focus();
     this.delayedSetLocationHash();
   },
   computed: {

@@ -140,7 +140,6 @@ export default Vue.extend({
       this.cost = this.card.calculatedCost ?? 0;
       this.tags = this.getCardTags(),
       this.reserveUnits = this.card.reserveUnits ?? Units.EMPTY;
-      this.payment.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
       this.setDefaultValues();
     });
@@ -158,23 +157,6 @@ export default Vue.extend({
       return getCardOrThrow(this.cardName).tags;
     },
     setDefaultValues() {
-      for (const target of SPENDABLE_RESOURCES) {
-        if (target === 'megaCredits') {
-          continue;
-        }
-        this.payment[target] = 0;
-      }
-
-      // Automatically use as many MC as possible, saving the rest for special resources.
-      //
-      // If the player wanted to maximize all standard resources / card resources, that line would have to be
-      // let megacreditBalance = this.cost;
-      // along with the last line in the function setting the MC value.
-      //
-      let megacreditBalance = Math.max(this.cost - this.thisPlayer.megaCredits, 0);
-
-      // console.log(this.cost, this.thisPlayer.megaCredits, megacreditBalance);
-
       // Calculates the optimal number of units to use given the unit value.
       //
       // It reads `megacreditBalance` as the remaining balance, and deducts the
@@ -214,7 +196,33 @@ export default Vue.extend({
         return toSaveUnits;
       }
 
-      for (const unit of ['seeds', 'microbes', 'floaters', 'lunaArchivesScience', 'graphene', 'corruption'] as const) {
+      for (const target of SPENDABLE_RESOURCES) {
+        this.payment[target] = 0;
+      }
+      // This is defined down here, but is used in the functions above.
+      let megacreditBalance = this.cost;
+
+      // Prioritize special resource types that are only ever used for buying cards.
+      // Of course this runs the risk of a player not having special resources for some award,
+      // milestone, or requirement.
+      for (const unit of ['seeds', 'lunaArchivesScience', 'graphene'] as const) {
+        if (megacreditBalance > 0 && this.canUse(unit)) {
+          this.payment[unit] = deductUnits(this.getAvailableUnits(unit), this.getResourceRate(unit), false);
+        }
+      }
+
+      // Set MC payment after knowning how much of other resources are consumed
+      this.payment.megaCredits = Math.max(0, Math.min(this.thisPlayer.megaCredits, megacreditBalance));
+
+      // console.log('units: ' + JSON.stringify(this.payment, null, 2));
+      // console.log('balance', megacreditBalance);
+
+      // Use as much MC as possible.
+      megacreditBalance = Math.max(megacreditBalance - this.thisPlayer.megaCredits, 0);
+
+      // console.log('balance', megacreditBalance);
+
+      for (const unit of ['microbes', 'floaters', 'corruption'] as const) {
         if (megacreditBalance > 0 && this.canUse(unit)) {
           this.payment[unit] = deductUnits(this.getAvailableUnits(unit), this.getResourceRate(unit));
         }
@@ -317,7 +325,6 @@ export default Vue.extend({
       this.cost = this.card.calculatedCost || 0;
       this.tags = this.getCardTags();
       this.reserveUnits = this.card.reserveUnits ?? Units.EMPTY;
-      this.payment.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
       this.setDefaultValues();
     },

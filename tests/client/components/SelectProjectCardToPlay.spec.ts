@@ -475,7 +475,6 @@ describe('SelectProjectCardToPlay', () => {
     expect(saveResponse.payment).deep.eq(Payment.of({titanium: 7, megaCredits: 6}));
   });
 
-  // TODO(kberg): Be greedy with science units.
   it('using luna archive science', async () => {
     // ARISTARCHUS_ROAD_NETWORK costs 15. Player has 7M€ and will use 8 science units.
     const wrapper = setupCardForPurchase(
@@ -485,15 +484,14 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({megaCredits: 7, lunaArchivesScience: 8});
+    tester.expectPayment({megaCredits: 5, lunaArchivesScience: 10});
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({lunaArchivesScience: 8, megaCredits: 7}));
+    expect(saveResponse.payment).deep.eq(Payment.of({lunaArchivesScience: 10, megaCredits: 5}));
   });
 
-  // TODO(kberg): be greedy with seeds.
   it('using seeds', async () => {
-    // ARCTIC_ALGAE costs 12. Player has 7M€ and will use 2 seeds.
+    // ARCTIC_ALGAE costs 12. Player has 7M€ and will use 2 seeds (Seeds are 5 MC each)
     const wrapper = setupCardForPurchase(
       CardName.ARCTIC_ALGAE, 12,
       {megaCredits: 7},
@@ -501,26 +499,25 @@ describe('SelectProjectCardToPlay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({megaCredits: 7, seeds: 1});
+    tester.expectPayment({megaCredits: 2, seeds: 2});
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({seeds: 1, megaCredits: 7}));
+    expect(saveResponse.payment).deep.eq(Payment.of({seeds: 2, megaCredits: 2}));
   });
 
-  // TODO(kberg): Be greedy with graphene units.
   it('using graphene', async () => {
-    // ASTEROID_MINING costs 30. Player has 11M€ and will use 5 graphene units.
+    // ASTEROID_MINING costs 30. Player has 11M€ and will use 7 graphene units. (Graphene are 4MC each)
     const wrapper = setupCardForPurchase(
       CardName.ASTEROID_MINING, 30,
-      {megaCredits: 11, titanium: 0},
+      {megaCredits: 17, titanium: 0},
       {graphene: 7, paymentOptions: {graphene: true}});
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({megaCredits: 10, graphene: 5});
+    tester.expectPayment({megaCredits: 2, graphene: 7});
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({graphene: 5, megaCredits: 10}));
+    expect(saveResponse.payment).deep.eq(Payment.of({graphene: 7, megaCredits: 2}));
   });
 
   it('initial setup allows for steel and titanium when using Last Restort Ingenuity', async () => {

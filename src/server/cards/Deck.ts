@@ -11,6 +11,7 @@ import {Logger} from '../logs/Logger';
 import {IPreludeCard} from './prelude/IPreludeCard';
 import {ICeoCard} from './ceos/ICeoCard';
 import {toName} from '../../common/utils/utils';
+import {IPlayer} from '../IPlayer';
 
 /**
  * A deck of cards to draw from, and also its discard pile.
@@ -111,20 +112,20 @@ export class Deck<T extends ICard> {
   /**
    * @deprecated use drawByConditionOrThrow, or create a safer version of drawByCondition
    */
-  public drawByConditionLegacy(logger: Logger, total: number, include: (card: T) => boolean) {
-    return this.drawByConditionOrThrow(logger, total, include);
+  public drawByConditionLegacy(player: IPlayer, total: number, include: (card: T) => boolean) {
+    return this.drawByConditionOrThrow(player, total, include);
   }
 
-  public drawByConditionOrThrow(logger: Logger, total: number, include: (card: T) => boolean) {
+  public drawByConditionOrThrow(player: IPlayer, total: number, include: (card: T) => boolean) {
     const result: Array<T> = [];
     const discardedCards = new Set<CardName>();
 
     while (result.length < total) {
       if (discardedCards.size >= this.drawPile.length + this.discardPile.length) {
-        logger.log(`discarded every ${this.type} card without a match`);
+        player.game.log(`discarded every ${this.type} card without a match`);
         break;
       }
-      const projectCard = this.drawOrThrow(logger);
+      const projectCard = this.drawOrThrow(player.game);
       if (include(projectCard)) {
         result.push(projectCard);
       } else {
@@ -133,8 +134,9 @@ export class Deck<T extends ICard> {
       }
     }
     if (discardedCards.size > 0) {
-      LogHelper.logDiscardedCards(logger, Array.from(discardedCards));
+      LogHelper.logDiscardedCards(player.game, Array.from(discardedCards));
     }
+    LogHelper.logDrawnCards(player, result);
 
     return result;
   }

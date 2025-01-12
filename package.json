@@ -23,7 +23,6 @@
     "webpack-cli": "^4.5.0"
   },
   "devDependencies": {
-    "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@types/ansi-escape-sequences": "^4.0.4",
     "@types/chai": "^4.3.1",
     "@types/chai-as-promised": "^7.1.5",
@@ -49,7 +48,6 @@
     "less-loader": "^10.0.0",
     "mocha": "^9.2.2",
     "mochapack": "^2.1.4",
-    "nyc": "^15.1.0",
     "rimraf": "^3.0.2",
     "spectre.css": "^0.5.8",
     "ts-loader": "^9.2.2",
@@ -67,9 +65,6 @@
   "optionalDependencies": {
     "pg": "^8.2.1",
     "sqlite3": "^5.1.5"
-  },
-  "nyc": {
-    "extends": "@istanbuljs/nyc-config-typescript"
   },
   "scripts": {
     "start": "node build/src/server/server.js",
@@ -93,7 +88,6 @@
     "test:postgresql": "ts-mocha -p tests/tsconfig.json \"tests/integration/PostgreSQL.spec.ts\"",
     "test:client": "cross-env NODE_ENV=development mochapack --require tests/client/components/setup.ts \"tests/client/**/*.spec.ts\"",
     "test:client:watch": "cross-env NODE_ENV=development mochapack --watch --require tests/client/components/setup.ts \"tests/client/**/*.spec.ts\"",
-    "cover": "nyc ts-mocha -p tests/tsconfig.json -r tests/testing/setup.ts \"tests/*.spec.ts\" \"tests/!(client)/**/*.spec.ts\"",
     "//": "When the zipped versions of JS are available dev:client and dev:server do not refresh automatically",
     "dev:prepare": "rm build/main.js.gz build/main.js.br || true",
     "dev:client": "npm run dev:prepare && cross-env NODE_ENV=development webpack --watch",

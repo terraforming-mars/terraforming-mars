@@ -8,7 +8,7 @@
   "private": true,
   "dependencies": {
     "ansi-escape-sequences": "^6.2.2",
-    "chart.js": "^3.7.0",
+    "chart.js": "^4.4.7",
     "console-stamp": "3.0.0-rc4.2",
     "cross-env": "^7.0.3",
     "dialog-polyfill": "^0.5.1",

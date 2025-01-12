@@ -30,7 +30,7 @@
     "@types/mocha": "^9.1.1",
     "@types/node": "^10.17.47",
     "@types/pg": "^7.14.7",
-    "@types/sqlite3": "^3.1.6",
+    "@types/sqlite3": "^3.1.11",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
     "@vue/test-utils": "^1.1.1",
@@ -64,7 +64,7 @@
   },
   "optionalDependencies": {
     "pg": "^8.2.1",
-    "sqlite3": "^5.1.5"
+    "sqlite3": "^5.1.7"
   },
   "scripts": {
     "start": "node build/src/server/server.js",

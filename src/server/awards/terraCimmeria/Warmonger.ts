@@ -58,5 +58,7 @@ export class Warmonger implements IAward {
     CardName.HACKERS_UNDERWORLD,
     CardName.INVESTIGATIVE_JOURNALISM,
     CardName.SPACE_PRIVATEERS,
+    // Prelude 2
+    CardName.RECESSION,
   ] as const;
 }

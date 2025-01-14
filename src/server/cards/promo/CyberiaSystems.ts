@@ -31,8 +31,21 @@ export class CyberiaSystems extends RoboticWorkforceBase {
     });
   }
 
-  protected override getPlayableBuildingCards(player: IPlayer): ReadonlyArray<ICard> {
-    return super.getPlayableBuildingCards(player).filter((c) => c.name !== CardName.CYBERIA_SYSTEMS);
+  public override bespokeCanPlay(player: IPlayer): boolean {
+    // Right now, this just verifies that the player actually has two cards with building tags and
+    // production boxes. It does not ensure that there is a play order that allows 2 cards to be
+    // played in a row. That would take some work.
+    //
+    // This will at least ensure that there's at least one card you can play right now.
+    //
+    // TODO(kberg): Do that. It will require a special case for Small Open Pit Mine, or
+    // it will need the same behavior that Mining Area and Mining Rights works.
+    return this.getPlayableBuildingCards(player, false).length >= 2 &&
+      this.getPlayableBuildingCards(player, true).length >= 1;
+  }
+
+  protected override getPlayableBuildingCards(player: IPlayer, canAfford: boolean = true): ReadonlyArray<ICard> {
+    return super.getPlayableBuildingCards(player, canAfford).filter((c) => c.name !== CardName.CYBERIA_SYSTEMS);
   }
 
   public override bespokePlay(player: IPlayer) {

@@ -27,7 +27,7 @@ export abstract class RoboticWorkforceBase extends Card {
     return filtered;
   }
 
-  protected isCardApplicable(card: ICard, player: IPlayer): boolean {
+  protected isCardApplicable(card: ICard, player: IPlayer, canAfford: boolean): boolean {
     if (!card.tags.includes(Tag.BUILDING) && !card.tags.includes(Tag.WILD)) {
       return false;
     }
@@ -39,13 +39,21 @@ export abstract class RoboticWorkforceBase extends Card {
     }
 
     if (card.productionBox !== undefined) {
-      return player.production.canAdjust(card.productionBox(player));
+      if (canAfford) {
+        return player.production.canAdjust(card.productionBox(player));
+      } else {
+        return true; // Not checking if the player can afford it.
+      }
     }
 
     if (card.behavior !== undefined) {
       const productionBehavior = this.productionBehavior(card.behavior);
       if (Object.keys(productionBehavior).length > 0) {
-        return getBehaviorExecutor().canExecute(productionBehavior, player, card);
+        if (canAfford) {
+          return getBehaviorExecutor().canExecute(productionBehavior, player, card);
+        } else {
+          return true; // Not checking if the player can afford it.
+        }
       }
     }
 
@@ -53,12 +61,8 @@ export abstract class RoboticWorkforceBase extends Card {
     return false;
   }
 
-  protected getPlayableBuildingCards(player: IPlayer): ReadonlyArray<ICard> {
-    return player.tableau.filter((card) => this.isCardApplicable(card, player));
-  }
-
-  public override bespokeCanPlay(player: IPlayer): boolean {
-    return this.getPlayableBuildingCards(player).length > 0;
+  protected getPlayableBuildingCards(player: IPlayer, canAfford: boolean = true): ReadonlyArray<ICard> {
+    return player.tableau.filter((card) => this.isCardApplicable(card, player, canAfford));
   }
 
   protected selectBuildingCard(player: IPlayer, cards: ReadonlyArray<ICard>, title: string, cb: (card: ICard) => PlayerInput | undefined = () => undefined) {

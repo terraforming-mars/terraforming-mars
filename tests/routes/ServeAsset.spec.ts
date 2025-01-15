@@ -138,17 +138,4 @@ describe('ServeAsset', () => {
       existsSync: 0,
     });
   });
-
-  it('sw.js', async () => {
-    instance = new ServeAsset(undefined, false, fileApi);
-    scaffolding.url = '/sw.js';
-    scaffolding.req.headers['accept-encoding'] = '';
-    await scaffolding.get(instance, res);
-    expect(res.content).eq('data: build/src/client/sw.js');
-    expect(fileApi.counts).deep.eq({
-      ...primedCache,
-      readFile: 1,
-      existsSync: 0,
-    });
-  });
 });

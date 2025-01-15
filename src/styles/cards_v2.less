@@ -1318,7 +1318,7 @@
               background-image: url(./assets/resources/one.png);
             }
             .card-resource-clone-trooper {
-                background-image: url(./assets/resources/clone-trooper.png);
+              background-image: url(./assets/resources/clone-trooper.png);
             }
 
             /* Underworld Assets */
@@ -1329,22 +1329,22 @@
               height: 44px;
             }
             .card-excavation {
+              background-image: url(./assets/underworld/excavate.png);
+              width: 44px;
+              background-size: 44px;
+              height: 44px;
+              &--superscript {
                 background-image: url(./assets/underworld/excavate.png);
-                width: 44px;
-                background-size: 44px;
-                height: 44px;
-                &--superscript {
-                  background-image: url(./assets/underworld/excavate.png);
-                  height: 22px;
-                  width: 22px;
-                  background-size: 22px;
-                  margin-left: 0px;
-                  margin-right: 0px;
-                  margin-bottom: 15px;
-                }
+                height: 22px;
+                width: 22px;
+                background-size: 22px;
+                margin-left: 0px;
+                margin-right: 0px;
+                margin-bottom: 15px;
+              }
             }
             .card-resource-corruption {
-                background-image: url(./assets/underworld/corruption.png);
+              background-image: url(./assets/underworld/corruption.png);
             }
             // Is this even used?
             .card-resource-tool {
@@ -1366,7 +1366,7 @@
               background-image: url(./assets/underworld/card-resource-supply-chain.png);
             }
             .card-resource-director {
-              background-image: url("./assets/resources/clone-trooper.png");
+              background-image: url("./assets/resources/director.png");
             }
 
             .card-neutral-delegate {
@@ -2612,7 +2612,7 @@ each(@parties, {
     @resource_types: microbe, animal, science, floater, fighter, camp,
       asteroid, disease, preservation, data, syndicate-fleet, cube,
       venusian-habitat, specialized-robot, seed, orbital, agenda, graphene, hydroelectric-resource,
-      clone-trooper;
+      clone-trooper, director;
     each(@resource_types, {
       .card-resource-@{value} {
         background-image: url("./assets/resources/@{value}.png");

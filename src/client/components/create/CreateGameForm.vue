@@ -375,12 +375,14 @@
                                     <span v-i18n>{{ getRandomMaOptionType('full') }}</span>
                                 </label>
                                 </div>
-                                <div>
+                                <!--
+                                  Remember to restore the behavior that creates variable dataToSend
+                                  <div>
                                   <input type="checkbox" name="modularMA" v-model="modularMA" id="modularMA-checkbox">
                                    <label for="modularMA-checkbox">
                                     <span v-i18n>Official Random α</span>
                                 </label>
-                                </div>
+                                </div> -->
                             </div>
 
                             <div v-if="modularMA">
@@ -1204,7 +1206,8 @@ export default (Vue as WithRefs<Refs>).extend({
         fastModeOption,
         removeNegativeGlobalEventsOption,
         includeFanMA,
-        modularMA: this.modularMA,
+        // modularMA: this.modularMA,
+        modularMA: false,
         startingCorporations,
         soloTR,
         clonedGamedId,

@@ -52,7 +52,7 @@
               <span v-for="p in winners" :key="p.color"><span :class="'log-player ' + getEndGamePlayerRowColorClass(p.color)">{{ p.name }}</span></span> <span v-i18n>won!</span>
           </div>
           <div class="game_end_victory_points">
-              <h2><span v-i18n>Victory points breakdown after</span> {{game.generation}} <span v-i18n>generations</span></h2>
+              <h2><span v-i18n>Victory point breakdown after</span> {{game.generation}} <span v-i18n>generations</span></h2>
               <table class="table game_end_table">
                   <thead>
                       <tr v-i18n>

@@ -19,7 +19,7 @@
     "+ Victory Points?": " oder mehr Siegpunkte zu erreichen?",
     "Go to main page": "Zurück zum Hauptmenü",
 
-    "Victory points breakdown after": "Siegpunkteaufschlüsselung nach ",
+    "Victory point breakdown after": "Siegpunkteaufschlüsselung nach ",
     "Victory points details": "Siegpunkte-Details",
     "Victory points details for": "Siegpunkte-Details für",
     "Victory Points": "Siegpunkte",
@@ -40,7 +40,7 @@
     "Ecological Zone:ares": "Naturschutzgebiet",
     "Commercial District:ares": "Geschäftsviertel",
     "Underworld Corruption Bribe": "Unterwelt Korruption Bestechlichkeit",
-    
+
     "Completed!": "Vervollständigt!",
     "% completed": "% vervollständigt",
     "Temperature": "Temperatur",
@@ -50,7 +50,7 @@
     "L. Habitat": "Mond Habitat",
     "L. Mining": "Mond Mine",
     "L. Logistics": "Mond Straßen",
-	
+
     "Final situation on the board": "Finales Spielbrett",
     "Final game log": "Abschließendes Spiel-Log",
 
@@ -59,7 +59,7 @@
     "Most tags on the jovian track": "Die meisten Jupiter-Symbole",
     "Most tags on the mars track": "Die meisten Mars-Symbole",
     "Most tags on the moon track": "Die meisten Mond-Symbole",
-    
+
     "${0} place for ${1} award (funded by ${2})": "${0} Platz für ${1} (finanziert durch ${2})",
     "Claimed ${0} milestone": "${0}-Meilenstein beansprucht",
 
@@ -71,5 +71,5 @@
     "Actions taken this game": "In diesem Spiel durchgeführte Aktionen",
     "Escape Velocity penalty": "Minuspunkte für Fluchtgeschwindigkeit (Escape Velocity)",
     "Download game log": "Spielprotokoll herunterladen"
-        
+
 }

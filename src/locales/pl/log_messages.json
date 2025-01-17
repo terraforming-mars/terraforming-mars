@@ -86,8 +86,6 @@
   "${0} acted as World Government and increased oxygen level": "${0} wykorzystuje akcję Działań Rządu Światowego i podnosi poziom tlenu",
   "${0} acted as World Government and increased temperature": "${0} wykorzystuje akcję Działań Rządu Światowego i podnosi temperaturę",
   "${0} loses ${1} resource(s) on ${2} by ${3}": "${0} traci ${1} zasób/oby/obów z ${2}, usunięte przez ${3}",
-  "${0}'s ${1} production modified by ${2} by ${3}": "Produkcja ${1} gracza ${0} została zmodyfikowana o ${2} przez ${3}",
-  "${0}'s ${1} amount modified by ${2} by ${3}": "Liczba zasobów ${1} gracza ${0} została zmodyfikowana o ${2} przez ${3}",
   "${0} received ${1} M€ from ${2} owner (${3})": "${0} otrzymuje ${1} M€ od ${2} właściciela (${3})",
   "${0} copied ${1} production with ${2}": "${0} kopiuje produkcję ${1} za pomocą ${2}",
   "${0} used ${1} action with ${2}": "${0} wykorzystuje akcję ${1} za pomocą ${2}",

@@ -184,8 +184,6 @@
     "${0} acted as World Government and increased oxygen level": "${0} 플레이어는 세계정부 테라포밍 사업으로 산소 농도를 1단계 상승시킴",
     "${0} acted as World Government and increased temperature": "${0} 플레이어는 세계정부 테라포밍 사업으로 기온을 1단계 상승시킴",
     "${0} loses ${1} resource(s) on ${2} by ${3}": "${0} 플레이어는 ${3} 플레이어에 의해 ${2} 자원을 ${1}개만큼 잃음",
-    "${0}'s ${1} production modified by ${2} by ${3}": "${0} 플레이어의 ${1} 생산력이 ${3} 플레이어의 ${2} 효과에 의해 변경됨",
-    "${0}'s ${1} amount modified by ${2} by ${3}": "${0} 플레이어의 ${1} 자원이 ${3} 플레이어의 ${2} 효과에 의해 변경됨",
     "${0} received ${1} M€ from ${2} owner (${3})": "${0} 플레이어는 ${2} 소유자(${3})로부터 ${1} M€를 받았습니다. ",
     "${0} copied ${1} production with ${2}": "${0} 플레이어가 ${2} 효과로 ${1} 생산력을 복사했습니다.",
     "${0} used ${1} action with ${2}": "${0} 플레이어가 ${2} 카드에서 ${1} 행동을 사용했습니다.",

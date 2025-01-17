@@ -56,29 +56,30 @@ export interface MainAppData {
     game: SimpleGameModel | undefined;
 }
 
+const data: MainAppData = {
+  screen: 'empty',
+  playerkey: 0,
+  settings: raw_settings,
+  isServerSideRequestInProgress: false,
+  componentsVisibility: {
+    'milestones': true,
+    'awards_list': true,
+    'tags_concise': false,
+    'pinned_player_0': false,
+    'pinned_player_1': false,
+    'pinned_player_2': false,
+    'pinned_player_3': false,
+    'pinned_player_4': false,
+    'turmoil_parties': false,
+  } as {[x: string]: boolean},
+  game: undefined as SimpleGameModel | undefined,
+  playerView: undefined,
+  spectator: undefined,
+};
+
 export const mainAppSettings = {
   'el': '#app',
-  'data': {
-    screen: 'empty',
-    playerkey: 0,
-    settings: raw_settings,
-    isServerSideRequestInProgress: false,
-    componentsVisibility: {
-      'milestones': true,
-      'awards_list': true,
-      'tags_concise': false,
-      'pinned_player_0': false,
-      'pinned_player_1': false,
-      'pinned_player_2': false,
-      'pinned_player_3': false,
-      'pinned_player_4': false,
-      'turmoil_parties': false,
-    } as {[x: string]: boolean},
-    game: undefined as SimpleGameModel | undefined,
-    playerView: undefined,
-    spectator: undefined,
-    logPaused: false,
-  } as MainAppData,
+  'data': data,
   'components': {
     // These component keys match the screen values, and their entries in index.html.
     'player-input-factory': PlayerInputFactory,

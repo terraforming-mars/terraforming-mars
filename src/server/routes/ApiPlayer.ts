@@ -31,7 +31,7 @@ export class ApiPlayer extends Handler {
     try {
       ctx.ipTracker.addParticipant(playerId, ctx.ip);
       const player = game.getPlayerById(playerId);
-      responses.writeJson(res, Server.getPlayerModel(player));
+      responses.writeJson(res, ctx, Server.getPlayerModel(player));
     } catch (err) {
       console.warn(`unable to find player ${playerId}`, err);
       responses.notFound(req, res);

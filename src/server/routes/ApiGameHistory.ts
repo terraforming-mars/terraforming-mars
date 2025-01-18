@@ -25,7 +25,7 @@ export class ApiGameHistory extends Handler {
     }
     try {
       const saveIds = await Database.getInstance().getSaveIds(gameId);
-      responses.writeJson(res, [...saveIds].sort());
+      responses.writeJson(res, ctx, [...saveIds].sort());
     } catch (err) {
       console.error(err);
       responses.badRequest(req, res, 'could not load admin stats');

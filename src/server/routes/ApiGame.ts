@@ -29,6 +29,6 @@ export class ApiGame extends Handler {
       return;
     }
     const model = Server.getSimpleGameModel(game);
-    responses.writeJson(res, model);
+    responses.writeJson(res, ctx, model);
   }
 }

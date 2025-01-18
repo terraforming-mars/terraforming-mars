@@ -16,6 +16,6 @@ export class ApiGames extends Handler {
       responses.notFound(req, res, 'could not load game list');
       return;
     }
-    responses.writeJson(res, list);
+    responses.writeJson(res, ctx, list);
   }
 }

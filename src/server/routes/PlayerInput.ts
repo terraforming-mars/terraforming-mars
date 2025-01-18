@@ -77,7 +77,7 @@ export class PlayerInput extends Handler {
     } catch (err) {
       console.error(err);
     }
-    responses.writeJson(res, Server.getPlayerModel(player));
+    responses.writeJson(res, ctx, Server.getPlayerModel(player));
   }
 
   private processInput(req: Request, res: Response, ctx: Context, player: IPlayer): Promise<void> {
@@ -96,7 +96,7 @@ export class PlayerInput extends Handler {
             await this.performUndo(req, res, ctx, player);
           } else {
             player.process(entity);
-            responses.writeJson(res, Server.getPlayerModel(player));
+            responses.writeJson(res, ctx, Server.getPlayerModel(player));
           }
           resolve();
         } catch (e) {

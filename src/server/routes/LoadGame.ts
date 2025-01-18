@@ -26,7 +26,7 @@ export class LoadGame extends Handler {
     return undefined;
   }
 
-  public override put(req: Request, res: Response, _ctx: Context): Promise<void> {
+  public override put(req: Request, res: Response, ctx: Context): Promise<void> {
     return new Promise((resolve) => {
       let body = '';
       req.on('data', function(data) {
@@ -51,7 +51,7 @@ export class LoadGame extends Handler {
             console.warn(`unable to find ${gameId} in database`);
             responses.notFound(req, res, 'game_id not found');
           } else {
-            responses.writeJson(res, Server.getSimpleGameModel(game));
+            responses.writeJson(res, ctx, Server.getSimpleGameModel(game));
           }
         } catch (error) {
           responses.internalServerError(req, res, error);

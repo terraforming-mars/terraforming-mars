@@ -73,12 +73,10 @@
     "Prelude Draft variant": "Präludium-Draft-Variante",
     "Initial Draft variant": "Starthand-Draft-Variante",
     "Initial Draft rounds": "Starthand-Draft-Runde",
-    "Corporations Draft": "Konzern-Draft-Variante",
     "Random first player": "Zufälliger Startspieler",
     "Show real-time VP": "Zeige Echtzeit-Siegpunkte",
     "Allow undo": "Zug rückgängig machen erlauben",
     "7 Heat Into Temperature": "7 Wärme in Temperatur",
-    "BreakThrough": "Durchbruch",
     "NEXT CARD:": "NÄCHSTE KARTE: ",
     "GENERATION 1 OF 12": "GENERATION ${0} von ${1}",
     "of 14": "von 14",
@@ -378,8 +376,6 @@
     "Error with input": "Fehlerhafte Eingabe",
     "This game is over!": "Das Spiel ist zuende!",
     "Not your turn to take any actions": "Es ist nicht dein Zug",
-    "Please Login with right user": "Bitte logge dich mit dem richtigen Benutzer ein",
-    "Undoing, Please refresh or wait seconds": "Rückgängig, bitte aktualisiere or warte einige Sekunden",
     "Pass": "Passen",
     "Automatically pass after this action": "Automatisch Passen",
     "Pay for a Standard Project": "Bezahle für ein Standardprojekt",
@@ -428,12 +424,8 @@
     "Increase the Moon logistics rate": "Erhöhe Logistikwertung",
 
     "Login": "Einloggen",
-    "Register": "Registrieren",
-    "Go To Register": "Zur Registrierung",
     "My Games": "Meine Spiele",
-    "Donate": "Spenden",
     "LoginOut": "Ausloggen",
-    "Help Translation": "Übersetungshilfe",
 
     "Toggle all": "Alles einschalten",
     "Base": "Basis",
@@ -1244,7 +1236,7 @@
     "You will be limited to excavating a space that gives 1 energy production.": "Du kannst nur ein Feld ausgraben, der 1 Energieproduktion ergibt.",
     "There are not enough cards to complete this action. You will draw fewer cards than expected.": "Es gibt nicht genügend Karten, um diese Aktion durchzuführen. Du wirst weniger Karten ziehen als erwartet.",
     "Behavior in this card will apply to Double Down, and so have no effect.": "Das Verhalten auf dieser Karte gilt für Einsatz verdoppeln und hat daher keinen Effekt.",
-    
+
     "Cards List": "Kartenliste",
     "legacy card UI": "Alte Kartenliste",
     "Advanced »": "Erweitert »",

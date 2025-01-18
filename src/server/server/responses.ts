@@ -67,7 +67,7 @@ export function downgradeRedirect(_req: Request, res: Response, ctx: Context): v
   res.end();
 }
 
-export function writeJson(res: Response, json: any, space?: string | number | undefined) {
+export function writeJson(res: Response, _ctx: Context, json: any, space?: string | number | undefined) {
   res.setHeader('Content-Type', 'application/json');
   const s = JSON.stringify(json, undefined, space);
   res.end(s);

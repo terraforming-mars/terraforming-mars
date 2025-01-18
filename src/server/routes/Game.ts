@@ -185,7 +185,7 @@ export class GameHandler extends Handler {
             game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, seed, spectatorId);
           }
           GameLoader.getInstance().add(game);
-          responses.writeJson(res, Server.getSimpleGameModel(game));
+          responses.writeJson(res, ctx, Server.getSimpleGameModel(game));
         } catch (error) {
           responses.internalServerError(req, res, error);
         }

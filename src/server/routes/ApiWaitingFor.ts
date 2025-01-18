@@ -58,9 +58,9 @@ export class ApiWaitingFor extends Handler {
     try {
       if (isPlayerId(id)) {
         ctx.ipTracker.addParticipant(id, ctx.ip);
-        responses.writeJson(res, this.getPlayerWaitingForModel(game.getPlayerById(id), game, gameAge, undoCount));
+        responses.writeJson(res, ctx, this.getPlayerWaitingForModel(game.getPlayerById(id), game, gameAge, undoCount));
       } else if (isSpectatorId(id)) {
-        responses.writeJson(res, this.getSpectatorWaitingForModel(game, gameAge, undoCount));
+        responses.writeJson(res, ctx, this.getSpectatorWaitingForModel(game, gameAge, undoCount));
       } else {
         responses.internalServerError(req, res, 'id not found');
       }

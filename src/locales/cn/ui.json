@@ -31,7 +31,6 @@
     "Show real-time VP": "显示实时分数",
     "Allow undo": "允许撤回",
     "7 Heat Into Temperature": "七热升温",
-    "BreakThrough": "界限突破",
     "NEXT CARD:": "下一张卡:",
 
     "Milestones": "里程碑",
@@ -221,8 +220,6 @@
     "Error with input": "输入错误",
     "This game is over!": "游戏已经结束了",
     "Not your turn to take any actions": "还没到你的回合,暂无法行动",
-    "Please Login with right user": "请登录该用户以继续操作",
-    "Undoing, Please refresh or wait seconds": "撤回中，请等待几秒或手动刷新页面",
     "Pass": "结束本时代",
     "Pay for a Standard Project": "执行标准行动",
     "Play project card": "打出项目卡",
@@ -254,12 +251,8 @@
     "Increase Venus scale": "提升金星改造度",
 
     "Login": "登录",
-    "Register": "注册",
-    "Go To Register": "前往注册",
     "My Games": "我的对局",
-    "Donate": "捐助本站",
     "LoginOut": "登出",
-    "Help Translation": "帮助翻译",
 
 
     "Toggle all": "全部切换",

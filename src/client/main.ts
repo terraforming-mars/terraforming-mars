@@ -30,14 +30,6 @@ async function bootstrap() {
     componentUpdated: trimEmptyTextNodes,
   });
 
-  if (window.isSecureContext && 'serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('sw.js').then(function(registration) {
-        console.log('registered the service worker', registration);
-      });
-    });
-  }
-
   new Vue(mainAppSettings);
 }
 

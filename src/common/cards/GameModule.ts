@@ -43,7 +43,7 @@ export const MODULE_NAMES: Readonly<Record<GameModule, string>> = {
 
 export const DEFAULT_EXPANSIONS: Record<Expansion, boolean> = {
   corpera: true,
-  promo: false,
+  promo: true,
   venus: false,
   colonies: false,
   prelude: true,

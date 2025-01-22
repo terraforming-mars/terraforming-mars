@@ -657,7 +657,7 @@ export default (Vue as WithRefs<Refs>).extend({
       escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
       twoCorpsVariant: false,
       customCeos: [],
-      startingCeos: 3,
+      startingCeos: 4,
       startingPreludes: 4,
       preludeDraftVariant: undefined,
       ceosDraftVariant: undefined,

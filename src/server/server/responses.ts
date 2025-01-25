@@ -28,6 +28,15 @@ export function notFound(req: Request, res: Response, err?: string): void {
   res.end();
 }
 
+export function setCookie(res: Response, key: string, value: string) {
+  res.setHeader('Set-Cookie', `${key}=${value}; HttpOnly; Secure; SameSite=Strict; Max-Age=86400; Path=/`);
+}
+
+export function redirect(res: Response, destination: string) {
+  res.writeHead(statusCode.found, {'Location': destination});
+  res.end();
+}
+
 export function notModified(res: Response): void {
   res.writeHead(statusCode.notModified);
   res.end();
@@ -67,8 +76,11 @@ export function downgradeRedirect(_req: Request, res: Response, ctx: Context): v
   res.end();
 }
 
-export function writeJson(res: Response, _ctx: Context, json: any, space?: string | number | undefined) {
+export function writeJson(res: Response, ctx: Context, json: any, space?: string | number | undefined) {
   res.setHeader('Content-Type', 'application/json');
+  if (ctx.user) {
+    json._user = {userid: ctx.user.global_name};
+  }
   const s = JSON.stringify(json, undefined, space);
   res.end(s);
 }

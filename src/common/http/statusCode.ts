@@ -2,6 +2,10 @@
 export const statusCode = {
   /** 301: moved permanently */
   movedPermanently: 301,
+  /** 302: found */
+  found: 302,
+  /** 303: see other */
+  seeOther: 303,
   /** 304: not modified */
   notModified: 304,
   /** 400: bad request */

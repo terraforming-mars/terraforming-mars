@@ -18,6 +18,7 @@ import {processRequest} from './server/requestProcessor';
 import {timeAsync} from './utils/timer';
 import {GameLoader} from './database/GameLoader';
 import {globalInitialize} from './globalInitialize';
+import {SessionManager} from './server/auth/SessionManager';
 
 process.on('uncaughtException', (err: any) => {
   console.error('UNCAUGHT EXCEPTION', err);
@@ -84,6 +85,9 @@ async function start() {
     .then((v) => {
       metrics.startDatabase.set(v.duration);
     });
+
+  // Initialize the session manager after initializing the database.
+  await SessionManager.getInstance().initialize();
 
   try {
     const stats = await Database.getInstance().stats();

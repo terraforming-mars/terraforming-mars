@@ -1,5 +1,6 @@
 import * as prometheus from 'prom-client';
 import * as responses from './responses';
+import * as authcookies from './auth/authcookies';
 
 import {paths} from '../../common/app/paths';
 
@@ -32,6 +33,12 @@ import {Request} from '../Request';
 import {Response} from '../Response';
 import {Clock} from '../../common/Timer';
 import {Autopass} from '../routes/Autopass';
+import {DiscordAuth} from '../routes/DiscordAuth';
+import {ApiLogout} from '../routes/ApiLogout';
+import {SessionId} from '../auth/Session';
+import {SessionManager} from './auth/SessionManager';
+import {DiscordUser} from './auth/discord';
+import {ApiProfile} from '../routes/ApiProfile';
 
 const metrics = {
   count: new prometheus.Counter({
@@ -78,15 +85,18 @@ const handlers: Map<string, IHandler> = new Map(
     [paths.HELP, ServeApp.INSTANCE],
     [paths.LOAD, Load.INSTANCE],
     [paths.LOAD_GAME, LoadGame.INSTANCE],
+    [paths.LOGIN, ServeApp.INSTANCE],
+    [paths.API_LOGOUT, ApiLogout.INSTANCE],
     ['main.js', ServeAsset.INSTANCE],
     ['main.js.map', ServeAsset.INSTANCE],
+    ['auth/discord/callback', DiscordAuth.INSTANCE],
     [paths.NEW_GAME, ServeApp.INSTANCE],
     [paths.PLAYER, ServeApp.INSTANCE],
     [paths.PLAYER_INPUT, PlayerInput.INSTANCE],
+    [paths.API_PROFILE, ApiProfile.INSTANCE],
     [paths.RESET, Reset.INSTANCE],
     [paths.SPECTATOR, ServeApp.INSTANCE],
     ['styles.css', ServeAsset.INSTANCE],
-    ['sw.js', ServeAsset.INSTANCE],
     [paths.THE_END, ServeApp.INSTANCE],
   ],
 );
@@ -108,15 +118,13 @@ function getHandler(pathname: string): IHandler | undefined {
   if (handler !== undefined) {
     return handler;
   }
-  if (pathname.startsWith('assets/')) {
+  if (pathname.startsWith('assets/') || pathname === 'sw.js') {
     return ServeAsset.INSTANCE;
   }
   return undefined;
 }
 
-export function processRequest(
-  req: Request,
-  res: Response): void {
+export function processRequest(req: Request, res: Response): void {
   const start = process.hrtime.bigint();
   let pathnameForLatency: string | undefined = undefined;
   try {
@@ -135,6 +143,17 @@ export function processRequest(
       return;
     }
 
+    let user: DiscordUser | undefined = undefined;
+    let sessionid: SessionId | undefined = undefined;
+    try {
+      sessionid = authcookies.extract(req);
+      if (sessionid !== undefined) {
+        user = SessionManager.getInstance().get(sessionid);
+      }
+    } catch (e) {
+      console.error('While extracting cookies', e);
+    }
+
     const url = new URL(req.url, `http://${req.headers.host}`);
     const ctx: Context = {
       url: url,
@@ -145,7 +164,10 @@ export function processRequest(
       ids: {
         serverId,
         statsId,
-      }};
+      },
+      sessionid,
+      user: user,
+    };
 
     const pathname = url.pathname.substring(1); // Remove leading '/'
     pathnameForLatency = pathname;

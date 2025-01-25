@@ -162,6 +162,7 @@ export class ServeAsset extends Handler {
       return this.toMainFile(urlPath, encodings);
 
     case 'sw.js':
+    case '/sw.js':
       return this.toServiceWorkerFile(urlPath);
 
     case 'favicon.ico':

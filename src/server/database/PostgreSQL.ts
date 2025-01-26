@@ -109,7 +109,7 @@ export class PostgreSQL implements IDatabase {
     CREATE INDEX IF NOT EXISTS games_i2 on games(created_time);
     CREATE INDEX IF NOT EXISTS participants_idx_ids on participants USING GIN (participants);
     CREATE INDEX IF NOT EXISTS completed_game_idx_completed_time on completed_game(completed_time);
-    CREATE INDEX IF NOT EXISTS session_idx_session_id on session(expiration_time);
+    CREATE INDEX IF NOT EXISTS session_idx_expiration_time on session(expiration_time);
     `;
     await this.client.query(sql);
   }

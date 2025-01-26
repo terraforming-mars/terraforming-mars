@@ -37,7 +37,15 @@ export async function getDiscordUser(code: string): Promise<DiscordUser> {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
-  const tokenData = await tokenResponse.json();
+
+  const tokenData: TokenData = await tokenResponse.json();
+
+  if (tokenResponse.ok === false) {
+    console.error(tokenResponse.status);
+    console.error(tokenResponse.statusText);
+    console.error('Error fetching auth token: ' + tokenResponse.statusText);
+    throw new Error(`${tokenResponse.status} - for URL root ${URL_ROOT}`);
+  }
 
   const userResponse = await fetch('https://discord.com/api/users/@me', {
     headers: {
@@ -48,3 +56,10 @@ export async function getDiscordUser(code: string): Promise<DiscordUser> {
   return discordUser;
 }
 
+type TokenData = {
+  access_token: string,
+  expires_in: number,
+  refresh_token: string,
+  scope: string,
+  token_type: string,
+}

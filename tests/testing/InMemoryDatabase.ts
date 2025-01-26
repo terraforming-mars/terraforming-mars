@@ -4,12 +4,17 @@ import {SerializedGame} from '../../src/server/SerializedGame';
 import {GameIdLedger, IDatabase} from '../../src/server/database/IDatabase';
 import {GameId, ParticipantId} from '../../src/common/Types';
 import {Session, SessionId} from '../../src/server/auth/Session';
+import {Clock} from '../../src/common/Timer';
 
 export class InMemoryDatabase implements IDatabase {
   public games: Map<GameId, Array<SerializedGame | undefined>> = new Map();
   protected completedGames: Map<GameId, Date> = new Map();
   protected sessions: Map<SessionId, Session> = new Map();
+  private clock: Clock;
 
+  constructor(clock: Clock = new Clock()) {
+    this.clock = clock;
+  }
   initialize(): Promise<unknown> {
     return Promise.resolve();
   }
@@ -89,7 +94,7 @@ export class InMemoryDatabase implements IDatabase {
     return Promise.resolve();
   }
   markFinished(gameId: GameId): Promise<void> {
-    this.completedGames.set(gameId, new Date());
+    this.completedGames.set(gameId, new Date(this.clock.now()));
     return Promise.resolve();
   }
   purgeUnfinishedGames(): Promise<Array<GameId>> {
@@ -132,7 +137,7 @@ export class InMemoryDatabase implements IDatabase {
     return Promise.resolve();
   }
   getSessions(): Promise<Array<Session>> {
-    const now = Date.now();
+    const now = this.clock.now();
     return Promise.resolve(Array.from(this.sessions.values()).filter((e) => e.expirationTimeMillis > now));
   }
 }

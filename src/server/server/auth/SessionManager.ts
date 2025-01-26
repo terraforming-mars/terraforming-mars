@@ -7,18 +7,23 @@ import {Database} from '../../database/Database';
 import {durationToMilliseconds} from '../../../server/utils/durations';
 
 export interface ISessionManager {
+  initialize(): Promise<void>;
   create(discordUser: DiscordUser): Promise<SessionId>;
+  get(sessionid: SessionId): DiscordUser | undefined;
+  expire(sessionid: SessionId): Promise<void>;
 }
 
 const DEFAULT_EXPIRATION_TIME = durationToMilliseconds(process.env.SESSION_DURATION || '30m');
+
 export class SessionManager implements ISessionManager {
   private static readonly INSTANCE = new SessionManager();
 
-  public static getInstance() {
+  public static getInstance(): ISessionManager {
     return this.INSTANCE;
   }
 
   private sessions: Map<SessionId, Session> = new Map();
+  private initialized: boolean;
   private clock: Clock;
   private database: IDatabase;
   private expirationTimeMillis: number;
@@ -30,17 +35,26 @@ export class SessionManager implements ISessionManager {
     this.clock = clock;
     this.database = database;
     this.expirationTimeMillis = expirationTimeMillis;
+    this.initialized = false;
   }
 
-  public async initialize() {
+  public async initialize(): Promise<void> {
+    if (this.initialized) {
+      // It's probably safe to have something more sophisticated, like
+      // empty the map first. But then it's not 'initlalize', it's
+      // 'reload'.
+      throw new Error('Session manager already initialized');
+    }
     try {
-      const sessions = await(Database.getInstance().getSessions());
+      const sessions = await(this.database.getSessions());
+      this.initialized = true;
       for (const session of sessions) {
         this.sessions.set(session.id, session);
       }
       console.log('initialized session manager with ' + this.sessions.size + ' sessions.');
     } catch (e) {
       console.error('Cannot load sessions: ', e);
+      throw e;
     }
   }
 

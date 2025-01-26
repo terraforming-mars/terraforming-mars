@@ -18,12 +18,14 @@ export type DiscordUser = {
   avatar_decoration_data?: any // data for the user's avatar decoration
 };
 
+const URL_ROOT = process.env.URL_ROOT || 'http://localhost:8080';
+
 export async function getDiscordUser(code: string): Promise<DiscordUser> {
   const data = {
     client_id: process.env['DISCORD_CLIENT_ID'] || '',
     client_secret: process.env['DISCORD_CLIENT_SECRET'] || '',
     grant_type: 'authorization_code',
-    redirect_uri: 'http://localhost:8080/auth/discord/callback',
+    redirect_uri: `${URL_ROOT}/auth/discord/callback`,
     code: code,
     scope: 'identify',
   };

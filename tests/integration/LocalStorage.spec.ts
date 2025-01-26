@@ -32,6 +32,7 @@ describeDatabaseSuite({
   omit: {
     markFinished: true,
     purgeUnfinishedGames: true,
+    sessions: true,
   },
   stats: {
     'type': 'Local Storage',

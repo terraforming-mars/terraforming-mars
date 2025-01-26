@@ -13,6 +13,7 @@ import {GameId} from '../../src/common/Types';
 import {statusCode} from '../../src/common/http/statusCode';
 import {cast} from '../TestingUtils';
 import {SelectInitialCards} from '../../src/server/inputs/SelectInitialCards';
+import {DiscordUser} from '../../src/server/server/auth/discord';
 
 /**
  * Describes a database test
@@ -25,6 +26,7 @@ export type DatabaseTestDescriptor<T extends ITestDatabase> = {
     purgeUnfinishedGames: boolean,
     markFinished: boolean,
     moreCleaning: boolean,
+    sessions: boolean,
   }>,
   otherTests?(dbFactory: () => T): void,
 };
@@ -316,6 +318,34 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
       const saveIds = await db.getSaveIds(game.id);
       expect(saveIds).has.members([0, 1, 2, 3]);
     });
+
+    if (dtor.omit?.sessions !== true) {
+      const discordUser = {id: 'xyz'} as DiscordUser;
+      it('createSession', async () => {
+        const expirationTimeMillis = Date.now() + 100000;
+        await db.createSession({id: '123', expirationTimeMillis, data: {discordUser}});
+        const sessions = await db.getSessions();
+        expect(sessions).deep.eq([{id: '123', expirationTimeMillis, data: {discordUser}}]);
+      });
+
+      it('deleteSession', async () => {
+        // TODO(kberg): Make databases rely on Clock. /shrug
+        const expirationTimeMillis = Date.now() + 100000;
+        await db.createSession({id: '123', expirationTimeMillis, data: {discordUser}});
+        let sessions = await db.getSessions();
+        expect(sessions).deep.eq([{id: '123', expirationTimeMillis, data: {discordUser}}]);
+        await db.deleteSession('123');
+        sessions = await db.getSessions();
+        expect(sessions).to.be.empty;
+      });
+
+      it('expiredSession', async () => {
+        const expirationTimeMillis = Date.now() - 1;
+        await db.createSession({id: '123', expirationTimeMillis, data: {discordUser}});
+        const sessions = await db.getSessions();
+        expect(sessions).to.be.empty;
+      });
+    }
 
     it('stats', async () => {
       const result = await db.stats();

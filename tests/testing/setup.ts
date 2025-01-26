@@ -15,7 +15,7 @@ const FAKE_DATABASE: IDatabase = {
   getGameIds: () => Promise.resolve([]),
   getSaveIds: () => Promise.resolve([]),
   initialize: () => Promise.resolve(),
-  saveGameResults: () => {},
+  saveGameResults: () => { },
   saveGame: () => Promise.resolve(),
   purgeUnfinishedGames: () => Promise.resolve([]),
   compressCompletedGames: () => Promise.resolve(),
@@ -23,6 +23,9 @@ const FAKE_DATABASE: IDatabase = {
 
   storeParticipants: () => Promise.resolve(),
   getParticipants: () => Promise.resolve([]),
+  createSession: () => Promise.resolve(),
+  deleteSession: () => Promise.resolve(),
+  getSessions: () => Promise.resolve([]),
 };
 
 let databaseUnderTest: IDatabase = FAKE_DATABASE;

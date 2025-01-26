@@ -95,7 +95,7 @@ describe('GameLoader', function() {
   it('gets no game when game goes missing from database', async function() {
     const game1 = await instance.getGame('game-never');
     expect(game1).is.undefined;
-    database.data.delete('gameid');
+    database.games.delete('gameid');
     const game2 = await instance.getGame('gameid');
     expect(game2).is.undefined;
   });
@@ -133,7 +133,7 @@ describe('GameLoader', function() {
   });
 
   it('loads values when no game ids', async function() {
-    database.data.delete('gameid');
+    database.games.delete('gameid');
     const game1 = await instance.getGame('gameid');
     expect(game1).is.undefined;
   });
@@ -152,7 +152,7 @@ describe('GameLoader', function() {
 
   it('waits for games to finish loading', async function() {
     // Set up a clean number of games;
-    database.data.delete('gameid');
+    database.games.delete('gameid');
     const numberOfGames = 10;
     for (let i = 0; i < numberOfGames; i++) {
       const player = new Player('name', Color.BLUE, false, 0, 'p-' + i as PlayerId);

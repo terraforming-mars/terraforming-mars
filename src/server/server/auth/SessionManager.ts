@@ -11,6 +11,7 @@ export interface ISessionManager {
   create(discordUser: DiscordUser): Promise<SessionId>;
   get(sessionid: SessionId): DiscordUser | undefined;
   expire(sessionid: SessionId): Promise<void>;
+  sessionIds(): ReadonlyArray<SessionId>;
 }
 
 const DEFAULT_EXPIRATION_TIME = durationToMilliseconds(process.env.SESSION_DURATION || '30m');
@@ -88,5 +89,9 @@ export class SessionManager implements ISessionManager {
   async expire(sessionid: SessionId): Promise<void> {
     this.sessions.delete(sessionid);
     await this.database.deleteSession(sessionid);
+  }
+
+  sessionIds(): ReadonlyArray<SessionId> {
+    return Array.from(this.sessions.keys());
   }
 }

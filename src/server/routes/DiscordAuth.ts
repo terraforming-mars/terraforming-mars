@@ -4,7 +4,6 @@ import {Context} from './IHandler';
 import {Request} from '../Request';
 import {Response} from '../Response';
 import {getDiscordUser} from '../server/auth/discord';
-import {SessionManager} from '../server/auth/SessionManager';
 import {paths} from '../../common/app/paths';
 import {sessionIdCookieName} from '../server/auth/authcookies';
 
@@ -19,14 +18,14 @@ export class DiscordAuth extends Handler {
       return;
     }
     const discordUser = await getDiscordUser(code);
-    const sessionId = await SessionManager.getInstance().create(discordUser);
+    const sessionId = await ctx.sessionManager.create(discordUser);
 
     // Find or create user in your database
     // let user = await db.findUserByDiscordId(discordUser.id);
     // if (!user) {
     //   user = await db.createUser({discordId: discordUser.id, username: discordUser.username /* ...other data */});
 
-    responses.setCookie(res, sessionIdCookieName, sessionId);
+    responses.setCookie(res, sessionIdCookieName, sessionId, 86400);
     responses.redirect(res, '/' + paths.LOGIN);
   }
 }

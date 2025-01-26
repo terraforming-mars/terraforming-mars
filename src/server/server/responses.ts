@@ -28,8 +28,12 @@ export function notFound(req: Request, res: Response, err?: string): void {
   res.end();
 }
 
-export function setCookie(res: Response, key: string, value: string) {
-  res.setHeader('Set-Cookie', `${key}=${value}; HttpOnly; Secure; SameSite=Strict; Max-Age=86400; Path=/`);
+export function setCookie(res: Response, key: string, value: string, lifetimeSeconds: number) {
+  res.setHeader('Set-Cookie', `${key}=${value}; HttpOnly; Secure; SameSite=Strict; Max-Age=${lifetimeSeconds}; Path=/`);
+}
+
+export function clearCookie(res: Response, key: string) {
+  res.setHeader('Set-Cookie', `${key}=deleted; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT`);
 }
 
 export function redirect(res: Response, destination: string) {
@@ -66,6 +70,13 @@ export function notAuthorized(req: Request, res: Response): void {
   console.warn('Not authorized', req.method, req.url);
   res.writeHead(statusCode.forbidden);
   res.write('Not authorized');
+  res.end();
+}
+
+export function unprocessableEntity(req: Request, res: Response, msg: string = 'Unprocessable Entity'): void {
+  console.warn(msg, req.method, req.url);
+  res.writeHead(statusCode.unprocessableEntity);
+  res.write(msg);
   res.end();
 }
 

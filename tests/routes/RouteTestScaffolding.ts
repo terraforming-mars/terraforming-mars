@@ -1,6 +1,7 @@
 import {Context} from '../../src/server/routes/IHandler';
 import {Handler} from '../../src/server/routes/Handler';
 import {FakeGameLoader} from './FakeGameLoader';
+import {FakeSessionManager} from './FakeSessionManager';
 import {MockRequest, MockResponse} from './HttpMocks';
 import {newIpTracker} from '../../src/server/server/IPTracker';
 import {FakeClock} from '../common/FakeClock';
@@ -17,6 +18,7 @@ export class RouteTestScaffolding {
       ip: '123.45.678.90',
       ipTracker: newIpTracker(),
       gameLoader: new FakeGameLoader(),
+      sessionManager: new FakeSessionManager(),
       ids: {
         serverId: '1',
         statsId: '2',

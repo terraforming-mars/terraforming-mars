@@ -143,12 +143,13 @@ export function processRequest(req: Request, res: Response): void {
       return;
     }
 
+    const sessionManager = SessionManager.getInstance();
     let user: DiscordUser | undefined = undefined;
     let sessionid: SessionId | undefined = undefined;
     try {
       sessionid = authcookies.extract(req);
       if (sessionid !== undefined) {
-        user = SessionManager.getInstance().get(sessionid);
+        user = sessionManager.get(sessionid);
       }
     } catch (e) {
       console.error('While extracting cookies', e);
@@ -159,6 +160,7 @@ export function processRequest(req: Request, res: Response): void {
       url: url,
       clock,
       gameLoader: GameLoader.getInstance(),
+      sessionManager: sessionManager,
       ip: getIPAddress(req),
       ipTracker: ipTracker,
       ids: {

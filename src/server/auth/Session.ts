@@ -1,9 +1,12 @@
 import {DiscordUser} from '../server/auth/discord';
 
 export type SessionId = string;
+export type SessionData = {
+  discordUser: DiscordUser;
+}
 
 export type Session = {
   id: SessionId;
-  discordUser: DiscordUser;
-  expirationDateMillis: number;
+  data: SessionData;
+  expirationTimeMillis: number;
 }

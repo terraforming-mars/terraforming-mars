@@ -1,16 +1,16 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import type * as sqlite3 from 'sqlite3';
 
 import {GameIdLedger, IDatabase} from './IDatabase';
 import {IGame, Score} from '../IGame';
 import {GameOptions} from '../game/GameOptions';
 import {GameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
-
-import type * as sqlite3 from 'sqlite3';
-
 import {daysAgoToSeconds} from './utils';
 import {MultiMap} from 'mnemonist';
+import {Session, SessionId} from '../auth/Session';
+
 export const IN_MEMORY_SQLITE_PATH = ':memory:';
 
 export class SQLite implements IDatabase {
@@ -48,6 +48,14 @@ export class SQLite implements IDatabase {
       completed_time timestamp not null default (strftime('%s', 'now')),
       PRIMARY KEY (game_id))`);
     await this.asyncRun('DROP TABLE IF EXISTS purges');
+
+    await this.asyncRun(
+      `CREATE TABLE IF NOT EXISTS session(
+        session_id varchar not null,
+        data varchar not null,
+        expiration_time timestamp not null,
+        PRIMARY KEY (session_id)
+      )`);
   }
 
   public async getPlayerCount(gameId: GameId): Promise<number> {
@@ -245,6 +253,25 @@ export class SQLite implements IDatabase {
       result.push({gameId, participantIds});
     });
     return result;
+  }
+
+  public async createSession(session: Session): Promise<void> {
+    await this.asyncRun('INSERT INTO session (session_id, data, expiration_time) VALUES($1, $2, $3)', [session.id, JSON.stringify(session.data), session.expirationTimeMillis / 1000]);
+  }
+
+  public async deleteSession(sessionId: SessionId): Promise<void> {
+    await this.asyncRun('DELETE FROM session where session_id = $1', [sessionId]);
+  }
+
+  async getSessions(): Promise<Array<Session>> {
+    const selectResult = await this.asyncAll('SELECT session_id, data, expiration_time FROM session where expiration_time > ?', [Date.now() / 1000]);
+    return selectResult.map((row) => {
+      return {
+        id: row.session_id,
+        data: JSON.parse(row.data),
+        expirationTimeMillis: row.expiration_time * 1000,
+      };
+    });
   }
 
   protected asyncRun(sql: string, params?: any): Promise<sqlite3.RunResult> {

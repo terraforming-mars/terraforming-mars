@@ -3,6 +3,7 @@ import {IGame, Score} from '../IGame';
 import {GameOptions} from '../game/GameOptions';
 import {GameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
+import {Session} from '../auth/Session';
 
 let storage: Storage;
 
@@ -198,5 +199,15 @@ export class LocalStorage implements IDatabase {
       }
     }
     return Promise.resolve(gameIds);
+  }
+
+  createSession(): Promise<void> {
+    return Promise.resolve();
+  }
+  deleteSession(): Promise<void> {
+    return Promise.resolve();
+  }
+  getSessions(): Promise<Array<Session>> {
+    return Promise.resolve([]);
   }
 }

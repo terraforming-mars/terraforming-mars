@@ -89,7 +89,7 @@ const handlers: Map<string, IHandler> = new Map(
     [paths.API_LOGOUT, ApiLogout.INSTANCE],
     ['main.js', ServeAsset.INSTANCE],
     ['main.js.map', ServeAsset.INSTANCE],
-    ['auth/discord/callback', DiscordAuth.INSTANCE],
+    [paths.AUTH_DISCORD_CALLBACK, DiscordAuth.INSTANCE],
     [paths.NEW_GAME, ServeApp.INSTANCE],
     [paths.PLAYER, ServeApp.INSTANCE],
     [paths.PLAYER_INPUT, PlayerInput.INSTANCE],

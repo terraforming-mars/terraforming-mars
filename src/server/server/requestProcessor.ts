@@ -39,6 +39,7 @@ import {SessionId} from '../auth/Session';
 import {SessionManager} from './auth/SessionManager';
 import {DiscordUser} from './auth/discord';
 import {ApiProfile} from '../routes/ApiProfile';
+import {Login} from '../routes/Login';
 
 const metrics = {
   count: new prometheus.Counter({
@@ -85,7 +86,7 @@ const handlers: Map<string, IHandler> = new Map(
     [paths.HELP, ServeApp.INSTANCE],
     [paths.LOAD, Load.INSTANCE],
     [paths.LOAD_GAME, LoadGame.INSTANCE],
-    [paths.LOGIN, ServeApp.INSTANCE],
+    [paths.LOGIN, Login.INSTANCE],
     [paths.API_LOGOUT, ApiLogout.INSTANCE],
     ['main.js', ServeAsset.INSTANCE],
     ['main.js.map', ServeAsset.INSTANCE],

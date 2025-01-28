@@ -30,7 +30,7 @@ export default Vue.extend({
   },
   mounted() {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'profile');
+    xhr.open('GET', paths.API_PROFILE);
     xhr.onerror = () => alert('Error getting session profile data');
     xhr.onload = () => {
       try {
@@ -48,7 +48,11 @@ export default Vue.extend({
   },
   computed: {
     loginUrl(): string {
-      return 'https://discord.com/oauth2/authorize?client_id=1326283152448163921&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fauth%2Fdiscord%2Fcallback&scope=identify';
+      const thisUrl = window.location.href;
+      const idx = window.location.href.lastIndexOf('/' + paths.LOGIN);
+      const url = thisUrl.substring(0, idx) + '/' + paths.AUTH_DISCORD_CALLBACK;
+      const encoded = encodeURI(url);
+      return 'https://discord.com/oauth2/authorize?client_id=1326283152448163921&response_type=code&scope=identify&redirect_uri=' + encoded;
     },
     logoutURL(): string {
       return paths.API_LOGOUT;

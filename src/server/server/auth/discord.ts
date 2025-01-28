@@ -52,7 +52,16 @@ export async function getDiscordUser(code: string): Promise<DiscordUser> {
       authorization: `${tokenData.token_type} ${tokenData.access_token}`,
     },
   });
+
+  if (userResponse.ok === false) {
+    console.error(userResponse.status);
+    console.error(userResponse.statusText);
+    console.error('Error fetching user: ' + userResponse.statusText);
+    throw new Error(`Fetching user: ${userResponse.status}`);
+  }
+
   const discordUser = await userResponse.json();
+
   return discordUser;
 }
 

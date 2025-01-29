@@ -30,18 +30,6 @@ export async function getDiscordUser(code: string): Promise<DiscordUser> {
     scope: 'identify',
   };
 
-  {
-    function sanitize(str: string): string {
-      return str.length === 0 ? 'EMPTY' : 'REDACTED';
-    }
-    const sanitized = {
-      ...data,
-      client_id: sanitize(data.client_id),
-      clent_secret: sanitize(data.client_secret),
-      code: sanitize(data.code),
-    };
-    console.log(sanitized);
-  }
   const tokenResponse = await fetch('https://discord.com/api/oauth2/token', {
     method: 'POST',
     body: new URLSearchParams(data),
@@ -56,6 +44,19 @@ export async function getDiscordUser(code: string): Promise<DiscordUser> {
     console.error(tokenResponse.status);
     console.error(tokenResponse.statusText);
     console.error('Error fetching auth token: ' + tokenResponse.statusText);
+    {
+      function sanitize(str: string): string {
+        return str.length === 0 ? 'EMPTY' : 'REDACTED';
+      }
+      const sanitized = {
+        ...data,
+        client_id: sanitize(data.client_id),
+        client_secret: sanitize(data.client_secret),
+        code: sanitize(data.code),
+      };
+      console.log(sanitized);
+    }
+
     throw new Error(`${tokenResponse.status} - for URL root ${URL_ROOT}`);
   }
 

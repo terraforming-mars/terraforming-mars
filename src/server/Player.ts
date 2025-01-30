@@ -79,6 +79,7 @@ import {IParty} from './turmoil/parties/IParty';
 import {AlliedParty} from './turmoil/AlliedParty';
 import {newStandardDraft} from './Draft';
 import {Message} from '../common/logs/Message';
+import {DiscordId} from './server/auth/discord';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 const DEFAULT_GLOBAL_PARAMETER_STEPS = {
@@ -111,6 +112,8 @@ export class Player implements IPlayer {
   // Terraforming Rating
   private terraformRating: number = 20;
   public hasIncreasedTerraformRatingThisGeneration: boolean = false;
+
+  public user?: DiscordId;
 
   public get megaCredits(): number {
     return this.stock.megacredits;
@@ -1798,6 +1801,7 @@ export class Player implements IPlayer {
   public serialize(): SerializedPlayer {
     const result: SerializedPlayer = {
       id: this.id,
+      user: this.user,
       corporations: this.corporations.map((corporation) => {
         const serialized = {
           name: corporation.name,
@@ -1901,6 +1905,7 @@ export class Player implements IPlayer {
     const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
 
     player.actionsTakenThisGame = d.actionsTakenThisGame;
+    player.actionsThisGeneration = new Set<CardName>(d.actionsThisGeneration);
     player.actionsTakenThisRound = d.actionsTakenThisRound;
     player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
     player.canUsePlantsAsMegacredits = d.canUsePlantsAsMegaCredits;
@@ -1917,6 +1922,7 @@ export class Player implements IPlayer {
     player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
     player.hasTurmoilScienceTagBonus = d.hasTurmoilScienceTagBonus;
     player.heat = d.heat;
+    player.lastCardPlayed = d.lastCardPlayed;
     player.megaCredits = d.megaCredits;
     player.needsToDraft = d.needsToDraft;
     player.oceanBonus = d.oceanBonus;
@@ -1941,13 +1947,10 @@ export class Player implements IPlayer {
     player.colonies.tradesThisGeneration = d.tradesThisGeneration;
     player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
     player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
-
-    player.lastCardPlayed = d.lastCardPlayed;
+    player.user = d.user;
 
     // Rebuild removed from play cards (Playwrights, Odyssey)
     player.removedFromPlayCards = cardsFromJSON(d.removedFromPlayCards);
-
-    player.actionsThisGeneration = new Set<CardName>(d.actionsThisGeneration);
 
     if (d.pickedCorporationCard !== undefined) {
       player.pickedCorporationCard = newCorporationCard(d.pickedCorporationCard);

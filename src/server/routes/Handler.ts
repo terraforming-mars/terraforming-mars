@@ -2,6 +2,7 @@ import * as responses from '../server/responses';
 import {IHandler, Context} from './IHandler';
 import {Request} from '../Request';
 import {Response} from '../Response';
+import {DiscordId} from '../server/auth/discord';
 
 export type Options = {
   validateServerId: boolean;
@@ -40,6 +41,23 @@ export abstract class Handler implements IHandler {
       validateStatsId: options?.validateStatsId === true,
       auth: options?.auth === true,
     };
+  }
+
+  protected isUser(userId: DiscordId | undefined, ctx: Context): boolean {
+    // Nobody's data to protect
+    if (userId === undefined) {
+      return true;
+    }
+    if (ctx.user?.id === undefined) {
+      return false;
+    }
+    if (ctx.user.id === userId) {
+      return true;
+    }
+    if (DISCORD_ADMIN_USER_IDS.includes(ctx.user?.id)) {
+      return true;
+    }
+    return false;
   }
 
   private isServerIdValid(ctx: Context): boolean {

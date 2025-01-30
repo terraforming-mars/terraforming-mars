@@ -1,5 +1,7 @@
+export type DiscordId = string;
+
 export type DiscordUser = {
-  id: string // the user's id identify
+  id: DiscordId // the user's id identity
   username: string // the user's username, not unique across the platform identify
   discriminator: string // the user's Discord-tag identify
   global_name?: string // the user's display name, if it is set. For bots, this is the application name identify

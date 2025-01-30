@@ -6,6 +6,7 @@ import {SerializedTimer} from '../common/SerializedTimer';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
 import {AlliedParty} from './turmoil/AlliedParty';
 import {GlobalParameter} from '../common/GlobalParameter';
+import {DiscordId} from './server/auth/discord';
 
 interface DeprecatedFields {
 }
@@ -77,4 +78,5 @@ export interface SerializedPlayer extends DeprecatedFields{
   underworldData: UnderworldPlayerData;
   victoryPointsByGeneration: Array<number>;
   globalParameterSteps: Record<GlobalParameter, number>;
+  user?: DiscordId;
 }

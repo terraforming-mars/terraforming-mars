@@ -171,7 +171,6 @@ export const ALL_AWARDS = [
   ...MODULAR_AWARDS,
 ];
 
-// Remove namespace and rename function
 export function getAwardByName(name: string): IAward | undefined {
   return ALL_AWARDS.find((a) => a.name === name);
 }

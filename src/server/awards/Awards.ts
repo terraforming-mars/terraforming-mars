@@ -54,131 +54,132 @@ import {Politician} from './modular/Politician';
 import {Manufacturer} from './modular/Manufacturer';
 import {Incorporator} from './modular/Incorporator';
 import {Rugged} from './Rugged';
+import {OneOrArray} from '../../common/utils/types';
+import {Expansion} from '../../common/cards/GameModule';
+import {BoardName} from '../../common/boards/BoardName';
+import {AwardName} from '../../common/ma/AwardName';
 
-export const THARSIS_AWARDS = [
-  new Landlord(),
-  new Scientist(),
-  new Banker(),
-  new Thermalist(),
-  new Miner(),
-];
+type MAManifestSpec<T> = {
+  // Creates a new instance of this Milestone or Award.
+  Factory: new () => T;
+  compatibility?: OneOrArray<Expansion>;
+  /* If true, this is a modular MA. */
+  modular?: boolean,
+}
+const manifest: Record<AwardName, MAManifestSpec<IAward>> = {
+  'Landlord': {Factory: Landlord, modular: true},
+  'Scientist': {Factory: Scientist, modular: true},
+  'Banker': {Factory: Banker, modular: true},
+  'Thermalist': {Factory: Thermalist, modular: true},
+  'Miner': {Factory: Miner, modular: true},
+  'Celebrity': {Factory: Celebrity, modular: true},
+  'Industrialist': {Factory: Industrialist, modular: true},
+  'Desert Settler': {Factory: DesertSettler},
+  'Estate Dealer': {Factory: EstateDealer, modular: true},
+  'Benefactor': {Factory: Benefactor, modular: true},
+  'Cultivator': {Factory: Cultivator},
+  'Excentric': {Factory: Excentric, modular: true},
+  'Magnate': {Factory: Magnate, modular: true},
+  'Space Baron': {Factory: SpaceBaron, modular: true},
+  'Contractor': {Factory: Contractor, modular: true},
+  'Venuphile': {Factory: Venuphile, compatibility: 'venus'},
+  'Entrepreneur': {Factory: Entrepreneur, compatibility: 'ares'},
+  'Full Moon': {Factory: FullMoon, compatibility: 'moon'},
+  'Lunar Magnate': {Factory: LunarMagnate, compatibility: 'moon'},
+  'Curator': {Factory: Curator},
+  'A. Engineer': {Factory: AmazonisEngineer},
+  'Promoter': {Factory: Promoter, modular: true},
+  'Tourist': {Factory: Tourist},
+  'A. Zoologist': {Factory: AZoologist, modular: true},
+  'Cosmic Settler': {Factory: CosmicSettler},
+  'Botanist': {Factory: Botanist, modular: true},
+  'Zoologist': {Factory: Zoologist},
+  'A. Manufacturer': {Factory: AManufacturer},
+  'Biologist': {Factory: Biologist, modular: true},
+  'T. Economizer': {Factory: TEconomizer},
+  'T. Politician': {Factory: TPolitician, compatibility: 'turmoil'},
+  'Urbanist': {Factory: Urbanist},
+  'Warmonger': {Factory: Warmonger},
+  'Forecaster': {Factory: Forecaster, modular: true},
+  'Edgedancer': {Factory: Edgedancer},
+  'Visionary': {Factory: Visionary, modular: true},
+  'Naturalist': {Factory: Naturalist},
+  'Voyager': {Factory: Voyager},
+  'Kingpin': {Factory: Kingpin, compatibility: 'underworld'},
+  'EdgeLord': {Factory: EdgeLord, compatibility: 'underworld'},
+  'Administrator': {Factory: Administrator, modular: true},
+  'Constructor': {Factory: Constructor, modular: true},
+  'Founder': {Factory: Founder, modular: true},
+  'Highlander': {Factory: Highlander, modular: true},
+  'Investor': {Factory: Investor, modular: true},
+  'Incorporator': {Factory: Incorporator, modular: true},
+  'Landscaper': {Factory: Landscaper, modular: true},
+  'Metropolist': {Factory: Metropolist, modular: true},
+  'Mogul': {Factory: Mogul, modular: true},
+  'Traveller': {Factory: Traveller, modular: true},
+  'Collector': {Factory: Collector, modular: true},
+  'Electrician': {Factory: Electrician, modular: true},
+  'Manufacturer': {Factory: Manufacturer, modular: true},
+  'Politician': {Factory: Politician, compatibility: 'turmoil', modular: true},
+  'Rugged': {Factory: Rugged, compatibility: 'ares'},
+} as const;
+
+export const boardAwards: Record<BoardName, ReadonlyArray<AwardName>> = {
+  [BoardName.THARSIS]: ['Landlord', 'Scientist', 'Banker', 'Thermalist', 'Miner'],
+  [BoardName.HELLAS]: ['Cultivator', 'Magnate', 'Space Baron', 'Excentric', 'Contractor'],
+  [BoardName.ELYSIUM]: ['Celebrity', 'Industrialist', 'Desert Settler', 'Estate Dealer', 'Benefactor'],
+  [BoardName.AMAZONIS]: ['Curator', 'A. Engineer', 'Promoter', 'Tourist', 'A. Zoologist'],
+  [BoardName.ARABIA_TERRA]: ['Cosmic Settler', 'Botanist', 'Promoter', 'Zoologist', 'A. Manufacturer'],
+  [BoardName.TERRA_CIMMERIA]: ['Biologist', 'T. Economizer', 'T. Politician', 'Urbanist', 'Warmonger'],
+  [BoardName.VASTITAS_BOREALIS]: ['Forecaster', 'Edgedancer', 'Visionary', 'Naturalist', 'Voyager'],
+  [BoardName.UTOPIA_PLANITIA]: [/* 'Suburbian', 'Investor', 'Botanist', 'Incorporator', 'Metropolist' */],
+  [BoardName.VASTITAS_BOREALIS_NOVUS]: [],
+  [BoardName.TERRA_CIMMERIA_NOVUS]: [],
+};
 
 export const VENUS_AWARDS = [
-  new Venuphile(),
-];
-
-export const ELYSIUM_AWARDS = [
-  new Celebrity(),
-  new Industrialist(),
-  new DesertSettler(),
-  new EstateDealer(),
-  new Benefactor(),
-];
-
-export const UTOPIA_PLANITIA_AWARDS = [
-  // new Suburbian(),
-  // new Investor(),
-  // new Botanist(),
-  // new Incorporator(),
-  // new Metropolist(),
-];
-
-export const HELLAS_AWARDS = [
-  new Cultivator(),
-  new Magnate(),
-  new SpaceBaron(),
-  new Excentric(),
-  new Contractor(),
+  'Venuphile',
 ];
 
 export const ARES_AWARDS = [
-  new Entrepreneur(),
-  new Rugged(),
-];
-
-export const MOON_AWARDS = [
-  new FullMoon(),
-  new LunarMagnate(),
-];
-
-export const AMAZONIS_PLANITIA_AWARDS = [
-  new Curator(),
-  new AmazonisEngineer(),
-  new Promoter(),
-  new Tourist(),
-  new AZoologist(),
-];
-
-export const ARABIA_TERRA_AWARDS = [
-  new CosmicSettler(),
-  new Botanist(),
-  new Promoter(),
-  new Zoologist(),
-  new AManufacturer(),
-];
-
-export const TERRA_CIMMERIA_AWARDS = [
-  new Biologist(),
-  new TEconomizer(),
-  new TPolitician(),
-  new Urbanist(),
-  new Warmonger(),
-];
-
-export const VASTITAS_BOREALIS_AWARDS = [
-  new Forecaster(),
-  new Edgedancer(),
-  new Visionary(),
-  new Naturalist(),
-  new Voyager(),
+  'Entrepreneur',
+  'Rugged',
 ];
 
 export const UNDERWORLD_AWARDS = [
-  new Kingpin(),
-  new EdgeLord(),
+  'Kingpin',
+  'EdgeLord',
 ];
 
 export const MODULAR_AWARDS = [
-  new Administrator(),
-  new Collector(),
-  new Constructor(),
-  new Electrician(),
-  new Founder(),
-  new Highlander(),
-  new Investor(),
-  new Incorporator(),
-  new Landscaper(),
-  new Manufacturer(),
-  new Metropolist(),
-  new Mogul(),
-  new Politician(),
-  new Traveller(),
-];
-
-export const ALL_AWARDS = [
-  ...THARSIS_AWARDS,
-  ...ELYSIUM_AWARDS,
-  ...HELLAS_AWARDS,
-  ...UTOPIA_PLANITIA_AWARDS,
-  ...VENUS_AWARDS,
-  ...ARES_AWARDS,
-  ...MOON_AWARDS,
-  ...AMAZONIS_PLANITIA_AWARDS,
-  ...ARABIA_TERRA_AWARDS,
-  ...TERRA_CIMMERIA_AWARDS,
-  ...VASTITAS_BOREALIS_AWARDS,
-  ...UNDERWORLD_AWARDS,
-  ...MODULAR_AWARDS,
+  'Administrator',
+  'Collector',
+  'Constructor',
+  'Electrician',
+  'Founder',
+  'Highlander',
+  'Investor',
+  'Incorporator',
+  'Landscaper',
+  'Manufacturer',
+  'Metropolist',
+  'Mogul',
+  'Politician',
+  'Traveller',
 ];
 
 export function getAwardByName(name: string): IAward | undefined {
-  return ALL_AWARDS.find((a) => a.name === name);
+  try {
+    return getAwardByNameOrThrow(name);
+  } catch (e) {
+    return undefined;
+  }
 }
 
 export function getAwardByNameOrThrow(name: string): IAward {
-  const award = getAwardByName(name);
-  if (award) {
-    return award;
+  try {
+    return new manifest[name as AwardName].Factory();
+  } catch (e) {
+    throw new Error(`Award ${name} not found.`);
   }
-  throw new Error(`Award ${name} not found.`);
 }

@@ -54,7 +54,8 @@ import {Engineer} from './modular/Engineer';
 import {Hydrologist} from './modular/Hydrologist';
 import {Thawer} from './modular/Thawer';
 import {Purifier} from './Purifier';
-// import {Agronomist} from './Agronomist';
+import {VSpacefarer} from './VSpacefarer';
+import {Agronomist} from './Agronomist';
 // import {Merchant} from './modular/Merchant';
 import {MAManifest} from '../ma/MAManifest';
 import {MilestoneName} from '../../common/ma/MilestoneName';
@@ -118,6 +119,8 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'Thawer': {Factory: Thawer},
     'Hydrologist': {Factory: Hydrologist},
     'Purifier': {Factory: Purifier, compatibility: 'ares'},
+    'Agronomist': {Factory: Agronomist},
+    'V. Spacefarer': {Factory: VSpacefarer},
   },
   boards: {
     [BoardName.THARSIS]: ['Terraformer', 'Mayor', 'Gardener', 'Builder', 'Planner'],
@@ -128,7 +131,7 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     [BoardName.TERRA_CIMMERIA]: ['T. Collector', 'Firestarter', 'Terra Pioneer', 'Spacefarer', 'Gambler'],
     [BoardName.VASTITAS_BOREALIS]: ['V. Electrician', 'Smith', 'Tradesman', 'Irrigator', 'Capitalist'],
     [BoardName.UTOPIA_PLANITIA]: [/* 'Suburbian', 'Investor', 'Botanist', 'Incorporator', 'Metropolist' */],
-    [BoardName.VASTITAS_BOREALIS_NOVUS]: [],
+    [BoardName.VASTITAS_BOREALIS_NOVUS]: ['Agronomist', 'Spacefarer', 'Geologist', 'Engineer', 'Farmer'],
     [BoardName.TERRA_CIMMERIA_NOVUS]: [],
   },
   expansions: {

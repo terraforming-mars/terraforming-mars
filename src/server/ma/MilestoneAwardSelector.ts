@@ -8,8 +8,7 @@ import {UnseededRandom} from '../../common/utils/Random';
 import {MilestoneName, milestoneNames} from '../../common/ma/MilestoneName';
 import {AwardName, awardNames} from '../../common/ma/AwardName';
 import {synergies} from './MilestoneAwardSynergies';
-import {AWARD_COMPATIBILITY, CompatibilityDetails, MILESTONE_COMPATIBILITY} from '../../common/ma/compatibilities';
-import {Expansion, EXPANSIONS} from '../../common/cards/GameModule';
+import {MAManifest, isCompatible} from './MAManifest';
 
 type DrawnMilestonesAndAwards = {
   milestones: Array<MilestoneName>,
@@ -76,12 +75,12 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     case BoardName.AMAZONIS:
     case BoardName.TERRA_CIMMERIA:
     case BoardName.VASTITAS_BOREALIS:
+    case BoardName.VASTITAS_BOREALIS_NOVUS:
       push(milestoneManifest.boards[boardName], awardManifest.boards[gameOptions.boardName]);
       break;
     case BoardName.UTOPIA_PLANITIA:
-    case BoardName.VASTITAS_BOREALIS_NOVUS:
+      return getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
     case BoardName.TERRA_CIMMERIA_NOVUS:
-      // There's no need to add more milestones and awards for these boards, so it returns.
       return getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
     }
     if (gameOptions.venusNextExtension) {
@@ -121,52 +120,32 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
  * exported for tests
  */
 export function getCandidates(gameOptions: GameOptions): [Array<MilestoneName>, Array<AwardName>] {
-  function include(compatibility: CompatibilityDetails): boolean {
+  function include<T extends string>(name: T, manifest: MAManifest<T, any>): boolean {
     if (!gameOptions.modularMA) {
-      switch (compatibility.map) {
-      case BoardName.THARSIS:
-      case BoardName.ELYSIUM:
-      case BoardName.HELLAS:
+      if (manifest.boards[BoardName.THARSIS].includes(name)) {
         return true;
-      case undefined:
+      }
+      if (manifest.boards[BoardName.ELYSIUM].includes(name)) {
+        return true;
+      }
+      if (manifest.boards[BoardName.HELLAS].includes(name)) {
+        return true;
+      }
+      if (gameOptions.includeFanMA === false) {
         return false;
-      default:
-        if (compatibility.map !== undefined && gameOptions.includeFanMA === false) {
-          return false;
-        }
       }
     } else {
-      if (compatibility.modular !== true) {
+      if (!manifest.modular.includes(name)) {
         return false;
       }
     }
-    const foo: Record<Expansion, keyof GameOptions> = {
-      corpera: 'corporateEra',
-      promo: 'promoCardsOption',
-      venus: 'venusNextExtension',
-      colonies: 'coloniesExtension',
-      prelude: 'preludeExtension',
-      prelude2: 'prelude2Expansion',
-      turmoil: 'turmoilExtension',
-      community: 'communityCardsOption',
-      ares: 'aresExtension',
-      moon: 'moonExpansion',
-      pathfinders: 'pathfindersExpansion',
-      ceo: 'ceoExtension',
-      starwars: 'starWarsExpansion',
-      underworld: 'underworldExpansion',
-    };
-    for (const expansion of EXPANSIONS) {
-      if (compatibility.compatibility === expansion) {
-        if (gameOptions[foo[expansion]] !== true) {
-          return false;
-        }
-      }
+    if (isCompatible(name, manifest, gameOptions) === false) {
+      return false;
     }
     return true;
   }
-  const candidateMilestones: Array<MilestoneName> = milestoneNames.filter((name) => include(MILESTONE_COMPATIBILITY[name]));
-  const candidateAwards: Array<AwardName> = awardNames.filter((name) => include(AWARD_COMPATIBILITY[name]));
+  const candidateMilestones: Array<MilestoneName> = milestoneNames.filter((name) => include(name, milestoneManifest));
+  const candidateAwards: Array<AwardName> = awardNames.filter((name) => include(name, awardManifest));
 
   return [candidateMilestones, candidateAwards];
 }

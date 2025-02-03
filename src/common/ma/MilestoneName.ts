@@ -57,9 +57,9 @@ export const milestoneNames = [
   'Capitalist',
 
   // Vastitas Borealis Novus
-  // 'Agronomist',
+  'Agronomist',
   'Engineer',
-  // 'V. Spacefarer',
+  'V. Spacefarer',
   'Geologist',
   'Farmer',
 

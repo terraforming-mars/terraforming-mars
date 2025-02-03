@@ -56,6 +56,13 @@ export const milestoneNames = [
   'Irrigator',
   'Capitalist',
 
+  // Vastitas Borealis Novus
+  // 'Agronomist',
+  'Engineer',
+  // 'V. Spacefarer',
+  'Geologist',
+  'Farmer',
+
   // Underworld
   'Tunneler',
   'Risktaker',
@@ -64,15 +71,12 @@ export const milestoneNames = [
   'Purifier',
 
   // Modular
-  'Breeder',
   // 'Briber',
   // 'Builder', // But 7 building tags
   // 'Coastguard', // NEW 3 tiles adjacent to oceans
-  // 'Engineer', // Currently it is ThermoEngineer, with a name conflict.
-  // 'Farmer', // Cuirrently it is Breeder. TODO(kberg): RENAME AFTER 1/1
+  // 'Farmer',
   'Forester',
   'Fundraiser',
-  'Geologist',
   'Hydrologist',
   'Landshaper',
   // 'Legend', // But 4 events
@@ -90,7 +94,6 @@ export const milestoneNames = [
   // 'Terraformer', // but 29 TR
   // 'Terran', // But 5 Earth tags.
   'Thawer',
-  'ThermoEngineer', // TODO(kberg): Rename to Engineer after the Engineer rename TODO is removed.
   // 'Trader', // NEW 3 types of resources on cards.
   // 'Tycoon', // But, 10 Green and Blue cards combined.
 ] as const;
@@ -104,10 +107,10 @@ const MILESTONE_RENAMES = new Map<string, MilestoneName>([
   // TODO(yournamehere): remove after 2021-04-05
   // ['Electrician', 'V. Electrician'],
 
-  // TODO(yournamehere): remove after 2025-01-01
-  ['Farmer', 'Forester'],
-  // TODO(yournamehere): remove after 2025-01-01
-  ['Businessperson', 'Terran'],
+  // TODO(konigsberg): remove after 2025-04-01
+  ['ThermoEngineer', 'Engineer'],
+  // TODO(konigsberg): remove after 2025-04-01
+  ['Breeder', 'Farmer'],
 ]);
 
 export function maybeRenamedMilestone(name: string): MilestoneName {

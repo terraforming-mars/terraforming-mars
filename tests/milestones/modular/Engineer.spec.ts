@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
-import {ThermoEngineer} from '../../../src/server/milestones/modular/ThermoEngineer';
+import {Engineer} from '../../../src/server/milestones/modular/Engineer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
 
-describe('Thermoengineer', () => {
-  let milestone: ThermoEngineer;
+describe('Engineer', () => {
+  let milestone: Engineer;
   let player: TestPlayer;
 
   beforeEach(() => {
-    milestone = new ThermoEngineer();
+    milestone = new Engineer();
     [/* game */, player] = testGame(2);
   });
 

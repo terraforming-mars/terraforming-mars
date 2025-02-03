@@ -1,10 +1,10 @@
 import {BaseMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
 
-export class ThermoEngineer extends BaseMilestone {
+export class Engineer extends BaseMilestone {
   constructor() {
     super(
-      'ThermoEngineer',
+      'Engineer',
       'Have a total of 10 energy and heat production',
       10);
   }

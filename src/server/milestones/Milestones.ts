@@ -48,12 +48,13 @@ import {Producer} from './modular/Producer';
 import {Researcher} from './modular/Researcher';
 import {Sponsor} from './modular/Sponsor';
 import {Lobbyist} from './modular/Lobbyist';
-import {Breeder} from './modular/Breeder';
+import {Farmer} from './modular/Farmer';
 // import {Briber} from './modular/Briber';
-import {ThermoEngineer} from './modular/ThermoEngineer';
+import {Engineer} from './modular/Engineer';
 import {Hydrologist} from './modular/Hydrologist';
 import {Thawer} from './modular/Thawer';
 import {Purifier} from './Purifier';
+// import {Agronomist} from './Agronomist';
 // import {Merchant} from './modular/Merchant';
 
 export const THARSIS_MILESTONES = [
@@ -134,13 +135,21 @@ export const VASTITAS_BOREALIS_MILESTONES = [
   new Capitalist(),
 ];
 
+// export const VASTITAS_BOREALIS_NOVUS_MILESTONES = [
+//   // new Agronomist(),
+//   new Engineer(),
+//   new VSpacefarer(),
+//   new Geologist(),
+//   new Farmer(),
+// ];
+
 export const UNDERWORLD_MILESTONES = [
   new Risktaker(),
   new Tunneler(),
 ];
 
 export const MODULAR_MILESTONES = [
-  new Breeder(),
+  new Farmer(),
   // new Briber(),
   new Fundraiser(),
   new Geologist(),
@@ -154,7 +163,7 @@ export const MODULAR_MILESTONES = [
   new Researcher(),
   new Sponsor(),
   new Thawer(),
-  new ThermoEngineer(),
+  new Engineer(),
 ];
 
 export const ALL_MILESTONES = [

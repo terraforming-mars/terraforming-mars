@@ -32,11 +32,11 @@ import {Curator} from './amazonisPlanitia/Curator';
 import {AmazonisEngineer} from './amazonisPlanitia/AmazonisEngineer';
 import {Tourist} from './amazonisPlanitia/Tourist';
 import {Biologist} from './terraCimmeria/Biologist';
-import {Economizer2} from './terraCimmeria/Economizer2';
+import {TEconomizer} from './terraCimmeria/TEconomizer';
 import {TPolitician} from './terraCimmeria/TPolitician';
 import {Urbanist} from './terraCimmeria/Urbanist';
 import {Warmonger} from './terraCimmeria/Warmonger';
-import {Zoologist2} from './amazonisPlanitia/Zoologist';
+import {AZoologist} from './amazonisPlanitia/AZoologist';
 import {Kingpin} from './underworld/Kingpin';
 import {EdgeLord} from './underworld/EdgeLord';
 import {Administrator} from './modular/Administrator';
@@ -106,7 +106,7 @@ export const AMAZONIS_PLANITIA_AWARDS = [
   new AmazonisEngineer(),
   new Promoter(),
   new Tourist(),
-  new Zoologist2(),
+  new AZoologist(),
 ];
 
 export const ARABIA_TERRA_AWARDS = [
@@ -119,7 +119,7 @@ export const ARABIA_TERRA_AWARDS = [
 
 export const TERRA_CIMMERIA_AWARDS = [
   new Biologist(),
-  new Economizer2(),
+  new TEconomizer(),
   new TPolitician(),
   new Urbanist(),
   new Warmonger(),

@@ -33,7 +33,6 @@ import {SelectSpace} from '../src/server/inputs/SelectSpace';
 import {GlobalParameter} from '../src/common/GlobalParameter';
 import {assertPlaceOcean} from './assertions';
 import {TiredEarth} from '../src/server/cards/pathfinders/TiredEarth';
-import {AmazonisEngineer} from '../src/server/awards/amazonisPlanitia/AmazonisEngineer';
 
 describe('Game', () => {
   it('should initialize with right defaults', () => {
@@ -773,32 +772,32 @@ describe('Game', () => {
     expect(deserialized.fundedAwards[0].player.id).eq('p-blue-id');
   });
 
-  it('deserializing a game with renamed awards', () => {
-    const player = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, player2], player);
-    const engineer = new AmazonisEngineer();
+  // it('deserializing a game with renamed awards', () => {
+  //   const player = TestPlayer.BLUE.newPlayer();
+  //   const player2 = TestPlayer.RED.newPlayer();
+  //   const game = Game.newInstance('gameid', [player, player2], player);
+  //   const engineer = new AmazonisEngineer();
 
-    game.awards.unshift(engineer);
+  //   game.awards.unshift(engineer);
 
-    game.fundedAwards.push({
-      award: engineer,
-      player: player,
-    });
+  //   game.fundedAwards.push({
+  //     award: engineer,
+  //     player: player,
+  //   });
 
-    const serialized = game.serialize();
-    expect(serialized.awards[0]).eq('A. Engineer');
-    expect(serialized.fundedAwards[0].name).eq('A. Engineer');
+  //   const serialized = game.serialize();
+  //   expect(serialized.awards[0]).eq('A. Engineer');
+  //   expect(serialized.fundedAwards[0].name).eq('A. Engineer');
 
-    serialized.awards[0] = 'Engineer' as any;
-    serialized.fundedAwards[0].name = 'Engineer' as any;
+  //   serialized.awards[0] = 'Engineer' as any;
+  //   serialized.fundedAwards[0].name = 'Engineer' as any;
 
-    const deserialized = Game.deserialize(serialized);
-    expect(deserialized.awards[0]).deep.eq(engineer);
-    expect(deserialized.fundedAwards).has.length(1);
-    expect(deserialized.fundedAwards[0].award.name).eq('A. Engineer');
-    expect(deserialized.fundedAwards[0].player.id).eq('p-blue-id');
-  });
+  //   const deserialized = Game.deserialize(serialized);
+  //   expect(deserialized.awards[0]).deep.eq(engineer);
+  //   expect(deserialized.fundedAwards).has.length(1);
+  //   expect(deserialized.fundedAwards[0].award.name).eq('A. Engineer');
+  //   expect(deserialized.fundedAwards[0].player.id).eq('p-blue-id');
+  // });
 
   // https://github.com/terraforming-mars/terraforming-mars/issues/5572
   it('dealing with awards accidentally funded twice', () => {

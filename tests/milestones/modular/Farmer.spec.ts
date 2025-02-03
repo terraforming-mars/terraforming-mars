@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {Ants} from '../../../src/server/cards/base/Ants';
-import {Breeder} from '../../../src/server/milestones/modular/Breeder';
+import {Farmer} from '../../../src/server/milestones/modular/Farmer';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('Breeder', () => {
-  let milestone: Breeder;
+describe('Farmer', () => {
+  let milestone: Farmer;
   let player: TestPlayer;
 
   beforeEach(() => {
-    milestone = new Breeder();
+    milestone = new Farmer();
     player = TestPlayer.BLUE.newPlayer();
   });
 

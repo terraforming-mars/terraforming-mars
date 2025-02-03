@@ -2,7 +2,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {IAward} from '../IAward';
 
-export class Economizer2 implements IAward {
+export class TEconomizer implements IAward {
   public readonly name = 'T. Economizer';
   public readonly description = 'Have the most project cards in play with a base cost of 10 M€ or less (not events.)';
 

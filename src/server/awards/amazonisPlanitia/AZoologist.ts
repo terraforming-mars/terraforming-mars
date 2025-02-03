@@ -2,7 +2,7 @@ import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {IAward} from '../IAward';
 
-export class Zoologist2 implements IAward {
+export class AZoologist implements IAward {
   public readonly name = 'A. Zoologist';
   public readonly description = 'Own the most animal and microbe resources';
 

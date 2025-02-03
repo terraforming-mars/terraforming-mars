@@ -2,10 +2,10 @@ import {BaseMilestone} from '../IMilestone';
 import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 
-export class Breeder extends BaseMilestone {
+export class Farmer extends BaseMilestone {
   constructor() {
     super(
-      'Breeder',
+      'Farmer',
       'Have 5 animal and microbe resources on your cards',
       5);
   }

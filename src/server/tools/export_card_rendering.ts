@@ -15,9 +15,7 @@ import {Units} from '../../common/Units';
 import {ALL_COLONIES_TILES, getColonyModule} from '../colonies/ColonyManifest';
 import {ALL_MILESTONES} from '../milestones/Milestones';
 import {ALL_AWARDS} from '../awards/Awards';
-import {MilestoneAwardMetadata} from '../../common/ma/MilestoneAwardMetadata';
-import {AwardName} from '../../common/ma/AwardName';
-import {MilestoneName} from '../../common/ma/MilestoneName';
+import {AwardMetadata, MilestoneMetadata} from '../../common/ma/MilestoneAwardMetadata';
 import {CardType} from '../../common/cards/CardType';
 import {OneOrArray} from '../../common/utils/types';
 import {globalInitialize} from '../globalInitialize';
@@ -143,22 +141,26 @@ class ColoniesProcessor {
   }
 }
 
-class MAProcessor {
-  public static json: Array<MilestoneAwardMetadata> = [];
+class MilestoneProcessor {
+  public static json: Array<MilestoneMetadata> = [];
   public static makeJson() {
-    ALL_MILESTONES.forEach((entry) => {
-      MAProcessor.processEntry(entry);
-    });
-
-    ALL_AWARDS.forEach((entry) => {
-      MAProcessor.processEntry(entry);
+    ALL_MILESTONES.forEach((milestone) => {
+      MilestoneProcessor.json.push({
+        name: milestone.name,
+        description: milestone.description,
+      });
     });
   }
+}
 
-  private static processEntry(metadata: {name: MilestoneName | AwardName, description: string}) {
-    MAProcessor.json.push({
-      name: metadata.name,
-      description: metadata.description,
+class AwardProcessor {
+  public static json: Array<AwardMetadata> = [];
+  public static makeJson() {
+    ALL_AWARDS.forEach((award) => {
+      AwardProcessor.json.push({
+        name: award.name,
+        description: award.description,
+      });
     });
   }
 }
@@ -171,9 +173,11 @@ globalInitialize();
 CardProcessor.makeJson();
 GlobalEventProcessor.makeJson();
 ColoniesProcessor.makeJson();
-MAProcessor.makeJson();
+MilestoneProcessor.makeJson();
+AwardProcessor.makeJson();
 
 fs.writeFileSync('src/genfiles/cards.json', JSON.stringify(CardProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/events.json', JSON.stringify(GlobalEventProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/colonies.json', JSON.stringify(ColoniesProcessor.json, null, 2));
-fs.writeFileSync('src/genfiles/ma.json', JSON.stringify(MAProcessor.json, null, 2));
+fs.writeFileSync('src/genfiles/milestones.json', JSON.stringify(MilestoneProcessor.json, null, 2));
+fs.writeFileSync('src/genfiles/awards.json', JSON.stringify(AwardProcessor.json, null, 2));

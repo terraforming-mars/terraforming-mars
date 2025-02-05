@@ -10,8 +10,9 @@ export class AwardScorer {
   constructor(game: IGame, award: IAward) {
     for (const player of game.getPlayers()) {
       let score = award.getScore(player);
-      // CEO Asimov Award Score Hook
-      if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
+      if (player.cardIsInEffect(CardName.ASIMOV)) {
+        score += ASIMOV_AWARD_BONUS;
+      }
       this.scores.set(player.id, score);
     }
   }

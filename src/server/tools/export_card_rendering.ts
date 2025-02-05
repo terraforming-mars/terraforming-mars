@@ -13,11 +13,11 @@ import {isPreludeCard} from '../cards/prelude/IPreludeCard';
 import {IColonyMetadata} from '../../common/colonies/IColonyMetadata';
 import {Units} from '../../common/Units';
 import {ALL_COLONIES_TILES, getColonyModule} from '../colonies/ColonyManifest';
-import {ALL_MILESTONES} from '../milestones/Milestones';
-import {ALL_AWARDS} from '../awards/Awards';
+import {milestoneManifest} from '../milestones/Milestones';
+import {awardManifest} from '../awards/Awards';
 import {MilestoneAwardMetadata} from '../../common/ma/MilestoneAwardMetadata';
-import {AwardName} from '../../common/ma/AwardName';
-import {MilestoneName} from '../../common/ma/MilestoneName';
+import {awardNames} from '../../common/ma/AwardName';
+import {milestoneNames} from '../../common/ma/MilestoneName';
 import {CardType} from '../../common/cards/CardType';
 import {OneOrArray} from '../../common/utils/types';
 import {globalInitialize} from '../globalInitialize';
@@ -146,19 +146,18 @@ class ColoniesProcessor {
 class MAProcessor {
   public static json: Array<MilestoneAwardMetadata> = [];
   public static makeJson() {
-    ALL_MILESTONES.forEach((entry) => {
-      MAProcessor.processEntry(entry);
+    milestoneNames.forEach((name) => {
+      MAProcessor.json.push({
+        name,
+        description: milestoneManifest.createOrThrow(name).description,
+      });
     });
 
-    ALL_AWARDS.forEach((entry) => {
-      MAProcessor.processEntry(entry);
-    });
-  }
-
-  private static processEntry(metadata: {name: MilestoneName | AwardName, description: string}) {
-    MAProcessor.json.push({
-      name: metadata.name,
-      description: metadata.description,
+    awardNames.forEach((name) => {
+      MAProcessor.json.push({
+        name,
+        description: awardManifest.createOrThrow(name).description,
+      });
     });
   }
 }

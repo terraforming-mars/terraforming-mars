@@ -1,20 +1,39 @@
 import {AwardName} from '@/common/ma/AwardName';
-import {MilestoneAwardMetadata} from '@/common/ma/MilestoneAwardMetadata';
+import {AwardMetadata, MilestoneMetadata} from '@/common/ma/MilestoneAwardMetadata';
 import {MilestoneName} from '@/common/ma/MilestoneName';
 // @ts-ignore
-import * as maJson from '@/genfiles/ma.json';
+import * as milestonejson from '@/genfiles/milestones.json';
+import * as awardjson from '@/genfiles/awards.json';
 
-const descriptions: Map<AwardName | MilestoneName, string> = new Map();
-(maJson as any as Array<MilestoneAwardMetadata>).forEach((metadata) => {
-  descriptions.set(metadata.name, metadata.description);
+const milestoneDescriptions: Map<MilestoneName, string> = new Map();
+const awardDescriptions: Map<AwardName, string> = new Map();
+
+(milestonejson as any as Array<MilestoneMetadata>).forEach((metadata) => {
+  milestoneDescriptions.set(metadata.name, metadata.description);
 });
 
-export function allMaNames() {
-  return descriptions.keys();
+(awardjson as any as Array<AwardMetadata>).forEach((metadata) => {
+  awardDescriptions.set(metadata.name, metadata.description);
+});
+
+export function allMilestoneNames() {
+  return milestoneDescriptions.keys();
 }
 
-export function getMilestoneAwardDescription(name: AwardName | MilestoneName): string {
-  const description = descriptions.get(name);
+export function allAwardNames() {
+  return awardDescriptions.keys();
+}
+
+export function getMilestoneDescription(name: MilestoneName): string {
+  const description = milestoneDescriptions.get(name);
+  if (description === undefined) {
+    throw new Error(`Unknown milestone or award ${name}`);
+  }
+  return description;
+}
+
+export function getAwardDescription(name: AwardName): string {
+  const description = awardDescriptions.get(name);
   if (description === undefined) {
     throw new Error(`Unknown milestone or award ${name}`);
   }

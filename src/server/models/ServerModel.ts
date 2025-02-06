@@ -91,7 +91,7 @@ export class Server {
 
     const players: Array<PublicPlayerModel> = game.getPlayersInGenerationOrder().map(this.getPlayer)
 
-    if (players.some(p => p.handicap && p.handicap > 0)) {
+    if (players.some(p => p.handicap)) {
       players.forEach(p => {
         p.handicap = p.handicap || 0;
       })

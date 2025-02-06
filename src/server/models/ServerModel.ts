@@ -89,7 +89,14 @@ export class Server {
   public static getPlayerModel(player: IPlayer): PlayerViewModel {
     const game = player.game;
 
-    const players: Array<PublicPlayerModel> = game.getPlayersInGenerationOrder().map(this.getPlayer);
+    const players: Array<PublicPlayerModel> = game.getPlayersInGenerationOrder().map(this.getPlayer)
+
+    if (players.some(p => p.handicap && p.handicap > 0)) {
+      players.forEach(p => {
+        p.handicap = p.handicap || 0;
+      })
+    }
+
     const thisPlayerIndex = players.findIndex((p) => p.color === player.color);
     const thisPlayer: PublicPlayerModel = players[thisPlayerIndex];
 

@@ -46,7 +46,7 @@ export type PublicPlayerModel = {
   energyProduction: number;
   excavations: number,
   fleetSize: number;
-  handicap: number;
+  handicap: number | undefined;
   heat: number;
   heatProduction: number;
   id: PlayerId | undefined;

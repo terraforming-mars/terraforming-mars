@@ -1,7 +1,7 @@
 <template>
-    <div :class="getClasses()">
+    <div :class="outerClass">
         <Tag :tag="tag" :size="size" :type="type"/>
-        <span :class="getCountClasses()">{{ getCount() }}</span>
+        <span :class="innerClass">{{ shownCount }}</span>
     </div>
 </template>
 
@@ -28,30 +28,36 @@ export default Vue.extend({
       type: String,
     },
     hideCount: {
+      // When true, don't show the count. Show a question mark instead.
       required: false,
       type: Boolean,
+    },
+    showWhenZero: {
+      // When true, show even if the value is zero.
+      required: false,
+      default: false,
     },
   },
   components: {
     Tag,
   },
-  methods: {
-    getClasses(): string {
+  computed: {
+    outerClass(): string {
       const classes = ['tag-display'];
-      if (this.count === 0 && this.tag !== 'escape') {
+      if (this.count === 0 && this.showWhenZero === false) {
         classes.push('tag-no-show');
       }
       return classes.join(' ');
     },
-    getCountClasses(): string {
+    innerClass(): string {
       const classes = ['tag-count-display'];
-      if (this.count === 0 && this.tag !== 'escape') {
+      if (this.count === 0 && this.showWhenZero === false) {
         classes.push('tag-count-no-show');
       }
 
       return classes.join(' ');
     },
-    getCount(): number | string {
+    shownCount(): number | string {
       return this.hideCount === true ? '?' : this.count;
     },
   },

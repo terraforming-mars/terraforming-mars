@@ -208,7 +208,7 @@ export class Server {
 
   public static getPlayer(player: IPlayer): PublicPlayerModel {
     const game = player.game;
-    const useHandicap = game.getPlayers().some((p) => p.handicap);
+    const useHandicap = game.getPlayers().some((p) => p.handicap !== 0);
     return {
       actionsTakenThisRound: player.actionsTakenThisRound,
       actionsTakenThisGame: player.actionsTakenThisGame,

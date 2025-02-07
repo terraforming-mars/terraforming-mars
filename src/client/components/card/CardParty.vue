@@ -18,7 +18,7 @@ export default Vue.extend({
     size: {
       required: false,
       default: 'card',
-      type: String,
+      type: String as () => 'card' | 'req',
     },
   },
   computed: {

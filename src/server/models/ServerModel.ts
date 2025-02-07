@@ -90,6 +90,7 @@ export class Server {
     const game = player.game;
 
     const players: Array<PublicPlayerModel> = game.getPlayersInGenerationOrder().map(this.getPlayer);
+
     const thisPlayerIndex = players.findIndex((p) => p.color === player.color);
     const thisPlayer: PublicPlayerModel = players[thisPlayerIndex];
 
@@ -207,6 +208,7 @@ export class Server {
 
   public static getPlayer(player: IPlayer): PublicPlayerModel {
     const game = player.game;
+    const useHandicap = game.getPlayers().some((p) => p.handicap !== 0);
     return {
       actionsTakenThisRound: player.actionsTakenThisRound,
       actionsTakenThisGame: player.actionsTakenThisGame,
@@ -221,6 +223,7 @@ export class Server {
       energy: player.energy,
       energyProduction: player.production.energy,
       fleetSize: player.colonies.getFleetSize(),
+      handicap: useHandicap ? player.handicap : undefined,
       heat: player.heat,
       heatProduction: player.production.heat,
       id: game.phase === Phase.END ? player.id : undefined,

@@ -1,6 +1,6 @@
 <template>
   <div class="card-party">
-  <span :class="getClasses()"></span>
+  <span :class="classes"></span>
   </div>
 </template>
 
@@ -21,8 +21,8 @@ export default Vue.extend({
       type: String,
     },
   },
-  methods: {
-    getClasses(): string {
+  computed: {
+    classes(): string {
       const p = this.party.toLowerCase().replace(' ', '-');
       switch (this.size) {
       case 'card':

@@ -1,7 +1,7 @@
 <template>
     <div :class="outerClass">
         <Tag :tag="tag" :size="size" :type="type"/>
-        <span :class="innerClass">{{ shownCount }}</span>
+        <span :class="innerClass">{{ count }}</span>
     </div>
 </template>
 
@@ -19,18 +19,13 @@ export default Vue.extend({
       type: String as () => CardTag|SpecialTags|'escape',
     },
     count: {
-      type: Number,
+      type: String as () => Number | String,
     },
     size: {
       type: String,
     },
     type: {
       type: String,
-    },
-    hideCount: {
-      // When true, don't show the count. Show a question mark instead.
-      required: false,
-      type: Boolean,
     },
     showWhenZero: {
       // When true, show even if the value is zero.
@@ -56,9 +51,6 @@ export default Vue.extend({
       }
 
       return classes.join(' ');
-    },
-    shownCount(): number | string {
-      return this.hideCount === true ? '?' : this.count;
     },
   },
 });

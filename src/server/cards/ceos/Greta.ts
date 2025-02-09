@@ -24,6 +24,7 @@ export class Greta extends CeoCard {
   }
 
   public opgActionIsActive = false;
+  // TODO(kberg): this isn't reset-compatible
   public effectTriggerCount = 0;
 
   public action(): PlayerInput | undefined {

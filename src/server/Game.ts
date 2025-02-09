@@ -761,14 +761,14 @@ export class Game implements IGame, Logger {
     }
 
     this.endGenerationForColonies();
+    UnderworldExpansion.endGeneration(this);
 
     Turmoil.ifTurmoil(this, (turmoil) => {
+      this.phase = Phase.TURMOIL;
       turmoil.endGeneration(this);
       // Behold The Emperor hook
       this.beholdTheEmperor = false;
     });
-
-    UnderworldExpansion.endGeneration(this);
 
     // turmoil.endGeneration might have added actions.
     if (this.deferredActions.length > 0) {

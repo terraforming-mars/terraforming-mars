@@ -24,11 +24,11 @@ export class TerraformingDeal extends PreludeCard {
     });
   }
 
-  // TODO(kberg): Like UNMO, TerraformingDeal can generate MC for raising TR  that MC can offset reds costs?
+  // TODO(kberg): Like UNMO, TerraformingDeal can generate MC for raising TR that MC can offset reds costs?
   public onIncreaseTerraformRating(player: IPlayer, cardOwner: IPlayer, steps: number) {
     if (cardOwner === player) {
       const phase = player.game.phase;
-      if (phase === Phase.ACTION || phase === Phase.PRELUDES) {
+      if (phase === Phase.ACTION || phase === Phase.PRELUDES || phase === Phase.TURMOIL) {
         cardOwner.stock.add(Resource.MEGACREDITS, 2 * steps, {log: true});
       }
     }

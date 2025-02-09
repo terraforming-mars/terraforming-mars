@@ -33,8 +33,10 @@ export enum Phase {
 
   /** Maps to rulebook production phase */
   PRODUCTION = 'production',
-  /** Standard rulebook Solar phase, triggers WGT, but also Turmoil and final greeneries. */
+  /** Standard rulebook Solar phase, triggers WGT, and final greeneries, but not Turmoil. */
   SOLAR = 'solar',
+  /** Turmoil phase. */
+  TURMOIL = 'turmoil',
   /** Does some cleanup and also executes the rulebook's turn order phase. */
   INTERGENERATION = 'intergeneration',
 

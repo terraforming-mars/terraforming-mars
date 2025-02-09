@@ -24,8 +24,9 @@ export class Greta extends CeoCard {
   }
 
   public opgActionIsActive = false;
-  // TODO(kberg): this isn't reset-compatible
-  public effectTriggerCount = 0;
+  public data = {
+    effectTriggerCount: 0,
+  };
 
   public action(): PlayerInput | undefined {
     this.opgActionIsActive = true;
@@ -35,10 +36,12 @@ export class Greta extends CeoCard {
 
   public onIncreaseTerraformRating(player: IPlayer, cardOwner: IPlayer) {
     const game = player.game;
-    if (this.opgActionIsActive === true && this.effectTriggerCount < 10) {
+    // TODO(kberg): Remove this after 2025-04-01
+    this.data.effectTriggerCount = this.data.effectTriggerCount ?? 0;
+    if (this.opgActionIsActive === true && this.data.effectTriggerCount < 10) {
       if (player === cardOwner && game.phase === Phase.ACTION) {
         player.stock.add(Resource.MEGACREDITS, 4, {log: true});
-        this.effectTriggerCount++;
+        this.data.effectTriggerCount++;
       }
     }
     return undefined;

@@ -160,6 +160,14 @@ export class Colonies {
     if (syndicatePirateRaider === undefined) {
       this.tradesThisGeneration = 0;
     } else if (syndicatePirateRaider === this.player.id) {
+      // CEO effect: Disable all other players from trading next gen,
+      // but free up all colonies (don't leave their trade fleets stuck there)
+      if (this.player.cardIsInEffect(CardName.HUAN)) {
+        for (const player of this.player.getOpponents()) {
+          // Magic number high enough to disable other players' trading
+          player.colonies.tradesThisGeneration = 50;
+        }
+      }
       this.tradesThisGeneration = 0;
     }
   }

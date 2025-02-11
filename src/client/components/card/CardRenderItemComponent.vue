@@ -413,6 +413,7 @@ export default Vue.extend({
         case CardRenderItemType.TR:
         case CardRenderItemType.WILD:
         case CardRenderItemType.UNDERGROUND_RESOURCES:
+        case CardRenderItemType.TRADE:
           result = '<div class="card-x">x</div>';
         }
       }

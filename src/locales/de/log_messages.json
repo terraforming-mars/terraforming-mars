@@ -287,6 +287,7 @@
     "Gain plants": "Erhalte Pflanzen",
     "Add animals": "Tiere hinzufügen",
 
+    "All players except ${0} may not trade next generation.": "Alle Spieler außer ${0} dürfen in der nächsten Generation nicht handeln.",
     "${0} spent ${1} energy to trade with ${2}": "${0} bezahlte ${1} Energie, um mit ${2} zu handeln",
     "${0} spent ${1} titanium to trade with ${2}": "${0} bezahlte ${1} Titan, um mit ${2} zu handeln",
     "${0} spent ${1} M€ to trade with ${2}": "${0} bezahlte ${1} M€, um mit ${2} zu handeln",

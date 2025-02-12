@@ -70,7 +70,7 @@ export default Vue.extend({
     cubeColor: {
       type: String as () => Color,
       required: false,
-      default: Color.NEUTRAL,
+      default: 'neutral',
     },
   },
   data() {

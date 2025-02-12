@@ -21,7 +21,6 @@ import {OrOptions} from '../src/server/inputs/OrOptions';
 import {BoardName} from '../src/common/boards/BoardName';
 import {CardName} from '../src/common/cards/CardName';
 import {Player} from '../src/server/Player';
-import {Color} from '../src/common/Color';
 import {RandomMAOptionType} from '../src/common/ma/RandomMAOptionType';
 import {SpaceBonus} from '../src/common/boards/SpaceBonus';
 import {TileType} from '../src/common/TileType';
@@ -403,10 +402,10 @@ describe('Game', () => {
   });
 
   it('Final greenery placement in order of the current generation', () => {
-    const player1 = new TestPlayer(Color.BLUE);
-    const player2 = new TestPlayer(Color.GREEN);
-    const player3 = new TestPlayer(Color.YELLOW);
-    const player4 = new TestPlayer(Color.RED);
+    const player1 = new TestPlayer('blue');
+    const player2 = new TestPlayer('green');
+    const player3 = new TestPlayer('yellow');
+    const player4 = new TestPlayer('red');
     const game = Game.newInstance('gto', [player1, player2, player3, player4], player3);
 
     [player1, player2, player3, player4].forEach((p) => {
@@ -455,10 +454,10 @@ describe('Game', () => {
   });
 
   it('Final greenery placement skips players without enough plants', () => {
-    const player1 = new TestPlayer(Color.BLUE);
-    const player2 = new TestPlayer(Color.GREEN);
-    const player3 = new TestPlayer(Color.YELLOW);
-    const player4 = new TestPlayer(Color.RED);
+    const player1 = new TestPlayer('blue');
+    const player2 = new TestPlayer('green');
+    const player3 = new TestPlayer('yellow');
+    const player4 = new TestPlayer('red');
     const game = Game.newInstance('gto', [player1, player2, player3, player4], player2);
     game.incrementFirstPlayer();
 
@@ -496,10 +495,10 @@ describe('Game', () => {
 
 
   it('Should return players in turn order', () => {
-    const player1 = new Player('p1', Color.BLUE, false, 0, 'p1-id');
-    const player2 = new Player('p2', Color.GREEN, false, 0, 'p2-id');
-    const player3 = new Player('p3', Color.YELLOW, false, 0, 'p3-id');
-    const player4 = new Player('p4', Color.RED, false, 0, 'p4-id');
+    const player1 = new Player('p1', 'blue', false, 0, 'p1-id');
+    const player2 = new Player('p2', 'green', false, 0, 'p2-id');
+    const player3 = new Player('p3', 'yellow', false, 0, 'p3-id');
+    const player4 = new Player('p4', 'red', false, 0, 'p4-id');
     const game = Game.newInstance('gto', [player1, player2, player3, player4], player3);
 
     expect(game.getPlayersInGenerationOrder().map(toName)).deep.eq(['p3', 'p4', 'p1', 'p2']);
@@ -650,8 +649,8 @@ describe('Game', () => {
   });
 
   it('fails when the same id appears in two players', () => {
-    const player1 = new Player('name', Color.BLUE, false, 0, 'p-id3');
-    const player2 = new Player('name', Color.RED, false, 0, 'p-id3');
+    const player1 = new Player('name', 'blue', false, 0, 'p-id3');
+    const player2 = new Player('name', 'red', false, 0, 'p-id3');
     expect(
       () => Game.newInstance('gameid', [player1, player2], player1))
       .to.throw(Error, /Duplicate player found: \[p-id3,p-id3\]/);
@@ -664,8 +663,8 @@ describe('Game', () => {
   });
 
   it('fails when the same color appears in two players', () => {
-    const player1 = new Player('name', Color.RED, false, 0, 'p-id1');
-    const player2 = new Player('name', Color.RED, false, 0, 'p-id2');
+    const player1 = new Player('name', 'red', false, 0, 'p-id1');
+    const player2 = new Player('name', 'red', false, 0, 'p-id2');
     expect(
       () => Game.newInstance('gameid', [player1, player2], player1))
       .to.throw(Error, /Duplicate color found/);
@@ -943,7 +942,7 @@ describe('Game', () => {
   });
 
   it('wgt includes all parameters at the game start', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
+    const player = new Player('blue', 'blue', false, 0, 'p-blue');
     const game = Game.newInstance('gameid', [player], player, {venusNextExtension: false});
     game.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);
@@ -954,7 +953,7 @@ describe('Game', () => {
   });
 
   it('wgt includes all parameters at the game start, with Venus', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
+    const player = new Player('blue', 'blue', false, 0, 'p-blue');
     const game = Game.newInstance('gameid', [player], player, {venusNextExtension: true});
     game.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);
@@ -966,7 +965,7 @@ describe('Game', () => {
   });
 
   it('wgt includes all parameters at the game start, with The Moon', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
+    const player = new Player('blue', 'blue', false, 0, 'p-blue');
     const game = Game.newInstance('gameid', [player], player, {venusNextExtension: false, moonExpansion: true});
     game.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);

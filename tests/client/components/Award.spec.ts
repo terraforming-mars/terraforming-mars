@@ -3,7 +3,6 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import Award from '@/client/components/Award.vue';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
-import {Color} from '@/common/Color';
 
 function createAward(
   {funded, scores = []}:
@@ -12,7 +11,7 @@ function createAward(
   return {
     name: `Cosmic Settler`,
     playerName: funded ? 'Foo' : '',
-    playerColor: funded ? Color.RED: '',
+    playerColor: funded ? 'red': '',
     scores,
   };
 }
@@ -44,7 +43,7 @@ describe('Award', () => {
     const award = createAward({
       funded: true,
       scores: [
-        {playerColor: Color.RED, playerScore: 2},
+        {playerColor: 'red', playerScore: 2},
       ],
     });
 
@@ -60,7 +59,7 @@ describe('Award', () => {
     const award = createAward({
       funded: true,
       scores: [
-        {playerColor: Color.RED, playerScore: 2},
+        {playerColor: 'red', playerScore: 2},
       ],
     });
 
@@ -76,7 +75,7 @@ describe('Award', () => {
     const award = createAward({
       funded: true,
       scores: [
-        {playerColor: Color.RED, playerScore: 2},
+        {playerColor: 'red', playerScore: 2},
       ],
     });
 
@@ -93,10 +92,10 @@ describe('Award', () => {
     const award = createAward({
       funded: false,
       scores: [
-        {playerColor: Color.RED, playerScore: 2},
-        {playerColor: Color.BLUE, playerScore: 4},
-        {playerColor: Color.YELLOW, playerScore: 0},
-        {playerColor: Color.GREEN, playerScore: 4},
+        {playerColor: 'red', playerScore: 2},
+        {playerColor: 'blue', playerScore: 4},
+        {playerColor: 'yellow', playerScore: 0},
+        {playerColor: 'green', playerScore: 4},
       ],
     });
 

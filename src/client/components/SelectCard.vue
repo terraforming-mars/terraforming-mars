@@ -175,7 +175,7 @@ export default Vue.extend({
       return undefined;
     },
     getOwner(card: CardModel): Owner {
-      return this.owners.get(card.name) ?? {name: 'unknown', color: Color.NEUTRAL};
+      return this.owners.get(card.name) ?? {name: 'unknown', color: 'neutral'};
     },
     isCardActivated(card: CardModel): boolean {
       // Copied from PlayerMixin.

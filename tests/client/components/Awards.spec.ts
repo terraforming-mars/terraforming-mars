@@ -8,7 +8,6 @@ import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {AWARD_COSTS} from '@/common/constants';
 import {AwardName} from '@/common/ma/AwardName';
 import {getMilestoneAwardDescription} from '@/client/MilestoneAwardManifest';
-import {Color} from '@/common/Color';
 import {Preferences} from '@/client/utils/PreferencesManager';
 
 const names: Array<AwardName> = ['Banker', 'Celebrity'];
@@ -16,7 +15,7 @@ function createAward({id = 1, funded = false}): FundedAwardModel {
   return {
     name: names[id - 1],
     playerName: funded ? 'Foo' : '',
-    playerColor: funded ? Color.RED: '',
+    playerColor: funded ? 'red': '',
     scores: [],
   };
 }

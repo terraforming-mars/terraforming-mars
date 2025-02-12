@@ -2,7 +2,6 @@ import {shallowMount} from '@vue/test-utils';
 import {getLocalVue} from '../getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
-import {Color} from '@/common/Color';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {RecursivePartial} from '@/common/utils/utils';
@@ -10,7 +9,7 @@ import {RecursivePartial} from '@/common/utils/utils';
 describe('PlayerInfo', function() {
   it('Played card count test', function() {
     const thisPlayer: RecursivePartial<PublicPlayerModel> = {
-      color: Color.BLUE,
+      color: 'blue',
       tableau: [
         {name: CardName.HELION},
         {name: CardName.ACQUIRED_COMPANY},

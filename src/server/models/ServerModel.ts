@@ -117,7 +117,7 @@ export class Server {
 
   public static getSpectatorModel(game: IGame): SpectatorModel {
     return {
-      color: Color.NEUTRAL,
+      color: 'neutral',
       id: game.spectatorId,
       game: this.getGameModel(game),
       players: game.getPlayersInGenerationOrder().map(this.getPlayer),
@@ -313,7 +313,7 @@ export class Server {
       return space.player.color;
     }
     if (space.tile?.protectedHazard === true) {
-      return Color.BRONZE;
+      return 'bronze';
     }
     return undefined;
   }

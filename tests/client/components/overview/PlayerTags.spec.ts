@@ -2,7 +2,6 @@ import {shallowMount} from '@vue/test-utils';
 import {getLocalVue} from '../getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
-import {Color} from '@/common/Color';
 import PlayerTags from '@/client/components/overview/PlayerTags.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {RecursivePartial} from '@/common/utils/utils';
@@ -14,7 +13,7 @@ describe('PlayerTags', function() {
 
   beforeEach(() => {
     const player: RecursivePartial<PublicPlayerModel> = {
-      color: Color.BLUE,
+      color: 'blue',
       tableau: [
         {
           name: CardName.CRESCENT_RESEARCH_ASSOCIATION, // 1/3 VP per moon tag

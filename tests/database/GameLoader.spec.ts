@@ -3,9 +3,7 @@ import {Game} from '../../src/server/Game';
 import {GameLoader} from '../../src/server/database/GameLoader';
 import {Player} from '../../src/server/Player';
 import {SerializedGame} from '../../src/server/SerializedGame';
-
 import {TestPlayer} from '../TestPlayer';
-import {Color} from '../../src/common/Color';
 import {GameIdLedger} from '../../src/server/database/IDatabase';
 import {GameId, PlayerId} from '../../src/common/Types';
 import {restoreTestDatabase, restoreTestGameLoader, setTestDatabase, setTestGameLoader} from '../testing/setup';
@@ -155,7 +153,7 @@ describe('GameLoader', function() {
     database.games.delete('gameid');
     const numberOfGames = 10;
     for (let i = 0; i < numberOfGames; i++) {
-      const player = new Player('name', Color.BLUE, false, 0, 'p-' + i as PlayerId);
+      const player = new Player('name', 'blue', false, 0, 'p-' + i as PlayerId);
       Game.newInstance('game-' + i as GameId, [player], player);
     }
     database.getGameSleep = 500;

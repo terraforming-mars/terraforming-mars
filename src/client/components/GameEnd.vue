@@ -279,7 +279,7 @@ export default Vue.extend({
       });
     },
     globalsDataset(): ReadonlyArray<DataSet> {
-      const dataset = [];
+      const dataset: Array<DataSet> = [];
 
       const gpg = this.game.globalsPerGeneration;
       function getValues(param: GlobalParameter, min: number, max: number): ReadonlyArray<number> {
@@ -289,16 +289,16 @@ export default Vue.extend({
         });
       }
 
-      dataset.push({label: $t('Temperature'), color: Color.RED, data: getValues(GlobalParameter.TEMPERATURE, -30, 8)});
-      dataset.push({label: $t('Oxygen'), color: Color.GREEN, data: getValues(GlobalParameter.OXYGEN, 0, 14)});
-      dataset.push({label: $t('Oceans'), color: Color.BLUE, data: getValues(GlobalParameter.OCEANS, 0, 9)});
+      dataset.push({label: $t('Temperature'), color: 'red', data: getValues(GlobalParameter.TEMPERATURE, -30, 8)});
+      dataset.push({label: $t('Oxygen'), color: 'green', data: getValues(GlobalParameter.OXYGEN, 0, 14)});
+      dataset.push({label: $t('Oceans'), color: 'blue', data: getValues(GlobalParameter.OCEANS, 0, 9)});
       if (this.game.gameOptions.expansions.venus === true) {
-        dataset.push({label: $t('Venus'), color: Color.YELLOW, data: getValues(GlobalParameter.VENUS, 0, 30)});
+        dataset.push({label: $t('Venus'), color: 'yellow', data: getValues(GlobalParameter.VENUS, 0, 30)});
       }
       if (this.game.gameOptions.expansions.moon === true) {
-        dataset.push({label: $t('L. Habitat'), color: Color.ORANGE, data: getValues(GlobalParameter.MOON_HABITAT_RATE, 0, 8)});
-        dataset.push({label: $t('L. Mining'), color: Color.PINK, data: getValues(GlobalParameter.MOON_MINING_RATE, 0, 8)});
-        dataset.push({label: $t('L. Logistics'), color: Color.PURPLE, data: getValues(GlobalParameter.MOON_LOGISTICS_RATE, 0, 8)});
+        dataset.push({label: $t('L. Habitat'), color: 'orange', data: getValues(GlobalParameter.MOON_HABITAT_RATE, 0, 8)});
+        dataset.push({label: $t('L. Mining'), color: 'pink', data: getValues(GlobalParameter.MOON_MINING_RATE, 0, 8)});
+        dataset.push({label: $t('L. Logistics'), color: 'purple', data: getValues(GlobalParameter.MOON_LOGISTICS_RATE, 0, 8)});
       }
       return dataset;
     },

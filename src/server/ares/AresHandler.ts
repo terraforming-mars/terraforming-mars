@@ -137,14 +137,14 @@ export class AresHandler {
     if (hasAdjacencyBonus) {
       entry.count++;
     }
-    if (hazardSeverity !== HazardSeverity.NONE) {
+    if (hazardSeverity !== 'none') {
       // TODO(kberg): remove ?? 0 by 2025-02-01
       entry.purifierCount = (entry.purifierCount ?? 0) + 1;
     }
   }
 
   public static hasHazardTile(space: Space): boolean {
-    return hazardSeverity(space.tile?.tileType) !== HazardSeverity.NONE;
+    return hazardSeverity(space.tile?.tileType) !== 'none';
   }
 
   private static computeAdjacencyCosts(player: IPlayer, space: Space, subjectToHazardAdjacency: boolean): AdjacencyCost {

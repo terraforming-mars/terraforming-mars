@@ -6,7 +6,7 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MareSerenitatisMine} from '../../../src/server/cards/moon/MareSerenitatisMine';
-import {MoonSpaces} from '../../../src/common/moon/MoonSpaces';
+import {NamedMoonSpaces} from '../../../src/common/moon/NamedMoonSpaces';
 import {TileType} from '../../../src/common/TileType';
 import {assertPlaceTile} from '../../assertions';
 
@@ -55,7 +55,7 @@ describe('MareSerenitatisMine', () => {
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.miningRate).eq(1);
 
-    const mareSerenitatis = moonData.moon.getSpaceOrThrow(MoonSpaces.MARE_SERENITATIS);
+    const mareSerenitatis = moonData.moon.getSpaceOrThrow(NamedMoonSpaces.MARE_SERENITATIS);
     expect(mareSerenitatis.player).eq(player);
     expect(mareSerenitatis.tile!.tileType).eq(TileType.MOON_MINE);
 

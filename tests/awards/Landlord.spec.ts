@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Landlord} from '../../src/server/awards/Landlord';
 import {SpaceName} from '../../src/server/SpaceName';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
-import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
+import {NamedMoonSpaces} from '../../src/common/moon/NamedMoonSpaces';
 import {EmptyBoard} from '../testing/EmptyBoard';
 import {AresHazards} from '../../src/server/ares/AresHazards';
 import {TileType} from '../../src/common/TileType';
@@ -37,7 +37,7 @@ describe('Landlord', () => {
     addGreenery(player, '35');
     expect(award.getScore(player)).to.eq(2);
 
-    MoonExpansion.addMineTile(player, MoonSpaces.MARE_IMBRIUM);
+    MoonExpansion.addMineTile(player, NamedMoonSpaces.MARE_IMBRIUM);
     expect(award.getScore(player)).to.eq(3);
   });
 

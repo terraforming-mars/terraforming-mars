@@ -54,6 +54,7 @@ import AppButton from '@/client/components/common/AppButton.vue';
 import {CardType} from '@/common/cards/CardType';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {Phase} from '@/common/Phase';
+import {ActionLabel} from './ActionLabel';
 
 export default Vue.extend({
   name: 'PlayerInfo',
@@ -69,7 +70,7 @@ export default Vue.extend({
       default: false,
     },
     actionLabel: {
-      type: String,
+      type: String as () => ActionLabel,
       default: '',
     },
     playerIndex: {

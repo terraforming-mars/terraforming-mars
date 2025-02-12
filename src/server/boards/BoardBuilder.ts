@@ -1,7 +1,7 @@
 import {Space} from './Space';
 import {SpaceId, isSpaceId, safeCast} from '../../common/Types';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {SpaceName} from '../SpaceName';
+import {NamedSpace, SpaceName} from '../SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {Random} from '../../common/utils/Random';
 import {inplaceShuffle} from '../utils/shuffle';
@@ -121,7 +121,7 @@ export class BoardBuilder {
 
   // Shuffle the ocean spaces and bonus spaces. But protect the land spaces supplied by
   // |lands| so that those IDs most definitely have land spaces.
-  public shuffle(rng: Random, ...preservedSpaceIds: Array<SpaceName>) {
+  public shuffle(rng: Random, ...preservedSpaceIds: Array<NamedSpace>) {
     const preservedSpaces = [...this.unshufflableSpaces];
     for (const spaceId of preservedSpaceIds) {
       const idx = Number(spaceId) - 3;

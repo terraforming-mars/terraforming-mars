@@ -76,7 +76,7 @@ export default Vue.extend({
       return 'event-party--' + partyName.toLowerCase().split(' ').join('_');
     },
     getClass(): string {
-      const common = 'global-event';
+      const common = 'global-event' + ' card-' + this.globalEventName.toLowerCase().replace(/ /g, '-');
       switch (this.type) {
       case 'coming':
         return common + ' global-event--coming';

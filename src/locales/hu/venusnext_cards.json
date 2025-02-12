@@ -1,207 +1,132 @@
 {
   "% Venus": "% Vénusz",
-
-  "Stratospheric Birds": "Sztratosférai madarak",
-  "Action: Add 1 animal to this card.": "Akció: adj 1 állatot ehhez a kártyához.",
-  "Requires Venus 12% and that you spend 1 floater from any card.": 
-    "Kijátszási feltétel: 12% Vénusz és 1 lebegő eltávolítása bármelyik kártyáról.",
-
-  "Venusian Plants": "Vénuszi növények",
-  "Requires Venus 16%. Raise Venus 1 step. Add 1 microbe or 1 animal to ANOTHER VENUS CARD": 
-    "Kijátszási feltétel: 16% Vénusz. Növeld a Vénusz értékét 1 egységgel. Adj 1 mikróbát vagy 1 állatot EGY MÁSIK VÉNUSZ KÁRTYÁHOZ.",
-
-  "Extremophiles": "Extremofilek",
-  "Action: Add 1 microbe to ANY card.": "Akció: adj 1 mikróbát BÁRMELYIK kártyához.",
-  "1 VP for every 3rd Microbe on this card.": "1 GyP minden 3. mikróbáért ezen a kártyán.",
+  "Stratospheric Birds": "Sztratoszferikus madarak",
+  "Action: Add 1 animal to this card.": "Akció: Rakj 1 állatot erre a kártyára!",
+  "Requires Venus 12% and that you spend 1 floater from any card.": "Kijátszási feltétel: legalább 12%-os Vénusz szint és 1 lebegő elköltése egy tetszőleges kártyádról.",
+  "Venusian Plants": "A Vénusz növényei",
+  "Requires Venus 16%. Raise Venus 1 step. Add 1 microbe or 1 animal to ANOTHER VENUS CARD": "Kijátszási feltétel: legalább 16%-os Vénusz szint. Növeld a Vénusz szintet 1 értékkel! Rakj 1 mikrobát vagy 1 állatot egy MÁSIK VÉNUSZ KÁRTYÁRA!",
+  "Extremophiles": "Extremofil",
+  "Action: Add 1 microbe to ANY card.": "Akció: Rakj 1 mikrobát egy TETSZŐLEGES kártyára!",
+  "1 VP for every 3rd Microbe on this card.": "1 GyP jár minden az ezen a kártyán lévő 3 mikroba után.",
   "Requires 2 science tags.": "Kijátszási feltétel: 2 tudomány ikon.",
-
   "Mining Quota": "Bányászati kvóta",
-  "Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps.": 
-    "Kijátszási feltétel: Vénusz, Föld és Jovian ikon. Növeld az acél termelésed 2 egységgel.",
-
-  "Corroder Suits": "Korrodáló ruhák",
-  "Increase your M€ production 2 steps. Add 1 resource to ANY Venus CARD.": 
-    "Növeld a M€ termelésed 2-vel. Adj 1 erőforrást BÁRMELYIK Vénusz kártyához.",
-
-  "Venusian Insects": "Vénuszi rovarok",
-  "Action: add 1 Microbe to this card.": "Akció: adj 1 mikróbát ehhez a kártyához.",
-  "1 VP for every 2nd Microbe on this card.": "1 GyP minden 2. mikróbáért ezen a kártyán.",
-  "Requires Venus 12%.": "Kijátszási feltétel: 12% Vénusz.",
-
-  "Sulphur-Eating Bacteria": "Kén-evő baktériumok",
-  "Action: Spend any number of microbes here to gain triple amount of M€.": "Akció: költs el X mikróbát innen, hogy 3*X M€-t kapj.",
-  "Requires Venus 6%": "Kijátszási feltétel: 6% Vénusz.",
-
-  "Venus Waystation": "Vénuszi állomás",
-  "Effect: When you play a Venus tag, you pay 2 M€ less for it.": "Hatás: ha egy Vénusz ikonú kártyát játszol, 2 M€-el kevesebbe kerül.",
-
+  "Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps.": "Kijátszási feltétel: legalább 1 Vénusz, Föld és Jupiter ikon. Növeld az acéltermelésed 2 értékkel!",
+  "Corroder Suits": "Védőfelszerelés",
+  "Increase your M€ production 2 steps. Add 1 resource to ANY Venus CARD.": "Növeld a M€-termelésed 2 értékkel! Rakj 1 erőforrást egy TETSZŐLEGES VÉNUSZ KÁRTYÁRA!",
+  "Venusian Insects": "A Vénusz rovarai",
+  "Action: add 1 Microbe to this card.": "Akció: Rakj 1 mikrobát erre a kártyára!",
+  "1 VP for every 2nd Microbe on this card.": "1 GyP jár minden ezen a kártyán lévő 2 mikroba után.",
+  "Requires Venus 12%.": "Kijátszási feltétel: legalább 12%-os Vénusz szint.",
+  "Sulphur-Eating Bacteria": "Kénevő baktérium",
+  "Action: Spend any number of microbes here to gain triple amount of M€.": "Akció: Költs el bármennyi mikrobát erről a kártyáról, hogy ennek a háromszorosát M€-ként megkapd!",
+  "Requires Venus 6%": "Kijátszási feltétel: legalább 6%-os Vénusz szint.",
+  "Venus Waystation": "Vénusz űrállomás",
+  "Effect: When you play a Venus tag, you pay 2 M€ less for it.": "Hatás: Amikor Vénusz ikont játszol ki, 2 M€-tel kevesebbet kell fizetned érte.",
   "Thermophiles": "Termofilek",
-  "Action: Add 1 microbe to ANY Venus CARD.": "Akció: adj 1 mikróbát BÁRMELYIK VÉNUSZ KÁRTYÁHOZ.",
-  "(Action: Remove 2 microbes to raise Venus 1 step)": "(Akció: távolíts el 2 mikróbát, hogy növeld a Vénusz értékét 1 egységgel.)",
-  "Action: Spend 2 microbes here to raise Venus 1 step.": "Akció: költs el 2 mikróbát innen, hogy növeld a Vénusz értékét 1 egységgel.",
-
-  "Sponsored Academies": "Támogatott akadémiák",
-  "Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card.": "Dobj el 1 kártyát a kezedből, majd húzz 3-at. MINDEN ELLENFÉL húzzon 1-et.",
-
-  "Sulphur Exports": "Kén export",
-  "Increase Venus 1 step. Increase your M€ production 1 step for each Venus tag you have, including this.": 
-    "Növeld a Vénusz értékét 1 egységgel. Növeld a M€ termelésed 1-el minden Vénusz ikonú kártyádért, beleértve ezt is.",
-
-  "Venus Soils": "Vénuszi talajok",
-  "Raise Venus 1 step. Increase your plant production 1 step. Add 2 microbes to ANOTHER card": 
-    "Növeld a Vénusz értékét 1 egységgel. Növeld a palánta termelésed 1-el. Adj 2 mikróbát EGY MÁSIK kártyához.",
-
+  "Action: Add 1 microbe to ANY Venus CARD.": "Akció: Rakj 1 mikrobát EGY TETSZŐLEGES VÉNUSZ KÁRTYÁRA!",
+  "Action: Remove 2 microbes to raise Venus 1 step": "Akció: Költs el erről a kártyáról 2 mikrobát, hogy növeld a Vénusz szintet 1 értékkel!",
+  "Sponsored Academies": "Támogatott egyetemek",
+  "Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card.": "Dobj el 1 kártyát a kezedből, EZUTÁN húzz 3 kártyát! Minden ELLENFELED húz 1 kártyát.",
+  "Sulphur Exports": "Kénkivitel",
+  "Increase Venus 1 step. Increase your M€ production 1 step for each Venus tag you have, including this.": "Növeld a Vénusz szintet 1 értékkel! Növeld a M€-termelésed annyival, amennyi kijátszott Vénusz ikonod van, ezt is beleértve!",
+  "Venus Soils": "Termőföld a Vénuszon",
+  "Raise Venus 1 step. Increase your plant production 1 step. Add 2 microbes to ANOTHER card": "Növeld a Vénusz szintet 1 értékkel! Növeld a palántatermelésed 1 értékkel! Rakj 2 mikrobát egy MÁSIK kártyára!",
   "Terraforming Contract": "Terraformálási szerződés",
-  "Requires that you have at least 25 TR. Increase your M€ production 4 steps.": 
-    "Kijátszási feltétel: legalább 25 TR. Növeld a M€ termelésed 4-gyel.",
-
-  "Solarnet": "Naprendszeri hálózat",
-  "Requires Venus, Earth and Jovian tags. Draw 2 cards.": "Kijátszási feltétel: Vénusz, Föld és Jovian ikon. Húzz 2 lapot.",
-
+  "Requires that you have at least 25 TR. Increase your M€ production 4 steps.": "Kijátszási feltétel: legalább 25-ös TR. Növeld a M€-termelésed 4 értékkel!",
+  "Solarnet": "Naphálózat",
+  "Requires Venus, Earth and Jovian tags. Draw 2 cards.": "Kijátszási feltétel: legalább 1 Vénusz, Föld és Jupiter ikon. Húzz 2 kártyát!",
   "Atalanta Planitia Lab": "Atalanta Planitia labor",
-  "Requires 3 science tags. Draw 2 cards.": "Kijátszási feltétel: 3 tudomány ikon. Húzz 2 lapot.",
-
-  "Rotator Impacts": "Rotációs ütközések",
-  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": 
-  "Akció: költs el 6 M€-t, hogy adj egy aszteroida erőforrást ehhez a kártyához [TITÁNT IS HASZNÁLHATSZ].",
-  "Action: Spend 1 resource from this card to increase Venus 1 step.": 
-    "Akció: költs el 1 erőforrást erről a kártyáról, hogy növeld a Vénusz értékét 1 egységgel.",
-  "Venus must be 14% or lower": "Kijátszási feltétel: a Vénusz maximum 14%-on lehet.",
-
-  "Omnicourt": "Omnicourt",
-  "Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.": "Kijátszási feltétel: Vénusz, Föld és Jupiter ikon. Növeld a TR-ed 2 egységgel.",
-
-  "Jet Stream Microscrappers": "Jet stream mikroszkrapperek",
-  "Action: Spend 1 titanium to add 2 floaters here": "Akció: költs el 1 titániumot, hogy 2 lebegőt helyezz ide.",
-  "Action: Spend 2 floaters here to raise Venus 1 step": "Akció: költs el 2 lebegőt innen, hogy növeld a Vénusz értékét 1 egységgel.",
-
-  "Spin-Inducing Asteroid": "Forgást indukáló aszteroida",
-  "Venus must be 10% or lower. Raise Venus 2 steps.": "Kijátszási feltétel: a Vénusz maximum 10%-on lehet. Növeld a Vénusz értékét 2 egységgel.",
-
-  "Dirigibles": "Dirigiblek",
-  "Action: Add 1 floater to ANY card": "Akció: adj 1 lebegőt BÁRMELYIK kártyához.",
-  "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.": 
-    "Hatás: ha egy Vénusz ikonú kártyát játszol, a lebegők innen használhatók fizetésre, és 3 M€-t érnek darabonként.",
-
-  "Floating Habs": "Lebegő lakóhelyek",
-  "Action: Spend 2 M€ to add 1 floater to ANY card": "Akció: költs el 2 M€-t, hogy 1 lebegőt adj BÁRMELYIK kártyához.",
-  "1 VP for every 2nd Floater on this card.": "1 GyP minden 2. lebegőért ezen a kártyán.",
-  "Requires 2 science tags. 1 VP for every 2nd Floater on this card": "Kijátszási feltétel: 2 tudomány ikon. 1 GyP minden 2. lebegőért ezen a kártyán.",
-
-  "Hydrogen to Venus": "Hidrogén a Vénuszra",
-  "Raise Venus 1 step. Add 1 floater to A VENUS CARD for each Jovian tag you have.": 
-    "Növeld a Vénusz értékét 1 egységgel. Adj 1 lebegőt EGY VÉNUSZ KÁRTYÁHOZ minden Jupiter ikonú kártyádért.",
-
-  "Water to Venus": "Víz a Vénuszra",
-  "Raise Venus 1 step.": "Növeld a Vénusz értékét 1 egységgel.",
-
-  "GHG Import From Venus": "ÜHG import Vénuszról",
-  "Raise Venus 1 step. Increase your heat production 3 steps.": "Növeld a Vénusz értékét 1 egységgel. Növeld a hő termelésed 3-mal.",
-
-  "Aerial Mappers": "Légifényképezők",
-  "Action: Add floater to ANY card.": "Akció: adj 1 lebegőt BÁRMELYIK kártyához.",
-  "Action: Spend one floater here to draw 1 card.": "Akció: költs el 1 lebegőt innen, hogy húzz 1 lapot.",
-
-  "Aerosport Tournament": "Aerosport verseny",
-  "Requires that you have 5 floaters. Gain 1 M€ per each city tile in play.": "Kijátszási feltétel: legalább 5 lebegőd van. 1 M€ minden városodért.",
-
-  "Air-Scrapping Expedition": "Magaslaia levegő gyűjtő expedíció",
-  "Raise Venus 1 step. Add 3 floaters to ANY Venus CARD": "Növeld a Vénusz értékét 1 egységgel. Adj 3 lebegőt BÁRMELYIK VÉNUSZ KÁRTYÁHOZ.",
-  "Raise Venus 1 step. Add 3 floaters to ANY Venus CARD.": "Növeld a Vénusz értékét 1 egységgel. Adj 3 lebegőt BÁRMELYIK VÉNUSZ KÁRTYÁHOZ.",
-
-  "Atmoscoop": "Atmoszkóp",
-  "Requires 3 science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 floaters to ANY card.": 
-    "Kijátszási feltétel: 3 tudomány ikon. Vagy növeld a hőmérsékletet 2 egységgel, vagy növeld a Vénusz értékét 2 egységgel. Adj 2 lebegőt BÁRMELYIK kártyához.",
-
-  "Comet for Venus": "Üstökös a Vénuszra",
-  "Raise Venus 1 step. Remove up to 4M€ from any player WITH A VENUS TAG IN PLAY.": 
-    "Növeld a Vénusz értékét 1 egységgel. Távolíts el legfeljebb 4 M€-t egy játékostól, AKINEK VAN VÉNUSZ IKONÚ KÁRTYÁJA.",
-
-  "Dawn City": "Hajnal város",
-  "Requires 4 science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a city tile on the RESERVED AREA.": 
-    "Kijátszási feltétel: 4 tudomány ikon. Csökkentsd az energiatermelésed 1-gyel. Növeld a titánium termelésed 1-gyel. Helyezz egy várost a FENNTARTOTT TERÜLETRE.",
-
-  "Deuterium Export": "Deutérium export",
-  "Action: Add 1 floater to this card.": "Akció: adj 1 lebegőt ehhez a kártyához.",
-  "Action: Spend 1 floater here to increase your energy production 1 step.": "Akció: költs el 1 lebegőt innen, hogy növeld az energiatermelésed 1-gyel.",
-
-  "Extractor Balloons": "Kivonó léggömbök",
-  "Action: Remove 2 floaters here to raise Venus 1 step.": "Akció: távolíts el 2 lebegőt innen, hogy növeld a Vénusz értékét 1 egységgel.",
-  "Add 3 floaters to this card": "Adj 3 lebegőt ehhez a kártyához.",
-
-  "Forced Precipitation": "Kényszerített csapadék",
-  "Action: Spend 2 M€ to add 1 floater to THIS card.": "Akció: költs el 2 M€-t, hogy adj 1 lebegőt EHHEZ a kártyához.",
-  "Action: Spend 2 floaters here to increase Venus 1 step.": "Akció: költs el 2 lebegőt innen, hogy növeld a Vénusz értékét 1 egységgel.",
-
-  "Freyja Biodomes": "Freyja biodómok",
+  "Requires 3 science tags. Draw 2 cards.": "Kijátszási feltétel: legalább 3 tudomány ikon. Húzz 2 kártyát!",
+  "Rotator Impacts": "Forgó becsapódások",
+  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "Akció: Költs el 6 M€-et, hogy 1 aszterodiát rakj erre a kártyára (titánnal is fizethetsz)!",
+  "Action: Spend 1 resource from this card to increase Venus 1 step.": "Akció: Költs el egy erőforrást erről a kártyáról, hogy növeld a Vénusz szintet 1 értékkel!",
+  "Venus must be 14% or lower": "Kijátszási feltétel: legfeljebb 14%-os Vénusz szint.",
+  "Omnicourt": "Legfelsőbb bíróság",
+  "Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.": "Kijátszási feltétel: legalább 1 Vénusz, Föld és Jupiter ikon. Növeld a TR-ed 2 értékkel!",
+  "Jet Stream Microscrappers": "Sugárhajtású mikroszeletelő",
+  "Action: Spend 1 titanium to add 2 floaters here": "Akció: Költs el 1 titánt, hogy 2 lebegőt rakj erre a kártyára!",
+  "Action: Spend 2 floaters here to raise Venus 1 step": "Akció: Költs el 2 lebegőt erről a kártyáról, hogy növeld a Vénusz szintet 1 értékkel!",
+  "Spin-Inducing Asteroid": "Forgást gerjesztő aszteroida",
+  "Venus must be 10% or lower. Raise Venus 2 steps.": "Kijátszási feltétel: legfeljebb 10%-os Vénusz szint. Növeld a Vénusz szintet 2 értékkel!",
+  "Dirigibles": "Kormányozható léghajó",
+  "Action: Add 1 floater to ANY card": "Akció: Rakj 1 lebegőt egy TETSZŐLEGES kártyára!",
+  "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.": "Hatás: Vénusz ikon kijátszásakor az itt lévő lebegők használhatóak fizetőeszközként, ilyenkor mindenyikük 3 M€-et ér.",
+  "Floating Habs": "Lebegő lakások",
+  "Action: Spend 2 M€ to add 1 floater to ANY card": "Akció: Költs el 2 M€-et, hogy 1 lebegőt rakj egy TETSZŐLEGES kártyára!",
+  "1 VP for every 2nd Floater on this card.": "1 GyP jár minden ezen a kártyán lévő 2 lebegő után.",
+  "Requires 2 science tags. 1 VP for every 2nd Floater on this card": "Kijátszási feltétel: legalább 2 tudomány ikon.",
+  "Hydrogen to Venus": "Hidrogént a Vénuszra",
+  "Raise Venus 1 step. Add 1 floater to A VENUS CARD for each Jovian tag you have.": "Növeld a Vénusz szintet 1 értékkel! Rakj annyi lebegőt EGY TETSZŐLEGES KÁRTYÁRA, amennyi kijátszott Jupiter ikonod van!",
+  "Water to Venus": "Vizet a Vénuszra",
+  "Raise Venus 1 step.": "Növeld a Vénusz szintet 1 értékkel!",
+  "GHG Import From Venus": "Üvegházhatású gázok cseréje",
+  "Raise Venus 1 step. Increase your heat production 3 steps.": "Növeld a Vénusz szintet 1 értékkel! Növeld a hőtermelésed 3 értékkel!",
+  "Aerial Mappers": "Légi térképészek",
+  "Action: Add floater to ANY card.": "Akció: Rakj 1 lebegőt egy TETSZŐLEGES kártyára!",
+  "Action: Spend one floater here to draw 1 card.": "Akció: Költs el 1 lebegőt erről a kártyáról, hogy húzz 1 kártyát!",
+  "Aerosport Tournament": "Légi sportbajnokság",
+  "Requires that you have 5 floaters. Gain 1 M€ per each city tile in play.": "Kijátszási feltétel: legalább 5 lebegő erőforrás. Kapsz 1 M€-et minden játékban lévő városért.",
+  "Air-Scrapping Expedition": "Légtördelő expedíció",
+  "Raise Venus 1 step. Add 3 floaters to ANY Venus CARD.": "Növeld a Vénusz szintet 1 értékkel! Rakj 3 lebegőt egy TETSZŐLEGES VÉNUSZ KÁRTYÁRA!",
+  "Atmoscoop": "Légkörbegyűjtő",
+  "Requires 3 science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 floaters to ANY card.": "Kijátszási feltétel: legalább 3 tudomány ikon. Vagy a hőmérsékletet, vagy a Vénusz szintet növeld 2 értékkel! Rakj 2 lebegőt egy TETSZŐLEGES kártyára!",
+  "Comet for Venus": "Üstököst a Vénuszba",
+  "Raise Venus 1 step. Remove up to 4M€ from any player WITH A VENUS TAG IN PLAY.": "Növeld a Vénusz szintet 1 értékkel! Dobass el legfeljebb 4 M€-et egy VÉNUSZ IKONNAL RENDELKEZŐ játékostól!",
+  "Dawn City": "Virradó város",
+  "Requires 4 science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a city tile on the RESERVED AREA.": "Kijátszási feltétel: legalább 4 tudomány ikon. Csökkentsd az energiatermelésed 1 értékkel! Növeld a titántermelésed 1 értékkel! Helyezz le 1 Városlapkát A SZÁMÁRA FENNTARTOTT TERÜLETRE!",
+  "Deuterium Export": "Deutérium kivitel",
+  "Action: Add 1 floater to this card.": "Akció: Rakj 1 lebegőt erre a kártyára!",
+  "Action: Spend 1 floater here to increase your energy production 1 step.": "Akció: Költs el 1 lebegőt erről a kártyáról, hogy növeld az energiatermelésed 1 értékkel!",
+  "Remove 1 floater to raise energy production 1 step": "Költs el 1 lebegőt erről a kártyáról, hogy növeld az energiatermelésed 1 értékkel!",
+  "Remove floater": "Költs el 1 lebegőt",
+  "Extractor Balloons": "Elszívó léggömbök",
+  "Action: Remove 2 floaters here to raise Venus 1 step.": "Akció: Költs el 2 lebegőt erről a kártyáról, hogy növeld a Vénusz szintet 1 értékkel!",
+  "Add 3 floaters to this card": "Rakj 3 lebegőt erre a kártyára!",
+  "Forced Precipitation": "Kikényszerített csapadék",
+  "Action: Spend 2 M€ to add 1 floater to THIS card.": "Akció: Költs el 2 M€-et, hogy 1 lebegőt rakj erre a kártyára!",
+  "Action: Spend 2 floaters here to increase Venus 1 step.": "Akció: Költs el 2 lebegőt erről a kártyáról, hogy növeld a Vénusz szintet 1 értékkel!",
+  "Freyja Biodomes": "Freyja biokupola",
   "10% Venus": "10% Vénusz",
-  "Requires 10% on the Venus track. Add 2 microbes or 2 animals to another Venus card. Production: energy -1, M€ +2.": 
-    "Kijátszási feltétel: 10% Vénusz. Adj 2 mikróbát vagy 2 állatot EGY MÁSIK VÉNUSZ KÁRTYÁHOZ. Termelés: energia -1, M€ +2.",
-
-  "Giant Solar Shade": "Óriás napelem",
-  "Raise Venus 3 steps.": "Növeld a Vénusz értékét 3 egységgel.",
-
+  "Requires 10% on the Venus track. Add 2 microbes or 2 animals to another Venus card. Production: energy -1, M€ +2.": "Kijátszási feltétel: legalább 10%-os Vénusz szint. Rakj 2 mikrobát vagy 2 állatot EGY MÁSIK VÉNUSZ KÁRTYÁRA! Csökkentsd az energiatermelésed 1 értékkel, a M€-termelésed pedig növeld 2 értékkel!",
+  "Giant Solar Shade": "Óriási árnyékoló",
+  "Raise Venus 3 steps.": "Növeld a Vénusz szintet 3 értékkel!",
   "Gyropolis": "Gyropolisz",
-  "Decrease your energy production 2 steps. Increase your M€ production 1 step for each Venus and Earth tag you have. Place a city tile.":
-    "Csökkentsd az energiatermelésed 2-gyel. Növeld a M€ termelésed 1-gyel minden Vénusz és Föld ikonú kártyádért. Helyezz egy várost.",
-  "Decrease your energy production 2 steps. Increase your M€ production 1 step for each Venus and Earth tag you have. Place a city tile": 
-    "Csökkentsd az energiatermelésed 2-gyel. Növeld a M€ termelésed 1-gyel minden Vénusz és Föld ikonú kártyádért. Helyezz egy várost",
-
-  "Io Sulphur Research": "Io kén kutatás",
-  "Draw 1 card, or draw 3 if you have at least 3 Venus tags.": "Húzz 1 lapot, vagy 3-at, ha legalább 3 Vénusz ikonú kártyád van.",
-
-  "Ishtar Mining": "Ishtar bányászat",
-  "8% VeFnus": "8% Vénusz",
-  "Requires Venus 8%. Increase your titanium production 1 step.": "Kijátszási feltétel: 8% Vénusz. Növeld a titánium termelésed 1-gyel.",
-
-  "Luna Metropolis": "Luna metropolisz",
-  "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.": 
-    "Növeld a M€ termelésed 1-gyel minden Föld ikonú kártyádért, beleértve ezt is. Helyezz egy várost a FENNTARTOTT TERÜLETRE.",
-
+  "Decrease your energy production 2 steps. Increase your M€ production 1 step for each Venus and Earth tag you have. Place a city tile.": "Csökkentsd az energiatermelésed 2 értékkel! Növeld a M€-termelésed 1 értékkel minden Vénusz és Föld ikonú kártyádért! Rakj le 1 Városlapkát!",
+  "Io Sulphur Research": "Kénkutatás",
+  "Draw 1 card, or draw 3 if you have at least 3 Venus tags.": "Húzz 1 kártyát, vagy húzz 3 kártyát, ha legalább 3 kijátszott Vénusz ikonnal rendelkezel!",
+  "Ishtar Mining": "Ishtari bányászat",
+  "8% Venus": "8% Venus",
+  "Requires Venus 8%. Increase your titanium production 1 step.": "Kijátszási feltétel: legalább 8%-os Vénusz szint. Növeld a titántermelésed 1 értékkel!",
+  "Luna Metropolis": "Hold metropolisz",
+  "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.": "Növeld a M€-termelésed 1 értékkel minden kijátszott Föld ikonodért, ezt a kártyát is beleértve! Helyezz 1 Városlapkát A SZÁMÁRA FENNTARTOTT HELYRE!",
   "Local Shading": "Helyi árnyékolás",
-  "Action: Spend 1 floater here to raise your M€ production 1 step.": "Akció: költs el 1 lebegőt innen, hogy növeld a M€ termelésed 1-gyel.",
-
+  "Action: Spend 1 floater here to raise your M€ production 1 step.": "Akció: Költs el 1 lebegőt erről a kártyáról, hogy növeld a M€-termelésed 1 értékkel!",
   "Maxwell Base": "Maxwell bázis",
-  "Action: Add 1 resource to ANOTHER VENUS CARD.": "Akció: adj 1 erőforrást EGY MÁSIK VÉNUSZ KÁRTYÁHOZ.",
-  "Requires Venus 12%. Decrease your energy production 1 step. Place a city tile ON THE RESERVED AREA.": 
-    "Kijátszási feltétel: 12% Vénusz. Csökkentsd az energiatermelésed 1-gyel. Helyezz egy várost a FENNTARTOTT TERÜLETRE.",
-
-  "Sister Planet Support": "Testvér bolygó támogatás",
+  "Action: Add 1 resource to ANOTHER VENUS CARD.": "Akció: Rakj 1 erőforrást EGY MÁSIK VÉNUSZ KÁRTYÁRA!",
+  "Requires Venus 12%. Decrease your energy production 1 step. Place a city tile ON THE RESERVED AREA.": "Kijátszási feltétel: legalább 12%-os Vénusz szint. Csökkentsd az energiatermelésed 1 értékkel! Helyezz 1 Városlapkát A SZÁMÁRA FENNTARTOTT HELYRE!",
+  "Sister Planet Support": "Testvérbolygó támogatás",
   "Venus Earth": "Vénusz Föld",
-  "Requires Venus and Earth tags. Increase your M€ production 3 steps.": "Kijátszási feltétel: Vénusz és Föld ikon. Növeld a M€ termelésed 3-mal.",
-
-  "Stratopolis": "Stratopolisz",
-  "Action: Add 2 floaters to ANY VENUS CARD.": "Akció: adj 2 lebegőt BÁRMELYIK VÉNUSZ KÁRTYÁHOZ.",
-  "1 VP for every 3rd Floater on this card.": "1 GyP minden 3. lebegőért ezen a kártyán.",
-  "Requires 2 science tags. Increase your M€ production 2 steps. Place a city tile ON THE RESERVED AREA": 
-    "Kijátszási feltétel: 2 tudomány ikon. Növeld a M€ termelésed 2-gyel. Helyezz egy várost a FENNTARTOTT TERÜLETRE.",
-
-  "Venus Governor": "Vénusz kormányzó",
-  "Requires 2 Venus tags. Increase your M€ production 2 steps.": "Kijátszási feltétel: 2 Vénusz ikon. Növeld a M€ termelésed 2-gyel.",
-
-  "Venusian Animals": "Vénuszi állatok",
+  "Requires Venus and Earth tags. Increase your M€ production 3 steps.": "Kijátszási feltétel: legalább 1 Vénusz és Föld ikon. Növeld a M€-termelésed 3 értékkel!",
+  "Stratopolis": "Sztratopolisz",
+  "Action: Add 2 floaters to ANY VENUS CARD.": "Akció: Rakj 2 lebegőt EGY TETSZŐLEGES VÉNUSZ KÁRTYÁRA!",
+  "1 VP for every 3rd Floater on this card.": "1 GyP jár minden ezen a kártyán lévő 3 lebegő után!",
+  "Requires 2 science tags. Increase your M€ production 2 steps. Place a city tile ON THE RESERVED AREA": "Kijátszási feltétel: legalább 2 tudomány ikon. Növeld a M€-termelésed 2 értékkel! Helyezz le 1 Városlapkát A SZÁMÁRA FENNTARTOTT HELYRE!",
+  "Venus Governor": "A Vénusz kormányzója",
+  "Requires 2 Venus tags. Increase your M€ production 2 steps.": "Kijátszási feltétel: legalább 2 Vénusz ikon. Növeld a M€-termelésed 2 értékkel!",
+  "Venusian Animals": "A Vénusz állata",
   "18% Venus": "18% Vénusz",
-  "Effect: When you play a science tag, including this, add 1 animal to this card.": 
-    "Hatás: ha egy tudomány ikonú kártyát játszol, adj 1 állatot ehhez a kártyához.",
-  "Requires Venus 18%": "Kijátszási feltétel: 18% Vénusz.",
-
-  "Venus Magnetizer": "Vénusz mágnesesítő",
-  "Action: Decrease your energy production 1 step to raise Venus 1 step.": 
-    "Akció: csökkentsd az energiatermelésed 1-gyel, hogy növeld a Vénusz értékét 1 egységgel.",
-  "Requires Venus 10%.": "Kijátszási feltétel: 10% Vénusz.",
-
-  "Luxury Foods": "Luxus élelmiszerek",
-  "(Requires that you have a Venus tag, an Earth tag and a Jovian tag.)": 
-    "(Kijátszási feltétel: Vénusz, Föld és Jupiter ikon.)",
-
+  "Effect: When you play a science tag, including this, add 1 animal to this card.": "Hatás: Amikor tudomány ikont játszol ki, ezt is beleértve, rakj 1 állatot erre a kártyára!",
+  "Requires Venus 18%": "Kijátszási feltétel: legalább 18%-os Vénusz szint. ",
+  "Venus Magnetizer": "Vénuszmágnesező",
+  "Action: Decrease your energy production 1 step to raise Venus 1 step.": "Akció: Csökkentsd az energiatermelésed 1 értékkel, hogy növeld a Vénusz szintet 1 értékkel!",
+  "Requires Venus 10%.": "Kijátszási feltétel: legalább 10%-os Vénusz szint.",
+  "Luxury Foods": "Luxus élelmiszer",
+  "(Requires that you have a Venus tag, an Earth tag and a Jovian tag.)": "Kijátszási feltétel: legalább 1 Vénusz, Föld és Jupiter ikon.",
   "Neutralizer Factory": "Semlegesítő gyár",
-  "Requires Venus 10%. Increase the Venus track 1 step.": "Kijátszási feltétel: 10% Vénusz. Növeld a Vénusz értékét 1 egységgel.",
-
-  "Orbital Reflectors": "Orbitális tükrök",
-  "Raise Venus 2 steps. Increase your heat production 2 steps.": "Növeld a Vénusz értékét 2 egységgel. Növeld a hő termelésed 2-vel.",
-
-  "Saturn Surfing": "Szaturnusz szörf",
-  "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.": 
-    "Akció: költs el 1 lebegőt innen, hogy 1 M€-t kapj minden lebegőért, BELEÉRTVE A FIZETETT LEHEGŐT IS. Max 5.",
-  "Add 1 floater here for every Earth tag you have, including this.": "Adj 1 lebegőt ide minden Föld ikonú kártyádért, beleértve ezt is."
+  "Requires Venus 10%. Increase the Venus track 1 step.": "Kijátszási feltétel: legalább 10%-os Vénusz szint. Növeld a Vénusz szintet 1 értékkel!",
+  "Orbital Reflectors": "Orbitális reflektorok",
+  "Raise Venus 2 steps. Increase your heat production 2 steps.": "Növeld a Vénusz szintet 2 értékkel! Növeld a hőtermelésed 2 értékkel!",
+  "Saturn Surfing": "Szaturnusz szörfözés",
+  "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.": "Akció: Költs el 1 lebegőt erről a kártyáról, hogy 1 M€-t szerezz minden itt lévő lebegő után, BELEÉRTVE AZT IS, AMIVEL FIZETTÉL (max 5)!",
+  "Add 1 floater here for every Earth tag you have, including this.": "Rakj 1-1 lebegőt erre a kártyára minden Föld ikonod után, beleértve ezt is!"
 }

@@ -1,54 +1,35 @@
 {
-  "Turmoil": "Hatalmi Játszma",
-  "Send a delegate in an area (from lobby)": "Helyezz egy küldöttet egy pártba (a lobbyból)",
-  "Send a delegate in an area (5 M€)": "Helyezz egy küldöttet egy pártba (5 M€)",
-  "Send a delegate in an area (3 M€)": "Helyezz egy küldöttet egy pártba (3 M€)",
-  "Policies": "Pártok",
-  "No ruling Policy": "Nincs kormányzó párt",
-
+  "Turmoil": "Hatalmi játszma",
+  "Send a delegate in an area (from lobby)": "Küldött küldése egy pártba (a lobbyból)",
+  "Send a delegate in an area (5 M€)": "Küldött küldése egy pártba (5 M€)",
+  "Send a delegate in an area (3 M€)": "Küldött küldése egy pártba (3 M€)",
+  "Policies": "Törvények",
+  "No ruling Policy": "Nincs uralkodó politika",
   "Mars First": "Csak a Mars",
   "Scientists": "Tudósok",
   "Unity": "Egység",
   "Kelvinists": "Kelvinisták",
   "Reds": "Vörösök",
   "Greens": "Zöldek",
-
   "mars first": "csak a mars",
   "scientists": "tudósok",
   "unity": "egység",
   "kelvinists": "kelvinisták",
   "reds": "vörösök",
   "greens": "zöldek",
-
   "Chairman": "Elnök",
   "Party leader": "Pártvezető",
-  "2 Party leaders": "2 Pártvezető",
-
-  "Mars First - (All players receive 1 M€ for each building tag they have.)": 
-    "Csak a Mars - (Minden játékos kap 1 M€-t minden épület ikonjáért.)",
-  "Scientists - (All players receive 1 M€ for each science tag they have.)": 
-    "Tudósok - (Minden játékos kap 1 M€-t minden tudomány ikonjáért.)",
-  "Unity - (All players receive 1 M€ for each Venus tag, Earth tag, and Jovian tag they have.)": 
-    "Egység - (Minden játékos kap 1 M€-t minden Vénusz, Föld és Jovian ikonjáért.)",
-  "Kelvinists - (All players receive 1 M€ for each heat production they have.)": 
-    "Kelvinisták - (Minden játékos kap 1 M€-t minden hő termelésért.)",
-  "Reds - (The player with the lowest TR gains 1 TR. Ties are friendly.)": 
-    "Vörösök - (A legkisebb TR-t birtokló játékos kap 1 TR-t. Döntetlen esetén mindketten.)",
-  "Greens - (All players receive 1 M€ for each Plant tag, Microbe tag, and Animal tag they have.)": 
-    "Zöldek - (Minden játékos kap 1 M€-t minden Növény, Mikroba és Állat ikonjáért.)",
-
-
-  "Mars First (Focused on Martian development and independence.)": 
-    "Csak a Mars (A Mars fejlesztésére és függetlenségére összpontosít.)",
-  "Scientists (Tech is the door to the future, and Scientists will do anything to open it.)": 
-    "Tudósok (A technológia az ajtó a jövőbe, és a tudósok mindent megtesznek, hogy kinyissák.)",
-  "Unity (Wants to see humanity prosper in the whole solar system.)": 
-    "Egység (Szeretnék, hogy az emberiség meghódítsa az egész naprendszert.)",
-  "Kelvinists (Pushes for rapid terraforming, usually employing a heat-first strategy.)": 
-    "Kelvinisták (Gyors terraformálásra törekszik, általában hő-előnyös stratégiát alkalmazva.)",
-  "Reds (Wishes to preserve the red planet.)": 
-    "Vörösök (A vörös bolygó megőrzését kívánja.)",
-  "Greens (Want to see a new Earth as soon as possible.)": 
-    "Zöldek (Szeretnék, ha minél hamarabb az új Földet látnák.)"
-
+  "2 Party leaders": "2 pártvezető",
+  "Mars First - (All players receive 1 M€ for each building tag they have.)": "Csak a Mars - (Minden játékos minden saját épület ikonért 1-1 M€-et kap.)",
+  "Scientists - (All players receive 1 M€ for each science tag they have.)": "Tudósok - (Minden játékos minden saját tudomány ikonért 1-1 M€-et kap.)",
+  "Unity - (All players receive 1 M€ for each Venus tag, Earth tag, and Jovian tag they have.)": "Egység - (Minden játékos minden saját Vénusz, Föld és Jupiter ikonért 1-1 M€-et kap.)",
+  "Kelvinists - (All players receive 1 M€ for each heat production they have.)": "Kelvinisták - (Minden játékos minden hőtermelésért 1-1 M€-t kap.)",
+  "Reds - (The player with the lowest TR gains 1 TR. Ties are friendly.)": "Vörösök - (A legalacsonyabb TR-rel rendelkező játékos(ok) kap(nak) 1 TR-t.)",
+  "Greens - (All players receive 1 M€ for each Plant tag, Microbe tag, and Animal tag they have.)": "Zöldek - (Minden játékos minden saját Növény, Mikroba és Állat ikonért 1-1 M€-et kap.)",
+  "Mars First (Focused on Martian development and independence.)": "Csak a Mars (A Mars fejlesztéséért és függetlenségéért küzdenek.)",
+  "Scientists (Tech is the door to the future, and Scientists will do anything to open it.)": "Tudósok (A tudomány a kulcs a jövőhöz, a Tudósok pedig mindent megtesznek, hogy kaput nyissanak.)",
+  "Unity (Wants to see humanity prosper in the whole solar system.)": "Egység (Szeretnék, ha az emberiség a teljes Naprendszert meghódítaná.)",
+  "Greens (Want to see a new Earth as soon as possible.)": "Zöldek (Új Földet szeretnének látni, amilyen gyorsan csak lehetséges.)",
+  "Reds (Wishes to preserve the red planet.)": "Vörösök (Meg szeretnék óvni a vörös bolygót. Igazán nagy fába vágták a  fejszéjüket.)",
+  "Kelvinists (Pushes for rapid terraforming, usually employing a heat-first strategy.)": "Kelvinisták (A gyors terraformálást népszerűsítik, általában a hőmérséklet emelésre koncentrálva.)"
 }

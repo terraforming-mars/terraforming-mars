@@ -1,43 +1,32 @@
-{    
-    "Project Workshop": "Project Workshop",
-    "Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.": 
-        "Akció: Dobj el egy kék kártyát, hogy a rajta lévő GyP-okat TR-re változtasd és húzz 2 lapot, vagy költs 3 M€-t, hogy húzz egy kék kártyát.",
-    "You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.": 
-        "39 M€-el, 1 acéllal és 1 titánnal kezdesz. Első akcióként húzz egy kék kártyát.",
-
-    "Junk Ventures": "Junk Ventures",
-    "You start with 43 M€. As your first action, discard the top 3 cards of the deck.": 
-        "43 M€-el kezdesz. Első akcióként dobj el a pakli tetejéről 3 lapot.",
-    "ACTION: SHUFFLE THE DISCARD PILE, THEN DRAW 3 CARDS FROM IT. KEEP 1 AND DISCARD THE OTHER 2.": 
-        "AKCIÓ: KEVERD MEG A DODÓ PAKLIT, MAJD HÚZZ BELŐLE 3 LAPOT. TARTS EGYET ÉS DOBD EL A MÁSIK KETTŐT.",
-
-    "Incite": "Incite",
-    "You start with 32 M€. As your first action, place two delegates in one party.": 
-        "32 M€-el kezdesz. Első akcióként helyezz el két küldöttet egy pártban.",
-    "Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.": 
-        "Hatás: +1 befolyásod van. Amikor küldöttet küldesz a lobbizás akcióval, 2 M€-el kevesebbet fizetsz érte.",
-
-    "Playwrights": "Playwrights",
-    "You start with 38 M€ and 1 energy production.": "38 M€-el és 1 energiatermeléssel kezdesz.",
-    "Action: Replay a played event from any player (INCLUDING events that place special tiles) by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.":
-        "Akció: Játszd újra egy játékos bármelyik lejátszott eseményét (BELEÉRTVE az eseményeket, amik speciális lapkákat helyeznek), fizess CSAK az M€-tel (kedvezmények és visszatérítések érvényesek), majd TÁVOLÍTSD EL A JÁTÉKBÓL.",
-
-    "Midas": "Midas",
-    "You start with 120 M€. Lower your TR 7 steps.": "120 M€-el kezdesz. Csökkentsd a TR-ed 7 lépéssel.",
-    
-    "Curiosity II": "Curiosity II",
-    "You start with 40 M€ and 2 steel production.": "40 M€-el és 2 acéltermeléssel kezdesz.",
-    "Effect: When you place a tile on an area that has a RESOURCE placement bonus, or on top of another tile, you may pay 2 M€ to draw a card.":
-        "Hatás: Amikor leraksz egy lapkát egy területre, aminek van NYERSANYAG lerakási bónusza, vagy egy másik lapra, fizethetsz 2 M€-t, hogy húzz egy lapot.",
-
-    "Agricola Inc": "Agricola Inc",
-    "You start with 1 plant production, 1 M€ production, 1 heat production and 40 M€.": 
-        "1 növénytermeléssel, 1 M€-termeléssel, 1 hőtermeléssel és 40 M€-el kezdesz.",
-    "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.":
-        "Hatás: Játék végén -2 / 0 / 1 / 2 GyP PER IKON TÍPUS minden 0 / 1-2 / 3-4 / 5+ ikonod után.",
-    
-    "UNITED NATIONS MISSION ONE": "UNITED NATIONS MISSION ONE",
-    "You start with 39 M€. Increase your TR 1 step.": "39 M€-el kezdesz. Növeld a TR-ed 1 lépéssel.",
-    "Effect: When any player takes an action or plays a card that increases TR, including this, gain 1 M€ for each step.":
-        "Hatás: Amikor bármelyik játékos akciót végez vagy kártyát játszik ki, ami növeli a TR-t, beleértve ezt is, kapj 1 M€-t minden lépésért."
+{
+  "Agricola Inc": "Agricola Inc",
+  "You start with 1 plant production, 1 M€ production, 1 heat production and 40 M€.": "1-es palántatermeléssel, 1-es M€-termeléssel, 1-es hőtermeléssel és 40 M€-tel kezdesz.",
+  "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "Hatás: Játék végén -2/0/1/2 GyP PER IKON TÍPUS minden 0/1-2/3-4/5+ ikonod után.",
+  "Athena": "Athena",
+  "You start with 62 M€. As your first action, place 2 hazard tiles adjacent to no other tiles.": "62 M€-tel kezdesz. Első akciódként helyezz le 2 Veszélylapkát, úgy, hogy ne érintezzen más lapkákkal!",
+  "Effect: You do not lose production when placing adjacent to hazard tiles.": "Hatás: Nem veszítesz termelést, ha Veszélylapka mellé helyezel le lapkát.",
+  "Curosity II": "Curosity II",
+  "You start with 40 M€ and 2 steel production.": "40 M€-tel és 2-es acéltermeléssel kezdesz.",
+  "Effect: When you place a tile on an area that has a RESOURCE placement bonus, or on top of another tile, you may pay 2 M€ to draw a card.": "Hatás: Amikor leraksz egy lapkát egy területre, aminek van NYERSANYAG lerakási bónusza, vagy egy másik lapkára, fizethetsz 2 M€-tet, hogy húzz 1 kártyát.",
+  "Eris": "Eris",
+  "You start with 46 M€. As your first action, draw an Ares card.": "46 M€-tel kezdesz. Első akciódként húzz egy Árész kártyát!",
+  "Action: Place a new hazard tile adjacent to NO OTHER TILE, OR remove a hazard tile to gain 1 TR.": "Akció: Rakj le 1 Veszélylapkát, hogy NE ÉRINTKEZZEN MÁS LAPKÁVAL, VAGY távolíts el egy Veszélylapkát, hogy kapj 1 TR-t!",
+  "Incite": "Incite",
+  "You start with 32 M€. As your first action, place two delegates in one party.": "32 M€-tel kezdesz. Első akciódként helyezz el 2 küldöttet egy pártba!",
+  "Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.": "Hatás: +1 befolyásod van. Amikor küldöttet küldesz a lobbizás akcióval, 2 M€-tel kevesebbet fizetsz érte.",
+  "Midas": "Midas",
+  "You start with 120 M€. Lower your TR 7 steps.": "120 M€-tel kezdesz. Csökkentsd a TR-ed 7 értékkel!",
+  "Playwrights": "Playwrights",
+  "You start with 38 M€ and 1 energy production.": "38 M€-tel és 1-es energiatermeléssel kezdesz.",
+  "Action: Replay a played event from any player (INCLUDING events that place special tiles) by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.": "Akció: Játszd újra egy játékos bármelyik kijátszott eseményét (BELEÉRTVE az eseményeket, amik speciális lapkákat helyeznek le), fizesd CSAK M€-tel (kedvezmények és visszatérítések érvényesek), majd TÁVOLÍTSD EL A JÁTÉKBÓL!",
+  "Project Workshop": "Project Workshop",
+  "You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.": "39 M€-tel, kapsz 1 acélt és 1 titánt. Első akciódként húzz egy kék kártyát!",
+  "Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.": "Akció: Dobj el egy kék kártyát, hogy a rajta lévő GyP-okat TR-re változtasd és húzz 2 kártyát, vagy költs el 3 M€-tet, hogy húzz egy kék kártyát!",
+  "Junk Ventures": "Junk Ventures",
+  "DECK: ": "PAKLI:",
+  "You start with 43 M€. As your first action, discard the top 3 cards of the deck.": "43 M€-tel kezdesz. Első akciódként dobj el a pakli tetejéről 3 kártyát!",
+  "ACTION: SHUFFLE THE DISCARD PILE, THEN DRAW 3 CARDS FROM IT. KEEP 1 AND DISCARD THE OTHER 2.": "AKCIÓ: KEVERD MEG A DOBÓ PAKLIT, MAJD HÚZZ BELŐLE 3 KÁRTYÁT! TARTS MEG EGYET ÉS DOBD EL A MÁSIK KETTŐT!",
+  "UNITED NATIONS MISSION ONE": "UNITED NATIONS MISSION ONE",
+  "You start with 39 M€. Increase your TR 1 step.": "39 M€-tel kezdesz. Növeld a TR-ed 1 értékkel!",
+  "Effect: When any player takes an action or plays a card that increases TR, including this, gain 1 M€ for each step.": "Hatás: Amikor bármelyik játékos akciót végez vagy kártyát játszik ki, ami növeli a TR-t, ezt is beleértve, kapj 1 M€-tet minden értékért."
 }

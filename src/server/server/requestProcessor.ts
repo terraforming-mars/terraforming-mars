@@ -1,45 +1,44 @@
 import * as prometheus from 'prom-client';
-import * as responses from './responses';
-import * as authcookies from './auth/authcookies';
-
+import {Clock} from '../../common/Timer';
 import {paths} from '../../common/app/paths';
-
+import {Request} from '../Request';
+import {Response} from '../Response';
+import {SessionId} from '../auth/Session';
+import {GameLoader} from '../database/GameLoader';
 import {ApiCloneableGame} from '../routes/ApiCloneableGame';
-import {ApiGameLogs} from '../routes/ApiGameLogs';
-import {ApiGames} from '../routes/ApiGames';
+import {ApiCreateGame} from '../routes/ApiCreateGame';
 import {ApiGame} from '../routes/ApiGame';
 import {ApiGameHistory} from '../routes/ApiGameHistory';
-import {ApiPlayer} from '../routes/ApiPlayer';
-import {ApiStats} from '../routes/ApiStats';
+import {ApiGameLogs} from '../routes/ApiGameLogs';
+import {ApiGames} from '../routes/ApiGames';
+import {ApiIPs} from '../routes/ApiIPs';
+import {ApiLogout} from '../routes/ApiLogout';
 import {ApiMetrics} from '../routes/ApiMetrics';
+import {ApiPlayer} from '../routes/ApiPlayer';
+import {ApiProfile} from '../routes/ApiProfile';
 import {ApiSpectator} from '../routes/ApiSpectator';
+import {ApiStats} from '../routes/ApiStats';
 import {ApiWaitingFor} from '../routes/ApiWaitingFor';
+import {Autopass} from '../routes/Autopass';
+import {DiscordAuth} from '../routes/DiscordAuth';
 import {GameHandler} from '../routes/Game';
-import {GameLoader} from '../database/GameLoader';
 import {GamesOverview} from '../routes/GamesOverview';
 import {Context, IHandler} from '../routes/IHandler';
 import {Load} from '../routes/Load';
 import {LoadGame} from '../routes/LoadGame';
+import {Login} from '../routes/Login';
 import {PlayerInput} from '../routes/PlayerInput';
+import {Reset} from '../routes/Reset';
 import {ServeApp} from '../routes/ServeApp';
 import {ServeAsset} from '../routes/ServeAsset';
 import {serverId, statsId} from '../utils/server-ids';
-import {Reset} from '../routes/Reset';
 import {newIpBlocklist} from './IPBlocklist';
-import {ApiIPs} from '../routes/ApiIPs';
 import {newIpTracker} from './IPTracker';
-import {getHerokuIpAddress} from './heroku';
-import {Request} from '../Request';
-import {Response} from '../Response';
-import {Clock} from '../../common/Timer';
-import {Autopass} from '../routes/Autopass';
-import {DiscordAuth} from '../routes/DiscordAuth';
-import {ApiLogout} from '../routes/ApiLogout';
-import {SessionId} from '../auth/Session';
 import {SessionManager} from './auth/SessionManager';
+import * as authcookies from './auth/authcookies';
 import {DiscordUser} from './auth/discord';
-import {ApiProfile} from '../routes/ApiProfile';
-import {Login} from '../routes/Login';
+import {getHerokuIpAddress} from './heroku';
+import * as responses from './responses';
 
 const metrics = {
   count: new prometheus.Counter({
@@ -67,7 +66,9 @@ const handlers: Map<string, IHandler> = new Map(
   [
     ['', ServeApp.INSTANCE],
     [paths.ADMIN, ServeApp.INSTANCE],
+    // TODO(kberg): What is this?
     [paths.API_CLONEABLEGAME, ApiCloneableGame.INSTANCE],
+    [paths.API_CREATEGAME, ApiCreateGame.INSTANCE],
     [paths.API_GAME, ApiGame.INSTANCE],
     [paths.API_GAME_HISTORY, ApiGameHistory.INSTANCE],
     [paths.API_GAME_LOGS, ApiGameLogs.INSTANCE],

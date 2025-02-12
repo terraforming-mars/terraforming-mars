@@ -5,7 +5,7 @@ import {RandomBoardOption} from '../../src/common/boards/RandomBoardOption';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {statusCode} from '../../src/common/http/statusCode';
-// import {isGameId, isPlayerId, isSpectatorId} from '../../src/common/Types';
+import {ApiCreateGame} from '../../src/server/routes/ApiCreateGame';
 
 describe('GameHandler', () => {
   let scaffolding: RouteTestScaffolding;
@@ -17,10 +17,10 @@ describe('GameHandler', () => {
   });
 
   it('Official random boards do not include fan maps', () => {
-    expect(GameHandler.boardOptions(RandomBoardOption.OFFICIAL)).deep.eq([BoardName.THARSIS, BoardName.HELLAS, BoardName.ELYSIUM]);
+    expect(ApiCreateGame.boardOptions(RandomBoardOption.OFFICIAL)).deep.eq([BoardName.THARSIS, BoardName.HELLAS, BoardName.ELYSIUM]);
   });
   it('Fully random boards do include fan maps', () => {
-    expect(GameHandler.boardOptions(RandomBoardOption.ALL)).deep.eq([
+    expect(ApiCreateGame.boardOptions(RandomBoardOption.ALL)).deep.eq([
       BoardName.THARSIS,
       BoardName.HELLAS,
       BoardName.ELYSIUM,

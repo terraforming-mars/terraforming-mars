@@ -546,6 +546,7 @@ import {DEFAULT_EXPANSIONS, Expansion} from '@/common/cards/GameModule';
 import {BoardNameType, NewGameConfig, NewPlayerModel} from '@/common/game/NewGameConfig';
 import {vueRoot} from '@/client/components/vueRoot';
 import {CreateGameModel} from './CreateGameModel';
+import {paths} from '@/common/app/paths';
 
 const REVISED_COUNT_ALGORITHM = false;
 
@@ -1249,7 +1250,7 @@ export default (Vue as WithRefs<Refs>).extend({
         }
       };
 
-      fetch('game', {'method': 'PUT', 'body': dataToSend, 'headers': {'Content-Type': 'application/json'}})
+      fetch(paths.API_CREATEGAME, {'method': 'PUT', 'body': dataToSend, 'headers': {'Content-Type': 'application/json'}})
         .then((response) => response.text())
         .then((text) => {
           try {

@@ -1,14 +1,13 @@
 import {expect} from 'chai';
 import {Resource} from '../../src/common/Resource';
 import {Player} from '../../src/server/Player';
-import {Color} from '../../src/common/Color';
 import {formatMessage, testGame} from '../TestingUtils';
 import {Units} from '../../src/common/Units';
 import {GlobalEventName} from '../../src/common/turmoil/globalEvents/GlobalEventName';
 
 describe('Stock', function() {
   it('has units', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
+    const player = new Player('blue', 'blue', false, 0, 'p-blue');
     const stock = player.stock;
 
     const units: Units = Units.of({});
@@ -47,7 +46,7 @@ describe('Stock', function() {
 
 
   it('addUnits', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
+    const player = new Player('blue', 'blue', false, 0, 'p-blue');
 
     expect(player.stock.asUnits()).deep.eq({
       megacredits: 0,
@@ -127,7 +126,7 @@ describe('Stock', function() {
   });
 
   it('deduct units', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
+    const player = new Player('blue', 'blue', false, 0, 'p-blue');
 
     expect(player.stock.asUnits()).deep.eq({
       megacredits: 0,

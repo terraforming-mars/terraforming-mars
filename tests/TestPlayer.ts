@@ -31,14 +31,14 @@ class TestTags extends Tags {
 }
 export class TestPlayer extends Player {
   // Prefer these players when testing, as their IDs are easy to recognize in output. Plus TestPlayer instances have useful support methods.
-  public static BLUE: TestPlayerFactory = new TestPlayerFactory(Color.BLUE);
-  public static RED: TestPlayerFactory = new TestPlayerFactory(Color.RED);
-  public static YELLOW: TestPlayerFactory = new TestPlayerFactory(Color.YELLOW);
-  public static GREEN: TestPlayerFactory = new TestPlayerFactory(Color.GREEN);
-  public static BLACK: TestPlayerFactory = new TestPlayerFactory(Color.BLACK);
-  public static PURPLE: TestPlayerFactory = new TestPlayerFactory(Color.PURPLE);
-  public static ORANGE: TestPlayerFactory = new TestPlayerFactory(Color.ORANGE);
-  public static PINK: TestPlayerFactory = new TestPlayerFactory(Color.PINK);
+  public static BLUE: TestPlayerFactory = new TestPlayerFactory('blue');
+  public static RED: TestPlayerFactory = new TestPlayerFactory('red');
+  public static YELLOW: TestPlayerFactory = new TestPlayerFactory('yellow');
+  public static GREEN: TestPlayerFactory = new TestPlayerFactory('green');
+  public static BLACK: TestPlayerFactory = new TestPlayerFactory('black');
+  public static PURPLE: TestPlayerFactory = new TestPlayerFactory('purple');
+  public static ORANGE: TestPlayerFactory = new TestPlayerFactory('orange');
+  public static PINK: TestPlayerFactory = new TestPlayerFactory('pink');
 
   constructor(color: Color, opts?: Partial<Options>) {
     const name = opts?.name ?? 'player-' + color;

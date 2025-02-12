@@ -7,7 +7,7 @@ import {Tag} from '../../common/cards/Tag';
 // import {CardResource} from '../../common/CardResource';
 // import {TileType} from '../../common/TileType';
 import {SpaceId} from '../../common/Types';
-import {MoonSpaces} from '../../common/moon/MoonSpaces';
+import {NamedMoonSpace} from '../../common/moon/NamedMoonSpaces';
 import {TileType} from '../../common/TileType';
 import {Countable, CountableUnits} from './Countable';
 import {PlacementType} from '../boards/PlacementType';
@@ -179,7 +179,7 @@ export type Behavior = {
 }
 
 export interface PlaceMoonTile {
-  space?: MoonSpaces;
+  space?: NamedMoonSpace;
 }
 
 export interface DrawCard {

@@ -100,24 +100,24 @@ export default Vue.extend({
       // return all but the focused user
       return result.slice(0, -1);
     },
-    getActionLabel(player: PublicPlayerModel): string {
+    getActionLabel(player: PublicPlayerModel): ActionLabel {
       if (this.playerView.game.phase === Phase.DRAFTING) {
         if (player.needsToDraft) {
-          return ActionLabel.DRAFTING;
+          return 'drafting';
         } else {
-          return ActionLabel.NONE;
+          return 'none';
         }
       } else if (this.playerView.game.phase === Phase.RESEARCH) {
         if (player.needsToResearch) {
-          return ActionLabel.RESEARCHING;
+          return 'researching';
         } else {
-          return ActionLabel.NONE;
+          return 'none';
         }
       }
       if (this.playerView.game.passedPlayers.includes(player.color)) {
-        return ActionLabel.PASSED;
+        return 'passed';
       }
-      if (player.isActive) return ActionLabel.ACTIVE;
+      if (player.isActive) return 'active';
       const notPassedPlayers = this.players.filter(
         (p: PublicPlayerModel) => !this.playerView.game.passedPlayers.includes(p.color),
       );
@@ -128,7 +128,7 @@ export default Vue.extend({
       );
 
       if (currentPlayerIndex === -1) {
-        return ActionLabel.NONE;
+        return 'none';
       }
 
       const prevPlayerIndex =
@@ -138,10 +138,10 @@ export default Vue.extend({
       const isNext = notPassedPlayers[prevPlayerIndex].isActive;
 
       if (isNext && this.players.length > SHOW_NEXT_LABEL_MIN) {
-        return ActionLabel.NEXT;
+        return 'next';
       }
 
-      return ActionLabel.NONE;
+      return 'none';
     },
   },
 });

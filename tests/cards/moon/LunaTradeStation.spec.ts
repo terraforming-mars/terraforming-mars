@@ -6,7 +6,7 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaTradeStation} from '../../../src/server/cards/moon/LunaTradeStation';
-import {MoonSpaces} from '../../../src/common/moon/MoonSpaces';
+import {NamedMoonSpaces} from '../../../src/common/moon/NamedMoonSpaces';
 import {TileType} from '../../../src/common/TileType';
 
 describe('LunaTradeStation', () => {
@@ -38,7 +38,7 @@ describe('LunaTradeStation', () => {
 
     expect(player.titanium).eq(1);
 
-    const lunaTradeStation = moonData.moon.getSpaceOrThrow(MoonSpaces.LUNA_TRADE_STATION);
+    const lunaTradeStation = moonData.moon.getSpaceOrThrow(NamedMoonSpaces.LUNA_TRADE_STATION);
     expect(lunaTradeStation.player).eq(player);
     expect(lunaTradeStation.tile!.tileType).eq(TileType.LUNA_TRADE_STATION);
   });

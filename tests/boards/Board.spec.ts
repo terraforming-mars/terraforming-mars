@@ -7,7 +7,7 @@ import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TestPlayer} from '../TestPlayer';
 import {Board} from '../../src/server/boards/Board';
 import {SerializedBoard} from '../../src/server/boards/SerializedBoard';
-import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
+import {NamedMoonSpaces} from '../../src/common/moon/NamedMoonSpaces';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptions';
 import {SpaceId} from '../../src/common/Types';
@@ -31,7 +31,7 @@ describe('Board', function() {
   it('getSpace', () => {
     expect(board.getSpaceOrThrow('01').spaceType).eq(SpaceType.COLONY);
     expect(board.getSpaceOrThrow('01').id).eq('01');
-    expect(() => board.getSpaceOrThrow(MoonSpaces.LUNA_TRADE_STATION).id).to.throw(Error, /Can't find space with id m01/);
+    expect(() => board.getSpaceOrThrow(NamedMoonSpaces.LUNA_TRADE_STATION).id).to.throw(Error, /Can't find space with id m01/);
   });
 
   it('getAdjacentSpaces', () => {

@@ -5,7 +5,7 @@ import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {TestPlayer} from '../../TestPlayer';
 import {MomentumViriumHabitat} from '../../../src/server/cards/moon/MomentumViriumHabitat';
-import {MoonSpaces} from '../../../src/common/moon/MoonSpaces';
+import {NamedMoonSpaces} from '../../../src/common/moon/NamedMoonSpaces';
 import {TileType} from '../../../src/common/TileType';
 
 describe('MomentumViriumHabitat', () => {
@@ -44,7 +44,7 @@ describe('MomentumViriumHabitat', () => {
     expect(player.production.megacredits).eq(3);
     expect(player.production.heat).eq(2);
 
-    const momentumVirium = moonData.moon.getSpaceOrThrow(MoonSpaces.MOMENTUM_VIRIUM);
+    const momentumVirium = moonData.moon.getSpaceOrThrow(NamedMoonSpaces.MOMENTUM_VIRIUM);
     expect(momentumVirium.player).eq(player);
     expect(momentumVirium.tile!.tileType).eq(TileType.MOON_HABITAT);
 

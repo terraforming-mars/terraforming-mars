@@ -52,7 +52,7 @@ export class ApiCreateGame extends Handler {
   public static readonly INSTANCE = new ApiCreateGame();
   private quotaHandler;
 
-  private constructor(quotaConfig: QuotaConfig = getQuotaConfig()) {
+  public constructor(quotaConfig: QuotaConfig = getQuotaConfig()) {
     super();
     this.quotaHandler = new QuotaHandler(quotaConfig);
   }

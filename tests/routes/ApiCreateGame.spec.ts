@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {BoardName} from '../../src/common/boards/BoardName';
 import {ApiCreateGame} from '../../src/server/routes/ApiCreateGame';
 import {MockRequest, MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
@@ -9,26 +10,47 @@ import {RandomMAOptionType} from '../../src/common/ma/RandomMAOptionType';
 import {AgendaStyle} from '../../src/common/turmoil/Types';
 import {Color} from '../../src/common/Color';
 import {SimpleGameModel} from '../../src/common/models/SimpleGameModel';
+import {RecursivePartial} from '../../src/common/utils/utils';
 
 describe('ApiCreateGame', () => {
   let scaffolding: RouteTestScaffolding;
   let req: MockRequest;
   let res: MockResponse;
+  let apiCreateGame: ApiCreateGame;
 
   beforeEach(() => {
     req = new MockRequest();
     res = new MockResponse();
     scaffolding = new RouteTestScaffolding(req);
+    apiCreateGame = new ApiCreateGame({limit: 99999, perMs: 1});
+  });
+
+  it('Official random boards do not include fan maps', () => {
+    expect(ApiCreateGame.boardOptions(RandomBoardOption.OFFICIAL)).deep.eq([BoardName.THARSIS, BoardName.HELLAS, BoardName.ELYSIUM]);
+  });
+  it('Fully random boards do include fan maps', () => {
+    expect(ApiCreateGame.boardOptions(RandomBoardOption.ALL)).deep.eq([
+      BoardName.THARSIS,
+      BoardName.HELLAS,
+      BoardName.ELYSIUM,
+      BoardName.UTOPIA_PLANITIA,
+      BoardName.VASTITAS_BOREALIS_NOVUS,
+      BoardName.TERRA_CIMMERIA_NOVUS,
+      BoardName.ARABIA_TERRA,
+      BoardName.VASTITAS_BOREALIS,
+      BoardName.AMAZONIS,
+      BoardName.TERRA_CIMMERIA,
+    ]);
   });
 
   it('no get', async () => {
-    await scaffolding.get(ApiCreateGame.INSTANCE, res);
+    await scaffolding.get(apiCreateGame, res);
     expect(res.statusCode).eq(statusCode.notFound);
     expect(res.content).eq('Not found');
   });
 
   it('simple create', async () => {
-    const put = scaffolding.put(ApiCreateGame.INSTANCE, res);
+    const put = scaffolding.put(apiCreateGame, res);
     const emit = Promise.resolve().then(() => {
       const newGameConfig: NewGameConfig = {
         players: [{
@@ -107,5 +129,21 @@ describe('ApiCreateGame', () => {
     const game = await scaffolding.ctx.gameLoader.getGame(model.id);
     expect(game).is.not.undefined;
     expect(game!.getPlayers()[0].name).eq('Robot');
+  });
+
+
+  async function create(data: RecursivePartial<NewGameConfig>) {
+    const put = scaffolding.put(apiCreateGame, res);
+    const emit = Promise.resolve().then(() => {
+      scaffolding.req.emitter.emit('data', JSON.stringify(data));
+      scaffolding.req.emitter.emit('end');
+    });
+    await Promise.all(([emit, put]));
+  }
+
+  it('red rover solo game', async () => {
+    await create({players: [{name: 'a player', color: Color.RED}]});
+
+    expect(res.statusCode).eq(statusCode.internalServerError);
   });
 });

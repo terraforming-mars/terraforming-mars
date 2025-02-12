@@ -7,7 +7,7 @@ import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {CardName} from '../../common/cards/CardName';
 import {AresHandler} from '../ares/AresHandler';
 import {Units} from '../../common/Units';
-import {HazardSeverity, hazardSeverity} from '../../common/AresTileType';
+import {hazardSeverity} from '../../common/AresTileType';
 import {TRSource} from '../../common/cards/TRSource';
 import {sum} from '../../common/utils/utils';
 
@@ -147,20 +147,20 @@ export abstract class Board {
     }
 
     switch (hazardSeverity(space.tile?.tileType)) {
-    case HazardSeverity.MILD:
+    case 'mild':
       costs.stock.megacredits += 8;
       break;
-    case HazardSeverity.SEVERE:
+    case 'severe':
       costs.stock.megacredits += 16;
       break;
     }
 
     for (const adjacentSpace of this.getAdjacentSpaces(space)) {
       switch (hazardSeverity(adjacentSpace.tile?.tileType)) {
-      case HazardSeverity.MILD:
+      case 'mild':
         costs.production += 1;
         break;
-      case HazardSeverity.SEVERE:
+      case 'severe':
         costs.production += 2;
         break;
       }

@@ -1,6 +1,5 @@
 import * as responses from '../server/responses';
 import {Database} from '../database/Database';
-import {GameLoader} from '../database/GameLoader';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {Context} from './IHandler';
@@ -46,7 +45,7 @@ export class LoadGame extends Handler {
           if (rollbackCount > 0) {
             Database.getInstance().deleteGameNbrSaves(gameId, rollbackCount);
           }
-          const game = await GameLoader.getInstance().getGame(gameId, /* bypassCache */ true);
+          const game = await ctx.gameLoader.getGame(gameId, /* bypassCache */ true);
           if (game === undefined) {
             console.warn(`unable to find ${gameId} in database`);
             responses.notFound(req, res, 'game_id not found');

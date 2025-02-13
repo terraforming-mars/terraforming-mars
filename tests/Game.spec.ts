@@ -566,7 +566,7 @@ describe('Game', () => {
   });
 
   // https://github.com/terraforming-mars/terraforming-mars/issues/5572
-  it('Milestones can be claimed', function() {
+  it('Milestones can be claimed', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, player2], player, {});
@@ -589,7 +589,7 @@ describe('Game', () => {
   });
 
   // https://github.com/terraforming-mars/terraforming-mars/issues/5572
-  it('Milestones cannot be claimed twice', function() {
+  it('Milestones cannot be claimed twice', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('gameid', [player, player2], player, {});

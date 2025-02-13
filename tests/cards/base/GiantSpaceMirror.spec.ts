@@ -3,8 +3,8 @@ import {testGame} from '../../TestGame';
 import {GiantSpaceMirror} from '../../../src/server/cards/base/GiantSpaceMirror';
 import {cast} from '../../TestingUtils';
 
-describe('GiantSpaceMirror', function() {
-  it('Should play', function() {
+describe('GiantSpaceMirror', () => {
+  it('Should play', () => {
     const card = new GiantSpaceMirror();
     const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);

@@ -6,7 +6,7 @@ import {IGame} from '../../../src/server/IGame';
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Pluto} from '../../../src/server/colonies/Pluto';
 
-describe('VenusAllies', function() {
+describe('VenusAllies', () => {
   let card: VenusAllies;
   let player: TestPlayer;
   let game: IGame;
@@ -15,7 +15,7 @@ describe('VenusAllies', function() {
     [game, player] = testGame(1, {venusNextExtension: true});
   });
 
-  it('Megacredits check', function() {
+  it('Megacredits check', () => {
     const colony1 = new Luna();
     const colony2 = new Pluto();
     colony1.colonies.push(player.id);

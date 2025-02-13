@@ -5,16 +5,16 @@ import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, testGame} from '../../TestingUtils';
 
-describe('HiTechLab', function() {
+describe('HiTechLab', () => {
   let card: HiTechLab;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new HiTechLab();
     [/* game */, player] = testGame(2);
   });
 
-  it('Can not act if no energy resources available', function() {
+  it('Can not act if no energy resources available', () => {
     expect(card.canAct(player)).is.not.true;
   });
 
@@ -32,7 +32,7 @@ describe('HiTechLab', function() {
     expect(selectAmount.max).eq(8);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.stock.add(Resource.ENERGY, 5);
     expect(card.canAct(player)).is.true;
 
@@ -42,7 +42,7 @@ describe('HiTechLab', function() {
     expect(player.energy).to.eq(2);
   });
 
-  it('Should give victory points', function() {
+  it('Should give victory points', () => {
     card.play(player);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });

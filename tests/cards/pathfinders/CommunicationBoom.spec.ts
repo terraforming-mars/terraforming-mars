@@ -6,8 +6,8 @@ import {CardName} from '../../../src/common/cards/CardName';
 import {CardResource} from '../../../src/common/CardResource';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
 
-describe('CommunicationBoom', function() {
-  it('resolve play', function() {
+describe('CommunicationBoom', () => {
+  it('resolve play', () => {
     const card = new CommunicationBoom();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

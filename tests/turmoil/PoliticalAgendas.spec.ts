@@ -8,7 +8,7 @@ import {PoliticalAgendas} from '../../src/server/turmoil/PoliticalAgendas';
 import {AgendaStyle} from '../../src/common/turmoil/Types';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 
-describe('PoliticalAgendas', function() {
+describe('PoliticalAgendas', () => {
   let player1: TestPlayer;
   let player2: TestPlayer;
   let randomElement: (list: Array<any>) => any;

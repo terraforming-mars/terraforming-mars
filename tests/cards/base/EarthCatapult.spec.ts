@@ -3,8 +3,8 @@ import {testGame} from '../../TestGame';
 import {EarthCatapult} from '../../../src/server/cards/base/EarthCatapult';
 import {cast} from '../../TestingUtils';
 
-describe('EarthCatapult', function() {
-  it('Should play', function() {
+describe('EarthCatapult', () => {
+  it('Should play', () => {
     const [/* game */, player] = testGame(1);
     const card = new EarthCatapult();
     const action = card.play(player);

@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {PublicCelebrations} from '../../../src/server/cards/turmoil/PublicCelebrations';
 import {testGame} from '../../TestGame';
 
-describe('PublicCelebrations', function() {
-  it('Should play', function() {
+describe('PublicCelebrations', () => {
+  it('Should play', () => {
     const card = new PublicCelebrations();
     const [game, player] = testGame(1, {turmoilExtension: true});
 

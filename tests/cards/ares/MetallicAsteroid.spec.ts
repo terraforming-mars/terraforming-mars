@@ -8,18 +8,18 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
 
-describe('MetallicAsteroid', function() {
+describe('MetallicAsteroid', () => {
   let card: MetallicAsteroid;
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MetallicAsteroid();
     [game, player, otherPlayer] = testGame(2, {aresExtension: true});
   });
 
-  it('Play', function() {
+  it('Play', () => {
     otherPlayer.plants = 5;
 
     expect(player.titanium).eq(0);

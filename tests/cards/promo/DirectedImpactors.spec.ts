@@ -11,21 +11,21 @@ import {cast, setTemperature} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
 
-describe('DirectedImpactors', function() {
+describe('DirectedImpactors', () => {
   let card: DirectedImpactors;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DirectedImpactors();
     [game, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
   });
 
-  it('Should act - single action choice, single target', function() {
+  it('Should act - single action choice, single target', () => {
     player.playedCards.push(card);
     expect(card.canAct(player)).is.not.true;
 
@@ -50,7 +50,7 @@ describe('DirectedImpactors', function() {
     expect(card.resourceCount).to.eq(0);
   });
 
-  it('Should act - multiple action choices, multiple targets', function() {
+  it('Should act - multiple action choices, multiple targets', () => {
     const card2 = new RotatorImpacts();
     player.playedCards.push(card, card2);
 
@@ -78,7 +78,7 @@ describe('DirectedImpactors', function() {
     expect(player.titanium).to.eq(0);
   });
 
-  it('Can still spend resource even if temperature is max', function() {
+  it('Can still spend resource even if temperature is max', () => {
     player.playedCards.push(card);
     card.resourceCount = 1;
     setTemperature(game, MAX_TEMPERATURE);

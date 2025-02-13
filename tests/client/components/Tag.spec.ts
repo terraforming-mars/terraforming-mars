@@ -4,8 +4,8 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import Tag from '@/client/components/Tag.vue';
 
-describe('Tag', function() {
-  it('getClasses with only tag', function() {
+describe('Tag', () => {
+  it('getClasses with only tag', () => {
     const tag = mount(Tag, {
       localVue: getLocalVue(),
       propsData: {

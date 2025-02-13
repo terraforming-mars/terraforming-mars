@@ -14,12 +14,12 @@ import {testGame} from '../../TestGame';
 
 const toSpaceId = (space: Space): string => space.id;
 
-describe('Wetlands', function() {
+describe('Wetlands', () => {
   let card: Wetlands;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Wetlands();
     [game, player/* , player2 */] = testGame( 2, {pathfindersExpansion: true});
     game.board = EmptyBoard.newInstance();
@@ -34,7 +34,7 @@ describe('Wetlands', function() {
   // 21  22  23  24
 
   // Can only play when two oceans are next to each other and you have 4 plants.
-  it('Can play', function() {
+  it('Can play', () => {
     player.megaCredits = card.cost;
 
     player.plants = 4;
@@ -50,7 +50,7 @@ describe('Wetlands', function() {
   });
 
   // Same test as above, with Red City in the way
-  it('Cannot play next to Red City', function() {
+  it('Cannot play next to Red City', () => {
     player.megaCredits = card.cost;
 
     player.plants = 4;
@@ -68,7 +68,7 @@ describe('Wetlands', function() {
 
 
   // If only available spaces are reserved, cannot play.
-  it('Can play if spots are reserved', function() {
+  it('Can play if spots are reserved', () => {
     player.megaCredits = card.cost;
 
     player.plants = 4;
@@ -91,7 +91,7 @@ describe('Wetlands', function() {
     expect(card.canPlay(player)).is.false;
   });
 
-  it('play', function() {
+  it('play', () => {
     player.plants = 7;
     addOcean(player, '15');
     addOcean(player, '16');
@@ -136,7 +136,7 @@ describe('Wetlands', function() {
     expect(player.canPlay(fake)).is.true;
   });
 
-  it('Wetlands counts as ocean for adjacency', function() {
+  it('Wetlands counts as ocean for adjacency', () => {
     const space = game.board.getSpaceOrThrow('15');
     game.simpleAddTile(player, space, {tileType: TileType.WETLANDS});
 
@@ -145,7 +145,7 @@ describe('Wetlands', function() {
     expect(player.megaCredits).eq(2);
   });
 
-  it('Wetlands counts for city-related VP', function() {
+  it('Wetlands counts for city-related VP', () => {
     const space = game.board.getSpaceOrThrow('15');
     game.simpleAddTile(player, space, {tileType: TileType.WETLANDS});
 
@@ -156,7 +156,7 @@ describe('Wetlands', function() {
     expect(player.getVictoryPoints().city).eq(1);
   });
 
-  it('Wetlands works with land claim', function() {
+  it('Wetlands works with land claim', () => {
     player.plants = 7;
     addOcean(player, '15');
     addOcean(player, '16');

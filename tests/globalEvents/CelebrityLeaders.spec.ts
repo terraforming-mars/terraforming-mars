@@ -4,8 +4,8 @@ import {CelebrityLeaders} from '../../src/server/turmoil/globalEvents/CelebrityL
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('CelebrityLeaders', function() {
-  it('resolve play', function() {
+describe('CelebrityLeaders', () => {
+  it('resolve play', () => {
     const card = new CelebrityLeaders();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

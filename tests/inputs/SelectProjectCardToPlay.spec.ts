@@ -9,7 +9,7 @@ import {Payment} from '../../src/common/inputs/Payment';
 import {testGame} from '../TestGame';
 import {toName} from '../TestingUtils';
 
-describe('SelectProjectCardToPlay', function() {
+describe('SelectProjectCardToPlay', () => {
   let player: TestPlayer;
   let aquiferPumping: IProjectCard;
   let ioMiningIndustries: IProjectCard;
@@ -26,7 +26,7 @@ describe('SelectProjectCardToPlay', function() {
     called = false;
   });
 
-  it('Simple', function() {
+  it('Simple', () => {
     const selectProjectCardToPlay = new SelectProjectCardToPlay(
       player,
       [

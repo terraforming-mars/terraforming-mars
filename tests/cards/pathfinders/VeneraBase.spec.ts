@@ -17,7 +17,7 @@ import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCultu
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {cast, churn} from '../../TestingUtils';
 
-describe('VeneraBase', function() {
+describe('VeneraBase', () => {
   let card: VeneraBase;
   let player: TestPlayer;
   let game: IGame;
@@ -26,7 +26,7 @@ describe('VeneraBase', function() {
   let venusFloater2: IProjectCard;
   let data: IProjectCard;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new VeneraBase();
     [game, player] = testGame(1, {turmoilExtension: true, pathfindersExpansion: true});
 
@@ -36,7 +36,7 @@ describe('VeneraBase', function() {
     data = new MartianCulture();
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.megaCredits = card.cost;
     const turmoil = Turmoil.getTurmoil(player.game);
     turmoil.rulingParty = new Greens();
@@ -45,7 +45,7 @@ describe('VeneraBase', function() {
     expect(player.canPlay(card)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
     const space = game.board.getSpaceOrThrow(SpaceName.VENERA_BASE);
     expect(space.tile).is.undefined;
@@ -58,7 +58,7 @@ describe('VeneraBase', function() {
     expect(space.player?.id).eq(player.id);
   });
 
-  it('canAct', function() {
+  it('canAct', () => {
     expect(card.canAct(player)).is.false;
     player.playedCards = [data];
     expect(card.canAct(player)).is.false;
@@ -68,7 +68,7 @@ describe('VeneraBase', function() {
     expect(card.canAct(player)).is.true;
   });
 
-  it('action', function() {
+  it('action', () => {
     player.playedCards = [venusFloater, venusFloater2, data, nonVenusFloater];
 
     const selectCard = cast(churn(card.action(player), player), SelectCard);

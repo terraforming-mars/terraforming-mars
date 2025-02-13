@@ -11,7 +11,7 @@ import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectC
 import {CardName} from '../../../src/common/cards/CardName';
 import {Payment} from '../../../src/common/inputs/Payment';
 
-describe('ValuableGases', function() {
+describe('ValuableGases', () => {
   let card: ValuableGases;
   let player: TestPlayer;
 
@@ -20,7 +20,7 @@ describe('ValuableGases', function() {
   let localShading: LocalShading;
   let airRaid: AirRaid;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ValuableGases();
     [/* game */, player] = testGame(1);
 
@@ -35,7 +35,7 @@ describe('ValuableGases', function() {
     player.cardsInHand = [floatingHabs, jovianLanters, localShading, airRaid];
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     expect(player.getPlayableCardsForTest()).is.empty;
 
     card.play(player);

@@ -11,7 +11,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {BotanicalExperience} from '../../../src/server/cards/pathfinders/BotanicalExperience';
 
-describe('SolarStorm', function() {
+describe('SolarStorm', () => {
   let card: SolarStorm;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -19,14 +19,14 @@ describe('SolarStorm', function() {
   let cryptocurrency: Cryptocurrency;
   let communicationCenter: CommunicationCenter;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SolarStorm();
     [/* game */, player, player2, player3] = testGame(3);
     cryptocurrency = new Cryptocurrency();
     communicationCenter = new CommunicationCenter();
   });
 
-  it('play', function() {
+  it('play', () => {
     expect(player.getTerraformRating()).eq(20);
     expect(player.game.getTemperature()).eq(-30);
 
@@ -44,7 +44,7 @@ describe('SolarStorm', function() {
     expect(player.production.asUnits()).deep.eq(Units.of({heat: 1}));
   });
 
-  it('remove data, nobody has data', function() {
+  it('remove data, nobody has data', () => {
     player.playedCards = [cryptocurrency];
     player2.playedCards = [communicationCenter];
     card.play(player);
@@ -53,7 +53,7 @@ describe('SolarStorm', function() {
     cast(player.getWaitingFor(), undefined);
   });
 
-  it('remove data, only you have data', function() {
+  it('remove data, only you have data', () => {
     player.playedCards = [cryptocurrency];
     player2.playedCards = [communicationCenter];
 
@@ -70,7 +70,7 @@ describe('SolarStorm', function() {
     expect(cryptocurrency.resourceCount).eq(0);
   });
 
-  it('remove data, two players with data', function() {
+  it('remove data, two players with data', () => {
     player.playedCards = [cryptocurrency];
     player2.playedCards = [communicationCenter];
 

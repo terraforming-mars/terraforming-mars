@@ -3,8 +3,8 @@ import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {assertPlaceCity} from '../../assertions';
 
-describe('EarlySettlement', function() {
-  it('Should play', function() {
+describe('EarlySettlement', () => {
+  it('Should play', () => {
     const card = new EarlySettlement();
     const [game, player] = testGame(1);
 

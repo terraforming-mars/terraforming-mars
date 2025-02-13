@@ -8,17 +8,17 @@ import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('MiningRightsAres', function() {
+describe('MiningRightsAres', () => {
   let card: MiningRightsAres;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MiningRightsAres();
     [game, player] = testGame(2, {aresExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const action = cast(card.play(player), SelectSpace);
 
     const titaniumSpace = action.spaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false)!;
@@ -44,7 +44,7 @@ describe('MiningRightsAres', function() {
     expect(steelSpace.adjacency).to.deep.eq({bonus: [SpaceBonus.STEEL]});
   });
 
-  it('Candidate spaces can not include hazards', function() {
+  it('Candidate spaces can not include hazards', () => {
     const land = game.board.getAvailableSpacesOnLand(player)
       .find((land) => land.bonus.includes(SpaceBonus.STEEL))!;
 

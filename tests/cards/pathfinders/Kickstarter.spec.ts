@@ -8,12 +8,12 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Tag} from '../../../src/common/cards/Tag';
 import {cast} from '../../TestingUtils';
 
-describe('Kickstarter', function() {
+describe('Kickstarter', () => {
   let card: Kickstarter;
   let game: IGame;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Kickstarter();
     [game, player] = testGame(1, {pathfindersExpansion: true});
   });

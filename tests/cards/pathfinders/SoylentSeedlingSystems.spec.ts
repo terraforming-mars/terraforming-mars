@@ -9,13 +9,13 @@ import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {TileType} from '../../../src/common/TileType';
 
-describe('SoylentSeedlingSystems', function() {
+describe('SoylentSeedlingSystems', () => {
   let soylent: SoylentSeedlingSystems;
   let celestic: Celestic;
   let player: TestPlayer;
   let player2: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     soylent = new SoylentSeedlingSystems();
     [/* game */, player, player2] = testGame(2);
     player.corporations.push(soylent);

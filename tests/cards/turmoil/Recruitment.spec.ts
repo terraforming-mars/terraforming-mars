@@ -3,8 +3,8 @@ import {Recruitment} from '../../../src/server/cards/turmoil/Recruitment';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {testGame} from '../../TestGame';
 
-describe('Recruitment', function() {
-  it('Should play', function() {
+describe('Recruitment', () => {
+  it('Should play', () => {
     const card = new Recruitment();
     const [game, player] = testGame(1, {turmoilExtension: true});
 

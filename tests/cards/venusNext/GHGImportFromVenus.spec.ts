@@ -3,8 +3,8 @@ import {GHGImportFromVenus} from '../../../src/server/cards/venusNext/GHGImportF
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('GHGImportFromVenus', function() {
-  it('Should play', function() {
+describe('GHGImportFromVenus', () => {
+  it('Should play', () => {
     const card = new GHGImportFromVenus();
     const [game, player] = testGame(2);
 

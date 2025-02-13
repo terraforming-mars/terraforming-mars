@@ -3,8 +3,8 @@ import {EcoSabotage} from '../../src/server/turmoil/globalEvents/EcoSabotage';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('EcoSabotage', function() {
-  it('resolve play', function() {
+describe('EcoSabotage', () => {
+  it('resolve play', () => {
     const card = new EcoSabotage();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

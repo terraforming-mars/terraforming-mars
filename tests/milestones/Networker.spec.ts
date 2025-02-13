@@ -28,7 +28,7 @@ describe('Networker', () => {
       networker.getScore(player3)];
   }
 
-  it('Takes action, Networker Milestone does not get a benefit', function() {
+  it('Takes action, Networker Milestone does not get a benefit', () => {
     // Place a tile that grants 1MC adjacency bonuses
     const naturalPreserveAres = new NaturalPreserveAres();
     naturalPreserveAres.play(player2);

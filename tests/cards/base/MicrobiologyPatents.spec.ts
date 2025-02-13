@@ -6,8 +6,8 @@ import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 import {cast} from '../../TestingUtils';
 
-describe('MicrobiologyPatents', function() {
-  it('Should play', function() {
+describe('MicrobiologyPatents', () => {
+  it('Should play', () => {
     const card = new MicrobiologyPatents();
     const [/* game */, player] = testGame(1);
 

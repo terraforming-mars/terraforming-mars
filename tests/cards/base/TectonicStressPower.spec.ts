@@ -4,20 +4,20 @@ import {TectonicStressPower} from '../../../src/server/cards/base/TectonicStress
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('TectonicStressPower', function() {
+describe('TectonicStressPower', () => {
   let card: TectonicStressPower;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new TectonicStressPower();
     [/* game */, player] = testGame(1);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.playedCards.push(new SearchForLife(), new SearchForLife());
     expect(card.canPlay(player)).is.true;
     card.play(player);

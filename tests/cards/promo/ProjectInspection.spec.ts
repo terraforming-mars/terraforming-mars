@@ -13,23 +13,23 @@ import {Odyssey} from '../../../src/server/cards/pathfinders/Odyssey';
 import {cast, runAllActions, testGame} from '../../TestingUtils';
 import {Payment} from '../../../src/common/inputs/Payment';
 
-describe('ProjectInspection', function() {
+describe('ProjectInspection', () => {
   let card: ProjectInspection;
   let player: TestPlayer;
   let restrictedArea: RestrictedArea;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ProjectInspection();
     [/* game */, player] = testGame(1);
     restrictedArea = new RestrictedArea();
   });
 
-  it('Can not play if no actions played this turn', function() {
+  it('Can not play if no actions played this turn', () => {
     player.playedCards.push(restrictedArea);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can not play if available actions can not act', function() {
+  it('Can not play if available actions can not act', () => {
     player.playedCards.push(restrictedArea);
     player.addActionThisGeneration(restrictedArea.name);
     player.megaCredits = 1;
@@ -37,7 +37,7 @@ describe('ProjectInspection', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.playedCards.push(restrictedArea);
     player.stock.add(Resource.MEGACREDITS, 2);
     player.addActionThisGeneration(restrictedArea.name);
@@ -47,7 +47,7 @@ describe('ProjectInspection', function() {
     cast(card.play(player), SelectCard);
   });
 
-  it('Can not play with Playwrights if there is no other card to chain', function() {
+  it('Can not play with Playwrights if there is no other card to chain', () => {
     const playwrights = new Playwrights();
     player.corporations.push(playwrights);
 
@@ -55,7 +55,7 @@ describe('ProjectInspection', function() {
     expect(card.canPlay(player)).is.false; // PI -> PW -> ???
   });
 
-  it('Can be used to play Playwrights into another available event card', function() {
+  it('Can be used to play Playwrights into another available event card', () => {
     const playwrights = new Playwrights();
     const indenturedWorkers = new IndenturedWorkers();
     player.corporations.push(playwrights);
@@ -85,7 +85,7 @@ describe('ProjectInspection', function() {
     expect(action2.cards[0]?.name).eq(indenturedWorkers.name);
   });
 
-  it('Can be used to play Odyssey into another available event card', function() {
+  it('Can be used to play Odyssey into another available event card', () => {
     const odyssey = new Odyssey();
     const indenturedWorkers = new IndenturedWorkers();
     player.corporations.push(odyssey);
@@ -116,7 +116,7 @@ describe('ProjectInspection', function() {
     expect(action2.cards[0]?.name).eq(indenturedWorkers.name);
   });
 
-  it('Can be played by Playwrights into different blue card', function() {
+  it('Can be played by Playwrights into different blue card', () => {
     const playwrights = new Playwrights();
     player.corporations.push(playwrights);
     player.playedCards.push(card);
@@ -137,7 +137,7 @@ describe('ProjectInspection', function() {
     expect(play1.cards[0]?.name).eq(restrictedArea.name);
   });
 
-  it('Can be played by Playwrights into Playwrights into another available event card', function() {
+  it('Can be played by Playwrights into Playwrights into another available event card', () => {
     const playwrights = new Playwrights();
     const indenturedWorkers = new IndenturedWorkers();
     player.corporations.push(playwrights);

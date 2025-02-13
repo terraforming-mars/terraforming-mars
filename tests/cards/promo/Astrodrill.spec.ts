@@ -8,11 +8,11 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 
-describe('Astrodrill', function() {
+describe('Astrodrill', () => {
   let card: Astrodrill;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Astrodrill();
     [/* game */, player/* , player2 */] = testGame(2);
     player.corporations.push(card);
@@ -20,11 +20,11 @@ describe('Astrodrill', function() {
     runAllActions(player.game);
   });
 
-  it('Starts with 3 asteroid resources', function() {
+  it('Starts with 3 asteroid resources', () => {
     expect(card.resourceCount).to.eq(3);
   });
 
-  it('Should play - can spend asteroid resource', function() {
+  it('Should play - can spend asteroid resource', () => {
     const action = cast(card.action(player), OrOptions);
     expect(action.options).has.lengthOf(3);
 
@@ -35,7 +35,7 @@ describe('Astrodrill', function() {
     expect(player.game.deferredActions).has.lengthOf(0);
   });
 
-  it('Should play - can add asteroid resource to self', function() {
+  it('Should play - can add asteroid resource to self', () => {
     const action = cast(card.action(player), OrOptions);
     expect(action.options).has.lengthOf(3);
 
@@ -46,7 +46,7 @@ describe('Astrodrill', function() {
     expect(result).is.undefined;
   });
 
-  it('Should play - can add asteroid resource to other card', function() {
+  it('Should play - can add asteroid resource to other card', () => {
     const cometAiming = new CometAiming();
     player.playedCards.push(cometAiming);
 
@@ -58,7 +58,7 @@ describe('Astrodrill', function() {
     expect(result).is.undefined;
   });
 
-  it('Should play - can gain a standard resource', function() {
+  it('Should play - can gain a standard resource', () => {
     const action = cast(card.action(player), OrOptions);
     expect(action.options).has.lengthOf(3);
 

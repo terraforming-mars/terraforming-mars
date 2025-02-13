@@ -16,19 +16,19 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {cast, toName} from '../../TestingUtils';
 import {CardType} from '../../../src/common/cards/CardType';
 
-describe('PublicSponsoredGrant', function() {
+describe('PublicSponsoredGrant', () => {
   let card: PublicSponsoredGrant;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new PublicSponsoredGrant();
     [game, player, player2, player3] = testGame(3, {turmoilExtension: true});
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.megaCredits = card.cost;
     const turmoil = Turmoil.getTurmoil(player.game);
     turmoil.rulingParty = new Unity();
@@ -37,7 +37,7 @@ describe('PublicSponsoredGrant', function() {
     expect(player.canPlay(card)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     player.megaCredits = 4;
     player2.megaCredits = 1;
     player3.megaCredits = 0;
@@ -68,7 +68,7 @@ describe('PublicSponsoredGrant', function() {
     expect(game.projectDeck.discardPile.map(toName)).deep.eq([CardName.SEARCH_FOR_LIFE]);
   });
 
-  it('works with events', function() {
+  it('works with events', () => {
     const options = cast(card.play(player), OrOptions);
     const eventOption = options.options.find((o) => o.title === Tag.EVENT)!;
 
@@ -79,7 +79,7 @@ describe('PublicSponsoredGrant', function() {
     expect(player.cardsInHand.map((c) => c.type)).deep.eq([CardType.EVENT, CardType.EVENT]);
   });
 
-  it('compatible with Mons Insurance', function() {
+  it('compatible with Mons Insurance', () => {
     player2.corporations.push(new MonsInsurance());
     // This isn't very clean but it's necessary for the test.
     game.monsInsuranceOwner = player2.id;

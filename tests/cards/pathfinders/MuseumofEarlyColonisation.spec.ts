@@ -6,17 +6,17 @@ import {addCity, addGreenery, addOcean} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {Units} from '../../../src/common/Units';
 
-describe('MuseumofEarlyColonisation', function() {
+describe('MuseumofEarlyColonisation', () => {
   let card: MuseumofEarlyColonisation;
   let player: TestPlayer;
   let player2: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MuseumofEarlyColonisation();
     [/* game */, player, player2] = testGame(2);
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     const ocean = addOcean(player2);
     const greenery = addGreenery(player2);
     const city = addCity(player2);
@@ -42,7 +42,7 @@ describe('MuseumofEarlyColonisation', function() {
     expect(card.canPlay(player)).is.false;
   });
 
-  it('play', function() {
+  it('play', () => {
     player.production.override({energy: 1});
     expect(player.getTerraformRating()).eq(20);
 

@@ -10,12 +10,12 @@ import {ArcadianCommunities} from '../../src/server/cards/promo/ArcadianCommunit
 import {testGame} from '../TestGame';
 import {AresHandler} from '../../src/server/ares/AresHandler';
 
-describe('MarsBoard', function() {
+describe('MarsBoard', () => {
   let board: MarsBoard;
   let player: TestPlayer;
   let player2: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     board = TharsisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
@@ -26,12 +26,12 @@ describe('MarsBoard', function() {
     (player2 as any).game = {gameOptions};
   });
 
-  it('Can have greenery placed on any available land when player has no tile placed', function() {
+  it('Can have greenery placed on any available land when player has no tile placed', () => {
     const availableSpaces = board.getAvailableSpacesForGreenery(player);
     expect(availableSpaces).has.lengthOf(board.getAvailableSpacesOnLand(player).length);
   });
 
-  it('Can have greenery placed on any available land when player has a tile placed that is land locked', function() {
+  it('Can have greenery placed on any available land when player has a tile placed that is land locked', () => {
     board.spaces[2].player = player;
     board.spaces[2].tile = {tileType: TileType.GREENERY};
     board.spaces[7].player = player2;
@@ -42,7 +42,7 @@ describe('MarsBoard', function() {
     expect(availableSpaces).has.lengthOf(board.getAvailableSpacesOnLand(player).length);
   });
 
-  it('Can only place greenery adjacent to a tile a player owns', function() {
+  it('Can only place greenery adjacent to a tile a player owns', () => {
     board.spaces[2].player = player;
     board.spaces[2].tile = {tileType: TileType.GREENERY};
     board.spaces[7].player = player2;
@@ -58,7 +58,7 @@ describe('MarsBoard', function() {
   // }
 
 
-  it('getOceanSpaces', function() {
+  it('getOceanSpaces', () => {
     expect(board.getOceanSpaces()).is.empty;
 
     const space1 = board.spaces[1];

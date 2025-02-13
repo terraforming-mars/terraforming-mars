@@ -6,8 +6,8 @@ import {Thorgate} from '../../../src/server/cards/corporation/Thorgate';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('Thorgate', function() {
-  it('Should play', function() {
+describe('Thorgate', () => {
+  it('Should play', () => {
     const card = new Thorgate();
     const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);

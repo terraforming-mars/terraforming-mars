@@ -5,20 +5,20 @@ import {InterstellarColonyShip} from '../../../src/server/cards/base/Interstella
 import {Research} from '../../../src/server/cards/base/Research';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('InterstellarColonyShip', function() {
+describe('InterstellarColonyShip', () => {
   let card: InterstellarColonyShip;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new InterstellarColonyShip();
     [/* game */, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.playedCards.push(new Research(), new Research(), new GeneRepair());
     expect(card.canPlay(player)).is.true;
 

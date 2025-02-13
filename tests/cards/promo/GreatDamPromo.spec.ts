@@ -6,20 +6,20 @@ import {TileType} from '../../../src/common/TileType';
 import {cast, churn, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('GreatDamPromo', function() {
+describe('GreatDamPromo', () => {
   let card: GreatDamPromo;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new GreatDamPromo();
     [/* game */, player] = testGame(2);
   });
 
-  it('Can not play without meeting requirements', function() {
+  it('Can not play without meeting requirements', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     maxOutOceans(player, 4);
 
     cast(churn(card.play(player), player), SelectSpace);
@@ -27,7 +27,7 @@ describe('GreatDamPromo', function() {
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
-  it('Works with Ares', function() {
+  it('Works with Ares', () => {
     maxOutOceans(player, 4).forEach((space) => space.tile = {tileType: TileType.OCEAN_CITY});
 
     cast(churn(card.play(player), player), SelectSpace);

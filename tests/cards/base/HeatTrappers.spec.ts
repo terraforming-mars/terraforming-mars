@@ -7,18 +7,18 @@ import {Resource} from '../../../src/common/Resource';
 import {cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('HeatTrappers', function() {
+describe('HeatTrappers', () => {
   let card: HeatTrappers;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new HeatTrappers();
     [game, player, player2] = testGame(2);
   });
 
-  it('Should be playable in solo mode', function() {
+  it('Should be playable in solo mode', () => {
     const [/* game */, player] = testGame(1);
     player.production.add(Resource.HEAT, 1);
 
@@ -30,7 +30,7 @@ describe('HeatTrappers', function() {
     expect(player.production.energy).to.eq(1); // Incremented
   });
 
-  it('Should play - auto select if single target', function() {
+  it('Should play - auto select if single target', () => {
     player2.production.add(Resource.HEAT, 7);
     expect(card.canPlay(player)).is.true;
     card.play(player);
@@ -41,7 +41,7 @@ describe('HeatTrappers', function() {
     expect(player2.production.heat).to.eq(5);
   });
 
-  it('Should play - multiple targets', function() {
+  it('Should play - multiple targets', () => {
     player.production.add(Resource.HEAT, 3);
     player2.production.add(Resource.HEAT, 7);
     card.play(player);
@@ -54,11 +54,11 @@ describe('HeatTrappers', function() {
     expect(player2.production.heat).to.eq(5);
   });
 
-  it('Can not play if nobody has heat production', function() {
+  it('Can not play if nobody has heat production', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Gives victory points', function() {
+  it('Gives victory points', () => {
     expect(card.getVictoryPoints(player)).to.eq(-1);
   });
 });

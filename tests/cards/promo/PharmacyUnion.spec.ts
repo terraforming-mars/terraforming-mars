@@ -33,19 +33,19 @@ import {AdvancedAlloys} from '../../../src/server/cards/base/AdvancedAlloys';
 import {BuildColonyStandardProject} from '../../../src/server/cards/colonies/BuildColonyStandardProject';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 
-describe('PharmacyUnion', function() {
+describe('PharmacyUnion', () => {
   let pharmacyUnion: PharmacyUnion;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     pharmacyUnion = new PharmacyUnion();
     [game, player, player2] = testGame(2);
     player.corporations.push(pharmacyUnion);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.corporations.length = 0; // Resetting so when setting the corporation it doesn't do anything flaky.
     [game, player] = testGame(1, {skipInitialCardSelection: false});
     const pi = cast(player.getWaitingFor(), SelectInitialCards);
@@ -60,7 +60,7 @@ describe('PharmacyUnion', function() {
     expect(player.cardsInHand[0].tags.includes(Tag.SCIENCE)).is.true;
   });
 
-  it('Gains diseases and removes MC when ANY player plays microbe cards', function() {
+  it('Gains diseases and removes MC when ANY player plays microbe cards', () => {
     player.megaCredits = 8;
     player2.megaCredits = 8;
     pharmacyUnion.play(player);
@@ -82,7 +82,7 @@ describe('PharmacyUnion', function() {
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('Removes diseases and gives TR only when corp owner plays science cards', function() {
+  it('Removes diseases and gives TR only when corp owner plays science cards', () => {
     pharmacyUnion.play(player);
     runAllActions(game);
 
@@ -104,7 +104,7 @@ describe('PharmacyUnion', function() {
     expect(player.getTerraformRating()).to.eq(21);
   });
 
-  it('Works correctly with Research', function() {
+  it('Works correctly with Research', () => {
     pharmacyUnion.play(player);
     runAllActions(game);
 
@@ -123,7 +123,7 @@ describe('PharmacyUnion', function() {
     expect(player.getTerraformRating()).to.eq(22);
   });
 
-  it('Can turn card face down once per game to gain 3 TR if no diseases on card', function() {
+  it('Can turn card face down once per game to gain 3 TR if no diseases on card', () => {
     pharmacyUnion.resourceCount = 0;
 
     const searchForLife = new SearchForLife();
@@ -146,7 +146,7 @@ describe('PharmacyUnion', function() {
     expect(player.getTerraformRating()).to.eq(23);
   });
 
-  it('Corporation tags do not count when corporation is disabled', function() {
+  it('Corporation tags do not count when corporation is disabled', () => {
     expect(player.tags.count(Tag.MICROBE)).to.eq(2);
     const advancedEcosystems = new AdvancedEcosystems();
     player.playedCards.push(new Fish());
@@ -163,7 +163,7 @@ describe('PharmacyUnion', function() {
     expect(advancedEcosystems.canPlay(player)).is.not.true;
   });
 
-  it('Edge Case - Let player pick the tag resolution order', function() {
+  it('Edge Case - Let player pick the tag resolution order', () => {
     // Edge case, let player pick order of resolution
     // see https://github.com/bafolts/terraforming-mars/issues/1286
 

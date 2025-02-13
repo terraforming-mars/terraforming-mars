@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {JovianEmbassy} from '../../../src/server/cards/promo/JovianEmbassy';
 import {testGame} from '../../TestGame';
 
-describe('JovianEmbassy', function() {
-  it('Should play', function() {
+describe('JovianEmbassy', () => {
+  it('Should play', () => {
     const card = new JovianEmbassy();
     const [/* game */, player] = testGame(2);
 

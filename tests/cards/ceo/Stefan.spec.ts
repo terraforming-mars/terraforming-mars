@@ -7,7 +7,7 @@ import {forceGenerationEnd, fakeCard, cast, runAllActions} from '../../TestingUt
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('Stefan', function() {
+describe('Stefan', () => {
   let card: Stefan;
   let player: TestPlayer;
   let game: IGame;
@@ -17,11 +17,11 @@ describe('Stefan', function() {
     [game, player] = testGame(1);
   });
 
-  it('Cannot act without cards', function() {
+  it('Cannot act without cards', () => {
     expect(card.canAct(player)).is.false;
   });
 
-  it('Takes action, sells all cards', function() {
+  it('Takes action, sells all cards', () => {
     const fake1 = fakeCard({tags: []});
     const fake2 = fakeCard({tags: []});
     player.cardsInHand.push(fake1, fake2);
@@ -35,7 +35,7 @@ describe('Stefan', function() {
     expect(player.megaCredits).eq(6);
   });
 
-  it('Takes action, sells only 1 card', function() {
+  it('Takes action, sells only 1 card', () => {
     const fake1 = fakeCard({tags: []});
     const fake2 = fakeCard({tags: []});
     player.cardsInHand.push(fake1, fake2);
@@ -49,7 +49,7 @@ describe('Stefan', function() {
     expect(player.megaCredits).eq(3);
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     const fake1 = fakeCard({tags: []});
     player.cardsInHand.push(fake1);
 

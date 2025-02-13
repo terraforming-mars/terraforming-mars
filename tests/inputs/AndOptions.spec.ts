@@ -4,7 +4,7 @@ import {AndOptions} from '../../src/server/inputs/AndOptions';
 import {TestPlayer} from '../TestPlayer';
 import {SelectAmount} from '../../src/server/inputs/SelectAmount';
 
-describe('AndOptions', function() {
+describe('AndOptions', () => {
   let player: TestPlayer;
   let called = false;
   const vals = <Array<number>>[];
@@ -21,7 +21,7 @@ describe('AndOptions', function() {
     [/* game */, player] = testGame(1);
   });
 
-  it('Simple', function() {
+  it('Simple', () => {
     const andOptions = new AndOptions(
       new SelectAmount('', '', 0, 10).andThen(amountCb),
       new SelectAmount('', '', 0, 10).andThen(amountCb),

@@ -9,22 +9,22 @@ import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 import {CardResource} from '../../../src/common/CardResource';
 
-describe('MagneticFieldGeneratorsAres', function() {
+describe('MagneticFieldGeneratorsAres', () => {
   let card: MagneticFieldGeneratorsAres;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MagneticFieldGeneratorsAres();
     [game, player] = testGame(2, {aresExtension: true});
   });
 
-  it('Cannot play without enough energy production', function() {
+  it('Cannot play without enough energy production', () => {
     player.production.add(Resource.ENERGY, 3);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Play and Adjacency Bonus Grants', function() {
+  it('Play and Adjacency Bonus Grants', () => {
     const microbeCard = fakeCard({name: 'microbeCard' as CardName, resourceType: CardResource.MICROBE});
     const dataCard = fakeCard({name: 'dataCard' as CardName, resourceType: CardResource.DATA});
     player.playedCards = [microbeCard, dataCard];

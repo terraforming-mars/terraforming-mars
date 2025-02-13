@@ -6,19 +6,19 @@ import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservat
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {cast, testGame} from '../../TestingUtils';
 
-describe('Solarpedia', function() {
+describe('Solarpedia', () => {
   let card: Solarpedia;
   let player: TestPlayer;
   let game: IGame;
   let lunarObservationPost: LunarObservationPost;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Solarpedia();
     [game, player] = testGame(1);
     lunarObservationPost = new LunarObservationPost();
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.megaCredits = card.cost;
     expect(player.canPlay(card)).is.false;
 
@@ -38,7 +38,7 @@ describe('Solarpedia', function() {
     expect(player.canPlay(card)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     const lunarObservationPost = new LunarObservationPost();
     player.playedCards = [lunarObservationPost];
 
@@ -48,7 +48,7 @@ describe('Solarpedia', function() {
     testAddResourcesToCard();
   });
 
-  it('act', function() {
+  it('act', () => {
     player.playedCards = [lunarObservationPost, card];
 
     card.action(player);
@@ -56,7 +56,7 @@ describe('Solarpedia', function() {
     testAddResourcesToCard();
   });
 
-  it('getVictoryPoints', function() {
+  it('getVictoryPoints', () => {
     card.resourceCount = 1;
     expect(card.getVictoryPoints(player)).eq(0);
     card.resourceCount = 2;

@@ -5,8 +5,8 @@ import {MinersOnStrike} from '../../src/server/turmoil/globalEvents/MinersOnStri
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('MinersOnStrike', function() {
-  it('resolve play', function() {
+describe('MinersOnStrike', () => {
+  it('resolve play', () => {
     const card = new MinersOnStrike();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

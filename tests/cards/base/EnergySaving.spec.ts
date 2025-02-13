@@ -3,8 +3,8 @@ import {EnergySaving} from '../../../src/server/cards/base/EnergySaving';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('EnergySaving', function() {
-  it('Should play', function() {
+describe('EnergySaving', () => {
+  it('Should play', () => {
     const card = new EnergySaving();
     const [game, player, redPlayer] = testGame(2);
     const action = card.play(player);

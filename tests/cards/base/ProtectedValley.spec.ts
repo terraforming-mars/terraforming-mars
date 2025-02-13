@@ -5,8 +5,8 @@ import {TileType} from '../../../src/common/TileType';
 import {cast, runAllActions, setOxygenLevel, testRedsCosts} from '../../TestingUtils';
 import {assertPlaceTile} from '../../assertions';
 
-describe('ProtectedValley', function() {
-  it('Should play', function() {
+describe('ProtectedValley', () => {
+  it('Should play', () => {
     const card = new ProtectedValley();
     const [game, player] = testGame(2);
     cast(card.play(player), undefined);

@@ -7,8 +7,8 @@ import {SelectInitialCards} from '../../../src/server/inputs/SelectInitialCards'
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
 
-describe('TerralabsResearch', function() {
-  it('Should play', function() {
+describe('TerralabsResearch', () => {
+  it('Should play', () => {
     const card = new TerralabsResearch();
     const card2 = new PowerPlant();
     const card3 = new BusinessNetwork();

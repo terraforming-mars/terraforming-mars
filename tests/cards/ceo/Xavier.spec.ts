@@ -12,7 +12,7 @@ import {Ecologist} from '../../../src/server/milestones/Ecologist';
 import {forceGenerationEnd, runAllActions} from '../../TestingUtils';
 
 
-describe('Xavier', function() {
+describe('Xavier', () => {
   let card: Xavier;
   let player: TestPlayer;
   let game: IGame;
@@ -23,7 +23,7 @@ describe('Xavier', function() {
     player.playedCards.push(card, new SearchForLife());
   });
 
-  it('Takes action once per game: Can play cards with tag requirements', function() {
+  it('Takes action once per game: Can play cards with tag requirements', () => {
     const lightningHarvest = new LightningHarvest();
     const geneRepair = new GeneRepair();
     player.cardsInHand.push(lightningHarvest);
@@ -43,7 +43,7 @@ describe('Xavier', function() {
     expect(geneRepair.canPlay(player)).is.false;
   });
 
-  it('Takes action once per game: Can use wild tags as production', function() {
+  it('Takes action once per game: Can use wild tags as production', () => {
     const sulphurExports = new SulphurExports();
     player.cardsInHand.push(sulphurExports);
 
@@ -65,7 +65,7 @@ describe('Xavier', function() {
     expect(player.production.megacredits).eq(4);
   });
 
-  it('Gives discount for cards with requirements', function() {
+  it('Gives discount for cards with requirements', () => {
     const lightningHarvest = new LightningHarvest();
     const geneRepair = new GeneRepair();
 

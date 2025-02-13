@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {BribedCommittee} from '../../../src/server/cards/base/BribedCommittee';
 import {testGame} from '../../TestGame';
 
-describe('BribedCommittee', function() {
-  it('Should play', function() {
+describe('BribedCommittee', () => {
+  it('Should play', () => {
     const card = new BribedCommittee();
     const [/* game */, player] = testGame(2);
     card.play(player);

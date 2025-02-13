@@ -7,17 +7,17 @@ import {cast, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 
-describe('ByElection', function() {
+describe('ByElection', () => {
   let card: ByElection;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ByElection();
     [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
 

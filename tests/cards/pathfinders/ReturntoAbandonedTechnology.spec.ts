@@ -11,18 +11,18 @@ import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('ReturntoAbandonedTechnology', function() {
+describe('ReturntoAbandonedTechnology', () => {
   let card: ReturntoAbandonedTechnology;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ReturntoAbandonedTechnology();
     [game, player] = testGame(1);
     player.playedCards.push(card);
   });
 
-  it('play when discard pile is empty', function() {
+  it('play when discard pile is empty', () => {
     game.projectDeck.discardPile = [];
 
     cast(card.play(player), undefined);
@@ -32,7 +32,7 @@ describe('ReturntoAbandonedTechnology', function() {
     expect(action.cards).is.empty;
   });
 
-  it('play when discard pile has 1 card', function() {
+  it('play when discard pile has 1 card', () => {
     const ants = new Ants();
     game.projectDeck.discardPile = [];
     game.projectDeck.discard(ants);
@@ -45,7 +45,7 @@ describe('ReturntoAbandonedTechnology', function() {
     expect(game.projectDeck.discardPile).is.empty;
   });
 
-  it('play when discard pile has 5 cards', function() {
+  it('play when discard pile has 5 cards', () => {
     const ants = new Ants();
     const birds = new Birds();
     const capital = new Capital();

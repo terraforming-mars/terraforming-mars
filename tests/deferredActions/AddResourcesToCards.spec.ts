@@ -8,38 +8,38 @@ import {CardResource} from '../../src/common/CardResource';
 import {AndOptions} from '../../src/server/inputs/AndOptions';
 import {cast, testGame} from '../TestingUtils';
 
-describe('AddResourcesToCards', function() {
+describe('AddResourcesToCards', () => {
   let player: TestPlayer;
   let ghgProducingBacteria: GHGProducingBacteria;
   let tardigrades: Tardigrades;
   let ants: Ants;
 
-  beforeEach(function() {
+  beforeEach(() => {
     [/* game */, player] = testGame(1);
     ghgProducingBacteria = new GHGProducingBacteria();
     tardigrades = new Tardigrades();
     ants = new Ants();
   });
 
-  it('0 cards in hand no action', function() {
+  it('0 cards in hand no action', () => {
     const action = new AddResourcesToCards(player, CardResource.MICROBE, 5);
     expect(action.execute()).is.undefined;
   });
 
-  it('0 resources no action', function() {
+  it('0 resources no action', () => {
     player.playedCards = [ghgProducingBacteria];
     const action = new AddResourcesToCards(player, CardResource.MICROBE, 0);
     expect(action.execute()).is.undefined;
   });
 
-  it('one card autofill', function() {
+  it('one card autofill', () => {
     player.playedCards = [ghgProducingBacteria];
     const options = new AddResourcesToCards(player, CardResource.MICROBE, 5).execute();
     expect(options).is.undefined;
     expect(ghgProducingBacteria.resourceCount).eq(5);
   });
 
-  it('many microbe cards', function() {
+  it('many microbe cards', () => {
     player.playedCards = [ghgProducingBacteria, tardigrades, ants];
 
     const options = cast(new AddResourcesToCards(player, CardResource.MICROBE, 9).execute(), AndOptions);
@@ -55,7 +55,7 @@ describe('AddResourcesToCards', function() {
     expect(ants.resourceCount).eq(5);
   });
 
-  it('many microbe cards, wrong input', function() {
+  it('many microbe cards, wrong input', () => {
     player.playedCards = [ghgProducingBacteria, tardigrades, ants];
 
     const options = cast(new AddResourcesToCards(player, CardResource.MICROBE, 9).execute(), AndOptions);

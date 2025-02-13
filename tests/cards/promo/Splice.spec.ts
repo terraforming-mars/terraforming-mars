@@ -10,18 +10,18 @@ import {TestPlayer} from '../../TestPlayer';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {IGame} from '../../../src/server/IGame';
 
-describe('Splice', function() {
+describe('Splice', () => {
   let card: Splice;
   let game: IGame;
   let player: TestPlayer;
   let player2: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Splice();
     [game, player, player2] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const tardigrades = new Tardigrades();
     cast(card.play(player), undefined);
 
@@ -43,7 +43,7 @@ describe('Splice', function() {
     expect(player.megaCredits).to.eq(2);
   });
 
-  it('Should play with multiple microbe tags', function() {
+  it('Should play with multiple microbe tags', () => {
     const pharmacyUnion = new PharmacyUnion();
     cast(card.play(player), undefined);
     player.corporations.push(card);
@@ -65,7 +65,7 @@ describe('Splice', function() {
     expect(player2.megaCredits).to.eq(4);
   });
 
-  it('Should grant Recyclon a microbe or 2MC', function() {
+  it('Should grant Recyclon a microbe or 2MC', () => {
     const recyclon = new Recyclon();
 
     player.playCorporationCard(card);

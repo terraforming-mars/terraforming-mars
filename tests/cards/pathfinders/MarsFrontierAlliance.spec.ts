@@ -12,7 +12,7 @@ import {Phase} from '../../../src/common/Phase';
 import {TestPlayer} from 'tests/TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 
-describe('MarsFrontierAlliance', function() {
+describe('MarsFrontierAlliance', () => {
   let card: MarsFrontierAlliance;
   let turmoil: Turmoil;
   let player: TestPlayer;
@@ -35,7 +35,7 @@ describe('MarsFrontierAlliance', function() {
     expect(selectParty.options).has.length(6);
   });
 
-  it('New generation - switch of allied party', function() {
+  it('New generation - switch of allied party', () => {
     player.corporations.push(card);
     game.generation = 10;
 

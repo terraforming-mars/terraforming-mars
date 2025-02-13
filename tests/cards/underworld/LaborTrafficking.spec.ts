@@ -8,18 +8,18 @@ import {AsteroidStandardProject} from '../../../src/server/cards/base/standardPr
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {CollusionStandardProject} from '../../../src/server/cards/underworld/CollusionStandardProject';
 
-describe('LaborTrafficking', function() {
+describe('LaborTrafficking', () => {
   let card: LaborTrafficking;
   let game: IGame;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new LaborTrafficking();
     [game, player] = testGame(1);
     player.playedCards.push(card);
   });
 
-  it('play', function() {
+  it('play', () => {
     const asteroidStandardProject = new AsteroidStandardProject();
     const greeneryStandardProject = new GreeneryStandardProject();
 

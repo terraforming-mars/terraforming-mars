@@ -7,24 +7,24 @@ import {IGame} from '../../../../src/server/IGame';
 import {testGame} from '../../../TestGame';
 import {assertPlaceOcean} from '../../../assertions';
 
-describe('AquiferStandardProject', function() {
+describe('AquiferStandardProject', () => {
   let card: AquiferStandardProject;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AquiferStandardProject();
     [game, player] = testGame(1);
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     player.megaCredits = card.cost - 1;
     expect(card.canAct(player)).is.false;
     player.megaCredits = card.cost;
     expect(card.canAct(player)).is.true;
   });
 
-  it('action', function() {
+  it('action', () => {
     player.megaCredits = card.cost;
     player.setTerraformRating(20);
     expect(game.board.getOceanSpaces()).is.empty;

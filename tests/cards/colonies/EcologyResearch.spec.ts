@@ -11,18 +11,18 @@ import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestingUtils';
 
-describe('EcologyResearch', function() {
+describe('EcologyResearch', () => {
   let card: EcologyResearch;
   let player: TestPlayer;
   let game: IGame;
   let colony: Luna;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new EcologyResearch();
     [game, player/* , player2 */] = testGame(2, {coloniesExtension: true});
   });
 
-  it('Should play without targets', function() {
+  it('Should play without targets', () => {
     colony = new Luna();
     colony.colonies.push(player.id);
     player.game.colonies.push(colony);
@@ -32,7 +32,7 @@ describe('EcologyResearch', function() {
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
-  it('Should play with single targets', function() {
+  it('Should play with single targets', () => {
     const tardigrades = new Tardigrades();
     const fish = new Fish();
     player.playedCards.push(tardigrades, fish);
@@ -50,7 +50,7 @@ describe('EcologyResearch', function() {
     expect(fish.resourceCount).to.eq(1);
   });
 
-  it('Should play with multiple targets', function() {
+  it('Should play with multiple targets', () => {
     const tardigrades = new Tardigrades();
     const ants = new Ants();
     player.playedCards.push(tardigrades, ants);

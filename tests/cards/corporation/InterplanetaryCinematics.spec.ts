@@ -5,21 +5,21 @@ import {InterplanetaryCinematics} from '../../../src/server/cards/corporation/In
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('InterplanetaryCinematics', function() {
+describe('InterplanetaryCinematics', () => {
   let card: InterplanetaryCinematics;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new InterplanetaryCinematics();
     [/* game */, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
     expect(player.steel).to.eq(20);
   });
 
-  it('Has onCardPlayed', function() {
+  it('Has onCardPlayed', () => {
     player.corporations.push(card);
     card.onCardPlayed(player, new Bushes());
     expect(player.megaCredits).to.eq(0);

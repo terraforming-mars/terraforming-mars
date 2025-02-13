@@ -5,8 +5,8 @@ import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
 
-describe('BusinessContacts', function() {
-  it('Should play', function() {
+describe('BusinessContacts', () => {
+  it('Should play', () => {
     const card = new BusinessContacts();
     const [game, player] = testGame(2);
 

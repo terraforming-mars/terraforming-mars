@@ -5,19 +5,19 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast, finishGeneration, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('PlantTax', function() {
+describe('PlantTax', () => {
   let card: PlantTax;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new PlantTax();
     [game, player, player2, player3] = testGame(3);
   });
 
-  it('play', function() {
+  it('play', () => {
     player.plants = 5;
     player2.plants = 15;
     player3.plants = 400;
@@ -31,7 +31,7 @@ describe('PlantTax', function() {
     expect(player3.plants).eq(398);
   });
 
-  it('generationEnd', function() {
+  it('generationEnd', () => {
     card.play(player);
     player.playedCards.push(card);
 

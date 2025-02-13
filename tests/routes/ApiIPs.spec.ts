@@ -4,7 +4,7 @@ import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {PlayerId, SpectatorId} from '../../src/common/Types';
 
-describe('ApiIPs', function() {
+describe('ApiIPs', () => {
   let res: MockResponse;
   let scaffolding: RouteTestScaffolding;
 

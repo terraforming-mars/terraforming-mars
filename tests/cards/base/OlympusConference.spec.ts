@@ -12,17 +12,17 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Leavitt} from '../../../src/server/cards/community/Leavitt';
 
-describe('OlympusConference', function() {
+describe('OlympusConference', () => {
   let card: OlympusConference;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new OlympusConference();
     [game, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.playedCards.push(card);
     card.play(player);
 
@@ -52,7 +52,7 @@ describe('OlympusConference', function() {
     expect(game.deferredActions).has.lengthOf(0);
   });
 
-  it('including this', function() {
+  it('including this', () => {
     player.cardsInHand = [card];
     player.playCard(card, undefined);
     expect(card.resourceCount).to.eq(0);
@@ -60,7 +60,7 @@ describe('OlympusConference', function() {
     expect(card.resourceCount).to.eq(1);
   });
 
-  it('Plays twice for Research', function() {
+  it('Plays twice for Research', () => {
     player.playedCards.push(card);
     card.onCardPlayed(player, new Research());
     expect(game.deferredActions).has.lengthOf(2);
@@ -81,7 +81,7 @@ describe('OlympusConference', function() {
     expect(game.deferredActions).has.lengthOf(0);
   });
 
-  it('Triggers before Mars University', function() {
+  it('Triggers before Mars University', () => {
     const marsUniversity = new MarsUniversity();
     const scienceTagCard = new AdaptationTechnology();
 

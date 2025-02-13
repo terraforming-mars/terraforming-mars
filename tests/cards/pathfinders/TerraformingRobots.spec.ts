@@ -9,7 +9,7 @@ import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCultu
 import {fakeCard} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 
-describe('TerraformingRobots', function() {
+describe('TerraformingRobots', () => {
   let card: TerraformingRobots;
   let player: TestPlayer;
 
@@ -17,7 +17,7 @@ describe('TerraformingRobots', function() {
   let floater2: IProjectCard;
   let other: IProjectCard;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new TerraformingRobots();
     [/* game */, player] = testGame(1);
     floater1 = new TitanShuttles();
@@ -26,7 +26,7 @@ describe('TerraformingRobots', function() {
     player.playedCards = [floater1, floater2, other];
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.megaCredits = card.cost;
     player.tagsForTest = {science: 3};
     expect(player.canPlay(card)).is.false;

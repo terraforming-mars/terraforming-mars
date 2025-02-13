@@ -7,18 +7,18 @@ import {Resource} from '../../../src/common/Resource';
 import {runAllActions, cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('EnergyTapping', function() {
+describe('EnergyTapping', () => {
   let card: EnergyTapping;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new EnergyTapping();
     [game, player, player2] = testGame(2);
   });
 
-  it('play - no targets', function() {
+  it('play - no targets', () => {
     player.playedCards.push(card, card);
     expect(card.canPlay(player)).is.true;
 
@@ -35,7 +35,7 @@ describe('EnergyTapping', function() {
     expect(player2.production.energy).to.eq(0);
   });
 
-  it('play - auto select if single target', function() {
+  it('play - auto select if single target', () => {
     player2.production.override({energy: 1});
 
     card.play(player);
@@ -46,7 +46,7 @@ describe('EnergyTapping', function() {
     expect(player2.production.energy).to.eq(0);
   });
 
-  it('play - multiple targets', function() {
+  it('play - multiple targets', () => {
     player.production.add(Resource.ENERGY, 2);
     player2.production.add(Resource.ENERGY, 3);
 
@@ -62,7 +62,7 @@ describe('EnergyTapping', function() {
     expect(player2.production.energy).to.eq(2);
   });
 
-  it('Playable in solo mode', function() {
+  it('Playable in solo mode', () => {
     [game, player] = testGame(1);
     card.play(player);
 

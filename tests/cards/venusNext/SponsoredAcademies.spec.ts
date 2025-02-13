@@ -13,7 +13,7 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
-describe('SponsoredAcademies', function() {
+describe('SponsoredAcademies', () => {
   let card: SponsoredAcademies;
   let game: IGame;
   let player: TestPlayer;
@@ -29,7 +29,7 @@ describe('SponsoredAcademies', function() {
     housePrinting = new HousePrinting();
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.cardsInHand.push(housePrinting, tardigrades);
     expect(card.canPlay(player)).is.true;
 
@@ -45,7 +45,7 @@ describe('SponsoredAcademies', function() {
     expect(player2.cardsInHand).has.lengthOf(1);
   });
 
-  it('triggers in right order', function() {
+  it('triggers in right order', () => {
     const [game, player, player2, player3, player4] = testGame(4);
 
     player.cardsInHand.push(card, new HousePrinting(), new Tardigrades());

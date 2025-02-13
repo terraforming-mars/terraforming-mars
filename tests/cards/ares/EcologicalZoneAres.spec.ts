@@ -8,17 +8,17 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('EcologicalZoneAres', function() {
+describe('EcologicalZoneAres', () => {
   let card: EcologicalZoneAres;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new EcologicalZoneAres();
     [game, player] = testGame(2, {aresExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     expect(card.canPlay(player)).is.false;
     const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
     game.addGreenery(player, landSpace);

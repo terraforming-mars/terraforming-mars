@@ -10,16 +10,16 @@ import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('ImportedHydrogen', function() {
+describe('ImportedHydrogen', () => {
   let card: ImportedHydrogen;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ImportedHydrogen();
     [/* game */, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const pets = new Pets();
     const tardigrades = new Tardigrades();
     const decomposers = new Decomposers();
@@ -43,7 +43,7 @@ describe('ImportedHydrogen', function() {
     expect(pets.resourceCount).to.eq(2);
   });
 
-  it('Should add plants directly if no microbe or animal cards available', function() {
+  it('Should add plants directly if no microbe or animal cards available', () => {
     expect(player.plants).to.eq(0);
     card.play(player);
     expect(player.plants).to.eq(3);

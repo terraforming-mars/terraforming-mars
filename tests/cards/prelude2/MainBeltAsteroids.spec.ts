@@ -14,17 +14,17 @@ describe('MainBeltAsteroids', () => {
   let game: IGame;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MainBeltAsteroids();
     [game, player] = testGame(2, {prelude2Expansion: true});
   });
 
-  it('Cannot play', function() {
+  it('Cannot play', () => {
     player.megaCredits = 4;
     expect(card.canPlay(player)).is.false;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.megaCredits = 5;
     expect(card.canPlay(player)).is.true;
 
@@ -41,7 +41,7 @@ describe('MainBeltAsteroids', () => {
     expect(card.getVictoryPoints(player)).to.eq(2);
   });
 
-  it('Should act automatically to itself', function() {
+  it('Should act automatically to itself', () => {
     player.megaCredits = 5;
 
     player.playCard(card);
@@ -60,7 +60,7 @@ describe('MainBeltAsteroids', () => {
     expect(card.getVictoryPoints(player)).to.eq(0);
   });
 
-  it('Should effect from other sources', function() {
+  it('Should effect from other sources', () => {
     player.megaCredits = 5;
 
     player.playCard(card);
@@ -90,7 +90,7 @@ describe('MainBeltAsteroids', () => {
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
-  it('Should act to other cards', function() {
+  it('Should act to other cards', () => {
     player.megaCredits = 5;
 
     player.playCard(card);

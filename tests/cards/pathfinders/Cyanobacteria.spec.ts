@@ -8,14 +8,14 @@ import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {TileType} from '../../../src/common/TileType';
 
-describe('Cyanobacteria', function() {
+describe('Cyanobacteria', () => {
   let card: Cyanobacteria;
   let player: TestPlayer;
   let ghgProducingBacteria: GHGProducingBacteria;
   let tardigrades: Tardigrades;
   let ants: Ants;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Cyanobacteria();
     [/* game */, player] = testGame(1);
     ghgProducingBacteria = new GHGProducingBacteria();
@@ -24,7 +24,7 @@ describe('Cyanobacteria', function() {
     maxOutOceans(player);
   });
 
-  it('play -- the simple part', function() {
+  it('play -- the simple part', () => {
     expect(player.game.getOxygenLevel()).eq(0);
 
     const options = card.play(player);
@@ -33,7 +33,7 @@ describe('Cyanobacteria', function() {
     expect(options).is.undefined;
   });
 
-  it('play, one microbe card', function() {
+  it('play, one microbe card', () => {
     player.playedCards = [ghgProducingBacteria];
     const options = card.play(player);
     expect(options).is.undefined;
@@ -42,7 +42,7 @@ describe('Cyanobacteria', function() {
     expect(ghgProducingBacteria.resourceCount).eq(9);
   });
 
-  it('play, one microbe card, include Wetlands', function() {
+  it('play, one microbe card, include Wetlands', () => {
     player.playedCards = [ghgProducingBacteria];
     player.game.simpleAddTile(
       player,
@@ -56,7 +56,7 @@ describe('Cyanobacteria', function() {
     expect(ghgProducingBacteria.resourceCount).eq(10);
   });
 
-  it('play, many microbe cards', function() {
+  it('play, many microbe cards', () => {
     player.playedCards = [ghgProducingBacteria, tardigrades, ants];
 
     cast(card.play(player), undefined);
@@ -74,7 +74,7 @@ describe('Cyanobacteria', function() {
     expect(ants.resourceCount).eq(5);
   });
 
-  it('play, many microbe cards, wrong input', function() {
+  it('play, many microbe cards, wrong input', () => {
     player.playedCards = [ghgProducingBacteria, tardigrades, ants];
 
     card.play(player);

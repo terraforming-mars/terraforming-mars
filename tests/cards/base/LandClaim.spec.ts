@@ -8,8 +8,8 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {AresHandler} from '../../../src/server/ares/AresHandler';
 
-describe('LandClaim', function() {
-  it('Should play', function() {
+describe('LandClaim', () => {
+  it('Should play', () => {
     const card = new LandClaim();
     const [/* game */, player] = testGame(2);
     const action = cast(card.play(player), SelectSpace);
@@ -19,7 +19,7 @@ describe('LandClaim', function() {
     expect(landSpace.tile).is.undefined;
   });
 
-  it('can claim south pole on hellas board', function() {
+  it('can claim south pole on hellas board', () => {
     const card = new LandClaim();
     const [/* game */, player] = testGame(2, {boardName: BoardName.HELLAS});
     const action = cast(card.play(player), SelectSpace);
@@ -27,7 +27,7 @@ describe('LandClaim', function() {
     expect(action.spaces.some((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.be.true;
   });
 
-  it('can claim hazard spaces', function() {
+  it('can claim hazard spaces', () => {
     const [game, player] = testGame(1, {aresExtension: true, pathfindersExpansion: true});
     const hazardSpace = game.board.spaces.filter(AresHandler.hasHazardTile)[0];
     const landClaim = new LandClaim();

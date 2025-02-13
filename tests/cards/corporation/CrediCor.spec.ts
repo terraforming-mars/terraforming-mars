@@ -9,16 +9,16 @@ import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
-describe('CrediCor', function() {
+describe('CrediCor', () => {
   let card: CrediCor;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CrediCor();
     [/* game */, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
     player.corporations.push(card);
     card.onStandardProject(player, new AsteroidStandardProject());
@@ -27,7 +27,7 @@ describe('CrediCor', function() {
     expect(player.megaCredits).to.eq(8);
   });
 
-  it('Runs onCardPlayed', function() {
+  it('Runs onCardPlayed', () => {
     player.corporations.push(card);
     expect(player.megaCredits).to.eq(0);
     card.onCardPlayed(player, new GiantIceAsteroid());

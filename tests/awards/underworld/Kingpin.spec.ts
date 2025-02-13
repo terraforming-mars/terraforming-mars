@@ -3,8 +3,8 @@ import {Kingpin} from '../../../src/server/awards/underworld/Kingpin';
 import {fakeCard} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('Kingpin', function() {
-  it('Correctly counts ocean tiles', function() {
+describe('Kingpin', () => {
+  it('Correctly counts ocean tiles', () => {
     const award = new Kingpin();
     const [/* game */, player/* , player2 */] = testGame(2, {underworldExpansion: true});
 

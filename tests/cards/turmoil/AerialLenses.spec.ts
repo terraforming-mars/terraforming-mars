@@ -7,18 +7,18 @@ import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestingUtils';
 
-describe('AerialLenses', function() {
+describe('AerialLenses', () => {
   let card: AerialLenses;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AerialLenses();
     [game, player, player2] = testGame(2, {turmoilExtension: true});
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
     expect(card.canPlay(player)).is.not.true;
 
     const kelvinists = game.turmoil!.getPartyByName(PartyName.KELVINISTS);
@@ -26,14 +26,14 @@ describe('AerialLenses', function() {
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Should play without plants', function() {
+  it('Should play without plants', () => {
     card.play(player);
     expect(player.production.heat).to.eq(2);
     const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
   });
 
-  it('Should play with plants', function() {
+  it('Should play with plants', () => {
     player2.plants = 5;
     card.play(player);
     expect(player.production.heat).to.eq(2);

@@ -6,28 +6,28 @@ import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, setTemperature} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('SubZeroSaltFish', function() {
+describe('SubZeroSaltFish', () => {
   let card: SubZeroSaltFish;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SubZeroSaltFish();
     [game, player, player2] = testGame(2);
   });
 
-  it('Can not play if no one has plant production', function() {
+  it('Can not play if no one has plant production', () => {
     setTemperature(game, 2);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can not play if temperature requirement not met', function() {
+  it('Can not play if temperature requirement not met', () => {
     player2.production.add(Resource.PLANTS, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     setTemperature(game, 2);
     player2.production.add(Resource.PLANTS, 1);
     expect(card.canPlay(player)).is.true;
@@ -37,7 +37,7 @@ describe('SubZeroSaltFish', function() {
     expect(card.getVictoryPoints(player)).to.eq(2);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     card.action(player);
     runAllActions(game);
     expect(card.resourceCount).to.eq(1);

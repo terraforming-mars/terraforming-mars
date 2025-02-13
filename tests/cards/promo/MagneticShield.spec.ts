@@ -4,20 +4,20 @@ import {MagneticShield} from '../../../src/server/cards/promo/MagneticShield';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('MagneticShield', function() {
+describe('MagneticShield', () => {
   let card: MagneticShield;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MagneticShield();
     [/* game */, player] = testGame(2);
   });
 
-  it('Can not play if not enough power tags available', function() {
+  it('Can not play if not enough power tags available', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.playedCards.push(new PowerPlant());
     player.playedCards.push(new PowerPlant());
     player.playedCards.push(new PowerPlant());

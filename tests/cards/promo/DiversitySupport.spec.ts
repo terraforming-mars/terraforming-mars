@@ -6,20 +6,20 @@ import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('DiversitySupport', function() {
+describe('DiversitySupport', () => {
   let card: DiversitySupport;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DiversitySupport();
     [/* game */, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
     // 3 non-standard resources
     const ants = new Ants();
     const fish = new Fish();

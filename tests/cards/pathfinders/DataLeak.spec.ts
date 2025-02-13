@@ -5,17 +5,17 @@ import {TestPlayer} from '../../TestPlayer';
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
 import {runAllActions, testGame} from '../../TestingUtils';
 
-describe('DataLeak', function() {
+describe('DataLeak', () => {
   let card: DataLeak;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DataLeak();
     [game, player] = testGame(1);
   });
 
-  it('play', function() {
+  it('play', () => {
     const lunarObservationPost = new LunarObservationPost();
     player.playedCards = [lunarObservationPost];
 

@@ -8,13 +8,13 @@ import {Resource} from '../../../src/common/Resource';
 import {CardType} from '../../../src/common/cards/CardType';
 import {CEOsFavoriteProject} from '../../../src/server/cards/base/CEOsFavoriteProject';
 
-describe('CommunicationCenter', function() {
+describe('CommunicationCenter', () => {
   let card: CommunicationCenter;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CommunicationCenter();
     [game, player, player2] = testGame(2, {pathfindersExpansion: true});
     player.playedCards = [card];

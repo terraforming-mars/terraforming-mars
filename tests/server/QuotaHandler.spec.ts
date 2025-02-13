@@ -6,7 +6,7 @@ import {GameLoader} from '../../src/server/database/GameLoader';
 import {FakeClock} from '../common/FakeClock';
 import {ISessionManager} from '../../src/server/server/auth/SessionManager';
 
-describe('QuotaHandler', function() {
+describe('QuotaHandler', () => {
   let ctx: Context;
   let fakeClock: FakeClock;
 

@@ -6,12 +6,12 @@ import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('TradeAdvance', function() {
+describe('TradeAdvance', () => {
   let card: TradeAdvance;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new TradeAdvance();
     [game, player] = testGame(2, {
       coloniesExtension: true,
@@ -19,7 +19,7 @@ describe('TradeAdvance', function() {
     });
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
 
     runAllActions(player.game);

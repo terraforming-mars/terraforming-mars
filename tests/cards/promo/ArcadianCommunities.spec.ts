@@ -9,7 +9,7 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {IGame} from '../../../src/server/IGame';
 
-describe('ArcadianCommunities', function() {
+describe('ArcadianCommunities', () => {
   let card: ArcadianCommunities;
   let player: TestPlayer;
   let game: IGame;

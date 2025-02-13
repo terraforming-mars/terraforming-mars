@@ -8,17 +8,17 @@ import {addOcean, cast} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
 
-describe('DesperateMeasures', function() {
+describe('DesperateMeasures', () => {
   let card: DesperateMeasures;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DesperateMeasures();
     [game, player] = testGame(2, {aresExtension: true, aresHazards: true});
   });
 
-  it('play on top of dust storm', function() {
+  it('play on top of dust storm', () => {
     const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
 
@@ -30,7 +30,7 @@ describe('DesperateMeasures', function() {
     expect(game.getOxygenLevel()).eq(1);
   });
 
-  it('play on top of erosion tile', function() {
+  it('play on top of erosion tile', () => {
     // 3 oceans brings out the erosion tiles
     addOcean(player);
     addOcean(player);
@@ -48,7 +48,7 @@ describe('DesperateMeasures', function() {
     expect(game.getTemperature()).eq(priorTemp + 2);
   });
 
-  it('hazard tile with player marker cannot be played on', function() {
+  it('hazard tile with player marker cannot be played on', () => {
     const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
     player.megaCredits = 8;
@@ -59,7 +59,7 @@ describe('DesperateMeasures', function() {
     expect(game.board.getAvailableSpacesOnLand(player).map((s) => s.id)).not.contains(protectedDustStorm.id);
   });
 
-  it('hazard tile with player marker is not removed after placing the sixth ocean', function() {
+  it('hazard tile with player marker is not removed after placing the sixth ocean', () => {
     const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
     cast(card.play(player), SelectSpace).cb(protectedDustStorm);

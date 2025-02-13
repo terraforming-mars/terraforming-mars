@@ -4,8 +4,8 @@ import {GlobalDustStorm} from '../../src/server/turmoil/globalEvents/GlobalDustS
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('GlobalDustStorm', function() {
-  it('resolve play', function() {
+describe('GlobalDustStorm', () => {
+  it('resolve play', () => {
     const card = new GlobalDustStorm();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

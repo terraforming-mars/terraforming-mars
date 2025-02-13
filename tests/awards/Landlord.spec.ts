@@ -41,7 +41,7 @@ describe('Landlord', () => {
     expect(award.getScore(player)).to.eq(3);
   });
 
-  it('Exclude Landclaimed Ares hazard tile from land-based award', function() {
+  it('Exclude Landclaimed Ares hazard tile from land-based award', () => {
     const [game, player/* , player2 */] = testGame(2, {aresExtension: true});
 
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];

@@ -10,34 +10,34 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('Vitor', function() {
+describe('Vitor', () => {
   let card: Vitor;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Vitor();
     [game, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('Has initial action', function() {
+  it('Has initial action', () => {
     const action = cast(card.initialAction(player), OrOptions);
     action.options[0].cb();
     expect(game.hasBeenFunded(game.awards[0])).is.true;
   });
 
-  it('No initial action for solo games', function() {
+  it('No initial action for solo games', () => {
     testGame(1);
     const action = player.deferInitialAction(card);
     cast(action, undefined);
   });
 
-  it('Give megacredits when card played', function() {
+  it('Give megacredits when card played', () => {
     player.corporations.push(card);
 
     // Dust Seals has victory points

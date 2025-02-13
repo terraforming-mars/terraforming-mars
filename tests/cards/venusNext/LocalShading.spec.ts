@@ -5,20 +5,20 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {testGame} from '../../TestGame';
 import {cast, churn} from '../../TestingUtils';
 
-describe('LocalShading', function() {
+describe('LocalShading', () => {
   let card: LocalShading;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new LocalShading();
     [/* game */, player] = testGame(1);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.playedCards.push(card);
     expect(card.canAct(player)).is.true;
     expect(churn(card.action(player), player)).is.undefined;

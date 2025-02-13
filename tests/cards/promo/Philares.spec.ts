@@ -140,7 +140,7 @@ describe('Philares', () => {
     ).to.throw('Select 2 resource(s)');
   });
 
-  it('Should take initial action', function() {
+  it('Should take initial action', () => {
     philaresPlayer.deferInitialAction(card);
     runAllActions(game);
 
@@ -149,7 +149,7 @@ describe('Philares', () => {
     expect(philaresPlayer.getTerraformRating()).to.eq(21);
   });
 
-  it('Can place final greenery if gains enough plants from earlier players placing adjacent greeneries', function() {
+  it('Can place final greenery if gains enough plants from earlier players placing adjacent greeneries', () => {
     game.addGreenery(philaresPlayer, space);
 
     // Max out all global parameters

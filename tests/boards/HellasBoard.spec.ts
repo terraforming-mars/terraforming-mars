@@ -13,17 +13,17 @@ import {DomedCrater} from '../../src/server/cards/base/DomedCrater';
 import {Resource} from '../../src/common/Resource';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 
-describe('HellasBoard', function() {
+describe('HellasBoard', () => {
   let board: HellasBoard;
   let game: IGame;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     [game, player/* , player2 */] = testGame(2, {boardName: BoardName.HELLAS, aresExtension: true});
     board = cast(game.board, HellasBoard);
   });
 
-  it('sanity test', function() {
+  it('sanity test', () => {
     const board = HellasBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     expect(board.spaces).to.deep.eq([
       {'id': '01', 'spaceType': 'colony', 'x': -1, 'y': -1, 'bonus': []},

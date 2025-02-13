@@ -10,14 +10,14 @@ import {addCity} from '../../TestingUtils';
 import {PharmacyUnion} from '../../../src/server/cards/promo/PharmacyUnion';
 import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCulture';
 
-describe('Hospitals', function() {
+describe('Hospitals', () => {
   let card: Hospitals;
   let player: TestPlayer;
   let player2: TestPlayer;
   let pharmacy: PharmacyUnion;
   let other: IProjectCard;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Hospitals();
     pharmacy = new PharmacyUnion();
     other = new MartianCulture();
@@ -33,7 +33,7 @@ describe('Hospitals', function() {
     expect(card.resourceCount).to.eq(3);
   });
 
-  it('Remove resource - this card', function() {
+  it('Remove resource - this card', () => {
     addCity(player);
     addCity(player);
     addCity(player);
@@ -50,7 +50,7 @@ describe('Hospitals', function() {
     expect(player.stock.megacredits).to.eq(6);
   });
 
-  it('act - two cards with diseases - select 1st (Pharmacy)', function() {
+  it('act - two cards with diseases - select 1st (Pharmacy)', () => {
     player.corporations.push(pharmacy);
     player.playedCards.push(card, other);
     addCity(player);
@@ -67,7 +67,7 @@ describe('Hospitals', function() {
     expect(card.resourceCount).eq(2);
   });
 
-  it('act - two cards with 2 diseases - select 2nd (Hospitals)', function() {
+  it('act - two cards with 2 diseases - select 2nd (Hospitals)', () => {
     player.corporations.push(pharmacy);
     player.playedCards.push(card);
     addCity(player);

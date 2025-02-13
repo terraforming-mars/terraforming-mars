@@ -4,8 +4,8 @@ import {Pandemic} from '../../src/server/turmoil/globalEvents/Pandemic';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('Pandemic', function() {
-  it('resolve play', function() {
+describe('Pandemic', () => {
+  it('resolve play', () => {
     const card = new Pandemic();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

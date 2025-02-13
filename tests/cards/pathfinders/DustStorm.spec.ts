@@ -3,18 +3,18 @@ import {DustStorm} from '../../../src/server/cards/pathfinders/DustStorm';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestingUtils';
 
-describe('DustStorm', function() {
+describe('DustStorm', () => {
   let card: DustStorm;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DustStorm();
     [/* game */, player, player2, player3] = testGame(3);
   });
 
-  it('play', function() {
+  it('play', () => {
     expect(player.getTerraformRating()).eq(20);
     expect(player.game.getTemperature()).eq(-30);
 

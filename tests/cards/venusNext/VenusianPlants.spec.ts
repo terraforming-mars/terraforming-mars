@@ -8,22 +8,22 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('VenusianPlants', function() {
+describe('VenusianPlants', () => {
   let card: VenusianPlants;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new VenusianPlants();
     [game, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     setVenusScaleLevel(game, 14);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play - multiple targets', function() {
+  it('Should play - multiple targets', () => {
     setVenusScaleLevel(game, 16);
     expect(card.canPlay(player)).is.true;
 
@@ -38,7 +38,7 @@ describe('VenusianPlants', function() {
     expect(game.getVenusScaleLevel()).to.eq(18);
   });
 
-  it('Should play - single target', function() {
+  it('Should play - single target', () => {
     const card2 = new Thermophiles();
     player.playedCards.push(card2);
     setVenusScaleLevel(game, 16);

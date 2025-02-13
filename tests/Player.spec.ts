@@ -36,13 +36,13 @@ import {Payment} from '../src/common/inputs/Payment';
 import {PhysicsComplex} from '../src/server/cards/base/PhysicsComplex';
 import {GlobalParameter} from '../src/common/GlobalParameter';
 
-describe('Player', function() {
-  it('should initialize with right defaults', function() {
+describe('Player', () => {
+  it('should initialize with right defaults', () => {
     const player = new Player('name', 'blue', false, 0, 'p-blue');
     expect(player.corporations).is.empty;
   });
 
-  it('Should throw error if nothing to process', function() {
+  it('Should throw error if nothing to process', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
     Game.newInstance('gameid', [player], player);
     (player as any).setWaitingFor(undefined, undefined);
@@ -50,7 +50,7 @@ describe('Player', function() {
     expect(() => player.process({type: 'option'})).to.throw('Not waiting for anything');
   });
 
-  it('Should run select player for PowerSupplyConsortium', function() {
+  it('Should run select player for PowerSupplyConsortium', () => {
     const card = new PowerSupplyConsortium();
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
     const player2 = new Player('red', 'red', false, 0, 'p-red');
@@ -66,7 +66,7 @@ describe('Player', function() {
     expect(player.production.energy).to.eq(1);
   });
 
-  it('Should error with input for run select player for PowerSupplyConsortium', function() {
+  it('Should error with input for run select player for PowerSupplyConsortium', () => {
     const card = new PowerSupplyConsortium();
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
     const player2 = new Player('red', 'red', false, 0, 'p-red');
@@ -87,7 +87,7 @@ describe('Player', function() {
     expect(() => player.process({type: 'player', player: 'yellow'})).to.throw(/Player not available/);
   });
 
-  it('Should run select amount for Insulation', function() {
+  it('Should run select amount for Insulation', () => {
     const card = new Insulation();
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
     const redPlayer = new Player('red', 'red', false, 0, 'p-red');
@@ -105,7 +105,7 @@ describe('Player', function() {
     expect(player.production.megacredits).to.eq(1);
     cast(player.getWaitingFor(), undefined);
   });
-  it('Runs SaturnSystems when other player plays card', function() {
+  it('Runs SaturnSystems when other player plays card', () => {
     const player1 = new Player('blue', 'blue', false, 0, 'p-blue');
     const player2 = new Player('red', 'red', false, 0, 'p-red');
     Game.newInstance('gto', [player1, player2], player1);
@@ -136,7 +136,7 @@ describe('Player', function() {
     player.process({type: 'option'});
     expect(player.getWaitingFor()).to.be.undefined;
   });
-  it('Omits buffer gas for non solo games', function() {
+  it('Omits buffer gas for non solo games', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
     const player2= new Player('red', 'red', false, 0, 'p-red');
     Game.newInstance('gameid', [player, player2], player);
@@ -144,7 +144,7 @@ describe('Player', function() {
     const bufferGas = option.cards.find((card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT);
     expect(bufferGas).to.be.undefined;
   });
-  it('Omit buffer gas for solo games without 63 TR', function() {
+  it('Omit buffer gas for solo games without 63 TR', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
     Game.newInstance('gameid', [player], player);
     const option = player.getStandardProjectOption();
@@ -152,7 +152,7 @@ describe('Player', function() {
     expect(bufferGas).to.be.undefined;
   });
 
-  it('Include buffer gas for solo games with 63 TR', function() {
+  it('Include buffer gas for solo games with 63 TR', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
     Game.newInstance('gameid', [player], player, {soloTR: true});
     const option = player.getStandardProjectOption();
@@ -254,7 +254,7 @@ describe('Player', function() {
     expect(newPlayer.color).eq('purple');
     expect(newPlayer.colonies.tradesThisGeneration).eq(100);
     expect(newPlayer.canUseCorruptionAsMegacredits).eq(true);
-    it('pulls self replicating robots target cards', function() {
+    it('pulls self replicating robots target cards', () => {
       const player = new Player('blue', 'blue', false, 0, 'p-blue');
       expect(player.getSelfReplicatingRobotsTargetCards()).is.empty;
       const srr = new SelfReplicatingRobots();

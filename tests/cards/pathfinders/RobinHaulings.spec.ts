@@ -7,13 +7,13 @@ import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
-describe('RobinHaulings', function() {
+describe('RobinHaulings', () => {
   let card: RobinHaulings;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new RobinHaulings();
     [game, player, player2] = testGame(2);
     player.corporations.push(card);

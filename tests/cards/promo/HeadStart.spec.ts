@@ -13,13 +13,13 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Donation} from '../../../src/server/cards/prelude/Donation';
 
-describe('HeadStart', function() {
+describe('HeadStart', () => {
   let headStart: HeadStart;
   let game: IGame;
   let player: TestPlayer;
   let player2: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     headStart = new HeadStart();
     [game, player, player2] = testGame(2, {preludeExtension: true});
   });

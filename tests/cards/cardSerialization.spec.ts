@@ -5,8 +5,8 @@ import {deserializeProjectCard, serializeProjectCard} from '../../src/server/car
 import {cast} from '../TestingUtils';
 import {Asimov} from '../../src/server/cards/ceos/Asimov';
 
-describe('CardSerialization', function() {
-  it('undefiend clone tags serialize and deserialize', function() {
+describe('CardSerialization', () => {
+  it('undefiend clone tags serialize and deserialize', () => {
     const card = new LobbyHalls();
     expect(card.tags).deep.eq([Tag.CLONE, Tag.BUILDING]);
 
@@ -19,7 +19,7 @@ describe('CardSerialization', function() {
     expect(lobbyHalls.tags).deep.eq([Tag.CLONE, Tag.BUILDING]);
   });
 
-  it('defined clone tags serialize and deserialize', function() {
+  it('defined clone tags serialize and deserialize', () => {
     const card = new LobbyHalls();
     card.cloneTag = Tag.SCIENCE;
     const serializedCard = serializeProjectCard(card);

@@ -8,7 +8,7 @@ import {TileType} from '../../../src/common/TileType';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
 import {SpaceName} from '../../../src/server/SpaceName';
 
-describe('SeismicPredictions', function() {
+describe('SeismicPredictions', () => {
   let card: SeismicPredictions;
   let player: TestPlayer;
   let game: IGame;

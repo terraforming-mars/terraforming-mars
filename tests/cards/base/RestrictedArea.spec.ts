@@ -7,22 +7,22 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
 
-describe('RestrictedArea', function() {
+describe('RestrictedArea', () => {
   let card: RestrictedArea;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new RestrictedArea();
     [game, player] = testGame(2);
   });
 
-  it('Can not act if not enough MC', function() {
+  it('Can not act if not enough MC', () => {
     player.megaCredits = 1;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
@@ -33,7 +33,7 @@ describe('RestrictedArea', function() {
     expect(space.adjacency?.bonus).eq(undefined);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.megaCredits = 2;
     expect(card.canAct(player)).is.true;
     card.action(player);

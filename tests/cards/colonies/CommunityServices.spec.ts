@@ -6,8 +6,8 @@ import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCo
 import {SeptumTribus} from '../../../src/server/cards/turmoil/SeptumTribus';
 import {cast, testGame} from '../../TestingUtils';
 
-describe('CommunityServices', function() {
-  it('Should play', function() {
+describe('CommunityServices', () => {
+  it('Should play', () => {
     const card = new CommunityServices();
     const corp = new Aridor();
     const prelude = new EccentricSponsor();
@@ -20,7 +20,7 @@ describe('CommunityServices', function() {
     expect(player.production.megacredits).to.eq(4);
   });
 
-  it('Wild Tags', function() {
+  it('Wild Tags', () => {
     const card = new CommunityServices();
     const septumTribus = new SeptumTribus();
     const prelude = new EccentricSponsor();

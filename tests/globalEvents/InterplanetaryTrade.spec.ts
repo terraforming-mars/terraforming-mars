@@ -4,8 +4,8 @@ import {InterplanetaryTrade} from '../../src/server/turmoil/globalEvents/Interpl
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('InterplanetaryTrade', function() {
-  it('resolve play', function() {
+describe('InterplanetaryTrade', () => {
+  it('resolve play', () => {
     const card = new InterplanetaryTrade();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

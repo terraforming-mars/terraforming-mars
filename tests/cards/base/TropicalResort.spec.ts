@@ -5,8 +5,8 @@ import {Resource} from '../../../src/common/Resource';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('TropicalResort', function() {
-  it('Should play', function() {
+describe('TropicalResort', () => {
+  it('Should play', () => {
     const card = new TropicalResort();
     const [/* game */, player] = testGame(1);
     player.production.add(Resource.HEAT, 2);

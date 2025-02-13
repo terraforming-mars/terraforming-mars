@@ -21,7 +21,7 @@ let game: IGame;
 let player: TestPlayer;
 let player2: TestPlayer;
 
-describe('Aridor', function() {
+describe('Aridor', () => {
   beforeEach(() => {
     card = new Aridor();
     // 2-player so as to not bother with pre-game action that drops a colony.
@@ -29,7 +29,7 @@ describe('Aridor', function() {
     player.corporations.push(card);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
 
     // Predators has an Animal tag

@@ -9,7 +9,7 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {Shara} from '../../../src/server/cards/ceos/Shara';
 
 
-describe('Shara', function() {
+describe('Shara', () => {
   let card: Shara;
   let player: TestPlayer;
   let game: IGame;
@@ -19,11 +19,11 @@ describe('Shara', function() {
     [game, player] = testGame(2, {ceoExtension: true, pathfindersExpansion: true});
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     expect(card.canAct(player)).is.true;
   });
 
-  it('Activate for Mars on Generation 6', function() {
+  it('Activate for Mars on Generation 6', () => {
     player.playedCards.push(card);
     player.megaCredits = 12;
     game.generation = 6;

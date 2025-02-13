@@ -4,8 +4,8 @@ import {ImprovedEnergyTemplates} from '../../src/server/turmoil/globalEvents/Imp
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('ImprovedEnergyTemplates', function() {
-  it('resolve play', function() {
+describe('ImprovedEnergyTemplates', () => {
+  it('resolve play', () => {
     const card = new ImprovedEnergyTemplates();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

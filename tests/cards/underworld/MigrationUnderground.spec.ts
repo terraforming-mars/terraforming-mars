@@ -6,7 +6,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
 
-describe('MigrationUnderground', function() {
+describe('MigrationUnderground', () => {
   let card: MigrationUnderground;
   let player: TestPlayer;
   let game: IGame;

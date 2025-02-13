@@ -55,6 +55,14 @@ export class Executor implements BehaviorExecutor {
       }
     }
 
+    if (behavior.drawCard !== undefined) {
+      const drawCard = behavior.drawCard;
+      const count = typeof(drawCard) === 'number' ? drawCard : ctx.count(drawCard.count);
+      if (game.projectDeck.canDraw(count) === false) {
+        return false;
+      }
+    }
+
     if (behavior.global !== undefined) {
       const g = behavior.global;
       if (g.temperature !== undefined && game.getTemperature() >= MAX_TEMPERATURE) {

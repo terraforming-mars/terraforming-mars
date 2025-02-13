@@ -4,8 +4,8 @@ import {AsteroidMining} from '../../src/server/turmoil/globalEvents/AsteroidMini
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('AsteroidMining', function() {
-  it('resolve play', function() {
+describe('AsteroidMining', () => {
+  it('resolve play', () => {
     const card = new AsteroidMining();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

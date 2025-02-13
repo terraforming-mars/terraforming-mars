@@ -9,7 +9,7 @@ import {use} from 'chai';
 import chaiAsPromised = require('chai-as-promised');
 use(chaiAsPromised);
 
-describe('ApiGameLogs', function() {
+describe('ApiGameLogs', () => {
   let scaffolding: RouteTestScaffolding;
   let res: MockResponse;
 

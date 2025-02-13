@@ -11,13 +11,13 @@ import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingB
 import {assertPlaceOcean} from '../../assertions';
 import {Whales} from '../../../src/server/cards/underworld/Whales';
 
-describe('SecretLabs', function() {
+describe('SecretLabs', () => {
   let card: SecretLabs;
   let player: TestPlayer;
   let microbeCard: IProjectCard;
   let floaterCard: IProjectCard;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SecretLabs();
     [/* game */, player] = testGame(1);
     microbeCard = new GHGProducingBacteria();
@@ -25,7 +25,7 @@ describe('SecretLabs', function() {
     player.playedCards = [microbeCard, floaterCard];
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.megaCredits = card.cost;
     player.tagsForTest = {jovian: 1, science: 1};
     expect(player.canPlay(card)).is.true;
@@ -37,7 +37,7 @@ describe('SecretLabs', function() {
     expect(player.canPlay(card)).is.false;
   });
 
-  it('play - place an ocean tile', function() {
+  it('play - place an ocean tile', () => {
     const orOptions = cast(card.play(player), OrOptions);
     const placeOcean = orOptions.options[0];
 
@@ -50,7 +50,7 @@ describe('SecretLabs', function() {
     expect(microbeCard.resourceCount).eq(2);
   });
 
-  it('play - raise temperature', function() {
+  it('play - raise temperature', () => {
     const orOptions = cast(card.play(player), OrOptions);
     const raiseTemperature = orOptions.options[1];
 
@@ -63,7 +63,7 @@ describe('SecretLabs', function() {
     expect(player.stock.asUnits()).deep.eq(Units.of({plants: 3}));
   });
 
-  it('play - raise oxygen', function() {
+  it('play - raise oxygen', () => {
     const orOptions = cast(card.play(player), OrOptions);
     const raiseOxygen = orOptions.options[2];
 
@@ -76,7 +76,7 @@ describe('SecretLabs', function() {
     expect(floaterCard.resourceCount).eq(2);
   });
 
-  it('play - available if oceans are maxed out', function() {
+  it('play - available if oceans are maxed out', () => {
     player.megaCredits = card.cost;
     player.tagsForTest = {jovian: 1, science: 1};
     maxOutOceans(player);

@@ -21,13 +21,13 @@ import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
 
-describe('ProjectWorkshop', function() {
+describe('ProjectWorkshop', () => {
   let card: ProjectWorkshop;
   let player: TestPlayer;
   let game: IGame;
   let advancedAlloys : AdvancedAlloys;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ProjectWorkshop();
     advancedAlloys = new AdvancedAlloys();
     [game, player] = testGame(1);
@@ -36,7 +36,7 @@ describe('ProjectWorkshop', function() {
     player.corporations.push(card);
   });
 
-  it('Starts with correct resources', function() {
+  it('Starts with correct resources', () => {
     expect(player.steel).to.eq(1);
     expect(player.titanium).to.eq(1);
 
@@ -46,12 +46,12 @@ describe('ProjectWorkshop', function() {
     expect(player.cardsInHand[0].type).to.eq(CardType.ACTIVE);
   });
 
-  it('Can not act', function() {
+  it('Can not act', () => {
     player.megaCredits = 2;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Can spend 3 M€ to draw a blue card', function() {
+  it('Can spend 3 M€ to draw a blue card', () => {
     player.megaCredits = 3;
 
     expect(card.canAct(player)).is.true;
@@ -61,7 +61,7 @@ describe('ProjectWorkshop', function() {
     expect(player.cardsInHand[0].type).to.eq(CardType.ACTIVE);
   });
 
-  it('Can flip a played blue card and remove its ongoing effects', function() {
+  it('Can flip a played blue card and remove its ongoing effects', () => {
     player.playedCards.push(advancedAlloys);
     advancedAlloys.play(player);
     player.megaCredits = 0;
@@ -77,7 +77,7 @@ describe('ProjectWorkshop', function() {
     expect(player.getTitaniumValue()).to.eq(3);
   });
 
-  it('Converts VP to TR correctly', function() {
+  it('Converts VP to TR correctly', () => {
     const smallAnimals = new SmallAnimals();
     player.addResourceTo(smallAnimals, 5);
 
@@ -99,7 +99,7 @@ describe('ProjectWorkshop', function() {
     expect(player.cardsInHand).has.lengthOf(4);
   });
 
-  it('Can select option if able to do both actions', function() {
+  it('Can select option if able to do both actions', () => {
     player.playedCards.push(advancedAlloys);
     player.megaCredits = 3;
     // That the response is OrOptions is the test.
@@ -147,7 +147,7 @@ describe('ProjectWorkshop', function() {
 
     player.playedCards.push(smallAnimals, extremophiles, birds);
 
-    const selectCard = function() {
+    const selectCard = () => {
       const orOptions = cast(card.action(player), OrOptions);
       return cast(orOptions.options[1].cb(), SelectCard);
     };
@@ -174,7 +174,7 @@ describe('ProjectWorkshop', function() {
     expect(player.megaCredits).eq(2); // Spent 3MC for the reds tax.
   });
 
-  it('Project Workshop + Helion', function() {
+  it('Project Workshop + Helion', () => {
     const helion = new Helion();
     helion.play(player);
     player.corporations.push(helion);

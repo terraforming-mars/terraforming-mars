@@ -14,19 +14,19 @@ import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {toName} from '../../../src/common/utils/utils';
 
-describe('Ambient', function() {
+describe('Ambient', () => {
   let card: Ambient;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Ambient();
     [game, player, player2] = testGame(2);
     player.corporations.push(card);
   });
 
-  it('initialAction', function() {
+  it('initialAction', () => {
     expect(game.getVenusScaleLevel()).eq(0);
     expect(player.getTerraformRating()).eq(20);
 
@@ -37,7 +37,7 @@ describe('Ambient', function() {
     expect(player.getTerraformRating()).eq(22);
   });
 
-  it('onCardPlayed', function() {
+  it('onCardPlayed', () => {
     expect(player.production.heat).eq(0);
 
     card.onCardPlayed(player, fakeCard({tags: []}));
@@ -55,7 +55,7 @@ describe('Ambient', function() {
     expect(player2.production.heat).eq(0);
   });
 
-  it('canAct', function() {
+  it('canAct', () => {
     player.heat = 7;
     setTemperature(game, MAX_TEMPERATURE);
 
@@ -88,7 +88,7 @@ describe('Ambient', function() {
     player.heat = 16;
     setTemperature(game, MAX_TEMPERATURE);
 
-    const getBlueActions = function() {
+    const getBlueActions = () => {
       const orOptions = cast(player.getActions(), OrOptions);
       const option = orOptions.options.find((o) => o.title === 'Perform an action from a played card');
       return option === undefined ? undefined : cast(option, SelectCard);

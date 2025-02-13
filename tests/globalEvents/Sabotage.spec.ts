@@ -4,8 +4,8 @@ import {Sabotage} from '../../src/server/turmoil/globalEvents/Sabotage';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('Sabotage', function() {
-  it('resolve play', function() {
+describe('Sabotage', () => {
+  it('resolve play', () => {
     const card = new Sabotage();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

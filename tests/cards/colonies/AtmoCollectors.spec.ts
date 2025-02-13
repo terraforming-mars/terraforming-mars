@@ -7,21 +7,21 @@ import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {Units} from '../../../src/common/Units';
 
-describe('AtmoCollectors', function() {
+describe('AtmoCollectors', () => {
   let card: AtmoCollectors;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AtmoCollectors();
     [game, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.playedCards.push(card);
 
     card.action(player);

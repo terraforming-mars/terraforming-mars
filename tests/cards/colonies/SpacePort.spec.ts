@@ -7,11 +7,11 @@ import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 
-describe('SpacePort', function() {
+describe('SpacePort', () => {
   let card: SpacePort;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SpacePort();
     [/* game */, player] = testGame(2, {coloniesExtension: true, customColoniesList: [
       ColonyName.CERES,
@@ -22,17 +22,17 @@ describe('SpacePort', function() {
     ]});
   });
 
-  it('Can not play without colony', function() {
+  it('Can not play without colony', () => {
     player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can not play without energy production', function() {
+  it('Can not play without energy production', () => {
     player.game.colonies[0].colonies.push(player.id);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.production.add(Resource.ENERGY, 1);
     player.game.colonies[0].colonies.push(player.id);
     expect(card.canPlay(player)).is.true;

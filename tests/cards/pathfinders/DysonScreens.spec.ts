@@ -5,11 +5,11 @@ import {SpaceName} from '../../../src/server/SpaceName';
 import {Units} from '../../../src/common/Units';
 import {testGame} from '../../TestGame';
 
-describe('DysonScreens', function() {
+describe('DysonScreens', () => {
   let card: DysonScreens;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DysonScreens();
     [/* game */, player] = testGame(1, {pathfindersExpansion: true});
   });
@@ -28,7 +28,7 @@ describe('DysonScreens', function() {
     expect(player.production.asUnits()).deep.eq(Units.of({energy: 2, heat: 2}));
   });
 
-  it('canAct', function() {
+  it('canAct', () => {
     player.titanium = 1;
     expect(card.canAct(player)).is.false;
 
@@ -36,7 +36,7 @@ describe('DysonScreens', function() {
     expect(card.canAct(player)).is.true;
   });
 
-  it('action', function() {
+  it('action', () => {
     player.titanium = 3;
 
     card.action(player);

@@ -6,18 +6,18 @@ import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions, setTemperature} from '../../TestingUtils';
 
-describe('PrivateSecurity', function() {
+describe('PrivateSecurity', () => {
   let card: PrivateSecurity;
   let player: TestPlayer;
   let opponent1: TestPlayer;
   let opponent2: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new PrivateSecurity();
     [/* game */, player, opponent1, opponent2] = testGame(3, {pathfindersExpansion: true});
   });
 
-  it('protects against Fish', function() {
+  it('protects against Fish', () => {
     opponent1.production.override({plants: 2});
     opponent2.production.override({plants: 4});
 

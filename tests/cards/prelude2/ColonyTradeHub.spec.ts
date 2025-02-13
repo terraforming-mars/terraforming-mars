@@ -8,7 +8,7 @@ import {Ceres} from '../../../src/server/colonies/Ceres';
 import {Units} from '../../../src/common/Units';
 
 
-describe('ColonyTradeHub', function() {
+describe('ColonyTradeHub', () => {
   let card: ColonyTradeHub;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -34,7 +34,7 @@ describe('ColonyTradeHub', function() {
     {player: 1, colony: 1, expected: [2, 0]},
   ] as const;
   for (const run of onColonyAddedRuns) {
-    it('Gains 2 M€ when any colony is added building a colony ' + JSON.stringify(run), function() {
+    it('Gains 2 M€ when any colony is added building a colony ' + JSON.stringify(run), () => {
       const players = game.getPlayers();
       players[0].playedCards.push(card);
 

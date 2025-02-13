@@ -12,11 +12,11 @@ import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 import {SelectResource} from '../../../src/server/inputs/SelectResource';
 import {Units} from '../../../src/common/Units';
 
-describe('FloatingTradeHub', function() {
+describe('FloatingTradeHub', () => {
   let card: FloatingTradeHub;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new FloatingTradeHub();
     [/* game */, player] = testGame(2, {preludeExtension: true});
     player.playedCards.push(card);
@@ -42,7 +42,7 @@ describe('FloatingTradeHub', function() {
     expect(card.resourceCount).eq(2);
   });
 
-  it('Act - select resource', function() {
+  it('Act - select resource', () => {
     card.resourceCount = 5;
 
     const orOptions = cast(card.action(player), OrOptions);

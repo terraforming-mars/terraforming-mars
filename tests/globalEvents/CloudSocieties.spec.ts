@@ -4,8 +4,8 @@ import {CloudSocieties} from '../../src/server/turmoil/globalEvents/CloudSocieti
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('CloudSocieties', function() {
-  it('resolve play', function() {
+describe('CloudSocieties', () => {
+  it('resolve play', () => {
     const card = new CloudSocieties();
     const [game, player] = testGame(1, {turmoilExtension: true});
     const turmoil = game.turmoil!;

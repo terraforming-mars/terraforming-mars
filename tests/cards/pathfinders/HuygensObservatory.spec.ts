@@ -11,13 +11,13 @@ import {cast, runAllActions, toName} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 import {IColony} from '../../../src/server/colonies/IColony';
 
-describe('HuygensObservatory', function() {
+describe('HuygensObservatory', () => {
   let card: HuygensObservatory;
   let player: TestPlayer;
   let game: IGame;
   let ganymede: IColony;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new HuygensObservatory();
     // By choosing 2 players I don't have to pay attention to the first action which
     // removes a colony tile.
@@ -78,7 +78,7 @@ describe('HuygensObservatory', function() {
     expect(card.canPlay(player)).is.false;
   });
 
-  it('play, simple case (place colony, trade with it)', function() {
+  it('play, simple case (place colony, trade with it)', () => {
     expect(player.getTerraformRating()).eq(20);
     const action = card.play(player);
 
@@ -113,7 +113,7 @@ describe('HuygensObservatory', function() {
     expect(player.stock.asUnits()).deep.eq(Units.of({plants: 1}));
   });
 
-  it('play, place colony where you already have one', function() {
+  it('play, place colony where you already have one', () => {
     ganymede.addColony(player);
     expect(player.production.asUnits()).deep.eq(Units.of({plants: 1}));
     const action = card.play(player);
@@ -132,7 +132,7 @@ describe('HuygensObservatory', function() {
     expect(player.production.asUnits()).deep.eq(Units.of({plants: 2}));
   });
 
-  it('play, cannot place a colony', function() {
+  it('play, cannot place a colony', () => {
     player.game.colonies.forEach((c) => {
       c.colonies[0] = player.id;
       c.colonies[1] = player.id;
@@ -155,7 +155,7 @@ describe('HuygensObservatory', function() {
     expect(player.stock.asUnits()).deep.eq(Units.of({plants: 1}));
   });
 
-  it('play, only trade fleet is on a colony', function() {
+  it('play, only trade fleet is on a colony', () => {
     ganymede.trade(player);
     expect(ganymede.visitor).eq(player.id);
 
@@ -189,7 +189,7 @@ describe('HuygensObservatory', function() {
     expect(tradeDestination.title).eq('Select colony tile to trade with for free');
   });
 
-  it('play, trade fleet on colony or home', function() {
+  it('play, trade fleet on colony or home', () => {
     ganymede.trade(player);
     expect(ganymede.visitor).eq(player.id);
     player.colonies.increaseFleetSize();

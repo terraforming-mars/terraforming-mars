@@ -4,12 +4,12 @@ import {Fish} from '../../../src/server/cards/base/Fish';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, testGame} from '../../TestingUtils';
 
-describe('BreedingFarms', function() {
+describe('BreedingFarms', () => {
   let card: BreedingFarms;
   let player: TestPlayer;
   let fish: Fish;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new BreedingFarms();
     [/* game */, player] = testGame(1);
     player.playedCards.push(card);
@@ -17,7 +17,7 @@ describe('BreedingFarms', function() {
     player.popWaitingFor();
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.tagsForTest = {};
     expect(card.canPlay(player)).is.false;
 
@@ -31,7 +31,7 @@ describe('BreedingFarms', function() {
     expect(card.canPlay(player)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     expect(player.getTerraformRating()).eq(14);
     expect(player.game.getTemperature()).eq(-30);
 
@@ -41,7 +41,7 @@ describe('BreedingFarms', function() {
     expect(player.game.getTemperature()).eq(-28);
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     player.plants = 0;
     player.playedCards = [];
 
@@ -63,7 +63,7 @@ describe('BreedingFarms', function() {
     expect(card.canAct(player)).is.true;
   });
 
-  it('act', function() {
+  it('act', () => {
     player.plants = 1;
     fish.resourceCount = 0;
     player.playedCards = [fish];

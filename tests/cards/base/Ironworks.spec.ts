@@ -4,22 +4,22 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('Ironworks', function() {
+describe('Ironworks', () => {
   let card: Ironworks;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Ironworks();
     [game, player] = testGame(2);
   });
 
-  it('Can not act without enough energy', function() {
+  it('Can not act without enough energy', () => {
     player.energy = 3;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.energy = 4;
     expect(card.canAct(player)).is.true;
 

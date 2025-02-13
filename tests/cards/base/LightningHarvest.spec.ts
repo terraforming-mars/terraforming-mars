@@ -4,20 +4,20 @@ import {GeneRepair} from '../../../src/server/cards/base/GeneRepair';
 import {LightningHarvest} from '../../../src/server/cards/base/LightningHarvest';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('LightningHarvest', function() {
+describe('LightningHarvest', () => {
   let card: LightningHarvest;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new LightningHarvest();
     [/* game */, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.playedCards.push(new GeneRepair(), new GeneRepair(), new GeneRepair());
     expect(card.canPlay(player)).is.true;
 

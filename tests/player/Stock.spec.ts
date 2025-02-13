@@ -5,7 +5,7 @@ import {formatMessage, testGame} from '../TestingUtils';
 import {Units} from '../../src/common/Units';
 import {GlobalEventName} from '../../src/common/turmoil/globalEvents/GlobalEventName';
 
-describe('Stock', function() {
+describe('Stock', () => {
   it('has units', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
     const stock = player.stock;

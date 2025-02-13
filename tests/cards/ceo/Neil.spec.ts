@@ -9,7 +9,7 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {LTFPrivileges} from '../../../src/server/cards/moon/LTFPrivileges';
 import {ThoriumRush} from '../../../src/server/cards/moon/ThoriumRush';
 
-describe('Neil', function() {
+describe('Neil', () => {
   let card: Neil;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -22,11 +22,11 @@ describe('Neil', function() {
     moonData = MoonExpansion.moonData(game);
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     expect(card.canAct(player)).is.true;
   });
 
-  it('Gains 1 M€ when any player plays a Moon tag', function() {
+  it('Gains 1 M€ when any player plays a Moon tag', () => {
     player.playedCards.push(card);
 
     player.playCard(new LTFPrivileges());
@@ -36,7 +36,7 @@ describe('Neil', function() {
     expect(player.megaCredits).eq(2);
   });
 
-  it('Takes action: Gains M€ production equal to lowest Moon rate', function() {
+  it('Takes action: Gains M€ production equal to lowest Moon rate', () => {
     moonData.habitatRate = 5;
     moonData.logisticRate = 4;
     moonData.miningRate = 2;
@@ -45,7 +45,7 @@ describe('Neil', function() {
     expect(player.production.megacredits).eq(2);
   });
 
-  it('Takes action: Gains M€ production equal to lowest Moon rate, two rates the same', function() {
+  it('Takes action: Gains M€ production equal to lowest Moon rate, two rates the same', () => {
     moonData.habitatRate = 5;
     moonData.logisticRate = 3;
     moonData.miningRate = 3;
@@ -54,7 +54,7 @@ describe('Neil', function() {
     expect(player.production.megacredits).eq(3);
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     card.action(player);
     forceGenerationEnd(game);
     expect(card.isDisabled).is.true;

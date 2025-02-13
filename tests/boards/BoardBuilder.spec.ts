@@ -10,7 +10,7 @@ import {preservingShuffle} from '../../src/server/boards/BoardBuilder';
 import {AmazonisBoard} from '../../src/server/boards/AmazonisBoard';
 import {TestPlayer} from '../TestPlayer';
 
-describe('BoardBuilder', function() {
+describe('BoardBuilder', () => {
   const preservingRuns = [
     {array: [0, 1, 2, 3, 4], preservedIndexes: [1], expected: [1]},
     {array: [0, 1, 2, 3, 4], preservedIndexes: [1, 2, 3], expected: [1, 2, 3]},

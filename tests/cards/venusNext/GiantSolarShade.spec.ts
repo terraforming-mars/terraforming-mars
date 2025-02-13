@@ -8,7 +8,7 @@ import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, testGame} from '../../TestingUtils';
 
-describe('GiantSolarShade', function() {
+describe('GiantSolarShade', () => {
   let card: GiantSolarShade;
   let player: TestPlayer;
   let game: IGame;
@@ -18,13 +18,13 @@ describe('GiantSolarShade', function() {
     [game, player/* , player2 */] = testGame(2, {venusNextExtension: true, turmoilExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
     expect(game.getVenusScaleLevel()).to.eq(6);
     expect(player.getTerraformRating()).to.eq(23);
   });
 
-  it('Should play with Reds and Dirigibles', function() {
+  it('Should play with Reds and Dirigibles', () => {
     player.game.phase = Phase.ACTION;
     player.game.turmoil!.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(game.turmoil!, game);

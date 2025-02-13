@@ -8,12 +8,12 @@ import {cast, churn} from '../../TestingUtils';
 import {HAZARD_CONSTRAINTS} from '../../../src/common/ares/AresData';
 import {AresHandler} from '../../../src/server/ares/AresHandler';
 
-describe('ButterflyEffect', function() {
+describe('ButterflyEffect', () => {
   let card: ButterflyEffect;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ButterflyEffect();
     [game, player] = testGame(2, {
       aresExtension: true,
@@ -21,7 +21,7 @@ describe('ButterflyEffect', function() {
     });
   });
 
-  it('play', function() {
+  it('play', () => {
     const priorTerraformingRating = player.getTerraformRating();
 
     const input = cast(churn(card.play(player), player), ShiftAresGlobalParameters);

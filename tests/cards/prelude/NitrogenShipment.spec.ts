@@ -3,8 +3,8 @@ import {NitrogenShipment} from '../../../src/server/cards/prelude/NitrogenShipme
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('NitrogenShipment', function() {
-  it('Should play', function() {
+describe('NitrogenShipment', () => {
+  it('Should play', () => {
     const card = new NitrogenShipment();
     const [/* game */, player] = testGame(2);
 

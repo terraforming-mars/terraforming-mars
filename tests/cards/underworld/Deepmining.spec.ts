@@ -7,17 +7,17 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('Deepmining', function() {
+describe('Deepmining', () => {
   let card: Deepmining;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Deepmining();
     [game, player] = testGame(2, {underworldExpansion: true});
   });
 
-  it('Cannot play', function() {
+  it('Cannot play', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
@@ -26,7 +26,7 @@ describe('Deepmining', function() {
     {spaceBonus: SpaceBonus.TITANIUM, production: 'titanium'},
   ] as const;
   for (const run of playRuns) {
-    it('play ' + JSON.stringify(run), function() {
+    it('play ' + JSON.stringify(run), () => {
       for (const space of game.board.getAvailableSpacesOnLand(player)) {
         if (space.bonus.includes(run.spaceBonus)) {
           space.undergroundResources = 'card1';

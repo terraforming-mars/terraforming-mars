@@ -9,18 +9,18 @@ import {AresHandler} from '../../../src/server/ares/AresHandler';
 import {cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
-describe('RareEarthElements', function() {
+describe('RareEarthElements', () => {
   let card: RareEarthElements;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new RareEarthElements();
     [game, player, player2] = testGame(2);
   });
 
-  it('play', function() {
+  it('play', () => {
     const spaces = player.game.board.getAvailableSpacesOnLand(player);
 
     game.simpleAddTile(player, spaces[0], {tileType: TileType.COMMERCIAL_DISTRICT});

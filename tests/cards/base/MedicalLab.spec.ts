@@ -3,8 +3,8 @@ import {Capital} from '../../../src/server/cards/base/Capital';
 import {MedicalLab} from '../../../src/server/cards/base/MedicalLab';
 import {cast, testGame} from '../../TestingUtils';
 
-describe('MedicalLab', function() {
-  it('Should play', function() {
+describe('MedicalLab', () => {
+  it('Should play', () => {
     const card = new MedicalLab();
     const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);

@@ -7,13 +7,13 @@ import {CardName} from '../../../src/common/cards/CardName';
 import {fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 
-describe('Ringcom', function() {
+describe('Ringcom', () => {
   let card: Ringcom;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Ringcom();
     [game, player, player2] = testGame(2);
     player.corporations.push(card);
@@ -27,7 +27,7 @@ describe('Ringcom', function() {
     expect(player.production.megacredits).eq(3);
   });
 
-  it('initialAction', function() {
+  it('initialAction', () => {
     const a = fakeCard({name: 'A' as CardName, tags: [Tag.JOVIAN]});
     const b = fakeCard({name: 'B' as CardName, tags: []});
     const c = fakeCard({name: 'C' as CardName, tags: [Tag.EARTH]});
@@ -40,14 +40,14 @@ describe('Ringcom', function() {
     expect(player.cardsInHand).has.members([a, d]);
   });
 
-  it('when you play a jovian tag', function() {
+  it('when you play a jovian tag', () => {
     const a = fakeCard({name: 'A' as CardName, tags: [Tag.JOVIAN]});
     expect(player.titanium).eq(0);
     player.playCard(a);
     expect(player.titanium).eq(1);
   });
 
-  it('when opponent plays a jovian tag', function() {
+  it('when opponent plays a jovian tag', () => {
     const a = fakeCard({name: 'A' as CardName, tags: [Tag.JOVIAN]});
     expect(player.titanium).eq(0);
     player2.playCard(a);

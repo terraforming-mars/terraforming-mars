@@ -8,13 +8,13 @@ import {cast, getSendADelegateOption, runAllActions, testGame} from '../../Testi
 import {TestPlayer} from '../../TestPlayer';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 
-describe('Incite', function() {
+describe('Incite', () => {
   let card: Incite;
   let player: TestPlayer;
   let game: IGame;
   let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Incite();
 
     [game, player] = testGame(1, {turmoilExtension: true});
@@ -24,17 +24,17 @@ describe('Incite', function() {
     turmoil = game.turmoil!;
   });
 
-  it('Starts with +1 influence', function() {
+  it('Starts with +1 influence', () => {
     expect(game.turmoil!.getPlayerInfluence(player)).to.eq(1);
   });
 
-  it('Works with Event Analysts', function() {
+  it('Works with Event Analysts', () => {
     const eventAnalysts = new EventAnalysts();
     eventAnalysts.play(player);
     expect(game.turmoil!.getPlayerInfluence(player)).to.eq(2);
   });
 
-  it('Can perform initial action', function() {
+  it('Can perform initial action', () => {
     player.deferInitialAction(card);
     runAllActions(game);
 

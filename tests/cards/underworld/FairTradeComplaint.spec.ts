@@ -6,7 +6,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {fakeCard} from '../../TestingUtils';
 
-describe('FairTradeComplaint', function() {
+describe('FairTradeComplaint', () => {
   let card: FairTradeComplaint;
   let player: TestPlayer;
   let game: IGame;

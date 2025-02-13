@@ -7,7 +7,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast, maxOutOceans, churn} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('GreatDamAres', function() {
+describe('GreatDamAres', () => {
   let card: GreatDamAres;
   let player: TestPlayer;
 
@@ -16,7 +16,7 @@ describe('GreatDamAres', function() {
     [/* game */, player] = testGame(2, {aresExtension: true, aresHazards: false});
   });
 
-  it('Requirements + Benefits', function() {
+  it('Requirements + Benefits', () => {
     maxOutOceans(player, 3);
     expect(card.canPlay(player)).is.not.true;
     maxOutOceans(player, 4);
@@ -27,7 +27,7 @@ describe('GreatDamAres', function() {
     expect(player.production.energy).to.eq(2);
   });
 
-  it('Requirements', function() {
+  it('Requirements', () => {
     maxOutOceans(player, 4);
     const action = cast(churn(card.play(player), player), SelectSpace);
     const space = action.spaces[0];

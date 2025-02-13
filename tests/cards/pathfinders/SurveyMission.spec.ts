@@ -32,7 +32,7 @@ describe('SurveyMission', () => {
   //
   // O is an ocean space, and G is another claimed space.
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SurveyMission();
     [game, player] = testGame(1, {pathfindersExpansion: true});
     board = EmptyBoard.newInstance();

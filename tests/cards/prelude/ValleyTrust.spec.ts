@@ -13,26 +13,26 @@ import {Loan} from '../../../src/server/cards/prelude/Loan';
 import {HugeAsteroid} from '../../../src/server/cards/prelude/HugeAsteroid';
 import {MetalRichAsteroid} from '../../../src/server/cards/prelude/MetalRichAsteroid';
 
-describe('ValleyTrust', function() {
+describe('ValleyTrust', () => {
   let card: ValleyTrust;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ValleyTrust();
     [game, player] = testGame(1, {preludeExtension: true});
   });
 
-  it('Does not get card discount for other tags', function() {
+  it('Does not get card discount for other tags', () => {
     expect(card.getCardDiscount(player, new Ants())).to.eq(0);
   });
 
-  it('Gets card discount for science tags', function() {
+  it('Gets card discount for science tags', () => {
     expect(card.getCardDiscount(player, new MedicalLab())).to.eq(2);
     expect(card.getCardDiscount(player, new Research())).to.eq(4);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
   });
 

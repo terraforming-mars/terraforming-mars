@@ -6,10 +6,10 @@ import {SpaceId} from '../../src/common/Types';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 
-describe('MoonBoard', function() {
+describe('MoonBoard', () => {
   let board: MoonBoard;
 
-  beforeEach(function() {
+  beforeEach(() => {
     board = MoonBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
   });
 

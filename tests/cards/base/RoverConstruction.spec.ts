@@ -4,8 +4,8 @@ import {addCity, runAllActions} from '../../TestingUtils';
 import {cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('RoverConstruction', function() {
-  it('Should play', function() {
+describe('RoverConstruction', () => {
+  it('Should play', () => {
     const card = new RoverConstruction();
     const [game, player/* , player2 */] = testGame(2);
     cast(card.play(player), undefined);

@@ -10,7 +10,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
 
-describe('Karen', function() {
+describe('Karen', () => {
   let card: Karen;
   let player: TestPlayer;
   let game: IGame;
@@ -23,11 +23,11 @@ describe('Karen', function() {
     player.megaCredits = 20;
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     expect(card.canAct(player)).is.true;
   });
 
-  it('Takes action', function() {
+  it('Takes action', () => {
     const selectCard = cast(card.action(player), SelectCard<IPreludeCard>);
     expect(selectCard.cards).has.length(1);
 
@@ -35,7 +35,7 @@ describe('Karen', function() {
     expect(player.playedCards.filter((card) => card.type === CardType.PRELUDE)).has.length(1);
   });
 
-  it('Takes action in Generation 4', function() {
+  it('Takes action in Generation 4', () => {
     for (let i = 0; i < 3; i++) {
       runAllActions(game);
       forceGenerationEnd(game);
@@ -48,7 +48,7 @@ describe('Karen', function() {
     expect(player.playedCards.filter((card) => card.type === CardType.PRELUDE)).has.length(1);
   });
 
-  it('Unplayable prelude', function() {
+  it('Unplayable prelude', () => {
     player.megaCredits = 0;
     game.preludeDeck.drawPile.push(new GalileanMining());
 
@@ -66,7 +66,7 @@ describe('Karen', function() {
     expect(game.preludeDeck.discardPile).to.have.members([prelude]);
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     const selectCard = cast(card.action(player), SelectCard<IPreludeCard>);
     selectCard.cb([selectCard.cards[0]]);
     forceGenerationEnd(game);

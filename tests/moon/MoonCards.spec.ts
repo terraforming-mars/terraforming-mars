@@ -5,7 +5,7 @@ import {CardResource} from '../../src/common/CardResource';
 import {MoonCards} from '../../src/server/moon/MoonCards';
 import {fail} from 'assert';
 
-describe('MoonCards', function() {
+describe('MoonCards', () => {
   describe('Moon science card test', () => {
     function contains(card: ICard): boolean {
       return MoonCards.scienceCardsWithLessThan2VP.has(card.name) ||

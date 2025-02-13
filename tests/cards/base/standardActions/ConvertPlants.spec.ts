@@ -8,24 +8,24 @@ import {PoliticalAgendas} from '../../../../src/server/turmoil/PoliticalAgendas'
 import {Reds} from '../../../../src/server/turmoil/parties/Reds';
 import {MAX_OXYGEN_LEVEL} from '../../../../src/common/constants';
 
-describe('ConvertPlants', function() {
+describe('ConvertPlants', () => {
   let card: ConvertPlants;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ConvertPlants();
     player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     Game.newInstance('gameid', [player, player2], player, {turmoilExtension: true});
   });
 
-  it('Can not act without plants', function() {
+  it('Can not act without plants', () => {
     expect(card.canAct(player)).eq(false);
     player.plants = 7;
     expect(card.canAct(player)).eq(false);
   });
 
-  it('Can not act with reds', function() {
+  it('Can not act with reds', () => {
     player.plants = 8;
     player.game.phase = Phase.ACTION;
     player.game.turmoil!.rulingParty = new Reds();
@@ -37,7 +37,7 @@ describe('ConvertPlants', function() {
     expect(card.canAct(player)).eq(true);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.plants = 8;
 
     expect(card.canAct(player)).eq(true);
@@ -48,7 +48,7 @@ describe('ConvertPlants', function() {
     expect(player.game.getOxygenLevel()).eq(1);
   });
 
-  it('Can act when maximized', function() {
+  it('Can act when maximized', () => {
     player.plants = 8;
     expect(card.canAct(player)).eq(true);
     setOxygenLevel(player.game, MAX_OXYGEN_LEVEL);

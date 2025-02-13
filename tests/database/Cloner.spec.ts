@@ -3,7 +3,7 @@ import {Cloner} from '../../src/server/database/Cloner';
 import {Game} from '../../src/server/Game';
 import {Player} from '../../src/server/Player';
 
-describe('Cloner', function() {
+describe('Cloner', () => {
   it('solo game preserved', () => {
     const player = new Player('old-player1', 'yellow', true, 9, 'p-old-player1-id');
     const game = Game.newInstance(

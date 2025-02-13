@@ -3,8 +3,8 @@ import {PowerPlant} from '../../../src/server/cards/pathfinders/PowerPlant';
 import {BalancedDevelopment} from '../../../src/server/cards/pathfinders/BalancedDevelopment';
 import {testGame} from '../../TestingUtils';
 
-describe('BalancedDevelopment', function() {
-  it('resolve play', function() {
+describe('BalancedDevelopment', () => {
+  it('resolve play', () => {
     const card = new BalancedDevelopment();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

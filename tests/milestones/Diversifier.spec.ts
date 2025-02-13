@@ -6,7 +6,7 @@ import {Leavitt} from '../../src/server/cards/community/Leavitt';
 import {AntiGravityTechnology} from '../../src/server/cards/base/AntiGravityTechnology';
 import {testGame} from '../TestGame';
 
-describe('Diversifier', function() {
+describe('Diversifier', () => {
   let milestone: Diversifier;
   let player: TestPlayer;
 
@@ -15,7 +15,7 @@ describe('Diversifier', function() {
     [/* game */, player] = testGame(2);
   });
 
-  it('Counts wild tags tags as unique tags', function() {
+  it('Counts wild tags tags as unique tags', () => {
     const milestone = new Diversifier();
     expect(milestone.canClaim(player)).is.not.true;
     for (let i = 0; i < 8; i++) {
@@ -24,7 +24,7 @@ describe('Diversifier', function() {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('Counts Leavitt science tag placement bonus', function() {
+  it('Counts Leavitt science tag placement bonus', () => {
     const [game, player] = testGame(1, {coloniesExtension: true});
     const leavitt = new Leavitt();
     game.colonies = [leavitt];
@@ -47,7 +47,7 @@ describe('Diversifier', function() {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('Counts Leavitt science tag placement bonus', function() {
+  it('Counts Leavitt science tag placement bonus', () => {
     const [game, player] = testGame(1, {coloniesExtension: true});
     const leavitt = new Leavitt();
     game.colonies = [leavitt];

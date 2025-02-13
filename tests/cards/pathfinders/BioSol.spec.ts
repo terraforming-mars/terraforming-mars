@@ -6,18 +6,18 @@ import {testGame} from '../../TestGame';
 import {Tag} from '../../../src/common/cards/Tag';
 import {runAllActions} from '../../TestingUtils';
 
-describe('BioSol', function() {
+describe('BioSol', () => {
   let card: BioSol;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new BioSol();
     [game, player] = testGame(1);
     player.corporations.push(card);
   });
 
-  it('initialAction', function() {
+  it('initialAction', () => {
     expect(player.cardsInHand).is.empty;
     player.deferInitialAction(card);
     runAllActions(game);
@@ -25,7 +25,7 @@ describe('BioSol', function() {
     expect(player.cardsInHand.filter((card) => card.tags.includes(Tag.MICROBE))).has.length(2);
   });
 
-  it('action', function() {
+  it('action', () => {
     card.action(player);
     runAllActions(game);
     expect(card.resourceCount).to.eq(1);

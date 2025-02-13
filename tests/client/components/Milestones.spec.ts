@@ -6,7 +6,7 @@ import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 import Milestone from '@/client/components/Milestone.vue';
 import {Preferences} from '@/client/utils/PreferencesManager';
 
-describe('Milestones', function() {
+describe('Milestones', () => {
   const mockMilestone: ClaimedMilestoneModel = {
     name: 'Forester',
     playerName: 'foo',
@@ -14,7 +14,7 @@ describe('Milestones', function() {
     scores: [],
   };
 
-  it('shows list and milestones', async function() {
+  it('shows list and milestones', async () => {
     const milestone = mount(Milestones, {
       localVue: getLocalVue(),
       propsData: {

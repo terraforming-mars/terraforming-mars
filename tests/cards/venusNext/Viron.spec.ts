@@ -7,16 +7,16 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 import {FocusedOrganization} from '../../../src/server/cards/prelude2/FocusedOrganization';
 
-describe('Viron', function() {
+describe('Viron', () => {
   let card: Viron;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Viron();
     [/* game */, player] = testGame(1);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     const action = card.play(player);
 
     cast(action, undefined);
@@ -36,7 +36,7 @@ describe('Viron', function() {
     expect(selectCard.cards).deep.eq([restrictedArea]);
   });
 
-  it('Cannot act once Viron is used', function() {
+  it('Cannot act once Viron is used', () => {
     card.play(player);
 
     player.corporations.push(card);

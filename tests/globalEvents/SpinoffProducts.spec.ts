@@ -9,7 +9,7 @@ import {TestPlayer} from '../TestPlayer';
 import {HabitatMarte} from '../../src/server/cards/pathfinders/HabitatMarte';
 import {DesignedOrganisms} from '../../src/server/cards/pathfinders/DesignedOrganisms';
 
-describe('SpinoffProducts', function() {
+describe('SpinoffProducts', () => {
   let card: SpinoffProducts;
   let game: IGame;
   let player: TestPlayer;
@@ -22,7 +22,7 @@ describe('SpinoffProducts', function() {
     turmoil = game.turmoil!;
   });
 
-  it('resolve play', function() {
+  it('resolve play', () => {
     player.playedCards.push(new Research());
     player2.playedCards.push(new Research());
     player2.playedCards.push(new Research());
@@ -38,7 +38,7 @@ describe('SpinoffProducts', function() {
     expect(player2.megaCredits).to.eq(14);
   });
 
-  it('resolve play, with Habitat Marte', function() {
+  it('resolve play, with Habitat Marte', () => {
     player.corporations.push(new HabitatMarte());
     player.playedCards.push(new Research(), new DesignedOrganisms());
 

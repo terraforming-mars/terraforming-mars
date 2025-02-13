@@ -5,21 +5,21 @@ import {testGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('TitanAirScrapping', function() {
+describe('TitanAirScrapping', () => {
   let card: TitanAirScrapping;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new TitanAirScrapping();
     [/* game */, player] = testGame(2);
   });
 
-  it('Can not act', function() {
+  it('Can not act', () => {
     player.playedCards.push(card);
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act - both actions possible', function() {
+  it('Should act - both actions possible', () => {
     player.playedCards.push(card);
     player.titanium = 3;
     player.addResourceTo(card, 7);
@@ -33,7 +33,7 @@ describe('TitanAirScrapping', function() {
     expect(card.getVictoryPoints(player)).to.eq(2);
   });
 
-  it('Should act automatically when only one action possible', function() {
+  it('Should act automatically when only one action possible', () => {
     player.playedCards.push(card);
     player.addResourceTo(card, 2);
     expect(card.canAct(player)).is.true;

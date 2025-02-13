@@ -12,7 +12,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
 import {testGame} from '../../TestGame';
 
-describe('HydrogenToVenus', function() {
+describe('HydrogenToVenus', () => {
   let card: HydrogenToVenus;
   let player: TestPlayer;
   let game: IGame;
@@ -21,7 +21,7 @@ describe('HydrogenToVenus', function() {
   let jovianTagCard1: IProjectCard;
   let jovianTagCard2: IProjectCard;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new HydrogenToVenus();
     [game, player] = testGame(2);
     venusCard1 = new DeuteriumExport();
@@ -30,7 +30,7 @@ describe('HydrogenToVenus', function() {
     jovianTagCard2 = new JovianLanterns();
   });
 
-  it('Should play with multiple venus cards', function() {
+  it('Should play with multiple venus cards', () => {
     player.playedCards.push(venusCard1, jovianTagCard1, venusCard2);
 
     cast(card.play(player), undefined);
@@ -42,7 +42,7 @@ describe('HydrogenToVenus', function() {
     expect(game.getVenusScaleLevel()).to.eq(2);
   });
 
-  it('Should play with multiple jovian tag cards', function() {
+  it('Should play with multiple jovian tag cards', () => {
     player.playedCards.push(venusCard1, jovianTagCard1, jovianTagCard2);
 
     cast(card.play(player), undefined);
@@ -51,7 +51,7 @@ describe('HydrogenToVenus', function() {
     expect(game.getVenusScaleLevel()).to.eq(2);
   });
 
-  it('Should play with single venus card', function() {
+  it('Should play with single venus card', () => {
     player.playedCards.push(venusCard1, jovianTagCard1);
 
     cast(card.play(player), undefined);
@@ -61,7 +61,7 @@ describe('HydrogenToVenus', function() {
     expect(game.getVenusScaleLevel()).to.eq(2);
   });
 
-  it('Should play with no venus cards', function() {
+  it('Should play with no venus cards', () => {
     cast(card.play(player), undefined);
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);

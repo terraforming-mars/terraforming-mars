@@ -4,8 +4,8 @@ import {HomeworldSupport} from '../../src/server/turmoil/globalEvents/HomeworldS
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('HomeworldSupport', function() {
-  it('resolve play', function() {
+describe('HomeworldSupport', () => {
+  it('resolve play', () => {
     const card = new HomeworldSupport();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

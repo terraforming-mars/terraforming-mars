@@ -8,7 +8,7 @@ import {TileType} from '../../../src/common/TileType';
 import {CardName} from '../../../src/common/cards/CardName';
 import {GanymedeColony} from '../../../src/server/cards/base/GanymedeColony';
 
-describe('StarVegas', function() {
+describe('StarVegas', () => {
   it('canPlay', () => {
     const card = new StarVegas();
     const [/* game */, player/* , player2 */] = testGame(2);

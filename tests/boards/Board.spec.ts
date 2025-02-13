@@ -12,12 +12,12 @@ import {SeededRandom} from '../../src/common/utils/Random';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptions';
 import {SpaceId} from '../../src/common/Types';
 
-describe('Board', function() {
+describe('Board', () => {
   let board: Board;
   let player: TestPlayer;
   let player2: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     board = TharsisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
@@ -109,7 +109,7 @@ describe('Board', function() {
   });
 
   it('has error with input while calling getAdjacentSpaces', () => {
-    expect(function() {
+    expect(() => {
       board.getAdjacentSpaces({
         x: 0,
         y: 0,
@@ -140,7 +140,7 @@ describe('Board', function() {
       .deep.eq([undefined, undefined, '04', '09', '08', undefined]);
   });
 
-  it('getNthAvailableLandSpace', function() {
+  it('getNthAvailableLandSpace', () => {
     // board spaces start at 03, and the top of the map looks like this
     //
     //    l o l o o
@@ -167,8 +167,8 @@ describe('Board', function() {
     expect(board.getNthAvailableLandSpace(3, -1).id).eq('59');
   });
 
-  it('getNthAvailableLandSpace throws if no spaces available', function() {
-    expect(function() {
+  it('getNthAvailableLandSpace throws if no spaces available', () => {
+    expect(() => {
       board.getNthAvailableLandSpace(0, 1, undefined, () => false);
     }).to.throw('no spaces available');
   });
@@ -179,7 +179,7 @@ describe('Board', function() {
     }
   }
 
-  it('getNthAvailableLandSpace positive', function() {
+  it('getNthAvailableLandSpace positive', () => {
     // First two rows look like this:
     //  - o - o o      - means land
     // - - - - - o     o means ocean
@@ -191,7 +191,7 @@ describe('Board', function() {
     expectSpace(board.getNthAvailableLandSpace(3, 1), '09', 4, 1);
   });
 
-  it('getNthAvailableLandSpace negative', function() {
+  it('getNthAvailableLandSpace negative', () => {
     // Last two rows look like this:
     // - - - - - -    - means land
     //  - - - - o     o means ocean
@@ -202,14 +202,14 @@ describe('Board', function() {
     expectSpace(board.getNthAvailableLandSpace(3, -1), '59', 4, 8);
   });
 
-  it('getNthAvailableLandSpace skips tiles', function() {
+  it('getNthAvailableLandSpace skips tiles', () => {
     const space = board.getNthAvailableLandSpace(2, 1);
     expectSpace(board.getNthAvailableLandSpace(2, 1), '08', 3, 1);
     space.tile = {tileType: TileType.GREENERY};
     expectSpace(board.getNthAvailableLandSpace(2, 1), '09', 4, 1);
   });
 
-  it('getNthAvailableLandSpace skips hazard tiles', function() {
+  it('getNthAvailableLandSpace skips hazard tiles', () => {
     const space = board.getNthAvailableLandSpace(2, 1);
     expectSpace(board.getNthAvailableLandSpace(2, 1), '08', 3, 1);
     space.tile = {tileType: TileType.DUST_STORM_MILD};
@@ -219,7 +219,7 @@ describe('Board', function() {
   // This happens with the Ares expansion and cards come out mid-game
   // after the board is already populated. Though, here, the high
   // card costs substitite for a heavily-populated board.
-  it('getNthAvailableLandSpace with a large card', function() {
+  it('getNthAvailableLandSpace with a large card', () => {
     expect(board.getNthAvailableLandSpace(46, 1).id).eq('61');
     expect(board.getNthAvailableLandSpace(47, 1).id).eq('62');
     expect(board.getNthAvailableLandSpace(48, 1).id).eq('03');

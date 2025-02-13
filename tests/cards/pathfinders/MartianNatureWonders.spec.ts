@@ -9,17 +9,17 @@ import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
 
-describe('MartianNatureWonders', function() {
+describe('MartianNatureWonders', () => {
   let card: MartianNatureWonders;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MartianNatureWonders();
     [game, player] = testGame(2);
   });
 
-  it('play', function() {
+  it('play', () => {
     const dataCard = new LunarObservationPost();
     player.playedCards.push(dataCard);
     expect(dataCard.resourceCount).eq(0);

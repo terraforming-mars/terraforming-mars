@@ -12,17 +12,17 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {MartianLumberCorp} from '../../../src/server/cards/promo/MartianLumberCorp';
 
 // There's a fair bit of code duplication from OceanCity. Rather a lot really.
-describe('NewVenice', function() {
+describe('NewVenice', () => {
   let card: NewVenice;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new NewVenice();
     [game, player/* , player2 */] = testGame(2, {pathfindersExpansion: true});
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
@@ -44,7 +44,7 @@ describe('NewVenice', function() {
     expect(player.getPlayableCardsForTest()).does.include(card);
   });
 
-  it('play', function() {
+  it('play', () => {
     const oceanSpace = addOcean(player);
     player.plants = 2;
     player.production.override({energy: 0, megacredits: 0});
@@ -67,7 +67,7 @@ describe('NewVenice', function() {
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);
   });
 
-  it('Cannot place a city next to New Venice', function() {
+  it('Cannot place a city next to New Venice', () => {
     const oceanSpace = addOcean(player);
 
     cast(card.play(player), undefined);
@@ -85,7 +85,7 @@ describe('NewVenice', function() {
     expect(citySpaces).to.not.include.any.members(adjacentSpaces);
   });
 
-  it('Can place New Venice next to a city', function() {
+  it('Can place New Venice next to a city', () => {
     const oceanSpace = addOcean(player);
     player.production.add(Resource.ENERGY, 1);
 
@@ -102,7 +102,7 @@ describe('NewVenice', function() {
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);
   });
 
-  it('New Venice counts as ocean for adjacency', function() {
+  it('New Venice counts as ocean for adjacency', () => {
     const oceanSpace = addOcean(player);
     cast(card.play(player), undefined);
     runAllActions(game);
@@ -119,7 +119,7 @@ describe('NewVenice', function() {
     expect(player.megaCredits).eq(2);
   });
 
-  it('New Venice counts for city-related VP', function() {
+  it('New Venice counts for city-related VP', () => {
     const oceanSpace = addOcean(player);
     cast(card.play(player), undefined);
     runAllActions(game);
@@ -136,7 +136,7 @@ describe('NewVenice', function() {
     expect(player.getVictoryPoints().city).eq(1);
   });
 
-  it('New Venice counts as VP for Capital', function() {
+  it('New Venice counts as VP for Capital', () => {
     const oceanSpace = game.board.getAvailableSpacesForOcean(player)[0];
 
     const capital = new Capital();

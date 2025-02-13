@@ -11,7 +11,7 @@ import {CrewTraining} from '../../../src/server/cards/pathfinders/CrewTraining';
 import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {Leavitt} from '../../../src/server/cards/community/Leavitt';
 
-describe('Faraday', function() {
+describe('Faraday', () => {
   let card: Faraday;
   let player: TestPlayer;
   let game: IGame;
@@ -26,7 +26,7 @@ describe('Faraday', function() {
     player.playedCards.push(card);
   });
 
-  it('Nothing happens when playing the 7th tag', function() {
+  it('Nothing happens when playing the 7th tag', () => {
     // 7th here is arbitrary, just a number that isnt a multiple of 5
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
 
@@ -37,7 +37,7 @@ describe('Faraday', function() {
     expect(player.megaCredits).to.eq(PLAYER_INITIALMC);
   });
 
-  it('Can draw a card when reaching a multiple of 5 for a tag', function() {
+  it('Can draw a card when reaching a multiple of 5 for a tag', () => {
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
     expect(player.cardsInHand).has.length(0);
 
@@ -56,7 +56,7 @@ describe('Faraday', function() {
     expect(player.cardsInHand[0].tags.includes(Tag.SCIENCE)).is.true;
   });
 
-  it('Can choose to do nothing when reaching a multiple of 5 for a tag', function() {
+  it('Can choose to do nothing when reaching a multiple of 5 for a tag', () => {
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
 
     player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
@@ -68,7 +68,7 @@ describe('Faraday', function() {
     expect(player.megaCredits).to.eq(PLAYER_INITIALMC);
   });
 
-  it('No prompt if player cannot afford to pay for card', function() {
+  it('No prompt if player cannot afford to pay for card', () => {
     player.megaCredits = 1;
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
 
@@ -79,7 +79,7 @@ describe('Faraday', function() {
     expect(player.megaCredits).to.eq(1);
   });
 
-  it('Play a card with two of the same tag', function() {
+  it('Play a card with two of the same tag', () => {
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
     player.playCard(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE]}));
 
@@ -92,7 +92,7 @@ describe('Faraday', function() {
     expect(player.cardsInHand[0].tags.includes(Tag.SCIENCE)).is.true;
   });
 
-  it('Play a card that puts two tags at 5 count, buy both', function() {
+  it('Play a card that puts two tags at 5 count, buy both', () => {
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
     player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.EARTH, Tag.EARTH, Tag.EARTH]}));
 
@@ -108,7 +108,7 @@ describe('Faraday', function() {
     expect(player.megaCredits).to.eq(PLAYER_INITIALMC - CARD_DRAW_COST - CARD_DRAW_COST);
   });
 
-  it('Play a card that puts two tags at 5 count, buy one', function() {
+  it('Play a card that puts two tags at 5 count, buy one', () => {
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
     player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.EARTH, Tag.EARTH, Tag.EARTH]}));
 
@@ -124,7 +124,7 @@ describe('Faraday', function() {
     expect(player.megaCredits).to.eq(PLAYER_INITIALMC - CARD_DRAW_COST);
   });
 
-  it('Play a card that puts two tags at 5 count, buy none', function() {
+  it('Play a card that puts two tags at 5 count, buy none', () => {
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
     player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.EARTH, Tag.EARTH, Tag.EARTH]}));
 
@@ -137,7 +137,7 @@ describe('Faraday', function() {
     expect(player.megaCredits).to.eq(PLAYER_INITIALMC);
   });
 
-  it('Wild tags dont count', function() {
+  it('Wild tags dont count', () => {
     player.playedCards.push(fakeCard({tags: [Tag.WILD, Tag.WILD]}));
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE]}));
     player.playCard(fakeCard({tags: [Tag.SCIENCE]}));
@@ -145,14 +145,14 @@ describe('Faraday', function() {
     expect(player.cardsInHand).has.length(0);
   });
 
-  it('Does not trigger on event cards', function() {
+  it('Does not trigger on event cards', () => {
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]}));
     player.playCard(fakeCard({tags: [Tag.SCIENCE], type: CardType.EVENT}));
     expect(game.deferredActions).has.length(0);
     expect(player.cardsInHand).has.length(0);
   });
 
-  it('Nothing happens when playing the Clone tag alone', function() {
+  it('Nothing happens when playing the Clone tag alone', () => {
     // Just give the player 4 tags of all the planets
     player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.JOVIAN, Tag.VENUS, Tag.MARS, Tag.SCIENCE]}));
     player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.JOVIAN, Tag.VENUS, Tag.MARS, Tag.SCIENCE]}));
@@ -166,7 +166,7 @@ describe('Faraday', function() {
     expect(player.megaCredits).to.eq(PLAYER_INITIALMC);
   });
 
-  it('Does trigger when activating Clone Tags (via CrewTraining)', function() {
+  it('Does trigger when activating Clone Tags (via CrewTraining)', () => {
     player.playedCards.push(fakeCard({tags: [Tag.EARTH, Tag.EARTH, Tag.EARTH, Tag.EARTH]}));
 
     const crewTraining = new CrewTraining();

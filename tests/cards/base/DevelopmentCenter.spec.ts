@@ -3,20 +3,20 @@ import {testGame} from '../../TestGame';
 import {DevelopmentCenter} from '../../../src/server/cards/base/DevelopmentCenter';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('DevelopmentCenter', function() {
+describe('DevelopmentCenter', () => {
   let card: DevelopmentCenter;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DevelopmentCenter();
     [/* game */, player] = testGame(2);
   });
 
-  it('Can not act', function() {
+  it('Can not act', () => {
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.energy = 1;
     expect(card.canAct(player)).is.true;
 

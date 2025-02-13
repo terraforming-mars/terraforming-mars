@@ -2,8 +2,8 @@ import {ProtectedHabitats} from '../../../src/server/cards/base/ProtectedHabitat
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('ProtectedHabitats', function() {
-  it('Should play', function() {
+describe('ProtectedHabitats', () => {
+  it('Should play', () => {
     const card = new ProtectedHabitats();
     const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);

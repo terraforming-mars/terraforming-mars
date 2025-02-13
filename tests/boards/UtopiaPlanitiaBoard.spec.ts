@@ -3,8 +3,8 @@ import {expect} from 'chai';
 import {UtopiaPlanitiaBoard} from '../../src/server/boards/UtopiaPlanitiaBoard';
 import {SeededRandom} from '../../src/common/utils/Random';
 
-describe('UtopiaPlanitiaBoard', function() {
-  it('sanity test', function() {
+describe('UtopiaPlanitiaBoard', () => {
+  it('sanity test', () => {
     const board = UtopiaPlanitiaBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     expect(board.spaces).to.deep.eq([
       {'id': '01', 'spaceType': 'colony', 'x': -1, 'y': -1, 'bonus': []},

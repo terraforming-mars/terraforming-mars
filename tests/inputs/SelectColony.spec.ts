@@ -5,7 +5,7 @@ import {IColony} from '../../src/server/colonies/IColony';
 import {Luna} from '../../src/server/colonies/Luna';
 import {Pluto} from '../../src/server/colonies/Pluto';
 
-describe('SelectColony', function() {
+describe('SelectColony', () => {
   let luna: Luna;
   let pluto: Pluto;
   let selected: IColony | undefined;
@@ -20,13 +20,13 @@ describe('SelectColony', function() {
     selected = undefined;
   });
 
-  it('Simple', function() {
+  it('Simple', () => {
     const selectColony = new SelectColony('', '', [luna, pluto]).andThen(cb);
     selectColony.process({type: 'colony', colonyName: ColonyName.LUNA});
     expect(selected!.name).eq(luna.name);
   });
 
-  it('Cannot select unavailable colony', function() {
+  it('Cannot select unavailable colony', () => {
     const selectColony = new SelectColony('', '', [luna, pluto]).andThen(cb);
     selectColony.process({type: 'colony', colonyName: ColonyName.LUNA});
     expect(selected!.name).eq(luna.name);

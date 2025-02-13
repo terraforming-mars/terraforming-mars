@@ -4,8 +4,8 @@ import {NitrogenRichAsteroid} from '../../../src/server/cards/base/NitrogenRichA
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('NitrogenRichAsteroid', function() {
-  it('Should play', function() {
+describe('NitrogenRichAsteroid', () => {
+  it('Should play', () => {
     const card = new NitrogenRichAsteroid();
     const [game, player] = testGame(2);
     cast(card.play(player), undefined);

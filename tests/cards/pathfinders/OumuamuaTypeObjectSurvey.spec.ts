@@ -9,7 +9,7 @@ import {CardName} from '../../../src/common/cards/CardName';
 import {Tag} from '../../../src/common/cards/Tag';
 import {ProjectDeck} from '../../../src/server/cards/Deck';
 
-describe('OumuamuaTypeObjectSurvey', function() {
+describe('OumuamuaTypeObjectSurvey', () => {
   let card: OumuamuaTypeObjectSurvey;
   let player: TestPlayer;
   let game: IGame;
@@ -56,7 +56,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     tags: [],
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new OumuamuaTypeObjectSurvey();
     [game, player] = testGame(1);
     projectDeck = game.projectDeck;
@@ -168,7 +168,7 @@ describe('OumuamuaTypeObjectSurvey', function() {
     expect(player.megaCredits).eq(100);
   });
 
-  it('The part where a card gets 2 data', function() {
+  it('The part where a card gets 2 data', () => {
     const lunarObservationPost = new LunarObservationPost();
     player.playedCards = [lunarObservationPost];
     // Put two cards on the front of the deck so they don't have data

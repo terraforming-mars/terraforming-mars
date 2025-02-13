@@ -11,24 +11,24 @@ import {TileType} from '../../../../src/common/TileType';
 import {testGame} from '../../../TestGame';
 import {assertPlaceTile} from '../../../assertions';
 
-describe('GreeneryStandardProject', function() {
+describe('GreeneryStandardProject', () => {
   let card: GreeneryStandardProject;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new GreeneryStandardProject();
     [game, player] = testGame(1);
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     player.megaCredits = card.cost - 1;
     expect(card.canAct(player)).is.false;
     player.megaCredits = card.cost;
     expect(card.canAct(player)).is.true;
   });
 
-  it('action', function() {
+  it('action', () => {
     player.megaCredits = card.cost;
     player.setTerraformRating(20);
     expect(game.getOxygenLevel()).eq(0);

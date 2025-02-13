@@ -5,8 +5,8 @@ import {SolarProbe} from '../../../src/server/cards/colonies/SolarProbe';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('SolarProbe', function() {
-  it('Should play', function() {
+describe('SolarProbe', () => {
+  it('Should play', () => {
     const card = new SolarProbe();
     const research = new Research();
     const [/* game */, player] = testGame(2);

@@ -4,8 +4,8 @@ import {VenusInfrastructure} from '../../src/server/turmoil/globalEvents/VenusIn
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('VenusInfrastructure', function() {
-  it('resolve play', function() {
+describe('VenusInfrastructure', () => {
+  it('resolve play', () => {
     const card = new VenusInfrastructure();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

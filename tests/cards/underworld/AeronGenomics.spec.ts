@@ -8,13 +8,13 @@ import {IGame} from '../../../src/server/IGame';
 import {runAllActions} from '../../TestingUtils';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
 
-describe('AeronGenomics', function() {
+describe('AeronGenomics', () => {
   let card: AeronGenomics;
   let player: TestPlayer;
   let game: IGame;
   let animalHost: IProjectCard;
 
-  beforeEach(function() {
+  beforeEach(() => {
     animalHost = new Birds();
     card = new AeronGenomics();
     [game, player] = testGame(2, {underworldExpansion: true});

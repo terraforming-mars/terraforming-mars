@@ -5,7 +5,7 @@ import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {statusCode} from '../../src/common/http/statusCode';
 import {DiscordUser} from '@/server/server/auth/discord';
 
-describe('ApiLogout', function() {
+describe('ApiLogout', () => {
   let scaffolding: RouteTestScaffolding;
   let res: MockResponse;
 

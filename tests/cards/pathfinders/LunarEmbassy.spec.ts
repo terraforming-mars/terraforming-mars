@@ -5,16 +5,16 @@ import {Units} from '../../../src/common/Units';
 import {SpaceName} from '../../../src/server/SpaceName';
 import {testGame} from '../../TestingUtils';
 
-describe('LunarEmbassy', function() {
+describe('LunarEmbassy', () => {
   let card: LunarEmbassy;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new LunarEmbassy();
     [/* game */, player] = testGame(1, {pathfindersExpansion: true});
   });
 
-  it('play', function() {
+  it('play', () => {
     player.production.override({});
     player.tagsForTest = {earth: 9};
     player.cardsInHand = [];

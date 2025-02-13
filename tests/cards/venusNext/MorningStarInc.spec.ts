@@ -5,8 +5,8 @@ import {testGame} from '../../TestGame';
 import {setVenusScaleLevel} from '../../TestingUtils';
 import {SpinInducingAsteroid} from '../../../src/server/cards/venusNext/SpinInducingAsteroid';
 
-describe('MorningStarInc', function() {
-  it('Should play', function() {
+describe('MorningStarInc', () => {
+  it('Should play', () => {
     const corp = new MorningStarInc();
     const min8Card = new IshtarMining();
     const max10Card = new SpinInducingAsteroid();

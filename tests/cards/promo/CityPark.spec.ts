@@ -4,12 +4,12 @@ import {addCity, cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('CityPark', function() {
+describe('CityPark', () => {
   let card: CityPark;
   let player: TestPlayer;
   let opponent: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CityPark();
     [/* game*/, player, opponent] = testGame(2);
   });
@@ -20,7 +20,7 @@ describe('CityPark', function() {
     {cities: 3, opponentCities: 0, expected: true},
   ] as const;
   for (const run of canPlayRuns) {
-    it('canplay ' + JSON.stringify(run), function() {
+    it('canplay ' + JSON.stringify(run), () => {
       for (let idx = 0; idx < run.cities; idx++) {
         addCity(player);
       }
@@ -31,7 +31,7 @@ describe('CityPark', function() {
     });
   }
 
-  it('play', function() {
+  it('play', () => {
     player.plants = 0;
     cast(card.play(player), undefined);
     expect(player.plants).eq(2);

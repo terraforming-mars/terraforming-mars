@@ -5,12 +5,12 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestingUtils';
 
-describe('MartianSurvey', function() {
+describe('MartianSurvey', () => {
   let card: MartianSurvey;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MartianSurvey();
     [game, player] = testGame(1);
   });

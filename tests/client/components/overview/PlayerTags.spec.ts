@@ -8,7 +8,7 @@ import {RecursivePartial} from '@/common/utils/utils';
 import {Tag} from '@/common/cards/Tag';
 import {Wrapper} from '@vue/test-utils';
 
-describe('PlayerTags', function() {
+describe('PlayerTags', () => {
   let wrapper: Wrapper<PlayerTags>;
 
   beforeEach(() => {
@@ -74,7 +74,7 @@ describe('PlayerTags', function() {
       localVue: getLocalVue(),
       parentComponent: {
         methods: {
-          getVisibilityState: function() {},
+          getVisibilityState: () => {},
         },
       },
       propsData: {

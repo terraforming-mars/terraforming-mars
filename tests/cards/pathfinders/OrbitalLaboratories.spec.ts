@@ -3,16 +3,16 @@ import {OrbitalLaboratories} from '../../../src/server/cards/pathfinders/Orbital
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestingUtils';
 
-describe('OrbitalLaboratories', function() {
+describe('OrbitalLaboratories', () => {
   let card: OrbitalLaboratories;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new OrbitalLaboratories();
     [/* game */, player] = testGame(1);
   });
 
-  it('play', function() {
+  it('play', () => {
     player.plants = 0;
     player.production.override({plants: 0});
 

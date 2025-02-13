@@ -10,7 +10,7 @@ import {testGame} from '../../TestGame';
 import {Petra} from '../../../src/server/cards/ceos/Petra';
 import {TPolitician} from '../../../src/server/awards/terraCimmeria/TPolitician';
 
-describe('Petra', function() {
+describe('Petra', () => {
   let card: Petra;
   let player: TestPlayer;
   let game: IGame;
@@ -22,7 +22,7 @@ describe('Petra', function() {
   let reds: IParty;
   let kelvinists: IParty;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Petra();
     [game, player] = testGame(2, {ceoExtension: true, turmoilExtension: true});
 
@@ -48,7 +48,7 @@ describe('Petra', function() {
     turmoil.sendDelegateToParty('NEUTRAL', reds.name, game);
   });
 
-  it('Initial sanity check', function() {
+  it('Initial sanity check', () => {
     expect(unity.delegates.count('NEUTRAL')).eq(0);
     expect(mars.delegates.count('NEUTRAL')).eq(0);
     expect(kelvinists.delegates.count('NEUTRAL')).eq(0);
@@ -61,11 +61,11 @@ describe('Petra', function() {
     expect(reds.delegates.count('NEUTRAL')).eq(1);
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     expect(card.canAct(player)).is.true;
   });
 
-  it('Cannot act if there are too many neutral delegates', function() {
+  it('Cannot act if there are too many neutral delegates', () => {
     // There are 5 neuts already, send 3 more to total 8.  Players only have 7 delegates.
     turmoil.sendDelegateToParty('NEUTRAL', reds.name, game);
     turmoil.sendDelegateToParty('NEUTRAL', reds.name, game);
@@ -73,7 +73,7 @@ describe('Petra', function() {
     expect(card.canAct(player)).is.false;
   });
 
-  it('Takes OPG action - lobby delegate remains unused', function() {
+  it('Takes OPG action - lobby delegate remains unused', () => {
     // Replace 4 delegates + chairman
     card.action(player);
 
@@ -108,7 +108,7 @@ describe('Petra', function() {
     expect(greens.delegates.count('NEUTRAL')).eq(3);
   });
 
-  it('Takes OPG action - all 7 delegates used (including lobby)', function() {
+  it('Takes OPG action - all 7 delegates used (including lobby)', () => {
     // Add two more neut delegates to Scientists, now 6 + 1 neut chairman (7 neut total)
     turmoil.sendDelegateToParty('NEUTRAL', scientists.name, game);
     turmoil.sendDelegateToParty('NEUTRAL', scientists.name, game);
@@ -133,7 +133,7 @@ describe('Petra', function() {
   });
 
 
-  it('OPG Counts for POLITICAN Award', function() {
+  it('OPG Counts for POLITICAN Award', () => {
     const politician = new TPolitician();
     game.awards = [];
     game.awards.push(politician);
@@ -144,7 +144,7 @@ describe('Petra', function() {
   });
 
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     card.action(player);
     forceGenerationEnd(game);
 

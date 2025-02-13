@@ -9,19 +9,19 @@ import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {OlympusConference} from '../../../src/server/cards/base/OlympusConference';
 import {testGame} from '../../TestGame';
 
-describe('SpaceDebrisCleaningOperation', function() {
+describe('SpaceDebrisCleaningOperation', () => {
   let card: SpaceDebrisCleaningOperation;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SpaceDebrisCleaningOperation();
     [game, player, player2] = testGame(2);
     player.playedCards.push(card);
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.tagsForTest = {space: 3};
     expect(card.canPlay(player)).is.false;
 
@@ -29,7 +29,7 @@ describe('SpaceDebrisCleaningOperation', function() {
     expect(card.canPlay(player)).is.true;
   });
 
-  it('canPlay, any 4 tags', function() {
+  it('canPlay, any 4 tags', () => {
     player2.tagsForTest = {space: 3};
     expect(card.canPlay(player)).is.false;
 
@@ -38,7 +38,7 @@ describe('SpaceDebrisCleaningOperation', function() {
     expect(card.canPlay(player)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     const lunarObservationPost = new LunarObservationPost(); // Holds data.
     player.playedCards = [lunarObservationPost];
 
@@ -51,7 +51,7 @@ describe('SpaceDebrisCleaningOperation', function() {
     expect(lunarObservationPost.resourceCount).eq(2); // Both "add resource" actions go to this card.
   });
 
-  it('play - omit animal and science tags', function() {
+  it('play - omit animal and science tags', () => {
     const tardigrades = new Tardigrades(); // microbe
     const penguins = new Penguins(); // animal
     const olympusConference = new OlympusConference(); // science

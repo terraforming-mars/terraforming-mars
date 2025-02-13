@@ -21,7 +21,7 @@ class TestableTags extends Tags {
   }
 }
 
-describe('Tags', function() {
+describe('Tags', () => {
   let player: IPlayer;
   let tags: TestableTags;
 

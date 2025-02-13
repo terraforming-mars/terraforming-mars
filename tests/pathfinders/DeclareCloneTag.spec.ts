@@ -11,18 +11,18 @@ import {IGame} from '../../src/server/IGame';
 import {CrewTraining} from '../../src/server/cards/pathfinders/CrewTraining';
 import {MartianZoo} from '../../src/server/cards/colonies/MartianZoo';
 
-describe('DeclareCloneTag', function() {
+describe('DeclareCloneTag', () => {
   let player: TestPlayer;
   let game: IGame;
   let card: LobbyHalls;
   let tag: Tag;
 
-  beforeEach(function() {
+  beforeEach(() => {
     [game, player] = testGame(1, {pathfindersExpansion: true});
     card = new LobbyHalls();
   });
 
-  it('sanity', function() {
+  it('sanity', () => {
     const action = new DeclareCloneTag(player, card).andThen((t) => tag = t);
 
     const options = cast(action.execute(), OrOptions);
@@ -44,7 +44,7 @@ describe('DeclareCloneTag', function() {
     expect(tag).eq(Tag.JOVIAN);
   });
 
-  it('clone tag with expansions', function() {
+  it('clone tag with expansions', () => {
     const [/* game */, player] = testGame(1, {venusNextExtension: true, moonExpansion: true, pathfindersExpansion: true});
 
     const action = new DeclareCloneTag(player, card).andThen((t) => tag = t);

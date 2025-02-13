@@ -6,18 +6,18 @@ import {testGame} from '../../TestGame';
 import {IGame} from '../../../src/server/IGame';
 import {AsteroidStandardProject} from '../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
 
-describe('StandardTechnology', function() {
+describe('StandardTechnology', () => {
   let card: StandardTechnology;
   let game: IGame;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new StandardTechnology();
     [game, player] = testGame(1);
     player.playedCards.push(card);
   });
 
-  it('play', function() {
+  it('play', () => {
     const asteroidStandardProject = new AsteroidStandardProject();
 
     // First play is standard cost.

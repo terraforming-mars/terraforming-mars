@@ -4,7 +4,7 @@ import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, testGame} from '../../TestingUtils';
 
-describe('IndenturedWorkers', function() {
+describe('IndenturedWorkers', () => {
   let card: IndenturedWorkers;
   let player: TestPlayer;
 

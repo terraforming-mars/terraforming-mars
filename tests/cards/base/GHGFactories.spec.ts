@@ -4,20 +4,20 @@ import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
 import {testGame} from '../../TestGame';
 
-describe('GHGFactories', function() {
+describe('GHGFactories', () => {
   let card: GHGFactories;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new GHGFactories();
     [/* game */, player] = testGame(1);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
     card.play(player);

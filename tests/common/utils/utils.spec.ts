@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import * as utils from '../../../src/common/utils/utils';
 
-describe('utils', function() {
+describe('utils', () => {
   it('range', () => {
     expect(utils.range(10)).deep.eq([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
   });

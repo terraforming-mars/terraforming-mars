@@ -11,14 +11,14 @@ import {StealResources} from '../../../src/server/deferredActions/StealResources
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {RemoveAnyPlants} from '../../../src/server/deferredActions/RemoveAnyPlants';
 
-describe('BotanicalExperience', function() {
+describe('BotanicalExperience', () => {
   let card: BotanicalExperience;
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
   let game: IGame;
   let space: Space;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new BotanicalExperience();
     [game, player, otherPlayer] = testGame(2);
     space = game.board.getAvailableSpacesForGreenery(otherPlayer)[0];

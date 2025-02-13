@@ -9,23 +9,23 @@ import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
 
-describe('RobinsonIndustries', function() {
+describe('RobinsonIndustries', () => {
   let card: RobinsonIndustries;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new RobinsonIndustries();
     [game, player] = testGame(1);
     player.corporations.push(card);
   });
 
-  it('Can not act', function() {
+  it('Can not act', () => {
     player.megaCredits = 3;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     player.megaCredits = 4;
     expect(card.canAct(player)).is.true;
 
@@ -38,7 +38,7 @@ describe('RobinsonIndustries', function() {
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('Only allows to choose from lowest production(s)', function() {
+  it('Only allows to choose from lowest production(s)', () => {
     player.production.add(Resource.MEGACREDITS, -1);
     let result = cast(card.action(player), OrOptions);
     expect(result.options).has.lengthOf(1);

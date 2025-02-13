@@ -10,18 +10,18 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {addGreenery, cast, maxOutOceans, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('Flooding', function() {
+describe('Flooding', () => {
   let card: Flooding;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Flooding();
     [game, player, player2] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const oceans = game.board.getAvailableSpacesForOcean(player);
     cast(card.play(player), undefined);
     runAllActions(game);
@@ -53,7 +53,7 @@ describe('Flooding', function() {
     expect(card.getVictoryPoints(player)).to.eq(-1);
   });
 
-  it('Does not suggest to remove money from yourself', function() {
+  it('Does not suggest to remove money from yourself', () => {
     const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
     cast(card.play(player), undefined);
     runAllActions(game);
@@ -72,7 +72,7 @@ describe('Flooding', function() {
     expect(subActionSelectPlayer.players[0]).to.eq(player2);
   });
 
-  it('Does not suggest player who played Land Claim', function() {
+  it('Does not suggest player who played Land Claim', () => {
     const landClaim = new LandClaim();
     const landClaimAction = cast(landClaim.play(player2), SelectSpace);
     const adjacentSpace = game.board.getAvailableSpacesOnLand(player).filter((space) => space.id === '03')[0];
@@ -88,7 +88,7 @@ describe('Flooding', function() {
     expect(selectSpace.cb(oceanSpaces[0])).is.undefined;
   });
 
-  it('Does not suggest to remove money if oceans are already maxed', function() {
+  it('Does not suggest to remove money if oceans are already maxed', () => {
     maxOutOceans(player);
     expect(card.canPlay(player)).is.true;
 

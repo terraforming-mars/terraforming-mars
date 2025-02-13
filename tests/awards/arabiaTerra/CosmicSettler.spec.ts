@@ -7,19 +7,19 @@ import {Board} from '../../../src/server/boards/Board';
 import {TileType} from '../../../src/common/TileType';
 import {testGame} from '../../TestGame';
 
-describe('CosmicSettler', function() {
+describe('CosmicSettler', () => {
   let award : CosmicSettler;
   let player: TestPlayer;
   let game: IGame;
   let board: Board;
 
-  beforeEach(function() {
+  beforeEach(() => {
     award = new CosmicSettler();
     [game, player] = testGame(2);
     board = game.board;
   });
 
-  it('Applies to cities in the sky', function() {
+  it('Applies to cities in the sky', () => {
     const colonySpaces = board.getSpaces(SpaceType.COLONY, player);
     const landSpaces = board.getAvailableSpacesOnLand(player);
 

@@ -16,17 +16,17 @@ import {testGame} from '../TestGame';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {SeededRandom} from '../../src/common/utils/Random';
 
-describe('ArabiaTerraBoard', function() {
+describe('ArabiaTerraBoard', () => {
   let board: ArabiaTerraBoard;
   let game: IGame;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     [game, player/* , player2 */] = testGame(2, {boardName: BoardName.ARABIA_TERRA});
     board = cast(game.board, ArabiaTerraBoard);
   });
 
-  it('sanity test', function() {
+  it('sanity test', () => {
     const board = ArabiaTerraBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     expect(board.spaces).to.deep.eq([
       {'id': '01', 'spaceType': 'colony', 'x': -1, 'y': -1, 'bonus': []},

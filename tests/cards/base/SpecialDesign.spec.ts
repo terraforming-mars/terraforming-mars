@@ -5,8 +5,8 @@ import {cast} from '../../TestingUtils';
 import {GlobalParameter} from '../../../src/common/GlobalParameter';
 import {CardName} from '../../../src/common/cards/CardName';
 
-describe('SpecialDesign', function() {
-  it('Should play', function() {
+describe('SpecialDesign', () => {
+  it('Should play', () => {
     const card = new SpecialDesign();
     const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);

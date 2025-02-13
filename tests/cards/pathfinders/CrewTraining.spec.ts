@@ -8,17 +8,17 @@ import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {cast} from '../../TestingUtils';
 
-describe('CrewTraining', function() {
+describe('CrewTraining', () => {
   let card: CrewTraining;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CrewTraining();
     [game, player] = testGame(1, {pathfindersExpansion: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     expect(player.getTerraformRating()).eq(14);
     expect(card.tags).deep.eq([Tag.CLONE, Tag.CLONE]);
 

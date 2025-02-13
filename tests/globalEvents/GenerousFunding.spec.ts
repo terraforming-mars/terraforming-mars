@@ -3,8 +3,8 @@ import {GenerousFunding} from '../../src/server/turmoil/globalEvents/GenerousFun
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('GenerousFunding', function() {
-  it('resolve play', function() {
+describe('GenerousFunding', () => {
+  it('resolve play', () => {
     const card = new GenerousFunding();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;
@@ -24,7 +24,7 @@ describe('GenerousFunding', function() {
     expect(player2.megaCredits).to.eq(26);
   });
 
-  it('no negative mc give out if TR lower than 15', function() {
+  it('no negative mc give out if TR lower than 15', () => {
     const card = new GenerousFunding();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

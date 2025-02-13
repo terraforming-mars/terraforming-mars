@@ -5,16 +5,16 @@ import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('AerosportTournament', function() {
+describe('AerosportTournament', () => {
   let player: TestPlayer;
   let card: AerosportTournament;
 
-  beforeEach(function() {
+  beforeEach(() => {
     [/* game */, player] = testGame(2);
     card = new AerosportTournament();
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
     const corp = new Celestic();
     const [/* game */, player] = testGame(2);
     player.corporations.push(corp);
@@ -23,7 +23,7 @@ describe('AerosportTournament', function() {
     corp.resourceCount = 5;
     expect(card.canPlay(player)).is.true;
   });
-  it('Play', function() {
+  it('Play', () => {
     addCity(player, '03');
     cast(card.play(player), undefined);
 

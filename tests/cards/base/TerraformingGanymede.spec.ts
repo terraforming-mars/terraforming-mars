@@ -7,7 +7,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {cast, testGame} from '../../TestingUtils';
 
-describe('TerraformingGanymede', function() {
+describe('TerraformingGanymede', () => {
   let card: TerraformingGanymede;
   let player: TestPlayer;
   let game: IGame;
@@ -17,7 +17,7 @@ describe('TerraformingGanymede', function() {
     [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(2);
     player.playedCards.push(card);

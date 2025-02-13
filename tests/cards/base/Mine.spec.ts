@@ -3,8 +3,8 @@ import {testGame} from '../../TestGame';
 import {Mine} from '../../../src/server/cards/base/Mine';
 import {cast} from '../../TestingUtils';
 
-describe('Mine', function() {
-  it('Should play', function() {
+describe('Mine', () => {
+  it('Should play', () => {
     const card = new Mine();
     const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);

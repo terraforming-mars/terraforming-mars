@@ -7,7 +7,7 @@ import {Luna} from '../../../src/server/colonies/Luna';
 import {testGame} from '../../TestGame';
 import {range} from '../../../src/common/utils/utils';
 
-describe('SoilStudies', function() {
+describe('SoilStudies', () => {
   let card: SoilStudies;
   let player: TestPlayer;
   let game: IGame;
@@ -17,7 +17,7 @@ describe('SoilStudies', function() {
     [game, player] = testGame(1);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     setTemperature(game, -2);
     expect(card.canPlay(player)).is.not.true;
   });
@@ -33,7 +33,7 @@ describe('SoilStudies', function() {
     {tags: {venus: 4, plant: 2, microbe: 2, wild: 1}, colonies: 1, expected: 9},
   ] as const;
   for (const run of playRuns) {
-    it('Play ' + JSON.stringify(run), function() {
+    it('Play ' + JSON.stringify(run), () => {
       player.tagsForTest = run.tags;
 
       const colony = new Luna();

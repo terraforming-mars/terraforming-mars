@@ -14,37 +14,37 @@ import {MicroMills} from '../../../src/server/cards/base/MicroMills';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 
-describe('CEOsFavoriteProject', function() {
+describe('CEOsFavoriteProject', () => {
   let card: CEOsFavoriteProject;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CEOsFavoriteProject();
     [/* game */, player] = testGame(2);
   });
 
-  it('Can not play - no cards', function() {
+  it('Can not play - no cards', () => {
     expect(card.canPlay(player)).is.false;
   });
 
-  it('Can not play - no cards that take resources', function() {
+  it('Can not play - no cards that take resources', () => {
     player.playedCards.push(new MicroMills());
     expect(card.canPlay(player)).is.false;
   });
 
-  it('Can not play - no cards that have r esources', function() {
+  it('Can not play - no cards that have r esources', () => {
     player.playedCards.push(new MicroMills(), new SecurityFleet());
     expect(card.canPlay(player)).is.false;
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
     const securityFleet = new SecurityFleet();
     player.playedCards.push(new MicroMills(), securityFleet);
     securityFleet.resourceCount = 1;
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const searchForLife = new SearchForLife();
     const securityFleet = new SecurityFleet();
     const decomposers = new Decomposers();
@@ -70,7 +70,7 @@ describe('CEOsFavoriteProject', function() {
     expect(securityFleet.resourceCount).to.eq(2);
   });
 
-  it('Can play on SelfReplicatingRobots cards', function() {
+  it('Can play on SelfReplicatingRobots cards', () => {
     const srr = new SelfReplicatingRobots();
     const birds = new Birds();
     player.playedCards.push(srr);
@@ -82,7 +82,7 @@ describe('CEOsFavoriteProject', function() {
     expect(srr.targetCards[0].resourceCount).to.eq(2);
   });
 
-  it('Cannot play on card with no resources', function() {
+  it('Cannot play on card with no resources', () => {
     const birds = new Birds();
     const securityFleet = new SecurityFleet();
     securityFleet.resourceCount++;

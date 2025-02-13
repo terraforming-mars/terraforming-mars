@@ -3,26 +3,26 @@ import {SpaceElevator} from '../../../src/server/cards/base/SpaceElevator';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('SpaceElevator', function() {
+describe('SpaceElevator', () => {
   let card: SpaceElevator;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SpaceElevator();
     [/* game */, player] = testGame(2);
   });
 
-  it('Can not act if no steel', function() {
+  it('Can not act if no steel', () => {
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
     expect(player.production.titanium).to.eq(1);
     expect(card.getVictoryPoints(player)).to.eq(2);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.steel = 1;
     expect(card.canAct(player)).is.true;
 

@@ -7,7 +7,7 @@ import {Apollo} from '../../../src/server/cards/ceos/Apollo';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 
-describe('Apollo', function() {
+describe('Apollo', () => {
   let card: Apollo;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -20,14 +20,14 @@ describe('Apollo', function() {
     moonData = MoonExpansion.moonData(game);
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     card.action(player);
     forceGenerationEnd(game);
     expect(card.isDisabled).is.true;
     expect(card.canAct(player)).is.false;
   });
 
-  it('Takes action: Gains 3 M€ for each Moon tile', function() {
+  it('Takes action: Gains 3 M€ for each Moon tile', () => {
     const spaces = moonData.moon.getAvailableSpacesOnLand(player);
     MoonExpansion.addHabitatTile(player, spaces[0].id);
     MoonExpansion.addMineTile(player2, spaces[1].id);

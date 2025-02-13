@@ -11,7 +11,7 @@ import {Networker} from '../../../src/server/milestones/Networker';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 
-describe('Gaia', function() {
+describe('Gaia', () => {
   let card: Gaia;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -25,7 +25,7 @@ describe('Gaia', function() {
     player.playedCards.push(card);
   });
 
-  it('Takes action', function() {
+  it('Takes action', () => {
     // Place a tile that grants 1MC adjacency bonuses
     const naturalPreserveAres = new NaturalPreserveAres();
     naturalPreserveAres.play(player2);
@@ -45,7 +45,7 @@ describe('Gaia', function() {
     expect(player.megaCredits).to.eq(2);
   });
 
-  it('Takes action, does not gain bonuses from Oceans', function() {
+  it('Takes action, does not gain bonuses from Oceans', () => {
     // Place a tile that grants 1MC adjacency bonuses
     const naturalPreservesSpace = game.board.getSpaceOrThrow('04');
     game.simpleAddTile(player2, naturalPreservesSpace, {tileType: TileType.NATURAL_PRESERVE});
@@ -61,7 +61,7 @@ describe('Gaia', function() {
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('Takes action, Networker Milestone does not get a benefit', function() {
+  it('Takes action, Networker Milestone does not get a benefit', () => {
     // Place a tile that grants 1MC adjacency bonuses
     const naturalPreservesSpace = game.board.getSpaceOrThrow('04');
     game.simpleAddTile(player2, naturalPreservesSpace, {tileType: TileType.NATURAL_PRESERVE});
@@ -79,7 +79,7 @@ describe('Gaia', function() {
     expect(milestone.getScore(player)).eq(0);
   });
 
-  it('Takes action, owner of the adjacency bonus tile does not gain MC', function() {
+  it('Takes action, owner of the adjacency bonus tile does not gain MC', () => {
     // Place a tile that grants 1MC adjacency bonuses
     const naturalPreservesSpace = game.board.getSpaceOrThrow('04');
     game.simpleAddTile(player2, naturalPreservesSpace, {tileType: TileType.NATURAL_PRESERVE});
@@ -97,7 +97,7 @@ describe('Gaia', function() {
   });
 
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     card.action(player);
     runAllActions(game);
 

@@ -6,8 +6,8 @@ import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {RecursivePartial} from '@/common/utils/utils';
 
-describe('PlayerInfo', function() {
-  it('Played card count test', function() {
+describe('PlayerInfo', () => {
+  it('Played card count test', () => {
     const thisPlayer: RecursivePartial<PublicPlayerModel> = {
       color: 'blue',
       tableau: [
@@ -34,7 +34,7 @@ describe('PlayerInfo', function() {
       localVue: getLocalVue(),
       parentComponent: {
         methods: {
-          getVisibilityState: function() {},
+          getVisibilityState: () => {},
         },
       },
       propsData: {

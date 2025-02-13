@@ -3,8 +3,8 @@ import {testGame} from '../../TestGame';
 import {SupplyDrop} from '../../../src/server/cards/prelude/SupplyDrop';
 import {cast} from '../../TestingUtils';
 
-describe('SupplyDrop', function() {
-  it('Should play', function() {
+describe('SupplyDrop', () => {
+  it('Should play', () => {
     const [/* game */, player] = testGame(1);
     const card = new SupplyDrop();
     cast(card.play(player), undefined);

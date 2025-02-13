@@ -5,20 +5,20 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast, churn} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('DeuteriumExport', function() {
+describe('DeuteriumExport', () => {
   let card: DeuteriumExport;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DeuteriumExport();
     [/* game */, player] = testGame(1, {preludeExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.playedCards.push(card);
     expect(churn(card.action(player), player)).is.undefined;
     expect(card.resourceCount).to.eq(1);

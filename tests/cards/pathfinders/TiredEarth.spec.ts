@@ -3,8 +3,8 @@ import {AcquiredCompany} from '../../../src/server/cards/base/AcquiredCompany';
 import {TiredEarth} from '../../../src/server/cards/pathfinders/TiredEarth';
 import {testGame} from '../../TestingUtils';
 
-describe('TiredEarth', function() {
-  it('resolve play', function() {
+describe('TiredEarth', () => {
+  it('resolve play', () => {
     const card = new TiredEarth();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

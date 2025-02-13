@@ -9,25 +9,25 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 
-describe('SelfReplicatingRobots', function() {
+describe('SelfReplicatingRobots', () => {
   let card: SelfReplicatingRobots;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SelfReplicatingRobots();
     [/* game */, player] = testGame(1);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.playedCards.push(new Research());
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.playedCards.push(card);
     expect(card.canAct(player)).is.not.true;
 

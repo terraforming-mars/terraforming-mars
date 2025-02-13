@@ -13,11 +13,11 @@ describe('Timer', () => {
     (Timer as any).lastStoppedAt = 0;
   });
 
-  it('starts at 00:00', function() {
+  it('starts at 00:00', () => {
     expect(Timer.toString(timer.serialize())).eq('00:00');
   });
 
-  it('changes running with start and stop', function() {
+  it('changes running with start and stop', () => {
     expect(timer.serialize().running).eq(false);
     timer.start();
     expect(timer.serialize().running).eq(true);
@@ -27,7 +27,7 @@ describe('Timer', () => {
     expect(timer.serialize().running).eq(true);
   });
 
-  it('shows 00:01 after 1 sec', function() {
+  it('shows 00:01 after 1 sec', () => {
     timer.start(); // Skipping first action.
     timer.stop();
     expect(Timer.toString(timer.serialize(), clock)).eq('00:00');
@@ -40,7 +40,7 @@ describe('Timer', () => {
     expect(Timer.toString(timer.serialize(), clock)).eq('00:01');
   });
 
-  it('shows 1:00:01 after 3601 sec', function() {
+  it('shows 1:00:01 after 3601 sec', () => {
     timer.start(); // Skipping first action
     timer.stop();
 

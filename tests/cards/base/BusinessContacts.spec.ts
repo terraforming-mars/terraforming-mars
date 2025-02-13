@@ -21,4 +21,19 @@ describe('BusinessContacts', () => {
     expect(player.cardsInHand).deep.eq([card1, card2]);
     expect(game.projectDeck.discardPile).deep.eq([card3, card4]);
   });
+
+  it('Cannot draw when the deck is empty', () => {
+    const card = new BusinessContacts();
+    const [game, player] = testGame(2);
+
+    game.projectDeck.discardPile.length = 0;
+    game.projectDeck.drawPile.length = 5;
+    expect(card.canPlay(player)).is.true;
+    game.projectDeck.drawPile.length = 4;
+    expect(card.canPlay(player)).is.true;
+    game.projectDeck.drawPile.length = 3;
+    expect(card.canPlay(player)).is.false;
+    game.projectDeck.drawPile.length = 2;
+    expect(card.canPlay(player)).is.false;
+  });
 });

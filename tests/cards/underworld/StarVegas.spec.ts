@@ -38,7 +38,6 @@ describe('StarVegas', () => {
     expect(selectSpace.spaces.map((space) => space.id)).to.have.members([
       SpaceName.GANYMEDE_COLONY,
       SpaceName.PHOBOS_SPACE_HAVEN,
-      SpaceName.STANFORD_TORUS,
     ]);
     const space = selectSpace.spaces[0];
 
@@ -64,7 +63,6 @@ describe('StarVegas', () => {
     expect(selectSpace.spaces.map((space) => space.id)).to.have.members([
       SpaceName.GANYMEDE_COLONY,
       SpaceName.PHOBOS_SPACE_HAVEN,
-      SpaceName.STANFORD_TORUS,
       SpaceName.LUNA_METROPOLIS,
       SpaceName.DAWN_CITY,
       SpaceName.STRATOPOLIS,
@@ -84,7 +82,6 @@ describe('StarVegas', () => {
     expect(selectSpace.spaces.map((space) => space.id)).to.have.members([
       SpaceName.GANYMEDE_COLONY,
       SpaceName.PHOBOS_SPACE_HAVEN,
-      SpaceName.STANFORD_TORUS,
       SpaceName.CERES_SPACEPORT,
       SpaceName.DYSON_SCREENS,
       SpaceName.LUNAR_EMBASSY,
@@ -103,7 +100,6 @@ describe('StarVegas', () => {
 
     expect(selectSpace.spaces.map((space) => space.id)).to.have.members([
       SpaceName.PHOBOS_SPACE_HAVEN,
-      SpaceName.STANFORD_TORUS,
     ]);
   });
 

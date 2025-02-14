@@ -11,6 +11,10 @@ import {NamedMoonSpaces} from '../../src/common/moon/NamedMoonSpaces';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptions';
 import {SpaceId} from '../../src/common/Types';
+import {CardName} from '../../src/common/cards/CardName';
+import {SpaceName} from '../../src/common/boards/SpaceName';
+import {testGame} from '../TestGame';
+import {toID} from '../../src/common/utils/utils';
 
 describe('Board', () => {
   let board: Board;
@@ -274,4 +278,18 @@ describe('Board', () => {
     expect(board.getSpaceOrThrow('01').player).eq(player1);
     expect(board.getSpaceOrThrow('03').player).eq(player2);
   });
+
+  const runs = [
+    {cards: [], spaces: [SpaceName.GANYMEDE_COLONY, SpaceName.PHOBOS_SPACE_HAVEN]},
+    {cards: [CardName.STANFORD_TORUS], spaces: [SpaceName.GANYMEDE_COLONY, SpaceName.PHOBOS_SPACE_HAVEN, SpaceName.STANFORD_TORUS]},
+    {cards: [CardName.VENERA_BASE], spaces: [SpaceName.GANYMEDE_COLONY, SpaceName.PHOBOS_SPACE_HAVEN, SpaceName.VENERA_BASE]},
+    {cards: [CardName.STANFORD_TORUS, CardName.VENERA_BASE], spaces: [SpaceName.GANYMEDE_COLONY, SpaceName.PHOBOS_SPACE_HAVEN, SpaceName.STANFORD_TORUS, SpaceName.VENERA_BASE]},
+  ] as const;
+  for (const run of runs) {
+    it('including cards adds their spaces ' + JSON.stringify(run.cards), () => {
+      const [game] = testGame(1, {includedCards: run.cards});
+      const spaceIds = game.board.spaces.filter((space) => space.spaceType === SpaceType.COLONY).map(toID);
+      expect(spaceIds).to.have.members(run.spaces);
+    });
+  }
 });

@@ -5,6 +5,8 @@ import {NamedSpace, SpaceName} from '../../common/boards/SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {Random} from '../../common/utils/Random';
 import {inplaceShuffle} from '../utils/shuffle';
+import {GameOptions} from '../game/GameOptions';
+import {expansionSpaceColonies} from '../../common/boards/expansionSpaceColonies';
 
 function colonySpace(id: SpaceId): Space {
   return {id, spaceType: SpaceType.COLONY, x: -1, y: -1, bonus: []};
@@ -22,8 +24,10 @@ export class BoardBuilder {
   private bonuses: Array<Array<SpaceBonus>> = [];
   private spaces: Array<Space> = [];
   private unshufflableSpaces: Array<number> = [];
+  private gameOptions: GameOptions;
 
-  constructor(private includeVenus: boolean, private includePathfinders: boolean) {
+  constructor(gameOptions: GameOptions) {
+    this.gameOptions = gameOptions;
   }
 
   ocean(...bonus: Array<SpaceBonus>): this {
@@ -82,23 +86,17 @@ export class BoardBuilder {
       }
     }
 
-    this.spaces.push(colonySpace(SpaceName.STANFORD_TORUS));
-    if (this.includeVenus) {
-      this.spaces.push(
-        colonySpace(SpaceName.DAWN_CITY),
-        colonySpace(SpaceName.LUNA_METROPOLIS),
-        colonySpace(SpaceName.MAXWELL_BASE),
-        colonySpace(SpaceName.STRATOPOLIS),
-      );
-    }
-    if (this.includePathfinders) {
-      this.spaces.push(
-        // Space.colony(SpaceName.MARTIAN_TRANSHIPMENT_STATION),
-        colonySpace(SpaceName.CERES_SPACEPORT),
-        colonySpace(SpaceName.DYSON_SCREENS),
-        colonySpace(SpaceName.LUNAR_EMBASSY),
-        colonySpace(SpaceName.VENERA_BASE),
-      );
+    // Include space colonies if the expansion is included, or if the card is included.
+    for (const entry of expansionSpaceColonies) {
+      let e: keyof GameOptions = 'boardName'; // arbitrary
+      switch (entry.expansion) {
+      case 'promo': e = 'promoCardsOption'; break;
+      case 'pathfinders': e = 'pathfindersExpansion'; break;
+      case 'venus': e = 'venusNextExtension'; break;
+      }
+      if (this.gameOptions[e] || this.gameOptions.includedCards.includes(entry.card)) {
+        this.spaces.push(colonySpace(entry.name));
+      }
     }
 
     return this.spaces;

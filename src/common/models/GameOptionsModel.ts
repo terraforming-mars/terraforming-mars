@@ -17,7 +17,7 @@ export type GameOptionsModel = {
   escapeVelocityPeriod?: number,
   escapeVelocityPenalty?: number,
   fastModeOption: boolean,
-  includedCards: Array<CardName>;
+  includedCards: ReadonlyArray<CardName>;
   includeFanMA: boolean,
   initialDraftVariant: boolean,
   preludeDraftVariant: boolean,

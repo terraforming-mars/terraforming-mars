@@ -70,7 +70,6 @@ describe('TerraCimmeriaBoard', () => {
       {'id': '61', 'spaceType': 'ocean', 'x': 6, 'y': 8, 'bonus': [2, 2]},
       {'id': '62', 'spaceType': 'land', 'x': 7, 'y': 8, 'bonus': [2]},
       {'id': '63', 'spaceType': 'ocean', 'x': 8, 'y': 8, 'bonus': [2, 2]},
-      {'id': '69', 'spaceType': 'colony', 'x': -1, 'y': -1, 'bonus': []},
     ]);
   });
 });

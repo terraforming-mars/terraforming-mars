@@ -86,7 +86,6 @@ describe('VastitasBorealisBoard', () => {
       {'id': '61', 'spaceType': 'land', 'x': 6, 'y': 8, 'bonus': [2]},
       {'id': '62', 'spaceType': 'land', 'x': 7, 'y': 8, 'bonus': [2, 2]},
       {'id': '63', 'spaceType': 'land', 'x': 8, 'y': 8, 'bonus': [1, 2]},
-      {'id': '69', 'spaceType': 'colony', 'x': -1, 'y': -1, 'bonus': []},
     ]);
   });
 

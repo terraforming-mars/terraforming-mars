@@ -70,7 +70,6 @@ describe('UtopiaPlanitiaBoard', () => {
       {'id': '61', 'spaceType': 'land', 'x': 6, 'y': 8, 'bonus': [1, 1]},
       {'id': '62', 'spaceType': 'ocean', 'x': 7, 'y': 8, 'bonus': [2]},
       {'id': '63', 'spaceType': 'land', 'x': 8, 'y': 8, 'bonus': [2]},
-      {'id': '69', 'spaceType': 'colony', 'x': -1, 'y': -1, 'bonus': []},
     ]);
   });
 });

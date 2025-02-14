@@ -12,7 +12,7 @@ const VOLCANIC_SPACE_IDS: ReadonlyArray<SpaceId> = ['05', '21', '27', '38'];
 const CURIOSITY_SPACE_ID: SpaceId = '16';
 export class TerraCimmeriaNovusBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): TerraCimmeriaNovusBoard {
-    const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
+    const builder = new BoardBuilder(gameOptions);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;

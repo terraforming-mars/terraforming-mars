@@ -50,7 +50,7 @@ export type GameOptions = {
   soloTR: boolean; // Solo victory by getting TR 63 by game end
   customCorporationsList: Array<CardName>;
   bannedCards: Array<CardName>;
-  includedCards: Array<CardName>;
+  includedCards: ReadonlyArray<CardName>;
   customColoniesList: Array<ColonyName>;
   customPreludes: Array<CardName>;
   customCeos: Array<CardName>;

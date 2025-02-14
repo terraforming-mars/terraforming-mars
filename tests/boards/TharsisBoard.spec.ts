@@ -70,7 +70,6 @@ describe('TharsisBoard', () => {
       {id: '61', spaceType: 'land', bonus: [], x: 6, y: 8},
       {id: '62', spaceType: 'land', bonus: [], x: 7, y: 8},
       {id: '63', spaceType: 'ocean', bonus: [0, 0], x: 8, y: 8},
-      {id: '69', spaceType: 'colony', bonus: [], x: -1, y: -1},
     ]);
   });
 });

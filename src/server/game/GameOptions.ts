@@ -48,12 +48,12 @@ export type GameOptions = {
   includeFanMA: boolean;
   modularMA: boolean;
   soloTR: boolean; // Solo victory by getting TR 63 by game end
-  customCorporationsList: Array<CardName>;
-  bannedCards: Array<CardName>;
+  customCorporationsList: ReadonlyArray<CardName>;
+  bannedCards: ReadonlyArray<CardName>;
   includedCards: ReadonlyArray<CardName>;
-  customColoniesList: Array<ColonyName>;
-  customPreludes: Array<CardName>;
-  customCeos: Array<CardName>;
+  customColoniesList: ReadonlyArray<ColonyName>;
+  customPreludes: ReadonlyArray<CardName>;
+  customCeos: ReadonlyArray<CardName>;
   startingCeos: number;
   // TODO(maserion): Remove '?' by 2025-01-01
   startingPreludes?: number;

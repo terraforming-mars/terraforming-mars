@@ -8,7 +8,7 @@ export type GameOptionsModel = {
   aresExtremeVariant: boolean,
   altVenusBoard: boolean,
   boardName: BoardName,
-  bannedCards: Array<CardName>;
+  bannedCards: ReadonlyArray<CardName>;
   expansions: Record<Expansion, boolean>,
   draftVariant: boolean,
   escapeVelocityMode: boolean,

@@ -3,7 +3,7 @@ import {testGame} from '../TestGame';
 import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
 import {BoardName} from '../../src/common/boards/BoardName';
-import {SpaceName} from '../../src/server/SpaceName';
+import {SpaceName} from '../../src/common/boards/SpaceName';
 import {HellasBoard} from '../../src/server/boards/HellasBoard';
 import {cast, runAllActions} from '../TestingUtils';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';

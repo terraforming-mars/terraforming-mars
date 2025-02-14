@@ -4,7 +4,7 @@ import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {addCity} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 
 describe('MartianMonuments', () => {
   let card: MartianMonuments;

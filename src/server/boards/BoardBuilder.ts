@@ -1,7 +1,7 @@
 import {Space} from './Space';
 import {SpaceId, isSpaceId, safeCast} from '../../common/Types';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {NamedSpace, SpaceName} from '../SpaceName';
+import {NamedSpace, SpaceName} from '../../common/boards/SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {Random} from '../../common/utils/Random';
 import {inplaceShuffle} from '../utils/shuffle';

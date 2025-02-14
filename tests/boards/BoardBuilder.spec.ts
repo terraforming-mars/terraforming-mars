@@ -4,7 +4,7 @@ import {SpaceType} from '../../src/common/boards/SpaceType';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {MultiSet} from 'mnemonist';
-import {SpaceName} from '../../src/server/SpaceName';
+import {SpaceName} from '../../src/common/boards/SpaceName';
 import {ArabiaTerraBoard} from '../../src/server/boards/ArabiaTerraBoard';
 import {preservingShuffle} from '../../src/server/boards/BoardBuilder';
 import {AmazonisBoard} from '../../src/server/boards/AmazonisBoard';

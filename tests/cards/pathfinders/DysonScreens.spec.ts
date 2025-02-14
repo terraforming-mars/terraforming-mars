@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {DysonScreens} from '../../../src/server/cards/pathfinders/DysonScreens';
 import {TestPlayer} from '../../TestPlayer';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {Units} from '../../../src/common/Units';
 import {testGame} from '../../TestGame';
 

@@ -3,7 +3,7 @@ import {Ingrid} from '../../../src/server/cards/ceos/Ingrid';
 import {IGame} from '../../../src/server/IGame';
 import {Phase} from '../../../src/common/Phase';
 import {addGreenery, addOcean, addCity, forceGenerationEnd, cast, runAllActions} from '../../TestingUtils';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {EcologicalZoneAres} from '../../../src/server/cards/ares/EcologicalZoneAres';

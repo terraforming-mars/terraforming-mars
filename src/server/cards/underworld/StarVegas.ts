@@ -4,7 +4,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {Card} from '../Card';
 import {IPlayer} from '../../IPlayer';
-import {SpaceName} from '../../SpaceName';
+import {SpaceName} from '../../../common/boards/SpaceName';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {Space} from '../../boards/Space';
 import {Resource} from '../../../common/Resource';

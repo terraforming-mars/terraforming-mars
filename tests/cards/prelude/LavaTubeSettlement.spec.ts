@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {LavaTubeSettlement} from '../../../src/server/cards/prelude/LavaTubeSettlement';
 import {Resource} from '../../../src/common/Resource';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {cast, runAllActions, testGame} from '../../TestingUtils';
 import {assertPlaceCity} from '../../assertions';

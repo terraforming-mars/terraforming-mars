@@ -1,4 +1,4 @@
-import {ValueOf} from '@/common/utils/utils';
+import {ValueOf} from '../utils/utils';
 
 export const SpaceName = {
   ARSIA_MONS: '29',

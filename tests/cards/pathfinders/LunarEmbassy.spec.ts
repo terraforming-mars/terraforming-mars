@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {LunarEmbassy} from '../../../src/server/cards/pathfinders/LunarEmbassy';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {testGame} from '../../TestingUtils';
 
 describe('LunarEmbassy', () => {

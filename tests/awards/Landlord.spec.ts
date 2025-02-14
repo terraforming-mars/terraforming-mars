@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Landlord} from '../../src/server/awards/Landlord';
-import {SpaceName} from '../../src/server/SpaceName';
+import {SpaceName} from '../../src/common/boards/SpaceName';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {NamedMoonSpaces} from '../../src/common/moon/NamedMoonSpaces';
 import {EmptyBoard} from '../testing/EmptyBoard';

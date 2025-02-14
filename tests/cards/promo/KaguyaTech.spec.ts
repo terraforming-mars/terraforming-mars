@@ -6,7 +6,7 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {EmptyBoard} from '../../testing/EmptyBoard';
 import {BoardName} from '../../../src/common/boards/BoardName';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {assertPlaceOcean} from '../../assertions';
 
 describe('KaguyaTech', () => {

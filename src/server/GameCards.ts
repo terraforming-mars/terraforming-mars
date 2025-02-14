@@ -114,7 +114,7 @@ export class GameCards {
     return ceos;
   }
 
-  private addCustomCards<T extends ICard>(cards: Array<T>, customList: Array<CardName> = []): Array<T> {
+  private addCustomCards<T extends ICard>(cards: Array<T>, customList: ReadonlyArray<CardName> = []): Array<T> {
     for (const cardName of customList) {
       const idx = cards.findIndex((c) => c.name === cardName);
       if (idx === -1) {

@@ -26,13 +26,13 @@ describe('InterplanetaryTransport', () => {
   });
 
   it('play - greeneries in space yield nothing', () => {
-    game.simpleAddTile(player, game.board.getSpaceOrThrow(SpaceName.STANFORD_TORUS), {tileType: TileType.GREENERY});
+    game.simpleAddTile(player, game.board.getSpaceOrThrow(SpaceName.GANYMEDE_COLONY), {tileType: TileType.GREENERY});
     card.play(player);
     expect(player.production.megacredits).eq(0);
   });
 
   it('play - cities in space yield money', () => {
-    game.simpleAddTile(player, game.board.getSpaceOrThrow(SpaceName.STANFORD_TORUS), {tileType: TileType.CITY});
+    game.simpleAddTile(player, game.board.getSpaceOrThrow(SpaceName.GANYMEDE_COLONY), {tileType: TileType.CITY});
     card.play(player);
     expect(player.production.megacredits).eq(1);
   });

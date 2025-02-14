@@ -9,7 +9,7 @@ describe('StanfordTorus', () => {
 
   beforeEach(() => {
     card = new StanfordTorus();
-    [/* game */, player] = testGame(2);
+    [/* game */, player] = testGame(2, {promoCardsOption: true});
   });
 
   it('Should play', () => {

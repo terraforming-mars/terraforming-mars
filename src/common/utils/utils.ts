@@ -167,3 +167,7 @@ export function copyAndClear<T>(array: Array<T>): Array<T> {
 export function toName<T>(item: {name: T}): T {
   return item.name;
 }
+
+export function toID<T>(item: {id: T}): T {
+  return item.id;
+}

@@ -9,7 +9,7 @@ import {SponsoredMohole} from '../../../src/server/cards/turmoil/SponsoredMohole
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {addOcean} from '../../TestingUtils';
 import {Phase} from '../../../src/common/Phase';
-import {TestPlayer} from 'tests/TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 
 describe('MarsFrontierAlliance', () => {

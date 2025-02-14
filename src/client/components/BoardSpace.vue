@@ -1,5 +1,5 @@
 <template>
-  <div :class="getMainClass()" :data_space_id="space.id">
+  <div v-if="space !== undefined" :class="getMainClass()" :data_space_id="space.id">
     <board-space-tile
       :space="space"
       :aresExtension="aresExtension"
@@ -45,7 +45,7 @@ export default Vue.extend({
   name: 'board-space',
   props: {
     space: {
-      type: Object as () => SpaceModel,
+      type: Object as () => SpaceModel | undefined,
     },
     text: {
       type: String,
@@ -67,14 +67,14 @@ export default Vue.extend({
   },
   methods: {
     getMainClass(): string {
-      let css = 'board-space board-space-' + this.space.id.toString();
+      let css = 'board-space board-space-' + this.space?.id.toString();
       css += ' board-space-selectable';
       return css;
     },
   },
   computed: {
     showBonus(): boolean {
-      return this.space.tileType === undefined || this.tileView === 'hide';
+      return this.space?.tileType === undefined || this.tileView === 'hide';
     },
   },
 });

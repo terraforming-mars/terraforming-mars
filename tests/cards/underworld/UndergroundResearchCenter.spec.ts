@@ -1,7 +1,8 @@
 import {expect} from 'chai';
 import {UndergroundResearchCenter} from '../../../src/server/cards/underworld/UndergroundResearchCenter';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions, toName} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
+import {toName} from '../../../src/common/utils/utils';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Tag} from '../../../src/common/cards/Tag';
 import {BiomassCombustors} from '../../../src/server/cards/base/BiomassCombustors';

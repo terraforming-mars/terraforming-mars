@@ -3,7 +3,8 @@ import {TheNewSpaceRace} from '../../../src/server/cards/pathfinders/TheNewSpace
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast, doWait, runAllActions, setRulingParty, toName} from '../../TestingUtils';
+import {cast, doWait, runAllActions, setRulingParty} from '../../TestingUtils';
+import {toName} from '../../../src/common/utils/utils';
 import {testGame} from '../../TestGame';
 import {AlliedBanks} from '../../../src/server/cards/prelude/AlliedBanks';
 import {BiosphereSupport} from '../../../src/server/cards/prelude/BiosphereSupport';

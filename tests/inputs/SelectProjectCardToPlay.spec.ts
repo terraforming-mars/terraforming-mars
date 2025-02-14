@@ -7,7 +7,8 @@ import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {CardName} from '../../src/common/cards/CardName';
 import {Payment} from '../../src/common/inputs/Payment';
 import {testGame} from '../TestGame';
-import {toName} from '../TestingUtils';
+import {toName} from '../../src/common/utils/utils';
+
 
 describe('SelectProjectCardToPlay', () => {
   let player: TestPlayer;

@@ -1,5 +1,6 @@
 import {expect} from 'chai';
-import {cast, toName} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
+import {toName} from '../../../src/common/utils/utils';
 import {FloatingTradeHub} from '../../../src/server/cards/prelude2/FloatingTradeHub';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';

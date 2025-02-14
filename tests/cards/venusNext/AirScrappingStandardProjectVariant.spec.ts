@@ -1,7 +1,8 @@
 import {expect} from 'chai';
 import {CardName} from '../../../src/common/cards/CardName';
 import {AirScrappingStandardProjectVariant} from '../../../src/server/cards/venusNext/AirScrappingStandardProjectVariant';
-import {runAllActions, setVenusScaleLevel, testRedsCosts, toName} from '../../TestingUtils';
+import {runAllActions, setVenusScaleLevel, testRedsCosts} from '../../TestingUtils';
+import {toName} from '../../../src/common/utils/utils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';

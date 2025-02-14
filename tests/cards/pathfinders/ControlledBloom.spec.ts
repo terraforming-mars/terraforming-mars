@@ -4,7 +4,8 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {CardName} from '../../../src/common/cards/CardName';
-import {addOcean, cast, fakeCard, toName} from '../../TestingUtils';
+import {addOcean, cast, fakeCard} from '../../TestingUtils';
+import {toName} from '../../../src/common/utils/utils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {CardResource} from '../../../src/common/CardResource';
 

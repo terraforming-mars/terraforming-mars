@@ -13,7 +13,8 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {CardName} from '../../../src/common/cards/CardName';
 import {MonsInsurance} from '../../../src/server/cards/promo/MonsInsurance';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {cast, toName} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
+import {toName} from '../../../src/common/utils/utils';
 import {CardType} from '../../../src/common/cards/CardType';
 
 describe('PublicSponsoredGrant', () => {

@@ -7,7 +7,8 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions, toName} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
+import {toName} from '../../../src/common/utils/utils';
 import {Units} from '../../../src/common/Units';
 import {IColony} from '../../../src/server/colonies/IColony';
 

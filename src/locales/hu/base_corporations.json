@@ -1,97 +1,61 @@
 {
-    "Beginner Corporation": "Kezdő Cégbirodalom",
-    "BEGINNER CORPORATION": "KEZDŐ CÉGBIRODALOM",
-    "You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.":
-        "42 M€-el kezdesz. A játék elején nem választhatsz 10 kártyát, hanem 10 kártyát kapsz ingyen.",
-
-    "Credicor": "Credicor",
-    "credicor": "credicor",
-    "CrediCor": "CrediCor",
-    "CREDICOR": "CREDICOR",
-    "You start with 57 M€.": "57 M€-el kezdesz.",
-    "Effect: After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4 M€.": 
-        "Hatás: Ha fizetsz egy kártyáért vagy egy standard projektért, ami 20 M€-be vagy többe kerül, akkor 4 M€-t kapsz.",
-
-    "Ecoline": "Ecoline",
-    "ECOLINE": "ECOLINE",
-    "ecoline": "ecoline",
-    "EcoLine": "EcoLine",
-    "You start with 2 plant production, 3 plants, and 36 M€.":  
-        "2 növény termeléssel, 3 növénnyel és 36 M€-el kezdesz.",
-    "Effect: You may always pay 7 plants, instead of 8, to place greenery.":
-        "Hatás: Mindig ahelyett, hogy 8 palántát fizetnél a növényzetlapka elhelyezéséért, fizess 7 palántát.",
-
-    "Helion": "Helion",
-    "HELION": "HELION",
-    "helion": "helion",
-    "You start with 3 heat production and 42 M€.": "3 hő termeléssel és 42 M€-vel kezdesz.",
-    "Effect: You may use heat as M€. You may not use M€ as heat.": 
-        "Hatás: Használhatsz hőt M€-ként. Nem használhatsz M€-t hőként.",
-
-    "Interplanetary Сinematics": "Interplanetary Сinematics",
-    "INTERPLANETARY": "INTERPLANETARY",
-    "CINEMATICS": "CINEMATICS",
-    "Interplanetary Cinematics": "Interplanetary Cinematics",
-    "You start with 20 steel and 30 M€.": "20 acéllal és 30 M€-el kezdesz",
-    "Effect: Each time you play an event, you gain 2 M€.": "Hatás: Amikor esemény kártyát játszol ki, kapsz 2 M€-et",
-
-    "Inventrix": "Inventrix",
-    "INVENTRIX": "INVENTRIX",
-    "As your first action in the game, draw 3 cards. Start with 45 M€.":
-        "A játék első akciójaként húzz 3 kártyát. 45 M€-el kezdesz.",
-    "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.":
-        "Hatás: A hőmérséklet, az oxigén, az óceán és a Vénusz követelmények +2 vagy -2 lépéssel módosulnak, a te választásod szerint.",
-
-    "Phobolog": "Phobolog",
-    "PhoboLog": "PhoboLog",
-    "PHOBOLOG": "PHOBOLOG",
-    "You start with 10 titanium and 23 M€.": "10 titánnal és 23 M€-el kezdesz.",
-    "Effect: Your titanium resources are each worth 1 M€ extra.": 
-        "Hatás: A titán erőforrásaid mindegyike 1 M€-el többet ér.",
-
-    "THARSIS": "THARSIS",
-    "REPUBLIC": "KÖZTÁRSASÁG",
-    "Tharsis Republic": "Tharsis Köztársaság",
-    "You start with 40 M€. As your first action in the game, place a city tile.": 
-        "40 M€-el kezdesz. A játék első akciójaként helyezz el egy várost.",
-    "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": 
-        "Hatás: Amikor bármilyen várost helyeznek el a MARSON, növeld a M€ termelésed 1 lépéssel. Amikor várost helyezel el, kapsz 3 M€-t.",
-
-    "Thorgate": "Thorgate",
-    "THORGATE": "THORGATE",
-    "You start with 1 energy production and 48 M€.": "1 energia termeléssel és 48 M€-el kezdesz.",
-    "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": 
-        "Hatás: Amikor energia inkonos kártyát játszol ki, vagy az alapvető erőműépítés projektet, akkor 3 M€-t kevesebbet fizetsz érte.",
-
-    "UNMI": "UNMI",
-    "UNITED": "UNITED",
-    "NATIONS": "NATIONS",
-    "MARS": "MARS",
-    "INITIATIVE": "INITIATIVE",
-    "UNITED NATIONS MARS INITIATIVE": "UNITED NATIONS MARS INITIATIVE",
-    "United Nations Mars Initiative": "United Nations Mars Initiative",
-    "You start with 40 M€.": "40 M€-el kezdesz.",
-    "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.":
-        "Akció: Ha a Terraformálási Értékedet ebben a körben növelték, akkor fizethetsz 3 M€-t, hogy 1 lépéssel többet növeld.",
-
-    "Mining Guild": "Mining Guild",
-    "MINING": "MINING",
-    "GUILD": "GUILD",
-    "You start with 30 M€, 5 steel and 1 steel production.": "30 M€-el, 5 acéllal és 1 acél termeléssel kezdesz.",
-    "Effect: Each time you place a tile on an area with a steel or titanium placement bonus, increase your steel production 1 step":
-        "Hatás: Minden alkalommal, amikor egy lapkát helyezel el egy területen, ahol van acél vagy titán elhelyezési bónusz, növeld az acél termelésed 1 lépéssel.",
-
-    "Terractor": "Terractor",
-    "TERACTOR": "TERACTOR",
-    "Teractor": "Teractor",
-    "You start with 60 M€.": "60 M€-el kezdesz.",
-    "Effect: When you play an Earth tag, you pay 3 M€ less for it.":
-        "Hatás: Amikor játszol egy Föld ikonnal, akkor 3 M€-t kevesebbet fizetsz érte.",
-
-    "Saturn Systems": "Saturn Systems",
-    "SATURN": "SATURN",
-    "SYSTEMS": "SYSTEMS",
-    "You start with 1 titanium production and 42 M€.": "1 titán termeléssel és 42 M€-el kezdesz.",
-    "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.":
-        "Hatás: Minden alkalommal, amikor bármilyen Jovian ikon kerül a játékba, beleértve ezt is, növeld a M€ termelésed 1 lépéssel."
+  "BEGINNER CORPORATION": "KEZDŐ CÉGBIRODALOM",
+  "Beginner Corporation": "Kezdő cégbirodalom",
+  "You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "42 M€-el kezdesz. A játék elején nem választhatsz 10 kártyát, hanem 10 kártyát kapsz ingyen.",
+  "CREDICOR": "CREDICOR",
+  "Credicor": "Credicor",
+  "CrediCor": "CrediCor",
+  "You start with 57 M€.": "57 M€-tel kezdesz.",
+  "Effect: After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4 M€.": "Hatás: Miután kijátszottál egy olyan kártyát, vagy általános projektet, aminek a költsége legalább 20 M€, kapsz 4 M€-et.",
+  "ECOLINE": "ECOLINE",
+  "Ecoline": "Ecoline",
+  "EcoLine": "EcoLine",
+  "You start with 2 plant production, 3 plants, and 36 M€.": "2-es palántatermeléssel, 3 palántával és 36 M€-tel kezdesz.",
+  "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "Hatás: 8 helyett 7 palántáért tudsz Növényzetlapkát lehelyezni.",
+  "HELION": "HELION",
+  "Helion": "Helion",
+  "You start with 3 heat production and 42 M€.": "3-as hőtermeléssel és 42 M€-tel kezdesz.",
+  "Effect: You may use heat as M€. You may not use M€ as heat.": "Hatás: Használhatod a hő erőforrást M€-ként, de nem használhatod a M€-et úgy, mintha hő lenne.",
+  "INTERPLANETARY": "INTERPLANETARY",
+  "CINEMATICS": "CINEMATICS",
+  "Interplanetary Cinematics": "Interplanetary Cinematics",
+  "You start with 20 steel and 30 M€.": "20 acéllal és 30 M€-tel kezdesz.",
+  "Effect: Each time you play an event, you gain 2 M€.": "Hatás: Valahányszor kijátszol egy eseményt, kapsz 2 M€-et.",
+  "INVENTRIX": "INVENTRIX",
+  "Inventrix": "Inventrix",
+  "As your first action in the game, draw 3 cards. Start with 45 M€.": "45 M€-tel kezdesz. A játékban az első akciódként húzz 3 kártyát!",
+  "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.": "Hatás: A hőmérséklet, oxigén és óceán követelményeidet +/-2 értékkel módosíthatod.",
+  "PHOBOLOG": "PHOBOLOG",
+  "Phobolog": "Phobolog",
+  "PhoboLog": "PhoboLog",
+  "You start with 10 titanium and 23 M€.": "10 titánnal és 23 M€-tel kezdesz.",
+  "Effect: Your titanium resources are each worth 1 M€ extra.": "Hatás: A titán erőforrásaid 1 M€-tel többet érnek.",
+  "THARSIS": "THARSIS",
+  "REPUBLIC": "KÖZTÁRSASÁG",
+  "Tharsis Republic": "Tharsis Köztársaság",
+  "You start with 40 M€. As your first action in the game, place a city tile.": "40 M€-el kezdesz. Első akciódként rakj le 1 ingyenes Városlapkát!",
+  "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "Hatás: Valahányszor a MARSRA lekerül egy Városlapka, növeld meg a M€-termelésed 1 értékkel! Amikor leraksz egy Városlapkát, kapsz 3 M€-et.",
+  "THORGATE": "THORGATE",
+  "Thorgate": "Thorgate",
+  "You start with 1 energy production and 48 M€.": "1-es energiatermeléssel és 48 M€-tel kezdesz.",
+  "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "Hatás: Amikor kijátszolt egy energiakártyát VAGY AZ ERŐMŰÉPÍTÉS ÁLTALÁNOS PROJEKTET, 3 M€-tel kevesebbet fizetsz érte.",
+  "UNITED NATIONS MARS INITIATIVE": "UNITED NATIONS MARS INITIATIVE",
+  "United Nations Mars Initiative": "United Nations Mars Initiative",
+  "UNMI": "UNMI",
+  "You start with 40 M€.": "40 M€-tel kezdesz.",
+  "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.": "Akció: Ha a Terraformálási Rátád növekedett ebben a generációban, elkölthetsz 3 M€-et, hogy emelhess rajta még 1 extra értéknyit.",
+  "MINING": "MINING",
+  "GUILD": "GUILD",
+  "Mining Guild": "Mining Guild",
+  "You start with 30 M€, 5 steel and 1 steel production.": "30 M€-tel, 5 acéllal és 1-es acéltermeléssel kezdesz.",
+  "Effect: Each time you place a tile on an area with a steel or titanium placement bonus, increase your steel production 1 step": "Hatás: Valahányszor lehelyezési bónusz miatt acélhoz vagy titánhoz jutsz, növeld meg az acéltermelésed 1 értékkel!",
+  "TERACTOR": "TERACTOR",
+  "Teractor": "Teractor",
+  "You start with 60 M€.": "60 M€-tel kezdesz.",
+  "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "Hatás: Amikor kijátszol egy Föld ikonos kártyát, 3 M€-tel kevesebbet kell fizetned érte.",
+  "SATURN": "SATURN",
+  "SYSTEMS": "SYSTEMS",
+  "Saturn Systems": "Saturn Systems",
+  "You start with 1 titanium production and 42 M€.": "1-es titántermeléssel és 42 M€-tel kezdesz.",
+  "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "Hatás: Valahányszor valaki kijátszik egy Jupiter ikont - ezzel együtt - növeld meg a M€-termelésed 1 értékkel!"
 }

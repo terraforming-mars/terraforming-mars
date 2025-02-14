@@ -31,8 +31,9 @@
 import Vue from 'vue';
 import {CardName} from '@/common/cards/CardName';
 import AppButton from '@/client/components/common/AppButton.vue';
-import {byType, getCard, getCards, toName} from '@/client/cards/ClientCardManifest';
+import {byType, getCard, getCards} from '@/client/cards/ClientCardManifest';
 import {CardType} from '@/common/cards/CardType';
+import {toName} from '@/common/utils/utils';
 
 const allItems: Array<CardName> = [
   ...getCards(byType(CardType.AUTOMATED)),

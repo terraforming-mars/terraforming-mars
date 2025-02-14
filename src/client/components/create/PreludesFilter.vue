@@ -37,8 +37,9 @@ import Vue from 'vue';
 
 import {CardName} from '@/common/cards/CardName';
 import {Expansion, GameModule, GAME_MODULES, MODULE_NAMES} from '@/common/cards/GameModule';
-import {byModule, byType, getCard, getCards, toName} from '@/client/cards/ClientCardManifest';
+import {byModule, byType, getCard, getCards} from '@/client/cards/ClientCardManifest';
 import {CardType} from '@/common/cards/CardType';
+import {toName} from '@/common/utils/utils';
 
 function preludeCardNames(module: GameModule): Array<CardName> {
   return getCards(byModule(module))

@@ -5,7 +5,7 @@ import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
 import {MarsBoard} from './MarsBoard';
 import {Turmoil} from '../turmoil/Turmoil';
-import {SpaceName} from '../SpaceName';
+import {SpaceName} from '../../common/boards/SpaceName';
 import {Space} from './Space';
 import {VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST} from '../../common/constants';
 import {SpaceCosts} from './Board';

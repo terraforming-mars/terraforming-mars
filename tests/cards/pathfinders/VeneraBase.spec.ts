@@ -8,7 +8,7 @@ import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
 import {Unity} from '../../../src/server/turmoil/parties/Unity';
 import {Units} from '../../../src/common/Units';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {TitanShuttles} from '../../../src/server/cards/colonies/TitanShuttles';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';

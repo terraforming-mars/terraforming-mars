@@ -1,6 +1,6 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {BoardBuilder} from './BoardBuilder';
-import {SpaceName} from '../SpaceName';
+import {SpaceName} from '../../common/boards/SpaceName';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
 import {MarsBoard} from './MarsBoard';

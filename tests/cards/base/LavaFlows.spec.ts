@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {LavaFlows} from '../../../src/server/cards/base/LavaFlows';
 import {IGame} from '../../../src/server/IGame';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';

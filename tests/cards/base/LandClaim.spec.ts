@@ -3,7 +3,7 @@ import {BoardName} from '../../../src/common/boards/BoardName';
 import {LandClaim} from '../../../src/server/cards/base/LandClaim';
 import * as constants from '../../../src/common/constants';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {AresHandler} from '../../../src/server/ares/AresHandler';

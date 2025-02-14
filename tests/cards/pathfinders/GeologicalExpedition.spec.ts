@@ -11,7 +11,7 @@ import {addCity, cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {CardResource} from '../../../src/common/CardResource';
 import {Units} from '../../../src/common/Units';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 
 describe('GeologicalExpedition', () => {

@@ -2,7 +2,7 @@ import {GameOptions} from '../game/GameOptions';
 import {IPlayer} from '../IPlayer';
 import {Random} from '../../common/utils/Random';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {SpaceName} from '../SpaceName';
+import {SpaceName} from '../../common/boards/SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {BoardBuilder} from './BoardBuilder';
 import {Space} from './Space';

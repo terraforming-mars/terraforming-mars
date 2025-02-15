@@ -30,7 +30,6 @@
     "Oxygen must be 6% or less.":"氧气必须在6%或者以下",
 
     "Inventors' Guild": "发明者指南",
-    "Action: Look at the top card and either buy it or discard it": "行动：查看计划卡牌库顶的牌，你可以买它或者弃掉它",
 
     "Martian Rails": "火星高铁",
     "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "行动：花费1电力，火星上每有1个城市，你获得1 M€。",
@@ -187,7 +186,6 @@
     "Fish": "鱼",
     "Action: Add 1 animal to this card.": "增加1个动物资源到本卡。",
     "(Requires +2 C° or warmer. Decrease any plant production 1 step.)": "需要火星温度至少为+2度。降低任一玩家的植物产量1级。",
-    "1 VP for each animal on this card.": "本卡上每有1个动物资源，获得1分。",
 
 
     "Lake Marineris": "水手湖",
@@ -281,7 +279,6 @@
 
     "Ganymede Colony": "木卫三殖民地",
     "Place a city tile ON THE RESERVED AREA.": "放置一个城市板块在预留位置上。",
-    "1 VP per Jovian tag you have.": "你每有一个木星标志，获得1分。",
 
     "Callisto Penal Mines": "木卫四开采法",
     "Increase your M€ production 3 steps.": "增加你的M€产量3级。",
@@ -372,7 +369,6 @@
     "Raise your TR 2 steps.": "提升你的改造度(TR) 2级。",
 
     "Solar Power": "太阳能",
-    "Increase your energy production 1 step.": "提升你的电力产量1级。",
 
     "Breathing Filters": "呼吸过滤器",
     "Requires 7% oxygen.": "需要氧气达到7%。",

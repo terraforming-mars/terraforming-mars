@@ -1,15 +1,15 @@
 {
   "Public Baths": "Öffentliches Bad",
   "Requires 6 oceans. Gain 6 M€.": "Benötigt 6 oder mehr Ozeanplättchen im Spiel. Erhalte 6 M€.",
-  
+
   "Casinos": "Casino",
   "Requires that you have a city. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Benötigt ein eigenes Stadtplättchen. Reduziere deine Energieproduktion um 1 und erhöhe deine M€-Produktion um 4.",
-  
+
   "Hospitals": "Krankenhäuser",
   "Effect: Each time a city is placed, gain a disease here.": "EFFEKT: Jedes Mal, wenn eine Stadt platziert wird, erhälst du hier eine Krankheit.",
   "Action: Remove a disease from ANY OF YOUR CARDS to gain 1 M€ per city in play.": "AKTION: Entferne eine Krankheit von EINER DEINER Karten und erhalte 1 M€ pro Stadt im Spiel.",
   "Decrease your energy production 1 step.": "Reduziere deine Energieproduktion um 1.",
-  
+
   "Supermarkets": "Supermarkt",
   "Requires two cities in play. Increase your M€ production 2 steps.": "Benötigt 2 Städte im Spiel. Erhöhe deine M€-Produktion um 2.",
 
@@ -37,7 +37,6 @@
 
   "Teslaract": "Teslarakt",
   "Action: Spend 1 energy production to gain 1 plant production.": "AKTION: Gebe 1 Energie-Produktion aus, um 1 Pflanzen-Produktion zu erhalten.",
-  "Raise your TR 1 step.": "Erhöhe deine TW um 1.",
 
   "Red Ships": "Rote Schiffe",
   "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "AKTION: Erhalte 1 M€ für jedes STADT- UND SPEZIALPLÄTTCHEN, die an einen Ozean grenzen.",
@@ -143,7 +142,6 @@
 
   "Sub-Crust Measurements": "Unterirdische Messungen",
   "Action: Draw a card.": "AKTION: Ziehe eine Karte.",
-  "Requires 2 science tags.": "Benötigt 2 eigene Wissenschaftssymbole.",
 
   "Potatoes": "Kartoffeln",
   "Lose 2 plants. Increase your M€ production 2 steps.": "Verliere 2 Pflanzen. Erhöhe deine M€-Produktion um 2.",

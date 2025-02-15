@@ -82,7 +82,7 @@
     "lint:fix": "eslint --fix src tests --ext ts --ext vue",
     "make:cards": "node build/src/server/tools/export_card_rendering.js",
     "make:css": "lessc src/styles/common.less build/styles.css && node src/server/tools/gzip.js",
-    "make:json": "node make_static_json.js",
+    "make:json": "npx ts-node src/tools/make_static_json.ts",
     "make:static": "npm run make:css && npm run make:json",
     "test": "npm run test:server && npm run test:client",
     "test:server": "ts-mocha -p tests/tsconfig.json -r tests/testing/setup.ts \"tests/*.spec.ts\" \"tests/!(client|integration)/**/*.spec.ts\"",

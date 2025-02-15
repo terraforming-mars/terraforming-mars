@@ -1,44 +1,46 @@
-/* eslint-disable no-undef */
-// Generates the files settings.json and translations.json, stored in src/genfiles
-
+// Generates the files settings.json and translations.json, stored in src/genfilesimport * as fs from 'fs';
 require('dotenv').config();
-const child_process = require('child_process');
-const fs = require('fs');
-const path = require('path');
+import * as fs from 'fs';
+import * as child_process from 'child_process';
+import * as path from 'path';
 
-function getAllTranslations() {
+type Translation = {[lang: string]: string}
+function getAllTranslations(): {[key: string]: Translation} {
   const pathToTranslationsDir = path.resolve('src/locales');
-  const translations = {};
-  let translationDir = '';
+  const translations: {[key: string]: Translation}= {};
 
   const dirs = fs.readdirSync(pathToTranslationsDir);
-  dirs.forEach((lang) => {
+  for (const lang of dirs) {
     const localeDir = path.join(pathToTranslationsDir, lang);
     if (lang.length === 2 && fs.statSync(localeDir).isDirectory()) {
-      translationDir = path.resolve(path.join(pathToTranslationsDir, lang));
+      const translationDir = path.resolve(path.join(pathToTranslationsDir, lang));
 
       const files = fs.readdirSync(translationDir);
-      files.forEach((file) => {
-        if (file === undefined || !file.endsWith('.json')) return;
+      for (const file of files) {
+        if (!file.endsWith('.json')) {
+          continue;
+        }
 
         const filename = path.join(translationDir, file);
         try {
-          const dataJson = JSON.parse(fs.readFileSync(filename, 'utf8'));
+          const content = fs.readFileSync(filename, 'utf8');
+          const json = JSON.parse(content);
 
-          for (const phrase in dataJson) {
-            if (dataJson.hasOwnProperty(phrase)) {
-              if (translations[phrase] === undefined) {
-                translations[phrase] = {};
-              }
-              translations[phrase][lang] = dataJson[phrase];
+          for (const phrase of Object.keys(json)) {
+            if (translations[phrase] === undefined) {
+              translations[phrase] = {};
             }
+            if (translations[phrase][lang] !== undefined) {
+              console.log(`${lang}: Repeated translation for [${phrase}]`);
+            }
+            translations[phrase][lang] = json[phrase];
           }
         } catch (e) {
           throw new Error(`While parsing ${filename}:` + e);
         }
-      });
+      }
     }
-  });
+  }
 
   return translations;
 }
@@ -95,15 +97,15 @@ fs.writeFileSync('src/genfiles/translations.json', JSON.stringify(
  * Generate translation files in `/assets/locales/*.json` to load them async by the client
  */
 function generateTranslations() {
-  const localesDir = path.join(__dirname, 'src/locales');
+  const localesDir = path.join(process.cwd(), 'src/locales');
   const localesCodes = fs.readdirSync(localesDir);
-  const destinationPath = path.join(__dirname, 'assets/locales');
+  const destinationPath = path.join(process.cwd(), 'assets/locales');
 
   if (!fs.existsSync(destinationPath)) {
     fs.mkdirSync(destinationPath);
   }
 
-  const isJSONExt = (fileName) => fileName.endsWith('.json');
+  const isJSONExt = (fileName: string) => fileName.endsWith('.json');
 
   localesCodes.forEach((localeCode) => {
     const localeDir = path.join(localesDir, localeCode);

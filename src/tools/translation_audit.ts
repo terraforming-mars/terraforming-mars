@@ -52,6 +52,7 @@ function parseJson(input: string): MultiMap<string, string> {
 
 const pathToTranslationsDir = path.resolve('src/locales');
 
+let errors = 0;
 const dirs = fs.readdirSync(pathToTranslationsDir);
 for (const lang of dirs) {
   const localeDir = path.join(pathToTranslationsDir, lang);
@@ -69,10 +70,15 @@ for (const lang of dirs) {
       for (const key of results.keys()) {
         if (results.get(key)!.length > 1) { // eslint-disable-line @typescript-eslint/no-non-null-assertion
           const uniqueCount = new Set(results.get(key)).size;
-          console.log(filename, key, uniqueCount);
+          console.log(filename, '[', uniqueCount, '] [', key, ']');
+          errors++;
         }
       }
     }
   }
 }
 
+if (errors > 0) {
+  console.error('Multiple translation strings in the same file. Stopping.');
+  process.exit(1);
+}

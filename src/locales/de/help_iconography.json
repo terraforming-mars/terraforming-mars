@@ -7,18 +7,16 @@
     "Tiles": "Felder",
     "Global Parameters": "Globale Parameter",
     "Others": "Andere",
-    
+
     "Building": "Gebäude",
     "Space": "Weltraum",
     "Science": "Wissenschaft",
     "Power": "Energie",
     "Earth": "Erde",
     "Jovian": "Jupiter",
-    "Venus": "Venus",
     "Plant": "Pflanze",
     "Microbe": "Mikrobe",
     "Animal": "Tier",
-    "City": "Stadt",
     "Wild": "Joker",
     "Event": "Ereignis",
     "Moon": "Mond",
@@ -127,8 +125,7 @@
     "Hot Keys" : "Tastaturkürzel",
     "Hotkeys Mapping" : "Tastaturkürzel-Belegung",
     "Main Board": "Spielbrett",
-    "Players Overview Table": "Spielerübersicht", 
-    "Cards in Hand": "Handkarten", 
-    "Colonies": "Kolonien",
-    "Fan Expansion Tags": "Fan-Erweiterungen"
+    "Players Overview Table": "Spielerübersicht",
+    "Cards in Hand": "Handkarten",
+    "Colonies": "Kolonien"
 }

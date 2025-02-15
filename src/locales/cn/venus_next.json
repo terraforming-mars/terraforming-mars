@@ -112,7 +112,6 @@
   "Floating Habs":"漂浮舱",
   "Action: Spend 2 M€ to add 1 floater to ANY card":"行动：花费2 M€并在任意一张牌上增加一个云资源",
   "Requires 2 science tags. 1 VP for every 2nd Floater on this card).":"需要你至少有2个科学标志。",
-  "Requires 2 science tags.":"需要你至少有2个科学标志。",
   "1 VP for every 2nd Floater on this card.":"本牌每2个云资源价值1分。",
 
 
@@ -160,11 +159,9 @@
   "Requires 4 science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a city tile on the RESERVED AREA.":"需要你拥有4个科学标志才能打出。减少1点电力产量，提升1点钛产量。放置一个城市板块到保留区。",
 
   "Deuterium Export":"输出氘",
-  "Action: Add 1 floater to this card.":"行动：放置1个云资源到本卡上",
   "Action: Spend 1 floater here to increase your energy production 1 step.":"行动：移除本卡上1个云资源以提升1点电力产量。",
 
   "Extractor Balloons":"热气球提取器",
-  "Action: Add 1 floater to this card.":"行动：放置1个云资源到本卡上",
   "OR":"或",
   "Action: Remove 2 floaters here to raise Venus 1 step.":"行动：移除本卡上2个云资源以提升金星改造度1级。",
   "Add 3 floaters to this card":"打出时，放置3个云资源到本卡上。",

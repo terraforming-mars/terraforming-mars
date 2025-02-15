@@ -1,30 +1,44 @@
 {
-  "(Choose a planet tag. This card counts as having 2 of that tag. Raise the planetary influence track accordingly. Gain 2 TR.)": "（选择一个行星标志。此卡片计为两个标志。提升相应的行星轨道。将你的改造度增加2。）",
-  "(Gain 10 M€. Play an active floater card from hand, ignoring requirements, and add 5 floaters to it.)": "(获得10M€。打出一张使用悬浮物的蓝色卡牌，忽略其参数条件。增加5个悬浮物。)",
-  "(Gain 4 titanium. Draw 2 event cards with a space tag.)": "(抽取2张太空事件。获得4个钛金属。)",
-  "(Gain 5 M€. Increase your plant production 1 step and your steel production 1 step.)": "将你的植物和钢铁产能提高1。获得5 M€。",
-  "(Gain 5 steel. Land-claim three non-reserved spaces in a triangle shape. Gain all placement bonuses. Only you may place tiles there, and will gain placement bonuses again.)": "预订3个相邻的三角形排列的领域并获得它们的放置奖励。只有你可以在那里放置饰片并再次获得放置奖励。获得5个钢铁。",
-  "(Increase the Venus scale 1 step. Increase your titanium production 1 step. Gain 6 M€.)": "将金星提高2％。将你的钛产能提高1。获得6M€。",
-  "(Increase your M€ production 3 steps. Draw 2 cards with a microbe tag.)": "（抽取2张带有微生物标志的牌。将你的M€产能增加3。）",
-  "(Increase your M€ production 3 steps. Draw 3 event cards that do not have a space tag.)": "（抽取3张没有太空标志的事件卡。将你的M€产能增加3。）",
-  "(Increase your steel production 1 step. Draw 3 cards with a building tag.)": "抽取3张建筑卡。将你的钢铁产能增加1。",
-  "(Pay 8M€. Place a city. Place a colony.)": "支付8M€。建立一个殖民地。放置一个城市板块。",
-  "(Place 1 delegate in any party. Draw 2 cards with a Mars tag. Increase your M€ production 2 steps.)": "抽取2张火星牌。将你的M€产能增加2。将1个代表放入任意政党。",
-  "(Place a colony. Receive the placement bonus twice.)": "建立一个殖民地。获得放置奖励的双倍。",
-  "(REVEALED BEFORE ANY OTHER PRELUDE. You become starting player for the game. Choose and set a ruling policy for the first generation. Gain 12 M€.)": "（在任何其他前序卡之前揭示。你成为游戏的起始玩家。你设定执政党。获得12 M€。）",
-  "(Raise Venus 2 steps. Draw 2 Venus cards.)": "将金星提高4％。抽取2张金星卡。",
-  "2x bonus": "2倍奖励",
-  "Anti-desertification Techniques": "抗沙漠化科技",
-  "CO² Reducers": "CO2减排器",
+  "CO² Reducers": "CO₂减排器",
+  "(Increase your M€ production 3 steps. Draw 2 cards with a microbe tag.)": "（将你的M€产能增加3。抽2张微生物牌。）",
+
   "Crew Training": "机组人员培训",
+  "(Choose a planet tag. This card counts as having 2 of that tag. Raise the planetary influence track accordingly. Gain 2 TR.)": "（选择一个行星标志，此卡视为两个行星标志。根据所选标志提升对应行星轨道。将你的改造度增加2。）",
+
   "Deep Space Operations": "深空操作",
+  "(Gain 4 titanium. Draw 2 event cards with a space tag.)": "（获得4个钛合金资源。抽2张太空事件牌。）",
+
   "Design Company": "公司设计",
+  "(Increase your steel production 1 step. Draw 3 cards with a building tag.)": "（将你的钢铁产能增加1。抽取3张建筑卡。）",
+
   "Experienced Martians": "经验丰富的火星人",
+  "(Place 1 delegate in any party. Draw 2 cards with a Mars tag. Increase your M€ production 2 steps.)": "（抽2张火星牌。将你的M€产能增加2。将1个代表放入任意政党。）",
+
   "Hydrogen Bombardment": "氢弹攻击",
-  "Increase your energy production by 1. Gain 14 M€.": "将你的电力产能提高1。获得14 M€。",
+  "(Increase the Venus scale 1 step. Increase your titanium production 1 step. Gain 6 M€.)": "（提升1格金星改造度。将你的钛产能提高1。获得6M€。）",
+
   "Personal Agenda": "个人议程",
-  "Strategic Base Planning": "战略基础规划",
+  "(Increase your M€ production 3 steps. Draw 3 event cards that do not have a space tag.)": "（将你的M€产能增加3。抽3张不含太空标志的事件牌。）",
+
+  "Research Grant": "研发资助",
+  "Research Grant:Pathfinders": "研发资助：探路者",
+  "(Increase your energy production by 1. Gain 14 M€.)": "（将你的电力产能提高1。获得14M€。）",
+
   "Survey Mission": "探索任务",
+  "(Gain 5 steel. Land-claim three non-reserved spaces in a triangle shape. Gain all placement bonuses. Only you may place tiles there, and will gain placement bonuses again.)": "（获得5个钢铁资源。以三角形布局圈占3个非保留区域，并获得它们的放置奖励。只有你可以在那里放置板块并再次获得放置奖励。）",
+
   "The New Space Race": "新的太空竞赛",
-  "Venus first": "金星第一"
+  "(REVEALED BEFORE ANY OTHER PRELUDE. You become starting player for the game. Choose and set a ruling policy for the first generation. Gain 12 M€.)": "（在任何其他前序牌之前揭示。你成为游戏的起始玩家，并为第一时代选择执政党。获得12M€。）",
+
+  "Valuable Gases": "贵重气体",
+  "Valuable Gases:Pathfinders": "贵重气体：探路者",
+  "(Gain 10 M€. Play an active floater card from hand, ignoring requirements, and add 5 floaters to it.)": "（获得10M€。打出一张使用悬浮物的行动牌，忽略其参数条件。增加5个悬浮物。）",
+
+  "Venus First": "金星优先",
+  "Venus First:Pathfinders": "金星优先：探路者",
+  "(Raise Venus 2 steps. Draw 2 Venus cards.)": "（提升2格金星改造度。抽2张金星牌。）",
+
+  "Vital Colony": "重点殖民地",
+  "2x bonus": "2倍奖励",
+  "(Place a colony. Receive the placement bonus twice.)": "（放置一个殖民地。获得2倍殖民奖励。）"
 }

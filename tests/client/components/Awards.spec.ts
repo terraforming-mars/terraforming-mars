@@ -14,8 +14,8 @@ const names: Array<AwardName> = ['Banker', 'Celebrity'];
 function createAward({id = 1, funded = false}): FundedAwardModel {
   return {
     name: names[id - 1],
-    playerName: funded ? 'Foo' : '',
-    playerColor: funded ? 'red': '',
+    playerName: funded ? 'Foo' : undefined,
+    playerColor: funded ? 'red': undefined,
     scores: [],
   };
 }

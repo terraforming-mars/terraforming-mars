@@ -10,8 +10,8 @@ function createAward(
 ): FundedAwardModel {
   return {
     name: `Cosmic Settler`,
-    playerName: funded ? 'Foo' : '',
-    playerColor: funded ? 'red': '',
+    playerName: funded ? 'Bob' : undefined,
+    playerColor: funded ? 'red': undefined,
     scores,
   };
 }

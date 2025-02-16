@@ -58,7 +58,7 @@ export default Vue.extend({
   components: {Award},
   props: {
     awards: {
-      type: Array as () => FundedAwardModel[],
+      type: Array as () => Array<FundedAwardModel>,
       required: true,
     },
     showScores: {

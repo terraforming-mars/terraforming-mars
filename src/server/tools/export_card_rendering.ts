@@ -13,8 +13,10 @@ import {isPreludeCard} from '../cards/prelude/IPreludeCard';
 import {IColonyMetadata} from '../../common/colonies/IColonyMetadata';
 import {Units} from '../../common/Units';
 import {ALL_COLONIES_TILES, getColonyModule} from '../colonies/ColonyManifest';
-import {ALL_MILESTONES} from '../milestones/Milestones';
-import {ALL_AWARDS} from '../awards/Awards';
+import {milestoneManifest} from '../milestones/Milestones';
+import {awardManifest} from '../awards/Awards';
+import {awardNames} from '../../common/ma/AwardName';
+import {milestoneNames} from '../../common/ma/MilestoneName';
 import {AwardMetadata, MilestoneMetadata} from '../../common/ma/MilestoneAwardMetadata';
 import {CardType} from '../../common/cards/CardType';
 import {OneOrArray} from '../../common/utils/types';
@@ -144,10 +146,10 @@ class ColoniesProcessor {
 class MilestoneProcessor {
   public static json: Array<MilestoneMetadata> = [];
   public static makeJson() {
-    ALL_MILESTONES.forEach((milestone) => {
+    milestoneNames.forEach((name) => {
       MilestoneProcessor.json.push({
-        name: milestone.name,
-        description: milestone.description,
+        name,
+        description: milestoneManifest.createOrThrow(name).description,
       });
     });
   }
@@ -156,10 +158,10 @@ class MilestoneProcessor {
 class AwardProcessor {
   public static json: Array<AwardMetadata> = [];
   public static makeJson() {
-    ALL_AWARDS.forEach((award) => {
+    awardNames.forEach((name) => {
       AwardProcessor.json.push({
-        name: award.name,
-        description: award.description,
+        name,
+        description: awardManifest.createOrThrow(name).description,
       });
     });
   }

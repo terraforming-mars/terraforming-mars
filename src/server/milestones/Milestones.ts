@@ -56,141 +56,116 @@ import {Thawer} from './modular/Thawer';
 import {Purifier} from './Purifier';
 // import {Agronomist} from './Agronomist';
 // import {Merchant} from './modular/Merchant';
+import {MAManifest} from '../ma/MAManifest';
+import {MilestoneName} from '../../common/ma/MilestoneName';
+import {BoardName} from '../../common/boards/BoardName';
 
-export const THARSIS_MILESTONES = [
-  new Terraformer(),
-  new Mayor(),
-  new Gardener(),
-  new Builder(),
-  new Planner(),
-];
-
-export const VENUS_MILESTONES = [
-  new Hoverlord(),
-];
-
-export const ELYSIUM_MILESTONES = [
-  new Generalist(),
-  new Specialist(),
-  new Ecologist(),
-  new Tycoon(),
-  new Legend(),
-];
-
-export const UTOPIA_PLANITIA_MILESTONES = [
-  // new Specialist(),
-  // new Pioneer(),
-  // new Trader(),
-  // new Metallurgist(),
-  // new Researcher(),
-];
-
-export const HELLAS_MILESTONES = [
-  new Diversifier(),
-  new Tactician(),
-  new PolarExplorer(),
-  new Energizer(),
-  new RimSettler(),
-];
-
-export const ARES_MILESTONES = [
-  new Networker(),
-  new Purifier(),
-];
-
-export const MOON_MILESTONES = [
-  new OneGiantStep(),
-  new Lunarchitect(),
-];
-
-export const AMAZONIS_PLANITIA_MILESTONES = [
-  new Colonizer(),
-  new Forester(),
-  new Minimalist(),
-  new Terran(),
-  new Tropicalist(),
-];
-
-export const ARABIA_TERRA_MILESTONES = [
-  new Economizer(),
-  new Pioneer(),
-  new LandSpecialist(),
-  new Martian(),
-  new Terran(), // Duplicate of Amazonis Planitia
-];
-
-export const TERRA_CIMMERIA_MILESTONES = [
-  new Collector(),
-  new Firestarter(),
-  new TerraPioneer(),
-  new Spacefarer(),
-  new Gambler(),
-];
-
-export const VASTITAS_BOREALIS_MILESTONES = [
-  new VElectrician(),
-  new Smith(),
-  new Tradesman(),
-  new Irrigator(),
-  new Capitalist(),
-];
-
-// export const VASTITAS_BOREALIS_NOVUS_MILESTONES = [
-//   // new Agronomist(),
-//   new Engineer(),
-//   new VSpacefarer(),
-//   new Geologist(),
-//   new Farmer(),
-// ];
-
-export const UNDERWORLD_MILESTONES = [
-  new Risktaker(),
-  new Tunneler(),
-];
-
-export const MODULAR_MILESTONES = [
-  new Farmer(),
-  // new Briber(),
-  new Fundraiser(),
-  new Geologist(),
-  new Hydrologist(),
-  new Landshaper(),
-  new Lobbyist(),
-  // new Merchant(),
-  new Philantropist(),
-  new Planetologist(),
-  new Producer(),
-  new Researcher(),
-  new Sponsor(),
-  new Thawer(),
-  new Engineer(),
-];
-
-export const ALL_MILESTONES = [
-  ...THARSIS_MILESTONES,
-  ...ELYSIUM_MILESTONES,
-  ...HELLAS_MILESTONES,
-  ...UTOPIA_PLANITIA_MILESTONES,
-  ...VENUS_MILESTONES,
-  ...ARES_MILESTONES,
-  ...MOON_MILESTONES,
-  ...AMAZONIS_PLANITIA_MILESTONES,
-  ...ARABIA_TERRA_MILESTONES,
-  ...TERRA_CIMMERIA_MILESTONES,
-  ...VASTITAS_BOREALIS_MILESTONES,
-  ...UNDERWORLD_MILESTONES,
-  ...MODULAR_MILESTONES,
-];
-
-// Remove namespace and rename function
-export function getMilestoneByName(name: string): IMilestone | undefined {
-  return ALL_MILESTONES.find((m) => m.name === name);
-}
-
-export function getMilestoneByNameOrThrow(name: string): IMilestone {
-  const milestone = getMilestoneByName(name);
-  if (milestone) {
-    return milestone;
-  }
-  throw new Error(`Milestone ${name} not found.`);
-}
+export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
+  all: {
+    'Terraformer': {Factory: Terraformer},
+    'Mayor': {Factory: Mayor},
+    'Gardener': {Factory: Gardener},
+    'Planner': {Factory: Planner},
+    'Builder': {Factory: Builder},
+    'Generalist': {Factory: Generalist},
+    'Specialist': {Factory: Specialist},
+    'Ecologist': {Factory: Ecologist},
+    'Tycoon': {Factory: Tycoon},
+    'Legend': {Factory: Legend},
+    'Diversifier': {Factory: Diversifier},
+    'Tactician': {Factory: Tactician},
+    'Polar Explorer': {Factory: PolarExplorer},
+    'Energizer': {Factory: Energizer},
+    'Rim Settler': {Factory: RimSettler},
+    'Hoverlord': {Factory: Hoverlord, compatibility: 'venus'},
+    'Networker': {Factory: Networker, compatibility: 'ares'},
+    'One Giant Step': {Factory: OneGiantStep, compatibility: 'moon'},
+    'Lunarchitect': {Factory: Lunarchitect, compatibility: 'moon'},
+    'Colonizer': {Factory: Colonizer, compatibility: 'colonies'},
+    'Forester': {Factory: Forester},
+    'Minimalist': {Factory: Minimalist},
+    'Terran': {Factory: Terran},
+    'Tropicalist': {Factory: Tropicalist},
+    'Economizer': {Factory: Economizer},
+    'Pioneer': {Factory: Pioneer, compatibility: 'colonies'},
+    'Land Specialist': {Factory: LandSpecialist},
+    'Martian': {Factory: Martian, compatibility: 'pathfinders'},
+    'T. Collector': {Factory: Collector},
+    'Firestarter': {Factory: Firestarter},
+    'Terra Pioneer': {Factory: TerraPioneer},
+    'Spacefarer': {Factory: Spacefarer},
+    'Gambler': {Factory: Gambler},
+    'V. Electrician': {Factory: VElectrician},
+    'Smith': {Factory: Smith},
+    'Tradesman': {Factory: Tradesman},
+    'Irrigator': {Factory: Irrigator},
+    'Capitalist': {Factory: Capitalist},
+    'Tunneler': {Factory: Tunneler, compatibility: 'underworld'},
+    'Risktaker': {Factory: Risktaker, compatibility: 'underworld'},
+    'Engineer': {Factory: Engineer},
+    'Fundraiser': {Factory: Fundraiser},
+    'Geologist': {Factory: Geologist},
+    'Landshaper': {Factory: Landshaper},
+    'Lobbyist': {Factory: Lobbyist, compatibility: 'turmoil'},
+    'Philantropist': {Factory: Philantropist},
+    'Planetologist': {Factory: Planetologist},
+    'Producer': {Factory: Producer},
+    'Researcher': {Factory: Researcher},
+    'Sponsor': {Factory: Sponsor},
+    'Farmer': {Factory: Farmer},
+    // 'Briber': {Factory: Briber},
+    // 'Merchant': {Factory: Merchant},
+    'Thawer': {Factory: Thawer},
+    'Hydrologist': {Factory: Hydrologist},
+    'Purifier': {Factory: Purifier, compatibility: 'ares'},
+  },
+  boards: {
+    [BoardName.THARSIS]: ['Terraformer', 'Mayor', 'Gardener', 'Builder', 'Planner'],
+    [BoardName.HELLAS]: ['Diversifier', 'Tactician', 'Polar Explorer', 'Energizer', 'Rim Settler'],
+    [BoardName.ELYSIUM]: ['Generalist', 'Specialist', 'Ecologist', 'Tycoon', 'Legend'],
+    [BoardName.AMAZONIS]: ['Colonizer', 'Forester', 'Minimalist', 'Terran', 'Tropicalist'],
+    [BoardName.ARABIA_TERRA]: ['Economizer', 'Pioneer', 'Land Specialist', 'Martian', 'Terran'],
+    [BoardName.TERRA_CIMMERIA]: ['T. Collector', 'Firestarter', 'Terra Pioneer', 'Spacefarer', 'Gambler'],
+    [BoardName.VASTITAS_BOREALIS]: ['V. Electrician', 'Smith', 'Tradesman', 'Irrigator', 'Capitalist'],
+    [BoardName.UTOPIA_PLANITIA]: [/* 'Suburbian', 'Investor', 'Botanist', 'Incorporator', 'Metropolist' */],
+    [BoardName.VASTITAS_BOREALIS_NOVUS]: [],
+    [BoardName.TERRA_CIMMERIA_NOVUS]: [],
+  },
+  expansions: {
+    venus: ['Hoverlord'],
+    ares: ['Networker', 'Purifier'],
+    moon: ['One Giant Step', 'Lunarchitect'],
+    underworld: ['Risktaker', 'Tunneler'],
+  },
+  modular: [
+    // 'Briber',
+    'Engineer',
+    'Farmer',
+    'Fundraiser',
+    'Geologist',
+    'Hydrologist',
+    'Landshaper',
+    'Lobbyist',
+    // 'Merchant',
+    'Philantropist',
+    'Planetologist',
+    'Producer',
+    'Researcher',
+    'Sponsor',
+    'Thawer',
+  ],
+  create: (name: string) => {
+    try {
+      return milestoneManifest.createOrThrow(name);
+    } catch (e) {
+      return undefined;
+    }
+  },
+  createOrThrow(name: string) {
+    try {
+      return new milestoneManifest.all[name as MilestoneName].Factory();
+    } catch (e) {
+      throw new Error(`Milestone ${name} not found.`);
+    }
+  },
+} as const;

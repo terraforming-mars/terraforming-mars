@@ -122,24 +122,22 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
 export function getCandidates(gameOptions: GameOptions): [Array<MilestoneName>, Array<AwardName>] {
   function include<T extends string>(name: T, manifest: MAManifest<T, any>): boolean {
     if (!gameOptions.modularMA) {
-      if (manifest.boards[BoardName.THARSIS].includes(name)) {
+      function boardHasMA(board: BoardName) {
+        return manifest.boards[board].includes(name);
+      }
+      if ([BoardName.THARSIS, BoardName.ELYSIUM, BoardName.HELLAS].some(boardHasMA)) {
         return true;
       }
-      if (manifest.boards[BoardName.ELYSIUM].includes(name)) {
-        return true;
-      }
-      if (manifest.boards[BoardName.HELLAS].includes(name)) {
-        return true;
-      }
-      if (gameOptions.includeFanMA === false) {
+      // TODO(kberg): Shares some ideas with ApiCreateGame
+      if (Object.values(BoardName).some(boardHasMA) && gameOptions.includeFanMA === false) {
         return false;
       }
     } else {
-      if (!manifest.modular.includes(name)) {
+      if (manifest.modular.includes(name) === false) {
         return false;
       }
     }
-    if (isCompatible(name, manifest, gameOptions) === false) {
+    if (!isCompatible(name, manifest, gameOptions)) {
       return false;
     }
     return true;

@@ -386,21 +386,11 @@ export default (Vue as WithRefs<Refs>).extend({
         visitor: undefined,
       };
     },
-    milestoneModel(milestoneName: MilestoneName): ClaimedMilestoneModel {
-      return {
-        name: milestoneName,
-        playerName: '',
-        playerColor: '',
-        scores: [],
-      };
+    milestoneModel(name: MilestoneName): ClaimedMilestoneModel {
+      return {name, playerName: undefined, playerColor: undefined, scores: []};
     },
-    awardModel(awardName: AwardName): FundedAwardModel {
-      return {
-        name: awardName,
-        playerName: '',
-        playerColor: '',
-        scores: [],
-      };
+    awardModel(name: AwardName): FundedAwardModel {
+      return {name, playerName: undefined, playerColor: undefined, scores: []};
     },
     // experimentalUI might not be used at the moment, but it's fine to just leave it here.
     experimentalUI(): boolean {

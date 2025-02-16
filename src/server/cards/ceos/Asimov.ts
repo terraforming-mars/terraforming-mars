@@ -11,9 +11,9 @@ import {Size} from '../../../common/cards/render/Size';
 import {awardManifest} from '../../awards/Awards';
 import {AwardScorer} from '../../awards/AwardScorer';
 import {message} from '../../logs/MessageBuilder';
-import {AWARD_COMPATIBILITY} from '../../../common/ma/compatibilities';
 import {AwardName, awardNames} from '../../../common/ma/AwardName';
 import {inplaceRemove} from '../../../common/utils/utils';
+import {isCompatible} from '../../ma/MAManifest';
 
 export class Asimov extends CeoCard {
   constructor() {
@@ -88,20 +88,7 @@ export class Asimov extends CeoCard {
     for (const award of player.game.awards) {
       inplaceRemove(candidates, award.name);
     }
-    const validAwards = candidates.filter((award) => {
-      // TODO(kberg): Centralize this so this card doesn't have to be updated.
-      // Remove awards that require unused variants/expansions
-      switch (AWARD_COMPATIBILITY[award].compatibility) {
-      case 'venus': return gameOptions.venusNextExtension;
-      case 'colonies': return gameOptions.coloniesExtension;
-      case 'turmoil': return gameOptions.turmoilExtension;
-      case 'ares': return gameOptions.aresExtension;
-      case 'moon': return gameOptions.moonExpansion;
-      case 'underworld': return gameOptions.underworldExpansion;
-      }
-
-      return true;
-    });
+    const validAwards = candidates.filter((awardName) => isCompatible(awardName, awardManifest, gameOptions));
     if (validAwards.length === 0) throw new Error('getValidAwards award list is empty.');
     return validAwards;
   }

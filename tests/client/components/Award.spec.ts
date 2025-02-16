@@ -39,37 +39,19 @@ describe('Award', () => {
     expect(wrapper.text()).to.not.include(expected);
   });
 
-  it('doesn\'t show scores', () => {
-    const award = createAward({
-      funded: true,
-      scores: [
-        {playerColor: 'red', playerScore: 2},
-      ],
+  const showScoresRuns = [
+    {value: undefined, expected: true},
+    {value: true, expected: true},
+    {value: false, expected: false},
+  ] as const;
+  for (const run of showScoresRuns) {
+    it('Show scores ' + run.value, () => {
+      const award = createAward({funded: true, scores: [{playerColor: 'red', playerScore: 2}]});
+      const wrapper = mount(Award, {localVue: getLocalVue(), propsData: {award, showScores: run.value}});
+
+      expect(wrapper.find('[data-test=player-score]').exists()).to.eq(run.expected);
     });
-
-    const wrapper = mount(Award, {
-      localVue: getLocalVue(),
-      propsData: {award},
-    });
-
-    expect(wrapper.find('[data-test=player-score]').exists()).to.be.false;
-  });
-
-  it('shows scores if showScores is passed', () => {
-    const award = createAward({
-      funded: true,
-      scores: [
-        {playerColor: 'red', playerScore: 2},
-      ],
-    });
-
-    const wrapper = mount(Award, {
-      localVue: getLocalVue(),
-      propsData: {award, showScores: true},
-    });
-
-    expect(wrapper.find('[data-test=player-score]').exists()).to.be.true;
-  });
+  }
 
   it('colors player score', () => {
     const award = createAward({

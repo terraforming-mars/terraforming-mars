@@ -63,7 +63,7 @@ export default Vue.extend({
     },
     showScores: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     preferences: {
       type: Object as () => Readonly<Preferences>,

@@ -4,9 +4,9 @@
       <i :title="award.playerName" class="board-cube" :class="`board-cube--${award.playerColor}`" />
     </div>
 
-    <div class="ma-name ma-name--awards award-block" :class="maAwardClass">
+    <div class="ma-name ma-name--awards award-block" :class="nameCss">
       <span v-i18n>{{ award.name }}</span>
-      <div class="ma-scores player_home_block--milestones-and-awards-scores" v-if="showScores">
+      <div v-if="showScores" class="ma-scores player_home_block--milestones-and-awards-scores">
         <p
           v-for="score in sortedScores"
           :key="score.playerColor"
@@ -38,21 +38,17 @@ export default Vue.extend({
     },
     showScores: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     showDescription: {
       type: Boolean,
     },
   },
-  data() {
-    return {
-    };
-  },
   computed: {
-    maAwardClass(): string {
+    nameCss(): string {
       return 'ma-name--' + this.award.name.replace(/ /g, '-').replace(/\./g, '').toLowerCase();
     },
-    sortedScores(): AwardScore[] {
+    sortedScores(): Array<AwardScore> {
       return [...this.award.scores].sort((s1, s2) => s2.playerScore - s1.playerScore);
     },
     description(): string {

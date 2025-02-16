@@ -1,11 +1,10 @@
 import {BoardName} from '../../common/boards/BoardName';
 import {Expansion} from '../../common/cards/GameModule';
-import {OneOrArray} from '../../common/utils/types';
 
 type MAManifestSpec<V> = {
   // Creates a new instance of this Milestone or Award.
   Factory: new () => V;
-  compatibility?: OneOrArray<Expansion>;
+  compatibility?: Expansion | undefined;
 }
 type ExpansionsWithMAs = 'venus' | 'ares' | 'moon' | 'underworld';
 

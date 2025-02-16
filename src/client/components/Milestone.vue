@@ -17,7 +17,7 @@
 
 import Vue from 'vue';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
-import {getMilestoneDescription} from '@/client/MilestoneAwardManifest';
+import {getMilestone} from '@/client/MilestoneAwardManifest';
 export default Vue.extend({
   name: 'Milestone',
   props: {
@@ -37,7 +37,7 @@ export default Vue.extend({
       return 'ma-name ma-name--' + this.milestone.name.replace(/ /g, '-').replace(/\./g, '').toLowerCase();
     },
     description(): string {
-      return getMilestoneDescription(this.milestone.name);
+      return getMilestone(this.milestone.name).description;
     },
   },
 });

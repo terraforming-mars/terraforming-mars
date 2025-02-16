@@ -17,7 +17,7 @@ import {milestoneManifest} from '../milestones/Milestones';
 import {awardManifest} from '../awards/Awards';
 import {awardNames} from '../../common/ma/AwardName';
 import {milestoneNames} from '../../common/ma/MilestoneName';
-import {AwardMetadata, MilestoneMetadata} from '../../common/ma/MilestoneAwardMetadata';
+import {ClientAward, ClientMilestone} from '../../common/ma/ClientMilestoneAward';
 import {CardType} from '../../common/cards/CardType';
 import {OneOrArray} from '../../common/utils/types';
 import {globalInitialize} from '../globalInitialize';
@@ -144,24 +144,26 @@ class ColoniesProcessor {
 }
 
 class MilestoneProcessor {
-  public static json: Array<MilestoneMetadata> = [];
+  public static json: Array<ClientMilestone> = [];
   public static makeJson() {
     milestoneNames.forEach((name) => {
       MilestoneProcessor.json.push({
         name,
         description: milestoneManifest.createOrThrow(name).description,
+        requirements: milestoneManifest.all[name].compatibility,
       });
     });
   }
 }
 
 class AwardProcessor {
-  public static json: Array<AwardMetadata> = [];
+  public static json: Array<ClientAward> = [];
   public static makeJson() {
     awardNames.forEach((name) => {
       AwardProcessor.json.push({
         name,
         description: awardManifest.createOrThrow(name).description,
+        requirements: awardManifest.all[name].compatibility,
       });
     });
   }

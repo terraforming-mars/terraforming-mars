@@ -7,7 +7,7 @@ import Award from '@/client/components/Award.vue';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {AWARD_COSTS} from '@/common/constants';
 import {AwardName} from '@/common/ma/AwardName';
-import {getMilestoneAwardDescription} from '@/client/MilestoneAwardManifest';
+import {getAwardDescription} from '@/client/MilestoneAwardManifest';
 import {Preferences} from '@/client/utils/PreferencesManager';
 
 const names: Array<AwardName> = ['Banker', 'Celebrity'];
@@ -256,8 +256,8 @@ describe('Awards', () => {
       propsData: {awards, showScores: true},
     });
 
-    const award0Description = getMilestoneAwardDescription(awards[0].name);
-    const award1Description = getMilestoneAwardDescription(awards[1].name);
+    const award0Description = getAwardDescription(awards[0].name);
+    const award1Description = getAwardDescription(awards[1].name);
     expect(wrapper.text()).to.not.include(award0Description);
     expect(wrapper.text()).to.not.include(award1Description);
 

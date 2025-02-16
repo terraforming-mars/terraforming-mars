@@ -183,8 +183,8 @@ import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import Milestone from '@/client/components/Milestone.vue';
 import Award from '@/client/components/Award.vue';
-import {AWARD_COMPATIBILITY, CompatibilityDetails, MILESTONE_COMPATIBILITY} from '@/common/ma/compatibilities';
 import {TypeOption, CardListModel, hashToModel, modelToHash} from '@/client/components/cardlist/CardListModel';
+import {getAward, getMilestone} from '@/client/MilestoneAwardManifest';
 
 type Refs = {
   filter: HTMLInputElement,
@@ -355,23 +355,22 @@ export default (Vue as WithRefs<Refs>).extend({
       const colony = getColony(name);
       return colony !== undefined && this.expansions[colony.module ?? 'base'] === true;
     },
-    isCompatible(compatibility: CompatibilityDetails): boolean {
-      if (compatibility.modular === true) {
-        return true;
-      }
-      return this.expansions[compatibility.compatibility ?? 'base'] === true;
-    },
+    // isCompatible(mile): boolean {
+    //   if (compatibility.modular === true) {
+    //   }
+    //   return
+    // },
     showMilestone(name: MilestoneName): boolean {
       if (!this.include(name, 'ma')) {
         return false;
       }
-      return this.isCompatible(MILESTONE_COMPATIBILITY[name]);
+      return this.expansions[getMilestone(name).requirements ?? 'base'] === true;
     },
     showAward(name: AwardName): boolean {
       if (!this.include(name, 'ma')) {
         return false;
       }
-      return this.isCompatible(AWARD_COMPATIBILITY[name]);
+      return this.expansions[getAward(name).requirements ?? 'base'] === true;
     },
     getLanguageCssClass() {
       const language = getPreferences().lang;

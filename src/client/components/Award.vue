@@ -27,7 +27,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {FundedAwardModel, AwardScore} from '@/common/models/FundedAwardModel';
-import {getAwardDescription} from '@/client/MilestoneAwardManifest';
+import {getAward} from '@/client/MilestoneAwardManifest';
 
 export default Vue.extend({
   name: 'Award',
@@ -56,7 +56,7 @@ export default Vue.extend({
       return [...this.award.scores].sort((s1, s2) => s2.playerScore - s1.playerScore);
     },
     description(): string {
-      return getAwardDescription(this.award.name);
+      return getAward(this.award.name).description;
     },
   },
 });

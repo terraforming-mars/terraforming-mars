@@ -3,6 +3,7 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import Award from '@/client/components/Award.vue';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
+import {getAward} from '@/client/MilestoneAwardManifest';
 
 function createAward(
   {funded, scores = []}:
@@ -16,8 +17,6 @@ function createAward(
   };
 }
 
-const DESCRIPTION = 'Own the most cities not on Mars';
-
 describe('Award', () => {
   it('shows passed award', () => {
     const award = createAward({funded: false});
@@ -29,17 +28,18 @@ describe('Award', () => {
     expect(wrapper.text()).to.include(award.name);
   });
 
-  it(`doesn't show award's description`, () => {
+  it('does not show award description', () => {
     const award = createAward({funded: false});
     const wrapper = mount(Award, {
       localVue: getLocalVue(),
       propsData: {award},
     });
 
-    expect(wrapper.text()).to.not.include(DESCRIPTION);
+    const expected = getAward('Cosmic Settler').description;
+    expect(wrapper.text()).to.not.include(expected);
   });
 
-  it(`doesn't show scores`, () => {
+  it('doesn\'t show scores', () => {
     const award = createAward({
       funded: true,
       scores: [
@@ -55,7 +55,7 @@ describe('Award', () => {
     expect(wrapper.find('[data-test=player-score]').exists()).to.be.false;
   });
 
-  it(`shows scores if showScores is passed`, () => {
+  it('shows scores if showScores is passed', () => {
     const award = createAward({
       funded: true,
       scores: [
@@ -71,7 +71,7 @@ describe('Award', () => {
     expect(wrapper.find('[data-test=player-score]').exists()).to.be.true;
   });
 
-  it(`colors player's score`, () => {
+  it('colors player score', () => {
     const award = createAward({
       funded: true,
       scores: [
@@ -110,7 +110,7 @@ describe('Award', () => {
     expect(scores).to.be.deep.eq([4, 4, 2, 0]);
   });
 
-  it(`shows player's cube if award is funded`, () => {
+  it('shows player cube if award is funded', () => {
     const award = createAward({funded: true});
     const wrapper = mount(Award, {
       localVue: getLocalVue(),
@@ -120,7 +120,7 @@ describe('Award', () => {
     expect(wrapper.find(`.board-cube--${award.playerColor}`).exists()).to.be.true;
   });
 
-  it(`creates correct css class from award's name`, () => {
+  it('creates correct css class from award name', () => {
     const award = createAward({funded: true});
     const wrapper = mount(Award, {
       localVue: getLocalVue(),

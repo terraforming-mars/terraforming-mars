@@ -8,7 +8,7 @@ import {UnseededRandom} from '../../common/utils/Random';
 import {MilestoneName, milestoneNames} from '../../common/ma/MilestoneName';
 import {AwardName, awardNames} from '../../common/ma/AwardName';
 import {synergies} from './MilestoneAwardSynergies';
-import {isCompatible, MAManifest} from './MAManifest';
+import {MAManifest, isCompatible} from './MAManifest';
 
 type DrawnMilestonesAndAwards = {
   milestones: Array<MilestoneName>,
@@ -75,12 +75,12 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     case BoardName.AMAZONIS:
     case BoardName.TERRA_CIMMERIA:
     case BoardName.VASTITAS_BOREALIS:
+    case BoardName.VASTITAS_BOREALIS_NOVUS:
       push(milestoneManifest.boards[boardName], awardManifest.boards[gameOptions.boardName]);
       break;
     case BoardName.UTOPIA_PLANITIA:
-    case BoardName.VASTITAS_BOREALIS_NOVUS:
+      return getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
     case BoardName.TERRA_CIMMERIA_NOVUS:
-      // There's no need to add more milestones and awards for these boards, so it returns.
       return getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
     }
     if (gameOptions.venusNextExtension) {

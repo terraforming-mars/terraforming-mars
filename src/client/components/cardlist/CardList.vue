@@ -240,10 +240,10 @@ export default (Vue as WithRefs<Refs>).extend({
       return results.concat('none');
     },
     allMilestoneNames(): ReadonlyArray<MilestoneName> {
-      return milestoneNames;
+      return [...milestoneNames].sort();
     },
     allAwardNames(): ReadonlyArray<AwardName> {
-      return awardNames;
+      return [...awardNames].sort();
     },
   },
   methods: {

@@ -238,13 +238,7 @@ export abstract class Card implements ICard {
       yesAnd = satisfied;
     }
 
-    if (this.behavior !== undefined) {
-      if (getBehaviorExecutor().canExecute(this.behavior, player, this, canAffordOptions) === false) {
-        return false;
-      }
-    }
-    const bespokeCanPlay = this.bespokeCanPlay(player, canAffordOptions ?? {cost: 0});
-    if (bespokeCanPlay === false) {
+    if (this.canPlayPostRequirements(player, canAffordOptions) === false) {
       return false;
     }
 
@@ -254,6 +248,18 @@ export abstract class Card implements ICard {
     return true;
   }
 
+  public canPlayPostRequirements(player: IPlayer, canAffordOptions?: CanAffordOptions) {
+    if (this.behavior !== undefined) {
+      if (getBehaviorExecutor().canExecute(this.behavior, player, this, canAffordOptions) === false) {
+        return false;
+      }
+    }
+    const bespokeCanPlay = this.bespokeCanPlay(player, canAffordOptions ?? {cost: 0});
+    if (bespokeCanPlay === false) {
+      return false;
+    }
+    return true;
+  }
   public bespokeCanPlay(_player: IPlayer, _canAffordOptions: CanAffordOptions): boolean {
     return true;
   }

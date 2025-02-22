@@ -163,8 +163,8 @@
   "(Increase your plant production by 2. Gain 1 plant.)": "(Øk planteproduksjonen din med 2. Få 1 plante.)",
 
   "Oumuamua Type Object Survey": "Oumuamua-type objektundersøkelse",
-  "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "Trekk 2 kort og vis dem frem. Hvis det første har et vitenskapssymbol eller mikrobesymbol, spill det umiddelbart, og ignorer krav og kostnader. Hvis ikke, og det har et romsymbol, få 3 energiproduksjon. Hvis det ikke har noen av disse, gjelder sjekken for det andre kortet.",
-  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card. )": "(Krever 1 romsymbol og 1 vitenskapssymbol. Legg til 2 data på et valgfritt kort.)",
+  "Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.": "Trekk 2 kort og vis dem frem. Hvis det første har et vitenskapssymbol eller mikrobesymbol, spill det umiddelbart, og ignorer krav og kostnader. Hvis ikke, og det har et romsymbol, få 3 energiproduksjon. Hvis det ikke har noen av disse, gjelder sjekken for det andre kortet.",
+  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card.)": "(Krever 1 romsymbol og 1 vitenskapssymbol. Legg til 2 data på et valgfritt kort.)",
 
   "Ozone Generators": "Ozongeneratorer",
   "(Action: Spend 3 energy to gain 1 TR.)": "(Handling: Bruk 3 energi for å få 1 TR.)",
@@ -243,7 +243,7 @@
   "(Effect: When you play a Mars tag, add 1 specialized robot on this card.)": "(Effekt: Når du spiller et Marssymbol, legg til 1 spesialisert robot på dette kortet.)",
   "1 VP for every specialized robot on this card.": "1 SP per spesialiserte robot på dette kortet.",
   "(Requires 4 science tags.)": "(Krever 4 vitenskapssymboler.)",
-  
+
   "Think Tank": "Tenketank",
   "(Action: Spend 2 M€ to place 1 data on any card.)": "(Handling: Bruk 2 M€ for å legge til 1 data på et valgfritt kort.)",
   "+/-1 global parameter": "+/-1 globale parametre",

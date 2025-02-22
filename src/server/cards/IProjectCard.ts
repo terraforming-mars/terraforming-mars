@@ -14,6 +14,9 @@ export type PlayableCard = {
 
 export interface IProjectCard extends ICard {
   canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): CanPlayResponse;
+
+  // The only card that is going to call this is Oumuamua Type Object Survey.
+  canPlayPostRequirements(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean;
   cost: number;
 
   /**

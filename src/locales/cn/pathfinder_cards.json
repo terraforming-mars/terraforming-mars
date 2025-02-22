@@ -131,7 +131,7 @@
   "Martian Culture": "火星文化",
   "(Action: Add 1 data to ANY card.)": "（行动：向任意一张卡牌添加1个数据资源。）",
   "(Requires any 2 Mars tags in play. 1 VP for every 2 data here.)": "（需要游戏中存在2个火星标志。本卡上每有2个数据资源，获得1分。）",
-  
+
   "Martian Dust Processing Plant": "粉尘加工厂",
   "(Decrease your energy production 1 step, and raise your steel production 2 steps. Gain 1 TR.)": "(将你的能源产能降低1，将你的钢铁产能增加2。提升1点改造度。)",
 
@@ -162,8 +162,8 @@
   "(Increase your plant production 2 steps. Gain 1 plant.)": "（提升2点植物产能。获得1个植物。）",
 
   "Oumuamua Type Object Survey": "奥陌陌天体调查",
-  "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "抽2张牌。如果第一张牌有科学或微生物标志，则立即免费打出（忽略其条件）。如果有太空标志，则将你的能源产能增加3。如果都不符合，则按同样方式处理第二张牌。",
-  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card. )": "（需要1个太空和科学标志。将2个数据添加到任何一张卡片中。）",
+  "Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.": "抽2张牌。如果第一张牌有科学或微生物标志，则立即免费打出（忽略其条件）。如果有太空标志，则将你的能源产能增加3。如果都不符合，则按同样方式处理第二张牌。",
+  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card.)": "（需要1个太空和科学标志。将2个数据添加到任何一张卡片中。）",
 
   "Ozone Generators": "臭氧生成器",
   "(Action: Spend 3 energy to gain 1 TR.)": "（行动：消耗3点电力资源，提升1点改造度。）",
@@ -187,7 +187,7 @@
 
   "Public Sponsored Grant": "公共补贴",
   "(Requires Scientists are ruling or that you have 2 delegates there. All players lose 2M€. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.)": "（需要科学家党为执政党，或你在科学家党有至少2个代表。所有玩家损失 2M€。选择一种标志（不能是城市、问号或行星标志），然后抽取2张带有该标志的卡牌。）",
-  
+
   "Rare-Earth Elements": "稀土元素",
   "(Increase your M€ production by 1 for every special tile you own on Mars.)": "(提升x点M€产能，x为你拥有的特殊板块数量。)",
 
@@ -225,7 +225,7 @@
 
   "Space Debris Cleaning Operation": "太空垃圾清理",
   "(Requires any 4 space tags in play. Gain 3 titanium. Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) Add 1 data to ANY card. Draw 1 card.)": "（需要游戏中存在4个空间标志。获得3个钛。为任意卡牌（不包括动物或科学资源的卡牌）添加1个资源。为任意卡牌添加1个数据资源。抽1张牌。）",
-  
+
   "Space Relay": "太空中继站",
   "(Effect: Whenever you play a card with a Jovian tag, including this, draw a card.)": "（效果：当你打出一张木星标志牌时（包括此牌），抽1张牌。）",
   "(Increase your M€ production 1 step.)": "（提升1点M€产能。）",
@@ -236,7 +236,7 @@
   "Terraforming Control Station": "改造控制站",
   "(Effect: When you play a Venus or Mars tag, pay 2 M€ less.)": "（效果：当你打出金星或火星标志时，你可以少支付2M€。）",
   "(Raise your TR 2 steps.)": "（提升2点改造度。）",
- 
+
   "Terraforming Robots": "改造机器人",
   "(Effect: When you play a Mars tag, add 1 specialized robot on this card.)": "（效果：当你打出一个火星标志时，增加一个机器人资源到本卡。）",
   "1 VP for every specialized robot on this card.": "本卡上每有1个机器人资源，获得1分。",

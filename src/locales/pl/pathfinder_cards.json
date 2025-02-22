@@ -158,8 +158,8 @@
   "Increase your plant production 2 steps. Gain 1 plant.": "Podnieś swoją produkcję roślinności o 2 poziomy. Otrzymujesz 1 jednostkę roślinności.",
 
   "Oumuamua Type Object Survey": "Przechwycenie Obiektu Typu Oumuamua",
-  "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "Dobierz 2 odkryte karty. Jeśli pierwsza z nich posiada symbol Nauki lub Mikrobów zagraj ją za darmo ignorując wymagania. Jeśli nie, ale posiada symboli Przestrzeni Kosmicznej, podnieś swoją produkcję energii o 3 poziomy. Jeśli pierwsza karta nie posiada żadnego z wymienionych symboli zastosuj tą zasadę do drugiej karty.",
-  "Requires 1 space tag and 1 science tag. Add 2 data to ANY card. ": "Musisz posiadać co najmniej 1 symbol Nauki i Przestrzeni Kosmicznej. Umieść 2 jednostki danych na dowolnej karcie.",
+  "Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.": "Dobierz 2 odkryte karty. Jeśli pierwsza z nich posiada symbol Nauki lub Mikrobów zagraj ją za darmo ignorując wymagania. Jeśli nie, ale posiada symboli Przestrzeni Kosmicznej, podnieś swoją produkcję energii o 3 poziomy. Jeśli pierwsza karta nie posiada żadnego z wymienionych symboli zastosuj tą zasadę do drugiej karty.",
+  "Requires 1 space tag and 1 science tag. Add 2 data to ANY card.": "Musisz posiadać co najmniej 1 symbol Nauki i Przestrzeni Kosmicznej. Umieść 2 jednostki danych na dowolnej karcie.",
 
   "Ozone Generators": "Generatory Ozonu",
   "Action: Spend 3 energy to gain 1 TR.": "Akcja: Wydaj 3 jednostki energii, aby podnieść swój WT o 1 poziom.",

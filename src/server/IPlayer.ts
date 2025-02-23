@@ -128,6 +128,7 @@ export interface IPlayer {
 
   // Custom cards
   // Community Leavitt Station and Pathfinders Leavitt Station
+  // Additional science tags (currently only granted from placing colonies)
   scienceTagCount: number;
   // PoliticalAgendas Scientists P41
   hasTurmoilScienceTagBonus: boolean;

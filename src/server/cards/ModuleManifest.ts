@@ -53,7 +53,7 @@ export namespace GlobalEventManifest {
 export class ModuleManifest {
   module: GameModule;
   projectCards : CardManifest<IProjectCard>;
-  cardsToRemove: Set<CardName>;
+  cardsToRemove: ReadonlySet<CardName>;
   corporationCards : CardManifest<ICorporationCard>;
   preludeCards : CardManifest<IPreludeCard>;
   ceoCards: CardManifest<ICeoCard>;

@@ -7,7 +7,7 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {MoonData} from '../../../src/server/moon/MoonData';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
-import {VictoryPointsBreakdown} from '../../../src/server/game/VictoryPointsBreakdown';
+import {VictoryPointsBreakdownBuilder} from '../../../src/server/game/VictoryPointsBreakdownBuilder';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TheGrandLunaCapitalGroup} from '../../../src/server/cards/moon/TheGrandLunaCapitalGroup';
@@ -117,23 +117,20 @@ describe('LunarMineUrbanization', () => {
   });
 
   it('computeVictoryPoints', () => {
-    const vps = new VictoryPointsBreakdown();
     function computeVps() {
-      vps.points.moonHabitats = 0;
-      vps.points.moonMines = 0;
-      vps.points.moonRoads = 0;
-      MoonExpansion.calculateVictoryPoints(player, vps);
+      const builder = new VictoryPointsBreakdownBuilder();
+      MoonExpansion.calculateVictoryPoints(player, builder);
+      const vps = builder.build();
       return {
-        habitats: vps.points.moonHabitats,
-        mines: vps.points.moonMines,
-        roads: vps.points.moonRoads,
+        habitats: vps.moonHabitats,
+        mines: vps.moonMines,
+        roads: vps.moonRoads,
       };
     }
 
     expect(computeVps()).eql({habitats: 0, mines: 0, roads: 0});
 
     MoonExpansion.addTile(player, 'm02', {tileType: TileType.MOON_ROAD});
-    MoonExpansion.calculateVictoryPoints(player, vps);
 
     expect(computeVps()).eql({habitats: 0, mines: 0, roads: 1});
 

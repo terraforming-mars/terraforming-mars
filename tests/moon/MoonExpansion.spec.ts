@@ -13,7 +13,7 @@ import {SpaceName} from '../../src/common/boards/SpaceName';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayer} from '../TestPlayer';
 import {Phase} from '../../src/common/Phase';
-import {VictoryPointsBreakdown} from '../../src/server/game/VictoryPointsBreakdown';
+import {VictoryPointsBreakdownBuilder} from '../../src/server/game/VictoryPointsBreakdownBuilder';
 import {testGame} from '../TestingUtils';
 
 describe('MoonExpansion', () => {
@@ -88,22 +88,19 @@ describe('MoonExpansion', () => {
   });
 
   it('computeVictoryPoints', () => {
-    const vps = new VictoryPointsBreakdown();
     function computeVps() {
-      vps.points.moonHabitats = 0;
-      vps.points.moonMines = 0;
-      vps.points.moonRoads = 0;
-      MoonExpansion.calculateVictoryPoints(player, vps);
+      const builder = new VictoryPointsBreakdownBuilder();
+      MoonExpansion.calculateVictoryPoints(player, builder);
+      const vps = builder.build();
       return {
-        colonies: vps.points.moonHabitats,
-        mines: vps.points.moonMines,
-        roads: vps.points.moonRoads,
+        colonies: vps.moonHabitats,
+        mines: vps.moonMines,
+        roads: vps.moonRoads,
       };
     }
 
     expect(computeVps()).eql({colonies: 0, mines: 0, roads: 0});
     MoonExpansion.addTile(player, 'm02', {tileType: TileType.MOON_ROAD});
-    MoonExpansion.calculateVictoryPoints(player, vps);
     expect(computeVps()).eql({colonies: 0, mines: 0, roads: 1});
     MoonExpansion.addTile(player, 'm03', {tileType: TileType.MOON_HABITAT});
 

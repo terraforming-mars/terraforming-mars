@@ -62,7 +62,7 @@ import {CeoExtension} from './CeoExtension';
 import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
 import {message} from './logs/MessageBuilder';
 import {calculateVictoryPoints} from './game/calculateVictoryPoints';
-import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
+import {VictoryPointsBreakdown} from '../common/game/VictoryPointsBreakdown';
 import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
@@ -443,7 +443,7 @@ export class Player implements IPlayer {
     return;
   }
 
-  public getVictoryPoints(): IVictoryPointsBreakdown {
+  public getVictoryPoints(): VictoryPointsBreakdown {
     return calculateVictoryPoints(this);
   }
 

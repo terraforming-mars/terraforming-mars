@@ -1,10 +1,14 @@
 import {Tag} from '../../common/cards/Tag';
-import {IVictoryPointsBreakdown} from '../../common/game/IVictoryPointsBreakdown';
+import {VictoryPointsBreakdown} from '../../common/game/VictoryPointsBreakdown';
 
 export type VictoryPoints = 'terraformRating' | 'milestones' | 'awards' | 'greenery' | 'city' | 'escapeVelocity' | 'moon habitat' | 'moon mine' | 'moon road' | 'planetary tracks' | 'victoryPoints';
 
-export class VictoryPointsBreakdown {
-  public readonly points: IVictoryPointsBreakdown = {
+type Mutable<T> = {
+  [K in keyof T]: T[K] extends ReadonlyArray<infer T> ? T[] : T[K];
+};
+
+export class VictoryPointsBreakdownBuilder {
+  private readonly points: Mutable<VictoryPointsBreakdown> = {
     terraformRating: 0,
     milestones: 0,
     awards: 0,
@@ -23,7 +27,12 @@ export class VictoryPointsBreakdown {
     detailsPlanetaryTracks: [],
   };
 
-  public updateTotal(): void {
+  public build(): VictoryPointsBreakdown {
+    this.updateTotal();
+    return this.points;
+  }
+
+  private updateTotal(): void {
     this.points.total = 0;
     this.points.total += this.points.terraformRating;
     this.points.total += this.points.milestones;

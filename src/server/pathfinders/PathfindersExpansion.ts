@@ -18,7 +18,7 @@ import {GainResources} from '../inputs/GainResources';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Tag} from '../../common/cards/Tag';
 import {Turmoil} from '../turmoil/Turmoil';
-import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
+import {VictoryPointsBreakdownBuilder} from '../game/VictoryPointsBreakdownBuilder';
 import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {Priority} from '../deferredActions/Priority';
 
@@ -245,14 +245,14 @@ export class PathfindersExpansion {
     return result;
   }
 
-  public static calculateVictoryPoints(player: IPlayer, victoryPointsBreakdown: VictoryPointsBreakdown) {
+  public static calculateVictoryPoints(player: IPlayer, builder: VictoryPointsBreakdownBuilder) {
     const data = player.game.pathfindersData;
     if (data === undefined) {
       return;
     }
     data.vps
       .filter((vp) => vp.id === player.id)
-      .forEach((vp) => victoryPointsBreakdown.setVictoryPoints('planetary tracks', vp.points, vp.tag));
+      .forEach((vp) => builder.setVictoryPoints('planetary tracks', vp.points, vp.tag));
   }
 
   public static addToSolBank(player: IPlayer) {

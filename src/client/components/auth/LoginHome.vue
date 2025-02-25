@@ -52,7 +52,7 @@ export default Vue.extend({
       const idx = window.location.href.lastIndexOf('/' + paths.LOGIN);
       const url = thisUrl.substring(0, idx) + '/' + paths.AUTH_DISCORD_CALLBACK;
       const encoded = encodeURI(url);
-      return 'https://discord.com/oauth2/authorize?client_id='+process.env['DISCORD_CLIENT_ID']+'&response_type=code&scope=identify&redirect_uri=' + encoded;
+      return 'https://discord.com/oauth2/authorize?client_id=1326283152448163921&response_type=code&scope=identify&redirect_uri=' + encoded;
     },
     logoutURL(): string {
       return paths.API_LOGOUT;

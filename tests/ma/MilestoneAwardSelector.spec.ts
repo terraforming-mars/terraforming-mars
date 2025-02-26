@@ -8,6 +8,8 @@ import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptio
 import {BoardName} from '../../src/common/boards/BoardName';
 import {AwardName} from '../../src/common/ma/AwardName';
 import {MilestoneName} from '../../src/common/ma/MilestoneName';
+import {AgendaStyle} from '../../src/common/turmoil/Types';
+import {CardName} from '../../src/common/cards/CardName';
 
 describe('MilestoneAwardSelector', () => {
   const maximumSynergyRuns = [
@@ -147,6 +149,16 @@ describe('MilestoneAwardSelector', () => {
     expect(mas.awards).to.have.length(6);
   });
 
+  it('Do not select Constructor when Colonies is not selected', () => {
+    for (let idx = 0; idx < 10000; idx++) {
+      const mas = chooseMilestonesAndAwards({
+        ...DEFAULT_GAME_OPTIONS,
+        coloniesExtension: false,
+        randomMA: RandomMAOptionType.LIMITED,
+      });
+      expect(mas.awards).does.not.contain('Constructor');
+    }
+  });
   // it('No modular milestones and awards by default', () => {
   //   const [milestones, awards] = getCandidates({...DEFAULT_GAME_OPTIONS,
   //     randomMA: RandomMAOptionType.UNLIMITED,

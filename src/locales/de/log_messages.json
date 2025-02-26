@@ -284,6 +284,7 @@
     "Gain plants": "Erhalte Pflanzen",
     "Add animals": "Tiere hinzufügen",
 
+    "All players except ${0} may not trade next generation.": "Alle Spieler außer ${0} dürfen in der nächsten Generation nicht handeln.",
     "${0} spent ${1} energy to trade with ${2}": "${0} bezahlte ${1} Energie, um mit ${2} zu handeln",
     "${0} spent ${1} titanium to trade with ${2}": "${0} bezahlte ${1} Titan, um mit ${2} zu handeln",
     "${0} spent ${1} M€ to trade with ${2}": "${0} bezahlte ${1} M€, um mit ${2} zu handeln",
@@ -349,6 +350,7 @@
     "${0} found life!": "${0} hat Leben gefunden!",
     "${0} gained ${1} energy": "${0} erhielt ${1} Energie",
     "${0} decreased energy production 1 step to gain 8 M€": "${0} senkte Energie-Produktion um 1, um 8 M€ zu erhalten",
+    "${0} stole ${1} ${2} from the neutral player": "${0} hat ${1} ${2} von dem neutralen Spieler gestohlen",
     "Neutral player received ${0} M€ from ${1} owner (${2})": "Der neutrale Spieler erhielt ${0} M€ vom Besitzer des ${1} (${2})",
     "${0} placed a Community (player marker)": "${0} platzierte eine Gemeinde (Spieler-Marker)",
     "${0} doubled resources on ${1} from ${2} to ${3}": "${0} verdoppelte Ressourcen auf ${1} von ${2} auf ${3}",

@@ -101,7 +101,7 @@ export const awardManifest: MAManifest<AwardName, IAward> = {
     'Kingpin': {Factory: Kingpin, compatibility: 'underworld'},
     'EdgeLord': {Factory: EdgeLord, compatibility: 'underworld'},
     'Administrator': {Factory: Administrator},
-    'Constructor': {Factory: Constructor},
+    'Constructor': {Factory: Constructor, compatibility: 'colonies'},
     'Founder': {Factory: Founder},
     'Highlander': {Factory: Highlander},
     'Investor': {Factory: Investor},

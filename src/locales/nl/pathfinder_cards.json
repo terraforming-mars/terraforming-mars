@@ -156,8 +156,8 @@
     "(Increase your plant production 2 steps. Gain 1 plant.)": "(Verhoog je plantproductie met 2. Ontvang 1 plant.)",
 
     "Oumuamua Type Object Survey": "Oumuamua-onderzoek",
-    "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "(Trek 2 kaarten. Als de eerste een wetenschaps- of microbesymbool heeft, speel deze dan (negeer de voorwaarden). Zo niet, en het heeft een ruimtesymbool, verhoog dan je energieproductie met 3. Als er niets van toepassing is, doe dan hetzelfde voor de 2e kaart.)",
-    "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card. )": "(Vereist 1 eigen ruimte- en wetenschapssymbool. Voeg 2 data toe aan een willekeurige kaart.)",
+    "Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.": "(Trek 2 kaarten. Als de eerste een wetenschaps- of microbesymbool heeft, speel deze dan (negeer de voorwaarden). Zo niet, en het heeft een ruimtesymbool, verhoog dan je energieproductie met 3. Als er niets van toepassing is, doe dan hetzelfde voor de 2e kaart.)",
+    "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card.)": "(Vereist 1 eigen ruimte- en wetenschapssymbool. Voeg 2 data toe aan een willekeurige kaart.)",
 
     "Ozone Generators": "Ozongenerator",
     "(Action: Spend 3 energy to gain 1 TR.)": "(ACTIE: besteed 3 energie om je TW met 1 te verhogen.)",

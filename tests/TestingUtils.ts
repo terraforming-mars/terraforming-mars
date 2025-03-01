@@ -1,6 +1,6 @@
+import * as constants from '../src/common/constants';
 import {expect} from 'chai';
 import {IGame} from '../src/server/IGame';
-import * as constants from '../src/common/constants';
 import {Space} from '../src/server/boards/Space';
 import {Phase} from '../src/common/Phase';
 import {Turmoil} from '../src/server/turmoil/Turmoil';
@@ -173,6 +173,9 @@ class FakeCard implements IProjectCard {
       return true;
     }
     return CardRequirements.compile(this.requirements).satisfies(player);
+  }
+  public canPlayPostRequirements(): boolean {
+    return true;
   }
   public play() {
     return undefined;

@@ -2,7 +2,7 @@ import {Tag} from '../cards/Tag';
 
 export type MADetail = {message: string, messageArgs?: Array<string>, victoryPoint: number};
 
-export interface IVictoryPointsBreakdown {
+export type VictoryPointsBreakdown = {
   terraformRating: number;
   milestones: number;
   awards: number;
@@ -15,8 +15,8 @@ export interface IVictoryPointsBreakdown {
   planetaryTracks: number;
   victoryPoints: number;
   total: number;
-  detailsCards: Array<{cardName: string, victoryPoint: number}>;
-  detailsMilestones: Array<MADetail>;
-  detailsAwards: Array<MADetail>;
-  detailsPlanetaryTracks: Array<{tag: Tag, points: number}>;
+  detailsCards: ReadonlyArray<{cardName: string, victoryPoint: number}>;
+  detailsMilestones: ReadonlyArray<MADetail>;
+  detailsAwards: ReadonlyArray<MADetail>;
+  detailsPlanetaryTracks: ReadonlyArray<{tag: Tag, points: number}>;
 }

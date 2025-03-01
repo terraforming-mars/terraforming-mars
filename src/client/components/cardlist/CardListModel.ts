@@ -68,10 +68,11 @@ export type CardListModel = {
   tags: Record<TagOption, boolean>,
   searchIndex: CardListSearchIndex,
   showAdvanced: boolean;
+  sortOrder: 'a' | '1';
 }
 
-export function hashToModel(windowLocationHash: string) {
-  const model = {
+export function hashToModel(windowLocationHash: string): CardListModel {
+  const model: CardListModel = {
     filterText: '',
     namesOnly: true,
     expansions: {
@@ -127,6 +128,7 @@ export function hashToModel(windowLocationHash: string) {
     },
     searchIndex: new CardListSearchIndex(),
     showAdvanced: false,
+    sortOrder: 'a',
   };
   if (windowLocationHash.length > 1) {
     const hash = decodeURIComponent(windowLocationHash).slice(1);

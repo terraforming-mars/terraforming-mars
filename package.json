@@ -7,7 +7,6 @@
   },
   "private": true,
   "dependencies": {
-    "@types/uuid": "^10.0.0",
     "ansi-escape-sequences": "^6.2.2",
     "chart.js": "^4.4.7",
     "console-stamp": "3.1.2",
@@ -33,6 +32,7 @@
     "@types/node": "^10.17.47",
     "@types/pg": "^7.14.7",
     "@types/sqlite3": "^3.1.11",
+    "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
     "@vue/test-utils": "^1.1.1",

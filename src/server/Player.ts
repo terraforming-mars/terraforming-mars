@@ -62,7 +62,7 @@ import {CeoExtension} from './CeoExtension';
 import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
 import {message} from './logs/MessageBuilder';
 import {calculateVictoryPoints} from './game/calculateVictoryPoints';
-import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
+import {VictoryPointsBreakdown} from '../common/game/VictoryPointsBreakdown';
 import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
@@ -443,7 +443,7 @@ export class Player implements IPlayer {
     return;
   }
 
-  public getVictoryPoints(): IVictoryPointsBreakdown {
+  public getVictoryPoints(): VictoryPointsBreakdown {
     return calculateVictoryPoints(this);
   }
 
@@ -751,9 +751,7 @@ export class Player implements IPlayer {
       floaters: card.tags.includes(Tag.VENUS),
       microbes: card.tags.includes(Tag.PLANT),
       lunaArchivesScience: card.tags.includes(Tag.MOON),
-      // TODO(kberg): add this.isCorporation(CardName.SPIRE)
       spireScience: card.type === CardType.STANDARD_PROJECT,
-      // TODO(kberg): add this.isCorporation(CardName.AURORAI)
       auroraiData: card.type === CardType.STANDARD_PROJECT,
       graphene: card.tags.includes(Tag.CITY) || card.tags.includes(Tag.SPACE),
       kuiperAsteroids: card.name === CardName.AQUIFER_STANDARD_PROJECT || card.name === CardName.ASTEROID_STANDARD_PROJECT,

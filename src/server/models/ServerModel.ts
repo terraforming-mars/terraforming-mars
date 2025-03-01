@@ -207,7 +207,7 @@ export class Server {
   public static getPlayer(player: IPlayer): PublicPlayerModel {
     const game = player.game;
     const useHandicap = game.getPlayers().some((p) => p.handicap !== 0);
-    return {
+    const model: PublicPlayerModel = {
       actionsTakenThisRound: player.actionsTakenThisRound,
       actionsTakenThisGame: player.actionsTakenThisGame,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
@@ -250,12 +250,36 @@ export class Server {
       titaniumProduction: player.production.titanium,
       titaniumValue: player.getTitaniumValue(),
       tradesThisGeneration: player.colonies.tradesThisGeneration,
-      victoryPointsBreakdown: player.getVictoryPoints(),
-      victoryPointsByGeneration: player.victoryPointsByGeneration,
       corruption: player.underworldData.corruption,
+      victoryPointsBreakdown: {
+        terraformRating: 0,
+        milestones: 0,
+        awards: 0,
+        greenery: 0,
+        city: 0,
+        escapeVelocity: 0,
+        moonHabitats: 0,
+        moonMines: 0,
+        moonRoads: 0,
+        planetaryTracks: 0,
+        victoryPoints: 0,
+        total: 0,
+        detailsCards: [],
+        detailsMilestones: [],
+        detailsAwards: [],
+        detailsPlanetaryTracks: [],
+      },
+      victoryPointsByGeneration: [],
       excavations: UnderworldExpansion.excavationMarkerCount(player),
       alliedParty: player.alliedParty,
     };
+
+    if (player.game.phase === Phase.END || player.game.gameOptions.showOtherPlayersVP === true) {
+      model.victoryPointsBreakdown = player.getVictoryPoints();
+      model.victoryPointsByGeneration = player.victoryPointsByGeneration;
+    }
+
+    return model;
   }
 
   private static getResourceProtections(player: IPlayer) {

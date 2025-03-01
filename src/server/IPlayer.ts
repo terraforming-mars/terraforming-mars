@@ -25,7 +25,7 @@ import {Tags} from './player/Tags';
 import {Colonies} from './player/Colonies';
 import {Production} from './player/Production';
 import {ICeoCard} from './cards/ceos/ICeoCard';
-import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
+import {VictoryPointsBreakdown} from '../common/game/VictoryPointsBreakdown';
 import {YesAnd} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Color} from '../common/Color';
@@ -128,6 +128,7 @@ export interface IPlayer {
 
   // Custom cards
   // Community Leavitt Station and Pathfinders Leavitt Station
+  // Additional science tags (currently only granted from placing colonies)
   scienceTagCount: number;
   // PoliticalAgendas Scientists P41
   hasTurmoilScienceTagBonus: boolean;
@@ -196,7 +197,7 @@ export interface IPlayer {
 
   getActionsThisGeneration(): Set<CardName>;
   addActionThisGeneration(cardName: CardName): void;
-  getVictoryPoints(): IVictoryPointsBreakdown;
+  getVictoryPoints(): VictoryPointsBreakdown;
   /* A card is in effect if it is played. This does not apply to corporations. It could. */
   cardIsInEffect(cardName: CardName): boolean;
   hasProtectedHabitats(): boolean;

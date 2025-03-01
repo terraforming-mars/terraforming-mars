@@ -159,8 +159,8 @@
   "(Increase your plant production 2 steps. Gain 1 plant.)": "(Збільшити виробництво рослин на 2 кроки. Отримати 1 рослину.)",
 
   "Oumuamua Type Object Survey": "Дослідження об'єкта типу Oumuamua",
-  "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "(Витягнути 2 карти відкритими. Якщо перша має науковий або мікробний символ, зіграйте її без урахування вимог і вартості. Якщо ні, і вона має символ космосу, отримайте 3 одиниці енергії. Якщо ні одне з цих не відповідає, перевірте другу карту.)",
-  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card. )": "(Вимагає 1 символ космосу та 1 символ науки. Додайте 2 дані до БУДЬ-ЯКОЇ карти.)",
+  "Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.": "(Витягнути 2 карти відкритими. Якщо перша має науковий або мікробний символ, зіграйте її без урахування вимог і вартості. Якщо ні, і вона має символ космосу, отримайте 3 одиниці енергії. Якщо ні одне з цих не відповідає, перевірте другу карту.)",
+  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card.)": "(Вимагає 1 символ космосу та 1 символ науки. Додайте 2 дані до БУДЬ-ЯКОЇ карти.)",
 
   "Ozone Generators": "Озонові генератори",
   "(Action: Spend 3 energy to gain 1 TR.)": "(Дія: Витратити 3 одиниці енергії, щоб отримати 1 РТ.)",

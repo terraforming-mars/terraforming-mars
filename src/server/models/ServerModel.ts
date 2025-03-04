@@ -215,7 +215,7 @@ export class Server {
       cardCost: player.cardCost,
       cardDiscount: player.colonies.cardDiscount,
       cardsInHandNbr: player.cardsInHand.length,
-      citiesCount: player.game.board.getCities(player).length,
+      citiesCount: game.board.getCities(player).length,
       coloniesCount: player.getColoniesCount(),
       color: player.color,
       energy: player.energy,
@@ -274,7 +274,7 @@ export class Server {
       alliedParty: player.alliedParty,
     };
 
-    if (player.game.phase === Phase.END || player.game.gameOptions.showOtherPlayersVP === true) {
+    if (game.phase === Phase.END || game.isSoloMode() || game.gameOptions.showOtherPlayersVP === true) {
       model.victoryPointsBreakdown = player.getVictoryPoints();
       model.victoryPointsByGeneration = player.victoryPointsByGeneration;
     }

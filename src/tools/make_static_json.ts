@@ -3,41 +3,67 @@ require('dotenv').config();
 import * as fs from 'fs';
 import * as child_process from 'child_process';
 import * as path from 'path';
+import * as constants from '../common/constants';
+
+function mkdirQuietly(path: string) {
+  if (!fs.existsSync(path)) {
+    fs.mkdirSync(path);
+  }
+}
+
+function readdir(path: string, predicate: (dirent: string) => boolean) {
+  const entries = fs.readdirSync(path);
+  return entries.filter(predicate);
+}
 
 type Translation = {[lang: string]: string}
-function getAllTranslations(): {[key: string]: Translation} {
-  const pathToTranslationsDir = path.resolve('src/locales');
-  const translations: {[key: string]: Translation}= {};
 
-  const dirs = fs.readdirSync(pathToTranslationsDir);
-  for (const lang of dirs) {
-    const localeDir = path.join(pathToTranslationsDir, lang);
-    if (lang.length === 2 && fs.statSync(localeDir).isDirectory()) {
-      const translationDir = path.resolve(path.join(pathToTranslationsDir, lang));
 
-      const files = fs.readdirSync(translationDir);
-      for (const file of files) {
-        if (!file.endsWith('.json')) {
-          continue;
-        }
+/**
+ * Reads all the translations in src/locales, and returns a data structure of this
+ * structure:
+ *
+ * {
+ *   'Hello' : {
+ *     'es': 'Hola',
+ *     'de': 'Guten Tag',
+ *   },
+ * },
+ */
+function getAllTranslations(): {[lang: string]: Translation} {
+  const translationsPath = path.resolve('src/locales');
+  const translations: {[lang: string]: Translation} = {};
 
-        const filename = path.join(translationDir, file);
-        try {
-          const content = fs.readFileSync(filename, 'utf8');
-          const json = JSON.parse(content);
+  const languageDirectories = readdir(
+    translationsPath,
+    (dirent) => dirent.length === 2 && fs.statSync(path.join(translationsPath, dirent)).isDirectory(),
+  );
 
-          for (const phrase of Object.keys(json)) {
-            if (translations[phrase] === undefined) {
-              translations[phrase] = {};
-            }
-            if (translations[phrase][lang] !== undefined) {
-              console.log(`${lang}: Repeated translation for [${phrase}]`);
-            }
-            translations[phrase][lang] = json[phrase];
+  for (const lang of languageDirectories) {
+    const translationDir = path.resolve(path.join(translationsPath, lang));
+
+    const languageFiles = readdir(
+      translationDir,
+      (dirent) => dirent.endsWith('.json'),
+    );
+
+    for (const file of languageFiles) {
+      const filename = path.join(translationDir, file);
+      try {
+        const content = fs.readFileSync(filename, 'utf8');
+        const json = JSON.parse(content);
+
+        for (const phrase of Object.keys(json)) {
+          if (translations[phrase] === undefined) {
+            translations[phrase] = {};
           }
-        } catch (e) {
-          throw new Error(`While parsing ${filename}:` + e);
+          if (translations[phrase][lang] !== undefined) {
+            console.log(`${lang}: Repeated translation for [${phrase}]`);
+          }
+          translations[phrase][lang] = json[phrase];
         }
+      } catch (e) {
+        throw new Error(`While parsing ${filename}:` + e);
       }
     }
   }
@@ -45,7 +71,7 @@ function getAllTranslations(): {[key: string]: Translation} {
   return translations;
 }
 
-function getBuildMetadata() /* {head: string, date: string} */ {
+function getBuildMetadata(): {head: string, date: string} {
   // assumes SOURCE_VERSION is git hash
   if (process.env.SOURCE_VERSION) {
     return {
@@ -63,53 +89,35 @@ function getBuildMetadata() /* {head: string, date: string} */ {
   }
 }
 
-function getWaitingForTimeout() {
-  if (process.env.WAITING_FOR_TIMEOUT) {
-    return Number(process.env.WAITING_FOR_TIMEOUT);
+function writeBuildMetadata() {
+  function getEnv(ev: string, dv: number) {
+    return process.env[ev] ? Number(process.env[ev]): dv;
   }
-  return 1000;
+
+  const buildmetadata = getBuildMetadata();
+  const settings = {
+    head: buildmetadata.head,
+    builtAt: buildmetadata.date,
+    waitingForTimeout: getEnv('WAITING_FOR_TIMEOUT', constants.DEFAULT_WAITING_FOR_TIMEOUT),
+    logLength: getEnv('LOG_LENGTH', constants.DEFAULT_LOG_LENGTH),
+    discordClientId: process.env['DISCORD_CLIENT_ID'] ?? '',
+  };
+  fs.writeFileSync('src/genfiles/settings.json', JSON.stringify(settings));
 }
-
-function getLogLength() {
-  if (process.env.LOG_LENGTH) {
-    return Number(process.env.LOG_LENGTH);
-  }
-  return 50;
-}
-
-if (!fs.existsSync('src/genfiles')) {
-  fs.mkdirSync('src/genfiles');
-}
-
-const buildmetadata = getBuildMetadata();
-fs.writeFileSync('src/genfiles/settings.json', JSON.stringify({
-  head: buildmetadata.head,
-  builtAt: buildmetadata.date,
-  waitingForTimeout: getWaitingForTimeout(),
-  logLength: getLogLength(),
-}));
-
-fs.writeFileSync('src/genfiles/translations.json', JSON.stringify(
-  getAllTranslations(),
-));
 
 /**
  * Generate translation files in `/assets/locales/*.json` to load them async by the client
  */
 function generateTranslations() {
   const localesDir = path.join(process.cwd(), 'src/locales');
-  const localesCodes = fs.readdirSync(localesDir);
   const destinationPath = path.join(process.cwd(), 'assets/locales');
 
-  if (!fs.existsSync(destinationPath)) {
-    fs.mkdirSync(destinationPath);
-  }
+  mkdirQuietly(destinationPath);
 
-  const isJSONExt = (fileName: string) => fileName.endsWith('.json');
-
+  const localesCodes = fs.readdirSync(localesDir);
   localesCodes.forEach((localeCode) => {
     const localeDir = path.join(localesDir, localeCode);
-    const localeFiles = fs.readdirSync(localeDir).filter(isJSONExt);
+    const localeFiles = fs.readdirSync(localeDir).filter((dirent) => dirent.endsWith('.json'));
 
     const localeObject = localeFiles.reduce((localeObject, localeFile) => {
       const filePath = path.join(localeDir, localeFile);
@@ -122,4 +130,13 @@ function generateTranslations() {
   });
 }
 
+function writeTranslations() {
+  const translations = getAllTranslations();
+  fs.writeFileSync('src/genfiles/translations.json', JSON.stringify(translations));
+}
+
+mkdirQuietly('src/genfiles');
+
+writeBuildMetadata();
 generateTranslations();
+writeTranslations();

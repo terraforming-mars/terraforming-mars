@@ -154,6 +154,7 @@ export class Game implements IGame, Logger {
   public moonData: MoonData | undefined;
   public pathfindersData: PathfindersData | undefined;
   public underworldData: UnderworldData = UnderworldExpansion.initializeGameWithoutUnderworld();
+  public inTurmoil: boolean = false;
 
   // Card-specific data
   // Mons Insurance promo corp
@@ -764,7 +765,8 @@ export class Game implements IGame, Logger {
     UnderworldExpansion.endGeneration(this);
 
     Turmoil.ifTurmoil(this, (turmoil) => {
-      this.phase = Phase.TURMOIL;
+      // this.phase = Phase.TURMOIL;
+      this.inTurmoil = true;
       turmoil.endGeneration(this);
       // Behold The Emperor hook
       this.beholdTheEmperor = false;
@@ -774,6 +776,7 @@ export class Game implements IGame, Logger {
     if (this.deferredActions.length > 0) {
       this.deferredActions.runAll(() => this.startGeneration());
     } else {
+      this.inTurmoil = false;
       this.startGeneration();
     }
   }

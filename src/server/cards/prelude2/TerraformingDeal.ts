@@ -28,7 +28,7 @@ export class TerraformingDeal extends PreludeCard {
   public onIncreaseTerraformRating(player: IPlayer, cardOwner: IPlayer, steps: number) {
     if (cardOwner === player) {
       const phase = player.game.phase;
-      if (phase === Phase.ACTION || phase === Phase.PRELUDES || phase === Phase.TURMOIL) {
+      if (phase === Phase.ACTION || phase === Phase.PRELUDES || player.game.inTurmoil) {
         cardOwner.stock.add(Resource.MEGACREDITS, 2 * steps, {log: true});
       }
     }

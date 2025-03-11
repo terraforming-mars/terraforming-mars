@@ -708,6 +708,7 @@ describe('Game', () => {
       'discardedColonies',
       'inDoubleDown',
       'inputsThisRound',
+      'inTurmoil',
       'playersInGenerationOrder',
       'monsInsuranceOwner',
       'resettable',

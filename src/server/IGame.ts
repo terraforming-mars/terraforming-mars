@@ -76,6 +76,8 @@ export interface IGame extends Logger {
   colonies: Array<IColony>;
   discardedColonies: Array<IColony>; // Not serialized
   turmoil: Turmoil | undefined;
+  // True when resolving Turmoil phase. Does not need to be serialized since the turmoil phase isn't saved in between.
+  inTurmoil: boolean;
   aresData: AresData | undefined;
   moonData: MoonData | undefined;
   pathfindersData: PathfindersData | undefined;

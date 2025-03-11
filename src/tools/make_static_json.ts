@@ -30,9 +30,9 @@ function getAllTranslations(): {[key: string]: Translation} {
             if (translations[phrase] === undefined) {
               translations[phrase] = {};
             }
-            if (translations[phrase][lang] !== undefined) {
-              console.log(`${lang}: Repeated translation for [${phrase}]`);
-            }
+            // if (translations[phrase][lang] !== undefined) {
+            //   console.log(`${lang}: Repeated translation for [${phrase}]`);
+            // }
             translations[phrase][lang] = json[phrase];
           }
         } catch (e) {

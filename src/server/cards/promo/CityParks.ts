@@ -5,11 +5,11 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class CityPark extends Card implements IProjectCard {
+export class CityParks extends Card implements IProjectCard {
   constructor() {
     super({
       type: CardType.AUTOMATED,
-      name: CardName.CITY_PARK,
+      name: CardName.CITY_PARKS,
       tags: [Tag.PLANT],
       cost: 7,
       victoryPoints: 2,

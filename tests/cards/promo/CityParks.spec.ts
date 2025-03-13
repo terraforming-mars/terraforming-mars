@@ -1,16 +1,16 @@
 import {expect} from 'chai';
-import {CityPark} from '../../../src/server/cards/promo/CityPark';
+import {CityParks} from '../../../src/server/cards/promo/CityParks';
 import {addCity, cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('CityPark', () => {
-  let card: CityPark;
+describe('CityParks', () => {
+  let card: CityParks;
   let player: TestPlayer;
   let opponent: TestPlayer;
 
   beforeEach(() => {
-    card = new CityPark();
+    card = new CityParks();
     [/* game*/, player, opponent] = testGame(2);
   });
 

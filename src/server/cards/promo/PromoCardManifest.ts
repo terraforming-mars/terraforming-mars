@@ -13,7 +13,7 @@ import {BactoviralResearch} from './BactoviralResearch';
 import {BioPrintingFacility} from './BioPrintingFacility';
 import {CarbonNanosystems} from './CarbonNanosystems';
 import {Casinos} from './Casinos';
-import {CityPark} from './CityPark';
+import {CityParks} from './CityParks';
 import {CometAiming} from './CometAiming';
 import {CorporateArchives} from './CorporateArchives';
 import {CrashSiteCleanup} from './CrashSiteCleanup';
@@ -152,7 +152,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.DIRECTED_HEAT_USAGE]: {Factory: DirectedHeatUsage},
     [CardName.ICY_IMPACTORS]: {Factory: IcyImpactors},
     [CardName.SOIL_ENRICHMENT]: {Factory: SoilEnrichment},
-    [CardName.CITY_PARK]: {Factory: CityPark},
+    [CardName.CITY_PARKS]: {Factory: CityParks},
     [CardName.SUPERMARKETS]: {Factory: Supermarkets},
     [CardName.HOSPITALS]: {Factory: Hospitals},
     [CardName.CASINOS]: {Factory: Casinos},

@@ -9,10 +9,14 @@ import {ALL_MODULE_MANIFESTS} from './cards/AllManifests';
 
 const CARD_RENAMES = new Map<string, CardName>([
   // When renaming a card, add the old name here (like the example below), and add a TODO (like the example below)
-  // And remember to add a test in spec.ts.
+  // And remember to add a test in createCard.spec.ts.
 
+  // eg
   // TODO(yournamehere): remove after 2021-04-05
   // ['Space Corridors', CardName.SPACE_LANES],
+
+  // TODO(kberg): Remove after 2025-05-01
+  ['City Park', CardName.CITY_PARKS],
 ]);
 
 function _createCard<T extends ICard>(cardName: CardName, cardManifestNames: Array<keyof ModuleManifest>): T | undefined {

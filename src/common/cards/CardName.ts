@@ -562,7 +562,7 @@ export enum CardName {
 
   ICY_IMPACTORS = 'Icy Impactors',
   SOIL_ENRICHMENT = 'Soil Enrichment',
-  CITY_PARK = 'City Park',
+  CITY_PARKS = 'City Parks',
   SUPERMARKETS = 'Supermarkets',
   HOSPITALS = 'Hospitals',
   PUBLIC_BATHS = 'Public Baths',

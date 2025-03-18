@@ -28,7 +28,6 @@ export class SQLite implements IDatabase {
   }
 
   public async initialize(): Promise<void> {
-    const {Database} = await import('sqlite3');
     const dbFolder = path.resolve(process.cwd(), './db');
     const dbPath = path.resolve(dbFolder, 'game.db');
     if (this.filename === undefined) {

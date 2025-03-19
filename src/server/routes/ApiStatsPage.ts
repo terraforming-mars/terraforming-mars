@@ -154,11 +154,11 @@ export class ApiStatsPage extends Handler {
     return { data: final };
   }
 
-  public override async get(req: Request, res: Response, _ctx: Context): Promise<void> {
+  public override async get(req: Request, res: Response, ctx: Context): Promise<void> {
     try {
       res.setHeader('Access-Control-Allow-Origin', '*');
       const stats = await this.getStatsPage();
-      responses.writeJson(res, stats, 2);
+      responses.writeJson(res, ctx, stats, 2);
     } catch (err) {
       console.error(err);
       responses.badRequest(req, res, 'could not load admin stats');

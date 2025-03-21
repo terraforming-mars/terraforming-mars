@@ -529,6 +529,7 @@
     "You cannot pay for this card": "Du kannst diese Karte nicht bezahlen",
     "You cannot afford any cards": "Du kannst dir keine Karten leisten",
     "Select card(s) to buy": "Wähle zu kaufende Karten",
+    "Select up to 1 card(s) to buy": "Wähle bis zu 1 kaufende Karte",
     "Select up to 4 card(s) to buy": "Wähle bis zu 4 kaufende Karten",
     "Select up to 2 events to return to your hand": "Wähle bis zu 2 Ereignisse um diese auf die Hand zu nehmen",
     "Place a greenery tile and raise the oxygen 1 step": "Platziere ein Grünflächen-Plättchen und erhöhe den Sauerstoffgehalt um 1%",
@@ -1235,6 +1236,7 @@
     "You will be limited to excavating a space that gives 1 energy production.": "Du kannst nur ein Feld ausgraben, der 1 Energieproduktion ergibt.",
     "There are not enough cards to complete this action. You will draw fewer cards than expected.": "Es gibt nicht genügend Karten, um diese Aktion durchzuführen. Du wirst weniger Karten ziehen als erwartet.",
     "Behavior in this card will apply to Double Down, and so have no effect.": "Das Verhalten auf dieser Karte gilt für Einsatz verdoppeln und hat daher keinen Effekt.",
+    "Lose 2 M€": "Verliere 2 M€",
 
     "Cards List": "Kartenliste",
     "legacy card UI": "Alte Kartenliste",

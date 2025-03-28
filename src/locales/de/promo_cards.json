@@ -1,4 +1,7 @@
 {
+  "Protected Growth": "Geschütztes Wachstum",
+  "Oxygen must be 7% or less. Gain 1 plant per power tag you have.": "Der Sauerstoffgehalt muss 7% oder weniger betragen. Du erhältst 1 Pflanze pro Energie-Symbol, das du hast.",
+  
   "Public Baths": "Öffentliches Bad",
   "Requires 6 oceans. Gain 6 M€.": "Benötigt 6 oder mehr Ozeanplättchen im Spiel. Erhalte 6 M€.",
 
@@ -68,7 +71,7 @@
   "Increase your steel production 1 step. Copy the PRODUCTION BOXES of 2 of your cards with building tags.": "Erhöhe deine Stahlproduktion um 1 Stufe. Kopiere die Produktionsboxen von 2 deiner anderen Karten mit Gebäudesymbolen.",
 
   "Carbon Nanosystems": "Kohlenstoff-Nanosysteme",
-  "Effect: When you play a science tag, including this, add a graphene resource here.": "EFFEKT: Wenn du einen Wissenschafts-Tag spielst, einschließlich dieses, füge hier eine Graphen-Ressource hinzu.",
+  "Effect: When you play a science tag, including this, add a graphene resource here.": "EFFEKT: Wenn du einen Wissenschafts-Symbol spielst, einschließlich dieses, füge hier eine Graphen-Ressource hinzu.",
   "Effect: When playing a space or city tag, graphenes may be used as 4 M€ each.": "EFFEKT: Wenn du einen Weltraum- oder Städtesymbol spielst, darfst du Graphen für je 4 M€ einsetzen.",
 
   "Astra Mechanica": "Astra Mechanika",

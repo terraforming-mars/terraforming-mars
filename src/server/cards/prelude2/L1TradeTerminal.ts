@@ -35,22 +35,34 @@ export class L1TradeTerminal extends Card {
     });
   }
 
-  public override bespokePlay(player: IPlayer): PlayerInput | undefined {
-    function addResources(cards: ReadonlyArray<ICard>): void {
-      for (const card of cards) {
-        player.addResourceTo(card, {qty: 1, log: true});
-      }
+  private addResources(player: IPlayer, cards: ReadonlyArray<ICard>): void {
+    for (const card of cards) {
+      player.addResourceTo(card, {qty: 1, log: true});
     }
+  }
 
-    const cards = player.getCardsWithResources();
-    if (cards.length === 3) {
-      addResources(cards);
+  private getEligibleCards(player: IPlayer) {
+    return [...player.getCardsWithResources(), ...player.getSelfReplicatingRobotsTargetCards().filter((card) => card.resourceCount > 0)];
+  }
+
+  public override bespokeCanPlay(player: IPlayer): boolean {
+    const cards = this.getEligibleCards(player);
+    if (cards.length === 0) {
+      this.warnings.add('noMatchingCards');
+    }
+    return true;
+  }
+
+  public override bespokePlay(player: IPlayer): PlayerInput | undefined {
+    const cards = this.getEligibleCards(player);
+    if (cards.length <= 3) {
+      this.addResources(player, cards);
       return undefined;
     }
 
     return new SelectCard('Select up to 3 cards to gain 1 resource each', 'Add Resources', cards, {min: 0, max: 3})
       .andThen((cards) => {
-        addResources(cards);
+        this.addResources(player, cards);
         return undefined;
       });
   }

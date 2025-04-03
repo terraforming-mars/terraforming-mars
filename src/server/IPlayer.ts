@@ -265,7 +265,7 @@ export interface IPlayer {
   addResourceTo(card: ICard, options?: number | {qty?: number, log: boolean, logZero?: boolean}): void;
 
   /**
-   * Returns the set of played cards that have actual resources on them.
+   * Returns the set of cards in play that have actual resources on them.
    *
    * If `resource` is absent, include cards that collect any resource.
    */

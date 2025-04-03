@@ -27,6 +27,7 @@ const descriptions: Record<Warning, string> = {
   'cannotAffordBoardOfDirectors': 'Warning: you do not have the 12 M€ required to act on a prelude.',
   'marsIsTerraformed': 'Note: all global parameters are at their goals.',
   'ineffectiveDoubleDown': 'Behavior in this card will apply to Double Down, and so have no effect.',
+  'noMatchingCards': 'No cards gain the reward of this action.',
 };
 
 export default Vue.extend({

@@ -14,4 +14,5 @@ export type Warning =
  'deckTooSmall' |
  'cannotAffordBoardOfDirectors' |
  'marsIsTerraformed' |
- 'ineffectiveDoubleDown';
+ 'ineffectiveDoubleDown' |
+ 'noMatchingCards';

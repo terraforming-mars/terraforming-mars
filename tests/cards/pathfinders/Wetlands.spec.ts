@@ -7,21 +7,20 @@ import {addCity, addGreenery, addOcean, cast, fakeCard, runAllActions, setOxygen
 import {TestPlayer} from '../../TestPlayer';
 import {EmptyBoard} from '../../testing/EmptyBoard';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {Space} from '../../../src/server/boards/Space';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
 import {CardName} from '../../../src/common/cards/CardName';
 import {testGame} from '../../TestGame';
-
-const toSpaceId = (space: Space): string => space.id;
+import {toID} from '../../../src/common/utils/utils';
 
 describe('Wetlands', () => {
   let card: Wetlands;
   let player: TestPlayer;
+  let player2: TestPlayer;
   let game: IGame;
 
   beforeEach(() => {
     card = new Wetlands();
-    [game, player/* , player2 */] = testGame( 2, {pathfindersExpansion: true});
+    [game, player, player2] = testGame( 2, {pathfindersExpansion: true});
     game.board = EmptyBoard.newInstance();
     game.board.getSpaceOrThrow('15').spaceType = SpaceType.OCEAN;
     game.board.getSpaceOrThrow('16').spaceType = SpaceType.OCEAN;
@@ -43,7 +42,7 @@ describe('Wetlands', () => {
 
     addOcean(player, '16');
     expect(player.canPlay(card)).is.true;
-    expect(card.availableSpaces(player).map(toSpaceId)).deep.eq(['09', '23']);
+    expect(card.availableSpaces(player).map(toID)).deep.eq(['09', '23']);
 
     player.plants = 3;
     expect(player.getPlayableCardsForTest()).does.not.include(card);
@@ -59,11 +58,11 @@ describe('Wetlands', () => {
 
     addOcean(player, '16');
     expect(player.canPlay(card)).is.true;
-    expect(card.availableSpaces(player).map(toSpaceId)).deep.eq(['09', '23']);
+    expect(card.availableSpaces(player).map(toID)).deep.eq(['09', '23']);
 
     game.simpleAddTile(player, game.board.getSpaceOrThrow('10'), {tileType: TileType.RED_CITY, card: CardName.RED_CITY});
     expect(player.canPlay(card)).is.true;
-    expect(card.availableSpaces(player).map(toSpaceId)).deep.eq(['23']);
+    expect(card.availableSpaces(player).map(toID)).deep.eq(['23']);
   });
 
 
@@ -78,31 +77,33 @@ describe('Wetlands', () => {
     addOcean(player, '16');
     expect(player.canPlay(card)).is.true;
 
-    expect(card.availableSpaces(player).map(toSpaceId)).deep.eq(['09', '23']);
+    expect(card.availableSpaces(player).map(toID)).deep.eq(['09', '23']);
 
     game.board.getSpaceOrThrow('09').spaceType = SpaceType.OCEAN;
 
     expect(card.canPlay(player)).is.true;
-    expect(card.availableSpaces(player).map(toSpaceId)).deep.eq(['23']);
+    expect(card.availableSpaces(player).map(toID)).deep.eq(['23']);
 
     game.board.getSpaceOrThrow('23').spaceType = SpaceType.OCEAN;
-    expect(card.availableSpaces(player).map(toSpaceId)).deep.eq([]);
+    expect(card.availableSpaces(player).map(toID)).deep.eq([]);
 
     expect(card.canPlay(player)).is.false;
   });
 
   it('play', () => {
     player.plants = 7;
-    addOcean(player, '15');
-    addOcean(player, '16');
+    addOcean(player2, '15');
+    addOcean(player2, '16');
     expect(card.canPlay(player)).is.true;
-    expect(card.availableSpaces(player).map(toSpaceId)).deep.eq(['09', '23']);
+    expect(card.availableSpaces(player).map(toID)).deep.eq(['09', '23']);
+
+    expect(player.getTerraformRating()).eq(20);
 
     const action = card.play(player);
     expect(player.plants).eq(3);
 
     const selectSpace = cast(action, SelectSpace);
-    expect(selectSpace.spaces.map(toSpaceId)).deep.eq(['09', '23']);
+    expect(selectSpace.spaces.map(toID)).deep.eq(['09', '23']);
 
     expect(game.getOxygenLevel()).eq(0);
 
@@ -112,6 +113,7 @@ describe('Wetlands', () => {
     runAllActions(game);
 
     expect(game.getOxygenLevel()).eq(1);
+    expect(player.getTerraformRating()).eq(22);
   });
 
   it('Wetlands does not count toward global parameters', () => {
@@ -164,13 +166,13 @@ describe('Wetlands', () => {
     claimedSpace.player = player;
 
     expect(card.canPlay(player)).is.true;
-    expect(card.availableSpaces(player).map(toSpaceId)).deep.eq(['09', '23']);
+    expect(card.availableSpaces(player).map(toID)).deep.eq(['09', '23']);
 
     const action = card.play(player);
     expect(player.plants).eq(3);
 
     const selectSpace = cast(action, SelectSpace);
-    expect(selectSpace.spaces.map(toSpaceId)).deep.eq(['09', '23']);
+    expect(selectSpace.spaces.map(toID)).deep.eq(['09', '23']);
 
     expect(game.getOxygenLevel()).eq(0);
 

@@ -10,6 +10,7 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {addOcean, cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
+import {toID} from '../../../src/common/utils/utils';
 
 describe('OceanCity', () => {
   let card: OceanCity;
@@ -79,10 +80,10 @@ describe('OceanCity', () => {
     const adjacentSpaces = game.board
       .getAdjacentSpaces(oceanSpace)
       .filter((space) => space.spaceType === SpaceType.LAND)
-      .map((space) => space.id);
+      .map(toID);
     const citySpaces = game.board
       .getAvailableSpacesForCity(player)
-      .map((space) => space.id);
+      .map(toID);
     expect(citySpaces).to.not.include.any.members(adjacentSpaces);
   });
 

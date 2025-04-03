@@ -10,6 +10,7 @@ import {addOcean, cast, runAllActions, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {MartianLumberCorp} from '../../../src/server/cards/promo/MartianLumberCorp';
+import {toID} from '../../../src/common/utils/utils';
 
 // There's a fair bit of code duplication from OceanCity. Rather a lot really.
 describe('NewVenice', () => {
@@ -78,10 +79,10 @@ describe('NewVenice', () => {
     const adjacentSpaces = game.board
       .getAdjacentSpaces(oceanSpace)
       .filter((space) => space.spaceType === SpaceType.LAND)
-      .map((space) => space.id);
+      .map(toID);
     const citySpaces = game.board
       .getAvailableSpacesForCity(player)
-      .map((space) => space.id);
+      .map(toID);
     expect(citySpaces).to.not.include.any.members(adjacentSpaces);
   });
 

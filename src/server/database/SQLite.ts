@@ -10,6 +10,7 @@ import {SerializedGame} from '../SerializedGame';
 import {daysAgoToSeconds} from './utils';
 import {MultiMap} from 'mnemonist';
 import {Session, SessionId} from '../auth/Session';
+import {toID} from '../../common/utils/utils';
 
 export const IN_MEMORY_SQLITE_PATH = ':memory:';
 
@@ -203,7 +204,7 @@ export class SQLite implements IDatabase {
     // when the database operation was an insert. (We should figure out why multiple saves occur and
     // try to stop them. But that's for another day.)
     if (game.lastSaveId === 0) {
-      const participantIds: Array<ParticipantId> = game.getPlayers().map((p) => p.id);
+      const participantIds: Array<ParticipantId> = game.getPlayers().map(toID);
       if (game.spectatorId) participantIds.push(game.spectatorId);
       try {
         await this.storeParticipants({gameId: game.id, participantIds: participantIds});

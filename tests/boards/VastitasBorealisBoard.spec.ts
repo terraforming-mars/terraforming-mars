@@ -9,6 +9,7 @@ import {SpaceName} from '../../src/common/boards/SpaceName';
 import {testGame} from '../TestGame';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {SeededRandom} from '../../src/common/utils/Random';
+import {toID} from '../../src/common/utils/utils';
 
 describe('VastitasBorealisBoard', () => {
   let board: VastitasBorealisBoard;
@@ -93,10 +94,10 @@ describe('VastitasBorealisBoard', () => {
     const space = board.getSpaceOrThrow(SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
 
     player.megaCredits = 2;
-    expect(board.getAvailableSpacesOnLand(player).map((space) => space.id)).does.not.include(SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
+    expect(board.getAvailableSpacesOnLand(player).map(toID)).does.not.include(SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
 
     player.megaCredits = 3;
-    expect(board.getAvailableSpacesOnLand(player).map((space) => space.id)).includes(SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
+    expect(board.getAvailableSpacesOnLand(player).map(toID)).includes(SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
     expect(game.getTemperature()).eq(-30);
 
     game.addTile(player, space, {tileType: TileType.CITY});

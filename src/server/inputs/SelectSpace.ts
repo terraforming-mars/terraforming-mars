@@ -4,6 +4,7 @@ import {InputResponse, isSelectSpaceResponse} from '../../common/inputs/InputRes
 import {SelectSpaceModel} from '../../common/models/PlayerInputModel';
 import {BasePlayerInput} from '../PlayerInput';
 import {InputError} from './InputError';
+import {toID} from '../../common/utils/utils';
 
 export class SelectSpace extends BasePlayerInput<Space> {
   constructor(
@@ -20,7 +21,7 @@ export class SelectSpace extends BasePlayerInput<Space> {
       title: this.title,
       buttonLabel: this.buttonLabel,
       type: 'space',
-      spaces: this.spaces.map((space) => space.id),
+      spaces: this.spaces.map(toID),
     };
   }
 

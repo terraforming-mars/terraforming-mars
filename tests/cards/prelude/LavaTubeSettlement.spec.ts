@@ -7,6 +7,7 @@ import {cast, runAllActions, testGame} from '../../TestingUtils';
 import {assertPlaceCity} from '../../assertions';
 import {BoardName} from '../../../src/common/boards/BoardName';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {toID} from '../../../src/common/utils/utils';
 
 describe('LavaTubeSettlement', () => {
   let card: LavaTubeSettlement;
@@ -41,7 +42,7 @@ describe('LavaTubeSettlement', () => {
     runAllActions(game);
 
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
-    expect(selectSpace.spaces.map((space) => space.id)).to.have.members(game.board.volcanicSpaceIds);
+    expect(selectSpace.spaces.map(toID)).to.have.members(game.board.volcanicSpaceIds);
     assertPlaceCity(player, selectSpace);
   });
 
@@ -54,7 +55,7 @@ describe('LavaTubeSettlement', () => {
     runAllActions(game);
 
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
-    expect(selectSpace.spaces.map((space) => space.id)).to.have.members(game.board.getAvailableSpacesForCity(player).map((space) => space.id));
+    expect(selectSpace.spaces.map(toID)).to.have.members(game.board.getAvailableSpacesForCity(player).map(toID));
   });
 
   it('Play on Utopia Planitia', () => {
@@ -66,6 +67,6 @@ describe('LavaTubeSettlement', () => {
     runAllActions(game);
 
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
-    expect(selectSpace.spaces.map((space) => space.id)).to.have.members(game.board.getAvailableSpacesForCity(player).map((space) => space.id));
+    expect(selectSpace.spaces.map(toID)).to.have.members(game.board.getAvailableSpacesForCity(player).map(toID));
   });
 });

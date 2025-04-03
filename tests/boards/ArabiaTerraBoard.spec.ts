@@ -15,6 +15,7 @@ import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {testGame} from '../TestGame';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {SeededRandom} from '../../src/common/utils/Random';
+import {toID} from '../../src/common/utils/utils';
 
 describe('ArabiaTerraBoard', () => {
   let board: ArabiaTerraBoard;
@@ -165,7 +166,7 @@ describe('ArabiaTerraBoard', () => {
     const landClaim = new LandClaim();
     const selectSpace = cast(landClaim.play(player), SelectSpace);
     const space = board.getSpaces(SpaceType.COVE)[0];
-    expect(selectSpace.spaces.map((space) => space.id)).contains(space.id);
+    expect(selectSpace.spaces.map(toID)).contains(space.id);
 
     selectSpace.cb(space);
 

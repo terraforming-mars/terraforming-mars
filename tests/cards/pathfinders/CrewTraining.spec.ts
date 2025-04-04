@@ -30,9 +30,9 @@ describe('CrewTraining', () => {
     const action = cast(game.deferredActions.pop(), DeclareCloneTag);
     const options = cast(action.execute(), OrOptions);
 
-    expect(options.options[0].title).to.match(/earth/);
+    expect(options.options[1].title).to.match(/earth/);
     expect(game.pathfindersData).deep.eq({
-      venus: -1,
+      venus: 0,
       earth: 0,
       mars: 0,
       jovian: 0,
@@ -40,10 +40,10 @@ describe('CrewTraining', () => {
       vps: [],
     });
 
-    options.options[0].cb();
+    options.options[1].cb();
 
     expect(game.pathfindersData).deep.eq({
-      venus: -1,
+      venus: 0,
       earth: 2,
       mars: 0,
       jovian: 0,

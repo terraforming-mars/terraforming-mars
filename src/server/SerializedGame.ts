@@ -18,6 +18,7 @@ import {UnderworldData} from './underworld/UnderworldData';
 import {AwardName} from '../common/ma/AwardName';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {MilestoneName} from '../common/ma/MilestoneName';
+import {Tag} from '../common/cards/Tag';
 
 export type SerializedGame = {
     activePlayer: PlayerId;
@@ -62,6 +63,7 @@ export type SerializedGame = {
     spectatorId: SpectatorId | undefined;
     stJosephCathedrals: Array<SpaceId>;
     syndicatePirateRaider: PlayerId | undefined;
+    tags: ReadonlyArray<Tag>
     temperature: number;
     tradeEmbargo?: boolean;
     turmoil?: SerializedTurmoil;

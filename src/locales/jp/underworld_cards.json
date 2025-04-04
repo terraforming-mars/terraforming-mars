@@ -30,7 +30,7 @@
     "Requires 1 corruption. Target a player that has at least 2 corruption. Unless that player pays you 10 M€, they lose 2 corruption.": "条件：汚職1つ以上. 汚職を2つ以上あるプレイヤーは、10MCをあなたに支払う または 2汚職除去.",
 
     "Corporate Theft": "企業窃盗",
-    "Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. NOTE: Do not use in single player games.": "条件：汚職2つ以上. 他のプレイヤーからカード上の資源を1つ盗む. これが防がれた場合、1腐敗獲得. ※ソロでは使用不可.",
+    "Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. IF SOLO: gain 1 corruption.": "条件：汚職2つ以上. 他のプレイヤーからカード上の資源を1つ盗む. これが防がれた場合、1腐敗獲得. ソロの場合: 腐敗を 1 つ獲得します。",
 
     "Crater Survey": "クレーター調査",
     "Add 2 data resources to ANOTHER card. Identify 4 underground resources.": "2データ獲得. 4回地下資源を調査する.",

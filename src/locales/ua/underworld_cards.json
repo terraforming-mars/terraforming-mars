@@ -30,7 +30,7 @@
   "Requires 1 corruption. Target a player that has at least 2 corruption. Unless that player pays you 10 M€, they lose 2 corruption.": "Вимагає 1 одиницю корупції. Виберіть гравця, у якого є принаймні 2 одиниці корупції. Якщо цей гравець не заплатить вам 10 M€, він втрачає 2 одиниці корупції.",
 
   "Corporate Theft": "Корпоративна крадіжка",
-  "Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. NOTE: Do not use in single player games.": "Вимагає 2 одиниці корупції. Видаліть 1 ресурс з карти, що належить іншому гравцю. Потім, якщо у вас є карта, на якій можна його зберігати, помістіть його на таку карту. Якщо ціль заблокувала це, ви отримуєте 1 одиницю корупції. ПРИМІТКА: Не використовуйте в одиночних іграх.",
+  "Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. IF SOLO: gain 1 corruption.": "Вимагає 2 одиниці корупції. Видаліть 1 ресурс з карти, що належить іншому гравцю. Потім, якщо у вас є карта, на якій можна його зберігати, помістіть його на таку карту. Якщо ціль заблокувала це, ви отримуєте 1 одиницю корупції. ЯКЩО СОЛО: отримати 1 пошкодження.",
 
   "Crater Survey": "Дослідження кратера",
   "Add 2 data resources to ANOTHER card. Identify 4 underground resources.": "Додайте 2 ресурси даних на ІНШУ карту. Визначте 4 підземні ресурси.",

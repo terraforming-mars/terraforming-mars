@@ -157,23 +157,24 @@ describe('MilestoneAwardSelector', () => {
       expect(mas.awards).does.not.contain('Constructor');
     }
   });
-  // it('No modular milestones and awards by default', () => {
-  //   const [milestones, awards] = getCandidates({...DEFAULT_GAME_OPTIONS,
-  //     randomMA: RandomMAOptionType.UNLIMITED,
-  //     venusNextExtension: true,
-  //     aresExtension: true,
-  //     moonExpansion: true,
-  //     coloniesExtension: true,
-  //     turmoilExtension: true,
-  //     includeFanMA: true,
-  //   });
 
-  //   expect(intersection(milestones, MODULAR_MILESTONES)).deep.eq([]);
-  //   expect(intersection(awards, MODULAR_AWARDS)).deep.eq([]);
+  it('No modular milestones and awards by default', () => {
+    const [milestones, awards] = getCandidates({...DEFAULT_GAME_OPTIONS,
+      randomMA: RandomMAOptionType.UNLIMITED,
+      venusNextExtension: true,
+      aresExtension: true,
+      moonExpansion: true,
+      coloniesExtension: true,
+      turmoilExtension: true,
+      includeFanMA: true,
+    });
 
-  //   // Landlord is listed as modular, but should be included here.
-  //   expect(awards).to.contain('Landlord');
-  // });
+    expect(intersection(milestones, milestoneManifest.modular)).deep.eq([]);
+    expect(intersection(awards, awardManifest.modular)).deep.eq([]);
+
+    // Landlord is listed as modular, but should be included here.
+    expect(awards).to.contain('Landlord');
+  });
 
   function choose(options: Partial<GameOptions>) {
     return chooseMilestonesAndAwards({...DEFAULT_GAME_OPTIONS, ...options});

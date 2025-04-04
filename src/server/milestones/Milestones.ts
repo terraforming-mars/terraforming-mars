@@ -109,7 +109,8 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'Landshaper': {Factory: Landshaper},
     'Lobbyist': {Factory: Lobbyist, compatibility: 'turmoil'},
     'Philantropist': {Factory: Philantropist},
-    'Planetologist': {Factory: Planetologist},
+    // TODO(kberg): Replace with compatibility based on, uh, tags?
+    'Planetologist': {Factory: Planetologist, compatibility: 'venus'},
     'Producer': {Factory: Producer},
     'Researcher': {Factory: Researcher},
     'Sponsor': {Factory: Sponsor},

@@ -5,6 +5,7 @@ import {GameId, isGameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
 import {Dirent, existsSync, mkdirSync, readdirSync, readFileSync, unlinkSync, writeFileSync} from 'fs';
 import {Session, SessionId} from '../auth/Session';
+import {toID} from '../../common/utils/utils';
 
 const path = require('path');
 const defaultDbFolder = path.resolve(process.cwd(), './db/files');
@@ -203,7 +204,7 @@ export class LocalFilesystem implements IDatabase {
         try {
           const text = readFileSync(this.filename(gameId));
           const game: SerializedGame = JSON.parse(text.toString());
-          const participantIds: Array<ParticipantId> = game.players.map((p) => p.id);
+          const participantIds: Array<ParticipantId> = game.players.map(toID);
           if (game.spectatorId) participantIds.push(game.spectatorId);
           gameIds.push({gameId, participantIds});
         } catch (e) {

@@ -21,6 +21,7 @@ import {SelectParty} from '../inputs/SelectParty';
 import {IPolicy, PolicyId, policyDescription} from './Policy';
 import {PlayerId} from '../../common/Types';
 import {ChoosePolicyBonus} from '../deferredActions/ChoosePolicyBonus';
+import {toID} from '../../common/utils/utils';
 
 export type NeutralPlayer = 'NEUTRAL';
 export type Delegate = IPlayer | NeutralPlayer;
@@ -552,7 +553,7 @@ export class Turmoil {
       chairman: serializeDelegateOrUndefined(this.chairman),
       rulingParty: this.rulingParty.name,
       dominantParty: this.dominantParty.name,
-      usedFreeDelegateAction: Array.from(this.usedFreeDelegateAction).map((p) => p.id),
+      usedFreeDelegateAction: Array.from(this.usedFreeDelegateAction).map(toID),
       delegateReserve: Array.from(this.delegateReserve.values()).map(serializeDelegate),
       parties: this.parties.map((p) => {
         return {

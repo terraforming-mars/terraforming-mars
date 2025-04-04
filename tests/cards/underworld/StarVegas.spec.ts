@@ -7,6 +7,7 @@ import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {CardName} from '../../../src/common/cards/CardName';
 import {GanymedeColony} from '../../../src/server/cards/base/GanymedeColony';
+import {toID} from '../../../src/common/utils/utils';
 
 describe('StarVegas', () => {
   it('canPlay', () => {
@@ -35,7 +36,7 @@ describe('StarVegas', () => {
     runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
 
-    expect(selectSpace.spaces.map((space) => space.id)).to.have.members([
+    expect(selectSpace.spaces.map(toID)).to.have.members([
       SpaceName.GANYMEDE_COLONY,
       SpaceName.PHOBOS_SPACE_HAVEN,
     ]);
@@ -60,7 +61,7 @@ describe('StarVegas', () => {
     runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
 
-    expect(selectSpace.spaces.map((space) => space.id)).to.have.members([
+    expect(selectSpace.spaces.map(toID)).to.have.members([
       SpaceName.GANYMEDE_COLONY,
       SpaceName.PHOBOS_SPACE_HAVEN,
       SpaceName.LUNA_METROPOLIS,
@@ -79,7 +80,7 @@ describe('StarVegas', () => {
     runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
 
-    expect(selectSpace.spaces.map((space) => space.id)).to.have.members([
+    expect(selectSpace.spaces.map(toID)).to.have.members([
       SpaceName.GANYMEDE_COLONY,
       SpaceName.PHOBOS_SPACE_HAVEN,
       SpaceName.CERES_SPACEPORT,
@@ -98,7 +99,7 @@ describe('StarVegas', () => {
     runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
 
-    expect(selectSpace.spaces.map((space) => space.id)).to.have.members([
+    expect(selectSpace.spaces.map(toID)).to.have.members([
       SpaceName.PHOBOS_SPACE_HAVEN,
     ]);
   });
@@ -111,7 +112,7 @@ describe('StarVegas', () => {
     runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
 
-    expect(selectSpace.spaces.map((space) => space.id)).to.include(SpaceName.GANYMEDE_COLONY);
+    expect(selectSpace.spaces.map(toID)).to.include(SpaceName.GANYMEDE_COLONY);
 
     const ganymedeColony = new GanymedeColony();
     expect(ganymedeColony.canPlay(player)).is.true;

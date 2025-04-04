@@ -107,7 +107,7 @@ describe('Board', () => {
     ]);
     board.spaces.forEach((space) => {
       const expected = expectedAdjacentSpaces.get(space.id);
-      const actual = board.getAdjacentSpaces(space).map((s) => s.id);
+      const actual = board.getAdjacentSpaces(space).map(toID);
       expect(expected).to.eql(actual);
     });
   });

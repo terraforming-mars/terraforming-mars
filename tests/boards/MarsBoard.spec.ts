@@ -9,6 +9,7 @@ import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptio
 import {ArcadianCommunities} from '../../src/server/cards/promo/ArcadianCommunities';
 import {testGame} from '../TestGame';
 import {AresHandler} from '../../src/server/ares/AresHandler';
+import {toID} from '../../src/common/utils/utils';
 
 describe('MarsBoard', () => {
   let board: MarsBoard;
@@ -89,7 +90,7 @@ describe('MarsBoard', () => {
   });
 
   it('edges', () => {
-    expect(board.getEdges().map((space) => space.id)).to.have.members(
+    expect(board.getEdges().map(toID)).to.have.members(
       [
         '03', '04', '05', '06', '07',
         '08', '13',

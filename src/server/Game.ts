@@ -76,7 +76,7 @@ import {SpaceType} from '../common/boards/SpaceType';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {BuildColony} from './deferredActions/BuildColony';
 import {newInitialDraft, newPreludeDraft, newStandardDraft} from './Draft';
-import {toName} from '../common/utils/utils';
+import {toID, toName} from '../common/utils/utils';
 import {OrOptions} from './inputs/OrOptions';
 import {SelectOption} from './inputs/SelectOption';
 import {SelectSpace} from './inputs/SelectSpace';
@@ -200,7 +200,7 @@ export class Game implements IGame, Logger {
     this.id = id;
     this.gameOptions = {...gameOptions};
     this.players = players;
-    const playerIds = players.map((p) => p.id);
+    const playerIds = players.map(toID);
     if (playerIds.includes(first.id) === false) {
       throw new Error('Cannot find first player ' + first.id + ' in [' + playerIds + ']');
     }
@@ -638,7 +638,7 @@ export class Game implements IGame, Logger {
 
   // Public for testing.
   public incrementFirstPlayer(): void {
-    let firstIndex = this.players.map((x) => x.id).indexOf(this.first.id);
+    let firstIndex = this.players.map(toID).indexOf(this.first.id);
     if (firstIndex === -1) {
       throw new Error('Didn\'t even find player');
     }

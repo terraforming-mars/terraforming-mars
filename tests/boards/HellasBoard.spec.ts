@@ -12,6 +12,7 @@ import {Manutech} from '../../src/server/cards/venusNext/Manutech';
 import {DomedCrater} from '../../src/server/cards/base/DomedCrater';
 import {Resource} from '../../src/common/Resource';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
+import {toID} from '../../src/common/utils/utils';
 
 describe('HellasBoard', () => {
   let board: HellasBoard;
@@ -99,12 +100,12 @@ describe('HellasBoard', () => {
     // Cannot afford
     player.megaCredits = 5;
     let availableSpacesOnLand = board.getAvailableSpacesOnLand(player);
-    expect(availableSpacesOnLand.map((s) => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
+    expect(availableSpacesOnLand.map(toID)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
 
     // Can afford
     player.megaCredits = 6;
     availableSpacesOnLand = board.getAvailableSpacesOnLand(player);
-    expect(availableSpacesOnLand.map((s) => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
+    expect(availableSpacesOnLand.map(toID)).to.include(SpaceName.HELLAS_OCEAN_TILE);
   });
 
   it('Calculate costs for Hellas ocean space with other costs (e.g. ares)', () => {
@@ -115,12 +116,12 @@ describe('HellasBoard', () => {
 
     player.megaCredits = 8;
     let availableSpacesOnLand = board.getAvailableSpacesOnLand(player);
-    expect(availableSpacesOnLand.map((s) => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
+    expect(availableSpacesOnLand.map(toID)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
 
     // Can afford
     player.megaCredits = 9;
     availableSpacesOnLand = board.getAvailableSpacesOnLand(player);
-    expect(availableSpacesOnLand.map((s) => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
+    expect(availableSpacesOnLand.map(toID)).to.include(SpaceName.HELLAS_OCEAN_TILE);
   });
 
   it('Cannot place on ocean space EVEN if Manutech can make up the difference - replicates #931', () => {
@@ -131,6 +132,6 @@ describe('HellasBoard', () => {
     runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     // This is still a bug because this ought to be true.
-    expect(selectSpace.spaces.map((s) => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
+    expect(selectSpace.spaces.map(toID)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
   });
 });

@@ -86,11 +86,9 @@ const isInGame = (tag: InterfaceTagsType, game: GameModel): boolean => {
   case SpecialTags.CORRUPTION:
     return gameOptions.expansions.underworld !== false;
   case Tag.VENUS:
-    return game.gameOptions.expansions.venus !== false;
   case Tag.MOON:
-    return game.gameOptions.expansions.moon !== false;
   case Tag.MARS:
-    return (gameOptions.expansions.pathfinders || gameOptions.expansions.underworld);
+    return game.tags.includes(tag);
   }
   return true;
 };

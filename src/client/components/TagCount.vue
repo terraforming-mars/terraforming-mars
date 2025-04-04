@@ -19,7 +19,7 @@ export default Vue.extend({
       type: String as () => CardTag|SpecialTags|'escape',
     },
     count: {
-      type: String as () => Number | String,
+      type: Number as () => Number | String,
     },
     size: {
       type: String,

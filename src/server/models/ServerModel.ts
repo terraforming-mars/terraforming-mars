@@ -65,6 +65,7 @@ export class Server {
       generation: game.getGeneration(),
       globalsPerGeneration: game.gameIsOver() ? game.globalsPerGeneration : [],
       isSoloModeWin: game.isSoloModeWin(),
+      isTerraformed: game.marsIsTerraformed(),
       lastSoloGeneration: game.lastSoloGeneration(),
       milestones: this.getMilestones(game),
       moon: this.getMoonModel(game),
@@ -75,12 +76,12 @@ export class Server {
       phase: game.phase,
       spaces: this.getSpaces(game.board, game.gagarinBase, game.stJosephCathedrals, game.nomadSpace),
       spectatorId: game.spectatorId,
+      step: game.lastSaveId,
       temperature: game.getTemperature(),
-      isTerraformed: game.marsIsTerraformed(),
+      tags: game.tags,
       turmoil: turmoil,
       undoCount: game.undoCount,
       venusScaleLevel: game.getVenusScaleLevel(),
-      step: game.lastSaveId,
     };
   }
 

@@ -9,6 +9,7 @@ import {MilestoneName, milestoneNames} from '../../common/ma/MilestoneName';
 import {AwardName, awardNames} from '../../common/ma/AwardName';
 import {synergies} from './MilestoneAwardSynergies';
 import {MAManifest, isCompatible} from './MAManifest';
+import {intersection} from '../../common/utils/utils';
 
 type DrawnMilestonesAndAwards = {
   milestones: Array<MilestoneName>,
@@ -121,29 +122,39 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
  */
 export function getCandidates(gameOptions: GameOptions): [Array<MilestoneName>, Array<AwardName>] {
   function include<T extends string>(name: T, manifest: MAManifest<T, any>): boolean {
+    // When using modular, don't include non-modular MAs.
+    if (gameOptions.modularMA) {
+      throw new Error('Not supporting modular awards yet.');
+    }
+
     if (!gameOptions.modularMA) {
-      function boardHasMA(board: BoardName) {
-        return manifest.boards[board].includes(name);
-      }
-      if ([BoardName.THARSIS, BoardName.ELYSIUM, BoardName.HELLAS].some(boardHasMA)) {
+      // The game boards this MA appears in, if any.
+      const boards = Object.values(BoardName).filter((boardName) => manifest.boards[boardName].includes(name));
+
+      // Always include the milestones and awards from the official boards
+      if (intersection(boards, [BoardName.THARSIS, BoardName.ELYSIUM, BoardName.HELLAS]).length > 0) {
         return true;
       }
-      // TODO(kberg): Shares some ideas with ApiCreateGame
-      if (Object.values(BoardName).some(boardHasMA) && gameOptions.includeFanMA === false) {
+      // Conditionally include milestones and awards from unofficial boards.
+      if (boards.length > 0 && gameOptions.includeFanMA === false) {
         return false;
       }
-    } else {
-      if (manifest.modular.includes(name) === false) {
+
+      // Disable the new modular awards until they're weighted.
+      if (manifest.modular.includes(name)) {
         return false;
       }
     }
+
     if (!isCompatible(name, manifest, gameOptions)) {
       return false;
     }
+
     return true;
   }
-  const candidateMilestones: Array<MilestoneName> = milestoneNames.filter((name) => include(name, milestoneManifest));
-  const candidateAwards: Array<AwardName> = awardNames.filter((name) => include(name, awardManifest));
+
+  const candidateMilestones = milestoneNames.filter((name) => include(name, milestoneManifest));
+  const candidateAwards = awardNames.filter((name) => include(name, awardManifest));
 
   return [candidateMilestones, candidateAwards];
 }

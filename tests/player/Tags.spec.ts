@@ -99,7 +99,7 @@ describe('Tags', () => {
     {options: {}, expected: 10},
     {options: {venusNextExtension: true}, expected: 11},
     {options: {coloniesExtension: true}, expected: 10},
-    {options: {pathfindersExpansion: true}, expected: 11},
+    {options: {pathfindersExpansion: true}, expected: 12},
     {options: {venusNextExtension: true, pathfindersExpansion: true}, expected: 12},
     {options: {moonExpansion: true}, expected: 11},
   ] as const;

@@ -52,7 +52,7 @@ describe('LobbyHalls', () => {
 
   function assertCloneTagAction(action: IDeferredAction) {
     const options = cast(action, DeclareCloneTag).execute();
-    options.options[0].cb();
+    options.options[1].cb();
     expect(card.tags).deep.eq([Tag.EARTH, Tag.BUILDING]);
   }
 });

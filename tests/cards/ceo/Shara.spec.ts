@@ -35,18 +35,18 @@ describe('Shara', () => {
     const action = cast(game.deferredActions.pop(), DeclareCloneTag);
     const options = cast(action.execute(), OrOptions);
 
-    expect(options.options[1].title).to.match(/mars/);
+    expect(options.options[2].title).to.match(/mars/);
     expect(game.pathfindersData).deep.eq({
-      venus: -1,
+      venus: 0,
       earth: 0,
       mars: 0,
       jovian: 0,
       moon: -1,
       vps: [],
     });
-    options.options[1].cb();
+    options.options[2].cb();
     expect(game.pathfindersData).deep.eq({
-      venus: -1,
+      venus: 0,
       earth: 0,
       mars: 2,
       jovian: 0,

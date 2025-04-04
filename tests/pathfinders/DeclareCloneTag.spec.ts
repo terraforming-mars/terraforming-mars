@@ -28,18 +28,22 @@ describe('DeclareCloneTag', () => {
     const options = cast(action.execute(), OrOptions);
     const orOptions = cast(options.options, Array<SelectOption>);
 
-    expect(orOptions).has.length(3);
+    expect(orOptions).has.length(4);
     expect(card.cloneTag).eq(Tag.CLONE);
 
     orOptions[0].cb(undefined);
+    expect(card.cloneTag).eq(Tag.VENUS);
+    expect(tag).eq(Tag.VENUS);
+
+    orOptions[1].cb(undefined);
     expect(card.cloneTag).eq(Tag.EARTH);
     expect(tag).eq(Tag.EARTH);
 
-    orOptions[1].cb(undefined);
+    orOptions[2].cb(undefined);
     expect(card.cloneTag).eq(Tag.MARS);
     expect(tag).eq(Tag.MARS);
 
-    orOptions[2].cb(undefined);
+    orOptions[3].cb(undefined);
     expect(card.cloneTag).eq(Tag.JOVIAN);
     expect(tag).eq(Tag.JOVIAN);
   });
@@ -90,9 +94,9 @@ describe('DeclareCloneTag', () => {
     const action = cast(game.deferredActions.pop(), DeclareCloneTag);
     const options = cast(action.execute(), OrOptions);
 
-    expect(options.options[0].title).to.match(/earth/);
+    expect(options.options[1].title).to.match(/earth/);
 
-    options.options[0].cb();
+    options.options[1].cb();
 
     runAllActions(game);
 

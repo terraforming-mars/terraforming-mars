@@ -91,4 +91,18 @@ describe('CorporateTheft', () => {
       }
     });
   }
+
+  it('solo', () => {
+    const card = new CorporateTheft();
+    const [/* game */, player] = testGame(1, {underworldExpansion: true});
+
+    player.underworldData.corruption = 1;
+    expect(card.canPlay(player)).is.false;
+
+    player.underworldData.corruption = 2;
+    expect(card.canPlay(player)).is.true;
+
+    cast(card.play(player), undefined);
+    expect(player.underworldData.corruption).eq(3);
+  });
 });

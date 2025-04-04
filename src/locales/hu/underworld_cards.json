@@ -21,7 +21,7 @@
   "THIS CANNOT BE BLOCKED BY CORRUPTION": "NEM LEHET KORRUPCIÓVAL KIVÉDENI",
   "Requires 1 corruption. Target a player that has at least 2 corruption. Unless that player pays you 10 M€, they lose 2 corruption.": "Kijátszási feltétel: legalább 1 korrupció. Válassz egy olyan játékost, akinek legalább 2 korrupciója van! Ha ez a játékos nem fizet neked 10 M€-et, akkor elveszít 2 korrupciót.",
   "Corporate Theft": "Vállalati lopás",
-  "Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. NOTE: Do not use in single player games.": "Kijátszási feltétel: legalább 2 korrupció. Távolíts el 1 erőforrást egy másik játékos kijátszott kártyájáról! Utána, ha van alkalmas kijátszott kártyád, rakd rá ezt az erőforrást! Ha a célpont kivédte a támadásodat, kapsz 1 korrupciót. MEGJEGYZÉS: Egyjátékos módban ne használd!",
+  "Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. IF SOLO: gain 1 corruption.": "Kijátszási feltétel: legalább 2 korrupció. Távolíts el 1 erőforrást egy másik játékos kijátszott kártyájáról! Utána, ha van alkalmas kijátszott kártyád, rakd rá ezt az erőforrást! Ha a célpont kivédte a támadásodat, kapsz 1 korrupciót. HA EGYEDÜL: szerezzen 1 korrupciót.",
   "Crater Survey": "Kráterfelmérés",
   "Add 2 data resources to ANOTHER card. Identify 4 underground resources.": "Rakj 2 adat erőforrást egy MÁSIK kártyára! Azonosíts 4 földalatti erőforrást!",
   "Cut-throat Budgeting": "Egyszerű költségvetés-tervezés",

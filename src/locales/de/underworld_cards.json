@@ -31,7 +31,7 @@
 "Requires 1 corruption. Target a player that has at least 2 corruption. Unless that player pays you 10 M€, they lose 2 corruption.": "Benötigt 1 Korruption. Visiere einen Spieler, der mindestens 2 Korruption hat. Wenn dieser Spieler nicht 10 M€ an dich zahlt, verliert er 2 Korruptionspunkte.",
 
 "Corporate Theft": "Unternehmensdiebstahl",
-"Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. NOTE: Do not use in single player games.": "Benötigt 2 Korruption. Entferne 1 Ressource von einer Karte, die einem anderen Spieler gehört. Wenn du dann eine Karte hast, die sie aufnehmen kann, lege sie auf eine solche Karte. Wenn das Ziel dies blockiert, erhältst du 1 Korruption. HINWEIS: Nicht im Solo-Modus verwenden.",
+"Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. IF SOLO: gain 1 corruption.": "Benötigt 2 Korruption. Entferne 1 Ressource von einer Karte, die einem anderen Spieler gehört. Wenn du dann eine Karte hast, die sie aufnehmen kann, lege sie auf eine solche Karte. Wenn das Ziel dies blockiert, erhältst du 1 Korruption. WENN ALLEIN: 1 Korruption erhalten.",
 
 "Crater Survey": "Krater Vermessung",
 "Add 2 data resources to ANOTHER card. Identify 4 underground resources.": "Füge 2 Daten einer ANDEREN Karte hinzu. Identifiziere 4 unterirdische Ressourcen.",

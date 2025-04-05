@@ -63,7 +63,7 @@
   "Drew and discarded ${0} and ${1} to place a ${2}": "Húztam és eldobtam a(z) ${0} és a(z) ${1} kártyát, hogy lehelyezzem a(z) ${2}-t.",
   "${0} drew and discarded a prelude": "${0} Húztál és eldobtál egy Kezdetek kártyát.",
   "You drew and discarded ${0}": "Húztál és eldobtál ${0}.",
-  "Resources from ${1} cannot be added to ${2}": "Az erőforrás a(z) ${1} kártyáról nem adható hozzá a(z) ${2} kártyára.",
+  "Resources from ${0} cannot be added to ${1}": "Az erőforrás a(z) ${0} kártyáról nem adható hozzá a(z) ${1} kártyára.",
   "The id of this game is ${0}": "A játék azonosítója: ${0}.",
   "Good luck ${0}!": "Sok szerencsét ${0}!",
   "Final greenery placement": "Végső Növényzetlapka lehelyezés.",

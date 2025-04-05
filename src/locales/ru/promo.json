@@ -62,7 +62,7 @@
     "Meat Industry": "Мясное производство",
     "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "Эффект: Получая животное на любую карту, получайте дополнительно 2 М€",
 
-    "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.": "Повысьте температуру на 3 шага и получите 4 стали. Разместите дембу НЕ по соседству с городом. Удалите до 6 растений у любого игрока",
+    "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. Remove up to 6 plants from any player.": "Повысьте температуру на 3 шага и получите 4 стали. Разместите дембу НЕ по соседству с городом. Удалите до 6 растений у любого игрока",
 
     "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Требует 4 океана. Увеличьте своё производство энергии на 2. Добавьте этот тайл на область рядом с океаном",
 
@@ -181,7 +181,7 @@
 
     "Stanford Torus": "Стэнфордский тор",
     "Place a city tile IN SPACE, outside and separate from the planet.": "Разместите город в локации Стэнфордский тор",
-		
+
     "Bactoviral Research": "Бактериологические исследования",
     "(Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.)": "(Возьмите 1 карту. Выберите 1 из сыгранных вами карт и выложите на неё 1 жетон бактерий за каждый жетон науки, включая этот.)",
 

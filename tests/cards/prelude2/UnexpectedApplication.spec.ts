@@ -24,6 +24,10 @@ describe('UnexpectedApplication', () => {
     housePrinting = new HousePrinting();
   });
 
+  it('can not play', () => {
+    expect(card.canPlay(player)).is.false;
+  });
+
   it('Should play', () => {
     player.cardsInHand.push(housePrinting, tardigrades);
     expect(card.canPlay(player)).is.true;

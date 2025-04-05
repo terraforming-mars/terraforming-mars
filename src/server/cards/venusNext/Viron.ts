@@ -42,7 +42,7 @@ export class Viron extends CorporationCard {
       if (isIHasCheckLoops(playedCard) && playedCard.getCheckLoops() >= 2) {
         continue;
       }
-      if (player.getActionsThisGeneration().has(playedCard.name) && playedCard.canAct(player)) {
+      if (player.actionsThisGeneration.has(playedCard.name) && playedCard.canAct(player)) {
         result.push(playedCard);
       }
     }
@@ -50,7 +50,7 @@ export class Viron extends CorporationCard {
   }
 
   public canAct(player: IPlayer): boolean {
-    return this.getActionCards(player).length > 0 && !player.getActionsThisGeneration().has(this.name);
+    return this.getActionCards(player).length > 0 && !player.actionsThisGeneration.has(this.name);
   }
 
   public action(player: IPlayer) {

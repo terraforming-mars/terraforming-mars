@@ -266,7 +266,7 @@ describe('Merger', () => {
 
     expect(viron.canAct(player)).is.false;
     expect(player.getPlayableActionCards()).deep.eq([septumTribus]);
-    player.addActionThisGeneration(septumTribus.name);
+    player.actionsThisGeneration.add(septumTribus.name);
     expect(player.getPlayableActionCards()).deep.eq([viron]);
     expect(viron.canAct(player)).is.true;
     const selectCard = cast(viron.action(player), SelectCard);

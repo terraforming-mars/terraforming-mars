@@ -92,7 +92,7 @@ export class TradeWithCollegiumCopernicus implements IColonyTrader {
 
   public canUse() {
     return (this.collegiumCopernicus?.resourceCount ?? 0) >= tradeCost(this.player) &&
-      !this.player.getActionsThisGeneration().has(CardName.COLLEGIUM_COPERNICUS);
+      !this.player.actionsThisGeneration.has(CardName.COLLEGIUM_COPERNICUS);
   }
 
   public optionText() {
@@ -100,7 +100,7 @@ export class TradeWithCollegiumCopernicus implements IColonyTrader {
   }
 
   public trade(colony: IColony) {
-    this.player.addActionThisGeneration(CardName.COLLEGIUM_COPERNICUS);
+    this.player.actionsThisGeneration.add(CardName.COLLEGIUM_COPERNICUS);
     if (this.collegiumCopernicus !== undefined) {
       tradeWithColony(this.collegiumCopernicus, this.player, colony);
     }

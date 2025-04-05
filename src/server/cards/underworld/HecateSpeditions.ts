@@ -80,7 +80,7 @@ export class TradeWithHectateSpeditions implements IColonyTrader {
 
   public canUse() {
     return (this.hectateSpeditions?.resourceCount ?? 0) >= tradeCost(this.player) &&
-      !this.player.getActionsThisGeneration().has(CardName.HECATE_SPEDITIONS);
+      !this.player.actionsThisGeneration.has(CardName.HECATE_SPEDITIONS);
   }
 
   public optionText() {

@@ -193,7 +193,7 @@ export class Player implements IPlayer {
 
   // This generation / this round
   public actionsTakenThisRound: number = 0;
-  private actionsThisGeneration: Set<CardName> = new Set();
+  public actionsThisGeneration: Set<CardName> = new Set();
   public lastCardPlayed: CardName | undefined;
   public pendingInitialActions: Array<ICorporationCard> = [];
 
@@ -432,15 +432,6 @@ export class Player implements IPlayer {
         b.globalEventName(from);
       }
     });
-  }
-
-  public getActionsThisGeneration(): Set<CardName> {
-    return this.actionsThisGeneration;
-  }
-
-  public addActionThisGeneration(cardName: CardName): void {
-    this.actionsThisGeneration.add(cardName);
-    return;
   }
 
   public getVictoryPoints(): VictoryPointsBreakdown {

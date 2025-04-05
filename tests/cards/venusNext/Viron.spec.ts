@@ -24,7 +24,7 @@ describe('Viron', () => {
     player.corporations.push(card);
     const restrictedArea = new RestrictedArea();
     player.playedCards.push(restrictedArea);
-    player.addActionThisGeneration(restrictedArea.name);
+    player.actionsThisGeneration.add(restrictedArea.name);
 
     expect(card.canAct(player)).is.not.true;
 
@@ -42,8 +42,8 @@ describe('Viron', () => {
     player.corporations.push(card);
     const restrictedArea = new RestrictedArea();
     player.playedCards.push(restrictedArea);
-    player.addActionThisGeneration(restrictedArea.name);
-    player.addActionThisGeneration(card.name);
+    player.actionsThisGeneration.add(restrictedArea.name);
+    player.actionsThisGeneration.add(card.name);
     player.megaCredits += 2;
 
     expect(card.canAct(player)).is.not.true;
@@ -63,7 +63,7 @@ describe('Viron', () => {
     expect(focusedOrganization.canAct(player)).is.true;
 
     player.playedCards.push(focusedOrganization);
-    player.addActionThisGeneration(focusedOrganization.name);
+    player.actionsThisGeneration.add(focusedOrganization.name);
 
     expect(card.canAct(player)).is.true;
   });

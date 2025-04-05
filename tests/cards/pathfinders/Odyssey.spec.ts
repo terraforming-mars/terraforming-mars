@@ -179,16 +179,16 @@ describe('Odyssey', () => {
 
     const projectInspection = new ProjectInspection();
     player.playedCards.push(projectInspection);
-    player.addActionThisGeneration(viron.name);
+    player.actionsThisGeneration.add(viron.name);
 
     // Need another action that Project Inspection can play. This creates the conditions
     // which caused a recursive call stack problem.
     const inventorsGuild = new InventorsGuild();
     player.playedCards.push(inventorsGuild);
-    player.addActionThisGeneration(inventorsGuild.name);
+    player.actionsThisGeneration.add(inventorsGuild.name);
 
     const selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
-    player.addActionThisGeneration(odyssey.name); // This is played after `action` as it matches code behavior.
+    player.actionsThisGeneration.add(odyssey.name); // This is played after `action` as it matches code behavior.
     expect(selectProjectCardToPlay.cards.map(toName)).deep.eq([projectInspection.name]);
 
     const playAction = selectProjectCardToPlay.payAndPlay(projectInspection, Payment.EMPTY);

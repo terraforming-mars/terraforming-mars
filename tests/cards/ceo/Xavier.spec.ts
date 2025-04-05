@@ -31,7 +31,7 @@ describe('Xavier', () => {
 
     // Once per game, can gain 2 wild tags for the generation
     card.action();
-    player.getActionsThisGeneration().add(card.name);
+    player.actionsThisGeneration.add(card.name);
     expect(lightningHarvest.canPlay(player)).is.true;
     lightningHarvest.play(player);
     expect(geneRepair.canPlay(player)).is.true;
@@ -49,7 +49,7 @@ describe('Xavier', () => {
 
     // Once per game, can gain 2 wild tags for the generation
     card.action();
-    player.getActionsThisGeneration().add(card.name);
+    player.actionsThisGeneration.add(card.name);
 
     // Resolve payment - 2 wild tags count for production effect
     sulphurExports.play(player);
@@ -72,7 +72,7 @@ describe('Xavier', () => {
     expect(card.getCardDiscount(player, lightningHarvest)).eq(0);
     expect(card.getCardDiscount(player, geneRepair)).eq(0);
     card.action();
-    player.getActionsThisGeneration().add(card.name);
+    player.actionsThisGeneration.add(card.name);
     expect(card.isDisabled).is.true;
     expect(card.getCardDiscount(player, lightningHarvest)).eq(1);
     expect(card.getCardDiscount(player, geneRepair)).eq(1);
@@ -91,7 +91,7 @@ describe('Xavier', () => {
 
     // Once per game, can gain 2 wild tags for the generation
     card.action();
-    player.getActionsThisGeneration().add(card.name);
+    player.actionsThisGeneration.add(card.name);
     expect(ecologist.getScore(player)).eq(2);
 
     // Bonus wild tags are lost next generation

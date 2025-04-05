@@ -211,7 +211,7 @@ export class Server {
     const model: PublicPlayerModel = {
       actionsTakenThisRound: player.actionsTakenThisRound,
       actionsTakenThisGame: player.actionsTakenThisGame,
-      actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
+      actionsThisGeneration: Array.from(player.actionsThisGeneration),
       availableBlueCardActionCount: player.getAvailableBlueActionCount(),
       cardCost: player.cardCost,
       cardDiscount: player.colonies.cardDiscount,

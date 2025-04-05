@@ -65,7 +65,7 @@ export class Ambient extends CorporationCard {
     player.increaseTerraformRating();
     // A hack that allows this action to be replayable.
     player.defer(() => {
-      player.getActionsThisGeneration().delete(this.name);
+      player.actionsThisGeneration.delete(this.name);
     });
     return undefined;
   }

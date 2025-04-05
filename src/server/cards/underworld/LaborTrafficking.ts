@@ -22,7 +22,7 @@ export class LaborTrafficking extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.effect('The first standard project action you take each generation, ' +
               'except selling patents, costs 6 M€ less.', (eb) =>
-            eb.text('FIRST').plate('Standard projects').asterix().startEffect.megacredits(-6));
+            eb.text('1ST').plate('Standard projects').asterix().startEffect.megacredits(-6));
         }),
       },
     });
@@ -33,6 +33,8 @@ export class LaborTrafficking extends Card implements IProjectCard {
   onStandardProject(player: IPlayer, project: ICard): void {
     if (project.name !== CardName.SELL_PATENTS_STANDARD_PROJECT) {
       this.data.generation = player.game.generation;
+      // This will have the effect of dimming the card after its one-per-generation use.
+      player.actionsThisGeneration.add(this.name);
     }
   }
 

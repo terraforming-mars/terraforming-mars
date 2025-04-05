@@ -32,7 +32,6 @@ import {Curator} from './amazonisPlanitia/Curator';
 import {AmazonisEngineer} from './amazonisPlanitia/AmazonisEngineer';
 import {Tourist} from './amazonisPlanitia/Tourist';
 import {Biologist} from './terraCimmeria/Biologist';
-import {TEconomizer} from './terraCimmeria/TEconomizer';
 import {TPolitician} from './terraCimmeria/TPolitician';
 import {Urbanist} from './terraCimmeria/Urbanist';
 import {Warmonger} from './terraCimmeria/Warmonger';
@@ -89,7 +88,6 @@ export const awardManifest: MAManifest<AwardName, IAward> = {
     'Zoologist': {Factory: Zoologist},
     'A. Manufacturer': {Factory: AManufacturer},
     'Biologist': {Factory: Biologist},
-    'T. Economizer': {Factory: TEconomizer},
     'T. Politician': {Factory: TPolitician, compatibility: 'turmoil'},
     'Urbanist': {Factory: Urbanist},
     'Warmonger': {Factory: Warmonger},
@@ -122,7 +120,7 @@ export const awardManifest: MAManifest<AwardName, IAward> = {
     [BoardName.ELYSIUM]: ['Celebrity', 'Industrialist', 'Desert Settler', 'Estate Dealer', 'Benefactor'],
     [BoardName.AMAZONIS]: ['Curator', 'A. Engineer', 'Promoter', 'Tourist', 'A. Zoologist'],
     [BoardName.ARABIA_TERRA]: ['Cosmic Settler', 'Botanist', 'Promoter', 'Zoologist', 'A. Manufacturer'],
-    [BoardName.TERRA_CIMMERIA]: ['Biologist', 'T. Economizer', 'T. Politician', 'Urbanist', 'Warmonger'],
+    [BoardName.TERRA_CIMMERIA]: ['Biologist', 'Incorporator', 'T. Politician', 'Urbanist', 'Warmonger'],
     [BoardName.VASTITAS_BOREALIS]: ['Forecaster', 'Edgedancer', 'Visionary', 'Naturalist', 'Voyager'],
     [BoardName.UTOPIA_PLANITIA]: [/* 'Suburbian', 'Investor', 'Botanist', 'Incorporator', 'Metropolist' */],
     [BoardName.VASTITAS_BOREALIS_NOVUS]: ['Traveller', 'Landscaper', 'Highlander', 'Promoter', 'Manufacturer'],
@@ -142,7 +140,7 @@ export const awardManifest: MAManifest<AwardName, IAward> = {
     'Founder',
     'Highlander',
     'Investor',
-    'Incorporator',
+    // 'Incorporator',
     'Landscaper',
     'Manufacturer',
     'Metropolist',

@@ -7,6 +7,7 @@ import {IGame} from '../../../src/server/IGame';
 import {AsteroidStandardProject} from '../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {CollusionStandardProject} from '../../../src/server/cards/underworld/CollusionStandardProject';
+import {CardName} from '../../../src/common/cards/CardName';
 
 describe('LaborTrafficking', () => {
   let card: LaborTrafficking;
@@ -34,9 +35,13 @@ describe('LaborTrafficking', () => {
     player.megaCredits = 17;
     expect(greeneryStandardProject.canAct(player)).eq(true);
 
+    expect(player.actionsThisGeneration).does.not.include(CardName.LABOR_TRAFFICKING);
+
     // Take an action.
     asteroidStandardProject.action(player);
     runAllActions(game);
+
+    expect(player.actionsThisGeneration).includes(CardName.LABOR_TRAFFICKING);
 
     // Second play is standard cost
     player.megaCredits = 13;
@@ -54,6 +59,9 @@ describe('LaborTrafficking', () => {
 
     // Next generation
     forceGenerationEnd(game);
+
+    expect(player.actionsThisGeneration).does.not.include(CardName.LABOR_TRAFFICKING);
+
     player.megaCredits = 7;
     expect(asteroidStandardProject.canAct(player)).eq(false);
     player.megaCredits = 8;

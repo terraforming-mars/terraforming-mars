@@ -17,7 +17,7 @@ export class DeimosDownAres extends DeimosDownPromo {
           b.tile(TileType.DEIMOS_DOWN, false, true).asterix().br;
           b.steel(4, {digit}).nbsp.minus().plants(-6, {all});
         }),
-        description: 'Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. It provides adjacency bonus of 1 asteroid and 1 steel.',
+        description: 'Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. It provides adjacency bonus of 1 asteroid and 1 steel.',
       });
   }
 }

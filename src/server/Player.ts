@@ -1494,9 +1494,10 @@ export class Player implements IPlayer {
     // if (saveBeforeTakingAction) game.save();
 
 
-    if (this.autopass) {
-      this.passOption().cb();
-    }
+    // Autopass is disabled.
+    // if (this.autopass) {
+    //   this.passOption().cb();
+    // }
     const headStartIsInEffect = this.headStartIsInEffect();
     this.game.inDoubleDown = false;
 

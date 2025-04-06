@@ -489,19 +489,19 @@ describe('Player', () => {
     });
   });
 
-  it('everybody autopasses', () => {
-    const [game, player, player2] = testGame(2);
+  // it('everybody autopasses', () => {
+  //   const [game, player, player2] = testGame(2);
 
-    game.phase = Phase.ACTION;
+  //   game.phase = Phase.ACTION;
 
-    player.autopass = true;
-    player2.autopass = true;
-    player.takeAction();
+  //   player.autopass = true;
+  //   player2.autopass = true;
+  //   player.takeAction();
 
-    expect(game.phase).eq(Phase.RESEARCH);
-    expect(player.autopass).is.false;
-    expect(player2.autopass).is.false;
-  });
+  //   expect(game.phase).eq(Phase.RESEARCH);
+  //   expect(player.autopass).is.false;
+  //   expect(player2.autopass).is.false;
+  // });
 
   it('Increasing temperature sets globalParameterSteps', () => {
     const [game, player, player2] = testGame(2, {solarPhaseOption: true});

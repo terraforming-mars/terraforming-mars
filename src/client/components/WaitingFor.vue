@@ -7,7 +7,7 @@
     </template>
   </template>
   <div v-else class="wf-root">
-    <template v-if="preferences().experimental_ui && playerView.game.phase === Phase.ACTION && playerView.players.length !== 1">
+    <!-- <template v-if="preferences().experimental_ui && playerView.game.phase === Phase.ACTION && playerView.players.length !== 1"> -->
       <!--
         Autopass is only available when you are taking actions because of how autopass is stored.
         It's connected with when the player takes actions, and is saved along with the rest of the
@@ -17,11 +17,11 @@
         If there was another database table that stored autopass and other settings, this could be
         changed to be available at all times.
       -->
-      <input type="checkbox" name="autopass" id="autopass-checkbox" v-model="autopass" v-on:change="updateAutopass">
+      <!-- <input type="checkbox" name="autopass" id="autopass-checkbox" v-model="autopass" v-on:change="updateAutopass">
       <label for="autopass-checkbox">
           <span v-i18n>Automatically pass after this action</span>
       </label>
-    </template>
+    </template> -->
     <!-- <template v-if="waitingfor !== undefined && waitingfor.showReset && playerView.players.length === 1">
       <div @click="reset">Reset This Action <span class="reset" >(experimental)</span></div>
     </template> -->

@@ -11,6 +11,13 @@ import {CardResource} from '../../common/CardResource';
  * Counts things in game state.
  */
 export interface ICounter {
+  /**
+   * Count using the applied countable definition.
+   *
+   * context: describes what to do in different counting contexts. Most of the time 'default' is correct, but
+   * when counting victory points, use 'vp'. 'vp' applies to counting victory points. As of now, this only applies
+   * to how it counts wild tags and other substitutions that only apply during an action.
+   */
   count(countable: Countable, context?: 'default' | 'vps'): number;
   countUnits(countableUnits: Partial<CountableUnits>): Units;
 }

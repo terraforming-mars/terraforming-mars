@@ -7,6 +7,7 @@ import {NoAttributes} from './NoAttributes';
  * Describes something that can be counted.
  */
 export type _Countable = {
+  /** An initial value for the countable. e.g. { start: 10 } returns 10. */
   start?: number;
 
   /**

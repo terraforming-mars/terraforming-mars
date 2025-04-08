@@ -8,7 +8,7 @@ import {Tag} from '../../common/cards/Tag';
 import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
 import {Units} from '../../common/Units';
-import {ICard} from './ICard';
+import {GetVictoryPointsContext, ICard} from './ICard';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
 import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
@@ -286,13 +286,25 @@ export abstract class Card implements ICard {
   public bespokeOnDiscard(_player: IPlayer): void {
   }
 
-  public getVictoryPoints(player: IPlayer): number {
+  public getVictoryPoints(player: IPlayer, context: GetVictoryPointsContext = 'default'): number {
     const vp = this.properties.victoryPoints;
     if (typeof(vp) === 'number') {
       return vp;
     }
-    if (typeof(vp) === 'object') {
-      return new Counter(player, this).count(vp, 'vps');
+    if (typeof (vp) === 'object') {
+      const counter = new Counter(player, this);
+      // This looks backwards, but what it's saying is:
+      //   Most of the time, use the VP counter when calculating VP.
+      //   But project inspection is special, and uses the regular form of calculating VP
+      //   ...  which is mostly a special case for counting tags.
+      switch (context) {
+      case 'default':
+        return counter.count(vp, 'vps');
+      case 'projectWorkshop':
+        return counter.count(vp, 'default');
+      default:
+        throw new Error('Unknown context for getVictoryPoints: ' + context);
+      }
     }
     if (vp === 'special') {
       throw new Error('When victoryPoints is \'special\', override getVictoryPoints');

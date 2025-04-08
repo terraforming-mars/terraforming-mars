@@ -20,6 +20,9 @@ import {Birds} from '../../../src/server/cards/base/Birds';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
+import {WaterImportFromEuropa} from '../../../src/server/cards/base/WaterImportFromEuropa';
+import {JovianEmbassy} from '../../../src/server/cards/promo/JovianEmbassy';
+import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
 
 describe('ProjectWorkshop', () => {
   let card: ProjectWorkshop;
@@ -97,6 +100,38 @@ describe('ProjectWorkshop', () => {
     selectCard.cb([extremophiles]);
     expect(player.getTerraformRating()).to.eq(originalTR + 5);
     expect(player.cardsInHand).has.lengthOf(4);
+  });
+
+  it('Converts VP to TR correctly when counting tags', () => {
+    const waterImportFromEuropa = new WaterImportFromEuropa();
+    const originalTR = player.getTerraformRating();
+
+    player.playedCards.push(waterImportFromEuropa);
+    player.actionsThisGeneration.add(waterImportFromEuropa.name);
+    player.playedCards.push(new JovianEmbassy());
+
+    const selectOption = cast(card.action(player), SelectOption);
+    cast(selectOption.cb(undefined), undefined);
+
+    expect(player.getTerraformRating()).to.eq(originalTR + 2);
+    expect(player.playedCards).does.not.include(waterImportFromEuropa);
+  });
+
+
+  it('Converts VP to TR correctly when counting wild tags', () => {
+    const waterImportFromEuropa = new WaterImportFromEuropa();
+    const originalTR = player.getTerraformRating();
+
+    player.playedCards.push(waterImportFromEuropa);
+    player.actionsThisGeneration.add(waterImportFromEuropa.name);
+    player.playedCards.push(new JovianEmbassy());
+    player.playedCards.push(new ResearchCoordination());
+
+    const selectOption = cast(card.action(player), SelectOption);
+    cast(selectOption.cb(undefined), undefined);
+
+    expect(player.getTerraformRating()).to.eq(originalTR + 3);
+    expect(player.playedCards).does.not.include(waterImportFromEuropa);
   });
 
   it('Can select option if able to do both actions', () => {

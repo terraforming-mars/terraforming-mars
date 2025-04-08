@@ -38,6 +38,9 @@ export function isIHasCheckLoops(object: any): object is IHasCheckLoops {
   return object.getCheckLoops !== undefined;
 }
 
+/** Defines how ICard.getVictoryPoints works. */
+export type GetVictoryPointsContext = 'default' | 'projectWorkshop';
+
 export interface ICard {
   name: CardName;
   tags: Array<Tag>;
@@ -71,7 +74,7 @@ export interface ICard {
    */
   getGlobalParameterRequirementBonus(player: IPlayer, parameter: GlobalParameter): number;
   victoryPoints?: number | 'special' | IVictoryPoints,
-  getVictoryPoints(player: IPlayer): number;
+  getVictoryPoints(player: IPlayer, context?: GetVictoryPointsContext): number;
   /** Returns any dynamic influence value */
   getInfluenceBonus?: (player: IPlayer) => number;
   /** Called when cards are played. However, if this is a corp, it'll be called when opponents play cards, too. */

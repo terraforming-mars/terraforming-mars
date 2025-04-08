@@ -62,7 +62,7 @@ export class ProjectWorkshop extends CorporationCard {
       return cards;
     }
     return cards.filter((card) => {
-      const vp = card.getVictoryPoints(player);
+      const vp = card.getVictoryPoints(player, 'projectWorkshop');
       if (vp <= 0) {
         return true;
       }
@@ -116,7 +116,7 @@ export class ProjectWorkshop extends CorporationCard {
   }
 
   private convertCardPointsToTR(player: IPlayer, card: ICard) {
-    const steps = card.getVictoryPoints(player);
+    const steps = card.getVictoryPoints(player, 'projectWorkshop');
     if (steps > 0) {
       player.increaseTerraformRating(steps, {log: true});
     } else if (steps < 0) {

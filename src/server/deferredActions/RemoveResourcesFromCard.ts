@@ -20,6 +20,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
   private blockable: boolean;
   private autoselect: boolean;
   private title: string | Message;
+  private log: boolean;
 
   public override priority = Priority.ATTACK_OPPONENT;
   constructor(
@@ -35,6 +36,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
       autoselect?: boolean
       title?: string | Message,
       blockable?: boolean,
+      log?: boolean,
     }) {
     super(player, Priority.ATTACK_OPPONENT);
     this.cardResource = cardResource;
@@ -43,6 +45,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
     this.mandatory = options?.mandatory ?? true;
     this.blockable = options?.blockable ?? true;
     this.autoselect = options?.autoselect ?? true;
+    this.log = options?.log ?? false;
     this.title = options?.title ?? (`Select card to remove ${count} ${cardResource}(s)`);
     if (this.source === 'self') {
       this.priority = Priority.LOSE_RESOURCE_OR_PRODUCTION;
@@ -101,7 +104,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
     const msg = message('${0} ${1} from ${2}', (b) => b.number(this.count).string(card.resourceType || 'resources').card(card));
     target.defer(UnderworldExpansion.maybeBlockAttack(target, this.player, msg, (proceed) => {
       if (proceed) {
-        target.removeResourceFrom(card, this.count, {removingPlayer: this.player});
+        target.removeResourceFrom(card, this.count, {removingPlayer: this.player, log: this.log});
       }
       this.cb({card: card, owner: target, proceed: proceed});
       return undefined;

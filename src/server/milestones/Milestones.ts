@@ -20,7 +20,6 @@ import {OneGiantStep} from '../moon/OneGiantStep';
 import {Lunarchitect} from '../moon/Lunarchitect';
 import {Economizer} from './arabiaTerra/Economizer';
 import {Pioneer} from './arabiaTerra/Pioneer';
-import {LandSpecialist} from './arabiaTerra/LandSpecialist';
 import {Martian} from './arabiaTerra/Martian';
 import {Capitalist} from './Capitalist';
 import {VElectrician} from './VElectrician';
@@ -60,6 +59,9 @@ import {Agronomist} from './Agronomist';
 import {MAManifest} from '../ma/MAManifest';
 import {MilestoneName} from '../../common/ma/MilestoneName';
 import {BoardName} from '../../common/boards/BoardName';
+import {Manager} from './Manager';
+import {Metallurgist} from './Metallurgist';
+import {Trader} from './Trader';
 
 export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
   all: {
@@ -89,7 +91,6 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'Tropicalist': {Factory: Tropicalist},
     'Economizer': {Factory: Economizer},
     'Pioneer': {Factory: Pioneer, compatibility: 'colonies'},
-    'Land Specialist': {Factory: LandSpecialist},
     'Martian': {Factory: Martian, compatibility: 'pathfinders'},
     'T. Collector': {Factory: Collector},
     'Firestarter': {Factory: Firestarter},
@@ -122,16 +123,19 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'Purifier': {Factory: Purifier, compatibility: 'ares'},
     'Agronomist': {Factory: Agronomist},
     'V. Spacefarer': {Factory: VSpacefarer},
+    'Manager': {Factory: Manager},
+    'Trader': {Factory: Trader},
+    'Metallurgist': {Factory: Metallurgist},
   },
   boards: {
     [BoardName.THARSIS]: ['Terraformer', 'Mayor', 'Gardener', 'Builder', 'Planner'],
     [BoardName.HELLAS]: ['Diversifier', 'Tactician', 'Polar Explorer', 'Energizer', 'Rim Settler'],
     [BoardName.ELYSIUM]: ['Generalist', 'Specialist', 'Ecologist', 'Tycoon', 'Legend'],
     [BoardName.AMAZONIS]: ['Colonizer', 'Forester', 'Minimalist', 'Terran', 'Tropicalist'],
-    [BoardName.ARABIA_TERRA]: ['Economizer', 'Pioneer', 'Land Specialist', 'Martian', 'Terran'],
+    [BoardName.ARABIA_TERRA]: ['Economizer', 'Pioneer', 'Manager', 'Martian', 'Terran'],
     [BoardName.TERRA_CIMMERIA]: ['T. Collector', 'Firestarter', 'Terra Pioneer', 'Spacefarer', 'Gambler'],
     [BoardName.VASTITAS_BOREALIS]: ['V. Electrician', 'Smith', 'Tradesman', 'Irrigator', 'Capitalist'],
-    [BoardName.UTOPIA_PLANITIA]: [/* 'Suburbian', 'Investor', 'Botanist', 'Incorporator', 'Metropolist' */],
+    [BoardName.UTOPIA_PLANITIA]: ['Manager', 'Pioneer', 'Trader', 'Metallurgist', 'Researcher'],
     [BoardName.VASTITAS_BOREALIS_NOVUS]: ['Agronomist', 'Spacefarer', 'Geologist', 'Engineer', 'Farmer'],
     [BoardName.TERRA_CIMMERIA_NOVUS]: [],
   },

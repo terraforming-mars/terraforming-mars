@@ -64,6 +64,10 @@ export const awardNames = [
   'Highlander',
   'Manufacturer',
 
+  // Utopia Planitia
+  // The other awards are Modular
+  'Suburbian',
+
   // Underworld
   'Kingpin',
   'EdgeLord',

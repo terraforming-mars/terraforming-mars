@@ -69,20 +69,10 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
   case RandomMAOptionType.NONE:
     const boardName = gameOptions.boardName;
     switch (gameOptions.boardName) {
-    case BoardName.THARSIS:
-    case BoardName.HELLAS:
-    case BoardName.ELYSIUM:
-    case BoardName.ARABIA_TERRA:
-    case BoardName.AMAZONIS:
-    case BoardName.TERRA_CIMMERIA:
-    case BoardName.VASTITAS_BOREALIS:
-    case BoardName.VASTITAS_BOREALIS_NOVUS:
-      push(milestoneManifest.boards[boardName], awardManifest.boards[gameOptions.boardName]);
-      break;
-    case BoardName.UTOPIA_PLANITIA:
-      return getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
     case BoardName.TERRA_CIMMERIA_NOVUS:
       return getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
+    default:
+      push(milestoneManifest.boards[boardName], awardManifest.boards[gameOptions.boardName]);
     }
     if (gameOptions.venusNextExtension) {
       push(milestoneManifest.expansions['venus'], awardManifest.expansions['venus']);

@@ -36,7 +36,7 @@ export class SpaceRaceToMars extends GlobalEvent implements IGlobalEvent {
   }
 
   private specialTileCount(player: IPlayer) {
-    // This code is repeated in Land Specialist
+    // This code is repeated in Manager
     const spaces = player.game.board.spaces
       .filter(Board.ownedBy(player))
       .filter(isSpecialTileSpace);

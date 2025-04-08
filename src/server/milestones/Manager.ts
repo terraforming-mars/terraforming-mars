@@ -1,13 +1,13 @@
-import {BaseMilestone} from '../IMilestone';
-import {IPlayer} from '../../IPlayer';
-import {isSpecialTileSpace, Board} from '../../boards/Board';
-import {MoonExpansion} from '../../moon/MoonExpansion';
+import {BaseMilestone} from './IMilestone';
+import {IPlayer} from '../IPlayer';
+import {isSpecialTileSpace, Board} from '../boards/Board';
+import {MoonExpansion} from '../moon/MoonExpansion';
 
-export class LandSpecialist extends BaseMilestone {
+export class Manager extends BaseMilestone {
   constructor() {
     super(
-      'Land Specialist',
-      'Own 3 special (normally, brown) tiles',
+      'Manager',
+      'Have 3 special tiles in play',
       3);
   }
   public getScore(player: IPlayer): number {

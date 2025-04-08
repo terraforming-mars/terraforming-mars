@@ -56,6 +56,7 @@ import {Rugged} from './Rugged';
 import {BoardName} from '../../common/boards/BoardName';
 import {AwardName} from '../../common/ma/AwardName';
 import {MAManifest} from '../ma/MAManifest';
+import {Suburbian} from './Suburbian';
 
 export const awardManifest: MAManifest<AwardName, IAward> = {
   all: {
@@ -113,6 +114,7 @@ export const awardManifest: MAManifest<AwardName, IAward> = {
     'Manufacturer': {Factory: Manufacturer},
     'Politician': {Factory: Politician, compatibility: 'turmoil'},
     'Rugged': {Factory: Rugged, compatibility: 'ares'},
+    'Suburbian': {Factory: Suburbian},
   },
   boards: {
     [BoardName.THARSIS]: ['Landlord', 'Scientist', 'Banker', 'Thermalist', 'Miner'],
@@ -122,7 +124,7 @@ export const awardManifest: MAManifest<AwardName, IAward> = {
     [BoardName.ARABIA_TERRA]: ['Cosmic Settler', 'Botanist', 'Promoter', 'Zoologist', 'A. Manufacturer'],
     [BoardName.TERRA_CIMMERIA]: ['Biologist', 'Incorporator', 'T. Politician', 'Urbanist', 'Warmonger'],
     [BoardName.VASTITAS_BOREALIS]: ['Forecaster', 'Edgedancer', 'Visionary', 'Naturalist', 'Voyager'],
-    [BoardName.UTOPIA_PLANITIA]: [/* 'Suburbian', 'Investor', 'Botanist', 'Incorporator', 'Metropolist' */],
+    [BoardName.UTOPIA_PLANITIA]: ['Suburbian', 'Investor', 'Botanist', 'Incorporator', 'Metropolist'],
     [BoardName.VASTITAS_BOREALIS_NOVUS]: ['Traveller', 'Landscaper', 'Highlander', 'Promoter', 'Manufacturer'],
     [BoardName.TERRA_CIMMERIA_NOVUS]: [],
   },

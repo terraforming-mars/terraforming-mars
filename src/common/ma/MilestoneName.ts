@@ -39,7 +39,7 @@ export const milestoneNames = [
   // Arabia Terra
   'Economizer',
   'Pioneer',
-  'Land Specialist',
+  // 'Manager',
   'Martian',
 
   // Terra Cimmeria
@@ -62,6 +62,13 @@ export const milestoneNames = [
   'V. Spacefarer',
   'Geologist',
   'Farmer',
+
+  // Utopia Planitia
+  'Manager',
+  // 'Pioneer', Included in modular
+  'Trader',
+  'Metallurgist',
+  // 'Researcher', - Included in modular
 
   // Underworld
   'Tunneler',
@@ -111,6 +118,8 @@ const MILESTONE_RENAMES = new Map<string, MilestoneName>([
   ['ThermoEngineer', 'Engineer'],
   // TODO(konigsberg): remove after 2025-04-01
   ['Breeder', 'Farmer'],
+  // TODO(konigsberg): remove after 2025-05-01
+  ['Land Specialist', 'Manager'],
 ]);
 
 export function maybeRenamedMilestone(name: string): MilestoneName {

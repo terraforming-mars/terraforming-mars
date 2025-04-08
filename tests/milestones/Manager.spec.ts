@@ -1,16 +1,16 @@
 import {expect} from 'chai';
-import {IGame} from '../../../src/server/IGame';
-import {LandSpecialist} from '../../../src/server/milestones/arabiaTerra/LandSpecialist';
-import {TestPlayer} from '../../TestPlayer';
-import {BoardName} from '../../../src/common/boards/BoardName';
-import {Board} from '../../../src/server/boards/Board';
-import {Space} from '../../../src/server/boards/Space';
-import {TileType} from '../../../src/common/TileType';
-import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {testGame} from '../../TestingUtils';
+import {IGame} from '../../src/server/IGame';
+import {Manager} from '../../src/server/milestones/Manager';
+import {TestPlayer} from '../TestPlayer';
+import {BoardName} from '../../src/common/boards/BoardName';
+import {Board} from '../../src/server/boards/Board';
+import {Space} from '../../src/server/boards/Space';
+import {TileType} from '../../src/common/TileType';
+import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
+import {testGame} from '../TestingUtils';
 
-describe('LandSpecialist', () => {
-  let milestone: LandSpecialist;
+describe('Manager', () => {
+  let milestone: Manager;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
@@ -18,7 +18,7 @@ describe('LandSpecialist', () => {
   let spaces: ReadonlyArray<Space>;
 
   beforeEach(() => {
-    milestone = new LandSpecialist();
+    milestone = new Manager();
     [game, player, player2] = testGame(2, {boardName: BoardName.ARABIA_TERRA, moonExpansion: true});
     board = game.board;
     spaces = board.getAvailableSpacesOnLand(player);

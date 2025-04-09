@@ -23,7 +23,7 @@ import {Pioneer} from './arabiaTerra/Pioneer';
 import {Martian} from './arabiaTerra/Martian';
 import {Capitalist} from './Capitalist';
 import {VElectrician} from './VElectrician';
-import {Irrigator} from './Irrigator';
+import {Coastguard} from './Coastguard';
 import {Smith} from './Smith';
 import {Tradesman} from './Tradesman';
 import {Colonizer} from './amazonisPlanitia/Colonizer';
@@ -62,6 +62,7 @@ import {BoardName} from '../../common/boards/BoardName';
 import {Manager} from './Manager';
 import {Metallurgist} from './Metallurgist';
 import {Trader} from './Trader';
+import {Architect} from './Architect';
 
 export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
   all: {
@@ -100,7 +101,7 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'V. Electrician': {Factory: VElectrician},
     'Smith': {Factory: Smith},
     'Tradesman': {Factory: Tradesman},
-    'Irrigator': {Factory: Irrigator},
+    'Coastguard': {Factory: Coastguard},
     'Capitalist': {Factory: Capitalist},
     'Tunneler': {Factory: Tunneler, compatibility: 'underworld'},
     'Risktaker': {Factory: Risktaker, compatibility: 'underworld'},
@@ -126,6 +127,7 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'Manager': {Factory: Manager},
     'Trader': {Factory: Trader},
     'Metallurgist': {Factory: Metallurgist},
+    'Architect': {Factory: Architect},
   },
   boards: {
     [BoardName.THARSIS]: ['Terraformer', 'Mayor', 'Gardener', 'Builder', 'Planner'],
@@ -134,10 +136,10 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     [BoardName.AMAZONIS]: ['Colonizer', 'Forester', 'Minimalist', 'Terran', 'Tropicalist'],
     [BoardName.ARABIA_TERRA]: ['Economizer', 'Pioneer', 'Manager', 'Martian', 'Terran'],
     [BoardName.TERRA_CIMMERIA]: ['T. Collector', 'Firestarter', 'Terra Pioneer', 'Spacefarer', 'Gambler'],
-    [BoardName.VASTITAS_BOREALIS]: ['V. Electrician', 'Smith', 'Tradesman', 'Irrigator', 'Capitalist'],
+    [BoardName.VASTITAS_BOREALIS]: ['V. Electrician', 'Smith', 'Tradesman', 'Coastguard', 'Capitalist'],
     [BoardName.UTOPIA_PLANITIA]: ['Manager', 'Pioneer', 'Trader', 'Metallurgist', 'Researcher'],
     [BoardName.VASTITAS_BOREALIS_NOVUS]: ['Agronomist', 'Spacefarer', 'Geologist', 'Engineer', 'Farmer'],
-    [BoardName.TERRA_CIMMERIA_NOVUS]: [],
+    [BoardName.TERRA_CIMMERIA_NOVUS]: ['Planetologist', 'Architect', 'Coastguard', 'Forester', 'Fundraiser'],
   },
   expansions: {
     venus: ['Hoverlord'],

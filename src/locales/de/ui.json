@@ -843,7 +843,7 @@
     "Decrease energy": "Reduziere Energie-Produktion",
     "Select amount of energy to gain": "Wähle Menge an Energie, die du erhalten möchtest",
     "Select amount of energy to convert to heat": "Wähle Menge an Energie, die in Wärme umgewandelt werden soll",
-    "Select up to steel to convert to titanium": "Wähle Menge an Stahl, der in Titan umgewandelt werden soll",
+    "Select up to ${1} steel to convert to titanium": "Wähle bis zu ${1} Stahl, der in Titan umgewandelt werden soll",
     "Convert Steel": "Konvertiere Stahl",
     "Spend 1 plant to gain 7 M€.": "Bezahle 1 Pflanze, um 7 M€ zu erhalten",
     "Spend 1 steel to gain 7 M€.": "Bezahle 1 Stahl, um 7 M€ zu erhalten",

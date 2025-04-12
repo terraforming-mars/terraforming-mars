@@ -41,7 +41,6 @@ export class PirkkaLuna extends CorporationCard {
   }
 
   public onCardPlayed(player: IPlayer, card: ICard) {
-    console.log("This pirkka luna gen map ", this.generationMap, ", current gen ", player.game.generation)
     if (player.isCorporation(this.name) && !this.generationMap[player.game.generation]) {
       const tagCount = player.tags.cardTagCount(card, Tag.EARTH);
       if (tagCount > 0) {

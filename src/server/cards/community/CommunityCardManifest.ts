@@ -20,6 +20,12 @@ import {SpecialDesignProxy} from './SpecialDesignProxy';
 import {TradeAdvance} from './TradeAdvance';
 import {UnitedNationsMissionOne} from './UnitedNationsMissionOne';
 import {ValuableGases} from './ValuableGases';
+import { ColonialConquest } from './ColonialConquest';
+import { ColonialCards } from './ColonialCards';
+import { CityMoney } from './CityMoney';
+import { BuildingMoney } from './BuildingMoney';
+import { HiredEarthRaiders } from './HiredEarthRaiders';
+import { PirkkaUniversity } from './PirkkaUniversity';
 
 export const COMMUNITY_CARD_MANIFEST = new ModuleManifest({
   module: 'community',
@@ -46,6 +52,12 @@ export const COMMUNITY_CARD_MANIFEST = new ModuleManifest({
   },
   projectCards: {
     [CardName.SPECIAL_DESIGN_PROXY]: {Factory: SpecialDesignProxy, instantiate: false},
+    [CardName.COLONIAL_CONQUEST]: {Factory: ColonialConquest}
+    ,[CardName.COLONIAL_CARDS]: {Factory: ColonialCards},
+    [CardName.CITY_MONEY]: {Factory: CityMoney},
+    [CardName.BUILDING_MONEY]: {Factory: BuildingMoney},
+    [CardName.HIRED_EARTH_RAIDERS]: {Factory: HiredEarthRaiders},
+    [CardName.PIRKKA_UNIVERSITY]: {Factory: PirkkaUniversity}
   },
   globalEvents: {
     [GlobalEventName.LEADERSHIP_SUMMIT]: {Factory: LeadershipSummit},

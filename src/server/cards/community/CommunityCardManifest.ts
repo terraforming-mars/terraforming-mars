@@ -28,6 +28,7 @@ import { HiredEarthRaiders } from './HiredEarthRaiders';
 import { PirkkaUniversity } from './PirkkaUniversity';
 import { PirkkaLuna } from './PirkkaLuna';
 import { AsteroidArms } from './AsteroidArms';
+import { RootWhisperer } from './RootWhisperer';
 
 export const COMMUNITY_CARD_MANIFEST = new ModuleManifest({
   module: 'community',
@@ -68,4 +69,7 @@ export const COMMUNITY_CARD_MANIFEST = new ModuleManifest({
   globalEvents: {
     [GlobalEventName.LEADERSHIP_SUMMIT]: {Factory: LeadershipSummit},
   },
+  ceoCards: {
+    [CardName.ROOT_WHISPERER]: {Factory:RootWhisperer}
+  }
 });

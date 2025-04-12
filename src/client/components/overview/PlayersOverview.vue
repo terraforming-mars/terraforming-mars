@@ -23,9 +23,6 @@
               :actionLabel="getActionLabel(thisPlayer)"
               :playerIndex="-1"/>
         </div>
-        <div>
-          Hello test
-        </div>
         
 </template>
 

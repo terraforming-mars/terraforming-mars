@@ -22,6 +22,7 @@ export enum CardName {
   HIRED_EARTH_RAIDERS = "Hired Earth Raiders",
   PIRKKA_UNIVERSITY = "Pirkka University",
   PIRKKA_LUNA = "Pirkka Luna",
+  ASTEROID_ARMS = "Asteroid Arms",
 
   ACQUIRED_COMPANY = 'Acquired Company',
   ADAPTATION_TECHNOLOGY = 'Adaptation Technology',

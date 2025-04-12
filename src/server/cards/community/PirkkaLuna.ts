@@ -24,7 +24,7 @@ export class PirkkaLuna extends CorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.br;
           b.corpBox('effect', (ce) => {
-            ce.effect('When you play an Earth tag, draw card, once per gen, excluding this', (eb) => {
+            ce.effect('When you play an Earth tag, draw card, once per gen, excluding this. Draw 3 science tags at the beginning', (eb) => {
               eb.tag(Tag.EARTH).startEffect.cards(1).slash().text("Generation", undefined, undefined, true);
             });
           });

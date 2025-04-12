@@ -27,6 +27,7 @@ import { BuildingMoney } from './BuildingMoney';
 import { HiredEarthRaiders } from './HiredEarthRaiders';
 import { PirkkaUniversity } from './PirkkaUniversity';
 import { PirkkaLuna } from './PirkkaLuna';
+import { AsteroidArms } from './AsteroidArms';
 
 export const COMMUNITY_CARD_MANIFEST = new ModuleManifest({
   module: 'community',
@@ -41,7 +42,8 @@ export const COMMUNITY_CARD_MANIFEST = new ModuleManifest({
     [CardName.JUNK_VENTURES]: {Factory: JunkVentures},
     [CardName.ERIS]: {Factory: Eris, compatibility: 'ares'},
     [CardName.ATHENA]: {Factory: Athena, compatibility: 'ares'},
-  [CardName.PIRKKA_LUNA]: {Factory: PirkkaLuna}
+  [CardName.PIRKKA_LUNA]: {Factory: PirkkaLuna},
+  [CardName.ASTEROID_ARMS]: {Factory: AsteroidArms}
 
   },
   preludeCards: {

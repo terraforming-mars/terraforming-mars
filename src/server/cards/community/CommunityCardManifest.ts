@@ -26,6 +26,7 @@ import { CityMoney } from './CityMoney';
 import { BuildingMoney } from './BuildingMoney';
 import { HiredEarthRaiders } from './HiredEarthRaiders';
 import { PirkkaUniversity } from './PirkkaUniversity';
+import { PirkkaLuna } from './PirkkaLuna';
 
 export const COMMUNITY_CARD_MANIFEST = new ModuleManifest({
   module: 'community',
@@ -40,6 +41,8 @@ export const COMMUNITY_CARD_MANIFEST = new ModuleManifest({
     [CardName.JUNK_VENTURES]: {Factory: JunkVentures},
     [CardName.ERIS]: {Factory: Eris, compatibility: 'ares'},
     [CardName.ATHENA]: {Factory: Athena, compatibility: 'ares'},
+  [CardName.PIRKKA_LUNA]: {Factory: PirkkaLuna}
+
   },
   preludeCards: {
     [CardName.RESEARCH_GRANT]: {Factory: ResearchGrant},
@@ -58,6 +61,7 @@ export const COMMUNITY_CARD_MANIFEST = new ModuleManifest({
     [CardName.BUILDING_MONEY]: {Factory: BuildingMoney},
     [CardName.HIRED_EARTH_RAIDERS]: {Factory: HiredEarthRaiders},
     [CardName.PIRKKA_UNIVERSITY]: {Factory: PirkkaUniversity}
+
   },
   globalEvents: {
     [GlobalEventName.LEADERSHIP_SUMMIT]: {Factory: LeadershipSummit},

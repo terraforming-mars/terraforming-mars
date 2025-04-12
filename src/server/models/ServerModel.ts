@@ -275,7 +275,7 @@ export class Server {
       alliedParty: player.alliedParty,
     };
 
-    if (game.phase === Phase.END || game.isSoloMode() || game.gameOptions.showOtherPlayersVP === true) {
+    if (true) {
       model.victoryPointsBreakdown = player.getVictoryPoints();
       model.victoryPointsByGeneration = player.victoryPointsByGeneration;
     }

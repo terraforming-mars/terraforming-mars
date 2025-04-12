@@ -15,6 +15,13 @@ export enum CardName {
   CONVERT_PLANTS = 'Convert Plants',
   CONVERT_HEAT = 'Convert Heat',
 
+  COLONIAL_CONQUEST = 'Colonial Conquest',
+  COLONIAL_CARDS = 'Colonial Cards',
+  CITY_MONEY = 'City Money',
+  BUILDING_MONEY = "Building Money",
+  HIRED_EARTH_RAIDERS = "Hired Earth Raiders",
+  PIRKKA_UNIVERSITY = "Pirkka University",
+
   ACQUIRED_COMPANY = 'Acquired Company',
   ADAPTATION_TECHNOLOGY = 'Adaptation Technology',
   ADAPTED_LICHEN = 'Adapted Lichen',

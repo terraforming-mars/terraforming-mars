@@ -23,6 +23,7 @@
               :actionLabel="getActionLabel(thisPlayer)"
               :playerIndex="-1"/>
         </div>
+        
 </template>
 
 <script lang="ts">

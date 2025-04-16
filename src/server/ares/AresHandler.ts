@@ -125,22 +125,29 @@ export class AresHandler {
   }
 
   public static maybeIncrementMilestones(aresData: AresData, player: IPlayer, space: Space, hazardSeverity: HazardSeverity) {
-    const hasAdjacencyBonus = player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => {
-      return (adjacentSpace.adjacency?.bonus?? []).length > 0;
-    });
-
     const entry : MilestoneCount | undefined = aresData.milestoneResults.find((e) => e.id === player.id);
     if (entry === undefined) {
       throw new Error('Player ID not in the Ares milestone results map: ' + player.id);
     }
 
+    const hasAdjacencyBonus = player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => {
+      return (adjacentSpace.adjacency?.bonus?? []).length > 0;
+    });
+
     if (hasAdjacencyBonus) {
       entry.count++;
     }
     if (hazardSeverity !== 'none') {
-      // TODO(kberg): remove ?? 0 by 2025-02-01
-      entry.purifierCount = (entry.purifierCount ?? 0) + 1;
+      entry.purifierCount++;
     }
+  }
+
+  public static incrementPurifier(aresData: AresData, player: IPlayer) {
+    const entry : MilestoneCount | undefined = aresData.milestoneResults.find((e) => e.id === player.id);
+    if (entry === undefined) {
+      throw new Error('Player ID not in the Ares milestone results map: ' + player.id);
+    }
+    entry.purifierCount++;
   }
 
   public static hasHazardTile(space: Space): boolean {

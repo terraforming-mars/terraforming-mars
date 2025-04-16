@@ -21,10 +21,10 @@
   "play":"打出",
   "Gain 6 M€. Play a Venus card from your hand and add 4 floaters to it.":"获得6 M€。从手牌中打出一张金星卡，并放置4个云资源",
 
-
   "Venus First":"金星优先",
-  "Raise Venus 2 steps. Draw 2 Venus cards from the deck.":"增加2点金星改造等级。抽两张金星卡"
+  "Raise Venus 2 steps. Draw 2 Venus cards from the deck.":"增加2点金星改造等级。抽两张金星卡",
 
-
+  "Project Reorganization":"项目重整",
+  "(Action: Spend 2 energy to look at the top 4 cards of the discard pile. Keep 1 and return the rest in order.)":"（行动：花费2个电力资源，观看弃牌顶的4张牌并保留其中1张牌，然后将其余牌按原顺序放回弃牌堆顶。）"
 
   }

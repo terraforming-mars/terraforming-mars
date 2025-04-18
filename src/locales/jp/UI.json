@@ -220,7 +220,7 @@
     "Urbanist": "都会王",
     "Have the most VP from city tile adjacencies on Mars": "火星上の都市タイルからのVP数",
     "Warmonger": "戦争王",
-    "Play the most cards that reduce other players' resources or production": "プレイ済みの他のプレイヤーの資源や生産を減らすカードの枚数",
+    "Play the most cards that reduce other players' resources or production, INCLUDING EVENTS": "プレイ済みの他のプレイヤーの資源や生産を減らすカードの枚数イベントを含む",
     "Forecaster": "適合王",
     "Have the most cards with requirements in play": "プレイ済みの制限付きカードの枚数",
     "Edgedancer": "末端王",

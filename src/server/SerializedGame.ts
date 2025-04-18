@@ -1,5 +1,4 @@
 import {Phase} from '../common/Phase';
-import {CardName} from '../common/cards/CardName';
 import {SerializedClaimedMilestone} from './milestones/ClaimedMilestone';
 import {SerializedFundedAward} from './awards/FundedAward';
 import {DeferredAction} from './deferredActions/DeferredAction';
@@ -69,8 +68,6 @@ export type SerializedGame = {
     turmoil?: SerializedTurmoil;
     undoCount: number;
     underworldData: UnderworldData;
-    // TODO(kberg): remove unDraftedCards after 2024-08-01
-    unDraftedCards?: Array<[PlayerId, Array<CardName>]>;
     venusScaleLevel: number;
 }
 

@@ -610,66 +610,51 @@
           rugged, purifier,
 
           agronomist, engineer, farmer,
-          ;
-        each(@ma-name, {
-          .ma-name--@{value} {
-            background-image: url("assets/ma/@{value}.png");
-          }
-        })
 
-        /* TODO(kberg): move these files up a level. */
-        @ma-name-fanmade:
           colonizer, minimalist, terran, tropicalist,
           curator, tourist, a-engineer, a-zoologist,
 
           t-collector, firestarter, terra-pioneer, spacefarer, gambler,
           biologist, t-politician, urbanist, warmonger,
           incorporator, manufacturer, politician,
-        ;
-        each(@ma-name-fanmade, {
-          .ma-name--@{value} {
-            background-image: url("assets/ma/fanmade/@{value}.png");
-          }
-        })
 
-        @ma-name-modular:
           administrator, constructor, founder, highlander, hydrologist, investor,
           landscaper, metropolist, mogul, thawer, traveller,
 
           collector, electrician, fundraiser, geologist, landshaper, lobbyist, philantropist,
           planetologist, producer, researcher, sponsor, forester, breeder, thermoengineer,
         ;
-        each(@ma-name-modular, {
+        each(@ma-name, {
           .ma-name--@{value} {
-            background-image: url("assets/ma/modular/@{value}.png");
+            background-image: url("assets/ma/@{value}.png");
           }
         })
 
         // TODO(kberg): Set better background sizes.
         // Underworld
         .ma-name--kingpin {
-          background-image: url(./assets/ma/underworld/kingpin.png);
+          background-image: url(./assets/ma/kingpin.png);
           background-repeat: no-repeat;
           background-size: 153px !important;
           background-position: -6px -5px !important;
         }
 
         .ma-name--edgelord {
-          background-image: url(./assets/ma/underworld/edgelord.png);
+          background-image: url(./assets/ma/edgelord.png);
           background-repeat: no-repeat;
           background-size: 153px !important;
           background-position: -6px -5px !important;
         }
 
         .ma-name--tunneler {
-          background-image: url(./assets/ma/underworld/tunneler.png);
+          background-image: url(./assets/ma/tunneler.png);
           background-repeat: no-repeat;
           background-size: 180px !important;
           background-position: -21px -7px !important;
         }
 
         .ma-name--risktaker {
-          background-image: url(./assets/ma/underworld/risktaker.png);
+          background-image: url(./assets/ma/risktaker.png);
           background-size: 165px !important;
           background-position: -11px -5px !important;
           background-repeat: no-repeat;

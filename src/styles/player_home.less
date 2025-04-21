@@ -580,8 +580,6 @@
             text-transform: uppercase;
             text-align: center;
             font-weight: bold;
-            background-size: 200px;
-            background-position: -30px -5px;
             border-radius: 10px 10px 0 0;
         }
 
@@ -627,6 +625,8 @@
         each(@ma-name, {
           .ma-name--@{value} {
             background-image: url("assets/ma/@{value}.png");
+            background-size: 200px;
+            background-position: -30px -5px;
           }
         })
 
@@ -634,9 +634,6 @@
         each(@underworld-ma-name, {
           .ma-name--@{value} {
             background-image: url("assets/ma/@{value}.png");
-            background-repeat: no-repeat;
-            background-size: auto !important;
-            background-position: 0px 0px !important;
           }
         })
 

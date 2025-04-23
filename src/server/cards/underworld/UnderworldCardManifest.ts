@@ -247,18 +247,18 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
   ],
 
   corporationCards: {
-    [CardName.HADESPHERE]: {Factory: Hadesphere},
-    [CardName.DEMETRON_LABS]: {Factory: DemetronLabs},
-    [CardName.JENSON_BOYLE_CO]: {Factory: JensonBoyleCo},
-    [CardName.HENKEI_GENETICS]: {Factory: HenkeiGenetics},
+    [CardName.HADESPHERE]: {Factory: Hadesphere, compatibility: 'underworld'},
+    [CardName.DEMETRON_LABS]: {Factory: DemetronLabs, compatibility: 'underworld'},
+    [CardName.JENSON_BOYLE_CO]: {Factory: JensonBoyleCo, compatibility: 'underworld'},
+    [CardName.HENKEI_GENETICS]: {Factory: HenkeiGenetics, compatibility: 'underworld'},
     [CardName.ARBORIST_COLLECTIVE]: {Factory: ArboristCollective},
     [CardName.KINGDOM_OF_TAURARO]: {Factory: KingdomofTauraro},
-    [CardName.AERON_GENOMICS]: {Factory: AeronGenomics},
-    [CardName.KEPLERTEC]: {Factory: Keplertec},
-    [CardName.VOLTAGON]: {Factory: Voltagon, compatibility: 'venus'},
+    [CardName.AERON_GENOMICS]: {Factory: AeronGenomics, compatibility: 'underworld'},
+    [CardName.KEPLERTEC]: {Factory: Keplertec, compatibility: 'underworld'},
+    [CardName.VOLTAGON]: {Factory: Voltagon, compatibility: ['venus', 'underworld']},
     // // [CardName.ARES_MEDIA]: {Factory: AresMedia}, // Not another events are up card.
-    [CardName.ANUBIS_SECURITIES]: {Factory: AnubisSecurities},
-    [CardName.HECATE_SPEDITIONS]: {Factory: HecateSpeditions, compatibility: 'colonies'},
+    [CardName.ANUBIS_SECURITIES]: {Factory: AnubisSecurities, compatibility: 'underworld'},
+    [CardName.HECATE_SPEDITIONS]: {Factory: HecateSpeditions, compatibility: ['colonies', 'underworld']},
   },
 
   preludeCards: {

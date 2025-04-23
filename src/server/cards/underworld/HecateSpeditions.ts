@@ -40,7 +40,7 @@ export class HecateSpeditions extends ActiveCorporationCard {
       },
 
       metadata: {
-        cardNumber: 'U12',
+        cardNumber: 'UC12',
         description: 'You start with 38 M€. As your first action, place a colony.',
         renderData: CardRenderer.builder((b) => {
           b.br;

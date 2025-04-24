@@ -54,6 +54,7 @@ const tileTypeToCssClass: Record<TileType, string> = {
   [TileType.MARS_NOMADS]: '', // This never actually renders.
   [TileType.REY_SKYWALKER]: 'martian-nature-wonders', // Use Martian Nature Wonders cube CSS.
   [TileType.MAN_MADE_VOLCANO]: 'man-made-volcano',
+  [TileType.NEW_HOLLAND]: 'new-holland',
 };
 
 const tileTypeToCssClassAresOverride = new Map<TileType, string>([
@@ -94,6 +95,8 @@ const descriptions: Record<TileType, string> = {
   [TileType.RED_CITY]: 'Red City: 1 VP per empty adjacent area. No greeneries may be placed next to it.',
   [TileType.MARTIAN_NATURE_WONDERS]: 'Martian Nature Wonders: nothing may be placed here',
   [TileType.REY_SKYWALKER]: 'Rey... Skywalker?: nothing may be placed here',
+
+  [TileType.NEW_HOLLAND]: 'New Holland: counts as an ocean and a city',
 };
 
 export default Vue.extend({

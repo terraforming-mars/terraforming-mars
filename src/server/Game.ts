@@ -2,7 +2,6 @@
 import * as constants from '../common/constants';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {Board} from './boards/Board';
-import {cardsFromJSON} from './createCard';
 import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
 import {ClaimedMilestone, serializeClaimedMilestones, deserializeClaimedMilestones} from './milestones/ClaimedMilestone';
@@ -1258,8 +1257,18 @@ export class Game implements IGame, Logger {
     tile: Tile): void {
     // Part 1, basic validation checks.
 
-    if (space.tile !== undefined && !(this.gameOptions.aresExtension || this.gameOptions.pathfindersExpansion)) {
-      throw new Error('Selected space is occupied');
+    if (space.tile !== undefined) {
+      let allow = false;
+      if (tile.tileType === TileType.NEW_HOLLAND) {
+        allow = true;
+      } else if (this.gameOptions.aresExtension) {
+        allow = true;
+      } else if (this.gameOptions.pathfindersExpansion) {
+        allow = true;
+      }
+      if (!allow) {
+        throw new Error('Selected space is occupied');
+      }
     }
 
     // Land claim a player can claim land for themselves
@@ -1691,16 +1700,6 @@ export class Game implements IGame, Logger {
     game.passedPlayers = new Set<PlayerId>(d.passedPlayers);
     game.donePlayers = new Set<PlayerId>(d.donePlayers);
     game.researchedPlayers = new Set<PlayerId>(d.researchedPlayers);
-
-    if (d.unDraftedCards && d.unDraftedCards.length > 0) {
-      d.unDraftedCards.forEach(([playerId, cardNames]) => {
-        const player = players.find((p) => p.id === playerId);
-        if (player === undefined) {
-          throw new Error('Unexpected undefined player when deserializing undrafted cards');
-        }
-        player.draftHand = cardsFromJSON(cardNames);
-      });
-    }
 
     game.lastSaveId = d.lastSaveId;
     game.clonedGamedId = d.clonedGamedId;

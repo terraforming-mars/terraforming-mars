@@ -27,15 +27,14 @@ export class AstraMechanica extends Card implements IProjectCard {
     });
   }
 
+  private static UNUSABLE_CARDS = [CardName.PATENT_MANIPULATION, CardName.RETURN_TO_ABANDONED_TECHNOLOGY, CardName.HOSTILE_TAKEOVER];
+
   private getCards(player: IPlayer): ReadonlyArray<IProjectCard> {
     return player.playedCards.filter((card) => {
       if (card.type !== CardType.EVENT) {
         return false;
       }
-      if (card.name === CardName.PATENT_MANIPULATION || card.name === CardName.RETURN_TO_ABANDONED_TECHNOLOGY) {
-        return false;
-      }
-      if (card.name === CardName.HOSTILE_TAKEOVER) {
+      if (AstraMechanica.UNUSABLE_CARDS.includes(card.name)) {
         return false;
       }
       if (card.tilesBuilt.some(isSpecialTile)) {
@@ -45,7 +44,14 @@ export class AstraMechanica extends Card implements IProjectCard {
     });
   }
 
+  private hasUnusableCards(player: IPlayer): boolean {
+    return player.playedCards.some((card) => AstraMechanica.UNUSABLE_CARDS.includes(card.name));
+  }
+
   public override bespokeCanPlay(player: IPlayer) {
+    if (this.hasUnusableCards(player)) {
+      this.warnings.add('unusableEventsForAstraMechanica');
+    }
     return this.getCards(player).length > 0;
   }
 

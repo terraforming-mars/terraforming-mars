@@ -86,6 +86,7 @@ import {TopsoilContract} from './TopsoilContract';
 import {TychoMagnetics} from './TychoMagnetics';
 import {StrategicBasePlanning} from './StrategicBasePlanning';
 import {Hospitals} from './Hospitals';
+import {NewHolland} from './NewHolland';
 
 export const PROMO_CARD_MANIFEST = new ModuleManifest({
   module: 'promo',
@@ -158,6 +159,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.CASINOS]: {Factory: Casinos},
     [CardName.PUBLIC_BATHS]: {Factory: PublicBaths},
     [CardName.PROTECTED_GROWTH]: {Factory: ProtectedGrowth},
+    [CardName.NEW_HOLLAND]: {Factory: NewHolland},
   },
 
   preludeCards: {

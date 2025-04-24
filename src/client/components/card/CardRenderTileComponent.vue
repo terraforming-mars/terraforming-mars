@@ -139,6 +139,9 @@ const TILE_CLASSES: Record<TileType, Classes> = {
   [TileType.MARTIAN_NATURE_WONDERS]: {}, // This isn't shown on a card
   [TileType.MARS_NOMADS]: {}, // This isn't shown on a card
   [TileType.REY_SKYWALKER]: {}, // This isn't shown on a card
+  [TileType.NEW_HOLLAND]: {
+    tile: 'card-tile-new-holland',
+  },
 };
 
 export default Vue.extend({

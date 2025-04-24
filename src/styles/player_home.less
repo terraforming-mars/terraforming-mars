@@ -621,19 +621,15 @@
 
           collector, electrician, fundraiser, geologist, landshaper, lobbyist, philantropist,
           planetologist, producer, researcher, sponsor, forester, breeder, thermoengineer,
+
+          kingpin, edgelord, tunneler, risktaker,
         ;
         each(@ma-name, {
           .ma-name--@{value} {
             background-image: url("assets/ma/@{value}.png");
-            background-size: 200px;
-            background-position: -30px -5px;
-          }
-        })
-
-      @underworld-ma-name: kingpin, edgelord, tunneler, risktaker;
-        each(@underworld-ma-name, {
-          .ma-name--@{value} {
-            background-image: url("assets/ma/@{value}.png");
+            // Images are expected to be 140px x 83px
+            // background-size: 200px;
+            // background-position: -30px -5px;
           }
         })
 

@@ -53,7 +53,7 @@ export default Vue.extend({
 
     const data: Data = {
       filterText: '',
-      allColonies: officialColonies.concat(communityColonies),
+      allColonies: officialColonies.concat(communityColonies).concat(pathfindersColonies),
       officialColonies,
       communityColonies,
       pathfindersColonies,

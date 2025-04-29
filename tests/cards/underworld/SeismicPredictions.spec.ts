@@ -48,7 +48,7 @@ describe('SeismicPredictions', () => {
       spaces.forEach((space, idx) => {
         game.simpleAddTile(player, space, {tileType: TileType.GREENERY});
         space.player = player;
-        UnderworldExpansion.identify(game, space, player);
+        UnderworldExpansion.identify(game, space);
         if (idx < run.claimed) {
           space.excavator = player;
         }

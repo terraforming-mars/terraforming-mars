@@ -41,6 +41,9 @@ export function isIHasCheckLoops(object: any): object is IHasCheckLoops {
 /** Defines how ICard.getVictoryPoints works. */
 export type GetVictoryPointsContext = 'default' | 'projectWorkshop';
 
+// TODO(kberg): Move this out of ICard.
+export type IdentificationTrigger = 'normal' | 'excavation' | 'tile';
+
 export interface ICard {
   name: CardName;
   tags: Array<Tag>;
@@ -110,9 +113,9 @@ export interface ICard {
    *   or undefined if added by a neutral player.
    * @param cardOwner the player who owns THIS CARD.
    * @param space the space that was just identified.
-   * @param fromExcavate when true, this identifacation came from excavating an unidentified space.
+   * @param trigger what triggered the identification.
    */
-  onIdentification?(identifyingPlayer: IPlayer | undefined, cardOwner: IPlayer, space: Space, fromExcavate: boolean): void;
+  onIdentification?(identifyingPlayer: IPlayer | undefined, cardOwner: IPlayer, space: Space, trigger: IdentificationTrigger): void;
 
   /**
    * Optional callback when any player excavates a space.

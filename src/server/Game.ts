@@ -1328,7 +1328,7 @@ export class Game implements IGame, Logger {
 
     if (this.gameOptions.underworldExpansion) {
       if (space.spaceType !== SpaceType.COLONY && space.player === player) {
-        UnderworldExpansion.identify(this, space, player);
+        UnderworldExpansion.identify(this, space, player, 'tile');
       }
     }
   }

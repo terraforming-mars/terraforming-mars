@@ -72,6 +72,7 @@ const ORDER: Array<InterfaceTagsType> = [
   SpecialTags.COLONY_COUNT,
   SpecialTags.EXCAVATIONS,
   SpecialTags.CORRUPTION,
+  SpecialTags.NEGATIVE_VP,
 ];
 
 const isInGame = (tag: InterfaceTagsType, game: GameModel): boolean => {
@@ -84,6 +85,7 @@ const isInGame = (tag: InterfaceTagsType, game: GameModel): boolean => {
     return game.turmoil !== undefined;
   case SpecialTags.EXCAVATIONS:
   case SpecialTags.CORRUPTION:
+  case SpecialTags.NEGATIVE_VP:
     return gameOptions.expansions.underworld !== false;
   case Tag.VENUS:
   case Tag.MOON:
@@ -107,6 +109,8 @@ const getTagCount = (tagName: InterfaceTagsType, player: PublicPlayerModel): num
     return player.excavations;
   case SpecialTags.CORRUPTION:
     return player.corruption;
+  case SpecialTags.NEGATIVE_VP:
+    return player.victoryPointsBreakdown.negativeVP;
   case 'all':
   case 'separator':
     return -1;

@@ -25,6 +25,7 @@ export class VictoryPointsBreakdownBuilder {
     detailsMilestones: [],
     detailsAwards: [],
     detailsPlanetaryTracks: [],
+    negativeVP: 0,
   };
 
   public build(): VictoryPointsBreakdown {
@@ -48,6 +49,9 @@ export class VictoryPointsBreakdownBuilder {
   }
 
   public setVictoryPoints(key: VictoryPoints, points: number, message?: string, messageArgs?: Array<string>) {
+    if (points < 0) {
+      this.points.negativeVP += points;
+    }
     switch (key) {
     case 'terraformRating':
       this.points.terraformRating += points;

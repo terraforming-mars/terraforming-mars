@@ -21,6 +21,7 @@ import {Phase} from '../../common/Phase';
 import {Units} from '../../common/Units';
 import {LogHelper} from '../LogHelper';
 import {Message} from '../../common/logs/Message';
+import {IdentificationTrigger} from '../cards/ICard';
 
 export class UnderworldExpansion {
   private constructor() {}
@@ -119,12 +120,15 @@ export class UnderworldExpansion {
   }
 
   /** Identify the token at `space`, optionally trigger callbacks */
-  public static identify(game: IGame, space: Space, player: IPlayer | undefined, fromExcavate: boolean = false): void {
+  public static identify(game: IGame, space: Space, player: IPlayer | undefined = undefined, trigger: IdentificationTrigger = 'normal'): void {
     if (game.gameOptions.underworldExpansion !== true) {
       throw new Error('Underworld expansion not in this game');
     }
 
     if (space.undergroundResources !== undefined) {
+      if (trigger === 'tile') {
+        return;
+      }
       if (player?.cardIsInEffect(CardName.NEUTRINOGRAPH) && space.excavator === undefined) {
         UnderworldExpansion.addTokens(game, [space.undergroundResources]);
         space.undergroundResources = undefined;
@@ -136,7 +140,7 @@ export class UnderworldExpansion {
     space.undergroundResources = undergroundResource;
     for (const p of game.getPlayersInGenerationOrder()) {
       for (const card of p.tableau) {
-        card.onIdentification?.(player, p, space, fromExcavate);
+        card.onIdentification?.(player, p, space, trigger);
       }
     }
   }
@@ -205,7 +209,7 @@ export class UnderworldExpansion {
     }
 
     if (space.undergroundResources === undefined) {
-      this.identify(player.game, space, player, /* fromExcavate= */ true);
+      this.identify(player.game, space, player, 'excavation');
     }
 
     const undergroundResource = space.undergroundResources;
@@ -222,7 +226,7 @@ export class UnderworldExpansion {
     // TODO(kberg): The identification is supposed to be resolved after the benefit.
     game.board
       .getAdjacentSpaces(space)
-      .forEach((s) => UnderworldExpansion.identify(game, s, player, /* fromExcavate= */ true));
+      .forEach((s) => UnderworldExpansion.identify(game, s, player, 'excavation'));
     const leaser = game.getCardPlayerOrUndefined(CardName.EXCAVATOR_LEASING);
     if (leaser !== undefined) {
       leaser.stock.add(Resource.MEGACREDITS, 1, {log: true});

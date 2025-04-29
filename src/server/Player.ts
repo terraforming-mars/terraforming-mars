@@ -270,16 +270,6 @@ export class Player implements IPlayer {
     this.stock = new Stock(this);
   }
 
-  public static initialize(
-    name: string,
-    color: Color,
-    beginner: boolean,
-    handicap: number = 0,
-    id: PlayerId): Player {
-    const player = new Player(name, color, beginner, handicap, id);
-    return player;
-  }
-
   public tearDown() {
     this.game = undefined as unknown as Game;
   }

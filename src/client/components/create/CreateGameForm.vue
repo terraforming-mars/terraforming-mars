@@ -830,8 +830,8 @@ export default (Vue as WithRefs<Refs>).extend({
                 if (component.showColoniesList) refs.coloniesFilter.updateColoniesByNames(customColonies);
                 if (component.showCorporationList) refs.corporationsFilter.selectedCorporations = customCorporations;
                 if (component.showPreludesList) refs.preludesFilter.updatePreludes(customPreludes);
-                if (component.showBannedCards) refs.cardsFilter.selectedCardNames = bannedCards;
-                if (component.showIncludedCards) refs.cardsFilter2.selectedCardNames = includedCards;
+                if (component.showBannedCards) refs.cardsFilter.selected = bannedCards;
+                if (component.showIncludedCards) refs.cardsFilter2.selected = includedCards;
                 if (!component.seededGame) component.seed = Math.random();
                 // set to alter after any watched properties
                 component.solarPhaseOption = Boolean(capturedSolarPhaseOption);

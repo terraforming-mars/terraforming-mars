@@ -1,34 +1,34 @@
 <template>
-   <div class="colony-grid-container"> <!--   <div v-if="metadata.name === ColonyName.VENUS" style="margin-top:5px;"> -->
-     <build-benefit :metadata="metadata" :idx="0"></build-benefit>
-     <build-benefit :metadata="metadata" :idx="1"></build-benefit>
-     <build-benefit :metadata="metadata" :idx="2"></build-benefit>
-     <div></div>
-     <div></div>
-     <div></div>
-     <div></div>
+   <div class="colony-grid-container">
+    <colony-space v-for="idx in [0, 1, 2, 3, 4, 5, 6]"
+      :key="idx"
+      :idx="idx"
+      :metadata="metadata"
+      :player="colony.colonies[idx]"
+      :marker="colony.isActive && colony.trackPosition === idx">
+    </colony-space>
   </div>
 </template>
 <script lang="ts">
 
 import Vue from 'vue';
 
-import {ColonyName} from '@/common/colonies/ColonyName';
 import {IColonyMetadata} from '@/common/colonies/IColonyMetadata';
-import BuildBenefit from './BuildBenefit.vue';
+import {ColonyModel} from '@/common/models/ColonyModel';
+import ColonySpace from './ColonySpace.vue';
 
 export default Vue.extend({
-  components: {BuildBenefit},
   name: 'ColonyRow',
+  components: {
+    ColonySpace,
+  },
   props: {
     metadata: {
       type: Object as () => IColonyMetadata,
       required: true,
     },
-  },
-  computed: {
-    ColonyName(): typeof ColonyName {
-      return ColonyName;
+    colony: {
+      type: Object as () => ColonyModel,
     },
   },
 });

@@ -7,11 +7,11 @@ export class Ceres extends Colony {
   constructor() {
     super({
       name: ColonyName.CERES,
-      description: [
-        'Gain 1 steel production',
-        'Gain n steel',
-        'Gain 2 steel',
-      ],
+      description: {
+        buildBonus: 'Gain 1 steel production',
+        tradeBonus: 'Gain n steel',
+        colonyBonus: 'Gain 2 steel',
+      },
 
       buildType: ColonyBenefit.GAIN_PRODUCTION,
       buildResource: Resource.STEEL,

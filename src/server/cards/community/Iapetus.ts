@@ -6,11 +6,11 @@ export class Iapetus extends Colony {
   constructor() {
     super({
       name: ColonyName.IAPETUS,
-      description: [
-        'Gain 1 TR',
-        'Gain n TR',
-        'Pay 1 M€ less for cards this generation',
-      ],
+      description: {
+        buildBonus: 'Gain 1 TR',
+        tradeBonus: 'Gain n TR',
+        colonyBonus: 'Pay 1 M€ less for cards this generation',
+      },
 
       buildType: ColonyBenefit.GAIN_TR,
       tradeType: ColonyBenefit.GAIN_TR,

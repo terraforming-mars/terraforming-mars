@@ -7,11 +7,11 @@ export class Luna extends Colony {
   constructor() {
     super({
       name: ColonyName.LUNA,
-      description: [
-        'Gain 2 M€ production',
-        'Gain n M€',
-        'Gain 2 M€',
-      ],
+      description: {
+        buildBonus: 'Gain 2 M€ production',
+        tradeBonus: 'Gain n M€',
+        colonyBonus: 'Gain 2 M€',
+      },
       buildType: ColonyBenefit.GAIN_PRODUCTION,
       buildQuantity: [2, 2, 2],
       buildResource: Resource.MEGACREDITS,

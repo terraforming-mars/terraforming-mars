@@ -71,4 +71,39 @@ describe('HecateSpeditions', () => {
     assertTradeAction(player, 'Pay 2 supply chain resources (use Hecate Speditions action)');
     expect(card.resourceCount).eq(0);
   });
+
+  it('trade discount', () => {
+    player.corporations.push(card);
+    card.resourceCount = 2;
+    player.colonies.tradeDiscount = 1;
+
+    assertTradeAction(player, 'Pay 1 supply chain resources (use Hecate Speditions action)');
+    expect(card.resourceCount).eq(1);
+  });
+
+  it('trade discount, min 1', () => {
+    player.corporations.push(card);
+    card.resourceCount = 2;
+    player.colonies.tradeDiscount = 2;
+
+    assertTradeAction(player, 'Pay 1 supply chain resources (use Hecate Speditions action)');
+    expect(card.resourceCount).eq(1);
+  });
+
+  it('trade more than once in a generation', () => {
+    player.corporations.push(card);
+    card.resourceCount = 6;
+    player.colonies.setFleetSize(10);
+
+    assertTradeAction(player, 'Pay 2 supply chain resources (use Hecate Speditions action)');
+    expect(card.resourceCount).eq(4);
+
+    assertTradeAction(player, 'Pay 2 supply chain resources (use Hecate Speditions action)');
+    expect(card.resourceCount).eq(2);
+
+    assertTradeAction(player, 'Pay 2 supply chain resources (use Hecate Speditions action)');
+    expect(card.resourceCount).eq(0);
+
+    assertNoTradeAction(player);
+  });
 });

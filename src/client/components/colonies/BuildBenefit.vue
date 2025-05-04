@@ -1,4 +1,5 @@
 <template>
+  <div style="position:absolute">
   <div v-if="metadata.buildType === ColonyBenefit.ADD_RESOURCES_TO_CARD">
     <template v-if="metadata.buildQuantity[idx] === 3">
       <div class="colony-placement-bonus triple-res resource white-x white-x--3" :class="resource"></div>
@@ -46,6 +47,7 @@
   <div v-else-if="metadata.buildType === ColonyBenefit.PLACE_HAZARD_TILE">
     <div class="tile hazard-tile"></div>
   </div>
+</div>
 </template>
 <script lang="ts">
 

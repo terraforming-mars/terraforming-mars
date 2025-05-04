@@ -383,10 +383,10 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     colonyModel(colonyName: ColonyName): ColonyModel {
       return {
-        colonies: [],
-        isActive: false,
+        colonies: ['red', 'blue'],
+        isActive: true,
         name: colonyName,
-        trackPosition: 0,
+        trackPosition: 3,
         visitor: undefined,
       };
     },

@@ -2,7 +2,7 @@
   <div>
     <build-benefit v-if="idx <= 2" :metadata="metadata" :idx="idx"></build-benefit>
     <div v-if="player !== undefined" class="occupied-colony-space">
-      <div :class="`board-cube colony-cube occupied-colony-space board-cube--${player}`"></div>
+      <div :class="`board-cube colony-cube board-cube--${player}`"></div>
     </div>
     <div v-if="marker" class="colony-track-marker"></div>
   </div>

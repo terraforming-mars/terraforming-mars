@@ -105,7 +105,7 @@ export default (Vue as WithRefs<Refs>).extend({
     },
   },
   watch: {
-    selectedCardNames(value) {
+    selected(value) {
       this.$emit('cards-list-changed', value);
     },
     searchTerm(value: string) {

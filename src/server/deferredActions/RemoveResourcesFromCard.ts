@@ -95,12 +95,12 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
   private attack(card: ICard) {
     const target = this.player.game.getCardPlayerOrThrow(card.name);
 
-    // // TODO(kberg): Consolidate the blockable in mayBlock.
-    // if (this.blockable === false) {
-    //   target.removeResourceFrom(card, this.count, {removingPlayer: this.player});
-    //   this.cb(true);
-    //   return;
-    // }
+    // TODO(kberg): Consolidate the blockable in maybeBlock.
+    if (this.blockable === false) {
+      target.removeResourceFrom(card, this.count, {removingPlayer: this.player});
+      this.cb({card: card, owner: target, proceed: true});
+      return;
+    }
     const msg = message('${0} ${1} from ${2}', (b) => b.number(this.count).string(card.resourceType || 'resources').card(card));
     target.defer(UnderworldExpansion.maybeBlockAttack(target, this.player, msg, (proceed) => {
       if (proceed) {

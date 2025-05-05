@@ -47,7 +47,9 @@ export class IntragenSanctuaryHeadquarters extends CorporationCard {
   }
 
   public onCardPlayed(player: IPlayer, card: ICard) {
-    const count = player.tags.cardTagCount(card, Tag.ANIMAL);
-    player.addResourceTo(this, {qty: count, log: true});
+    // onCardPlayed on corporation cards is called when ANY PLAYER plays a card.
+    const corporationOwner = player.game.getCardPlayerOrThrow(this.name);
+    const count = corporationOwner.tags.cardTagCount(card, Tag.ANIMAL);
+    corporationOwner.addResourceTo(this, {qty: count, log: true});
   }
 }

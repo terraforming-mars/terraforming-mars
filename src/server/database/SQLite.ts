@@ -11,6 +11,7 @@ import {daysAgoToSeconds} from './utils';
 import {MultiMap} from 'mnemonist';
 import {Session, SessionId} from '../auth/Session';
 import {toID} from '../../common/utils/utils';
+import {Database} from 'sqlite3';
 
 export const IN_MEMORY_SQLITE_PATH = ':memory:';
 

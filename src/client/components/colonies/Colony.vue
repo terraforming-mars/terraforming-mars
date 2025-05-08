@@ -165,8 +165,8 @@ export default Vue.extend({
       const titles = ['Build Colony bonus', 'Trade bonus', 'Colony bonus'].map(translateText);
 
       return `${titles[0]}: ${translateText(descriptions.buildBonus)}
-${titles[1]}: ${translateText(descriptions.colonyBonus)}
-${titles[2]}: ${translateText(descriptions.tradeBonus)}`;
+${titles[1]}: ${translateText(descriptions.tradeBonus)}
+${titles[2]}: ${translateText(descriptions.colonyBonus)}`;
     },
     ColonyName(): typeof ColonyName {
       return ColonyName;

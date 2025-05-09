@@ -106,11 +106,6 @@ const MILESTONE_RENAMES = new Map<string, MilestoneName>([
 
   // TODO(yournamehere): remove after 2021-04-05
   // ['Electrician', 'V. Electrician'],
-
-  // TODO(konigsberg): remove after 2025-04-01
-  ['ThermoEngineer', 'Engineer'],
-  // TODO(konigsberg): remove after 2025-04-01
-  ['Breeder', 'Farmer'],
 ]);
 
 export function maybeRenamedMilestone(name: string): MilestoneName {

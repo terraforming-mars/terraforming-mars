@@ -36,8 +36,6 @@ export class Greta extends CeoCard {
 
   public onIncreaseTerraformRating(player: IPlayer, cardOwner: IPlayer) {
     const game = player.game;
-    // TODO(kberg): Remove this after 2025-04-01
-    this.data.effectTriggerCount = this.data.effectTriggerCount ?? 0;
     if (this.opgActionIsActive === true && this.data.effectTriggerCount < 10) {
       if (player === cardOwner && game.phase === Phase.ACTION) {
         player.stock.add(Resource.MEGACREDITS, 4, {log: true});

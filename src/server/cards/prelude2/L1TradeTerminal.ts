@@ -19,14 +19,14 @@ export class L1TradeTerminal extends Card {
 
       behavior: {
         colonies: {
-          tradeOffset: 2, // TODO(kberg): mandatory
+          tradeOffset: 2,
         },
       },
 
       metadata: {
         cardNumber: 'P78',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you trade, first increase that colony tile track 2 steps.', (eb) =>
+          b.effect('When you trade, you may first increase that colony tile track 2 steps.', (eb) =>
             eb.trade().startEffect.text('+2')).br;
           b.text('3').diverseTag().asterix().br;
           b.plainText('(Add a resource to 3 different cards that already have resources.)').br;

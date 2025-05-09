@@ -123,8 +123,8 @@ export abstract class Colony implements IColony {
     */
   public trade(player: IPlayer, tradeOptions: TradeOptions = {}, bonusTradeOffset = 0): void {
     const tradeOffset = player.colonies.tradeOffset + bonusTradeOffset;
-    const maxTrackPosition = Math.min(this.trackPosition + tradeOffset, MAX_COLONY_TRACK_POSITION);
-    const steps = maxTrackPosition - this.trackPosition;
+    const maxPossibleTrackPosition = Math.min(this.trackPosition + tradeOffset, MAX_COLONY_TRACK_POSITION);
+    const steps = maxPossibleTrackPosition - this.trackPosition;
 
     if (steps === 0 ||
         this.metadata.shouldIncreaseTrack === 'no' ||
@@ -134,7 +134,7 @@ export abstract class Colony implements IColony {
       return;
     }
 
-    if (this.metadata.shouldIncreaseTrack === 'yes' || (this.metadata.tradeResource !== undefined && this.metadata.tradeResource[this.trackPosition] === this.metadata.tradeResource[maxTrackPosition])) {
+    if (this.metadata.shouldIncreaseTrack === 'yes' || (this.metadata.tradeResource !== undefined && this.metadata.tradeResource[this.trackPosition] === this.metadata.tradeResource[maxPossibleTrackPosition])) {
       // No point in asking the player, just increase it
       this.increaseTrack(steps);
       LogHelper.logColonyTrackIncrease(player, this, steps);

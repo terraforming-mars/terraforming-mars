@@ -13,8 +13,6 @@ describe('L1TradeTerminal', () => {
   let card: L1TradeTerminal;
   let player: TestPlayer;
 
-  // TODO(kberg): Add test for the card effect.
-
   beforeEach(() => {
     card = new L1TradeTerminal();
     [/* game */, player] = testGame(2, {coloniesExtension: true});

@@ -17,6 +17,10 @@ export class MiningComplex extends PreludeCard {
       name: CardName.MINING_COMPLEX,
       tags: [Tag.MOON],
       startingMegacredits: -7,
+      tr: {
+        moonMining: 1,
+        moonLogistics: 1,
+      },
       tilesBuilt: [TileType.MOON_MINE, TileType.MOON_ROAD],
 
       metadata: {

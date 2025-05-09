@@ -23,7 +23,18 @@ export type IColonyMetadata = Readonly<{
   colonyBonusType: ColonyBenefit;
   colonyBonusQuantity: number; // Default is 1
   colonyBonusResource?: Resource;
-  shouldIncreaseTrack: 'yes' | 'no' | 'ask' // Default is 'yes';
+  /**
+   * If the player may increase the colony track, this determines whether to ask the player.
+   *
+   * Colonies that give resources should be set to 'yes' since they'll typically get more resources the higher
+   * the track goes.
+   *
+   * Colonies should be set to 'no' when the the reward is worse the higher the track goes. (This is limited to Titania.)
+   *
+   * Mercury and Hygeia give _different_ rewards at different levels of the track, so it is worth asking the player whether
+   * to move up the track.
+   */
+  shouldIncreaseTrack: 'yes' | 'no' | 'ask'
 }>;
 
 export type IInputColonyMetadata = Omit<IColonyMetadata, 'buildQuantity' |'tradeQuantity' | 'colonyBonusQuantity' | 'shouldIncreaseTrack'> & Partial<IColonyMetadata>;

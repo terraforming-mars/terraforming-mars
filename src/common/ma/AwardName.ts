@@ -93,9 +93,6 @@ export const AWARD_RENAMES = new Map<string, AwardName>([
   // And remember to add a test in spec.ts.
 
   // TODO(yournamehere): remove after 2021-04-05
-
-  // TODO(kberg): remove after 2025-05-01
-  ['T. Economizer', 'Incorporator'],
 ]);
 
 export function maybeRenamedAward(name: string): AwardName {

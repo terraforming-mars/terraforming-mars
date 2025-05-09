@@ -464,6 +464,12 @@ export class Player implements IPlayer {
   }
 
   public attack(perpetrator: IPlayer, resource: Resource, count: number, options?: {log?: boolean, stealing?: boolean}): void {
+    if (count === 0) {
+      return;
+    }
+    if (count < 0) {
+      throw new Error('Unexpected attack count is less than 0 ' + count);
+    }
     const msg = message('Lose ${0} ${1}', (b) => b.number(count).string(resource));
     this.maybeBlockAttack(perpetrator, msg, (proceed) => {
       if (proceed) {

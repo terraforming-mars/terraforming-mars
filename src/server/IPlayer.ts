@@ -215,6 +215,12 @@ export interface IPlayer {
    * is not blocked.
    */
   maybeBlockAttack(perpetrator: IPlayer, message: Message | string, cb: (proceed: boolean) => PlayerInput | undefined): void;
+
+  /**
+   * Remove or steal standard resources from another player. Could be blocked (see `maybeBlockAttack`.)
+   *
+   * Nothing happens if count is 0.
+   */
   attack(perpetrator: IPlayer, type: Resource, count: number, options?: {log?: boolean, stealing?: boolean}): void;
 
   /**

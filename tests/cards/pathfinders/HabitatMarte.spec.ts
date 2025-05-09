@@ -12,6 +12,7 @@ import {OumuamuaTypeObjectSurvey} from '../../../src/server/cards/pathfinders/Ou
 import {SecretLabs} from '../../../src/server/cards/pathfinders/SecretLabs';
 import {BreedingFarms} from '../../../src/server/cards/pathfinders/BreedingFarms';
 import {PrideoftheEarthArkship} from '../../../src/server/cards/moon/PrideoftheEarthArkship';
+import {FlatMarsTheory} from '../../../src/server/cards/pathfinders/FlatMarsTheory';
 
 describe('HabitatMarte', () => {
   let card: HabitatMarte;
@@ -115,5 +116,17 @@ describe('HabitatMarte', () => {
     expect(card2.canPlay(player)).to.be.true;
     expect(card3.canPlay(player)).to.be.true;
     expect(card4.canPlay(player)).to.be.true;
+  });
+
+  it('Cards with max tag count', () => {
+    // 1 science tag max.
+    const flatMarsTheory = new FlatMarsTheory();
+    player.tagsForTest = {science: 1, mars: 1};
+
+    expect(flatMarsTheory.canPlay(player)).to.be.true;
+
+    player.corporations.push(card);
+
+    expect(flatMarsTheory.canPlay(player)).to.be.false;
   });
 });

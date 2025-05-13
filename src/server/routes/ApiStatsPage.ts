@@ -20,7 +20,7 @@ export class ApiStatsPage extends Handler {
       const g = await db.getGame(r.game_id);
       const players = g.players.map(p => ({
         id: p.id,
-        name: p.name,
+        name: p.name.replace('Samuel Wesley Musselman', 'Sam'),
         color: p.color,
         score: p.victoryPointsByGeneration.slice(-1)[0],
         tieBreakScore: p.victoryPointsByGeneration.slice(-1)[0] + p.megaCredits / 1000000,

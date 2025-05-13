@@ -188,7 +188,7 @@ import {BonusId, PolicyId} from '@/common/turmoil/Types';
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'agenda',
+  name: 'TurmoilAgenda',
   props: {
     type: {
       type: String as () => 'dominant-bonus' | 'policy-bonus' | 'party-bonus',

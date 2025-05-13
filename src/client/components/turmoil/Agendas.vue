@@ -184,6 +184,7 @@
 
 <script lang="ts">
 
+import {BonusId, PolicyId} from '@/common/turmoil/Types';
 import Vue from 'vue';
 
 export default Vue.extend({
@@ -193,7 +194,7 @@ export default Vue.extend({
       type: String as () => 'dominant-bonus' | 'policy-bonus' | 'party-bonus',
     },
     id: {
-      type: String as () => string | undefined,
+      type: String as () => BonusId | PolicyId | undefined,
     },
   },
   computed: {

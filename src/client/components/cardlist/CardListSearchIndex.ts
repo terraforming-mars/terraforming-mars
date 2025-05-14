@@ -15,9 +15,15 @@ export class CardListSearchIndex {
   private searchIndex: Map<string, Array<string>>;
   private entries: Array<string>;
 
-  constructor() {
+  private constructor() {
     this.searchIndex = new Map();
     this.entries = [];
+  }
+
+  public static create() {
+    const instance = new CardListSearchIndex();
+    instance.build();
+    return instance;
   }
 
   build() {

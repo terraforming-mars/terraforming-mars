@@ -156,6 +156,21 @@
         </template>
       </section>
 
+      <section>
+        <h2 v-i18n>Agendas</h2>
+        <template v-if="types.agendas">
+          <div class="player_home_colony_cont">
+            <div class="player_home_colony" v-for="id in allAgendaIds" :key="id">
+              <div class="turmoil_agenda_cont">
+                <div style="padding: 12px; background-image: linear-gradient(rgb(156, 96, 45), black); border-radius: 8px; height: 120px;">
+                  <turmoil-agenda :id="id"></turmoil-agenda><div style="text-align:center">{{ id }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </section>
+
       <div class="free-floating-preferences-icon">
         <preferences-icon></preferences-icon>
       </div>
@@ -167,7 +182,7 @@
 import Vue from 'vue';
 import {CardType} from '@/common/cards/CardType';
 import {CardName} from '@/common/cards/CardName';
-import {toName} from '@/common/utils/utils';
+import {partition, toName} from '@/common/utils/utils';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import {allGlobalEventNames, getGlobalEvent} from '@/client/turmoil/ClientGlobalEventManifest';
@@ -185,14 +200,16 @@ import {AwardName, awardNames} from '@/common/ma/AwardName';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {WithRefs} from 'vue-typed-refs';
+import {TypeOption, CardListModel, hashToModel, modelToHash} from '@/client/components/cardlist/CardListModel';
+import {getAward, getMilestone} from '@/client/MilestoneAwardManifest';
+import {BonusId, BONUS_IDS, PolicyId, POLICY_IDS} from '@/common/turmoil/Types';
 import Card from '@/client/components/card/Card.vue';
 import Colony from '@/client/components/colonies/Colony.vue';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import Milestone from '@/client/components/Milestone.vue';
 import Award from '@/client/components/Award.vue';
-import {TypeOption, CardListModel, hashToModel, modelToHash} from '@/client/components/cardlist/CardListModel';
-import {getAward, getMilestone} from '@/client/MilestoneAwardManifest';
+import TurmoilAgenda from '@/client/components/turmoil/TurmoilAgenda.vue';
 
 type Refs = {
   filter: HTMLInputElement,
@@ -206,6 +223,7 @@ export default (Vue as WithRefs<Refs>).extend({
     Colony,
     Milestone,
     Award,
+    TurmoilAgenda,
     PreferencesIcon,
   },
   data(): CardListModel {
@@ -232,6 +250,7 @@ export default (Vue as WithRefs<Refs>).extend({
         'globalEvents',
         'milestones',
         'awards',
+        'agendas',
       ];
     },
     allTags(): Array<Tag | 'none'> {
@@ -248,6 +267,13 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     allAwardNames(): ReadonlyArray<AwardName> {
       return [...awardNames].sort();
+    },
+    allAgendaIds(): ReadonlyArray<PolicyId | BonusId> {
+      const ids = (POLICY_IDS as ReadonlyArray<PolicyId | BonusId>).concat(BONUS_IDS);
+      const [official, expansion] = partition(ids, (id) => id.endsWith('01'));
+      official.sort(); // This puts matching party content together.
+      expansion.sort();
+      return [...official, ...expansion];
     },
   },
   methods: {

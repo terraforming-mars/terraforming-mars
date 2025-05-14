@@ -1,7 +1,7 @@
 import {Tag} from '@/common/cards/Tag';
 import {CardType} from '@/common/cards/CardType';
 import {GameModule, GAME_MODULES} from '@/common/cards/GameModule';
-import {CardListSearchIndex} from '@/client/components/cardlist/CardListSearchIndex';
+import {SearchIndex} from '@/client/components/cardlist/SearchIndex';
 
 export type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
 type TagOption = Tag | 'none';
@@ -65,7 +65,7 @@ export type CardListModel = {
   expansions: Record<GameModule, boolean>,
   types: Record<TypeOption, boolean>,
   tags: Record<TagOption, boolean>,
-  searchIndex: CardListSearchIndex,
+  searchIndex: SearchIndex,
   namesOnly: boolean,
   showAdvanced: boolean;
   sortOrder: 'a' | '1';
@@ -126,7 +126,7 @@ export function hashToModel(windowLocationHash: string): CardListModel {
       clone: true,
       none: true,
     },
-    searchIndex: CardListSearchIndex.create(),
+    searchIndex: SearchIndex.create(),
     namesOnly: true,
     showAdvanced: false,
     sortOrder: 'a',

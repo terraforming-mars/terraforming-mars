@@ -1,5 +1,5 @@
 <template>
-  <div :class="getClass">
+  <div>
     <template v-if="id === 'mb01'">
       <div class="resource money party-resource">1</div> /
       <div class="resource-tag tag-building party-resource-tag"></div>
@@ -190,22 +190,8 @@ import Vue from 'vue';
 export default Vue.extend({
   name: 'TurmoilAgenda',
   props: {
-    type: {
-      type: String as () => 'dominant-bonus' | 'policy-bonus' | 'party-bonus',
-    },
     id: {
       type: String as () => BonusId | PolicyId | undefined,
-    },
-  },
-  computed: {
-    getClass(): string {
-      switch (this.type) {
-      case 'dominant-bonus':
-        return 'dominant-party-bonus';
-      case 'party-bonus':
-        return 'party-bonus';
-      }
-      return '';
     },
   },
 });

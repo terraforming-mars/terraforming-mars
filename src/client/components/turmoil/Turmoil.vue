@@ -16,7 +16,9 @@
           <div class="dominant-party-name">
             <div :class="'party-name party-name--'+partyNameToCss(turmoil.ruling)" v-i18n>{{ turmoil.ruling }}</div>
           </div>
-          <turmoil-agenda type="dominant-bonus" :id="getPolicy(turmoil.ruling)"></turmoil-agenda>
+          <div class="dominant-party-bonus">
+            <turmoil-agenda :id="getPolicy(turmoil.ruling)"></turmoil-agenda>
+          </div>
           <div class="policy-user-cubes">
             <template v-for="n in turmoil.policyActionUsers">
               <div v-if="n.turmoilPolicyActionUsed" :key="n.color" :class="'policy-use-marker board-cube--'+n.color"></div>
@@ -36,7 +38,10 @@
             <div v-show="isVisible()" class='policies-global'>
               <div v-for="party in turmoil.parties" :key="party.name" class='policy-block'>
                 <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
-                <turmoil-agenda type="policy-bonus" :id="getPolicy(party.name)"></turmoil-agenda>
+
+                <div class="party-bonus">
+                  <turmoil-agenda :id="getPolicy(party.name)"></turmoil-agenda>
+                </div>
               </div>
             </div>
           </div>

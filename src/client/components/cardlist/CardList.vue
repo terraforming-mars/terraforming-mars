@@ -17,6 +17,11 @@
             &#x2195;
         </button>
 
+        <button id="show-metadata" v-on:click="toggleShowMetadata()" style="width: 30px;">
+            <span v-if="showMetadata === true">■</span>
+            <span v-else>□</span>
+        </button>
+
         <button id="advanced-search-collapser" v-on:click="toggleAdvancedSearch()">
             <span v-if="showAdvanced === true" v-i18n>Advanced «</span>
             <span v-else v-i18n>Advanced »</span>
@@ -207,7 +212,6 @@ export default (Vue as WithRefs<Refs>).extend({
     return hashToModel(window.location.hash);
   },
   mounted() {
-    this.searchIndex.build();
     this.$refs.filter.focus();
     this.delayedSetLocationHash();
   },
@@ -383,8 +387,8 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     colonyModel(colonyName: ColonyName): ColonyModel {
       return {
-        colonies: ['red', 'blue'],
-        isActive: true,
+        colonies: this.showMetadata ? ['red', 'blue'] : [],
+        isActive: this.showMetadata,
         name: colonyName,
         trackPosition: 3,
         visitor: undefined,
@@ -408,6 +412,9 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     toggleSortOrder(): void {
       this.sortOrder = this.sortOrder === 'a' ? '1' : 'a';
+    },
+    toggleShowMetadata(): void {
+      this.showMetadata = !this.showMetadata;
     },
   },
 });

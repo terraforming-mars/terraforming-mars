@@ -5,6 +5,7 @@ import {ColonyName} from '../../common/colonies/ColonyName';
 import {GameId} from '../../common/Types';
 import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
 import {AgendaStyle} from '../../common/turmoil/Types';
+import {Expansion} from '../../common/cards/GameModule';
 
 export type GameOptions = {
   boardName: BoardName;
@@ -16,7 +17,7 @@ export type GameOptions = {
   fastModeOption: boolean;
   showOtherPlayersVP: boolean;
 
-  // Extensions
+  // Extensions -- Deprecated, except when importing JSON
   corporateEra: boolean;
   venusNextExtension: boolean;
   coloniesExtension: boolean;
@@ -36,6 +37,8 @@ export type GameOptions = {
   ceoExtension: boolean;
   starWarsExpansion: boolean;
   underworldExpansion: boolean;
+
+  expansions: Record<Expansion, boolean>,
 
   // Variants
   draftVariant: boolean;
@@ -97,6 +100,22 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   escapeVelocityBonusSeconds: constants.DEFAULT_ESCAPE_VELOCITY_BONUS_SECONDS, // Number of seconds a player gets back with every action.
   escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD, // VP a player loses for every `escapeVelocityPenalty` minutes after `escapeVelocityThreshold`.
   escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
+  expansions: {
+    corpera: false,
+    promo: false,
+    venus: false,
+    colonies: false,
+    prelude: false,
+    prelude2: false,
+    turmoil: false,
+    community: false,
+    ares: false,
+    moon: false,
+    pathfinders: false,
+    ceo: false,
+    starwars: false,
+    underworld: false,
+  },
   fastModeOption: false,
   includeFanMA: false,
   initialDraftVariant: false,

@@ -248,6 +248,24 @@ export class Game implements IGame, Logger {
     options: Partial<GameOptions> = {},
     seed = 0,
     spectatorId: SpectatorId | undefined = undefined): Game {
+    if (options.expansions === undefined) {
+      options.expansions = {
+        corpera: options.corporateEra ?? false,
+        venus: options.venusNextExtension ?? false,
+        colonies: options.coloniesExtension ?? false,
+        prelude: options.preludeExtension ?? false,
+        prelude2: options.prelude2Expansion ?? false,
+        turmoil: options.turmoilExtension ?? false,
+        promo: options.promoCardsOption ?? false,
+        community: options.communityCardsOption ?? false,
+        ares: options.aresExtension ?? false,
+        moon: options.moonExpansion ?? false,
+        pathfinders: options.pathfindersExpansion ?? false,
+        ceo: options.ceoExtension ?? false,
+        starwars: options.starWarsExpansion ?? false,
+        underworld: options.underworldExpansion ?? false,
+      };
+    }
     const gameOptions = {...DEFAULT_GAME_OPTIONS, ...options};
     if (gameOptions.clonedGamedId !== undefined) {
       throw new Error('Cloning should not come through this execution path.');
@@ -1621,6 +1639,25 @@ export class Game implements IGame, Logger {
   }
 
   public static deserialize(d: SerializedGame): Game {
+    // TODO(kberg): Remove by 2025-08-01
+    if (d.gameOptions.expansions === undefined) {
+      d.gameOptions.expansions = {
+        corpera: d.gameOptions.corporateEra,
+        venus: d.gameOptions.venusNextExtension,
+        colonies: d.gameOptions.coloniesExtension,
+        prelude: d.gameOptions.preludeExtension,
+        prelude2: d.gameOptions.prelude2Expansion,
+        turmoil: d.gameOptions.turmoilExtension,
+        promo: d.gameOptions.promoCardsOption,
+        community: d.gameOptions.communityCardsOption,
+        ares: d.gameOptions.aresExtension,
+        moon: d.gameOptions.moonExpansion,
+        pathfinders: d.gameOptions.pathfindersExpansion,
+        ceo: d.gameOptions.ceoExtension,
+        starwars: d.gameOptions.starWarsExpansion,
+        underworld: d.gameOptions.underworldExpansion,
+      };
+    }
     const gameOptions = d.gameOptions;
 
     const players = d.players.map((element) => Player.deserialize(element));

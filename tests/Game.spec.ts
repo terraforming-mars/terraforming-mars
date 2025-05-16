@@ -1014,29 +1014,28 @@ describe('Game', () => {
     Game.newInstance('gameid', [player], player, {ceoExtension: true, startingCeos: 4});
     expect(player.dealtCeoCards).has.lengthOf(4);
   });
-});
 
-it('Arctic Algae works during WGT', () => {
-  const player = TestPlayer.BLUE.newPlayer();
-  const player2 = TestPlayer.RED.newPlayer();
-  player.playedCards.push(new ArcticAlgae());
-  // player2 is first player, and will resolve WGT.
-  const game = Game.newInstance('gameid', [player, player2], player2, {venusNextExtension: true});
-  game.worldGovernmentTerraforming();
-  const orOptions = cast(player2.popWaitingFor(), OrOptions);
-  const oceanAction = cast(orOptions.options.filter((o) => o.title.toString() === 'Add an ocean')[0], SelectSpace);
-  assertPlaceOcean(player2, oceanAction);
-  expect(player.plants).to.eq(0);
-  runAllActions(game);
-  expect(player.plants).to.eq(2);
-});
+  it('Arctic Algae works during WGT', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
+    player.playedCards.push(new ArcticAlgae());
+    // player2 is first player, and will resolve WGT.
+    const game = Game.newInstance('gameid', [player, player2], player2, {venusNextExtension: true});
+    game.worldGovernmentTerraforming();
+    const orOptions = cast(player2.popWaitingFor(), OrOptions);
+    const oceanAction = cast(orOptions.options.filter((o) => o.title.toString() === 'Add an ocean')[0], SelectSpace);
+    assertPlaceOcean(player2, oceanAction);
+    expect(player.plants).to.eq(0);
+    runAllActions(game);
+    expect(player.plants).to.eq(2);
+  });
 
-it('Arctic Algae works during WGT before Turmoil', () => {
-  const player = TestPlayer.BLUE.newPlayer();
-  const player2 = TestPlayer.RED.newPlayer();
-  player.playedCards.push(new ArcticAlgae());
-  // player2 is first player, and will resolve WGT.
-  const game = Game.newInstance('gameid', [player, player2], player2, {venusNextExtension: true, turmoilExtension: true});
+  it('Arctic Algae works during WGT before Turmoil', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
+    player.playedCards.push(new ArcticAlgae());
+    // player2 is first player, and will resolve WGT.
+    const game = Game.newInstance('gameid', [player, player2], player2, {venusNextExtension: true, turmoilExtension: true});
 
   game.turmoil!.currentGlobalEvent = new TiredEarth(); // Lose one plant for each earth tag you have.
   player.tagsForTest = {earth: 1};
@@ -1049,18 +1048,40 @@ it('Arctic Algae works during WGT before Turmoil', () => {
   cb?.(); // Will gain 2 plants and lose 1 plant.
 
   expect(player.plants).to.eq(1);
-});
+  });
 
-it('game.tags excludes values accordingly', () => {
-  const player = TestPlayer.BLUE.newPlayer();
-  let game = Game.newInstance('gameid', [player], player, {pathfindersExpansion: true});
-  expect(game.tags).to.include(Tag.VENUS);
+  it('game.tags excludes values accordingly', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    let game = Game.newInstance('gameid', [player], player, {pathfindersExpansion: true});
+    expect(game.tags).to.include(Tag.VENUS);
 
-  game = Game.newInstance('gameid', [player], player, {pathfindersExpansion: true, bannedCards: [
-    CardName.DYSON_SCREENS,
-    CardName.THINK_TANK,
-  ]});
-  expect(game.tags).does.not.include(Tag.VENUS);
+    game = Game.newInstance('gameid', [player], player, {pathfindersExpansion: true, bannedCards: [
+      CardName.DYSON_SCREENS,
+      CardName.THINK_TANK,
+    ]});
+    expect(game.tags).does.not.include(Tag.VENUS);
+  });
+
+  it('creating game sets expansions', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, {pathfindersExpansion: true});
+    expect(game.gameOptions.pathfindersExpansion).is.true;
+    expect(game.gameOptions.expansions.pathfinders).is.true;
+  });
+
+  it('deserializing game sets expansions', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const game = Game.newInstance('gameid', [player], player, {pathfindersExpansion: true});
+    (game.gameOptions.expansions as any) = undefined;
+    const serialized = game.serialize();
+
+    expect(serialized.gameOptions.expansions).is.undefined;
+
+    const game2 = Game.deserialize(serialized);
+
+    expect(game2.gameOptions.pathfindersExpansion).is.true;
+    expect(game2.gameOptions.expansions.pathfinders).is.true;
+  });
 });
 
 function assertIsJSON(serialized: any) {

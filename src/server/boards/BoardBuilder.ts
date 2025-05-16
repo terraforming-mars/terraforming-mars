@@ -7,6 +7,7 @@ import {Random} from '../../common/utils/Random';
 import {inplaceShuffle} from '../utils/shuffle';
 import {GameOptions} from '../game/GameOptions';
 import {expansionSpaceColonies} from '../../common/boards/expansionSpaceColonies';
+import {CardName} from '../../common/cards/CardName';
 
 function colonySpace(id: SpaceId): Space {
   return {id, spaceType: SpaceType.COLONY, x: -1, y: -1, bonus: []};
@@ -94,6 +95,15 @@ export class BoardBuilder {
       case 'pathfinders': e = 'pathfindersExpansion'; break;
       case 'venus': e = 'venusNextExtension'; break;
       }
+
+      // Special case for Venera Base when Pathfinders is included, but Turmoil is not
+      if (entry.card === CardName.VENERA_BASE) {
+        if (this.gameOptions.includedCards.includes(entry.card) || (this.gameOptions.pathfindersExpansion && this.gameOptions.turmoilExtension)) {
+          this.spaces.push(colonySpace(entry.name));
+        }
+        continue;
+      }
+
       if (this.gameOptions[e] || this.gameOptions.includedCards.includes(entry.card)) {
         this.spaces.push(colonySpace(entry.name));
       }

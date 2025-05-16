@@ -88,13 +88,7 @@ export class BoardBuilder {
 
     // Include space colonies if the expansion is included, or if the card is included.
     for (const entry of expansionSpaceColonies) {
-      let e: keyof GameOptions = 'boardName'; // arbitrary
-      switch (entry.expansion) {
-      case 'promo': e = 'promoCardsOption'; break;
-      case 'pathfinders': e = 'pathfindersExpansion'; break;
-      case 'venus': e = 'venusNextExtension'; break;
-      }
-      if (this.gameOptions[e] || this.gameOptions.includedCards.includes(entry.card)) {
+      if (this.gameOptions.expansions[entry.expansion] || this.gameOptions.includedCards.includes(entry.card)) {
         this.spaces.push(colonySpace(entry.name));
       }
     }

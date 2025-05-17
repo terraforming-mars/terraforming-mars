@@ -86,7 +86,6 @@ describe('StarVegas', () => {
       SpaceName.CERES_SPACEPORT,
       SpaceName.DYSON_SCREENS,
       SpaceName.LUNAR_EMBASSY,
-      SpaceName.VENERA_BASE,
     ]);
   });
 

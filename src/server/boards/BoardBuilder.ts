@@ -96,9 +96,10 @@ export class BoardBuilder {
       case 'venus': e = 'venusNextExtension'; break;
       }
 
-      // Special case for Venera Base when Pathfinders is included, but Turmoil is not
+      // Special case for Venera Base when Pathfinders is included, but Turmoil or Venus is not
       if (entry.card === CardName.VENERA_BASE) {
-        if (this.gameOptions.includedCards.includes(entry.card) || (this.gameOptions.pathfindersExpansion && this.gameOptions.turmoilExtension)) {
+        const PathfindersTurmoilVenusInPlay = this.gameOptions.pathfindersExpansion && this.gameOptions.turmoilExtension && this.gameOptions.venusNextExtension
+        if (this.gameOptions.includedCards.includes(entry.card) || PathfindersTurmoilVenusInPlay) {
           this.spaces.push(colonySpace(entry.name));
         }
         continue;

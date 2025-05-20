@@ -29,14 +29,14 @@ export class AresSetup {
     // don't take solo into account, nor if you played with more than
     // five players.
     if (playerCount >= 5) {
-      AresHazards.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1, 2);
+      AresHazards.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 'top', 2);
     } else if (playerCount === 4) {
-      AresHazards.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1);
-      AresHazards.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, -1);
+      AresHazards.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 'top');
+      AresHazards.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 'bottom');
     } else if (playerCount <= 3) {
-      AresHazards.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1, 2);
-      AresHazards.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1);
-      AresHazards.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, -1);
+      AresHazards.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 'top', 2);
+      AresHazards.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 'top');
+      AresHazards.randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 'bottom');
     }
   }
 }

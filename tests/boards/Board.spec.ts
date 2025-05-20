@@ -154,12 +154,7 @@ describe('Board', () => {
     expect(board.getNthAvailableLandSpace(2, 1).id).eq('08');
     expect(board.getNthAvailableLandSpace(3, 1).id).eq('09');
     // Filter changes available spaces.
-    expect(board.getNthAvailableLandSpace(3, 1, undefined /* player */, (s) => s.id !== '09').id).eq('10');
-
-    // Filter player tokens (I'm looking at you, Land Claim)
-    board.getSpaceOrThrow('05').player = player;
-    expect(board.getNthAvailableLandSpace(3, 1, player2).id).eq('10');
-    expect(board.getNthAvailableLandSpace(3, 1, player).id).eq('09');
+    expect(board.getNthAvailableLandSpace(3, 1, (s) => s.id !== '09').id).eq('10');
 
     // bottom ends at 63 and looks like this
     //
@@ -173,7 +168,7 @@ describe('Board', () => {
 
   it('getNthAvailableLandSpace throws if no spaces available', () => {
     expect(() => {
-      board.getNthAvailableLandSpace(0, 1, undefined, () => false);
+      board.getNthAvailableLandSpace(0, 1, () => false);
     }).to.throw('no spaces available');
   });
 

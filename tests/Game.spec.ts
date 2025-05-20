@@ -34,6 +34,7 @@ import {GlobalParameter} from '../src/common/GlobalParameter';
 import {assertPlaceOcean} from './assertions';
 import {TiredEarth} from '../src/server/cards/pathfinders/TiredEarth';
 import {Tag} from '../src/common/cards/Tag';
+import {CaretakerContract} from '../src/server/cards/base/CaretakerContract';
 
 describe('Game', () => {
   it('should initialize with right defaults', () => {
@@ -1068,6 +1069,21 @@ describe('Game', () => {
     expect(game.gameOptions.pathfindersExpansion).is.true;
     expect(game.gameOptions.expansions.pathfinders).is.true;
   });
+
+  it('getSpaceByOffset skips Mars Nomad', () => {
+    const player = TestPlayer.BLUE.newPlayer();
+    const player2 = TestPlayer.RED.newPlayer();
+    const game = Game.newInstance('gameid', [player, player2], player);
+    game.projectDeck.drawPile.push(new CaretakerContract()); // Caretaker Contract costs 3
+
+    expect(game.getSpaceByOffset(1, TileType.EROSION_MILD).id).eq('08');
+
+    game.nomadSpace = '08';
+    game.projectDeck.drawPile.push(new CaretakerContract()); // Caretaker Contract costs 3
+
+    expect(game.getSpaceByOffset(1, TileType.EROSION_MILD).id).eq('09');
+  });
+
 
   it('deserializing game sets expansions', () => {
     const player = TestPlayer.BLUE.newPlayer();

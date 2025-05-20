@@ -1609,7 +1609,7 @@ export class Game implements IGame, Logger {
     const cost = this.discardForCost(cardCount, toPlace);
 
     const distance = Math.max(cost - 1, 0); // Some cards cost zero.
-    const space = this.board.getNthAvailableLandSpace(distance, direction, undefined /* player */,
+    const space = this.board.getNthAvailableLandSpace(distance, direction,
       (space) => {
         // TODO(kberg): this toPlace check is a short-term hack.
         //
@@ -1621,7 +1621,7 @@ export class Game implements IGame, Logger {
           return adjacentSpaces.every((sp) => sp.tile?.tileType !== TileType.CITY) && // no cities nearby
               adjacentSpaces.some((sp) => this.board.canPlaceTile(sp)); // can place forest nearby
         } else {
-          return true;
+          return this.nomadSpace !== space.id;
         }
       });
     if (space === undefined) {

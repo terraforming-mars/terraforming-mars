@@ -231,11 +231,11 @@ export abstract class Board {
 
   // |distance| represents the number of eligible spaces from the top left (or bottom right)
   // to count. So distance 0 means the first available space.
-  // If |direction| is 1, count from the top left. If -1, count from the other end of the map.
+  // |direction| describes whether counting starts from the top left or bottom right.
   // |predicate| allows callers to provide additional filtering of eligible spaces.
   public getNthAvailableLandSpace(
     distance: number,
-    direction: -1 | 1,
+    direction: 'top' | 'bottom',
     predicate: (value: Space) => boolean = (_x) => true): Space {
     const spaces = this.spaces.filter((space) => {
       return this.canPlaceTile(space) && space.player === undefined;
@@ -243,7 +243,7 @@ export abstract class Board {
     if (spaces.length === 0) {
       throw new Error('no spaces available');
     }
-    let idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
+    let idx = (direction === 'top') ? distance : (spaces.length - (distance + 1));
     while (idx < 0) {
       idx += spaces.length;
     }

@@ -1076,12 +1076,12 @@ describe('Game', () => {
     const game = Game.newInstance('gameid', [player, player2], player);
     game.projectDeck.drawPile.push(new CaretakerContract()); // Caretaker Contract costs 3
 
-    expect(game.getSpaceByOffset(1, TileType.EROSION_MILD).id).eq('08');
+    expect(game.getSpaceByOffset('top', TileType.EROSION_MILD).id).eq('08');
 
     game.nomadSpace = '08';
     game.projectDeck.drawPile.push(new CaretakerContract()); // Caretaker Contract costs 3
 
-    expect(game.getSpaceByOffset(1, TileType.EROSION_MILD).id).eq('09');
+    expect(game.getSpaceByOffset('top', TileType.EROSION_MILD).id).eq('09');
   });
 
 

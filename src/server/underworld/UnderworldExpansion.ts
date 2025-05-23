@@ -428,7 +428,9 @@ export class UnderworldExpansion {
   }
 
   static endGeneration(game: IGame) {
-    game.getPlayersInGenerationOrder().forEach((player) => player.underworldData.temperatureBonus = undefined);
+    for (const player of game.getPlayers()) {
+      player.underworldData.temperatureBonus = undefined;
+    }
   }
 
   //   // TODOc(kberg): add viz for temperature bonus.

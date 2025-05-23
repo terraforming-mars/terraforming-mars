@@ -10,6 +10,7 @@ import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 import {SulphurExports} from '../../../src/server/cards/venusNext/SulphurExports';
 import {Ecologist} from '../../../src/server/milestones/Ecologist';
 import {forceGenerationEnd, runAllActions} from '../../TestingUtils';
+import {Diversifier} from '../../../src/server/milestones/Diversifier';
 
 
 describe('Xavier', () => {
@@ -98,5 +99,16 @@ describe('Xavier', () => {
     forceGenerationEnd(game);
     expect(card.isDisabled).is.true;
     expect(ecologist.getScore(player)).eq(0);
+  });
+
+  it('Works with Diversifier', () => {
+    const diversifier = new Diversifier();
+
+    // There's a science tag in Search for Life
+    expect(diversifier.getScore(player)).eq(1);
+
+    card.action();
+
+    expect(diversifier.getScore(player)).eq(3);
   });
 });

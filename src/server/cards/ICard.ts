@@ -172,9 +172,10 @@ export interface ICard {
   resourceCount: number;
   resourceType?: CardResource;
   protectedResources?: boolean;
-  /** Currently used for The Moon, but can be expanded to encompass other tile-placing cards. */
+  /** Indicates the tile built, which can be used in a variety of useful ways. */
   tilesBuilt: ReadonlyArray<TileType>;
-  isDisabled?: boolean; // For Pharmacy Union and CEO cards.
+  /** For Pharmacy Union, the card is effectively out of the game.. CEO uses it to ensure it can't be retriggered.  */
+  isDisabled?: boolean;
   /**
    * Extra data that the game will serialize and deserialize along with the card.
    *

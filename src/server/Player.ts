@@ -36,7 +36,6 @@ import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tag} from '../common/cards/Tag';
 import {Timer} from '../common/Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
-import {GameCards} from './GameCards';
 import {AllOptions, DrawCards, DrawOptions} from './deferredActions/DrawCards';
 import {Units} from '../common/Units';
 import {MoonExpansion} from './moon/MoonExpansion';
@@ -1411,43 +1410,8 @@ export class Player implements IPlayer {
     return this.newCanAfford(o).canAfford;
   }
 
-  private getStandardProjects(): Array<IStandardProjectCard> {
-    const gameOptions = this.game.gameOptions;
-    return new GameCards(gameOptions)
-      .getStandardProjects()
-      .filter((card) => {
-        switch (card.name) {
-        // sell patents is not displayed as a card
-        case CardName.SELL_PATENTS_STANDARD_PROJECT:
-          return false;
-        // For buffer gas, show ONLY IF in solo AND 63TR mode
-        case CardName.BUFFER_GAS_STANDARD_PROJECT:
-          return this.game.isSoloMode() && gameOptions.soloTR;
-        case CardName.AIR_SCRAPPING_STANDARD_PROJECT:
-          return gameOptions.altVenusBoard === false;
-        case CardName.AIR_SCRAPPING_STANDARD_PROJECT_VARIANT:
-          return gameOptions.altVenusBoard === true;
-        case CardName.MOON_HABITAT_STANDARD_PROJECT_VARIANT_2:
-        case CardName.MOON_MINE_STANDARD_PROJECT_VARIANT_2:
-        case CardName.MOON_ROAD_STANDARD_PROJECT_VARIANT_2:
-          return gameOptions.moonStandardProjectVariant === true;
-        case CardName.MOON_HABITAT_STANDARD_PROJECT_VARIANT_1:
-        case CardName.MOON_MINE_STANDARD_PROJECT_VARIANT_1:
-        case CardName.MOON_ROAD_STANDARD_PROJECT_VARIANT_1:
-          return gameOptions.moonStandardProjectVariant1 === true;
-        case CardName.EXCAVATE_STANDARD_PROJECT:
-          return gameOptions.underworldExpansion === true;
-        case CardName.COLLUSION_STANDARD_PROJECT:
-          return gameOptions.underworldExpansion === true && gameOptions.turmoilExtension === true;
-        default:
-          return true;
-        }
-      })
-      .sort((a, b) => a.cost - b.cost);
-  }
-
   public getStandardProjectOption(): SelectCard<IStandardProjectCard> {
-    const standardProjects: Array<IStandardProjectCard> = this.getStandardProjects();
+    const standardProjects: Array<IStandardProjectCard> = this.game.getStandardProjects();
 
     return new SelectCard(
       'Standard projects',

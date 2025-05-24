@@ -125,12 +125,28 @@ export interface ICard {
    */
   onExcavation?(player: IPlayer, space: Space): void;
 
+  /**
+   * Callback when `player` gains (or loses) production.
+   *
+  * @param player the card owner.
+   */
   onProductionGain?(player: IPlayer, resource: Resource, amount: number): void;
+  /**
+   * Callback during the production phase. Used to reset between generations.
+   *
+   * @param player the card owner.
+   */
   onProductionPhase?(player: IPlayer): void;
 
-  /** Optional callback when ANY player adds a colony. */
+  /**
+   * Callback when ANY player adds a colony.
+   *
+   * @param player the player adding a colony.
+   * @param cardOwner the player who owns this card.
+   */
   onColonyAdded?(player: IPlayer, cardOwner: IPlayer): void;
-  /** Optional callback when `player` adds a colony to Leavitt. */
+
+  /** Callback when THIS player adds a colony to Leavitt. */
   onColonyAddedToLeavitt?(player: IPlayer): void;
 
   cost?: number; /** Used with IProjectCard and PreludeCard. */

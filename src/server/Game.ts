@@ -84,6 +84,7 @@ import {maybeRenamedAward} from '../common/ma/AwardName';
 import {Eris} from './cards/community/Eris';
 import {AresHazards} from './ares/AresHazards';
 import {hazardSeverity} from '../common/AresTileType';
+import {IStandardProjectCard} from './cards/IStandardProjectCard';
 
 // Can be overridden by tests
 
@@ -1576,6 +1577,41 @@ export class Game implements IGame, Logger {
 
   public getCardsInHandByType(player: IPlayer, cardType: CardType) {
     return player.cardsInHand.filter((card) => card.type === cardType);
+  }
+
+  public getStandardProjects(): Array<IStandardProjectCard> {
+    const gameOptions = this.gameOptions;
+    return new GameCards(gameOptions)
+      .getStandardProjects()
+      .filter((card) => {
+        switch (card.name) {
+        // sell patents is not displayed as a card
+        case CardName.SELL_PATENTS_STANDARD_PROJECT:
+          return false;
+          // For buffer gas, show ONLY IF in solo AND 63TR mode
+        case CardName.BUFFER_GAS_STANDARD_PROJECT:
+          return this.isSoloMode() && gameOptions.soloTR;
+        case CardName.AIR_SCRAPPING_STANDARD_PROJECT:
+          return gameOptions.altVenusBoard === false;
+        case CardName.AIR_SCRAPPING_STANDARD_PROJECT_VARIANT:
+          return gameOptions.altVenusBoard === true;
+        case CardName.MOON_HABITAT_STANDARD_PROJECT_VARIANT_2:
+        case CardName.MOON_MINE_STANDARD_PROJECT_VARIANT_2:
+        case CardName.MOON_ROAD_STANDARD_PROJECT_VARIANT_2:
+          return gameOptions.moonStandardProjectVariant === true;
+        case CardName.MOON_HABITAT_STANDARD_PROJECT_VARIANT_1:
+        case CardName.MOON_MINE_STANDARD_PROJECT_VARIANT_1:
+        case CardName.MOON_ROAD_STANDARD_PROJECT_VARIANT_1:
+          return gameOptions.moonStandardProjectVariant1 === true;
+        case CardName.EXCAVATE_STANDARD_PROJECT:
+          return gameOptions.underworldExpansion === true;
+        case CardName.COLLUSION_STANDARD_PROJECT:
+          return gameOptions.underworldExpansion === true && gameOptions.turmoilExtension === true;
+        default:
+          return true;
+        }
+      })
+      .sort((a, b) => a.cost - b.cost);
   }
 
   public log(message: string, f?: (builder: LogMessageBuilder) => void, options?: {reservedFor?: IPlayer}) {

@@ -5,8 +5,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {IActionCard, ICard} from '../ICard';
+import {IActionCard} from '../ICard';
 import {IStandardProjectCard} from '../IStandardProjectCard';
+import {SelectCard} from '../../inputs/SelectCard';
 
 export class StandardTechnology extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -19,29 +20,64 @@ export class StandardTechnology extends Card implements IActionCard, IProjectCar
       metadata: {
         cardNumber: 'UX00',
         renderData: CardRenderer.builder((b) => {
-          b.empty().startAction.text('REPEAT').br.plate('Standard projects').asterix().megacredits(-6);
+          b.empty().startAction.text('REPEAT').br.plate('Standard projects').asterix().megacredits(-8);
           b.plainText('Action: Use a standard project that you\'ve already done this generation, with its cost reduced by 8 M€.').br;
         }),
       },
     });
   }
-  public action(_player: IPlayer) {
-    return undefined;
+
+  public data: {projects: Array<CardName>} = {projects: []};
+
+  // Controls when the standard project discount applies. It doesn't apply when normally evaluating standard projects
+  //
+  // Does not need to be serialized.
+  private discount: boolean = false;
+
+  private getStandardProjects(player: IPlayer) {
+    this.discount = true;
+    try {
+      return player.game.getStandardProjects()
+        .filter((card) => this.data.projects.includes(card.name))
+        .filter((card) => card.canAct(player));
+    } finally {
+      this.discount = false;
+    }
   }
-  public canAct(_player: IPlayer): boolean {
-    throw new Error('Method not implemented.');
+  public canAct(player: IPlayer): boolean {
+    return this.getStandardProjects(player).length > 0;
   }
 
-  public data: {gens: Partial<Record<CardName, number>>} = {gens: {}};
-
-  onStandardProject(player: IPlayer, project: ICard): void {
-    this.data.gens[project.name] = player.game.generation;
+  public action(player: IPlayer) {
+    const standardProjects = this.getStandardProjects(player);
+    return new SelectCard(
+      'Standard projects',
+      'Confirm',
+      standardProjects)
+      .andThen(([card]) => {
+        this.discount = true;
+        try {
+          return card.action(player);
+        } finally {
+          this.discount = false;
+        }
+      });
   }
 
-  public getStandardProjectDiscount(player: IPlayer, card: IStandardProjectCard): number {
-    if (card && this.data.gens[card.name] === player.game.generation) {
+  onStandardProject(_player: IPlayer, project: IStandardProjectCard): void {
+    if (!this.data.projects.includes(project.name)) {
+      this.data.projects.push(project.name);
+    }
+  }
+
+  public getStandardProjectDiscount(_player: IPlayer, card: IStandardProjectCard): number {
+    if (this.discount && this.data.projects.includes(card.name)) {
       return 8;
     }
     return 0;
+  }
+
+  onProductionPhase(): void {
+    this.data = {projects: []};
   }
 }

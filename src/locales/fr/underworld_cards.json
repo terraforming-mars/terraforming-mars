@@ -180,7 +180,7 @@
     "Requires any 3 cities in play. Place a city on a space reserved for a different space city. Gain 2 corruption. Increase your M€ production one step for each city in play.": "Requires any 3 cities in play. Place a city on a space reserved for a different space city. Gain 2 corruption. Increase your M€ production one step for each city in play.",
     "Standard Technology": "Technologie Standard",
     "REPEAT": "REPEAT",
-    "Action: Use a standard project that you've already done this generation, with its cost reduced by 8 M€.": "Action: Use a standard project that you've already done this generation, with its cost reduced by 8 M€.",
+    "(Action: Use a standard project that you've already used this generation, with its cost reduced by 8 M€).": "(Action: Use a standard project that you've already used this generation, with its cost reduced by 8 M€).",
     "Stem Field Subsidies": "Stem Field Subsidies",
     "Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.",
     "1 VP per 3 data resources on this card.": "1 VP per 3 data resources on this card.",

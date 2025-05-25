@@ -49,7 +49,7 @@ class MarsFirstBonus02 extends Bonus {
 }
 
 class MarsFirstPolicy01 implements IPolicy {
-  readonly id = 'mfp01' as const;
+  readonly id = 'mp01' as const;
   readonly description = 'When you place a tile ON MARS, gain 1 steel';
 
   onTilePlaced(player: IPlayer, space: Space) {
@@ -60,7 +60,7 @@ class MarsFirstPolicy01 implements IPolicy {
 }
 
 class MarsFirstPolicy02 implements IPolicy {
-  readonly id = 'mfp02' as const;
+  readonly id = 'mp02' as const;
   readonly description = 'When you play a building tag, gain 2 M€';
 
   onCardPlayed(player: IPlayer, card: IProjectCard) {
@@ -69,7 +69,7 @@ class MarsFirstPolicy02 implements IPolicy {
 }
 
 class MarsFirstPolicy03 extends Policy {
-  readonly id = 'mfp03' as const;
+  readonly id = 'mp03' as const;
   readonly description = 'Your steel resources are worth 1 M€ extra';
 
   override onPolicyStartForPlayer(player: IPlayer): void {
@@ -82,7 +82,7 @@ class MarsFirstPolicy03 extends Policy {
 }
 
 class MarsFirstPolicy04 implements IPolicy {
-  readonly id = 'mfp04' as const;
+  readonly id = 'mp04' as const;
   readonly description = 'Spend 4 M€ to draw a Building card (Turmoil Mars First)';
 
   canAct(player: IPlayer) {

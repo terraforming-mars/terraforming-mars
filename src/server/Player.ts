@@ -79,6 +79,7 @@ import {AlliedParty} from './turmoil/AlliedParty';
 import {newStandardDraft} from './Draft';
 import {Message} from '../common/logs/Message';
 import {DiscordId} from './server/auth/discord';
+import {PolicyId} from '../common/turmoil/Types';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 const DEFAULT_GLOBAL_PARAMETER_STEPS = {
@@ -1944,6 +1945,11 @@ export class Player implements IPlayer {
       player.underworldData = d.underworldData;
     }
     if (d.alliedParty !== undefined) {
+      // TODO(kberg): Remove after 2025-08-01
+      const agenda = d.alliedParty.agenda;
+      if (agenda.policyId.startsWith('mfp')) {
+        agenda.policyId = (agenda.policyId.slice(0, 1) + agenda.policyId.slice(2)) as PolicyId;
+      }
       player._alliedParty = d.alliedParty;
     }
 

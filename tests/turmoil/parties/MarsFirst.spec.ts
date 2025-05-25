@@ -33,14 +33,14 @@ describe('MarsFirst', () => {
   });
 
   it('Ruling policy 1: When you place a tile ON MARS, gain 1 steel', () => {
-    setRulingParty(game, PartyName.MARS, 'mfp01');
+    setRulingParty(game, PartyName.MARS, 'mp01');
 
     addGreenery(player, '11');
     expect(player.steel).to.eq(1);
   });
 
   it('Ruling policy 2: When you play a building tag, gain 2 MC', () => {
-    setRulingParty(game, PartyName.MARS, 'mfp02');
+    setRulingParty(game, PartyName.MARS, 'mp02');
 
     const mine = new Mine();
     player.playCard(mine);
@@ -49,14 +49,14 @@ describe('MarsFirst', () => {
 
   it('Ruling policy 3: Your steel resources are worth 1 M€ extra', () => {
     expect(player.getSteelValue()).to.eq(2);
-    setRulingParty(game, PartyName.MARS, 'mfp03');
+    setRulingParty(game, PartyName.MARS, 'mp03');
     expect(player.getSteelValue()).to.eq(3);
     setRulingParty(game, PartyName.SCIENTISTS, 'sp01');
     expect(player.getSteelValue()).to.eq(2);
   });
 
   it('Ruling policy 4: Spend 4 M€ to draw a Building card', () => {
-    setRulingParty(game, PartyName.MARS, 'mfp04');
+    setRulingParty(game, PartyName.MARS, 'mp04');
 
     const marsFirstPolicy = MARS_FIRST_POLICY_4;
     player.megaCredits = 7;

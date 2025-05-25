@@ -38,7 +38,7 @@ export class TurmoilHandler {
     }
 
     // PoliticalAgendas MarsFirst P2 hook
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.MARS, 'mfp02')) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.MARS, 'mp02')) {
       MARS_FIRST_POLICY_2.onCardPlayed(player, selectedCard);
     }
   }

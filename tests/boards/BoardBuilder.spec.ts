@@ -9,6 +9,7 @@ import {ArabiaTerraBoard} from '../../src/server/boards/ArabiaTerraBoard';
 import {preservingShuffle} from '../../src/server/boards/BoardBuilder';
 import {AmazonisBoard} from '../../src/server/boards/AmazonisBoard';
 import {TestPlayer} from '../TestPlayer';
+import { CardName } from '../../src/common/cards/CardName';
 
 describe('BoardBuilder', () => {
   const preservingRuns = [
@@ -94,5 +95,45 @@ describe('BoardBuilder', () => {
       new SeededRandom(seed));
       expect(board.getSpaces(SpaceType.RESTRICTED, TestPlayer.BLUE.newPlayer())[0].bonus).is.empty;
     }
+  });
+  
+  it('Venera base spot shows when Pathfinders, Venus & Turmoil are all in play', () => {
+    const seed = Math.random();
+    const board = TharsisBoard.newInstance({
+      ...DEFAULT_GAME_OPTIONS,
+      pathfindersExpansion: true,
+      venusNextExtension: true,
+      turmoilExtension: true,
+    },
+    new SeededRandom(seed));
+
+    expect(board.getSpaces(SpaceType.COLONY, TestPlayer.BLUE.newPlayer())).to.deep.include({ id: '78', spaceType: 'colony', x: -1, y: -1, bonus: [] });
+  });
+
+  it('Venera base spot does not show when Turmoil is not in play', () => {
+    const seed = Math.random();
+    const board = TharsisBoard.newInstance({
+      ...DEFAULT_GAME_OPTIONS,
+      pathfindersExpansion: true,
+      venusNextExtension: true,
+      turmoilExtension: false,
+    },
+    new SeededRandom(seed));
+
+    expect(board.getSpaces(SpaceType.COLONY, TestPlayer.BLUE.newPlayer())).to.not.deep.include({ id: '78', spaceType: 'colony', x: -1, y: -1, bonus: [] });
+  });
+
+  it('Venera base spot shows when added to deck, even when Pathfinders is not in play', () => {
+    const seed = Math.random();
+    const board = TharsisBoard.newInstance({
+      ...DEFAULT_GAME_OPTIONS,
+      pathfindersExpansion: false,
+      venusNextExtension: true,
+      turmoilExtension: true,
+      includedCards: [CardName.VENERA_BASE],
+    },
+    new SeededRandom(seed));
+
+    expect(board.getSpaces(SpaceType.COLONY, TestPlayer.BLUE.newPlayer())).to.deep.include({ id: '78', spaceType: 'colony', x: -1, y: -1, bonus: [] });
   });
 });

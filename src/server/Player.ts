@@ -75,11 +75,10 @@ import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {Counter} from './behavior/Counter';
 import {TRSource} from '../common/cards/TRSource';
 import {IParty} from './turmoil/parties/IParty';
-import {AlliedParty} from './turmoil/AlliedParty';
 import {newStandardDraft} from './Draft';
 import {Message} from '../common/logs/Message';
 import {DiscordId} from './server/auth/discord';
-import {PolicyId} from '../common/turmoil/Types';
+import {AlliedParty, PolicyId} from '../common/turmoil/Types';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 const DEFAULT_GLOBAL_PARAMETER_STEPS = {

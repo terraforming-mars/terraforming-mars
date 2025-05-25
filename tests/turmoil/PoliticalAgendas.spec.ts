@@ -5,7 +5,7 @@ import {Game} from '../../src/server/Game';
 import {cast, runAllActions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {PoliticalAgendas} from '../../src/server/turmoil/PoliticalAgendas';
-import {AgendaStyle} from '../../src/common/turmoil/Types';
+import {AgendaStyle, PolicyId} from '../../src/common/turmoil/Types';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 
 describe('PoliticalAgendas', () => {
@@ -107,5 +107,24 @@ describe('PoliticalAgendas', () => {
       expect(PoliticalAgendas.currentAgenda(turmoil).bonusId).eq('kb02');
       expect(PoliticalAgendas.currentAgenda(turmoil).policyId).eq('kp02');
     });
+  });
+
+  it('Mars First serialization test', () => {
+    let game = Game.newInstance('gameid', [player1, player2], player1, {turmoilExtension: true, politicalAgendasExtension: AgendaStyle.STANDARD});
+    let turmoil = game.turmoil!;
+    const marsFirst = turmoil.getPartyByName(PartyName.MARS);
+    turmoil.rulingParty = marsFirst;
+    turmoil.chairman = player2;
+    PoliticalAgendas.setNextAgenda(turmoil, game);
+    runAllActions(game);
+
+    expect(PoliticalAgendas.currentAgenda(turmoil).policyId).eq('mp01');
+
+    turmoil.politicalAgendasData.agendas.get(PartyName.MARS)!.policyId = 'mfp01' as PolicyId;
+    game = Game.deserialize(game.serialize());
+    turmoil = game.turmoil!;
+
+    expect(PoliticalAgendas.currentAgenda(turmoil).bonusId).eq('mb01');
+    expect(PoliticalAgendas.currentAgenda(turmoil).policyId).eq('mp01');
   });
 });

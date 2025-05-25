@@ -1,7 +1,6 @@
 <!-- TODO(ryoku): merge with other party rendering code -->
 <template>
   <div>
-
     <template v-if="id === 'mp01'">
       <div class="policy-top-margin"><div v-if="partyName !== undefined" :class="'party-badge party-badge--mars_first'" v-i18n></div><div class="tile empty-tile-small"></div> : <span class="steel resource"></span></div>
     </template>
@@ -45,15 +44,17 @@
 <script lang="ts">
 
 import Vue from 'vue';
+import {PolicyId} from '@/common/turmoil/Types';
+import {PartyName} from '@/common/turmoil/PartyName';
 
 export default Vue.extend({
-  name: 'agenda',
+  name: 'AlliedPartyAgenda',
   props: {
     id: {
-      type: String as () => string,
+      type: String as () => PolicyId,
     },
     partyName: {
-      type: String as () => string,
+      type: String as () => PartyName,
     },
   },
 });

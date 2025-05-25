@@ -82,7 +82,6 @@ import Vue from 'vue';
 import {GameOptionsModel} from '@/common/models/GameOptionsModel';
 import {BoardName} from '@/common/boards/BoardName';
 import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
-import {AgendaStyle} from '@/common/turmoil/Types';
 import {translateTextWithParams} from '@/client/directives/i18n';
 
 const boardColorClass: Record<BoardName, string> = {
@@ -112,9 +111,8 @@ export default Vue.extend({
     },
   },
   computed: {
-
     isPoliticalAgendasOn(): boolean {
-      return (this.gameOptions.politicalAgendasExtension !== AgendaStyle.STANDARD);
+      return (this.gameOptions.politicalAgendasExtension !== 'Standard');
     },
     boardColorClass(): string {
       return boardColorClass[this.gameOptions.boardName];

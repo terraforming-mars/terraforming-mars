@@ -43,7 +43,7 @@ function createParties(): ReadonlyArray<IParty> {
 
 const UNINITIALIZED_POLITICAL_AGENDAS_DATA: PoliticalAgendasData = {
   agendas: new Map(),
-  agendaStyle: AgendaStyle.CHAIRMAN,
+  agendaStyle: 'Chairman',
 };
 
 export class Turmoil {
@@ -71,7 +71,7 @@ export class Turmoil {
     this.globalEventDealer = globalEventDealer;
   }
 
-  public static newInstance(game: IGame, agendaStyle: AgendaStyle = AgendaStyle.STANDARD): Turmoil {
+  public static newInstance(game: IGame, agendaStyle: AgendaStyle = 'Standard'): Turmoil {
     const dealer = GlobalEventDealer.newInstance(game);
 
     // The game begins with Greens in power and a Neutral chairman

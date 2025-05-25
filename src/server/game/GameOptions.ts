@@ -124,7 +124,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   moonStandardProjectVariant: false,
   moonStandardProjectVariant1: false,
   pathfindersExpansion: false,
-  politicalAgendasExtension: AgendaStyle.STANDARD,
+  politicalAgendasExtension: 'Standard',
   preludeDraftVariant: false,
   preludeExtension: false,
   prelude2Expansion: false,

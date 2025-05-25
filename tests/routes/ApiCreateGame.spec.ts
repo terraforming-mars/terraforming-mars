@@ -7,7 +7,6 @@ import {statusCode} from '../../src/common/http/statusCode';
 import {NewGameConfig} from '../../src/common/game/NewGameConfig';
 import {RandomBoardOption} from '../../src/common/boards/RandomBoardOption';
 import {RandomMAOptionType} from '../../src/common/ma/RandomMAOptionType';
-import {AgendaStyle} from '../../src/common/turmoil/Types';
 import {SimpleGameModel} from '../../src/common/models/SimpleGameModel';
 import {RecursivePartial} from '../../src/common/utils/utils';
 
@@ -84,7 +83,7 @@ describe('ApiCreateGame', () => {
         fastModeOption: false,
         showOtherPlayersVP: false,
         aresExtremeVariant: false,
-        politicalAgendasExtension: AgendaStyle.STANDARD,
+        politicalAgendasExtension: 'Standard',
         solarPhaseOption: false,
         removeNegativeGlobalEventsOption: false,
         modularMA: false,

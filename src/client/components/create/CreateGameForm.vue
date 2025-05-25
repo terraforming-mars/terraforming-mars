@@ -618,7 +618,7 @@ export default (Vue as WithRefs<Refs>).extend({
       solarPhaseOption: false,
       shuffleMapOption: false,
       aresExtremeVariant: false,
-      politicalAgendasExtension: AgendaStyle.STANDARD,
+      politicalAgendasExtension: 'Standard',
       undoOption: false,
       showTimers: true,
       fastModeOption: false,
@@ -670,7 +670,7 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     turmoil(value: boolean) {
       if (value === false) {
-        this.politicalAgendasExtension = AgendaStyle.STANDARD;
+        this.politicalAgendasExtension = 'Standard';
       }
     },
     initialDraft(value: boolean) {
@@ -897,23 +897,23 @@ export default (Vue as WithRefs<Refs>).extend({
       }
     },
     isPoliticalAgendasExtensionEnabled(): Boolean {
-      return this.politicalAgendasExtension !== AgendaStyle.STANDARD;
+      return this.politicalAgendasExtension !== 'Standard';
     },
     politicalAgendasExtensionToggle() {
-      if (this.politicalAgendasExtension === AgendaStyle.STANDARD) {
-        this.politicalAgendasExtension = AgendaStyle.RANDOM;
+      if (this.politicalAgendasExtension === 'Standard') {
+        this.politicalAgendasExtension = 'Random';
       } else {
-        this.politicalAgendasExtension = AgendaStyle.STANDARD;
+        this.politicalAgendasExtension = 'Standard';
       }
     },
     getPoliticalAgendasExtensionAgendaStyle(type: 'random' | 'chairman'): AgendaStyle {
       if (type === 'random') {
-        return AgendaStyle.RANDOM;
+        return 'Random';
       } else if (type === 'chairman') {
-        return AgendaStyle.CHAIRMAN;
+        return 'Chairman';
       } else {
         console.warn('AgendaStyle not found');
-        return AgendaStyle.STANDARD;
+        return 'Standard';
       }
     },
     isBeginnerToggleEnabled(): Boolean {

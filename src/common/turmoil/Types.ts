@@ -1,3 +1,5 @@
+import {PartyName} from './PartyName';
+
 export type AgendaStyle =
   /** Use the standard policies and bonuses. */
   'Standard' |
@@ -17,6 +19,7 @@ type PolicySuffix = typeof POLICY_SUFFIXES[number];
 export type BonusId = `${Party}${BonusSuffix}`;
 export type PolicyId = `${Party}${PolicySuffix}`
 
+/* A party's policy (and ruling bonus). Can vary based on the agenda style. */
 export type Agenda = {
   bonusId: BonusId;
   policyId: PolicyId;
@@ -24,3 +27,9 @@ export type Agenda = {
 
 export const BONUS_IDS: ReadonlyArray<BonusId> = PARTIES.flatMap((p) => BONUS_SUFFIXES.map((s) => `${p}${s}` as BonusId));
 export const POLICY_IDS: ReadonlyArray<PolicyId> = PARTIES.flatMap((p) => POLICY_SUFFIXES.map((s) => `${p}${s}` as PolicyId));
+
+/** When player has Mars Frontier Alliance, this is their political party alliance. */
+export type AlliedParty = {
+  partyName: PartyName;
+  agenda: Agenda;
+};

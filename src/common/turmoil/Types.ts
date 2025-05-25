@@ -1,8 +1,10 @@
-export enum AgendaStyle {
-  STANDARD = 'Standard',
-  RANDOM = 'Random',
-  CHAIRMAN = 'Chairman',
-}
+export type AgendaStyle =
+  /** Use the standard policies and bonuses. */
+  'Standard' |
+  /** Randomly choose policies and bonuses, which remain for the entire game. */
+  'Random' |
+  /** The incoming chairman sets the incoming policy and bonus each generation. */
+  'Chairman';
 
 const PARTIES = ['m', 's', 'u', 'k', 'r', 'g'] as const;
 const BONUS_SUFFIXES = ['b01', 'b02'] as const;

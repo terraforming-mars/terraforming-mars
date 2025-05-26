@@ -2,9 +2,11 @@ import {Tag} from '@/common/cards/Tag';
 import {CardType} from '@/common/cards/CardType';
 import {GameModule, GAME_MODULES} from '@/common/cards/GameModule';
 import {SearchIndex} from '@/client/components/cardlist/SearchIndex';
+import {CardResource} from '@/common/CardResource';
 
 export type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards' | 'agendas';
-type TagOption = Tag | 'none';
+export type TagOption = Tag | 'none';
+export type CardResourceOption = CardResource | 'none';
 
 const MODULE_ABBREVIATIONS: Record<GameModule, string> = {
   base: 'b',
@@ -66,6 +68,7 @@ export type CardListModel = {
   expansions: Record<GameModule, boolean>,
   types: Record<TypeOption, boolean>,
   tags: Record<TagOption, boolean>,
+  cardResources: Record<CardResourceOption, boolean>
   searchIndex: SearchIndex,
   namesOnly: boolean,
   showAdvanced: boolean;
@@ -127,6 +130,36 @@ export function hashToModel(windowLocationHash: string): CardListModel {
       event: true,
       clone: true,
       none: true,
+    },
+    cardResources: {
+      'Animal': true,
+      'Microbe': true,
+      'Fighter': true,
+      'Science': true,
+      'Floater': true,
+      'Asteroid': true,
+      'Camp': true,
+      'Preservation': true,
+      'Director': true,
+      'Disease': true,
+      'Graphene': true,
+      'Hydroelectric resource': true,
+      'Resource cube': true,
+      'Data': true,
+      'Syndicate Fleet': true,
+      'Venusian Habitat': true,
+      'Specialized Robot': true,
+      'Seed': true,
+      'Agenda': true,
+      'Orbital': true,
+      'Clone Trooper': true,
+      'Tool': true,
+      'Ware': true,
+      'Scoop': true,
+      'Journalism': true,
+      'Activist': true,
+      'Supply Chain': true,
+      'none': true,
     },
     searchIndex: SearchIndex.create(),
     namesOnly: true,

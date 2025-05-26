@@ -2621,26 +2621,26 @@ each(@parties, {
         background-size: 22px;
         vertical-align: middle;
     }
+}
 
-    // This copies stuff above, but scoped inside card-resources-counter. It shouldn't be necessary if
-    // the stuff above wasn't contained inside card-content.
-    @resource_types: microbe, animal, science, floater, fighter, camp,
-      asteroid, disease, preservation, data, syndicate-fleet, cube,
-      venusian-habitat, specialized-robot, seed, orbital, agenda, graphene, hydroelectric-resource,
-      clone-trooper, director;
-    each(@resource_types, {
-      .card-resource-@{value} {
-        background-image: url("./assets/resources/@{value}.png");
-      }
-    })
 
-    @underworld_resource_types: tool, ware, scoop, activist, journalism, supply-chain;
-    each(@underworld_resource_types, {
-      .card-resource-@{value} {
-        background-image: url("./assets/underworld/card-resource-@{value}.png");
-      }
-    })
-    .card-resource-cube {
-      background-image: url("./assets/cube.png");
-    }
+// Card resources images
+@resource_types: microbe, animal, science, floater, fighter, camp,
+  asteroid, disease, preservation, data, syndicate-fleet, cube,
+  venusian-habitat, specialized-robot, seed, orbital, agenda, graphene, hydroelectric-resource,
+  clone-trooper, director;
+each(@resource_types, {
+  .card-resource-@{value} {
+    background-image: url("./assets/resources/@{value}.png");
+  }
+})
+
+@underworld_resource_types: tool, ware, scoop, activist, journalism, supply-chain;
+each(@underworld_resource_types, {
+  .card-resource-@{value} {
+    background-image: url("./assets/underworld/card-resource-@{value}.png");
+  }
+})
+.card-resource-cube {
+  background-image: url("./assets/cube.png");
 }

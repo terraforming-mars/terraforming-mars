@@ -44,7 +44,7 @@
         <!-- types -->
         <div class="selection-row">
           <button id="toggle-checkbox" v-on:click="invertTypes()">
-              <span v-i18n>-</span>
+              <span>-</span>
           </button>
 
           <span v-for="type in allTypes" :key="type">
@@ -60,7 +60,7 @@
         <!-- tags -->
         <div class="selection-row">
           <button id="toggle-checkbox" v-on:click="invertTags()">
-              <span v-i18n>-</span>
+              <span>-</span>
           </button>
           <span v-for="tag in allTags" :key="tag">
             <input v-if="tag === 'event'" type="checkbox" :name="`${tag}-cardType`" :id="`${tag}-tag-checkbox`" v-model="types.event">
@@ -72,41 +72,55 @@
           </span>
         </div>
 
+        <!-- resource types -->
+        <div class="selection-row">
+          <button id="toggle-checkbox" v-on:click="invertCardResources()">
+              <span>-</span>
+          </button>
+          <span v-for="cardResource in allCardResources" :key="cardResource">
+            <input type="checkbox" :name="`${cardResource}-cardResource`" :id="`${cardResource}-resource-checkbox`" v-model="cardResources[cardResource]">
+            <label :for="`${cardResource}-resource-checkbox`" class="expansion-button">
+              <div :class="`expansion-icon card-resource resource-${cardResource}`"></div>
+            </label>
+          </span>
+        </div>
+
       </div>
+
       <!-- start cards -->
 
       <section class="card-list-cards-list">
           <h2 v-i18n>Project Cards</h2>
           <div class="cardbox" v-for="card in getAllProjectCards()" :key="card">
-              <Card v-if="showCard(card)" :card="{'name': card}" />
+              <Card v-if="showCard(card)" :card="cardModel(card)" />
           </div>
       </section>
       <br>
       <section class="card-list-cards-list">
           <h2 v-i18n>Corporations</h2>
           <div class="cardbox" v-for="card in getAllCorporationCards()" :key="card">
-              <Card v-if="showCard(card)" :card="{'name': card}" />
+              <Card v-if="showCard(card)" :card="cardModel(card)" />
           </div>
       </section>
       <br>
       <section class="card-list-cards-list">
           <h2 v-i18n>Preludes</h2>
           <div class="cardbox" v-for="card in getAllPreludeCards()" :key="card">
-              <Card v-if="showCard(card)" :card="{'name': card}" />
+              <Card v-if="showCard(card)" :card="cardModel(card)" />
           </div>
       </section>
       <br>
       <section class="card-list-cards-list">
           <h2 v-i18n>CEOs</h2>
           <div class="cardbox" v-for="card in getAllCeoCards()" :key="card">
-              <Card v-if="showCard(card)" :card="{'name': card}" />
+              <Card v-if="showCard(card)" :card="cardModel(card)" />
           </div>
       </section>
       <br>
       <section class="card-list-cards-list">
         <h2 v-i18n>Standard Projects</h2>
         <div class="cardbox" v-for="card in getAllStandardProjectCards()" :key="card">
-            <Card v-if="showCard(card)" :card="{'name': card}" />
+            <Card v-if="showCard(card)" :card="cardModel(card)" />
         </div>
       </section>
 
@@ -188,10 +202,12 @@ import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import {allGlobalEventNames, getGlobalEvent} from '@/client/turmoil/ClientGlobalEventManifest';
 import {byType, getCard, getCardOrThrow, getCards} from '@/client/cards/ClientCardManifest';
 import {COMMUNITY_COLONY_NAMES, OFFICIAL_COLONY_NAMES, PATHFINDERS_COLONY_NAMES} from '@/common/colonies/AllColonies';
+import {CardModel} from '@/common/models/CardModel';
 import {ColonyModel} from '@/common/models/ColonyModel';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {GameModule, GAME_MODULES} from '@/common/cards/GameModule';
-import {Tag} from '@/common/cards/Tag';
+import {ALL_TAGS} from '@/common/cards/Tag';
+import {CardResource} from '@/common/CardResource';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
 import {ClientCard} from '@/common/cards/ClientCard';
 import {translateText} from '@/client/directives/i18n';
@@ -200,7 +216,7 @@ import {AwardName, awardNames} from '@/common/ma/AwardName';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {WithRefs} from 'vue-typed-refs';
-import {TypeOption, CardListModel, hashToModel, modelToHash} from '@/client/components/cardlist/CardListModel';
+import {TypeOption, TagOption, CardResourceOption, CardListModel, hashToModel, modelToHash} from '@/client/components/cardlist/CardListModel';
 import {getAward, getMilestone} from '@/client/MilestoneAwardManifest';
 import {BonusId, BONUS_IDS, PolicyId, POLICY_IDS} from '@/common/turmoil/Types';
 import Card from '@/client/components/card/Card.vue';
@@ -253,11 +269,14 @@ export default (Vue as WithRefs<Refs>).extend({
         'agendas',
       ];
     },
-    allTags(): Array<Tag | 'none'> {
-      const results: Array<Tag | 'none'> = [];
-      for (const tag in Tag) {
-        if (Object.prototype.hasOwnProperty.call(Tag, tag)) {
-          results.push((<any>Tag)[tag]);
+    allTags(): ReadonlyArray<TagOption> {
+      return (ALL_TAGS as ReadonlyArray<TagOption>).concat('none');
+    },
+    allCardResources(): ReadonlyArray<CardResourceOption> {
+      const results: Array<CardResourceOption> = [];
+      for (const cardResource in CardResource) {
+        if (Object.prototype.hasOwnProperty.call(CardResource, cardResource)) {
+          results.push((<any>CardResource)[cardResource]);
         }
       }
       return results.concat('none');
@@ -294,6 +313,9 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     invertTags() {
       this.allTags.forEach((tag) => this.tags[tag] = !this.tags[tag]);
+    },
+    invertCardResources() {
+      this.allCardResources.forEach((cardResource) => this.cardResources[cardResource] = !this.cardResources[cardResource]);
     },
     invertTypes() {
       this.allTypes.forEach((type) => this.types[type] = !this.types[type]);
@@ -373,6 +395,12 @@ export default (Vue as WithRefs<Refs>).extend({
       }
       return matches;
     },
+    filterByCardResources(card: ClientCard): boolean {
+      if (card.resourceType === undefined) {
+        return this.cardResources['none'] === true;
+      }
+      return this.cardResources[card.resourceType] === true;
+    },
     showCard(cardName: CardName): boolean {
       if (!this.include(cardName, 'card')) return false;
 
@@ -383,6 +411,7 @@ export default (Vue as WithRefs<Refs>).extend({
 
       if (!this.filterByTags(card)) return false;
       if (!this.types[card.type]) return false;
+      if (!this.filterByCardResources(card)) return false;
       return this.expansions[card.module] === true;
     },
     showGlobalEvent(name: GlobalEventName): boolean {
@@ -410,6 +439,16 @@ export default (Vue as WithRefs<Refs>).extend({
     getLanguageCssClass() {
       const language = getPreferences().lang;
       return 'language-' + language;
+    },
+    cardModel(cardName: CardName): Partial<CardModel> {
+      const card = getCardOrThrow(cardName);
+      const model: Partial<CardModel> = {
+        name: cardName,
+      };
+      if (this.showMetadata) {
+        model.resources = card.resourceType !== undefined ? 2 : undefined;
+      }
+      return model;
     },
     colonyModel(colonyName: ColonyName): ColonyModel {
       return {

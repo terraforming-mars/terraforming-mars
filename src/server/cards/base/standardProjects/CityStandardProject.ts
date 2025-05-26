@@ -23,13 +23,6 @@ export class CityStandardProject extends StandardProjectCard {
     });
   }
 
-  protected override discount(player: IPlayer): number {
-    if (player.getPlayedCard(CardName.PREFABRICATION_OF_HUMAN_HABITATS)) {
-      return 2 + super.discount(player);
-    }
-    return super.discount(player);
-  }
-
   public override canPayWith(player: IPlayer) {
     if (player.getPlayedCard(CardName.PREFABRICATION_OF_HUMAN_HABITATS)) {
       return {steel: true};

@@ -18,11 +18,12 @@ describe('Underworld / StandardTechnology', () => {
   beforeEach(() => {
     card = new StandardTechnology();
     [game, player] = testGame(1);
-    player.playedCards.push(card);
     asteroidStandardProject = new AsteroidStandardProject();
   });
 
   it('canAct', () => {
+    player.playedCards.push(card);
+
     expect(card.canAct(player)).is.false;
 
     expect(asteroidStandardProject.canAct(player)).is.false;
@@ -51,7 +52,30 @@ describe('Underworld / StandardTechnology', () => {
     expect(card.canAct(player)).is.false;
   });
 
+  it('Works for standard projects taken before Standard Technology was played', () => {
+    player.megaCredits = 14;
+    asteroidStandardProject.action(player);
+    runAllActions(game);
+    expect(player.megaCredits).eq(0);
+
+    // Second play is discounted
+    player.megaCredits = 6;
+
+    expect(card.canAct(player)).is.false;
+
+    player.playedCards.push(card);
+
+    expect(card.canAct(player)).is.true;
+
+    // Next generation
+    forceGenerationEnd(game);
+    player.megaCredits = 14;
+    expect(asteroidStandardProject.canAct(player)).is.true;
+    expect(card.canAct(player)).is.false;
+  });
+
   it('action', () => {
+    player.playedCards.push(card);
     card.data.projects.push(CardName.ASTEROID_STANDARD_PROJECT, CardName.AQUIFER_STANDARD_PROJECT);
     player.megaCredits = 9;
 

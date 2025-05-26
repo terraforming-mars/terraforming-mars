@@ -146,6 +146,9 @@ export interface IPlayer {
    * False when the player does not have Preservation Program, or after the first TR in the action phase.
    */
   preservationProgram: boolean;
+  // Standard Technology: Underworld
+  standardProjectsThisGeneration: Set<CardName>;
+
 
   // The number of actions a player can take this round.
   // It's almost always 2, but certain cards can change this value.

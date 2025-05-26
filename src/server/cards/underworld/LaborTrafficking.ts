@@ -39,7 +39,7 @@ export class LaborTrafficking extends Card implements IProjectCard {
 
   public getStandardProjectDiscount(player: IPlayer, card: IStandardProjectCard): number {
     if (card.name !== CardName.SELL_PATENTS_STANDARD_PROJECT) {
-      if (this.data.generation !== player.game.generation) {
+      if (player.standardProjectsThisGeneration.size === 0) {
         return 6;
       }
     }

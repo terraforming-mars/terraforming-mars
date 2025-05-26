@@ -146,7 +146,13 @@ export interface IPlayer {
    * False when the player does not have Preservation Program, or after the first TR in the action phase.
    */
   preservationProgram: boolean;
-  // Standard Technology: Underworld
+  /**
+   * The list of standard projects (EXCEPT SELL PATENTS) this player has taken this generation.
+   *
+   * For Underworld: Standard Technology and Labor Trafficking
+   *
+   * Note: Sell Patents is absent to simplify Labor Trafficking. It's also not necessary.
+   */
   standardProjectsThisGeneration: Set<CardName>;
 
 

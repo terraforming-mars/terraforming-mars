@@ -81,6 +81,7 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
 
   protected projectPlayed(player: IPlayer) {
     player.game.log('${0} used ${1} standard project', (b) => b.player(player).card(this));
+    player.standardProjectsThisGeneration.add(this.name);
     this.onStandardProject(player);
   }
 

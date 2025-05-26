@@ -28,6 +28,7 @@ export class StandardTechnology extends Card implements IActionCard, IProjectCar
     });
   }
 
+  // TODO(kberg): Remove data by 2025-08-01
   public data: {projects: Array<CardName>} = {projects: []};
 
   // Controls when the standard project discount applies. It doesn't apply when normally evaluating standard projects
@@ -35,11 +36,15 @@ export class StandardTechnology extends Card implements IActionCard, IProjectCar
   // Does not need to be serialized.
   private discount: boolean = false;
 
+  private includeThisStandardProject(player: IPlayer, cardName: CardName) {
+    return player.standardProjectsThisGeneration.has(cardName) || this.data.projects.includes(cardName);
+  }
+
   private getStandardProjects(player: IPlayer) {
     this.discount = true;
     try {
       return player.game.getStandardProjects()
-        .filter((card) => this.data.projects.includes(card.name))
+        .filter((card) => this.includeThisStandardProject(player, card.name))
         .filter((card) => card.canAct(player));
     } finally {
       this.discount = false;
@@ -65,14 +70,8 @@ export class StandardTechnology extends Card implements IActionCard, IProjectCar
       });
   }
 
-  onStandardProject(_player: IPlayer, project: IStandardProjectCard): void {
-    if (!this.data.projects.includes(project.name)) {
-      this.data.projects.push(project.name);
-    }
-  }
-
-  public getStandardProjectDiscount(_player: IPlayer, card: IStandardProjectCard): number {
-    if (this.discount && this.data.projects.includes(card.name)) {
+  public getStandardProjectDiscount(player: IPlayer, card: IStandardProjectCard): number {
+    if (this.discount && this.includeThisStandardProject(player, card.name)) {
       return 8;
     }
     return 0;

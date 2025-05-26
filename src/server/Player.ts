@@ -169,9 +169,7 @@ export class Player implements IPlayer {
   // cards that provide 'next card' discounts. This will clear between turns.
   public removedFromPlayCards: Array<IProjectCard> = [];
   public preservationProgram = false;
-  // Underworld
   public underworldData: UnderworldPlayerData = UnderworldExpansion.initializePlayer();
-  // Standard Technology: Underworld
   public standardProjectsThisGeneration: Set<CardName> = new Set();
 
   // The number of actions a player can take this round.

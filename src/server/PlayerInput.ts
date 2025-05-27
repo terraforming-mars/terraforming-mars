@@ -64,8 +64,22 @@ export abstract class BasePlayerInput<T> implements PlayerInput {
     this.cb = cb;
     return this;
   }
-}
 
+  public setTitle(title: string | Message) : this {
+    this.title = title;
+    return this;
+  }
+
+  public setButtonLabel(buttonLabel: string) : this {
+    this.buttonLabel = buttonLabel;
+    return this;
+  }
+
+  public setWarning(warning: string | Message) : this {
+    this.warning = warning;
+    return this;
+  }
+}
 
 export function getCardFromPlayerInput<T extends ICard>(cards: ReadonlyArray<T>, cardName: string): {card: T, idx: number} {
   const idx = cards.findIndex((card) => card.name === cardName);

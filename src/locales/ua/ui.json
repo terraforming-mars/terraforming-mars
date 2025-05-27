@@ -855,7 +855,7 @@
   "Gain ${0} resource(s) for your Venus track bonus.": "Отримат ${0} ресурс(и) за бонусом на трасі Венери.",
   "Gain 1 resource for your Planetary track bonus.": "Отримати 1 ресурс за бонусом на планетарній трасі.",
   "Assign the clone tag for ${0}": "Призначити клонований тег для ${0}",
-  "Select an additional bonus from this space.": "Виберіть додатковий бонус з цього простору.",
+  "Select an additional bonus from this space": "Виберіть додатковий бонус з цього простору.",
   "Philares effect: select ${0} resource(s)": "Ефект Philares: виберіть ${0} ресурс(и)",
   "Global Event - Select 2 cards to discard": "Глобальна подія - Виберіть 2 карти для викидання",
   "Dry Deserts Global Event - Gain ${0} resource(s) for influence": "Глобальна подія Сухі пустелі - Отримати ${0} ресурс(и) за вплив",

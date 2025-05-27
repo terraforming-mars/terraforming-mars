@@ -84,7 +84,7 @@ export class PharmacyUnion extends CorporationCard {
       // TODO (Lynesth): Modify this when https://github.com/bafolts/terraforming-mars/issues/1670 is fixed
       if (player.canAfford({cost: 0, tr: {tr: 3}})) {
         player.defer(() => {
-          const orOptions = new OrOptions(
+          return new OrOptions(
             new SelectOption('Turn it face down to gain 3 TR and lose up to 4 M€').andThen(() => {
               this.isDisabled = true;
               player.increaseTerraformRating(3);
@@ -101,9 +101,7 @@ export class PharmacyUnion extends CorporationCard {
               game.log('${0} removed a disease from ${1} to gain 1 TR', (b) => b.player(player).card(this));
               return undefined;
             }),
-          );
-          orOptions.title = 'Choose the order of tag resolution for Pharmacy Union';
-          return orOptions;
+          ).setTitle('Choose the order of tag resolution for Pharmacy Union');
         }, Priority.PHARMACY_UNION);
         return undefined;
       }

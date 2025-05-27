@@ -6,6 +6,10 @@ import {Resource} from '../../src/common/Resource';
 import {ProtectedHabitats} from '../../src/server/cards/base/ProtectedHabitats';
 import {BotanicalExperience} from '../../src/server/cards/pathfinders/BotanicalExperience';
 import {LunarSecurityStations} from '../../src/server/cards/moon/LunarSecurityStations';
+import {cast, runAllActions} from '../TestingUtils';
+import {IGame} from '../../src/server/IGame';
+import {OrOptions} from '../../src/server/inputs/OrOptions';
+import {assertIsMaybeBlock} from '../underworld/underworldAssertions';
 
 describe('RemoveResources', () => {
   let player: TestPlayer;
@@ -75,5 +79,22 @@ describe('RemoveResources', () => {
     expect(target.plants).eq(3);
   });
 
-  // TODO(kberg): Underworld blocking.
+  it('Underworld blocking', () => {
+    let game: IGame;
+    [game, player, target] = testGame(3, {underworldExpansion: true});
+    target.plants = 15;
+    target.underworldData.corruption = 1;
+    new RemoveResources(target, player, Resource.PLANTS, 2).andThen(andThen).execute();
+    runAllActions(game);
+    const orOptions = cast(target.popWaitingFor(), OrOptions);
+
+    assertIsMaybeBlock(player, orOptions, 'corruption');
+    expect(removed).eq(0);
+    expect(target.plants).eq(15);
+    expect(target.underworldData.corruption).eq(0);
+
+    assertIsMaybeBlock(player, orOptions, 'do not block');
+    expect(removed).eq(2);
+    expect(target.plants).eq(13);
+  });
 });

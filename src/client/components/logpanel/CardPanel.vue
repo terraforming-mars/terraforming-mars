@@ -71,7 +71,6 @@ export default Vue.extend({
     hideMe() {
       this.$emit('hide');
     },
-    // TODO(kberg): getColony could have the actual game colony by changing this component's properties.
     getColony(name: ColonyName): ColonyModel {
       return {
         colonies: [],

@@ -156,7 +156,6 @@ export class Player implements IPlayer {
 
   // Custom cards
   // Community Leavitt Station and Pathfinders Leavitt Station
-  // TODO(kberg): move scienceTagCount to Tags?
   public scienceTagCount: number = 0;
   // PoliticalAgendas Scientists P41
   public hasTurmoilScienceTagBonus: boolean = false;
@@ -1811,7 +1810,6 @@ export class Player implements IPlayer {
       needsToDraft: this.needsToDraft,
       cardDiscount: this.colonies.cardDiscount,
       // Colonies
-      // TODO(kberg): consider a ColoniesSerializer or something.
       fleetSize: this.colonies.getFleetSize(),
       tradesThisGeneration: this.colonies.tradesThisGeneration,
       colonyTradeOffset: this.colonies.tradeOffset,

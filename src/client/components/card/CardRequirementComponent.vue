@@ -104,8 +104,6 @@ export default Vue.extend({
       return classes;
     },
     componentClassArray(): Array<string> {
-      // TODO(kberg): This duplicates CardRenderItemComponent. That shouldn't be
-      // necessary.
       switch (this.type) {
       case RequirementType.OXYGEN:
         return ['card-global-requirement', 'card-oxygen--req'];

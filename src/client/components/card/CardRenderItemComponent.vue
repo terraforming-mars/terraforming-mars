@@ -228,11 +228,10 @@ export default Vue.extend({
           return ['card-hazard-tile'];
         }
       case CardRenderItemType.MOON_HABITAT_RATE:
-        // TODO(kberg): Update to habitat rate
         if (this.item.size !== undefined) {
-          return ['card-colony-rate', `card-colony-rate--${this.item.size}`];
+          return ['card-habitat-rate', `card-habitat-rate--${this.item.size}`];
         } else {
-          return ['card-colony-rate'];
+          return ['card-habitat-rate'];
         }
       case CardRenderItemType.MOON_MINE:
         if (this.item.secondaryTag === AltSecondaryTag.MOON_MINING_RATE) {

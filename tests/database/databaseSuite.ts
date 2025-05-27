@@ -264,6 +264,7 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
           'participantIds': [
             'p-player1-id1',
             'p-player2-id1',
+            'spectator-id1',
           ],
         },
       ]);
@@ -275,6 +276,7 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
           'participantIds': [
             'p-player1-id1',
             'p-player2-id1',
+            'spectator-id1',
           ],
         },
         {
@@ -283,13 +285,13 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
             'p-player1-id2',
             'p-player2-id2',
             'p-player3-id2',
+            'spectator-id2',
           ],
         },
       ]);
     });
 
-    it('getGameId', async () => {
-      // TODO(kberg): this does not test spectator ids.
+    it('getGameId by PlayerID and Spectator ID', async () => {
       testGame(2, {}, '1');
       await db.lastSaveGamePromise;
       testGame(3, {}, '2');
@@ -297,6 +299,10 @@ export function describeDatabaseSuite<T extends ITestDatabase>(dtor: DatabaseTes
       expect(await db.getGameId('p-player1-id1')).eq('game-id1');
       expect(await db.getGameId('p-player3-id2')).eq('game-id2');
       expect(db.getGameId('p-unknown')).to.be.rejected;
+
+      expect(await db.getGameId('spectator-id1')).eq('game-id1');
+      expect(await db.getGameId('spectator-id2')).eq('game-id2');
+      expect(db.getGameId('spectator-unknown')).to.be.rejected;
     });
 
     it('deleteGameNbrSaves', async () => {

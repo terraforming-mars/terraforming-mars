@@ -33,8 +33,8 @@ export class ChoosePoliticalAgenda extends DeferredAction {
       });
     });
 
-    const orBonuses = new OrOptions(...bonuses);
-    orBonuses.title = message('Select a ${0} bonus', (b) => b.party(this.party));
+    const orBonuses = new OrOptions(...bonuses)
+      .setTitle(message('Select a ${0} bonus', (b) => b.party(this.party)));
 
     const policies = this.party.policies.map((policy) => {
       return new SelectOption(policyDescription(policy, this.player),
@@ -44,8 +44,8 @@ export class ChoosePoliticalAgenda extends DeferredAction {
           return undefined;
         });
     });
-    const orPolicies = new OrOptions(...policies);
-    orPolicies.title = message('Select a ${0} policy', (b) => b.party(this.party));
+    const orPolicies = new OrOptions(...policies)
+      .setTitle(message('Select a ${0} policy', (b) => b.party(this.party)));
 
     return new OrOptions(orBonuses, orPolicies);
   }

@@ -888,7 +888,7 @@
     "Gain ${0} resource(s) for your Venus track bonus.": "금성개척률 트랙 보너스 효과로 기본 자원 ${0}개를 획득",
     "Gain 1 resource for your Planetary track bonus.": "행성 트랙 보너스 효과로 기본 자원 1개를 획득",
     "Assign the clone tag for ${0}": "${0}에 대한 복제 태그 할당",
-    "Select an additional bonus from this space.": "해당 타일의 추가 보너스 선택",
+    "Select an additional bonus from this space": "해당 타일의 추가 보너스 선택",
     "Philares effect: select ${0} resource(s)": "필레어스 지속 효과: 자원 ${0}개 선택",
     "Global Event - Select 2 cards to discard": "행성계 사건 - 버릴 카드 2장 선택",
     "Dry Deserts Global Event - Remove an Ocean tile from the board": "마른 사막 행성계 사건 - 해양 타일을 1장 제거합니다.",

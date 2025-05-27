@@ -47,8 +47,8 @@ export class UtopiaInvest extends CorporationCard implements IActionCard {
     player.game.log('${0} decreased ${1} production 1 step to gain 4 ${2}', (b) => b.player(player).string(type).string(type));
   }
   public action(player: IPlayer) {
-    const result = new OrOptions();
-    result.title = 'Select production to decrease one step and gain 4 resources';
+    const result = new OrOptions()
+      .setTitle('Select production to decrease one step and gain 4 resources');
 
     const options = [];
 

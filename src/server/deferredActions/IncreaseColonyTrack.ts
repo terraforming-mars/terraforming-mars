@@ -27,7 +27,9 @@ export class IncreaseColonyTrack extends DeferredAction {
       return undefined;
     }
 
-    const options = new OrOptions();
+    const options = new OrOptions()
+      .setTitle(message('Increase ${0} colony track before trade', (b) => b.colony(this.colony)));
+
     for (let step = this.steps; step > 0; step--) {
       options.options.push(
         new SelectOption(message('Increase colony track ${0} step(s)', (b) => b.number(step)))
@@ -39,7 +41,6 @@ export class IncreaseColonyTrack extends DeferredAction {
           }),
       );
     }
-    options.title = message('Increase ${0} colony track before trade', (b) => b.colony(this.colony));
 
     options.options.push(
       new SelectOption('Don\'t increase colony track').andThen(() => {

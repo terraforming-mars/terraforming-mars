@@ -331,9 +331,9 @@ export class UnderworldExpansion {
     if (target.underworldData.corruption === 0 && militaryContractorFighters === 0) {
       return cb(true);
     }
-    const options = new OrOptions();
-    options.title = message('Spend 1 corruption to block an attack by ${0}?', (b) => b.player(perpetrator));
-    options.warning = msg;
+    const options = new OrOptions()
+      .setTitle(message('Spend 1 corruption to block an attack by ${0}?', (b) => b.player(perpetrator)))
+      .setWarning(msg);
     if (privateMilitaryContractor !== undefined && militaryContractorFighters > 0) {
       options.options.push(
         new SelectOption(

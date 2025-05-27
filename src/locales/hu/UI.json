@@ -941,7 +941,7 @@
   "Gain ${0} resource(s) for your Venus track bonus.": "Kapsz ${0} erőforrást a Vénusz szint bónuszából!",
   "Gain 1 resource for your Planetary track bonus.": "Kapsz 1 erőforrást a Bolygósáv bónuszából!",
   "Assign the clone tag for ${0}": "Rendeld hozzá a klóncímkét a(z) ${0}-hoz",
-  "Select an additional bonus from this space.": "Válassz egy további bónuszt erről a mezőről!",
+  "Select an additional bonus from this space": "Válassz egy további bónuszt erről a mezőről!",
   "Philares effect: select ${0} resource(s)": "Philares cég hatás: Válassz ${0} erőforrást",
   "Global Event - Select 2 cards to discard": "Globális esemény: Dobj el 2 kártyát!",
   "Dry Deserts Global Event - Remove an Ocean tile from the board": "Száraz sivatagok globális esemény: Vegyél le 1 Óceánlapkát",

@@ -48,7 +48,7 @@ export class OlympusConference extends Card implements IProjectCard {
           player.addResourceTo(this, 1);
           return undefined;
         }
-        const options = new OrOptions(
+        return new OrOptions(
           new SelectOption('Remove a science resource from this card to draw a card', 'Remove resource').andThen(() => {
             player.removeResourceFrom(this);
             player.drawCard();
@@ -58,9 +58,7 @@ export class OlympusConference extends Card implements IProjectCard {
             player.addResourceTo(this, 1);
             return undefined;
           }),
-        );
-        options.title = 'Select an option for Olympus Conference';
-        return options;
+        ).setTitle('Select an option for Olympus Conference');
       },
       Priority.SUPERPOWER); // Unshift that deferred action
     }

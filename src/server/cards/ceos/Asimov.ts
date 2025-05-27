@@ -49,9 +49,9 @@ export class Asimov extends CeoCard {
     const validAwards = this.getValidAwards(player);
     inplaceShuffle(validAwards, UnseededRandom.INSTANCE);
 
-    const freeAward = new OrOptions();
-    freeAward.title = 'Select award to put into play and fund';
-    freeAward.buttonLabel = 'Confirm';
+    const freeAward = new OrOptions()
+      .setTitle('Select award to put into play and fund')
+      .setButtonLabel('Confirm');
 
     freeAward.options = validAwards.slice(0, awardCount).map((award) => this.selectAwardToFund(player, award));
     freeAward.options.push(

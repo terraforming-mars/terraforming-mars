@@ -71,8 +71,8 @@ export class Atmoscoop extends Card implements IProjectCard {
       game.increaseVenusScaleLevel(player, 2);
       return undefined;
     });
-    const increaseTempOrVenus = new OrOptions(increaseTemp, increaseVenus);
-    increaseTempOrVenus.title = 'Choose global parameter to raise';
+    const increaseTempOrVenus = new OrOptions(increaseTemp, increaseVenus)
+      .setTitle('Choose global parameter to raise');
 
     if (!this.temperatureIsMaxed(game) && this.venusIsMaxed(game)) {
       player.game.increaseTemperature(player, 2);

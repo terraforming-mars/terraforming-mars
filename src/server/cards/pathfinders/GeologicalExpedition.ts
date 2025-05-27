@@ -62,8 +62,7 @@ export class GeologicalExpedition extends Card implements IProjectCard {
     }
     const filtered = bonuses.filter((bonus) => VALID_BONUSES.includes(bonus));
     const unique = Array.from(new Set(filtered));
-    const options = new OrOptions();
-    options.title = 'Select an additional bonus from this space.';
+    const options = new OrOptions().setTitle('Select an additional bonus from this space');
     unique.forEach((bonus) => {
       options.options.push(new SelectOption(
         SpaceBonus.toString(bonus),

@@ -40,13 +40,18 @@ export class CommunicationCenter extends Card implements IProjectCard {
 
   public onResourceAdded(player: IPlayer, playedCard: ICard) {
     if (playedCard.name !== this.name) return;
-    while (this.resourceCount >= 3) {
-      this.resourceCount -= 3;
-      player.drawCard(1);
-      player.game.log('${0} automatically removed 3 data from ${1} to draw a card.', (b) => {
-        b.player(player).card(this);
-      });
-    }
+
+    // 
+    const priority = (playedCard.name === CardName.SOLAR_STORM) ? Priority.BACK_OF_THE_LINE : Priority.DEFAULT;
+    player.defer(() => {
+        while (this.resourceCount >= 3) {
+          this.resourceCount -= 3;
+          player.drawCard(1);
+          player.game.log('${0} automatically removed 3 data from ${1} to draw a card.', (b) => {
+            b.player(player).card(this);
+          });
+        }
+    }, priority);
   }
 
   public onCardPlayedFromAnyPlayer(thisCardOwner: IPlayer, _playedCardOwner: IPlayer, card: IProjectCard) {

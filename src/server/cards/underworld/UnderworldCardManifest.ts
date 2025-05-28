@@ -71,7 +71,7 @@ import {ManMadeVolcano} from './ManMadeVolcano';
 import {MartianExpress} from './MartianExpress';
 // // import {MediaFrenzy} from './MediaFrenzy';
 import {MediaStir} from './MediaStir';
-// // import {MercenaryAssault} from './MercenaryAssault';
+import {MercenarySquad} from './MercenarySquad';
 import {MicroGeodesics} from './MicroGeodesics';
 import {Microgravimetry} from './Microgravimetry';
 import {MicroprobingTechnology} from './MicroprobingTechnology';
@@ -225,7 +225,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.GEOLOGICAL_SURVEY_UNDERWORLD]: {Factory: GeologicalSurvey},
     // 82-90
     [CardName.CLASS_ACTION_LAWSUIT]: {Factory: ClassActionLawsuit},
-    // // [CardName.MERCENARY_ASSAULT]: {Factory: MercenaryAssault}, // Blocking rules.
+    [CardName.MERCENARY_SQUAD]: {Factory: MercenarySquad},
     [CardName.RESEARCH_DEVELOPMENT_HUB]: {Factory: ResearchDevelopmentHub},
     [CardName.PLANETARY_RIGHTS_BUYOUT]: {Factory: PlanetaryRightsBuyout},
     // // [CardName.MEDIA_FRENZY]: {Factory: MediaFrenzy}, // Scoops is not quite clear yet.

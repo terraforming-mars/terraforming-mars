@@ -39,10 +39,10 @@ export class CorporateTheft extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    if (player.game.isSoloMode()) {
+    const game = player.game;
+    if (game.isSoloMode()) {
       UnderworldExpansion.gainCorruption(player, 1, {log: true});
     }
-    const game = player.game;
     game.defer(new RemoveResourcesFromCard(player, undefined, 1, {source: 'opponents', blockable: true, autoselect: false})).andThen((response) => {
       if (response.proceed && response.card !== undefined) {
         const type = response.card.resourceType;

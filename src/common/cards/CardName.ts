@@ -1008,7 +1008,7 @@ export enum CardName {
   CUT_THROAT_BUDGETING = 'Cut-throat Budgeting',
   GEOLOGICAL_SURVEY_UNDERWORLD = 'Geological Survey:underworld',
   CLASS_ACTION_LAWSUIT = 'Class-action Lawsuit',
-  MERCENARY_ASSAULT = 'Mercenary Assault',
+  MERCENARY_SQUAD = 'Mercenary Squad',
   RESEARCH_DEVELOPMENT_HUB = 'Research & Development Hub',
   PLANETARY_RIGHTS_BUYOUT = 'Planetary Rights Buyout',
   MEDIA_FRENZY = 'Media Frenzy',

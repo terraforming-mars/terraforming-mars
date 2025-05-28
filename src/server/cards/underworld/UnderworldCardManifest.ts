@@ -69,7 +69,7 @@ import {Landfill} from './Landfill';
 import {LobbyingNetwork} from './LobbyingNetwork';
 import {ManMadeVolcano} from './ManMadeVolcano';
 import {MartianExpress} from './MartianExpress';
-// // import {MediaFrenzy} from './MediaFrenzy';
+import {MediaFrenzy} from './MediaFrenzy';
 import {MediaStir} from './MediaStir';
 import {MercenarySquad} from './MercenarySquad';
 import {MicroGeodesics} from './MicroGeodesics';
@@ -228,7 +228,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.MERCENARY_SQUAD]: {Factory: MercenarySquad},
     [CardName.RESEARCH_DEVELOPMENT_HUB]: {Factory: ResearchDevelopmentHub},
     [CardName.PLANETARY_RIGHTS_BUYOUT]: {Factory: PlanetaryRightsBuyout},
-    // // [CardName.MEDIA_FRENZY]: {Factory: MediaFrenzy}, // Scoops is not quite clear yet.
+    [CardName.MEDIA_FRENZY]: {Factory: MediaFrenzy},
     [CardName.INVESTIGATIVE_JOURNALISM]: {Factory: InvestigativeJournalism},
     [CardName.WHALES]: {Factory: Whales},
     [CardName.GUERILLA_ECOLOGISTS]: {Factory: GuerillaEcologists},

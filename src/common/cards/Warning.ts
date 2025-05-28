@@ -16,4 +16,6 @@ export type Warning =
  'marsIsTerraformed' |
  'ineffectiveDoubleDown' |
  'noMatchingCards' |
- 'unusableEventsForAstraMechanica';
+ 'unusableEventsForAstraMechanica' |
+ 'noEffect' |
+ 'selfTarget';

@@ -15,7 +15,7 @@ import {Casino} from './Casino';
 import {CaveCity} from './CaveCity';
 import {CentralReservoir} from './CentralReservoir';
 import {ChemicalFactory} from './ChemicalFactory';
-// import {ClassActionLawsuit} from './ClassActionLawsuit';
+import {ClassActionLawsuit} from './ClassActionLawsuit';
 import {CloudVortexOutpost} from './CloudVortexOutpost';
 import {CollusionStandardProject} from './CollusionStandardProject';
 import {ConcessionRights} from './ConcessionRights';
@@ -224,7 +224,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.CUT_THROAT_BUDGETING]: {Factory: CutThroatBudgeting},
     [CardName.GEOLOGICAL_SURVEY_UNDERWORLD]: {Factory: GeologicalSurvey},
     // 82-90
-    // [CardName.CLASS_ACTION_LAWSUIT]: {Factory: ClassActionLawsuit},
+    [CardName.CLASS_ACTION_LAWSUIT]: {Factory: ClassActionLawsuit},
     // // [CardName.MERCENARY_ASSAULT]: {Factory: MercenaryAssault}, // Blocking rules.
     [CardName.RESEARCH_DEVELOPMENT_HUB]: {Factory: ResearchDevelopmentHub},
     [CardName.PLANETARY_RIGHTS_BUYOUT]: {Factory: PlanetaryRightsBuyout},

@@ -35,9 +35,6 @@ export enum Phase {
   PRODUCTION = 'production',
   /** Standard rulebook Solar phase, triggers WGT, and final greeneries, but not Turmoil. */
   SOLAR = 'solar',
-  /** Turmoil phase. */
-  // TODO(kberg): Delete Turmoil phase by 2025-05-01
-  TURMOIL = 'turmoil',
   /** Does some cleanup and also executes the rulebook's turn order phase. */
   INTERGENERATION = 'intergeneration',
 

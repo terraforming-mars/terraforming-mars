@@ -251,7 +251,7 @@
 
     "Standard Technology": "標準テクノロジー",
     "REPEAT": "",
-    "Action: Use a standard project that you've already done this generation, with its cost reduced by 8 M€.": "アクション：この世代、すでに行った標準プロジェクトをコスト-8MCでプレイする.",
+    "(Action: Use a standard project that you've already used this generation, with its cost reduced by 8 M€).": "アクション：この世代、すでに行った標準プロジェクトをコスト-8MCでプレイする.",
 
     "Stem Field Subsidies": "STEMフィールド補助金",
     "Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "効果：科学タグをプレイ時、1データ獲得. 地下資源を調査する.",

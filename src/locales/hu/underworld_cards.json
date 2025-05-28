@@ -180,7 +180,7 @@
   "Requires any 3 cities in play. Place a city on a space reserved for a different space city. Gain 2 corruption. Increase your M€ production one step for each city in play.": "Kijátszási feltétel: legalább 3 város. Rakj le 1 Városlapkát az űrbe egy olyan helyre, ami MÁSNAK VAN FENNTARTVA! Növeld a M€-termelésed minden város után 1 értékkel!",
   "Standard Technology": "Szabványos technológia",
   "REPEAT": "ÚJRA",
-  "Action: Use a standard project that you've already done this generation, with its cost reduced by 8 M€.": "Akció: Használd újra egy olyan általános projektet, amit már használtál ebben a generációban, és fizess érte 8 M€-tel kevesebbet!",
+  "(Action: Use a standard project that you've already used this generation, with its cost reduced by 8 M€).": "Akció: Használd újra egy olyan általános projektet, amit már használtál ebben a generációban, és fizess érte 8 M€-tel kevesebbet!",
   "Stem Field Subsidies": "Őssejtek támogatása",
   "Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "Hatás: Amikor kijátszol egy tudomány ikont, ezt is beleértve, rakj 1 adatot egy TETSZŐLEGES kártyára és azonosíts egy földalatti erőforrást!",
   "Subnautic Pirates": "Tengeralatti kalózok",

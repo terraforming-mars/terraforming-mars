@@ -247,6 +247,7 @@ describe('Player', () => {
         [GlobalParameter.MOON_MINING_RATE]: 0,
         [GlobalParameter.MOON_LOGISTICS_RATE]: 0,
       },
+      standardProjectsThisGeneration: [],
     };
 
     const newPlayer = Player.deserialize(json);

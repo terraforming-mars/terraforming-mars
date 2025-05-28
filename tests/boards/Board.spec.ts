@@ -149,31 +149,26 @@ describe('Board', () => {
     //
     //    l o l o o
     //   l l l l l o
-    expect(board.getNthAvailableLandSpace(0, 1).id).eq('03');
-    expect(board.getNthAvailableLandSpace(1, 1).id).eq('05');
-    expect(board.getNthAvailableLandSpace(2, 1).id).eq('08');
-    expect(board.getNthAvailableLandSpace(3, 1).id).eq('09');
+    expect(board.getNthAvailableLandSpace(0, 'top').id).eq('03');
+    expect(board.getNthAvailableLandSpace(1, 'top').id).eq('05');
+    expect(board.getNthAvailableLandSpace(2, 'top').id).eq('08');
+    expect(board.getNthAvailableLandSpace(3, 'top').id).eq('09');
     // Filter changes available spaces.
-    expect(board.getNthAvailableLandSpace(3, 1, undefined /* player */, (s) => s.id !== '09').id).eq('10');
-
-    // Filter player tokens (I'm looking at you, Land Claim)
-    board.getSpaceOrThrow('05').player = player;
-    expect(board.getNthAvailableLandSpace(3, 1, player2).id).eq('10');
-    expect(board.getNthAvailableLandSpace(3, 1, player).id).eq('09');
+    expect(board.getNthAvailableLandSpace(3, 'top', (s) => s.id !== '09').id).eq('10');
 
     // bottom ends at 63 and looks like this
     //
     //  l l l l l l
     //   l l l l o
-    expect(board.getNthAvailableLandSpace(0, -1).id).eq('62');
-    expect(board.getNthAvailableLandSpace(1, -1).id).eq('61');
-    expect(board.getNthAvailableLandSpace(2, -1).id).eq('60');
-    expect(board.getNthAvailableLandSpace(3, -1).id).eq('59');
+    expect(board.getNthAvailableLandSpace(0, 'bottom').id).eq('62');
+    expect(board.getNthAvailableLandSpace(1, 'bottom').id).eq('61');
+    expect(board.getNthAvailableLandSpace(2, 'bottom').id).eq('60');
+    expect(board.getNthAvailableLandSpace(3, 'bottom').id).eq('59');
   });
 
   it('getNthAvailableLandSpace throws if no spaces available', () => {
     expect(() => {
-      board.getNthAvailableLandSpace(0, 1, undefined, () => false);
+      board.getNthAvailableLandSpace(0, 'top', () => false);
     }).to.throw('no spaces available');
   });
 
@@ -189,10 +184,10 @@ describe('Board', () => {
     // - - - - - o     o means ocean
     // This will skip ocean spaces.
 
-    expectSpace(board.getNthAvailableLandSpace(0, 1), '03', 4, 0);
-    expectSpace(board.getNthAvailableLandSpace(1, 1), '05', 6, 0);
-    expectSpace(board.getNthAvailableLandSpace(2, 1), '08', 3, 1);
-    expectSpace(board.getNthAvailableLandSpace(3, 1), '09', 4, 1);
+    expectSpace(board.getNthAvailableLandSpace(0, 'top'), '03', 4, 0);
+    expectSpace(board.getNthAvailableLandSpace(1, 'top'), '05', 6, 0);
+    expectSpace(board.getNthAvailableLandSpace(2, 'top'), '08', 3, 1);
+    expectSpace(board.getNthAvailableLandSpace(3, 'top'), '09', 4, 1);
   });
 
   it('getNthAvailableLandSpace negative', () => {
@@ -200,41 +195,41 @@ describe('Board', () => {
     // - - - - - -    - means land
     //  - - - - o     o means ocean
 
-    expectSpace(board.getNthAvailableLandSpace(0, -1), '62', 7, 8);
-    expectSpace(board.getNthAvailableLandSpace(1, -1), '61', 6, 8);
-    expectSpace(board.getNthAvailableLandSpace(2, -1), '60', 5, 8);
-    expectSpace(board.getNthAvailableLandSpace(3, -1), '59', 4, 8);
+    expectSpace(board.getNthAvailableLandSpace(0, 'bottom'), '62', 7, 8);
+    expectSpace(board.getNthAvailableLandSpace(1, 'bottom'), '61', 6, 8);
+    expectSpace(board.getNthAvailableLandSpace(2, 'bottom'), '60', 5, 8);
+    expectSpace(board.getNthAvailableLandSpace(3, 'bottom'), '59', 4, 8);
   });
 
   it('getNthAvailableLandSpace skips tiles', () => {
-    const space = board.getNthAvailableLandSpace(2, 1);
-    expectSpace(board.getNthAvailableLandSpace(2, 1), '08', 3, 1);
+    const space = board.getNthAvailableLandSpace(2, 'top');
+    expectSpace(board.getNthAvailableLandSpace(2, 'top'), '08', 3, 1);
     space.tile = {tileType: TileType.GREENERY};
-    expectSpace(board.getNthAvailableLandSpace(2, 1), '09', 4, 1);
+    expectSpace(board.getNthAvailableLandSpace(2, 'top'), '09', 4, 1);
   });
 
   it('getNthAvailableLandSpace skips hazard tiles', () => {
-    const space = board.getNthAvailableLandSpace(2, 1);
-    expectSpace(board.getNthAvailableLandSpace(2, 1), '08', 3, 1);
+    const space = board.getNthAvailableLandSpace(2, 'top');
+    expectSpace(board.getNthAvailableLandSpace(2, 'top'), '08', 3, 1);
     space.tile = {tileType: TileType.DUST_STORM_MILD};
-    expectSpace(board.getNthAvailableLandSpace(2, 1), '09', 4, 1);
+    expectSpace(board.getNthAvailableLandSpace(2, 'top'), '09', 4, 1);
   });
 
   // This happens with the Ares expansion and cards come out mid-game
   // after the board is already populated. Though, here, the high
   // card costs substitite for a heavily-populated board.
   it('getNthAvailableLandSpace with a large card', () => {
-    expect(board.getNthAvailableLandSpace(46, 1).id).eq('61');
-    expect(board.getNthAvailableLandSpace(47, 1).id).eq('62');
-    expect(board.getNthAvailableLandSpace(48, 1).id).eq('03');
-    expect(board.getNthAvailableLandSpace(49, 1).id).eq('05');
-    expect(board.getNthAvailableLandSpace(50, 1).id).eq('08');
+    expect(board.getNthAvailableLandSpace(46, 'top').id).eq('61');
+    expect(board.getNthAvailableLandSpace(47, 'top').id).eq('62');
+    expect(board.getNthAvailableLandSpace(48, 'top').id).eq('03');
+    expect(board.getNthAvailableLandSpace(49, 'top').id).eq('05');
+    expect(board.getNthAvailableLandSpace(50, 'top').id).eq('08');
 
-    expect(board.getNthAvailableLandSpace(46, -1).id).eq('05');
-    expect(board.getNthAvailableLandSpace(47, -1).id).eq('03');
-    expect(board.getNthAvailableLandSpace(48, -1).id).eq('62');
-    expect(board.getNthAvailableLandSpace(49, -1).id).eq('61');
-    expect(board.getNthAvailableLandSpace(50, -1).id).eq('60');
+    expect(board.getNthAvailableLandSpace(46, 'bottom').id).eq('05');
+    expect(board.getNthAvailableLandSpace(47, 'bottom').id).eq('03');
+    expect(board.getNthAvailableLandSpace(48, 'bottom').id).eq('62');
+    expect(board.getNthAvailableLandSpace(49, 'bottom').id).eq('61');
+    expect(board.getNthAvailableLandSpace(50, 'bottom').id).eq('60');
   });
 
   class TestBoard extends Board {

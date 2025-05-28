@@ -28,13 +28,6 @@ export class MoonMineStandardProject extends StandardProjectCard {
     super(properties);
   }
 
-  protected override discount(player: IPlayer): number {
-    if (player.getPlayedCard(CardName.MOONCRATE_BLOCK_FACTORY)) {
-      return 4;
-    }
-    return super.discount(player);
-  }
-
   public override canAct(player: IPlayer): boolean {
     const moonData = MoonExpansion.moonData(player.game);
     const spaces = moonData.moon.getAvailableSpacesForMine(player);

@@ -36,7 +36,6 @@ import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tag} from '../common/cards/Tag';
 import {Timer} from '../common/Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
-import {GameCards} from './GameCards';
 import {AllOptions, DrawCards, DrawOptions} from './deferredActions/DrawCards';
 import {Units} from '../common/Units';
 import {MoonExpansion} from './moon/MoonExpansion';
@@ -76,10 +75,10 @@ import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {Counter} from './behavior/Counter';
 import {TRSource} from '../common/cards/TRSource';
 import {IParty} from './turmoil/parties/IParty';
-import {AlliedParty} from './turmoil/AlliedParty';
 import {newStandardDraft} from './Draft';
 import {Message} from '../common/logs/Message';
 import {DiscordId} from './server/auth/discord';
+import {AlliedParty, PolicyId} from '../common/turmoil/Types';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 const DEFAULT_GLOBAL_PARAMETER_STEPS = {
@@ -112,6 +111,78 @@ export class Player implements IPlayer {
   // Terraforming Rating
   private terraformRating: number = 20;
   public hasIncreasedTerraformRatingThisGeneration: boolean = false;
+
+
+  // Resource values
+  private titaniumValue: number = 3;
+  private steelValue: number = 2;
+  // Helion
+  public canUseHeatAsMegaCredits: boolean = false;
+  // Martian Lumber Corp
+  public canUsePlantsAsMegacredits: boolean = false;
+  // Luna Trade Federation
+  public canUseTitaniumAsMegacredits: boolean = false;
+  // Friends in High Places
+  public canUseCorruptionAsMegacredits: boolean = false;
+
+  // This generation / this round
+  public actionsTakenThisRound: number = 0;
+  public actionsThisGeneration: Set<CardName> = new Set();
+  public lastCardPlayed: CardName | undefined;
+  public pendingInitialActions: Array<ICorporationCard> = [];
+
+  // Cards
+  public dealtCorporationCards: Array<ICorporationCard> = [];
+  public dealtPreludeCards: Array<IPreludeCard> = [];
+  public dealtCeoCards: Array<ICeoCard> = [];
+  public dealtProjectCards: Array<IProjectCard> = [];
+  public cardsInHand: Array<IProjectCard> = [];
+  public preludeCardsInHand: Array<IPreludeCard> = [];
+  public ceoCardsInHand: Array<IProjectCard> = [];
+  public playedCards: Array<IProjectCard> = [];
+  public draftedCards: Array<IProjectCard> = [];
+  public draftHand: Array<IProjectCard> = [];
+  public cardCost: number = constants.CARD_COST;
+  public needsToDraft?: boolean;
+
+  public timer: Timer = Timer.newInstance();
+  public autopass = false;
+
+  // Turmoil
+  public turmoilPolicyActionUsed: boolean = false;
+  public politicalAgendasActionUsedCount: number = 0;
+
+  public oceanBonus: number = constants.OCEAN_BONUS;
+
+  // Custom cards
+  // Community Leavitt Station and Pathfinders Leavitt Station
+  // TODO(kberg): move scienceTagCount to Tags?
+  public scienceTagCount: number = 0;
+  // PoliticalAgendas Scientists P41
+  public hasTurmoilScienceTagBonus: boolean = false;
+  // Ecoline
+  public plantsNeededForGreenery: number = 8;
+  // Lawsuit
+  public removingPlayers: Array<PlayerId> = [];
+  // For Playwrights corp.
+  // removedFromPlayCards is a bit of a misname: it's a temporary storage for
+  // cards that provide 'next card' discounts. This will clear between turns.
+  public removedFromPlayCards: Array<IProjectCard> = [];
+  public preservationProgram = false;
+  public underworldData: UnderworldPlayerData = UnderworldExpansion.initializePlayer();
+  public standardProjectsThisGeneration: Set<CardName> = new Set();
+
+  // The number of actions a player can take this round.
+  // It's almost always 2, but certain cards can change this value (Mars Maths, Tool with the First Order)
+  //
+  // This value isn't serialized. Probably ought to be.
+  public availableActionsThisRound = 2;
+
+  // Stats
+  public actionsTakenThisGame: number = 0;
+  public victoryPointsByGeneration: Array<number> = [];
+  public totalDelegatesPlaced: number = 0;
+  public globalParameterSteps: Record<GlobalParameter, number> = {...DEFAULT_GLOBAL_PARAMETER_STEPS};
 
   public user?: DiscordId;
 
@@ -178,77 +249,6 @@ export class Player implements IPlayer {
 
     alliedPolicy?.onPolicyStartForPlayer?.(this);
   }
-
-  // Resource values
-  private titaniumValue: number = 3;
-  private steelValue: number = 2;
-  // Helion
-  public canUseHeatAsMegaCredits: boolean = false;
-  // Martian Lumber Corp
-  public canUsePlantsAsMegacredits: boolean = false;
-  // Luna Trade Federation
-  public canUseTitaniumAsMegacredits: boolean = false;
-  // Friends in High Places
-  public canUseCorruptionAsMegacredits: boolean = false;
-
-  // This generation / this round
-  public actionsTakenThisRound: number = 0;
-  public actionsThisGeneration: Set<CardName> = new Set();
-  public lastCardPlayed: CardName | undefined;
-  public pendingInitialActions: Array<ICorporationCard> = [];
-
-  // Cards
-  public dealtCorporationCards: Array<ICorporationCard> = [];
-  public dealtPreludeCards: Array<IPreludeCard> = [];
-  public dealtCeoCards: Array<ICeoCard> = [];
-  public dealtProjectCards: Array<IProjectCard> = [];
-  public cardsInHand: Array<IProjectCard> = [];
-  public preludeCardsInHand: Array<IPreludeCard> = [];
-  public ceoCardsInHand: Array<IProjectCard> = [];
-  public playedCards: Array<IProjectCard> = [];
-  public draftedCards: Array<IProjectCard> = [];
-  public draftHand: Array<IProjectCard> = [];
-  public cardCost: number = constants.CARD_COST;
-  public needsToDraft?: boolean;
-
-  public timer: Timer = Timer.newInstance();
-  public autopass = false;
-
-  // Turmoil
-  public turmoilPolicyActionUsed: boolean = false;
-  public politicalAgendasActionUsedCount: number = 0;
-
-  public oceanBonus: number = constants.OCEAN_BONUS;
-
-  // Custom cards
-  // Community Leavitt Station and Pathfinders Leavitt Station
-  // TODO(kberg): move scienceTagCount to Tags?
-  public scienceTagCount: number = 0;
-  // PoliticalAgendas Scientists P41
-  public hasTurmoilScienceTagBonus: boolean = false;
-  // Ecoline
-  public plantsNeededForGreenery: number = 8;
-  // Lawsuit
-  public removingPlayers: Array<PlayerId> = [];
-  // For Playwrights corp.
-  // removedFromPlayCards is a bit of a misname: it's a temporary storage for
-  // cards that provide 'next card' discounts. This will clear between turns.
-  public removedFromPlayCards: Array<IProjectCard> = [];
-  public preservationProgram = false;
-  // Underworld
-  public underworldData: UnderworldPlayerData = UnderworldExpansion.initializePlayer();
-
-  // The number of actions a player can take this round.
-  // It's almost always 2, but certain cards can change this value (Mars Maths, Tool with the First Order)
-  //
-  // This value isn't serialized. Probably ought to be.
-  public availableActionsThisRound = 2;
-
-  // Stats
-  public actionsTakenThisGame: number = 0;
-  public victoryPointsByGeneration: Array<number> = [];
-  public totalDelegatesPlaced: number = 0;
-  public globalParameterSteps: Record<GlobalParameter, number> = {...DEFAULT_GLOBAL_PARAMETER_STEPS};
 
   constructor(
     public name: string,
@@ -646,6 +646,7 @@ export class Player implements IPlayer {
   public runProductionPhase(): void {
     this.actionsThisGeneration.clear();
     this.removingPlayers = [];
+    this.standardProjectsThisGeneration.clear();
 
     this.turmoilPolicyActionUsed = false;
     this.politicalAgendasActionUsedCount = 0;
@@ -1411,43 +1412,8 @@ export class Player implements IPlayer {
     return this.newCanAfford(o).canAfford;
   }
 
-  private getStandardProjects(): Array<IStandardProjectCard> {
-    const gameOptions = this.game.gameOptions;
-    return new GameCards(gameOptions)
-      .getStandardProjects()
-      .filter((card) => {
-        switch (card.name) {
-        // sell patents is not displayed as a card
-        case CardName.SELL_PATENTS_STANDARD_PROJECT:
-          return false;
-        // For buffer gas, show ONLY IF in solo AND 63TR mode
-        case CardName.BUFFER_GAS_STANDARD_PROJECT:
-          return this.game.isSoloMode() && gameOptions.soloTR;
-        case CardName.AIR_SCRAPPING_STANDARD_PROJECT:
-          return gameOptions.altVenusBoard === false;
-        case CardName.AIR_SCRAPPING_STANDARD_PROJECT_VARIANT:
-          return gameOptions.altVenusBoard === true;
-        case CardName.MOON_HABITAT_STANDARD_PROJECT_VARIANT_2:
-        case CardName.MOON_MINE_STANDARD_PROJECT_VARIANT_2:
-        case CardName.MOON_ROAD_STANDARD_PROJECT_VARIANT_2:
-          return gameOptions.moonStandardProjectVariant === true;
-        case CardName.MOON_HABITAT_STANDARD_PROJECT_VARIANT_1:
-        case CardName.MOON_MINE_STANDARD_PROJECT_VARIANT_1:
-        case CardName.MOON_ROAD_STANDARD_PROJECT_VARIANT_1:
-          return gameOptions.moonStandardProjectVariant1 === true;
-        case CardName.EXCAVATE_STANDARD_PROJECT:
-          return gameOptions.underworldExpansion === true;
-        case CardName.COLLUSION_STANDARD_PROJECT:
-          return gameOptions.underworldExpansion === true && gameOptions.turmoilExtension === true;
-        default:
-          return true;
-        }
-      })
-      .sort((a, b) => a.cost - b.cost);
-  }
-
   public getStandardProjectOption(): SelectCard<IStandardProjectCard> {
-    const standardProjects: Array<IStandardProjectCard> = this.getStandardProjects();
+    const standardProjects: Array<IStandardProjectCard> = this.game.getStandardProjects();
 
     return new SelectCard(
       'Standard projects',
@@ -1865,6 +1831,9 @@ export class Player implements IPlayer {
       removingPlayers: this.removingPlayers,
       // Playwrights
       removedFromPlayCards: this.removedFromPlayCards.map(toName),
+      // Standard Technology: Underworld
+      standardProjectsThisGeneration: Array.from(this.standardProjectsThisGeneration),
+
       name: this.name,
       color: this.color,
       beginner: this.beginner,
@@ -1891,7 +1860,7 @@ export class Player implements IPlayer {
     const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
 
     player.actionsTakenThisGame = d.actionsTakenThisGame;
-    player.actionsThisGeneration = new Set<CardName>(d.actionsThisGeneration);
+    player.actionsThisGeneration = new Set(d.actionsThisGeneration);
     player.actionsTakenThisRound = d.actionsTakenThisRound;
     player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
     player.canUsePlantsAsMegacredits = d.canUsePlantsAsMegaCredits;
@@ -1909,6 +1878,8 @@ export class Player implements IPlayer {
     player.hasTurmoilScienceTagBonus = d.hasTurmoilScienceTagBonus;
     player.heat = d.heat;
     player.lastCardPlayed = d.lastCardPlayed;
+    // TODO(kberg): Remove ?? [] by 2025-08-01
+    player.standardProjectsThisGeneration = new Set(d.standardProjectsThisGeneration ?? []);
     player.megaCredits = d.megaCredits;
     player.needsToDraft = d.needsToDraft;
     player.oceanBonus = d.oceanBonus;
@@ -1980,6 +1951,11 @@ export class Player implements IPlayer {
       player.underworldData = d.underworldData;
     }
     if (d.alliedParty !== undefined) {
+      // TODO(kberg): Remove after 2025-08-01
+      const agenda = d.alliedParty.agenda;
+      if (agenda.policyId.startsWith('mfp')) {
+        agenda.policyId = (agenda.policyId.slice(0, 1) + agenda.policyId.slice(2)) as PolicyId;
+      }
       player._alliedParty = d.alliedParty;
     }
 

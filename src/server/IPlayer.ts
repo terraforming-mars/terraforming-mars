@@ -32,7 +32,7 @@ import {Color} from '../common/Color';
 import {OrOptions} from './inputs/OrOptions';
 import {Stock} from './player/Stock';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
-import {AlliedParty} from './turmoil/AlliedParty';
+import {AlliedParty} from '../common/turmoil/Types';
 import {IParty} from './turmoil/parties/IParty';
 import {Message} from '../common/logs/Message';
 import {DiscordId} from './server/auth/discord';
@@ -146,6 +146,15 @@ export interface IPlayer {
    * False when the player does not have Preservation Program, or after the first TR in the action phase.
    */
   preservationProgram: boolean;
+  /**
+   * The list of standard projects (EXCEPT SELL PATENTS) this player has taken this generation.
+   *
+   * For Underworld: Standard Technology and Labor Trafficking
+   *
+   * Note: Sell Patents is absent to simplify Labor Trafficking. It's also not necessary.
+   */
+  standardProjectsThisGeneration: Set<CardName>;
+
 
   // The number of actions a player can take this round.
   // It's almost always 2, but certain cards can change this value.

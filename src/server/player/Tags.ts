@@ -210,7 +210,7 @@ export class Tags {
     let wildTagCount = 0;
 
     for (const card of this.player.tableau) {
-      if (card.isDisabled) {
+      if (card.name === CardName.PHARMACY_UNION && card.isDisabled) {
         continue;
       }
       if (playerIsOdyssey || card.type !== CardType.EVENT) {

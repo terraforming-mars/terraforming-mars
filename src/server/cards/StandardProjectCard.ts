@@ -45,7 +45,7 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
   }
 
   private adjustedCost(player: IPlayer) {
-    const discountFromCards = sum(player.playedCards.map((card) => card.getStandardProjectDiscount?.(player, this) ?? 0));
+    const discountFromCards = sum(player.tableau.map((card) => card.getStandardProjectDiscount?.(player, this) ?? 0));
     const discount = discountFromCards + this.discount(player);
     const adjusted = Math.max(0, this.cost - discount);
     return adjusted;
@@ -81,6 +81,10 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
 
   protected projectPlayed(player: IPlayer) {
     player.game.log('${0} used ${1} standard project', (b) => b.player(player).card(this));
+    // standardProjectsThisGeneration does not include Sell Patents.
+    if (this.name !== CardName.SELL_PATENTS_STANDARD_PROJECT) {
+      player.standardProjectsThisGeneration.add(this.name);
+    }
     this.onStandardProject(player);
   }
 

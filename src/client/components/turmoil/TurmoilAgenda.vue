@@ -1,5 +1,5 @@
 <template>
-  <div :class="getClass">
+  <div>
     <template v-if="id === 'mb01'">
       <div class="resource money party-resource">1</div> /
       <div class="resource-tag tag-building party-resource-tag"></div>
@@ -56,16 +56,16 @@
       <div class="resource money party-resource">2</div> /
       <div class="tile greenery-tile greenery-tile-small"></div>
     </template>
-    <template v-else-if="id === 'mfp01'">
+    <template v-else-if="id === 'mp01'">
       <div class="policy-top-margin"><div class="tile empty-tile-small"></div> : <span class="steel resource"></span></div>
     </template>
-    <template v-else-if="id === 'mfp02'">
+    <template v-else-if="id === 'mp02'">
       <div class="policy-top-margin"><div class="resource-tag tag-building"></div> : <div class="money resource">2</div></div>
     </template>
-    <template v-else-if="id === 'mfp03'">
+    <template v-else-if="id === 'mp03'">
       <div class="policy-top-margin"><div class="resource steel"></div> : +<div class="resource money">1</div></div>
     </template>
-    <template v-else-if="id === 'mfp04'">
+    <template v-else-if="id === 'mp04'">
       <span class="money resource">4</span>
       <span class="red-arrow-3x"></span>
       <div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-building"></div></div>
@@ -184,27 +184,14 @@
 
 <script lang="ts">
 
+import {BonusId, PolicyId} from '@/common/turmoil/Types';
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'agenda',
+  name: 'TurmoilAgenda',
   props: {
-    type: {
-      type: String as () => 'dominant-bonus' | 'policy-bonus' | 'party-bonus',
-    },
     id: {
-      type: String as () => string | undefined,
-    },
-  },
-  computed: {
-    getClass(): string {
-      switch (this.type) {
-      case 'dominant-bonus':
-        return 'dominant-party-bonus';
-      case 'party-bonus':
-        return 'party-bonus';
-      }
-      return '';
+      type: String as () => BonusId | PolicyId | undefined,
     },
   },
 });

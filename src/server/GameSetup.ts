@@ -60,7 +60,7 @@ export class GameSetup {
     // put 2 neutrals cities on board with adjacent forest
     const neutral = this.neutralPlayerFor(game.id);
 
-    function placeCityAndForest(game: IGame, direction: -1 | 1) {
+    function placeCityAndForest(game: IGame, direction: 'top' | 'bottom') {
       const board = game.board;
       const citySpace = game.getSpaceByOffset(direction, TileType.CITY);
       game.simpleAddTile(neutral, citySpace, {tileType: TileType.CITY});
@@ -81,7 +81,7 @@ export class GameSetup {
       }
     }
 
-    placeCityAndForest(game, 1);
-    placeCityAndForest(game, -1);
+    placeCityAndForest(game, 'top');
+    placeCityAndForest(game, 'bottom');
   }
 }

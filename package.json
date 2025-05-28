@@ -74,6 +74,7 @@
     "build": "npm run make:static && npm run build:server && npm run build:client",
     "build:client": "npm run make:cards && cross-env NODE_ENV=production webpack",
     "build:server": "tsc --build src/tsconfig.json",
+    "build:test":  "tsc --build tests/tsconfig.json",
     "build:tests": "tsc --build tests/tsconfig.json",
     "clean": "rm -r ./build/ ./src/genfiles/ || true",
     "lint": "npm run lint:server && npm run lint:i18n && npm run lint:client",

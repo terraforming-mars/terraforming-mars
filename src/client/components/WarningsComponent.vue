@@ -29,6 +29,8 @@ const descriptions: Record<Warning, string> = {
   'ineffectiveDoubleDown': 'Behavior in this card will apply to Double Down, and so have no effect.',
   'unusableEventsForAstraMechanica': 'Astra Mechanica does not apply to events that return cards to a player\'s hand.',
   'noMatchingCards': 'No cards gain the reward of this action.',
+  'noEffect': 'This action will have no effect.',
+  'selfTarget': 'Note: This action will target you.',
 };
 
 export default Vue.extend({

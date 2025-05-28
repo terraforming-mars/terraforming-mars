@@ -1353,9 +1353,6 @@
             .card-resource-ware {
               background-image: url(./assets/underworld/card-resource-ware.png);
             }
-            .card-resource-scoop {
-              background-image: url(./assets/underworld/card-resource-scoop.png);
-            }
             .card-resource-journalism {
               background-image: url(./assets/underworld/card-resource-journalism.png);
             }
@@ -2634,7 +2631,7 @@ each(@parties, {
       }
     })
 
-    @underworld_resource_types: tool, ware, scoop, activist, journalism, supply-chain;
+    @underworld_resource_types: tool, ware, activist, journalism, supply-chain;
     each(@underworld_resource_types, {
       .card-resource-@{value} {
         background-image: url("./assets/underworld/card-resource-@{value}.png");

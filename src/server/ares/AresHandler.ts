@@ -135,7 +135,7 @@ export class AresHandler {
     });
 
     if (hasAdjacencyBonus) {
-      entry.count++;
+      entry.networkerCount++;
     }
     if (hazardSeverity !== 'none') {
       entry.purifierCount++;

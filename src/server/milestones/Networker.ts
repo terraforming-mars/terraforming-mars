@@ -9,6 +9,6 @@ export class Networker extends BaseMilestone {
       3);
   }
   public getScore(player: IPlayer): number {
-    return player.game.aresData?.milestoneResults.find((e) => e.id === player.id)?.count || 0;
+    return player.game.aresData?.milestoneResults.find((e) => e.id === player.id)?.networkerCount || 0;
   }
 }

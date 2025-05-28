@@ -122,15 +122,14 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
         }
       } else {
         if (source !== 'self') {
-          switch (resourceType) {
-          case CardResource.ANIMAL:
-          case CardResource.MICROBE:
-            if (!p.hasProtectedHabitats()) {
-              resourceCards.push(...get());
+          const hasProtetedHabitats = p.hasProtectedHabitats();
+          for (const card of get()) {
+            if (hasProtetedHabitats) {
+              if (card.resourceType === CardResource.ANIMAL || card.resourceType === CardResource.MICROBE) {
+                continue;
+              }
             }
-            break;
-          default:
-            resourceCards.push(...get());
+            resourceCards.push(card);
           }
         }
       }

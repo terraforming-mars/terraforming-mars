@@ -59,6 +59,7 @@ const TAG_ABBREVIATIONS: Record<TagOption, string> = {
   [Tag.EVENT]: 'e',
   [Tag.CLONE]: 'f',
   none: 'g',
+  [Tag.CRIME]: 'h',
 };
 
 export type CardListModel = {
@@ -123,6 +124,7 @@ export function hashToModel(windowLocationHash: string): CardListModel {
       city: true,
       moon: true,
       mars: true,
+      crime: true,
       wild: true,
       event: true,
       clone: true,

@@ -4,12 +4,14 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {digit} from '../Options';
+import {Tag} from '../../../common/cards/Tag';
 
 export class UndergroundSmugglingRing extends Card implements IProjectCard {
   constructor() {
     super({
       type: CardType.AUTOMATED,
       name: CardName.UNDERGROUND_SMUGGLING_RING,
+      tags: [Tag.CRIME],
       cost: 8,
 
       requirements: {excavation: 1},

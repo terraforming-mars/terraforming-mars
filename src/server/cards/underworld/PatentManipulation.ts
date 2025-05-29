@@ -7,12 +7,14 @@ import {CardRenderer} from '../render/CardRenderer';
 import {SelectCard} from '../../inputs/SelectCard';
 import {isSpecialTile} from '../../boards/Board';
 import {inplaceRemove} from '../../../common/utils/utils';
+import {Tag} from '../../../common/cards/Tag';
 
 export class PatentManipulation extends Card implements IProjectCard {
   constructor() {
     super({
       type: CardType.EVENT,
       name: CardName.PATENT_MANIPULATION,
+      tags: [Tag.CRIME],
       cost: 7,
 
       requirements: {corruption: 1},

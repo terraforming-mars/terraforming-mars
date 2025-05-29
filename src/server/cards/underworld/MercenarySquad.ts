@@ -8,6 +8,7 @@ import {all} from '../Options';
 import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
+import {Tag} from '../../../common/cards/Tag';
 
 export class MercenarySquad extends Card implements IProjectCard {
   constructor() {
@@ -15,7 +16,7 @@ export class MercenarySquad extends Card implements IProjectCard {
       type: CardType.EVENT,
       name: CardName.MERCENARY_SQUAD,
       cost: 1,
-      tags: [/* Tag.CRIME */],
+      tags: [Tag.CRIME],
 
       requirements: {corruption: 1},
 

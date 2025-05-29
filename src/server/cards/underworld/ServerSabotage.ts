@@ -9,11 +9,13 @@ import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFrom
 import {CardResource} from '../../../common/CardResource';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 import {cancelled} from '../Options';
+import {Tag} from '../../../common/cards/Tag';
 export class ServerSabotage extends Card implements IProjectCard {
   constructor() {
     super({
       type: CardType.EVENT,
       name: CardName.SERVER_SABOTAGE,
+      tags: [Tag.CRIME],
       cost: 7,
 
       behavior: {

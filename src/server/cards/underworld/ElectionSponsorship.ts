@@ -12,7 +12,7 @@ export class ElectionSponsorship extends PreludeCard implements ICard {
   constructor() {
     super({
       name: CardName.ELECTION_SPONSORSHIP,
-      tags: [Tag.MARS],
+      tags: [Tag.CRIME],
 
       behavior: {
         underworld: {corruption: 1},

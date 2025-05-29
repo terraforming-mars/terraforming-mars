@@ -3,6 +3,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {Tag} from '../../../common/cards/Tag';
 
 export class StagedProtests extends Card implements IProjectCard {
   public generationUsed: number = -1;
@@ -12,6 +13,7 @@ export class StagedProtests extends Card implements IProjectCard {
       name: CardName.STAGED_PROTESTS,
       type: CardType.EVENT,
       cost: 6,
+      tags: [Tag.CRIME],
 
       requirements: {corruption: 1},
 

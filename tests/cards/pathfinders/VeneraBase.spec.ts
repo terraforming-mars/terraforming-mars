@@ -28,7 +28,7 @@ describe('VeneraBase', () => {
 
   beforeEach(() => {
     card = new VeneraBase();
-    [game, player] = testGame(1, {turmoilExtension: true, pathfindersExpansion: true});
+    [game, player] = testGame(1, {venusNextExtension: true, turmoilExtension: true, pathfindersExpansion: true});
 
     nonVenusFloater = new TitanShuttles();
     venusFloater = new FloatingHabs();

@@ -40,7 +40,7 @@ export class CollegiumCopernicus extends CorporationCard implements IActionCard 
           b.br;
           b.megacredits(33).cards(2, {secondaryTag: Tag.SCIENCE}).br;
           b.effect('When you play a card with a science tag (including this) Add 1 data to ANY card.', (eb) => {
-            eb.tag(Tag.SCIENCE).startEffect.resource(CardResource.DATA).asterix();
+            eb.tag(Tag.SCIENCE).asterix().startEffect.resource(CardResource.DATA).asterix();
           }).br;
           b.action('Spend 3 data from this card to trade.', (eb) => {
             eb.resource(CardResource.DATA, 3).startAction.trade();

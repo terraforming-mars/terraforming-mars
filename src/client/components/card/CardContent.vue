@@ -1,8 +1,10 @@
 <template>
   <div :class="getClasses()">
-    <CardRequirementsComponent v-if="requirements.length > 0" :requirements="requirements"/>
-    <CardRenderData v-if="metadata.renderData" :renderData="metadata.renderData" />
-    <CardDescription v-if="hasDescription" :item="metadata.description" />
+    <CardRequirementsComponent v-if="requirements.length > 0" :requirements="requirements"/>      
+    <CardRenderData v-if="metadata.renderData && metadata.renderData.rows.length > 0" :renderData="{ rows: [metadata.renderData.rows[0]] }" />
+    <CardDescription v-if="isCorporation && hasDescription" :item="metadata.description"/>
+    <CardRenderData v-if="metadata.renderData.rows.length > 1" :renderData="{ rows: metadata.renderData.rows.slice(1) }" />
+    <CardDescription v-if="!isCorporation && hasDescription" :item="metadata.description"/>
     <CardVictoryPoints v-if="metadata.victoryPoints" :victoryPoints="metadata.victoryPoints" />
     <div class="padBottom" v-if="padBottom" style="padding-bottom: 22px;"></div>
   </div>

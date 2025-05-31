@@ -1,5 +1,5 @@
 <template>
-  <div :class="getMainClasses()">
+  <div :class="[getMainClasses(), { 'is-corporation': isCorporation() }]">
     <div v-if="isPrelude()" class="prelude-label">prelude</div>
     <div v-if="isCorporation()" class="corporation-label">corporation</div>
     <div v-if="isCeo()" class="ceo-label">CEO</div>

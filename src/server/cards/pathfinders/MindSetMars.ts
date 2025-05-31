@@ -29,7 +29,7 @@ export class MindSetMars extends CorporationCard {
         description: 'You start with 44 M€ and 1 agenda resource to this card.',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.megacredits(44).resource(CardResource.AGENDA).nbsp.tag(Tag.BUILDING).colon(Size.SMALL).resource(CardResource.AGENDA).br;
+          b.megacredits(44).resource(CardResource.AGENDA).nbsp.tag(Tag.BUILDING).asterix().colon(Size.SMALL).resource(CardResource.AGENDA).br;
           b.text('(Action: When you play a card with a building tag, add 1 agenda on this card.)', Size.SMALL, false, false).br;
           b.resource(CardResource.AGENDA, {amount: 2, digit}).arrow(Size.SMALL).delegates(1).nbsp;
           b.resource(CardResource.AGENDA, {amount: 5, digit}).arrow(Size.SMALL).city().br;

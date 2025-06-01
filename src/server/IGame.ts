@@ -103,13 +103,14 @@ export interface IGame extends Logger {
   stJosephCathedrals: Array<SpaceId>;
   // Mars Nomads
   nomadSpace: SpaceId | undefined;
-  // Trade Embargo
+  /** When true, players may not trade for the rest of this generation. */
   tradeEmbargo: boolean;
   /** True when Behold The Emperor is in effect this coming Turmoil phase */
   beholdTheEmperor: boolean;
-
-  /* Double Down: tracking when an action is due to double down. Does not need to be serialized. */
+  /** Double Down: tracking when an action is due to double down. Does not need to be serialized. */
   inDoubleDown: boolean;
+  /** If Vermin is in play and it has 10 or more animals */
+  verminInEffect: boolean;
 
   /** The set of tags available in this game. */
   readonly tags: ReadonlyArray<Tag>;

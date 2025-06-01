@@ -7,11 +7,13 @@ import {Turmoil} from '../turmoil/Turmoil';
 import {VictoryPointsBreakdownBuilder} from './VictoryPointsBreakdownBuilder';
 import {FundedAward} from '../awards/FundedAward';
 import {AwardScorer} from '../awards/AwardScorer';
+import {CardName} from '../../common/cards/CardName';
 
 export function calculateVictoryPoints(player: IPlayer) {
   const builder = new VictoryPointsBreakdownBuilder();
 
   // Victory points from cards
+  let playerOwnsVermin = false; // For Vermin
   let negativeVP = 0; // For Underworld.
   for (const playedCard of player.tableau) {
     if (playedCard.victoryPoints !== undefined) {
@@ -21,6 +23,14 @@ export function calculateVictoryPoints(player: IPlayer) {
         negativeVP += vp;
       }
     }
+    playerOwnsVermin ||= playedCard.name === CardName.VERMIN;
+  }
+
+  // Apply the Vermin penalty to other players. Vermin owner is penalized by the card itself.
+  if (player.game.verminInEffect && playerOwnsVermin === false) {
+    const cities = player.game.board.getCities(player).length;
+    builder.setVictoryPoints('victoryPoints', cities * -1, CardName.VERMIN);
+    negativeVP -= cities;
   }
 
   // Victory points from TR

@@ -567,6 +567,7 @@ export enum CardName {
   HOSPITALS = 'Hospitals',
   PUBLIC_BATHS = 'Public Baths',
   PROTECTED_GROWTH = 'Protected Growth',
+  VERMIN = 'Vermin',
 
   // Promo from contest
   FLOYD_CONTINUUM = 'Floyd Continuum',

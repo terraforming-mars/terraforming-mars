@@ -7,7 +7,7 @@ import {Tag} from '../../../common/cards/Tag';
 
 export class CardRenderDynamicVictoryPoints implements ICardRenderDynamicVictoryPoints {
   public targetOneOrMore: boolean = false; // marking target to be one or more res (Search for Life)
-  public anyPlayer: boolean = false; // Law Suit
+  public anyPlayer: boolean = false; // Law Suit, Vermin
   public asterisk: boolean | undefined = undefined;
   public asFraction: boolean | undefined = undefined;
 

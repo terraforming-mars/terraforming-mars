@@ -75,7 +75,9 @@ export class VictoryPointsBreakdownBuilder {
       break;
     case 'victoryPoints':
       this.points.victoryPoints += points;
-      if (message !== undefined) this.points.detailsCards.push({cardName: message, victoryPoint: points});
+      if (message !== undefined) {
+        this.points.detailsCards.push({cardName: message, victoryPoint: points});
+      }
       break;
     case 'moon habitat':
       this.points.moonHabitats += points;

@@ -564,6 +564,10 @@ export class Player implements IPlayer {
       if (removingPlayer !== undefined && removingPlayer !== this && this.removingPlayers.includes(removingPlayer.id) === false) {
         this.removingPlayers.push(removingPlayer.id);
       }
+      // Vermin hook (1 of 2)
+      if (card.name === CardName.VERMIN) {
+        this.game.verminInEffect = card.resourceCount >= 10;
+      }
     }
   }
 
@@ -584,6 +588,11 @@ export class Player implements IPlayer {
       for (const playedCard of this.tableau) {
         playedCard.onResourceAdded?.(this, card, count);
       }
+    }
+
+    // Vermin hook (2 of 2)
+    if (card.name === CardName.VERMIN) {
+      this.game.verminInEffect = card.resourceCount >= 10;
     }
   }
 

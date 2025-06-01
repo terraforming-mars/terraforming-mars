@@ -355,7 +355,7 @@ export abstract class Card implements ICard {
 
     if (vps === 'special') {
       if (properties.metadata.victoryPoints === undefined) {
-        throw new Error('When card.victoryPoints is \'special\', metadata.vp and getVictoryPoints must be supplied');
+        throw new Error('When card.victoryPoints is \'special\', metadata.victoryPoints and getVictoryPoints must be supplied');
       }
       return;
     } else {

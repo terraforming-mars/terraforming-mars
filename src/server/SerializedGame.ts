@@ -72,5 +72,6 @@ export type SerializedGame = {
     undoCount: number;
     underworldData: UnderworldData;
     venusScaleLevel: number;
+    verminInEffect: boolean;
 }
 

@@ -32,8 +32,17 @@ export class FrontierTown extends Card implements IProjectCard {
     });
   }
 
+  private availableSpaces(player: IPlayer) {
+    return player.game.board.getAvailableSpacesForCity(
+      player, {cost: player.getCardCost(this), bonusMultiplier: 3});
+  }
+
+  public override bespokeCanPlay(player: IPlayer) {
+    return this.availableSpaces(player).length > 0;
+  }
+
   public override bespokePlay(player: IPlayer) {
-    player.game.defer(new PlaceCityTile(player)).andThen((space) => {
+    player.game.defer(new PlaceCityTile(player, {spaces: this.availableSpaces(player)})).andThen((space) => {
       if (space) {
         player.game.grantSpaceBonuses(player, space);
         player.game.grantSpaceBonuses(player, space);

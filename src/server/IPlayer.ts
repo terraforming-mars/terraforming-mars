@@ -39,10 +39,19 @@ import {DiscordId} from './server/auth/discord';
 
 export type ResourceSource = IPlayer | GlobalEventName | ICard;
 
+/**
+ * Represents additional costs a player must pay to execute an action.
+ *
+ * For instance, when finding a space to place a tile, it has to take into account
+ * that the player must also pay some additional costs (e.g. additional TR from the
+ * card's action, or resources they have to spend.)
+ */
 export type CanAffordOptions = Partial<PaymentOptions> & {
   cost: number,
   reserveUnits?: Units,
   tr?: TRSource,
+  /** Represents when the action rewards the tile space more than once. */
+  bonusMultiplier?: number,
 }
 
 /**

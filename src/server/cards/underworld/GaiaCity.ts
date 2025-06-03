@@ -32,7 +32,7 @@ export class GaiaCity extends Card implements IProjectCard {
 
   private availableSpaces(player: IPlayer) {
     const availableSpaceForCity = player.game.board.getAvailableSpacesForCity(
-      player, {cost: player.getCardCost(this)});
+      player, {cost: player.getCardCost(this), bonusMultiplier: 2});
     return availableSpaceForCity.filter((space) => space.excavator !== undefined);
   }
 

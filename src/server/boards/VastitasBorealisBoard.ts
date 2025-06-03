@@ -62,7 +62,7 @@ export class VastitasBorealisBoard extends MarsBoard {
   public override spaceCosts(space: Space): SpaceCosts {
     const costs = super.spaceCosts(space);
     if (space.id === SpaceName.VASTITAS_BOREALIS_NORTH_POLE) {
-      costs.stock.megacredits = VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST;
+      costs.megacredits = VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST;
       costs.tr.temperature = 1;
     }
     return costs;

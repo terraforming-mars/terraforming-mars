@@ -52,7 +52,7 @@ export class HellasBoard extends MarsBoard {
   public override spaceCosts(space: Space): SpaceCosts {
     const costs = super.spaceCosts(space);
     if (space.id === SpaceName.HELLAS_OCEAN_TILE) {
-      costs.stock.megacredits = HELLAS_BONUS_OCEAN_COST;
+      costs.megacredits = HELLAS_BONUS_OCEAN_COST;
       costs.tr.oceans = 1;
     }
     return costs;

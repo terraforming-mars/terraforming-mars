@@ -1,12 +1,16 @@
 import {expect} from 'chai';
 import {GaiaCity} from '../../../src/server/cards/underworld/GaiaCity';
 import {testGame} from '../../TestGame';
-import {cast, churn} from '../../TestingUtils';
+import {cast, churn, setRulingParty} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Space} from '../../../src/server/boards/Space';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
+import {BoardName} from '../../../src/common/boards/BoardName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
+import {HELLAS_BONUS_OCEAN_COST} from '../../../src/common/constants';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
 
 describe('GaiaCity', () => {
   const canPlayRuns = [
@@ -71,5 +75,38 @@ describe('GaiaCity', () => {
 
     expect(space.tile?.tileType).eq(TileType.CITY);
     expect(player.plants).eq(2);
+  });
+
+  it('Manages double placement costs', () => {
+    const card = new GaiaCity();
+    const [/* game */, player] = testGame(2, {underworldExpansion: true, boardName: BoardName.HELLAS});
+
+    player.production.override({energy: 1});
+
+    const hellasOceanSpace = player.game.board.getSpaceOrThrow(SpaceName.HELLAS_OCEAN_TILE);
+    hellasOceanSpace.excavator = player;
+
+    player.megaCredits = card.cost + HELLAS_BONUS_OCEAN_COST + HELLAS_BONUS_OCEAN_COST - 1;
+    expect(card.canPlay(player)).is.false;
+
+    player.megaCredits++;
+    expect(card.canPlay(player)).is.true;
+  });
+
+  it('Manages double placement and Reds costs', () => {
+    const card = new GaiaCity();
+    const [game, player] = testGame(2, {underworldExpansion: true, turmoilExtension: true, boardName: BoardName.HELLAS});
+    setRulingParty(game, PartyName.REDS);
+
+    player.production.override({energy: 1});
+
+    const hellasOceanSpace = player.game.board.getSpaceOrThrow(SpaceName.HELLAS_OCEAN_TILE);
+    hellasOceanSpace.excavator = player;
+
+    player.megaCredits = card.cost + HELLAS_BONUS_OCEAN_COST + HELLAS_BONUS_OCEAN_COST + 6 - 1;
+    expect(card.canPlay(player)).is.false;
+
+    player.megaCredits++;
+    expect(card.canPlay(player)).is.true;
   });
 });

@@ -1,11 +1,14 @@
 import {expect} from 'chai';
 import {FrontierTown} from '../../../src/server/cards/prelude2/FrontierTown';
 import {testGame} from '../../TestGame';
-import {cast, churn} from '../../TestingUtils';
+import {cast, churn, runAllActions, setRulingParty} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {BoardName} from '../../../src/common/boards/BoardName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
+import {HELLAS_BONUS_OCEAN_COST} from '../../../src/common/constants';
 
 describe('FrontierTown', () => {
   const canPlayRuns = [
@@ -63,5 +66,49 @@ describe('FrontierTown', () => {
     expect(space.tile?.tileType).eq(TileType.CITY);
     expect(player.plants).eq(3);
     expect(player.megaCredits).eq(2); // 2, not 6.
+  });
+
+  it('Manages double placement costs', () => {
+    const card = new FrontierTown();
+    const [game, player] = testGame(2, {boardName: BoardName.HELLAS});
+    player.production.override({energy: 1});
+    const hellasOceanSpace = player.game.board.getSpaceOrThrow(SpaceName.HELLAS_OCEAN_TILE);
+
+    player.megaCredits = card.cost + (HELLAS_BONUS_OCEAN_COST * 3) - 1;
+    card.play(player);
+    runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+
+    expect(selectSpace.spaces).does.not.include(hellasOceanSpace);
+
+    player.megaCredits++;
+    card.play(player);
+    runAllActions(game);
+    const selectSpace2 = cast(player.popWaitingFor(), SelectSpace);
+
+    expect(selectSpace2.spaces).includes(hellasOceanSpace);
+  });
+
+  it('Manages double placement and Reds costs', () => {
+    const card = new FrontierTown();
+    const [game, player] = testGame(2, {turmoilExtension: true, boardName: BoardName.HELLAS});
+    setRulingParty(game, PartyName.REDS);
+    player.production.override({energy: 1});
+
+    const hellasOceanSpace = player.game.board.getSpaceOrThrow(SpaceName.HELLAS_OCEAN_TILE);
+
+    player.megaCredits = card.cost + (HELLAS_BONUS_OCEAN_COST * 3) + 9 - 1;
+    card.play(player);
+    runAllActions(game);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+
+    expect(selectSpace.spaces).does.not.include(hellasOceanSpace);
+
+    player.megaCredits++;
+    card.play(player);
+    runAllActions(game);
+    const selectSpace2 = cast(player.popWaitingFor(), SelectSpace);
+
+    expect(selectSpace2.spaces).includes(hellasOceanSpace);
   });
 });

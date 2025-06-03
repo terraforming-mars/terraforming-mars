@@ -58,7 +58,7 @@ export class TerraCimmeriaNovusBoard extends MarsBoard {
   public override spaceCosts(space: Space) {
     const costs = super.spaceCosts(space);
     if (space.bonus.includes(SpaceBonus.COLONY)) {
-      costs.stock.megacredits = TERRA_CIMMERIA_COLONY_COST;
+      costs.megacredits = TERRA_CIMMERIA_COLONY_COST;
     }
     return costs;
   }

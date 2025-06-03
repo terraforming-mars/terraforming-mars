@@ -50,6 +50,11 @@ export class MarsBoard extends Board {
     case 'isolated': return this.getAvailableIsolatedSpaces(player, canAffordOptions);
     case 'volcanic': return this.getAvailableVolcanicSpaces(player, canAffordOptions);
     case 'upgradeable-ocean': return this.getOceanSpaces({upgradedOceans: false});
+    case 'upgradeable-ocean-new-holland': {
+      const oceanSpaces = this.getOceanSpaces({upgradedOceans: false});
+      const filtered = this.getAvailableSpacesForCity(player, undefined, oceanSpaces);
+      return filtered;
+    }
     default: throw new Error('unknown type ' + type);
     }
   }
@@ -60,10 +65,11 @@ export class MarsBoard extends Board {
    * The default condition is to return those oceans used to count toward the global parameter, so
    * upgraded oceans are included, but Wetlands is not. That's why the boolean values have different defaults.
    */
-  public getOceanSpaces(include?: {upgradedOceans?: boolean, wetlands?: boolean}): ReadonlyArray<Space> {
+  public getOceanSpaces(include?: {upgradedOceans?: boolean, wetlands?: boolean, newHolland?: boolean}): ReadonlyArray<Space> {
     const spaces = this.spaces.filter((space) => {
       if (!Board.isOceanSpace(space)) return false;
       if (space.tile?.tileType === undefined) return false;
+
       const tileType = space.tile.tileType;
       if (OCEAN_UPGRADE_TILES.has(tileType)) {
         return include?.upgradedOceans ?? true;
@@ -76,8 +82,8 @@ export class MarsBoard extends Board {
     return spaces;
   }
 
-  public getAvailableSpacesForCity(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
-    const spacesOnLand = this.getAvailableSpacesOnLand(player, canAffordOptions);
+  public getAvailableSpacesForCity(player: IPlayer, canAffordOptions?: CanAffordOptions, spaces?: ReadonlyArray<Space>): ReadonlyArray<Space> {
+    const spacesOnLand = spaces ?? this.getAvailableSpacesOnLand(player, canAffordOptions);
     // Gordon CEO can ignore placement restrictions for Cities+Greenery
     if (player.cardIsInEffect(CardName.GORDON)) {
       return spacesOnLand;
@@ -115,17 +121,17 @@ export class MarsBoard extends Board {
   }
 
   public getAvailableSpacesForGreenery(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
-    let spacesOnLand = this.getAvailableSpacesOnLand(player, canAffordOptions);
+    let availableLandSpaces = this.getAvailableSpacesOnLand(player, canAffordOptions);
     // Gordon CEO can ignore placement restrictions for Cities+Greenery
-    if (player.cardIsInEffect(CardName.GORDON)) return spacesOnLand;
+    if (player.cardIsInEffect(CardName.GORDON)) return availableLandSpaces;
     // Spaces next to Red City are always unavialable for Greeneries.
-    spacesOnLand = this.filterSpacesAroundRedCity(spacesOnLand);
+    availableLandSpaces = this.filterSpacesAroundRedCity(availableLandSpaces);
 
-    const spacesForGreenery = spacesOnLand.filter((space) => {
+    // player can place a greenery in an available land space that is next
+    // to a tile the player already owns.
+    const spacesForGreenery = availableLandSpaces.filter((space) => {
       return this.getAdjacentSpaces(space).some((adj) => {
-        // TODO(kberg): I think "adj.tile.tileTypep !== TileType.OCEAN" can be removed. Probably doesn't work
-        // for ocean city.
-        return MarsBoard.hasRealTile(adj) && adj.player === player && adj.tile?.tileType !== TileType.OCEAN;
+        return MarsBoard.hasRealTile(adj) && adj.player === player;
       });
     });
 
@@ -134,15 +140,12 @@ export class MarsBoard extends Board {
       return spacesForGreenery;
     }
     // Place anywhere if no space owned
-    return spacesOnLand;
+    return availableLandSpaces;
   }
 
   public getAvailableSpacesForOcean(player: IPlayer): ReadonlyArray<Space> {
     return this.getSpaces(SpaceType.OCEAN, player)
-      .filter(
-        (space) => space.tile === undefined &&
-                      (space.player === undefined || space.player === player),
-      );
+      .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player));
   }
 
   private computeEdges(): ReadonlyArray<Space> {

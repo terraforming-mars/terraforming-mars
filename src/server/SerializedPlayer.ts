@@ -4,7 +4,7 @@ import {Color} from '../common/Color';
 import {SerializedCard} from './SerializedCard';
 import {SerializedTimer} from '../common/SerializedTimer';
 import {UnderworldPlayerData} from './underworld/UnderworldData';
-import {AlliedParty} from './turmoil/AlliedParty';
+import {AlliedParty} from '../common/turmoil/Types';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {DiscordId} from './server/auth/discord';
 
@@ -64,6 +64,7 @@ export interface SerializedPlayer extends DeprecatedFields{
   removedFromPlayCards: Array<CardName>;
   removingPlayers: Array<PlayerId>;
   scienceTagCount: number;
+  standardProjectsThisGeneration: Array<CardName>;
   steel: number;
   steelProduction: number;
   steelValue: number;

@@ -60,12 +60,12 @@ export class GameSetup {
     // put 2 neutrals cities on board with adjacent forest
     const neutral = this.neutralPlayerFor(game.id);
 
-    function placeCityAndForest(game: IGame, direction: -1 | 1) {
+    function placeCityAndForest(game: IGame, direction: 'top' | 'bottom') {
       const board = game.board;
       const citySpace = game.getSpaceByOffset(direction, TileType.CITY);
       game.simpleAddTile(neutral, citySpace, {tileType: TileType.CITY});
       if (game.gameOptions.underworldExpansion === true) {
-        UnderworldExpansion.identify(game, citySpace, undefined);
+        UnderworldExpansion.identify(game, citySpace);
       }
 
       const adjacentSpaces = board.getAdjacentSpaces(citySpace).filter((s) => game.board.canPlaceTile(s));
@@ -77,11 +77,11 @@ export class GameSetup {
       const greenerySpace = adjacentSpaces[idx%adjacentSpaces.length];
       game.simpleAddTile(neutral, greenerySpace, {tileType: TileType.GREENERY});
       if (game.gameOptions.underworldExpansion === true) {
-        UnderworldExpansion.identify(game, greenerySpace, undefined);
+        UnderworldExpansion.identify(game, greenerySpace);
       }
     }
 
-    placeCityAndForest(game, 1);
-    placeCityAndForest(game, -1);
+    placeCityAndForest(game, 'top');
+    placeCityAndForest(game, 'bottom');
   }
 }

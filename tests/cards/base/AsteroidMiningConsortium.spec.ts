@@ -24,12 +24,15 @@ describe('AsteroidMiningConsortium', () => {
 
   it('Can play if player has titanium production', () => {
     player.production.add(Resource.TITANIUM, 1);
+
     expect(card.canPlay(player)).is.true;
+    expect(card.warnings).to.have.key('selfTarget');
   });
 
   it('Should play - auto select if single target', () => {
     player2.production.add(Resource.TITANIUM, 1);
 
+    expect(card.warnings).to.not.have.key('selfTarget');
     expect(player.production.titanium).to.eq(0);
     expect(player2.production.titanium).to.eq(1);
 

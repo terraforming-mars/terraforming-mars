@@ -53,8 +53,7 @@ export class HuygensObservatory extends Card implements IProjectCard {
       return;
     }
 
-    const orOptions = new OrOptions();
-    orOptions.title = 'Select a trade fleet';
+    const orOptions = new OrOptions().setTitle('Select a trade fleet');
 
     const visitedColonies = game.colonies.filter((colony) => colony.visitor === player.id);
     const hasFreeTradeFleet = visitedColonies.length < player.colonies.getFleetSize();

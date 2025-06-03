@@ -10,7 +10,7 @@ import {SelectColony} from '../../src/server/inputs/SelectColony';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {MAX_COLONY_TRACK_POSITION} from '../../src/common/constants';
-import {cast, runAllActions, setRulingParty} from '../TestingUtils';
+import {cast, formatMessage, runAllActions, setRulingParty} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {CardName} from '../../src/common/cards/CardName';
 import {Pallas} from '../../src/server/cards/community/Pallas';
@@ -21,6 +21,8 @@ import {ColonyDeserializer} from '../../src/server/colonies/ColonyDeserializer';
 import {testGame} from '../TestGame';
 import {Venus} from '../../src/server/cards/community/Venus';
 import {PartyName} from '../../src/common/turmoil/PartyName';
+import {L1TradeTerminal} from '../../src/server/cards/prelude2/L1TradeTerminal';
+import {Mercury} from '../../src/server/cards/community/Mercury';
 
 function isBuildColonyStandardProjectAvailable(player: TestPlayer) {
   const options = cast(player.getStandardProjectOption(), SelectCard);
@@ -399,6 +401,20 @@ describe('Colony', () => {
 
     luna.trade(player, {usesTradeFleet: true});
     expect(player.colonies.tradesThisGeneration).eq(3);
+  });
+
+  it('../../../src if player should move the track', () => {
+    const l1TradeTerminal = new L1TradeTerminal();
+    cast(l1TradeTerminal.play(player), undefined);
+    // Mercury has different rewards, so the player will want to choose how far up to move the track.
+    const colony = new Mercury();
+    colony.trade(player);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+
+    expect(formatMessage(orOptions.options[0].title)).eq('Increase colony track 2 step(s)');
+    expect(formatMessage(orOptions.options[1].title)).eq('Increase colony track 1 step(s)');
+    expect(formatMessage(orOptions.options[2].title)).eq('Don\'t increase colony track');
   });
 
   it('serializing and deserializing', () => {

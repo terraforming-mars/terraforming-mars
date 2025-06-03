@@ -102,11 +102,8 @@ export class TheDarksideofTheMoonSyndicate extends CorporationCard {
         }
       });
       costs.forEachMultiplicity((qty, target) => {
-        // TODO(kberg): Create a Game.steal method that manages this, both here
-        // and in StealResources.
         const adjustedQuantity = Math.min(qty, target.megaCredits);
-        activePlayer.stock.add(Resource.MEGACREDITS, adjustedQuantity, {log: true});
-        target.stock.deduct(Resource.MEGACREDITS, adjustedQuantity, {log: true, from: activePlayer});
+        target.attack(cardOwner, Resource.MEGACREDITS, adjustedQuantity, {log: true, stealing: true});
       });
     }
     return undefined;

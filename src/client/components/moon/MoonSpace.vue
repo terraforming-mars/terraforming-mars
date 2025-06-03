@@ -10,16 +10,8 @@
     <template v-if="tileView === 'coords'">
       <div class="board-space-coords">({{ space.y }}, {{ space.x }}) ({{ space.id }})</div>
     </template>
-    <div
-      v-if="space.color !== undefined && tileView === 'show'"
-      class="board-cube"
-      :class="`board-cube--${space.color}`"
-    />
-    <div
-      v-if="space.coOwner !== undefined && tileView === 'show'"
-      class="board-cube-coOwner"
-      :class="`board-cube--${space.coOwner}`"
-    />
+    <div v-if="space.color !== undefined && tileView === 'show'" :class="playerColorCss"></div>
+    <div v-if="space.coOwner !== undefined && tileView === 'show'" :class="coOwnerColorCss"></div>
 
   </div>
 </template>
@@ -30,6 +22,7 @@ import {SpaceModel} from '@/common/models/SpaceModel';
 import Bonus from '@/client/components/Bonus.vue';
 import {TileView} from '../board/TileView';
 import BoardSpaceTile from '@/client/components/board/BoardSpaceTile.vue';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'MoonSpace',
@@ -62,6 +55,20 @@ export default Vue.extend({
       }
 
       return css;
+    },
+    playerColorCss(): string {
+      if (this.space?.color === undefined) {
+        return '';
+      }
+      const css = 'board-cube board-cube--' + this.space.color;
+      return getPreferences().symbol_overlay ? css + ' overlay' : css;
+    },
+    coOwnerColorCss(): string {
+      if (this.space?.coOwner === undefined) {
+        return '';
+      }
+      const css = 'board-cube-coOwner board-cube--' + this.space.coOwner;
+      return getPreferences().symbol_overlay ? css + ' overlay' : css;
     },
   },
 });

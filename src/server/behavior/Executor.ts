@@ -111,8 +111,17 @@ export class Executor implements BehaviorExecutor {
       if (spend.plants && player.plants < spend.plants) {
         return false;
       }
-      if (spend.energy && player.energy < spend.energy) {
-        return false;
+      if (spend.energy) {
+        if (player.energy < spend.energy) {
+          return false;
+        }
+        if (!player.canAfford({
+          cost: 0,
+          reserveUnits: Units.of({energy: spend.energy}),
+          tr: asTrSource,
+        })) {
+          return false;
+        }
       }
       if (spend.heat) {
         if (player.availableHeat() < spend.heat) {

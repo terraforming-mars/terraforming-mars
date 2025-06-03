@@ -5,11 +5,11 @@ import {Colony} from './Colony';
 export class Deimos extends Colony {
   constructor() {
     super({
-      description: [
-        'Place a hazard tile next to no other tile',
-        'Erode n spaces adjacent to hazard tiles (gaining placement bonuses)',
-        'Gain 1 M€ per hazard tile on Mars',
-      ],
+      description: {
+        buildBonus: 'Place a hazard tile next to no other tile',
+        tradeBonus: 'Erode n spaces adjacent to hazard tiles (gaining placement bonuses)',
+        colonyBonus: 'Gain 1 M€ per hazard tile on Mars',
+      },
       //  public description = 'Hazards';
       name: ColonyName.DEIMOS,
       buildType: ColonyBenefit.PLACE_HAZARD_TILE,

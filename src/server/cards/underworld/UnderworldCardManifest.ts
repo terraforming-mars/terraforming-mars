@@ -15,7 +15,7 @@ import {Casino} from './Casino';
 import {CaveCity} from './CaveCity';
 import {CentralReservoir} from './CentralReservoir';
 import {ChemicalFactory} from './ChemicalFactory';
-// import {ClassActionLawsuit} from './ClassActionLawsuit';
+import {ClassActionLawsuit} from './ClassActionLawsuit';
 import {CloudVortexOutpost} from './CloudVortexOutpost';
 import {CollusionStandardProject} from './CollusionStandardProject';
 import {ConcessionRights} from './ConcessionRights';
@@ -69,9 +69,9 @@ import {Landfill} from './Landfill';
 import {LobbyingNetwork} from './LobbyingNetwork';
 import {ManMadeVolcano} from './ManMadeVolcano';
 import {MartianExpress} from './MartianExpress';
-// // import {MediaFrenzy} from './MediaFrenzy';
+import {MediaFrenzy} from './MediaFrenzy';
 import {MediaStir} from './MediaStir';
-// // import {MercenaryAssault} from './MercenaryAssault';
+import {MercenarySquad} from './MercenarySquad';
 import {MicroGeodesics} from './MicroGeodesics';
 import {Microgravimetry} from './Microgravimetry';
 import {MicroprobingTechnology} from './MicroprobingTechnology';
@@ -108,7 +108,7 @@ import {SoilExport} from './SoilExport';
 import {SpacePrivateers} from './SpacePrivateers';
 import {SpaceWargames} from './SpaceWargames';
 import {StagedProtests} from './StagedProtests';
-// import {StandardTechnology} from './StandardTechnology';
+import {StandardTechnology} from './StandardTechnology';
 import {StarVegas} from './StarVegas';
 import {StemFieldSubsidies} from './StemFieldSubsidies';
 import {SubnauticPirates} from './SubnauticPirates';
@@ -224,41 +224,41 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.CUT_THROAT_BUDGETING]: {Factory: CutThroatBudgeting},
     [CardName.GEOLOGICAL_SURVEY_UNDERWORLD]: {Factory: GeologicalSurvey},
     // 82-90
-    // [CardName.CLASS_ACTION_LAWSUIT]: {Factory: ClassActionLawsuit},
-    // // [CardName.MERCENARY_ASSAULT]: {Factory: MercenaryAssault}, // Blocking rules.
+    [CardName.CLASS_ACTION_LAWSUIT]: {Factory: ClassActionLawsuit},
+    [CardName.MERCENARY_SQUAD]: {Factory: MercenarySquad},
     [CardName.RESEARCH_DEVELOPMENT_HUB]: {Factory: ResearchDevelopmentHub},
     [CardName.PLANETARY_RIGHTS_BUYOUT]: {Factory: PlanetaryRightsBuyout},
-    // // [CardName.MEDIA_FRENZY]: {Factory: MediaFrenzy}, // Scoops is not quite clear yet.
+    [CardName.MEDIA_FRENZY]: {Factory: MediaFrenzy},
     [CardName.INVESTIGATIVE_JOURNALISM]: {Factory: InvestigativeJournalism},
     [CardName.WHALES]: {Factory: Whales},
     [CardName.GUERILLA_ECOLOGISTS]: {Factory: GuerillaEcologists},
     [CardName.THIOLAVA_VENTS]: {Factory: ThiolavaVents},
 
     // // Replacements
-    // [CardName.STANDARD_TECHNOLOGY_UNDERWORLD]: {Factory: StandardTechnology},
+    [CardName.STANDARD_TECHNOLOGY_UNDERWORLD]: {Factory: StandardTechnology},
     [CardName.HACKERS_UNDERWORLD]: {Factory: Hackers},
     [CardName.HIRED_RAIDERS_UNDERWORLD]: {Factory: HiredRaiders},
   },
 
   cardsToRemove: [
-    // CardName.STANDARD_TECHNOLOGY,
+    CardName.STANDARD_TECHNOLOGY,
     CardName.HACKERS,
     CardName.HIRED_RAIDERS,
   ],
 
   corporationCards: {
-    [CardName.HADESPHERE]: {Factory: Hadesphere},
-    [CardName.DEMETRON_LABS]: {Factory: DemetronLabs},
-    [CardName.JENSON_BOYLE_CO]: {Factory: JensonBoyleCo},
-    [CardName.HENKEI_GENETICS]: {Factory: HenkeiGenetics},
+    [CardName.HADESPHERE]: {Factory: Hadesphere, compatibility: 'underworld'},
+    [CardName.DEMETRON_LABS]: {Factory: DemetronLabs, compatibility: 'underworld'},
+    [CardName.JENSON_BOYLE_CO]: {Factory: JensonBoyleCo, compatibility: 'underworld'},
+    [CardName.HENKEI_GENETICS]: {Factory: HenkeiGenetics, compatibility: 'underworld'},
     [CardName.ARBORIST_COLLECTIVE]: {Factory: ArboristCollective},
     [CardName.KINGDOM_OF_TAURARO]: {Factory: KingdomofTauraro},
-    [CardName.AERON_GENOMICS]: {Factory: AeronGenomics},
-    [CardName.KEPLERTEC]: {Factory: Keplertec},
-    [CardName.VOLTAGON]: {Factory: Voltagon, compatibility: 'venus'},
+    [CardName.AERON_GENOMICS]: {Factory: AeronGenomics, compatibility: 'underworld'},
+    [CardName.KEPLERTEC]: {Factory: Keplertec, compatibility: 'underworld'},
+    [CardName.VOLTAGON]: {Factory: Voltagon, compatibility: ['venus', 'underworld']},
     // // [CardName.ARES_MEDIA]: {Factory: AresMedia}, // Not another events are up card.
-    [CardName.ANUBIS_SECURITIES]: {Factory: AnubisSecurities},
-    [CardName.HECATE_SPEDITIONS]: {Factory: HecateSpeditions, compatibility: 'colonies'},
+    [CardName.ANUBIS_SECURITIES]: {Factory: AnubisSecurities, compatibility: 'underworld'},
+    [CardName.HECATE_SPEDITIONS]: {Factory: HecateSpeditions, compatibility: ['colonies', 'underworld']},
   },
 
   preludeCards: {

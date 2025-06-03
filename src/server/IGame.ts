@@ -34,6 +34,7 @@ import {Logger} from './logs/Logger';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {UnderworldData} from './underworld/UnderworldData';
 import {OrOptions} from './inputs/OrOptions';
+import {IStandardProjectCard} from './cards/IStandardProjectCard';
 
 export interface Score {
   corporation: String;
@@ -102,13 +103,14 @@ export interface IGame extends Logger {
   stJosephCathedrals: Array<SpaceId>;
   // Mars Nomads
   nomadSpace: SpaceId | undefined;
-  // Trade Embargo
+  /** When true, players may not trade for the rest of this generation. */
   tradeEmbargo: boolean;
   /** True when Behold The Emperor is in effect this coming Turmoil phase */
   beholdTheEmperor: boolean;
-
-  /* Double Down: tracking when an action is due to double down. Does not need to be serialized. */
+  /** Double Down: tracking when an action is due to double down. Does not need to be serialized. */
   inDoubleDown: boolean;
+  /** If Vermin is in play and it has 10 or more animals */
+  verminInEffect: boolean;
 
   /** The set of tags available in this game. */
   readonly tags: ReadonlyArray<Tag>;
@@ -223,9 +225,14 @@ export interface IGame extends Logger {
   getCardHolder(name: CardName): [IPlayer | undefined, IProjectCard | undefined];
   getCardsInHandByResource(player: IPlayer, resourceType: CardResource): void;
   getCardsInHandByType(player: IPlayer, cardType: CardType): void;
+  /**
+   * Returns the list of standard project cards used in this game, sorted by cost.
+   */
+  getStandardProjects(): Array<IStandardProjectCard>;
+
   log(message: string, f?: (builder: LogMessageBuilder) => void, options?: {reservedFor?: IPlayer}): void;
   discardForCost(cardCount: 1 | 2, toPlace: TileType): number;
-  getSpaceByOffset(direction: -1 | 1, toPlace: TileType, cardCount?: 1 | 2): Space;
+  getSpaceByOffset(direction: 'top' | 'bottom', toPlace: TileType, cardCount?: 1 | 2): Space;
   expectedPurgeTimeMs(): number;
   logIllegalState(description: string, metadata: {}): void;
 

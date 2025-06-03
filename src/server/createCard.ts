@@ -14,9 +14,6 @@ const CARD_RENAMES = new Map<string, CardName>([
   // eg
   // TODO(yournamehere): remove after 2021-04-05
   // ['Space Corridors', CardName.SPACE_LANES],
-
-  // TODO(kberg): Remove after 2025-05-01
-  ['City Park', CardName.CITY_PARKS],
 ]);
 
 function _createCard<T extends ICard>(cardName: CardName, cardManifestNames: Array<keyof ModuleManifest>): T | undefined {

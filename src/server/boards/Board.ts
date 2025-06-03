@@ -8,11 +8,15 @@ import {CardName} from '../../common/cards/CardName';
 import {AresHandler} from '../ares/AresHandler';
 import {Units} from '../../common/Units';
 import {hazardSeverity} from '../../common/AresTileType';
-import {TRSource} from '../../common/cards/TRSource';
+import {TR_SOURCES, TRSource} from '../../common/cards/TRSource';
 import {sum} from '../../common/utils/utils';
 
+/**
+ * The bonus costs to place a tile on a space. For instance, spending 6MC to place an ocean,
+ * or spending production to cover an Ares hazard.
+ */
 export type SpaceCosts = {
-  stock: Units,
+  megacredits: number,
   production: number,
   tr: TRSource,
 };
@@ -136,11 +140,20 @@ export abstract class Board {
    * @returns `true` when costs has changed, `false` when it has not.
    */
   protected spaceCosts(_space: Space): SpaceCosts {
-    return {stock: {...Units.EMPTY}, production: 0, tr: {}};
+    return {megacredits: 0, production: 0, tr: {}};
   }
 
-  private computeAdditionalCosts(space: Space, aresExtension: boolean): SpaceCosts {
+  private computeAdditionalCosts(space: Space, aresExtension: boolean, multiplier: number | undefined): SpaceCosts {
     const costs: SpaceCosts = this.spaceCosts(space);
+    if (multiplier !== undefined) {
+      costs.megacredits *= multiplier;
+      for (const key of TR_SOURCES) {
+        const val = costs.tr[key];
+        if (val !== undefined) {
+          costs.tr[key] = val * multiplier;
+        }
+      }
+    }
 
     if (aresExtension === false) {
       return costs;
@@ -148,10 +161,10 @@ export abstract class Board {
 
     switch (hazardSeverity(space.tile?.tileType)) {
     case 'mild':
-      costs.stock.megacredits += 8;
+      costs.megacredits += 8;
       break;
     case 'severe':
-      costs.stock.megacredits += 16;
+      costs.megacredits += 16;
       break;
     }
 
@@ -166,7 +179,7 @@ export abstract class Board {
       }
       if (adjacentSpace.adjacency !== undefined) {
         const adjacency = adjacentSpace.adjacency;
-        costs.stock.megacredits += adjacency.cost ?? 0;
+        costs.megacredits += adjacency.cost ?? 0;
         // TODO(kberg): offset costs with heat and MC bonuses.
         // for (const bonus of adjacency.bonus) {
         //   case (bonus) {
@@ -182,10 +195,10 @@ export abstract class Board {
   }
 
   public canAfford(player: IPlayer, space: Space, canAffordOptions?: CanAffordOptions) {
-    const additionalCosts = this.computeAdditionalCosts(space, player.game.gameOptions.aresExtension);
-    if (additionalCosts.stock.megacredits > 0) {
+    const additionalCosts = this.computeAdditionalCosts(space, player.game.gameOptions.aresExtension, canAffordOptions?.bonusMultiplier);
+    if (additionalCosts.megacredits > 0) {
       const plan: CanAffordOptions = canAffordOptions !== undefined ? {...canAffordOptions} : {cost: 0, tr: {}};
-      plan.cost += additionalCosts.stock.megacredits;
+      plan.cost += additionalCosts.megacredits;
       plan.tr = additionalCosts.tr;
 
       const afford = player.canAfford(plan);
@@ -231,21 +244,19 @@ export abstract class Board {
 
   // |distance| represents the number of eligible spaces from the top left (or bottom right)
   // to count. So distance 0 means the first available space.
-  // If |direction| is 1, count from the top left. If -1, count from the other end of the map.
-  // |player| will be an additional space filter (which basically supports Land Claim)
+  // |direction| describes whether counting starts from the top left or bottom right.
   // |predicate| allows callers to provide additional filtering of eligible spaces.
   public getNthAvailableLandSpace(
     distance: number,
-    direction: -1 | 1,
-    player: IPlayer | undefined = undefined,
+    direction: 'top' | 'bottom',
     predicate: (value: Space) => boolean = (_x) => true): Space {
     const spaces = this.spaces.filter((space) => {
-      return this.canPlaceTile(space) && (space.player === undefined || space.player === player);
+      return this.canPlaceTile(space) && space.player === undefined;
     }).filter(predicate);
-    let idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
     if (spaces.length === 0) {
       throw new Error('no spaces available');
     }
+    let idx = (direction === 'top') ? distance : (spaces.length - (distance + 1));
     while (idx < 0) {
       idx += spaces.length;
     }

@@ -19,7 +19,7 @@ export class MicrobiologyPatents extends Card implements IProjectCard {
         cardNumber: 'Pf63',
         renderData: CardRenderer.builder((b) => {
           b.effect('After you play a card with a microbe tag, increase your M€ production 1 step.',
-            (eb) => eb.tag(Tag.MICROBE).startEffect.production((pb) => pb.megacredits(1)));
+            (eb) => eb.tag(Tag.MICROBE).asterix().startEffect.production((pb) => pb.megacredits(1)));
         }),
       },
     });

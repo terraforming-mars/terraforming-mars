@@ -12,6 +12,7 @@ import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {Size} from '../../../common/cards/render/Size';
 import {TileType, tileTypeToString} from '../../../common/TileType';
 import {LogHelper} from '../../LogHelper';
+import {AresHandler} from '../../ares/AresHandler';
 
 const ARES_CARDS = [
   CardName.BIOENGINEERING_ENCLOSURE,
@@ -101,12 +102,18 @@ export class Eris extends CorporationCard {
           Eris.getAllUnprotectedHazardSpaces(game)).andThen(
           (space) => {
             const tileType = space.tile?.tileType;
-            space.tile = undefined;
-            player.increaseTerraformRating(1, {log: true});
+
+            // Unnecessary type check
             if (tileType === undefined) {
               return;
             }
+
+            space.tile = undefined;
+            player.increaseTerraformRating(1, {log: true});
             LogHelper.logBoardTileAction(player, space, tileTypeToString[tileType], 'removed');
+            AresHandler.ifAres(game, (aresData) => {
+              AresHandler.incrementPurifier(aresData, player);
+            });
             return undefined;
           },
         );

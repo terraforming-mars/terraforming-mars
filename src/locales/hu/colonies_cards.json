@@ -53,7 +53,7 @@
   "Martian Zoo": "Marsi állatkert",
   "Effect: When you play an Earth tag, place an animal here.": "Hatás: Amikor egy Föld ikont játszol ki, rakj 1 állatot erre a kártyára!",
   "Action: Gain 1M€ per animal here.": "Akció: Kapsz 1 M€-t minden ezen a kártyán lévő állat után.",
-  "Requires 2 city tiles in play.": "Kijátszási feltétel: legalább 2 Városlapka.",
+  "Requires 2 city tiles in play.": "Kijátszási feltétel: legalább 2 játékban lévő városlapka.",
   "Mining Colony": "Bányászgyarmat",
   "Increase your titanium production 1 step. Place a colony.": "Növeld a titántermelésed 1 értékkel! Hozz létre 1 gyarmatot!",
   "Minority Refuge": "Menedék a kisebbségeknek",
@@ -110,7 +110,7 @@
   "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "Hatás: Amikor kereskedsz, növelheted a gyarmatsávot 1 értékkel.",
   "Place a colony": "Hozz létre 1 gyarmatot!",
   "Urban Decomposers": "Városi bontók",
-  "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "Kijátszási feltétel: 1 Városlapka és 1 gyarmat. Növeld a palántatermelésed 1 értékkel, és rakj 2 mikrobát egy MÁSIK kártyára!",
+  "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "Kijátszási feltétel: 1 saját Városlapka és 1 saját gyarmat. Növeld a palántatermelésed 1 értékkel, és rakj 2 mikróbát egy MÁSIK kártyára!",
   "Warp Drive": "Térhajtómű",
   "Effect: When you play a space card, you pay 4 M€ less for it.": "Hatás: Amikor egy űr ikont játszol ki, fizess érte 4 M€-tel kevesebbet!",
   "Requires 5 science tags.": "Kijátszási feltétel: legalább 5 tudomány ikon."

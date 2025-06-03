@@ -34,7 +34,7 @@ export class Ringcom extends CorporationCard {
           b.cards(2, {secondaryTag: Tag.JOVIAN});
           b.corpBox('effect', (ce) => {
             ce.effect('When any player plays a card with a Jovian tag (including this) gain 1 titanium.', (eb) => {
-              eb.tag(Tag.JOVIAN, {all}).startEffect.titanium(1);
+              eb.tag(Tag.JOVIAN, {all}).asterix().startEffect.titanium(1);
             });
           });
         }),

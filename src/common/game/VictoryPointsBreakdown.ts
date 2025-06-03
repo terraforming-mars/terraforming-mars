@@ -19,4 +19,6 @@ export type VictoryPointsBreakdown = {
   detailsMilestones: ReadonlyArray<MADetail>;
   detailsAwards: ReadonlyArray<MADetail>;
   detailsPlanetaryTracks: ReadonlyArray<{tag: Tag, points: number}>;
+  // Total VP less than 0. For Underworld
+  negativeVP: number;
 }

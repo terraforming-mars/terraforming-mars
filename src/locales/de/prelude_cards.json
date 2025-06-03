@@ -8,7 +8,7 @@
 
     "Colonial Envoys": "Koloniale Gesandte",
     "Requires that Unity is ruling or that you have 2 delegates there. Place 1 delegate for each colony you have. YOU MAY PLACE THEM IN SEPERATE PARTIES.": "Benötigt Regierungspartei: EINIGKEIT oder 2+ eigene Delegierte dort. Platziere 1 Delegierten für jede deiner Kolonien. DU KANNST SIE IN VERSCHIEDENEN PARTEIEN PLATZIEREN.",
-    
+
     "Colonial Representation": "Koloniale Vertretung",
     "Effect: You have +1 influence.": "EFFEKT: Du erhältst 1 Einfluss",
     "Gain 3 M€ per colony you have.": "Erhalte 3 M€ pro Kolonie, die du hast.",
@@ -23,7 +23,7 @@
 
     "Frontier Town": "Grenzstadt",
     "Requires that Mars First is ruling or that you have 2 delegates there. Decrease your energy production one step. Place a city tile. GAIN THE PRINTED PLACEMENT BONUS 2 ADDITIONAL TIMES.": "Benötigt Regierungspartei: MARS FIRST oder 2+ eigene Delegierte dort. Reduziere deine Energieproduktion um 1. Platziere ein Stadtplättchen. ERHALTE DEN AUFGEDRUCKTEN PLATZIERUNGSBONUS 2 WEITERE MALE.",
-    
+
     "GHG Shipment": "Treibhausgasverfrachtung",
     "Requires that Kelvinists are in power or that you have 2 delegates there. Increase your heat production 1 step. Gain 1 heat for each floater you have.": "Benötigt Regierungspartei: KELVINISTEN oder 2+ eigene Delegierte dort. Erhöhe deine Wärmeproduktion um 1. Du erhältst 1 Wärme für jeden Schweber, den du hast.",
 
@@ -34,12 +34,12 @@
     "Requires 2 Jovian tags. Place 2 delegates in 1 party.": "Benötigt 2 Jupitersymbole. Platziere 2 Delegierte in eine Partei.",
 
     "L1 Trade Terminal": "L1 Handelsterminal",
-    "Effect: When you trade, first increase that colony tile track 2 steps.": "EFFEKT: Wenn du Handel treibst, erhöhe zuerst die Leiste der Kolonieplättchen um 2 Schritte.",
+    "Effect: When you trade, you may first increase that colony tile track 2 steps.": "EFFEKT: Wenn du Handel treibst, darfst du zuerst den Marker auf der Handelsleiste des Kolonieplättchens um 2 Schritte erhöhen.",
     "Add a resource to 3 different cards that already have resources.": "Füge bis zu 3 verschiedenen Karten, auf der bereits mindestens 1 Ressource ist, 1 weitere Ressource hinzu.",
 
     "Microgravity Nutrition": "Ernährung unter Schwerelosigkeit",
     "Increase your M€ production 1 step for each colony you have.": "Erhöhe deine M€-Produktion um 1 für jede Kolonie, die du hast.",
-    
+
     "Red Appeasement": "Rote Beschwichtigungspolitik",
     "Requires that Reds are ruling or that you have 2 delegates there, AND THAT NO OTHER PLAYER HAS PASSED.": "Benötigt Regierungspartei: DIE ROTEN oder 2+ eigene Delegierte dort, und dass kein anderer Spieler gepasst hat.",
     "Increase M€ production 2 steps. This counts as passing. You get no other turns this generation.": "Erhöhe die M€-Produktion um 2. Dies zählt als Passen. Du bekommst keine weiteren Züge in dieser Generation.",
@@ -51,7 +51,7 @@
 
     "Special Permit": "Sondergenehmigung",
     "Requires that Greens are ruling or that you have 2 delegates there. Steal 4 plants from any player.": "Benötigt Regierungspartei: DIE GRÜNEN oder 2+ eigene Delegierte dort. Stehle 4 Pflanzen von einem beliebigen Spieler.",
-    
+
     "Sponsoring Nation": "Fördernde Nation",
     "Requires 4 Earth tags. Gain 3 TR. Place 2 delegates.": "Benötigt 4 Erdsymbole. Erhalte 3 TW. Platziere 2 Delegierte in eine Partei.",
 
@@ -74,7 +74,7 @@
     "Venus Shuttles": "Venus-Shuttles",
     "Action: Spend 12 M€ to raise Venus 1 step. This cost is REDUCED BY 1 FOR EACH VENUS TAG you have.": "AKTION: Bezahle 12 M€, um die Venuswertung um 2% zu erhöhen. Diese Kosten werden für jedes Venussymbol, das du hast, um 1 reduziert.",
     "Add 2 floaters to ANY VENUS CARD.": "Füge 2 Schweber zu einer beliebigen Venuskarte hinzu.",
-    
+
     "Venus Trade Hub": "Venus Handelszentrum",
     "Effect: When you trade, gain 3 M€.": "EFFEKT: Wenn du handelst, erhalte 3 M€.",
     "Requires 2 Venus tags.": "Benötigt 2 Venussymbole.",
@@ -82,7 +82,7 @@
     "WG Project": "Weltregierung Projekt",
     "Requires that you are Chairman. DRAW 3 PRELUDE CARDS AND PLAY 1 OF THEM, Discard the other 2.": "Benötigt eigenen Vorsitzenden. Ziehe 3 PRÄLUDIUM-KARTEN und spiele 1 davon aus, lege die anderen 2 ab.",
 
-    
+
     "Psychrophiles": "Psychrophilen",
     "Action: Add 1 microbe to this card.": "AKTION: Füge dieser Karte 1 Mikrobe hinzu.",
     "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "EFFEKT: Wenn du eine Pflanzenkarte bezahlst, darfst Du Mikroben von dieser Karte für je 2 M€ verwenden.",

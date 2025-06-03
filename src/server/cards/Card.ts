@@ -58,7 +58,13 @@ type SharedProperties = {
   protectedResources?: boolean;
   startingMegaCredits?: number;
   tags?: Array<Tag>;
-  /** Describes where the card's TR comes from. */
+  /**
+   * Describes where the card's TR comes from.
+   *
+   * No need to be explicit about this if all the TR raising
+   * comes from `behavior`.
+   */
+
   tr?: TRSource,
   victoryPoints?: number | 'special' | IVictoryPoints,
 }
@@ -349,7 +355,7 @@ export abstract class Card implements ICard {
 
     if (vps === 'special') {
       if (properties.metadata.victoryPoints === undefined) {
-        throw new Error('When card.victoryPoints is \'special\', metadata.vp and getVictoryPoints must be supplied');
+        throw new Error('When card.victoryPoints is \'special\', metadata.victoryPoints and getVictoryPoints must be supplied');
       }
       return;
     } else {

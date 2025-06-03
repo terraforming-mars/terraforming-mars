@@ -5,7 +5,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {ICard} from '../ICard';
 import {IStandardProjectCard} from '../IStandardProjectCard';
 
 export class LaborTrafficking extends Card implements IProjectCard {
@@ -14,7 +13,7 @@ export class LaborTrafficking extends Card implements IProjectCard {
       name: CardName.LABOR_TRAFFICKING,
       type: CardType.ACTIVE,
       cost: 3,
-      tags: [Tag.SPACE],
+      tags: [Tag.SPACE, Tag.CRIME],
       victoryPoints: -2,
 
       metadata: {
@@ -30,7 +29,7 @@ export class LaborTrafficking extends Card implements IProjectCard {
 
   public data: {generation: number} = {generation: -1};
 
-  onStandardProject(player: IPlayer, project: ICard): void {
+  onStandardProject(player: IPlayer, project: IStandardProjectCard): void {
     if (project.name !== CardName.SELL_PATENTS_STANDARD_PROJECT) {
       this.data.generation = player.game.generation;
       // This will have the effect of dimming the card after its one-per-generation use.
@@ -40,7 +39,7 @@ export class LaborTrafficking extends Card implements IProjectCard {
 
   public getStandardProjectDiscount(player: IPlayer, card: IStandardProjectCard): number {
     if (card.name !== CardName.SELL_PATENTS_STANDARD_PROJECT) {
-      if (this.data.generation !== player.game.generation) {
+      if (player.standardProjectsThisGeneration.size === 0) {
         return 6;
       }
     }

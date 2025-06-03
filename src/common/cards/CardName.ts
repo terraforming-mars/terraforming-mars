@@ -577,10 +577,12 @@ export enum CardName {
   HOSPITALS = 'Hospitals',
   PUBLIC_BATHS = 'Public Baths',
   PROTECTED_GROWTH = 'Protected Growth',
+  VERMIN = 'Vermin',
 
   // Promo from contest
   FLOYD_CONTINUUM = 'Floyd Continuum',
   CASINOS = 'Casinos',
+  NEW_HOLLAND = 'New Holland',
 
   // End of promo cards
 
@@ -1007,7 +1009,7 @@ export enum CardName {
   CUT_THROAT_BUDGETING = 'Cut-throat Budgeting',
   GEOLOGICAL_SURVEY_UNDERWORLD = 'Geological Survey:underworld',
   CLASS_ACTION_LAWSUIT = 'Class-action Lawsuit',
-  MERCENARY_ASSAULT = 'Mercenary Assault',
+  MERCENARY_SQUAD = 'Mercenary Squad',
   RESEARCH_DEVELOPMENT_HUB = 'Research & Development Hub',
   PLANETARY_RIGHTS_BUYOUT = 'Planetary Rights Buyout',
   MEDIA_FRENZY = 'Media Frenzy',

@@ -104,8 +104,6 @@ export default Vue.extend({
       return classes;
     },
     componentClassArray(): Array<string> {
-      // TODO(kberg): This duplicates CardRenderItemComponent. That shouldn't be
-      // necessary.
       switch (this.type) {
       case RequirementType.OXYGEN:
         return ['card-global-requirement', 'card-oxygen--req'];
@@ -134,7 +132,7 @@ export default Vue.extend({
       case RequirementType.TAG:
         return ['card-resource-tag--S', 'card-tag-' + this.requirement.tag];
       case RequirementType.HABITAT_RATE:
-        return ['card-colony-rate', 'card-colony-rate--req'];
+        return ['card-habitat-rate', 'card-habitat-rate--req'];
       case RequirementType.MINING_RATE:
         return ['card-mining-rate', 'card-mining-rate--req'];
       case RequirementType.LOGISTIC_RATE:

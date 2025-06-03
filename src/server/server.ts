@@ -90,8 +90,9 @@ async function start() {
   await SessionManager.getInstance().initialize();
 
   try {
-    const stats = await Database.getInstance().stats();
-    console.log(JSON.stringify(stats, undefined, 2));
+    Database.getInstance().stats().then((stats) => {
+      console.log(JSON.stringify(stats, undefined, 2));
+    });
   } catch (err) {
     // Do not fail. Just continue. Stats aren't vital.
     console.error(err);

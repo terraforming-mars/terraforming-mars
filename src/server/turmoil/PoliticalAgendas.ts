@@ -5,7 +5,7 @@ import {IParty} from './parties/IParty';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {IPolicy} from './Policy';
 import {Turmoil} from './Turmoil';
-import {Agenda, AgendaStyle} from '../../common/turmoil/Types';
+import {Agenda, AgendaStyle, PolicyId} from '../../common/turmoil/Types';
 
 export type PoliticalAgendasData = {
   agendas: Map<PartyName, Agenda>;
@@ -26,7 +26,7 @@ export class PoliticalAgendas {
     const agendas: Map<PartyName, Agenda> = new Map();
 
     parties.forEach((p) => {
-      if (agendaStyle === AgendaStyle.STANDARD) {
+      if (agendaStyle === 'Standard') {
         agendas.set(p.name, {bonusId: p.bonuses[0].id, policyId: p.policies[0].id});
       } else {
         agendas.set(p.name, PoliticalAgendas.getRandomAgenda(p));
@@ -71,7 +71,7 @@ export class PoliticalAgendas {
 
     // Agendas are static unless it's chosen by a chairperson, in which case
     // defer the selection.
-    if (politicalAgendasData.agendaStyle === AgendaStyle.CHAIRMAN && chairman !== 'NEUTRAL') {
+    if (politicalAgendasData.agendaStyle === 'Chairman' && chairman !== 'NEUTRAL') {
       const agenda = this.getAgenda(turmoil, rulingParty.name);
       game.defer(new ChoosePoliticalAgenda(
         chairman,
@@ -97,6 +97,12 @@ export class PoliticalAgendas {
   }
 
   public static deserialize(d: SerializedPoliticalAgendasData): PoliticalAgendasData {
+    // TODO(kberg): Remove after 2025-08-01
+    for (const [_, agendas] of d.agendas) {
+      if (agendas.policyId.startsWith('mfp')) {
+        agendas.policyId = (agendas.policyId.slice(0, 1) + agendas.policyId.slice(2)) as PolicyId;
+      }
+    }
     return {
       agendas: new Map(d.agendas),
       agendaStyle: d.agendaStyle,

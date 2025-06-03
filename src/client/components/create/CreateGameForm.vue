@@ -623,7 +623,7 @@ export default (Vue as WithRefs<Refs>).extend({
       solarPhaseOption: false,
       shuffleMapOption: false,
       aresExtremeVariant: false,
-      politicalAgendasExtension: AgendaStyle.STANDARD,
+      politicalAgendasExtension: 'Standard',
       undoOption: false,
       showTimers: true,
       fastModeOption: false,
@@ -676,7 +676,7 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     turmoil(value: boolean) {
       if (value === false) {
-        this.politicalAgendasExtension = AgendaStyle.STANDARD;
+        this.politicalAgendasExtension = 'Standard';
       }
     },
     initialDraft(value: boolean) {
@@ -836,8 +836,8 @@ export default (Vue as WithRefs<Refs>).extend({
                 if (component.showColoniesList) refs.coloniesFilter.updateColoniesByNames(customColonies);
                 if (component.showCorporationList) refs.corporationsFilter.selectedCorporations = customCorporations;
                 if (component.showPreludesList) refs.preludesFilter.updatePreludes(customPreludes);
-                if (component.showBannedCards) refs.cardsFilter.selectedCardNames = bannedCards;
-                if (component.showIncludedCards) refs.cardsFilter2.selectedCardNames = includedCards;
+                if (component.showBannedCards) refs.cardsFilter.selected = bannedCards;
+                if (component.showIncludedCards) refs.cardsFilter2.selected = includedCards;
                 if (!component.seededGame) component.seed = Math.random();
                 // set to alter after any watched properties
                 component.solarPhaseOption = Boolean(capturedSolarPhaseOption);
@@ -903,23 +903,23 @@ export default (Vue as WithRefs<Refs>).extend({
       }
     },
     isPoliticalAgendasExtensionEnabled(): Boolean {
-      return this.politicalAgendasExtension !== AgendaStyle.STANDARD;
+      return this.politicalAgendasExtension !== 'Standard';
     },
     politicalAgendasExtensionToggle() {
-      if (this.politicalAgendasExtension === AgendaStyle.STANDARD) {
-        this.politicalAgendasExtension = AgendaStyle.RANDOM;
+      if (this.politicalAgendasExtension === 'Standard') {
+        this.politicalAgendasExtension = 'Random';
       } else {
-        this.politicalAgendasExtension = AgendaStyle.STANDARD;
+        this.politicalAgendasExtension = 'Standard';
       }
     },
     getPoliticalAgendasExtensionAgendaStyle(type: 'random' | 'chairman'): AgendaStyle {
       if (type === 'random') {
-        return AgendaStyle.RANDOM;
+        return 'Random';
       } else if (type === 'chairman') {
-        return AgendaStyle.CHAIRMAN;
+        return 'Chairman';
       } else {
         console.warn('AgendaStyle not found');
-        return AgendaStyle.STANDARD;
+        return 'Standard';
       }
     },
     isBeginnerToggleEnabled(): Boolean {
@@ -1097,6 +1097,39 @@ export default (Vue as WithRefs<Refs>).extend({
       if (players.length === 1 && this.expansions.corpera === false) {
         const confirm = window.confirm(translateText(
           'We do not recommend playing a solo game without the Corporate Era. Press OK if you want to play without it.'));
+        if (confirm === false) return;
+      }
+
+
+      // Check Prelude 2 + Pathfinders
+      let energyProductionBug = true;
+      console.log(this.showCorporationList, this.customCorporations.length);
+      if (this.showCorporationList && customCorporations.length > 0 && !customCorporations.includes(CardName.THORGATE)) {
+        energyProductionBug = false;
+      }
+      if (this.bannedCards.includes(CardName.STANDARD_TECHNOLOGY)) {
+        energyProductionBug = false;
+      }
+
+      if (this.bannedCards.includes(CardName.SUITABLE_INFRASTRUCTURE)) {
+        energyProductionBug = false;
+      } else {
+        if (this.expansions.prelude2 === false && !this.includedCards.includes(CardName.SUITABLE_INFRASTRUCTURE)) {
+          energyProductionBug = false;
+        }
+      }
+
+      if (this.bannedCards.includes(CardName.HIGH_TEMP_SUPERCONDUCTORS)) {
+        energyProductionBug = false;
+      } else {
+        if (this.expansions.pathfinders === false && !this.includedCards.includes(CardName.HIGH_TEMP_SUPERCONDUCTORS)) {
+          energyProductionBug = false;
+        }
+      }
+
+      if (energyProductionBug === true) {
+        const confirm = window.confirm(translateText(
+          'It is possible with Thorgate, Standard Technology, Suitable Infrastructure, and High Temp. Superconductors for a player to have infinite energy production. Press OK to continue or Cancel to change your selections.'));
         if (confirm === false) return;
       }
 

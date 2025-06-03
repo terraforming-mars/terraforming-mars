@@ -15,4 +15,7 @@ export type Warning =
  'cannotAffordBoardOfDirectors' |
  'marsIsTerraformed' |
  'ineffectiveDoubleDown' |
- 'noMatchingCards';
+ 'noMatchingCards' |
+ 'unusableEventsForAstraMechanica' |
+ 'noEffect' |
+ 'selfTarget';

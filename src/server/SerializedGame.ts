@@ -1,5 +1,4 @@
 import {Phase} from '../common/Phase';
-import {CardName} from '../common/cards/CardName';
 import {SerializedClaimedMilestone} from './milestones/ClaimedMilestone';
 import {SerializedFundedAward} from './awards/FundedAward';
 import {DeferredAction} from './deferredActions/DeferredAction';
@@ -19,6 +18,7 @@ import {AwardName} from '../common/ma/AwardName';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {MilestoneName} from '../common/ma/MilestoneName';
 import {Tag} from '../common/cards/Tag';
+import {Expansion} from '../common/cards/GameModule';
 
 export type SerializedGame = {
     activePlayer: PlayerId;
@@ -36,6 +36,8 @@ export type SerializedGame = {
     deferredActions: Array<DeferredAction>;
     donePlayers: Array<PlayerId>;
     draftRound: number;
+    // TODO(kberg): Remove ? by 2025-08-01
+    expansions?: Record<Expansion, boolean>;
     first: PlayerId;
     fundedAwards: Array<SerializedFundedAward>;
     gagarinBase: Array<SpaceId>;
@@ -69,8 +71,7 @@ export type SerializedGame = {
     turmoil?: SerializedTurmoil;
     undoCount: number;
     underworldData: UnderworldData;
-    // TODO(kberg): remove unDraftedCards after 2024-08-01
-    unDraftedCards?: Array<[PlayerId, Array<CardName>]>;
     venusScaleLevel: number;
+    verminInEffect: boolean;
 }
 

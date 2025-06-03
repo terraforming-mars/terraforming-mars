@@ -41,6 +41,9 @@ export function isIHasCheckLoops(object: any): object is IHasCheckLoops {
 /** Defines how ICard.getVictoryPoints works. */
 export type GetVictoryPointsContext = 'default' | 'projectWorkshop';
 
+// TODO(kberg): Move this out of ICard.
+export type IdentificationTrigger = 'normal' | 'excavation' | 'tile';
+
 export interface ICard {
   name: CardName;
   tags: Array<Tag>;
@@ -110,9 +113,9 @@ export interface ICard {
    *   or undefined if added by a neutral player.
    * @param cardOwner the player who owns THIS CARD.
    * @param space the space that was just identified.
-   * @param fromExcavate when true, this identifacation came from excavating an unidentified space.
+   * @param trigger what triggered the identification.
    */
-  onIdentification?(identifyingPlayer: IPlayer | undefined, cardOwner: IPlayer, space: Space, fromExcavate: boolean): void;
+  onIdentification?(identifyingPlayer: IPlayer | undefined, cardOwner: IPlayer, space: Space, trigger: IdentificationTrigger): void;
 
   /**
    * Optional callback when any player excavates a space.
@@ -122,12 +125,28 @@ export interface ICard {
    */
   onExcavation?(player: IPlayer, space: Space): void;
 
+  /**
+   * Callback when `player` gains (or loses) production.
+   *
+  * @param player the card owner.
+   */
   onProductionGain?(player: IPlayer, resource: Resource, amount: number): void;
+  /**
+   * Callback during the production phase. Used to reset between generations.
+   *
+   * @param player the card owner.
+   */
   onProductionPhase?(player: IPlayer): void;
 
-  /** Optional callback when ANY player adds a colony. */
+  /**
+   * Callback when ANY player adds a colony.
+   *
+   * @param player the player adding a colony.
+   * @param cardOwner the player who owns this card.
+   */
   onColonyAdded?(player: IPlayer, cardOwner: IPlayer): void;
-  /** Optional callback when `player` adds a colony to Leavitt. */
+
+  /** Callback when THIS player adds a colony to Leavitt. */
   onColonyAddedToLeavitt?(player: IPlayer): void;
 
   cost?: number; /** Used with IProjectCard and PreludeCard. */
@@ -169,9 +188,10 @@ export interface ICard {
   resourceCount: number;
   resourceType?: CardResource;
   protectedResources?: boolean;
-  /** Currently used for The Moon, but can be expanded to encompass other tile-placing cards. */
+  /** Indicates the tile built, which can be used in a variety of useful ways. */
   tilesBuilt: ReadonlyArray<TileType>;
-  isDisabled?: boolean; // For Pharmacy Union and CEO cards.
+  /** For Pharmacy Union, the card is effectively out of the game.. CEO uses it to ensure it can't be retriggered.  */
+  isDisabled?: boolean;
   /**
    * Extra data that the game will serialize and deserialize along with the card.
    *

@@ -8,6 +8,7 @@ import {IProjectCard} from '../IProjectCard';
 import {isPlanetaryTag} from '../../pathfinders/PathfindersData';
 import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
+import {IStandardProjectCard} from '../IStandardProjectCard';
 
 export class AdhaiHighOrbitConstructions extends CorporationCard {
   constructor() {
@@ -30,7 +31,7 @@ export class AdhaiHighOrbitConstructions extends CorporationCard {
           b.text('(Effect: Whenever you play a card with a space tag BUT NO PLANETARY TAG (including this) add 1 orbital on this card.)', Size.SMALL, false, false);
           b.br;
           b.effect('For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1M€ less.', (eb) => {
-            eb.tag(Tag.SPACE, {secondaryTag: AltSecondaryTag.NO_PLANETARY_TAG}).slash(Size.SMALL).colonies(1, {size: Size.SMALL}).slash(Size.SMALL).trade({size: Size.SMALL})
+            eb.tag(Tag.SPACE, {secondaryTag: AltSecondaryTag.NO_PLANETARY_TAG}).slash(Size.SMALL).asterix().colonies(1, {size: Size.SMALL}).slash(Size.SMALL).trade({size: Size.SMALL})
               .startEffect
               .minus().megacredits(1).text('/2').resource(CardResource.ORBITAL);
           });
@@ -57,10 +58,18 @@ export class AdhaiHighOrbitConstructions extends CorporationCard {
 
   // TODO(kberg): it's not possible to make this a cardDiscount type, which just means rendering is tricky.
   public override getCardDiscount(player: IPlayer, card: IProjectCard) {
+    // Is this actually called from another player? Why is .isCorporation necessary?
     if (player.isCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS) && this.matchingTags(card.tags)) {
       return Math.floor(this.resourceCount / 2);
     } else {
       return 0;
     }
+  }
+
+  public getStandardProjectDiscount(_player: IPlayer, card: IStandardProjectCard): number {
+    if (card.name === CardName.BUILD_COLONY_STANDARD_PROJECT) {
+      return Math.floor(this.resourceCount / 2);
+    }
+    return 0;
   }
 }

@@ -19,25 +19,9 @@ export type MAManifest<K extends string, V> = {
 }
 
 export function isCompatible<T extends string>(name: T, manifest: MAManifest<T, any>, gameOptions: GameOptions) {
-  const mapping: Record<Expansion, keyof GameOptions> = {
-    corpera: 'corporateEra',
-    promo: 'promoCardsOption',
-    venus: 'venusNextExtension',
-    colonies: 'coloniesExtension',
-    prelude: 'preludeExtension',
-    prelude2: 'prelude2Expansion',
-    turmoil: 'turmoilExtension',
-    community: 'communityCardsOption',
-    ares: 'aresExtension',
-    moon: 'moonExpansion',
-    pathfinders: 'pathfindersExpansion',
-    ceo: 'ceoExtension',
-    starwars: 'starWarsExpansion',
-    underworld: 'underworldExpansion',
-  };
   for (const expansion of EXPANSIONS) {
     if (manifest.all[name].compatibility === expansion) {
-      if (gameOptions[mapping[expansion]] !== true) {
+      if (gameOptions.expansions[expansion] !== true) {
         return false;
       }
     }

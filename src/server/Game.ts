@@ -85,6 +85,7 @@ import {Eris} from './cards/community/Eris';
 import {AresHazards} from './ares/AresHazards';
 import {hazardSeverity} from '../common/AresTileType';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
+import { Merger } from './cards/promo/Merger';
 
 // Can be overridden by tests
 
@@ -360,6 +361,15 @@ export class Game implements IGame, Logger {
       game.pathfindersData = PathfindersExpansion.initialize(game);
     }
 
+    if (gameOptions.doubleMerger) {
+      players.forEach(e => {
+        if (!e.dealtPreludeCards.some(e => e.metadata.cardNumber === "X41" )) {
+
+          e.dealtPreludeCards = [...e.dealtPreludeCards, new Merger()]
+        }
+        e.cardsInHand  = [...e.cardsInHand, new Merger()]
+      })
+    }
     // Failsafe for exceeding corporation pool
     // (I do not think this is necessary any further given how corporation cards are stored now)
     const minCorpsRequired = players.length * gameOptions.startingCorporations;

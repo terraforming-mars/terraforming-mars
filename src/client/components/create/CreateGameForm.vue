@@ -282,6 +282,11 @@
                                 <span v-i18n>Set Predefined Game</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#set-predefined-game" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
+                            <input type="checkbox" v-model="doubleMerger" id="double-merger-checkbox">
+                            <label for="double-merger-checkbox">
+                                <span v-i18n>Double merger</span>
+                            </label>
+
                             <div v-if="seededGame">
                                 <input type="text" name="clonedGamedId" v-model="clonedGameId" />
                             </div>
@@ -645,6 +650,7 @@ export default (Vue as WithRefs<Refs>).extend({
       preludeDraftVariant: undefined,
       preludeToggled: false,
       uploading: false,
+      doubleMerger: false
     };
   },
   components: {
@@ -1057,6 +1063,7 @@ export default (Vue as WithRefs<Refs>).extend({
       const includeFanMA = this.includeFanMA;
       const startingCorporations = this.startingCorporations;
       const soloTR = this.soloTR;
+      const doubleMerger = this.doubleMerger
       // const beginnerOption = this.beginnerOption;
       const randomFirstPlayer = this.randomFirstPlayer;
       const requiresVenusTrackCompletion = this.requiresVenusTrackCompletion;
@@ -1232,6 +1239,7 @@ export default (Vue as WithRefs<Refs>).extend({
         customCeos,
         startingCeos,
         startingPreludes,
+        doubleMerger
       };
       return JSON.stringify(dataToSend, undefined, 4);
     },

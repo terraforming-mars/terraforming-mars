@@ -2478,10 +2478,11 @@
             overflow: hidden;
             white-space: nowrap;
             height: 27px;
-        /* Conditional height adjustment for corporation cards */
-        &.is-corporation {
-            height: 40px;
-        }
+
+            /* Conditional height adjustment for corporation cards makes a cleaner scrolling experience. */
+            &.is-corporation {
+                height: 40px;
+            }
 
             .corporation-label {
                 text-transform: uppercase;

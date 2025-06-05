@@ -38,6 +38,12 @@ export default Vue.extend({
       }
       return 'card-resource-' + this.item.resource.toLowerCase().replaceAll(' ', '-');
     },
+    resourceSizeClass(): string {
+      if (this.item.size !== undefined) {
+        return 'card-resource-size--' + this.item.size;
+      }
+      return '';
+    },
     tagClass(): string {
       if (this.item.tag === undefined) {
         return '';
@@ -270,7 +276,7 @@ export default Vue.extend({
       case CardRenderItemType.CORRUPTION:
         return [cardResource, 'card-resource-corruption'];
       case CardRenderItemType.RESOURCE:
-        return [cardResource, this.resourceClass];
+        return [cardResource, this.resourceClass, this.resourceSizeClass];
       case CardRenderItemType.TAG:
         return ['card-resource-tag', this.tagClass];
       case CardRenderItemType.NEUTRAL_DELEGATE:

@@ -1,9 +1,9 @@
 <template>
-  <div :class="getClasses()">
+  <div :class="classes">
     <CardRequirementsComponent v-if="requirements.length > 0" :requirements="requirements"/>
-    <CardRenderData v-if="metadata.renderData && metadata.renderData.rows.length > 0" :renderData="{ rows: [metadata.renderData.rows[0]] }" />
+    <CardRenderData v-if="firstRow !== undefined" :renderData="firstRow" />
     <CardDescription v-if="isCorporation && hasDescription" :item="metadata.description"/>
-    <CardRenderData v-if="metadata.renderData.rows.length > 1" :renderData="{ rows: metadata.renderData.rows.slice(1) }" />
+    <CardRenderData v-if="remainingRows !== undefined" :renderData="remainingRows" />
     <CardDescription v-if="!isCorporation && hasDescription" :item="metadata.description"/>
     <CardVictoryPoints v-if="metadata.victoryPoints" :victoryPoints="metadata.victoryPoints" />
     <div class="padBottom" v-if="padBottom" style="padding-bottom: 22px;"></div>
@@ -19,6 +19,7 @@ import CardVictoryPoints from './CardVictoryPoints.vue';
 import CardDescription from './CardDescription.vue';
 import CardRenderData from './CardRenderData.vue';
 import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
+import {ICardRenderRoot, isICardRenderRoot} from '@/common/cards/render/Types';
 
 export default Vue.extend({
   name: 'CardContent',
@@ -45,18 +46,36 @@ export default Vue.extend({
     CardRenderData,
   },
   methods: {
-    getClasses(): string {
+  },
+  computed: {
+    classes(): string {
       const classes: Array<string> = ['card-content'];
       if (this.isCorporation) {
         classes.push('card-content-corporation');
       }
       return classes.join(' ');
     },
-  },
-  computed: {
     hasDescription(): boolean {
       const description = this.metadata.description;
       return description !== undefined && (typeof(description) !== 'string' || description.length > 0);
+    },
+    firstRow(): ICardRenderRoot | undefined {
+      if (isICardRenderRoot(this.metadata.renderData) && this.metadata.renderData.rows.length > 0) {
+        return {
+          is: 'root',
+          rows: [this.metadata.renderData.rows[0]],
+        };
+      }
+      return undefined;
+    },
+    remainingRows(): ICardRenderRoot | undefined {
+      if (isICardRenderRoot(this.metadata.renderData) && this.metadata.renderData.rows.length > 1) {
+        return {
+          is: 'root',
+          rows: this.metadata.renderData.rows.slice(1),
+        };
+      }
+      return undefined;
     },
   },
 });

@@ -43,7 +43,7 @@ import {TileType} from '../common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
 import {RandomMAOptionType} from '../common/ma/RandomMAOptionType';
 import {AresHandler} from './ares/AresHandler';
-import {AresData} from '../common/ares/AresData';
+import {AresData, deserializeAresData} from '../common/ares/AresData';
 import {GameSetup} from './GameSetup';
 import {GameCards} from './GameCards';
 import {GlobalParameter} from '../common/GlobalParameter';
@@ -1746,16 +1746,7 @@ export class Game implements IGame, Logger {
     game.fundedAwards = deserializeFundedAwards(d.fundedAwards, players, awards);
 
     if (gameOptions.aresExtension) {
-      const aresData = d.aresData;
-      // Remove this entire block by 2025-08-01
-      if (aresData !== undefined) {
-        for (const entry of aresData.milestoneResults) {
-          if (entry.networkerCount === undefined) {
-            entry.networkerCount = (entry as any ['count'] as number) ?? 0;
-          }
-        }
-      }
-      game.aresData = aresData;
+      game.aresData = deserializeAresData(d.aresData);
     }
     // Reload colonies elements if needed
     if (gameOptions.coloniesExtension) {

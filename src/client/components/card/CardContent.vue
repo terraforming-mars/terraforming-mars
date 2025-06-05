@@ -1,6 +1,6 @@
 <template>
   <div :class="getClasses()">
-    <CardRequirementsComponent v-if="requirements.length > 0" :requirements="requirements"/>  
+    <CardRequirementsComponent v-if="requirements.length > 0" :requirements="requirements"/>
     <CardRenderData v-if="metadata.renderData && metadata.renderData.rows.length > 0" :renderData="{ rows: [metadata.renderData.rows[0]] }" />
     <CardDescription v-if="isCorporation && hasDescription" :item="metadata.description"/>
     <CardRenderData v-if="metadata.renderData.rows.length > 1" :renderData="{ rows: metadata.renderData.rows.slice(1) }" />

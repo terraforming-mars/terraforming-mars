@@ -54,7 +54,7 @@ export class Vermin extends ActionCard implements IProjectCard, IActionCard {
             eb.empty().startAction.resource(CardResource.ANIMAL).or().resource(CardResource.MICROBE).asterix();
           });
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.questionmark(),
+        victoryPoints: CardRenderDynamicVictoryPoints.vermin(),
         description: 'Each player, including you, gets -1 VP per city they have IF THERE ARE AT LEAST 10 ANIMALS HERE.',
       },
     });

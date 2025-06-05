@@ -6,10 +6,11 @@ import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
 
 export class CardRenderDynamicVictoryPoints implements ICardRenderDynamicVictoryPoints {
-  public targetOneOrMore: boolean = false; // marking target to be one or more res (Search for Life)
-  public anyPlayer: boolean = false; // Law Suit, Vermin
-  public asterisk: boolean | undefined = undefined;
-  public asFraction: boolean | undefined = undefined;
+  public targetOneOrMore: boolean | undefined; // marking target to be one or more res (Search for Life)
+  public anyPlayer: boolean | undefined; // Law Suit
+  public asterisk: boolean | undefined;
+  public asFraction: boolean | undefined;
+  public vermin: boolean | undefined;
 
   constructor(public item: CardRenderItem | undefined, public points: number, public target: number) {}
 
@@ -36,6 +37,12 @@ export class CardRenderDynamicVictoryPoints implements ICardRenderDynamicVictory
   public static searchForLife(): CardRenderDynamicVictoryPoints {
     const item = new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.RESOURCE, 1, {resource: CardResource.SCIENCE}), 3, 3);
     item.targetOneOrMore = true;
+    return item;
+  }
+  public static vermin() {
+    const item = new CardRenderDynamicVictoryPoints(undefined, 0, 0);
+    item.vermin = true;
+    item.anyPlayer = true;
     return item;
   }
   public static colonies(points: number, target: number, any: boolean = false): CardRenderDynamicVictoryPoints {

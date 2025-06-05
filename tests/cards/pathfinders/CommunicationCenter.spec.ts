@@ -7,6 +7,11 @@ import {testGame} from '../../TestGame';
 import {Resource} from '../../../src/common/Resource';
 import {CardType} from '../../../src/common/cards/CardType';
 import {CEOsFavoriteProject} from '../../../src/server/cards/base/CEOsFavoriteProject';
+import {DataLeak} from '../../../src/server/cards/pathfinders/DataLeak';
+import {NobelLabs} from '../../../src/server/cards/pathfinders/NobelLabs';
+import {SolarStorm} from '../../../src/server/cards/pathfinders/SolarStorm';
+import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
 describe('CommunicationCenter', () => {
   let card: CommunicationCenter;
@@ -76,7 +81,7 @@ describe('CommunicationCenter', () => {
     expect(player2.cardsInHand).is.length(0);
   });
 
-  it('Work with CEOs favorite project', () => {
+  it('Works with CEOs favorite project', () => {
     card.resourceCount = 2;
     player.playedCards = [card];
 
@@ -97,5 +102,51 @@ describe('CommunicationCenter', () => {
     player.addResourceTo(card, 8);
     expect(card.resourceCount).eq(1);
     expect(player.cardsInHand).is.length(3);
+  });
+
+  it('Works with data leak (checking code works)', () => {
+    card.resourceCount = 2;
+    player.playedCards = [card];
+
+    const dataLeak = new DataLeak();
+    player.playCard(dataLeak);
+
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
+
+    expect(player.cardsInHand).has.length(2);
+    expect(card.resourceCount).eq(2);
+  });
+
+  it('Works with Nobel Labs (checking code works)', () => {
+    card.resourceCount = 2;
+    const nobelLabs = new NobelLabs
+    player.playedCards = [card, nobelLabs];
+
+    nobelLabs.action(player);
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
+
+    expect(player.cardsInHand).has.length(1);
+    expect(card.resourceCount).eq(1);
+  });
+
+  it('Can be targetted by Solar Storm before a card is automatically drawn', () => {
+    card.resourceCount = 2;
+    player.playedCards = [card];
+    const solarStorm = new SolarStorm();
+    solarStorm.play(player2);
+    
+    runAllActions(game);
+    
+    const orOptions = cast(player2.getWaitingFor(), OrOptions);
+    const selectCard = cast(orOptions.options[0], SelectCard);
+    expect(selectCard.cards).has.members([card]);
+    selectCard.cb([card]);
+
+    runAllActions(game);
+
+    expect(player.cardsInHand).has.length(0);
+    expect(card.resourceCount).eq(0);
   });
 });

@@ -41,8 +41,8 @@ export class CommunicationCenter extends Card implements IProjectCard {
   public onResourceAdded(player: IPlayer, playedCard: ICard) {
     if (playedCard.name !== this.name) return;
 
-    // 
-    const priority = (playedCard.name === CardName.SOLAR_STORM) ? Priority.BACK_OF_THE_LINE : Priority.DEFAULT;
+    // Resolve Solar Storm removing data before removing resources to draw card
+    const priority = (playedCard.name === CardName.SOLAR_STORM) ? Priority.BACK_OF_THE_LINE : Priority.DRAW_CARDS;
     player.defer(() => {
         while (this.resourceCount >= 3) {
           this.resourceCount -= 3;

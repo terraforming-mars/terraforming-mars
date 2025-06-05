@@ -99,12 +99,17 @@ async function start() {
   }
   GameLoader.getInstance().maintenance();
 
-  const port = process.env.PORT || 8080;
-  const host = process.env.HOST || '::';
   console.log(`Starting ${raw_settings.head}, built at ${raw_settings.builtAt}`);
-  console.log(`Starting server listening to ${host} on port ${port}`);
 
-  server.listen({'port': port, 'host': host});
+  const port = process.env.PORT || 8080;
+  const host = process.env.HOST;
+  if (host) {
+    console.log(`Starting server listening to ${host} on port ${port}`);
+  } else {
+    console.log(`Starting server on port ${port}`);
+  }
+
+  server.listen({port: port, host: host});
 
   if (!process.env.SERVER_ID) {
     console.log(`The secret serverId for this server is ${ansi.style.bold}${serverId}${ansi.style.reset}.`);

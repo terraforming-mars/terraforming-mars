@@ -47,8 +47,10 @@ export class ClassActionLawsuit extends Card implements IProjectCard {
       if (analysis.playersWithMaxCorruption.length > 1) {
         return false;
       }
-      if (analysis.playersWithMaxCorruption.length === 1 && player.underworldData.corruption === analysis.maxCorruption) {
-        this.warnings.add('selfTarget');
+      if (player.game.getPlayers().length > 1) {
+        if (analysis.playersWithMaxCorruption.length === 1 && player.underworldData.corruption === analysis.maxCorruption) {
+          this.warnings.add('selfTarget');
+        }
       }
     }
     return true;

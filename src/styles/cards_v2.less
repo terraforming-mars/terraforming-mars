@@ -1015,6 +1015,7 @@
             line-height: 20px;
             font-weight: bold;
             text-align: center;
+            padding-bottom: 0px;
 
             // Adding scrolling for cards with huge description
             &:not(.global-event-card-content) {
@@ -1034,7 +1035,7 @@
             }
 
             .card-corporation-box {
-                position: absolute;
+                position: relative;
                 display: flex;
                 flex-flow: column;
                 justify-content: center;
@@ -1042,8 +1043,6 @@
                 border-radius: 10px;
                 background: linear-gradient(to bottom right, #cccccc, #aaaaaa, #dddddd, #cccccc, #aaaaaa, #cacaca, #aaaaaa, #cccccc);
                 box-shadow: 0 0 0px 1px rgba(0, 0, 0.5);
-                bottom: 8px;
-                left: 8px;
                 width: 216px;
                 padding: 0 4px;
                 /* hide points on hover by poppig the overlay on top of them*/
@@ -2479,6 +2478,12 @@
             overflow: hidden;
             white-space: nowrap;
             height: 27px;
+
+            /* Conditional height adjustment for corporation cards makes a cleaner scrolling experience. */
+            &.is-corporation {
+                height: 40px;
+            }
+
             .corporation-label {
                 text-transform: uppercase;
                 float: left;

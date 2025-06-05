@@ -104,7 +104,7 @@ async function start() {
   console.log(`Starting ${raw_settings.head}, built at ${raw_settings.builtAt}`);
   console.log(`Starting server listening to ${host} on port ${port}`);
 
-  server.listen({"port": port, "host": host});
+  server.listen({'port': port, 'host': host});
 
   if (!process.env.SERVER_ID) {
     console.log(`The secret serverId for this server is ${ansi.style.bold}${serverId}${ansi.style.reset}.`);

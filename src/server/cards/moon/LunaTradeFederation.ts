@@ -8,10 +8,11 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Space} from '../../boards/Space';
 import {Resource} from '../../../common/Resource';
 import {Size} from '../../../common/cards/render/Size';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 // import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 // import {all, multiplier} from '../Options';
 
-export class LunaTradeFederation extends CorporationCard {
+export class LunaTradeFederation extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.LUNA_TRADE_FEDERATION,

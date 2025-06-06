@@ -11,7 +11,7 @@ import {MAX_TEMPERATURE} from '../../../common/constants';
 import {Size} from '../../../common/cards/render/Size';
 import {Units} from '../../../common/Units';
 
-export class Ambient extends CorporationCard {
+export class Ambient extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.AMBIENT,

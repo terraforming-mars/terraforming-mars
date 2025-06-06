@@ -10,8 +10,9 @@ import {Resource} from '../../../common/Resource';
 import {IActionCard} from '../ICard';
 import {Behavior} from '../../behavior/Behavior';
 import {getBehaviorExecutor} from '../../behavior/BehaviorExecutor';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class PalladinShipping extends CorporationCard implements IActionCard {
+export class PalladinShipping extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {
     super({
       name: CardName.PALLADIN_SHIPPING,

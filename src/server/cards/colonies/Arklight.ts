@@ -7,7 +7,7 @@ import {ICard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Arklight extends CorporationCard {
+export class Arklight extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ARKLIGHT,

@@ -5,8 +5,9 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {all} from '../Options';
 import {Resource} from '../../../common/Resource';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class KingdomofTauraro extends CorporationCard {
+export class KingdomofTauraro extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.KINGDOM_OF_TAURARO,

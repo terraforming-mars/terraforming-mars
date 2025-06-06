@@ -5,8 +5,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IStandardProjectCard} from '../IStandardProjectCard';
 import {Resource} from '../../../common/Resource';
+import {ICorporationCard} from './ICorporationCard';
 
-export class CrediCor extends CorporationCard {
+export class CrediCor extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.CREDICOR,

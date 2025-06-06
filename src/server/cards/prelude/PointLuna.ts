@@ -6,7 +6,7 @@ import {ICard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class PointLuna extends CorporationCard {
+export class PointLuna extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.POINT_LUNA,

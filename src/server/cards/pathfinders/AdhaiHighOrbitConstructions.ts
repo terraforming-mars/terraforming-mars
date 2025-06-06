@@ -9,8 +9,9 @@ import {isPlanetaryTag} from '../../pathfinders/PathfindersData';
 import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {IStandardProjectCard} from '../IStandardProjectCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class AdhaiHighOrbitConstructions extends CorporationCard {
+export class AdhaiHighOrbitConstructions extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS,

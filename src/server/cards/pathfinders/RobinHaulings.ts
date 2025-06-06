@@ -10,8 +10,9 @@ import {IProjectCard} from '../IProjectCard';
 import {MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '../../../common/constants';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class RobinHaulings extends CorporationCard {
+export class RobinHaulings extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ROBIN_HAULINGS,

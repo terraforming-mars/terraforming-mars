@@ -3,8 +3,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {GlobalParameter} from '../../../common/GlobalParameter';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class MorningStarInc extends CorporationCard {
+export class MorningStarInc extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.MORNING_STAR_INC,

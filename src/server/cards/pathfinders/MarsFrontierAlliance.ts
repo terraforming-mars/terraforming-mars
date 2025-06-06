@@ -5,8 +5,9 @@ import {IPlayer} from '../../../server/IPlayer';
 import {PlayerInput} from '../../../server/PlayerInput';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {ChooseAlliedParty} from '../../../server/deferredActions/ChooseAlliedParty';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class MarsFrontierAlliance extends CorporationCard {
+export class MarsFrontierAlliance extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.MARS_FRONTIER_ALLIANCE,

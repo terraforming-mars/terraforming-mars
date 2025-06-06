@@ -12,8 +12,9 @@ import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictory
 import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {all} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class TheGrandLunaCapitalGroup extends CorporationCard {
+export class TheGrandLunaCapitalGroup extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.THE_GRAND_LUNA_CAPITAL_GROUP,

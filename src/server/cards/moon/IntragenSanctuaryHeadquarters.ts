@@ -9,7 +9,7 @@ import {all} from '../Options';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {ICard} from '../ICard';
 
-export class IntragenSanctuaryHeadquarters extends CorporationCard {
+export class IntragenSanctuaryHeadquarters extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.INTRAGEN_SANCTUARY_HEADQUARTERS,

@@ -6,8 +6,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class LunaFirstIncorporated extends CorporationCard {
+export class LunaFirstIncorporated extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.LUNA_FIRST_INCORPORATED,

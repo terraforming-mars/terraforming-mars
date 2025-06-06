@@ -5,8 +5,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class MonsInsurance extends CorporationCard {
+export class MonsInsurance extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.MONS_INSURANCE,

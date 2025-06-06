@@ -14,7 +14,7 @@ import {message} from '../../logs/MessageBuilder';
 import {ICard} from '../ICard';
 import {GainResources} from '../../deferredActions/GainResources';
 
-export class Splice extends CorporationCard {
+export class Splice extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.SPLICE,

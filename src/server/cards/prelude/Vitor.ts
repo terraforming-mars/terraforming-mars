@@ -9,8 +9,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
 import {message} from '../../logs/MessageBuilder';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Vitor extends CorporationCard {
+export class Vitor extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.VITOR,

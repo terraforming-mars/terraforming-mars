@@ -11,7 +11,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class Recyclon extends CorporationCard {
+export class Recyclon extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.RECYCLON,

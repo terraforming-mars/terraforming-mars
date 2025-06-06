@@ -6,8 +6,9 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {CardResource} from '../../../common/CardResource';
 import {Space} from '../../boards/Space';
 import {Board} from '../../boards/Board';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class SoylentSeedlingSystems extends CorporationCard {
+export class SoylentSeedlingSystems extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.SOYLENT_SEEDLING_SYSTEMS,

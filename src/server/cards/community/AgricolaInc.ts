@@ -6,8 +6,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {inplaceRemove} from '../../../common/utils/utils';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class AgricolaInc extends CorporationCard {
+export class AgricolaInc extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.AGRICOLA_INC,

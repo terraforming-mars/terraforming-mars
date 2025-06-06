@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {ICard} from '../ICard';
 
-export class Ringcom extends CorporationCard {
+export class Ringcom extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.RINGCOM,

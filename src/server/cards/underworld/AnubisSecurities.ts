@@ -8,8 +8,9 @@ import {Resource} from '../../../common/Resource';
 import {all} from '../Options';
 import {Size} from '../../../common/cards/render/Size';
 import {Priority} from '../../deferredActions/Priority';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class AnubisSecurities extends CorporationCard {
+export class AnubisSecurities extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ANUBIS_SECURITIES,

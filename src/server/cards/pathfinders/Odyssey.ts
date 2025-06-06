@@ -7,8 +7,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {Size} from '../../../common/cards/render/Size';
 import {SelectProjectCardToPlay} from '../../inputs/SelectProjectCardToPlay';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Odyssey extends CorporationCard implements IActionCard {
+export class Odyssey extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {
     super({
       name: CardName.ODYSSEY,

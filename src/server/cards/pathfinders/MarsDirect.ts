@@ -4,11 +4,12 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
 // TODO(kberg): This card is actually different: it uses resources to track on this card, which
 // means this result can be changed by cards like CEO's Favorite Project.
 // It also means cards with a wild tag may impact this.
-export class MarsDirect extends CorporationCard {
+export class MarsDirect extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.MARS_DIRECT,

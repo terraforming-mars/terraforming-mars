@@ -10,7 +10,7 @@ import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 import {SerializedCard} from '../../SerializedCard';
 import {ICard} from '../ICard';
 
-export class Aridor extends CorporationCard {
+export class Aridor extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ARIDOR,

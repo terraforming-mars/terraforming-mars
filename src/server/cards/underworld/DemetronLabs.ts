@@ -12,8 +12,9 @@ import {sum} from '../../../common/utils/utils';
 import {Space} from '../../boards/Space';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class DemetronLabs extends CorporationCard implements IActionCard {
+export class DemetronLabs extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {
     super({
       name: CardName.DEMETRON_LABS,

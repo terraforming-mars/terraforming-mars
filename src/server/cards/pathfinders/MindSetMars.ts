@@ -12,8 +12,9 @@ import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {Size} from '../../../common/cards/render/Size';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class MindSetMars extends CorporationCard {
+export class MindSetMars extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.MIND_SET_MARS,

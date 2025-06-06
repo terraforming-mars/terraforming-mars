@@ -4,8 +4,9 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {ChooseCards} from '../../deferredActions/ChooseCards';
 import {IPlayer} from '../../IPlayer';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class JunkVentures extends CorporationCard {
+export class JunkVentures extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.JUNK_VENTURES,

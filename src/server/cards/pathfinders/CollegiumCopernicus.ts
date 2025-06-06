@@ -16,7 +16,7 @@ import {message} from '../../logs/MessageBuilder';
 function tradeCost(player: IPlayer) {
   return Math.max(0, 3 - player.colonies.tradeDiscount);
 }
-export class CollegiumCopernicus extends CorporationCard implements IActionCard {
+export class CollegiumCopernicus extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {
     super({
       name: CardName.COLLEGIUM_COPERNICUS,

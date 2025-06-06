@@ -5,8 +5,9 @@ import {IActionCard, ICard, isIActionCard, isIHasCheckLoops} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Viron extends CorporationCard {
+export class Viron extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.VIRON,

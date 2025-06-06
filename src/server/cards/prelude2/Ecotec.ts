@@ -9,8 +9,9 @@ import {Resource} from '../../../common/Resource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Ecotec extends CorporationCard {
+export class Ecotec extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ECOTEC,

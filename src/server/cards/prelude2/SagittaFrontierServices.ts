@@ -10,7 +10,7 @@ import {GainResources} from '../../deferredActions/GainResources';
 import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 
-export class SagittaFrontierServices extends CorporationCard {
+export class SagittaFrontierServices extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.SAGITTA_FRONTIER_SERVICES,

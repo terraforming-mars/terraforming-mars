@@ -14,7 +14,7 @@ import {Resource} from '../../../common/Resource';
 import {all, digit} from '../Options';
 import {SerializedCard} from '../../SerializedCard';
 
-export class PharmacyUnion extends CorporationCard {
+export class PharmacyUnion extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.PHARMACY_UNION,

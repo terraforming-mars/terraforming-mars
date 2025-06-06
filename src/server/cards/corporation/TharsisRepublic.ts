@@ -12,8 +12,9 @@ import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
+import {ICorporationCard} from './ICorporationCard';
 
-export class TharsisRepublic extends CorporationCard {
+export class TharsisRepublic extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.THARSIS_REPUBLIC,

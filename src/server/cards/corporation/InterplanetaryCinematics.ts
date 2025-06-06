@@ -7,8 +7,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 import {Resource} from '../../../common/Resource';
+import {ICorporationCard} from './ICorporationCard';
 
-export class InterplanetaryCinematics extends CorporationCard {
+export class InterplanetaryCinematics extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.INTERPLANETARY_CINEMATICS,

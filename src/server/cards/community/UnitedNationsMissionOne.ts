@@ -6,8 +6,9 @@ import {IPlayer} from '../../IPlayer';
 import {all} from '../Options';
 import {Phase} from '../../../common/Phase';
 import {Resource} from '../../../common/Resource';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class UnitedNationsMissionOne extends CorporationCard {
+export class UnitedNationsMissionOne extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.UNITED_NATIONS_MISSION_ONE,

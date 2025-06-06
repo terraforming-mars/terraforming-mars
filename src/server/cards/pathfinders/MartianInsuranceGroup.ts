@@ -6,8 +6,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class MartianInsuranceGroup extends CorporationCard {
+export class MartianInsuranceGroup extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.MARTIAN_INSURANCE_GROUP,

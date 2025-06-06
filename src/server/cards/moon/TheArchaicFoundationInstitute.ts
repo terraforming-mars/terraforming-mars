@@ -9,8 +9,9 @@ import {ICard} from '../ICard';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
 import {LogHelper} from '../../LogHelper';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class TheArchaicFoundationInstitute extends CorporationCard {
+export class TheArchaicFoundationInstitute extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE,

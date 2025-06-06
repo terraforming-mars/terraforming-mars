@@ -12,8 +12,9 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {all} from '../Options';
 import {SpecialDesignProxy} from './SpecialDesignProxy';
 import {inplaceRemove} from '../../../common/utils/utils';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Playwrights extends CorporationCard {
+export class Playwrights extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.PLAYWRIGHTS,

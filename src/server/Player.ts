@@ -30,7 +30,6 @@ import {SelectProjectCardToPlay} from './inputs/SelectProjectCardToPlay';
 import {SelectOption} from './inputs/SelectOption';
 import {SelectSpace} from './inputs/SelectSpace';
 import {SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
-import {SerializedCard} from './SerializedCard';
 import {SerializedPlayer} from './SerializedPlayer';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tag} from '../common/cards/Tag';
@@ -47,7 +46,6 @@ import {LogHelper} from './LogHelper';
 import {UndoActionOption} from './inputs/UndoActionOption';
 import {Turmoil} from './turmoil/Turmoil';
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
-import {deserializeProjectCard, serializeProjectCard} from './cards/cardSerialization';
 import {ColoniesHandler} from './colonies/ColoniesHandler';
 import {MonsInsurance} from './cards/promo/MonsInsurance';
 import {InputResponse} from '../common/inputs/InputResponse';
@@ -79,6 +77,7 @@ import {newStandardDraft} from './Draft';
 import {Message} from '../common/logs/Message';
 import {DiscordId} from './server/auth/discord';
 import {AlliedParty, PolicyId} from '../common/turmoil/Types';
+import {PlayedCards} from './cards/PlayedCards';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 const DEFAULT_GLOBAL_PARAMETER_STEPS = {
@@ -139,7 +138,7 @@ export class Player implements IPlayer {
   public cardsInHand: Array<IProjectCard> = [];
   public preludeCardsInHand: Array<IPreludeCard> = [];
   public ceoCardsInHand: Array<IProjectCard> = [];
-  public playedCards: Array<IProjectCard> = [];
+  public playedCards: PlayedCards = new PlayedCards();
   public draftedCards: Array<IProjectCard> = [];
   public draftHand: Array<IProjectCard> = [];
   public cardCost: number = constants.CARD_COST;
@@ -274,7 +273,7 @@ export class Player implements IPlayer {
   }
 
   public get tableau(): Array<ICorporationCard | IProjectCard> {
-    return [...this.corporations, ...this.playedCards];
+    return [...this.corporations, ...this.playedCards.asArray()];
   }
 
   public isCorporation(corporationName: CardName): boolean {
@@ -294,7 +293,7 @@ export class Player implements IPlayer {
   }
 
   public getPlayedCard(cardName: CardName): ICard | undefined {
-    return this.playedCards.find((card) => card.name === cardName);
+    return this.playedCards.get(cardName);
   }
 
   public getTitaniumValue(): number {
@@ -428,7 +427,7 @@ export class Player implements IPlayer {
   }
 
   public cardIsInEffect(cardName: CardName): boolean {
-    return this.playedCards.some((playedCard) => playedCard.name === cardName);
+    return this.playedCards.get(cardName) !== undefined;
   }
 
   public hasProtectedHabitats(): boolean {
@@ -1050,7 +1049,7 @@ export class Player implements IPlayer {
   }
 
   public discardPlayedCard(card: IProjectCard) {
-    const found = inplaceRemove(this.playedCards, card);
+    const found = this.playedCards.remove(card);
     if (found === false) {
       console.error(`Error: card ${card.name} not in ${this.id}'s hand`);
       return;
@@ -1812,7 +1811,7 @@ export class Player implements IPlayer {
       cardsInHand: this.cardsInHand.map(toName),
       preludeCardsInHand: this.preludeCardsInHand.map(toName),
       ceoCardsInHand: this.ceoCardsInHand.map(toName),
-      playedCards: this.playedCards.map(serializeProjectCard),
+      playedCards: this.playedCards.serialize(),
       draftedCards: this.draftedCards.map(toName),
       cardCost: this.cardCost,
       needsToDraft: this.needsToDraft,
@@ -1946,7 +1945,7 @@ export class Player implements IPlayer {
     // I don't like "as IPreludeCard" but this is pretty safe.
     player.preludeCardsInHand = cardsFromJSON(d.preludeCardsInHand) as Array<IPreludeCard>;
     player.ceoCardsInHand = ceosFromJSON(d.ceoCardsInHand);
-    player.playedCards = d.playedCards.map((element: SerializedCard) => deserializeProjectCard(element));
+    player.playedCards = PlayedCards.deserialize(d.playedCards);
     player.draftedCards = cardsFromJSON(d.draftedCards);
     player.autopass = d.autoPass ?? false;
     player.preservationProgram = d.preservationProgram ?? false;

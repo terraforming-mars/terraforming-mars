@@ -164,7 +164,7 @@ describe('ProjectWorkshop', () => {
     const selectOption = cast(card.action(player), SelectOption);
 
     expect(selectOption.cb(undefined)).is.undefined;
-    expect(player.playedCards).is.empty;
+    expect(player.playedCards.length).eq(0);
 
     expect(player.getTerraformRating()).to.eq(originalTR - 5);
     expect(player.cardsInHand).has.lengthOf(2);
@@ -215,7 +215,7 @@ describe('ProjectWorkshop', () => {
     expect(orOptions.options[1].cb()).is.undefined;
     runAllActions(game);
 
-    expect(player.playedCards).has.members([smallAnimals, extremophiles]);
+    expect(player.playedCards.asArray()).has.members([smallAnimals, extremophiles]);
     expect(game.projectDeck.discardPile).contains(birds);
     expect(player.getTerraformRating()).to.eq(originalTR + 1);
     expect(player.megaCredits).eq(2); // Spent 3MC for the reds tax.

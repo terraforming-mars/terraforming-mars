@@ -22,7 +22,7 @@ describe('SecretLabs', () => {
     [/* game */, player] = testGame(1);
     microbeCard = new GHGProducingBacteria();
     floaterCard = new JovianLanterns();
-    player.playedCards = [microbeCard, floaterCard];
+    player.playedCards.push(microbeCard, floaterCard);
   });
 
   it('canPlay', () => {

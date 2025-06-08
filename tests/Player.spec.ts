@@ -35,6 +35,7 @@ import {OrOptions} from '../src/server/inputs/OrOptions';
 import {Payment} from '../src/common/inputs/Payment';
 import {PhysicsComplex} from '../src/server/cards/base/PhysicsComplex';
 import {GlobalParameter} from '../src/common/GlobalParameter';
+import {EnergyTapping} from '../src/server/cards/base/EnergyTapping';
 
 describe('Player', () => {
   it('should initialize with right defaults', () => {
@@ -59,7 +60,7 @@ describe('Player', () => {
     player2.production.add(Resource.ENERGY, 2);
     player3.production.add(Resource.ENERGY, 2);
     player.playedCards.push(new LunarBeam());
-    player.playedCards.push(new LunarBeam());
+    player.playedCards.push(new EnergyTapping());
     card.play(player);
     runAllActions(player.game);
     player.process({type: 'player', player: player2.color});
@@ -74,7 +75,7 @@ describe('Player', () => {
     (player as any).setWaitingFor(undefined, undefined);
 
     player.playedCards.push(new LunarBeam());
-    player.playedCards.push(new LunarBeam());
+    player.playedCards.push(new EnergyTapping());
     player.production.add(Resource.ENERGY, 1);
     player2.production.add(Resource.ENERGY, 1);
 

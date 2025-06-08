@@ -61,21 +61,21 @@ describe('CassiniStation', () => {
   });
 
   it('play - one floater card', () => {
-    player.playedCards = [floater1];
+    player.playedCards.push(floater1);
     const options = card.play(player);
     expect(options).is.undefined;
     expect(floater1.resourceCount).eq(2);
   });
 
   it('play - one data card', () => {
-    player.playedCards = [data1];
+    player.playedCards.push(data1);
     const options = card.play(player);
     expect(options).is.undefined;
     expect(data1.resourceCount).eq(3);
   });
 
   it('play - all', () => {
-    player.playedCards = [floater1, floater2, data1, data2, other];
+    player.playedCards.push(floater1, floater2, data1, data2, other);
     const options = cast(card.play(player), SelectCard);
 
     expect(options?.cards).has.length(4);

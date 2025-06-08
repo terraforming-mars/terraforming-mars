@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {PowerPlant} from '../../../src/server/cards/base/PowerPlant';
 import {MagneticShield} from '../../../src/server/cards/promo/MagneticShield';
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
@@ -13,16 +12,19 @@ describe('MagneticShield', () => {
     [/* game */, player] = testGame(2);
   });
 
-  it('Can not play if not enough power tags available', () => {
-    expect(card.canPlay(player)).is.not.true;
-  });
-
+  const canPlayRuns = [
+    {tags: 0, expected: false},
+    {tags: 1, expected: false},
+    {tags: 2, expected: false},
+    {tags: 3, expected: true},
+  ] as const;
+  for (const run of canPlayRuns) {
+    it('canPlay ' + run.tags, () => {
+      player.tagsForTest = {power: run.tags};
+      expect(card.canPlay(player)).eq(run.expected);
+    });
+  }
   it('Should play', () => {
-    player.playedCards.push(new PowerPlant());
-    player.playedCards.push(new PowerPlant());
-    player.playedCards.push(new PowerPlant());
-    expect(card.canPlay(player)).is.true;
-
     card.play(player);
     expect(player.getTerraformRating()).to.eq(24);
   });

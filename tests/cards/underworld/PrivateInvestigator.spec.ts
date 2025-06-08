@@ -24,7 +24,7 @@ describe('PrivateInvestigator', () => {
 
     expect(selectPlayer.players).to.have.members([player2, player4]);
     selectPlayer.cb(player2);
-    expect(player2.playedCards).includes(card);
-    expect(player.playedCards).does.not.include(card);
+    expect(player2.playedCards.get(card.name)).deep.eq(card);
+    expect(player.playedCards.get(card.name)).is.undefined;
   });
 });

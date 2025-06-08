@@ -47,7 +47,7 @@ describe('Lowell', () => {
     selectCard.cb([selectCard.cards[0]]);
 
     expect(player.playedCards.filter((card) => card.type === CardType.CEO)).has.length(1);
-    expect(player.playedCards.includes(card)).is.false;
+    expect(player.playedCards.get(card.name)).is.undefined;
     expect(player.megaCredits).eq(0);
   });
 

@@ -105,7 +105,7 @@ describe('OlympusConference', () => {
 
     // Reset the state
     game.deferredActions = new DeferredActionsQueue();
-    player.playedCards = [];
+    player.playedCards.set();
 
 
     // Mars University played before Olympus Conference

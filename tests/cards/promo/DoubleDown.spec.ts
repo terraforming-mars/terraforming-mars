@@ -53,7 +53,7 @@ describe('DoubleDown', () => {
     selectCard.cb([donation]);
 
     expect(player.stock.megacredits).to.eq(21);
-    expect(player.playedCards).to.have.members([donation, doubleDown]);
+    expect(player.playedCards.asArray()).to.have.members([donation, doubleDown]);
     expect(player.preludeCardsInHand).is.empty;
   });
 
@@ -131,7 +131,7 @@ describe('DoubleDown', () => {
     expect(player.production.energy).to.eq(0);
     expect(player.preludeCardsInHand).is.empty;
     expect(player.stock.megacredits).eq(19);
-    expect(player.playedCards).deep.eq([galileanMining]);
+    expect(player.playedCards.asArray()).deep.eq([galileanMining]);
   });
 
   it('Can double-down New Partner', () => {
@@ -149,7 +149,7 @@ describe('DoubleDown', () => {
 
     expect(player.production.megacredits).to.eq(1);
     expect(player.preludeCardsInHand).is.empty;
-    expect(player.playedCards).deep.eq([newPartner, doubleDown]);
+    expect(player.playedCards.asArray()).deep.eq([newPartner, doubleDown]);
   });
 
   it('Can double-down when drawing with New Partner', () => {
@@ -173,7 +173,7 @@ describe('DoubleDown', () => {
 
     expect(player.production.megacredits).to.eq(2);
     expect(player.preludeCardsInHand).is.empty;
-    expect(player.playedCards).deep.eq([newPartner, doubleDown]);
+    expect(player.playedCards.asArray()).deep.eq([newPartner, doubleDown]);
   });
 
   it('Make compatible with Board of Directors', () => {
@@ -194,7 +194,7 @@ describe('DoubleDown', () => {
     expect(Array.from(boardOfDirectors.warnings)).includes('ineffectiveDoubleDown');
 
     expect(boardOfDirectors.resourceCount).eq(4);
-    expect(player.playedCards).deep.eq([boardOfDirectors, doubleDown]);
+    expect(player.playedCards.asArray()).deep.eq([boardOfDirectors, doubleDown]);
 
     const modelCard = (<SelectCardModel>model.waitingFor).cards[0];
     expect(modelCard.name).eq(CardName.BOARD_OF_DIRECTORS);

@@ -64,7 +64,7 @@ describe('FriendsInHighPlaces', () => {
     player.megaCredits = 30;
     player.underworldData.corruption = 1;
     expect(player.canPlay(largeConvoy)).eq(true);
-    player.playedCards = [];
+    player.playedCards.set();
     expect(player.canPlay(largeConvoy)).eq(false);
   });
 });

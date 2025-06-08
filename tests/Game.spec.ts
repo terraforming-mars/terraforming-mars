@@ -15,7 +15,6 @@ import {SaturnSystems} from '../src/server/cards/corporation/SaturnSystems';
 import {Resource} from '../src/common/Resource';
 import {Space} from '../src/server/boards/Space';
 import {SpaceId} from '../src/common/Types';
-import {ResearchNetwork} from '../src/server/cards/prelude/ResearchNetwork';
 import {ArcticAlgae} from '../src/server/cards/base/ArcticAlgae';
 import {Ecologist} from '../src/server/milestones/Ecologist';
 import {OrOptions} from '../src/server/inputs/OrOptions';
@@ -539,13 +538,11 @@ describe('Game', () => {
   it('Check Ecologist Milestone', () => {
     const player = TestPlayer.BLUE.newPlayer();
 
-    const card1 = new ResearchNetwork();
-    const card2 = new ArcticAlgae();
     const ecologist = new Ecologist();
 
-    player.playedCards.push(card1, card2);
+    player.tagsForTest = {plant: 1, microbe: 1};
     expect(ecologist.canClaim(player)).is.not.true;
-    player.playedCards.push(card1, card2);
+    player.tagsForTest = {plant: 1, microbe: 1, wild: 2};
     expect(ecologist.canClaim(player)).is.true;
   });
 

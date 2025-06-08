@@ -46,7 +46,7 @@ describe('ValleyTrust', () => {
     expect(selectCard.cards).to.have.members([loan, hugeAsteroid, metalRichAsteroid]);
 
     selectCard.cb([loan]);
-    expect(player.playedCards).includes(loan);
+    expect(player.playedCards.get(loan.name)).deep.eq(loan);
     expect(game.preludeDeck.discardPile).to.have.members([hugeAsteroid, metalRichAsteroid]);
   });
 

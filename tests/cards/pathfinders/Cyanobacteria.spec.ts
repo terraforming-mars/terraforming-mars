@@ -34,7 +34,7 @@ describe('Cyanobacteria', () => {
   });
 
   it('play, one microbe card', () => {
-    player.playedCards = [ghgProducingBacteria];
+    player.playedCards.push(ghgProducingBacteria);
     const options = card.play(player);
     expect(options).is.undefined;
     // 9 oceans, so, maxed out.
@@ -43,7 +43,7 @@ describe('Cyanobacteria', () => {
   });
 
   it('play, one microbe card, include Wetlands', () => {
-    player.playedCards = [ghgProducingBacteria];
+    player.playedCards.push(ghgProducingBacteria);
     player.game.simpleAddTile(
       player,
       player.game.board.getAvailableSpacesOnLand(player)[0],
@@ -57,7 +57,7 @@ describe('Cyanobacteria', () => {
   });
 
   it('play, many microbe cards', () => {
-    player.playedCards = [ghgProducingBacteria, tardigrades, ants];
+    player.playedCards.push(ghgProducingBacteria, tardigrades, ants);
 
     cast(card.play(player), undefined);
 
@@ -75,7 +75,7 @@ describe('Cyanobacteria', () => {
   });
 
   it('play, many microbe cards, wrong input', () => {
-    player.playedCards = [ghgProducingBacteria, tardigrades, ants];
+    player.playedCards.push(ghgProducingBacteria, tardigrades, ants);
 
     card.play(player);
     const options = cast(player.game.deferredActions.peek()!.execute(), AndOptions);

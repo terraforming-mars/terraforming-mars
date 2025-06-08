@@ -37,7 +37,7 @@ describe('UnderworldExpansion', () => {
     dataCard2 = new MartianCulture();
     microbeCard1 = new GHGProducingBacteria();
     microbeCard2 = new RegolithEaters();
-    player1.playedCards = [dataCard1, dataCard2, microbeCard1, microbeCard2];
+    player1.playedCards.set(dataCard1, dataCard2, microbeCard1, microbeCard2);
     game.phase = Phase.ACTION;
   });
 

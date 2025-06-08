@@ -82,7 +82,7 @@ describe('Counter', () => {
 
     // Unset this so playedCards are counted more closely. It's a weird thing about tagsForTest.
     player.tagsForTest = undefined;
-    player.playedCards = [fakeCard({tags: [Tag.CITY, Tag.CITY]})];
+    player.playedCards.set(fakeCard({tags: [Tag.CITY, Tag.CITY]}));
     expect(counter.count({tag: Tag.CITY})).eq(3);
 
     // Adding it to the player's tableau doesn't double-count it.

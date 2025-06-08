@@ -109,7 +109,7 @@ describe('CollegiumCopernicus', () => {
 
   it('onCardPlayed', () => {
     const lunarObservationPost = new LunarObservationPost();
-    player.playedCards = [lunarObservationPost];
+    player.playedCards.push(lunarObservationPost);
 
     card.onCardPlayed(player, fakeCard({tags: [Tag.SCIENCE]}));
     runAllActions(game);

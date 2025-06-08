@@ -57,7 +57,7 @@ describe('ImprovedMoonConcrete', () => {
     expect(player.getPlayableCards().map((card) => card.card.name)).is.empty;
 
     // And this one shows that with Improved Moon Concrete, titanium isn't necessary
-    player.playedCards = [card];
+    player.playedCards.push(card);
     expect(player.getPlayableCards().map((card) => card.card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
   });
 
@@ -72,7 +72,7 @@ describe('ImprovedMoonConcrete', () => {
     expect(projectCard.canAct(player)).is.false;
 
     // And this one shows that with Improved Moon Concrete, titanium isn't necessary
-    player.playedCards = [card];
+    player.playedCards.push(card);
     expect(projectCard.canAct(player)).is.true;
   });
 });

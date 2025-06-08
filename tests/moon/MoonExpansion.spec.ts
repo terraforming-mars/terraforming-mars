@@ -179,7 +179,7 @@ describe('MoonExpansion', () => {
     expect(player.getPlayableCardsForTest()).does.not.include(card);
 
     // Gives a +2/-2 on the next action
-    player.playedCards = [specialDesign];
+    player.playedCards.push(specialDesign);
     player.lastCardPlayed = specialDesign.name;
 
     expect(player.getPlayableCardsForTest()).does.include(card);

@@ -33,7 +33,7 @@ describe('ControlledBloom', () => {
     const a = fakeCard({name: 'A' as CardName, resourceType: CardResource.MICROBE});
     const b = fakeCard({name: 'B' as CardName, resourceType: CardResource.DATA});
     const c = fakeCard({name: 'C' as CardName, resourceType: CardResource.MICROBE});
-    player.playedCards = [a, b, c];
+    player.playedCards.push(a, b, c);
 
     card.play(player);
 

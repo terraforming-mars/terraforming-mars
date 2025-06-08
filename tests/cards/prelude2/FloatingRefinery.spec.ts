@@ -29,7 +29,7 @@ describe('FloatingRefinery', () => {
     floater2 = new FloatingHabs();
     other = new MartianCulture();
     [game, player] = testGame(2, {preludeExtension: true});
-    player.playedCards = [floater1, floater2, other];
+    player.playedCards.push(floater1, floater2, other);
   });
 
   it('Play', () => {

@@ -21,7 +21,7 @@ describe('EarthEmbassy', () => {
   it('play', () => {
     const fake = fakeCard({tags: [Tag.EARTH, Tag.MOON, Tag.MOON]});
 
-    player.playedCards = [fake];
+    player.playedCards.push(fake);
     expect(player.tags.count(Tag.EARTH, 'raw')).eq(1);
     expect(player.tags.count(Tag.EARTH, 'default')).eq(1);
 
@@ -67,7 +67,7 @@ describe('EarthEmbassy', () => {
 
     expect(player.cardsInHand).has.length(0);
 
-    player.playedCards = [earthEmbassy];
+    player.playedCards.push(earthEmbassy);
     pointLuna.onCardPlayed(player, fake);
 
     expect(player.cardsInHand).is.empty;

@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {PowerPlant} from '../../../src/server/cards/pathfinders/PowerPlant';
 import {BalancedDevelopment} from '../../../src/server/cards/pathfinders/BalancedDevelopment';
 import {testGame} from '../../TestingUtils';
 
@@ -10,9 +9,8 @@ describe('BalancedDevelopment', () => {
     const turmoil = game.turmoil!;
 
     turmoil.initGlobalEvent(game);
-    player.playedCards.push(new PowerPlant());
-    player2.playedCards.push(new PowerPlant());
-    player2.playedCards.push(new PowerPlant());
+    player.tagsForTest = {mars: 1};
+    player2.tagsForTest = {mars: 2};
 
     turmoil.chairman = player2;
     turmoil.dominantParty.partyLeader = player2;

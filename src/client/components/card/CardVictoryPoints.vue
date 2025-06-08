@@ -8,8 +8,8 @@
       </div>
     </template>
     <template v-else-if="victoryPoints.vermin">
-      10+
-      <CardRenderItemComponent :item="microbe"/>
+      10
+      <CardRenderItemComponent :item="animal"/>
       : -1/
       <CardRenderItemComponent :item="city"/>
       *
@@ -84,8 +84,8 @@ export default Vue.extend({
       }
       return `${vps.points}/${vps.target}`;
     },
-    microbe(): ICardRenderItem {
-      return {is: 'item', type: CardRenderItemType.RESOURCE, resource: CardResource.MICROBE, size: Size.SMALL, amount: 1};
+    animal(): ICardRenderItem {
+      return {is: 'item', type: CardRenderItemType.RESOURCE, resource: CardResource.ANIMAL, size: Size.SMALL, amount: 1};
     },
     city(): ICardRenderItem {
       return {is: 'item', type: CardRenderItemType.CITY, size: Size.SMALL, amount: 1};

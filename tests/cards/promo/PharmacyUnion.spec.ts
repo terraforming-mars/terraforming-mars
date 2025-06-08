@@ -200,7 +200,7 @@ describe('PharmacyUnion', () => {
   it('Edge case, lose MC before gaining', () => {
     // See https://github.com/terraforming-mars/terraforming-mars/issues/2191
     player.megaCredits = 0;
-    player.playedCards = [new MediaGroup()];
+    player.playedCards.push(new MediaGroup());
     player.playCard(new Virus());
     runAllActions(player.game);
     expect(player.megaCredits).eq(3);

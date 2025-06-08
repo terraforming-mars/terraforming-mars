@@ -51,7 +51,7 @@ describe('SolBank', () => {
   });
 
   it('discounted card does not trigger', () => {
-    player.playedCards = [new IndenturedWorkers()];
+    player.playedCards.push(new IndenturedWorkers());
     player.lastCardPlayed = CardName.INDENTURED_WORKERS; // 8 MC discount
     player.cardsInHand = [new MicroMills()];
     const spctp = new SelectProjectCardToPlay(player);

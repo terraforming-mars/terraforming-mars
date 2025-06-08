@@ -36,6 +36,7 @@ import {AlliedParty} from '../common/turmoil/Types';
 import {IParty} from './turmoil/parties/IParty';
 import {Message} from '../common/logs/Message';
 import {DiscordId} from './server/auth/discord';
+import {PlayedCards} from './cards/PlayedCards';
 
 export type ResourceSource = IPlayer | GlobalEventName | ICard;
 
@@ -115,7 +116,7 @@ export interface IPlayer {
   cardsInHand: Array<IProjectCard>;
   preludeCardsInHand: Array<IPreludeCard>;
   ceoCardsInHand: Array<IProjectCard>;
-  playedCards: Array<IProjectCard>;
+  playedCards: PlayedCards;
   cardCost: number;
   tableau: Array<ICorporationCard | IProjectCard>;
 

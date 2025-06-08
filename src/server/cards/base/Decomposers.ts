@@ -41,7 +41,7 @@ export class Decomposers extends Card implements IProjectCard {
   }
   public override bespokePlay(player: IPlayer) {
     // Get two extra microbes from EcoExperts if played during prelude while having just played EcoExperts
-    if (player.game.phase === Phase.PRELUDES && player.playedCards.length > 0 && player.playedCards[player.playedCards.length-1].name === CardName.ECOLOGY_EXPERTS) {
+    if (player.game.phase === Phase.PRELUDES && player.playedCards.last()?.name === CardName.ECOLOGY_EXPERTS) {
       player.addResourceTo(this, {qty: 2, log: true});
     }
     return undefined;

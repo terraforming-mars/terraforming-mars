@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {StripMine} from '../../src/server/cards/base/StripMine';
 import {GlobalDustStorm} from '../../src/server/turmoil/globalEvents/GlobalDustStorm';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
@@ -9,9 +8,8 @@ describe('GlobalDustStorm', () => {
     const card = new GlobalDustStorm();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;
-    player.playedCards.push(new StripMine());
-    player2.playedCards.push(new StripMine());
-    player2.playedCards.push(new StripMine());
+    player.tagsForTest = {building: 1};
+    player2.tagsForTest = {building: 2};
     turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2;

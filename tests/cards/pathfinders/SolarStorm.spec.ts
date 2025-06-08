@@ -45,8 +45,8 @@ describe('SolarStorm', () => {
   });
 
   it('remove data, nobody has data', () => {
-    player.playedCards = [cryptocurrency];
-    player2.playedCards = [communicationCenter];
+    player.playedCards.push(cryptocurrency);
+    player2.playedCards.push(communicationCenter);
     card.play(player);
 
     runAllActions(player.game);
@@ -54,8 +54,8 @@ describe('SolarStorm', () => {
   });
 
   it('remove data, only you have data', () => {
-    player.playedCards = [cryptocurrency];
-    player2.playedCards = [communicationCenter];
+    player.playedCards.push(cryptocurrency);
+    player2.playedCards.push(communicationCenter);
 
     cryptocurrency.resourceCount = 2;
 
@@ -71,8 +71,8 @@ describe('SolarStorm', () => {
   });
 
   it('remove data, two players with data', () => {
-    player.playedCards = [cryptocurrency];
-    player2.playedCards = [communicationCenter];
+    player.playedCards.push(cryptocurrency);
+    player2.playedCards.push(communicationCenter);
 
     cryptocurrency.resourceCount = 2;
     communicationCenter.resourceCount = 6;

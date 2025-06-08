@@ -73,7 +73,7 @@ describe('OumuamuaTypeObjectSurvey', () => {
 
     expect(projectDeck.drawPile).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([noTags, earthTag]);
-    expect(player.playedCards).is.empty;
+    expect(player.playedCards.length).eq(0);
     expect(player.production.energy).eq(0);
   });
 
@@ -84,7 +84,7 @@ describe('OumuamuaTypeObjectSurvey', () => {
 
     expect(projectDeck.drawPile).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([noTags, spaceTag]);
-    expect(player.playedCards).is.empty;
+    expect(player.playedCards.length).eq(0);
     expect(player.production.energy).eq(3);
   });
 
@@ -96,7 +96,7 @@ describe('OumuamuaTypeObjectSurvey', () => {
 
     expect(projectDeck.drawPile).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([spaceTag, spaceScienceTag]);
-    expect(player.playedCards).is.empty;
+    expect(player.playedCards.length).eq(0);
     expect(player.production.energy).eq(3);
   });
 
@@ -108,7 +108,7 @@ describe('OumuamuaTypeObjectSurvey', () => {
 
     expect(projectDeck.drawPile).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([spaceTag]);
-    expect(player.playedCards).deep.eq([spaceScienceTag]);
+    expect(player.playedCards.asArray()).deep.eq([spaceScienceTag]);
     expect(player.production.energy).eq(0);
     // played card doesn't cost anything.
     expect(player.megaCredits).eq(100);
@@ -121,7 +121,7 @@ describe('OumuamuaTypeObjectSurvey', () => {
 
     expect(projectDeck.drawPile).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([noTags]);
-    expect(player.playedCards).deep.eq([microbeTag]);
+    expect(player.playedCards.asArray()).deep.eq([microbeTag]);
     expect(player.production.energy).eq(0);
     // played card doesn't cost anything.
     expect(player.megaCredits).eq(100);
@@ -134,7 +134,7 @@ describe('OumuamuaTypeObjectSurvey', () => {
 
     expect(projectDeck.drawPile).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([noTags]);
-    expect(player.playedCards).deep.eq([scienceTag]);
+    expect(player.playedCards.asArray()).deep.eq([scienceTag]);
     expect(player.production.energy).eq(0);
     // played card doesn't cost anything.
     expect(player.megaCredits).eq(100);
@@ -147,7 +147,7 @@ describe('OumuamuaTypeObjectSurvey', () => {
 
     expect(projectDeck.drawPile).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([noTags]);
-    expect(player.playedCards).deep.eq([scienceMicrobeTag]);
+    expect(player.playedCards.asArray()).deep.eq([scienceMicrobeTag]);
     expect(player.production.energy).eq(0);
     // played card doesn't cost anything.
     expect(player.megaCredits).eq(100);
@@ -164,7 +164,7 @@ describe('OumuamuaTypeObjectSurvey', () => {
 
     expect(projectDeck.drawPile).deep.eq([slug]);
     expect(player.cardsInHand).deep.eq([noTags]);
-    expect(player.playedCards).deep.eq([requirementsCard]);
+    expect(player.playedCards.asArray()).deep.eq([requirementsCard]);
     expect(player.production.energy).eq(0);
     // played card doesn't cost anything.
     expect(player.megaCredits).eq(100);
@@ -178,7 +178,7 @@ describe('OumuamuaTypeObjectSurvey', () => {
     card.play(player);
 
     expect(projectDeck.drawPile).deep.eq([slug]);
-    expect(player.playedCards).is.empty;
+    expect(player.playedCards.length).eq(0);
     expect(player.cardsInHand).deep.eq([unplayableMicrobeTag, noTags]);
   });
 
@@ -193,14 +193,14 @@ describe('OumuamuaTypeObjectSurvey', () => {
     card.play(player);
 
     expect(projectDeck.drawPile).deep.eq([slug]);
-    expect(player.playedCards).deep.eq([cardWithMicrobe, playableMicrobeTag]);
+    expect(player.playedCards.asArray()).deep.eq([cardWithMicrobe, playableMicrobeTag]);
     expect(player.cardsInHand).deep.eq([noTags]);
   });
 
 
   it('The part where a card gets 2 data', () => {
     const lunarObservationPost = new LunarObservationPost();
-    player.playedCards = [lunarObservationPost];
+    player.playedCards.push(lunarObservationPost);
     // Put two cards on the front of the deck so they don't have data
     projectDeck.drawPile.push(slug, noTags);
 
@@ -218,7 +218,7 @@ describe('OumuamuaTypeObjectSurvey', () => {
 
   //   expect(projectDeck.drawPile).deep.eq([slug]);
   //   expect(player.cardsInHand).deep.eq([noTags]);
-  //   expect(player.playedCards).deep.eq([lunarObservationPost]);
+  //   expect(player.playedCards.asArray()).deep.eq([lunarObservationPost]);
   //   expect(player.production.energy).eq(0);
   //   // played card doesn't cost anything.
   //   expect(player.megaCredits).eq(100);

@@ -27,10 +27,10 @@ describe('LunaPoliticalInstitute', () => {
 
     expect(player.getPlayableCardsForTest()).does.not.include(card);
 
-    player.playedCards = [fakeCard({tags: [Tag.MOON]})];
+    player.playedCards.push(fakeCard({tags: [Tag.MOON]}));
     expect(player.getPlayableCardsForTest()).does.not.include(card);
 
-    player.playedCards = [fakeCard({tags: [Tag.MOON, Tag.MOON]})];
+    player.playedCards.push(fakeCard({tags: [Tag.MOON]}));
     expect(player.getPlayableCardsForTest()).includes(card);
   });
 

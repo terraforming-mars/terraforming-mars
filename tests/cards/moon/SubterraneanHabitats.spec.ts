@@ -61,7 +61,7 @@ describe('SubterraneanHabitats', () => {
       player.titanium = run.titanium;
       player.megaCredits = 1000;
       if (run.played) {
-        player.playedCards = [card];
+        player.playedCards.push(card);
       }
 
       if (run.expected) {
@@ -83,7 +83,7 @@ describe('SubterraneanHabitats', () => {
     expect(projectCard.canAct(player)).is.false;
 
     // And this one shows that with Subterranean Habitats, titanium isn't necessary
-    player.playedCards = [card];
+    player.playedCards.push(card);
     expect(projectCard.canAct(player)).is.true;
   });
 });

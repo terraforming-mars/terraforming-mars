@@ -163,6 +163,8 @@ export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initia
 }
 
 class FakeCard implements IProjectCard {
+  static idx = 0;
+
   public name = 'Fake Card' as CardName;
   public cost = 0;
   public tags = [];
@@ -195,6 +197,9 @@ class FakeCard implements IProjectCard {
 export function fakeCard(attrs: Partial<IProjectCard> = {}): IProjectCard {
   const card = new FakeCard();
   Object.assign(card, attrs);
+  if (attrs.name === undefined) {
+    card.name = 'Fake Card ' + FakeCard.idx++ as CardName;
+  }
   return card;
 }
 

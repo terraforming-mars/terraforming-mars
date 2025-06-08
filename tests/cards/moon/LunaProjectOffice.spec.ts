@@ -29,7 +29,7 @@ describe('LunaProjectOffice', () => {
     game.generation = 10;
     const card = new LunaProjectOffice();
 
-    player.playedCards = [card];
+    player.playedCards.push(card);
     card.play(player);
     expect(LunaProjectOffice.isActive(player)).is.true;
 
@@ -72,7 +72,7 @@ describe('LunaProjectOffice', () => {
     game.generation = 10;
     const card = new LunaProjectOffice();
 
-    player.playedCards = [card];
+    player.playedCards.push(card);
     card.play(player);
     expect(LunaProjectOffice.isActive(player)).is.true;
 
@@ -121,7 +121,7 @@ describe('LunaProjectOffice', () => {
     game.generation = 10;
     const card = new LunaProjectOffice();
 
-    player.playedCards = [card];
+    player.playedCards.push(card);
     card.play(player);
     expect(LunaProjectOffice.isActive(player)).is.true;
 

@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {StripMine} from '../../src/server/cards/base/StripMine';
 import {Election} from '../../src/server/turmoil/globalEvents/Election';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestGame';
@@ -12,9 +11,8 @@ describe('Election', () => {
     const [game, player, player2, player3] = testGame(3, {turmoilExtension: true});
     const turmoil = game.turmoil!;
     turmoil.initGlobalEvent(game);
-    player.playedCards.push(new StripMine());
-    player2.playedCards.push(new StripMine());
-    player2.playedCards.push(new StripMine());
+    player.tagsForTest = {building: 1};
+    player2.tagsForTest = {building: 2};
     addCity(player3);
     turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();

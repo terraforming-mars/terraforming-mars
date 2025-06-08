@@ -18,7 +18,7 @@ describe('FloaterLeasing', () => {
     const jovianLanterns = new JovianLanterns();
     const searchForLife = new SearchForLife();
 
-    player.playedCards = [jovianLanterns, searchForLife];
+    player.playedCards.push(jovianLanterns, searchForLife);
 
     searchForLife.resourceCount = 5;
     jovianLanterns.resourceCount = 2;

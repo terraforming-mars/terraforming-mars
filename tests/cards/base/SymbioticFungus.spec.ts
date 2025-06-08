@@ -32,17 +32,19 @@ describe('SymbioticFungus', () => {
   });
 
   it('Should act - single target', () => {
-    player.playedCards.push(new Ants());
+    const ants = new Ants();
+    player.playedCards.push(ants);
     card.action(player);
     runAllActions(game);
-    expect(player.playedCards[0].resourceCount).to.eq(1);
+    expect(ants.resourceCount).to.eq(1);
   });
 
   it('Should act - multiple targets', () => {
-    player.playedCards.push(new Ants(), new Decomposers());
+    const ants = new Ants();
+    player.playedCards.push(ants, new Decomposers());
     const selectCard = cast(churn(card.action(player), player), SelectCard);
 
-    selectCard.cb([player.playedCards[0]]);
-    expect(player.playedCards[0].resourceCount).to.eq(1);
+    selectCard.cb([ants]);
+    expect(ants.resourceCount).to.eq(1);
   });
 });

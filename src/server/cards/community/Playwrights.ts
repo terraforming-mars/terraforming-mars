@@ -11,7 +11,6 @@ import {Size} from '../../../common/cards/render/Size';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {all} from '../Options';
 import {SpecialDesignProxy} from './SpecialDesignProxy';
-import {inplaceRemove} from '../../../common/utils/utils';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 
 export class Playwrights extends CorporationCard implements ICorporationCard {
@@ -62,9 +61,8 @@ export class Playwrights extends CorporationCard implements ICorporationCard {
           const selectedCard: IProjectCard = card;
 
           players.forEach((p) => {
-            const card = p.getPlayedCard(selectedCard.name);
-            if (card !== undefined) {
-              inplaceRemove(p.playedCards, card);
+            if (p.playedCards.get(selectedCard.name)) {
+              p.playedCards.remove(card);
             }
           });
 
@@ -82,9 +80,9 @@ export class Playwrights extends CorporationCard implements ICorporationCard {
                */
                 player.defer(() => {
                   player.game.getPlayers().some((p) => {
-                    const card = p.playedCards[p.playedCards.length - 1];
+                    const card = p.playedCards.last();
                     if (card?.name === selectedCard.name) {
-                      p.playedCards.pop();
+                      p.playedCards.remove(card);
                       return true;
                     }
                     return false;

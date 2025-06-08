@@ -22,7 +22,6 @@ describe('Warmonger', () => {
   });
 
   it('score', () => {
-    player.playedCards = [];
     expect(award.getScore(player)).eq(0);
 
     // Tardigrades does not take from another card or player.

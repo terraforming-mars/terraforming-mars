@@ -50,7 +50,7 @@ describe('Odyssey', () => {
 
   it('cannot act - cannot afford', () => {
     const expensiveEvent = fakeCard({type: CardType.EVENT, cost: 8});
-    player.playedCards = [expensiveEvent];
+    player.playedCards.push(expensiveEvent);
     expect(odyssey.canAct(player)).is.false;
     player.megaCredits = 7;
     expect(odyssey.canAct(player)).is.false;
@@ -62,7 +62,7 @@ describe('Odyssey', () => {
     // Requires +2C temperature.
     const event = new IceCapMelting();
     player.megaCredits = event.cost;
-    player.playedCards = [event];
+    player.playedCards.push(event);
     expect(odyssey.canAct(player)).is.false;
     setTemperature(game, 0);
     expect(odyssey.canAct(player)).is.false;
@@ -75,7 +75,7 @@ describe('Odyssey', () => {
     expect(odyssey.canAct(player)).is.false;
     const expensiveEvent = fakeCard({type: CardType.EVENT, cost: 17});
     const nonEvent = fakeCard({type: CardType.ACTIVE, cost: 2});
-    player.playedCards = [expensiveEvent, nonEvent];
+    player.playedCards.push(expensiveEvent, nonEvent);
     expect(odyssey.canAct(player)).is.false;
     expensiveEvent.cost = 16;
     expect(odyssey.canAct(player)).is.true;
@@ -86,7 +86,7 @@ describe('Odyssey', () => {
     const importOfAdvancedGHG = new ImportOfAdvancedGHG();
     // Costs 2. Look at the top 3 cards from the deck. Take 1 of them into hand and discard the other two.
     const inventionContest = new InventionContest();
-    player.playedCards = [importOfAdvancedGHG, inventionContest];
+    player.playedCards.push(importOfAdvancedGHG, inventionContest);
 
     let selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
 
@@ -100,7 +100,7 @@ describe('Odyssey', () => {
     selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
     expect(selectProjectCardToPlay.cards).has.members([importOfAdvancedGHG, inventionContest]);
 
-    expect(player.playedCards).has.members([importOfAdvancedGHG, inventionContest]);
+    expect(player.playedCards.asArray()).has.members([importOfAdvancedGHG, inventionContest]);
     expect(player.production.heat).eq(0);
 
     selectProjectCardToPlay.payAndPlay(importOfAdvancedGHG, {...Payment.EMPTY, megaCredits: importOfAdvancedGHG.cost});
@@ -108,7 +108,7 @@ describe('Odyssey', () => {
 
     expect(player.production.heat).eq(2);
     expect(game.projectDeck.discardPile.pop()).eq(importOfAdvancedGHG);
-    expect(player.playedCards).has.members([inventionContest]);
+    expect(player.playedCards.asArray()).has.members([inventionContest]);
     expect(player.megaCredits).eq(0);
   });
 
@@ -117,7 +117,7 @@ describe('Odyssey', () => {
     const mediaGroup = new MediaGroup();
     player.megaCredits = 50;
 
-    player.playedCards = [importOfAdvancedGHG, mediaGroup];
+    player.playedCards.push(importOfAdvancedGHG, mediaGroup);
     const selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
 
     expect(player.production.heat).eq(0);
@@ -129,7 +129,7 @@ describe('Odyssey', () => {
     expect(player.production.heat).eq(2);
     expect(player.megaCredits).eq(44); // 50 - 9 + 3 = 44
     expect(game.projectDeck.discardPile.pop()).eq(importOfAdvancedGHG);
-    expect(player.playedCards).has.members([mediaGroup]);
+    expect(player.playedCards.asArray()).has.members([mediaGroup]);
   });
 
   it('Acts correctly for event cards that give one time discount', () => {

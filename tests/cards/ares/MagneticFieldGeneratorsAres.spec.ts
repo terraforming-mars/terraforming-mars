@@ -27,7 +27,7 @@ describe('MagneticFieldGeneratorsAres', () => {
   it('Play and Adjacency Bonus Grants', () => {
     const microbeCard = fakeCard({name: 'microbeCard' as CardName, resourceType: CardResource.MICROBE});
     const dataCard = fakeCard({name: 'dataCard' as CardName, resourceType: CardResource.DATA});
-    player.playedCards = [microbeCard, dataCard];
+    player.playedCards.set(microbeCard, dataCard);
 
     player.production.add(Resource.ENERGY, 4);
     expect(card.canPlay(player)).is.true;

@@ -146,7 +146,7 @@ describe('OceanCity', () => {
     capital.play(player);
     runAllActions(game);
     const capitalAction = cast(player.popWaitingFor(), SelectSpace);
-    player.playedCards = [capital];
+    player.playedCards.push(capital);
 
     const capitalSpace = game.board
       .getAdjacentSpaces(oceanSpace)

@@ -6,7 +6,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectCard} from '../../inputs/SelectCard';
 import {isSpecialTile} from '../../boards/Board';
-import {inplaceRemove} from '../../../common/utils/utils';
 import {Tag} from '../../../common/cards/Tag';
 
 export class PatentManipulation extends Card implements IProjectCard {
@@ -63,7 +62,7 @@ export class PatentManipulation extends Card implements IProjectCard {
       .andThen(
         (cards) => {
           for (const card of cards) {
-            inplaceRemove(player.playedCards, card);
+            player.playedCards.remove(card);
             card.resourceCount = 0;
             player.cardsInHand.push(card);
             card.onDiscard?.(player);

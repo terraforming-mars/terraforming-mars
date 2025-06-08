@@ -9,13 +9,15 @@ describe('CloudSocieties', () => {
     const card = new CloudSocieties();
     const [game, player] = testGame(1, {turmoilExtension: true});
     const turmoil = game.turmoil!;
-    player.playedCards.push(new FloatingHabs());
+    const floatingHabs = new FloatingHabs();
+    player.playedCards.push(floatingHabs);
     turmoil.chairman = player;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player;
     turmoil.dominantParty.delegates.add(player);
     card.resolve(game, turmoil);
     game.deferredActions.runNext();
-    expect(player.playedCards[0].resourceCount).to.eq(3);
+
+    expect(floatingHabs.resourceCount).to.eq(3);
   });
 });

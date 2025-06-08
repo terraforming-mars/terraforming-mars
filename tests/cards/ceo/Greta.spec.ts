@@ -15,16 +15,24 @@ describe('Greta', () => {
     card = new Greta();
   });
 
-  it('Gains 4 M€ per TR raise action when OPG action is used', () => {
+
+  it('Does not 4 M€ per TR raise action before OPG action is used', () => {
     const [game, player] = testGame(1, {ceoExtension: true});
     player.playCard(card);
 
-    // doesn't gain before card action
     runAllActions(game);
     game.phase = Phase.ACTION;
 
     player.playCard(new BigAsteroid());
     expect(player.megaCredits).to.eq(0);
+  });
+
+  it('Gains 4 M€ per TR raise action when OPG action is used', () => {
+    const [game, player] = testGame(1, {ceoExtension: true});
+    player.playCard(card);
+
+    runAllActions(game);
+    game.phase = Phase.ACTION;
 
     card.action();
 

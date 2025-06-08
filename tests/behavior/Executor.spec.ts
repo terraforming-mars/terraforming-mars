@@ -36,6 +36,7 @@ import {HeatTrappers} from '../../src/server/cards/base/HeatTrappers';
 import {PartyName} from '../../src/common/turmoil/PartyName';
 import {Helion} from '../../src/server/cards/corporation/Helion';
 import {SelectPayment} from '../../src/server/inputs/SelectPayment';
+import {CardName} from '../../src/common/cards/CardName';
 
 function asUnits(player: IPlayer): Units {
   return {
@@ -59,7 +60,7 @@ describe('Executor', () => {
   beforeEach(() => {
     [game, player, player2, player3] = testGame(3, {turmoilExtension: true, venusNextExtension: true, underworldExpansion: true});
 
-    fake = fakeCard();
+    fake = fakeCard({name: 'Fake Card' as CardName});
     executor = new Executor();
   });
 
@@ -270,7 +271,7 @@ describe('Executor', () => {
   // Because beforehand, it counted an additional tag.
   it('add resources to specific card - includes self', () => {
     const saturnSurfing = new SaturnSurfing();
-    player.playedCards = [fakeCard({tags: [Tag.EARTH, Tag.EARTH]})];
+    player.playedCards.set(fakeCard({tags: [Tag.EARTH, Tag.EARTH]}));
     player.megaCredits = saturnSurfing.cost;
     player.playCard(saturnSurfing);
     runAllActions(game);
@@ -294,7 +295,7 @@ describe('Executor', () => {
       };
     }
 
-    player.playedCards = [tardigrades, ants, regolithEathers, livestock];
+    player.playedCards.set(tardigrades, ants, regolithEathers, livestock);
 
     expect(resourceCount()).deep.eq({
       tardigrades: 0,
@@ -350,7 +351,7 @@ describe('Executor', () => {
     const regolithEathers = new RegolithEaters(); // Holds microbes
     const livestock = new Livestock(); // Holds animals
 
-    player.playedCards = [tardigrades, ants, regolithEathers, livestock];
+    player.playedCards.set(tardigrades, ants, regolithEathers, livestock);
 
     expect(livestock.resourceCount).eq(0);
 
@@ -365,7 +366,7 @@ describe('Executor', () => {
     const livestock = new Livestock(); // Holds animals
     const birds = new Birds(); // Holds animals
 
-    player.playedCards = [birds, livestock];
+    player.playedCards.set(birds, livestock);
 
     expect(livestock.resourceCount).eq(0);
 

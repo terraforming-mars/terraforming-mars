@@ -45,12 +45,11 @@ describe('LunarSecurityStations', () => {
 
     const hiredRaiders = new HiredRaiders();
 
-    opponent2.playedCards = [];
     let action = cast(hiredRaiders.play(player), OrOptions);
     // Options for both opponents.
     expect(action.options).has.lengthOf(3);
 
-    opponent2.playedCards = [card];
+    opponent2.playedCards.push(card);
     action = cast(hiredRaiders.play(player), OrOptions);
     // Options for only one opponent.
     expect(action.options).has.lengthOf(2);

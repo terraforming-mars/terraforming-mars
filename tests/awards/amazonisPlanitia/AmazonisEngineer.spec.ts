@@ -19,7 +19,6 @@ describe('AmazonisEngineer', () => {
   });
 
   it('score', () => {
-    player.playedCards = [];
     expect(award.getScore(player)).eq(0);
     player.playedCards.push(new Tardigrades());
     expect(award.getScore(player)).eq(0);

@@ -34,7 +34,7 @@ describe('PrefabricationofHumanHabitats', () => {
     const cityStandardProject = new CityStandardProject();
 
     player.megaCredits = 23;
-    player.playedCards.pop();
+    player.playedCards.set();
     expect(cityStandardProject.canAct(player)).is.false;
 
     player.playedCards.push(card);

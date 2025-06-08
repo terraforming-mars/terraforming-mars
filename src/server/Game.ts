@@ -1190,7 +1190,10 @@ export class Game implements IGame, Logger {
           this.defer(new GrantVenusAltTrackBonusDeferred(player, standardResourcesGranted, grantWildResource));
         }
       }
-      player.playedCards.forEach((card) => card.onGlobalParameterIncrease?.(player, GlobalParameter.VENUS, steps));
+      // TODO(kberg): Make player.tableau.forEach()?
+      for (const card of player.playedCards) {
+        card.onGlobalParameterIncrease?.(player, GlobalParameter.VENUS, steps);
+      }
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.VENUS, steps);
       player.onGlobalParameterIncrease(GlobalParameter.VENUS, steps);
       player.increaseTerraformRating(steps);
@@ -1235,7 +1238,10 @@ export class Game implements IGame, Logger {
         player.production.add(Resource.HEAT, 1, {log: true});
       }
 
-      player.playedCards.forEach((card) => card.onGlobalParameterIncrease?.(player, GlobalParameter.TEMPERATURE, steps));
+      // TODO(kberg): Make player.tableau.forEach()?
+      for (const card of player.playedCards) {
+        card.onGlobalParameterIncrease?.(player, GlobalParameter.TEMPERATURE, steps);
+      }
       player.onGlobalParameterIncrease(GlobalParameter.TEMPERATURE, steps);
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.TEMPERATURE, steps);
       player.increaseTerraformRating(steps);

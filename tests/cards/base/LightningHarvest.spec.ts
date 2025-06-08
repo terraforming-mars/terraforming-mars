@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
-import {GeneRepair} from '../../../src/server/cards/base/GeneRepair';
 import {LightningHarvest} from '../../../src/server/cards/base/LightningHarvest';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -18,7 +17,7 @@ describe('LightningHarvest', () => {
   });
 
   it('Should play', () => {
-    player.playedCards.push(new GeneRepair(), new GeneRepair(), new GeneRepair());
+    player.tagsForTest = {science: 3};
     expect(card.canPlay(player)).is.true;
 
     card.play(player);

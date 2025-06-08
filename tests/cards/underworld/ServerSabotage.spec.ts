@@ -57,8 +57,8 @@ describe('ServerSabotage', () => {
     const cryptocurrency = new Cryptocurrency();
     const communicationCenter = new CommunicationCenter();
 
-    player.playedCards = [cryptocurrency];
-    player2.playedCards = [communicationCenter];
+    player.playedCards.push(cryptocurrency);
+    player2.playedCards.push(communicationCenter);
 
     cryptocurrency.resourceCount = 2;
     communicationCenter.resourceCount = 6;

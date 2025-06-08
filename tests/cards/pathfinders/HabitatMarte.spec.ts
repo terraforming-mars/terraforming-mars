@@ -61,7 +61,7 @@ describe('HabitatMarte', () => {
     player.corporations.push(card);
     expect(player.canPlay(interstellar)).is.true;
 
-    player.playedCards = [fiveMarsTags];
+    player.playedCards.push(fiveMarsTags);
 
     expect(player.canPlay(interstellar)).is.true;
 
@@ -76,7 +76,7 @@ describe('HabitatMarte', () => {
 
     // When you play a science tag ... either add a science resource to this card, or remove a science resource from this card to draw a card.
     const olympusConference = new OlympusConference();
-    player.playedCards = [olympusConference];
+    player.playedCards.push(olympusConference);
     expect(olympusConference.resourceCount).eq(0);
 
     olympusConference.onCardPlayed(player, marsCard);

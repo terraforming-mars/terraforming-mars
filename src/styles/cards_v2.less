@@ -1231,68 +1231,26 @@
             .card-resource-heat {
                 background-image: url(./assets/resources/heat.png);
             }
-            .card-resource-microbe {
-                background-image: url(./assets/resources/microbe.png);
-            }
-            .card-resource-animal {
-                background-image: url(./assets/resources/animal.png);
-            }
-            .card-resource-science {
-                background-image: url(./assets/resources/science.png);
-            }
-            .card-resource-floater {
-                background-image: url(./assets/resources/floater.png);
+            @resource_types: microbe, animal, science, floater, fighter, camp,
+              asteroid, disease, preservation, data, syndicate-fleet, cube,
+              venusian-habitat, specialized-robot, seed, orbital, agenda, graphene, hydroelectric-resource,
+              clone-trooper, director;
+            each(@resource_types, {
+              .card-resource-@{value} {
+                background-image: url("./assets/resources/@{value}.png");
+              }
+            })
+            @underworld_resource_types: tool, ware, activist, journalism, supply-chain;
+            each(@underworld_resource_types, {
+              .card-resource-@{value} {
+                background-image: url("./assets/underworld/card-resource-@{value}.png");
+              }
+            })
+            .card-resource-cube {
+              background-image: url("./assets/cube.png");
             }
             .card-resource-wild {
                 background-image: url(./assets/resources/wild.png);
-            }
-            .card-resource-fighter {
-                background-image: url(./assets/resources/fighter.png);
-            }
-            .card-resource-camp {
-                background-image: url(./assets/resources/camp.png);
-            }
-            .card-resource-asteroid {
-                color: #0000 !important;
-                background-image: url(./assets/resources/asteroid.png);
-            }
-            .card-resource-disease {
-                color: #0000 !important;
-                background-image: url(./assets/resources/disease.png);
-            }
-            .card-resource-preservation {
-                background-image: url(./assets/resources/preservation.png);
-            }
-            .card-resource-data {
-                background-image: url(./assets/resources/data.png);
-            }
-            .card-resource-syndicate-fleet {
-                color: #0000 !important;
-                background-image: url(./assets/resources/syndicate-fleet.png);
-            }
-            .card-resource-venusian-habitat {
-                color: #0000 !important;
-                background-image: url(./assets/resources/venusian-habitat.png);
-            }
-            .card-resource-specialized-robot {
-                color: #0000 !important;
-                background-image: url(./assets/resources/specialized-robot.png);
-            }
-            .card-resource-seed {
-                color: #0000 !important;
-                background-image: url(./assets/resources/seed.png);
-            }
-            .card-resource-agenda {
-                color: #0000 !important;
-                background-image: url(./assets/resources/agenda.png);
-            }
-            .card-resource-orbital {
-                color: #0000 !important;
-                background-image: url(./assets/resources/orbital.png);
-            }
-            .card-resource-cube {
-                color: #0000 !important;
-                background-image: url(./assets/cube.png);
             }
             .card-resource-diverse {
                 background: linear-gradient(to bottom right, green, yellow, red);
@@ -1303,21 +1261,12 @@
             .card-resource-cathedral {
                 background-image: url(./assets/promo/cathedral.png);
             }
-            .card-resource-graphene {
-                background-image: url(./assets/resources/graphene.png);
-            }
             .card-resource-nomads {
                 background: linear-gradient(to bottom right, gold, goldenrod, gold);
                 border: 1px solid black;
             }
-            .card-resource-hydroelectric-resource {
-                background-image: url(./assets/resources/hydroelectric-resource.png);
-            }
             .card-resource-one {
               background-image: url(./assets/resources/one.png);
-            }
-            .card-resource-clone-trooper {
-              background-image: url(./assets/resources/clone-trooper.png);
             }
             .card-resource-size--S {
               height: 18px;
@@ -1349,25 +1298,6 @@
             }
             .card-resource-corruption {
               background-image: url(./assets/underworld/corruption.png);
-            }
-            // Is this even used?
-            .card-resource-tool {
-              background-image: url(./assets/underworld/card-resource-tool.png);
-            }
-            .card-resource-ware {
-              background-image: url(./assets/underworld/card-resource-ware.png);
-            }
-            .card-resource-journalism {
-              background-image: url(./assets/underworld/card-resource-journalism.png);
-            }
-            .card-resource-activist {
-              background-image: url(./assets/underworld/card-resource-activist.png);
-            }
-            .card-resource-supply-chain {
-              background-image: url(./assets/underworld/card-resource-supply-chain.png);
-            }
-            .card-resource-director {
-              background-image: url("./assets/resources/director.png");
             }
 
             .card-neutral-delegate {
@@ -1693,48 +1623,14 @@
                 }
             }
             // TODO(kberg) This set of tags looks like a duplicate of cards.less.
-            .card-tag-wild {
-                background-image: url("./assets/tags/wild.png");
-            }
-            .card-tag-building {
-                background-image: url("./assets/tags/building.png");
-            }
-            .card-tag-space {
-                background-image: url("./assets/tags/space.png");
-            }
-            .card-tag-power {
-                background-image: url("./assets/tags/power.png");
-            }
-            .card-tag-jovian {
-                background-image: url("./assets/tags/jovian.png");
-            }
-            .card-tag-venus {
-                background-image: url("./assets/tags/venus.png");
-            }
-            .card-tag-earth {
-                background-image: url("./assets/tags/earth.png");
-            }
-            .card-tag-city {
-                background-image: url("./assets/tags/city.png");
-            }
-            .card-tag-microbe {
-                background-image: url("./assets/tags/microbe.png");
-            }
-            .card-tag-plant {
-                background-image: url("./assets/tags/plant.png");
-            }
-            .card-tag-animal {
-                background-image: url("./assets/tags/animal.png");
-            }
-            .card-tag-event {
-                background-image: url("./assets/tags/event.png");
-            }
-            .card-tag-science {
-                background-image: url("./assets/tags/science.png");
-            }
-            .card-tag-none {
-                background-image: url("./assets/tags/tag-none.png");
-            }
+            @tags: wild, building, space, power, jovian, venus, earth, city,
+            microbe, plant, animal, event, science, none, moon, crime, empty;
+            each(@tags, {
+              .card-tag-@{value} {
+                background-image: url("./assets/tags/@{value}.png");
+              }
+            })
+
             .card-tag-floater {
                 background-image: url("./assets/resources/floater.png");
                 border-radius: 0px;
@@ -1742,18 +1638,6 @@
             .card-tag-wild-resource {
                 background-image: url("./assets/resources/wild.png");
                 border-radius: 0px;
-            }
-            .card-tag-moon {
-                background-image: url("./assets/tags/moon.png")
-            }
-            .card-tag-mars {
-                background-image: url("./assets/tags/mars.png");
-            }
-            .card-tag-crime {
-              background-image: url("./assets/tags/crime.png");
-            }
-            .card-tag-empty {
-                background-image: url("./assets/tags/empty.png");
             }
             .card-tag-diverse {
                 background: linear-gradient(to bottom right, green, yellow, red);

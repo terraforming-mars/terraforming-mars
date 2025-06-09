@@ -7,24 +7,13 @@
     </template>
   </template>
   <div v-else class="wf-root">
-    <!-- <template v-if="preferences().experimental_ui && playerView.game.phase === Phase.ACTION && playerView.players.length !== 1"> -->
-      <!--
-        Autopass is only available when you are taking actions because of how autopass is stored.
-        It's connected with when the player takes actions, and is saved along with the rest of the
-        game. This means that if you are waiting for someone else to take actions, you can't change
-        your autopass setting.
-
-        If there was another database table that stored autopass and other settings, this could be
-        changed to be available at all times.
-      -->
-      <!-- <input type="checkbox" name="autopass" id="autopass-checkbox" v-model="autopass" v-on:change="updateAutopass">
-      <label for="autopass-checkbox">
-          <span v-i18n>Automatically pass after this action</span>
+    <template v-if="preferences().experimental_ui && playerView.game.phase === Phase.ACTION">
+      <input type="checkbox" name="suspend" id="suspend-checkbox" v-model="suspend" v-on:change="updateSuspend">
+      <label for="suspend-checkbox">
+        <span v-i18n>Suspend</span>
       </label>
-    </template> -->
-    <!-- <template v-if="waitingfor !== undefined && waitingfor.showReset && playerView.players.length === 1">
-      <div @click="reset">Reset This Action <span class="reset" >(experimental)</span></div>
-    </template> -->
+      <div v-if="showRefresh()">Refresh<span class="reset"></span></div>
+    </template>
     <player-input-factory :players="players"
                           :playerView="playerView"
                           :playerinput="waitingfor"
@@ -60,8 +49,9 @@ let documentTitleTimer: number | undefined;
 
 type DataModel = {
   waitingForTimeout: typeof raw_settings.waitingForTimeout,
-  autopass: boolean,
   playersWaitingFor: Array<Color>
+  suspend: boolean,
+  savedPlayerView: PlayerViewModel | undefined;
 }
 
 export default Vue.extend({
@@ -83,8 +73,9 @@ export default Vue.extend({
   data(): DataModel {
     return {
       waitingForTimeout: this.settings.waitingForTimeout,
-      autopass: this.playerView.autopass,
       playersWaitingFor: [],
+      suspend: false,
+      savedPlayerView: undefined,
     };
   },
   methods: {
@@ -98,40 +89,20 @@ export default Vue.extend({
       }
       document.title = next + ' ' + this.$t(constants.APP_NAME);
     },
-    // TODO(kberg): use loadPlayerViewResponse.
     onsave(out: InputResponse) {
-      const xhr = new XMLHttpRequest();
       const root = vueRoot(this);
-      const showAlert = root.showAlert;
 
       if (root.isServerSideRequestInProgress) {
         console.warn('Server request in progress');
         return;
       }
-
       root.isServerSideRequestInProgress = true;
+
+      const xhr = new XMLHttpRequest();
       xhr.open('POST', paths.PLAYER_INPUT + '?id=' + this.playerView.id);
       xhr.responseType = 'json';
       xhr.onload = () => {
-        if (xhr.status === statusCode.ok) {
-          root.screen = 'empty';
-          root.playerView = xhr.response;
-          root.playerkey++;
-          root.screen = 'player-home';
-          if (this.playerView.game.phase === 'end' && window.location.pathname !== paths.THE_END) {
-            (window).location = (window).location; // eslint-disable-line no-self-assign
-          }
-        } else if (xhr.status === statusCode.badRequest && xhr.responseType === 'json') {
-          if (xhr.response.id === INVALID_RUN_ID) {
-            showAlert(xhr.response.message, () => {
-              setTimeout(() => window.location.reload(), 100);
-            });
-          } else {
-            showAlert(xhr.response.message);
-          }
-        } else {
-          showAlert('Unexpected response from server. Please try again.');
-        }
+        this.loadPlayerViewResponse(xhr);
         root.isServerSideRequestInProgress = false;
       };
       xhr.send(JSON.stringify({runId: this.playerView.runId, ...out}));
@@ -160,43 +131,37 @@ export default Vue.extend({
         root.isServerSideRequestInProgress = false;
       };
     },
-    updateAutopass() {
-      const xhr = new XMLHttpRequest();
-      const root = vueRoot(this);
-      if (root.isServerSideRequestInProgress) {
-        console.warn('Server request in progress');
-        return;
-      }
-      xhr.onload = () => {
-        root.isServerSideRequestInProgress = true;
-      };
-      xhr.open('GET', paths.AUTOPASS + '?id=' + this.playerView.id + '&autopass=' + this.autopass);
-      xhr.responseType = 'json';
-      xhr.send();
-      xhr.onerror = function() {
-        // todo(kberg): Report error to caller
-        root.isServerSideRequestInProgress = false;
-      };
-    },
     loadPlayerViewResponse(xhr: XMLHttpRequest) {
       const root = vueRoot(this);
       const showAlert = vueRoot(this).showAlert;
-      if (xhr.status === 200) {
-        root.screen = 'empty';
-        root.playerView = xhr.response;
-        root.playerkey++;
-        root.screen = 'player-home';
-        if (this.playerView.game.phase === 'end' && window.location.pathname !== paths.THE_END) {
-          (window).location = (window).location; // eslint-disable-line no-self-assign
-        }
+      if (xhr.status === statusCode.ok) {
+        this.updatePlayerView(xhr.response);
       } else if (xhr.status === statusCode.badRequest && xhr.responseType === 'json') {
-        showAlert(xhr.response.message);
+        let cb = () => {};
+        if (xhr.response.id === INVALID_RUN_ID) {
+          cb = () => setTimeout(() => window.location.reload(), 100);
+        }
+        showAlert(xhr.response.message, cb);
       } else {
         showAlert('Unexpected response from server. Please try again.');
       }
       root.isServerSideRequestInProgress = false;
     },
-
+    updatePlayerView(playerView: PlayerViewModel | undefined) {
+      if (this.suspend === false) {
+        const root = vueRoot(this);
+        root.screen = 'empty';
+        root.playerView = playerView;
+        root.playerkey++;
+        root.screen = 'player-home';
+        if (this.playerView.game.phase === 'end' && window.location.pathname !== paths.THE_END) {
+          window.location = window.location as any as (string & Location); // eslint-disable-line no-self-assign
+        }
+        this.savedPlayerView = undefined;
+      } else {
+        this.savedPlayerView = playerView;
+      }
+    },
     waitForUpdate() {
       const vueApp = this;
       const root = vueRoot(this);
@@ -266,6 +231,14 @@ export default Vue.extend({
           });
         }
       }
+    },
+    updateSuspend() {
+      if (this.suspend === false && this.savedPlayerView !== undefined) {
+        this.updatePlayerView(this.savedPlayerView);
+      }
+    },
+    showRefresh(): boolean {
+      return this.suspend === true && this.savedPlayerView !== undefined;
     },
   },
   mounted() {

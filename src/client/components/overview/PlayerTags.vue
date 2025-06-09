@@ -63,6 +63,7 @@ const ORDER: Array<InterfaceTagsType> = [
   Tag.CITY,
   Tag.MOON,
   Tag.MARS,
+  Tag.CRIME,
   'separator',
   Tag.EVENT,
   SpecialTags.NONE,

@@ -1,12 +1,12 @@
 <template>
-  <div :class="classes">
+  <div class="card-content" :class="corporationClass">
     <CardRequirementsComponent v-if="requirements.length > 0" :requirements="requirements"/>
     <CardRenderData v-if="firstRow !== undefined" :renderData="firstRow" />
     <CardDescription v-if="isCorporation && hasDescription" :item="metadata.description"/>
     <CardRenderData v-if="remainingRows !== undefined" :renderData="remainingRows" />
     <CardDescription v-if="!isCorporation && hasDescription" :item="metadata.description"/>
     <CardVictoryPoints v-if="metadata.victoryPoints" :victoryPoints="metadata.victoryPoints" />
-    <div class="padBottom" v-if="padBottom" style="padding-bottom: 22px;"></div>
+    <div class="padBottom" v-if="padBottom"></div>
   </div>
 </template>
 
@@ -48,12 +48,8 @@ export default Vue.extend({
   methods: {
   },
   computed: {
-    classes(): string {
-      const classes: Array<string> = ['card-content'];
-      if (this.isCorporation) {
-        classes.push('card-content-corporation');
-      }
-      return classes.join(' ');
+    corporationClass(): string {
+      return this.isCorporation ? 'card-content-corporation' : '';
     },
     hasDescription(): boolean {
       const description = this.metadata.description;

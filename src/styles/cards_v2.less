@@ -1002,7 +1002,6 @@
             height: 256px !important;
         }
         .card-content {
-            // background: grey;
             color: black;
             position: relative;
             display: flex;
@@ -1019,8 +1018,8 @@
 
             // Adding scrolling for cards with huge description
             &:not(.global-event-card-content) {
-				overflow-x: hidden;
-			}
+              overflow-x: hidden;
+            }
             &::-webkit-scrollbar-track {
                 background-color: transparent;
                 border-radius: 0 0 32px 0;
@@ -1034,6 +1033,9 @@
                 border-radius: 0 0 32px 0;
             }
 
+            .padBottom {
+              padding-bottom: 30px;
+            }
             .card-corporation-box {
                 position: relative;
                 display: flex;

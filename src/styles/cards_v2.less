@@ -1231,18 +1231,6 @@
             .card-resource-heat {
                 background-image: url(./assets/resources/heat.png);
             }
-            @resource_types: microbe, animal, science, floater, fighter, camp,
-              asteroid, disease, preservation, data, syndicate-fleet, cube,
-              venusian-habitat, specialized-robot, seed, orbital, agenda, graphene, hydroelectric-resource,
-              clone-trooper, director, tool, ware, activist, journalism, supply-chain;
-            each(@resource_types, {
-              .card-resource-@{value} {
-                background-image: url("./assets/resources/@{value}.png");
-              }
-            })
-            .card-resource-cube {
-              background-image: url("./assets/cube.png");
-            }
             .card-resource-wild {
                 background-image: url(./assets/resources/wild.png);
             }
@@ -2504,29 +2492,28 @@ each(@parties, {
 }
 
 .card-resources-counter {
-    .card-resource {
-        position: relative;
-        display: inline-block;
-        margin-bottom: 4px;
-        width: 22px;
-        height: 22px;
-        background-size: 22px;
-        vertical-align: middle;
-    }
+  .card-resource {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 4px;
+      width: 22px;
+      height: 22px;
+      background-size: 22px;
+      vertical-align: middle;
+  }
+}
 
-    // This copies stuff above, but scoped inside card-resources-counter. It shouldn't be necessary if
-    // the stuff above wasn't contained inside card-content.
-    @resource_types: microbe, animal, science, floater, fighter, camp,
-      asteroid, disease, preservation, data, syndicate-fleet, cube,
-      venusian-habitat, specialized-robot, seed, orbital, agenda, graphene, hydroelectric-resource,
-      clone-trooper, director, tool, ware, activist, journalism, supply-chain;
-    each(@resource_types, {
-      .card-resource-@{value} {
-        background-image: url("./assets/resources/@{value}.png");
-      }
-    })
+// resources.less also has a variable called resource_types.
+@card_resource_types: microbe, animal, science, floater, fighter, camp,
+  asteroid, disease, preservation, data, syndicate-fleet, cube,
+  venusian-habitat, specialized-robot, seed, orbital, agenda, graphene, hydroelectric-resource,
+  clone-trooper, director, tool, ware, activist, journalism, supply-chain;
+each(@card_resource_types, {
+  .card-resource-@{value} {
+    background-image: url("./assets/resources/@{value}.png");
+  }
+})
 
-    .card-resource-cube {
-      background-image: url("./assets/cube.png");
-    }
+.card-resource-cube {
+  background-image: url("./assets/cube.png");
 }

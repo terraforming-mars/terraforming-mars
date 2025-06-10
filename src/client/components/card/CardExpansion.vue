@@ -1,7 +1,7 @@
 <template>
-  <div :class="templateClasses()">
+  <div :class="templateClasses">
     <div :class="iconClasses(expansion)"></div>
-    <div v-for="module in modules()" :class="iconClasses(module)" :key="module"></div>
+    <div v-for="module in modules" :class="iconClasses(module)" :key="module"></div>
   </div>
 </template>
 <script lang="ts">
@@ -49,15 +49,17 @@ export default Vue.extend({
     },
   },
   methods: {
-    modules(): ReadonlyArray<GameModule> {
-      return this.compatibility.filter((e) => e !== this.expansion);
-    },
     iconClasses(module: GameModule): string {
-      const classes = ['card-expansion', 'project-icon'];
+      const classes = ['project-icon'];
       if (module !== 'base') {
         classes.push(MODULE_TO_CSS[module]);
       }
       return classes.join(' ');
+    },
+  },
+  computed: {
+    modules(): ReadonlyArray<GameModule> {
+      return this.compatibility.filter((e) => e !== this.expansion);
     },
     templateClasses(): string {
       if (this.isCorporation) {

@@ -1,5 +1,5 @@
 <template>
-  <div :class="cardClasses">
+  <div class="card-container filterDiv hover-hide-res" :class="cardClasses">
       <div class="card-content-wrapper" v-i18n @mouseover="hovering = true" @mouseleave="hovering = false">
           <div v-if="!isStandardProject" class="card-cost-and-tags">
               <CardCost :amount="cost" :newCost="reducedCost" />
@@ -8,10 +8,11 @@
               <CardTags :tags="tags" />
           </div>
           <CardTitle :title="card.name" :type="cardType"/>
-          <CardContent v-if="cardMetadata !== undefined" :metadata="cardMetadata" :requirements="cardRequirements" :isCorporation="isCorporationCard" :padBottom="hasResourceType" />
+          <CardContent :metadata="cardMetadata" :requirements="cardRequirements" :isCorporation="isCorporationCard" :bottomPadding="bottomPadding" />
       </div>
       <CardExpansion :expansion="cardExpansion" :isCorporation="isCorporationCard" :isResourceCard="isResourceCard" :compatibility="cardCompatibility" />
       <CardResourceCounter v-if="hasResourceType" :amount="resourceAmount" :type="resourceType" />
+      <CardVictoryPoints v-if="cardMetadata.victoryPoints" :victoryPoints="cardMetadata.victoryPoints" />
       <CardExtraContent :card="card" />
       <slot/>
   </div>
@@ -28,9 +29,10 @@ import CardCost from './CardCost.vue';
 import CardExtraContent from './CardExtraContent.vue';
 import CardExpansion from './CardExpansion.vue';
 import CardTags from './CardTags.vue';
-import {CardType} from '@/common/cards/CardType';
+import CardVictoryPoints from './CardVictoryPoints.vue';
 import CardContent from './CardContent.vue';
 import CardHelp from './CardHelp.vue';
+import {CardType} from '@/common/cards/CardType';
 import {CardMetadata} from '@/common/cards/CardMetadata';
 import {Tag} from '@/common/cards/Tag';
 import {getPreferences} from '@/client/utils/PreferencesManager';
@@ -51,6 +53,7 @@ export default Vue.extend({
     CardExpansion,
     CardTags,
     CardContent,
+    CardVictoryPoints,
   },
   props: {
     card: {
@@ -121,7 +124,7 @@ export default Vue.extend({
       return this.cardInstance.type;
     },
     cardClasses(): string {
-      const classes = ['card-container', 'filterDiv', 'hover-hide-res'];
+      const classes = [];
       classes.push('card-' + this.card.name.toLowerCase().replace(/ /g, '-'));
 
       if (this.card.isDisabled) {
@@ -165,6 +168,15 @@ export default Vue.extend({
       if (this.robotCard !== undefined || this.card.isSelfReplicatingRobotsCard === true) return CardResource.RESOURCE_CUBE;
       // This last RESOURCE_CUBE is functionally unnecessary and serves to satisfy the type contract.
       return this.cardInstance.resourceType ?? CardResource.RESOURCE_CUBE;
+    },
+    bottomPadding(): string {
+      if (this.cardMetadata.victoryPoints !== undefined) {
+        return 'long';
+      }
+      if (this.hasResourceType) {
+        return 'short';
+      }
+      return '';
     },
     hasHelp(): boolean {
       return this.hovering && this.cardInstance.metadata.hasExternalHelp === true;

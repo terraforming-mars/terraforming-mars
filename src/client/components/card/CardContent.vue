@@ -5,8 +5,7 @@
     <CardDescription v-if="isCorporation && hasDescription" :item="metadata.description"/>
     <CardRenderData v-if="remainingRows !== undefined" :renderData="remainingRows" />
     <CardDescription v-if="!isCorporation && hasDescription" :item="metadata.description"/>
-    <CardVictoryPoints v-if="metadata.victoryPoints" :victoryPoints="metadata.victoryPoints" />
-    <div class="padBottom" v-if="padBottom"></div>
+    <div :class="'bottom-padding-' + bottomPadding" v-if="bottomPadding"></div>
   </div>
 </template>
 
@@ -15,7 +14,6 @@
 import Vue from 'vue';
 import {CardMetadata} from '@/common/cards/CardMetadata';
 import CardRequirementsComponent from './CardRequirementsComponent.vue';
-import CardVictoryPoints from './CardVictoryPoints.vue';
 import CardDescription from './CardDescription.vue';
 import CardRenderData from './CardRenderData.vue';
 import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
@@ -35,13 +33,12 @@ export default Vue.extend({
       type: Boolean,
       required: true,
     },
-    padBottom: {
-      type: Boolean,
+    bottomPadding: {
+      type: String, // '', 'short', 'long'
     },
   },
   components: {
     CardRequirementsComponent,
-    CardVictoryPoints,
     CardDescription,
     CardRenderData,
   },

@@ -27,7 +27,7 @@ export class StormCraftIncorporated extends ActiveCorporationCard {
         cardNumber: 'R29',
         description: 'You start with 48 M€.',
         renderData: CardRenderer.builder((b) => {
-          b.br.br.br;
+          b.br;
           b.megacredits(48);
           b.corpBox('action', (ce) => {
             ce.vSpace(Size.LARGE);

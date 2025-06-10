@@ -1234,16 +1234,10 @@
             @resource_types: microbe, animal, science, floater, fighter, camp,
               asteroid, disease, preservation, data, syndicate-fleet, cube,
               venusian-habitat, specialized-robot, seed, orbital, agenda, graphene, hydroelectric-resource,
-              clone-trooper, director;
+              clone-trooper, director, tool, ware, activist, journalism, supply-chain;
             each(@resource_types, {
               .card-resource-@{value} {
                 background-image: url("./assets/resources/@{value}.png");
-              }
-            })
-            @underworld_resource_types: tool, ware, activist, journalism, supply-chain;
-            each(@underworld_resource_types, {
-              .card-resource-@{value} {
-                background-image: url("./assets/underworld/card-resource-@{value}.png");
               }
             })
             .card-resource-cube {
@@ -2525,19 +2519,13 @@ each(@parties, {
     @resource_types: microbe, animal, science, floater, fighter, camp,
       asteroid, disease, preservation, data, syndicate-fleet, cube,
       venusian-habitat, specialized-robot, seed, orbital, agenda, graphene, hydroelectric-resource,
-      clone-trooper, director;
+      clone-trooper, director, tool, ware, activist, journalism, supply-chain;
     each(@resource_types, {
       .card-resource-@{value} {
         background-image: url("./assets/resources/@{value}.png");
       }
     })
 
-    @underworld_resource_types: tool, ware, activist, journalism, supply-chain;
-    each(@underworld_resource_types, {
-      .card-resource-@{value} {
-        background-image: url("./assets/underworld/card-resource-@{value}.png");
-      }
-    })
     .card-resource-cube {
       background-image: url("./assets/cube.png");
     }

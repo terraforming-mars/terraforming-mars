@@ -686,6 +686,9 @@ export default (Vue as WithRefs<Refs>).extend({
     initialDraft(value: boolean) {
       if (value === true && this.preludeDraftVariant === undefined) {
         this.preludeDraftVariant = true;
+      };
+      if (value === true && this.ceosDraftVariant === undefined) {
+        this.ceosDraftVariant = true;
       }
     },
     prelude(value: boolean) {

@@ -49,6 +49,7 @@ export interface NewGameConfig {
   draftVariant: boolean;
   initialDraft: boolean; // initialDraftVariant: boolean;
   preludeDraftVariant: boolean;
+  ceosDraftVariant: boolean;
   startingCorporations: number;
   shuffleMapOption: boolean;
   randomMA: RandomMAOptionType;

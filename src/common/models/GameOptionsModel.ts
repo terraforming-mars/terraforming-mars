@@ -21,6 +21,7 @@ export type GameOptionsModel = {
   includeFanMA: boolean,
   initialDraftVariant: boolean,
   preludeDraftVariant: boolean,
+  ceosDraftVariant: boolean,
   politicalAgendasExtension: AgendaStyle,
   removeNegativeGlobalEvents: boolean,
   showOtherPlayersVP: boolean,

@@ -122,6 +122,7 @@ export class ApiCreateGame extends Handler {
             coloniesExtension: gameReq.expansions.colonies,
             communityCardsOption: gameReq.expansions.community,
             expansions: gameReq.expansions,
+            ceosDraftVariant: gameReq.ceosDraftVariant,
             corporateEra: gameReq.expansions.corpera,
             customCeos: gameReq.customCeos,
             customColoniesList: gameReq.customColoniesList,

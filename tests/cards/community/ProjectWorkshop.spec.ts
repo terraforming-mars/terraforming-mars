@@ -28,11 +28,13 @@ describe('ProjectWorkshop', () => {
   let card: ProjectWorkshop;
   let player: TestPlayer;
   let game: IGame;
-  let advancedAlloys : AdvancedAlloys;
+  let advancedAlloys: AdvancedAlloys;
+  let birds: Birds;
 
   beforeEach(() => {
     card = new ProjectWorkshop();
     advancedAlloys = new AdvancedAlloys();
+    birds = new Birds();
     [game, player] = testGame(1);
 
     card.play(player);
@@ -78,6 +80,17 @@ describe('ProjectWorkshop', () => {
     expect(player.cardsInHand).has.lengthOf(2);
     expect(player.getSteelValue()).to.eq(2);
     expect(player.getTitaniumValue()).to.eq(3);
+  });
+
+  it('Can flip a played blue card and remove its resources', () => {
+    player.playedCards.push(birds);
+    birds.resourceCount = 4;
+
+    card.action(player).cb(undefined);
+
+    expect(player.playedCards).has.lengthOf(0);
+    expect(game.projectDeck.discardPile.includes(birds)).is.true;
+    expect(birds.resourceCount).eq(0);
   });
 
   it('Converts VP to TR correctly', () => {
@@ -176,7 +189,6 @@ describe('ProjectWorkshop', () => {
     player.addResourceTo(extremophiles, 9);
     expect(extremophiles.getVictoryPoints(player)).eq(3);
 
-    const birds = new Birds();
     birds.resourceCount = 1;
     expect(birds.getVictoryPoints(player)).eq(1);
 

@@ -1057,6 +1057,7 @@ export class Player implements IPlayer {
     }
     this.game.projectDeck.discard(card);
     card.onDiscard?.(this);
+    card.resourceCount = 0;
     this.game.log('${0} discarded ${1}', (b) => b.player(this).card(card));
   }
 

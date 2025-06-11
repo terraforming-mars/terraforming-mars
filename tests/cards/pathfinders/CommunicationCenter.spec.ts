@@ -120,7 +120,7 @@ describe('CommunicationCenter', () => {
 
   it('Works with Nobel Labs (checking code works)', () => {
     card.resourceCount = 2;
-    const nobelLabs = new NobelLabs
+    const nobelLabs = new NobelLabs();
     player.playedCards = [card, nobelLabs];
 
     nobelLabs.action(player);
@@ -132,17 +132,22 @@ describe('CommunicationCenter', () => {
   });
 
   it('Can be targetted by Solar Storm before a card is automatically drawn', () => {
+    // Solar storm removes data from another player. Since the other player can
+    // control order of operations, they get to remove data from Communication Center
+    // before this player can remove them.
     card.resourceCount = 2;
     player.playedCards = [card];
     const solarStorm = new SolarStorm();
-    solarStorm.play(player2);
-    
+    player2.playCard(solarStorm);
+
     runAllActions(game);
+    expect(card.resourceCount).eq(3);
     
     const orOptions = cast(player2.getWaitingFor(), OrOptions);
     const selectCard = cast(orOptions.options[0], SelectCard);
     expect(selectCard.cards).has.members([card]);
     selectCard.cb([card]);
+    expect(card.resourceCount).eq(0);
 
     runAllActions(game);
 

@@ -10,7 +10,7 @@ import {IPlayer} from '../../IPlayer';
 import {Board} from '../../boards/Board';
 import {Space} from '../../boards/Space';
 import {IActionCard} from '../ICard';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {vermin} from '../render/DynamicVictoryPoints';
 
 export class Vermin extends ActionCard implements IProjectCard, IActionCard {
   constructor() {
@@ -54,7 +54,7 @@ export class Vermin extends ActionCard implements IProjectCard, IActionCard {
             eb.empty().startAction.resource(CardResource.ANIMAL).or().resource(CardResource.MICROBE).asterix();
           });
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.vermin(),
+        victoryPoints: vermin(),
         description: 'Each player, including you, gets -1 VP per city they have IF THERE ARE AT LEAST 10 ANIMALS HERE.',
       },
     });

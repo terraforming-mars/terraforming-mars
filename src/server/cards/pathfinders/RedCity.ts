@@ -5,7 +5,7 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {questionmark} from '../render/DynamicVictoryPoints';
 import {TileType} from '../../../common/TileType';
 import {PlaceTile} from '../../deferredActions/PlaceTile';
 import {Board} from '../../boards/Board';
@@ -38,7 +38,7 @@ export class RedCity extends Card implements IProjectCard {
           '-1 energy prod, +2 M€ prod. ' +
           'Place the special tile on Mars ADJACENT TO NO GREENERY. ' +
           'NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space (or hazard) next to this tile.',
-        victoryPoints: CardRenderDynamicVictoryPoints.questionmark(),
+        victoryPoints: questionmark(),
       },
     });
   }

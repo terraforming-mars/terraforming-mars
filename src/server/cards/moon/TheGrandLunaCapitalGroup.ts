@@ -8,7 +8,7 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Space} from '../../boards/Space';
 import {SpaceId} from '../../../common/Types';
 import {Resource} from '../../../common/Resource';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {moonHabitatTile} from '../render/DynamicVictoryPoints';
 import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {all} from '../Options';
@@ -46,7 +46,7 @@ export class TheGrandLunaCapitalGroup extends CorporationCard implements ICorpor
           }).br,
           b.vpText('1 VP for each habitat tile adjacent to your habitat tiles.').br;
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.moonHabitatTile(1),
+        victoryPoints: moonHabitatTile(1),
       },
     });
   }

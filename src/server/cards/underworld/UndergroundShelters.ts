@@ -4,7 +4,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {undergroundShelters} from '../render/DynamicVictoryPoints';
 import {IPlayer} from '../../IPlayer';
 import {sum} from '../../../common/utils/utils';
 
@@ -24,7 +24,7 @@ export class UndergroundShelters extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U72',
         // TODO(kberg): Custom VP icon.
-        victoryPoints: CardRenderDynamicVictoryPoints.undergroundShelters(),
+        victoryPoints: undergroundShelters(),
         renderData: CardRenderer.builder((b) => {
           b.excavate(1);
         }),

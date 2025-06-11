@@ -9,7 +9,7 @@ import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
 import {Units} from '../../common/Units';
 import {GetVictoryPointsContext, ICard} from './ICard';
-import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
+import * as DynamicVictoryPoints from './render/DynamicVictoryPoints';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
 import {CountableVictoryPoints} from '../../common/cards/CountableVictoryPoints';
 import {IProjectCard} from './IProjectCard';
@@ -374,18 +374,18 @@ export abstract class Card implements ICard {
       if (properties.resourceType === undefined) {
         throw new Error('When defining a card-resource based VP, resourceType must be defined.');
       }
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.resource(properties.resourceType, each, per);
+      properties.metadata.victoryPoints = DynamicVictoryPoints.resource(properties.resourceType, each, per);
       return;
     } else if (vps.tag !== undefined) {
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.tag(vps.tag, each, per);
+      properties.metadata.victoryPoints = DynamicVictoryPoints.tag(vps.tag, each, per);
     } else if (vps.cities !== undefined) {
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.cities(each, per, vps.all);
+      properties.metadata.victoryPoints = DynamicVictoryPoints.cities(each, per, vps.all);
     } else if (vps.colonies !== undefined) {
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.colonies(each, per, vps.all);
+      properties.metadata.victoryPoints = DynamicVictoryPoints.colonies(each, per, vps.all);
     } else if (vps.moon !== undefined) {
       if (vps.moon.road !== undefined) {
         // vps.per is ignored
-        properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.moonRoadTile(each, vps.all);
+        properties.metadata.victoryPoints = DynamicVictoryPoints.moonRoadTile(each, vps.all);
       } else {
         throw new Error('moon defined, but no valid sub-object defined');
       }

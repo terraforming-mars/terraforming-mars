@@ -5,7 +5,7 @@ import {CardType} from './CardType';
 import {Expansion, GameModule} from './GameModule';
 import {CardMetadata} from './CardMetadata';
 import {CardRequirementDescriptor} from './CardRequirementDescriptor';
-import {IVictoryPoints} from './IVictoryPoints';
+import {CountableVictoryPoints} from './CountableVictoryPoints';
 import {Tag} from './Tag';
 import {CardDiscount} from './Types';
 import {OneOrArray} from '../utils/types';
@@ -15,7 +15,7 @@ export type ClientCard = {
   module: GameModule;
   tags: Array<Tag>;
   cardDiscount?: OneOrArray<CardDiscount>;
-  victoryPoints?: number | 'special' | IVictoryPoints,
+  victoryPoints?: number | 'special' | CountableVictoryPoints,
   cost?: number;
   type: CardType;
   requirements: Array<CardRequirementDescriptor>;

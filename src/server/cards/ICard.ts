@@ -10,7 +10,7 @@ import {CardMetadata} from '../../common/cards/CardMetadata';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {BoardType} from '../boards/BoardType';
 import {CardDiscount} from '../../common/cards/Types';
-import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
+import {CountableVictoryPoints} from '../../common/cards/CountableVictoryPoints';
 import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {TRSource} from '../../common/cards/TRSource';
@@ -76,7 +76,7 @@ export interface ICard {
    * see `globalParameterRequirementBonus` for more information.
    */
   getGlobalParameterRequirementBonus(player: IPlayer, parameter: GlobalParameter): number;
-  victoryPoints?: number | 'special' | IVictoryPoints,
+  victoryPoints?: number | 'special' | CountableVictoryPoints,
   getVictoryPoints(player: IPlayer, context?: GetVictoryPointsContext): number;
   /** Returns any dynamic influence value */
   getInfluenceBonus?: (player: IPlayer) => number;

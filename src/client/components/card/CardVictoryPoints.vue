@@ -27,7 +27,7 @@
 
 import Vue from 'vue';
 import CardRenderItemComponent from '@/client/components/card/CardRenderItemComponent.vue';
-import {ICardRenderDynamicVictoryPoints} from '@/common/cards/render/ICardRenderDynamicVictoryPoints';
+import {CardRenderDynamicVictoryPoints} from '@/common/cards/render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {CardResource} from '@/common/CardResource';
 import {ICardRenderItem} from '@/common/cards/render/Types';
@@ -37,7 +37,7 @@ export default Vue.extend({
   name: 'CardVictoryPoints',
   props: {
     victoryPoints: {
-      type: [Number, Object as () => ICardRenderDynamicVictoryPoints],
+      type: [Number, Object as () => CardRenderDynamicVictoryPoints],
       required: true,
     },
   },

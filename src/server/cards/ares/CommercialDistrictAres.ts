@@ -3,8 +3,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CommercialDistrict} from '../base/CommercialDistrict';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-
+import {cities} from '../render/DynamicVictoryPoints';
 
 export class CommercialDistrictAres extends CommercialDistrict {
   constructor() {
@@ -21,7 +20,7 @@ export class CommercialDistrictAres extends CommercialDistrict {
           }).nbsp.nbsp.tile(TileType.COMMERCIAL_DISTRICT, false, true).br;
           b.vpText('1 VP per adjacent city tile.');
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 1, true),
+        victoryPoints: cities(1, 1, true),
       });
   }
 }

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {shallowMount, Wrapper} from '@vue/test-utils';
 import {getLocalVue} from '../getLocalVue';
 import CardVictoryPoints from '@/client/components/card/CardVictoryPoints.vue';
-import {ICardRenderDynamicVictoryPoints} from '@/common/cards/render/ICardRenderDynamicVictoryPoints';
+import {CardRenderDynamicVictoryPoints} from '@/common/cards/render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {RecursivePartial} from '@/common/utils/utils';
 import {CardResource} from '@/common/CardResource';
@@ -58,7 +58,7 @@ describe('CardVictoryPoints', () => {
   });
 
 
-  function prop(vps: RecursivePartial<ICardRenderDynamicVictoryPoints>) {
+  function prop(vps: RecursivePartial<CardRenderDynamicVictoryPoints>) {
     return {
       victoryPoints: {
         item: undefined,

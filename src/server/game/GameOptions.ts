@@ -87,6 +87,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   bannedCards: [],
   includedCards: [],
   ceoExtension: false,
+  ceosDraftVariant: false,
   clonedGamedId: undefined,
   coloniesExtension: false,
   communityCardsOption: false,

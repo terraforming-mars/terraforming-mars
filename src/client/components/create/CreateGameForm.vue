@@ -351,6 +351,13 @@
                                     <span v-i18n>Prelude Draft variant</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#initial-draft" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
                                 </div>
+
+                                <div v-if="initialDraft && expansions.ceo">
+                                <input type="checkbox" name="ceosDraft" v-model="ceosDraftVariant" id="ceosDraft-checkbox">
+                                <label for="ceosDraft-checkbox">
+                                    <span v-i18n>CEOs Draft variant</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#initial-draft" class="tooltip" target="_blank">&#9432;</a>
+                                </label>
+                                </div>
                             </div>
                             <input type="checkbox" v-model="randomFirstPlayer" id="randomFirstPlayer-checkbox">
                             <label for="randomFirstPlayer-checkbox">
@@ -644,6 +651,7 @@ export default (Vue as WithRefs<Refs>).extend({
       startingCeos: 3,
       startingPreludes: 4,
       preludeDraftVariant: undefined,
+      ceosDraftVariant: undefined,
       preludeToggled: false,
       uploading: false,
     };
@@ -1249,6 +1257,7 @@ export default (Vue as WithRefs<Refs>).extend({
         clonedGamedId,
         initialDraft,
         preludeDraftVariant: this.preludeDraftVariant ?? false,
+        ceosDraftVariant: this.ceosDraftVariant ?? false,
         randomMA,
         shuffleMapOption,
         // beginnerOption,

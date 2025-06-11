@@ -11,7 +11,7 @@ import {Units} from '../../common/Units';
 import {GetVictoryPointsContext, ICard} from './ICard';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
-import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
+import {CountableVictoryPoints} from '../../common/cards/CountableVictoryPoints';
 import {IProjectCard} from './IProjectCard';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {PlayerInput} from '../PlayerInput';
@@ -66,7 +66,7 @@ type SharedProperties = {
    */
 
   tr?: TRSource,
-  victoryPoints?: number | 'special' | IVictoryPoints,
+  victoryPoints?: number | 'special' | CountableVictoryPoints,
 }
 
 /* Internal representation of card properties. */
@@ -228,7 +228,7 @@ export abstract class Card implements ICard {
   public get tr(): TRSource | undefined {
     return this.properties.tr;
   }
-  public get victoryPoints(): number | 'special' | IVictoryPoints | undefined {
+  public get victoryPoints(): number | 'special' | CountableVictoryPoints | undefined {
     return this.properties.victoryPoints;
   }
   public get tilesBuilt(): ReadonlyArray<TileType> {

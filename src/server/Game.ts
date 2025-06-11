@@ -1,4 +1,3 @@
-
 import * as constants from '../common/constants';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {Board} from './boards/Board';
@@ -66,7 +65,7 @@ import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
 import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
 import {addDays, stringToNumber} from './database/utils';
-import {ALL_TAGS, Tag} from '../common/cards/Tag';
+import {Tag} from '../common/cards/Tag';
 import {IGame, Score} from './IGame';
 import {MarsBoard} from './boards/MarsBoard';
 import {UnderworldData} from './underworld/UnderworldData';
@@ -233,16 +232,6 @@ export class Game implements IGame, Logger {
     });
 
     this.tags = tags;
-    // TODO(kberg): Remove this count by 2025-06-01
-    if (this.tags.length === 0) {
-      this.tags = ALL_TAGS.filter((tag) => {
-        if (tag === Tag.VENUS) return gameOptions.venusNextExtension;
-        if (tag === Tag.MOON) return gameOptions.moonExpansion;
-        if (tag === Tag.MARS) return gameOptions.pathfindersExpansion;
-        if (tag === Tag.CLONE) return gameOptions.pathfindersExpansion;
-        return true;
-      });
-    }
   }
 
   public static newInstance(id: GameId,
@@ -1715,8 +1704,7 @@ export class Game implements IGame, Logger {
 
     const ceoDeck = CeoDeck.deserialize(d.ceoDeck, rng);
 
-    // TODO(kberg): remove || [] after 2025-06-01
-    const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck, d.tags || []);
+    const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck, d.tags);
     game.resettable = true;
     game.spectatorId = d.spectatorId;
     game.createdTime = new Date(d.createdTimeMs);

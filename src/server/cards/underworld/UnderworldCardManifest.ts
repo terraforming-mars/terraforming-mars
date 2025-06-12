@@ -2,6 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {ModuleManifest} from '../ModuleManifest';
 import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
 
+import {Acidizing} from './Acidizing';
 import {AeronGenomics} from './AeronGenomics';
 import {AntiTrustCrackdown} from './AntiTrustCrackdown';
 import {AnubisSecurities} from './AnubisSecurities';
@@ -11,6 +12,7 @@ import {ArtesianAquifer} from './ArtesianAquifer';
 import {BatteryFactory} from './BatteryFactory';
 import {BatteryShipment} from './BatteryShipment';
 import {BehemothExcavator} from './BehemothExcavator';
+import {Biobatteries} from './Biobatteries';
 import {Casino} from './Casino';
 import {CaveCity} from './CaveCity';
 import {CentralReservoir} from './CentralReservoir';
@@ -27,18 +29,23 @@ import {Deepmining} from './Deepmining';
 import {Deepnuking} from './Deepnuking';
 import {DeepwaterDome} from './DeepwaterDome';
 import {DemetronLabs} from './DemetronLabs';
+import {DetectiveTVSeries} from './DetectiveTVSeries';
 import {EarthquakeMachine} from './EarthquakeMachine';
 import {ElectionSponsorship} from './ElectionSponsorship';
 import {ExcavateStandardProject} from './ExcavateStandardProject';
 import {ExcavatorLeasing} from './ExcavatorLeasing';
 import {ExpeditionVehicles} from './ExpeditionVehicles';
+import {ExploitationOfVenus} from './ExploitationOfVenus';
+import {ExportConvoy} from './ExportConvoy';
 import {FairTradeComplaint} from './FairTradeComplaint';
 import {FabricatedScandal} from './FabricatedScandal';
+import {FamilyConnections} from './FamilyConnections';
 import {ForestTunnels} from './ForestTunnels';
 import {FreeTradePort} from './FreeTradePort';
 import {FriendsInHighPlaces} from './FriendsInHighPlaces';
 import {GaiaCity} from './GaiaCity';
 import {GanymedeTradingCompany} from './GanymedeTradingCompany';
+import {GasTrust} from './GasTrust';
 import {GeologicalExpertise} from './GeologicalExpertise';
 import {GeologicalSurvey} from './GeologicalSurvey';
 import {GeologistTeam} from './GeologistTeam';
@@ -95,6 +102,7 @@ import {PrivateMilitaryContractor} from './PrivateMilitaryContractor';
 import {PrivateResorts} from './PrivateResorts';
 import {Prospecting} from './Prospecting';
 import {PublicSpaceline} from './PublicSpaceline';
+import {Racketeering} from './Racketeering';
 import {RecklessDetonation} from './RecklessDetonation';
 import {ResearchDevelopmentHub} from './ResearchDevelopmentHub';
 import {RobotMoles} from './RobotMoles';
@@ -111,6 +119,7 @@ import {StagedProtests} from './StagedProtests';
 import {StandardTechnology} from './StandardTechnology';
 import {StarVegas} from './StarVegas';
 import {StemFieldSubsidies} from './StemFieldSubsidies';
+import {StingOperation} from './StingOperation';
 import {SubnauticPirates} from './SubnauticPirates';
 import {SubterraneanSea} from './SubterraneanSea';
 import {ThiolavaVents} from './ThiolavaVents';
@@ -233,6 +242,15 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.WHALES]: {Factory: Whales},
     [CardName.GUERILLA_ECOLOGISTS]: {Factory: GuerillaEcologists},
     [CardName.THIOLAVA_VENTS]: {Factory: ThiolavaVents},
+    [CardName.DETECTIVE_TV_SERIES]: {Factory: DetectiveTVSeries},
+    [CardName.RACKETEERING]: {Factory: Racketeering},
+    [CardName.GAS_TRUST]: {Factory: GasTrust},
+    [CardName.STING_OPERATION]: {Factory: StingOperation},
+    [CardName.FAMILY_CONNECTIONS]: {Factory: FamilyConnections},
+    [CardName.BIOBATTERIES]: {Factory: Biobatteries},
+    [CardName.EXPORT_CONVOY]: {Factory: ExportConvoy},
+    [CardName.ACIDIZING]: {Factory: Acidizing, compatibility: 'venus'},
+    [CardName.EXPLOITATION_OF_VENUS]: {Factory: ExploitationOfVenus, compatibility: 'venus'},
 
     // // Replacements
     [CardName.STANDARD_TECHNOLOGY_UNDERWORLD]: {Factory: StandardTechnology},

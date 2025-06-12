@@ -1007,6 +1007,16 @@ export enum CardName {
   WHALES = 'Whales',
   GUERILLA_ECOLOGISTS = 'Guerilla Ecologists',
   THIOLAVA_VENTS = 'Thiolava Vents',
+  DETECTIVE_TV_SERIES = 'Detective TV Series',
+  RACKETEERING = 'Racketeering',
+  GAS_TRUST = 'Gas Trust',
+  STING_OPERATION = 'Sting Operation',
+  FAMILY_CONNECTIONS = 'Family Connections',
+  BIOBATTERIES = 'Biobatteries',
+  EXPORT_CONVOY = 'Export Convoy',
+  ACIDIZING = 'Acidizing',
+  EXPLOITATION_OF_VENUS = 'Exploitation Of Venus',
+
   // Underworld Corporations
   HADESPHERE = 'Hadesphere',
   DEMETRON_LABS = 'Demetron Labs',

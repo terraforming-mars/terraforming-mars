@@ -111,6 +111,8 @@ export interface IGame extends Logger {
   inDoubleDown: boolean;
   /** If Vermin is in play and it has 10 or more animals */
   verminInEffect: boolean;
+  /** If Exploitation of Venus is in effect */
+  exploitationOfVenusInEffect: boolean;
 
   /** The set of tags available in this game. */
   readonly tags: ReadonlyArray<Tag>;

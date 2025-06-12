@@ -42,8 +42,16 @@ export type _Countable = {
     excavationMarkers?: NoAttributes,
   },
 
-  all?: boolean; // (Note for later: Tags and Cities have different defaults. THIS IS NOT GOOD, IS IT?)
-  others?: true; // For tags this has a behavior.
+  // (Note for later: Tags and Cities have different defaults. THIS IS NOT GOOD, IS IT?)
+  all?: boolean;
+  /**
+   * When counting tags, this counts other players' tags, not yours.
+   */
+  others?: true;
+  /**
+   * When true, include events when counting tags.
+   */
+  includeEvents?: true;
 
   /**
    * Multiply the sum by this value.

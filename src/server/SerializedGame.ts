@@ -38,6 +38,7 @@ export type SerializedGame = {
     draftRound: number;
     // TODO(kberg): Remove ? by 2025-08-01
     expansions?: Record<Expansion, boolean>;
+    exploitationOfVenusInEffect: boolean;
     first: PlayerId;
     fundedAwards: Array<SerializedFundedAward>;
     gagarinBase: Array<SpaceId>;

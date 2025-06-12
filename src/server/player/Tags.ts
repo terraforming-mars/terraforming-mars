@@ -14,7 +14,8 @@ export type CountingMode =
   'default' | // Like raw, but include the wild tags and other deafult substitutions. Typical when performing an action.
   'milestone' | // Like raw with special conditions for milestones (Chimera)
   'award' | // Like raw with special conditions for awards (Chimera)
-  'raw-pf'; // Like raw, but includes Mars Tags when tag is Science (Habitat Marte)
+  'raw-pf' | // Like raw, but includes Mars Tags when tag is Science (Habitat Marte)
+  'raw-underworld' // Like raw, but includes tags on events
 
 export type DistinctCountMode =
   'default' | // Count all tags in played cards, and then add in all the wild tags.
@@ -63,7 +64,7 @@ export class Tags {
    * Get the number of tags this player has.
    */
   public count(tag: Tag, mode: CountingMode = 'default') {
-    const includeEvents = this.player.isCorporation(CardName.ODYSSEY);
+    const includeEvents = mode === 'raw-underworld' || this.player.isCorporation(CardName.ODYSSEY);
     const includeTagSubstitutions = (mode === 'default' || mode === 'milestone');
 
     let tagCount = this.rawCount(tag, includeEvents);

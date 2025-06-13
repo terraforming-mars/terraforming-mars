@@ -33,14 +33,20 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
     });
   }
 
+  public override bespokeCanPlay(player: IPlayer): boolean {
+    // What a hack.
+    player.megaCredits += 10;
+    try {
+      return this.getPlayableCards(player).length > 0;
+    } finally {
+      player.megaCredits -= 10;
+    }
+  }
+
   public override bespokePlay(player: IPlayer) {
     player.stock.add(Resource.MEGACREDITS, 10);
 
-    const playableCards = player.cardsInHand.filter((card) => {
-      return card.resourceType === CardResource.FLOATER &&
-        card.type === CardType.ACTIVE &&
-        player.canAfford(player.affordOptionsForCard(card));
-    }).map((card) => {
+    const playableCards = this.getPlayableCards(player).map((card) => {
       return {
         card: card,
         details: true,
@@ -55,5 +61,13 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
     }
 
     return undefined;
+  }
+
+  private getPlayableCards(player: IPlayer) {
+    return player.cardsInHand.filter((card) => {
+      return card.resourceType === CardResource.FLOATER &&
+        card.type === CardType.ACTIVE &&
+        player.canAfford(player.affordOptionsForCard(card));
+    });
   }
 }

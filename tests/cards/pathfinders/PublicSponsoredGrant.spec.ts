@@ -45,7 +45,7 @@ describe('PublicSponsoredGrant', () => {
 
     const options = cast(card.play(player), OrOptions);
 
-    expect(player.megaCredits).eq(4);
+    expect(player.megaCredits).eq(2);
     expect(player2.megaCredits).eq(0);
     expect(player3.megaCredits).eq(0);
 
@@ -92,7 +92,7 @@ describe('PublicSponsoredGrant', () => {
 
     // This is a great test, because player1 instigated the loss, so does not get an insurance
     // payout. Player 2 loses the payout and player 3 gets it.
-    expect(player.megaCredits).eq(10);
+    expect(player.megaCredits).eq(8);
     expect(player2.megaCredits).eq(5);
     expect(player3.megaCredits).eq(11);
   });

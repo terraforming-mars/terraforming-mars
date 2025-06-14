@@ -566,10 +566,9 @@
             top: 14px;
             left: 1px;
             font-size: 15px;
-            width: 90px;
+            width: 150px;
             color: white;
             line-height: 23px;
-            padding: 5px;
             text-align: center;
             font-weight: normal;
             box-shadow: 3px 3px 6px grey;
@@ -987,9 +986,9 @@
         }
         .card-odyssey-logo {
             background-image: url(./assets/pathfinders/corp-logo-odyssey.png);
-            height: 90px;
-            width: 125px;
-            background-size: 125px 90px;
+            height: 70px;
+            width: 97px;
+            background-size: 97px 70px;
             margin-top: 10px;
         }
         .card-aurorai-logo {
@@ -1053,6 +1052,7 @@
         box-shadow: 0 0 0px 1px rgba(0, 0, 0.5);
         width: 216px;
         padding: 0 4px;
+        margin: 4px 0;
         /* hide points on hover by poppig the overlay on top of them*/
         &:hover {
             box-shadow: 0px 0px 4px 1px #353594;
@@ -1880,6 +1880,9 @@
             flex-flow: row;
             align-items: center;
         }
+        .card-row:empty {
+            margin: 0;
+        }
     }
     .card-description {
         margin-top: 8px;
@@ -2452,11 +2455,8 @@
     }
 }
 /* fixes */
-.card-mons-insurance {
-    .card-content-corporation > .card-description {
-        position: relative;
-        top: -16px;
-    }
+.card-nirgal-enterprises .card-title {
+    height: 60px !important;
 }
 
 .card-party {

@@ -1053,6 +1053,7 @@
         box-shadow: 0 0 0px 1px rgba(0, 0, 0.5);
         width: 216px;
         padding: 0 4px;
+        margin: 4px 0;
         /* hide points on hover by poppig the overlay on top of them*/
         &:hover {
             box-shadow: 0px 0px 4px 1px #353594;
@@ -1879,6 +1880,9 @@
             display: flex;
             flex-flow: row;
             align-items: center;
+        }
+        .card-row:empty {
+            margin: 0;
         }
     }
     .card-description {

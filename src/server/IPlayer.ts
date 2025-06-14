@@ -276,6 +276,11 @@ export interface IPlayer {
    */
   getGlobalParameterRequirementBonus(parameter: GlobalParameter): number;
   /**
+   * When Ecology Experts evaluates whether it can be played, it needs
+   * this temporary requirement bonus for global parameters.
+   */
+  temporaryGlobalParameterRequirementBonus: number;
+  /**
    * Called when this player is responsible for increasing a global parameter.
    */
   onGlobalParameterIncrease(parameter: GlobalParameter, steps: number): void;

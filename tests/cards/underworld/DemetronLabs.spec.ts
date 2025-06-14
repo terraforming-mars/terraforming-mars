@@ -49,6 +49,7 @@ describe('DemetronLabs', () => {
     const space = excavatableSpaces.filter((s) => !s.undergroundResources)[0];
 
     expect(space.undergroundResources).is.undefined;
+    space.undergroundResources = 'microbe1';
 
     UnderworldExpansion.excavate(player, space);
 

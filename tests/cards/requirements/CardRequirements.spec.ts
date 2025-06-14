@@ -218,9 +218,9 @@ describe('CardRequirements', () => {
   });
 
   it('satisfies properly for production', () => {
-    const requirements = {production: Resource.PLANTS};
+    const requirements = {production: Resource.HEAT};
     expect(satisfies(requirements, player)).eq(false);
-    player.production.add(Resource.PLANTS, 1);
+    player.production.add(Resource.HEAT, 1);
     expect(satisfies(requirements, player)).eq(true);
   });
 

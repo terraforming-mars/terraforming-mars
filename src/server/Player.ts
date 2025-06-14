@@ -169,6 +169,7 @@ export class Player implements IPlayer {
   public preservationProgram = false;
   public underworldData: UnderworldPlayerData = UnderworldExpansion.initializePlayer();
   public standardProjectsThisGeneration: Set<CardName> = new Set();
+  public temporaryGlobalParameterRequirementBonus = 0;
 
   // The number of actions a player can take this round.
   // It's almost always 2, but certain cards can change this value (Mars Maths, Tool with the First Order)
@@ -525,7 +526,7 @@ export class Player implements IPlayer {
   }
 
   public getGlobalParameterRequirementBonus(parameter: GlobalParameter): number {
-    let requirementsBonus = 0;
+    let requirementsBonus = this.temporaryGlobalParameterRequirementBonus;
     for (const card of this.tableau) {
       requirementsBonus += card.getGlobalParameterRequirementBonus(this, parameter);
     }

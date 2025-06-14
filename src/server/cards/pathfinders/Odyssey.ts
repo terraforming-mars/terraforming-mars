@@ -19,7 +19,7 @@ export class Odyssey extends CorporationCard implements ICorporationCard, IActio
         cardNumber: 'PfC18',
         description: 'You start with 33 M€.',
         renderData: CardRenderer.builder((b) => {
-          b.br.br.br.br.br.br.megacredits(33).nbsp.nbsp.nbsp;
+          b.megacredits(33);
           b.colon().cards(1, {secondaryTag: Tag.EVENT}).asterix().br;
           b.text('(Effect: Your event cards stay face up, and their tags are in use as if those were automated (green) cards.)',
             Size.TINY, false, false).br;

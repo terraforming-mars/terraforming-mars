@@ -24,11 +24,11 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
       metadata: {
         cardNumber: 'PfP02',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(10).br;
-          b.text('play', Size.MEDIUM, true).cards(1, {secondaryTag: AltSecondaryTag.FLOATER}).asterix().br;
+          b.megacredits(10);
+          b.text('play', Size.MEDIUM, true).cards(1, {secondaryTag: AltSecondaryTag.FLOATER}).asterix().br.projectRequirements().br;
           b.resource(CardResource.FLOATER, {amount: 5, digit});
         }),
-        description: 'Gain 10 M€. Play an active floater card from hand, ignoring requirements, and add 5 floaters to it.',
+        description: 'Gain 10 M€. PLAY AN ACTIVE FLOATER CARD FROM HAND, IGNORING GLOBAL REQUIREMENTS, and add 5 floaters to it.',
       },
     });
   }

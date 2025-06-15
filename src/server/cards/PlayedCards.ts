@@ -4,6 +4,7 @@ import {inplaceRemove} from '../../common/utils/utils';
 import {deserializeProjectCard, serializeProjectCard} from './cardSerialization';
 import {SerializedCard} from '../SerializedCard';
 import {ICard} from './ICard';
+import {CardType} from '../../common/cards/CardType';
 
 /**
  * Represents all cards in front of a player EXCEPT Corporation Cards.
@@ -21,6 +22,7 @@ import {ICard} from './ICard';
 export class PlayedCards {
   private array: Array<IProjectCard> = [];
   private byName: Map<CardName, IProjectCard> = new Map();
+  private _eventCount: number = 0;
 
   /**
    * Return the number of played cards.
@@ -57,6 +59,10 @@ export class PlayedCards {
     return this.array[Symbol.iterator]();
   }
 
+  public eventCount() {
+    return this._eventCount;
+  }
+
   /**
    * Returns the elements of an array that meet the condition specified in a callback function.
    * @param predicate A function that accepts up to three arguments. The filter method calls the predicate function one time for each element in the array.
@@ -88,6 +94,9 @@ export class PlayedCards {
       }
       this.array.push(card);
       this.byName.set(card.name, card);
+      if (card.type === CardType.EVENT) {
+        this._eventCount++;
+      }
     }
   }
 
@@ -99,6 +108,9 @@ export class PlayedCards {
     const found = this.byName.delete(card.name);
     if (found) {
       inplaceRemove(this.array, card);
+      if (card.type === CardType.EVENT) {
+        this._eventCount--;
+      }
     }
     return found;
   }

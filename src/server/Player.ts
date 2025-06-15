@@ -513,15 +513,18 @@ export class Player implements IPlayer {
     return coloniesCount;
   }
 
-  /*
+  /**
+   * Return the number of events played by this player.
+   *
    * When playing Pharmacy Union, if the card is discarded, then it sits in the event pile.
    * That's why it's included below. The FAQ describes how this applies to things like the
    * Legend Milestone, Media Archives, and NOT Media Group.
    */
   public getPlayedEventsCount(): number {
-    let count = this.playedCards.filter((card) => card.type === CardType.EVENT).length;
-    if (this.getCorporation(CardName.PHARMACY_UNION)?.isDisabled) count++;
-
+    let count = this.playedCards.eventCount();
+    if (this.getCorporation(CardName.PHARMACY_UNION)?.isDisabled) {
+      count++;
+    }
     return count;
   }
 

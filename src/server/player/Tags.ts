@@ -3,7 +3,6 @@
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {ALL_TAGS, Tag} from '../../common/cards/Tag';
-import {isICorporationCard} from '../cards/corporation/ICorporationCard';
 import {ICard} from '../cards/ICard';
 import {IPlayer} from '../IPlayer';
 import {OneOrArray} from '../../common/utils/types';
@@ -143,12 +142,19 @@ export class Tags {
 
   // Counts the tags in the player's play area only.
   protected rawCount(tag: Tag, includeEventsTags: boolean) {
-    let tagCount = 0;
+    let tagCount = this.player.playedCards.tags[tag];
 
-    for (const card of this.player.tableau) {
-      if (!includeEventsTags && card.type === CardType.EVENT) continue;
-      if (isICorporationCard(card) && card.isDisabled) continue;
-      tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
+    for (const card of this.player.corporations) {
+      if (!card.isDisabled) {
+        tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
+      }
+    }
+    if (includeEventsTags) {
+      for (const card of this.player.playedCards) {
+        if (card.type === CardType.EVENT) {
+          tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
+        }
+      }
     }
 
     return tagCount;

@@ -5,6 +5,27 @@ import {deserializeProjectCard, serializeProjectCard} from './cardSerialization'
 import {SerializedCard} from '../SerializedCard';
 import {ICard} from './ICard';
 import {CardType} from '../../common/cards/CardType';
+import {Tag} from '../../common/cards/Tag';
+
+const NO_TAGS = {
+  [Tag.BUILDING]: 0,
+  [Tag.SPACE]: 0,
+  [Tag.SCIENCE]: 0,
+  [Tag.POWER]: 0,
+  [Tag.EARTH]: 0,
+  [Tag.JOVIAN]: 0,
+  [Tag.VENUS]: 0,
+  [Tag.PLANT]: 0,
+  [Tag.MICROBE]: 0,
+  [Tag.ANIMAL]: 0,
+  [Tag.CITY]: 0,
+  [Tag.MOON]: 0,
+  [Tag.MARS]: 0,
+  [Tag.CRIME]: 0,
+  [Tag.WILD]: 0,
+  [Tag.EVENT]: 0,
+  [Tag.CLONE]: 0,
+} as const;
 
 /**
  * Represents all cards in front of a player EXCEPT Corporation Cards.
@@ -23,6 +44,7 @@ export class PlayedCards {
   private array: Array<IProjectCard> = [];
   private byName: Map<CardName, IProjectCard> = new Map();
   private _eventCount: number = 0;
+  private _tags: Record<Tag, number> = {...NO_TAGS};
 
   /**
    * Return the number of played cards.
@@ -59,10 +81,13 @@ export class PlayedCards {
     return this.array[Symbol.iterator]();
   }
 
-  public eventCount() {
+  public get eventCount() {
     return this._eventCount;
   }
 
+  public get tags(): Readonly<Record<Tag, number>> {
+    return this._tags;
+  }
   /**
    * Returns the elements of an array that meet the condition specified in a callback function.
    * @param predicate A function that accepts up to three arguments. The filter method calls the predicate function one time for each element in the array.
@@ -92,11 +117,17 @@ export class PlayedCards {
       if (this.get(card.name)) {
         throw new Error(`${card.name} already exists`);
       }
-      this.array.push(card);
-      this.byName.set(card.name, card);
-      if (card.type === CardType.EVENT) {
-        this._eventCount++;
-      }
+      this.pushCard(card);
+    }
+  }
+
+  private pushCard(card: IProjectCard) {
+    this.array.push(card);
+    this.byName.set(card.name, card);
+    if (card.type === CardType.EVENT) {
+      this._eventCount++;
+    } else {
+      this.addTags(card);
     }
   }
 
@@ -110,6 +141,8 @@ export class PlayedCards {
       inplaceRemove(this.array, card);
       if (card.type === CardType.EVENT) {
         this._eventCount--;
+      } else {
+        this.removeTags(card);
       }
     }
     return found;
@@ -121,7 +154,34 @@ export class PlayedCards {
   public set(...cards: Array<IProjectCard>) {
     this.byName.clear();
     this.array = [];
+    this._eventCount = 0;
+    this._tags = {...NO_TAGS};
+
     this.push(...cards);
+  }
+
+  private addTags(card: ICard) {
+    for (const tag of card.tags) {
+      this._tags[tag]++;
+    }
+  }
+
+  private removeTags(card: ICard) {
+    for (const tag of card.tags) {
+      this._tags[tag]--;
+    }
+  }
+
+  /**
+   * Some cards have dynamic behavior: clone tags, or the Xavier
+   * CEO. This object caches all the tags of played cards. So,
+   * when a card's tags are changed after being placed here, this
+   * allows the card to update its state.
+   */
+  public retagCard(card: ICard, cb: () => void) {
+    this.removeTags(card);
+    cb();
+    this.addTags(card);
   }
 
   public serialize(): Array<SerializedCard> {

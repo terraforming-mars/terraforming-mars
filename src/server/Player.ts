@@ -521,7 +521,7 @@ export class Player implements IPlayer {
    * Legend Milestone, Media Archives, and NOT Media Group.
    */
   public getPlayedEventsCount(): number {
-    let count = this.playedCards.eventCount();
+    let count = this.playedCards.eventCount;
     if (this.getCorporation(CardName.PHARMACY_UNION)?.isDisabled) {
       count++;
     }

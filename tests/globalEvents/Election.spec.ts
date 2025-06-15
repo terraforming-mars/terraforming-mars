@@ -46,21 +46,21 @@ describe('Election', () => {
 
     expect(player.getTerraformRating()).to.eq(14);
 
-    fake.tags.push(Tag.BUILDING);
+    player.playedCards.push(fakeCard({tags: [Tag.BUILDING]}));
     expect(card.getScore(player, turmoil, game)).eq(5);
 
     card.resolve(game, turmoil);
 
     expect(player.getTerraformRating()).to.eq(15);
 
-    fake.tags.push(Tag.BUILDING, Tag.BUILDING, Tag.BUILDING, Tag.BUILDING);
+    player.playedCards.push(fakeCard({tags: [Tag.BUILDING, Tag.BUILDING, Tag.BUILDING, Tag.BUILDING]}));
     expect(card.getScore(player, turmoil, game)).eq(9);
 
     card.resolve(game, turmoil);
 
     expect(player.getTerraformRating()).to.eq(16);
 
-    fake.tags.push(Tag.BUILDING);
+    player.playedCards.push(fakeCard({tags: [Tag.BUILDING]}));
     expect(card.getScore(player, turmoil, game)).eq(10);
 
     card.resolve(game, turmoil);

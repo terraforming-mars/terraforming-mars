@@ -70,7 +70,8 @@ describe('Tags', () => {
 
     expect(player.tags.count(Tag.JOVIAN)).eq(1);
 
-    card.type = CardType.EVENT;
+    const event = fakeCard({type: CardType.EVENT, tags: [Tag.JOVIAN]});
+    player.playedCards.set(event);
 
     expect(player.tags.count(Tag.JOVIAN)).eq(0);
   });

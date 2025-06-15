@@ -149,24 +149,25 @@ export interface ICard {
   /** Callback when THIS player adds a colony to Leavitt. */
   onColonyAddedToLeavitt?(player: IPlayer): void;
 
-  cost?: number; /** Used with IProjectCard and PreludeCard. */
-  type: CardType;
+  readonly cost?: number; /** Used with IProjectCard and PreludeCard. */
+  readonly type: CardType;
   requirements: Array<CardRequirementDescriptor>;
-  metadata: CardMetadata;
+  readonly metadata: CardMetadata;
 
   /**
    * Per-instance state-specific warnings about this card's action.
    */
   warnings: Set<Warning>;
 
-  behavior?: Behavior,
+  readonly behavior?: Behavior,
 
   /**
    * Returns the contents of the card's production box.
    *
    * Use with Robotic Workforce and Cyberia Systems.
    *
-   * Prefer this to `produce` and prefer `behavior` to this.
+   * Prefer this to `produce`.
+   * Prefer `behavior` to this.
    */
   productionBox?(player: IPlayer): Units;
 

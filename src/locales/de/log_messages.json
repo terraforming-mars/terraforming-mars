@@ -213,6 +213,7 @@
     "${0} gained 2 titanium": "${0} erhielt 2 Titan",
     "${0} gained ${1} corruption": "${0} erhielt ${1} Korruption",
     "${0} spent ${1} corruption": "${0} bezahlte ${1} Korruption",
+    "${0} spent ${1} ${2} to gain 20 M€ and 1 corruption": "${0} gab ${1} ${2} aus, um 20 M€ und 1 Korruption zu erhalten",
     "${0} spent 8 energy to increase oxygen 1 step.": "${0} hat 8 Energie ausgegeben, um den Sauerstoffgehalt um 1% zu erhöhen.",
     "${0} spent 8 energy to increase Venus 1 step.": "${0} hat 8 Energie ausgegeben, um die Venuswertung um 2% zu erhöhen.",
     "${0} decreased temperature 1 step": "${0} senkte die Temperatur um 2 °C",

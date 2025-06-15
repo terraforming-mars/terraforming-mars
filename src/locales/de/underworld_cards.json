@@ -1,5 +1,8 @@
 {
 
+"Acidizing": "Ansäuerung",
+"Raise Venus 1 step. Excavate an underground resource.": "Erhöhe die Venuswertung um 1. Grabe eine unterirdische Ressource aus.",
+
 "Anti-trust Crackdown": "Kartellrechtliches Durchgreifen",
 "Requires that you have no more than 0 corruption. ALL players lose 2 corruption each.": "Benötigt, dass du nicht mehr als 0 Korruption hast. ALLE Spieler verlieren jeweils 2 Korruption.",
 
@@ -12,6 +15,10 @@
 "Behemoth Excavator": "Behemoth Bagger",
 "Excavate 3 underground resources.": "Grabe 3 unterirdische Ressourcen aus.",
 
+"Biobatteries": "Biobatterien",
+"NOTE: For the moment, all wild tags are going to energy.": "HINWEIS: Im Moment werden alle Jokersymbole auf Energie zugerechnet.",
+"Increase your energy production 1 step. Gain 1 energy for every microbe tag you have (including this.) For every power tag you have (including this) put 1 microbe on another card.": "Erhöhe deine Energieproduktion um 1. Erhalte 1 Energie für jedes Mikrobensymbol, das du hast (einschließlich dieser). Für jedes Energiesymbol, das du hast (einschließlich dieser), lege 1 Mikrobe auf eine andere Karte.",
+
 "Casino": "Kasino",
 "Requires at least 1 city tile in play. Gain 1 corruption. Increase your M€ production 2 steps.": "Benötigt mindestens 1 Stadtplättchen im Spiel. Erhalte 1 Korruption. Erhöhe deine M€-Produktion um 2.",
 
@@ -22,6 +29,10 @@
 "Action: Spend 1 plant to excavate an underground resource.": "AKTION: Bezahle 1 Pflanze, um eine unterirdische Ressource auszugraben.",
 "Gain 2 corruption.": "Erhalte 2 Korruption.",
 
+"Class-action Lawsuit": "Sammelklage",
+"THIS CAN'T BE BLOCKED BY CORRUPTION": "DIES KANN NICHT DURCH KORRUPTION VERHINDERT WERDEN",
+"The player with more corruption than anybody else discards corruption until they have the same amount as the 2nd highest player, along with 3 M€ per unit of corruption removed this way.": "Der Spieler, der mehr Korruption als alle anderen hat, wirft so lange Korruption ab, bis er die gleiche Menge wie der zweithöchste Spieler hat, zusammen mit 3 M€ pro auf diese Weise entfernter Einheit Korruption.",
+  
 "Concession Rights": "Konzessionsrechte",
 "Requires 1 Earth tag. Until the end of this generation, you can excavate ignoring placement restrictions. Excavate 1 underground resource. Gain 1 corruption.": "Benötigt 1 Erd-Symbol. Bis zum Ende dieser Generation kannst du ohne Rücksicht auf Platzierungsbeschränkungen graben. Grabe 1 unterirdische Ressource aus. Erhalte 1 Korruption.",
 
@@ -39,6 +50,9 @@
 "Cut-throat Budgeting": "Halsabschneiderische Budgetierung",
 "Requires 1 corruption. Increase your M€, steel, and energy production 1 step each.": "Benötigt 1 Korruption. Erhöhe deine M€-, Stahl- und Energieproduktion um jeweils 1.",
 
+"Detective TV Series": "Detektiv TV-Serien",
+"Effect: Whenever ANY player plays a crime tag, you gain 2 MC.": "EFFEKT: Immer wenn ein beliebiger Spieler ein Verbrechensymbol spielt, erhältst du 2 M€.",
+  
 "Deepmining": "Tiefbohrung",
 "Excavate an underground resource that depicts steel or titanium ANYWHERE ON THE BOARD. Increase your production of that resource 1 step.": "Grabe eine IDENTIFIZIERTE unterirdische Ressource ÜBERALL AUF DEM MARS mit einem Stahl- oder Titan-Platzierungsbonus aus. Erhöhe diese Produktion um 1 Stufe.",
 
@@ -56,10 +70,20 @@
 "Expedition Vehicles": "Expeditions-Fahrzeuge",
 "Effect: After you place a tile (on Mars or in space) that has no adjacent tiles, draw a card.": "EFFEKT: Nachdem du ein Plättchen (auf dem Mars oder im Weltraum) platziert hast, das keine angrenzenden Plättchen hat, ziehe eine Karte.",
 
+"Exploitation Of Venus": "Ausbeutung der Venus",
+"Effect: Whenever ANY player terraforms Venus 1 step, THEY also gain 2 MC.": "EFFEKT: Immer wenn ein beliebiger Spieler die Venuswertung erhöht, erhält er 2 M€ pro 2% Erhöhung.",
+"Action: Pay 1 corruption to terraform Venus 1 step.": "AKTION: Zahle 1 Korruption, um die Venuswertung um 2% zu erhöhen.",
+
+"Export Convoy": "Export Konvoi",
+"Pay 4 plants, or 3 microbes, or 2 animals from any of your cards. Gain 20 M€ and 1 corruption.": "Bezahle 4 Pflanzen oder 3 Mikroben oder 2 Tiere von einer deiner Karten. Du erhältst 20 M€ und 1 Korruption.",
+
 "Fabricated Scandal": "Erfundener Skandal",
 "most": "am meisten",
 "least": "am wenigsten",
 "Gain 1 corruption. The players with the highest TR lose 1 TR. Then the players with the lowest TR gain 1 TR, if possible.": "Erhalte 1 Korruption. Die Spieler mit dem höchsten TW verlieren 1 TW. Dann erhalten die Spieler mit dem niedrigsten TW 1 TW, wenn möglich.",
+
+"Family Connections": "Familiäre Bindungen",
+"Gain 1 corruption for every city tag you have.": "Für jedes Stadtsymbol, das du hast, erhältst du 1 Korruption.",
 
 "Forest Tunnels": "Waldtunnel",
 "Requires an excavation marker. Gain 1 plant for every excavation marker you have.": "Benötigt einen Ausgrabungsmarker. Erhalte 1 Pflanze für jeden Ausgrabungsmarker, den du besitzt.",
@@ -71,6 +95,9 @@
 "Gaia City": "Gaia-Stadt",
 "Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (including adjacencies.) Regular placement restriction still apply.": "Verringere deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 2. Platziere eine Stadt auf einem Feld mit einem Ausgrabungsmarker eines beliebigen Spielers. Der Platzierungsbonus wird verdoppelt (einschließlich der Nachbarschaftsboni). Die normalen Platzierungsbeschränkungen gelten weiterhin.",
 "Placement Bonus x2": "2x Platzierungsbonus",
+
+"Gas Trust": "Gas Treuhand",
+"Gain 1 corruption. Gain 3 heat for each crime tag you have INCLUDING EVENTS and this card.": "Erhalte 1 Korruption. Erhalte 3 Wärme für jedes Verbrechensymbol, das du hast, einschließlich der Ereigniskarten und dieser Karte.",
 
 "Geological Survey": "Geologische Untersuchung",
 "Add 1 data resource to ANOTHER card. Identify any 2 underground resources on Mars.": "Füge 1 Datum zu einer ANDEREN Karte hinzu. Identifiziere 2 beliebige unterirdische Ressourcen auf dem Mars.",
@@ -137,6 +164,12 @@
 "Action: Remove all wares from here and gain 1 M€ for each ware removed.": "Aktion: Entferne alle Waren von dieser Karte und erhalte 1 M€ für jede entfernte Ware.",
 "Requires 1 city in play.": "Benötigt 1 Stadt im Spiel.",
 
+"Media Frenzy": "Medienrausch",
+"Remove up to 1 corruption from another player. Reveal 2 cards from the deck until you reveal 2 event cards. Take them into hand and discard the rest.": "Entferne bis zu 1 Korruption von einem anderen Spieler. Ziehe 2 Karten, bis du 2 Ereigniskarten aufdeckst. Nimm sie auf die Hand und wirf den Rest ab.",
+
+"Mercenary Squad": "Söldnertruppe",
+"Requires 1 corruption. Remove up to 2 resources from ANY card": "Benötigt 1 Korruption. Entferne bis zu 2 Ressourcen von einer beliebigen Karte",
+  
 "Micro-Geodesics": "Mikro-Geodäsie",
 "Spend 1 microbe from any card to excavate an underground resource and gain 3 plants. Add 1 data resource to ANOTHER card.": "Bezahle 1 Mikrobe von einer eigenen beliebigen Karte, um eine unterirdische Ressource auszugraben und 3 Pflanzen zu erhalten. Füge 1 Datum EINER ANDEREN Karte hinzu.",
 
@@ -208,6 +241,9 @@
 "Increase your M€ production 2 steps": "Erhöhe deine M€-Produktion um 2.",
 "Requires 5 space tags. This card has 2 Earth tags, 2 Jovian tags, 2 Venus tags, and 2 Mars tags.": "Benötigt 5 Weltraum-Symbole. Diese Karte hat 2 Erd-, 2 Jupiter-, 2 Venus- und 2 Mars-Symbole.",
 
+"Racketeering": "Organisierte Kriminalität",
+"Requires 1 corruption. Increase your M€ production one step for each crime tag you have INCLUDING EVENTS and this card.": "Benötigt 1 Korruption. Erhöhe deine M€-Produktion um einen Schritt für jedes Verbrechensymbol, das du hast, EINSCHLIESSLICH EREIGNISKARTEN und dieser Karte.",
+  
 "Reckless Detonation": "Rücksichtslose Sprengung",
 "Requires 2 corruption. Excavate an underground resource. Remove up to 3 steel or 2 titanium from another player.": "Benötigt 2 Korruption. Grabe eine unterirdische Ressource aus. Entferne bis zu 3 Stahl oder 2 Titan von einem anderen Spieler.",
 
@@ -258,6 +294,10 @@
 "Stem Field Subsidies": "Subventionen für Stammzellen",
 "Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "EFFEKT: Immer wenn du eine Wissenschaftssymbol spielst (einschließlich dieses), lege 1 Datum auf eine beliebige Karte und identifiziere eine unterirdische Ressource.",
 "1 VP per 3 data resources on this card.": "1 SP pro 3 Datenressourcen auf dieser Karte.",
+
+"Sting Operation": "Verdeckte Operation",
+"Target a player that has at least 4 corruption. Draw 2 cards.": "Ziele auf einen Spieler, der mindestens 4 Korruption hat. Ziehe 2 Karten.",
+"Place this card face-down in that player's project card file.": "Lege diese Karte verdeckt in die Projektkarten dieses Spielers.",
 
 "Subnautic Pirates": "Subnautische Piraten",
 "Requires 1 excavation marker and 1 corruption. Pick an ocean tile that has your excavation marker on it. Steal 6 M€ from each other player that owns a tile adjacent to that ocean. This can be blocked by corruption.": "Benötigt 1 Ausgrabungsmarker und 1 Korruption. Wähle ein Ozeanplättchen, auf dem dein Ausgrabungsmarker liegt. Klaue 6 M€ von jedem anderen Spieler, der ein an diesen Ozean angrenzendes Plättchen besitzt. Dies kann durch Korruption verhindert werden.",

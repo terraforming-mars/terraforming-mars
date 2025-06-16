@@ -9,7 +9,14 @@
   </label>
 
   <section v-trim-whitespace>
-    <div v-if="selectedCardHasWarning()" class="card-warning">{{ $t(card.warning) }}</div>
+    <template v-if="card.additionalCosts">
+      <div v-if="card.additionalCosts.thinkTankResources" class="card-warning">
+        Playing {{card.name}} consumes {{card.additionalCosts.thinkTankResources}} data from Think Tank
+      </div>
+      <div v-if="card.additionalCosts.redsCost" class="card-warning">
+        Playing {{card.name}} will cost {{card.additionalCosts.redsCost}} M€ more because Reds are in power
+      </div>
+    </template>
     <warnings-component :warnings="card.warnings"></warnings-component>
 
     <h3 class="payments_title" v-i18n>How to pay?</h3>
@@ -337,9 +344,6 @@ export default Vue.extend({
     },
     hasWarning(): boolean {
       return this.warning !== undefined;
-    },
-    selectedCardHasWarning(): boolean {
-      return this.card !== undefined && this.card.warning !== undefined;
     },
     showReserveWarning(unit: SpendableResource): boolean {
       switch (unit) {

@@ -3,7 +3,7 @@ import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
 import {CardType} from '../../common/cards/CardType';
-import {AdditionalCostsToPlay} from './requirements/CardRequirement';
+import {AdditionalCostsToPlay} from '../../common/cards/Types';
 
 export type CanPlayResponse = boolean | AdditionalCostsToPlay;
 

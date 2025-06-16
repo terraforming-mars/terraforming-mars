@@ -25,3 +25,10 @@ export type GlobalParameterRequirementBonus = {
   nextCardOnly?: boolean,
 };
 
+/**
+ * When defined, this indicates additional costs required to play a card.
+ */
+export type AdditionalCostsToPlay = {
+  thinkTankResources?: number,
+  redsCost?: number,
+}

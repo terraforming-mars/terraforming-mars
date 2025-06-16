@@ -7,7 +7,7 @@ import {CardAction, IPlayer} from '../IPlayer';
 import {InputResponse, isSelectProjectCardToPlayResponse} from '../../common/inputs/InputResponse';
 import {CardName} from '../../common/cards/CardName';
 import {CanPlayResponse} from '../cards/IProjectCard';
-import {AdditionalCostsToPlay} from '../cards/requirements/CardRequirement';
+import {AdditionalCostsToPlay} from '../../common/cards/Types';
 import {cardsToModel} from '../models/ModelUtils';
 import {SelectProjectCardToPlayModel} from '../../common/models/PlayerInputModel';
 import {InputError} from './InputError';

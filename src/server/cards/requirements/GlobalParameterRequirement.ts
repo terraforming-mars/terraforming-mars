@@ -1,7 +1,7 @@
 import {IPlayer} from '../../IPlayer';
 import {InequalityRequirement} from './InequalityRequirement';
 import {GlobalParameter} from '../../../common/GlobalParameter';
-import {AdditionalCostsToPlay} from './CardRequirement';
+import {AdditionalCostsToPlay} from '../../../common/cards/Types';
 
 
 /**

@@ -24,7 +24,7 @@ import {CardRequirementsDescriptor} from './CardRequirementDescriptor';
 import {CardRequirements} from './requirements/CardRequirements';
 import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
 import {asArray} from '../../common/utils/utils';
-import {AdditionalCostsToPlay} from './requirements/CardRequirement';
+import {AdditionalCostsToPlay} from '../../common/cards/Types';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {Warning} from '../../common/cards/Warning';
 

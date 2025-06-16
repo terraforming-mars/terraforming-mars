@@ -1,6 +1,6 @@
-import {CardRequirement, AdditionalCostsToPlay} from './CardRequirement';
+import {CardRequirement} from './CardRequirement';
 import {IPlayer} from '../../IPlayer';
-
+import {AdditionalCostsToPlay} from '../../../common/cards/Types';
 /**
  * Defines a class of requirements that compare to a given value. Subclasses provide that value
  * with `getScore`.

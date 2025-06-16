@@ -1,6 +1,6 @@
 import {RequirementType} from '../../../common/cards/RequirementType';
 import {IPlayer} from '../../IPlayer';
-
+import {AdditionalCostsToPlay} from '../../../common/cards/Types';
 export type Options = {
   max: boolean,
   all: boolean,
@@ -8,14 +8,6 @@ export type Options = {
   nextTo: boolean,
   count: number,
 };
-
-/**
- * When defined, this indicates additional costs required to play a card.
- */
-export type AdditionalCostsToPlay = {
-  thinkTankResources?: number,
-  redsCost?: number,
-}
 
 /**
  * Information to evaluate a card requirement.

@@ -26,7 +26,7 @@ import {Colonies} from './player/Colonies';
 import {Production} from './player/Production';
 import {ICeoCard} from './cards/ceos/ICeoCard';
 import {VictoryPointsBreakdown} from '../common/game/VictoryPointsBreakdown';
-import {AdditionalCostsToPlay} from './cards/requirements/CardRequirement';
+import {AdditionalCostsToPlay} from '../common/cards/Types';
 import {PlayableCard} from './cards/IProjectCard';
 import {Color} from '../common/Color';
 import {OrOptions} from './inputs/OrOptions';

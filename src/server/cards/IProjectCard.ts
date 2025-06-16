@@ -37,7 +37,14 @@ export interface IProjectCard extends ICard {
    */
   reserveUnits?: Units;
 
-  // HELP I AM UNDOCUMENTED
+  /**
+   * Per-instance state-specific additional costs to play this card.
+   *
+   * This is ephemeral data that gets reset between evaluations.
+   * It is not serialized.
+   *
+   * See: ICard.warnings.
+   */
   additionalCostsToPay?: AdditionalCostsToPlay;
 }
 

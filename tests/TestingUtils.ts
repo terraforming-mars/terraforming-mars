@@ -170,12 +170,11 @@ class FakeCard implements IProjectCard {
   public tags = [];
   public requirements = [];
   public warnings = new Set<Warning>();
-  public canPlay(player: IPlayer) {
+  public canPlay(player: IPlayer): boolean {
     if (this.requirements.length === 0) {
       return true;
     }
-    // TODO(kberg): simplify
-    return CardRequirements.compile(this.requirements).satisfies(player) !== false;
+    return CardRequirements.compile(this.requirements).satisfies(player, this);
   }
   public canPlayPostRequirements(): boolean {
     return true;

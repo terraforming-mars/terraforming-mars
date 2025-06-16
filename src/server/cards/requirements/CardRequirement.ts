@@ -1,6 +1,7 @@
 import {RequirementType} from '../../../common/cards/RequirementType';
 import {IPlayer} from '../../IPlayer';
-import {AdditionalCostsToPlay} from '../../../common/cards/Types';
+import {IProjectCard} from '../IProjectCard';
+
 export type Options = {
   max: boolean,
   all: boolean,
@@ -46,9 +47,10 @@ export abstract class CardRequirement {
    * Evaluate whether |player| satisfies this requirement. It takes into account any
    * player modifiers (e.g. Adaptation Technology, and fan-based Think Tank.)
    *
-   * Returns true if |player| can satisfy the requirement, false if it cannot, and
-   * AdditionalCostsToPlay if it can only do that under certain conditions (e.g. spend 2 Think Tank
-   * resources.)
+   * |card| is the project card with this requirement. It is currently only used for
+   * setting Think Tank costs.
+   *
+   * Returns true if |player| can satisfy the requirement, false if it cannot.
    */
-  public abstract satisfies(player: IPlayer, thinkTankResources?: number) : boolean | AdditionalCostsToPlay;
+  public abstract satisfies(player: IPlayer, card: IProjectCard) : boolean;
 }

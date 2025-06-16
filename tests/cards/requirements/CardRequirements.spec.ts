@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CardRequirements} from '../../../src/server/cards/requirements/CardRequirements';
-import {runAllActions, cast, addGreenery, setTemperature, setOxygenLevel, setVenusScaleLevel, churn} from '../../TestingUtils';
+import {runAllActions, cast, addGreenery, setTemperature, setOxygenLevel, setVenusScaleLevel, churn, fakeCard} from '../../TestingUtils';
 import {AdaptationTechnology} from '../../../src/server/cards/base/AdaptationTechnology';
 import {TileType} from '../../../src/common/TileType';
 import {Ants} from '../../../src/server/cards/base/Ants';
@@ -23,7 +23,7 @@ function compile(req: OneOrArray<CardRequirementDescriptor>) {
   return CardRequirements.compile(asArray(req));
 }
 function satisfies(req: OneOrArray<CardRequirementDescriptor>, player: IPlayer) {
-  return compile(asArray(req)).satisfies(player);
+  return compile(asArray(req)).satisfies(player, fakeCard());
 }
 
 describe('CardRequirements', () => {

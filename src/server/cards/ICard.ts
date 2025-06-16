@@ -156,6 +156,10 @@ export interface ICard {
 
   /**
    * Per-instance state-specific warnings about this card's action.
+   * This is ephemeral data that gets reset between evaluations.
+   * It is not serialized.
+   *
+   * See: IProjectCard.additionalCostsToPay
    */
   warnings: Set<Warning>;
 

@@ -29,6 +29,8 @@ export type GlobalParameterRequirementBonus = {
  * When defined, this indicates additional costs required to play a card.
  */
 export type AdditionalCostsToPlay = {
+  /** Any resources that need to come off Think Tank to meet global requirements. */
   thinkTankResources?: number,
+  /** Any predicted fees required to play this card because Reds are in power. */
   redsCost?: number,
 }

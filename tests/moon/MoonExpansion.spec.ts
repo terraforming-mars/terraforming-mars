@@ -176,13 +176,13 @@ describe('MoonExpansion', () => {
     player.titanium = 1;
     player.steel = 1;
     moonData.miningRate = 3;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     // Gives a +2/-2 on the next action
     player.playedCards.push(specialDesign);
     player.lastCardPlayed = specialDesign.name;
 
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('raiseMiningRate during WGT', () => {

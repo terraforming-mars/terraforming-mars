@@ -45,7 +45,7 @@ describe('ValuableGases', () => {
 
   it('Should play', () => {
     player.cardsInHand = [floatingHabs, jovianLanters, localShading, airRaid];
-    expect(player.getPlayableCardsForTest()).is.empty;
+    expect(player.getPlayableCards()).is.empty;
 
     card.play(player);
 

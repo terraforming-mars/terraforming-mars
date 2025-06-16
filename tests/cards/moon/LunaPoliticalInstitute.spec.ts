@@ -25,13 +25,13 @@ describe('LunaPoliticalInstitute', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     player.playedCards.push(fakeCard({tags: [Tag.MOON]}));
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     player.playedCards.push(fakeCard({tags: [Tag.MOON]}));
-    expect(player.getPlayableCardsForTest()).includes(card);
+    expect(player.getPlayableCards()).includes(card);
   });
 
   it('can act', () => {

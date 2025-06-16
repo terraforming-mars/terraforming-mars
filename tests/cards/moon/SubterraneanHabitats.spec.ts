@@ -27,9 +27,9 @@ describe('SubterraneanHabitats', () => {
     player.megaCredits = 1000;
 
     player.steel = 1;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
     player.steel = 2;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
@@ -65,9 +65,9 @@ describe('SubterraneanHabitats', () => {
       }
 
       if (run.expected) {
-        expect(player.getPlayableCards().map((card) => card.card.name)).deep.eq([run.card]);
+        expect(player.getPlayableCards().map((card) => card.name)).deep.eq([run.card]);
       } else {
-        expect(player.getPlayableCards().map((card) => card.card.name)).is.empty;
+        expect(player.getPlayableCards().map((card) => card.name)).is.empty;
       }
     });
   }

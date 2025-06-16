@@ -1,7 +1,8 @@
 import {IPlayer} from '../../IPlayer';
 import {InequalityRequirement} from './InequalityRequirement';
 import {GlobalParameter} from '../../../common/GlobalParameter';
-import {YesAnd} from './CardRequirement';
+import {CardName} from '../../../common/cards/CardName';
+import {IProjectCard} from '../IProjectCard';
 
 
 /**
@@ -17,14 +18,17 @@ export abstract class GlobalParameterRequirement extends InequalityRequirement {
 
   public abstract getGlobalValue(player: IPlayer): number;
 
-  public override satisfies(player: IPlayer, thinkTankResources: number): boolean | YesAnd {
-    if (super.satisfies(player, thinkTankResources)) {
+  public override satisfies(player: IPlayer, card: IProjectCard): boolean {
+    if (super.satisfies(player, card)) {
       return true;
     }
+    const thinkTankResources = player.getPlayedCard(CardName.THINK_TANK)?.resourceCount;
     if (thinkTankResources) {
       const distance = this.distance(player);
       if (distance <= thinkTankResources) {
-        return {thinkTankResources: distance};
+        card.additionalProjectCosts = card.additionalProjectCosts ?? {};
+        card.additionalProjectCosts.thinkTankResources = distance;
+        return true;
       }
     }
     return false;

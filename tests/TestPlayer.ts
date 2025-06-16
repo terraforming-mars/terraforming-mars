@@ -4,7 +4,6 @@ import {Color} from '../src/common/Color';
 import {Tag} from '../src/common/cards/Tag';
 import {InputResponse} from '../src/common/inputs/InputResponse';
 import {Tags} from '../src/server/player/Tags';
-import {IProjectCard} from '../src/server/cards/IProjectCard';
 import {PlayerId} from '../src/common/Types';
 
 type Options = {name: string, beginner?: boolean, idSuffix?: string};
@@ -77,9 +76,5 @@ export class TestPlayer extends Player {
     this.waitingFor = undefined;
     this.waitingForCb = undefined;
     return waitingFor;
-  }
-
-  public getPlayableCardsForTest(): Array<IProjectCard> {
-    return this.getPlayableCards().map((entry) => entry.card);
   }
 }

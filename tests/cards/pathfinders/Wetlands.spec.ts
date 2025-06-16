@@ -45,7 +45,7 @@ describe('Wetlands', () => {
     expect(card.availableSpaces(player).map(toID)).deep.eq(['09', '23']);
 
     player.plants = 3;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   // Same test as above, with Red City in the way

@@ -32,12 +32,14 @@ describe('TerraformingGanymede', () => {
     player.megaCredits = card.cost;
     expect(player.canPlay(card)).is.not.true;
     player.megaCredits = card.cost + 3;
-    expect(player.canPlay(card)).deep.eq({redsCost: 3});
+    expect(player.canPlay(card)).is.true;
+    expect(card.additionalProjectCosts).deep.eq({redsCost: 3});
 
     player.tagsForTest = {jovian: 2};
     player.megaCredits = card.cost + 8;
     expect(player.canPlay(card)).is.not.true;
     player.megaCredits = card.cost + 9;
-    expect(player.canPlay(card)).deep.eq({redsCost: 9});
+    expect(player.canPlay(card)).is.true;
+    expect(card.additionalProjectCosts).deep.eq({redsCost: 9});
   });
 });

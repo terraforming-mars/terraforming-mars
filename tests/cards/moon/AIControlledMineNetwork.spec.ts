@@ -23,10 +23,10 @@ describe('AIControlledMineNetwork', () => {
     player.megaCredits = card.cost;
 
     moonData.logisticRate = 1;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     moonData.logisticRate = 2;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {

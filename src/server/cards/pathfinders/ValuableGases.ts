@@ -46,12 +46,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     player.stock.add(Resource.MEGACREDITS, 10);
 
-    const playableCards = this.getPlayableCards(player).map((card) => {
-      return {
-        card: card,
-        details: true,
-      };
-    });
+    const playableCards = this.getPlayableCards(player);
     if (playableCards.length !== 0) {
       player.defer(new SelectProjectCardToPlay(player, playableCards)
         .andThen((card) => {

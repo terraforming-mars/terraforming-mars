@@ -60,6 +60,7 @@ describe('WildlifeDome', () => {
     expect(player.canPlay(card)).is.not.true;
 
     player.megaCredits = 18;
-    expect(player.canPlay(card)).deep.eq({redsCost: 3});
+    expect(player.canPlay(card)).is.true;
+    expect(card.additionalCostsToPay).deep.eq({redsCost: 3});
   });
 });

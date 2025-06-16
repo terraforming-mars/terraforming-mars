@@ -10,7 +10,7 @@ import {Log} from '../src/common/logs/Log';
 import {Greens} from '../src/server/turmoil/parties/Greens';
 import {PoliticalAgendas} from '../src/server/turmoil/PoliticalAgendas';
 import {Reds} from '../src/server/turmoil/parties/Reds';
-import {CanPlayResponse, IProjectCard} from '../src/server/cards/IProjectCard';
+import {IProjectCard} from '../src/server/cards/IProjectCard';
 import {CardName} from '../src/common/cards/CardName';
 import {CardType} from '../src/common/cards/CardType';
 import {SpaceId} from '../src/common/Types';
@@ -132,7 +132,7 @@ export function formatMessage(message: Message | string): string {
  * @param initialMegacredits starting money
  * @param passingDelta additional money required to take this action when Reds are in power.. Typically a multiple of 3
  */
-export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initialMegacredits: number, passingDelta: number) {
+export function testRedsCosts(cb: () => boolean, player: IPlayer, initialMegacredits: number, passingDelta: number) {
   const turmoil = Turmoil.getTurmoil(player.game);
 
   {
@@ -174,7 +174,8 @@ class FakeCard implements IProjectCard {
     if (this.requirements.length === 0) {
       return true;
     }
-    return CardRequirements.compile(this.requirements).satisfies(player);
+    // TODO(kberg): simplify
+    return CardRequirements.compile(this.requirements).satisfies(player) !== false;
   }
   public canPlayPostRequirements(): boolean {
     return true;

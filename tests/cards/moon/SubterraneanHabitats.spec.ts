@@ -65,9 +65,9 @@ describe('SubterraneanHabitats', () => {
       }
 
       if (run.expected) {
-        expect(player.getPlayableCards().map((card) => card.card.name)).deep.eq([run.card]);
+        expect(player.getPlayableCards().map((card) => card.name)).deep.eq([run.card]);
       } else {
-        expect(player.getPlayableCards().map((card) => card.card.name)).is.empty;
+        expect(player.getPlayableCards().map((card) => card.name)).is.empty;
       }
     });
   }

@@ -109,6 +109,7 @@ export abstract class Card implements ICard {
   protected readonly properties: InternalProperties;
   public resourceCount = 0;
   public warnings = new Set<Warning>();
+  public additionalCostsToPay?: AdditionalCostsToPlay = undefined;
 
   private internalize(external: StaticCardProperties): InternalProperties {
     const name = external.name;
@@ -234,23 +235,20 @@ export abstract class Card implements ICard {
   public get tilesBuilt(): ReadonlyArray<TileType> {
     return this.properties.tilesBuilt;
   }
-  public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean | AdditionalCostsToPlay {
-    let additionalCosts: AdditionalCostsToPlay | undefined = undefined;
-    const satisfied = this.properties.compiledRequirements.satisfies(player);
+  public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean {
+    const satisfied: AdditionalCostsToPlay | boolean = this.properties.compiledRequirements.satisfies(player);
     if (satisfied === false) {
       return false;
-    }
-    if (satisfied !== true) {
-      additionalCosts = satisfied;
     }
 
     if (this.canPlayPostRequirements(player, canAffordOptions) === false) {
       return false;
     }
 
-    if (additionalCosts !== undefined) {
-      return additionalCosts;
+    if (satisfied !== true) {
+      this.additionalCostsToPay = satisfied;
     }
+
     return true;
   }
 

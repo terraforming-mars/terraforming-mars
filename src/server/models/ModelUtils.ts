@@ -48,8 +48,8 @@ export function cardsToModel(
     }
     const playCardMetadata = options?.extras?.get(card.name);
 
-    if (typeof(playCardMetadata?.details) === 'object') {
-      model.additionalCosts = playCardMetadata.details;
+    if (isIProjectCard(card) && card.additionalCostsToPay) {
+      model.additionalCosts = card.additionalCostsToPay;
     }
 
     const reserveUnits = playCardMetadata?.reserveUnits;

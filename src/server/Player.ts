@@ -60,8 +60,6 @@ import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
 import {message} from './logs/MessageBuilder';
 import {calculateVictoryPoints} from './game/calculateVictoryPoints';
 import {VictoryPointsBreakdown} from '../common/game/VictoryPointsBreakdown';
-import {AdditionalCostsToPlay} from '../common/cards/Types';
-import {PlayableCard} from './cards/IProjectCard';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
 import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
@@ -1226,7 +1224,7 @@ export class Player implements IPlayer {
     return this.ceoCardsInHand.filter((card) => card.canPlay?.(this) === true);
   }
 
-  public getPlayableCards(): Array<PlayableCard> {
+  public getPlayableCards(): Array<IProjectCard> {
     const candidateCards: Array<IProjectCard> = [...this.cardsInHand];
     // Self Replicating robots check
     const card = this.getPlayedCard(CardName.SELF_REPLICATING_ROBOTS);
@@ -1234,15 +1232,12 @@ export class Player implements IPlayer {
       candidateCards.push(...card.targetCards);
     }
 
-    const playableCards: Array<PlayableCard> = [];
+    const playableCards: Array<IProjectCard> = [];
     for (const card of candidateCards) {
       card.warnings.clear();
-      const canPlay = this.canPlay(card);
-      if (canPlay !== false) {
-        playableCards.push({
-          card,
-          details: canPlay,
-        });
+      card.additionalCostsToPay = undefined;
+      if (this.canPlay(card)) {
+        playableCards.push(card);
       }
     }
     return playableCards;
@@ -1276,7 +1271,8 @@ export class Player implements IPlayer {
     };
   }
 
-  public canPlay(card: IProjectCard): boolean | AdditionalCostsToPlay {
+  public canPlay(card: IProjectCard): boolean {
+    card.additionalCostsToPay = undefined;
     const options = this.affordOptionsForCard(card);
     const canAfford = this.newCanAfford(options);
     if (!canAfford.canAfford) {
@@ -1287,13 +1283,10 @@ export class Player implements IPlayer {
       return false;
     }
     if (canAfford.redsCost > 0) {
-      if (typeof canPlay === 'boolean') {
-        return {redsCost: canAfford.redsCost};
-      } else {
-        return {...canPlay, redsCost: canAfford.redsCost};
-      }
+      card.additionalCostsToPay = card.additionalCostsToPay ?? {};
+      card.additionalCostsToPay.redsCost = canAfford.redsCost;
     }
-    return canPlay;
+    return true;
   }
 
   private maxSpendable(reserveUnits: Units = Units.EMPTY): Payment {

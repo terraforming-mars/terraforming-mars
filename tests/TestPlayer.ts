@@ -79,7 +79,8 @@ export class TestPlayer extends Player {
     return waitingFor;
   }
 
+  // TODO(kberg): remove anytime in its own commit.
   public getPlayableCardsForTest(): Array<IProjectCard> {
-    return this.getPlayableCards().map((entry) => entry.card);
+    return this.getPlayableCards();
   }
 }

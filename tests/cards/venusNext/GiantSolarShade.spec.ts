@@ -36,6 +36,7 @@ describe('GiantSolarShade', () => {
     player.playedCards.push(dirigibles);
     player.addResourceTo(dirigibles, 3);
 
-    expect(player.canPlay(card)).deep.eq({redsCost: 9});
+    expect(player.canPlay(card)).is.true;
+    expect(card.additionalCostsToPay).deep.eq({redsCost: 9});
   });
 });

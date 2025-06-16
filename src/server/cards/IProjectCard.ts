@@ -5,15 +5,8 @@ import {Units} from '../../common/Units';
 import {CardType} from '../../common/cards/CardType';
 import {AdditionalCostsToPlay} from '../../common/cards/Types';
 
-export type CanPlayResponse = boolean | AdditionalCostsToPlay;
-
-export type PlayableCard = {
-  card: IProjectCard,
-  details?: CanPlayResponse,
-};
-
 export interface IProjectCard extends ICard {
-  canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): CanPlayResponse;
+  canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean;
 
   // The only card that is going to call this is Oumuamua Type Object Survey.
   canPlayPostRequirements(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean;
@@ -43,6 +36,9 @@ export interface IProjectCard extends ICard {
    * the Convert Heat standard action, and other cards.
    */
   reserveUnits?: Units;
+
+  // HELP I AM UNDOCUMENTED
+  additionalCostsToPay?: AdditionalCostsToPlay;
 }
 
 export function isIProjectCard(card: ICard): card is IProjectCard {

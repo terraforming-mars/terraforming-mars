@@ -1,20 +1,17 @@
 import {BasePlayerInput} from '../PlayerInput';
 import {isPayment, Payment} from '../../common/inputs/Payment';
-import {IProjectCard, PlayableCard} from '../cards/IProjectCard';
+import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {CardAction, IPlayer} from '../IPlayer';
 import {InputResponse, isSelectProjectCardToPlayResponse} from '../../common/inputs/InputResponse';
 import {CardName} from '../../common/cards/CardName';
-import {CanPlayResponse} from '../cards/IProjectCard';
-import {AdditionalCostsToPlay} from '../../common/cards/Types';
 import {cardsToModel} from '../models/ModelUtils';
 import {SelectProjectCardToPlayModel} from '../../common/models/PlayerInputModel';
 import {InputError} from './InputError';
 
 export type PlayCardMetadata = {
   reserveUnits: Readonly<Units>;
-  details: CanPlayResponse | undefined;
 };
 
 export class SelectProjectCardToPlay extends BasePlayerInput<IProjectCard> {
@@ -23,22 +20,21 @@ export class SelectProjectCardToPlay extends BasePlayerInput<IProjectCard> {
 
   constructor(
     private player: IPlayer,
-    cards: Array<PlayableCard> = player.getPlayableCards(),
+    cards: Array<IProjectCard> = player.getPlayableCards(),
     public config?: {
       action?: CardAction,
     }) {
     super('projectCard', 'Play project card');
     this.buttonLabel = 'Play card';
-    this.cards = cards.map((card) => card.card);
+    this.cards = cards.map((card) => card);
     this.extras = new Map(
       cards.map((card) => {
         return [
-          card.card.name,
+          card.name,
           {
-            reserveUnits: card.card.reserveUnits ?
-              MoonExpansion.adjustedReserveCosts(player, card.card) :
+            reserveUnits: card.reserveUnits ?
+              MoonExpansion.adjustedReserveCosts(player, card) :
               Units.EMPTY,
-            details: card.details,
           },
         ];
       }));
@@ -94,14 +90,14 @@ export class SelectProjectCardToPlay extends BasePlayerInput<IProjectCard> {
     if (reserveUnits.plants + input.payment.plants > this.player.plants) {
       throw new InputError(`${reserveUnits.titanium} units of plants must be reserved for ${input.card}`);
     }
-    const additionalCosts = typeof(details.details) === 'boolean' ? undefined : details.details;
-    this.payAndPlay(card, input.payment, additionalCosts);
+    this.payAndPlay(card, input.payment);
     return undefined;
   }
 
   // Public for tests
-  public payAndPlay(card: IProjectCard, payment: Payment, additionalCosts?: AdditionalCostsToPlay) {
+  public payAndPlay(card: IProjectCard, payment: Payment) {
     this.player.checkPaymentAndPlayCard(card, payment, this.config?.action);
+    const additionalCosts = card.additionalCostsToPay;
     if ((additionalCosts?.thinkTankResources ?? 0) > 0) {
       const thinkTank = this.player.tableau.find((card) => card.name === CardName.THINK_TANK);
       // TODO(kberg): this processing ought to be done while paying for the card.

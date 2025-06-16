@@ -152,6 +152,19 @@ export function deNull<T>(array: ReadonlyArray<T | undefined>): Array<T> {
 }
 
 /**
+ * Return a partial of |record| omitting entries whose value is 0.
+ */
+export function partialize<T extends string | number | symbol>(record: Record<T, number>): Partial<Record<T, number>> {
+  const partial: Partial<Record<T, number>> = {};
+  for (const e in record) {
+    if (record[e] !== 0) {
+      partial[e] = record[e];
+    }
+  }
+  return partial;
+}
+
+/**
  * Makes a copy of array, but then empties it.
  * Useful for moving contents.
  */

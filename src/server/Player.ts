@@ -60,7 +60,7 @@ import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
 import {message} from './logs/MessageBuilder';
 import {calculateVictoryPoints} from './game/calculateVictoryPoints';
 import {VictoryPointsBreakdown} from '../common/game/VictoryPointsBreakdown';
-import {YesAnd} from './cards/requirements/CardRequirement';
+import {AdditionalCostsToPlay} from './cards/requirements/CardRequirement';
 import {PlayableCard} from './cards/IProjectCard';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
 import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
@@ -1276,7 +1276,7 @@ export class Player implements IPlayer {
     };
   }
 
-  public canPlay(card: IProjectCard): boolean | YesAnd {
+  public canPlay(card: IProjectCard): boolean | AdditionalCostsToPlay {
     const options = this.affordOptionsForCard(card);
     const canAfford = this.newCanAfford(options);
     if (!canAfford.canAfford) {

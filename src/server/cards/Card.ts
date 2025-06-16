@@ -24,7 +24,7 @@ import {CardRequirementsDescriptor} from './CardRequirementDescriptor';
 import {CardRequirements} from './requirements/CardRequirements';
 import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
 import {asArray} from '../../common/utils/utils';
-import {YesAnd} from './requirements/CardRequirement';
+import {AdditionalCostsToPlay} from './requirements/CardRequirement';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {Warning} from '../../common/cards/Warning';
 
@@ -234,22 +234,22 @@ export abstract class Card implements ICard {
   public get tilesBuilt(): ReadonlyArray<TileType> {
     return this.properties.tilesBuilt;
   }
-  public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean | YesAnd {
-    let yesAnd: YesAnd | undefined = undefined;
+  public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean | AdditionalCostsToPlay {
+    let additionalCosts: AdditionalCostsToPlay | undefined = undefined;
     const satisfied = this.properties.compiledRequirements.satisfies(player);
     if (satisfied === false) {
       return false;
     }
     if (satisfied !== true) {
-      yesAnd = satisfied;
+      additionalCosts = satisfied;
     }
 
     if (this.canPlayPostRequirements(player, canAffordOptions) === false) {
       return false;
     }
 
-    if (yesAnd !== undefined) {
-      return yesAnd;
+    if (additionalCosts !== undefined) {
+      return additionalCosts;
     }
     return true;
   }

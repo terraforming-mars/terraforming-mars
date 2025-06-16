@@ -9,7 +9,10 @@ export type Options = {
   count: number,
 };
 
-export type YesAnd = {
+/**
+ * When defined, this indicates additional costs required to play a card.
+ */
+export type AdditionalCostsToPlay = {
   thinkTankResources?: number,
   redsCost?: number,
 }
@@ -52,8 +55,8 @@ export abstract class CardRequirement {
    * player modifiers (e.g. Adaptation Technology, and fan-based Think Tank.)
    *
    * Returns true if |player| can satisfy the requirement, false if it cannot, and
-   * YesAnd if it can only do that under certain conditions (e.g. spend 2 Think Tank
+   * AdditionalCostsToPlay if it can only do that under certain conditions (e.g. spend 2 Think Tank
    * resources.)
    */
-  public abstract satisfies(player: IPlayer, thinkTankResources?: number) : boolean | YesAnd;
+  public abstract satisfies(player: IPlayer, thinkTankResources?: number) : boolean | AdditionalCostsToPlay;
 }

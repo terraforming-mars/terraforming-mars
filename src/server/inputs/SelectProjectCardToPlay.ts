@@ -7,7 +7,7 @@ import {CardAction, IPlayer} from '../IPlayer';
 import {InputResponse, isSelectProjectCardToPlayResponse} from '../../common/inputs/InputResponse';
 import {CardName} from '../../common/cards/CardName';
 import {CanPlayResponse} from '../cards/IProjectCard';
-import {YesAnd} from '../cards/requirements/CardRequirement';
+import {AdditionalCostsToPlay} from '../cards/requirements/CardRequirement';
 import {cardsToModel} from '../models/ModelUtils';
 import {SelectProjectCardToPlayModel} from '../../common/models/PlayerInputModel';
 import {InputError} from './InputError';
@@ -94,18 +94,19 @@ export class SelectProjectCardToPlay extends BasePlayerInput<IProjectCard> {
     if (reserveUnits.plants + input.payment.plants > this.player.plants) {
       throw new InputError(`${reserveUnits.titanium} units of plants must be reserved for ${input.card}`);
     }
-    const yesAnd = typeof(details.details) === 'boolean' ? undefined : details.details;
-    this.payAndPlay(card, input.payment, yesAnd);
+    const additionalCosts = typeof(details.details) === 'boolean' ? undefined : details.details;
+    this.payAndPlay(card, input.payment, additionalCosts);
     return undefined;
   }
 
-  public payAndPlay(card: IProjectCard, payment: Payment, yesAnd?: YesAnd) {
+  // Public for tests
+  public payAndPlay(card: IProjectCard, payment: Payment, additionalCosts?: AdditionalCostsToPlay) {
     this.player.checkPaymentAndPlayCard(card, payment, this.config?.action);
-    if ((yesAnd?.thinkTankResources ?? 0) > 0) {
+    if ((additionalCosts?.thinkTankResources ?? 0) > 0) {
       const thinkTank = this.player.tableau.find((card) => card.name === CardName.THINK_TANK);
       // TODO(kberg): this processing ought to be done while paying for the card.
       if (thinkTank !== undefined) {
-        this.player.removeResourceFrom(thinkTank, yesAnd?.thinkTankResources, {log: true});
+        this.player.removeResourceFrom(thinkTank, additionalCosts?.thinkTankResources, {log: true});
       }
     }
     this.cb(card);

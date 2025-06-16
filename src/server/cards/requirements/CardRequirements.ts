@@ -2,7 +2,7 @@ import {RequirementType} from '../../../common/cards/RequirementType';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirement, YesAnd} from './CardRequirement';
+import {CardRequirement, AdditionalCostsToPlay} from './CardRequirement';
 import {ChairmanRequirement} from './ChairmanRequirement';
 import {CitiesRequirement} from './CitiesRequirement';
 import {ColoniesRequirement} from './ColoniesRequirement';
@@ -32,7 +32,7 @@ import {ExcavationRequirement} from './ExcavationRequirement';
 export class CardRequirements {
   constructor(public requirements: Array<CardRequirement>) {}
 
-  public satisfies(player: IPlayer): boolean | YesAnd {
+  public satisfies(player: IPlayer): boolean | AdditionalCostsToPlay {
     if (this.requirements.length === 0) {
       return true;
     }
@@ -49,7 +49,7 @@ export class CardRequirements {
       return false;
     }
     const thinkTankResources = player.getPlayedCard(CardName.THINK_TANK)?.resourceCount;
-    let result: boolean | YesAnd = true;
+    let result: boolean | AdditionalCostsToPlay = true;
     for (const requirement of this.requirements) {
       const satisfies = requirement.satisfies(player, thinkTankResources);
       if (satisfies === false) {

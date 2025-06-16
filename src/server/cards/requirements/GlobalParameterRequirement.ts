@@ -1,7 +1,7 @@
 import {IPlayer} from '../../IPlayer';
 import {InequalityRequirement} from './InequalityRequirement';
 import {GlobalParameter} from '../../../common/GlobalParameter';
-import {YesAnd} from './CardRequirement';
+import {AdditionalCostsToPlay} from './CardRequirement';
 
 
 /**
@@ -17,7 +17,7 @@ export abstract class GlobalParameterRequirement extends InequalityRequirement {
 
   public abstract getGlobalValue(player: IPlayer): number;
 
-  public override satisfies(player: IPlayer, thinkTankResources: number): boolean | YesAnd {
+  public override satisfies(player: IPlayer, thinkTankResources: number): boolean | AdditionalCostsToPlay {
     if (super.satisfies(player, thinkTankResources)) {
       return true;
     }

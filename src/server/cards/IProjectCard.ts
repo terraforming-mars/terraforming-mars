@@ -3,9 +3,9 @@ import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
 import {CardType} from '../../common/cards/CardType';
-import {YesAnd} from './requirements/CardRequirement';
+import {AdditionalCostsToPlay} from './requirements/CardRequirement';
 
-export type CanPlayResponse = boolean | YesAnd;
+export type CanPlayResponse = boolean | AdditionalCostsToPlay;
 
 export type PlayableCard = {
   card: IProjectCard,

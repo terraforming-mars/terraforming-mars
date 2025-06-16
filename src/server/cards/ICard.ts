@@ -159,7 +159,7 @@ export interface ICard {
    * This is ephemeral data that gets reset between evaluations.
    * It is not serialized.
    *
-   * See: IProjectCard.additionalCostsToPay
+   * See: IProjectCard.additionalProjectCosts
    */
   warnings: Set<Warning>;
 

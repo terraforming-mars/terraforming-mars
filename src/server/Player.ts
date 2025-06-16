@@ -1235,7 +1235,7 @@ export class Player implements IPlayer {
     const playableCards: Array<IProjectCard> = [];
     for (const card of candidateCards) {
       card.warnings.clear();
-      card.additionalCostsToPay = undefined;
+      card.additionalProjectCosts = undefined;
       if (this.canPlay(card)) {
         playableCards.push(card);
       }
@@ -1272,7 +1272,7 @@ export class Player implements IPlayer {
   }
 
   public canPlay(card: IProjectCard): boolean {
-    card.additionalCostsToPay = undefined;
+    card.additionalProjectCosts = undefined;
     const options = this.affordOptionsForCard(card);
     const canAfford = this.newCanAfford(options);
     if (!canAfford.canAfford) {
@@ -1283,8 +1283,8 @@ export class Player implements IPlayer {
       return false;
     }
     if (canAfford.redsCost > 0) {
-      card.additionalCostsToPay = card.additionalCostsToPay ?? {};
-      card.additionalCostsToPay.redsCost = canAfford.redsCost;
+      card.additionalProjectCosts = card.additionalProjectCosts ?? {};
+      card.additionalProjectCosts.redsCost = canAfford.redsCost;
     }
     return true;
   }

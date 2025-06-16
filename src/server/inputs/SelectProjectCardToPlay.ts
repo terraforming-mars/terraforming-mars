@@ -97,12 +97,12 @@ export class SelectProjectCardToPlay extends BasePlayerInput<IProjectCard> {
   // Public for tests
   public payAndPlay(card: IProjectCard, payment: Payment) {
     this.player.checkPaymentAndPlayCard(card, payment, this.config?.action);
-    const additionalCosts = card.additionalCostsToPay;
-    if ((additionalCosts?.thinkTankResources ?? 0) > 0) {
+    const additionalProjectCosts = card.additionalProjectCosts;
+    if ((additionalProjectCosts?.thinkTankResources ?? 0) > 0) {
       const thinkTank = this.player.tableau.find((card) => card.name === CardName.THINK_TANK);
       // TODO(kberg): this processing ought to be done while paying for the card.
       if (thinkTank !== undefined) {
-        this.player.removeResourceFrom(thinkTank, additionalCosts?.thinkTankResources, {log: true});
+        this.player.removeResourceFrom(thinkTank, additionalProjectCosts?.thinkTankResources, {log: true});
       }
     }
     this.cb(card);

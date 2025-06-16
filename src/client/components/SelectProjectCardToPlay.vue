@@ -9,12 +9,12 @@
   </label>
 
   <section v-trim-whitespace>
-    <template v-if="card.additionalCosts">
-      <div v-if="card.additionalCosts.thinkTankResources" class="card-warning">
-        Playing {{card.name}} consumes {{card.additionalCosts.thinkTankResources}} data from Think Tank
+    <template v-if="card.additionalProjectCosts">
+      <div v-if="card.additionalProjectCosts.thinkTankResources" class="card-warning">
+        Playing {{card.name}} consumes {{card.additionalProjectCosts.thinkTankResources}} data from Think Tank
       </div>
-      <div v-if="card.additionalCosts.redsCost" class="card-warning">
-        Playing {{card.name}} will cost {{card.additionalCosts.redsCost}} M€ more because Reds are in power
+      <div v-if="card.additionalProjectCosts.redsCost" class="card-warning">
+        Playing {{card.name}} will cost {{card.additionalProjectCosts.redsCost}} M€ more because Reds are in power
       </div>
     </template>
     <warnings-component :warnings="card.warnings"></warnings-component>

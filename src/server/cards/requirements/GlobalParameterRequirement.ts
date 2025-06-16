@@ -26,8 +26,8 @@ export abstract class GlobalParameterRequirement extends InequalityRequirement {
     if (thinkTankResources) {
       const distance = this.distance(player);
       if (distance <= thinkTankResources) {
-        card.additionalCostsToPay = card.additionalCostsToPay ?? {};
-        card.additionalCostsToPay.thinkTankResources = distance;
+        card.additionalProjectCosts = card.additionalProjectCosts ?? {};
+        card.additionalProjectCosts.thinkTankResources = distance;
         return true;
       }
     }

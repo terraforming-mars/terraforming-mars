@@ -24,7 +24,7 @@ import {CardRequirementsDescriptor} from './CardRequirementDescriptor';
 import {CardRequirements} from './requirements/CardRequirements';
 import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
 import {asArray} from '../../common/utils/utils';
-import {AdditionalCostsToPlay} from '../../common/cards/Types';
+import {AdditionalProjectCosts} from '../../common/cards/Types';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {Warning} from '../../common/cards/Warning';
 
@@ -109,7 +109,7 @@ export abstract class Card implements ICard {
   protected readonly properties: InternalProperties;
   public resourceCount = 0;
   public warnings = new Set<Warning>();
-  public additionalCostsToPay?: AdditionalCostsToPlay = undefined;
+  public additionalProjectCosts?: AdditionalProjectCosts = undefined;
 
   private internalize(external: StaticCardProperties): InternalProperties {
     const name = external.name;

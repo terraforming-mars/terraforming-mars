@@ -86,7 +86,7 @@ export class PlayerInput extends Handler {
     player.tableau.forEach((card) => {
       card.warnings.clear();
       if (isIProjectCard(card)) {
-        card.additionalCostsToPay = undefined;
+        card.additionalProjectCosts = undefined;
       }
     });
     return new Promise((resolve) => {

@@ -42,7 +42,7 @@ describe('SocialEvents', () => {
     expect(player.canPlay(card)).is.false;
     player.megaCredits = card.cost + 6;
     expect(player.canPlay(card)).is.true;
-    expect(card.additionalCostsToPay).deep.eq({redsCost: 6});
+    expect(card.additionalProjectCosts).deep.eq({redsCost: 6});
   });
 
   it('play', () => {

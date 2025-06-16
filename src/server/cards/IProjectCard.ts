@@ -3,7 +3,7 @@ import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
 import {CardType} from '../../common/cards/CardType';
-import {AdditionalCostsToPlay} from '../../common/cards/Types';
+import {AdditionalProjectCosts} from '../../common/cards/Types';
 
 export interface IProjectCard extends ICard {
   canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean;
@@ -45,7 +45,7 @@ export interface IProjectCard extends ICard {
    *
    * See: ICard.warnings.
    */
-  additionalCostsToPay?: AdditionalCostsToPlay;
+  additionalProjectCosts?: AdditionalProjectCosts;
 }
 
 export function isIProjectCard(card: ICard): card is IProjectCard {

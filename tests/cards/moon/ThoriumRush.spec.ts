@@ -68,7 +68,7 @@ describe('ThoriumRush', () => {
     expect(player.canPlay(card)).is.false;
     player.megaCredits = card.cost + 9;
     expect(player.canPlay(card)).is.true;
-    expect(card.additionalCostsToPay).deep.eq({redsCost: 9});
+    expect(card.additionalProjectCosts).deep.eq({redsCost: 9});
 
     moonData.miningRate = 8;
 
@@ -76,7 +76,7 @@ describe('ThoriumRush', () => {
     expect(player.canPlay(card)).is.false;
     player.megaCredits = card.cost + 6;
     expect(player.canPlay(card)).is.true;
-    expect(card.additionalCostsToPay).deep.eq({redsCost: 6});
+    expect(card.additionalProjectCosts).deep.eq({redsCost: 6});
 
     moonData.habitatRate = 8;
 
@@ -84,7 +84,7 @@ describe('ThoriumRush', () => {
     expect(player.canPlay(card)).is.false;
     player.megaCredits = card.cost + 3;
     expect(player.canPlay(card)).is.true;
-    expect(card.additionalCostsToPay).deep.eq({redsCost: 3});
+    expect(card.additionalProjectCosts).deep.eq({redsCost: 3});
 
     moonData.logisticRate = 8;
 

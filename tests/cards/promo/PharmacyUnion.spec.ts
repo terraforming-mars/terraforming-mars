@@ -362,7 +362,7 @@ describe('PharmacyUnion', () => {
 
     // Play GHG Producing Bacteria, triggering the effects.
     expect(player.canPlay(ghgProducingBacteria)).is.true;
-    expect(ghgProducingBacteria.additionalCostsToPay).deep.eq({redsCost: 3});
+    expect(ghgProducingBacteria.additionalProjectCosts).deep.eq({redsCost: 3});
     player.playCard(ghgProducingBacteria, Payment.of({megaCredits: 8}));
     expect(player.megaCredits).eq(4);
 
@@ -416,7 +416,7 @@ describe('PharmacyUnion', () => {
     player.megaCredits += 4;
 
     expect(player.canPlay(advancedAlloys)).is.true;
-    expect(advancedAlloys.additionalCostsToPay).deep.eq({redsCost: 3});
+    expect(advancedAlloys.additionalProjectCosts).deep.eq({redsCost: 3});
 
     player.playCard(advancedAlloys, Payment.of({megaCredits: 9}));
 

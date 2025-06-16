@@ -76,4 +76,10 @@ describe('utils', () => {
     expect(utils.deNull([undefined, 1, undefined])).deep.eq([1]);
     expect(utils.deNull([undefined, undefined])).deep.eq([]);
   });
+
+  it('partialize', () => {
+    expect(utils.partialize({})).deep.eq({});
+    expect(utils.partialize({'a': 0})).deep.eq({});
+    expect(utils.partialize({'a': 0, 'b': 1})).deep.eq({'b': 1});
+  });
 });

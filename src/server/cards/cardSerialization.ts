@@ -1,6 +1,5 @@
 import {newCorporationCard, newProjectCard} from '../createCard';
 import {SerializedCard} from '../SerializedCard';
-import {isCeoCard} from './ceos/ICeoCard';
 import {IProjectCard} from './IProjectCard';
 import {isICloneTagCard} from './pathfinders/ICloneTagCard';
 import {CardType} from '../../common/cards/CardType';
@@ -26,16 +25,10 @@ export function serializeProjectCard(card: IProjectCard): SerializedCard {
   if (isICloneTagCard(card)) {
     serialized.cloneTag = card.cloneTag;
   }
-  if (isCeoCard(card)) {
-    serialized.isDisabled = card.isDisabled;
-    if (card.opgActionIsActive !== undefined) {
-      serialized.opgActionIsActive = card.opgActionIsActive;
-    }
-  }
-  card.serialize?.(serialized);
   if (card.data !== undefined) {
     serialized.data = card.data;
   }
+  card.serialize?.(serialized);
   return serialized;
 }
 
@@ -58,12 +51,6 @@ export function deserializeProjectCard(element: SerializedCard): IProjectCard {
   }
   if (element.bonusResource !== undefined) {
     card.bonusResource = asArray(element.bonusResource);
-  }
-  if (isCeoCard(card)) {
-    card.isDisabled = element.isDisabled;
-    if (element.opgActionIsActive !== undefined) {
-      card.opgActionIsActive = element.opgActionIsActive;
-    }
   }
   card.deserialize?.(element);
   return card;

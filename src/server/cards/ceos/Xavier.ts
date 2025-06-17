@@ -25,8 +25,6 @@ export class Xavier extends CeoCard {
     });
   }
 
-  public opgActionIsActive = false;
-
   public override get tags(): Array<Tag> {
     return this.opgActionIsActive ? [Tag.WILD, Tag.WILD] : [];
   }

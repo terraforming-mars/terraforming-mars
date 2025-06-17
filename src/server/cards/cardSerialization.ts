@@ -41,6 +41,7 @@ export function serializeProjectCard(card: IProjectCard): SerializedCard {
       serialized.opgActionIsActive = card.opgActionIsActive;
     }
   }
+  card.serialize?.(serialized);
   if (card.data !== undefined) {
     serialized.data = card.data;
   }
@@ -86,6 +87,9 @@ export function deserializeProjectCard(element: SerializedCard): IProjectCard {
     if (element.opgActionIsActive !== undefined) {
       card.opgActionIsActive = element.opgActionIsActive;
     }
+  }
+  if (!(card instanceof SelfReplicatingRobots)) {
+    card.deserialize?.(element);
   }
   return card;
 }

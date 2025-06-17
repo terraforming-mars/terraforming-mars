@@ -21,6 +21,7 @@ import {IStandardProjectCard} from './IStandardProjectCard';
 import {Warning} from '../../common/cards/Warning';
 import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
+import {SerializedCard} from '../SerializedCard';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -203,6 +204,15 @@ export interface ICard {
    * ONLY store plain JSON data. Classes, objects, functions, will all be incorrectly serialized.
    */
   data?: JSONValue;
+
+  /**
+   * Additional custom serialization for this card.
+   */
+  serialize?(serialized: SerializedCard): void;
+  /**
+   * Additional custom deserialization for this card.
+   */
+  deserialize?(serialized: SerializedCard): void;
 
   /** The generation the card was activated. Used for Duncan and Underworld cards. */
   // TODO(kberg): move to json?

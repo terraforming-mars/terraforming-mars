@@ -271,7 +271,7 @@ export class Player implements IPlayer {
     this.game = undefined as unknown as Game;
   }
 
-  public get tableau(): Array<ICorporationCard | IProjectCard> {
+  public get tableau(): Array<ICard> {
     return [...this.corporations, ...this.playedCards.asArray()];
   }
 

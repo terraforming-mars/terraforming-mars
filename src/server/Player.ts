@@ -351,9 +351,9 @@ export class Player implements IPlayer {
       if (opts.log === true) {
         this.game.log('${0} gained ${1} TR', (b) => b.player(this).number(steps));
       }
-      for (const player of this.game.getPlayersInGenerationOrder()) {
-        for (const card of player.tableau) {
-          card.onIncreaseTerraformRating?.(this, player, steps);
+      for (const cardOwner of this.game.getPlayersInGenerationOrder()) {
+        for (const card of cardOwner.tableau) {
+          card.onIncreaseTerraformRatingByAnyPlayer?.(cardOwner, this, steps);
         }
       }
     };
@@ -951,7 +951,7 @@ export class Player implements IPlayer {
         this.defer(actionFromPlayedCard);
       }
       for (const someCard of somePlayer.playedCards) {
-        const actionFromPlayedCard = someCard.onCardPlayedFromAnyPlayer?.(somePlayer, this, card);
+        const actionFromPlayedCard = someCard.onCardPlayedByAnyPlayer?.(somePlayer, card, this);
         this.defer(actionFromPlayedCard);
       }
     }

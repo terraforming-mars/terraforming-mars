@@ -36,7 +36,7 @@ export class Aurorai extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public onIncreaseTerraformRating(player: IPlayer, cardOwner: IPlayer, steps: number) {
+  public onIncreaseTerraformRatingByAnyPlayer(cardOwner: IPlayer, player: IPlayer, steps: number) {
     if (player === cardOwner) {
       player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: steps}), Priority.GAIN_RESOURCE_OR_PRODUCTION);
     }

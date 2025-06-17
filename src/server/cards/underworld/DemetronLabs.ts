@@ -69,7 +69,7 @@ export class DemetronLabs extends CorporationCard implements ICorporationCard, I
   // This doesn't need to be serialized. It ensures this is only evaluated once per action.
   // When the server restarts, the player has to take an action anyway.
   private lastActionId = -1;
-  public onIdentification(identifyingPlayer: IPlayer | undefined, cardOwner: IPlayer, _space: Space, trigger: IdentificationTrigger) {
+  public onIdentificationByAnyPlayer(cardOwner: IPlayer, identifyingPlayer: IPlayer | undefined, _space: Space, trigger: IdentificationTrigger) {
     if (identifyingPlayer !== cardOwner || trigger === 'excavation') {
       return;
     }

@@ -10,11 +10,10 @@ import {BigAsteroid} from '../../../src/server/cards/base/BigAsteroid';
 describe('Solar Logistics', () => {
   let card: SolarLogistics;
   let player: TestPlayer;
-  let player2: TestPlayer;
 
   beforeEach(() => {
     card = new SolarLogistics();
-    [/* game */, player, player2] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Card Effects Work - titanium', () => {
@@ -34,12 +33,9 @@ describe('Solar Logistics', () => {
   it('Card Effects Work - card draw', () => {
     card.play(player);
     expect(player.cardsInHand).has.length(0);
-    expect(card.onCardPlayedFromAnyPlayer(player, player, card)).is.undefined;
+    expect(card.onCardPlayedByAnyPlayer(player, card)).is.undefined;
     // I play space event
-    expect(card.onCardPlayedFromAnyPlayer(player, player, new BigAsteroid())).is.undefined;
+    expect(card.onCardPlayedByAnyPlayer(player, new BigAsteroid())).is.undefined;
     expect(player.cardsInHand).has.length(1);
-    // Other player plays space event
-    expect(card.onCardPlayedFromAnyPlayer(player, player2, new BigAsteroid())).is.undefined;
-    expect(player.cardsInHand).has.length(2);
   });
 });

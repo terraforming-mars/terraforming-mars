@@ -65,7 +65,7 @@ export class GameSetup {
       const citySpace = game.getSpaceByOffset(direction, TileType.CITY);
       game.simpleAddTile(neutral, citySpace, {tileType: TileType.CITY});
       if (game.gameOptions.underworldExpansion === true) {
-        UnderworldExpansion.identify(game, citySpace);
+        UnderworldExpansion.identify(game, citySpace, undefined);
       }
 
       const adjacentSpaces = board.getAdjacentSpaces(citySpace).filter((s) => game.board.canPlaceTile(s));
@@ -77,7 +77,7 @@ export class GameSetup {
       const greenerySpace = adjacentSpaces[idx%adjacentSpaces.length];
       game.simpleAddTile(neutral, greenerySpace, {tileType: TileType.GREENERY});
       if (game.gameOptions.underworldExpansion === true) {
-        UnderworldExpansion.identify(game, greenerySpace);
+        UnderworldExpansion.identify(game, greenerySpace, undefined);
       }
     }
 

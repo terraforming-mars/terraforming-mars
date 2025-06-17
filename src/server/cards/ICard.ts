@@ -83,18 +83,20 @@ export interface ICard {
   getInfluenceBonus?: (player: IPlayer) => number;
   /** Called when cards are played. However, if this is a corp, it'll be called when opponents play cards, too. */
   onCardPlayed?(player: IPlayer, card: ICard): PlayerInput | undefined | void;
-  onCardPlayedFromAnyPlayer?(thisCardOwner: IPlayer, playedCardOwner: IPlayer, card: IProjectCard): PlayerInput | undefined;
+  onCardPlayedByAnyPlayer?(thisCardOwner: IPlayer, card: ICard, playedCardOwner: IPlayer): PlayerInput | undefined | void;
+  onCardPlayedFromAnyPlayer?: never;
   onStandardProject?(player: IPlayer, project: IStandardProjectCard): void;
   onTilePlaced?(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType): void;
   onDiscard?(player: IPlayer): void;
   /**
    * Called when anybody gains TR
    *
-   * @param player the player gaining TR
    * @param cardOwner the owner of this card
+   * @param player the player gaining TR
    * @param steps the number of steps gained
    */
-  onIncreaseTerraformRating?(player: IPlayer, cardOwner: IPlayer, steps: number): void;
+  onIncreaseTerraformRatingByAnyPlayer?(cardOwner: IPlayer, player: IPlayer, steps: number): void;
+  onIncreaseTerraformRating?: never;
   onGlobalParameterIncrease?(player: IPlayer, parameter: GlobalParameter, steps: number): void;
 
   /**
@@ -107,19 +109,21 @@ export interface ICard {
    */
   onResourceAdded?(player: IPlayer, playedCard: ICard, count: number): void;
 
+
   /**
    * Optional callback when any player identifies a space.
-   *
-   * @param identifyingPlayer the player performing the identification action
-   *   or undefined if added by a neutral player.
+  *
    * @param cardOwner the player who owns THIS CARD.
+   * @param identifyingPlayer the player performing the identification action,
+   *        or undefined if it is the neutral player (game setup or global event.)
    * @param space the space that was just identified.
    * @param trigger what triggered the identification.
    */
-  onIdentification?(identifyingPlayer: IPlayer | undefined, cardOwner: IPlayer, space: Space, trigger: IdentificationTrigger): void;
+  onIdentificationByAnyPlayer?(cardOwner: IPlayer, identifyingPlayer: IPlayer | undefined, space: Space, trigger: IdentificationTrigger): void;
+  onIdentification?: never;
 
   /**
-   * Optional callback when any player excavates a space.
+   * Optional callback when this card owner player excavates a space.
    *
    * @param player the player performing the excavation action
    * @param space the space that was just excavated.
@@ -145,7 +149,8 @@ export interface ICard {
    * @param player the player adding a colony.
    * @param cardOwner the player who owns this card.
    */
-  onColonyAdded?(player: IPlayer, cardOwner: IPlayer): void;
+  onColonyAddedByAnyPlayer?(cardOwner: IPlayer, colonyOwner: IPlayer): void;
+  onColonyAdded?: never;
 
   /** Callback when THIS player adds a colony to Leavitt. */
   onColonyAddedToLeavitt?(player: IPlayer): void;

@@ -76,6 +76,7 @@ import {Message} from '../common/logs/Message';
 import {DiscordId} from './server/auth/discord';
 import {AlliedParty, PolicyId} from '../common/turmoil/Types';
 import {PlayedCards} from './cards/PlayedCards';
+import {deserializeCorporationCard, serializeCorporationCard} from './cards/cardSerialization';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 const DEFAULT_GLOBAL_PARAMETER_STEPS = {
@@ -1757,15 +1758,7 @@ export class Player implements IPlayer {
     const result: SerializedPlayer = {
       id: this.id,
       user: this.user,
-      corporations: this.corporations.map((corporation) => {
-        const serialized = {
-          name: corporation.name,
-          resourceCount: corporation.resourceCount,
-          isDisabled: false,
-        };
-        corporation.serialize?.(serialized);
-        return serialized;
-      }),
+      corporations: this.corporations.map(serializeCorporationCard),
       // Used only during set-up
       pickedCorporationCard: this.pickedCorporationCard?.name,
       // Terraforming Rating
@@ -1916,21 +1909,9 @@ export class Player implements IPlayer {
     }
 
     // Rebuild corporation cards
-    const corporations = d.corporations;
-
-    // This shouldn't happen
-    if (corporations !== undefined) {
-      for (const corporation of corporations) {
-        const card = newCorporationCard(corporation.name);
-        if (card === undefined) {
-          continue;
-        }
-        if (corporation.resourceCount !== undefined) {
-          card.resourceCount = corporation.resourceCount;
-        }
-        card.deserialize?.(corporation);
-        player.corporations.push(card);
-      }
+    const cards = d.corporations.map((element) => deserializeCorporationCard(element));
+    for (const card of cards) {
+      player.corporations.push(card);
     }
 
     player.pendingInitialActions = corporationCardsFromJSON(d.pendingInitialActions ?? []);

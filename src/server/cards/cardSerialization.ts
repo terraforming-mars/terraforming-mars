@@ -1,4 +1,4 @@
-import {newProjectCard} from '../createCard';
+import {newCorporationCard, newProjectCard} from '../createCard';
 import {SerializedCard} from '../SerializedCard';
 import {isCeoCard} from './ceos/ICeoCard';
 import {IProjectCard} from './IProjectCard';
@@ -6,6 +6,7 @@ import {isICloneTagCard} from './pathfinders/ICloneTagCard';
 import {SelfReplicatingRobots} from './promo/SelfReplicatingRobots';
 import {CardType} from '../../common/cards/CardType';
 import {asArray} from '../../common/utils/utils';
+import {ICorporationCard} from './corporation/ICorporationCard';
 
 export function serializeProjectCard(card: IProjectCard): SerializedCard {
   const serialized: SerializedCard = {
@@ -86,5 +87,27 @@ export function deserializeProjectCard(element: SerializedCard): IProjectCard {
       card.opgActionIsActive = element.opgActionIsActive;
     }
   }
+  return card;
+}
+
+export function serializeCorporationCard(card: ICorporationCard): SerializedCard {
+  const serialized = {
+    name: card.name,
+    resourceCount: card.resourceCount,
+    isDisabled: false,
+  };
+  card.serialize?.(serialized);
+  return serialized;
+}
+
+export function deserializeCorporationCard(element: SerializedCard): ICorporationCard {
+  const card = newCorporationCard(element.name);
+  if (card === undefined) {
+    throw new Error(`Card ${element.name} not found`);
+  }
+  if (element.resourceCount !== undefined) {
+    card.resourceCount = element.resourceCount;
+  }
+  card.deserialize?.(element);
   return card;
 }

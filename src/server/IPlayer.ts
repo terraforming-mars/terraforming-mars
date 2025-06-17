@@ -116,7 +116,7 @@ export interface IPlayer {
   ceoCardsInHand: Array<IProjectCard>;
   playedCards: PlayedCards;
   cardCost: number;
-  tableau: Array<ICorporationCard | IProjectCard>;
+  tableau: Array<ICard>;
 
   /** Cards this player has in their draft hand. Player chooses from them, and passes them to the next player */
   draftHand: Array<IProjectCard>;

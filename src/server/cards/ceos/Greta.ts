@@ -23,7 +23,6 @@ export class Greta extends CeoCard {
     });
   }
 
-  public opgActionIsActive = false;
   public data = {
     effectTriggerCount: 0,
   };

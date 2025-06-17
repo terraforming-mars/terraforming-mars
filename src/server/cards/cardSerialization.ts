@@ -3,7 +3,6 @@ import {SerializedCard} from '../SerializedCard';
 import {isCeoCard} from './ceos/ICeoCard';
 import {IProjectCard} from './IProjectCard';
 import {isICloneTagCard} from './pathfinders/ICloneTagCard';
-import {SelfReplicatingRobots} from './promo/SelfReplicatingRobots';
 import {CardType} from '../../common/cards/CardType';
 import {asArray} from '../../common/utils/utils';
 import {ICorporationCard} from './corporation/ICorporationCard';
@@ -23,14 +22,6 @@ export function serializeProjectCard(card: IProjectCard): SerializedCard {
   }
   if (card.generationUsed !== undefined) {
     serialized.generationUsed = card.generationUsed;
-  }
-  if (card instanceof SelfReplicatingRobots) {
-    serialized.targetCards = card.targetCards.map((t) => {
-      return {
-        card: {name: t.name},
-        resourceCount: t.resourceCount,
-      };
-    });
   }
   if (isICloneTagCard(card)) {
     serialized.cloneTag = card.cloneTag;
@@ -65,22 +56,8 @@ export function deserializeProjectCard(element: SerializedCard): IProjectCard {
   if (isICloneTagCard(card) && element.cloneTag !== undefined) {
     card.cloneTag = element.cloneTag;
   }
-  if (card instanceof SelfReplicatingRobots && element.targetCards !== undefined) {
-    card.targetCards = [];
-    element.targetCards.forEach((targetCard) => {
-      const foundTargetCard = newProjectCard(targetCard.card.name);
-      if (foundTargetCard !== undefined) {
-        foundTargetCard.resourceCount = targetCard.resourceCount;
-        card.targetCards.push(foundTargetCard);
-      } else {
-        console.warn('did not find card for SelfReplicatingRobots', targetCard);
-      }
-    });
-  }
-  if (!(card instanceof SelfReplicatingRobots)) {
-    if (element.bonusResource !== undefined) {
-      card.bonusResource = asArray(element.bonusResource);
-    }
+  if (element.bonusResource !== undefined) {
+    card.bonusResource = asArray(element.bonusResource);
   }
   if (isCeoCard(card)) {
     card.isDisabled = element.isDisabled;
@@ -88,9 +65,7 @@ export function deserializeProjectCard(element: SerializedCard): IProjectCard {
       card.opgActionIsActive = element.opgActionIsActive;
     }
   }
-  if (!(card instanceof SelfReplicatingRobots)) {
-    card.deserialize?.(element);
-  }
+  card.deserialize?.(element);
   return card;
 }
 

@@ -91,7 +91,7 @@ describe('Neutrinograph', () => {
 it('effect does not apply to adding tiles', () => {
   const card = new Neutrinograph();
   const fake = fakeCard({
-    onIdentification() {
+    onIdentificationByAnyPlayer() {
       throw new Error('Unexpected identification');
     },
   });
@@ -99,7 +99,7 @@ it('effect does not apply to adding tiles', () => {
   const [game, player] = testGame(2, {underworldExpansion: true});
 
   const space = UnderworldExpansion.identifiableSpaces(player)[0];
-  UnderworldExpansion.identify(game, space);
+  UnderworldExpansion.identify(game, space, undefined);
 
   player.playedCards.push(card);
   player.playedCards.push(fake);

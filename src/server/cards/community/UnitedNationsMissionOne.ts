@@ -38,7 +38,8 @@ export class UnitedNationsMissionOne extends CorporationCard implements ICorpora
   }
 
   // TODO(kberg): Since UNMO can generate MC for raising TR, that MC can offset reds costs, can't it?
-  public onIncreaseTerraformRating(player: IPlayer, cardOwner: IPlayer, steps: number) {
+  public onIncreaseTerraformRatingByAnyPlayer(
+    cardOwner: IPlayer, player: IPlayer, steps: number) {
     const game = player.game;
 
     if (game.phase === Phase.ACTION || game.phase === Phase.PRELUDES) {

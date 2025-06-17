@@ -6,8 +6,9 @@ import {IPlayer} from '../../IPlayer';
 import {Phase} from '../../../common/Phase';
 import {Resource} from '../../../common/Resource';
 import {PreludeCard} from '../prelude/PreludeCard';
+import {IPreludeCard} from '../prelude/IPreludeCard';
 
-export class TerraformingDeal extends PreludeCard {
+export class TerraformingDeal extends PreludeCard implements IPreludeCard {
   constructor() {
     super({
       name: CardName.TERRAFORMING_DEAL,
@@ -25,7 +26,7 @@ export class TerraformingDeal extends PreludeCard {
   }
 
   // TODO(kberg): Like UNMO, TerraformingDeal can generate MC for raising TR that MC can offset reds costs?
-  public onIncreaseTerraformRating(player: IPlayer, cardOwner: IPlayer, steps: number) {
+  public onIncreaseTerraformRatingByAnyPlayer(cardOwner: IPlayer, player: IPlayer, steps: number) {
     if (cardOwner === player) {
       const phase = player.game.phase;
       if (phase === Phase.ACTION || phase === Phase.PRELUDES || player.game.inTurmoil) {

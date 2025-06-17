@@ -3,6 +3,7 @@ import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardType} from '../../../common/cards/CardType';
 import {Behavior} from '../../behavior/Behavior';
+import {SerializedCard} from '../../SerializedCard';
 
 export interface ICorporationCard extends ICard {
   type: CardType.CORPORATION;
@@ -11,7 +12,15 @@ export interface ICorporationCard extends ICard {
   firstAction?: Behavior,
   startingMegaCredits: number;
   cardCost?: number;
-  onCorpCardPlayed?(player: IPlayer, card: ICard, cardOwner: IPlayer): PlayerInput | undefined | void;
+  /**
+   * Called when |playedCardOwner| playes |card|.
+   *
+   * Not called when |card| is this card.
+   */
+  onCorpCardPlayed?(thisCardOwner: IPlayer, card: ICorporationCard, playedCardOwner: IPlayer): PlayerInput | undefined | void;
+
+  serialize?(serialized: SerializedCard): void;
+  deserialize?(serialized: SerializedCard): void;
 }
 
 export function isICorporationCard(card: ICard): card is ICorporationCard {

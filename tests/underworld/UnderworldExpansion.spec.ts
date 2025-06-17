@@ -72,7 +72,7 @@ describe('UnderworldExpansion', () => {
     const responses: Array<string> = [];
     const space = game.board.getAvailableSpacesOnLand(player1)[0];
     const fake = fakeCard({
-      onIdentification(identifyingPlayer, cardOwner, space) {
+      onIdentificationByAnyPlayer(cardOwner, identifyingPlayer, space) {
         responses.push(`${identifyingPlayer?.id} - ${cardOwner.id} - ${space.id}`);
       },
     });

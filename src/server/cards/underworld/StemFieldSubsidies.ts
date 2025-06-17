@@ -8,6 +8,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {IdentifySpacesDeferred} from '../../underworld/IdentifySpacesDeferred';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {ICard} from '../ICard';
 
 export class StemFieldSubsidies extends Card implements IProjectCard {
   constructor() {
@@ -30,7 +31,7 @@ export class StemFieldSubsidies extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     const count = player.tags.cardTagCount(card, Tag.SCIENCE);
     this.onScienceTagAdded(player, count);
   }

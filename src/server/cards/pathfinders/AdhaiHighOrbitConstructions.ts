@@ -10,6 +10,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {IStandardProjectCard} from '../IStandardProjectCard';
 import {ICorporationCard} from '../corporation/ICorporationCard';
+import {ICard} from '../ICard';
 
 export class AdhaiHighOrbitConstructions extends CorporationCard implements ICorporationCard {
   constructor() {
@@ -51,7 +52,7 @@ export class AdhaiHighOrbitConstructions extends CorporationCard implements ICor
     return spaceTag;
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (player.isCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS) && this.matchingTags(card.tags)) {
       player.addResourceTo(this, 1);
     }

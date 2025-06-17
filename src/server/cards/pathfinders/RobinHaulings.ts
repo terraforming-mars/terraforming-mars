@@ -6,7 +6,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {digit} from '../Options';
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 import {MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '../../../common/constants';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -41,7 +41,7 @@ export class RobinHaulings extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (player.isCorporation(CardName.ROBIN_HAULINGS) && card.tags.includes(Tag.VENUS)) {
       player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER));
     }

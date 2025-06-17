@@ -4,7 +4,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {ActiveCorporationCard} from '../corporation/CorporationCard';
 import {CardResource} from '../../../common/CardResource';
 import {IPlayer} from '../../IPlayer';
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 
 export class HenkeiGenetics extends ActiveCorporationCard {
   constructor() {
@@ -38,7 +38,7 @@ export class HenkeiGenetics extends ActiveCorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (!player.isCorporation(this.name)) {
       return;
     }

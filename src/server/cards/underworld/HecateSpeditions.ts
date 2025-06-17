@@ -61,7 +61,7 @@ export class HecateSpeditions extends ActiveCorporationCard {
     player.addResourceTo(this, {qty: count, log: true, logZero: false});
   }
 
-  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
+  public onCorpCardPlayed(player: IPlayer, card: ICard) {
     this.onCardPlayed(player, card);
   }
 }

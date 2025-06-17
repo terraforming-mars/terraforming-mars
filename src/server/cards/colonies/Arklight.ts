@@ -37,7 +37,7 @@ export class Arklight extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
+  public onCorpCardPlayed(player: IPlayer, card: ICard) {
     this.onCardPlayed(player, card);
   }
 

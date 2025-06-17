@@ -6,7 +6,8 @@ import {ActiveCorporationCard} from '../corporation/CorporationCard';
 import {digit} from '../Options';
 import {CardResource} from '../../../common/CardResource';
 import {IPlayer} from '../../IPlayer';
-import {IProjectCard} from '../IProjectCard';
+import {isIProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 
 export class ArboristCollective extends ActiveCorporationCard {
   constructor() {
@@ -43,11 +44,11 @@ export class ArboristCollective extends ActiveCorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (!player.isCorporation(this.name)) {
       return;
     }
-    if (card.type === CardType.EVENT && card.cost <= 14) {
+    if (isIProjectCard(card) && card.type === CardType.EVENT && card.cost <= 14) {
       player.addResourceTo(this, {qty: 1, log: true});
     }
   }

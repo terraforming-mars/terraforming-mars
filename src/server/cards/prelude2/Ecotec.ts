@@ -3,7 +3,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {Resource} from '../../../common/Resource';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -40,7 +40,7 @@ export class Ecotec extends CorporationCard implements ICorporationCard {
     return undefined;
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (!player.isCorporation(this.name)) {
       return undefined;
     }

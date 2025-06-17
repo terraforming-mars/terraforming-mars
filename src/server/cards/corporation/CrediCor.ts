@@ -1,11 +1,12 @@
 import {CorporationCard} from './CorporationCard';
 import {IPlayer} from '../../IPlayer';
-import {IProjectCard} from '../IProjectCard';
+import {IProjectCard, isIProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IStandardProjectCard} from '../IStandardProjectCard';
 import {Resource} from '../../../common/Resource';
 import {ICorporationCard} from './ICorporationCard';
+import {ICard} from '../ICard';
 
 export class CrediCor extends CorporationCard implements ICorporationCard {
   constructor() {
@@ -33,8 +34,10 @@ export class CrediCor extends CorporationCard implements ICorporationCard {
       player.stock.add(Resource.MEGACREDITS, 4, {log: true});
     }
   }
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    this.effect(player, card);
+  public onCardPlayed(player: IPlayer, card: ICard) {
+    if (isIProjectCard(card)) {
+      this.effect(player, card);
+    }
   }
   public onStandardProject(player: IPlayer, project: IStandardProjectCard) {
     this.effect(player, project);

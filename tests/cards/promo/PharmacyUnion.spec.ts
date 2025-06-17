@@ -16,7 +16,6 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {Virus} from '../../../src/server/cards/base/Virus';
 import {cast, runAllActions, runNextAction, setOxygenLevel, setRulingParty} from '../../TestingUtils';
-import {Player} from '../../../src/server/Player';
 import {testGame} from '../../TestGame';
 import {Leavitt} from '../../../src/server/cards/community/Leavitt';
 import {Splice} from '../../../src/server/cards/promo/Splice';
@@ -32,6 +31,7 @@ import {Payment} from '../../../src/common/inputs/Payment';
 import {AdvancedAlloys} from '../../../src/server/cards/base/AdvancedAlloys';
 import {BuildColonyStandardProject} from '../../../src/server/cards/colonies/BuildColonyStandardProject';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
+import {deserializeCorporationCard, serializeCorporationCard} from '../../../src/server/cards/cardSerialization';
 
 describe('PharmacyUnion', () => {
   let pharmacyUnion: PharmacyUnion;
@@ -206,26 +206,23 @@ describe('PharmacyUnion', () => {
     expect(player.megaCredits).eq(3);
   });
 
-  it('serialization test for Player with Pharmacy Union, when false', () => {
-    pharmacyUnion.play(player);
+  it('serialization test for Pharmacy Union, when false', () => {
     pharmacyUnion.isDisabled = false;
-    const serializedPlayer = player.serialize();
+    const serialized = serializeCorporationCard(pharmacyUnion);
 
-    expect(serializedPlayer.corporations?.[0].isDisabled).is.false;
+    expect(serialized.isDisabled).is.false;
 
-    const reserializedPlayer = Player.deserialize(serializedPlayer);
-    const reserializedPharmacyUnion = cast(reserializedPlayer.corporations?.[0], PharmacyUnion);
+    const reserializedPharmacyUnion = deserializeCorporationCard(serialized);
     expect(reserializedPharmacyUnion.isDisabled).is.false;
   });
 
-  it('serialization test for Player with Pharmacy Union, when true', () => {
+  it('serialization test for Pharmacy Union, when true', () => {
     pharmacyUnion.isDisabled = true;
-    const serializedPlayer = player.serialize();
+    const serialized = serializeCorporationCard(pharmacyUnion);
 
-    expect(serializedPlayer.corporations?.[0].isDisabled).is.true;
+    expect(serialized.isDisabled).is.true;
 
-    const reserializedPlayer = Player.deserialize(serializedPlayer);
-    const reserializedPharmacyUnion = cast(reserializedPlayer.corporations?.[0], PharmacyUnion);
+    const reserializedPharmacyUnion = deserializeCorporationCard(serialized);
     expect(reserializedPharmacyUnion.isDisabled).is.true;
   });
 

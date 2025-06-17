@@ -120,7 +120,7 @@ export class UnderworldExpansion {
   }
 
   /** Identify the token at `space`, optionally trigger callbacks */
-  public static identify(game: IGame, space: Space, player: IPlayer | undefined = undefined, trigger: IdentificationTrigger = 'normal'): void {
+  public static identify(game: IGame, space: Space, player: IPlayer | undefined, trigger: IdentificationTrigger = 'normal'): void {
     if (game.gameOptions.underworldExpansion !== true) {
       throw new Error('Underworld expansion not in this game');
     }
@@ -138,9 +138,10 @@ export class UnderworldExpansion {
     }
     const undergroundResource = this.drawExcavationToken(game);
     space.undergroundResources = undergroundResource;
+
     for (const p of game.getPlayersInGenerationOrder()) {
       for (const card of p.tableau) {
-        card.onIdentification?.(player, p, space, trigger);
+        card.onIdentificationByAnyPlayer?.(p, player, space, trigger);
       }
     }
   }

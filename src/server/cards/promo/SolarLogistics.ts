@@ -6,6 +6,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {all} from '../Options';
 import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 
 export class SolarLogistics extends Card implements IProjectCard {
   constructor() {
@@ -37,7 +38,7 @@ export class SolarLogistics extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayedFromAnyPlayer(thisCardOwner: IPlayer, _playedCardOwner: IPlayer, card: IProjectCard) {
+  public onCardPlayedByAnyPlayer(thisCardOwner: IPlayer, card: ICard) {
     if (card.type === CardType.EVENT && card.tags.includes(Tag.SPACE)) {
       thisCardOwner.drawCard(1);
     }

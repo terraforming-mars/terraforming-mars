@@ -10,7 +10,7 @@ import {IPlayer} from '../../IPlayer';
 import {Policy, IPolicy} from '../Policy';
 import {Phase} from '../../../common/Phase';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {IProjectCard} from '../../cards/IProjectCard';
+import {ICard} from '../../cards/ICard';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
 import {TITLES} from '../../inputs/titles';
 
@@ -63,7 +63,7 @@ class MarsFirstPolicy02 implements IPolicy {
   readonly id = 'mp02' as const;
   readonly description = 'When you play a building tag, gain 2 M€';
 
-  onCardPlayed(player: IPlayer, card: IProjectCard) {
+  onCardPlayed(player: IPlayer, card: ICard) {
     if (card.tags.includes(Tag.BUILDING)) player.stock.add(Resource.MEGACREDITS, 2);
   }
 }

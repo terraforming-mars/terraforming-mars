@@ -7,6 +7,7 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Phase} from '../../../common/Phase';
+import {ICard} from '../ICard';
 
 export class Decomposers extends Card implements IProjectCard {
   constructor() {
@@ -35,7 +36,7 @@ export class Decomposers extends Card implements IProjectCard {
       },
     });
   }
-  public onCardPlayed(player: IPlayer, card: IProjectCard): void {
+  public onCardPlayed(player: IPlayer, card: ICard): void {
     const qty = player.tags.cardTagCount(card, [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE]);
     player.addResourceTo(this, {qty, log: true});
   }

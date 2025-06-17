@@ -13,6 +13,7 @@ import {CardMetadata} from '../../../common/cards/CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Phase} from '../../../common/Phase';
 import {Board} from '../../boards/Board';
+import {ICard} from '../ICard';
 
 export class EcologicalZone extends Card implements IProjectCard {
   constructor(
@@ -54,7 +55,7 @@ export class EcologicalZone extends Card implements IProjectCard {
   public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
     return this.getAvailableSpaces(player, canAffordOptions).length > 0;
   }
-  public onCardPlayed(player: IPlayer, card: IProjectCard): void {
+  public onCardPlayed(player: IPlayer, card: ICard): void {
     const qty = player.tags.cardTagCount(card, [Tag.ANIMAL, Tag.PLANT]);
     player.addResourceTo(this, {qty, log: true});
   }

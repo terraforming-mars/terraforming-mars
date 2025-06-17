@@ -1,4 +1,4 @@
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
@@ -31,7 +31,7 @@ export class SoilBacteria extends PreludeCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard): void {
+  public onCardPlayed(player: IPlayer, card: ICard): void {
     const amount = player.tags.cardTagCount(card, [Tag.PLANT, Tag.MICROBE]);
     if (amount > 0) {
       player.defer(() => player.stock.add(Resource.PLANTS, amount, {log: true}));

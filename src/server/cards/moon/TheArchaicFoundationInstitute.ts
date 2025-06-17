@@ -2,7 +2,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {CorporationCard} from '../corporation/CorporationCard';
-import {IProjectCard} from '../IProjectCard';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
 import {ICard} from '../ICard';
@@ -43,7 +42,7 @@ export class TheArchaicFoundationInstitute extends CorporationCard implements IC
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard): void {
+  public onCardPlayed(player: IPlayer, card: ICard): void {
     if (player.isCorporation(this.name)) {
       const moonTags = card.tags.filter((t) => t === Tag.MOON);
       const count = moonTags.length;

@@ -7,6 +7,7 @@ import {IPlayer} from '../../IPlayer';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
+import {ICard} from '../ICard';
 
 export class GMOContract extends Card implements IProjectCard {
   constructor() {
@@ -30,7 +31,7 @@ export class GMOContract extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard): void {
+  public onCardPlayed(player: IPlayer, card: ICard): void {
     const amount = player.tags.cardTagCount(card, [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE]);
     if (amount > 0) {
       player.defer(() => player.stock.add(Resource.MEGACREDITS, amount * 2, {log: true}));

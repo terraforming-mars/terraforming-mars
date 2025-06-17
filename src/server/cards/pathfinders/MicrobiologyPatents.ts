@@ -6,6 +6,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
+import {ICard} from '../ICard';
 
 export class MicrobiologyPatents extends Card implements IProjectCard {
   constructor() {
@@ -25,7 +26,7 @@ export class MicrobiologyPatents extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (card.tags.includes(Tag.MICROBE)) {
       player.production.add(Resource.MEGACREDITS, 1, {log: true});
     }

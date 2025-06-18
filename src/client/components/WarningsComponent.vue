@@ -31,6 +31,7 @@ const descriptions: Record<Warning, string> = {
   'noMatchingCards': 'No cards gain the reward of this action.',
   'noEffect': 'This action will have no effect.',
   'selfTarget': 'Note: This action will target you.',
+  'pharmacyUnion': 'Note: playing a card with a microbe tag will cause you to lose 4 M€ (or as much as possible).',
 };
 
 export default Vue.extend({

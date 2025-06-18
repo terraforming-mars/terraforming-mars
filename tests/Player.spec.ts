@@ -555,5 +555,74 @@ describe('Player', () => {
     game.increaseOxygenLevel(player2, 2);
     expect(player2.globalParameterSteps[GlobalParameter.OXYGEN]).eq(2);
   });
+
+  it('run research phase', () => {
+    const [game, player] = testGame(1, {skipInitialCardSelection: true});
+    game.generation = 2;
+    player.megaCredits = 20;
+
+    game.gotoResearchPhase();
+
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    const cards = selectCard.cards;
+    selectCard.cb([cards[0], cards[2]]);
+    runAllActions(game);
+
+    expect(player.cardsInHand).to.have.members([cards[0], cards[2]]);
+    expect(player.megaCredits).eq(14);
+  });
+
+  it('run research phase, player has corruption, declines', () => {
+    const [game, player] = testGame(1, {underworldExpansion: true, skipInitialCardSelection: true});
+    game.generation = 2;
+    player.megaCredits = 20;
+    player.underworldData.corruption = 1;
+
+    game.gotoResearchPhase();
+
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+    const selectCard = cast(orOptions.options[0], SelectCard);
+    const selectedCards = selectCard.cards;
+    selectCard.cb([selectedCards[0], selectedCards[2]]);
+    runAllActions(game);
+
+    expect(player.cardsInHand).to.have.members([selectedCards[0], selectedCards[2]]);
+    expect(player.megaCredits).eq(14);
+    expect(player.underworldData.corruption).eq(1);
+  });
+
+  it('run research phase, player has corruption, accepts', () => {
+    const [game, player] = testGame(1, {underworldExpansion: true, skipInitialCardSelection: true});
+    game.generation = 2;
+    player.megaCredits = 20;
+    player.underworldData.corruption = 1;
+
+    game.gotoResearchPhase();
+
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+    const discardCards = cast(orOptions.options[1], SelectCard);
+    const [discard1, discard2] = [discardCards.cards[0], discardCards.cards[2]];
+    const [kept1, kept2] = [discardCards.cards[1], discardCards.cards[3]];
+    discardCards.cb([discard1, discard2]);
+
+    expect(player.game.projectDeck.discardPile).includes(discard1);
+    expect(player.game.projectDeck.discardPile).includes(discard2);
+    runAllActions(game);
+
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    const selectedCards = selectCard.cards;
+
+    expect(selectedCards).does.not.include(discard1);
+    expect(selectedCards).does.not.include(discard2);
+    expect(selectedCards).includes(kept1);
+    expect(selectedCards).includes(kept2);
+
+    selectCard.cb([selectedCards[0], selectedCards[2]]);
+    runAllActions(game);
+
+    expect(player.cardsInHand).to.have.members([selectedCards[0], selectedCards[2]]);
+    expect(player.megaCredits).eq(14);
+    expect(player.underworldData.corruption).eq(1);
+  });
 });
 

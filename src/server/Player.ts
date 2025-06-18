@@ -699,11 +699,42 @@ export class Player implements IPlayer {
       selectable--;
     }
 
-    // TODO(kberg): Using .execute to rely on directly calling setWaitingFor is not great.
-    // It's because each player is drafting at the same time. Once again, the server isn't ideal
-    // when it comes to handling multiple players at once.
-    const action = new ChooseCards(this, copyAndClear(this.draftedCards), {paying: true, keepMax: selectable}).execute();
-    this.setWaitingFor(action, () => this.game.playerIsFinishedWithResearchPhase(this));
+    const cards = copyAndClear(this.draftedCards);
+
+    const chooseCardsToBuy = () => {
+      return new ChooseCards(this, cards, {paying: true, keepMax: selectable}).execute();
+    };
+
+    const buyDraftedCards = () => {
+      // TODO(kberg): Using .execute to rely on directly calling setWaitingFor is not great.
+      // It's because all players is drafting at the same time. Once again, the server isn't ideal
+      // when it comes to handling multiple players at once.
+      const action = chooseCardsToBuy();
+      this.setWaitingFor(action, () => this.game.playerIsFinishedWithResearchPhase(this));
+    };
+
+    if (this.underworldData.corruption > 0 &&
+        this.game.gameOptions.expansions.underworld === true &&
+        cards.length >= 2 &&
+        this.game.projectDeck.size() >= 2) {
+      // Player may spend 1 corruption to discard 2 cards and draw 2 cards.
+      const options = new OrOptions();
+      options.options.push(chooseCardsToBuy());
+      options.options.push(new SelectCard('Spend 1 corruption to replace 2 cards', 'Spend Corruption', cards, {min: 2, max: 2}).andThen((discards) => {
+        this.game.projectDeck.discard(...discards);
+        for (const discard of discards) {
+          inplaceRemove(cards, discard);
+        }
+        // Drawing from the top to maintain seeds.
+        cards.push(...this.game.projectDeck.drawN(this.game, 2, 'top'));
+        buyDraftedCards();
+
+        return undefined;
+      }));
+      this.setWaitingFor(options);
+    } else {
+      buyDraftedCards();
+    }
   }
 
   public getCardCost(card: IProjectCard): number {

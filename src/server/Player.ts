@@ -1290,6 +1290,9 @@ export class Player implements IPlayer {
       card.additionalProjectCosts = card.additionalProjectCosts ?? {};
       card.additionalProjectCosts.redsCost = canAfford.redsCost;
     }
+    if (this.isCorporation(CardName.PHARMACY_UNION) && card.tags.includes(Tag.MICROBE)) {
+      card.warnings.add('pharmacyUnion');
+    }
     return true;
   }
 

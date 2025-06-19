@@ -63,12 +63,12 @@ describe('EarthEmbassy', () => {
     player.corporations.push(pointLuna);
 
     const fake = fakeCard({tags: [Tag.MOON]});
-    pointLuna.onCardPlayed(player, fake);
+    pointLuna.onCardPlayedForCorps(player, fake);
 
     expect(player.cardsInHand).has.length(0);
 
     player.playedCards.push(earthEmbassy);
-    pointLuna.onCardPlayed(player, fake);
+    pointLuna.onCardPlayedForCorps(player, fake);
 
     expect(player.cardsInHand).is.empty;
   });

@@ -81,9 +81,9 @@ export interface ICard {
   getVictoryPoints(player: IPlayer, context?: GetVictoryPointsContext): number;
   /** Returns any dynamic influence value */
   getInfluenceBonus?: (player: IPlayer) => number;
-  /** Called when cards are played. However, if this is a corp, it'll be called when opponents play cards, too. */
+  /** Called when cards are played. Corps have a different callback */
   onCardPlayed?(player: IPlayer, card: ICard): PlayerInput | undefined | void;
-  onCardPlayedByAnyPlayer?(thisCardOwner: IPlayer, card: ICard, playedCardOwner: IPlayer): PlayerInput | undefined | void;
+  onCardPlayedByAnyPlayer?(thisCardOwner: IPlayer, card: ICard, activePlayer: IPlayer): PlayerInput | undefined | void;
   onCardPlayedFromAnyPlayer?: never;
   onStandardProject?(player: IPlayer, project: IStandardProjectCard): void;
   onTilePlaced?(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType): void;
@@ -146,8 +146,8 @@ export interface ICard {
   /**
    * Callback when ANY player adds a colony.
    *
-   * @param player the player adding a colony.
    * @param cardOwner the player who owns this card.
+   * @param colonyOwner the player adding a colony.
    */
   onColonyAddedByAnyPlayer?(cardOwner: IPlayer, colonyOwner: IPlayer): void;
   onColonyAdded?: never;

@@ -41,17 +41,8 @@ export class Ambient extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public override bespokePlay(player: IPlayer) {
-    this.onCorpCardPlayed(player, this);
-    return undefined;
-  }
-
-  public onCorpCardPlayed(player: IPlayer, card: ICard) {
-    this.onCardPlayed(player, card);
-  }
-
-  public onCardPlayed(player: IPlayer, card: ICard): void {
-    if (player.isCorporation(this.name) && card.tags.includes(Tag.VENUS)) {
+  public onCardPlayedForCorps(player: IPlayer, card: ICard): void {
+    if (card.tags.includes(Tag.VENUS)) {
       player.production.add(Resource.HEAT, 1, {log: true});
     }
   }

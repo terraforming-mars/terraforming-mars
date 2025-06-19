@@ -44,10 +44,7 @@ export class ArboristCollective extends ActiveCorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: ICard) {
-    if (!player.isCorporation(this.name)) {
-      return;
-    }
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
     if (isIProjectCard(card) && card.type === CardType.EVENT && card.cost <= 14) {
       player.addResourceTo(this, {qty: 1, log: true});
     }

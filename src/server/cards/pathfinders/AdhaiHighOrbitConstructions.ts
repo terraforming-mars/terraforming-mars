@@ -52,16 +52,15 @@ export class AdhaiHighOrbitConstructions extends CorporationCard implements ICor
     return spaceTag;
   }
 
-  public onCardPlayed(player: IPlayer, card: ICard) {
-    if (player.isCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS) && this.matchingTags(card.tags)) {
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+    if (this.matchingTags(card.tags)) {
       player.addResourceTo(this, 1);
     }
   }
 
   // TODO(kberg): it's not possible to make this a cardDiscount type, which just means rendering is tricky.
-  public override getCardDiscount(player: IPlayer, card: IProjectCard) {
-    // Is this actually called from another player? Why is .isCorporation necessary?
-    if (player.isCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS) && this.matchingTags(card.tags)) {
+  public override getCardDiscount(_player: IPlayer, card: IProjectCard) {
+    if (this.matchingTags(card.tags)) {
       return Math.floor(this.resourceCount / 2);
     } else {
       return 0;

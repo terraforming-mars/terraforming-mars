@@ -18,12 +18,11 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.PHARMACY_UNION,
-      startingMegaCredits: 46, // 54 minus 8 for the 2 diseases
+      startingMegaCredits: 54,
       resourceType: CardResource.DISEASE,
 
       behavior: {
         drawCard: {count: 1, tag: Tag.SCIENCE},
-        addResources: 2,
       },
 
       metadata: {
@@ -57,18 +56,15 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
     return [Tag.MICROBE, Tag.MICROBE];
   }
 
-  public onCorpCardPlayed(player: IPlayer, card: ICard) {
-    this.onCardPlayed(player, card);
-  }
-
   private addDisease(player: IPlayer, count: number) {
     const megaCreditsLost = Math.min(player.megaCredits, count * 4);
     player.addResourceTo(this, count);
     player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
+    // TODO(kberg): Change text to include count by 2025-07-01.
     player.game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
   }
 
-  public onCardPlayed(player: IPlayer, card: ICard): void {
+  public onCardPlayedByAnyPlayer(player: IPlayer, card: ICard, activePlayer: IPlayer): void {
     if (this.isDisabled) {
       return;
     }
@@ -77,46 +73,43 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
 
     const hasScienceTag = player.tags.cardHasTag(card, Tag.SCIENCE);
     const hasMicrobesTag = card.tags.includes(Tag.MICROBE);
-    const isPharmacyUnion = player.isCorporation(CardName.PHARMACY_UNION);
 
-    // Edge case, let player pick order of resolution (see https://github.com/bafolts/terraforming-mars/issues/1286)
-    if (isPharmacyUnion && hasScienceTag && hasMicrobesTag && this.resourceCount === 0) {
-      // TODO (Lynesth): Modify this when https://github.com/bafolts/terraforming-mars/issues/1670 is fixed
-      if (player.canAfford({cost: 0, tr: {tr: 3}})) {
-        player.defer(() => {
-          return new OrOptions(
-            new SelectOption('Turn it face down to gain 3 TR and lose up to 4 M€').andThen(() => {
-              this.isDisabled = true;
-              player.increaseTerraformRating(3);
-              const megaCreditsLost = Math.min(player.megaCredits, 4);
-              player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
-              game.log('${0} turned ${1} face down to gain 3 TR and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
-              return undefined;
-            }),
-            new SelectOption('Add a disease to it and lose up to 4 M€, then remove a disease to gain 1 TR').andThen(() => {
-              const megaCreditsLost = Math.min(player.megaCredits, 4);
-              player.increaseTerraformRating();
-              player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
-              game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
-              game.log('${0} removed a disease from ${1} to gain 1 TR', (b) => b.player(player).card(this));
-              return undefined;
-            }),
-          ).setTitle('Choose the order of tag resolution for Pharmacy Union');
-        }, Priority.PHARMACY_UNION);
-        return undefined;
+    if (player === activePlayer && hasScienceTag) {
+      // Edge case, let player pick order of resolution (see https://github.com/bafolts/terraforming-mars/issues/1286)
+      if (hasMicrobesTag && this.resourceCount === 0) {
+        // TODO (Lynesth): Modify this when https://github.com/bafolts/terraforming-mars/issues/1670 is fixed
+        if (player.canAfford({cost: 0, tr: {tr: 3}})) {
+          player.defer(() => {
+            return new OrOptions(
+              new SelectOption('Turn it face down to gain 3 TR and lose up to 4 M€').andThen(() => {
+                this.isDisabled = true;
+                player.increaseTerraformRating(3);
+                const megaCreditsLost = Math.min(player.megaCredits, 4);
+                player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
+                game.log('${0} turned ${1} face down to gain 3 TR and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
+                return undefined;
+              }),
+              new SelectOption('Add a disease to it and lose up to 4 M€, then remove a disease to gain 1 TR').andThen(() => {
+                const megaCreditsLost = Math.min(player.megaCredits, 4);
+                player.increaseTerraformRating();
+                player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
+                game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
+                game.log('${0} removed a disease from ${1} to gain 1 TR', (b) => b.player(player).card(this));
+                return undefined;
+              }),
+            ).setTitle('Choose the order of tag resolution for Pharmacy Union');
+          }, Priority.PHARMACY_UNION);
+          return undefined;
+        }
+      } else {
+        const scienceTags = player.tags.cardTagCount(card, Tag.SCIENCE);
+        this.onScienceTagAdded(player, scienceTags);
       }
     }
-
-    if (isPharmacyUnion && hasScienceTag) {
-      const scienceTags = player.tags.cardTagCount(card, Tag.SCIENCE);
-      this.onScienceTagAdded(player, scienceTags);
-    }
-
 
     if (hasMicrobesTag) {
       player.defer(() => {
         const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tag.MICROBE).length;
-        const player = game.getCardPlayerOrThrow(this.name);
         this.addDisease(player, microbeTagCount);
         return undefined;
       }, Priority.PHARMACY_UNION);

@@ -16,12 +16,11 @@ describe('RobinHaulings', () => {
   beforeEach(() => {
     card = new RobinHaulings();
     [game, player, player2] = testGame(2);
-    player.corporations.push(card);
   });
 
   it('play', () => {
     expect(card.resourceCount).eq(0);
-    card.play(player);
+    player.playCorporationCard(card);
     runAllActions(game);
     expect(card.resourceCount).eq(1);
   });

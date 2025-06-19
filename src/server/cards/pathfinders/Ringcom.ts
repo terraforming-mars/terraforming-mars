@@ -24,7 +24,6 @@ export class Ringcom extends CorporationCard implements ICorporationCard {
         drawCard: {count: 2, tag: Tag.JOVIAN},
       },
 
-
       metadata: {
         cardNumber: 'PfC4',
         description: 'You start with 39 M€. and 3 M€ production. As your first action, draw 2 cards with a Jovian tag.',
@@ -42,23 +41,9 @@ export class Ringcom extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public override bespokePlay(player: IPlayer) {
-    // Typically  onCardPlayed isn't necessary, but onCorpCardPlayed isn't called for your own corp card.
-    this.onCardPlayed(player, this);
-    return undefined;
-  }
-
-  public onCorpCardPlayed(player: IPlayer, card: ICard) {
-    this.onCardPlayed(player, card);
-  }
-
-  public onCardPlayed(player: IPlayer, card: ICard): void {
+  public onCardPlayedByAnyPlayer(player: IPlayer, card: ICard) {
     if (card.tags.includes(Tag.JOVIAN)) {
-      player.game.getPlayers().forEach((p) => {
-        if (p.isCorporation(this.name)) {
-          p.stock.add(Resource.TITANIUM, 1, {log: true});
-        }
-      });
+      player.stock.add(Resource.TITANIUM, 1, {log: true});
     }
   }
 }

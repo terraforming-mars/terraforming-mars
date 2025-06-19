@@ -28,7 +28,7 @@ describe('Splice', () => {
     player.corporations.push(card);
 
     player2.playedCards.push(tardigrades);
-    cast(card.onCardPlayed(player2, tardigrades), undefined);
+    cast(card.onCardPlayedByAnyPlayer(player, tardigrades, player2), undefined);
     runAllActions(game);
     const orOptions = cast(player2.popWaitingFor(), OrOptions);
 
@@ -55,7 +55,7 @@ describe('Splice', () => {
     cast(pharmacyUnion.play(player), undefined);
     player2.corporations.push(pharmacyUnion);
 
-    cast(card.onCardPlayed(player2, pharmacyUnion), undefined);
+    cast(card.onCardPlayedByAnyPlayer(player, pharmacyUnion, player2), undefined);
 
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
@@ -69,7 +69,10 @@ describe('Splice', () => {
     const recyclon = new Recyclon();
 
     player.playCorporationCard(card);
+    runAllActions(game);
+    expect(player.megaCredits).eq(48);
     player2.playCorporationCard(recyclon);
+    runAllActions(game);
 
     // Default resource on Recyclon and player2's MC
     expect(recyclon.resourceCount).to.eq(1);

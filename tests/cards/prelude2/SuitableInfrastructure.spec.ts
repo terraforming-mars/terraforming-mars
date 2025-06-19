@@ -9,6 +9,7 @@ import {SaturnSystems} from '../../../src/server/cards/corporation/SaturnSystems
 import {Manutech} from '../../../src/server/cards/venusNext/Manutech';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
 import {RefugeeCamps} from '../../../src/server/cards/colonies/RefugeeCamps';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 function simulateFinishingAction(player: IPlayer) {
   player.actionsTakenThisGame++;
@@ -65,11 +66,11 @@ describe('SuitableInfrastructure', () => {
     const jovianLanterns = new JovianLanterns();
 
     game.activePlayer = player2.id;
-    saturnSystems.onCardPlayed(player2, jovianLanterns);
+    (<ICorporationCard> saturnSystems).onCardPlayedByAnyPlayer?.(player, jovianLanterns, player2);
     expect(player.stock.megacredits).eq(0);
 
     game.activePlayer = player.id;
-    saturnSystems.onCardPlayed(player2, jovianLanterns);
+    (<ICorporationCard> saturnSystems).onCardPlayedByAnyPlayer?.(player, jovianLanterns, player2);
     expect(player.stock.megacredits).eq(2);
   });
 

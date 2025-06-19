@@ -23,7 +23,11 @@ describe('Ambient', () => {
   beforeEach(() => {
     card = new Ambient();
     [game, player, player2] = testGame(2);
-    player.corporations.push(card);
+  });
+
+  it('play', () => {
+    player.playCorporationCard(card);
+    expect(player.production.heat).eq(1);
   });
 
   it('initialAction', () => {
@@ -37,20 +41,21 @@ describe('Ambient', () => {
     expect(player.getTerraformRating()).eq(22);
   });
 
-  it('onCardPlayed', () => {
+  it('effect', () => {
+    player.corporations.push(card);
     expect(player.production.heat).eq(0);
 
-    card.onCardPlayed(player, fakeCard({tags: []}));
+    player.playCard(fakeCard({tags: []}));
     expect(player.production.heat).eq(0);
 
-    card.onCardPlayed(player, fakeCard({tags: [Tag.EARTH]}));
+    player.playCard(fakeCard({tags: [Tag.EARTH]}));
     expect(player.production.heat).eq(0);
 
-    card.onCardPlayed(player, fakeCard({tags: [Tag.VENUS]}));
+    player.playCard(fakeCard({tags: [Tag.VENUS]}));
     expect(player.production.heat).eq(1);
     expect(player2.production.heat).eq(0);
 
-    card.onCardPlayed(player2, fakeCard({tags: [Tag.VENUS]}));
+    player2.playCard(fakeCard({tags: [Tag.VENUS]}));
     expect(player.production.heat).eq(1);
     expect(player2.production.heat).eq(0);
   });
@@ -85,6 +90,7 @@ describe('Ambient', () => {
   });
 
   it('action is repeatable', () => {
+    player.corporations.push(card);
     player.heat = 16;
     setTemperature(game, MAX_TEMPERATURE);
 

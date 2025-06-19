@@ -75,8 +75,6 @@ export interface IPlayer {
   readonly production: Production;
   readonly stock: Stock;
 
-  // Corporate identity
-  corporations: Array<ICorporationCard>;
 
   // Used only during set-up
   pickedCorporationCard?: ICorporationCard;
@@ -116,7 +114,8 @@ export interface IPlayer {
   ceoCardsInHand: Array<IProjectCard>;
   playedCards: PlayedCards;
   cardCost: number;
-  tableau: Array<ICard>;
+  // This will eventually replace playedCards.
+  tableau: ReadonlyArray<ICard>;
 
   /** Cards this player has in their draft hand. Player chooses from them, and passes them to the next player */
   draftHand: Array<IProjectCard>;
@@ -184,21 +183,10 @@ export interface IPlayer {
   user?: DiscordId;
 
   /**
-   * Return `true` if this player has played the supplied corporation card.
-   */
-  isCorporation(corporationName: CardName): boolean;
-  /**
-   * Return the corporation card this player has played by the given name, or `undefined`.
-   */
-  getCorporation(corporationName: CardName): ICorporationCard | undefined;
-  /**
-   * Return the corporation card this player has played by the given name, or throw an Error.
-   */
-  getCorporationOrThrow(corporationName: CardName): ICorporationCard;
-  /**
    * Return the card this player has played by the given name, or `undefined`.
    */
   getPlayedCard(cardName: CardName): ICard | undefined;
+  getPlayedCardOrThrow(cardName: CardName): ICard;
   getTitaniumValue(): number;
   increaseTitaniumValue(): void;
   decreaseTitaniumValue(): void;
@@ -331,7 +319,7 @@ export interface IPlayer {
   spendHeat(amount: number, cb?: () => (undefined | PlayerInput)) : PlayerInput | undefined;
 
   playCard(selectedCard: IProjectCard, payment?: Payment, cardAction?: CardAction): void;
-  onCardPlayed(card: IProjectCard): void;
+  onCardPlayed(card: ICard): void;
   playCorporationCard(corporationCard: ICorporationCard): void;
   drawCard(count?: number, options?: DrawOptions): void;
   drawCardKeepSome(count: number, options: AllOptions): void;

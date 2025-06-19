@@ -57,8 +57,10 @@ export class ProjectWorkshop extends CorporationCard implements ICorporationCard
     });
   }
 
-  private getEligibleCards(player: IPlayer) {
-    const cards = player.playedCards.filter((card) => card.type === CardType.ACTIVE);
+  private getEligibleCards(player: IPlayer): ReadonlyArray<IProjectCard> {
+    const cards = player.playedCards.projects()
+      .filter((card) => card.type === CardType.ACTIVE);
+
     if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp01')) {
       return cards;
     }

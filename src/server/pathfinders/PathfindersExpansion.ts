@@ -256,7 +256,7 @@ export class PathfindersExpansion {
   }
 
   public static addToSolBank(player: IPlayer) {
-    const solBank = player.getCorporation(CardName.SOLBANK);
+    const solBank = player.getPlayedCard(CardName.SOLBANK);
     if (solBank !== undefined) {
       player.defer(
         () => player.addResourceTo(solBank, {qty: 1, log: true}),

@@ -1,7 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {ActiveCorporationCard} from '../corporation/CorporationCard';
 import {Size} from '../../../common/cards/render/Size';
@@ -57,11 +56,11 @@ export class HecateSpeditions extends ActiveCorporationCard {
 
 // TODO(kberg): This pattern has occurred enough times that this can be reduced.
 export class TradeWithHectateSpeditions implements IColonyTrader {
-  private hectateSpeditions: ICorporationCard | undefined;
+  private hectateSpeditions: ICard | undefined;
   private tradeCost: number;
 
   constructor(private player: IPlayer) {
-    this.hectateSpeditions = player.getCorporation(CardName.HECATE_SPEDITIONS);
+    this.hectateSpeditions = player.getPlayedCard(CardName.HECATE_SPEDITIONS);
     this.tradeCost = Math.max(1, 2 - player.colonies.tradeDiscount);
   }
 
@@ -73,7 +72,7 @@ export class TradeWithHectateSpeditions implements IColonyTrader {
     return message('Pay ${0} ${1} resources (use ${2} action)', (b) => b.number(this.tradeCost).string('supply chain').cardName(CardName.HECATE_SPEDITIONS));
   }
 
-  private tradeWithColony(card: ICorporationCard, player: IPlayer, colony: IColony) {
+  private tradeWithColony(card: ICard, player: IPlayer, colony: IColony) {
     card.resourceCount -= this.tradeCost;
     player.game.log('${0} spent ${1} ${2} from ${3} to trade with ${4}',
       (b) => b.player(player).number(this.tradeCost).string('supply chain resources').card(card).colony(colony));

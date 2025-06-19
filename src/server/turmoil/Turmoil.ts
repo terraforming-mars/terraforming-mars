@@ -367,7 +367,7 @@ export class Turmoil {
       const chairman = this.chairman;
       let steps = gainTR ? 1 : 0;
       // Tempest Consultancy Hook (gains an additional TR when they become chairman)
-      if (chairman.isCorporation(CardName.TEMPEST_CONSULTANCY)) steps += 1;
+      if (chairman.cardIsInEffect(CardName.TEMPEST_CONSULTANCY)) steps += 1;
 
       // Raise TR
       chairman.defer(() => {
@@ -536,7 +536,7 @@ export class Turmoil {
       let sendDelegate;
       if (!this.usedFreeDelegateAction.has(player)) {
         sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (from lobby)', {freeStandardAction: true});
-      } else if (player.isCorporation(CardName.INCITE) && player.canAfford(3)) {
+      } else if (player.cardIsInEffect(CardName.INCITE) && player.canAfford(3)) {
         sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (3 M€)', {cost: 3});
       } else if (player.canAfford(5)) {
         sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (5 M€)', {cost: 5});

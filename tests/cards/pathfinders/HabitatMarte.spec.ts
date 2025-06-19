@@ -25,18 +25,18 @@ describe('HabitatMarte', () => {
   });
 
   it('tag count', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     expect(player.tags.count(Tag.SCIENCE, 'raw')).eq(0);
     expect(player.tags.count(Tag.SCIENCE)).eq(1);
   });
 
   it('card cost', () => {
-    player.corporations.push(new ValleyTrust()); // -2 per science tag
+    player.playedCards.push(new ValleyTrust()); // -2 per science tag
     expect(player.getCardCost(fakeCard({cost: 10, tags: [Tag.MARS]}))).eq(10);
     expect(player.getCardCost(fakeCard({cost: 10, tags: [Tag.SCIENCE]}))).eq(8);
     expect(player.getCardCost(fakeCard({cost: 10, tags: [Tag.MARS, Tag.MARS]}))).eq(10);
 
-    player.corporations.push(card);
+    player.playedCards.push(card);
     expect(player.getCardCost(fakeCard({cost: 10, tags: [Tag.MARS]}))).eq(8);
     expect(player.getCardCost(fakeCard({cost: 10, tags: [Tag.SCIENCE]}))).eq(8);
     expect(player.getCardCost(fakeCard({cost: 10, tags: [Tag.MARS, Tag.MARS]}))).eq(6);
@@ -58,14 +58,14 @@ describe('HabitatMarte', () => {
 
     expect(player.canPlay(interstellar)).is.false;
 
-    player.corporations.push(card);
+    player.playedCards.push(card);
     expect(player.canPlay(interstellar)).is.true;
 
     player.playedCards.push(fiveMarsTags);
 
     expect(player.canPlay(interstellar)).is.true;
 
-    player.corporations = [];
+    player.playedCards.remove(card);
 
     expect(player.canPlay(interstellar)).is.false;
   });
@@ -84,7 +84,7 @@ describe('HabitatMarte', () => {
     cast(player.getWaitingFor(), undefined);
     expect(olympusConference.resourceCount).eq(0);
 
-    player.corporations.push(card);
+    player.playedCards.push(card);
     olympusConference.onCardPlayed(player, marsCard);
     runAllActions(game);
     cast(player.getWaitingFor(), undefined);
@@ -110,7 +110,7 @@ describe('HabitatMarte', () => {
     expect(card3.canPlay(player)).to.be.false;
     expect(card4.canPlay(player)).to.be.false;
 
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     expect(card1.canPlay(player)).to.be.true;
     expect(card2.canPlay(player)).to.be.true;
@@ -125,7 +125,7 @@ describe('HabitatMarte', () => {
 
     expect(flatMarsTheory.canPlay(player)).to.be.true;
 
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     expect(flatMarsTheory.canPlay(player)).to.be.false;
   });

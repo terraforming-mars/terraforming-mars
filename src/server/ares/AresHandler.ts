@@ -155,7 +155,7 @@ export class AresHandler {
   }
 
   private static computeAdjacencyCosts(player: IPlayer, space: Space, subjectToHazardAdjacency: boolean): AdjacencyCost {
-    if (player.isCorporation(CardName.ATHENA)) {
+    if (player.cardIsInEffect(CardName.ATHENA)) {
       subjectToHazardAdjacency = false;
     }
 

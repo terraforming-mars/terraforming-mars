@@ -1045,7 +1045,7 @@ export class Game implements IGame, Logger {
 
     const scores: Array<Score> = [];
     this.players.forEach((player) => {
-      const corporation = player.playedCards.filter(isICorporationCard).map(toName).join('|');
+      const corporation = player.playedCards.corporations().map(toName).join('|');
       const vpb = player.getVictoryPoints();
       scores.push({corporation: corporation, playerScore: vpb.total});
     });

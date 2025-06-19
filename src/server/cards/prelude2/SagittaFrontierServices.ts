@@ -37,7 +37,7 @@ export class SagittaFrontierServices extends CorporationCard implements ICorpora
   public override bespokePlay(player: IPlayer) {
     // Gain the 4 MC for playing itself.
     player.stock.megacredits += 4;
-    player.game.log('${0} gained 4 M€ for playing a card with no tags.', (b) => b.player(player));
+    player.game.log('${0} gained 4 M€ for playing ${1}, which has no tags.', (b) => b.player(player).card(this));
 
     player.drawCard(1, {include: (c) => c.tags.length === 0 && c.type !== CardType.EVENT});
     return undefined;

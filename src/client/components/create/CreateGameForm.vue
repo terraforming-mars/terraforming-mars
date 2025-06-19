@@ -43,7 +43,7 @@
                             <input type="checkbox" name="prelude2" id="prelude2-checkbox" v-model="expansions.prelude2">
                             <label for="prelude2-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-prelude2"></div>
-                                <span v-i18n>Prelude 2(β)</span>
+                                <span v-i18n>Prelude 2</span>
                             </label>
 
                             <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="expansions.venus">
@@ -67,7 +67,7 @@
                             <input type="checkbox" name="promo" id="promo-checkbox" v-model="expansions.promo">
                             <label for="promo-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-promo"></div>
-                                <span v-i18n>Promos</span><span> 🆕</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
+                                <span v-i18n>Promos</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <div class="create-game-subsection-label" v-i18n>Fan-made</div>
@@ -662,6 +662,7 @@ export default (Vue as WithRefs<Refs>).extend({
       this.expansions.venus = value;
       this.expansions.colonies = value;
       this.expansions.turmoil = value;
+      this.expansions.prelude2 = value;
       this.expansions.promo = value;
       this.solarPhaseOption = value;
     },

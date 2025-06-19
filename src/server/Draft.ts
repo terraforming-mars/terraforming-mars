@@ -7,8 +7,9 @@ import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
 import {SelectCard} from './inputs/SelectCard';
 import {message} from './logs/MessageBuilder';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
+import {ICeoCard} from './cards/ceos/ICeoCard';
 
-export type DraftType = 'none' | 'initial' | 'prelude' | 'standard';
+export type DraftType = 'none' | 'initial' | 'prelude' | 'ceos' | 'standard';
 
 /*
  * Drafting terminology:
@@ -257,9 +258,42 @@ class PreludeDraft extends Draft {
   }
 
   override endRound() {
+    this.game.initialDraftIteration++;
     for (const player of this.game.getPlayers()) {
       // TODO(kberg): player.draftedCards is not ideal here.
       player.dealtPreludeCards = player.draftedCards as Array<IPreludeCard>;
+      player.draftedCards = [];
+    }
+    if (this.game.gameOptions.ceoExtension && this.game.gameOptions.ceosDraftVariant) {
+      this.game.draftRound = 1;
+      newCEOsDraft(this.game).startDraft();   
+    } else {
+      this.game.gotoInitialResearchPhase();
+    }
+  }
+}
+
+class CEOsDraft extends Draft {
+  constructor(game: IGame) {
+    super('ceos', game);
+  }
+
+  override draw(player: IPlayer) {
+    return player.dealtCeoCards;
+  }
+
+  override cardsToKeep(_player: IPlayer): number {
+    return 1;
+  }
+
+  override passDirection(): 'after' {
+    return 'after';
+  }
+
+  override endRound() {
+    for (const player of this.game.getPlayers()) {
+      // TODO(kberg): player.draftedCards is not ideal here.
+      player.dealtCeoCards = player.draftedCards as Array<ICeoCard>;
       player.draftedCards = [];
     }
 
@@ -277,4 +311,8 @@ export function newInitialDraft(game: IGame) {
 
 export function newPreludeDraft(game: IGame) {
   return new PreludeDraft(game);
+}
+
+export function newCEOsDraft(game: IGame) {
+  return new CEOsDraft(game);
 }

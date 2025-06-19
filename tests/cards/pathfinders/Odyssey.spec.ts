@@ -175,7 +175,7 @@ describe('Odyssey', () => {
   // ... and so on.
   it('Be compatible with Viron and Project Inspection', () => {
     const viron = new Viron();
-    player.playAdditionalCorporationCard(viron);
+    player.playCorporationCard(viron);
 
     const projectInspection = new ProjectInspection();
     player.playedCards.push(projectInspection);

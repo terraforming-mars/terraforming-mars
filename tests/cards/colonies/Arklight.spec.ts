@@ -28,7 +28,7 @@ describe('Arklight', () => {
 
     card.resourceCount = 0;
 
-    player.playAdditionalCorporationCard(new EcoLine());
+    player.playCorporationCard(new EcoLine());
 
     expect(card.resourceCount).to.eq(1);
   });

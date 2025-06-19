@@ -18,11 +18,6 @@ export class IntragenSanctuaryHeadquarters extends CorporationCard implements IC
       resourceType: CardResource.ANIMAL,
       victoryPoints: {resourcesHere: {}, per: 2},
 
-      behavior: {
-        // Gains the initial resource from its own tag.
-        addResources: 1,
-      },
-
       firstAction: {
         text: 'Place a habitat tile on The Moon.',
         moon: {habitatTile: {}},
@@ -42,12 +37,7 @@ export class IntragenSanctuaryHeadquarters extends CorporationCard implements IC
     });
   }
 
-  public onCorpCardPlayed(player: IPlayer, card: ICard) {
-    this.onCardPlayed(player, card);
-  }
-
-  public onCardPlayed(player: IPlayer, card: ICard) {
-    // onCardPlayed on corporation cards is called when ANY PLAYER plays a card.
+  public onCardPlayedByAnyPlayer(player: IPlayer, card: ICard) {
     const corporationOwner = player.game.getCardPlayerOrThrow(this.name);
     const count = corporationOwner.tags.cardTagCount(card, Tag.ANIMAL);
     corporationOwner.addResourceTo(this, {qty: count, log: true});

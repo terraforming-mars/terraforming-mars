@@ -21,7 +21,6 @@ export class Recyclon extends CorporationCard implements ICorporationCard {
 
       behavior: {
         production: {steel: 1},
-        addResources: 1,
       },
 
       metadata: {
@@ -41,12 +40,8 @@ export class Recyclon extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: ICard) {
-    if (!player.isCorporation(this.name)) {
-      return undefined;
-    }
-
-    if (card.tags.includes(Tag.BUILDING) === false || !player.isCorporation(this.name)) {
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+    if (card.tags.includes(Tag.BUILDING) === false) {
       return undefined;
     }
     if (this.resourceCount < 2) {
@@ -65,9 +60,5 @@ export class Recyclon extends CorporationCard implements ICorporationCard {
       return undefined;
     });
     return new OrOptions(spendResource, addResource);
-  }
-
-  public onCorpCardPlayed(player: IPlayer, card: ICard) {
-    return this.onCardPlayed(player, card);
   }
 }

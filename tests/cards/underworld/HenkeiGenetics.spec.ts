@@ -50,7 +50,7 @@ describe('HenkeiGenetics', () => {
   it('onCardPlayed', () => {
     player.corporations.push(card);
     const tardigrades = new Tardigrades();
-    card.onCardPlayed(player, tardigrades);
+    player.playCard(tardigrades);
     runAllActions(game);
     expect(tardigrades.resourceCount).eq(2);
   });

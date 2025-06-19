@@ -24,10 +24,6 @@ export class CollegiumCopernicus extends CorporationCard implements ICorporation
       startingMegaCredits: 33,
       resourceType: CardResource.DATA,
 
-      behavior: {
-        addResourcesToAnyCard: {count: 1, type: CardResource.DATA},
-      },
-
       firstAction: {
         text: 'Draw 2 cards with a science tag',
         drawCard: {count: 2, tag: Tag.SCIENCE},
@@ -50,11 +46,7 @@ export class CollegiumCopernicus extends CorporationCard implements ICorporation
     });
   }
 
-  public onCorpCardPlayed(player: IPlayer, card: ICard) {
-    this.onCardPlayed(player, card);
-  }
-
-  public onCardPlayed(player: IPlayer, card: ICard): void {
+  public onCardPlayedForCorps(player: IPlayer, card: ICard): void {
     if (player.tags.cardHasTag(card, Tag.SCIENCE) && player.isCorporation(this.name)) {
       player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 1}));
     }

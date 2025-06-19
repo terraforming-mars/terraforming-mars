@@ -35,8 +35,8 @@ export class MartianInsuranceGroup extends CorporationCard implements ICorporati
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: ICard): void {
-    if (player.isCorporation(this.name) && card.type === CardType.EVENT) {
+  public onCardPlayedForCorps(player: IPlayer, card: ICard): void {
+    if (card.type === CardType.EVENT) {
       player.production.add(Resource.MEGACREDITS, 1, {log: true});
     }
   }

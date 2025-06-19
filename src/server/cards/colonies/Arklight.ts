@@ -18,7 +18,6 @@ export class Arklight extends CorporationCard implements ICorporationCard {
 
       behavior: {
         production: {megacredits: 2},
-        addResources: 1,
       },
 
       metadata: {
@@ -37,13 +36,10 @@ export class Arklight extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public onCorpCardPlayed(player: IPlayer, card: ICard) {
-    this.onCardPlayed(player, card);
-  }
-
-  public onCardPlayed(player: IPlayer, card: ICard): void {
-    if (player.isCorporation(CardName.ARKLIGHT)) {
-      player.addResourceTo(this, {qty: card.tags.filter((cardTag) => cardTag === Tag.ANIMAL || cardTag === Tag.PLANT).length, log: true});
+  public onCardPlayedForCorps(player: IPlayer, card: ICard): void {
+    const qty = card.tags.filter((cardTag) => cardTag === Tag.ANIMAL || cardTag === Tag.PLANT).length;
+    if (qty > 0) {
+      player.addResourceTo(this, {qty: qty, log: true});
     }
   }
 }

@@ -31,7 +31,7 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(54).cards(1, {secondaryTag: Tag.SCIENCE});
           // blank space after MC is on purpose
-          b.text('(You start with 54 M€ . Draw a Science card.)', Size.TINY, false, false);
+          b.text('(You start with 54 M€. Draw a Science card.)', Size.TINY, false, false);
           b.corpBox('effect', (ce) => {
             ce.vSpace(Size.LARGE);
             ce.effect(undefined, (eb) => {

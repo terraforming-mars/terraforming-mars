@@ -16,8 +16,7 @@ export class SaturnSystems extends CorporationCard implements ICorporationCard {
       startingMegaCredits: 42,
 
       behavior: {
-        // The 1MC is for the card effect related to itself.
-        production: {titanium: 1, megacredits: 1},
+        production: {titanium: 1},
       },
 
       metadata: {
@@ -36,15 +35,12 @@ export class SaturnSystems extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: ICard) {
+  public onCardPlayedByAnyPlayer(thisCardOwner: IPlayer, card: ICard) {
+    // TODO(kberg): count the tags first. I don't know any cards with 2 jovian tags, though.
     for (const tag of card.tags) {
       if (tag === Tag.JOVIAN) {
-        player.game.getCardPlayerOrThrow(this.name).production.add(Resource.MEGACREDITS, 1, {log: true});
+        thisCardOwner.production.add(Resource.MEGACREDITS, 1, {log: true});
       }
     }
-  }
-
-  public onCorpCardPlayed(player: IPlayer, card: ICard) {
-    this.onCardPlayed(player, card);
   }
 }

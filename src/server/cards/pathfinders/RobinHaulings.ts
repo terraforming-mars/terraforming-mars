@@ -20,10 +20,6 @@ export class RobinHaulings extends CorporationCard implements ICorporationCard {
       startingMegaCredits: 39,
       resourceType: CardResource.FLOATER,
 
-      behavior: {
-        addResources: 1,
-      },
-
       metadata: {
         cardNumber: 'PfC17',
         description: 'You start with 39 M€.',
@@ -41,8 +37,8 @@ export class RobinHaulings extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: ICard) {
-    if (player.isCorporation(CardName.ROBIN_HAULINGS) && card.tags.includes(Tag.VENUS)) {
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+    if (card.tags.includes(Tag.VENUS)) {
       player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER));
     }
   }

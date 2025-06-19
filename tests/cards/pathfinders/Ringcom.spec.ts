@@ -16,13 +16,12 @@ describe('Ringcom', () => {
   beforeEach(() => {
     card = new Ringcom();
     [game, player, player2] = testGame(2);
-    player.corporations.push(card);
   });
 
   it('play', () => {
     expect(player.titanium).eq(0);
     expect(player.production.megacredits).eq(0);
-    card.play(player);
+    player.playCard(card);
     expect(player.titanium).eq(1);
     expect(player.production.megacredits).eq(3);
   });
@@ -41,6 +40,7 @@ describe('Ringcom', () => {
   });
 
   it('when you play a jovian tag', () => {
+    player.corporations.push(card);
     const a = fakeCard({name: 'A' as CardName, tags: [Tag.JOVIAN]});
     expect(player.titanium).eq(0);
     player.playCard(a);
@@ -48,6 +48,7 @@ describe('Ringcom', () => {
   });
 
   it('when opponent plays a jovian tag', () => {
+    player.corporations.push(card);
     const a = fakeCard({name: 'A' as CardName, tags: [Tag.JOVIAN]});
     expect(player.titanium).eq(0);
     player2.playCard(a);

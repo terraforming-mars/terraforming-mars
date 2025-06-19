@@ -42,13 +42,11 @@ export class TheArchaicFoundationInstitute extends CorporationCard implements IC
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: ICard): void {
-    if (player.isCorporation(this.name)) {
-      const moonTags = card.tags.filter((t) => t === Tag.MOON);
-      const count = moonTags.length;
-      if (count > 0) {
-        player.addResourceTo(this, {qty: count, log: true});
-      }
+  public onCardPlayedForCorps(player: IPlayer, card: ICard): void {
+    const moonTags = card.tags.filter((t) => t === Tag.MOON);
+    const count = moonTags.length;
+    if (count > 0) {
+      player.addResourceTo(this, {qty: count, log: true});
     }
   }
 

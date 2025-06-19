@@ -921,13 +921,10 @@ export class Player implements IPlayer {
     // trigger other corp's effects, e.g. SaturnSystems, PharmacyUnion, Splice
     for (const somePlayer of this.game.getPlayers()) {
       for (const corporation of somePlayer.corporations) {
-        if (somePlayer === this && corporation.name === playedCorporationCard.name) {
-          continue;
+        if (somePlayer === this) {
+          this.defer(corporation.onCardPlayedForCorps?.(this, playedCorporationCard));
         }
-        if (corporation.onCorpCardPlayed === undefined) {
-          continue;
-        }
-        this.defer(corporation.onCorpCardPlayed(this, playedCorporationCard, somePlayer));
+        this.defer(corporation.onCardPlayedByAnyPlayer?.(somePlayer, playedCorporationCard, this));
       }
     }
   }
@@ -936,10 +933,13 @@ export class Player implements IPlayer {
     if (card.type === CardType.PROXY) {
       return;
     }
+
+    /* A player responding to their own cards played. */
+    for (const playedCorp of this.corporations) {
+      this.defer(playedCorp.onCardPlayedForCorps?.(this, card));
+    }
     for (const playedCard of this.playedCards) {
-      /* A player responding to their own cards played. */
-      const actionFromPlayedCard = playedCard.onCardPlayed?.(this, card);
-      this.defer(actionFromPlayedCard);
+      this.defer(playedCard.onCardPlayed?.(this, card));
     }
 
     TurmoilHandler.applyOnCardPlayedEffect(this, card);
@@ -947,7 +947,7 @@ export class Player implements IPlayer {
     /* A player responding to any other player's card played, for corp effects. */
     for (const somePlayer of this.game.getPlayersInGenerationOrder()) {
       for (const corporationCard of somePlayer.corporations) {
-        const actionFromPlayedCard = corporationCard.onCardPlayed?.(this, card);
+        const actionFromPlayedCard = corporationCard.onCardPlayedByAnyPlayer?.(somePlayer, card, this);
         this.defer(actionFromPlayedCard);
       }
       for (const someCard of somePlayer.playedCards) {
@@ -1009,6 +1009,7 @@ export class Player implements IPlayer {
     this.game.log('${0} played ${1}', (b) => b.player(this).card(corporationCard));
     // Calculating this before playing the corporation card, which might change the player's hand size.
     const numberOfCardInHand = this.cardsInHand.length;
+    // TODO(kberg): Fix after 2025-06-20: Why isn't this action deferred?
     corporationCard.play(this);
     if (corporationCard.initialAction !== undefined || corporationCard.firstAction !== undefined) {
       this.pendingInitialActions.push(corporationCard);

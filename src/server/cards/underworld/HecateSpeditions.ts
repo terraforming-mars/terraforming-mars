@@ -21,10 +21,6 @@ export class HecateSpeditions extends ActiveCorporationCard {
       startingMegaCredits: 38,
       resourceType: CardResource.SUPPLY_CHAIN,
 
-      behavior: {
-        addResources: 1,
-      },
-
       firstAction: {
         colonies: {buildColony: {}},
         text: 'Place a colony',
@@ -53,16 +49,9 @@ export class HecateSpeditions extends ActiveCorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: ICard) {
-    if (!player.isCorporation(this.name)) {
-      return;
-    }
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
     const count = card.tags.filter((tag) => isPlanetaryTag(tag)).length;
     player.addResourceTo(this, {qty: count, log: true, logZero: false});
-  }
-
-  public onCorpCardPlayed(player: IPlayer, card: ICard) {
-    this.onCardPlayed(player, card);
   }
 }
 

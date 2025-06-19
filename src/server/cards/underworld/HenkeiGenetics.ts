@@ -38,10 +38,7 @@ export class HenkeiGenetics extends ActiveCorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: ICard) {
-    if (!player.isCorporation(this.name)) {
-      return;
-    }
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
     if (card.resourceType === CardResource.MICROBE && card.tags.includes(Tag.MICROBE)) {
       player.addResourceTo(card, {qty: 2, log: true});
     }

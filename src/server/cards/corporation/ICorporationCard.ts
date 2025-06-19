@@ -12,12 +12,9 @@ export interface ICorporationCard extends ICard {
   firstAction?: Behavior,
   startingMegaCredits: number;
   cardCost?: number;
-  /**
-   * Called when |playedCardOwner| playes |card|.
-   *
-   * Not called when |card| is this card.
-   */
-  onCorpCardPlayed?(thisCardOwner: IPlayer, card: ICorporationCard, playedCardOwner: IPlayer): PlayerInput | undefined | void;
+  onCardPlayedForCorps?(player: IPlayer, card: ICard): PlayerInput | undefined | void;
+  onCorpCardPlayedByAnyPlayer?: never;
+  onCardPlayed?: never;
 
   serialize?(serialized: SerializedCard): void;
   deserialize?(serialized: SerializedCard): void;

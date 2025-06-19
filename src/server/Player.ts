@@ -989,8 +989,7 @@ export class Player implements IPlayer {
     // Calculating this before playing the corporation card, which might change the player's hand size.
     const numberOfCardInHand = this.cardsInHand.length;
     ColoniesHandler.maybeActivateColonies(this.game, corporationCard);
-    // TODO(kberg): Fix after 2025-06-20: Why isn't this action deferred?
-    corporationCard.play(this);
+    this.defer(corporationCard.play(this));
     if (corporationCard.initialAction !== undefined || corporationCard.firstAction !== undefined) {
       this.pendingInitialActions.push(corporationCard);
     }

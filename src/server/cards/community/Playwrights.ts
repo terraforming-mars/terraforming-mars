@@ -106,19 +106,24 @@ export class Playwrights extends CorporationCard implements ICorporationCard {
     this.checkLoops++;
     try {
       player.game.getPlayers().forEach((p) => {
-        playedEvents.push(...p.playedCards.filter((card) => {
+        for (const card of p.playedCards.projects()) {
           // Special case Price Wars, which is not easy to work with.
           if (card.name === CardName.PRICE_WARS) {
-            return false;
+            continue;
           }
+          if (card.type !== CardType.EVENT) {
+            continue;
+          }
+
           const canAffordOptions = {
             cost: player.getCardCost(card),
             reserveUnits: MoonExpansion.adjustedReserveCosts(player, card),
           };
-          return card.type === CardType.EVENT &&
           // Can player.canPlay(card) replace this?
-          player.canAfford(canAffordOptions) && card.canPlay(player, canAffordOptions);
-        }));
+          if (player.canAfford(canAffordOptions) && card.canPlay(player, canAffordOptions)) {
+            playedEvents.push(card);
+          }
+        }
       });
     } finally {
       this.checkLoops--;

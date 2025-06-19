@@ -1,11 +1,14 @@
 import {CardName} from '../../common/cards/CardName';
-import {IProjectCard} from './IProjectCard';
-import {inplaceRemove} from '../../common/utils/utils';
-import {deserializeProjectCard, serializeProjectCard} from './cardSerialization';
-import {SerializedCard} from '../SerializedCard';
 import {ICard} from './ICard';
+import {inplaceRemove} from '../../common/utils/utils';
+import {deserializeCard, serializeCard} from './cardSerialization';
+import {SerializedCard} from '../SerializedCard';
 import {CardType} from '../../common/cards/CardType';
 import {Tag} from '../../common/cards/Tag';
+import {ICorporationCard, isICorporationCard} from './corporation/ICorporationCard';
+import {IPreludeCard} from './prelude/IPreludeCard';
+import {IProjectCard, isIProjectCard} from './IProjectCard';
+import {ICeoCard, isCeoCard} from './ceos/ICeoCard';
 
 const NO_TAGS = {
   [Tag.BUILDING]: 0,
@@ -28,7 +31,7 @@ const NO_TAGS = {
 } as const;
 
 /**
- * Represents all cards in front of a player EXCEPT Corporation Cards.
+ * Represents all cards in front of a player.
  *
  * As an implementation, it optimizes on a few common lookup mechanisms
  * so as to replace O(n) lookups with O(1) lookups like "Is this card in
@@ -41,8 +44,8 @@ const NO_TAGS = {
  * Cards are retained in insertion order.
  */
 export class PlayedCards {
-  private array: Array<IProjectCard> = [];
-  private byName: Map<CardName, IProjectCard> = new Map();
+  private array: Array<ICard> = [];
+  private byName: Map<CardName, ICard> = new Map();
   private _eventCount: number = 0;
   private _tags: Record<Tag, number> = {...NO_TAGS};
 
@@ -56,28 +59,28 @@ export class PlayedCards {
   /**
    * Get the card by the given name, or `undefined` if it is not here.
    */
-  public get(name: CardName): IProjectCard | undefined {
+  public get(name: CardName): ICard | undefined {
     return this.byName.get(name);
   }
 
   /**
    * Return the set of played cards as an array, in the order they are played.
    */
-  public asArray(): ReadonlyArray<IProjectCard> {
+  public asArray(): ReadonlyArray<ICard> {
     return this.array;
   }
 
   /**
    * Shortcut for returning the most recently played card, or `undefined` if this set is empty.
    */
-  public last(): IProjectCard | undefined {
+  public last(): ICard | undefined {
     return this.array[this.array.length - 1];
   }
 
   /**
    * Returns an iterator over the set of played cards in insertion order.
    */
-  [Symbol.iterator](): Iterator<IProjectCard> {
+  [Symbol.iterator](): Iterator<ICard> {
     return this.array[Symbol.iterator]();
   }
 
@@ -93,8 +96,24 @@ export class PlayedCards {
    * @param predicate A function that accepts up to three arguments. The filter method calls the predicate function one time for each element in the array.
    * @param thisArg An object to which the this keyword can refer in the predicate function. If thisArg is omitted, undefined is used as the this value.
    */
-  filter(predicate: (value: IProjectCard, index: number, array: ReadonlyArray<IProjectCard>) => unknown, thisArg?: any): Array<IProjectCard> {
+  filter(predicate: (value: ICard, index: number, array: ReadonlyArray<ICard>) => unknown, thisArg?: any): Array<ICard> {
     return this.array.filter(predicate, thisArg);
+  }
+
+  corporations(): ReadonlyArray<ICorporationCard> {
+    return this.filter(isICorporationCard).map((card) => <ICorporationCard> card);
+  }
+
+  preludes(): ReadonlyArray<IPreludeCard> {
+    return this.filter((card) => card.type === CardType.PRELUDE).map((card) => <IPreludeCard> card);
+  }
+
+  projects(): ReadonlyArray<IProjectCard> {
+    return this.filter(isIProjectCard).map((card) => <IProjectCard> card);
+  }
+
+  ceos(): ReadonlyArray<ICeoCard> {
+    return this.filter(isCeoCard).map((card) => <ICeoCard> card);
   }
 
   /**
@@ -105,14 +124,14 @@ export class PlayedCards {
    * @param thisArg An object to which the this keyword can refer in the predicate function.
    * If thisArg is omitted, undefined is used as the this value.
    */
-  some(predicate: (value: IProjectCard, index: number, array: Array<IProjectCard>) => unknown, thisArg?: any): boolean {
+  some(predicate: (value: ICard, index: number, array: Array<ICard>) => unknown, thisArg?: any): boolean {
     return this.array.some(predicate, thisArg);
   }
 
   /**
    * Add `cards` in order.
    */
-  public push(...cards: Array<IProjectCard>) {
+  public push(...cards: Array<ICard>) {
     for (const card of cards) {
       if (this.get(card.name)) {
         throw new Error(`${card.name} already exists`);
@@ -121,7 +140,9 @@ export class PlayedCards {
     }
   }
 
-  private pushCard(card: IProjectCard) {
+  private pushCard(card: ICard) {
+    // TODO(kberg): consider whether corporations should be put in the front
+    // of the array in the way tableau works.
     this.array.push(card);
     this.byName.set(card.name, card);
     if (card.type === CardType.EVENT) {
@@ -151,7 +172,7 @@ export class PlayedCards {
   /**
    * Remove all the cards and replace them with those supplied in `cards`
    */
-  public set(...cards: Array<IProjectCard>) {
+  public set(...cards: Array<ICard>) {
     this.byName.clear();
     this.array = [];
     this._eventCount = 0;
@@ -185,12 +206,12 @@ export class PlayedCards {
   }
 
   public serialize(): Array<SerializedCard> {
-    return this.array.map(serializeProjectCard);
+    return this.array.map(serializeCard);
   }
 
   public static deserialize(serialized: SerializedCard[]): PlayedCards {
     const playedCards = new PlayedCards();
-    const cards = serialized.map((element) => deserializeProjectCard(element));
+    const cards = serialized.map((element) => deserializeCard(element));
     for (const card of cards) {
       playedCards.push(card);
     }

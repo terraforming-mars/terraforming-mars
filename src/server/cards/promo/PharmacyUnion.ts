@@ -82,8 +82,7 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
           player.defer(() => {
             return new OrOptions(
               new SelectOption('Turn it face down to gain 3 TR and lose up to 4 M€').andThen(() => {
-                this.isDisabled = true;
-                player.increaseTerraformRating(3);
+                this.disable(player);
                 const megaCreditsLost = Math.min(player.megaCredits, 4);
                 player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
                 game.log('${0} turned ${1} face down to gain 3 TR and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
@@ -145,8 +144,7 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
 
         return new OrOptions(
           new SelectOption('Turn this card face down and gain 3 TR', 'Gain TR').andThen(() => {
-            this.isDisabled = true;
-            player.increaseTerraformRating(3);
+            this.disable(player);
             game.log('${0} turned ${1} face down to gain 3 TR', (b) => b.player(player).card(this));
             return undefined;
           }),
@@ -156,6 +154,12 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
     }
   }
 
+  private disable(player: IPlayer) {
+    player.playedCards.retagCard(this, () => {
+      this.isDisabled = true;
+    });
+    player.increaseTerraformRating(3);
+  }
   public serialize(serialized: SerializedCard) {
     serialized.isDisabled = this.isDisabled;
   }

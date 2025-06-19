@@ -97,9 +97,9 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
         canUseSteel: canPayWith.steel,
         canUseTitanium: canPayWith.titanium,
         canUseSeeds: canPayWith.seeds,
-        canUseAuroraiData: player.isCorporation(CardName.AURORAI),
-        canUseSpireScience: player.isCorporation(CardName.SPIRE),
-        canUseAsteroids: canPayWith.kuiperAsteroids && player.isCorporation(CardName.KUIPER_COOPERATIVE),
+        canUseAuroraiData: player.cardIsInEffect(CardName.AURORAI),
+        canUseSpireScience: player.cardIsInEffect(CardName.SPIRE),
+        canUseAsteroids: canPayWith.kuiperAsteroids && player.cardIsInEffect(CardName.KUIPER_COOPERATIVE),
         title: message('Select how to pay for the ${0} standard project', (b) => b.cardName(this.name)),
       })).andThen(() => {
       this.projectPlayed(player);

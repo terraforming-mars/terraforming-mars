@@ -90,7 +90,7 @@ export class MarsBoard extends Board {
     }
     // Kingdom of Tauraro can place cities next to cities, but also must place them
     // next to tiles they own, if possible.
-    if (player.isCorporation(CardName.KINGDOM_OF_TAURARO)) {
+    if (player.cardIsInEffect(CardName.KINGDOM_OF_TAURARO)) {
       const spacesNextToMySpaces = spacesOnLand.filter(
         (space) => this.getAdjacentSpaces(space).some(
           (adj) => adj.tile !== undefined && adj.player === player));

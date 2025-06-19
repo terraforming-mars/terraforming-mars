@@ -43,7 +43,7 @@ export class Odyssey extends CorporationCard implements ICorporationCard, IActio
     this.checkLoops++;
     try {
       const array = [];
-      for (const card of player.playedCards) {
+      for (const card of player.playedCards.projects()) {
         // Special case Price Wars, which is not easy to work with.
         if (card.name === CardName.PRICE_WARS) {
           continue;

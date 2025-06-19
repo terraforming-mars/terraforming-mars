@@ -227,6 +227,6 @@ describe('DoubleDown', () => {
     selectCorp.cb([astroDrill]);
     runAllActions(game);
     expect(astroDrill.resourceCount).eq(3);
-    expect(player.tableau.map(toName)).deep.eq([CardName.HELION, CardName.ASTRODRILL, CardName.MERGER, CardName.DOUBLE_DOWN]);
+    expect(player.tableau.map(toName)).to.have.members([CardName.HELION, CardName.ASTRODRILL, CardName.MERGER, CardName.DOUBLE_DOWN]);
   });
 });

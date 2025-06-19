@@ -75,7 +75,7 @@ describe('ProjectWorkshop', () => {
     expect(player.getTitaniumValue()).to.eq(4);
 
     card.action(player).cb(undefined);
-    expect(player.playedCards).has.lengthOf(0);
+    expect(player.playedCards.asArray()).deep.eq([card]);
     expect(game.projectDeck.discardPile.includes(advancedAlloys)).is.true;
     expect(player.cardsInHand).has.lengthOf(2);
     expect(player.getSteelValue()).to.eq(2);
@@ -88,7 +88,7 @@ describe('ProjectWorkshop', () => {
 
     card.action(player).cb(undefined);
 
-    expect(player.playedCards).has.lengthOf(0);
+    expect(player.playedCards.asArray()).deep.eq([card]);
     expect(game.projectDeck.discardPile.includes(birds)).is.true;
     expect(birds.resourceCount).eq(0);
   });
@@ -164,7 +164,7 @@ describe('ProjectWorkshop', () => {
     const selectOption = cast(card.action(player), SelectOption);
 
     expect(selectOption.cb(undefined)).is.undefined;
-    expect(player.playedCards.length).eq(0);
+    expect(player.playedCards.asArray()).deep.eq([card]);
 
     expect(player.getTerraformRating()).to.eq(originalTR - 5);
     expect(player.cardsInHand).has.lengthOf(2);
@@ -215,7 +215,7 @@ describe('ProjectWorkshop', () => {
     expect(orOptions.options[1].cb()).is.undefined;
     runAllActions(game);
 
-    expect(player.playedCards.asArray()).has.members([smallAnimals, extremophiles]);
+    expect(player.playedCards.asArray()).has.members([card, smallAnimals, extremophiles]);
     expect(game.projectDeck.discardPile).contains(birds);
     expect(player.getTerraformRating()).to.eq(originalTR + 1);
     expect(player.megaCredits).eq(2); // Spent 3MC for the reds tax.

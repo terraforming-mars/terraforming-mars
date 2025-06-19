@@ -29,7 +29,7 @@ export interface SerializedPlayer extends DeprecatedFields{
   colonyTradeOffset: number;
   colonyVictoryPoints: number;
   color: Color;
-  corporations: Array<SerializedCard>;
+  corporations?: Array<SerializedCard>;
   dealtCorporationCards: Array<CardName>;
   dealtCeoCards: Array<CardName>;
   dealtPreludeCards: Array<CardName>;

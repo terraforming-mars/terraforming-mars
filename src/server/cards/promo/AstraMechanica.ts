@@ -34,7 +34,7 @@ export class AstraMechanica extends Card implements IProjectCard {
   ];
 
   private getCards(player: IPlayer): ReadonlyArray<IProjectCard> {
-    return player.playedCards.filter((card) => {
+    return player.playedCards.projects().filter((card) => {
       if (card.type !== CardType.EVENT) {
         return false;
       }

@@ -384,7 +384,6 @@
   "${0} gained ${1} M€ from the ${2} corp effect": "${0} отримав ${1} M€ з ефекту корпорації ${2}",
   "${0} gained 1 M€ production from ${1} for ${2}": "${0} отримав 1 одиницю виробництва MC від ${1} за ${2}",
   "${0} gained 2 ${1} from ${2}": "${0} отримав 2 ${1} від ${2}",
-  "${0} gained 4 M€ for playing a card with no tags.": "${0} отримав 4 M€ за гру картою без символів.",
   "${0} gained 4 M€ for playing ${1}, which has no tags.": "${0} отримав 4 M€ за гру ${1}, яка не має символів.",
   "${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.": "${0} отримав 1 M€ за гру ${1}, яка має рівно 1 символ.",
 

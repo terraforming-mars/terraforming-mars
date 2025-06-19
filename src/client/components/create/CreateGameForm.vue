@@ -40,6 +40,12 @@
                                 <span v-i18n>Prelude</span>
                             </label>
 
+                            <input type="checkbox" name="prelude2" id="prelude2-checkbox" v-model="expansions.prelude2">
+                            <label for="prelude2-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-prelude2"></div>
+                                <span v-i18n>Prelude 2</span>
+                            </label>
+
                             <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="expansions.venus">
                             <label for="venusNext-checkbox" class="expansion-button">
                             <div class="create-game-expansion-icon expansion-icon-venus"></div>
@@ -56,12 +62,6 @@
                             <label for="turmoil-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-turmoil"></div>
                                 <span v-i18n>Turmoil</span>
-                            </label>
-
-                            <input type="checkbox" name="prelude2" id="prelude2-checkbox" v-model="expansions.prelude2">
-                            <label for="prelude2-checkbox" class="expansion-button">
-                                <div class="create-game-expansion-icon expansion-icon-prelude2"></div>
-                                <span v-i18n>Prelude 2</span>
                             </label>
 
                             <input type="checkbox" name="promo" id="promo-checkbox" v-model="expansions.promo">

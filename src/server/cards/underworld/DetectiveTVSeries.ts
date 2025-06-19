@@ -19,7 +19,7 @@ export class DetectiveTVSeries extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U91',
         renderData: CardRenderer.builder((b) => {
-          b.effect('Whenever ANY player plays a crime tag, you gain 2 MC', (ab) => {
+          b.effect('Whenever ANY player plays a crime tag, you gain 2 MC.', (ab) => {
             ab.tag(Tag.CRIME, {all}).startEffect.megacredits(2);
           });
         }),

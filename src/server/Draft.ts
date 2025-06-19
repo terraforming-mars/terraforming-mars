@@ -168,7 +168,7 @@ class StandardDraft extends Draft {
     if (LunaProjectOffice.isActive(player)) {
       return 5;
     }
-    if (player.isCorporation(CardName.MARS_MATHS)) {
+    if (player.cardIsInEffect(CardName.MARS_MATHS)) {
       return 5;
     }
 
@@ -180,7 +180,7 @@ class StandardDraft extends Draft {
       if (LunaProjectOffice.isActive(player)) {
         return 2;
       }
-      if (player.isCorporation(CardName.MARS_MATHS)) {
+      if (player.cardIsInEffect(CardName.MARS_MATHS)) {
         return 2;
       }
     }

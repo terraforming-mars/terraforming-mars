@@ -110,10 +110,10 @@ describe('Aridor', () => {
 
     const serializedPlayer = player.serialize();
 
-    expect(serializedPlayer.corporations?.[0].allTags).deep.eq([Tag.ANIMAL, Tag.SCIENCE, Tag.CITY, Tag.BUILDING]);
+    expect(serializedPlayer.playedCards?.[0].allTags).deep.eq([Tag.ANIMAL, Tag.SCIENCE, Tag.CITY, Tag.BUILDING]);
 
     const reserializedPlayer = Player.deserialize(serializedPlayer);
-    const reserializedAridor = cast(reserializedPlayer.corporations?.[0], Aridor);
+    const reserializedAridor = cast(reserializedPlayer.playedCards.corporations()[0], Aridor);
 
     expect(Array.from(reserializedAridor.allTags)).deep.eq([Tag.ANIMAL, Tag.SCIENCE, Tag.CITY, Tag.BUILDING]);
   });

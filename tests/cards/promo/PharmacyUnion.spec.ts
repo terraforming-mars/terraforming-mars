@@ -383,7 +383,7 @@ describe('PharmacyUnion', () => {
     const pharmacyUnion = new PharmacyUnion();
     const [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
     pharmacyUnion.resourceCount = 2;
-    player.corporations = [pharmacyUnion];
+    player.playedCards.push(pharmacyUnion);
 
     player.megaCredits = 12;
 
@@ -424,7 +424,7 @@ describe('PharmacyUnion', () => {
     const leavitt = new Leavitt();
     const [game, player/* , player2 */] = testGame(2, {coloniesExtension: true, turmoilExtension: true});
     pharmacyUnion.resourceCount = 2;
-    player.corporations = [pharmacyUnion];
+    player.playedCards.push(pharmacyUnion);
 
     game.colonies.push(leavitt);
 

@@ -119,7 +119,7 @@ export class Colonies {
           return false;
         }
         if (colony.name === ColonyName.LEAVITT) {
-          const pharmacyUnion = this.player.getCorporation(CardName.PHARMACY_UNION);
+          const pharmacyUnion = this.player.getPlayedCard(CardName.PHARMACY_UNION);
           if ((pharmacyUnion?.resourceCount ?? 0) > 0 && !this.player.canAfford({cost: cost, tr: {tr: 1}})) {
             return false;
           }
@@ -219,7 +219,7 @@ export class TradeWithMegacredits implements IColonyTrader {
 
   constructor(private player: IPlayer) {
     this.tradeCost = MC_TRADE_COST- player.colonies.tradeDiscount;
-    const adhai = player.getCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS);
+    const adhai = player.getPlayedCard(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS);
     if (adhai !== undefined) {
       const adhaiDiscount = Math.floor(adhai.resourceCount / 2);
       this.tradeCost = Math.max(0, this.tradeCost - adhaiDiscount);

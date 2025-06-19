@@ -37,14 +37,14 @@ describe('Odyssey', () => {
   beforeEach(() => {
     odyssey = new Odyssey();
     [game, player] = testGame(1);
-    player.corporations.push(odyssey);
+    player.playedCards.push(odyssey);
   });
 
   it('events count for tags', () => {
     const event = fakeCard({type: CardType.EVENT, tags: [Tag.JOVIAN]});
     player.playedCards.push(event);
     expect(player.tags.count(Tag.JOVIAN)).eq(1);
-    player.corporations = [];
+    player.playedCards.remove(odyssey);
     expect(player.tags.count(Tag.JOVIAN)).eq(0);
   });
 
@@ -100,7 +100,7 @@ describe('Odyssey', () => {
     selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
     expect(selectProjectCardToPlay.cards).has.members([importOfAdvancedGHG, inventionContest]);
 
-    expect(player.playedCards.asArray()).has.members([importOfAdvancedGHG, inventionContest]);
+    expect(player.playedCards.asArray()).has.members([odyssey, importOfAdvancedGHG, inventionContest]);
     expect(player.production.heat).eq(0);
 
     selectProjectCardToPlay.payAndPlay(importOfAdvancedGHG, {...Payment.EMPTY, megaCredits: importOfAdvancedGHG.cost});
@@ -108,7 +108,7 @@ describe('Odyssey', () => {
 
     expect(player.production.heat).eq(2);
     expect(game.projectDeck.discardPile.pop()).eq(importOfAdvancedGHG);
-    expect(player.playedCards.asArray()).has.members([inventionContest]);
+    expect(player.playedCards.asArray()).has.members([odyssey, inventionContest]);
     expect(player.megaCredits).eq(0);
   });
 
@@ -129,7 +129,7 @@ describe('Odyssey', () => {
     expect(player.production.heat).eq(2);
     expect(player.megaCredits).eq(44); // 50 - 9 + 3 = 44
     expect(game.projectDeck.discardPile.pop()).eq(importOfAdvancedGHG);
-    expect(player.playedCards.asArray()).has.members([mediaGroup]);
+    expect(player.playedCards.asArray()).has.members([odyssey, mediaGroup]);
   });
 
   it('Acts correctly for event cards that give one time discount', () => {

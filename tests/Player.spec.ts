@@ -40,7 +40,8 @@ import {EnergyTapping} from '../src/server/cards/base/EnergyTapping';
 describe('Player', () => {
   it('should initialize with right defaults', () => {
     const player = new Player('name', 'blue', false, 0, 'p-blue');
-    expect(player.corporations).is.empty;
+    expect(player.playedCards.corporations()).is.empty;
+    expect(player.playedCards.length).eq(0);
   });
 
   it('Should throw error if nothing to process', () => {
@@ -113,7 +114,7 @@ describe('Player', () => {
     const card = new IoMiningIndustries();
     const corporationCard = new SaturnSystems();
     expect(player1.production.megacredits).to.eq(0);
-    player1.corporations = [corporationCard];
+    player1.playedCards.push(corporationCard);
     player2.playCard(card, undefined);
     expect(player1.production.megacredits).to.eq(1);
   });

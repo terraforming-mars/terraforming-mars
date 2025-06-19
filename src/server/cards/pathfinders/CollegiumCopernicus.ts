@@ -47,7 +47,7 @@ export class CollegiumCopernicus extends CorporationCard implements ICorporation
   }
 
   public onCardPlayedForCorps(player: IPlayer, card: ICard): void {
-    if (player.tags.cardHasTag(card, Tag.SCIENCE) && player.isCorporation(this.name)) {
+    if (player.tags.cardHasTag(card, Tag.SCIENCE) && player.cardIsInEffect(this.name)) {
       player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 1}));
     }
   }
@@ -69,17 +69,17 @@ export class CollegiumCopernicus extends CorporationCard implements ICorporation
   }
 }
 
-export function tradeWithColony(card: ICorporationCard, player: IPlayer, colony: IColony) {
+export function tradeWithColony(card: ICard, player: IPlayer, colony: IColony) {
   const cost = tradeCost(player);
   card.resourceCount -= cost;
   player.game.log('${0} spent ${1} data from ${2} to trade with ${3}', (b) => b.player(player).number(cost).card(card).colony(colony));
   colony.trade(player);
 }
 export class TradeWithCollegiumCopernicus implements IColonyTrader {
-  private collegiumCopernicus: ICorporationCard | undefined;
+  private collegiumCopernicus: ICard | undefined;
 
   constructor(private player: IPlayer) {
-    this.collegiumCopernicus = player.getCorporation(CardName.COLLEGIUM_COPERNICUS);
+    this.collegiumCopernicus = player.getPlayedCard(CardName.COLLEGIUM_COPERNICUS);
   }
 
   public canUse() {

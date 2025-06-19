@@ -5,6 +5,7 @@ import {Tag} from '../src/common/cards/Tag';
 import {InputResponse} from '../src/common/inputs/InputResponse';
 import {Tags} from '../src/server/player/Tags';
 import {PlayerId} from '../src/common/Types';
+import {ICorporationCard} from '../src/server/cards/corporation/ICorporationCard';
 
 type Options = {name: string, beginner?: boolean, idSuffix?: string};
 
@@ -12,6 +13,25 @@ class TestPlayerFactory {
   constructor(private color: Color) {}
   newPlayer(opts?: Partial<Options>): TestPlayer {
     return new TestPlayer(this.color, opts);
+  }
+}
+
+class PlayedCorps {
+  constructor(private player: TestPlayer) {
+  }
+
+  public get length(): number {
+    return this.player.playedCards.corporations().length;
+  }
+
+  public push(...cards: Array<ICorporationCard>) {
+    this.player.playedCards.push(...cards);
+  }
+  public clear() {
+    const corps = this.player.playedCards.corporations();
+    for (const corp of corps) {
+      this.player.playedCards.remove(corp);
+    }
   }
 }
 
@@ -56,6 +76,9 @@ export class TestPlayer extends Player {
       id);
     this.tags = new TestTags(this);
   }
+
+  /** @deprecated use playedCards */
+  public corporations = new PlayedCorps(this);
 
   public tagsForTest: Partial<Record<Tag, number>> | undefined = undefined;
 

@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {CardType} from '../../../src/common/cards/CardType';
 import {IPreludeCard} from '../../../src/server/cards/prelude/IPreludeCard';
 import {Karen} from '../../../src/server/cards/ceos/Karen';
 import {GalileanMining} from '../../../src/server/cards/prelude/GalileanMining';
@@ -32,7 +31,7 @@ describe('Karen', () => {
     expect(selectCard.cards).has.length(1);
 
     selectCard.cb([selectCard.cards[0]]);
-    expect(player.playedCards.filter((card) => card.type === CardType.PRELUDE)).has.length(1);
+    expect(player.playedCards.preludes()).has.length(1);
   });
 
   it('Takes action in Generation 4', () => {
@@ -45,7 +44,7 @@ describe('Karen', () => {
     expect(selectCard.cards).has.length(4);
 
     selectCard.cb([selectCard.cards[0]]);
-    expect(player.playedCards.filter((card) => card.type === CardType.PRELUDE)).has.length(1);
+    expect(player.playedCards.preludes()).has.length(1);
   });
 
   it('Unplayable prelude', () => {

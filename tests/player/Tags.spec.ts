@@ -3,7 +3,6 @@ import {Tag} from '../../src/common/cards/Tag';
 import {IPlayer} from '../../src/server/IPlayer';
 import {TestPlayer} from '../TestPlayer';
 import {Tags} from '../../src/server/player/Tags';
-import {isICorporationCard} from '../../src/server/cards/corporation/ICorporationCard';
 import {fakeCard, testGame} from '../TestingUtils';
 import {CardType} from '../../src/common/cards/CardType';
 import {CardName} from '../../src/common/cards/CardName';
@@ -32,11 +31,7 @@ describe('Tags', () => {
 
   function playFakeCorporation(...tags: Array<Tag>) {
     const card = fakeCard({type: CardType.CORPORATION, tags: tags});
-    if (isICorporationCard(card)) {
-      player.corporations.push(card);
-    } else {
-      throw new Error('Internal error while making a fake corporation card)');
-    }
+    player.playedCards.push(card);
   }
 
   function playFakeEvent(...tags: Array<Tag>) {
@@ -80,14 +75,15 @@ describe('Tags', () => {
     const [_, player] = testGame(1);
     const event = fakeCard({type: CardType.EVENT, tags: [Tag.JOVIAN]});
     const nonEvent = fakeCard({tags: [Tag.JOVIAN, Tag.BUILDING]});
-    player.corporations.push(new Odyssey());
+    const odyssey = new Odyssey();
+    player.playedCards.push(odyssey);
     player.playedCards.push(event);
     player.playedCards.push(nonEvent);
 
     expect(player.tags.count(Tag.JOVIAN)).eq(2);
     expect(player.tags.distinctCount('default')).eq(3);
 
-    player.corporations = [];
+    player.playedCards.remove(odyssey);
 
     expect(player.tags.count(Tag.JOVIAN)).eq(1);
     expect(player.tags.distinctCount('default')).eq(2);

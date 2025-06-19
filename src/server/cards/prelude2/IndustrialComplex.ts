@@ -26,7 +26,7 @@ export class IndustrialComplex extends PreludeCard {
 
   public override bespokeCanPlay(player: IPlayer) {
     let megaCredits = -this.startingMegaCredits;
-    if (player.isCorporation(CardName.MANUTECH)) {
+    if (player.cardIsInEffect(CardName.MANUTECH)) {
       if (player.production.megacredits === 0) {
         megaCredits--;
       }

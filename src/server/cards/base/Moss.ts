@@ -31,7 +31,7 @@ export class Moss extends Card implements IProjectCard {
 
   public override bespokeCanPlay(player: IPlayer): boolean {
     const hasViralEnhancers = player.getPlayedCard(CardName.VIRAL_ENHANCERS);
-    const hasEnoughPlants = player.plants >= 1 || hasViralEnhancers !== undefined || player.isCorporation(CardName.MANUTECH);
+    const hasEnoughPlants = player.plants >= 1 || hasViralEnhancers !== undefined || player.cardIsInEffect(CardName.MANUTECH);
 
     return hasEnoughPlants;
   }

@@ -13,7 +13,6 @@ export interface ICorporationCard extends ICard {
   startingMegaCredits: number;
   cardCost?: number;
   onCardPlayedForCorps?(player: IPlayer, card: ICard): PlayerInput | undefined | void;
-  onCorpCardPlayedByAnyPlayer?: never;
   onCardPlayed?: never;
 
   serialize?(serialized: SerializedCard): void;

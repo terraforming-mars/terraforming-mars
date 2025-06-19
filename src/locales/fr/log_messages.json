@@ -390,7 +390,6 @@
     "${0} gained 1 M€ production from ${1} for ${2}": "${0} gained 1 M€ production from ${1} for ${2}",
     "${0} gained ${1} from ${2}": "${0} gained ${1} from ${2}",
     "${0} gained 2 ${1} from ${2}": "${0} gained 2 ${1} from ${2}",
-    "${0} gained 4 M€ for playing a card with no tags.": "${0} gained 4 M€ for playing a card with no tags.",
     "${0} gained 4 M€ for playing ${1}, which has no tags.": "${0} gained 4 M€ for playing ${1}, which has no tags.",
     "${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.": "${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.",
     "${0} gained ${1} TR": "${0} a gagné ${1} NT",

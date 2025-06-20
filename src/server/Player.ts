@@ -53,7 +53,6 @@ import {Tags} from './player/Tags';
 import {Colonies} from './player/Colonies';
 import {Production} from './player/Production';
 import {Stock} from './player/Stock';
-import {Merger} from './cards/promo/Merger';
 import {getBehaviorExecutor} from './behavior/BehaviorExecutor';
 import {CeoExtension} from './CeoExtension';
 import {ICeoCard, isCeoCard} from './cards/ceos/ICeoCard';
@@ -991,32 +990,16 @@ export class Player implements IPlayer {
       });
   }
 
-  public playAdditionalCorporationCard(corporationCard: ICorporationCard): void {
-    if (this.corporations.length === 0) {
-      throw new Error('Cannot add additional corporation when it does not have a starting corporation.');
-    }
-    return this._playCorporationCard(corporationCard, true);
-  }
-
   public playCorporationCard(corporationCard: ICorporationCard): void {
-    if (this.corporations.length > 0) {
-      throw new Error('Cannot add additional corporation without specifying it explicitly.');
-    }
-    return this._playCorporationCard(corporationCard, false);
-  }
+    const additionalCorp = this.corporations.length > 0;
 
-  private _playCorporationCard(corporationCard: ICorporationCard, additionalCorp = false): void {
     this.corporations.push(corporationCard);
 
-    // There is a simpler way to deal with this block, but I'd rather not deal with the fallout of getting it wrong.
-    if (additionalCorp) {
-      this.megaCredits += corporationCard.startingMegaCredits;
-      this.cardCost = Merger.setCardCost(this);
-    } else {
-      this.megaCredits = corporationCard.startingMegaCredits;
-      if (corporationCard.cardCost !== undefined) {
-        this.cardCost = corporationCard.cardCost;
-      }
+    // Update starting MC
+    this.megaCredits += corporationCard.startingMegaCredits;
+    // Update card cost.
+    if (corporationCard.cardCost !== undefined) {
+      this.cardCost += corporationCard.cardCost - constants.CARD_COST;
     }
 
     if (additionalCorp === false && corporationCard.name !== CardName.BEGINNER_CORPORATION) {

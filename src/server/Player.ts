@@ -1876,8 +1876,8 @@ export class Player implements IPlayer {
     // Rebuild corporation cards
     // TODO(kberg): Remove by 2025-10-01
     if (d.corporations) {
-      const cards = d.corporations.map((element) => deserializeCorporationCard(element));
-      for (const card of cards) {
+      for (const entry of d.corporations) {
+        const card = deserializeCorporationCard(entry);
         player.playedCards.push(card);
       }
     }
@@ -1891,7 +1891,7 @@ export class Player implements IPlayer {
     // I don't like "as IPreludeCard" but this is pretty safe.
     player.preludeCardsInHand = cardsFromJSON(d.preludeCardsInHand) as Array<IPreludeCard>;
     player.ceoCardsInHand = ceosFromJSON(d.ceoCardsInHand);
-    player.playedCards = PlayedCards.deserialize(d.playedCards);
+    player.playedCards.deserialize(d.playedCards);
     player.draftedCards = cardsFromJSON(d.draftedCards);
     player.autopass = d.autoPass ?? false;
     player.preservationProgram = d.preservationProgram ?? false;

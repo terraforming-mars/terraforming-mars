@@ -209,12 +209,10 @@ export class PlayedCards {
     return this.array.map(serializeCard);
   }
 
-  public static deserialize(serialized: SerializedCard[]): PlayedCards {
-    const playedCards = new PlayedCards();
-    const cards = serialized.map((element) => deserializeCard(element));
-    for (const card of cards) {
-      playedCards.push(card);
+  public deserialize(serialized: SerializedCard[]) {
+    for (const entry of serialized) {
+      const card = deserializeCard(entry);
+      this.push(card);
     }
-    return playedCards;
   }
 }

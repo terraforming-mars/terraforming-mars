@@ -1765,13 +1765,15 @@ export class Game implements IGame, Logger {
         switch (game.initialDraftIteration) {
         case 1:
           newInitialDraft(game).restoreDraft();
-          case 2:
-            newInitialDraft(game).restoreDraft();
-          case 3:
-            newPreludeDraft(game).restoreDraft();
-          case 4:
-            newCEOsDraft(game).restoreDraft();
-
+          break;
+        case 2:
+          newInitialDraft(game).restoreDraft();
+          break;
+        case 3:
+          newPreludeDraft(game).restoreDraft();
+          break;
+        case 4:
+          newCEOsDraft(game).restoreDraft();
         }
       } else {
         game.gotoInitialResearchPhase();

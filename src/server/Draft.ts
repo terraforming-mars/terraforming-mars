@@ -266,7 +266,7 @@ class PreludeDraft extends Draft {
     }
     if (this.game.gameOptions.ceoExtension && this.game.gameOptions.ceosDraftVariant) {
       this.game.draftRound = 1;
-      newCEOsDraft(this.game).startDraft();   
+      newCEOsDraft(this.game).startDraft();
     } else {
       this.game.gotoInitialResearchPhase();
     }

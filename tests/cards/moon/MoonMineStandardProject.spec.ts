@@ -8,7 +8,6 @@ import {TestPlayer} from '../../TestPlayer';
 import {MoonMineStandardProject} from '../../../src/server/cards/moon/MoonMineStandardProject';
 import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectPaymentDeferred';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
-import {Payment} from '../../../src/common/inputs/Payment';
 import {assertPlaceTile} from '../../assertions';
 import {TileType} from '../../../src/common/TileType';
 
@@ -55,16 +54,15 @@ describe('MoonMineStandardProject', () => {
     player.titanium = 3;
     expect(player.getTerraformRating()).eq(14);
     expect(player.production.steel).eq(0);
+    player.megaCredits = 20;
 
-    card.action(player);
-    const payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
-    payAction.cb(Payment.EMPTY);
+    cast(card.action(player), undefined);
+    runAllActions(game);
 
     expect(player.titanium).eq(2);
     expect(player.production.steel).eq(1);
     expect(moonData.miningRate).eq(0);
 
-    runAllActions(game);
     assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_MINE);
 
     expect(moonData.miningRate).eq(1);

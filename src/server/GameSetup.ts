@@ -62,7 +62,16 @@ export class GameSetup {
 
     function placeCityAndForest(game: IGame, direction: 'top' | 'bottom') {
       const board = game.board;
-      const citySpace = game.getSpaceByOffset(direction, TileType.CITY);
+
+      const cost = game.discardForCost(1, TileType.CITY);
+
+      const distance = Math.max(cost - 1, 0); // Some cards cost zero.
+      const citySpace = board.getNthAvailableLandSpace(distance, direction,
+        (space) => {
+          const adjacentSpaces = board.getAdjacentSpaces(space);
+          return adjacentSpaces.every((sp) => sp.tile?.tileType !== TileType.CITY) && // no cities nearby
+              adjacentSpaces.some((sp) => board.canPlaceTile(sp)); // can place forest nearby
+        });
       game.simpleAddTile(neutral, citySpace, {tileType: TileType.CITY});
       if (game.gameOptions.underworldExpansion === true) {
         UnderworldExpansion.identify(game, citySpace, undefined);

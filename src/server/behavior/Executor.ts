@@ -304,7 +304,6 @@ export class Executor implements BehaviorExecutor {
             });
         });
 
-      // TODO(kberg): move this behavior to OrOptions?
       if (options.length === 1 && behavior.or.autoSelect === true) {
         options[0].cb(undefined);
       } else {

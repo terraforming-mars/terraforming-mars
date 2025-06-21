@@ -1,7 +1,7 @@
 {
   "Adhai High Orbit Constructions": "Adhai High Orbit Byggfirma",
   "Effect: Whenever you play a card with a space tag BUT NO PLANETARY TAG (including this) add 1 orbital on this card.": "Effekt: Når du spiller et kort med et rom-symbol, MEN UTEN ET JORD-SYMBOL (inkludert dette), legg til 1 orbital på dette kortet.",
-  "Effect: For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1M€ less.": "Effekt: Kort med et rom-symbol og ingen planetsymboler, STANDARDPROSJEKTET 'Bygg koloni' og å handle med en koloni koster 1 M€ mindre for hver 2. orbital på dette kortet",
+  "Effect: For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1 M€ less.": "Effekt: Kort med et rom-symbol og ingen planetsymboler, STANDARDPROSJEKTET 'Bygg koloni' og å handle med en koloni koster 1 M€ mindre for hver 2. orbital på dette kortet",
   "You start with 43 M€.": "Du starter med 43 M€.",
 
   "Ambient": "Ambient",
@@ -34,7 +34,7 @@
   "Mars Direct": "Mars Direkte",
   "Effect: When you play a Mars tag, you pay 1 M€ less for each Mars tag you have.": "Effekt: Når du spiller et Mars-symbol, betaler du 1 M€ mindre for hvert Mars-symbol du har.",
   "You start with 52 M€.": "Du starter med 52 M€.",
-  
+
   "Mars Math": "Mars Matematikk",
   "Effect: At the beginning of the Research phase, you draw 5 cards to choose from, but do not buy additional cards.": "Effekt: Ved begynnelsen av Forskningsfasen trekker du 5 kort å velge mellom, men kjøper ikke ekstra kort.",
   "Action: Take another two actions this turn.": "Handling: Ta to ekstra handlinger denne runden.",
@@ -49,7 +49,7 @@
   "Action: Spend 2 agenda resources to place 1 delegate in any party.": "Handling: Bruk 2 agendaer for å plassere 1 delegat i et valgfritt parti.",
   "Action: Spend 5 agenda resources to place a city tile on Mars.": "Handling: Bruk 5 agendaer for å plassere en by-brikke på Mars.",
   "You start with 44 M€ and 1 agenda resource to this card.": "Du starter med 44 M€ og 1 agenda-ressurs på dette kortet.",
-  
+
   "GAGARIN MOBILE BASE": "Gagarin Mobil Base",
   "move": "flytt",
   "Action: Move the Base to ANY nearest empty area where it has not yet been. Collect the bonus.": "Handling: Flytt basen til et valgfritt nærmeste tomt område der den ikke har vært. Motta plasseringsbonusen (dersom feltet har en plasseringsbonus).",
@@ -68,7 +68,7 @@
   "Effect: Whenever you play a card with a Venus tag add 1 floater to ANY card.": "Effekt: Når du spiller et kort med et Venus-symbol, legg til 1 svever på et valgfritt kort.",
   "Action: Remove 3 floaters from this card to raise Venus 1 step or raise oxygen 1 step": "Handling: Fjern 3 svevere fra dette kortet for å øke Venus-skalaen med 1 eller oksygen-skalaen med 1.",
   "You start with 39 M€.": "Du starter med 39 M€.",
-  
+
   "Solbank": "Solbanken",
   "Effect: Whenever you spend M€ (or steel or titanium) add 1 data to this card.": "Effekt: Når du bruker M€, stål eller titan, legg til 1 data på dette kortet.",
   "Effect: During the production phase convert each data from this card into 1M€ each.": "Effekt: Under produksjonsfasen, konverter hver data på dette kortet til 1M€.",

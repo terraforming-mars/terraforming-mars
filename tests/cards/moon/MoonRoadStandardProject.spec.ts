@@ -8,7 +8,6 @@ import {TestPlayer} from '../../TestPlayer';
 import {MoonRoadStandardProject} from '../../../src/server/cards/moon/MoonRoadStandardProject';
 import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectPaymentDeferred';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
-import {Payment} from '../../../src/common/inputs/Payment';
 import {assertPlaceTile} from '../../assertions';
 import {TileType} from '../../../src/common/TileType';
 
@@ -54,15 +53,14 @@ describe('MoonRoadStandardProject', () => {
   it('act', () => {
     player.steel = 3;
     expect(player.getTerraformRating()).eq(14);
+    player.megaCredits = 18;
 
-    card.action(player);
-    const payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
-    payAction.cb(Payment.EMPTY);
+    cast(card.action(player), undefined);
+    runAllActions(game);
 
     expect(player.steel).eq(2);
     expect(moonData.logisticRate).eq(0);
 
-    runAllActions(game);
     assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
 
     expect(moonData.logisticRate).eq(1);

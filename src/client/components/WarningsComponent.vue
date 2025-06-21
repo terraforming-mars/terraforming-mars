@@ -32,6 +32,7 @@ const descriptions: Record<Warning, string> = {
   'noEffect': 'This action will have no effect.',
   'selfTarget': 'Note: This action will target you.',
   'pharmacyUnion': 'Note: playing a card with a microbe tag will cause you to lose 4 M€ (or as much as possible).',
+  'kaguyaTech': 'Warning: Your only greeneries are special tiles.',
 };
 
 export default Vue.extend({

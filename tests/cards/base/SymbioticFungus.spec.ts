@@ -8,41 +8,43 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('SymbioticFungus', function() {
+describe('SymbioticFungus', () => {
   let card: SymbioticFungus;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SymbioticFungus();
     [game, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     setTemperature(game, -14);
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Can act without targets', function() {
+  it('Can act without targets', () => {
     expect(card.canAct(player)).is.true;
   });
 
-  it('Should act - single target', function() {
-    player.playedCards.push(new Ants());
+  it('Should act - single target', () => {
+    const ants = new Ants();
+    player.playedCards.push(ants);
     card.action(player);
     runAllActions(game);
-    expect(player.playedCards[0].resourceCount).to.eq(1);
+    expect(ants.resourceCount).to.eq(1);
   });
 
-  it('Should act - multiple targets', function() {
-    player.playedCards.push(new Ants(), new Decomposers());
+  it('Should act - multiple targets', () => {
+    const ants = new Ants();
+    player.playedCards.push(ants, new Decomposers());
     const selectCard = cast(churn(card.action(player), player), SelectCard);
 
-    selectCard.cb([player.playedCards[0]]);
-    expect(player.playedCards[0].resourceCount).to.eq(1);
+    selectCard.cb([ants]);
+    expect(ants.resourceCount).to.eq(1);
   });
 });

@@ -10,6 +10,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
 import {message} from '../../logs/MessageBuilder';
+import {ICard} from '../ICard';
 
 export class ViralEnhancers extends Card implements IProjectCard {
   constructor() {
@@ -31,7 +32,7 @@ export class ViralEnhancers extends Card implements IProjectCard {
       },
     });
   }
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     const resourceCount = player.tags.cardTagCount(card, [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE]);
     if (resourceCount === 0) {
       return undefined;

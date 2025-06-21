@@ -5,13 +5,13 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {digit} from '../Options';
 import {IPlayer} from '../../IPlayer';
-import {IProjectCard} from '../IProjectCard';
 import {Resource} from '../../../common/Resource';
-import {IActionCard} from '../ICard';
+import {IActionCard, ICard} from '../ICard';
 import {Behavior} from '../../behavior/Behavior';
 import {getBehaviorExecutor} from '../../behavior/BehaviorExecutor';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class PalladinShipping extends CorporationCard implements IActionCard {
+export class PalladinShipping extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {
     super({
       name: CardName.PALLADIN_SHIPPING,
@@ -39,11 +39,9 @@ export class PalladinShipping extends CorporationCard implements IActionCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    if (player.isCorporation(this.name)) {
-      if (card.type === CardType.EVENT && card.tags.includes(Tag.SPACE)) {
-        player.stock.add(Resource.TITANIUM, 1, {log: true});
-      }
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+    if (card.type === CardType.EVENT && card.tags.includes(Tag.SPACE)) {
+      player.stock.add(Resource.TITANIUM, 1, {log: true});
     }
   }
 

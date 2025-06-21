@@ -62,6 +62,11 @@ export abstract class Colony implements IColony {
     if (game.syndicatePirateRaider) {
       if (game.syndicatePirateRaider === this.visitor) {
         this.visitor = undefined;
+      } else {
+        const raider = game.getPlayerById(game.syndicatePirateRaider);
+        if (raider.cardIsInEffect(CardName.HUAN)) {
+          this.visitor = undefined;
+        }
       }
     } else {
       this.visitor = undefined;
@@ -95,7 +100,7 @@ export abstract class Colony implements IColony {
 
     for (const cardOwner of player.game.getPlayers()) {
       for (const card of cardOwner.tableau) {
-        card.onColonyAdded?.(player, cardOwner);
+        card.onColonyAddedByAnyPlayer?.(cardOwner, player);
       }
     }
 
@@ -118,8 +123,8 @@ export abstract class Colony implements IColony {
     */
   public trade(player: IPlayer, tradeOptions: TradeOptions = {}, bonusTradeOffset = 0): void {
     const tradeOffset = player.colonies.tradeOffset + bonusTradeOffset;
-    const maxTrackPosition = Math.min(this.trackPosition + tradeOffset, MAX_COLONY_TRACK_POSITION);
-    const steps = maxTrackPosition - this.trackPosition;
+    const maxPossibleTrackPosition = Math.min(this.trackPosition + tradeOffset, MAX_COLONY_TRACK_POSITION);
+    const steps = maxPossibleTrackPosition - this.trackPosition;
 
     if (steps === 0 ||
         this.metadata.shouldIncreaseTrack === 'no' ||
@@ -129,7 +134,7 @@ export abstract class Colony implements IColony {
       return;
     }
 
-    if (this.metadata.shouldIncreaseTrack === 'yes' || (this.metadata.tradeResource !== undefined && this.metadata.tradeResource[this.trackPosition] === this.metadata.tradeResource[maxTrackPosition])) {
+    if (this.metadata.shouldIncreaseTrack === 'yes' || (this.metadata.tradeResource !== undefined && this.metadata.tradeResource[this.trackPosition] === this.metadata.tradeResource[maxPossibleTrackPosition])) {
       // No point in asking the player, just increase it
       this.increaseTrack(steps);
       LogHelper.logColonyTrackIncrease(player, this, steps);

@@ -2,9 +2,9 @@ import {expect} from 'chai';
 import {ColonyDealer} from '../../src/server/colonies/ColonyDealer';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
-import {toName} from '../TestingUtils';
+import {toName} from '../../src/common/utils/utils';
 
-describe('ColonyDealer', function() {
+describe('ColonyDealer', () => {
   const options = {...DEFAULT_GAME_OPTIONS, venusNextExtension: false, coloniesExtension: false, turmoilExtension: false, communityCardsOption: false};
 
   it('draw', () => {

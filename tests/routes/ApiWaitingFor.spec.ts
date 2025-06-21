@@ -7,7 +7,7 @@ import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {GameId} from '../../src/common/Types';
 import {statusCode} from '../../src/common/http/statusCode';
 
-describe('ApiWaitingFor', function() {
+describe('ApiWaitingFor', () => {
   let scaffolding: RouteTestScaffolding;
   let res: MockResponse;
 
@@ -27,7 +27,7 @@ describe('ApiWaitingFor', function() {
     const player = TestPlayer.BLACK.newPlayer();
     const game = Game.newInstance('g' + player.id as GameId, [player], player);
     await scaffolding.ctx.gameLoader.add(game);
-    (game as any).getPlayerById = function() {
+    (game as any).getPlayerById = () => {
       throw new Error('player does not exist');
     };
 
@@ -53,7 +53,7 @@ describe('ApiWaitingFor', function() {
     const player2 = TestPlayer.RED.newPlayer();
     const game = Game.newInstance('game-id', [player, player2], player);
     await scaffolding.ctx.gameLoader.add(game);
-    (game as any).getBySpectatorId = function() {
+    (game as any).getBySpectatorId = () => {
       throw new Error('spectator does not exist');
     };
 

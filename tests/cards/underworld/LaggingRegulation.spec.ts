@@ -5,7 +5,7 @@ import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('LaggingRegulation', function() {
+describe('LaggingRegulation', () => {
   let card: LaggingRegulation;
   let player1: TestPlayer;
   let player2: TestPlayer;

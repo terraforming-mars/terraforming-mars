@@ -4,26 +4,26 @@ import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
-describe('JovianLanterns', function() {
+describe('JovianLanterns', () => {
   let card: JovianLanterns;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new JovianLanterns();
     [/* game */, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
     expect(player.getTerraformRating()).to.eq(21);
   });
 
-  it('Can not act', function() {
+  it('Can not act', () => {
     player.playedCards.push(card);
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.titanium = 3;
     expect(card.canAct(player)).is.true;
 

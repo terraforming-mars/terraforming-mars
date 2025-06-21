@@ -3,8 +3,8 @@ import {SupportedResearch} from '../../../src/server/cards/turmoil/SupportedRese
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {testGame} from '../../TestGame';
 
-describe('SupportedResearch', function() {
-  it('Should play', function() {
+describe('SupportedResearch', () => {
+  it('Should play', () => {
     const card = new SupportedResearch();
     const [game, player] = testGame(2, {turmoilExtension: true});
     expect(card.canPlay(player)).is.not.true;

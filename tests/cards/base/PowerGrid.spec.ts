@@ -4,8 +4,8 @@ import {EnergySaving} from '../../../src/server/cards/base/EnergySaving';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('PowerGrid', function() {
-  it('Should play', function() {
+describe('PowerGrid', () => {
+  it('Should play', () => {
     const card = new PowerGrid();
     const [/* game */, player] = testGame(2);
     const action = card.play(player);

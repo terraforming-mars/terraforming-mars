@@ -20,7 +20,7 @@ describe('VenusContract', () => {
   it('play', () => {
     expect(player.getTerraformRating()).eq(20);
     player.cardsInHand.length = 0;
-    player.playedCards.length = 0;
+    player.playedCards.set();
 
     card.play(player);
 

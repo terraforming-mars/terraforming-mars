@@ -188,6 +188,6 @@ function parseConfigString(stringValue: string): CacheConfig {
   const evictMillis = durationToMilliseconds(parsed.eviction_age);
   if (!isNaN(evictMillis)) options.evictMillis = evictMillis;
   const sleepMillis = durationToMilliseconds(parsed.sweep_freq);
-  if (isNaN(sleepMillis)) options.sleepMillis = sleepMillis;
+  if (!isNaN(sleepMillis)) options.sleepMillis = sleepMillis;
   return options;
 }

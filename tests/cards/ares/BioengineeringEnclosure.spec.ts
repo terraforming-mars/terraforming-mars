@@ -8,13 +8,13 @@ import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {runAllActions} from '../../TestingUtils';
 
-describe('BioengineeringEnclosure', function() {
+describe('BioengineeringEnclosure', () => {
   let card: BioengineeringEnclosure;
   let player: TestPlayer;
   let game: IGame;
   let animalHost: IProjectCard;
 
-  beforeEach(function() {
+  beforeEach(() => {
     animalHost = new Birds();
     card = new BioengineeringEnclosure();
     [game, player] = testGame(2, {aresExtension: true});

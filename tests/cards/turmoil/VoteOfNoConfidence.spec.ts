@@ -4,8 +4,8 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {runAllActions, testRedsCosts} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('VoteOfNoConfidence', function() {
-  it('Should play', function() {
+describe('VoteOfNoConfidence', () => {
+  it('Should play', () => {
     const card = new VoteOfNoConfidence();
     const [game, player] = testGame(1, {turmoilExtension: true});
     const turmoil = game.turmoil!;
@@ -24,7 +24,7 @@ describe('VoteOfNoConfidence', function() {
     expect(player.getTerraformRating()).to.eq(15);
   });
 
-  it('Neutral Delegate returns to Reserve', function() {
+  it('Neutral Delegate returns to Reserve', () => {
     const card = new VoteOfNoConfidence();
     const [game, player] = testGame(1, {turmoilExtension: true});
     const turmoil = game.turmoil!;

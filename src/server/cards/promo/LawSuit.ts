@@ -8,7 +8,7 @@ import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {any} from '../render/DynamicVictoryPoints';
 import {all} from '../Options';
 
 export class LawSuit extends Card implements IProjectCard {
@@ -26,7 +26,7 @@ export class LawSuit extends Card implements IProjectCard {
           b.text('steal', Size.SMALL, true).megacredits(3, {all}).asterix();
         }),
         description: 'Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER\'S EVENT PILE.',
-        victoryPoints: CardRenderDynamicVictoryPoints.any(-1),
+        victoryPoints: any(-1),
       },
     });
   }

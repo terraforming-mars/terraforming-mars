@@ -25,10 +25,10 @@ describe('AlgaeBioreactors', () => {
     player.megaCredits = card.cost;
 
     player.production.override({plants: 1});
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     player.production.override({plants: 0});
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {

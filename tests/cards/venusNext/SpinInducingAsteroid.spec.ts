@@ -6,28 +6,28 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('SpinInducingAsteroid', function() {
+describe('SpinInducingAsteroid', () => {
   let card: SpinInducingAsteroid;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SpinInducingAsteroid();
     [game, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     setVenusScaleLevel(game, 12);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     expect(card.canPlay(player)).is.true;
     card.play(player);
     expect(game.getVenusScaleLevel()).to.eq(4);
   });
 
-  it('Should play with Morning Star', function() {
+  it('Should play with Morning Star', () => {
     player.corporations.push(new MorningStarInc());
     setVenusScaleLevel(game, 12);
     expect(card.canPlay(player)).is.true;

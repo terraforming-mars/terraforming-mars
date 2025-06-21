@@ -4,7 +4,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {SpaceType} from '../../../common/boards/SpaceType';
-import {IActionCard} from '../ICard';
+import {IActionCard, IdentificationTrigger} from '../ICard';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {LogHelper} from '../../LogHelper';
 import {digit} from '../Options';
@@ -12,8 +12,9 @@ import {sum} from '../../../common/utils/utils';
 import {Space} from '../../boards/Space';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class DemetronLabs extends CorporationCard implements IActionCard {
+export class DemetronLabs extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {
     super({
       name: CardName.DEMETRON_LABS,
@@ -68,8 +69,8 @@ export class DemetronLabs extends CorporationCard implements IActionCard {
   // This doesn't need to be serialized. It ensures this is only evaluated once per action.
   // When the server restarts, the player has to take an action anyway.
   private lastActionId = -1;
-  public onIdentification(identifyingPlayer: IPlayer | undefined, cardOwner: IPlayer, _space: Space, fromExcavate: boolean) {
-    if (identifyingPlayer !== cardOwner || fromExcavate === true) {
+  public onIdentificationByAnyPlayer(cardOwner: IPlayer, identifyingPlayer: IPlayer | undefined, _space: Space, trigger: IdentificationTrigger) {
+    if (identifyingPlayer !== cardOwner || trigger === 'excavation') {
       return;
     }
     const actionId = sum(identifyingPlayer.game.getPlayers().map((p) => p.actionsTakenThisGame));

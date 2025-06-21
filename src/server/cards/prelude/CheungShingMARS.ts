@@ -2,8 +2,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class CheungShingMARS extends CorporationCard {
+export class CheungShingMARS extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.CHEUNG_SHING_MARS,

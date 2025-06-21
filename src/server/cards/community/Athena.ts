@@ -6,8 +6,9 @@ import {PlaceHazardTile} from '../../deferredActions/PlaceHazardTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {TileType} from '../../../common/TileType';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Athena extends CorporationCard {
+export class Athena extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ATHENA,

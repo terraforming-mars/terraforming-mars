@@ -10,7 +10,7 @@ export class FriendsInHighPlaces extends Card {
     super({
       name: CardName.FRIENDS_IN_HIGH_PLACES,
       type: CardType.ACTIVE,
-      tags: [Tag.EARTH],
+      tags: [Tag.CRIME, Tag.EARTH],
       cost: 10,
 
       behavior: {

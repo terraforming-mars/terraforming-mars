@@ -8,7 +8,7 @@ import {addCity, addGreenery, cast, fakeCard, maxOutOceans, runAllActions} from 
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {Units} from '../../src/common/Units';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
-import {SpaceName} from '../../src/server/SpaceName';
+import {SpaceName} from '../../src/common/boards/SpaceName';
 import {OceanCity} from '../../src/server/cards/ares/OceanCity';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {Wetlands} from '../../src/server/cards/pathfinders/Wetlands';
@@ -18,31 +18,29 @@ describe('Counter', () => {
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
-  let fake: IProjectCard;
 
   beforeEach(() => {
     [game, player, player2, player3] = testGame(3, {
       venusNextExtension: true,
       aresExtension: true,
       aresHazards: false});
-    fake = fakeCard();
   });
 
   it('numbers', () => {
-    const counter = new Counter(player, fake);
+    const counter = new Counter(player, fakeCard());
     expect(counter.count(3)).eq(3);
     expect(counter.count(8)).eq(8);
   });
 
   it('start', () => {
-    const counter = new Counter(player, fake);
+    const counter = new Counter(player, fakeCard());
     expect(counter.count({start: 3})).eq(3);
     expect(counter.count({start: 3, each: 7})).eq(21);
   });
 
   it('tags, simple', () => {
     player.tagsForTest = {building: 2, space: 3, moon: 7};
-    const counter = new Counter(player, fake);
+    const counter = new Counter(player, fakeCard());
     expect(counter.count({tag: Tag.BUILDING})).eq(2);
     expect(counter.count({tag: Tag.SPACE})).eq(3);
 
@@ -52,7 +50,7 @@ describe('Counter', () => {
 
   it('tags, multiple', () => {
     player.tagsForTest = {building: 2, space: 3, moon: 7};
-    const counter = new Counter(player, fake);
+    const counter = new Counter(player, fakeCard());
     expect(counter.count({tag: [Tag.BUILDING, Tag.MOON]})).eq(9);
 
     // Wild only counts once. It's really a test for tags.count, but it's useful to see here.
@@ -65,7 +63,7 @@ describe('Counter', () => {
     player2.tagsForTest = {space: 4};
     player3.tagsForTest = {microbe: 8, wild: 2}; // Wild tags will be ignored.
 
-    const counter = new Counter(player, fake);
+    const counter = new Counter(player, fakeCard());
     expect(counter.count({tag: Tag.BUILDING, all: true})).eq(2);
     expect(counter.count({tag: Tag.SPACE, all: true})).eq(7);
     expect(counter.count({tag: Tag.MICROBE, all: true})).eq(8);
@@ -73,16 +71,14 @@ describe('Counter', () => {
   });
 
   it('tags, including this', () => {
+    const fake = fakeCard({tags: [Tag.CITY]});
     let counter = new Counter(player, fake);
 
-    fake.tags = [Tag.CITY];
     expect(counter.count({tag: Tag.CITY})).eq(1);
-    player.tagsForTest = {city: 1};
+    player.playedCards.push(fakeCard({tags: [Tag.CITY]}));
     expect(counter.count({tag: Tag.CITY})).eq(2);
 
-    // Unset this so playedCards are counted more closely. It's a weird thing about tagsForTest.
-    player.tagsForTest = undefined;
-    player.playedCards = [fakeCard({tags: [Tag.CITY, Tag.CITY]})];
+    player.playedCards.set(fakeCard({tags: [Tag.CITY, Tag.CITY]}));
     expect(counter.count({tag: Tag.CITY})).eq(3);
 
     // Adding it to the player's tableau doesn't double-count it.
@@ -93,9 +89,9 @@ describe('Counter', () => {
   });
 
   it('tags, multiple, including this', () => {
+    const fake = fakeCard({tags: [Tag.MICROBE, Tag.PLANT]});
     let counter = new Counter(player, fake);
 
-    fake.tags = [Tag.MICROBE, Tag.PLANT];
     expect(counter.count({tag: [Tag.VENUS, Tag.PLANT]})).eq(1);
     player.tagsForTest = {plant: 1};
     expect(counter.count({tag: [Tag.VENUS, Tag.PLANT]})).eq(2);
@@ -109,7 +105,7 @@ describe('Counter', () => {
   });
 
   it('count cities', () => {
-    const counter = new Counter(player, fake);
+    const counter = new Counter(player, fakeCard());
 
     function count() {
       return {
@@ -149,7 +145,7 @@ describe('Counter', () => {
   });
 
   it('count cities that you own', () => {
-    const count = (player: TestPlayer) => new Counter(player, fake).count({cities: {}, all: false});
+    const count = (player: TestPlayer) => new Counter(player, fakeCard()).count({cities: {}, all: false});
 
     addCity(player, SpaceName.GANYMEDE_COLONY);
 
@@ -170,7 +166,7 @@ describe('Counter', () => {
   });
 
   it('count greeneries', () => {
-    const counter = new Counter(player, fake);
+    const counter = new Counter(player, fakeCard());
     expect(counter.count({greeneries: {}})).eq(0);
 
     addGreenery(player);
@@ -195,7 +191,7 @@ describe('Counter', () => {
   });
 
   it('count greeneries that you ownown', () => {
-    const count = (player: TestPlayer) => new Counter(player, fake).count({greeneries: {}, all: false});
+    const count = (player: TestPlayer) => new Counter(player, fakeCard()).count({greeneries: {}, all: false});
 
     addGreenery(player);
 
@@ -214,7 +210,7 @@ describe('Counter', () => {
   });
 
   it('count oceans', () => {
-    const counter = new Counter(player, fake);
+    const counter = new Counter(player, fakeCard());
     expect(counter.count({oceans: {}})).eq(0);
 
     maxOutOceans(player, 1);
@@ -239,7 +235,7 @@ describe('Counter', () => {
 
   it('count units', () => {
     player.tagsForTest = {building: 2, space: 3};
-    const counter = new Counter(player, fake);
+    const counter = new Counter(player, fakeCard());
     const units: Units = counter.countUnits({
       megacredits: {tag: Tag.SPACE},
       energy: -1,

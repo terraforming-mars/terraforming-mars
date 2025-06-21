@@ -11,10 +11,10 @@ export class ApiStats extends Handler {
     super({validateStatsId: true});
   }
 
-  public override async get(req: Request, res: Response, _ctx: Context): Promise<void> {
+  public override async get(req: Request, res: Response, ctx: Context): Promise<void> {
     try {
       const stats = await Database.getInstance().stats();
-      responses.writeJson(res, stats, 2);
+      responses.writeJson(res, ctx, stats, 2);
     } catch (err) {
       console.error(err);
       responses.badRequest(req, res, 'could not load admin stats');

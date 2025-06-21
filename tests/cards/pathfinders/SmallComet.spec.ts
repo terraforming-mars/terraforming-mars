@@ -8,19 +8,19 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('SmallComet', function() {
+describe('SmallComet', () => {
   let card: SmallComet;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SmallComet();
     [game, player, player2, player3] = testGame(3);
   });
 
-  it('play', function() {
+  it('play', () => {
     expect(player.getTerraformRating()).eq(20);
     expect(player.game.getTemperature()).eq(-30);
     player.plants = 5;

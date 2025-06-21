@@ -11,7 +11,6 @@
     "Science": "Scienza",
     "Power": "Potenza",
     "Earth": "Terra",
-    "Venus": "Venere",
     "Plant": "Pianta",
     "Microbe": "Microbo",
     "Animal": "Animale",
@@ -24,17 +23,17 @@
     "Heat": "Calore",
     "Floater": "Galleggiante",
     "Asteroid": "Asteroide",
-    
+
     "Greenery": "Vegetazione",
     "City": "Città",
     "Ocean": "Oceano",
     "Special": "Speciale",
-    
+
     "Temperature": "Temperatura",
     "Oxygen": "Ossigeno",
     "Oceans": "Oceani",
     "Venus": "Venere",
-    
+
     "Victory Point (VP)": "Punti Vittoria (PV)",
     "Terraform Rating (TR)": "Tasso di Terraformazione (TT)",
     "Project Card": "Carta Progetto",
@@ -43,10 +42,10 @@
     "Trade Fleet": "Flotta Commerciale",
     "Delegate": "Delegato",
     "Influence": "Influenza",
-    
+
     "Hotkeys Mapping" : "Tasti di scelta rapida",
     "Main Board": "Plancia principale",
-    "Players Overview Table": "Tabella riassuntiva giocatori", 
-    "Cards in Hand": "Carte nella mano", 
+    "Players Overview Table": "Tabella riassuntiva giocatori",
+    "Cards in Hand": "Carte nella mano",
     "Colonies": "Colonie"
 }

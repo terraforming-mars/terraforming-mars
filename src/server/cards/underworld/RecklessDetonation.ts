@@ -9,12 +9,14 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {Resource} from '../../../common/Resource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {message} from '../../logs/MessageBuilder';
+import {Tag} from '../../../common/cards/Tag';
 
 export class RecklessDetonation extends Card implements IProjectCard {
   constructor() {
     super({
       type: CardType.EVENT,
       name: CardName.RECKLESS_DETONATION,
+      tags: [Tag.CRIME],
       cost: 1,
 
       requirements: {corruption: 2},

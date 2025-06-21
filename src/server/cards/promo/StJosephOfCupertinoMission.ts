@@ -7,7 +7,7 @@ import {IPlayer} from '../../IPlayer';
 import {IGame} from '../../IGame';
 import {Space} from '../../boards/Space';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {cathedral} from '../render/DynamicVictoryPoints';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -31,7 +31,7 @@ export class StJosephOfCupertinoMission extends Card implements IActionCard {
           });
         }),
         description: '1 VP per City with a Cathedral in it.',
-        victoryPoints: CardRenderDynamicVictoryPoints.cathedral(),
+        victoryPoints: cathedral(),
       },
     });
   }

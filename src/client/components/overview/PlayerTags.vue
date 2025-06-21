@@ -1,14 +1,15 @@
 <template>
     <div class="player-tags">
         <div class="player-tags-main">
-            <tag-count :tag="'vp'" :count="player.victoryPointsBreakdown.total" :size="'big'" :type="'main'" :hideCount="hideVpCount" />
+            <tag-count tag="vp" :count="hideVpCount ? '?' : player.victoryPointsBreakdown.total" :size="'big'" :type="'main'" />
             <div v-if="isEscapeVelocityOn" :class="tooltipCss" :data-tooltip="$t('Escape Velocity penalty')">
-              <tag-count :tag="'escape'" :count="escapeVelocityPenalty" :size="'big'" :type="'main'"/>
+              <tag-count tag="escape" :count="escapeVelocityPenalty" :size="'big'" type="'main'" :showWhenZero="true"/>
             </div>
-            <tag-count :tag="'tr'" :count="player.terraformRating" :size="'big'" :type="'main'"/>
+            <tag-count tag="tr" :count="player.terraformRating" :size="'big'" :type="'main'"/>
+            <tag-count v-if="player.handicap !== undefined" :tag="'handicap'" :count="player.handicap" :size="'big'" :type="'main'" :showWhenZero="true"/>
             <div class="tag-and-discount">
               <PlayerTagDiscount v-if="all.discount" :amount="all.discount" :color="player.color"  :data-test="'discount-all'"/>
-              <tag-count :tag="'cards'" :count="cardsInHandCount" :size="'big'" :type="'main'"/>
+              <tag-count tag="cards" :count="cardsInHandCount" :size="'big'" :type="'main'"/>
             </div>
         </div>
         <div class="player-tags-secondary">
@@ -62,6 +63,7 @@ const ORDER: Array<InterfaceTagsType> = [
   Tag.CITY,
   Tag.MOON,
   Tag.MARS,
+  Tag.CRIME,
   'separator',
   Tag.EVENT,
   SpecialTags.NONE,
@@ -71,6 +73,7 @@ const ORDER: Array<InterfaceTagsType> = [
   SpecialTags.COLONY_COUNT,
   SpecialTags.EXCAVATIONS,
   SpecialTags.CORRUPTION,
+  SpecialTags.NEGATIVE_VP,
 ];
 
 const isInGame = (tag: InterfaceTagsType, game: GameModel): boolean => {
@@ -83,13 +86,13 @@ const isInGame = (tag: InterfaceTagsType, game: GameModel): boolean => {
     return game.turmoil !== undefined;
   case SpecialTags.EXCAVATIONS:
   case SpecialTags.CORRUPTION:
+  case SpecialTags.NEGATIVE_VP:
     return gameOptions.expansions.underworld !== false;
   case Tag.VENUS:
-    return game.gameOptions.expansions.venus !== false;
   case Tag.MOON:
-    return game.gameOptions.expansions.moon !== false;
   case Tag.MARS:
-    return (gameOptions.expansions.pathfinders || gameOptions.expansions.underworld);
+  case Tag.CRIME:
+    return game.tags.includes(tag);
   }
   return true;
 };
@@ -108,6 +111,8 @@ const getTagCount = (tagName: InterfaceTagsType, player: PublicPlayerModel): num
     return player.excavations;
   case SpecialTags.CORRUPTION:
     return player.corruption;
+  case SpecialTags.NEGATIVE_VP:
+    return player.victoryPointsBreakdown.negativeVP;
   case 'all':
   case 'separator':
     return -1;

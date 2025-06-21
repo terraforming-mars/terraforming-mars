@@ -33,7 +33,7 @@ export class GeologistTeam extends ActionCard implements IProjectCard {
     });
   }
 
-  public onIdentification(_identifyingPlayer: IPlayer | undefined, cardOwner: IPlayer, space: Space) {
+  public onIdentificationByAnyPlayer(cardOwner: IPlayer, _identifyingPlayer: IPlayer | undefined, space: Space) {
     if (space.undergroundResources === 'ocean') {
       if (cardOwner.canAfford({cost: 0, tr: {tr: 1}})) {
         cardOwner.increaseTerraformRating(1, {log: true});

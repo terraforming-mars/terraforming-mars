@@ -4,8 +4,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {IProjectCard, isIProjectCard} from '../IProjectCard';
+import {isIProjectCard} from '../IProjectCard';
 import {CardResource} from '../../../common/CardResource';
+import {ICard} from '../ICard';
 
 export class CloudVortexOutpost extends PreludeCard {
   constructor() {
@@ -31,7 +32,7 @@ export class CloudVortexOutpost extends PreludeCard {
 
   public data: {isDisabled: boolean} = {isDisabled: false};
 
-  onCardPlayed(player: IPlayer, card: IProjectCard) {
+  onCardPlayed(player: IPlayer, card: ICard) {
     if (this.data.isDisabled) {
       return;
     }

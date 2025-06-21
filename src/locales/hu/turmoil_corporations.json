@@ -1,27 +1,24 @@
 {
-  "Lakefront Resorts": "Lakefront Resorts",
   "LAKEFRONT": "LAKEFRONT",
   "RESORTS": "RESORTS",
-  "You start with 54 M€.": "54 M€-el kezdesz.",
-  "Effect: When any ocean tile is placed, increase your M€ production 1 step. Your bonus for placing adjacent to oceans is 3M€ instead of 2 M€.":
-    "Hatás: Ha óceán lapka kerül a pályára, növeld a M€ termelésed 1 lépéssel. A szomszédos óceánok mellé lerakott lapkák után járó bónuszod 3 M€, nem 2 M€.",
-
+  "Lakefront Resorts": "Lakefront Resorts",
+  "You start with 54 M€.": "54 M€-tel kezdesz.",
+  "Effect: When any ocean tile is placed, increase your M€ production 1 step. Your bonus for placing adjacent to oceans is 3M€ instead of 2 M€.": "Hatás: Minden alkalommal, amikor Óceánlapkát helyez le valaki, növeld a M€-termelésed 1 értékkel! Amikor te helyezel le lapkát óceánnal szomszédosan, 3 M€ a bónuszod a megszokott 2 M€ helyett.",
+  "TERRALABS": "TERRALABS",
+  "RESEARCH": "RESEARCH",
   "Terralabs Research": "Terralabs Research",
-  "You start with 14 M€. Lower your TR 1 step.": "14 M€-el kezdesz. Csökkentsd a TR-ed 1 lépéssel.",
-  "Effect: Buying cards to hand costs 1 M€.": "Hatás: Kézbe vásárolt lapok 1 M€-ba kerülnek.",
-
+  "You start with 14 M€. Lower your TR 1 step.": "14 M€-tel kezdesz. Csökkentsd a TR-ed 1 értékkel!",
+  "Effect: Buying cards to hand costs 1 M€.": "Hatás: A kártyák vásárlása (kézbe kerülése) 1 M€-be kerül, a játék elején a kezdő kártyáknak is ez a költsége.",
+  "UTOPIA": "UTOPIA",
+  "INVEST": "INVEST",
   "Utopia Invest": "Utopia Invest",
-  "You start with 40 M€. Increase your steel and titanium production 1 step each.": "40 M€-el kezdesz. Növeld a vas és titán termelésed 1 lépéssel mindegyiket.",
-  "Action: Decrease any production to gain 4 resources of that kind.": "Akció: Csökkents bármilyen termelést, hogy 4 erőforrást kapj abból a fajtából.",
-
+  "You start with 40 M€. Increase your steel and titanium production 1 step each.": "40 M€-tel kezdesz. Növeld az acél- és a titántermelésed 1-1 értékkel!",
+  "Action: Decrease any production to gain 4 resources of that kind.": "Akció: Csökkentsd egy tetszőleges termelésed 1 értékkel, hogy 4 ugyanolyan erőforrást kapj!",
+  "PRISTAR": "PRISTAR",
   "Pristar": "Pristar",
-  "You start with 53 M€. Decrease your TR 2 steps. 1 VP per preservation resource here.": 
-    "53 M€-el kezdesz. Csökkentsd a TR-ed 2 lépéssel. 1 GyP minden megőrzési erőforrásért itt.",
-  "Effect: During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 M€.": 
-    "Hatás: A termelési fázisban, ha eddig nem növeltél TR-t ebben a körben, adj hozzá egy megőrzési erőforrást ide és kapj 6 M€-t.",
-
-  "Septem Tribues": "Septem Tribus",
-  "You start with 36 M€. When you perform an action, the wild tag counts as any tag of your choice.": 
-    "36 M€-el kezdesz. Ha akciót végzel, a kérdőjel ikon számít bármilyen ikonnak, amit választasz.",
-  "Action: Gain 2 M€ for each party where you have at least 1 delegate.": "Akció: Kapj 2 M€-t minden párt után, ahol legalább 1 küldötted van."
+  "You start with 53 M€. Decrease your TR 2 steps. 1 VP per preservation resource here.": "53 M€-tel kezdesz. Csökkentsd a TR-ed 2 értékkel! Minden ezen a kártyán lévő értékmegőrzés erőforrásért 1 GyP-t kapsz.",
+  "Effect: During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 M€.": "Hatás: A termelési fázis során, amennyiben ebben a generációban nem nőtt a TR-ed, rakj 1 értékmegőrzés erőforrást erre a kártyára, és kapsz 6 M€-et!",
+  "Septem Tribus": "Septem Tribus",
+  "You start with 36 M€. When you perform an action, the wild tag counts as any tag of your choice.": "36 M€-tel kezdesz. Amikor akciót hajtasz végre, az univerzális ikon egy általad választott tetszőleges ikonnak számít.",
+  "Action: Gain 2 M€ for each party where you have at least 1 delegate.": "Akció: MINDEN PÁRTÉRT, AMELYBEN LEGALÁBB 1 KÜLDÖTTED VAN kapsz 2 M€-et."
 }

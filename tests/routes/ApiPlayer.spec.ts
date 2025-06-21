@@ -6,7 +6,7 @@ import {MockResponse} from './HttpMocks';
 import {PlayerViewModel} from '../../src/common/models/PlayerModel';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 
-describe('ApiPlayer', function() {
+describe('ApiPlayer', () => {
   let scaffolding: RouteTestScaffolding;
   let res: MockResponse;
 

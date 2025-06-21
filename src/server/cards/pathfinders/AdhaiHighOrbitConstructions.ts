@@ -8,8 +8,11 @@ import {IProjectCard} from '../IProjectCard';
 import {isPlanetaryTag} from '../../pathfinders/PathfindersData';
 import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
+import {IStandardProjectCard} from '../IStandardProjectCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {ICard} from '../ICard';
 
-export class AdhaiHighOrbitConstructions extends CorporationCard {
+export class AdhaiHighOrbitConstructions extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS,
@@ -30,7 +33,7 @@ export class AdhaiHighOrbitConstructions extends CorporationCard {
           b.text('(Effect: Whenever you play a card with a space tag BUT NO PLANETARY TAG (including this) add 1 orbital on this card.)', Size.SMALL, false, false);
           b.br;
           b.effect('For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1M€ less.', (eb) => {
-            eb.tag(Tag.SPACE, {secondaryTag: AltSecondaryTag.NO_PLANETARY_TAG}).slash(Size.SMALL).colonies(1, {size: Size.SMALL}).slash(Size.SMALL).trade({size: Size.SMALL})
+            eb.tag(Tag.SPACE, {secondaryTag: AltSecondaryTag.NO_PLANETARY_TAG}).slash(Size.SMALL).asterix().colonies(1, {size: Size.SMALL}).slash(Size.SMALL).trade({size: Size.SMALL})
               .startEffect
               .minus().megacredits(1).text('/2').resource(CardResource.ORBITAL);
           });
@@ -49,18 +52,25 @@ export class AdhaiHighOrbitConstructions extends CorporationCard {
     return spaceTag;
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    if (player.isCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS) && this.matchingTags(card.tags)) {
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+    if (this.matchingTags(card.tags)) {
       player.addResourceTo(this, 1);
     }
   }
 
   // TODO(kberg): it's not possible to make this a cardDiscount type, which just means rendering is tricky.
-  public override getCardDiscount(player: IPlayer, card: IProjectCard) {
-    if (player.isCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS) && this.matchingTags(card.tags)) {
+  public override getCardDiscount(_player: IPlayer, card: IProjectCard) {
+    if (this.matchingTags(card.tags)) {
       return Math.floor(this.resourceCount / 2);
     } else {
       return 0;
     }
+  }
+
+  public getStandardProjectDiscount(_player: IPlayer, card: IStandardProjectCard): number {
+    if (card.name === CardName.BUILD_COLONY_STANDARD_PROJECT) {
+      return Math.floor(this.resourceCount / 2);
+    }
+    return 0;
   }
 }

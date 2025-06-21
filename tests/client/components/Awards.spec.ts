@@ -7,16 +7,15 @@ import Award from '@/client/components/Award.vue';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {AWARD_COSTS} from '@/common/constants';
 import {AwardName} from '@/common/ma/AwardName';
-import {getMilestoneAwardDescription} from '@/client/MilestoneAwardManifest';
-import {Color} from '@/common/Color';
+import {getAward} from '@/client/MilestoneAwardManifest';
 import {Preferences} from '@/client/utils/PreferencesManager';
 
 const names: Array<AwardName> = ['Banker', 'Celebrity'];
 function createAward({id = 1, funded = false}): FundedAwardModel {
   return {
     name: names[id - 1],
-    playerName: funded ? 'Foo' : '',
-    playerColor: funded ? Color.RED: '',
+    playerName: funded ? 'Foo' : undefined,
+    playerColor: funded ? 'red': undefined,
     scores: [],
   };
 }
@@ -247,7 +246,7 @@ describe('Awards', () => {
     });
   });
 
-  it(`shows award descriptions on click`, async () => {
+  it('shows award descriptions on click', async () => {
     const awards = [
       createAward({id: 1, funded: true}),
       createAward({id: 2, funded: false}),
@@ -257,8 +256,8 @@ describe('Awards', () => {
       propsData: {awards, showScores: true},
     });
 
-    const award0Description = getMilestoneAwardDescription(awards[0].name);
-    const award1Description = getMilestoneAwardDescription(awards[1].name);
+    const award0Description = getAward(awards[0].name).description;
+    const award1Description = getAward(awards[1].name).description;
     expect(wrapper.text()).to.not.include(award0Description);
     expect(wrapper.text()).to.not.include(award1Description);
 

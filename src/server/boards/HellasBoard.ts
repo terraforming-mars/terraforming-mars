@@ -1,5 +1,5 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {SpaceName} from '../SpaceName';
+import {SpaceName} from '../../common/boards/SpaceName';
 import {SpaceCosts} from './Board';
 import {Space} from './Space';
 import {HELLAS_BONUS_OCEAN_COST} from '../../common/constants';
@@ -10,7 +10,7 @@ import {MarsBoard} from './MarsBoard';
 
 export class HellasBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): HellasBoard {
-    const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
+    const builder = new BoardBuilder(gameOptions);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -52,7 +52,7 @@ export class HellasBoard extends MarsBoard {
   public override spaceCosts(space: Space): SpaceCosts {
     const costs = super.spaceCosts(space);
     if (space.id === SpaceName.HELLAS_OCEAN_TILE) {
-      costs.stock.megacredits = HELLAS_BONUS_OCEAN_COST;
+      costs.megacredits = HELLAS_BONUS_OCEAN_COST;
       costs.tr.oceans = 1;
     }
     return costs;

@@ -3,8 +3,8 @@ import {OrbitalReflectors} from '../../../src/server/cards/venusNext/OrbitalRefl
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('OrbitalReflectors', function() {
-  it('Should play', function() {
+describe('OrbitalReflectors', () => {
+  it('Should play', () => {
     const card = new OrbitalReflectors();
     const [game, player] = testGame(2);
 

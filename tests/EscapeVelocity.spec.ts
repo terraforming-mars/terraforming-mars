@@ -8,7 +8,7 @@ let player: TestPlayer;
 let clock: FakeClock;
 let timer: Timer;
 
-describe('EscapeVelocity', function() {
+describe('EscapeVelocity', () => {
   beforeEach(() => {
     [/* game */, player] = testGame(1, {
       escapeVelocityMode: true,
@@ -27,7 +27,7 @@ describe('EscapeVelocity', function() {
     timer.stop();
   });
 
-  it('sanity test', function() {
+  it('sanity test', () => {
     timer.start();
 
     expect(player.getVictoryPoints().total).eq(14);
@@ -48,7 +48,7 @@ describe('EscapeVelocity', function() {
     expect(player.getVictoryPoints().escapeVelocity).eq(-2);
   });
 
-  it('too many points', function() {
+  it('too many points', () => {
     timer.start();
 
     expect(player.getVictoryPoints().total).eq(14);
@@ -81,8 +81,8 @@ describe('EscapeVelocity', function() {
     expect(player.getVictoryPoints().escapeVelocity).eq(-14);
 
     clock.millis += 4 * 60 * 1000;
-    expect(player.getVictoryPoints().total).eq(0);
-    expect(player.getVictoryPoints().escapeVelocity).eq(-14);
+    expect(player.getVictoryPoints().total).eq(-2);
+    expect(player.getVictoryPoints().escapeVelocity).eq(-16);
 
     player.setTerraformRating(17);
 
@@ -90,7 +90,7 @@ describe('EscapeVelocity', function() {
     expect(player.getVictoryPoints().escapeVelocity).eq(-16);
   });
 
-  it('bonus seconds', function() {
+  it('bonus seconds', () => {
     timer.start();
 
     expect(player.getVictoryPoints().total).eq(14);

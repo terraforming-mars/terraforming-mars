@@ -94,7 +94,7 @@ class RedsPolicy02 implements IPolicy {
 
   onTilePlaced(player: IPlayer) {
     let amountPlayerHas = player.megaCredits;
-    if (player.isCorporation(CardName.HELION)) amountPlayerHas += player.heat;
+    if (player.cardIsInEffect(CardName.HELION)) amountPlayerHas += player.heat;
 
     const amountToPay = Math.min(amountPlayerHas, 3);
     if (amountToPay > 0) {

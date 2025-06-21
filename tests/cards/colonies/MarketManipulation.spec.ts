@@ -14,12 +14,12 @@ import {TestPlayer} from '../../TestPlayer';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {cast} from '../../TestingUtils';
 
-describe('MarketManipulation', function() {
+describe('MarketManipulation', () => {
   let card: MarketManipulation;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MarketManipulation();
     [game, player] = testGame(2, {
       coloniesExtension: true,
@@ -32,7 +32,7 @@ describe('MarketManipulation', function() {
     });
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
     const increaseColonyAction = cast(game.deferredActions.pop()!.execute(), SelectColony);
     increaseColonyAction.cb(increaseColonyAction.colonies[0]);
@@ -47,7 +47,7 @@ describe('MarketManipulation', function() {
     expect(game.colonies[2].trackPosition).to.eq(1);
   });
 
-  it('Should not allow increase of sole decreasable colony', function() {
+  it('Should not allow increase of sole decreasable colony', () => {
     const pluto = new Pluto();
     pluto.trackPosition = 0;
     const callisto = new Callisto();
@@ -73,7 +73,7 @@ describe('MarketManipulation', function() {
     expect(game.colonies[2].trackPosition).to.eq(0);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     const enceladus = new Enceladus();
     const miranda = new Miranda();
     const luna = new Luna();

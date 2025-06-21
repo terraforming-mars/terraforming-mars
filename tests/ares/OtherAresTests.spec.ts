@@ -6,11 +6,11 @@ import {TestPlayer} from '../TestPlayer';
 import {addOcean} from '../TestingUtils';
 import {testGame} from '../TestGame';
 
-describe('OtherAresTests', function() {
+describe('OtherAresTests', () => {
   let player: TestPlayer;
   let game: IGame;
 
-  it('Desert settler counts upgraded oceans', function() {
+  it('Desert settler counts upgraded oceans', () => {
     [game, player] = testGame(2, {aresExtension: true});
 
     const oceanSpace = game.board.getAvailableSpacesForOcean(player).filter((s) => s.y >= 5)[0];

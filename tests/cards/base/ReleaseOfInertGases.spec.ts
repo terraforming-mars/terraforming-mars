@@ -3,8 +3,8 @@ import {ReleaseOfInertGases} from '../../../src/server/cards/base/ReleaseOfInert
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('ReleaseOfInertGases', function() {
-  it('Should play', function() {
+describe('ReleaseOfInertGases', () => {
+  it('Should play', () => {
     const card = new ReleaseOfInertGases();
     const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);

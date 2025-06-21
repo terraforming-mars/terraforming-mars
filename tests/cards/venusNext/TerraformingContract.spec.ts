@@ -3,8 +3,8 @@ import {TerraformingContract} from '../../../src/server/cards/venusNext/Terrafor
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('TerraformingContract', function() {
-  it('Should play', function() {
+describe('TerraformingContract', () => {
+  it('Should play', () => {
     const card = new TerraformingContract();
     const [/* game */, player] = testGame(1);
 

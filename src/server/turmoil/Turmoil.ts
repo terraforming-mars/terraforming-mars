@@ -12,15 +12,16 @@ import {IGlobalEvent} from './globalEvents/IGlobalEvent';
 import {SerializedDelegate, SerializedTurmoil} from './SerializedTurmoil';
 import {DELEGATES_FOR_NEUTRAL_PLAYER, DELEGATES_PER_PLAYER} from '../../common/constants';
 import {PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
-import {AgendaStyle} from '../../common/turmoil/Types';
+import {AgendaStyle, PolicyId} from '../../common/turmoil/Types';
 import {CardName} from '../../common/cards/CardName';
 import {MultiSet} from 'mnemonist';
 import {IPlayer} from '../IPlayer';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {SelectParty} from '../inputs/SelectParty';
-import {IPolicy, PolicyId, policyDescription} from './Policy';
+import {IPolicy, policyDescription} from './Policy';
 import {PlayerId} from '../../common/Types';
 import {ChoosePolicyBonus} from '../deferredActions/ChoosePolicyBonus';
+import {toID} from '../../common/utils/utils';
 
 export type NeutralPlayer = 'NEUTRAL';
 export type Delegate = IPlayer | NeutralPlayer;
@@ -42,7 +43,7 @@ function createParties(): ReadonlyArray<IParty> {
 
 const UNINITIALIZED_POLITICAL_AGENDAS_DATA: PoliticalAgendasData = {
   agendas: new Map(),
-  agendaStyle: AgendaStyle.CHAIRMAN,
+  agendaStyle: 'Chairman',
 };
 
 export class Turmoil {
@@ -70,7 +71,7 @@ export class Turmoil {
     this.globalEventDealer = globalEventDealer;
   }
 
-  public static newInstance(game: IGame, agendaStyle: AgendaStyle = AgendaStyle.STANDARD): Turmoil {
+  public static newInstance(game: IGame, agendaStyle: AgendaStyle = 'Standard'): Turmoil {
     const dealer = GlobalEventDealer.newInstance(game);
 
     // The game begins with Greens in power and a Neutral chairman
@@ -366,7 +367,7 @@ export class Turmoil {
       const chairman = this.chairman;
       let steps = gainTR ? 1 : 0;
       // Tempest Consultancy Hook (gains an additional TR when they become chairman)
-      if (chairman.isCorporation(CardName.TEMPEST_CONSULTANCY)) steps += 1;
+      if (chairman.cardIsInEffect(CardName.TEMPEST_CONSULTANCY)) steps += 1;
 
       // Raise TR
       chairman.defer(() => {
@@ -535,7 +536,7 @@ export class Turmoil {
       let sendDelegate;
       if (!this.usedFreeDelegateAction.has(player)) {
         sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (from lobby)', {freeStandardAction: true});
-      } else if (player.isCorporation(CardName.INCITE) && player.canAfford(3)) {
+      } else if (player.cardIsInEffect(CardName.INCITE) && player.canAfford(3)) {
         sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (3 M€)', {cost: 3});
       } else if (player.canAfford(5)) {
         sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (5 M€)', {cost: 5});
@@ -552,7 +553,7 @@ export class Turmoil {
       chairman: serializeDelegateOrUndefined(this.chairman),
       rulingParty: this.rulingParty.name,
       dominantParty: this.dominantParty.name,
-      usedFreeDelegateAction: Array.from(this.usedFreeDelegateAction).map((p) => p.id),
+      usedFreeDelegateAction: Array.from(this.usedFreeDelegateAction).map(toID),
       delegateReserve: Array.from(this.delegateReserve.values()).map(serializeDelegate),
       parties: this.parties.map((p) => {
         return {

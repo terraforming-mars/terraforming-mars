@@ -10,6 +10,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {message} from '../../logs/MessageBuilder';
+import {Tag} from '../../../common/cards/Tag';
 
 export class HiredRaiders extends Card implements IProjectCard {
   constructor() {
@@ -17,6 +18,7 @@ export class HiredRaiders extends Card implements IProjectCard {
       type: CardType.EVENT,
       name: CardName.HIRED_RAIDERS_UNDERWORLD,
       cost: 1,
+      tags: [Tag.CRIME],
 
       metadata: {
         cardNumber: 'UX02',

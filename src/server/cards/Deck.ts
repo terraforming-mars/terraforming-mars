@@ -33,7 +33,7 @@ export class Deck<T extends ICard> {
     this.random = random;
   }
 
-  public shuffle(cardsOnTop: Array<CardName> = []) {
+  public shuffle(cardsOnTop: ReadonlyArray<CardName> = []) {
     const copy = [...this.drawPile, ...this.discardPile];
     this.drawPile.splice(0, this.drawPile.length);
     this.discardPile.splice(0, this.discardPile.length);

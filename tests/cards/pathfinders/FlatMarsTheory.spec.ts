@@ -5,17 +5,17 @@ import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {testGame} from '../../TestingUtils';
 
-describe('FlatMarsTheory', function() {
+describe('FlatMarsTheory', () => {
   let card: FlatMarsTheory;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new FlatMarsTheory();
     [game, player] = testGame(1);
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.tagsForTest = {};
     expect(card.canPlay(player)).is.true;
 
@@ -32,7 +32,7 @@ describe('FlatMarsTheory', function() {
     expect(card.canPlay(player)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     (game as any).generation = 4;
     card.play(player);
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 4}));

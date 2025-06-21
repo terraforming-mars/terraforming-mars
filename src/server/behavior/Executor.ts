@@ -55,6 +55,14 @@ export class Executor implements BehaviorExecutor {
       }
     }
 
+    if (behavior.drawCard !== undefined) {
+      const drawCard = behavior.drawCard;
+      const count = typeof(drawCard) === 'number' ? drawCard : ctx.count(drawCard.count);
+      if (game.projectDeck.canDraw(count) === false) {
+        return false;
+      }
+    }
+
     if (behavior.global !== undefined) {
       const g = behavior.global;
       if (g.temperature !== undefined && game.getTemperature() >= MAX_TEMPERATURE) {
@@ -103,8 +111,17 @@ export class Executor implements BehaviorExecutor {
       if (spend.plants && player.plants < spend.plants) {
         return false;
       }
-      if (spend.energy && player.energy < spend.energy) {
-        return false;
+      if (spend.energy) {
+        if (player.energy < spend.energy) {
+          return false;
+        }
+        if (!player.canAfford({
+          cost: 0,
+          reserveUnits: Units.of({energy: spend.energy}),
+          tr: asTrSource,
+        })) {
+          return false;
+        }
       }
       if (spend.heat) {
         if (player.availableHeat() < spend.heat) {
@@ -428,7 +445,12 @@ export class Executor implements BehaviorExecutor {
     }
 
     if (behavior.tr !== undefined) {
-      player.increaseTerraformRating(ctx.count(behavior.tr));
+      const count = ctx.count(behavior.tr);
+      if (count >= 0) {
+        player.increaseTerraformRating(count);
+      } else {
+        player.decreaseTerraformRating(-count);
+      }
     }
     const addResources = behavior.addResources;
     if (addResources !== undefined) {

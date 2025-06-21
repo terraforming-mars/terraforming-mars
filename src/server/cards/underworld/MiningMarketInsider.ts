@@ -39,8 +39,8 @@ export class MiningMarketInsider extends ActionCard implements IProjectCard {
   // This doesn't need to be serialized. It ensures this is only evaluated once per action.
   // When the server restarts, the player has to take an action anyway.
   private lastActionId = -1;
-  public onIdentification(identifyingPlayer: IPlayer, cardOwner: IPlayer) {
-    const actionId = sum(identifyingPlayer.game.getPlayers().map((p) => p.actionsTakenThisGame));
+  public onIdentificationByAnyPlayer(cardOwner: IPlayer) {
+    const actionId = sum(cardOwner.game.getPlayers().map((p) => p.actionsTakenThisGame));
     if (this.lastActionId !== actionId) {
       cardOwner.addResourceTo(this);
       this.lastActionId = actionId;

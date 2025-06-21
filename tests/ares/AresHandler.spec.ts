@@ -27,17 +27,17 @@ import {testGame} from '../TestGame';
 
 // oddly, this no longer tests AresHandler calls. So that's interesting.
 // TODO(kberg): break up tests, but no rush.
-describe('AresHandler', function() {
+describe('AresHandler', () => {
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     [game, player, otherPlayer] = testGame(2, {aresExtension: true});
     game.board = EmptyBoard.newInstance();
   });
 
-  it('Get adjacency bonus', function() {
+  it('Get adjacency bonus', () => {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     firstSpace.adjacency = {bonus: [SpaceBonus.DRAW_CARD]};
     game.addTile(otherPlayer, firstSpace, {tileType: TileType.RESTRICTED_AREA});
@@ -59,7 +59,7 @@ describe('AresHandler', function() {
     expect(otherPlayer.cardsInHand).is.length(0);
   });
 
-  it('Get multiple bonuses', function() {
+  it('Get multiple bonuses', () => {
     const greenerySpace = game.board.getAvailableSpacesForGreenery(player)[0];
     const adjacentSpaces = game.board.getAdjacentSpaces(greenerySpace);
     const [firstSpace, secondSpace] = adjacentSpaces;
@@ -79,7 +79,7 @@ describe('AresHandler', function() {
     expect(otherPlayer.stock.asUnits()).deep.eq(Units.of({megacredits: 2}));
   });
 
-  describe('setupHazards', function() {
+  describe('setupHazards', () => {
     interface SpaceToTest {
       tile: Tile;
       x: number;
@@ -94,7 +94,7 @@ describe('AresHandler', function() {
         });
     }
 
-    it('4 player game', function() {
+    it('4 player game', () => {
       // front-load the deck with cards of predetermined costs.
       // four player game places two dust storms.
 
@@ -109,7 +109,7 @@ describe('AresHandler', function() {
         {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 6, y: 8}]);
     });
 
-    it('5 player game', function() {
+    it('5 player game', () => {
       // front-load the deck with cards of predetermined costs.
       // 5 player game places one dust storm but with two cards.
 
@@ -122,7 +122,7 @@ describe('AresHandler', function() {
       expect(spacesWithTiles(game)).to.deep.eq([{tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 5, y: 1}]);
     });
 
-    it('3 player game', function() {
+    it('3 player game', () => {
       // front-load the deck with cards of predetermined costs.
       // 3 player game places 3 dust storms, the first with two cards.
 
@@ -141,7 +141,7 @@ describe('AresHandler', function() {
     });
   });
 
-  it('Pay Adjacency Costs', function() {
+  it('Pay Adjacency Costs', () => {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     firstSpace.adjacency = {bonus: [], cost: 2};
     game.addTile(otherPlayer, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
@@ -160,7 +160,7 @@ describe('AresHandler', function() {
     expect(otherPlayer.megaCredits).is.eq(0);
   });
 
-  it('Cannot afford adjacency costs', function() {
+  it('Cannot afford adjacency costs', () => {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     firstSpace.adjacency = {bonus: [], cost: 2};
     game.addTile(otherPlayer, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
@@ -174,7 +174,7 @@ describe('AresHandler', function() {
     }).to.throw(/Placing here costs 2 M€/);
   });
 
-  it('Pay adjacent hazard costs - mild', function() {
+  it('Pay adjacent hazard costs - mild', () => {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     AresHazards.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
 
@@ -195,7 +195,7 @@ describe('AresHandler', function() {
     expect(player.production.plants).eq(6);
   });
 
-  it('pay adjacent hazard costs - severe', function() {
+  it('pay adjacent hazard costs - severe', () => {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     AresHazards.putHazardAt(firstSpace, TileType.DUST_STORM_SEVERE);
 
@@ -219,7 +219,7 @@ describe('AresHandler', function() {
     expect(player.production.plants).eq(5);
   });
 
-  it('Adjacenct hazard costs do not apply to oceans', function() {
+  it('Adjacenct hazard costs do not apply to oceans', () => {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     AresHazards.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
 
@@ -233,7 +233,7 @@ describe('AresHandler', function() {
     expect(before).to.deep.eq(after);
   });
 
-  it('cover mild hazard', function() {
+  it('cover mild hazard', () => {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
     AresHazards.putHazardAt(space, TileType.EROSION_MILD);
     player.megaCredits = 8;
@@ -247,7 +247,7 @@ describe('AresHandler', function() {
     expect(player.getTerraformRating()).eq(21);
   });
 
-  it('cover severe hazard', function() {
+  it('cover severe hazard', () => {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
     AresHazards.putHazardAt(space, TileType.EROSION_SEVERE);
     player.megaCredits = 16;
@@ -261,7 +261,7 @@ describe('AresHandler', function() {
     expect(player.getTerraformRating()).eq(22);
   });
 
-  it('Placing on top of an ocean does not regrant bonuses', function() {
+  it('Placing on top of an ocean does not regrant bonuses', () => {
     game.board = TharsisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     const space = game.board.getSpaces(SpaceType.OCEAN, player).find((space) => {
       return space.bonus.length > 0 && space.bonus[0] === SpaceBonus.PLANT;
@@ -277,7 +277,7 @@ describe('AresHandler', function() {
     expect(player.plants).eq(0);
   });
 
-  it('No adjacency bonuses during WGT', function() {
+  it('No adjacency bonuses during WGT', () => {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     firstSpace.adjacency = {bonus: [SpaceBonus.DRAW_CARD]};
     game.addTile(otherPlayer, firstSpace, {tileType: TileType.RESTRICTED_AREA});
@@ -298,7 +298,7 @@ describe('AresHandler', function() {
     expect(otherPlayer.cardsInHand).is.length(0);
   });
 
-  it('No adjacency costs during WGT', function() {
+  it('No adjacency costs during WGT', () => {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     firstSpace.adjacency = {bonus: [], cost: 2};
     game.addTile(otherPlayer, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
@@ -314,7 +314,7 @@ describe('AresHandler', function() {
     expect(player.megaCredits).is.eq(2);
   });
 
-  it('No adjacency hazard costs during WGT', function() {
+  it('No adjacency hazard costs during WGT', () => {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     AresHazards.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
     game.phase = Phase.SOLAR;
@@ -326,7 +326,7 @@ describe('AresHandler', function() {
     expect(game.deferredActions).has.lengthOf(0);
   });
 
-  it('No hazard coverage cost or bonus during WGT', function() {
+  it('No hazard coverage cost or bonus during WGT', () => {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
     AresHazards.putHazardAt(space, TileType.EROSION_SEVERE);
     player.megaCredits = 8;
@@ -347,11 +347,11 @@ describe('Hazard tests', () => {
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     [game, player/* , player2 */] = testGame(2, {aresExtension: true, aresHazards: true});
   });
 
-  it('erosion appears after the third ocean', function() {
+  it('erosion appears after the third ocean', () => {
     addOcean(player);
     addOcean(player);
 
@@ -364,7 +364,7 @@ describe('Hazard tests', () => {
     expect(tiles.get(TileType.EROSION_MILD)).has.lengthOf(2);
   });
 
-  it('dust storms disappear after the sixth ocean', function() {
+  it('dust storms disappear after the sixth ocean', () => {
     addOcean(player);
     addOcean(player);
     addOcean(player);
@@ -384,7 +384,7 @@ describe('Hazard tests', () => {
     expect(player.getTerraformRating()).eq(prior + 2); // One for the ocean, once for the dust storm event.
   });
 
-  it('dust storms disappear after the sixth ocean, desperate measures changes that', function() {
+  it('dust storms disappear after the sixth ocean, desperate measures changes that', () => {
     addOcean(player);
     addOcean(player);
     addOcean(player);
@@ -409,7 +409,7 @@ describe('Hazard tests', () => {
     expect(player.getTerraformRating()).eq(priorTr + 2); // One for the ocean, once for the dust storm event.
   });
 
-  it('dust storms amplify at 5% oxygen', function() {
+  it('dust storms amplify at 5% oxygen', () => {
     while (game.getOxygenLevel() < 4) {
       game.increaseOxygenLevel(player, 1);
     }
@@ -425,7 +425,7 @@ describe('Hazard tests', () => {
     expect(tiles.get(TileType.DUST_STORM_SEVERE)).has.lengthOf(3);
   });
 
-  it('amplifying dust storms does not change desperate measures', function() {
+  it('amplifying dust storms does not change desperate measures', () => {
     while (game.getOxygenLevel() < 4) {
       game.increaseOxygenLevel(player, 1);
     }
@@ -444,7 +444,7 @@ describe('Hazard tests', () => {
     expect(protectedTile.tile!.protectedHazard).is.true;
   });
 
-  it('erosions amplify at -4C', function() {
+  it('erosions amplify at -4C', () => {
     while (game.getTemperature() < -6) {
       game.increaseTemperature(player, 1);
     }
@@ -463,7 +463,7 @@ describe('Hazard tests', () => {
     expect(tiles.get(TileType.EROSION_SEVERE)).has.lengthOf(2);
   });
 
-  it('severe erosions appear at third ocean when temperature passes -4C', function() {
+  it('severe erosions appear at third ocean when temperature passes -4C', () => {
     while (game.getTemperature() < -6) {
       game.increaseTemperature(player, 1);
     }

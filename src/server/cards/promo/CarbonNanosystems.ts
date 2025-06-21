@@ -7,6 +7,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {Size} from '../../../common/cards/render/Size';
+import {ICard} from '../ICard';
 
 export class CarbonNanosystems extends Card implements IProjectCard {
   constructor() {
@@ -28,7 +29,7 @@ export class CarbonNanosystems extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     const tags = card.tags.filter((tag) => tag === Tag.SCIENCE).length;
     player.addResourceTo(this, {qty: tags, log: true});
     return undefined;

@@ -21,7 +21,7 @@ export const HAZARD_CONSTRAINTS = [
 /*
  * This is the same as
  * type HazardData = {
- *    erosionOceanCount: HazardConstraint;
+ *   erosionOceanCount: HazardConstraint;
  *   removeDustStormsOceanCount: HazardConstraint;
  *   severeErosionTemperature: HazardConstraint;
  *   severeDustStormOxygen: HazardConstraint;
@@ -30,7 +30,24 @@ export const HAZARD_CONSTRAINTS = [
 export type HazardData = Record<typeof HAZARD_CONSTRAINTS[number], HazardConstraint>;
 
 export type MilestoneCount = {
-    id: PlayerId;
-    count: number;
-    purifierCount: number;
+  id: PlayerId;
+  // TODO(kberg): Remove count by 2025-08-01
+  count?: number;
+  networkerCount: number;
+  purifierCount: number;
+}
+
+// TODO(kberg): Inline this function after 2025-08-01
+export function deserializeAresData(serialized: AresData | undefined): AresData | undefined {
+  const deserialized = serialized;
+  // TODO(kberg): Remove this block after 2025-08-01
+  if (deserialized !== undefined) {
+    for (const entry of deserialized.milestoneResults) {
+      if (entry.networkerCount === undefined) {
+        entry.networkerCount = entry.count ?? 0;
+      }
+    }
+  }
+
+  return deserialized;
 }

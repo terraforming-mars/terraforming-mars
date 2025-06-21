@@ -37,7 +37,7 @@
 "Requires 1 corruption. Increase your M€, steel, and energy production 1 step each.": "",
 
 "Deepmining": "",
-"Excavate an IDENTIFIED underground resource ANYWHERE ON MARS with a steel or titanium placement bonus. Increase that production 1 step.": "",
+"Excavate an underground resource that depicts steel or titanium ANYWHERE ON THE BOARD. Increase your production of that resource 1 step.": "",
 
 "Deepnuking": "",
 "Excavate 2 underground resources. Remove up to 3 plants from any player.": "",
@@ -231,7 +231,7 @@
 
 "Standard Technology": "",
 "REPEAT": "",
-"Action: Use a standard project that you've already done this generation, with its cost reduced by 8 M€.": "",
+"(Action: Use a standard project that you've already used this generation, with its cost reduced by 8 M€).": "",
 
 "Stem Field Subsidies": "",
 "Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "",
@@ -247,7 +247,7 @@
 "Action: Spend 1 tool resource on this card to excavate an underground resource.": "",
 
 "Tunnel Boring Machine": "",
-"Action: Pay 3 energy to excavate 2 underground resources": "",
+"Action: Pay 3 energy to excavate 2 underground resources.": "",
 
 "Tunneling Subcontractor": "",
 "Gain 1 corruption. Excavate an underground resource.": "",

@@ -63,12 +63,15 @@ export function twoWayDifference<T>(a: Array<T>, b: Array<T>): Array<T> {
     .concat(b.filter((x) => !a.includes(x)));
 }
 
-
 // https://stackoverflow.com/questions/47914536/use-partial-in-nested-property-with-typescript
 // Recursive partials are useful for nested partial objects.
 export type RecursivePartial<T> = {
   [P in keyof T]?: RecursivePartial<T[P]>;
 };
+
+// https://stackoverflow.com/questions/49285864/is-there-a-valueof-similar-to-keyof-in-typescript
+// Useful for replacing enums with a dictionary of values.
+export type ValueOf<T> = T[keyof T];
 
 /**
  * Remove the `element` from `array`.
@@ -149,6 +152,19 @@ export function deNull<T>(array: ReadonlyArray<T | undefined>): Array<T> {
 }
 
 /**
+ * Return a partial of |record| omitting entries whose value is 0.
+ */
+export function partialize<T extends string | number | symbol>(record: Record<T, number>): Partial<Record<T, number>> {
+  const partial: Partial<Record<T, number>> = {};
+  for (const e in record) {
+    if (record[e] !== 0) {
+      partial[e] = record[e];
+    }
+  }
+  return partial;
+}
+
+/**
  * Makes a copy of array, but then empties it.
  * Useful for moving contents.
  */
@@ -163,4 +179,8 @@ export function copyAndClear<T>(array: Array<T>): Array<T> {
  */
 export function toName<T>(item: {name: T}): T {
   return item.name;
+}
+
+export function toID<T>(item: {id: T}): T {
+  return item.id;
 }

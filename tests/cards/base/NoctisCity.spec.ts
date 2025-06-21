@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {NoctisCity} from '../../../src/server/cards/base/NoctisCity';
 import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -10,21 +10,21 @@ import {cast, churn} from '../../TestingUtils';
 import {BoardName} from '../../../src/common/boards/BoardName';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
-describe('NoctisCity', function() {
+describe('NoctisCity', () => {
   let card: NoctisCity;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new NoctisCity();
     [game, player] = testGame(2);
   });
 
-  it('Cannot play without energy production', function() {
+  it('Cannot play without energy production', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('All land spaces are available on Hellas', function() {
+  it('All land spaces are available on Hellas', () => {
     // With two players, there's no solo setup, so all spaces will be available.
     const [game, player] = testGame(2, {boardName: BoardName.HELLAS});
 
@@ -32,7 +32,7 @@ describe('NoctisCity', function() {
     expect(selectSpace.spaces).deep.eq(game.board.getAvailableSpacesForCity(player));
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 

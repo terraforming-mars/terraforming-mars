@@ -19,7 +19,7 @@ describe('GeoscanSatellite', () => {
     const economicEspionage = new EconomicEspionage();
     const tardigrades = new Tardigrades();
 
-    player.playedCards = [communicationCenter, economicEspionage, tardigrades];
+    player.playedCards.push(communicationCenter, economicEspionage, tardigrades);
     cast(card.play(player), undefined);
 
     runAllActions(game);

@@ -55,6 +55,7 @@
                 ></games-overview>
                 <card-list v-else-if="screen === 'cards'"></card-list>
                 <admin-home v-else-if="screen === 'admin'"></admin-home>
+                <login-home v-else-if="screen === 'login-home'"></login-home>
                 <Help v-else-if="screen === 'help'"></Help>
             </div>
             <div class="notice" v-i18n>

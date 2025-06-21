@@ -37,7 +37,6 @@
     "Show real-time VP": "Mostra PV in tempo reale",
     "Allow undo": "Permetti annulla",
     "7 Heat Into Temperature": "7 Calore per la Temperatura",
-    "BreakThrough": "BreakThrough",
     "NEXT CARD:": "PROSSIMA CARTA:",
 
     "Milestones": "Milestone",
@@ -141,8 +140,6 @@
     "Error with input": "Errore di inserimento",
     "This game is over!": "Questa partita è finita!",
     "Not your turn to take any actions": "Non è il tuo turno per fare azioni",
-    "Please Login with right user": "Si prega di fare il login con il corretto utente",
-    "Undoing, Please refresh or wait seconds": "Annullamento in corso, si prega di aggiornare o aspettare qualche secondo",
     "Pass": "Passa",
     "Pay for a Standard Project": "Paga per un Progetto Standard",
     "Play project card": "Paga carta progetto",
@@ -177,12 +174,8 @@
     "Increase Venus scale": "Aumenta la scala di Venere",
 
     "Login": "Login",
-    "Register": "Registrati",
-    "Go To Register": "Vai alla Registrazione",
     "My Games": "Le Mie Partite",
-    "Donate": "Dona",
     "LoginOut": "Scollegati",
-    "Help Translation": "Aiuta con la Traduzione",
 
 
     "Toggle all": "Spunta tutti",

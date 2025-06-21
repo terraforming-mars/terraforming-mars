@@ -17,7 +17,7 @@ export class SpacePrivateers extends Card implements IProjectCard, IActionCard {
       type: CardType.ACTIVE,
       name: CardName.SPACE_PRIVATEERS,
       cost: 10,
-      tags: [Tag.SPACE],
+      tags: [Tag.CRIME, Tag.SPACE],
       resourceType: CardResource.FIGHTER,
       victoryPoints: -2,
       requirements: {corruption: 3},

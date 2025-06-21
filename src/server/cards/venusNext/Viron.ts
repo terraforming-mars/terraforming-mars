@@ -5,8 +5,9 @@ import {IActionCard, ICard, isIActionCard, isIHasCheckLoops} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Viron extends CorporationCard {
+export class Viron extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.VIRON,
@@ -42,7 +43,7 @@ export class Viron extends CorporationCard {
       if (isIHasCheckLoops(playedCard) && playedCard.getCheckLoops() >= 2) {
         continue;
       }
-      if (player.getActionsThisGeneration().has(playedCard.name) && playedCard.canAct(player)) {
+      if (player.actionsThisGeneration.has(playedCard.name) && playedCard.canAct(player)) {
         result.push(playedCard);
       }
     }
@@ -50,7 +51,7 @@ export class Viron extends CorporationCard {
   }
 
   public canAct(player: IPlayer): boolean {
-    return this.getActionCards(player).length > 0 && !player.getActionsThisGeneration().has(this.name);
+    return this.getActionCards(player).length > 0 && !player.actionsThisGeneration.has(this.name);
   }
 
   public action(player: IPlayer) {

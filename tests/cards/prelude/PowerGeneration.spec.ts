@@ -3,8 +3,8 @@ import {PowerGeneration} from '../../../src/server/cards/prelude/PowerGeneration
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('PowerGeneration', function() {
-  it('Should play', function() {
+describe('PowerGeneration', () => {
+  it('Should play', () => {
     const card = new PowerGeneration();
     const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);

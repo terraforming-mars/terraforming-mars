@@ -3,8 +3,8 @@ import {LeadershipSummit} from '../../../src/server/cards/community/LeadershipSu
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {testGame} from '../../TestingUtils';
 
-describe('LeadershipSummit', function() {
-  it('resolve play', function() {
+describe('LeadershipSummit', () => {
+  it('resolve play', () => {
     const card = new LeadershipSummit();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

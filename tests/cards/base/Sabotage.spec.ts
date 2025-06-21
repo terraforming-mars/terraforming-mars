@@ -5,17 +5,17 @@ import {testGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('Sabotage', function() {
+describe('Sabotage', () => {
   let card: Sabotage;
   let player: TestPlayer;
   let player2: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Sabotage();
     [/* game */, player, player2] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player2.titanium = 3;
     player2.steel = 4;
     player2.megaCredits = 7;

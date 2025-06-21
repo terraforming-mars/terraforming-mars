@@ -3,8 +3,8 @@ import {HousePrinting} from '../../../src/server/cards/prelude/HousePrinting';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('HousePrinting', function() {
-  it('Should play', function() {
+describe('HousePrinting', () => {
+  it('Should play', () => {
     const card = new HousePrinting();
     const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);

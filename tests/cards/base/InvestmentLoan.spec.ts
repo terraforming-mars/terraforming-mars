@@ -4,8 +4,8 @@ import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('InvestmentLoan', function() {
-  it('Should play', function() {
+describe('InvestmentLoan', () => {
+  it('Should play', () => {
     const card = new InvestmentLoan();
     const [game, player] = testGame(2);
     cast(card.play(player), undefined);

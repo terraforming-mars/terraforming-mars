@@ -20,6 +20,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
   private blockable: boolean;
   private autoselect: boolean;
   private title: string | Message;
+  private log: boolean;
 
   public override priority = Priority.ATTACK_OPPONENT;
   constructor(
@@ -35,6 +36,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
       autoselect?: boolean
       title?: string | Message,
       blockable?: boolean,
+      log?: boolean,
     }) {
     super(player, Priority.ATTACK_OPPONENT);
     this.cardResource = cardResource;
@@ -43,6 +45,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
     this.mandatory = options?.mandatory ?? true;
     this.blockable = options?.blockable ?? true;
     this.autoselect = options?.autoselect ?? true;
+    this.log = options?.log ?? false;
     this.title = options?.title ?? (`Select card to remove ${count} ${cardResource}(s)`);
     if (this.source === 'self') {
       this.priority = Priority.LOSE_RESOURCE_OR_PRODUCTION;
@@ -92,16 +95,16 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
   private attack(card: ICard) {
     const target = this.player.game.getCardPlayerOrThrow(card.name);
 
-    // // TODO(kberg): Consolidate the blockable in mayBlock.
-    // if (this.blockable === false) {
-    //   target.removeResourceFrom(card, this.count, {removingPlayer: this.player});
-    //   this.cb(true);
-    //   return;
-    // }
+    // TODO(kberg): Consolidate the blockable in maybeBlock.
+    if (this.blockable === false) {
+      target.removeResourceFrom(card, this.count, {removingPlayer: this.player});
+      this.cb({card: card, owner: target, proceed: true});
+      return;
+    }
     const msg = message('${0} ${1} from ${2}', (b) => b.number(this.count).string(card.resourceType || 'resources').card(card));
     target.defer(UnderworldExpansion.maybeBlockAttack(target, this.player, msg, (proceed) => {
       if (proceed) {
-        target.removeResourceFrom(card, this.count, {removingPlayer: this.player});
+        target.removeResourceFrom(card, this.count, {removingPlayer: this.player, log: this.log});
       }
       this.cb({card: card, owner: target, proceed: proceed});
       return undefined;
@@ -119,15 +122,14 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
         }
       } else {
         if (source !== 'self') {
-          switch (resourceType) {
-          case CardResource.ANIMAL:
-          case CardResource.MICROBE:
-            if (!p.hasProtectedHabitats()) {
-              resourceCards.push(...get());
+          const hasProtetedHabitats = p.hasProtectedHabitats();
+          for (const card of get()) {
+            if (hasProtetedHabitats) {
+              if (card.resourceType === CardResource.ANIMAL || card.resourceType === CardResource.MICROBE) {
+                continue;
+              }
             }
-            break;
-          default:
-            resourceCards.push(...get());
+            resourceCards.push(card);
           }
         }
       }

@@ -11,7 +11,7 @@ export class ChemicalFactory extends ActionCard implements IProjectCard {
       type: CardType.ACTIVE,
       name: CardName.CHEMICAL_FACTORY,
       cost: 18,
-      tags: [Tag.BUILDING],
+      tags: [Tag.CRIME, Tag.BUILDING],
 
       action: {
         spend: {plants: 1},

@@ -8,12 +8,12 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {Tag} from '../../../src/common/cards/Tag';
 import {cast} from '../../TestingUtils';
 
-describe('Kickstarter', function() {
+describe('Kickstarter', () => {
   let card: Kickstarter;
   let game: IGame;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Kickstarter();
     [game, player] = testGame(1, {pathfindersExpansion: true});
   });
@@ -28,9 +28,9 @@ describe('Kickstarter', function() {
     const action = cast(game.deferredActions.pop(), DeclareCloneTag);
     const options = cast(action.execute(), OrOptions);
 
-    expect(options.options[1].title).to.match(/mars/);
+    expect(options.options[2].title).to.match(/mars/);
     expect(game.pathfindersData).deep.eq({
-      venus: -1,
+      venus: 0,
       earth: 0,
       mars: 0,
       jovian: 0,
@@ -38,10 +38,10 @@ describe('Kickstarter', function() {
       vps: [],
     });
 
-    options.options[1].cb();
+    options.options[2].cb();
 
     expect(game.pathfindersData).deep.eq({
-      venus: -1,
+      venus: 0,
       earth: 0,
       mars: 3,
       jovian: 0,

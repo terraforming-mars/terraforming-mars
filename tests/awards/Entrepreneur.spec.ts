@@ -15,8 +15,8 @@ function addAdjacencyBonus(player: IPlayer, spaceId: SpaceId, adjacency: Adjacen
   space.adjacency = adjacency;
 }
 
-describe('Entrepreneur', function() {
-  it('Correctly counts ocean tiles', function() {
+describe('Entrepreneur', () => {
+  it('Correctly counts ocean tiles', () => {
     const award = new Entrepreneur();
     const [/* game */, player/* , player2 */] = testGame(2);
 

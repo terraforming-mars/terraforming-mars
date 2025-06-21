@@ -30,7 +30,7 @@
     "Requires 1 corruption. Target a player that has at least 2 corruption. Unless that player pays you 10 M€, they lose 2 corruption.": "条件：汚職1つ以上. 汚職を2つ以上あるプレイヤーは、10MCをあなたに支払う または 2汚職除去.",
 
     "Corporate Theft": "企業窃盗",
-    "Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. NOTE: Do not use in single player games.": "条件：汚職2つ以上. 他のプレイヤーからカード上の資源を1つ盗む. これが防がれた場合、1腐敗獲得. ※ソロでは使用不可.",
+    "Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. IF SOLO: gain 1 corruption.": "条件：汚職2つ以上. 他のプレイヤーからカード上の資源を1つ盗む. これが防がれた場合、1腐敗獲得. ソロの場合: 腐敗を 1 つ獲得します。",
 
     "Crater Survey": "クレーター調査",
     "Add 2 data resources to ANOTHER card. Identify 4 underground resources.": "2データ獲得. 4回地下資源を調査する.",
@@ -39,7 +39,7 @@
     "Requires 1 corruption. Increase your M€, steel, and energy production 1 step each.": "条件：汚職1つ以上. MC産出+1. 建材産出+1. 電力産出+1.",
 
     "Deepmining": "深掘り",
-    "Excavate an IDENTIFIED underground resource ANYWHERE ON MARS with a steel or titanium placement bonus. Increase that production 1 step.": "配置ボーナスに建材 または チタンを含む地下資源が判明したマスで地下資源を採掘する. 入手した資材の産出+1.",
+    "Excavate an underground resource that depicts steel or titanium ANYWHERE ON THE BOARD. Increase your production of that resource 1 step.": "配置ボーナスに建材 または チタンを含む地下資源が判明したマスで地下資源を採掘する. 入手した資材の産出+1.",
 
     "Deepnuking": "核掘り",
     "Excavate 2 underground resources. Remove up to 3 plants from any player.": "2回地下資源を採掘する. 望むならプレイヤー1人から最大3植物除去.",
@@ -218,7 +218,6 @@
     "1 VP per 3 data resources on this card.": "このカード上の3データ毎に1VP.",
 
     "Scapegoat": "生け贄",
-    "Gain 1 corruption.": "1汚職獲得.",
 
     "Search for Life Underground": "地下生命探査",
     "Action: Spend 1 M€ to identify an underground resource. If it depicts at least 1 microbe, add a science resource here.": "アクション：1MC支払い、地下資源を調査する. そこに微生物があればこのカード上に1科学リソースを追加する.",
@@ -226,7 +225,7 @@
     "Temperature must -18° C or colder.": "条件：気温-18℃以下.",
 
     "Server Sabotage": "サーバー妨害",
-    "Gain 1 corruption. Remove up to 2 data fromany player. Remove all unclaimed underground resources from the board back into the pile. Their spaces can be identified again.": "1汚職獲得. プレイヤー1人の2データ除去. 採掘されていない資源トークンを全て除去する. それらは再び調査できる.",
+    "Gain 1 corruption. Remove up to 2 data from any player. Remove all unclaimed underground resources from the board back into the pile. Their spaces can be identified again.": "1汚職獲得. プレイヤー1人の2データ除去. 採掘されていない資源トークンを全て除去する. それらは再び調査できる.",
 
     "Soil Export": "土壌輸出",
     "Excavate an underground resource.": "地下資源を採掘する.",
@@ -252,11 +251,10 @@
 
     "Standard Technology": "標準テクノロジー",
     "REPEAT": "",
-    "Action: Use a standard project that you've already done this generation, with its cost reduced by 8 M€.": "アクション：この世代、すでに行った標準プロジェクトをコスト-8MCでプレイする.",
+    "(Action: Use a standard project that you've already used this generation, with its cost reduced by 8 M€).": "アクション：この世代、すでに行った標準プロジェクトをコスト-8MCでプレイする.",
 
     "Stem Field Subsidies": "STEMフィールド補助金",
     "Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "効果：科学タグをプレイ時、1データ獲得. 地下資源を調査する.",
-    "1 VP per 3 data resources on this card.": "このカード上の3データ毎に1VP.",
 
     "Subnautic Pirates": "潜水海賊",
     "Requires 1 excavation marker and 1 corruption. Pick an ocean tile that has your excavation marker on it. Steal 6 M€ from each other player that owns a tile adjacent to that ocean. This can be blocked by corruption.": "条件：地下採掘1回以上、汚職1つ以上. あなたが地下採掘している海洋を1枚選ぶ. そこに隣接するタイルを所有している他の全プレイヤーから6MC盗む.",
@@ -273,7 +271,7 @@
     "Action: Spend 1 tool resource on this card to excavate an underground resource.": "アクション：このカード上から1工具除去し、地下資源を採掘する.",
 
     "Tunnel Boring Machine": "トンネルボーリングマシン",
-    "Action: Pay 3 energy to excavate 2 underground resources": "アクション：3電力支払い、2回地下資源を採掘する.",
+    "Action: Pay 3 energy to excavate 2 underground resources.": "アクション：3電力支払い、2回地下資源を採掘する.",
 
     "Tunneling Subcontractor": "トンネル工事請負業者",
     "Gain 1 corruption. Excavate an underground resource.": "1汚職獲得. 地下資源を採掘する.",

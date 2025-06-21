@@ -5,12 +5,14 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {all} from '../Options';
 import {IPlayer} from '../../IPlayer';
+import {Tag} from '../../../common/cards/Tag';
 
 export class FabricatedScandal extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.FABRICATED_SCANDAL,
       type: CardType.EVENT,
+      tags: [Tag.CRIME],
       cost: 15,
 
       behavior: {

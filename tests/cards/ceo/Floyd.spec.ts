@@ -7,7 +7,7 @@ import {Floyd} from '../../../src/server/cards/ceos/Floyd';
 import {AsteroidMining} from '../../../src/server/cards/base/AsteroidMining';
 import {testGame} from '../../TestGame';
 
-describe('Floyd', function() {
+describe('Floyd', () => {
   let card: Floyd;
   let player: TestPlayer;
   let game: IGame;
@@ -17,11 +17,11 @@ describe('Floyd', function() {
     [game, player] = testGame(2, {ceoExtension: true});
   });
 
-  it('Cannot act without cards', function() {
+  it('Cannot act without cards', () => {
     expect(card.canAct(player)).is.false;
   });
 
-  it('Takes action', function() {
+  it('Takes action', () => {
     player.playedCards.push(card);
     game.generation = 6;
     player.megaCredits = 6;
@@ -41,7 +41,7 @@ describe('Floyd', function() {
     expect(player.canPlay(asteroidMining)).is.true;
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     card.action(player);
     runAllActions(game);
 

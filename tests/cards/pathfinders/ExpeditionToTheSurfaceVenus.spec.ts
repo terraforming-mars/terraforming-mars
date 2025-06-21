@@ -4,17 +4,17 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('ExpeditiontotheSurfaceVenus', function() {
+describe('ExpeditiontotheSurfaceVenus', () => {
   let card: ExpeditionToTheSurfaceVenus;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ExpeditionToTheSurfaceVenus();
     [game, player] = testGame(1);
   });
 
-  it('play', function() {
+  it('play', () => {
     player.cardsInHand = [];
     expect(player.getTerraformRating()).eq(14);
 

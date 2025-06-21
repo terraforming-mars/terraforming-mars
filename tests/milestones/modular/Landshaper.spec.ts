@@ -8,13 +8,13 @@ import {TileType} from '../../../src/common/TileType';
 import {BoardName} from '../../../src/common/boards/BoardName';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 
-describe('Landshaper', function() {
+describe('Landshaper', () => {
   let milestone: Landshaper;
   let player: TestPlayer;
   let game: IGame;
   let spaces: ReadonlyArray<Space>;
 
-  beforeEach(function() {
+  beforeEach(() => {
     milestone = new Landshaper();
     [game, player] = testGame(2, {boardName: BoardName.ARABIA_TERRA, moonExpansion: true});
     spaces = game.board.getAvailableSpacesOnLand(player);

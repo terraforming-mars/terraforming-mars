@@ -14,19 +14,23 @@ import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {toName} from '../../../src/common/utils/utils';
 
-describe('Ambient', function() {
+describe('Ambient', () => {
   let card: Ambient;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Ambient();
     [game, player, player2] = testGame(2);
-    player.corporations.push(card);
   });
 
-  it('initialAction', function() {
+  it('play', () => {
+    player.playCorporationCard(card);
+    expect(player.production.heat).eq(1);
+  });
+
+  it('initialAction', () => {
     expect(game.getVenusScaleLevel()).eq(0);
     expect(player.getTerraformRating()).eq(20);
 
@@ -37,25 +41,26 @@ describe('Ambient', function() {
     expect(player.getTerraformRating()).eq(22);
   });
 
-  it('onCardPlayed', function() {
+  it('effect', () => {
+    player.corporations.push(card);
     expect(player.production.heat).eq(0);
 
-    card.onCardPlayed(player, fakeCard({tags: []}));
+    player.playCard(fakeCard({tags: []}));
     expect(player.production.heat).eq(0);
 
-    card.onCardPlayed(player, fakeCard({tags: [Tag.EARTH]}));
+    player.playCard(fakeCard({tags: [Tag.EARTH]}));
     expect(player.production.heat).eq(0);
 
-    card.onCardPlayed(player, fakeCard({tags: [Tag.VENUS]}));
+    player.playCard(fakeCard({tags: [Tag.VENUS]}));
     expect(player.production.heat).eq(1);
     expect(player2.production.heat).eq(0);
 
-    card.onCardPlayed(player2, fakeCard({tags: [Tag.VENUS]}));
+    player2.playCard(fakeCard({tags: [Tag.VENUS]}));
     expect(player.production.heat).eq(1);
     expect(player2.production.heat).eq(0);
   });
 
-  it('canAct', function() {
+  it('canAct', () => {
     player.heat = 7;
     setTemperature(game, MAX_TEMPERATURE);
 
@@ -85,10 +90,11 @@ describe('Ambient', function() {
   });
 
   it('action is repeatable', () => {
+    player.corporations.push(card);
     player.heat = 16;
     setTemperature(game, MAX_TEMPERATURE);
 
-    const getBlueActions = function() {
+    const getBlueActions = () => {
       const orOptions = cast(player.getActions(), OrOptions);
       const option = orOptions.options.find((o) => o.title === 'Perform an action from a played card');
       return option === undefined ? undefined : cast(option, SelectCard);

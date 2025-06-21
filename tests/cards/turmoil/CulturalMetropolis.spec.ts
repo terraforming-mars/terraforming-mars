@@ -9,31 +9,31 @@ import {cast, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
 
-describe('Cultural Metropolis', function() {
+describe('Cultural Metropolis', () => {
   let card: CulturalMetropolis;
   let player: TestPlayer;
   let game: IGame;
   let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CulturalMetropolis();
     [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
     turmoil = game.turmoil!;
   });
 
-  it('Can not play without energy production', function() {
+  it('Can not play without energy production', () => {
     turmoil.sendDelegateToParty(player, PartyName.UNITY, game);
     turmoil.sendDelegateToParty(player, PartyName.UNITY, game);
     expect(card.canPlay(player)).is.not.true;
   });
 
 
-  it('Can not play without two delegate in unity or unity ruling', function() {
+  it('Can not play without two delegate in unity or unity ruling', () => {
     player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can not play without 2 delegates available', function() {
+  it('Can not play without 2 delegates available', () => {
     player.production.add(Resource.ENERGY, 1);
     turmoil.sendDelegateToParty(player, PartyName.UNITY, game);
     turmoil.sendDelegateToParty(player, PartyName.UNITY, game);
@@ -64,7 +64,7 @@ describe('Cultural Metropolis', function() {
     expect(card.canPlay(player)).is.false;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const unity = turmoil.getPartyByName(PartyName.UNITY);
     const startingUnityDelegateCount = unity.delegates.size;
 

@@ -6,7 +6,7 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MareImbriumMine} from '../../../src/server/cards/moon/MareImbriumMine';
-import {MoonSpaces} from '../../../src/common/moon/MoonSpaces';
+import {NamedMoonSpaces} from '../../../src/common/moon/NamedMoonSpaces';
 import {TileType} from '../../../src/common/TileType';
 
 describe('MareImbriumMine', () => {
@@ -47,7 +47,7 @@ describe('MareImbriumMine', () => {
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.miningRate).eq(1);
 
-    const mareImbrium = moonData.moon.getSpaceOrThrow(MoonSpaces.MARE_IMBRIUM);
+    const mareImbrium = moonData.moon.getSpaceOrThrow(NamedMoonSpaces.MARE_IMBRIUM);
     expect(mareImbrium.player).eq(player);
     expect(mareImbrium.tile!.tileType).eq(TileType.MOON_MINE);
   });

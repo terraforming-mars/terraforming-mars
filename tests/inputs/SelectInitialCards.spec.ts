@@ -5,7 +5,7 @@ import {TestPlayer} from '../TestPlayer';
 import {CardName} from '../../src/common/cards/CardName';
 import {ICorporationCard} from '../../src/server/cards/corporation/ICorporationCard';
 import {cardsFromJSON, ceosFromJSON, corporationCardsFromJSON, preludesFromJSON} from '../../src/server/createCard';
-import {toName} from '../TestingUtils';
+import {toName} from '../../src/common/utils/utils';
 
 describe('SelectInitialCards', () => {
   let player: TestPlayer;

@@ -1,5 +1,5 @@
 <template>
-  <div :class="getMainClass()" :data_space_id="space.id">
+  <div v-if="space !== undefined" :class="getMainClass()" :data_space_id="space.id">
     <board-space-tile
       :space="space"
       :aresExtension="aresExtension"
@@ -11,7 +11,7 @@
       <div class="board-space-coords">({{ space.y }}, {{ space.x }}) ({{ space.id }})</div>
     </template>
     <template v-if="tileView === 'show'">
-      <div :class="'board-cube board-cube--'+space.color" v-if="space.color !== undefined"></div>
+      <div :class="playerColorCss" v-if="space.color !== undefined"></div>
       <template v-if="space.gagarin !== undefined">
         <div v-if="space.gagarin === 0" class='gagarin'></div>
         <div v-else class='gagarin visited'></div>
@@ -40,12 +40,13 @@ import BoardSpaceTile from '@/client/components/board/BoardSpaceTile.vue';
 import UndergroundResources from '@/client/components/board/UndergroundResources.vue';
 import {TileView} from '@/client/components/board/TileView';
 import {SpaceModel} from '@/common/models/SpaceModel';
+import {getPreferences} from '../utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'board-space',
   props: {
     space: {
-      type: Object as () => SpaceModel,
+      type: Object as () => SpaceModel | undefined,
     },
     text: {
       type: String,
@@ -67,14 +68,21 @@ export default Vue.extend({
   },
   methods: {
     getMainClass(): string {
-      let css = 'board-space board-space-' + this.space.id.toString();
+      let css = 'board-space board-space-' + this.space?.id.toString();
       css += ' board-space-selectable';
       return css;
     },
   },
   computed: {
     showBonus(): boolean {
-      return this.space.tileType === undefined || this.tileView === 'hide';
+      return this.space?.tileType === undefined || this.tileView === 'hide';
+    },
+    playerColorCss(): string {
+      if (this.space?.color === undefined) {
+        return '';
+      }
+      const css = 'board-cube board-cube--' + this.space.color;
+      return getPreferences().symbol_overlay ? css + ' overlay' : css;
     },
   },
 });

@@ -7,7 +7,7 @@
     "Tiles": "타일",
     "Global Parameters": "행성 지표",
     "Others": "기타",
-    
+
     "Building": "건물",
     "Space": "우주",
     "Science": "과학",
@@ -36,14 +36,12 @@
     "Disease": "질병",
 
     "Greenery": "녹지 타일",
-    "City": "도시 타일",
     "Ocean": "해양 타일",
     "Special": "특수 타일",
 
     "Temperature": "기온",
     "Oxygen": "산소 농도",
     "Oceans": "해양 타일",
-    "Venus": "금성개척률",
 
     "Victory Point (VP)": "승점 (VP)",
     "Terraform Rating (TR)": "테라포밍 등급 (TR)",
@@ -127,7 +125,7 @@
     "Hot Keys": "단축키",
     "Hotkeys Mapping": "단축키 매핑",
     "Main Board": "중앙 게임판",
-    "Players Overview Table": "플레이어 개요표", 
-    "Cards in Hand": "손에 있는 카드", 
+    "Players Overview Table": "플레이어 개요표",
+    "Cards in Hand": "손에 있는 카드",
     "Colonies": "개척기지"
 }

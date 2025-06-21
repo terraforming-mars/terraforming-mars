@@ -4,14 +4,14 @@ import {GainResources} from '../../src/server/inputs/GainResources';
 import {TestPlayer} from '../TestPlayer';
 import {Units} from '../../src/common/Units';
 
-describe('GainResources', function() {
+describe('GainResources', () => {
   let player: TestPlayer;
 
   beforeEach(() => {
     [/* game */, player] = testGame(1);
   });
 
-  it('Simple', function() {
+  it('Simple', () => {
     const gainResources = new GainResources(player, 2, '');
 
     expect(player.stock.asUnits()).deep.eq(Units.EMPTY);
@@ -26,12 +26,12 @@ describe('GainResources', function() {
     expect(player.stock.asUnits()).deep.eq(Units.of({megacredits: 1, plants: 1}));
   });
 
-  it('No options', function() {
+  it('No options', () => {
     const gainResources = new GainResources(player, 2, '');
     expect(() => gainResources.process({type: 'and', responses: []}, player)).to.throw(/Incorrect options provided/);
   });
 
-  it('Not enough options', function() {
+  it('Not enough options', () => {
     const gainResources = new GainResources(player, 2, '');
     expect(() => gainResources.process({type: 'and', responses: [
       {type: 'amount', amount: 0},
@@ -42,7 +42,7 @@ describe('GainResources', function() {
     ]}, player)).to.throw(/Incorrect options provided/);
   });
 
-  it('Too many options', function() {
+  it('Too many options', () => {
     const gainResources = new GainResources(player, 2, '');
     expect(() => gainResources.process({type: 'and', responses: [
       {type: 'amount', amount: 0},
@@ -55,7 +55,7 @@ describe('GainResources', function() {
     ]}, player)).to.throw(/Incorrect options provided/);
   });
 
-  it('Did not select enough', function() {
+  it('Did not select enough', () => {
     const gainResources = new GainResources(player, 2, '');
     expect(() => gainResources.process({type: 'and', responses: [
       {type: 'amount', amount: 0},
@@ -67,7 +67,7 @@ describe('GainResources', function() {
     ]}, player)).to.throw('Select 2 resource(s)');
   });
 
-  it('Selected too much', function() {
+  it('Selected too much', () => {
     const gainResources = new GainResources(player, 2, '');
     expect(() => gainResources.process({type: 'and', responses: [
       {type: 'amount', amount: 1},

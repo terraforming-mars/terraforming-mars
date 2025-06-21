@@ -130,8 +130,6 @@
     "${0} acted as World Government and increased oxygen level": "${0} trad op als wereldregering en een verhoogd het zuurstofgehalte",
     "${0} acted as World Government and increased temperature": "${0} trad op als wereldregering en verhoogde de temperatuur",
     "${0} loses ${1} resource(s) on ${2} by ${3}": "${0} verloor ${1} resource(s) op ${2} door ${3}",
-    "${0}'s ${1} production modified by ${2} by ${3}": "De ${1}-productie van ${0} is gewijzigd met ${2} door ${3}",
-    "${0}'s ${1} amount modified by ${2} by ${3}": "De ${1}-grondstoffen van ${0} zijn gewijzigd met ${2} door ${3}",
     "${0} received ${1} M€ from ${2} owner (${3})": "${0} ontving ${1} M€ van ${2} (${3})",
     "${0} copied ${1} production with ${2}": "${0} kopieerde de productie van ${1} met ${2}",
     "${0} used ${1} action with ${2}": "${0} gebruikte een actie van ${1} met ${2}",

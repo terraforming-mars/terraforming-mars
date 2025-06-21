@@ -3,8 +3,8 @@ import {SkyDocks} from '../../../src/server/cards/colonies/SkyDocks';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
-describe('SkyDocks', function() {
-  it('Should play', function() {
+describe('SkyDocks', () => {
+  it('Should play', () => {
     const card = new SkyDocks();
     const player = TestPlayer.BLUE.newPlayer();
     expect(card.canPlay(player)).is.not.true;

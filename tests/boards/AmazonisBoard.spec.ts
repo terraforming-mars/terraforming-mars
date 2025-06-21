@@ -3,8 +3,8 @@ import {expect} from 'chai';
 import {AmazonisBoard} from '../../src/server/boards/AmazonisBoard';
 import {SeededRandom} from '../../src/common/utils/Random';
 
-describe('AmazonisBoard', function() {
-  it('sanity test', function() {
+describe('AmazonisBoard', () => {
+  it('sanity test', () => {
     const board = AmazonisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     expect(board.spaces).to.deep.eq([
       {'id': '01', 'spaceType': 'colony', 'x': -1, 'y': -1, 'bonus': []},
@@ -70,7 +70,6 @@ describe('AmazonisBoard', function() {
       {'id': '61', 'spaceType': 'land', 'x': 6, 'y': 8, 'bonus': [1]},
       {'id': '62', 'spaceType': 'ocean', 'x': 7, 'y': 8, 'bonus': [2]},
       {'id': '63', 'spaceType': 'land', 'x': 8, 'y': 8, 'bonus': [1, 1]},
-      {'id': '69', 'spaceType': 'colony', 'x': -1, 'y': -1, 'bonus': []},
     ]);
   });
 });

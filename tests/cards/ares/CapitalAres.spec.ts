@@ -10,17 +10,17 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('CapitalAres', function() {
+describe('CapitalAres', () => {
   let card: CapitalAres;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CapitalAres();
     [game, player] = testGame(2, {aresExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
     for (let i = 0; i < 4; i++) {
       oceanSpaces[i].tile = {tileType: TileType.OCEAN};

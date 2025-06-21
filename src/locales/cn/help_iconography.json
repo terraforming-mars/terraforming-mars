@@ -7,15 +7,10 @@
     "Card Tags": "卡牌标志",
     "Building": "建筑",
     "Space": "太空",
-    "Science": "科学",
     "Power": "电力",
     "Earth": "地球",
     "Jovian": "木星",
-    "Venus": "金星",
     "Plant": "植物",
-    "Microbe": "微生物",
-    "Animal": "动物",
-    "City": "城市",
     "Moon": "月亮",
 
     "Wild": "百搭",
@@ -32,19 +27,19 @@
     "Science": "科学",
     "Floater": "云资源",
     "Asteroid": "小行星",
-    
+
     "Tiles": "板块",
     "Greenery": "森林",
     "City": "城市",
     "Ocean": "海洋",
     "Special": "特殊",
-    
+
     "Global Parameters": "全球参数",
     "Temperature": "温度",
     "Oxygen": "氧气",
     "Oceans": "海洋",
     "Venus": "金星",
-    
+
     "Others": "其他",
     "Victory Point (VP)": "胜利点数 (VP)",
     "Terraform Rating (TR)": "改造度 (TR)",
@@ -54,7 +49,7 @@
     "Trade Fleet": "贸易舰队",
     "Delegate": "代表",
     "Influence": "影响力",
-    
+
     "Game Phases":"游戏阶段",
     "Initial Drafting (optional variant)":"初始轮抽（可选变体）",
     "Draw 3 corporation cards":"抽3张公司卡牌",
@@ -68,12 +63,12 @@
     "Select which corporation, 2 preludes and project cards to keep.":"选择要保留的公司，2张前序和项目卡牌。",
     "In turn order, play the corporation and pay 3 M€ for each of the project cards bought.":"按回合顺序，打出公司牌并为每张购买的项目卡牌支付3M€。",
     "In turn order, play both preludes.":"按回合顺序，打出两张前序。",
-    
+
     "Research Phase (Generation 2+)":"研究阶段（时代2+）",
     "Draw four project cards":"抽四张项目卡",
     "(Optional variant: draft the cards. Pick one pass to the player below in even generation and above in odd generation. Repeat until you have four cards.)":"（可选变体：轮抽这些卡。选出一张，在偶数时代传给下一位玩家，在奇数时代传给上一位玩家。重复直到选了四张牌。）",
     "Decide how many cards to buy":"决定购买多少张牌。",
-    
+
     "Action phase":"行动阶段",
     "Turmoil policy in effect":"动荡政策生效",
     "Take 1 or 2 actions (mandatory 2 actions if playing with fast mode):":"进行1或2行动（如果在快速模式下，则必须2行动）",
@@ -87,11 +82,11 @@
     "trade with 9 M€, 3 Ti, or 3 energy":"使用9 M€，3 钛，或者3电力来交易",
     "send delegate: free from lobby, 5 M€ from reserve":"派出代表：从大厅免费，从储备区要花费5 M€",
     "Pass for the generation":"跳过该时代",
-    
+
     "Production Phase":"生产阶段",
     "Energy becomes heat":"电能变成热量",
     "Produce resources":"生产资源",
-    
+
     "Solar Phase":"太阳阶段",
     "i. Game end check":"i. 检查游戏结束",
     "If temperature, oxygen, and oceans are maxed, skip the rest of solar phase to the end game phase.":"如果温度、氧气以及海洋都达到最大，跳过剩余的太阳阶段，进入游戏结束阶段。",
@@ -119,16 +114,16 @@
     "Move the coming (middle) Global Event to current position (right). Add its lower neutral delegate.":"将近期（中间的）全球事件移动到当前（右边）。按照其下部添加中立代表。",
     "Move the distant (left) Global Event to coming position (middle)":"将远期（左边的）全球事件移动到近期（中间）。",
     "Reveal a new Global Event in the distant (left) position. Add its top neutral delegate":"翻开一张新的全球事件，放到远期（左边的）位置。按照其上部添加中立代表。",
-    
+
     "End Game":"游戏结束",
     "In turn order, convert plants to greeneries.":"按照回合顺序，消耗植物放置森林。",
     "Assign awards":"分配奖励",
     "Score: TR + tiles + card + milestones + awards + (1 VP per chairman and party leader":"计分：改造度+板块分数+卡牌分数+里程碑+奖励分数+（每个主席和党派领袖1VP",
-    
+
     "Hot Keys": "快捷键",
     "Main Board": "主面板",
-    "Players Overview Table": "玩家一览面板", 
-    "Cards in Hand": "手牌", 
+    "Players Overview Table": "玩家一览面板",
+    "Cards in Hand": "手牌",
     "Colonies": "殖民地"
 
 }

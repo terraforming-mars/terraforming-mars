@@ -2,8 +2,9 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Polyphemos extends CorporationCard {
+export class Polyphemos extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.POLYPHEMOS,

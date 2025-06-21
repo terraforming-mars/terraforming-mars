@@ -4,15 +4,16 @@ import {InventorsGuild} from '../../src/server/cards/base/InventorsGuild';
 import {SolarnetShutdown} from '../../src/server/turmoil/globalEvents/SolarnetShutdown';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
+import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
+import {AICentral} from '../../src/server/cards/base/AICentral';
 
-describe('SolarnetShutdown', function() {
-  it('resolve play', function() {
+describe('SolarnetShutdown', () => {
+  it('resolve play', () => {
     const card = new SolarnetShutdown();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;
-    player.playedCards.push(new InventorsGuild());
-    player.playedCards.push(new ColonizerTrainingCamp());
-    player2.playedCards.push(new InventorsGuild(), new InventorsGuild(), new InventorsGuild());
+    player.playedCards.push(new InventorsGuild(), new ColonizerTrainingCamp());
+    player2.playedCards.push(new InventorsGuild(), new Tardigrades(), new AICentral());
     player.megaCredits = 10;
     player2.megaCredits = 10;
 

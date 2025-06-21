@@ -77,8 +77,6 @@
     "${0} acted as World Government and increased oxygen level": "${0} atuou como governo mundial e aumentou o nível de oxigênio",
     "${0} acted as World Government and increased temperature": "${0} atuou como governo mundial e aumentou a temperatura",
     "${0} loses ${1} resource(s) on ${2} by ${3}": "${3} fez que ${0} perca ${1} recurso(s) em ${2}",
-    "${0}'s ${1} production modified by ${2} by ${3}": "A produção de ${1} de ${0} foi modificada em ${2} por ${3}",
-    "${0}'s ${1} amount modified by ${2} by ${3}": "O recurso ${1} de ${0} foi modificado em ${2} por ${3}",
     "${0} received ${1} M€ from ${2} owner (${3})": "${0} recebeu ${1} M€ de ${2} (${3})",
     "${0} copied ${1} production with ${2}": "${0} copiou a produção de ${1} com ${2}",
     "${0} used ${1} action with ${2}": "${0} fez a ação ${1} com ${2}",

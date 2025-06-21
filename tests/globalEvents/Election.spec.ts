@@ -1,20 +1,18 @@
 import {expect} from 'chai';
-import {StripMine} from '../../src/server/cards/base/StripMine';
 import {Election} from '../../src/server/turmoil/globalEvents/Election';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestGame';
 import {addCity, fakeCard} from '../TestingUtils';
 import {Tag} from '../../src/common/cards/Tag';
 
-describe('Election', function() {
-  it('resolve play', function() {
+describe('Election', () => {
+  it('resolve play', () => {
     const card = new Election();
     const [game, player, player2, player3] = testGame(3, {turmoilExtension: true});
     const turmoil = game.turmoil!;
     turmoil.initGlobalEvent(game);
-    player.playedCards.push(new StripMine());
-    player2.playedCards.push(new StripMine());
-    player2.playedCards.push(new StripMine());
+    player.tagsForTest = {building: 1};
+    player2.tagsForTest = {building: 2};
     addCity(player3);
     turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
@@ -33,7 +31,7 @@ describe('Election', function() {
   });
 
 
-  it('solo play', function() {
+  it('solo play', () => {
     const card = new Election();
     const [game, player] = testGame(1, {turmoilExtension: true});
     const turmoil = game.turmoil!;
@@ -48,21 +46,21 @@ describe('Election', function() {
 
     expect(player.getTerraformRating()).to.eq(14);
 
-    fake.tags.push(Tag.BUILDING);
+    player.playedCards.push(fakeCard({tags: [Tag.BUILDING]}));
     expect(card.getScore(player, turmoil, game)).eq(5);
 
     card.resolve(game, turmoil);
 
     expect(player.getTerraformRating()).to.eq(15);
 
-    fake.tags.push(Tag.BUILDING, Tag.BUILDING, Tag.BUILDING, Tag.BUILDING);
+    player.playedCards.push(fakeCard({tags: [Tag.BUILDING, Tag.BUILDING, Tag.BUILDING, Tag.BUILDING]}));
     expect(card.getScore(player, turmoil, game)).eq(9);
 
     card.resolve(game, turmoil);
 
     expect(player.getTerraformRating()).to.eq(16);
 
-    fake.tags.push(Tag.BUILDING);
+    player.playedCards.push(fakeCard({tags: [Tag.BUILDING]}));
     expect(card.getScore(player, turmoil, game)).eq(10);
 
     card.resolve(game, turmoil);

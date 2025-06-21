@@ -9,25 +9,25 @@ import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestingUtils';
 
-describe('Banned Delegate', function() {
+describe('Banned Delegate', () => {
   let card: BannedDelegate;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
   let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new BannedDelegate();
     [game, player, player2] = testGame(2, {turmoilExtension: true});
     turmoil = game.turmoil!;
   });
 
-  it('Cannot play', function() {
+  it('Cannot play', () => {
     turmoil.chairman = player2;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     turmoil.chairman = player;
     expect(card.canPlay(player)).is.true;
 
@@ -48,7 +48,7 @@ describe('Banned Delegate', function() {
     expect(greens.delegates.size).eq(initialDelegatesCount - 1);
   });
 
-  it('Removes duplicates', function() {
+  it('Removes duplicates', () => {
     turmoil.chairman = player;
     expect(card.canPlay(player)).is.true;
 

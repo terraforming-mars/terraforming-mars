@@ -1,23 +1,22 @@
-import GameEnd from '@/client/components/GameEnd.vue';
+import * as constants from '@/common/constants';
+import * as raw_settings from '@/genfiles/settings.json';
+import AdminHome from '@/client/components/admin/AdminHome.vue';
+import CardList from '@/client/components/cardlist/CardList.vue';
 import CreateGameForm from '@/client/components/create/CreateGameForm.vue';
+import GameEnd from '@/client/components/GameEnd.vue';
 import GameHome from '@/client/components/GameHome.vue';
 import GamesOverview from '@/client/components/GamesOverview.vue';
+import Help from '@/client/components/help/Help.vue';
+import LoginHome from '@/client/components/auth/LoginHome.vue';
+import LoadGameForm from '@/client/components/LoadGameForm.vue';
 import PlayerHome from '@/client/components/PlayerHome.vue';
 import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
 import SpectatorHome from '@/client/components/SpectatorHome.vue';
-import {ViewModel, PlayerViewModel} from '@/common/models/PlayerModel';
 import StartScreen from '@/client/components/StartScreen.vue';
-import LoadGameForm from '@/client/components/LoadGameForm.vue';
-import CardList from '@/client/components/cardlist/CardList.vue';
-import {SimpleGameModel} from '@/common/models/SimpleGameModel';
-import Help from '@/client/components/help/Help.vue';
-import AdminHome from '@/client/components/admin/AdminHome.vue';
-
 import {$t, setTranslationContext} from '@/client/directives/i18n';
-
-import * as constants from '@/common/constants';
-import * as raw_settings from '@/genfiles/settings.json';
 import {paths} from '@/common/app/paths';
+import {PlayerViewModel, ViewModel} from '@/common/models/PlayerModel';
+import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {isPlayerId, isSpectatorId} from '@/common/Types';
 import {hasShowModal, showModal, windowHasHTMLDialogElement} from './HTMLDialogElementCompatibility';
@@ -25,8 +24,7 @@ import {statusCode} from '@/common/http/statusCode';
 
 const dialogPolyfill = require('dialog-polyfill');
 
-export interface MainAppData {
-    screen: 'admin' |
+type Screen = 'admin' |
             'create-game-form' |
             'cards' |
             'empty' |
@@ -34,10 +32,13 @@ export interface MainAppData {
             'games-overview' |
             'help' |
             'load' |
+            'login-home' |
             'player-home' |
             'spectator-home' |
             'start-screen' |
             'the-end';
+export interface MainAppData {
+    screen: Screen;
     /**
      * player or spectator are set once the app component has loaded.
      * Vue only watches properties that exist initially. When we
@@ -54,31 +55,34 @@ export interface MainAppData {
     isServerSideRequestInProgress: boolean;
     componentsVisibility: {[x: string]: boolean};
     game: SimpleGameModel | undefined;
+    login: string | undefined;
 }
+
+const data: MainAppData = {
+  screen: 'empty',
+  playerkey: 0,
+  settings: raw_settings,
+  isServerSideRequestInProgress: false,
+  componentsVisibility: {
+    'milestones': true,
+    'awards_list': true,
+    'tags_concise': false,
+    'pinned_player_0': false,
+    'pinned_player_1': false,
+    'pinned_player_2': false,
+    'pinned_player_3': false,
+    'pinned_player_4': false,
+    'turmoil_parties': false,
+  } as {[x: string]: boolean},
+  game: undefined as SimpleGameModel | undefined,
+  playerView: undefined,
+  spectator: undefined,
+  login: undefined,
+};
 
 export const mainAppSettings = {
   'el': '#app',
-  'data': {
-    screen: 'empty',
-    playerkey: 0,
-    settings: raw_settings,
-    isServerSideRequestInProgress: false,
-    componentsVisibility: {
-      'milestones': true,
-      'awards_list': true,
-      'tags_concise': false,
-      'pinned_player_0': false,
-      'pinned_player_1': false,
-      'pinned_player_2': false,
-      'pinned_player_3': false,
-      'pinned_player_4': false,
-      'turmoil_parties': false,
-    } as {[x: string]: boolean},
-    game: undefined as SimpleGameModel | undefined,
-    playerView: undefined,
-    spectator: undefined,
-    logPaused: false,
-  } as MainAppData,
+  'data': data,
   'components': {
     // These component keys match the screen values, and their entries in index.html.
     'player-input-factory': PlayerInputFactory,
@@ -93,6 +97,7 @@ export const mainAppSettings = {
     'card-list': CardList,
     'help': Help,
     'admin-home': AdminHome,
+    'login-home': LoginHome,
   },
   'methods': {
     showAlert(message: string, cb: () => void = () => {}): void {
@@ -185,7 +190,9 @@ export const mainAppSettings = {
   },
   mounted() {
     document.title = constants.APP_NAME;
-    if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(document.getElementById('alert-dialog'));
+    if (!windowHasHTMLDialogElement()) {
+      dialogPolyfill.default.registerDialog(document.getElementById('alert-dialog'));
+    }
     const currentPathname = getLastPathSegment();
     const app = this as unknown as (MainAppData) & (typeof mainAppSettings.methods);
     if (currentPathname === paths.PLAYER) {
@@ -235,6 +242,8 @@ export const mainAppSettings = {
       app.updateSpectator();
     } else if (currentPathname === paths.ADMIN) {
       app.screen = 'admin';
+    } else if (currentPathname === paths.LOGIN) {
+      app.screen = 'login-home';
     } else {
       app.screen = 'start-screen';
     }

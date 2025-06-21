@@ -5,7 +5,7 @@ import {Diversifier} from '../../src/server/milestones/Diversifier';
 import {Generalist} from '../../src/server/milestones/Generalist';
 import {TestPlayer} from '../TestPlayer';
 
-describe('ClaimedMilestones', function() {
+describe('ClaimedMilestones', () => {
   it('test serialization', () => {
     const bluePlayer = TestPlayer.BLUE.newPlayer();
     const redPlayer = TestPlayer.RED.newPlayer();

@@ -12,7 +12,8 @@ describe('UndergroundHabitat', () => {
     const card = new UndergroundHabitat();
     const [game, player] = testGame(2, {underworldExpansion: true});
 
-    player.playedCards = [new Birds(), new Penguins()];
+    const birds = new Birds();
+    player.playedCards.set(birds, new Penguins());
 
     cast(card.play(player), undefined);
 
@@ -23,7 +24,7 @@ describe('UndergroundHabitat', () => {
     runAllActions(game);
 
     const selectCard = cast(player.popWaitingFor(), SelectCard);
-    selectCard.cb([player.playedCards[0]]);
-    expect(player.playedCards[0].resourceCount).eq(1);
+    selectCard.cb([birds]);
+    expect(birds.resourceCount).eq(1);
   });
 });

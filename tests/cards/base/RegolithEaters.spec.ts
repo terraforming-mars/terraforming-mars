@@ -6,17 +6,17 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('RegolithEaters', function() {
+describe('RegolithEaters', () => {
   let card: RegolithEaters;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new RegolithEaters();
     [game, player] = testGame(2);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.playedCards.push(card);
     expect(churn(card.action(player), player)).is.undefined;
     expect(card.resourceCount).to.eq(1);

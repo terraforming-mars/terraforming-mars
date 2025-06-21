@@ -3,8 +3,8 @@ import {EventAnalysts} from '../../../src/server/cards/turmoil/EventAnalysts';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {testGame} from '../../TestGame';
 
-describe('EventAnalysts', function() {
-  it('Should play', function() {
+describe('EventAnalysts', () => {
+  it('Should play', () => {
     const card = new EventAnalysts();
     const [game, player] = testGame(1, {turmoilExtension: true});
     expect(card.canPlay(player)).is.not.true;

@@ -12,6 +12,7 @@ import {Resource} from '../../../common/Resource';
 import {message} from '../../../server/logs/MessageBuilder';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
+import {Tag} from '../../../common/cards/Tag';
 
 
 export class CorporateBlackmail extends Card implements IProjectCard {
@@ -20,6 +21,7 @@ export class CorporateBlackmail extends Card implements IProjectCard {
       name: CardName.CORPORATE_BLACKMAIL,
       type: CardType.EVENT,
       cost: 2,
+      tags: [Tag.CRIME],
       victoryPoints: -2,
 
       requirements: {corruption: 1},

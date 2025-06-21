@@ -8,28 +8,28 @@ import {Resource} from '../../../src/common/Resource';
 import {setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('Shuttles', function() {
+describe('Shuttles', () => {
   let card: Shuttles;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Shuttles();
     [game, player] = testGame(2);
   });
 
-  it('Can not play without energy production', function() {
+  it('Can not play without energy production', () => {
     setOxygenLevel(game, 5);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can not play if oxygen level too low', function() {
+  it('Can not play if oxygen level too low', () => {
     player.production.add(Resource.ENERGY, 1);
     setOxygenLevel(game, 4);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     setOxygenLevel(game, 5);
     player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.true;

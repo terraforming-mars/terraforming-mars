@@ -11,7 +11,7 @@ import {AresTestHelper} from '../../ares/AresTestHelper';
 import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Caesar} from '../../../src/server/cards/ceos/Caesar';
 
-describe('Caesar', function() {
+describe('Caesar', () => {
   let card: Caesar;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -27,14 +27,14 @@ describe('Caesar', function() {
     runAllActions(game);
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     expect(card.canAct(player)).is.true;
     card.action(player);
     expect(card.isDisabled).is.true;
     expect(card.canAct(player)).is.false;
   });
 
-  it('Takes action - 5 or less hazards', function() {
+  it('Takes action - 5 or less hazards', () => {
     // Sanity checks
     game.generation = 3;
     let hazards = AresTestHelper.getHazards(player);
@@ -63,7 +63,7 @@ describe('Caesar', function() {
     expect(player2.production.plants).eq(startingPlants - 1);
   });
 
-  it('Takes action - more than 5 hazards', function() {
+  it('Takes action - more than 5 hazards', () => {
     game.generation = 6;
     // Sanity check to make sure there are no Hazards on the map
     let hazards = AresTestHelper.getHazards(player);

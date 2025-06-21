@@ -5,7 +5,7 @@ import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('MediaStir', function() {
+describe('MediaStir', () => {
   let card: MediaStir;
   let player: TestPlayer;
   let game: IGame;

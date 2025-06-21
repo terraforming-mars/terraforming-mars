@@ -5,8 +5,8 @@ import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
 
-describe('CorporateArchives', function() {
-  it('Should play', function() {
+describe('CorporateArchives', () => {
+  it('Should play', () => {
     const card = new CorporateArchives();
     const [game, player] = testGame(2);
     const discarded = game.projectDeck.discardPile;

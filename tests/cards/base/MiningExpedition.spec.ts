@@ -6,18 +6,18 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('MiningExpedition', function() {
+describe('MiningExpedition', () => {
   let card: MiningExpedition;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MiningExpedition();
     [game, player, player2] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player2.plants = 8;
     card.play(player);
     expect(game.deferredActions).has.lengthOf(1);

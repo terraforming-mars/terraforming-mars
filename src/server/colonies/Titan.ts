@@ -7,11 +7,11 @@ export class Titan extends Colony {
   public override isActive = false;
   constructor() {
     super({
-      description: [
-        'Add 3 floaters to ANY card',
-        'Add n floaters to ANY card',
-        'Add 1 floater to ANY card',
-      ],
+      description: {
+        buildBonus: 'Add 3 floaters to ANY card',
+        tradeBonus: 'Add n floaters to ANY card',
+        colonyBonus: 'Add 1 floater to ANY card',
+      },
 
       name: ColonyName.TITAN,
       cardResource: CardResource.FLOATER,

@@ -1,5 +1,6 @@
 import {expect} from 'chai';
-import {cast, toName} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
+import {toName} from '../../../src/common/utils/utils';
 import {FloatingRefinery} from '../../../src/server/cards/prelude2/FloatingRefinery';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
@@ -13,7 +14,7 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 
-describe('FloatingRefinery', function() {
+describe('FloatingRefinery', () => {
   let card: FloatingRefinery;
   let player: TestPlayer;
   let game: IGame;
@@ -22,13 +23,13 @@ describe('FloatingRefinery', function() {
   let floater2: IProjectCard;
   let other: IProjectCard;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new FloatingRefinery();
     floater1 = new TitanShuttles();
     floater2 = new FloatingHabs();
     other = new MartianCulture();
     [game, player] = testGame(2, {preludeExtension: true});
-    player.playedCards = [floater1, floater2, other];
+    player.playedCards.push(floater1, floater2, other);
   });
 
   it('Play', () => {
@@ -45,7 +46,7 @@ describe('FloatingRefinery', function() {
     expect(card.resourceCount).to.eq(1);
   });
 
-  it('Remove resource - this card', function() {
+  it('Remove resource - this card', () => {
     player.playedCards.push(card);
     card.resourceCount = 3;
     const orOptions = cast(card.action(player), OrOptions);
@@ -58,7 +59,7 @@ describe('FloatingRefinery', function() {
     expect(card.resourceCount).to.eq(1);
   });
 
-  it('act - two cards with 2 floaters - select 1st', function() {
+  it('act - two cards with 2 floaters - select 1st', () => {
     card.resourceCount = 1;
     floater1.resourceCount = 2;
     floater2.resourceCount = 2;
@@ -77,7 +78,7 @@ describe('FloatingRefinery', function() {
     expect(player.stock.megacredits).to.eq(2);
   });
 
-  it('act - two cards with 2 floaters - select 2nd', function() {
+  it('act - two cards with 2 floaters - select 2nd', () => {
     card.resourceCount = 1;
     floater1.resourceCount = 2;
     floater2.resourceCount = 2;

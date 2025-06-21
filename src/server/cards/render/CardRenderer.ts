@@ -168,8 +168,8 @@ abstract class Builder<T> {
   public trade(options?: ItemOptions): this {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.TRADE, -1, options));
   }
-  public tradeFleet(): this {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.TRADE_FLEET));
+  public tradeFleet(options?: ItemOptions): this {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.TRADE_FLEET, -1, options));
   }
 
   public colonies(amount: number = 1, options?: ItemOptions): this {

@@ -41,7 +41,7 @@
   "Union": "Union",
   "Pharmacy Union": "製薬連合",
   " Pharmacy Union ": "製薬連合",
-  "You start with 54 M€ . Draw a Science card.": "初期資源：54MC. 科学タグカードを1枚入手.",
+  "You start with 54 M€. Draw a Science card.": "初期資源：54MC. 科学タグカードを1枚入手.",
   "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "効果：微生物タグカードがプレイされる毎に、このカード上に1病原追加し、4MC支払う(不足している場合は可能なだけ支払う). 科学タグカードをプレイする毎に、このカード上から1病原を除去し、TR+1段階. もし除去できる病原がなければ、このカードを裏返してもよい. その場合、TR+3段階.",
 
   "PHIL": "PHIL",
@@ -63,7 +63,7 @@
   " Tycho Magnetics ": "ティコマグネティックス",
   "You start with 42 M€. Increase your energy production 1 step.": "初期資源：42MC. 初期産出：電力産出+1.",
   "Action: Spend any amount of energy to draw the that many cards. Keep 1 and discard the rest.": "アクション：x電力を支払う. デッキの上からx枚を見る.その内、1枚を獲得し残りを捨て札にする.",
-  
+
   "SPLI": "SPLI",
   "C": "C",
   "E": "E",

@@ -238,6 +238,13 @@
 	background: url(./assets/board_icons.png) -535px -83px no-repeat;
 }
 
+.board-space-tile--new-holland {
+	background: url("./assets/tiles/new_holland_board_tile.png");
+	width: 44px;
+	height: 50px;
+	background-size: 44px, 50px;
+}
+
 .board-cube {
 	position: absolute;
 	width: 21px;
@@ -255,11 +262,6 @@
 	z-index: 3;
 	margin: 8px 0 0 4px;
 	filter: drop-shadow(2px 2px 3px black);
-}
-
-.colony-cube {
-	transform: scale(1.6);
-	margin: 13px 0 0 15px;
 }
 
 .occupied-colony-space {
@@ -309,6 +311,88 @@
 // TODO(kberg): this only works at the moment because I've made the neutral cube bronze.
 .board-cube--neutral {
 	background: url(./assets/board_icons.png) -142px -91px no-repeat;
+}
+
+.overlay_base {
+  position: absolute;
+  font-size: 15px;
+}
+
+.board-cube--red.overlay::after {
+  .overlay_base;
+  content: "▲";
+  margin-left: 3px;
+  margin-top: -2px;
+}
+
+.board-cube--blue.overlay::after {
+  .overlay_base;
+  content: "+";
+  margin-left: 7px;
+  margin-top: -2px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.board-cube--black.overlay::after {
+  .overlay_base;
+  content: "∇";
+  margin-left: 5px;
+  margin-top: 1px;
+}
+
+.board-cube--yellow.overlay::after {
+  .overlay_base;
+  content: "∗";
+  margin-left: 4px;
+  margin-top: -1px;
+  font-weight: bold;
+}
+
+.board-cube--green.overlay::after {
+  .overlay_base;
+  content: "◆";
+  margin-left: 5px;
+  margin-top: -2px;
+}
+
+.board-cube--purple.overlay::after {
+  .overlay_base;
+  content: "◉";
+  margin-left: 5px;
+  margin-top: 0px;
+  font-size: 13px;
+}
+
+.board-cube--orange.overlay::after {
+  .overlay_base;
+  content: "▢";
+  margin-left: 5px;
+  margin-top: 0px;
+  font-size: 13px;
+}
+
+.board-cube--pink.overlay::after {
+  .overlay_base;
+  content: "◈";
+  margin-left: 5px;
+  margin-top: -2px;
+}
+
+.board-cube--bronze.overlay::after {
+  .overlay_base;
+  content: "▦";
+  margin-left: 5px;
+  margin-top: 3px;
+  font-size: 9px;
+}
+
+.board-cube--neutral.overlay::after {
+  .overlay_base;
+  font-size: 13px;
+  content: "★";
+  margin-left: 4px;
+  margin-top: 1px;
 }
 
 .board-outer-spaces {

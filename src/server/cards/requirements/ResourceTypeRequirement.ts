@@ -14,6 +14,7 @@ export class ResourceTypeRequirement extends InequalityRequirement {
   public override getScore(player: IPlayer): number {
     const standardResources = ALL_RESOURCES.filter((res) => player.stock.get(res) > 0).length;
     const nonStandardResources = new Set(player.getCardsWithResources().map((card) => card.resourceType)).size;
-    return standardResources + nonStandardResources;
+    const corruption = player.underworldData.corruption > 0 ? 1 : 0;
+    return standardResources + nonStandardResources + corruption;
   }
 }

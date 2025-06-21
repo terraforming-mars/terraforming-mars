@@ -2,17 +2,16 @@ import {expect} from 'chai';
 import {Cloner} from '../../src/server/database/Cloner';
 import {Game} from '../../src/server/Game';
 import {Player} from '../../src/server/Player';
-import {Color} from '../../src/common/Color';
 
-describe('Cloner', function() {
+describe('Cloner', () => {
   it('solo game preserved', () => {
-    const player = new Player('old-player1', Color.YELLOW, true, 9, 'p-old-player1-id');
+    const player = new Player('old-player1', 'yellow', true, 9, 'p-old-player1-id');
     const game = Game.newInstance(
       'g-old-game-id', [player], player, {
         turmoilExtension: true,
       }, -5179823149812374);
 
-    const newPlayer = new Player('new-player1', Color.RED, false, 3, 'p-new-player1-id');
+    const newPlayer = new Player('new-player1', 'red', false, 3, 'p-new-player1-id');
     const newGame = Cloner.clone('g-new-id', [newPlayer], 0, game.serialize());
 
     expect(newGame.id).eq('g-new-id');
@@ -22,7 +21,7 @@ describe('Cloner', function() {
     expect(newGame.getPlayerById('p-new-player1-id')).is.not.undefined;
 
     const newPlayerZero = newGame.getPlayersInGenerationOrder()[0];
-    expect(newPlayerZero.color).eq(Color.RED);
+    expect(newPlayerZero.color).eq('red');
     expect(newPlayerZero.beginner).is.true;
 
     expect(player.getTerraformRating()).eq(23);
@@ -56,8 +55,8 @@ describe('Cloner', function() {
       const oldSpace = game.board.spaces[idx];
       const newSpace = newGame.board.spaces[idx];
       if (oldSpace.player !== undefined) {
-        expect(oldSpace.player.color, `for idx ${idx}`).eq(Color.NEUTRAL);
-        expect(newSpace.player!.color, `for idx ${idx}`).eq(Color.NEUTRAL);
+        expect(oldSpace.player.color, `for idx ${idx}`).eq('neutral');
+        expect(newSpace.player!.color, `for idx ${idx}`).eq('neutral');
         // By destroying these spaces (at the end of the test) the spaces can be tested for equality
         // ignoring `space.player`
         oldSpace.player = undefined;

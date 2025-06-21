@@ -7,11 +7,11 @@ export class Titania extends Colony {
   constructor() {
     super({
       name: ColonyName.TITANIA,
-      description: [
-        'Gain 5, 3, or 2 VP',
-        'Gain n VP',
-        'Lose 3 M€',
-      ],
+      description: {
+        buildBonus: 'Gain 5, 3, or 2 VP',
+        tradeBonus: 'Gain n VP',
+        colonyBonus: 'Lose 3 M€',
+      },
 
 
       buildType: ColonyBenefit.GAIN_VP,

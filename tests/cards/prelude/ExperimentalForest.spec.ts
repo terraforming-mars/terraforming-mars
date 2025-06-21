@@ -5,8 +5,8 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('ExperimentalForest', function() {
-  it('Should play', function() {
+describe('ExperimentalForest', () => {
+  it('Should play', () => {
     const card = new ExperimentalForest();
     const [game, player] = testGame(1);
     card.play(player);

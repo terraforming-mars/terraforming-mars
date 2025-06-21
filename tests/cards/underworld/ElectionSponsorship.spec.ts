@@ -40,7 +40,7 @@ describe('ElectionSponsorship', () => {
 
     expect(turmoil.getPlayerInfluence(player)).eq(0);
 
-    player.playedCards = [card];
+    player.playedCards.push(card);
 
     expect(turmoil.getPlayerInfluence(player)).eq(2);
 

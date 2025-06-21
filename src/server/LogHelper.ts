@@ -1,4 +1,5 @@
 import {CardName} from '../common/cards/CardName';
+import {Resource} from '../common/Resource';
 import {IPlayer} from './IPlayer';
 import {ICard} from './cards/ICard';
 import {Space} from './boards/Space';
@@ -107,5 +108,9 @@ export class LogHelper {
         }
       }
     }, options);
+  }
+
+  static logStealFromNeutralPlayer(player: IPlayer, resource: Resource, amount: number) {
+    player.game.log('${0} stole ${1} ${2} from the neutral player', (b) => b.player(player).number(amount).string(resource));
   }
 }

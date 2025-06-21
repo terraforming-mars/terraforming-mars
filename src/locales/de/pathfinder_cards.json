@@ -156,14 +156,13 @@
 
   "Nobel Labs": "Nobel-Labor",
   "(Action: Add 2 microbes OR 2 data OR 2 floaters to ANY card.)": "(AKTION: Füge einer beliebigen Karte 2 Mikroben 2 Daten oder 2 Schweber hinzu.)",
-  "(Requires 4 science tags.)": "(Benötigt 4 eigene Wissenschaftssymbole.)",
 
   "Orbital Laboratories": "Orbitale Gärten",
   "(Increase your plant production 2 steps. Gain 1 plant.)": "(Erhöhe deine Pflanzen-Produktion um 2. Erhalte 1 Pflanze.)",
 
   "Oumuamua Type Object Survey": "Oumuamua-Untersuchung",
-  "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "(Ziehe 2 Karten. Hat die erste ein Wissenschafts- oder Mikrobensymbol, spiele sie sofort kostenlos, (ignoriere dabei ihre Bedingungen). Hat sie ein Weltraumsymbol, erhöhe deine Energie-Produktion um 3. Falls nichts zutrifft, verfahre mit der 2. Karte ebenso.)",
-  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card. )": "(Benötigt 1 eigenes Weltraum- und Wissenschaftssymbol. Füge einer beliebigen Karte 2 Daten hinzu.)",
+  "Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.": "Ziehe 2 Karten. Hat die erste ein Wissenschafts- oder Mikrobensymbol (und spielbar ist), spiele sie sofort kostenlos, (ignoriere dabei ihre Bedingungen). Hat sie ein Weltraumsymbol, erhöhe deine Energie-Produktion um 3. Falls nichts zutrifft, verfahre mit der 2. Karte ebenso.",
+  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card.)": "(Benötigt 1 eigenes Weltraum- und Wissenschaftssymbol. Füge einer beliebigen Karte 2 Daten hinzu.)",
 
   "Ozone Generators": "Ozongenerator",
   "(Action: Spend 3 energy to gain 1 TR.)": "(AKTION: Verbrauche 3 Energie, um deinen TW um 1 zu erhöhen.)",
@@ -187,7 +186,7 @@
 
   "Public Sponsored Grant": "Öffentliche Subvention",
   "(Requires Scientists are ruling or that you have 2 delegates there. All players lose 2M€. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.)": "(Benötigt Regierungspartei: FORSCHUNG oder 2+ eiegene Delegierte dort. Alle Spieler verlieren 2 M€. Wähle ein Symbol (außer Jupiter, Stadt, Joker und Planet) und ziehe 2 Karten damit.)",
-  
+
   "Rare-Earth Elements": "Seltene-Erd-Elemente",
   "(Increase your M€ production by 1 for every special tile you own on Mars.)": "(Erhöhe deine M€-Produktion um 1 je eigenes Spezialplättchen.)",
 
@@ -225,7 +224,7 @@
 
   "Space Debris Cleaning Operation": "Weltraumschrott räumen",
   "(Requires any 4 space tags in play. Gain 3 titanium. Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) Add 1 data to ANY card. Draw 1 card.)": "(Benötigt 4 Weltraumsymbole im Spiel. Füge einer Karte 1 beliebige Ressource hinzu (kein Tier). Füge einer Karte 1 Datenressource hinzu. Erhalte 3 Titan. Ziehe 1 Karte.)",
-  
+
   "Space Relay": "Orbitaler Verstärker",
   "(Effect: Whenever you play a card with a Jovian tag, including this, draw a card.)": "(EFFEKT: Wenn du ein Jupitersymbol ausspielst (einschließlich dieses), ziehe 1 Karte.)",
   "(Erhöhe deine M€-Produktion um 1 Schritt.)": "(Erhöhe deine M€-Produktion um 1.)",

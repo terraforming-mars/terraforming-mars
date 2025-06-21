@@ -33,12 +33,10 @@ const cssClass: Record<CardResource, string> = {
   [CardResource.CLONE_TROOPER]: 'card-resource-clone-trooper',
   [CardResource.TOOL]: 'card-resource-tool',
   [CardResource.WARE]: 'card-resource-ware',
-  [CardResource.SCOOP]: 'card-resource-scoop',
   [CardResource.ACTIVIST]: 'card-resource-activist',
   [CardResource.JOURNALISM]: 'card-resource-journalism',
   [CardResource.SUPPLY_CHAIN]: 'card-resource-supply-chain',
-  // TODO(kberg): provide a better resource for director.
-  [CardResource.DIRECTOR]: 'card-resource-clone-trooper',
+  [CardResource.DIRECTOR]: 'card-resource-director',
 };
 
 export default Vue.extend({

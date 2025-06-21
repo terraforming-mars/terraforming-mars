@@ -7,7 +7,7 @@ export class InheritedFortune extends PreludeCard {
   constructor() {
     super({
       name: CardName.INHERITED_FORTUNE,
-      tags: [Tag.EARTH],
+      tags: [Tag.CRIME],
 
       behavior: {
         production: {megacredits: 1},

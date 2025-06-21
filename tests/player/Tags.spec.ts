@@ -3,7 +3,6 @@ import {Tag} from '../../src/common/cards/Tag';
 import {IPlayer} from '../../src/server/IPlayer';
 import {TestPlayer} from '../TestPlayer';
 import {Tags} from '../../src/server/player/Tags';
-import {isICorporationCard} from '../../src/server/cards/corporation/ICorporationCard';
 import {fakeCard, testGame} from '../TestingUtils';
 import {CardType} from '../../src/common/cards/CardType';
 import {CardName} from '../../src/common/cards/CardName';
@@ -21,7 +20,7 @@ class TestableTags extends Tags {
   }
 }
 
-describe('Tags', function() {
+describe('Tags', () => {
   let player: IPlayer;
   let tags: TestableTags;
 
@@ -32,11 +31,7 @@ describe('Tags', function() {
 
   function playFakeCorporation(...tags: Array<Tag>) {
     const card = fakeCard({type: CardType.CORPORATION, tags: tags});
-    if (isICorporationCard(card)) {
-      player.corporations.push(card);
-    } else {
-      throw new Error('Internal error while making a fake corporation card)');
-    }
+    player.playedCards.push(card);
   }
 
   function playFakeEvent(...tags: Array<Tag>) {
@@ -70,7 +65,8 @@ describe('Tags', function() {
 
     expect(player.tags.count(Tag.JOVIAN)).eq(1);
 
-    card.type = CardType.EVENT;
+    const event = fakeCard({type: CardType.EVENT, tags: [Tag.JOVIAN]});
+    player.playedCards.set(event);
 
     expect(player.tags.count(Tag.JOVIAN)).eq(0);
   });
@@ -79,14 +75,15 @@ describe('Tags', function() {
     const [_, player] = testGame(1);
     const event = fakeCard({type: CardType.EVENT, tags: [Tag.JOVIAN]});
     const nonEvent = fakeCard({tags: [Tag.JOVIAN, Tag.BUILDING]});
-    player.corporations.push(new Odyssey());
+    const odyssey = new Odyssey();
+    player.playedCards.push(odyssey);
     player.playedCards.push(event);
     player.playedCards.push(nonEvent);
 
     expect(player.tags.count(Tag.JOVIAN)).eq(2);
     expect(player.tags.distinctCount('default')).eq(3);
 
-    player.corporations = [];
+    player.playedCards.remove(odyssey);
 
     expect(player.tags.count(Tag.JOVIAN)).eq(1);
     expect(player.tags.distinctCount('default')).eq(2);
@@ -99,7 +96,7 @@ describe('Tags', function() {
     {options: {}, expected: 10},
     {options: {venusNextExtension: true}, expected: 11},
     {options: {coloniesExtension: true}, expected: 10},
-    {options: {pathfindersExpansion: true}, expected: 11},
+    {options: {pathfindersExpansion: true}, expected: 12},
     {options: {venusNextExtension: true, pathfindersExpansion: true}, expected: 12},
     {options: {moonExpansion: true}, expected: 11},
   ] as const;

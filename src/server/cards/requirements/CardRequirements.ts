@@ -1,8 +1,7 @@
 import {RequirementType} from '../../../common/cards/RequirementType';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRequirement, YesAnd} from './CardRequirement';
+import {CardRequirement} from './CardRequirement';
 import {ChairmanRequirement} from './ChairmanRequirement';
 import {CitiesRequirement} from './CitiesRequirement';
 import {ColoniesRequirement} from './ColoniesRequirement';
@@ -28,30 +27,30 @@ import {VenusRequirement} from './VenusRequirement';
 import {CardRequirementDescriptor} from '../../../common/cards/CardRequirementDescriptor';
 import {CorruptionRequirement} from './CorruptionRequirement';
 import {ExcavationRequirement} from './ExcavationRequirement';
+import {IProjectCard} from '../IProjectCard';
 
 export class CardRequirements {
   constructor(public requirements: Array<CardRequirement>) {}
 
-  public satisfies(player: IPlayer): boolean | YesAnd {
+  public satisfies(player: IPlayer, card: IProjectCard): boolean {
     if (this.requirements.length === 0) {
       return true;
     }
     // Process tags separately, though max & any tag criteria will be processed later.
     // This pre-computation takes the wild tag into account.
     const tags: Array<Tag> = [];
-    this.requirements.forEach((requirement) => {
+    for (const requirement of this.requirements) {
       if ((requirement.type === RequirementType.TAG) &&
-      requirement.all !== true && requirement.max !== true) {
+        requirement.all !== true && requirement.max !== true) {
         tags.push((requirement as TagCardRequirement).tag);
       }
-    });
+    }
     if (tags.length > 1 && !player.tags.playerHas(tags)) {
       return false;
     }
-    const thinkTankResources = player.getPlayedCard(CardName.THINK_TANK)?.resourceCount;
-    let result: boolean | YesAnd = true;
+    let result = true;
     for (const requirement of this.requirements) {
-      const satisfies = requirement.satisfies(player, thinkTankResources);
+      const satisfies = requirement.satisfies(player, card);
       if (satisfies === false) {
         return false;
       }

@@ -1,7 +1,7 @@
 <template>
     <div class="player-allied-party">
         <div v-if="player.alliedParty" class='allied-policy-block'>
-            <AlliedPartyAgenda :id="player.alliedParty.agenda.policyId" :partyName="player.alliedParty.partyName"></AlliedPartyAgenda>
+            <AlliedPartyAgenda :id="player.alliedParty.agenda.policyId"></AlliedPartyAgenda>
         </div>
     </div>
 </template>

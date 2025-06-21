@@ -14,6 +14,10 @@ export class ProductionRequirement extends InequalityRequirement {
   public readonly resource: Resource;
   constructor(resource: Resource, options?: Partial<Options>) {
     super(options);
+    if (resource === Resource.PLANTS) {
+      throw new Error(
+        'This error can be removed once the card is made compatible with Ecology Experts');
+    }
     this.resource = resource;
   }
   public getScore(player: IPlayer): number {

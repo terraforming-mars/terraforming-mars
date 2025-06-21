@@ -4,6 +4,7 @@ import {trimEmptyTextNodes} from '@/client/directives/TrimWhitespace';
 import {mainAppSettings} from '@/client/components/App';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import i18nPlugin from '@/client/plugins/i18n.plugin';
+import {startOauth} from '@/client/oauth';
 
 declare global {
   interface Window {
@@ -31,6 +32,8 @@ async function bootstrap() {
   });
 
   new Vue(mainAppSettings);
+
+  window.onload = startOauth;
 }
 
 bootstrap();

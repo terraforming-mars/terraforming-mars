@@ -7,16 +7,16 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 import {FocusedOrganization} from '../../../src/server/cards/prelude2/FocusedOrganization';
 
-describe('Viron', function() {
+describe('Viron', () => {
   let card: Viron;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Viron();
     [/* game */, player] = testGame(1);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     const action = card.play(player);
 
     cast(action, undefined);
@@ -24,7 +24,7 @@ describe('Viron', function() {
     player.corporations.push(card);
     const restrictedArea = new RestrictedArea();
     player.playedCards.push(restrictedArea);
-    player.addActionThisGeneration(restrictedArea.name);
+    player.actionsThisGeneration.add(restrictedArea.name);
 
     expect(card.canAct(player)).is.not.true;
 
@@ -36,14 +36,14 @@ describe('Viron', function() {
     expect(selectCard.cards).deep.eq([restrictedArea]);
   });
 
-  it('Cannot act once Viron is used', function() {
+  it('Cannot act once Viron is used', () => {
     card.play(player);
 
     player.corporations.push(card);
     const restrictedArea = new RestrictedArea();
     player.playedCards.push(restrictedArea);
-    player.addActionThisGeneration(restrictedArea.name);
-    player.addActionThisGeneration(card.name);
+    player.actionsThisGeneration.add(restrictedArea.name);
+    player.actionsThisGeneration.add(card.name);
     player.megaCredits += 2;
 
     expect(card.canAct(player)).is.not.true;
@@ -63,7 +63,7 @@ describe('Viron', function() {
     expect(focusedOrganization.canAct(player)).is.true;
 
     player.playedCards.push(focusedOrganization);
-    player.addActionThisGeneration(focusedOrganization.name);
+    player.actionsThisGeneration.add(focusedOrganization.name);
 
     expect(card.canAct(player)).is.true;
   });

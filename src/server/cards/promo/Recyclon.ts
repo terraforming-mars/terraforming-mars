@@ -11,7 +11,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class Recyclon extends CorporationCard {
+export class Recyclon extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.RECYCLON,
@@ -21,7 +21,6 @@ export class Recyclon extends CorporationCard {
 
       behavior: {
         production: {steel: 1},
-        addResources: 1,
       },
 
       metadata: {
@@ -41,12 +40,8 @@ export class Recyclon extends CorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: ICard) {
-    if (!player.isCorporation(this.name)) {
-      return undefined;
-    }
-
-    if (card.tags.includes(Tag.BUILDING) === false || !player.isCorporation(this.name)) {
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+    if (card.tags.includes(Tag.BUILDING) === false) {
       return undefined;
     }
     if (this.resourceCount < 2) {
@@ -65,9 +60,5 @@ export class Recyclon extends CorporationCard {
       return undefined;
     });
     return new OrOptions(spendResource, addResource);
-  }
-
-  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
-    return this.onCardPlayed(player, card);
   }
 }

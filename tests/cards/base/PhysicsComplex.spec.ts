@@ -4,22 +4,22 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
 
-describe('PhysicsComplex', function() {
+describe('PhysicsComplex', () => {
   let card: PhysicsComplex;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new PhysicsComplex();
     [/* game */, player] = testGame(1);
   });
 
-  it('Can not act', function() {
+  it('Can not act', () => {
     card.play(player);
     player.energy = 5;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.playedCards.push(card);
     player.energy = 6;
     expect(card.canAct(player)).is.true;

@@ -3,8 +3,8 @@ import {EcoLine} from '../../../src/server/cards/corporation/EcoLine';
 import {ConvertPlants} from '../../../src/server/cards/base/standardActions/ConvertPlants';
 import {cast, testGame} from '../../TestingUtils';
 
-describe('EcoLine', function() {
-  it('Should play', function() {
+describe('EcoLine', () => {
+  it('Should play', () => {
     const card = new EcoLine();
     const [/* game*/, player] = testGame(1);
     cast(card.play(player), undefined);

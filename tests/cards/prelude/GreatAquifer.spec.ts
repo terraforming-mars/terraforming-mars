@@ -1,11 +1,19 @@
 import {GreatAquifer} from '../../../src/server/cards/prelude/GreatAquifer';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
+import {assertPlaceOcean} from '../../assertions';
 
-describe('GreatAquifer', function() {
-  it('Should play', function() {
+describe('GreatAquifer', () => {
+  it('Should play', () => {
     const card = new GreatAquifer();
-    const [/* game */, player] = testGame(2);
+    const [game, player] = testGame(2);
     cast(card.play(player), undefined);
+
+    runAllActions(game);
+    assertPlaceOcean(player, player.popWaitingFor());
+    runAllActions(game);
+    assertPlaceOcean(player, player.popWaitingFor());
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
   });
 });

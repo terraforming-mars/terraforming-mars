@@ -5,8 +5,8 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('NuclearZoneAres', function() {
-  it('Should play', function() {
+describe('NuclearZoneAres', () => {
+  it('Should play', () => {
     const card = new NuclearZoneAres();
     const [game, player] = testGame(2, {aresExtension: true});
     card.play(player);

@@ -9,10 +9,12 @@ import {SponsoredMohole} from '../../../src/server/cards/turmoil/SponsoredMohole
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {addOcean} from '../../TestingUtils';
 import {Phase} from '../../../src/common/Phase';
-import {TestPlayer} from 'tests/TestPlayer';
+import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
+import {PolicyId} from '../../../src/common/turmoil/Types';
+import {Game} from '../../../src/server/Game';
 
-describe('MarsFrontierAlliance', function() {
+describe('MarsFrontierAlliance', () => {
   let card: MarsFrontierAlliance;
   let turmoil: Turmoil;
   let player: TestPlayer;
@@ -20,14 +22,11 @@ describe('MarsFrontierAlliance', function() {
 
   beforeEach(() => {
     card = new MarsFrontierAlliance();
-    [game, player] = testGame(1, {
-      pathfindersExpansion: true,
-      turmoilExtension: true,
-    });
+    [game, player] = testGame(1, {pathfindersExpansion: true, turmoilExtension: true});
     turmoil = game.turmoil!;
   });
 
-  it('Asks for allied company at game start', () => {
+  it('Asks for allied party at game start', () => {
     game.phase = Phase.INITIALDRAFTING;
     player.playCorporationCard(card);
     runAllActions(game);
@@ -35,7 +34,7 @@ describe('MarsFrontierAlliance', function() {
     expect(selectParty.options).has.length(6);
   });
 
-  it('New generation - switch of allied party', function() {
+  it('New generation - switch of allied party', () => {
     player.corporations.push(card);
     game.generation = 10;
 
@@ -149,6 +148,18 @@ describe('MarsFrontierAlliance', function() {
     const availableActions = player.getActions();
     const scientistsAction = availableActions.options.filter((o) => o.title === scientists.policies[0].description);
     expect(scientistsAction).to.be.empty;
+  });
+
+  it('Mars First test', () => {
+    const marsFirst = turmoil.getPartyByName(PartyName.MARS);
+    player.setAlliedParty(marsFirst);
+
+    expect(player.alliedParty?.agenda.policyId).eq('mp01');
+
+    player.alliedParty!.agenda.policyId = 'mfp01' as PolicyId;
+    game = Game.deserialize(game.serialize());
+
+    expect(player.alliedParty?.agenda.policyId).eq('mp01');
   });
 });
 

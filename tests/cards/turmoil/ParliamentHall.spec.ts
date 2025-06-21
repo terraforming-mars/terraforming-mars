@@ -5,8 +5,8 @@ import {ParliamentHall} from '../../../src/server/cards/turmoil/ParliamentHall';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {testGame} from '../../TestGame';
 
-describe('ParliamentHall', function() {
-  it('Should play', function() {
+describe('ParliamentHall', () => {
+  it('Should play', () => {
     const card = new ParliamentHall();
     const card2 = new DeepWellHeating();
     const card3 = new MartianRails();

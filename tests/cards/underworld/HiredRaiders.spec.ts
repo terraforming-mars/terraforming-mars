@@ -5,17 +5,17 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('HiredRaiders', function() {
+describe('HiredRaiders', () => {
   let card: HiredRaiders;
   let player: TestPlayer;
   let player2: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new HiredRaiders();
     [/* game */, player, player2] = testGame(2);
   });
 
-  it('Play, no corruption', function() {
+  it('Play, no corruption', () => {
     player.megaCredits = 10;
     player2.megaCredits = 10;
 
@@ -26,7 +26,7 @@ describe('HiredRaiders', function() {
     expect(player.megaCredits).to.eq(13);
   });
 
-  it('Play, corruption', function() {
+  it('Play, corruption', () => {
     player.megaCredits = 10;
     player2.megaCredits = 10;
     player.underworldData.corruption = 2;
@@ -38,7 +38,7 @@ describe('HiredRaiders', function() {
     expect(player.megaCredits).to.eq(17);
   });
 
-  it('Works in solo', function() {
+  it('Works in solo', () => {
     [/* game */, player] = testGame(1);
 
     cast(card.play(player), undefined);

@@ -28,7 +28,7 @@ describe('Founder', () => {
       founder.getScore(player3)];
   }
 
-  it('Takes action, Founder Milestone does not get a benefit', function() {
+  it('Takes action, Founder Milestone does not get a benefit', () => {
     const naturalPreserve = new NaturalPreserve();
     naturalPreserve.play(player2);
     runAllActions(game);

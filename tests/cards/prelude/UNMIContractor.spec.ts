@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {UNMIContractor} from '../../../src/server/cards/prelude/UNMIContractor';
 
-describe('UNMIContractor', function() {
-  it('Should play', function() {
+describe('UNMIContractor', () => {
+  it('Should play', () => {
     const [/* game */, player] = testGame(1);
     const card = new UNMIContractor();
     card.play(player);

@@ -4,8 +4,8 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import TagCount from '@/client/components/TagCount.vue';
 
-describe('TagCount', function() {
-  it('renders with no count', function() {
+describe('TagCount', () => {
+  it('renders with no count', () => {
     const tagCount = mount(TagCount, {
       localVue: getLocalVue(),
       propsData: {
@@ -15,7 +15,7 @@ describe('TagCount', function() {
     expect(tagCount.find('div[class="tag-display tag-no-show"]').exists()).is.true;
     expect(tagCount.find('span[class="tag-count-display tag-count-no-show"]').exists()).is.true;
   });
-  it('renders with count', function() {
+  it('renders with count', () => {
     const tagCount = mount(TagCount, {
       localVue: getLocalVue(),
       propsData: {

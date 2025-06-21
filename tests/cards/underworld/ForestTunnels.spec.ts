@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ForestTunnels} from '../../../src/server/cards/underworld/ForestTunnels';
 import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 
 describe('Forest Tunnels', () => {
   it('Can play', () => {

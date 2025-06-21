@@ -10,7 +10,7 @@ import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {IapetusII} from '../../../src/server/cards/pathfinders/IapetusII';
 import {CollegiumCopernicus} from '../../../src/server/cards/pathfinders/CollegiumCopernicus';
 
-describe('Maria', function() {
+describe('Maria', () => {
   let card: Maria;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -21,11 +21,11 @@ describe('Maria', function() {
     [game, player, player2] = testGame(2, {ceoExtension: true, coloniesExtension: true});
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     expect(card.canAct(player)).is.true;
   });
 
-  it('Takes action generation 1', function() {
+  it('Takes action generation 1', () => {
     const coloniesInPlay = game.colonies.length;
     cast(card.action(player), undefined);
     runAllActions(player.game);
@@ -36,7 +36,7 @@ describe('Maria', function() {
     expect(game.colonies).has.length(coloniesInPlay + 1);
   });
 
-  it('Takes action in Generation 4', function() {
+  it('Takes action in Generation 4', () => {
     game.generation = 4;
 
     cast(card.action(player), undefined);
@@ -103,7 +103,7 @@ describe('Maria', function() {
     expect(iapetusii.colonies).is.not.empty;
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     card.action(player);
     forceGenerationEnd(game);
 

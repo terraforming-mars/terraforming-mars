@@ -8,17 +8,17 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
 
-describe('IndustrialCenterAres', function() {
+describe('IndustrialCenterAres', () => {
   let card: IndustrialCenterAres;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new IndustrialCenterAres();
     [game, player] = testGame(2, {aresExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     game.addCity(player, game.board.getAvailableSpacesOnLand(player)[0]);
     expect(game.board.getCitiesOnMars()).has.length(1);
 

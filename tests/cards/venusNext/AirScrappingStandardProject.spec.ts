@@ -6,24 +6,24 @@ import {TestPlayer} from '../../TestPlayer';
 import {MAX_VENUS_SCALE} from '../../../src/common/constants';
 import {testGame} from '../../TestGame';
 
-describe('AirScrappingStandardProject', function() {
+describe('AirScrappingStandardProject', () => {
   let card: AirScrappingStandardProject;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AirScrappingStandardProject();
     [game, player/* , player2 */] = testGame(2, {venusNextExtension: true, altVenusBoard: false, turmoilExtension: true});
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     player.megaCredits = 14;
     expect(card.canAct(player)).is.false;
     player.megaCredits = 15;
     expect(card.canAct(player)).is.true;
   });
 
-  it('action', function() {
+  it('action', () => {
     player.megaCredits = 15;
     player.setTerraformRating(20);
     expect(game.getVenusScaleLevel()).eq(0);

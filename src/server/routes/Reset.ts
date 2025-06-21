@@ -67,7 +67,7 @@ export class Reset extends Handler {
       if (game !== undefined) {
         const reloadedPlayer = game.getPlayerById(player.id);
         game.inputsThisRound = 0;
-        responses.writeJson(res, Server.getPlayerModel(reloadedPlayer));
+        responses.writeJson(res, ctx, Server.getPlayerModel(reloadedPlayer));
         return;
       }
     } catch (err) {

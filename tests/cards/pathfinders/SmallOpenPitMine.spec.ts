@@ -8,22 +8,22 @@ import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns'
 import {GHGProducingBacteria} from '../../../src/server/cards/base/GHGProducingBacteria';
 import {cast, testGame} from '../../TestingUtils';
 
-describe('SmallOpenPitMine', function() {
+describe('SmallOpenPitMine', () => {
   let card: SmallOpenPitMine;
   let player: TestPlayer;
   let microbeCard: IProjectCard;
   let floaterCard: IProjectCard;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SmallOpenPitMine();
     [/* game */, player] = testGame(1);
 
     microbeCard = new GHGProducingBacteria();
     floaterCard = new JovianLanterns();
-    player.playedCards = [microbeCard, floaterCard];
+    player.playedCards.push(microbeCard, floaterCard);
   });
 
-  it('play - steel', function() {
+  it('play - steel', () => {
     card.play(player);
     const options = cast(player.game.deferredActions.pop()?.execute(), OrOptions);
     const twoSteel = options.options[0];
@@ -33,7 +33,7 @@ describe('SmallOpenPitMine', function() {
     expect(player.production.asUnits()).deep.eq(Units.of({steel: 2}));
   });
 
-  it('play - titanium', function() {
+  it('play - titanium', () => {
     card.play(player);
     const options = cast(player.game.deferredActions.pop()?.execute(), OrOptions);
     const oneTitanium = options.options[1];

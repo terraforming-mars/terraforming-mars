@@ -8,7 +8,7 @@ import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
 import {Unity} from '../../../src/server/turmoil/parties/Unity';
 import {Units} from '../../../src/common/Units';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {TitanShuttles} from '../../../src/server/cards/colonies/TitanShuttles';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
@@ -17,7 +17,7 @@ import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCultu
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {cast, churn} from '../../TestingUtils';
 
-describe('VeneraBase', function() {
+describe('VeneraBase', () => {
   let card: VeneraBase;
   let player: TestPlayer;
   let game: IGame;
@@ -26,9 +26,9 @@ describe('VeneraBase', function() {
   let venusFloater2: IProjectCard;
   let data: IProjectCard;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new VeneraBase();
-    [game, player] = testGame(1, {turmoilExtension: true, pathfindersExpansion: true});
+    [game, player] = testGame(1, {venusNextExtension: true, turmoilExtension: true, pathfindersExpansion: true});
 
     nonVenusFloater = new TitanShuttles();
     venusFloater = new FloatingHabs();
@@ -36,7 +36,7 @@ describe('VeneraBase', function() {
     data = new MartianCulture();
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.megaCredits = card.cost;
     const turmoil = Turmoil.getTurmoil(player.game);
     turmoil.rulingParty = new Greens();
@@ -45,7 +45,7 @@ describe('VeneraBase', function() {
     expect(player.canPlay(card)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
     const space = game.board.getSpaceOrThrow(SpaceName.VENERA_BASE);
     expect(space.tile).is.undefined;
@@ -58,18 +58,18 @@ describe('VeneraBase', function() {
     expect(space.player?.id).eq(player.id);
   });
 
-  it('canAct', function() {
+  it('canAct', () => {
     expect(card.canAct(player)).is.false;
-    player.playedCards = [data];
+    player.playedCards.set(data);
     expect(card.canAct(player)).is.false;
-    player.playedCards = [nonVenusFloater];
+    player.playedCards.set(nonVenusFloater);
     expect(card.canAct(player)).is.false;
-    player.playedCards = [venusFloater];
+    player.playedCards.set(venusFloater);
     expect(card.canAct(player)).is.true;
   });
 
-  it('action', function() {
-    player.playedCards = [venusFloater, venusFloater2, data, nonVenusFloater];
+  it('action', () => {
+    player.playedCards.set(venusFloater, venusFloater2, data, nonVenusFloater);
 
     const selectCard = cast(churn(card.action(player), player), SelectCard);
     expect(selectCard.cards).to.have.members([venusFloater, venusFloater2]);

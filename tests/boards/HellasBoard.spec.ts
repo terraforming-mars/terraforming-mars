@@ -3,7 +3,7 @@ import {testGame} from '../TestGame';
 import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
 import {BoardName} from '../../src/common/boards/BoardName';
-import {SpaceName} from '../../src/server/SpaceName';
+import {SpaceName} from '../../src/common/boards/SpaceName';
 import {HellasBoard} from '../../src/server/boards/HellasBoard';
 import {cast, runAllActions} from '../TestingUtils';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
@@ -12,18 +12,19 @@ import {Manutech} from '../../src/server/cards/venusNext/Manutech';
 import {DomedCrater} from '../../src/server/cards/base/DomedCrater';
 import {Resource} from '../../src/common/Resource';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
+import {toID} from '../../src/common/utils/utils';
 
-describe('HellasBoard', function() {
+describe('HellasBoard', () => {
   let board: HellasBoard;
   let game: IGame;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     [game, player/* , player2 */] = testGame(2, {boardName: BoardName.HELLAS, aresExtension: true});
     board = cast(game.board, HellasBoard);
   });
 
-  it('sanity test', function() {
+  it('sanity test', () => {
     const board = HellasBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     expect(board.spaces).to.deep.eq([
       {'id': '01', 'spaceType': 'colony', 'x': -1, 'y': -1, 'bonus': []},
@@ -89,7 +90,6 @@ describe('HellasBoard', function() {
       {'id': '61', 'spaceType': 'land', 'x': 6, 'y': 8, 'bonus': [5]},
       {'id': '62', 'spaceType': 'land', 'x': 7, 'y': 8, 'bonus': [4, 4]},
       {'id': '63', 'spaceType': 'land', 'x': 8, 'y': 8, 'bonus': []},
-      {'id': '69', 'spaceType': 'colony', 'x': -1, 'y': -1, 'bonus': []},
     ]);
   });
 
@@ -100,12 +100,12 @@ describe('HellasBoard', function() {
     // Cannot afford
     player.megaCredits = 5;
     let availableSpacesOnLand = board.getAvailableSpacesOnLand(player);
-    expect(availableSpacesOnLand.map((s) => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
+    expect(availableSpacesOnLand.map(toID)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
 
     // Can afford
     player.megaCredits = 6;
     availableSpacesOnLand = board.getAvailableSpacesOnLand(player);
-    expect(availableSpacesOnLand.map((s) => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
+    expect(availableSpacesOnLand.map(toID)).to.include(SpaceName.HELLAS_OCEAN_TILE);
   });
 
   it('Calculate costs for Hellas ocean space with other costs (e.g. ares)', () => {
@@ -116,12 +116,12 @@ describe('HellasBoard', function() {
 
     player.megaCredits = 8;
     let availableSpacesOnLand = board.getAvailableSpacesOnLand(player);
-    expect(availableSpacesOnLand.map((s) => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
+    expect(availableSpacesOnLand.map(toID)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
 
     // Can afford
     player.megaCredits = 9;
     availableSpacesOnLand = board.getAvailableSpacesOnLand(player);
-    expect(availableSpacesOnLand.map((s) => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
+    expect(availableSpacesOnLand.map(toID)).to.include(SpaceName.HELLAS_OCEAN_TILE);
   });
 
   it('Cannot place on ocean space EVEN if Manutech can make up the difference - replicates #931', () => {
@@ -132,6 +132,6 @@ describe('HellasBoard', function() {
     runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     // This is still a bug because this ought to be true.
-    expect(selectSpace.spaces.map((s) => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
+    expect(selectSpace.spaces.map(toID)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
   });
 });

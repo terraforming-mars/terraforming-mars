@@ -7,7 +7,7 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 
-describe('Airliners', function() {
+describe('Airliners', () => {
   let card: Airliners;
   let game: IGame;
   let player: TestPlayer;
@@ -17,11 +17,11 @@ describe('Airliners', function() {
     [game, player] = testGame(1);
   });
 
-  it('can play', function() {
+  it('can play', () => {
     const jovianLanterns = new JovianLanterns();
     const searchForLife = new SearchForLife();
 
-    player.playedCards = [jovianLanterns, searchForLife];
+    player.playedCards.push(jovianLanterns, searchForLife);
 
     player.megaCredits = card.cost;
 
@@ -43,13 +43,13 @@ describe('Airliners', function() {
     expect(player.canPlay(card)).is.false;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     expect(player.production.megacredits).eq(0);
 
     const jovianLanterns = new JovianLanterns();
     const searchForLife = new SearchForLife();
 
-    player.playedCards = [jovianLanterns, searchForLife];
+    player.playedCards.push(jovianLanterns, searchForLife);
 
     const action = card.play(player);
 

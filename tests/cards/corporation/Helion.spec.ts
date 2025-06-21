@@ -5,16 +5,16 @@ import {TestPlayer} from '../../TestPlayer';
 import {StormCraftIncorporated} from '../../../src/server/cards/colonies/StormCraftIncorporated';
 import {cast} from '../../TestingUtils';
 
-describe('Helion', function() {
+describe('Helion', () => {
   let card: Helion;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Helion();
     [/* game */, player] = testGame(1);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
     expect(player.production.heat).to.eq(3);
 
@@ -28,7 +28,7 @@ describe('Helion', function() {
   it('Merger with Helion, Stormcraft Incorporated', () => {
     const stormcraft = new StormCraftIncorporated();
     player.playCorporationCard(card);
-    player.playAdditionalCorporationCard(stormcraft);
+    player.playCorporationCard(stormcraft);
 
     player.heat = 4;
     player.megaCredits = 0;

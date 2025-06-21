@@ -27,7 +27,7 @@ export class StormCraftIncorporated extends ActiveCorporationCard {
         cardNumber: 'R29',
         description: 'You start with 48 M€.',
         renderData: CardRenderer.builder((b) => {
-          b.br.br.br;
+          b.br;
           b.megacredits(48);
           b.corpBox('action', (ce) => {
             ce.vSpace(Size.LARGE);
@@ -49,7 +49,7 @@ export class StormCraftIncorporated extends ActiveCorporationCard {
     let heatAmount: number;
     let floaterAmount: number;
 
-    const options = new AndOptions(
+    return new AndOptions(
       new SelectAmount('Heat', 'Spend heat', 0, Math.min(player.heat, targetAmount))
         .andThen((amount) => {
           heatAmount = amount;
@@ -73,8 +73,6 @@ export class StormCraftIncorporated extends ActiveCorporationCard {
       player.removeResourceFrom(this, floaterAmount);
       player.stock.deduct(Resource.HEAT, heatAmount);
       return cb();
-    });
-    options.title = message('Select how to spend ${0} heat', (b) => b.number(targetAmount));
-    return options;
+    }).setTitle(message('Select how to spend ${0} heat', (b) => b.number(targetAmount)));
   }
 }

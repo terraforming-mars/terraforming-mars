@@ -183,7 +183,7 @@ describe('MonsInsurance - Solo', () => {
 
     // Predators steals one animal from another player
     const predators = new Predators();
-    player.playedCards = [predators];
+    player.playedCards.push(predators);
     expect(predators.resourceCount).eq(0);
 
     predators.action(player);

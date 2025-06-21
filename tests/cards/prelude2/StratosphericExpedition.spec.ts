@@ -8,20 +8,20 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 
-describe('StratosphericExpedition', function() {
+describe('StratosphericExpedition', () => {
   let card: StratosphericExpedition;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new StratosphericExpedition();
     [game, player] = testGame(1, {venusNextExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const jovianLanterns = new JovianLanterns();
     const searchForLife = new SearchForLife();
-    player.playedCards = [jovianLanterns, searchForLife];
+    player.playedCards.push(jovianLanterns, searchForLife);
     const action = card.play(player);
 
     runAllActions(game);

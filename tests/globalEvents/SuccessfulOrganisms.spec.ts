@@ -4,8 +4,8 @@ import {SuccessfulOrganisms} from '../../src/server/turmoil/globalEvents/Success
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('SuccessfulOrganisms', function() {
-  it('resolve play', function() {
+describe('SuccessfulOrganisms', () => {
+  it('resolve play', () => {
     const card = new SuccessfulOrganisms();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

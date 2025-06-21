@@ -2,8 +2,11 @@ import {Tag} from '../../../common/cards/Tag';
 import {CorporationCard} from './CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {IPlayer} from '../../IPlayer';
+import {IStandardProjectCard} from '../IStandardProjectCard';
+import {ICorporationCard} from './ICorporationCard';
 
-export class Thorgate extends CorporationCard {
+export class Thorgate extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.THORGATE,
@@ -29,6 +32,13 @@ export class Thorgate extends CorporationCard {
         }),
       },
     });
+  }
+
+  public getStandardProjectDiscount(_player: IPlayer, card: IStandardProjectCard): number {
+    if (card.name === CardName.POWER_PLANT_STANDARD_PROJECT) {
+      return 3;
+    }
+    return 0;
   }
 }
 

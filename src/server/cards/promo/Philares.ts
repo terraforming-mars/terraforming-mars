@@ -10,8 +10,9 @@ import {BoardType} from '../../boards/BoardType';
 import {all} from '../Options';
 import {SelectResources} from '../../inputs/SelectResources';
 import {message} from '../../logs/MessageBuilder';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Philares extends CorporationCard {
+export class Philares extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.PHILARES,

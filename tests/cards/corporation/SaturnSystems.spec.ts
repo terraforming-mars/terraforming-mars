@@ -4,31 +4,31 @@ import {SaturnSystems} from '../../../src/server/cards/corporation/SaturnSystems
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('SaturnSystems', function() {
+describe('SaturnSystems', () => {
   let card: SaturnSystems;
   let player: TestPlayer;
   let player2: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SaturnSystems();
     [/* game */, player, player2] = testGame(2);
   });
 
-  it('Should play', function() {
-    card.play(player);
+  it('Should play', () => {
+    player.playCorporationCard(card);
     expect(player.production.titanium).to.eq(1);
     expect(player.production.megacredits).to.eq(1);
   });
 
-  it('Runs onCardPlayed', function() {
+  it('Runs onCardPlayedByAnyPlayer', () => {
     player.corporations.push(card);
-    card.onCardPlayed(player, new MirandaResort());
+    player.playCard(new MirandaResort());
     expect(player.production.megacredits).to.eq(1);
   });
 
-  it('Runs onCardPlayed when other player plays card', function() {
+  it('Runs onCardPlayedByAnyPlayer when other player plays card', () => {
     player.corporations.push(card);
-    card.onCardPlayed(player2, new MirandaResort());
+    player2.playCard(new MirandaResort());
     expect(player.production.megacredits).to.eq(1);
   });
 });

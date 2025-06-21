@@ -4,8 +4,8 @@ import {Highlander} from '../../../src/server/awards/modular/Highlander';
 import {TileType} from '../../../src/common/TileType';
 import {addGreenery, addOcean} from '../../TestingUtils';
 
-describe('Highlander', function() {
-  it('Correctly counts tiles not adjacent to ocean tiles', function() {
+describe('Highlander', () => {
+  it('Correctly counts tiles not adjacent to ocean tiles', () => {
     const award = new Highlander();
     const [/* game */, player, player2] = testGame(2);
 
@@ -29,7 +29,7 @@ describe('Highlander', function() {
     expect(award.getScore(player)).to.eq(2);
   });
 
-  it('Correctly handles Ares upgraded oceans', function() {
+  it('Correctly handles Ares upgraded oceans', () => {
     const award = new Highlander();
     const [game, player, player2] = testGame(2);
 

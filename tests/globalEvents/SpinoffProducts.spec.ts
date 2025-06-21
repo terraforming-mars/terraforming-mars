@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {Research} from '../../src/server/cards/base/Research';
 import {IGame} from '../../src/server/IGame';
 import {SpinoffProducts} from '../../src/server/turmoil/globalEvents/SpinoffProducts';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
@@ -7,9 +6,8 @@ import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {testGame} from '../TestGame';
 import {TestPlayer} from '../TestPlayer';
 import {HabitatMarte} from '../../src/server/cards/pathfinders/HabitatMarte';
-import {DesignedOrganisms} from '../../src/server/cards/pathfinders/DesignedOrganisms';
 
-describe('SpinoffProducts', function() {
+describe('SpinoffProducts', () => {
   let card: SpinoffProducts;
   let game: IGame;
   let player: TestPlayer;
@@ -22,10 +20,9 @@ describe('SpinoffProducts', function() {
     turmoil = game.turmoil!;
   });
 
-  it('resolve play', function() {
-    player.playedCards.push(new Research());
-    player2.playedCards.push(new Research());
-    player2.playedCards.push(new Research());
+  it('resolve play', () => {
+    player.tagsForTest = {science: 2};
+    player2.tagsForTest = {science: 4};
 
     turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
@@ -38,9 +35,9 @@ describe('SpinoffProducts', function() {
     expect(player2.megaCredits).to.eq(14);
   });
 
-  it('resolve play, with Habitat Marte', function() {
+  it('resolve play, with Habitat Marte', () => {
     player.corporations.push(new HabitatMarte());
-    player.playedCards.push(new Research(), new DesignedOrganisms());
+    player.tagsForTest = {science: 3, mars: 2};
 
     turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
@@ -50,7 +47,6 @@ describe('SpinoffProducts', function() {
 
     card.resolve(game, turmoil);
 
-    // This includes Habitat Marte itself, which has a Mars tag.
     expect(player.megaCredits).to.eq(10);
   });
 });

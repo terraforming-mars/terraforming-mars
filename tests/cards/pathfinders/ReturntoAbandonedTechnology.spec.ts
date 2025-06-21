@@ -11,18 +11,18 @@ import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('ReturntoAbandonedTechnology', function() {
+describe('ReturntoAbandonedTechnology', () => {
   let card: ReturntoAbandonedTechnology;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ReturntoAbandonedTechnology();
     [game, player] = testGame(1);
     player.playedCards.push(card);
   });
 
-  it('play when discard pile is empty', function() {
+  it('play when discard pile is empty', () => {
     game.projectDeck.discardPile = [];
 
     cast(card.play(player), undefined);
@@ -32,20 +32,23 @@ describe('ReturntoAbandonedTechnology', function() {
     expect(action.cards).is.empty;
   });
 
-  it('play when discard pile has 1 card', function() {
-    const ants = new Ants();
-    game.projectDeck.discardPile = [];
-    game.projectDeck.discard(ants);
+  for (let idx = 1; idx <= 4; idx++) {
+    it('canPlay when discard pile has ' + idx + ' card(s)', () => {
+      const cards = [(new Ants()), (new Birds()), (new Capital()), (new Decomposers())];
+      game.projectDeck.discardPile = [];
+      for (const c of cards.slice(0, idx)) {
+        game.projectDeck.discard(c);
+      }
 
-    cast(card.play(player), undefined);
-    runAllActions(game);
-    const action = cast(player.popWaitingFor(), SelectCard);
+      if (idx === 4) {
+        expect(card.canPlay(player)).is.true;
+      } else {
+        expect(card.canPlay(player)).is.false;
+      }
+    });
+  }
 
-    expect(action.cards).deep.eq([ants]);
-    expect(game.projectDeck.discardPile).is.empty;
-  });
-
-  it('play when discard pile has 5 cards', function() {
+  it('play when discard pile has 5 cards', () => {
     const ants = new Ants();
     const birds = new Birds();
     const capital = new Capital();

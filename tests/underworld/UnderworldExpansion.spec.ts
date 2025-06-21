@@ -20,7 +20,7 @@ import {PlayerInput} from '../../src/server/PlayerInput';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {PrivateMilitaryContractor} from '../../src/server/cards/underworld/PrivateMilitaryContractor';
 
-describe('UnderworldExpansion', function() {
+describe('UnderworldExpansion', () => {
   let player1: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
@@ -37,7 +37,7 @@ describe('UnderworldExpansion', function() {
     dataCard2 = new MartianCulture();
     microbeCard1 = new GHGProducingBacteria();
     microbeCard2 = new RegolithEaters();
-    player1.playedCards = [dataCard1, dataCard2, microbeCard1, microbeCard2];
+    player1.playedCards.set(dataCard1, dataCard2, microbeCard1, microbeCard2);
     game.phase = Phase.ACTION;
   });
 
@@ -72,7 +72,7 @@ describe('UnderworldExpansion', function() {
     const responses: Array<string> = [];
     const space = game.board.getAvailableSpacesOnLand(player1)[0];
     const fake = fakeCard({
-      onIdentification(identifyingPlayer, cardOwner, space) {
+      onIdentificationByAnyPlayer(cardOwner, identifyingPlayer, space) {
         responses.push(`${identifyingPlayer?.id} - ${cardOwner.id} - ${space.id}`);
       },
     });

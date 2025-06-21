@@ -8,12 +8,12 @@ import {Philares} from '../../src/server/cards/promo/Philares';
 import {IGame} from '../../src/server/IGame';
 import {MoonData} from '../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
-import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
-import {SpaceName} from '../../src/server/SpaceName';
+import {NamedMoonSpaces} from '../../src/common/moon/NamedMoonSpaces';
+import {SpaceName} from '../../src/common/boards/SpaceName';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayer} from '../TestPlayer';
 import {Phase} from '../../src/common/Phase';
-import {VictoryPointsBreakdown} from '../../src/server/game/VictoryPointsBreakdown';
+import {VictoryPointsBreakdownBuilder} from '../../src/server/game/VictoryPointsBreakdownBuilder';
 import {testGame} from '../TestingUtils';
 
 describe('MoonExpansion', () => {
@@ -28,8 +28,8 @@ describe('MoonExpansion', () => {
   });
 
   it('addTile', () => {
-    MoonExpansion.addTile(player, MoonSpaces.MARE_IMBRIUM, {tileType: TileType.LUNA_TRADE_STATION});
-    const space: Space = moonData.moon.getSpaceOrThrow(MoonSpaces.MARE_IMBRIUM);
+    MoonExpansion.addTile(player, NamedMoonSpaces.MARE_IMBRIUM, {tileType: TileType.LUNA_TRADE_STATION});
+    const space: Space = moonData.moon.getSpaceOrThrow(NamedMoonSpaces.MARE_IMBRIUM);
     expect(space.player).eq(player);
     expect(space.tile).deep.eq({tileType: TileType.LUNA_TRADE_STATION});
   });
@@ -44,9 +44,9 @@ describe('MoonExpansion', () => {
   });
 
   it('addTile fails occupied space', () => {
-    const space: Space = moonData.moon.getSpaceOrThrow(MoonSpaces.MARE_IMBRIUM);
+    const space: Space = moonData.moon.getSpaceOrThrow(NamedMoonSpaces.MARE_IMBRIUM);
     space.tile = {tileType: TileType.MOON_MINE};
-    expect(() => MoonExpansion.addTile(player, MoonSpaces.MARE_IMBRIUM, {tileType: TileType.LUNA_TRADE_STATION})).to.throw(/occupied/);
+    expect(() => MoonExpansion.addTile(player, NamedMoonSpaces.MARE_IMBRIUM, {tileType: TileType.LUNA_TRADE_STATION})).to.throw(/occupied/);
   });
 
   it('addTile throws with Mars space', () => {
@@ -88,22 +88,19 @@ describe('MoonExpansion', () => {
   });
 
   it('computeVictoryPoints', () => {
-    const vps = new VictoryPointsBreakdown();
     function computeVps() {
-      vps.points.moonHabitats = 0;
-      vps.points.moonMines = 0;
-      vps.points.moonRoads = 0;
-      MoonExpansion.calculateVictoryPoints(player, vps);
+      const builder = new VictoryPointsBreakdownBuilder();
+      MoonExpansion.calculateVictoryPoints(player, builder);
+      const vps = builder.build();
       return {
-        colonies: vps.points.moonHabitats,
-        mines: vps.points.moonMines,
-        roads: vps.points.moonRoads,
+        colonies: vps.moonHabitats,
+        mines: vps.moonMines,
+        roads: vps.moonRoads,
       };
     }
 
     expect(computeVps()).eql({colonies: 0, mines: 0, roads: 0});
     MoonExpansion.addTile(player, 'm02', {tileType: TileType.MOON_ROAD});
-    MoonExpansion.calculateVictoryPoints(player, vps);
     expect(computeVps()).eql({colonies: 0, mines: 0, roads: 1});
     MoonExpansion.addTile(player, 'm03', {tileType: TileType.MOON_HABITAT});
 
@@ -179,13 +176,13 @@ describe('MoonExpansion', () => {
     player.titanium = 1;
     player.steel = 1;
     moonData.miningRate = 3;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     // Gives a +2/-2 on the next action
-    player.playedCards = [specialDesign];
+    player.playedCards.push(specialDesign);
     player.lastCardPlayed = specialDesign.name;
 
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('raiseMiningRate during WGT', () => {

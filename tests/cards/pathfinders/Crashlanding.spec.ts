@@ -141,7 +141,7 @@ describe('Crashlanding', () => {
   });
 
   it('play - resources', () => {
-    player.playedCards = [dataCard, animalCard, microbeCard];
+    player.playedCards.push(dataCard, animalCard, microbeCard);
 
     card.play(player);
     runAllActions(game);

@@ -101,8 +101,6 @@ export class RemoveAnyPlants extends DeferredAction {
       removalOptions.push(option);
     }
 
-    const orOptions = new OrOptions(...removalOptions);
-    orOptions.title = this.title;
-    return orOptions;
+    return new OrOptions(...removalOptions).setTitle(this.title);
   }
 }

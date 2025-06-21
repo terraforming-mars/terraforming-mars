@@ -5,16 +5,16 @@ import {IGame} from '../../../src/server/IGame';
 import {MagneticFieldStimulationDelays} from '../../../src/server/cards/pathfinders/MagneticFieldStimulationDelays';
 import {testGame} from '../../TestingUtils';
 
-describe('MagneticFieldStimulationDelays', function() {
+describe('MagneticFieldStimulationDelays', () => {
   let card: MagneticFieldStimulationDelays;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MagneticFieldStimulationDelays();
     [game/* , player */] = testGame(1);
   });
 
-  it('resolve play', function() {
+  it('resolve play', () => {
     setTemperature(game, -30);
     setOxygenLevel(game, 0);
 
@@ -48,7 +48,7 @@ describe('MagneticFieldStimulationDelays', function() {
     expect(game.getOxygenLevel()).to.eq(1);
   });
 
-  it('cannot reduce temperature if maxed out', function() {
+  it('cannot reduce temperature if maxed out', () => {
     setTemperature(game, MAX_TEMPERATURE);
     setOxygenLevel(game, 5);
 
@@ -58,7 +58,7 @@ describe('MagneticFieldStimulationDelays', function() {
     expect(game.getOxygenLevel()).to.eq(3);
   });
 
-  it('cannot reduce oxygen if maxed out', function() {
+  it('cannot reduce oxygen if maxed out', () => {
     setTemperature(game, 0);
     setOxygenLevel(game, MAX_OXYGEN_LEVEL);
 

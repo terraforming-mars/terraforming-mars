@@ -9,7 +9,8 @@ import {SelectCard} from '../src/server/inputs/SelectCard';
 import {SerializedGame} from '../src/server/SerializedGame';
 import {testGame} from './TestGame';
 import {InMemoryDatabase} from './testing/InMemoryDatabase';
-import {cast, finishGeneration, toName} from './TestingUtils';
+import {cast, finishGeneration} from './TestingUtils';
+import {toName} from '../src/common/utils/utils';
 import {restoreTestDatabase, setTestDatabase} from './testing/setup';
 
 // Tests for deserializing a game at the start of the drafting phase.

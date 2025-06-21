@@ -372,7 +372,7 @@ describe('drafting', () => {
     let player: TestPlayer;
     let otherPlayer: TestPlayer;
     try {
-      Deck.shuffle = function() {};
+      Deck.shuffle = () => {};
       [/* game */, player, otherPlayer] = testGame(2, {draftVariant: true, initialDraftVariant: true});
     } finally {
       Deck.shuffle = shuffle;
@@ -655,7 +655,7 @@ describe('drafting', () => {
     let player: TestPlayer;
     let otherPlayer: TestPlayer;
     try {
-      Deck.shuffle = function() {};
+      Deck.shuffle = () => {};
       [/* game */, player, otherPlayer] = testGame(2, {draftVariant: true, initialDraftVariant: true, preludeExtension: true, preludeDraftVariant: false});
     } finally {
       Deck.shuffle = shuffle;
@@ -779,7 +779,7 @@ describe('drafting', () => {
     let player: TestPlayer;
     let otherPlayer: TestPlayer;
     try {
-      Deck.shuffle = function() {};
+      Deck.shuffle = () => {};
       [/* game */, player, otherPlayer] = testGame(2, {draftVariant: true, initialDraftVariant: true, preludeExtension: true, preludeDraftVariant: true});
     } finally {
       Deck.shuffle = shuffle;
@@ -1011,7 +1011,7 @@ function selectCard(player: TestPlayer, cardName: CardName) {
 //   expect(game.deferredActions).has.length(0);
 //   expect(restored.deferredActions).has.length(0);
 
-//   for (const id of game.getPlayers().map((p) => p.id)) {
+//   for (const id of game.getPlayers().map(toID)) {
 //     const livePlayer = game.getPlayerById(id);
 //     const restoredPlayer = restored.getPlayerById(id);
 

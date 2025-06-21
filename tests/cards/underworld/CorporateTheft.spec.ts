@@ -30,8 +30,8 @@ describe('CorporateTheft', () => {
 
       player.underworldData.corruption = run.corruption;
 
-      player.playedCards = run.cards.map(toCard);
-      opponent.playedCards = run.opponentCards.map(toCard);
+      player.playedCards.push(...run.cards.map(toCard));
+      opponent.playedCards.push(...run.opponentCards.map(toCard));
 
       expect(card.canPlay(player)).eq(run.expected);
     });
@@ -55,8 +55,8 @@ describe('CorporateTheft', () => {
 
       player.underworldData.corruption = run.player.corruption;
       opponent.underworldData.corruption = run.opponent.corruption;
-      player.playedCards = run.player.cards.map(toCard);
-      opponent.playedCards = run.opponent.cards.map(toCard);
+      player.playedCards.push(...run.player.cards.map(toCard));
+      opponent.playedCards.push(...run.opponent.cards.map(toCard));
 
       cast(card.play(player), undefined);
       runAllActions(game);
@@ -91,4 +91,18 @@ describe('CorporateTheft', () => {
       }
     });
   }
+
+  it('solo', () => {
+    const card = new CorporateTheft();
+    const [/* game */, player] = testGame(1, {underworldExpansion: true});
+
+    player.underworldData.corruption = 1;
+    expect(card.canPlay(player)).is.false;
+
+    player.underworldData.corruption = 2;
+    expect(card.canPlay(player)).is.true;
+
+    cast(card.play(player), undefined);
+    expect(player.underworldData.corruption).eq(3);
+  });
 });

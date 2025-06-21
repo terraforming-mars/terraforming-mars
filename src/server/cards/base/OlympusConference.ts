@@ -9,6 +9,7 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {Priority} from '../../deferredActions/Priority';
 import {CardRenderer} from '../render/CardRenderer';
+import {ICard} from '../ICard';
 
 export class OlympusConference extends Card implements IProjectCard {
   constructor() {
@@ -33,7 +34,7 @@ export class OlympusConference extends Card implements IProjectCard {
   }
 
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     const scienceTags = player.tags.cardTagCount(card, Tag.SCIENCE);
     this.onScienceTagAdded(player, scienceTags);
   }
@@ -48,7 +49,7 @@ export class OlympusConference extends Card implements IProjectCard {
           player.addResourceTo(this, 1);
           return undefined;
         }
-        const options = new OrOptions(
+        return new OrOptions(
           new SelectOption('Remove a science resource from this card to draw a card', 'Remove resource').andThen(() => {
             player.removeResourceFrom(this);
             player.drawCard();
@@ -58,9 +59,7 @@ export class OlympusConference extends Card implements IProjectCard {
             player.addResourceTo(this, 1);
             return undefined;
           }),
-        );
-        options.title = 'Select an option for Olympus Conference';
-        return options;
+        ).setTitle('Select an option for Olympus Conference');
       },
       Priority.SUPERPOWER); // Unshift that deferred action
     }

@@ -11,7 +11,7 @@ import {MartianCulture} from '../../../src/server/cards/pathfinders/MartianCultu
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {cast} from '../../TestingUtils';
 
-describe('NobelLabs', function() {
+describe('NobelLabs', () => {
   let card: NobelLabs;
   let player: TestPlayer;
   let game: IGame;
@@ -20,7 +20,7 @@ describe('NobelLabs', function() {
   let data: IProjectCard;
   let science: IProjectCard;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new NobelLabs();
     [game, player] = testGame(1);
 
@@ -30,7 +30,7 @@ describe('NobelLabs', function() {
     science = new SearchForLife();
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.megaCredits = card.cost;
     player.tagsForTest = {science: 3};
     expect(player.canPlay(card)).is.false;
@@ -38,20 +38,20 @@ describe('NobelLabs', function() {
     expect(player.canPlay(card)).is.true;
   });
 
-  it('canAct', function() {
+  it('canAct', () => {
     expect(card.canAct(player)).is.false;
-    player.playedCards = [science];
+    player.playedCards.set(science);
     expect(card.canAct(player)).is.false;
-    player.playedCards = [data];
+    player.playedCards.set(data);
     expect(card.canAct(player)).is.true;
-    player.playedCards = [microbe];
+    player.playedCards.set(microbe);
     expect(card.canAct(player)).is.true;
-    player.playedCards = [floater];
+    player.playedCards.set(floater);
     expect(card.canAct(player)).is.true;
   });
 
-  it('action', function() {
-    player.playedCards = [floater, data, microbe, science];
+  it('action', () => {
+    player.playedCards.push(floater, data, microbe, science);
 
     card.action(player);
 

@@ -3,8 +3,8 @@ import {StrongSociety} from '../../src/server/turmoil/globalEvents/StrongSociety
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {addCity, testGame} from '../TestingUtils';
 
-describe('StrongSociety', function() {
-  it('resolve play', function() {
+describe('StrongSociety', () => {
+  it('resolve play', () => {
     const card = new StrongSociety();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

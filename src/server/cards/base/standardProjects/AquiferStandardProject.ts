@@ -21,7 +21,7 @@ export class AquiferStandardProject extends StandardProjectCard {
   }
 
   public override canPayWith(player: IPlayer) {
-    if (player.isCorporation(CardName.KUIPER_COOPERATIVE)) {
+    if (player.cardIsInEffect(CardName.KUIPER_COOPERATIVE)) {
       return {kuiperAsteroids: true};
     } else {
       return {};

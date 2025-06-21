@@ -10,7 +10,7 @@ import {Tardigrades} from '../../src/server/cards/base/Tardigrades';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {cast} from '../TestingUtils';
 
-describe('GrantResourceDeferred', function() {
+describe('GrantResourceDeferred', () => {
   let player: TestPlayer;
   let ants: Ants;
   let tardigrades: Tardigrades;

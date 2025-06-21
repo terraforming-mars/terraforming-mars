@@ -15,13 +15,13 @@ describe('LunaProjectOffice', () => {
     player.megaCredits = card.cost;
 
     player.tagsForTest = {science: 2};
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     player.tagsForTest = {science: 1};
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
-  it('play - solo', function() {
+  it('play - solo', () => {
     const [game, player] = testGame(1, {
       moonExpansion: true,
     });
@@ -29,7 +29,7 @@ describe('LunaProjectOffice', () => {
     game.generation = 10;
     const card = new LunaProjectOffice();
 
-    player.playedCards = [card];
+    player.playedCards.push(card);
     card.play(player);
     expect(LunaProjectOffice.isActive(player)).is.true;
 
@@ -62,7 +62,7 @@ describe('LunaProjectOffice', () => {
 
   // This test is almost exactly the same as the solo test, but they take
   // different paths in the code.
-  it('play - 2 player - draft', function() {
+  it('play - 2 player - draft', () => {
     const [game, player, player2] = testGame(2, {
       moonExpansion: true,
       draftVariant: true,
@@ -72,7 +72,7 @@ describe('LunaProjectOffice', () => {
     game.generation = 10;
     const card = new LunaProjectOffice();
 
-    player.playedCards = [card];
+    player.playedCards.push(card);
     card.play(player);
     expect(LunaProjectOffice.isActive(player)).is.true;
 
@@ -112,7 +112,7 @@ describe('LunaProjectOffice', () => {
 
   // This test is almost exactly the same as the solo test, but it takes
   // different paths in the code.
-  it('play - 2 player - no draft', function() {
+  it('play - 2 player - no draft', () => {
     const [game, player, player2] = testGame(2, {
       moonExpansion: true,
       draftVariant: false,
@@ -121,7 +121,7 @@ describe('LunaProjectOffice', () => {
     game.generation = 10;
     const card = new LunaProjectOffice();
 
-    player.playedCards = [card];
+    player.playedCards.push(card);
     card.play(player);
     expect(LunaProjectOffice.isActive(player)).is.true;
 

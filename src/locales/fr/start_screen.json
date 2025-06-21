@@ -1,4 +1,6 @@
 {
+    "TERRAFORMING": "TERRAFORMING",
+    "MARS": "MARS",
     "New game": "Nouvelle partie",
     "How to Play": "Comment jouer",
     "Cards list": "Liste des cartes",
@@ -6,11 +8,9 @@
     "About us": "À propos de nous",
     "Whats new?": "Quoi de neuf ?",
     "Join us on Discord": "Rejoinez-nous sur Discord",
-    "MARS": "MARS",
     "Create game": "Créer une partie",
     "Looking for people to play with": "Recherche de personnes avec qui jouer",
     "version": "Version",
     "deployed": "Déployée",
-    "Not affiliated with FryxGames, Asmodee Digital or Steam in any way.": "Non affilié à FryxGames, Asmodee Digital ou Steam de quelque manière que ce soit.",
-    "TERRAFORMING": "TERRAFORMING"
+    " Not affiliated with FryxGames, Asmodee Digital or Steam in any way. ": " Non affilié à FryxGames, Asmodee Digital ou Steam de quelque manière que ce soit. "
 }

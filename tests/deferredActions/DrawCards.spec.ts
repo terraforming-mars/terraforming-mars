@@ -9,30 +9,30 @@ import {ProjectDeck} from '../../src/server/cards/Deck';
 import {cast, formatMessage, runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
 
-describe('DrawCards', function() {
+describe('DrawCards', () => {
   let game: IGame;
   let player: TestPlayer;
   let projectDeck: ProjectDeck;
 
-  beforeEach(function() {
+  beforeEach(() => {
     [game, player] = testGame(2);
     projectDeck = player.game.projectDeck;
   });
 
-  it('draws 3', function() {
+  it('draws 3', () => {
     DrawCards.keepAll(player, 3).execute();
     expect(player.cardsInHand).has.length(3);
     expect(projectDeck.discardPile).has.length(0);
   });
 
-  it('draws 3 special', function() {
+  it('draws 3 special', () => {
     DrawCards.keepAll(player, 3, {cardType: CardType.ACTIVE, tag: Tag.SPACE}).execute();
     expect(player.cardsInHand).has.length(3);
     expect(player.cardsInHand.filter((card) => card.tags.includes(Tag.SPACE) && card.type === CardType.ACTIVE))
       .has.length(3);
   });
 
-  it('draws 2 from 4', function() {
+  it('draws 2 from 4', () => {
     cast(DrawCards.keepSome(player, 4, {keepMax: 2}).execute(), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectCard);
@@ -43,7 +43,7 @@ describe('DrawCards', function() {
     expect(projectDeck.discardPile).has.length(2);
   });
 
-  it('buys 1', function() {
+  it('buys 1', () => {
     player.megaCredits = 3;
     cast(DrawCards.keepSome(player, 1, {paying: true}).execute(), undefined);
     runAllActions(game);
@@ -58,7 +58,7 @@ describe('DrawCards', function() {
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('cannot buy', function() {
+  it('cannot buy', () => {
     player.megaCredits = 2;
     cast(DrawCards.keepSome(player, 1, {paying: true}).execute(), undefined);
     runAllActions(game);

@@ -11,13 +11,13 @@ import {IDeferredAction} from '../../../src/server//deferredActions/DeferredActi
 import {cast} from '../../TestingUtils';
 import {assertAddDelegateAction} from '../../turmoil/turmoilAssertions';
 
-describe('LobbyHalls', function() {
+describe('LobbyHalls', () => {
   let card: LobbyHalls;
   let game: IGame;
   let player: TestPlayer;
   let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new LobbyHalls();
     [game, player] = testGame(1, {turmoilExtension: true, pathfindersExpansion: true});
     turmoil = game.turmoil!;
@@ -30,7 +30,7 @@ describe('LobbyHalls', function() {
     expect(card.canPlay(player)).is.false;
   });
 
-  it('play', function() {
+  it('play', () => {
     card.play(player);
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 2}));
   });
@@ -52,7 +52,7 @@ describe('LobbyHalls', function() {
 
   function assertCloneTagAction(action: IDeferredAction) {
     const options = cast(action, DeclareCloneTag).execute();
-    options.options[0].cb();
+    options.options[1].cb();
     expect(card.tags).deep.eq([Tag.EARTH, Tag.BUILDING]);
   }
 });

@@ -6,7 +6,7 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MareNectarisMine} from '../../../src/server/cards/moon/MareNectarisMine';
-import {MoonSpaces} from '../../../src/common/moon/MoonSpaces';
+import {NamedMoonSpaces} from '../../../src/common/moon/NamedMoonSpaces';
 import {TileType} from '../../../src/common/TileType';
 
 describe('MareNectarisMine', () => {
@@ -25,9 +25,9 @@ describe('MareNectarisMine', () => {
     player.cardsInHand = [card];
     player.titanium = 0;
     player.megaCredits = card.cost;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
     player.titanium = 1;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
@@ -44,7 +44,7 @@ describe('MareNectarisMine', () => {
     expect(player.getTerraformRating()).eq(15);
     expect(moonData.miningRate).eq(1);
 
-    const mareNectaris = moonData.moon.getSpaceOrThrow(MoonSpaces.MARE_NECTARIS);
+    const mareNectaris = moonData.moon.getSpaceOrThrow(NamedMoonSpaces.MARE_NECTARIS);
     expect(mareNectaris.player).eq(player);
     expect(mareNectaris.tile!.tileType).eq(TileType.MOON_MINE);
   });

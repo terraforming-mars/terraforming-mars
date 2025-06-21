@@ -3,7 +3,8 @@ import {TheNewSpaceRace} from '../../../src/server/cards/pathfinders/TheNewSpace
 import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {cast, doWait, runAllActions, setRulingParty, toName} from '../../TestingUtils';
+import {cast, doWait, runAllActions, setRulingParty} from '../../TestingUtils';
+import {toName} from '../../../src/common/utils/utils';
 import {testGame} from '../../TestGame';
 import {AlliedBanks} from '../../../src/server/cards/prelude/AlliedBanks';
 import {BiosphereSupport} from '../../../src/server/cards/prelude/BiosphereSupport';
@@ -15,14 +16,14 @@ import {TestPlayer} from '../../TestPlayer';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {CardName} from '../../../src/common/cards/CardName';
 
-describe('TheNewSpaceRace', function() {
+describe('TheNewSpaceRace', () => {
   let card: TheNewSpaceRace;
   let player1: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new TheNewSpaceRace();
     [game, player1, player2, player3] = testGame(
       3, {
@@ -41,7 +42,7 @@ describe('TheNewSpaceRace', function() {
    * While moving through to the game phase, the first player will change, and there will be a change of ruling party.
    * Finally, that player will get a second action.
   */
-  it('Should play', function() {
+  it('Should play', () => {
     player1.dealtPreludeCards = [new AlliedBanks(), new BiosphereSupport()];
     player2.dealtPreludeCards = [new AquiferTurbines(), card];
     player3.dealtPreludeCards = [new GalileanMining(), new HugeAsteroid()];
@@ -94,7 +95,7 @@ describe('TheNewSpaceRace', function() {
     expect(next.cards.map(toName)).deep.eq([CardName.AQUIFER_TURBINES]);
   });
 
-  it('Play during late game (e.g. Karen CEO)', function() {
+  it('Play during late game (e.g. Karen CEO)', () => {
     expect(player1.getTitaniumValue()).eq(3);
     setRulingParty(game, PartyName.UNITY);
     expect(player1.getTitaniumValue()).eq(4);

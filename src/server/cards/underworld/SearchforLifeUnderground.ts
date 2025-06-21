@@ -8,7 +8,7 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {searchForLife} from '../render/DynamicVictoryPoints';
 import {max} from '../Options';
 import {IdentifySpacesDeferred} from '../../underworld/IdentifySpacesDeferred';
 import {undergroundResourceTokenDescription} from '../../../common/underworld/UndergroundResourceToken';
@@ -36,7 +36,7 @@ export class SearchforLifeUnderground extends Card implements IActionCard, IProj
           }).br;
           b.vpText('3 VPs if you have one or more science resources here.');
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.searchForLife(),
+        victoryPoints: searchForLife(),
       },
     });
   }
@@ -61,7 +61,7 @@ export class SearchforLifeUnderground extends Card implements IActionCard, IProj
             player.game.log('${0} had no underground resources to discard', (b) => b.player(player));
             return;
           }
-          player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).string(undergroundResourceTokenDescription[undergroundResources]));
+          player.game.log('${0} revealed ${1}', (b) => b.player(player).string(undergroundResourceTokenDescription[undergroundResources]));
           if (['microbe1', 'microbe2', 'microbe1pertemp'].includes(undergroundResources)) {
             player.addResourceTo(this, 1);
             player.game.log('${0} found life!', (b) => b.player(player));

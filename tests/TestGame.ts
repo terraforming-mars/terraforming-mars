@@ -42,7 +42,7 @@ export function testGame(count: number, customOptions?: Partial<TestGameOptions>
     copy.aresHazards = true;
   }
 
-  const game = Game.newInstance(`game-id${idSuffix}`, players, players[0], customOptions);
+  const game = Game.newInstance(`game-id${idSuffix}`, players, players[0], customOptions, /* seed= */ undefined, `spectator-id${idSuffix}`);
   if (customOptions?.skipInitialCardSelection !== false) {
     for (const player of players) {
       /* Removes waitingFor if it is SelectInitialCards. Used when wanting it cleared out for further testing. */

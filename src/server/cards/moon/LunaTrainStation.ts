@@ -4,7 +4,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {moonRoadTile} from '../render/DynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {digit} from '../Options';
@@ -39,7 +39,7 @@ export class LunaTrainStation extends Card {
           b.production((pb) => pb.megacredits(4));
           b.tile(TileType.LUNA_TRAIN_STATION, true).moonLogisticsRate();
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.moonRoadTile(2, true),
+        victoryPoints: moonRoadTile(2, true),
       },
     });
   }

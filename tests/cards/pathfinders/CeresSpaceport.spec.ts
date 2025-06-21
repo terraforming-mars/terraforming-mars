@@ -2,20 +2,20 @@ import {expect} from 'chai';
 import {CeresSpaceport} from '../../../src/server/cards/pathfinders/CeresSpaceport';
 import {TestPlayer} from '../../TestPlayer';
 import {PlaceOceanTile} from '../../../src/server/deferredActions/PlaceOceanTile';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {Units} from '../../../src/common/Units';
 import {testGame} from '../../TestingUtils';
 
-describe('CeresSpaceport', function() {
+describe('CeresSpaceport', () => {
   let card: CeresSpaceport;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CeresSpaceport();
     [/* game */, player] = testGame(1, {pathfindersExpansion: true});
   });
 
-  it('play', function() {
+  it('play', () => {
     player.production.override({});
     player.tagsForTest = {jovian: 9};
     player.cardsInHand = [];

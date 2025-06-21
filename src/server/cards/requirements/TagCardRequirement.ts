@@ -18,7 +18,7 @@ export class TagCardRequirement extends InequalityRequirement {
   }
 
   public getScore(player: IPlayer): number {
-    const mode = this.max !== true ? 'default' : 'raw';
+    const mode = this.max !== true ? 'default' : 'raw-pf';
     let tagCount = player.tags.count(this.tag, mode);
 
     if (this.all) {

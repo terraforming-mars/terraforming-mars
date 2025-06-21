@@ -13,6 +13,9 @@ export class CentralReservoir extends PreludeCard {
       name: CardName.CENTRAL_RESERVOIR,
       tags: [Tag.BUILDING],
 
+      // TR is necessary even with behavior because this places an ocean with bespoke
+      // behavior.
+      tr: {tr: 1, oceans: 1},
       behavior: {tr: 1},
 
       metadata: {

@@ -6,16 +6,16 @@ import {LunarBeam} from '../../../src/server/cards/base/LunarBeam';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('Cartel', function() {
+describe('Cartel', () => {
   let card: Cartel;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Cartel();
     [/* game */, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
     expect(player.production.megacredits).to.eq(1);
 
@@ -25,14 +25,14 @@ describe('Cartel', function() {
     expect(player.production.megacredits).to.eq(3);
   });
 
-  it('Correctly counts tags', function() {
+  it('Correctly counts tags', () => {
     const cards = [
       new ImportedHydrogen(), // event with earth tag
       new InterstellarColonyShip(), // event with earth tag
       new LunarBeam(), // green card with earth tag
     ];
 
-    player.playedCards = player.playedCards.concat(cards);
+    player.playedCards.push(...cards);
     card.play(player);
     expect(player.production.megacredits).to.eq(2); // events are excluded
   });

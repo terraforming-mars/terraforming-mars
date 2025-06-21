@@ -7,7 +7,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {TITLES} from '../../inputs/titles';
 import {DrawCeoCardFromDeck} from '../../deferredActions/DrawCeoCardFromDeck';
-import {inplaceRemove} from '../../../common/utils/utils';
 
 export class Lowell extends CeoCard {
   constructor() {
@@ -44,7 +43,7 @@ export class Lowell extends CeoCard {
         player.game.defer(new DrawCeoCardFromDeck(player, 3)).andThen((newCeo) => {
           if (newCeo !== undefined) {
             // Move Lowell to the discard pile
-            inplaceRemove(player.playedCards, this);
+            player.playedCards.remove(this);
             game.ceoDeck.discard(this);
             // Play the new CEO
             player.playCard(newCeo);

@@ -14,4 +14,9 @@ export type Warning =
  'deckTooSmall' |
  'cannotAffordBoardOfDirectors' |
  'marsIsTerraformed' |
- 'ineffectiveDoubleDown';
+ 'ineffectiveDoubleDown' |
+ 'noMatchingCards' |
+ 'unusableEventsForAstraMechanica' |
+ 'noEffect' |
+ 'selfTarget' |
+ 'pharmacyUnion';

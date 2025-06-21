@@ -9,17 +9,17 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('SolarFarm', function() {
+describe('SolarFarm', () => {
   let card: SolarFarm;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SolarFarm();
     [game, player] = testGame(2, {aresExtension: true, aresHazards: true});
   });
 
-  it('Play', function() {
+  it('Play', () => {
     // Find the first spot with no hazard tile on it to place a city.
     const space = game.board.getAvailableSpacesForCity(player).filter((s) => !AresHandler.hasHazardTile(s))[0];
     // Hack the space to have a large number of plants, just to show a matching

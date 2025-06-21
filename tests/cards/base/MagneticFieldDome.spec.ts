@@ -4,20 +4,20 @@ import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('MagneticFieldDome', function() {
+describe('MagneticFieldDome', () => {
   let card: MagneticFieldDome;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MagneticFieldDome();
     [/* game */, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.production.add(Resource.ENERGY, 2);
     expect(card.canPlay(player)).is.true;
 

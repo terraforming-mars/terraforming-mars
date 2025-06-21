@@ -5,8 +5,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Resource} from '../../../common/Resource';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Pristar extends CorporationCard {
+export class Pristar extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.PRISTAR,
@@ -14,6 +15,10 @@ export class Pristar extends CorporationCard {
       resourceType: CardResource.PRESERVATION,
 
       victoryPoints: {resourcesHere: {}},
+
+      behavior: {
+        tr: -2,
+      },
 
       metadata: {
         cardNumber: 'R07',
@@ -30,11 +35,6 @@ export class Pristar extends CorporationCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: IPlayer) {
-    player.decreaseTerraformRating(2);
-    return undefined;
   }
 
   public onProductionPhase(player: IPlayer) {

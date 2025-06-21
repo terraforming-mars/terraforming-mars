@@ -3,14 +3,15 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 import {CardResource} from '../../../common/CardResource';
 import {Resource} from '../../../common/Resource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Ecotec extends CorporationCard {
+export class Ecotec extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ECOTEC,
@@ -34,15 +35,7 @@ export class Ecotec extends CorporationCard {
     });
   }
 
-  public override bespokePlay(player: IPlayer) {
-    this.onCardPlayed(player, this);
-    return undefined;
-  }
-
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    if (!player.isCorporation(this.name)) {
-      return undefined;
-    }
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
     const resourceCount = player.tags.cardTagCount(card, [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE]);
     if (resourceCount === 0) {
       return undefined;

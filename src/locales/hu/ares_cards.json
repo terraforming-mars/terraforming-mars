@@ -1,129 +1,70 @@
 {
-    "Capital": "Főváros",
-    "Capital tile": "Főváros lapka",
-    "1 additional VP for each ocean tile adjacent to this city tile.":
-        "1 további GyP minden olyan óceán lapka után, ami a Főváros mellett van.",
-    "Requires 4 ocean tiles. Place tile with ADJACENCY BONUS of 2 M€. Energy prod -2 and M€ prod +5.": 
-        "Kijátszási feltétel: 4 óceán lapka. Helyezz le egy lapkát, amelynek LEHELYEZÉSI BÓNUSZA 2 M€. Energiatermelés -2 és M€ termelés +5.",
-    
-    "Mohole Area": "Mohole Terület",
-    "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN. The tile grants an ADJACENCY BONUS of 2 heat.": 
-        "Növeld a hőtermelésed 4 lépéssel. Helyezd el ezt a lapkát EGY OLYAN TERÜLETEN, AMI FENN VAN TARTVA ÓCEÁNNAK. Ez a lapka 2 hő LEHELYEZÉSI BÓNUSZT ad.",
-
-    "Industrial Center": "Ipari Központ",
-    "Action: Spend 7 M€ to increase your steel production 1 step.": "AKCIÓ: Fizess 7 M€-t, hogy növeld az acéltermelésed 1 lépéssel.",
-    "Place this tile adjacent to a city tile. This tile grants an ADJACENCY BONUS of 1 steel.": 
-        "Helyezd el ezt a lapkát egy város lapka mellé. Ez a lapka 1 acél LEHELYEZÉSI BÓNUSZT ad.",
-        
-    "Mining (Titanium) tile": "Bányászat (Titán) lapka",
-    "Mining (Titanium)": "Bányászat (Titán)",
-    "Mining (Steel) tile": "Bányászat (Acél) lapka",
-    "Mining (Steel)": "Bányászat (Acél)",
-    "Mining Rights": "Bányászati Jogok",
-    "Place one of these tiles on an area with a steel or titanium placement bonus. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.":
-        "Helyezz le egy ilyen lapkát egy olyan területre, ahol van acél vagy titán lehelyezési bónusz. Ez a lapka növeli ugyanazt a termelésedet 1 lépéssel, mint amilyen bónuszt ad a terület, amin van.",
-    
-    "Mining Area": "Bányászati Terület",
-    "Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": 
-        "Helyezz le egy ilyen lapkát egy olyan területre, ahol van acél vagy titán lehelyezési bónusz, EGY MÁSIK SAJÁT LAPKA MELLETT. Ez a lapka növeli ugyanazt a termelésedet 1 lépéssel, mint amilyen bónuszt ad a terület, amin van.",
-    
-    "Ecological Zone": "Ökológiai Zóna",
-    "Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.": 
-    "Hatás: Ha játszol egy állatot vagy növényt tartalmazó ikon, IDE ÉRTVE EZT, tegyél egy állatot erre a kártyára.",
-    "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.":
-    "Követelmény, hogy NÁLAD legyen egy növényzet lapka. Helyezze ezt a lapkát BÁRMELY növényzet lapka mellé.",
-    "The tile grants an ADJACENCY BONUS of 1 animal. 1 VP per 2 animals on this card.": 
-        "Ez a lapka 1 állat LEHELYEZÉSI BÓNUSZT ad. 1 GyP minden 2 állat után ezen a kártyán.",
-
-    "Bio-Fertilizer Facility": "Bio-Trágya Gyár",
-    "Bio-Fertilizer Facility tile": "Bio-Trágya Gyár lapka",
-    "Requires 1 science tag. Increase your plant production 1 step. Add up to 2 microbes to ANY card. Place this tile which grants an ADJACENCY BONUS of 1 plant and 1 microbe.": 
-        "Kijátszási feltétel: 1 tudomány ikon. Növeld a palántatermelésed 1 lépéssel. Adj hozzá legfeljebb 2 mikrobát BÁRMELY kártyához. Helyezd el ezt a lapkát, amely 1 palánta és 1 mikroba LEHELYEZÉSI BÓNUSZT ad.",
-
-    "Lava Flows": "Lávafolyamok",
-    "Lava Flows tile": "Lávafolyamok lapka",
-    "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. This tile grants an ADJACENCY BONUS of 2 heat.": 
-        "Növeld a hőmérsékletet 2 lépéssel és helyezd el ezt a lapkát EGY VULKANIKUS TERÜLETRE. Ez a lapka 2 hő LEHELYEZÉSI BÓNUSZT ad.",
-
-    "Commercial District": "Kereskedelmi Negyed",
-    "1 VP per adjacent city tile.": "1 GyP minden LEHELYEZÉSI város lapka után.",
-    "Place this tile which grants an ADJACENCY BONUS of 2 M€. Decrease your energy production 1 step and increase your M€ production 4 steps.": 
-        "Helyezd el ezt a lapkát, amely 2 M€ LEHELYEZÉSI BÓNUSZT ad. Csökkentsd az energiatermelésed 1 lépéssel és növeld a M€ termelésed 4 lépéssel.",
-        
-    "Desperate Measures": "Kétségbeesett Intézkedések",
-    "Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.": 
-        "Helyezz egy bronz kockát egy porvihar lapkára és növeld az oxigént 1 lépéssel, vagy helyezz egy bronz kockát egy eróziós lapkára és növeld a hőmérsékletet 1 lépéssel. A veszély lapka, amelyen a bronz kocka van, nem távolítható el.",
-        
-    "Marketing Experts": "Marketing Szakértők",
-    "Effect: When an ADJACENCY BONUS is collected from a tile you own, you gain 1 M€.": 
-        "Hatás: Ha egy LEHELYEZÉSI BÓNUSZT gyűjtesz egy saját lapkáról, akkor 1 M€-t kapsz.",
-    "Increase your M€ production 1 step.": "Növeld a M€ termelésed 1 lépéssel.",
-
-    "Bioengineering Enclosure": "Bio-Mérnöki Zártzóna",
-    "Action: Remove 1 animal from THIS card to add 1 animal to ANOTHER card.": 
-        "AKCIÓ: Távolíts el 1 állatot erről a kártyáról, hogy azt, EGY MÁSIK kártyához add.",
-    "Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.": 
-        "Kijátszási feltétel: 1 tudomány ikon. Adj hozzá 2 állatot ehhez a kártyához. MÁSOK NEM TÁVOLÍTHATNAK EL ÁLLATOKAT ERRŐL A KÁRTYÁRÓL.",
-
-    "Butterfly Effect": "Pillangó Effekt",
-    "Gain 1 TR. Move each hazard marker up to 1 step up or down along its terraforming track.": 
-        "Kapsz 1 TR-t. Mozgasd meg minden veszély jelzőt 1 lépéssel felfelé vagy lefelé a terraformálási pályáján.",
-    "All hazard markers": "Minden veszély jelző",
-
-    "Geological Survey": "Geológiai Felmérés",
-    "Any max 5 Greeneries": "Max 5 Növényzet",
-    "Effect: When placing a tile ON MARS grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain.": 
-        "Hatás: Ha egy lapkát helyezel el a MARSON, amely bármilyen acélt, titánt vagy hőt ad, akkor egy további ilyen erőforrást kapsz.",
-    "Requires 5 or fewer greeneries on Mars.": "Kijátszási feltétel: maximum 5 növényzet lapka a Marson.",
-
-    "Ecological Survey": "Ökológiai Felmérés",
-    "Any 3 Greeneries": "3 Növényzet",
-    "Effect: When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain.": 
-        "Hatás: Ha egy lapkát helyezel el, amely bármilyen növényt, állatot vagy mikrobát ad, akkor egy további ilyen erőforrást kapsz.",
-    "Requires 3 greeneries on Mars.": "Kijátszási feltétel: minimum 3 növényzet lapka a Marson.",
-
-    "Magnetic Field Generators": "Mágneses Mező Generátorok",
-    "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile. It provides adjacency bonus of 1 plant and 1 microbe.": 
-        "Csökkentsd az energiatermelésed 4 lépéssel és növeld a palántatermelésed 2 lépéssel. Növeld a TR-ed 3 lépéssel. Helyezd el ezt a lapkát. Ez a lapka 1 palánta és 1 mikroba LEHELYEZÉSI BÓNUSZT ad.",
-    
-    "Natural Preserve": "Természetvédelmi Terület",
-    "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an ADJACENCY BONUS of of 1 M€. Increase your M€ production 1 step.": 
-        "Az oxigénnek 4% vagy annál kevesebbnek kell lennie. Helyezd el ezt a lapkát EGY MÁSIK LAPKA MELLETT. Ez a lapka 1 M€ LEHELYEZÉSI BÓNUSZT ad. Növeld a M€ termelésed 1 lépéssel.",
-
-    "Ocean Sanctuary": "Óceán Szentély",
-    "1 VP per animal on this card.": "1 GyP minden állat után ezen a kártyán.",
-    "Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 animal. Add 1 animal to this card.": 
-        "Kijátszási feltétel: 5 óceán lapka. Helyezd el ezt a lapkát egy már meglévő óceán lapka tetejére. Ez a lapka 1 állat LEHELYEZÉSI BÓNUSZT ad. Adj hozzá 1 állatot ehhez a kártyához.",
-
-    "Nuclear Zone": "Nukleáris Zóna",
-    "Raise the temperature two steps. Place this tile. Players must pay an additional 2M€ when they place a tile with their player marker on it ADJACENT to the Nuclear Zone.": 
-        "Növeld a hőmérsékletet 2 lépéssel. Helyezd el ezt a lapkát. A játékosoknak 2 M€-t kell fizetniük, amikor egy lapkát helyeznek el a játékosuk jelzőjével, amely LEHELYEZÉSI a Nukleáris Zónával.",
-
-    "Restricted Area": "Korlátozott Terület",
-    "Action: Spend 2 M€ to draw a card.": "AKCIÓ: Fizess 2 M€-t, hogy húzz egy lapot.",
-    "Place this tile which grants an ADJACENCY BONUS of 1 card.": "Helyezd el ezt a lapkát, amely 1 lap LEHELYEZÉSI BÓNUSZT ad.",
-
-    "Solar Farm": "Napelempark",
-    "Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your energy production 1 step for each plant resource on the area where you place the tile.": 
-        "Helyezd el ezt a lapkát, amely 2 energia LEHELYEZÉSI BÓNUSZT ad. Növeld az energiatermelésed 1 lépéssel minden palánta erőforrásért a területen, ahol a lapkát elhelyezed.",
-
-    "Great Dam": "Nagy Gát",
-    "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile. The tile grants an ADJACENCY BONUS of 2 Energy.": 
-        "Kijátszási feltétel: 4 óceán lapka. Növeld az energiatermelésed 2 lépéssel. Helyezd el ezt a lapkát EGY ÓCEÁN LAPKA MELLETT. Ez a lapka 2 energia LEHELYEZÉSI BÓNUSZT ad.",
-
-    "Deimos Down": "Deimos Lefelé",
-    "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. It provides adjacency bonus of 1 asteroid and 1 steel.": 
-        "Növeld a hőmérsékletet 3 lépéssel és szerezz 4 acélt. Helyezd el ezt a lapkát EGY MÁSIK VÁROS LAPKA MELLETT. Ez a lapka 1 aszteroida és 1 acél LEHELYEZÉSI BÓNUSZT ad.",
-    
-    "Metallic Asteroid": "Fém Aszteroida",
-    "Raise temperature 1 step and gain 1 titanium. Remove up to 4 plants from any player. Place this tile which grants an ADJACENCY BONUS of 1 titanium.": 
-        "Növeld a hőmérsékletet 1 lépéssel és szerezz 1 titánt. Távolíts el legfeljebb 4 növényt bármelyik játékostól. Helyezd el ezt a lapkát, amely 1 titán LEHELYEZÉSI BÓNUSZT ad.",
-
-    "Ocean Farm": "Óceán Farm",
-    "Requires 4 ocean tiles. Increase your heat production 1 step and increase your plant production 1 step. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 plant.": 
-        "Kijátszási feltétel: 4 óceán lapka. Növeld a hőtermelésed 1 lépéssel és növeld a palántatermelésed 1 lépéssel. Helyezd el ezt a lapkát egy már meglévő óceán lapka tetejére. Ez a lapka 1 palánta LEHELYEZÉSI BÓNUSZT ad.",
-
-    "Ocean City": "Óceán Város",
-    "Requires 6 ocean tiles. Decrease your energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.":
-        "Kijátszási feltétel: 6 óceán lapka. Csökkentsd az energiatermelésed 1 lépéssel és növeld a M€ termelésed 3 lépéssel. Helyezd el ezt a lapkát egy már meglévő óceán lapka tetejére, FIGYELMELMÉTBE VÉVE A VÁROSOK NORMÁL HELYEZÉSI KORLÁTOZÁSAIT. Ez a lapka számít városnak és óceánnak is."
+  "Desperate Measures": "Kétségbeesett intézkedések",
+  "Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.": "Helyezz egy bronz kockát egy porvihar lapkára és növeld az oxigént 1 értékkel, vagy helyezz egy bronz kockát egy eróziós lapkára és növeld a hőmérsékletet 1 értékkel. A Veszélylapka, amelyen a bronz kocka van, nem távolítható el.",
+  "Mining Area": "Bányatelep",
+  "Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "Tedd le ezt a lapkát egy mezőre, ami valamelyik lent lévő lapkád mellett van és amin acél vagy titán lehelyezési bónusz található! Növeld meg annak az erőforrásnak a termelését 1 értékkel!",
+  "Industrial Center": "Ipari központ",
+  "Action: Spend 7 M€ to increase your steel production 1 step.": "Akció: Költs el 7 M€-et, hogy megnöveld az acéltermelésed 1 értékkel!",
+  "Place this tile adjacent to a city tile. This tile grants an ADJACENCY BONUS of 1 steel.": "Helyezd le ezt a lapkát egy Városlapka mellé! Ez a lapka 1 acél LEHELYEZÉSI BÓNUSZT ad.",
+  "Marketing Experts": "Marketingszakértők",
+  "Effect: When an ADJACENCY BONUS is collected from a tile you own, you gain 1 M€.": "Hatás: Ha egy LEHELYEZÉSI BÓNUSZT gyűjtesz egy saját lapkáról, akkor 1 M€-et kapsz.",
+  "Increase your M€ production 1 step.": "Növeld a M€-termelésed 1 értékkel!",
+  "Bioengineering Enclosure": "Biomérnöki ház",
+  "Action: Remove 1 animal from THIS card to add 1 animal to ANOTHER card.": "Akció: Távolíts el 1 állatot erről a kártyáról, hogy azt, EGY MÁSIK kártyához ad!",
+  "Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.": "Kijátszási feltétel: legfeljebb 1 tudomány ikon. Adj hozzá 2 állatot ehhez a kártyához! MÁSOK NEM TÁVOLÍTHATNAK EL ÁLLATOKAT ERRŐL A KÁRTYÁRÓL.",
+  "Butterfly Effect": "Pillangóhatás",
+  "Gain 1 TR. Move each hazard marker up to 1 step up or down along its terraforming track.": "Kapsz 1 TR-t. Mozgasd  minden veszélyjelzőt 1 lépéssel felfelé vagy lefelé a terraformálási pályáján!",
+  "All hazard markers": "Minden veszélyjelző",
+  "Geological Survey": "Földtani felmérés",
+  "Any max 5 Greeneries": "Legfeljebb 5 Növényzetlapka",
+  "Effect: When placing a tile ON MARS grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain.": "Hatás: Ha egy lapkát helyezel le a MARSON, amely acélt, titánt vagy hőt ad, akkor egy további ilyen erőforrást kapsz.",
+  "Requires 5 or fewer greeneries on Mars.": "Kijátszási feltétel: legfeljebb 5 Növényzetlapka a Marson.",
+  "Ecological Survey": "Ökológiai felmérés",
+  "Any 3 Greeneries": "3 Növényzetlapka",
+  "Effect: When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain.": "Hatás: Ha egy lapkát helyezel le, amely palántát, állatot vagy mikrobát adna, akkor egy további ilyen erőforrást kapsz.",
+  "Requires 3 greeneries on Mars.": "Kijátszási feltétel: legalább 3 Növényzetlapka a Marson.",
+  "Magnetic Field Generators": "Mágneses tér generátor",
+  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile. It provides adjacency bonus of 1 plant and 1 microbe.": "Csökkentsd az energiatermelésed 4 értékkel és növeld a palántatermelésed 2 értékkel! Növeld a TR-ed 3 értékkel! Helyezd le ezt a lapkát! Ez a lapka 1 palánta és 1 mikroba LEHELYEZÉSI BÓNUSZT ad.",
+  "Mining Rights": "Bányászati jogok",
+  "Place one of these tiles on an area with a steel or titanium placement bonus. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "Rakj le egy ilyen lapkát egy olyan területre, ahol van acél vagy titán lehelyezési bónusz! Ez a lapka növeli ugyanazt a termelésedet 1 értékkel, mint amilyen bónuszt ad a terület, amin van.",
+  "Natural Preserve": "Természetvédelmi övezet",
+  "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an ADJACENCY BONUS of of 1 M€. Increase your M€ production 1 step.": "Kijátszási feltétel: Legfeljebb 4%-os oxigénszint. Helyezd le ezt a lapkát EGY MÁSIK LAPKA MELLÉ! Ez a lapka 1 M€ LEHELYEZÉSI BÓNUSZT ad. Növeld a M€-termelésed 1 értékkel!",
+  "Ocean Sanctuary": "Óceán-menedék",
+  "1 VP per animal on this card.": "1 GyP minden állat után ezen a kártyán.",
+  "Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 animal. Add 1 animal to this card.": "Kijátszási feltétel: legalább 5 Óceánlapka. Helyezd le ezt a lapkát egy már meglévő Óceánlapka tetejére! Ez a lapka 1 állat LEHELYEZÉSI BÓNUSZT ad. Adj hozzá 1 állatot ehhez a kártyához!",
+  "Nuclear Zone": "Nukleáris övezet",
+  "Raise the temperature two steps. Place this tile. Players must pay an additional 2M€ when they place a tile with their player marker on it ADJACENT to the Nuclear Zone.": "Növeld a hőmérsékletet 2 értékkel! Helyezd le ezt a lapkát! A játékosoknak további 2 M€-et kell fizetniük, ha játékosjelzővel elláttot lapkát helyeznek le a Nukleáris övezet mellé.",
+  "Restricted Area": "Szigorított védelmi terület",
+  "Action: Spend 2 M€ to draw a card.": "Akció: Költs el 2 M€-et, hogy húzz egy kártyát!",
+  "Place this tile which grants an ADJACENCY BONUS of 1 card.": "Helyezd le ezt a lapkát, amely 1 lap LEHELYEZÉSI BÓNUSZT ad.",
+  "Solar Farm": "Napelempark",
+  "Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your energy production 1 step for each plant resource on the area where you place the tile.": "Helyezd le ezt a lapkát, amely 2 energia LEHELYEZÉSI BÓNUSZT ad. Növeld az energiatermelésed 1 értékkel minden palánta erőforrásért a területen, ahova a lapkát lehelyezted!",
+  "Great Dam": "Nagy gát",
+  "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile. The tile grants an ADJACENCY BONUS of 2 Energy.": "Kijátszási feltétel: legalább 4 Óceánlapka. Növeld az energiatermelésed 2 értékkel! Helyezd le ezt a lapkát EGY ÓCEÁNLAPKA MELLÉ! Ez a lapka 2 energia LEHELYEZÉSI BÓNUSZT ad.",
+  "Deimos Down": "Deiomos \"leszállt\"",
+  ".Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. It provides adjacency bonus of 1 asteroid and 1 steel. Remove up to 6 plants from any player.": "Növeld a hőmérsékletet 3 értékkel és kapj 4 acélt! Helyezd le ezt a lapkát EGY MÁSIK VÁROS LAPKA MELLÉ! Ez a lapka 1 aszteroida és 1 acél LEHELYEZÉSI BÓNUSZT ad. Dobass el legfeljebb 6 palántát valemelyik játékossal!",
+  "Ecological Zone": "Ökológia övezet",
+  "Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.": "Hatás: Ha kijátszol egy állat vagy palánta ikont - beleértve ezt is - tegyél egy állatot erre a kártyára!",
+  "The tile grants an ADJACENCY BONUS of 1 animal. 1 VP per 2 animals on this card.": "Ez a lapka 1 állat LEHELYEZÉSI BÓNUSZT ad. 1 GyP minden 2 állat után ezen a kártyán.",
+  "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "Kijátszási feltétel: Rendelkezz 1 saját Növényzetlapkával. Helyezd le ezt a lapkát BÁRMELY növényzet lapka mellé!",
+  "Bio-Fertilizer Facility": "Bio-műtrágya létesítmény",
+  "Requires 1 science tag. Increase your plant production 1 step. Add up to 2 microbes to ANY card. Place this tile which grants an ADJACENCY BONUS of 1 plant and 1 microbe.": "Kijátszási feltétel: legalább 1 tudomány ikon. Növeld a palántatermelésed 1 értékkel! Rakj legfeljebb 2 mikrobát egy TETSZŐLEGES kártyára! Helyezd le ezt a lapkát, amely 1 palánta és 1 mikroba LEHELYEZÉSI BÓNUSZT ad!",
+  "Metallic Asteroid": "Fémes aszteroida",
+  "Raise temperature 1 step and gain 1 titanium. Remove up to 4 plants from any player. Place this tile which grants an ADJACENCY BONUS of 1 titanium.": "Növeld a hőmérsékletet 1 értékkel és kapsz 1 titánt! Dobass el legfeljebb 4 palántát bármelyik játékossal! Helyezd le ezt a lapkát, amely 1 titán LEHELYEZÉSI BÓNUSZT ad!",
+  "Ocean Farm": "Óceán farm",
+  "Requires 4 ocean tiles. Increase your heat production 1 step and increase your plant production 1 step. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 plant.": "Kijátszási feltétel: legalább 4 Óceánlapka. Növeld a hőtermelésed és a palántatermelésed 1-1 értékkel! Helyezd le ezt a lapkát egy már meglévő Óceánlapka tetejére. Ez a lapka 1 palánta LEHELYEZÉSI BÓNUSZT ad.",
+  "Commercial District": "Kereskedelmi negyed",
+  "1 VP per adjacent city tile.": "1 GyP minden LEHELYEZÉSI Városlapka után.",
+  "Place this tile which grants an ADJACENCY BONUS of 2 M€. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Helyezd le ezt a lapkát, amely 2 M€ LEHELYEZÉSI BÓNUSZT ad! Csökkentsd az energiatermelésed 1 értékkel és növeld a M€-termelésed 4 értékkel!",
+  "Ocean City": "Óceánváros",
+  "Requires 6 ocean tiles. Decrease your energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "Kijátszási feltétel: legalább 6 Óceánlapka. Csökkentsd az energiatermelésed 1 értékkel és növeld a M€-termelésed 3 értékkel! Helyezd le ezt a lapkát egy már meglévő Óceánlapka tetejére, FIGYELEMBE VÉVE A VÁROSOK NORMÁL LEHELYEZÉSI KORLÁTOZÁSAIT! Ez a lapka számít városnak és óceánnak is.",
+  "Lava Flows": "Lávafolyamok",
+  "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. This tile grants an ADJACENCY BONUS of 2 heat.": "Növeld a hőmérsékletet 2 értékkel és helyezd le ezt a lapkát EGY VULKANIKUS TERÜLETRE! Ez a lapka 2 hő LEHELYEZÉSI BÓNUSZT ad.",
+  "Mohole Area": "Mohole terület",
+  "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN. The tile grants an ADJACENCY BONUS of 2 heat.": "Növeld a hőtermelésed 4 értékkel! Helyezd le ezt a lapkát EGY OLYAN TERÜLETEN, AMI ÓCEÁNOKNAK VAN FENNTARTVA! Ez a lapka 2 hő LEHELYEZÉSI BÓNUSZT ad.",
+  "Capital": "Főváros",
+  "1 additional VP for each ocean tile adjacent to this city tile.": "1 GyP jár minden szomszédos Óceánlapka után.",
+  "Requires 4 ocean tiles. Place tile with ADJACENCY BONUS of 2 M€. Energy prod -2 and M€ prod +5.": "Kijátszási feltétel: legalább 4 Óceánlapka. Rakd le a lapkát, aminek a szomszédos bónusza 2 M€! Csökkentsd az energiatermelésed 2 és növeld a M€-termelésed 5 értékkel!",
+  "Purifier": "Tisztító",
+  "Have removed at least 3 hazard tiles (excluding WGT)": "Távolíts el legalább 3 Veszélylapkát (a WGT kivételével)"
 }

@@ -3,8 +3,8 @@ import {testGame} from '../../TestGame';
 import {SolarWindPower} from '../../../src/server/cards/base/SolarWindPower';
 import {cast} from '../../TestingUtils';
 
-describe('SolarWindPower', function() {
-  it('Should play', function() {
+describe('SolarWindPower', () => {
+  it('Should play', () => {
     const card = new SolarWindPower();
     const [/* game */, player] = testGame(1);
 

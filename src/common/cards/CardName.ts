@@ -562,14 +562,17 @@ export enum CardName {
 
   ICY_IMPACTORS = 'Icy Impactors',
   SOIL_ENRICHMENT = 'Soil Enrichment',
-  CITY_PARK = 'City Park',
+  CITY_PARKS = 'City Parks',
   SUPERMARKETS = 'Supermarkets',
   HOSPITALS = 'Hospitals',
   PUBLIC_BATHS = 'Public Baths',
+  PROTECTED_GROWTH = 'Protected Growth',
+  VERMIN = 'Vermin',
 
   // Promo from contest
   FLOYD_CONTINUUM = 'Floyd Continuum',
   CASINOS = 'Casinos',
+  NEW_HOLLAND = 'New Holland',
 
   // End of promo cards
 
@@ -996,7 +999,7 @@ export enum CardName {
   CUT_THROAT_BUDGETING = 'Cut-throat Budgeting',
   GEOLOGICAL_SURVEY_UNDERWORLD = 'Geological Survey:underworld',
   CLASS_ACTION_LAWSUIT = 'Class-action Lawsuit',
-  MERCENARY_ASSAULT = 'Mercenary Assault',
+  MERCENARY_SQUAD = 'Mercenary Squad',
   RESEARCH_DEVELOPMENT_HUB = 'Research & Development Hub',
   PLANETARY_RIGHTS_BUYOUT = 'Planetary Rights Buyout',
   MEDIA_FRENZY = 'Media Frenzy',
@@ -1004,6 +1007,16 @@ export enum CardName {
   WHALES = 'Whales',
   GUERILLA_ECOLOGISTS = 'Guerilla Ecologists',
   THIOLAVA_VENTS = 'Thiolava Vents',
+  DETECTIVE_TV_SERIES = 'Detective TV Series',
+  RACKETEERING = 'Racketeering',
+  GAS_TRUST = 'Gas Trust',
+  STING_OPERATION = 'Sting Operation',
+  FAMILY_CONNECTIONS = 'Family Connections',
+  BIOBATTERIES = 'Biobatteries',
+  EXPORT_CONVOY = 'Export Convoy',
+  ACIDIZING = 'Acidizing',
+  EXPLOITATION_OF_VENUS = 'Exploitation Of Venus',
+
   // Underworld Corporations
   HADESPHERE = 'Hadesphere',
   DEMETRON_LABS = 'Demetron Labs',

@@ -8,9 +8,10 @@ import {SelectParty} from '../../src/server/inputs/SelectParty';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {TileType} from '../../src/common/TileType';
+import {toID} from '../../src/common/utils/utils';
 
-describe('VastitasBorealisNovusBoard', function() {
-  it('sanity test', function() {
+describe('VastitasBorealisNovusBoard', () => {
+  it('sanity test', () => {
     const board = VastitasBorealisNovusBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     expect(board.spaces).to.deep.eq([
       {'id': '01', 'spaceType': 'colony', 'x': -1, 'y': -1, 'bonus': []},
@@ -76,7 +77,6 @@ describe('VastitasBorealisNovusBoard', function() {
       {'id': '61', 'spaceType': 'land', 'x': 6, 'y': 8, 'bonus': [3]},
       {'id': '62', 'spaceType': 'land', 'x': 7, 'y': 8, 'bonus': [1]},
       {'id': '63', 'spaceType': 'land', 'x': 8, 'y': 8, 'bonus': [0]},
-      {'id': '69', 'spaceType': 'colony', 'x': -1, 'y': -1, 'bonus': []},
     ]);
   });
 
@@ -108,10 +108,10 @@ describe('VastitasBorealisNovusBoard', function() {
     const space = board.spaces.find((space) => space.bonus.includes(SpaceBonus.TEMPERATURE))!;
 
     player.megaCredits = 2;
-    expect(board.getAvailableSpacesOnLand(player).map((space) => space.id)).does.not.include(space.id);
+    expect(board.getAvailableSpacesOnLand(player).map(toID)).does.not.include(space.id);
 
     player.megaCredits = 3;
-    expect(board.getAvailableSpacesOnLand(player).map((space) => space.id)).includes(space.id);
+    expect(board.getAvailableSpacesOnLand(player).map(toID)).includes(space.id);
     expect(game.getTemperature()).eq(-30);
 
     game.addTile(player, space, {tileType: TileType.CITY});

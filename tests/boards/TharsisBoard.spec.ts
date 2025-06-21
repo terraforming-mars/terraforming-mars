@@ -3,8 +3,8 @@ import {expect} from 'chai';
 import {TharsisBoard} from '../../src/server/boards/TharsisBoard';
 import {SeededRandom} from '../../src/common/utils/Random';
 
-describe('TharsisBoard', function() {
-  it('sanity test', function() {
+describe('TharsisBoard', () => {
+  it('sanity test', () => {
     const board = TharsisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     expect(board.spaces).to.deep.eq([
       {id: '01', spaceType: 'colony', bonus: [], x: -1, y: -1},
@@ -70,7 +70,6 @@ describe('TharsisBoard', function() {
       {id: '61', spaceType: 'land', bonus: [], x: 6, y: 8},
       {id: '62', spaceType: 'land', bonus: [], x: 7, y: 8},
       {id: '63', spaceType: 'ocean', bonus: [0, 0], x: 8, y: 8},
-      {id: '69', spaceType: 'colony', bonus: [], x: -1, y: -1},
     ]);
   });
 });

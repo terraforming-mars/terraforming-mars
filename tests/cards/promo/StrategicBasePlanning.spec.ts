@@ -7,12 +7,12 @@ import {TestPlayer} from '../../TestPlayer';
 import {assertPlaceCity} from '../../assertions';
 import {assertBuildColony} from '../../colonies/coloniesAssertions';
 
-describe('StrategicBasePlanning', function() {
+describe('StrategicBasePlanning', () => {
   let card: StrategicBasePlanning;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new StrategicBasePlanning();
     // 2 players to remove an early-game solo action in the deferred actions queue.
     [game, player] = testGame(2, {
@@ -27,7 +27,7 @@ describe('StrategicBasePlanning', function() {
     });
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     game.deferredActions.pop();
 
     player.megaCredits = 100;

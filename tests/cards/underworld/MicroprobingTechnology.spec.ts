@@ -16,7 +16,8 @@ describe('MicroprobingTechnology', () => {
     player.tagsForTest = {science: 1};
     expect(card.canPlay(player)).is.true;
 
-    player.playedCards = [new Cryptocurrency(), new CommunicationCenter];
+    const cryptocurrency = new Cryptocurrency();
+    player.playedCards.set(cryptocurrency, new CommunicationCenter);
 
     cast(card.play(player), undefined);
 
@@ -32,7 +33,7 @@ describe('MicroprobingTechnology', () => {
     runAllActions(game);
 
     const selectCard = cast(player.popWaitingFor(), SelectCard);
-    selectCard.cb([player.playedCards[0]]);
-    expect(player.playedCards[0].resourceCount).eq(2);
+    selectCard.cb([cryptocurrency]);
+    expect(cryptocurrency.resourceCount).eq(2);
   });
 });

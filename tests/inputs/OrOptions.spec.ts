@@ -5,7 +5,7 @@ import {TestPlayer} from '../TestPlayer';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {SelectAmount} from '../../src/server/inputs/SelectAmount';
 
-describe('orOptions', function() {
+describe('orOptions', () => {
   let player: TestPlayer;
   let value = -1;
   function cb(val: number) {
@@ -17,7 +17,7 @@ describe('orOptions', function() {
     [/* game */, player] = testGame(1);
   });
 
-  it('Simple', function() {
+  it('Simple', () => {
     const orOptions = new OrOptions(
       new SelectOption('').andThen(() => cb(2)),
       new SelectOption('').andThen(() => cb(3)),

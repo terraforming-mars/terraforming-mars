@@ -16,6 +16,7 @@ export class DeepwaterDome extends PreludeCard {
       name: CardName.DEEPWATER_DOME,
       tags: [Tag.PLANT, Tag.BUILDING],
 
+      tr: {oceans: 1},
       behavior: {
         production: {plants: 1},
       },

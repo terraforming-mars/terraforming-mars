@@ -12,12 +12,12 @@ import {CardModel} from '@/common/models/CardModel';
 
 let savedData: InputResponse | undefined;
 
-describe('SelectInitialCards', function() {
+describe('SelectInitialCards', () => {
   beforeEach(() => {
     savedData = undefined;
   });
 
-  it('saves data without prelude', async function() {
+  it('saves data without prelude', async () => {
     const component = createComponent([CardName.ECOLINE], [CardName.ANTS]);
     expect(component).not.is.undefined;
 
@@ -42,7 +42,7 @@ describe('SelectInitialCards', function() {
     ]});
   });
 
-  it('Cannot save with only one prelude', async function() {
+  it('Cannot save with only one prelude', async () => {
     const component = createComponent([CardName.ECOLINE], [CardName.ANTS], [CardName.ALLIED_BANK]);
     expect(component).not.is.undefined;
 
@@ -57,7 +57,7 @@ describe('SelectInitialCards', function() {
     expect(button.attributes().disabled).eq('disabled');
   });
 
-  it('saves data with prelude', async function() {
+  it('saves data with prelude', async () => {
     const component = createComponent(
       [CardName.ECOLINE],
       [CardName.ANTS],
@@ -95,7 +95,7 @@ describe('SelectInitialCards', function() {
     expect(confirmationDialog.$data.shown).is.false;
   });
 
-  it('shows error when no project cards selected', async function() {
+  it('shows error when no project cards selected', async () => {
     const component = createComponent([CardName.ECOLINE], [CardName.ANTS]);
     const selectCards = component.findAllComponents({name: 'select-card'});
     selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
@@ -111,7 +111,7 @@ describe('SelectInitialCards', function() {
     expect(confirmationDialog.$data.shown).is.true;
   });
 
-  it('shows error when prelude cards are selected but not project cards', async function() {
+  it('shows error when prelude cards are selected but not project cards', async () => {
     const component = createComponent(
       [CardName.ECOLINE],
       [CardName.ANTS],
@@ -130,7 +130,7 @@ describe('SelectInitialCards', function() {
     expect(confirmationDialog.$data.shown).is.true;
   });
 
-  it('Cannot select two ceos', async function() {
+  it('Cannot select two ceos', async () => {
     const component = createComponent([CardName.ECOLINE], [CardName.ANTS], undefined, [CardName.FLOYD, CardName.HAL9000, CardName.ENDER]);
     expect(component).not.is.undefined;
 

@@ -8,8 +8,9 @@ import {Resource} from '../../../common/Resource';
 import {all} from '../Options';
 import {Size} from '../../../common/cards/render/Size';
 import {Priority} from '../../deferredActions/Priority';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class AnubisSecurities extends CorporationCard {
+export class AnubisSecurities extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ANUBIS_SECURITIES,
@@ -52,7 +53,7 @@ export class AnubisSecurities extends CorporationCard {
     return undefined;
   }
 
-  public onIncreaseTerraformRating(player: IPlayer, _cardOwner: IPlayer, steps: number) {
+  public onIncreaseTerraformRatingByAnyPlayer(_cardOwner: IPlayer, player: IPlayer, steps: number) {
     const money = steps * 2;
     player.stock.add(Resource.MEGACREDITS, money);
     player.game.log('${0} gained ${1} M€ from the ${2} corp effect', (b) => b.player(player).number(money).card(this));

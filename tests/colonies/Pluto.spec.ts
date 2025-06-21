@@ -8,31 +8,31 @@ import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
 
-describe('Pluto', function() {
+describe('Pluto', () => {
   let pluto: Pluto;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     pluto = new Pluto();
     [game, player, player2] = testGame(2, {coloniesExtension: true});
     game.colonies.push(pluto);
   });
 
-  it('Should build', function() {
+  it('Should build', () => {
     pluto.addColony(player);
     runAllActions(game); // Draw cards
     expect(player.cardsInHand).has.lengthOf(2);
   });
 
-  it('Should trade', function() {
+  it('Should trade', () => {
     pluto.trade(player);
     runAllActions(game); // Draw cards
     expect(player.cardsInHand).has.lengthOf(1);
   });
 
-  it('Should give trade bonus', function() {
+  it('Should give trade bonus', () => {
     pluto.addColony(player);
     runAllActions(game); // Draw a card
     expect(player.cardsInHand).has.lengthOf(2);

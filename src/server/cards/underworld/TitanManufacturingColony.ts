@@ -6,6 +6,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {ActionCard} from '../ActionCard';
 import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
+import {ICard} from '../ICard';
 
 export class TitanManufacturingColony extends ActionCard implements IProjectCard {
   constructor() {
@@ -33,7 +34,7 @@ export class TitanManufacturingColony extends ActionCard implements IProjectCard
     });
   }
 
-  onCardPlayed(player: IPlayer, card: IProjectCard): undefined {
+  onCardPlayed(player: IPlayer, card: ICard): undefined {
     const count = card.tags.filter((tag) => tag === Tag.JOVIAN).length;
     player.addResourceTo(this, {qty: count, log: true});
     return undefined;

@@ -6,9 +6,9 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {TileType} from '../../../src/common/TileType';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 
-describe('SeismicPredictions', function() {
+describe('SeismicPredictions', () => {
   let card: SeismicPredictions;
   let player: TestPlayer;
   let game: IGame;
@@ -48,7 +48,7 @@ describe('SeismicPredictions', function() {
       spaces.forEach((space, idx) => {
         game.simpleAddTile(player, space, {tileType: TileType.GREENERY});
         space.player = player;
-        UnderworldExpansion.identify(game, space, player);
+        UnderworldExpansion.identify(game, space, undefined);
         if (idx < run.claimed) {
           space.excavator = player;
         }

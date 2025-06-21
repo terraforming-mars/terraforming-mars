@@ -10,7 +10,7 @@ import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 import {SerializedCard} from '../../SerializedCard';
 import {ICard} from '../ICard';
 
-export class Aridor extends CorporationCard {
+export class Aridor extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ARIDOR,
@@ -69,18 +69,11 @@ export class Aridor extends CorporationCard {
     }
   }
 
-  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
-    return this.onCardPlayed(player, card);
-  }
-
   public onColonyAddedToLeavitt(player: IPlayer) {
     this.processTags(player, [Tag.SCIENCE]);
   }
 
-  public onCardPlayed(player: IPlayer, card: ICard) {
-    if (!player.isCorporation(this.name)) {
-      return;
-    }
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
     this.processTags(player, this.tagsForCard(card));
   }
 

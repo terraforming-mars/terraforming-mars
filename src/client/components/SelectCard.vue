@@ -14,7 +14,6 @@
               </template>
             </Card>
         </label>
-        <div v-if="hasCardWarning()" class="card-warning">{{ $t(warning) }}</div>
         <warnings-component :warnings="warnings"></warnings-component>
         <div v-if="showsave === true" class="nofloat">
             <AppButton :disabled="isOptionalToManyCards && cardsSelected() === 0" type="submit" @click="saveData" :title="buttonLabel()" />
@@ -124,26 +123,6 @@ export default Vue.extend({
       }
       return cards;
     },
-    hasCardWarning() {
-      // This is pretty clunky, to be honest.
-      if (Array.isArray(this.cards)) {
-        if (this.cards.length === 1) {
-          this.warnings = this.cards[0].warnings;
-          if (this.cards[0].warning !== undefined) {
-            this.warning = this.cards[0].warning;
-            return true;
-          }
-        }
-        return false;
-      } else if (typeof this.cards === 'object') {
-        this.warnings = this.cards.warnings;
-        if (this.cards.warning !== undefined) {
-          this.warning = this.cards.warning;
-          return true;
-        }
-      }
-      return false;
-    },
     getData(): Array<CardName> {
       return Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name];
     },
@@ -175,7 +154,7 @@ export default Vue.extend({
       return undefined;
     },
     getOwner(card: CardModel): Owner {
-      return this.owners.get(card.name) ?? {name: 'unknown', color: Color.NEUTRAL};
+      return this.owners.get(card.name) ?? {name: 'unknown', color: 'neutral'};
     },
     isCardActivated(card: CardModel): boolean {
       // Copied from PlayerMixin.

@@ -8,7 +8,7 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {searchForLife} from '../render/DynamicVictoryPoints';
 import {max} from '../Options';
 import {TITLES} from '../../inputs/titles';
 
@@ -33,7 +33,7 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard {
           }).br;
           b.vpText('3 VPs if you have one or more science resources here.');
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.searchForLife(),
+        victoryPoints: searchForLife(),
       },
     });
   }

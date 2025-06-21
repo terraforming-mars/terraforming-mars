@@ -32,6 +32,18 @@ export class EcologyExperts extends PreludeCard {
     }
     return 0;
   }
+
+  public override canPlay(player: IPlayer) {
+    // NOTE: when a card comes into play with a plant production, this will
+    // get more complicated.
+    player.temporaryGlobalParameterRequirementBonus += 50;
+    try {
+      return player.getPlayableCards().length > 0;
+    } finally {
+      player.temporaryGlobalParameterRequirementBonus -= 50;
+    }
+  }
+
   public override bespokePlay(player: IPlayer) {
     player.game.defer(new PlayProjectCard(player));
     return undefined;

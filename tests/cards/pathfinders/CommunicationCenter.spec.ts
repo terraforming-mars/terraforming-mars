@@ -8,16 +8,15 @@ import {Resource} from '../../../src/common/Resource';
 import {CardType} from '../../../src/common/cards/CardType';
 import {CEOsFavoriteProject} from '../../../src/server/cards/base/CEOsFavoriteProject';
 
-describe('CommunicationCenter', function() {
+describe('CommunicationCenter', () => {
   let card: CommunicationCenter;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CommunicationCenter();
     [game, player, player2] = testGame(2, {pathfindersExpansion: true});
-    player.playedCards = [card];
   });
 
   it('canPlay', () => {
@@ -41,7 +40,7 @@ describe('CommunicationCenter', function() {
   });
 
   it('onCardPlayed', () => {
-    player.playedCards = [card];
+    player.playedCards.push(card);
     expect(card.resourceCount).eq(0);
 
     player.onCardPlayed(fakeCard({type: CardType.ACTIVE}));
@@ -78,7 +77,7 @@ describe('CommunicationCenter', function() {
 
   it('Work with CEOs favorite project', () => {
     card.resourceCount = 2;
-    player.playedCards = [card];
+    player.playedCards.push(card);
 
     const ceosFavoriteProject = new CEOsFavoriteProject();
     player.playCard(ceosFavoriteProject);
@@ -91,7 +90,7 @@ describe('CommunicationCenter', function() {
   });
 
   it('card.addResourceTo', () => {
-    player.playedCards = [card];
+    player.playedCards.push(card);
     card.resourceCount = 2;
     expect(player.cardsInHand).is.length(0);
     player.addResourceTo(card, 8);

@@ -1,6 +1,6 @@
 import {CardModel} from './CardModel';
 import {Color} from '../Color';
-import {IVictoryPointsBreakdown} from '../game/IVictoryPointsBreakdown';
+import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
 import {PlayerInputModel} from './PlayerInputModel';
 import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
@@ -46,6 +46,7 @@ export type PublicPlayerModel = {
   energyProduction: number;
   excavations: number,
   fleetSize: number;
+  handicap: number | undefined;
   heat: number;
   heatProduction: number;
   id: PlayerId | undefined;
@@ -74,7 +75,7 @@ export type PublicPlayerModel = {
   titaniumProduction: number;
   titaniumValue: number;
   tradesThisGeneration: number;
-  victoryPointsBreakdown: IVictoryPointsBreakdown;
+  victoryPointsBreakdown: VictoryPointsBreakdown;
   victoryPointsByGeneration: ReadonlyArray<number>;
   alliedParty?: AlliedPartyModel;
 }

@@ -27,6 +27,11 @@ const descriptions: Record<Warning, string> = {
   'cannotAffordBoardOfDirectors': 'Warning: you do not have the 12 M€ required to act on a prelude.',
   'marsIsTerraformed': 'Note: all global parameters are at their goals.',
   'ineffectiveDoubleDown': 'Behavior in this card will apply to Double Down, and so have no effect.',
+  'unusableEventsForAstraMechanica': 'Astra Mechanica does not apply to events that return cards to a player\'s hand.',
+  'noMatchingCards': 'No cards gain the reward of this action.',
+  'noEffect': 'This action will have no effect.',
+  'selfTarget': 'Note: This action will target you.',
+  'pharmacyUnion': 'Note: playing a card with a microbe tag will cause you to lose 4 M€ (or as much as possible).',
 };
 
 export default Vue.extend({

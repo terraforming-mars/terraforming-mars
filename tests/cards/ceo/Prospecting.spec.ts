@@ -8,7 +8,7 @@ import {Prospecting} from '../../../src/server/cards/underworld/Prospecting';
 import {Venus} from '../../../src/server/cards/community/Venus';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 
-describe('Prospecting', function() {
+describe('Prospecting', () => {
   let card: Prospecting;
   let player: TestPlayer;
   let game: IGame;
@@ -18,11 +18,11 @@ describe('Prospecting', function() {
     [game, player/* , player2 */] = testGame(2, {coloniesExtension: true});
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
     expect(card.canPlay(player)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     const coloniesInPlay = game.colonies.length;
     cast(card.play(player), undefined);
     runAllActions(player.game);

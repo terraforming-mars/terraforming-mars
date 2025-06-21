@@ -1,0 +1,230 @@
+{
+  "16 Psyche": "灵神星16",
+  "Increase titanium production 2 steps. Gain 3 titanium.": "钛产量+2。获得3个钛。",
+
+  "Advertising": "广告业",
+  "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "效果：每当你打出一张基础费用≥20M€的卡牌时，提升1点M€产能。",
+
+  "Aqueduct Systems": "导水系统",
+  "Requires you have a city next to an ocean. Draw 3 cards with a building tag.": "需要你的城市与海洋相邻。抽取3张建筑标志卡牌。",
+
+  "Asteroid Deflection System": "小行星防卫系统",
+  "Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.": "行动：展示并弃置牌库顶的一张牌。若该牌有太空标志，则在此卡添加1个小行星资源。",
+  "opponents may not remove your plants": "其他玩家不能移除你的植物。",
+  "Decrease your energy production 1 step. 1VP per asteroid on this card.": "降低1点电力产能。本卡上每有1个小行星资源，获得1分。",
+
+  "Asteroid Hollowing": "小行星挖掘",
+  "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "行动：消耗1个钛，在此卡添加1个小行星资源并提升1点M€产能。",
+  "1VP for each 2 asteroids on this card.": "本卡上每有2个小行星资源，获得1分。",
+
+  "Asteroid Rights": "小行星权力",
+  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "行动：支付1M€，在任意卡牌上添加1个小行星资源。",
+  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "行动：移除此卡的1个小行星资源，选择提升1点M€产能或获得2个钛。",
+  "Add 2 asteroids to this card.": "在此卡添加2个小行星资源。",
+
+  "Astra Mechanica": "星械会",
+  "Fan note: You may not choose cards that return cards to your hand.": "注释：不可选择能回收手牌的卡牌。",
+  "RETURN UP TO 2 OF YOUR PLAYED EVENT CARDS TO YOUR HAND. THEY MAY NOT BE CARDS THAT PLACE SPECIAL TILES.": "将最多2张你已打出的事件牌收回手牌。不可选择放置特殊板块的牌。",
+
+  "Bactoviral Research": "细菌病毒研究",
+  "Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.": "抽1张牌。选择你已打出的一张卡牌，你每有1个科学标志（包括此牌），为其添加1个微生物资源。",
+
+  "Bio Printing Facility": "生物打印设备",
+  "Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.": "行动：消耗2点电力资源，选择获得2个植物或在另一张卡牌上添加1个动物资源。",
+
+  "Carbon Nanosystems": "碳纳米系统",
+  "Effect: When you play a science tag, including this, add a graphene resource here.": "效果：每当你打出科学标志时（包括此牌），在此卡添加1个石墨烯资源。",
+  "Effect: When playing a space or city tag, graphenes may be used as 4 M€ each.": "效果：打出太空或城市标志时，每个石墨烯资源可抵4M€。",
+
+  "Casinos": "赌场",
+  "Requires that you have a city. Decrease your energy production 1 step and increase your M€ production 4 steps.": "需要你拥有1座城市。降低1点电力产能，提升4点M€产能。",
+
+  "City Parks": "城市公园",
+  "Requires that you have 3 cities. Gain 2 plants.": "需要你拥有3座城市。获得2个植物。",
+
+  "Comet Aiming": "彗星瞄准",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "行动：消耗1个钛，在任意卡牌上添加1个小行星资源。",
+  "Action: Remove 1 asteroid here to place an ocean.": "行动：移除此卡的1个小行星资源来放置1个海洋板块。",
+
+  "Crash Site Cleanup": "陨石坑清洁",
+  "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "需要本时代有玩家移除了其他玩家的植物。获得1个钛或2个钢。",
+
+  "Cutting Edge Technology": "前沿科技",
+  "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "效果：打出有条件限制的卡牌时，费用减少2M€。",
+
+  "Cyberia Systems": "赛博利亚系统",
+  "Increase your steel production 1 step. Copy the PRODUCTION BOXES of 2 of your cards with building tags.": "提升1点钢铁产能。复制你2张建筑标志卡牌的产能效果。",
+
+  "Deimos Down": "火卫二陨落",
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. Remove up to 6 plants from any player.": "提升3级温度并获得4个钢。将此板块放置在不与其他城市相邻的位置。移除任意玩家最多6个植物。",
+
+  "Directed Heat Usage": "热能定向利用",
+  "Action: Spend 3 heat to gain either 4 M€ or 2 plants.": "行动：消耗3点热能资源，选择获得4M€或2个植物。",
+
+  "Directed Impactors": "定向冲撞器",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "行动：支付6M€（可用钛支付），在任意卡牌上添加1个小行星资源。",
+  "Action: Remove 1 asteroid here to raise temperature 1 step.": "行动：移除此卡的1个小行星资源来提升1级温度。",
+
+  "Diversity Support": "多样性扶持",
+  "9 Resource types": "9种资源类型",
+  "Requires that you have 9 different types of resources. Gain 1 TR.": "需要你拥有9种不同类型的资源。提升1点改造度。",
+
+  "Dusk Laser Mining": "黄昏激光矿业",
+  "Requires 2 science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "需要2个科学标志。降低1点电力产能，提升1点钛产能。获得4个钛。",
+
+  "Energy Market": "能源市场",
+  "Action: Spend 2X M€ to gain X energy.": "行动：支付2X M€，获得X点电力资源。",
+  "Action: Decrease energy production 1 step to gain 8 M€.": "行动：降低1点电力产能，获得8M€。",
+
+  "Field-Capped City": "磁场穹顶城市",
+  "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "提升2点M€产能和1点电力产能。获得3个植物。放置1个城市板块。",
+
+  "Floyd Continuum": "弗洛伊德连续体",
+  "Action: Gain 3 M€ per completed terraforming parameter.": "行动：每个已完成的改造参数获得3M€。",
+  "FAN NOTE: This will apply to Venus but not The Moon.": "注释：对金星有效，对月球无效。",
+
+  "Great Dam": "大坝",
+  "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "需要4个海洋板块。提升2点电力产能。将此板块放置在与海洋相邻的位置。",
+
+  "Harvest": "丰收",
+  "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "需要你拥有3个绿化板块。获得12M€。",
+
+  "Hermetic Order of Mars": "火星秘教",
+  "Oxygen must be 4% or lower. Increase your M€ production 2 steps. Gain 1 M€ per empty area adjacent to your tiles.": "需要氧气浓度≤4%。提升2点M€产能。每个与你板块相邻的空地获得1M€。",
+
+  "Hi-Tech Lab": "高科技实验室",
+  "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "行动：消耗任意数量的电力资源，抽取等量卡牌。保留1张，弃置其余。",
+
+  "Homeostasis Bureau": "稳态管理局",
+  "Effect: When you raise the temperature, gain 3 M€.": "效果：每当你提升温度时，获得3M€。",
+  "Increase your heat production 2 steps.": "提升2点热能产能。",
+
+  "Hospitals": "医院",
+  "Effect: Each time a city is placed, gain a disease here.": "效果：每当有城市被放置时，在此卡获得1个疾病资源。",
+  "Action: Remove a disease from ANY OF YOUR CARDS to gain 1 M€ per city in play.": "行动：从你的任意卡牌移除1个疾病资源，每有1座城市获得1M€。",
+  "Decrease your energy production 1 step.": "降低1点电力产能。",
+
+  "Icy Impactors": "冰体撞击器",
+  "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "行动：支付10M€（可用钛支付），在此卡添加2个小行星资源。",
+  "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "行动：移除此卡的1个小行星资源放置海洋板块，由起始玩家指定位置。",
+
+  "Imported Nutrients": "营养物输入",
+  "Gain 4 plants and add 4 microbes to ANOTHER CARD.": "获得4个植物并在另一张卡牌上添加4个微生物资源。",
+
+  "Interplanetary Trade": "星际贸易",
+  "Increase your M€ production 1 step per different tag you have in play, including this.": "你每有1种不同的标志（包括此牌），提升1点M€产能。",
+
+  "Jovian Embassy": "木星大使馆",
+  "Raise your TR 1 step.": "提升1点改造度。",
+
+  "Kaguya Tech": "辉夜科技",
+  "Increase M€ production 2 steps. Draw 1 card. Remove 1 of your greenery tiles (does not affect oxygen.) Place a city tile there, regardless of placement rules. Gain placement bonuses as usual.": "提升2点M€产能。抽1张牌。移除你的1个绿化板块（不影响氧气），无视放置规则在该处放置城市板块并获得奖励。",
+
+  "Law Suit": "诉讼",
+  "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "从本时代移除过你资源或降低过你产能的玩家处偷取3M€。将此牌背面朝上放入该玩家的事件牌堆。",
+
+  "Magnetic Field Generators": "磁力发动机",
+  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.": "降低4点电力产能，提升2点植物产能。提升3点改造度。放置此板块。",
+
+  "Magnetic Shield": "磁屏",
+  "3 Power": "3个电力标志",
+  "Requires 3 power tags. Raise your TR 4 steps.": "需要3个电力标志。提升4点改造度。",
+
+  "Mars Nomads": "火星游牧者",
+  "Action: MOVE THE NOMADS to an adjacent, non-reserved empty area and collect THE PLACEMENT BONUS as if placing a special tile there. No tiles may be placed on the Nomad area.": "行动：将游牧者移动至相邻的非保留空地并获得放置奖励（如同放置特殊板块）。游牧者区域不可放置板块。",
+  "PLACE THE NOMADS on a non-reserved, empty area on the game board.": "将游牧者放置在地图上的非保留空地。",
+
+  "Martian Lumber Corp": "火星木材公司",
+  "Effect: When playing a building tag, plants may be used as 3 M€ each.": "效果：打出建筑标志时，每个植物可抵3M€。",
+  "Requires that you have 2 greenery tiles. Increase plant production 1 step.": "需要你拥有2个绿化板块。提升1点植物产能。",
+
+  "Meat Industry": "肉类工业",
+  "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "效果：当你在任意卡牌获得动物资源时，获得2M€。",
+
+  "Meltworks": "熔融工厂",
+  "Action: Spend 5 heat to gain 3 steel.": "行动：消耗5点热能资源，获得3个钢。",
+
+  "Mercurian Alloys": "水星合金",
+  "Effect: Your titanium resources are worth 1 M€ extra.": "效果：你的钛资源价值+1M€。",
+
+  "Mohole Lake": "莫霍湖",
+  "Action: Add a microbe or animal to ANOTHER card.": "行动：在另一张卡牌上添加1个微生物或动物资源。",
+  "Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.": "获得3个植物。提升1级温度并放置1个海洋板块。",
+
+  "Neptunian Power Consultants": "海王星能源顾问",
+  "Effect: When any ocean is placed, you MAY pay 5 M€ (steel may be used), to raise energy production 1 step and add 1 hydroelectric resource to this card.": "效果：每当有海洋被放置时，可支付5M€（可用钢支付），提升1点电力产能并在此卡添加1个水电资源。",
+  "1 VP per hydroelectric resource on this card": "本卡上每有1个水电资源，获得1分。",
+
+  "Orbital Cleanup": "轨道清洁",
+  "Action: Gain 1 M€ per science tag you have.": "行动：你每有1个科学标志，获得1M€。",
+  "Decrease your M€ production 2 steps.": "降低2点M€产能。",
+
+  "Outdoor Sports": "户外运动",
+  "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "需要任意城市与海洋相邻。提升2点M€产能。",
+
+  "Penguins": "企鹅",
+  "Action: Add 1 animal to this card.": "行动：在此卡添加1个动物资源。",
+  "Requires 8 oceans.": "需要8个海洋板块。",
+
+  "Potatoes": "土豆",
+  "Lose 2 plants. Increase your M€ production 2 steps.": "失去2个植物。提升2点M€产能。",
+
+  "Project Inspection": "项目检测",
+  "Use a card action that has been used this generation.": "使用一个本时代已被使用过的卡牌行动。",
+
+  "Red Ships": "红色舰队",
+  "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "行动：每个与海洋相邻的城市/特殊板块获得1M€。",
+  "Requires 4% oxygen.": "需要4%氧气浓度。",
+
+  "Rego Plastics": "表土塑料",
+  "Effect: Your steel resources are worth 1 M€ extra.": "效果：你的钢资源价值+1M€。",
+
+  "Robot Pollinators": "机器授粉者",
+  "Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.": "需要4%氧气浓度。提升1点植物产能。你每有1个植物标志，获得1个植物。",
+
+  "Saturn Surfing": "土星冲浪",
+  "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.": "行动：移除此卡的1个漂浮物资源，获得等同本卡漂浮物数量的M€（包含被移除的），最多5M€。",
+  "Add 1 floater here for every Earth tag you have, including this.": "你每有1个地球标志（包括此牌），在此卡添加1个漂浮物资源。",
+
+  "Self-replicating Robots": "自我复制机器人",
+  "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "行动：从手牌展示一张太空或建筑标志卡牌置于此，并在其上放置2个资源；或翻倍此卡上某张卡牌的资源数量。",
+  "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "效果：此卡上的卡牌可视为手牌打出，费用减少其上的资源数量。",
+
+  "Small Asteroid": "微型小行星",
+  "Increase temperature 1 step. Remove up to 2 plants from any player.": "提升1级温度。移除任意玩家最多2个植物。",
+
+  "Snow Algae": "雪藻",
+  "Requires 2 oceans. Increase your plant production and your heat production 1 step each.": "需要2个海洋板块。提升1点植物产能和1点热能产能。",
+
+  "Soil Enrichment": "土壤改良",
+  "Spend 1 microbe from ANY of your cards to gain 5 plants": "从你的任意卡牌移除1个微生物资源，获得5个植物。",
+
+  "Solar Logistics": "太阳能物流",
+  "Effect: When you play an Earth tag, you pay 2 M€ less.": "效果：打出地球标志时，费用减少2M€。",
+  "Effect: When any player plays a space event, draw a card.": "效果：当任意玩家打出太空事件牌时，抽1张牌。",
+  "Gain 2 titanium.": "获得2个钛。",
+
+  "St. Joseph of Cupertino Mission": "库比蒂诺圣约瑟夫传教团",
+  "Action: Pay 5 M€ (STEEL MAY BE USED) to build 1 Cathedral in a city. Max 1 per city. City owner can pay 2 M€ to draw 1 card.": "行动：支付5M€（可用钢支付）在城市建造1座大教堂（每城限1）。城市拥有者可支付2M€抽1张牌。",
+  "1 VP per City with a Cathedral in it.": "每个有大教堂的城市获得1分。",
+
+  "Stanford Torus": "斯坦福环面",
+  "Place a city tile IN SPACE, outside and separate from the planet.": "在太空保留区放置1个城市板块。",
+
+  "Sub-Crust Measurements": "测量地壳",
+  "Action: Draw a card.": "行动：抽1张牌。",
+
+  "Supercapacitors": "超级电容",
+  "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.": "效果：生产阶段可自行决定是否将每个电力资源转化为热能。",
+  "Increase M€ production 1 step.": "提升1点M€产能。",
+
+  "Supermarkets": "超市",
+  "Requires two cities in play. Increase your M€ production 2 steps.": "需要场上有2座城市。提升2点M€产能。",
+
+  "Teslaract": "泰斯拉立方体",
+  "Action: Spend 1 energy production to gain 1 plant production.": "行动：降低1点电力产能，提升1点植物产能。",
+
+  "Topsoil Contract": "表土合约",
+  "Effect: When you gain a microbe to ANY CARD, also gain 1 M€.": "效果：当你在任意卡牌获得微生物资源时，额外获得1M€。",
+  "Gain 3 plants.": "获得3个植物。"
+}

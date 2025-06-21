@@ -1,6 +1,6 @@
 {
   "Pharmacy Union": "Pharmacy Union",
-  "You start with 54 M€ . Draw a Science card.": "Você começa com 54 M€. Compre uma carta de Ciência.",
+  "You start with 54 M€. Draw a Science card.": "Você começa com 54 M€. Compre uma carta de Ciência.",
   "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.":  "Efeito: Quando QUALQUER ícone de micróbio for jogado, adicione uma doença aqui e perca 4 M€ ou o quanto for possível. Quando você joga um ícone de ciência, remova uma doença daqui e ganhe 1 IT OU se não houver mais doenças aqui, você PODE virar esta carta para baixo na sua PILHA DE EVENTOS para ganhar 3 ITs.",
 
   "Comet Aiming": "Mirando Cometas",
@@ -139,7 +139,7 @@
   "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Você começa com 44 M€. Como sua primeira ação, compre uma carta e micróbio.",
   "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "Efeito: Quando um ícone de micróbio é jogado, incluindo este, AQUELE JOGADOR recebe 2 M€ ou adiciona um micróbio ÀQUELA carta, e você recebe 2 M€.",
 
-  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.": "Aumente a temperatura 3 níveis e receba 4 de aço. Coloque este tile NÃO ADJACENTE a uma cidade. Remova até 6 plantas de um jogador.",
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. Remove up to 6 plants from any player.": "Aumente a temperatura 3 níveis e receba 4 de aço. Coloque este tile NÃO ADJACENTE a uma cidade. Remova até 6 plantas de um jogador.",
 
   "Astrodrill": "Astrodrill",
   "You start with 38 M€ and 3 asteroid resources.": "Você começa com 38 M€ e 3 recursos de asteroide.",
@@ -156,7 +156,6 @@
   "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "Efeito: Quando você joga um ícone de construção, incluindo este, ganhe 1 micróbio nesta carta, ou remova 2 micróbios aqui para aumentar sua produção de planta 1 nível.",
 
   "Requires 8 oceans. 1 VP for each animal on this card.": "Requer 8 oceanos. 1 PV por cada animal nesta carta.",
-  "Requires 2 science tags.": "Requer 2 ícones de ciência",
   "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "Ação: Gaste 2X M€ para receber X energias, ou diminua 1 nível sua produção de energia para receber 8 M€.",
 
   "Bactoviral Research": "Pesquisa Bactoviral",

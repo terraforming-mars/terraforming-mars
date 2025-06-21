@@ -4,16 +4,16 @@ import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('LunarBeam', function() {
+describe('LunarBeam', () => {
   let card: LunarBeam;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new LunarBeam();
     [/* game */, player] = testGame(1);
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
     player.production.add(Resource.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.not.true;
 
@@ -21,7 +21,7 @@ describe('LunarBeam', function() {
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
     expect(player.production.megacredits).to.eq(-2);
     expect(player.production.heat).to.eq(2);

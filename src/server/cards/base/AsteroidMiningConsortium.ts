@@ -33,6 +33,16 @@ export class AsteroidMiningConsortium extends Card implements IProjectCard {
     });
   }
 
+  public override bespokeCanPlay(player: IPlayer) {
+    if (player.game.getPlayers().length > 1) {
+      const eligiblePlayers = player.game.getPlayers().filter((p) => p.production.titanium > 0);
+      if (eligiblePlayers.length === 1 && eligiblePlayers[0] === player) {
+        this.warnings.add('selfTarget');
+      }
+    }
+    return true;
+  }
+
   public override bespokePlay(player: IPlayer) {
     player.game.defer(new DecreaseAnyProduction(
       player,

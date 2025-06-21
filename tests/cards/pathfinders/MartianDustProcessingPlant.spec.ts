@@ -4,23 +4,23 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 
-describe('MartianDustProcessingPlant', function() {
+describe('MartianDustProcessingPlant', () => {
   let card: MartianDustProcessingPlant;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MartianDustProcessingPlant();
     [/* game */, player] = testGame(1);
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.production.override({energy: 0});
     expect(card.canPlay(player)).is.false;
     player.production.override({energy: 1});
     expect(card.canPlay(player)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     player.production.override({energy: 1});
     expect(player.getTerraformRating()).eq(14);
 

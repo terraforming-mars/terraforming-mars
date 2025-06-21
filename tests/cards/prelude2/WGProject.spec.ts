@@ -12,7 +12,7 @@ import {testGame} from '../../TestGame';
 import {IPreludeCard} from '../../../src/server/cards/prelude/IPreludeCard';
 import {BusinessEmpire} from '../../../src/server/cards/prelude/BusinessEmpire';
 
-describe('WGProject', function() {
+describe('WGProject', () => {
   let card: WGProject;
   let player: TestPlayer;
   let game: IGame;
@@ -32,19 +32,19 @@ describe('WGProject', function() {
     businessEmpire = new BusinessEmpire();
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     expect(card.canPlay(player)).is.not.true;
     game.turmoil!.chairman = player;
     expect(card.canPlay(player)).is.true;
   });
 
-  it('canPlay - not enough preludes', function() {
+  it('canPlay - not enough preludes', () => {
     game.turmoil!.chairman = player;
     game.preludeDeck.drawPile.length = 2;
     expect(card.canPlay(player)).is.false;
   });
 
-  it('Should play with at least 1 playable prelude', function() {
+  it('Should play with at least 1 playable prelude', () => {
     game.preludeDeck.drawPile.push(smeltingPlant, businessEmpire, donation);
 
     const selectCard = cast(card.play(player), SelectCard<IPreludeCard>);
@@ -53,11 +53,11 @@ describe('WGProject', function() {
 
     selectCard.cb([donation]);
 
-    expect(player.playedCards).deep.eq([donation]);
+    expect(player.playedCards.asArray()).deep.eq([donation]);
     expect(game.preludeDeck.discardPile).to.have.members([businessEmpire, smeltingPlant]);
   });
 
-  it('Can play with no playable preludes drawn', function() {
+  it('Can play with no playable preludes drawn', () => {
     player.megaCredits = 0;
     // Both of these cards cost MC which the player does not have, and so
     // if the player plays this they will have to fizzle one of the cards.
@@ -71,7 +71,7 @@ describe('WGProject', function() {
     runAllActions(game);
 
     expect(player.megaCredits).eq(15);
-    expect(player.playedCards).is.empty;
+    expect(player.playedCards.length).eq(0);
     expect(game.preludeDeck.discardPile).to.have.members([galileanMining, businessEmpire, hugeAsteroid]);
   });
 });

@@ -4,7 +4,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 import {CardResource} from '../../../common/CardResource';
 import {IPlayer} from '../../IPlayer';
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 import {Tag} from '../../../common/cards/Tag';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -12,8 +12,9 @@ import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {Size} from '../../../common/cards/render/Size';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class MindSetMars extends CorporationCard {
+export class MindSetMars extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.MIND_SET_MARS,
@@ -29,7 +30,7 @@ export class MindSetMars extends CorporationCard {
         description: 'You start with 44 M€ and 1 agenda resource to this card.',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.megacredits(44).resource(CardResource.AGENDA).nbsp.tag(Tag.BUILDING).colon(Size.SMALL).resource(CardResource.AGENDA).br;
+          b.megacredits(44).resource(CardResource.AGENDA).nbsp.tag(Tag.BUILDING).asterix().colon(Size.SMALL).resource(CardResource.AGENDA).br;
           b.text('(Action: When you play a card with a building tag, add 1 agenda on this card.)', Size.SMALL, false, false).br;
           b.resource(CardResource.AGENDA, {amount: 2, digit}).arrow(Size.SMALL).delegates(1).nbsp;
           b.resource(CardResource.AGENDA, {amount: 5, digit}).arrow(Size.SMALL).city().br;
@@ -40,8 +41,7 @@ export class MindSetMars extends CorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    if (player.game.getCardPlayerOrUndefined(this.name) !== player) return;
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
     if (card.tags.includes(Tag.BUILDING)) {
       player.addResourceTo(this, {qty: 1, log: true});
     }

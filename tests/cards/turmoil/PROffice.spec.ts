@@ -5,8 +5,8 @@ import {PROffice} from '../../../src/server/cards/turmoil/PROffice';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {testGame} from '../../TestGame';
 
-describe('PROffice', function() {
-  it('Should play', function() {
+describe('PROffice', () => {
+  it('Should play', () => {
     const card = new PROffice();
     const card2 = new Sponsors();
     const card3 = new AcquiredCompany();

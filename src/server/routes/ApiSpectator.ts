@@ -28,6 +28,6 @@ export class ApiSpectator extends Handler {
       responses.notFound(req, res);
       return;
     }
-    responses.writeJson(res, Server.getSpectatorModel(game));
+    responses.writeJson(res, ctx, Server.getSpectatorModel(game));
   }
 }

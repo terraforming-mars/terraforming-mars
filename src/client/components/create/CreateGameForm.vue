@@ -43,7 +43,7 @@
                             <input type="checkbox" name="prelude2" id="prelude2-checkbox" v-model="expansions.prelude2">
                             <label for="prelude2-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-prelude2"></div>
-                                <span v-i18n>Prelude 2(β)</span>
+                                <span v-i18n>Prelude 2</span>
                             </label>
 
                             <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="expansions.venus">
@@ -67,7 +67,7 @@
                             <input type="checkbox" name="promo" id="promo-checkbox" v-model="expansions.promo">
                             <label for="promo-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-promo"></div>
-                                <span v-i18n>Promos</span><span> 🆕</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
+                                <span v-i18n>Promos</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <div class="create-game-subsection-label" v-i18n>Fan-made</div>
@@ -161,14 +161,15 @@
                             <input type="checkbox" name="starwars" id="starwars-checkbox" v-model="expansions.starwars">
                             <label for="starwars-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-starwars"></div>
-                                <span v-i18n>Star Wars (β)</span><span> 🆕</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/StarWars" class="tooltip" target="_blank">&#9432;</a>
+                                <span v-i18n>Star Wars</span><span> </span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/StarWars" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <input type="checkbox" name="ceo" id="underworld-checkbox" v-model="expansions.underworld">
                             <label for="underworld-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-underworld"></div>
-                                <span v-i18n>Underworld</span><span> 🆕</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Underworld" class="tooltip" target="_blank">&#9432;</a>
+                                <span v-i18n>Underworld 2 (α)</span><span></span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Underworld" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+                            <div class="warning" v-if="expansions.underworld">Underworld is slowly migrating to Underworld 2. Rules WILL change, and things that were reliable WILL break. Hence, (α).</div>
                         </div>
 
                         <div class="create-game-page-column">
@@ -375,12 +376,14 @@
                                     <span v-i18n>{{ getRandomMaOptionType('full') }}</span>
                                 </label>
                                 </div>
-                                <div>
+                                <!--
+                                  Remember to restore the behavior that creates variable dataToSend
+                                  <div>
                                   <input type="checkbox" name="modularMA" v-model="modularMA" id="modularMA-checkbox">
                                    <label for="modularMA-checkbox">
                                     <span v-i18n>Official Random α</span>
                                 </label>
-                                </div>
+                                </div> -->
                             </div>
 
                             <div v-if="modularMA">
@@ -540,10 +543,11 @@ import {GameId} from '@/common/Types';
 import {AgendaStyle} from '@/common/turmoil/Types';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import {getCard} from '@/client/cards/ClientCardManifest';
-import {DEFAULT_EXPANSIONS, Expansion, GameModule} from '@/common/cards/GameModule';
+import {DEFAULT_EXPANSIONS, Expansion} from '@/common/cards/GameModule';
 import {BoardNameType, NewGameConfig, NewPlayerModel} from '@/common/game/NewGameConfig';
 import {vueRoot} from '@/client/components/vueRoot';
 import {CreateGameModel} from './CreateGameModel';
+import {paths} from '@/common/app/paths';
 
 const REVISED_COUNT_ALGORITHM = false;
 
@@ -568,14 +572,14 @@ export default (Vue as WithRefs<Refs>).extend({
       firstIndex: 1,
       playersCount: 1,
       players: [
-        {name: '', color: Color.RED, beginner: false, handicap: 0, first: false},
-        {name: '', color: Color.GREEN, beginner: false, handicap: 0, first: false},
-        {name: '', color: Color.YELLOW, beginner: false, handicap: 0, first: false},
-        {name: '', color: Color.BLUE, beginner: false, handicap: 0, first: false},
-        {name: '', color: Color.BLACK, beginner: false, handicap: 0, first: false},
-        {name: '', color: Color.PURPLE, beginner: false, handicap: 0, first: false},
-        {name: '', color: Color.ORANGE, beginner: false, handicap: 0, first: false},
-        {name: '', color: Color.PINK, beginner: false, handicap: 0, first: false},
+        {name: '', color: 'red', beginner: false, handicap: 0, first: false},
+        {name: '', color: 'green', beginner: false, handicap: 0, first: false},
+        {name: '', color: 'yellow', beginner: false, handicap: 0, first: false},
+        {name: '', color: 'blue', beginner: false, handicap: 0, first: false},
+        {name: '', color: 'black', beginner: false, handicap: 0, first: false},
+        {name: '', color: 'purple', beginner: false, handicap: 0, first: false},
+        {name: '', color: 'orange', beginner: false, handicap: 0, first: false},
+        {name: '', color: 'pink', beginner: false, handicap: 0, first: false},
       ],
       expansions: {...DEFAULT_EXPANSIONS},
       draftVariant: true,
@@ -615,7 +619,7 @@ export default (Vue as WithRefs<Refs>).extend({
       solarPhaseOption: false,
       shuffleMapOption: false,
       aresExtremeVariant: false,
-      politicalAgendasExtension: AgendaStyle.STANDARD,
+      politicalAgendasExtension: 'Standard',
       undoOption: false,
       showTimers: true,
       fastModeOption: false,
@@ -659,6 +663,7 @@ export default (Vue as WithRefs<Refs>).extend({
       this.expansions.venus = value;
       this.expansions.colonies = value;
       this.expansions.turmoil = value;
+      this.expansions.prelude2 = value;
       this.expansions.promo = value;
       this.solarPhaseOption = value;
     },
@@ -667,7 +672,7 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     turmoil(value: boolean) {
       if (value === false) {
-        this.politicalAgendasExtension = AgendaStyle.STANDARD;
+        this.politicalAgendasExtension = 'Standard';
       }
     },
     initialDraft(value: boolean) {
@@ -827,8 +832,8 @@ export default (Vue as WithRefs<Refs>).extend({
                 if (component.showColoniesList) refs.coloniesFilter.updateColoniesByNames(customColonies);
                 if (component.showCorporationList) refs.corporationsFilter.selectedCorporations = customCorporations;
                 if (component.showPreludesList) refs.preludesFilter.updatePreludes(customPreludes);
-                if (component.showBannedCards) refs.cardsFilter.selectedCardNames = bannedCards;
-                if (component.showIncludedCards) refs.cardsFilter2.selectedCardNames = includedCards;
+                if (component.showBannedCards) refs.cardsFilter.selected = bannedCards;
+                if (component.showIncludedCards) refs.cardsFilter2.selected = includedCards;
                 if (!component.seededGame) component.seed = Math.random();
                 // set to alter after any watched properties
                 component.solarPhaseOption = Boolean(capturedSolarPhaseOption);
@@ -894,23 +899,23 @@ export default (Vue as WithRefs<Refs>).extend({
       }
     },
     isPoliticalAgendasExtensionEnabled(): Boolean {
-      return this.politicalAgendasExtension !== AgendaStyle.STANDARD;
+      return this.politicalAgendasExtension !== 'Standard';
     },
     politicalAgendasExtensionToggle() {
-      if (this.politicalAgendasExtension === AgendaStyle.STANDARD) {
-        this.politicalAgendasExtension = AgendaStyle.RANDOM;
+      if (this.politicalAgendasExtension === 'Standard') {
+        this.politicalAgendasExtension = 'Random';
       } else {
-        this.politicalAgendasExtension = AgendaStyle.STANDARD;
+        this.politicalAgendasExtension = 'Standard';
       }
     },
     getPoliticalAgendasExtensionAgendaStyle(type: 'random' | 'chairman'): AgendaStyle {
       if (type === 'random') {
-        return AgendaStyle.RANDOM;
+        return 'Random';
       } else if (type === 'chairman') {
-        return AgendaStyle.CHAIRMAN;
+        return 'Chairman';
       } else {
         console.warn('AgendaStyle not found');
-        return AgendaStyle.STANDARD;
+        return 'Standard';
       }
     },
     isBeginnerToggleEnabled(): Boolean {
@@ -964,13 +969,9 @@ export default (Vue as WithRefs<Refs>).extend({
     getPlayerContainerColorClass(color: Color): string {
       return playerColorClass(color, 'bg_transparent');
     },
-    isEnabled(module: GameModule): boolean {
-      // TODO(kberg): use type Expansion which eliminates 'base'.
+    isEnabled(expansion: Expansion): boolean {
       const model: CreateGameModel = this;
-      if (module === 'base') {
-        return true;
-      }
-      return model.expansions[module];
+      return model.expansions[expansion];
     },
     boardHref(boardName: BoardName | RandomBoardOption) {
       const options: Record<BoardName | RandomBoardOption, string> = {
@@ -1094,6 +1095,39 @@ export default (Vue as WithRefs<Refs>).extend({
         if (confirm === false) return;
       }
 
+
+      // Check Prelude 2 + Pathfinders
+      let energyProductionBug = true;
+      console.log(this.showCorporationList, this.customCorporations.length);
+      if (this.showCorporationList && customCorporations.length > 0 && !customCorporations.includes(CardName.THORGATE)) {
+        energyProductionBug = false;
+      }
+      if (this.bannedCards.includes(CardName.STANDARD_TECHNOLOGY)) {
+        energyProductionBug = false;
+      }
+
+      if (this.bannedCards.includes(CardName.SUITABLE_INFRASTRUCTURE)) {
+        energyProductionBug = false;
+      } else {
+        if (this.expansions.prelude2 === false && !this.includedCards.includes(CardName.SUITABLE_INFRASTRUCTURE)) {
+          energyProductionBug = false;
+        }
+      }
+
+      if (this.bannedCards.includes(CardName.HIGH_TEMP_SUPERCONDUCTORS)) {
+        energyProductionBug = false;
+      } else {
+        if (this.expansions.pathfinders === false && !this.includedCards.includes(CardName.HIGH_TEMP_SUPERCONDUCTORS)) {
+          energyProductionBug = false;
+        }
+      }
+
+      if (energyProductionBug === true) {
+        const confirm = window.confirm(translateText(
+          'It is possible with Thorgate, Standard Technology, Suitable Infrastructure, and High Temp. Superconductors for a player to have infinite energy production. Press OK to continue or Cancel to change your selections.'));
+        if (confirm === false) return;
+      }
+
       // Check custom corp count
       if (this.showCorporationList && customCorporations.length > 0) {
         let neededCorpsCount = players.length * startingCorporations;
@@ -1208,7 +1242,8 @@ export default (Vue as WithRefs<Refs>).extend({
         fastModeOption,
         removeNegativeGlobalEventsOption,
         includeFanMA,
-        modularMA: this.modularMA,
+        // modularMA: this.modularMA,
+        modularMA: false,
         startingCorporations,
         soloTR,
         clonedGamedId,
@@ -1250,7 +1285,7 @@ export default (Vue as WithRefs<Refs>).extend({
         }
       };
 
-      fetch('game', {'method': 'PUT', 'body': dataToSend, 'headers': {'Content-Type': 'application/json'}})
+      fetch(paths.API_CREATEGAME, {'method': 'PUT', 'body': dataToSend, 'headers': {'Content-Type': 'application/json'}})
         .then((response) => response.text())
         .then((text) => {
           try {

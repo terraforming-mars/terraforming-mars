@@ -8,7 +8,7 @@ import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {SelectGlobalEvent} from '../../../src/server/inputs/SelectGlobalEvent';
 import {testGame} from '../../TestGame';
 
-describe('ExecutiveOrder', function() {
+describe('ExecutiveOrder', () => {
   let card: ExecutiveOrder;
   let player: TestPlayer;
   let game: IGame;
@@ -18,7 +18,7 @@ describe('ExecutiveOrder', function() {
     [game, player] = testGame(2, {turmoilExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const turmoil = game.turmoil!;
     const selectGlobalEvent = cast(card.play(player), SelectGlobalEvent);
     expect(selectGlobalEvent.globalEvents).has.length(4);

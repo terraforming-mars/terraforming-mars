@@ -3,20 +3,20 @@ import {UrbanizedArea} from '../../../src/server/cards/base/UrbanizedArea';
 import {IGame} from '../../../src/server/IGame';
 import {Space} from '../../../src/server/boards/Space';
 import {Resource} from '../../../src/common/Resource';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast, churn} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('UrbanizedArea', function() {
+describe('UrbanizedArea', () => {
   let card: UrbanizedArea;
   let player: TestPlayer;
   let game: IGame;
   let lands: Space[];
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new UrbanizedArea();
     [game, player] = testGame(2);
 
@@ -24,17 +24,17 @@ describe('UrbanizedArea', function() {
     lands = game.board.getAdjacentSpaces(tharsisTholus).filter((space) => space.spaceType === SpaceType.LAND);
   });
 
-  it('Can not play without energy production', function() {
+  it('Can not play without energy production', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can not play without available space between two cities', function() {
+  it('Can not play without available space between two cities', () => {
     game.addCity(player, lands[0]);
     player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     game.addCity(player, lands[0]);
     game.addCity(player, lands[1]);
 

@@ -12,7 +12,10 @@ export default {
     Vue.prototype.$t = $t;
 
     Vue.directive('i18n', {
-      inserted: translateTextNode,
+      inserted: (el, binding) => {
+        el.setAttribute('tm-has-i18n', 'true');
+        translateTextNode(el, binding);
+      },
       componentUpdated: translateTextNode,
     });
   },

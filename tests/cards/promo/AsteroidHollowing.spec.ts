@@ -4,25 +4,25 @@ import {AsteroidHollowing} from '../../../src/server/cards/promo/AsteroidHollowi
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('AsteroidHollowing', function() {
+describe('AsteroidHollowing', () => {
   let card: AsteroidHollowing;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AsteroidHollowing();
     [/* game */, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
   });
 
-  it('Can not act', function() {
+  it('Can not act', () => {
     player.playedCards.push(card);
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.titanium = 1;
 
     expect(card.canAct(player)).is.true;
@@ -33,7 +33,7 @@ describe('AsteroidHollowing', function() {
     expect(player.production.megacredits).to.eq(1);
   });
 
-  it('Should give victory points', function() {
+  it('Should give victory points', () => {
     player.playedCards.push(card);
     player.titanium = 2;
 

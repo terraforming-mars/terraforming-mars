@@ -4,8 +4,8 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {assertPlaceCity} from '../../assertions';
 
-describe('FieldCappedCity', function() {
-  it('Should play', function() {
+describe('FieldCappedCity', () => {
+  it('Should play', () => {
     const card = new FieldCappedCity();
     const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);

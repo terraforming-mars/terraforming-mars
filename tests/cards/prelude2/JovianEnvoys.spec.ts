@@ -6,18 +6,18 @@ import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 
-describe('JovianEnvoys', function() {
+describe('JovianEnvoys', () => {
   let card: JovianEnvoys;
   let player: TestPlayer;
   let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new JovianEnvoys();
     [/* game */, player] = testGame(1, {turmoilExtension: true});
     turmoil = player.game.turmoil!;
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.megaCredits = card.cost;
 
     player.tagsForTest = {jovian: 1};
@@ -31,7 +31,7 @@ describe('JovianEnvoys', function() {
   });
 
 
-  it('play', function() {
+  it('play', () => {
     expect(turmoil.getAvailableDelegateCount(player)).eq(7);
     const marsFirst = turmoil.getPartyByName(PartyName.MARS);
     expect(marsFirst.delegates.get(player)).eq(0);

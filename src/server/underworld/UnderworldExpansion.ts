@@ -21,6 +21,7 @@ import {Phase} from '../../common/Phase';
 import {Units} from '../../common/Units';
 import {LogHelper} from '../LogHelper';
 import {Message} from '../../common/logs/Message';
+import {IdentificationTrigger} from '../cards/ICard';
 
 export class UnderworldExpansion {
   private constructor() {}
@@ -119,12 +120,15 @@ export class UnderworldExpansion {
   }
 
   /** Identify the token at `space`, optionally trigger callbacks */
-  public static identify(game: IGame, space: Space, player: IPlayer | undefined, fromExcavate: boolean = false): void {
+  public static identify(game: IGame, space: Space, player: IPlayer | undefined, trigger: IdentificationTrigger = 'normal'): void {
     if (game.gameOptions.underworldExpansion !== true) {
       throw new Error('Underworld expansion not in this game');
     }
 
     if (space.undergroundResources !== undefined) {
+      if (trigger === 'tile') {
+        return;
+      }
       if (player?.cardIsInEffect(CardName.NEUTRINOGRAPH) && space.excavator === undefined) {
         UnderworldExpansion.addTokens(game, [space.undergroundResources]);
         space.undergroundResources = undefined;
@@ -134,9 +138,10 @@ export class UnderworldExpansion {
     }
     const undergroundResource = this.drawExcavationToken(game);
     space.undergroundResources = undergroundResource;
+
     for (const p of game.getPlayersInGenerationOrder()) {
       for (const card of p.tableau) {
-        card.onIdentification?.(player, p, space, fromExcavate);
+        card.onIdentificationByAnyPlayer?.(p, player, space, trigger);
       }
     }
   }
@@ -205,7 +210,7 @@ export class UnderworldExpansion {
     }
 
     if (space.undergroundResources === undefined) {
-      this.identify(player.game, space, player, /* fromExcavate= */ true);
+      this.identify(player.game, space, player, 'excavation');
     }
 
     const undergroundResource = space.undergroundResources;
@@ -222,7 +227,7 @@ export class UnderworldExpansion {
     // TODO(kberg): The identification is supposed to be resolved after the benefit.
     game.board
       .getAdjacentSpaces(space)
-      .forEach((s) => UnderworldExpansion.identify(game, s, player, /* fromExcavate= */ true));
+      .forEach((s) => UnderworldExpansion.identify(game, s, player, 'excavation'));
     const leaser = game.getCardPlayerOrUndefined(CardName.EXCAVATOR_LEASING);
     if (leaser !== undefined) {
       leaser.stock.add(Resource.MEGACREDITS, 1, {log: true});
@@ -327,9 +332,9 @@ export class UnderworldExpansion {
     if (target.underworldData.corruption === 0 && militaryContractorFighters === 0) {
       return cb(true);
     }
-    const options = new OrOptions();
-    options.title = message('Spend 1 corruption to block an attack by ${0}?', (b) => b.player(perpetrator));
-    options.warning = msg;
+    const options = new OrOptions()
+      .setTitle(message('Spend 1 corruption to block an attack by ${0}?', (b) => b.player(perpetrator)))
+      .setWarning(msg);
     if (privateMilitaryContractor !== undefined && militaryContractorFighters > 0) {
       options.options.push(
         new SelectOption(
@@ -424,7 +429,9 @@ export class UnderworldExpansion {
   }
 
   static endGeneration(game: IGame) {
-    game.getPlayersInGenerationOrder().forEach((player) => player.underworldData.temperatureBonus = undefined);
+    for (const player of game.getPlayers()) {
+      player.underworldData.temperatureBonus = undefined;
+    }
   }
 
   //   // TODOc(kberg): add viz for temperature bonus.

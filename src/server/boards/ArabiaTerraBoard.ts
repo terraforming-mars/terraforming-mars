@@ -2,7 +2,7 @@ import {GameOptions} from '../game/GameOptions';
 import {IPlayer} from '../IPlayer';
 import {Random} from '../../common/utils/Random';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {SpaceName} from '../SpaceName';
+import {SpaceName} from '../../common/boards/SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {BoardBuilder} from './BoardBuilder';
 import {Space} from './Space';
@@ -10,7 +10,7 @@ import {MarsBoard} from './MarsBoard';
 
 export class ArabiaTerraBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): ArabiaTerraBoard {
-    const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
+    const builder = new BoardBuilder(gameOptions);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;

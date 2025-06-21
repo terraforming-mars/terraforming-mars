@@ -5,8 +5,9 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {PreludesExpansion} from '../../preludes/PreludesExpansion';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class ValleyTrust extends CorporationCard {
+export class ValleyTrust extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.VALLEY_TRUST,

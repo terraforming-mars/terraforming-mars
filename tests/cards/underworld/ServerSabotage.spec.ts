@@ -9,7 +9,7 @@ import {CommunicationCenter} from '../../../src/server/cards/pathfinders/Communi
 import {cast, runAllActions} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
-describe('ServerSabotage', function() {
+describe('ServerSabotage', () => {
   let card: ServerSabotage;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -53,12 +53,12 @@ describe('ServerSabotage', function() {
     }
   });
 
-  it('remove data, two players with data', function() {
+  it('remove data, two players with data', () => {
     const cryptocurrency = new Cryptocurrency();
     const communicationCenter = new CommunicationCenter();
 
-    player.playedCards = [cryptocurrency];
-    player2.playedCards = [communicationCenter];
+    player.playedCards.push(cryptocurrency);
+    player2.playedCards.push(communicationCenter);
 
     cryptocurrency.resourceCount = 2;
     communicationCenter.resourceCount = 6;

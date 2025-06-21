@@ -10,7 +10,7 @@ import {cast} from '../TestingUtils';
 import {OrOptionsResponse} from '../../src/common/inputs/InputResponse';
 import {CardName} from '../../src/common/cards/CardName';
 
-describe('PlayerInput', function() {
+describe('PlayerInput', () => {
   let scaffolding: RouteTestScaffolding;
   let req: MockRequest;
   let res: MockResponse;

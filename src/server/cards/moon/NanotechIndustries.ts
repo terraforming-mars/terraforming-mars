@@ -7,8 +7,9 @@ import {CardResource} from '../../../common/CardResource';
 import {IPlayer} from '../../IPlayer';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {MoonCards} from '../../moon/MoonCards';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class NanotechIndustries extends CorporationCard implements IActionCard {
+export class NanotechIndustries extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {
     super({
       name: CardName.NANOTECH_INDUSTRIES,

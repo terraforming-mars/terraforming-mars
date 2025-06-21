@@ -18,10 +18,10 @@ describe('LunaSenate', () => {
     player.megaCredits = card.cost;
 
     player.tagsForTest = {moon: 3};
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     player.tagsForTest = {moon: 2};
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {

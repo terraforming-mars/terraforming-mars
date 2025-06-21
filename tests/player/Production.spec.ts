@@ -1,12 +1,11 @@
 import {expect} from 'chai';
 import {Resource} from '../../src/common/Resource';
 import {Player} from '../../src/server/Player';
-import {Color} from '../../src/common/Color';
 import {Units} from '../../src/common/Units';
 
-describe('Production', function() {
+describe('Production', () => {
   it('deduct production', () => {
-    const player = new Player('blue', Color.BLUE, false, 0, 'p-blue');
+    const player = new Player('blue', 'blue', false, 0, 'p-blue');
 
     expect(player.production.asUnits()).deep.eq({
       megacredits: 0,

@@ -7,8 +7,9 @@ import {Size} from '../../../common/cards/render/Size';
 import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {digit} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class TempestConsultancy extends CorporationCard {
+export class TempestConsultancy extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.TEMPEST_CONSULTANCY,

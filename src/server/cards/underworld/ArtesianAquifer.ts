@@ -16,6 +16,8 @@ export class ArtesianAquifer extends Card implements IProjectCard {
       tags: [Tag.BUILDING],
       cost: 16,
 
+      tr: {oceans: 1},
+
       metadata: {
         cardNumber: 'U59',
         renderData: CardRenderer.builder((b) => {

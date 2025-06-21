@@ -5,8 +5,8 @@ import {CuttingEdgeTechnology} from '../../../src/server/cards/promo/CuttingEdge
 import {VoteOfNoConfidence} from '../../../src/server/cards/turmoil/VoteOfNoConfidence';
 import {testGame} from '../../TestGame';
 
-describe('CuttingEdgeTechnology', function() {
-  it('Should play', function() {
+describe('CuttingEdgeTechnology', () => {
+  it('Should play', () => {
     const card = new CuttingEdgeTechnology();
     const [/* game */, player] = testGame(2);
     card.play(player);

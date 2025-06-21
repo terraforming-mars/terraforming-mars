@@ -58,7 +58,7 @@ describe('Playwrights', () => {
 
     expect(player.getTerraformRating()).to.eq(tr + 4);
     expect(player.megaCredits).eq(0);
-    expect(player.playedCards).has.lengthOf(0);
+    expect(player.playedCards.asArray()).has.members([card]);
     expect(player.removedFromPlayCards).has.lengthOf(1);
   });
 
@@ -78,7 +78,7 @@ describe('Playwrights', () => {
 
     expect(player.getTerraformRating()).to.eq(tr + 2);
     expect(player.megaCredits).eq(0);
-    expect(player2.playedCards).has.lengthOf(0);
+    expect(player2.playedCards.length).eq(0);
     expect(player.removedFromPlayCards).has.lengthOf(1);
   });
 
@@ -124,8 +124,8 @@ describe('Playwrights', () => {
 
     runAllActions(player.game);
 
-    expect(player.playedCards).has.lengthOf(0);
-    expect(player2.playedCards).has.lengthOf(0); // Card is removed from play for sued player
+    expect(player.playedCards.asArray()).deep.eq([card]);
+    expect(player2.playedCards.length).eq(0); // Card is removed from play for sued player
     expect(player.removedFromPlayCards).has.lengthOf(1);
   });
 

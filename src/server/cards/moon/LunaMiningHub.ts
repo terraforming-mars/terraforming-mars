@@ -4,7 +4,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {moonMiningTile} from '../render/DynamicVictoryPoints';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
@@ -43,7 +43,7 @@ export class LunaMiningHub extends Card {
           b.tile(TileType.LUNA_MINING_HUB, true).moonMiningRate({size: Size.SMALL});
           b.text('Place this tile on The Moon and raise the mining rate 1 step.', Size.TINY, false, false);
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.moonMiningTile(2, true),
+        victoryPoints: moonMiningTile(2, true),
       },
     });
   }

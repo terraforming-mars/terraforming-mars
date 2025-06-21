@@ -8,7 +8,7 @@ export class JensonBoyleCo extends ActiveCorporationCard {
   constructor() {
     super({
       name: CardName.JENSON_BOYLE_CO,
-      tags: [Tag.EARTH],
+      tags: [Tag.CRIME],
       startingMegaCredits: 46,
 
       behavior: {

@@ -40,7 +40,7 @@ describe('MoonGlobalParameterValue', () => {
     expect(wrapper.text()).to.include(moonData.miningRate);
   });
 
-  it(`doesn't show any rating if every rating is on its max (or above)`, () => {
+  it('Does not show any rating if every rating is on its max (or above)', () => {
     const moonData: MoonModel = {
       habitatRate: MAXIMUM_HABITAT_RATE,
       logisticsRate: MAXIMUM_LOGISTICS_RATE + 1,
@@ -76,7 +76,7 @@ describe('MoonGlobalParameterValue', () => {
     expect(wrapper.find('[data-test="completed-checkmark"]').exists()).to.be.true;
   });
 
-  it(`doesn't show completed-checkmark if any of rate is under its max`, () => {
+  it('does not show completed-checkmark if any of rate is under its max', () => {
     const cases: Array<MoonModel> = [
       {
         habitatRate: MAXIMUM_HABITAT_RATE - 1,

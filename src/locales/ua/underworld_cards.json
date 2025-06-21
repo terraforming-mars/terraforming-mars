@@ -30,7 +30,7 @@
   "Requires 1 corruption. Target a player that has at least 2 corruption. Unless that player pays you 10 M€, they lose 2 corruption.": "Вимагає 1 одиницю корупції. Виберіть гравця, у якого є принаймні 2 одиниці корупції. Якщо цей гравець не заплатить вам 10 M€, він втрачає 2 одиниці корупції.",
 
   "Corporate Theft": "Корпоративна крадіжка",
-  "Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. NOTE: Do not use in single player games.": "Вимагає 2 одиниці корупції. Видаліть 1 ресурс з карти, що належить іншому гравцю. Потім, якщо у вас є карта, на якій можна його зберігати, помістіть його на таку карту. Якщо ціль заблокувала це, ви отримуєте 1 одиницю корупції. ПРИМІТКА: Не використовуйте в одиночних іграх.",
+  "Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. IF SOLO: gain 1 corruption.": "Вимагає 2 одиниці корупції. Видаліть 1 ресурс з карти, що належить іншому гравцю. Потім, якщо у вас є карта, на якій можна його зберігати, помістіть його на таку карту. Якщо ціль заблокувала це, ви отримуєте 1 одиницю корупції. ЯКЩО СОЛО: отримати 1 пошкодження.",
 
   "Crater Survey": "Дослідження кратера",
   "Add 2 data resources to ANOTHER card. Identify 4 underground resources.": "Додайте 2 ресурси даних на ІНШУ карту. Визначте 4 підземні ресурси.",
@@ -39,7 +39,7 @@
   "Requires 1 corruption. Increase your M€, steel, and energy production 1 step each.": "Вимагає 1 одиницю корупції. Збільште ваше виробництво M€, сталі та енергії на 1 крок кожне.",
 
   "Deepmining": "Глибинна розробка",
-  "Excavate an IDENTIFIED underground resource ANYWHERE ON MARS with a steel or titanium placement bonus. Increase that production 1 step.": "Видобути ІДЕНТИФІКОВАНИЙ підземний ресурс БУДЬ-ДЕ НА МАРСІ з бонусом за розміщення сталі або титану. Збільште це виробництво на 1 крок.",
+  "Excavate an underground resource that depicts steel or titanium ANYWHERE ON THE BOARD. Increase your production of that resource 1 step.": "Видобути ІДЕНТИФІКОВАНИЙ підземний ресурс БУДЬ-ДЕ НА МАРСІ з бонусом за розміщення сталі або титану. Збільште це виробництво на 1 крок.",
 
   "Deepnuking": "Глибинне вибухання",
   "Excavate 2 underground resources. Remove up to 3 plants from any player.": "Видобути 2 підземні ресурси. Видаліть до 3 рослин від будь-якого гравця.",
@@ -210,10 +210,8 @@
 
   "Robot Moles": "Робот-кроти",
   "Action: Spend 1 steel to add 1 data to this card and identify 2 underground resources.": "Дія: Витратити 1 одиницю сталі, щоб додати 1 одиницю даних на цю картку та визначити 2 підземні ресурси.",
-  "1 VP per 3 data resources on this card.": "1 ПО за кожні 3 одиниці даних на цій картці.",
 
   "Scapegoat": "Козел відпущення",
-  "Gain 1 corruption.": "Отримайте 1 одиницю корупції.",
 
   "Search for Life Underground": "Пошук життя під землею",
   "Action: Spend 1 M€ to identify an underground resource. If it depicts at least 1 microbe, add a science resource here.": "Дія: Витратити 1 M€, щоб визначити підземний ресурс. Якщо він зображує принаймні 1 мікроба, додайте сюди науковий ресурс.",
@@ -221,7 +219,7 @@
   "Temperature must -18° C or colder.": "Температура повинна бути -18° C або холодніше.",
 
   "Server Sabotage": "Саботаж сервера",
-  "Gain 1 corruption. Remove up to 2 data fromany player. Remove all unclaimed underground resources from the board back into the pile. Their spaces can be identified again.": "Отримайте 1 одиницю корупції. Видаліть до 2 одиниць даних від будь-якого гравця. Поверніть усі невикористані підземні ресурси з дошки назад у стопку. Їх місця можна визначити знову.",
+  "Gain 1 corruption. Remove up to 2 data from any player. Remove all unclaimed underground resources from the board back into the pile. Their spaces can be identified again.": "Отримайте 1 одиницю корупції. Видаліть до 2 одиниць даних від будь-якого гравця. Поверніть усі невикористані підземні ресурси з дошки назад у стопку. Їх місця можна визначити знову.",
 
   "Soil Export": "Експорт ґрунту",
   "Excavate an underground resource.": "Розкопайте підземний ресурс.",
@@ -247,7 +245,7 @@
 
   "Standard Technology": "Стандартна технологія",
   "REPEAT": "ПОВТОРИТИ",
-  "Action: Use a standard project that you've already done this generation, with its cost reduced by 8 M€.": "Дія: Використовуйте стандартний проект, який ви вже виконали в цьому поколінні, зі знижкою вартості на 8 M€.",
+  "(Action: Use a standard project that you've already used this generation, with its cost reduced by 8 M€).": "Дія: Використовуйте стандартний проект, який ви вже виконали в цьому поколінні, зі знижкою вартості на 8 M€.",
   "Stem Field Subsidies": "Субсидії для стовбурових клітин",
   "Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "Ефект: Кожного разу, коли ви граєте науковий символ (включаючи цей), додайте 1 одиницю даних на БУДЬ-ЯКУ картку та визначте підземний ресурс.",
   "1 VP per 3 data resources on this card.": "1 ПО за кожні 3 одиниці даних на цій картці.",
@@ -267,7 +265,7 @@
   "Action: Spend 1 tool resource on this card to excavate an underground resource.": "Дія: Витратити 1 ресурс-інструменту на цій картці, щоб розкопати підземний ресурс.",
 
   "Tunnel Boring Machine": "Тунельна бурильна машина",
-  "Action: Pay 3 energy to excavate 2 underground resources": "Дія: Заплатити 3 одиниці енергії, щоб розкопати 2 підземні ресурси",
+  "Action: Pay 3 energy to excavate 2 underground resources.": "Дія: Заплатити 3 одиниці енергії, щоб розкопати 2 підземні ресурси",
 
   "Tunneling Subcontractor": "Підземний підрядник",
   "Gain 1 corruption. Excavate an underground resource.": "Отримайте 1 одиницю корупції. Розкопайте підземний ресурс.",

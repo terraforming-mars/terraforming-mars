@@ -23,7 +23,7 @@ describe('Keplertec', () => {
   it('canAct', () => {
     const card = new Keplertec();
     const [/* game */, player] = testGame(2);
-    player.playedCards = [card];
+    player.playedCards.push(card);
 
     expect(card.canAct(player)).is.false;
     player.titanium = 1;
@@ -35,7 +35,7 @@ describe('Keplertec', () => {
     const [game, player] = testGame(2);
 
     const personalSpaceCruiser = new PersonalSpacecruiser();
-    player.playedCards = [card, personalSpaceCruiser, new Tardigrades()];
+    player.playedCards.push(card, personalSpaceCruiser, new Tardigrades());
     player.titanium = 1;
     cast(card.action(player), undefined);
     runAllActions(game);
@@ -53,7 +53,7 @@ describe('Keplertec', () => {
   it('effect', () => {
     const card = new Keplertec();
     const [game, player] = testGame(2, {underworldExpansion: true});
-    player.playedCards = [card];
+    player.playedCards.push(card);
 
     // Preload with reliable tokens, first one is draw a card.
     game.underworldData.tokens.push('card1');
@@ -78,7 +78,7 @@ describe('Keplertec', () => {
   it('effect, 2 at once', () => {
     const card = new Keplertec();
     const [game, player] = testGame(2, {underworldExpansion: true});
-    player.playedCards = [card];
+    player.playedCards.push(card);
 
     // Preload with reliable token.
     game.underworldData.tokens.push('card1');

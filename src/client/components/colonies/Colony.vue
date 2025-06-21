@@ -1,21 +1,20 @@
 <template>
     <!-- <div :class="recedeIfInactive"> -->
+    <!-- Show the background, tooltip, and other setup -->
     <div class="filterDiv colony-card colonies tooltip tooltip-bottom" :class="backgroundClass" :data-tooltip="tooltip" v-i18n>
+
+    <!-- Show colony ship if somebody is visiting -->
     <div v-if="colony.visitor !== undefined" class="colony-spaceship">
       <div :class="'colonies-fleet colonies-fleet-'+ colony.visitor"></div>
     </div>
-    <div v-if="colony.isActive" :style="`margin-left: ${cubeXPosition}px; margin-top:${cubeYPosition + colonyCubeOffset}px;`" class="colony_cube"></div>
-    <template v-for="idx in [0, 1, 2]">
-      <div :key="idx" v-if="colony.colonies.length > idx" :style="`margin-left: ${colonyXPositions[idx]}px;  margin-top:${cubeYPosition}px;`" class="occupied-colony-space">
-        <div :class="'board-cube colony-cube board-cube--' + colony.colonies[idx]"></div>
-      </div>
-    </template>
 
+    <!-- show the large title on top -->
     <div class="colony-card-title-div">
       <span class="colony-card-title-span" :class="colony.name + '-title'">{{colony.name}}</span>
     </div>
-    <!-- Colony Bonus -->
+
     <div class="colony-content" :style="'margin-top: {{colonyContentOffset}}px;'">
+    <!-- Bonus for colony owners when somebody trades -->
       <template v-if="metadata.colonyBonusType === ColonyBenefit.GAIN_RESOURCES">
         <template v-if="metadata.colonyBonusResource !== Resource.MEGACREDITS">
           <div v-for="n in metadata.colonyBonusQuantity" :key=n class="resource" :class="metadata.colonyBonusResource"></div>
@@ -66,6 +65,7 @@
 
       <br>
 
+      <!-- Bonus for player who trades -->
       <template v-if="metadata.tradeType === ColonyBenefit.GAIN_RESOURCES">
         <div style="margin-left:20px;" class="resource" :class="metadata.tradeResource"></div>
         <div class="white-x"></div>
@@ -107,7 +107,9 @@
         <span v-else class="colony-background-color" v-i18n>Trade Income</span>
       </template>
 
-    <colony-row :metadata="metadata"></colony-row>
+    <!-- Show the spaces for the player cubes and the white cube -->
+    <colony-row :metadata="metadata" :colony="colony"></colony-row>
+    <!-- show the numbers underneath the colony row -->
     <colony-trade-row :metadata="metadata"></colony-trade-row>
   </div>
 <!-- </div> -->
@@ -145,50 +147,6 @@ export default Vue.extend({
     ColonyTradeRow,
   },
   computed: {
-    cubeXPosition(): number {
-      return this.colony.trackPosition * 56 + 27;
-    },
-    colonyXPositions(): Array<number> {
-      return [0, 1, 2].map((index) => index * 56 + 16);
-    },
-    colonyCubeOffset(): number {
-      return 7;
-    },
-    cubeYPosition(): number {
-      switch (this.colony.name) {
-      case ColonyName.IAPETUS:
-      case ColonyName.LEAVITT:
-        return 181;
-      case ColonyName.VENUS:
-        return 186;
-      case ColonyName.PALLAS:
-        return 168;
-      case ColonyName.MERCURY:
-      case ColonyName.HYGIEA:
-        return 144;
-      case ColonyName.EUROPA:
-      case ColonyName.MIRANDA:
-        return 166;
-      case ColonyName.PLUTO:
-        return 165;
-      case ColonyName.LUNA:
-        return 163;
-      case ColonyName.DEIMOS:
-        return 188;
-      default:
-        return 164;
-      }
-    },
-    getColonyContentOffset(): number {
-      switch (this.colony.name) {
-      case ColonyName.PLUTO:
-      case ColonyName.MIRANDA:
-        return -12;
-      case ColonyName.DEIMOS:
-        return 3;
-      }
-      return 0;
-    },
     metadata(): IColonyMetadata {
       return getColony(this.colony.name);
     },
@@ -203,12 +161,12 @@ export default Vue.extend({
       return this.colony.name.replace(' ', '-') + '-background';
     },
     tooltip(): string {
-      const descriptions = this.metadata.description.map(translateText);
+      const descriptions = this.metadata.description;
       const titles = ['Build Colony bonus', 'Trade bonus', 'Colony bonus'].map(translateText);
 
-      return `${titles[0]}: ${descriptions[0]}
-${titles[1]}: ${descriptions[1]}
-${titles[2]}: ${descriptions[2]}`;
+      return `${titles[0]}: ${translateText(descriptions.buildBonus)}
+${titles[1]}: ${translateText(descriptions.tradeBonus)}
+${titles[2]}: ${translateText(descriptions.colonyBonus)}`;
     },
     ColonyName(): typeof ColonyName {
       return ColonyName;

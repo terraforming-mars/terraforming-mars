@@ -6,21 +6,21 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('InventorsGuild', function() {
+describe('InventorsGuild', () => {
   let card: InventorsGuild;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new InventorsGuild();
     [game, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.megaCredits = 3;
     const selectCard = cast(churn(card.action(player), player), SelectCard);
     selectCard.cb([]);
@@ -35,7 +35,7 @@ describe('InventorsGuild', function() {
     expect(player.cardsInHand).has.lengthOf(1);
   });
 
-  it('Cannot buy card if cannot pay', function() {
+  it('Cannot buy card if cannot pay', () => {
     player.megaCredits = 2;
     const selectCard = cast(churn(card.action(player), player), SelectCard);
     expect(selectCard.config.max).to.eq(0);

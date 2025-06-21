@@ -10,13 +10,13 @@ import {Units} from '../../../src/common/Units';
 import {IColony} from '../../../src/server/colonies/IColony';
 import {Luna} from '../../../src/server/colonies/Luna';
 
-describe('MinorityRefuge', function() {
+describe('MinorityRefuge', () => {
   let card: MinorityRefuge;
   let player: TestPlayer;
   let game: IGame;
   let triton: IColony;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MinorityRefuge();
     // By choosing 2 players I don't have to pay attention to the first action which
     // removes a colony tile.

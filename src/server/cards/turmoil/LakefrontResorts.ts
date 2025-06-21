@@ -10,8 +10,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {Board} from '../../boards/Board';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class LakefrontResorts extends CorporationCard {
+export class LakefrontResorts extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.LAKEFRONT_RESORTS,
@@ -49,7 +50,7 @@ export class LakefrontResorts extends CorporationCard {
   public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (Board.isUncoveredOceanSpace(space)) {
       cardOwner.game.defer(
-        new GainProduction(cardOwner, Resource.MEGACREDITS),
+        new GainProduction(cardOwner, Resource.MEGACREDITS, {log: true}),
         cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
       );
     }

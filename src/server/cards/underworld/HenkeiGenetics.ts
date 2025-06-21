@@ -4,7 +4,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {ActiveCorporationCard} from '../corporation/CorporationCard';
 import {CardResource} from '../../../common/CardResource';
 import {IPlayer} from '../../IPlayer';
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 
 export class HenkeiGenetics extends ActiveCorporationCard {
   constructor() {
@@ -38,10 +38,7 @@ export class HenkeiGenetics extends ActiveCorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    if (!player.isCorporation(this.name)) {
-      return;
-    }
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
     if (card.resourceType === CardResource.MICROBE && card.tags.includes(Tag.MICROBE)) {
       player.addResourceTo(card, {qty: 2, log: true});
     }

@@ -1,5 +1,5 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {SpaceName} from '../SpaceName';
+import {SpaceName} from '../../common/boards/SpaceName';
 import {BoardBuilder} from './BoardBuilder';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
@@ -8,7 +8,7 @@ import {Space} from './Space';
 
 export class ElysiumBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): ElysiumBoard {
-    const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
+    const builder = new BoardBuilder(gameOptions);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;

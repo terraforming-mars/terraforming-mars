@@ -3,8 +3,8 @@ import {Aphrodite} from '../../../src/server/cards/venusNext/Aphrodite';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('Aphrodite', function() {
-  it('Should play', function() {
+describe('Aphrodite', () => {
+  it('Should play', () => {
     const card = new Aphrodite();
     const [game, player, player2] = testGame(2);
     cast(card.play(player), undefined);

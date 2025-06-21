@@ -11,7 +11,7 @@ export class Nightclubs extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
       name: CardName.NIGHTCLUBS,
       cost: 11,
-      tags: [Tag.BUILDING],
+      tags: [Tag.BUILDING, Tag.CRIME],
 
       requirements: {cities: 1},
 

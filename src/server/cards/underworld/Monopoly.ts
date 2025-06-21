@@ -8,13 +8,16 @@ import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {Units} from '../../../common/Units';
 import {message} from '../../logs/MessageBuilder';
+import {Tag} from '../../../common/cards/Tag';
 
 export class Monopoly extends Card implements IProjectCard {
   constructor() {
     super({
       type: CardType.EVENT,
       name: CardName.MONOPOLY,
+      tags: [Tag.CRIME],
       cost: 12,
+
       requirements: {corruption: 3},
       victoryPoints: -2,
 

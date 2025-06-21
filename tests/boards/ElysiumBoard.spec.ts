@@ -3,8 +3,8 @@ import {expect} from 'chai';
 import {ElysiumBoard} from '../../src/server/boards/ElysiumBoard';
 import {SeededRandom} from '../../src/common/utils/Random';
 
-describe('ElysiumBoard', function() {
-  it('sanity test', function() {
+describe('ElysiumBoard', () => {
+  it('sanity test', () => {
     const board = ElysiumBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     expect(board.spaces).to.deep.eq([
       {'id': '01', 'spaceType': 'colony', 'x': -1, 'y': -1, 'bonus': []},
@@ -70,7 +70,6 @@ describe('ElysiumBoard', function() {
       {'id': '61', 'spaceType': 'land', 'x': 6, 'y': 8, 'bonus': [3]},
       {'id': '62', 'spaceType': 'land', 'x': 7, 'y': 8, 'bonus': [3]},
       {'id': '63', 'spaceType': 'land', 'x': 8, 'y': 8, 'bonus': [1, 1]},
-      {'id': '69', 'spaceType': 'colony', 'x': -1, 'y': -1, 'bonus': []},
     ]);
   });
 });

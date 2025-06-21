@@ -10,7 +10,7 @@ import {TitanFloatingLaunchPad} from '../../src/server/cards/colonies/TitanFloat
 import {EarthEmbassy} from '../../src/server/cards/moon/EarthEmbassy';
 import {CardManifest} from '../../src/server/cards/ModuleManifest';
 import {ICard} from '../../src/server/cards/ICard';
-import {toName} from '../TestingUtils';
+import {toName} from '../../src/common/utils/utils';
 
 describe('ModuleManifest', () => {
   const cardManifest: CardManifest<IProjectCard> = {

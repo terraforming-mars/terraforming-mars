@@ -7,14 +7,14 @@ import {testGame} from '../TestGame';
 import {SelectPlayer} from '../../src/server/inputs/SelectPlayer';
 import {Resource} from '../../src/common/Resource';
 
-describe('DecreaseAnyProduction', function() {
+describe('DecreaseAnyProduction', () => {
   let game: IGame;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
   let decreaseAnyProduction: DecreaseAnyProduction;
 
-  beforeEach(function() {
+  beforeEach(() => {
     [game, player, player2, player3] = testGame(3);
     decreaseAnyProduction = new DecreaseAnyProduction(player, Resource.TITANIUM, {count: 2});
   });

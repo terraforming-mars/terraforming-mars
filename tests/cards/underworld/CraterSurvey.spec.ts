@@ -12,7 +12,8 @@ describe('CraterSurvey', () => {
     const card = new CraterSurvey();
     const [game, player] = testGame(2, {underworldExpansion: true});
 
-    player.playedCards = [new Cryptocurrency(), new CommunicationCenter];
+    const cryptocurrency = new Cryptocurrency();
+    player.playedCards.push(cryptocurrency, new CommunicationCenter);
 
     cast(card.play(player), undefined);
 
@@ -28,7 +29,7 @@ describe('CraterSurvey', () => {
     runAllActions(game);
 
     const selectCard = cast(player.popWaitingFor(), SelectCard);
-    selectCard.cb([player.playedCards[0]]);
-    expect(player.playedCards[0].resourceCount).eq(2);
+    selectCard.cb([cryptocurrency]);
+    expect(cryptocurrency.resourceCount).eq(2);
   });
 });

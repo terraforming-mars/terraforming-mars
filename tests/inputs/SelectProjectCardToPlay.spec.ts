@@ -7,9 +7,8 @@ import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {CardName} from '../../src/common/cards/CardName';
 import {Payment} from '../../src/common/inputs/Payment';
 import {testGame} from '../TestGame';
-import {toName} from '../TestingUtils';
 
-describe('SelectProjectCardToPlay', function() {
+describe('SelectProjectCardToPlay', () => {
   let player: TestPlayer;
   let aquiferPumping: IProjectCard;
   let ioMiningIndustries: IProjectCard;
@@ -26,13 +25,10 @@ describe('SelectProjectCardToPlay', function() {
     called = false;
   });
 
-  it('Simple', function() {
+  it('Simple', () => {
     const selectProjectCardToPlay = new SelectProjectCardToPlay(
       player,
-      [
-        {card: aquiferPumping},
-        {card: ioMiningIndustries},
-      ],
+      [aquiferPumping, ioMiningIndustries],
     ).andThen(cb);
 
     expect(() => selectProjectCardToPlay.process({
@@ -49,7 +45,7 @@ describe('SelectProjectCardToPlay', function() {
 
     player.megaCredits = 20;
     expect(called).is.false;
-    expect(player.playedCards).is.empty;
+    expect(player.playedCards.length).eq(0);
     selectProjectCardToPlay.process({
       type: 'projectCard',
       card: CardName.AQUIFER_PUMPING,
@@ -57,6 +53,7 @@ describe('SelectProjectCardToPlay', function() {
     });
     expect(called).is.true;
     expect(player.megaCredits).eq(2);
-    expect(player.playedCards.map(toName)).deep.eq([CardName.AQUIFER_PUMPING]);
+    expect(player.playedCards).has.length(1);
+    expect(player.playedCards.get(CardName.AQUIFER_PUMPING)).is.not.undefined;
   });
 });

@@ -20,21 +20,22 @@ describe('IntragenSanctuaryHeadquarters', () => {
 
   it('on play', () => {
     expect(card.resourceCount).eq(0);
-    card.play(player);
+    player.playCorporationCard(card);
     runAllActions(player.game);
     expect(card.resourceCount).eq(1);
   });
 
-  it('onCardPlayed', () => {
+  it('onCardPlayedByAnyPlayer', () => {
+    player.corporations.push(card);
     expect(card.resourceCount).eq(0);
 
     // This can't reasonably be tested without setting up a research phase.
     // Game-play tests would help, as would making sure the initial set-up
     // gave the initial resource.
-    card.onCardPlayed(player, new MicroMills());
+    card.onCardPlayedByAnyPlayer(player, new MicroMills());
     expect(card.resourceCount).eq(0);
 
-    card.onCardPlayed(player, new MartianZoo());
+    card.onCardPlayedByAnyPlayer(player, new MartianZoo());
     expect(card.resourceCount).eq(1);
   });
 
@@ -57,14 +58,15 @@ describe('IntragenSanctuaryHeadquarters', () => {
 
 
   it('onCardPlayed by other player', () => {
+    player.corporations.push(card);
     expect(card.resourceCount).eq(0);
     // This can't reasonably be tested without setting up a research phase.
     // Game-play tests would help, as would making sure the initial set-up
     // gave the initial resource.
-    card.onCardPlayed(player2, new MicroMills());
+    player2.playCard(new MicroMills());
     expect(card.resourceCount).eq(0);
 
-    card.onCardPlayed(player2, new MartianZoo());
+    player2.playCard(new MartianZoo());
     expect(card.resourceCount).eq(1);
   });
 
@@ -74,6 +76,18 @@ describe('IntragenSanctuaryHeadquarters', () => {
     player.playedCards.push(meatIndustry);
     const pets = new Pets();
     player.playCard(pets);
+
+    expect(card.resourceCount).eq(1);
+    expect(player.megaCredits).eq(2);
+  });
+
+  it('works when opponent plays Meat Industry #7329', () => {
+    player.corporations.push(card);
+    const meatIndustry = new MeatIndustry();
+    player.playedCards.push(meatIndustry);
+    const pets = new Pets();
+    player2.playCard(pets);
+
     expect(card.resourceCount).eq(1);
     expect(player.megaCredits).eq(2);
   });

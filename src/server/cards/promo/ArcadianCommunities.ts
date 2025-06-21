@@ -36,7 +36,7 @@ export class ArcadianCommunities extends CorporationCard implements ICorporation
     });
   }
 
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     return new SelectSpace(
       'Select space for claim',
       player.game.board.getAvailableSpacesOnLand(player))

@@ -38,7 +38,7 @@ export class ValleyTrust extends CorporationCard implements ICorporationCard {
   }
 
   // TODO(kberg): find a way to feed warnings for initialAction.
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     const game = player.game;
     const cards = game.preludeDeck.drawN(game, 3);
     return PreludesExpansion.selectPreludeToPlay(player, cards, 'discard');

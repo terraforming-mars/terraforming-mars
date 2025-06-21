@@ -33,7 +33,7 @@ describe('Vitor', () => {
 
   it('No initial action for solo games', () => {
     testGame(1);
-    const action = player.deferInitialAction(card);
+    const action = player.defer(card.initialAction(player));
     cast(action, undefined);
   });
 

@@ -50,7 +50,7 @@ export class Aridor extends CorporationCard implements ICorporationCard {
     return undefined;
   }
 
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     ColoniesHandler.addColonyTile(
       player,
       {title: 'Aridor first action - Select colony tile to add'},

@@ -989,9 +989,8 @@ export class Player implements IPlayer {
     // Calculating this before playing the corporation card, which might change the player's hand size.
     const numberOfCardInHand = this.cardsInHand.length;
     ColoniesHandler.maybeActivateColonies(this.game, corporationCard);
-    // TODO(kberg): Fix after 2025-06-20: Why isn't this action deferred?
-    corporationCard.play(this);
-    if (corporationCard.initialAction !== undefined || corporationCard.firstAction !== undefined) {
+    this.defer(corporationCard.play(this));
+    if (corporationCard.initialAction !== undefined && corporationCard.initialActionText !== undefined) {
       this.pendingInitialActions.push(corporationCard);
     }
     if (additionalCorp === false) {
@@ -1498,8 +1497,7 @@ export class Player implements IPlayer {
           corp.initialActionText)
           .andThen(() => {
             game.log('${0} took the first action of ${1} corporation', (b) => b.player(this).card(corp)),
-
-            this.deferInitialAction(corp);
+            this.defer(corp.initialAction?.(this));
             inplaceRemove(this.pendingInitialActions, corp);
             return undefined;
           });
@@ -1524,18 +1522,6 @@ export class Player implements IPlayer {
     this.setWaitingFor(this.getActions(), () => {
       this.incrementActionsTaken();
       this.takeAction();
-    });
-  }
-
-  // TODO(kberg): move to CorporationCard
-  public deferInitialAction(corp: ICorporationCard) {
-    this.defer(() => {
-      if (corp.initialAction) {
-        return corp.initialAction(this);
-      } else if (corp.firstAction !== undefined) {
-        getBehaviorExecutor().execute(corp.firstAction, this, corp);
-      }
-      return undefined;
     });
   }
 

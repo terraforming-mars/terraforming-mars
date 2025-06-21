@@ -436,6 +436,7 @@ export class Server {
       includeFanMA: options.includeFanMA,
       initialDraftVariant: options.initialDraftVariant,
       preludeDraftVariant: options.preludeDraftVariant,
+      ceosDraftVariant: options.ceosDraftVariant,
       politicalAgendasExtension: options.politicalAgendasExtension,
       removeNegativeGlobalEvents: options.removeNegativeGlobalEventsOption,
       showOtherPlayersVP: options.showOtherPlayersVP,

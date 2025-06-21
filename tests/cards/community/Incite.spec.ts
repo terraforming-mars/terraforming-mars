@@ -35,7 +35,7 @@ describe('Incite', () => {
   });
 
   it('Can perform initial action', () => {
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
 
     const sendDelegate = cast(player.getWaitingFor(), SelectParty);

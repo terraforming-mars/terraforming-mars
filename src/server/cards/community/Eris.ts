@@ -68,7 +68,7 @@ export class Eris extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     this.drawAresCard(player);
     return undefined;
   }

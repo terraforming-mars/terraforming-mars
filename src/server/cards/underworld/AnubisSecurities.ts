@@ -45,7 +45,7 @@ export class AnubisSecurities extends CorporationCard implements ICorporationCar
     return 0;
   }
 
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     this.inInitialAction = true;
     player.game.defer(new PlayProjectCard(player).andThen(() => {
       this.inInitialAction = false;

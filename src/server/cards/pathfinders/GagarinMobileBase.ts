@@ -96,7 +96,7 @@ export class GagarinMobileBase extends CorporationCard implements ICorporationCa
     return undefined;
   }
 
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     return this.action(player);
   }
 

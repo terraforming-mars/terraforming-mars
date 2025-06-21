@@ -42,7 +42,7 @@ export class Vitor extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     const game = player.game;
 
     // Awards are disabled for 1 player games

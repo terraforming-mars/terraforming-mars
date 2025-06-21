@@ -33,7 +33,7 @@ describe('Ringcom', () => {
     const d = fakeCard({name: 'D' as CardName, tags: [Tag.JOVIAN]});
     game.projectDeck.drawPile.push(a, b, c, d);
 
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
 
     expect(player.cardsInHand).has.members([a, d]);

@@ -128,7 +128,7 @@ describe('CollegiumCopernicus', () => {
 
   it('initialAction', () => {
     expect(player.cardsInHand).is.empty;
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
     expect(player.cardsInHand).has.length(2);
     expect(player.cardsInHand.filter((card) => card.tags.includes(Tag.SCIENCE))).has.length(2);

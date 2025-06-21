@@ -32,7 +32,7 @@ export class Athena extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     const game = player.game;
     const title = 'Select space next to no other tile for hazard';
 

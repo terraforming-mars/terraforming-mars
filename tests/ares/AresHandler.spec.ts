@@ -5,23 +5,17 @@ import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {AresTestHelper} from './AresTestHelper';
 import {EmptyBoard} from '../testing/EmptyBoard';
 import {TileType} from '../../src/common/TileType';
-import {Tile} from '../../src/server/Tile';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {Resource} from '../../src/common/Resource';
 import {SelectProductionToLose} from '../../src/server/inputs/SelectProductionToLose';
 import {TharsisBoard} from '../../src/server/boards/TharsisBoard';
 import {DesperateMeasures} from '../../src/server/cards/ares/DesperateMeasures';
-import {Decomposers} from '../../src/server/cards/base/Decomposers';
-import {EnergyTapping} from '../../src/server/cards/base/EnergyTapping';
 import {Phase} from '../../src/common/Phase';
 import {TestPlayer} from '../TestPlayer';
 import {AresHazards} from '../../src/server/ares/AresHazards';
-import {AresSetup} from '../../src/server/ares/AresSetup';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {Units} from '../../src/common/Units';
 import {addOcean, cast, runAllActions} from '../TestingUtils';
-import {Ants} from '../../src/server/cards/base/Ants';
-import {Birds} from '../../src/server/cards/base/Birds';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {testGame} from '../TestGame';
 
@@ -77,68 +71,6 @@ describe('AresHandler', () => {
 
     expect(player.stock.asUnits()).deep.eq(Units.of({titanium: 1, steel: 1}));
     expect(otherPlayer.stock.asUnits()).deep.eq(Units.of({megacredits: 2}));
-  });
-
-  describe('setupHazards', () => {
-    interface SpaceToTest {
-      tile: Tile;
-      x: number;
-      y: number;
-    }
-
-    function spacesWithTiles(game: IGame): Array<SpaceToTest> {
-      return game.board.spaces
-        .filter((space) => space.tile !== undefined)
-        .map((space) => {
-          return {tile: space.tile!, x: space.x, y: space.y};
-        });
-    }
-
-    it('4 player game', () => {
-      // front-load the deck with cards of predetermined costs.
-      // four player game places two dust storms.
-
-      const deck = game.projectDeck.drawPile;
-      deck.push(new EnergyTapping());
-      deck.push(new Decomposers());
-
-      AresSetup.setupHazards(game, 4);
-
-      expect(spacesWithTiles(game)).to.deep.eq([
-        {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 8, y: 0},
-        {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 6, y: 8}]);
-    });
-
-    it('5 player game', () => {
-      // front-load the deck with cards of predetermined costs.
-      // 5 player game places one dust storm but with two cards.
-
-      const deck = game.projectDeck.drawPile;
-      deck.push(new EnergyTapping());
-      deck.push(new Decomposers());
-
-      AresSetup.setupHazards(game, 5);
-
-      expect(spacesWithTiles(game)).to.deep.eq([{tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 5, y: 1}]);
-    });
-
-    it('3 player game', () => {
-      // front-load the deck with cards of predetermined costs.
-      // 3 player game places 3 dust storms, the first with two cards.
-
-      const deck = game.projectDeck.drawPile;
-      deck.push(new EnergyTapping());
-      deck.push(new Decomposers());
-      deck.push(new Ants());
-      deck.push(new Birds());
-
-      AresSetup.setupHazards(game, 3);
-
-      expect(spacesWithTiles(game)).to.deep.eq([
-        {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 8, y: 0},
-        {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 1, y: 3},
-        {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 6, y: 8}]);
-    });
   });
 
   it('Pay Adjacency Costs', () => {

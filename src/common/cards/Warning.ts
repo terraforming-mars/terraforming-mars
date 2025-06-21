@@ -19,4 +19,5 @@ export type Warning =
  'unusableEventsForAstraMechanica' |
  'noEffect' |
  'selfTarget' |
- 'pharmacyUnion';
+ 'pharmacyUnion' |
+ 'kaguyaTech';

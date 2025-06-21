@@ -241,7 +241,6 @@ export abstract class Board {
     return landSpaces;
   }
 
-
   // |distance| represents the number of eligible spaces from the top left (or bottom right)
   // to count. So distance 0 means the first available space.
   // |direction| describes whether counting starts from the top left or bottom right.

@@ -1527,7 +1527,7 @@ export class Player implements IPlayer {
     });
   }
 
-  // TODO(kberg): perhaps move to Card
+  // TODO(kberg): move to CorporationCard
   public deferInitialAction(corp: ICorporationCard) {
     this.defer(() => {
       if (corp.initialAction) {

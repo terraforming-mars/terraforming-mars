@@ -54,7 +54,6 @@ export class HecateSpeditions extends ActiveCorporationCard {
   }
 }
 
-// TODO(kberg): This pattern has occurred enough times that this can be reduced.
 export class TradeWithHectateSpeditions implements IColonyTrader {
   private hectateSpeditions: ICard | undefined;
   private tradeCost: number;

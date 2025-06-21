@@ -339,7 +339,7 @@ export class Game implements IGame, Logger {
 
     // Setup Ares hazards
     if (gameOptions.aresExtension && gameOptions.aresHazards) {
-      AresSetup.setupHazards(game, players.length);
+      AresSetup.setupHazards(game);
     }
 
     if (gameOptions.moonExpansion) {
@@ -1181,7 +1181,6 @@ export class Game implements IGame, Logger {
           this.defer(new GrantVenusAltTrackBonusDeferred(player, standardResourcesGranted, grantWildResource));
         }
       }
-      // TODO(kberg): Make player.tableau.forEach()?
       for (const card of player.playedCards) {
         card.onGlobalParameterIncrease?.(player, GlobalParameter.VENUS, steps);
       }
@@ -1232,7 +1231,6 @@ export class Game implements IGame, Logger {
         player.production.add(Resource.HEAT, 1, {log: true});
       }
 
-      // TODO(kberg): Make player.tableau.forEach()?
       for (const card of player.playedCards) {
         card.onGlobalParameterIncrease?.(player, GlobalParameter.TEMPERATURE, steps);
       }
@@ -1642,31 +1640,6 @@ export class Game implements IGame, Logger {
       this.log('Drew and discarded ${0} and ${1} to place a ${2}', (b) => b.card(card1, {cost: true}).card(card2, {cost: true}).tileType(toPlace));
       return card1.cost + card2.cost;
     }
-  }
-
-  public getSpaceByOffset(direction: 'top' | 'bottom', toPlace: TileType, cardCount: 1 | 2 = 1) {
-    const cost = this.discardForCost(cardCount, toPlace);
-
-    const distance = Math.max(cost - 1, 0); // Some cards cost zero.
-    const space = this.board.getNthAvailableLandSpace(distance, direction,
-      (space) => {
-        // TODO(kberg): this toPlace check is a short-term hack.
-        //
-        // If the tile is a city, then follow these extra placement rules for initial solo player placement.
-        // Otherwise it's a hazard tile, and the city rules don't matter. Ideally this should just split into separate functions,
-        // which would be nice, since it makes Game smaller.
-        if (toPlace === TileType.CITY) {
-          const adjacentSpaces = this.board.getAdjacentSpaces(space);
-          return adjacentSpaces.every((sp) => sp.tile?.tileType !== TileType.CITY) && // no cities nearby
-              adjacentSpaces.some((sp) => this.board.canPlaceTile(sp)); // can place forest nearby
-        } else {
-          return this.nomadSpace !== space.id;
-        }
-      });
-    if (space === undefined) {
-      throw new Error('Couldn\'t find space when card cost is ' + cost);
-    }
-    return space;
   }
 
   public expectedPurgeTimeMs(): number {

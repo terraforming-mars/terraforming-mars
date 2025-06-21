@@ -25,7 +25,7 @@ function createPlayers(count: number, idSuffix: string): Array<TestPlayer> {
 /**
  * Creates a new game for testing. Has some hidden behavior for testing:
  *
- * 1. If aresExtension is true, and the player has not specifically enabled hazards, disable ares hazards.
+ * 1. If aresExtension is true, and the aresHazards is not specifically also true, disable ares hazards.
  *    Hazard placement is non-deterministic.
  * 2. If skipInitialCardSelection is true, then the game ignores initial card selection. It's still
  *    in an intermediate state, but the game is testable.
@@ -39,7 +39,7 @@ export function testGame(count: number, customOptions?: Partial<TestGameOptions>
 
   const copy = {...customOptions};
   if (copy.aresExtension === true && copy.aresHazards === undefined) {
-    copy.aresHazards = true;
+    copy.aresHazards = false;
   }
 
   const game = Game.newInstance(`game-id${idSuffix}`, players, players[0], customOptions, /* seed= */ undefined, `spectator-id${idSuffix}`);

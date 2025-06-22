@@ -128,11 +128,11 @@ export class MoonExpansion {
       // Ideally, this should be part of game.addTile, but since it isn't it's convenient enough to
       // hard-code onTilePlaced here. I wouldn't be surprised if this introduces a problem, but for now
       // it's not a problem until it is.
-      game.getPlayers().forEach((p) => {
-        p.tableau.forEach((playedCard) => {
+      for (const p of game.getPlayers()) {
+        for (const playedCard of p.tableau) {
           playedCard.onTilePlaced?.(p, player, space, BoardType.MOON);
-        });
-      });
+        }
+      }
     });
   }
 

@@ -271,8 +271,8 @@ export class Player implements IPlayer {
   /**
    * @deprecated use |playedCards|.
    */
-  public get tableau(): ReadonlyArray<ICard> {
-    return this.playedCards.asArray();
+  public get tableau(): PlayedCards {
+    return this.playedCards;
   }
 
   public getPlayedCard(cardName: CardName): ICard | undefined {
@@ -666,7 +666,10 @@ export class Player implements IPlayer {
     this.energy += this.production.energy;
     this.heat += this.production.heat;
 
-    this.tableau.forEach((card) => card.onProductionPhase?.(this));
+    for (const card of this.tableau) {
+      card.onProductionPhase?.(this);
+    }
+
     // Turn off CEO OPG actions that were activated this generation
     for (const card of this.playedCards) {
       if (isCeoCard(card)) {
@@ -707,9 +710,9 @@ export class Player implements IPlayer {
     let cost = card.cost;
     cost -= this.colonies.cardDiscount;
 
-    this.tableau.forEach((playedCard) => {
+    for (const playedCard of this.tableau) {
       cost -= playedCard.getCardDiscount?.(this, card) ?? 0;
-    });
+    }
 
     // Playwrights hook
     this.removedFromPlayCards.forEach((removedFromPlayCard) => {

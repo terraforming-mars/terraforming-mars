@@ -478,12 +478,9 @@ export class Turmoil {
       }
     }
 
-    player.tableau.forEach((card) => {
-      const bonus = card.getInfluenceBonus?.(player);
-      if (bonus !== undefined) {
-        influence += bonus;
-      }
-    });
+    for (const card of player.tableau) {
+      influence += card.getInfluenceBonus?.(player) ?? 0;
+    }
 
     return influence;
   }

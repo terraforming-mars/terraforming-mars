@@ -115,7 +115,7 @@ export interface IPlayer {
   playedCards: PlayedCards;
   cardCost: number;
   // This will eventually replace playedCards.
-  tableau: ReadonlyArray<ICard>;
+  tableau: PlayedCards;
 
   /** Cards this player has in their draft hand. Player chooses from them, and passes them to the next player */
   draftHand: Array<IProjectCard>;

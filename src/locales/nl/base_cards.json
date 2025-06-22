@@ -35,7 +35,7 @@
     "Gain 8 M€.": "Ontvang 8 M€.",
 
     "Trade Advance": "Commerciële voorsprong",
-    "[ solo": "[ solo",
+    "[ solo": "",
     "Trade all colonies with": "Handel met alle kolonies",
     "Gain 2 M€ [SOLO: Gain 10 M€]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.": "Krijg 2 M€ [SOLO: Ontvang 10 M€]. Handel onmiddellijk met alle actieve kolonies. Je mag het kolonietegelspoor 1 verhogen voor elk van deze transacties.",
 
@@ -195,7 +195,7 @@
     "Action: Add 1 microbe to this card.": "ACTIE: Voeg 1 microbe toe aan deze kaart.",
     "1 VP per 4 Microbes on this card.": "1 OP voor elke 4 microben op deze kaart.",
 
-    "Virus": "Virus",
+    "Virus": "",
     "Remove up to 2 animals or 5 plants from any player.": "Verwijder maximaal 2 dieren OF 5 planten van een speler.",
 
     "Miranda Resort": "Vakantieoord Miranda",
@@ -223,7 +223,7 @@
     "Beam From A Thorium Asteroid": "Asteroïde energiestraal",
     "(Requires a Jovian tag. Increase your heat production and energy production 3 steps each.)": "(Vereist een eigen Jupiter-symbool. Verhoog je warmte- en energieproductie elk met 3.)",
 
-    "Mangrove": "Mangrove",
+    "Mangrove": "",
     "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "Vereist een temperatuur van +4°C of warmer. Plaats een groentegel op een gebied dat gereserveerd is voor oceanen. Verhoog het zuurstofgehalte met 1%. Negeer de normale plaatsingsregels.",
 
     "Trees": "Bomen",
@@ -415,7 +415,7 @@
     "Urbanized Area": "Verstedelijkt gebied",
     "(Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.)": "(Verminder je energieproductie met 1. Verhoog je M€-productie met 2. Plaats een stadstegel naast minstens 2 andere stadstegels.)",
 
-    "Sabotage": "Sabotage",
+    "Sabotage": "",
     "Remove up to 3 titanium from any player, or 4 steel, or 7 M€.": "Verwijder tot 3 titanium OF 4 staal OF 7 M€ van een speler.",
 
     "Moss": "Mos",
@@ -429,7 +429,7 @@
     "Steal up to 2 steel, or 3 M€ from any player.": "Steel tot 2 staal OF 3 M€ van een speler en plaats het op je tableau.",
     "Do not steal": "Steel niets",
 
-    "Hackers": "Hackers",
+    "Hackers": "",
     "Decrease your energy production 1 step and any M€ production 2 steps. Increase your M€ production 2 steps.": "Verlaag je energieproductie met 1 en de M€-productie van een speler met 2. Verhoog je M€-productie met 2.",
 
     "GHG Factories": "CFK-fabriek",
@@ -443,7 +443,7 @@
     "(Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.)": "(Vereist dat JIJ een groentegel hebt. Plaats deze tegel naast een groentegel.)",
     "1 VP per 2 animals on this card. [already defined]": "",
 
-    "Zeppelins": "Zeppelins",
+    "Zeppelins": "",
     "Requires 5% oxygen. Increase your M€ production 1 step for each city tile ON MARS.": "Vereist een zuurstofgehalte van 5% of meer. Verhoog je M€-productie met 1 per stadstegel OP MARS.",
 
     "Worms": "Regenwormen",
@@ -690,7 +690,7 @@
     "Underground Detonations": "Ondergrondse ontploffing",
     "Action: Spend 10M€ to increase your heat production 2 steps.": "ACTIE: Betaal 10 M€ om je warmteproductie met 2 te verhogen.",
 
-    "Soletta": "Soletta",
+    "Soletta": "",
     "Increase your heat production 7 steps.": "Verhoog je warmteproductie met 7.",
 
     "Technology Demonstration": "Technologie Demonstratie",

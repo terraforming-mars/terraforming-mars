@@ -94,8 +94,8 @@
   "Tired Earth": "Elfáradt Föld",
   "Magnetic Field Stimulation Delays": "Késések a mágneses tér stimulációjában",
   "Communication Boom": "Kommunikációs fellendülés",
-  "x": "x",
-  "w/rsrs": "w/rsrs",
+  "x": "",
+  "w/rsrs": "",
   "over 15": "15 felett",
   "over 10": "10 felett",
   "over 6": "6 felett",
@@ -103,7 +103,7 @@
   "2nd:": "2.:",
   "1st/2nd": "1./2.",
   "Lose all": "X",
-  "max 3": "max 3",
-  "MAX 6": "MAX 6",
+  "max 3": "",
+  "MAX 6": "",
   "OR": "VAGY"
 }

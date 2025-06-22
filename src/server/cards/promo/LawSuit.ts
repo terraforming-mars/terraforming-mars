@@ -32,7 +32,7 @@ export class LawSuit extends Card implements IProjectCard {
   }
 
   private targets(player: IPlayer) {
-    return player.game.getPlayersById(player.removingPlayers);
+    return player.removingPlayers.map((id) => player.game.getPlayerById(id));
   }
 
   public override bespokeCanPlay(player: IPlayer) {

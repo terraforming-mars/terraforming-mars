@@ -2,7 +2,6 @@ import * as constants from '../common/constants';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {Board} from './boards/Board';
 import {CardName} from '../common/cards/CardName';
-import {CardType} from '../common/cards/CardType';
 import {ClaimedMilestone, serializeClaimedMilestones, deserializeClaimedMilestones} from './milestones/ClaimedMilestone';
 import {ColonyDealer} from './colonies/ColonyDealer';
 import {IColony} from './colonies/IColony';
@@ -12,7 +11,6 @@ import {Database} from './database/Database';
 import {FundedAward, serializeFundedAwards, deserializeFundedAwards} from './awards/FundedAward';
 import {IAward} from './awards/IAward';
 import {IMilestone} from './milestones/IMilestone';
-import {IProjectCard} from './cards/IProjectCard';
 import {Space} from './boards/Space';
 import {Tile} from './Tile';
 import {LogMessageBuilder} from './logs/LogMessageBuilder';
@@ -61,7 +59,6 @@ import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 import {GameLoader} from './database/GameLoader';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from './game/GameOptions';
-import {TheNewSpaceRace} from './cards/pathfinders/TheNewSpaceRace';
 import {CorporationDeck, PreludeDeck, ProjectDeck, CeoDeck} from './cards/Deck';
 import {Logger} from './logs/Logger';
 import {addDays, stringToNumber} from './database/utils';
@@ -419,7 +416,7 @@ export class Game implements IGame, Logger {
   }
 
   /** Properly starts the game with the project draft, or initial research phase. */
-  public gotoInitialPhase(): void {
+  private gotoInitialPhase(): void {
     // Initial Draft
     if (this.gameOptions.initialDraftVariant) {
       this.phase = Phase.INITIALDRAFTING;
@@ -507,11 +504,6 @@ export class Game implements IGame, Logger {
       throw new Error(`player ${id} does not exist on game ${this.id}`);
     }
     return player;
-  }
-
-  // Function to return an array of players from an array of player ids
-  public getPlayersById(ids: Array<PlayerId>): Array<IPlayer> {
-    return ids.map((id) => this.getPlayerById(id));
   }
 
   public defer<T>(action: DeferredAction<T>, priority?: Priority): AndThen<T> {
@@ -982,7 +974,8 @@ export class Game implements IGame, Logger {
         this.researchedPlayers.clear();
         this.phase = Phase.ACTION;
         this.passedPlayers.clear();
-        TheNewSpaceRace.potentiallyChangeFirstPlayer(this);
+        this.potentiallyChangeFirstPlayer();
+
         this.startActionsForPlayer(this.first);
       }
     });
@@ -1559,25 +1552,18 @@ export class Game implements IGame, Logger {
     return undefined;
   }
 
-  // Returns the player holding a card in hand. Return undefined when nobody has that card in hand.
-  public getCardHolder(name: CardName): [IPlayer | undefined, IProjectCard | undefined] {
+  private potentiallyChangeFirstPlayer() {
     for (const player of this.players) {
       // Check cards player has in hand
       for (const card of [...player.preludeCardsInHand, ...player.cardsInHand]) {
-        if (card.name === name) {
-          return [player, card];
+        if (card.name === CardName.THE_NEW_SPACE_RACE) {
+          this.log(
+            '${0} has ${1}, which is played before any other Prelude and makes them first player.',
+            (b) => b.player(player).card(card));
+          player.playCard(card);
         }
       }
     }
-    return [undefined, undefined];
-  }
-
-  public getCardsInHandByResource(player: IPlayer, resourceType: CardResource) {
-    return player.cardsInHand.filter((card) => card.resourceType === resourceType);
-  }
-
-  public getCardsInHandByType(player: IPlayer, cardType: CardType) {
-    return player.cardsInHand.filter((card) => card.type === cardType);
   }
 
   public getStandardProjects(): Array<IStandardProjectCard> {

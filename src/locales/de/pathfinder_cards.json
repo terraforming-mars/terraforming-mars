@@ -6,7 +6,7 @@
   "(Action: Spend 1 steel and 1 energy to gain 3 plants.)": "(AKTION: Verbrauche 1 Stahl und 1 Energie, um 3 Pflanzen zu erhalten.)",
   "(Requires -18° C or warmer.)": "(Benötigt eine Temperatur von -18°C oder wärmer.)",
 
-  "Anthozoa": "Anthozoa",
+  "Anthozoa": "",
   "(Action: Spend 1 plant to add an animal to this card.)": "(AKTION: Verbrauche 1 Pflanze, um dieser Karte 1 Tier hinzuzufügen.)",
   "(Requires 3 oceans on Mars. 1 VP per 2 animals on this card.)": "(Benötigt 3 Ozeanplättchen. 1 SP je 2 Tiere auf dieser Karte.)",
 
@@ -89,7 +89,7 @@
   "(Draw 2 cards. Raise Venus 1 step. Gain 1M€ for each of your Venus tags, including this.)": "(Ziehe 2 Karten. Erhöhe Venus um 2%. Erhalte 1 M€ je eigenes Venussymbol (einschließlich dieses).)",
 
   "Flat Mars Theory": "Erd-Kulturgesellschaft",
-  "GENERATION": "Generation",
+  "GENERATION": "",
   "(Requires maximum 1 science tag. Increase your M€ production 1 step for every generation played so far.)": "(Benötigt 1 oder weniger eigene Wissenschaftssymbole. Erhöhe deine M€-Produktion um 1 je gespielter Generation, einschließlich der aktuellen.)",
 
   "Floater-Urbanism": "Schweber-Urbanismus",
@@ -113,7 +113,7 @@
   "Interplanetary Transport": "Interplanetarer Transport",
   "(Increase your M€ production 1 step for every offworld city tile.)": "(Erhöhe deine M€-Produktion um 1 je Stadtplättchen im Weltraum.)",
 
-  "Kickstarter": "Kickstarter",
+  "Kickstarter": "",
   "(Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 3 steps in total.)": "Wähle ein Planetensymbol. Diese Karte zählt als hätte sie dieses Symbol. Erhöhe die dazugehörige Planetenleiste um 3 Schritte insgesamt statt um 1.",
 
   "Last Resort Ingenuity": "Improviationstalent",
@@ -218,7 +218,7 @@
   "Solar Storm": "Sonnensturm",
   "(Every player loses 2 plants. Remove up to 3 data from any player. Raise your heat production 1 step. Raise the temperature 1 step.)": "(Erhöhe die Temperatur um 2°C. Erhöhe deine Wärme-Produktion um 1. Entferne bis zu 3 Daten von einem anderen Spieler. Alle Spieler verlieren 2 Pflanzen.)",
 
-  "Solarpedia": "Solarpedia",
+  "Solarpedia": "",
   "(Action: Add 2 data to ANY card.)": "(AKTION: Füge einer beliebigen Karte 2 Daten hinzu.)",
   "(Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.)": "(Benötigt je ein eigenes Venus-, Erde-, Mars- und Jupitersymbol. Füge einer beliebigen Karte 2 Daten hinzu. 1 SP je 6 Daten auf dieser Karte.)",
 
@@ -234,7 +234,7 @@
 
   "Terraforming Control Station": "Terraform-Kontrollstation",
   "(Effect: When you play a Venus or Mars tag, pay 2 M€ less.)": "(EFFEKT: Wenn du ein Venus- oder Marssymbol ausspielst, bezahlst du 2 M€ weniger.)",
-  "(Erhöhe deinen TW um 2.)": "(Erhöhe deinen TW um 2.)",
+  "(Erhöhe deinen TW um 2.)": "",
 
   "Terraforming Robots": "Terraforming-Roboter",
   "(Effect: When you play a Mars tag, add 1 specialized robot on this card.)": "(EFFEKT: Wenn du ein Marssymbol ausspielst, füge dieser Karte 1 Roboter hinzu.)",

@@ -45,7 +45,7 @@
     "Temperature": "Temperatur",
     "Oxygen": "Sauerstoff",
     "Oceans": "Ozeane",
-    "Venus": "Venus",
+    "Venus": "",
     "L. Habitat": "Mond Habitat",
     "L. Mining": "Mond Mine",
     "L. Logistics": "Mond Straßen",
@@ -62,8 +62,8 @@
     "${0} place for ${1} award (funded by ${2})": "${0} Platz für ${1} (finanziert durch ${2})",
     "Claimed ${0} milestone": "${0}-Meilenstein beansprucht",
 
-    "M": "M",
-    "A": "A",
+    "M": "",
+    "A": "",
     "Milestones points": "Punkte durch Meilensteine",
     "Awards points": "Punkte durch Auszeichnungen",
 

@@ -3,10 +3,10 @@
   "Effect: When any city is placed, add 1 animal here.": "EFFEKT: Jedes Mal, wenn eine Stadt platziert wird, wird hier 1 Tier hinzugefügt.",
   "Action: Add 1 animal here or 1 microbe to ANOTHER card.": "AKTION: Füge 1 Tier hier oder 1 Mikrobe zu einer ANDEREN Karte hinzu.",
   "Each player, including you, gets -1 VP per city they have IF THERE ARE AT LEAST 10 ANIMALS HERE.": "Jeder Spieler, auch du, erhält -1 SP pro Stadt, die er besitzt, WENN MINDESTENS 10 TIERE HIER SIND.",
-  
+
   "New Holland": "Neu Holland",
   "Requires 4 city tiles ON MARS. Increase your M€ production 3 steps. Place a city tile on top of an already placed ocean tile, FOLLOWING NORMAL CITY PLACEMENT RESTRICTIONS. The tile counts as a city and an ocean.": "Benötigt 4 Städte AUF DEM MARS. Erhöhe deine M€-Produktion um 3. Platziere eine Stadt auf ein bereits gelegten Ozean und befolge dabei die normalen Platzierungbeschränkungen von Städten. Das Plättchen zählt als Stadt und als Ozean.",
-  
+
   "Protected Growth": "Geschütztes Wachstum",
   "Oxygen must be 7% or less. Gain 1 plant per power tag you have.": "Der Sauerstoffgehalt muss 7% oder weniger betragen. Du erhältst 1 Pflanze pro Energie-Symbol, das du hast.",
 
@@ -34,7 +34,7 @@
   "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "AKTION: Gib 10 M€ aus (Titan kann verwendet werden), um hier 2 Asteroiden hinzuzufügen.",
   "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "AKTION: Gib 1 Asteroid von hier aus, um ein Ozeanplättchen zu platzieren. DER ERSTE SPIELER WÄHLT, WO DU ES PLATZIEREN MUSST.",
 
-  "Floyd Continuum": "Floyd Continuum",
+  "Floyd Continuum": "",
   "Action: Gain 3 M€ per completed terraforming parameter.": "AKTION: Erhalte 3 M€ pro abgeschlossenem Terraform-Parameter.",
 
   "Martian Lumber Corp": "Mars-Holz Konzern",
@@ -98,7 +98,7 @@
   "Robot Pollinators": "Roboter-Bestäuber",
   "Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.": "Erfordet 4% Sauerstoffgehalt. Erhöhe deine Pflanzen-Produktion um 1. Erhalte 1 Pflanze für jedes Pflanzensymbol, das du hast.",
 
-  "16 Psyche": "16 Psyche",
+  "16 Psyche": "",
   "Increase titanium production 2 steps. Gain 3 titanium.": "Erhöhe deine Titan-Produktion um 2. Erhalte 3 Titan.",
 
   "Comet Aiming": "Kometenzielen",

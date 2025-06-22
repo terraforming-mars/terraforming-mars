@@ -418,19 +418,16 @@ export class Player implements IPlayer {
   }
 
   public cardIsInEffect(cardName: CardName): boolean {
-    return this.playedCards.get(cardName) !== undefined;
-  }
-
-  public hasProtectedHabitats(): boolean {
-    return this.cardIsInEffect(CardName.PROTECTED_HABITATS);
+    return this.playedCards.has(cardName);
   }
 
   public plantsAreProtected(): boolean {
-    return this.hasProtectedHabitats() || this.cardIsInEffect(CardName.ASTEROID_DEFLECTION_SYSTEM);
+    return this.playedCards.has(CardName.PROTECTED_HABITATS) ||
+      this.playedCards.has(CardName.ASTEROID_DEFLECTION_SYSTEM);
   }
 
   public alloysAreProtected(): boolean {
-    return this.cardIsInEffect(CardName.LUNAR_SECURITY_STATIONS);
+    return this.playedCards.has(CardName.LUNAR_SECURITY_STATIONS);
   }
 
   public canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: IPlayer) {
@@ -442,7 +439,7 @@ export class Player implements IPlayer {
     }
 
     // The pathfindersExpansion test is just an optimization for non-Pathfinders games.
-    if (attacker !== this && this.cardIsInEffect(CardName.PRIVATE_SECURITY)) {
+    if (attacker !== this && this.playedCards.has(CardName.PRIVATE_SECURITY)) {
       return false;
     }
     return true;
@@ -652,7 +649,7 @@ export class Player implements IPlayer {
     this.turmoilPolicyActionUsed = false;
     this.politicalAgendasActionUsedCount = 0;
 
-    if (this.cardIsInEffect(CardName.SUPERCAPACITORS)) {
+    if (this.playedCards.has(CardName.SUPERCAPACITORS)) {
       Supercapacitors.onProduction(this);
     } else {
       this.heat += this.energy;
@@ -695,7 +692,7 @@ export class Player implements IPlayer {
     }
 
     let selectable = this.draftedCards.length;
-    if (this.cardIsInEffect(CardName.MARS_MATHS) && !this.cardIsInEffect(CardName.LUNA_PROJECT_OFFICE)) {
+    if (this.playedCards.has(CardName.MARS_MATHS) && !this.playedCards.has(CardName.LUNA_PROJECT_OFFICE)) {
       selectable--;
     }
 
@@ -733,7 +730,7 @@ export class Player implements IPlayer {
     return {
       heat: this.canUseHeatAsMegaCredits,
       steel: this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.BUILDING),
-      plants: card.tags.includes(Tag.BUILDING) && this.cardIsInEffect(CardName.MARTIAN_LUMBER_CORP),
+      plants: card.tags.includes(Tag.BUILDING) && this.playedCards.has(CardName.MARTIAN_LUMBER_CORP),
       titanium: this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.SPACE),
       lunaTradeFederationTitanium: this.canUseTitaniumAsMegacredits,
       seeds: card.tags.includes(Tag.PLANT) || card.name === CardName.GREENERY_STANDARD_PROJECT,
@@ -744,7 +741,7 @@ export class Player implements IPlayer {
       auroraiData: card.type === CardType.STANDARD_PROJECT,
       graphene: card.tags.includes(Tag.CITY) || card.tags.includes(Tag.SPACE),
       kuiperAsteroids: card.name === CardName.AQUIFER_STANDARD_PROJECT || card.name === CardName.ASTEROID_STANDARD_PROJECT,
-      corruption: card.tags.includes(Tag.EARTH) && this.cardIsInEffect(CardName.FRIENDS_IN_HIGH_PLACES),
+      corruption: card.tags.includes(Tag.EARTH) && this.playedCards.has(CardName.FRIENDS_IN_HIGH_PLACES),
     };
   }
 
@@ -1054,7 +1051,7 @@ export class Player implements IPlayer {
     if (this.game.allMilestonesClaimed()) {
       return [];
     }
-    if ((this.canAfford(this.milestoneCost()) || this.cardIsInEffect(CardName.VANALLEN))) {
+    if ((this.canAfford(this.milestoneCost()) || this.playedCards.has(CardName.VANALLEN))) {
       return this.game.milestones
         .filter((milestone) => !this.game.milestoneClaimed(milestone) && milestone.canClaim(this));
     }
@@ -1074,7 +1071,7 @@ export class Player implements IPlayer {
     if (vanAllen !== undefined) {
       vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: this});
     }
-    if (!this.cardIsInEffect(CardName.VANALLEN)) { // Why isn't this an else clause to the statement above?
+    if (!this.playedCards.has(CardName.VANALLEN)) { // Why isn't this an else clause to the statement above?
       const cost = this.milestoneCost();
       this.game.defer(new SelectPaymentDeferred(this, cost, {title: 'Select how to pay for milestone'}));
     }
@@ -1091,7 +1088,7 @@ export class Player implements IPlayer {
   }
 
   private milestoneCost() {
-    if (this.cardIsInEffect(CardName.NIRGAL_ENTERPRISES)) {
+    if (this.playedCards.has(CardName.NIRGAL_ENTERPRISES)) {
       return 0;
     }
     return this.isStagedProtestsActive() ? MILESTONE_COST + 8 : MILESTONE_COST;
@@ -1099,7 +1096,7 @@ export class Player implements IPlayer {
 
   // Public for tests.
   public awardFundingCost() {
-    if (this.cardIsInEffect(CardName.NIRGAL_ENTERPRISES)) {
+    if (this.playedCards.has(CardName.NIRGAL_ENTERPRISES)) {
       return 0;
     }
     const plus8 = this.isStagedProtestsActive() ? 8 : 0;
@@ -1251,7 +1248,7 @@ export class Player implements IPlayer {
       card.additionalProjectCosts = card.additionalProjectCosts ?? {};
       card.additionalProjectCosts.redsCost = canAfford.redsCost;
     }
-    if (this.cardIsInEffect(CardName.PHARMACY_UNION) && card.tags.includes(Tag.MICROBE)) {
+    if (this.playedCards.has(CardName.PHARMACY_UNION) && card.tags.includes(Tag.MICROBE)) {
       card.warnings.add('pharmacyUnion');
     }
     return true;
@@ -1394,7 +1391,7 @@ export class Player implements IPlayer {
   }
 
   private headStartIsInEffect() {
-    if (this.game.phase === Phase.PRELUDES && this.cardIsInEffect(CardName.HEAD_START)) {
+    if (this.game.phase === Phase.PRELUDES && this.playedCards.has(CardName.HEAD_START)) {
       if (this.actionsTakenThisRound < 2) {
         return true;
       }

@@ -9,6 +9,7 @@ import {Priority} from './Priority';
 import {Message} from '../../common/logs/Message';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 import {message} from '../logs/MessageBuilder';
+import {CardName} from '../../common/cards/CardName';
 
 export type Source = 'self' | 'opponents' | 'all';
 export type Response = {card: ICard, owner: IPlayer, proceed: boolean} | {card: undefined, owner: undefined, proceed: boolean};
@@ -122,7 +123,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
         }
       } else {
         if (source !== 'self') {
-          const hasProtetedHabitats = p.hasProtectedHabitats();
+          const hasProtetedHabitats = p.cardIsInEffect(CardName.PROTECTED_HABITATS);
           for (const card of get()) {
             if (hasProtetedHabitats) {
               if (card.resourceType === CardResource.ANIMAL || card.resourceType === CardResource.MICROBE) {

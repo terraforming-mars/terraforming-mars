@@ -56,6 +56,9 @@ export class PlayedCards {
     return this.array.length;
   }
 
+  public has(name: CardName): boolean {
+    return this.byName.has(name);
+  }
   /**
    * Get the card by the given name, or `undefined` if it is not here.
    */

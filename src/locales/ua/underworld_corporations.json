@@ -43,13 +43,13 @@
   "Action: Pay 1 corruption to draw a card with a microbe tag.": "Дія: Заплатити 1 корупцію, щоб витягнути карту з позначкою мікробів.",
   "You start with 47 M€ and 1 corruption.": "Ви починаєте з 47 M€ і 1 корупцією.",
 
-  "JENSON-BOYLE & CO": "Jenson-Boyle & Co",
-  "Jenson-Boyle & Co": "Jenson-Boyle & Co",
+  "JENSON-BOYLE & CO": "",
+  "Jenson-Boyle & Co": "",
   "Action: Pay 1 corruption to gain either 4 steel, 3 titanium, 3 plants or 6 heat.": "Дія: Заплатити 1 корупцію, щоб отримати або 4 сталі, 3 титану, 3 рослини або 6 тепла.",
   "You start with 46 M€ and 2 corruption.": "Ви починаєте з 46 M€ і 2 корупцією.",
 
-  "KEPLERTEC": "KeplerTec",
-  "Keplertec": "KeplerTec",
+  "KEPLERTEC": "",
+  "Keplertec": "",
   "Action: Spend 1 titanium to put a fighter resource on ANY card.": "Дія: Витратити 1 титан, щоб покласти ресурс бійця на БУДЬ-ЯКУ карту.",
   "Effect: When you place a fighter resource on this card, draw 4 random underground resource tokens. Pick one of them and claim the reward on it. Then shuffle the tokens back into the pile.": "Ефект: Коли ви розміщуєте ресурс бійця на цій карті, витягніть 4 випадкові токени підземних ресурсів. Виберіть один з них і отримайте на ньому винагороду. Потім перемішайте токени назад у стопку.",
   "You start with 33 M€, 3 titanium, and 1 titanium production.": "Ви починаєте з 33 M€, 3 титану і виробництвом титану на 1 крок.",
@@ -59,8 +59,8 @@
   "Effect: You may place cities adjacent to other cities. You must always place cities adjacent to tiles you already own, if possible.": "Ефект: Ви можете розміщувати міста поруч з іншими містами. Ви завжди повинні розміщувати міста поруч з плитками, які ви вже володієте, якщо це можливо.",
   "You start with 50 M€ and 6 M€ production. All opponents gain 2 M€ production. As your first action, place a city.": "Ви починаєте з 50 M€ і 6 M€ виробництва. Всі супротивники отримують 2 M€ виробництва. Як вашу першу дію, розмістіть місто.",
 
-  "VOLTAGON": "Voltagon",
-  "Voltagon": "Voltagon",
+  "VOLTAGON": "",
+  "Voltagon": "",
   "Effect: After you excavate an underground resource, gain 2 energy.": "Ефект: Після того, як ви розкопаєте підземний ресурс, отримайте 2 одиниці енергії.",
   "Action: Spend 8 energy to increase oxygen or Venus 1 step.": "Дія: Витратити 8 одиниць енергії, щоб збільшити кисень або Венеру на 1 крок.",
   "You start with 38 M€ and 1 energy production.": "Ви починаєте з 38 M€ і виробництвом енергії на 1 крок."

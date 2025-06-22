@@ -9,7 +9,7 @@
   "(Action: When temperature is maxed, spend 8 heat gain 1 TR. You may repeat this action like a standard project.)": "(Дія: Коли температура досягає максимуму, витратьте 8 тепла, отримайте 1 РТ. Ви можете повторити цю дію, як стандартний проект.)",
   "(You start with 38 M€. As your first action, raise the Venus scale 2 steps.)": "(Ви починаєте з 38 M€. Як ваша перша дія, підніміть шкалу Венера на 2 кроки.)",
 
-  "AURORAI": "AURORAI",
+  "AURORAI": "",
   "(Effect: Whenever you increase your terraform rating, add 1 data per step to ANY card.)": "(Ефект: Кожного разу, коли ви збільшуєте ваш рейтинг терраформування, додайте 1 дані за кожен крок до БУДЬ-ЯКОЇ карти.)",
   "(Effect: You can use data on this card as 3M€ each to pay for standard projects.)": "(Ефект: Ви можете використовувати дані на цій карті як 3M€ кожна, щоб оплатити стандартні проекти.)",
   "(You start with 33 M€. and 2 data on this card)": "(Ви починаєте з 33 M€. і 2 дані на цій карті.)",
@@ -60,7 +60,7 @@
   "(Effect: When any ocean tile is placed ON MARS, increase your M€ production 1 step. When you place an ocean tile, gain 4M€.)": "(Ефект: Коли будь-яка океанська плитка розміщується НА МАРСІ, збільшуйте ваше виробництво M€ на 1 крок. Коли ви розміщуєте океанську плитку, отримайте 4M€.)",
   "(You start with 32 M€. As your first action, place an ocean tile.)": "(Ви починаєте з 40 M€. Як ваша перша дія в грі, розмістіть океанську плитку.)",
 
-  "RingCom": "RingCom",
+  "RingCom": "",
   "(Effect: When any player plays a card with a Jovian tag (including this) gain 1 titanium.)": "(Ефект: Коли будь-який гравець грає карту з тегом Юпітера (включаючи цю карту), отримайте 1 титан.)",
   "(You start with 39 M€. and 3 M€ production. As your first action, draw 2 cards with a Jovian tag.)": "(Ви починаєте з 39 M€. і виробництвом 3 M€. Як ваша перша дія, витягніть 2 карти з тегом Юпітера.)",
 

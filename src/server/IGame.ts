@@ -1,20 +1,17 @@
 import {MarsBoard} from './boards/MarsBoard';
 import {CardName} from '../common/cards/CardName';
-import {CardType} from '../common/cards/CardType';
 import {ClaimedMilestone} from './milestones/ClaimedMilestone';
 import {IColony} from './colonies/IColony';
 import {Color} from '../common/Color';
 import {FundedAward} from './awards/FundedAward';
 import {IAward} from './awards/IAward';
 import {IMilestone} from './milestones/IMilestone';
-import {IProjectCard} from './cards/IProjectCard';
 import {Space} from './boards/Space';
 import {LogMessageBuilder} from './logs/LogMessageBuilder';
 import {LogMessage} from '../common/logs/LogMessage';
 import {Phase} from '../common/Phase';
 import {IPlayer} from './IPlayer';
 import {PlayerId, GameId, SpectatorId, SpaceId, isGameId} from '../common/Types';
-import {CardResource} from '../common/CardResource';
 import {AndThen, DeferredAction} from './deferredActions/DeferredAction';
 import {Priority} from './deferredActions/Priority';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
@@ -116,18 +113,14 @@ export interface IGame extends Logger {
 
   /** The set of tags available in this game. */
   readonly tags: ReadonlyArray<Tag>;
-  // Function use to properly start the game: with project draft or with research phase
-  gotoInitialPhase(): void;
   /** Initiates the first research phase, which is when a player chooses their starting hand, corps and preludes. */
   gotoInitialResearchPhase(): void;
   gotoResearchPhase(): void;
   save(): void;
   serialize(): SerializedGame;
   isSoloMode() :boolean;
-  // Retrieve a player by it's id
+  // Retrieve a player by its id
   getPlayerById(id: PlayerId): IPlayer;
-  // Return an array of players from an array of player ids
-  getPlayersById(ids: Array<PlayerId>): ReadonlyArray<IPlayer>;
   defer<T>(action: DeferredAction<T>, priority?: Priority): AndThen<T>;
   milestoneClaimed(milestone: IMilestone): boolean;
   marsIsTerraformed(): boolean;
@@ -223,10 +216,6 @@ export interface IGame extends Logger {
    * Returns the Player holding this card, or returns undefined.
    */
   getCardPlayerOrUndefined(name: CardName): IPlayer | undefined;
-  // Returns the player holding a card in hand. Return undefined when nobody has that card in hand.
-  getCardHolder(name: CardName): [IPlayer | undefined, IProjectCard | undefined];
-  getCardsInHandByResource(player: IPlayer, resourceType: CardResource): void;
-  getCardsInHandByType(player: IPlayer, cardType: CardType): void;
   /**
    * Returns the list of standard project cards used in this game, sorted by cost.
    */

@@ -76,7 +76,7 @@
 	"Domed Crater": "Zadaszony Krater",
     "Oxygen must be 7% or less. Gain 3 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Poziom tlenu musi wynosić co najwyżej 7%. Otrzymujesz 3 jednostki roślinności. Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 3 poziomy.",
 
-	"Noctis City": "Noctis City",
+	"Noctis City": "",
     "(Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile ON THE RESERVED AREA, disregarding normal placement restrictions.)": "Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 3 poziomy. Umieść obszar miasta na zarezerwowanym polu.",
 
 	"Methane From Titan": "Metan z Tytana",
@@ -676,7 +676,7 @@
 	"Underground Detonations": "Podziemne Detonacje",
     "Action: Spend 10M€ to increase your heat production 2 steps.": "Akcja: Wydaj 10 M€, aby podnieść swoją produkcję ciepła o 2 poziomy.",
 
-	"Soletta": "Soletta",
+	"Soletta": "",
     "Increase your heat production 7 steps.": "Podnieś swoją produkcję ciepła o 7 poziomów.",
 
 	"Technology Demonstration": "Pokaz Technologii",
@@ -694,5 +694,5 @@
 	"AI Central": "Centrala SI",
     "Action: Draw 2 cards.": "Akcja: Dobierz 2 karty.",
     "Requires 3 science tags to play. Decrease your energy production 1 step.": "Wymaga 3 znaczników nauki. Obniż swoją produkcję energii o 1 poziom."
-    
+
 }

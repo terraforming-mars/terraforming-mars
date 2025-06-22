@@ -1,7 +1,7 @@
 {
-  "Pharmacy Union": "Pharmacy Union",
+  "Pharmacy Union": "",
   "You start with 54 M€. Draw a Science card.": "Você começa com 54 M€. Compre uma carta de Ciência.",
-  "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.":  "Efeito: Quando QUALQUER ícone de micróbio for jogado, adicione uma doença aqui e perca 4 M€ ou o quanto for possível. Quando você joga um ícone de ciência, remova uma doença daqui e ganhe 1 IT OU se não houver mais doenças aqui, você PODE virar esta carta para baixo na sua PILHA DE EVENTOS para ganhar 3 ITs.",
+  "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "Efeito: Quando QUALQUER ícone de micróbio for jogado, adicione uma doença aqui e perca 4 M€ ou o quanto for possível. Quando você joga um ícone de ciência, remova uma doença daqui e ganhe 1 IT OU se não houver mais doenças aqui, você PODE virar esta carta para baixo na sua PILHA DE EVENTOS para ganhar 3 ITs.",
 
   "Comet Aiming": "Mirando Cometas",
   "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.": "Ação: Gaste 1 titânio para adicionar um recurso de asteroide a QUALQUER CARTA.",
@@ -130,8 +130,8 @@
   "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.": "Você começa com 47 M€. Como sua primeira ação, posicione um tile de vegetação",
   "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "Efeito: Cada nova adjacência entre seus tiles e tiles de oponentes lhe traz um recurso básico à sua escolha - independente de quem acaba de colocar o tile.",
 
-  "Arcadian": "Arcadian",
-  "Communities": "Communities",
+  "Arcadian": "",
+  "Communities": "",
   "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "Você começa com 40 M€ e 10 aço. COMO SUA PRIMEIRA AÇÃO, COLOQUE UMA COMUNIDADE [MARCADOR DE JOGADOR] EM UMA ÁREA NÃO RESERVADA.",
   "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.": "AÇÃO: COLOQUE UMA COMUNIDADE (MARCADOR DE JOGADOR) EM UMA ÁREA NÃO RESERVADA ADJACENTE A UM DE SEUS TILES OU ÁREAS MARCADAS",
   "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.": "EFEITO: ÁREAS MARCADAS SÃO RESERVADAS PARA VOCÊ. QANDO VOCÊ COLOCAR UM TILE LÁ, RECEBA 3 M€",
@@ -141,7 +141,7 @@
 
   "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. Remove up to 6 plants from any player.": "Aumente a temperatura 3 níveis e receba 4 de aço. Coloque este tile NÃO ADJACENTE a uma cidade. Remova até 6 plantas de um jogador.",
 
-  "Astrodrill": "Astrodrill",
+  "Astrodrill": "",
   "You start with 38 M€ and 3 asteroid resources.": "Você começa com 38 M€ e 3 recursos de asteroide.",
   "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "Ação: adicione 1 asteroide a QUALQUER carta OU receba qualquer recurso padrão OU remova um asteroide para receber 3 titânios.",
 
@@ -164,4 +164,3 @@
   " microbe(s)": "micróbio(s)",
   "Add microbe(s)": "Adicionar micróbio(s)"
 }
-

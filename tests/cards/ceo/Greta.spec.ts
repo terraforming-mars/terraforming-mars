@@ -126,7 +126,7 @@ describe('Greta', () => {
 
     const serialized = game.serialize();
     const deserialized = Game.deserialize(serialized);
-    const deserailizedCard = deserialized.getPlayers()[0].tableau[0];
+    const deserailizedCard = deserialized.getPlayers()[0].tableau.asArray()[0];
 
     expect(cast(deserailizedCard, Greta).data.effectTriggerCount).eq(2);
   });

@@ -1327,11 +1327,11 @@ export class Game implements IGame, Logger {
       space.player = undefined;
     }
 
-    this.players.forEach((p) => {
-      p.tableau.forEach((playedCard) => {
+    for (const p of this.players) {
+      for (const playedCard of p.tableau) {
         playedCard.onTilePlaced?.(p, player, space, BoardType.MARS);
-      });
-    });
+      }
+    }
 
     if (initialTileType !== undefined) {
       AresHandler.ifAres(this, () => {

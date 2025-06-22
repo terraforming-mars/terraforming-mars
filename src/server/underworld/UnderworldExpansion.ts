@@ -222,7 +222,9 @@ export class UnderworldExpansion {
     this.grant(player, undergroundResource);
 
     space.excavator = player;
-    player.tableau.forEach((card) => card.onExcavation?.(player, space));
+    for (const card of player.tableau) {
+      card.onExcavation?.(player, space);
+    }
 
     // TODO(kberg): The identification is supposed to be resolved after the benefit.
     game.board

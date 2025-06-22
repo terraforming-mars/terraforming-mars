@@ -69,8 +69,8 @@
     "This game id was ${0}": "今回のGameID ${0}",
 
     "${0} gained ${1} M€ by discarding ${2} cards": "${0}は${2}枚カードを売却し、${1}MC獲得",
-    "TR": "TR",
-    "1 TR": "1 TR",
+    "TR": "",
+    "1 TR": "",
     "nothing": "なし",
     "card": "カード",
     "1 Card": "カード1枚",

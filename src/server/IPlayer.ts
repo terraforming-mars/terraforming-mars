@@ -205,7 +205,6 @@ export interface IPlayer {
   getVictoryPoints(): VictoryPointsBreakdown;
   /* A card is in effect if it is played. This does not apply to corporations. It could. */
   cardIsInEffect(cardName: CardName): boolean;
-  hasProtectedHabitats(): boolean;
   plantsAreProtected(): boolean;
   alloysAreProtected(): boolean;
   /**

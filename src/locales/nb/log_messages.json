@@ -326,9 +326,9 @@
 	"${0} lost ${1} TR": "${0} mistet ${1} TR",
 
 	"earth": "Jorden",
-	"venus": "Venus",
+	"venus": "",
 	"jovian": "Jupiter",
-	"mars": "Mars",
+	"mars": "",
 	"moon": "Månen",
 	"${0} spent 1 corruption to block an attack by ${1}": "${0} brukte 1 korrupsjon for å blokkere et angrep fra ${1}",
 	"${0} turned the clone tag on ${1} into a ${2} tag": "${0} endret klone-merket på ${1} til et ${2}-merke",

@@ -35,7 +35,7 @@
 	"Gain 8 M€.": "Få 8 M€.",
 
 	"Trade Advance": "Handelsforskudd",
-	"[ solo": "[ solo",
+	"[ solo": "",
 	"Trade all colonies with": "Handle med alle kolonier med",
 	"Gain 2 M€ [SOLO: Gain 10 M€]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.": "Få 2 M€ [SOLO: Få 10 M€]. Handle med alle aktive kolonier. Du kan øke koloni-sporet 1 steg før hver handel.",
 
@@ -195,7 +195,7 @@
 	"Add 1 microbe to this card.": "Legg til 1 mikrobe på dette kortet.",
 	"1 VP per 4 Microbes on this card.": "1 SP per 4 mikrober på dette kortet.",
 
-	"Virus": "Virus",
+	"Virus": "",
 	"Remove up to 2 animals or 5 plants from any player.": "Fjern opptil 2 dyr eller 5 planter fra en spiller.",
 
 	"Miranda Resort": "Miranda feriested",
@@ -259,7 +259,7 @@
 
 	"Earth Catapult": "Jordkatapult",
 	"Effect: When you play a card, you pay 2 M€ less for it.": "Effekt: Når du spiller et kort, betaler du 2 M€ mindre for det.",
-	
+
 	"Advanced Alloys": "Avanserte legeringer",
 	"Effect: Each titanium you have is worth 1 M€ extra.": "Effekt: Hver titan du har er verdt 1 M€ ekstra.",
 	"Effect: Each steel you have is worth 1 M€ extra.": "Effekt: Hver stål du har er verdt 1 M€ ekstra.",
@@ -617,9 +617,9 @@
 
 	"Ice Cap Melting": "Smelting av iskappe",
 	"Requires +2 C or warmer. Place 1 ocean tile.": "Krever +2 °C eller varmere. Plasser 1 havbrikke.",
-	
+
 	"Gain 5 plants": "Få 5 planter",
-	
+
 	"Add 4 animals to Fish": "Legg til 4 dyr på Fisk",
 
 	"Corporate Stronghold": "Konsernbygning",
@@ -690,7 +690,7 @@
 	"Underground Detonations": "Underjordiske detonasjoner",
 	"Spend 10M€ to increase your heat production 2 steps.": "Bruk 10 M€ for å øke din varmeproduksjon med 2 trinn.",
 
-	"Soletta": "Soletta",
+	"Soletta": "",
 	"Increase your heat production 7 steps.": "Øk din varmeproduksjon med 7 trinn.",
 
 	"Technology Demonstration": "Teknologidemonstrasjon",

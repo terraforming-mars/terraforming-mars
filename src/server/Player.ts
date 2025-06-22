@@ -782,8 +782,7 @@ export class Player implements IPlayer {
   }
 
   public resourcesOnCard(name: CardName): number {
-    const card = this.tableau.find((card) => card.name === name);
-    return card?.resourceCount ?? 0;
+    return this.playedCards.get(name)?.resourceCount ?? 0;
   }
 
   public getSpendable(SpendableResource: SpendableCardResource): number {
@@ -808,7 +807,7 @@ export class Player implements IPlayer {
       if (count === 0) {
         return;
       }
-      const card = this.tableau.find((card) => card.name === name);
+      const card = this.playedCards.get(name);
       if (card === undefined) {
         throw new Error('Card ' + name + ' not found');
       }

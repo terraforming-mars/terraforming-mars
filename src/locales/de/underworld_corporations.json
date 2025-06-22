@@ -12,7 +12,7 @@
 "PAYS": "Zahlen",
 "At the end of the production phase, discard all your corruption and gain 6 M€ for each unit discarded. Then, each player must pay you 1 M€ per unit of corruption they have. If no one has any, gain 1 TR instead.": "Am Ende der Produktionsphase gibst du deine gesamte Korruption ab und erhältst 6 M€ für jede abgegebene Korruption. Dann muss jeder Spieler 1 M€ pro Korruptionseinheit, die er besitzt, an dich zahlen. Hat niemand Korruption, erhälst du stattdessen 1 TW.",
 "You start with 42 M€. As your first action, play a card ignoring global requirements.": "Du beginnst mit 42 M€. Als deine erste Aktion im Spiel, spiele eine Karte aus, die die globalen Anforderungen ignoriert.",
-  
+
 "ARBORIST COLLECTIVE": "Arboristen Kollektiv",
 "Arborist Collective": "Arboristen Kollektiv",
 "Effect: After you play an event card with a base cost of 14 or less, put an activist resource on this card.": "EFFEKT: Nachdem du eine Ereigniskarte mit Grundkosten von 14 oder weniger gespielt hast, lege eine Aktivistenressource auf diese Karte.",
@@ -25,7 +25,7 @@
 "Effect: After you identify 1 or more underground resources in a single action EXCEPT BY EXCAVATING, put 1 data on ANY card": "EFFEKT: Nachdem du 1 oder mehr unterirdische Ressourcen in einer einzigen Aktion identifiziert hast, AUSSER DURCH AUSGRABEN, lege 1 Datum auf eine beliebige Karte.",
 "Action: Spend 3 data here and pick a space on Mars with no tile. Gain its placement bonus, and no adjacency bonuses.": "AKTION: Bezahle von hier 3 Daten und wähle ein Feld auf dem Mars, auf dem kein Plättchen liegt. Du erhältst den Platzierungsbonus, aber keine Nachbarschaftsboni.",
 "You start with 45 M€ and 3 data on this card.": "Du beginnst mit 45 M€ und 3 Daten auf dieser Karte.",
-  
+
 "HADESPHERE": "Sphäre des Hades",
 "Hadesphere": "Sphäre des Hades",
 "Action: Excavate an underground resource.": "AKTION: Grabe eine unterirdische Ressource aus.",
@@ -44,13 +44,13 @@
 "Action: Pay 1 corruption to draw a card with a microbe tag.": "AKTION: Zahle 1 Korruption, um eine Karte mit einem Mikroben-Symbol zu ziehen.",
 "You start with 47 M€ and 1 corruption.": "Du beginnst mit 47 M€ und 1 Koruption.",
 
-"JENSON-BOYLE & CO": "Jenson-Boyle & Co",
-"Jenson-Boyle & Co": "Jenson-Boyle & Co",
+"JENSON-BOYLE & CO": "",
+"Jenson-Boyle & Co": "",
 "Action: Pay 1 corruption to gain either 4 steel, 3 titanium, 3 plants or 6 heat.": "AKTION: Bezahle 1 Korruption, um entweder 4 Stahl, 3 Titan, 3 Pflanzen oder 6 Hitze zu erhalten.",
 "You start with 46 M€ and 2 corruption.": "Du beginnst mit 46 M€ und 2 Korruption.",
 
-"KEPLERTEC": "KeplerTec",
-"Keplertec": "KeplerTec",
+"KEPLERTEC": "",
+"Keplertec": "",
 "Action: Spend 1 titanium to put a fighter resource on ANY card.": "AKTION: Benutze 1 Titan, um eine Jäger-Ressource auf eine beliebige Karte zu legen.",
 "Effect: When you place a fighter resource on this card, draw 4 random underground resource tokens. Pick one of them and claim the reward on it. Then shuffle the tokens back into the pile.": "EFFEKT: Wenn du eine Jäger-Ressource auf dieser Karte platzierst, ziehe 4 zufällige unterirdische Ressourcenplättchen. Wähle eine von ihnen und beanspruche die darauf befindliche Belohnung. Dann mischst du die Plättchen zurück in den Stapel.",
 "You start with 33 M€, 3 titanium, and 1 titanium production.": "Du beginnst mit 33 M€, 3 Titan und 1 Titan-Produktion.",
@@ -60,8 +60,8 @@
 "Effect: You may place cities adjacent to other cities. You must always place cities adjacent to tiles you already own, if possible.": "EFFEKT: Du darfst Städte angrenzend an andere Städte platzieren. Du musst Städte immer angrenzend zu deinen Plättchen platzieren, die du bereits besitzst, sofern dies möglich ist.",
 "You start with 50 M€ and 6 M€ production. All opponents gain 2 M€ production. As your first action, place a city.": "Du beginnst mit 50 M€ und 6 M€ Produktion. Alle Gegner erhalten 2 M€ Produktion. Als erste Aktion platziere eine Stadt.",
 
-"VOLTAGON": "Voltagon",
-"Voltagon": "Voltagon",
+"VOLTAGON": "",
+"Voltagon": "",
 "Effect: After you excavate an underground resource, gain 2 energy.": "EFFEKT: Nachdem du eine unterirdische Ressource ausgegraben hast, erhältst du 2 Energie.",
 "Action: Spend 8 energy to increase oxygen or Venus 1 step.": "AKTION: Bezahle 8 Energie, um den Sauerstoffgehalt oder die Venuswertung um 1 zu erhöhen.",
 "You start with 38 M€ and 1 energy production.": "Du beginnst mit 38 M€ und einer Energie-Produktion von 1."

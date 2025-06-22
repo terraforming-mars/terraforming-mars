@@ -11,7 +11,7 @@
     "ACTION: ": "AKTION: ",
     "DRAW 1 PRELUDE CARD: EITHER DISCARD IT, OR PAY 12 M€ AND REMOVE 1 DIRECTOR RESOURCE HERE TO PLAY IT.": "Ziehe 1 Präludium-Karte: Entweder du wirfst sie ab, oder du zahlst 12 M€ und entfernst 1 Direktorressource, um sie auszuspielen.",
     "Add 4 director resources here.": "Füge hier 4 Direktor-Ressourcen hinzu.",
-    
+
     "Colony Trade Hub": "Kolonie Handelszentrum",
     "Increase your energy production 1 step. Gain 2 titanium": "Erhöhe deine Energieproduktion um 1. Erhalte 2 Titan.",
     "Effect: When any colony is placed, gain 2 M€.": "EFFEKT: Wenn eine Kolonie platziert wird, erhalte 2 M€.",
@@ -43,13 +43,13 @@
     "Action: Gain 1 asteroid to ANY CARD.": "AKTION: Erhalte 1 Asteroiden zu einer beliebigen Karte.",
     "Effect: When gaining an asteroid HERE, gain 1 titanium.": "EFFEKT: Wenn du einen Asteroiden auf dieser Karte platzierst, erhalte 1 Titan.",
     "Lose 5 M€. 1 VP per 2 asteroids here.": "Zahle 5 M€. 1 SP pro 2 Asteroiden hier.",
-    
+
     "Nobel Prize": "Nobelpreis",
     "Gain 5 M€. Draw 2 cards with requirements.": "Erhalte 5 M€. Ziehe 2 Karten mit Vorausetzungen.",
 
     "Old Mining Colony": "Alte Bergbaukolonie",
     "Increase your titanium production 1 step. Place 1 colony. Discard 1 card.": "Erhöhe deine Titan-Produktion um 1. Platziere 1 Kolonie. Werfe 1 Karte ab.",
-    
+
     "Planetary Alliance": "Planetarische Allianz",
     "Raise your TR 2 steps. Draw 1 Jovian card and 1 Venus card.": "Erhöhe deinen TW um 2. Ziehe 1 Jupiter-Karte und 1 Venus-Karte.",
 
@@ -69,7 +69,7 @@
     "Soil Bacteria": "Bodenbakterien",
     "Effect: When playing a plant tag or a microbe tag, including this, gain 1 plant.": "EFFEKT: Wenn du einen Pflanzen- oder Mikroben-Symbol spielst, einschließlich dieses, erhalte 1 Pflanze.",
     "Draw 2 microbe cards and gain 3 plants.": "Ziehe 2 Mikrobenkarten und erhalte 3 Pflanzen.",
-    
+
     "Space Lanes": "Weltraum-Linien",
     "Effect: When you play a Jovian, Earth, or Venus tag, you pay 2 M€ less for it.": "EFFEKT: Wenn du ein Jupiter-, Erd- oder Venus-Symbol spielst, zahlst du 2 M€ weniger dafür.",
     "Gain 3 titanium.": "Erhalte 3 Titan.",
@@ -95,7 +95,7 @@
 
     "Strategic Base Planning": "Strategische Basisplannung",
     "Pay 3M€. Place a city. Place a colony.": "Zahle 3 M€. Errichte eine Kolonie. Platziere ein Stadtplättchen.",
-    
+
     "Anti-desertification Techniques": "Anti-Wüstenbildungstechniken",
     "Gain 3 M€. Increase your plant production 1 step and your steel production 1 step.": "Erhöhe deine Pfanzen- und Stahl-Produktion um 1. Erhalte 3 M€.",
 
@@ -186,7 +186,7 @@
     "Mining Operations": "Bergbau-Betrieb",
     "Increase your steel production 2 steps. Gain 4 steel.": "Erhöhe deine Stahlproduktion um 2. Erhalte 4 Stahl.",
 
-    "Mohole": "Mohole",
+    "Mohole": "",
     "Increase your heat production 3 steps. Gain 3 heat.": "Erhöhe deine Wärme-Produktion um 3. Erhalte 3 Wärme.",
 
     "Mohole Excavation": "Mohole-Ausgrabungsstätte",

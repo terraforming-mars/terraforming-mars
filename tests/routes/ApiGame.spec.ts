@@ -84,6 +84,7 @@ describe('ApiGame', () => {
           'includedCards': [],
           'includeFanMA': false,
           'initialDraftVariant': false,
+          'ceosDraftVariant': false,
           'politicalAgendasExtension': 'Standard',
           'preludeDraftVariant': false,
           'randomMA': 'No randomization',

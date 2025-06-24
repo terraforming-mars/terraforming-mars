@@ -55,6 +55,6 @@ describe('ValleyTrust', () => {
     const selectCard = cast(card.initialAction(player), SelectCard<IPreludeCard>);
 
     expect(selectCard.cards).has.length(3);
-    expect(selectCard.cards.every((c) => isPreludeCard(c))).is.true;
+    expect(selectCard.cards.every(isPreludeCard)).is.true;
   });
 });

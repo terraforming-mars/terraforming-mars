@@ -359,6 +359,7 @@
   "${0} linked ${1} with ${2}": "${0} verband ${1} mit ${2}",
   "${0} turned ${1} face down to gain 3 TR and lost ${2} M€": "${0} drehte ${1} um, um 3 TW zu erhalten und ${2} M€ zu verlieren",
   "${0} added a disease to ${1} and lost ${2} M€": "${0} fügte ${1} eine Krankheit hinzu und verlor ${2} M€",
+  "${0} added ${3} diseases to ${1} and lost ${2} M€": "${0} fügte ${3} Krankheiten zu ${1} hinzu und verlor ${2} M€",
   "${0} removed a disease from ${1} to gain 1 TR": "${0} entfernte eine Krankheit von ${1}, um 1 TW zu erhalten",
   "${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost": "${0} kann keine Krankheit von ${1} entfernen, um 1 TW zu erhalten aufgrund zu hoher Kosten für DIE-ROTEN-Politik",
   "${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost": "${0} kann ${1} nicht umdrehen, um 3 TW zu erhalten aufgrund zu hoher Kosten für DIE-ROTEN-Politik",

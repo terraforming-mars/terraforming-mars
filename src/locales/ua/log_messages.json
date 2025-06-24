@@ -346,6 +346,7 @@
   "${0} doubled resources on ${1} from ${2} to ${3}": "${0} подвоїв ресурси на ${1} з ${2} до ${3}",
   "${0} turned ${1} face down to gain 3 TR and lost ${2} M€": "${0} перевернув ${1}, щоб отримати 3 РТ і втратив ${2} M€",
   "${0} added a disease to ${1} and lost ${2} M€": "${0} додав хворобу до ${1} і втратив ${2} M€",
+  "${0} added ${3} diseases to ${1} and lost ${2} M€": "${0} додав ${3} хвороби до ${1} і втратив ${2} M€",
   "${0} removed a disease from ${1} to gain 1 TR": "${0} видалив хворобу з ${1}, щоб отримати 1 РТ",
   "${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost": "${0} не може видалити хворобу з ${1}, щоб отримати 1 РТ через нездійсненність вартості політики ЧЕРВОНІ",
   "${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost": "${0} не може перевернути ${1}, щоб отримати 3 РТ через нездійсненність вартості політики ЧЕРВОНІ",

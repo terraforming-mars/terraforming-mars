@@ -575,6 +575,7 @@ describe('Player', () => {
   it('run research phase, player has corruption, declines', () => {
     const [game, player] = testGame(1, {underworldExpansion: true, skipInitialCardSelection: true});
     game.generation = 2;
+    game.underworldDraftEnabled = true;
     player.megaCredits = 20;
     player.underworldData.corruption = 1;
 
@@ -593,6 +594,7 @@ describe('Player', () => {
 
   it('run research phase, player has corruption, accepts', () => {
     const [game, player] = testGame(1, {underworldExpansion: true, skipInitialCardSelection: true});
+    game.underworldDraftEnabled = true;
     game.generation = 2;
     player.megaCredits = 20;
     player.underworldData.corruption = 1;

@@ -132,7 +132,6 @@ export class Game implements IGame, Logger {
   public first: IPlayer;
 
   // Drafting
-
   public draftRound: number = 1;
   public initialDraftIteration: number = 1;
 
@@ -178,6 +177,7 @@ export class Game implements IGame, Logger {
   /* The set of tags available in this game. */
   public readonly tags: ReadonlyArray<Tag>;
 
+  public underworldDraftEnabled = false;
   /*
    * An optimized list of the players, in generation order. This is erased every time first placer changes,
    * and refilled on calls to getPlayersInGenerationOrder

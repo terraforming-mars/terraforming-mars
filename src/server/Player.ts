@@ -713,10 +713,10 @@ export class Player implements IPlayer {
       this.setWaitingFor(action, () => this.game.playerIsFinishedWithResearchPhase(this));
     };
 
-    if (this.underworldData.corruption > 0 &&
-        this.game.gameOptions.expansions.underworld === true &&
-        cards.length >= 2 &&
-        this.game.projectDeck.size() >= 2) {
+    if (this.game.underworldDraftEnabled &&
+      this.underworldData.corruption > 0 &&
+      cards.length >= 2 &&
+      this.game.projectDeck.size() >= 2) {
       // Player may spend 1 corruption to discard 2 cards and draw 2 cards.
       const options = new OrOptions();
       options.options.push(chooseCardsToBuy());

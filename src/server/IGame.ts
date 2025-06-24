@@ -245,6 +245,7 @@ export interface IGame extends Logger {
   getPlayerBefore(player: IPlayer): IPlayer;
 
   underworldDraftEnabled: boolean;
+  getActionCount(): number;
 }
 
 export function isIGame(object: any): object is IGame {

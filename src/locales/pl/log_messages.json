@@ -190,6 +190,7 @@
   "${0} linked ${1} with ${2}": "${0} umieszcza kartę ${1} na karcie ${2}",
   "${0} turned ${1} face down to gain 3 TR and lost ${2} M€": "${0} odwraca kartę ${1} podnosi swój WT o 3 poziomy i traci ${2} M€.",
   "${0} added a disease to ${1} and lost ${2} M€": "${0} umieszcza jednostkę chorób na ${1} oraz traci ${2} M€.",
+  "${0} added ${3} diseases to ${1} and lost ${2} M€": "${0} umieszcza ${3} jednostek chorób na ${1} oraz traci ${2} M€.",
   "${0} removed a disease from ${1} to gain 1 TR": "${0} usuwa jednostkę chorób z ${1}, i podnosi swój WT o 1 poziom.",
   "${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost": "${0} nie może usunąć jednostki choroby z ${1} ze względu na niemożliwość pokrycia dodatkowego kosztu polityki czerwonych.",
   "${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost": "${0} nie może odwrócić karty ${1} ze względu na niemożliwość pokrycia dodatkowego kosztu polityki czerwonych.",

@@ -56,12 +56,21 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
     return [Tag.MICROBE, Tag.MICROBE];
   }
 
+  private logAddingDisease(player: IPlayer, count: number, megaCreditsLost: number) {
+    if (count === 1) {
+      player.game.log('${0} added a disease to ${1} and lost ${2} M€',
+        (b) => b.player(player).card(this).number(megaCreditsLost));
+    } else {
+      player.game.log('${0} added ${3} diseases to ${1} and lost ${2} M€',
+        (b) => b.player(player).card(this).number(megaCreditsLost).number(count));
+    }
+  }
+
   private addDisease(player: IPlayer, count: number) {
     const megaCreditsLost = Math.min(player.megaCredits, count * 4);
     player.addResourceTo(this, count);
     player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
-    // TODO(kberg): Change text to include count by 2025-07-01.
-    player.game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
+    this.logAddingDisease(player, count, megaCreditsLost);
   }
 
   public onCardPlayedByAnyPlayer(player: IPlayer, card: ICard, activePlayer: IPlayer): void {
@@ -92,7 +101,7 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
                 const megaCreditsLost = Math.min(player.megaCredits, 4);
                 player.increaseTerraformRating();
                 player.stock.deduct(Resource.MEGACREDITS, megaCreditsLost);
-                game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
+                this.logAddingDisease(player, 1, megaCreditsLost);
                 game.log('${0} removed a disease from ${1} to gain 1 TR', (b) => b.player(player).card(this));
                 return undefined;
               }),

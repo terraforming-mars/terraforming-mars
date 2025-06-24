@@ -37,12 +37,12 @@ export class MiningMarketInsider extends ActionCard implements IProjectCard {
   // Behavior is similar in Demetron labs
   // This doesn't need to be serialized. It ensures this is only evaluated once per action.
   // When the server restarts, the player has to take an action anyway.
-  private lastActionId = -1;
+  private lastAction = -1;
   public onIdentificationByAnyPlayer(cardOwner: IPlayer) {
-    const actionId = cardOwner.game.getActionCount();
-    if (this.lastActionId !== actionId) {
+    const actionCount = cardOwner.game.getActionCount();
+    if (this.lastAction !== actionCount) {
       cardOwner.addResourceTo(this);
-      this.lastActionId = actionId;
+      this.lastAction = actionCount;
     }
   }
 }

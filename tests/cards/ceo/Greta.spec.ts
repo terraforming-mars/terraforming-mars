@@ -105,9 +105,9 @@ describe('Greta', () => {
     turmoil.endGeneration(game);
     runAllActions(game);
     expect(turmoil.chairman).to.eq(player);
-    expect(player.getTerraformRating()).to.eq(20);
+    expect(player.terraformRating).to.eq(20);
     expect(player.megaCredits).to.eq(0);
-    expect(player2.getTerraformRating()).to.eq(19);
+    expect(player2.terraformRating).to.eq(19);
     expect(player2.megaCredits).to.eq(0);
   });
 

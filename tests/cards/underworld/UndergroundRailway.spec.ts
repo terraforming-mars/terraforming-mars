@@ -33,6 +33,6 @@ describe('UndergroundRailway', () => {
     player.setTerraformRating(20);
     cast(card.play(player), undefined);
     expect(player.production.energy).eq(0);
-    expect(player.getTerraformRating()).eq(22);
+    expect(player.terraformRating).eq(22);
   });
 });

@@ -295,9 +295,9 @@ describe('UnderworldExpansion', () => {
   });
 
   it('grant bonus - tr', () => {
-    expect(player1.getTerraformRating()).eq(20);
+    expect(player1.terraformRating).eq(20);
     UnderworldExpansion.grant(player1, 'tr');
-    expect(player1.getTerraformRating()).eq(21);
+    expect(player1.terraformRating).eq(21);
   });
 
   // it('grant bonus - ocean', () => {

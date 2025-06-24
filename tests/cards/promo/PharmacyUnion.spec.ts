@@ -88,12 +88,12 @@ describe('PharmacyUnion', () => {
     game.deferredActions.pop();
 
     expect(pharmacyUnion.resourceCount).to.eq(1);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
 
     player2.playCard(new LagrangeObservatory());
     expect(game.deferredActions).has.lengthOf(0);
     expect(pharmacyUnion.resourceCount).to.eq(1);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
   });
 
   it('Works correctly with Research', () => {
@@ -109,7 +109,7 @@ describe('PharmacyUnion', () => {
     game.deferredActions.pop();
 
     expect(pharmacyUnion.resourceCount).to.eq(0);
-    expect(player.getTerraformRating()).to.eq(22);
+    expect(player.terraformRating).to.eq(22);
   });
 
   it('Can turn card face down once per game to gain 3 TR if no diseases on card', () => {
@@ -124,14 +124,14 @@ describe('PharmacyUnion', () => {
     game.deferredActions.pop();
     orOptions.options[0].cb();
 
-    expect(player.getTerraformRating()).to.eq(23);
+    expect(player.terraformRating).to.eq(23);
     expect(pharmacyUnion.isDisabled).is.true;
     expect(player.getPlayedEventsCount()).to.eq(1); // Counts as a played event
 
     // Cannot trigger once per game effect a second time
     player.playCard(new AntiGravityTechnology());
     expect(game.deferredActions).has.lengthOf(0);
-    expect(player.getTerraformRating()).to.eq(23);
+    expect(player.terraformRating).to.eq(23);
   });
 
   it('Corporation tags do not count when corporation is disabled', () => {
@@ -221,7 +221,7 @@ describe('PharmacyUnion', () => {
     runAllActions(game);
 
     expect(pharmacyUnion.resourceCount).to.eq(1);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
   });
 
   describe('Prioritize effect order', () => {
@@ -352,12 +352,12 @@ describe('PharmacyUnion', () => {
     // Pharmacy Union science tag benefit.
     runNextAction(game);
     expect(player.megaCredits).eq(4);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     // Pay for the reds cost and gain TR benefit
     runNextAction(game);
     expect(player.megaCredits).eq(1);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
 
     // Plays the microbe tag cost, costs 4MC, player no longer has money
     runNextAction(game);
@@ -408,12 +408,12 @@ describe('PharmacyUnion', () => {
     // Pharmacy Union science tag benefit lines up the TR bump.
     runNextAction(game);
     expect(player.megaCredits).eq(4);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     // // Pay for the reds cost and gain TR benefit
     runNextAction(game);
     expect(player.megaCredits).eq(1);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
 
     // And that's it.
     expect(game.deferredActions).has.length(0);
@@ -452,6 +452,6 @@ describe('PharmacyUnion', () => {
 
     expect(player.tags.count(Tag.SCIENCE)).eq(1);
     expect(player.megaCredits).eq(0);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
   });
 });

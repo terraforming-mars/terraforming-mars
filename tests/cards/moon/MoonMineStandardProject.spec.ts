@@ -52,7 +52,7 @@ describe('MoonMineStandardProject', () => {
 
   it('act', () => {
     player.titanium = 3;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(player.production.steel).eq(0);
     player.megaCredits = 20;
 
@@ -66,7 +66,7 @@ describe('MoonMineStandardProject', () => {
     assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_MINE);
 
     expect(moonData.miningRate).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 
   it('can act when Reds are in power', () => {

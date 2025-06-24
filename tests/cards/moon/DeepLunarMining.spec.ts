@@ -30,14 +30,14 @@ describe('DeepLunarMining', () => {
   it('play', () => {
     player.titanium = 3;
     expect(player.production.titanium).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.miningRate).eq(0);
 
     card.play(player);
 
     expect(player.titanium).eq(2);
     expect(player.production.titanium).eq(2);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(moonData.miningRate).eq(1);
   });
 });

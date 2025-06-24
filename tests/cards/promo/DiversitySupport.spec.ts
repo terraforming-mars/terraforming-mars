@@ -40,7 +40,7 @@ describe('DiversitySupport', () => {
 
     expect(card.canPlay(player)).is.true;
     card.play(player);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
   });
 
   it('Works with corruption', () => {

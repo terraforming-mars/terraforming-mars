@@ -23,7 +23,7 @@ describe('ImportedNitrogen', () => {
 
   it('Should play without animals and microbes', () => {
     card.play(player);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
     expect(player.plants).to.eq(4);
   });
 
@@ -39,7 +39,7 @@ describe('ImportedNitrogen', () => {
     addAnimals.cb([pets]);
     expect(pets.resourceCount).to.eq(2);
 
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
     expect(player.plants).to.eq(4);
   });
 
@@ -55,7 +55,7 @@ describe('ImportedNitrogen', () => {
 
     expect(game.deferredActions.pop()!.execute()).is.undefined;
 
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
     expect(player.plants).to.eq(4);
   });
 
@@ -75,7 +75,7 @@ describe('ImportedNitrogen', () => {
     addAnimals.cb([pets]);
     expect(pets.resourceCount).to.eq(2);
 
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
     expect(player.plants).to.eq(4);
   });
 });

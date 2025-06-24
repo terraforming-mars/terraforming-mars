@@ -70,7 +70,7 @@ describe('LunaEcumenopolis', () => {
   it('Place 2 colony tiles', () => {
     moonData.habitatRate = 2;
     const moon = moonData.moon;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     moon.getSpaceOrThrow('m12').tile = {tileType: TileType.MOON_HABITAT};
     moon.getSpaceOrThrow('m19').tile = {tileType: TileType.MOON_HABITAT};
@@ -80,14 +80,14 @@ describe('LunaEcumenopolis', () => {
     expect(input1.spaces.map(toID)).deep.eq(['m13', 'm18']);
     input1.cb(moon.getSpaceOrThrow('m18'));
     expect(moonData.habitatRate).eq(3);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
 
     const input2 = cast(game.deferredActions.pop()!.execute(), SelectSpace);
     expect(input2.spaces.map(toID)).deep.eq(['m13', 'm17']);
     input1.cb(moon.getSpaceOrThrow('m13'));
     expect(moonData.habitatRate).eq(4);
     runAllActions(game);
-    expect(player.getTerraformRating()).eq(18);
+    expect(player.terraformRating).eq(18);
   });
 
   it('can play next to Lunar Mine Urbanization', () => {
@@ -108,7 +108,7 @@ describe('LunaEcumenopolis', () => {
   it('Place 2 colony tiles next to Lunar Mine Urbanization', () => {
     moonData.habitatRate = 2;
     const moon = moonData.moon;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     moon.getSpaceOrThrow('m12').tile = {tileType: TileType.LUNAR_MINE_URBANIZATION};
     moon.getSpaceOrThrow('m19').tile = {tileType: TileType.MOON_HABITAT};
@@ -118,14 +118,14 @@ describe('LunaEcumenopolis', () => {
     expect(input1.spaces.map(toID)).deep.eq(['m13', 'm18']);
     input1.cb(moon.getSpaceOrThrow('m18'));
     expect(moonData.habitatRate).eq(3);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
 
     const input2 = cast(game.deferredActions.pop()!.execute(), SelectSpace);
     expect(input2.spaces.map(toID)).deep.eq(['m13', 'm17']);
     input1.cb(moon.getSpaceOrThrow('m13'));
     expect(moonData.habitatRate).eq(4);
     runAllActions(game);
-    expect(player.getTerraformRating()).eq(18);
+    expect(player.terraformRating).eq(18);
   });
 
   it('Compatible with Subterranean Habitats', () => {

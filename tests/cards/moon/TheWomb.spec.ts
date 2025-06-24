@@ -33,7 +33,7 @@ describe('TheWomb', () => {
   it('play', () => {
     player.production.override({energy: 2});
     player.titanium = 2;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     card.play(player);
 

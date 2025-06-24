@@ -89,13 +89,13 @@ describe('Underworld / StandardTechnology', () => {
     const selectCard2 = cast(card.action(player), SelectCard);
     expect((selectCard2.cards.map(toName))).deep.eq([CardName.ASTEROID_STANDARD_PROJECT, CardName.AQUIFER_STANDARD_PROJECT]);
 
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     selectCard2.cb([selectCard2.cards[0]]);
     runAllActions(game);
 
     expect(player.megaCredits).eq(4);
     expect(game.getTemperature()).eq(-28);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 });

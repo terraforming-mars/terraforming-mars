@@ -74,7 +74,7 @@ export interface IPlayer {
   colonies: Colonies;
   readonly production: Production;
   readonly stock: Stock;
-
+  readonly terraformRating: number;
 
   // Used only during set-up
   pickedCorporationCard?: ICorporationCard;
@@ -194,6 +194,7 @@ export interface IPlayer {
   getSteelValue(): number;
   increaseSteelValue(): void;
   decreaseSteelValue(): void;
+  /** @deprecated use #terraformRating. */
   getTerraformRating(): number;
   increaseTerraformRating(steps?: number, opts?: {log?: boolean}): void;
   decreaseTerraformRating(steps?: number, opts?: {log?: boolean}): void;

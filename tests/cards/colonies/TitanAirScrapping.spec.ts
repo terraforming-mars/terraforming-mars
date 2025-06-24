@@ -28,7 +28,7 @@ describe('TitanAirScrapping', () => {
     const orOptions = cast(card.action(player), OrOptions);
     orOptions.options[0].cb();
 
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
     expect(card.resourceCount).to.eq(5);
     expect(card.getVictoryPoints(player)).to.eq(2);
   });
@@ -39,7 +39,7 @@ describe('TitanAirScrapping', () => {
     expect(card.canAct(player)).is.true;
 
     card.action(player);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
     expect(card.resourceCount).to.eq(0);
   });
 });

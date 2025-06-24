@@ -123,19 +123,19 @@ describe('Game', () => {
     const game = Game.newInstance('game-id', [player, player2], player);
 
     setTemperature(game, 6);
-    let initialTR = player.getTerraformRating();
+    let initialTR = player.terraformRating;
     game.increaseTemperature(player, 2);
 
     expect(game.getTemperature()).to.eq(constants.MAX_TEMPERATURE);
-    expect(player.getTerraformRating()).to.eq(initialTR + 1);
+    expect(player.terraformRating).to.eq(initialTR + 1);
 
-    initialTR = player.getTerraformRating();
+    initialTR = player.terraformRating;
     setTemperature(game, 6);
 
     // Try 3 steps increase
     game.increaseTemperature(player, 3);
     expect(game.getTemperature()).to.eq(constants.MAX_TEMPERATURE);
-    expect(player.getTerraformRating()).to.eq(initialTR + 1);
+    expect(player.terraformRating).to.eq(initialTR + 1);
   });
 
   it('Disallows to set oxygenLevel more than allowed maximum', () => {
@@ -144,11 +144,11 @@ describe('Game', () => {
     const game = Game.newInstance('game-id', [player, player2], player);
 
     setOxygenLevel(game, 13);
-    const initialTR = player.getTerraformRating();
+    const initialTR = player.terraformRating;
     game.increaseOxygenLevel(player, 2);
 
     expect(game.getOxygenLevel()).to.eq(constants.MAX_OXYGEN_LEVEL);
-    expect(player.getTerraformRating()).to.eq(initialTR + 1);
+    expect(player.terraformRating).to.eq(initialTR + 1);
   });
 
   it('Draft round for 2 players', () => {
@@ -397,7 +397,7 @@ describe('Game', () => {
     expect(game.isSoloModeWin()).is.not.true;
 
     // Don't give TR or raise oxygen for final greenery placements
-    expect(player.getTerraformRating()).to.eq(20);
+    expect(player.terraformRating).to.eq(20);
     expect(game.getOxygenLevel()).to.eq(12);
   });
 

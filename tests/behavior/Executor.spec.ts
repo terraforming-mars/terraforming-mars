@@ -237,15 +237,15 @@ describe('Executor', () => {
   });
 
   it('tr', () => {
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     executor.execute({tr: 2}, player, fake);
 
-    expect(player.getTerraformRating()).eq(22);
+    expect(player.terraformRating).eq(22);
 
     executor.execute({tr: -1}, player, fake);
 
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
   });
 
   it('add resources to specific card', () => {
@@ -506,11 +506,11 @@ describe('Executor', () => {
     const behavior: Behavior = {spend: {energy: 1}, tr: 1};
     expect(executor.canExecute(behavior, player, fake)).is.false;
     player.energy = 1;
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(executor.canExecute(behavior, player, fake)).is.true;
     executor.execute(behavior, player, fake);
     expect(player.energy).eq(0);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
   });
 
   it('spend - energy, raise TR, reds in power', () => {
@@ -549,11 +549,11 @@ describe('Executor', () => {
     const behavior: Behavior = {spend: {heat: 1}, tr: 1};
     expect(executor.canExecute(behavior, player, fake)).is.false;
     player.heat = 1;
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(executor.canExecute(behavior, player, fake)).is.true;
     executor.execute(behavior, player, fake);
     expect(player.heat).eq(0);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
   });
 
   it('spend - heat, raise TR, reds in power', () => {
@@ -594,7 +594,7 @@ describe('Executor', () => {
     const behavior = {spend: {heat: 3}, tr: 1};
     player.heat = 3;
 
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(executor.canExecute(behavior, player, fake)).is.true;
 
     setRulingParty(game, PartyName.REDS);
@@ -610,7 +610,7 @@ describe('Executor', () => {
     expect(player.heat).eq(3);
     const selectPayment = cast(player.popWaitingFor(), SelectPayment);
     selectPayment.cb(Payment.of({heat: 3}));
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(player.heat).eq(0);
   });
 

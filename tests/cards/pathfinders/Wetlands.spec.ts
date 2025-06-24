@@ -97,7 +97,7 @@ describe('Wetlands', () => {
     expect(card.canPlay(player)).is.true;
     expect(card.availableSpaces(player).map(toID)).deep.eq(['09', '23']);
 
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     const action = card.play(player);
     expect(player.plants).eq(3);
@@ -113,7 +113,7 @@ describe('Wetlands', () => {
     runAllActions(game);
 
     expect(game.getOxygenLevel()).eq(1);
-    expect(player.getTerraformRating()).eq(22);
+    expect(player.terraformRating).eq(22);
   });
 
   it('Wetlands does not count toward global parameters', () => {

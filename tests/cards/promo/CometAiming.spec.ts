@@ -41,7 +41,7 @@ describe('CometAiming', () => {
     expect(player.game.deferredActions).has.lengthOf(1);
     const selectSpace = cast(player.game.deferredActions.peek()!.execute(), SelectSpace);
     selectSpace.cb(selectSpace.spaces[0]);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
   });
 
   it('Should act - multiple action choices, multiple targets', () => {
@@ -63,12 +63,12 @@ describe('CometAiming', () => {
     maxOutOceans(player2);
 
     expect(card.canAct(player)).is.true;
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     card.action(player);
     runAllActions(game);
 
     expect(card.resourceCount).to.eq(0);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
   });
 });

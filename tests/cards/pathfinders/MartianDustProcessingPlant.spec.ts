@@ -22,11 +22,11 @@ describe('MartianDustProcessingPlant', () => {
 
   it('play', () => {
     player.production.override({energy: 1});
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     card.play(player);
 
     expect(player.production.asUnits()).deep.eq(Units.of({steel: 2}));
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 });

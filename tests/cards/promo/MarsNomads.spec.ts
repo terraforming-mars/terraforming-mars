@@ -147,14 +147,14 @@ describe('MarsNomads', () => {
     selectSpace.cb(space3);
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     space3.bonus = [SpaceBonus.TEMPERATURE];
     selectSpace.cb(space3);
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
     expect(game.getTemperature()).eq(-30);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
   });
 
   it('Compatible with Land Claim on placement', () => {

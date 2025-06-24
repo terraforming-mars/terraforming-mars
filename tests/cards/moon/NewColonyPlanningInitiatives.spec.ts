@@ -31,11 +31,11 @@ describe('NewColonyPlanningInitiatives', () => {
 
   it('play', () => {
     moonData.habitatRate = 2;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     card.play(player);
 
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(moonData.habitatRate).eq(3);
   });
 });

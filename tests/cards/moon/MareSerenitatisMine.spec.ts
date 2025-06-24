@@ -43,7 +43,7 @@ describe('MareSerenitatisMine', () => {
     player.steel = 3;
     expect(player.production.steel).eq(0);
     expect(player.production.titanium).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.miningRate).eq(0);
 
     card.play(player);
@@ -52,7 +52,7 @@ describe('MareSerenitatisMine', () => {
     expect(player.steel).eq(2);
     expect(player.production.steel).eq(1);
     expect(player.production.titanium).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(moonData.miningRate).eq(1);
 
     const mareSerenitatis = moonData.moon.getSpaceOrThrow(NamedMoonSpaces.MARE_SERENITATIS);
@@ -65,7 +65,7 @@ describe('MareSerenitatisMine', () => {
     assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
 
     expect(moonData.logisticRate).eq(1);
-    expect(player.getTerraformRating()).eq(16);
+    expect(player.terraformRating).eq(16);
   });
 });
 

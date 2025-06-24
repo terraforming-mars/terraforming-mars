@@ -25,7 +25,7 @@ describe('SphereHabitats', () => {
   it('play', () => {
     player.titanium = 3;
     expect(player.production.steel).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     card.play(player);
 

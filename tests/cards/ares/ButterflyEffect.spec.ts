@@ -22,10 +22,10 @@ describe('ButterflyEffect', () => {
   });
 
   it('play', () => {
-    const priorTerraformingRating = player.getTerraformRating();
+    const priorTerraformingRating = player.terraformRating;
 
     const input = cast(churn(card.play(player), player), ShiftAresGlobalParameters);
-    expect(player.getTerraformRating()).eq(priorTerraformingRating + 1);
+    expect(player.terraformRating).eq(priorTerraformingRating + 1);
 
     const originalHazardData = game.aresData!.hazardData;
     expect(originalHazardData.erosionOceanCount.threshold).eq(3);
@@ -56,9 +56,9 @@ describe('ButterflyEffect', () => {
       }
     });
 
-    const priorTerraformingRating = player.getTerraformRating();
+    const priorTerraformingRating = player.terraformRating;
 
     expect(churn(card.play(player), player)).is.undefined;
-    expect(player.getTerraformRating()).eq(priorTerraformingRating + 1);
+    expect(player.terraformRating).eq(priorTerraformingRating + 1);
   });
 });

@@ -169,28 +169,28 @@ describe('AresHandler', () => {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
     AresHazards.putHazardAt(space, TileType.EROSION_MILD);
     player.megaCredits = 8;
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     game.addTile(player, space, {tileType: TileType.GREENERY});
     game.deferredActions.peek()!.execute();
 
     expect(space.tile!.tileType).eq(TileType.GREENERY);
     expect(player.megaCredits).is.eq(0);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
   });
 
   it('cover severe hazard', () => {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
     AresHazards.putHazardAt(space, TileType.EROSION_SEVERE);
     player.megaCredits = 16;
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     game.addTile(player, space, {tileType: TileType.GREENERY});
     game.deferredActions.peek()!.execute();
 
     expect(space.tile!.tileType).eq(TileType.GREENERY);
     expect(player.megaCredits).is.eq(0);
-    expect(player.getTerraformRating()).eq(22);
+    expect(player.terraformRating).eq(22);
   });
 
   it('Placing on top of an ocean does not regrant bonuses', () => {
@@ -262,7 +262,7 @@ describe('AresHandler', () => {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
     AresHazards.putHazardAt(space, TileType.EROSION_SEVERE);
     player.megaCredits = 8;
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     game.phase = Phase.SOLAR;
 
     game.addTile(player, space, {tileType: TileType.GREENERY});
@@ -271,7 +271,7 @@ describe('AresHandler', () => {
 
     // No costs or benefits
     expect(player.megaCredits).is.eq(8);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
   });
 });
 
@@ -306,14 +306,14 @@ describe('Hazard tests', () => {
     let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     expect(tiles.get(TileType.DUST_STORM_MILD)).has.lengthOf(3);
     expect(tiles.get(TileType.DUST_STORM_SEVERE)).is.undefined;
-    const prior = player.getTerraformRating();
+    const prior = player.terraformRating;
 
     addOcean(player);
 
     tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     expect(tiles.get(TileType.DUST_STORM_MILD)).is.undefined;
     expect(tiles.get(TileType.DUST_STORM_SEVERE)).is.undefined;
-    expect(player.getTerraformRating()).eq(prior + 2); // One for the ocean, once for the dust storm event.
+    expect(player.terraformRating).eq(prior + 2); // One for the ocean, once for the dust storm event.
   });
 
   it('dust storms disappear after the sixth ocean, desperate measures changes that', () => {
@@ -331,14 +331,14 @@ describe('Hazard tests', () => {
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
     cast(new DesperateMeasures().play(player), SelectSpace).cb(protectedDustStorm);
 
-    const priorTr = player.getTerraformRating();
+    const priorTr = player.terraformRating;
 
     addOcean(player);
 
     tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     expect(tiles.get(TileType.DUST_STORM_MILD)).has.lengthOf(1);
     expect(tiles.get(TileType.DUST_STORM_SEVERE)).is.undefined;
-    expect(player.getTerraformRating()).eq(priorTr + 2); // One for the ocean, once for the dust storm event.
+    expect(player.terraformRating).eq(priorTr + 2); // One for the ocean, once for the dust storm event.
   });
 
   it('dust storms amplify at 5% oxygen', () => {

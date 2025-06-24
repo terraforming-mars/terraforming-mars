@@ -46,7 +46,7 @@ describe('ToolWithTheFirstOrder', () => {
     cb!();
     runAllActions(game);
 
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
 
     expect(player.actionsTakenThisRound).eq(1);
     expect(game.activePlayer).eq(player.id);

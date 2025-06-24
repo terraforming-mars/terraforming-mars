@@ -166,8 +166,8 @@ describe('Turmoil', () => {
 
     expect(turmoil.chairman).to.eq(player);
     // both players lose 1 TR; player gains 1 TR from Reds ruling bonus, 1 TR from chairman
-    expect(player.getTerraformRating()).to.eq(21);
-    expect(player2.getTerraformRating()).to.eq(20);
+    expect(player.terraformRating).to.eq(21);
+    expect(player2.terraformRating).to.eq(20);
 
     expect(turmoil.getAvailableDelegateCount(player)).eq(4);
     expect(turmoil.getAvailableDelegateCount(player2)).eq(6);
@@ -626,14 +626,14 @@ describe('Turmoil', () => {
     turmoil.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(turmoil, game);
 
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     player.megaCredits = 2;
     player.increaseTerraformRating();
     runAllActions(game);
 
     expect(player.megaCredits).eq(2); // No change
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     player.megaCredits = 3;
     player.increaseTerraformRating();
@@ -641,28 +641,28 @@ describe('Turmoil', () => {
     runAllActions(game);
 
     expect(player.megaCredits).eq(0);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
 
     player.megaCredits = 3;
     player.increaseTerraformRating(2);
     runAllActions(game);
 
     expect(player.megaCredits).eq(3); // No change
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
 
     player.megaCredits = 5;
     player.increaseTerraformRating(2);
     runAllActions(game);
 
     expect(player.megaCredits).eq(5); // No change
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
 
     player.megaCredits = 6;
     player.increaseTerraformRating(2);
     runAllActions(game);
 
     expect(player.megaCredits).eq(0);
-    expect(player.getTerraformRating()).eq(17);
+    expect(player.terraformRating).eq(17);
 
     // This doesn't apply outside of the ACTION phase
     game.phase = Phase.SOLAR;
@@ -672,7 +672,7 @@ describe('Turmoil', () => {
     runAllActions(game);
 
     expect(player.megaCredits).eq(6);
-    expect(player.getTerraformRating()).eq(19);
+    expect(player.terraformRating).eq(19);
   });
 
   it('deserialization', () => {

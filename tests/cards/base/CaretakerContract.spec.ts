@@ -41,7 +41,7 @@ describe('CaretakerContract', () => {
     player.heat = 8;
     card.action(player);
     expect(player.heat).to.eq(0);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
   });
 
   it('Cannot act if cannot afford reds tax', () => {

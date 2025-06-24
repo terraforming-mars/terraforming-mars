@@ -40,11 +40,11 @@ describe('Playwrights', () => {
 
   it('Can replay own event', () => {
     const event = new ReleaseOfInertGases();
-    const tr = player.getTerraformRating();
+    const tr = player.terraformRating;
     event.play(player);
     player.playedCards.push(event);
 
-    expect(player.getTerraformRating()).to.eq(tr + 2);
+    expect(player.terraformRating).to.eq(tr + 2);
     expect(card.canAct(player)).is.not.true;
 
     player.megaCredits = event.cost;
@@ -56,7 +56,7 @@ describe('Playwrights', () => {
     game.deferredActions.pop()!.execute(); // SelectPayment
     runAllActions(game);
 
-    expect(player.getTerraformRating()).to.eq(tr + 4);
+    expect(player.terraformRating).to.eq(tr + 4);
     expect(player.megaCredits).eq(0);
     expect(player.playedCards.asArray()).has.members([card]);
     expect(player.removedFromPlayCards).has.lengthOf(1);
@@ -64,7 +64,7 @@ describe('Playwrights', () => {
 
   it('Can replay other player\'s event', () => {
     const event = new ReleaseOfInertGases();
-    const tr = player.getTerraformRating();
+    const tr = player.terraformRating;
     event.play(player2);
     player2.playedCards.push(event);
 
@@ -76,7 +76,7 @@ describe('Playwrights', () => {
     game.deferredActions.pop()!.execute(); // SelectPayment
     runAllActions(game);
 
-    expect(player.getTerraformRating()).to.eq(tr + 2);
+    expect(player.terraformRating).to.eq(tr + 2);
     expect(player.megaCredits).eq(0);
     expect(player2.playedCards.length).eq(0);
     expect(player.removedFromPlayCards).has.lengthOf(1);

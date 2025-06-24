@@ -29,12 +29,12 @@ class RedsBonus01 extends Bonus {
     const game = player.game;
     const players = [...game.getPlayersInGenerationOrder()];
 
-    if (game.isSoloMode() && players[0].getTerraformRating() <= 20) return 1;
+    if (game.isSoloMode() && players[0].terraformRating <= 20) return 1;
 
-    players.sort((p1, p2) => p1.getTerraformRating() - p2.getTerraformRating());
-    const min = players[0].getTerraformRating();
+    players.sort((p1, p2) => p1.terraformRating - p2.terraformRating);
+    const min = players[0].terraformRating;
 
-    if (player.getTerraformRating() === min) return 1;
+    if (player.terraformRating === min) return 1;
     return 0;
   }
 
@@ -64,12 +64,12 @@ class RedsBonus02 implements IBonus {
     const game = player.game;
     const players = [...game.getPlayersInGenerationOrder()];
 
-    if (game.isSoloMode() && players[0].getTerraformRating() > 20) return -1;
+    if (game.isSoloMode() && players[0].terraformRating > 20) return -1;
 
-    players.sort((p1, p2) => p2.getTerraformRating() - p1.getTerraformRating());
-    const max = players[0].getTerraformRating();
+    players.sort((p1, p2) => p2.terraformRating - p1.terraformRating);
+    const max = players[0].terraformRating;
 
-    if (player.getTerraformRating() === max) return -1;
+    if (player.terraformRating === max) return -1;
     return 0;
   }
 

@@ -38,13 +38,13 @@ describe('LunaStagingStation', () => {
   it('play', () => {
     player.titanium = 1;
     moonData.logisticRate = 2;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     card.play(player);
 
     expect(player.titanium).eq(0);
     expect(moonData.logisticRate).eq(4);
-    expect(player.getTerraformRating()).eq(16);
+    expect(player.terraformRating).eq(16);
   });
 });
 

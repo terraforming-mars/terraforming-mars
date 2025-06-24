@@ -31,6 +31,6 @@ describe('MagneticFieldGeneratorsPromo', () => {
     cast(player.popWaitingFor(), SelectSpace);
     expect(player.production.energy).to.eq(0);
     expect(player.production.plants).to.eq(2);
-    expect(player.getTerraformRating()).to.eq(23);
+    expect(player.terraformRating).to.eq(23);
   });
 });

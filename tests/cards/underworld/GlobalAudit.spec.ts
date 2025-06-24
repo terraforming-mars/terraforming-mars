@@ -16,10 +16,10 @@ describe('GlobalAudit', () => {
 
     cast(card.play(player), undefined);
 
-    expect(player.getTerraformRating()).eq(21);
-    expect(player2.getTerraformRating()).eq(20);
-    expect(player3.getTerraformRating()).eq(21);
-    expect(player4.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(21);
+    expect(player2.terraformRating).eq(20);
+    expect(player3.terraformRating).eq(21);
+    expect(player4.terraformRating).eq(20);
   });
 
   it('Should play - reds', () => {
@@ -44,13 +44,13 @@ describe('GlobalAudit', () => {
     cast(player3.popWaitingFor(), undefined);
     cast(player4.popWaitingFor(), undefined);
 
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(player.megaCredits).eq(1);
-    expect(player2.getTerraformRating()).eq(21);
+    expect(player2.terraformRating).eq(21);
     expect(player2.megaCredits).eq(0);
-    expect(player3.getTerraformRating()).eq(20);
+    expect(player3.terraformRating).eq(20);
     expect(player3.megaCredits).eq(2);
-    expect(player4.getTerraformRating()).eq(20);
+    expect(player4.terraformRating).eq(20);
     expect(player4.megaCredits).eq(1);
   });
 });

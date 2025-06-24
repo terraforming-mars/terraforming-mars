@@ -65,7 +65,7 @@ describe('VenusShuttles', () => {
 
   it('action', () => {
     player.megaCredits = 13;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(game.getVenusScaleLevel()).eq(0);
 
     cast(card.action(player), undefined);
@@ -74,7 +74,7 @@ describe('VenusShuttles', () => {
 
     expect(player.megaCredits).eq(1);
     expect(game.getVenusScaleLevel()).eq(2);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 
   it('Action 15 venus tags', () => {

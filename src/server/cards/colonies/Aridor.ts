@@ -63,8 +63,9 @@ export class Aridor extends CorporationCard implements ICorporationCard {
       const currentSize = this.allTags.size;
       this.allTags.add(tag);
       if (this.allTags.size > currentSize) {
-        player.game.log('${0} gained 1 M€ production from ${1} for ${2}', (b) => b.player(player).card(this).string(tag));
-        player.production.add(Resource.MEGACREDITS, 1, {log: true});
+        player.game.log('${0} gained 1 M€ production from ${1} for the ${2} tag',
+          (b) => b.player(player).card(this).string(tag));
+        player.production.add(Resource.MEGACREDITS, 1);
       }
     }
   }

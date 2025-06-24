@@ -92,7 +92,7 @@ describe('AnubisSecurities', () => {
 
       expect(player.megaCredits).eq(run.expected.mc[0]);
       expect(player2.megaCredits).eq(run.expected.mc[1]);
-      expect(player.getTerraformRating()).eq(run.expected.tr);
+      expect(player.terraformRating).eq(run.expected.tr);
     });
   }
 });

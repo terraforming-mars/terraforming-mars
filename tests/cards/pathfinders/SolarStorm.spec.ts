@@ -27,7 +27,7 @@ describe('SolarStorm', () => {
   });
 
   it('play', () => {
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(player.game.getTemperature()).eq(-30);
 
     player.plants = 5;
@@ -36,7 +36,7 @@ describe('SolarStorm', () => {
 
     card.play(player);
 
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(player.game.getTemperature()).eq(-28);
     expect(player.plants).eq(3);
     expect(player2.plants).eq(13);

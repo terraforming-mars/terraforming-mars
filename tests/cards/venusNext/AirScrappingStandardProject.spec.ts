@@ -32,7 +32,7 @@ describe('AirScrappingStandardProject', () => {
     runAllActions(game);
 
     expect(player.megaCredits).eq(0);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(game.getVenusScaleLevel()).eq(2);
   });
 
@@ -42,14 +42,14 @@ describe('AirScrappingStandardProject', () => {
 
     setVenusScaleLevel(game, MAX_VENUS_SCALE);
 
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(card.canAct(player)).eq(true);
 
     cast(card.action(player), undefined);
     runAllActions(game);
 
     expect(game.getVenusScaleLevel()).eq(MAX_VENUS_SCALE);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(player.megaCredits).eq(0);
   });
 

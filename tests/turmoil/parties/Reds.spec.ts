@@ -20,37 +20,37 @@ describe('Reds', () => {
   it('Ruling bonus 1: The player(s) with the lowest TR gains 1 TR', () => {
     player.increaseTerraformRating();
 
-    const secondPlayerInitialTR = secondPlayer.getTerraformRating();
+    const secondPlayerInitialTR = secondPlayer.terraformRating;
     const bonus = REDS_BONUS_1;
     bonus.grant(game);
-    expect(secondPlayer.getTerraformRating()).to.eq(secondPlayerInitialTR + 1);
+    expect(secondPlayer.terraformRating).to.eq(secondPlayerInitialTR + 1);
   });
 
   it('Ruling bonus 1: Ties for lowest TR are resolved correctly', () => {
-    const initialPlayerTR = player.getTerraformRating();
+    const initialPlayerTR = player.terraformRating;
     const bonus = REDS_BONUS_1;
 
     bonus.grant(game);
-    expect(player.getTerraformRating()).to.eq(initialPlayerTR + 1);
-    expect(secondPlayer.getTerraformRating()).to.eq(initialPlayerTR + 1);
+    expect(player.terraformRating).to.eq(initialPlayerTR + 1);
+    expect(secondPlayer.terraformRating).to.eq(initialPlayerTR + 1);
   });
 
   it('Ruling bonus 2: The player(s) with the highest TR loses 1 TR', () => {
     player.increaseTerraformRating();
 
-    const playerInitialTR = player.getTerraformRating();
+    const playerInitialTR = player.terraformRating;
     const bonus = REDS_BONUS_2;
     bonus.grant(game);
-    expect(player.getTerraformRating()).to.eq(playerInitialTR - 1);
+    expect(player.terraformRating).to.eq(playerInitialTR - 1);
   });
 
   it('Ruling bonus 2: Ties for highest TR are resolved correctly', () => {
-    const initialPlayerTR = player.getTerraformRating();
+    const initialPlayerTR = player.terraformRating;
     const bonus = REDS_BONUS_2;
 
     bonus.grant(game);
-    expect(player.getTerraformRating()).to.eq(initialPlayerTR - 1);
-    expect(secondPlayer.getTerraformRating()).to.eq(initialPlayerTR - 1);
+    expect(player.terraformRating).to.eq(initialPlayerTR - 1);
+    expect(secondPlayer.terraformRating).to.eq(initialPlayerTR - 1);
   });
 
   it('Ruling policy 1: When you take an action that raises TR, you MUST pay 3 M€ per step raised', () => {

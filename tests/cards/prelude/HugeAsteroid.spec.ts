@@ -22,7 +22,7 @@ describe('HugeAsteroid', () => {
   it('Should play', () => {
     player.megaCredits = 5;
     expect(card.canPlay(player)).is.true;
-    const initialTR = player.getTerraformRating();
+    const initialTR = player.terraformRating;
 
     card.play(player);
 
@@ -31,6 +31,6 @@ describe('HugeAsteroid', () => {
 
     expect(player.megaCredits).to.eq(0);
     expect(player.production.heat).to.eq(1);
-    expect(player.getTerraformRating()).to.eq(initialTR + 3);
+    expect(player.terraformRating).to.eq(initialTR + 3);
   });
 });

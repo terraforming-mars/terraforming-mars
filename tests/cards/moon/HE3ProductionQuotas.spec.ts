@@ -53,7 +53,7 @@ describe('HE3ProductionQuotas', () => {
     spaces[1].tile = {tileType: TileType.MOON_MINE};
     spaces[2].tile = {tileType: TileType.MOON_MINE};
     moonData.miningRate = 0;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     player.steel = 5;
     player.heat = 0;
@@ -62,7 +62,7 @@ describe('HE3ProductionQuotas', () => {
     expect(player.steel).eq(2);
     expect(player.heat).eq(12);
     expect(moonData.miningRate).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 });
 

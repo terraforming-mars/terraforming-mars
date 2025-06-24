@@ -33,7 +33,7 @@ describe('ThoriumRush', () => {
     moonData.habitatRate = 0;
     moonData.logisticRate = 0;
     moonData.miningRate = 0;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     card.play(player);
 
@@ -44,7 +44,7 @@ describe('ThoriumRush', () => {
     expect(moonData.habitatRate).eq(1);
     expect(moonData.habitatRate).eq(1);
     expect(moonData.habitatRate).eq(1);
-    expect(player.getTerraformRating()).eq(17);
+    expect(player.terraformRating).eq(17);
   });
 
   it('canPlay when Reds are in power', () => {

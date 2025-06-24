@@ -52,7 +52,7 @@ describe('MoonRoadStandardProject', () => {
 
   it('act', () => {
     player.steel = 3;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     player.megaCredits = 18;
 
     cast(card.action(player), undefined);
@@ -64,7 +64,7 @@ describe('MoonRoadStandardProject', () => {
     assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
 
     expect(moonData.logisticRate).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 
 

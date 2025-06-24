@@ -103,7 +103,7 @@ export class Player implements IPlayer {
   public pickedCorporationCard?: ICorporationCard;
 
   // Terraforming Rating
-  private terraformRating: number = 20;
+  public terraformRating: number = 20;
   public hasIncreasedTerraformRatingThisGeneration: boolean = false;
 
 

@@ -31,14 +31,14 @@ describe('LunarTradeFleet', () => {
 
   it('play', () => {
     player.production.override({megacredits: 0});
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     moonData.logisticRate = 0;
 
     card.play(player);
 
     player.production.override({megacredits: 2});
     expect(moonData.logisticRate).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 });
 

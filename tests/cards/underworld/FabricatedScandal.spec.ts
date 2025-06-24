@@ -20,6 +20,6 @@ describe('FabricatedScandal', () => {
     cast(card.play(player), undefined);
 
     expect(player.underworldData.corruption).to.eq(1);
-    expect(players.map((p) => p.getTerraformRating())).deep.eq([20, 19, 22, 22]);
+    expect(players.map((p) => p.terraformRating)).deep.eq([20, 19, 22, 22]);
   });
 });

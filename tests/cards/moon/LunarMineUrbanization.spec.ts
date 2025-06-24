@@ -49,7 +49,7 @@ describe('LunarMineUrbanization', () => {
 
     player.production.override({megacredits: 0});
     moonData.habitatRate = 0;
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(player.heat).eq(0);
     player.titanium = 1;
 
@@ -65,7 +65,7 @@ describe('LunarMineUrbanization', () => {
     expect(MoonExpansion.spaces(player.game, TileType.MOON_MINE)).eql([space]);
     expect(MoonExpansion.spaces(player.game, TileType.MOON_HABITAT)).eql([space]);
     expect(moonData.habitatRate).eq(1);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(player.heat).eq(1); // Ensures placement bonus.
   });
 
@@ -98,7 +98,7 @@ describe('LunarMineUrbanization', () => {
 
     player.production.override({megacredits: 0});
     moonData.habitatRate = 0;
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     player.titanium = 1;
 
     const action = cast(card.play(player), SelectSpace);
@@ -113,7 +113,7 @@ describe('LunarMineUrbanization', () => {
     expect(MoonExpansion.spaces(player.game, TileType.MOON_MINE)).eql([priorLMUSpace, space]);
     expect(MoonExpansion.spaces(player.game, TileType.MOON_HABITAT)).eql([priorLMUSpace, space]);
     expect(moonData.habitatRate).eq(1);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
   });
 
   it('computeVictoryPoints', () => {

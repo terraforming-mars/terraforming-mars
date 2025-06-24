@@ -41,14 +41,14 @@ describe('LunaTrainStation', () => {
   it('play', () => {
     player.steel = 3;
     expect(player.production.steel).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.miningRate).eq(0);
 
     card.play(player);
 
     expect(player.steel).eq(1);
     expect(player.production.megacredits).eq(4);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(moonData.logisticRate).eq(1);
 
     const space = moonData.moon.spaces[2];

@@ -31,10 +31,10 @@ describe('OzoneGenerators', () => {
   });
 
   it('action', () => {
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     player.energy = 3;
     card.action(player);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(player.energy).eq(0);
   });
 });

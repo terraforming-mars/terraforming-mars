@@ -23,13 +23,13 @@ describe('CultivationOfVenus', () => {
 
   it('act', () => {
     player.plants = 5;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     card.action(player);
 
     expect(player.plants).eq(2);
     expect(game.getVenusScaleLevel()).to.eq(2);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 
   it('victoryPoints', () => {

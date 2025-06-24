@@ -28,14 +28,14 @@ describe('UndergroundDetonators', () => {
     player.steel = 0;
     player.titanium = 0;
     moonData.miningRate = 0;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     card.play(player);
 
     expect(player.titanium).eq(1);
     expect(player.steel).eq(1);
     expect(moonData.miningRate).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 });
 

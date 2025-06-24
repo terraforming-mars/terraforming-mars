@@ -19,12 +19,12 @@ describe('CrewTraining', () => {
   });
 
   it('Should play', () => {
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(card.tags).deep.eq([Tag.CLONE, Tag.CLONE]);
 
     card.play(player);
 
-    expect(player.getTerraformRating()).eq(16);
+    expect(player.terraformRating).eq(16);
 
     expect(game.deferredActions).has.length(1);
     const action = cast(game.deferredActions.pop(), DeclareCloneTag);

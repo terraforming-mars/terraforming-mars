@@ -32,13 +32,13 @@ describe('RoverDriversUnion', () => {
 
   it('play', () => {
     moonData.logisticRate = 2;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     player.production.override({megacredits: 0});
 
     card.play(player);
 
     expect(moonData.logisticRate).eq(3);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(player.production.megacredits).eq(3);
 
     player.production.override({megacredits: 0});
@@ -46,7 +46,7 @@ describe('RoverDriversUnion', () => {
     card.play(player);
 
     expect(moonData.logisticRate).eq(4);
-    expect(player.getTerraformRating()).eq(16);
+    expect(player.terraformRating).eq(16);
     expect(player.production.megacredits).eq(4);
   });
 

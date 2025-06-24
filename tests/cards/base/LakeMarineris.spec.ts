@@ -30,7 +30,7 @@ describe('LakeMarineris', () => {
     firstOcean.cb(firstOcean.spaces[0]);
     const secondOcean = cast(game.deferredActions.pop()!.execute(), SelectSpace);
     secondOcean.cb(secondOcean.spaces[1]);
-    expect(player.getTerraformRating()).to.eq(22);
+    expect(player.terraformRating).to.eq(22);
 
     expect(card.getVictoryPoints(player)).to.eq(2);
   });

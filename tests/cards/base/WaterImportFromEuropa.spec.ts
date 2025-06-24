@@ -38,7 +38,7 @@ describe('WaterImportFromEuropa', () => {
     expect(game.deferredActions).has.lengthOf(1);
     const selectOcean = cast(game.deferredActions.peek()!.execute(), SelectSpace);
     selectOcean.cb(selectOcean.spaces[0]);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
   });
 
   it('Can act if can pay even after oceans are maxed', () => {

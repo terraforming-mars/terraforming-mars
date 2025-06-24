@@ -21,7 +21,7 @@ describe('GiantSolarShade', () => {
   it('Should play', () => {
     cast(card.play(player), undefined);
     expect(game.getVenusScaleLevel()).to.eq(6);
-    expect(player.getTerraformRating()).to.eq(23);
+    expect(player.terraformRating).to.eq(23);
   });
 
   it('Should play with Reds and Dirigibles', () => {

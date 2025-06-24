@@ -30,12 +30,12 @@ describe('BreedingFarms', () => {
   }
 
   it('play', () => {
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(player.game.getTemperature()).eq(-30);
 
     card.play(player);
 
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(player.game.getTemperature()).eq(-28);
   });
 

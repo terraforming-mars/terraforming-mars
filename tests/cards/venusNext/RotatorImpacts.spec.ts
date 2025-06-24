@@ -67,7 +67,7 @@ describe('RotatorImpacts', () => {
     card.action(player);
     expect(card.resourceCount).to.eq(0);
     expect(game.getVenusScaleLevel()).eq(2);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
   });
 
   it('Should act', () => {

@@ -37,7 +37,7 @@ describe('Habitat14', () => {
   it('play', () => {
     player.titanium = 1;
     player.production.override({megacredits: 1, energy: 1});
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     card.play(player);
 

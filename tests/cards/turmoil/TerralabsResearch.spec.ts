@@ -21,7 +21,7 @@ describe('TerralabsResearch', () => {
     // 14 starting MC - 1 for each card select at the start (total: 2)
     expect(player.megaCredits).to.eq(12);
     // 14 Solo TR - 1
-    expect(player.getTerraformRating()).to.eq(13);
+    expect(player.terraformRating).to.eq(13);
 
     player.playedCards.push(card3);
     expect(card3.action(player)).is.undefined;

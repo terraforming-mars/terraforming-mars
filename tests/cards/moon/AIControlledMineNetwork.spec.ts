@@ -31,12 +31,12 @@ describe('AIControlledMineNetwork', () => {
 
   it('play', () => {
     expect(moonData.logisticRate).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     card.play(player);
 
     expect(moonData.logisticRate).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 });
 

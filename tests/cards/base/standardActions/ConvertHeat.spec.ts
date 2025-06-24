@@ -51,13 +51,13 @@ describe('ConvertHeat', () => {
 
     setTemperature(game, MAX_TEMPERATURE);
 
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(card.canAct(player)).eq(true);
 
     cast(card.action(player), undefined);
 
     expect(game.getTemperature()).eq(MAX_TEMPERATURE);
     expect(player.heat).eq(0);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
   });
 });

@@ -21,7 +21,7 @@ describe('TerraformingGanymede', () => {
     cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(2);
     player.playedCards.push(card);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
   });
 
   it('canPlay with Reds', () => {

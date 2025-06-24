@@ -35,7 +35,7 @@ describe('LunarIndustryComplex', () => {
   it('play', () => {
     player.production.override(Units.EMPTY);
     expect(moonData.miningRate).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     player.titanium = 2;
 
     card.play(player);
@@ -44,7 +44,7 @@ describe('LunarIndustryComplex', () => {
     placeMineTile.execute()!.cb(moonData.moon.getSpaceOrThrow('m02'));
 
     expect(moonData.miningRate).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
 
     expect(player.titanium).eq(0);
     expect(player.production.steel).eq(1);

@@ -31,7 +31,7 @@ describe('MiningComplex', () => {
   });
 
   it('play', () => {
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.miningRate).eq(0);
     expect(moonData.logisticRate).eq(0);
     player.megaCredits = 7;
@@ -44,7 +44,7 @@ describe('MiningComplex', () => {
     placeMineTile.execute()!.cb(moonData.moon.getSpaceOrThrow('m06'));
 
     expect(moonData.miningRate).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
 
     const placeRoadTile = cast(game.deferredActions.pop(), PlaceMoonRoadTile);
     const selectSpace = cast(placeRoadTile.execute(), SelectSpace);
@@ -53,6 +53,6 @@ describe('MiningComplex', () => {
     selectSpace.cb(spaces[0]);
 
     expect(moonData.logisticRate).eq(1);
-    expect(player.getTerraformRating()).eq(16);
+    expect(player.terraformRating).eq(16);
   });
 });

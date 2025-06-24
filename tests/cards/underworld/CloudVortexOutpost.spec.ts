@@ -13,13 +13,13 @@ describe('CloudVortexOutpost', () => {
     const card = new CloudVortexOutpost();
     const [game, player] = testGame(1, {venusNextExtension: true});
 
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(game.getVenusScaleLevel()).eq(0);
 
     cast(card.play(player), undefined);
 
     expect(game.getVenusScaleLevel()).eq(4);
-    expect(player.getTerraformRating()).eq(16);
+    expect(player.terraformRating).eq(16);
   });
 
   it('onCardPlayed', () => {

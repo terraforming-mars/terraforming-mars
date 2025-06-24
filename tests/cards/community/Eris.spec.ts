@@ -31,7 +31,7 @@ describe('Eris', () => {
   it('Can act', () => {
     const action = cast(card.action(player), OrOptions);
     const initialHazardsCount = game.board.getHazards().length;
-    const initialTR = player.getTerraformRating();
+    const initialTR = player.terraformRating;
 
     // Place a hazard tile
     action.options[0].cb();
@@ -46,7 +46,7 @@ describe('Eris', () => {
     removeHazard.cb(removeHazard.spaces[0]);
     expect(removeHazard.spaces[0].tile).is.undefined;
     expect(game.board.getHazards()).has.length(initialHazardsCount);
-    expect(player.getTerraformRating()).eq(initialTR + 1);
+    expect(player.terraformRating).eq(initialTR + 1);
   });
 
   it('Respects Reds', () => {

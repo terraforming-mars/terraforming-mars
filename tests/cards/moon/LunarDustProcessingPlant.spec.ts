@@ -33,13 +33,13 @@ describe('LunarDustProcessingPlant', () => {
 
   it('play', () => {
     player.titanium = 3;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.logisticRate).eq(0);
 
     card.play(player);
 
     expect(player.titanium).eq(2);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(moonData.logisticRate).eq(1);
   });
 

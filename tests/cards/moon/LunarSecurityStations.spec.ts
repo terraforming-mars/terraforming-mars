@@ -59,12 +59,12 @@ describe('LunarSecurityStations', () => {
   });
 
   it('play', () => {
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(moonData.logisticRate).eq(0);
 
     card.play(player);
 
     expect(moonData.logisticRate).eq(1);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
   });
 });

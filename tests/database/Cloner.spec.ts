@@ -24,10 +24,10 @@ describe('Cloner', () => {
     expect(newPlayerZero.color).eq('red');
     expect(newPlayerZero.beginner).is.true;
 
-    expect(player.getTerraformRating()).eq(23);
+    expect(player.terraformRating).eq(23);
     expect(player.handicap).eq(9);
 
-    expect(newPlayerZero.getTerraformRating()).eq(17);
+    expect(newPlayerZero.terraformRating).eq(17);
     expect(newPlayerZero.handicap).eq(3);
 
     expect(player.dealtCorporationCards, 'dealtCorporationCards').deep.eq(newPlayerZero.dealtCorporationCards);

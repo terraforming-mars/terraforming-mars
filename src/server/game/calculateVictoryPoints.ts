@@ -34,7 +34,7 @@ export function calculateVictoryPoints(player: IPlayer) {
   }
 
   // Victory points from TR
-  builder.setVictoryPoints('terraformRating', player.getTerraformRating());
+  builder.setVictoryPoints('terraformRating', player.terraformRating);
 
   // Victory points from awards
   giveAwards(player, builder);

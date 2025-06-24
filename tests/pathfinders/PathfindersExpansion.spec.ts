@@ -73,14 +73,14 @@ describe('PathfindersExpansion', () => {
     player1.tagsForTest = {venus: 4};
     player2.tagsForTest = {venus: 3};
 
-    expect(player1.getTerraformRating()).eq(20);
-    expect(player2.getTerraformRating()).eq(20);
+    expect(player1.terraformRating).eq(20);
+    expect(player2.terraformRating).eq(20);
 
     PathfindersExpansion.raiseTrack(Tag.VENUS, player2, 1);
 
     // Player 2 gets the terraformiing bump
-    expect(player1.getTerraformRating()).eq(20);
-    expect(player2.getTerraformRating()).eq(21);
+    expect(player1.terraformRating).eq(20);
+    expect(player2.terraformRating).eq(21);
 
     // Player 1 gets the 2VP.
     expect(player1.getVictoryPoints().total).eq(22);

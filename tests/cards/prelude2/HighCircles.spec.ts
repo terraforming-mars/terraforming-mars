@@ -28,7 +28,7 @@ describe('HighCircles', () => {
 
   it('TR check', () => {
     card.play(player);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
   });
 
   it('Delegates check', () => {

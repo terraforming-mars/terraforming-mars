@@ -12,10 +12,10 @@ describe('Midas', () => {
   });
 
   it('Starts with correct TR', () => {
-    const initialTR = player.getTerraformRating();
+    const initialTR = player.terraformRating;
 
     card.play(player);
     player.corporations.push(card);
-    expect(player.getTerraformRating()).to.eq(initialTR - 7);
+    expect(player.terraformRating).to.eq(initialTR - 7);
   });
 });

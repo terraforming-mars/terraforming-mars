@@ -358,7 +358,7 @@ export class Game implements IGame, Logger {
     // Give them their corporation cards, other cards, starting production,
     // handicaps.
     for (const player of game.getPlayersInGenerationOrder()) {
-      player.setTerraformRating(player.getTerraformRating() + player.handicap);
+      player.setTerraformRating(player.terraformRating + player.handicap);
       if (!gameOptions.corporateEra) {
         player.production.override({
           megacredits: 1,
@@ -570,7 +570,7 @@ export class Game implements IGame, Logger {
   public isSoloModeWin(): boolean {
     // Solo TR victory condition
     if (this.gameOptions.soloTR) {
-      return this.players[0].getTerraformRating() >= 63;
+      return this.players[0].terraformRating >= 63;
     }
 
     // Complete terraforing victory condition.

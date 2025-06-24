@@ -1282,7 +1282,10 @@ export class Player implements IPlayer {
       card.additionalProjectCosts.redsCost = canAfford.redsCost;
     }
     if (this.playedCards.has(CardName.PHARMACY_UNION) && card.tags.includes(Tag.MICROBE)) {
-      card.warnings.add('pharmacyUnion');
+      const pharmacyUnion = this.getPlayedCard(CardName.PHARMACY_UNION);
+      if (pharmacyUnion?.isDisabled === false) {
+        card.warnings.add('pharmacyUnion');
+      }
     }
     return true;
   }

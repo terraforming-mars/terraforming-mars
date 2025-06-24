@@ -392,7 +392,7 @@
   "${0} discarded ${1} corruption and gained ${2} M€": "${0} elhajított ${1} korrupciót és kapott ${2} M€-tet.",
   "${0} used the ${1} action to convert ${2} wares into ${2} M€": "${0} használta a(z) ${1} akciót és átkonvertált ${2} árut ${2} M€-re.",
   "${0} gained ${1} M€ from the ${2} corp effect": "${0} ${1} M€-tet kapott a(z) ${2} cég hatásból.",
-  "${0} gained 1 M€ production from ${1} for ${2}": "A(z) ${1} kártya hatása miatt ${0} növelte a M€-termelését 1 értékkel, mert ${2} ikont játszott ki.",
+  "${0} gained 1 M€ production from ${1} for the ${2} tag": "A(z) ${1} kártya hatása miatt ${0} növelte a M€-termelését 1 értékkel, mert ${2} ikont játszott ki.",
   "${0} gained 4 M€ for playing ${1}, which has no tags.": "${0} kapott 4 M€-tet, mert kijásztotta a(z) ${1} kártyát, ami ikon nélküli.",
   "${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.": "${0} kapott 1 M€-tet, mert kijásztotta a(z) ${1} kártyát, ami csak 1 ikonnal rendelkezik.",
   "${0} gained ${1} TR": "${0} szerzett ${1} TR-t.",

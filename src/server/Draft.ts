@@ -232,6 +232,9 @@ class InitialDraft extends Draft {
       }
       if (this.game.gameOptions.preludeExtension && this.game.gameOptions.preludeDraftVariant) {
         newPreludeDraft(this.game).startDraft();
+      } else if (this.game.gameOptions.ceoExtension && this.game.gameOptions.ceosDraftVariant) {
+        this.game.initialDraftIteration++;
+        newCEOsDraft(this.game).startDraft();
       } else {
         this.game.gotoInitialResearchPhase();
       }

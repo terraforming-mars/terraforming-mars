@@ -145,7 +145,7 @@ export default Vue.extend({
     cardMetadata(): CardMetadata {
       return this.cardInstance.metadata;
     },
-    cardRequirements(): Array<CardRequirementDescriptor> {
+    cardRequirements(): ReadonlyArray<CardRequirementDescriptor> {
       return this.cardInstance.requirements;
     },
     resourceAmount(): number {

@@ -46,8 +46,8 @@ export type GetVictoryPointsContext = 'default' | 'projectWorkshop';
 export type IdentificationTrigger = 'normal' | 'excavation' | 'tile';
 
 export interface ICard {
-  name: CardName;
-  tags: Array<Tag>;
+  readonly name: CardName;
+  readonly tags: ReadonlyArray<Tag>;
   play(player: IPlayer): PlayerInput | undefined;
   /**
    * Describes the M€ discount `player` could apply to playing `card`.
@@ -157,7 +157,7 @@ export interface ICard {
 
   readonly cost?: number; /** Used with IProjectCard and PreludeCard. */
   readonly type: CardType;
-  requirements: Array<CardRequirementDescriptor>;
+  readonly requirements: ReadonlyArray<CardRequirementDescriptor>;
   readonly metadata: CardMetadata;
 
   /**
@@ -167,7 +167,7 @@ export interface ICard {
    *
    * See: IProjectCard.additionalProjectCosts
    */
-  warnings: Set<Warning>;
+  readonly warnings: Set<Warning>;
 
   readonly behavior?: Behavior,
 

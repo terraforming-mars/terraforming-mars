@@ -67,15 +67,15 @@ export class DemetronLabs extends CorporationCard implements ICorporationCard, I
   // Behavior is similar in Mining Market Insider.
   // This doesn't need to be serialized. It ensures this is only evaluated once per action.
   // When the server restarts, the player has to take an action anyway.
-  private lastActionId = -1;
+  private lastAction = -1;
   public onIdentificationByAnyPlayer(cardOwner: IPlayer, identifyingPlayer: IPlayer | undefined, _space: Space, trigger: IdentificationTrigger) {
     if (identifyingPlayer !== cardOwner || trigger === 'excavation') {
       return;
     }
-    const actionId = cardOwner.game.getActionCount();
-    if (this.lastActionId !== actionId) {
+    const actionCount = cardOwner.game.getActionCount();
+    if (this.lastAction !== actionCount) {
       cardOwner.game.defer(new AddResourcesToCard(cardOwner, CardResource.DATA));
-      this.lastActionId = actionId;
+      this.lastAction = actionCount;
     }
   }
 }

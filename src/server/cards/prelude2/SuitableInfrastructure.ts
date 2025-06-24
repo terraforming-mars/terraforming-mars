@@ -32,15 +32,15 @@ export class SuitableInfrastructure extends PreludeCard {
   // Behavior is similar in Demetron labs
   // This doesn't need to be serialized. It ensures this is only evaluated once per action.
   // When the server restarts, the player has to take an action anyway.
-  private lastActionId = -1;
+  private lastAction = -1;
   public onProductionGain(player: IPlayer, _resource: Resource, amount: number) {
     if (player.game.activePlayer !== player.id || amount <= 0) {
       return;
     }
-    const actionId = player.game.getActionCount();
-    if (this.lastActionId !== actionId) {
+    const actionCount = player.game.getActionCount();
+    if (this.lastAction !== actionCount) {
       player.stock.add(Resource.MEGACREDITS, 2);
-      this.lastActionId = actionId;
+      this.lastAction = actionCount;
     }
   }
 }

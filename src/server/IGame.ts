@@ -243,6 +243,8 @@ export interface IGame extends Logger {
   draftRound: number;
   getPlayerAfter(player: IPlayer): IPlayer;
   getPlayerBefore(player: IPlayer): IPlayer;
+
+  underworldDraftEnabled: boolean;
 }
 
 export function isIGame(object: any): object is IGame {

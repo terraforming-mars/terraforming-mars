@@ -1215,10 +1215,6 @@ export class Player implements IPlayer {
     }
   }
 
-  private getPlayableCeoCards(): Array<IProjectCard> {
-    return this.ceoCardsInHand.filter((card) => card.canPlay?.(this) === true);
-  }
-
   public getPlayableCards(): Array<IProjectCard> {
     const candidateCards: Array<IProjectCard> = [...this.cardsInHand];
     // Self Replicating robots check
@@ -1440,7 +1436,7 @@ export class Player implements IPlayer {
    *
    * This method indicates the avalilable actions by setting the `waitingFor` attribute of this player.
    *
-   * ../..param {boolean} saveBeforeTakingAction when true, the game state is saved. Default is `true`. This
+   * saveBeforeTakingAction when true, the game state is saved. Default is `true`. This
    * should only be false in testing and when this method is called during game deserialization. In other
    * words, don't set this value unless you know what you're doing.
    */
@@ -1474,11 +1470,11 @@ export class Player implements IPlayer {
         const selectPrelude = PreludesExpansion.selectPreludeToPlay(this, this.preludeCardsInHand);
 
         this.setWaitingFor(selectPrelude, this.runWhenEmpty(() => {
+          this.incrementActionsTaken();
           if (this.preludeCardsInHand.length === 0 && !this.headStartIsInEffect()) {
             game.playerIsFinishedTakingActions();
             return;
           }
-
           this.takeAction();
         }));
 
@@ -1489,11 +1485,11 @@ export class Player implements IPlayer {
         // The CEO phase occurs between the Prelude phase and before the Action phase.
         // All CEO cards are played before players take their first normal actions.
         game.phase = Phase.CEOS;
-        const playableCeoCards = this.getPlayableCeoCards();
-        for (let i = playableCeoCards.length - 1; i >= 0; i--) {
-          // start from the end of the list and work backwards, we're removing items as we go.
-          const card = this.ceoCardsInHand[i];
-          this.playCard(card);
+
+        // start from the end of the list and work backwards, not sure why.
+        const playableCeoCards = this.ceoCardsInHand.filter((card) => card.canPlay?.(this) === true).reverse();
+        for (const ceo of playableCeoCards) {
+          this.playCard(ceo);
         }
         // Null out ceoCardsInHand, anything left was unplayable.
         this.ceoCardsInHand = [];
@@ -1721,19 +1717,27 @@ export class Player implements IPlayer {
     this.game.inputsThisRound++;
   }
 
-  // This was only built for the Philares/Final Greenery case. Might not work elsewhere.
+  /**
+   * A version of setWaitingFor that does not discard a setWaitingFor call whe
+   * this player is already waiting for something. Instead, it modifies the
+   * current waitingFor by wrapping it with behavior that calls the next setWaitingFor
+   * when it finishes.
+   *
+   * This was only built for the Philares/Final Greenery case. Might not work elsewhere.
+   */
   public setWaitingForSafely(input: PlayerInput, cb: () => void = () => {}): void {
     if (this.waitingFor === undefined) {
       this.setWaitingFor(input, cb);
     } else {
-      const oldcb = this.waitingForCb;
-      this.waitingForCb =
-        oldcb === undefined ?
-          cb :
-          () => {
-            oldcb();
-            this.setWaitingForSafely(input, cb);
-          };
+      const savedcb = this.waitingForCb;
+      if (savedcb === undefined) {
+        this.waitingForCb = cb;
+      } else {
+        this.waitingForCb = () => {
+          savedcb();
+          this.setWaitingForSafely(input, cb);
+        };
+      }
     }
   }
 

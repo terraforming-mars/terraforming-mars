@@ -1099,6 +1099,7 @@ export class Game implements IGame, Logger {
 
   private startActionsForPlayer(player: IPlayer) {
     this.activePlayer = player.id;
+    player.actionsTakenThisGame++;
     player.actionsTakenThisRound = 0;
 
     player.takeAction();

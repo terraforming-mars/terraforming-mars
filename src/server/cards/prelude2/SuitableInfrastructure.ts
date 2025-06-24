@@ -40,6 +40,8 @@ export class SuitableInfrastructure extends PreludeCard {
     const actionCount = player.game.getActionCount();
     if (this.lastAction !== actionCount) {
       player.stock.add(Resource.MEGACREDITS, 2);
+      player.game.log('${0} gained ${1} ${2} from ${3}',
+        (b) => b.player(player).number(2).string('M€').card(this));
       this.lastAction = actionCount;
     }
   }

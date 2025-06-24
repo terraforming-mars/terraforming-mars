@@ -25,7 +25,7 @@ export type SelectProjectCardToPlayDataModel = SelectPaymentDataModel & {
   cardName: CardName;
   card: CardModel;
   reserveUnits: Units;
-  tags: Array<Tag>;
+  tags: ReadonlyArray<Tag>;
   available: Omit<Units, 'megacredits' | 'energy'>;
 }
 

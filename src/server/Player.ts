@@ -1543,8 +1543,7 @@ export class Player implements IPlayer {
 
       this.setWaitingFor(orOptions, () => {
         if (this.pendingInitialActions.length === 0) {
-          this.actionsTakenThisRound++;
-          this.actionsTakenThisGame++;
+          this.incrementActionsTaken();
         }
         this.timer.rebate(constants.BONUS_SECONDS_PER_ACTION * 1000);
         this.takeAction();

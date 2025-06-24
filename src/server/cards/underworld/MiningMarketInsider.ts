@@ -6,7 +6,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {ActionCard} from '../ActionCard';
 import {all, digit} from '../Options';
 import {IPlayer} from '../../IPlayer';
-import {sum} from '../../../common/utils/utils';
 import {CardResource} from '../../../common/CardResource';
 
 export class MiningMarketInsider extends ActionCard implements IProjectCard {
@@ -40,7 +39,7 @@ export class MiningMarketInsider extends ActionCard implements IProjectCard {
   // When the server restarts, the player has to take an action anyway.
   private lastActionId = -1;
   public onIdentificationByAnyPlayer(cardOwner: IPlayer) {
-    const actionId = sum(cardOwner.game.getPlayers().map((p) => p.actionsTakenThisGame));
+    const actionId = cardOwner.game.getActionCount();
     if (this.lastActionId !== actionId) {
       cardOwner.addResourceTo(this);
       this.lastActionId = actionId;

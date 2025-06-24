@@ -4,7 +4,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
-import {sum} from '../../../common/utils/utils';
 
 export class SuitableInfrastructure extends PreludeCard {
   constructor() {
@@ -38,7 +37,7 @@ export class SuitableInfrastructure extends PreludeCard {
     if (player.game.activePlayer !== player.id || amount <= 0) {
       return;
     }
-    const actionId = sum(player.game.getPlayers().map((p) => p.actionsTakenThisGame));
+    const actionId = player.game.getActionCount();
     if (this.lastActionId !== actionId) {
       player.stock.add(Resource.MEGACREDITS, 2);
       this.lastActionId = actionId;

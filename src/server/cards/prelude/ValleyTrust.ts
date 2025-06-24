@@ -1,7 +1,6 @@
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CorporationCard} from '../corporation/CorporationCard';
-import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {PreludesExpansion} from '../../preludes/PreludesExpansion';
@@ -30,11 +29,6 @@ export class ValleyTrust extends CorporationCard implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public override getCardDiscount(player: IPlayer, card: IProjectCard) {
-    // TODO(chosta) -> improve once the discounts property is given a go
-    return player.tags.cardTagCount(card, Tag.SCIENCE) * 2;
   }
 
   // TODO(kberg): find a way to feed warnings for initialAction.

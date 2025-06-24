@@ -407,7 +407,7 @@ export abstract class Card implements ICard {
     }
   }
 
-  public getCardDiscount(_player?: IPlayer, card?: IProjectCard): number {
+  public getCardDiscount(player: IPlayer, card: IProjectCard): number {
     if (this.cardDiscount === undefined) {
       return 0;
     }
@@ -417,10 +417,10 @@ export abstract class Card implements ICard {
       if (discount.tag === undefined) {
         sum += discount.amount;
       } else {
-        const tags = card?.tags.filter((tag) => tag === discount.tag).length ?? 0;
+        const tagCount = player.tags.cardTagCount(card, discount.tag);
         if (discount.per !== 'card') {
-          sum += discount.amount * tags;
-        } else if (tags > 0) {
+          sum += discount.amount * tagCount;
+        } else if (tagCount > 0) {
           sum += discount.amount;
         }
       }

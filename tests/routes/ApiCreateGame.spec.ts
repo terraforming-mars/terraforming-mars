@@ -90,6 +90,7 @@ describe('ApiCreateGame', () => {
         draftVariant: false,
         initialDraft: false,
         preludeDraftVariant: false,
+        ceosDraftVariant: false,
         startingCorporations: 0,
         shuffleMapOption: false,
         randomMA: RandomMAOptionType.NONE,

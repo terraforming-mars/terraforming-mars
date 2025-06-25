@@ -625,6 +625,7 @@ describe('drafting', () => {
         CardName.SATURN_SYSTEMS,
       ],
       preludeCards: [],
+      ceoCards: [],
     });
 
     expect(initialCardSelection(otherPlayer)).deep.eq({
@@ -645,6 +646,7 @@ describe('drafting', () => {
         CardName.THORGATE,
       ],
       preludeCards: [],
+      ceoCards: [],
     });
   });
 
@@ -687,6 +689,7 @@ describe('drafting', () => {
         CardName.ECCENTRIC_SPONSOR,
         CardName.RESEARCH_NETWORK,
       ],
+      ceoCards: [],
     });
 
     expect(initialCardSelection(otherPlayer)).deep.eq({
@@ -712,6 +715,7 @@ describe('drafting', () => {
         CardName.METAL_RICH_ASTEROID,
         CardName.MOHOLE,
       ],
+      ceoCards: [],
     });
   });
 
@@ -819,6 +823,7 @@ describe('drafting', () => {
         CardName.RESEARCH_NETWORK,
         CardName.METAL_RICH_ASTEROID,
       ],
+      ceoCards: [],
     });
 
     expect(initialCardSelection(otherPlayer)).deep.eq({
@@ -843,6 +848,113 @@ describe('drafting', () => {
         CardName.ECOLOGY_EXPERTS,
         CardName.MOHOLE,
         CardName.ECCENTRIC_SPONSOR,
+      ],
+      ceoCards: [],
+    });
+  });
+
+  it('2 player - initial draft + ceo draft', () => {
+    const [/* game */, player, otherPlayer] = testGame(2, {
+      skipInitialShuffling: true,
+      draftVariant: true,
+      initialDraftVariant: true,
+      ceoExtension: true,
+      ceosDraftVariant: true,
+    });
+
+    runInitialProjectDraft(player, otherPlayer);
+
+    // Start of the CEO draft
+
+    expect(player.draftedCards.map(toName)).deep.eq([]);
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([]);
+
+    expect(draftSelection(player)).deep.eq([
+      CardName.VANALLEN,
+      CardName.ULRICH,
+      CardName.TATE]);
+
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.STEFAN,
+      CardName.RYU,
+      CardName.MUSK]);
+
+    selectCard(player, CardName.VANALLEN);
+    selectCard(otherPlayer, CardName.STEFAN);
+
+    expect(player.draftedCards.map(toName)).deep.eq([
+      CardName.VANALLEN,
+    ]);
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([
+      CardName.STEFAN,
+    ]);
+
+    // Second CEO card
+
+    expect(draftSelection(player)).deep.eq([
+      CardName.RYU,
+      CardName.MUSK]);
+
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.ULRICH,
+      CardName.TATE]);
+
+    selectCard(player, CardName.RYU);
+    selectCard(otherPlayer, CardName.TATE);
+
+    expect(player.draftedCards.map(toName)).deep.eq([]);
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([]);
+
+    // End of draft
+
+    expect(initialCardSelection(player)).deep.eq({
+      projectCards: [
+        CardName.ADAPTATION_TECHNOLOGY,
+        CardName.ARCTIC_ALGAE,
+        CardName.AEROBRAKED_AMMONIA_ASTEROID,
+        CardName.ARCHAEBACTERIA,
+        CardName.ADVANCED_ECOSYSTEMS,
+        CardName.ASTEROID_MINING,
+        CardName.BLACK_POLAR_DUST,
+        CardName.ASTEROID,
+        CardName.BIRDS,
+        CardName.BIG_ASTEROID,
+      ],
+      corporationCards: [
+        CardName.TERACTOR,
+        CardName.SATURN_SYSTEMS,
+      ],
+      preludeCards: [],
+      ceoCards: [
+        CardName.VANALLEN,
+        CardName.RYU,
+        CardName.ULRICH,
+      ],
+    });
+
+    expect(initialCardSelection(otherPlayer)).deep.eq({
+      projectCards: [
+        CardName.ALGAE,
+        CardName.ANTS,
+        CardName.AQUIFER_PUMPING,
+        CardName.ADAPTED_LICHEN,
+        CardName.ARTIFICIAL_LAKE,
+        CardName.BUSHES,
+        CardName.ARTIFICIAL_PHOTOSYNTHESIS,
+        CardName.BREATHING_FILTERS,
+        CardName.BEAM_FROM_A_THORIUM_ASTEROID,
+        CardName.BIOMASS_COMBUSTORS,
+      ],
+      corporationCards: [
+        CardName.UNITED_NATIONS_MARS_INITIATIVE,
+        CardName.THORGATE,
+      ],
+      preludeCards: [
+      ],
+      ceoCards: [
+        CardName.STEFAN,
+        CardName.TATE,
+        CardName.MUSK,
       ],
     });
   });
@@ -930,6 +1042,7 @@ function initialCardSelection(player: IPlayer) {
     corporationCards: map(selectInitialCards.inputs.corp),
     preludeCards: map(selectInitialCards.inputs.prelude),
     projectCards: map(selectInitialCards.inputs.project),
+    ceoCards: map(selectInitialCards.inputs.ceo),
   };
 }
 

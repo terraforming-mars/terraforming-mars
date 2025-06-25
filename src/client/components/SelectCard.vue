@@ -14,6 +14,7 @@
               </template>
             </Card>
         </label>
+        <div v-if="hasCardWarning()" class="card-warning">{{ $t(warning) }}</div>
         <warnings-component :warnings="warnings"></warnings-component>
         <div v-if="showsave === true" class="nofloat">
             <AppButton :disabled="isOptionalToManyCards && cardsSelected() === 0" type="submit" @click="saveData" :title="buttonLabel()" />
@@ -126,6 +127,19 @@ export default Vue.extend({
     getData(): Array<CardName> {
       return Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name];
     },
+    hasCardWarning() {
+      // This is pretty clunky, to be honest.
+      if (Array.isArray(this.cards)) {
+        if (this.cards.length === 1) {
+          this.warnings = this.cards[0].warnings;
+        }
+        return false;
+      } else if (typeof this.cards === 'object') {
+        this.warnings = this.cards.warnings;
+      }
+      return false;
+    },
+
     canSave() {
       const len = this.getData().length;
       if (len > this.playerinput.min) {

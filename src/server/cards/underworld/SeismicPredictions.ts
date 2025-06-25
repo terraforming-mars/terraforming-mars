@@ -40,7 +40,7 @@ export class SeismicPredictions extends GlobalEvent implements IGlobalEvent {
       const penalty = Math.min(5, filtered.length) - turmoil.getPlayerInfluence(player);
       const cost = penalty * 2;
       if (cost > 0) {
-        player.stock.deduct(Resource.MEGACREDITS, cost, {log: true, from: this.name});
+        player.stock.deduct(Resource.MEGACREDITS, cost, {log: true, from: {globalEvent: this}});
       }
     });
   }

@@ -1,10 +1,10 @@
-// import {CardName} from '../../common/cards/CardName';
-// import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {LawSuit} from '../cards/promo/LawSuit';
-import {IPlayer, ResourceSource, isIPlayer} from '../IPlayer';
+import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
 import {CrashSiteCleanup} from '../cards/promo/CrashSiteCleanup';
+import {LogHelper} from '../LogHelper';
+import {From, isFromPlayer} from '../logs/From';
 
 export class Stock {
   private units: Units;
@@ -83,7 +83,7 @@ export class Stock {
     amount: number,
     options? : {
       log?: boolean,
-      from? : ResourceSource,
+      from? : From,
       stealing?: boolean
     }) {
     this.add(resource, -amount, options);
@@ -94,7 +94,7 @@ export class Stock {
     amount : number,
     options? : {
       log?: boolean,
-      from? : ResourceSource,
+      from? : From,
       stealing?: boolean
     }) {
     if (amount === 0) {
@@ -127,24 +127,24 @@ export class Stock {
     this.units[resource] += delta;
 
     if (options?.log === true) {
-      this.player.logUnitDelta(resource, delta, 'amount', options.from, options.stealing);
+      LogHelper.logUnitDelta(this.player, resource, delta, 'amount', options.from, options.stealing);
     }
 
     const from = options?.from;
-    if (isIPlayer(from)) {
-      LawSuit.resourceHook(this.player, resource, delta, from);
-      CrashSiteCleanup.resourceHook(this.player, resource, delta, from);
+    if (isFromPlayer(from)) {
+      LawSuit.resourceHook(this.player, resource, delta, from.player);
+      CrashSiteCleanup.resourceHook(this.player, resource, delta, from.player);
     }
 
     // Mons Insurance hook
-    if (options?.from !== undefined && delta < 0 && (isIPlayer(from) && from.id !== this.player.id)) {
+    if (options?.from !== undefined && delta < 0 && (isFromPlayer(from) && from.player.id !== this.player.id)) {
       this.player.resolveInsurance();
     }
   }
 
   public addUnits(units: Units, options? : {
     log?: boolean,
-    from? : ResourceSource,
+    from? : From,
   }) {
     if (units.megacredits !== 0) {
       this.add(Resource.MEGACREDITS, units.megacredits, options);
@@ -183,7 +183,7 @@ export class Stock {
   public steal(resource: Resource, qty: number, thief: IPlayer, options?: {log?: boolean}) {
     const qtyToSteal = Math.min(this[resource], qty);
     if (qtyToSteal > 0) {
-      this.deduct(resource, qtyToSteal, {log: options?.log ?? true, from: thief, stealing: true});
+      this.deduct(resource, qtyToSteal, {log: options?.log ?? true, from: {player: thief}, stealing: true});
       thief.stock.add(resource, qtyToSteal);
     }
   }

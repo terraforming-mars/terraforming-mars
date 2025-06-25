@@ -1,8 +1,9 @@
-import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {LawSuit} from '../cards/promo/LawSuit';
 import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
+import {LogHelper} from '../LogHelper';
+import {From, isFromPlayer} from '../logs/From';
 
 export class Production {
   private units: Units;
@@ -46,24 +47,24 @@ export class Production {
   public add(
     resource: Resource,
     amount : number,
-    options? : { log: boolean, from? : IPlayer | GlobalEventName, stealing?: boolean},
+    options? : { log: boolean, from? : From, stealing?: boolean},
   ) {
     const adj = resource === Resource.MEGACREDITS ? -5 : 0;
     const delta = (amount >= 0) ? amount : Math.max(amount, -(this.units[resource] - adj));
     this.units[resource] += delta;
 
     if (options?.log === true) {
-      this.player.logUnitDelta(resource, amount, 'production', options.from, options.stealing);
+      LogHelper.logUnitDelta(this.player, resource, amount, 'production', options.from, options.stealing);
     }
 
     const from = options?.from;
-    if (typeof(from) === 'object') {
-      LawSuit.resourceHook(this.player, resource, delta, from);
-    }
+    if (isFromPlayer(from)) {
+      LawSuit.resourceHook(this.player, resource, delta, from.player);
 
-    // Mons Insurance hook
-    if (options?.from !== undefined && delta < 0 && (typeof(from) === 'object' && from.id !== this.player.id)) {
-      this.player.resolveInsurance();
+      // Mons Insurance hook
+      if (delta < 0 && from.player.id !== this.player.id) {
+        this.player.resolveInsurance();
+      }
     }
 
     for (const card of this.player.tableau) {
@@ -80,7 +81,7 @@ export class Production {
       this.units.heat + units.heat >= 0;
   }
 
-  public adjust(units: Units, options?: {log: boolean, from?: IPlayer}) {
+  public adjust(units: Units, options?: {log: boolean, from?: From}) {
     if (units.megacredits !== undefined) {
       this.add(Resource.MEGACREDITS, units.megacredits, options);
     }

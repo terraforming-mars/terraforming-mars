@@ -32,7 +32,7 @@ export class MudSlides extends GlobalEvent implements IGlobalEvent {
         ).length;
       const amount = Math.min(5, tiles) - turmoil.getPlayerInfluence(player);
       if (amount > 0) {
-        player.stock.deduct(Resource.MEGACREDITS, 4 * amount, {log: true, from: this.name});
+        player.stock.deduct(Resource.MEGACREDITS, 4 * amount, {log: true, from: {globalEvent: this}});
       }
     });
   }

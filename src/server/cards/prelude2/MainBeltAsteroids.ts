@@ -38,7 +38,7 @@ export class MainBeltAsteroids extends ActivePreludeCard implements IActionCard 
 
   public onResourceAdded(player: IPlayer, card: ICard, count: number) {
     if (card === this) {
-      player.stock.add(Resource.TITANIUM, count, {log: true, from: this});
+      player.stock.add(Resource.TITANIUM, count, {log: true, from: {card: this}});
     }
   }
 

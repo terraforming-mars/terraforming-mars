@@ -19,7 +19,6 @@ import {AllOptions, DrawOptions} from './deferredActions/DrawCards';
 import {Units} from '../common/Units';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {GlobalParameter} from '../common/GlobalParameter';
-import {GlobalEventName} from '../common/turmoil/globalEvents/GlobalEventName';
 import {InputResponse} from '../common/inputs/InputResponse';
 import {Tags} from './player/Tags';
 import {Colonies} from './player/Colonies';
@@ -35,8 +34,6 @@ import {IParty} from './turmoil/parties/IParty';
 import {Message} from '../common/logs/Message';
 import {DiscordId} from './server/auth/discord';
 import {PlayedCards} from './cards/PlayedCards';
-
-export type ResourceSource = IPlayer | GlobalEventName | ICard;
 
 /**
  * Represents additional costs a player must pay to execute an action.
@@ -197,7 +194,6 @@ export interface IPlayer {
   increaseTerraformRating(steps?: number, opts?: {log?: boolean}): void;
   decreaseTerraformRating(steps?: number, opts?: {log?: boolean}): void;
   setTerraformRating(value: number): void;
-  logUnitDelta(resource: Resource, amount: number, unitType: 'production' | 'amount', from: ResourceSource | undefined, stealing?: boolean): void;
 
   // The action cards used this generation.
   actionsThisGeneration: Set<CardName>;

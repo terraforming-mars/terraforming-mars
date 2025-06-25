@@ -40,8 +40,8 @@ export class Recession extends PreludeCard {
       const m = message('Lose 5 M€ and 1 M€ production');
       target.maybeBlockAttack(player, m, (proceed) => {
         if (proceed) {
-          target.production.add(Resource.MEGACREDITS, -1, {log: true, from: player});
-          target.stock.deduct(Resource.MEGACREDITS, Math.min(target.megaCredits, 5), {log: true, from: player});
+          target.production.add(Resource.MEGACREDITS, -1, {log: true, from: {player}});
+          target.stock.deduct(Resource.MEGACREDITS, Math.min(target.megaCredits, 5), {log: true, from: {player}});
         }
         return undefined;
       });

@@ -320,9 +320,9 @@ describe('Player', () => {
       player1.production.add(Resource.MEGACREDITS, -5);
       player2.megaCredits = 3;
       game.monsInsuranceOwner = player2;
-      player1.stock.add(Resource.MEGACREDITS, -3, {from: player2, log: false});
+      player1.stock.add(Resource.MEGACREDITS, -3, {from: {player: player2}, log: false});
       expect(player2.megaCredits).eq(3);
-      player1.production.add(Resource.MEGACREDITS, -3, {from: player2, log: false});
+      player1.production.add(Resource.MEGACREDITS, -3, {from: {player: player2}, log: false});
       expect(player2.megaCredits).eq(3);
     });
 

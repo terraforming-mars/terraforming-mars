@@ -58,7 +58,7 @@ export class Splice extends CorporationCard implements ICorporationCard {
     const gain = microbeTags * 2;
 
     // Splice owner gets 2M€ per microbe tag
-    game.defer(new GainResources(player, Resource.MEGACREDITS, {count: gain, log: true, from: this}));
+    game.defer(new GainResources(player, Resource.MEGACREDITS, {count: gain, log: true, from: {card: this}}));
 
     const gainResource = new SelectOption('Add a microbe resource to this card', 'Add microbe').andThen(() => {
       cardPlayer.addResourceTo(card);
@@ -69,7 +69,7 @@ export class Splice extends CorporationCard implements ICorporationCard {
       message('Gain ${0} M€', (b) => b.number(gain)),
       'Gain M€')
       .andThen(() => {
-        game.defer(new GainResources(cardPlayer, Resource.MEGACREDITS, {count: gain, log: true, from: this}));
+        game.defer(new GainResources(cardPlayer, Resource.MEGACREDITS, {count: gain, log: true, from: {card: this}}));
         return undefined;
       });
 

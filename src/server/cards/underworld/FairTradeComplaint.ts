@@ -35,7 +35,7 @@ export class FairTradeComplaint extends GlobalEvent implements IGlobalEvent {
       const savings = 2 * turmoil.getPlayerInfluence(player);
       const cost = Math.max(0, penalty - savings);
       if (cost > 0) {
-        player.stock.deduct(Resource.MEGACREDITS, cost, {log: true, from: this.name});
+        player.stock.deduct(Resource.MEGACREDITS, cost, {log: true, from: {globalEvent: this}});
       }
     });
   }

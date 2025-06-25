@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import * as utils from '../../../src/common/utils/utils';
+import {Tag} from '../../../src/common/cards/Tag';
 
 describe('utils', () => {
   it('range', () => {
@@ -81,5 +82,49 @@ describe('utils', () => {
     expect(utils.partialize({})).deep.eq({});
     expect(utils.partialize({'a': 0})).deep.eq({});
     expect(utils.partialize({'a': 0, 'b': 1})).deep.eq({'b': 1});
+  });
+
+  it('getEnumKeys', () => {
+    expect(utils.getEnumKeys(Tag)).deep.eq([
+      'BUILDING',
+      'SPACE',
+      'SCIENCE',
+      'POWER',
+      'EARTH',
+      'JOVIAN',
+      'VENUS',
+      'PLANT',
+      'MICROBE',
+      'ANIMAL',
+      'CITY',
+      'MOON',
+      'MARS',
+      'CRIME',
+      'WILD',
+      'EVENT',
+      'CLONE',
+    ]);
+  });
+
+  it('getEnumStringValues', () => {
+    expect(utils.getEnumStringValues(Tag)).deep.eq([
+      'building',
+      'space',
+      'science',
+      'power',
+      'earth',
+      'jovian',
+      'venus',
+      'plant',
+      'microbe',
+      'animal',
+      'city',
+      'moon',
+      'mars',
+      'crime',
+      'wild',
+      'event',
+      'clone',
+    ]);
   });
 });

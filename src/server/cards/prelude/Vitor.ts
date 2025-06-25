@@ -67,6 +67,6 @@ export class Vitor extends CorporationCard implements ICorporationCard {
       if (victoryPoints.points <= 0) return;
     }
 
-    player.stock.add(Resource.MEGACREDITS, 3, {log: true, from: this});
+    player.stock.add(Resource.MEGACREDITS, 3, {log: true, from: {card: this}});
   }
 }

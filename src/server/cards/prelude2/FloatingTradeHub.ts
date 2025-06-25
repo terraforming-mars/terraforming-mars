@@ -47,7 +47,7 @@ export class FloatingTradeHub extends PreludeCard implements IActionCard {
       .andThen(() => {
         // TODO(kberg): Add a better log message.
         player.removeResourceFrom(this, selectAmount.selected, {log: true});
-        player.stock.add(Units.ResourceMap[selectResource.selected], selectAmount.selected, {log: true, from: this});
+        player.stock.add(Units.ResourceMap[selectResource.selected], selectAmount.selected, {log: true, from: {card: this}});
         return undefined;
       });
     if (this.resourceCount === 0) {

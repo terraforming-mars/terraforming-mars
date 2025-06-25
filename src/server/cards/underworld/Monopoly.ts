@@ -60,7 +60,7 @@ export class Monopoly extends Card implements IProjectCard {
             const msg = message('Lose ${0} ${1} production', (b) => b.number(1).string(resource));
             target.maybeBlockAttack(player, msg, (proceed: boolean) => {
               if (proceed) {
-                target.production.add(resource, -1, {log: true, from: player, stealing: true});
+                target.production.add(resource, -1, {log: true, from: {player: player}, stealing: true});
                 player.production.add(resource, 1, {log: false});
                 target.resolveInsurance();
               }

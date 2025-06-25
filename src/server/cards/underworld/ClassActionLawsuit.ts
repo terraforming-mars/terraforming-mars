@@ -72,7 +72,7 @@ export class ClassActionLawsuit extends Card implements IProjectCard {
     const diff = analysis.maxCorruption - secondMost;
     const target = analysis.playersWithMaxCorruption[0];
     UnderworldExpansion.loseCorruption(target, diff, {log: true});
-    target.stock.deduct(Resource.MEGACREDITS, diff * 3, {log: true, from: player});
+    target.stock.deduct(Resource.MEGACREDITS, diff * 3, {log: true, from: {player: player}});
     return undefined;
   }
 }

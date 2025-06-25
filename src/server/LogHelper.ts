@@ -6,6 +6,7 @@ import {Space} from './boards/Space';
 import {TileType, tileTypeToString} from '../common/TileType';
 import {IColony} from './colonies/IColony';
 import {Logger} from './logs/Logger';
+import {From, isFromPlayer} from './logs/From';
 
 export class LogHelper {
   static logAddResource(player: IPlayer, card: ICard, qty: number = 1): void {
@@ -112,5 +113,55 @@ export class LogHelper {
 
   static logStealFromNeutralPlayer(player: IPlayer, resource: Resource, amount: number) {
     player.game.log('${0} stole ${1} ${2} from the neutral player', (b) => b.player(player).number(amount).string(resource));
+  }
+
+  public static logUnitDelta(
+    player: IPlayer,
+    resource: Resource,
+    amount: number,
+    unitType: 'production' | 'amount',
+    from: From | undefined,
+    stealing = false,
+  ) {
+    if (amount === 0) {
+      // Logging zero units doesn't seem to happen
+      return;
+    }
+
+    const modifier = amount > 0 ? 'increased' : 'decreased';
+    const absAmount = Math.abs(amount);
+    let message = '${0}\'s ${1} ' + unitType + ' ${2} by ${3}';
+
+    if (from !== undefined) {
+      if (stealing === true) {
+        message = message + ' stolen';
+      }
+      message = message + ' by ${4}';
+    }
+
+    player.game.log(message, (b) => {
+      b.player(player)
+        .string(resource)
+        .string(modifier)
+        .number(absAmount);
+
+      if (from !== undefined) {
+        if (isFromPlayer(from)) {
+          b.player(from.player);
+        } else if ('card' in from) {
+          if (typeof(from.card) === 'object') {
+            b.card(from.card);
+          } else {
+            b.cardName(from.card);
+          }
+        } else {
+          if (typeof(from.globalEvent) === 'object') {
+            b.globalEvent(from.globalEvent);
+          } else {
+            b.globalEventName(from.globalEvent);
+          }
+        }
+      }
+    });
   }
 }

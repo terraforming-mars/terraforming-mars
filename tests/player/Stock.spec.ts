@@ -243,7 +243,7 @@ describe('Stock', () => {
     const [game, player, player2] = testGame(2);
 
     player.megaCredits = 5;
-    player.stock.add(Resource.MEGACREDITS, -5, {log: true, from: player2});
+    player.stock.add(Resource.MEGACREDITS, -5, {log: true, from: {player: player2}});
 
     const log = game.gameLog;
     const logEntry = log[log.length - 1];
@@ -253,7 +253,7 @@ describe('Stock', () => {
   it('addResource logging from global event', () => {
     const [game, player] = testGame(1);
 
-    player.stock.add(Resource.MEGACREDITS, 12, {log: true, from: GlobalEventName.ASTEROID_MINING});
+    player.stock.add(Resource.MEGACREDITS, 12, {log: true, from: {globalEvent: GlobalEventName.ASTEROID_MINING}});
 
     const log = game.gameLog;
     const logEntry = log[log.length - 1];

@@ -60,7 +60,7 @@ import {message} from './logs/MessageBuilder';
 import {calculateVictoryPoints} from './game/calculateVictoryPoints';
 import {VictoryPointsBreakdown} from '../common/game/VictoryPointsBreakdown';
 import {Supercapacitors} from './cards/promo/Supercapacitors';
-import {CanAffordOptions, CardAction, IPlayer, ResourceSource, isIPlayer} from './IPlayer';
+import {CanAffordOptions, CardAction, IPlayer} from './IPlayer';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {copyAndClear, inplaceRemove, sum, toName} from '../common/utils/utils';
 import {PreludesExpansion} from './preludes/PreludesExpansion';
@@ -369,44 +369,6 @@ export class Player implements IPlayer {
     return this.terraformRating = value;
   }
 
-  public logUnitDelta(
-    resource: Resource,
-    amount: number,
-    unitType: 'production' | 'amount',
-    from: ResourceSource | undefined,
-    stealing = false,
-  ) {
-    if (amount === 0) {
-      // Logging zero units doesn't seem to happen
-      return;
-    }
-
-    const modifier = amount > 0 ? 'increased' : 'decreased';
-    const absAmount = Math.abs(amount);
-    let message = '${0}\'s ${1} ' + unitType + ' ${2} by ${3}';
-
-    if (from !== undefined) {
-      if (stealing === true) {
-        message = message + ' stolen';
-      }
-      message = message + ' by ${4}';
-    }
-
-    this.game.log(message, (b) => {
-      b.player(this)
-        .string(resource)
-        .string(modifier)
-        .number(absAmount);
-      if (isIPlayer(from)) {
-        b.player(from);
-      } else if (typeof(from) === 'object') {
-        b.cardName(from.name);
-      } else if (typeof(from) === 'string') {
-        b.globalEventName(from);
-      }
-    });
-  }
-
   public getVictoryPoints(): VictoryPointsBreakdown {
     return calculateVictoryPoints(this);
   }
@@ -452,7 +414,7 @@ export class Player implements IPlayer {
         if (options?.stealing) {
           this.stock.steal(resource, count, perpetrator, {log: options?.log});
         } else {
-          this.stock.deduct(resource, count, {log: options?.log, from: perpetrator});
+          this.stock.deduct(resource, count, {log: options?.log, from: {player: perpetrator}});
         }
       }
       return undefined;
@@ -1086,7 +1048,7 @@ export class Player implements IPlayer {
     // VanAllen CEO Hook for Milestones
     const vanAllen = this.game.getCardPlayerOrUndefined(CardName.VANALLEN);
     if (vanAllen !== undefined) {
-      vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: this});
+      vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: {player: this}});
     }
     if (!this.playedCards.has(CardName.VANALLEN)) { // Why isn't this an else clause to the statement above?
       const cost = this.milestoneCost();

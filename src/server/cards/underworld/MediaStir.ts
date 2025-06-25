@@ -28,11 +28,11 @@ export class MediaStir extends GlobalEvent implements IGlobalEvent {
       const adjusted = Math.max(0, corruption - turmoil.getPlayerInfluence(player));
       if (adjusted > 0) {
         const cost = adjusted * 3;
-        player.stock.deduct(Resource.MEGACREDITS, cost, {log: true, from: this.name});
+        player.stock.deduct(Resource.MEGACREDITS, cost, {log: true, from: {globalEvent: this}});
       }
       if (player.underworldData.corruption === 0) {
         // TODO(kberg): Add "from"
-        // player.increaseTerraformRating(1, {log: true, from: this.name});
+        // player.increaseTerraformRating(1, {log: true, from: {card: this}});
         player.increaseTerraformRating(1, {log: true});
       }
     });

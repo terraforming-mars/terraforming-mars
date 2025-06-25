@@ -30,7 +30,7 @@ export class CommunicationBoom extends GlobalEvent implements IGlobalEvent {
     game.playersInGenerationOrder.forEach((player) => {
       const deducted = Math.min(10, player.megaCredits);
       if (deducted > 0) {
-        player.stock.deduct(Resource.MEGACREDITS, 10, {log: true, from: this.name});
+        player.stock.deduct(Resource.MEGACREDITS, 10, {log: true, from: {globalEvent: this}});
         PathfindersExpansion.addToSolBank(player);
       }
       player.getResourceCards(CardResource.DATA).forEach((card) => {

@@ -36,7 +36,7 @@ export class KingdomofTauraro extends CorporationCard implements ICorporationCar
   }
 
   public override bespokePlay(player: IPlayer) {
-    for (const opponent of player.getOpponents()) {
+    for (const opponent of player.opponents) {
       opponent.production.add(Resource.MEGACREDITS, 2, {log: true});
     }
     return undefined;

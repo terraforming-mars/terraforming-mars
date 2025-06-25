@@ -23,7 +23,7 @@ export class AresSetup {
   }
 
   public static setupHazards(game: IGame) {
-    const playerCount = game.getPlayers().length;
+    const playerCount = game.players.length;
     // The number of dust storms depends on the player count.
     // I made up that the solo player has 3 dust storms. The rules
     // don't take solo into account, nor if you played with more than

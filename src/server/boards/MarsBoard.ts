@@ -85,12 +85,12 @@ export class MarsBoard extends Board {
   public getAvailableSpacesForCity(player: IPlayer, canAffordOptions?: CanAffordOptions, spaces?: ReadonlyArray<Space>): ReadonlyArray<Space> {
     const spacesOnLand = spaces ?? this.getAvailableSpacesOnLand(player, canAffordOptions);
     // Gordon CEO can ignore placement restrictions for Cities+Greenery
-    if (player.cardIsInEffect(CardName.GORDON)) {
+    if (player.tableau.has(CardName.GORDON)) {
       return spacesOnLand;
     }
     // Kingdom of Tauraro can place cities next to cities, but also must place them
     // next to tiles they own, if possible.
-    if (player.cardIsInEffect(CardName.KINGDOM_OF_TAURARO)) {
+    if (player.tableau.has(CardName.KINGDOM_OF_TAURARO)) {
       const spacesNextToMySpaces = spacesOnLand.filter(
         (space) => this.getAdjacentSpaces(space).some(
           (adj) => adj.tile !== undefined && adj.player === player));
@@ -123,7 +123,7 @@ export class MarsBoard extends Board {
   public getAvailableSpacesForGreenery(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
     let availableLandSpaces = this.getAvailableSpacesOnLand(player, canAffordOptions);
     // Gordon CEO can ignore placement restrictions for Cities+Greenery
-    if (player.cardIsInEffect(CardName.GORDON)) return availableLandSpaces;
+    if (player.tableau.has(CardName.GORDON)) return availableLandSpaces;
     // Spaces next to Red City are always unavialable for Greeneries.
     availableLandSpaces = this.filterSpacesAroundRedCity(availableLandSpaces);
 

@@ -46,7 +46,7 @@ export class MediaFrenzy extends Card implements IProjectCard {
 
     player.defer(new SelectPlayer(this.opponentsWithCorruption(player), 'Select player to lose 1 corruption', 'Select player')
       .andThen((target) => {
-        const privateMilitaryContractor = target.getPlayedCard(CardName.PRIVATE_MILITARY_CONTRACTOR);
+        const privateMilitaryContractor = target.tableau.get(CardName.PRIVATE_MILITARY_CONTRACTOR);
         if (privateMilitaryContractor && privateMilitaryContractor.resourceCount > 0) {
           target.maybeBlockAttack(player, '', (proceed) => {
             if (proceed) {
@@ -63,6 +63,6 @@ export class MediaFrenzy extends Card implements IProjectCard {
   }
 
   private opponentsWithCorruption(player: IPlayer) {
-    return player.getOpponents().filter((opponent) => opponent.underworldData.corruption > 0);
+    return player.opponents.filter((opponent) => opponent.underworldData.corruption > 0);
   }
 }

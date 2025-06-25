@@ -50,7 +50,7 @@ export class GameLogs {
 
       switch (datum.type) {
       case LogMessageDataType.PLAYER:
-        for (const player of game.getPlayers()) {
+        for (const player of game.players) {
           if (datum.value === player.color) {
             return player.name;
           }

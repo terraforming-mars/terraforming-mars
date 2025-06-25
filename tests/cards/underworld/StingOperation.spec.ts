@@ -16,7 +16,7 @@ describe('StingOperation', () => {
     it('canPlay ' + JSON.stringify(run), () => {
       const card = new StingOperation();
       const [game, player] = testGame(3, {underworldExpansion: true});
-      zip(run.corruption, game.getPlayers()).map(([corruption, player]) => player.underworldData.corruption = corruption);
+      zip(run.corruption, game.players).map(([corruption, player]) => player.underworldData.corruption = corruption);
 
       expect(card.canPlay(player)).eq(run.expected);
       if (run.warning) {

@@ -109,7 +109,7 @@ export function runNextAction(game: IGame) {
 
 export function forceGenerationEnd(game: IGame) {
   while (game.deferredActions.pop() !== undefined) {} // eslint-disable-line no-empty
-  game.getPlayersInGenerationOrder().forEach((player) => player.pass());
+  game.playersInGenerationOrder.forEach((player) => player.pass());
   game.playerIsFinishedTakingActions();
 }
 
@@ -233,7 +233,7 @@ export async function sleep(ms: number): Promise<void> {
 
 export function finishGeneration(game: IGame): void {
   const priorGeneration = game.generation;
-  game.getPlayersInGenerationOrder().forEach((player) => {
+  game.playersInGenerationOrder.forEach((player) => {
     game.playerHasPassed(player);
     game.playerIsFinishedTakingActions();
   });

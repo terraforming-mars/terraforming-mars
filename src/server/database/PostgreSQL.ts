@@ -313,7 +313,7 @@ export class PostgreSQL implements IDatabase {
         VALUES ($1, $2, $3, $4)
         ON CONFLICT (game_id, save_id) DO UPDATE SET game = $3
         RETURNING (xmax = 0) AS inserted`,
-        [game.id, game.lastSaveId, gameJSON, game.getPlayers().length]);
+        [game.id, game.lastSaveId, gameJSON, game.players.length]);
 
       await this.client.query(
         `INSERT INTO game (game_id, log, options)
@@ -342,7 +342,7 @@ export class PostgreSQL implements IDatabase {
       // when the database operation was an insert. (We should figure out why multiple saves occur and
       // try to stop them. But that's for another day.)
       if (inserted === true && thisSaveId === 0) {
-        const participantIds: Array<ParticipantId> = game.getPlayers().map(toID);
+        const participantIds: Array<ParticipantId> = game.players.map(toID);
         if (game.spectatorId) participantIds.push(game.spectatorId);
         await this.storeParticipants({gameId: game.id, participantIds: participantIds});
       }

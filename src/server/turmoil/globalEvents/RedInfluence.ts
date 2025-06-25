@@ -24,7 +24,7 @@ export class RedInfluence extends GlobalEvent implements IGlobalEvent {
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
+    game.playersInGenerationOrder.forEach((player) => {
       const sets = Math.floor((player.terraformRating - 10)/5);
       if (sets > 0) {
         const amount = Math.min(sets, 5);

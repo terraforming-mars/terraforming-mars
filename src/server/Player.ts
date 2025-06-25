@@ -97,6 +97,7 @@ export class Player implements IPlayer {
   public colonies: Colonies;
   public readonly production: Production;
   public readonly stock: Stock;
+  public readonly opponents: ReadonlyArray<IPlayer> = [];
   private _alliedParty: AlliedParty | undefined;
 
   // Used only during set-up
@@ -264,6 +265,11 @@ export class Player implements IPlayer {
     this.stock = new Stock(this);
   }
 
+  public setup(game: IGame) {
+    this.game = game;
+    (this.opponents as Array<IPlayer>).push(...game.players.filter((p) => p !== this));
+  }
+
   public tearDown() {
     this.game = undefined as unknown as Game;
   }
@@ -273,18 +279,6 @@ export class Player implements IPlayer {
    */
   public get tableau(): PlayedCards {
     return this.playedCards;
-  }
-
-  public getPlayedCard(cardName: CardName): ICard | undefined {
-    return this.playedCards.get(cardName);
-  }
-
-  public getPlayedCardOrThrow(cardName: CardName): ICard {
-    const card = this.getPlayedCard(cardName);
-    if (card === undefined) {
-      throw new Error(`player ${this.name} does not have card ${cardName}`);
-    }
-    return card;
   }
 
   public getTitaniumValue(): number {
@@ -302,7 +296,7 @@ export class Player implements IPlayer {
   }
 
   public getSelfReplicatingRobotsTargetCards(): Array<IProjectCard> {
-    const selfReplicatingRobots = this.getPlayedCard(CardName.SELF_REPLICATING_ROBOTS);
+    const selfReplicatingRobots = this.tableau.get(CardName.SELF_REPLICATING_ROBOTS);
     if (selfReplicatingRobots instanceof SelfReplicatingRobots) {
       return selfReplicatingRobots.targetCards;
     }
@@ -343,7 +337,7 @@ export class Player implements IPlayer {
       if (opts.log === true) {
         this.game.log('${0} gained ${1} TR', (b) => b.player(this).number(steps));
       }
-      for (const cardOwner of this.game.getPlayersInGenerationOrder()) {
+      for (const cardOwner of this.game.playersInGenerationOrder) {
         for (const card of cardOwner.tableau) {
           card.onIncreaseTerraformRatingByAnyPlayer?.(cardOwner, this, steps);
         }
@@ -417,10 +411,6 @@ export class Player implements IPlayer {
     return calculateVictoryPoints(this);
   }
 
-  public cardIsInEffect(cardName: CardName): boolean {
-    return this.playedCards.has(cardName);
-  }
-
   public plantsAreProtected(): boolean {
     return this.playedCards.has(CardName.PROTECTED_HABITATS) ||
       this.playedCards.has(CardName.ASTEROID_DEFLECTION_SYSTEM);
@@ -470,21 +460,15 @@ export class Player implements IPlayer {
   }
 
   public resolveInsurance() {
-  // game.monsInsuranceOwner could be eliminated entirely if there
-  // was a fast version of getCardPlayer().
-  // I mean, it could be eliminated now, but getCardPlayer is expensive, and
-  // checking for who is Mons Insurance is called often even when the card
-  // is out of play.
-    const game = this.game;
-    if (game.monsInsuranceOwner !== undefined && game.monsInsuranceOwner !== this.id) {
-      const monsInsuranceOwner = game.getPlayerById(game.monsInsuranceOwner);
-      const monsInsurance = <MonsInsurance> monsInsuranceOwner.getPlayedCardOrThrow(CardName.MONS_INSURANCE);
+    const monsInsuranceOwner = this.game.monsInsuranceOwner;
+    if (monsInsuranceOwner !== undefined && monsInsuranceOwner !== this) {
+      const monsInsurance = <MonsInsurance>monsInsuranceOwner.tableau.get(CardName.MONS_INSURANCE);
       monsInsurance.payDebt(monsInsuranceOwner, this);
     }
   }
 
   public resolveInsuranceInSoloGame() {
-    const monsInsurance = <MonsInsurance> this.getPlayedCard(CardName.MONS_INSURANCE);
+    const monsInsurance = <MonsInsurance> this.tableau.get(CardName.MONS_INSURANCE);
     monsInsurance?.payDebt(this, undefined);
   }
 
@@ -509,7 +493,7 @@ export class Player implements IPlayer {
    */
   public getPlayedEventsCount(): number {
     let count = this.playedCards.eventCount;
-    if (this.getPlayedCard(CardName.PHARMACY_UNION)?.isDisabled) {
+    if (this.tableau.get(CardName.PHARMACY_UNION)?.isDisabled) {
       count++;
     }
     return count;
@@ -905,7 +889,7 @@ export class Player implements IPlayer {
         this.preludeCardsInHand.splice(preludeCardIndex, 1);
       }
 
-      const selfReplicatingRobots = this.getPlayedCard(CardName.SELF_REPLICATING_ROBOTS);
+      const selfReplicatingRobots = this.tableau.get(CardName.SELF_REPLICATING_ROBOTS);
       if (selfReplicatingRobots instanceof SelfReplicatingRobots) {
         if (inplaceRemove(selfReplicatingRobots.targetCards, selectedCard)) {
           selectedCard.resourceCount = 0;
@@ -958,7 +942,7 @@ export class Player implements IPlayer {
     TurmoilHandler.applyOnCardPlayedEffect(this, card);
 
     /* A player responding to any other player's card played. */
-    for (const somePlayer of this.game.getPlayersInGenerationOrder()) {
+    for (const somePlayer of this.game.playersInGenerationOrder) {
       for (const effectCard of somePlayer.playedCards) {
         const actionFromPlayedCard = effectCard.onCardPlayedByAnyPlayer?.(somePlayer, card, this);
         this.defer(actionFromPlayedCard);
@@ -1072,7 +1056,7 @@ export class Player implements IPlayer {
   }
 
   public spendHeat(amount: number, cb: () => (undefined | PlayerInput) = () => undefined) : PlayerInput | undefined {
-    const stormcraft = <StormCraftIncorporated> this.getPlayedCard(CardName.STORMCRAFT_INCORPORATED);
+    const stormcraft = <StormCraftIncorporated> this.tableau.get(CardName.STORMCRAFT_INCORPORATED);
     if (stormcraft?.resourceCount > 0) {
       return stormcraft.spendHeat(this, amount, cb);
     }
@@ -1116,7 +1100,7 @@ export class Player implements IPlayer {
     if (owner === undefined) {
       return false;
     }
-    const stagedProtests = owner.getPlayedCard(CardName.STAGED_PROTESTS);
+    const stagedProtests = owner.tableau.get(CardName.STAGED_PROTESTS);
     return stagedProtests?.generationUsed === this.game.generation;
   }
 
@@ -1218,7 +1202,7 @@ export class Player implements IPlayer {
   public getPlayableCards(): Array<IProjectCard> {
     const candidateCards: Array<IProjectCard> = [...this.cardsInHand];
     // Self Replicating robots check
-    const card = this.getPlayedCard(CardName.SELF_REPLICATING_ROBOTS);
+    const card = this.tableau.get(CardName.SELF_REPLICATING_ROBOTS);
     if (card instanceof SelfReplicatingRobots) {
       candidateCards.push(...card.targetCards);
     }
@@ -1247,7 +1231,7 @@ export class Player implements IPlayer {
       }
     }
 
-    const pharmacyUnion = this.getPlayedCard(CardName.PHARMACY_UNION);
+    const pharmacyUnion = this.tableau.get(CardName.PHARMACY_UNION);
     if ((pharmacyUnion?.resourceCount ?? 0 > 0) && this.tags.cardHasTag(card, Tag.SCIENCE)) {
       trSource.tr = (trSource.tr ?? 0) + 1;
     }
@@ -1278,7 +1262,7 @@ export class Player implements IPlayer {
       card.additionalProjectCosts.redsCost = canAfford.redsCost;
     }
     if (this.playedCards.has(CardName.PHARMACY_UNION) && card.tags.includes(Tag.MICROBE)) {
-      const pharmacyUnion = this.getPlayedCard(CardName.PHARMACY_UNION);
+      const pharmacyUnion = this.tableau.get(CardName.PHARMACY_UNION);
       if (pharmacyUnion?.isDisabled === false) {
         card.warnings.add('pharmacyUnion');
       }
@@ -1512,7 +1496,7 @@ export class Player implements IPlayer {
     //   all 3 Awards are claimed before starting your turn as Vitor), you can skip this and
     //   proceed with other actions instead.
     // This code just uses "must skip" instead of "can skip".
-    const vitor = this.getPlayedCard(CardName.VITOR);
+    const vitor = this.tableau.get(CardName.VITOR);
     if (vitor !== undefined && this.game.allAwardsFunded()) {
       this.pendingInitialActions = this.pendingInitialActions.filter((card) => card !== vitor);
     }
@@ -1633,7 +1617,7 @@ export class Player implements IPlayer {
     });
 
     // End turn
-    if (this.game.getPlayers().length > 1 &&
+    if (this.game.players.length > 1 &&
       this.actionsTakenThisRound > 0 &&
       !this.game.gameOptions.fastModeOption &&
       this.allOtherPlayersHavePassed() === false) {
@@ -1675,7 +1659,7 @@ export class Player implements IPlayer {
   private allOtherPlayersHavePassed(): boolean {
     const game = this.game;
     if (game.isSoloMode()) return true;
-    const players = game.getPlayers();
+    const players = game.players;
     const passedPlayers = game.getPassedPlayers();
     return passedPlayers.length === players.length - 1 && passedPlayers.includes(this.color) === false;
   }
@@ -1937,10 +1921,6 @@ export class Player implements IPlayer {
       player.globalParameterSteps = {...DEFAULT_GLOBAL_PARAMETER_STEPS, ...d.globalParameterSteps};
     }
     return player;
-  }
-
-  public getOpponents(): Array<IPlayer> {
-    return this.game.getPlayers().filter((p) => p !== this);
   }
 
   /* Shorthand for deferring things */

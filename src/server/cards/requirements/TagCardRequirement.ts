@@ -22,7 +22,7 @@ export class TagCardRequirement extends InequalityRequirement {
     let tagCount = player.tags.count(this.tag, mode);
 
     if (this.all) {
-      player.getOpponents().forEach((p) => {
+      player.opponents.forEach((p) => {
         // Don't include opponents' wild tags because they are not performing the action.
         tagCount += p.tags.count(this.tag, 'raw');
       });

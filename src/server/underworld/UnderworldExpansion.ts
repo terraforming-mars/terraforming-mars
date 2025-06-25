@@ -101,7 +101,7 @@ export class UnderworldExpansion {
    */
   public static identifiableSpaces(player: IPlayer): ReadonlyArray<Space> {
     const spaces = player.game.board.spaces.filter((space) => space.spaceType !== SpaceType.COLONY);
-    if (player.cardIsInEffect(CardName.NEUTRINOGRAPH)) {
+    if (player.tableau.has(CardName.NEUTRINOGRAPH)) {
       return spaces.filter((space) => space.excavator === undefined);
     } else {
       return spaces.filter((space) => space.undergroundResources === undefined);
@@ -129,7 +129,7 @@ export class UnderworldExpansion {
       if (trigger === 'tile') {
         return;
       }
-      if (player?.cardIsInEffect(CardName.NEUTRINOGRAPH) && space.excavator === undefined) {
+      if (player?.tableau.has(CardName.NEUTRINOGRAPH) && space.excavator === undefined) {
         UnderworldExpansion.addTokens(game, [space.undergroundResources]);
         space.undergroundResources = undefined;
       } else {
@@ -139,7 +139,7 @@ export class UnderworldExpansion {
     const undergroundResource = this.drawExcavationToken(game);
     space.undergroundResources = undergroundResource;
 
-    for (const p of game.getPlayersInGenerationOrder()) {
+    for (const p of game.playersInGenerationOrder) {
       for (const card of p.tableau) {
         card.onIdentificationByAnyPlayer?.(p, player, space, trigger);
       }
@@ -180,7 +180,7 @@ export class UnderworldExpansion {
       return anyExcavatableSpaces;
     }
 
-    const concessionRights = player.getPlayedCard(CardName.CONCESSION_RIGHTS);
+    const concessionRights = player.tableau.get(CardName.CONCESSION_RIGHTS);
     if (concessionRights?.generationUsed === player.game.generation) {
       if (options?.ignoreConcsesionRights !== true) {
         return anyExcavatableSpaces;
@@ -305,7 +305,7 @@ export class UnderworldExpansion {
       break;
     case 'ocean':
       if (player.canAfford({cost: 4, tr: {oceans: 1}})) {
-        if (player.game.canAddOcean() || player.cardIsInEffect(CardName.WHALES)) {
+        if (player.game.canAddOcean() || player.tableau.has(CardName.WHALES)) {
           player.game.defer(new SelectPaymentDeferred(player, 4, {title: message('Select how to pay 4 M€ for ocean bonus')}))
             .andThen(() => player.game.defer(new PlaceOceanTile(player)));
         }
@@ -329,7 +329,7 @@ export class UnderworldExpansion {
     if (target.game.gameOptions.underworldExpansion === false) {
       return cb(true);
     }
-    const privateMilitaryContractor = target.getPlayedCard(CardName.PRIVATE_MILITARY_CONTRACTOR);
+    const privateMilitaryContractor = target.tableau.get(CardName.PRIVATE_MILITARY_CONTRACTOR);
     const militaryContractorFighters = privateMilitaryContractor?.resourceCount ?? 0;
     if (target.underworldData.corruption === 0 && militaryContractorFighters === 0) {
       return cb(true);
@@ -431,7 +431,7 @@ export class UnderworldExpansion {
   }
 
   static endGeneration(game: IGame) {
-    for (const player of game.getPlayers()) {
+    for (const player of game.players) {
       player.underworldData.temperatureBonus = undefined;
     }
   }
@@ -441,7 +441,7 @@ export class UnderworldExpansion {
     if (game.phase !== Phase.ACTION) {
       return;
     }
-    game.getPlayersInGenerationOrder().forEach((player) => {
+    game.playersInGenerationOrder.forEach((player) => {
       switch (player.underworldData.temperatureBonus) {
       case 'data1pertemp':
       case 'microbe1pertemp':

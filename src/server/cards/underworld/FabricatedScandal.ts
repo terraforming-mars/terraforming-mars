@@ -34,15 +34,15 @@ export class FabricatedScandal extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
-    const highestTR = Math.max(...game.getPlayers().map(((p) => p.terraformRating)));
-    game.getPlayers().forEach((p) => {
+    const highestTR = Math.max(...game.players.map(((p) => p.terraformRating)));
+    game.players.forEach((p) => {
       if (p.terraformRating === highestTR) {
         p.decreaseTerraformRating(1, {log: true});
       }
     });
 
-    const lowestTR = Math.min(...game.getPlayers().map(((p) => p.terraformRating)));
-    game.getPlayers().forEach((p) => {
+    const lowestTR = Math.min(...game.players.map(((p) => p.terraformRating)));
+    game.players.forEach((p) => {
       if (p.terraformRating === lowestTR && player.canAfford({cost: 0, tr: {tr: 1}})) {
         p.increaseTerraformRating(1, {log: true});
       }

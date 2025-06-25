@@ -20,7 +20,7 @@ export class ChoosePoliticalAgenda extends DeferredAction {
   }
 
   public execute(): PlayerInput {
-    const players = this.player.game.getPlayers();
+    const players = this.player.game.players;
     const bonuses: Array<SelectOption> = this.party.bonuses.map((bonus) => {
       const description = message(
         bonus.description + ' (${0})',

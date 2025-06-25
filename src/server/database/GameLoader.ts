@@ -71,7 +71,7 @@ export class GameLoader implements IGameLoader {
     if (game.spectatorId !== undefined) {
       d.participantIds.set(game.spectatorId, game.id);
     }
-    for (const player of game.getPlayers()) {
+    for (const player of game.players) {
       d.participantIds.set(player.id, game.id);
     }
   }

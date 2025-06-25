@@ -24,7 +24,7 @@ export class ImprovedEnergyTemplates extends GlobalEvent implements IGlobalEvent
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
+    game.playersInGenerationOrder.forEach((player) => {
       player.production.add(Resource.ENERGY, Math.floor((player.tags.count(Tag.POWER, 'raw') + turmoil.getPlayerInfluence(player)) / 2), {log: true, from: this.name});
     });
   }

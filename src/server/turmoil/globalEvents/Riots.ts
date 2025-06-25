@@ -24,7 +24,7 @@ export class Riots extends GlobalEvent implements IGlobalEvent {
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
+    game.playersInGenerationOrder.forEach((player) => {
       const city = game.board.spaces.filter(
         (space) => Board.isCitySpace(space) &&
                          space.player === player,

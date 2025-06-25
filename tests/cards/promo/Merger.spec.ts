@@ -115,7 +115,7 @@ describe('Merger', () => {
     selectCorp.cb([selectCorp.cards[index]]); // Arcadian
     runAllActions(game);
 
-    expect(player.cardIsInEffect(CardName.ARCADIAN_COMMUNITIES)).is.true;
+    expect(player.tableau.has(CardName.ARCADIAN_COMMUNITIES)).is.true;
     expect(player.pendingInitialActions).has.length(1);
   });
 
@@ -133,8 +133,8 @@ describe('Merger', () => {
     player.corporations.push(new Splice(), new SaturnSystems());
     player.megaCredits = 0;
 
-    expect(player.cardIsInEffect(CardName.SPLICE)).is.true;
-    expect(player.cardIsInEffect(CardName.SATURN_SYSTEMS)).is.true;
+    expect(player.tableau.has(CardName.SPLICE)).is.true;
+    expect(player.tableau.has(CardName.SATURN_SYSTEMS)).is.true;
 
     player2.playCard(new VestaShipyard());
     runAllActions(game);
@@ -161,8 +161,8 @@ describe('Merger', () => {
     selectCorp.cb([cheungShingMARS]);
     expect(player.corporations).has.length(2);
 
-    expect(player.cardIsInEffect(CardName.SPLICE)).is.true;
-    expect(player.cardIsInEffect(CardName.CHEUNG_SHING_MARS)).is.true;
+    expect(player.tableau.has(CardName.SPLICE)).is.true;
+    expect(player.tableau.has(CardName.CHEUNG_SHING_MARS)).is.true;
 
     expect(player.production.megacredits).to.eq(3);
   });

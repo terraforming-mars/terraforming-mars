@@ -26,7 +26,7 @@ export class CloudSocieties extends GlobalEvent implements IGlobalEvent {
   }
 
   public resolve(game: IGame, turmoil: Turmoil) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
+    game.playersInGenerationOrder.forEach((player) => {
       const resourceCards = player.getResourceCards(CardResource.FLOATER);
       resourceCards.forEach((card) => {
         player.addResourceTo(card, 1);

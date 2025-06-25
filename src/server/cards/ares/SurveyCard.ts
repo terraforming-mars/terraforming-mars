@@ -72,7 +72,7 @@ export abstract class SurveyCard extends Card implements IProjectCard {
         break;
       case Resource.PLANTS:
         grant = Board.isUncoveredOceanSpace(space) &&
-          cardOwner.cardIsInEffect(CardName.ARCTIC_ALGAE);
+          cardOwner.tableau.has(CardName.ARCTIC_ALGAE);
       }
     }
     if (grant) {

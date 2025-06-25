@@ -30,7 +30,7 @@ export class AntiTrustCrackdown extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.game.getPlayersInGenerationOrder().forEach((p) => {
+    player.game.playersInGenerationOrder.forEach((p) => {
       if (p !== player) {
         const loss = Math.min(p.underworldData.corruption, 2);
         if (loss > 0) {

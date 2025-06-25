@@ -30,7 +30,7 @@ export class SeismicPredictions extends GlobalEvent implements IGlobalEvent {
   public resolve(game: IGame, turmoil: Turmoil) {
     UnderworldExpansion.removeAllUnclaimedTokens(game);
 
-    game.getPlayersInGenerationOrder().forEach((player) => {
+    game.playersInGenerationOrder.forEach((player) => {
       const playerSpaces = player.game.board.spaces
         .filter(Board.ownedBy(player))
         .filter(Board.hasRealTile)

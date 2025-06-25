@@ -29,7 +29,7 @@ describe('CorridorsOfPower', () => {
     if (color === undefined) {
       return undefined;
     }
-    return game.getPlayers().find((player) => player.color === color) ?? 'NEUTRAL';
+    return game.players.find((player) => player.color === color) ?? 'NEUTRAL';
   }
 
   const effectRuns = [

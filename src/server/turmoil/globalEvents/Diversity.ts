@@ -23,7 +23,7 @@ export class Diversity extends GlobalEvent implements IGlobalEvent {
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
+    game.playersInGenerationOrder.forEach((player) => {
       if (player.tags.distinctCount('globalEvent') + turmoil.getPlayerInfluence(player) >= 9) {
         player.stock.add(Resource.MEGACREDITS, 10, {log: true, from: this.name});
       }

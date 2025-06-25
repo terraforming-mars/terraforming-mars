@@ -97,7 +97,7 @@ export class Merger extends PreludeCard {
     // const titaniumValue = player.getTitaniumValue() + (behavior?.titanumValue ?? 0);
     const titaniumValue = player.getTitaniumValue();
 
-    if (player.cardIsInEffect(CardName.MANUTECH)) {
+    if (player.tableau.has(CardName.MANUTECH)) {
       sum += asNumber(production?.megacredits);
       incomingTitanium += asNumber(production?.titanium);
     }

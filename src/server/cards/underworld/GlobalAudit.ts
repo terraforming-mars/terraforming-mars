@@ -25,7 +25,7 @@ export class GlobalAudit extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    for (const p of player.game.getPlayers()) {
+    for (const p of player.game.players) {
       if (p.underworldData.corruption === 0 && player.canAfford({cost: 0, tr: {tr: 1}})) {
         p.increaseTerraformRating(1, {log: true});
       }

@@ -35,7 +35,7 @@ export class GuerillaEcologists extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: IPlayer) {
-    if (player.plants >= 4 || (player.plants >= 3 && player.cardIsInEffect(CardName.VIRAL_ENHANCERS))) {
+    if (player.plants >= 4 || (player.plants >= 3 && player.tableau.has(CardName.VIRAL_ENHANCERS))) {
       return this.availableSpaces(player).length > 0;
     }
     return false;

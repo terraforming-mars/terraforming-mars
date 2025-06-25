@@ -27,7 +27,7 @@ class RedsBonus01 extends Bonus {
 
   getScore(player: IPlayer) {
     const game = player.game;
-    const players = [...game.getPlayersInGenerationOrder()];
+    const players = [...game.playersInGenerationOrder];
 
     if (game.isSoloMode() && players[0].terraformRating <= 20) return 1;
 
@@ -39,7 +39,7 @@ class RedsBonus01 extends Bonus {
   }
 
   override grant(game: IGame) {
-    const players = game.getPlayersInGenerationOrder();
+    const players = game.playersInGenerationOrder;
     const scores = players.map((player) => this.getScore(player));
 
     players.forEach((player, idx) => {
@@ -62,7 +62,7 @@ class RedsBonus02 implements IBonus {
 
   getScore(player: IPlayer) {
     const game = player.game;
-    const players = [...game.getPlayersInGenerationOrder()];
+    const players = [...game.playersInGenerationOrder];
 
     if (game.isSoloMode() && players[0].terraformRating > 20) return -1;
 
@@ -74,7 +74,7 @@ class RedsBonus02 implements IBonus {
   }
 
   grant(game: IGame) {
-    const players = game.getPlayersInGenerationOrder();
+    const players = game.playersInGenerationOrder;
     const scores = players.map((player) => this.getScore(player));
 
     players.forEach((player, idx) => {
@@ -94,7 +94,7 @@ class RedsPolicy02 implements IPolicy {
 
   onTilePlaced(player: IPlayer) {
     let amountPlayerHas = player.megaCredits;
-    if (player.cardIsInEffect(CardName.HELION)) amountPlayerHas += player.heat;
+    if (player.tableau.has(CardName.HELION)) amountPlayerHas += player.heat;
 
     const amountToPay = Math.min(amountPlayerHas, 3);
     if (amountToPay > 0) {

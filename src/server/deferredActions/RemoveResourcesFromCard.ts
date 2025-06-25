@@ -114,7 +114,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
 
   public static getAvailableTargetCards(player: IPlayer, resourceType: CardResource | undefined, source: Source = 'all'): Array<ICard> {
     const resourceCards: Array<ICard> = [];
-    for (const p of player.game.getPlayers()) {
+    for (const p of player.game.players) {
       // Making this a function just to delay calling getCardsWithResources unless it's needed.
       const get = () => p.getCardsWithResources(resourceType).filter((card) => card.protectedResources !== true);
       if (p === player) {
@@ -123,7 +123,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
         }
       } else {
         if (source !== 'self') {
-          const hasProtetedHabitats = p.cardIsInEffect(CardName.PROTECTED_HABITATS);
+          const hasProtetedHabitats = p.tableau.has(CardName.PROTECTED_HABITATS);
           for (const card of get()) {
             if (hasProtetedHabitats) {
               if (card.resourceType === CardResource.ANIMAL || card.resourceType === CardResource.MICROBE) {

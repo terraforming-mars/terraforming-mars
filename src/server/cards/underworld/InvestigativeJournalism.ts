@@ -39,13 +39,13 @@ export class InvestigativeJournalism extends Card implements IProjectCard, IActi
   }
 
   public canAct(player: IPlayer) {
-    return player.canAfford(5) && player.game.getPlayers().some((p) => p.underworldData.corruption > player.underworldData.corruption);
+    return player.canAfford(5) && player.game.players.some((p) => p.underworldData.corruption > player.underworldData.corruption);
   }
 
   public action(player: IPlayer) {
     player.game.defer(new SelectPaymentDeferred(player, 5, {title: TITLES.payForCardAction(this.name)}))
       .andThen(() => {
-        const moreCorruptPlayers = player.game.getPlayers().filter((p) => p.underworldData.corruption > player.underworldData.corruption);
+        const moreCorruptPlayers = player.game.players.filter((p) => p.underworldData.corruption > player.underworldData.corruption);
         player.defer(new SelectPlayer(moreCorruptPlayers, 'Select player to lose 1 corruption', 'Select player')
           .andThen((target) => {
             UnderworldExpansion.loseCorruption(target, 1, {log: true});

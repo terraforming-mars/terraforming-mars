@@ -34,7 +34,7 @@ export class PrivateInvestigator extends Card implements IProjectCard {
   }
 
   private targets(player: IPlayer) {
-    return player.game.getPlayers().filter((p) => p.underworldData.corruption > player.underworldData.corruption);
+    return player.game.players.filter((p) => p.underworldData.corruption > player.underworldData.corruption);
   }
 
   public override bespokeCanPlay(player: IPlayer) {

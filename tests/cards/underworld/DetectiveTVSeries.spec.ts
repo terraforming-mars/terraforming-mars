@@ -23,7 +23,7 @@ describe('DetectiveTVSeries', () => {
       const crimeCard = new Scapegoat();
       const nonCrimeCard = new MicroMills();
 
-      const activePlayer = game.getPlayers()[run.player];
+      const activePlayer = game.players[run.player];
       const activeCard = run.crimeTagCard ? crimeCard : nonCrimeCard;
       activePlayer.playCard(activeCard);
 

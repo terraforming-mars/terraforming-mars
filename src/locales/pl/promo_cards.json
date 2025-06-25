@@ -50,13 +50,13 @@
 
 	"Asteroid Deflection System": "Zakrzywianie Trajektorii Asteroid",
     "(Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.)": "Akcja: Odkryj i odrzuć kartę. Jeśli ma symboli Przestrzeni Kosmicznej, umieść 1 jednostkę asteroid na tej karcie.",
-    "opponents may not remove your plants": "Wrogowie nie mogą usuwać Twoich jedn. roślinności.",
+    "opponents may not remove your plants": "Wrogowie nie mogą usuwać Twoich jednostek roślinności.",
     "(Decrease your energy production 1 step. 1VP per asteroid on this card.)": "Obniż swoją produkcję energii o 1 poziom. Otrzymujesz 1 PZ za każdą jednostkę asteroid na tej karcie.",
 
-	"Jovian Embassy": "Jowiańska Ambasada",
+	"Jovian Embassy": "Ambasada Jowisza",
     "(Raise your TR 1 step.)": "Podnieś swój WT o 1 poziom.",
 
-	"Sub-Crust Measurements": "Pomiary Podpowierzniowe",
+	"Sub-Crust Measurements": "Pomiary Podpowierzchniowe",
     "Action: Draw a card.": "Akcja: Dobierz 1 kartę.",
 
 	"Potatoes": "Ziemniaki",
@@ -151,10 +151,10 @@
     "Effect: When you raise the temperature, gain 3 M€.": "Efekt: Kiedy podnosisz temperaturę, otrzymaj 3 M€.",
 
   "City Parks": "Park miejski",
-    "Requires that you have 3 cities. Gain 2 plants.": "Musisz mieć co najmniej 3 miasta. Otrzymujesz 2 jedn. roślinności.",
+    "Requires that you have 3 cities. Gain 2 plants.": "Musisz mieć co najmniej 3 miasta. Otrzymujesz 2 jednostki roślinności.",
 
   "Soil Enrichment": "Wzbogacenie gleby",
-    "Spend 1 microbe from ANY of your cards to gain 5 plants": "Wydaj 1 jednostkę mikrobów z twojej dowolnej karty, aby otrzymać 5 jedn. roślinności",
+    "Spend 1 microbe from ANY of your cards to gain 5 plants": "Wydaj 1 jednostkę mikrobów z twojej dowolnej karty, aby otrzymać 5 jednostek roślinności",
 
   "Floyd Continuum": "Kontinuum Floyda",
     "Action: Gain 3 M€ per completed terraforming parameter.": "Akcja: Otrzymaj 3 M€ za każdy ukończony parametr terraformacji.",
@@ -170,7 +170,7 @@
 
   "Carbon Nanosystems": "Nanosystemy Węglowe",
     "Effect: When you play a science tag, including this, add a graphene resource here.": "Efekt: Kiedy zagrasz kartę z symbolem Nauki, włączając tę, dodaj tutaj jednostkę grafenu.",
-    "Effect: When playing a space or city tag, graphenes may be used as 4 M€ each.": "Efekt: Kiedy grasz kartę z symbolem Kosmosu lub Miasta, jedn. grafenu mogą być używane jako 4 M€ każdy.",
+    "Effect: When playing a space or city tag, graphenes may be used as 4 M€ each.": "Efekt: Kiedy grasz kartę z symbolem Kosmosu lub Miasta, jednostek grafenu mogą być używane jako 4 M€ każdy.",
 
   "Cyberia Systems": "Systemy Cyberia",
     "Copy": "Kopiuj",
@@ -209,7 +209,7 @@
   "Solar Logistics": "Logistyka Słoneczna",
     "Effect: When you play an Earth tag, you pay 2 M€ less.": "Efekt: Kiedy zagrywasz kartę z symbolem Ziemi, płacisz o 2 M€ mniej.",
     "Effect: When any player plays a space event, draw a card.": "Efekt: Kiedy którykolwiek gracz zagrywa kartę wydarzenia Kosmicznego, dobierz kartę.",
-    "Gain 2 titanium.": "Otrzymujesz 2 jedn. tytanu.",
+    "Gain 2 titanium.": "Otrzymujesz 2 jednostki tytanu.",
 
   "Supercapacitors": "Superkondensatory",
     "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.": "Efekt: Konwersja energii na ciepło podczas produkcji jest opcjonalna dla każdego zasobnika energii.",

@@ -54,7 +54,7 @@ export class Production {
     this.units[resource] += delta;
 
     if (options?.log === true) {
-      LogHelper.logUnitDelta(this.player, resource, amount, 'production', options.from, options.stealing);
+      LogHelper.logUnitDelta(this.player, resource, amount, /* production*/ true, options.from, options.stealing);
     }
 
     const from = options?.from;

@@ -127,7 +127,7 @@ export class Stock {
     this.units[resource] += delta;
 
     if (options?.log === true) {
-      LogHelper.logUnitDelta(this.player, resource, delta, 'amount', options.from, options.stealing);
+      LogHelper.logUnitDelta(this.player, resource, delta, /* production*/ false, options.from, options.stealing);
     }
 
     const from = options?.from;

@@ -236,7 +236,7 @@ describe('Stock', () => {
 
     player.stock.add(Resource.MEGACREDITS, 12, {log: true});
     const logEntry = log[0];
-    expect(formatMessage(logEntry)).eq('blue\'s megacredits amount increased by 12');
+    expect(formatMessage(logEntry)).eq('blue gained 12 M€');
   });
 
   it('addResource logging from player', () => {
@@ -247,7 +247,7 @@ describe('Stock', () => {
 
     const log = game.gameLog;
     const logEntry = log[log.length - 1];
-    expect(formatMessage(logEntry)).eq('blue\'s megacredits amount decreased by 5 by red');
+    expect(formatMessage(logEntry)).eq('blue lost 5 M€ because of red');
   });
 
   it('addResource logging from global event', () => {
@@ -257,7 +257,7 @@ describe('Stock', () => {
 
     const log = game.gameLog;
     const logEntry = log[log.length - 1];
-    expect(formatMessage(logEntry)).eq('blue\'s megacredits amount increased by 12 by Asteroid Mining');
+    expect(formatMessage(logEntry)).eq('blue gained 12 M€ because of Asteroid Mining');
   });
 
   it('addResource logs error when deducting too much', () => {

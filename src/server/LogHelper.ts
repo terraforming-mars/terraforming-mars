@@ -115,11 +115,11 @@ export class LogHelper {
     player.game.log('${0} stole ${1} ${2} from the neutral player', (b) => b.player(player).number(amount).string(resource));
   }
 
-  public static logUnitDelta(
+  static logUnitDelta(
     player: IPlayer,
     resource: Resource,
     amount: number,
-    unitType: 'production' | 'amount',
+    production: boolean,
     from: From | undefined,
     stealing = false,
   ) {
@@ -128,22 +128,49 @@ export class LogHelper {
       return;
     }
 
-    const modifier = amount > 0 ? 'increased' : 'decreased';
-    const absAmount = Math.abs(amount);
-    let message = '${0}\'s ${1} ' + unitType + ' ${2} by ${3}';
+    // 1. Peter gained 5 MC
+    // 2. Peter gained 5 MC from Robotic Workforce
+    // 3. Peter gained 5 MC production
+    // 4. Peter gained 5 MC production beacuse of Robotic Workforce
+
+    // 5. Peter lost 5 MC
+    // 6. Peter lost 5 MC from Robotic Workforce
+    // 7. Peter lost 5 MC production
+    // 8. Peter lost 5 MC production beacuse of Robotic Workforce
+
+    // 9. Peter lost 1 MC production, stolen by Alan
+
+    const singular: Record<Resource, string> = {
+      [Resource.MEGACREDITS]: 'M€',
+      [Resource.STEEL]: 'steel',
+      [Resource.TITANIUM]: 'titanium',
+      [Resource.PLANTS]: 'plant',
+      [Resource.ENERGY]: 'energy',
+      [Resource.HEAT]: 'heat',
+    };
+
+    let resourceString = singular[resource];
+    if (resource === Resource.PLANTS && Math.abs(amount) > 1) {
+      resourceString = 'plants';
+    }
+    const modifier = amount > 0 ? 'gained' : 'lost';
+    let message = production ?
+      '${0} ' + modifier + ' ${1} ${2} production' :
+      '${0} ' + modifier + ' ${1} ${2}';
+      //  You   lost           1   plant production
 
     if (from !== undefined) {
       if (stealing === true) {
-        message = message + ' stolen';
+        message = '${3} stole ${1} ${2} from ${0}';
+      } else {
+        message = message + ' because of ${3}';
       }
-      message = message + ' by ${4}';
     }
 
     player.game.log(message, (b) => {
       b.player(player)
-        .string(resource)
-        .string(modifier)
-        .number(absAmount);
+        .number(Math.abs(amount))
+        .string(resourceString);
 
       if (from !== undefined) {
         if (isFromPlayer(from)) {

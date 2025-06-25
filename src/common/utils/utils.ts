@@ -181,6 +181,51 @@ export function toName<T>(item: {name: T}): T {
   return item.name;
 }
 
+/**
+ * Returns the ID of any IDed item. Ideal for iterating with the Array.map and other iterative functions.
+ */
 export function toID<T>(item: {id: T}): T {
   return item.id;
+}
+
+/**
+ * Return the names of an enum. For example, given
+ *
+ * enum Day {
+ *   M = 'Monday',
+ *   T = 'Tuesday',
+ * }
+ *
+ * this returns ['M', 'T'].
+ */
+export function getEnumKeys<T extends Record<string, any>>(enumObject: T): Array<string> {
+  return Object.keys(enumObject) as Array<string>;
+}
+
+/**
+ * Return the values of an enum. For example, given
+ *
+ * enum Day {
+ *   M = 'Monday',
+ *   T = 'Tuesday',
+ * }
+ *
+ * this returns ['Monday', 'Tuesday'], and is of type Array<Day>.
+ */
+export function getEnumStringValues<T extends Record<string, string>>(enumObject: T): Array<T[keyof T]> {
+  return Object.values(enumObject) as Array<T[keyof T]>;
+}
+
+/**
+ * Return the entries of an enum. For example, given
+ *
+ * enum Day {
+ *   M = 'Monday',
+ *   T = 'Tuesday',
+ * }
+ *
+ * this returns [['M', 'Monday'], ['T', 'Tuesday']], and is of type Array<[string, Day]>.
+ */
+export function getEnumStringEntries<T extends Record<string, string>>(enumObject: T): Array<[string, T[keyof T]]> {
+  return Object.entries(enumObject) as Array<[string, T[keyof T]]>;
 }

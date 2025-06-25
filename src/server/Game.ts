@@ -70,7 +70,7 @@ import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {SpaceType} from '../common/boards/SpaceType';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {BuildColony} from './deferredActions/BuildColony';
-import {newInitialDraft, newPreludeDraft, newStandardDraft} from './Draft';
+import {newInitialDraft, newPreludeDraft, newCEOsDraft, newStandardDraft} from './Draft';
 import {sum, toID, toName} from '../common/utils/utils';
 import {OrOptions} from './inputs/OrOptions';
 import {SelectOption} from './inputs/SelectOption';
@@ -1762,10 +1762,18 @@ export class Game implements IGame, Logger {
     // Still in Draft or Research of generation 1
     if (game.generation === 1 && players.some((p) => p.playedCards.filter(isICorporationCard).length === 0)) {
       if (game.phase === Phase.INITIALDRAFTING) {
-        if (game.initialDraftIteration === 3) {
-          newPreludeDraft(game).restoreDraft();
-        } else {
+        switch (game.initialDraftIteration) {
+        case 1:
           newInitialDraft(game).restoreDraft();
+          break;
+        case 2:
+          newInitialDraft(game).restoreDraft();
+          break;
+        case 3:
+          newPreludeDraft(game).restoreDraft();
+          break;
+        case 4:
+          newCEOsDraft(game).restoreDraft();
         }
       } else {
         game.gotoInitialResearchPhase();

@@ -344,14 +344,23 @@
                                     <span v-i18n>Initial Draft variant</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#initial-draft" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
                                 </div>
-
-                                <div v-if="initialDraft && expansions.prelude">
+                            </div>
+                            <div class="create-game-page-column-row" v-if="initialDraft">
+                              <div v-if="expansions.prelude">
                                 <input type="checkbox" name="preludeDraft" v-model="preludeDraftVariant" id="preludeDraft-checkbox">
                                 <label for="preludeDraft-checkbox">
-                                    <span v-i18n>Prelude Draft variant</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#initial-draft" class="tooltip" target="_blank">&#9432;</a>
+                                  <span v-i18n>Prelude Draft</span>
                                 </label>
-                                </div>
+                              </div>
+
+                              <div v-if="expansions.ceo">
+                                <input type="checkbox" name="ceosDraft" v-model="ceosDraftVariant" id="ceosDraft-checkbox">
+                                <label for="ceosDraft-checkbox">
+                                  <span v-i18n>CEO Draft</span>
+                                </label>
+                              </div>
                             </div>
+
                             <input type="checkbox" v-model="randomFirstPlayer" id="randomFirstPlayer-checkbox">
                             <label for="randomFirstPlayer-checkbox">
                                 <span v-i18n>Random first player</span>
@@ -644,6 +653,7 @@ export default (Vue as WithRefs<Refs>).extend({
       startingCeos: 3,
       startingPreludes: 4,
       preludeDraftVariant: undefined,
+      ceosDraftVariant: undefined,
       preludeToggled: false,
       uploading: false,
     };
@@ -678,6 +688,9 @@ export default (Vue as WithRefs<Refs>).extend({
     initialDraft(value: boolean) {
       if (value === true && this.preludeDraftVariant === undefined) {
         this.preludeDraftVariant = true;
+      }
+      if (value === true && this.ceosDraftVariant === undefined) {
+        this.ceosDraftVariant = true;
       }
     },
     prelude(value: boolean) {
@@ -1249,6 +1262,7 @@ export default (Vue as WithRefs<Refs>).extend({
         clonedGamedId,
         initialDraft,
         preludeDraftVariant: this.preludeDraftVariant ?? false,
+        ceosDraftVariant: this.ceosDraftVariant ?? false,
         randomMA,
         shuffleMapOption,
         // beginnerOption,

@@ -227,12 +227,11 @@ export interface IGame extends Logger {
   logIllegalState(description: string, metadata: {}): void;
 
   /**
-   * Drafting before the first generation goes through 3 iterations:
+   * Drafting before the first generation goes through up to 4 iterations:
    * 1. first 5 project cards,
    * 2. second 5 project cards
-   * 3. [optional] preludes.
-   *
-   * This works, but makes it hard to add a CEO draft.
+   * 3. [optional] preludes
+   * 4. [optional] CEOs
    */
   initialDraftIteration: number;
   /**

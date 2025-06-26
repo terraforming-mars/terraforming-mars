@@ -37,7 +37,7 @@ export class PriceWars extends Card implements IProjectCard {
   public generationUsed: number | undefined = undefined;
 
   private increase(player: IPlayer) {
-    for (const p of player.game.getPlayersInGenerationOrder()) {
+    for (const p of player.game.playersInGenerationOrder) {
       if (p === player) {
         p.increaseSteelValue();
         p.increaseTitaniumValue();
@@ -49,7 +49,7 @@ export class PriceWars extends Card implements IProjectCard {
   }
 
   private decrease(player: IPlayer) {
-    for (const p of player.game.getPlayersInGenerationOrder()) {
+    for (const p of player.game.playersInGenerationOrder) {
       if (p === player) {
         p.decreaseSteelValue();
         p.decreaseTitaniumValue();

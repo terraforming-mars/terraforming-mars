@@ -93,7 +93,9 @@ export function setGameLog(f: () => Array<LogMessage>) {
 export class Game implements IGame, Logger {
   public readonly id: GameId;
   public readonly gameOptions: Readonly<GameOptions>;
-  private players: Array<IPlayer>;
+  public readonly players: ReadonlyArray<IPlayer>;
+  // The API makes this readonly.
+  public playersInGenerationOrder: ReadonlyArray<IPlayer> = [];
 
   // Game-level data
   public lastSaveId: number = 0;
@@ -153,7 +155,7 @@ export class Game implements IGame, Logger {
 
   // Card-specific data
   // Mons Insurance promo corp
-  public monsInsuranceOwner?: PlayerId; // Not serialized
+  public monsInsuranceOwner: IPlayer | undefined; // Not serialized
   // Crash Site promo project
   public someoneHasRemovedOtherPlayersPlants: boolean = false;
   // Syndicate Pirate Raids
@@ -178,11 +180,6 @@ export class Game implements IGame, Logger {
   public readonly tags: ReadonlyArray<Tag>;
 
   public underworldDraftEnabled = false;
-  /*
-   * An optimized list of the players, in generation order. This is erased every time first placer changes,
-   * and refilled on calls to getPlayersInGenerationOrder
-   */
-  playersInGenerationOrder: Array<IPlayer> = [];
 
   private constructor(
     id: GameId,
@@ -216,7 +213,8 @@ export class Game implements IGame, Logger {
     }
 
     this.activePlayer = activePlayer;
-    this.first = first;
+    this.first = first; // To satisfy the constructor.
+    this.setFirstPlayer(first);
     this.rng = rng;
     this.projectDeck = projectDeck;
     this.corporationDeck = corporationDeck;
@@ -225,11 +223,20 @@ export class Game implements IGame, Logger {
     this.board = board;
 
     this.players.forEach((player) => {
-      player.game = this;
-      if (player.cardIsInEffect(CardName.MONS_INSURANCE)) this.monsInsuranceOwner = player.id;
+      player.setup(this);
+      if (player.tableau.has(CardName.MONS_INSURANCE)) {
+        this.monsInsuranceOwner = player;
+      }
     });
 
     this.tags = tags;
+  }
+
+  private setFirstPlayer(first: IPlayer) {
+    this.first = first;
+    const e = [...this.players, ...this.players];
+    const idx = e.findIndex((p) => p.id === this.first.id);
+    this.playersInGenerationOrder = e.slice(idx, idx + this.players.length);
   }
 
   public static newInstance(id: GameId,
@@ -357,7 +364,7 @@ export class Game implements IGame, Logger {
     // Initialize each player:
     // Give them their corporation cards, other cards, starting production,
     // handicaps.
-    for (const player of game.getPlayersInGenerationOrder()) {
+    for (const player of game.playersInGenerationOrder) {
       player.setTerraformRating(player.terraformRating + player.handicap);
       if (!gameOptions.corporateEra) {
         player.production.override({
@@ -635,7 +642,7 @@ export class Game implements IGame, Logger {
     // TODO(kberg): I think we can get rid of this weird validation at a later time.
     player.pickedCorporationCard = corporationCard;
     if (this.players.every((p) => p.pickedCorporationCard !== undefined)) {
-      for (const somePlayer of this.getPlayersInGenerationOrder()) {
+      for (const somePlayer of this.playersInGenerationOrder) {
         if (somePlayer.pickedCorporationCard === undefined) {
           throw new Error(`pickedCorporationCard is not defined for ${somePlayer.id}`);
         }
@@ -662,8 +669,8 @@ export class Game implements IGame, Logger {
       throw new Error('Didn\'t even find player');
     }
     firstIndex = (firstIndex + 1) % this.players.length;
-    this.first = this.players[firstIndex];
-    this.playersInGenerationOrder.length = 0;
+    const first = this.players[firstIndex];
+    this.setFirstPlayer(first);
   }
 
   // Only used in the prelude The New Space Race.
@@ -671,8 +678,7 @@ export class Game implements IGame, Logger {
     if (newFirstPlayer.game.id !== this.id) {
       throw new Error(`player ${newFirstPlayer.id} is not part of this game`);
     }
-    this.first = newFirstPlayer;
-    this.playersInGenerationOrder.length = 0;
+    this.setFirstPlayer(newFirstPlayer);
   }
 
   public gotoInitialResearchPhase(): void {
@@ -801,7 +807,7 @@ export class Game implements IGame, Logger {
   }
 
   private updatePlayerVPForTheGeneration(): void {
-    this.getPlayers().forEach((player) => {
+    this.players.forEach((player) => {
       player.victoryPointsByGeneration.push(player.getVictoryPoints().total);
     });
   }
@@ -835,7 +841,7 @@ export class Game implements IGame, Logger {
 
     this.players.forEach((player) => {
       player.hasIncreasedTerraformRatingThisGeneration = false;
-      if (player.cardIsInEffect(CardName.PRESERVATION_PROGRAM)) {
+      if (player.tableau.has(CardName.PRESERVATION_PROGRAM)) {
         player.preservationProgram = true;
       }
     });
@@ -1070,7 +1076,7 @@ export class Game implements IGame, Logger {
    * If nobody can add a greenery, end the game.
    */
   public /* for testing */ takeNextFinalGreeneryAction(): void {
-    for (const player of this.getPlayersInGenerationOrder()) {
+    for (const player of this.playersInGenerationOrder) {
       if (this.donePlayers.has(player.id)) {
         continue;
       }
@@ -1187,7 +1193,7 @@ export class Game implements IGame, Logger {
     }
 
     // Check for Aphrodite corporation
-    const aphrodite = this.players.find((player) => player.cardIsInEffect(CardName.APHRODITE));
+    const aphrodite = this.players.find((player) => player.tableau.has(CardName.APHRODITE));
     if (aphrodite !== undefined) {
       aphrodite.megaCredits += steps * 2;
     }
@@ -1312,7 +1318,7 @@ export class Game implements IGame, Logger {
     // Part 3. Setup for bonuses
     const initialTileType = space.tile?.tileType;
     const coveringExistingTile = space.tile !== undefined;
-    const arcadianCommunityBonus = space.player === player && player.cardIsInEffect(CardName.ARCADIAN_COMMUNITIES);
+    const arcadianCommunityBonus = space.player === player && player.tableau.has(CardName.ARCADIAN_COMMUNITIES);
 
     // Part 4. Place the tile
     this.simpleAddTile(player, space, tile);
@@ -1512,20 +1518,6 @@ export class Game implements IGame, Logger {
     const space = this.board.getSpaceOrThrow(spaceId);
     space.tile = undefined;
     space.player = undefined;
-  }
-
-  public getPlayers(): ReadonlyArray<IPlayer> {
-    return this.players;
-  }
-
-  // Players returned in play order starting with first player this generation.
-  public getPlayersInGenerationOrder(): ReadonlyArray<IPlayer> {
-    if (this.playersInGenerationOrder.length === 0) {
-      const e = [...this.players, ...this.players];
-      const idx = e.findIndex((p) => p.id === this.first.id);
-      this.playersInGenerationOrder = e.slice(idx, idx + this.players.length);
-    }
-    return this.playersInGenerationOrder;
   }
 
   /**
@@ -1806,6 +1798,6 @@ export class Game implements IGame, Logger {
   }
 
   public getActionCount() {
-    return sum(this.getPlayers().map((p) => p.actionsTakenThisGame));
+    return sum(this.players.map((p) => p.actionsTakenThisGame));
   }
 }

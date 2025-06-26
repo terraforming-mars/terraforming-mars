@@ -59,7 +59,7 @@ export class TradeWithHectateSpeditions implements IColonyTrader {
   private tradeCost: number;
 
   constructor(private player: IPlayer) {
-    this.hectateSpeditions = player.getPlayedCard(CardName.HECATE_SPEDITIONS);
+    this.hectateSpeditions = player.tableau.get(CardName.HECATE_SPEDITIONS);
     this.tradeCost = Math.max(1, 2 - player.colonies.tradeDiscount);
   }
 

@@ -24,13 +24,13 @@ export abstract class Policy implements IPolicy {
   abstract readonly description: string | ((player: IPlayer | undefined) => string);
 
   public onPolicyStart(game: IGame): void {
-    game.getPlayersInGenerationOrder().forEach((p) => this.onPolicyStartForPlayer(p));
+    game.playersInGenerationOrder.forEach((p) => this.onPolicyStartForPlayer(p));
   }
 
   public abstract onPolicyStartForPlayer(_player: IPlayer): void;
 
   public onPolicyEnd(game: IGame): void {
-    game.getPlayersInGenerationOrder().forEach((p) => this.onPolicyEndForPlayer(p));
+    game.playersInGenerationOrder.forEach((p) => this.onPolicyEndForPlayer(p));
   }
 
   public abstract onPolicyEndForPlayer(_player: IPlayer): void;

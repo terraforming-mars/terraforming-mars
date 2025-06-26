@@ -35,7 +35,7 @@ export class MercenarySquad extends Card implements IProjectCard {
     if (cards.length === 0) {
       return false;
     }
-    if (player.game.getPlayers().length > 1) {
+    if (player.game.players.length > 1) {
       if (!cards.some((card) => player.game.getCardPlayerOrThrow(card.name) !== player)) {
         this.warnings.add('selfTarget');
       }

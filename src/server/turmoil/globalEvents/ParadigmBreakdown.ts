@@ -23,7 +23,7 @@ export class ParadigmBreakdown extends GlobalEvent implements IGlobalEvent {
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
+    game.playersInGenerationOrder.forEach((player) => {
       if (player.cardsInHand.length >= 2) {
         game.defer(new DiscardCards(player, 2, 2, 'Global Event - Select 2 cards to discard'));
       } else if (player.cardsInHand.length === 1) {

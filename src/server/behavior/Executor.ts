@@ -154,7 +154,7 @@ export class Executor implements BehaviorExecutor {
     if (behavior.decreaseAnyProduction !== undefined) {
       if (!game.isSoloMode()) {
         const dap = behavior.decreaseAnyProduction;
-        const targets = game.getPlayers().filter((p) => p.canHaveProductionReduced(dap.type, dap.count, player));
+        const targets = game.players.filter((p) => p.canHaveProductionReduced(dap.type, dap.count, player));
 
         if (targets.length === 0) {
           return false;
@@ -275,7 +275,7 @@ export class Executor implements BehaviorExecutor {
     if (behavior.underworld !== undefined) {
       const underworld = behavior.underworld;
       if (underworld.identify !== undefined) {
-        if (card.name === CardName.NEUTRINOGRAPH || player.cardIsInEffect(CardName.NEUTRINOGRAPH)) {
+        if (card.name === CardName.NEUTRINOGRAPH || player.tableau.has(CardName.NEUTRINOGRAPH)) {
           // Special case for Neutrinograph. Excavatable spaces are ones that are unidentified or reidentifiable.
           if (UnderworldExpansion.excavatableSpaces(player).length === 0) {
             return false;

@@ -66,10 +66,10 @@ export function testGame(count: number, customOptions?: Partial<TestGameOptions>
 }
 
 export function getTestPlayer(game: IGame, idx: number): TestPlayer {
-  const players = game.getPlayers();
+  const players = game.players;
   const length = players.length;
   if (idx >= length) {
     throw new Error(`Invalid index ${idx} when game has ${length} players`);
   }
-  return game.getPlayers()[idx] as TestPlayer;
+  return game.players[idx] as TestPlayer;
 }

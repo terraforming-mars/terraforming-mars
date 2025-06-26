@@ -107,14 +107,14 @@ export class PathfindersExpansion {
         }
       }
       rewards.everyone.forEach((reward) => {
-        game.getPlayers().forEach((p) => {
+        game.players.forEach((p) => {
           PathfindersExpansion.grant(reward, p, tag);
         });
       });
       if (rewards.mostTags.length > 0) {
         const players = PathfindersExpansion.playersWithMostTags(
           tag,
-          game.getPlayers().slice(),
+          game.players.slice(),
           (typeof(from) === 'object') ? from : undefined);
         rewards.mostTags.forEach((reward) => {
           players.forEach((p) => {
@@ -256,7 +256,7 @@ export class PathfindersExpansion {
   }
 
   public static addToSolBank(player: IPlayer) {
-    const solBank = player.getPlayedCard(CardName.SOLBANK);
+    const solBank = player.tableau.get(CardName.SOLBANK);
     if (solBank !== undefined) {
       player.defer(
         () => player.addResourceTo(solBank, {qty: 1, log: true}),

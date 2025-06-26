@@ -127,7 +127,7 @@ describe('ApiCreateGame', () => {
     expect(model.id.startsWith('g')).is.true;
     const game = await scaffolding.ctx.gameLoader.getGame(model.id);
     expect(game).is.not.undefined;
-    expect(game!.getPlayers()[0].name).eq('Robot');
+    expect(game!.players[0].name).eq('Robot');
   });
 
 

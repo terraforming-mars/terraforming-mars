@@ -65,7 +65,7 @@ describe('TheNewSpaceRace', () => {
     selectInitialCards3.options[2].cb([]);
 
     // Some assertions before the last cb.
-    expect(game.getPlayersInGenerationOrder()).deep.eq([player1, player2, player3]);
+    expect(game.playersInGenerationOrder).deep.eq([player1, player2, player3]);
 
     // Some cleanup before the last cb. These would be normally popped if the callbacks were done via inbound HTTP Request.
     // The cast() just confirms these are the expected SelectInitialCards
@@ -76,7 +76,7 @@ describe('TheNewSpaceRace', () => {
     // This will trigger everything.
     selectInitialCards3.cb(undefined);
 
-    expect(game.getPlayersInGenerationOrder()).deep.eq([player2, player3, player1]);
+    expect(game.playersInGenerationOrder).deep.eq([player2, player3, player1]);
 
     cast(player1.getWaitingFor(), undefined);
     cast(player3.getWaitingFor(), undefined);
@@ -101,7 +101,7 @@ describe('TheNewSpaceRace', () => {
     expect(player1.getTitaniumValue()).eq(4);
 
     // Some assertions before the last cb.
-    expect(game.getPlayersInGenerationOrder()).deep.eq([player1, player2, player3]);
+    expect(game.playersInGenerationOrder).deep.eq([player1, player2, player3]);
 
     cast(card.play(player2), undefined);
     runAllActions(game);

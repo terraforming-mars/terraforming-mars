@@ -53,6 +53,9 @@ export interface IGame extends Logger {
   inputsThisRound: number;
   resettable: boolean;
   generation: number;
+  readonly players: ReadonlyArray<IPlayer>;
+  readonly playersInGenerationOrder: ReadonlyArray<IPlayer>;
+
   /**
    * Stores the state of each global parameter at the end of each generation.
    *
@@ -84,7 +87,7 @@ export interface IGame extends Logger {
   // Card-specific data
 
   /* An optimization to see if anyone owns Mons Insurance */
-  monsInsuranceOwner?: PlayerId; // Not serialized
+  monsInsuranceOwner: IPlayer | undefined; // Not serialized
   /* For the promo Crash Site. */
   someoneHasRemovedOtherPlayersPlants: boolean;
   // Syndicate Pirate Raids
@@ -205,9 +208,7 @@ export interface IGame extends Logger {
   canRemoveOcean(): boolean;
   addOcean(player: IPlayer, space: Space): void;
   removeTile(spaceId: string): void;
-  getPlayers(): ReadonlyArray<IPlayer>;
-  /* Players returned in play order starting with first player this generation. */
-  getPlayersInGenerationOrder(): ReadonlyArray<IPlayer>;
+
   /**
    * Returns the Player holding this card, or throws.
    */

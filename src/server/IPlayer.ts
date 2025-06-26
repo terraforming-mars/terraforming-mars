@@ -69,12 +69,13 @@ export interface IPlayer {
   beginner: boolean;
   handicap: number;
 
-  game: IGame;
+  readonly game: IGame;
   tags: Tags;
   colonies: Colonies;
   readonly production: Production;
   readonly stock: Stock;
   readonly terraformRating: number;
+  readonly opponents: ReadonlyArray<IPlayer>;
 
   // Used only during set-up
   pickedCorporationCard?: ICorporationCard;
@@ -182,11 +183,8 @@ export interface IPlayer {
   // When set, this player can only be accessed by the user.
   user?: DiscordId;
 
-  /**
-   * Return the card this player has played by the given name, or `undefined`.
-   */
-  getPlayedCard(cardName: CardName): ICard | undefined;
-  getPlayedCardOrThrow(cardName: CardName): ICard;
+  setup(game: IGame): void;
+
   getTitaniumValue(): number;
   increaseTitaniumValue(): void;
   decreaseTitaniumValue(): void;
@@ -204,8 +202,6 @@ export interface IPlayer {
   // The action cards used this generation.
   actionsThisGeneration: Set<CardName>;
   getVictoryPoints(): VictoryPointsBreakdown;
-  /* A card is in effect if it is played. This does not apply to corporations. It could. */
-  cardIsInEffect(cardName: CardName): boolean;
   plantsAreProtected(): boolean;
   alloysAreProtected(): boolean;
   /**
@@ -301,7 +297,6 @@ export interface IPlayer {
   runInput(input: InputResponse, pi: PlayerInput): void;
   getAvailableBlueActionCount(): number;
   getPlayableActionCards(): Array<ICard & IActionCard>;
-  getUsableOPGCeoCards(): Array<ICeoCard>;
   runProductionPhase(): void;
   finishProductionPhase(): void;
 
@@ -343,7 +338,6 @@ export interface IPlayer {
   canAfford(options: number | CanAffordOptions): boolean;
   getStandardProjectOption(): SelectCard<IStandardProjectCard>;
   takeAction(saveBeforeTakingAction?: boolean): void;
-  getOpponents(): ReadonlyArray<IPlayer>;
   /** Return possible mid-game actions like play a card and fund an award, but not play prelude card. */
   getActions(): OrOptions;
   process(input: InputResponse): void;

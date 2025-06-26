@@ -69,7 +69,7 @@ export class TheDarksideofTheMoonSyndicate extends CorporationCard implements IC
           player.stock.add(Resource.MEGACREDITS, 2);
           LogHelper.logStealFromNeutralPlayer(player, Resource.MEGACREDITS, 2);
         } else {
-          for (const target of player.getOpponents()) {
+          for (const target of player.opponents) {
             target.attack(player, Resource.MEGACREDITS, 2, {stealing: true});
           }
         }

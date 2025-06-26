@@ -43,7 +43,7 @@ export class Counter {
   private cardIsUnplayed: boolean;
 
   public constructor(private player: IPlayer, private card: ICard) {
-    this.cardIsUnplayed = !player.cardIsInEffect(card.name);
+    this.cardIsUnplayed = !player.tableau.has(card.name);
   }
 
   public count(countable: Countable, context: 'default' | 'vps' = 'default'): number {
@@ -109,7 +109,7 @@ export class Counter {
 
         // When counting all the other players' tags, just count raw, so as to disregard their wild tags.
         if (countable.all === true || countable.others === true) {
-          player.getOpponents()
+          player.opponents
             .forEach((p) => sum += p.tags.count(tag, 'raw'));
         }
       }
@@ -157,7 +157,7 @@ export class Counter {
       const underworld = countable.underworld;
       if (underworld.corruption !== undefined) {
         if (countable.all === true) {
-          sum += utils.sum(game.getPlayers().map((p) => p.underworldData.corruption));
+          sum += utils.sum(game.players.map((p) => p.underworldData.corruption));
         } else {
           sum += player.underworldData.corruption;
         }

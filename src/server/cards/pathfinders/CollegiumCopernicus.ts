@@ -47,7 +47,7 @@ export class CollegiumCopernicus extends CorporationCard implements ICorporation
   }
 
   public onCardPlayedForCorps(player: IPlayer, card: ICard): void {
-    if (player.tags.cardHasTag(card, Tag.SCIENCE) && player.cardIsInEffect(this.name)) {
+    if (player.tags.cardHasTag(card, Tag.SCIENCE) && player.tableau.has(this.name)) {
       player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 1}));
     }
   }
@@ -79,7 +79,7 @@ export class TradeWithCollegiumCopernicus implements IColonyTrader {
   private collegiumCopernicus: ICard | undefined;
 
   constructor(private player: IPlayer) {
-    this.collegiumCopernicus = player.getPlayedCard(CardName.COLLEGIUM_COPERNICUS);
+    this.collegiumCopernicus = player.tableau.get(CardName.COLLEGIUM_COPERNICUS);
   }
 
   public canUse() {

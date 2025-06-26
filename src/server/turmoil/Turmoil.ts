@@ -83,7 +83,7 @@ export class Turmoil {
     // Init parties
     turmoil.parties = createParties();
 
-    game.getPlayersInGenerationOrder().forEach((player) => {
+    game.playersInGenerationOrder.forEach((player) => {
       turmoil.delegateReserve.add(player, DELEGATES_PER_PLAYER);
     });
     // One Neutral delegate is already Chairman
@@ -250,7 +250,7 @@ export class Turmoil {
   public endGeneration(game: IGame): void {
     // 1 - All player lose 1 TR
     game.log('All players lose 1 TR.');
-    game.getPlayers().forEach((player) => {
+    game.players.forEach((player) => {
       player.decreaseTerraformRating();
     });
 
@@ -320,7 +320,7 @@ export class Turmoil {
     this.rulingPolicy().onPolicyEnd?.(game);
 
     // Mars Frontier Alliance ends allied party policy
-    const alliedPlayer = game.getPlayers().find((p) => p.alliedParty !== undefined);
+    const alliedPlayer = game.players.find((p) => p.alliedParty !== undefined);
     this.executeAlliedOnPolicyEnd(alliedPlayer);
 
     // Behold the Emperor Hook prevents changing the ruling party.
@@ -367,7 +367,7 @@ export class Turmoil {
       const chairman = this.chairman;
       let steps = gainTR ? 1 : 0;
       // Tempest Consultancy Hook (gains an additional TR when they become chairman)
-      if (chairman.cardIsInEffect(CardName.TEMPEST_CONSULTANCY)) steps += 1;
+      if (chairman.tableau.has(CardName.TEMPEST_CONSULTANCY)) steps += 1;
 
       // Raise TR
       chairman.defer(() => {
@@ -422,7 +422,7 @@ export class Turmoil {
     const rulingParty = this.rulingParty;
 
     // Ruling bonus should be chosen between global or allied party if MFA is in play
-    const alliedPlayer = game.getPlayers().find((p) => p.alliedParty !== undefined);
+    const alliedPlayer = game.players.find((p) => p.alliedParty !== undefined);
     this.applyRulingBonus(game, alliedPlayer);
 
     // Resolve Ruling Bonus
@@ -533,7 +533,7 @@ export class Turmoil {
       let sendDelegate;
       if (!this.usedFreeDelegateAction.has(player)) {
         sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (from lobby)', {freeStandardAction: true});
-      } else if (player.cardIsInEffect(CardName.INCITE) && player.canAfford(3)) {
+      } else if (player.tableau.has(CardName.INCITE) && player.canAfford(3)) {
         sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (3 M€)', {cost: 3});
       } else if (player.canAfford(5)) {
         sendDelegate = new SendDelegateToArea(player, 'Send a delegate in an area (5 M€)', {cost: 5});

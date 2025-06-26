@@ -21,7 +21,7 @@ export class RemoveAnyPlants extends DeferredAction {
     let qtyToRemove = Math.min(target.plants, this.count);
 
     // Botanical Experience hook.
-    if (target.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
+    if (target.tableau.has(CardName.BOTANICAL_EXPERIENCE)) {
       qtyToRemove = Math.ceil(qtyToRemove / 2);
     }
 
@@ -56,18 +56,18 @@ export class RemoveAnyPlants extends DeferredAction {
       removalOptions.push(option);
 
       // Shortcut. Only provide the opportunity  if the player is playing Mons Insurance.
-      if (game.monsInsuranceOwner !== player.id) {
+      if (game.monsInsuranceOwner !== player) {
         option.cb(undefined);
         return undefined;
       }
     }
 
-    const candidates = player.getOpponents().filter((p) => !p.plantsAreProtected() && p.plants > 0);
+    const candidates = player.opponents.filter((p) => !p.plantsAreProtected() && p.plants > 0);
     removalOptions.push(...candidates.map((target) => {
       let qtyToRemove = Math.min(target.plants, this.count);
 
       // Botanical Experience hook.
-      if (target.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
+      if (target.tableau.has(CardName.BOTANICAL_EXPERIENCE)) {
         qtyToRemove = Math.ceil(qtyToRemove / 2);
       }
 

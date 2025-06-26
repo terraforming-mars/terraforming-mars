@@ -70,7 +70,7 @@ export class AnubisSecurities extends CorporationCard implements ICorporationCar
       }
 
       let anyCorruptOpponents = false;
-      for (const opponent of player.game.getPlayersInGenerationOrder()) {
+      for (const opponent of player.game.playersInGenerationOrder) {
         if (opponent === player) {
           continue;
         }

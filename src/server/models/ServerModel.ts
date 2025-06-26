@@ -38,7 +38,7 @@ export class Server {
       activePlayer: game.getPlayerById(game.activePlayer).color,
       id: game.id,
       phase: game.phase,
-      players: game.getPlayersInGenerationOrder().map((player) => ({
+      players: game.playersInGenerationOrder.map((player) => ({
         color: player.color,
         id: player.id,
         name: player.name,
@@ -88,7 +88,7 @@ export class Server {
   public static getPlayerModel(player: IPlayer): PlayerViewModel {
     const game = player.game;
 
-    const players: Array<PublicPlayerModel> = game.getPlayersInGenerationOrder().map(this.getPlayer);
+    const players: Array<PublicPlayerModel> = game.playersInGenerationOrder.map(this.getPlayer);
 
     const thisPlayerIndex = players.findIndex((p) => p.color === player.color);
     const thisPlayer: PublicPlayerModel = players[thisPlayerIndex];
@@ -119,7 +119,7 @@ export class Server {
       color: 'neutral',
       id: game.spectatorId,
       game: this.getGameModel(game),
-      players: game.getPlayersInGenerationOrder().map(this.getPlayer),
+      players: game.playersInGenerationOrder.map(this.getPlayer),
       thisPlayer: undefined,
       runId: runId,
     };
@@ -148,7 +148,7 @@ export class Server {
       );
       let scores: Array<MilestoneScore> = [];
       if (claimed === undefined && claimedMilestones.length < MAX_MILESTONES) {
-        scores = game.getPlayers().map((player) => ({
+        scores = game.players.map((player) => ({
           playerColor: player.color,
           playerScore: milestone.getScore(player),
         }));
@@ -174,7 +174,7 @@ export class Server {
       const scorer = new AwardScorer(game, award);
       let scores: Array<AwardScore> = [];
       if (fundedAwards.length < MAX_AWARDS || funded !== undefined) {
-        scores = game.getPlayers().map((player) => ({
+        scores = game.players.map((player) => ({
           playerColor: player.color,
           playerScore: scorer.get(player),
         }));
@@ -207,7 +207,7 @@ export class Server {
 
   public static getPlayer(player: IPlayer): PublicPlayerModel {
     const game = player.game;
-    const useHandicap = game.getPlayers().some((p) => p.handicap !== 0);
+    const useHandicap = game.players.some((p) => p.handicap !== 0);
     const model: PublicPlayerModel = {
       actionsTakenThisRound: player.actionsTakenThisRound,
       actionsTakenThisGame: player.actionsTakenThisGame,
@@ -301,7 +301,7 @@ export class Server {
 
     if (player.plantsAreProtected()) {
       protection.plants = 'on';
-    } else if (player.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
+    } else if (player.tableau.has(CardName.BOTANICAL_EXPERIENCE)) {
       protection.plants = 'half';
     }
 
@@ -309,7 +309,7 @@ export class Server {
   }
 
   private static getProductionProtections(player: IPlayer) {
-    const defaultProteection = player.cardIsInEffect(CardName.PRIVATE_SECURITY) ? 'on' : 'off';
+    const defaultProteection = player.tableau.has(CardName.PRIVATE_SECURITY) ? 'on' : 'off';
     const protection: Record<Resource, Protection> = {
       megacredits: defaultProteection,
       steel: defaultProteection,

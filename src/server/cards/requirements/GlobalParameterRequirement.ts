@@ -22,7 +22,7 @@ export abstract class GlobalParameterRequirement extends InequalityRequirement {
     if (super.satisfies(player, card)) {
       return true;
     }
-    const thinkTankResources = player.getPlayedCard(CardName.THINK_TANK)?.resourceCount;
+    const thinkTankResources = player.tableau.get(CardName.THINK_TANK)?.resourceCount;
     if (thinkTankResources) {
       const distance = this.distance(player);
       if (distance <= thinkTankResources) {

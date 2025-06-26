@@ -37,7 +37,7 @@ export class SponsoredAcademies extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     player.game.defer(new DiscardCards(player), Priority.SPONSORED_ACADEMIES).andThen(() => {});
     player.game.defer(DrawCards.keepAll(player, 3), Priority.SPONSORED_ACADEMIES);
-    for (const p of player.getOpponents()) {
+    for (const p of player.opponents) {
       player.game.defer(DrawCards.keepAll(p));
     }
     return undefined;

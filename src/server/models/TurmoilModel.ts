@@ -42,7 +42,7 @@ export function getTurmoilModel(game: IGame): TurmoilModel | undefined {
     };
 
     const policyActionUsers = Array.from(
-      game.getPlayersInGenerationOrder(),
+      game.playersInGenerationOrder,
       (player) => {
         return {
           color: player.color,

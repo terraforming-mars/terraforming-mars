@@ -35,7 +35,7 @@ export class StingOperation extends Card implements IProjectCard {
   }
 
   private targets(player: IPlayer) {
-    return player.game.getPlayers().filter((player) => player.underworldData.corruption >= 4);
+    return player.game.players.filter((player) => player.underworldData.corruption >= 4);
   }
 
   public override bespokeCanPlay(player: IPlayer) {

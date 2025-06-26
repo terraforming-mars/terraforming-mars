@@ -8,9 +8,9 @@ import {ASIMOV_AWARD_BONUS} from '../../common/constants';
 export class AwardScorer {
   private scores: Map<PlayerId, number> = new Map();
   constructor(game: IGame, award: IAward) {
-    for (const player of game.getPlayers()) {
+    for (const player of game.players) {
       let score = award.getScore(player);
-      if (player.cardIsInEffect(CardName.ASIMOV)) {
+      if (player.tableau.has(CardName.ASIMOV)) {
         score += ASIMOV_AWARD_BONUS;
       }
       this.scores.set(player.id, score);

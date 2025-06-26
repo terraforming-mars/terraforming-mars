@@ -36,7 +36,7 @@ export class PlantTax extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
-    for (const target of game.getPlayers()) {
+    for (const target of game.players) {
       game.defer(new RemoveResources(target, player, Resource.PLANTS, 2));
     }
     return undefined;

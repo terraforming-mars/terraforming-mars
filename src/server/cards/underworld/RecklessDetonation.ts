@@ -42,7 +42,7 @@ export class RecklessDetonation extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     if (player.game.isSoloMode()) return undefined;
 
-    const availablePlayerTargets = player.game.getPlayers().filter((p) => p.id !== player.id);
+    const availablePlayerTargets = player.game.players.filter((p) => p.id !== player.id);
     const availableActions = new OrOptions();
 
     availablePlayerTargets.forEach((target) => {

@@ -51,7 +51,7 @@ export class Playwrights extends CorporationCard implements ICorporationCard {
   }
 
   public action(player: IPlayer): SelectCard<IProjectCard> | undefined {
-    const players = player.game.getPlayers();
+    const players = player.game.players;
     const replayableEvents = this.getReplayableEvents(player);
 
     return new SelectCard<IProjectCard>(
@@ -79,7 +79,7 @@ export class Playwrights extends CorporationCard implements ICorporationCard {
                * Needs to be deferred to happen after Law Suit's `play()` method.
                */
                 player.defer(() => {
-                  player.game.getPlayers().some((p) => {
+                  player.game.players.some((p) => {
                     const card = p.playedCards.last();
                     if (card?.name === selectedCard.name) {
                       p.playedCards.remove(card);
@@ -105,7 +105,7 @@ export class Playwrights extends CorporationCard implements ICorporationCard {
 
     this.checkLoops++;
     try {
-      player.game.getPlayers().forEach((p) => {
+      player.game.players.forEach((p) => {
         for (const card of p.playedCards.projects()) {
           // Special case Price Wars, which is not easy to work with.
           if (card.name === CardName.PRICE_WARS) {

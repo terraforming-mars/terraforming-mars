@@ -63,7 +63,7 @@ export class Tags {
    * Get the number of tags this player has.
    */
   public count(tag: Tag, mode: CountingMode = 'default') {
-    const includeEvents = mode === 'raw-underworld' || this.player.cardIsInEffect(CardName.ODYSSEY);
+    const includeEvents = mode === 'raw-underworld' || this.player.tableau.has(CardName.ODYSSEY);
     const includeTagSubstitutions = (mode === 'default' || mode === 'milestone');
 
     let tagCount = this.rawCount(tag, includeEvents);
@@ -75,7 +75,7 @@ export class Tags {
 
     if (includeTagSubstitutions) {
       // Earth Embassy hook
-      if (tag === Tag.EARTH && this.player.cardIsInEffect(CardName.EARTH_EMBASSY)) {
+      if (tag === Tag.EARTH && this.player.tableau.has(CardName.EARTH_EMBASSY)) {
         tagCount += this.rawCount(Tag.MOON, includeEvents);
       }
 
@@ -86,13 +86,13 @@ export class Tags {
 
     // Habitat Marte hook
     if (mode !== 'raw') {
-      if (tag === Tag.SCIENCE && this.player.cardIsInEffect(CardName.HABITAT_MARTE)) {
+      if (tag === Tag.SCIENCE && this.player.tableau.has(CardName.HABITAT_MARTE)) {
         tagCount += this.rawCount(Tag.MARS, includeEvents);
       }
     }
 
     // Chimera hook
-    if (this.player.cardIsInEffect(CardName.CHIMERA)) {
+    if (this.player.tableau.has(CardName.CHIMERA)) {
       // Awards do not count wild tags, so in this case one will be added.
       if (mode === 'award') {
         tagCount++;
@@ -114,7 +114,7 @@ export class Tags {
       if (tag === target) return true;
       if (tag === Tag.MARS &&
         target === Tag.SCIENCE &&
-        this.player.cardIsInEffect(CardName.HABITAT_MARTE)) {
+        this.player.tableau.has(CardName.HABITAT_MARTE)) {
         return true;
       }
     }
@@ -133,7 +133,7 @@ export class Tags {
       } else if (Array.isArray(target) && target.includes(tag)) {
         count++;
       } else if (tag === Tag.MARS && target === Tag.SCIENCE &&
-        this.player.cardIsInEffect(CardName.HABITAT_MARTE)) {
+        this.player.tableau.has(CardName.HABITAT_MARTE)) {
         count++;
       }
     }
@@ -160,7 +160,7 @@ export class Tags {
    * Tag substitutions are included, and not counted repeatedly.
    */
   public multipleCount(tags: Array<Tag>, mode: MultipleCountMode = 'default'): number {
-    const includeEvents = this.player.cardIsInEffect(CardName.ODYSSEY);
+    const includeEvents = this.player.tableau.has(CardName.ODYSSEY);
 
     let tagCount = 0;
     tags.forEach((tag) => {
@@ -168,17 +168,17 @@ export class Tags {
     });
 
     // This is repeated behavior from getTagCount, sigh, OK.
-    if (tags.includes(Tag.EARTH) && !tags.includes(Tag.MOON) && this.player.cardIsInEffect(CardName.EARTH_EMBASSY)) {
+    if (tags.includes(Tag.EARTH) && !tags.includes(Tag.MOON) && this.player.tableau.has(CardName.EARTH_EMBASSY)) {
       tagCount += this.rawCount(Tag.MOON, includeEvents);
     }
 
     if (mode !== 'award') {
       tagCount += this.rawCount(Tag.WILD, includeEvents);
       // Chimera has 2 wild tags but should only count as one for milestones.
-      if (this.player.cardIsInEffect(CardName.CHIMERA) && mode === 'milestone') tagCount--;
+      if (this.player.tableau.has(CardName.CHIMERA) && mode === 'milestone') tagCount--;
     } else {
       // Chimera counts as one wild tag for awards
-      if (this.player.cardIsInEffect(CardName.CHIMERA)) tagCount++;
+      if (this.player.tableau.has(CardName.CHIMERA)) tagCount++;
     }
 
     return tagCount;
@@ -208,7 +208,7 @@ export class Tags {
    */
   public distinctCount(mode: DistinctCountMode, extraTag?: Tag): number {
     const uniqueTags = new Set<Tag>();
-    const playerIsOdyssey = this.player.cardIsInEffect(CardName.ODYSSEY);
+    const playerIsOdyssey = this.player.tableau.has(CardName.ODYSSEY);
     let wildTagCount = 0;
 
     for (const card of this.player.tableau) {
@@ -240,7 +240,7 @@ export class Tags {
     // Global events occur outside the action phase. Stop counting here, before wild tags apply.
     if (mode === 'globalEvent') return uniqueTags.size;
 
-    if (mode === 'milestone' && this.player.cardIsInEffect(CardName.CHIMERA)) wildTagCount--;
+    if (mode === 'milestone' && this.player.tableau.has(CardName.CHIMERA)) wildTagCount--;
 
     let maximum = this.tagsInGame();
     if (playerIsOdyssey) maximum++;
@@ -256,7 +256,7 @@ export class Tags {
       } else if (tag === Tag.SCIENCE) {
         if (this.player.hasTurmoilScienceTagBonus) {
           distinctCount++;
-        } else if (this.player.cardIsInEffect(CardName.HABITAT_MARTE)) {
+        } else if (this.player.tableau.has(CardName.HABITAT_MARTE)) {
           if (this.count(Tag.MARS, 'raw') > 0) {
             distinctCount++;
           }

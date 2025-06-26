@@ -33,7 +33,7 @@ export class RemoveResources extends DeferredAction<number> {
     let qtyLost = Math.min(this.target.stock.get(this.resource), this.count);
 
     // Botanical Experience hook.
-    if (this.resource === Resource.PLANTS && this.target.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
+    if (this.resource === Resource.PLANTS && this.target.tableau.has(CardName.BOTANICAL_EXPERIENCE)) {
       qtyLost = Math.ceil(qtyLost / 2);
     }
 

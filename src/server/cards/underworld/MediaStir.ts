@@ -23,7 +23,7 @@ export class MediaStir extends GlobalEvent implements IGlobalEvent {
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
+    game.playersInGenerationOrder.forEach((player) => {
       const corruption = Math.min(player.underworldData.corruption, 5);
       const adjusted = Math.max(0, corruption - turmoil.getPlayerInfluence(player));
       if (adjusted > 0) {

@@ -17,8 +17,8 @@ describe('EcoSabotage', () => {
     player.plants = 10;
     player2.plants = 10;
 
-    expect(turmoil.getPlayerInfluence(player)).eq(0);
-    expect(turmoil.getPlayerInfluence(player2)).eq(2);
+    expect(turmoil.getInfluence(player)).eq(0);
+    expect(turmoil.getInfluence(player2)).eq(2);
 
     card.resolve(game, turmoil);
 

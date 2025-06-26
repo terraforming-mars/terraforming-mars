@@ -24,7 +24,7 @@ describe('Oscar', () => {
 
   it('Has +1 influence', () => {
     card.play(player);
-    expect(turmoil?.getPlayerInfluence(player)).eq(1);
+    expect(turmoil?.getInfluence(player)).eq(1);
   });
 
   it('Takes OPG action', () => {

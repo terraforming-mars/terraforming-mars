@@ -69,7 +69,7 @@ export function calculateVictoryPoints(player: IPlayer) {
 
   Turmoil.ifTurmoil(player.game, (turmoil) => {
     if (includeTurmoilVP) {
-      builder.setVictoryPoints('victoryPoints', turmoil.getPlayerVictoryPoints(player), 'Turmoil Points');
+      builder.setVictoryPoints('victoryPoints', turmoil.getVictoryPoints(player), 'Turmoil Points');
     }
   });
 

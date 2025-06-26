@@ -29,7 +29,7 @@ export class CelebrityLeaders extends GlobalEvent implements IGlobalEvent {
       const eventsCards = player.getPlayedEventsCount();
       player.stock.add(
         Resource.MEGACREDITS,
-        2 * (Math.min(5, eventsCards) + turmoil.getPlayerInfluence(player)),
+        2 * (Math.min(5, eventsCards) + turmoil.getInfluence(player)),
         {log: true, from: {globalEvent: this}},
       );
     });

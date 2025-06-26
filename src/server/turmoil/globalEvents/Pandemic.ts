@@ -26,7 +26,7 @@ export class Pandemic extends GlobalEvent implements IGlobalEvent {
   public resolve(game: IGame, turmoil: Turmoil) {
     game.playersInGenerationOrder.forEach((player) => {
       const maxedSteelTags = Math.min(5, player.tags.count(Tag.BUILDING, 'raw'));
-      player.stock.deduct(Resource.MEGACREDITS, 3 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)), {log: true, from: {globalEvent: this}});
+      player.stock.deduct(Resource.MEGACREDITS, 3 * Math.max(0, maxedSteelTags - turmoil.getInfluence(player)), {log: true, from: {globalEvent: this}});
     });
   }
 }

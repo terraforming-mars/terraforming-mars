@@ -30,7 +30,7 @@ export class MudSlides extends GlobalEvent implements IGlobalEvent {
           game.board.getAdjacentSpaces(space)
             .filter((space) => Board.isOceanSpace(space)).length > 0,
         ).length;
-      const amount = Math.min(5, tiles) - turmoil.getPlayerInfluence(player);
+      const amount = Math.min(5, tiles) - turmoil.getInfluence(player);
       if (amount > 0) {
         player.stock.deduct(Resource.MEGACREDITS, 4 * amount, {log: true, from: {globalEvent: this}});
       }

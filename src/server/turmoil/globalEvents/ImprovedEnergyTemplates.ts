@@ -29,7 +29,7 @@ export class ImprovedEnergyTemplates extends GlobalEvent implements IGlobalEvent
         Resource.ENERGY,
         Math.floor(
           (player.tags.count(Tag.POWER, 'raw') +
-            turmoil.getPlayerInfluence(player)) /
+            turmoil.getInfluence(player)) /
             2),
         {log: true, from: {globalEvent: this}},
       );

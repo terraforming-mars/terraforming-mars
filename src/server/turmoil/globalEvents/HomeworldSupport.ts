@@ -25,7 +25,7 @@ export class HomeworldSupport extends GlobalEvent implements IGlobalEvent {
   }
   public resolve(game: IGame, turmoil: Turmoil) {
     game.playersInGenerationOrder.forEach((player) => {
-      const amount = Math.min(5, player.tags.count(Tag.EARTH, 'raw')) + turmoil.getPlayerInfluence(player);
+      const amount = Math.min(5, player.tags.count(Tag.EARTH, 'raw')) + turmoil.getInfluence(player);
       if (amount > 0) {
         player.stock.add(Resource.MEGACREDITS, 2 * amount, {log: true, from: {globalEvent: this}});
       }

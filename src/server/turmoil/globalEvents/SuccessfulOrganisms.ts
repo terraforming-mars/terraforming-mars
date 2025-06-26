@@ -25,7 +25,7 @@ export class SuccessfulOrganisms extends GlobalEvent implements IGlobalEvent {
   }
   public resolve(game: IGame, turmoil: Turmoil) {
     game.playersInGenerationOrder.forEach((player) => {
-      player.stock.add(Resource.PLANTS, Math.min(5, player.production.plants) + turmoil.getPlayerInfluence(player), {log: true, from: {globalEvent: this}});
+      player.stock.add(Resource.PLANTS, Math.min(5, player.production.plants) + turmoil.getInfluence(player), {log: true, from: {globalEvent: this}});
     });
   }
 }

@@ -37,7 +37,7 @@ export class SeismicPredictions extends GlobalEvent implements IGlobalEvent {
         .filter((space) => space.spaceType !== SpaceType.COLONY);
       const filtered = playerSpaces.filter(
         (space) => space.undergroundResources === undefined && space.excavator === undefined);
-      const penalty = Math.min(5, filtered.length) - turmoil.getPlayerInfluence(player);
+      const penalty = Math.min(5, filtered.length) - turmoil.getInfluence(player);
       const cost = penalty * 2;
       if (cost > 0) {
         player.stock.deduct(Resource.MEGACREDITS, cost, {log: true, from: {globalEvent: this}});

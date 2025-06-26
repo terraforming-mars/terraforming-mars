@@ -24,7 +24,7 @@ export class SnowCover extends GlobalEvent implements IGlobalEvent {
     game.increaseTemperature(game.playersInGenerationOrder[0], -2);
 
     game.playersInGenerationOrder.forEach((player) => {
-      player.drawCard(turmoil.getPlayerInfluence(player));
+      player.drawCard(turmoil.getInfluence(player));
     });
   }
 }

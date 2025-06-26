@@ -27,7 +27,7 @@ export class MigrationUnderground extends GlobalEvent implements IGlobalEvent {
 
   public resolve(game: IGame, turmoil: Turmoil) {
     game.playersInGenerationOrder.forEach((player) => {
-      const sum = UnderworldExpansion.excavationMarkerCount(player) + turmoil.getPlayerInfluence(player);
+      const sum = UnderworldExpansion.excavationMarkerCount(player) + turmoil.getInfluence(player);
       const mc = Math.floor(sum / 2);
       const max = Math.min(mc, 5);
       player.production.add(Resource.MEGACREDITS, max, {log: true});

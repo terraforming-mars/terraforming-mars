@@ -30,7 +30,7 @@ export class SpinoffProducts extends GlobalEvent implements IGlobalEvent {
         Resource.MEGACREDITS,
         2 *
           (Math.min(5, player.tags.count(Tag.SCIENCE, 'raw-pf')) +
-            turmoil.getPlayerInfluence(player)),
+            turmoil.getInfluence(player)),
         {log: true, from: {globalEvent: this}},
       );
     });

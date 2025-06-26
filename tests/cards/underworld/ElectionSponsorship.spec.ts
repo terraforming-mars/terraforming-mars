@@ -38,19 +38,19 @@ describe('ElectionSponsorship', () => {
     const [game, player] = testGame(2, {turmoilExtension: true});
     const turmoil = Turmoil.getTurmoil(game);
 
-    expect(turmoil.getPlayerInfluence(player)).eq(0);
+    expect(turmoil.getInfluence(player)).eq(0);
 
     player.playedCards.push(card);
 
-    expect(turmoil.getPlayerInfluence(player)).eq(2);
+    expect(turmoil.getInfluence(player)).eq(2);
 
     game.generation = 3;
-    expect(turmoil.getPlayerInfluence(player)).eq(2);
+    expect(turmoil.getInfluence(player)).eq(2);
 
     game.generation = 4;
-    expect(turmoil.getPlayerInfluence(player)).eq(2);
+    expect(turmoil.getInfluence(player)).eq(2);
 
     game.generation = 5;
-    expect(turmoil.getPlayerInfluence(player)).eq(0);
+    expect(turmoil.getInfluence(player)).eq(0);
   });
 });

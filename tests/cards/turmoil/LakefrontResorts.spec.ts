@@ -3,15 +3,15 @@ import {LakefrontResorts} from '../../../src/server/cards/turmoil/LakefrontResor
 import {addOcean, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('LakefrontResorts', function() {
-  it('Should play', function() {
+describe('LakefrontResorts', () => {
+  it('Should play', () => {
     const card = new LakefrontResorts();
     const [game, player] = testGame(2);
     const play = card.play(player);
 
     expect(play).is.undefined;
 
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     addOcean(player, '06');
     addOcean(player, '07');
     runAllActions(game);

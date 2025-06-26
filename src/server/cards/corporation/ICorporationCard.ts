@@ -2,18 +2,18 @@ import {ICard} from '../ICard';
 import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {CardType} from '../../../common/cards/CardType';
-import {SerializedCard} from '../../SerializedCard';
 import {Behavior} from '../../behavior/Behavior';
+import {SerializedCard} from '../../SerializedCard';
 
 export interface ICorporationCard extends ICard {
+  type: CardType.CORPORATION;
   initialActionText?: string;
-  initialAction?: (player: IPlayer) => PlayerInput | undefined;
+  initialAction?(player: IPlayer): PlayerInput | undefined;
   firstAction?: Behavior,
   startingMegaCredits: number;
   cardCost?: number;
-  onCorpCardPlayed?: (player: IPlayer, card: ICorporationCard) => PlayerInput | undefined;
-  onProductionPhase?: (player: IPlayer) => undefined; // For Pristar
-  isDisabled?: boolean;
+  onCardPlayedForCorps?(player: IPlayer, card: ICard): PlayerInput | undefined | void;
+  onCardPlayed?: never;
 
   serialize?(serialized: SerializedCard): void;
   deserialize?(serialized: SerializedCard): void;

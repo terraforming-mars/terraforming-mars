@@ -4,7 +4,7 @@ import {DeuteriumExport} from '../../../src/server/cards/venusNext/DeuteriumExpo
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {ExtractorBalloons} from '../../../src/server/cards/venusNext/ExtractorBalloons';
 import {StratosphericBirds} from '../../../src/server/cards/venusNext/StratosphericBirds';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {Payment} from '../../../src/common/inputs/Payment';
@@ -16,7 +16,7 @@ import {testGame} from '../../TestGame';
 describe('StratosphericBirds', () => {
   let card: StratosphericBirds;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let deuteriumExport: DeuteriumExport;
 
   beforeEach(() => {
@@ -30,26 +30,26 @@ describe('StratosphericBirds', () => {
     player.playedCards.push(deuteriumExport);
     player.addResourceTo(deuteriumExport, 1);
     setVenusScaleLevel(game, 10);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Cannot play if no floater', () => {
     setVenusScaleLevel(game, 12);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can play', () => {
     player.playedCards.push(deuteriumExport);
     player.addResourceTo(deuteriumExport, 1);
     setVenusScaleLevel(game, 12);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', () => {
     player.playedCards.push(deuteriumExport);
     player.addResourceTo(deuteriumExport, 1);
     setVenusScaleLevel(game, 12);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     player.playedCards.push(card);
 
     card.play(player);
@@ -92,7 +92,7 @@ describe('StratosphericBirds', () => {
     setVenusScaleLevel(game, 12);
     player.megaCredits = 12;
 
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
     selectProjectCardToPlay.payAndPlay(card, {...Payment.EMPTY, megaCredits: 12});
@@ -111,12 +111,12 @@ describe('StratosphericBirds', () => {
     player.megaCredits = 9;
 
     // 9 M€ + 1 Dirigibles floater: Cannot play
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
 
     // 12 M€ + 1 Dirigibles floater: Card is playable
     player.megaCredits = 12;
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     // Try to spend floater to pay for card: Throw an error
     expect(() => {
@@ -140,7 +140,7 @@ describe('StratosphericBirds', () => {
     setVenusScaleLevel(game, 12);
     player.megaCredits = 3;
 
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     // Spend all 3 floaters from Dirigibles to pay for the card
     const selectProjectCardToPlay = new SelectProjectCardToPlay(player);
@@ -161,6 +161,6 @@ describe('StratosphericBirds', () => {
     const indentured = new IndenturedWorkers();
     player.playCard(indentured);
     card.play(player);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 });

@@ -1,5 +1,5 @@
-// Is board-cont necessary?
 <template>
+  <!-- Is board-cont necessary? -->
   <div class="board-cont moon-board" id="moon_board">
     <svg id="moon_board_legend" height="550" width="630" class="board-legend">
       <g id="mare_imbrium" transform="translate(250, 40)">
@@ -40,7 +40,7 @@
       </g>
     </svg>
 
-    <div class="board-outer-spaces">
+    <div id="moon_board_outer_spaces" class="board-outer-spaces">
       <MoonSpace :space="getSpaceById('m01')" text="Luna Trade Station"></MoonSpace>
       <MoonSpace :space="getSpaceById('m37')" text="Momentum Virium Habitat"></MoonSpace>
     </div>
@@ -62,16 +62,16 @@
 
     <div class="board" id="moon_board">
       <MoonSpace
-        v-for="curSpace in getAllNonColonySpaces()"
-        :key="curSpace.id"
-        :space="curSpace"
-        :is_selectable="true"
+        v-for="space in getAllNonColonySpaces()"
+        :key="space.id"
+        :space="space"
         :tileView="tileView"
         data-test="moon-board-space"
       />
     </div>
   </div>
 </template>
+
 <script lang="ts">
 
 import Vue from 'vue';
@@ -133,13 +133,13 @@ export default Vue.extend({
         curValue = this.model.miningRate;
         break;
       case 'habitat':
-        curValue = this.model.colonyRate;
+        curValue = this.model.habitatRate;
         break;
       default:
         throw new Error('Wrong parameter to get values from: ' + targetParameter);
       }
 
-      const values: Array<MoonParamLevel> = [];
+      const values = [];
       for (let value = 8; value >= 0; value -= 1) {
         values.push({
           value: value,

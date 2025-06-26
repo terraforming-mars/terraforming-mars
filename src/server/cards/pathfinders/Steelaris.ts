@@ -1,25 +1,23 @@
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {Space} from '../../boards/Space';
 import {TileType} from '../../../common/TileType';
 import {GainStock} from '../../deferredActions/GainStock';
-import {Priority} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 import {Size} from '../../../common/cards/render/Size';
 import {BoardType} from '../../boards/BoardType';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {Units} from '../../../common/Units';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Steelaris extends Card implements ICorporationCard {
+export class Steelaris extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.STEELARIS,
       tags: [Tag.BUILDING, Tag.CITY],
       startingMegaCredits: 42,

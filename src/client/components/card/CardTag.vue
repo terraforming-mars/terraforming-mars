@@ -18,7 +18,7 @@ export default Vue.extend({
     type: {
       type: String,
       required: true,
-      validator: (type: Tag) => Object.values(Tag).includes(type),
+      validator: (type: Tag | 'asterisk') => type === 'asterisk' || Object.values(Tag).includes(type),
     },
   },
   methods: {

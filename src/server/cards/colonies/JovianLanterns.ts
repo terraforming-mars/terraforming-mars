@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Payment} from '../../../common/inputs/Payment';
@@ -19,7 +18,7 @@ export class JovianLanterns extends Card implements IProjectCard {
 
       resourceType: CardResource.FLOATER,
       victoryPoints: {resourcesHere: {}, per: 2},
-      requirements: CardRequirements.builder((b) => b.tag(Tag.JOVIAN)),
+      requirements: {tag: Tag.JOVIAN},
 
       behavior: {
         tr: 1,
@@ -30,9 +29,9 @@ export class JovianLanterns extends Card implements IProjectCard {
         cardNumber: 'C18',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 titanium to add 2 floaters here.', (eb) => {
-            eb.titanium(1).startAction.floaters(2);
+            eb.titanium(1).startAction.resource(CardResource.FLOATER, 2);
           }).br;
-          b.tr(1).floaters(2).asterix().br;
+          b.tr(1).resource(CardResource.FLOATER, 2).asterix().br;
           b.vpText('1 VP per 2 floaters here.');
         }),
         description: {

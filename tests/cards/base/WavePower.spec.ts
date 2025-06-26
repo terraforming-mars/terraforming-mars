@@ -4,23 +4,23 @@ import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {maxOutOceans} from '../../TestingUtils';
 
-describe('WavePower', function() {
+describe('WavePower', () => {
   let card: WavePower;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new WavePower();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     maxOutOceans(player, 2);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     maxOutOceans(player, 3);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.production.energy).to.eq(1);

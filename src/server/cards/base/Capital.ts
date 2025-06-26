@@ -7,16 +7,15 @@ import {TileType} from '../../../common/TileType';
 import {CardName} from '../../../common/cards/CardName';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {Board} from '../../boards/Board';
-import {ICardMetadata} from '../../../common/cards/ICardMetadata';
-import {CardRequirements} from '../requirements/CardRequirements';
+import {CardMetadata} from '../../../common/cards/CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {oceans} from '../render/DynamicVictoryPoints';
 
 export class Capital extends Card implements IProjectCard {
   constructor(
     name = CardName.CAPITAL,
     adjacencyBonus: AdjacencyBonus | undefined = undefined,
-    metadata: ICardMetadata = {
+    metadata: CardMetadata = {
       cardNumber: '008',
       description: {
         text: 'Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your M€ production 5 steps.',
@@ -29,7 +28,7 @@ export class Capital extends Card implements IProjectCard {
         }).nbsp.tile(TileType.CAPITAL, false).br;
         b.vpText('1 additional VP for each ocean tile adjacent to this city tile.');
       }),
-      victoryPoints: CardRenderDynamicVictoryPoints.oceans(1, 1),
+      victoryPoints: oceans(1, 1),
     },
   ) {
     super({
@@ -48,7 +47,7 @@ export class Capital extends Card implements IProjectCard {
         },
       },
 
-      requirements: CardRequirements.builder((b) => b.oceans(4)),
+      requirements: {oceans: 4},
       victoryPoints: 'special',
       metadata,
     });

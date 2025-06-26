@@ -14,6 +14,7 @@ import Vue from 'vue';
 import {PlayerInputType} from '@/common/input/PlayerInputType';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {InputResponse} from '@/common/inputs/InputResponse';
 import AndOptions from '@/client/components/AndOptions.vue';
 import OrOptions from '@/client/components/OrOptions.vue';
 import SelectAmount from '@/client/components/SelectAmount.vue';
@@ -24,12 +25,14 @@ import SelectInitialCards from '@/client/components/SelectInitialCards.vue';
 import SelectOption from '@/client/components/SelectOption.vue';
 import SelectPlayer from '@/client/components/SelectPlayer.vue';
 import SelectSpace from '@/client/components/SelectSpace.vue';
-import SelectPartyPlayer from '@/client/components/SelectPartyPlayer.vue';
+import SelectDelegate from '@/client/components/SelectDelegate.vue';
 import SelectParty from '@/client/components/SelectParty.vue';
 import SelectColony from '@/client/components/SelectColony.vue';
 import SelectProductionToLose from '@/client/components/SelectProductionToLose.vue';
 import ShiftAresGlobalParameters from '@/client/components/ShiftAresGlobalParameters.vue';
-import {InputResponse} from '@/common/inputs/InputResponse';
+import SelectGlobalEvent from '@/client/components/SelectGlobalEvent.vue';
+import SelectResource from '@/client/components/SelectResource.vue';
+import SelectResources from '@/client/components/SelectResources.vue';
 
 const typeToComponentName: Record<PlayerInputType, string> = {
   'and': 'and-options',
@@ -42,11 +45,15 @@ const typeToComponentName: Record<PlayerInputType, string> = {
   'space': 'select-space',
   'player': 'select-player',
   'amount': 'select-amount',
-  'delegate': 'select-party-player',
-  'party': 'select-party-to-send-delegate',
+  'delegate': 'select-delegate',
+  'party': 'select-party',
   'colony': 'select-colony',
   'productionToLose': 'select-production-to-lose',
   'aresGlobalParameters': 'shift-ares-global-parameters',
+  'globalEvent': 'select-global-event',
+  'policy': 'select-policy',
+  'resource': 'select-resource',
+  'resources': 'select-resources',
 };
 
 export default Vue.component('player-input-factory', {
@@ -81,11 +88,14 @@ export default Vue.component('player-input-factory', {
     SelectInitialCards,
     'select-player': SelectPlayer,
     'select-space': SelectSpace,
-    'select-party-player': SelectPartyPlayer,
-    'select-party-to-send-delegate': SelectParty,
+    'select-delegate': SelectDelegate,
+    'select-party': SelectParty,
     'select-colony': SelectColony,
     SelectProductionToLose,
     ShiftAresGlobalParameters,
+    SelectGlobalEvent,
+    'select-resource': SelectResource,
+    'select-resources': SelectResources,
   },
   methods: {
     saveData() {
@@ -98,7 +108,7 @@ export default Vue.component('player-input-factory', {
   },
   computed: {
     componentName(): string {
-      return typeToComponentName[this.playerinput.inputType];
+      return typeToComponentName[this.playerinput.type];
     },
   },
 });

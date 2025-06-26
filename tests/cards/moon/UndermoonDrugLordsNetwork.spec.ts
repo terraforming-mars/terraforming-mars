@@ -1,16 +1,15 @@
 import {UndermoonDrugLordsNetwork} from '../../../src/server/cards/moon/UndermoonDrugLordsNetwork';
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
+import {testGame} from '../../TestingUtils';
 
 describe('UndermoonDrugLordsNetwork', () => {
   let player: TestPlayer;
   let card: UndermoonDrugLordsNetwork;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [/* game */, player] = testGame(1, {moonExpansion: true});
     card = new UndermoonDrugLordsNetwork();
   });
 
@@ -18,27 +17,27 @@ describe('UndermoonDrugLordsNetwork', () => {
     const moonData = MoonExpansion.moonData(player.game);
 
     player.production.override({megacredits: 0});
-    moonData.colonyRate = 0;
+    moonData.habitatRate = 0;
     card.play(player);
     expect(player.production.megacredits).eq(0);
 
     player.production.override({megacredits: 0});
-    moonData.colonyRate = 1;
+    moonData.habitatRate = 1;
     card.play(player);
     expect(player.production.megacredits).eq(0);
 
     player.production.override({megacredits: 0});
-    moonData.colonyRate = 2;
+    moonData.habitatRate = 2;
     card.play(player);
     expect(player.production.megacredits).eq(1);
 
     player.production.override({megacredits: 0});
-    moonData.colonyRate = 3;
+    moonData.habitatRate = 3;
     card.play(player);
     expect(player.production.megacredits).eq(1);
 
     player.production.override({megacredits: 0});
-    moonData.colonyRate = 4;
+    moonData.habitatRate = 4;
     card.play(player);
     expect(player.production.megacredits).eq(2);
   });

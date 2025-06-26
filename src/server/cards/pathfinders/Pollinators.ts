@@ -5,7 +5,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 
 export class Pollinators extends ActionCard implements IProjectCard {
   constructor() {
@@ -15,7 +14,7 @@ export class Pollinators extends ActionCard implements IProjectCard {
       cost: 19,
       tags: [Tag.PLANT, Tag.ANIMAL],
       resourceType: CardResource.ANIMAL,
-      requirements: CardRequirements.builder((b) => b.tag(Tag.PLANT, 3)),
+      requirements: {tag: Tag.PLANT, count: 3},
       victoryPoints: {resourcesHere: {}},
 
       behavior: {
@@ -27,9 +26,9 @@ export class Pollinators extends ActionCard implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: '...',
+        cardNumber: 'PfT9',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 animal on this card', (ab) => ab.empty().startAction.animals(1)).br;
+          b.action('Add 1 animal on this card', (ab) => ab.empty().startAction.resource(CardResource.ANIMAL)).br;
           b.production((pb) => pb.plants(1).megacredits(2));
           b.vpText('1 VP per animal on this card.');
         }),

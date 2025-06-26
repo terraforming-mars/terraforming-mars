@@ -56,7 +56,7 @@
 		
     "Initial Drafting (optional variant)": "Предварительный набор карт (опциональный режим)",
 	"Draw 3 corporation cards": "Взятие 3 карт корпораций",
-	"Draw 4 prelude cards ": "Взятие 4 карт прологов",
+	"Draw 4 prelude cards": "Взятие 4 карт прологов",
 	"Draw 5 project cards. Draft. Pick one card and pass to the player above in turn order. Repeat until you have 5 cards.": "Взятие 5 карт проектов. Каждый игрок берёт карту и передаёт следующему игроку в порядке очереди. Добор до 5 карт. Повторение, пока у каждого игрока не получится 5 карт проектов на руке.",
 	"Draw 5 more project cards. Draft and pass to the player below in turn order instead.": "Взятие ещё 5 карт проектов. И повторяется выполнение предыдущего пункта, но теперь передаётся выбор предыдущему игроку.",
 	"Draft the prelude cards. Pick one card and pass to the player above in turn order. Repeat until you have 4 preludes.": "Взятие карт прологов. Выполняется то же самое действие, как и с картами проектов, пока на руках у игроков не окажется 4 карты.",
@@ -87,7 +87,7 @@
 	"Produce resources": "Производство ресурсов",
 	"Solar Phase": "Солнечная фаза",
 	"i. Game end check": "1. Проверка выполнения условий окончания игры",
-	"If temperature, oxygen, and oceans are maxed, skip the rest of solar phase to the end game phase. ": "Если шкалы температуры, кислорода и океанов заполнены, эта фаза пропускается.",
+	"If temperature, oxygen, and oceans are maxed, skip the rest of solar phase to the end game phase.": "Если шкалы температуры, кислорода и океанов заполнены, эта фаза пропускается.",
 	"(If playing solo, the game ends after 14 generations.)": "(При игре в соло, игра заканчивается после 14 поколения.)",
 	"Solo mode adjustments for expansions:": "Условия соло-режима при игре с дополнениями:",
 	"• Prelude: The game ends 2 generations earlier.": "• Пролог: игра заканчивается на 2 поколения раньше.",

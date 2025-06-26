@@ -123,15 +123,16 @@ export class GameLoader implements IGameLoader {
   public async restoreGameAt(gameId: GameId, saveId: number): Promise<IGame> {
     const current = await this.getGame(gameId);
     if (current === undefined) {
+      console.error('GameLoader cannot find game ' + gameId);
       throw new Error('Cannot find game');
     }
     const currentSaveId = current.lastSaveId;
-    const serializedGame = await Database.getInstance().getGameVersion(gameId, saveId);
-    const game = Game.deserialize(serializedGame);
     const deletes = (currentSaveId - saveId) - 1;
     if (deletes > 0) {
       await Database.getInstance().deleteGameNbrSaves(gameId, deletes);
     }
+    const serializedGame = await Database.getInstance().getGame(gameId);
+    const game = Game.deserialize(serializedGame);
     await this.add(game);
     game.undoCount++;
     return game;
@@ -187,6 +188,6 @@ function parseConfigString(stringValue: string): CacheConfig {
   const evictMillis = durationToMilliseconds(parsed.eviction_age);
   if (!isNaN(evictMillis)) options.evictMillis = evictMillis;
   const sleepMillis = durationToMilliseconds(parsed.sweep_freq);
-  if (isNaN(sleepMillis)) options.sleepMillis = sleepMillis;
+  if (!isNaN(sleepMillis)) options.sleepMillis = sleepMillis;
   return options;
 }

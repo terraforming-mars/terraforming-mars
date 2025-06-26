@@ -2,46 +2,43 @@ import {expect} from 'chai';
 import {Research} from '../../../src/server/cards/base/Research';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {Stratopolis} from '../../../src/server/cards/venusNext/Stratopolis';
-import {Game} from '../../../src/server/Game';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
-import {cast, churnAction, runAllActions} from '../../TestingUtils';
+import {cast, churn, runAllActions, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('Stratopolis', function() {
+describe('Stratopolis', () => {
   let card: Stratopolis;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Stratopolis();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, redPlayer], player, {venusNextExtension: true});
+    [/* game */, player/* , player2 */] = testGame(2, {venusNextExtension: true});
   });
 
-  it('Can not play', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+  it('Can not play', () => {
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.playedCards.push(new Research());
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.production.megacredits).to.eq(2);
   });
 
-  it('Should act - single target', function() {
+  it('Should act - single target', () => {
     player.playedCards.push(card);
     card.action(player);
     runAllActions(player.game);
     expect(card.resourceCount).to.eq(2);
   });
 
-  it('Should act - multiple targets', function() {
+  it('Should act - multiple targets', () => {
     const card2 = new AerialMappers();
     player.playedCards.push(card, card2);
 
-    const selectCard = cast(churnAction(card, player), SelectCard);
+    const selectCard = cast(churn(card.action(player), player), SelectCard);
     selectCard.cb([card2]);
 
     expect(card2.resourceCount).to.eq(2);

@@ -1,51 +1,72 @@
 import {expect} from 'chai';
 import {LavaTubeSettlement} from '../../../src/server/cards/prelude/LavaTubeSettlement';
-import {Game} from '../../../src/server/Game';
-import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resource} from '../../../src/common/Resource';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {TileType} from '../../../src/common/TileType';
-import {cast, resetBoard} from '../../TestingUtils';
-import {TestPlayer} from '../../TestPlayer';
+import {cast, runAllActions, testGame} from '../../TestingUtils';
+import {assertPlaceCity} from '../../assertions';
+import {BoardName} from '../../../src/common/boards/BoardName';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {toID} from '../../../src/common/utils/utils';
 
-describe('LavaTubeSettlement', function() {
+describe('LavaTubeSettlement', () => {
   let card: LavaTubeSettlement;
-  let player: TestPlayer;
-  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new LavaTubeSettlement();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
-    resetBoard(game);
   });
 
-  it('Cannot play without energy production', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+  it('Cannot play without energy production', () => {
+    const [/* game */, player] = testGame(2);
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Cannot play if no volcanic spaces left', function() {
+  it('Cannot play if no volcanic spaces left', () => {
+    const [game, player, otherPlayer] = testGame(2);
     player.production.add(Resource.ENERGY, 1);
-    game.addTile(player, game.board.getSpace(SpaceName.THARSIS_THOLUS), {tileType: TileType.LAVA_FLOWS});
-    game.addTile(player, game.board.getSpace(SpaceName.ARSIA_MONS), {tileType: TileType.LAVA_FLOWS});
-    game.addTile(player, game.board.getSpace(SpaceName.PAVONIS_MONS), {tileType: TileType.LAVA_FLOWS});
+    game.addTile(player, game.board.getSpaceOrThrow(SpaceName.THARSIS_THOLUS), {tileType: TileType.LAVA_FLOWS});
+    game.addTile(player, game.board.getSpaceOrThrow(SpaceName.ARSIA_MONS), {tileType: TileType.LAVA_FLOWS});
+    game.addTile(player, game.board.getSpaceOrThrow(SpaceName.PAVONIS_MONS), {tileType: TileType.LAVA_FLOWS});
 
-    const anotherPlayer = TestPlayer.RED.newPlayer();
-    game.board.getSpace(SpaceName.ASCRAEUS_MONS).player = anotherPlayer; // land claim
+    game.board.getSpaceOrThrow(SpaceName.ASCRAEUS_MONS).player = otherPlayer; // land claim
 
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
+    const [game, player] = testGame(2);
     player.production.add(Resource.ENERGY, 1);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
-    const selectSpace = cast(game.deferredActions.peek()!.execute(), SelectSpace);
-    selectSpace.cb(selectSpace.availableSpaces[0]);
+    runAllActions(game);
 
-    expect(selectSpace.availableSpaces[0].tile && selectSpace.availableSpaces[0].tile.tileType).to.eq(TileType.CITY);
-    expect(selectSpace.availableSpaces[0].player).to.eq(player);
-    expect(player.production.energy).to.eq(0);
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    expect(selectSpace.spaces.map(toID)).to.have.members(game.board.volcanicSpaceIds);
+    assertPlaceCity(player, selectSpace);
+  });
+
+  it('Play on Hellas', () => {
+    const [game, player] = testGame(2, {boardName: BoardName.HELLAS});
+    player.production.add(Resource.ENERGY, 1);
+    expect(card.canPlay(player)).is.true;
+
+    card.play(player);
+    runAllActions(game);
+
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    expect(selectSpace.spaces.map(toID)).to.have.members(game.board.getAvailableSpacesForCity(player).map(toID));
+  });
+
+  it('Play on Utopia Planitia', () => {
+    const [game, player] = testGame(2, {boardName: BoardName.UTOPIA_PLANITIA});
+    player.production.add(Resource.ENERGY, 1);
+    expect(card.canPlay(player)).is.true;
+
+    card.play(player);
+    runAllActions(game);
+
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    expect(selectSpace.spaces.map(toID)).to.have.members(game.board.getAvailableSpacesForCity(player).map(toID));
   });
 });

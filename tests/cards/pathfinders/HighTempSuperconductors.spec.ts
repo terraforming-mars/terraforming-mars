@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {HighTempSuperconductors} from '../../../src/server/cards/pathfinders/HighTempSuperconductors';
 import {Thorgate} from '../../../src/server/cards/corporation/Thorgate';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
@@ -13,19 +13,19 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {PowerPlantStandardProject} from '../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 
-describe('HighTempSuperconductors', function() {
+describe('HighTempSuperconductors', () => {
   let card: HighTempSuperconductors;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new HighTempSuperconductors();
     [game, player] = testGame(1, {turmoilExtension: true});
     turmoil = Turmoil.getTurmoil(game);
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.megaCredits = card.cost;
     turmoil.rulingParty = new Reds();
     expect(player.canPlay(card)).is.false;
@@ -33,12 +33,12 @@ describe('HighTempSuperconductors', function() {
     expect(player.canPlay(card)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     card.play(player);
     expect(player.production.asUnits()).deep.eq(Units.of({energy: 2}));
   });
 
-  it('discount power tag', function() {
+  it('discount power tag', () => {
     player.playedCards.push(card);
 
     // Not power tag
@@ -55,7 +55,7 @@ describe('HighTempSuperconductors', function() {
     expect(player.canPlay(cost10WithTag)).is.true;
   });
 
-  it('discount standard project', function() {
+  it('discount standard project', () => {
     player.playedCards.push(card);
 
     const powerPlant = new PowerPlantStandardProject();
@@ -66,9 +66,9 @@ describe('HighTempSuperconductors', function() {
   });
 
 
-  it('double-discount with Thorgate', function() {
+  it('double-discount with Thorgate', () => {
     player.playedCards.push(card);
-    player.setCorporationForTest(new Thorgate());
+    player.corporations.push(new Thorgate());
 
     const powerPlant = new PowerPlantStandardProject();
     player.megaCredits = powerPlant.cost - 7;
@@ -77,7 +77,7 @@ describe('HighTempSuperconductors', function() {
     expect(powerPlant.canAct(player)).is.true;
   });
 
-  it('discount Kelvinists ruling bonus', function() {
+  it('discount Kelvinists ruling bonus', () => {
     setRulingParty(game, PartyName.KELVINISTS);
 
     player.megaCredits = 9;

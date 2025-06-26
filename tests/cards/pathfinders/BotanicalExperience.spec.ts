@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {BotanicalExperience} from '../../../src/server/cards/pathfinders/BotanicalExperience';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -11,29 +11,32 @@ import {StealResources} from '../../../src/server/deferredActions/StealResources
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {RemoveAnyPlants} from '../../../src/server/deferredActions/RemoveAnyPlants';
 
-describe('BotanicalExperience', function() {
+describe('BotanicalExperience', () => {
   let card: BotanicalExperience;
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let space: Space;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new BotanicalExperience();
     [game, player, otherPlayer] = testGame(2);
     space = game.board.getAvailableSpacesForGreenery(otherPlayer)[0];
-    player.playedCards.push(card);
   });
 
   it('canPlay', () => {
-    expect(player.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     game.addGreenery(otherPlayer, space);
-    expect(player.simpleCanPlay(card)).is.true;
+
+    expect(card.canPlay(player)).is.true;
   });
 
   it('onTilePlaced', () => {
+    player.playedCards.push(card);
+
     expect(card.resourceCount).eq(0);
+
     // Space is empty
     card.onTilePlaced(player, player, space);
     expect(card.resourceCount).eq(0);
@@ -57,6 +60,7 @@ describe('BotanicalExperience', function() {
   });
 
   it('card.addResourceTo', () => {
+    player.playedCards.push(card);
     card.resourceCount = 2;
     expect(player.production.plants).eq(0);
     player.addResourceTo(card, 8);
@@ -66,7 +70,7 @@ describe('BotanicalExperience', function() {
 
   it('targeted to remove plants', () => {
     player.plants = 7;
-    player.playedCards = [card];
+    player.playedCards.push(card);
     game.defer(new RemoveAnyPlants(otherPlayer, 5));
     runAllActions(game);
     const orOptions = cast(otherPlayer.getWaitingFor(), OrOptions);
@@ -80,7 +84,7 @@ describe('BotanicalExperience', function() {
 
   it('targeted to steal plants', () => {
     player.plants = 7;
-    player.playedCards = [card];
+    player.playedCards.push(card);
     game.defer(new StealResources(otherPlayer, Resource.PLANTS, 5));
     runAllActions(game);
     const orOptions = cast(otherPlayer.getWaitingFor(), OrOptions);
@@ -95,7 +99,7 @@ describe('BotanicalExperience', function() {
 
   it('does not imapct other resource types', () => {
     player.megaCredits = 7;
-    player.playedCards = [card];
+    player.playedCards.push(card);
     game.defer(new StealResources(otherPlayer, Resource.MEGACREDITS, 5));
     runAllActions(game);
     const orOptions = cast(otherPlayer.getWaitingFor(), OrOptions);

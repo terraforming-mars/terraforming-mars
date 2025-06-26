@@ -2,7 +2,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
 
@@ -15,7 +14,7 @@ export class GHGProducingBacteria extends ActionCard {
       cost: 8,
       resourceType: CardResource.MICROBE,
 
-      requirements: CardRequirements.builder((b) => b.oxygen(4)),
+      requirements: {oxygen: 4},
 
       action: {
         or: {
@@ -40,11 +39,11 @@ export class GHGProducingBacteria extends ActionCard {
         cardNumber: '034',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 microbe to this card.', (eb) => {
-            eb.empty().startAction.microbes(1);
+            eb.empty().startAction.resource(CardResource.MICROBE);
           }).br;
           b.or().br;
           b.action('Remove 2 microbes to raise temperature 1 step.', (eb) => {
-            eb.microbes(2).startAction.temperature(1);
+            eb.resource(CardResource.MICROBE, 2).startAction.temperature(1);
           });
         }),
       },

@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardResource} from '../../../common/CardResource';
 import {max} from '../Options';
 
@@ -15,7 +14,7 @@ export class EarlyExpedition extends Card implements IProjectCard {
       name: CardName.EARLY_EXPEDITION,
       cost: 15,
       tags: [Tag.SCIENCE, Tag.SPACE, Tag.CITY],
-      requirements: CardRequirements.builder((b) => b.temperature(-18, {max})),
+      requirements: {temperature: -18, max},
 
       behavior: {
         production: {energy: -1, megacredits: 3},
@@ -26,8 +25,11 @@ export class EarlyExpedition extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf18',
         renderData: CardRenderer.builder((b) => {
-          b.minus().production((pb) => pb.energy(1)).production((pb) => pb.megacredits(3)).br;
-          b.data().asterix().city().asterix();
+          b.production((pb) => {
+            pb.minus().energy(1).br;
+            pb.plus().megacredits(3);
+          });
+          b.resource(CardResource.DATA).asterix().city().asterix();
         }),
         description: 'Temperature must be -18 C or lower. Decrease your energy production 1 step and ' +
           'Raise your M€ production 3 steps. Add 1 data to ANY card. Place a city tile on Mars NEXT TO NO OTHER TILE.',

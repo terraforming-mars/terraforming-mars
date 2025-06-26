@@ -8,7 +8,6 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Card} from '../Card';
-import {CardRequirements} from '../requirements/CardRequirements';
 
 export class LunarMineUrbanization extends Card implements IProjectCard {
   constructor() {
@@ -21,21 +20,23 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
       behavior: {
         production: {megacredits: 1},
       },
-      // NOTE(kberg): Rules were that it says it Requires 1 mine tile. Changing to "Requires you have 1 mine tile."
-      requirements: CardRequirements.builder((b) => b.miningTiles(1)),
+      requirements: {miningTiles: 1},
       tr: {moonHabitat: 1},
 
       metadata: {
-        description: 'Requires you have 1 mine tile. Increase your M€ production 1 step. Replace one of your mine tiles ' +
-        'with this special tile. Raise the habitat rate 1 step. This tile counts both as a habitat and a mine tile.',
         cardNumber: 'M55',
+        description: 'Requires you have 1 mine tile. Increase your M€ production 1 step. Raise the habitat rate 1 step. ' +
+        'Remove 1 of your mine tiles (does not affect the mining rate.) ' +
+        'Place this special tile there, regardless of placement rules. ' +
+        'Gain placement bonuses as usual. This tile counts both as a habitat and a mine tile.',
 
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.megacredits(1)).br;
+          b.production((pb) => pb.megacredits(1));
           b.moonHabitatRate();
           b.tile(TileType.LUNAR_MINE_URBANIZATION, true).asterix();
         }),
       },
+      tilesBuilt: [TileType.LUNAR_MINE_URBANIZATION],
     });
   }
 
@@ -45,13 +46,25 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     const spaces = MoonExpansion.spaces(player.game, TileType.MOON_MINE, {ownedBy: player, upgradedTiles: false});
-    return new SelectSpace('Select one of your mines to upgrade', spaces, (space) => {
-      if (space.tile === undefined) {
-        throw new Error(`Space ${space.id} should have a tile, how doesn't it?`);
-      }
-      space.tile.tileType = TileType.LUNAR_MINE_URBANIZATION;
-      MoonExpansion.raiseHabitatRate(player);
-      return undefined;
-    });
+    return new SelectSpace('Select one of your mines to upgrade', spaces)
+      .andThen((space) => {
+        if (space.tile === undefined) {
+          throw new Error(`Space ${space.id} should have a tile, how doesn't it?`);
+        }
+        // #6982, make compatible with Hostile Takeover
+        const owner = space.player;
+        const coOwner = space.coOwner;
+
+        space.tile = undefined;
+        space.player = undefined;
+        space.coOwner = undefined;
+        MoonExpansion.addTile(player, space.id, {tileType: TileType.LUNAR_MINE_URBANIZATION, card: this.name});
+
+        space.player = owner;
+        space.coOwner = coOwner;
+
+        MoonExpansion.raiseHabitatRate(player);
+        return undefined;
+      });
   }
 }

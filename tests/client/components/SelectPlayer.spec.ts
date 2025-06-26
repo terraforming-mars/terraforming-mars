@@ -1,9 +1,8 @@
 import {mount, Wrapper} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
-import {Color} from '@/common/Color';
 import SelectPlayer from '@/client/components/SelectPlayer.vue';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectPlayerModel} from '@/common/models/PlayerInputModel';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import {InputResponse} from '@/common/inputs/InputResponse';
 
@@ -12,19 +11,20 @@ describe('SelectPlayer', () => {
   let response: InputResponse | undefined = undefined;
 
   const players: Array<Partial<PublicPlayerModel>> = [
-    {name: 'alpha', color: Color.BLUE},
-    {name: 'beta', color: Color.RED},
-    {name: 'gamma', color: Color.YELLOW},
-    {name: 'delta', color: Color.GREEN},
+    {name: 'alpha', color: 'blue'},
+    {name: 'beta', color: 'red'},
+    {name: 'gamma', color: 'yellow'},
+    {name: 'delta', color: 'green'},
   ];
 
   beforeEach(() => {
-    const playerInput: Partial<PlayerInputModel> = {
+    const playerInput: SelectPlayerModel = {
+      type: 'player',
       title: '',
       buttonLabel: '',
       // This is a different order from the order in `players`
       // because this is the order that players will be shown.
-      players: [Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE],
+      players: ['red', 'yellow', 'green', 'blue'],
     };
 
     wrapper = mount(SelectPlayer, {
@@ -45,7 +45,7 @@ describe('SelectPlayer', () => {
     await wrapper.vm.$nextTick();
 
     const inputs = wrapper.findAll('input');
-    expect(inputs.length).eq(4);
+    expect(inputs).has.length(4);
     expect(inputs.at(0).element.getAttribute('value')).eq('red');
     expect(inputs.at(1).element.getAttribute('value')).eq('yellow');
     expect(inputs.at(2).element.getAttribute('value')).eq('green');

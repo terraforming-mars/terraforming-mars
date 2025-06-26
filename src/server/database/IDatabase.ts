@@ -2,6 +2,7 @@ import {IGame, Score} from '../IGame';
 import {GameOptions} from '../game/GameOptions';
 import {GameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
+import {Session, SessionId} from '../auth/Session';
 
 export type GameIdLedger = {gameId: GameId, participantIds: Array<ParticipantId>}
 
@@ -19,7 +20,6 @@ export type GameIdLedger = {gameId: GameId, participantIds: Array<ParticipantId>
  * in the game. Why, I have no idea, says kberg.
 */
 export interface IDatabase {
-
     /**
      * Creates any tables needed
      */
@@ -87,11 +87,6 @@ export interface IDatabase {
     saveGameResults(gameId: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void;
 
     /**
-     * Load a game at save point 0, and provide it in the callback.
-     */
-    loadCloneableGame(gameId: GameId): Promise<SerializedGame>;
-
-    /**
      * Deletes the last `rollbackCount` saves of the specified game.
      *
      * Used as part of undo, reset, and via API to roll back a broken game.
@@ -108,7 +103,6 @@ export interface IDatabase {
      *   (Purges all saves between `(0, last save]`.)
      */
     markFinished(gameId: GameId): Promise<void>;
-
 
     /**
      * A maintenance task that purges abandoned solo games older
@@ -137,4 +131,8 @@ export interface IDatabase {
 
     storeParticipants(entry: GameIdLedger): Promise<void>;
     getParticipants(): Promise<Array<GameIdLedger>>;
+
+    createSession(session: Session): Promise<void>;
+    deleteSession(sessionId: SessionId): Promise<void>;
+    getSessions(): Promise<Array<Session>>;
 }

@@ -8,11 +8,11 @@ export class Enceladus extends Colony {
   constructor() {
     super({
       name: ColonyName.ENCELADUS,
-      description: [
-        'Add 3 microbes to ANY card',
-        'Add n microbes to ANY card',
-        'Add 1 microbe to ANY card',
-      ],
+      description: {
+        buildBonus: 'Add 3 microbes to ANY card',
+        tradeBonus: 'Add n microbes to ANY card',
+        colonyBonus: 'Add 1 microbe to ANY card',
+      },
 
       cardResource: CardResource.MICROBE,
       buildType: ColonyBenefit.ADD_RESOURCES_TO_CARD,

@@ -4,7 +4,7 @@ import {AndOptions} from '../../src/server/inputs/AndOptions';
 import {TestPlayer} from '../TestPlayer';
 import {SelectAmount} from '../../src/server/inputs/SelectAmount';
 
-describe('AndOptions', function() {
+describe('AndOptions', () => {
   let player: TestPlayer;
   let called = false;
   const vals = <Array<number>>[];
@@ -18,16 +18,15 @@ describe('AndOptions', function() {
   }
 
   beforeEach(() => {
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
-  it('Simple', function() {
+  it('Simple', () => {
     const andOptions = new AndOptions(
-      cb,
-      new SelectAmount('', '', amountCb, 0, 10),
-      new SelectAmount('', '', amountCb, 0, 10),
-      new SelectAmount('', '', amountCb, 0, 10),
-    );
+      new SelectAmount('', '', 0, 10).andThen(amountCb),
+      new SelectAmount('', '', 0, 10).andThen(amountCb),
+      new SelectAmount('', '', 0, 10).andThen(amountCb),
+    ).andThen(cb);
 
     expect(andOptions.options).has.length(3);
 

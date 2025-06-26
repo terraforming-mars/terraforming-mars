@@ -71,7 +71,7 @@
   "Spend 1 titanium. Increase your titanium production 2 steps. Raise the mining rate 1 step.":"花1钛。增加你的钛产量2级。提高采矿效率1级。",
 
   "Earth Embassy":"地球大使馆",
-  "Effect: After being played, when you perform an action, your Moon tags count as Earth tags, but not vice versa.":"效果：在打出后，当你执行一个动作时，你的月球标签算作地球标签，但反向不成立。",
+  "Effect: When you perform an action, your PLAYED Moon tags count as Earth tags, but not vice versa.":"效果：在打出后，当你执行一个动作时，你的月球标签算作地球标签，但反向不成立。",
 
   "Geodesic Tents": "测量营地",
   "Decrease your energy production 1 step and increase your plant production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "降低电产和植物产量 1。花费1个钛。 在月球上放置一块殖民地砖，并提高 殖民效率 1级。",
@@ -168,7 +168,7 @@
   "Spend 2 titanium. Place a mine tile on The Moon and raise the mining rate 1 step. Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.": "花费2钛。在月球上放置一个挖矿板块，并提高采矿速率1级。将钢、钛和热的产量分别增加1级。电产增加2级。",
 
   "Lunar Mine Urbanization" :"月球矿脉城市化",
-  "Requires you have 1 mine tile. Increase your M€ production 1 step. Replace one of your mine tiles with this special tile. Raise the habitat rate 1 step. This tile counts both as a habitat and a mine tile.": "要求你有1个矿板块。增加你的M€生产1级。用这种特殊的改造板块替换你的一个采矿板块。提高殖民效率1级。这个特殊板块既可以算作殖民地板块也可以算作采矿板块。",
+  "Requires you have 1 mine tile. Increase your M€ production 1 step. Remove 1 of your mine tiles (does not affect the mining rate.) Place this special tile there, regardless of placement rules. Gain placement bonuses as usual.  Raise the habitat rate 1 step. This tile counts both as a habitat and a mine tile.": "要求你有1个矿板块。增加你的M€生产1级。用这种特殊的改造板块替换你的一个采矿板块。提高殖民效率1级。这个特殊板块既可以算作殖民地板块也可以算作采矿板块。",
 
   "Lunar Observation Post" :"月球观测站",
   "Action: Add 1 data resource to ANY card": "行动：向任意卡牌添加1个数据资源",
@@ -214,7 +214,7 @@
   "Effect: When you pay for a Lunar standard project, you spend 4M€ less.":"效果：当你为月球标准项目支付时，可以少支付4M€。",
   "Requires 1 mine on The Moon.":"需要1个在月球上的矿场。",
 
-  "New Colony Planning Initiaitives":"新殖民地计划委员会",
+  "New Colony Planning Initiatives":"新殖民地计划委员会",
   "2 habitat rate":"2 殖民效率",
   "Requires the habitat rate to be 2 or higher. Raise the habitat rate 1 step.":"需要殖民效率为2或更高。提升殖民效率1级。",
 
@@ -247,7 +247,7 @@
   "1 VP per 3 microbes here.":"此牌上每3个微生物1VP。",
   "Action: Spend 1 steel to add 2 microbes here.":"行动：花费1钢，在此牌上增加2微生物。",
 
-  "Sinus Iridium Road Network":"彩虹湾高速路网",
+  "Sinus Irdium Road Network":"彩虹湾高速路网",
   "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the Logistics Rate 1 step.":"降低你的电力产量1级，提升你的M€产量3级。在月球上放置一个道路板块，提升物流效率1级。",
 
   "Small Duty Rovers":"小型月面车",
@@ -269,7 +269,7 @@
   "Action: Spend X steel to gain 3X M€ (max 3 steel).":"行动：花费X钢，获得3X的M€（最大3钢）。",
 
   "Subterranean Habitats":"地下栖息地",
-  "Effect: When you build a habitat on The Moon, you spend 1 titanium less.":"效果：当你在月球上建造殖民地时，你少花费1钛。",
+  "Effect: When you build a habitat on THE MOON, you spend 1 titanium less.":"效果：当你在月球上建造殖民地时，你少花费1钛。",
   "Spend 2 steel. Raise the habitat rate 1 step.":"花费2钢。提升殖民效率1级。",
 
   "Syndicate Pirate Raids":"联合海盗袭击",
@@ -285,8 +285,6 @@
   "Spend 2 titanium. Increase your titanium production 1 step for every 2 raised steps of mining rate.":"花费2钛。每有2级采矿效率，提升你的钛产量1级。",
 
   "Titanium Market Monopolists":"钛市场垄断",
-  "3 Mining rate":"3 采矿效率",
-  "Requires the mining rate to be 3 or higher.":"需要采矿效率为3或更高。",
   "Action: Spend 2X M€ to gain X titanium [max 8 M€]":"行动：花费2X的M€，获得X的钛（最大8M€）",
   "Action: Spend X titanium to gain 4X M€ [max 4 titanium].":"行动：花费X钛，获得4X的M€（最大4钛）。",
 

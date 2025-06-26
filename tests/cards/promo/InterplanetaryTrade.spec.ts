@@ -10,22 +10,13 @@ import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCo
 import {InterplanetaryTrade} from '../../../src/server/cards/promo/InterplanetaryTrade';
 import {MaxwellBase} from '../../../src/server/cards/venusNext/MaxwellBase';
 import {DeclarationOfIndependence} from '../../../src/server/cards/pathfinders/DeclarationOfIndependence';
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {GameOptions} from '../../../src/server/game/GameOptions';
+import {testGame} from '../../TestingUtils';
 
-describe('InterplanetaryTrade', function() {
-  let card: InterplanetaryTrade;
-  let player: TestPlayer;
-  let game: Game;
+describe('InterplanetaryTrade', () => {
+  it('Should play', () => {
+    const card = new InterplanetaryTrade();
+    const [/* game */, player] = testGame(1);
 
-  beforeEach(function() {
-    card = new InterplanetaryTrade();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
-  });
-
-  it('Should play', function() {
     player.playedCards.push(new AdvancedAlloys());
     player.playedCards.push(new SpaceElevator());
     player.playedCards.push(new MarsUniversity());
@@ -35,7 +26,10 @@ describe('InterplanetaryTrade', function() {
     expect(player.production.megacredits).to.eq(4);
   });
 
-  it('Should only count wild tags up to the max amount of tag types existing (10 at base)', function() {
+  it('Should only count wild tags up to the max amount of tag types existing (10 at base)', () => {
+    const card = new InterplanetaryTrade();
+    const [/* game */, player] = testGame(1);
+
     player.playedCards.push(new AdvancedAlloys());
     player.playedCards.push(new SpaceElevator());
     player.playedCards.push(new MarsUniversity());
@@ -48,8 +42,9 @@ describe('InterplanetaryTrade', function() {
     expect(player.production.megacredits).to.eq(10);
   });
 
-  it('Should only count wild tags up to the max amount of tag types existing (11 with venus)', function() {
-    (game.gameOptions as GameOptions).venusNextExtension = true;
+  it('Should only count wild tags up to the max amount of tag types existing (11 with venus)', () => {
+    const card = new InterplanetaryTrade();
+    const [/* game */, player] = testGame(1, {venusNextExtension: true});
     player.playedCards.push(new AdvancedAlloys());
     player.playedCards.push(new SpaceElevator());
     player.playedCards.push(new MarsUniversity());
@@ -62,9 +57,9 @@ describe('InterplanetaryTrade', function() {
     expect(player.production.megacredits).to.eq(11);
   });
 
-  it('Should only count wild tags up to the max amount of tag types existing (12 with venus and moon)', function() {
-    (game.gameOptions as GameOptions).venusNextExtension = true;
-    (game.gameOptions as GameOptions).moonExpansion = true;
+  it('Should only count wild tags up to the max amount of tag types existing (12 with venus and moon)', () => {
+    const card = new InterplanetaryTrade();
+    const [/* game */, player] = testGame(1, {venusNextExtension: true, moonExpansion: true});
     player.playedCards.push(new AdvancedAlloys());
     player.playedCards.push(new SpaceElevator());
     player.playedCards.push(new MarsUniversity());
@@ -77,9 +72,9 @@ describe('InterplanetaryTrade', function() {
     expect(player.production.megacredits).to.eq(12);
   });
 
-  it('Should only count wild tags up to the max amount of tag types existing (13 with venus, moon, and Mars)', function() {
-    (game.gameOptions as GameOptions).venusNextExtension = true;
-    (game.gameOptions as GameOptions).moonExpansion = true;
+  it('Should only count wild tags up to the max amount of tag types existing (13 with venus, moon, and Mars)', () => {
+    const card = new InterplanetaryTrade();
+    const [/* game */, player] = testGame(1, {venusNextExtension: true, moonExpansion: true});
     player.playedCards.push(new AdvancedAlloys());
     player.playedCards.push(new SpaceElevator());
     player.playedCards.push(new MarsUniversity());
@@ -93,12 +88,18 @@ describe('InterplanetaryTrade', function() {
     expect(player.production.megacredits).to.eq(12);
   });
 
-  it('Should give victory points', function() {
+  it('Should give victory points', () => {
+    const card = new InterplanetaryTrade();
+    const [/* game */, player] = testGame(1);
+
     card.play(player);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
-  it('Should raise MC production by one', function() {
+  it('Should raise MC production by one', () => {
+    const card = new InterplanetaryTrade();
+    const [/* game */, player] = testGame(1);
+
     card.play(player);
     expect(player.production.megacredits).to.eq(1);
   });

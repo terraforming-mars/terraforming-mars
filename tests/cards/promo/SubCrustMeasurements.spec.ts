@@ -4,28 +4,28 @@ import {SubCrustMeasurements} from '../../../src/server/cards/promo/SubCrustMeas
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('SubCrustMeasurements', function() {
+describe('SubCrustMeasurements', () => {
   let card: SubCrustMeasurements;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SubCrustMeasurements();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
-  it('Can not play if not enough science tags', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+  it('Can not play if not enough science tags', () => {
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.playedCards.push(new Research());
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(card.getVictoryPoints(player)).to.eq(2);
   });
 
-  it('Should take action', function() {
+  it('Should take action', () => {
     expect(player.cardsInHand).has.lengthOf(0);
     card.action(player);
     expect(player.cardsInHand).has.lengthOf(1);

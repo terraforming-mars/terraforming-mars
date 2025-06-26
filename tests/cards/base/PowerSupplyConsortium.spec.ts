@@ -1,43 +1,53 @@
 import {expect} from 'chai';
 import {PowerSupplyConsortium} from '../../../src/server/cards/base/PowerSupplyConsortium';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
 import {runAllActions, cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('PowerSupplyConsortium', function() {
+describe('PowerSupplyConsortium', () => {
   let card: PowerSupplyConsortium;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new PowerSupplyConsortium();
     [game, player, player2] = testGame(2);
   });
 
-  it('Cannot play without power tags', function() {
+  it('Cannot play without power tags', () => {
     player.production.add(Resource.ENERGY, 3);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
+    player.tagsForTest = {power: 1};
+    expect(card.canPlay(player)).is.false;
+    player.tagsForTest = {power: 2};
+    expect(card.canPlay(player)).is.true;
   });
 
-  it('Can play - no targets', function() {
-    player.playedCards.push(card, card);
-    expect(player.simpleCanPlay(card)).is.true;
+  it('Can play - no targets', () => {
+    player.tagsForTest = {power: 2};
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     runAllActions(game);
 
-    cast(player.popWaitingFor(), undefined);
     expect(player.production.energy).to.eq(1);
+
+    const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
+    expect(selectPlayer.players).deep.eq([player]);
+    selectPlayer.cb(player);
+    runAllActions(game);
+    expect(player.production.energy).to.eq(0);
+    expect(player2.production.energy).to.eq(0);
   });
 
-  it('Can play - single target', function() {
+  it('Can play - single target', () => {
     player2.production.override({energy: 1});
-    player.playedCards.push(card, card);
-    expect(player.simpleCanPlay(card)).is.true;
+    player.tagsForTest = {power: 2};
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     runAllActions(game);
@@ -47,7 +57,7 @@ describe('PowerSupplyConsortium', function() {
     expect(player2.production.energy).to.eq(0);
   });
 
-  it('Can play - multiple targets', function() {
+  it('Can play - multiple targets', () => {
     player.production.add(Resource.ENERGY, 1);
     player2.production.add(Resource.ENERGY, 3);
 
@@ -61,9 +71,9 @@ describe('PowerSupplyConsortium', function() {
     expect(player2.production.energy).to.eq(2);
   });
 
-  it('Can play in solo mode if have enough power tags', function() {
+  it('Can play in solo mode if have enough power tags', () => {
     const [soloGame, soloPlayer] = testGame(1);
-    soloPlayer.playedCards.push(card, card);
+    soloPlayer.tagsForTest = {power: 2};
     expect(card.canPlay(soloPlayer)).is.true;
 
     card.play(soloPlayer);

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import * as utils from '../../../src/common/utils/utils';
 
-describe('utils', function() {
+describe('utils', () => {
   it('range', () => {
     expect(utils.range(10)).deep.eq([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
   });
@@ -65,5 +65,21 @@ describe('utils', function() {
       ['b', 4],
       ['c', 2],
     ]);
+  });
+
+  it('deNull', () => {
+    expect(utils.deNull([])).deep.eq([]);
+    expect(utils.deNull([1])).deep.eq([1]);
+    expect(utils.deNull([1, 2, 3, 4, 5])).deep.eq([1, 2, 3, 4, 5]);
+    expect(utils.deNull([1, undefined, 3, 4, 5])).deep.eq([1, 3, 4, 5]);
+    expect(utils.deNull([undefined])).deep.eq([]);
+    expect(utils.deNull([undefined, 1, undefined])).deep.eq([1]);
+    expect(utils.deNull([undefined, undefined])).deep.eq([]);
+  });
+
+  it('partialize', () => {
+    expect(utils.partialize({})).deep.eq({});
+    expect(utils.partialize({'a': 0})).deep.eq({});
+    expect(utils.partialize({'a': 0, 'b': 1})).deep.eq({'b': 1});
   });
 });

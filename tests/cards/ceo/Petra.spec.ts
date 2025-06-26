@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/server/turmoil/Turmoil';
@@ -8,13 +8,12 @@ import {TestPlayer} from '../../TestPlayer';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
 import {testGame} from '../../TestGame';
 import {Petra} from '../../../src/server/cards/ceos/Petra';
-import {Politician} from '../../../src/server/awards/terraCimmeria/Politician';
+import {TPolitician} from '../../../src/server/awards/terraCimmeria/TPolitician';
 
-
-describe('Petra', function() {
+describe('Petra', () => {
   let card: Petra;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
   let mars: IParty;
   let unity: IParty;
@@ -23,7 +22,7 @@ describe('Petra', function() {
   let reds: IParty;
   let kelvinists: IParty;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Petra();
     [game, player] = testGame(2, {ceoExtension: true, turmoilExtension: true});
 
@@ -49,7 +48,7 @@ describe('Petra', function() {
     turmoil.sendDelegateToParty('NEUTRAL', reds.name, game);
   });
 
-  it('Initial sanity check', function() {
+  it('Initial sanity check', () => {
     expect(unity.delegates.count('NEUTRAL')).eq(0);
     expect(mars.delegates.count('NEUTRAL')).eq(0);
     expect(kelvinists.delegates.count('NEUTRAL')).eq(0);
@@ -62,11 +61,11 @@ describe('Petra', function() {
     expect(reds.delegates.count('NEUTRAL')).eq(1);
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     expect(card.canAct(player)).is.true;
   });
 
-  it('Cannot act if there are too many neutral delegates', function() {
+  it('Cannot act if there are too many neutral delegates', () => {
     // There are 5 neuts already, send 3 more to total 8.  Players only have 7 delegates.
     turmoil.sendDelegateToParty('NEUTRAL', reds.name, game);
     turmoil.sendDelegateToParty('NEUTRAL', reds.name, game);
@@ -74,25 +73,25 @@ describe('Petra', function() {
     expect(card.canAct(player)).is.false;
   });
 
-  it('Takes OPG action - lobby delegate remains unused', function() {
+  it('Takes OPG action - lobby delegate remains unused', () => {
     // Replace 4 delegates + chairman
     card.action(player);
 
-    expect(scientists.delegates.count(player.id)).eq(2);
-    expect(scientists.partyLeader).eq(player.id);
+    expect(scientists.delegates.count(player)).eq(2);
+    expect(scientists.partyLeader).eq(player);
 
-    expect(greens.delegates.count(player.id)).eq(1);
-    expect(greens.partyLeader).eq(player.id);
+    expect(greens.delegates.count(player)).eq(1);
+    expect(greens.partyLeader).eq(player);
 
-    expect(reds.delegates.count(player.id)).eq(1);
-    expect(reds.partyLeader).eq(player.id);
+    expect(reds.delegates.count(player)).eq(1);
+    expect(reds.partyLeader).eq(player);
 
     expect(player.megaCredits).to.eq(15);
 
     // Make sure that the player has the correct amount of spare delegates
-    expect(turmoil.getAvailableDelegateCount(player.id)).eq(2); // 1 Reserve + 1 Lobby
-    expect(turmoil.delegateReserve.has(player.id)).is.true;
-    expect(turmoil.chairman).eq(player.id);
+    expect(turmoil.getAvailableDelegateCount(player)).eq(2); // 1 Reserve + 1 Lobby
+    expect(turmoil.delegateReserve.has(player)).is.true;
+    expect(turmoil.chairman).eq(player);
 
 
     // Send 3 Neutral delegates
@@ -109,33 +108,33 @@ describe('Petra', function() {
     expect(greens.delegates.count('NEUTRAL')).eq(3);
   });
 
-  it('Takes OPG action - all 7 delegates used (including lobby)', function() {
+  it('Takes OPG action - all 7 delegates used (including lobby)', () => {
     // Add two more neut delegates to Scientists, now 6 + 1 neut chairman (7 neut total)
     turmoil.sendDelegateToParty('NEUTRAL', scientists.name, game);
     turmoil.sendDelegateToParty('NEUTRAL', scientists.name, game);
 
     // Replace 6 delegates + chairman
     card.action(player);
-    expect(turmoil.getAvailableDelegateCount(player.id)).eq(0);
-    expect(turmoil.delegateReserve.has(player.id)).is.false;
-    expect(turmoil.chairman).eq(player.id);
+    expect(turmoil.getAvailableDelegateCount(player)).eq(0);
+    expect(turmoil.delegateReserve.has(player)).is.false;
+    expect(turmoil.chairman).eq(player);
 
-    expect(scientists.delegates.count(player.id)).eq(4);
-    expect(scientists.partyLeader).eq(player.id);
+    expect(scientists.delegates.count(player)).eq(4);
+    expect(scientists.partyLeader).eq(player);
 
-    expect(greens.delegates.count(player.id)).eq(1);
-    expect(greens.partyLeader).eq(player.id);
+    expect(greens.delegates.count(player)).eq(1);
+    expect(greens.partyLeader).eq(player);
 
-    expect(reds.delegates.count(player.id)).eq(1);
-    expect(reds.partyLeader).eq(player.id);
+    expect(reds.delegates.count(player)).eq(1);
+    expect(reds.partyLeader).eq(player);
 
     // We should have been paid 3MC for every swap, 7*3 total
     expect(player.megaCredits).to.eq(21);
   });
 
 
-  it('OPG Counts for POLITICAN Award', function() {
-    const politician = new Politician();
+  it('OPG Counts for POLITICAN Award', () => {
+    const politician = new TPolitician();
     game.awards = [];
     game.awards.push(politician);
     const preOPGScore = game.awards[0].getScore(player);
@@ -145,7 +144,7 @@ describe('Petra', function() {
   });
 
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     card.action(player);
     forceGenerationEnd(game);
 

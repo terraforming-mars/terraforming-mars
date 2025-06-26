@@ -1,32 +1,29 @@
 import {expect} from 'chai';
 import {AirScrappingStandardProject} from '../../../src/server/cards/venusNext/AirScrappingStandardProject';
-import {runAllActions, setVenusScaleLevel} from '../../TestingUtils';
-import {Game} from '../../../src/server/Game';
+import {cast, runAllActions, setVenusScaleLevel, testRedsCosts} from '../../TestingUtils';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
-import {Reds} from '../../../src/server/turmoil/parties/Reds';
-import {Phase} from '../../../src/common/Phase';
 import {MAX_VENUS_SCALE} from '../../../src/common/constants';
+import {testGame} from '../../TestGame';
 
-describe('AirScrappingStandardProject', function() {
+describe('AirScrappingStandardProject', () => {
   let card: AirScrappingStandardProject;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AirScrappingStandardProject();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, {venusNextExtension: true, altVenusBoard: false, turmoilExtension: true});
+    [game, player/* , player2 */] = testGame(2, {venusNextExtension: true, altVenusBoard: false, turmoilExtension: true});
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     player.megaCredits = 14;
     expect(card.canAct(player)).is.false;
     player.megaCredits = 15;
     expect(card.canAct(player)).is.true;
   });
 
-  it('action', function() {
+  it('action', () => {
     player.megaCredits = 15;
     player.setTerraformRating(20);
     expect(game.getVenusScaleLevel()).eq(0);
@@ -35,26 +32,30 @@ describe('AirScrappingStandardProject', function() {
     runAllActions(game);
 
     expect(player.megaCredits).eq(0);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(game.getVenusScaleLevel()).eq(2);
   });
 
-  it('Cannot act when maximized', () => {
+  it('Paying when the global parameter is at its goal is a valid stall action', () => {
     player.megaCredits = 15;
-    expect(card.canAct(player)).is.true;
+    expect(card.canAct(player)).eq(true);
+
     setVenusScaleLevel(game, MAX_VENUS_SCALE);
-    expect(card.canAct(player)).is.false;
+
+    expect(player.terraformRating).eq(20);
+    expect(card.canAct(player)).eq(true);
+
+    cast(card.action(player), undefined);
+    runAllActions(game);
+
+    expect(game.getVenusScaleLevel()).eq(MAX_VENUS_SCALE);
+    expect(player.terraformRating).eq(20);
+    expect(player.megaCredits).eq(0);
   });
 
-  it('Can not act with reds', () => {
-    player.megaCredits = 15;
-    player.game.phase = Phase.ACTION;
-    player.game.turmoil!.rulingParty = new Reds();
-    PoliticalAgendas.setNextAgenda(player.game.turmoil!, player.game);
-    expect(card.canAct(player)).eq(false);
-    player.megaCredits = 17;
-    expect(card.canAct(player)).eq(false);
-    player.megaCredits = 18;
-    expect(card.canAct(player)).eq(true);
+  it('Test reds', () => {
+    testRedsCosts(() => card.canAct(player), player, 15, 3);
+    setVenusScaleLevel(game, 30);
+    testRedsCosts(() => card.canAct(player), player, 15, 0);
   });
 });

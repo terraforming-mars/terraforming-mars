@@ -5,8 +5,8 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 import {Resource} from '../../../common/Resource';
+import {ICard} from '../ICard';
 
 export class OptimalAerobraking extends Card implements IProjectCard {
   constructor() {
@@ -19,13 +19,13 @@ export class OptimalAerobraking extends Card implements IProjectCard {
       metadata: {
         cardNumber: '031',
         renderData: CardRenderer.builder((b) => b.effect('When you play a space event, you gain 3 M€ and 3 heat.', (be) => {
-          be.space({played}).event({played}).startEffect.megacredits(3).heat(3);
+          be.tag(Tag.SPACE).tag(Tag.EVENT).startEffect.megacredits(3).heat(3);
         })),
       },
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (card.type === CardType.EVENT && card.tags.includes(Tag.SPACE)) {
       player.stock.add(Resource.MEGACREDITS, 3, {log: true, from: this});
       player.stock.add(Resource.HEAT, 3, {log: true, from: this});

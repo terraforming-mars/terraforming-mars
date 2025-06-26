@@ -5,27 +5,30 @@ import {testGame} from '../../TestGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('RedSpotObservatory', function() {
+describe('RedSpotObservatory', () => {
   let card: RedSpotObservatory;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new RedSpotObservatory();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
-  it('Can not play', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+  it('Can not play', () => {
+    player.tagsForTest = {science: 2};
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
-    player.playedCards.push(card, card, card);
-    expect(player.simpleCanPlay(card)).is.true;
+  it('Can play', () => {
+    player.tagsForTest = {science: 3};
+    expect(card.canPlay(player)).is.true;
+  });
 
+  it('Should play', () => {
     cast(card.play(player), undefined);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.playedCards.push(card);
     expect(card.canAct()).is.true;
 

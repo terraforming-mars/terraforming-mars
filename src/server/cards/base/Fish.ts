@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
@@ -27,13 +26,13 @@ export class Fish extends ActionCard implements IProjectCard {
 
       resourceType: CardResource.ANIMAL,
       victoryPoints: {resourcesHere: {}},
-      requirements: CardRequirements.builder((b) => b.temperature(2)),
+      requirements: {temperature: 2},
 
       metadata: {
         cardNumber: '052',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 animal to this card.', (eb) => {
-            eb.empty().startAction.animals(1);
+            eb.empty().startAction.resource(CardResource.ANIMAL);
           }).br;
           b.production((pb) => pb.minus().plants(1, {all})).br;
           b.vpText('1 VP for each animal on this card.');

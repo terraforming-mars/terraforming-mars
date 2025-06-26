@@ -1,18 +1,14 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
-import {SpaceName} from '../SpaceName';
-import {IPlayer} from '../IPlayer';
-import {SerializedBoard} from './SerializedBoard';
+import {SpaceName} from '../../common/boards/SpaceName';
 import {Random} from '../../common/utils/Random';
 import {Space} from './Space';
 import {GameOptions} from '../game/GameOptions';
-import {SpaceId} from '../../common/Types';
 import {MarsBoard} from './MarsBoard';
 
 export class TerraCimmeriaBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): TerraCimmeriaBoard {
-    const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
+    const builder = new BoardBuilder(gameOptions);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -41,31 +37,23 @@ export class TerraCimmeriaBoard extends MarsBoard {
     builder.ocean(PLANT, PLANT).ocean(PLANT, PLANT).ocean(PLANT, PLANT).land(PLANT).ocean(PLANT, PLANT);
 
     if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng);
+      builder.shuffle(rng,
+        SpaceName.ALBOR_THOLUS_TERRACIMMERIA,
+        SpaceName.APOLLINARIS_MONS,
+        SpaceName.HADRIACUS_MONS,
+        SpaceName.TYRRHENUS_MONS);
     }
 
     const spaces = builder.build();
     return new TerraCimmeriaBoard(spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<IPlayer>): TerraCimmeriaBoard {
-    return new TerraCimmeriaBoard(Board.deserializeSpaces(board.spaces, players));
-  }
-
-  public override getNonReservedLandSpaces(): ReadonlyArray<Space> {
-    return super.getNonReservedLandSpaces();
-  }
-
-  public override getVolcanicSpaceIds(): ReadonlyArray<SpaceId> {
-    return [
+  public constructor(spaces: ReadonlyArray<Space>) {
+    super(spaces, undefined, [
       SpaceName.ALBOR_THOLUS_TERRACIMMERIA,
       SpaceName.APOLLINARIS_MONS,
       SpaceName.HADRIACUS_MONS,
       SpaceName.TYRRHENUS_MONS,
-    ];
-  }
-
-  public override getNoctisCitySpaceId(): SpaceId | undefined {
-    return undefined;
+    ]);
   }
 }

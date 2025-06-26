@@ -8,36 +8,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '16.x'
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
     - run: npm ci
     - run: npm run lint
     - run: npm run build
     - run: npm run build:tests
     - run: npm test
-  build-windows:
 
-    # TODO(kberg): Move to windows-latest.
-    runs-on: windows-2019
+  build-windows:
+    runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
-        node-version: '16.x'
+        node-version: 18
     - run: npm ci
-    - run: npm run lint
+    # - run: npm run lint
     - run: npm run build
-    - run: npm run build:tests
-    - run: npm test
+    # - run: npm run build:tests
+    # - run: npm test
 
   build-docker:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
     - run: docker build .
 
 

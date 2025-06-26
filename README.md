@@ -58,6 +58,15 @@ as they're the clearest instructions.)
 ## ⬤ I want to run a copy of the server on Docker
 Check out our [Docker setup wiki page](https://github.com/bafolts/terraforming-mars/wiki/Docker-Setup)
 
+(Warning, this is not aggressively supported, though some people are on the Discord.)
+
+## ⬤ I want to run a copy on a YunoHost server
+[![Install Terraforming Mars with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=terraforming-mars)
+
+The code for the Yunohost Terraforming-Mars package is in this [GitHub repo](https://github.com/YunoHost-Apps/terraforming-mars_ynh)
+
+(Warning, this is not specifically supported.)
+
 ## ⬤ I want to report a bug or feature request
 Add it to our [issues tab](https://github.com/bafolts/terraforming-mars/issues/new).
 
@@ -103,7 +112,7 @@ Thanks goes to these wonderful people:
     </tr>
     <tr>
       <td><img src="https://avatars1.githubusercontent.com/u/413481?s=460&v=4" width="50px;" alt=""/></td>
-      <td><b><a href="https://github.com/kberg">Robert Konigsberg</b></a>: Ares fan expansion, The Moon fan expansion, infrastructure cleanup, code reviews, two opinions too many.</a> </td>
+      <td><b><a href="https://github.com/kberg">Robert Konigsberg</b></a>: Fan expansions: Ares, The Moon, Pathfinders, Underworld. Prelude 2. Infrastructure cleanup, code reviews, two opinions too many.</a> </td>
     </tr>
     <tr>
       <td><img src="https://avatars.githubusercontent.com/u/836179?s=460&v=4" width="50px;" alt=""/></td>
@@ -116,6 +125,14 @@ Thanks goes to these wonderful people:
     <tr>
       <td><img src="https://avatars.githubusercontent.com/u/15874357?s=460&v=4" width="50px;" alt=""/><br />
       <td><a href="https://github.com/derornos"><b>푸른이(derornos)</b></a>: 한국어화 옮긴이(Korean translator)<br>&emsp;<a href="mailto:derornos@gmail.com">메일(email): derornos@gmail.com</a> / <a href="https://open.kakao.com/me/derornos">카카오톡(KakaoTalk, Messenger): link</a></td>
+    </tr>
+    <tr>
+      <td><img src="https://avatars.githubusercontent.com/u/105346182?s=460&v=4" width="50px;" alt=""/><br />
+      <td><a href="https://github.com/Borbarad2"><b>Borbarad</b></a>: Translation</a> </td>
+    </tr>
+    <tr>
+      <td><img src="https://avatars.githubusercontent.com/u/2050250?s=460&v=4" width="50px;" alt=""/><br />
+      <td><a href="https://github.com/d-little"><b>d-little</b></a>: CEOs</a> </td>
     </tr>
   </tdata>
 </table>

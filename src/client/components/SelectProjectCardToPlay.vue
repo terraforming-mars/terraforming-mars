@@ -1,20 +1,74 @@
+<template>
+<div class="payments_cont">
+
+  <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
+
+  <label v-for="availableCard in cards" class="payments_cards" :key="availableCard.name">
+    <input class="hidden" type="radio" v-model="cardName" v-on:change="cardChanged()" :value="availableCard.name" />
+    <Card class="cardbox" :card="availableCard" />
+  </label>
+
+  <section v-trim-whitespace>
+    <template v-if="card.additionalProjectCosts">
+      <div v-if="card.additionalProjectCosts.thinkTankResources" class="card-warning">
+        Playing {{card.name}} consumes {{card.additionalProjectCosts.thinkTankResources}} data from Think Tank
+      </div>
+      <div v-if="card.additionalProjectCosts.redsCost" class="card-warning">
+        Playing {{card.name}} will cost {{card.additionalProjectCosts.redsCost}} M€ more because Reds are in power
+      </div>
+    </template>
+    <warnings-component :warnings="card.warnings"></warnings-component>
+
+    <h3 class="payments_title" v-i18n>How to pay?</h3>
+
+    <template v-for="unit of SPENDABLE_RESOURCES">
+      <div v-bind:key="unit">
+        <payment-unit-component
+          v-model.number="payment[unit]"
+          v-if="canUse(unit) === true"
+          :unit="unit"
+          :description="descriptions[unit]"
+          @plus="addValue(unit)"
+          @minus="reduceValue(unit)"
+          @max="setMaxValue(unit)">
+        </payment-unit-component>
+        <div v-if="showReserveWarning(unit)" class="card-warning" v-i18n="$t(unit)">
+        (Some ${0} are unavailable here in reserve for the project card.)
+        </div>
+      </div>
+    </template>
+
+    <div v-if="hasWarning()" class="tm-warning">
+      <label class="label label-error">{{ $t(warning) }}</label>
+    </div>
+
+    <div v-if="showsave === true" class="payments_save">
+      <AppButton size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" data-test="save"/>
+    </div>
+  </section>
+</div>
+</template>
+
 <script lang="ts">
 import Vue from 'vue';
-import AppButton from '@/client/components/common/AppButton.vue';
 
-import {Payment, PAYMENT_KEYS} from '@/common/inputs/Payment';
+import AppButton from '@/client/components/common/AppButton.vue';
+import {Payment} from '@/common/inputs/Payment';
+import {SpendableResource, SPENDABLE_RESOURCES} from '@/common/inputs/Spendable';
 import Card from '@/client/components/card/Card.vue';
 import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
+import PaymentUnitComponent from '@/client/components/PaymentUnit.vue';
 import {CardModel} from '@/common/models/CardModel';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
-import {PaymentWidgetMixin, SelectProjectCardToPlayModel} from '@/client/mixins/PaymentWidgetMixin';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {PaymentWidgetMixin, SelectProjectCardToPlayDataModel} from '@/client/mixins/PaymentWidgetMixin';
+import {SelectProjectCardToPlayModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {Tag} from '@/common/cards/Tag';
 import {Units} from '@/common/Units';
 import {CardName} from '@/common/cards/CardName';
 import {SelectProjectCardToPlayResponse} from '@/common/inputs/InputResponse';
+import WarningsComponent from '@/client/components/WarningsComponent.vue';
 
 export default Vue.extend({
   name: 'SelectProjectCardToPlay',
@@ -23,7 +77,7 @@ export default Vue.extend({
       type: Object as () => PlayerViewModel,
     },
     playerinput: {
-      type: Object as () => PlayerInputModel,
+      type: Object as () => SelectProjectCardToPlayModel,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectProjectCardToPlayResponse) => void,
@@ -36,16 +90,30 @@ export default Vue.extend({
     },
   },
   computed: {
+    ...PaymentWidgetMixin.computed,
     thisPlayer(): PublicPlayerModel {
       return this.playerView.thisPlayer;
     },
+    SPENDABLE_RESOURCES(): ReadonlyArray<keyof Payment> {
+      return [
+        'steel',
+        'titanium',
+        'heat',
+        'plants',
+        'microbes',
+        'floaters',
+        'lunaArchivesScience',
+        'seeds',
+        'graphene',
+        'megaCredits',
+        'corruption',
+      ];
+    },
   },
-  data(): SelectProjectCardToPlayModel {
+  data(): SelectProjectCardToPlayDataModel {
     let card: CardModel | undefined;
-    let cards: Array<CardModel> = [];
-    if (this.playerinput !== undefined &&
-            this.playerinput.cards !== undefined &&
-            this.playerinput.cards.length > 0) {
+    let cards: ReadonlyArray<CardModel> = [];
+    if ((this.playerinput?.cards?.length ?? 0) > 0) {
       cards = CardOrderStorage.getOrdered(
         CardOrderStorage.getCardOrder(this.playerView.id),
         this.playerinput.cards,
@@ -62,15 +130,7 @@ export default Vue.extend({
       cards: cards,
       cost: 0,
       tags: [],
-      heat: 0,
-      megaCredits: 0,
-      steel: 0,
-      titanium: 0,
-      microbes: 0,
-      science: 0,
-      seeds: 0,
-      auroraiData: 0,
-      floaters: 0,
+      payment: {...Payment.EMPTY},
       warning: undefined,
       available: Units.of({}),
     };
@@ -78,6 +138,8 @@ export default Vue.extend({
   components: {
     Card,
     AppButton,
+    PaymentUnitComponent,
+    WarningsComponent,
   },
   mounted() {
     Vue.nextTick(() => {
@@ -85,7 +147,6 @@ export default Vue.extend({
       this.cost = this.card.calculatedCost ?? 0;
       this.tags = this.getCardTags(),
       this.reserveUnits = this.card.reserveUnits ?? Units.EMPTY;
-      this.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
       this.setDefaultValues();
     });
@@ -103,23 +164,13 @@ export default Vue.extend({
       return getCardOrThrow(this.cardName).tags;
     },
     setDefaultValues() {
-      this.microbes = 0;
-      this.floaters = 0;
-      this.science = 0;
-      this.seeds = 0;
-      this.steel = 0;
-      this.titanium = 0;
-      this.heat = 0;
-
-      let megacreditBalance = Math.max(this.cost - this.thisPlayer.megaCredits, 0);
-
-      // Calcualtes the optimal number of units to use given the unit value.
+      // Calculates the optimal number of units to use given the unit value.
       //
       // It reads `megacreditBalance` as the remaining balance, and deducts the
       // consumed balance as part of this method.
       //
       // It returns the number of units consumed from availableUnits to make that
-      const deductUnits = function(
+      function deductUnits(
         availableUnits: number | undefined,
         unitValue: number,
         overpay: boolean = true): number {
@@ -131,12 +182,14 @@ export default Vue.extend({
         const balanceAsUnits = overpay ? Math.ceil(_tmp) : Math.floor(_tmp);
         const contributingUnits = Math.min(availableUnits, balanceAsUnits);
 
+        // console.log(megacreditBalance, unitValue, availableUnits, overpay, '-', _tmp, balanceAsUnits, contributingUnits);
+
         megacreditBalance -= contributingUnits * unitValue;
         return contributingUnits;
-      };
+      }
 
       // This function help save some money at the end
-      const saveOverSpendingUnits = function(
+      function saveOverspendingUnits(
         spendingUnits: number | undefined,
         unitValue: number): number {
         if (spendingUnits === undefined || spendingUnits === 0 || megacreditBalance === 0) {
@@ -148,40 +201,60 @@ export default Vue.extend({
 
         megacreditBalance += toSaveUnits * unitValue;
         return toSaveUnits;
-      };
-
-      if (megacreditBalance > 0 && this.canUseSeeds()) {
-        this.seeds = deductUnits(this.playerinput.seeds, 5);
       }
 
-      if (megacreditBalance > 0 && this.canUseMicrobes()) {
-        this.microbes = deductUnits(this.playerinput.microbes, 2);
+      for (const target of SPENDABLE_RESOURCES) {
+        this.payment[target] = 0;
+      }
+      // This is defined down here, but is used in the functions above.
+      let megacreditBalance = this.cost;
+
+      // Prioritize special resource types that are only ever used for buying cards.
+      // Of course this runs the risk of a player not having special resources for some award,
+      // milestone, or requirement.
+      for (const unit of ['seeds', 'lunaArchivesScience', 'graphene'] as const) {
+        if (megacreditBalance > 0 && this.canUse(unit)) {
+          this.payment[unit] = deductUnits(this.getAvailableUnits(unit), this.getResourceRate(unit), false);
+        }
       }
 
-      if (megacreditBalance > 0 && this.canUseFloaters()) {
-        this.floaters = deductUnits(this.playerinput.floaters, 3);
+      // Set MC payment after knowning how much of other resources are consumed
+      this.payment.megaCredits = Math.max(0, Math.min(this.thisPlayer.megaCredits, megacreditBalance));
+
+      // console.log('units: ' + JSON.stringify(this.payment, null, 2));
+      // console.log('balance', megacreditBalance);
+
+      // Use as much MC as possible.
+      megacreditBalance = Math.max(megacreditBalance - this.thisPlayer.megaCredits, 0);
+
+      // console.log('balance', megacreditBalance);
+
+      for (const unit of ['microbes', 'floaters', 'corruption'] as const) {
+        if (megacreditBalance > 0 && this.canUse(unit)) {
+          this.payment[unit] = deductUnits(this.getAvailableUnits(unit), this.getResourceRate(unit));
+        }
       }
 
-      if (megacreditBalance > 0 && this.canUseScience()) {
-        this.science = deductUnits(this.playerinput.science, 1);
-      }
-
+      // These aren't in the loop above because of the reserve units bit.
+      // It's doable of course.
       this.available.steel = Math.max(this.thisPlayer.steel - this.reserveUnits.steel, 0);
-      if (megacreditBalance > 0 && this.canUseSteel()) {
-        this.steel = deductUnits(this.available.steel, this.thisPlayer.steelValue, true);
+      if (megacreditBalance > 0 && this.canUse('steel')) {
+        this.payment.steel = deductUnits(this.available.steel, this.getResourceRate('steel'), true);
       }
 
       this.available.titanium = Math.max(this.thisPlayer.titanium - this.reserveUnits.titanium, 0);
-      if (megacreditBalance > 0 && this.canUseTitanium()) {
-        this.titanium = deductUnits(this.available.titanium, this.thisPlayer.titaniumValue, true);
-      }
-      if (megacreditBalance > 0 && this.canUseTitanium() === false && this.canUseLunaTradeFederationTitanium()) {
-        this.titanium = deductUnits(this.available.titanium, this.thisPlayer.titaniumValue - 1, true);
+      if (megacreditBalance > 0 && (this.canUse('titanium') || this.canUseLunaTradeFederationTitanium())) {
+        this.payment.titanium = deductUnits(this.available.titanium, this.getResourceRate('titanium'), true);
       }
 
       this.available.heat = Math.max(this.availableHeat() - this.reserveUnits.heat, 0);
-      if (megacreditBalance > 0 && this.canUseHeat()) {
-        this.heat = deductUnits(this.available.heat, 1);
+      if (megacreditBalance > 0 && this.canUse('heat')) {
+        this.payment.heat = deductUnits(this.available.heat, this.getResourceRate('heat'));
+      }
+
+      this.available.plants = Math.max(this.thisPlayer.plants - this.reserveUnits.plants, 0);
+      if (megacreditBalance > 0 && this.canUse('plants')) {
+        this.payment.plants = deductUnits(this.available.plants, this.getResourceRate('plants'));
       }
 
       // If we are overspending
@@ -190,121 +263,112 @@ export default Vue.extend({
         // We need not try to save heat since heat is paid last at value 1. We will never overspend in heat.
         // We do not need to save Ti either because Ti is paid last before heat. If we overspend, it is because of Ti.
         // We cannot reduce the amount of Ti and still pay enough.
-        this.steel -= saveOverSpendingUnits(this.steel, this.thisPlayer.steelValue);
-        this.floaters -= saveOverSpendingUnits(this.floaters, 3);
-        this.microbes -= saveOverSpendingUnits(this.microbes, 2);
-        this.science -= saveOverSpendingUnits(this.science, 1);
-        this.seeds -= saveOverSpendingUnits(this.seeds, 5);
-        this.megaCredits -= saveOverSpendingUnits(this.megaCredits, 1);
-      }
-    },
-    canUseHeat(): boolean {
-      return this.playerinput.canUseHeat === true && this.availableHeat() > 0;
-    },
-    canUseSteel() {
-      if (this.card !== undefined && this.available.steel > 0) {
-        if (this.tags.includes(Tag.BUILDING) || this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY) {
-          return true;
+        for (const key of [
+          'steel',
+          'plants',
+          'floaters',
+          'microbes',
+          'seeds',
+          'graphene',
+          'lunaArchivesScience',
+          'corruption',
+          'megaCredits'] as const) {
+          this.payment[key] -= saveOverspendingUnits(this.payment[key], this.getResourceRate(key));
         }
       }
-      return false;
+      // See top that sets megacreditBalance
+      // this.payment['megaCredits'] = megacreditBalance;
     },
-    canUseTitanium() {
-      if (this.card !== undefined && this.available.titanium > 0) {
-        if (this.tags.includes(Tag.SPACE) || this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY) {
-          return true;
-        }
+    canUseTitaniumRegularly(): boolean {
+      return this.tags.includes(Tag.SPACE) ||
+          this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY;
+    },
+    cardCanUse(unit: SpendableResource): boolean {
+      switch (unit) {
+      case 'megaCredits':
+        return true;
+      case 'heat':
+        return this.playerinput.paymentOptions.heat === true;
+      case 'steel':
+        return this.tags.includes(Tag.BUILDING) ||
+          this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY;
+      case 'titanium':
+        return this.canUseTitaniumRegularly() ||
+          this.playerinput.paymentOptions.lunaTradeFederationTitanium === true;
+      case 'plants':
+        return this.tags.includes(Tag.BUILDING) && this.playerinput.paymentOptions.plants === true;
+      case 'microbes':
+        return this.tags.includes(Tag.PLANT);
+      case 'floaters':
+        return this.tags.includes(Tag.VENUS);
+      case 'lunaArchivesScience':
+        return this.tags.includes(Tag.MOON);
+      case 'seeds':
+        return this.tags.includes(Tag.PLANT) ||
+            this.card.name === CardName.GREENERY_STANDARD_PROJECT;
+      case 'graphene':
+        return this.tags.includes(Tag.SPACE) ||
+            this.tags.includes(Tag.CITY);
+      case 'corruption':
+        return this.tags.includes(Tag.EARTH) && this.playerinput.paymentOptions.corruption === true;
+      default:
+        throw new Error('Unknown unit ' + unit);
       }
-      return false;
     },
-    canUseLunaTradeFederationTitanium() {
-      return this.card !== undefined && this.available.titanium > 0 && this.playerinput.canUseLunaTradeFederationTitanium === true;
-    },
-    canUseMicrobes() {
-      // FYI Microbes are limited to the Psychrophiles card, which allows spending microbes for Plant cards.
-      if (this.card !== undefined && (this.playerinput.microbes ?? 0) > 0) {
-        if (this.tags.includes(Tag.PLANT)) {
-          return true;
-        }
+    canUse(unit: SpendableResource) {
+      if (!this.hasUnits(unit)) {
+        return false;
       }
-      return false;
-    },
-    canUseFloaters() {
-      // FYI Floaters are limited to the DIRIGIBLES card.
-      if (this.card !== undefined && (this.playerinput.floaters ?? 0) > 0) {
-        if (this.tags.includes(Tag.VENUS)) {
-          return true;
-        }
+      if (this.card === undefined) {
+        return false;
       }
-      return false;
+      return this.cardCanUse(unit);
     },
-    canUseScience() {
-      // FYI Science Resources are limited to the Luna Archive card, which allows spending its science resources for Moon cards.
-      if (this.card !== undefined && (this.playerinput.science ?? 0) > 0) {
-        if (this.tags.includes(Tag.MOON)) {
-          return true;
-        }
-      }
-      return false;
-    },
-    canUseSeeds() {
-      // FYI Seed Resources are limited to the Soylent Seedling Systems corp card, which allows spending its
-      // resources for plant cards and the standard greenery project.
-      if (this.card !== undefined && (this.playerinput.seeds ?? 0) > 0) {
-        if (this.tags.includes(Tag.PLANT)) {
-          return true;
-        }
-        if (this.card.name === CardName.GREENERY_STANDARD_PROJECT) {
-          return true;
-        }
-      }
-      return false;
+    canUseLunaTradeFederationTitanium(): boolean {
+      return this.playerinput.paymentOptions.lunaTradeFederationTitanium === true;
     },
     cardChanged() {
       this.card = this.getCard();
       this.cost = this.card.calculatedCost || 0;
       this.tags = this.getCardTags();
       this.reserveUnits = this.card.reserveUnits ?? Units.EMPTY;
-      this.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
       this.setDefaultValues();
+    },
+    getTitaniumResourceRate(): number {
+      const titaniumValue = this.asModel().playerView.thisPlayer.titaniumValue;
+      if (this.canUseTitaniumRegularly()) {
+        return titaniumValue;
+      }
+      return titaniumValue - 1;
     },
     hasWarning(): boolean {
       return this.warning !== undefined;
     },
-    selectedCardHasWarning(): boolean {
-      return this.card !== undefined && this.card.warning !== undefined;
-    },
-    showReserveSteelWarning(): boolean {
-      return this.reserveUnits.steel > 0 && this.canUseSteel();
-    },
-    showReserveTitaniumWarning(): boolean {
-      return this.reserveUnits.titanium > 0 && (this.canUseTitanium() || this.canUseLunaTradeFederationTitanium());
-    },
-    showReserveHeatWarning(): boolean {
-      return this.reserveUnits?.heat > 0 && this.canUseHeat();
+    showReserveWarning(unit: SpendableResource): boolean {
+      switch (unit) {
+      case 'titanium':
+        return this.reserveUnits.titanium > 0 && (this.canUse('titanium') || this.canUseLunaTradeFederationTitanium());
+      case 'steel':
+      case 'heat':
+      case 'plants':
+        return this.reserveUnits[unit] > 0 && this.canUse(unit);
+      }
+      return false;
     },
     saveData() {
-      const payment: Payment = {
-        heat: this.heat,
-        megaCredits: this.megaCredits,
-        steel: this.steel,
-        titanium: this.titanium,
-        microbes: this.microbes,
-        floaters: this.floaters,
-        science: this.science,
-        seeds: this.seeds,
-        auroraiData: 0,
-      };
       let totalSpent = 0;
-      for (const target of PAYMENT_KEYS) {
-        if (payment[target] > this.getAmount(target)) {
+
+      for (const target of SPENDABLE_RESOURCES) {
+        totalSpent += this.payment[target] * this.getResourceRate(target);
+      }
+
+      for (const target of SPENDABLE_RESOURCES) {
+        if (this.payment[target] > this.getAvailableUnits(target)) {
           this.warning = `You do not have enough ${target}`;
           return;
         }
-        totalSpent += payment[target] * this.getResourceRate(target);
       }
-
       if (totalSpent < this.cost) {
         this.warning = 'Haven\'t spent enough';
         return;
@@ -312,8 +376,8 @@ export default Vue.extend({
 
       if (totalSpent > this.cost) {
         const diff = totalSpent - this.cost;
-        for (const target of PAYMENT_KEYS) {
-          if (payment[target] && diff >= this.getResourceRate(target)) {
+        for (const target of SPENDABLE_RESOURCES) {
+          if (this.payment[target] && diff >= this.getResourceRate(target)) {
             this.warning = `You cannot overspend ${target}`;
             return;
           }
@@ -329,7 +393,7 @@ export default Vue.extend({
           this.onsave({
             type: 'projectCard',
             card: this.card.name,
-            payment: payment,
+            payment: this.payment,
           });
         } else {
           this.warning = 'Please adjust payment amount';
@@ -339,107 +403,10 @@ export default Vue.extend({
         this.onsave({
           type: 'projectCard',
           card: this.card.name,
-          payment: payment,
+          payment: this.payment,
         });
       }
     },
   },
 });
 </script>
-<template>
-<div class="payments_cont">
-
-  <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
-
-  <label v-for="availableCard in cards" class="payments_cards" :key="availableCard.name">
-    <input class="hidden" type="radio" v-model="cardName" v-on:change="cardChanged()" :value="availableCard.name" />
-    <Card class="cardbox" :card="availableCard" />
-  </label>
-
-  <section v-trim-whitespace>
-    <div v-if="selectedCardHasWarning()" class="card-warning">{{ $t(card.warning) }}</div>
-
-    <h3 class="payments_title" v-i18n>How to pay?</h3>
-
-    <div class="payments_type input-group" v-if="canUseSteel()">
-      <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
-      <AppButton type="minus" @click="reduceValue('steel', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="steel" />
-      <AppButton type="plus" @click="addValue('steel', 1, available.steel)" />
-      <AppButton type="max" @click="setMaxValue('steel', available.steel)" title="MAX" />
-    </div>
-    <div v-if="showReserveSteelWarning()" class="card-warning" v-i18n>
-    (Some steel is unavailable here in reserve for the project card.)
-    </div>
-
-    <div class="payments_type input-group" v-if="canUseTitanium() || canUseLunaTradeFederationTitanium()">
-      <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay by Titanium')"></i>
-      <AppButton type="minus" @click="reduceValue('titanium', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="titanium" />
-      <AppButton type="plus" @click="addValue('titanium', 1, available.titanium)" />
-      <AppButton type="max" @click="setMaxValue('titanium', available.titanium)" title="MAX" />
-    </div>
-    <div v-if="showReserveTitaniumWarning()" class="card-warning" v-i18n>
-    (Some titanium is unavailable here in reserve for the project card.)
-    </div>
-
-    <div class="payments_type input-group" v-if="canUseHeat()">
-      <i class="resource_icon resource_icon--heat payments_type_icon" :title="$t('Pay by Heat')"></i>
-      <AppButton type="minus" @click="reduceValue('heat', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="heat" />
-      <AppButton type="plus" @click="addValue('heat', 1, available.heat)" />
-      <AppButton type="max" @click="setMaxValue('heat', available.heat)" title="MAX" />
-    </div>
-    <div v-if="showReserveHeatWarning()" class="card-warning" v-i18n>
-    (Some heat is unavailable here in reserve for the project card.)
-    </div>
-
-    <div class="payments_type input-group" v-if="canUseMicrobes()">
-      <i class="resource_icon resource_icon--microbe payments_type_icon" :title="$t('Pay by Microbes')"></i>
-      <AppButton type="minus" @click="reduceValue('microbes', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="microbes" />
-      <AppButton type="plus" @click="addValue('microbes', 1)" />
-      <AppButton type="max" @click="setMaxValue('microbes')" title="MAX" />
-    </div>
-
-    <div class="payments_type input-group" v-if="canUseFloaters()">
-      <i class="resource_icon resource_icon--floater payments_type_icon" :title="$t('Pay by Floaters')"></i>
-      <AppButton type="minus" @click="reduceValue('floaters', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="floaters" />
-      <AppButton type="plus" @click="addValue('floaters', 1)" />
-      <AppButton type="max" @click="setMaxValue('floaters')" title="MAX" />
-    </div>
-
-    <div class="payments_type input-group" v-if="canUseScience()">
-      <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay by Science Resources')"></i>
-      <AppButton type="minus" @click="reduceValue('science', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="science" />
-      <AppButton type="plus" @click="addValue('science', 1)" />
-      <AppButton type="max" @click="setMaxValue('science')" title="MAX" />
-    </div>
-
-    <div class="payments_type input-group" v-if="canUseSeeds()">
-      <i class="resource_icon resource_icon--seed payments_type_icon" :title="$t('Pay by Seeds')"></i>
-      <AppButton type="minus" @click="reduceValue('seeds', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="seeds" />
-      <AppButton type="plus" @click="addValue('seeds', 1)" />
-      <AppButton type="max" @click="setMaxValue('seeds')" title="MAX" />
-    </div>
-
-    <div class="payments_type input-group">
-      <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay by Megacredits')"></i>
-      <AppButton type="minus" @click="reduceValue('megaCredits', 1)" />
-      <input class="form-input form-inline payments_input" v-model.number="megaCredits" />
-      <AppButton type="plus" @click="addValue('megaCredits', 1)" />
-    </div>
-
-    <div v-if="hasWarning()" class="tm-warning">
-      <label class="label label-error">{{ $t(warning) }}</label>
-    </div>
-
-    <div v-if="showsave === true" class="payments_save">
-      <AppButton size="big" @click="saveData" :title="playerinput.buttonLabel" data-test="save"/>
-    </div>
-  </section>
-</div>
-</template>

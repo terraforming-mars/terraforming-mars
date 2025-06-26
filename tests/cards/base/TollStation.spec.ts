@@ -1,15 +1,11 @@
 import {expect} from 'chai';
 import {TollStation} from '../../../src/server/cards/base/TollStation';
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, testGame} from '../../TestingUtils';
 
-describe('TollStation', function() {
-  it('Should play', function() {
+describe('TollStation', () => {
+  it('Should play', () => {
     const card = new TollStation();
-    const player = TestPlayer.BLUE.newPlayer();
-    const anotherPlayer = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, anotherPlayer], player);
+    const [/* game */, player, anotherPlayer] = testGame(2);
     cast(card.play(player), undefined);
     anotherPlayer.playedCards.push(card);
     expect(player.production.megacredits).to.eq(0);

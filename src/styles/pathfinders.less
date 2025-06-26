@@ -2,8 +2,7 @@
 	margin: 20px;
 	display: inline-block;
 
-	.table {
-		border-collapse: collapse;
+	table {
 		border-spacing: 0px;
 	}
 
@@ -14,7 +13,16 @@
 		position: relative;
 		background: #ccc;
 		margin-bottom: 10px;
+		border-radius: 2px;
 	}
+
+	.track-icon {
+		position: absolute;
+		margin: 12px 0 0 -20px;
+    	text-shadow: 0 1px 1px #000;
+	}
+
+
 
 	.track-numbers {
 		margin-left: 50px;
@@ -25,14 +33,14 @@
 	}
 
 	.track-tag {
-		width: 70px;
-		height: 70px;
+		width: 60px;
+		height: 60px;
 		border-radius: 50%;
-		background-size: 70px;
+		background-size: 60px;
 		border: 2px solid #000;
 		position: absolute;
-		top: -25px;
-		left: -25px;
+		top: 24px;
+		left: -30px;
 		background-position: -2px;
 	}
 	.track-tag-venus {background-image: url(./assets/tags/venus.png);}
@@ -58,43 +66,21 @@
 	}
 
 	.highlight {
-    font-weight: bold;
-		background: linear-gradient(transparent,#fff8);
+        font-weight: bold;
+		background: #fff6;
+		border-left: 2px solid #222;
+		
  	}
 	td {
-		padding: 0;
+		padding: 5px 14px;
 		text-align: center;
 		background: linear-gradient(transparent, #0008);
+		border-left: 2px solid #0008; 
 	}
 	tr {
 		height: 50px;
 		border: none;
 	}
-
-	table td:nth-child(1) { min-width: 20px; }
-  table td:nth-child(2) { min-width: 20px; } // 0 space
-  table td:nth-child(3) { min-width: 20px; }
-  table td:nth-child(4) { min-width: 45px; }
-  table td:nth-child(5) { min-width: 80px; }
-  table td:nth-child(6) { min-width: 20px; }
-  table td:nth-child(7) { min-width: 100px; } // 5
-  table td:nth-child(8) { min-width: 45px; }
-  table td:nth-child(9) { min-width: 20px; }
-  table td:nth-child(10) { min-width: 80px; }
-  table td:nth-child(11) { min-width: 45px; }
-  table td:nth-child(12) { min-width: 20px; } // 10
-  table td:nth-child(13) { min-width: 80px; }
-  table td:nth-child(14) { min-width: 45px; }
-  table td:nth-child(15) { min-width: 20px; }
-  table td:nth-child(16) { min-width: 80px; }
-  table td:nth-child(17) { min-width: 20px; } // 15
-  table td:nth-child(18) { min-width: 60px; }
-  table td:nth-child(19) { min-width: 45px; }
-  table td:nth-child(20) { min-width: 20px; }
-  table td:nth-child(21) { min-width: 80px; }
-  table td:nth-child(22) { min-width: 45px; } // 20
-  table td:nth-child(23) { min-width: 20px; }
-  table td:nth-child(24) { min-width: 45px; } // 22
 
 .rewards_cont	{
 		display: flex;

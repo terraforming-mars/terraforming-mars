@@ -1,13 +1,10 @@
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {Space} from '../../boards/Space';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
@@ -15,11 +12,12 @@ import {DrawCards} from '../../deferredActions/DrawCards';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Phase} from '../../../common/Phase';
+import {TITLES} from '../../inputs/titles';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class CuriosityII extends Card implements ICorporationCard {
+export class CuriosityII extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.CURIOSITY_II,
       tags: [Tag.SCIENCE, Tag.BUILDING],
       startingMegaCredits: 40,
@@ -29,7 +27,7 @@ export class CuriosityII extends Card implements ICorporationCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'Y07',
         description: 'You start with 40 M€ and 2 steel production.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
@@ -56,7 +54,7 @@ export class CuriosityII extends Card implements ICorporationCard {
     if (space.spaceType === SpaceType.COLONY) return;
 
     if (space.bonus.some((bonus) => eligibleBonuses.includes(bonus)) || space.tile?.covers !== undefined) {
-      cardOwner.game.defer(new SimpleDeferredAction(cardOwner, () => this.corpAction(cardOwner)));
+      cardOwner.defer(() => this.corpAction(cardOwner));
     }
   }
 
@@ -64,14 +62,12 @@ export class CuriosityII extends Card implements ICorporationCard {
     if (!player.canAfford(2)) return undefined;
 
     return new OrOptions(
-      new SelectOption('Pay 2 M€ to draw a card', 'Confirm', () => {
-        player.game.defer(new SelectPaymentDeferred(player, 2, {title: 'Select how to pay for action'}));
-        player.game.defer(DrawCards.keepAll(player));
+      new SelectOption('Pay 2 M€ to draw a card').andThen(() => {
+        player.game.defer(new SelectPaymentDeferred(player, 2, {title: TITLES.payForCardAction(this.name)}))
+          .andThen(() => player.game.defer(DrawCards.keepAll(player)));
         return undefined;
       }),
-      new SelectOption('Do nothing', 'Confirm', () => {
-        return undefined;
-      }),
+      new SelectOption('Do nothing'),
     );
   }
 }

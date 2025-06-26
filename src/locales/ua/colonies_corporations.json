@@ -1,0 +1,32 @@
+{
+  "POLYPHEMOS": "ПОЛІФЕМОС",
+  "Polyphemos": "Поліфемос",
+  "You start with 50 M€. Increase your M€ production 5 steps. Gain 5 titanium.": "Ви починаєте з 50 M€. Збільште виробництво M€ на 5 кроків. Отримайте 5 титану.",
+  "Effect: When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.": "Ефект: Коли ви купуєте карту в руку, платите 5M€ замість 3, включаючи початкову руку.",
+
+  "STORM": "ШТОРМ",
+  "CRAFT": "МАЙСТЕРНІ",
+  "INCOR": "ІНКОР",
+  "PORATED": "ПОРЕЙТЕД",
+  "STORMCRAFT INCORPORATED": "ШТОРМКРАФТ ІНКОРПОРЕЙТЕД",
+  "Stormcraft Incorporated": "Штормкрафт Інкорпорейтед",
+  "You start with 48 M€.": "Ви починаєте з 48 M€.",
+  "Action: Add a floater to ANY card.": "Дія: Додайте плавунець до БУДЬ-ЯКОЇ карти.",
+  "Effect: Floaters on this card may be used as 2 heat each.": "Ефект: Плавунці на цій карті можуть бути використані як 2 одиниці тепла кожен.",
+
+  "ARKLIGHT": "АРКЛАЙТ",
+  "Arklight": "Арклайт",
+  "You start with 45 M€. Increase your M€ production 2 steps. 1 VP per 2 animals on this card.": "Ви починаєте з 45 M€. Збільште виробництво M€ на 2 кроки. 1 ПО за кожні 2 тварини на цій карті.",
+  "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.": "Ефект: Коли ви граєте карту з тваринним або рослинним символом, включаючи цю карту, додайте 1 тварину на цю карту.",
+
+  "ARIDOR": "АРІДОР",
+  "Aridor": "Арідор",
+  "COLONY": "КОЛОНІЯ",
+  "You start with 40 M€. As your first action, put an additional Colony Tile of your choice into play": "Ви починаєте з 40 M€. Як вашу першу дію, розмістіть додаткову плитку колонії за вашим вибором.",
+  "Effect: When you get a new type of tag in play [event cards do not count], increase your M€ production 1 step.": "Ефект: Коли ви отримуєте новий тип символу в грі [карти подій не враховуються], збільште виробництво M€ на 1.",
+
+  "POSEIDON": "ПОСЕЙДОН",
+  "Poseidon": "Посейдон",
+  "You start with 45 M€. As your first action, place a colony.": "Ви починаєте з 45 M€. Як вашу першу дію, розмістіть колонію.",
+  "Effect: When any colony is placed, including this, raise your M€ production 1 step.": "Ефект: Коли будь-яка колонія розміщується (включаючи цю), збільште виробництво M€ на 1."
+}

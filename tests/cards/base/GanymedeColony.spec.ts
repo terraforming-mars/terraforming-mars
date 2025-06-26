@@ -3,10 +3,10 @@ import {GanymedeColony} from '../../../src/server/cards/base/GanymedeColony';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('GanymedeColony', function() {
-  it('Should play', function() {
+describe('GanymedeColony', () => {
+  it('Should play', () => {
     const card = new GanymedeColony();
-    const [, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);
     player.playedCards.push(card);
     expect(card.getVictoryPoints(player)).to.eq(1);

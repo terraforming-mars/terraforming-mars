@@ -3,10 +3,10 @@ import {Research} from '../../../src/server/cards/base/Research';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('Research', function() {
-  it('Should play', function() {
+describe('Research', () => {
+  it('Should play', () => {
     const card = new Research();
-    const [, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(1);
     expect(player.cardsInHand).has.lengthOf(2);

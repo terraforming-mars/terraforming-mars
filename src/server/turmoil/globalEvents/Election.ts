@@ -8,12 +8,11 @@ import {Turmoil} from '../Turmoil';
 import {IPlayer} from '../../IPlayer';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../../cards/render/CardRenderer';
-import {played} from '../../cards/Options';
 import {Size} from '../../../common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.influence({size: Size.SMALL}).plus().building(1, {played, size: Size.SMALL}).plus().city({size: Size.SMALL}).colon();
-  b.text('1st:', Size.SMALL).tr(2, {size: Size.TINY, digit: true}).text('2nd:', Size.SMALL).tr(1, {size: Size.TINY});
+  b.influence().plus().tag(Tag.BUILDING, {size: Size.SMALL}).plus().city({size: Size.MEDIUM}).colon().br;
+  b.text('1st:', Size.SMALL).tr(2, {size: Size.TINY}).nbsp.text('2nd:', Size.SMALL).tr(1, {size: Size.TINY});
 });
 
 export class Election extends GlobalEvent implements IGlobalEvent {

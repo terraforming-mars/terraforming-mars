@@ -4,6 +4,8 @@ import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class MiningRightsAres extends MiningRights {
+  protected override readonly isAres = true;
+
   constructor() {
     super(
       CardName.MINING_RIGHTS_ARES,

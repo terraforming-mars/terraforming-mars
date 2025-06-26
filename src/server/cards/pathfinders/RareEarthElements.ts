@@ -6,7 +6,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
-import {isSpecialTile, playerTileFn} from '../../boards/Board';
+import {isSpecialTileSpace, Board} from '../../boards/Board';
 
 export class RareEarthElements extends Card implements IProjectCard {
   constructor() {
@@ -28,8 +28,8 @@ export class RareEarthElements extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     const spaces = player.game.board.spaces
-      .filter(playerTileFn(player))
-      .filter(isSpecialTile);
+      .filter(Board.ownedBy(player))
+      .filter(isSpecialTileSpace);
 
     player.production.add(Resource.MEGACREDITS, spaces.length, {log: true});
     return undefined;

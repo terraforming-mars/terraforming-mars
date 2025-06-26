@@ -47,11 +47,11 @@ export class ExtractorBalloons extends Card implements IActionCard {
         description: 'Add 3 floaters to this card',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 floater to this card.', (eb) => {
-            eb.empty().startAction.floaters(1);
+            eb.empty().startAction.resource(CardResource.FLOATER);
           }).br;
           b.action('Remove 2 floaters here to raise Venus 1 step.', (eb) => {
-            eb.or(Size.SMALL).floaters(2).startAction.venus(1);
-          }).br.floaters(3);
+            eb.or(Size.SMALL).resource(CardResource.FLOATER, 2).startAction.venus(1);
+          }).br.resource(CardResource.FLOATER, 3);
         }),
       },
     });
@@ -62,20 +62,20 @@ export class ExtractorBalloons extends Card implements IActionCard {
   }
   public action(player: IPlayer) {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-    const canAffordReds = player.canAfford(0, {tr: {venus: 1}});
+    const canAffordReds = player.canAfford({cost: 0, tr: {venus: 1}});
     if (this.resourceCount < 2 || venusMaxed || !canAffordReds) {
       player.addResourceTo(this, {log: true});
       return undefined;
     }
     return new OrOptions(
       new SelectOption('Remove 2 floaters to raise Venus scale 1 step',
-        'Remove floaters', () => {
-          player.removeResourceFrom(this, 2);
-          const actual = player.game.increaseVenusScaleLevel(player, 1);
-          LogHelper.logVenusIncrease(player, actual);
-          return undefined;
-        }),
-      new SelectOption('Add 1 floater to this card', 'Add floater', () => {
+        'Remove floaters').andThen(() => {
+        player.removeResourceFrom(this, 2);
+        const actual = player.game.increaseVenusScaleLevel(player, 1);
+        LogHelper.logVenusIncrease(player, actual);
+        return undefined;
+      }),
+      new SelectOption('Add 1 floater to this card', 'Add floater').andThen(() => {
         player.addResourceTo(this, {log: true});
         return undefined;
       }),

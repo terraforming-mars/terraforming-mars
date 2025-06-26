@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Aurorai} from '../../../src/server/cards/pathfinders/Aurorai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
@@ -9,15 +9,15 @@ import {AsteroidStandardProject} from '../../../src/server/cards/base/standardPr
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
 
-describe('Aurorai', function() {
+describe('Aurorai', () => {
   let card: Aurorai;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Aurorai();
     [game, player] = testGame(1);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
   });
 
   it('on TR bump', () => {
@@ -61,16 +61,16 @@ describe('Aurorai', function() {
     runAllActions(game);
 
     const selectPayment = cast(player.popWaitingFor(), SelectPayment);
-    expect(selectPayment.canUseData).is.true;
+    expect(selectPayment.paymentOptions.auroraiData).is.true;
 
     expect(game.getTemperature()).eq(-30);
     expect(() =>
-      selectPayment.cb({...Payment.EMPTY, megaCredits: 4, auroraiData: 2}),
+      selectPayment.process({type: 'payment', payment: {...Payment.EMPTY, megaCredits: 4, auroraiData: 2}}, player),
     ).to.throw(/Did not spend enough/);
 
-    selectPayment.cb({...Payment.EMPTY, megaCredits: 8, auroraiData: 2});
+    selectPayment.process({type: 'payment', payment: {...Payment.EMPTY, megaCredits: 8, auroraiData: 2}}, player),
     expect(game.getTemperature()).eq(-28);
     expect(player.megaCredits).eq(2);
-    expect(player.getSpendableData()).eq(1);
+    expect(player.getSpendable('auroraiData')).eq(1);
   });
 });

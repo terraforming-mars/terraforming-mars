@@ -12,6 +12,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
+import {message} from '../../logs/MessageBuilder';
 
 export class BioPrintingFacility extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -26,7 +27,7 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.', (eb) => {
             eb.energy(2, {digit}).startAction.plants(2);
-            eb.or().animals(1).asterix();
+            eb.or().resource(CardResource.ANIMAL).asterix();
           });
         }),
       },
@@ -47,7 +48,7 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
       return undefined;
     }
 
-    const gainPlantOption = new SelectOption('Gain 2 plants', 'Gain plants', () => {
+    const gainPlantOption = new SelectOption('Gain 2 plants', 'Gain plants').andThen(() => {
       player.stock.add(Resource.PLANTS, 2, {log: true});
       return undefined;
     });
@@ -56,7 +57,7 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
       const targetCard = availableAnimalCards[0];
 
       return new OrOptions(
-        new SelectOption('Add 1 animal to ' + targetCard.name, 'Add animal', () => {
+        new SelectOption(message('Add ${0} animal to ${1}', (b) => b.number(1).card(targetCard)), 'Add animal').andThen(() => {
           player.addResourceTo(targetCard, {log: true});
           return undefined;
         }),
@@ -68,12 +69,11 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
       new SelectCard(
         'Select card to add 1 animal',
         'Add animal',
-        availableAnimalCards,
-        ([card]) => {
+        availableAnimalCards)
+        .andThen(([card]) => {
           player.addResourceTo(card, {log: true});
           return undefined;
-        },
-      ),
+        }),
       gainPlantOption,
     );
   }

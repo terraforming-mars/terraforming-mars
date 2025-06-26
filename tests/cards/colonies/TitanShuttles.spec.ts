@@ -3,37 +3,37 @@ import {cast} from '../../TestingUtils';
 import {TitanFloatingLaunchPad} from '../../../src/server/cards/colonies/TitanFloatingLaunchPad';
 import {TitanShuttles} from '../../../src/server/cards/colonies/TitanShuttles';
 import {ICard} from '../../../src/server/cards/ICard';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('TitanShuttles', function() {
+describe('TitanShuttles', () => {
   let card: TitanShuttles;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new TitanShuttles();
     [game, player] = testGame(2);
 
     player.playedCards.push(card);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     expect(card.canAct()).is.true;
   });
 
-  it('Gives VP', function() {
+  it('Gives VP', () => {
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
-  it('Auto add floaters if only 1 option and 1 target available', function() {
+  it('Auto add floaters if only 1 option and 1 target available', () => {
     card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
     const input = game.deferredActions.peek()!.execute();
@@ -41,7 +41,7 @@ describe('TitanShuttles', function() {
     expect(card.resourceCount).to.eq(2);
   });
 
-  it('Can select target if multiple Jovian floater cards available', function() {
+  it('Can select target if multiple Jovian floater cards available', () => {
     const card2 = new TitanFloatingLaunchPad();
     player.playedCards.push(card2);
 
@@ -53,7 +53,7 @@ describe('TitanShuttles', function() {
     expect(card.resourceCount).to.eq(2);
   });
 
-  it('Both actions available', function() {
+  it('Both actions available', () => {
     const card2 = new TitanFloatingLaunchPad();
     player.playedCards.push(card2);
     player.addResourceTo(card, 7);

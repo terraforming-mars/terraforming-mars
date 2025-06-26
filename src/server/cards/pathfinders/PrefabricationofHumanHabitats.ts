@@ -4,10 +4,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
-import {played} from '../Options';
+import {IPlayer} from '../../IPlayer';
+import {IStandardProjectCard} from '../IStandardProjectCard';
 
 export class PrefabricationofHumanHabitats extends Card implements IProjectCard {
   constructor() {
@@ -17,23 +17,30 @@ export class PrefabricationofHumanHabitats extends Card implements IProjectCard 
       cost: 8,
       tags: [Tag.BUILDING, Tag.CITY],
 
-      requirements: CardRequirements.builder((b) => b.production(Resource.STEEL)),
+      requirements: {production: Resource.STEEL, count: 1},
       cardDiscount: {tag: Tag.CITY, amount: 2},
 
       metadata: {
         cardNumber: 'Pf02',
         renderData: CardRenderer.builder((b) => {
           b.effect('Cards with a city tag cost 2M€ less.', (eb) => {
-            eb.city({size: Size.MEDIUM, played}).startEffect.megacredits(-2);
+            eb.tag(Tag.CITY, {size: Size.MEDIUM}).startEffect.megacredits(-2);
           });
           b.br;
           b.effect('The CITY STANDARD PROJECT costs 2M€ less. STEEL MAY BE USED as if you were playing a building card.', (eb) => {
-            eb.city().asterix().startEffect.megacredits(23).openBrackets.steel(1).closeBrackets;
+            eb.city().asterix().startEffect.megacredits(23).super((b) => b.steel(1));
           });
         }),
         description: 'Requires that you have steel production.',
       },
     });
+  }
+
+  public getStandardProjectDiscount(_player: IPlayer, card: IStandardProjectCard): number {
+    if (card.name === CardName.CITY_STANDARD_PROJECT) {
+      return 2;
+    }
+    return 0;
   }
 }
 

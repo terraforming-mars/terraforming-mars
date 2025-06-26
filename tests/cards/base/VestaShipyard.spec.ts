@@ -2,10 +2,10 @@ import {expect} from 'chai';
 import {VestaShipyard} from '../../../src/server/cards/base/VestaShipyard';
 import {testGame} from '../../TestGame';
 
-describe('VestaShipyard', function() {
-  it('Should play', function() {
+describe('VestaShipyard', () => {
+  it('Should play', () => {
     const card = new VestaShipyard();
-    const [, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     card.play(player);
     expect(player.production.titanium).to.eq(1);

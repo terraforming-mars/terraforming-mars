@@ -263,16 +263,26 @@
 
 .tag-tr {
     background-image: url(./assets/resources/tr.png);
-    background-image: url(./assets/resources/tr.png);
     background-size: 49px 38px !important;
     background-position: -4px -2px !important;
 }
+.tag-handicap {
+    background-image: url(./assets/resources/handicap.png);
+    background-size: 42px 35px !important;
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: unset;
+    filter: drop-shadow(.5px .5px 0 black)
+        drop-shadow(-.5px .5px 0 black)
+        drop-shadow(.5px -.5px 0 black)
+        drop-shadow(-.5px -.5px 0 black);
+}
+
 .tag-escape {
     background-image: url(./assets/expansion_icons/expansion_icon_escapeVelocity.png);
-    background-color: black;
-    background-size: 40px;
-    background-position: -3px;
-    border-radius: 20px;
+    background-size: 56px;
+    background-position: -8px;
+    border-radius: 18px;
 }
 .tag-city-count {
     background-image: url(./assets/tiles/city.png);
@@ -295,7 +305,7 @@
     box-shadow: none;
 }
 
-  .tag-influence-count {
+.tag-influence-count {
     background-image: url(./assets/misc/influence.png);
     border: none !important;
     background-color: transparent !important;
@@ -306,7 +316,48 @@
     filter: brightness(0.8);
     border-radius: 0px !important;
     background-position: 0px !important;
-  }
+}
+
+
+.tag-excavation-count {
+  background-image: url(./assets/underworld/excavate.png);
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  background-size: 34px !important;
+  width: 34px !important;
+  height: 34px !important;
+  filter: brightness(0.8);
+  border-radius: 0px !important;
+  background-position: 0px !important;
+}
+
+.tag-corruption-count {
+  background-image: url(./assets/underworld/corruption.png);
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  background-size: 34px !important;
+  width: 34px !important;
+  height: 34px !important;
+  filter: brightness(0.8);
+  border-radius: 0px !important;
+  background-position: 0px !important;
+}
+
+.tag-negative-vp {
+  background-image: url(./assets/underworld/negative-vp.png);
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  background-size: 34px !important;
+  width: 34px !important;
+  height: 34px !important;
+  filter: brightness(0.8);
+  border-radius: 0px !important;
+  background-position: 0px !important;
+}
+
 .player-board-blue-action-counter{
     margin-top: 8px;
 }
@@ -397,11 +448,9 @@
     }
 
     .player_name {
-        color: #ccc;
         text-shadow: 1px 1px 1px #222, -1px -1px 2px #666;
-        padding: 1px 5px;
+        padding: 2px 5px;
         border-radius: 4px;
-        font-weight: bold;
     }
 
     .tags_cont {
@@ -544,223 +593,58 @@
             text-transform: uppercase;
             text-align: center;
             font-weight: bold;
-            background-size: 200px;
-            background-position: -30px -5px;
             border-radius: 10px 10px 0 0;
         }
 
-        .ma-name--terraformer {
-            background-image: url(./assets/ma/terraformer.png);
-        }
+        @ma-name:
+          terraformer, mayor, gardener, builder, planner,
+          landlord, banker, scientist, thermalist, miner,
 
-        .ma-name--mayor {
-            background-image: url(./assets/ma/mayor.png);
-        }
+          generalist, specialist, ecologist, tycoon, legend,
+          celebrity, industrialist, desert-settler, estate-dealer, benefactor,
 
-        .ma-name--gardener {
-            background-image: url(./assets/ma/gardener.png);
-        }
+          diversifier, tactician, polar-explorer, energizer, rim-settler,
+          cultivator, magnate, space-baron, excentric, contractor,
 
-        .ma-name--builder {
-            background-image: url(./assets/ma/builder.png);
-        }
+          hoverlord, venuphile,
 
-        .ma-name--planner {
-            background-image: url(./assets/ma/planner.png);
-        }
+          networker, entrepreneur,
 
-        .ma-name--generalist {
-            background-image: url(./assets/ma/generalist.png);
-        }
+          lunar-magnate, lunarchitect, full-moon, one-giant-step,
 
-        .ma-name--specialist {
-            background-image: url(./assets/ma/specialist.png);
-        }
+          economizer, pioneer, land-specialist, martian,
+          cosmic-settler, botanist, promoter, zoologist, a-manufacturer,
 
-        .ma-name--ecologist {
-            background-image: url(./assets/ma/ecologist.png);
-        }
+          v-electrician, v-spacefarer, smith, tradesman, irrigator, capitalist,
+          forecaster, edgedancer, visionary, naturalist, voyager,
 
-        .ma-name--tycoon {
-            background-image: url(./assets/ma/tycoon.png);
-        }
+          rugged, purifier,
 
-        .ma-name--legend {
-            background-image: url(./assets/ma/legend.png);
-        }
+          agronomist, engineer, farmer,
 
-        .ma-name--diversifier {
-            background-image: url(./assets/ma/diversifier.png);
-        }
+          colonizer, minimalist, terran, tropicalist,
+          curator, tourist, a-engineer, a-zoologist,
 
-        .ma-name--tactician {
-            background-image: url(./assets/ma/tactician.png);
-        }
+          t-collector, firestarter, terra-pioneer, spacefarer, gambler,
+          biologist, t-politician, urbanist, warmonger,
+          incorporator, manufacturer, politician,
 
-        .ma-name--polar-explorer {
-            background-image: url(./assets/ma/polar_explorer.png);
-        }
+          administrator, constructor, founder, highlander, hydrologist, investor,
+          landscaper, metropolist, mogul, thawer, traveller,
 
-        .ma-name--energizer {
-            background-image: url(./assets/ma/energizer.png);
-        }
+          collector, electrician, fundraiser, geologist, landshaper, lobbyist, philantropist,
+          planetologist, producer, researcher, sponsor, forester, breeder, thermoengineer,
 
-        .ma-name--rim-settler {
-            background-image: url(./assets/ma/rim_settler.png);
-        }
-
-        .ma-name--hoverlord {
-            background-image: url(./assets/ma/hoverlord.png);
-        }
-
-        .ma-name--landlord {
-            background-image: url(./assets/ma/landlord.png);
-        }
-
-        .ma-name--banker {
-            background-image: url(./assets/ma/banker.png);
-        }
-
-        .ma-name--scientist {
-            background-image: url(./assets/ma/scientist.png);
-        }
-
-        .ma-name--thermalist {
-            background-image: url(./assets/ma/thermalist.png);
-        }
-
-        .ma-name--miner {
-            background-image: url(./assets/ma/miner.png);
-        }
-
-        .ma-name--celebrity {
-            background-image: url(./assets/ma/celebrity.png);
-        }
-
-        .ma-name--industrialist {
-            background-image: url(./assets/ma/industrialist.png);
-        }
-
-        .ma-name--desert-settler {
-            background-image: url(./assets/ma/desert_settler.png);
-        }
-
-        .ma-name--estate-dealer {
-            background-image: url(./assets/ma/estate_dealer.png);
-        }
-
-        .ma-name--benefactor {
-            background-image: url(./assets/ma/benefactor.png);
-        }
-
-        .ma-name--cultivator {
-            background-image: url(./assets/ma/cultivator.png);
-        }
-
-        .ma-name--magnate {
-            background-image: url(./assets/ma/magnate.png);
-        }
-
-        .ma-name--space-baron {
-            background-image: url(./assets/ma/space_baron.png);
-        }
-
-        .ma-name--excentric {
-            background-image: url(./assets/ma/excentric.png);
-        }
-
-        .ma-name--contractor {
-            background-image: url(./assets/ma/contractor.png);
-        }
-
-        .ma-name--venuphile {
-            background-image: url(./assets/ma/venuphile.png);
-        }
-
-        .ma-name--economizer {
-            background-image: url(./assets/ma/economizer.png);
-        }
-
-        .ma-name--pioneer {
-            background-image: url(./assets/ma/pioneer.png);
-        }
-
-        .ma-name--land-specialist {
-            background-image: url(./assets/ma/land-specialist.png);
-        }
-
-        .ma-name--martian {
-            background-image: url(./assets/ma/martian.png);
-        }
-
-        .ma-name--businessperson {
-            background-image: url(./assets/ma/businessperson.png);
-        }
-
-        .ma-name--cosmic-settler {
-            background-image: url(./assets/ma/cosmic-settler.png);
-        }
-
-        .ma-name--botanist {
-            background-image: url(./assets/ma/botanist.png);
-        }
-
-        .ma-name--coordinator {
-            background-image: url(./assets/ma/coordinator.png);
-        }
-
-        .ma-name--zoologist {
-            background-image: url(./assets/ma/zoologist.png);
-        }
-
-        .ma-name--manufacturer {
-            background-image: url(./assets/ma/manufacturer.png);
-        }
-
-        .ma-name--electrician {
-            background-image: url(./assets/ma/electrician.png);
-            padding-top: 61px;
-        }
-
-        .ma-name--smith {
-            background-image: url(./assets/ma/smith.png);
-            padding-top: 61px;
-        }
-
-        .ma-name--tradesman {
-            background-image: url(./assets/ma/tradesman.png);
-            padding-top: 61px;
-        }
-
-        .ma-name--irrigator {
-            background-image: url(./assets/ma/irrigator.png);
-            padding-top: 61px;
-        }
-
-        .ma-name--capitalist {
-            background-image: url(./assets/ma/capitalist.png);
-            padding-top: 61px;
-        }
-
-        .ma-name--adapter {
-            background-image: url(./assets/ma/adapter.png);
-        }
-
-        .ma-name--edgedancer {
-            background-image: url(./assets/ma/edgedancer.png);
-        }
-
-        .ma-name--naturalist {
-            background-image: url(./assets/ma/naturalist.png);
-        }
-
-        .ma-name--hoarder {
-            background-image: url(./assets/ma/hoarder.png);
-        }
-
-        .ma-name--voyager {
-            background-image: url(./assets/ma/voyager.png);
-        }
+          kingpin, edgelord, tunneler, risktaker,
+        ;
+        each(@ma-name, {
+          .ma-name--@{value} {
+            background-image: url("assets/ma/@{value}.png");
+            // Images are expected to be 140px x 83px
+            // background-size: 200px;
+            // background-position: -30px -5px;
+          }
+        })
 
         .ma-description {
             display: inline-block;
@@ -771,14 +655,6 @@
             font-size: 14px;
             line-height: 15px;
             text-align: center;
-
-        }
-    }
-
-    .pwned-item {
-        .ma-name,
-        .ma-description {
-            opacity: 1;
         }
     }
 }
@@ -868,6 +744,10 @@
         display: inline-block;
         vertical-align: top;
         margin: 0px 0px 10px 0px;
+    }
+    .inactiveColony {
+      transform: scale(.9);
+      opacity: .7;
     }
 }
 

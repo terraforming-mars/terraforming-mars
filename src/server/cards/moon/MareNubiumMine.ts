@@ -2,8 +2,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {MoonSpaces} from '../../../common/moon/MoonSpaces';
-import {TileType} from '../../../common/TileType';
+import {NamedMoonSpaces} from '../../../common/moon/NamedMoonSpaces';
 import {Card} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
@@ -18,7 +17,7 @@ export class MareNubiumMine extends Card {
       behavior: {
         production: {titanium: 1},
         moon: {
-          mineTile: {space: MoonSpaces.MARE_NUBIUM},
+          mineTile: {space: NamedMoonSpaces.MARE_NUBIUM},
         },
       },
       reserveUnits: {titanium: 1},
@@ -31,7 +30,6 @@ export class MareNubiumMine extends Card {
           b.production((pb) => pb.titanium(1)).moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).asterix();
         }),
       },
-      tilesBuilt: [TileType.MOON_MINE],
     });
   }
 }

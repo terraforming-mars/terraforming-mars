@@ -1,27 +1,28 @@
 import {expect} from 'chai';
 import {Inventrix} from '../../../src/server/cards/corporation/Inventrix';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {GlobalParameter} from '../../../src/common/GlobalParameter';
 
-describe('Inventrix', function() {
+describe('Inventrix', () => {
   let card: Inventrix;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Inventrix();
     [game, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
-    expect(card.getRequirementBonus()).to.eq(2);
+    expect(card.getGlobalParameterRequirementBonus(player, GlobalParameter.OCEANS)).to.eq(2);
   });
 
-  it('Should take initial action', function() {
-    player.runInitialAction(card);
+  it('Should take initial action', () => {
+    player.defer(card.initialAction(player));
     runAllActions(game);
     expect(player.cardsInHand).has.lengthOf(3);
   });

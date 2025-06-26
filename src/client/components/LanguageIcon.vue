@@ -36,7 +36,8 @@ export default Vue.extend({
       return PreferencesManager.INSTANCE.values().lang as keyof typeof LANGUAGES;
     },
     title(): string {
-      return LANGUAGES[this.lang];
+      const lang = LANGUAGES[this.lang];
+      return `${lang[0]} (${lang[1]})`;
     },
   },
 });

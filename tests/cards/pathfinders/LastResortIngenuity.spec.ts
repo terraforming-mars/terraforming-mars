@@ -1,20 +1,19 @@
 import {expect} from 'chai';
 import {LastResortIngenuity} from '../../../src/server/cards/pathfinders/LastResortIngenuity';
 import {AsteroidMiningConsortium} from '../../../src/server/cards/base/AsteroidMiningConsortium';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
-describe('LastResortIngenuity', function() {
+describe('LastResortIngenuity', () => {
   let card: LastResortIngenuity;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new LastResortIngenuity();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    [/* game */, player] = testGame(1);
   });
 
-  it('play', function() {
+  it('play', () => {
     const cardWithoutTags = new AsteroidMiningConsortium();
     player.titanium = 10;
     // AsteroidMiningConsortium doesn't have a space tag, but requires titanium production.

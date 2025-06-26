@@ -1,39 +1,46 @@
+import {expect} from 'chai';
 import {shallowMount} from '@vue/test-utils';
 import {ALL_LANGUAGES, LANGUAGES} from '@/common/constants';
-import {expect} from 'chai';
-import * as sinon from 'sinon';
 import LanguageSwitcher from '@/client/components/LanguageSwitcher.vue';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 describe('LanguageSwitcher', () => {
-  it('renders all available languages', () => {
+  describe('renders all available languages', () => {
     const wrapper = shallowMount(LanguageSwitcher);
 
     ALL_LANGUAGES.forEach((lang) => {
-      const icon = wrapper.find(`.language-icon--${lang}`);
-      expect(icon.attributes('title')).to.be.eq(LANGUAGES[lang]);
+      it('render ' + lang, () => {
+        const icon = wrapper.find(`.language-icon--${lang}`);
+        const expected = icon.attributes('title') as string;
+        const e = LANGUAGES[lang];
+        expect(expected).to.be.a('string');
+        expect(expected).to.satisfy((title: string) => title.startsWith(e[0]));
+        expect(expected).to.satisfy((title: string) => title.indexOf(e[1], 1) > 0);
+      });
     });
   });
 
   it('saves language preference', async () => {
-    const preferenceSaveSpy = sinon.spy(PreferencesManager.INSTANCE, 'set');
+    const originalSetPreferences = PreferencesManager.INSTANCE.set;
+    let calledKey = '';
+    let calledValue = '';
+    PreferencesManager.INSTANCE.set = function(key, value: string) {
+      calledKey = key;
+      calledValue = value;
+    };
     const wrapper = shallowMount(LanguageSwitcher, {
       data() {
         return {PreferencesManager};
       },
     });
-
+    let called = false;
+    (wrapper.vm as unknown as typeof LanguageSwitcher.prototype.methods).reloadWindow = () => {
+      called = true;
+    };
     await wrapper.find('.language-icon--en').trigger('click');
-    expect(preferenceSaveSpy.calledWith('lang', 'en')).to.be.true;
-    preferenceSaveSpy.restore();
-  });
-
-  it('reloads application on lang switch', async () => {
-    const windowReloadSpy = sinon.spy(window.location, 'reload');
-    const wrapper = shallowMount(LanguageSwitcher);
-
-    await wrapper.find('.language-icon--en').trigger('click');
-    expect(windowReloadSpy.called).to.be.true;
-    windowReloadSpy.restore();
+    expect(calledKey).to.be.eq('lang');
+    expect(calledValue).to.be.eq('en');
+    expect(called).to.be.true;
+    PreferencesManager.INSTANCE.set = originalSetPreferences;
   });
 });

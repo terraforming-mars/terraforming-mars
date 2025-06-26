@@ -3,8 +3,8 @@ import {PhobosSpaceHaven} from '../../../src/server/cards/base/PhobosSpaceHaven'
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('PhobosSpaceHaven', function() {
-  it('Should play', function() {
+describe('PhobosSpaceHaven', () => {
+  it('Should play', () => {
     const card = new PhobosSpaceHaven();
     const [game, player] = testGame(2);
     cast(card.play(player), undefined);

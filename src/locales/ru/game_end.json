@@ -8,14 +8,14 @@
     "Try starting with the Beginner corporation": "Сыграйте корпорацией для новичков",
 
     "You win!": "Победа!",
-    "won!": "победил!",
+    "won!": "победил(а)!",
     "But it isn't the reason to stop making Mars better.": "Но это не повод останавливаться на достигнутом.",
     "Try to win with expansions enabled": "Попробуйте победить с дополнениями",
     "Try to win before the last generation": "Попробуйте победить до наступления последнего поколения",
     "Can you get": "Сможете набрать",
     "+ Victory Points?": "+ победных очков?",
 
-    "Victory points breakdown after": "Победные очки после",
+    "Victory point breakdown after": "Победные очки после",
     "Terraforming Mars - Game finished!": "Покорение Марса - Игра окончена!",
     "Download game log": "Скачать лог игры",
     "Milestones points": "Очки достижений",
@@ -31,15 +31,11 @@
     "A": "Н",
     "Total": "Всего",
 
-    "Claimed Planner milestone": "Получено достижение Стратег",
-    "Claimed Generalist milestone": "Получено достижение Универсал",
-    "Claimed Mayor milestone": "Получено достижение Мэр",
-    "1st place for Excentric award ": "1-ое место за награду Эксцентрик",
-    "1st place for Landlord award ": "1-ое место за награду Собственник",
-    "1st place for Benefactor award ": "1-ое место за награду Меценат",
-		
     "Victory points details": "Подробно о наборе победных очков",
     "Victory points details for": "Подробно о наборе очков игроком:",
     "Final situation on the board": "Итоговая ситуация на Марсе",
-    "Final game log": "Последние действия игроков"
+    "Final game log": "Последние действия игроков",
+    "${0} place for ${1} award (funded by ${2})": "${0} в борьбе за награду ${1} (учреждена ${2})",
+    "% completed": "% завершения",
+    "Claimed ${0} milestone": "Достижение ${0}"
 }

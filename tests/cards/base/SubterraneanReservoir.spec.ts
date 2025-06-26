@@ -2,10 +2,10 @@ import {SubterraneanReservoir} from '../../../src/server/cards/base/Subterranean
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('SubterraneanReservoir', function() {
-  it('Should play', function() {
+describe('SubterraneanReservoir', () => {
+  it('Should play', () => {
     const card = new SubterraneanReservoir();
-    const [, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);
   });
 });

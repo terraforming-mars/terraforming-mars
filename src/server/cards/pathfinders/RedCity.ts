@@ -4,14 +4,15 @@ import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {questionmark} from '../render/DynamicVictoryPoints';
 import {TileType} from '../../../common/TileType';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {AresHandler} from '../../ares/AresHandler';
+import {PlaceTile} from '../../deferredActions/PlaceTile';
 import {Board} from '../../boards/Board';
 import {IProjectCard} from '../IProjectCard';
+import {message} from '../../logs/MessageBuilder';
+import {Space} from '../../boards/Space';
+import {SpaceType} from '../../../common/boards/SpaceType';
 
 export class RedCity extends Card implements IProjectCard {
   constructor() {
@@ -25,7 +26,7 @@ export class RedCity extends Card implements IProjectCard {
         production: {energy: -1, megacredits: 2},
       },
 
-      requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),
+      requirements: {party: PartyName.REDS},
       victoryPoints: 'special',
 
       metadata: {
@@ -37,7 +38,7 @@ export class RedCity extends Card implements IProjectCard {
           '-1 energy prod, +2 M€ prod. ' +
           'Place the special tile on Mars ADJACENT TO NO GREENERY. ' +
           'NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space (or hazard) next to this tile.',
-        victoryPoints: CardRenderDynamicVictoryPoints.questionmark(),
+        victoryPoints: questionmark(),
       },
     });
   }
@@ -52,10 +53,13 @@ export class RedCity extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace('Select space for Red City', this.availableRedCitySpaces(player), (space) => {
-      player.game.addTile(player, space, {tileType: TileType.RED_CITY, card: this.name});
-      return undefined;
-    });
+    player.game.defer(
+      new PlaceTile(player, {
+        tile: {tileType: TileType.RED_CITY, card: this.name},
+        on: () => this.availableRedCitySpaces(player),
+        title: message('Select space for ${0}', (b) => b.card(this)),
+      }));
+    return undefined;
   }
 
   public override getVictoryPoints(player: IPlayer): number {
@@ -65,6 +69,10 @@ export class RedCity extends Card implements IProjectCard {
     }
 
     const neighbors = player.game.board.getAdjacentSpaces(space);
-    return neighbors.filter((neighbor) => neighbor.tile === undefined || AresHandler.hasHazardTile(neighbor)).length;
+    return neighbors.filter((neighbor) => this.isEmpty(neighbor)).length;
+  }
+
+  private isEmpty(space: Space): boolean {
+    return space.spaceType === SpaceType.RESTRICTED ||Board.hasRealTile(space) === false;
   }
 }

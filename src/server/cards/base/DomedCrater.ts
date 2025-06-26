@@ -4,7 +4,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit, max} from '../Options';
 
@@ -23,9 +22,9 @@ export class DomedCrater extends Card implements IProjectCard {
         city: {},
       },
 
-      requirements: CardRequirements.builder((b) => b.oxygen(7, {max})),
+      requirements: {oxygen: 7, max},
       metadata: {
-        cardNumber: 'T03',
+        cardNumber: '016',
         description: {
           text: 'Oxygen must be 7% or less. Gain 3 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.',
           align: 'left',

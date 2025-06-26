@@ -8,7 +8,6 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resource} from '../../../common/Resource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
@@ -21,19 +20,19 @@ export class JupiterFloatingStation extends Card implements IProjectCard {
       name: CardName.JUPITER_FLOATING_STATION,
       type: CardType.ACTIVE,
       resourceType: CardResource.FLOATER,
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3)),
+      requirements: {tag: Tag.SCIENCE, count: 3},
       victoryPoints: 1,
 
       metadata: {
         cardNumber: 'C19',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 floater to a JOVIAN CARD.', (eb) => {
-            eb.empty().startAction.floaters(1, {secondaryTag: Tag.JOVIAN});
+            eb.empty().startAction.resource(CardResource.FLOATER, {secondaryTag: Tag.JOVIAN});
           }).br;
           b.or().br;
           b.action('Gain 1 M€ for every floater here [MAX 4].', (eb) => {
             eb.empty().startAction;
-            eb.megacredits(1).slash().floaters(1).text('[max 4]', Size.SMALL);
+            eb.megacredits(1).slash().resource(CardResource.FLOATER).text('[max 4]', Size.SMALL);
           });
         }),
         description: {
@@ -51,13 +50,13 @@ export class JupiterFloatingStation extends Card implements IProjectCard {
 
   public action(player: IPlayer) {
     return new OrOptions(
-      new SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
+      new SelectOption('Add 1 floater to a Jovian card', 'Add floater').andThen(() => {
         player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {
           restrictedTag: Tag.JOVIAN, title: 'Add 1 floater to a Jovian card',
         }));
         return undefined;
       }),
-      new SelectOption('Gain 1 M€ per floater here (max 4) ', 'Gain M€', () => {
+      new SelectOption('Gain 1 M€ per floater here (max 4)', 'Gain M€').andThen(() => {
         player.stock.add(Resource.MEGACREDITS, Math.min(this.resourceCount, 4), {log: true});
         return undefined;
       }),

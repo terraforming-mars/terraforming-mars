@@ -6,12 +6,12 @@ import {IoMiningIndustries} from '../../src/server/cards/base/IoMiningIndustries
 import {ICard} from '../../src/server/cards/ICard';
 import {CardName} from '../../src/common/cards/CardName';
 
-describe('SelectCard', function() {
+describe('SelectCard', () => {
   let aquiferPumping: ICard;
   let roboticWorkforce: ICard;
   let ioMiningIndustries: ICard;
-  let selected: Array<ICard>;
-  const cb = (cards: Array<ICard>) => {
+  let selected: ReadonlyArray<ICard>;
+  const cb = (cards: ReadonlyArray<ICard>) => {
     selected = cards;
     return undefined;
   };
@@ -23,13 +23,12 @@ describe('SelectCard', function() {
     selected = [];
   });
 
-  it('Simple', function() {
+  it('Simple', () => {
     const selectCards = new SelectCard(
       'Select card',
       'Save',
-      [aquiferPumping, ioMiningIndustries],
-      cb,
-    );
+      [aquiferPumping, ioMiningIndustries])
+      .andThen(cb);
 
     selectCards.process({type: 'card', cards: [CardName.AQUIFER_PUMPING]});
     expect(selected).deep.eq([aquiferPumping]);
@@ -38,26 +37,24 @@ describe('SelectCard', function() {
     expect(selected).deep.eq([ioMiningIndustries]);
   });
 
-  it('Cannot select unavailable card', function() {
+  it('Cannot select unavailable card', () => {
     const selectCards = new SelectCard(
       'Select card',
       'Save',
-      [aquiferPumping, roboticWorkforce],
-      cb,
-    );
+      [aquiferPumping, roboticWorkforce])
+      .andThen(cb);
 
     expect(() => selectCards.process({type: 'card', cards: [CardName.DIRECTED_IMPACTORS]}))
       .to.throw(Error, /Card Directed Impactors not found/);
   });
 
-  it('Throws error when selected card was not enabled', function() {
+  it('Throws error when selected card was not enabled', () => {
     const selectCards = new SelectCard(
       'Select card',
       'Save',
       [aquiferPumping, roboticWorkforce, ioMiningIndustries],
-      cb,
-      {enabled: [true, false, true]},
-    );
+      {enabled: [true, false, true]})
+      .andThen(cb);
 
     selectCards.process({type: 'card', cards: [CardName.AQUIFER_PUMPING]});
     expect(selected).deep.eq([aquiferPumping]);

@@ -2,31 +2,31 @@ import {expect} from 'chai';
 import {TopsoilContract} from '../../../src/server/cards/promo/TopsoilContract';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {Ants} from '../../../src/server/cards/base/Ants';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {AerobrakedAmmoniaAsteroid} from '../../../src/server/cards/base/AerobrakedAmmoniaAsteroid';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('TopsoilContract', function() {
+describe('TopsoilContract', () => {
   let card: TopsoilContract;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new TopsoilContract();
     [game, player, player2] = testGame(2);
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
     card.play(player);
     runAllActions(game);
 
     expect(player.plants).to.eq(3);
   });
 
-  it('Gives 1 M€ whenever player gains a microbe', function() {
+  it('Gives 1 M€ whenever player gains a microbe', () => {
     player.playedCards.push(card);
 
     // Get MC when player gains microbes

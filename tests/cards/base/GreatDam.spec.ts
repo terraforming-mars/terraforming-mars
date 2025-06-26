@@ -10,7 +10,7 @@ describe('GreatDam', () => {
 
   beforeEach(() => {
     card = new GreatDam();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('Can play', () => {

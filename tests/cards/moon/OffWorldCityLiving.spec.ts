@@ -1,21 +1,22 @@
-import {Game} from '../../../src/server/Game';
+import {expect} from 'chai';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {OffWorldCityLiving} from '../../../src/server/cards/moon/OffWorldCityLiving';
-import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 
 describe('OffWorldCityLiving', () => {
+  let game: IGame;
   let player: TestPlayer;
   let card: OffWorldCityLiving;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
     // Adding a vestigial player to avoid the two starting cities.
-    const game = Game.newInstance('gameid', [player, TestPlayer.RED.newPlayer()], player, {moonExpansion: true});
+    [game, player] = testGame(2, {moonExpansion: true});
     card = new OffWorldCityLiving();
     moonData = MoonExpansion.moonData(game);
   });
@@ -24,12 +25,12 @@ describe('OffWorldCityLiving', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
-    expect(moonData.colonyRate).eq(0);
-    expect(player.getTerraformRating()).eq(20);
+    expect(moonData.habitatRate).eq(0);
+    expect(player.terraformRating).eq(20);
     expect(player.production.megacredits).eq(0);
 
     const colonySpaces = player.game.board.spaces.filter((s) => s.spaceType === SpaceType.COLONY);
@@ -43,8 +44,8 @@ describe('OffWorldCityLiving', () => {
 
     card.play(player);
 
-    expect(moonData.colonyRate).eq(1);
-    expect(player.getTerraformRating()).eq(21);
+    expect(moonData.habitatRate).eq(1);
+    expect(player.terraformRating).eq(21);
     expect(player.production.megacredits).eq(2);
   });
 

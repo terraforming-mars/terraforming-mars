@@ -1,68 +1,84 @@
+import {ICard} from '../../cards/ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
 import {IAward} from '../IAward';
 
 export class Warmonger implements IAward {
   public readonly name = 'Warmonger';
-  public readonly description = 'Play the most cards that reduce other players\' resources or production';
+  public readonly description = 'Play the most cards that reduce other players\' resources or production, INCLUDING EVENTS';
 
   public getScore(player: IPlayer): number {
-    const cardNames = player.playedCards.map((card) => card.name);
-    return cardNames.filter((name) => Warmonger.attackCards.includes(name)).length;
+    return player.tableau.filter(Warmonger.include).length;
   }
 
-  private static attackCards = [
+  // Public for testing
+  public static include(card: ICard) {
+    if (Warmonger.attackCards.includes(card.name)) {
+      return true;
+    }
+    return Warmonger.autoInclude(card);
+  }
+
+  // Public for testing
+  public static autoInclude(card: ICard) {
+    if (card.behavior !== undefined) {
+      const behavior = card.behavior;
+      if (behavior.removeAnyPlants !== undefined) return true;
+      if (behavior.decreaseAnyProduction !== undefined) return true;
+    }
+    return false;
+  }
+
+  // This is the list of cards that have bespoke attack code.
+  // public for testing.
+  public static attackCards: ReadonlyArray<CardName> = [
     // Base + Corp Era
     CardName.ANTS,
-    CardName.ASTEROID,
     CardName.ASTEROID_MINING_CONSORTIUM,
-    CardName.BIG_ASTEROID,
-    CardName.BIOMASS_COMBUSTORS,
-    CardName.BIRDS,
-    CardName.CLOUD_SEEDING,
-    CardName.COMET,
-    CardName.DEIMOS_DOWN,
+    CardName.COMET_FOR_VENUS,
     CardName.ENERGY_TAPPING,
-    CardName.FISH,
     CardName.FLOODING,
-    CardName.GIANT_ICE_ASTEROID,
     CardName.GREAT_ESCARPMENT_CONSORTIUM,
     CardName.HACKERS,
-    CardName.HEAT_TRAPPERS,
-    CardName.HERBIVORES,
     CardName.HIRED_RAIDERS,
-    CardName.MINING_EXPEDITION,
     CardName.POWER_SUPPLY_CONSORTIUM,
     CardName.PREDATORS,
     CardName.SABOTAGE,
-    CardName.SMALL_ANIMALS,
     CardName.VIRUS,
     // Venus
-    CardName.COMET_FOR_VENUS,
     // Colonies
     CardName.AIR_RAID,
-    CardName.IMPACTOR_SWARM,
-    CardName.SUBZERO_SALT_FISH,
     // Turmoil
-    CardName.AERIAL_LENSES,
-    CardName.LAW_SUIT,
     // Promo
-    CardName.SMALL_ASTEROID,
-    CardName.DEIMOS_DOWN_PROMO,
     CardName.MONS_INSURANCE,
-    // Ares
-    CardName.METALLIC_ASTEROID,
-    CardName.DEIMOS_DOWN_ARES,
     // Moon
     CardName.ANCIENT_SHIPYARDS,
-    CardName.COSMIC_RADIATION,
-    CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE,
     CardName.REVOLTING_COLONISTS,
+    CardName.ROAD_PIRACY,
+    CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE,
     // Pathfinders
     CardName.DUST_STORM,
+    CardName.SMALL_COMET,
     CardName.SOLAR_STORM,
-    CardName.PUBLIC_SPONSORED_GRANT,
     // CEOs
     CardName.BJORN,
-  ];
+    // Star Wars
+    CardName.CLONE_TROOPERS,
+    // Underworld
+    CardName.ANTI_TRUST_CRACKDOWN,
+    CardName.CLASS_ACTION_LAWSUIT,
+    CardName.CORPORATE_BLACKMAIL,
+    CardName.CORPORATE_THEFT,
+    CardName.HACKERS_UNDERWORLD,
+    CardName.HIRED_RAIDERS_UNDERWORLD,
+    CardName.INVESTIGATIVE_JOURNALISM,
+    CardName.MONOPOLY,
+    CardName.PLANT_TAX,
+    CardName.RECKLESS_DETONATION,
+    CardName.SERVER_SABOTAGE,
+    CardName.SPACE_PRIVATEERS,
+    // Prelude 2
+    CardName.RECESSION,
+    CardName.SPECIAL_PERMIT,
+  ] as const;
 }

@@ -1,14 +1,12 @@
-import {ICorporationCard} from './ICorporationCard';
-import {Card} from '../Card';
+import {CorporationCard} from './CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
+import {ICorporationCard} from './ICorporationCard';
 
-export class BeginnerCorporation extends Card implements ICorporationCard {
+export class BeginnerCorporation extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.BEGINNER_CORPORATION,
 
       behavior: {

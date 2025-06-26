@@ -1,4 +1,3 @@
-
 import {Color} from '../Color';
 import {AwardName} from '../ma/AwardName';
 
@@ -9,7 +8,7 @@ export type AwardScore = {
 
 export type FundedAwardModel = {
   name: AwardName;
-  playerName: string;
-  playerColor: Color | '';
+  playerName: string | undefined;
+  playerColor: Color | undefined;
   scores: Array<AwardScore>;
 }

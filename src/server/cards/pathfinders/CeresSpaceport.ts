@@ -2,10 +2,9 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
-import {SpaceName} from '../../SpaceName';
+import {SpaceName} from '../../../common/boards/SpaceName';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 
 export class CeresSpaceport extends Card implements IProjectCard {
   constructor() {
@@ -27,7 +26,7 @@ export class CeresSpaceport extends Card implements IProjectCard {
         cardNumber: 'Pf14',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(2))
-            .production((pb) => pb.titanium(1).slash().jovian({amount: 2, played}))
+            .production((pb) => pb.titanium(1).slash().tag(Tag.JOVIAN, 2))
             .br
             .cards(1).oceans(1).city().asterix().br;
         }),

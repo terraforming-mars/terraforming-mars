@@ -1,0 +1,93 @@
+{
+  "Desperate Measures": "Відчайдушні заходи",
+  "Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.": "ЕФЕКТ: Покладіть бронзовий кубик на плитку з пиловою бурею і підвищте рівень кисню на 1 крок, або покладіть бронзовий кубик на плитку з ерозією і підвищте температуру на 1 крок. Плитка з небезпекою і бронзовим кубиком не може бути видалена.",
+
+  "Mining Area": "Гірнича зона",
+  "Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "Покладіть одну з цих плиток на зону з бонусом за розміщення сталі або титану, ПОСТАВЛЕНУ ПОСЛІДОВНО ДО ІНШОЇ З ВАШИХ ПЛИТОК. Ця плитка надає НАБЛИЖЕНИЙ БОНУС тієї ж ресурсу, що й зона. Збільште вашу виробництво цього ресурсу на 1 крок.",
+
+  "Industrial Center": "Промисловий центр",
+  "Action: Spend 7 M€ to increase your steel production 1 step.": "ДІЯ: Витратити 7 M€, щоб збільшити виробництво сталі на 1 крок.",
+  "Place this tile adjacent to a city tile. This tile grants an ADJACENCY BONUS of 1 steel.": "Покладіть цю плитку поруч з міською плиткою. Ця плитка надає НАБЛИЖЕНИЙ БОНУС 1 сталі.",
+
+  "Marketing Experts": "Маркетингові експерти",
+  "Effect: When an ADJACENCY BONUS is collected from a tile you own, you gain 1 M€.": "ЕФЕКТ: Коли з плитки, яку ви володієте, збирається НАБЛИЖЕНИЙ БОНУС, ви отримуєте 1 M€.",
+  "Increase your M€ production 1 step.": "Збільште ваше виробництво M€ на 1 крок.",
+
+  "Bioengineering Enclosure": "Біоінженерний контейнер",
+  "Action: Remove 1 animal from THIS card to add 1 animal to ANOTHER card.": "ДІЯ: Видаліть 1 тварину з ЦІЄЇ карти, щоб додати 1 тварину на ІНШУ карту.",
+  "Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.": "Для гри потрібен 1 науковий символ. Додайте 2 тварини на цю карту. Інші гравці не можуть видаляти тварини з цієї карти.",
+
+  "Butterfly Effect": "Ефект метелика",
+  "Gain 1 TR. Move each hazard marker up to 1 step up or down along its terraforming track.": "Отримайте 1 РТ. Перемістіть кожен маркер небезпеки на 1 крок вгору або вниз по його трасі терраформування.",
+  "All hazard markers": "Всі маркери небезпеки",
+
+  "Geological Survey": "Геологічне дослідження",
+  "Any max 5 Greeneries": "Максимум 5 зелених зон",
+  "Effect: When placing a tile ON MARS grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain.": "ЕФЕКТ: Коли ви розміщуєте плитку НА МАРСІ, яка надає вам сталь, титан або тепло, ви отримуєте додатковий ресурс кожного з цих ресурсів, який ви отримуєте.",
+  "Requires 5 or fewer greeneries on Mars.": "Потрібно 5 або менше зелених зон на Марсі.",
+
+  "Ecological Survey": "Екологічне дослідження",
+  "Any 3 Greeneries": "3 зелені зони",
+  "Effect: When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain.": "ЕФЕКТ: Коли ви розміщуєте плитку, яка надає вам рослини, тварини або мікроби, ви отримуєте додатковий ресурс кожного з цих ресурсів, який ви отримуєте.",
+  "Requires 3 greeneries on Mars.": "Потрібно 3 зелені зони на Марсі.",
+
+  "Magnetic Field Generators": "Магнітні генератори поля",
+  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile. It provides adjacency bonus of 1 plant and 1 microbe.": "Зменште ваше виробництво енергії на 4 кроки і збільште ваше виробництво рослин на 2 кроки. Підвищте ваш TR на 3 кроки. Покладіть цю плитку. Вона надає НАБЛИЖЕНИЙ БОНУС 1 рослині та 1 мікробу.",
+
+  "Mining Rights": "Права на розробку",
+  "Place one of these tiles on an area with a steel or titanium placement bonus. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "Покладіть одну з цих плиток на зону з бонусом за розміщення сталі або титану. Ця плитка надає НАБЛИЖЕНИЙ БОНУС тієї ж ресурсу. Збільште ваше виробництво цього ресурсу на 1 крок.",
+
+  "Natural Preserve": "Природний заповідник",
+  "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an ADJACENCY BONUS of of 1 M€. Increase your M€ production 1 step.": "Рівень кисню повинен бути 4% або менше. Покладіть цю плитку БІЛЯ ЖОДНОЇ ІНШОЇ ПЛИТКИ. Плитка надає НАБЛИЖЕНИЙ БОНУС 1 M€. Збільште ваше виробництво M€ на 1 крок.",
+
+  "Ocean Sanctuary": "Океанський заповідник",
+  "1 VP per animal on this card.": "1 ПО за кожну тварину на цій карті.",
+  "Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 animal. Add 1 animal to this card.": "Потрібно 5 океанських плиток. Покладіть цю плитку на існуючу океанську плитку. Плитка надає НАБЛИЖЕНИЙ БОНУС 1 тварині. Додайте 1 тварину на цю карту.",
+
+  "Nuclear Zone": "Ядерна зона",
+  "Raise the temperature two steps. Place this tile. Players must pay an additional 2M€ when they place a tile with their player marker on it ADJACENT to the Nuclear Zone.": "Підвищте температуру на два кроки. Покладіть цю плитку. Гравці повинні заплатити додатково 2 M€, коли вони розміщують плитку з їхнім гравцевим маркером поруч з Ядерною зоною.",
+
+  "Restricted Area": "Зона обмеженого доступу",
+  "Action: Spend 2 M€ to draw a card.": "ДІЯ: Витратити 2 M€, щоб взяти карту.",
+  "Place this tile which grants an ADJACENCY BONUS of 1 card.": "Покладіть цю плитку, яка надає НАБЛИЖЕНИЙ БОНУС 1 карти.",
+
+  "Solar Farm": "Сонячна ферма",
+  "Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your energy production 1 step for each plant resource on the area where you place the tile.": "Покладіть цю плитку, яка надає НАБЛИЖЕНИЙ БОНУС 2 енергії. Збільште ваше виробництво енергії на 1 крок за кожен рослинний ресурс на зоні, де ви розміщуєте плитку.",
+
+  "Great Dam": "Велика дамба",
+  "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile. The tile grants an ADJACENCY BONUS of 2 Energy.": "Потрібно 4 океанські плитки. Збільште ваше виробництво енергії на 2 кроки. Покладіть цю плитку ПОСЛІДОВНО ДО океанської плитки. Плитка надає НАБЛИЖЕНИЙ БОНУС 2 енергії.",
+
+  "Deimos Down": "Падіння Деймоса",
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. It provides adjacency bonus of 1 asteroid and 1 steel. Remove up to 6 plants from any player.": "Підвищте температуру на 3 кроки і отримайте 4 сталі. Покладіть цю плитку БЕЗПОСЕРЕДНЬО ДО жодної іншої міської плитки. Вона надає НАБЛИЖЕНИЙ БОНУС 1 астероїду та 1 сталі. Видалити до 6 рослин у будь-якого гравця.",
+
+  "Ecological Zone": "Екологічна зона",
+  "Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.": "ЕФЕКТ: Коли ви граєте тваринний або рослинний символ, ВКЛЮЧАЮЧИ ЦІ, додайте тварину на цю карту.",
+  "The tile grants an ADJACENCY BONUS of 1 animal. 1 VP per 2 animals on this card.": "Плитка надає НАБЛИЖЕНИЙ БОНУС 1 тварині. 1 ПО за кожні 2 тварини на цій карті.",
+  "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "Вимагає, щоб ВИ мали плитку зеленого насадження. Покладіть цю плитку поруч з БУДЬ-ЯКИМ зеленим насадженням.",
+
+  "Bio-Fertilizer Facility": "Біо-добривний комплекс",
+  "Requires 1 science tag. Increase your plant production 1 step. Add up to 2 microbes to ANY card. Place this tile which grants an ADJACENCY BONUS of 1 plant and 1 microbe.": "Потрібен 1 науковий символ. Збільште ваше виробництво рослин на 1 крок. Додайте до 2 мікробів на БУДЬ-ЯКУ карту. Покладіть цю плитку, яка надає НАБЛИЖЕНИЙ БОНУС 1 рослині та 1 мікробу.",
+
+  "Metallic Asteroid": "Металевий астероїд",
+  "Raise temperature 1 step and gain 1 titanium. Remove up to 4 plants from any player. Place this tile which grants an ADJACENCY BONUS of 1 titanium.": "Підвищте температуру на 1 крок і отримайте 1 титан. Видаліть до 4 рослин з будь-якого гравця. Покладіть цю плитку, яка надає НАБЛИЖЕНИЙ БОНУС 1 титану.",
+
+  "Ocean Farm": "Океанське сільське господарство",
+  "Requires 4 ocean tiles. Increase your heat production 1 step and increase your plant production 1 step. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 plant.": "Потрібно 4 океанські плитки. Збільште ваше виробництво тепла на 1 крок і збільште ваше виробництво рослин на 1 крок. Покладіть цю плитку на існуючу океанську плитку. Плитка надає НАБЛИЖЕНИЙ БОНУС 1 рослині.",
+
+  "Commercial District": "Комерційний район",
+  "1 VP per adjacent city tile.": "1 ПО за кожну сусідню міську плитку.",
+  "Place this tile which grants an ADJACENCY BONUS of 2 M€. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Покладіть цю плитку, яка надає НАБЛИЖЕНИЙ БОНУС 2 M€. Зменште ваше виробництво енергії на 1 крок і збільште ваше виробництво M€ на 4 кроки.",
+
+  "Ocean City": "Океанське місто",
+  "Requires 6 ocean tiles. Decrease your energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "Потрібно 6 океанських плиток. Зменште ваше виробництво енергії на 1 крок і збільште ваше виробництво M€ на 3 кроки. Покладіть цю плитку на існуючу океанську плитку, ІГНОРУЮЧИ ЗВИЧАЙНІ ОБМЕЖЕННЯ РОЗМІЩЕННЯ ДЛЯ МІСТ. Ця плитка вважається містом і океаном одночасно.",
+
+  "Lava Flows": "Лавові потоки",
+  "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. This tile grants an ADJACENCY BONUS of 2 heat.": "Підвищте температуру на 2 кроки і розмістіть цю плитку НА THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS АБО ARSIA MONS. Ця плитка надає НАБЛИЖЕНИЙ БОНУС 2 тепла.",
+
+  "Mohole Area": "Могольська зона",
+  "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN. The tile grants an ADJACENCY BONUS of 2 heat.": "Збільште ваше виробництво тепла на 4 кроки. Покладіть цю плитку НА ЗОНУ, ЗАЛИШЕНУ ДЛЯ ОКЕАНУ. Плитка надає НАБЛИЖЕНИЙ БОНУС 2 тепла.",
+
+  "Capital": "Столиця",
+  "1 additional VP for each ocean tile adjacent to this city tile.": "1 додаткове ПО за кожну океанську плитку, прилеглу до цієї міської плитки.",
+  "Requires 4 ocean tiles. Place tile with ADJACENCY BONUS of 2 M€. Energy prod -2 and M€ prod +5.": "Потрібно 4 океанські плитки. Покладіть плитку з НАБЛИЖЕНИМ БОНУСОМ 2 M€. Виробництво енергії -2 і виробництво M€ +5."
+}

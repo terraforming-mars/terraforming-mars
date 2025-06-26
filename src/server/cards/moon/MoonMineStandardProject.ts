@@ -19,20 +19,13 @@ export class MoonMineStandardProject extends StandardProjectCard {
     metadata: {
       cardNumber: '',
       renderData: CardRenderer.builder((b) =>
-        b.standardProject('Spend 20 M€ and 1 titanium to place a mine on the moon, raise the mining rate 1 step, and raise steel production 1 step.', (eb) => {
+        b.standardProject('Spend 20 M€ and 1 titanium to place a mine on The Moon, raise the mining rate 1 step, and raise steel production 1 step.', (eb) => {
           eb.megacredits(20).titanium(1).startAction.moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).production((pb) => pb.steel(1));
         }),
       ),
     },
   }) {
     super(properties);
-  }
-
-  protected override discount(player: IPlayer): number {
-    if (player.playedCards.find((card) => card.name === CardName.MOONCRATE_BLOCK_FACTORY)) {
-      return 4;
-    }
-    return super.discount(player);
   }
 
   public override canAct(player: IPlayer): boolean {

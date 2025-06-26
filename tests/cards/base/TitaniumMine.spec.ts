@@ -3,10 +3,10 @@ import {TitaniumMine} from '../../../src/server/cards/base/TitaniumMine';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('TitaniumMine', function() {
-  it('Should play', function() {
+describe('TitaniumMine', () => {
+  it('Should play', () => {
     const card = new TitaniumMine();
-    const [, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);
     expect(player.production.titanium).to.eq(1);
   });

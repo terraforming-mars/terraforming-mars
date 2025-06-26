@@ -6,9 +6,8 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardResource} from '../../../common/CardResource';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Tag} from '../../../common/cards/Tag';
-import {digit, played} from '../Options';
+import {digit} from '../Options';
 import {Resource} from '../../../common/Resource';
 import {Size} from '../../../common/cards/render/Size';
 
@@ -19,20 +18,20 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
       name: CardName.OUMUAMUA_TYPE_OBJECT_SURVEY,
       cost: 20,
       tags: [Tag.SPACE, Tag.SCIENCE],
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SPACE, 1).tag(Tag.SCIENCE, 1)),
+      requirements: [{tag: Tag.SPACE}, {tag: Tag.SCIENCE}],
 
       metadata: {
         cardNumber: 'Pf53',
         renderData: CardRenderer.builder((b) => {
-          b.data({amount: 2}).asterix().cards(2, {size: Size.SMALL}).asterix().br;
-          b.science(1, {played}).microbes(1, {played}).colon().text('play ', Size.SMALL, false, true);
-          b.space({played}).colon().production((pb) => pb.energy(3, {digit})).br;
+          b.resource(CardResource.DATA, 2).asterix().cards(2, {size: Size.SMALL}).asterix().br;
+          b.tag(Tag.SCIENCE).tag(Tag.MICROBE).colon().text('play ', Size.SMALL, false, true);
+          b.tag(Tag.SPACE).colon().production((pb) => pb.energy(3, {digit})).br;
           b.text(
-            'Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. ' +
-            'If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.',
+            'Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. ' +
+            'If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.',
             Size.SMALL, false, false);
         }),
-        description: 'Requires 1 space tag and 1 science tag. Add 2 data to ANY card. ',
+        description: 'Requires 1 space tag and 1 science tag. Add 2 data to ANY card.',
       },
     });
   }
@@ -45,9 +44,14 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
   private processCard(player: IPlayer, card: IProjectCard): boolean {
     const tags = card.tags;
     if (player.tags.cardHasTag(card, Tag.SCIENCE) || player.tags.cardHasTag(card, Tag.MICROBE)) {
-      player.playCard(card, undefined);
-      return true;
-    } else if (tags.includes(Tag.SPACE)) {
+      if (!card.canPlayPostRequirements(player)) {
+        player.game.log('${0} cannot play ${1}', (b) => b.player(player).card(card));
+      } else {
+        player.playCard(card, undefined);
+        return true;
+      }
+    }
+    if (tags.includes(Tag.SPACE)) {
       player.production.add(Resource.ENERGY, 3, {log: true});
       this.keep(player, card);
       return true;
@@ -57,13 +61,17 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
     }
   }
 
+  public override bespokeCanPlay(player: IPlayer): boolean {
+    return player.game.projectDeck.canDraw(2);
+  }
+
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
     // TODO(kberg): Make sure this action occurs after the card play, in case the played card has data.
     game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
-    const cards = [game.projectDeck.draw(player.game), game.projectDeck.draw(player.game)];
+    const cards = game.projectDeck.drawNOrThrow(game, 2);
 
-    player.game.log('${0} revealed ${1} and ${2}', (b) => b.player(player).card(cards[0]).card(cards[1]));
+    player.game.log('${0} revealed ${1} and ${2}', (b) => b.player(player).card(cards[0], {tags: true}).card(cards[1], {tags: true}));
     if (this.processCard(player, cards[0])) {
       this.keep(player, cards[1]);
     } else {

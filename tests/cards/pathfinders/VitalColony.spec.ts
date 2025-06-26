@@ -3,16 +3,16 @@ import {testGame} from '../../TestGame';
 import {VitalColony} from '../../../src/server/cards/pathfinders/VitalColony';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('VitalColony', function() {
+describe('VitalColony', () => {
   let card: VitalColony;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new VitalColony();
     // 2 players to remove an early-game solo action in the deferred actions queue.
     [game, player] = testGame(2, {
@@ -27,7 +27,7 @@ describe('VitalColony', function() {
     });
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
 
     const selectColony = cast(game.deferredActions.pop()!.execute(), SelectColony);

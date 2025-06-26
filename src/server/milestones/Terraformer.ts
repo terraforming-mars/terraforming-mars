@@ -11,7 +11,7 @@ export class Terraformer implements IMilestone {
     this.description = 'Have a terraform rating of 35 (or 26 with Turmoil.)';
   }
   public getScore(player: IPlayer): number {
-    return player.getTerraformRating();
+    return player.terraformRating;
   }
   public canClaim(player: IPlayer): boolean {
     const target = Turmoil.ifTurmoilElse(player.game, () => this.terraformRatingTurmoil, () => this.terraformRating);

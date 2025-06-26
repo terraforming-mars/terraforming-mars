@@ -1,7 +1,7 @@
-import {Game} from '../../../src/server/Game';
+import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {DarksideObservatory} from '../../../src/server/cards/moon/DarksideObservatory';
-import {expect} from 'chai';
 import {PhysicsComplex} from '../../../src/server/cards/base/PhysicsComplex';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 import {OlympusConference} from '../../../src/server/cards/base/OlympusConference';
@@ -27,38 +27,37 @@ describe('DarksideObservatory', () => {
   const nanotechIndustries = new NanotechIndustries();
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [/* game */, player] = testGame(1, {moonExpansion: true});
     card = new DarksideObservatory();
   });
 
   it('can act', () => {
-    player.playedCards = [];
+    player.playedCards.set();
     expect(card.canAct(player)).is.false;
 
-    player.playedCards = [physicsComplex];
+    player.playedCards.set(physicsComplex);
     expect(card.canAct(player)).is.false;
 
-    player.playedCards = [searchForLife];
+    player.playedCards.set(searchForLife);
     expect(card.canAct(player)).is.false;
 
-    player.playedCards = [olympusConference];
+    player.playedCards.set(olympusConference);
     expect(card.canAct(player)).is.true;
 
-    player.playedCards = [prideoftheEarthArkship];
+    player.playedCards.set(prideoftheEarthArkship);
     expect(card.canAct(player)).is.true;
 
-    player.playedCards = [processorFactory];
+    player.playedCards.set(processorFactory);
     expect(card.canAct(player)).is.true;
 
-    player.playedCards = [];
-    player.setCorporationForTest(nanotechIndustries);
+    player.playedCards.set();
+    player.corporations.push(nanotechIndustries);
     expect(card.canAct(player)).is.true;
   });
 
   it('act', () => {
-    player.playedCards = [physicsComplex, searchForLife, olympusConference, prideoftheEarthArkship, processorFactory];
-    player.setCorporationForTest(nanotechIndustries);
+    player.playedCards.set(physicsComplex, searchForLife, olympusConference, prideoftheEarthArkship, processorFactory);
+    player.corporations.push(nanotechIndustries);
     const input = card.action(player);
 
     expect(input.cards).has.members([olympusConference, prideoftheEarthArkship, processorFactory, nanotechIndustries]);

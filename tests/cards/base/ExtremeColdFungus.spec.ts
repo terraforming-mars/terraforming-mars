@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {cast, churnAction, setTemperature} from '../../TestingUtils';
+import {cast, churn, setTemperature} from '../../TestingUtils';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {ExtremeColdFungus} from '../../../src/server/cards/base/ExtremeColdFungus';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -11,7 +11,7 @@ import {testGame} from '../../TestGame';
 describe('ExtremeColdFungus', () => {
   let card: ExtremeColdFungus;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new ExtremeColdFungus();
@@ -20,12 +20,12 @@ describe('ExtremeColdFungus', () => {
 
   it('Cannot play', () => {
     setTemperature(game, -8);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can play', () => {
     setTemperature(game, -12);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', () => {
@@ -36,7 +36,7 @@ describe('ExtremeColdFungus', () => {
     const tardigrades = new Tardigrades();
     player.playedCards.push(tardigrades);
 
-    const action = cast(churnAction(card, player), OrOptions);
+    const action = cast(churn(card.action(player), player), OrOptions);
     expect(action.options).has.lengthOf(2);
 
     action.options[0].cb();
@@ -51,7 +51,7 @@ describe('ExtremeColdFungus', () => {
     const ants = new Ants();
     player.playedCards.push(tardigrades, ants);
 
-    const action = cast(churnAction(card, player), OrOptions);
+    const action = cast(churn(card.action(player), player), OrOptions);
     expect(action.options).has.lengthOf(2);
 
     action.options[0].cb([tardigrades]);

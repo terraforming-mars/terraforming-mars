@@ -1,15 +1,15 @@
 import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {Space} from '../../boards/Space';
-import {IPlayer} from '../../IPlayer';
-import {Resource} from '../../../common/Resource';
+import {PlaceTile} from '../../../server/deferredActions/PlaceTile';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
+import {message} from '../../logs/MessageBuilder';
+import {Units} from '../../../common/Units';
 
 export class SolarFarm extends Card implements IProjectCard {
   constructor() {
@@ -31,32 +31,29 @@ export class SolarFarm extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: IPlayer): boolean {
-    return player.game.board.getAvailableSpacesOnLand(player).length > 0;
+  public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions): boolean {
+    return player.game.board.getAvailableSpacesOnLand(player, canAffordOptions).length > 0;
   }
 
-  public produce(player: IPlayer) {
+  public productionBox(player: IPlayer) {
     const space = player.game.board.getSpaceByTileCard(this.name);
     if (space === undefined) {
       throw new Error('Solar Farm space not found');
     }
     const plantsOnSpace = space.bonus.filter((b) => b === SpaceBonus.PLANT).length;
-    player.production.add(Resource.ENERGY, plantsOnSpace, {log: true});
+    return Units.of({energy: plantsOnSpace});
   }
 
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace(
-      'Select space for Solar Farm tile',
-      player.game.board.getAvailableSpacesOnLand(player),
-      (space: Space) => {
-        player.game.addTile(player, space, {
-          tileType: TileType.SOLAR_FARM,
-          card: this.name,
-        });
-        this.produce(player);
-        space.adjacency = {bonus: [SpaceBonus.ENERGY, SpaceBonus.ENERGY]};
-        return undefined;
-      },
-    );
+    player.game.defer(
+      new PlaceTile(player, {
+        tile: {tileType: TileType.SOLAR_FARM, card: this.name},
+        on: 'land',
+        title: message('Select space for ${0} tile', (b) => b.card(this)),
+        adjacencyBonus: {bonus: [SpaceBonus.ENERGY, SpaceBonus.ENERGY]},
+      }).andThen(() => {
+        player.production.adjust(this.productionBox(player), {log: true});
+      }));
+    return undefined;
   }
 }

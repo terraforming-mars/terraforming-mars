@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {IoResearchOutpost} from '../../../src/server/cards/prelude/IoResearchOutpost';
-import {Game} from '../../../src/server/Game';
 import {testGame} from '../../TestGame';
 
-describe('IoResearchOutpost', function() {
-  it('Should play', function() {
+describe('IoResearchOutpost', () => {
+  it('Should play', () => {
     const card = new IoResearchOutpost();
-    const [, player] = testGame(1);
-    Game.newInstance('gameid', [player], player);
+    const [/* game */, player] = testGame(1);
+    testGame(1);
     card.play(player);
 
     expect(player.production.titanium).to.eq(1);

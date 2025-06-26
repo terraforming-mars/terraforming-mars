@@ -1,29 +1,29 @@
 import {expect} from 'chai';
 import {Birds} from '../../../src/server/cards/base/Birds';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Resource} from '../../../src/common/Resource';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('Birds', function() {
+describe('Birds', () => {
   let card: Birds;
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Birds();
     [game, player, player2, player3] = testGame(3);
   });
 
-  it('Cannot play without oxygen', function() {
+  it('Cannot play without oxygen', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player2.production.add(Resource.PLANTS, 2);
     player3.production.add(Resource.PLANTS, 7);
     setOxygenLevel(game, 13);
@@ -38,7 +38,7 @@ describe('Birds', function() {
     expect(player3.production.plants).to.eq(7);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     card.action(player);
     runAllActions(player.game);
     expect(card.resourceCount).to.eq(1);

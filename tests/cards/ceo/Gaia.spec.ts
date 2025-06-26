@@ -1,23 +1,22 @@
-
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
-import {SpaceType} from '../../../src/common/boards/SpaceType';
+import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
 import {addGreenery, addCity, cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-
 import {Gaia} from '../../../src/server/cards/ceos/Gaia';
 import {NaturalPreserveAres} from '../../../src/server/cards/ares/NaturalPreserveAres';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Networker} from '../../../src/server/milestones/Networker';
+import {TileType} from '../../../src/common/TileType';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 
-describe('Gaia', function() {
+describe('Gaia', () => {
   let card: Gaia;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Gaia();
@@ -26,13 +25,13 @@ describe('Gaia', function() {
     player.playedCards.push(card);
   });
 
-  it('Takes action', function() {
+  it('Takes action', () => {
     // Place a tile that grants 1MC adjacency bonuses
     const naturalPreserveAres = new NaturalPreserveAres();
     naturalPreserveAres.play(player2);
     runAllActions(game);
     const action = cast(player2.popWaitingFor(), SelectSpace);
-    const space = action.availableSpaces[0];
+    const space = action.spaces[0];
     action.cb(space);
 
     // Place tiles from different players next to tile that grants adjacency bonuses
@@ -46,18 +45,15 @@ describe('Gaia', function() {
     expect(player.megaCredits).to.eq(2);
   });
 
-  it('Takes action, does not gain bonuses from Oceans', function() {
+  it('Takes action, does not gain bonuses from Oceans', () => {
     // Place a tile that grants 1MC adjacency bonuses
-    const naturalPreserveAres = new NaturalPreserveAres();
-    naturalPreserveAres.play(player2);
-    runAllActions(game);
-    const action = cast(player2.popWaitingFor(), SelectSpace);
-    const space = action.availableSpaces[0];
-    action.cb(space);
+    const naturalPreservesSpace = game.board.getSpaceOrThrow('04');
+    game.simpleAddTile(player2, naturalPreservesSpace, {tileType: TileType.NATURAL_PRESERVE});
+    naturalPreservesSpace.adjacency = {bonus: [SpaceBonus.MEGACREDITS]};
 
     // Place an Ocean adjacent
-    const adjacentSpace = game.board.getAdjacentSpaces(space)[0];
-    adjacentSpace.spaceType = SpaceType.OCEAN;
+    const adjacentSpace = game.board.getAdjacentSpaces(naturalPreservesSpace)[0];
+    adjacentSpace.tile = {tileType: TileType.OCEAN};
 
     // Take action, do not gain MC from Ocean adjacency
     player.megaCredits = 0;
@@ -65,38 +61,32 @@ describe('Gaia', function() {
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('Takes action, Networker Milestone does not get a benefit', function() {
+  it('Takes action, Networker Milestone does not get a benefit', () => {
     // Place a tile that grants 1MC adjacency bonuses
-    const naturalPreserveAres = new NaturalPreserveAres();
-    naturalPreserveAres.play(player2);
-    runAllActions(game);
-    const action = cast(player2.popWaitingFor(), SelectSpace);
-    const space = action.availableSpaces[0];
-    action.cb(space);
+    const naturalPreservesSpace = game.board.getSpaceOrThrow('04');
+    game.simpleAddTile(player2, naturalPreservesSpace, {tileType: TileType.NATURAL_PRESERVE});
+    naturalPreservesSpace.adjacency = {bonus: [SpaceBonus.MEGACREDITS]};
 
     // Place tiles from different players next to tile that grants adjacency bonuses
-    const adjacentSpaces = game.board.getAdjacentSpaces(space);
+    const adjacentSpaces = game.board.getAdjacentSpaces(naturalPreservesSpace);
     addGreenery(player2, adjacentSpaces[0].id);
     addCity(player3, adjacentSpaces[1].id);
 
     const milestone = new Networker();
-    const oldScore = milestone.getScore(player);
+    expect(milestone.getScore(player)).eq(0);
     // Gain adjacency bonuses of all players' tiles
     card.action(player);
-    expect(milestone.getScore(player)).eq(oldScore);
+    expect(milestone.getScore(player)).eq(0);
   });
 
-  it('Takes action, owner of the adjacency bonus tile does not gain MC', function() {
+  it('Takes action, owner of the adjacency bonus tile does not gain MC', () => {
     // Place a tile that grants 1MC adjacency bonuses
-    const naturalPreserveAres = new NaturalPreserveAres();
-    naturalPreserveAres.play(player2);
-    runAllActions(game);
-    const action = cast(player2.popWaitingFor(), SelectSpace);
-    const space = action.availableSpaces[0];
-    action.cb(space);
+    const naturalPreservesSpace = game.board.getSpaceOrThrow('04');
+    game.simpleAddTile(player2, naturalPreservesSpace, {tileType: TileType.NATURAL_PRESERVE});
+    naturalPreservesSpace.adjacency = {bonus: [SpaceBonus.MEGACREDITS]};
 
     // Place tiles from different players next to tile that grants adjacency bonuses
-    const adjacentSpaces = game.board.getAdjacentSpaces(space);
+    const adjacentSpaces = game.board.getAdjacentSpaces(naturalPreservesSpace);
     addGreenery(player2, adjacentSpaces[0].id);
     addCity(player3, adjacentSpaces[1].id);
 
@@ -107,9 +97,9 @@ describe('Gaia', function() {
   });
 
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     card.action(player);
-    game.deferredActions.runAll(() => {});
+    runAllActions(game);
 
     forceGenerationEnd(game);
     expect(card.isDisabled).is.true;

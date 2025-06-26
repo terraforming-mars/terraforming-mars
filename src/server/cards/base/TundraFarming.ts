@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class TundraFarming extends Card implements IProjectCard {
@@ -20,7 +19,7 @@ export class TundraFarming extends Card implements IProjectCard {
         stock: {plants: 1},
       },
 
-      requirements: CardRequirements.builder((b) => b.temperature(-6)),
+      requirements: {temperature: -6},
       metadata: {
         cardNumber: '169',
         renderData: CardRenderer.builder((b) => {

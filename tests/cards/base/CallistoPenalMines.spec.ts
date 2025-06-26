@@ -3,10 +3,10 @@ import {testGame} from '../../TestGame';
 import {CallistoPenalMines} from '../../../src/server/cards/base/CallistoPenalMines';
 import {cast} from '../../TestingUtils';
 
-describe('CallistoPenalMines', function() {
-  it('Should play', function() {
+describe('CallistoPenalMines', () => {
+  it('Should play', () => {
     const card = new CallistoPenalMines();
-    const [, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(3);
     expect(card.getVictoryPoints(player)).to.eq(2);

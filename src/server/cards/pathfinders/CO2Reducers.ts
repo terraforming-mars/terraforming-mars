@@ -15,7 +15,7 @@ export class CO2Reducers extends PreludeCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'PfP03',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(3)).br;
           b.cards(2, {secondaryTag: Tag.MICROBE});

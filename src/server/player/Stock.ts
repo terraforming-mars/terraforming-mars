@@ -97,6 +97,9 @@ export class Stock {
       from? : ResourceSource,
       stealing?: boolean
     }) {
+    if (amount === 0) {
+      return;
+    }
     // When amount is negative, sometimes the amount being asked to be removed is more than the player has.
     // delta represents an adjusted amount which basically declares that a player cannot lose more resources
     // then they have.
@@ -139,16 +142,28 @@ export class Stock {
     }
   }
 
-  public addUnits(units: Partial<Units>, options? : {
+  public addUnits(units: Units, options? : {
     log?: boolean,
     from? : ResourceSource,
   }) {
-    this.add(Resource.MEGACREDITS, units.megacredits || 0, options);
-    this.add(Resource.STEEL, units.steel || 0, options);
-    this.add(Resource.TITANIUM, units.titanium || 0, options);
-    this.add(Resource.PLANTS, units.plants || 0, options);
-    this.add(Resource.ENERGY, units.energy || 0, options);
-    this.add(Resource.HEAT, units.heat || 0, options);
+    if (units.megacredits !== 0) {
+      this.add(Resource.MEGACREDITS, units.megacredits, options);
+    }
+    if (units.steel !== 0) {
+      this.add(Resource.STEEL, units.steel, options);
+    }
+    if (units.titanium !== 0) {
+      this.add(Resource.TITANIUM, units.titanium, options);
+    }
+    if (units.plants !== 0) {
+      this.add(Resource.PLANTS, units.plants, options);
+    }
+    if (units.energy !== 0) {
+      this.add(Resource.ENERGY, units.energy, options);
+    }
+    if (units.heat !== 0) {
+      this.add(Resource.HEAT, units.heat, options);
+    }
   }
 
   public deductUnits(units: Units) {
@@ -165,10 +180,10 @@ export class Stock {
    * `from` steals up to `qty` units of `resource` from this player. Or, at least as
    * much as possible.
    */
-  public steal(resource: Resource, qty: number, thief: IPlayer) {
+  public steal(resource: Resource, qty: number, thief: IPlayer, options?: {log?: boolean}) {
     const qtyToSteal = Math.min(this[resource], qty);
     if (qtyToSteal > 0) {
-      this.deduct(resource, qtyToSteal, {log: true, from: thief, stealing: true});
+      this.deduct(resource, qtyToSteal, {log: options?.log ?? true, from: thief, stealing: true});
       thief.stock.add(resource, qtyToSteal);
     }
   }

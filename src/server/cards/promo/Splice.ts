@@ -1,26 +1,25 @@
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Resource} from '../../../common/Resource';
-import {all, played} from '../Options';
-import {newMessage} from '../../logs/MessageBuilder';
+import {all} from '../Options';
+import {message} from '../../logs/MessageBuilder';
+import {ICard} from '../ICard';
+import {GainResources} from '../../deferredActions/GainResources';
 
-export class Splice extends Card implements ICorporationCard {
+export class Splice extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.SPLICE,
       tags: [Tag.MICROBE],
-      startingMegaCredits: 48, // 44 + 4 as card resolution when played
+      startingMegaCredits: 44,
 
       firstAction: {
         text: 'Draw a card with a microbe tag',
@@ -35,12 +34,12 @@ export class Splice extends Card implements ICorporationCard {
           b.corpBox('effect', (ce) => {
             ce.vSpace(Size.LARGE);
             ce.effect(undefined, (eb) => {
-              eb.microbes(1, {played, all}).startEffect;
-              eb.megacredits(2, {all}).or().microbes(1, {all}).asterix();
+              eb.tag(Tag.MICROBE, {all}).startEffect;
+              eb.megacredits(2, {all}).or().resource(CardResource.MICROBE, {all}).asterix();
             });
             ce.vSpace();
             ce.effect('when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.', (eb) => {
-              eb.microbes(1, {played, all}).startEffect;
+              eb.tag(Tag.MICROBE, {all}).startEffect;
               eb.megacredits(2);
             });
           });
@@ -49,44 +48,36 @@ export class Splice extends Card implements ICorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    return this._onCardPlayed(player, card);
-  }
-
-  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
-    return this._onCardPlayed(player, card);
-  }
-
-  private _onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard): OrOptions | undefined {
-    if (card.tags.includes(Tag.MICROBE) === false) {
-      return undefined;
+  public onCardPlayedByAnyPlayer(player: IPlayer, card: ICard, cardPlayer: IPlayer) {
+    const game = player.game;
+    const microbeTags = cardPlayer.tags.cardTagCount(card, Tag.MICROBE);
+    if (microbeTags === 0) {
+      return;
     }
-    const gainPerMicrobe = 2;
-    const microbeTagsCount = player.tags.cardTagCount(card, Tag.MICROBE);
-    const megacreditsGain = microbeTagsCount * gainPerMicrobe;
 
-    const addResource = new SelectOption('Add a microbe resource to this card', 'Add microbe', () => {
-      player.addResourceTo(card);
+    const gain = microbeTags * 2;
+
+    // Splice owner gets 2M€ per microbe tag
+    game.defer(new GainResources(player, Resource.MEGACREDITS, {count: gain, log: true, from: this}));
+
+    const gainResource = new SelectOption('Add a microbe resource to this card', 'Add microbe').andThen(() => {
+      cardPlayer.addResourceTo(card);
       return undefined;
     });
 
-    const getMegacredits = new SelectOption(
-      newMessage('Gain ${0} M€', (b)=>b.number(megacreditsGain)),
-      'Gain M€',
-      () => {
-        player.stock.add(Resource.MEGACREDITS, megacreditsGain, {log: true});
+    const gainMC = new SelectOption(
+      message('Gain ${0} M€', (b) => b.number(gain)),
+      'Gain M€')
+      .andThen(() => {
+        game.defer(new GainResources(cardPlayer, Resource.MEGACREDITS, {count: gain, log: true, from: this}));
         return undefined;
       });
 
-    // Splice owner get 2M€ per microbe tag
-    player.game.getCardPlayerOrThrow(this.name).stock.add(Resource.MEGACREDITS, megacreditsGain, {log: true});
-
-    // Card player choose between 2 M€ and a microbe on card, if possible
     if (card.resourceType === CardResource.MICROBE) {
-      return new OrOptions(addResource, getMegacredits);
+      // Card player chooses between 2 M€ and a microbe on card, if possible
+      cardPlayer.defer(new OrOptions(gainResource, gainMC));
     } else {
-      player.stock.add(Resource.MEGACREDITS, megacreditsGain, {log: true});
-      return undefined;
+      gainMC.cb(undefined);
     }
   }
 }

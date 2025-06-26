@@ -3,22 +3,22 @@ import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {BeamFromAThoriumAsteroid} from '../../../src/server/cards/base/BeamFromAThoriumAsteroid';
 
-describe('BeamFromAThoriumAsteroid', function() {
+describe('BeamFromAThoriumAsteroid', () => {
   let card: BeamFromAThoriumAsteroid;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new BeamFromAThoriumAsteroid();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
-  it('Cannot play without a Jovian tag', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+  it('Cannot play without a Jovian tag', () => {
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.playedCards.push(card);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.production.heat).to.eq(3);

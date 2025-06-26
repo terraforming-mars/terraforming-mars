@@ -1,21 +1,21 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {EconomicHelp} from '../../../src/server/cards/pathfinders/EconomicHelp';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 
-describe('EconomicHelp', function() {
+describe('EconomicHelp', () => {
   let card: EconomicHelp;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new EconomicHelp();
     [game, player] = testGame(1, {pathfindersExpansion: true, venusNextExtension: true});
   });
 
-  it('Play - one lowest influence tracks', function() {
+  it('Play - one lowest influence tracks', () => {
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
     game.pathfindersData = {
       venus: 0,
@@ -39,7 +39,7 @@ describe('EconomicHelp', function() {
     });
   });
 
-  it('Play - two lowest influence tracks', function() {
+  it('Play - two lowest influence tracks', () => {
     game.pathfindersData = {
       venus: 2,
       earth: 1,
@@ -61,7 +61,7 @@ describe('EconomicHelp', function() {
     });
   });
 
-  it('Play - all influence tracks tied', function() {
+  it('Play - all influence tracks tied', () => {
     expect(game.pathfindersData).deep.eq({
       venus: 0,
       earth: 0,
@@ -83,7 +83,7 @@ describe('EconomicHelp', function() {
     });
   });
 
-  it('Play - ignore maximized tracks', function() {
+  it('Play - ignore maximized tracks', () => {
     game.pathfindersData = {
       venus: 17, // At the maximum
       earth: 18, // Max is 22

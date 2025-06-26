@@ -1,11 +1,7 @@
-import {Resource} from '../../../common/Resource';
-import {PartyName} from '../../../common/turmoil/PartyName';
 import {RequirementType} from '../../../common/cards/RequirementType';
-import {ICardRequirements} from '../../../common/cards/ICardRequirements';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRequirement, Options, YesAnd} from './CardRequirement';
+import {CardRequirement} from './CardRequirement';
 import {ChairmanRequirement} from './ChairmanRequirement';
 import {CitiesRequirement} from './CitiesRequirement';
 import {ColoniesRequirement} from './ColoniesRequirement';
@@ -28,32 +24,33 @@ import {TRRequirement} from './TRRequirement';
 import {TagCardRequirement} from './TagCardRequirement';
 import {TemperatureRequirement} from './TemperatureRequirement';
 import {VenusRequirement} from './VenusRequirement';
+import {CardRequirementDescriptor} from '../../../common/cards/CardRequirementDescriptor';
+import {CorruptionRequirement} from './CorruptionRequirement';
+import {ExcavationRequirement} from './ExcavationRequirement';
+import {IProjectCard} from '../IProjectCard';
 
-export class CardRequirements implements ICardRequirements {
+export class CardRequirements {
   constructor(public requirements: Array<CardRequirement>) {}
 
-  public static builder(f: (builder: Builder) => void): CardRequirements {
-    const builder = new Builder();
-    f(builder);
-    return builder.build();
-  }
-  public satisfies(player: IPlayer): boolean | YesAnd {
+  public satisfies(player: IPlayer, card: IProjectCard): boolean {
+    if (this.requirements.length === 0) {
+      return true;
+    }
     // Process tags separately, though max & any tag criteria will be processed later.
     // This pre-computation takes the wild tag into account.
     const tags: Array<Tag> = [];
-    this.requirements.forEach((requirement) => {
+    for (const requirement of this.requirements) {
       if ((requirement.type === RequirementType.TAG) &&
-      requirement.isAny !== true && requirement.isMax !== true) {
+        requirement.all !== true && requirement.max !== true) {
         tags.push((requirement as TagCardRequirement).tag);
       }
-    });
+    }
     if (tags.length > 1 && !player.tags.playerHas(tags)) {
       return false;
     }
-    const thinkTankResources = player.playedCards.find((c) => c.name === CardName.THINK_TANK)?.resourceCount;
-    let result: boolean | YesAnd = true;
+    let result = true;
     for (const requirement of this.requirements) {
-      const satisfies = requirement.satisfies(player, thinkTankResources);
+      const satisfies = requirement.satisfies(player, card);
       if (satisfies === false) {
         return false;
       }
@@ -63,122 +60,65 @@ export class CardRequirements implements ICardRequirements {
     }
     return result;
   }
-}
 
-class Builder {
-  private reqs: Array<CardRequirement> = [];
-
-  public build(): CardRequirements {
-    return new CardRequirements(this.reqs);
+  public static compile(descriptors: Array<CardRequirementDescriptor> | undefined): CardRequirements {
+    if (descriptors === undefined) {
+      return new CardRequirements([]);
+    }
+    return new CardRequirements(descriptors.map((descriptor) => CardRequirements.compileOne(descriptor)));
   }
 
-  public oceans(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new OceanRequirement(amount, options));
-    return this;
-  }
-
-  public oxygen(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new OxygenRequirement(amount, options));
-    return this;
-  }
-
-  public temperature(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new TemperatureRequirement(amount, options));
-    return this;
-  }
-
-  public venus(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new VenusRequirement(amount, options));
-    return this;
-  }
-
-  public tr(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new TRRequirement(amount, options));
-    return this;
-  }
-
-  public chairman(): Builder {
-    this.reqs.push(new ChairmanRequirement());
-    return this;
-  }
-
-  public resourceTypes(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new ResourceTypeRequirement(amount, options));
-    return this;
-  }
-
-  public greeneries(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new GreeneriesRequirement(amount, options));
-    return this;
-  }
-
-  public cities(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new CitiesRequirement(amount, options));
-    return this;
-  }
-
-  public colonies(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new ColoniesRequirement(amount, options));
-    return this;
-  }
-
-  public floaters(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new FloatersRequirement(amount, options));
-    return this;
-  }
-
-  public partyLeaders(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new PartyLeadersRequirement(amount, options));
-    return this;
-  }
-
-  public tag(tag: Tag, amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new TagCardRequirement(tag, amount, options));
-    return this;
-  }
-
-  public production(resource: Resource, amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new ProductionRequirement(resource, amount, options));
-    return this;
-  }
-
-  public party(party: PartyName): Builder {
-    this.reqs.push(new PartyRequirement(party));
-    return this;
-  }
-
-  public plantsRemoved(): Builder {
-    this.reqs.push(new RemovedPlantsRequirement());
-    return this;
-  }
-
-  public habitatRate(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new HabitatRateRequirement(amount, options));
-    return this;
-  }
-
-  public miningRate(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new MiningRateRequirement(amount, options));
-    return this;
-  }
-
-  public logisticRate(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new LogisticsRateRequirement(amount, options));
-    return this;
-  }
-
-  public habitatTiles(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new HabitatTilesRequirement(amount, options));
-    return this;
-  }
-
-  public miningTiles(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new MiningTilesRequirement(amount, options));
-    return this;
-  }
-
-  public roadTiles(amount: number = 1, options?: Options): Builder {
-    this.reqs.push(new RoadTilesRequirement(amount, options));
-    return this;
+  private static compileOne(descriptor: CardRequirementDescriptor): CardRequirement {
+    if (descriptor.tag !== undefined) {
+      return new TagCardRequirement(descriptor.tag, descriptor);
+    } else if (descriptor.oceans !== undefined) {
+      return new OceanRequirement({...descriptor, count: descriptor.oceans});
+    } else if (descriptor.oxygen !== undefined) {
+      return new OxygenRequirement({...descriptor, count: descriptor.oxygen});
+    } else if (descriptor.temperature !== undefined) {
+      return new TemperatureRequirement({...descriptor, count: descriptor.temperature});
+    } else if (descriptor.venus !== undefined) {
+      return new VenusRequirement({...descriptor, count: descriptor.venus});
+    } else if (descriptor.tr !== undefined) {
+      return new TRRequirement({...descriptor, count: descriptor.tr});
+    } else if (descriptor.chairman !== undefined) {
+      return new ChairmanRequirement();
+    } else if (descriptor.resourceTypes !== undefined) {
+      return new ResourceTypeRequirement({...descriptor, count: descriptor.resourceTypes});
+    } else if (descriptor.greeneries !== undefined) {
+      return new GreeneriesRequirement({...descriptor, count: descriptor.greeneries});
+    } else if (descriptor.cities !== undefined) {
+      return new CitiesRequirement({...descriptor, count: descriptor.cities});
+    } else if (descriptor.colonies !== undefined) {
+      return new ColoniesRequirement({...descriptor, count: descriptor.colonies});
+    } else if (descriptor.floaters !== undefined) {
+      return new FloatersRequirement({...descriptor, count: descriptor.floaters});
+    } else if (descriptor.partyLeader !== undefined) {
+      return new PartyLeadersRequirement(descriptor);
+    } else if (descriptor.production !== undefined) {
+      return new ProductionRequirement(descriptor.production, descriptor);
+    } else if (descriptor.party !== undefined) {
+      return new PartyRequirement(descriptor.party);
+    } else if (descriptor.plantsRemoved !== undefined) {
+      return new RemovedPlantsRequirement();
+    } else if (descriptor.habitatRate !== undefined) {
+      return new HabitatRateRequirement({...descriptor, count: descriptor.habitatRate});
+    } else if (descriptor.miningRate !== undefined) {
+      return new MiningRateRequirement({...descriptor, count: descriptor.miningRate});
+    } else if (descriptor.logisticRate !== undefined) {
+      return new LogisticsRateRequirement({...descriptor, count: descriptor.logisticRate});
+    } else if (descriptor.habitatTiles !== undefined) {
+      return new HabitatTilesRequirement({...descriptor, count: descriptor.habitatTiles});
+    } else if (descriptor.miningTiles !== undefined) {
+      return new MiningTilesRequirement({...descriptor, count: descriptor.miningTiles});
+    } else if (descriptor.roadTiles !== undefined) {
+      return new RoadTilesRequirement({...descriptor, count: descriptor.roadTiles});
+    } else if (descriptor.excavation !== undefined) {
+      return new ExcavationRequirement({...descriptor, count: descriptor.excavation});
+    } else if (descriptor.corruption !== undefined) {
+      return new CorruptionRequirement({...descriptor, count: descriptor.corruption});
+    } else {
+      throw new Error('Unknown requirement: ' + JSON.stringify(descriptor));
+    }
   }
 }

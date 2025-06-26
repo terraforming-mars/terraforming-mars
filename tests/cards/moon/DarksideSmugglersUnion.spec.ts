@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {DarksideSmugglersUnion} from '../../../src/server/cards/moon/DarksideSmugglersUnion';
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Triton} from '../../../src/server/colonies/Triton';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {TestPlayer} from '../../TestPlayer';
@@ -11,18 +11,18 @@ import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 import {Message} from '../../../src/common/logs/Message';
 
-describe('DarksideSmugglersUnion', function() {
+describe('DarksideSmugglersUnion', () => {
   let card: DarksideSmugglersUnion;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DarksideSmugglersUnion();
     // Second player is ignored.
     [game, player] = testGame(2, {coloniesExtension: true});
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.playedCards.push(card);
     expect(card.canAct(player)).is.true;
   });
@@ -41,7 +41,7 @@ describe('DarksideSmugglersUnion', function() {
     expect(card.canAct(player)).is.false;
   });
 
-  it('Should play with multiple and colonies', function() {
+  it('Should play with multiple and colonies', () => {
     game.colonies = [new Luna(), new Triton()];
 
     player.playedCards.push(card);

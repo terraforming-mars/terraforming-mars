@@ -19,7 +19,7 @@
 
 import Vue from 'vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {AndOptionsModel} from '@/common/models/PlayerInputModel';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {AndOptionsResponse, InputResponse} from '@/common/inputs/InputResponse';
 
@@ -37,7 +37,7 @@ export default Vue.extend({
       type: Array as () => Array<PublicPlayerModel>,
     },
     playerinput: {
-      type: Object as () => PlayerInputModel,
+      type: Object as () => AndOptionsModel,
     },
     onsave: {
       type: Function as unknown as () => (out: AndOptionsResponse) => void,
@@ -53,9 +53,6 @@ export default Vue.extend({
     AppButton,
   },
   data(): DataModel {
-    if (this.playerinput.options === undefined) {
-      throw new Error('options must be defined');
-    }
     return {
       responded: this.playerinput.options.map(() => undefined),
     };
@@ -63,7 +60,7 @@ export default Vue.extend({
   methods: {
     playerFactorySaved(idx: number) {
       return (out: InputResponse) => {
-        this.$data.responded[idx] = out;
+        this.responded[idx] = out;
       };
     },
     canSave(): boolean {

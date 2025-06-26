@@ -6,11 +6,11 @@ import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {message} from '../../logs/MessageBuilder';
 
 export class CosmicRadiation extends Card implements IProjectCard {
   constructor() {
@@ -20,7 +20,7 @@ export class CosmicRadiation extends Card implements IProjectCard {
       tags: [Tag.MOON],
       cost: 3,
 
-      requirements: CardRequirements.builder((b) => b.miningRate(4)),
+      requirements: {miningRate: 4},
       metadata: {
         description: 'Requires 4 mining rate. All players pay 4M€ for each mining tile they own.',
         cardNumber: 'M52',
@@ -41,12 +41,11 @@ export class CosmicRadiation extends Card implements IProjectCard {
         const owes = Math.min(bill, mineTileOwner.spendableMegacredits());
 
         game.defer(new SelectPaymentDeferred(mineTileOwner, owes, {
-          title: 'You must pay ' + owes + 'M€ for ' + owned + ' mining tiles',
-          afterPay: () => {
+          title: message('You must spend ${0} M€ for ${1} mining tiles', (b) => b.number(owes).number(owned))}))
+          .andThen(() =>
             game.log(
               '${0} spends ${1} M€ for the ${2} mining tiles they own.',
-              (b) => b.player(mineTileOwner).number(owes).number(owned));
-          }}));
+              (b) => b.player(mineTileOwner).number(owes).number(owned)));
       }
     });
     return undefined;

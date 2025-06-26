@@ -1,14 +1,15 @@
 <template>
     <div class="player-tags">
         <div class="player-tags-main">
-            <tag-count :tag="'vp'" :count="player.victoryPointsBreakdown.total" :size="'big'" :type="'main'" :hideCount="hideVpCount" />
-            <div v-if="isEscapeVelocityOn" class="tag-display" :class="tooltipCss" :data-tooltip="$t('Escape Velocity penalty')">
-              <tag-count :tag="'escape'" :count="escapeVelocityPenalty" :size="'big'" :type="'main'"/>
+            <tag-count tag="vp" :count="hideVpCount ? '?' : player.victoryPointsBreakdown.total" :size="'big'" :type="'main'" />
+            <div v-if="isEscapeVelocityOn" :class="tooltipCss" :data-tooltip="$t('Escape Velocity penalty')">
+              <tag-count tag="escape" :count="escapeVelocityPenalty" :size="'big'" type="'main'" :showWhenZero="true"/>
             </div>
-            <tag-count :tag="'tr'" :count="player.terraformRating" :size="'big'" :type="'main'"/>
+            <tag-count tag="tr" :count="player.terraformRating" :size="'big'" :type="'main'"/>
+            <tag-count v-if="player.handicap !== undefined" :tag="'handicap'" :count="player.handicap" :size="'big'" :type="'main'" :showWhenZero="true"/>
             <div class="tag-and-discount">
               <PlayerTagDiscount v-if="all.discount" :amount="all.discount" :color="player.color"  :data-test="'discount-all'"/>
-              <tag-count :tag="'cards'" :count="cardsInHandCount" :size="'big'" :type="'main'"/>
+              <tag-count tag="cards" :count="cardsInHandCount" :size="'big'" :type="'main'"/>
             </div>
         </div>
         <div class="player-tags-secondary">
@@ -62,6 +63,7 @@ const ORDER: Array<InterfaceTagsType> = [
   Tag.CITY,
   Tag.MOON,
   Tag.MARS,
+  Tag.CRIME,
   'separator',
   Tag.EVENT,
   SpecialTags.NONE,
@@ -69,32 +71,54 @@ const ORDER: Array<InterfaceTagsType> = [
   SpecialTags.INFLUENCE,
   SpecialTags.CITY_COUNT,
   SpecialTags.COLONY_COUNT,
+  SpecialTags.EXCAVATIONS,
+  SpecialTags.CORRUPTION,
+  SpecialTags.NEGATIVE_VP,
 ];
 
 const isInGame = (tag: InterfaceTagsType, game: GameModel): boolean => {
-  if (game.gameOptions.coloniesExtension === false && tag === SpecialTags.COLONY_COUNT) return false;
+  const gameOptions = game.gameOptions;
   if (game.turmoil === undefined && tag === SpecialTags.INFLUENCE) return false;
-  if (game.gameOptions.venusNextExtension === false && tag === Tag.VENUS) return false;
-  if (game.gameOptions.moonExpansion === false && tag === Tag.MOON) return false;
-  if (game.gameOptions.pathfindersExpansion === false && tag === Tag.MARS) return false;
+  switch (tag) {
+  case SpecialTags.COLONY_COUNT:
+    return gameOptions.expansions.colonies !== false;
+  case SpecialTags.INFLUENCE:
+    return game.turmoil !== undefined;
+  case SpecialTags.EXCAVATIONS:
+  case SpecialTags.CORRUPTION:
+  case SpecialTags.NEGATIVE_VP:
+    return gameOptions.expansions.underworld !== false;
+  case Tag.VENUS:
+  case Tag.MOON:
+  case Tag.MARS:
+  case Tag.CRIME:
+    return game.tags.includes(tag);
+  }
   return true;
 };
 
 const getTagCount = (tagName: InterfaceTagsType, player: PublicPlayerModel): number => {
-  if (tagName === SpecialTags.COLONY_COUNT) {
+  switch (tagName) {
+  case SpecialTags.COLONY_COUNT:
     return player.coloniesCount || 0;
-  }
-  if (tagName === SpecialTags.INFLUENCE) {
+  case SpecialTags.INFLUENCE:
     return player.influence || 0;
-  }
-  if (tagName === SpecialTags.CITY_COUNT) {
+  case SpecialTags.CITY_COUNT:
     return player.citiesCount || 0;
-  }
-  if (tagName === SpecialTags.NONE) {
+  case SpecialTags.NONE:
     return player.noTagsCount || 0;
+  case SpecialTags.EXCAVATIONS:
+    return player.excavations;
+  case SpecialTags.CORRUPTION:
+    return player.corruption;
+  case SpecialTags.NEGATIVE_VP:
+    return player.victoryPointsBreakdown.negativeVP;
+  case 'all':
+  case 'separator':
+    return -1;
+  default:
+    return player.tags[tagName];
   }
-
-  return player.tags.find((tag) => tag.tag === tagName)?.count ?? 0;
 };
 
 export default Vue.extend({
@@ -157,7 +181,7 @@ export default Vue.extend({
     }
 
     // Put them in order.
-    const tagsInOrder: Array<TagDetail> = [];
+    const tagsInOrder = [];
     for (const tag of ORDER) {
       const entry = details[tag];
       tagsInOrder.push(entry);

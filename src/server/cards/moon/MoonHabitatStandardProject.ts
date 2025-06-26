@@ -29,13 +29,6 @@ export class MoonHabitatStandardProject extends StandardProjectCard {
     super(properties);
   }
 
-  protected override discount(player: IPlayer): number {
-    if (player.playedCards.find((card) => card.name === CardName.MOONCRATE_BLOCK_FACTORY)) {
-      return 4;
-    }
-    return super.discount(player);
-  }
-
   public override canAct(player: IPlayer): boolean {
     const moonData = MoonExpansion.moonData(player.game);
     const spaces = moonData.moon.getAvailableSpacesOnLand(player);

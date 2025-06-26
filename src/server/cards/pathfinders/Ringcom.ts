@@ -1,18 +1,16 @@
-import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {all, played} from '../Options';
-import {IProjectCard} from '../IProjectCard';
+import {all} from '../Options';
+import {ICard} from '../ICard';
 
-export class Ringcom extends Card implements ICorporationCard {
+export class Ringcom extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.RINGCOM,
       tags: [Tag.JOVIAN],
       startingMegaCredits: 39,
@@ -26,7 +24,6 @@ export class Ringcom extends Card implements ICorporationCard {
         drawCard: {count: 2, tag: Tag.JOVIAN},
       },
 
-
       metadata: {
         cardNumber: 'PfC4',
         description: 'You start with 39 M€. and 3 M€ production. As your first action, draw 2 cards with a Jovian tag.',
@@ -36,7 +33,7 @@ export class Ringcom extends Card implements ICorporationCard {
           b.cards(2, {secondaryTag: Tag.JOVIAN});
           b.corpBox('effect', (ce) => {
             ce.effect('When any player plays a card with a Jovian tag (including this) gain 1 titanium.', (eb) => {
-              eb.jovian({all, played}).startEffect.titanium(1);
+              eb.tag(Tag.JOVIAN, {all}).asterix().startEffect.titanium(1);
             });
           });
         }),
@@ -44,24 +41,9 @@ export class Ringcom extends Card implements ICorporationCard {
     });
   }
 
-  public override bespokePlay(player: IPlayer) {
-    // Typically  onCardPlayed isn't necessary, but onCorpCardPlayed isn't called for your own corp card.
-    this.onCardPlayed(player, this);
-    return undefined;
-  }
-
-  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
-    this.onCardPlayed(player, card);
-    return undefined;
-  }
-
-  public onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard): void {
+  public onCardPlayedByAnyPlayer(player: IPlayer, card: ICard) {
     if (card.tags.includes(Tag.JOVIAN)) {
-      player.game.getPlayers().forEach((p) => {
-        if (p.isCorporation(this.name)) {
-          p.stock.add(Resource.TITANIUM, 1, {log: true});
-        }
-      });
+      player.stock.add(Resource.TITANIUM, 1, {log: true});
     }
   }
 }

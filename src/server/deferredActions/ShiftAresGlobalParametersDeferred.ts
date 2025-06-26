@@ -1,9 +1,9 @@
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 import {IPlayer} from '../IPlayer';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
 import {AresHandler} from '../ares/AresHandler';
 import {PlayerInput} from '../PlayerInput';
-import {AresGlobalParametersResponse} from '../../common/inputs/AresGlobalParametersResponse';
 
 export class ShiftAresGlobalParametersDeferred extends DeferredAction {
   constructor(player: IPlayer) {
@@ -13,9 +13,8 @@ export class ShiftAresGlobalParametersDeferred extends DeferredAction {
   public execute() {
     let pi: PlayerInput | undefined = undefined;
     AresHandler.ifAres(this.player.game, (aresData) => {
-      pi = new ShiftAresGlobalParameters(
-        this.player,
-        (response: AresGlobalParametersResponse) => {
+      pi = new ShiftAresGlobalParameters()
+        .andThen((response) => {
           const hazardData = aresData.hazardData;
           if (hazardData.erosionOceanCount.available) {
             hazardData.erosionOceanCount.threshold += response.lowOceanDelta;

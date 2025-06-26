@@ -1,22 +1,22 @@
-import {Game} from '../../../src/server/Game';
+import {expect} from 'chai';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {HE3ProductionQuotas} from '../../../src/server/cards/moon/HE3ProductionQuotas';
-import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {TileType} from '../../../src/common/TileType';
 import {Kelvinists} from '../../../src/server/turmoil/parties/Kelvinists';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
 
 describe('HE3ProductionQuotas', () => {
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let card: HE3ProductionQuotas;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, {moonExpansion: true, turmoilExtension: true});
+    [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true});
     card = new HE3ProductionQuotas();
     moonData = MoonExpansion.moonData(game);
   });
@@ -32,19 +32,19 @@ describe('HE3ProductionQuotas', () => {
     spaces[2].tile = {tileType: TileType.MOON_MINE};
 
     player.steel = 3;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     game.turmoil!.rulingParty = new Greens();
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
 
     game.turmoil!.rulingParty = new Kelvinists();
     player.steel = 2;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     player.steel = 3;
     spaces[3].tile = {tileType: TileType.MOON_MINE};
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {
@@ -53,7 +53,7 @@ describe('HE3ProductionQuotas', () => {
     spaces[1].tile = {tileType: TileType.MOON_MINE};
     spaces[2].tile = {tileType: TileType.MOON_MINE};
     moonData.miningRate = 0;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     player.steel = 5;
     player.heat = 0;
@@ -62,7 +62,7 @@ describe('HE3ProductionQuotas', () => {
     expect(player.steel).eq(2);
     expect(player.heat).eq(12);
     expect(moonData.miningRate).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 });
 

@@ -1,27 +1,26 @@
 import {expect} from 'chai';
 import {PowerPlantStandardProject} from '../../../../src/server/cards/base/standardProjects/PowerPlantStandardProject';
 import {TestPlayer} from '../../../TestPlayer';
-import {Game} from '../../../../src/server/Game';
+import {IGame} from '../../../../src/server/IGame';
 import {StandardTechnology} from '../../../../src/server/cards/base/StandardTechnology';
+import {testGame} from '../../../TestingUtils';
 
-describe('PowerPlantStandardProjects', function() {
+describe('PowerPlantStandardProjects', () => {
   let card: PowerPlantStandardProject;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new PowerPlantStandardProject();
-    player = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player);
+    [game, player/* , player2 */] = testGame(2);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.megaCredits = 11;
     player.playedCards.push(new StandardTechnology());
-    expect(game.deferredActions.length).eq(0);
+    expect(game.deferredActions).has.length(0);
     card.action(player);
-    expect(game.deferredActions.length).eq(1);
+    expect(game.deferredActions).has.length(1);
     expect(player.megaCredits).eq(11);
     game.deferredActions.runNext();
     expect(player.production.energy).eq(1);

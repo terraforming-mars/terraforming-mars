@@ -1,26 +1,26 @@
 import {expect} from 'chai';
 import {ArchaeBacteria} from '../../../src/server/cards/base/ArchaeBacteria';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {setTemperature} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('ArchaeBacteria', function() {
+describe('ArchaeBacteria', () => {
   let card: ArchaeBacteria;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ArchaeBacteria();
     [game, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     setTemperature(game, -12);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
     expect(player.production.plants).to.eq(1);
   });

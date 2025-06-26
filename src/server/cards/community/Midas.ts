@@ -1,17 +1,18 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Midas extends Card implements ICorporationCard {
+export class Midas extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.MIDAS,
       startingMegaCredits: 120,
-      type: CardType.CORPORATION,
+
+      behavior: {
+        tr: -7,
+      },
 
       metadata: {
         cardNumber: 'R41',
@@ -23,10 +24,5 @@ export class Midas extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  public override bespokePlay(player: IPlayer) {
-    player.decreaseTerraformRating(7);
-    return undefined;
   }
 }

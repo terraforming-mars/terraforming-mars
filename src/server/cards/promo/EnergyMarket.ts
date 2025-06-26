@@ -10,7 +10,6 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
-import {multiplier} from '../Options';
 
 export class EnergyMarket extends Card implements IProjectCard {
   constructor() {
@@ -24,7 +23,7 @@ export class EnergyMarket extends Card implements IProjectCard {
         cardNumber: 'X03',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 2X M€ to gain X energy.', (eb) => {
-            eb.megacredits(2, {multiplier}).startAction.text('x').energy(1);
+            eb.megacredits(1, {text: '2x'}).startAction.text('x').energy(1);
           }).br;
           b.or().br;
           b.action('Decrease energy production 1 step to gain 8 M€.', (eb) => {
@@ -41,21 +40,12 @@ export class EnergyMarket extends Card implements IProjectCard {
 
   private getEnergyOption(player: IPlayer, availableMC: number): SelectAmount {
     return new SelectAmount(
-      'Select amount of energy to gain',
-      'Gain energy',
-      (amount: number) => {
-        player.game.defer(new SelectPaymentDeferred(
-          player,
-          amount * 2,
-          {
-            afterPay: () => player.stock.add(Resource.ENERGY, amount, {log: true}),
-          }));
-
+      'Select amount of energy to gain', 'Gain energy', 1, Math.floor(availableMC / 2))
+      .andThen((amount) => {
+        player.game.defer(new SelectPaymentDeferred(player, amount * 2))
+          .andThen(() => player.stock.add(Resource.ENERGY, amount, {log: true}));
         return undefined;
-      },
-      1,
-      Math.floor(availableMC / 2),
-    );
+      });
   }
 
   private getMegacreditsOption(player: IPlayer) {
@@ -69,10 +59,10 @@ export class EnergyMarket extends Card implements IProjectCard {
     const availableMC = player.spendableMegacredits();
     if (availableMC >= 2 && player.production.energy >= 1) {
       return new OrOptions(
-        new SelectOption('Spend 2X M€ to gain X energy', 'Spend M€', () => {
+        new SelectOption('Spend 2X M€ to gain X energy', 'Spend M€').andThen(() => {
           return this.getEnergyOption(player, availableMC);
         }),
-        new SelectOption('Decrease energy production 1 step to gain 8 M€', 'Decrease energy', () => {
+        new SelectOption('Decrease energy production 1 step to gain 8 M€', 'Decrease energy').andThen(() => {
           return this.getMegacreditsOption(player);
         }),
       );

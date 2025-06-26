@@ -6,7 +6,6 @@ import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class BiofertilizerFacility extends Card implements IProjectCard {
@@ -24,11 +23,10 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
           type: TileType.BIOFERTILIZER_FACILITY,
           on: 'land',
           adjacencyBonus: {bonus: [SpaceBonus.PLANT, SpaceBonus.MICROBE]},
-          title: 'Select space for Biofertilizer Facility tile',
         },
       },
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE)),
+      requirements: {tag: Tag.SCIENCE},
       metadata: {
         description: 'Requires 1 science tag. Increase your plant production 1 step. ' +
                   'Add up to 2 microbes to ANY card. ' +
@@ -36,7 +34,7 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
         cardNumber: 'A02',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(1));
-          b.microbes(2);
+          b.resource(CardResource.MICROBE, 2);
           b.br;
           b.tile(TileType.BIOFERTILIZER_FACILITY, false, true);
         }),

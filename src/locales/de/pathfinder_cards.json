@@ -6,7 +6,7 @@
   "(Action: Spend 1 steel and 1 energy to gain 3 plants.)": "(AKTION: Verbrauche 1 Stahl und 1 Energie, um 3 Pflanzen zu erhalten.)",
   "(Requires -18° C or warmer.)": "(Benötigt eine Temperatur von -18°C oder wärmer.)",
 
-  "Anthozoa": "Anthozoa",
+  "Anthozoa": "",
   "(Action: Spend 1 plant to add an animal to this card.)": "(AKTION: Verbrauche 1 Pflanze, um dieser Karte 1 Tier hinzuzufügen.)",
   "(Requires 3 oceans on Mars. 1 VP per 2 animals on this card.)": "(Benötigt 3 Ozeanplättchen. 1 SP je 2 Tiere auf dieser Karte.)",
 
@@ -29,7 +29,7 @@
 
   "Charity Donation": "Wohltätige Spende",
   "Reveal cards from the deck equal to the player count plus 1.": "Decke 1 Karte mehr auf als Spieler am Spiel teilnehmen.",
-  "In player order starting with you, each player takes one card in hand. Discard the remaining card.":  "Beginnend bei dir wählt der Reihe nach jeder Spieler eine davon und nimmt sie auf die Hand. Werfe die letzte Karte ab.",
+  "In player order starting with you, each player takes one card in hand. Discard the remaining card.": "Beginnend bei dir wählt der Reihe nach jeder Spieler eine davon und nimmt sie auf die Hand. Werfe die letzte Karte ab.",
 
   "Communication Center": "Kommunikationszentrum",
   "(Effect: Whenever ANY PLAYER plays an event, add 1 data to this card.)": "(EFFEKT: Immer wenn eine Ereigniskarte gespielt wird, füge dieser Karte 1 Datenressource hinzu.)",
@@ -89,7 +89,7 @@
   "(Draw 2 cards. Raise Venus 1 step. Gain 1M€ for each of your Venus tags, including this.)": "(Ziehe 2 Karten. Erhöhe Venus um 2%. Erhalte 1 M€ je eigenes Venussymbol (einschließlich dieses).)",
 
   "Flat Mars Theory": "Erd-Kulturgesellschaft",
-  "GENERATION": "Generation",
+  "GENERATION": "",
   "(Requires maximum 1 science tag. Increase your M€ production 1 step for every generation played so far.)": "(Benötigt 1 oder weniger eigene Wissenschaftssymbole. Erhöhe deine M€-Produktion um 1 je gespielter Generation, einschließlich der aktuellen.)",
 
   "Floater-Urbanism": "Schweber-Urbanismus",
@@ -105,7 +105,7 @@
   "(Requires Kelvinists are ruling or you have 2 delegates there. Increase your energy production 2 steps.)": "(Benötigt Regierungspartei: KELVINISTEN oder 2+ eigene Delegierte dort. Erhöhe deine Energie-Produktion um 2.)",
 
   "Huygens Observatory": "Huygens-Observatorium",
-  "(Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that is already on a colony tile, but you may not trade with the tile that fleet came from. Gain 1 TR.)": "(Errichte eine Kolonie - auch dort erlaubt, wo du bereits eine Kolonie hast. Handle kostenlos - du darfst dafür eine bereits genutzte Flotte verwenden. Erhöhe deinen TW um 1. *)",
+  "(Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that is already on a colony tile, but you may not trade with the tile that fleet came from. Gain 1 TR.)": "(Errichte eine Kolonie - auch dort erlaubt, wo du bereits eine Kolonie hast. Handle kostenlos - du darfst dafür eine bereits genutzte Flotte verwenden. Erhöhe deinen TW um 1.)",
 
   "Hydrogen Processing Plant": "Wasserstoff-Verarbeitung",
   "(Oxygen level must be 3% or higher. Decrease oxygen level 1% Raise your energy production 1 step for every two ocean tiles on Mars.)": "(Benötigt Sauerstoffgehalt von 3% oder mehr. Erhöhe deine Energie-Produktion um 1 je 2 Ozeanplättchen im Spiel. Senke den Sauerstoffgehalt um 1%)",
@@ -113,7 +113,7 @@
   "Interplanetary Transport": "Interplanetarer Transport",
   "(Increase your M€ production 1 step for every offworld city tile.)": "(Erhöhe deine M€-Produktion um 1 je Stadtplättchen im Weltraum.)",
 
-  "Kickstarter": "Kickstarter",
+  "Kickstarter": "",
   "(Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 3 steps in total.)": "Wähle ein Planetensymbol. Diese Karte zählt als hätte sie dieses Symbol. Erhöhe die dazugehörige Planetenleiste um 3 Schritte insgesamt statt um 1.",
 
   "Last Resort Ingenuity": "Improviationstalent",
@@ -156,14 +156,13 @@
 
   "Nobel Labs": "Nobel-Labor",
   "(Action: Add 2 microbes OR 2 data OR 2 floaters to ANY card.)": "(AKTION: Füge einer beliebigen Karte 2 Mikroben 2 Daten oder 2 Schweber hinzu.)",
-  "(Requires 4 science tags.)": "(Benötigt 4 eigene Wissenschaftssymbole.)",
 
   "Orbital Laboratories": "Orbitale Gärten",
-  "(Increase your plant production by 2. Gain 1 plant.)": "(Erhöhe deine Pflanzen-Produktion um 2. Erhalte 1 Pflanze.)",
+  "(Increase your plant production 2 steps. Gain 1 plant.)": "(Erhöhe deine Pflanzen-Produktion um 2. Erhalte 1 Pflanze.)",
 
   "Oumuamua Type Object Survey": "Oumuamua-Untersuchung",
-  "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "(Ziehe 2 Karten. Hat die erste ein Wissenschafts- oder Mikrobensymbol, spiele sie sofort kostenlos, (ignoriere dabei ihre Bedingungen). Hat sie ein Weltraumsymbol, erhöhe deine Energie-Produktion um 3. Falls nichts zutrifft, verfahre mit der 2. Karte ebenso.)",
-  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card. )": "(Benötigt 1 eigenes Weltraum- und Wissenschaftssymbol. Füge einer beliebigen Karte 2 Daten hinzu.)",
+  "Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.": "Ziehe 2 Karten. Hat die erste ein Wissenschafts- oder Mikrobensymbol (und spielbar ist), spiele sie sofort kostenlos, (ignoriere dabei ihre Bedingungen). Hat sie ein Weltraumsymbol, erhöhe deine Energie-Produktion um 3. Falls nichts zutrifft, verfahre mit der 2. Karte ebenso.",
+  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card.)": "(Benötigt 1 eigenes Weltraum- und Wissenschaftssymbol. Füge einer beliebigen Karte 2 Daten hinzu.)",
 
   "Ozone Generators": "Ozongenerator",
   "(Action: Spend 3 energy to gain 1 TR.)": "(AKTION: Verbrauche 3 Energie, um deinen TW um 1 zu erhöhen.)",
@@ -186,7 +185,7 @@
   "NO": "NICHT",
 
   "Public Sponsored Grant": "Öffentliche Subvention",
-  "(Requires Scientists are ruling or that you have 2 delegates there. All players lose 2M€. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.)": "(Benötigt Regierungspartei: FORSCHUNG oder 2+ eiegene Delegierte dort. Alle anderen Spieler verlieren 2 M€. Wähle ein Symbol (außer Jupiter, Stadt, Joker und Planet) und ziehe 2 Karten damit.)",
+  "(Requires Scientists are ruling or that you have 2 delegates there. All players lose 2M€. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.)": "(Benötigt Regierungspartei: FORSCHUNG oder 2+ eiegene Delegierte dort. Alle Spieler verlieren 2 M€. Wähle ein Symbol (außer Jupiter, Stadt, Joker und Planet) und ziehe 2 Karten damit.)",
 
   "Rare-Earth Elements": "Seltene-Erd-Elemente",
   "(Increase your M€ production by 1 for every special tile you own on Mars.)": "(Erhöhe deine M€-Produktion um 1 je eigenes Spezialplättchen.)",
@@ -219,12 +218,12 @@
   "Solar Storm": "Sonnensturm",
   "(Every player loses 2 plants. Remove up to 3 data from any player. Raise your heat production 1 step. Raise the temperature 1 step.)": "(Erhöhe die Temperatur um 2°C. Erhöhe deine Wärme-Produktion um 1. Entferne bis zu 3 Daten von einem anderen Spieler. Alle Spieler verlieren 2 Pflanzen.)",
 
-  "Solarpedia": "Solarpedia",
+  "Solarpedia": "",
   "(Action: Add 2 data to ANY card.)": "(AKTION: Füge einer beliebigen Karte 2 Daten hinzu.)",
   "(Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.)": "(Benötigt je ein eigenes Venus-, Erde-, Mars- und Jupitersymbol. Füge einer beliebigen Karte 2 Daten hinzu. 1 SP je 6 Daten auf dieser Karte.)",
 
   "Space Debris Cleaning Operation": "Weltraumschrott räumen",
-  "(Requires 4 space tags. Gain 3 titanium. Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) Add 1 data to ANY card. Draw 1 card.)": "(Benötigt 4 Weltraumsymbole im Spiel. Füge einer Karte 1 beliebige Ressource hinzu (kein Tier). Füge einer Karte 1 Datenressource hinzu. Erhalte 3 Titan. Ziehe 1 Karte.)",
+  "(Requires any 4 space tags in play. Gain 3 titanium. Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) Add 1 data to ANY card. Draw 1 card.)": "(Benötigt 4 Weltraumsymbole im Spiel. Füge einer Karte 1 beliebige Ressource hinzu (kein Tier). Füge einer Karte 1 Datenressource hinzu. Erhalte 3 Titan. Ziehe 1 Karte.)",
 
   "Space Relay": "Orbitaler Verstärker",
   "(Effect: Whenever you play a card with a Jovian tag, including this, draw a card.)": "(EFFEKT: Wenn du ein Jupitersymbol ausspielst (einschließlich dieses), ziehe 1 Karte.)",
@@ -235,17 +234,17 @@
 
   "Terraforming Control Station": "Terraform-Kontrollstation",
   "(Effect: When you play a Venus or Mars tag, pay 2 M€ less.)": "(EFFEKT: Wenn du ein Venus- oder Marssymbol ausspielst, bezahlst du 2 M€ weniger.)",
-  "(Erhöhe deinen TW um 2.)": "(Erhöhe deinen TW um 2.)",
+  "(Erhöhe deinen TW um 2.)": "",
 
   "Terraforming Robots": "Terraforming-Roboter",
   "(Effect: When you play a Mars tag, add 1 specialized robot on this card.)": "(EFFEKT: Wenn du ein Marssymbol ausspielst, füge dieser Karte 1 Roboter hinzu.)",
   "1 VP for every specialized robot on this card.": "1 SP je Roboter auf dieser Karte.",
   "(Requires 4 science tags.)": "(Benötigt 4 eigene Wissenschaftssymbole.)",
-  
+
   "Think Tank": "Denkfabrik",
   "(Action: Spend 2 M€ to place 1 data on any card.)": "(AKTION: Bezahle 2 M€ um einer Karte 1 Datenressource hinzuzufügen.)",
   "+/-1 global parameter": "+/-1 globaler Parameter",
-  "(Effect: When playing a card, you can remove data from this card to change the card's global requirement by 1 step for every 1 data removed.)": "(Effekt: Wenn du eine Karte ausspielst, darfst du Daten von dieser Karte entfernen, um je entfernte Datenressource die globalen Bedingungen der Karte um 1 Stufe zu erhöhen bzw. zu verringern.)",
+  "(Effect: When playing a card, you can remove data from this card to change the card's global requirement by 1 step for every 1 data removed.)": "(EFFEKT: Wenn du eine Karte ausspielst, darfst du Daten von dieser Karte entfernen, um je entfernte Datenressource die globalen Bedingungen der Karte um 1 Stufe zu erhöhen bzw. zu verringern.)",
 
   "Venera Base": "Venera Basis",
   "(Action: Add 1 floater to ANY Venus card)": "(AKTION: Füge einer beliebigen Venuskarte 1 Schweber hinzu.)",

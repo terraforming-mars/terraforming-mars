@@ -8,7 +8,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {Board} from '../../boards/Board';
 import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {cities} from '../render/DynamicVictoryPoints';
 
 export class CommercialDistrict extends Card implements IProjectCard {
   constructor(
@@ -24,7 +24,7 @@ export class CommercialDistrict extends Card implements IProjectCard {
         }).nbsp.nbsp.tile(TileType.COMMERCIAL_DISTRICT, true).br;
         b.vpText('1 VP per adjacent city tile.');
       }),
-      victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 1, true),
+      victoryPoints: cities(1, 1, true, true),
     },
   ) {
     super({

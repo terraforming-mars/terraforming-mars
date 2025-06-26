@@ -3,7 +3,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {Card} from '../Card';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {all} from '../Options';
@@ -18,7 +17,7 @@ export class VoteOfNoConfidence extends Card implements IProjectCard {
 
       // TODO(kberg): this renders a delegate with a tie and a black background. On the physical card, there is
       // no black background.
-      requirements: CardRequirements.builder((b) => b.partyLeaders()),
+      requirements: {partyLeader: 1},
       metadata: {
         cardNumber: 'T16',
         renderData: CardRenderer.builder((b) => {
@@ -34,15 +33,15 @@ export class VoteOfNoConfidence extends Card implements IProjectCard {
 
   public override bespokeCanPlay(player: IPlayer): boolean {
     const turmoil = Turmoil.getTurmoil(player.game);
-    if (!turmoil.hasDelegatesInReserve(player.id)) return false;
+    if (!turmoil.hasDelegatesInReserve(player)) return false;
 
     return turmoil.chairman === 'NEUTRAL';
   }
 
   public override bespokePlay(player: IPlayer) {
     const turmoil = Turmoil.getTurmoil(player.game);
-    turmoil.delegateReserve.remove(player.id);
-    turmoil.setNewChairman(player.id, player.game, /* setAgenda */ false);
+    turmoil.delegateReserve.remove(player);
+    turmoil.setNewChairman(player, player.game, /* setAgenda */ false);
     return undefined;
   }
 }

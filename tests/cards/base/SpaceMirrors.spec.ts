@@ -1,25 +1,25 @@
 import {expect} from 'chai';
 import {SpaceMirrors} from '../../../src/server/cards/base/SpaceMirrors';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('SpaceMirrors', function() {
+describe('SpaceMirrors', () => {
   let card: SpaceMirrors;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SpaceMirrors();
     [game, player] = testGame(2);
   });
 
-  it('Can not act', function() {
+  it('Can not act', () => {
     player.megaCredits = 6;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.megaCredits = 7;
     expect(card.canAct(player)).is.true;
 

@@ -1,14 +1,12 @@
 import {expect} from 'chai';
 import {AcquiredSpaceAgency} from '../../../src/server/cards/prelude/AcquiredSpaceAgency';
 import {Tag} from '../../../src/common/cards/Tag';
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
-describe('AcquiredSpaceAgency', function() {
-  it('Should play', function() {
+describe('AcquiredSpaceAgency', () => {
+  it('Should play', () => {
     const card = new AcquiredSpaceAgency();
-    const player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    const [/* game*/, player] = testGame(1);
     card.play(player);
 
     expect(player.titanium).to.eq(6);

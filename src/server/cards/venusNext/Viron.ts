@@ -1,20 +1,18 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {IActionCard, ICard, isIActionCard, isIHasCheckLoops} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
-import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Viron extends Card implements ICard, ICorporationCard {
+export class Viron extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.VIRON,
       tags: [Tag.MICROBE],
       startingMegaCredits: 48,
-      type: CardType.CORPORATION,
 
       metadata: {
         cardNumber: 'R12',
@@ -34,7 +32,7 @@ export class Viron extends Card implements ICard, ICorporationCard {
 
   // This matches Viron.getActionCards.
   private getActionCards(player: IPlayer): Array<IActionCard & ICard> {
-    const result: Array<IActionCard & ICard> = [];
+    const result = [];
     for (const playedCard of player.tableau) {
       if (playedCard === this) {
         continue;
@@ -45,7 +43,7 @@ export class Viron extends Card implements ICard, ICorporationCard {
       if (isIHasCheckLoops(playedCard) && playedCard.getCheckLoops() >= 2) {
         continue;
       }
-      if (player.getActionsThisGeneration().has(playedCard.name) && playedCard.canAct(player)) {
+      if (player.actionsThisGeneration.has(playedCard.name) && playedCard.canAct(player)) {
         result.push(playedCard);
       }
     }
@@ -53,7 +51,7 @@ export class Viron extends Card implements ICard, ICorporationCard {
   }
 
   public canAct(player: IPlayer): boolean {
-    return this.getActionCards(player).length > 0 && !player.getActionsThisGeneration().has(this.name);
+    return this.getActionCards(player).length > 0 && !player.actionsThisGeneration.has(this.name);
   }
 
   public action(player: IPlayer) {
@@ -64,12 +62,10 @@ export class Viron extends Card implements ICard, ICorporationCard {
     return new SelectCard(
       'Perform again an action from a played card',
       'Take action',
-      this.getActionCards(player),
-      ([card]) => {
-        const foundCard = card;
-        player.game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard).card(this));
-        return foundCard.action(player);
-      },
-    );
+      this.getActionCards(player))
+      .andThen(([card]) => {
+        player.game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(card).card(this));
+        return card.action(player);
+      });
   }
 }

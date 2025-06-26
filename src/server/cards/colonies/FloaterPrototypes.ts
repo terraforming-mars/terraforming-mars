@@ -20,7 +20,7 @@ export class FloaterPrototypes extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: 'C11',
-        renderData: CardRenderer.builder((b) => b.floaters(2).asterix()),
+        renderData: CardRenderer.builder((b) => b.resource(CardResource.FLOATER, 2).asterix()),
         description: 'Add two floaters to ANOTHER card.',
       },
     });

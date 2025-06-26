@@ -298,6 +298,23 @@ input[type="radio"]:checked + .filterDiv::after {
     transform: rotate(-90deg);
 }
 
+.prelude2-icon:after {
+  position: absolute;
+  border: 1px solid black;
+  font-family: Prototype;
+  background-color: rgb(235, 118, 171);
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 16px;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  color: white;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+  content: "2";
+}
+
 .venus-icon:after {
     position: absolute;
     border: 1px solid black;
@@ -366,6 +383,7 @@ input[type="radio"]:checked + .filterDiv::after {
     border-radius: 50%;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
     content: "\25b2";
+    background: #d4d4d4;
 }
 
 .community-icon:after {
@@ -452,6 +470,32 @@ input[type="radio"]:checked + .filterDiv::after {
     border-radius: 50%;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
     content: "💼";
+}
+
+.starwars-icon:after {
+    position: absolute;
+    color:#DDD;
+    border: 1px solid #222;
+    background: #999;
+    font-family: Prototype;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    width: 16px;
+    height:16px;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
+    content: "W";
+}
+
+.underworld-icon:after {
+  position: absolute;
+  background-image: url(./assets/expansion_icons/expansion_icon_underworld.png);
+  width: 26px;
+  height: 26px;
+  background-size: 26px;
+  content: "";
 }
 
 .button-icon:after {
@@ -638,10 +682,15 @@ input[type="radio"]:checked + .filterDiv::after {
 .tag-clone {
     background-image: url("./assets/tags/clone.png");
 }
+.tag-crime {
+    background-image: url("./assets/tags/crime.png");
+}
 .tag-none {
     background-image: url("./assets/tags/tag-none.png");
 }
-
+.tag-asterisk {
+  background-image: url("./assets/underworld/asterisk-tag.png");
+}
 /************** Style the Content ************/
 .content {
     color: black;
@@ -925,9 +974,9 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .special-tile {
     background-image: url(./assets/tiles/special.png);
-    width: 47px;
-    height: 51px;
-    background-size: 47px 51px;
+    width: 40px;
+    height: 47px;
+    background-size: 40px;
 }
 
 .special-tile--S {
@@ -949,6 +998,13 @@ input[type="radio"]:checked + .filterDiv::after {
     height: 40px;
     background-size: 60px 40px;
     color: #0000;
+}
+
+.city-or-special-tile {
+    background-image: url(./assets/promo/city-or-special-tile.png);
+    width: 40px;
+    height: 47px;
+    background-size: 40px;
 }
 
 .rating {
@@ -2640,6 +2696,10 @@ input[type="radio"]:checked + .filterDiv::after {
     background-image: url(./assets/expansion_icons/expansion_icon_prelude.png);
 }
 
+.expansion-icon-prelude2 {
+    background-image: url(./assets/expansion_icons/expansion_icon_prelude2.png);
+}
+
 .expansion-icon-colony {
     background-image: url(./assets/expansion_icons/expansion_icon_colonies.png);
 }
@@ -2679,14 +2739,16 @@ input[type="radio"]:checked + .filterDiv::after {
     background-image: url(./assets/expansion_icons/expansion_icon_ceo.png);
 }
 
+.expansion-icon-starwars {
+    background-image: url(./assets/expansion_icons/expansion_icon_starwars.png);
+}
+
+.expansion-icon-underworld {
+  background-image: url(./assets/expansion_icons/expansion_icon_underworld.png);
+}
+
 /* refactored */
 .card-container {
-    .project-icon:after,
-    .preludeCard-icon:after {
-        bottom: 8px;
-        left: 8px;
-        margin: 0px;
-    }
     .card-content-wrapper {
         position: relative;
         .temporary-content-wrapper {
@@ -2720,19 +2782,20 @@ input[type="radio"]:checked + .filterDiv::after {
             .card-help {
                 float: left;
                 font-family: Prototype;
-                font-size: 26px;
-                width: 30px;
-                height: 50px;
+                font-size: 20px;
+                width: 24px;
+                height: 24px;
                 margin-left: -20px;
-                line-height: 48px;
-                border-radius: 20px;
-
-                background-color: black;
-                color: white;
+                line-height: 24px;
+                border-radius: 24px;
+                background-color: #444;
                 text-align: center;
-            }
-            .card-help-inner a:visited {
-                color: #FFF;
+                a {
+                  color: #C33;
+                  text-decoration: none;
+                }
+                position: static;
+                z-index: 1;
             }
             .card-tags {
                 display: flex;

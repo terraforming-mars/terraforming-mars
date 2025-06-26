@@ -27,7 +27,7 @@ export class AerobrakedAmmoniaAsteroid extends Card implements IProjectCard {
             pb.heat(3).br;
             pb.plants(1);
           }).br;
-          b.microbes(2).asterix();
+          b.resource(CardResource.MICROBE, 2).asterix();
         }),
       },
     });

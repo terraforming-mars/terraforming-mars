@@ -1,31 +1,31 @@
 import {expect} from 'chai';
 import {LuxuryEstate} from '../../../src/server/cards/pathfinders/LuxuryEstate';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {addGreenery, addCity, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('LuxuryEstate', function() {
+describe('LuxuryEstate', () => {
   let card: LuxuryEstate;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new LuxuryEstate();
     [game, player, player2] = testGame(2);
     player.playedCards.push(card);
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     setOxygenLevel(game, 6);
-    expect(player.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     setOxygenLevel(game, 7);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     card.play(player);
     expect(player.titanium).eq(0);
 

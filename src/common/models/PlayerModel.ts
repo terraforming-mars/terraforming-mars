@@ -1,20 +1,28 @@
 import {CardModel} from './CardModel';
 import {Color} from '../Color';
-import {IVictoryPointsBreakdown} from '../game/IVictoryPointsBreakdown';
-import {TagCount} from '../cards/TagCount';
+import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
 import {PlayerInputModel} from './PlayerInputModel';
 import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
 import {PlayerId, ParticipantId} from '../Types';
 import {CardName} from '../cards/CardName';
 import {Resource} from '../Resource';
+import {PartyName} from '../turmoil/PartyName';
+import {Agenda} from '../turmoil/Types';
+import {Tag} from '../cards/Tag';
 
 export interface ViewModel {
   game: GameModel;
   players: Array<PublicPlayerModel>;
   id?: ParticipantId;
   thisPlayer: PublicPlayerModel | undefined;
+  runId: string;
 }
+
+type AlliedPartyModel = {
+  partyName: PartyName;
+  agenda: Agenda;
+};
 
 // 'off': Resources (or production) are unprotected.
 // 'on': Resources (or production) are protected.
@@ -24,7 +32,7 @@ export type Protection = 'off' | 'on' | 'half';
 /** The public information about a player */
 export type PublicPlayerModel = {
   actionsTakenThisRound: number;
-  actionsThisGeneration: Array<string /* CardName */>;
+  actionsThisGeneration: ReadonlyArray<CardName>;
   actionsTakenThisGame: number;
   availableBlueCardActionCount: number;
   cardCost: number;
@@ -33,9 +41,12 @@ export type PublicPlayerModel = {
   citiesCount: number;
   coloniesCount: number;
   color: Color;
+  corruption: number,
   energy: number;
   energyProduction: number;
+  excavations: number,
   fleetSize: number;
+  handicap: number | undefined;
   heat: number;
   heatProduction: number;
   id: PlayerId | undefined;
@@ -52,35 +63,36 @@ export type PublicPlayerModel = {
   plantProduction: number;
   protectedResources: Record<Resource, Protection>;
   protectedProduction: Record<Resource, Protection>;
-  tableau: Array<CardModel>;
+  tableau: ReadonlyArray<CardModel>;
   selfReplicatingRobotsCards: Array<CardModel>;
   steel: number;
   steelProduction: number;
   steelValue: number;
-  tags: Array<TagCount>;
+  tags: Record<Tag, number>
   terraformRating: number;
   timer: TimerModel;
   titanium: number;
   titaniumProduction: number;
   titaniumValue: number;
   tradesThisGeneration: number;
-  victoryPointsBreakdown: IVictoryPointsBreakdown;
-  victoryPointsByGeneration: Array<number>
+  victoryPointsBreakdown: VictoryPointsBreakdown;
+  victoryPointsByGeneration: ReadonlyArray<number>;
+  alliedParty?: AlliedPartyModel;
 }
 
 /** A player's view of the game, including their secret information. */
 export interface PlayerViewModel extends ViewModel {
-  cardsInHand: Array<CardModel>;
-  dealtCorporationCards: Array<CardModel>;
-  dealtPreludeCards: Array<CardModel>;
-  dealtProjectCards: Array<CardModel>;
-  dealtCeoCards: Array<CardModel>;
-  draftedCorporations: Array<CardModel>;
-  draftedCards: Array<CardModel>;
+  autopass: boolean;
+  cardsInHand: ReadonlyArray<CardModel>;
+  dealtCorporationCards: ReadonlyArray<CardModel>;
+  dealtPreludeCards: ReadonlyArray<CardModel>;
+  dealtProjectCards: ReadonlyArray<CardModel>;
+  dealtCeoCards: ReadonlyArray<CardModel>;
+  draftedCards: ReadonlyArray<CardModel>;
   id: PlayerId;
-  ceoCardsInHand: Array<CardModel>;
-  pickedCorporationCard: Array<CardModel>; // Why Array?
-  preludeCardsInHand: Array<CardModel>;
+  ceoCardsInHand: ReadonlyArray<CardModel>;
+  pickedCorporationCard: ReadonlyArray<CardModel>; // Why Array?
+  preludeCardsInHand: ReadonlyArray<CardModel>;
   thisPlayer: PublicPlayerModel;
   waitingFor: PlayerInputModel | undefined;
 }

@@ -6,22 +6,25 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast, runAllActions} from '../../TestingUtils';
 import {MarsBoard} from '../../../src/server/boards/MarsBoard';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
+import {TileType} from '../../../src/common/TileType';
+import {IGame} from '../../../src/server/IGame';
 
-describe('ArcadianCommunities', function() {
+describe('ArcadianCommunities', () => {
   let card: ArcadianCommunities;
   let player: TestPlayer;
+  let game: IGame;
   let board: MarsBoard;
 
   beforeEach(() => {
     card = new ArcadianCommunities();
-    [, player] = testGame(2);
-    player.setCorporationForTest(card);
+    [game, player] = testGame(2);
+    player.corporations.push(card);
     board = player.game.board;
   });
 
   it('initial action', () => {
     const action = cast(card.initialAction(player), SelectSpace);
-    const space = action.availableSpaces[0];
+    const space = action.spaces[0];
     expect(space.tile).is.undefined;
     expect(space.player).is.undefined;
 
@@ -33,8 +36,7 @@ describe('ArcadianCommunities', function() {
   });
 
   it('play', () => {
-    const play = card.play(player);
-    expect(play).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.steel).to.eq(10);
   });
 
@@ -44,7 +46,7 @@ describe('ArcadianCommunities', function() {
     initLands[0].player = player;
 
     const action = cast(card.action(player), SelectSpace);
-    const space = action.availableSpaces[0];
+    const space = action.spaces[0];
 
     expect(space.tile).is.undefined;
     expect(space.player).is.undefined;
@@ -56,20 +58,20 @@ describe('ArcadianCommunities', function() {
     expect(player.megaCredits).to.eq(0);
 
     // This describes the effect.
-    player.game.addCity(player, space);
-    runAllActions(player.game);
+    game.addCity(player, space);
+    runAllActions(game);
     expect(player.megaCredits).to.eq(3);
   });
 
   it('available spaces do not include those where player already has token', () => {
     // Spaces 10 and 11 are valid, adjacent spaces.
-    const first = board.getSpace('10');
+    const first = board.getSpaceOrThrow('10');
     expect(first.spaceType).eq(SpaceType.LAND);
 
-    const second = board.getSpace('11');
+    const second = board.getSpaceOrThrow('11');
     expect(second.spaceType).eq(SpaceType.LAND);
 
-    const neighbor = board.getSpace('05');
+    const neighbor = board.getSpaceOrThrow('05');
     expect(neighbor.spaceType).eq(SpaceType.LAND);
 
     expect(board.getAdjacentSpaces(first)).contains(second);
@@ -78,12 +80,23 @@ describe('ArcadianCommunities', function() {
 
     neighbor.player = player;
 
-    expect(cast(card.action(player), SelectSpace).availableSpaces).contains(first);
-    expect(cast(card.action(player), SelectSpace).availableSpaces).contains(second);
+    expect(cast(card.action(player), SelectSpace).spaces).contains(first);
+    expect(cast(card.action(player), SelectSpace).spaces).contains(second);
 
     first.player = player;
 
-    expect(cast(card.action(player), SelectSpace).availableSpaces).does.not.contain(first);
-    expect(cast(card.action(player), SelectSpace).availableSpaces).does.contain(second);
+    expect(cast(card.action(player), SelectSpace).spaces).does.not.contain(first);
+    expect(cast(card.action(player), SelectSpace).spaces).does.contain(second);
+  });
+
+  // Verifies that a regression does not recoccur.
+  it('Not granting when it should not', () => {
+    const oceanSpace = board.getAvailableSpacesForOcean(player)[0];
+    oceanSpace.bonus = []; // Just to make sure.
+    expect(player.megaCredits).to.eq(0);
+    game.addTile(player, oceanSpace, {tileType: TileType.MOHOLE_AREA});
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
+    expect(player.megaCredits).to.eq(0);
   });
 });

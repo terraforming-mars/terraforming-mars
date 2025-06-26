@@ -1,23 +1,20 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {Space} from '../../boards/Space';
-import {SelectAmount} from '../../inputs/SelectAmount';
-import {AndOptions} from '../../inputs/AndOptions';
-import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
-import {SimpleDeferredAction, Priority} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {BoardType} from '../../boards/BoardType';
-import {Resource} from '../../../common/Resource';
 import {all} from '../Options';
+import {SelectResources} from '../../inputs/SelectResources';
+import {message} from '../../logs/MessageBuilder';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Philares extends Card implements ICorporationCard {
+export class Philares extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.PHILARES,
       tags: [Tag.BUILDING],
       startingMegaCredits: 47,
@@ -29,6 +26,7 @@ export class Philares extends Card implements ICorporationCard {
 
       metadata: {
         cardNumber: 'R25',
+        hasExternalHelp: true,
         description: 'You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(47).nbsp.greenery();
@@ -41,64 +39,6 @@ export class Philares extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-  private selectResources(philaresPlayer: IPlayer, resourceCount: number): AndOptions {
-    let megacreditsAmount = 0;
-    let steelAmount = 0;
-    let titaniumAmount = 0;
-    let plantsAmount = 0;
-    let energyAmount = 0;
-    let heatAmount = 0;
-
-    const selectMegacredit = new SelectAmount('Megacredits', 'Select', (amount: number) => {
-      megacreditsAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectSteel = new SelectAmount('Steel', 'Select', (amount: number) => {
-      steelAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectTitanium = new SelectAmount('Titanium', 'Select', (amount: number) => {
-      titaniumAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectPlants = new SelectAmount('Plants', 'Select', (amount: number) => {
-      plantsAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectEnergy = new SelectAmount('Energy', 'Select', (amount: number) => {
-      energyAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectHeat = new SelectAmount('Heat', 'Select', (amount: number) => {
-      heatAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-
-    const selectResources = new AndOptions(
-      () => {
-        if (
-          megacreditsAmount +
-                    steelAmount +
-                    titaniumAmount +
-                    plantsAmount +
-                    energyAmount +
-                    heatAmount > resourceCount
-        ) {
-          throw new Error('Need to select ' + resourceCount + ' resource(s)');
-        }
-        philaresPlayer.stock.add(Resource.MEGACREDITS, megacreditsAmount, {log: true});
-        philaresPlayer.stock.add(Resource.STEEL, steelAmount, {log: true});
-        philaresPlayer.stock.add(Resource.TITANIUM, titaniumAmount, {log: true});
-        philaresPlayer.stock.add(Resource.PLANTS, plantsAmount, {log: true});
-        philaresPlayer.stock.add(Resource.ENERGY, energyAmount, {log: true});
-        philaresPlayer.stock.add(Resource.HEAT, heatAmount, {log: true});
-        return undefined;
-      }, selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat);
-    selectResources.title = 'Philares effect: select ' + resourceCount + ' resource(s)';
-
-    return selectResources;
   }
 
   public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType) {
@@ -117,13 +57,17 @@ export class Philares extends Card implements ICorporationCard {
       adjacentSpacesWithPlayerTiles.filter((space) => space.player?.id !== cardOwner.id) :
       adjacentSpacesWithPlayerTiles.filter((space) => space.player?.id === cardOwner.id);
 
-    if (eligibleTiles.length > 0) {
-      cardOwner.game.defer(
-        new SimpleDeferredAction(cardOwner, () => {
-          cardOwner.game.log('${0} must select ${1} bonus resource(s) from ${2}\' ability', (b) => b.player(cardOwner).number(eligibleTiles.length).card(this));
-          return this.selectResources(cardOwner, eligibleTiles.length);
-        }),
-        cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : Priority.GAIN_RESOURCE_OR_PRODUCTION,
+    const count = eligibleTiles.length;
+    if (count > 0) {
+      cardOwner.defer(() => {
+        cardOwner.game.log('${0} must select ${1} bonus resource(s) from ${2}\' ability', (b) => b.player(cardOwner).number(count).card(this));
+        return new SelectResources(message('Gain ${0} standard resources', (b) => b.number(count)), count)
+          .andThen((units) => {
+            cardOwner.stock.addUnits(units, {log: true});
+            return undefined;
+          });
+      },
+      cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : Priority.GAIN_RESOURCE_OR_PRODUCTION,
       );
     }
   }

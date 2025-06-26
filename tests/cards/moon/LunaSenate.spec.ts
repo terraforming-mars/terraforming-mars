@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaSenate} from '../../../src/server/cards/moon/LunaSenate';
+import {testGame} from '../../TestingUtils';
 
 describe('LunaSenate', () => {
   let player: TestPlayer;
@@ -9,9 +9,7 @@ describe('LunaSenate', () => {
   let card: LunaSenate;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.PURPLE.newPlayer();
-    Game.newInstance('gameid', [player, player2], player, {moonExpansion: true});
+    [/* game */, player, player2] = testGame(2, {moonExpansion: true});
     card = new LunaSenate();
   });
 
@@ -20,10 +18,10 @@ describe('LunaSenate', () => {
     player.megaCredits = card.cost;
 
     player.tagsForTest = {moon: 3};
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     player.tagsForTest = {moon: 2};
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {
@@ -33,7 +31,7 @@ describe('LunaSenate', () => {
 
     card.play(player);
 
-    expect(player.production.megacredits).eq(9);
+    expect(player.production.megacredits).eq(4);
   });
 
   it('does not count opponent wild tags', () => {
@@ -43,12 +41,13 @@ describe('LunaSenate', () => {
 
     card.play(player);
 
-    expect(player.production.megacredits).eq(8);
+    expect(player.production.megacredits).eq(3);
   });
 
   it('getVictoryPoints', () => {
     player.playedCards.push(card);
     player.tagsForTest = {moon: 3};
+    player2.tagsForTest = {moon: 1};
     expect(card.getVictoryPoints(player)).eq(3);
 
     player.tagsForTest = {moon: 4};

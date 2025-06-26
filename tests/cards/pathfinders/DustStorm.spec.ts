@@ -1,24 +1,21 @@
 import {expect} from 'chai';
 import {DustStorm} from '../../../src/server/cards/pathfinders/DustStorm';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
-describe('DustStorm', function() {
+describe('DustStorm', () => {
   let card: DustStorm;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DustStorm();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    player3 = TestPlayer.GREEN.newPlayer();
-    Game.newInstance('gameid', [player, player2, player3], player);
+    [/* game */, player, player2, player3] = testGame(3);
   });
 
-  it('play', function() {
-    expect(player.getTerraformRating()).eq(20);
+  it('play', () => {
+    expect(player.terraformRating).eq(20);
     expect(player.game.getTemperature()).eq(-30);
 
     player.energy = 5;
@@ -27,7 +24,7 @@ describe('DustStorm', function() {
 
     card.play(player);
 
-    expect(player.getTerraformRating()).eq(22);
+    expect(player.terraformRating).eq(22);
     expect(player.game.getTemperature()).eq(-26);
     expect(player.energy).eq(0);
     expect(player2.energy).eq(0);

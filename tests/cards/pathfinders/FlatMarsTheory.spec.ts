@@ -1,38 +1,38 @@
 import {expect} from 'chai';
 import {FlatMarsTheory} from '../../../src/server/cards/pathfinders/FlatMarsTheory';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
+import {testGame} from '../../TestingUtils';
 
-describe('FlatMarsTheory', function() {
+describe('FlatMarsTheory', () => {
   let card: FlatMarsTheory;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new FlatMarsTheory();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.tagsForTest = {};
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     player.tagsForTest = {science: 1};
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     player.tagsForTest = {science: 2};
-    expect(player.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player)).is.false;
 
     player.tagsForTest = {science: 1, wild: 1};
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     player.tagsForTest = {wild: 2};
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     (game as any).generation = 4;
     card.play(player);
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 4}));

@@ -1,24 +1,34 @@
 import {CardType} from '../../common/cards/CardType';
 import {IPlayer} from '../IPlayer';
-import {IActionCard, ICard} from './ICard';
 import {TRSource} from '../../common/cards/TRSource';
 import {PlayerInput} from '../PlayerInput';
-import {ICardMetadata} from '../../common/cards/ICardMetadata';
+import {CardMetadata} from '../../common/cards/CardMetadata';
 import {CardName} from '../../common/cards/CardName';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {Card} from './Card';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {Units} from '../../common/Units';
+import {message} from '../logs/MessageBuilder';
+import {IStandardProjectCard} from './IStandardProjectCard';
+import {sum} from '../../common/utils/utils';
 
-interface StaticStandardProjectCardProperties {
+type StaticStandardProjectCardProperties = {
   name: CardName,
   cost: number,
-  metadata: ICardMetadata,
+  metadata: CardMetadata,
   reserveUnits?: Partial<Units>,
   tr?: TRSource,
 }
 
-export abstract class StandardProjectCard extends Card implements IActionCard, ICard {
+export type StandardProjectCanPayWith = {
+  steel?: boolean,
+  titanium?: boolean,
+  seeds?: boolean,
+  kuiperAsteroids?: boolean,
+  // tr?: TRSource,
+}
+
+export abstract class StandardProjectCard extends Card implements IStandardProjectCard {
   constructor(properties: StaticStandardProjectCardProperties) {
     super({
       type: CardType.STANDARD_PROJECT,
@@ -34,6 +44,15 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
     return 0;
   }
 
+  private adjustedCost(player: IPlayer) {
+    const discountFromCards =
+      sum(player.tableau.asArray()
+        .map((card) => card.getStandardProjectDiscount?.(player, this) ?? 0));
+    const discount = discountFromCards + this.discount(player);
+    const adjusted = Math.max(0, this.cost - discount);
+    return adjusted;
+  }
+
   protected abstract actionEssence(player: IPlayer): void
 
   public onStandardProject(player: IPlayer): void {
@@ -42,46 +61,52 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
     }
   }
 
-  public canAct(player: IPlayer): boolean {
+  protected canPlayOptions(player: IPlayer) {
     const canPayWith = this.canPayWith(player);
-    return player.canAfford(
-      this.cost - this.discount(player), {
-        ...canPayWith,
-        tr: this.tr,
-        auroraiData: true,
-        reserveUnits: MoonExpansion.adjustedReserveCosts(player, this),
-      });
+    return {
+      ...canPayWith,
+      cost: this.adjustedCost(player),
+      tr: this.tr,
+      auroraiData: true,
+      spireScience: true,
+      reserveUnits: MoonExpansion.adjustedReserveCosts(player, this),
+    };
   }
 
-  public canPayWith(_player: IPlayer): {steel?: boolean, titanium?: boolean, seeds?: boolean, tr?: TRSource} {
+  public canAct(player: IPlayer): boolean {
+    return player.canAfford(this.canPlayOptions(player));
+  }
+
+  public canPayWith(_player: IPlayer): StandardProjectCanPayWith {
     return {};
   }
 
   protected projectPlayed(player: IPlayer) {
     player.game.log('${0} used ${1} standard project', (b) => b.player(player).card(this));
+    // standardProjectsThisGeneration does not include Sell Patents.
+    if (this.name !== CardName.SELL_PATENTS_STANDARD_PROJECT) {
+      player.standardProjectsThisGeneration.add(this.name);
+    }
     this.onStandardProject(player);
-  }
-
-  private suffixFreeCardName(cardName: CardName): string {
-    return cardName.split(':')[0];
   }
 
   public action(player: IPlayer): PlayerInput | undefined {
     const canPayWith = this.canPayWith(player);
     player.game.defer(new SelectPaymentDeferred(
       player,
-      this.cost - this.discount(player),
+      this.adjustedCost(player),
       {
         canUseSteel: canPayWith.steel,
         canUseTitanium: canPayWith.titanium,
         canUseSeeds: canPayWith.seeds,
-        canUseData: player.isCorporation(CardName.AURORAI),
-        title: `Select how to pay for ${this.suffixFreeCardName(this.name)} standard project`,
-        afterPay: () => {
-          this.projectPlayed(player);
-          this.actionEssence(player);
-        },
-      }));
+        canUseAuroraiData: player.cardIsInEffect(CardName.AURORAI),
+        canUseSpireScience: player.cardIsInEffect(CardName.SPIRE),
+        canUseAsteroids: canPayWith.kuiperAsteroids && player.cardIsInEffect(CardName.KUIPER_COOPERATIVE),
+        title: message('Select how to pay for the ${0} standard project', (b) => b.cardName(this.name)),
+      })).andThen(() => {
+      this.projectPlayed(player);
+      this.actionEssence(player);
+    });
     return undefined;
   }
 }

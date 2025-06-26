@@ -3,12 +3,15 @@ import {Turmoil} from '../../turmoil/Turmoil';
 import {CardRequirement} from './CardRequirement';
 import {RequirementType} from '../../../common/cards/RequirementType';
 
+/**
+ * Evaluates whether a player is the chairman.
+ */
 export class ChairmanRequirement extends CardRequirement {
   public readonly type = RequirementType.CHAIRMAN;
   constructor() {
-    super(0);
+    super({count: 1});
   }
   public satisfies(player: IPlayer) : boolean {
-    return Turmoil.getTurmoil(player.game).chairman === player.id;
+    return Turmoil.getTurmoil(player.game).chairman === player;
   }
 }

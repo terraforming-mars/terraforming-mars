@@ -1,27 +1,27 @@
 import {expect} from 'chai';
 import {setTemperature} from '../../TestingUtils';
 import {TundraFarming} from '../../../src/server/cards/base/TundraFarming';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('TundraFarming', function() {
+describe('TundraFarming', () => {
   let card: TundraFarming;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new TundraFarming();
     [game, player] = testGame(2);
   });
 
-  it('Can not play', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+  it('Can not play', () => {
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     setTemperature(game, -6);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.production.plants).to.eq(1);

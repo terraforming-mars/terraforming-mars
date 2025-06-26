@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {MiningGuild} from '../../../src/server/cards/corporation/MiningGuild';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Phase} from '../../../src/common/Phase';
@@ -16,7 +16,7 @@ describe('MiningGuild', () => {
   let card: MiningGuild;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new MiningGuild();
@@ -25,7 +25,7 @@ describe('MiningGuild', () => {
       aresHazards: false,
     });
 
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
   });
 
   it('Should play', () => {
@@ -35,19 +35,20 @@ describe('MiningGuild', () => {
   });
 
   it('Gives steel production bonus when placing tiles', () => {
-    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: '00', bonus: []}, BoardType.MARS);
+    const space = game.board.getAvailableSpacesOnLand(player)[0];
+    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: space.id, bonus: []}, BoardType.MARS);
     runAllActions(game);
     expect(player.production.steel).to.eq(0);
 
-    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: '00', bonus: [SpaceBonus.STEEL, SpaceBonus.TITANIUM]}, BoardType.MARS);
+    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: space.id, bonus: [SpaceBonus.STEEL, SpaceBonus.TITANIUM]}, BoardType.MARS);
     runAllActions(game);
     expect(player.production.steel).to.eq(1);
 
-    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: '00', bonus: [SpaceBonus.STEEL]}, BoardType.MARS);
+    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: space.id, bonus: [SpaceBonus.STEEL]}, BoardType.MARS);
     runAllActions(game);
     expect(player.production.steel).to.eq(2);
 
-    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: '00', bonus: [SpaceBonus.TITANIUM]}, BoardType.MARS);
+    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: space.id, bonus: [SpaceBonus.TITANIUM]}, BoardType.MARS);
     runAllActions(game);
     expect(player.production.steel).to.eq(3);
   });
@@ -96,6 +97,30 @@ describe('MiningGuild', () => {
 
     expect(space.tile?.tileType).equal(TileType.OCEAN_CITY);
     runAllActions(game);
+    expect(player.production.steel).to.eq(1);
+  });
+
+  it('Gains bonus from adjacency', () => {
+    const space = game.board.getAvailableSpacesOnLand(player)[0];
+    const adjacentSpace = game.board.getAdjacentSpaces(space)[0];
+    game.simpleAddTile(player, adjacentSpace, {tileType: TileType.METALLIC_ASTEROID});
+    adjacentSpace.adjacency = {bonus: [SpaceBonus.TITANIUM]};
+    game.addOcean(player, space);
+    runAllActions(game);
+    expect(player.stock.titanium).to.eq(1);
+    expect(player.production.steel).to.eq(1);
+  });
+
+  it('Does not double up bonus from placement and adjacency', () => {
+    const space = game.board.getAvailableSpacesOnLand(player)[0];
+    const adjacentSpace = game.board.getAdjacentSpaces(space)[0];
+    game.simpleAddTile(player, adjacentSpace, {tileType: TileType.METALLIC_ASTEROID});
+    space.bonus = [SpaceBonus.STEEL];
+    adjacentSpace.adjacency = {bonus: [SpaceBonus.TITANIUM]};
+    game.addOcean(player, space);
+    runAllActions(game);
+    expect(player.stock.titanium).to.eq(1);
+    expect(player.stock.steel).to.eq(1);
     expect(player.production.steel).to.eq(1);
   });
 });

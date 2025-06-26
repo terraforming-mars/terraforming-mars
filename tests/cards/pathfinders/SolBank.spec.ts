@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {SolBank} from '../../../src/server/cards/pathfinders/SolBank';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, finishGeneration, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
@@ -18,11 +18,12 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {AsteroidStandardProject} from '../../../src/server/cards/base/standardProjects/AsteroidStandardProject';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {SelectColony} from '../../../src/server/inputs/SelectColony';
 
 describe('SolBank', () => {
   let solBank: SolBank;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     [game, player] = testGame(1, {coloniesExtension: true, turmoilExtension: true});
@@ -30,6 +31,9 @@ describe('SolBank', () => {
     player.playCorporationCard(solBank);
     player.megaCredits = 100;
     game.colonies.push(new Luna());
+
+    // Player is waiting for SelectColony. Popping it. The cast is just to ensure that if this changes, the test changes.
+    cast(player.popWaitingFor(), SelectColony);
   });
 
   it('paying for project card', () => {
@@ -47,7 +51,7 @@ describe('SolBank', () => {
   });
 
   it('discounted card does not trigger', () => {
-    player.playedCards = [new IndenturedWorkers()];
+    player.playedCards.push(new IndenturedWorkers());
     player.lastCardPlayed = CardName.INDENTURED_WORKERS; // 8 MC discount
     player.cardsInHand = [new MicroMills()];
     const spctp = new SelectProjectCardToPlay(player);
@@ -92,7 +96,7 @@ describe('SolBank', () => {
   });
 
   it('paying for research cards', () => {
-    player.runResearchPhase(false);
+    player.runResearchPhase();
     runAllActions(game);
     const selectCard = cast(player.popWaitingFor(), SelectCard);
     selectCard.cb([selectCard.cards[1], selectCard.cards[2]]);

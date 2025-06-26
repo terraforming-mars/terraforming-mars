@@ -9,7 +9,7 @@ import {use} from 'chai';
 import chaiAsPromised = require('chai-as-promised');
 use(chaiAsPromised);
 
-describe('ApiGameLogs', function() {
+describe('ApiGameLogs', () => {
   let scaffolding: RouteTestScaffolding;
   let res: MockResponse;
 
@@ -57,7 +57,7 @@ describe('ApiGameLogs', function() {
     game.log('Generation ${0}', (b) => b.forNewGeneration().number(50));
     await scaffolding.get(ApiGameLogs.INSTANCE, res);
     const messages = JSON.parse(res.content);
-    expect(messages.length).eq(1);
+    expect(messages).has.length(1);
     expect(messages[messages.length - 1].message).eq('Generation ${0}');
     expect(messages[messages.length - 1].data[0].value).eq('50');
   });
@@ -107,7 +107,7 @@ describe('ApiGameLogs', function() {
       await scaffolding.get(ApiGameLogs.INSTANCE, res);
       const messages = JSON.parse(res.content);
 
-      expect(messages.length).eq(2);
+      expect(messages).has.length(2);
       expect(messages[0].message).eq('All players see this.');
       expect(messages[1].message).eq(`${entry.color} player sees this.`);
     });

@@ -1,41 +1,39 @@
 import {expect} from 'chai';
 import {AerialLenses} from '../../../src/server/cards/turmoil/AerialLenses';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
-describe('AerialLenses', function() {
+describe('AerialLenses', () => {
   let card: AerialLenses;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AerialLenses();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-
-    game = Game.newInstance('gameid', [player, player2], player, {turmoilExtension: true});
+    [game, player, player2] = testGame(2, {turmoilExtension: true});
   });
 
-  it('Can play', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+  it('Can play', () => {
+    expect(card.canPlay(player)).is.not.true;
 
     const kelvinists = game.turmoil!.getPartyByName(PartyName.KELVINISTS);
-    kelvinists.delegates.add(player.id, 2);
-    expect(player.simpleCanPlay(card)).is.true;
+    kelvinists.delegates.add(player, 2);
+    expect(card.canPlay(player)).is.true;
   });
 
-  it('Should play without plants', function() {
+  it('Should play without plants', () => {
     card.play(player);
     expect(player.production.heat).to.eq(2);
     const input = game.deferredActions.peek()!.execute();
     expect(input).is.undefined;
   });
 
-  it('Should play with plants', function() {
+  it('Should play with plants', () => {
     player2.plants = 5;
     card.play(player);
     expect(player.production.heat).to.eq(2);

@@ -22,7 +22,7 @@ export class GreeneryStandardProject extends StandardProjectCard {
   }
 
   public override canPayWith(player: IPlayer) {
-    if (player.isCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS)) {
+    if (player.cardIsInEffect(CardName.SOYLENT_SEEDLING_SYSTEMS)) {
       return {seeds: true};
     } else {
       return {};
@@ -30,7 +30,10 @@ export class GreeneryStandardProject extends StandardProjectCard {
   }
 
   public override canAct(player: IPlayer): boolean {
-    if (player.game.board.getAvailableSpacesForGreenery(player).length === 0) return false;
+    // This is pricey because it forces calling canPlayOptions twice.
+    if (player.game.board.getAvailableSpacesForGreenery(player, this.canPlayOptions(player)).length === 0) {
+      return false;
+    }
     return super.canAct(player);
   }
 

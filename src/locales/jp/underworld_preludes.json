@@ -1,0 +1,46 @@
+{
+    "Battery Shipment": "バッテリー輸送",
+    "Gain 12 energy. Increase your energy production 2 steps.": "12電力獲得. 電力産出+2.",
+
+    "Central Reservoir": "中央貯水池",
+    "Gain 1 TR. Place an ocean tile ON AN AREA NOT RESERVED FOR OCEAN. Then excavate the underground resource in that space.": "TR+1段階. 海洋予定地以外に海洋1枚配置. そこの地下資源を採掘する.",
+
+    "Cloud Vortex Outpost": "雲の渦の前哨基地",
+    "Raise Venus 2 steps": "金星+2段階.",
+    "Effect: After you play your FIRST project card that can hold floaters, put 3 floaters on it.": "効果：このカードのプレイ後、浮遊体を配置できるカードを初めてプレイした時、そのカード上に3浮遊体追加.",
+
+    "Deepwater Dome": "深海ドーム",
+    "Increase your plant production 1 step. Place an ocean. Then place a player cube on an adjacent unreserved space. Only you may place a tile there. Identify the underground resources in both spaces.": "植物産出+1. 海洋1枚配置. そこに隣接する非予定地にプレイヤーマーカーを配置. そこにタイル配置ができるのはあなただけ. 配置した海洋とプレイヤーマーカーの地下資源を調査する.",
+
+    "Election Sponsorship": "選挙支援",
+    "Gain 1 corruption. Place 1 delegate in any party.": "1汚職獲得. 代議員を1名配置.",
+    "Gen 1-4": "1-4世代",
+    "Effect: For the first 4 generations, gain +2 influence": "効果：最初の4世代の間、影響力+2.",
+
+    "Free Trade Port": "自由貿易港",
+    "Gain 1 corruption. Place a colony.": "1汚職獲得. コロニー1つ配置.",
+
+    "Ganymede Trading Company": "ガニメデ商社",
+    "Gain 1 corruption, 3 titanium, and a trade fleet.": "1汚職獲得. 3チタン獲得. 1交易艦隊獲得.",
+
+    "Geological Expertise": "地質学の専門知識",
+    "Identify 4 underground resources. Draw 2 cards with science tags.": "4回地下資源を調査する. 科学タグカードを2枚入手.",
+
+    "Inherited Fortune": "受け継がれた財産",
+    "Gain 1 corruption and 10 M€. Increase your M€ production 1 step.": "1汚職獲得. 10MC獲得. MC産出+1.",
+
+    "Investor Plaza": "投資家プラザ",
+    "Place a city and gain 1 corruption.": "都市1枚配置. 1汚職獲得.",
+
+    "Prospecting": "試掘",
+    "Pay 4 M€. Put an additional colony tile of your choice into play. Then place a colony on it.": "4MC支払う. 天体を1つ追加し、そこにコロニー1つ配置.",
+
+    "Secret Research": "秘密調査",
+    "Gain 1 corruption and draw 3 cards.": "1汚職獲得. 3ドロー.",
+
+    "Tunneling Operation": "トンネル工事",
+    "Identify 1 underground resource. Then excavate 2 underground resources. Increase your steel production 2 steps.": "地下資源を調査する. 2回地下資源を採掘する. 建材産出+2.",
+
+    "Underground Settlement": "地下街",
+    "Place a city tile. Then excavate the underground resource in its space.": "都市タイル1枚配置. そこの地下資源を採掘する."
+}

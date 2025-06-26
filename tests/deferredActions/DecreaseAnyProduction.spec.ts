@@ -1,20 +1,20 @@
 import {expect} from 'chai';
 import {DecreaseAnyProduction} from '../../src/server/deferredActions/DecreaseAnyProduction';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
 import {cast, runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
 import {SelectPlayer} from '../../src/server/inputs/SelectPlayer';
 import {Resource} from '../../src/common/Resource';
 
-describe('DecreaseAnyProduction', function() {
-  let game: Game;
+describe('DecreaseAnyProduction', () => {
+  let game: IGame;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
   let decreaseAnyProduction: DecreaseAnyProduction;
 
-  beforeEach(function() {
+  beforeEach(() => {
     [game, player, player2, player3] = testGame(3);
     decreaseAnyProduction = new DecreaseAnyProduction(player, Resource.TITANIUM, {count: 2});
   });

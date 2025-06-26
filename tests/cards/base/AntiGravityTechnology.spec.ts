@@ -2,25 +2,28 @@ import {expect} from 'chai';
 import {AntiGravityTechnology} from '../../../src/server/cards/base/AntiGravityTechnology';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('AntiGravityTechnology', function() {
+describe('AntiGravityTechnology', () => {
   let card: AntiGravityTechnology;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AntiGravityTechnology();
     player = TestPlayer.BLUE.newPlayer();
   });
 
-  it('Cannot play', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+  it('Cannot play', () => {
+    player.tagsForTest = {science: 6};
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
-    player.playedCards.push(card, card, card, card, card, card, card);
-    expect(player.simpleCanPlay(card)).is.true;
+  it('Can play', () => {
+    player.tagsForTest = {science: 7};
+    expect(card.canPlay(player)).is.true;
+  });
 
+  it('Should play', () => {
     card.play(player);
     expect(card.getVictoryPoints(player)).to.eq(3);
-    expect(card.getCardDiscount()).to.eq(2);
+    expect(card.getCardDiscount(player, card)).to.eq(2);
   });
 });

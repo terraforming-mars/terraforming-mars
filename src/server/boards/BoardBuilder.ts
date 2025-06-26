@@ -1,12 +1,16 @@
-import {Space, newSpace} from './Space';
-import {SpaceId} from '../../common/Types';
+import {Space} from './Space';
+import {SpaceId, isSpaceId, safeCast} from '../../common/Types';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {SpaceName} from '../SpaceName';
+import {NamedSpace, SpaceName} from '../../common/boards/SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {Random} from '../../common/utils/Random';
+import {inplaceShuffle} from '../utils/shuffle';
+import {GameOptions} from '../game/GameOptions';
+import {expansionSpaceColonies} from '../../common/boards/expansionSpaceColonies';
+import {CardName} from '../../common/cards/CardName';
 
 function colonySpace(id: SpaceId): Space {
-  return newSpace(id, SpaceType.COLONY, -1, -1, []);
+  return {id, spaceType: SpaceType.COLONY, x: -1, y: -1, bonus: []};
 }
 
 export class BoardBuilder {
@@ -21,37 +25,46 @@ export class BoardBuilder {
   private bonuses: Array<Array<SpaceBonus>> = [];
   private spaces: Array<Space> = [];
   private unshufflableSpaces: Array<number> = [];
+  private gameOptions: GameOptions;
 
-  constructor(private includeVenus: boolean, private includePathfinders: boolean) {
-    this.spaces.push(colonySpace(SpaceName.GANYMEDE_COLONY));
-    this.spaces.push(colonySpace(SpaceName.PHOBOS_SPACE_HAVEN));
+  constructor(gameOptions: GameOptions) {
+    this.gameOptions = gameOptions;
   }
 
-  ocean(...bonus: Array<SpaceBonus>) {
+  ocean(...bonus: Array<SpaceBonus>): this {
     this.spaceTypes.push(SpaceType.OCEAN);
     this.bonuses.push(bonus);
     return this;
   }
 
-  cove(...bonus: Array<SpaceBonus>) {
+  cove(...bonus: Array<SpaceBonus>): this {
     this.spaceTypes.push(SpaceType.COVE);
     this.bonuses.push(bonus);
     return this;
   }
 
-  land(...bonus: Array<SpaceBonus>) {
+  land(...bonus: Array<SpaceBonus>): this {
     this.spaceTypes.push(SpaceType.LAND);
     this.bonuses.push(bonus);
     return this;
   }
 
-  doNotShuffleLastSpace() {
+  restricted(): this {
+    this.spaceTypes.push(SpaceType.RESTRICTED);
+    this.bonuses.push([]);
+    return this;
+  }
+
+  doNotShuffleLastSpace(): this {
     this.unshufflableSpaces.push(this.spaceTypes.length - 1);
     return this;
   }
 
 
   build(): Array<Space> {
+    this.spaces.push(colonySpace(SpaceName.GANYMEDE_COLONY));
+    this.spaces.push(colonySpace(SpaceName.PHOBOS_SPACE_HAVEN));
+
     const tilesPerRow = [5, 6, 7, 8, 9, 8, 7, 6, 5];
     const idOffset = this.spaces.length + 1;
     let idx = 0;
@@ -62,36 +75,38 @@ export class BoardBuilder {
       for (let i = 0; i < tilesInThisRow; i++) {
         const spaceId = idx + idOffset;
         const xCoordinate = xOffset + i;
-        const space = newSpace(BoardBuilder.spaceId(spaceId), this.spaceTypes[idx], xCoordinate, row, this.bonuses[idx]);
+        const space = {
+          id: BoardBuilder.spaceId(spaceId),
+          spaceType: this.spaceTypes[idx],
+          x: xCoordinate,
+          y: row,
+          bonus: this.bonuses[idx],
+        };
         this.spaces.push(space);
         idx++;
       }
     }
 
-    this.spaces.push(colonySpace(SpaceName.STANFORD_TORUS));
-    if (this.includeVenus) {
-      this.spaces.push(
-        colonySpace(SpaceName.DAWN_CITY),
-        colonySpace(SpaceName.LUNA_METROPOLIS),
-        colonySpace(SpaceName.MAXWELL_BASE),
-        colonySpace(SpaceName.STRATOPOLIS),
-      );
-    }
-    if (this.includePathfinders) {
-      this.spaces.push(
-        // Space.colony(SpaceName.MARTIAN_TRANSHIPMENT_STATION),
-        colonySpace(SpaceName.CERES_SPACEPORT),
-        colonySpace(SpaceName.DYSON_SCREENS),
-        colonySpace(SpaceName.LUNAR_EMBASSY),
-        colonySpace(SpaceName.VENERA_BASE),
-      );
+    // Include space colonies if the expansion is included, or if the card is included.
+    for (const entry of expansionSpaceColonies) {
+      // Special case for Venera Base when Pathfinders is included, but Turmoil or Venus is not
+      if (entry.card === CardName.VENERA_BASE) {
+        const pathfindersTurmoilVenusInPlay = this.gameOptions.pathfindersExpansion && this.gameOptions.turmoilExtension && this.gameOptions.venusNextExtension;
+        if (this.gameOptions.includedCards.includes(entry.card) || pathfindersTurmoilVenusInPlay) {
+          this.spaces.push(colonySpace(entry.name));
+        }
+        continue;
+      }
+      if (this.gameOptions.expansions[entry.expansion] || this.gameOptions.includedCards.includes(entry.card)) {
+        this.spaces.push(colonySpace(entry.name));
+      }
     }
 
     return this.spaces;
   }
 
-  public shuffleArray(rng: Random, array: Array<Object>): void {
-    this.unshufflableSpaces.sort((a, b) => a < b ? a : b);
+  /*
+  public shuffleArray(rng: Random, array: Array<unknown>): void {
     // Reversing the indexes so the elements are pulled from the right.
     // Reversing the result so elements are listed left to right.
     const spliced = this.unshufflableSpaces.reverse().map((idx) => array.splice(idx, 1)[0]).reverse();
@@ -103,28 +118,22 @@ export class BoardBuilder {
       array.splice(this.unshufflableSpaces[idx], 0, spliced[idx]);
     }
   }
+*/
 
   // Shuffle the ocean spaces and bonus spaces. But protect the land spaces supplied by
   // |lands| so that those IDs most definitely have land spaces.
-  public shuffle(rng: Random, ...lands: Array<SpaceName>) {
-    this.shuffleArray(rng, this.spaceTypes);
-    this.shuffleArray(rng, this.bonuses);
-    let safety = 0;
-    while (safety < 1000) {
-      let satisfy = true;
-      for (const land of lands) {
-        // Why -3?
-        const land_id = Number(land) - 3;
-        while (this.spaceTypes[land_id] === SpaceType.OCEAN) {
-          satisfy = false;
-          const idx = rng.nextInt(this.spaceTypes.length);
-          [this.spaceTypes[land_id], this.spaceTypes[idx]] = [this.spaceTypes[idx], this.spaceTypes[land_id]];
-        }
+  public shuffle(rng: Random, ...preservedSpaceIds: Array<NamedSpace>) {
+    const preservedSpaces = [...this.unshufflableSpaces];
+    for (const spaceId of preservedSpaceIds) {
+      const idx = Number(spaceId) - 3;
+      if (!preservedSpaces.includes(idx)) {
+        preservedSpaces.push(idx);
       }
-      if (satisfy) return;
-      safety++;
     }
-    throw new Error('infinite loop detected');
+    preservedSpaces.sort((a, b) => a - b);
+    preservingShuffle(this.spaceTypes, preservedSpaces, rng);
+    preservingShuffle(this.bonuses, this.unshufflableSpaces, rng);
+    return;
   }
 
   private static spaceId(id: number): SpaceId {
@@ -132,7 +141,19 @@ export class BoardBuilder {
     if (id < 10) {
       strId = '0'+strId;
     }
-    // OK to cast this.
-    return strId as SpaceId;
+    return safeCast(strId, isSpaceId);
   }
 }
+
+export function preservingShuffle(array: Array<unknown>, preservedIndexes: ReadonlyArray<number>, rng: Random): void {
+  // Reversing the indexes so the elements are pulled from the right.
+  // Reversing the result so elements are listed left to right.
+  const forward = [...preservedIndexes].sort((a, b) => a - b);
+  const backward = [...forward].reverse();
+  const spliced = backward.map((idx) => array.splice(idx, 1)[0]).reverse();
+  inplaceShuffle(array, rng);
+  for (let idx = 0; idx < forward.length; idx++) {
+    array.splice(forward[idx], 0, spliced[idx]);
+  }
+}
+

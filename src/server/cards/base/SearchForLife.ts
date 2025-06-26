@@ -7,10 +7,10 @@ import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {max, played} from '../Options';
+import {searchForLife} from '../render/DynamicVictoryPoints';
+import {max} from '../Options';
+import {TITLES} from '../../inputs/titles';
 
 export class SearchForLife extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -23,17 +23,17 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard {
       resourceType: CardResource.SCIENCE,
       victoryPoints: 'special',
 
-      requirements: CardRequirements.builder((b) => b.oxygen(6, {max})),
+      requirements: {oxygen: 6, max},
       metadata: {
         cardNumber: '005',
         description: 'Oxygen must be 6% or less.',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 M€ to reveal the top card of the draw deck. If that card has a microbe tag, add a science resource here.', (eb) => {
-            eb.megacredits(1).startAction.microbes(1, {played}).asterix().nbsp.colon().nbsp.science();
+            eb.megacredits(1).startAction.tag(Tag.MICROBE).asterix().nbsp.colon().nbsp.resource(CardResource.SCIENCE);
           }).br;
           b.vpText('3 VPs if you have one or more science resources here.');
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.searchForLife(),
+        victoryPoints: searchForLife(),
       },
     });
   }
@@ -45,28 +45,21 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard {
     return 0;
   }
   public canAct(player: IPlayer): boolean {
-    return player.canAfford(1);
+    return player.canAfford(1) && player.game.projectDeck.canDraw(1);
   }
+
   public action(player: IPlayer) {
-    player.game.defer(
-      new SelectPaymentDeferred(
-        player,
-        1,
-        {
-          title: 'Select how to pay for action',
-          afterPay: () => {
-            const topCard = player.game.projectDeck.draw(player.game);
+    player.game.defer(new SelectPaymentDeferred(player, 1, {title: TITLES.payForCardAction(this.name)}))
+      .andThen(() => {
+        const card = player.game.projectDeck.drawOrThrow(player.game);
+        player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(card, {tags: true}));
+        if (card.tags.includes(Tag.MICROBE)) {
+          player.addResourceTo(this, 1);
+          player.game.log('${0} found life!', (b) => b.player(player));
+        }
 
-            player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));
-
-            if (topCard.tags.includes(Tag.MICROBE)) {
-              player.addResourceTo(this, 1);
-              player.game.log('${0} found life!', (b) => b.player(player));
-            }
-
-            player.game.projectDeck.discard(topCard);
-          },
-        }));
+        player.game.projectDeck.discard(card);
+      });
 
     return undefined;
   }

@@ -4,10 +4,10 @@ import {SisterPlanetSupport} from '../../../src/server/cards/venusNext/SisterPla
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('MiningQuota', function() {
-  it('Should play', function() {
+describe('MiningQuota', () => {
+  it('Should play', () => {
     const card = new MiningQuota();
-    const [, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
     player.playedCards.push(new SisterPlanetSupport);
     expect(card.canPlay(player)).is.not.true;
 

@@ -4,10 +4,10 @@ import {Insulation} from '../../../src/server/cards/base/Insulation';
 import {Resource} from '../../../src/common/Resource';
 import {testGame} from '../../TestGame';
 
-describe('Insulation', function() {
-  it('Should play', function() {
+describe('Insulation', () => {
+  it('Should play', () => {
     const card = new Insulation();
-    const [, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     expect(card.canPlay(player)).is.false;
     player.production.add(Resource.HEAT, 1);

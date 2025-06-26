@@ -1,9 +1,10 @@
 import {IPlayer} from '../IPlayer';
 import {Units} from '../../common/Units';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 
 export type Options = {
-  cb?: () => void;
+  cb?(): void;
   log?: boolean;
 }
 

@@ -18,117 +18,148 @@ import {Contractor} from './Contractor';
 import {Entrepreneur} from './Entrepreneur';
 import {FullMoon} from '../moon/FullMoon';
 import {LunarMagnate} from '../moon/LunarMagnate';
-import {CosmicSettler} from './CosmicSettler';
-import {Botanist} from './Botanist';
-import {Coordinator} from './Coordinator';
-import {Zoologist} from './Zoologist';
-import {Manufacturer} from './Manufacturer';
-import {Adapter} from './Adapter';
+import {CosmicSettler} from './arabiaTerra/CosmicSettler';
+import {Botanist} from './arabiaTerra/Botanist';
+import {Promoter} from './arabiaTerra/Promoter';
+import {Zoologist} from './arabiaTerra/Zoologist';
+import {AManufacturer} from './arabiaTerra/Manufacturer';
+import {Forecaster} from './Forecaster';
 import {Edgedancer} from './Edgedancer';
-import {Hoarder} from './Hoarder';
+import {Visionary} from './Visionary';
 import {Naturalist} from './Naturalist';
 import {Voyager} from './Voyager';
 import {Curator} from './amazonisPlanitia/Curator';
-import {Engineer} from './amazonisPlanitia/Engineer';
-import {Historian} from './amazonisPlanitia/Historian';
+import {AmazonisEngineer} from './amazonisPlanitia/AmazonisEngineer';
 import {Tourist} from './amazonisPlanitia/Tourist';
 import {Biologist} from './terraCimmeria/Biologist';
-import {Economizer2} from './terraCimmeria/Economizer2';
-import {Politician} from './terraCimmeria/Politician';
+import {TPolitician} from './terraCimmeria/TPolitician';
 import {Urbanist} from './terraCimmeria/Urbanist';
 import {Warmonger} from './terraCimmeria/Warmonger';
-import {Zoologist2} from './amazonisPlanitia/Zoologist';
+import {AZoologist} from './amazonisPlanitia/AZoologist';
+import {Kingpin} from './underworld/Kingpin';
+import {EdgeLord} from './underworld/EdgeLord';
+import {Administrator} from './modular/Administrator';
+import {Constructor} from './modular/Constructor';
+import {Founder} from './modular/Founder';
+import {Highlander} from './modular/Highlander';
+import {Investor} from './modular/Investor';
+import {Landscaper} from './modular/Landscaper';
+import {Metropolist} from './modular/Metropolist';
+import {Mogul} from './modular/Mogul';
+import {Traveller} from './modular/Traveller';
+import {Electrician} from './modular/Electrician';
+import {Collector} from './modular/Collector';
+import {Politician} from './modular/Politician';
+import {Manufacturer} from './modular/Manufacturer';
+import {Incorporator} from './modular/Incorporator';
+import {Rugged} from './Rugged';
+import {BoardName} from '../../common/boards/BoardName';
+import {AwardName} from '../../common/ma/AwardName';
+import {MAManifest} from '../ma/MAManifest';
 
-export const THARSIS_AWARDS: Array<IAward> = [
-  new Landlord(),
-  new Scientist(),
-  new Banker(),
-  new Thermalist(),
-  new Miner(),
-];
-
-export const VENUS_AWARDS: Array<IAward> = [
-  new Venuphile(),
-];
-
-export const ELYSIUM_AWARDS: Array<IAward> = [
-  new Celebrity(),
-  new Industrialist(),
-  new DesertSettler(),
-  new EstateDealer(),
-  new Benefactor(),
-];
-
-export const HELLAS_AWARDS: Array<IAward> = [
-  new Cultivator(),
-  new Magnate(),
-  new SpaceBaron(),
-  new Excentric(),
-  new Contractor(),
-];
-
-export const ARES_AWARDS: Array<IAward> = [
-  new Entrepreneur(),
-];
-
-export const MOON_AWARDS: Array<IAward> = [
-  new FullMoon(),
-  new LunarMagnate(),
-];
-
-export const AMAZONIS_PLANITIA_AWARDS: Array<IAward> = [
-  new Curator(),
-  new Engineer(),
-  new Historian(),
-  new Tourist(),
-  new Zoologist2(),
-];
-
-export const ARABIA_TERRA_AWARDS = [
-  new CosmicSettler(),
-  new Botanist(),
-  new Coordinator(),
-  new Zoologist(),
-  new Manufacturer(),
-];
-
-export const TERRA_CIMMERIA_AWARDS: Array<IAward> = [
-  new Biologist(),
-  new Economizer2(),
-  new Politician(),
-  new Urbanist(),
-  new Warmonger(),
-];
-
-export const VASTITAS_BOREALIS_AWARDS: Array<IAward> = [
-  new Adapter(),
-  new Edgedancer(),
-  new Hoarder(),
-  new Naturalist(),
-  new Voyager(),
-];
-
-export const ALL_AWARDS: Array<IAward> = [
-  ...THARSIS_AWARDS,
-  ...ELYSIUM_AWARDS,
-  ...HELLAS_AWARDS,
-  ...VENUS_AWARDS,
-  ...ARES_AWARDS,
-  ...MOON_AWARDS,
-  ...AMAZONIS_PLANITIA_AWARDS,
-  ...ARABIA_TERRA_AWARDS,
-  ...TERRA_CIMMERIA_AWARDS,
-  ...VASTITAS_BOREALIS_AWARDS,
-];
-
-export namespace Awards {
-  export const ALL = ALL_AWARDS;
-
-  export function getByName(name: string): IAward {
-    const award = ALL_AWARDS.find((a) => a.name === name);
-    if (award) {
-      return award;
+export const awardManifest: MAManifest<AwardName, IAward> = {
+  all: {
+    'Landlord': {Factory: Landlord},
+    'Scientist': {Factory: Scientist},
+    'Banker': {Factory: Banker},
+    'Thermalist': {Factory: Thermalist},
+    'Miner': {Factory: Miner},
+    'Celebrity': {Factory: Celebrity},
+    'Industrialist': {Factory: Industrialist},
+    'Desert Settler': {Factory: DesertSettler},
+    'Estate Dealer': {Factory: EstateDealer},
+    'Benefactor': {Factory: Benefactor},
+    'Cultivator': {Factory: Cultivator},
+    'Excentric': {Factory: Excentric},
+    'Magnate': {Factory: Magnate},
+    'Space Baron': {Factory: SpaceBaron},
+    'Contractor': {Factory: Contractor},
+    'Venuphile': {Factory: Venuphile, compatibility: 'venus'},
+    'Entrepreneur': {Factory: Entrepreneur, compatibility: 'ares'},
+    'Full Moon': {Factory: FullMoon, compatibility: 'moon'},
+    'Lunar Magnate': {Factory: LunarMagnate, compatibility: 'moon'},
+    'Curator': {Factory: Curator},
+    'A. Engineer': {Factory: AmazonisEngineer},
+    'Promoter': {Factory: Promoter},
+    'Tourist': {Factory: Tourist},
+    'A. Zoologist': {Factory: AZoologist},
+    'Cosmic Settler': {Factory: CosmicSettler},
+    'Botanist': {Factory: Botanist},
+    'Zoologist': {Factory: Zoologist},
+    'A. Manufacturer': {Factory: AManufacturer},
+    'Biologist': {Factory: Biologist},
+    'T. Politician': {Factory: TPolitician, compatibility: 'turmoil'},
+    'Urbanist': {Factory: Urbanist},
+    'Warmonger': {Factory: Warmonger},
+    'Forecaster': {Factory: Forecaster},
+    'Edgedancer': {Factory: Edgedancer},
+    'Visionary': {Factory: Visionary},
+    'Naturalist': {Factory: Naturalist},
+    'Voyager': {Factory: Voyager},
+    'Kingpin': {Factory: Kingpin, compatibility: 'underworld'},
+    'EdgeLord': {Factory: EdgeLord, compatibility: 'underworld'},
+    'Administrator': {Factory: Administrator},
+    'Constructor': {Factory: Constructor, compatibility: 'colonies'},
+    'Founder': {Factory: Founder},
+    'Highlander': {Factory: Highlander},
+    'Investor': {Factory: Investor},
+    'Incorporator': {Factory: Incorporator},
+    'Landscaper': {Factory: Landscaper},
+    'Metropolist': {Factory: Metropolist},
+    'Mogul': {Factory: Mogul},
+    'Traveller': {Factory: Traveller},
+    'Collector': {Factory: Collector},
+    'Electrician': {Factory: Electrician},
+    'Manufacturer': {Factory: Manufacturer},
+    'Politician': {Factory: Politician, compatibility: 'turmoil'},
+    'Rugged': {Factory: Rugged, compatibility: 'ares'},
+  },
+  boards: {
+    [BoardName.THARSIS]: ['Landlord', 'Scientist', 'Banker', 'Thermalist', 'Miner'],
+    [BoardName.HELLAS]: ['Cultivator', 'Magnate', 'Space Baron', 'Excentric', 'Contractor'],
+    [BoardName.ELYSIUM]: ['Celebrity', 'Industrialist', 'Desert Settler', 'Estate Dealer', 'Benefactor'],
+    [BoardName.AMAZONIS]: ['Curator', 'A. Engineer', 'Promoter', 'Tourist', 'A. Zoologist'],
+    [BoardName.ARABIA_TERRA]: ['Cosmic Settler', 'Botanist', 'Promoter', 'Zoologist', 'A. Manufacturer'],
+    [BoardName.TERRA_CIMMERIA]: ['Biologist', 'Incorporator', 'T. Politician', 'Urbanist', 'Warmonger'],
+    [BoardName.VASTITAS_BOREALIS]: ['Forecaster', 'Edgedancer', 'Visionary', 'Naturalist', 'Voyager'],
+    [BoardName.UTOPIA_PLANITIA]: [/* 'Suburbian', 'Investor', 'Botanist', 'Incorporator', 'Metropolist' */],
+    [BoardName.VASTITAS_BOREALIS_NOVUS]: ['Traveller', 'Landscaper', 'Highlander', 'Promoter', 'Manufacturer'],
+    [BoardName.TERRA_CIMMERIA_NOVUS]: [],
+  },
+  expansions: {
+    venus: ['Venuphile'],
+    ares: ['Entrepreneur', 'Rugged'],
+    moon: ['Full Moon', 'Lunar Magnate'],
+    underworld: ['Kingpin', 'EdgeLord'],
+  },
+  modular: [
+    'Administrator',
+    'Collector',
+    'Constructor',
+    'Electrician',
+    'Founder',
+    'Highlander',
+    'Investor',
+    // 'Incorporator',
+    'Landscaper',
+    'Manufacturer',
+    'Metropolist',
+    'Mogul',
+    'Politician',
+    'Traveller',
+  ],
+  create: (name: string) => {
+    try {
+      return awardManifest.createOrThrow(name);
+    } catch (e) {
+      return undefined;
     }
-    throw new Error(`Award ${name} not found.`);
-  }
-}
+  },
+  createOrThrow(name: string) {
+    try {
+      return new awardManifest.all[name as AwardName].Factory();
+    } catch (e) {
+      throw new Error(`Award ${name} not found.`);
+    }
+  },
+} as const;

@@ -4,10 +4,10 @@ import {Ceres} from '../../../src/server/colonies/Ceres';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('RimFreighters', function() {
-  it('Should play', function() {
+describe('RimFreighters', () => {
+  it('Should play', () => {
     const card = new RimFreighters();
-    const [, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);
     const ceres = new Ceres();
     ceres.trade(player);

@@ -4,7 +4,6 @@ import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class OceanCity extends Card implements IProjectCard {
@@ -20,11 +19,10 @@ export class OceanCity extends Card implements IProjectCard {
         tile: {
           type: TileType.OCEAN_CITY,
           on: 'upgradeable-ocean',
-          title: 'Select space for Ocean City',
         },
       },
 
-      requirements: CardRequirements.builder((b) => b.oceans(6)),
+      requirements: {oceans: 6},
       metadata: {
         cardNumber: 'A20',
         renderData: CardRenderer.builder((b) => {

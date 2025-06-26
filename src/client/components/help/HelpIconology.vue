@@ -63,8 +63,8 @@
                 <div class="help-icon-label" v-i18n>Event</div>
             </div>
             <br>
-            <div class="help-icon-sublabel" v-i18n>
-                Fan Expansion Tags
+            <div>
+                <div class="help-icon-sublabel" v-i18n>Fan Expansion Tags</div>
             </div>
             <div>
                 <div class="resource-tag tag-moon"></div>
@@ -88,8 +88,8 @@
             <div>
                 <div class="help-icons-section-heading" v-i18n>Resources</div>
             </div>
-            <div class="help-icon-sublabel" v-i18n>
-                Standard Resources
+            <div>
+                <div class="help-icon-sublabel" v-i18n>Standard Resources</div>
             </div>
             <div>
                 <div class="help-icon-resource money"><div class="help-icon-mc-font">€</div></div>
@@ -115,8 +115,9 @@
                 <div class="help-icon-resource heat"></div>
                 <div class="help-icon-label" v-i18n>Heat</div>
             </div>
-            <div class="help-icon-sublabel" v-i18n>
-                Resources on Cards
+            <br>
+            <div>
+                <div class="help-icon-sublabel" v-i18n>Resources on Cards</div>
             </div>
             <div>
                 <div class="help-icon-resource animal"></div>

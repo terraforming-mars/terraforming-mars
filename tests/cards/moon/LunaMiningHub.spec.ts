@@ -1,21 +1,21 @@
-import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {expect} from 'chai';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaMiningHub} from '../../../src/server/cards/moon/LunaMiningHub';
-import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
 import {PlaceSpecialMoonTile} from '../../../src/server/moon/PlaceSpecialMoonTile';
 
 describe('LunaMiningHub', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: LunaMiningHub;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [game, player] = testGame(1, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new LunaMiningHub();
   });
@@ -27,29 +27,29 @@ describe('LunaMiningHub', () => {
     player.titanium = 1;
     player.steel = 1;
     moonData.miningRate = 5;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     player.titanium = 0;
     player.steel = 1;
     moonData.miningRate = 5;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 1;
     player.steel = 0;
     moonData.miningRate = 5;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 1;
     player.steel = 1;
     moonData.miningRate = 4;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {
     player.titanium = 3;
     player.steel = 3;
     expect(player.production.steel).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.miningRate).eq(0);
 
     card.play(player);
@@ -57,7 +57,7 @@ describe('LunaMiningHub', () => {
     expect(player.titanium).eq(2);
     expect(player.production.steel).eq(1);
     expect(player.production.titanium).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(moonData.miningRate).eq(1);
 
     const placeTileAction = game.deferredActions.pop() as PlaceSpecialMoonTile;
@@ -65,7 +65,7 @@ describe('LunaMiningHub', () => {
     placeTileAction.execute()!.cb(space);
 
     expect(moonData.miningRate).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
 
     expect(space.player).eq(player);
     expect(space.tile!.tileType).eq(TileType.LUNA_MINING_HUB);
@@ -74,7 +74,7 @@ describe('LunaMiningHub', () => {
 
   it('getVictoryPoints', () => {
     // This space has room to surround it with mines.
-    const space = moonData.moon.getSpace('m15');
+    const space = moonData.moon.getSpaceOrThrow('m15');
     space.tile = {tileType: TileType.LUNA_MINING_HUB, card: card.name};
 
     expect(card.getVictoryPoints(player)).eq(0);

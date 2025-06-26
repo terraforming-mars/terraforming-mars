@@ -6,7 +6,6 @@ import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {GainProduction} from '../../deferredActions/GainProduction';
@@ -19,7 +18,7 @@ export class PowerSupplyConsortium extends Card implements IProjectCard {
       tags: [Tag.POWER],
       cost: 5,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.POWER, 2)),
+      requirements: {tag: Tag.POWER, count: 2},
       metadata: {
         cardNumber: '160',
         renderData: CardRenderer.builder((b) => {
@@ -34,9 +33,14 @@ export class PowerSupplyConsortium extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.game.defer(
-      new DecreaseAnyProduction(player, Resource.ENERGY, {count: 1, stealing: true}));
-    player.game.defer(new GainProduction(player, Resource.ENERGY, {count: 1}));
+    const gainProduction = new GainProduction(player, Resource.ENERGY, {count: 1, log: false});
+    const decreaseAnyProduction = new DecreaseAnyProduction(player, Resource.ENERGY, {count: 1, stealing: true});
+    // If no player has energy production, then This Player must gain their energy production in order to lose it.
+    if (player.game.getPlayers().filter((player) => player.production.energy > 0).length === 0) {
+      player.game.defer(gainProduction).andThen(() => player.game.defer(decreaseAnyProduction));
+    } else {
+      player.game.defer(decreaseAnyProduction).andThen(() => player.game.defer(gainProduction));
+    }
     return undefined;
   }
 }

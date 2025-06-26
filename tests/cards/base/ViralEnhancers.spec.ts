@@ -5,22 +5,22 @@ import {Birds} from '../../../src/server/cards/base/Birds';
 import {EcologicalZone} from '../../../src/server/cards/base/EcologicalZone';
 import {Moss} from '../../../src/server/cards/base/Moss';
 import {ViralEnhancers} from '../../../src/server/cards/base/ViralEnhancers';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('ViralEnhancers', function() {
+describe('ViralEnhancers', () => {
   let card: ViralEnhancers;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ViralEnhancers();
     [game, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
 
     const ants = new Ants();
@@ -47,7 +47,7 @@ describe('ViralEnhancers', function() {
     expect(player.plants).to.eq(2);
   });
 
-  it('Should play for each tag', function() {
+  it('Should play for each tag', () => {
     card.play(player);
 
     const ecologicalZone = new EcologicalZone();

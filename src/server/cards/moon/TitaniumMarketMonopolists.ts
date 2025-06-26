@@ -1,10 +1,8 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
 import {MarketCard} from './MarketCard';
-import {multiplier} from '../Options';
 
 export class TitaniumMarketMonopolists extends MarketCard {
   constructor() {
@@ -17,13 +15,13 @@ export class TitaniumMarketMonopolists extends MarketCard {
         type: CardType.ACTIVE,
         cost: 21,
 
-        requirements: CardRequirements.builder((b) => b.miningRate(3)),
+        requirements: {miningRate: 3},
         metadata: {
           description: 'Requires the mining rate to be 3 or higher.',
           cardNumber: 'M29',
           renderData: CardRenderer.builder((b) => {
             b.action('Spend 2X M€ to gain X titanium [max 8 M€]', (eb) => {
-              eb.megacredits(2, {multiplier}).startAction.text('X').titanium(1).asterix();
+              eb.megacredits(1, {text: '2x'}).startAction.text('X').titanium(1).asterix();
             }).br;
             b.or().br;
             b.action('Spend X titanium to gain 4X M€ [max 4 titanium].', (eb) => {

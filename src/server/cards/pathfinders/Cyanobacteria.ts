@@ -24,7 +24,7 @@ export class Cyanobacteria extends Card implements IProjectCard {
         cardNumber: 'Pf27',
         renderData: CardRenderer.builder((b) => {
           b.oxygen(1).br;
-          b.microbes(1).asterix().slash().oceans(1).br;
+          b.resource(CardResource.MICROBE).asterix().slash().oceans(1).br;
         }),
         description: 'Raise the oxygen level 1%. For every ocean tile, add a microbe to ANY card.',
       },

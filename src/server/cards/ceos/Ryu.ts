@@ -8,7 +8,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {ALL_RESOURCES, Resource} from '../../../common/Resource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectAmount} from '../../inputs/SelectAmount';
-import {newMessage} from '../../logs/MessageBuilder';
+import {message} from '../../logs/MessageBuilder';
 
 export class Ryu extends CeoCard {
   constructor() {
@@ -31,7 +31,6 @@ export class Ryu extends CeoCard {
     if (!super.canAct(player)) {
       return false;
     }
-    // I'm not using player.canReduceAnyProduction here as that cares about solo players
     return player.production.megacredits +
               player.production.steel +
               player.production.titanium +
@@ -45,7 +44,7 @@ export class Ryu extends CeoCard {
     const choices = new OrOptions();
 
     ALL_RESOURCES.filter((r) => this.productionIsDecreasable(player, r)).forEach((resourceToDecrease) => {
-      const selectOption = new SelectOption(newMessage('Decrease ${0} production', (b) => b.string(resourceToDecrease)), 'Select', () => {
+      const selectOption = new SelectOption(message('Decrease ${0} production', (b) => b.string(resourceToDecrease))).andThen(() => {
         // M€ production can go down to -5
         let decreasable = player.production.get(resourceToDecrease);
         if (resourceToDecrease === Resource.MEGACREDITS) decreasable += 5;
@@ -54,22 +53,21 @@ export class Ryu extends CeoCard {
         return new SelectAmount(
           `Select amount of ${resourceToDecrease} production to decrease`,
           'Decrease',
-          (amount: number) => {
-            const productionToIncrease =
-              ALL_RESOURCES.filter((res) => res !== resourceToDecrease)
-                .map((res) => new SelectOption(newMessage('Increase ${0} production', (b) => b.string(res)), 'Select', () => {
-                  player.production.add(resourceToDecrease, -amount, {log: true});
-                  // player.production.adjust()
-                  player.production.add(res, amount, {log: true});
-                  return undefined;
-                }));
-
-            return new OrOptions(...productionToIncrease);
-          },
           1,
           maxDecreasableAmt,
           true,
-        );
+        ).andThen((amount) => {
+          const productionToIncrease =
+            ALL_RESOURCES.filter((res) => res !== resourceToDecrease)
+              .map((res) => new SelectOption(message('Increase ${0} production', (b) => b.string(res))).andThen(() => {
+                player.production.add(resourceToDecrease, -amount, {log: true});
+                // player.production.adjust()
+                player.production.add(res, amount, {log: true});
+                return undefined;
+              }));
+
+          return new OrOptions(...productionToIncrease);
+        });
       });
 
       choices.options.push(selectOption);

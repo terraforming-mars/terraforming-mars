@@ -3,29 +3,29 @@ import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {CorroderSuits} from '../../../src/server/cards/venusNext/CorroderSuits';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {FloaterUrbanism} from '../../../src/server/cards/pathfinders/FloaterUrbanism';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {NitriteReducingBacteria} from '../../../src/server/cards/base/NitriteReducingBacteria';
 import {testGame} from '../../TestGame';
 
-describe('CorroderSuits', function() {
+describe('CorroderSuits', () => {
   let card: CorroderSuits;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CorroderSuits();
     [game, player] = testGame(2);
   });
 
-  it('Should play - no targets', function() {
+  it('Should play - no targets', () => {
     card.play(player);
     expect(player.production.megacredits).to.eq(2);
   });
 
-  it('Should play - single target', function() {
+  it('Should play - single target', () => {
     const aerialMappers = new AerialMappers(); // Venus tag with Floaters
     player.playedCards.push(aerialMappers);
 
@@ -36,12 +36,12 @@ describe('CorroderSuits', function() {
     expect(player.production.megacredits).to.eq(2);
   });
 
-  it('Should play - multiple targets', function() {
+  it('Should play - multiple targets', () => {
     const aerialMappers = new AerialMappers(); // Venus tag with Floaters
     const dirigibles = new Dirigibles(); // Venus tag with Floaters
     player.playedCards.push(aerialMappers, dirigibles);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
 
     const selectCard = cast(player.popWaitingFor(), SelectCard);
@@ -53,7 +53,7 @@ describe('CorroderSuits', function() {
     expect(player.production.megacredits).to.eq(2);
   });
 
-  it('Should play - specialized resource type', function() {
+  it('Should play - specialized resource type', () => {
     const floaterUrbanism = new FloaterUrbanism(); // Card from a fan expansion with a Venus tag and special resource type.
     player.playedCards.push(floaterUrbanism);
 
@@ -70,7 +70,7 @@ describe('CorroderSuits', function() {
     const nitriteReducingBacteria = new NitriteReducingBacteria(); // Microbe tag with microbes
     player.playedCards.push(aerialMappers, dirigibles, nitriteReducingBacteria);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
 
     const selectCard = cast(player.popWaitingFor(), SelectCard);

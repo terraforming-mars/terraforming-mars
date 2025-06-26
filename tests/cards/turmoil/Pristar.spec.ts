@@ -2,13 +2,13 @@ import {expect} from 'chai';
 import {Pristar} from '../../../src/server/cards/turmoil/Pristar';
 import {testGame} from '../../TestGame';
 
-describe('Pristar', function() {
-  it('Should play', function() {
+describe('Pristar', () => {
+  it('Should play', () => {
     const card = new Pristar();
     const [game, player] = testGame(2);
 
     const play = card.play(player);
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     expect(play).is.undefined;
     player.megaCredits = 10;
     game.increaseTemperature(player, 1);

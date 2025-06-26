@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {TestPlayer} from '../TestPlayer';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {testGame} from '../TestGame';
 import {addGreenery, addCity, cast, runAllActions} from '../TestingUtils';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {NaturalPreserveAres} from '../../src/server/cards/ares/NaturalPreserveAres';
-import {EmptyBoard} from '../ares/EmptyBoard';
+import {EmptyBoard} from '../testing/EmptyBoard';
 import {Networker} from '../../src/server/milestones/Networker';
 
 describe('Networker', () => {
@@ -13,7 +13,7 @@ describe('Networker', () => {
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     [game, player, player2, player3] = testGame(3, {aresExtension: true, aresHazards: false});
@@ -28,13 +28,13 @@ describe('Networker', () => {
       networker.getScore(player3)];
   }
 
-  it('Takes action, Networker Milestone does not get a benefit', function() {
+  it('Takes action, Networker Milestone does not get a benefit', () => {
     // Place a tile that grants 1MC adjacency bonuses
     const naturalPreserveAres = new NaturalPreserveAres();
     naturalPreserveAres.play(player2);
     runAllActions(game);
     const action = cast(player2.popWaitingFor(), SelectSpace);
-    const naturalPreserveSpace = action.availableSpaces[0];
+    const naturalPreserveSpace = action.spaces[0];
     action.cb(naturalPreserveSpace);
 
     expect(scores()).deep.eq([0, 0, 0]);

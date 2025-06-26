@@ -23,15 +23,8 @@ export class CityStandardProject extends StandardProjectCard {
     });
   }
 
-  protected override discount(player: IPlayer): number {
-    if (player.playedCards.find((card) => card.name === CardName.PREFABRICATION_OF_HUMAN_HABITATS)) {
-      return 2 + super.discount(player);
-    }
-    return super.discount(player);
-  }
-
   public override canPayWith(player: IPlayer) {
-    if (player.playedCards.find((card) => card.name === CardName.PREFABRICATION_OF_HUMAN_HABITATS)) {
+    if (player.getPlayedCard(CardName.PREFABRICATION_OF_HUMAN_HABITATS)) {
       return {steel: true};
     } else {
       return {};
@@ -39,7 +32,11 @@ export class CityStandardProject extends StandardProjectCard {
   }
 
   public override canAct(player: IPlayer): boolean {
-    return super.canAct(player) && player.game.board.getAvailableSpacesForCity(player).length > 0;
+    // This is pricey because it forces calling canPlayOptions twice.
+    if (player.game.board.getAvailableSpacesForCity(player, this.canPlayOptions(player)).length === 0) {
+      return false;
+    }
+    return super.canAct(player);
   }
 
   actionEssence(player: IPlayer): void {

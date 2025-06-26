@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {AquiferPumping, OCEAN_COST} from '../../../src/server/cards/base/AquiferPumping';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {cast, maxOutOceans} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Phase} from '../../../src/common/Phase';
@@ -9,21 +9,21 @@ import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {testGame} from '../../TestGame';
 
-describe('AquiferPumping', function() {
+describe('AquiferPumping', () => {
   let card: AquiferPumping;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AquiferPumping();
     [game, player] = testGame(2);
   });
 
-  it('Should play', function() {
-    expect(card.play(player)).is.undefined;
+  it('Should play', () => {
+    cast(card.play(player), undefined);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.megaCredits = OCEAN_COST;
     const action = card.action(player);
     cast(action, undefined);
@@ -31,20 +31,19 @@ describe('AquiferPumping', function() {
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('Cannot act if not enough to pay', function() {
+  it('Cannot act if not enough to pay', () => {
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Can use steel to pay', function() {
+  it('Can use steel to pay', () => {
     player.megaCredits = OCEAN_COST - 2;
     expect(card.canAct(player)).is.not.true;
     player.steel = 1;
     expect(card.canAct(player)).is.true;
   });
 
-  it('Cannot act if cannot afford reds tax', function() {
-    const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, {turmoilExtension: true});
+  it('Cannot act if cannot afford reds tax', () => {
+    [game, player] = testGame(1, {turmoilExtension: true});
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -64,9 +63,8 @@ describe('AquiferPumping', function() {
     expect(card.canAct(player)).is.true;
   });
 
-  it('Steel does not satisfy the reds tax', function() {
-    const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, {turmoilExtension: true});
+  it('Steel does not satisfy the reds tax', () => {
+    [game, player] = testGame(1, {turmoilExtension: true});
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -84,7 +82,7 @@ describe('AquiferPumping', function() {
     expect(card.canAct(player)).is.false;
   });
 
-  it('Can act if can pay even after oceans are maxed', function() {
+  it('Can act if can pay even after oceans are maxed', () => {
     maxOutOceans(player);
     player.megaCredits = 8;
 

@@ -1,18 +1,16 @@
 import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
-import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Size} from '../../../common/cards/render/Size';
-import {Card} from '../Card';
 import {all} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class LunaFirstIncorporated extends Card implements ICorporationCard {
+export class LunaFirstIncorporated extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.LUNA_FIRST_INCORPORATED,
       tags: [Tag.MOON],
       startingMegaCredits: 40,
@@ -25,7 +23,7 @@ export class LunaFirstIncorporated extends Card implements ICorporationCard {
       metadata: {
         // description: 'You start with 40 M€, 2 steel, and 2 titanium.',
         description: 'You start with 40 M€, 1 steel, and 1 titanium.',
-        cardNumber: '',
+        cardNumber: 'MC6',
         renderData: CardRenderer.builder((b) => {
           // b.megacredits(40).steel(2).titanium(2).br;
           b.megacredits(40).steel(1).titanium(1).br;

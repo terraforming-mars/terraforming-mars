@@ -1,18 +1,17 @@
 import {CardName} from '../../../common/cards/CardName';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../../turmoil/Turmoil';
+import {digit} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class TempestConsultancy extends Card implements ICorporationCard {
+export class TempestConsultancy extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.TEMPEST_CONSULTANCY,
       tags: [Tag.MOON],
       startingMegaCredits: 37,
@@ -24,11 +23,11 @@ export class TempestConsultancy extends Card implements ICorporationCard {
 
       metadata: {
         description: 'You start with 37 M€. As your first action, place 2 delegates in one party.',
-        cardNumber: '',
+        cardNumber: 'MC2',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(37).delegates(1).delegates(1).br;
           b.action('Place 1 delegate in any party for every 5 Moon tags you have [max 3.]', (eb) => {
-            eb.empty().startAction.delegates(1).text('(max 3)', Size.SMALL).slash().text('5 ').moon();
+            eb.empty().startAction.delegates(1).text('(max 3)', Size.SMALL).slash().tag(Tag.MOON, {amount: 5, digit});
           }).br;
           b.effect('When your delegate becomes the chairman, increase your TR 1 step.', (eb) => {
             eb.chairman().startEffect.tr(1);
@@ -38,7 +37,7 @@ export class TempestConsultancy extends Card implements ICorporationCard {
     });
   }
 
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     const title = 'Tempest Consultancy first action - Select where to send two delegates';
     player.game.defer(new SendDelegateToArea(player, title, {count: 2}));
 
@@ -46,13 +45,13 @@ export class TempestConsultancy extends Card implements ICorporationCard {
   }
 
   public canAct(player: IPlayer) {
-    return player.tags.count(Tag.MOON) >= 5 && Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id) > 0;
+    return player.tags.count(Tag.MOON) >= 5 && Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player) > 0;
   }
 
   public action(player: IPlayer) {
     let count = Math.floor(player.tags.count(Tag.MOON) / 5);
     count = Math.min(count, 3);
-    count = Math.min(count, Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id));
+    count = Math.min(count, Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player));
     if (count > 0) {
       player.game.defer(new SendDelegateToArea(
         player,

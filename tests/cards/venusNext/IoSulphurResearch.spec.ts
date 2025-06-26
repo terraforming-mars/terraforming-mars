@@ -3,10 +3,10 @@ import {IoSulphurResearch} from '../../../src/server/cards/venusNext/IoSulphurRe
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('IoSulphurResearch', function() {
-  it('Should play', function() {
+describe('IoSulphurResearch', () => {
+  it('Should play', () => {
     const card = new IoSulphurResearch();
-    const [, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     cast(card.play(player), undefined);
     expect(player.cardsInHand).has.lengthOf(1);

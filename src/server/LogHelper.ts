@@ -1,8 +1,9 @@
 import {CardName} from '../common/cards/CardName';
+import {Resource} from '../common/Resource';
 import {IPlayer} from './IPlayer';
 import {ICard} from './cards/ICard';
 import {Space} from './boards/Space';
-import {TileType} from '../common/TileType';
+import {TileType, tileTypeToString} from '../common/TileType';
 import {IColony} from './colonies/IColony';
 import {Logger} from './logs/Logger';
 
@@ -30,7 +31,7 @@ export class LogHelper {
   }
 
   static logTilePlacement(player: IPlayer, space: Space, tileType: TileType) {
-    this.logBoardTileAction(player, space, TileType.toString(tileType) + ' tile');
+    this.logBoardTileAction(player, space, tileTypeToString[tileType] + ' tile');
   }
 
   static logBoardTileAction(player: IPlayer, space: Space, description: string, action: string = 'placed') {
@@ -61,7 +62,7 @@ export class LogHelper {
     player.game.log('${0} raised the Venus scale ${1} step(s)', (b) => b.player(player).number(steps));
   }
 
-  static logDiscardedCards(logger: Logger, cards: Array<ICard> | Array<CardName>) {
+  static logDiscardedCards(logger: Logger, cards: ReadonlyArray<ICard> | ReadonlyArray<CardName>) {
     logger.log('${0} card(s) were discarded', (b) => {
       b.rawString(cards.length.toString());
       for (const card of cards) {
@@ -74,7 +75,7 @@ export class LogHelper {
     });
   }
 
-  static logDrawnCards(player: IPlayer, cards: Array<ICard> | Array<CardName>, privateMessage: boolean = false) {
+  static logDrawnCards(player: IPlayer, cards: ReadonlyArray<ICard> | ReadonlyArray<CardName>, privateMessage: boolean = false) {
     // If |this.count| equals 3, for instance, this generates "${0} drew ${1}, ${2} and ${3}"
     let message = '${0} drew ';
     if (cards.length === 0) {
@@ -107,5 +108,9 @@ export class LogHelper {
         }
       }
     }, options);
+  }
+
+  static logStealFromNeutralPlayer(player: IPlayer, resource: Resource, amount: number) {
+    player.game.log('${0} stole ${1} ${2} from the neutral player', (b) => b.player(player).number(amount).string(resource));
   }
 }

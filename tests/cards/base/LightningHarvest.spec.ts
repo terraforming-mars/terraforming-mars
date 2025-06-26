@@ -1,25 +1,24 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
-import {GeneRepair} from '../../../src/server/cards/base/GeneRepair';
 import {LightningHarvest} from '../../../src/server/cards/base/LightningHarvest';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('LightningHarvest', function() {
+describe('LightningHarvest', () => {
   let card: LightningHarvest;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new LightningHarvest();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
-  it('Can not play', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+  it('Can not play', () => {
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
-    player.playedCards.push(new GeneRepair(), new GeneRepair(), new GeneRepair());
-    expect(player.simpleCanPlay(card)).is.true;
+  it('Should play', () => {
+    player.tagsForTest = {science: 3};
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.production.energy).to.eq(1);

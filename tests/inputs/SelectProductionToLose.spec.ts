@@ -3,7 +3,7 @@ import {SelectProductionToLose} from '../../src/server/inputs/SelectProductionTo
 import {Units} from '../../src/common/Units';
 import {TestPlayer} from '../TestPlayer';
 
-describe('SelectProductionToLose', function() {
+describe('SelectProductionToLose', () => {
   let player: TestPlayer;
   let selected: Units | undefined = undefined;
   const cb = (units: Units) => {
@@ -15,8 +15,8 @@ describe('SelectProductionToLose', function() {
     player = TestPlayer.BLUE.newPlayer();
   });
 
-  it('Simple', function() {
-    const selectProductionToLose = new SelectProductionToLose('', 2, player, cb);
+  it('Simple', () => {
+    const selectProductionToLose = new SelectProductionToLose('', 2, player).andThen(cb);
 
     selectProductionToLose.process({type: 'productionToLose', units: Units.of({megacredits: 2})}, player);
     expect(selected).deep.eq(Units.of({megacredits: 2}));

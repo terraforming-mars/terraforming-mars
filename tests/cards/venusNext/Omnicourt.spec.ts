@@ -3,34 +3,34 @@ import {Omnicourt} from '../../../src/server/cards/venusNext/Omnicourt';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('Omnicourt', function() {
-  it('Should play', function() {
+describe('Omnicourt', () => {
+  it('Should play', () => {
     const card = new Omnicourt();
-    const [, player] = testGame(2);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    const [/* game */, player] = testGame(2);
+    expect(card.canPlay(player)).is.not.true;
 
     player.tagsForTest = {venus: 1};
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
     player.tagsForTest = {earth: 1};
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
     player.tagsForTest = {jovian: 1};
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
     player.tagsForTest = {venus: 1, earth: 1};
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
     player.tagsForTest = {jovian: 1, earth: 1};
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
     player.tagsForTest = {venus: 1, jovian: 1};
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
     player.tagsForTest = {venus: 1, jovian: 1, earth: 1};
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     cast(card.play(player), undefined);
-    expect(player.getTerraformRating()).to.eq(22);
+    expect(player.terraformRating).to.eq(22);
   });
 });

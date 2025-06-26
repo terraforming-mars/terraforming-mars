@@ -27,15 +27,13 @@ export class MinorityRefuge extends Card implements IProjectCard {
     });
   }
 
-  public warning?: string;
-
   public override bespokeCanPlay(player: IPlayer): boolean {
     if (player.colonies.getPlayableColonies().length === 0) {
       return false;
     }
 
     const megaCreditsProduction = player.production.megacredits;
-    if (megaCreditsProduction === -4 && player.isCorporation(CardName.POSEIDON)) {
+    if (megaCreditsProduction === -4 && player.cardIsInEffect(CardName.POSEIDON)) {
       return true;
     } else if (megaCreditsProduction <= -4) {
       const lunaIsAvailable = player.game.colonies.some((colony) =>
@@ -46,7 +44,7 @@ export class MinorityRefuge extends Card implements IProjectCard {
       if (lunaIsAvailable === false) {
         return false;
       }
-      this.warning = 'You will only be able to build the colony on Luna.';
+      this.warnings.add('buildOnLuna');
     }
 
     return true;
@@ -61,10 +59,8 @@ export class MinorityRefuge extends Card implements IProjectCard {
         player, {
           title: 'Select colony for Minority Refuge',
           colonies: openColonies,
-          cb: () => {
-            player.production.add(Resource.MEGACREDITS, -2);
-          },
-        }));
+        }))
+      .andThen(() => player.production.add(Resource.MEGACREDITS, -2));
     return undefined;
   }
 }

@@ -3,7 +3,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class Heather extends Card implements IProjectCard {
@@ -19,9 +18,9 @@ export class Heather extends Card implements IProjectCard {
         stock: {plants: 1},
       },
 
-      requirements: CardRequirements.builder((b) => b.temperature(-14)),
+      requirements: {temperature: -14},
       metadata: {
-        cardNumber: '178',
+        cardNumber: '88',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(1)).plants(1);
         }),

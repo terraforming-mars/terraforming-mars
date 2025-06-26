@@ -1,33 +1,45 @@
+import * as fs from 'fs';
+import * as path from 'path';
+import type * as sqlite3 from 'sqlite3';
+
 import {GameIdLedger, IDatabase} from './IDatabase';
 import {IGame, Score} from '../IGame';
 import {GameOptions} from '../game/GameOptions';
 import {GameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
-
-import sqlite3 = require('sqlite3');
-import {RunResult} from 'sqlite3';
 import {daysAgoToSeconds} from './utils';
 import {MultiMap} from 'mnemonist';
-const path = require('path');
-const fs = require('fs');
-const dbFolder = path.resolve(process.cwd(), './db');
-const dbPath = path.resolve(dbFolder, 'game.db');
+import {Session, SessionId} from '../auth/Session';
+import {toID} from '../../common/utils/utils';
 
 export const IN_MEMORY_SQLITE_PATH = ':memory:';
 
 export class SQLite implements IDatabase {
-  protected db: sqlite3.Database;
+  private _db: sqlite3.Database | undefined;
 
-  constructor(private filename: string = dbPath, private throwQuietFailures: boolean = false) {
-    if (filename !== IN_MEMORY_SQLITE_PATH) {
+  protected get db(): sqlite3.Database {
+    if (this._db === undefined) {
+      throw new Error('attempt to get db before initialize');
+    }
+    return this._db;
+  }
+
+  constructor(private filename: undefined | string = undefined, private throwQuietFailures: boolean = false) {
+  }
+
+  public async initialize(): Promise<void> {
+    const {Database} = await import('sqlite3');
+    const dbFolder = path.resolve(process.cwd(), './db');
+    const dbPath = path.resolve(dbFolder, 'game.db');
+    if (this.filename === undefined) {
+      this.filename = dbPath;
+    }
+    if (this.filename !== IN_MEMORY_SQLITE_PATH) {
       if (!fs.existsSync(dbFolder)) {
         fs.mkdirSync(dbFolder);
       }
     }
-    this.db = new sqlite3.Database(filename);
-  }
-
-  public async initialize(): Promise<void> {
+    this._db = new Database(String(this.filename));
     await this.asyncRun('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default (strftime(\'%s\', \'now\')), PRIMARY KEY (game_id, save_id))');
     await this.asyncRun('CREATE TABLE IF NOT EXISTS participants(game_id varchar, participant varchar, PRIMARY KEY (game_id, participant))');
     await this.asyncRun('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
@@ -37,6 +49,14 @@ export class SQLite implements IDatabase {
       completed_time timestamp not null default (strftime('%s', 'now')),
       PRIMARY KEY (game_id))`);
     await this.asyncRun('DROP TABLE IF EXISTS purges');
+
+    await this.asyncRun(
+      `CREATE TABLE IF NOT EXISTS session(
+        session_id varchar not null,
+        data varchar not null,
+        expiration_time timestamp not null,
+        PRIMARY KEY (session_id)
+      )`);
   }
 
   public async getPlayerCount(gameId: GameId): Promise<number> {
@@ -52,20 +72,6 @@ export class SQLite implements IDatabase {
     const sql = 'SELECT distinct game_id game_id FROM games';
     const rows = await this.asyncAll(sql, []);
     return rows.map((row) => row.game_id);
-  }
-
-  // TODO(kberg): Remove repetition between this and getGameVersion.
-  // this is basically getGameVersion with save ID 0.
-  // This method has more content, so that has to be reconciled.
-  public async loadCloneableGame(gameId: GameId): Promise<SerializedGame> {
-    const sql = 'SELECT game_id, game FROM games WHERE game_id = ? AND save_id = 0';
-    const row: { game_id: GameId, game: any; } = await this.asyncGet(sql, [gameId]);
-    if (row === undefined || row.game_id === undefined || row.game === undefined) {
-      throw new Error(`Game ${gameId} not found`);
-    }
-
-    const json = JSON.parse(row.game);
-    return json;
   }
 
   saveGameResults(gameId: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
@@ -89,7 +95,6 @@ export class SQLite implements IDatabase {
     return JSON.parse(row.game);
   }
 
-  // TODO(kberg): throw an error if two game ids exist.
   public async getGameId(participantId: ParticipantId): Promise<GameId> {
     // Default sql is for player id;
     let sql = 'SELECT game_id from games, json_each(games.game, \'$.players\') e where json_extract(e.value, \'$.id\') = ?';
@@ -112,11 +117,10 @@ export class SQLite implements IDatabase {
   }
 
   public async getGameVersion(gameId: GameId, saveId: number): Promise<SerializedGame> {
-    const row: { game: any; } = await this.asyncGet(
-      'SELECT game FROM games WHERE game_id = ? and save_id = ?',
-      [gameId, saveId]);
-    if (row === undefined) {
-      throw new Error(`bad game id ${gameId}`);
+    const sql = 'SELECT game_id, game FROM games WHERE game_id = ? and save_id = ?';
+    const row: { game_id: GameId, game: any; } = await this.asyncGet(sql, [gameId, saveId]);
+    if (row === undefined || row.game_id === undefined || row.game === undefined) {
+      throw new Error(`Game ${gameId} not found`);
     }
     return JSON.parse(row.game);
   }
@@ -141,7 +145,14 @@ export class SQLite implements IDatabase {
     if (maxGameDays !== undefined) {
       const dateToSeconds = daysAgoToSeconds(maxGameDays, 0);
       const selectResult = await this.asyncAll('SELECT DISTINCT game_id game_id FROM games WHERE created_time < ? and status = \'running\'', [dateToSeconds]);
-      const gameIds = selectResult.map((row) => row.game_id);
+      let gameIds = selectResult.map((row) => row.game_id);
+      if (gameIds.length > 1000) {
+        console.log('Truncated purge to 1000 games.');
+        gameIds = gameIds.slice(0, 1000);
+      } else {
+        console.log(`${gameIds.length} games to be purged.`);
+      }
+
       if (gameIds.length > 0) {
         console.log(`About to purge ${gameIds.length} games`);
         const placeholders = gameIds.map(() => '?').join(', ');
@@ -174,7 +185,7 @@ export class SQLite implements IDatabase {
     }
   }
 
-  async compressCompletedGame(gameId: GameId): Promise<RunResult> {
+  async compressCompletedGame(gameId: GameId): Promise<sqlite3.RunResult> {
     const maxSaveId = await this.getMaxSaveId(gameId);
     return this.asyncRun('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [gameId, maxSaveId])
       .then(() => {
@@ -183,7 +194,7 @@ export class SQLite implements IDatabase {
   }
 
   async saveGame(game: IGame): Promise<void> {
-    const gameJSON = game.toJSON();
+    const gameJSON = JSON.stringify(game.serialize());
     // Insert
     await this.runQuietly(
       'INSERT INTO games (game_id, save_id, game, players) VALUES (?, ?, ?, ?) ON CONFLICT (game_id, save_id) DO UPDATE SET game = ?',
@@ -193,7 +204,7 @@ export class SQLite implements IDatabase {
     // when the database operation was an insert. (We should figure out why multiple saves occur and
     // try to stop them. But that's for another day.)
     if (game.lastSaveId === 0) {
-      const participantIds: Array<ParticipantId> = game.getPlayers().map((p) => p.id);
+      const participantIds: Array<ParticipantId> = game.getPlayers().map(toID);
       if (game.spectatorId) participantIds.push(game.spectatorId);
       try {
         await this.storeParticipants({gameId: game.id, participantIds: participantIds});
@@ -216,11 +227,11 @@ export class SQLite implements IDatabase {
   }
 
   public stats(): Promise<{[key: string]: string | number}> {
-    const size = this.filename === IN_MEMORY_SQLITE_PATH ? -1 : fs.statSync(this.filename).size;
+    const size = this.filename === IN_MEMORY_SQLITE_PATH ? -1 : fs.statSync(String(this.filename)).size;
 
     return Promise.resolve({
       type: 'SQLite',
-      path: this.filename,
+      path: String(this.filename),
       size_bytes: size,
     });
   }
@@ -245,12 +256,31 @@ export class SQLite implements IDatabase {
     return result;
   }
 
-  protected asyncRun(sql: string, params?: any): Promise<RunResult> {
+  public async createSession(session: Session): Promise<void> {
+    await this.asyncRun('INSERT INTO session (session_id, data, expiration_time) VALUES($1, $2, $3)', [session.id, JSON.stringify(session.data), session.expirationTimeMillis / 1000]);
+  }
+
+  public async deleteSession(sessionId: SessionId): Promise<void> {
+    await this.asyncRun('DELETE FROM session where session_id = $1', [sessionId]);
+  }
+
+  async getSessions(): Promise<Array<Session>> {
+    const selectResult = await this.asyncAll('SELECT session_id, data, expiration_time FROM session where expiration_time > ?', [Date.now() / 1000]);
+    return selectResult.map((row) => {
+      return {
+        id: row.session_id,
+        data: JSON.parse(row.data),
+        expirationTimeMillis: row.expiration_time * 1000,
+      };
+    });
+  }
+
+  protected asyncRun(sql: string, params?: any): Promise<sqlite3.RunResult> {
     return new Promise((resolve, reject) => {
       // It is intentional that this is declared `function` and that the first
       // parameter is `this`.
       // See https://stackoverflow.com/questions/73523387/in-node-sqlite3-does-runs-first-callback-parameter-return-error
-      function cb(this: RunResult, err: Error | null) {
+      function cb(this: sqlite3.RunResult, err: Error | null) {
         if (err) {
           reject(err);
         } else {

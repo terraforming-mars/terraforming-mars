@@ -1,11 +1,12 @@
-import {IPlayer} from '../IPlayer';
+import {IPlayer, ResourceSource} from '../IPlayer';
 import {Resource} from '../../common/Resource';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 
 export type Options = {
   count?: number;
-  cb?: () => void;
   log?: boolean;
+  from?: ResourceSource;
 }
 
 export class GainResources extends DeferredAction {
@@ -24,8 +25,8 @@ export class GainResources extends DeferredAction {
     if (this.options.count === 0) {
       return undefined;
     }
-    this.player.stock.add(this.resource, this.options.count ?? 1, {log: this.options.log});
-    this.options.cb?.();
+    this.player.stock.add(this.resource, this.options.count ?? 1, {log: this.options.log, from: this.options.from});
+    this.cb(undefined);
     return undefined;
   }
 }

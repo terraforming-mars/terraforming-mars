@@ -3,7 +3,7 @@ import {testGame} from '../../TestGame';
 import {CoordinatedRaid} from '../../../src/server/cards/pathfinders/CoordinatedRaid';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Colony} from '../../../src/server/colonies/Colony';
 import {ColonyBenefit} from '../../../src/common/colonies/ColonyBenefit';
@@ -15,7 +15,11 @@ export class TestColony extends Colony {
   constructor() {
     super({
       name: 'TestColony' as ColonyName,
-      description: ['', '', ''],
+      description: {
+        buildBonus: '',
+        tradeBonus: '',
+        colonyBonus: '',
+      },
       buildType: ColonyBenefit.GAIN_RESOURCES,
       buildQuantity: [3, 3, 3],
       buildResource: Resource.TITANIUM,
@@ -30,13 +34,13 @@ export class TestColony extends Colony {
   }
 }
 
-describe('CoordinatedRaid', function() {
+describe('CoordinatedRaid', () => {
   let card: CoordinatedRaid;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CoordinatedRaid();
     [game, player, player2] = testGame(2, {
       coloniesExtension: true,
@@ -52,7 +56,7 @@ describe('CoordinatedRaid', function() {
     game.colonies = [game.colonies[0], new TestColony()];
   });
 
-  it('play', function() {
+  it('play', () => {
     const colony = game.colonies[1];
     colony.addColony(player2);
     colony.addColony(player2);
@@ -69,7 +73,7 @@ describe('CoordinatedRaid', function() {
     expect(player2.stock.asUnits()).deep.eq(Units.of({titanium: 6}));
   });
 
-  it('Coordinated Raid ignores Trade Envoys', function() {
+  it('Coordinated Raid ignores Trade Envoys', () => {
     player.colonies.tradeOffset += 2;
     const colony = game.colonies[1];
     colony.addColony(player2);

@@ -1,7 +1,8 @@
 import {IPlayer} from '../../IPlayer';
-import {isHazardTileType, TileType} from '../../../common/TileType';
+import {TileType} from '../../../common/TileType';
 import {SpaceType} from '../../../common/boards/SpaceType';
 import {BaseMilestone} from '../IMilestone';
+import {Board} from '../../boards/Board';
 
 export class TerraPioneer extends BaseMilestone {
   constructor() {
@@ -14,15 +15,10 @@ export class TerraPioneer extends BaseMilestone {
   public getScore(player: IPlayer): number {
     // Don't simplify this to "space.tile?.tileType !== TileType.OCEAN"
     // Because that will make Land Claim a valid space for Landlord
-    const marsSpaces = player.game.board.spaces.filter(
-      (space) => {
-        return space.tile !== undefined &&
-          isHazardTileType(space.tile.tileType) === false &&
-          space.tile.tileType !== TileType.OCEAN &&
-          space.spaceType !== SpaceType.COLONY &&
-          space.player === player;
-      },
-    ).length;
+    const marsSpaces = player.game.board.spaces
+      .filter(Board.ownedBy(player))
+      .filter(Board.hasRealTile)
+      .filter((space) => space.tile?.tileType !== TileType.OCEAN && space.spaceType !== SpaceType.COLONY).length;
 
     return marsSpaces;
   }

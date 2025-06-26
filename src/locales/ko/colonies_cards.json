@@ -17,9 +17,10 @@
     "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "조건: 보유한 지구 태그 2개 이상.) (이번 세대에, 자신이 사용하는 다음번 카드의 추진 비용 16MC 할인.",
 
     "Corona Extractor": "코로나 추출기",
+    "Requires 4 science tags. Increase your energy production 4 steps.": "조건: 보유한 과학 태그 4개 이상.) (에너지 생산력 4 증가",
 
     "Cryo-Sleep": "냉동수면",
-    "Effect: When you trade, you pay 1 less resource for it.": "지속효과: 무역 사업 행동 시, 비용으로 지불하는 자원 1개 할인.",
+    "Effect: When you trade, you pay 1 less resource for it.": "지속 효과: 무역 사업 행동 시, 비용으로 지불하는 자원 1개 할인.",
 
     "Earth Elevator": "지구 궤도 엘리베이터",
     "Increase your titanium production 3 steps.": "티타늄 생산력 3 증가.",
@@ -52,7 +53,6 @@
     "Place a colony.": "개척기지 1개 배치.",
 
     "Jovian Lanterns": "목성 궤도 등불",
-    "Action: Spend 1 titanium to add 2 floaters here.": "행동: 티타늄 자원 1개 소비해서 이 카드에 부양체 자원 2개 추가.",
     "1 VP per 2 floaters here.": "이 카드의 부양체 자원 2개당 승점 1점.",
     "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.": "조건: 보유한 목성 태그 1개 이상.) (테라포밍 등급 1TR 상승. 자신의 아무 카드 1장에 부양체 자원 2개 추가.",
 
@@ -74,7 +74,7 @@
     "Increase one colony tile track 1 step. Decrease another colony tile track 1 step.": "위성 타일 하나의 트랙 마커를 오른쪽으로 1칸 이동, 그 외 다른 위성 타일 하나의 트랙 마커를 왼쪽으로 1칸 이동.",
 
     "Martian Zoo": "화성 동물원",
-    "Effect: When you play an Earth tag, place an animal here.": "지속효과: 카드 사용 시, 그 카드의 지구 태그 수만큼 이 카드에 동물 자원 추가.",
+    "Effect: When you play an Earth tag, place an animal here.": "지속 효과: 카드 사용 시, 그 카드의 지구 태그 수만큼 이 카드에 동물 자원 추가.",
     "Action: Gain 1M€ per animal here.": "행동: 이 카드에 동물 자원 수만큼 M€ 획득.",
     "Requires 2 city tiles in play.": "조건: 아무 도시 타일 2장 이상.",
 
@@ -101,7 +101,7 @@
 
     "Red Spot Observatory": "대적반 관측소",
     "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": "행동: 이 카드에 부양체 자원 1개 추가, 또는 이 카드에 부양체 자원 1개 소비해서 카드 1장 획득.",
-    "Requires 3 science tags. Draw 2 cards.": "조건: .) (카드 2장 획득.",
+    "Requires 3 science tags. Draw 2 cards.": "조건: 보유한 과학 태그 3개 이상.) (카드 2장 획득.",
 
     "Refugee Camps": "난민 구호소",
     "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "행동: 메가크레딧 생산력 1 감소시켜서, 이 카드에 캠프 자원 1개 추가.",
@@ -113,6 +113,7 @@
     "Rim Freighters": "외곽 태양계 화물선",
 
     "Sky Docks": "공중 선착장",
+    "Effect: When you play a card, you pay 1 M€ less for it.": "지속 효과: 모든 카드의 추진 비용 1 메가크레딧 할인",
     "Requires 2 Earth tags. Gain 1 Trade Fleet.": "조건: 보유한 지구 태그 2개 이상.) (무역선단 1개 획득.",
 
     "Solar Probe": "태양 탐사선",
@@ -129,13 +130,16 @@
     "1VP per 2 colonies in play.": "배치된 아무 개척기지 2개당 승점 1점.",
 
     "Spin-off Department": "파생상품 개발부서",
-    "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "지속효과: 추진 비용의 기본값이 20M€ 이상인 카드를 추진할 때마다, 카드 1장 획득.",
+    "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "지속 효과: 추진 비용의 기본값이 20M€ 이상인 카드를 추진할 때마다, 카드 1장 획득.",
+    "Increase your M€ production 2 steps.": "메가크레딧 생산력 2 증가",
 
     "Sub-zero Salt Fish": "냉동저항성 물고기",
+    "Action: Add 1 animal to this card.": "행동: 이 카드 위에 동물 자원 1개 추가.",
     "1 VP per 2 animals on this card.": "이 카드의 동물 자원 2개당 승점 1점.",
     "Requires -6 C. Decrease any plant production 1 step.": "조건: 기온 -6 ℃ 이상.) (아무 1명의 식물 생산력 1 감소.",
 
     "Titan Air-scrapping": "타이탄 대기 감쇄",
+    "Action: Spend 1 titanium to add 2 floaters here.": "행동: 티타늄 자원 1개를 제거하고, 이 카드 위에 부양체 자원 2개 추가",
     "Action: Spend 2 floaters here to increase your TR 1 step.": "행동: 이 카드에 부양체 자원 2개 소비해서 테라포밍 등급 1TR 상승.",
 
     "Titan Floating Launch-pad": "타이탄 공중 발사대",
@@ -149,13 +153,13 @@
     "Trade Envoys": "무역 사절단",
 
     "Trading Colony": "무역형 개척기지",
-    "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "지속효과: 무역 사업 행동을 수행할 때마다, 먼저 해당 위성 타일의 트랙 마커를 오른쪽으로 한 칸 이동.",
+    "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "지속 효과: 무역 사업 행동을 수행할 때마다, 먼저 해당 위성 타일의 트랙 마커를 오른쪽으로 한 칸 이동.",
     "Place a colony": "개척기지 1개 배치.",
 
     "Urban Decomposers": "도시권 분해자 생물",
     "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "조건: 보유한 도시 타일 1장 및 개척기치 1개 이상.) (식물 생산력 1 증가. 자신의 아무 카드 1장에 미생물 자원 2개 추가.",
 
     "Warp Drive": "워프 드라이브",
-    "Effect: When you play a space card, you pay 4 M€ less for it.": "지속효과: 우주 카드 사용 시, 우주 태그 1개마다 4M€ 할인.",
+    "Effect: When you play a space card, you pay 4 M€ less for it.": "지속 효과: 우주 카드 사용 시, 우주 태그 1개마다 4M€ 할인.",
     "Requires 5 science tags.": "조건: 보유한 과학 태그 5개 이상."
 }

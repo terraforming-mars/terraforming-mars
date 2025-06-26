@@ -1,0 +1,165 @@
+{
+  "Applied Science": "Прикладна наука",
+  "Action: Remove 1 resource here to either add 1 resource to ANY CARD WITH A RESOURCE or gain 1 standard resource.": "Дія: Видалити 1 ресурс тут, щоб отримати 1 стандартний ресурс за вашим вибором або додати 1 ресурс на БУДЬ-ЯКУ КАРТКУ З РЕСУРСОМ.",
+  "Add 6 science resources here.": "Додайте 6 ресурсів тут.",
+
+  "Atmospheric Enhancers": "Атмосферні покращувачі",
+  "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "Ефект: Підвищте температуру, кисень або Венеру на 2 кроки. Розкрийте карти з колоди, поки не розкриєте 2 карти з плаваючим значком. Візьміть ці 2 карти в руку і відкиньте решту.",
+
+  "Colony Trade Hub": "Торговий центр колонії",
+  "Increase your energy production 1 step. Gain 2 titanium": "Підвищте виробництво енергії на 1 крок. Отримайте 3 титану.",
+  "Effect: When any colony is placed, gain 2 M€.": "Ефект: Коли розміщується колонія, отримайте 2 M€.",
+
+  "Corridors of Power": "Коридори влади",
+  "Effect: Each time you become party leader, draw 1 card.": "Ефект: Кожного разу, коли один з ваших делегатів стає лідером партії, візьміть карту.",
+  "Raise your TR 1 step and gain 4 M€": "Підвищте ваш TR на один крок. Отримайте 4 M€.",
+
+  "Focused Organization": "Спрямована організація",
+  "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource": "Дія: Відкиньте 1 карту і витратте 1 стандартний ресурс, щоб взяти 1 карту і отримати 1 стандартний ресурс.",
+  "Draw 1 card and gain 1 standard resource.": "Візьміть 1 карту і отримайте 1 стандартний ресурс.",
+
+  "Nobel Prize": "Нобелівська премія",
+  "Gain 2 M€. Draw 2 cards with requirements.": "Отримайте 2 M€. Візьміть 2 карти з вимогами.",
+
+  "Space Corridors": "Космічні коридори",
+  "Effect: When you play a Jovian, Earth, or Venus tag, you pay 2 M€ less for it.": "Ефект: Коли ви граєте карту з міткою Юпітера, Землі або Венери, ви платите на 2 M€ менше за неї.",
+
+  "Old Mining Colony": "Стара рудникова колонія",
+  "Increase your titanium production 1 step. Place 1 colony. Discard 1 card.": "Підвищте виробництво титану на 1 крок. Розмістіть 1 колонію. Відкиньте 1 карту.",
+
+  "Anti-desertification Techniques": "Техніки проти пустелезації",
+  "Gain 3 M€. Increase your plant production 1 step and your steel production 1 step.": "Отримайте 3 M€. Підвищте виробництво рослин на 1 крок і виробництво сталі на 1 крок.",
+
+  "Corporate Archives": "Корпоративні архіви",
+  "Look at the top 7 cards from the deck. Take 2 of them into hand and discard the other 5.": "Перегляньте верхні 7 карт з колоди. Візьміть 2 з них в руку і відкиньте інші 5.",
+  "Look at the top 7 cards from the deck.": "Перегляньте верхні 7 карт з колоди.",
+  "Take 2 of them into hand and discard the other 5.": "Візьміть 2 з них в руку і відкиньте інші 5.",
+  "Gain 13 M€": "Отримайте 13 M€",
+
+  "Double Down": "Подвоїти ставку",
+  "Copy your other prelude's direct effect.": "Скопіюйте прямий ефект вашого іншого прелюдію.",
+
+  "Giant Solar Collector": "Великий сонячний колектор",
+  "Increase your energy production 2 steps. Raise Venus 1 step.": "Підвищте виробництво енергії на 2 кроки. Підвищте Венеру на 1 крок.",
+
+  "Head Start": "Перевага на старті",
+  "GAIN 2 STEEL.": "Отримайте 2 сталі.",
+  "GAIN 2 M€ PER PROJECT CARD YOU HAVE IN HAND.": "Отримайте 2 M€ за кожну проектну карту, яку у вас є в руці.",
+  "IMMEDIATELY TAKE 2 ACTIONS.": "Негайно зробіть 2 дії.",
+
+  "Merger": "Злиття",
+  "Draw 4 corporation cards. Play one of them and discard the other 3. Then pay 42 M€.": "Візьміть 4 картки корпорації. Зіграйте одну з них і відкиньте інші 3. Потім заплатіть 42 M€.",
+
+  "New Partner": "Новий партнер",
+  "Raise your M€ production 1 step. Immediately draw 2 prelude cards. Play 1 of them, and discard the other.": "Підвищте виробництво M€ на 1 крок. Негайно візьміть 2 картки прелюдії. Зіграйте 1 з них і відкиньте іншу.",
+
+  "Allied Bank": "Об'єднані банки",
+  "Increase your M€ production 4 steps. Gain 3 M€.": "Збільште виробництво M€ на 4 кроки. Отримайте 3 M€.",
+
+  "Aquifer Turbines": "Аквіферні турбіни",
+  "Place an ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "Розмістіть океанську плиту. Збільште виробництво енергії на 2 кроки. Заплатіть 3 M€.",
+
+  "Biofuels": "Біопаливо",
+  "Increase your energy and plant production 1 step. Gain 2 plants.": "Збільште виробництво енергії та рослин на 1 крок. Отримайте 2 рослини.",
+
+  "Biolab": "Біолабораторія",
+  "Increase your plant production 1 step. Draw 3 cards.": "Збільште виробництво рослин на 1 крок. Візьміть 3 карти.",
+
+  "Biosphere Support": "Підтримка біосфери",
+  "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "Збільште виробництво рослин на 2 кроки. Зменште виробництво M€ на 1 крок.",
+
+  "Business Empire": "Бізнес-імперія",
+  "Increase your M€ production 6 steps. Pay 6 M€.": "Збільште виробництво M€ на 6 кроків. Заплатіть 6 M€.",
+
+  "Dome Farming": "Купольне сільське господарство",
+  "Increase your M€ production 2 steps and plant production 1 step.": "Збільште виробництво M€ на 2 кроки та виробництво рослин на 1 крок.",
+
+  "Donation": "Пожертва",
+  "Gain 21 M€.": "Отримайте 21 M€.",
+
+  "Early Settlement": "Раннє поселення",
+  "Increase your plant production 1 step. Place a city tile.": "Збільште виробництво рослин на 1 крок. Розмістіть плиту міста.",
+
+  "Ecology Experts": "Екологічні експерти",
+  "Increase your plant production 1 step. PLAY A CARD FROM HAND, IGNORING GLOBAL REQUIREMENTS.": "Збільште виробництво рослин на 1 крок. ЗІГРАЙТЕ КАРТУ З РУКИ, ІГНОРУЮЧИ ГЛОБАЛЬНІ ВИМОГИ.",
+
+  "Eccentric Sponsor": "Ексцентричний спонсор",
+  "Play a card from hand, reducing its cost by 25 M€": "Зіграйте карту з руки, зменшивши її вартість на 25 M€.",
+
+  "Experimental Forest": "Експериментальний ліс",
+  "Place 1 greenery tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Розмістіть 1 плиту зеленого ландшафту та підвищте рівень кисню на 1 крок. Розкрийте карти, поки не розкриєте дві карти з позначками рослин на них. Візьміть їх у руку та відкиньте решту.",
+
+  "Galilean Mining": "Галілейський розробник",
+  "Increase your titanium production 2 steps. Pay 5 M€.": "Збільште виробництво титану на 2 кроки. Заплатіть 5 M€.",
+
+  "Great Aquifer": "Великий аквіфер",
+  "Place 2 ocean tiles.": "Розмістіть 2 океанські плити.",
+
+  "Huge Asteroid": "Великий астероїд",
+  "Increase temperature 3 steps. Pay 5 M€.": "Збільште температуру на 3 кроки. Заплатіть 5 M€.",
+
+  "Io Research Outpost": "Дослідницька станція Іо",
+  "Increase your titanium production 1 step. Draw a card.": "Збільште виробництво титану на 1 крок. Візьміть карту.",
+
+  "Loan": "Позика",
+  "Gain 30 M€. Decrease your M€ production 2 steps.": "Отримайте 30 M€. Зменште виробництво M€ на 2 кроки.",
+
+  "Martian Industries": "Марсіанські промисловості",
+  "Increase your energy and steel production 1 step. Gain 6 M€.": "Збільште виробництво енергії та сталі на 1 крок. Отримайте 6 M€.",
+
+  "Metal-Rich Asteroid": "Металерудний астероїд",
+  "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "Збільште температуру на 1 крок. Отримайте 4 титану та 4 сталі.",
+
+  "Metals Company": "Металургійна компанія",
+  "Increase your M€, steel and titanium production 1 step.": "Збільште виробництво M€, сталі та титану на 1 крок.",
+
+  "Mining Operations": "Гірничі операції",
+  "Increase your steel production 2 steps. Gain 4 steel.": "Збільште виробництво сталі на 2 кроки. Отримайте 4 сталі.",
+
+  "Mohole": "Моголь",
+  "Increase your heat production 3 steps. Gain 3 heat.": "Збільште виробництво тепла на 3 кроки. Отримайте 3 тепла.",
+
+  "Mohole Excavation": "Могольна розробка",
+  "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": "Збільште виробництво сталі на 1 крок та виробництво тепла на 2 кроки. Отримайте 2 тепла.",
+
+  "Nitrogen Shipment": "Поставка азоту",
+  "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 M€.": "Збільште виробництво рослин на 1 крок. Збільште ваш РТ на 1 крок. Отримайте 5 M€.",
+
+  "Orbital Construction Yard": "Орбітальний будівельний двір",
+  "Increase your titanium production 1 step. Gain 4 titanium.": "Збільште виробництво титану на 1 крок. Отримайте 4 титану.",
+
+  "Polar Industries": "Полярні промисловості",
+  "Increase your heat production 2 steps. Place an ocean tile.": "Збільште виробництво тепла на 2 кроки. Розмістіть океанську плиту.",
+
+  "Power Generation": "Виробництво енергії",
+  "Increase your energy production 3 steps.": "Збільште виробництво енергії на 3 кроки.",
+
+  "Research Network": "Дослідницька мережа",
+  "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Збільште виробництво M€ на 1 крок. Візьміть 3 карти. Після того, як вона буде зіграна, коли ви виконуєте дію, дикий символ вважається будь-яким символом за вашим вибором.",
+
+  "Self-Sufficient Settlement": "Самодостатнє поселення",
+  "Increase your M€ production 2 steps. Place a city tile.": "Збільште виробництво M€ на 2 кроки. Розмістіть плиту міста.",
+
+  "Smelting Plant": "Завод з виплавки",
+  "Raise oxygen 2 steps. Gain 5 steel.": "Підвищте рівень кисню на 2 кроки. Отримайте 5 сталі.",
+
+  "Society Support": "Підтримка суспільства",
+  "Increase your plant, energy and heat production 1 step. Decrease M€ production 1 step.": "Збільште виробництво рослин, енергії та тепла на 1 крок. Зменште виробництво M€ на 1 крок.",
+
+  "Supplier": "Постачальник",
+  "Increase your energy production 2 steps. Gain 4 steel.": "Збільште виробництво енергії на 2 кроки. Отримайте 4 сталі.",
+
+  "Supply Drop": "Постачання",
+  "Gain 3 titanium, 8 steel and 3 plants.": "Отримайте 3 титану, 8 сталі та 3 рослини.",
+
+  "UNMI Contractor": "Підрядник ООНМІ",
+  "Increase your TR 3 steps. Draw a card.": "Збільште ваш РТ на 3 кроки. Візьміть карту.",
+
+  "Acquired Space Agency": "Придбана космічна агенція",
+  "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Отримайте 6 титану. Розкрийте карти, поки не розкриєте дві карти з позначками космосу. Візьміть їх у руку та відкиньте решту.",
+
+  "Add resource to card GHG Producing Bacteria": "Додайте ресурс на картку GHG Producing Bacteria",
+  "Add resource to card Fish": "Додайте ресурс на картку Fish",
+  "Add resource": "Додати ресурс",
+  "Gain plant": "Отримайте рослину"
+}

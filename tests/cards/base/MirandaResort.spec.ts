@@ -4,10 +4,10 @@ import {MirandaResort} from '../../../src/server/cards/base/MirandaResort';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('MirandaResort', function() {
-  it('Should play', function() {
+describe('MirandaResort', () => {
+  it('Should play', () => {
     const card = new MirandaResort();
-    const [/* skipped */, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     player.playedCards.push(new BusinessNetwork());
     cast(card.play(player), undefined);

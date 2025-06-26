@@ -1,21 +1,21 @@
 import {expect} from 'chai';
 import {LunarMagnate} from '../../src/server/moon/LunarMagnate';
-import {Game} from '../../src/server/Game';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {TestPlayer} from '../TestPlayer';
 import {TileType} from '../../src/common/TileType';
+import {testGame} from '../TestGame';
+import {IGame} from '../../src/server/IGame';
 
-describe('LunarMagnate', function() {
+describe('LunarMagnate', () => {
   let player: TestPlayer;
+  let game: IGame;
   let otherPlayer: TestPlayer;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    otherPlayer = TestPlayer.PINK.newPlayer();
-    Game.newInstance('gameid', [player, otherPlayer], player, {moonExpansion: true});
+    [game, player, otherPlayer] = testGame(2, {moonExpansion: true});
   });
 
-  it('Basic test', function() {
+  it('Basic test', () => {
     const award = new LunarMagnate();
     expect(award.getScore(player)).eq(0);
     MoonExpansion.addTile(player, 'm01', {tileType: TileType.MOON_MINE});
@@ -34,6 +34,19 @@ describe('LunarMagnate', function() {
     expect(award.getScore(otherPlayer)).eq(0);
     MoonExpansion.addTile(otherPlayer, 'm07', {tileType: TileType.MOON_MINE});
     expect(award.getScore(player)).eq(6);
+    expect(award.getScore(otherPlayer)).eq(1);
+  });
+
+  it('Comatible with Hostile Takeover', () => {
+    const award = new LunarMagnate();
+    MoonExpansion.addTile(player, 'm01', {tileType: TileType.MOON_MINE});
+
+    expect(award.getScore(player)).eq(1);
+    expect(award.getScore(otherPlayer)).eq(0);
+
+    MoonExpansion.spaces(game, undefined, {ownedBy: player})[0].coOwner = otherPlayer;
+
+    expect(award.getScore(player)).eq(1);
     expect(award.getScore(otherPlayer)).eq(1);
   });
 });

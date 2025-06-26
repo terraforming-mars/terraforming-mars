@@ -1,24 +1,22 @@
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Space} from '../../boards/Space';
 import {SpaceId} from '../../../common/Types';
 import {Resource} from '../../../common/Resource';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {moonHabitatTile} from '../render/DynamicVictoryPoints';
 import {Size} from '../../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {Card} from '../Card';
 import {all} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class TheGrandLunaCapitalGroup extends Card implements ICorporationCard {
+export class TheGrandLunaCapitalGroup extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.THE_GRAND_LUNA_CAPITAL_GROUP,
       tags: [Tag.CITY, Tag.MOON],
       startingMegaCredits: 32,
@@ -41,14 +39,14 @@ export class TheGrandLunaCapitalGroup extends Card implements ICorporationCard {
         cardNumber: 'MC7',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(32).titanium(1).moonHabitat({secondaryTag: AltSecondaryTag.MOON_HABITAT_RATE}).br;
-          b.effect('When you place a colony tile, gain 2 M€ for each adjacent colony tile.', (eb) => {
+          b.effect('When you place a habitat tile, gain 2 M€ for each adjacent habitat tile.', (eb) => {
             eb.moonHabitat({size: Size.SMALL, all}).moonHabitat({size: Size.SMALL}).asterix()
               .startEffect
               .megacredits(2).slash().moonHabitat({size: Size.SMALL, all});
           }).br,
           b.vpText('1 VP for each habitat tile adjacent to your habitat tiles.').br;
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.moonHabitatTile(1),
+        victoryPoints: moonHabitatTile(1),
       },
     });
   }

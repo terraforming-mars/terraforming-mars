@@ -22,11 +22,11 @@ export class DarksideObservatory extends Card implements IProjectCard, IActionCa
         cardNumber: 'M75',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.]', (ab) => {
-            ab.empty().startAction.science(1).asterix();
+            ab.empty().startAction.resource(CardResource.SCIENCE).asterix();
           }).br;
           b.or().br;
           b.action('Add 2 data to ANY card.', (ab) => {
-            ab.empty().startAction.data({amount: 2}).asterix();
+            ab.empty().startAction.resource(CardResource.DATA, 2).asterix();
           });
         }),
       },
@@ -38,7 +38,7 @@ export class DarksideObservatory extends Card implements IProjectCard, IActionCa
   }
 
   public canAct(player: IPlayer) {
-    return player.playedCards.some(this.include) || player.corporations.some(this.include);
+    return player.playedCards.some(this.include);
   }
 
   private addResource(card: ICard, player: IPlayer): void {
@@ -51,16 +51,13 @@ export class DarksideObservatory extends Card implements IProjectCard, IActionCa
   }
 
   public action(player: IPlayer) {
-    const playableCards = [
-      ...player.playedCards.filter((c) => this.include(c)),
-      ...player.corporations.filter((c) => this.include(c)),
-    ];
+    const playableCards = player.playedCards.filter((c) => this.include(c));
 
     return new SelectCard(
       'Select card to add EITHER 1 science resource OR 2 Data resources',
       'Add',
-      playableCards,
-      ([card]) => {
+      playableCards)
+      .andThen(([card]) => {
         this.addResource(card, player);
         return undefined;
       });

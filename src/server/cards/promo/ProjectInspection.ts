@@ -26,7 +26,7 @@ export class ProjectInspection extends Card implements IProjectCard {
 
   // This matches Viron.getActionCards.
   private getActionCards(player: IPlayer): Array<IActionCard & ICard> {
-    const result: Array<IActionCard & ICard> = [];
+    const result = [];
 
     for (const playedCard of player.tableau) {
       if (playedCard === this) {
@@ -38,7 +38,7 @@ export class ProjectInspection extends Card implements IProjectCard {
       if (isIHasCheckLoops(playedCard) && playedCard.getCheckLoops() >= 2) {
         continue;
       }
-      if (player.getActionsThisGeneration().has(playedCard.name) && playedCard.canAct(player)) {
+      if (player.actionsThisGeneration.has(playedCard.name) && playedCard.canAct(player)) {
         result.push(playedCard);
       }
     }
@@ -57,12 +57,11 @@ export class ProjectInspection extends Card implements IProjectCard {
     return new SelectCard<IActionCard & ICard>(
       'Perform an action from a played card again',
       'Take action',
-      actionCards,
-      ([card]) => {
+      actionCards)
+      .andThen(([card]) => {
         const foundCard = card;
         player.game.log('${0} used ${1} action with ${2}', (b) => b.player(player).card(foundCard).card(this));
         return foundCard.action(player);
-      },
-    );
+      });
   }
 }

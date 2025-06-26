@@ -27,8 +27,8 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
         cardNumber: 'X27',
         renderData: CardRenderer.builder((b) => {
           b.action('Add a microbe or animal to ANOTHER card.', (eb) => {
-            eb.empty().startAction.microbes(1).asterix();
-            eb.nbsp.or().nbsp.animals(1).asterix();
+            eb.empty().startAction.resource(CardResource.MICROBE).asterix();
+            eb.nbsp.or().nbsp.resource(CardResource.ANIMAL).asterix();
           }).br;
           b.plants(3).temperature(1).oceans(1);
         }),
@@ -53,9 +53,10 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
       return undefined;
     }
 
-    return new SelectCard('Select card to add microbe or animal', 'Add resource', availableCards, ([card]) => {
-      player.addResourceTo(card, {log: true});
-      return undefined;
-    });
+    return new SelectCard('Select card to add microbe or animal', 'Add resource', availableCards)
+      .andThen(([card]) => {
+        player.addResourceTo(card, {log: true});
+        return undefined;
+      });
   }
 }

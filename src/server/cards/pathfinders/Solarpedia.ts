@@ -5,7 +5,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {ActionCard} from '../ActionCard';
-import {CardRequirements} from '../requirements/CardRequirements';
 
 export class Solarpedia extends ActionCard implements IProjectCard {
   constructor() {
@@ -14,7 +13,7 @@ export class Solarpedia extends ActionCard implements IProjectCard {
       type: CardType.ACTIVE,
       tags: [Tag.SPACE],
       cost: 12,
-      requirements: CardRequirements.builder((b) => b.tag(Tag.VENUS).tag(Tag.EARTH).tag(Tag.MARS).tag(Tag.JOVIAN)),
+      requirements: [{tag: Tag.VENUS}, {tag: Tag.EARTH}, {tag: Tag.MARS}, {tag: Tag.JOVIAN}],
       resourceType: CardResource.DATA,
       victoryPoints: {resourcesHere: {}, per: 6},
 
@@ -30,9 +29,9 @@ export class Solarpedia extends ActionCard implements IProjectCard {
         cardNumber: 'Pf54',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 2 data to ANY card.', (ab) => {
-            ab.empty().startAction.data({amount: 2}).asterix();
+            ab.empty().startAction.resource(CardResource.DATA, 2).asterix();
           }).br;
-          b.data({amount: 2}).asterix();
+          b.resource(CardResource.DATA, 2).asterix();
         }),
         description: 'Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.',
       },

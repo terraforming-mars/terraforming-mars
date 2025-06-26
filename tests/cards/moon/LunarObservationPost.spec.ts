@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {churnAction} from '../../TestingUtils';
+import {churn} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
 import {testGame} from '../../TestGame';
@@ -9,7 +9,7 @@ describe('LunarObservationPost', () => {
   let card: LunarObservationPost;
 
   beforeEach(() => {
-    [, player] = testGame(2, {moonExpansion: true});
+    [/* game */, player] = testGame(2, {moonExpansion: true});
     card = new LunarObservationPost();
   });
 
@@ -18,10 +18,10 @@ describe('LunarObservationPost', () => {
     player.megaCredits = card.cost;
 
     player.titanium = 1;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     player.titanium = 0;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {
@@ -37,7 +37,7 @@ describe('LunarObservationPost', () => {
 
     expect(card.resourceCount).eq(0);
 
-    expect(churnAction(card, player)).is.undefined;
+    expect(churn(card.action(player), player)).is.undefined;
 
     expect(card.resourceCount).eq(1);
 

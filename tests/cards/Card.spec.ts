@@ -6,8 +6,8 @@ import {Helion} from '../../src/server/cards/corporation/Helion';
 import {Inventrix} from '../../src/server/cards/corporation/Inventrix';
 import {Tag} from '../../src/common/cards/Tag';
 
-describe('Card', function() {
-  it('pulls values for typical corporation', function() {
+describe('Card', () => {
+  it('pulls values for typical corporation', () => {
     const card = new Helion();
     expect(card.type).to.eq(CardType.CORPORATION);
     expect(card.initialActionText).is.undefined;
@@ -16,7 +16,7 @@ describe('Card', function() {
     expect(card.name).to.eq(CardName.HELION);
     expect(card.tags).to.deep.eq([Tag.SPACE]);
   });
-  it('pulls initialActionText', function() {
+  it('pulls initialActionText', () => {
     const card = new Inventrix();
     expect(card.initialActionText).to.eq('Draw 3 cards');
   });

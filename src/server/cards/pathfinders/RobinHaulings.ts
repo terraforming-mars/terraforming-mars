@@ -1,60 +1,54 @@
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {played} from '../Options';
-import {IProjectCard} from '../IProjectCard';
+import {digit} from '../Options';
+import {ICard} from '../ICard';
 import {MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '../../../common/constants';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class RobinHaulings extends Card implements ICorporationCard {
+export class RobinHaulings extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.ROBIN_HAULINGS,
       tags: [Tag.MARS, Tag.VENUS],
       startingMegaCredits: 39,
       resourceType: CardResource.FLOATER,
 
-      behavior: {
-        addResources: 1,
-      },
-
       metadata: {
-        cardNumber: 'PfC9',
+        cardNumber: 'PfC17',
         description: 'You start with 39 M€.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(39).br;
           b.effect('Whenever you play a card with a Venus tag add 1 floater to ANY card.', (eb) => {
-            eb.venus(1, {played}).startEffect.floaters(1).asterix();
+            eb.tag(Tag.VENUS).asterix().startEffect.resource(CardResource.FLOATER).asterix();
           });
           b.br;
           b.action('Remove 3 floaters from this card to raise Venus 1 step or raise oxygen 1 step', (ab) => {
-            ab.floaters(3, {digit: true}).startAction.venus(1).or().oxygen(1);
+            ab.resource(CardResource.FLOATER, {amount: 3, digit}).startAction.venus(1).or().oxygen(1);
           });
         }),
       },
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    if (player.isCorporation(CardName.ROBIN_HAULINGS) && card.tags.includes(Tag.VENUS)) {
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+    if (card.tags.includes(Tag.VENUS)) {
       player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER));
     }
   }
 
   private canRaiseVenus(player: IPlayer) {
-    return player.game.getVenusScaleLevel() < MAX_VENUS_SCALE && player.canAfford(0, {tr: {venus: 1}});
+    return player.game.getVenusScaleLevel() < MAX_VENUS_SCALE && player.canAfford({cost: 0, tr: {venus: 1}});
   }
 
   private canRaiseOxygen(player: IPlayer) {
-    return player.game.getOxygenLevel() < MAX_OXYGEN_LEVEL && player.canAfford(0, {tr: {oxygen: 1}});
+    return player.game.getOxygenLevel() < MAX_OXYGEN_LEVEL && player.canAfford({cost: 0, tr: {oxygen: 1}});
   }
 
   public canAct(player: IPlayer) {
@@ -66,10 +60,8 @@ export class RobinHaulings extends Card implements ICorporationCard {
     const options = new OrOptions();
     if (this.canRaiseVenus(player)) {
       options.options.push(
-        new SelectOption(
-          'Spend 3 floaters to raise Venus 1 step',
-          'OK',
-          () => {
+        new SelectOption('Spend 3 floaters to raise Venus 1 step')
+          .andThen(() => {
             player.game.increaseVenusScaleLevel(player, 1);
             this.resourceCount -= 3;
             return undefined;
@@ -77,10 +69,8 @@ export class RobinHaulings extends Card implements ICorporationCard {
     }
     if (this.canRaiseOxygen(player)) {
       options.options.push(
-        new SelectOption(
-          'Spend 3 floaters to raise oxygen 1 step',
-          'OK',
-          () => {
+        new SelectOption('Spend 3 floaters to raise oxygen 1 step')
+          .andThen(() => {
             player.game.increaseOxygenLevel(player, 1);
             this.resourceCount -= 3;
             return undefined;

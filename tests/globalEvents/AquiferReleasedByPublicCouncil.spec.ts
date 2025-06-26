@@ -1,25 +1,19 @@
 import {expect} from 'chai';
-import {Game} from '../../src/server/Game';
 import {AquiferReleasedByPublicCouncil} from '../../src/server/turmoil/globalEvents/AquiferReleasedByPublicCouncil';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/server/turmoil/Turmoil';
-import {TestPlayer} from '../TestPlayer';
+import {testGame} from '../TestingUtils';
 
-describe('AquiferReleasedByPublicCouncil', function() {
-  it('resolve play', function() {
+describe('AquiferReleasedByPublicCouncil', () => {
+  it('resolve play', () => {
     const card = new AquiferReleasedByPublicCouncil();
-    const player = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, player2], player);
-    const turmoil = Turmoil.newInstance(game);
-
-    turmoil.initGlobalEvent(game);
-    turmoil.chairman = player2.id;
+    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const turmoil = game.turmoil!;
+    turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
-    turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.add(player.id);
-    turmoil.dominantParty.delegates.add(player2.id);
-    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.partyLeader = player2;
+    turmoil.dominantParty.delegates.add(player);
+    turmoil.dominantParty.delegates.add(player2);
+    turmoil.dominantParty.delegates.add(player2);
 
     card.resolve(game, turmoil);
     expect(player.steel).to.eq(1);

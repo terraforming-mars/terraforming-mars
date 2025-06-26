@@ -1,24 +1,20 @@
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {ICard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 
-export class PointLuna extends Card implements ICorporationCard {
+export class PointLuna extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.POINT_LUNA,
       tags: [Tag.SPACE, Tag.EARTH],
       startingMegaCredits: 38,
 
       behavior: {
         production: {titanium: 1},
-        drawCard: 1,
       },
 
       metadata: {
@@ -29,24 +25,18 @@ export class PointLuna extends Card implements ICorporationCard {
           b.production((pb) => pb.titanium(1)).nbsp.megacredits(38);
           b.corpBox('effect', (ce) => {
             ce.effect('When you play an Earth tag, including this, draw a card.', (eb) => {
-              eb.earth(1, {played}).startEffect.cards(1);
+              eb.tag(Tag.EARTH).startEffect.cards(1);
             });
           });
         }),
       },
     });
   }
-  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
-    return this.onCardPlayed(player, card);
-  }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard | ICorporationCard) {
-    if (player.isCorporation(this.name)) {
-      const tagCount = player.tags.cardTagCount(card, Tag.EARTH);
-      if (tagCount > 0) {
-        player.drawCard(tagCount);
-      }
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+    const tagCount = player.tags.cardTagCount(card, Tag.EARTH);
+    if (tagCount > 0) {
+      player.drawCard(tagCount);
     }
-    return undefined;
   }
 }

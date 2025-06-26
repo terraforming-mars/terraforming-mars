@@ -4,31 +4,31 @@ import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {addCity} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 
-describe('MartianMonuments', function() {
+describe('MartianMonuments', () => {
   let card: MartianMonuments;
   let player: TestPlayer;
   let player2: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MartianMonuments();
-    [/* skipped */, player, player2] = testGame(2);
+    [/* game */, player, player2] = testGame(2);
   });
 
-  it('can play', function() {
-    expect(player.simpleCanPlay(card)).is.false;
+  it('can play', () => {
+    expect(card.canPlay(player)).is.false;
     addCity(player);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
-    expect(player2.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player2)).is.false;
 
     // Add a city in space, it shouldn't count.
     addCity(player2, SpaceName.GANYMEDE_COLONY);
-    expect(player2.simpleCanPlay(card)).is.false;
+    expect(card.canPlay(player2)).is.false;
   });
 
-  it('play', function() {
+  it('play', () => {
     player.tagsForTest = {mars: 8};
     card.play(player);
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 9})); // "including this"

@@ -6,10 +6,10 @@ import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 import {cast} from '../../TestingUtils';
 
-describe('MicrobiologyPatents', function() {
-  it('Should play', function() {
+describe('MicrobiologyPatents', () => {
+  it('Should play', () => {
     const card = new MicrobiologyPatents();
-    const [, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
 
     cast(card.play(player), undefined);
     card.onCardPlayed(player, new Virus());

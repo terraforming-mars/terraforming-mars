@@ -1,27 +1,26 @@
 import {expect} from 'chai';
 import {RobinHaulings} from '../../../src/server/cards/pathfinders/RobinHaulings';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
-describe('RobinHaulings', function() {
+describe('RobinHaulings', () => {
   let card: RobinHaulings;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new RobinHaulings();
     [game, player, player2] = testGame(2);
-    player.setCorporationForTest(card);
   });
 
   it('play', () => {
     expect(card.resourceCount).eq(0);
-    card.play(player);
+    player.playCorporationCard(card);
     runAllActions(game);
     expect(card.resourceCount).eq(1);
   });

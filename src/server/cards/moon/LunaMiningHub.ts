@@ -2,10 +2,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../../common/TileType';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {moonMiningTile} from '../render/DynamicVictoryPoints';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
@@ -16,20 +15,20 @@ export class LunaMiningHub extends Card {
       name: CardName.LUNA_MINING_HUB,
       type: CardType.AUTOMATED,
       tags: [Tag.BUILDING],
-      cost: 16,
+      cost: 23,
       reserveUnits: {steel: 1, titanium: 1},
 
       behavior: {
         production: {steel: 1, titanium: 1},
         // TODO(kberg): mining rate ought to occur after tile is placed.
         moon: {
-          tile: {type: TileType.LUNA_MINING_HUB, title: 'Select a space for Luna Mining Hub.'},
+          tile: {type: TileType.LUNA_MINING_HUB},
           miningRate: 1,
         },
       },
 
       victoryPoints: 'special',
-      requirements: CardRequirements.builder((b) => b.miningRate(5)),
+      requirements: {miningRate: 5},
 
       metadata: {
         cardNumber: 'M14',
@@ -44,7 +43,7 @@ export class LunaMiningHub extends Card {
           b.tile(TileType.LUNA_MINING_HUB, true).moonMiningRate({size: Size.SMALL});
           b.text('Place this tile on The Moon and raise the mining rate 1 step.', Size.TINY, false, false);
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.moonMiningTile(2, true),
+        victoryPoints: moonMiningTile(2, true),
       },
     });
   }

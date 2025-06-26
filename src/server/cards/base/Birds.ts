@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
@@ -18,7 +17,7 @@ export class Birds extends ActionCard implements IProjectCard {
       cost: 10,
 
       resourceType: CardResource.ANIMAL,
-      requirements: CardRequirements.builder((b) => b.oxygen(13)),
+      requirements: {oxygen: 13},
       victoryPoints: {resourcesHere: {}},
 
       behavior: {
@@ -34,7 +33,7 @@ export class Birds extends ActionCard implements IProjectCard {
         description: 'Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.',
         renderData: CardRenderer.builder((b) => {
           b.action('Add an animal to this card.', (eb) => {
-            eb.empty().startAction.animals(1);
+            eb.empty().startAction.resource(CardResource.ANIMAL);
           }).br;
           b.production((pb) => {
             pb.minus().plants(-2, {all});

@@ -1,19 +1,17 @@
 import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Space} from '../../boards/Space';
 import {IActionCard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class ArcadianCommunities extends Card implements IActionCard, ICorporationCard {
+export class ArcadianCommunities extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.ARCADIAN_COMMUNITIES,
       startingMegaCredits: 40,
       initialActionText: 'Place a community (player marker) on a non-reserved area',
@@ -38,18 +36,15 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
     });
   }
 
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     return new SelectSpace(
       'Select space for claim',
-      player.game.board.getAvailableSpacesOnLand(player),
-      (space: Space) => {
+      player.game.board.getAvailableSpacesOnLand(player))
+      .andThen((space: Space) => {
         space.player = player;
-
         player.game.log('${0} placed a Community (player marker)', (b) => b.player(player));
-
         return undefined;
-      },
-    );
+      });
   }
 
   public getAvailableSpacesForMarker(player: IPlayer): Array<Space> {
@@ -70,13 +65,10 @@ export class ArcadianCommunities extends Card implements IActionCard, ICorporati
   }
 
   public action(player: IPlayer) {
-    return new SelectSpace(
-      'Select space for claim',
-      this.getAvailableSpacesForMarker(player),
-      (space: Space) => {
+    return new SelectSpace('Select space for claim', this.getAvailableSpacesForMarker(player))
+      .andThen((space) => {
         space.player = player;
         return undefined;
-      },
-    );
+      });
   }
 }

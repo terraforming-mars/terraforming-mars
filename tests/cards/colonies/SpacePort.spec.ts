@@ -7,13 +7,13 @@ import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 
-describe('SpacePort', function() {
+describe('SpacePort', () => {
   let card: SpacePort;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SpacePort();
-    [, player] = testGame(2, {coloniesExtension: true, customColoniesList: [
+    [/* game */, player] = testGame(2, {coloniesExtension: true, customColoniesList: [
       ColonyName.CERES,
       ColonyName.CALLISTO,
       ColonyName.ENCELADUS,
@@ -22,26 +22,26 @@ describe('SpacePort', function() {
     ]});
   });
 
-  it('Can not play without colony', function() {
+  it('Can not play without colony', () => {
     player.production.add(Resource.ENERGY, 1);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can not play without energy production', function() {
+  it('Can not play without energy production', () => {
     player.game.colonies[0].colonies.push(player.id);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.production.add(Resource.ENERGY, 1);
     player.game.colonies[0].colonies.push(player.id);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 
-    action.cb(action.availableSpaces[0]);
+    action.cb(action.spaces[0]);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(4);
   });

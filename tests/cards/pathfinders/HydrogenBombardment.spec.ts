@@ -1,21 +1,21 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {HydrogenBombardment} from '../../../src/server/cards/pathfinders/HydrogenBombardment';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('HydrogenBombardment', function() {
+describe('HydrogenBombardment', () => {
   let card: HydrogenBombardment;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new HydrogenBombardment();
     [game, player] = testGame(1, {venusNextExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
     expect(game.getVenusScaleLevel()).to.eq(2);
     expect(player.megaCredits).eq(6);

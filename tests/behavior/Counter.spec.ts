@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Counter} from '../../src/server/behavior/Counter';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
 import {Tag} from '../../src/common/cards/Tag';
@@ -8,32 +8,39 @@ import {addCity, addGreenery, cast, fakeCard, maxOutOceans, runAllActions} from 
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {Units} from '../../src/common/Units';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
-import {SpaceName} from '../../src/server/SpaceName';
+import {SpaceName} from '../../src/common/boards/SpaceName';
 import {OceanCity} from '../../src/server/cards/ares/OceanCity';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {Wetlands} from '../../src/server/cards/pathfinders/Wetlands';
 
 describe('Counter', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
-  let fake: IProjectCard;
 
   beforeEach(() => {
-    [game, player, player2, player3] = testGame(3, {venusNextExtension: true, aresExtension: true, aresHazards: false});
-    fake = fakeCard({});
+    [game, player, player2, player3] = testGame(3, {
+      venusNextExtension: true,
+      aresExtension: true,
+      aresHazards: false});
   });
 
   it('numbers', () => {
-    const counter = new Counter(player, fake);
+    const counter = new Counter(player, fakeCard());
     expect(counter.count(3)).eq(3);
     expect(counter.count(8)).eq(8);
   });
 
+  it('start', () => {
+    const counter = new Counter(player, fakeCard());
+    expect(counter.count({start: 3})).eq(3);
+    expect(counter.count({start: 3, each: 7})).eq(21);
+  });
+
   it('tags, simple', () => {
     player.tagsForTest = {building: 2, space: 3, moon: 7};
-    const counter = new Counter(player, fake);
+    const counter = new Counter(player, fakeCard());
     expect(counter.count({tag: Tag.BUILDING})).eq(2);
     expect(counter.count({tag: Tag.SPACE})).eq(3);
 
@@ -43,7 +50,7 @@ describe('Counter', () => {
 
   it('tags, multiple', () => {
     player.tagsForTest = {building: 2, space: 3, moon: 7};
-    const counter = new Counter(player, fake);
+    const counter = new Counter(player, fakeCard());
     expect(counter.count({tag: [Tag.BUILDING, Tag.MOON]})).eq(9);
 
     // Wild only counts once. It's really a test for tags.count, but it's useful to see here.
@@ -56,7 +63,7 @@ describe('Counter', () => {
     player2.tagsForTest = {space: 4};
     player3.tagsForTest = {microbe: 8, wild: 2}; // Wild tags will be ignored.
 
-    const counter = new Counter(player, fake);
+    const counter = new Counter(player, fakeCard());
     expect(counter.count({tag: Tag.BUILDING, all: true})).eq(2);
     expect(counter.count({tag: Tag.SPACE, all: true})).eq(7);
     expect(counter.count({tag: Tag.MICROBE, all: true})).eq(8);
@@ -64,16 +71,14 @@ describe('Counter', () => {
   });
 
   it('tags, including this', () => {
+    const fake = fakeCard({tags: [Tag.CITY]});
     let counter = new Counter(player, fake);
 
-    fake.tags = [Tag.CITY];
     expect(counter.count({tag: Tag.CITY})).eq(1);
-    player.tagsForTest = {city: 1};
+    player.playedCards.push(fakeCard({tags: [Tag.CITY]}));
     expect(counter.count({tag: Tag.CITY})).eq(2);
 
-    // Unset this so playedCards are counted more closely. It's a weird thing about tagsForTes.
-    player.tagsForTest = undefined;
-    player.playedCards = [fakeCard({tags: [Tag.CITY, Tag.CITY]})];
+    player.playedCards.set(fakeCard({tags: [Tag.CITY, Tag.CITY]}));
     expect(counter.count({tag: Tag.CITY})).eq(3);
 
     // Adding it to the player's tableau doesn't double-count it.
@@ -83,8 +88,24 @@ describe('Counter', () => {
     expect(counter.count({tag: Tag.CITY})).eq(3);
   });
 
+  it('tags, multiple, including this', () => {
+    const fake = fakeCard({tags: [Tag.MICROBE, Tag.PLANT]});
+    let counter = new Counter(player, fake);
+
+    expect(counter.count({tag: [Tag.VENUS, Tag.PLANT]})).eq(1);
+    player.tagsForTest = {plant: 1};
+    expect(counter.count({tag: [Tag.VENUS, Tag.PLANT]})).eq(2);
+
+    // Adding it to the player's tableau doesn't double-count it.
+    player.tagsForTest = undefined;
+    player.playedCards.push(fake);
+    // New game state needs a new Counter.
+    counter = new Counter(player, fake);
+    expect(counter.count({tag: [Tag.VENUS, Tag.PLANT]})).eq(1);
+  });
+
   it('count cities', () => {
-    const counter = new Counter(player, fake);
+    const counter = new Counter(player, fakeCard());
 
     function count() {
       return {
@@ -124,7 +145,7 @@ describe('Counter', () => {
   });
 
   it('count cities that you own', () => {
-    const count = (player: TestPlayer) => new Counter(player, fake).count({cities: {}, all: false});
+    const count = (player: TestPlayer) => new Counter(player, fakeCard()).count({cities: {}, all: false});
 
     addCity(player, SpaceName.GANYMEDE_COLONY);
 
@@ -145,7 +166,7 @@ describe('Counter', () => {
   });
 
   it('count greeneries', () => {
-    const counter = new Counter(player, fake);
+    const counter = new Counter(player, fakeCard());
     expect(counter.count({greeneries: {}})).eq(0);
 
     addGreenery(player);
@@ -165,12 +186,12 @@ describe('Counter', () => {
     const wetlands = new Wetlands();
     player.plants = 4;
     const selectSpace = cast(wetlands.play(player), SelectSpace);
-    selectSpace.cb(selectSpace.availableSpaces[0]);
+    selectSpace.cb(selectSpace.spaces[0]);
     expect(counter.count({greeneries: {}})).eq(4);
   });
 
   it('count greeneries that you ownown', () => {
-    const count = (player: TestPlayer) => new Counter(player, fake).count({greeneries: {}, all: false});
+    const count = (player: TestPlayer) => new Counter(player, fakeCard()).count({greeneries: {}, all: false});
 
     addGreenery(player);
 
@@ -189,7 +210,7 @@ describe('Counter', () => {
   });
 
   it('count oceans', () => {
-    const counter = new Counter(player, fake);
+    const counter = new Counter(player, fakeCard());
     expect(counter.count({oceans: {}})).eq(0);
 
     maxOutOceans(player, 1);
@@ -208,13 +229,13 @@ describe('Counter', () => {
     const wetlands = new Wetlands();
     player.plants = 4;
     const selectSpace = cast(wetlands.play(player), SelectSpace);
-    selectSpace.cb(selectSpace.availableSpaces[0]);
+    selectSpace.cb(selectSpace.spaces[0]);
     expect(counter.count({oceans: {}})).eq(10);
   });
 
   it('count units', () => {
     player.tagsForTest = {building: 2, space: 3};
-    const counter = new Counter(player, fake);
+    const counter = new Counter(player, fakeCard());
     const units: Units = counter.countUnits({
       megacredits: {tag: Tag.SPACE},
       energy: -1,
@@ -227,19 +248,19 @@ describe('Counter', () => {
 
 
 describe('Counter for Moon', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
   let fake: IProjectCard;
 
   beforeEach(() => {
     [game, player] = testGame(3, {moonExpansion: true});
-    fake = fakeCard({});
+    fake = fakeCard();
   });
 
   it('colony rate', () => {
     const counter = new Counter(player, fake);
     const moonData = MoonExpansion.moonData(game);
-    moonData.colonyRate = 3;
+    moonData.habitatRate = 3;
 
     expect(counter.count({moon: {habitatRate: {}}})).eq(3);
     expect(counter.count({moon: {habitatRate: {}}, per: 2})).eq(1);
@@ -312,5 +333,47 @@ describe('Counter for Moon', () => {
     expect(counter.count({moon: {road: {}}})).eq(4);
     MoonExpansion.addRoadTile(player, 'm06');
     expect(counter.count({moon: {road: {}}})).eq(5);
+  });
+});
+
+describe('Counter for Underworld', () => {
+  let game: IGame;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let fake: IProjectCard;
+
+  beforeEach(() => {
+    [game, player, player2] = testGame(3, {underworldExpansion: true});
+    fake = fakeCard();
+  });
+
+  it('corruption', () => {
+    const counter = new Counter(player, fake);
+    expect(counter.count({underworld: {corruption: {}}})).eq(0);
+
+    player.underworldData.corruption = 3;
+
+    expect(counter.count({underworld: {corruption: {}}})).eq(3);
+    expect(counter.count({underworld: {corruption: {}}, all: true})).eq(3);
+
+    player2.underworldData.corruption = 5;
+
+    expect(counter.count({underworld: {corruption: {}}})).eq(3);
+    expect(counter.count({underworld: {corruption: {}}, all: true})).eq(8);
+  });
+
+  it('excavationMarkers', () => {
+    const counter = new Counter(player, fake);
+    expect(counter.count({underworld: {excavationMarkers: {}}})).eq(0);
+
+    game.board.getSpaceOrThrow(SpaceName.NOCTIS_CITY).excavator = player;
+
+    expect(counter.count({underworld: {excavationMarkers: {}}})).eq(1);
+    expect(counter.count({underworld: {excavationMarkers: {}}, all: true})).eq(1);
+
+    game.board.getSpaceOrThrow(SpaceName.THARSIS_THOLUS).excavator = player2;
+
+    expect(counter.count({underworld: {excavationMarkers: {}}})).eq(1);
+    expect(counter.count({underworld: {excavationMarkers: {}}, all: true})).eq(2);
   });
 });

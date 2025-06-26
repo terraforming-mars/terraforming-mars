@@ -1,11 +1,11 @@
 import {ChoosePoliticalAgenda} from '../deferredActions/ChoosePoliticalAgenda';
 import {IGame} from '../IGame';
-import {Bonus} from './Bonus';
+import {IBonus} from './Bonus';
 import {IParty} from './parties/IParty';
 import {PartyName} from '../../common/turmoil/PartyName';
-import {Policy} from './Policy';
+import {IPolicy} from './Policy';
 import {Turmoil} from './Turmoil';
-import {Agenda, AgendaStyle} from '../../common/turmoil/Types';
+import {Agenda, AgendaStyle, PolicyId} from '../../common/turmoil/Types';
 
 export type PoliticalAgendasData = {
   agendas: Map<PartyName, Agenda>;
@@ -22,11 +22,11 @@ export class PoliticalAgendas {
 
   public static newInstance(
     agendaStyle: AgendaStyle,
-    parties: Array<IParty>): PoliticalAgendasData {
+    parties: ReadonlyArray<IParty>): PoliticalAgendasData {
     const agendas: Map<PartyName, Agenda> = new Map();
 
     parties.forEach((p) => {
-      if (agendaStyle === AgendaStyle.STANDARD) {
+      if (agendaStyle === 'Standard') {
         agendas.set(p.name, {bonusId: p.bonuses[0].id, policyId: p.policies[0].id});
       } else {
         agendas.set(p.name, PoliticalAgendas.getRandomAgenda(p));
@@ -40,8 +40,8 @@ export class PoliticalAgendas {
   }
 
   private static getRandomAgenda(party: IParty): Agenda {
-    const bonus: Bonus = PoliticalAgendas.randomElement(party.bonuses);
-    const policy: Policy = PoliticalAgendas.randomElement(party.policies);
+    const bonus: IBonus = PoliticalAgendas.randomElement(party.bonuses);
+    const policy: IPolicy = PoliticalAgendas.randomElement(party.policies);
 
     return {bonusId: bonus.id, policyId: policy.id};
   }
@@ -71,10 +71,10 @@ export class PoliticalAgendas {
 
     // Agendas are static unless it's chosen by a chairperson, in which case
     // defer the selection.
-    if (politicalAgendasData.agendaStyle === AgendaStyle.CHAIRMAN && chairman !== 'NEUTRAL') {
+    if (politicalAgendasData.agendaStyle === 'Chairman' && chairman !== 'NEUTRAL') {
       const agenda = this.getAgenda(turmoil, rulingParty.name);
       game.defer(new ChoosePoliticalAgenda(
-        game.getPlayerById(chairman),
+        chairman,
         rulingParty,
         (bonusId) => {
           agenda.bonusId = bonusId;
@@ -97,6 +97,12 @@ export class PoliticalAgendas {
   }
 
   public static deserialize(d: SerializedPoliticalAgendasData): PoliticalAgendasData {
+    // TODO(kberg): Remove after 2025-08-01
+    for (const [_, agendas] of d.agendas) {
+      if (agendas.policyId.startsWith('mfp')) {
+        agendas.policyId = (agendas.policyId.slice(0, 1) + agendas.policyId.slice(2)) as PolicyId;
+      }
+    }
     return {
       agendas: new Map(d.agendas),
       agendaStyle: d.agendaStyle,
@@ -104,7 +110,7 @@ export class PoliticalAgendas {
   }
 
   // Overridable for tests
-  public static defaultRandomElement<T>(list: Array<T>): T {
+  public static defaultRandomElement<T>(list: ReadonlyArray<T>): T {
     const rng = Math.floor(Math.random() * list.length);
     return list[rng];
   }

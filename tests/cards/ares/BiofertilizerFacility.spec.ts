@@ -3,7 +3,7 @@ import {AICentral} from '../../../src/server/cards/base/AICentral';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {BiofertilizerFacility} from '../../../src/server/cards/ares/BiofertilizerFacility';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
@@ -11,26 +11,26 @@ import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast, runAllActions} from '../../TestingUtils';
 
-describe('BiofertilizerFacility', function() {
+describe('BiofertilizerFacility', () => {
   let card: BiofertilizerFacility;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   let scienceTagCard: IProjectCard = new AICentral();
   let microbeHost: IProjectCard = new Ants();
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new BiofertilizerFacility();
     [game, player] = testGame(2, {aresExtension: true});
     scienceTagCard = new AICentral();
     microbeHost = new Ants();
   });
 
-  it('Cannot play without a science tag', function() {
+  it('Cannot play without a science tag', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Play', function() {
+  it('Play', () => {
     // Set up the cards.
     // Adds the necessary Science tag.
     player.playCard(scienceTagCard);
@@ -38,7 +38,7 @@ describe('BiofertilizerFacility', function() {
 
     // Initial expectations that will change after playing the card.
     expect(player.production.plants).is.eq(0);
-    expect(microbeHost.resourceCount || 0).is.eq(0);
+    expect(microbeHost.resourceCount).is.eq(0);
     expect(game.deferredActions).has.lengthOf(0);
 
     expect(card.canPlay(player)).is.true;

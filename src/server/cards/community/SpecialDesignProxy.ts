@@ -1,37 +1,17 @@
-import {IProjectCard} from '../IProjectCard';
-import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
-import {ICardMetadata} from '../../../common/cards/ICardMetadata';
 import {IPlayer} from '../../IPlayer';
+import {ProxyCard} from '../ProxyCard';
 
-export class SpecialDesignProxy implements IProjectCard {
-  public get cost() {
-    return 0;
+/**
+ * A special use card that stands in when Playwrights reactivates Special Design.
+ *
+ * Since Special Design can't sit in the game, this proxy card takes care of it.
+ */
+export class SpecialDesignProxy extends ProxyCard {
+  constructor() {
+    super(CardName.SPECIAL_DESIGN_PROXY);
   }
-  public get tags() {
-    return [];
-  }
-  public get name() {
-    return CardName.SPECIAL_DESIGN_PROXY;
-  }
-  public get type() {
-    return CardType.PROXY;
-  }
-  public canPlay() {
-    return false;
-  }
-  public get metadata(): ICardMetadata {
-    throw new Error('SpecialDesignProxy is a proxy card, not a real card. Should not render');
-  }
-  public play() {
-    return undefined;
-  }
-  public resourceCount: number = 0;
-
-  public getVictoryPoints() {
-    return 0;
-  }
-  public getRequirementBonus(player: IPlayer) {
+  public override getGlobalParameterRequirementBonus(player: IPlayer) {
     // NOTE: normally code looks like 'if player.lastCardPlayed === this.name` but
     // not in this case.
     if (player.lastCardPlayed === CardName.SPECIAL_DESIGN) {

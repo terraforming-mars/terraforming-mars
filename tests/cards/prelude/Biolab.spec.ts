@@ -1,13 +1,12 @@
 import {expect} from 'chai';
 import {Biolab} from '../../../src/server/cards/prelude/Biolab';
-import {Game} from '../../../src/server/Game';
 import {testGame} from '../../TestGame';
 
-describe('Biolab', function() {
-  it('Should play', function() {
+describe('Biolab', () => {
+  it('Should play', () => {
     const card = new Biolab();
-    const [, player] = testGame(1);
-    Game.newInstance('gameid', [player], player);
+    const [/* game */, player] = testGame(1);
+    testGame(1);
     card.play(player);
 
     expect(player.production.plants).to.eq(1);

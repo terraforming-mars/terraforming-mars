@@ -20,8 +20,18 @@ export class AquiferStandardProject extends StandardProjectCard {
     });
   }
 
+  public override canPayWith(player: IPlayer) {
+    if (player.cardIsInEffect(CardName.KUIPER_COOPERATIVE)) {
+      return {kuiperAsteroids: true};
+    } else {
+      return {};
+    }
+  }
+
   public override canAct(player: IPlayer): boolean {
-    if (!player.game.canAddOcean()) return false;
+    if (!player.game.canAddOcean()) {
+      this.warnings.add('maxoceans');
+    }
     return super.canAct(player);
   }
 

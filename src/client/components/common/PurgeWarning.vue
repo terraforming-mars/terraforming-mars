@@ -1,15 +1,11 @@
 <template>
   <span v-if="expectedPurgeTimeMs != 0">
-    <div v-if="hoursLeft < 48" class="general-warning">
-      {{ getWarningText(true) }}
-    </div>
-    <div v-else>
-      {{ getWarningText(false) }}
+    <div :class="klass">{{ warningText }}
+      <a href="https://github.com/terraforming-mars/terraforming-mars/wiki/FAQ#purge">
+        <span v-i18n>Why?</span>
+      </a>
     </div>
   </span>
-      <!-- <label class="label label-error">{{ $t(warning) }}</label> -->
-
-
 </template>
 <script lang="ts">
 import {translateTextWithParams} from '@/client/directives/i18n';
@@ -36,15 +32,21 @@ export default Vue.extend({
       }
       return '' + date.getFullYear() + '-' + pad(date.getMonth()+1) + '-' + pad(date.getDate()) + ' ' + pad(date.getHours()) + ':' + pad(date.getMinutes());
     },
-  },
-  methods: {
-    getWarningText(isHours: Boolean): string {
-      if (isHours) {
+    soon(): boolean {
+      return this.hoursLeft < 48;
+    },
+    klass(): string {
+      return this.soon ? 'general-warning' : '';
+    },
+    warningText(): string {
+      if (this.soon) {
         return translateTextWithParams('Warning: This game will be purged in approximately ${0} hours.', [Math.floor(this.hoursLeft).toString()]);
       } else {
         return translateTextWithParams('Warning: This server automatically purges unfinished games. Try to complete this game by ${0}.', [this.purgeTime]);
       }
     },
+  },
+  methods: {
   },
 });
 </script>

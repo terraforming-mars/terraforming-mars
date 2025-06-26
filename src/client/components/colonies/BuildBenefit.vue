@@ -1,4 +1,5 @@
 <template>
+  <div style="position:absolute">
   <div v-if="metadata.buildType === ColonyBenefit.ADD_RESOURCES_TO_CARD">
     <template v-if="metadata.buildQuantity[idx] === 3">
       <div class="colony-placement-bonus triple-res resource white-x white-x--3" :class="resource"></div>
@@ -13,7 +14,7 @@
   </div>
   <div v-else-if="metadata.buildType === ColonyBenefit.DRAW_CARDS && metadata.buildQuantity[idx] === 2">
     <div class="resource card card-with-border" style="margin-top: 0px; margin-left: -5px; transform: scale(0.8);"></div>
-    <div class="resource card card-with-border" style="position absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
+    <div class="resource card card-with-border" style="position: absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
   </div>
   <div v-else-if="metadata.buildType === ColonyBenefit.GAIN_INFLUENCE">
     <div class="influence" style="margin-top:5px"></div>
@@ -43,6 +44,10 @@
   <div v-else-if="metadata.buildType === ColonyBenefit.PLACE_OCEAN_TILE">
     <div class="tile ocean-tile ocean-tile-colony"></div>
   </div>
+  <div v-else-if="metadata.buildType === ColonyBenefit.PLACE_HAZARD_TILE">
+    <div class="tile hazard-tile"></div>
+  </div>
+</div>
 </template>
 <script lang="ts">
 

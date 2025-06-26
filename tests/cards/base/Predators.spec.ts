@@ -7,27 +7,27 @@ import {Predators} from '../../../src/server/cards/base/Predators';
 import {ProtectedHabitats} from '../../../src/server/cards/base/ProtectedHabitats';
 import {SmallAnimals} from '../../../src/server/cards/base/SmallAnimals';
 import {ICard} from '../../../src/server/cards/ICard';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('Predators', function() {
+describe('Predators', () => {
   let card: Predators;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Predators();
     [game, player, player2] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     setOxygenLevel(game, 11);
     expect(card.canPlay(player)).is.true;
     player.playedCards.push(card);
@@ -37,7 +37,7 @@ describe('Predators', function() {
     expect(card.getVictoryPoints(player)).to.eq(5);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     const fish = new Fish();
     const smallAnimals = new SmallAnimals();
     player.playedCards.push(card, fish, smallAnimals);
@@ -54,7 +54,7 @@ describe('Predators', function() {
     expect(fish.resourceCount).to.eq(0);
   });
 
-  it('Respects pets', function() {
+  it('Respects pets', () => {
     player.playedCards.push(card);
     const fish = new Fish();
     const pets = new Pets();
@@ -74,7 +74,7 @@ describe('Predators', function() {
     expect(pets.resourceCount).to.eq(1);
   });
 
-  it('Respects Bioengineering Enclosure', function() {
+  it('Respects Bioengineering Enclosure', () => {
     player.playedCards.push(card);
     const fish = new Fish();
     const bioengineeringEnclosure = new BioengineeringEnclosure();
@@ -94,7 +94,7 @@ describe('Predators', function() {
     expect(bioengineeringEnclosure.resourceCount).to.eq(1);
   });
 
-  it('Respects protected habitats', function() {
+  it('Respects protected habitats', () => {
     player.playedCards.push(card);
     const fish = new Fish();
     const animals = new SmallAnimals();

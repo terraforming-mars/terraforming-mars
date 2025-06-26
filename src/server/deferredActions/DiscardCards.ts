@@ -1,34 +1,54 @@
 import {IPlayer} from '../IPlayer';
 import {SelectCard} from '../inputs/SelectCard';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
+import {Message} from '../../common/logs/Message';
+import {message} from '../logs/MessageBuilder';
+import {IProjectCard} from '../cards/IProjectCard';
 
-export class DiscardCards extends DeferredAction {
+export class DiscardCards extends DeferredAction<ReadonlyArray<IProjectCard>> {
   constructor(
     player: IPlayer,
-    public count: number = 1,
-    public title: string = 'Select ' + count + ' card' + (count > 1 ? 's' : '') + ' to discard',
+    public min: number = 1,
+    public max: number = 1,
+    public title?: string | Message,
   ) {
     super(player, Priority.DISCARD_CARDS);
   }
 
   public execute() {
-    if (this.player.cardsInHand.length <= this.count) {
-      const cards = this.player.cardsInHand.splice(0, this.player.cardsInHand.length);
-      cards.forEach((card) => this.player.game.projectDeck.discard(card));
+    if (this.player.cardsInHand.length <= this.min) {
+      const discards = [...this.player.cardsInHand];
+      for (const card of discards) {
+        this.player.discardCardFromHand(card);
+      }
+      this.cb(discards);
       return undefined;
     }
+
+    let title: string | Message | undefined = this.title;
+    if (title === undefined) {
+      if (this.min === this.max) {
+        if (this.min === 1) {
+          title = 'Select 1 card to discard';
+        } else {
+          title = message('Select ${0} cards to discard', (b) => b.number(this.min));
+        }
+      } else {
+        title = message('Select between ${0} and ${1} cards to discard', (b) => b.number(this.min).number(this.max));
+      }
+    }
     return new SelectCard(
-      this.title,
+      title,
       'Discard',
       this.player.cardsInHand,
-      (cards) => {
-        for (const card of cards) {
-          this.player.cardsInHand.splice(this.player.cardsInHand.indexOf(card), 1);
-          this.player.game.projectDeck.discard(card);
+      {min: this.min, max: this.max})
+      .andThen((discards) => {
+        for (const card of discards) {
+          this.player.discardCardFromHand(card);
         }
+        this.cb(discards);
         return undefined;
-      },
-      {min: this.count, max: this.count},
-    );
+      });
   }
 }

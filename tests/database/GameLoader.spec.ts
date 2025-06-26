@@ -3,12 +3,10 @@ import {Game} from '../../src/server/Game';
 import {GameLoader} from '../../src/server/database/GameLoader';
 import {Player} from '../../src/server/Player';
 import {SerializedGame} from '../../src/server/SerializedGame';
-
 import {TestPlayer} from '../TestPlayer';
-import {Color} from '../../src/common/Color';
 import {GameIdLedger} from '../../src/server/database/IDatabase';
 import {GameId, PlayerId} from '../../src/common/Types';
-import {restoreTestDatabase, restoreTestGameLoader, setTestDatabase, setTestGameLoader} from '../utils/setup';
+import {restoreTestDatabase, restoreTestGameLoader, setTestDatabase, setTestGameLoader} from '../testing/setup';
 import {sleep} from '../TestingUtils';
 import {InMemoryDatabase} from '../testing/InMemoryDatabase';
 import {FakeClock} from '../common/FakeClock';
@@ -33,13 +31,13 @@ class TestDatabase extends InMemoryDatabase {
   }
 }
 
-describe('GameLoader', function() {
+describe('GameLoader', () => {
   let instance: GameLoader;
   let database: TestDatabase;
   let game: Game;
   let clock: FakeClock;
 
-  beforeEach(function() {
+  beforeEach(() => {
     clock = new FakeClock();
     instance = GameLoader.newTestInstance({sleepMillis: 0, evictMillis: 100, sweep: 'manual'}, clock);
     setTestGameLoader(instance);
@@ -50,28 +48,28 @@ describe('GameLoader', function() {
     game = Game.newInstance('gameid', [player, player2], player);
     instance.resetForTesting();
   });
-  afterEach(function() {
+  afterEach(() => {
     restoreTestDatabase();
     restoreTestGameLoader();
   });
 
-  it('uses shared instance', function() {
+  it('uses shared instance', () => {
     expect(instance).to.eq(GameLoader.getInstance());
   });
 
-  it('gets undefined when player does not exist', async function() {
+  it('gets undefined when player does not exist', async () => {
     const game = await instance.getGame('player-doesnotexist');
     expect(game).is.undefined;
   });
 
-  it('gets game when it exists in database', async function() {
+  it('gets game when it exists in database', async () => {
     const game1 = await instance.getGame('gameid');
     expect(game1!.id).to.eq(game.id);
   });
 
-  it('gets no game when fails to deserialize from database', async function() {
+  it('gets no game when fails to deserialize from database', async () => {
     const originalDeserialize = Game.deserialize;
-    Game.deserialize = function() {
+    Game.deserialize = () => {
       throw new Error('could not parse this');
     };
     try {
@@ -82,31 +80,31 @@ describe('GameLoader', function() {
     }
   });
 
-  it('gets game when requested before database loaded', async function() {
+  it('gets game when requested before database loaded', async () => {
     const game1 = instance.getGame('gameid');
     expect(game1).is.not.undefined;
   });
 
-  it('gets player when requested before database loaded', async function() {
+  it('gets player when requested before database loaded', async () => {
     const game1 = await instance.getGame(game.getPlayersInGenerationOrder()[0].id);
     expect(game1).is.not.undefined;
   });
 
-  it('gets no game when game goes missing from database', async function() {
+  it('gets no game when game goes missing from database', async () => {
     const game1 = await instance.getGame('game-never');
     expect(game1).is.undefined;
-    database.data.delete('gameid');
+    database.games.delete('gameid');
     const game2 = await instance.getGame('gameid');
     expect(game2).is.undefined;
   });
 
-  it('gets player when it exists in database', async function() {
+  it('gets player when it exists in database', async () => {
     const players = game.getPlayersInGenerationOrder();
     const game1 = await instance.getGame(players[Math.floor(Math.random() * players.length)].id);
     expect(game1!.id).to.eq(game.id);
   });
 
-  it('gets game when added and not in database', async function() {
+  it('gets game when added and not in database', async () => {
     // Violating the readonly nature for this test. It ensures that no game with the specific ID is not in the loader.
     (game.id as GameId) = 'gameid-alpha';
     instance.add(game);
@@ -114,7 +112,7 @@ describe('GameLoader', function() {
     expect(game1!.id).to.eq('gameid-alpha');
   });
 
-  it('gets player when added and not in database', async function() {
+  it('gets player when added and not in database', async () => {
     const players = game.getPlayersInGenerationOrder();
     instance.add(game);
     const game1 = await instance.getGame(players[Math.floor(Math.random() * players.length)]!.id);
@@ -125,37 +123,37 @@ describe('GameLoader', function() {
     );
   });
 
-  it('loads values after error pulling game ids', async function() {
+  it('loads values after error pulling game ids', async () => {
     database.failure = 'getParticipants';
     instance.resetForTesting();
     const game1 = await instance.getGame('gameid');
     expect(game1).is.undefined;
   });
 
-  it('loads values when no game ids', async function() {
-    database.data.delete('gameid');
+  it('loads values when no game ids', async () => {
+    database.games.delete('gameid');
     const game1 = await instance.getGame('gameid');
     expect(game1).is.undefined;
   });
 
-  it('loads players that will never exist', async function() {
+  it('loads players that will never exist', async () => {
     const game1 = await instance.getGame('p-non-existent-id');
     expect(game1).is.undefined;
   });
 
-  it('loads players available later', async function() {
+  it('loads players available later', async () => {
     const game1 = await instance.getGame('gameid');
     expect(game1!.id).to.eq('gameid');
     const game2 = await GameLoader.getInstance().getGame(game.getPlayersInGenerationOrder()[0].id);
     expect(game2!.id).to.eq('gameid');
   });
 
-  it('waits for games to finish loading', async function() {
+  it('waits for games to finish loading', async () => {
     // Set up a clean number of games;
-    database.data.delete('gameid');
+    database.games.delete('gameid');
     const numberOfGames = 10;
     for (let i = 0; i < numberOfGames; i++) {
-      const player = new Player('name', Color.BLUE, false, 0, 'p-' + i as PlayerId);
+      const player = new Player('name', 'blue', false, 0, 'p-' + i as PlayerId);
       Game.newInstance('game-' + i as GameId, [player], player);
     }
     database.getGameSleep = 500;

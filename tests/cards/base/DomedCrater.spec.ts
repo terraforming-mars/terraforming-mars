@@ -1,43 +1,41 @@
 import {expect} from 'chai';
 import {DomedCrater} from '../../../src/server/cards/base/DomedCrater';
-import {Game} from '../../../src/server/Game';
-import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Resource} from '../../../src/common/Resource';
-import {TileType} from '../../../src/common/TileType';
 import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
+import {assertPlaceCity} from '../../assertions';
 
-describe('DomedCrater', function() {
+describe('DomedCrater', () => {
   let card: DomedCrater;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DomedCrater();
     [game, player] = testGame(2);
   });
 
-  it('Can not play without energy production', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+  it('Can not play without energy production', () => {
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can not play if oxygen level too high', function() {
+  it('Can not play if oxygen level too high', () => {
     player.production.add(Resource.ENERGY, 1);
     setOxygenLevel(game, 8);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(player.game);
-    const action = cast(player.popWaitingFor(), SelectSpace);
 
-    action.cb(action.availableSpaces[0]);
-    expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.CITY);
+    assertPlaceCity(player, player.popWaitingFor());
+
     expect(player.plants).to.eq(3);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(3);

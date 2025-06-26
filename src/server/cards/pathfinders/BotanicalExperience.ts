@@ -4,8 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
-import {all} from '../Options';
+import {all, digit} from '../Options';
 import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
 import {Space} from '../../boards/Space';
@@ -21,15 +20,16 @@ export class BotanicalExperience extends Card implements IProjectCard {
       name: CardName.BOTANICAL_EXPERIENCE,
       cost: 14,
       tags: [Tag.PLANT, Tag.MARS, Tag.SCIENCE],
-      requirements: CardRequirements.builder((b) => b.greeneries(1, {all})),
+      requirements: {greeneries: 1, all},
       resourceType: CardResource.DATA,
 
       metadata: {
         cardNumber: 'Pf50',
+        hasExternalHelp: true,
         renderData: CardRenderer.builder((b) => {
-          b.greenery(Size.SMALL, /* withO2 */ false, /* anyPlayer */ true).colon().data({size: Size.SMALL});
+          b.greenery({size: Size.SMALL, withO2: false, any: true}).colon().resource(CardResource.DATA, {size: Size.SMALL});
           b.nbsp;
-          b.data({amount: 3, digit: true}).asterix().colon().production((pb) => pb.plants(1));
+          b.resource(CardResource.DATA, {amount: 3, digit}).asterix().colon().production((pb) => pb.plants(1));
           b.br;
           b.text('(EFFECT: Whenever a greenery tile is placed, add 1 data on this card.) ' +
             '(EFFECT: Whenever this card has at least 3 data, automatically remove 3 data to raise your plant production 1 step.) ' +

@@ -11,6 +11,7 @@
   "Extremophiles": "극한성 생물",
   "Action: Add 1 microbe to ANY card.": "행동: 자신의 아무 카드 1장에 미생물 자원 1개 추가.",
   "1 VP for every 3rd Microbe on this card.": "이 카드의 미생물 자원 3개당 승점 1점.",
+  "Requires 2 science tags.": "과학 태그 2개 이상.",
 
   "Mining Quota": "채굴 할당량",
   "Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps.": "조건: 보유한 금성/지구/목성 태그 각 1개 이상.) (강철 생산력 2 증가.",
@@ -28,10 +29,11 @@
   "Requires Venus 6%": "조건: 금성개척률 6% 이상.",
 
   "Venus Waystation": "금성 중간기착지",
-  "Effect: When you play a Venus tag, you pay 2 M€ less for it.": "지속효과: 금성 카드 사용 시, 금성 태그 1개마다 2M€ 할인.",
+  "Effect: When you play a Venus tag, you pay 2 M€ less for it.": "지속 효과: 금성 카드 사용 시, 금성 태그 1개마다 2M€ 할인.",
 
   "Thermophiles": "호열성 미생물",
   "Action: Add 1 microbe to ANY Venus CARD.": "행동: 자신의 아무 금성 카드 1장에 미생물 자원 1개 추가.",
+  "Action: Remove 2 microbes to raise Venus 1 step": "행동: 이 카드에 미생물 자원 2개 소비해서 금성 개척률 1단계 상승.",
   "Action: Spend 2 microbes here to raise Venus 1 step.": "행동: 이 카드에 미생물 자원 2개 소비해서 금성 개척률 1단계 상승.",
 
   "Sponsored Academies": "대학 후원",
@@ -69,7 +71,7 @@
 
   "Dirigibles": "비행선",
   "Action: Add 1 floater to ANY card": "행동: 자신의 아무 카드 1장에 부양체 자원 1개 추가.",
-  "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.": "지속효과: 금성 태그 카드 사용시, 이 카드에 부양체 자원 1개당 3M€ 가치로 지불 가능.",
+  "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.": "지속 효과: 금성 태그 카드 사용시, 이 카드에 부양체 자원 1개당 3M€ 가치로 지불 가능.",
 
   "Floating Habs": "공중 주거구역",
   "Action: Spend 2 M€ to add 1 floater to ANY card": "행동: 2M€ 소비해서 자신의 아무 카드 1장에 부양체 자원 1개 추가.",
@@ -107,6 +109,8 @@
   "Deuterium Export": "금성에서 중수소 수출",
   "Action: Add 1 floater to this card.": "행동: 이 카드에 부양체 자원 1개 추가,",
   "Action: Spend 1 floater here to increase your energy production 1 step.": "행동: 카드에 부양체 자원 1개 소비해서 에너지 생산력 1 증가.",
+  "Remove 1 floater to raise energy production 1 step": "카드에 부양체 자원 1개 제거해서 에너지 생산력 1 증가.",
+  "Remove floater": "부양체 자원 제거.",
 
   "Extractor Balloons": "대기 포집 풍선",
   "Action: Remove 2 floaters here to raise Venus 1 step.": "행동: 이 카드의 부양체 자원 2개 소비해서 금성 개척률 1단계 상승.",
@@ -157,7 +161,7 @@
 
   "Venusian Animals": "금성 동물",
   "18% Venus": "조건: 금성개척률 18% 이상.",
-  "Effect: When you play a science tag, including this, add 1 animal to this card.": "지속효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 과학 태그 수만큼 이 카드에 동물 자원 추가.",
+  "Effect: When you play a science tag, including this, add 1 animal to this card.": "지속 효과: 이 카드도 포함해서 카드 사용 시, 그 카드의 과학 태그 수만큼 이 카드에 동물 자원 추가.",
   "Requires Venus 18%": "조건: 금성개척률 18% 이상.",
 
   "Venus Magnetizer": "금성 자기장 형성기",
@@ -171,5 +175,9 @@
   "Requires Venus 10%. Increase the Venus track 1 step.": "조건: 금성개척률 10% 이상.) (금성 개척률 1단계 상승.",
 
   "Orbital Reflectors": "궤도 반사경",
-  "Raise Venus 2 steps. Increase your heat production 2 steps.": "금성 개척률 2단계 상승. 열 생산력 2 증가."
+  "Raise Venus 2 steps. Increase your heat production 2 steps.": "금성 개척률 2단계 상승. 열 생산력 2 증가.",
+
+  "Saturn Surfing": "토성 서핑",
+  "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.": "행동: 이 카드 위의 부양체 자원 1개를 제거하고, 제거하기 전의 부양체 자원 개수만큼(최대 5개) 메가크레딧 획득.",
+  "Add 1 floater here for every Earth tag you have, including this.": "보유한 지구 태그의 수만큼 이 카드 위에 부양체 자원 추가."
 }

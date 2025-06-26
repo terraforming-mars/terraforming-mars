@@ -1,0 +1,257 @@
+{
+  "Advanced Power Grid": "향상된 전력 격자",
+  "(Increase your energy production 2 steps. Increase your M€ production 1 step per power tag you have, including this.)": "(에너지 생산력 2 증가. 이 카드를 포함해서 보유한 전기 태그당 메가크레딧 생산력 증가.)",
+
+  "Agro-Drones": "농업용 드론",
+  "(Action: Spend 1 steel and 1 energy to gain 3 plants.)": "(행동: 강철 자원 1개와 에너지 자원 1개를 소비해서 식물 자원 3개 획득.)",
+  "(Requires -18° C or warmer.)": "(조건: 기온 -18°C 이상.)",
+
+  "Anthozoa": "산호충",
+  "(Action: Spend 1 plant to add an animal to this card.)": "(행동: 식물 자원 1개를 제거해서 이 카드에 동물 자원 1개 추가.)",
+  "(Requires 3 oceans on Mars. 1 VP per 2 animals on this card.)": "(조건: 화성의 해양 타일 3장 이상.) (게임 종료 시, 이 카드에 놓인 동물 자원 2개당 승점 1점.)",
+
+  "Asteroid Resources": "운석 자원",
+  "(Spend 3 energy. Either increase your steel and titanium production one step, OR place an ocean, and gain 2 steel and one titanium.)": "(에너지 자원 3개 제거. 강철과 티타늄 생산력 1 증가 또는 해양 타일 1장 배치 및 강철 자원 2개와 티타늄 자원 1개 획득.)",
+
+  "Botanical Experience": "식물학적 지식",
+  "(EFFECT: Whenever a greenery tile is placed, add 1 data on this card.) (EFFECT: Whenever this card has at least 3 data, automatically remove 3 data to raise your plant production 1 step.) (EFFECT: Players may remove your plants, but you only lose half, rounded up.)": "(지속 효과: 녹지 타일이 배치될 때마다 이 카드에 데이터 자원 1개 추가.) (지속 효과: 자동으로 이 카드에 놓인 데이터 자원 3개를 제거해 식물 생산력 1 증가.) (지속 효과: 사건형 카드의 효과로 식물 자원이 제거될 경우, 절반만 제거. 단, 소수점 이하 반올림.)",
+  "(Requires one greenery tile on Mars.)": "(조건: 화성에 녹지 타일 1장 이상.)",
+
+  "Breeding Farms": "육종 농장",
+  "(Action: Spend 1 plant to add 1 animal to ANY card.)": "(행동: 식물 자원 1개를 소비해서 아무 카드에 동물 자원 1개 추가.)",
+  "(Requires 1 science tag and 1 animal tag. Raise the temperature 1 step.)": "(조건: 과학 태그, 동물 태그 1개 이상.) (기온 1단계 상승.)",
+
+  "Cassini Station": "카시니 정거장",
+  "(Increase your energy production 1 step for every colony in play. Add 2 floaters to ANY card OR add 3 data to ANY card.)": "(아무 개척기지마다 에너지 생산력 증가. 아무 카드에 부양체 자원 2개 또는 데이터 자원 3개 추가.)",
+
+  "Ceres Spaceport": "세레스 우주 공항",
+  "(Increase your M€ production 2 steps, and titanium production 1 step for every 2 Jovian tags (including these.) Draw a card. Place an ocean tile. Place a city tile ON THE RESERVED AREA.)": "(메가크레딧 생산력 2 증가. 이 카드도 포함해서 보유한 목성 태그 2개당 타티늄 생산력 1 증가. 세레스 우주 공항 전용 구역에 도시 타일 배치.)",
+
+  "Charity Donation": "자선 기부",
+  "Reveal cards from the deck equal to the player count plus 1.": "플레이어 수 +1만큼 더미에서 카드를 공개.",
+  "In player order starting with you, each player takes one card in hand. Discard the remaining card.":  "자신부터 플레이어 순서대로 각 플레이어는 손으로 카드 1장을 골라 가져감. 남은 카드는 버림.",
+
+  "Communication Center": "통신 센터",
+  "(Effect: Whenever ANY PLAYER plays an event, add 1 data to this card.)": "(지속 효과: 아무 플레이어가 사건형 카드를 추진할 때마다, 이 카드에 데이터 자원 1개 추가.)",
+  "(Effect: Remove 3 data to draw a card automatically.)": "(지속 효과: 자동으로 데이터 자원 3개를 제거하여 카드 1장 획득.)",
+  "(Decrease your energy production 1 step. Place 2 data on this card.)": "(에너지 생산력 1 감소. 이 카드에 데이터 자원 2개 추가.)",
+
+  "Controlled Bloom": "제어된 개화",
+  "(Requires 3 oceans. Add 3 microbes to ANY card. Gain 3 plants.)": "(조건: 해양 타일 3장 이상.) (아무 카드에 미생물 자원 3개 추가. 식물 자원 3개 획득.)",
+
+  "Coordinated Raid": "연합 공격대",
+  "(Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.)": "(조건: 아무 개척기지 1개 이상.) (아무 위성에 사용하지 않은 자신의 무역선단을 보냄. 무역 보너스와 이 타일의 각 개척기지당 개척기지 보너스를 획득. 이 행동으로 다른 플레이어들은 개척기지 보너스를 획득하지 않음.)",
+
+  "Crashlanding": "불시착",
+  "(Place AND ORIENT this tile on a non-reserved space adjacent to no more than 1 city.": "(불시착 특수 타일을 도시 타일과 1장 이하로 인접한 빈 구역에 배치.",
+  "Crashsite grants an ADJACENCY BONUS of 1 data, and either 1 steel or 1 titanium.": "불시착 타일의 인접 보너스로 데이터 자원 1개와 더불어, 강철 자원이나 티타늄 자원 중에 인접한 면에 그려진 것과 같은 자원 1개를 제공.",
+  "When placing Crashsite, for each tile you own next it, gain those bonuses.": "불시착 타일을 배치할 때, 그 옆에 있는 자신의 타일 하나당 해당 보너스를 얻음.",
+  "Add 1 data to any card. Add 1 resource to any card.)": "아무 카드에 데이터 자원 1개 추가. 아무 카드에 아무 자원 1개 추가.)",
+
+  "Cryptocurrency": "가상 화폐",
+  "(Action: Spend 1 energy to add 1 data to this card.)": "(행동: 에너지 자원 1개를 소비해서 이 카드에 데이터 자원 1개를 추가.)",
+  "(Action: Remove all data from this card to gain 3M€ per data removed.)": "(행동: 이 카드 위의 모든 데이터 자원을 제거해서 제거한 데이터 자원당 3 M€ 획득.)",
+
+  "Cultivation of Venus": "금성 재배",
+  "(Action: Spend 3 plants to raise Venus 1 step.)": "(행동: 식물 자원 3개를 제거해서 금성 지표 1단계 상승.)",
+  "(1 VP for every 2 Venus tags you own.)": "(금성 태그 2개당 승점 1점.)",
+
+  "Cyanobacteria": "남세균",
+  "(Raise the oxygen level 1%. For every ocean tile, add a microbe to ANY card.)": "(산소 농도 1% 상승. 해양 타일당 미생물 자원을 아무 카드에 추가.)",
+
+  "Data Leak": "데이터 누수",
+  "(Add 5 data to ANY card.)": "(아무 카드에 데이터 자원 5개 추가.)",
+
+  "Declaration of Independence": "독립 선언문",
+  "(Requires that you have at least 6 Mars tags in play. Place 2 delegates in any party.)": "(조건: 보유한 화성 태그 6개 이상.) (아무 정당에 의원 2명 추가.)",
+
+  "Designed Organisms": "인공설계 유기체",
+  "(Requires 5 science tags. Increase your plant production 2 steps. Gain 3 plants. Add 3 microbes to ANY card. Add 1 animal to ANY card.)": "(조건: 과학 태그 5개 이상.) (식물 생산력 2 증가. 식물 자원 3개 획득. 아무 카드에 미생물 자원 3개 추가. 아무 카드에 동물 자원 1개 추가.)",
+
+  "Dust Storm": "먼지 폭풍",
+  "(Every player loses all energy. Raise the temperature 2 steps.)": "(모든 플레이어의 에너지 자원 전부를 제거. 기온 2단계 상승.)",
+
+  "Dyson Screens": "다이슨 스크린",
+  "(Action: Pay 2 titanium to raise your heat and energy production 1 step each.)": "(행동: 티타늄 자원 2개를 소비해서 에너지와 열 생산력 1씩 증가.)",
+  "(Raise the temperature 1 step. Draw a card. Place a city tile ON THE RESERVED AREA. Raise your energy and heat production 2 steps.)": "(기온 1단계 상승. 카드 1장 획득. 다이슨 스크린 전용 구역에 도시 타일 배치. 열과 에너지 생산력 2씩 증가.)",
+
+  "Early Expedition": "초기 탐사",
+  "(Temperature must be -18 C or lower. Decrease your energy production 1 step and Raise your M€ production 3 steps. Add 1 data to ANY card. Place a city tile on Mars NEXT TO NO OTHER TILE.)": "(조건: 기온 -18°C 이하.) (에너지 생산력 1 감소. 메가크레딧 생산력 3 증가. 아무 카드에 데이터 자원 1개 추가. 다른 타일과 인접하지 않은 화성의 빈 구역 한 곳에 도시 타일 배치.)",
+
+  "Economic Espionage": "경제적 첩보",
+  "(Action: Spend 2 M€ to Add 1 data to ANY card.)": "(행동: 2 M€을 소비해서 아무 카드에 데이터 자원 1개 추가.)",
+  "(1VP for every 3 data here.)": "(게임 종료 시, 이 카드에 놓인 데이터 자원 3개당 승점 1점.)",
+
+  "Economic Help": "경제적 지원",
+  "(Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. Increase your M€ production 1 step)": "(가장 낮은 행성 영향력 트랙을 3만큼 전진. 최하위가 동률인 경우에는 모두 2만큼 전진. 메가크레딧 생산력 1 증가.)",
+
+  "Expedition to the Surface - Venus": "금성 표면 탐사",
+  "(Draw 2 cards. Raise Venus 1 step. Gain 1M€ for each of your Venus tags, including this.)": "(카드 2장 획득. 금성 지표 1단계 상승. 이 카드를 포함해서 보유한 금성 태그당 1 M€ 획득.)",
+
+  "Flat Mars Theory": "화성 평면설",
+  "GENERATION": "세대",
+  "(Requires maximum 1 science tag. Increase your M€ production 1 step for every generation played so far.)": "(조건: 과학 태그 1개 이하.) (세대 수만큼 메가크레딧 생산력 증가.)",
+
+  "Floater-Urbanism": "부양체 도시주의",
+  "(Action: Spend 1 floater from any card to add 1 Venusian habitat on this card.)": "(행동: 아무 카드의 부양체 자원 1개를 소비해서 이 카드에 금성 거주지 자원 1개 추가.)",
+  "1 VP for every Venusian habitat on this card.": "이 카드 위에 금성 거주지 자원당 승점 1점.",
+  "(Requires 4 Venus tags.)": "(조건: 금성 태그 4개 이상.)",
+
+  "Geological Expedition": "지질학 탐사",
+  "(Effect: When you place a tile ON MARS gain 1 additional resource on the space. If the space has no bonus, gain 1 steel.)": "(지속 효과: 화성에 타일을 배치할 때, 배치 보너스 중에서 하나를 선택하여 추가로 1번 더 획득. 배치 보너스가 없는 구역인 경우, 강철 자원 1개 획득.)",
+
+  "High Temp. Superconductors": "고온 초전도체",
+  "(Effect: When playing a power card, THE STANDARD PROJECT POWER PLANT, OR THE KELVINIST RULING POLICY ACTION, pay 3M€ less.)": "(지속 효과: 발전소 건설 일반 프로젝트 또는 켈빈당 정책 행동의 비용 3 M€ 할인.)",
+  "(Requires Kelvinists are ruling or you have 2 delegates there. Increase your energy production 2 steps.)": "(조건: 켈빈당이 집권, 또는 켈빈당에 자기 의원이 2명 이상.) (에너지 생산력 2 증가.)",
+
+  "Huygens Observatory": "호이겐스 천문대",
+  "(Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that is already on a colony tile, but you may not trade with the tile that fleet came from. Gain 1 TR.)": "(개척기지 배치하되, 이미 개척지기를 배치한 위성에도 배치 가능. 비용을 지불하지 않고 무역사업 수행. 이미 위성 타일에 보낸 무역선단을 되돌리고 이를 사용할 수 있으며, 이 경우 아직 무역선단을 보내지 않은 위성을 선택. 테라포밍 등급 1 TR 상승.)",
+
+  "Hydrogen Processing Plant": "수소 처리 플랜트",
+  "(Oxygen level must be 3% or higher. Decrease oxygen level 1% Raise your energy production 1 step for every two ocean tiles on Mars.)": "(조건: 산소 농도 3% 이상.) (산도 농도 1% 감소. 화성에 있는 해양 타일 2장당 에너지 생산력 1 증가.)",
+
+  "Interplanetary Transport": "성간 수송",
+  "(Increase your M€ production 1 step for every offworld city tile.)": "(화성 외의 공간에 존재하는 도시 타일 1장당 메가크레딧 생산력 1 증가.)",
+
+  "Kickstarter": "킥스타터",
+  "(Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 3 steps in total.)": "(행성 태그를 하나 선택. 이 카드는 선택한 태그를 가지고 있는 것으로 간주. 해당 행성 영향력 트랙을 총 3단계 전진.)",
+
+  "Last Resort Ingenuity": "기발한 최후의 수단",
+  "The next card you play this generation can be paid for with steel or titanium despite its tags.": "태그와 상관없이 이번 세대에 다음에 추진하는 프로젝트의 비용으로 강철과 티타늄도 사용 가능.",
+
+  "Lobby Halls": "로비 홀",
+  "(Increase your M€ production 2 steps. Place 1 delegate in any party. Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 1 step.)": "(메가크레딧 생산력 2 증가. 아무 정당에 의원 1명 배치. 행성 태그를 하나 선택. 이 카드는 선택한 태그를 1개 가진 것으로 간주. 선택한 태그의 행성 영향력 트랙 1 상승.)",
+
+  "Lunar Embassy": "월면 대사관",
+  "(Increase your M€ production 3 steps, and plant production 1 step for every 2 Earth tags (including this.) Draw a card. Place a city tile ON THE RESERVED AREA.)": "(메가크레딧 생산력 3 증가.  카드도 포함해서 보유한 지구 태그 2개당 식물 생산력 1 증가. 카드 1장 획득. 월면 대사관 전용 구역에 도시 타일 배치.)",
+
+  "Luxury Estate": "호화로운 사유지",
+  "(Oxygen must be 7% or greater. Gain 1 titanium for each city tile and greenery tile you own.)": "(조건: 산소 농도 7% 이상.) (자신이 보유한 도시/녹지 타일 1장당 티타늄 자원 1개 획득.)",
+
+  "Martian Culture": "화성 문화",
+  "(Action: Add 1 data to ANY card.)": "(행동: 아무 카드에 데이터 자원 1개 추가.)",
+  "(Requires any 2 Mars tags in play. 1 VP for every 2 data here.)": "(조건: 아무 화성 태그 2개 이상.) (이 카드에 놓인 데이터 자원 2개당 승점 1점.)",
+
+  "Martian Dust Processing Plant": "화성 분진 처리 시설",
+  "(Decrease your energy production 1 step, and raise your steel production 2 steps. Gain 1 TR.)": "(에너지 생산력 1 감소. 강철 생산력 1 증가. 테라포밍 등급 1 TR 증가.)",
+
+  "Martian Monuments": "화성 기념물",
+  "(Requires that you own a city ON MARS. Raise your M€ production 1 step for every Mars tag you own (including this.))": "(조건: 화성에 보유한 도시 타일 1장 이상.) (이 카드를 포함해서 보유한 화성 태그당 메가크레딧 1 증가.)",
+
+  "Martian Nature Wonders": "화성 - 자연의 신비",
+  "(Place a neutral player cube on a non-reserved space. No tile can be placed on that space this game. Gather any bonus on that space, but no bonuses from adjacent spaces. Add 2 data to ANY card.)": "(자신의 플레이어 마커를 전용 구역을 제외한 화성의 빈 구역 한 곳에 배치. 이제부터 그 구역에는 어떠한 타일도 배치할 수 없음. 인접 보너스는 제외하고 해당 구역에 표시된 배치 보너스 획득. 아무 카드에 데이터 자원 2개 추가.)",
+
+  "Martian Repository": "화성 - 지식 저장소",
+  "(Effect: For every science or Mars tag you play (including these) add 1 data to this card.)": "(지속 효과: 이 카드도 포함해서 자신이 플레이한 카드의 과학/화성 태그마다 이 카드에 데이터 자원 1개 추가.)",
+  "(Decrease your energy production 1 step. 1 VP for every 3 data here.)": "(에너지 생산력 1 감소.) (게임 종료 시, 이 카드에 놓인 데이터 자원 3개당 승점 1점.)",
+
+  "Microbiology Patents": "미생물학 특허",
+  "(Effect: After you play a card with a microbe tag, increase your M€ production 1 step.)": "(지속 효과: 미생물 태그가 있는 카드를 추진할 때마다, 메가크레딧 생산력 1 증가.)",
+
+  "Museum of Early Colonisation": "초기 식민지사 박물관",
+  "(Requires 1 ocean, 1 city and one greenery on Mars. Decrease your energy production 1 step. Raise your steel, titanium, and plant production 1 step. Gain 1 TR.)": "(조건: 화성에 해양 타일, 도시 타일, 녹지 타일 각 1장 이상.) (에너지 생산력 1 감소. 강철, 티타늄, 식물 생산력 1씩 증가. 테라포밍 등급 1 TR 상승.)",
+
+  "New Venice": "뉴 베니스",
+  "(Requires 3 ocean tiles. Lose 2 plants. Increase your energy production 1 step and your M€ production 2 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.)": "(조건: 해양 타일 3장 이상.) (식물 자원 2개 제거. 메가크레딧 생산력 2 증가. 에너지 생산력 1 증가. 일반적인 도시 배치 규칙을 무시하고 이미 배치된 해양 타일 위에 뉴 베니스 특수 타일을 배치. 이 타일은 도시 타일이자 해양 타일인 것으로 간주.)",
+
+  "Nobel Labs": "노벨 연구소",
+  "(Action: Add 2 microbes OR 2 data OR 2 floaters to ANY card.)": "(행동: 미생물, 데이터, 부양체 중 한 종류를 골라 아무 카드에 그 자원 2개 추가.)",
+  "(Requires 4 science tags.)": "(조건: 과학 태그 4개 이상.)",
+
+  "Orbital Laboratories": "궤도상 실험실",
+  "(Increase your plant production 2 steps. Gain 1 plant.)": "(식물 생산력 2 증가. 식물 자원 1개 획득.)",
+
+  "Oumuamua Type Object Survey": "오무아무아 혜성 조사작업",
+  "Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.": "카드를 앞면으로 2장 펼쳐, 첫 번째 카드가 과학 또는 미생물 태그를 가진 경우, 추진 조건을 무시하고 그 카드를 추진. 그렇지 않고 우주 태그라면, 에너지 생산력 3 증가. 이러한 태그가 3개 모두에도 없다면 두 번째 카드에도 동일하게 적용. 나머지 카드는 모두 손으로 가져옴.",
+  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card.)": "(조건: 과학, 우주 태그 각 1개 이상.) (아무 카드에 데이터 자원 2개 추가.)",
+
+  "Ozone Generators": "오존 생성기",
+  "(Action: Spend 3 energy to gain 1 TR.)": "(행동: 에너지 자원 3개를 소비해서 테라포밍 등급 1 TR 상승.)",
+  "(Requires 6% Oxygen.)": "(조건: 산소 농도 6% 이상.)",
+
+  "Pollinators": "수분 조절기",
+  "(Action: Add 1 animal on this card)": "(행동: 이 카드에 동물 자원 1개 추가.)",
+  "(Requires 3 plant tags. Raise your plant production 1 step and your M€ production 2 steps.)": "(조건: 식물 태그 3개 이상.) (식물 생산력 1 증가. 메가크레딧 생산력 2 증가.)",
+
+  "Power Plant": "발전소",
+  "(Increase your heat production 2 steps and your energy production 1 step.)": "(열 생산력 2 증가. 에너지 생산력 1 증가.)",
+
+  "Prefabrication of Human Habitats": "조립식 거주지",
+  "(Effect: Cards with a city tag cost 2M€ less.)": "(지속 효과: 도시 태그가 있는 카드의 추진 비용 2 M€ 할인.)",
+  "(Effect: The CITY STANDARD PROJECT costs 2M€ less. STEEL MAY BE USED as if you were playing a building card.)": "(지속 효과: 도시 건설 일반 프로젝트 비용 2 M€ 할인. 이때, 건물 카드를 사용할 때처럼 강철 자원도 사용할 수 있음.)",
+  "(Requires that you have steel production.)": "(조건: 강철 생산력 1 이상.)",
+
+  "Private Security": "민간 경비",
+  "Opponents may not remove your basic resource production": "다른 플레이어들은 자신의 기본 자원 생산력을 제거할 수 없음.",
+  "NO": "불가",
+
+  "Public Sponsored Grant": "공공 후원 보조금",
+  "(Requires Scientists are ruling or that you have 2 delegates there. All players lose 2M€. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.)": "(조건: 과학당이 집권, 또는 과학당에 자기 의원이 2명 이상.) (만능, 도시, 행성 태그가 아닌 태그 하나를 선택하고 선택한 태그가 있는 카드 2장 획득.)",
+
+  "Rare-Earth Elements": "희토류",
+  "(Increase your M€ production by 1 for every special tile you own on Mars.)": "(화성에 배치한 자신 소유의 특수 타일 1장당 메가크레딧 생산력 1 증가.)",
+
+  "Red City": "붉은 도시",
+  "(Requires that Reds are ruling or that you have 2 delegates there. -1 energy prod, +2 M€ prod. Place the special tile on Mars ADJACENT TO NO GREENERY. NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space (or hazard) next to this tile.)": "(조건: 적색당이 집권, 또는 적색당에 자기 의원이 2명 이상.) (에너지 생산력 1 감소. 메가크레딧 생산력 2 증가. 녹지 타일에 인접하지 않은 화성의 빈 구역에 붉은 도시 특수 타일 배치. 이 타일에 인접한 구역에는 녹지 타일을 배치할 수 없음.) (게임 종료 시, 이 타일에 인접한 빈 구역이나 위험 구역당 승점 1점.)",
+
+  "Return to Abandoned Technology": "버린 기술로의 회귀",
+  "Draw the top 4 cards from the discard pile. Choose 2 to keep and discard the rest.": "버린 카드 더미의 최상단 카드 4장을 확인한 후, 그 중 2장을 획득하고 나머지는 버림.",
+
+  "Rich Deposits": "풍부한 예치금",
+  "(Requires 2 science tags. Increase your steel production 3 steps.)": "(조건: 과학 태그 2개 이상.) (강철 생산력 3 증가.)",
+
+  "Secret Labs": "비밀 연구소",
+  "(Requires 1 science tag and 1 Jovian tag. Place an ocean tile. Add 2 microbes to ANY card. OR Raise temperature 1 step. Gain 3 plants. OR Raise oxygen level 1 step. Add 2 floaters to ANY card.)": "(조건: 과학 태그와 목성 태그 각 1개씩 이상.) (해양 타일을 1개 배치하고 아무 카드에 미생물 자원 2개 추가 또는 기온을 1단계 올리고 식물 자원 3개 획득 또는 산소 농도를 1단계 올리고 아무 카드에 부양체 자원 2개 추가.)",
+
+  "Small Comet": "작은 혜성",
+  "(Every player loses 2 plants. Raise the temperature 1 step. Raise the oxygen 1 step. Place an ocean ON AN AREA NOT RESERVED FOR OCEAN. Gain 1 titanium.)": "(모든 플레이어의 식물 자원 2개 제거. 기온 1단계 상승. 산소 농도 1단계 상승. 화성에 비어있고 전용 구역이 아닌 아무 구역에 해양 타일 1장 배치. 티타늄 자원 1개 획득.)",
+
+  "Small Open Pit Mine": "소형 노천 채굴",
+  "(Increase your steel production 2 steps OR increase your titanium production 1 step.)": "(강철 생산력 2 증가 또는 티타늄 생산력 1 증가.)",
+
+  "Social Events": "사회적 사건",
+  "(Gain 1 TR for every 2 Mars tags you have (including this one.))": "(이 카드를 포함하여 보유한 화성 태그 2개당 테라포밍 등급 1 TR 상승.)",
+
+  "Soil Detoxification": "토양 정화",
+  "(Effect: Using the STANDARD GREENERY ACTION costs 1 plant less.)": "(지속 효과: 식물 자원 1개 덜 지불하여 녹지 형성 일반 행동을 수행.)",
+  "(Requires that Greens are ruling or you have 2 delegates there. Increase your plant production 1 step)": "(조건: 녹색당이 집권, 또는 녹색당에 자기 의원이 2명 이상.) (식물 생산력 1 증가.)",
+
+  "Solar Storm": "태양 폭풍",
+  "(Every player loses 2 plants. Remove up to 3 data from any player. Raise your heat production 1 step. Raise the temperature 1 step.)": "(모든 플레이어는 식물 자원 2개 제거. 아무 플레이어의 데이터 자원 3개 제거. 열 에너지 생산력 1 증가. 기온 1단계 상승.)",
+
+  "Solarpedia": "솔라페디아",
+  "(Action: Add 2 data to ANY card.)": "(행동: 아무 카드에 데이터 자원 2개 추가.)",
+  "(Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.)": "(조건: 금성, 지구, 화성, 목성 태그 각 1개 이상.) (아무 카드에 데이터 자원 2개 추가.) (게임 종료 시, 이 카드에 놓인 데이터 자원 6개당 승점 1점.)",
+
+  "Space Debris Cleaning Operation": "우주 잔해 청소 작업",
+  "(Requires any 4 space tags in play. Gain 3 titanium. Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) Add 1 data to ANY card. Draw 1 card.)": "(조건: 아무 우주 태그 4개 이상.) (티타늄 자원 3개 추가. 아무 카드에 과학 자원이나 동물 자원이 아닌 아무 자원 1개 추가. 카드 1장 획득.)",
+
+  "Space Relay": "우주 릴레이",
+  "(Effect: Whenever you play a card with a Jovian tag, including this, draw a card.)": "(지속 효과: 이 카드도 포함해서 목성 태그를 추진할 때마다 카드 1장 획득.)",
+  "Increase your M€ production 1 step.": "메가크레딧 생산력 1 증가.",
+
+  "Specialized Settlement": "특수 결제",
+  "(Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile on Mars. Increase your production by 1 of a resource on the map gained by placement bonus.)": "(에너지 생산력 1 감소. 메가크레딧 3 증가. 화성에 도시 타일 1장 배치. 배치 보너스로 얻는 자원에 대한 생산력 1 증가.)",
+
+  "Terraforming Control Station": "테라포밍 관리 정거장",
+  "(Effect: When you play a Venus or Mars tag, pay 2 M€ less.)": "(지속 효과: 목성/화성 태그의 프로젝트 추진 비용 2 M€ 할인.)",
+  "(Raise your TR 2 steps.)": "(테라포밍 등급 2 TR 상승.)",
+
+  "Terraforming Robots": "테라포밍 로봇",
+  "(Effect: When you play a Mars tag, add 1 specialized robot on this card.)": "(지속 효과: 화성 태그가 있는 카드를 추진할 때마다, 이 카드에 특화 로봇 자원 1개 추가.)",
+  "1 VP for every specialized robot on this card.": "이 카드의 특화 로봇 자원마다 승점 1점.",
+
+  "Think Tank": "씽크 탱크",
+  "(Action: Spend 2 M€ to place 1 data on any card.)": "(행동: 2 M€을 지불하여 아무 카드에 데이터 자원 1개 추가.)",
+  "+/-1 global parameter": "±1 행성 지표",
+  "(Effect: When playing a card, you can remove data from this card to change the card's global requirement by 1 step for every 1 data removed.)": "(지속 효과: 카드 추진 시, 이 카드에 놓인 데이터 자원 2개를 제거하여 금성개척률을 포함한 행성 지표 조건을 +1단계 또는 -1단계 적용 가능.)",
+
+  "Venera Base": "베네라 기지",
+  "(Action: Add 1 floater to ANY Venus card)": "(행동: 아무 금성 카드에 부양체 자원 1개 추가.)",
+  "1 VP per 2 Venus tags you have.": "보유한 금성 태그 2개당 승점 1점.",
+  "Requires Unity is ruling or that you have 2 delegates there. Raise your M€ production 3 steps and place a city tile ON THE RESERVED AREA.": "조건: 통합당이 집권, 또는 통합당에 자기 의원이 2명 이상.) (메가크레딧 생산력 3 증가. 베네라 기지 전용 구역에 도시 타일 배치.",
+
+  "Wetlands": "습지",
+  "(Requires 2 ocean tiles. Lose 4 plants. Place this tile on an UNRESERVED SPACE ADJACENT TO AT LEAST 2 OCEANS. Raise oxygen 1 step. Gain 1 TR.)": "(조건: 해양 타일 2장 이상.) (식물 자원 4개 제거. 습지 특수 타일을 해양 타일이 놓이는 곳 이외의 구역에 배치. 이때, 이미 배치된 2개 이상의 해양 타일과 맞닿게 놓아야 함. 자신의 플레이어 마커를 습지 특수 타일에 배치. 산소 농도 1% 상승. 테라포밍 등급 1 TR 상승.)",
+  "(Effect: Wetlands counts as a greenery tile and an ocean tile, except it can't be covered and is not one of the 9 oceans required to end the game.)": "(지속 효과: 습지는 녹지 타일이자 동시에 해양 타일인 것으로 간주. 게임 종료 조건인 9개의 해양 타일 수에는 포함하지 않음.)"
+}

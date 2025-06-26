@@ -4,7 +4,6 @@ import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class Livestock extends ActionCard implements IProjectCard {
@@ -17,7 +16,7 @@ export class Livestock extends ActionCard implements IProjectCard {
 
       resourceType: CardResource.ANIMAL,
       victoryPoints: {resourcesHere: {}},
-      requirements: CardRequirements.builder((b) => b.oxygen(9)),
+      requirements: {oxygen: 9},
 
       behavior: {
         production: {plants: -1, megacredits: 2},
@@ -31,7 +30,7 @@ export class Livestock extends ActionCard implements IProjectCard {
         cardNumber: '184',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 animal to this card.', (eb) => {
-            eb.empty().startAction.animals(1);
+            eb.empty().startAction.resource(CardResource.ANIMAL);
           }).br;
           b.production((pb) => {
             pb.minus().plants(1).nbsp.plus().megacredits(2);

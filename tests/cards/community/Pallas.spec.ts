@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Pallas} from '../../../src/server/cards/community/Pallas';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
@@ -8,17 +8,18 @@ import {Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {IParty} from '../../../src/server/turmoil/parties/IParty';
+import {MultiSet} from 'mnemonist';
 
-describe('Pallas', function() {
+describe('Pallas', () => {
   let pallas: Pallas;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
   let greens: IParty;
   let scientists: IParty;
 
-  beforeEach(function() {
+  beforeEach(() => {
     pallas = new Pallas();
     [game, player, player2] = testGame(2, {turmoilExtension: true, coloniesExtension: true});
     game.colonies.push(pallas);
@@ -30,7 +31,7 @@ describe('Pallas', function() {
     scientists.delegates.clear();
   });
 
-  it('Should build', function() {
+  it('Should build', () => {
     expect(turmoil.getPlayerInfluence(player)).eq(0);
     expect(turmoil.getPlayerInfluence(player2)).eq(0);
     pallas.addColony(player);
@@ -44,7 +45,7 @@ describe('Pallas', function() {
     expect(turmoil.getPlayerInfluence(player2)).eq(1);
   });
 
-  it('Should trade', function() {
+  it('Should trade', () => {
     pallas.trackPosition = 4; // Send 2 delegates
     pallas.trade(player);
 
@@ -55,7 +56,7 @@ describe('Pallas', function() {
 
     const selectParty = cast(player.popWaitingFor(), SelectParty);
     selectParty.cb(PartyName.GREENS);
-    expect(Array.from(greens.delegates.values())).deep.eq([player.id]);
+    expect(greens.delegates).deep.eq(MultiSet.from([player]));
     expect(scientists.delegates.size).eq(0);
 
     runAllActions(game);
@@ -63,20 +64,20 @@ describe('Pallas', function() {
     const selectParty2 = cast(player.popWaitingFor(), SelectParty);
     selectParty2.cb(PartyName.SCIENTISTS);
 
-    expect(Array.from(greens.delegates.values())).deep.eq([player.id]);
-    expect(Array.from(scientists.delegates.values())).deep.eq([player.id]);
+    expect(greens.delegates).deep.eq(MultiSet.from([player]));
+    expect(scientists.delegates).deep.eq(MultiSet.from([player]));
 
     runAllActions(game);
 
     cast(player.popWaitingFor(), undefined);
   });
 
-  it('Should give trade bonus', function() {
+  it('Should give trade bonus', () => {
     pallas.addColony(player);
     player.megaCredits = 0;
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
     pallas.trade(player2); // player2 is trading. But player(1) is getting the MC
     runAllActions(game);
     const sendDelegates = cast(player2.popWaitingFor(), SelectParty);
@@ -86,13 +87,13 @@ describe('Pallas', function() {
     expect(player.megaCredits).eq(3);
   });
 
-  it('Colony benefit occurs after trade bonus', function() {
+  it('Colony benefit occurs after trade bonus', () => {
     pallas.addColony(player);
     player.megaCredits = 0;
     pallas.trackPosition = 2; // Send 1 delegate
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    turmoil.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
+    turmoil.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
     pallas.trade(player); // player(1) is trading and gaining the mc.
     runAllActions(game);
     const sendDelegates = cast(player.popWaitingFor(), SelectParty);

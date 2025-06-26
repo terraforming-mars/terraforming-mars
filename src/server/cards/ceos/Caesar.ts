@@ -5,9 +5,8 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 
 import {SelectProductionToLoseDeferred} from '../../deferredActions/SelectProductionToLoseDeferred';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {PlaceHazardTile} from '../../deferredActions/PlaceHazardTile';
-import {HAZARD_TILES, TileType} from '../../../common/TileType';
+import {TileType} from '../../../common/TileType';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 
@@ -41,16 +40,13 @@ export class Caesar extends CeoCard {
       game.defer(new PlaceHazardTile(player, TileType.EROSION_MILD));
     }
 
-    const otherPlayers = game.getPlayers().filter((p) => p.id !== player.id);
-
-    game.defer(new SimpleDeferredAction(player, () => {
-      const hazardTileCount = game.board.spaces.filter((space) => space.tile && HAZARD_TILES.has(space.tile.tileType)).length;
-      otherPlayers.forEach((opponent) => {
-        const units = hazardTileCount < 6 ? 1 : 2;
+    player.defer(() => {
+      const units = game.board.getHazards().length < 6 ? 1 : 2;
+      player.getOpponents().forEach((opponent) => {
         game.defer(new SelectProductionToLoseDeferred(opponent, units));
       });
       return undefined;
-    }));
+    });
 
     return undefined;
   }

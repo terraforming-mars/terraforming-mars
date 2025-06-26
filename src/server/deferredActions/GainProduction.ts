@@ -1,9 +1,11 @@
 import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 
 export type Options = {
   count?: number;
+  log?: boolean;
 }
 
 export class GainProduction extends DeferredAction {
@@ -20,10 +22,12 @@ export class GainProduction extends DeferredAction {
       this.options.count = 1;
     } else if (this.options.count < 0) {
       throw new Error('GainProduction count option must be >= 0');
-    } else if (this.options.count === 0) {
-      return undefined;
     }
-    this.player.production.add(this.resource, this.options.count);
+
+    if (this.options.count > 0) {
+      this.player.production.add(this.resource, this.options.count, {log: this.options.log ?? true});
+    }
+    this.cb(undefined);
     return undefined;
   }
 }

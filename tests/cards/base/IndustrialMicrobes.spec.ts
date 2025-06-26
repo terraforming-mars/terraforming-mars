@@ -3,10 +3,10 @@ import {IndustrialMicrobes} from '../../../src/server/cards/base/IndustrialMicro
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('IndustrialMicrobes', function() {
-  it('Should play', function() {
+describe('IndustrialMicrobes', () => {
+  it('Should play', () => {
     const card = new IndustrialMicrobes();
-    const [, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);
     expect(player.production.energy).to.eq(1);
     expect(player.production.steel).to.eq(1);

@@ -3,29 +3,29 @@ import {Algae} from '../../../src/server/cards/base/Algae';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {Decomposers} from '../../../src/server/cards/base/Decomposers';
 import {EcologyExperts} from '../../../src/server/cards/prelude/EcologyExperts';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Phase} from '../../../src/common/Phase';
 import {TestPlayer} from '../../TestPlayer';
 import {setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('Decomposers', function() {
+describe('Decomposers', () => {
   let card: Decomposers;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Decomposers();
     [game, player] = testGame(2);
   });
 
-  it('Can not play', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+  it('Can not play', () => {
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     setOxygenLevel(game, 3);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     card.play(player);
 
     card.onCardPlayed(player, new Birds());
@@ -38,11 +38,11 @@ describe('Decomposers', function() {
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
-  it('Should get triggered by EcoExperts if played together', function() {
+  it('Should get triggered by EcoExperts if played together', () => {
     const ecoExpertCard = new EcologyExperts();
     game.phase = Phase.PRELUDES;
     player.playCard(ecoExpertCard);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     player.playCard(card);
     expect(card.resourceCount).to.eq(3);
   });

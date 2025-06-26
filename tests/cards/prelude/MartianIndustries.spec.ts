@@ -3,10 +3,10 @@ import {MartianIndustries} from '../../../src/server/cards/prelude/MartianIndust
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('MartianIndustries', function() {
-  it('Should play', function() {
+describe('MartianIndustries', () => {
+  it('Should play', () => {
     const card = new MartianIndustries();
-    const [, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);
     expect(player.production.energy).to.eq(1);
     expect(player.production.steel).to.eq(1);

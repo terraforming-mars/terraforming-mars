@@ -1,0 +1,93 @@
+{
+	"Desperate Measures": "Desperate tiltak",
+	"Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.": "Plasser en bronsekube på en sandstorm-brikke og øk oksygen med 1, eller plasser en bronsekube på en erosjon-brikke og øk temperaturen med 1. Det farlige området med bronsekuben kan ikke fjernes.",
+
+	"Mining Area": "Gruveområde",
+	"Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "Plasser en av disse brikkene på et område med en stål- eller titan-plasseringsbonus, VED SIDEN AV EN ANNEN AV DINE BRIKKER. Denne brikken gir en NÆRHETSBONUS av samme ressurs som området. Øk produksjonen av den ressursen med 1.",
+
+	"Industrial Center": "Industrielt senter",
+	"Action: Spend 7 M€ to increase your steel production 1 step.": "Handling: Bruk 7 M€ for å øke stålproduksjonen din med 1.",
+	"Place this tile adjacent to a city tile. This tile grants an ADJACENCY BONUS of 1 steel.": "Plasser denne brikken ved siden av en by-brikke. Denne brikken gir 1 stål i NÆRHETSBONUS.",
+
+	"Marketing Experts": "Markedsføringseksperter",
+	"Effect: When an ADJACENCY BONUS is collected from a tile you own, you gain 1 M€.": "Effekt: Du får 1M€ når en NÆRHETSBONUS samles inn fra en brikke du eier.",
+	"Increase your M€ production 1 step.": "Øk M€-produksjonen din med 1.",
+
+	"Bioengineering Enclosure": "Bioteknisk Innhegning",
+	"Action: Remove 1 animal from THIS card to add 1 animal to ANOTHER card.": "Handling: Fjern 1 dyr fra DETTE kortet for å legge til 1 dyr på ET ANNEN kort.",
+	"Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.": "Krever 1 vitenskapssymbol for å spille. Legg til 2 dyr på dette kortet. ANDRE KAN IKKE FJERNE DYR FRA DETTE KORTET.",
+
+	"Butterfly Effect": "Sommerfugleffekten",
+	"Gain 1 TR. Move each hazard marker up to 1 step up or down along its terraforming track.": "Få 1 TR. Flytt hvert faremerke 1 steg opp eller ned langs sin terraformingsbane.",
+	"All hazard markers": "Alle faremerker",
+
+	"Geological Survey": "Geologisk undersøkelse",
+	"Any max 5 Greeneries": "Maks 5 skogområder",
+	"Effect: When placing a tile ON MARS grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain.": "Effekt: Når du plasserer en brikke PÅ MARS som gir deg stål, titan eller varme, får du en ekstra ressurs av hver av disse.",
+	"Requires 5 or fewer greeneries on Mars.": "Krever 5 eller færre skogområder på Mars.",
+
+	"Ecological Survey": "Økologisk undersøkelse",
+	"Any 3 Greeneries": " 3 skogområder",
+	"Effect: When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain.": "Effekt: Når du plasserer en brikke som gir deg planter, dyr eller mikrober, får du en ekstra ressurs av hver av disse.",
+	"Requires 3 greeneries on Mars.": "Krever 3 skogområder på Mars.",
+
+	"Magnetic Field Generators:ares": "Magnetfeltgeneratorer",
+	"Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile. It provides adjacency bonus of 1 plant and 1 microbe.": "Senk energiproduksjonen din med 4 og øk planteproduksjonen din med 2. Øk TR med 3. Plasser denne brikken. Den gir 1 plante og 1 mikrobe i NÆRHETSBONUS.",
+
+	"Mining Rights": "Gruverettigheter",
+	"Place one of these tiles on an area with a steel or titanium placement bonus. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "Plasser en av disse brikkene på et område med en stål- eller titan-plasseringsbonus. Denne brikken gir en NÆRHETSBONUS av samme ressurs som området. Øk produksjonen av den ressursen med 1.",
+
+	"Natural Preserve": "Naturreservat",
+	"Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an ADJACENCY BONUS of of 1 M€. Increase your M€ production 1 step.": "Oksygen må være 4% eller mindre. Denne brikken gir 1 M€ i NÆRHETSBONUS. Øk M€-produksjonen din med 1. DENNE BRIKKEN KAN IKKE PLASSERES INNTIL ANDRE BRIKKER.",
+
+	"Ocean Sanctuary": "Havreservat",
+	"1 VP per animal on this card.": "1 SP per dyr på dette kortet.",
+	"Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 animal. Add 1 animal to this card.": "Krever 5 hav-brikker. Plasser denne brikken på et eksisterende hav-område. Denne brikken gir 1 dyr i NÆRHETSBONUS. Legg til 1 dyr på dette kortet.",
+
+	"Nuclear Zone": "Kjernefysisk sone",
+	"Raise the temperature two steps. Place this tile. Players must pay an additional 2M€ when they place a tile with their player marker on it ADJACENT to the Nuclear Zone.": "Øk temperaturen med 2. Plasser denne brikken. Spillere må betale 2M€ ekstra når de plasserer en brikke med spillermerket sitt INNTIL Kjernefysisk sone.",
+
+	"Restricted Area": "Avgrenset område",
+	"Action: Spend 2 M€ to draw a card.": "Handling: Betal 2 M€ for å trekke et kort.",
+	"Place this tile which grants an ADJACENCY BONUS of 1 card.": "Plasser denne brikken. Den gir 1 kort i NÆRHETSBONUS.",
+
+	"Solar Farm": "Solcellefarm",
+	"Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your energy production 1 step for each plant resource on the area where you place the tile.": "Plasser denne brikken. Den gir 2 energi i NÆRHETSBONUS. Øk energiproduksjonen din med 1 for hver plante-ressurs på området der du plasserer brikken.",
+
+	"Great Dam:ares": "Stor demning",
+	"Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile. The tile grants an ADJACENCY BONUS of 2 Energy.": "Krever 4 hav-brikker. Øk energiproduksjonen din med 2. Plasser denne brikken INNTIL en hav-brikke. Denne brikken gir 2 energi i NÆRHETSBONUS.",
+
+	"Deimos Down:ares": "Deimos ned",
+	"Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. It provides adjacency bonus of 1 asteroid and 1 steel. Remove up to 6 plants from any player.": "Øk temperaturen med 3 og få 4 stål. Denne brikken kan ikke plasseres inntil by-brikker. Den gir 1 asteroide og 1 stål i NÆRHETSBONUS. Fjern opptil 6 planter fra en spiller.",
+
+	"Ecological Zone": "Økologisk sone",
+	"Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.": "Effekt: Når du spiller et dyr- eller plante-symbol (INKLUDERT DISSE), legg til et dyr på dette kortet.",
+	"The tile grants an ADJACENCY BONUS of 1 animal. 1 VP per 2 animals on this card.": "Denne brikken gir 1 dyr i NÆRHETSBONUS. 1 SP per 2 dyr på dette kortet.",
+	"Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "Krever at DU har et skogområde. Plasser denne brikken inntil ET VALGFRITT SKOGOMRÅDE.",
+
+	"Bio-Fertilizer Facility": "Anlegg for biogjødsel",
+	"Requires 1 science tag. Increase your plant production 1 step. Add up to 2 microbes to ANY card. Place this tile which grants an ADJACENCY BONUS of 1 plant and 1 microbe.": "Krever 1 vitenskapssymbol. Øk planteproduksjonen din med 1. Legg til opptil 2 mikrober på ET VALGFRITT KORT. Plasser denne brikken. Den gir 1 plante og 1 mikrobe i NÆRHETSBONUS.",
+
+	"Metallic Asteroid": "Metallrik asteroide",
+	"Raise temperature 1 step and gain 1 titanium. Remove up to 4 plants from any player. Place this tile which grants an ADJACENCY BONUS of 1 titanium.": "Øk temperaturen med 1 og få 1 titan. Fjern opptil 4 planter fra en valgfri spiller. Plasser denne brikken. Den gir 1 titan i NÆRHETSBONUS.",
+
+	"Ocean Farm": "Havfarm",
+	"Requires 4 ocean tiles. Increase your heat production 1 step and increase your plant production 1 step. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 plant.": "Krever 4 hav-brikker. Øk varmeproduksjonen din med 1 og planteproduksjonen din med 1. Plasser denne brikken på et eksisterende hav-område. Denne brikken gir 1 plante i NÆRHETSBONUS.",
+
+	"Commercial District": "Forretningsdistrikt",
+	"1 VP per adjacent city tile.": "1 SP per by-brikke som grenser til denne.",
+	"Place this tile which grants an ADJACENCY BONUS of 2 M€. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Plasser denne brikken. Den gir 2 M€ i NÆRHETSBONUS. Senk energiproduksjonen din med 1 og øk M€-produksjonen din med 4.",
+
+	"Ocean City": "Havby",
+	"Requires 6 ocean tiles. Decrease your energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "Krever 6 hav-brikker. Senk energiproduksjonen din med 1 og øk M€-produksjonen din med 3. Plasser denne brikken på et eksisterende hav-område, UTEN Å TA HENSYN TIL NORMALE BEGRENSNINGER FOR BYER. Denne brikken teller som en by og et hav-område.",
+
+	"Lava Flows": "Lavastrømmer",
+	"Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. This tile grants an ADJACENCY BONUS of 2 heat.": "Øk temperaturen med 2 og plasser denne brikken PÅ ET VULKANSK OMRÅDE. Denne brikken gir 2 varme i NÆRHETSBONUS.",
+
+	"Mohole Area": "Mohole-område",
+	"Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN. The tile grants an ADJACENCY BONUS of 2 heat.": "Øk varmeproduksjonen din med 4. Plasser denne brikken PÅ ET OMRÅDE RESERVERT FOR HAV. Denne brikken gir 2 varme i NÆRHETSBONUS.",
+
+	"Capital": "Hovedstad",
+	"1 additional VP for each ocean tile adjacent to this city tile.": "1 SP ekstra for hvert hav-område som grenser til denne by-brikken.",
+	"Requires 4 ocean tiles. Place tile with ADJACENCY BONUS of 2 M€. Energy prod -2 and M€ prod +5.": "Krever 4 hav-brikker. Senk energiproduksjonen din med 2 og øk M€-produksjonen din med 5. Denne brikken gir 2 M€ i NÆRHETSBONUS."
+}

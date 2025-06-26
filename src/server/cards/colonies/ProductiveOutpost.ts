@@ -2,10 +2,11 @@ import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
+import {IColony} from '../../colonies/IColony';
+import {ColonyName} from '../../../common/colonies/ColonyName';
 
 export class ProductiveOutpost extends Card implements IProjectCard {
   constructor() {
@@ -23,11 +24,29 @@ export class ProductiveOutpost extends Card implements IProjectCard {
     });
   }
 
+  // Order:
+  // Titania
+  // All colonies
+  // Leavitt
+  //
+  // TODO(kberg): Make it possible for Leavitt to resolve before Titania.
+
   public override bespokePlay(player: IPlayer) {
-    player.game.colonies.forEach((colony) => {
+    const value = (c: IColony): number => {
+      if (c.name === ColonyName.TITANIA) {
+        return 1;
+      }
+      if (c.name === ColonyName.LEAVITT) {
+        return -1;
+      }
+      return 0;
+    };
+    const sorted = [...player.game.colonies].sort((a, b) => value(b) - value(a));
+
+    sorted.forEach((colony) => {
       colony.colonies.filter((owner) => owner === player.id).forEach((owner) => {
         // Not using GiveColonyBonus deferred action because it's only for the active player
-        player.game.defer(new SimpleDeferredAction(player, () => colony.giveColonyBonus(player.game.getPlayerById(owner))));
+        player.defer(() => colony.giveColonyBonus(player.game.getPlayerById(owner)));
       });
     });
     return undefined;

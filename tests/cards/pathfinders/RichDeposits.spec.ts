@@ -1,18 +1,17 @@
 import {expect} from 'chai';
 import {RichDeposits} from '../../../src/server/cards/pathfinders/RichDeposits';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
-describe('RichDeposits', function() {
+describe('RichDeposits', () => {
   let card: RichDeposits;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new RichDeposits();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    [/* game */, player] = testGame(1);
   });
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.megaCredits = card.cost;
     expect(player.canPlay(card)).is.false;
     player.tagsForTest = {science: 1};
@@ -21,7 +20,7 @@ describe('RichDeposits', function() {
     expect(player.canPlay(card)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     expect(player.production.asUnits().steel).eq(0);
     card.play(player);
     expect(player.production.asUnits().steel).eq(3);

@@ -1,0 +1,30 @@
+{
+  "Trade Embargo (I)": "",
+  "Nobody may trade for the rest of this generation.": "この世代中、誰も交易できない.",
+
+  "Clone Troopers (II)": "",
+  "Action: Add one Clone Trooper to this card OR remove one Clone Trooper from this card to steal one standard resource from any player.": "アクション：このカード上に1クローン・トルーパー追加 または このカード上から1クローン・トルーパー除去し、プレイヤー1人から1標準リソースを盗む.",
+  "Requires 6 ocean tiles. 1 VP per Clone Trooper on this card.": "条件：海洋6枚以上. このカード上の1クローン・トルーパー毎に1VP",
+
+  "Behold The Emperor! (III)": "",
+  "Requires that you are Chairman. The current ruling party will automatically be the ruling party during the next Solar phase, and you will remain the Chairman. (As if the current ruling party were dominant and you were its party leader.)": "条件：あなたが議長. 次の太陽系フェイズの間、与党が変わらず、議長も変わらない.",
+
+  "Tosche Station (IV)": "",
+  "Action: Spend X Energy and gain X-1 plants (max 4.)": "アクション：x電力支払い、x-1植物獲得(最大4).",
+  "max 4": "最大4",
+
+  "Cloud City (V)": "",
+  "Requires Venus 6%. Raise Venus 1 step. Add 2 floaters to any card.": "条件：金星6%以上. 金星+1段階. 2浮遊体獲得.",
+
+  "Forest Moon (VI)": "",
+  "Requires any 4 greeneries on Mars. Decrease any energy production 2 steps. Add an animal to any card.": "条件：緑地4枚以上. プレイヤー1人の電力産出-2. 1動物獲得.",
+
+  "Takonda Castle (VII)": "",
+  "Gain 1 M€ for each of your microbe tags and animal tags.": "微生物タグと動物タグの合計数分、1MC獲得.",
+
+  "Tool with the First Order (VIII)": "",
+  "Take another action this turn. Gain 1 TR.": "1アクションする. TR+1.",
+
+  "Rey ... Skywalker?! (IX)": "",
+  "Raise your M€ production 4 steps. Place a bronze cube on an empty unreserved space on Mars. No tile may be placed on that space for the rest of the game.": "MC産出+4. 非予定地の空きマスに銅キューブを配置. そこに誰もタイルを配置できない."
+}

@@ -3,8 +3,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
-import {MoonSpaces} from '../../../common/moon/MoonSpaces';
-import {TileType} from '../../../common/TileType';
+import {NamedMoonSpaces} from '../../../common/moon/NamedMoonSpaces';
 import {Card} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
@@ -20,7 +19,7 @@ export class MareImbriumMine extends Card implements IProjectCard {
       behavior: {
         production: {steel: 1, titanium: 1},
         moon: {
-          mineTile: {space: MoonSpaces.MARE_IMBRIUM},
+          mineTile: {space: NamedMoonSpaces.MARE_IMBRIUM},
         },
       },
 
@@ -33,7 +32,6 @@ export class MareImbriumMine extends Card implements IProjectCard {
           b.moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).asterix();
         }),
       },
-      tilesBuilt: [TileType.MOON_MINE],
     });
   }
 }

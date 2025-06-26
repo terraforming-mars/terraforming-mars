@@ -12,11 +12,10 @@ describe('Biologist', () => {
 
   beforeEach(() => {
     award = new Biologist();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
   });
 
   it('score', () => {
-    player.playedCards = [];
     expect(award.getScore(player)).eq(0);
     player.playedCards.push(fakeCard({tags: [Tag.MICROBE]}));
     expect(award.getScore(player)).eq(1);
@@ -32,7 +31,6 @@ describe('Biologist', () => {
 
   it('score, with Chimera', () => {
     player.corporations.push(new Chimera());
-    player.playedCards = [];
     expect(award.getScore(player)).eq(1);
     player.playedCards.push(fakeCard({tags: [Tag.MICROBE]}));
     expect(award.getScore(player)).eq(2);

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {CapitalAres} from '../../../src/server/cards/ares/CapitalAres';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Resource} from '../../../src/common/Resource';
@@ -10,17 +10,17 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('CapitalAres', function() {
+describe('CapitalAres', () => {
   let card: CapitalAres;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CapitalAres();
     [game, player] = testGame(2, {aresExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
     for (let i = 0; i < 4; i++) {
       oceanSpaces[i].tile = {tileType: TileType.OCEAN};
@@ -38,9 +38,8 @@ describe('CapitalAres', function() {
     expect(citySpace.spaceType).to.eq(SpaceType.LAND);
     action.cb(citySpace);
 
-    expect(citySpace.tile).is.not.undefined;
     expect(citySpace.player).to.eq(player);
-    expect(citySpace.tile && citySpace.tile.tileType).to.eq(TileType.CAPITAL);
+    expect(citySpace.tile?.tileType).to.eq(TileType.CAPITAL);
     expect(card.getVictoryPoints(player)).to.eq(1);
     expect(citySpace.adjacency).to.deep.eq({bonus: [SpaceBonus.MEGACREDITS, SpaceBonus.MEGACREDITS]});
   });

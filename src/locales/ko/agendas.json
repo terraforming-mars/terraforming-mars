@@ -1,57 +1,63 @@
 {
-   "Select a Mars First bonus.": "화성중심당 집권 보너스 선택",
+   "Select a ${0} bonus": "${0} 집권 보너스 선택",
+   "Select a ${0} policy": "${0} 집권당 정책 선택",
+
    "Gain 1 M€ for each building tag you have": "모든 플레이어는 자신의 건물 태그 수만큼 메가크레딧 획득",
    "Gain 1 M€ for each tile you have ON MARS": "모든 플레이어는 화성에 놓인 자신 소유의 타일만큼 메가크레딧 획득",
-   "Select a Mars First policy.": "화성중심당 집권당 정책 선택",
+   "Gain 1 M€ for each building tag you have (${0})": "모든 플레이어는 자신의 건물 태그 수만큼 메가크레딧 획득 (${0})",
+   "Gain 1 M€ for each tile you have ON MARS (${0})": "모든 플레이어는 화성에 놓인 자신 소유의 타일만큼 메가크레딧 획득 (${0})",
+
    "When you place a tile ON MARS, gain 1 steel": "아무 타일이나 화성에 1장 놓을 때마다 강철 자원 1개 획득",
    "When you play a building tag, gain 2 M€": "건물 태그가 있는 카드를 추진할 때마다 2 M€ 획득",
    "Your steel resources are worth 1 M€ extra": "각 강철 자원의 가치 1 M€ 상승",
    "Spend 4 M€ to draw a Building card (Turmoil Mars First)": "4 M€을 소비하여 건물 태그가 있는 카드 1장 획득",
 
-   "Select a Scientists bonus.": "과학당 집권 보너스 선택",
    "Gain 1 M€ for each science tag you have": "모든 플레이어는 자신의 과학 태그 수만큼 메가크레딧 획득",
    "Gain 1 M€ for every 3 cards in hand": "모든 플레이어는 자신의 손에 있는 카드 3장마다 메가크레딧 획득",
-   "Select a Scientists policy.": "과학당 집권당 정책 선택",
-   "Your global requirements are +/- 2 steps": "추진 조건 중 행성 지표에는 +/- 2단계 중 원하는 것을 적용.",
+   "Gain 1 M€ for each science tag you have (${0})": "모든 플레이어는 자신의 과학 태그 수만큼 메가크레딧 획득 (${0})",
+   "Gain 1 M€ for every 3 cards in hand (${0})": "모든 플레이어는 자신의 손에 있는 카드 3장마다 메가크레딧 획득 (${0})",
+
+   "Your global requirements are +/- 2 steps": "추진 조건 중 행성 지표에는 ±2단계 중 원하는 것을 적용",
    "When you raise a global parameter, draw a card per step raised": "행성 지표를 상승시킬 때마다, 상승시킨 단계당 카드 1장 획득",
    "Cards with Science tag requirements may be played with 1 less Science tag": "모든 카드의 추진 조건에서 과학 태그의 필요 개수가 1개 감소",
 
-   "Select a Unity bonus.": "통합당 집권 보너스 선택",
-   "Gain 1 M€ for each Venus, Earth and Jovian tag you have": "모든 플레이어는 자신의 금성 · 지구 · 목성 태그 수만큼 메가크레딧 획득",
+   "Gain 1 M€ for each Venus, Earth and Jovian tag you have": "모든 플레이어는 자신의 행성(금성 · 지구 · 목성 등) 태그 수만큼 메가크레딧 획득",
    "Gain 1 M€ for each Space tag you have": "모든 플레이어는 자신의 우주 태그 수만큼 메가크레딧 획득",
-   "Select a Unity policy.": "통합당 집권당 정책 선택",
+   "Gain 1 M€ for each Venus, Earth and Jovian tag you have (${0})": "모든 플레이어는 자신의 행성(금성 · 지구 · 목성 등) 태그 수만큼 메가크레딧 획득 (${0})",
+   "Gain 1 M€ for each Space tag you have (${0})": "모든 플레이어는 자신의 우주 태그 수만큼 메가크레딧 획득 (${0})",
+
    "Your titanium resources are worth 1 M€ extra": "각 티타늄 자원의 가치 1 M€ 상승",
    "Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)": "4 M€을 소비하여 티타늄 자원 2개를 획득하거나 아무 카드에 부양체 자원 2개 추가",
    "Spend 4 M€ to draw a Space card (Turmoil Unity)": "4 M€을 소비하여 우주 태그가 있는 카드 1장 획득",
    "Cards with Space tags cost 2 M€ less to play": "우주 태그를 가진 카드의 추진 비용이 2 M€ 할인",
 
-   "Select a Greens bonus.": "녹색당 집권 보너스 선택",
    "Gain 1 M€ for each Plant, Microbe and Animal tag you have": "모든 플레이어는 자신의 식물 · 미생물 · 동물 태그 수만큼 메가크레딧 획득",
-   "Gain 2 M€ for each greenery tile you have": "모든 플레이어는 자신의 녹지 타일 수만큼 메가크레딧 획득",
-   "Select a Greens policy.": "녹색당 집권당 정책 선택",
+   "Gain 2 M€ for each greenery tile you have": "모든 플레이어는 자신의 녹지 타일 수만큼 2 M€ 획득",
+   "Gain 1 M€ for each Plant, Microbe and Animal tag you have (${0})": "모든 플레이어는 자신의 식물 · 미생물 · 동물 태그 수만큼 메가크레딧 획득 (${0})",
+   "Gain 2 M€ for each greenery tile you have (${0})": "모든 플레이어는 자신의 녹지 타일 수만큼 2 M€ 획득 (${0})",
+
    "When you place a greenery tile, gain 4 M€": "녹지 타일을 1장 놓을 때마다 4 M€ 획득",
    "When you place a tile, gain 1 plant": "아무 타일을 1장 놓을 때마다 식물 자원 1개 획득",
    "When you play an animal, plant or microbe tag, gain 2 M€": "식물 · 미생물 · 동물 태그를 가진 카드를 추진할 때마다 2 M€ 획득",
    "Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)": "5 M€을 소비하여 식물 자원 3개를 획득하거나 아무 카드에 미생물 자원 2개 추가",
 
-   "Select a Reds bonus.": "적색당 집권 보너스 선택",
    "The player(s) with the lowest TR gains 1 TR": "테라포밍 등급이 가장 낮은 플레이어(들)의 테라포밍 등급 1 TR 상승",
    "The player(s) with the highest TR loses 1 TR": "테라포밍 등급이 가장 높은 플레이어(들)의 테라포밍 등급 1 TR 감소",
-   "Select a Reds policy.": "적색당 집권당 정책 선택",
-   "When you take an action that raises TR, you MUST pay 3 M€ per step raised": "자신의 테라포밍 등급이 1 TR 상승할 때마다 3 M€ 상실. 보유한 메가크레딧이 3 M€ 미만이면, 테라포밍 등급을 올릴 수 없음.",
-   "When you place a tile, pay 3 M€ or as much as possible": "아무 타일을 1장 놓을 때마다 가능한 3 M€까지 상실",
-   "Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)": "4 M€를 소비하여 목표치에 도달하지 않은 행성 지표 중 하나의 단계를 1만큼 감소시킴 (이때 트랙 보너스는 얻지 못함)",
-   "When you raise a global parameter, decrease your M€ production 1 step per step raised if possible": "행성 지표를 상승시킬 때마다 가능하다면 메가크레딧 생산량을 1만큼 감소시켜야 함",
+   "The player(s) with the lowest TR gains 1 TR (${0})": "테라포밍 등급이 가장 낮은 플레이어(들)의 테라포밍 등급 1 TR 상승 (${0})",
+   "The player(s) with the highest TR loses 1 TR (${0})": "테라포밍 등급이 가장 높은 플레이어(들)의 테라포밍 등급 1 TR 감소 (${0})",
 
-   "Select a Kelvinists bonus.": "켈빈당 집권 보너스 선택",
+   "When you take an action that raises TR, you MUST pay 3 M€ per step raised": "자신의 테라포밍 등급이 1 TR 상승할 때마다 3 M€ 상실 및 보유한 메가크레딧이 3 M€ 미만인 경우에는 테라포밍 등급을 올리기 불가",
+   "When you place a tile, pay 3 M€ or as much as possible": "아무 타일을 1장 놓을 때마다 3 M€까지 가능한 만큼 메가크레딧 상실",
+   "Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)": "4 M€를 소비하여 목표치에 도달하지 않은 행성 지표 중 하나를 1단계 감소시킴 (이때 트랙 보너스는 얻지 못함)",
+   "When you raise a global parameter, decrease your M€ production 1 step per step raised if possible": "행성 지표를 상승시킬 때마다 메가크레딧 생산력을 1까지 가능한 만큼 감소시킴",
+
    "Gain 1 M€ for each heat production you have": "모든 플레이어는 자신의 열 생산력 1마다 1 M€ 획득",
-   "Gain 1 heat for each heat production you have": "모든 플레이어는 자신의 열 생산력 1마다 열 자원 획득",
-   "Select a Kelvinists policy.": "켈빈당 집권당 정책 선택",
+   "Gain 1 heat for each heat production you have": "모든 플레이어는 자신의 열 생산력 1마다 열 자원 1개 획득",
+   "Gain 1 M€ for each heat production you have (${0})": "모든 플레이어는 자신의 열 생산력 1마다 1 M€ 획득 (${0})",
+   "Gain 1 heat for each heat production you have (${0})": "모든 플레이어는 자신의 열 생산력 1마다 열 자원 1개 획득 (${0})",
+
    "Pay 10 M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)": "10 M€을 소비하여 자신의 열 생산력 및 에너지 생산력을 1씩 증가(플레이어당 사용 횟수 제한은 없음)",
    "When you raise temperature, gain 3 M€ per step raised": "기온을 상승시킬 때마다 올린 단계당 3 M€ 획득",
    "Convert 6 heat into temperature (Turmoil Kelvinists)": "기온을 열 자원 6개로 변환",
    "When you place a tile, gain 2 heat": "아무 타일을 1장 놓을 때마다 열 자원 2개 획득"
-
-
-
   }

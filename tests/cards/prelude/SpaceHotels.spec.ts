@@ -3,24 +3,26 @@ import {TestPlayer} from '../../TestPlayer';
 import {SpaceHotels} from '../../../src/server/cards/prelude/SpaceHotels';
 import {testGame} from '../../TestGame';
 
-describe('SpaceHotels', function() {
+describe('SpaceHotels', () => {
   let card: SpaceHotels;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SpaceHotels();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
-  it('Can not play', function() {
-    player.playedCards.push(card);
-    expect(player.simpleCanPlay(card)).is.not.true;
+  it('Can not play', () => {
+    player.tagsForTest = {earth: 1};
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
-    player.playedCards.push(card, card);
-    expect(player.simpleCanPlay(card)).is.true;
+  it('Can play', () => {
+    player.tagsForTest = {earth: 2};
+    expect(card.canPlay(player)).is.true;
+  });
 
+  it('Should play', () => {
     card.play(player);
     expect(player.production.megacredits).to.eq(4);
   });

@@ -1,22 +1,22 @@
 import {expect} from 'chai';
 import {Pollinators} from '../../../src/server/cards/pathfinders/Pollinators';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 import {runAllActions} from '../../TestingUtils';
 
-describe('Pollinators', function() {
+describe('Pollinators', () => {
   let card: Pollinators;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Pollinators();
     [game, player] = testGame(1);
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.megaCredits = card.cost;
     player.tagsForTest = {plant: 2};
     expect(player.canPlay(card)).is.false;

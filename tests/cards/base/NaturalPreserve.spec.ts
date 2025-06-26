@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {NaturalPreserve} from '../../../src/server/cards/base/NaturalPreserve';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
@@ -10,7 +10,7 @@ import {testGame} from '../../TestGame';
 describe('NaturalPreserve', () => {
   let card: NaturalPreserve;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new NaturalPreserve();
@@ -41,10 +41,10 @@ describe('NaturalPreserve', () => {
     card.play(player);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
-    const space = action.availableSpaces[0];
+    const space = action.spaces[0];
     action.cb(space);
     expect(player.production.megacredits).to.eq(1);
-    expect(space.tile && space.tile.tileType).to.eq(TileType.NATURAL_PRESERVE);
+    expect(space.tile?.tileType).to.eq(TileType.NATURAL_PRESERVE);
     expect(space.adjacency?.bonus).eq(undefined);
 
     expect(card.getVictoryPoints(player)).to.eq(1);

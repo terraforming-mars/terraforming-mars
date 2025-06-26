@@ -1,35 +1,35 @@
 import {expect} from 'chai';
-import {churnAction, cast} from '../../TestingUtils';
+import {churn, cast} from '../../TestingUtils';
 import {FloaterTechnology} from '../../../src/server/cards/colonies/FloaterTechnology';
 import {ICard} from '../../../src/server/cards/ICard';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {FloatingHabs} from '../../../src/server/cards/venusNext/FloatingHabs';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('FloaterTechnology', function() {
+describe('FloaterTechnology', () => {
   let card: FloaterTechnology;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new FloaterTechnology();
     [game, player] = testGame(2);
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
     const result = card.play(player);
     expect(result).is.undefined;
   });
 
-  it('Can act without targets', function() {
+  it('Can act without targets', () => {
     expect(card.canAct(player)).is.true;
-    expect(churnAction(card, player)).is.undefined;
+    expect(churn(card.action(player), player)).is.undefined;
   });
 
-  it('Acts automatically with single targets', function() {
+  it('Acts automatically with single targets', () => {
     const dirigibles = new Dirigibles();
     player.playedCards.push(dirigibles);
 
@@ -40,12 +40,12 @@ describe('FloaterTechnology', function() {
     expect(dirigibles.resourceCount).to.eq(1);
   });
 
-  it('Should act with multiple targets', function() {
+  it('Should act with multiple targets', () => {
     const dirigibles = new Dirigibles();
     const floatingHabs = new FloatingHabs();
     player.playedCards.push(dirigibles, floatingHabs);
 
-    const selectCard = cast(churnAction(card, player), SelectCard<ICard>);
+    const selectCard = cast(churn(card.action(player), player), SelectCard<ICard>);
     selectCard.cb([floatingHabs]);
     expect(floatingHabs.resourceCount).to.eq(1);
     expect(dirigibles.resourceCount).to.eq(0);

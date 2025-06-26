@@ -1,35 +1,35 @@
 import {expect} from 'chai';
 import {Ceres} from '../../src/server/colonies/Ceres';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {TestPlayer} from '../TestPlayer';
 import {runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
 
-describe('Ceres', function() {
+describe('Ceres', () => {
   let ceres: Ceres;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     ceres = new Ceres();
     [game, player, player2] = testGame(2, {coloniesExtension: true});
     game.colonies.push(ceres);
   });
 
-  it('Should build', function() {
+  it('Should build', () => {
     ceres.addColony(player);
     expect(player.production.steel).to.eq(1);
     expect(player2.production.steel).to.eq(0);
   });
 
-  it('Should trade', function() {
+  it('Should trade', () => {
     ceres.trade(player);
     expect(player.steel).to.eq(2);
     expect(player2.steel).to.eq(0);
   });
 
-  it('Should give trade bonus', function() {
+  it('Should give trade bonus', () => {
     ceres.addColony(player);
 
     ceres.trade(player2);

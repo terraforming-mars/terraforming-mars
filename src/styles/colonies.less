@@ -1,10 +1,18 @@
-.colony_cube {
+// Is this supposed to be for the Colonies expansion?
+.colony-cube {
+	transform: scale(1.6);
+	margin: 13px 0 0 15px;
+  position: absolute;
+  top: 0;
+}
+
+.colony-track-marker {
     background: url(./assets/cube.png);
     position: absolute;
-    margin-top: 185px;
+    margin: 13px 0 0 15px;
+    top: 0px;
     width: 30px;
     height: 30px;
-    z-index: 3;
 }
 
 .colony-spaceship {
@@ -393,6 +401,37 @@
 
 .Leavitt-II-title {
     &:extend(.Leavitt-title);
+}
+
+.Deimos-title {
+    text-transform: uppercase;
+    background: linear-gradient(to right,rgb(141, 47, 3), transparent);
+}
+
+.Deimos-background {
+    background-image: url("./assets/colonies-planets/deimos.jpg");
+    background-size: 170px;
+    background-position: top -14px right -10px;
+    box-shadow: inset 0 0 4px 4px rgb(180, 71, 8), 0 0 2px 1px black;
+}
+
+.deimos-colony-bonus {
+    display: inline-block;
+}
+
+.deimos-colony-bonus-text {
+    position: relative;
+    top: -3px;
+    left: -3px;
+}
+
+.hazard-tile {
+  background-image: url("./assets/tiles/hazard.png");
+  background-size: 42px 42px;
+  height: 42px;
+  width: 42px;
+  filter: contrast(1.25);
+  margin-top: 3px;
 }
 
 input[type="radio"]:checked + .colonies.filterDiv {

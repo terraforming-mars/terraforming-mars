@@ -1,23 +1,44 @@
 import {expect} from 'chai';
 import {Poseidon} from '../../../src/server/cards/colonies/Poseidon';
 import {Ceres} from '../../../src/server/colonies/Ceres';
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestGame';
+import {cast, runAllActions} from '../../TestingUtils';
+import {SelectColony} from '../../../src/server/inputs/SelectColony';
+import {Units} from '../../../src/common/Units';
 
-// TODO(kberg): add a test for Posideon's initial action.
-
-describe('Poseidon', function() {
-  it('Should play', function() {
+describe('Poseidon', () => {
+  it('Should play', () => {
     const card = new Poseidon();
-    const player = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player);
-    const play = card.play(player);
-    expect(play).is.undefined;
-    player.setCorporationForTest(card);
+    const [/* game */, player, player2] = testGame(2);
+
+    cast(card.play(player), undefined);
+
+    player.corporations.push(card);
     const ceres = new Ceres();
     ceres.addColony(player);
-    expect(player.production.megacredits).to.eq(1);
-    expect(player.production.steel).to.eq(1);
+
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 1, steel: 1}));
+    expect(player2.production.asUnits()).deep.eq(Units.of({}));
+
+    ceres.addColony(player2);
+
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 2, steel: 1}));
+    expect(player2.production.asUnits()).deep.eq(Units.of({steel: 1}));
+  });
+
+  it('initial action', () => {
+    const card = new Poseidon();
+    const [game, player/* , player2 */] = testGame(2, {coloniesExtension: true});
+
+    player.defer(card.initialAction(player));
+    runAllActions(game);
+
+    const selectColony = cast(player.popWaitingFor(), SelectColony);
+    const colony = selectColony.colonies[0];
+    expect(colony.colonies).is.empty;
+
+    selectColony.cb(colony);
+
+    expect(colony.colonies).deep.eq([player.id]);
   });
 });

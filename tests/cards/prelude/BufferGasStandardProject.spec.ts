@@ -1,32 +1,28 @@
 import {expect} from 'chai';
 import {BufferGasStandardProject} from '../../../src/server/cards/prelude/BufferGasStandardProject';
-import {runAllActions} from '../../TestingUtils';
+import {runAllActions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
-import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
-import {Reds} from '../../../src/server/turmoil/parties/Reds';
-import {Phase} from '../../../src/common/Phase';
+import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
 
-describe('BufferGasStandardProject', function() {
+describe('BufferGasStandardProject', () => {
   let card: BufferGasStandardProject;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new BufferGasStandardProject();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     player.megaCredits = card.cost - 1;
     expect(card.canAct(player)).is.false;
     player.megaCredits = card.cost;
     expect(card.canAct(player)).is.true;
   });
 
-  it('action', function() {
+  it('action', () => {
     player.megaCredits = card.cost;
     player.setTerraformRating(20);
 
@@ -34,21 +30,11 @@ describe('BufferGasStandardProject', function() {
     runAllActions(game);
 
     expect(player.megaCredits).eq(0);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
   });
 
-  it('Can not act with reds', () => {
+  it('Test reds', () => {
     [game, player] = testGame(1, {turmoilExtension: true});
-
-    player.megaCredits = card.cost;
-    player.setTerraformRating(20);
-    player.game.phase = Phase.ACTION;
-    player.game.turmoil!.rulingParty = new Reds();
-    PoliticalAgendas.setNextAgenda(player.game.turmoil!, player.game);
-    expect(card.canAct(player)).eq(false);
-    player.megaCredits = card.cost + 2;
-    expect(card.canAct(player)).eq(false);
-    player.megaCredits = card.cost + 3;
-    expect(card.canAct(player)).eq(true);
+    testRedsCosts(() => card.canAct(player), player, card.cost, 3);
   });
 });

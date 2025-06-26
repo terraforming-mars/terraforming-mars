@@ -1,25 +1,25 @@
 import {expect} from 'chai';
 import {BusinessEmpire} from '../../../src/server/cards/prelude/BusinessEmpire';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
-describe('BusinessEmpire', function() {
+describe('BusinessEmpire', () => {
   let card: BusinessEmpire;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new BusinessEmpire();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     player.megaCredits = 5;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.megaCredits = 6;
     expect(card.canPlay(player)).is.true;
     card.play(player);

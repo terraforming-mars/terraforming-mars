@@ -3,10 +3,10 @@ import {testGame} from '../../TestGame';
 import {SolarPower} from '../../../src/server/cards/base/SolarPower';
 import {cast} from '../../TestingUtils';
 
-describe('SolarPower', function() {
-  it('Should play', function() {
+describe('SolarPower', () => {
+  it('Should play', () => {
     const card = new SolarPower();
-    const [, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);
     expect(player.production.energy).to.eq(1);
     expect(card.getVictoryPoints(player)).to.eq(1);

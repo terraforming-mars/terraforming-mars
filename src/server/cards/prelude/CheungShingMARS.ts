@@ -1,15 +1,12 @@
 import {Tag} from '../../../common/cards/Tag';
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Card} from '../Card';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class CheungShingMARS extends Card implements ICorporationCard {
+export class CheungShingMARS extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.CHEUNG_SHING_MARS,
       tags: [Tag.BUILDING],
       startingMegaCredits: 44,
@@ -27,7 +24,7 @@ export class CheungShingMARS extends Card implements ICorporationCard {
           b.production((pb) => pb.megacredits(3)).nbsp.megacredits(44);
           b.corpBox('effect', (ce) => {
             ce.effect('When you play a building tag, you pay 2 M€ less for it.', (eb) => {
-              eb.building(1, {played}).startEffect.megacredits(-2);
+              eb.tag(Tag.BUILDING).startEffect.megacredits(-2);
             });
           });
         }),

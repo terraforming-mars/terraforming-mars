@@ -1,22 +1,57 @@
 {
+    "Ceres Tech Market": "",
+    "Action: Discard any number of cards from your hand to gain 2 M€ for each discarded card.": "행동: 카드 X장을 버리고, 2X M€ 획득.",
+    "Gain 2 M€ per colony you own.": "보유한 개척기지 1개당 2 M€ 획득.",
+
+    "Cloud Tourism": "",
+    "Increase your M€ production 1 step for each pair of Earth and Venus tags you own. 1 VP for every 3rd floater on this card.": "보유한 금성 및 지구 태그마다 메가크레딧 생산력 1씩 증가.) (게임 종료 시, 이 카드 위의 부양체 자원 3개당 승점 1점.",
+
+    "GHG Shipment": "",
+    "Requires that Kelvinists are in power or that you have 2 delegates there. Increase your heat production 1 step. Gain 1 heat for each floater you have.": "조건: 켈빈당이 집권, 또는 켈빈당에 자기 의원이 2명 이상.) (열 에너지 생산력 1 증가. 보유한 부양체 자원마다 열 에너지 획득.",
+
+    "Ishtar Expedition": "",
+    "Requires Venus 10%. Gain 3 titanium and draw 2 Venus cards.": "조건: 금성 개척률 10% 이상) (티타늄 자원 3개 획득. 금성 카드 2장 획득.",
+
+    "L1 Trade Terminal": "",
+    "Effect: When you trade, you may first increase that colony tile track 2 steps.": "효과: 거래할 때 먼저 해당 식민지 타일 트랙을 2칸 늘릴 수 있습니다.",
+    "Add a resource to 3 different cards that already have resources.": "특수 자원이 1개 이상 있는 서로 다른 카드 3장 위에 동일한 특수 자원을 각각 1개씩 추가.",
+
+    "Red Appeasement": "",
+    "Requires that Reds are ruling or that you have 2 delegates there, AND THAT NO OTHER PLAYER HAS PASSED.": "조건: 적색당이 집권, 또는 적색당에 자기 의원이 2명 이상. 패스한 플레이어가 아무도 없음.",
+    "Increase M€ production 2 steps. This counts as passing. You get no other turns this generation.": "메가크레딧 생산력 2 증가. 그 후 이 세대를 패스한 것으로 취급.",
+    "PASS": "패스",
+
+    "Sponsoring Nation": "",
+    "Requires 4 Earth tags. Gain 3 TR. Place 2 delegates.": "조건: 지구 태그 4개 이상.) (테라포밍 등급 3 TR 상승. 의원 2명 배치.",
+
+    "Summit Logistics": "",
+    "Requires that Scientists are ruling or that you have 2 delegates there. Gain 1 M€ per planet tag and colony you have. Draw 2 cards.": "조건: 과학당이 집권, 또는 과학당에 자기 의원이 2명 이상.) (자신의 목성/지구/금성 태그 수와 개척기지 수만큼 메가크레딧 획득. 카드 2장 획득.",
+    "FAN EXPANSION NOTE: This includes Mars but not The Moon.": "주의 사항: 화성 태그는 포함되지만, 달 태그는 포함되지 않음.",
+
+    "Venus Orbital Survey": "",
+    "Action: Reveal the top 2 cards, take any venus cards to hand for free. Any other card you either buy or discard": "행동: 덱 맨 위 카드 2장을 공개하고 그 중 아무 금성 카드를 비용 없이 손에 1장 이상 추가. 그 외의 다른 카드는 구매하거나 버림",
+
+
     "Psychrophiles": "호냉성 미생물",
     "Action: Add 1 microbe to this card.": "행동: 이 카드에 미생물 자원 1개 추가.",
-    "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "지속효과: 식물 태그 카드 사용시, 이 카드에 있는 미생물 자원 1개당 2 M€ 가치로 지불.",
+    "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "지속 효과: 식물 태그 카드 사용시, 이 카드에 있는 미생물 자원 1개당 2 M€ 가치로 지불.",
     "Temperature must be -20 C or lower.": "조건: 기온 -20℃ 이하.",
 
     "Research Coordination": "연구 조직화",
     "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "이 카드를 사용한 뒤부터, 자신이 행동을 수행할 때마다, 이 카드의 만능 태그를 자신이 원하는 태그로 취급.",
 
     "SF Memorial": "SF 거장 기념비",
+    "Draw 1 card.": "카드 1장 뽑기.",
 
     "Martian Survey": "화성 측량",
     "Oxygen must be 4% or lower. Draw two cards.": "조건: 산소 농도 4% 이하.) (카드 2장 획득.",
 
     "House Printing": "주택 3D 프린팅",
+    "Increase your steel production 1 step.": "강철 생산력 1 증가.",
 
     "Space Hotels": "우주 호텔",
     "Requires 2 Earth tags. Increase M€ production 4 steps.": "메가크레딧 생산력 4 증가.",
 
     "Lava Tube Settlement": "용암동굴 정착지",
-    "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "에너지 생산력 1 감소. 메가크레딧 생산력 2 증가. 주변의 다른 도시 타일을 무시하고, 화산 구역에 도시 타일 1장 배치."
+    "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "에너지 생산력 1 감소. 메가크레딧 생산력 2 증가. 주변의 다른 도시 타일을 무시하고, 소화산 또는 화산 구역에 도시 타일 1장 배치."
 }

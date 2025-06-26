@@ -9,26 +9,26 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('AirRaid', function() {
+describe('AirRaid', () => {
   let card: AirRaid;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let corpo: StormCraftIncorporated;
+  let stormcraftIncorporated: StormCraftIncorporated;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AirRaid();
-    [/* skipped */, player, player2] = testGame(3);
+    [/* game */, player, player2] = testGame(3);
 
-    corpo = new StormCraftIncorporated();
-    player.setCorporationForTest(corpo);
+    stormcraftIncorporated = new StormCraftIncorporated();
+    player.corporations.push(stormcraftIncorporated);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play - multiple targets', function() {
-    player.addResourceTo(corpo);
+  it('Should play - multiple targets', () => {
+    player.addResourceTo(stormcraftIncorporated);
     expect(card.canPlay(player)).is.true;
 
     const otherCardWithFloater = new Dirigibles();
@@ -44,12 +44,12 @@ describe('AirRaid', function() {
     expect(player2.megaCredits).to.eq(0);
     expect(player.megaCredits).to.eq(4);
 
-    option2.cb([corpo]);
-    expect(corpo.resourceCount).to.eq(0);
+    option2.cb([stormcraftIncorporated]);
+    expect(stormcraftIncorporated.resourceCount).to.eq(0);
   });
 
-  it('Should play - single target for floater removal and MC removal', function() {
-    player.addResourceTo(corpo);
+  it('Should play - single target for floater removal and MC removal', () => {
+    player.addResourceTo(stormcraftIncorporated);
     expect(card.canPlay(player)).is.true;
 
     player2.megaCredits = 4;
@@ -60,7 +60,7 @@ describe('AirRaid', function() {
     option.options[0].cb();
     player.game.deferredActions.pop()!.execute(); // Remove floater
 
-    expect(corpo.resourceCount).to.eq(0);
+    expect(stormcraftIncorporated.resourceCount).to.eq(0);
     expect(player2.megaCredits).to.eq(0);
     expect(player.megaCredits).to.eq(4);
   });

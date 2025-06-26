@@ -12,7 +12,7 @@ describe('MarsDirect', () => {
   let card: MarsDirect;
 
   beforeEach(() => {
-    [/* skipped */, player, player2] = testGame(2);
+    [/* game */, player, player2] = testGame(2);
     card = new MarsDirect();
   });
 
@@ -28,27 +28,27 @@ describe('MarsDirect', () => {
     addOcean(player2);
 
     player.cardsInHand = [powerPlant, controlledBloom];
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
 
     player.tagsForTest = {mars: 0};
     player.megaCredits = 13;
-    expect(player.getPlayableCardsForTest()).has.members([powerPlant, controlledBloom]);
+    expect(player.getPlayableCards()).has.members([powerPlant, controlledBloom]);
 
     player.tagsForTest = {mars: 0};
     player.megaCredits = 12;
-    expect(player.getPlayableCardsForTest()).is.empty;
+    expect(player.getPlayableCards()).is.empty;
 
     player.tagsForTest = {mars: 1};
     player.megaCredits = 12;
-    expect(player.getPlayableCardsForTest()).has.members([powerPlant]);
+    expect(player.getPlayableCards()).has.members([powerPlant]);
 
     player.tagsForTest = {mars: 1};
     player.megaCredits = 11;
-    expect(player.getPlayableCardsForTest()).is.empty;
+    expect(player.getPlayableCards()).is.empty;
 
     player.tagsForTest = {mars: 2};
     player.megaCredits = 11;
-    expect(player.getPlayableCardsForTest()).has.members([powerPlant]);
+    expect(player.getPlayableCards()).has.members([powerPlant]);
   });
 });
 

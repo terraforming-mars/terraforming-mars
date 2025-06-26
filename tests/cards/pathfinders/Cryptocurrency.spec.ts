@@ -1,33 +1,31 @@
 import {expect} from 'chai';
 import {Cryptocurrency} from '../../../src/server/cards/pathfinders/Cryptocurrency';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {cast} from '../../TestingUtils';
+import {cast, testGame} from '../../TestingUtils';
 
-describe('Cryptocurrency', function() {
+describe('Cryptocurrency', () => {
   let card: Cryptocurrency;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Cryptocurrency();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    [/* game */, player] = testGame(1);
   });
 
-  it('canAct with energy', function() {
+  it('canAct with energy', () => {
     expect(card.canAct(player)).is.false;
     player.energy = 1;
     expect(card.canAct(player)).is.true;
   });
 
-  it('canAct with resources', function() {
+  it('canAct with resources', () => {
     expect(card.canAct(player)).is.false;
     card.resourceCount = 1;
     expect(card.canAct(player)).is.true;
   });
 
-  it('action - energy to data', function() {
+  it('action - energy to data', () => {
     player.energy = 3;
     card.resourceCount = 0;
     card.action(player);
@@ -35,7 +33,7 @@ describe('Cryptocurrency', function() {
     expect(card.resourceCount).eq(1);
   });
 
-  it('action - data to money', function() {
+  it('action - data to money', () => {
     player.energy = 0;
     player.megaCredits = 0;
     card.resourceCount = 6;
@@ -44,7 +42,7 @@ describe('Cryptocurrency', function() {
     expect(player.megaCredits).eq(18);
   });
 
-  it('action - both', function() {
+  it('action - both', () => {
     player.energy = 4;
     player.megaCredits = 0;
     card.resourceCount = 6;

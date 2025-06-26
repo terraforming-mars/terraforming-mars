@@ -5,9 +5,9 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {Units} from '../../../src/common/Units';
 import {cast} from '../../TestingUtils';
 
-describe('ResearchNetwork', function() {
-  it('Should play', function() {
-    const [, player] = testGame(1);
+describe('ResearchNetwork', () => {
+  it('Should play', () => {
+    const [/* game */, player] = testGame(1);
     const card = new ResearchNetwork();
 
     expect(player.cardsInHand).has.length(0);

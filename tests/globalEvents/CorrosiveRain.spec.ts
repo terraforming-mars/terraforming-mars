@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {CorrosiveRain} from '../../src/server/turmoil/globalEvents/CorrosiveRain';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
@@ -13,11 +13,11 @@ import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {testGame} from '../TestGame';
 
-describe('CorrosiveRain', function() {
+describe('CorrosiveRain', () => {
   let card: CorrosiveRain;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
 
   beforeEach(() => {
@@ -26,12 +26,12 @@ describe('CorrosiveRain', function() {
     turmoil = game.turmoil!;
   });
 
-  it('resolve play', function() {
-    turmoil.chairman = player2.id;
+  it('resolve play', () => {
+    turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
-    turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.add(player2.id);
-    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.partyLeader = player2;
+    turmoil.dominantParty.delegates.add(player2);
+    turmoil.dominantParty.delegates.add(player2);
 
     player.megaCredits = 15;
     player2.megaCredits = 15;
@@ -50,7 +50,7 @@ describe('CorrosiveRain', function() {
     const titanShuttles = new TitanShuttles();
     const titanAirScrapping = new TitanAirScrapping();
     const birds = new Birds();
-    player.playedCards = [titanShuttles, titanAirScrapping, birds];
+    player.playedCards.push(titanShuttles, titanAirScrapping, birds);
 
     titanShuttles.resourceCount = 3;
     titanAirScrapping.resourceCount = 1;
@@ -65,7 +65,7 @@ describe('CorrosiveRain', function() {
     const removeFloaters = cast(orOptions.options[1], SelectCard);
 
     expect(player.megaCredits).eq(3);
-    reduce10MC.cb();
+    reduce10MC.cb(undefined);
     expect(player.megaCredits).eq(0);
 
     expect(titanShuttles.resourceCount).eq(3);

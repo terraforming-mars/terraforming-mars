@@ -1,14 +1,12 @@
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {all} from '../Options';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {ActionCard} from '../ActionCard';
+import {ActiveCorporationCard} from '../corporation/CorporationCard';
 
-export class LunaHyperloopCorporation extends ActionCard {
+export class LunaHyperloopCorporation extends ActiveCorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.LUNA_HYPERLOOP_CORPORATION,
       tags: [Tag.MOON, Tag.BUILDING],
       startingMegaCredits: 38,
@@ -25,7 +23,7 @@ export class LunaHyperloopCorporation extends ActionCard {
 
       metadata: {
         description: 'You start with 38 M€ and 4 steel.',
-        cardNumber: '',
+        cardNumber: 'MC4',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(38).steel(4).br;
           b.action('Gain 1 M€ for each road tile on The Moon.', (eb) => {

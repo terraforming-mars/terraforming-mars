@@ -1,36 +1,36 @@
 import {expect} from 'chai';
 import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 import {Tag} from '../../../src/common/cards/Tag';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {fakeCard, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('SearchForLife', function() {
+describe('SearchForLife', () => {
   let card: SearchForLife;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SearchForLife();
     [game, player] = testGame(2);
   });
 
-  it('Can not act if no MC', function() {
+  it('Can not act if no MC', () => {
     player.megaCredits = 0;
     expect(card.canAct(player)).is.not.true;
     player.megaCredits = 1;
     expect(card.canAct(player)).is.true;
   });
 
-  it('Can not play if oxygen level too high', function() {
+  it('Can not play if oxygen level too high', () => {
     setOxygenLevel(game, 7);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     setOxygenLevel(game, 6);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     player.playedCards.push(card);
     card.play(player);
 
@@ -40,12 +40,12 @@ describe('SearchForLife', function() {
   });
 
 
-  it('action fails, no tags', function() {
+  it('action fails, no tags', () => {
     player.playedCards.push(card);
 
     player.megaCredits = 1;
 
-    game.projectDeck.drawPile.push(fakeCard({}));
+    game.projectDeck.drawPile.push(fakeCard());
 
     card.action(player);
     runAllActions(game); // pays for card.
@@ -53,7 +53,7 @@ describe('SearchForLife', function() {
     expect(card.resourceCount).eq(0);
   });
 
-  it('action fails, wrong tag', function() {
+  it('action fails, wrong tag', () => {
     player.playedCards.push(card);
 
     player.megaCredits = 1;
@@ -66,7 +66,7 @@ describe('SearchForLife', function() {
     expect(card.resourceCount).eq(0);
   });
 
-  it('action fails, wild tag', function() {
+  it('action fails, wild tag', () => {
     player.playedCards.push(card);
 
     player.megaCredits = 1;
@@ -79,7 +79,7 @@ describe('SearchForLife', function() {
     expect(card.resourceCount).eq(0);
   });
 
-  it('action succeeds', function() {
+  it('action succeeds', () => {
     player.playedCards.push(card);
 
     player.megaCredits = 1;
@@ -90,5 +90,16 @@ describe('SearchForLife', function() {
     runAllActions(game); // pays for card.
     expect(player.megaCredits).to.eq(0);
     expect(card.resourceCount).eq(1);
+  });
+
+  it('Cannot act when the deck is empty', () => {
+    player.megaCredits = 1;
+    game.projectDeck.drawPile.length = 1;
+
+    expect(card.canAct(player)).is.true;
+
+    game.projectDeck.drawPile.length = 0;
+
+    expect(card.canAct(player)).is.false;
   });
 });

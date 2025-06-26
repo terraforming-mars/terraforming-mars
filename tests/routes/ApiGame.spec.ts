@@ -4,6 +4,7 @@ import {Game} from '../../src/server/Game';
 import {MockResponse} from './HttpMocks';
 import {TestPlayer} from '../TestPlayer';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
+import {statusCode} from '../../src/common/http/statusCode';
 
 describe('ApiGame', () => {
   let scaffolding: RouteTestScaffolding;
@@ -17,7 +18,7 @@ describe('ApiGame', () => {
   it('no parameter', async () => {
     scaffolding.url = '/api/game';
     await scaffolding.get(ApiGame.INSTANCE, res);
-    expect(res.statusCode).eq(400);
+    expect(res.statusCode).eq(statusCode.badRequest);
     expect(res.content).eq('Bad request: missing id parameter');
   });
 
@@ -26,7 +27,7 @@ describe('ApiGame', () => {
     scaffolding.ctx.gameLoader.add(Game.newInstance('game-valid-id', [player], player));
     scaffolding.url = '/api/game?id=invalidId';
     await scaffolding.get(ApiGame.INSTANCE, res);
-    expect(res.statusCode).eq(404);
+    expect(res.statusCode).eq(statusCode.notFound);
     expect(res.content).eq('Not found: game not found');
   });
 
@@ -54,27 +55,39 @@ describe('ApiGame', () => {
         ],
         'gameOptions': {
           'altVenusBoard': false,
-          'aresExtension': false,
-          'boardName': 'tharsis',
+          'aresExtremeVariant': false,
           'bannedCards': [],
-          'ceoExtension': false,
-          'coloniesExtension': false,
-          'communityCardsOption': false,
-          'corporateEra': true,
+          'boardName': 'tharsis',
           'draftVariant': false,
+          'escapeVelocityBonusSeconds': 2,
           'escapeVelocityMode': false,
           'escapeVelocityPenalty': 1,
           'escapeVelocityPeriod': 2,
           'escapeVelocityThreshold': 30,
+          'expansions': {
+            'ares': false,
+            'ceo': false,
+            'colonies': false,
+            'community': false,
+            'corpera': true,
+            'moon': false,
+            'pathfinders': false,
+            'prelude': false,
+            'prelude2': false,
+            'promo': false,
+            'starwars': false,
+            'turmoil': false,
+            'underworld': false,
+            'venus': false,
+          },
           'fastModeOption': false,
+          'includedCards': [],
           'includeFanMA': false,
-          'includeVenusMA': true,
           'initialDraftVariant': false,
-          'moonExpansion': false,
-          'pathfindersExpansion': false,
-          'preludeExtension': false,
-          'promoCardsOption': false,
+          'ceosDraftVariant': false,
           'politicalAgendasExtension': 'Standard',
+          'preludeDraftVariant': false,
+          'randomMA': 'No randomization',
           'removeNegativeGlobalEvents': false,
           'requiresMoonTrackCompletion': false,
           'requiresVenusTrackCompletion': false,
@@ -83,11 +96,8 @@ describe('ApiGame', () => {
           'shuffleMapOption': false,
           'solarPhaseOption': false,
           'soloTR': false,
-          'randomMA': 'No randomization',
-          'turmoilExtension': false,
-          'undoOption': false,
-          'venusNextExtension': false,
           'twoCorpsVariant': false,
+          'undoOption': false,
         },
       },
     );

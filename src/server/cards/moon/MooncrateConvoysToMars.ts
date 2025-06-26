@@ -2,7 +2,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {IPlayer} from '../../IPlayer';
 import {SellSteel} from '../../moon/SellSteel';
@@ -15,7 +14,7 @@ export class MooncrateConvoysToMars extends Card implements IProjectCard {
       name: CardName.MOONCRATE_CONVOYS_TO_MARS,
       type: CardType.EVENT,
       cost: 13,
-      requirements: CardRequirements.builder((b) => b.party(PartyName.MARS)),
+      requirements: {party: PartyName.MARS},
 
       behavior: {
         moon: {logisticsRate: 1},

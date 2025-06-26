@@ -1,45 +1,47 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
-import {cast, forceGenerationEnd} from '../../TestingUtils';
+import {IGame} from '../../../src/server/IGame';
+import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
-
 import {Maria} from '../../../src/server/cards/ceos/Maria';
 import {Venus} from '../../../src/server/cards/community/Venus';
 import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {IapetusII} from '../../../src/server/cards/pathfinders/IapetusII';
 import {CollegiumCopernicus} from '../../../src/server/cards/pathfinders/CollegiumCopernicus';
 
-
-describe('Maria', function() {
+describe('Maria', () => {
   let card: Maria;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Maria();
     [game, player, player2] = testGame(2, {ceoExtension: true, coloniesExtension: true});
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     expect(card.canAct(player)).is.true;
   });
 
-  it('Takes action generation 1', function() {
+  it('Takes action generation 1', () => {
     const coloniesInPlay = game.colonies.length;
-    const selectColony = cast(card.action(player), SelectColony);
-    const builtColonyName = selectColony.colonies[0].name;
-    selectColony.cb(selectColony.colonies[0]);
-    expect(game.colonies.find((colony) => colony.name === builtColonyName)).is.not.undefined;
-    expect(game.colonies.length).to.eq(coloniesInPlay + 1);
+    cast(card.action(player), undefined);
+    runAllActions(player.game);
+    const selectColony = cast(player.popWaitingFor(), SelectColony);
+    const selectedColony = selectColony.colonies[0];
+    selectColony.cb(selectedColony);
+    expect(game.colonies).to.contain(selectedColony);
+    expect(game.colonies).has.length(coloniesInPlay + 1);
   });
 
-  it('Takes action in Generation 4', function() {
+  it('Takes action in Generation 4', () => {
     game.generation = 4;
 
-    const selectColony = cast(card.action(player), SelectColony);
+    cast(card.action(player), undefined);
+    runAllActions(player.game);
+    const selectColony = cast(player.popWaitingFor(), SelectColony);
     expect(selectColony.colonies).has.length(4);
   });
 
@@ -47,7 +49,9 @@ describe('Maria', function() {
     const venus = new Venus();
     game.discardedColonies = [];
     game.discardedColonies.push(venus);
-    const selectColony = cast(card.action(player), SelectColony);
+    cast(card.action(player), undefined);
+    runAllActions(player.game);
+    const selectColony = cast(player.popWaitingFor(), SelectColony);
     selectColony?.cb(venus);
 
     expect(game.colonies).includes(venus);
@@ -56,11 +60,13 @@ describe('Maria', function() {
   });
 
   it('Takes action - chooses Venus, which is activated', () => {
-    player2.setCorporationForTest(new Celestic());
+    player2.corporations.push(new Celestic());
     const venus = new Venus();
     game.discardedColonies = [];
     game.discardedColonies.push(venus);
-    const selectColony = cast(card.action(player), SelectColony);
+    cast(card.action(player), undefined);
+    runAllActions(player.game);
+    const selectColony = cast(player.popWaitingFor(), SelectColony);
     selectColony?.cb(venus);
 
     expect(game.colonies).includes(venus);
@@ -72,7 +78,9 @@ describe('Maria', function() {
     const iapetusii = new IapetusII();
     game.discardedColonies = [];
     game.discardedColonies.push(iapetusii);
-    const selectColony = cast(card.action(player), SelectColony);
+    cast(card.action(player), undefined);
+    runAllActions(player.game);
+    const selectColony = cast(player.popWaitingFor(), SelectColony);
     selectColony?.cb(iapetusii);
 
     expect(game.colonies).includes(iapetusii);
@@ -81,11 +89,13 @@ describe('Maria', function() {
   });
 
   it('Takes action - chooses Ieptus II, which is activated', () => {
-    player2.setCorporationForTest(new CollegiumCopernicus());
+    player2.corporations.push(new CollegiumCopernicus());
     const iapetusii = new IapetusII();
     game.discardedColonies = [];
     game.discardedColonies.push(iapetusii);
-    const selectColony = cast(card.action(player), SelectColony);
+    cast(card.action(player), undefined);
+    runAllActions(player.game);
+    const selectColony = cast(player.popWaitingFor(), SelectColony);
     selectColony?.cb(iapetusii);
 
     expect(game.colonies).includes(iapetusii);
@@ -93,7 +103,7 @@ describe('Maria', function() {
     expect(iapetusii.colonies).is.not.empty;
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     card.action(player);
     forceGenerationEnd(game);
 

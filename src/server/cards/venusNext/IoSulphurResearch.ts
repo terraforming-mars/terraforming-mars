@@ -4,7 +4,7 @@ import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {digit, played} from '../Options';
+import {digit} from '../Options';
 import {IProjectCard} from '../IProjectCard';
 
 export class IoSulphurResearch extends Card implements IProjectCard {
@@ -22,7 +22,7 @@ export class IoSulphurResearch extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.cards(1).br;
           b.or().br;
-          b.venus(3, {played, digit}).colon().cards(3);
+          b.tag(Tag.VENUS, {amount: 3, digit}).colon().cards(3);
         }),
         description: 'Draw 1 card, or draw 3 if you have at least 3 Venus tags.',
       },

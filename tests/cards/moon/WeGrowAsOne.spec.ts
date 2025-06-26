@@ -1,4 +1,4 @@
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {WeGrowAsOne} from '../../../src/server/cards/moon/WeGrowAsOne';
 import {expect} from 'chai';
@@ -8,7 +8,7 @@ import {testGame} from '../../TestGame';
 
 describe('WeGrowAsOne', () => {
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let card: WeGrowAsOne;
 
   beforeEach(() => {
@@ -25,10 +25,10 @@ describe('WeGrowAsOne', () => {
     player.megaCredits = card.cost;
 
     game.turmoil!.rulingParty = new Unity();
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     game.turmoil!.rulingParty = new Greens();
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {

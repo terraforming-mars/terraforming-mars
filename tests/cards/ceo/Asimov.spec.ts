@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -9,11 +9,11 @@ import {Asimov} from '../../../src/server/cards/ceos/Asimov';
 import {FundedAwardModel} from '../../../src/common/models/FundedAwardModel';
 import {Server} from '../../../src/server/models/ServerModel';
 
-describe('Asimov', function() {
+describe('Asimov', () => {
   let card: Asimov;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Asimov();
@@ -44,7 +44,7 @@ describe('Asimov', function() {
     });
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     expect(card.canAct(player)).is.true;
 
     const orOptions = cast(card.action(player), OrOptions);
@@ -56,19 +56,19 @@ describe('Asimov', function() {
     expect(card.canAct(player)).is.false;
   });
 
-  it('Takes action in Generation 4', function() {
+  it('Takes action in Generation 4', () => {
     game.generation = 4;
     const orOptions = cast(card.action(player), OrOptions);
     expect(orOptions.options).has.length(10-4+1); // The +1 here is for the "Do Nothing" option
   });
 
-  it('Takes action in Generation 15', function() {
+  it('Takes action in Generation 15', () => {
     game.generation = 15;
     const orOptions = cast(card.action(player), OrOptions);
     expect(orOptions.options).has.length(1+1); // The +1 here is for the "Do Nothing" option
   });
 
-  it('Number of awards increases after play, and the new award is funded', function() {
+  it('Number of awards increases after play, and the new award is funded', () => {
     // Sanity check that the last award is not funded
     expect(game.hasBeenFunded(game.awards[game.awards.length - 1])).is.false;
     game.generation = 1;
@@ -76,11 +76,11 @@ describe('Asimov', function() {
     const action = cast(card.action(player), OrOptions);
     action.options[0].cb();
     // Make sure there's a new award, and that it has been funded
-    expect(game.awards.length).is.eq(preActionAwardCount + 1);
+    expect(game.awards).has.length(preActionAwardCount + 1);
     expect(game.hasBeenFunded(game.awards[game.awards.length - 1])).is.true;
   });
 
-  it('Cannot act if 3 awards are already funded', function() {
+  it('Cannot act if 3 awards are already funded', () => {
     game.fundAward(player2, game.awards[0]);
     game.fundAward(player2, game.awards[1]);
     game.fundAward(player2, game.awards[2]);

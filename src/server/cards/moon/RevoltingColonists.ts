@@ -6,11 +6,11 @@ import {Tag} from '../../../common/cards/Tag';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {message} from '../../logs/MessageBuilder';
 
 export class RevoltingColonists extends Card implements IProjectCard {
   constructor() {
@@ -19,13 +19,13 @@ export class RevoltingColonists extends Card implements IProjectCard {
       type: CardType.EVENT,
       tags: [Tag.MOON],
       cost: 3,
-      requirements: CardRequirements.builder((b) => b.habitatRate(4)),
+      requirements: {habitatRate: 4},
 
       metadata: {
         description: 'Requires 4 habitat rate. All players pay 3M€ for each habitat tile they own.',
         cardNumber: 'M51',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(3, {all}).slash().moonHabitat({size: Size.SMALL, all});
+          b.minus().megacredits(3, {all}).slash().moonHabitat({size: Size.SMALL, all});
         }),
       },
     });
@@ -34,19 +34,26 @@ export class RevoltingColonists extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
     const colonies = MoonExpansion.spaces(game, TileType.MOON_HABITAT);
-    game.getPlayers().forEach((habitatTileOwner) => {
-      const owned = colonies.filter((colony) => colony.player?.id === habitatTileOwner.id).length;
+    game.getPlayers().forEach((target) => {
+      const owned = colonies.filter((colony) => colony.player?.id === target.id).length;
       if (owned > 0) {
         const bill = owned * 3;
-        const owes = Math.min(bill, habitatTileOwner.spendableMegacredits());
+        const owes = Math.min(bill, target.spendableMegacredits());
 
-        game.defer(new SelectPaymentDeferred(habitatTileOwner, owes, {
-          title: 'You must pay ' + owes + 'M€ for ' + owned + ' habitat tiles',
-          afterPay: () => {
-            game.log(
-              '${0} spends ${1} M€ for the ${2} habitat tiles they own.',
-              (b) => b.player(habitatTileOwner).number(owes).number(owned));
-          }}));
+        if (owes > 0) {
+          const msg = message('${0} MC', (b) => b.number(owes));
+          target.maybeBlockAttack(player, msg, (proceed) => {
+            if (proceed) {
+              game.defer(new SelectPaymentDeferred(target, owes, {
+                title: message('You must spend ${0} M€ for ${1} habitat tiles', (b) => b.number(owes).number(owned))}))
+                .andThen(() =>
+                  game.log(
+                    '${0} spends ${1} M€ for the ${2} habitat tiles they own.',
+                    (b) => b.player(target).number(owes).number(owned)));
+            }
+            return undefined;
+          });
+        }
       }
     });
     return undefined;

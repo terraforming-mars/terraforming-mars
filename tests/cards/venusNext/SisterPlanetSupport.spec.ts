@@ -3,20 +3,20 @@ import {SisterPlanetSupport} from '../../../src/server/cards/venusNext/SisterPla
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('SisterPlanetSupport', function() {
-  it('Should play', function() {
+describe('SisterPlanetSupport', () => {
+  it('Should play', () => {
     const card = new SisterPlanetSupport();
-    const [, player] = testGame(1);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    const [/* game */, player] = testGame(1);
+    expect(card.canPlay(player)).is.not.true;
 
     player.tagsForTest = {venus: 1};
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
     player.tagsForTest = {earth: 1};
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
 
     player.tagsForTest = {venus: 1, earth: 1};
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(3);

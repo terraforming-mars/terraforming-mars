@@ -14,7 +14,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectAmountModel} from '@/common/models/PlayerInputModel';
 import {SelectAmountResponse} from '@/common/inputs/InputResponse';
 
 interface DataModel {
@@ -29,7 +29,7 @@ export default Vue.extend({
   },
   props: {
     playerinput: {
-      type: Object as () => PlayerInputModel,
+      type: Object as () => SelectAmountModel,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectAmountResponse) => void,

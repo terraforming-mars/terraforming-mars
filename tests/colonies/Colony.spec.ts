@@ -3,14 +3,14 @@ import {IColony} from '../../src/server/colonies/IColony';
 import {Pluto} from '../../src/server/colonies/Pluto';
 import {DustSeals} from '../../src/server/cards/base/DustSeals';
 import {IPlayer} from '../../src/server/IPlayer';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {AndOptions} from '../../src/server/inputs/AndOptions';
 import {SelectColony} from '../../src/server/inputs/SelectColony';
 import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {IProjectCard} from '../../src/server/cards/IProjectCard';
 import {MAX_COLONY_TRACK_POSITION} from '../../src/common/constants';
-import {cast, runAllActions} from '../TestingUtils';
+import {cast, formatMessage, runAllActions, setRulingParty} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {CardName} from '../../src/common/cards/CardName';
 import {Pallas} from '../../src/server/cards/community/Pallas';
@@ -19,6 +19,10 @@ import {Europa} from '../../src/server/colonies/Europa';
 import {ColonyName} from '../../src/common/colonies/ColonyName';
 import {ColonyDeserializer} from '../../src/server/colonies/ColonyDeserializer';
 import {testGame} from '../TestGame';
+import {Venus} from '../../src/server/cards/community/Venus';
+import {PartyName} from '../../src/common/turmoil/PartyName';
+import {L1TradeTerminal} from '../../src/server/cards/prelude2/L1TradeTerminal';
+import {Mercury} from '../../src/server/cards/community/Mercury';
 
 function isBuildColonyStandardProjectAvailable(player: TestPlayer) {
   const options = cast(player.getStandardProjectOption(), SelectCard);
@@ -39,15 +43,15 @@ function isTradeWithColonyActionAvailable(player: IPlayer) {
 }
 
 
-describe('Colony', function() {
+describe('Colony', () => {
   let luna: IColony;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
   let player4: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     [game, player, player2, player3, player4] = testGame(4, {
       coloniesExtension: true,
       customColoniesList: [
@@ -62,7 +66,7 @@ describe('Colony', function() {
     luna = game.colonies.find((c) => c.name === ColonyName.LUNA)!;
   });
 
-  it('Should build and give placement bonus', function() {
+  it('Should build and give placement bonus', () => {
     expect(luna.colonies).has.lengthOf(0);
     expect(player.production.megacredits).to.eq(0);
 
@@ -82,14 +86,14 @@ describe('Colony', function() {
     expect(player3.production.megacredits).to.eq(2);
   });
 
-  it('Should start with a trackPosition at 1', function() {
+  it('Should start with a trackPosition at 1', () => {
     expect(game.colonies).has.length(6);
     game.colonies.forEach((colony) => {
       expect(colony.trackPosition).to.eq(1);
     });
   });
 
-  it('Should increase by 1 at the end of a generation', function() {
+  it('Should increase by 1 at the end of a generation', () => {
     expect(game.colonies).has.length(6);
     game.colonies.forEach((colony) => {
       colony.endGeneration(game);
@@ -101,7 +105,7 @@ describe('Colony', function() {
     });
   });
 
-  it('Should push the trackPosition if a colony is built on it', function() {
+  it('Should push the trackPosition if a colony is built on it', () => {
     expect(luna.trackPosition).to.eq(1);
     luna.addColony(player);
     expect(luna.trackPosition).to.eq(1);
@@ -111,7 +115,7 @@ describe('Colony', function() {
     expect(luna.trackPosition).to.eq(3);
   });
 
-  it('Should decrease trackPosition after trade', function() {
+  it('Should decrease trackPosition after trade', () => {
     luna.trackPosition = MAX_COLONY_TRACK_POSITION;
     luna.trade(player);
     runAllActions(game);
@@ -125,7 +129,7 @@ describe('Colony', function() {
     expect(luna.trackPosition).to.eq(2);
   });
 
-  it('decreaseTrackAfterTrade', function() {
+  it('decreaseTrackAfterTrade', () => {
     luna.trackPosition = MAX_COLONY_TRACK_POSITION;
     luna.trade(player);
     runAllActions(game);
@@ -144,17 +148,17 @@ describe('Colony', function() {
     expect(luna.trackPosition).to.eq(2);
   });
 
-  it('Should not increase trackPosition above max', function() {
+  it('Should not increase trackPosition above max', () => {
     luna.increaseTrack(100);
     expect(luna.trackPosition).to.eq(MAX_COLONY_TRACK_POSITION);
   });
 
-  it('Should not decrease trackPosition below 0', function() {
+  it('Should not decrease trackPosition below 0', () => {
     luna.decreaseTrack(100);
     expect(luna.trackPosition).to.eq(0);
   });
 
-  it('Should trade', function() {
+  it('Should trade', () => {
     // TODO (Lynesth): Do this better with next colony refactor PR
     const income = [1, 2, 4, 7, 10, 13, 17];
     for (let i = 0; i <= MAX_COLONY_TRACK_POSITION; i++) {
@@ -166,7 +170,7 @@ describe('Colony', function() {
     }
   });
 
-  it('Should give trade bonus to players with colonies only', function() {
+  it('Should give trade bonus to players with colonies only', () => {
     // No colonies
     luna.trackPosition = 3; // 7 MC
     luna.trade(player);
@@ -211,7 +215,7 @@ describe('Colony', function() {
     expect(player4.megaCredits).to.eq(7);
   });
 
-  it('Should give trade bonus for each colony a player has', function() {
+  it('Should give trade bonus for each colony a player has', () => {
     luna.trackPosition = 3; // 7 MC
     luna.addColony(player);
     luna.addColony(player);
@@ -225,14 +229,14 @@ describe('Colony', function() {
     expect(player4.megaCredits).to.eq(0);
   });
 
-  it('Should let player build a colony only if they can afford it', function() {
+  it('Should let player build a colony only if they can afford it', () => {
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
 
     player.megaCredits = 17;
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
   });
 
-  it('Should not let players build a colony if they already have one', function() {
+  it('Should not let players build a colony if they already have one', () => {
     game.colonies = [luna]; // Only a single colony in this test to show that building a second colony on a tile isn't possible.
     player.megaCredits = 17;
 
@@ -243,7 +247,7 @@ describe('Colony', function() {
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
   });
 
-  it('Should not let players build a colony if colony tile is full', function() {
+  it('Should not let players build a colony if colony tile is full', () => {
     game.colonies = [luna]; // Only a single colony in this test to show that building on a full tile isn't possible.
     player.megaCredits = 17;
     expect(luna.isFull()).to.be.false;
@@ -261,7 +265,47 @@ describe('Colony', function() {
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
   });
 
-  it('Should let players trade only if they can afford it', function() {
+  it('Should let players build on Venus when Reds are in power.', () => {
+    [game, player, player2] = testGame(2, {coloniesExtension: true, venusNextExtension: true, turmoilExtension: true});
+    const venus = new Venus();
+    game.colonies = [venus];
+    game.colonies.push(venus);
+    venus.isActive = true;
+
+    player.megaCredits = 17;
+
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
+
+    setRulingParty(game, PartyName.REDS);
+
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
+
+    player.megaCredits = 20;
+
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
+  });
+
+  it('Should let players build on Europa when Reds are in power.', () => {
+    [game, player, player2] = testGame(2, {coloniesExtension: true, venusNextExtension: true, turmoilExtension: true});
+    const europa = new Europa();
+    game.colonies = [europa];
+    game.colonies.push(europa);
+    europa.isActive = true;
+
+    player.megaCredits = 17;
+
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
+
+    setRulingParty(game, PartyName.REDS);
+
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
+
+    player.megaCredits = 20;
+
+    expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
+  });
+
+  it('Should let players trade only if they can afford it', () => {
     expect(isTradeWithColonyActionAvailable(player)).to.be.false;
 
     player.megaCredits = 8;
@@ -285,7 +329,7 @@ describe('Colony', function() {
     expect(isTradeWithColonyActionAvailable(player)).to.be.true;
   });
 
-  it('Player with Helion can trade', function() {
+  it('Player with Helion can trade', () => {
     expect(isTradeWithColonyActionAvailable(player)).to.be.false;
 
     player.megaCredits = 7;
@@ -296,14 +340,14 @@ describe('Colony', function() {
     expect(isTradeWithColonyActionAvailable(player)).to.be.true;
   });
 
-  it('Should not let players trade if they have no fleet', function() {
+  it('Should not let players trade if they have no fleet', () => {
     player.titanium = 3;
 
     luna.trade(player);
     expect(isTradeWithColonyActionAvailable(player)).to.be.false;
   });
 
-  it('Should not let players trade with colonies that have already been traded with', function() {
+  it('Should not let players trade with colonies that have already been traded with', () => {
     game.colonies = [luna]; // Only a single colony in this test to show that retrading on a colony isn't possible.
 
     player.titanium = 3;
@@ -313,7 +357,7 @@ describe('Colony', function() {
     expect(isTradeWithColonyActionAvailable(player2)).to.be.false;
   });
 
-  it('Testing GiveTradeBonus Deferred Action', function() {
+  it('Testing GiveTradeBonus Deferred Action', () => {
     const card = new DustSeals();
     player.cardsInHand.push(card);
     player2.cardsInHand.push(card);
@@ -357,6 +401,20 @@ describe('Colony', function() {
 
     luna.trade(player, {usesTradeFleet: true});
     expect(player.colonies.tradesThisGeneration).eq(3);
+  });
+
+  it('../../../src if player should move the track', () => {
+    const l1TradeTerminal = new L1TradeTerminal();
+    cast(l1TradeTerminal.play(player), undefined);
+    // Mercury has different rewards, so the player will want to choose how far up to move the track.
+    const colony = new Mercury();
+    colony.trade(player);
+    runAllActions(game);
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+
+    expect(formatMessage(orOptions.options[0].title)).eq('Increase colony track 2 step(s)');
+    expect(formatMessage(orOptions.options[1].title)).eq('Increase colony track 1 step(s)');
+    expect(formatMessage(orOptions.options[2].title)).eq('Don\'t increase colony track');
   });
 
   it('serializing and deserializing', () => {

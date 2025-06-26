@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {Harvest} from '../../../src/server/cards/promo/Harvest';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('Harvest', function() {
+describe('Harvest', () => {
   let card: Harvest;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Harvest();
     [game, player] = testGame(2);
 
@@ -17,14 +17,14 @@ describe('Harvest', function() {
     landSpaces.forEach((space) => game.addGreenery(player, space));
   });
 
-  it('Cannot play', function() {
-    expect(player.simpleCanPlay(card)).is.false;
+  it('Cannot play', () => {
+    expect(card.canPlay(player)).is.false;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
     game.addGreenery(player, landSpace);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.megaCredits).to.eq(12);

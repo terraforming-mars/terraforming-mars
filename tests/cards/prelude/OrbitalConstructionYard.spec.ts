@@ -3,10 +3,10 @@ import {testGame} from '../../TestGame';
 import {OrbitalConstructionYard} from '../../../src/server/cards/prelude/OrbitalConstructionYard';
 import {cast} from '../../TestingUtils';
 
-describe('OrbitalConstructionYard', function() {
-  it('Should play', function() {
+describe('OrbitalConstructionYard', () => {
+  it('Should play', () => {
     const card = new OrbitalConstructionYard();
-    const [, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);
     expect(player.production.titanium).to.eq(1);
     expect(player.titanium).to.eq(4);

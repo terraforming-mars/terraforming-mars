@@ -1,8 +1,8 @@
 {
     "__TERRAFORMING__": "테　라　포　밍",
     "__MARS__": "마 스",
-    "TERRAFORMING": "TERRAFORMING",
-    "MARS": "MARS",
+    "TERRAFORMING": "",
+    "MARS": "",
     "New game": "새 게임",
     "How to Play": "플레이 방법(영문)",
     "Cards list": "카드 목록 보기",
@@ -15,5 +15,5 @@
     "Your name": "당신의 이름",
     "version": "버전",
     "deployed": "배포",
-    "Not affiliated with FryxGames, Asmodee Digital or Steam in any way.": "FryxGames, Asmodee Digital 및 Steam과 제휴하지 않았습니다."
+    " Not affiliated with FryxGames, Asmodee Digital or Steam in any way. ": "FryxGames, Asmodee Digital 및 Steam과 제휴하지 않았습니다."
 }

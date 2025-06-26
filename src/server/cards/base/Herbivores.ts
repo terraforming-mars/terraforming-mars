@@ -9,8 +9,6 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
-import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {Board} from '../../boards/Board';
 
@@ -24,7 +22,7 @@ export class Herbivores extends Card implements IProjectCard {
 
       resourceType: CardResource.ANIMAL,
       victoryPoints: {resourcesHere: {}, per: 2},
-      requirements: CardRequirements.builder((b) => b.oxygen(8)),
+      requirements: {oxygen: 8},
 
       behavior: {
         decreaseAnyProduction: {type: Resource.PLANTS, count: 1},
@@ -35,10 +33,10 @@ export class Herbivores extends Card implements IProjectCard {
         cardNumber: '147',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you place a greenery tile, add an animal to this card.', (eb) => {
-            eb.greenery(Size.MEDIUM, false).startEffect.animals(1);
+            eb.greenery({withO2: false}).startEffect.resource(CardResource.ANIMAL);
           }).br;
           b.vpText('1 VP per 2 animals on this card.');
-          b.animals(1).production((pb) => pb.minus().plants(1, {all}));
+          b.resource(CardResource.ANIMAL).production((pb) => pb.minus().plants(1, {all}));
         }),
         description: {
         // TODO (chosta): revert the original description once a solution for description space is found

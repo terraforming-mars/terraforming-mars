@@ -1,9 +1,8 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
-import {SpaceName} from '../../SpaceName';
+import {SpaceName} from '../../../common/boards/SpaceName';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
 
@@ -17,7 +16,7 @@ export class Stratopolis extends ActionCard {
 
       resourceType: CardResource.FLOATER,
       victoryPoints: {resourcesHere: {}, per: 3},
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),
+      requirements: {tag: Tag.SCIENCE, count: 2},
 
       behavior: {
         production: {megacredits: 2},
@@ -37,7 +36,7 @@ export class Stratopolis extends ActionCard {
         cardNumber: '248',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 2 floaters to ANY VENUS CARD.', (eb) => {
-            eb.empty().startAction.floaters(2, {secondaryTag: Tag.VENUS});
+            eb.empty().startAction.resource(CardResource.FLOATER, {amount: 2, secondaryTag: Tag.VENUS});
           }).br;
           b.production((pb) => pb.megacredits(2)).city().asterix();
           b.vpText('1 VP for every 3rd Floater on this card.');

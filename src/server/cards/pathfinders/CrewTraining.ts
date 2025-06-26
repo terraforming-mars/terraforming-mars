@@ -6,7 +6,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {ICloneTagCard} from './ICloneTagCard';
 import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
 import {Size} from '../../../common/cards/render/Size';
-import {played} from '../Options';
 
 export class CrewTraining extends PreludeCard implements ICloneTagCard {
   constructor() {
@@ -18,14 +17,14 @@ export class CrewTraining extends PreludeCard implements ICloneTagCard {
       },
 
       metadata: {
-        cardNumber: 'P08',
+        cardNumber: 'PfP06',
         renderData: CardRenderer.builder((b) => {
           b.planetaryTrack().text('2')
-            .venus(1, {played}).or(Size.SMALL)
-            .earth(1, {played}).or(Size.SMALL).br;
-          b.mars(1, {played}).or(Size.SMALL)
-            .jovian({amount: 1, played}).or(Size.SMALL)
-            .moon(1, {played}).br;
+            .tag(Tag.VENUS).or(Size.SMALL)
+            .tag(Tag.EARTH).or(Size.SMALL).br;
+          b.tag(Tag.MARS).or(Size.SMALL)
+            .tag(Tag.JOVIAN).or(Size.SMALL)
+            .tag(Tag.MOON).br;
 
           b.tr(2);
         }),

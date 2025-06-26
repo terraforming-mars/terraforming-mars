@@ -13,4 +13,8 @@ export type PlayerInputType =
     'space' |
     'colony' |
     'productionToLose' |
-    'aresGlobalParameters';
+    'aresGlobalParameters' |
+    'globalEvent' |
+    'policy' |
+    'resource' |
+    'resources';

@@ -23,7 +23,7 @@ export class ConvertHeat extends StandardActionCard {
 
   public canAct(player: IPlayer): boolean {
     if (player.game.getTemperature() === MAX_TEMPERATURE) {
-      return false;
+      this.warnings.add('maxtemp');
     }
 
     // Strictly speaking, this conditional is not necessary, because canAfford manages reserveUnits.
@@ -31,7 +31,8 @@ export class ConvertHeat extends StandardActionCard {
       return false;
     }
 
-    return player.canAfford(0, {
+    return player.canAfford({
+      cost: 0,
       tr: {temperature: 1},
       reserveUnits: Units.of({heat: 8}),
     });

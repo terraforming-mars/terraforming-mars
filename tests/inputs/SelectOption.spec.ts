@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
 
-describe('SelectOption', function() {
+describe('SelectOption', () => {
   let selected = false;
   const cb = () => {
     selected = true;
@@ -9,8 +9,8 @@ describe('SelectOption', function() {
   };
 
 
-  it('Simple', function() {
-    const selectOption = new SelectOption('', '', cb);
+  it('Simple', () => {
+    const selectOption = new SelectOption('').andThen(cb);
 
     expect(selected).eq(false);
     selectOption.process({type: 'option'});

@@ -1,0 +1,64 @@
+{
+   "Select a ${0} bonus": "与党ボーナスを選択",
+   "Select a ${0} policy": "与党政策を選択",
+
+   "Gain 1 M€ for each building tag you have": "土建タグの数分、1MC獲得",
+   "Gain 1 M€ for each tile you have ON MARS": "火星上の所有タイルの数分、1MC獲得",
+   "Gain 1 M€ for each building tag you have (${0})": "土建タグの数分、1MC獲得 (${0})",
+   "Gain 1 M€ for each tile you have ON MARS (${0})": "火星上の所有タイルの数分、1MC獲得 (${0})",
+
+   "When you place a tile ON MARS, gain 1 steel": "火星上にタイルを配置した時、1建材獲得",
+   "When you play a building tag, gain 2 M€": "土建タグをプレイ時、2MC獲得",
+   "Your steel resources are worth 1 M€ extra": "建材の価値+1MC",
+   "Spend 4 M€ to draw a Building card (Turmoil Mars First)": "4MC支払い、土建タグカードを1枚入手(3回まで実行可能)",
+
+   "Gain 1 M€ for each science tag you have": "科学タグの数分、1MC獲得",
+   "Gain 1 M€ for every 3 cards in hand": "手札3枚につき、1MC獲得",
+   "Gain 1 M€ for each science tag you have (${0})": "科学タグの数分、1MC獲得 (${0})",
+   "Gain 1 M€ for every 3 cards in hand (${0})": "手札3枚につき、1MC獲得 (${0})",
+
+   "Pay 10 M€ to draw 3 cards (Turmoil Scientists)": "10MC支払い、3ドロー(1回のみ実行可能)",
+   "Your global requirements are +/- 2 steps": "グローバルパラメーター参照時、それらの条件を+2 または -2段階してもよい",
+   "When you raise a global parameter, draw a card per step raised": "グローバルパラメーターを上げる毎に、1ドロー",
+   "Cards with Science tag requirements may be played with 1 less Science tag": "科学タグが条件のカードの必要科学タグ数-1",
+
+   "Gain 1 M€ for each Venus, Earth and Jovian tag you have": "金星タグ、地球タグ、木星タグの数分、1MC獲得",
+   "Gain 1 M€ for each Space tag you have": "宇宙タグの数分、1MC獲得",
+   "Gain 1 M€ for each Venus, Earth and Jovian tag you have (${0})": "金星タグ、地球タグ、木星タグの数分、1MC獲得 (${0})",
+   "Gain 1 M€ for each Space tag you have (${0})": "宇宙タグの数分、1MC獲得 (${0})",
+
+   "Your titanium resources are worth 1 M€ extra": "チタンの価値+1MC",
+   "Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)": "4MC支払い、2チタン または 2浮遊体獲得(3回まで実行可能)",
+   "Spend 4 M€ to draw a Space card (Turmoil Unity)": "4MC支払い、宇宙タグカードを1枚入手(3回まで実行可能)",
+   "Cards with Space tags cost 2 M€ less to play": "宇宙タグカードのプレイコスト-2MC",
+
+   "Gain 1 M€ for each Plant, Microbe and Animal tag you have": "植物タグ、微生物タグ、動物タグの数分、1MC獲得",
+   "Gain 2 M€ for each greenery tile you have": "所有緑地タイルの数分、2MC獲得",
+   "Gain 1 M€ for each Plant, Microbe and Animal tag you have (${0})": "植物タグ、微生物タグ、動物タグの数分、1MC獲得 (${0})",
+   "Gain 2 M€ for each greenery tile you have (${0})": "所有緑地タイルの数分、2MC獲得 (${0})",
+
+   "When you place a greenery tile, gain 4 M€": "緑地タイル配置時、4MC獲得",
+   "When you place a tile, gain 1 plant": "タイル配置時、1植物獲得",
+   "When you play an animal, plant or microbe tag, gain 2 M€": "植物タグ、微生物タグ、動物タグをプレイ時、2MC獲得",
+   "Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)": "5MC支払い、3植物 または 2微生物獲得(3回まで実行可能)",
+
+   "The player(s) with the lowest TR gains 1 TR": "TRが最も低いプレイヤーをTR+1段階",
+   "The player(s) with the highest TR loses 1 TR": "TRが最も高いプレイヤーをTR-1段階",
+   "The player(s) with the lowest TR gains 1 TR (${0})": "TRが最も低いプレイヤーをTR+1段階 (${0})",
+   "The player(s) with the highest TR loses 1 TR (${0})": "TRが最も高いプレイヤーをTR-1段階 (${0})",
+
+   "When you take an action that raises TR, you MUST pay 3 M€ per step raised": "TR+1する毎に、3MC支払う(2MC以下の場合はTRは上がらない)",
+   "When you place a tile, pay 3 M€ or as much as possible": "タイル配置時、3MC支払う(不足している場合は可能なだけ支払う)",
+   "Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)": "4MC支払い、最大でないグローバルパラメーター-1段階(3回まで実行可能)",
+   "When you raise a global parameter, decrease your M€ production 1 step per step raised if possible": "グローバルパラメーター+1段階する毎に、MC産出-1(不足している場合は可能なだけ行う)",
+
+   "Gain 1 M€ for each heat production you have": "温熱産出の数分、1MC獲得",
+   "Gain 1 heat for each heat production you have": "温熱産出の数分、1温熱獲得",
+   "Gain 1 M€ for each heat production you have (${0})": "温熱産出の数分、1MC獲得 (${0})",
+   "Gain 1 heat for each heat production you have (${0})": "温熱産出の数分、1温熱獲得 (${0})",
+
+   "Pay 10 M€ to increase your energy and heat production 1 step (Turmoil Kelvinists)": "10MC支払い、電力産出+1. 温熱産出+1(何回でも実行可能)",
+   "When you raise temperature, gain 3 M€ per step raised": "温度+1段階する毎に、3MC獲得",
+   "Convert 6 heat into temperature (Turmoil Kelvinists)": "温熱を温度へ変換するコストが8→6温熱になる(何回でも実行可能)",
+   "When you place a tile, gain 2 heat": "タイル配置時、2温熱獲得"
+  }

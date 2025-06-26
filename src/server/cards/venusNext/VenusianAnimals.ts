@@ -4,10 +4,9 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {played} from '../Options';
+import {ICard} from '../ICard';
 
 export class VenusianAnimals extends Card implements IProjectCard {
   constructor() {
@@ -19,12 +18,12 @@ export class VenusianAnimals extends Card implements IProjectCard {
       resourceType: CardResource.ANIMAL,
       victoryPoints: {resourcesHere: {}},
 
-      requirements: CardRequirements.builder((b) => b.venus(18)),
+      requirements: {venus: 18},
       metadata: {
         cardNumber: '259',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a science tag, including this, add 1 animal to this card.', (eb)=> {
-            eb.science(1, {played}).startEffect.animals(1);
+            eb.tag(Tag.SCIENCE).startEffect.resource(CardResource.ANIMAL);
           }).br;
           b.vpText('1 VP per animal on this card.');
         }),
@@ -32,7 +31,11 @@ export class VenusianAnimals extends Card implements IProjectCard {
       },
     });
   }
-  public onCardPlayed(player: IPlayer, card: IProjectCard): void {
-    player.addResourceTo(this, player.tags.cardTagCount(card, Tag.SCIENCE));
+  public onCardPlayed(player: IPlayer, card: ICard): void {
+    const qty = player.tags.cardTagCount(card, Tag.SCIENCE);
+    player.addResourceTo(this, {qty, log: true});
+  }
+  public onColonyAddedToLeavitt(player: IPlayer): void {
+    player.addResourceTo(this, {qty: 1, log: true});
   }
 }

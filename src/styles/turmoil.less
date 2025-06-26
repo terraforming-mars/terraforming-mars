@@ -74,47 +74,60 @@
     display: inline-block;
     vertical-align: top;
     transform: scale(0.88);
-    margin: -50px 0 -45px -60px;
+    margin: -40px 0 -45px -60px;
 }
 
 .events-board {
     display: inline-block;
     vertical-align: top;
-    width: 1025px;
     box-sizing: initial;
     text-align: left;
-    margin: -10px 0 -10px 10px;
+    margin: 10px 0 -10px 0px;
+    width: 1010px;
 }
 
 .global-event {
     display: inline-block;
     vertical-align: top;
-    width: 350px;
+    width: 332px;
     height: 186px;
-    background: url(./assets/turmoil_ui.png);
-    background-position: -21px -172px;
-    margin: 20px 0 0 -13px;
+    margin: 0 1px;
+    background: url(./assets/parties/global_event.png);
     color: #000000;
     font-size: medium;
-}
-
-.global-event--current {
-    background-position: -727px -172px;
-}
-
-.global-event--coming {
-    background-position: -375px -172px;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 .global-event-card-content {
-  width: 330px !important;
-  margin-left: 10px;
+    width: 300px !important;
+    height: 118px !important;
+    justify-content: center;
+    margin: 0 auto;
+    top: 3px;
+    box-sizing: inherit;
 }
 
-.global-event-name--narrow {
-  letter-spacing: -0.05em;
-  font-size: 14px;
-  margin-left: 10px;
+.global-event-title {
+    position: absolute;
+    text-transform: uppercase;
+    width: 200px;
+    margin-top: 135px;
+    margin-left: 70px;
+    font-weight: 600;
+    text-align: center;
+    height: 32px;
+    top: 11px;
+}
+
+.global-event-name {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    line-height: 15px;
 }
 
 .event-title {
@@ -252,6 +265,49 @@
     }
     &.party-background--kelvinists {
         background-position: -873px 316px;
+    }
+}
+
+.party-badge {
+    clip-path: polygon(0 0, 80% 0%, 100% 20%, 100% 100%, 20% 100%, 0% 80%);
+    font-family: Prototype;
+    position: relative;
+    display: inline-block;
+    margin-top: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-bottom: 10px;
+    width: 30px;
+    height: 30px;
+    font-size: 22px;
+    line-height: 30px;
+    background-size: 30px;
+    filter: drop-shadow(0px 0px 1px black);
+    vertical-align: middle;
+
+    &.party-badge--greens {
+        background: #16b215;
+    }
+
+    &.party-badge--scientists {
+        background: #fff;
+        color: #222;
+    }
+
+    &.party-badge--mars_first {
+        background: #c97e23;
+    }
+
+    &.party-badge--unity {
+        background: #108ff0;
+    }
+
+    &.party-badge--reds {
+        background: #e65b5a;
+    }
+
+    &.party-badge--kelvinists {
+        background: #5d4d4d;
     }
 }
 
@@ -569,7 +625,6 @@
 .policies-clickable:visited {
     color: #303030;
 }
-
 
 .policy-block {
     background-color: #313131;

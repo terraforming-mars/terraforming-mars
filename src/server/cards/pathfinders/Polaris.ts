@@ -1,22 +1,21 @@
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, digit} from '../Options';
 import {Space} from '../../boards/Space';
 import {GainResources} from '../../deferredActions/GainResources';
-import {Priority} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 import {Size} from '../../../common/cards/render/Size';
 import {Board} from '../../boards/Board';
+import {Phase} from '../../../common/Phase';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Polaris extends Card implements ICorporationCard {
+export class Polaris extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.POLARIS,
       tags: [Tag.SPACE],
       startingMegaCredits: 32,
@@ -51,14 +50,13 @@ export class Polaris extends Card implements ICorporationCard {
       activePlayer.game.log(
         '${0} gained 1 ${1} production from ${2}',
         (b) => b.player(cardOwner).string(Resource.MEGACREDITS).cardName(this.name));
-      if (activePlayer.id === cardOwner.id) {
+      if (activePlayer.id === cardOwner.id && cardOwner.game.phase !== Phase.SOLAR) {
         cardOwner.game.defer(
           new GainResources(cardOwner, Resource.MEGACREDITS, {
             count: 4,
-            cb: () => activePlayer.game.log(
-              '${0} gained ${1} from ${2}',
-              (b) => b.player(cardOwner).string(Resource.MEGACREDITS).cardName(this.name)),
-          }),
+          }).andThen(() => activePlayer.game.log(
+            '${0} gained ${1} from ${2}',
+            (b) => b.player(cardOwner).string(Resource.MEGACREDITS).cardName(this.name))),
           cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
         );
       }

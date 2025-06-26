@@ -2,35 +2,13 @@ import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import ShiftAresGlobalParameters from '@/client/components/ShiftAresGlobalParameters.vue';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
-import {PartyName} from '@/common/turmoil/PartyName';
+import {ShiftAresGlobalParametersModel} from '@/common/models/PlayerInputModel';
 
-describe('ShiftAresGlobalParameters', function() {
-  const mockPlayerModel: PlayerInputModel = {
+describe('ShiftAresGlobalParameters', () => {
+  const mockPlayerModel: ShiftAresGlobalParametersModel = {
     title: 'Testing, baby!',
     buttonLabel: 'Click me!',
-    inputType: 'aresGlobalParameters',
-    amount: undefined,
-    options: undefined,
-    cards: undefined,
-    max: undefined,
-    min: undefined,
-    canUseSteel: undefined,
-    canUseTitanium: undefined,
-    canUseLunaTradeFederationTitanium: undefined,
-    canUseHeat: undefined,
-    canUseSeeds: undefined,
-    canUseData: undefined,
-    players: undefined,
-    availableSpaces: undefined,
-    availableParties: [PartyName.MARS, PartyName.SCIENTISTS, PartyName.UNITY, PartyName.GREENS, PartyName.REDS, PartyName.KELVINISTS],
-    microbes: undefined,
-    floaters: undefined,
-    science: undefined,
-    seeds: undefined,
-    auroraiData: undefined,
-    coloniesModel: undefined,
-    payProduction: undefined,
+    type: 'aresGlobalParameters',
     aresData: {
       includeHazards: true,
       hazardData: {
@@ -53,11 +31,9 @@ describe('ShiftAresGlobalParameters', function() {
       },
       milestoneResults: [],
     },
-    selectBlueCardAction: false,
-    showReset: false,
   };
 
-  it('sets up data', function() {
+  it('sets up data', () => {
     const playerinput = mockPlayerModel;
     const ares = mount(ShiftAresGlobalParameters, {
       localVue: getLocalVue(),

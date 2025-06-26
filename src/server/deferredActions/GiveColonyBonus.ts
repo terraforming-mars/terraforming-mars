@@ -1,11 +1,11 @@
 import {IPlayer} from '../IPlayer';
 import {PlayerId} from '../../common/Types';
 import {IColony} from '../colonies/IColony';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 import {MultiSet} from 'mnemonist';
 
 export class GiveColonyBonus extends DeferredAction {
-  public cb: () => void = () => {};
   private waitingFor = new MultiSet<PlayerId>();
   private playersWithBonuses = new Set<PlayerId>();
 
@@ -19,7 +19,7 @@ export class GiveColonyBonus extends DeferredAction {
 
   public execute() {
     if (this.colony.colonies.length === 0) {
-      this.cb();
+      this.cb(undefined);
       return undefined;
     }
 
@@ -60,7 +60,7 @@ export class GiveColonyBonus extends DeferredAction {
 
   private doneGettingBonus(): void {
     if (this.playersWithBonuses.size === 0) {
-      this.cb();
+      this.cb(undefined);
     }
   }
 }

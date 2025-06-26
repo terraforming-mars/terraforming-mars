@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 import {Resource} from '../../../src/common/Resource';
@@ -7,14 +7,13 @@ import {forceGenerationEnd} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
-
 import {Ryu} from '../../../src/server/cards/ceos/Ryu';
 
 
-describe('Ryu', function() {
+describe('Ryu', () => {
   let card: Ryu;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Ryu();
@@ -25,14 +24,14 @@ describe('Ryu', function() {
     player.playedCards.push(card);
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     card.action(player);
     forceGenerationEnd(game);
     expect(card.isDisabled).is.true;
     expect(card.canAct(player)).is.false;
   });
 
-  it('Cannot act', function() {
+  it('Cannot act', () => {
     player.production.override({
       megacredits: -5,
       steel: 0,
@@ -44,7 +43,7 @@ describe('Ryu', function() {
     expect(card.canAct(player)).is.false;
   });
 
-  it('Takes action in Gen 1', function() {
+  it('Takes action in Gen 1', () => {
     expect(card.canAct(player)).is.true;
 
     const selectProductionToDecrease = cast(card.action(player), OrOptions);
@@ -57,7 +56,7 @@ describe('Ryu', function() {
     expect(selectAmount.max).eq(3);
   });
 
-  it('Takes action in Gen 4', function() {
+  it('Takes action in Gen 4', () => {
     game.generation = 4;
     expect(card.canAct(player)).is.true;
 

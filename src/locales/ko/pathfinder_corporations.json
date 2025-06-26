@@ -1,0 +1,94 @@
+{
+  "Adhai High Orbit Constructions": "",
+  "(Effect: Whenever you play a card with a space tag BUT NO PLANETARY TAG (including this) add 1 orbital on this card.)": "(지속 효과: 이 카드를 포함해서 행성 태그가 없는 우주 태그를 가진 카드를 추진할 때마다 궤도 자원 1개를 추가.)",
+  "(Effect: For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1 M€ less.)": "(지속 효과: 이 카드의 궤도 자원 2개마다, 이 카드를 포함해서 행성 태그가 없는 우주 태그를 가진 카드를 추진하거나 개척기지 일반 프로젝트를 추진하거나 무역사업 행동을 수행할 때마다 1 M€씩 할인.)",
+  "(You start with 43 M€.)": "(43 M€을 가지고 게임 시작.)",
+
+  "Ambient": "",
+  "(Effect: When you play a card with a Venus tag (including this) increase your heat production 1 step.)": "(지속 효과: 이 카드를 포함해서, 금성 태그가 있는 카드를 추진할 때마다 열 생산력 1 증가.)",
+  "(Action: When temperature is maxed, spend 8 heat gain 1 TR. You may repeat this action like a standard project.)": "(행동: 기온이 끝에 도달한 후, 열 자원 8개로 테라포밍 등급 1TR 증가. 이 행동은 가능한 횟수만큼 반복 가능.)",
+  "(You start with 38 M€. As your first action, raise the Venus scale 2 steps.)": "(게임의 첫 행동으로서 금성 지표를 2개 올립니다. 38 M€을 가지고 게임 시작.)",
+
+  "AURORAI": "",
+  "(Effect: Whenever you increase your terraform rating, add 1 data per step to ANY card.)": "(지속 효과: 테라포밍 등급을 올릴 때마다, 아무 카드에 올라간 등급마다 데이터 자원 1개를 추가.)",
+  "(Effect: You can use data on this card as 3M€ each to pay for standard projects.)": "(지속 효과: 일반 프로젝트를 추진할 때, 이 카드 위의 데이터 자원을 3 M€으로 사용 가능.)",
+  "(You start with 33 M€. and 2 data on this card)": "(33 M€, 이 카드에 데이터 자원 2개를 가지고 게임 시작.)",
+
+  "Bio-Sol": "",
+  "(Action: Add 1 microbe to ANY card)": "(행동: 아무 카드에 미생물 자원을 1개 놓음.)",
+  "(You start with 42 M€. As your first action, draw 2 cards with a microbe tag.)": "(게임의 첫 행동으로서 미생물 태그가 있는 카드 2장 획득. 42 M€을 가지고 게임 시작.)",
+
+  "Chimera": "",
+  "(Effect: When you perform an action, these wild tags count as any tags of your choice. For claiming milestones and funding awards, both symbols count as one. (Other wild tags still do not count toward awards.))": "(지속 효과: 이 카드의 태그는 다른 카드의 모든 효과와 요구 사항에 대해 아무 태그 2개를 가진 것으로 간주할 수 있음. 업적을 달성하거나 기업상을 제정할 때의 이 카드는 아무 태그 1개로만 취급.)",
+  "(You start with 36 M€, 1 steel, and 1 titanium.)": "(36 M€, 강철 자원 1개, 티타늄 자원 1개를 가지고 게임 시작.)",
+
+  "Collegium Copernicus": "",
+  "(Effect: When you play a card with a science tag (including this) Add 1 data to ANY card.)": "(지속 효과: 이 카드를 포함해서 과학 태그가 있는 카드를 추진할 때, 아무 카드에 데이터 자원을 1개 추가.)",
+  "(Action: Spend 3 data from this card to trade.)": "(행동: 이 카드 위의 데이터 자원 3개를 소비해서 무역사업 행동을 수행.)",
+  "(You start with 33 M€. As your first action, draw 2 cards with a science tag.)": "(게임의 첫 행동으로서 과학 태그가 있는 카드 2장 획득. 43 M€을 가지고 게임 시작.)",
+
+  "Habitat Marte": "",
+  "(Effect: Mars tags also count as science tags.)": "(지속 효과: 화성 태그는 동시에 과학 태그인 것으로 간주.)",
+  "(You start with 40 M€)": "(40 M€을 가지고 게임 시작.)",
+
+  "Mars Dierct": "",
+  "(Effect: When you play a Mars tag, you pay 1 M€ less for each Mars tag you have.)": "(지속 효과: 이 카드를 포함해서 화성 태그가 있는 카드를 추진할 때마다 보유한 화성 태그마다 1 M€씩 할인.)",
+  "(You start with 52 M€.)": "(52 M€을 가지고 게임 시작.)",
+
+  "Mars Frontier Alliance": "",
+  "(Effect: After new ruling party is chosen, place the political program tile of the second most popular party on this card (you may use its effect as a passive effect of your corporation or as ruling party this generation).)": "새로운 집권당이 선택되면, 이 카드 위에 두 번째로 다수당이었던 정당을 이 카드 위에 올려놓음. 자신은 이 기업의 지속 효과나 이번 세대의 집권당으로서 이 카드 위에 올려놓은 정당의 효과를 사용할 수 있음.",
+  "(You start with 40 M€. When you reveal this card, select any remaining political program tile (you may use its effect as a passive effect of your corporation or as ruling party this generation).)": "(40 M€을 가지고 게임 시작. 이 카드를 공개할 때, 남아있는 아무 정책 타일을 선택. 자신은 이 기업의 지속 효과나 이번 세대의 집권당으로서 선택한 정당의 효과를 사용할 수 있음.)",
+
+  "Mars Math": "",
+  "(Effect: At the beginning of the Research phase, you draw 5 cards, but may STILL only buy 4 cards. If you are drafting, keep 2 cards for your first draft.)": "(지속 효과: 새로운 세대가 시작할 때, 4장이 아닌 5장의 카드를 뽑아, 최대 4장까지 구매할 수 있음. 드래프트 규칙 사용 시, 첫 번째 드래프트 때 1장이 아닌 2장을 골라야 함.)",
+  "(Action: Take another two actions this turn.)": "(행동: 이번 차례에 2번의 행동을 추가로 수행.)",
+  "(You start with 40 M€. As your first action, draw 2 cards)": "(게임 첫 행동으로서 카드 2장 획득. 40 M€을 가지고 게임 시작.)",
+
+  "Martian Insurance Group": "",
+  "(Effect: Whenever you play an event card, raise your M€ production 1 step.)": "(지속 효과: 사건형 카드를 추진할 때마다 메가크레딧 생산력 1 증가.)",
+  "(You start with 42 M€ and 1 M€ production.)": "(42 M€, 메가크레딧 생산력 1을 가지고 게임 시작.)",
+
+  "MindSet Mars": "",
+  "(Action: When you play a card with a building tag, add 1 agenda on this card.)": "(행동: 건물 태그를 가진 카드를 추진할 때, 이 카드에 의제 자원을 1개 추가.)",
+  "(Action: Spend 2 agenda resources to place 1 delegate in any party.)": "(행동: 의제 자원을 2개 소비해서 아무 정당에 의원을 1명 배치.)",
+  "(Action: Spend 5 agenda resources to place a city tile on Mars.)": "(행동: 의제 자원을 5개 소비해서 화성에 도시 타일을 배치.)",
+  "(You start with 44 M€ and 1 agenda resource to this card.)": "(44 M€, 이 카드에 의제 자원을 1개 가지고 게임 시작.)",
+
+  "GAGARIN MOBILE BASE": "",
+  "move": "이동",
+  "(Action: Move the Base to ANY nearest empty area where it has not yet been. Collect the bonus.)": "(행동: 아직 배치한 적 없는 인접한 빈 구역으로 기지를 이동. 배치 보너스 획득.)",
+  "(Effect: When another player places a tile where the Base is, move the Base.)": "(지속 효과: 아무 플레이어가 기지가 있는 곳에 타일을 배치할 때, 기지를 이동.)",
+  "(You start with 42 M€. As your first action, put Gagarin Mobile Base on ANY area on Mars. Collect the bonus.)": "(게임의 첫 행동으로서 화성의 아무 구역에 Gagarin Mobile 기지 배치 및 배치 보너스 획득. 42 M€을 가지고 게임 시작.)",
+
+  "Polaris": "",
+  "(Effect: When any ocean tile is placed ON MARS, increase your M€ production 1 step. When you place an ocean tile, gain 4M€.)": "(지속 효과: 자신이 해양 타일을 놓을 때마다 4 M€ 획득. 화성에 아무 해양 타일이 놓일 때마다 자신의 메가크레딧 생산력 1 증가.)",
+  "(You start with 32 M€. As your first action, place an ocean tile.)": "(게임의 첫 행동으로서 해양 타일 1장 배치. 32 M€을 가지고 게임 시작.)",
+
+  "RingCom": "",
+  "(Effect: When any player plays a card with a Jovian tag (including this) gain 1 titanium.)": "(지속 효과: 이 카드를 포함해서 모든 플레이어 중에 목성 태그가 있는 프로젝트 카드를 추진할 때마다 자신은 티타늄 자원 1개 획득.)",
+  "(You start with 39 M€. and 3 M€ production. As your first action, draw 2 cards with a Jovian tag.)": "(게임의 첫 행동으로서 목성 태그가 있는 카드 2장 획득. 39 M€, 메가크레딧 생산력 3을 가지고 게임 시작.)",
+
+  "Robin Haulings": "",
+  "(Effect: Whenever you play a card with a Venus tag add 1 floater to ANY card.)": "(지속 효과: 금성 태그가 있는 프로젝트 카드를 추진할 때마다, 아무 카드에 부양체 자원을 1개 추가.)",
+  "(Action: Remove 3 floaters from this card to raise Venus 1 step or raise oxygen 1 step)": "(행동: 이 카드의 부양체 자원 3개를 제거하여 금성 지표나 산소 농도를 1단계 올림.)",
+  "(You start with 39 M€.)": "(39 M€을 가지고 게임 시작.)",
+
+  "Solbank": "",
+  "(Effect: Whenever you spend M€ (or steel or titanium) add 1 data to this card.)": "(지속 효과: 메가크레딧이나 강철 자원 또는 티타늄 자원을 소비할 때마다, 이 카드에 데이터 자원을 1개 추가.)",
+  "(Effect: During the production phase convert each data from this card into 1M€ each.)": "(지속 효과: 생산 단계 동안, 이 카드 위에 있는 데이터 자원을 1 M€으로 변환할 수 있음.)",
+  "(You start with 40 M€.)": "(40 M€을 가지고 게임 시작.)",
+
+  "Soylent Seedling Systems": "",
+  "(Effect: When you place a greenery tile, add 1 seed resource to this card.)": "(지속 효과: 녹지 타일을 놓을  때, 이 카드에 씨앗 자원 1개를 추가.)",
+  "(Effect: When paying for a plant card, or the STANDARD GREENERY PROJECT, seeds here may be used as 5 M€ each.)": "(지속 효과: 식물 태그가 있는 카드를 추진하거나 일반 프로젝트 중 녹지 형성을 할 때, 씨앗 자원 1개마다 5 M€로 사용할 수 있음.)",
+  "(You start with 38M€ and 2 seeds on this card.)": "(38 M€, 이 카드에 씨앗 자원 2개를 가지고 게임 시작.)",
+
+  "Steelaris": "",
+  "(Effect: When any city or special tile is placed ON MARS, gain 1 steel and 1 plant.)": "(지속 효과: 아무 도시나 아무 특수 타일이 화성에 배치될 때마다 자신은 강철 자원 1개와 식물 자원 1개 획득.)",
+  "(You start with 42 M€.)": "(42 M€을 가지고 게임 시작.)",
+
+  "Odyssey": "",
+  "(Effect: Your event cards stay face up, and their tags are in use as if those were automated (green) cards.)": "(지속 효과: 추진한 사건형 카드를 앞면으로 두고, 그 태그를 유지형(녹색) 카드인 것처럼 적용.)",
+  "(Action: Pay for and play an event card you have already played that has a base cost of 16M€ or less (INCLUDING events that place special tiles,) after which discard that card.)": "(행동: 이미 추진한 사건형 카드 중 특수 타일을 배치하는 사건형 카드를 포함하여 기본 비용이 16 M€ 이하인 카드를 비용을 지불하고 다시 추진한 뒤, 그 카드를 버림.)",
+  "(You start with 33 M€.)": "(33 M€을 가지고 게임 시작.)"
+}

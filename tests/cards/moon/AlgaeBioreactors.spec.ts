@@ -1,22 +1,21 @@
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {setOxygenLevel, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AlgaeBioreactors} from '../../../src/server/cards/moon/AlgaeBioreactors';
 import {expect} from 'chai';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {Phase} from '../../../src/common/Phase';
 import {MAX_OXYGEN_LEVEL} from '../../../src/common/constants';
 
 describe('AlgaeBioreactors', () => {
   let player: TestPlayer;
   let card: AlgaeBioreactors;
-  let game: Game;
-  let moonData: IMoonData;
+  let game: IGame;
+  let moonData: MoonData;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [game, player] = testGame(1, {moonExpansion: true});
     card = new AlgaeBioreactors();
     moonData = MoonExpansion.moonData(game);
   });
@@ -26,37 +25,35 @@ describe('AlgaeBioreactors', () => {
     player.megaCredits = card.cost;
 
     player.production.override({plants: 1});
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     player.production.override({plants: 0});
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {
     player.production.override({plants: 1});
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(game.getOxygenLevel()).eq(0);
-    moonData.colonyRate = 0;
+    moonData.habitatRate = 0;
 
     card.play(player);
 
     expect(player.production.plants).eq(0);
-    expect(moonData.colonyRate).eq(1);
+    expect(moonData.habitatRate).eq(1);
     expect(game.getOxygenLevel()).eq(1);
-    expect(player.getTerraformRating()).eq(16);
+    expect(player.terraformRating).eq(16);
   });
 
   it('canPlay when Reds are in power', () => {
-    const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, {moonExpansion: true, turmoilExtension: true});
+    const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true});
     const moonData = MoonExpansion.moonData(game);
-    game.phase = Phase.ACTION;
 
     // Card requirements
     player.production.override({plants: 1});
 
     testRedsCosts(() => player.canPlay(card), player, card.cost, 6);
-    moonData.colonyRate = 8;
+    moonData.habitatRate = 8;
     testRedsCosts(() => player.canPlay(card), player, card.cost, 3);
     setOxygenLevel(game, MAX_OXYGEN_LEVEL);
     testRedsCosts(() => player.canPlay(card), player, card.cost, 0);

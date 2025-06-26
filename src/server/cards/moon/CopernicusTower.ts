@@ -4,7 +4,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {Resource} from '../../../common/Resource';
 import {CardResource} from '../../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Size} from '../../../common/cards/render/Size';
 import {ActionCard} from '../ActionCard';
 
@@ -17,7 +16,7 @@ export class CopernicusTower extends ActionCard {
       cost: 36,
 
       resourceType: CardResource.SCIENCE,
-      requirements: CardRequirements.builder((b) => b.production(Resource.TITANIUM, 2)),
+      requirements: {production: Resource.TITANIUM, count: 2},
       victoryPoints: {tag: Tag.MOON},
 
       action: {
@@ -42,7 +41,7 @@ export class CopernicusTower extends ActionCard {
         renderData: CardRenderer.builder((b) => {
           b.text('Requires you have 2 titanium production.', Size.TINY, false, false).br;
           b.action('Add 1 science resource here, or spend 1 science resource here to raise your TR 1 step.', (eb) => {
-            eb.empty().startAction.science(1).nbsp.slash().nbsp.science(1).arrow().tr(1);
+            eb.empty().startAction.resource(CardResource.SCIENCE).nbsp.slash().nbsp.resource(CardResource.SCIENCE).arrow().tr(1);
           });
           b.br;
           b.vpText('1 VP PER MOON TAG YOU HAVE.');

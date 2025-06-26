@@ -3,17 +3,24 @@ import {GameOptions} from '../../src/server/game/GameOptions';
 import {SerializedGame} from '../../src/server/SerializedGame';
 import {GameIdLedger, IDatabase} from '../../src/server/database/IDatabase';
 import {GameId, ParticipantId} from '../../src/common/Types';
+import {Session, SessionId} from '../../src/server/auth/Session';
+import {Clock} from '../../src/common/Timer';
 
 export class InMemoryDatabase implements IDatabase {
-  public data: Map<GameId, Array<SerializedGame>> = new Map();
+  public games: Map<GameId, Array<SerializedGame | undefined>> = new Map();
   protected completedGames: Map<GameId, Date> = new Map();
+  protected sessions: Map<SessionId, Session> = new Map();
+  private clock: Clock;
 
+  constructor(clock: Clock = new Clock()) {
+    this.clock = clock;
+  }
   initialize(): Promise<unknown> {
     return Promise.resolve();
   }
 
   async getGame(gameId: GameId): Promise<SerializedGame> {
-    const row = this.data.get(gameId);
+    const row = this.games.get(gameId);
     if (row === undefined || row.length === 0) {
       throw new Error('not found');
     } else {
@@ -32,7 +39,7 @@ export class InMemoryDatabase implements IDatabase {
     throw new Error(`participant id ${id} not found`);
   }
   getSaveIds(gameId: GameId): Promise<number[]> {
-    const row = this.data.get(gameId);
+    const row = this.games.get(gameId);
     if (row === undefined || row.length === 0) {
       return Promise.reject(new Error('not found'));
     } else {
@@ -42,7 +49,7 @@ export class InMemoryDatabase implements IDatabase {
     }
   }
   getGameVersion(gameId: GameId, saveId: number): Promise<SerializedGame> {
-    const row = this.data.get(gameId);
+    const row = this.games.get(gameId);
     if (row === undefined || row.length === 0) {
       return Promise.reject(new Error(`Game ${gameId} not found`));
     }
@@ -53,7 +60,7 @@ export class InMemoryDatabase implements IDatabase {
     return Promise.resolve(serializedGame);
   }
   getGameIds(): Promise<GameId[]> {
-    return Promise.resolve(Array.from(this.data.keys()));
+    return Promise.resolve(Array.from(this.games.keys()));
   }
   async getPlayerCount(gameId: GameId): Promise<number> {
     const game = await this.getGame(gameId);
@@ -61,10 +68,10 @@ export class InMemoryDatabase implements IDatabase {
   }
   saveGame(game: IGame): Promise<void> {
     const gameId = game.id;
-    const row = this.data.get(gameId) || [];
-    this.data.set(gameId, row);
-    while (row.length < game.lastSaveId) {
-      row.push();
+    const row = this.games.get(gameId) || [];
+    this.games.set(gameId, row);
+    while (row.length <= game.lastSaveId) {
+      row.push(undefined);
     }
     row[game.lastSaveId] = game.serialize();
     game.lastSaveId++;
@@ -78,7 +85,7 @@ export class InMemoryDatabase implements IDatabase {
   }
 
   deleteGameNbrSaves(gameId: GameId, rollbackCount: number): Promise<void> {
-    const row = this.data.get(gameId);
+    const row = this.games.get(gameId);
     if (row === undefined) {
       throw new Error('Game not found ' + gameId);
     }
@@ -87,13 +94,13 @@ export class InMemoryDatabase implements IDatabase {
     return Promise.resolve();
   }
   markFinished(gameId: GameId): Promise<void> {
-    this.completedGames.set(gameId, new Date());
+    this.completedGames.set(gameId, new Date(this.clock.now()));
     return Promise.resolve();
   }
   purgeUnfinishedGames(): Promise<Array<GameId>> {
-    const keys = [...this.data.keys()];
+    const keys = [...this.games.keys()];
     for (const key of keys) {
-      this.data.delete(key);
+      this.games.delete(key);
     }
     return Promise.resolve(keys);
   }
@@ -110,12 +117,27 @@ export class InMemoryDatabase implements IDatabase {
   }
   async getParticipants(): Promise<Array<GameIdLedger>> {
     const entries: Array<GameIdLedger> = [];
-    this.data.forEach((games, gameId) => {
-      const firstSave = games[0];
-      const participantIds: Array<ParticipantId> = firstSave.players.map((p) => p.id);
-      if (firstSave.spectatorId) participantIds.push(firstSave.spectatorId);
+    this.games.forEach((games, gameId) => {
+      // Last save is always defined
+      const lastSave = games[games.length - 1]!;
+      const participantIds: Array<ParticipantId> = lastSave.players.map((p) => p.id);
+      if (lastSave.spectatorId) {
+        participantIds.push(lastSave.spectatorId);
+      }
       entries.push({gameId, participantIds});
     });
     return entries;
+  }
+  createSession(session: Session): Promise<void> {
+    this.sessions.set(session.id, session);
+    return Promise.resolve();
+  }
+  deleteSession(sessionId: SessionId): Promise<void> {
+    this.sessions.delete(sessionId);
+    return Promise.resolve();
+  }
+  getSessions(): Promise<Array<Session>> {
+    const now = this.clock.now();
+    return Promise.resolve(Array.from(this.sessions.values()).filter((e) => e.expirationTimeMillis > now));
   }
 }

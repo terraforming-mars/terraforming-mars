@@ -3,10 +3,10 @@ import {testGame} from '../../TestGame';
 import {Psyche} from '../../../src/server/cards/promo/16Psyche';
 import {cast} from '../../TestingUtils';
 
-describe('16 Psyche', function() {
-  it('Should play', function() {
+describe('16 Psyche', () => {
+  it('Should play', () => {
     const card = new Psyche();
-    const [, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
 
     // Sanity
     expect(player.getVictoryPoints().victoryPoints).to.eq(0);

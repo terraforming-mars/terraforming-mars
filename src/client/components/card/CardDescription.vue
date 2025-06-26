@@ -1,12 +1,11 @@
 <template>
-  <div :class="getClasses()" v-i18n>({{ getDescription() }})</div>
+  <div :class="classes" v-i18n>({{ description }})</div>
 </template>
 
 <script lang="ts">
 
 import Vue from 'vue';
 import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
-import {generateClassString} from '@/common/utils/utils';
 
 export default Vue.extend({
   name: 'CardDescription',
@@ -15,8 +14,8 @@ export default Vue.extend({
       required: true,
     },
   },
-  methods: {
-    getClasses(): string {
+  computed: {
+    classes(): ReadonlyArray<string> {
       const classes: string[] = ['card-description'];
       if (isIDescription(this.item)) {
         if (this.item.align !== 'center') {
@@ -25,9 +24,9 @@ export default Vue.extend({
         }
         classes.push('card-description-align--' + this.item.align);
       }
-      return generateClassString(classes);
+      return classes;
     },
-    getDescription(): string {
+    description(): string {
       return isIDescription(this.item) ? this.item.text : String(this.item);
     },
   },

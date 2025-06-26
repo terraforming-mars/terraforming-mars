@@ -1,24 +1,23 @@
 import {expect} from 'chai';
 import {DataLeak} from '../../../src/server/cards/pathfinders/DataLeak';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarObservationPost} from '../../../src/server/cards/moon/LunarObservationPost';
-import {runAllActions} from '../../TestingUtils';
+import {runAllActions, testGame} from '../../TestingUtils';
 
-describe('DataLeak', function() {
+describe('DataLeak', () => {
   let card: DataLeak;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DataLeak();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
   });
 
-  it('play', function() {
+  it('play', () => {
     const lunarObservationPost = new LunarObservationPost();
-    player.playedCards = [lunarObservationPost];
+    player.playedCards.push(lunarObservationPost);
 
     card.play(player);
     runAllActions(game);

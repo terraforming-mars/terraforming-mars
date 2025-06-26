@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {GeodesicTents} from '../../../src/server/cards/moon/GeodesicTents';
 import {PlaceMoonHabitatTile} from '../../../src/server/moon/PlaceMoonHabitatTile';
@@ -9,8 +9,7 @@ describe('GeodesicTents', () => {
   let card: GeodesicTents;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [/* game */, player] = testGame(1, {moonExpansion: true});
     card = new GeodesicTents();
   });
 
@@ -20,15 +19,15 @@ describe('GeodesicTents', () => {
 
     player.titanium = 0;
     player.production.override({energy: 1});
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 1;
     player.production.override({energy: 0});
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 1;
     player.production.override({energy: 1});
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {

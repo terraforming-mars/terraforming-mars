@@ -2,9 +2,11 @@ import {expect} from 'chai';
 import {shallowMount, Wrapper} from '@vue/test-utils';
 import {getLocalVue} from '../getLocalVue';
 import CardVictoryPoints from '@/client/components/card/CardVictoryPoints.vue';
-import {ICardRenderDynamicVictoryPoints} from '@/common/cards/render/ICardRenderDynamicVictoryPoints';
+import {CardRenderDynamicVictoryPoints} from '@/common/cards/render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {RecursivePartial} from '@/common/utils/utils';
+import {CardResource} from '@/common/CardResource';
+import {Tag} from '@/common/cards/Tag';
 
 describe('CardVictoryPoints', () => {
   let wrapper: Wrapper<any>;
@@ -37,23 +39,26 @@ describe('CardVictoryPoints', () => {
     expect(wrapper.find('[data-test=item]').exists()).is.false;
   });
   it('renders points with item - points = targed 10/', async () => {
-    await wrapper.setProps(prop({item: {type: CardRenderItemType.CAMPS}, points: 10, target: 10}));
+    await wrapper.setProps(prop({item: {type: CardRenderItemType.RESOURCE, resource: CardResource.CAMP}, points: 10, target: 10}));
     expect(wrapper.text()).to.equal('10/');
-    expect(wrapper.find('[data-test=item]').props().item.type).eq('camps');
+    expect(wrapper.find('[data-test=item]').props().item.type).eq('resource');
+    expect(wrapper.find('[data-test=item]').props().item.resource).eq('Camp');
   });
   it('renders points with item - points = targed 5/10', async () => {
-    await wrapper.setProps(prop({item: {type: CardRenderItemType.ASTEROIDS}, points: 5, target: 10}));
+    await wrapper.setProps(prop({item: {type: CardRenderItemType.RESOURCE, resource: CardResource.ASTEROID}, points: 5, target: 10}));
     expect(wrapper.text()).to.equal('5/10');
-    expect(wrapper.find('[data-test=item]').props().item.type).eq('asteroids');
+    expect(wrapper.find('[data-test=item]').props().item.type).eq('resource');
+    expect(wrapper.find('[data-test=item]').props().item.resource).eq('Asteroid');
   });
   it('search for life', async () => {
-    await wrapper.setProps(prop({item: {type: CardRenderItemType.SCIENCE}, targetOneOrMore: true}));
+    await wrapper.setProps(prop({item: {type: CardRenderItemType.TAG, tag: Tag.SCIENCE}, targetOneOrMore: true}));
     expect(wrapper.text()).to.equal('*:3');
-    expect(wrapper.find('[data-test=item]').props().item.type).eq('science');
+    expect(wrapper.find('[data-test=item]').props().item.type).eq('tag');
+    expect(wrapper.find('[data-test=item]').props().item.tag).eq('science');
   });
 
 
-  function prop(vps: RecursivePartial<ICardRenderDynamicVictoryPoints>) {
+  function prop(vps: RecursivePartial<CardRenderDynamicVictoryPoints>) {
     return {
       victoryPoints: {
         item: undefined,

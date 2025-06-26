@@ -1,16 +1,13 @@
-import {Card} from '../Card';
-import {ICorporationCard} from './ICorporationCard';
+import {CorporationCard} from './CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {multiplier} from '../Options';
+import {ICorporationCard} from './ICorporationCard';
 
-export class Helion extends Card implements ICorporationCard {
+export class Helion extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.HELION,
       tags: [Tag.SPACE],
       startingMegaCredits: 42,
@@ -27,7 +24,7 @@ export class Helion extends Card implements ICorporationCard {
           b.production((pb) => pb.heat(3)).nbsp.megacredits(42);
           b.corpBox('effect', (ce) => {
             ce.effect('You may use heat as M€. You may not use M€ as heat.', (eb) => {
-              eb.startEffect.text('x').heat(1).equals().megacredits(0, {multiplier});
+              eb.startEffect.text('x').heat(1).equals().megacredits(1, {text: 'x'});
             });
           });
         }),

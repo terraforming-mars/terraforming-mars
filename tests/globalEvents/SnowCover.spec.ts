@@ -1,33 +1,33 @@
 import {expect} from 'chai';
 import {setTemperature} from '../TestingUtils';
 import {MAX_TEMPERATURE} from '../../src/common/constants';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {SnowCover} from '../../src/server/turmoil/globalEvents/SnowCover';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
 
-describe('SnowCover', function() {
+describe('SnowCover', () => {
   let card: SnowCover;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SnowCover();
     [game, player, player2] = testGame(2);
 
     turmoil = Turmoil.newInstance(game);
-    turmoil.chairman = player2.id;
+    turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
-    turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.add(player2.id);
-    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.partyLeader = player2;
+    turmoil.dominantParty.delegates.add(player2);
+    turmoil.dominantParty.delegates.add(player2);
   });
 
-  it('resolve play', function() {
+  it('resolve play', () => {
     card.resolve(game, turmoil);
     expect(player2.cardsInHand).has.lengthOf(3);
     expect(game.getTemperature()).to.eq(-30);
@@ -45,7 +45,7 @@ describe('SnowCover', function() {
     expect(game.getTemperature()).to.eq(-28);
   });
 
-  it('cannot reduce temperature if maxed out', function() {
+  it('cannot reduce temperature if maxed out', () => {
     setTemperature(game, MAX_TEMPERATURE);
     card.resolve(game, turmoil);
     expect(game.getTemperature()).to.eq(MAX_TEMPERATURE);

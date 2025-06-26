@@ -1,4 +1,73 @@
 {
+
+    "Applied Science": "",
+    "Action: Remove 1 resource here to either add 1 resource to ANY CARD WITH A RESOURCE or gain 1 standard resource.": "행동: 이 카드 위의 과학 자원 1개를 제거하고, 기본 자원 1개 획득하거나 자원이 놓여 있는 아무 카드 위에 그 자원 1개 추가",
+    "Add 6 science resources here.": "이 카드 위에 과학 자원 6개 추가.",
+
+    "Atmospheric Enhancers": "",
+    "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "기온, 산소 농도, 금성 지표 중 하나를 골라 2단계 상승. 부양체 자원이 그려진 카드 2장이 공개될 때까지 더미에서 카드를 공개. 손으로 그 카드 2장을 가져오고 나머지는 버림.",
+
+    "Board of Directors": "",
+    "ACTION:": "행동:",
+    "DRAW 1 PRELUDE CARD: EITHER DISCARD IT, OR PAY 12 M€ AND REMOVE 1 DIRECTOR RESOURCE HERE TO PLAY IT.": "서곡 카드 1장 획득. 그 카드를 버리거나 12 M€을 지불하고 이 카드에서 director 자원 1개를 제거하여 그 카드를 추진.",
+    "This is not the director icon yet.": "아직 director 아이콘이 없음.",
+    "Add 4 director resources here.": "이 카드에 director 자원 4개 추가.",
+
+    "Colony Trade Hub": "",
+    "Increase your energy production 1 step. Gain 2 titanium": "에너지 생산력 1 증가. 티타늄 자원 3개 획득.",
+    "Effect: When any colony is placed, gain 2 M€.": "지속 효과: 아무 개척기지가 배치될 때마다, 자신은 2 M€ 획득.",
+
+    "Corridors of Power": "",
+    "Effect: Each time you become party leader, draw 1 card.": "지속 효과: 자신의 의원이 의장이 될 때마다 카드를 1장 뽑음.",
+    "Raise your TR 1 step and gain 4 M€": "테라포밍 등급 1 TR 상승. 4 M€ 획득.",
+
+    "Focused Organization": "",
+    "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource": "행동: 카드 1장을 버리고 기본 자원 1개를 제거해서, 카드 1장과 기본 자원 1개 획득.",
+    "Draw 1 card and gain 1 standard resource.": "카드 1장 획득. 기본 자원 1개 획득.",
+
+    "Nobel Prize": "",
+    "Gain 5 M€. Draw 2 cards with requirements.": "5 M€ 획득. 추진 조건이 있는 카드 2장 획득.",
+
+    "Planetary Alliance": "",
+    "Raise your TR 2 steps. Draw 1 Jovian card and 1 Venus card.": "테라포밍 등급 2 TR 상승. 목성 카드 1장과 금성 카드 1장 획득.",
+
+    "Space Lanes": "",
+    "Effect: When you play a Jovian, Earth, or Venus tag, you pay 2 M€ less for it.": "지속 효과: 금성, 지구, 목성 카드 사용 시, 2 M€ 할인.",
+
+    "Old Mining Colony": "",
+    "Increase your titanium production 1 step. Place 1 colony. Discard 1 card.": "티타늄 생산력 1 증가. 개척기지 1개 배치. 카드 1장 버림.",
+
+
+    "Strategic Base Planning": "",
+    "Pay 3M€. Place a city. Place a colony.": "3 M€ 지불. 도시 1개 배치. 개척지기 1개 배치.",
+
+    "Anti-desertification Techniques": "",
+    "Gain 3 M€. Increase your plant production 1 step and your steel production 1 step.": "3 M€ 획득. 식물 생산력 1 증가. 강철 생산력 1 증가.",
+
+    "Corporate Archives": "기업 아카이브",
+    "Look at the top 7 cards from the deck. Take 2 of them into hand and discard the other 5.": "프로젝트 카드 7장을 뽑아 2장은 획득하고 나머지 5장은 버림.",
+    "Look at the top 7 cards from the deck.": "프로젝트 카드 7장을 뽑음.",
+    "Take 2 of them into hand and discard the other 5.": "2장은 획득하고 나머지 5장은 버림.",
+    "Gain 13 M€": "13 M€ 획득.",
+
+    "Double Down": "재집행",
+    "Copy your other prelude's direct effect.": "자신의 다른 서곡 카드의 즉발 효과를 복사.",
+
+    "Giant Solar Collector": "",
+    "Increase your energy production 2 steps. Raise Venus 1 step.": "에너지 생산력 2 증가. 금성 개척률 1단계 상승.",
+
+    "Head Start": "유리한 출발",
+    "GAIN 2 STEEL.": "강철 2개 획득.",
+    "GAIN 2 M€ PER PROJECT CARD YOU HAVE IN HAND.": "손에 든 카드 1장당 2 M€ 획득.",
+    "IMMEDIATELY TAKE 2 ACTIONS.": "즉시 행동 2개 수행.",
+
+    "Merger": "합병",
+    "Draw 4 corporation cards. Play one of them and discard the other 3. Then pay 42 M€.": "기업 카드 4장을 뽑아 1장은 사용하고 나머지 3장은 버림. 그 후 42 M€ 제거.",
+
+    "New Partner": "새로운 파트너",
+    "Raise your M€ production 1 step. Immediately draw 2 prelude cards. Play 1 of them, and discard the other.": "메가크레딧 생산력 1 증가. 서곡 카드 2장을 뽑아 1장은 사용하고 나머지는 버림.",
+
+
     "Allied Bank": "연합 은행",
     "Increase your M€ production 4 steps. Gain 3 M€.": "메가크레딧 생산력 4 증가. 3 M€ 획득.",
 
@@ -27,7 +96,7 @@
     "Increase your plant production 1 step. Place a city tile.": "도시 타일 1장 배치. 식물 생산력 1 증가.",
 
     "Ecology Experts": "생태학 전문가 그룹",
-    "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": "식물 생산력 1 증가. 추진 조건 중 행성 지표 무시하고, 카드 1장 사용(추진비용 지불).",
+    "Increase your plant production 1 step. PLAY A CARD FROM HAND, IGNORING GLOBAL REQUIREMENTS.": "식물 생산력 1 증가. 추진 조건 중 행성 지표 무시하고, 카드 1장 사용(추진비용 지불).",
 
     "Eccentric Sponsor": "괴짜 후원자",
     "Play a card from hand, reducing its cost by 25 M€": "추진 비용을 25 M€ 할인해서, 즉시 손에 카드 1장 사용.",
@@ -78,6 +147,7 @@
     "Increase your heat production 2 steps. Place an ocean tile.": "해양 타일 1장 배치. 열 생산력 2 증가.",
 
     "Power Generation": "발전 시설",
+    "Increase your energy production 3 steps.": "에너지 생산력 3 증가.",
 
     "Research Network": "연구 네트워크",
     "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "메가크레딧 생산력 1 증가. 카드 3장 획득.",
@@ -101,5 +171,10 @@
     "Increase your TR 3 steps. Draw a card.": "테라포밍 등급 3TR 상승. 카드 1장 획득.",
 
     "Acquired Space Agency": "항공우주국 합병",
-    "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "티타늄 자원 6개 획득. 프로젝트 덱 공개후, 우주 태그 카드 2장 획득."
+    "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "티타늄 자원 6개 획득. 프로젝트 덱 공개후, 우주 태그 카드 2장 획득.",
+
+    "Add resource to card GHG Producing Bacteria": "온실가스 생산 세균 카드에 자원 추가",
+    "Add resource to card Fish": "물고기 카드에 자원 추가",
+    "Add resource": "자원 추가",
+    "Gain plant": "식물 자원 획득"
 }

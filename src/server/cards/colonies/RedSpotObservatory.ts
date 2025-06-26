@@ -7,7 +7,6 @@ import {CardResource} from '../../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 
 export class RedSpotObservatory extends Card implements IProjectCard {
@@ -24,13 +23,13 @@ export class RedSpotObservatory extends Card implements IProjectCard {
         drawCard: 2,
       },
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3)),
+      requirements: {tag: Tag.SCIENCE, count: 3},
       metadata: {
         cardNumber: 'C32',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 floater to this card, or spend 1 floater here to draw a card.', (eb) => {
-            eb.empty().arrow().floaters(1).or();
-            eb.floaters(1).startAction.cards(1);
+            eb.empty().arrow().resource(CardResource.FLOATER).or();
+            eb.resource(CardResource.FLOATER).startAction.cards(1);
           }).br;
           b.cards(2);
         }),
@@ -53,10 +52,10 @@ export class RedSpotObservatory extends Card implements IProjectCard {
       return undefined;
     }
 
-    const opts: Array<SelectOption> = [];
+    const opts = [];
 
-    const addResource = new SelectOption('Add 1 floater on this card', 'Add floater', () => this.addResource(player));
-    const spendResource = new SelectOption('Remove 1 floater on this card to draw a card', 'Remove floater', () => this.spendResource(player));
+    const addResource = new SelectOption('Add 1 floater on this card', 'Add floater').andThen(() => this.addResource(player));
+    const spendResource = new SelectOption('Remove 1 floater on this card to draw a card', 'Remove floater').andThen(() => this.spendResource(player));
 
     opts.push(spendResource);
     opts.push(addResource);

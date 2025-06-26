@@ -3,21 +3,21 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import SelectInitialCards from '@/client/components/SelectInitialCards.vue';
-import {AndOptionsResponse, InputResponse} from '@/common/inputs/InputResponse';
+import {SelectInitialCardsResponse, InputResponse} from '@/common/inputs/InputResponse';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {Preferences} from '@/client/utils/PreferencesManager';
 import * as titles from '@/common/inputs/SelectInitialCards';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {SelectCardModel} from '@/common/models/PlayerInputModel';
 import {CardModel} from '@/common/models/CardModel';
 
 let savedData: InputResponse | undefined;
 
-describe('SelectInitialCards', function() {
+describe('SelectInitialCards', () => {
   beforeEach(() => {
     savedData = undefined;
   });
 
-  it('saves data without prelude', async function() {
+  it('saves data without prelude', async () => {
     const component = createComponent([CardName.ECOLINE], [CardName.ANTS]);
     expect(component).not.is.undefined;
 
@@ -25,7 +25,7 @@ describe('SelectInitialCards', function() {
     expect(button.attributes().disabled).eq('disabled');
 
     const selectCards = component.findAllComponents({name: 'select-card'});
-    expect(selectCards.length).to.eq(2);
+    expect(selectCards).has.length(2);
     selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
 
     await component.vm.$nextTick();
@@ -36,18 +36,18 @@ describe('SelectInitialCards', function() {
 
     await button.trigger('click');
 
-    expect(savedData).to.deep.eq({type: 'and', responses: [
+    expect(savedData).to.deep.eq({type: 'initialCards', responses: [
       {type: 'card', cards: [CardName.ECOLINE]},
       {type: 'card', cards: [CardName.ANTS]},
     ]});
   });
 
-  it('Cannot save with only one prelude', async function() {
+  it('Cannot save with only one prelude', async () => {
     const component = createComponent([CardName.ECOLINE], [CardName.ANTS], [CardName.ALLIED_BANK]);
     expect(component).not.is.undefined;
 
     const selectCards = component.findAllComponents({name: 'select-card'});
-    expect(selectCards.length).to.eq(3);
+    expect(selectCards).has.length(3);
     selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
     selectCards.at(1).vm.$emit('cardschanged', [CardName.ALLIED_BANK]);
     selectCards.at(2).vm.$emit('cardschanged', [CardName.ANTS]);
@@ -57,7 +57,7 @@ describe('SelectInitialCards', function() {
     expect(button.attributes().disabled).eq('disabled');
   });
 
-  it('saves data with prelude', async function() {
+  it('saves data with prelude', async () => {
     const component = createComponent(
       [CardName.ECOLINE],
       [CardName.ANTS],
@@ -68,7 +68,7 @@ describe('SelectInitialCards', function() {
     expect(button.attributes().disabled).eq('disabled');
 
     const selectCards = component.findAllComponents({name: 'select-card'});
-    expect(selectCards.length).to.eq(3);
+    expect(selectCards).has.length(3);
 
     selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
     await component.vm.$nextTick();
@@ -84,7 +84,7 @@ describe('SelectInitialCards', function() {
 
     await button.trigger('click');
 
-    expect(savedData).to.deep.eq({type: 'and', responses: [
+    expect(savedData).to.deep.eq({type: 'initialCards', responses: [
       {type: 'card', cards: [CardName.ECOLINE]},
       {type: 'card', cards: [CardName.ALLIED_BANK, CardName.SUPPLY_DROP]},
       {type: 'card', cards: [CardName.ANTS]},
@@ -95,7 +95,7 @@ describe('SelectInitialCards', function() {
     expect(confirmationDialog.$data.shown).is.false;
   });
 
-  it('shows error when no project cards selected', async function() {
+  it('shows error when no project cards selected', async () => {
     const component = createComponent([CardName.ECOLINE], [CardName.ANTS]);
     const selectCards = component.findAllComponents({name: 'select-card'});
     selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
@@ -111,7 +111,7 @@ describe('SelectInitialCards', function() {
     expect(confirmationDialog.$data.shown).is.true;
   });
 
-  it('shows error when prelude cards are selected but not project cards', async function() {
+  it('shows error when prelude cards are selected but not project cards', async () => {
     const component = createComponent(
       [CardName.ECOLINE],
       [CardName.ANTS],
@@ -129,22 +129,21 @@ describe('SelectInitialCards', function() {
     const confirmationDialog = getConfirmDialog(component);
     expect(confirmationDialog.$data.shown).is.true;
   });
-});
 
-it('Cannot select two ceos', async function() {
-  const component = createComponent([CardName.ECOLINE], [CardName.ANTS], undefined, [CardName.FLOYD, CardName.HAL9000, CardName.ENDER]);
-  expect(component).not.is.undefined;
+  it('Cannot select two ceos', async () => {
+    const component = createComponent([CardName.ECOLINE], [CardName.ANTS], undefined, [CardName.FLOYD, CardName.HAL9000, CardName.ENDER]);
+    expect(component).not.is.undefined;
 
-  const selectCards = component.findAllComponents({name: 'select-card'});
-  expect(selectCards.length).to.eq(3);
-  selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
-  selectCards.at(1).vm.$emit('cardschanged', [CardName.FLOYD, CardName.HAL9000]);
-  selectCards.at(2).vm.$emit('cardschanged', [CardName.ANTS]);
-  await component.vm.$nextTick();
+    const selectCards = component.findAllComponents({name: 'select-card'});
+    expect(selectCards).has.length(3);
+    selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
+    selectCards.at(1).vm.$emit('cardschanged', [CardName.FLOYD, CardName.HAL9000]);
+    selectCards.at(2).vm.$emit('cardschanged', [CardName.ANTS]);
+    await component.vm.$nextTick();
 
-  const button = getButton(component);
-  console.log(button.attributes());
-  expect(button.attributes().disabled).eq('disabled');
+    const button = getButton(component);
+    expect(button.attributes().disabled).eq('disabled');
+  });
 });
 
 function getButton(component: Wrapper<SelectInitialCards>) {
@@ -160,24 +159,52 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
   const toObject = (cards: Array<CardName>) => cards.map((name) => {
     return {name} as CardModel;
   });
-  const options: Array<Partial<PlayerInputModel>> = [{
+  const options: Array<SelectCardModel> = [{
+    type: 'card',
     title: titles.SELECT_CORPORATION_TITLE,
+    buttonLabel: 'x',
     cards: toObject(corpCards),
+    max: 1,
+    min: 1,
+    showOnlyInLearnerMode: false,
+    selectBlueCardAction: false,
+    showOwner: false,
   }, {
+    type: 'card',
     title: titles.SELECT_PROJECTS_TITLE,
+    buttonLabel: 'x',
     cards: toObject(projectCards),
+    max: projectCards.length,
+    min: 1,
+    showOnlyInLearnerMode: false,
+    selectBlueCardAction: false,
+    showOwner: false,
   }];
 
   if (preludeCards) {
     options.splice(1, 0, {
+      type: 'card',
       title: titles.SELECT_PRELUDE_TITLE,
+      buttonLabel: 'x',
       cards: toObject(preludeCards),
+      max: 2,
+      min: 2,
+      showOnlyInLearnerMode: false,
+      selectBlueCardAction: false,
+      showOwner: false,
     });
   }
   if (ceoCards) {
     options.push({
+      type: 'card',
       title: titles.SELECT_CEO_TITLE,
+      buttonLabel: 'x',
       cards: toObject(ceoCards),
+      max: 1,
+      min: 1,
+      showOnlyInLearnerMode: false,
+      selectBlueCardAction: false,
+      showOwner: false,
     });
   }
 
@@ -191,10 +218,10 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
         game: {},
       },
       playerinput: {
-        title: 'foo',
+        title: 'selectInitialCards',
         options,
       },
-      onsave: function(data: AndOptionsResponse) {
+      onsave: function(data: SelectInitialCardsResponse) {
         savedData = data;
       },
       showsave: true,

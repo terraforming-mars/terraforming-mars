@@ -1,9 +1,10 @@
 import {expect} from 'chai';
 import {Odyssey} from '../../../src/server/cards/pathfinders/Odyssey';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions, setTemperature} from '../../TestingUtils';
+import {toName} from '../../../src/common/utils/utils';
 import {Tag} from '../../../src/common/cards/Tag';
 import {CardType} from '../../../src/common/cards/CardType';
 import {ImportOfAdvancedGHG} from '../../../src/server/cards/base/ImportOfAdvancedGHG';
@@ -23,29 +24,33 @@ import {SolarWindPower} from '../../../src/server/cards/base/SolarWindPower';
 import {ThoriumRush} from '../../../src/server/cards/moon/ThoriumRush';
 import {Diversity} from '../../../src/server/turmoil/globalEvents/Diversity';
 import {Kelvinists} from '../../../src/server/turmoil/parties/Kelvinists';
+import {Anthozoa} from '../../../src/server/cards/pathfinders/Anthozoa';
+import {ControlledBloom} from '../../../src/server/cards/pathfinders/ControlledBloom';
+import {Ecologist} from '../../../src/server/milestones/Ecologist';
+
 
 describe('Odyssey', () => {
   let odyssey: Odyssey;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     odyssey = new Odyssey();
     [game, player] = testGame(1);
-    player.setCorporationForTest(odyssey);
+    player.playedCards.push(odyssey);
   });
 
   it('events count for tags', () => {
     const event = fakeCard({type: CardType.EVENT, tags: [Tag.JOVIAN]});
     player.playedCards.push(event);
     expect(player.tags.count(Tag.JOVIAN)).eq(1);
-    player.setCorporationForTest(undefined);
+    player.playedCards.remove(odyssey);
     expect(player.tags.count(Tag.JOVIAN)).eq(0);
   });
 
   it('cannot act - cannot afford', () => {
     const expensiveEvent = fakeCard({type: CardType.EVENT, cost: 8});
-    player.playedCards = [expensiveEvent];
+    player.playedCards.push(expensiveEvent);
     expect(odyssey.canAct(player)).is.false;
     player.megaCredits = 7;
     expect(odyssey.canAct(player)).is.false;
@@ -57,7 +62,7 @@ describe('Odyssey', () => {
     // Requires +2C temperature.
     const event = new IceCapMelting();
     player.megaCredits = event.cost;
-    player.playedCards = [event];
+    player.playedCards.push(event);
     expect(odyssey.canAct(player)).is.false;
     setTemperature(game, 0);
     expect(odyssey.canAct(player)).is.false;
@@ -70,7 +75,7 @@ describe('Odyssey', () => {
     expect(odyssey.canAct(player)).is.false;
     const expensiveEvent = fakeCard({type: CardType.EVENT, cost: 17});
     const nonEvent = fakeCard({type: CardType.ACTIVE, cost: 2});
-    player.playedCards = [expensiveEvent, nonEvent];
+    player.playedCards.push(expensiveEvent, nonEvent);
     expect(odyssey.canAct(player)).is.false;
     expensiveEvent.cost = 16;
     expect(odyssey.canAct(player)).is.true;
@@ -81,7 +86,7 @@ describe('Odyssey', () => {
     const importOfAdvancedGHG = new ImportOfAdvancedGHG();
     // Costs 2. Look at the top 3 cards from the deck. Take 1 of them into hand and discard the other two.
     const inventionContest = new InventionContest();
-    player.playedCards = [importOfAdvancedGHG, inventionContest];
+    player.playedCards.push(importOfAdvancedGHG, inventionContest);
 
     let selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
 
@@ -95,7 +100,7 @@ describe('Odyssey', () => {
     selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
     expect(selectProjectCardToPlay.cards).has.members([importOfAdvancedGHG, inventionContest]);
 
-    expect(player.playedCards).has.members([importOfAdvancedGHG, inventionContest]);
+    expect(player.playedCards.asArray()).has.members([odyssey, importOfAdvancedGHG, inventionContest]);
     expect(player.production.heat).eq(0);
 
     selectProjectCardToPlay.payAndPlay(importOfAdvancedGHG, {...Payment.EMPTY, megaCredits: importOfAdvancedGHG.cost});
@@ -103,7 +108,7 @@ describe('Odyssey', () => {
 
     expect(player.production.heat).eq(2);
     expect(game.projectDeck.discardPile.pop()).eq(importOfAdvancedGHG);
-    expect(player.playedCards).has.members([inventionContest]);
+    expect(player.playedCards.asArray()).has.members([odyssey, inventionContest]);
     expect(player.megaCredits).eq(0);
   });
 
@@ -112,7 +117,7 @@ describe('Odyssey', () => {
     const mediaGroup = new MediaGroup();
     player.megaCredits = 50;
 
-    player.playedCards = [importOfAdvancedGHG, mediaGroup];
+    player.playedCards.push(importOfAdvancedGHG, mediaGroup);
     const selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
 
     expect(player.production.heat).eq(0);
@@ -124,7 +129,7 @@ describe('Odyssey', () => {
     expect(player.production.heat).eq(2);
     expect(player.megaCredits).eq(44); // 50 - 9 + 3 = 44
     expect(game.projectDeck.discardPile.pop()).eq(importOfAdvancedGHG);
-    expect(player.playedCards).has.members([mediaGroup]);
+    expect(player.playedCards.asArray()).has.members([odyssey, mediaGroup]);
   });
 
   it('Acts correctly for event cards that give one time discount', () => {
@@ -144,6 +149,16 @@ describe('Odyssey', () => {
     expect(player.getCardCost(deimosDown)).to.eq(deimosDown.cost); // no more discount
   });
 
+  it('Be compatible with milestones requiring tags', () => {
+    const anthozoa = new Anthozoa();
+    const controlledBloom = new ControlledBloom();
+    player.playedCards.push(anthozoa);
+    player.playedCards.push(controlledBloom);
+
+    const ecologist = new Ecologist();
+    expect(ecologist.canClaim(player)).to.be.true;
+  });
+
   // This is a weird one.
   // Odyssey lets you replay an event card.
   // Project Inspection is an event that lets you replay a blue action.
@@ -160,28 +175,28 @@ describe('Odyssey', () => {
   // ... and so on.
   it('Be compatible with Viron and Project Inspection', () => {
     const viron = new Viron();
-    player.playAdditionalCorporationCard(viron);
+    player.playCorporationCard(viron);
 
     const projectInspection = new ProjectInspection();
     player.playedCards.push(projectInspection);
-    player.addActionThisGeneration(viron.name);
+    player.actionsThisGeneration.add(viron.name);
 
     // Need another action that Project Inspection can play. This creates the conditions
     // which caused a recursive call stack problem.
     const inventorsGuild = new InventorsGuild();
     player.playedCards.push(inventorsGuild);
-    player.addActionThisGeneration(inventorsGuild.name);
+    player.actionsThisGeneration.add(inventorsGuild.name);
 
     const selectProjectCardToPlay = cast(odyssey.action(player), SelectProjectCardToPlay);
-    player.addActionThisGeneration(odyssey.name); // This is played after `action` as it matches code behavior.
-    expect(selectProjectCardToPlay.cards.map((c) => c.name)).deep.eq([projectInspection.name]);
+    player.actionsThisGeneration.add(odyssey.name); // This is played after `action` as it matches code behavior.
+    expect(selectProjectCardToPlay.cards.map(toName)).deep.eq([projectInspection.name]);
 
     const playAction = selectProjectCardToPlay.payAndPlay(projectInspection, Payment.EMPTY);
     expect(playAction).is.undefined;
     runAllActions(game);
     const selectAction = cast(player.popWaitingFor(), SelectCard);
     // It might be a bug that odyssey is replayable, but that's what you get when you bend the rules.
-    expect(selectAction.cards.map((c) => c.name)).deep.eq([odyssey.name, inventorsGuild.name]);
+    expect(selectAction.cards.map(toName)).deep.eq([odyssey.name, inventorsGuild.name]);
   });
 
   it('Be compatible with Diversity Global Event', () => {
@@ -196,17 +211,17 @@ describe('Odyssey', () => {
 
     player.playedCards.push(new ThoriumRush()); // Event: Building, Moon
 
-    turmoil.chairman = player.id;
+    turmoil.chairman = player;
     turmoil.dominantParty = new Kelvinists();
-    turmoil.dominantParty.partyLeader = player.id;
-    turmoil.dominantParty.delegates.add(player.id);
+    turmoil.dominantParty.partyLeader = player;
+    turmoil.dominantParty.delegates.add(player);
 
     // Not enough tags, because the event does not count.
     diversity.resolve(game, turmoil);
     expect(player.megaCredits).to.eq(0);
 
     // Now there will be enough tags, with the event.
-    player.setCorporationForTest(odyssey);
+    player.corporations.push(odyssey);
     diversity.resolve(game, turmoil);
 
     expect(player.megaCredits).to.eq(10);

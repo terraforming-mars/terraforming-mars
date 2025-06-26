@@ -24,7 +24,7 @@ export class AirScrappingExpedition extends Card implements IProjectCard {
         cardNumber: '215',
         description: 'Raise Venus 1 step. Add 3 floaters to ANY Venus CARD.',
         renderData: CardRenderer.builder((b) => {
-          b.venus(1).floaters(3, {secondaryTag: Tag.VENUS});
+          b.venus(1).resource(CardResource.FLOATER, {amount: 3, secondaryTag: Tag.VENUS});
         }),
       },
     });
@@ -42,9 +42,10 @@ export class AirScrappingExpedition extends Card implements IProjectCard {
       return;
     }
 
-    return new SelectCard('Select card to add 3 floaters', 'Add floaters', floaterCards, ([card]) => {
-      player.addResourceTo(card, {qty: 3, log: true});
-      return undefined;
-    });
+    return new SelectCard('Select card to add 3 floaters', 'Add floaters', floaterCards)
+      .andThen(([card]) => {
+        player.addResourceTo(card, {qty: 3, log: true});
+        return undefined;
+      });
   }
 }

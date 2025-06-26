@@ -3,11 +3,11 @@ import {AtalantaPlanitiaLab} from '../../../src/server/cards/venusNext/AtalantaP
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('AtalantaPlanitiaLab', function() {
-  it('Should play', function() {
+describe('AtalantaPlanitiaLab', () => {
+  it('Should play', () => {
     const card = new AtalantaPlanitiaLab();
-    const [, player] = testGame(2);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    const [/* game */, player] = testGame(2);
+    expect(card.canPlay(player)).is.not.true;
     cast(card.play(player), undefined);
     expect(player.cardsInHand).has.lengthOf(2);
     expect(card.getVictoryPoints(player)).to.eq(2);

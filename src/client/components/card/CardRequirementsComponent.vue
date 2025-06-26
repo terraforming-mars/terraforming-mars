@@ -1,7 +1,7 @@
 <template>
-  <div :class="getClasses()">
-    <div v-for="(req, idx) in requirements.requirements" :key="idx">
-      <card-requirement :requirement="req" />
+  <div :class="getClasses">
+    <div v-for="(req, idx) in requirements" :key="idx">
+      <card-requirement :requirement="req" :leftMargin="indentRight[idx]"/>
     </div>
   </div>
 </template>
@@ -10,23 +10,26 @@
 
 import Vue from 'vue';
 import CardRequirementComponent from './CardRequirementComponent.vue';
-import {ICardRequirements} from '@/common/cards/ICardRequirements';
+import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
 
 export default Vue.extend({
   name: 'CardRequirementsComponent',
   props: {
     requirements: {
-      type: Object as () => ICardRequirements,
+      type: Array<CardRequirementDescriptor>,
       required: true,
     },
   },
   components: {
     'card-requirement': CardRequirementComponent,
   },
-  methods: {
+  computed: {
     getClasses(): string {
-      const hasMax = this.requirements.requirements.some((req) => req.isMax);
+      const hasMax = this.requirements.some((req) => req.max);
       return hasMax ? 'card-requirements card-requirements-max' : 'card-requirements';
+    },
+    indentRight(): ReadonlyArray<boolean> {
+      return [false, ...this.requirements.map((req) => (req.nextTo || false))];
     },
   },
 });

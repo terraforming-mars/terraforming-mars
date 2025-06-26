@@ -5,19 +5,19 @@ import {SaturnSurfing} from '../../../src/server/cards/promo/SaturnSurfing';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 
-describe('SaturnSurfing', function() {
+describe('SaturnSurfing', () => {
   let card: SaturnSurfing;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SaturnSurfing();
     [game, player] = testGame(1);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.playedCards.push(new Sponsors());
     player.playedCards.push(new EarthOffice());
     card.play(player);
@@ -26,7 +26,7 @@ describe('SaturnSurfing', function() {
     expect(card.resourceCount).to.eq(3);
   });
 
-  it('Can not act if no floaters on the card', function() {
+  it('Can not act if no floaters on the card', () => {
     card.play(player);
     runAllActions(game);
 
@@ -36,7 +36,7 @@ describe('SaturnSurfing', function() {
     expect(card.canAct()).is.not.true;
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     player.playedCards.push(new Sponsors());
     player.playedCards.push(new EarthOffice());
     card.play(player);
@@ -50,7 +50,7 @@ describe('SaturnSurfing', function() {
     expect(player.megaCredits).to.eq(3);
   });
 
-  it('Should give victory points', function() {
+  it('Should give victory points', () => {
     card.play(player);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });

@@ -1,6 +1,5 @@
 import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
-import {IPreludeCard} from '../prelude/IPreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {PreludesExpansion} from '../../preludes/PreludesExpansion';
@@ -15,7 +14,7 @@ export class NewPartner extends PreludeCard {
       },
 
       metadata: {
-        cardNumber: 'P43',
+        cardNumber: 'X42',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1)).prelude().asterix();
         }),
@@ -24,11 +23,17 @@ export class NewPartner extends PreludeCard {
     });
   }
 
+  public override bespokeCanPlay(player: IPlayer) {
+    const game = player.game;
+    if (!game.preludeDeck.canDraw(2)) {
+      this.warnings.add('deckTooSmall');
+    }
+    return true;
+  }
+
   public override bespokePlay(player: IPlayer) {
-    const cards: Array<IPreludeCard> = [
-      player.game.preludeDeck.draw(player.game),
-      player.game.preludeDeck.draw(player.game),
-    ];
-    return PreludesExpansion.playPrelude(player, cards);
+    const game = player.game;
+    const cards = game.preludeDeck.drawN(game, 2);
+    return PreludesExpansion.selectPreludeToPlay(player, cards);
   }
 }

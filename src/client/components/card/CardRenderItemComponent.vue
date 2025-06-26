@@ -1,28 +1,20 @@
 <template>
   <div class="card-item-container">
-    <div class="card-res-amount" v-if="item.showDigit">{{ getAmountAbs() }}</div>
-    <div :class="getComponentClasses()" v-for="index in itemsToShow()" v-html="itemHtmlContent()" :key="index"/>
-    <div class="card-over" v-if="this.item.over !== undefined">over {{this.item.over}}</div>
+    <div class="card-res-amount" v-if="item.showDigit">{{ amountAbs }}</div>
+    <div :class="componentClasses" v-for="index in itemsToShow" v-html="itemHtmlContent" :key="index"/>
+    <div class="card-over" v-if="item.over !== undefined">over {{item.over}}</div>
   </div>
 </template>
 
 <script lang="ts">
 
 import Vue from 'vue';
-import {generateClassString} from '@/common/utils/utils';
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
 import {Size} from '@/common/cards/render/Size';
 import {Tag} from '@/common/cards/Tag';
 import {ICardRenderItem, isICardRenderItem} from '@/common/cards/render/Types';
-
-// microbe, animal and plant tag could be used both as a resource and played tag
-const RESOURCE_AND_TAG_TYPES = [
-  CardRenderItemType.ANIMALS,
-  CardRenderItemType.PLANTS,
-  CardRenderItemType.MICROBES,
-  CardRenderItemType.SCIENCE,
-  CardRenderItemType.CITY];
+import {CardResource} from '@/common/CardResource';
 
 export default Vue.extend({
   name: 'CardRenderItemComponent',
@@ -32,262 +24,47 @@ export default Vue.extend({
     },
   },
   methods: {
-    getComponentClasses(): string {
-      let classes: Array<string> = [];
-
-      const type: CardRenderItemType = this.item.type;
-      if (type === CardRenderItemType.TEMPERATURE) {
-        classes.push('card-global-requirement');
-        classes.push('card-temperature-global-requirement');
-      } else if (type === CardRenderItemType.OXYGEN) {
-        classes.push('card-global-requirement');
-        classes.push('card-oxygen-global-requirement');
-      } else if (type === CardRenderItemType.OCEANS) {
-        classes.push('card-global-requirement');
-        classes.push('card-ocean-global-requirement');
-        if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
-          classes.push(`card-ocean--${this.item.size}`);
-        }
-      } else if (type === CardRenderItemType.VENUS) {
-        classes.push('card-global-requirement');
-        classes.push('card-venus-global-requirement');
-      } else if (type === CardRenderItemType.TR) {
-        classes.push('card-tile');
-        classes.push('card-tr');
-        if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
-          classes.push(`card-tr--${this.item.size}`);
-        }
-      } else if (type === CardRenderItemType.TITANIUM) {
-        classes.push('card-resource');
-        classes.push('card-resource-titanium');
-      } else if (type === CardRenderItemType.STEEL) {
-        classes.push('card-resource');
-        classes.push('card-resource-steel');
-      } else if (type === CardRenderItemType.HEAT) {
-        classes.push('card-resource');
-        classes.push('card-resource-heat');
-      } else if (type === CardRenderItemType.ENERGY) {
-        classes.push('card-resource');
-        classes.push('card-resource-energy');
-      } else if (type === CardRenderItemType.PLANTS) {
-        classes.push('card-resource');
-        classes.push('card-resource-plant');
-      } else if (type === CardRenderItemType.MEGACREDITS) {
-        classes.push('card-resource');
-        classes.push('card-resource-money');
-        if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
-          classes.push(`card-money--${this.item.size}`);
-        }
-      } else if (type === CardRenderItemType.CARDS) {
-        classes.push('card-resource');
-        classes.push('card-card');
-      } else if (type === CardRenderItemType.FLOATERS) {
-        classes.push('card-resource');
-        classes.push('card-resource-floater');
-      } else if (type === CardRenderItemType.ASTEROIDS) {
-        classes.push('card-resource');
-        classes.push('card-resource-asteroid');
-      } else if (type === CardRenderItemType.MICROBES) {
-        classes.push('card-resource');
-        classes.push('card-resource-microbe');
-      } else if (type === CardRenderItemType.ANIMALS) {
-        classes.push('card-resource');
-        classes.push('card-resource-animal');
-      } else if (type === CardRenderItemType.WILD) {
-        classes.push('card-resource');
-        classes.push('card-resource-wild');
-        if (this.item.cancelled === true) classes.push('card-private-security');
-      } else if (type === CardRenderItemType.PRESERVATION) {
-        classes.push('card-resource');
-        classes.push('card-resource-preservation');
-      } else if (type === CardRenderItemType.FIGHTER) {
-        classes.push('card-resource');
-        classes.push('card-resource-fighter');
-      } else if (type === CardRenderItemType.CAMPS) {
-        classes.push('card-resource');
-        classes.push('card-resource-camp');
-      } else if (type === CardRenderItemType.DIVERSE_TAG) {
-        classes.push('card-resource');
-        classes.push('card-resource-diverse');
-      } else if (type === CardRenderItemType.SCIENCE) {
-        classes.push('card-resource');
-        classes.push('card-resource-science');
-      } else if (type === CardRenderItemType.TRADE) {
-        classes.push('card-resource-trade');
-        if (this.item.size === Size.SMALL) {
-          classes.push('card-resource-colony--S');
-        }
-      } else if (type === CardRenderItemType.COLONIES) {
-        classes.push('card-resource-colony');
-        // TODO (chosta): think about an abstraction for item size
-        if (this.item.size === Size.SMALL) {
-          classes.push('card-resource-colony--S');
-        }
-      } else if (type === CardRenderItemType.TRADE_DISCOUNT || type === CardRenderItemType.MULTIPLIER_WHITE) {
-        classes.push('card-resource');
-        classes.push('card-resource-trade-discount');
-      } else if (type === CardRenderItemType.TRADE_FLEET) {
-        classes.push('card-resource-trade-fleet');
-      } else if (type === CardRenderItemType.SYNDICATE_FLEET) {
-        classes.push('card-resource');
-        classes.push('card-resource-syndicate-fleet');
-      } else if (type === CardRenderItemType.CHAIRMAN) {
-        classes.push('card-chairman');
-      } else if (type === CardRenderItemType.PARTY_LEADERS) {
-        classes.push('card-party-leader');
-      } else if (type === CardRenderItemType.DELEGATES) {
-        classes.push('card-delegate');
-      } else if (type === CardRenderItemType.INFLUENCE) {
-        classes.push('card-influence');
-        classes.push(`card-influence--size-${this.item.size}`);
-      } else if (type === CardRenderItemType.NO_TAGS) {
-        classes.push('card-resource-tag');
-        classes.push('card-community-services');
-      } else if (type === CardRenderItemType.CITY) {
-        classes.push('card-tile');
-        classes.push(`city-tile--${this.item.size}`);
-      } else if (type === CardRenderItemType.GREENERY) {
-        classes.push('card-tile');
-        if (this.item.secondaryTag === AltSecondaryTag.OXYGEN) {
-          classes.push(`greenery-tile-oxygen--${this.item.size}`);
-        } else {
-          classes.push(`greenery-tile--${this.item.size}`);
-        }
-      } else if (type === CardRenderItemType.EMPTY_TILE) {
-        classes.push('card-tile-ares');
-        if (this.item.size !== undefined) {
-          classes.push(`board-space-tile--empty-tile--${this.item.size}`);
-        }
-      } else if (type === CardRenderItemType.EMPTY_TILE_GOLDEN) {
-        classes.push('card-tile-ares');
-        classes.push('board-space-tile--adjacency-tile');
-      } else if (type === CardRenderItemType.EMPTY_TILE_SPECIAL) {
-        classes.push('card-tile');
-        if (this.item.size !== undefined) {
-          classes.push(`special-tile--${this.item.size}`);
-        } else {
-          classes.push('special-tile');
-        }
-      } else if (type === CardRenderItemType.COMMUNITY) {
-        classes.push('card-resource');
-        classes.push('card-resource-community');
-      } else if (type === CardRenderItemType.DISEASE) {
-        classes.push('card-resource');
-        classes.push('card-resource-disease');
-      } else if (type === CardRenderItemType.DATA_RESOURCE) {
-        classes.push('card-resource');
-        classes.push('card-resource-data');
-      } else if (type === CardRenderItemType.RESOURCE_CUBE) {
-        classes.push('card-resource');
-        classes.push('card-resource-cube');
-      } else if (type === CardRenderItemType.VENUSIAN_HABITAT) {
-        classes.push('card-resource');
-        classes.push('card-resource-venusian-habitat');
-      } else if (type === CardRenderItemType.SPECIALIZED_ROBOT) {
-        classes.push('card-resource');
-        classes.push('card-resource-specialized-robot');
-      } else if (type === CardRenderItemType.SEED) {
-        classes.push('card-resource');
-        classes.push('card-resource-seed');
-      } else if (type === CardRenderItemType.ORBITAL) {
-        classes.push('card-resource');
-        classes.push('card-resource-orbital');
-      } else if (type === CardRenderItemType.AGENDA) {
-        classes.push('card-resource');
-        classes.push('card-resource-agenda');
-      } else if (this.item.type === CardRenderItemType.MOON_HABITAT) {
-        if (this.item.secondaryTag === AltSecondaryTag.MOON_HABITAT_RATE) {
-          classes.push(sized('card-tile-lunar-habitat-rate', this.item.size));
-        } else {
-          classes.push(sized('card-tile-lunar-habitat', this.item.size));
-        }
-      } else if (type === CardRenderItemType.GLOBAL_EVENT) {
-        classes.push('turmoil-global-event');
-
-      // CEO Extension:
-      } else if (type === CardRenderItemType.ARROW_OPG) {
-        classes.push('card-arrow-opg');
-      } else if (type === CardRenderItemType.REDS) {
-        classes.push('card-reds');
-      } else if (type === CardRenderItemType.REDS_DEACTIVATED) {
-        classes.push('card-reds-deactivated');
-      } else if (type === CardRenderItemType.ADJACENCY_BONUS) {
-        classes.push('card-adjacency-bonus');
-      } else if (type === CardRenderItemType.HAZARD_TILE) {
-        if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
-          classes.push(`card-hazard-tile--${this.item.size}`);
-        } else {
-          classes.push('card-hazard-tile');
-        }
+    sized(clazz: string, size: string | undefined) {
+      return size !== undefined ? `${clazz}--${size}` : clazz;
+    },
+  },
+  computed: {
+    resourceClass(): string {
+      if (this.item.resource === undefined) {
+        return '';
+      }
+      if (this.item.resource === CardResource.RESOURCE_CUBE) {
+        return 'card-resource-cube';
+      }
+      return 'card-resource-' + this.item.resource.toLowerCase().replaceAll(' ', '-');
+    },
+    resourceSizeClass(): string {
+      if (this.item.size !== undefined) {
+        return 'card-resource-size--' + this.item.size;
+      }
+      return '';
+    },
+    tagClass(): string {
+      if (this.item.tag === undefined) {
+        return '';
+      }
+      return 'card-tag-' + this.item.tag.toLowerCase().replaceAll(' ', '-');
+    },
+    componentClasses(): ReadonlyArray<string> {
+      const classes: Array<string> = [];
+      if (this.item.isSuperscript) {
+        classes.push('card-superscript');
       }
 
-      function sized(clazz: string, size: string | undefined) {
-        return size !== undefined ? `${clazz}--${size}` : clazz;
-      }
-
-      if (this.item.type === CardRenderItemType.MOON_HABITAT_RATE) {
-        classes.push('card-colony-rate');
-        if (this.item.size !== undefined) classes.push(`card-colony-rate--${this.item.size}`);
-      }
-      if (this.item.type === CardRenderItemType.MOON_MINE) {
-        if (this.item.secondaryTag === AltSecondaryTag.MOON_MINING_RATE) {
-          classes.push(sized('card-tile-lunar-mine-rate', this.item.size));
-        } else {
-          classes.push(sized('card-tile-lunar-mine', this.item.size));
-        }
-      }
-      if (this.item.type === CardRenderItemType.MOON_MINING_RATE) {
-        classes.push('card-mining-rate');
-        if (this.item.size !== undefined) classes.push(`card-mining-rate--${this.item.size}`);
-      }
-      if (this.item.type === CardRenderItemType.MOON_ROAD) {
-        if (this.item.secondaryTag === AltSecondaryTag.MOON_LOGISTICS_RATE) {
-          classes.push(sized('card-tile-lunar-road-rate', this.item.size));
-        } else {
-          classes.push(sized('card-tile-lunar-road', this.item.size));
-        }
-      }
-      if (this.item.type === CardRenderItemType.MOON_LOGISTICS_RATE) {
-        classes.push('card-logistics-rate');
-        if (this.item.size !== undefined) classes.push(`card-logistics-rate--${this.item.size}`);
-      }
-      if (this.item.type === CardRenderItemType.PLANETARY_TRACK) {
-        classes.push('card-planetary-track');
-      }
+      classes.push(...this.componentClassArray);
 
       if (this.item.secondaryTag === AltSecondaryTag.NO_PLANETARY_TAG) {
         classes.push('tag-clone');
       }
-      // round tags
-      if (this.item.isPlayed) {
-        // override resource behavior
-        if (RESOURCE_AND_TAG_TYPES.includes(type)) {
-          classes = classes.filter((c) => c !== 'card-resource');
-        }
-        classes.push('card-resource-tag');
-        if (type === CardRenderItemType.EVENT) {
-          classes.push('card-tag-event');
-        } else if (type === CardRenderItemType.SPACE) {
-          classes.push('card-tag-space');
-        } else if (type === CardRenderItemType.SCIENCE) {
-          classes.push('card-tag-science');
-        } else if (type === CardRenderItemType.JOVIAN) {
-          classes.push('card-tag-jovian');
-        } else if (type === CardRenderItemType.VENUS) {
-          classes.push('card-tag-venus');
-        } else if (type === CardRenderItemType.EARTH) {
-          classes.push('card-tag-earth');
-        } else if (type === CardRenderItemType.BUILDING) {
-          classes.push('card-tag-building');
-        } else if (type === CardRenderItemType.CITY) {
-          classes.push('card-tag tag-city');
-        } else if (this.item.type === CardRenderItemType.MARS) {
-          classes.push('card-tag tag-mars');
-        }
-      }
 
       // act upon any player
       if (this.item.anyPlayer === true) {
+        const type = this.item.type;
         if (type === CardRenderItemType.DELEGATES) {
           classes.push('card-delegate-red');
         } else if (type === CardRenderItemType.CHAIRMAN) {
@@ -300,6 +77,9 @@ export default Vue.extend({
       // golden background
       if (this.item.isPlate) {
         classes.push('card-plate');
+        if (this.item.size === Size.SMALL) {
+          classes.push('card-plate--narrow');
+        }
       }
 
       // size and text
@@ -314,33 +94,228 @@ export default Vue.extend({
           classes.push('card-text-normal');
         }
       }
-
-      return generateClassString(classes);
+      return classes;
     },
-    getAmountAbs(): number {
+    componentClassArray(): Array<string> {
+      let cardResource = 'card-resource';
+      if (this.item.secondaryTag) {
+        cardResource = 'card-resource--has-secondary-tag';
+      } else if (this.item.isSuperscript) {
+        cardResource = 'card-resource--superscript';
+      }
+
+      switch (this.item.type) {
+      case CardRenderItemType.TEMPERATURE:
+        return ['card-global-requirement', 'card-temperature-global-requirement'];
+      case CardRenderItemType.OXYGEN:
+        return ['card-global-requirement', 'card-oxygen-global-requirement'];
+      case CardRenderItemType.OCEANS:
+        if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
+          return ['card-global-requirement', 'card-ocean-global-requirement', `card-ocean--${this.item.size}`];
+        } else {
+          return ['card-global-requirement', 'card-ocean-global-requirement'];
+        }
+      case CardRenderItemType.VENUS:
+        return ['card-global-requirement', 'card-venus-global-requirement'];
+      case CardRenderItemType.TR:
+        if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
+          return ['card-tile', 'card-tr', `card-tr--${this.item.size}`];
+        } else {
+          return ['card-tile', 'card-tr'];
+        }
+      case CardRenderItemType.TITANIUM:
+        return [cardResource, 'card-resource-titanium'];
+      case CardRenderItemType.STEEL:
+        return [cardResource, 'card-resource-steel'];
+      case CardRenderItemType.HEAT:
+        return [cardResource, 'card-resource-heat'];
+      case CardRenderItemType.ENERGY:
+        return [cardResource, 'card-resource-energy'];
+      case CardRenderItemType.PLANTS:
+        return [cardResource, 'card-resource-plant'];
+      case CardRenderItemType.MEGACREDITS:
+        if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
+          return [cardResource, 'card-resource-money', `card-money--${this.item.size}`];
+        } else {
+          return [cardResource, 'card-resource-money'];
+        }
+      case CardRenderItemType.CARDS:
+        return [cardResource, 'card-card'];
+      case CardRenderItemType.WILD:
+        if (this.item.cancelled === true) {
+          return [cardResource, 'card-resource-wild', 'card-private-security'];
+        } else {
+          return [cardResource, 'card-resource-wild'];
+        }
+      case CardRenderItemType.ONE:
+        return [cardResource, 'card-resource-one'];
+      case CardRenderItemType.DIVERSE_TAG:
+        return ['card-resource-tag', 'card-resource-diverse'];
+      case CardRenderItemType.TRADE:
+        if (this.item.size === Size.SMALL) {
+          return ['card-resource-trade', 'card-resource-colony--S'];
+        } else {
+          return ['card-resource-trade'];
+        }
+      case CardRenderItemType.COLONIES:
+        // TODO (chosta): think about an abstraction for item size
+        if (this.item.size === Size.SMALL) {
+          return ['card-resource-colony', 'card-resource-colony--S'];
+        } else {
+          return ['card-resource-colony'];
+        }
+      case CardRenderItemType.TRADE_DISCOUNT:
+      case CardRenderItemType.MULTIPLIER_WHITE:
+        return [cardResource, 'card-resource-trade-discount'];
+      case CardRenderItemType.TRADE_FLEET:
+        return ['card-resource-trade-fleet'];
+      case CardRenderItemType.CHAIRMAN:
+        return ['card-chairman'];
+      case CardRenderItemType.PARTY_LEADERS:
+        return ['card-party-leader'];
+      case CardRenderItemType.DELEGATES:
+        return ['card-delegate'];
+      case CardRenderItemType.INFLUENCE:
+        return ['card-influence', `card-influence--size-${this.item.size}`];
+      case CardRenderItemType.NO_TAGS:
+        return ['card-resource-tag', 'card-no-tags'];
+      case CardRenderItemType.EMPTY_TAG:
+        return ['card-resource-tag', 'card-tag-empty'];
+      case CardRenderItemType.CITY:
+        return ['card-tile', `city-tile--${this.item.size}`];
+      case CardRenderItemType.GREENERY:
+        if (this.item.secondaryTag === AltSecondaryTag.OXYGEN) {
+          return ['card-tile', `greenery-tile-oxygen--${this.item.size}`];
+        } else {
+          return ['card-tile', `greenery-tile--${this.item.size}`];
+        }
+      case CardRenderItemType.EMPTY_TILE:
+        if (this.item.size !== undefined) {
+          return ['card-tile-ares', `board-space-tile--empty-tile--${this.item.size}`];
+        } else {
+          return ['card-tile-ares'];
+        }
+      case CardRenderItemType.EMPTY_TILE_GOLDEN:
+        return ['card-tile-ares', 'board-space-tile--adjacency-tile'];
+      case CardRenderItemType.EMPTY_TILE_SPECIAL:
+        if (this.item.size !== undefined) {
+          return ['card-tile', `special-tile--${this.item.size}`];
+        } else {
+          return ['card-tile', 'special-tile'];
+        }
+      case CardRenderItemType.CITY_OR_SPECIAL_TILE:
+        return ['card-tile', 'city-or-special-tile'];
+      case CardRenderItemType.COMMUNITY:
+        return [cardResource, 'card-resource-community'];
+      case CardRenderItemType.MOON_HABITAT:
+        if (this.item.secondaryTag === AltSecondaryTag.MOON_HABITAT_RATE) {
+          return [this.sized('card-tile-lunar-habitat-rate', this.item.size)];
+        } else {
+          return [this.sized('card-tile-lunar-habitat', this.item.size)];
+        }
+      case CardRenderItemType.GLOBAL_EVENT:
+        return ['turmoil-global-event'];
+      case CardRenderItemType.POLICY:
+        return ['turmoil-policy-tile'];
+
+      // CEOs:
+      case CardRenderItemType.ARROW_OPG:
+        return ['card-arrow-opg'];
+      case CardRenderItemType.REDS:
+        return ['card-reds'];
+      case CardRenderItemType.REDS_DEACTIVATED:
+        return ['card-reds-deactivated'];
+      case CardRenderItemType.ADJACENCY_BONUS:
+        return ['card-adjacency-bonus'];
+      case CardRenderItemType.HAZARD_TILE:
+        if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
+          return [`card-hazard-tile--${this.item.size}`];
+        } else {
+          return ['card-hazard-tile'];
+        }
+      case CardRenderItemType.MOON_HABITAT_RATE:
+        if (this.item.size !== undefined) {
+          return ['card-habitat-rate', `card-habitat-rate--${this.item.size}`];
+        } else {
+          return ['card-habitat-rate'];
+        }
+      case CardRenderItemType.MOON_MINE:
+        if (this.item.secondaryTag === AltSecondaryTag.MOON_MINING_RATE) {
+          return [this.sized('card-tile-lunar-mine-rate', this.item.size)];
+        } else {
+          return [this.sized('card-tile-lunar-mine', this.item.size)];
+        }
+      case CardRenderItemType.MOON_MINING_RATE:
+        if (this.item.size !== undefined) {
+          return ['card-mining-rate', `card-mining-rate--${this.item.size}`];
+        } else {
+          return ['card-mining-rate'];
+        }
+      case CardRenderItemType.MOON_ROAD:
+        if (this.item.secondaryTag === AltSecondaryTag.MOON_LOGISTICS_RATE) {
+          return [this.sized('card-tile-lunar-road-rate', this.item.size)];
+        } else {
+          return [this.sized('card-tile-lunar-road', this.item.size)];
+        }
+      case CardRenderItemType.MOON_LOGISTICS_RATE:
+        if (this.item.size !== undefined) {
+          return ['card-logistics-rate', `card-logistics-rate--${this.item.size}`];
+        } else {
+          return ['card-logistics-rate'];
+        }
+      case CardRenderItemType.PLANETARY_TRACK:
+        return ['card-planetary-track'];
+      case CardRenderItemType.CATHEDRAL:
+        return [cardResource, 'card-resource-cathedral'];
+      case CardRenderItemType.NOMADS:
+        return [cardResource, 'card-resource-nomads'];
+      case CardRenderItemType.IDENTIFY:
+        return ['card-identification'];
+      case CardRenderItemType.EXCAVATE:
+        return [this.item.isSuperscript ? 'card-excavation--superscript' : 'card-excavation'];
+      case CardRenderItemType.CORRUPTION:
+        return [cardResource, 'card-resource-corruption'];
+      case CardRenderItemType.RESOURCE:
+        return [cardResource, this.resourceClass, this.resourceSizeClass];
+      case CardRenderItemType.TAG:
+        return ['card-resource-tag', this.tagClass];
+      case CardRenderItemType.NEUTRAL_DELEGATE:
+        return ['card-neutral-delegate'];
+      case CardRenderItemType.UNDERGROUND_RESOURCES:
+        return ['card-underground-resources'];
+      case CardRenderItemType.CORRUPTION_SHIELD:
+        return ['card-corruption-shield'];
+      case CardRenderItemType.GEOSCAN_ICON:
+        return ['card-geoscan-icon'];
+      case CardRenderItemType.UNDERGROUND_SHELTERS:
+        return ['card-underground-shelters'];
+      default:
+        return [];
+      }
+    },
+    amountAbs(): number {
       if (this.item.amountInside) return 1;
       return Math.abs(this.item.amount);
     },
     itemsToShow(): number {
       if (this.item.showDigit) return 1;
-      return this.getAmountAbs();
+      return this.amountAbs;
     },
     // Oooh this is begging to be a template or something.
     itemHtmlContent(): string {
       let result = '';
       // in case of symbols inside
-      if (isICardRenderItem(this.item) && this.item.amountInside) {
-        if (this.item.questionMark === true) {
-          result += '?';
-        } else if (this.item.amount !== 0) {
-          result += this.item.amount.toString();
-        }
+      if (isICardRenderItem(this.item)) {
+        if (this.item.innerText) {
+          result += this.item.innerText;
+        } else if (this.item.amountInside) {
+          if (this.item.amount !== 0) {
+            result += this.item.amount.toString();
+          }
 
-        if (this.item.multiplier) {
-          result += 'X';
-        }
-        if (this.item.clone) {
-          result += '<div style="-webkit-filter: greyscale(100%);filter: grayscale(100%)">🪐</div>';
+          if (this.item.clone) {
+            result += '<div style="-webkit-filter: greyscale(100%);filter: grayscale(100%)">🪐</div>';
+          }
         }
       }
 
@@ -358,7 +333,7 @@ export default Vue.extend({
       if (this.item.isPlate || this.item.text !== undefined) {
         result += this.item.text || 'n/a';
       }
-      if (this.item.type === CardRenderItemType.NO_TAGS || this.item.type === CardRenderItemType.MULTIPLIER_WHITE) {
+      if (this.item.type === CardRenderItemType.MULTIPLIER_WHITE) {
         result = 'X';
       } else if (this.item.type === CardRenderItemType.IGNORE_GLOBAL_REQUIREMENTS) {
         result += '<div class="card-project-requirements">';
@@ -369,8 +344,8 @@ export default Vue.extend({
       if (this.item.type === CardRenderItemType.SELF_REPLICATING) {
         result = '<div class="card-resource card-card"><div class="cards-count">2</div><div class="card-icon card-icon-space">✴</div><div class="card-icon card-icon-building">☗</div></div>';
       }
-      if (this.item.type === CardRenderItemType.PLACE_COLONY) {
-        result = '<span class="card-place-colony">colony</span>';
+      if (this.item.type === CardRenderItemType.COLONY_TILE) {
+        result = '<span class="card-colony-tile">colony</span>';
       }
       if (this.item.type === CardRenderItemType.PRELUDE) {
         result = '<div class="card-prelude-container"><span class="card-prelude-icon">prel</span></div>';
@@ -396,24 +371,19 @@ export default Vue.extend({
       if (this.item.type === CardRenderItemType.MEGACREDITS && this.item.amount === undefined) {
         result = '?';
       }
-      if (this.item.type === CardRenderItemType.MOON) {
-        return '<div class="card-tag-moon-on-card"></div>';
-      }
-      if (this.item.type === CardRenderItemType.RESOURCE_CUBE) {
-        return '<div class="board-cube--bronze"></div>';
-      }
       // TODO(chosta): abstract once another case of cancel (X) on top of an item is needed
-      if (this.item.type === CardRenderItemType.TR && this.item.cancelled === true) {
-        result = '<div class="card-x">x</div>';
-      }
-      if (this.item.type === CardRenderItemType.WILD && this.item.cancelled === true) {
-        result = '<div class="card-x">✕</div>';
+      if (this.item.cancelled === true) {
+        switch (this.item.type) {
+        case CardRenderItemType.TR:
+        case CardRenderItemType.WILD:
+        case CardRenderItemType.UNDERGROUND_RESOURCES:
+        case CardRenderItemType.TRADE:
+          result = '<div class="card-x">x</div>';
+        }
       }
 
       return result;
     },
   },
 });
-
 </script>
-

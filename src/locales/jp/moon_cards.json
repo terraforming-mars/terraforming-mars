@@ -1,0 +1,321 @@
+{
+  "Basic Infrastructure": "ベーシックインフラ",
+  "Place a road tile on The Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.": "月に道路タイルを配置し、物流レート+1段階. 交易艦隊1つ獲得.",
+
+  "Core Mine": "中核鉱山",
+  "Place a mine tile on The Moon and raise the mining rate 1 step. Increase your titanium production 1 step.": "月に鉱山タイルを配置し、採掘レート+1段階. チタン産出+1.",
+
+  "First Lunar Settlement": "ルナ最初の入植地",
+  "Place a habitat tile on The Moon and raise the habitat rate 1 step. Increase your M€ production 1 step.": "月に生息地タイルを配置し、居住地レート+1段階. MC産出+1.",
+
+  "Lunar Planning Office": "ルナ・企画事務所",
+  "Draw 2 cards with a Moon tag. Gain 6 steel.": "月タグカードを2枚入手. 6建材獲得.",
+
+  "Mining Complex": "採掘コンプレックス",
+  "Place a mine tile on The Moon and raise the mining rate 1 step. Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. Pay 7 M€.": "月に鉱山タイルを配置し、道路タイルをそれに隣接して配置. 採掘レート+1段階. 物流レート+1段階. 7MC支払う.",
+
+  "AI Controlled Mine Network": "AI制御鉱山ネットワーク",
+  "Requires the logistic rate to be 2 or higher. Raise the logistic rate 1 step": "条件：物流レート2以上. 物流レート+1段階.",
+
+  "Algae Bioreactors": "藻類バイオリアクター",
+  "Decrease your plant production 1 step. Raise the habitat rate 1 step and oxygen 1%.": "植物産出-1. 居住地レート+1段階. 酸素+1段階.",
+
+  "An Offer You Can't Refuse": "拒否できない申し出",
+  "Exchange a NON-NEUTRAL opponent delegate with one of your own from the reserve. This exchange may not change the party leader. You may then move your delegate to another party.": "他プレイヤーの党首でない代議員1名を除去. 代議員を1名配置.",
+
+  "Ancient Shipyards": "古代の造船所",
+  "Ancient Shipyards (Nerfed)": "古代の造船所",
+  "Action: Steal 2 M€ from each player and add a resource cube here.": "アクション：他の全プレイヤーから2MC盗む. このカード上に1リソースキューブ追加.",
+  "Spend 3 titanium. -1 VP for every resource here.": "3チタン支払う. このカード上の1リソースキューブ毎に-1VP.",
+
+  "Archimedes Hydroponics Station": "アルキメデス水耕栽培基地",
+  "Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.": "電力産出-1. MC産出-1. 植物産出+2.",
+
+  "Aristarchus Road Network": "アリスタルコス・ロード",
+  "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "2建材支払う. MC産出+2. 月に道路タイルを配置し、物流レート+1段階.",
+
+  "Colonist Shuttles": "ルナ・入植シャトル",
+  "Spend 1 titanium. Raise the habitat rate 1 step. Gain 2M€ for each habitat tile on The Moon.": "1チタン支払う. 居住地レート+1段階. 月の生息地タイル1枚毎に、2MC獲得.",
+
+  "Copernicus Solar Arrays": "コペルニクス太陽光発電所",
+  "Spend 1 titanium. Gain 2 heat. Incease your energy production 1 step.": "1チタン支払う. 2温熱獲得. 電力産出+1.",
+
+  "Copernicus Tower": "コペルニクスタワー",
+  "Requires you have 2 titanium production.": "条件：チタン産出2以上.",
+  "Action: Add 1 science resource here, or spend 1 science resource here to raise your TR 1 step.": "アクション：1科学リソース獲得、もしくはこのカード上の1科学リソースを支払いTR+1段階.",
+  "1 VP PER MOON TAG YOU HAVE.": "月タグ1つ毎に1VP.",
+
+  "Cosmic Radiation": "宇宙線",
+  "Requires 4 mining rate. All players pay 4M€ for each mining tile they own.": "条件：採掘レート4以上. 全プレイヤーは所有する鉱山タイル1枚毎に、4MC除去.",
+
+  "Darkside Incubation Plant": "暗闇側の培養プラント",
+  "Action: Add 1 microbe here.": "アクション：このカード上に1微生物追加.",
+  "Action: Spend 2 microbes to raise the habitat rate 1 step.": "アクション：2微生物除去し、居住地レート+1段階.",
+  "Spend 1 titanium. 1 VP for every 2 microbes here.": "1チタン支払う. このカード上の2微生物毎に1VP.",
+
+  "Darkside Meteor Bombardment": "暗闇側への流星弾",
+  "Gain 2 steel and 2 titanium. Raise the mining rate 2 steps.": "2建材と2チタン獲得. 採掘レート+2段階.",
+
+  "Darkside Mining Syndicate": "暗闇側の採掘組合",
+  "Increase your titanium production 2 steps, or 1 step if the mining rate is at least 2. And then raise the mining rate 1 step.": "チタン産出+2、採掘レート2以上の場合はチタン産出+1. 採掘レート+1段階.",
+
+  "Darkside Observatory": "暗闇側の天文台",
+  "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.]": "アクション：1科学リソース獲得、ただし1科学リソース毎に2VP以上のカードには追加できない.",
+  "Action: Add 2 data to ANY card.": "アクション：2データ獲得.",
+
+  "Darkside Smugglers' Union": "暗闇側の密輸組織",
+  "Action: Perform a trade action.": "アクション：交易を1回行う.",
+  "Raise the logistics rate 1 step.": "物流レート+1段階.",
+
+  "Deep Lunar Mining": "ルナ・深層鉱脈",
+  "Spend 1 titanium. Increase your titanium production 2 steps. Raise the mining rate 1 step.": "1チタン支払う. チタン産出+2, 採掘レート+1段階.",
+
+  "Earth Embassy": "地球大使館",
+  "Effect: When you perform an action, your PLAYED Moon tags count as Earth tags, but not vice versa.": "効果：月タグは地球タグとしても数える.",
+
+  "Geodesic Tents": "ジオデシックテント",
+  "Decrease your energy production 1 step and increase your plant production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "電力産出-1. 植物産出+1. 1チタン支払う. 月に生息地タイルを配置し、居住地レート+1段階.",
+
+  "Grand Luna Academy": "グランド・ルナ・アカデミー",
+  "Draw 1 card per 2 Moon tags you have, including this.": "月タグ2つ毎に、1ドロー.",
+
+  "HE3 Fusion Plant": "HE-3融合ブラント",
+  "Requires the mining rate of 2 or higher. Increase your energy production 1 step for each mining tile on The Moon.": "条件：採掘レート2以上. 鉱山タイル1枚毎に、電力産出+1.",
+
+  "HE3 Lobbyists": "HE-3関係のロビー活動家",
+  "Increase your M€ production 1 step for each Moon tag you have (including this).": "月タグの数分、MC産出+1.",
+
+  "HE3 Production Quotas": "HE-3生産の割当",
+  "Requires that Kelvinists are ruling or that you have 2 delegates there, and 1 mine tile on The Moon. Pay 1 steel per mine tile on The Moon to gain 4 heat per mine tile on The Moon. Raise the mining rate 1 step.": "条件：汎ケルビン党が与党か、そこに2議席ある. 鉱山タイル1枚以上. 鉱山タイル1枚毎に1建材支払い、4温熱獲得. 採掘レート+1段階.",
+
+  "HE3 Refinery": "HE-3精製所",
+  "Action: Gain 1 M€ for each level of mining rate.": "アクション：採掘レート1毎に、1MC獲得.",
+
+  "Habitat 14": "第14居住区",
+  "Decrease your energy production 1 step and your M€ production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "電力産出-1. MC産出-1. 1チタン支払う. 月に生息地タイルを配置し、居住地レート+1段階.",
+
+  "Heavy Duty Rovers": "超巨大ローバー",
+  "Gain 4 M€ for each mining tile adjacent to a road tile. Raise the logistic rate 1 step.": "道路タイルに隣接する鉱山タイル1枚毎に、4MC獲得. 物流レート+1段階.",
+
+  "Heliostat Mirror Array": "ヘリオスタットミラー発電所",
+  "Spend 1 titanium. Gain 1 heat. Increase your energy production 2 steps.": "1チタン支払う. 1温熱獲得. 電力産出+2.",
+
+  "Hostile Takeover": "敵対的買収",
+  "Requires a habitat rate of 2 or higher, and a mining rate of 4 or higher. Add your player marker to a habitat tile and a mining tile owned by any opponent. Those now also count as yours. Increase your M€ production 2 steps.": "条件：居住地レート2以上. 採掘レート4以上. 他プレイヤーの生息地タイルと鉱山タイルにプレイヤーマーカーを配置. これらは自分のタイルとして数える. MC産出+2.",
+
+  "Hypersensitive Silicon Chip Factory": "過敏性シリコンチップ工場",
+  "Requires 2 mining tiles on The Moon. Spend 2 titanium. Increase your M€ production 4 steps.": "条件：鉱山タイル2枚以上. 2チタン支払う. MC産出+4.",
+
+  "Improved Moon Concrete": "良質な月のセメント",
+  "Effect: When you build a mine on The Moon, you spend 1 titanium less.": "効果：月に鉱山タイルを配置する場合、コスト-1チタン.",
+  "Spend 2 steel. Raise the mining rate 1 step.": "2建材支払う. 採掘レート+1段階.",
+
+  "Iron Extraction Center": "鉄鋼精錬所",
+  "Spend 1 titanium. Increase your steel production 1 step for every 2 raised steps of mining rate.": "1チタン支払う. 採掘レート2毎に、建材産出+1.",
+
+  "L.T.F. Headquarters": "ルナ通商連合本部",
+  "Raise the habitat rate 1 step. Place a colony. Gain 1 Trade Fleet.": "居住地レート+1段階. コロニー1つ配置. 交易艦隊1つ獲得.",
+
+  "L.T.F. Privileges": "ルナ通商連合特権",
+  "Effect: When playing a Moon tag, you do not pay additional steel or titanium for playing it.": "効果：月タグをプレイ時、建材もしくはチタンは支払わない.",
+
+  "Luna Conference": "ルナ会議",
+  "Requires that Scientists are ruling or that you have 2 delegates there. Gain 2 M€ per road tile on The Moon. Gain 2M€ per habitat tile on The Moon.": "条件：科学万能党が与党か、そこに2議席ある. 道路タイル1枚毎に、2MC獲得. 生息地タイル1枚毎に、2MC獲得.",
+
+  "Luna Mining Hub": "ルナ・採掘拠点",
+  "Requires a mining rate of 5 or higher.": "条件：採掘レート5以上",
+  "Spend 1 steel and 1 titanium and raise your steel and titanium production 1 step.": "1チタンと1建材支払う. 建材産出+1. チタン産出+1.",
+  "Place this tile on The Moon and raise the mining rate 1 step.": " 月に特殊タイルを配置し、採掘レート+1段階.",
+  "2 VP PER MINING TILE ADJACENT TO THIS TILE.": "このタイルに隣接する鉱山タイル1枚毎に2VP.",
+
+  "Luna Political Institute": "ルナ・学術会議",
+  "Action: Place one of your delegates in any party.": "アクション：控えの代議員を任意の政党に1名配置.",
+  "Requires that you have 2 Moon tags.": "条件：月タグ2つ以上.",
+
+  "Luna Project Office": "ルナ・プロジェクトオフィス",
+  "DRAW 5 CARDS DURING THE RESEARCH PHASE FOR THE NEXT 2 GENERATIONS.": "次の2世代は研究フェイズで5枚カードを見る(ドラフトの場合は最初に2枚キープ).",
+
+  "Luna Resort": "ルナ・リゾート",
+  "Requires 2 habitats on The Moon. Spend 2 titanium. Decrease your energy production 1 step and increase your M€ production 3 steps. Raise the habitat rate 1 step.": "条件：生息地タイル2枚以上. 2チタン支払う. 電力産出-1. MC産出+3. 居住地レート+1段階.",
+
+  "Luna Senate": "ルナ・議会",
+  "1 VP per Moon tag you have.": "月タグ1つ毎に1VP.",
+  "Requires that you have 3 Moon tags. Increase your M€ production 1 step per Moon tag in the game (including these.)": "条件：月タグ3つ以上. 全プレイヤーの月タグ1つ毎に、MC産出+1.",
+
+  "Luna Staging Station": "ルナ・仮設住宅",
+  "Requires the logistic rate to be 2 or higher. Spend 1 titanium. Raise the logistic rate 2 steps.": "条件：物流レート2以上. 1チタン支払う. 物流レート+2段階.",
+
+  "Luna Trade Station": "ルナ・貿易拠点",
+  "Action: Gain 2 M€ for each habitat tile on The Moon.": "アクション：生息地タイル1枚毎に、2MC獲得.",
+  "Spend 2 titanium. Place this tile ON THE RESERVED AREA.": "2チタン支払う. 予定地に特殊タイルを配置.",
+
+  "Luna Train Station": "ルナ・トレインステーション",
+  "Requires a logistic rate of 5 or higher. Spend 2 steel. Increase your M€ production 4 steps. Place this tile on The Moon and raise the logistic rate 1 step. 2 VP FOR EACH ROAD TILE ADJACENT TO THIS TILE.": "2建材支払う. MC産出+4. 月に特殊タイルを配置し、物流レート+1段階. このタイルに隣接する道路タイル1枚毎に2VP.",
+
+  "Lunar Dust Processing Plant": "ルナ・ゴミ処理場",
+  "Effect: When you place a road tile on The Moon, you spend no steel on it.": "効果：月に道路タイルを配置する場合、建材は支払わない.",
+  "Spend 1 titanium. Raise the logistic rate 1 step.": "1チタン支払う. 物流レート+1段階.",
+
+  "Lunar Industry Complex": "ルナ産業コンプレックス",
+  "Spend 2 titanium. Place a mine tile on The Moon and raise the mining rate 1 step. Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.": "2チタン支払う. 月に鉱山タイルを配置し、採掘レート+1段階. 建材産出+1. チタン産出+1. 温熱産出+1. 電力産出+2.",
+
+  "Lunar Mine Urbanization": "ルナ・都市化鉱山",
+  "Requires you have 1 mine tile. Increase your M€ production 1 step. Remove 1 of your mine tiles (does not affect the mining rate.) Place this special tile there, regardless of placement rules. Gain placement bonuses as usual. This tile counts both as a habitat and a mine tile.": "条件：鉱山タイル1枚以上所持. MC産出+1. 所有している鉱山タイル1枚を特殊タイルに置き換え配置ボーナスを獲得. このタイルは生息地・鉱山タイルとして数える. 居住地レート+1段階.",
+
+  "Lunar Observation Post": "ルナ・観測部門",
+  "Action: Add 1 data resource to ANY card": "アクション：1データ獲得.",
+  "Spend 1 titanium. 1 VP for every 3 data resources here.": "1チタン支払う. このカード上の3データ毎に1VP.",
+
+  "Lunar Security Stations": "ルナ・セキュリティステーション",
+  "Requires 3 road tiles on The Moon. Raise the logistic rate 1 step.": "条件：道路タイル3枚以上. 物流レート+1段階.",
+
+  "Lunar Steel": "月の鋼",
+  "Effect: Your steel resources are worth 1 M€ extra.": "効果：建材の価値+1MC.",
+
+  "Lunar Trade Fleet": "ルナ・貿易船団",
+  "2 titanium production": "チタン産出2以上",
+  "Requires that you have 2 titanium production. Increase your M€ production 1 step. Raise the logistic rate 1 step.": "条件：チタン産出2以上. MC産出+1. 物流レート+1段階.",
+
+  "Mare Imbrium Mine": "雨の海鉱山",
+  "Spend 1 titanium. Increase your steel production 1 step and your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the mining rate 1 step.": "1チタン支払う. 建材産出+1. チタン産出+1. 予定地(Mare Imbrium)に鉱山タイルを配置. 採掘レート+1段階.",
+
+  "Mare Nectaris Mine": "神酒の海鉱山",
+  "Spend 1 titanium. Increase your steel production 1 step. Place a mine ON THE RESERVED AREA and raise the mining rate 1 step.": "1チタン支払う. 建材産出+1. 予定地(Mare Nectaris)に鉱山タイルを配置. 採掘レート+1段階.",
+
+  "Mare Nubium Mine": "雲の海鉱山",
+  "Spend 1 titanium. Increase your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the mining rate 1 step.": "1チタン支払う. チタン産出+1. 予定地(Mare Nubium)に鉱山タイルを配置. 採掘レート+1段階.",
+
+  "Mare Serenitatis Mine": "晴れの海鉱山",
+  "Spend 2 titanium and 1 steel. Increase your steel and titanium production 1 step. Place a mine ON THE RESERVED AREA and a road tile adjacent to it. Raise the mining rate 1 step and the logistic rate 1 step.": "2チタンと1建材支払う. 建材産出+1. チタン産出+1. 予定地(Mare Serenitatis)に鉱山タイルを配置し、道路タイルをそれに隣接して配置. 採掘レート+1段階. 物流レート+1段階.",
+
+  "Microsingularity Plant": "マイクロ特異性発電所",
+  "Requires 2 habitats on The Moon. Increase your energy production 2 steps.": "条件：生息地タイル2枚以上. 電力産出+2.",
+
+  "Mining Robots Manuf. Center": "採掘ロボット製造センター",
+  "Spend 1 titanium. Raise the mining rate 2 steps.": "1チタン支払う. 採掘レート+2段階.",
+
+  "Momentum Virium Habitat": "モメンタムビリウム",
+  "Spend 1 titanium. Increase your heat production 2 steps and your M€ production 3 steps. Place a habitat tile ON THE RESERVED AREA and raise the habitat rate 1 step.": "1チタン支払う. 温熱産出+2. MC産出+3. 予定地に生息地タイルを配置し、居住地レート+1段階.",
+
+  "Moon Tether": "月の鎖",
+  "Effect: When you play a card, you pay 2 M€ less for it.": "効果：カードのプレイコスト-2MC.",
+  "Requires 6 space tags.": "条件：宇宙タグ6つ以上.",
+
+  "Mooncrate Block Factory": "月コンクリートブロック工場",
+  "Lunar standard projects": "月の標準プロジェクト",
+  "Effect: When you pay for a Lunar standard project, you spend 4M€ less.": "効果：月の標準プロジェクトのコスト-4MC.",
+  "Requires 1 mine on The Moon.": "条件：鉱山タイル1枚以上",
+
+  "Mooncrate Convoys To Mars": "月護送船団火星へ",
+  "Requires that Mars First are ruling or that you have 2 delegates there. Raise the logistic rate 1 step. All players may sell their steel resources for 3M€ each.": "条件：火星第一の党が与党か、そこに2議席ある. 物流レート+1段階. 全プレイヤーは建材を3MCで売却してもよい.",
+
+  "New Colony Planning Initiatives": "新生息計画への取り組み",
+  "Requires the habitat rate to be 2 or higher. Raise the habitat rate 1 step.": "条件：居住地レート2以上. 居住地レート+1段階.",
+
+  "Off-World City Living": "オフ・ワールド都市での生活",
+  "Increase your M€ production 1 step per city tile NOT ON MARS. Increase habitat rate 1 step.": "火星上以外の都市タイル1枚毎に、MC産出+1. 居住地レート+1段階.",
+
+  "Orbital Power Grid": "オービタル電力会社",
+  "Increase your energy production 1 step per city tile NOT ON MARS.": "火星上以外の都市タイル1枚毎に、電力産出+1.",
+
+  "Preliminary Darkside": "暗闇側の予備地",
+  "Gain 3 titanium or 4 steel. Raise the mining rate 1 step.": "3チタン または 4建材獲得. 採掘レート+1段階.",
+
+  "Pride of the Earth Arkship": "地球からの方舟のプライド",
+  "Science 2 Space": "科学タグ、2宇宙タグ",
+  "Action: Add 1 science resource here per every 5 science tags you have.": "アクション：科学タグ5つ毎に、このカード上に1科学リソース追加.",
+  "Requires 1 science and 2 space tags. Spend 2 titanium. 1 VP per science resource here.": "条件：科学タグ1つ以上、宇宙タグ2つ以上. 2チタン支払う. このカード上の1科学リソース毎に1VP.",
+
+  "Processor Factory": "月プロセッサー工場",
+  "1 VP for every 3 data resources here.": "このカード上の3データ毎に1VP.",
+  "Action: Spend 1 steel to add 2 data resources to ANY card.": "アクション：1建材支払い、2データ獲得.",
+
+  "Revolting Colonists": "月生息地騒乱",
+  "Requires 4 habitat rate. All players pay 3M€ for each habitat tile they own.": "条件：居住地レート4以上. 全プレイヤーは所有する生息地タイル1枚毎に、3MC除去.",
+
+  "Road Piracy": "路上強盗",
+  "Requires 3 logistic rate. Steal up to 6 steel or 4 titanium from other players. (Resources may be stolen from more than 1 opponent.)": "条件：物流レート3以上. 望むならプレイヤー1人から最大6建材 または 4チタン盗む.",
+
+  "Rover Drivers Union": "ローバー操縦士組合",
+  "Requires 2 logistic rate. Raise the logistic rate 1 step. Increase your M€ production 1 step per logistic rate.": "物流レート+1段階. 物流レート1毎に、MC産出+1.",
+
+  "Rust Eating Bacteria": "錆食金",
+  "1 VP per 3 microbes here.": "このカード上の3微生物毎に1VP",
+  "Action: Spend 1 steel to add 2 microbes here.": "アクション：1建材支払い、このカード上に2微生物追加.",
+
+  "Sinus Irdium Road Network": "虹の入江・ロード",
+  "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "電力産出-1. MC産出+3. 月に道路タイルを配置し、物流レート+1段階.",
+
+  "Small Duty Rovers": "小型ローバー",
+  "Spend 1 titanium. Raise the logistic rate 1 step. Gain 1 M€ per habitat tile, mine tile and road tile on The Moon.": "1チタン支払う. 物流レート+1段階. 生息地タイルと鉱山タイルと道路タイルの合計数分、1MC獲得.",
+
+  "Solar Panel Foundry": "ソーラーパネル炉型鋳物工場",
+  "Action: Spend 2 steel to increase your energy production 1 step.": "アクション：2建材支払い、電力産出+1.",
+
+  "Sphere Habitats": "球形居住地",
+  "Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "1チタン支払う. 月に生息地タイルを配置し、居住地レート+1段階.",
+
+  "Staging Station \"Behemoth\"": "貨物ステーション \"ベヒモス\"",
+  "Gain 2 Trade Fleets. Raise the logistic rate 1 step.": "2交易艦隊獲得. 物流レート+1段階",
+
+  "Steel Market Monopolists": "建材市場の独占",
+  "Requires the mining rate to be 3 or higher.": "条件：採掘レート3以上.",
+  "Action: Spend 3X M€ to gain 2X steel (max 9 M€)": "アクション：3xMC支払い、2x建材獲得(最大9MC).",
+  "Action: Spend X steel to gain 3X M€ (max 3 steel).": "アクション：x建材支払い、3xMC獲得(最大3建材).",
+
+  "Subterranean Habitats": "地下居住地",
+  "Effect: When you build a habitat on THE MOON, you spend 1 titanium less.": "効果：月に生息地タイルを配置する場合、コスト-1チタン",
+  "Spend 2 steel. Raise the habitat rate 1 step.": "2建材支払う. 居住地レート+1段階.",
+
+  "Syndicate Pirate Raids": "海賊シンジゲートの襲撃",
+  "ALL OPPONENTS CANNOT RETRIEVE THEIR TRADE FLEETS THIS GENERATION": "他のプレイヤーは、この世代交易艦隊を戻せない.",
+
+  "The Womb": "母胎都市",
+  "Decrease your energy production 2 steps and increase your M€ production 4 steps. Spend 2 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "電力産出-2. MC産出+4. 2チタン支払う. 月に生息地タイルを配置し、居住地レート+1段階.",
+
+  "Thorium Rush": "トリウムラッシュ",
+  "Place 1 habitat tile, 1 mining tile and 1 road tile on The Moon. Raise the habitat rate, mining rate and logistic rate 1 step.": "月に生息地タイルと鉱山タイルと道路タイルを配置. 居住地レート+1段階. 採掘レート+1段階. 物流レート+1段階.",
+
+  "Titanium Extraction Center": "チタン抽出センター",
+  "Spend 2 titanium. Increase your titanium production 1 step for every 2 raised steps of mining rate.": "2チタン支払う. 採掘レート2毎に、チタン産出+1.",
+
+  "Titanium Market Monopolists": "チタン市場の独占",
+  "Action: Spend 2X M€ to gain X titanium [max 8 M€]": "アクション：2xMC支払い、xチタン獲得(最大8MC).",
+  "Action: Spend X titanium to gain 4X M€ [max 4 titanium].": "アクション：xチタン支払い、4xMC獲得(最大4チタン).",
+
+  "Tycho Road Network": "ティコ・ロード",
+  "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "1建材支払う. MC産出+1. 月に道路タイルを配置し、物流レート+1段階.",
+
+  "Underground Detonators": "地下起爆装置",
+  "Gain 1 steel and 1 titanium. Raise the mining rate 1 step.": "1建材、1チタン獲得. 採掘レート+1段階.",
+
+  "Undermoon Drug Lords Network": "月の闇医薬品取引ネットワーク",
+  "Increase your M€ production 1 step per 2 steps of habitat rate.": "居住地レート2毎に、MC産出+1.",
+
+  "Water Treatment Complex": "複合型水処理施設",
+  "Requires 1 habitat tile on The Moon. Spend 1 titanium. Raise the habitat rate 2 steps.": "条件：生息地タイル1枚以上. 1チタン支払う. 居住地レート+2段階.",
+
+  "We Grow As One": "成長する私たちは一つ",
+  "Requires that Unity are ruling or that you have 2 delegates there. Increase ALL colony tile tracks 1 step. Increase each colony tile track 1 step if you have a colony on that colony tile.": "条件：太陽系融和党が与党か、そこに2議席ある. 全ての天体の交易マーカー+1段階. コロニーがある全ての天体の交易マーカー+1段階.",
+
+  "Martian Embassy": "火星大使館",
+  "Raise the Mars Planetary Track 1 step for every 3 Moon tags you have, including this.": "月タグ3つ毎に、火星の影響度+1段階.",
+
+  "Luna Archives": "ルナ・公文書館",
+  "Action: Add 1 science resource here for each Moon tag you have.": "アクション：月タグ1つ毎に、このカード上に1科学リソース追加.",
+  "Effect: When playing a Moon tag, science resources here may be used as payment, and are worth 1M€ each.": "効果：月タグをプレイ時、このカード上の科学リソースを1MCとして支払ってもよい.",
+
+  "Luna Ecumenopolis": "ルナ・エクメノポリス",
+  "Spend 2 titanium. Place 2 habitat tiles adjacent to at least 2 other habitat tiles and raise habitat rate 2 steps. Increase your TR 1 step for each 2 steps of the habitat rate.": "2チタン支払う. 生息地タイル2枚を他の生息地タイル2枚に隣接させて配置し、生息地レート+2段階. 生息地レート2毎にTR+1段階.",
+
+  "Steal": "盗む",
+  "Habitat rate": "居住地レート",
+  "Mining rate": "採掘レート",
+  "Logistic rate": "物流レート",
+  "Colony tile": "生息地タイル",
+  "Colony tiles": "生息地タイル",
+  "Mine tile": "鉱山タイル",
+  "Mine tiles": "鉱山タイル",
+  "Road tile": "道路タイル",
+  "Road tiles": "道路タイル"
+}

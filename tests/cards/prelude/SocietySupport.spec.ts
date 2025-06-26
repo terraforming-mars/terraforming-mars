@@ -3,9 +3,9 @@ import {SocietySupport} from '../../../src/server/cards/prelude/SocietySupport';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('SocietySupport', function() {
-  it('Should play', function() {
-    const [, player] = testGame(1);
+describe('SocietySupport', () => {
+  it('Should play', () => {
+    const [/* game */, player] = testGame(1);
     const card = new SocietySupport();
     cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(-1);

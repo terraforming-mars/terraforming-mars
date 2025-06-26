@@ -8,7 +8,6 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
@@ -22,14 +21,14 @@ export class Ants extends Card implements IActionCard, IProjectCard {
 
       resourceType: CardResource.MICROBE,
       victoryPoints: {resourcesHere: {}, per: 2},
-      requirements: CardRequirements.builder((b) => b.oxygen(4)),
+      requirements: {oxygen: 4},
 
       metadata: {
         cardNumber: '035',
         description: 'Requires 4% oxygen.',
         renderData: CardRenderer.builder((b) => {
           b.action('Remove 1 microbe from any card to add 1 to this card.', (eb) => {
-            eb.microbes(1, {all}).startAction.microbes(1);
+            eb.resource(CardResource.MICROBE, {all}).startAction.resource(CardResource.MICROBE);
           }).br;
           b.vpText('1 VP per 2 microbes on this card.');
         }),
@@ -39,12 +38,15 @@ export class Ants extends Card implements IActionCard, IProjectCard {
 
   public canAct(player: IPlayer): boolean {
     if (player.game.isSoloMode()) return true;
-    return RemoveResourcesFromCard.getAvailableTargetCards(player, this.resourceType).length > 0;
+    return RemoveResourcesFromCard.getAvailableTargetCards(player, CardResource.MICROBE).length > 0;
   }
 
   public action(player: IPlayer) {
-    player.game.defer(new RemoveResourcesFromCard(player, CardResource.MICROBE));
-    player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {filter: (c) => c.name === this.name}));
+    player.game.defer(new RemoveResourcesFromCard(player, CardResource.MICROBE, 1, {log: true}).andThen((response) => {
+      if (response.proceed) {
+        player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {filter: (c) => c.name === this.name}));
+      }
+    }));
     return undefined;
   }
 }

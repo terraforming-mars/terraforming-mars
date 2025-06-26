@@ -1,26 +1,25 @@
 import {expect} from 'chai';
 import {Research} from '../../../src/server/cards/base/Research';
 import {MercurianAlloys} from '../../../src/server/cards/promo/MercurianAlloys';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
-describe('MercurianAlloys', function() {
+describe('MercurianAlloys', () => {
   let card: MercurianAlloys;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MercurianAlloys();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    [/* game */, player] = testGame(1);
   });
 
-  it('Can not play if not enough science tags available', function() {
-    expect(player.simpleCanPlay(card)).is.not.true;
+  it('Can not play if not enough science tags available', () => {
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.playedCards.push(new Research());
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
     card.play(player);
     expect(player.getTitaniumValue()).to.eq(4);

@@ -1,20 +1,19 @@
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {IProjectCard} from '../IProjectCard';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {ICard} from '../ICard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {IAward} from '../../awards/IAward';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
+import {message} from '../../logs/MessageBuilder';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Vitor extends Card implements ICorporationCard {
+export class Vitor extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.VITOR,
       tags: [Tag.EARTH],
       startingMegaCredits: 48, // It's 45 + 3 when this corp is played
@@ -37,21 +36,19 @@ export class Vitor extends Card implements ICorporationCard {
   }
 
   private selectAwardToFund(player: IPlayer, award: IAward): SelectOption {
-    return new SelectOption('Fund ' + award.name + ' award', 'Confirm', () => {
+    return new SelectOption(message('Fund ${0} award', (b) => b.award(award))).andThen(() => {
       player.game.fundAward(player, award);
       return undefined;
     });
   }
 
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     const game = player.game;
 
     // Awards are disabled for 1 player games
     if (game.isSoloMode()) return;
 
-    const freeAward = new OrOptions();
-    freeAward.title = 'Select award to fund';
-    freeAward.buttonLabel = 'Confirm';
+    const freeAward = new OrOptions().setTitle('Select award to fund').setButtonLabel('Confirm');
 
     // If Vitor isn't going first and someone else funds awards, filter them out.
     const availableAwards = game.awards.filter((award) => !game.fundedAwards.map((fa) => fa.award).includes(award));
@@ -60,10 +57,7 @@ export class Vitor extends Card implements ICorporationCard {
     return freeAward;
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    if (!player.isCorporation(this.name)) {
-      return;
-    }
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
     const victoryPoints = card.metadata.victoryPoints;
     if (victoryPoints === undefined) return;
     if (typeof(victoryPoints) === 'number') {

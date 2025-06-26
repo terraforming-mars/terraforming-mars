@@ -3,7 +3,7 @@ import {cast, setVenusScaleLevel} from '../../TestingUtils';
 import {MorningStarInc} from '../../../src/server/cards/venusNext/MorningStarInc';
 import {RotatorImpacts} from '../../../src/server/cards/venusNext/RotatorImpacts';
 import {MAX_VENUS_SCALE} from '../../../src/common/constants';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -11,7 +11,7 @@ import {testGame} from '../../TestGame';
 describe('RotatorImpacts', () => {
   let card: RotatorImpacts;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new RotatorImpacts();
@@ -20,29 +20,29 @@ describe('RotatorImpacts', () => {
 
   it('Cannot play', () => {
     setVenusScaleLevel(game, 16);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can play', () => {
     setVenusScaleLevel(game, 14);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', () => {
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
     cast(card.play(player), undefined);
   });
 
   it('Works with MSI corporation', () => {
     const corp = new MorningStarInc();
     corp.play(player);
-    player.setCorporationForTest(corp);
+    player.corporations.push(corp);
 
     setVenusScaleLevel(game, 18);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
-  it('Should act', () => {
+  it('Should act - only add resource', () => {
     player.playedCards.push(card);
     player.megaCredits = 16;
     player.titanium = 2;
@@ -53,6 +53,28 @@ describe('RotatorImpacts', () => {
 
     card.action(player);
     expect(card.resourceCount).to.eq(1);
+  });
+
+  it('Should act - only spend resource', () => {
+    player.playedCards.push(card);
+    player.megaCredits = 1;
+    card.resourceCount = 1;
+
+    expect(card.canAct(player)).is.true;
+    expect(game.getVenusScaleLevel()).eq(0);
+
+    // only one possible action: spend resource
+    card.action(player);
+    expect(card.resourceCount).to.eq(0);
+    expect(game.getVenusScaleLevel()).eq(2);
+    expect(player.terraformRating).eq(21);
+  });
+
+  it('Should act', () => {
+    player.playedCards.push(card);
+    player.megaCredits = 16;
+    player.titanium = 2;
+    card.resourceCount = 1;
 
     // two possible actions: add resource or spend titanium
     const orOptions = cast(card.action(player), OrOptions);
@@ -83,6 +105,7 @@ describe('RotatorImpacts', () => {
     card.resourceCount = 1;
 
     setVenusScaleLevel(game, MAX_VENUS_SCALE);
-    expect(card.canAct(player)).is.not.true;
+    expect(card.canAct(player)).is.true;
+    expect(Array.from(card.warnings)).contains('maxvenus');
   });
 });

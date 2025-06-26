@@ -3,49 +3,49 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {Extremophiles} from '../../../src/server/cards/venusNext/Extremophiles';
 import {FreyjaBiodomes} from '../../../src/server/cards/venusNext/FreyjaBiodomes';
 import {VenusianAnimals} from '../../../src/server/cards/venusNext/VenusianAnimals';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, setVenusScaleLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('FreyjaBiodomes', function() {
+describe('FreyjaBiodomes', () => {
   let card: FreyjaBiodomes;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new FreyjaBiodomes();
     [game, player] = testGame(2);
   });
 
-  it('Can not play without energy production', function() {
+  it('Can not play without energy production', () => {
     setVenusScaleLevel(game, 10);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can not play if Venus requirement not met', function() {
+  it('Can not play if Venus requirement not met', () => {
     player.production.add(Resource.ENERGY, 1);
     setVenusScaleLevel(game, 8);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play - single target', function() {
+  it('Should play - single target', () => {
     const card2 = new Extremophiles();
     player.playedCards.push(card2);
 
     player.production.add(Resource.ENERGY, 1);
     setVenusScaleLevel(game, 10);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.production.energy).to.eq(0);
     expect(player.production.megacredits).to.eq(2);
     expect(card2.resourceCount).to.eq(2);
   });
 
-  it('Should play - multiple targets', function() {
+  it('Should play - multiple targets', () => {
     const card2 = new Extremophiles();
     const card3 = new VenusianAnimals();
     player.production.add(Resource.ENERGY, 1);

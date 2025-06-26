@@ -1,0 +1,136 @@
+{
+
+	"ACTIVATE THE BELOW ABILITY": "다음 능력 활성화",
+	"CHANGE LEADER": "지도자 변경",
+	"STEAL": "훔치기",
+	"EACH": "각",
+	"SET ALL": "모두 설정:",
+	"SWAP": "교체",
+	"SELL": "판매",
+	"GAIN": "획득",
+	"ALL": "모든",
+	"MILESTONES": "업적",
+	"GAIN THESE RESOURCES": "해당 자원 획득",
+	"GAIN ALL YOUR COLONY BONUSES TWICE": "모든 개척기지 보너스를 2회 획득",
+	"REPLACE ALL NEUTRAL": "모든 중립 의원 대체",
+
+
+	"Co-leadership": "",
+	"Draw 3 CEO cards and take one to your hand, it will be played on your first turn. Discard the other 2.": "",
+
+
+	"Apollo": "",
+	"Once per game, gain 3 M€ for each tile on The Moon.": "",
+
+	"Asimov": "",
+	"Effect: You have +2 score for all awards.": "",
+  "Once per game, draw 10-X awards (min. 1), where X is the current generation number. You may put one into the game and fund it for free.": "",
+
+	"Bjorn": "",
+	"Once per game, steal X+2 M€ from each player that has more M€ than you, where X is the current generation number.": "",
+
+	"Caesar": "",
+	"Once per game, place X hazard tiles where X is the current generation number. Each opponent loses 1 unit of production of their choice, or 2 units if there are 6 or more hazard tiles.": "",
+
+	"Clarke": "",
+	"Once per game, increase your plant and heat production 1 step each. Gain plants and heat equal to your production +4.": "",
+
+	"Duncan": "",
+	"Once per game, gain 7-X VP and 4X M€, where X is the current generation number.": "",
+
+	"Ender": "",
+	"Once per game, discard any number of cards up to twice the current generation number to draw that many cards.": "",
+
+	"Faraday": "",
+	"When you gain a multiple of 5 for any tag type IN PLAY, you may pay 3 M€ to draw a card with that tag. Wild tags do not count for this effect.": "",
+
+	"Floyd": "",
+	"Once per game, play a card from hand for 13 + 2X M€ less, where X is the current generation number.": "",
+
+	"Gaia": "",
+	"Once per game, gain the Ares adjacency bonuses of all player-owned tiles on Mars.": "",
+
+	"Gordon": "",
+	"Effect: Ignore placement restrictions for greenery and city tiles on Mars.": "",
+  "Effect: Gain 2 M€ when you place a greenery or city tile on Mars.": "",
+
+	"Greta": "",
+	"When you take an action or play a card that increases your TR THIS GENERATION (max 10 times), gain 4 M€.": "",
+
+	"HAL 9000": "",
+	"Once per game, decrease each of your productions 1 step to gain 4 of that resource.": "",
+
+	"Ingrid": "",
+	"When you take an action that places a tile on Mars THIS GENERATION, draw a card.": "",
+
+	"Jansson": "",
+	"Once per game, gain all placement bonuses under your tiles on Mars.": "",
+
+	"Karen": "",
+	"Once per game, draw Prelude cards equal to the current generation number and choose one to play, and discard the rest.": "",
+
+	"Lowell": "",
+	"Once per game, pay 8 M€ to draw 3 CEO cards and choose one to play. Discard this card.": "",
+
+	"Maria": "",
+	"Once per game, draw colony tiles equal to the current generation number. Put one into play and build a colony on it for free if possible.": "",
+
+	"Musk": "",
+	"Once per game, discard any number of Earth cards to draw that many space cards, and gain that many units of titanium, plus 6.": "",
+
+	"Naomi": "",
+	"Effect: When you build a colony, gain 2 energy and 3 M€.": "",
+  "Once per game, move each colony tile track marker to its highest or lowest value.": "",
+
+	"Neil": "",
+	"Effect: Gain 1 M€ when any player plays a Moon tag.": "",
+  "Once per game, increase your M€ production by the value of the LOWEST Moon rate.": "",
+
+	"Oscar": "",
+	"Once per game, replace the Chairman with one of your delegates.": "",
+
+	"Petra": "",
+	"Once per game, replace all Neutral delegates with your delegates. Gain 3 M€ for each delegate replaced this way. Place 3 Neutral delegates.": "",
+
+	"Quill": "",
+	"Once per game, add 2 floaters to each of your cards that collect floaters, then add 2 floaters to ANY card. Gain 1 M€ for every 2 floaters added this way.": "",
+
+	"Rogers": "",
+	"Ignore global requirements for your Venus cards THIS GENERATION. When you play a Venus tag THIS GENERATION, you pay 3 M€ less for it.": "",
+
+	"Ryu": "",
+	"Once per game, swap up to X+2 units of production between two resources, where X is the current generation number.": "",
+
+	"Shara": "",
+	"Once per game, choose a planet tag. This card counts as having immediately played 2 of that tag. Then gain M€ equal to that tags planety influence track.": "",
+
+	"Stefan": "",
+	"Once per game, sell any number of cards from your hand for 3 M€ each.": "",
+
+	"Tate": "",
+	"Once per game, name a tag. Reveal cards from the deck until you find 5 cards with that tag. BUY up to 2 cards and discard the rest.": "",
+
+	"Ulrich": "",
+	"Once per game, gain 4 M€ for each ocean placed. If all oceans are aleady placed, gain only 15 M€.": "",
+
+	"Van Allen": "",
+	"Effect: MILESTONES ALWAYS COST 0 M€ FOR YOU.": "",
+"Effect: When any milestone is claimed, gain 3 M€.": "",
+
+	"Will": "",
+	"Once per game, add the following resources to your cards: 2 animals, 2 microbes, 2 floaters, 2 wild.": "",
+
+	"Xavier": "",
+	"Once per game, gain 2 wild tags for THIS GENERATION.": "",
+	"Effect: AFTER this action has been used, when playing a card with a requirement, you pay 1 M€ less for it.": "",
+
+	"Xu": "",
+	"Once per game, gain 2 M€ for each Venus tag in play. Gain an additional 8 M€ if you have the most Venus tags in play.": "",
+
+	"Yvonne": "",
+	"Once per game, gain all your colony bonuses twice.": "",
+
+	"Zan": "",
+	"Effect: You are immune to Reds' ruling policy.": "",
+  "Once per game, place all of your available delegates in Reds. Gain 1 M€ for each delegate placed this way.": ""
+}

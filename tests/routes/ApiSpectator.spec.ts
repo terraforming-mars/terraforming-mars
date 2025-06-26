@@ -6,7 +6,7 @@ import {MockResponse} from './HttpMocks';
 import {SpectatorModel} from '../../src/common/models/SpectatorModel';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 
-describe('ApiSpectator', function() {
+describe('ApiSpectator', () => {
   let scaffolding: RouteTestScaffolding;
   let res: MockResponse;
 

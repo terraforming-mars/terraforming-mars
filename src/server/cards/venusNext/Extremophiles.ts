@@ -2,7 +2,6 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {ActionCard} from '../ActionCard';
 
@@ -20,13 +19,13 @@ export class Extremophiles extends ActionCard {
         addResourcesToAnyCard: {type: CardResource.MICROBE, count: 1},
       },
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 2)),
+      requirements: {tag: Tag.SCIENCE, count: 2},
       metadata: {
         cardNumber: '224',
         description: 'Requires 2 science tags.',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 microbe to ANY card.', (eb) => {
-            eb.empty().startAction.microbes(1).asterix();
+            eb.empty().startAction.resource(CardResource.MICROBE).asterix();
           }).br;
           b.vpText('1 VP for every 3rd Microbe on this card.');
         }),

@@ -3,10 +3,10 @@ import {testGame} from '../../TestGame';
 import {Sponsors} from '../../../src/server/cards/base/Sponsors';
 import {cast} from '../../TestingUtils';
 
-describe('Sponsors', function() {
-  it('Should play', function() {
+describe('Sponsors', () => {
+  it('Should play', () => {
     const card = new Sponsors();
-    const [, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(2);
   });

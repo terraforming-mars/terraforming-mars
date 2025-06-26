@@ -8,10 +8,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {played} from '../../cards/Options';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.production((pb) => pb.energy(1)).slash().energy(2, {played}).influence({size: Size.SMALL});
+  b.production((pb) => pb.energy(1)).slash().tag(Tag.POWER, 2).influence({size: Size.SMALL});
 });
 
 export class ImprovedEnergyTemplates extends GlobalEvent implements IGlobalEvent {

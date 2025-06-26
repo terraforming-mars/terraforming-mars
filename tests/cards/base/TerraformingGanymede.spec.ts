@@ -1,30 +1,27 @@
 import {expect} from 'chai';
 import {TerraformingGanymede} from '../../../src/server/cards/base/TerraformingGanymede';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Phase} from '../../../src/common/Phase';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {TestPlayer} from '../../TestPlayer';
 import {Reds} from '../../../src/server/turmoil/parties/Reds';
-import {cast} from '../../TestingUtils';
+import {cast, testGame} from '../../TestingUtils';
 
-describe('TerraformingGanymede', function() {
+describe('TerraformingGanymede', () => {
   let card: TerraformingGanymede;
   let player: TestPlayer;
-  let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new TerraformingGanymede();
-    player = TestPlayer.BLUE.newPlayer();
-    player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player, {turmoilExtension: true});
+    [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(2);
     player.playedCards.push(card);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
   });
 
   it('canPlay with Reds', () => {
@@ -36,11 +33,13 @@ describe('TerraformingGanymede', function() {
     expect(player.canPlay(card)).is.not.true;
     player.megaCredits = card.cost + 3;
     expect(player.canPlay(card)).is.true;
+    expect(card.additionalProjectCosts).deep.eq({redsCost: 3});
 
     player.tagsForTest = {jovian: 2};
     player.megaCredits = card.cost + 8;
     expect(player.canPlay(card)).is.not.true;
     player.megaCredits = card.cost + 9;
     expect(player.canPlay(card)).is.true;
+    expect(card.additionalProjectCosts).deep.eq({redsCost: 9});
   });
 });

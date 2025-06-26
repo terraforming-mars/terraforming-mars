@@ -9,17 +9,17 @@ import {Miranda} from '../../../src/server/colonies/Miranda';
 import {Europa} from './../../../src/server/colonies/Europa';
 import {Pluto} from '../../../src/server/colonies/Pluto';
 import {Callisto} from '../../../src/server/colonies/Callisto';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {cast} from '../../TestingUtils';
 
-describe('MarketManipulation', function() {
+describe('MarketManipulation', () => {
   let card: MarketManipulation;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MarketManipulation();
     [game, player] = testGame(2, {
       coloniesExtension: true,
@@ -32,7 +32,7 @@ describe('MarketManipulation', function() {
     });
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
     const increaseColonyAction = cast(game.deferredActions.pop()!.execute(), SelectColony);
     increaseColonyAction.cb(increaseColonyAction.colonies[0]);
@@ -47,7 +47,7 @@ describe('MarketManipulation', function() {
     expect(game.colonies[2].trackPosition).to.eq(1);
   });
 
-  it('Should not allow increase of sole decreasable colony', function() {
+  it('Should not allow increase of sole decreasable colony', () => {
     const pluto = new Pluto();
     pluto.trackPosition = 0;
     const callisto = new Callisto();
@@ -58,7 +58,7 @@ describe('MarketManipulation', function() {
     player.game.colonies = [pluto, callisto, europa];
     card.play(player);
     const increaseColonyAction = cast(game.deferredActions.pop()!.execute(), SelectColony);
-    expect(increaseColonyAction.colonies.length).to.eq(2);
+    expect(increaseColonyAction.colonies).has.length(2);
 
     increaseColonyAction.cb(increaseColonyAction.colonies[0]);
     expect(game.colonies[0].trackPosition).to.eq(1);
@@ -66,14 +66,14 @@ describe('MarketManipulation', function() {
     expect(game.colonies[2].trackPosition).to.eq(1);
 
     const decreaseColonyAction = cast(game.deferredActions.pop()!.execute(), SelectColony);
-    expect(decreaseColonyAction.colonies.length).to.eq(1);
+    expect(decreaseColonyAction.colonies).has.length(1);
     decreaseColonyAction.cb(decreaseColonyAction.colonies[0]);
     expect(game.colonies[0].trackPosition).to.eq(1);
     expect(game.colonies[1].trackPosition).to.eq(0);
     expect(game.colonies[2].trackPosition).to.eq(0);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     const enceladus = new Enceladus();
     const miranda = new Miranda();
     const luna = new Luna();

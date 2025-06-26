@@ -1,6 +1,6 @@
 {
   "Pharmacy Union": "Sindicato Farmacéutico",
-  "You start with 54 M€ . Draw a Science card.": "Comienza con 54 M€. Roba una carta de Ciencia.",
+  "You start with 54 M€. Draw a Science card.": "Comienza con 54 M€. Roba una carta de Ciencia.",
   "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "Efecto: Cuando se juega CUALQUIER carta tipo microbio, añade una enfermedad aquí y pierde 4 M€ o tanto como sea posible. Cuando juegas una carta tipo ciencia, elimina una enfermedad aquí y gana 1 nivel de VT O, si no hay enfermedades aquí, PUEDES poner esta carta boca abajo en tu PILA DE EVENTOS para ganar 3 niveles de VT.",
 
   "Comet Aiming":"Apuntado de Cometas",
@@ -135,7 +135,7 @@
   "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Comienza con 44 M€. Como primera acción, revela cartas hasta que hayas revelado una carta de tipo microbio. Róbala y descarta el resto.",
   "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "Efecto: cuando se juega una carta de tipo microbio, incluida esta, ESE JUGADOR gana 2 M€, o le añade un microbio a ESA carta, y tú ganas 2 M€.",
 
-  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.":"Aumenta la temperatura 3 niveles y obtén 4 de acero. Coloca esta loseta NO ADYACENTE a una ciudad. Elimina hasta 6 plantas de un jugador. ",
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. Remove up to 6 plants from any player.":"Aumenta la temperatura 3 niveles y obtén 4 de acero. Coloca esta loseta NO ADYACENTE a una ciudad. Elimina hasta 6 plantas de un jugador. ",
 
   "Astrodrill":"Astrotaladro",
   "You start with 38 M€ and 3 asteroid resources.":"Comienza con 38 M€ y 3 recursos de asteroide.",
@@ -152,6 +152,5 @@
   "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "Efecto: cuando juegues una carta de tipo edificio, incluida esta, obtienes 1 microbio para esta carta, o eliminas 2 microbios aquí y aumentas tu producción de plantas en 1 nivel.",
 
   "Requires 8 oceans. 1 VP for each animal on this card.":"Requiere 8 océanos. 1 PV por cada animal en esta carta.",
-  "Requires 2 science tags.":"Requiere 2 símbolos de ciencia",
   "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.":"Acción: Gasta 2X M€ para ganar X energía, o reduce la producción de energía en 1 nivel para ganar 8 M€."
 }

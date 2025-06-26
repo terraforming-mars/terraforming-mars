@@ -1,28 +1,22 @@
 import {CardName} from '../../common/cards/CardName';
-import {ICard} from '../cards/ICard';
 import {IGame} from '../IGame';
 import {SelectCard} from '../inputs/SelectCard';
 import {Space} from '../boards/Space';
 import {IPlayer} from '../IPlayer';
 import {CardResource} from '../../common/CardResource';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {OCEAN_UPGRADE_TILES, TileType} from '../../common/TileType';
+import {HAZARD_STEPS, HazardSeverity, hazardSeverity} from '../../common/AresTileType';
+import {OCEAN_UPGRADE_TILES, TileType, tileTypeToString} from '../../common/TileType';
 import {Tile} from '../Tile';
 import {AresData, MilestoneCount} from '../../common/ares/AresData';
 import {AdjacencyCost} from './AdjacencyCost';
 import {MultiSet} from 'mnemonist';
 import {Phase} from '../../common/Phase';
-import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {SelectProductionToLoseDeferred} from '../deferredActions/SelectProductionToLoseDeferred';
-import {_AresHazardPlacement} from './AresHazards';
+import {AresHazards} from './AresHazards';
 import {CrashlandingBonus} from '../pathfinders/CrashlandingBonus';
-
-export enum HazardSeverity {
-    NONE,
-    MILD,
-    SEVERE
-}
+import {Board} from '../boards/Board';
 
 export class AresHandler {
   private constructor() {}
@@ -34,26 +28,17 @@ export class AresHandler {
     }
   }
 
-  public static earnAdjacencyBonuses(aresData: AresData, player: IPlayer, space: Space) {
-    let incrementMilestone = false;
+  public static earnAdjacencyBonuses(player: IPlayer, space: Space, options?: {giveAresTileOwnerBonus?: boolean}) {
     for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
-      const grantedBonus = this.earnAdacencyBonus(space, adjacentSpace, player);
-      incrementMilestone ||= grantedBonus;
-    }
-    if (incrementMilestone) {
-      const entry : MilestoneCount | undefined = aresData.milestoneResults.find((e) => e.id === player.id);
-      if (entry === undefined) {
-        throw new Error('Player ID not in the Ares milestone results map: ' + player.id);
-      }
-      entry.count++;
+      this.earnAdacencyBonus(space, adjacentSpace, player, options?.giveAresTileOwnerBonus);
     }
   }
 
   // |player| placed a tile at |space| next to |adjacentSpace|.
   // Returns true if the adjacent space contains a bonus for adjacency.
-  private static earnAdacencyBonus(newTileSpace: Space, adjacentSpace: Space, player: IPlayer, adjacentTileOwnerGainsBonus: boolean = true): boolean {
+  private static earnAdacencyBonus(newTileSpace: Space, adjacentSpace: Space, player: IPlayer, giveAresTileOwnerBonus: boolean = true): void {
     if (adjacentSpace.adjacency === undefined || adjacentSpace.adjacency.bonus.length === 0) {
-      return false;
+      return;
     }
     const adjacentPlayer = adjacentSpace.player;
     if (adjacentPlayer === undefined) {
@@ -67,18 +52,14 @@ export class AresHandler {
       } else if (availableCards.length === 1) {
         player.addResourceTo(availableCards[0], {log: true});
       } else if (availableCards.length > 1) {
-        player.game.defer(new SimpleDeferredAction(
-          player,
-          () => new SelectCard(
-            'Select a card to add an ' + resourceAsText,
-            'Add ' + resourceAsText + 's',
-            availableCards,
-            (selected: ICard[]) => {
-              player.addResourceTo(selected[0], {log: true});
-              return undefined;
-            },
-          ),
-        ));
+        player.defer(new SelectCard(
+          'Select a card to add an ' + resourceAsText,
+          'Add ' + resourceAsText + 's',
+          availableCards)
+          .andThen((selected) => {
+            player.addResourceTo(selected[0], {log: true});
+            return undefined;
+          }));
       }
     };
 
@@ -129,10 +110,10 @@ export class AresHandler {
     const bonusText = Array.from(bonuses.multiplicities())
       .map(([bonus, count]) => `${count} ${SpaceBonus.toString(bonus)}`)
       .join(', ');
-    const tileText = adjacentSpace.tile !== undefined ? TileType.toString(adjacentSpace.tile.tileType) : 'no tile';
+    const tileText = adjacentSpace.tile !== undefined ? tileTypeToString[adjacentSpace.tile.tileType] : 'no tile';
     player.game.log('${0} gains ${1} for placing next to ${2}', (b) => b.player(player).string(bonusText).string(tileText));
 
-    if (adjacentTileOwnerGainsBonus) {
+    if (giveAresTileOwnerBonus) {
       let ownerBonus = 1;
       if (adjacentPlayer.cardIsInEffect(CardName.MARKETING_EXPERTS)) {
         ownerBonus = 2;
@@ -141,40 +122,44 @@ export class AresHandler {
       adjacentPlayer.megaCredits += ownerBonus;
       player.game.log('${0} gains ${1} M€ for a tile placed next to ${2}', (b) => b.player(adjacentPlayer).number(ownerBonus).string(tileText));
     }
+  }
 
-    return true;
+  public static maybeIncrementMilestones(aresData: AresData, player: IPlayer, space: Space, hazardSeverity: HazardSeverity) {
+    const entry : MilestoneCount | undefined = aresData.milestoneResults.find((e) => e.id === player.id);
+    if (entry === undefined) {
+      throw new Error('Player ID not in the Ares milestone results map: ' + player.id);
+    }
+
+    const hasAdjacencyBonus = player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => {
+      return (adjacentSpace.adjacency?.bonus?? []).length > 0;
+    });
+
+    if (hasAdjacencyBonus) {
+      entry.networkerCount++;
+    }
+    if (hazardSeverity !== 'none') {
+      entry.purifierCount++;
+    }
+  }
+
+  public static incrementPurifier(aresData: AresData, player: IPlayer) {
+    const entry : MilestoneCount | undefined = aresData.milestoneResults.find((e) => e.id === player.id);
+    if (entry === undefined) {
+      throw new Error('Player ID not in the Ares milestone results map: ' + player.id);
+    }
+    entry.purifierCount++;
   }
 
   public static hasHazardTile(space: Space): boolean {
-    return AresHandler.hazardSeverity(space) !== HazardSeverity.NONE;
+    return hazardSeverity(space.tile?.tileType) !== 'none';
   }
 
-  public static hazardSeverity(space: Space): HazardSeverity {
-    const type = space.tile?.tileType;
-
-    switch (type) {
-    case TileType.DUST_STORM_MILD:
-    case TileType.EROSION_MILD:
-      return HazardSeverity.MILD;
-
-    case TileType.DUST_STORM_SEVERE:
-    case TileType.EROSION_SEVERE:
-      return HazardSeverity.SEVERE;
-
-    default:
-      return HazardSeverity.NONE;
+  private static computeAdjacencyCosts(player: IPlayer, space: Space, subjectToHazardAdjacency: boolean): AdjacencyCost {
+    if (player.cardIsInEffect(CardName.ATHENA)) {
+      subjectToHazardAdjacency = false;
     }
-  }
 
-  // A light version of `earnAdjacencyBonuses` but does not increment the milestone,
-  // and does not grant the 1MC bonus for ares tile owners.
-  public static earnAdjacencyBonusesForGaia(player: IPlayer, space: Space) {
-    for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
-      this.earnAdacencyBonus(space, adjacentSpace, player, false);
-    }
-  }
-
-  private static computeAdjacencyCosts(game: IGame, space: Space, subjectToHazardAdjacency: boolean): AdjacencyCost {
+    const game = player.game;
     // Summing up production cost isn't really the way to do it, because each tile could
     // reduce different production costs. Oh well.
     let megaCreditCost = 0;
@@ -182,27 +167,13 @@ export class AresHandler {
     game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
       megaCreditCost += adjacentSpace.adjacency?.cost || 0;
       if (subjectToHazardAdjacency === true) {
-        const severity = this.hazardSeverity(adjacentSpace);
-        switch (severity) {
-        case HazardSeverity.MILD:
-          productionCost += 1;
-          break;
-        case HazardSeverity.SEVERE:
-          productionCost += 2;
-          break;
-        }
+        const severity = hazardSeverity(adjacentSpace.tile?.tileType);
+        productionCost += HAZARD_STEPS[severity];
       }
     });
 
-    const severity = this.hazardSeverity(space);
-    switch (severity) {
-    case HazardSeverity.MILD:
-      megaCreditCost += 8;
-      break;
-    case HazardSeverity.SEVERE:
-      megaCreditCost += 16;
-      break;
-    }
+    const severity = hazardSeverity(space.tile?.tileType);
+    megaCreditCost += HAZARD_STEPS[severity] * 8;
 
     return {megacredits: megaCreditCost, production: productionCost};
   }
@@ -211,7 +182,7 @@ export class AresHandler {
     if (player.game.phase === Phase.SOLAR) {
       return {megacredits: 0, production: 0};
     }
-    const cost = AresHandler.computeAdjacencyCosts(player.game, space, subjectToHazardAdjacency);
+    const cost = AresHandler.computeAdjacencyCosts(player, space, subjectToHazardAdjacency);
 
     // Make this more sophisticated, a player can pay for different adjacencies
     // with different production units, and, a severe hazard can't split payments.
@@ -227,9 +198,11 @@ export class AresHandler {
     }
     if (cost.production > 0) {
       throw new Error(`Placing here costs ${cost.production} units of production and ${cost.megacredits} M€`);
-    } else {
+    }
+    if (cost.megacredits > 0) {
       throw new Error(`Placing here costs ${cost.megacredits} M€`);
     }
+    return cost;
   }
 
   public static payAdjacencyAndHazardCosts(player: IPlayer, space: Space, subjectToHazardAdjacency: boolean) {
@@ -262,38 +235,29 @@ export class AresHandler {
   }
 
   public static onTemperatureChange(game: IGame, aresData: AresData) {
-    _AresHazardPlacement.onTemperatureChange(game, aresData);
+    AresHazards.onTemperatureChange(game, aresData);
   }
 
   public static onOceanPlaced(aresData: AresData, player: IPlayer) {
-    _AresHazardPlacement.onOceanPlaced(aresData, player);
+    AresHazards.onOceanPlaced(aresData, player);
   }
 
   public static onOxygenChange(game: IGame, aresData: AresData) {
-    _AresHazardPlacement.onOxygenChange(game, aresData);
+    AresHazards.onOxygenChange(game, aresData);
   }
 
-  public static grantBonusForRemovingHazard(player: IPlayer, initialTileType: TileType | undefined) {
+  public static grantBonusForRemovingHazard(player: IPlayer, initialTileType: TileType) {
     if (player.game.phase === Phase.SOLAR) {
       return;
     }
-    let steps: number;
-    switch (initialTileType) {
-    case TileType.DUST_STORM_MILD:
-    case TileType.EROSION_MILD:
-      steps = 1;
-      break;
-
-    case TileType.DUST_STORM_SEVERE:
-    case TileType.EROSION_SEVERE:
-      steps = 2;
-      break;
-
-    default:
-      return;
+    const steps = HAZARD_STEPS[hazardSeverity(initialTileType)];
+    if (steps > 0) {
+      player.increaseTerraformRating(steps);
+      player.game.log('${0}\'s TR increases ${1} step(s) for removing ${2}', (b) => b.player(player).number(steps).tileType(initialTileType));
     }
-    player.increaseTerraformRating(steps);
-    player.game.log('${0}\'s TR increases ${1} step(s) for removing ${2}', (b) => b.player(player).number(steps).string(TileType.toString(initialTileType)));
+  }
+
+  public static anyAdjacentSpaceGivesBonus(board: Board, space: Space, bonus: SpaceBonus): boolean {
+    return board.getAdjacentSpaces(space).some((adj) => adj.adjacency?.bonus.includes(bonus));
   }
 }
-

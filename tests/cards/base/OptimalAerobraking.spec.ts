@@ -4,10 +4,10 @@ import {OptimalAerobraking} from '../../../src/server/cards/base/OptimalAerobrak
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('OptimalAerobraking', function() {
-  it('Should play', function() {
+describe('OptimalAerobraking', () => {
+  it('Should play', () => {
     const card = new OptimalAerobraking();
-    const [, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);
     expect(card.onCardPlayed(player, card)).is.undefined;
     expect(card.onCardPlayed(player, new BigAsteroid())).is.undefined;

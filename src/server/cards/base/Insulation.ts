@@ -6,7 +6,6 @@ import {SelectAmount} from '../../inputs/SelectAmount';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {multiplier} from '../Options';
 
 export class Insulation extends Card implements IProjectCard {
   constructor() {
@@ -19,7 +18,7 @@ export class Insulation extends Card implements IProjectCard {
         cardNumber: '152',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.text('-X').heat(1).nbsp.text('+').megacredits(0, {multiplier});
+            pb.text('-X').heat(1).nbsp.text('+').megacredits(1, {text: 'x'});
           });
         }),
         description: 'Decrease your heat production any number of steps and increase your M€ production the same number of steps.',
@@ -32,16 +31,11 @@ export class Insulation extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    return new SelectAmount(
-      'Select amount of heat production to decrease',
-      'Decrease',
-      (amount: number) => {
+    return new SelectAmount('Select amount of heat production to decrease', 'Decrease', 1, player.production.heat)
+      .andThen((amount) => {
         player.production.add(Resource.HEAT, -amount, {log: true});
         player.production.add(Resource.MEGACREDITS, amount, {log: true});
         return undefined;
-      },
-      1,
-      player.production.heat,
-    );
+      });
   }
 }

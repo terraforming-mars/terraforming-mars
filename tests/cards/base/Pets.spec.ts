@@ -1,17 +1,13 @@
 import {expect} from 'chai';
 import {Pets} from '../../../src/server/cards/base/Pets';
-import {Game} from '../../../src/server/Game';
-import {addCity, runAllActions} from '../../TestingUtils';
-import {TestPlayer} from '../../TestPlayer';
+import {addCity, runAllActions, testGame} from '../../TestingUtils';
 import {cast} from '../../TestingUtils';
 
-describe('Pets', function() {
-  it('Should play', function() {
+describe('Pets', () => {
+  it('Should play', () => {
     const card = new Pets();
-    const player = TestPlayer.BLUE.newPlayer();
-    const player2 = TestPlayer.RED.newPlayer();
+    const [game, player] = testGame(1);
     player.playedCards.push(card);
-    const game = Game.newInstance('gameid', [player, player2], player);
     cast(card.play(player), undefined);
     player.addResourceTo(card, 4);
     expect(card.getVictoryPoints(player)).to.eq(2);

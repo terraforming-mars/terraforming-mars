@@ -1,26 +1,24 @@
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TheGrandLunaCapitalGroup} from '../../../src/server/cards/moon/TheGrandLunaCapitalGroup';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
+import {testGame} from '../../TestGame';
 
 describe('TheGrandLunaCapitalGroup', () => {
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
   let card: TheGrandLunaCapitalGroup;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    otherPlayer = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, otherPlayer], player, {moonExpansion: true});
+    [/* game */, player, otherPlayer] = testGame(2, {moonExpansion: true});
     card = new TheGrandLunaCapitalGroup();
-    moonData = MoonExpansion.moonData(game);
+    moonData = MoonExpansion.moonData(player.game);
   });
 
   it('effect', () => {
-    const centerSpace = moonData.moon.getSpace('m07');
+    const centerSpace = moonData.moon.getSpaceOrThrow('m07');
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
 
     // Space 0 intentionallyleft blank
@@ -31,7 +29,7 @@ describe('TheGrandLunaCapitalGroup', () => {
 
     // Test 1: place non-colony
     player.megaCredits = 0;
-    player.setCorporationForTest(card);
+    player.corporations.push(card);
     // Trigger the effect.
     MoonExpansion.addMineTile(player, centerSpace.id);
     expect(player.megaCredits).eq(0);
@@ -48,7 +46,7 @@ describe('TheGrandLunaCapitalGroup', () => {
   it('victoryPoints', () => {
     // It's possible better tests are necessary, but I don't think so.
     // I was wrong.
-    const centerSpace = moonData.moon.getSpace('m06');
+    const centerSpace = moonData.moon.getSpaceOrThrow('m06');
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
 
     expect(card.getVictoryPoints(player)).eq(0);

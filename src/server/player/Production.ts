@@ -1,7 +1,5 @@
-import {CardName} from '../../common/cards/CardName';
 import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {LawSuit} from '../cards/promo/LawSuit';
-import {Manutech} from '../cards/venusNext/Manutech';
 import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
@@ -68,9 +66,8 @@ export class Production {
       this.player.resolveInsurance();
     }
 
-    // Manutech hook
-    if (this.player.isCorporation(CardName.MANUTECH)) {
-      Manutech.onProductionGain(this.player, resource, amount);
+    for (const card of this.player.tableau) {
+      card.onProductionGain?.(this.player, resource, amount);
     }
   }
 

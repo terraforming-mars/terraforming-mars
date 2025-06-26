@@ -5,16 +5,16 @@ import {PathfindersExpansion} from '../../src/server/pathfinders/PathfindersExpa
 import {Tag} from '../../src/common/cards/Tag';
 import {cast, fakeCard, runAllActions} from '../TestingUtils';
 import {CardResource} from '../../src/common/CardResource';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {PathfindersData} from '../../src/server/pathfinders/PathfindersData';
 import {CardName} from '../../src/common/cards/CardName';
 import {SelectParty} from '../../src/server/inputs/SelectParty';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 
-describe('PathfindersExpansion', function() {
+describe('PathfindersExpansion', () => {
   let player1: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let pathfindersData: PathfindersData;
 
   beforeEach(() => {
@@ -73,14 +73,14 @@ describe('PathfindersExpansion', function() {
     player1.tagsForTest = {venus: 4};
     player2.tagsForTest = {venus: 3};
 
-    expect(player1.getTerraformRating()).eq(20);
-    expect(player2.getTerraformRating()).eq(20);
+    expect(player1.terraformRating).eq(20);
+    expect(player2.terraformRating).eq(20);
 
     PathfindersExpansion.raiseTrack(Tag.VENUS, player2, 1);
 
     // Player 2 gets the terraformiing bump
-    expect(player1.getTerraformRating()).eq(20);
-    expect(player2.getTerraformRating()).eq(21);
+    expect(player1.terraformRating).eq(20);
+    expect(player2.terraformRating).eq(21);
 
     // Player 1 gets the 2VP.
     expect(player1.getVictoryPoints().total).eq(22);

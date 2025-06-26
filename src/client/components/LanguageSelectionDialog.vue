@@ -1,3 +1,21 @@
+<template>
+  <div class="preferences_panel">
+    <div class="preferences_panel_item form-group">
+      <div class="preferences_panel_langs">
+        <label class="form-radio" v-for="lang in ALL_LANGUAGES" :key="lang">
+          <div
+            :key="lang"
+            :class="`language-icon language-icon-for-switcher language-icon--${lang}`"
+            :title="LANGUAGES[lang][1]"
+            @click="switchLanguageTo(lang)"
+          />
+          <span class="language-text" @click="switchLanguageTo(lang)">{{ LANGUAGES[lang] }}</span>
+        </label>
+      </div>
+    </div>
+  </div>
+</template>
+
 <script lang="ts">
 import Vue from 'vue';
 
@@ -27,21 +45,3 @@ export default Vue.extend({
   },
 });
 </script>
-
-<template>
-  <div class="preferences_panel">
-    <div class="preferences_panel_item form-group">
-      <div class="preferences_panel_langs">
-        <label class="form-radio" v-for="lang in ALL_LANGUAGES" :key="lang">
-          <div
-            :key="LANGUAGES[lang]"
-            :class="`language-icon language-icon-for-switcher language-icon--${lang}`"
-            :title="LANGUAGES[lang]"
-            @click="switchLanguageTo(lang)"
-          />
-          <span class="language-text" @click="switchLanguageTo(lang)">{{ LANGUAGES[lang] }}</span>
-        </label>
-      </div>
-    </div>
-  </div>
-</template>

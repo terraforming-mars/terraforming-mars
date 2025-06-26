@@ -1,30 +1,30 @@
 import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {RobotPollinators} from '../../../src/server/cards/promo/RobotPollinators';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {fakeCard, setOxygenLevel} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {Tag} from '../../../src/common/cards/Tag';
 
-describe('Robot Pollinators', function() {
+describe('Robot Pollinators', () => {
   let card: RobotPollinators;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new RobotPollinators();
     [game, player] = testGame(1);
   });
 
 
-  it('Can not play if oxygen level too low', function() {
+  it('Can not play if oxygen level too low', () => {
     setOxygenLevel(game, 1);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
     setOxygenLevel(game, 10);
-    expect(player.simpleCanPlay(card)).is.true;
+    expect(card.canPlay(player)).is.true;
   });
 
-  it('Play, No tags', function() {
+  it('Play, No tags', () => {
     // Sanity
     setOxygenLevel(game, 10);
     expect(player.production.plants).to.eq(0);
@@ -37,7 +37,7 @@ describe('Robot Pollinators', function() {
     expect(player.plants).to.eq(0);
   });
 
-  it('Play, Yes tags', function() {
+  it('Play, Yes tags', () => {
     // Sanity
     setOxygenLevel(game, 10);
     expect(player.production.plants).to.eq(0);

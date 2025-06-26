@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class NitrophilicMoss extends Card implements IProjectCard {
@@ -19,7 +18,7 @@ export class NitrophilicMoss extends Card implements IProjectCard {
         production: {plants: 2},
       },
 
-      requirements: CardRequirements.builder((b) => b.oceans(3)),
+      requirements: {oceans: 3},
       metadata: {
         cardNumber: '146',
         renderData: CardRenderer.builder((b) => {
@@ -33,8 +32,8 @@ export class NitrophilicMoss extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {
-    const viralEnhancers = player.playedCards.find((card) => card.name === CardName.VIRAL_ENHANCERS);
-    const hasEnoughPlants = player.plants >= 2 || player.isCorporation(CardName.MANUTECH) || player.plants >= 1 && viralEnhancers !== undefined;
+    const viralEnhancers = player.getPlayedCard(CardName.VIRAL_ENHANCERS);
+    const hasEnoughPlants = player.plants >= 2 || player.cardIsInEffect(CardName.MANUTECH) || player.plants >= 1 && viralEnhancers !== undefined;
 
     return hasEnoughPlants;
   }

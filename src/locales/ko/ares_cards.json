@@ -31,6 +31,9 @@
     "Effect: When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain.": "",
     "Requires 3 greeneries on Mars.": "",
 
+    "Magnetic Field Generators": "",
+    "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile. It provides adjacency bonus of 1 plant and 1 microbe.": "",
+
     "Mining Rights": "",
     "Place one of these tiles on an area with a steel or titanium placement bonus. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "",
 
@@ -51,9 +54,15 @@
     "Solar Farm": "",
     "Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your energy production 1 step for each plant resource on the area where you place the tile.": "",
 
+    "Great Dam": "",
+    "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile. The tile grants an ADJACENCY BONUS of 2 Energy.": "",
+
+    "Deimos Down": "",
+    "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. It provides adjacency bonus of 1 asteroid and 1 steel. Remove up to 6 plants from any player.": "",
+
     "Ecological Zone": "",
     "Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.": "",
-    "the tile grants an adjacency bonus of 1 animal. 1 VP per 2 animals on this card.": "",
+    "The tile grants an ADJACENCY BONUS of 1 animal. 1 VP per 2 animals on this card.": "",
     "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "",
 
     "Bio-Fertilizer Facility": "",
@@ -70,7 +79,7 @@
     "Place this tile which grants an ADJACENCY BONUS of 2 M€. Decrease your energy production 1 step and increase your M€ production 4 steps.": "",
 
     "Ocean City": "",
-    "Requires 6 ocean tiles. Decrease your energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "Na planszy musi znajdować się przynajmniej 6 obszarów oceanów. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 3 poziomy. Umieść ten specjalny obszar miasta na istniejącym obszarze oceanu, ignorując normalne ograniczenia umieszczania miast. Ten obszar liczy się jako obszar miasta i obszar oceanu.",
+    "Requires 6 ocean tiles. Decrease your energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "",
 
     "Lava Flows": "",
     "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. This tile grants an ADJACENCY BONUS of 2 heat.": "",

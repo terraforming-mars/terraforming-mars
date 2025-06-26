@@ -3,10 +3,10 @@ import {LagrangeObservatory} from '../../../src/server/cards/base/LagrangeObserv
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('LagrangeObservatory', function() {
-  it('Should play', function() {
+describe('LagrangeObservatory', () => {
+  it('Should play', () => {
     const card = new LagrangeObservatory();
-    const [, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);
 
     expect(player.cardsInHand).has.lengthOf(1);

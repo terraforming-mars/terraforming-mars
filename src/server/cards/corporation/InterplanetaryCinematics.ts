@@ -1,18 +1,17 @@
-import {Card} from '../Card';
-import {ICorporationCard} from './ICorporationCard';
+import {CorporationCard} from './CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {digit, played} from '../Options';
+import {digit} from '../Options';
 import {Resource} from '../../../common/Resource';
+import {ICorporationCard} from './ICorporationCard';
 
-export class InterplanetaryCinematics extends Card implements ICorporationCard {
+export class InterplanetaryCinematics extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.INTERPLANETARY_CINEMATICS,
       tags: [Tag.BUILDING],
       startingMegaCredits: 30,
@@ -29,15 +28,15 @@ export class InterplanetaryCinematics extends Card implements ICorporationCard {
           b.megacredits(30).nbsp.steel(20, {digit});
           b.corpBox('effect', (ce) => {
             ce.effect('Each time you play an event, you gain 2 M€.', (eb) => {
-              eb.event({played}).startEffect.megacredits(2);
+              eb.tag(Tag.EVENT).startEffect.megacredits(2);
             });
           });
         }),
       },
     });
   }
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    if (player.isCorporation(this.name) && card.type === CardType.EVENT) {
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+    if (card.type === CardType.EVENT) {
       player.stock.add(Resource.MEGACREDITS, 2, {log: true, from: this});
     }
   }

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../src/server/Game';
+import {IGame} from '../../src/server/IGame';
 import {MudSlides} from '../../src/server/turmoil/globalEvents/MudSlides';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
@@ -7,10 +7,10 @@ import {testGame} from '../TestGame';
 import {Space} from '../../src/server/boards/Space';
 import {TileType} from '../../src/common/TileType';
 
-describe('MudSlides', function() {
+describe('MudSlides', () => {
   let card: MudSlides;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
 
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('MudSlides', function() {
     turmoil = Turmoil.getTurmoil(game);
   });
 
-  it('resolve play', function() {
+  it('resolve play', () => {
     const oceanTile = game.board.getAvailableSpacesForOcean(player)[0];
     game.addCity(player, game.board.getAdjacentSpaces(oceanTile)[0]);
     game.addOcean(player, oceanTile);
@@ -30,7 +30,7 @@ describe('MudSlides', function() {
     expect(player.megaCredits).to.eq(6);
   });
 
-  it('resolve play with overplaced tiles', function() {
+  it('resolve play with overplaced tiles', () => {
     [game, player] = testGame(2, {aresExtension: true, turmoilExtension: true});
 
     // Find two adjacent ocean spaces

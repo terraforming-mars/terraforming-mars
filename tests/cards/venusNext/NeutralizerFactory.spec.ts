@@ -3,11 +3,11 @@ import {NeutralizerFactory} from '../../../src/server/cards/venusNext/Neutralize
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('NeutralizerFactory', function() {
-  it('Should play', function() {
+describe('NeutralizerFactory', () => {
+  it('Should play', () => {
     const card = new NeutralizerFactory();
     const [game, player] = testGame(2);
-    expect(player.simpleCanPlay(card)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
     cast(card.play(player), undefined);
     expect(game.getVenusScaleLevel()).to.eq(2);
   });

@@ -5,36 +5,36 @@ import {Ceres} from '../../../src/server/colonies/Ceres';
 import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {Io} from '../../../src/server/colonies/Io';
 import {Luna} from '../../../src/server/colonies/Luna';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SelectColony} from '../../../src/server/inputs/SelectColony';
 import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
-describe('AerospaceMission', function() {
+
+describe('AerospaceMission', () => {
   let card: AerospaceMission;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AerospaceMission();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, redPlayer], player, {coloniesExtension: true});
+    [game, player/* , player2 */] = testGame(2, {coloniesExtension: true});
     // Ignore randomly generated colonies, and add some colonies that can be built independently of cards
     game.colonies = [new Callisto(), new Ceres(), new Io(), new Luna()];
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     player.megaCredits = 13;
     expect(card.canPlay(player)).is.false;
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
     player.megaCredits = 14;
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.megaCredits = 14;
     card.play(player);
 

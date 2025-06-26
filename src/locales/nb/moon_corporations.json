@@ -1,0 +1,48 @@
+{
+  "Crescent Research Association": "Crescent Forskningsgruppe",
+  "When you play a Moon tag, you pay 1 M€ less for each Moon tag you have.": "Når du spiller et Måne-symbol, betaler du 1 M€ mindre for hvert Måne-symbol du har.",
+  "You start with 50 M€. 1 VP for every 3 Moon tags you have.": "Du starter med 50 M€. 1 VP for hvert 3. Måne-symbol du har.",
+
+  "Intragen Sanctuary Headquarters": "Intragen Sanctuary Hovedkvarter",
+  "When any player plays an animal tag (including this), add 1 animal on this card.": "Når en spiller spiller et dyr-symbol (inkludert dette), legg til 1 dyr på dette kortet.",
+  "You start with 38 M€. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step. 1 VP for every 2 animals on this card.": "Du starter med 38 M€. Som din første handling, plasser en habitat-brikke på Månen og øk habitatnivået 1 steg. 1 SP for hvert 2. dyr på dette kortet.",
+
+  "Luna First Incorporated": "Luna First AS",
+  "When you raise any Moon Rate, increase your M€ production 1 step per step.": "Når du øker en Måne-verdi, øk din M€ produksjon 1 steg per steg.",
+  "When any player raises any Moon Rate, gain 1M€ per step.": "Når en spiller øker en Måne-verdi, få 1 M€ per steg.",
+  "You start with 40 M€, 1 steel, and 1 titanium.": "Du starter med 40 M€, 1 stål og 1 titan.",
+
+  "Luna Hyperloop Corporation": "Luna Hyperloop AS",
+  "Gain 1 M€ for each road tile on The Moon.": "Få 1 M€ for hvert vei-symbol på Månen.",
+  "1 VP for each road tile on The Moon.": "1 SP for hvert vei-symbol på Månen.",
+  "You start with 38 M€ and 4 steel.": "Du starter med 38 M€ og 4 stål.",
+
+  "Nanotech Industries": "Nanotech Industrier",
+  "Add 1 science resource to ANY card [except those giving 2 or more VP per 1 science resource.]": "Legg til 1 vitenskapsressurs på ET VALGFRITT KORT (unntatt de som gir 2 eller flere SP per 1 vitenskapsressurs).",
+  "You start with 42 M€. As your first action, draw 3 cards. Take 2 of them into hand, and discard the rest. 1 VP for every 2 science resources here.": "Du starter med 42 M€. Som din første handling, trekk 3 kort. Ta 2 av dem i hånden din, og kast det siste. 1 SP for hver 2. vitenskapsressurs her.",
+
+  "Tempest Consultancy": "Tempest Konsult",
+  "Place 1 delegate in any party for every 5 Moon tags you have [max 3.]": "Plasser 1 delegat i et valgfritt parti for hvert 5. Måne-symbol du har (maks 3 delegater).",
+  "When your delegate becomes the chairman, increase your TR 1 step.": "Når din delegat blir leder, øk din TR 1 steg.",
+  "You start with 37 M€. As your first action, place 2 delegates in one party.": "Du starter med 37 M€. Som din første handling, plasser 2 delegater i et parti.",
+
+  "The Archaic Foundation Institute": "Arkeologistiftelsens Institutt",
+  "When you play a Moon tag, including these, add a cube to this card.": "Når du spiller et Måne-symbol, inkludert dette, legg til en kube på dette kortet.",
+  "Automatically remove 3 cubes here and gain 1 TR.": "Fjern automatisk 3 kuber her og få 1 TR.",
+  "You start with 55 M€.": "Du starter med 55 M€.",
+
+  "Luna Trade Federation": "Luna Handelsføderasjon",
+  "When you place a mine tile on The Moon, raise your titanium production 1 step.": "Når du plasserer en gruve på Månen, øk din titan produksjon 1 steg.",
+  "You may use titanium resources as 2M€ each.": "Du kan bruke titan som 2 M€ hver.",
+  "You start with 15 M€ and 10 titanium.": "Du starter med 15 M€ og 10 titan.",
+
+  "The Darkside of The Moon Syndicate": "Darkside-syndikatet",
+  "Action: Spend 1 titanium to add 1 syndicate fleet on this card OR remove 1 syndicate fleet from this card to steal 2M€ from every opponent.": "Handling: Bruk 1 titan for å legge til 1 syndikatflåte på dette kortet ELLER fjern 1 syndikatflåte fra dette kortet for å stjele 2 M€ fra hver motstander.",
+  "You start with 40 M€ and 2 syndicate fleets on this card.": "Du starter med 40 M€ og 2 syndikatflåter på dette kortet.",
+  "When you place a tile on The Moon, steal 2 M€ from opponents for each of their tiles next to yours.": "Når du plasserer en brikke på Månen, stjel 2 M€ fra dine motstandere for hver av deres brikker ved siden av din.",
+
+  "The Grand Luna Capital Group": "Luna Storkapital",
+  "When you place a habitat tile, gain 2 M€ for each adjacent habitat tile.": "Når du plasserer en habitat-brikke, få 2 M€ for hver tilstøtende habitat-brikke.",
+  "1 VP for each habitat tile adjacent to your habitat tiles.": "1 SP for hver habitat-brikke tilstøtende til dine habitat-brikker.",
+  "You start with 32 M€ and 1 titanium. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step.": "Du starter med 32 M€ og 1 titan. Som din første handling, plasser en habitat-brikke på Månen og øk habitatnivået 1 steg."
+}

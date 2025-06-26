@@ -4,9 +4,9 @@ import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCo
 import {Tag} from '../../../src/common/cards/Tag';
 import {cast} from '../../TestingUtils';
 
-describe('ResearchCoordination', function() {
-  it('Should play', function() {
-    const [, player] = testGame(1);
+describe('ResearchCoordination', () => {
+  it('Should play', () => {
+    const [/* game */, player] = testGame(1);
     const card = new ResearchCoordination();
     cast(card.play(player), undefined);
     expect(player.tags.count(Tag.WILD)).eq(0);

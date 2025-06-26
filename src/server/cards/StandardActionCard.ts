@@ -1,17 +1,17 @@
 import {CardType} from '../../common/cards/CardType';
-import {ICardMetadata} from '../../common/cards/ICardMetadata';
+import {CardMetadata} from '../../common/cards/CardMetadata';
 import {CardName} from '../../common/cards/CardName';
 import {Card} from './Card';
-import {IActionCard, ICard} from './ICard';
 import {PlayerInput} from '../PlayerInput';
 import {IPlayer} from '../IPlayer';
+import {IStandardActionCard} from './IStandardActionCard';
 
 interface StaticStandardActionCardProperties {
   name: CardName,
-  metadata: ICardMetadata,
+  metadata: CardMetadata,
 }
 
-export abstract class StandardActionCard extends Card implements IActionCard, ICard {
+export abstract class StandardActionCard extends Card implements IStandardActionCard {
   constructor(properties: StaticStandardActionCardProperties) {
     super({
       type: CardType.STANDARD_ACTION,

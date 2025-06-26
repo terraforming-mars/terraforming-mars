@@ -22,7 +22,7 @@ export class FloaterTechnology extends ActionCard implements IProjectCard {
         cardNumber: 'C12',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 floater to ANOTHER card.', (eb) => {
-            eb.empty().startAction.floaters(1).asterix();
+            eb.empty().startAction.resource(CardResource.FLOATER).asterix();
           });
         }),
       },

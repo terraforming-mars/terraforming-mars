@@ -37,18 +37,14 @@ export class Supercapacitors extends Card implements IProjectCard {
       return;
     }
     player.defer(
-      new SelectAmount(
-        'Select amount of energy to convert to heat',
-        'OK',
-        (amount) => {
+      new SelectAmount('Select amount of energy to convert to heat', 'OK', 0, player.energy, true)
+        .andThen((amount) => {
           player.energy -= amount;
           player.heat += amount;
           player.game.log('${0} converted ${1} units of energy to heat', (b) => b.player(player).number(amount));
           player.finishProductionPhase();
           return undefined;
         },
-        0,
-        player.energy,
-        true));
+        ));
   }
 }

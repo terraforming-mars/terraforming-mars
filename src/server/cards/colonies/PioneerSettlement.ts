@@ -7,7 +7,6 @@ import {Resource} from '../../../common/Resource';
 import {ColonyName} from '../../../common/colonies/ColonyName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {Card} from '../Card';
 import {max} from '../Options';
 
@@ -18,7 +17,7 @@ export class PioneerSettlement extends Card implements IProjectCard {
       tags: [Tag.SPACE],
       name: CardName.PIONEER_SETTLEMENT,
       type: CardType.AUTOMATED,
-      requirements: CardRequirements.builder((b) => b.colonies(1, {max})),
+      requirements: {colonies: 1, max},
       victoryPoints: 2,
 
       metadata: {
@@ -31,8 +30,6 @@ export class PioneerSettlement extends Card implements IProjectCard {
       },
     });
   }
-
-  public warning?: string;
 
   public override bespokeCanPlay(player: IPlayer): boolean {
     if (player.colonies.getPlayableColonies().length === 0) {
@@ -59,13 +56,13 @@ export class PioneerSettlement extends Card implements IProjectCard {
     }
 
     const megaCreditsProduction = player.production.megacredits;
-    if (megaCreditsProduction === -4 && player.isCorporation(CardName.POSEIDON)) {
+    if (megaCreditsProduction === -4 && player.cardIsInEffect(CardName.POSEIDON)) {
       return true;
     } else if (megaCreditsProduction <= -4) {
       if (lunaIsAvailable === false) {
         return false;
       }
-      this.warning = 'You will only be able to build the colony on Luna.';
+      this.warnings.add('buildOnLuna');
     }
 
     return true;

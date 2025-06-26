@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Capital} from '../../../src/server/cards/base/Capital';
 import {TestPlayer} from '../../TestPlayer';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
@@ -13,7 +13,7 @@ import {testGame} from '../../TestGame';
 describe('Capital', () => {
   let card: Capital;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Capital();
@@ -56,15 +56,14 @@ describe('Capital', () => {
     expect(citySpace.spaceType).to.eq(SpaceType.LAND);
     action.cb(citySpace);
 
-    expect(citySpace.tile).is.not.undefined;
     expect(citySpace.player).to.eq(player);
-    expect(citySpace.tile && citySpace.tile.tileType).to.eq(TileType.CAPITAL);
+    expect(citySpace.tile?.tileType).to.eq(TileType.CAPITAL);
     expect(card.getVictoryPoints(player)).to.eq(1);
     expect(citySpace.adjacency?.bonus).eq(undefined);
   });
 
   it('Capital special tile counts as a city', () => {
-    const space = game.board.getNthAvailableLandSpace(2, 1, player);
+    const space = game.board.getSpaceOrThrow('08');
     game.addTile(player, space, {
       tileType: TileType.CAPITAL,
       card: card.name,

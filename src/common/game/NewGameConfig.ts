@@ -6,11 +6,11 @@ import {Color} from '../Color';
 import {RandomMAOptionType} from '../ma/RandomMAOptionType';
 import {AgendaStyle} from '../turmoil/Types';
 import {GameId} from '../Types';
+import {Expansion} from '../cards/GameModule';
 
 export type BoardNameType = BoardName | RandomBoardOption;
 
 export interface NewPlayerModel {
-  index: number;
   name: string;
   color: Color;
   beginner: boolean;
@@ -18,15 +18,14 @@ export interface NewPlayerModel {
   first: boolean;
 }
 
+/**
+ * Like GameOptions, but the data structure sent from the new game page.
+ */
 export interface NewGameConfig {
   players: Array<NewPlayerModel>;
-  prelude: boolean;
-  venusNext: boolean;
-  colonies: boolean;
-  turmoil: boolean;
+  expansions: Record<Expansion, boolean>,
   board: BoardNameType;
   seed: number;
-  initialDraft: boolean;
   randomFirstPlayer: boolean;
 
   // boardName: BoardName;
@@ -39,26 +38,18 @@ export interface NewGameConfig {
   showOtherPlayersVP: boolean;
 
   // Extensions
-  corporateEra: boolean;
-  // venusNextExtension: boolean;
-  // coloniesExtension: boolean;
-  // preludeExtension: boolean;
-  // turmoilExtension: boolean;
-  promoCardsOption: boolean;
-  communityCardsOption: boolean;
-  aresExtension: boolean;
   // aresHazards: boolean;
+  aresExtremeVariant: boolean;
   politicalAgendasExtension: AgendaStyle;
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
-  includeVenusMA: boolean;
-  moonExpansion: boolean;
-  pathfindersExpansion: boolean;
-  ceoExtension: boolean;
+  modularMA: boolean;
 
   // Variants
   draftVariant: boolean;
-  // initialDraftVariant: boolean;
+  initialDraft: boolean; // initialDraftVariant: boolean;
+  preludeDraftVariant: boolean;
+  ceosDraftVariant: boolean;
   startingCorporations: number;
   shuffleMapOption: boolean;
   randomMA: RandomMAOptionType;
@@ -66,17 +57,21 @@ export interface NewGameConfig {
   soloTR: boolean; // Solo victory by getting TR 63 by game end
   customCorporationsList: Array<CardName>;
   bannedCards: Array<CardName>;
+  includedCards: Array<CardName>;
   customColoniesList: Array<ColonyName>;
   customPreludes: Array<CardName>;
   requiresMoonTrackCompletion: boolean; // Moon must be completed to end the game
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
   moonStandardProjectVariant: boolean;
+  moonStandardProjectVariant1: boolean;
   altVenusBoard: boolean;
   escapeVelocityMode: boolean;
   escapeVelocityThreshold: number | undefined;
+  escapeVelocityBonusSeconds: number | undefined;
   escapeVelocityPeriod: number | undefined;
   escapeVelocityPenalty: number | undefined;
   twoCorpsVariant: boolean;
   customCeos: Array<CardName>;
   startingCeos: number;
+  startingPreludes: number;
 }

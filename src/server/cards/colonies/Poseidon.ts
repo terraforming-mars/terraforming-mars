@@ -1,16 +1,16 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Card} from '../Card';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
+import {IPlayer} from '../../IPlayer';
+import {Resource} from '../../../common/Resource';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Poseidon extends Card implements ICorporationCard {
+export class Poseidon extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.POSEIDON,
       startingMegaCredits: 45,
-      type: CardType.CORPORATION,
 
       firstAction: {
         text: 'Place a colony',
@@ -31,5 +31,9 @@ export class Poseidon extends Card implements ICorporationCard {
         }),
       },
     });
+  }
+
+  public onColonyAddedByAnyPlayer(cardOwner: IPlayer) {
+    cardOwner.production.add(Resource.MEGACREDITS, 1, {log: true});
   }
 }

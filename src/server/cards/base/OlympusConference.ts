@@ -7,9 +7,9 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {Priority, SimpleDeferredAction} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
+import {ICard} from '../ICard';
 
 export class OlympusConference extends Card implements IProjectCard {
   constructor() {
@@ -24,9 +24,9 @@ export class OlympusConference extends Card implements IProjectCard {
       metadata: {
         cardNumber: '185',
         renderData: CardRenderer.builder((b) => {
-          b.science(1, {played}).colon().science().br;
+          b.tag(Tag.SCIENCE).colon().resource(CardResource.SCIENCE).br;
           b.or().br;
-          b.minus().science().plus().cards(1);
+          b.minus().resource(CardResource.SCIENCE).plus().cards(1);
         }),
         description: 'When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.',
       },
@@ -34,32 +34,34 @@ export class OlympusConference extends Card implements IProjectCard {
   }
 
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     const scienceTags = player.tags.cardTagCount(card, Tag.SCIENCE);
-    for (let i = 0; i < scienceTags; i++) {
-      player.game.defer(new SimpleDeferredAction(
-        player,
-        () => {
-          // Can't remove a resource
-          if (this.resourceCount === 0) {
+    this.onScienceTagAdded(player, scienceTags);
+  }
+  public onColonyAddedToLeavitt(player: IPlayer) {
+    this.onScienceTagAdded(player, 1);
+  }
+  public onScienceTagAdded(player: IPlayer, count: number) {
+    for (let i = 0; i < count; i++) {
+      player.defer(() => {
+        // Can't remove a resource
+        if (this.resourceCount === 0) {
+          player.addResourceTo(this, 1);
+          return undefined;
+        }
+        return new OrOptions(
+          new SelectOption('Remove a science resource from this card to draw a card', 'Remove resource').andThen(() => {
+            player.removeResourceFrom(this);
+            player.drawCard();
+            return undefined;
+          }),
+          new SelectOption('Add a science resource to this card', 'Add resource').andThen(() => {
             player.addResourceTo(this, 1);
             return undefined;
-          }
-          const options = new OrOptions(
-            new SelectOption('Remove a science resource from this card to draw a card', 'Remove resource', () => {
-              player.removeResourceFrom(this);
-              player.drawCard();
-              return undefined;
-            }),
-            new SelectOption('Add a science resource to this card', 'Add resource', () => {
-              player.addResourceTo(this, 1);
-              return undefined;
-            }),
-          );
-          options.title = 'Select an option for Olympus Conference';
-          return options;
-        },
-      ), Priority.SUPERPOWER); // Unshift that deferred action
+          }),
+        ).setTitle('Select an option for Olympus Conference');
+      },
+      Priority.SUPERPOWER); // Unshift that deferred action
     }
     return undefined;
   }

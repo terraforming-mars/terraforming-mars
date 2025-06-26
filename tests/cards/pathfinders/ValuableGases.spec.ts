@@ -7,10 +7,12 @@ import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns'
 import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {AirRaid} from '../../../src/server/cards/colonies/AirRaid';
 import {cast, runAllActions} from '../../TestingUtils';
+import {toName} from '../../../src/common/utils/utils';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
 import {CardName} from '../../../src/common/cards/CardName';
+import {Payment} from '../../../src/common/inputs/Payment';
 
-describe('ValuableGases', function() {
+describe('ValuableGases', () => {
   let card: ValuableGases;
   let player: TestPlayer;
 
@@ -19,9 +21,9 @@ describe('ValuableGases', function() {
   let localShading: LocalShading;
   let airRaid: AirRaid;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ValuableGases();
-    [/* skipped */, player] = testGame(1);
+    [/* game */, player] = testGame(1);
 
     // Floating Habs is active, has floaters, requires 2 science, and costs 20
     floatingHabs = new FloatingHabs();
@@ -31,30 +33,31 @@ describe('ValuableGases', function() {
     localShading = new LocalShading();
     // Air Raid is not a floater card
     airRaid = new AirRaid();
-    player.cardsInHand = [floatingHabs, jovianLanters, localShading, airRaid];
   });
 
-  it('Should play', function() {
-    expect(player.getPlayableCardsForTest()).is.empty;
+  it('canPlay', () => {
+    expect(card.canPlay(player)).is.false;
+
+    player.cardsInHand = [localShading];
+
+    expect(card.canPlay(player)).is.true;
+  });
+
+  it('Should play', () => {
+    player.cardsInHand = [floatingHabs, jovianLanters, localShading, airRaid];
+    expect(player.getPlayableCards()).is.empty;
 
     card.play(player);
 
     runAllActions(player.game);
 
     const selectProjectCardToPlay = cast(player.popWaitingFor(), SelectProjectCardToPlay);
-    expect(selectProjectCardToPlay.cards.map((card) => card.name)).has.members([CardName.LOCAL_SHADING, CardName.FLOATING_HABS]);
+    expect(selectProjectCardToPlay.cards.map(toName)).has.members([CardName.LOCAL_SHADING, CardName.FLOATING_HABS]);
     expect(player.megaCredits).eq(10);
 
     selectProjectCardToPlay.payAndPlay(localShading, {
-      heat: 0,
+      ...Payment.EMPTY,
       megaCredits: localShading.cost,
-      steel: 0,
-      titanium: 0,
-      microbes: 0,
-      floaters: 0,
-      science: 0,
-      seeds: 0,
-      auroraiData: 0,
     });
 
     expect(localShading.resourceCount).eq(5);

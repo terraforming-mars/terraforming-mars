@@ -1,22 +1,7 @@
 {
-    "Callisto": "Каллисто",
-    "Ceres": "Церера",
-    "Enceladus": "Энцелад",
-    "Europa": "Европа",
-    "Ganymede": "Ганимед",
-    "Io": "Ио",
-    "Luna": "Луна",
-    "Miranda": "Миранда",
-    "Pluto": "Плутон",
-    "Titan": "Титан",
-    "Triton": "Тритон",
-    "Iapetus": "Япет",
-    "Iapetus II": "Япет II",
-    "Mercury": "Меркурий",
-    "Hygiea": "Гигея",
-    "Titania": "Титания",
-    "Leavitt": "Ливитт",
-    "Pallas": "Паллада",
+    "Build Colony bonus": "Бонус строительства",
+    "Colony bonus": "Бонус колонии",
+    "Trade bonus": "Торговый бонус",
 
     "Select colony tile to remove": "Выберите колонию, которая будет убрана из игры",
     "Colony Bonus": "Бонус колонии",
@@ -40,10 +25,105 @@
     "Europa - (Production)": "Европа - (Производство)",
     "Ganymede - (Plants)": "Ганимед - (Растения)",
     "Io - (Heat)": "Ио - (Тепло)",
+    "Venus - (Venus)": "Венера - (Венера)",
     "Luna - (MegaCredits)": "Луна - (Доход)",
     "Miranda - (Animals)": "Миранда - (Животные)",
     "Pluto - (Cards)": "Плутон - (Карты)",
     "Titan - (Floaters)": "Титан - (Аэростаты)",
-    "Triton - (Titanium)": "Тритон - (Титан)"
+    "Triton - (Titanium)": "Тритон - (Титан)",
+
+    "Callisto": "Каллисто",
+    "Gain 1 energy production": "Повысьте производство энергии на 1",
+    "Gain n energy": "Получите X энергии",
+    "Gain 3 energy": "Получите 3 энергии",
+
+    "Ceres": "Церера",
+    "Gain 1 steel production": "Повысьте производство стали на 1",
+    "Gain n steel": "Получите X стали",
+    "Gain 2 steel": "Получите 2 стали",
+
+    "Enceladus": "Энцелад",
+    "Add 3 microbes to ANY card": "Добавьте 3 микроба на любую карту",
+    "Add n microbes to ANY card": "Добавьте X микробов на любую карту",
+    "Add 1 microbe to ANY card": "Добавьте 1 микроба на любую карту",
+
+
+    "Europa": "Европа",
+    "Place an ocean tile": "Расзместите 1 океан",
+    "Gain 1 unit of production of the type under the track marker": "Повысьте на 1 уровень производства соответствующего маркеру",
+    "Gain 1 M€": "Получите 1 M€",
+
+    "Ganymede": "Ганимед",
+    "Gain 1 plant production": "Повысьте производство растений на 1",
+    "Gain n plants": "Получите X растений",
+    "Gain 1 plant": "Получите 1 растениe",
+
+    "Io": "Ио",
+    "Gain 1 heat production": "Повысьте производство тепла на 1",
+    "Gain n heat": "Получите X тепла",
+    "Gain 2 heat": "Получите 2 тепла",
+
+    "Luna": "Луна",
+    "Gain 2 M€ production": "Повысьте производство M€ на 2",
+    "Gain n M€": "Повысьте производство M€ на X",
+    "Gain 2 M€": "Получите 2 M€",
+
+    "Miranda": "Миранда",
+    "Add 1 animal to ANY card": "Добавьте 1 животное на любую карту",
+    "Add n animals to ANY card": "Добавьте X животных на любую карту",
+    "Draw 1 card": "Доберите 1 карту",
+
+    "Pluto": "Плутон",
+    "Draw 2 cards": "Доберите 2 карты",
+    "Draw n cards": "Коберите X карт",
+    "Draw 1 card and then discard 1 card": "Доберите 1 карту, затем сбросьте 1 карту",
+
+    "Titan": "Титан",
+    "Add 3 floaters to ANY card": "Добавьте 3 дирижабля на любую карту",
+    "Add n floaters to ANY card": "Добавьте X дирижаблей на любую карту",
+    "Add 1 floater to ANY card": "Добавьте 1 дирижабль на любую карту",
+
+    "Triton": "Тритон",
+    "Gain 3 titanium": "Получите 3 титана",
+    "Gain n titanium": "Получите X титана",
+    "Gain 1 titanium": "Получите 1 титан",
+
+    "Iapetus": "Япет",
+    "Gain 1 TR": "Получите 1 РТ",
+    "Gain n TR": "Получите X РТ",
+    "Pay 1 M€ less for cards this generation": "Платите на  1 M€ меньше за розыгрыш карт в этом поколении",
+
+    "Mercury": "Меркурий",
+    "Gain the trade bonus of any colony. (This does not move the markers.)": "Получите торговый бонус любой колонии, не двигая её маркер",
+    "Gain 1 unit of production of the type below the track marker": "Повысьте на 1 уровень производства соответствующего маркеру",
+
+    "Hygiea": "Гигея",
+    "Choose opponent to discard 1 card": "Выберите оппонета, он должен сбросить одну карту с руки",
+    "Steal 3 units of the listed type": "Украдите 3 ресурса данного типа",
+    "Gain 3 M€": "Получите 3 M€",
+
+    "Titania": "Титания",
+    "Gain 5, 3, or 2 VP": "Получите 5, 3 или 2 ПО",
+    "Gain n VP": "Получите X ПО",
+    "Lose 3 M€": "Потратьте 3 M€",
+
+    "Increase Venus 1 step": "Продвиньте трек Венеры на 1 шаг",
+    "Add n resources to ANY Venus card": "Добавьте X ресурсов на карту с меткой Венеры",
+    "Add 1 resource to ANY Venus card": "Добавьте 1 ресурс на карту с меткой Венеры",
+
+    "Leavitt": "Ливитт",
+    "Gain 1 science tag": "Получите 1 метку науки",
+    "Draw n cards, keep 1": "Доберите X карт, оставьте себе 1 одних, остальные сбросьте",
+    "Draw 1 card which you may pay to keep": "Доберите 1 карту, можете оставить ее себе",
+
+    "Pallas": "Паллада",
+    "Gain +1 influence": "Получите 1 влияние",
+    "Place n delegates": "Получите X делегатов",
+    "Gain 1 M€ for each delegate in any party": "Получите 1 M€ за каждого делегата от любой партии",
+
+    "Iapetus II": "Япет II",
+    "Add 3 data to ANY card": "Добавьте 3 единицы данных на любую карту",
+    "Add n data to ANY card": "Добавьте X единиц данных на любую карту",
+    "Add 1 data to ANY card": "Добавьте 1 единицу данных на любую карту"
 
 }

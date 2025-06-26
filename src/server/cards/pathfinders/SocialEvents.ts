@@ -5,7 +5,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
-import {played} from '../Options';
 
 export class SocialEvents extends Card implements IProjectCard {
   constructor() {
@@ -14,24 +13,25 @@ export class SocialEvents extends Card implements IProjectCard {
       name: CardName.SOCIAL_EVENTS,
       cost: 18,
       tags: [Tag.EARTH, Tag.MARS],
-      tr: ((player) => ({tr: this.getExpectedTr(player)})),
 
       metadata: {
-        cardNumber: '...',
+        cardNumber: 'PfT10',
         renderData: CardRenderer.builder((b) => {
-          b.tr(1).slash().mars(2, {played});
+          b.tr(1).slash().tag(Tag.MARS, 2);
         }),
         description: 'Gain 1 TR for every 2 Mars tags you have (including this one.)',
       },
     });
   }
 
-  private getExpectedTr(player: IPlayer) {
-    return Math.floor((player.tags.count(Tag.MARS) + 1) / 2); // +1 is the "including this"
+  public computeTr(player: IPlayer) {
+    const expectedTr = Math.floor((player.tags.count(Tag.MARS) + 1) / 2); // +1 is the "including this";
+    return {tr: expectedTr};
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.increaseTerraformRating(this.getExpectedTr(player), {log: true});
+    const steps = this.computeTr(player).tr;
+    player.increaseTerraformRating(steps, {log: true});
     return undefined;
   }
 }

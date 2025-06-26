@@ -22,6 +22,7 @@ export class ColonyDealer {
     if (gameOptions.moonExpansion && !this.gameOptions.pathfindersExpansion) colonyTiles.filter((c) => c.colonyName !== ColonyName.LEAVITT_II); // Leavitt II isn't built yet but this is pre-emptive
     if (!gameOptions.venusNextExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
     if (!gameOptions.turmoilExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PALLAS);
+    if (!gameOptions.aresExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.DEIMOS);
     this.gameColonies = colonyTiles.map((cf) => new cf.Factory());
   }
 

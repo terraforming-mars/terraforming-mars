@@ -7,15 +7,20 @@ import {TileType} from '../../common/TileType';
 import {AresData, HazardConstraint} from '../../common/ares/AresData';
 
 /**
- * Package-private support for placing and upgrading hazard tiles.
+ * Support for placing and upgrading hazard tiles.
  */
-export class _AresHazardPlacement {
+export class AresHazards {
   public static putHazardAt(space: Space, tileType: TileType) {
     space.tile = {tileType: tileType, protectedHazard: false};
   }
 
-  public static randomlyPlaceHazard(game: IGame, tileType: TileType, direction: 1 | -1, cardCount: 1 | 2 = 1) {
-    const space = game.getSpaceByOffset(direction, tileType, cardCount);
+  public static randomlyPlaceHazard(game: IGame, tileType: TileType, direction: 'top' | 'bottom', cardCount: 1 | 2 = 1) {
+    const cost = game.discardForCost(cardCount, tileType);
+    const distance = Math.max(cost - 1, 0); // Some cards cost zero.
+    const space = game.board.getNthAvailableLandSpace(
+      distance, direction,
+      (space) => game.nomadSpace !== space.id);
+
     this.putHazardAt(space, tileType);
     return space;
   }
@@ -29,7 +34,7 @@ export class _AresHazardPlacement {
         }
       });
 
-    game.log('${0} have upgraded to ${1}', (b) => b.string(TileType.toString(from)).string(TileType.toString(to)));
+    game.log('${0} have upgraded to ${1}', (b) => b.tileType(from).tileType(to));
   }
 
   public static onTemperatureChange(game: IGame, aresData: AresData) {
@@ -69,8 +74,8 @@ export class _AresHazardPlacement {
           type = TileType.EROSION_SEVERE;
         }
 
-        const space1 = this.randomlyPlaceHazard(player.game, type, 1);
-        const space2 = this.randomlyPlaceHazard(player.game, type, -1);
+        const space1 = this.randomlyPlaceHazard(player.game, type, 'top');
+        const space2 = this.randomlyPlaceHazard(player.game, type, 'bottom');
         [space1, space2].forEach((space) => {
           LogHelper.logTilePlacement(player, space, type);
         });

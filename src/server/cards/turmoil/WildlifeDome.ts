@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class WildlifeDome extends Card implements IProjectCard {
@@ -14,7 +13,7 @@ export class WildlifeDome extends Card implements IProjectCard {
       cost: 15,
       tags: [Tag.ANIMAL, Tag.PLANT, Tag.BUILDING],
       type: CardType.AUTOMATED,
-      requirements: CardRequirements.builder((b) => b.party(PartyName.GREENS)),
+      requirements: {party: PartyName.GREENS},
 
       behavior: {
         greenery: {},

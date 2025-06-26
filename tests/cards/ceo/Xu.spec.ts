@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {runAllActions, forceGenerationEnd, cast} from '../../TestingUtils';
@@ -8,11 +8,11 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {Xu} from '../../../src/server/cards/ceos/Xu';
 
 
-describe('Xu', function() {
+describe('Xu', () => {
   let card: Xu;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
   beforeEach(() => {
     card = new Xu();
@@ -22,7 +22,7 @@ describe('Xu', function() {
     player2.megaCredits = 0;
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     expect(card.canAct(player)).is.true;
 
     card.action(player);
@@ -33,7 +33,7 @@ describe('Xu', function() {
     expect(card.canAct(player)).is.false;
   });
 
-  it('Takes OPG action, has the most venus tags', function() {
+  it('Takes OPG action, has the most venus tags', () => {
     player.playedCards.push(fakeCard({tags: [Tag.VENUS, Tag.VENUS, Tag.VENUS, Tag.VENUS]}));
     player2.playedCards.push(fakeCard({tags: [Tag.VENUS, Tag.VENUS]}));
 
@@ -51,7 +51,7 @@ describe('Xu', function() {
     expect(player2.megaCredits).to.eq(0);
   });
 
-  it('Takes OPG action, ties are "friendly" to the player', function() {
+  it('Takes OPG action, ties are "friendly" to the player', () => {
     player.playedCards.push(fakeCard({tags: [Tag.VENUS]}));
     player2.playedCards.push(fakeCard({tags: [Tag.VENUS, Tag.VENUS]}));
 
@@ -70,7 +70,7 @@ describe('Xu', function() {
   });
 
 
-  it('Takes OPG action, does not Have the most Venus tags in play', function() {
+  it('Takes OPG action, does not Have the most Venus tags in play', () => {
     player2.playedCards.push(fakeCard({tags: [Tag.VENUS, Tag.VENUS]}));
 
     expect(player.megaCredits).to.eq(0);
@@ -86,7 +86,7 @@ describe('Xu', function() {
     expect(player2.megaCredits).to.eq(0);
   });
 
-  it('Takes OPG action, opponent players have wild tags', function() {
+  it('Takes OPG action, opponent players have wild tags', () => {
     player.playedCards.push(fakeCard({tags: [Tag.VENUS, Tag.VENUS, Tag.WILD]}));
     player2.playedCards.push(fakeCard({tags: [Tag.VENUS, Tag.VENUS, Tag.VENUS, Tag.WILD, Tag.WILD, Tag.WILD]}));
 

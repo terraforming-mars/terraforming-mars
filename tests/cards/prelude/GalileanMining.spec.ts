@@ -1,25 +1,25 @@
 import {expect} from 'chai';
 import {GalileanMining} from '../../../src/server/cards/prelude/GalileanMining';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
-describe('GalileanMining', function() {
+describe('GalileanMining', () => {
   let card: GalileanMining;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new GalileanMining();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     player.megaCredits = 4;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.megaCredits = 5;
     expect(card.canPlay(player)).is.true;
 

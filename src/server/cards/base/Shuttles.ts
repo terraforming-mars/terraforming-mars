@@ -4,8 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
-import {played} from '../Options';
 
 export class Shuttles extends Card implements IProjectCard {
   constructor() {
@@ -20,13 +18,13 @@ export class Shuttles extends Card implements IProjectCard {
         production: {energy: -1, megacredits: 2},
       },
 
-      requirements: CardRequirements.builder((b) => b.oxygen(5)),
+      requirements: {oxygen: 5},
       cardDiscount: {tag: Tag.SPACE, amount: 2},
       metadata: {
         cardNumber: '166',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a space card, you pay 2 M€ less for it.', (eb) => {
-            eb.space({played}).startEffect.megacredits(-2);
+            eb.tag(Tag.SPACE).startEffect.megacredits(-2);
           }).br;
           b.production((pb) => {
             pb.minus().energy(1).nbsp;

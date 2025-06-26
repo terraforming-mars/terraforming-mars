@@ -2,15 +2,15 @@ import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Space} from '../../boards/Space';
-import {IPlayer} from '../../IPlayer';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
 import {TileType} from '../../../common/TileType';
 import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Board} from '../../boards/Board';
 import {Size} from '../../../common/cards/render/Size';
+import {message} from '../../logs/MessageBuilder';
 
 export class Wetlands extends Card implements IProjectCard {
   constructor() {
@@ -20,7 +20,7 @@ export class Wetlands extends Card implements IProjectCard {
       tags: [Tag.PLANT, Tag.MARS],
       cost: 20,
       tr: {oxygen: 1, tr: 1},
-      requirements: CardRequirements.builder((b) => b.oceans(2)),
+      requirements: {oceans: 2},
       reserveUnits: {plants: 4},
       victoryPoints: 1,
 
@@ -40,7 +40,7 @@ export class Wetlands extends Card implements IProjectCard {
     });
   }
 
-  public availableSpaces(player: IPlayer) {
+  public availableSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions) {
     const board = player.game.board;
     const adjacentOceans: (space: Space) => number = (space) => {
       const adjacentSpaces = board.getAdjacentSpaces(space);
@@ -51,25 +51,20 @@ export class Wetlands extends Card implements IProjectCard {
     const spacesNextToRedCity = redCity ?
       board.getAdjacentSpaces(redCity) :
       [];
-    return board.getAvailableSpacesOnLand(player)
+    return board.getAvailableSpacesOnLand(player, canAffordOptions)
       .filter((space) => adjacentOceans(space) >= 2)
       .filter((space) => !spacesNextToRedCity.includes(space));
   }
 
-  public override bespokeCanPlay(player: IPlayer) {
-    if (!player.stock.has(this.reserveUnits)) {
-      return false;
-    }
-    return this.availableSpaces(player).length > 0;
+  public override bespokeCanPlay(player: IPlayer, canAffordOptions: CanAffordOptions) {
+    return this.availableSpaces(player, canAffordOptions).length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.stock.deductUnits(this.reserveUnits);
-
     return new SelectSpace(
-      'Select space for Wetlands',
-      this.availableSpaces(player),
-      (space: Space) => {
+      message('Select space for ${0}', (b) => b.card(this)),
+      this.availableSpaces(player))
+      .andThen((space) => {
         const tile = {
           tileType: TileType.WETLANDS,
           card: this.name,
@@ -77,8 +72,8 @@ export class Wetlands extends Card implements IProjectCard {
         };
         player.game.addTile(player, space, tile);
         player.game.increaseOxygenLevel(player, 1);
+        player.increaseTerraformRating(1);
         return undefined;
-      },
-    );
+      });
   }
 }

@@ -4,33 +4,30 @@ import {CommunityServices} from '../../../src/server/cards/colonies/CommunitySer
 import {EccentricSponsor} from '../../../src/server/cards/prelude/EccentricSponsor';
 import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
 import {SeptumTribus} from '../../../src/server/cards/turmoil/SeptumTribus';
-import {Game} from '../../../src/server/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {cast} from '../../TestingUtils';
+import {cast, testGame} from '../../TestingUtils';
 
-describe('CommunityServices', function() {
-  it('Should play', function() {
+describe('CommunityServices', () => {
+  it('Should play', () => {
     const card = new CommunityServices();
     const corp = new Aridor();
     const prelude = new EccentricSponsor();
     const researchCoordination = new ResearchCoordination();
-    const player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    const [/* game*/, player] = testGame(1);
     player.playedCards.push(prelude, researchCoordination);
-    player.setCorporationForTest(corp);
+    player.corporations.push(corp);
     cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(1);
     expect(player.production.megacredits).to.eq(4);
   });
-  it('Wild Tags', function() {
+
+  it('Wild Tags', () => {
     const card = new CommunityServices();
-    const corpo = new SeptumTribus();
+    const septumTribus = new SeptumTribus();
     const prelude = new EccentricSponsor();
     const researchCoordination = new ResearchCoordination();
-    const player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    const [/* game*/, player] = testGame(1);
     player.playedCards.push(prelude, researchCoordination);
-    player.setCorporationForTest(corpo);
+    player.corporations.push(septumTribus);
     cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(1);
     expect(player.production.megacredits).to.eq(4);

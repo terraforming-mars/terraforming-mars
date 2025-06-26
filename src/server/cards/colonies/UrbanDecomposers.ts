@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardResource} from '../../../common/CardResource';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
@@ -21,11 +20,11 @@ export class UrbanDecomposers extends Card implements IProjectCard {
         addResourcesToAnyCard: {count: 2, type: CardResource.MICROBE},
       },
 
-      requirements: CardRequirements.builder((b) => b.colonies().cities()),
+      requirements: [{colonies: 1}, {cities: 1}],
       metadata: {
         cardNumber: 'C48',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.plants(1)).microbes(2).asterix();
+          b.production((pb) => pb.plants(1)).resource(CardResource.MICROBE, 2).asterix();
         }),
         description: 'Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.',
       },

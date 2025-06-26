@@ -1,22 +1,22 @@
-import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {expect} from 'chai';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {cast} from '../../TestingUtils';
+import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AristarchusRoadNetwork} from '../../../src/server/cards/moon/AristarchusRoadNetwork';
-import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
-import {PlaceMoonRoadTile} from '../../../src/server/moon/PlaceMoonRoadTile';
+import {assertPlaceTile} from '../../assertions';
 
 describe('AristarchusRoadNetwork', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: AristarchusRoadNetwork;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [game, player] = testGame(1, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new AristarchusRoadNetwork();
   });
@@ -25,15 +25,15 @@ describe('AristarchusRoadNetwork', () => {
     player.cardsInHand = [card];
     player.steel = 1;
     player.megaCredits = card.cost;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
     player.steel = 2;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
     player.steel = 2;
     expect(player.production.megacredits).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.logisticRate).eq(0);
 
     card.play(player);
@@ -41,18 +41,11 @@ describe('AristarchusRoadNetwork', () => {
     expect(player.steel).eq(0);
     expect(player.production.megacredits).eq(2);
 
-    const deferredAction = cast(game.deferredActions.peek(), PlaceMoonRoadTile);
-    const selectSpace = deferredAction.execute()!;
-    const roadSpace = selectSpace.availableSpaces[0];
-    expect(roadSpace.tile).is.undefined;
-    expect(roadSpace.player).is.undefined;
+    runAllActions(game);
     expect(moonData.logisticRate).eq(0);
+    assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
 
-    deferredAction.execute()!.cb(roadSpace);
-    expect(roadSpace.tile!.tileType).eq(TileType.MOON_ROAD);
-    expect(roadSpace.player).eq(player);
-
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(moonData.logisticRate).eq(1);
   });
 });

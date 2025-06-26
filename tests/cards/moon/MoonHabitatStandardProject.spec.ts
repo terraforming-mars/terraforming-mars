@@ -1,24 +1,24 @@
-import {Game} from '../../../src/server/Game';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {expect} from 'chai';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {cast, testRedsCosts} from '../../TestingUtils';
+import {cast, runAllActions, testRedsCosts} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MoonHabitatStandardProject} from '../../../src/server/cards/moon/MoonHabitatStandardProject';
-import {expect} from 'chai';
 import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectPaymentDeferred';
-import {PlaceMoonHabitatTile} from '../../../src/server/moon/PlaceMoonHabitatTile';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
-import {Phase} from '../../../src/common/Phase';
+import {assertPlaceTile} from '../../assertions';
+import {TileType} from '../../../src/common/TileType';
 
 describe('MoonHabitatStandardProject', () => {
-  let game: Game;
+  let game: IGame;
   let player: TestPlayer;
-  let moonData: IMoonData;
+  let moonData: MoonData;
   let card: MoonHabitatStandardProject;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [game, player] = testGame(1, {moonExpansion: true});
     moonData = MoonExpansion.moonData(game);
     card = new MoonHabitatStandardProject();
   });
@@ -52,37 +52,32 @@ describe('MoonHabitatStandardProject', () => {
 
   it('act', () => {
     player.titanium = 3;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(player.production.megacredits).eq(0);
+    player.megaCredits = 22;
 
-    card.action(player);
-    const payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
-    payAction.options.afterPay!();
+    cast(card.action(player), undefined);
+    runAllActions(game);
 
     expect(player.titanium).eq(2);
     expect(player.production.megacredits).eq(1);
+    expect(moonData.habitatRate).eq(0);
 
-    expect(moonData.colonyRate).eq(0);
+    assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_HABITAT);
 
-    const placeTileAction = cast(game.deferredActions.peek(), PlaceMoonHabitatTile);
-    placeTileAction.execute()!.cb(moonData.moon.spaces[2]);
-
-    expect(moonData.colonyRate).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(moonData.habitatRate).eq(1);
+    expect(player.terraformRating).eq(15);
   });
 
-  it('can act when Reds are in power.', () => {
-    const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, {moonExpansion: true, turmoilExtension: true});
+  it('can act when Reds are in power', () => {
+    const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true});
     const moonData = MoonExpansion.moonData(game);
-    game.phase = Phase.ACTION;
-
 
     // Card requirements
     player.titanium = 1;
 
     testRedsCosts(() => card.canAct(player), player, card.cost, 3);
-    moonData.colonyRate = 8;
+    moonData.habitatRate = 8;
     testRedsCosts(() => card.canAct(player), player, card.cost, 0);
   });
 });

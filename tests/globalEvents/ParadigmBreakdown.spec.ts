@@ -9,19 +9,19 @@ import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {cast, runAllActions} from '../TestingUtils';
 import {testGame} from '../TestGame';
 
-describe('ParadigmBreakdown', function() {
-  it('resolve play', function() {
+describe('ParadigmBreakdown', () => {
+  it('resolve play', () => {
     const card = new ParadigmBreakdown();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = Turmoil.newInstance(game);
 
     turmoil.initGlobalEvent(game);
-    turmoil.chairman = player2.id;
+    turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
-    turmoil.dominantParty.partyLeader = player2.id;
-    turmoil.dominantParty.delegates.add(player.id);
-    turmoil.dominantParty.delegates.add(player2.id);
-    turmoil.dominantParty.delegates.add(player2.id);
+    turmoil.dominantParty.partyLeader = player2;
+    turmoil.dominantParty.delegates.add(player);
+    turmoil.dominantParty.delegates.add(player2);
+    turmoil.dominantParty.delegates.add(player2);
 
     const asteroid = new Asteroid();
     const dustSeals = new DustSeals();

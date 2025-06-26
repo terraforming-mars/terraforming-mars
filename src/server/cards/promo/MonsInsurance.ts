@@ -1,17 +1,15 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
-import {Card} from '../Card';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class MonsInsurance extends Card implements ICorporationCard {
+export class MonsInsurance extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.MONS_INSURANCE,
       startingMegaCredits: 48,
 
@@ -39,10 +37,8 @@ export class MonsInsurance extends Card implements ICorporationCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    for (const p of player.game.getPlayers()) {
-      if (p.id !== player.id) {
-        p.production.add(Resource.MEGACREDITS, -2, {log: true});
-      }
+    for (const p of player.getOpponents()) {
+      p.production.add(Resource.MEGACREDITS, -2, {log: true});
     }
     player.game.monsInsuranceOwner = player.id;
     return undefined;

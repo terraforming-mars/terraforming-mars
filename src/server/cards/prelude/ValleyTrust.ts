@@ -1,18 +1,14 @@
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 import {PreludesExpansion} from '../../preludes/PreludesExpansion';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class ValleyTrust extends Card implements ICorporationCard {
+export class ValleyTrust extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
-      type: CardType.CORPORATION,
       name: CardName.VALLEY_TRUST,
       tags: [Tag.EARTH],
       startingMegaCredits: 37,
@@ -27,7 +23,7 @@ export class ValleyTrust extends Card implements ICorporationCard {
           b.megacredits(37).nbsp.prelude().asterix();
           b.corpBox('effect', (ce) => {
             ce.effect('When you play a science tag, you pay 2M€ less for it.', (eb) => {
-              eb.science(1, {played}).startEffect.megacredits(-2);
+              eb.tag(Tag.SCIENCE).startEffect.megacredits(-2);
             });
           });
         }),
@@ -35,18 +31,10 @@ export class ValleyTrust extends Card implements ICorporationCard {
     });
   }
 
-  public override getCardDiscount(player: IPlayer, card: IProjectCard) {
-    // TODO(chosta) -> improve once the discounts property is given a go
-    return player.tags.cardTagCount(card, Tag.SCIENCE) * 2;
-  }
-
-  public initialAction(player: IPlayer) {
+  // TODO(kberg): find a way to feed warnings for initialAction.
+  public override initialAction(player: IPlayer) {
     const game = player.game;
-    const cards = [
-      game.preludeDeck.draw(game),
-      game.preludeDeck.draw(game),
-      game.preludeDeck.draw(game),
-    ];
-    return PreludesExpansion.playPrelude(player, cards);
+    const cards = game.preludeDeck.drawN(game, 3);
+    return PreludesExpansion.selectPreludeToPlay(player, cards, 'discard');
   }
 }

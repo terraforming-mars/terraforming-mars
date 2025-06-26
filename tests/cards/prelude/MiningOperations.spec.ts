@@ -3,10 +3,10 @@ import {MiningOperations} from '../../../src/server/cards/prelude/MiningOperatio
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('MiningOperations', function() {
-  it('Should play', function() {
+describe('MiningOperations', () => {
+  it('Should play', () => {
     const card = new MiningOperations();
-    const [, player] = testGame(1);
+    const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);
     expect(player.production.steel).to.eq(2);
     expect(player.steel).to.eq(4);

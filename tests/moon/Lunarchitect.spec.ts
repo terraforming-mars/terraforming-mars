@@ -1,21 +1,19 @@
 import {expect} from 'chai';
 import {Lunarchitect} from '../../src/server/moon/Lunarchitect';
-import {Game} from '../../src/server/Game';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
 import {TestPlayer} from '../TestPlayer';
 import {TileType} from '../../src/common/TileType';
+import {testGame} from '../TestGame';
 
-describe('Lunarchitect', function() {
+describe('Lunarchitect', () => {
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    otherPlayer = TestPlayer.PINK.newPlayer();
-    Game.newInstance('gameid', [player, otherPlayer], player, {moonExpansion: true});
+    [/* game */, player, otherPlayer] = testGame(2, {moonExpansion: true});
   });
 
-  it('Basic test', function() {
+  it('Basic test', () => {
     const milestone = new Lunarchitect();
     expect(milestone.canClaim(player)).is.not.true;
     MoonExpansion.addTile(player, 'm01', {tileType: TileType.MOON_MINE});
@@ -32,8 +30,7 @@ describe('Lunarchitect', function() {
     expect(milestone.canClaim(player)).is.true;
   });
 
-
-  it('Other player tokens do not count', function() {
+  it('Other player tokens do not count', () => {
     const milestone = new Lunarchitect();
     expect(milestone.canClaim(player)).is.not.true;
     MoonExpansion.addTile(player, 'm01', {tileType: TileType.MOON_MINE});

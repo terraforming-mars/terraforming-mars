@@ -2,20 +2,20 @@ import {expect} from 'chai';
 import {testGame} from '../../TestGame';
 import {VenusFirst} from '../../../src/server/cards/pathfinders/VenusFirst';
 import {Tag} from '../../../src/common/cards/Tag';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('VenusFirst', function() {
+describe('VenusFirst', () => {
   let card: VenusFirst;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new VenusFirst();
     [game, player] = testGame(1, {venusNextExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
     expect(game.getVenusScaleLevel()).to.eq(4);
     expect(player.cardsInHand).has.lengthOf(2);

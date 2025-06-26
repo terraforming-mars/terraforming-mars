@@ -7,24 +7,24 @@ import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
-describe('Teractor', function() {
+describe('Teractor', () => {
   let card: Teractor;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Teractor();
-    [/* skipped */, player] = testGame(2);
+    [/* game */, player] = testGame(2);
 
     cast(card.play(player), undefined);
   });
 
 
-  it('Should play', function() {
+  it('Should play', () => {
     expect(card.getCardDiscount(player, new Cartel())).to.eq(3);
     expect(card.getCardDiscount(player, new Birds())).to.eq(0);
   });
 
-  it('Discounts Luna Governor correctly', function() {
+  it('Discounts Luna Governor correctly', () => {
     expect(card.getCardDiscount(player, new LunaGovernor())).to.eq(6);
   });
 });

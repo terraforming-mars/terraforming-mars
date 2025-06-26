@@ -1,25 +1,25 @@
 import {expect} from 'chai';
 import {UndergroundDetonations} from '../../../src/server/cards/base/UndergroundDetonations';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('UndergroundDetonations', function() {
+describe('UndergroundDetonations', () => {
   let card: UndergroundDetonations;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new UndergroundDetonations();
     [game, player] = testGame(2);
   });
 
-  it('Can not act', function() {
+  it('Can not act', () => {
     player.megaCredits = 9;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.megaCredits = 10;
     expect(card.canAct(player)).is.true;
 

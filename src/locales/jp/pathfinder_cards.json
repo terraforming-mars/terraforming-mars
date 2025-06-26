@@ -1,0 +1,257 @@
+{
+  "Advanced Power Grid": "先進的電力会社",
+  "(Increase your energy production 2 steps. Increase your M€ production 1 step per power tag you have, including this.)": "(電力産出+2. 電力タグの数分、MC産出+1.)",
+
+  "Agro-Drones": "農業用ドローン",
+  "(Action: Spend 1 steel and 1 energy to gain 3 plants.)": "(アクション：1建材と1電力を支払い、3植物獲得.)",
+  "(Requires -18° C or warmer.)": "(条件：温度-18℃以上.)",
+
+  "Anthozoa": "サンゴ礁",
+  "(Action: Spend 1 plant to add an animal to this card.)": "(アクション：1植物を支払い、1動物獲得)",
+  "(Requires 3 oceans on Mars. 1 VP per 2 animals on this card.)": "(条件：海洋3枚以上. このカード上の2動物毎に1VP)",
+
+  "Asteroid Resources": "小惑星資源",
+  "(Spend 3 energy. Either increase your steel and titanium production one step, OR place an ocean, and gain 2 steel and one titanium.)": "(3電力支払う. 建材産出+1、チタン産出+1 または 海洋1枚配置し、2建材と1チタン獲得.)",
+
+  "Botanical Experience": "植物学知識",
+  "(EFFECT: Whenever a greenery tile is placed, add 1 data on this card.) (EFFECT: Whenever this card has at least 3 data, automatically remove 3 data to raise your plant production 1 step.) (EFFECT: Players may remove your plants, but you only lose half, rounded up.)": "(効果：火星上に緑地タイルが配置された時、このカード上に1データ追加.)(効果：このカード上に3データたまった時、このカード上から3データ除去し植物産出+1.)(効果：他のプレイヤーがあなたの植物を除去する時、効果を半分にする(小数点以下は四捨五入).)",
+  "(Requires one greenery tile on Mars.)": "(条件：火星上に緑地タイル1つ以上)",
+
+  "Breeding Farms": "飼育場",
+  "(Action: Spend 1 plant to add 1 animal to ANY card.)": "(アクション：1植物を支払い、1動物獲得.)",
+  "(Requires 1 science tag and 1 animal tag. Raise the temperature 1 step.)": "(条件：科学タグ1つ以上、動物タグ1つ以上. 温度+1段階.)",
+
+  "Cassini Station": "カッシーニ・ステーション",
+  "(Increase your energy production 1 step for every colony in play. Add 2 floaters to ANY card OR add 3 data to ANY card.)": "(全プレイヤーのコロニーの数分、電力産出+1. 2浮遊体 または 3データ獲得.)",
+
+  "Ceres Spaceport": "セレス宇宙港",
+  "(Increase your M€ production 2 steps, and titanium production 1 step for every 2 Jovian tags (including these.) Draw a card. Place an ocean tile. Place a city tile ON THE RESERVED AREA.)": "(MC産出+2. 木星タグの数分、チタン産出+1. 1ドロー. 海洋1枚配置. 予定地に都市タイルを配置.)",
+
+  "Charity Donation": "チャリティ寄付",
+  "Reveal cards from the deck equal to the player count plus 1.": "プレイ人数+1枚を山札から公開する.",
+  "In player order starting with you, each player takes one card in hand. Discard the remaining card.": "あなたから順に各プレイヤーは、公開されたカードの中から1枚獲得. 残りを捨て札にする.",
+
+  "Communication Center": "データセンター",
+  "(Effect: Whenever ANY PLAYER plays an event, add 1 data to this card.)": "(効果：イベントカードがプレイされた時、このカード上に1データ追加.)",
+  "(Effect: Remove 3 data to draw a card automatically.)": "(効果：このカード上に3データたまった時、このカード上から3データ除去し1ドロー.)",
+  "(Decrease your energy production 1 step. Place 2 data on this card.)": "(電力産出-1. このカード上に2データ追加.)",
+
+  "Controlled Bloom": "開花制御",
+  "(Requires 3 oceans. Add 3 microbes to ANY card. Gain 3 plants.)": "(条件：海洋3枚以上. 3微生物獲得. 3植物獲得.)",
+
+  "Coordinated Raid": "組織的襲撃",
+  "(Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.)": "(条件：所有コロニー1つ以上. 未使用の交易艦隊で交易をする(すでに交易されている天体でも可). これで発生する他のプレイヤーのコロニー・ボーナスを代わりに獲得する.)",
+
+  "Crashlanding": "不時着",
+  "(Place AND ORIENT this tile on a non-reserved space adjacent to no more than 1 city.": "(特殊タイルを非予定地かつ都市の隣接数が1つ以下にするように配置.",
+  "Crashsite grants an ADJACENCY BONUS of 1 data, and either 1 steel or 1 titanium.": "このタイルは1データと、1建材 または 1チタンの隣接ボーナスがある.",
+  "When placing Crashsite, for each tile you own next it, gain those bonuses.": "すでに配置している所有するタイルに隣接する場合、この隣接ボーナスを獲得.",
+  "Add 1 data to any card. Add 1 resource to any card.)": "1データ獲得. 好きな1資源を好きなカードに追加.",
+
+  "Cryptocurrency": "仮想通貨",
+  "(Action: Spend 1 energy to add 1 data to this card.)": "(アクション：1電力を支払い、このカード上に1データ追加.)",
+  "(Action: Remove all data from this card to gain 3M€ per data removed.)": "(アクション：このカード上から全てのデータを除去し、その数分3MC獲得.)",
+
+  "Cultivation of Venus": "金星の開墾",
+  "(Action: Spend 3 plants to raise Venus 1 step.)": "(アクション：3植物支払い、金星+1段階",
+  "(1 VP for every 2 Venus tags you own.)": "(金星タグ2つ毎に1VP.)",
+
+  "Cyanobacteria": "シアノバクテリア",
+  "(Raise the oxygen level 1%. For every ocean tile, add a microbe to ANY card.)": "(酸素濃度+1段階. 海洋タイルの数分、1微生物獲得.)",
+
+  "Data Leak": "データリーク",
+  "(Add 5 data to ANY card.)": "(5データ獲得.)",
+
+  "Declaration of Independence": "独立宣言",
+  "(Requires that you have at least 6 Mars tags in play. Place 2 delegates in any party.)": "(条件：火星タグ6つ以上. 任意の政党に代議員を2名配置.)",
+
+  "Designed Organisms": "設計された生物",
+  "(Requires 5 science tags. Increase your plant production 2 steps. Gain 3 plants. Add 3 microbes to ANY card. Add 1 animal to ANY card.)": "(条件：科学タグ5つ以上. 植物産出+2. 3植物獲得. 3微生物獲得. 1動物獲得.)",
+
+  "Dust Storm": "砂塵嵐",
+  "(Every player loses all energy. Raise the temperature 2 steps.)": "(全プレイヤーは電力を全て失う. 温度+2段階.)",
+
+  "Dyson Screens": "ダイソンスクリーン",
+  "(Action: Pay 2 titanium to raise your heat and energy production 1 step each.)": "(アクション：2チタン支払い、温熱産出+1. 電力産出+1.)",
+  "(Raise the temperature 1 step. Draw a card. Place a city tile ON THE RESERVED AREA. Raise your energy and heat production 2 steps.)": "(温度+1段階. 1ドロー. 予定地に都市タイルを配置. 温熱産出+2. 電力産出+2.)",
+
+  "Early Expedition": "先発調査隊",
+  "(Temperature must be -18 C or lower. Decrease your energy production 1 step and Raise your M€ production 3 steps. Add 1 data to ANY card. Place a city tile on Mars NEXT TO NO OTHER TILE.)": "(条件：-18℃以下. 電力産出-1. MC産出+3. 1データ獲得. 他タイルに隣接しないように都市タイルを配置.)",
+
+  "Economic Espionage": "産業スパイ",
+  "(Action: Spend 2 M€ to Add 1 data to ANY card.)": "(アクション：2MC支払い、1データ獲得.)",
+  "(1VP for every 3 data here.)": "(このカード上の3データ毎に1VP.)",
+
+  "Economic Help": "経済支援",
+  "(Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. Increase your M€ production 1 step)": "(影響度が最も低い惑星の影響度+3. 該当するものが複数ある場合、その全ての影響度+2. MC産出+1.)",
+
+  "Expedition to the Surface - Venus": "金星の地表調査",
+  "(Draw 2 cards. Raise Venus 1 step. Gain 1M€ for each of your Venus tags, including this.)": "(2ドロー. 金星+1段階. 金星タグ1つ毎に、1MC獲得.)",
+
+  "Flat Mars Theory": "火星平面説",
+  "GENERATION": "世代数",
+  "(Requires maximum 1 science tag. Increase your M€ production 1 step for every generation played so far.)": "(条件：科学タグ1つ以下. 世代数の数分、MC産出+1.)",
+
+  "Floater-Urbanism": "浮遊体譲地",
+  "(Action: Spend 1 floater from any card to add 1 Venusian habitat on this card.)": "(アクション：所有するカードから1浮遊体除去し、このカードに1金星生息地を追加.)",
+  "1 VP for every Venusian habitat on this card.": "このカード上の1金星生息地毎に1VP.",
+  "(Requires 4 Venus tags.)": "(条件：金星タグ4つ以上.)",
+
+  "Geological Expedition": "地質調査隊",
+  "(Effect: When you place a tile ON MARS gain 1 additional resource on the space. If the space has no bonus, gain 1 steel.)": "(効果：火星上でタイルの配置ボーナスを貰うとき時、追加でその資源を1つ獲得. 配置ボーナスがない時、1建材獲得.)",
+
+  "High Temp. Superconductors": "高温超伝導体",
+  "(Effect: When playing a power card, THE STANDARD PROJECT POWER PLANT, OR THE KELVINIST RULING POLICY ACTION, pay 3M€ less.)": "(効果：電力タグ または 標準プロジェクトの発電所の設置 または 汎ケルビン党の政策をプレイ時、プレイコスト-3MC.)",
+  "(Requires Kelvinists are ruling or you have 2 delegates there. Increase your energy production 2 steps.)": "(条件：汎ケルビン党が与党か、そこに2議席ある. 電力産出+2.)",
+
+  "Huygens Observatory": "ホイヘンス天文台",
+  "(Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that is already on a colony tile, but you may not trade with the tile that fleet came from. Gain 1 TR.)": "(コロニー1つ配置(既に配置済みの天体でも可). 無料で交易する(すでに使用した交易艦隊の使用可). TR+1段階.)",
+
+  "Hydrogen Processing Plant": "水素処理プラント",
+  "(Oxygen level must be 3% or higher. Decrease oxygen level 1% Raise your energy production 1 step for every two ocean tiles on Mars.)": "(条件：酸素3%以上. 海洋タイル2枚毎に、電力産出+1. 酸素濃度-1段階.)",
+
+  "Interplanetary Transport": "惑星間輸送",
+  "(Increase your M€ production 1 step for every offworld city tile.)": "(火星外の都市タイルの数分、MC産出+1.)",
+
+  "Kickstarter": "キックスターター",
+  "(Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 3 steps in total.)": "(惑星タグを1つ選択. このカードはその選択したタグとして扱う. 選択した惑星の影響度+3段階.)",
+
+  "Last Resort Ingenuity": "独創的な最終手段",
+  "The next card you play this generation can be paid for with steel or titanium despite its tags.": "次にプレイするカードのコストはタグに関わらず、建材、チタンで支払うことができる.",
+
+  "Lobby Halls": "ロビー・ホール",
+  "(Increase your M€ production 2 steps. Place 1 delegate in any party. Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 1 step.)": "(MC産出+2. 任意の政党に代議員を1名配置. 惑星タグを1つ選択. このカードはその選択したタグとして扱う. 選択した惑星の影響度+1段階.)",
+
+  "Lunar Embassy": "月大使館",
+  "(Increase your M€ production 3 steps, and plant production 1 step for every 2 Earth tags (including this.) Draw a card. Place a city tile ON THE RESERVED AREA.)": "(MC産出+3. 地球タグ2つ毎に植物産出+1. 1ドロー. 予定地に都市タイルを配置.)",
+
+  "Luxury Estate": "高級住宅",
+  "(Oxygen must be 7% or greater. Gain 1 titanium for each city tile and greenery tile you own.)": "(条件：酸素7%以上. 所有している都市タイルと緑地タイルの合計数分、1チタン獲得.)",
+
+  "Martian Culture": "火星文明",
+  "(Action: Add 1 data to ANY card.)": "(アクション：1データ獲得)",
+  "(Requires any 2 Mars tags in play. 1 VP for every 2 data here.)": "(条件：全プレイヤーの火星タグ2つ以上. このカード上の2データ毎に1VP)",
+
+  "Martian Dust Processing Plant": "廃棄物処理施設",
+  "(Decrease your energy production 1 step, and raise your steel production 2 steps. Gain 1 TR.)": "(電力産出-1. 建材産出+2. TR+1段階.)",
+
+  "Martian Monuments": "火星記念碑",
+  "(Requires that you own a city ON MARS. Raise your M€ production 1 step for every Mars tag you own (including this.))": "(条件：火星上に都市1つ以上所持. 火星タグの数分、MC産出+1.)",
+
+  "Martian Nature Wonders": "火星の神秘",
+  "(Place a neutral player cube on a non-reserved space. No tile can be placed on that space this game. Gather any bonus on that space, but no bonuses from adjacent spaces. Add 2 data to ANY card.)": "(非予定地に中立のプレイヤーマーカーを配置し、配置ボーナスを獲得(隣接ボーナスは貰えない). 2データ獲得.)",
+
+  "Martian Repository": "火星博物館",
+  "(Effect: For every science or Mars tag you play (including these) add 1 data to this card.)": "(効果：科学タグ、火星タグをプレイ時、このカード上に1データ追加.)",
+  "(Decrease your energy production 1 step. 1 VP for every 3 data here.)": "(電力産出-1. このカード上の3データ毎に1VP.)",
+
+  "Microbiology Patents": "微生物学特許",
+  "(Effect: After you play a card with a microbe tag, increase your M€ production 1 step.)": "(効果：微生物タグをプレイ時、MC産出+1.)",
+
+  "Museum of Early Colonisation": "入植歴史記念館",
+  "(Requires 1 ocean, 1 city and one greenery on Mars. Decrease your energy production 1 step. Raise your steel, titanium, and plant production 1 step. Gain 1 TR.)": "(条件：海洋、都市、緑地がそれぞれ1つ以上. 電力産出-1. 建材産出+1. チタン産出+1. 植物産出+1. TR+1段階.)",
+
+  "New Venice": "ニュー・ベニス",
+  "(Requires 3 ocean tiles. Lose 2 plants. Increase your energy production 1 step and your M€ production 2 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.)": "(条件：海洋3枚以上. 2植物を支払う. 電力産出+1. MC産出+2. 特殊タイルを海洋タイルに重ねて配置. このタイルは海洋・都市・特殊タイルとして数える.)",
+
+  "Nobel Labs": "ノーベル研究所",
+  "(Action: Add 2 microbes OR 2 data OR 2 floaters to ANY card.)": "(アクション：2微生物 または 2データ または 2浮遊体獲得.)",
+  "(Requires 4 science tags.)": "(条件：科学タグ4つ以上.)",
+
+  "Orbital Laboratories": "軌道研究所",
+  "(Increase your plant production 2 steps. Gain 1 plant.)": "(植物産出+2. 1植物獲得.)",
+
+  "Oumuamua Type Object Survey": "恒星間小惑星の形状調査",
+  "play ": "プレイ ",
+  "Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.": "2ドローし、それを公開する. 1枚目に科学 もしくは 微生物タグがある場合、条件とコストを無視してプレイ. そうでなく宇宙タグがある場合、電力産出+3. いずれのタグもない場合、2枚目で同様の処理をする.",
+  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card.)": "(条件：宇宙タグ1つ以上、科学タグ1つ以上. 2データ獲得)",
+
+  "Ozone Generators": "オゾン生成器",
+  "(Action: Spend 3 energy to gain 1 TR.)": "(アクション：3電力支払い、TR+1段階.)",
+  "(Requires 6% Oxygen.)": "(条件：酸素6%以上)",
+
+  "Pollinators": "送粉者",
+  "(Action: Add 1 animal on this card)": "(アクション：このカード上に1動物追加.)",
+  "(Requires 3 plant tags. Raise your plant production 1 step and your M€ production 2 steps.)": "(条件：植物タグ3つ以上. 植物産出+1. MC産出+2.)",
+
+  "Power Plant:Pathfinders": "大規模火力発電所",
+  "(Increase your heat production 2 steps and your energy production 1 step.)": "(温熱産出+2. 電力産出+1.)",
+
+  "Prefabrication of Human Habitats": "仮設住宅",
+  "(Effect: Cards with a city tag cost 2M€ less.)": "(効果：都市タグカードのプレイコスト-2MC)",
+  "(Effect: The CITY STANDARD PROJECT costs 2M€ less. STEEL MAY BE USED as if you were playing a building card.)": "(効果：標準プロジェクトの都市化のプレイコスト-2MC. 建材での支払いが可能.)",
+  "(Requires that you have steel production.)": "(条件：建材産出1以上.)",
+
+  "Private Security": "民間警備会社",
+  "Opponents may not remove your basic resource production": "効果：他のプレイヤーは、あなたの産出を下げられない.",
+
+  "Public Sponsored Grant": "公的助成金",
+  "(Requires Scientists are ruling or that you have 2 delegates there. All players lose 2M€. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.)": "(条件：科学万能党が与党か、そこに2議席ある. 他の全プレイヤーは2MC除去. 都市、ワイルド、惑星タグ以外のタグを選択し、そのタグのカードを2枚獲得.)",
+
+  "Rare-Earth Elements": "希土類元素",
+  "(Increase your M€ production by 1 for every special tile you own on Mars.)": "(所有する火星上の特殊タイル数分、MC産出+1.)",
+
+  "Red City": "紅の街",
+  "(Requires that Reds are ruling or that you have 2 delegates there. -1 energy prod, +2 M€ prod. Place the special tile on Mars ADJACENT TO NO GREENERY. NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space (or hazard) next to this tile.)": "(条件：赤き惑星党が与党か、そこに2議席ある. 電力産出-1. MC産出+2. 特殊タイルを緑地に隣接しないように配置. このタイルの隣に緑地を配置できない. このタイルの周辺の空きマス1つ(または災害タイル1枚)毎に1VP)",
+
+  "Return to Abandoned Technology": "放棄技術への回帰",
+  "Draw the top 4 cards from the discard pile. Choose 2 to keep and discard the rest.": "捨て札から4枚見る. その内、2枚を獲得し残りを捨て札に戻す.",
+
+  "Rich Deposits": "豊富な埋蔵量",
+  "(Requires 2 science tags. Increase your steel production 3 steps.)": "(条件：科学タグ2つ以上. 建材産出+3.)",
+
+  "Secret Labs": "極秘研究所",
+  "(Requires 1 science tag and 1 Jovian tag. Place an ocean tile. Add 2 microbes to ANY card. OR Raise temperature 1 step. Gain 3 plants. OR Raise oxygen level 1 step. Add 2 floaters to ANY card.)": "(条件：科学タグ1つ以上、木星タグ1つ以上. 海洋1枚配置し、2微生物獲得 または 気温+1段階し、3植物獲得 または 酸素濃度+1段階し、2浮遊体獲得.)",
+
+  "Small Comet": "小型彗星",
+  "(Every player loses 2 plants. Raise the temperature 1 step. Raise the oxygen 1 step. Place an ocean ON AN AREA NOT RESERVED FOR OCEAN. Gain 1 titanium.)": "(全プレイヤーは2植物除去. 気温+1段階. 酸素濃度+1段階. 海洋予定地以外に海洋1枚配置. 1チタン獲得.)",
+
+  "Small Open Pit Mine": "小さな露天掘り鉱山",
+  "(Increase your steel production 2 steps OR increase your titanium production 1 step.)": "(建材産出+2 または チタン産出+1.)",
+
+  "Social Events": "ソーシャル・イベント",
+  "(Gain 1 TR for every 2 Mars tags you have (including this one.))": "(火星タグ2つ毎にTR+1段階.)",
+
+  "Soil Detoxification": "土壌の無毒化",
+  "(Effect: Using the STANDARD GREENERY ACTION costs 1 plant less.)": "(効果：植物で緑地を配置する時、消費植物が1少なくなる.)",
+  "(Requires that Greens are ruling or you have 2 delegates there. Increase your plant production 1 step)": "(条件：緑の党が与党か、そこに2議席ある. 植物産出+1.)",
+
+  "Solar Storm": "太陽フレア",
+  "(Every player loses 2 plants. Remove up to 3 data from any player. Raise your heat production 1 step. Raise the temperature 1 step.)": "(全プレイヤーは2植物除去. 望むならプレイヤー1人から最大3データ除去. 温熱産出+1. 気温+1段階.)",
+
+  "Solarpedia": "ソーラーペディア",
+  "(Action: Add 2 data to ANY card.)": "(アクション：2データ獲得.)",
+  "(Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.)": "(条件：金星タグ1つ以上、木星タグ1つ以上、地球タグ1つ以上、火星タグ1つ以上. 2データ獲得. このカード上の6データ毎に1VP)",
+
+  "Space Debris Cleaning Operation": "スペースデブリの清掃",
+  "(Requires any 4 space tags in play. Gain 3 titanium. Add 1 resource to ANY card (not cards that take ANIMAL or SCIENCE resources.) Add 1 data to ANY card. Draw 1 card.)": "(条件：全プレイヤーの宇宙タグ4つ以上. 3チタン獲得. 動物と科学リソース以外の好きな1資源を好きなカードに追加. 1データ獲得. 1ドロー.)",
+
+  "Space Relay": "宇宙中継",
+  "(Effect: Whenever you play a card with a Jovian tag, including this, draw a card.)": "(効果：木星タグをプレイ時、1ドロー.)",
+  "(Increase your M€ production 1 step.)": "(MC産出+1)",
+
+  "Specialized Settlement": "環境適応型開拓地",
+  "(Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile on Mars. Increase your production by 1 of a resource on the map gained by placement bonus.)": "(電力産出-1. MC産出+3. 都市タイルを配置. 配置ボーナスと同じ資源1種類の産出+1.)",
+
+  "Terraforming Control Station": "テラフォーミング制御本部",
+  "(Effect: When you play a Venus or Mars tag, pay 2 M€ less.)": "(効果：金星、火星タグカードのプレイコスト-2MC.)",
+  "(Raise your TR 2 steps.)": "(TR+2段階.)",
+
+  "Terraforming Robots": "テラフォーミング・ロボット",
+  "(Effect: When you play a Mars tag, add 1 specialized robot on this card.)": "(効果：火星タグをプレイ時、このカード上に1専門ロボット追加.)",
+  "1 VP for every specialized robot on this card.": "このカード上の1専門ロボット毎に1VP.",
+
+  "Think Tank": "シンクタンク",
+  "(Action: Spend 2 M€ to place 1 data on any card.)": "(アクション：2MC支払い、1データ獲得.)",
+  "+/-1 global parameter": "グローバルパラメーター参照 +/-1",
+  "(Effect: When playing a card, you can remove data from this card to change the card's global requirement by 1 step for every 1 data removed.)": "(効果：カードをプレイ時、このカード上の任意の数のデータを除去し、その数分グローバルパラメータの条件を1段階上下できる.)",
+
+  "Venera Base": "ベネラ基地",
+  "(Action: Add 1 floater to ANY Venus card)": "(アクション：金星タグカード上に1浮遊体追加.)",
+  "1 VP per 2 Venus tags you have.": "金星タグ2つ毎に1VP.",
+  "Requires Unity is ruling or that you have 2 delegates there. Raise your M€ production 3 steps and place a city tile ON THE RESERVED AREA.": "条件：太陽系融和党が与党か、そこに2議席ある. MC産出+3. 予定地に都市タイルを配置.",
+
+  "Wetlands": "湿原",
+  "(Requires 2 ocean tiles. Lose 4 plants. Place this tile on an UNRESERVED SPACE ADJACENT TO AT LEAST 2 OCEANS. Raise oxygen 1 step. Gain 1 TR.)": "(条件：海洋2枚以上. 4植物を支払う. 特殊タイルを海洋2枚以上に隣接して配置. 酸素濃度+1段階. TR+1段階.)",
+  "(Effect: Wetlands counts as a greenery tile and an ocean tile, except it can't be covered and is not one of the 9 oceans required to end the game.)": "(効果：このタイルは海洋・緑地・特殊タイルとして数える(海洋の終了条件には数えない).)"
+}

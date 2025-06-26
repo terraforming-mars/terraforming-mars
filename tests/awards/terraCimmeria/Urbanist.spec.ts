@@ -1,25 +1,17 @@
 import {expect} from 'chai';
 import {Urbanist} from '../../../src/server/awards/terraCimmeria/Urbanist';
-import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {addCity, addGreenery, cast, churnPlay, maxOutOceans} from '../../TestingUtils';
-import {Game} from '../../../src/server/Game';
+import {addCity, addGreenery, cast, churn, maxOutOceans} from '../../TestingUtils';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Capital} from '../../../src/server/cards/base/Capital';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {RedCity} from '../../../src/server/cards/pathfinders/RedCity';
 
 describe('Urbanist', () => {
-  let award: Urbanist;
-  let player: TestPlayer;
-  let game: Game;
-
-  beforeEach(() => {
-    award = new Urbanist();
-    [game, player] = testGame(2);
-  });
+  const award = new Urbanist();
 
   it('score', () => {
+    const [game, player] = testGame(2);
     const [citySpace] = game.board.getAvailableSpacesForCity(player);
     addCity(player, citySpace.id);
 
@@ -40,9 +32,10 @@ describe('Urbanist', () => {
   });
 
   it('Score with Capital', () => {
+    const [game, player] = testGame(2);
     const oceanSpaces = maxOutOceans(player);
     const capital = new Capital();
-    const selectSpace = cast(churnPlay(capital, player), SelectSpace);
+    const selectSpace = cast(churn(capital.play(player), player), SelectSpace);
     player.playedCards.push(capital);
     const citySpace = game.board.getAdjacentSpaces(oceanSpaces[0])[1];
     expect(citySpace.spaceType).to.eq(SpaceType.LAND);
@@ -53,14 +46,19 @@ describe('Urbanist', () => {
 
     expect(capital.getVictoryPoints(player)).to.eq(1);
     expect(award.getScore(player)).eq(1);
+
+    const greeneries = game.board.getAdjacentSpaces(citySpace).filter((space) => space.tile === undefined);
+    addGreenery(player, greeneries[0].id);
+    expect(award.getScore(player)).eq(2);
   });
 
 
   it('Score with Red City', () => {
+    const [/* game */, player] = testGame(2);
     const redCity = new RedCity();
-    const selectSpace = cast(churnPlay(redCity, player), SelectSpace);
+    const selectSpace = cast(churn(redCity.play(player), player), SelectSpace);
     player.playedCards.push(redCity);
-    const citySpace = selectSpace.availableSpaces[0];
+    const citySpace = selectSpace.spaces[0];
 
     expect(award.getScore(player)).eq(0);
 

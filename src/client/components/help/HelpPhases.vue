@@ -6,7 +6,10 @@
           <label for="initial-draft" class="first"><span v-i18n>Initial Drafting (optional variant)</span></label>
             <ul>
               <li v-i18n>Draw 3 corporation cards</li>
-              <li v-i18n>Draw 4 prelude cards <div class="expansion-icon expansion-icon-prelude"></div></li>
+              <li>
+                <span v-i18n>Draw 4 prelude cards</span>
+                <div class="expansion-icon expansion-icon-prelude"></div>
+              </li>
               <li v-i18n>Draw 5 project cards. Draft. Pick one card and pass to the player above in turn order. Repeat until you have 5 cards.</li>
               <li v-i18n>Draw 5 more project cards. Draft and pass to the player below in turn order instead.</li>
               <li>
@@ -85,7 +88,7 @@
               <ul>
                 <li><span v-i18n>i. Game end check</span>
                   <ul>
-                    <li v-i18n>If temperature, oxygen, and oceans are maxed, skip the rest of solar phase to the end game phase. </li>
+                    <li v-i18n>If temperature, oxygen, and oceans are maxed, skip the rest of solar phase to the end game phase.</li>
                     <li v-i18n>(If playing solo, the game ends after 14 generations.)</li>
                     <li v-i18n>Solo mode adjustments for expansions:</li>
                     <li v-i18n>• Prelude: The game ends 2 generations earlier.</li>
@@ -139,7 +142,7 @@
             <li v-i18n>In turn order, convert plants to greeneries.</li>
             <li v-i18n>Assign awards</li>
             <li>
-              <span v-i18n> Score: TR + tiles + card + milestones + awards + (1 VP per chairman and party leader</span>
+              <span v-i18n>Score: TR + tiles + card + milestones + awards + (1 VP per chairman and party leader</span>
               <div class="expansion-icon expansion-icon-turmoil"></div>)
             </li>
           </ul>

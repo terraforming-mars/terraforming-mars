@@ -2,6 +2,7 @@ import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
 import {MarsBoard} from '../../boards/MarsBoard';
 import {BoardType} from '../../boards/BoardType';
 import {Space} from '../../boards/Space';
@@ -14,13 +15,14 @@ export class SurveyMission extends PreludeCard {
   constructor() {
     super({
       name: CardName.SURVEY_MISSION,
+      tags: [Tag.MARS],
 
       behavior: {
         stock: {steel: 5},
       },
 
       metadata: {
-        cardNumber: 'P07',
+        cardNumber: 'PfP07',
         renderData: CardRenderer.builder((b) => {
           b.steel(5, {digit});
           b.br;
@@ -78,23 +80,24 @@ export class SurveyMission extends PreludeCard {
     const spaceSet: Set<Space> = new Set(triplets.flat());
     const spaces = Array.from(spaceSet).filter((space) => space.player === undefined);
     spaces.sort((s1, s2) => parseInt(s2.id) - parseInt(s1.id));
-    return new SelectSpace(messages[iteration], spaces, (space) => {
-      space.player = player;
-      player.game.grantSpaceBonuses(player, space);
-      LogHelper.logBoardTileAction(player, space, 'claimed');
-      player.getCorporation(CardName.MINING_GUILD)?.onTilePlaced?.(player, player, space, BoardType.MARS);
+    return new SelectSpace(messages[iteration], spaces)
+      .andThen((space) => {
+        space.player = player;
+        player.game.grantSpaceBonuses(player, space);
+        LogHelper.logBoardTileAction(player, space, 'claimed');
+        player.getPlayedCard(CardName.MINING_GUILD)?.onTilePlaced?.(player, player, space, BoardType.MARS);
 
-      if (iteration === 2) return undefined;
+        if (iteration === 2) return undefined;
 
-      const revisedTriplets = triplets.filter((triplet) => {
-        return triplet[0].id === space.id ||
+        const revisedTriplets = triplets.filter((triplet) => {
+          return triplet[0].id === space.id ||
           triplet[1].id === space.id ||
           triplet[2].id === space.id;
-      });
-      if (revisedTriplets.length === 0) return undefined;
+        });
+        if (revisedTriplets.length === 0) return undefined;
 
-      return this.selectSpace(player, iteration + 1, revisedTriplets);
-    });
+        return this.selectSpace(player, iteration + 1, revisedTriplets);
+      });
   }
 
   public override bespokePlay(player: IPlayer) {

@@ -1,27 +1,23 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {IProjectCard} from '../IProjectCard';
-import {CardType} from '../../../common/cards/CardType';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {ICard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
-import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 
-export class Arklight extends Card implements ICorporationCard {
+export class Arklight extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ARKLIGHT,
       tags: [Tag.ANIMAL],
       startingMegaCredits: 45,
       resourceType: CardResource.ANIMAL,
-      type: CardType.CORPORATION,
       victoryPoints: {resourcesHere: {}, per: 2},
 
       behavior: {
         production: {megacredits: 2},
-        addResources: 1,
       },
 
       metadata: {
@@ -31,7 +27,7 @@ export class Arklight extends Card implements ICorporationCard {
           b.megacredits(45).nbsp.production((pb) => pb.megacredits(2));
           b.corpBox('effect', (ce) => {
             ce.effect('When you play an animal or plant tag, including this, add 1 animal to this card.', (eb) => {
-              eb.animals(1, {played}).slash().plants(1, {played}).startEffect.animals(1);
+              eb.tag(Tag.ANIMAL).slash().tag(Tag.PLANT).startEffect.resource(CardResource.ANIMAL);
             });
             ce.vSpace(); // to offset the description to the top a bit so it can be readable
           });
@@ -40,9 +36,10 @@ export class Arklight extends Card implements ICorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard): void {
-    if (player.isCorporation(CardName.ARKLIGHT)) {
-      player.addResourceTo(this, {qty: card.tags.filter((cardTag) => cardTag === Tag.ANIMAL || cardTag === Tag.PLANT).length, log: true});
+  public onCardPlayedForCorps(player: IPlayer, card: ICard): void {
+    const qty = card.tags.filter((cardTag) => cardTag === Tag.ANIMAL || cardTag === Tag.PLANT).length;
+    if (qty > 0) {
+      player.addResourceTo(this, {qty: qty, log: true});
     }
   }
 }

@@ -14,10 +14,10 @@
 
 import Vue from 'vue';
 import * as constants from '@/common/constants';
-import * as HTTPResponseCode from '@/client/utils/HTTPResponseCode';
 import GameOverview from '@/client/components/admin/GameOverview.vue';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {GameId, ParticipantId} from '@/common/Types';
+import {statusCode} from '@/common/http/statusCode';
 
 type FetchStatus = {
   id: GameId;
@@ -53,7 +53,7 @@ export default Vue.extend({
         alert('Error getting games data');
       };
       xhr.onload = () => {
-        if (xhr.status === HTTPResponseCode.OK) {
+        if (xhr.status === statusCode.ok) {
           const result = xhr.response;
           if (result instanceof Array) {
             result.forEach(function(response: Response) {
@@ -84,7 +84,7 @@ export default Vue.extend({
         this.getGame(idx + 1);
       };
       xhr.onload = () => {
-        if (xhr.status === HTTPResponseCode.OK) {
+        if (xhr.status === statusCode.ok) {
           const result = xhr.response;
           if (result instanceof Object) {
             const game = result as SimpleGameModel;

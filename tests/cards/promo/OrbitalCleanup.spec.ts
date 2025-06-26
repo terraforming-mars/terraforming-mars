@@ -11,27 +11,27 @@ import {BioengineeringEnclosure} from '../../../src/server/cards/ares/Bioenginee
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SCIENTISTS_POLICY_4} from '../../../src/server/turmoil/parties/Scientists';
 
-describe('OrbitalCleanup', function() {
+describe('OrbitalCleanup', () => {
   let card: OrbitalCleanup;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new OrbitalCleanup();
-    [, player] = testGame(1);
+    [/* game */, player] = testGame(1);
   });
 
-  it('Can not play if cannot decrease MC production', function() {
+  it('Can not play if cannot decrease MC production', () => {
     player.production.add(Resource.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     expect(card.canPlay(player)).is.true;
     card.play(player);
     expect(player.production.megacredits).to.eq(-2);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.playedCards.push(new Research());
     player.playedCards.push(new AdvancedAlloys());
     player.playedCards.push(new ResearchCoordination());
@@ -40,20 +40,20 @@ describe('OrbitalCleanup', function() {
     expect(player.megaCredits).to.eq(4);
   });
 
-  it('Should give victory points', function() {
+  it('Should give victory points', () => {
     card.play(player);
     expect(card.getVictoryPoints(player)).to.eq(2);
   });
 
-  it('Turmoil Science Tag Requirements doesnt increase Income', function() {
+  it('Turmoil Science Tag Requirements doesnt increase Income', () => {
     const [game, player] = testGame(2, {ceoExtension: true, turmoilExtension: true});
 
     // Sanity check that Science Ruling Policy is working as intended:
     const bioengineeringEnclosure = new BioengineeringEnclosure(); // Requires 1 science tag
-    expect(player.simpleCanPlay(bioengineeringEnclosure)).is.false;
+    expect(bioengineeringEnclosure.canPlay(player)).is.false;
     setRulingParty(game, PartyName.SCIENTISTS, SCIENTISTS_POLICY_4.id); // Reduce science tag requirements by 1
-    SCIENTISTS_POLICY_4.apply(game);
-    expect(player.simpleCanPlay(bioengineeringEnclosure)).is.true;
+    SCIENTISTS_POLICY_4.onPolicyStart(game);
+    expect(bioengineeringEnclosure.canPlay(player)).is.true;
 
     // Make sure that we do not get 1MC for the Science Ruling Policy
     player.playedCards.push(new Research());

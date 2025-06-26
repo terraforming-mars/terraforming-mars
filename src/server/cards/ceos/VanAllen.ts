@@ -1,5 +1,5 @@
 import {CardName} from '../../../common/cards/CardName';
-import {all, digit} from '../Options';
+import {all} from '../Options';
 import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 
@@ -10,13 +10,12 @@ export class VanAllen extends CeoCard {
       metadata: {
         cardNumber: 'L22',
         renderData: CardRenderer.builder((b) => {
+          b.effect('MILESTONES ALWAYS COST 0 M€ FOR YOU.', (eb) => {
+            eb.plate('Milestones').startEffect.megacredits(1, {text: '0'});
+          });
           b.br;
-          b.milestone().colon().text('=').megacredits(0, {digit});
-          b.br;
-          b.milestone({all}).colon().megacredits(3);
-          b.br.br;
+          b.effect('When any milestone is claimed, gain 3 M€.', (eb) => eb.milestone({all}).startEffect.megacredits(3));
         }),
-        description: 'You may claim milestones for free (you must still meet the requirements). When any milestone is claimed, gain 3 M€.',
       },
     });
   }

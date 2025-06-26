@@ -1,25 +1,31 @@
 <template>
     <div class="cards-filter">
-        <h2 v-i18n>Cards to exclude from the game</h2>
-        <div class="cards-filter-results-cont" v-if="selectedCardNames.length">
-            <div class="cards-filter-result" v-for="cardName in selectedCardNames" v-bind:key="cardName">
+        <h2 v-i18n>{{ title }}</h2>
+        <div class="cards-filter-results-cont" v-if="selected.length">
+            <div class="cards-filter-result" v-for="cardName in selected" v-bind:key="cardName">
                 <label>{{ cardName }}
-                  <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is prelude" v-if="isPrelude(cardName)"></i>
-                  <i class="create-game-expansion-icon expansion-icon-ceo" title="This card is CEO" v-if="isCEO(cardName)"></i>
+                  <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is a prelude" v-if="isPrelude(cardName)"></i>
+                  <i class="create-game-expansion-icon expansion-icon-ceo" title="This card is a CEO" v-if="isCEO(cardName)"></i>
+                  <template v-for="expansion of expansions(cardName)">
+                    <i v-bind:key="expansion" :class="`create-game-expansion-icon expansion-icon-${expansion}`" :title="expansion"></i>
+                  </template>
                 </label>
                 <AppButton size="small" type="close" @click="removeCard(cardName)" />
             </div>
         </div>
         <div class="cards-filter-input">
             <div>
-                <input class="form-input" :placeholder="$t('Start typing the card name to exclude')" v-model="searchTerm" />
+                <input ref="filter" class="form-input" :placeholder="$t(hint)" v-model="searchTerm" />
             </div>
-            <div class="cards-filter-suggest" v-if="foundCardNames.length">
-                <div class="cards-filter-suggest-item" v-for="cardName in foundCardNames" v-bind:key="cardName">
+            <div class="cards-filter-suggest" v-if="searchMatches.length">
+                <div class="cards-filter-suggest-item" v-for="cardName in searchMatches" v-bind:key="cardName">
                     <a href="#" v-on:click.prevent="addCard(cardName)">
                       {{ cardName }}
-                      <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is prelude" v-if="isPrelude(cardName)"></i>
-                      <i class="create-game-expansion-icon expansion-icon-ceo" title="This card is CEO" v-if="isCEO(cardName)"></i>
+                      <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is a Prelude" v-if="isPrelude(cardName)"></i>
+                      <i class="create-game-expansion-icon expansion-icon-ceo" title="This card is a CEO" v-if="isCEO(cardName)"></i>
+                      <template v-for="expansion of expansions(cardName)">
+                        <i v-bind:key="expansion" :class="`create-game-expansion-icon expansion-icon-${expansion}`" :title="expansion"></i>
+                      </template>
                     </a>
                 </div>
             </div>
@@ -29,33 +35,48 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import {WithRefs} from 'vue-typed-refs';
 import {CardName} from '@/common/cards/CardName';
 import AppButton from '@/client/components/common/AppButton.vue';
-import {byType, getCard, getCards, toName} from '@/client/cards/ClientCardManifest';
+import {byType, getCard, getCards} from '@/client/cards/ClientCardManifest';
 import {CardType} from '@/common/cards/CardType';
+import {inplaceRemove, toName} from '@/common/utils/utils';
+import {Expansion} from '@/common/cards/GameModule';
 
-const allItems: Array<CardName> = [
+const ALL_CARDS: Array<CardName> = [
   ...getCards(byType(CardType.AUTOMATED)),
   ...getCards(byType(CardType.ACTIVE)),
   ...getCards(byType(CardType.EVENT)),
-  ...getCards(byType(CardType.PRELUDE)),
   ...getCards(byType(CardType.CEO)),
 ].map(toName)
   .sort((a, b) => a.localeCompare(b));
 
-interface CardsFilterModel {
-    selectedCardNames: Array<CardName>;
-    foundCardNames: Array<CardName>;
-    searchTerm: string;
+type Refs = {
+  filter: HTMLInputElement,
+};
+
+type CardsFilterModel = {
+  selected: Array<CardName>;
+  searchMatches: Array<CardName>;
+  searchTerm: string;
 }
 
-export default Vue.extend({
+export default (Vue as WithRefs<Refs>).extend({
   name: 'CardsFilter',
-  props: {},
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+    hint: {
+      type: String,
+      required: true,
+    },
+  },
   data(): CardsFilterModel {
     return {
-      selectedCardNames: [],
-      foundCardNames: [],
+      selected: [],
+      searchMatches: [],
       searchTerm: '',
     };
   },
@@ -69,39 +90,56 @@ export default Vue.extend({
     isCEO(cardName: CardName) {
       return getCard(cardName)?.type === CardType.CEO;
     },
-    removeCard(cardNameToRemove: CardName) {
-      this.selectedCardNames = this.selectedCardNames.filter((curCardName) => curCardName !== cardNameToRemove).sort();
+    expansions(cardName: CardName): Array<Expansion> {
+      return getCard(cardName)?.compatibility ?? [];
     },
-    addCard(cardNameToAdd: CardName) {
-      if (this.selectedCardNames.includes(cardNameToAdd)) return;
-      this.selectedCardNames.push(cardNameToAdd);
-      this.selectedCardNames.sort();
+    removeCard(cardName: CardName) {
+      inplaceRemove(this.selected, cardName);
+    },
+    addCard(cardName: CardName) {
+      if (this.selected.includes(cardName)) return;
+      this.selected.push(cardName);
+      this.selected.sort();
       this.searchTerm = '';
+      this.$refs.filter.focus();
     },
   },
   watch: {
-    selectedCardNames(value) {
+    selected(value) {
       this.$emit('cards-list-changed', value);
     },
     searchTerm(value: string) {
-      if (value === '') {
-        this.foundCardNames = [];
-        return;
-      }
+      this.searchMatches = [];
+
+      // Allows multiple simultaneous entries
+      // This is case sensitive, as opposed to the standard search
       if (value.indexOf(',') !== -1) {
         const cardNames = new Set(value.split(',').map((c) => c.trim()));
-        for (const item of allItems) {
+        for (const item of ALL_CARDS) {
           if (cardNames.has(item)) {
             this.addCard(item);
           }
         }
         return;
       }
-      const newCardNames = allItems.filter(
-        (candidate: CardName) => ! this.selectedCardNames.includes(candidate) && candidate.toLowerCase().indexOf(value.toLowerCase()) !== -1,
-      ).sort();
-      this.foundCardNames = newCardNames.slice(0, 5);
+
+      if (value === '') {
+        return;
+      }
+
+      const searchTermLowercase = value.toLowerCase();
+      for (const candidate of ALL_CARDS) {
+        if (candidate.toLowerCase().indexOf(searchTermLowercase) >= 0) {
+          this.searchMatches.push(candidate);
+        }
+        if (this.searchMatches.length === 5) {
+          return;
+        }
+      }
     },
+  },
+  mounted() {
+    this.$refs.filter.focus();
   },
 });
 </script>

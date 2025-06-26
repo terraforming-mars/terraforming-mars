@@ -1,16 +1,15 @@
-import {Game} from '../../../src/server/Game';
+import {expect} from 'chai';
+import {testGame} from '../../TestGame';
 import {runNextAction} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {ProcessorFactory} from '../../../src/server/cards/moon/ProcessorFactory';
-import {expect} from 'chai';
 
 describe('ProcessorFactory', () => {
   let player: TestPlayer;
   let card: ProcessorFactory;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [/* game */, player] = testGame(1, {moonExpansion: true});
     card = new ProcessorFactory();
   });
 

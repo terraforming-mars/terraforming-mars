@@ -6,7 +6,7 @@ import {Tag} from '../../../common/cards/Tag';
 export class VenusFirst extends PreludeCard {
   constructor() {
     super({
-      name: CardName.VENUS_FIRST_PATHFINDERS,
+      name: CardName.VENUS_FIRST,
       tags: [Tag.VENUS],
 
       behavior: {
@@ -15,7 +15,7 @@ export class VenusFirst extends PreludeCard {
       },
 
       metadata: {
-        cardNumber: '',
+        cardNumber: 'PfP01',
         renderData: CardRenderer.builder((b) => {
           b.venus(2).br.br;
           b.cards(2, {secondaryTag: Tag.VENUS});

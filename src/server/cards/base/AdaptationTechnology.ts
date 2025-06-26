@@ -13,6 +13,7 @@ export class AdaptationTechnology extends Card implements IProjectCard {
       tags: [Tag.SCIENCE],
       cost: 12,
       victoryPoints: 1,
+      globalParameterRequirementBonus: {steps: 2},
 
       metadata: {
         cardNumber: '153',
@@ -23,8 +24,5 @@ export class AdaptationTechnology extends Card implements IProjectCard {
         }),
       },
     });
-  }
-  public getRequirementBonus(): number {
-    return 2;
   }
 }

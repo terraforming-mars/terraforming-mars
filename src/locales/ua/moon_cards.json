@@ -1,0 +1,320 @@
+{
+  "Basic Infrastructure": "Базова інфраструктура",
+  "Place a road tile on The Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.": "Покладіть дорожню плитку на Місяць і підвищте рівень логістики на 1 крок. Отримайте 1 торговий флот.",
+
+  "Core Mine": "Основна шахта",
+  "Place a mine tile on The Moon and raise the mining rate 1 step. Increase your titanium production 1 step.": "Покладіть шахтну плитку на Місяць і підвищте рівень видобутку руди на 1 крок. Збільште виробництво титану на 1 крок.",
+
+  "First Lunar Settlement": "Перше місячне поселення",
+  "Place a habitat tile on The Moon and raise the habitat rate 1 step. Increase your M€ production 1 step.": "Покладіть плитку житла на Місяць і підвищте рівень житла на 1 крок. Збільште виробництво M€ на 1 крок.",
+
+  "Lunar Planning Office": "Офіс планування на Місяці",
+  "Draw 2 cards with a Moon tag. Gain 6 steel.": "Витягніть 2 карти з позначкою Місяця. Отримайте 6 сталі.",
+
+  "Mining Complex": "Гірничий комплекс",
+  "Place a mine tile on The Moon and raise the mining rate 1 step. Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. Pay 7 M€.": "Покладіть шахтну плитку на Місяць і підвищте рівень видобутку руди на 1 крок. Покладіть дорожню плитку поруч з розміщеною шахтною плиткою і підвищте рівень логістики на 1 крок. Заплатіть 7 M€.",
+
+  "AI Controlled Mine Network": "Мережа шахт, керована ШІ",
+  "Requires the logistic rate to be 2 or higher. Raise the logistic rate 1 step": "Вимагає логістичний рейтинг 2 або вище. Підвищте логістичний рейтинг на 1 крок.",
+
+  "Algae Bioreactors": "Водоростеві біореактори",
+  "Decrease your plant production 1 step. Raise the habitat rate 1 step and oxygen 1%.": "Зменште виробництво рослин на 1 крок. Підвищте рівень житла на 1 крок і рівень кисню на 1%.",
+
+  "An Offer You Can't Refuse": "Пропозиція, від якої неможливо відмовитися",
+  "Exchange a NON-NEUTRAL opponent delegate with one of your own from the reserve. This exchange may not change the party leader. You may then move your delegate to another party.": "Обміняйте делегата НЕ-НЕЙТРАЛЬНОГО опонента на свого з резерву. Ця обмін не може змінити лідера партії. Потім ви можете перемістити свого делегата в іншу партію.",
+
+  "Ancient Shipyards": "Стародавні верфи",
+  "Ancient Shipyards (Nerfed)": "Стародавні верфи (зменшено)",
+  "Action: Steal 2 M€ from each player and add a resource cube here.": "Дія: Вкрадіть 2 M€ у кожного гравця і додайте сюди куб ресурсу.",
+  "Spend 3 titanium. -1 VP for every resource here.": "Витратити 3 титану. -1 ПО за кожен ресурс тут.",
+
+  "Archimedes Hydroponics Station": "Гідропонічна станція Архімеда",
+  "Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.": "Зменште виробництво енергії на 1 крок і виробництво M€ на 1 крок. Збільште виробництво рослин на 2 кроки.",
+
+  "Aristarchus Road Network": "Дорожня мережа Аристарха",
+  "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Витратити 2 сталі. Збільште виробництво M€ на 2 кроки. Покладіть дорожню плитку на Місяць і підвищте рівень логістики на 1 крок.",
+
+  "Colonist Shuttles": "Колоністські шатли",
+  "Spend 1 titanium. Raise the habitat rate 1 step. Gain 2M€ for each habitat tile on The Moon.": "Витратити 1 титан. Підвищте рівень житла на 1 крок. Отримайте 2M€ за кожну плитку житла на Місяці.",
+
+  "Copernicus Solar Arrays": "Сонячні батареї Коперніка",
+  "Spend 1 titanium. Gain 2 heat. Incease your energy production 1 step.": "Витратити 1 титан. Отримайте 2 одиниці тепла. Збільште виробництво енергії на 1 крок.",
+
+  "Copernicus Tower": "Вежа Коперніка",
+  "Requires you have 2 titanium production.": "Вимагає наявності 2 одиниць виробництва титану.",
+  "Action: Add 1 science resource here, or spend 1 science resource here to raise your TR 1 step.": "Дія: Додайте 1 науковий ресурс сюди або витратіть 1 науковий ресурс сюди, щоб підвищити ваш TR на 1 крок.",
+  "1 VP PER MOON TAG YOU HAVE.": "1 ПО ЗА КОЖНУ ПОЗНАЧКУ МІСЯЦЯ, ЯКУ ВИ МАЄТЕ.",
+
+  "Cosmic Radiation": "Космічне випромінювання",
+  "Requires 4 mining rate. All players pay 4M€ for each mining tile they own.": "Вимагає рівня видобутку руди 4. Усі гравці платять 4M€ за кожну шахтну плитку, яку вони володіють.",
+
+  "Darkside Incubation Plant": "Інкубаційний центр на темній стороні",
+  "Action: Add 1 microbe here.": "Дія: Додайте 1 мікроба сюди.",
+  "Action: Spend 2 microbes to raise the habitat rate 1 step.": "Дія: Витратіть 2 мікроби, щоб підвищити рівень житла на 1 крок.",
+  "Spend 1 titanium. 1 VP for every 2 microbes here.": "Витратити 1 титан. 1 ПО за кожні 2 мікроби тут.",
+
+  "Darkside Meteor Bombardment": "Метеорний обстріл на темній стороні",
+  "Gain 2 steel and 2 titanium. Raise the mining rate 2 steps.": "Отримайте 2 сталі і 2 титану. Підвищте рівень видобутку руди на 2 кроки.",
+
+  "Darkside Mining Syndicate": "Гірничий синдикат на темній стороні",
+  "Increase your titanium production 2 steps, or 1 step if the mining rate is at least 2. And then raise the mining rate 1 step.": "Збільште виробництво титану на 2 кроки або на 1 крок, якщо рівень видобутку руди є щонайменше 2. А потім підвищте рівень видобутку руди на 1 крок.",
+
+  "Darkside Observatory": "Обсерваторія на темній стороні",
+  "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.]": "Дія: Додайте 1 науковий ресурс до БУДЬ-ЯКОЇ карти [КРІМ тих, які дають 2 ПО або більше за кожен науковий ресурс].",
+  "Action: Add 2 data to ANY card.": "Дія: Додайте 2 дані до БУДЬ-ЯКОЇ карти.",
+
+  "Darkside Smugglers' Union": "Союз контрабандистів на темній стороні",
+  "Action: Perform a trade action.": "Дія: Виконайте торгову дію.",
+  "Raise the logistics rate 1 step.": "Підвищте рівень логістики на 1 крок.",
+
+  "Deep Lunar Mining": "Глибокий місячний розробка",
+  "Spend 1 titanium. Increase your titanium production 2 steps. Raise the mining rate 1 step.": "Витратити 1 титан. Збільште виробництво титану на 2 кроки. Підвищте рівень видобутку руди на 1 крок.",
+
+  "Earth Embassy": "Посольство Землі",
+  "Effect: When you perform an action, your PLAYED Moon tags count as Earth tags, but not vice versa.": "Ефект: Після того, як вона була зіграна, коли ви виконуєте дію, ваші позначки Місяця враховуються як позначки Землі, але навпаки - ні.",
+
+  "Geodesic Tents": "Геодезичні намети",
+  "Decrease your energy production 1 step and increase your plant production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Зменште виробництво енергії на 1 крок і збільште виробництво рослин на 1 крок. Витратити 1 титан. Покладіть плитку житла на Місяць і підвищте рівень житла на 1 крок.",
+
+  "Grand Luna Academy": "Велика академія Луни",
+  "Draw 1 card per 2 Moon tags you have, including this.": "Витягніть 1 карту за кожні 2 позначки Місяця, які у вас є, включаючи цю.",
+
+  "HE3 Fusion Plant": "Фузійна електростанція HE3",
+  "Requires the mining rate of 2 or higher. Increase your energy production 1 step for each mining tile on The Moon.": "Вимагає рівня видобутку руди 2 або вище. Збільште виробництво енергії на 1 крок за кожну шахтну плитку на Місяці.",
+
+  "HE3 Lobbyists": "Лобісти HE3",
+  "Increase your M€ production 1 step for each Moon tag you have (including this).": "Збільште виробництво M€ на 1 крок за кожну позначку Місяця, яку у вас є (включаючи цю).",
+
+  "HE3 Production Quotas": "Квоти на виробництво HE3",
+  "Requires that Kelvinists are ruling or that you have 2 delegates there, and 1 mine tile on The Moon. Pay 1 steel per mine tile on The Moon to gain 4 heat per mine tile on The Moon. Raise the mining rate 1 step.": "Вимагає, щоб Кельвіністи були у владі або щоб у вас було 2 делегати там, і 1 шахтна плитка на Місяці. Заплатіть 1 сталь за кожну шахтну плитку на Місяці, щоб отримати 4 одиниці тепла за кожну шахтну плитку на Місяці. Підвищте рівень видобутку руди на 1 крок.",
+
+  "HE3 Refinery": "Рафінерія HE3",
+  "Action: Gain 1 M€ for each level of mining rate.": "Дія: Отримайте 1 M€ за кожен рівень видобутку руди.",
+
+  "Habitat 14": "Житло 14",
+  "Decrease your energy production 1 step and your M€ production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Зменште виробництво енергії на 1 крок і виробництво M€ на 1 крок. Витратити 1 титан. Покладіть плитку житла на Місяць і підвищте рівень житла на 1 крок.",
+
+  "Heavy Duty Rovers": "Вантажні ровери",
+  "Gain 4 M€ for each mining tile adjacent to a road tile. Raise the logistic rate 1 step.": "Отримайте 4 M€ за кожну шахтну плитку, прилеглу до дорожньої плитки. Підвищте рівень логістики на 1 крок.",
+
+  "Heliostat Mirror Array": "Геліостатне дзеркальне поле",
+  "Spend 1 titanium. Gain 1 heat. Increase your energy production 2 steps.": "Витратити 1 титан. Отримайте 1 одиницю тепла. Збільште виробництво енергії на 2 кроки.",
+
+  "Hostile Takeover": "Ворожа поглинання",
+  "Requires a habitat rate of 2 or higher, and a mining rate of 4 or higher. Add your player marker to a habitat tile and a mining tile owned by any opponent. Those now also count as yours. Increase your M€ production 2 steps.": "Вимагає рейтингу місця для житла 2 або вище та рейтингу видобутку 4 або вище. Додайте свій маркер гравця на плитку для житла та плитку для видобутку, що належать будь-якому супротивнику. Тепер вони також вважаються вашими. Збільште виробництво M€ на 2 кроки.",
+
+  "Hypersensitive Silicon Chip Factory": "Гіперчутлива фабрика кремнієвих чіпів",
+  "Requires 2 mining tiles on The Moon. Spend 2 titanium. Increase your M€ production 4 steps.": "Вимагає 2 плиток видобутку на Місяці. Витратити 2 титану. Збільште виробництво M€ на 4 кроки.",
+
+  "Improved Moon Concrete": "Покращений бетон Місяця",
+  "Effect: When you build a mine on The Moon, you spend 1 titanium less.": "Ефект: Коли ви будуєте шахту на Місяці, ви витрачаєте на 1 титан менше.",
+  "Spend 2 steel. Raise the mining rate 1 step.": "Витратити 2 сталі. Підвищте рейтинг видобутку на 1 крок.",
+
+  "Iron Extraction Center": "Центр видобутку заліза",
+  "Spend 1 titanium. Increase your steel production 1 step for every 2 raised steps of mining rate.": "Витратити 1 титан. Збільште виробництво сталі на 1 крок за кожні 2 підвищені кроки рейтингу видобутку.",
+
+  "L.T.F. Headquarters": "Головний офіс L.T.F.",
+  "Raise the habitat rate 1 step. Place a colony. Gain 1 Trade Fleet.": "Підвищте рейтинг місця для житла на 1 крок. Розмістіть колонію. Отримайте 1 торговий флот.",
+
+  "L.T.F. Privileges": "Привілеї L.T.F.",
+  "Effect: When playing a Moon tag, you do not pay additional steel or titanium for playing it.": "Ефект: Коли ви граєте карту з позначкою Місяця, ви не платите додатково сталі або титану за її гру.",
+
+  "Luna Conference": "Конференція на Місяці",
+  "Requires that Scientists are ruling or that you have 2 delegates there. Gain 2 M€ per road tile on The Moon. Gain 2M€ per habitat tile on The Moon.": "Вимагає, щоб учені правили або щоб у вас було 2 делегати там. Отримайте 2 M€ за кожну дорожню плитку на Місяці. Отримайте 2 M€ за кожну плитку для житла на Місяці.",
+
+  "Luna Mining Hub": "Шахтна головна на Місяці",
+  "Requires a mining rate of 5 or higher.": "Вимагає рейтингу видобутку 5 або вище.",
+  "Spend 1 steel and 1 titanium and raise your steel and titanium production 1 step.": "Витратити 1 сталь і 1 титан і підвищити виробництво сталі і титану на 1 крок. ",
+  "Place this tile on The Moon and raise the mining rate 1 step.": "Розмістіть цю плитку на Місяці і підвищте рейтинг видобутку на 1 крок.",
+  "2 VP PER MINING TILE ADJACENT TO THIS TILE.": "2 ПО ЗА КОЖНУ ПЛИТКУ ВИДОБУТКУ, ЩО ПРИЛЕГЛА ДО ЦІЄЇ ПЛИТКИ.",
+
+  "Luna Political Institute": "Політичний інститут на Місяці",
+  "Action: Place one of your delegates in any party.": "Дія: Розмістіть одного з ваших делегатів в будь-якій партії.",
+  "Requires that you have 2 Moon tags.": "Вимагає, щоб у вас було 2 позначки Місяця.",
+
+  "Luna Project Office": "Офіс проекту на Місяці",
+  "DRAW 5 CARDS DURING THE RESEARCH PHASE FOR THE NEXT 2 GENERATIONS.": "НАМАЛЮЙТЕ 5 КАРТ ПІД ЧАС ФАЗИ ДОСЛІДЖЕНЬ НА НАСТУПНІ 2 ПОКОЛІННЯ.",
+
+  "Luna Resort": "Курорт на Місяці",
+  "Requires 2 habitats on The Moon. Spend 2 titanium. Decrease your energy production 1 step and increase your M€ production 3 steps. Raise the habitat rate 1 step.": "Вимагає 2 місця для житла на Місяці. Витратити 2 титану. Зменште виробництво енергії на 1 крок і збільште виробництво M€ на 3 кроки. Підвищте рейтинг місця для житла на 1 крок.",
+
+  "Luna Senate": "Сенат на Місяці",
+  "1 VP per Moon tag you have.": "1 ПО за кожну позначку Місяця, яку у вас є.",
+  "Requires that you have 3 Moon tags. Increase your M€ production 1 step per Moon tag in the game (including these.)": "Вимагає, щоб у вас було 3 позначки Місяця. Збільште виробництво M€ на 1 крок за кожну позначку Місяця в грі (включаючи ці).",
+
+  "Luna Staging Station": "Стадіон на Місяці",
+  "Requires the logistic rate to be 2 or higher. Spend 1 titanium. Raise the logistic rate 2 steps.": "Вимагає, щоб рейтинг логістики був 2 або вище. Витратити 1 титан. Підвищте рейтинг логістики на 2 кроки.",
+
+  "Luna Trade Station": "Торгова станція на Місяці",
+  "Action: Gain 2 M€ for each habitat tile on The Moon.": "Дія: Отримайте 2 M€ за кожну плитку для житла на Місяці.",
+  "Spend 2 titanium. Place this tile ON THE RESERVED AREA.": "Витратити 2 титану. Розмістіть цю плитку НА ЗАРЕЗЕРВОВАНІЙ ОБЛАСТІ.",
+
+  "Luna Train Station": "Залізничний вокзал на Місяці",
+  "Requires a logistic rate of 5 or higher. Spend 2 steel. Increase your M€ production 4 steps. Place this tile on The Moon and raise the logistic rate 1 step. 2 VP FOR EACH ROAD TILE ADJACENT TO THIS TILE.": "Вимагає рейтингу логістики 5 або вище. Витратити 2 сталі. Збільште виробництво M€ на 4 кроки. Розмістіть цю плитку на Місяці і підвищте рейтинг логістики на 1 крок. 2 ПО ЗА КОЖНУ ДОРОЖНЮ ПЛИТКУ, ЩО ПРИЛЕГЛА ДО ЦІЄЇ ПЛИТКИ.",
+
+  "Lunar Dust Processing Plant": "Завод з обробки місячного пилу",
+  "Effect: When you place a road tile on The Moon, you spend no steel on it.": "Ефект: Коли ви розміщуєте дорожню плитку на Місяці, ви не витрачаєте на неї сталь.",
+  "Spend 1 titanium. Raise the logistic rate 1 step.": "Витратити 1 титан. Підвищте рейтинг логістики на 1 крок.",
+
+  "Lunar Industry Complex": "Місячний промисловий комплекс",
+  "Spend 2 titanium. Place a mine tile on The Moon and raise the mining rate 1 step. Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.": "Витратити 2 титану. Розмістіть плитку шахти на Місяці і підвищте рейтинг видобутку на 1 крок. Збільште виробництво сталі, титану та тепла на 1 крок кожне. Збільште виробництво енергії на 2 кроки.",
+
+  "Lunar Mine Urbanization": "Місячна шахтна урбанізація",
+  "Requires you have 1 mine tile. Increase your M€ production 1 step. Remove 1 of your mine tiles (does not affect the mining rate.) Place this special tile there, regardless of placement rules. Gain placement bonuses as usual.  Raise the habitat rate 1 step. This tile counts both as a habitat and a mine tile.": "Вимагає, щоб у вас було 1 плитка шахти. Збільште виробництво M€ на 1 крок. Видаліть 1 з ваших плиток шахти (це не впливає на рейтинг видобутку). Розмістіть цю спеціальну плитку там, незалежно від правил розміщення. Отримуйте бонуси за розміщення, як зазвичай. Підвищте рейтинг місця для житла на 1 крок. Ця плитка вважається як плитка для житла і шахти.",
+
+  "Lunar Observation Post": "Місячна спостережна станція",
+  "Action: Add 1 data resource to ANY card": "Дія: Додайте 1 ресурс даних до БУДЬ-ЯКОЇ карти",
+  "Spend 1 titanium. 1 VP for every 3 data resources here.": "Витратити 1 титан. 1 ПО за кожні 3 ресурси даних тут.",
+
+  "Lunar Security Stations": "Місячні станції безпеки",
+  "Requires 3 road tiles on The Moon. Raise the logistic rate 1 step.": "Вимагає 3 дорожніх плиток на Місяці. Підвищте рейтинг логістики на 1 крок.",
+
+  "Lunar Steel": "Місячна сталь",
+  "Effect: Your steel resources are worth 1 M€ extra.": "Ефект: Ваші ресурси сталі варто 1 M€ більше.",
+
+  "Lunar Trade Fleet": "Місячний торговий флот",
+  "2 titanium production": "Вимагає 2 виробництва титану.",
+  "Requires that you have 2 titanium production. Increase your M€ production 1 step. Raise the logistic rate 1 step.": "Вимагає, щоб у вас було 2 виробництва титану. Збільште виробництво M€ на 1 крок. Підвищте рейтинг логістики на 1 крок.",
+
+  "Mare Imbrium Mine": "Шахта Маре Імбріум",
+  "Spend 1 titanium. Increase your steel production 1 step and your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the mining rate 1 step.": "Витратити 1 титану. Збільште виробництво сталі на 1 крок і виробництво титану на 1 крок. Розмістіть шахту НА ЗАРЕЗЕРВОВАНІЙ ОБЛАСТІ і підвищте рейтинг видобутку на 1 крок.",
+
+  "Mare Nectaris Mine": "Шахта Маре Нектарис",
+  "Spend 1 titanium. Increase your steel production 1 step. Place a mine ON THE RESERVED AREA and raise the mining rate 1 step.": "Витратити 1 титану. Збільште виробництво сталі на 1 крок. Розмістіть шахту НА ЗАРЕЗЕРВОВАНІЙ ОБЛАСТІ і підвищте рейтинг видобутку на 1 крок.",
+
+  "Mare Nubium Mine": "Шахта Маре Нубіум",
+  "Spend 1 titanium. Increase your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the mining rate 1 step.": "Витратити 1 титану. Збільште виробництво титану на 1 крок. Розмістіть шахту НА ЗАРЕЗЕРВОВАНІЙ ОБЛАСТІ і підвищте рейтинг видобутку на 1 крок.",
+
+  "Mare Serenitatis Mine": "Шахта Маре Серенітатіс",
+  "Spend 2 titanium and 1 steel. Increase your steel and titanium production 1 step. Place a mine ON THE RESERVED AREA and a road tile adjacent to it. Raise the mining rate 1 step and the logistic rate 1 step.": "Spend 2 титану і 1 сталь. Підвищте виробництво сталі і титану на 1 крок. Розмістіть шахту НА ЗАРЕЗЕРВОВАНІЙ ОБЛАСТІ і дорожню плитку, що прилягає до неї. Підвищте рейтинг видобутку на 1 крок і рейтинг логістики на 1 крок.",
+
+  "Microsingularity Plant": "Мікросингулярний завод",
+  "Requires 2 habitats on The Moon. Increase your energy production 2 steps.": "Вимагає 2 житлових плиток на Місяці. Збільште виробництво енергії на 2 кроки.",
+
+  "Mining Robots Manuf. Center": "Центр виробництва гірничих роботів",
+  "Spend 1 titanium. Raise the mining rate 2 steps.": "Витратити 1 титану. Підвищте рейтинг видобутку на 2 кроки.",
+
+  "Momentum Virium Habitat": "Житловий модуль Momentum Virium",
+  "Spend 1 titanium. Increase your heat production 2 steps and your M€ production 3 steps. Place a habitat tile ON THE RESERVED AREA and raise the habitat rate 1 step.": "Витратити 1 титану. Збільште виробництво тепла на 2 кроки і виробництво M€ на 3 кроки. Розмістіть житлову плитку НА ЗАРЕЗЕРВОВАНІЙ ОБЛАСТІ і підвищте рейтинг місця для житла на 1 крок.",
+
+  "Moon Tether": "Місячна зв'язка",
+  "Effect: When you play a card, you pay 2 M€ less for it.": "Ефект: Коли ви граєте карту, ви платите на 2 M€ менше.",
+  "Requires 6 space tags.": "Вимагає 6 космічних символів.",
+
+  "Mooncrate Block Factory": "Фабрика блоків Mooncrate",
+  "Lunar standard projects": "Стандартні проекти на Місяці",
+  "Effect: When you pay for a Lunar standard project, you spend 4M€ less.": "Ефект: Коли ви платите за стандартний проект на Місяці, ви витрачаєте на 4 M€ менше.",
+  "Requires 1 mine on The Moon.": "Вимагає 1 шахту на Місяці.",
+
+  "Mooncrate Convoys To Mars": "Конвої Mooncrate до Марсу",
+  "Requires that Mars First are ruling or that you have 2 delegates there. Raise the logistic rate 1 step. All players may sell their steel resources for 3M€ each.": "Вимагає, щоб Mars First були у владі або щоб у вас було 2 делегати там. Підвищте рейтинг логістики на 1 крок. Всі гравці можуть продати свої сталеві ресурси за 3 M€ кожен.",
+
+  "New Colony Planning Initiatives": "Ініціативи планування нової колонії",
+  "Requires the habitat rate to be 2 or higher. Raise the habitat rate 1 step.": "Вимагає, щоб рейтинг місця для житла був 2 або вище. Підвищте рейтинг місця для житла на 1 крок.",
+
+  "Off-World City Living": "Місце проживання в місті поза Землею",
+  "Increase your M€ production 1 step per city tile NOT ON MARS. Increase habitat rate 1 step.": "Збільште виробництво M€ на 1 крок за кожну міську плитку НЕ НА МАРСІ. Підвищте рейтинг місця для житла на 1 крок.",
+
+  "Orbital Power Grid": "Орбітальна енергетична мережа",
+  "Increase your energy production 1 step per city tile NOT ON MARS.": "Збільште виробництво енергії на 1 крок за кожну міську плитку НЕ НА МАРСІ.",
+
+  "Preliminary Darkside": "Попередній Darkside",
+  "Gain 3 titanium or 4 steel. Raise the mining rate 1 step.": "Отримайте 3 титану або 4 сталі. Підвищте рейтинг видобутку на 1 крок.",
+
+  "Pride of the Earth Arkship": "Гордість Землі Аркшіп",
+  "Science 2 Space": "Наука 2 космос",
+  "Action: Add 1 science resource here per every 5 science tags you have.": "Дія: Додайте 1 науковий ресурс сюди за кожні 5 наукових символів, які у вас є.",
+  "Requires 1 science and 2 space tags. Spend 2 titanium. 1 VP per science resource here.": "Вимагає 1 наукового і 2 космічних символів. Витратити 2 титану. 1 ПО за кожен науковий ресурс тут.",
+
+  "Processor Factory": "Фабрика процесорів",
+  "1 VP for every 3 data resources here.": "1 ПО за кожні 3 ресурси даних тут.",
+  "Action: Spend 1 steel to add 2 data resources to ANY card.": "Дія: Витратити 1 сталь, щоб додати 2 ресурси даних до БУДЬ-ЯКОЇ карти.",
+
+  "Revolting Colonists": "Бунтівні колоністи",
+  "Requires 4 habitat rate. All players pay 3M€ for each habitat tile they own.": "Вимагає рейтинг місця для житла 4 або вище. Всі гравці платять 3 M€ за кожну міську плитку, яку вони володіють.",
+
+  "Road Piracy": "Дорожнє піратство",
+  "Requires 3 logistic rate. Steal up to 6 steel or 4 titanium from other players. (Resources may be stolen from more than 1 opponent.)": "Вимагає рейтинг логістики 3. Вкрадіть до 6 сталі або 4 титану у інших гравців. (Ресурси можуть бути вкрадені від більш як 1 суперника.)",
+
+  "Rover Drivers Union": "Союз водіїв роверів",
+  "Requires 2 logistic rate. Raise the logistic rate 1 step. Increase your M€ production 1 step per logistic rate.": "Вимагає рейтинг логістики 2. Підвищте рейтинг логістики на 1 крок. Збільште виробництво M€ на 1 крок за кожен підвищений рейтинг логістики.",
+
+  "Rust Eating Bacteria": "Бактерії, що їдять ржавіну",
+  "1 VP per 3 microbes here.": "1 ПО за кожні 3 мікроби тут.",
+  "Action: Spend 1 steel to add 2 microbes here.": "Дія: Витратити 1 сталь, щоб додати 2 мікроби сюди.",
+
+  "Sinus Irdium Road Network": "Дорожня мережа Sinus Irdium",
+  "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Зменште виробництво енергії на 1 крок і збільште виробництво M€ на 3 кроки. Витратити 1 сталь. Розмістіть дорожню плитку на Місяці і підвищте рейтинг логістики на 1 крок.",
+
+  "Small Duty Rovers": "Малі рейсові ровери",
+  "Spend 1 titanium. Raise the logistic rate 1 step. Gain 1 M€ per habitat tile, mine tile and road tile on The Moon.": "Витратити 1 титану. Підвищте рейтинг логістики на 1 крок. Отримайте 1 M€ за кожну житлову плитку, шахтну плитку і дорожню плитку на Місяці.",
+
+  "Solar Panel Foundry": "Сонячна панельна ливарня",
+  "Action: Spend 2 steel to increase your energy production 1 step.": "Дія: Витратити 2 сталі, щоб збільшити виробництво енергії на 1 крок.",
+
+  "Sphere Habitats": "Сферичні житла",
+  "Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Витратити 1 титану. Розмістити житлову плитку на Місяці і підвищити рейтинг місця для житла на 1 крок.",
+
+  "Staging Station \"Behemoth\"": "Стадіон \"Бегемот\"",
+  "Gain 2 Trade Fleets. Raise the logistic rate 1 step.": "Отримайте 2 торгові флоти. Підвищте рейтинг логістики на 1 крок.",
+
+  "Steel Market Monopolists": "Монополісти сталевого ринку",
+  "Requires the mining rate to be 3 or higher.": "Вимагає, щоб рейтинг видобутку був 3 або вище.",
+  "Action: Spend 3X M€ to gain 2X steel (max 9 M€)": "Дія: Витратити 3X M€, щоб отримати 2X сталі (максимум 9 M€)",
+  "Action: Spend X steel to gain 3X M€ (max 3 steel).": "Дія: Витратити X сталі, щоб отримати 3X M€ (максимум 3 сталі).",
+
+  "Subterranean Habitats": "Підземні житла",
+  "Effect: When you build a habitat on THE MOON, you spend 1 titanium less.": "Ефект: Коли ви будуєте житло на МІСЯЦІ, ви витрачаєте на 1 титану менше.",
+  "Spend 2 steel. Raise the habitat rate 1 step.": "Витратити 2 сталі. Підвищити рейтинг місця для житла на 1 крок.",
+
+  "Syndicate Pirate Raids": "Рейди піратів синдикату",
+  "ALL OPPONENTS CANNOT RETRIEVE THEIR TRADE FLEETS THIS GENERATION": "ВСІ СУПЕРНИКИ НЕ МОЖУТЬ ВИТЯГНУТИ СВОЇ ТОРГОВІ ФЛОТИ В ЦІЙ ГЕНЕРАЦІЇ",
+
+  "The Womb": "Колиска всіх метрополій",
+  "Decrease your energy production 2 steps and increase your M€ production 4 steps. Spend 2 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Зменште виробництво енергії на 2 кроки і збільште виробництво M€ на 4 кроки. Витратити 2 титану. Розмістіть житлову плитку на Місяці і підвищте рейтинг місця для житла на 1 крок.",
+
+  "Thorium Rush": "Гарячка торію",
+  "Place 1 habitat tile, 1 mining tile and 1 road tile on The Moon. Raise the habitat rate, mining rate and logistic rate 1 step.": "Розмістіть 1 житлову плитку, 1 шахтну плитку і 1 дорожню плитку на Місяці. Підвищте рейтинг місця для житла, рейтинг видобутку і рейтинг логістики на 1 крок.",
+  "Titanium Extraction Center": "Центр видобутку титану",
+  "Spend 2 titanium. Increase your titanium production 1 step for every 2 raised steps of mining rate.": "Витратити 2 титану. Збільште виробництво титану на 1 крок за кожні 2 підвищені кроки рейтингу видобутку.",
+
+  "Titanium Market Monopolists": "Монополісти на ринку титану",
+  "Action: Spend 2X M€ to gain X titanium [max 8 M€]": "Дія: Витратити 2X M€, щоб отримати X титану [максимум 8 M€]",
+  "Action: Spend X titanium to gain 4X M€ [max 4 titanium].": "Дія: Витратити X титану, щоб отримати 4X M€ [максимум 4 титану].",
+
+  "Tycho Road Network": "Тихо-дорожня мережа",
+  "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Витратити 1 сталь. Збільшити виробництво M€ на 1 крок. Розмістити дорожню плитку на Місяці і підвищити рейтинг логістики на 1 крок.",
+
+  "Underground Detonators": "Підземні детонатори",
+  "Gain 1 steel and 1 titanium. Raise the mining rate 1 step.": "Отримайте 1 сталь і 1 титан. Підвищте рейтинг видобутку на 1 крок.",
+
+  "Undermoon Drug Lords Network": "Мережа наркобаронів під місяцем",
+  "Increase your M€ production 1 step per 2 steps of habitat rate.": "Збільште виробництво M€ на 1 крок за кожні 2 підвищені кроки рейтингу місця для житла.",
+
+  "Water Treatment Complex": "Комплекс водопідготовки",
+  "Requires 1 habitat tile on The Moon. Spend 1 titanium. Raise the habitat rate 2 steps.": "Вимагає 1 житлову плитку на Місяці. Витратити 1 титану. Підвищити рейтинг місця для житла на 2 кроки.",
+
+  "We Grow As One": "Ми ростемо як одне ціле",
+  "Requires that Unity are ruling or that you have 2 delegates there. Increase ALL colony tile tracks 1 step. Increase each colony tile track 1 step if you have a colony on that colony tile.": "Вимагає, щоб Unity були у владі або щоб у вас було 2 делегати там. Підвищте всі колоніальні шляхи на 1 крок. Підвищте кожен колоніальний шлях на 1 крок, якщо у вас є колонія на цій колоніальній плитці.",
+
+  "Martian Embassy": "Посольство Марсу",
+  "Raise the Mars Planetary Track 1 step for every 3 Moon tags you have, including this.": "Підвищте Марсіанську планетарну доріжку на 1 крок за кожні 3 місячні символи, які у вас є, включаючи цей.",
+
+  "Luna Archives": "Архіви Місяця",
+  "Action: Add 1 science resource here for each Moon tag you have.": "Дія: Додайте 1 науковий ресурс сюди за кожен місячний символ, який у вас є.",
+  "Effect: When playing a Moon tag, science resources here may be used as payment, and are worth 1M€ each.": "Ефект: При грі з місячним символом, наукові ресурси тут можуть бути використані як платіж і коштують 1 M€ кожен.",
+
+  "Luna Ecumenopolis": "Екуменополіс Місяця",
+  "Spend 2 titanium. Place 2 habitat tiles adjacent to at least 2 other habitat tiles and raise habitat rate 2 steps. Increase your TR 1 step for each 2 steps of the habitat rate.": "Витратити 2 титану. Розмістити 2 житлові плитки поруч з щонайменше 2 іншими житловими плитками і підвищити рейтинг місця для житла на 2 кроки. Підвищте ваш РТ на 1 крок за кожні 2 кроки рейтингу місця для житла.",
+
+  "Steal": "Вкрасти",
+  "Habitat rate": "Рейтинг місця для житла",
+  "Mining rate": "Рейтинг видобутку",
+  "Logistic rate": "Рейтинг логістики",
+  "Colony tile": "Житлова плитка",
+  "Colony tiles": "Житлові плитки",
+  "Mine tile": "Шахтна плитка",
+  "Mine tiles": "Шахтні плитки",
+  "Road tile": "Дорожня плитка",
+  "Road tiles": "Дорожні плитки"
+}

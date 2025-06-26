@@ -1,21 +1,21 @@
 import {expect} from 'chai';
 import {setOxygenLevel} from '../../TestingUtils';
 import {OzoneGenerators} from '../../../src/server/cards/pathfinders/OzoneGenerators';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
-describe('OzoneGenerators', function() {
+describe('OzoneGenerators', () => {
   let card: OzoneGenerators;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new OzoneGenerators();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     setOxygenLevel(game, 5);
     player.megaCredits = card.cost;
     expect(player.canPlay(card)).is.false;
@@ -23,18 +23,18 @@ describe('OzoneGenerators', function() {
     expect(player.canPlay(card)).is.true;
   });
 
-  it('canAct', function() {
+  it('canAct', () => {
     player.energy = 2;
     expect(card.canAct(player)).is.false;
     player.energy = 3;
     expect(card.canAct(player)).is.true;
   });
 
-  it('action', function() {
-    expect(player.getTerraformRating()).eq(14);
+  it('action', () => {
+    expect(player.terraformRating).eq(14);
     player.energy = 3;
     card.action(player);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(player.energy).eq(0);
   });
 });

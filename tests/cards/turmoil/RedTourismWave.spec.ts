@@ -1,21 +1,32 @@
 import {expect} from 'chai';
 import {RedTourismWave} from '../../../src/server/cards/turmoil/RedTourismWave';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {IGame} from '../../../src//server/IGame';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {testGame} from '../../TestGame';
+import {TestPlayer} from '../../TestPlayer';
 
-describe('RedTourismWave', function() {
-  it('Should play', function() {
-    const card = new RedTourismWave();
-    const [game, player] = testGame(2, {turmoilExtension: true});
-    expect(player.simpleCanPlay(card)).is.not.true;
+describe('RedTourismWave', () => {
+  let card: RedTourismWave;
+  let game: IGame;
+  let player: TestPlayer;
+
+  beforeEach(() => {
+    card = new RedTourismWave();
+    [game, player] = testGame(2, {turmoilExtension: true});
+  });
+
+  it('Can play', () => {
+    expect(card.canPlay(player)).is.not.true;
 
     const reds = game.turmoil!.getPartyByName(PartyName.REDS);
-    reds.delegates.add(player.id, 2);
-    expect(player.simpleCanPlay(card)).is.true;
+    reds.delegates.add(player, 2);
+    expect(card.canPlay(player)).is.true;
+  });
 
-    const tharsis = game.board.getSpace(SpaceName.THARSIS_THOLUS);
+  it('play', () => {
+    const tharsis = game.board.getSpaceOrThrow(SpaceName.THARSIS_THOLUS);
     const lands = game.board.getAdjacentSpaces(tharsis).filter((space) => space.spaceType === SpaceType.LAND);
     game.addCity(player, lands[0]);
     card.play(player);

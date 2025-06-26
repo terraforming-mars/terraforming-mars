@@ -4,7 +4,6 @@ import {ActionCard} from '../ActionCard';
 import {CardType} from '../../../common/cards/CardType';
 import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class SymbioticFungus extends ActionCard implements IProjectCard {
@@ -20,12 +19,12 @@ export class SymbioticFungus extends ActionCard implements IProjectCard {
         // return new SelectCard('Select card to add microbe', 'Add microbe', availableCards, ([card]) => {
       },
 
-      requirements: CardRequirements.builder((b) => b.temperature(-14)),
+      requirements: {temperature: -14},
       metadata: {
         cardNumber: '133',
         renderData: CardRenderer.builder((b) => {
           b.action('Add a microbe to ANOTHER card.', (eb) => {
-            eb.empty().startAction.microbes(1).asterix();
+            eb.empty().startAction.resource(CardResource.MICROBE).asterix();
           });
         }),
         description: 'Requires -14 C° or warmer.',

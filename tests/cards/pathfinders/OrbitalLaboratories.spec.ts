@@ -1,19 +1,18 @@
 import {expect} from 'chai';
 import {OrbitalLaboratories} from '../../../src/server/cards/pathfinders/OrbitalLaboratories';
-import {Game} from '../../../src/server/Game';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
-describe('OrbitalLaboratories', function() {
+describe('OrbitalLaboratories', () => {
   let card: OrbitalLaboratories;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new OrbitalLaboratories();
-    player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player);
+    [/* game */, player] = testGame(1);
   });
 
-  it('play', function() {
+  it('play', () => {
     player.plants = 0;
     player.production.override({plants: 0});
 

@@ -20,9 +20,12 @@
   "Algae Bioreactors": "",
   "Decrease your plant production 1 step. Raise the habitat rate 1 step and oxygen 1%.": "",
 
+  "An Offer You Can't Refuse": "",
+  "Exchange a NON-NEUTRAL opponent delegate with one of your own from the reserve. This exchange may not change the party leader. You may then move your delegate to another party.": "",
+
   "Ancient Shipyards": "",
   "Ancient Shipyards (Nerfed)": "",
-  "Action: Steal 8 M€ from any player and add a resource cube here.": "",
+  "Action: Steal 2 M€ from each player and add a resource cube here.": "",
   "Spend 3 titanium. -1 VP for every resource here.": "",
 
   "Archimedes Hydroponics Station": "",
@@ -60,11 +63,15 @@
   "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.]": "",
   "Action: Add 2 data to ANY card.": "",
 
+  "Darkside Smugglers' Union": "",
+  "Action: Perform a trade action.": "",
+  "Raise the logistics rate 1 step.": "",
+
   "Deep Lunar Mining": "",
   "Spend 1 titanium. Increase your titanium production 2 steps. Raise the mining rate 1 step.": "",
 
   "Earth Embassy": "",
-  "Effect: After being played, when you perform an action, your Moon tags count as Earth tags, but not vice versa.": "",
+  "Effect: When you perform an action, your PLAYED Moon tags count as Earth tags, but not vice versa.": "",
 
   "Geodesic Tents": "",
   "Decrease your energy production 1 step and increase your plant production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "",
@@ -92,6 +99,9 @@
 
   "Heliostat Mirror Array": "",
   "Spend 1 titanium. Gain 1 heat. Increase your energy production 2 steps.": "",
+
+  "Hostile Takeover": "",
+  "Requires a habitat rate of 2 or higher, and a mining rate of 4 or higher. Add your player marker to a habitat tile and a mining tile owned by any opponent. Those now also count as yours. Increase your M€ production 2 steps.": "",
 
   "Hypersensitive Silicon Chip Factory": "",
   "Requires 2 mining tiles on The Moon. Spend 2 titanium. Increase your M€ production 4 steps.": "",
@@ -150,7 +160,7 @@
   "Spend 2 titanium. Place a mine tile on The Moon and raise the mining rate 1 step. Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.": "",
 
   "Lunar Mine Urbanization": "",
-  "Requires you have 1 mine tile. Increase your M€ production 1 step. Replace one of your mine tiles with this special tile. Raise the habitat rate 1 step. This tile counts both as a habitat and a mine tile.": "",
+  "Requires you have 1 mine tile. Increase your M€ production 1 step. Raise the habitat rate 1 step. Remove 1 of your mine tiles (does not affect the mining rate.) Place this special tile there, regardless of placement rules. Gain placement bonuses as usual. This tile counts both as a habitat and a mine tile.": "",
 
   "Lunar Observation Post": "",
   "Action: Add 1 data resource to ANY card": "",
@@ -160,6 +170,8 @@
   "Requires 3 road tiles on The Moon. Raise the logistic rate 1 step.": "",
 
   "Lunar Steel": "",
+  "Effect: Your steel resources are worth 1 M€ extra.": "",
+
   "Lunar Trade Fleet": "",
   "2 titanium production": "",
   "Requires that you have 2 titanium production. Increase your M€ production 1 step. Raise the logistic rate 1 step.": "",
@@ -186,14 +198,18 @@
   "Spend 1 titanium. Increase your heat production 2 steps and your M€ production 3 steps. Place a habitat tile ON THE RESERVED AREA and raise the habitat rate 1 step.": "",
 
   "Moon Tether": "",
+  "Effect: When you play a card, you pay 2 M€ less for it.": "지속 효과: 모든 카드의 추진 비용 2 M€ 할인.",
   "Requires 6 space tags.": "",
-  "Mooncrate Block Factory": "",
 
+  "Mooncrate Block Factory": "",
   "Lunar standard projects": "",
   "Effect: When you pay for a Lunar standard project, you spend 4M€ less.": "",
   "Requires 1 mine on The Moon.": "",
 
-  "New Colony Planning Initiaitives": "",
+  "Mooncrate Convoys To Mars": "",
+  "Requires that Mars First are ruling or that you have 2 delegates there. Raise the logistic rate 1 step. All players may sell their steel resources for 3M€ each.": "",
+
+  "New Colony Planning Initiatives": "",
   "Requires the habitat rate to be 2 or higher. Raise the habitat rate 1 step.": "",
 
   "Off-World City Living": "",
@@ -217,6 +233,9 @@
   "Revolting Colonists": "",
   "Requires 4 habitat rate. All players pay 3M€ for each habitat tile they own.": "",
 
+  "Road Piracy": "",
+  "Requires 3 logistic rate. Steal up to 6 steel or 4 titanium from other players. (Resources may be stolen from more than 1 opponent.)": "",
+
   "Rover Drivers Union": "",
   "Requires 2 logistic rate. Raise the logistic rate 1 step. Increase your M€ production 1 step per logistic rate.": "",
 
@@ -224,7 +243,7 @@
   "1 VP per 3 microbes here.": "",
   "Action: Spend 1 steel to add 2 microbes here.": "",
 
-  "Sinus Iridium Road Network": "",
+  "Sinus Irdium Road Network": "",
   "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "",
 
   "Small Duty Rovers": "",
@@ -245,7 +264,7 @@
   "Action: Spend X steel to gain 3X M€ (max 3 steel).": "",
 
   "Subterranean Habitats": "",
-  "Effect: When you build a habitat on The Moon, you spend 1 titanium less.": "",
+  "Effect: When you build a habitat on THE MOON, you spend 1 titanium less.": "",
   "Spend 2 steel. Raise the habitat rate 1 step.": "",
 
   "Syndicate Pirate Raids": "",
@@ -256,7 +275,6 @@
 
   "Thorium Rush": "",
   "Place 1 habitat tile, 1 mining tile and 1 road tile on The Moon. Raise the habitat rate, mining rate and logistic rate 1 step.": "",
-
   "Titanium Extraction Center": "",
   "Spend 2 titanium. Increase your titanium production 1 step for every 2 raised steps of mining rate.": "",
 
@@ -279,11 +297,24 @@
   "We Grow As One": "",
   "Requires that Unity are ruling or that you have 2 delegates there. Increase ALL colony tile tracks 1 step. Increase each colony tile track 1 step if you have a colony on that colony tile.": "",
 
-  "Steal": "",
-  "habitat rate": "",
-  "Mining rate": "",
-  "Logistic rate": "",
-  "Colony tiles": "",
-  "Mine tiles": "",
-  "Road tiles": ""
+  "Martian Embassy": "",
+  "Raise the Mars Planetary Track 1 step for every 3 Moon tags you have, including this.": "",
+
+  "Luna Archives": "",
+  "Action: Add 1 science resource here for each Moon tag you have.": "",
+  "Effect: When playing a Moon tag, science resources here may be used as payment, and are worth 1M€ each.": "",
+
+  "Luna Ecumenopolis": "",
+  "Spend 2 titanium. Place 2 habitat tiles adjacent to at least 2 other habitat tiles and raise habitat rate 2 steps. Increase your TR 1 step for each 2 steps of the habitat rate.": "",
+
+  "Steal": "훔치기",
+  "Habitat rate": "월면 기지 등급",
+  "Mining rate": "월면 광산 등급",
+  "Logistic rate": "월면 도로 등급",
+  "Colony tile": "월면 기지 타일",
+  "Colony tiles": "월면 기지 타일",
+  "Mine tile": "월면 광산 타일",
+  "Mine tiles": "월면 광산 타일",
+  "Road tile": "월면 도로 타일",
+  "Road tiles": "월면 도로 타일"
 }

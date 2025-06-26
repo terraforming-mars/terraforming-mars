@@ -13,6 +13,7 @@ import {Resource} from '../../../common/Resource';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
+import {message} from '../../logs/MessageBuilder';
 
 export class LargeConvoy extends Card implements IProjectCard {
   constructor() {
@@ -32,7 +33,7 @@ export class LargeConvoy extends Card implements IProjectCard {
         cardNumber: '143',
         renderData: CardRenderer.builder((b) => {
           b.oceans(1).cards(2).br;
-          b.plants(5, {digit}).or(Size.MEDIUM).animals(4, {digit}).asterix();
+          b.plants(5, {digit}).or(Size.MEDIUM).resource(CardResource.ANIMAL, {amount: 4, digit}).asterix();
         }),
         description: 'Place an ocean tile and draw 2 cards. Gain 5 plants or add 4 animals to ANOTHER card.',
       },
@@ -49,14 +50,14 @@ export class LargeConvoy extends Card implements IProjectCard {
 
     if (animalCards.length === 0 ) return gainPlants();
 
-    const availableActions: Array<PlayerInput> = [];
+    const availableActions = [];
 
-    const gainPlantsOption = new SelectOption('Gain 5 plants', 'Gain plants', gainPlants);
+    const gainPlantsOption = new SelectOption('Gain 5 plants', 'Gain plants').andThen(gainPlants);
     availableActions.push(gainPlantsOption);
 
     if (animalCards.length === 1) {
       const targetAnimalCard = animalCards[0];
-      availableActions.push(new SelectOption('Add 4 animals to ' + targetAnimalCard.name, 'Add animals', () => {
+      availableActions.push(new SelectOption(message('Add ${0} animals to ${1}', (b) => b.number(4).card(targetAnimalCard)), 'Add animals').andThen(() => {
         player.addResourceTo(targetAnimalCard, {qty: 4, log: true});
         return undefined;
       }));
@@ -65,12 +66,11 @@ export class LargeConvoy extends Card implements IProjectCard {
         new SelectCard(
           'Select card to add 4 animals',
           'Add animals',
-          animalCards,
-          ([card]) => {
+          animalCards)
+          .andThen(([card]) => {
             player.addResourceTo(card, {qty: 4, log: true});
             return undefined;
-          },
-        ),
+          }),
       );
     }
 

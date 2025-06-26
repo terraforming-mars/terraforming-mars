@@ -1,7 +1,7 @@
 <template>
-    <div :class="getClasses()">
+    <div :class="outerClass">
         <Tag :tag="tag" :size="size" :type="type"/>
-        <span :class="getCountClasses()">{{ getCount() }}</span>
+        <span :class="innerClass">{{ count }}</span>
     </div>
 </template>
 
@@ -19,7 +19,7 @@ export default Vue.extend({
       type: String as () => CardTag|SpecialTags|'escape',
     },
     count: {
-      type: Number,
+      type: Number as () => Number | String,
     },
     size: {
       type: String,
@@ -27,32 +27,30 @@ export default Vue.extend({
     type: {
       type: String,
     },
-    hideCount: {
+    showWhenZero: {
+      // When true, show even if the value is zero.
       required: false,
-      type: Boolean,
+      default: false,
     },
   },
   components: {
     Tag,
   },
-  methods: {
-    getClasses(): string {
+  computed: {
+    outerClass(): string {
       const classes = ['tag-display'];
-      if (this.count === 0 && this.tag !== 'escape') {
+      if (this.count === 0 && this.showWhenZero === false) {
         classes.push('tag-no-show');
       }
       return classes.join(' ');
     },
-    getCountClasses(): string {
+    innerClass(): string {
       const classes = ['tag-count-display'];
-      if (this.count === 0 && this.tag !== 'escape') {
+      if (this.count === 0 && this.showWhenZero === false) {
         classes.push('tag-count-no-show');
       }
 
       return classes.join(' ');
-    },
-    getCount(): number | string {
-      return this.hideCount === true ? '?' : this.count;
     },
   },
 });

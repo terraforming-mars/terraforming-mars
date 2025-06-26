@@ -3,60 +3,86 @@ import {CardResource} from '../../common/CardResource';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectOption} from '../inputs/SelectOption';
-import {CardName} from '../../common/cards/CardName';
 import {ICard} from '../cards/ICard';
-import {DeferredAction, Priority} from './DeferredAction';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
+import {Message} from '../../common/logs/Message';
+import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
+import {message} from '../logs/MessageBuilder';
+import {CardName} from '../../common/cards/CardName';
 
-// TODO (kberg chosta): Make this a card attribute instead
-const animalsProtectedCards = [CardName.PETS, CardName.BIOENGINEERING_ENCLOSURE];
+export type Source = 'self' | 'opponents' | 'all';
+export type Response = {card: ICard, owner: IPlayer, proceed: boolean} | {card: undefined, owner: undefined, proceed: boolean};
+export class RemoveResourcesFromCard extends DeferredAction<Response> {
+  public cardResource: CardResource | undefined;
+  public count: number;
+  private source: Source;
+  private mandatory: boolean;
+  private blockable: boolean;
+  private autoselect: boolean;
+  private title: string | Message;
+  private log: boolean;
 
-export class RemoveResourcesFromCard extends DeferredAction {
   public override priority = Priority.ATTACK_OPPONENT;
   constructor(
     player: IPlayer,
-    public resourceType: CardResource,
-    public count: number = 1,
-    public ownCardsOnly: boolean = false,
-    public mandatory: boolean = true, // Resource must be removed (either it's a cost or the icon is not red-bordered)
-    public title: string = 'Select card to remove ' + count + ' ' + resourceType + '(s)',
-  ) {
+    cardResource: CardResource | undefined,
+    count: number = 1,
+    options?: {
+      /** Which players to take from. Default all. */
+      source?: Source,
+      /** Resource must be removed (either it's a cost or the icon is not red-bordered.) default true. */
+      mandatory?: boolean,
+      /** If there's only one card, automatically select it. Default is true. Ignored if mandatory is false. */
+      autoselect?: boolean
+      title?: string | Message,
+      blockable?: boolean,
+      log?: boolean,
+    }) {
     super(player, Priority.ATTACK_OPPONENT);
-    if (ownCardsOnly) {
+    this.cardResource = cardResource;
+    this.count = count;
+    this.source = options?.source ?? 'all';
+    this.mandatory = options?.mandatory ?? true;
+    this.blockable = options?.blockable ?? true;
+    this.autoselect = options?.autoselect ?? true;
+    this.log = options?.log ?? false;
+    this.title = options?.title ?? (`Select card to remove ${count} ${cardResource}(s)`);
+    if (this.source === 'self') {
       this.priority = Priority.LOSE_RESOURCE_OR_PRODUCTION;
+      if (this.blockable) {
+        throw new Error('Cannot block removing resources from self');
+      }
     }
   }
 
   public execute() {
-    if (this.ownCardsOnly === false && this.player.game.isSoloMode()) {
+    if (this.source !== 'self' && this.player.game.isSoloMode()) {
       this.player.resolveInsuranceInSoloGame();
+      this.cb({card: undefined, owner: undefined, proceed: true});
       return undefined;
     }
 
-    const resourceCards = RemoveResourcesFromCard.getAvailableTargetCards(this.player, this.resourceType, this.ownCardsOnly);
+    const cards = RemoveResourcesFromCard.getAvailableTargetCards(this.player, this.cardResource, this.source);
 
-    if (resourceCards.length === 0) {
+    if (cards.length === 0) {
+      this.cb({card: undefined, owner: undefined, proceed: false});
       return undefined;
     }
 
     const selectCard = new SelectCard(
       this.title,
       'Remove resource(s)',
-      resourceCards,
-      ([card]) => {
-        const owner = this.player.game.getCardPlayerOrThrow(card.name);
-        owner.removeResourceFrom(card, this.count, {removingPlayer: this.player});
+      cards,
+      {showOwner: true})
+      .andThen(([card]) => {
+        this.attack(card);
         return undefined;
-      },
-      {
-        showOwner: true,
-      },
-    );
+      });
 
     if (this.mandatory) {
-      if (resourceCards.length === 1) {
-        const card = resourceCards[0];
-        const owner = this.player.game.getCardPlayerOrThrow(card.name);
-        owner.removeResourceFrom(card, this.count, {removingPlayer: this.player});
+      if (cards.length === 1 && this.autoselect === true) {
+        this.attack(cards[0]);
         return undefined;
       }
       return selectCard;
@@ -64,35 +90,50 @@ export class RemoveResourcesFromCard extends DeferredAction {
 
     return new OrOptions(
       selectCard,
-      new SelectOption('Do not remove', 'Confirm', () => {
-        return undefined;
-      }),
-    );
+      new SelectOption('Do not remove'));
   }
 
-  public static getAvailableTargetCards(player: IPlayer, resourceType: CardResource | undefined, ownCardsOnly: boolean = false): Array<ICard> {
-    let resourceCards: Array<ICard>;
-    if (ownCardsOnly) {
-      if (resourceType === CardResource.ANIMAL) {
-        resourceCards = player.getCardsWithResources(resourceType).filter((card) => animalsProtectedCards.includes(card.name) === false);
-      } else {
-        resourceCards = player.getCardsWithResources(resourceType);
+  private attack(card: ICard) {
+    const target = this.player.game.getCardPlayerOrThrow(card.name);
+
+    // TODO(kberg): Consolidate the blockable in maybeBlock.
+    if (this.blockable === false) {
+      target.removeResourceFrom(card, this.count, {removingPlayer: this.player});
+      this.cb({card: card, owner: target, proceed: true});
+      return;
+    }
+    const msg = message('${0} ${1} from ${2}', (b) => b.number(this.count).string(card.resourceType || 'resources').card(card));
+    target.defer(UnderworldExpansion.maybeBlockAttack(target, this.player, msg, (proceed) => {
+      if (proceed) {
+        target.removeResourceFrom(card, this.count, {removingPlayer: this.player, log: this.log});
       }
-    } else {
-      resourceCards = [];
-      player.game.getPlayers().forEach((p) => {
-        switch (resourceType) {
-        case CardResource.ANIMAL:
-          if (p.hasProtectedHabitats() && player.id !== p.id) return;
-          resourceCards.push(...p.getCardsWithResources(resourceType).filter((card) => animalsProtectedCards.includes(card.name) === false));
-          break;
-        case CardResource.MICROBE:
-          if (p.hasProtectedHabitats() && player.id !== p.id) return;
-          // This fallthrough is intentional
-        default: // eslint-disable-line no-fallthrough
-          resourceCards.push(...p.getCardsWithResources(resourceType));
+      this.cb({card: card, owner: target, proceed: proceed});
+      return undefined;
+    }));
+  }
+
+  public static getAvailableTargetCards(player: IPlayer, resourceType: CardResource | undefined, source: Source = 'all'): Array<ICard> {
+    const resourceCards: Array<ICard> = [];
+    for (const p of player.game.getPlayers()) {
+      // Making this a function just to delay calling getCardsWithResources unless it's needed.
+      const get = () => p.getCardsWithResources(resourceType).filter((card) => card.protectedResources !== true);
+      if (p === player) {
+        if (source !== 'opponents') {
+          resourceCards.push(...get());
         }
-      });
+      } else {
+        if (source !== 'self') {
+          const hasProtetedHabitats = p.cardIsInEffect(CardName.PROTECTED_HABITATS);
+          for (const card of get()) {
+            if (hasProtetedHabitats) {
+              if (card.resourceType === CardResource.ANIMAL || card.resourceType === CardResource.MICROBE) {
+                continue;
+              }
+            }
+            resourceCards.push(card);
+          }
+        }
+      }
     }
     return resourceCards;
   }

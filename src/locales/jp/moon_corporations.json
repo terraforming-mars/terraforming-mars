@@ -1,0 +1,59 @@
+{
+  "Crescent Research Association": "クレセント研究団体",
+  " Crescent Research Association ": "クレセント研究団体",
+  "Effect: When you play a Moon tag, you pay 1 M€ less for each Moon tag you have.": "効果：月タグ1つ毎に、月タグカードのプレイコスト-1MC",
+  "You start with 50 M€. 1 VP for every 3 Moon tags you have.": "初期資源：50MC. 月タグ3つ毎に1VP.",
+
+  "Intragen Sanctuary Headquarters": "イントラジェン聖所本部",
+  " Intragen Sanctuary Headquarters ": "イントラジェン聖所本部",
+  "Effect: When any player plays an animal tag (including this), add 1 animal on this card.": "効果：動物タグがプレイされる毎に、このカード上に1動物追加.",
+  "You start with 38 M€. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step. 1 VP for every 2 animals on this card.": "初期資源：38MC. 月に生息地タイルを配置し、居住地レート+1段階. このカード上の2動物毎に1VP.",
+
+  "Luna First Incorporated": "ルナ・ファースト",
+  " Luna First Incorporated ": "ルナ・ファースト",
+  "Effect: When you raise any Moon Rate, increase your M€ production 1 step per step.": "効果：いずれかの月レートを上げた時、MC産出+1.",
+  "Effect: When any player raises any Moon Rate, gain 1M€ per step.": "効果：いずれかの月レートが上がった時、1MC獲得.",
+  "You start with 40 M€, 1 steel, and 1 titanium.": "初期資源：40MC. 1建材. 1チタン.",
+
+  "Luna Hyperloop Corporation": "ルナ・ハイパーループ",
+  " Luna Hyperloop Corporation ": "ルナ・ハイパーループ",
+  "Action: Gain 1 M€ for each road tile on The Moon.": "アクション：道路タイル1枚毎に、1MC獲得.",
+  "1 VP for each road tile on The Moon.": "道路タイル1枚毎に1VP.",
+  "You start with 38 M€ and 4 steel.": "初期資源：38MC. 4建材.",
+
+  "Nanotech Industries": "ナノテック工業",
+  " Nanotech Industries ": "ナノテック工業",
+  "Action: Add 1 science resource to ANY card [except those giving 2 or more VP per 1 science resource.]": "アクション：1科学リソース獲得、ただし1科学リソース毎に2VP以上のカードには追加できない.",
+  "You start with 42 M€. As your first action, draw 3 cards. Take 2 of them into hand, and discard the rest. 1 VP for every 2 science resources here.": "初期資源：42MC. 1アクション目：デッキの上から3枚を見る. その内、1枚を獲得し残りを捨て札にする. このカード上の2科学リソース毎に1VP",
+
+  "Tempest Consultancy": "テンペスト・コンサルティング",
+  " Tempest Consultancy ": "テンペスト・コンサルティング",
+  "Action: Place 1 delegate in any party for every 5 Moon tags you have [max 3.]": "アクション：月タグ5つ毎に、任意の政党に代議員を1名配置(最大3名).",
+  "Effect: When your delegate becomes the chairman, increase your TR 1 step.": "効果：あなたが議長になった時、TRを+1段階.",
+  "You start with 37 M€. As your first action, place 2 delegates in one party.": "初期資源：37MC. 1アクション目：任意の政党に代議員を2名配置.",
+
+  "The Archaic Foundation Institute": "アルカイック財団研究所",
+  " The Archaic Foundation Institute ": "アルカイック財団研究所",
+  "Effect: When you play a Moon tag, including these, add a cube to this card.": "効果：月タグをプレイ時、このカード上に1銅キューブ追加.",
+  "Effect: Automatically remove 3 cubes here and gain 1 TR.": "効果：このカード上から3銅キューブ除去し、TR+1段階.",
+  "Action: Remove 3 cubes here; gain 1 TR.": "アクション：このカード上から3銅キューブ除去し、TR+1段階.(動乱時使用)",
+  "You start with 55 M€.": "初期資源：55MC.",
+
+  "Luna Trade Federation": "ルナ貿易連盟",
+  " Luna Trade Federation ": "ルナ貿易連盟",
+  "Effect: When you place a mine tile on The Moon, raise your titanium production 1 step.": "効果：鉱山タイル配置時、チタン産出+1.",
+  "Effect: You may use titanium resources as 2M€ each.": "効果：チタンを2MCとして支払ってもよい.",
+  "You start with 15 M€ and 10 titanium.": "初期資源：15MC. 10チタン.",
+
+  "The Darkside of The Moon Syndicate": "暗闇側のムーン・シンジゲート",
+  " The Darkside of The Moon Syndicate ": "暗闇側のムーン・シンジゲート",
+  "Action: Spend 1 titanium to add 1 syndicate fleet on this card OR remove 1 syndicate fleet from this card to steal 2M€ from every opponent.": "アクション：1チタンを支払い、このカード上に1シンジゲート艦追加. もしくは このカード上から2シンジゲート艦を除去し、他の全プレイヤーから2MC盗む.",
+  "You start with 40 M€ and 2 syndicate fleets on this card.": "初期資源：40MC. このカード上に2シンジゲート艦追加.",
+  "Effect: When you place a tile on The Moon, steal 2 M€ from opponents for each of their tiles next to yours.": "効果：月にタイルを配置した時、隣接するタイルの他プレイヤーから2MCまで盗む.",
+
+  "The Grand Luna Capital Group": "グランド・ルナ・キャピタル・グループ",
+  " The Grand Luna Capital Group ": "グランド・ルナ・キャピタル・グループ",
+  "Effect: When you place a habitat tile, gain 2 M€ for each adjacent habitat tile.": "効果：生息地タイルを配置した時、隣接する生息地タイル1枚毎に、2MC獲得.",
+  "1 VP for each habitat tile adjacent to your habitat tiles.": "生息地タイルに隣接する生息地タイル1枚毎に1VP.",
+  "You start with 32 M€ and 1 titanium. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step.": "初期資源：32MC. 1チタン. 1アクション目：月に生息地タイルを配置し、居住地レート+1段階."
+}

@@ -18,20 +18,13 @@ export class MoonRoadStandardProject extends StandardProjectCard {
     metadata: {
       cardNumber: '',
       renderData: CardRenderer.builder((b) =>
-        b.standardProject('Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.', (eb) => {
+        b.standardProject('Spend 18 M€ and 1 steel to place a road on The Moon and raise the Logistics Rate 1 step.', (eb) => {
           eb.megacredits(18).steel(1).startAction.moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTICS_RATE});
         }),
       ),
     },
   }) {
     super(properties);
-  }
-
-  protected override discount(player: IPlayer): number {
-    if (player.playedCards.find((card) => card.name === CardName.MOONCRATE_BLOCK_FACTORY)) {
-      return 4;
-    }
-    return super.discount(player);
   }
 
   public override canAct(player: IPlayer): boolean {

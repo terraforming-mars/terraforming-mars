@@ -1,6 +1,8 @@
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {BaseMilestone} from '../IMilestone'; export class Spacefarer extends BaseMilestone {
+import {BaseMilestone} from '../IMilestone';
+
+export class Spacefarer extends BaseMilestone {
   constructor() {
     super(
       'Spacefarer',

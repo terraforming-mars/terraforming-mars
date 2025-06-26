@@ -4,7 +4,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 
 export class LunarMining extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +21,7 @@ export class LunarMining extends Card implements IProjectCard {
         cardNumber: 'C22',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.titanium(1).slash().earth(2, {played});
+            pb.titanium(1).slash().tag(Tag.EARTH, 2);
           });
         }),
         description: 'Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.',

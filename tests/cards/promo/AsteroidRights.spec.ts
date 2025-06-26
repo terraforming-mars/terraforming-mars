@@ -2,39 +2,36 @@ import {expect} from 'chai';
 import {ICard} from '../../../src/server/cards/ICard';
 import {AsteroidRights} from '../../../src/server/cards/promo/AsteroidRights';
 import {CometAiming} from '../../../src/server/cards/promo/CometAiming';
-import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, testGame} from '../../TestingUtils';
 
-describe('AsteroidRights', function() {
+describe('AsteroidRights', () => {
   let card: AsteroidRights;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AsteroidRights();
-    player = TestPlayer.BLUE.newPlayer();
-    const redPlayer = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, redPlayer], player);
+    [/* game */, player/* , player2 */] = testGame(2);
 
     player.playedCards.push(card);
     card.play(player);
-    runAllActions(game);
+    runAllActions(player.game);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     expect(card.resourceCount).to.eq(2);
   });
 
-  it('Can not act', function() {
+  it('Can not act', () => {
     player.megaCredits = 0;
     card.resourceCount = 0;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act - can auto spend asteroid resource', function() {
+  it('Should act - can auto spend asteroid resource', () => {
     player.megaCredits = 0;
     const action = cast(card.action(player), OrOptions);
 
@@ -47,7 +44,7 @@ describe('AsteroidRights', function() {
     expect(player.titanium).to.eq(2);
   });
 
-  it('Should play - can auto add asteroid resource to self', function() {
+  it('Should play - can auto add asteroid resource to self', () => {
     player.megaCredits = 1;
     card.resourceCount = 0;
 
@@ -57,7 +54,7 @@ describe('AsteroidRights', function() {
     expect(card.resourceCount).to.eq(1);
   });
 
-  it('Should play - can add asteroid resource to other card', function() {
+  it('Should play - can add asteroid resource to other card', () => {
     player.megaCredits = 1;
     card.resourceCount = 0;
     const cometAiming = new CometAiming();
@@ -68,7 +65,7 @@ describe('AsteroidRights', function() {
     expect(cometAiming.resourceCount).to.eq(1);
   });
 
-  it('Should play - all options available', function() {
+  it('Should play - all options available', () => {
     player.megaCredits = 1;
     const cometAiming = new CometAiming();
     player.playedCards.push(cometAiming);

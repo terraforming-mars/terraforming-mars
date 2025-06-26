@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {SocialEvents} from '../../../src/server/cards/pathfinders/SocialEvents';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {Phase} from '../../../src/common/Phase';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -11,13 +11,13 @@ import {runAllActions} from '../../TestingUtils';
 
 // This card is only difficult when Reds are in power, so these tests set up for that.
 
-describe('SocialEvents', function() {
+describe('SocialEvents', () => {
   let card: SocialEvents;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SocialEvents();
     [game, player] = testGame(1, {turmoilExtension: true});
     turmoil = Turmoil.getTurmoil(game);
@@ -25,14 +25,14 @@ describe('SocialEvents', function() {
     game.phase = Phase.ACTION;
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.megaCredits = card.cost;
     expect(player.canPlay(card)).is.true;
     player.tagsForTest = {mars: 3};
     expect(player.canPlay(card)).is.true;
   });
 
-  it('canPlay - Reds', function() {
+  it('canPlay - Reds', () => {
     turmoil.rulingParty = new Reds();
     player.megaCredits = card.cost;
     expect(player.canPlay(card)).is.true;
@@ -42,45 +42,46 @@ describe('SocialEvents', function() {
     expect(player.canPlay(card)).is.false;
     player.megaCredits = card.cost + 6;
     expect(player.canPlay(card)).is.true;
+    expect(card.additionalProjectCosts).deep.eq({redsCost: 6});
   });
 
-  it('play', function() {
-    expect(player.getTerraformRating()).eq(14);
+  it('play', () => {
+    expect(player.terraformRating).eq(14);
 
     player.tagsForTest = {mars: 0};
     card.play(player);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     player.tagsForTest = {mars: 1};
     card.play(player);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
 
     player.tagsForTest = {mars: 3};
     card.play(player);
-    expect(player.getTerraformRating()).eq(17);
+    expect(player.terraformRating).eq(17);
   });
 
-  it('play - reds', function() {
+  it('play - reds', () => {
     turmoil.rulingParty = new Reds();
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     player.megaCredits = 10;
     player.tagsForTest = {mars: 0};
     card.play(player);
     runAllActions(game);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(player.megaCredits).eq(10);
 
     player.tagsForTest = {mars: 1};
     card.play(player);
     runAllActions(game);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(player.megaCredits).eq(7); // -3 MC
 
     player.tagsForTest = {mars: 3};
     card.play(player);
     runAllActions(game);
-    expect(player.getTerraformRating()).eq(17);
+    expect(player.terraformRating).eq(17);
     expect(player.megaCredits).eq(1); // -6 MC
   });
 });

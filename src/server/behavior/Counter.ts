@@ -1,10 +1,26 @@
+import * as utils from '../../common/utils/utils'; // Since there's already a sum variable.
 import {Units} from '../../common/Units';
 import {TileType} from '../../common/TileType';
 import {ICard} from '../cards/ICard';
 import {IPlayer} from '../IPlayer';
 import {Countable, CountableUnits} from './Countable';
-import {hasIntersection} from '../../common/utils/utils';
 import {MoonExpansion} from '../moon/MoonExpansion';
+import {CardResource} from '../../common/CardResource';
+
+/**
+ * Counts things in game state.
+ */
+export interface ICounter {
+  /**
+   * Count using the applied countable definition.
+   *
+   * context: describes what to do in different counting contexts. Most of the time 'default' is correct, but
+   * when counting victory points, use 'vp'. 'vp' applies to counting victory points. As of now, this only applies
+   * to how it counts wild tags and other substitutions that only apply during an action.
+   */
+  count(countable: Countable, context?: 'default' | 'vps'): number;
+  countUnits(countableUnits: Partial<CountableUnits>): Units;
+}
 
 /**
  * Counts things in game state.
@@ -35,7 +51,7 @@ export class Counter {
       return countable;
     }
 
-    let sum = 0;
+    let sum = countable.start ?? 0;
 
     const player = this.player;
     const card = this.card;
@@ -57,7 +73,11 @@ export class Counter {
     }
 
     if (countable.oceans !== undefined) {
-      sum += game.board.getOceanSpaces({wetlands: true}).length;
+      sum += game.board.getOceanSpaces({upgradedOceans: true, wetlands: true}).length;
+    }
+
+    if (countable.floaters !== undefined) {
+      sum += player.getResourceCount(CardResource.FLOATER);
     }
 
     if (countable.greeneries !== undefined) {
@@ -70,14 +90,14 @@ export class Counter {
       if (Array.isArray(tag)) { // Multiple tags
         // These two error cases could be coded up, but they don't have a case just yet, and if they do come
         // up, better for the code to error than silently ignore it.
-        if (this.cardIsUnplayed && hasIntersection(tag, card.tags)) {
-          throw new Error(`Not supporting the case counting tags ${tag} when played card tags are ${card.tags}`);
-        }
         if (countable.others === true) {
           throw new Error('Not counting others\' multiple Tags.');
         }
 
         sum += player.tags.multipleCount(tag);
+        if (this.cardIsUnplayed) { // And include the card itself if it isn't already on the tableau.
+          sum += player.tags.cardTagCount(card, tag);
+        }
       } else { // Single tag
         if (countable.others !== true) { // Just count player's own tags.
           sum += player.tags.count(tag, context === 'vps' ? 'raw' : context);
@@ -89,8 +109,7 @@ export class Counter {
 
         // When counting all the other players' tags, just count raw, so as to disregard their wild tags.
         if (countable.all === true || countable.others === true) {
-          game.getPlayers()
-            .filter((p) => p.id !== player.id)
+          player.getOpponents()
             .forEach((p) => sum += p.tags.count(tag, 'raw'));
         }
       }
@@ -100,11 +119,21 @@ export class Counter {
       sum += card.resourceCount;
     }
 
+    if (countable.colonies !== undefined) {
+      player.game.colonies.forEach((colony) => {
+        if (countable.all) {
+          sum += colony.colonies.length;
+        } else {
+          sum += colony.colonies.filter((colony) => colony === player.id).length;
+        }
+      });
+    }
+
     if (countable.moon !== undefined) {
       const moon = countable.moon;
       MoonExpansion.ifMoon(game, (moonData) => {
         if (moon.habitatRate) {
-          sum += moonData.colonyRate;
+          sum += moonData.habitatRate;
         }
         if (moon.miningRate) {
           sum += moonData.miningRate;
@@ -121,6 +150,24 @@ export class Counter {
       }
       if (moon.road) {
         sum += MoonExpansion.spaces(game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
+      }
+    }
+
+    if (countable.underworld !== undefined) {
+      const underworld = countable.underworld;
+      if (underworld.corruption !== undefined) {
+        if (countable.all === true) {
+          sum += utils.sum(game.getPlayers().map((p) => p.underworldData.corruption));
+        } else {
+          sum += player.underworldData.corruption;
+        }
+      }
+      if (underworld.excavationMarkers !== undefined) {
+        if (countable.all) {
+          sum += player.game.board.spaces.filter((space) => space.excavator !== undefined).length;
+        } else {
+          sum += player.game.board.spaces.filter((space) => space.excavator === player).length;
+        }
       }
     }
 

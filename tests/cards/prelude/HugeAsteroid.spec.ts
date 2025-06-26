@@ -1,28 +1,28 @@
 import {expect} from 'chai';
 import {HugeAsteroid} from '../../../src/server/cards/prelude/HugeAsteroid';
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
+import {testGame} from '../../TestingUtils';
 
-describe('HugeAsteroid', function() {
+describe('HugeAsteroid', () => {
   let card: HugeAsteroid;
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new HugeAsteroid();
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player);
+    [game, player] = testGame(1);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     player.megaCredits = 4;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.megaCredits = 5;
     expect(card.canPlay(player)).is.true;
-    const initialTR = player.getTerraformRating();
+    const initialTR = player.terraformRating;
 
     card.play(player);
 
@@ -31,6 +31,6 @@ describe('HugeAsteroid', function() {
 
     expect(player.megaCredits).to.eq(0);
     expect(player.production.heat).to.eq(1);
-    expect(player.getTerraformRating()).to.eq(initialTR + 3);
+    expect(player.terraformRating).to.eq(initialTR + 3);
   });
 });

@@ -2,17 +2,15 @@ import {GameOptions} from '../game/GameOptions';
 import {IPlayer} from '../IPlayer';
 import {Random} from '../../common/utils/Random';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {SpaceName} from '../SpaceName';
+import {SpaceName} from '../../common/boards/SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
 import {Space} from './Space';
-import {SerializedBoard} from './SerializedBoard';
 import {MarsBoard} from './MarsBoard';
 
 export class ArabiaTerraBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): ArabiaTerraBoard {
-    const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
+    const builder = new BoardBuilder(gameOptions);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -43,20 +41,20 @@ export class ArabiaTerraBoard extends MarsBoard {
     builder.land().land().land().land().land(STEEL);
 
     if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng); // , SpaceName.HECATES_THOLUS, SpaceName.ELYSIUM_MONS, SpaceName.ARSIA_MONS_ELYSIUM, SpaceName.OLYMPUS_MONS);
+      builder.shuffle(rng, SpaceName.TIKHONAROV, SpaceName.LADON, SpaceName.FLAUGERGUES, SpaceName.CHARYBDIS);
     }
 
     const spaces = builder.build();
     return new ArabiaTerraBoard(spaces);
   }
 
-  public override getVolcanicSpaceIds() {
-    return [
+  public constructor(spaces: ReadonlyArray<Space>) {
+    super(spaces, undefined, [
       SpaceName.TIKHONAROV,
       SpaceName.LADON,
       SpaceName.FLAUGERGUES,
       SpaceName.CHARYBDIS,
-    ];
+    ]);
   }
 
   public override getSpaces(spaceType: SpaceType): Array<Space> {
@@ -69,7 +67,9 @@ export class ArabiaTerraBoard extends MarsBoard {
     }
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<IPlayer>): ArabiaTerraBoard {
-    return new ArabiaTerraBoard(Board.deserializeSpaces(board.spaces, players));
+  public override getAvailableSpacesForOcean(player: IPlayer): readonly Space[] {
+    // Nomads can be found on cove spaces
+    return super.getAvailableSpacesForOcean(player)
+      .filter((space) => space.id !== player.game.nomadSpace);
   }
 }

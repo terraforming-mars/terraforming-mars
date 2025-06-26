@@ -8,7 +8,6 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 
@@ -22,13 +21,13 @@ export class Predators extends Card implements IProjectCard, IActionCard {
 
       resourceType: CardResource.ANIMAL,
       victoryPoints: {resourcesHere: {}},
-      requirements: CardRequirements.builder((b) => b.oxygen(11)),
+      requirements: {oxygen: 11},
 
       metadata: {
         cardNumber: '024',
         renderData: CardRenderer.builder((b) => {
           b.action('Remove 1 animal from any card and add it to this card.', (eb) => {
-            eb.animals(1, {all}).startAction.animals(1);
+            eb.resource(CardResource.ANIMAL, {all}).startAction.resource(CardResource.ANIMAL);
           }).br;
           b.vpText('1 VP per animal on this card.');
         }),
@@ -43,8 +42,13 @@ export class Predators extends Card implements IProjectCard, IActionCard {
   }
 
   public action(player: IPlayer) {
-    player.game.defer(new RemoveResourcesFromCard(player, CardResource.ANIMAL));
-    player.game.defer(new AddResourcesToCard(player, CardResource.ANIMAL, {filter: (c) => c.name === this.name}));
+    player.game.defer(
+      new RemoveResourcesFromCard(player, CardResource.ANIMAL, 1, {log: true})
+        .andThen((response) => {
+          if (response.proceed) {
+            player.game.defer(new AddResourcesToCard(player, CardResource.ANIMAL, {filter: (c) => c.name === this.name}));
+          }
+        }));
     return undefined;
   }
 }

@@ -1,9 +1,10 @@
-import {Game} from '../../../src/server/Game';
+import {IGame} from '../../../src/server/IGame';
+import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {ThoriumRush} from '../../../src/server/cards/moon/ThoriumRush';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {IMoonData} from '../../../src/server/moon/IMoonData';
+import {MoonData} from '../../../src/server/moon/MoonData';
 import {Phase} from '../../../src/common/Phase';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
@@ -11,13 +12,12 @@ import {Reds} from '../../../src/server/turmoil/parties/Reds';
 
 describe('ThoriumRush', () => {
   let player: TestPlayer;
-  let game: Game;
+  let game: IGame;
   let card: ThoriumRush;
-  let moonData: IMoonData;
+  let moonData: MoonData;
 
   beforeEach(() => {
-    player = TestPlayer.BLUE.newPlayer();
-    game = Game.newInstance('gameid', [player], player, {moonExpansion: true});
+    [game, player] = testGame(1, {moonExpansion: true});
     card = new ThoriumRush();
     moonData = MoonExpansion.moonData(game);
   });
@@ -26,30 +26,29 @@ describe('ThoriumRush', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
-    moonData.colonyRate = 0;
+    moonData.habitatRate = 0;
     moonData.logisticRate = 0;
     moonData.miningRate = 0;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     card.play(player);
 
-    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpace('m02')),
-    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpace('m03')),
-    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpace('m04')),
+    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpaceOrThrow('m02')),
+    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpaceOrThrow('m03')),
+    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpaceOrThrow('m04')),
 
-    expect(moonData.colonyRate).eq(1);
-    expect(moonData.colonyRate).eq(1);
-    expect(moonData.colonyRate).eq(1);
-    expect(player.getTerraformRating()).eq(17);
+    expect(moonData.habitatRate).eq(1);
+    expect(moonData.habitatRate).eq(1);
+    expect(moonData.habitatRate).eq(1);
+    expect(player.terraformRating).eq(17);
   });
 
   it('canPlay when Reds are in power', () => {
-    const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, {moonExpansion: true, turmoilExtension: true});
+    const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true});
     const turmoil = game.turmoil!;
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;
@@ -69,6 +68,7 @@ describe('ThoriumRush', () => {
     expect(player.canPlay(card)).is.false;
     player.megaCredits = card.cost + 9;
     expect(player.canPlay(card)).is.true;
+    expect(card.additionalProjectCosts).deep.eq({redsCost: 9});
 
     moonData.miningRate = 8;
 
@@ -76,13 +76,15 @@ describe('ThoriumRush', () => {
     expect(player.canPlay(card)).is.false;
     player.megaCredits = card.cost + 6;
     expect(player.canPlay(card)).is.true;
+    expect(card.additionalProjectCosts).deep.eq({redsCost: 6});
 
-    moonData.colonyRate = 8;
+    moonData.habitatRate = 8;
 
     player.megaCredits = card.cost + 2;
     expect(player.canPlay(card)).is.false;
     player.megaCredits = card.cost + 3;
     expect(player.canPlay(card)).is.true;
+    expect(card.additionalProjectCosts).deep.eq({redsCost: 3});
 
     moonData.logisticRate = 8;
 

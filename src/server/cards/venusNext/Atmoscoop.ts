@@ -10,7 +10,6 @@ import {CardName} from '../../../common/cards/CardName';
 import * as constants from '../../../common/constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../../common/turmoil/PartyName';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {Card} from '../Card';
@@ -23,7 +22,7 @@ export class Atmoscoop extends Card implements IProjectCard {
       cost: 22,
       tags: [Tag.JOVIAN, Tag.SPACE],
 
-      requirements: CardRequirements.builder((b) => b.tag(Tag.SCIENCE, 3)),
+      requirements: {tag: Tag.SCIENCE, count: 3},
       victoryPoints: 1,
 
       behavior: {
@@ -35,7 +34,7 @@ export class Atmoscoop extends Card implements IProjectCard {
         description: 'Requires 3 science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 floaters to ANY card.',
         renderData: CardRenderer.builder((b) => {
           b.temperature(2).or(Size.SMALL).venus(2).br;
-          b.floaters(2).asterix();
+          b.resource(CardResource.FLOATER, 2).asterix();
         }),
       },
     });
@@ -46,9 +45,13 @@ export class Atmoscoop extends Card implements IProjectCard {
     const remainingVenusSteps = (constants.MAX_VENUS_SCALE - player.game.getVenusScaleLevel()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, remainingVenusSteps, 2);
 
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp01')) {
       // TODO(kberg): this is not correct, because the titanium can't be used for the reds cost.
-      return player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised, {titanium: true});
+      // TODO(kberg): this.cost does not take the card discount into account.
+      return player.canAfford({
+        cost: this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised,
+        titanium: true,
+      });
     }
 
     return true;
@@ -60,16 +63,16 @@ export class Atmoscoop extends Card implements IProjectCard {
       return undefined;
     }
 
-    const increaseTemp = new SelectOption('Raise temperature 2 steps', 'Raise temperature', () => {
+    const increaseTemp = new SelectOption('Raise temperature 2 steps', 'Raise temperature').andThen(() => {
       game.increaseTemperature(player, 2);
       return undefined;
     });
-    const increaseVenus = new SelectOption('Raise Venus 2 steps', 'Raise Venus', () => {
+    const increaseVenus = new SelectOption('Raise Venus 2 steps', 'Raise Venus').andThen(() => {
       game.increaseVenusScaleLevel(player, 2);
       return undefined;
     });
-    const increaseTempOrVenus = new OrOptions(increaseTemp, increaseVenus);
-    increaseTempOrVenus.title = 'Choose global parameter to raise';
+    const increaseTempOrVenus = new OrOptions(increaseTemp, increaseVenus)
+      .setTitle('Choose global parameter to raise');
 
     if (!this.temperatureIsMaxed(game) && this.venusIsMaxed(game)) {
       player.game.increaseTemperature(player, 2);

@@ -1,16 +1,13 @@
 import {expect} from 'chai';
 import {LunarExports} from '../../../src/server/cards/colonies/LunarExports';
-import {Game} from '../../../src/server/Game';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
-import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions, testGame} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 
-describe('LunarExports', function() {
-  it('Should play', function() {
+describe('LunarExports', () => {
+  it('Should play', () => {
     const card = new LunarExports();
-    const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player);
+    const [game, player] = testGame(1);
     card.play(player);
     runAllActions(game);
     const orOptions = cast(player.popWaitingFor(), OrOptions);

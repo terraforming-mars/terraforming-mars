@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SelectParty} from '../../src/server/inputs/SelectParty';
 import {PartyName} from '../../src/common/turmoil/PartyName';
 
-describe('SelectParty', function() {
+describe('SelectParty', () => {
   let selected: PartyName | undefined;
   const cb = (cards: PartyName) => {
     selected = cards;
@@ -13,8 +13,8 @@ describe('SelectParty', function() {
     selected = undefined;
   });
 
-  it('Simple', function() {
-    const selectParty = new SelectParty('', '', [PartyName.GREENS, PartyName.KELVINISTS], cb);
+  it('Simple', () => {
+    const selectParty = new SelectParty('', '', [PartyName.GREENS, PartyName.KELVINISTS]).andThen(cb);
 
     selectParty.process({type: 'party', partyName: PartyName.GREENS});
     expect(selected).eq(PartyName.GREENS);
@@ -23,8 +23,8 @@ describe('SelectParty', function() {
     expect(selected).eq(PartyName.KELVINISTS);
   });
 
-  it('Cannot select unavailable party', function() {
-    const selectParty = new SelectParty('', '', [PartyName.GREENS, PartyName.KELVINISTS], cb);
+  it('Cannot select unavailable party', () => {
+    const selectParty = new SelectParty('', '', [PartyName.GREENS, PartyName.KELVINISTS]).andThen(cb);
 
     expect(() => selectParty.process({type: 'party', partyName: PartyName.SCIENTISTS}))
       .to.throw(Error, /Invalid party selected/);

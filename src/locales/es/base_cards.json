@@ -52,7 +52,7 @@
 
 
 
-    "Capital": "Capital",
+    "Capital": "",
     "2 Oceans": "2 Océanos",
     "3 Oceans": "3 Océanos",
     "4 Oceans": "4 Océanos",
@@ -198,7 +198,7 @@
     "Action: Add 1 microbe to this card.": "Acción: añade 1 microbio a esta carta.",
     "1 VP per 4 Microbes on this card.": "1 PV por cada 4 microbios en esta carta.",
 
-    "Virus": "Virus",
+    "Virus": "",
     "Remove up to 2 animals or 5 plants from any player.": "Elimina hasta 2 animales o hasta 5 plantas de cualquier jugador.",
 
     "Miranda Resort": "Centro Turístico Miranda",
@@ -433,7 +433,7 @@
     "Steal up to 2 steel, or 3 M€ from any player.": "Roba hasta 2 de acero o 3 M€ de cualquier jugador.",
 
     "Hackers": "Piratas Informáticos",
-    "Decrease your energy production 1 step and any M€ production 2 steps. increase your M€ production 2 steps.": "Reduce tu producción de energía 1 nivel y la producción de M€ de cualquier jugador 2 niveles. Aumenta tu producción de M€ 2 niveles.",
+    "Decrease your energy production 1 step and any M€ production 2 steps. Increase your M€ production 2 steps.": "Reduce tu producción de energía 1 nivel y la producción de M€ de cualquier jugador 2 niveles. Aumenta tu producción de M€ 2 niveles.",
 
     "GHG Factories": "Fábricas de GEI",
     "Decrease your energy production 1 step and increase your heat production 4 steps.": "Reduce tu producción de energía 1 nivel e incrementa tu producción de calor 4 niveles.",
@@ -489,7 +489,6 @@
     "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.": "Aumenta la temperatura 2 niveles y coloca esta loseta en THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS O ARSIA MONS.",
 
     "Power Plant": "Central Eléctrica",
-    "Increase your energy production 1 step.": "Aumenta tu producción de energía 1 nivel.",
 
     "Mohole Area": "Área Mohole",
     "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.": "Aumenta tu producción de calor 4 niveles. Coloca esta loseta EN UN ÁREA RESERVADA PARA OCÉANO.",

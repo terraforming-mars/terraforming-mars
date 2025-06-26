@@ -3,8 +3,9 @@ import {testGame} from '../../TestGame';
 import {OutdoorSports} from '../../../src/server/cards/promo/OutdoorSports';
 import {TestPlayer} from '../../TestPlayer';
 import {Space} from '../../../src/server/boards/Space';
+import {partition} from '../../../src/common/utils/utils';
 
-describe('OutdoorSports', function() {
+describe('OutdoorSports', () => {
   let card: OutdoorSports;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -12,19 +13,21 @@ describe('OutdoorSports', function() {
   let spaceNextToOcean: Space;
   let spaceNotNextToOcean: Space;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new OutdoorSports();
-    [, player, player2] = testGame(2);
+    [/* game */, player, player2] = testGame(2);
     const board = player.game.board;
     oceanSpace = board.getAvailableSpacesForOcean(player)[0];
 
     const spacesNextToOceanSpace = board.getAdjacentSpaces(oceanSpace);
     const citySpaces = board.getAvailableSpacesForCity(player);
-    spaceNextToOcean = citySpaces.filter((space) => spacesNextToOceanSpace.includes(space))[0];
-    spaceNotNextToOcean = citySpaces.filter((space) => !spacesNextToOceanSpace.includes(space))[0];
+    [[spaceNextToOcean], [spaceNotNextToOcean]] = partition(
+      citySpaces,
+      (space) => spacesNextToOceanSpace.includes(space),
+    );
   });
 
-  it('cannotPlay', function() {
+  it('cannotPlay', () => {
     player.megaCredits = card.cost;
     player.game.addOcean(player, oceanSpace);
     expect(player.canPlay(card)).is.not.true;
@@ -33,7 +36,7 @@ describe('OutdoorSports', function() {
     expect(player.canPlay(card)).is.not.true;
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.megaCredits = card.cost;
     player.game.addOcean(player, oceanSpace);
     expect(player.canPlay(card)).is.not.true;
@@ -42,7 +45,7 @@ describe('OutdoorSports', function() {
     expect(player.canPlay(card)).is.true;
   });
 
-  it('canPlay - other player owns the city', function() {
+  it('canPlay - other player owns the city', () => {
     player.megaCredits = card.cost;
     player.game.addOcean(player, oceanSpace);
     expect(player.canPlay(card)).is.not.true;
@@ -51,7 +54,7 @@ describe('OutdoorSports', function() {
     expect(player.canPlay(card)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     expect(player.production.megacredits).to.eq(0);
 
     card.play(player);

@@ -6,7 +6,6 @@ import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {GainProduction} from '../../deferredActions/GainProduction';
@@ -20,7 +19,7 @@ export class AsteroidMiningConsortium extends Card implements IProjectCard {
       cost: 13,
       victoryPoints: 1,
 
-      requirements: CardRequirements.builder((b) => b.production(Resource.TITANIUM)),
+      requirements: {production: Resource.TITANIUM, count: 1},
       metadata: {
         description: 'Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.',
         cardNumber: '002',
@@ -34,13 +33,23 @@ export class AsteroidMiningConsortium extends Card implements IProjectCard {
     });
   }
 
+  public override bespokeCanPlay(player: IPlayer) {
+    if (player.game.getPlayers().length > 1) {
+      const eligiblePlayers = player.game.getPlayers().filter((p) => p.production.titanium > 0);
+      if (eligiblePlayers.length === 1 && eligiblePlayers[0] === player) {
+        this.warnings.add('selfTarget');
+      }
+    }
+    return true;
+  }
+
   public override bespokePlay(player: IPlayer) {
     player.game.defer(new DecreaseAnyProduction(
       player,
       Resource.TITANIUM,
       {count: 1, stealing: true},
     ));
-    player.game.defer(new GainProduction(player, Resource.TITANIUM, {count: 1}));
+    player.game.defer(new GainProduction(player, Resource.TITANIUM, {count: 1, log: false}));
     return undefined;
   }
 }

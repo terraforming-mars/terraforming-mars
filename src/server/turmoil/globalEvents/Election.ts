@@ -73,7 +73,7 @@ export class Election extends GlobalEvent implements IGlobalEvent {
   }
 
   public getScore(player: IPlayer, turmoil: Turmoil, game: IGame) {
-    const score = player.tags.count(Tag.BUILDING, 'raw') + turmoil.getPlayerInfluence(player);
+    const score = player.tags.count(Tag.BUILDING, 'raw') + turmoil.getInfluence(player);
 
     const cities = game.board.spaces.filter(
       (space) => Board.isCitySpace(space) && space.player === player,

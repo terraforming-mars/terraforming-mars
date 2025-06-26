@@ -456,7 +456,7 @@ export class Turmoil {
     policy.onPolicyStart?.(game);
   }
 
-  public getPlayerInfluence(player: IPlayer) {
+  public getInfluence(player: IPlayer) {
     let influence = 0;
     if (this.chairman === player) influence++;
 
@@ -517,7 +517,7 @@ export class Turmoil {
    *
    * Players get 1 VP at the end of the game for each chairman and party leader they have.
    */
-  public getPlayerVictoryPoints(player: IPlayer): number {
+  public getVictoryPoints(player: IPlayer): number {
     let victory = 0;
     if (this.chairman === player) victory++;
     this.parties.forEach((party) => {

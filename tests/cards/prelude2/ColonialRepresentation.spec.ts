@@ -21,7 +21,7 @@ describe('ColonialRepresentation', () => {
     game.turmoil!.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
     game.turmoil!.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
     card.play(player);
-    expect(game.turmoil!.getPlayerInfluence(player)).to.eq(3);
+    expect(game.turmoil!.getInfluence(player)).to.eq(3);
   });
 
   it('Megacredits check', () => {

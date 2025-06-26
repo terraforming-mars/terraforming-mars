@@ -29,7 +29,7 @@ export class Riots extends GlobalEvent implements IGlobalEvent {
         (space) => Board.isCitySpace(space) &&
                          space.player === player,
       ).length;
-      const amount = Math.min(5, city) - turmoil.getPlayerInfluence(player);
+      const amount = Math.min(5, city) - turmoil.getInfluence(player);
       if (amount > 0) {
         player.stock.deduct(Resource.MEGACREDITS, 4 * amount, {log: true, from: {globalEvent: this}});
       }

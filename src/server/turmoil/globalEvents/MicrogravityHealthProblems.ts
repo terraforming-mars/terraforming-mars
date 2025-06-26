@@ -33,7 +33,7 @@ export class MicrogravityHealthProblems extends GlobalEvent implements IGlobalEv
         3 *
           Math.max(
             0,
-            Math.min(5, coloniesCount) - turmoil.getPlayerInfluence(player),
+            Math.min(5, coloniesCount) - turmoil.getInfluence(player),
           ),
         {log: true, from: {globalEvent: this}},
       );

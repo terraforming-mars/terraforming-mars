@@ -36,7 +36,7 @@ export class CommunicationBoom extends GlobalEvent implements IGlobalEvent {
       player.getResourceCards(CardResource.DATA).forEach((card) => {
         player.addResourceTo(card, {qty: 2, log: true});
       });
-      const count = turmoil.getPlayerInfluence(player);
+      const count = turmoil.getInfluence(player);
       game.defer(new AddResourcesToCards(player, CardResource.DATA, count));
     });
   }

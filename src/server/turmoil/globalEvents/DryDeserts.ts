@@ -29,7 +29,7 @@ export class DryDeserts extends GlobalEvent implements IGlobalEvent {
     }
 
     game.playersInGenerationOrder.forEach((player) => {
-      const count = turmoil.getPlayerInfluence(player);
+      const count = turmoil.getInfluence(player);
       if (count > 0) {
         player.defer(new GainResources(
           player,

@@ -99,18 +99,18 @@ describe('Turmoil', () => {
     // 1 influence: Leader of dominant party
     expectDelegateMatch(greens.delegates, player);
     expect(greens.partyLeader).to.eq(player);
-    expect(turmoil.getPlayerInfluence(player)).to.eq(1);
+    expect(turmoil.getInfluence(player)).to.eq(1);
 
     // 2 influence: Leader of dominant party + at least 1 non-leader delegate in party
     turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
     expect(greens.delegates.size).eq(2);
-    expect(turmoil.getPlayerInfluence(player)).to.eq(2);
+    expect(turmoil.getInfluence(player)).to.eq(2);
   });
 
   it('Chairman gives 1 influence', () => {
     turmoil.parties.forEach((party) => party.delegates.clear());
     turmoil.chairman = player;
-    expect(turmoil.getPlayerInfluence(player)).to.eq(1);
+    expect(turmoil.getInfluence(player)).to.eq(1);
   });
 
   it('Correctly set dominant party', () => {

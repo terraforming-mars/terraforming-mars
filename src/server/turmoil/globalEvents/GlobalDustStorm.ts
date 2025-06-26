@@ -31,7 +31,7 @@ export class GlobalDustStorm extends GlobalEvent implements IGlobalEvent {
       const maxedSteelTags = Math.min(5, player.tags.count(Tag.BUILDING, 'raw'));
       player.stock.deduct(
         Resource.MEGACREDITS,
-        2 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)),
+        2 * Math.max(0, maxedSteelTags - turmoil.getInfluence(player)),
         {log: true, from: {globalEvent: this}},
       );
     });

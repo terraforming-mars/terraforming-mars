@@ -70,6 +70,6 @@ export class Revolution extends GlobalEvent implements IGlobalEvent {
     }
   }
   public getScore(player: IPlayer, turmoil: Turmoil) {
-    return player.tags.count(Tag.EARTH, 'raw') + turmoil.getPlayerInfluence(player);
+    return player.tags.count(Tag.EARTH, 'raw') + turmoil.getInfluence(player);
   }
 }

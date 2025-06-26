@@ -27,7 +27,7 @@ export class Productivity extends GlobalEvent implements IGlobalEvent {
       player.stock.add(
         Resource.STEEL,
         Math.min(5, player.production.steel) +
-          turmoil.getPlayerInfluence(player),
+          turmoil.getInfluence(player),
         {log: true, from: {globalEvent: this}},
       );
     });

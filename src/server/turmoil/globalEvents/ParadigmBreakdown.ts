@@ -29,7 +29,7 @@ export class ParadigmBreakdown extends GlobalEvent implements IGlobalEvent {
       } else if (player.cardsInHand.length === 1) {
         game.defer(new DiscardCards(player, 1, 1, 'Global Event - Select a card to discard'));
       }
-      player.stock.add(Resource.MEGACREDITS, 2 * (turmoil.getPlayerInfluence(player)), {log: true, from: {globalEvent: this}});
+      player.stock.add(Resource.MEGACREDITS, 2 * (turmoil.getInfluence(player)), {log: true, from: {globalEvent: this}});
     });
   }
 }

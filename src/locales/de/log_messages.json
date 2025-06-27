@@ -32,6 +32,14 @@
   "${0}'s ${1} production ${2} by ${3} by ${4}": "${0}\u2019s ${1} Produktion wurde um ${3} ${2} von ${4}",
   "${0} removed ${1} resource(s) from ${2}\u2019s ${3}": "${0} entfernte ${1} Ressource(n) von ${2}\u2019s ${3}",
 
+  "${0} gain ${1} ${2} production": "${0} erhält ${1} ${2} Produktion",
+  "${0} lost ${1} ${2} production": "${0} verliert ${1} ${2} Produktion",
+  "${0} gain ${1} ${2}": "${0} erhält ${1} ${2}",
+  "${0} lost ${1} ${2}": "${0} verliert ${1} ${2}",
+  "${3} stole ${1} ${2} from ${0}": "${3} stahl ${1} ${2} von ${0}", 
+  "${3} stole ${1} ${2} from ${0} because of ${3}": "${3} stahl ${1} ${2} von ${0} wegen ${3}",
+  "${0} gained ${1} ${2} from ${3}": "${0} erhielt ${1} ${2} von ${3}",
+
   "Card not found": "Karte nicht gefunden",
   "The project discard pile has been shuffled to form a new deck.": "Der Projektkarten-Ablagestapel wurde neu gemischt, um einen neuen Nachziehstapel zu bilden.",
   "${0} fizzled. ${1} gains 15 M€.": "${0} hat gepatzt. ${1} erhält 15 M€.",
@@ -420,9 +428,9 @@
 
   "${0} searched for ${1} tags": "${0} suchte nach ${1} Symbol",
   "earth": "Erde",
-  "venus": "",
+  "venus": "Venus",
   "jovian": "Jupiter",
-  "mars": "",
+  "mars": "Mars",
   "moon": "Mond",
   "Player spent ${0} steel and gained ${1} heat": "Spieler hat ${0} Stahl ausgegeben und ${1} Wärme erhalten",
   "${0} turned the clone tag on ${1} into a ${2} tag": "${0} verwandelte das Klon-Symbol auf ${1} in ein ${2}-Symbol",

@@ -534,6 +534,7 @@
   "You cannot afford any cards": "Du kannst dir keine Karten leisten",
   "Select card(s) to buy": "Wähle zu kaufende Karten",
   "Select up to ${0} card(s) to buy": "Wähle bis zu ${0} kaufende Karte",
+  "Select ${0} card(s) to keep": "Wähle ${0} Karte(n) zum Behalten",
   "Select up to 2 events to return to your hand": "Wähle bis zu 2 Ereignisse um diese auf die Hand zu nehmen",
   "Place a greenery tile and raise the oxygen 1 step": "Platziere ein Grünflächen-Plättchen und erhöhe den Sauerstoffgehalt um 1%",
   "Place your initial ocean.": "Platziere deinen initialen Ozean",

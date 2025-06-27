@@ -7,7 +7,8 @@
 "Requires that you have no more than 0 corruption. ALL players lose 2 corruption each.": "Benötigt, dass du nicht mehr als 0 Korruption hast. ALLE Spieler verlieren jeweils 2 Korruption.",
 
 "Artesian Aquifer": "Artesischer Grundwasserleiter",
-"Place an ocean, then excavate the underground resource in its space, if possible.": "Platziere einen Ozean und grabe dann, wenn möglich, die unterirdische Ressource in seinem Feld aus.",
+"// Place an ocean, then excavate the underground resource in its space, if possible.": "Platziere einen Ozean und grabe dann, wenn möglich, die unterirdische Ressource in seinem Feld aus.",
+"Excavate 1 underground resource on ANY SPACE RESERVED FOR AN OCEAN. Then, place an ocean tile there, if possible.": "",
 
 "Battery Factory": "Batterie-Fabrik",
 "Action: Spend 1 energy to gain 1 M€ for each power tag you have.": "AKTION: Bezahle 1 Energie, um 1 M€ für jedes Energie-Symbol zu erhalten, das du hast.",

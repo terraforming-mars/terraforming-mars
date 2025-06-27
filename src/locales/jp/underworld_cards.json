@@ -3,7 +3,8 @@
     "Requires that you have no more than 0 corruption. ALL players lose 2 corruption each.": "条件：汚職0以下. 全プレイヤーは2汚職除去.",
 
     "Artesian Aquifer": "被圧帯水層",
-    "Place an ocean, then excavate the underground resource in its space, if possible.": "海洋1枚配置し、可能であればそこの地下資源を採掘する.",
+    "// Place an ocean, then excavate the underground resource in its space, if possible.": "海洋1枚配置し、可能であればそこの地下資源を採掘する.",
+    "Excavate 1 underground resource on ANY SPACE RESERVED FOR AN OCEAN. Then, place an ocean tile there, if possible.": "",
 
     "Battery Factory": "電池工場",
     "Action: Spend 1 energy to gain 1 M€ for each power tag you have.": "アクション：1電力支払い、電力タグの数分1MC獲得.",

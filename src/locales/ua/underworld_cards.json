@@ -12,7 +12,8 @@
   "Excavate 3 underground resources.": "Видобути 3 підземні ресурси.",
 
   "Casino": "Казино",
-  "Requires at least 1 city tile in play. Gain 1 corruption. Increase your M€ production 2 steps.": "Вимагає принаймні 1 міського плитки в грі. Отримайте 1 одиницю корупції. Збільште вашу виробництво M€ на 2 кроки.",
+  "// Requires at least 1 city tile in play. Gain 1 corruption. Increase your M€ production 2 steps.": "Вимагає принаймні 1 міського плитки в грі. Отримайте 1 одиницю корупції. Збільште вашу виробництво M€ на 2 кроки.",
+  "Requires that you own 2 city tiles. Gain 1 corruption. Increase your M€ production 4 steps.": "",
 
   "Cave City": "Печера місто",
   "Requires 1 excavation marker. Increase your M€ production 1 step. Place a city in a space where YOU have an excavation marker. Regular placement restrictions still apply.": "Вимагає 1 маркеру розкопок. Збільште вашу виробництво M€ на 1 крок. Розмістіть місто на місці, де У ВАС є маркер розкопок. Звичайні обмеження розміщення все ще застосовуються.",
@@ -202,7 +203,8 @@
   "Public Spaceline": "Публічна космічна лінія",
   "Requires 5 space tags. This card has 2 Earth tags, 2 Jovian tags, 2 Venus tags, and 2 Mars tags.": "Вимагає 5 символів космосу. На цій картці є 2 символи Землі, 2 символи Юпітера, 2 символи Венери і 2 символи Марса.",
   "Reckless Detonation": "Безрозсудний вибух",
-  "Requires 2 corruption. Excavate an underground resource. Remove up to 3 steel or 2 titanium from another player.": "Вимагає 2 одиниці корупції. Розкопайте підземний ресурс. Видаліть до 3 одиниць сталі або 2 одиниці титану у іншого гравця.",
+  "// Requires 2 corruption. Excavate an underground resource. Remove up to 3 steel or 2 titanium from another player.": "Вимагає 2 одиниці корупції. Розкопайте підземний ресурс. Видаліть до 3 одиниць сталі або 2 одиниці титану у іншого гравця.",
+  "Requires 2 corruption. Excavate an underground resource. Remove up to 3 steel or 2 titanium from any player.": "",
 
   "Research & Development Hub": "Центр досліджень та розробок",
   "Effect: At the end of each production phase, add 1 data here for EACH OTHER PLAYER that has 7 or more cards in their hand.": "Ефект: В кінці кожної фази виробництва додайте 1 одиницю даних сюди для КОЖНОГО ІНШОГО ГРАВЦЯ, у якого є 7 або більше карт на руках.",

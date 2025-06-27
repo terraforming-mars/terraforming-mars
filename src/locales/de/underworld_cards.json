@@ -20,7 +20,8 @@
 "Increase your energy production 1 step. Gain 1 energy for every microbe tag you have (including this.) For every power tag you have (including this) put 1 microbe on another card.": "Erhöhe deine Energieproduktion um 1. Erhalte 1 Energie für jedes Mikrobensymbol, das du hast (einschließlich dieser). Für jedes Energiesymbol, das du hast (einschließlich dieser), lege 1 Mikrobe auf eine andere Karte.",
 
 "Casino": "Kasino",
-"Requires at least 1 city tile in play. Gain 1 corruption. Increase your M€ production 2 steps.": "Benötigt mindestens 1 Stadtplättchen im Spiel. Erhalte 1 Korruption. Erhöhe deine M€-Produktion um 2.",
+"// Requires at least 1 city tile in play. Gain 1 corruption. Increase your M€ production 2 steps.": "Benötigt mindestens 1 Stadtplättchen im Spiel. Erhalte 1 Korruption. Erhöhe deine M€-Produktion um 2.",
+"Requires that you own 2 city tiles. Gain 1 corruption. Increase your M€ production 4 steps.": "",
 
 "Cave City": "Höhlenstadt",
 "Requires 1 excavation marker. Increase your M€ production 1 step. Place a city in a space where YOU have an excavation marker. Regular placement restrictions still apply.": "Benötigt 1 Ausgrabungsmarker. Erhöhe deine M€-Produktion um 1. Platziere eine Stadt auf einem Feld, auf dem DU einen Ausgrabungsmarker hast. Die normalen Platzierungsbeschränkungen gelten weiterhin.",
@@ -245,7 +246,8 @@
 "Requires 1 corruption. Increase your M€ production one step for each crime tag you have INCLUDING EVENTS and this card.": "Benötigt 1 Korruption. Erhöhe deine M€-Produktion um einen Schritt für jedes Verbrechensymbol, das du hast, EINSCHLIESSLICH EREIGNISKARTEN und dieser Karte.",
 
 "Reckless Detonation": "Rücksichtslose Sprengung",
-"Requires 2 corruption. Excavate an underground resource. Remove up to 3 steel or 2 titanium from another player.": "Benötigt 2 Korruption. Grabe eine unterirdische Ressource aus. Entferne bis zu 3 Stahl oder 2 Titan von einem anderen Spieler.",
+"// Requires 2 corruption. Excavate an underground resource. Remove up to 3 steel or 2 titanium from another player.": "Benötigt 2 Korruption. Grabe eine unterirdische Ressource aus. Entferne bis zu 3 Stahl oder 2 Titan von einem anderen Spieler.",
+"Requires 2 corruption. Excavate an underground resource. Remove up to 3 steel or 2 titanium from any player.": "",
 
 "Research & Development Hub": "Forschungs- und Entwicklungszentrum",
 "Effect: At the end of each production phase, add 1 data here for EACH OTHER PLAYER that has 7 or more cards in their hand.": "EFFEKT: Am Ende jeder Produktionsphase füge 1 Datum für JEDEN ANDEREN SPIELER, der 7 oder mehr Karten auf der Hand hat, hinzu.",

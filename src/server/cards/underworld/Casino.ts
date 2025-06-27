@@ -12,12 +12,12 @@ export class Casino extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
       name: CardName.CASINO,
       tags: [Tag.BUILDING, Tag.CRIME],
-      cost: 12,
+      cost: 15,
 
-      requirements: {cities: 1, all},
+      requirements: {cities: 2, all},
 
       behavior: {
-        production: {megacredits: 2},
+        production: {megacredits: 4},
         underworld: {corruption: 1},
       },
 
@@ -25,9 +25,9 @@ export class Casino extends Card implements IProjectCard {
         cardNumber: 'U20',
         renderData: CardRenderer.builder((b) => {
           b.corruption();
-          b.production((pb) => pb.megacredits(2));
+          b.production((pb) => pb.megacredits(4));
         }),
-        description: 'Requires at least 1 city tile in play. Gain 1 corruption. Increase your M€ production 2 steps.',
+        description: 'Requires that you own 2 city tiles. Gain 1 corruption. Increase your M€ production 4 steps.',
       },
     });
   }

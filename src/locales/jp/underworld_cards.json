@@ -207,7 +207,8 @@
     "Requires 5 space tags. This card has 2 Earth tags, 2 Jovian tags, 2 Venus tags, and 2 Mars tags.": "条件：宇宙タグ5つ以上. MC産出+2. このカードは地球タグ2つ、木星タグ2つ、金星タグ2つ、火星タグ2つとして数える.",
 
     "Reckless Detonation": "無謀な爆破",
-    "Requires 2 corruption. Excavate an underground resource. Remove up to 3 steel or 2 titanium from another player.": "条件：汚職2つ以上. 地下資源を採掘する. 望むならプレイヤー1人から最大3建材 または 2チタン除去.",
+    "// Requires 2 corruption. Excavate an underground resource. Remove up to 3 steel or 2 titanium from another player.": "条件：汚職2つ以上. 地下資源を採掘する. 望むならプレイヤー1人から最大3建材 または 2チタン除去.",
+    "Requires 2 corruption. Excavate an underground resource. Remove up to 3 steel or 2 titanium from any player.": "",
 
     "Research & Development Hub": "研究開発拠点",
     "Effect: At the end of each production phase, add 1 data here for EACH OTHER PLAYER that has 7 or more cards in their hand.": "効果：生産フェイズ終了時、他の手札が7枚以上のプレイヤーの人数分、このカード上に1データ追加.",

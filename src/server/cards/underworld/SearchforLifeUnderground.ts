@@ -20,7 +20,7 @@ export class SearchforLifeUnderground extends Card implements IActionCard, IProj
     super({
       type: CardType.ACTIVE,
       name: CardName.SEARCH_FOR_LIFE_UNDERGROUND,
-      tags: [Tag.MARS, Tag.SCIENCE],
+      tags: [Tag.SCIENCE],
       cost: 6,
 
       resourceType: CardResource.SCIENCE,

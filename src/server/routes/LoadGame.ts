@@ -25,7 +25,7 @@ export class LoadGame extends Handler {
     return undefined;
   }
 
-  public override put(req: Request, res: Response, ctx: Context): Promise<void> {
+  public override post(req: Request, res: Response, ctx: Context): Promise<void> {
     return new Promise((resolve) => {
       let body = '';
       req.on('data', function(data) {

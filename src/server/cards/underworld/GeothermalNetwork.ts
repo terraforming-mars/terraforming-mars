@@ -13,7 +13,7 @@ export class GeothermalNetwork extends Card implements IProjectCard {
       tags: [Tag.MARS, Tag.BUILDING],
       cost: 14,
 
-      requirements: {excavation: 3},
+      requirements: {undergroundTokens: 3},
 
       behavior: {
         production: {heat: 3},

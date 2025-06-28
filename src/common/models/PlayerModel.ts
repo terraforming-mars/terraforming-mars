@@ -34,6 +34,7 @@ export type PublicPlayerModel = {
   actionsTakenThisRound: number;
   actionsThisGeneration: ReadonlyArray<CardName>;
   actionsTakenThisGame: number;
+  alliedParty?: AlliedPartyModel;
   availableBlueCardActionCount: number;
   cardCost: number;
   cardDiscount: number;
@@ -75,9 +76,9 @@ export type PublicPlayerModel = {
   titaniumProduction: number;
   titaniumValue: number;
   tradesThisGeneration: number;
+  undergroundTokens: number;
   victoryPointsBreakdown: VictoryPointsBreakdown;
   victoryPointsByGeneration: ReadonlyArray<number>;
-  alliedParty?: AlliedPartyModel;
 }
 
 /** A player's view of the game, including their secret information. */

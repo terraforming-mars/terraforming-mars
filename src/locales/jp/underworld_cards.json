@@ -62,7 +62,8 @@
     "Gain 1 corruption. The players with the highest TR lose 1 TR. Then the players with the lowest TR gain 1 TR, if possible.": "1汚職獲得. TRが最も高いプレイヤーはTR-1段階. TRが最も低いプレイヤーはTR+1段階.",
 
     "Forest Tunnels": "森林トンネル",
-    "Requires an excavation marker. Gain 1 plant for every excavation marker you have.": "条件：地下採掘1回以上. 採掘した数分、1植物獲得.",
+    "// Requires an excavation marker. Gain 1 plant for every excavation marker you have.": "条件：地下採掘1回以上. 採掘した数分、1植物獲得.",
+    "Gain 1 plant for each underground resource token you have claimed. (This excludes the ones returned to the supply.)": "",
 
     "Friends in High Places": "有力なコネ",
     "Effect: When paying for Earth cards, corruption resources may be spent as 10 M€ each.": "効果：地球タグカードをプレイ時、汚職を10MCとして支払ってもよい.",

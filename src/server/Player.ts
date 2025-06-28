@@ -1866,7 +1866,8 @@ export class Player implements IPlayer {
     player.timer = Timer.deserialize(d.timer);
 
     if (d.underworldData !== undefined) {
-      player.underworldData = d.underworldData;
+      // TODO(kberg): Remove the {tokens, ...} wrapper by 2025-10-01
+      player.underworldData = {tokens: [], ...d.underworldData};
     }
     if (d.alliedParty !== undefined) {
       // TODO(kberg): Remove after 2025-08-01

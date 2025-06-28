@@ -151,18 +151,18 @@ export class Turmoil {
     return policy;
   }
 
-  public sendDelegateToParty(playerId: Delegate, partyName: PartyName, game: IGame, throwIfError = false): void {
+  public sendDelegateToParty(delegate: Delegate, partyName: PartyName, game: IGame, throwIfError = false): void {
     const party = this.getPartyByName(partyName);
-    if (this.delegateReserve.has(playerId)) {
-      this.delegateReserve.remove(playerId);
+    if (this.delegateReserve.has(delegate)) {
+      this.delegateReserve.remove(delegate);
     } else {
-      console.log(`${playerId}/${game.id} tried to get a delegate from an empty reserve.`);
+      console.log(`${delegate}/${game.id} tried to get a delegate from an empty reserve.`);
       if (throwIfError) {
         throw new Error('No available delegate');
       }
       return;
     }
-    party.sendDelegate(playerId, game);
+    party.sendDelegate(delegate, game);
     this.checkDominantParty();
   }
 

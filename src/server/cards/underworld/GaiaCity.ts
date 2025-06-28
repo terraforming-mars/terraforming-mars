@@ -30,19 +30,19 @@ export class GaiaCity extends Card implements IProjectCard {
     });
   }
 
-  private availableSpaces(player: IPlayer) {
+  private availableSpaces(player: IPlayer, cost: number) {
     const availableSpaceForCity = player.game.board.getAvailableSpacesForCity(
-      player, {cost: player.getCardCost(this), bonusMultiplier: 2});
+      player, {cost: cost, bonusMultiplier: 2});
     return availableSpaceForCity.filter((space) => space.excavator !== undefined);
   }
 
   public override bespokeCanPlay(player: IPlayer) {
-    return this.availableSpaces(player).length > 0;
+    return this.availableSpaces(player, player.getCardCost(this)).length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {
     player.game.defer(new PlaceCityTile(player, {
-      spaces: this.availableSpaces(player),
+      spaces: this.availableSpaces(player, 0),
     })).andThen((space) => {
       if (space) {
         player.game.grantPlacementBonuses(player, space);

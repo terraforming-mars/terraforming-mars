@@ -1211,7 +1211,7 @@ export class Player implements IPlayer {
   public canPlay(card: IProjectCard): boolean {
     card.additionalProjectCosts = undefined;
     const options = this.affordOptionsForCard(card);
-    const canAfford = this.newCanAfford(options);
+    const canAfford = this.canAffordInternal(options);
     if (!canAfford.canAfford) {
       return false;
     }
@@ -1311,9 +1311,7 @@ export class Player implements IPlayer {
   /**
    * Returns information about whether a player can afford to spend money with other costs and ways to pay taken into account.
    */
-  public newCanAfford(o: number | CanAffordOptions): {redsCost: number, canAfford: boolean} {
-    const options: CanAffordOptions = typeof(o) === 'number' ? {cost: o} : {...o};
-
+  private canAffordInternal(options: CanAffordOptions): {redsCost: number, canAfford: boolean} {
     // TODO(kberg): These are set both here and in SelectPayment. Consolidate, perhaps.
     options.heat = this.canUseHeatAsMegaCredits;
     options.lunaTradeFederationTitanium = this.canUseTitaniumAsMegacredits;
@@ -1354,7 +1352,8 @@ export class Player implements IPlayer {
    * and additionally pay the reserveUnits (no replaces here)
    */
   public canAfford(o: number | CanAffordOptions): boolean {
-    return this.newCanAfford(o).canAfford;
+    const options: CanAffordOptions = typeof(o) === 'number' ? {cost: o} : {...o};
+    return this.canAffordInternal(options).canAfford;
   }
 
   public getStandardProjectOption(): SelectCard<IStandardProjectCard> {

@@ -237,14 +237,10 @@ export abstract class Card implements ICard {
     return this.properties.tilesBuilt;
   }
   public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean {
-    const satisfied: boolean = this.properties.compiledRequirements.satisfies(player, this);
-    if (satisfied) {
-      if (this.canPlayPostRequirements(player, canAffordOptions)) {
-        return true;
-      }
+    if (!this.properties.compiledRequirements.satisfies(player, this)) {
+      return false;
     }
-
-    return false;
+    return this.canPlayPostRequirements(player, canAffordOptions);
   }
 
   public canPlayPostRequirements(player: IPlayer, canAffordOptions?: CanAffordOptions) {

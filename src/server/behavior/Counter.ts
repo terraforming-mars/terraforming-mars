@@ -169,6 +169,15 @@ export class Counter {
           sum += player.game.board.spaces.filter((space) => space.excavator === player).length;
         }
       }
+      if (underworld.undergroundTokens !== undefined) {
+        if (countable.all) {
+          for (const p of game.players) {
+            sum += p.underworldData.tokens.length;
+          }
+        } else {
+          sum += player.underworldData.tokens.length;
+        }
+      }
     }
 
     if (countable.each !== undefined) {

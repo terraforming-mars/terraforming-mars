@@ -212,6 +212,7 @@ export class Server {
       actionsTakenThisRound: player.actionsTakenThisRound,
       actionsTakenThisGame: player.actionsTakenThisGame,
       actionsThisGeneration: Array.from(player.actionsThisGeneration),
+      alliedParty: player.alliedParty,
       availableBlueCardActionCount: player.getAvailableBlueActionCount(),
       cardCost: player.cardCost,
       cardDiscount: player.colonies.cardDiscount,
@@ -219,8 +220,10 @@ export class Server {
       citiesCount: game.board.getCities(player).length,
       coloniesCount: player.getColoniesCount(),
       color: player.color,
+      corruption: player.underworldData.corruption,
       energy: player.energy,
       energyProduction: player.production.energy,
+      excavations: UnderworldExpansion.excavationMarkerCount(player),
       fleetSize: player.colonies.getFleetSize(),
       handicap: useHandicap ? player.handicap : undefined,
       heat: player.heat,
@@ -251,7 +254,7 @@ export class Server {
       titaniumProduction: player.production.titanium,
       titaniumValue: player.getTitaniumValue(),
       tradesThisGeneration: player.colonies.tradesThisGeneration,
-      corruption: player.underworldData.corruption,
+      undergroundTokens: player.underworldData.tokens.length,
       victoryPointsBreakdown: {
         terraformRating: 0,
         milestones: 0,
@@ -272,8 +275,6 @@ export class Server {
         negativeVP: 0,
       },
       victoryPointsByGeneration: [],
-      excavations: UnderworldExpansion.excavationMarkerCount(player),
-      alliedParty: player.alliedParty,
     };
 
     if (game.phase === Phase.END || game.isSoloMode() || game.gameOptions.showOtherPlayersVP === true) {

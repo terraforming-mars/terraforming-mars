@@ -31,4 +31,5 @@ export enum RequirementType {
     // Underworld
     EXCAVATION = 'Excavation',
     CORRUPTION = 'Corruption',
+    UNDERGROUND_TOKENS = 'Underground tokens',
 }

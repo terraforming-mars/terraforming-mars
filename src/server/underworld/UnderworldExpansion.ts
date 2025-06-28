@@ -91,6 +91,7 @@ export class UnderworldExpansion {
   public static initializePlayer(): UnderworldPlayerData {
     return {
       corruption: 0,
+      tokens: [],
     };
   }
 
@@ -222,6 +223,9 @@ export class UnderworldExpansion {
     this.grant(player, undergroundResource);
 
     space.excavator = player;
+    player.underworldData.tokens.push(undergroundResource);
+    // space.undergroundResources = undefined; ADD THIS
+
     for (const card of player.tableau) {
       card.onExcavation?.(player, space);
     }

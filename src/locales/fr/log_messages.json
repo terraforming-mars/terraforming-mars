@@ -437,5 +437,5 @@
   "${0} increased ${1} colony track ${2} step(s)": "",
   "${0} decreased ${1} colony track 1 step": "",
   "${0} kept ${1} project cards": "",
-  "Unable to perform undo operation. Error retrieving game from database. Please try again.": "Unable to perform undo operation. Error retrieving game from database. Please try again."
+  "Unable to perform undo operation. Error retrieving game from database. Please try again.": ""
 }

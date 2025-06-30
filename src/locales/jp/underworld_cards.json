@@ -64,7 +64,7 @@
 
     "Forest Tunnels": "森林トンネル",
     "// Requires an excavation marker. Gain 1 plant for every excavation marker you have.": "条件：地下採掘1回以上. 採掘した数分、1植物獲得.",
-    "Gain 1 plant for each underground resource token you have claimed.": "",
+    "Gain 1 plant for each underground token you have claimed.": "",
 
     "Friends in High Places": "有力なコネ",
     "Effect: When paying for Earth cards, corruption resources may be spent as 10 M€ each.": "効果：地球タグカードをプレイ時、汚職を10MCとして支払ってもよい.",
@@ -263,7 +263,7 @@
 
     "Subnautic Pirates": "潜水海賊",
     "// Requires 1 excavation marker and 1 corruption. Pick an ocean tile that has your excavation marker on it. Steal 6 M€ from each other player that owns a tile adjacent to that ocean. This can be blocked by corruption.": "条件：地下採掘1回以上、汚職1つ以上. あなたが地下採掘している海洋を1枚選ぶ. そこに隣接するタイルを所有している他の全プレイヤーから6MC盗む.",
-    "Requires you have 1 corruption and 1 underground resource token. Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "",
+    "Requires you have 1 corruption and 1 underground token. Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "",
 
     "Subterranean Sea": "地底の海",
     "Place an ocean tile ON AN AREA NOT RESERVED FOR OCEAN where you have an excavation marker.": "あなたが地下採掘している、海洋予定地以外に海洋1枚配置.",
@@ -284,7 +284,7 @@
 
     "Underground Amusement Park": "地下遊園地",
     "// Requires an excavation marker. Increase your M€ production 1 step.": "条件：地下採掘1回以上. MC産出+1.",
-    "Requires you have 1 underground resource token. Increase your M€ production 1 step.": "",
+    "Requires you have 1 underground token. Increase your M€ production 1 step.": "",
 
     "Underground Habitat": "地下居住区",
     "Excavate an underground resource. Increase your plant production 1 step. Add 1 animal on another card.": "地下資源を採掘する. 植物産出+1. 1動物獲得.",
@@ -300,7 +300,7 @@
 
     "Underground Smuggling Ring": "地下密輸組織",
     "// Requires an excavation marker. Gain 1 corruption and 2 of the same standard resource.": "条件：地下採掘1回以上. 1汚職獲得. 1種類の2標準リソース獲得.",
-    "Requires you have 1 underground resource token. Gain 1 corruption and 2 of the same standard resource.": "",
+    "Requires you have 1 underground token. Gain 1 corruption and 2 of the same standard resource.": "",
 
     "Voltaic Metallurgy": "ボルタ冶金",
     "Action: Spend any number of steel to gain the same amount of titanium (max is the number of power tags you have.)": "アクション：x建材支払い、xチタン獲得(電力タグの数分まで可能).",

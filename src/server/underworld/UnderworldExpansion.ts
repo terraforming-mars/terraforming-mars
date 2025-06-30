@@ -466,7 +466,7 @@ export class UnderworldExpansion {
   public static drawExcavationToken(game: IGame): UndergroundResourceToken {
     const token = game.underworldData?.tokens.pop();
     if (token === undefined) {
-      throw new Error('No underground resource token!');
+      throw new Error('No underground token!');
     }
     return token;
   }

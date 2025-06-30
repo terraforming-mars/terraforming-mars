@@ -24,7 +24,7 @@ export class SubnauticPirates extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.text('STEAL').megacredits(7).asterix();
         }),
-        description: 'Requires you have 1 corruption and 1 underground resource token. ' +
+        description: 'Requires you have 1 corruption and 1 underground token. ' +
           'Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.',
       },
     });

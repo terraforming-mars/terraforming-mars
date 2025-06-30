@@ -90,7 +90,7 @@
 
 "Forest Tunnels": "Waldtunnel",
 "// Requires an excavation marker. Gain 1 plant for every excavation marker you have.": "Benötigt einen Ausgrabungsmarker. Erhalte 1 Pflanze für jeden Ausgrabungsmarker, den du besitzt.",
-"Gain 1 plant for each underground resource token you have claimed.": "",
+"Gain 1 plant for each underground token you have claimed.": "",
 
 "Friends in High Places": "Freunde in hohen Positionen",
 "Effect: When paying for Earth cards, corruption resources may be spent as 10 M€ each.": "EFFEKT: Beim Bezahlen von Karten mit Erdsymbol können Korruptionsressourcen zu je 10 M€ ausgegeben werden.",
@@ -307,7 +307,7 @@
 
 "Subnautic Pirates": "Subnautische Piraten",
 "// Requires 1 excavation marker and 1 corruption. Pick an ocean tile that has your excavation marker on it. Steal 6 M€ from each other player that owns a tile adjacent to that ocean. This can be blocked by corruption.": "Benötigt 1 Ausgrabungsmarker und 1 Korruption. Wähle ein Ozeanplättchen, auf dem dein Ausgrabungsmarker liegt. Klaue 6 M€ von jedem anderen Spieler, der ein an diesen Ozean angrenzendes Plättchen besitzt. Dies kann durch Korruption verhindert werden.",
-"Requires you have 1 corruption and 1 underground resource token. Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "",
+"Requires you have 1 corruption and 1 underground token. Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "",
 
 "Subterranean Sea": "Unterirdisches Meer",
 "Place an ocean tile ON AN AREA NOT RESERVED FOR OCEAN where you have an excavation marker.": "Platziere ein Ozeanplättchen auf ein Feld, das nicht für einen Ozean reserviert ist und auf der du einen Ausgrabungsmarker hast.",
@@ -328,7 +328,7 @@
 
 "Underground Amusement Park": "Unterirdischer Vergnügungspark",
 "// Requires an excavation marker. Increase your M€ production 1 step.": "Benötigt einen Ausgrabungsmarker. Erhöhe deine M€-Produktion um 1.",
-"Requires you have 1 underground resource token. Increase your M€ production 1 step.": "",
+"Requires you have 1 underground token. Increase your M€ production 1 step.": "",
 "Underground Habitat": "Unterirdischer Lebensraum",
 "Excavate an underground resource. Increase your plant production 1 step. Add 1 animal on another card.": "Grabe eine unterirdische Ressource aus. Erhöhe deine Pflanzenproduktion um 1. Füge 1 Tier einer anderen Karte hinzu.",
 
@@ -343,7 +343,7 @@
 
 "Underground Smuggling Ring": "Unterirdischer Schmuggelring",
 "// Requires an excavation marker. Gain 1 corruption and 2 of the same standard resource.": "Benötigt einen Ausgrabungsmarker. Erhalte 1 Korruption und 2 von einer gleichen Standardressource.",
-"Requires you have 1 underground resource token. Gain 1 corruption and 2 of the same standard resource.": "",
+"Requires you have 1 underground token. Gain 1 corruption and 2 of the same standard resource.": "",
 
 "Voltaic Metallurgy": "Voltaische Metallurgie",
 "Action: Spend any number of steel to gain the same amount of titanium (max is the number of power tags you have.)": "AKTION: Gib eine beliebige Anzahl von Stahl aus, um die gleiche Menge Titan zu erhalten (das Maximum ist die Anzahl der Energie-Symbole, die du hast).",

@@ -25,7 +25,7 @@ export class UndergroundAmusementPark extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1));
         }),
-        description: 'Requires you have 1 underground resource token. Increase your M€ production 1 step.',
+        description: 'Requires you have 1 underground token. Increase your M€ production 1 step.',
       },
     });
   }

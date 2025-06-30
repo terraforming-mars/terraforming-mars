@@ -176,18 +176,28 @@ export const PaymentWidgetMixin = {
         amount = thisPlayer[unit];
         break;
 
-      case 'floaters':
-      case 'microbes':
-      case 'lunaArchivesScience':
-      case 'spireScience':
-      case 'seeds':
-      case 'auroraiData':
-      case 'graphene':
-      case 'kuiperAsteroids':
-      case 'corruption':
-        // TODO(kberg): remove 'as any'. You can do it.
-        amount = (model.playerinput as any)[unit];
-        break;
+      default:
+        const input = model.playerinput;
+        if (input.type === 'payment') {
+          switch (unit) {
+          case 'spireScience':
+          case 'seeds':
+          case 'auroraiData':
+          case 'kuiperAsteroids':
+            amount = input[unit];
+          }
+        } else {
+          switch (unit) {
+          case 'floaters':
+          case 'microbes':
+          case 'lunaArchivesScience':
+          case 'seeds':
+          case 'graphene':
+          case 'kuiperAsteroids':
+          case 'corruption':
+            amount = input[unit];
+          }
+        }
       }
 
       if (amount === undefined) {

@@ -16,7 +16,7 @@
 "Requires that you own 2 city tiles. Gain 1 corruption. Increase your M€ production 4 steps.": "",
 
 "Cave City": "",
-"Requires 1 excavation marker. Increase your M€ production 1 step. Place a city in a space where YOU have an excavation marker. Regular placement restrictions still apply.": "",
+"Increase your steel production 1 step. Place a city in a NON-RESERVED SPACE WITH YOUR EXCAVATION MARKER, ignoring other placement restrictions.": "",
 
 "Chemical Factory": "",
 "Action: Spend 1 plant to excavate an underground resource.": "",
@@ -237,7 +237,7 @@
 "Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "",
 
 "Subnautic Pirates": "",
-"Requires 1 excavation marker and 1 corruption. Pick an ocean tile that has your excavation marker on it. Steal 6 M€ from each other player that owns a tile adjacent to that ocean. This can be blocked by corruption.": "",
+"Requires you have 1 corruption and 1 underground resource token. Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "",
 
 "Subterranean Sea": "",
 "Place an ocean tile ON AN AREA NOT RESERVED FOR OCEAN where you have an excavation marker.": "",
@@ -253,7 +253,7 @@
 "Gain 1 corruption. Excavate an underground resource.": "",
 
 "Underground Amusement Park": "",
-"Requires an excavation marker. Increase your M€ production 1 step.": "",
+"Requires you have 1 underground resource token. Increase your M€ production 1 step.": "",
 
 "Underground Habitat": "",
 "Excavate an underground resource. Increase your plant production 1 step. Add 1 animal on another card.": "",
@@ -265,7 +265,7 @@
 "Excavate an underground resource. At the end of the game, your cities score 1 VP per 3 excavation markers YOU have in that city space and adjacent spaces.": "",
 
 "Underground Smuggling Ring": "",
-"Requires an excavation marker. Gain 1 corruption and 2 of the same standard resource.": "",
+"Requires you have 1 underground resource token. Gain 1 corruption and 2 of the same standard resource.": "",
 
 "Voltaic Metallurgy": "",
 "Action: Spend any number of steel to gain the same amount of titanium (max is the number of power tags you have.)": "",

@@ -14,7 +14,7 @@ export class UndergroundAmusementPark extends Card implements IProjectCard {
       cost: 5,
       victoryPoints: 1,
 
-      requirements: {excavation: 1},
+      requirements: {undergroundTokens: 1},
 
       behavior: {
         production: {megacredits: 1},
@@ -25,7 +25,7 @@ export class UndergroundAmusementPark extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1));
         }),
-        description: 'Requires an excavation marker. Increase your M€ production 1 step.',
+        description: 'Requires you have 1 underground resource token. Increase your M€ production 1 step.',
       },
     });
   }

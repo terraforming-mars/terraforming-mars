@@ -16,10 +16,10 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
 describe('UndergroundResearchCenter', () => {
   const canPlayRuns = [
-    {excavationMarkers: 4, energyProduction: 0, expected: false},
-    {excavationMarkers: 5, energyProduction: 0, expected: false},
-    {excavationMarkers: 4, energyProduction: 1, expected: false},
-    {excavationMarkers: 5, energyProduction: 1, expected: true},
+    {excavationTokens: 3, energyProduction: 0, expected: false},
+    {excavationTokens: 4, energyProduction: 0, expected: false},
+    {excavationTokens: 3, energyProduction: 1, expected: false},
+    {excavationTokens: 4, energyProduction: 1, expected: true},
   ] as const;
   for (const run of canPlayRuns) {
     it('canPlay ' + JSON.stringify(run), () => {
@@ -27,9 +27,8 @@ describe('UndergroundResearchCenter', () => {
       const [/* game */, player/* , opponent */] = testGame(2, {underworldExpansion: true});
 
       player.production.override({energy: run.energyProduction});
-      const spaces = UnderworldExpansion.excavatableSpaces(player);
-      for (let idx = 0; idx < run.excavationMarkers; idx++) {
-        spaces[idx].excavator = player;
+      for (let idx = 0; idx < run.excavationTokens; idx++) {
+        player.underworldData.tokens.push('nothing');
       }
       expect(card.canPlay(player)).eq(run.expected);
     });
@@ -64,9 +63,7 @@ describe('UndergroundResearchCenter', () => {
     const [game, player] = testGame(2, {underworldExpansion: true});
 
     player.playedCards.push(new ViralEnhancers());
-    UnderworldExpansion.excavatableSpaces(player)
-      .slice(0, 5)
-      .forEach((space) => space.excavator = player);
+    player.underworldData.tokens.push('nothing', 'nothing', 'nothing', 'nothing');
 
     expect(card.canPlay(player)).is.false;
 

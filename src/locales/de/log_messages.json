@@ -2,7 +2,7 @@
   "${0} revealed and discarded ${1}": "${0} deckte ${1} auf und warf es ab",
   "${0} revealed ${1}": "${0} deckte ${1} auf",
   "${0} used ${1} standard action": "${0} führte Standardaktion ${1} aus",
-  "Generation ${0}": "",
+  "Generation ${0}": "Generation ${0}",
   "${0} added ${1} ${2} to ${3}": "${0} fügte ${3} ${1} ${2} hinzu",
   "Convert Heat": "Wärme umwandeln",
   "Convert Plants": "Pflanzen umwandeln",
@@ -32,12 +32,13 @@
   "${0}'s ${1} production ${2} by ${3} by ${4}": "${0}\u2019s ${1} Produktion wurde um ${3} ${2} von ${4}",
   "${0} removed ${1} resource(s) from ${2}\u2019s ${3}": "${0} entfernte ${1} Ressource(n) von ${2}\u2019s ${3}",
 
-  "${0} gain ${1} ${2} production": "${0} erhält ${1} ${2} Produktion",
+  "${0} gained ${1} ${2} production": "${0} erhält ${1} ${2} Produktion",
   "${0} lost ${1} ${2} production": "${0} verliert ${1} ${2} Produktion",
   "${0} gain ${1} ${2}": "${0} erhält ${1} ${2}",
   "${0} lost ${1} ${2}": "${0} verliert ${1} ${2}",
   "${3} stole ${1} ${2} from ${0}": "${3} stahl ${1} ${2} von ${0}", 
   "${3} stole ${1} ${2} from ${0} because of ${3}": "${3} stahl ${1} ${2} von ${0} wegen ${3}",
+  "${0} lost ${1} ${2} because of ${3}": "${0} verliert ${1} ${2} wegen ${3}",
   "${0} gained ${1} ${2} from ${3}": "${0} erhielt ${1} ${2} von ${3}",
 
   "Card not found": "Karte nicht gefunden",

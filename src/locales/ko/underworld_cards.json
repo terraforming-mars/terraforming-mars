@@ -59,7 +59,7 @@
 "Gain 1 corruption. The players with the highest TR lose 1 TR. Then the players with the lowest TR gain 1 TR, if possible.": "",
 
 "Forest Tunnels": "",
-"Gain 1 plant for each underground resource token you have claimed.": "",
+"Gain 1 plant for each underground token you have claimed.": "",
 
 "Gaia City": "",
 "Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (incluing adjacencies.) Regular placement restriction still apply.": "",
@@ -237,7 +237,7 @@
 "Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "",
 
 "Subnautic Pirates": "",
-"Requires you have 1 corruption and 1 underground resource token. Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "",
+"Requires you have 1 corruption and 1 underground token. Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "",
 
 "Subterranean Sea": "",
 "Place an ocean tile ON AN AREA NOT RESERVED FOR OCEAN where you have an excavation marker.": "",
@@ -253,7 +253,7 @@
 "Gain 1 corruption. Excavate an underground resource.": "",
 
 "Underground Amusement Park": "",
-"Requires you have 1 underground resource token. Increase your M€ production 1 step.": "",
+"Requires you have 1 underground token. Increase your M€ production 1 step.": "",
 
 "Underground Habitat": "",
 "Excavate an underground resource. Increase your plant production 1 step. Add 1 animal on another card.": "",
@@ -265,7 +265,7 @@
 "Excavate an underground resource. At the end of the game, your cities score 1 VP per 3 excavation markers YOU have in that city space and adjacent spaces.": "",
 
 "Underground Smuggling Ring": "",
-"Requires you have 1 underground resource token. Gain 1 corruption and 2 of the same standard resource.": "",
+"Requires you have 1 underground token. Gain 1 corruption and 2 of the same standard resource.": "",
 
 "Voltaic Metallurgy": "",
 "Action: Spend any number of steel to gain the same amount of titanium (max is the number of power tags you have.)": "",

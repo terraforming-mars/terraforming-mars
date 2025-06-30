@@ -29,7 +29,7 @@ export class UndergroundResearchCenter extends Card implements IProjectCard {
           b.production((pb) => pb.minus().energy(1)).excavate().cards(2).asterix();
         }),
 
-        description: 'Requires you have 4 underground resource tokens. Decrease your energy production 1 step. ' +
+        description: 'Requires you have 4 underground tokens. Decrease your energy production 1 step. ' +
         'Excavate an underground resource. Choose a tag that is not the wild tag or clone tag. ' +
         'Draw 2 cards with that tag.',
       },

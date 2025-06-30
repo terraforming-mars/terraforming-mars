@@ -43,7 +43,7 @@ export class Keplertec extends ActiveCorporationCard {
           b.action('Spend 1 titanium to put a fighter resource on ANY card.', (ab) => {
             ab.titanium(1).startAction.resource(CardResource.FIGHTER).asterix();
           }).br;
-          b.effect('When you place a fighter resource on this card, draw 4 random underground resource tokens. ' +
+          b.effect('When you place a fighter resource on this card, draw 4 random underground tokens. ' +
             'Pick one of them and claim the reward on it. Then shuffle the tokens back into the pile.', (eb) => {
             eb.resource(CardResource.FIGHTER).startEffect.undergroundResources(1, {text: '?'}).asterix();
           }).br;

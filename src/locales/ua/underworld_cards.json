@@ -64,7 +64,7 @@
 
   "Forest Tunnels": "Лісові тунелі",
   "// Requires an excavation marker. Gain 1 plant for every excavation marker you have.": "Вимагає маркер розкопок. Отримайте 1 рослину за кожен маркер розкопок, який у вас є.",
-  "Gain 1 plant for each underground resource token you have claimed.": "",
+  "Gain 1 plant for each underground token you have claimed.": "",
 
   "Friends in High Places": "Друзі на високих посадах",
   "Effect: When paying for Earth cards, corruption resources may be spent as 10 M€ each.": "Ефект: При оплаті карт Землі, ресурси корупції можна витрачати по 10 M€ за кожен.",
@@ -258,7 +258,7 @@
 
   "Subnautic Pirates": "Пірати підводного світу",
   "// Requires 1 excavation marker and 1 corruption. Pick an ocean tile that has your excavation marker on it. Steal 6 M€ from each other player that owns a tile adjacent to that ocean. This can be blocked by corruption.": "Вимагає 1 маркеру розкопок та 1 одиниці корупції. Виберіть океанську плитку, на якій знаходиться ваш маркер розкопок. Вкрадіть 6 M€ у кожного іншого гравця, який володіє плиткою, прилеглою до цього океану. Це може бути заблоковано корупцією.",
-  "Requires you have 1 corruption and 1 underground resource token. Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "",
+  "Requires you have 1 corruption and 1 underground token. Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "",
 
   "Subterranean Sea": "Підземне море",
   "Place an ocean tile ON AN AREA NOT RESERVED FOR OCEAN where you have an excavation marker.": "Покладіть океанську плитку НА МІСЦЕ, НЕ ЗАРЕЗЕРВОВАНЕ ДЛЯ ОКЕАНУ, де у вас є маркер розкопок.",
@@ -279,7 +279,7 @@
 
   "Underground Amusement Park": "Підземний парк розваг",
   "// Requires an excavation marker. Increase your M€ production 1 step.": "Вимагає маркера розкопок. Збільште ваше виробництво M€ на 1 крок.",
-  "Requires you have 1 underground resource token. Increase your M€ production 1 step.": "",
+  "Requires you have 1 underground token. Increase your M€ production 1 step.": "",
 
   "Underground Habitat": "Підземне селище",
   "Excavate an underground resource. Increase your plant production 1 step. Add 1 animal on another card.": "Розкопайте підземний ресурс. Збільште ваше виробництво рослин на 1 крок. Додайте 1 тварину на іншу картку.",
@@ -295,7 +295,7 @@
 
   "Underground Smuggling Ring": "Підземне контрабандне кільце",
   "// Requires an excavation marker. Gain 1 corruption and 2 of the same standard resource.": "Вимагає маркера розкопок. Отримайте 1 одиницю корупції та 2 однакових стандартних ресурси.",
-  "Requires you have 1 underground resource token. Gain 1 corruption and 2 of the same standard resource.": "",
+  "Requires you have 1 underground token. Gain 1 corruption and 2 of the same standard resource.": "",
 
   "Voltaic Metallurgy": "Вольтаїчна металургія",
   "Action: Spend any number of steel to gain the same amount of titanium (max is the number of power tags you have.)": "Дія: Витратити будь-яку кількість сталі, щоб отримати таку ж кількість титану (максимум - кількість символів енергії, які у вас є).",

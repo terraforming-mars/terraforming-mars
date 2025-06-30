@@ -5,7 +5,7 @@ export class Tunneler extends BaseMilestone {
   constructor() {
     super(
       'Tunneler',
-      'Have at least 7 underground resource tokens',
+      'Have at least 7 underground tokens',
       7);
   }
 

@@ -26,7 +26,7 @@ export class GeothermalNetwork extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.heat(3));
         }),
-        description: 'Requires 3 excavation markers. Increase your heat production 3 steps.',
+        description: 'Requires 3 underground tokens. Increase your heat production 3 steps.',
       },
     });
   }

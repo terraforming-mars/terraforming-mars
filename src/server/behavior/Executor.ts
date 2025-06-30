@@ -357,7 +357,6 @@ export class Executor implements BehaviorExecutor {
       if ((spend.cards ?? 0) > 0) {
         const count: number = spend.cards ?? 0;
         const cards = player.cardsInHand.filter((c) => card !== c);
-        // TODO(kberg): this does not count preludes or CEOs. Same for canExecute.
         player.defer(
           new SelectCard(
             message('Select ${0} card(s) to discard', (b) => b.number(count)),

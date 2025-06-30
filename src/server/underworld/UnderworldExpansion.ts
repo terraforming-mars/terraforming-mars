@@ -21,7 +21,7 @@ import {Phase} from '../../common/Phase';
 import {Units} from '../../common/Units';
 import {LogHelper} from '../LogHelper';
 import {Message} from '../../common/logs/Message';
-import {IdentificationTrigger} from '../cards/ICard';
+import {IdentificationTrigger} from './underworldTypes';
 
 export class UnderworldExpansion {
   private constructor() {}
@@ -328,7 +328,6 @@ export class UnderworldExpansion {
     }
   }
 
-  // TODO(kberg): turn into a deferred action?
   public static maybeBlockAttack(target: IPlayer, perpetrator: IPlayer, msg: Message | string, cb: (proceed: boolean) => PlayerInput | undefined): PlayerInput | undefined {
     if (target.game.gameOptions.underworldExpansion === false) {
       return cb(true);

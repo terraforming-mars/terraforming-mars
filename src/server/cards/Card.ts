@@ -464,7 +464,7 @@ function populateCount(requirement: CardRequirementDescriptor): CardRequirementD
     requirement.miningTiles ??
     requirement.roadTiles ??
     requirement.corruption ??
-    requirement.excavation;
+    requirement.undergroundTokens;
 
   return requirement;
 }

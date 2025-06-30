@@ -16,7 +16,8 @@
     "Requires at least 1 city tile in play. Gain 1 corruption. Increase your M€ production 2 steps.": "条件：都市タイル1枚以上. 1汚職獲得. MC産出+2.",
 
     "Cave City": "洞窟都市",
-    "Requires 1 excavation marker. Increase your M€ production 1 step. Place a city in a space where YOU have an excavation marker. Regular placement restrictions still apply.": "条件：地下採掘1回以上. MC産出+1. あなたが地下採掘した空きマスに都市を1枚配置. 通常の配置制限は引き続き適用されます。",
+    "// Requires 1 excavation marker. Increase your M€ production 1 step. Place a city in a space where YOU have an excavation marker. Regular placement restrictions still apply.": "条件：地下採掘1回以上. MC産出+1. あなたが地下採掘した空きマスに都市を1枚配置. 通常の配置制限は引き続き適用されます。",
+    "Increase your steel production 1 step. Place a city in a NON-RESERVED SPACE WITH YOUR EXCAVATION MARKER, ignoring other placement restrictions.": "",
 
     "Chemical Factory": "化学工場",
     "Action: Spend 1 plant to excavate an underground resource.": "アクション：1植物を支払い、地下資源を採掘する.",
@@ -62,7 +63,8 @@
     "Gain 1 corruption. The players with the highest TR lose 1 TR. Then the players with the lowest TR gain 1 TR, if possible.": "1汚職獲得. TRが最も高いプレイヤーはTR-1段階. TRが最も低いプレイヤーはTR+1段階.",
 
     "Forest Tunnels": "森林トンネル",
-    "Requires an excavation marker. Gain 1 plant for every excavation marker you have.": "条件：地下採掘1回以上. 採掘した数分、1植物獲得.",
+    "// Requires an excavation marker. Gain 1 plant for every excavation marker you have.": "条件：地下採掘1回以上. 採掘した数分、1植物獲得.",
+    "Gain 1 plant for each underground token you own.": "",
 
     "Friends in High Places": "有力なコネ",
     "Effect: When paying for Earth cards, corruption resources may be spent as 10 M€ each.": "効果：地球タグカードをプレイ時、汚職を10MCとして支払ってもよい.",
@@ -83,7 +85,8 @@
     "Place 2 data on any card. Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces.": "2データ獲得. ボード上の1マスを選ぶ. そのマスと隣接するマスの地下資源を調査する.",
 
     "Geothermal Network": "地熱ネットワーク",
-    "Requires 3 excavation markers. Increase your heat production 3 steps.": "条件：地下採掘3回以上. 温熱産出+3.",
+    "// Requires 3 excavation markers. Increase your heat production 3 steps.": "条件：地下採掘3回以上. 温熱産出+3.",
+    "Requires 3 underground tokens. Increase your heat production 3 steps.": "",
 
     "Global Audit": "国際監査",
     "Every player with 0 corruption gains 1 TR, if possible.": "汚職が0のプレイヤーは、可能であればTR+1段階.",
@@ -259,7 +262,8 @@
     "Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "効果：科学タグをプレイ時、1データ獲得. 地下資源を調査する.",
 
     "Subnautic Pirates": "潜水海賊",
-    "Requires 1 excavation marker and 1 corruption. Pick an ocean tile that has your excavation marker on it. Steal 6 M€ from each other player that owns a tile adjacent to that ocean. This can be blocked by corruption.": "条件：地下採掘1回以上、汚職1つ以上. あなたが地下採掘している海洋を1枚選ぶ. そこに隣接するタイルを所有している他の全プレイヤーから6MC盗む.",
+    "// Requires 1 excavation marker and 1 corruption. Pick an ocean tile that has your excavation marker on it. Steal 6 M€ from each other player that owns a tile adjacent to that ocean. This can be blocked by corruption.": "条件：地下採掘1回以上、汚職1つ以上. あなたが地下採掘している海洋を1枚選ぶ. そこに隣接するタイルを所有している他の全プレイヤーから6MC盗む.",
+    "Requires you have 1 corruption and 1 underground token. Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "",
 
     "Subterranean Sea": "地底の海",
     "Place an ocean tile ON AN AREA NOT RESERVED FOR OCEAN where you have an excavation marker.": "あなたが地下採掘している、海洋予定地以外に海洋1枚配置.",
@@ -279,7 +283,8 @@
     "Gain 1 corruption. Excavate an underground resource.": "1汚職獲得. 地下資源を採掘する.",
 
     "Underground Amusement Park": "地下遊園地",
-    "Requires an excavation marker. Increase your M€ production 1 step.": "条件：地下採掘1回以上. MC産出+1.",
+    "// Requires an excavation marker. Increase your M€ production 1 step.": "条件：地下採掘1回以上. MC産出+1.",
+    "Requires you have 1 underground token. Increase your M€ production 1 step.": "",
 
     "Underground Habitat": "地下居住区",
     "Excavate an underground resource. Increase your plant production 1 step. Add 1 animal on another card.": "地下資源を採掘する. 植物産出+1. 1動物獲得.",
@@ -294,7 +299,8 @@
     "Excavate an underground resource. At the end of the game, your cities score 1 VP per 3 excavation markers YOU have in that city space and adjacent spaces.": "地下資源を採掘する. あなたの都市は、そこと周りのあなたが採掘したマス3つ毎に1VP.",
 
     "Underground Smuggling Ring": "地下密輸組織",
-    "Requires an excavation marker. Gain 1 corruption and 2 of the same standard resource.": "条件：地下採掘1回以上. 1汚職獲得. 1種類の2標準リソース獲得.",
+    "// Requires an excavation marker. Gain 1 corruption and 2 of the same standard resource.": "条件：地下採掘1回以上. 1汚職獲得. 1種類の2標準リソース獲得.",
+    "Requires you have 1 underground token. Gain 1 corruption and 2 of the same standard resource.": "",
 
     "Voltaic Metallurgy": "ボルタ冶金",
     "Action: Spend any number of steel to gain the same amount of titanium (max is the number of power tags you have.)": "アクション：x建材支払い、xチタン獲得(電力タグの数分まで可能).",

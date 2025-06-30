@@ -71,7 +71,7 @@ const ORDER: Array<InterfaceTagsType> = [
   SpecialTags.INFLUENCE,
   SpecialTags.CITY_COUNT,
   SpecialTags.COLONY_COUNT,
-  SpecialTags.EXCAVATIONS,
+  SpecialTags.UNDERGROUND_TOKEN_COUNT,
   SpecialTags.CORRUPTION,
   SpecialTags.NEGATIVE_VP,
 ];
@@ -84,7 +84,7 @@ const isInGame = (tag: InterfaceTagsType, game: GameModel): boolean => {
     return gameOptions.expansions.colonies !== false;
   case SpecialTags.INFLUENCE:
     return game.turmoil !== undefined;
-  case SpecialTags.EXCAVATIONS:
+  case SpecialTags.UNDERGROUND_TOKEN_COUNT:
   case SpecialTags.CORRUPTION:
   case SpecialTags.NEGATIVE_VP:
     return gameOptions.expansions.underworld !== false;
@@ -107,8 +107,8 @@ const getTagCount = (tagName: InterfaceTagsType, player: PublicPlayerModel): num
     return player.citiesCount || 0;
   case SpecialTags.NONE:
     return player.noTagsCount || 0;
-  case SpecialTags.EXCAVATIONS:
-    return player.excavations;
+  case SpecialTags.UNDERGROUND_TOKEN_COUNT:
+    return player.undergroundTokens;
   case SpecialTags.CORRUPTION:
     return player.corruption;
   case SpecialTags.NEGATIVE_VP:

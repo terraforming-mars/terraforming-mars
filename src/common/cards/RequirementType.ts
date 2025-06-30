@@ -29,6 +29,6 @@ export enum RequirementType {
     ROAD_TILES = 'Road tiles',
 
     // Underworld
-    EXCAVATION = 'Excavation',
     CORRUPTION = 'Corruption',
+    UNDERGROUND_TOKENS = 'Underground tokens',
 }

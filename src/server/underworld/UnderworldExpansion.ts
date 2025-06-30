@@ -91,6 +91,7 @@ export class UnderworldExpansion {
   public static initializePlayer(): UnderworldPlayerData {
     return {
       corruption: 0,
+      tokens: [],
     };
   }
 
@@ -222,6 +223,9 @@ export class UnderworldExpansion {
     this.grant(player, undergroundResource);
 
     space.excavator = player;
+    player.underworldData.tokens.push(undergroundResource);
+    // space.undergroundResources = undefined; ADD THIS
+
     for (const card of player.tableau) {
       card.onExcavation?.(player, space);
     }
@@ -422,14 +426,6 @@ export class UnderworldExpansion {
     inplaceShuffle(game.underworldData.tokens, game.rng);
   }
 
-  static excavationMarkerCount(player: IPlayer): number {
-    return this.excavatedSpaces(player).length;
-  }
-
-  static excavatedSpaces(player: IPlayer) {
-    return player.game.board.spaces.filter((space) => space.excavator === player);
-  }
-
   static endGeneration(game: IGame) {
     for (const player of game.players) {
       player.underworldData.temperatureBonus = undefined;
@@ -470,7 +466,7 @@ export class UnderworldExpansion {
   public static drawExcavationToken(game: IGame): UndergroundResourceToken {
     const token = game.underworldData?.tokens.pop();
     if (token === undefined) {
-      throw new Error('No underground resource token!');
+      throw new Error('No underground token!');
     }
     return token;
   }

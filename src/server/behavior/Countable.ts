@@ -40,6 +40,7 @@ export type _Countable = {
   underworld?: {
     corruption?: NoAttributes,
     excavationMarkers?: NoAttributes,
+    undergroundTokens?: NoAttributes,
   },
 
   // (Note for later: Tags and Cities have different defaults. THIS IS NOT GOOD, IS IT?)

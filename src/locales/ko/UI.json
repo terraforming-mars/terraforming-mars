@@ -160,7 +160,8 @@
     "Tycoon": "거물",
     "Have 15 project cards in play (not events.)": "자신이 보유한 유지형/활동형 카드(초락색 및 파란색 카드)가 15장 이상.",
     "Tunneler": "",
-    "Have at least 7 excavation markers": "발굴 마커 7개 이상.",
+    "// Have at least 7 excavation markers": "발굴 마커 7개 이상.",
+    "Have at least 7 underground tokens": "",
     "Risktaker": "",
     "Have at least 3 NEGATIVE VPs among your cards. (Event cards count.)": "추진한 카드 중 승점을 낮추는 카드(사건형 카드 포함) 3장 이상.",
 

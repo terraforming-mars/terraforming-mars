@@ -143,8 +143,8 @@ export default Vue.extend({
         return ['card-tile-lunar-mine--S', 'tile--req'];
       case RequirementType.ROAD_TILES:
         return ['card-tile-lunar-road--S', 'tile--req'];
-      case RequirementType.EXCAVATION:
-        return ['card-excavation req'];
+      case RequirementType.UNDERGROUND_TOKENS:
+        return ['card-underground-resources req'];
       case RequirementType.CORRUPTION:
         return ['card-resource', 'card-resource-corruption'];
       case RequirementType.PRODUCTION:

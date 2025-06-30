@@ -28,7 +28,6 @@ import {AwardScorer} from '../awards/AwardScorer';
 import {SpaceId} from '../../common/Types';
 import {cardsToModel, coloniesToModel} from './ModelUtils';
 import {runId} from '../utils/server-ids';
-import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 import {toName} from '../../common/utils/utils';
 import {MAX_AWARDS, MAX_MILESTONES} from '../../common/constants';
 
@@ -223,7 +222,6 @@ export class Server {
       corruption: player.underworldData.corruption,
       energy: player.energy,
       energyProduction: player.production.energy,
-      excavations: UnderworldExpansion.excavationMarkerCount(player),
       fleetSize: player.colonies.getFleetSize(),
       handicap: useHandicap ? player.handicap : undefined,
       heat: player.heat,

@@ -22,7 +22,7 @@ export class ForestTunnels extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.plants(1).slash().excavate(1);
         }),
-        description: 'Gain 1 plant for each underground resource token you have claimed. (This excludes the ones returned to the supply.)',
+        description: 'Gain 1 plant for each underground resource token you have claimed.',
       },
     });
   }

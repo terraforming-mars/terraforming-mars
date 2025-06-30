@@ -427,11 +427,7 @@ export class UnderworldExpansion {
   }
 
   static excavationMarkerCount(player: IPlayer): number {
-    return this.excavatedSpaces(player).length;
-  }
-
-  static excavatedSpaces(player: IPlayer) {
-    return player.game.board.spaces.filter((space) => space.excavator === player);
+    return player.game.board.spaces.filter((space) => space.excavator === player).length;
   }
 
   static endGeneration(game: IGame) {

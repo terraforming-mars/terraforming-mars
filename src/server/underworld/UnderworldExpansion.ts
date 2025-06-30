@@ -328,7 +328,6 @@ export class UnderworldExpansion {
     }
   }
 
-  // TODO(kberg): turn into a deferred action?
   public static maybeBlockAttack(target: IPlayer, perpetrator: IPlayer, msg: Message | string, cb: (proceed: boolean) => PlayerInput | undefined): PlayerInput | undefined {
     if (target.game.gameOptions.underworldExpansion === false) {
       return cb(true);

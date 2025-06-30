@@ -25,7 +25,8 @@
 "Requires that you own 2 city tiles. Gain 1 corruption. Increase your M€ production 4 steps.": "",
 
 "Cave City": "Höhlenstadt",
-"Requires 1 excavation marker. Increase your M€ production 1 step. Place a city in a space where YOU have an excavation marker. Regular placement restrictions still apply.": "Benötigt 1 Ausgrabungsmarker. Erhöhe deine M€-Produktion um 1. Platziere eine Stadt auf einem Feld, auf dem DU einen Ausgrabungsmarker hast. Die normalen Platzierungsbeschränkungen gelten weiterhin.",
+"// Requires 1 excavation marker. Increase your M€ production 1 step. Place a city in a space where YOU have an excavation marker. Regular placement restrictions still apply.": "Benötigt 1 Ausgrabungsmarker. Erhöhe deine M€-Produktion um 1. Platziere eine Stadt auf einem Feld, auf dem DU einen Ausgrabungsmarker hast. Die normalen Platzierungsbeschränkungen gelten weiterhin.",
+"Increase your steel production 1 step. Place a city in a space where YOU have an excavation marker. Regular placement restrictions still apply.": "",
 
 "Chemical Factory": "Chemische Fabrik",
 "Action: Spend 1 plant to excavate an underground resource.": "AKTION: Bezahle 1 Pflanze, um eine unterirdische Ressource auszugraben.",
@@ -304,7 +305,8 @@
 "Place this card face-down in that player's project card file.": "Lege diese Karte verdeckt in die Projektkarten dieses Spielers.",
 
 "Subnautic Pirates": "Subnautische Piraten",
-"Requires 1 excavation marker and 1 corruption. Pick an ocean tile that has your excavation marker on it. Steal 6 M€ from each other player that owns a tile adjacent to that ocean. This can be blocked by corruption.": "Benötigt 1 Ausgrabungsmarker und 1 Korruption. Wähle ein Ozeanplättchen, auf dem dein Ausgrabungsmarker liegt. Klaue 6 M€ von jedem anderen Spieler, der ein an diesen Ozean angrenzendes Plättchen besitzt. Dies kann durch Korruption verhindert werden.",
+"// Requires 1 excavation marker and 1 corruption. Pick an ocean tile that has your excavation marker on it. Steal 6 M€ from each other player that owns a tile adjacent to that ocean. This can be blocked by corruption.": "Benötigt 1 Ausgrabungsmarker und 1 Korruption. Wähle ein Ozeanplättchen, auf dem dein Ausgrabungsmarker liegt. Klaue 6 M€ von jedem anderen Spieler, der ein an diesen Ozean angrenzendes Plättchen besitzt. Dies kann durch Korruption verhindert werden.",
+"Requires you have 1 corruption and 1 underground resource token. Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "",
 
 "Subterranean Sea": "Unterirdisches Meer",
 "Place an ocean tile ON AN AREA NOT RESERVED FOR OCEAN where you have an excavation marker.": "Platziere ein Ozeanplättchen auf ein Feld, das nicht für einen Ozean reserviert ist und auf der du einen Ausgrabungsmarker hast.",
@@ -324,8 +326,8 @@
 "Gain 1 corruption. Excavate an underground resource.": "Erhalte 1 Korruption. Grabe eine unterirdische Ressource aus.",
 
 "Underground Amusement Park": "Unterirdischer Vergnügungspark",
-"Requires an excavation marker. Increase your M€ production 1 step.": "Benötigt einen Ausgrabungsmarker. Erhöhe deine M€-Produktion um 1.",
-
+"// Requires an excavation marker. Increase your M€ production 1 step.": "Benötigt einen Ausgrabungsmarker. Erhöhe deine M€-Produktion um 1.",
+"Requires you have 1 underground resource token. Increase your M€ production 1 step.": "",
 "Underground Habitat": "Unterirdischer Lebensraum",
 "Excavate an underground resource. Increase your plant production 1 step. Add 1 animal on another card.": "Grabe eine unterirdische Ressource aus. Erhöhe deine Pflanzenproduktion um 1. Füge 1 Tier einer anderen Karte hinzu.",
 
@@ -339,7 +341,8 @@
 "Excavate an underground resource. At the end of the game, your cities score 1 VP per 3 excavation markers YOU have in that city space and adjacent spaces.": "Grabe eine unterirdische Ressource aus. Am Ende des Spiels erhalte für deine Städte 1 Siegpunkt pro 3 Ausgrabungsmarker, die du in diesem Stadtfeld und den angrenzenden Feldern hast.",
 
 "Underground Smuggling Ring": "Unterirdischer Schmuggelring",
-"Requires an excavation marker. Gain 1 corruption and 2 of the same standard resource.": "Benötigt einen Ausgrabungsmarker. Erhalte 1 Korruption und 2 von einer gleichen Standardressource.",
+"// Requires an excavation marker. Gain 1 corruption and 2 of the same standard resource.": "Benötigt einen Ausgrabungsmarker. Erhalte 1 Korruption und 2 von einer gleichen Standardressource.",
+"Requires you have 1 underground resource token. Gain 1 corruption and 2 of the same standard resource.": "",
 
 "Voltaic Metallurgy": "Voltaische Metallurgie",
 "Action: Spend any number of steel to gain the same amount of titanium (max is the number of power tags you have.)": "AKTION: Gib eine beliebige Anzahl von Stahl aus, um die gleiche Menge Titan zu erhalten (das Maximum ist die Anzahl der Energie-Symbole, die du hast).",

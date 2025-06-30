@@ -17,7 +17,8 @@
   "Requires that you own 2 city tiles. Gain 1 corruption. Increase your M€ production 4 steps.": "",
 
   "Cave City": "Печера місто",
-  "Requires 1 excavation marker. Increase your M€ production 1 step. Place a city in a space where YOU have an excavation marker. Regular placement restrictions still apply.": "Вимагає 1 маркеру розкопок. Збільште вашу виробництво M€ на 1 крок. Розмістіть місто на місці, де У ВАС є маркер розкопок. Звичайні обмеження розміщення все ще застосовуються.",
+  "// Requires 1 excavation marker. Increase your M€ production 1 step. Place a city in a space where YOU have an excavation marker. Regular placement restrictions still apply.": "Вимагає 1 маркеру розкопок. Збільште вашу виробництво M€ на 1 крок. Розмістіть місто на місці, де У ВАС є маркер розкопок. Звичайні обмеження розміщення все ще застосовуються.",
+  "Increase your steel production 1 step. Place a city in a NON-RESERVED SPACE WITH YOUR EXCAVATION MARKER, ignoring other placement restrictions.": "",
 
   "Chemical Factory": "Хімічний завод",
   "Action: Spend 1 plant to excavate an underground resource.": "Дія: Витратити 1 рослину, щоб викопати підземний ресурс.",
@@ -255,7 +256,8 @@
   "1 VP per 3 data resources on this card.": "1 ПО за кожні 3 одиниці даних на цій картці.",
 
   "Subnautic Pirates": "Пірати підводного світу",
-  "Requires 1 excavation marker and 1 corruption. Pick an ocean tile that has your excavation marker on it. Steal 6 M€ from each other player that owns a tile adjacent to that ocean. This can be blocked by corruption.": "Вимагає 1 маркеру розкопок та 1 одиниці корупції. Виберіть океанську плитку, на якій знаходиться ваш маркер розкопок. Вкрадіть 6 M€ у кожного іншого гравця, який володіє плиткою, прилеглою до цього океану. Це може бути заблоковано корупцією.",
+  "// Requires 1 excavation marker and 1 corruption. Pick an ocean tile that has your excavation marker on it. Steal 6 M€ from each other player that owns a tile adjacent to that ocean. This can be blocked by corruption.": "Вимагає 1 маркеру розкопок та 1 одиниці корупції. Виберіть океанську плитку, на якій знаходиться ваш маркер розкопок. Вкрадіть 6 M€ у кожного іншого гравця, який володіє плиткою, прилеглою до цього океану. Це може бути заблоковано корупцією.",
+  "Requires you have 1 corruption and 1 underground resource token. Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "",
 
   "Subterranean Sea": "Підземне море",
   "Place an ocean tile ON AN AREA NOT RESERVED FOR OCEAN where you have an excavation marker.": "Покладіть океанську плитку НА МІСЦЕ, НЕ ЗАРЕЗЕРВОВАНЕ ДЛЯ ОКЕАНУ, де у вас є маркер розкопок.",
@@ -275,7 +277,8 @@
   "Gain 1 corruption. Excavate an underground resource.": "Отримайте 1 одиницю корупції. Розкопайте підземний ресурс.",
 
   "Underground Amusement Park": "Підземний парк розваг",
-  "Requires an excavation marker. Increase your M€ production 1 step.": "Вимагає маркера розкопок. Збільште ваше виробництво M€ на 1 крок.",
+  "// Requires an excavation marker. Increase your M€ production 1 step.": "Вимагає маркера розкопок. Збільште ваше виробництво M€ на 1 крок.",
+  "Requires you have 1 underground resource token. Increase your M€ production 1 step.": "",
 
   "Underground Habitat": "Підземне селище",
   "Excavate an underground resource. Increase your plant production 1 step. Add 1 animal on another card.": "Розкопайте підземний ресурс. Збільште ваше виробництво рослин на 1 крок. Додайте 1 тварину на іншу картку.",
@@ -290,7 +293,8 @@
   "Excavate an underground resource. At the end of the game, your cities score 1 VP per 3 excavation markers YOU have in that city space and adjacent spaces.": "Розкопайте підземний ресурс. В кінці гри ваші міста набирають 1 ПО за кожні 3 маркера розкопок, ЯКІ ви маєте в цьому місці міста та прилеглих місцях.",
 
   "Underground Smuggling Ring": "Підземне контрабандне кільце",
-  "Requires an excavation marker. Gain 1 corruption and 2 of the same standard resource.": "Вимагає маркера розкопок. Отримайте 1 одиницю корупції та 2 однакових стандартних ресурси.",
+  "// Requires an excavation marker. Gain 1 corruption and 2 of the same standard resource.": "Вимагає маркера розкопок. Отримайте 1 одиницю корупції та 2 однакових стандартних ресурси.",
+  "Requires you have 1 underground resource token. Gain 1 corruption and 2 of the same standard resource.": "",
 
   "Voltaic Metallurgy": "Вольтаїчна металургія",
   "Action: Spend any number of steel to gain the same amount of titanium (max is the number of power tags you have.)": "Дія: Витратити будь-яку кількість сталі, щоб отримати таку ж кількість титану (максимум - кількість символів енергії, які у вас є).",

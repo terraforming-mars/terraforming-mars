@@ -59,8 +59,6 @@ export type CardRequirementDescriptor = {
   logisticRate?: number,
 
   // Underworld
-  // TODO(kberg): evaluate whether excavation is still used by 2025-10-01
-  excavation?: number,
   undergroundTokens?: number,
   corruption?: number,
 
@@ -117,8 +115,6 @@ export function requirementType(descriptor: CardRequirementDescriptor): Requirem
     return RequirementType.MINING_TILES;
   } else if (descriptor.roadTiles !== undefined) {
     return RequirementType.ROAD_TILES;
-  } else if (descriptor.excavation !== undefined) {
-    return RequirementType.EXCAVATION;
   } else if (descriptor.undergroundTokens !== undefined) {
     return RequirementType.UNDERGROUND_TOKENS;
   } else if (descriptor.corruption !== undefined) {

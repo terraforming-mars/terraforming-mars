@@ -606,9 +606,9 @@
   "Copy": "Kopiere",
   "Do nothing": "Mache nichts",
   "Ok ${0}": "OK ${0}",
-  "Ok 0": "OK 0",
-  "Ok 1": "OK 1",
-  "Ok 2": "OK 2",
+  "Ok 0": "",
+  "Ok 1": "",
+  "Ok 2": "",
 
   "Starting Megacredits:": "Startkapital:",
   "After Preludes:": "Nach Präludium:",

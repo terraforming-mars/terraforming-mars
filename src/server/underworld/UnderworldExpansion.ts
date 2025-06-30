@@ -21,7 +21,7 @@ import {Phase} from '../../common/Phase';
 import {Units} from '../../common/Units';
 import {LogHelper} from '../LogHelper';
 import {Message} from '../../common/logs/Message';
-import {IdentificationTrigger} from '../cards/ICard';
+import {IdentificationTrigger} from './underworldTypes';
 
 export class UnderworldExpansion {
   private constructor() {}

@@ -22,6 +22,7 @@ import {Warning} from '../../common/cards/Warning';
 import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
 import {SerializedCard} from '../SerializedCard';
+import {IdentificationTrigger} from '../underworld/underworldTypes';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -41,9 +42,6 @@ export function isIHasCheckLoops(object: any): object is IHasCheckLoops {
 
 /** Defines how ICard.getVictoryPoints works. */
 export type GetVictoryPointsContext = 'default' | 'projectWorkshop';
-
-// TODO(kberg): Move this out of ICard.
-export type IdentificationTrigger = 'normal' | 'excavation' | 'tile';
 
 export interface ICard {
   readonly name: CardName;

@@ -2,7 +2,7 @@
   "${0} revealed and discarded ${1}": "${0} deckte ${1} auf und warf es ab",
   "${0} revealed ${1}": "${0} deckte ${1} auf",
   "${0} used ${1} standard action": "${0} führte Standardaktion ${1} aus",
-  "Generation ${0}": "Generation ${0}",
+  "Generation ${0}": "",
   "${0} added ${1} ${2} to ${3}": "${0} fügte ${3} ${1} ${2} hinzu",
   "Convert Heat": "Wärme umwandeln",
   "Convert Plants": "Pflanzen umwandeln",

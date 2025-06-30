@@ -84,7 +84,8 @@
   "Place 2 data on any card. Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces.": "Розмістіть 2 ресурси даних на будь-якій карті. Виберіть місце на дошці. Визначте підземний ресурс у цьому місці та в усіх сусідніх місцях.",
 
   "Geothermal Network": "Геотермальна мережа",
-  "Requires 3 excavation markers. Increase your heat production 3 steps.": "Вимагає 3 маркери розкопок. Збільште ваше виробництво тепла на 3 кроки.",
+  "// Requires 3 excavation markers. Increase your heat production 3 steps.": "Вимагає 3 маркери розкопок. Збільште ваше виробництво тепла на 3 кроки.",
+  "Requires 3 underground tokens. Increase your heat production 3 steps.": "",
 
   "Global Audit": "Глобальна аудиторія",
   "Every player with 0 corruption gains 1 TR, if possible.": "Кожен гравець з 0 корупцією отримує 1 РТ, якщо це можливо.",

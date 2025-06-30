@@ -426,10 +426,6 @@ export class UnderworldExpansion {
     inplaceShuffle(game.underworldData.tokens, game.rng);
   }
 
-  static excavationMarkerCount(player: IPlayer): number {
-    return player.game.board.spaces.filter((space) => space.excavator === player).length;
-  }
-
   static endGeneration(game: IGame) {
     for (const player of game.players) {
       player.underworldData.temperatureBonus = undefined;

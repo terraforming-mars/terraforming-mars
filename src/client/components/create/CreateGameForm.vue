@@ -169,7 +169,7 @@
                                 <div class="create-game-expansion-icon expansion-icon-underworld"></div>
                                 <span v-i18n>Underworld 2 (development)</span><span></span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Underworld" class="tooltip" target="_blank">&#9432;</a>
                             </label>
-                            <div class="warning" v-if="expansions.underworld">Underworld is slowly migrating to Underworld 2. Rules WILL change, and things that were reliable WILL break.</div>
+                            <div class="warning" v-if="expansions.underworld"><span v-i18n>Underworld is slowly migrating to Underworld 2. Rules WILL change, and things that were reliable WILL break.</span></div>
                         </div>
 
                         <div class="create-game-page-column">

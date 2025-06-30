@@ -33,7 +33,13 @@ function getAllTranslations(): {[key: string]: Translation} {
             // if (translations[phrase][lang] !== undefined) {
             //   console.log(`${lang}: Repeated translation for [${phrase}]`);
             // }
-            translations[phrase][lang] = json[phrase];
+            const translated = json[phrase];
+            if (translated.trim() === phrase.trim()) {
+              throw new Error('Do not repeat a translation with its own text: ' + phrase);
+            }
+            if (translated.trim().length !== 0) {
+              translations[phrase][lang] = translated;
+            }
           }
         } catch (e) {
           throw new Error(`While parsing ${filename}:` + e);

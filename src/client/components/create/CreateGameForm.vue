@@ -1299,7 +1299,7 @@ export default (Vue as WithRefs<Refs>).extend({
         }
       };
 
-      fetch(paths.API_CREATEGAME, {'method': 'PUT', 'body': dataToSend, 'headers': {'Content-Type': 'application/json'}})
+      fetch(paths.API_CREATEGAME, {'method': 'POST', 'body': dataToSend, 'headers': {'Content-Type': 'application/json'}})
         .then((response) => response.text())
         .then((text) => {
           try {

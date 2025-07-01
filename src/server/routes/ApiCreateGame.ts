@@ -73,7 +73,7 @@ export class ApiCreateGame extends Handler {
 
   // TODO(kberg): much of this code can be moved outside of handler, and that
   // would be better.
-  public override put(req: Request, res: Response, ctx: Context): Promise<void> {
+  public override post(req: Request, res: Response, ctx: Context): Promise<void> {
     return new Promise((resolve) => {
       if (this.quotaHandler.measure(ctx) === false) {
         responses.quotaExceeded(req, res);

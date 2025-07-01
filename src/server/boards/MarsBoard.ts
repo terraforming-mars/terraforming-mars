@@ -144,7 +144,7 @@ export class MarsBoard extends Board {
   }
 
   public getAvailableSpacesForOcean(player: IPlayer): ReadonlyArray<Space> {
-    return this.getSpaces(SpaceType.OCEAN, player)
+    return this.getSpaces(SpaceType.OCEAN)
       .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player));
   }
 

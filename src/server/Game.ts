@@ -1777,8 +1777,8 @@ export class Game implements IGame, Logger {
     } else if (game.phase === Phase.END) {
       // There's nowhere that we need to go for end game.
     } else {
-      // We should be in ACTION phase, let's prompt the active player for actions
-      game.getPlayerById(game.activePlayer).takeAction(/* saveBeforeTakingAction */ false);
+      // We should be in ACTION phase, let's prompt the active player to take an action.
+      game.getPlayerById(game.activePlayer).takeAction();
     }
 
     if (game.phase === Phase.END) GameLoader.getInstance().mark(game.id);

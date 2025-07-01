@@ -1380,13 +1380,8 @@ export class Player implements IPlayer {
    * Set up a player taking their next action.
    *
    * This method indicates the avalilable actions by setting the `waitingFor` attribute of this player.
-   *
-   * saveBeforeTakingAction when true, the game state is saved. Default is `true`. This
-   * should only be false in testing and when this method is called during game deserialization. In other
-   * words, don't set this value unless you know what you're doing.
    */
-  // @ts-ignore saveBeforeTakingAction is unused at the moment.
-  public takeAction(saveBeforeTakingAction: boolean = true): void {
+  public takeAction(): void {
     const game = this.game;
 
     if (game.deferredActions.length > 0) {
@@ -1397,13 +1392,7 @@ export class Player implements IPlayer {
     if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) {
       game.save();
     }
-    // if (saveBeforeTakingAction) game.save();
 
-
-    // Autopass is disabled.
-    // if (this.autopass) {
-    //   this.passOption().cb();
-    // }
     const headStartIsInEffect = this.headStartIsInEffect();
     this.game.inDoubleDown = false;
 

@@ -333,7 +333,7 @@ export interface IPlayer {
   affordOptionsForCard(card: IProjectCard): CanAffordOptions;
   canAfford(options: number | CanAffordOptions): boolean;
   getStandardProjectOption(): SelectCard<IStandardProjectCard>;
-  takeAction(saveBeforeTakingAction?: boolean): void;
+  takeAction(): void;
   /** Return possible mid-game actions like play a card and fund an award, but not play prelude card. */
   getActions(): OrOptions;
   process(input: InputResponse): void;

@@ -1482,8 +1482,10 @@ export class Player implements IPlayer {
     }
 
     this.setWaitingFor(this.getActions(), () => {
-      this.incrementActionsTaken();
-      this.takeAction();
+      game.deferredActions.runAll(() => {
+        this.incrementActionsTaken();
+        this.takeAction();
+      });
     });
   }
 

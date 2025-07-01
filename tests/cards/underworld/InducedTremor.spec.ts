@@ -33,7 +33,7 @@ describe('InducedTremor', () => {
     expect(spaces[0].undergroundResources).is.not.undefined;
     expect(spaces[1].undergroundResources).is.not.undefined;
     expect(spaces[2].undergroundResources).is.not.undefined;
-    expect(game.underworldData.tokens).has.length(86);
+    expect(game.underworldData.tokens).has.length(88);
 
     cast(card.play(player), undefined);
     runAllActions(game);
@@ -45,7 +45,7 @@ describe('InducedTremor', () => {
     expect(spaces[0].undergroundResources).is.not.undefined;
     expect(spaces[1].undergroundResources).is.undefined;
     expect(spaces[2].undergroundResources).is.not.undefined;
-    expect(game.underworldData.tokens).has.length(87);
+    expect(game.underworldData.tokens).has.length(89);
 
     runAllActions(game);
     assertIsExcavationAction(player, player.popWaitingFor());

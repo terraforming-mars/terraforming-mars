@@ -1322,9 +1322,6 @@ export class Game implements IGame, Logger {
     // Part 4. Place the tile
     this.simpleAddTile(player, space, tile);
 
-    // Clear out underworld components.
-    UnderworldExpansion.onTilePlaced(this, space);
-
     // Part 5. Collect the bonuses
     if (this.phase !== Phase.SOLAR) {
       this.grantPlacementBonuses(player, space, coveringExistingTile, arcadianCommunityBonus);
@@ -1335,6 +1332,9 @@ export class Game implements IGame, Logger {
     } else {
       space.player = undefined;
     }
+
+    // Clear out underworld components.
+    UnderworldExpansion.onTilePlaced(this, space);
 
     for (const p of this.players) {
       for (const playedCard of p.tableau) {
@@ -1371,6 +1371,10 @@ export class Game implements IGame, Logger {
 
       if (arcadianCommunityBonus) {
         this.defer(new GainResources(player, Resource.MEGACREDITS, {count: 3}));
+      }
+
+      if (space.undergroundResources === 'place6mc') {
+        this.defer(new GainResources(player, Resource.MEGACREDITS, {count: 6}));
       }
     }
   }

@@ -479,6 +479,8 @@ export class Player implements IPlayer {
       requirementsBonus += 2;
     }
 
+    requirementsBonus += UnderworldExpansion.getGlobalParameterRequirementBonus(this, parameter);
+
     return requirementsBonus;
   }
 
@@ -1866,8 +1868,13 @@ export class Player implements IPlayer {
     player.timer = Timer.deserialize(d.timer);
 
     if (d.underworldData !== undefined) {
-      // TODO(kberg): Remove the {tokens, ...} wrapper by 2025-10-01
-      player.underworldData = {tokens: [], ...d.underworldData};
+      const dunerworldData = d.underworldData;
+      // TODO(kberg): Remove the wrapper by 2025-10-01
+      player.underworldData = {
+        tokens: dunerworldData.tokens ?? [],
+        corruption: dunerworldData.corruption,
+        activeBonus: dunerworldData.temperatureBonus ?? dunerworldData.activeBonus,
+      };
     }
     if (d.alliedParty !== undefined) {
       // TODO(kberg): Remove after 2025-08-01

@@ -53,19 +53,19 @@ describe('UnderworldExpansion', () => {
   });
 
   it('sanity', () => {
-    expect(underworldData.tokens).has.length(89);
+    expect(underworldData.tokens).has.length(91);
   });
 
   it('identify', () => {
     const space = game.board.getAvailableSpacesOnLand(player1)[0];
 
     expect(space.undergroundResources).is.undefined;
-    expect(underworldData.tokens).has.length(89);
+    expect(underworldData.tokens).has.length(91);
 
     UnderworldExpansion.identify(game, space, player1);
 
     expect(space.undergroundResources).is.not.undefined;
-    expect(underworldData.tokens).has.length(88);
+    expect(underworldData.tokens).has.length(90);
     expect(space.excavator).is.undefined;
   });
 
@@ -90,7 +90,7 @@ describe('UnderworldExpansion', () => {
 
   it('serializing and deserializing board spaces', () => {
     const spaces = game.board.getAvailableSpacesOnLand(player1);
-    spaces[0].undergroundResources = 'data3';
+    spaces[0].undergroundResources = 'nothing';
     spaces[1].undergroundResources = 'corruption2';
     spaces[2].undergroundResources = 'ocean';
     spaces[0].excavator = player1;
@@ -100,7 +100,7 @@ describe('UnderworldExpansion', () => {
     const serialized = game.serialize();
     const serializedSpaces = serialized.board.spaces.filter((space) => spaceIds.includes(space.id));
 
-    expect(serializedSpaces[0].undergroundResources).eq('data3');
+    expect(serializedSpaces[0].undergroundResources).eq('nothing');
     expect(serializedSpaces[1].undergroundResources).eq('corruption2');
     expect(serializedSpaces[2].undergroundResources).eq('ocean');
     expect(serializedSpaces[3]).does.not.haveOwnPropertyDescriptor('undergroundResources');
@@ -111,7 +111,7 @@ describe('UnderworldExpansion', () => {
 
     const game2 = Game.deserialize(serialized);
     const deserializedSpaces = game2.board.spaces.filter((space) => spaceIds.includes(space.id));
-    expect(deserializedSpaces[0].undergroundResources).eq('data3');
+    expect(deserializedSpaces[0].undergroundResources).eq('nothing');
     expect(deserializedSpaces[1].undergroundResources).eq('corruption2');
     expect(deserializedSpaces[2].undergroundResources).eq('ocean');
     expect(deserializedSpaces[3]).does.not.haveOwnPropertyDescriptor('undergroundResources');
@@ -229,12 +229,6 @@ describe('UnderworldExpansion', () => {
     expect(player1.production.asUnits()).deep.eq(Units.of({titanium: 1}));
   });
 
-  it('grant bonus - plant1', () => {
-    expect(player1.stock.asUnits()).deep.eq(Units.of({}));
-    UnderworldExpansion.grant(player1, 'plant1');
-    expect(player1.stock.asUnits()).deep.eq(Units.of({plants: 1}));
-  });
-
   it('grant bonus - plant2', () => {
     expect(player1.stock.asUnits()).deep.eq(Units.of({}));
     UnderworldExpansion.grant(player1, 'plant2');
@@ -314,33 +308,33 @@ describe('UnderworldExpansion', () => {
   // });
 
   it('grant bonus - data1pertemp', () => {
-    expect(player1.underworldData.temperatureBonus).is.undefined;
+    expect(player1.underworldData.activeBonus).is.undefined;
     UnderworldExpansion.grant(player1, 'data1pertemp');
-    expect(player1.underworldData.temperatureBonus).eq('data1pertemp');
+    expect(player1.underworldData.activeBonus).eq('data1pertemp');
   });
 
   it('grant bonus - microbe1pertemp', () => {
-    expect(player1.underworldData.temperatureBonus).is.undefined;
+    expect(player1.underworldData.activeBonus).is.undefined;
     UnderworldExpansion.grant(player1, 'microbe1pertemp');
-    expect(player1.underworldData.temperatureBonus).eq('microbe1pertemp');
+    expect(player1.underworldData.activeBonus).eq('microbe1pertemp');
   });
 
   it('grant bonus - plant2pertemp', () => {
-    expect(player1.underworldData.temperatureBonus).is.undefined;
+    expect(player1.underworldData.activeBonus).is.undefined;
     UnderworldExpansion.grant(player1, 'plant2pertemp');
-    expect(player1.underworldData.temperatureBonus).eq('plant2pertemp');
+    expect(player1.underworldData.activeBonus).eq('plant2pertemp');
   });
 
   it('grant bonus - steel2pertemp', () => {
-    expect(player1.underworldData.temperatureBonus).is.undefined;
+    expect(player1.underworldData.activeBonus).is.undefined;
     UnderworldExpansion.grant(player1, 'steel2pertemp');
-    expect(player1.underworldData.temperatureBonus).eq('steel2pertemp');
+    expect(player1.underworldData.activeBonus).eq('steel2pertemp');
   });
 
   it('grant bonus - titanium1pertemp', () => {
-    expect(player1.underworldData.temperatureBonus).is.undefined;
+    expect(player1.underworldData.activeBonus).is.undefined;
     UnderworldExpansion.grant(player1, 'titanium1pertemp');
-    expect(player1.underworldData.temperatureBonus).eq('titanium1pertemp');
+    expect(player1.underworldData.activeBonus).eq('titanium1pertemp');
   });
 
   it('grant bonus - science tag', () => {
@@ -459,7 +453,7 @@ describe('UnderworldExpansion', () => {
   });
 
   it('on temperature change - data1pertemp', () => {
-    player1.underworldData.temperatureBonus = 'data1pertemp';
+    player1.underworldData.activeBonus = 'data1pertemp';
 
     expect(player1.getCardsWithResources()).is.empty;
 
@@ -483,7 +477,7 @@ describe('UnderworldExpansion', () => {
   });
 
   it('on temperature change - microbe1pertemp', () => {
-    player1.underworldData.temperatureBonus = 'microbe1pertemp';
+    player1.underworldData.activeBonus = 'microbe1pertemp';
 
     expect(player1.getCardsWithResources()).is.empty;
 
@@ -507,39 +501,39 @@ describe('UnderworldExpansion', () => {
   });
 
   it('on temperature change - plant2pertemp', () => {
-    player1.underworldData.temperatureBonus = 'plant2pertemp';
+    player1.underworldData.activeBonus = 'plant2pertemp';
     game.increaseTemperature(player2, 2);
     expect(player1.stock.plants).eq(4);
   });
 
   it('on temperature change - steel2pertemp', () => {
-    player1.underworldData.temperatureBonus = 'steel2pertemp';
+    player1.underworldData.activeBonus = 'steel2pertemp';
     game.increaseTemperature(player2, 2);
     expect(player1.stock.steel).eq(4);
   });
 
   it('on temperature change - titanium1pertemp', () => {
-    player1.underworldData.temperatureBonus = 'titanium1pertemp';
+    player1.underworldData.activeBonus = 'titanium1pertemp';
     game.increaseTemperature(player2, 2);
     expect(player1.stock.titanium).eq(2);
   });
 
   it('temperature bonus does not apply to Solar Phase', () => {
-    player1.underworldData.temperatureBonus = 'titanium1pertemp';
+    player1.underworldData.activeBonus = 'titanium1pertemp';
     game.phase = Phase.SOLAR;
     game.increaseTemperature(player2, 2);
     expect(player1.stock.titanium).eq(0);
   });
 
   it('temperature bonus does not apply next generation', () => {
-    player1.underworldData.temperatureBonus = 'steel2pertemp';
+    player1.underworldData.activeBonus = 'steel2pertemp';
     game.increaseTemperature(player2, 2);
     expect(player1.stock.steel).eq(4);
     player1.stock.steel = 0;
 
     forceGenerationEnd(game);
 
-    expect(player1.underworldData.temperatureBonus).is.undefined;
+    expect(player1.underworldData.activeBonus).is.undefined;
     game.increaseTemperature(player2, 1);
     expect(player1.stock.steel).eq(0);
   });

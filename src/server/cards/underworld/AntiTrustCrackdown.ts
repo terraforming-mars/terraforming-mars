@@ -13,7 +13,7 @@ export class AntiTrustCrackdown extends Card implements IProjectCard {
     super({
       name: CardName.ANTI_TRUST_CRACKDOWN,
       type: CardType.EVENT,
-      cost: 22,
+      cost: 18,
       tags: [Tag.EARTH],
       victoryPoints: 2,
 

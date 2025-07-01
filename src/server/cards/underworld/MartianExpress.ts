@@ -5,7 +5,6 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
 import {IActionCard} from '../ICard';
-import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 
 export class MartianExpress extends Card implements IActionCard {
@@ -14,7 +13,6 @@ export class MartianExpress extends Card implements IActionCard {
       type: CardType.ACTIVE,
       name: CardName.MARTIAN_EXPRESS,
       cost: 5,
-      tags: [Tag.MARS],
       victoryPoints: 1,
       requirements: {cities: 1, all: true},
       resourceType: CardResource.WARE,

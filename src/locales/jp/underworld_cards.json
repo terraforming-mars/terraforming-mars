@@ -119,7 +119,8 @@
 
     "Investigative Journalism": "調査報道",
     "Action: Spend 5 M€ and remove 1 corruption from ANOTHER player with more corruption than you to add 1 journalism resource on this card.": "アクション：5MC支払い、あなたより汚職を多く所持しているプレイヤー1人から1汚職除去. このカード上に1記事追加.",
-    "Decrease your M€ production 2 steps. 1 VP per 2 journalism resources on this card.": "MC産出-2. このカード上の2記事毎に1VP",
+    "// Decrease your M€ production 2 steps. 1 VP per 2 journalism resources on this card.": "MC産出-2. このカード上の2記事毎に1VP",
+    "Decrease your M€ production 1 step. 1 VP per journalism resource on this card.": "",
 
     "Labor Trafficking": "労働者人身売買",
     "FIRST": "最初の",

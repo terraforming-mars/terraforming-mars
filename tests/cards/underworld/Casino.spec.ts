@@ -12,7 +12,7 @@ describe('Casino', () => {
 
     expect(card.canPlay(player)).is.false;
 
-    addCity(player2);
+    addCity(player);
 
     expect(card.canPlay(player)).is.false;
     expect(card.canPlay(player2)).is.false;
@@ -20,7 +20,7 @@ describe('Casino', () => {
     addCity(player);
 
     expect(card.canPlay(player)).is.true;
-    expect(card.canPlay(player2)).is.true;
+    expect(card.canPlay(player2)).is.false;
   });
 
   it('Should play', () => {

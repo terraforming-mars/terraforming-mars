@@ -20,10 +20,10 @@ export class InvestigativeJournalism extends Card implements IProjectCard, IActi
       cost: 3,
       tags: [Tag.EARTH],
       resourceType: CardResource.JOURNALISM,
-      victoryPoints: {resourcesHere: {}, per: 2},
+      victoryPoints: {resourcesHere: {}},
 
       behavior: {
-        production: {megacredits: -2},
+        production: {megacredits: -1},
       },
 
       metadata: {
@@ -31,9 +31,9 @@ export class InvestigativeJournalism extends Card implements IProjectCard, IActi
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 5 M€ and remove 1 corruption from ANOTHER player with more corruption than you to add 1 journalism resource on this card.',
             (ab) => ab.megacredits(5).corruption(1).asterix().startAction.resource(CardResource.JOURNALISM)).br;
-          b.production((pb) => pb.megacredits(-2));
+          b.production((pb) => pb.megacredits(-1));
         }),
-        description: 'Decrease your M€ production 2 steps. 1 VP per 2 journalism resources on this card.',
+        description: 'Decrease your M€ production 1 step. 1 VP per journalism resource on this card.',
       },
     });
   }

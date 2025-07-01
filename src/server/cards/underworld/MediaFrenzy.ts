@@ -5,7 +5,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 import {all} from '../Options';
-import {IPlayer, CanAffordOptions} from '../../IPlayer';
+import {IPlayer} from '../../IPlayer';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
@@ -31,7 +31,7 @@ export class MediaFrenzy extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: IPlayer, _canAffordOptions: CanAffordOptions): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     if (player.game.isSoloMode()) {
       return true;
     }

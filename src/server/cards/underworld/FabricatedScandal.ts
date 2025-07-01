@@ -13,7 +13,7 @@ export class FabricatedScandal extends Card implements IProjectCard {
       name: CardName.FABRICATED_SCANDAL,
       type: CardType.EVENT,
       tags: [Tag.CRIME],
-      cost: 15,
+      cost: 14,
 
       behavior: {
         underworld: {corruption: 1},

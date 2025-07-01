@@ -3,7 +3,6 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {Tag} from '../../../common/cards/Tag';
 import {all} from '../Options';
 
 export class VolunteerMiningInitiative extends Card implements IProjectCard {
@@ -12,7 +11,7 @@ export class VolunteerMiningInitiative extends Card implements IProjectCard {
       name: CardName.VOLUNTEER_MINING_INITIATIVE,
       type: CardType.EVENT,
       cost: 12,
-      tags: [Tag.MARS],
+      tags: [],
 
       behavior: {
         underworld: {excavate: {count: {cities: {}, all: true, per: 3}}},

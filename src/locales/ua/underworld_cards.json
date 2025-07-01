@@ -117,7 +117,8 @@
 
   "Investigative Journalism": "Журналістика розслідувань",
   "Action: Spend 5 M€ and remove 1 corruption from ANOTHER player with more corruption than you to add 1 journalism resource on this card.": "Дія: Витратити 5 M€ і видалити 1 одиницю корупції з ІНШОГО гравця з більшою кількістю корупції, ніж у вас, щоб додати 1 ресурс журналістики на цю картку.",
-  "Decrease your M€ production 2 steps. 1 VP per 2 journalism resources on this card.": "Зменште ваше виробництво M€ на 2 кроки. 1 РТ за 2 ресурси журналістики на цій картці.",
+  "// Decrease your M€ production 2 steps. 1 VP per 2 journalism resources on this card.": "Зменште ваше виробництво M€ на 2 кроки. 1 РТ за 2 ресурси журналістики на цій картці.",
+  "Decrease your M€ production 1 step. 1 VP per journalism resource on this card.": "",
 
   "Labor Trafficking": "Торгівля робочою силою",
   "FIRST": "ПЕРШИЙ",

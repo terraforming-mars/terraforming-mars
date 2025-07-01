@@ -9,11 +9,11 @@ export class CutThroatBudgeting extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.CUT_THROAT_BUDGETING,
-      type: CardType.EVENT,
+      type: CardType.AUTOMATED,
       cost: 2,
       tags: [Tag.CRIME],
 
-      victoryPoints: -2,
+      victoryPoints: -1,
 
       requirements: {corruption: 1},
       behavior: {

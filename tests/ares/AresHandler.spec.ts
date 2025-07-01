@@ -195,7 +195,7 @@ describe('AresHandler', () => {
 
   it('Placing on top of an ocean does not regrant bonuses', () => {
     game.board = TharsisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
-    const space = game.board.getSpaces(SpaceType.OCEAN, player).find((space) => {
+    const space = game.board.getSpaces(SpaceType.OCEAN).find((space) => {
       return space.bonus.length > 0 && space.bonus[0] === SpaceBonus.PLANT;
     })!;
     expect(otherPlayer.plants).eq(0);

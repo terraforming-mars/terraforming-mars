@@ -14,14 +14,14 @@ describe('ArtesianAquifer', () => {
     runAllActions(game);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     const space = selectSpace.spaces[0];
-    space.undergroundResources = 'plant1';
+    space.undergroundResources = 'plant2';
     space.bonus = [];
     expect(space.tile?.tileType).is.undefined;
 
     selectSpace.cb(space);
     runAllActions(game);
 
-    expect(player.plants).eq(1);
+    expect(player.plants).eq(2);
     expect(space.tile?.tileType).eq(TileType.OCEAN);
   });
 });

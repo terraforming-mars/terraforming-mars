@@ -180,7 +180,9 @@ export class MarsBoard extends Board {
 
     const spaces = this.getAvailableSpacesOnLand(player, canAffordOptions);
     if (volcanicSpaceIds.length > 0) {
-      return spaces.filter((space) => volcanicSpaceIds.includes(space.id));
+      return spaces.filter((space) => {
+        return volcanicSpaceIds.includes(space.id) || space.undergroundResources === 'volcanicoceanspace';
+      });
     }
     return spaces;
   }

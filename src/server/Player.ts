@@ -382,6 +382,17 @@ export class Player implements IPlayer {
     return this.playedCards.has(CardName.LUNAR_SECURITY_STATIONS);
   }
 
+  public isProtected(resource: Resource) {
+    switch (resource) {
+    case Resource.PLANTS:
+      return this.plantsAreProtected();
+    case Resource.STEEL:
+    case Resource.TITANIUM:
+      return this.alloysAreProtected();
+    }
+    return false;
+  }
+
   public canHaveProductionReduced(resource: Resource, minQuantity: number, attacker: IPlayer) {
     const reducable = this.production[resource] + (resource === Resource.MEGACREDITS ? 5 : 0);
     if (reducable < minQuantity) return false;

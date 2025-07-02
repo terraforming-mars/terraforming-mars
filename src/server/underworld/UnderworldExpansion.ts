@@ -196,7 +196,7 @@ export class UnderworldExpansion {
     return spaces;
   }
 
-  public static excavate(player: IPlayer, space: Space) {
+  public static excavate(player: IPlayer, space: Space): void {
     const game = player.game;
     validateUnderworldExpansion(game);
 

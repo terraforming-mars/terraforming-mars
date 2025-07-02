@@ -109,7 +109,8 @@
 "Effect: When ANY player identifies an underground resource that depicts an ocean, YOU gain 1 TR.": "EFFEKT: Wenn ein beliebiger Spieler eine unterirdische Ressource identifiziert, die einen Ozean darstellt, erhältst DU 1 TW.",
 
 "Geoscan Satellite": "Geoscan Satellit",
-"Place 2 data on any card. Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces.": "FÜge 2 Daten einer beliebigen Karte hinzu. Wähle ein Feld auf dem Spielbrett. Identifiziere die unterirdische Ressource in diesem Feld und in allen angrenzenden Feldern.",
+"// Place 2 data on any card. Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces.": "FÜge 2 Daten einer beliebigen Karte hinzu. Wähle ein Feld auf dem Spielbrett. Identifiziere die unterirdische Ressource in diesem Feld und in allen angrenzenden Feldern.",
+"Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces. Then claim one of them.": "",
 
 "Geothermal Network": "Geothermisches Netzwerk",
 "// Requires 3 excavation markers. Increase your heat production 3 steps.": "Benötigt 3 Ausgrabungsmarker. Erhöhe die Wärmeproduktion um 3.",
@@ -331,7 +332,8 @@
 "Excavate an underground resource. Increase your plant production 1 step. Add 1 animal on another card.": "Grabe eine unterirdische Ressource aus. Erhöhe deine Pflanzenproduktion um 1. Füge 1 Tier einer anderen Karte hinzu.",
 
 "Underground Railway": "Unterirdische Eisenbahn",
-"Decrease your energy production 1 step. Gain 1 TR for every 4 excavation markers you own.": "Reduziere deine Energieproduktion um 1. Erhalte 1 TW für je 4 Ausgrabungsmarker, die du besitzt.",
+"// Decrease your energy production 1 step. Gain 1 TR for every 4 excavation markers you own.": "Reduziere deine Energieproduktion um 1. Erhalte 1 TW für je 4 Ausgrabungsmarker, die du besitzt.",
+"Decrease your energy production 1 step. Gain 1 TR for every 4 underground tokens you have.": "",
 
 "Underground Research Center": "Unterirdisches Forschungszentrum",
 "Requires 5 excavation markers. Decrease your energy production 1 step. Excavate an underground resource. Choose a tag that is not the wild tag or clone tag. Draw 2 cards with that tag.": "Benötigt 5 Ausgrabungsmarker. Reduziere deine Energie-Produktion um 1. Grabe eine unterirdische Ressource aus. Wähle ein Symbol, das kein Joker- oder Klonsymbol ist. Ziehe 2 Karten mit diesem Symbol.",

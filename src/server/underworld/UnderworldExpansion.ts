@@ -120,21 +120,25 @@ export class UnderworldExpansion {
     );
   }
 
-  /** Identify the token at `space`, optionally trigger callbacks */
-  public static identify(game: IGame, space: Space, player: IPlayer | undefined, trigger: IdentificationTrigger = 'normal'): void {
+  /**
+   * Identify the token at `space`, optionally trigger callbacks.
+   *
+   * Returns |true| if it identifies a space, and |false| if it does not.
+   */
+  public static identify(game: IGame, space: Space, player: IPlayer | undefined, trigger: IdentificationTrigger = 'normal'): boolean {
     if (game.gameOptions.underworldExpansion !== true) {
       throw new Error('Underworld expansion not in this game');
     }
 
     if (space.undergroundResources !== undefined) {
       if (trigger === 'tile') {
-        return;
+        return false;
       }
       if (player?.tableau.has(CardName.NEUTRINOGRAPH) && space.excavator === undefined) {
         UnderworldExpansion.addTokens(game, [space.undergroundResources]);
         space.undergroundResources = undefined;
       } else {
-        return;
+        return false;
       }
     }
     const undergroundResource = this.drawExcavationToken(game);
@@ -145,6 +149,7 @@ export class UnderworldExpansion {
         card.onIdentificationByAnyPlayer?.(p, player, space, trigger);
       }
     }
+    return true;
   }
 
   /**

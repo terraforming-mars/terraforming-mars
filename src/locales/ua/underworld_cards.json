@@ -81,7 +81,8 @@
   "Effect: When ANY player identifies an underground resource that depicts an ocean, YOU gain 1 TR.": "Ефект: Коли БУДЬ-ЯКИЙ гравець визначає підземний ресурс, що зображає океан, ВИ отримуєте 1 РТ.",
 
   "Geoscan Satellite": "Геоскан-супутник",
-  "Place 2 data on any card. Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces.": "Розмістіть 2 ресурси даних на будь-якій карті. Виберіть місце на дошці. Визначте підземний ресурс у цьому місці та в усіх сусідніх місцях.",
+  "// Place 2 data on any card. Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces.": "Розмістіть 2 ресурси даних на будь-якій карті. Виберіть місце на дошці. Визначте підземний ресурс у цьому місці та в усіх сусідніх місцях.",
+  "Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces. Then claim one of them.": "",
 
   "Geothermal Network": "Геотермальна мережа",
   "// Requires 3 excavation markers. Increase your heat production 3 steps.": "Вимагає 3 маркери розкопок. Збільште ваше виробництво тепла на 3 кроки.",
@@ -286,7 +287,8 @@
   "Excavate an underground resource. Increase your plant production 1 step. Add 1 animal on another card.": "Розкопайте підземний ресурс. Збільште ваше виробництво рослин на 1 крок. Додайте 1 тварину на іншу картку.",
 
   "Underground Railway": "Підземна залізниця",
-  "Decrease your energy production 1 step. Gain 1 TR for every 4 excavation markers you own.": "Зменште ваше виробництво енергії на 1 крок. Отримайте 1 РТ за кожні 4 маркера розкопок, які ви володієте.",
+  "// Decrease your energy production 1 step. Gain 1 TR for every 4 excavation markers you own.": "Зменште ваше виробництво енергії на 1 крок. Отримайте 1 РТ за кожні 4 маркера розкопок, які ви володієте.",
+  "Decrease your energy production 1 step. Gain 1 TR for every 4 underground tokens you have.": "",
 
   "Underground Research Center": "Підземний дослідницький центр",
   "Requires 5 excavation markers. Decrease your energy production 1 step. Excavate an underground resource. Choose a tag that is not the wild tag or clone tag. Draw 2 cards with that tag.": "Вимагає 5 маркерів розкопок. Зменште ваше виробництво енергії на 1 крок. Розкопайте підземний ресурс. Виберіть символ, який не є символом дикого або клонованого. Витягніть 2 карти з цим символом.",

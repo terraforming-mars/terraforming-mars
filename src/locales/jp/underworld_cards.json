@@ -82,7 +82,8 @@
     "Effect: When ANY player identifies an underground resource that depicts an ocean, YOU gain 1 TR.": "効果：地下資源が調査されて、それに海洋が描かれていた時、TR+1段階.",
 
     "Geoscan Satellite": "測量衛星",
-    "Place 2 data on any card. Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces.": "2データ獲得. ボード上の1マスを選ぶ. そのマスと隣接するマスの地下資源を調査する.",
+    "// Place 2 data on any card. Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces.": "2データ獲得. ボード上の1マスを選ぶ. そのマスと隣接するマスの地下資源を調査する.",
+    "Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces. Then claim one of them.": "",
 
     "Geothermal Network": "地熱ネットワーク",
     "// Requires 3 excavation markers. Increase your heat production 3 steps.": "条件：地下採掘3回以上. 温熱産出+3.",
@@ -291,7 +292,8 @@
     "Excavate an underground resource. Increase your plant production 1 step. Add 1 animal on another card.": "地下資源を採掘する. 植物産出+1. 1動物獲得.",
 
     "Underground Railway": "地下鉄道",
-    "Decrease your energy production 1 step. Gain 1 TR for every 4 excavation markers you own.": "電力産出-1. 採掘した回数4回毎にTR+1段階.",
+    "// Decrease your energy production 1 step. Gain 1 TR for every 4 excavation markers you own.": "電力産出-1. 採掘した回数4回毎にTR+1段階.",
+    "Decrease your energy production 1 step. Gain 1 TR for every 4 underground tokens you have.": "",
 
     "Underground Research Center": "地下研究センター",
     "Requires 5 excavation markers. Decrease your energy production 1 step. Excavate an underground resource. Choose a tag that is not the wild tag or clone tag. Draw 2 cards with that tag.": "条件：地下採掘5回以上. 電力産出-1. 地下資源を採掘する. ワイルド、惑星選択タグ以外のタグを1つ選び、そのタグのカードを2枚入手.",

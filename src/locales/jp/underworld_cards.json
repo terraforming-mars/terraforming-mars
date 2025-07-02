@@ -118,7 +118,8 @@
     "Excavate an underground resource, then pick an adjacent space with an unclaimed resource token. Remove that token. The space can be identified again.": "地下資源を採掘し、それに隣接する採掘されていないマスを選ぶ. そのマスの資源トークンを除外する. そのマスは再び調査できる.",
 
     "Infrastructure Overload": "インフラの過負荷",
-    "Requires 2 corruption. Reduce any energy production 2 steps.": "条件：汚職2つ以上. プレイヤー1人の電力産出-2.",
+    "// Requires 2 corruption. Reduce any energy production 2 steps.": "条件：汚職2つ以上. プレイヤー1人の電力産出-2.",
+    "Gain 1 corruption. Reduce any energy production 2 steps.": "1汚職獲得. プレイヤー1人の電力産出-2.",
 
     "Investigative Journalism": "調査報道",
     "Action: Spend 5 M€ and remove 1 corruption from ANOTHER player with more corruption than you to add 1 journalism resource on this card.": "アクション：5MC支払い、あなたより汚職を多く所持しているプレイヤー1人から1汚職除去. このカード上に1記事追加.",

@@ -190,7 +190,6 @@ describe('Player', () => {
       heatProduction: 12,
       titaniumValue: 13,
       steelValue: 14,
-      canUseCorruptionAsMegacredits: true,
       canUseHeatAsMegaCredits: false,
       canUseTitaniumAsMegacredits: false,
       canUsePlantsAsMegaCredits: false,
@@ -256,7 +255,6 @@ describe('Player', () => {
 
     expect(newPlayer.color).eq('purple');
     expect(newPlayer.colonies.tradesThisGeneration).eq(100);
-    expect(newPlayer.canUseCorruptionAsMegacredits).eq(true);
     it('pulls self replicating robots target cards', () => {
       const player = new Player('blue', 'blue', false, 0, 'p-blue');
       expect(player.getSelfReplicatingRobotsTargetCards()).is.empty;

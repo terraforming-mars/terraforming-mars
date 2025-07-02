@@ -59,8 +59,7 @@ export type GameOptions = {
   customPreludes: ReadonlyArray<CardName>;
   customCeos: ReadonlyArray<CardName>;
   startingCeos: number;
-  // TODO(maserion): Remove '?' by 2025-01-01
-  startingPreludes?: number;
+  startingPreludes: number;
   /** Moon must be completed to end the game */
   requiresMoonTrackCompletion: boolean;
   /** Venus must be completed to end the game */

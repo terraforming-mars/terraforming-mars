@@ -46,7 +46,8 @@
 "Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. IF SOLO: gain 1 corruption.": "Benötigt 2 Korruption. Entferne 1 Ressource von einer Karte, die einem anderen Spieler gehört. Wenn du dann eine Karte hast, die sie aufnehmen kann, lege sie auf eine solche Karte. Wenn das Ziel dies blockiert, erhältst du 1 Korruption. WENN ALLEIN: 1 Korruption erhalten.",
 
 "Crater Survey": "Krater Vermessung",
-"Add 2 data resources to ANOTHER card. Identify 4 underground resources.": "Füge 2 Daten einer ANDEREN Karte hinzu. Identifiziere 4 unterirdische Ressourcen.",
+"// Add 2 data resources to ANOTHER card. Identify 4 underground resources.": "Füge 2 Daten einer ANDEREN Karte hinzu. Identifiziere 4 unterirdische Ressourcen.",
+"Identify 4 underground resources. Claim one of them.": "",
 
 "Cut-throat Budgeting": "Halsabschneiderische Budgetierung",
 "Requires 1 corruption. Increase your M€, steel, and energy production 1 step each.": "Benötigt 1 Korruption. Erhöhe deine M€-, Stahl- und Energieproduktion um jeweils 1.",
@@ -102,7 +103,8 @@
 "Gain 1 corruption. Gain 3 heat for each crime tag you have INCLUDING EVENTS and this card.": "Erhalte 1 Korruption. Erhalte 3 Wärme für jedes Verbrechensymbol, das du hast, einschließlich der Ereigniskarten und dieser Karte.",
 
 "Geological Survey": "Geologische Untersuchung",
-"Add 1 data resource to ANOTHER card. Identify any 2 underground resources on Mars.": "Füge 1 Datum zu einer ANDEREN Karte hinzu. Identifiziere 2 beliebige unterirdische Ressourcen auf dem Mars.",
+"// Add 1 data resource to ANOTHER card. Identify any 2 underground resources on Mars.": "Füge 1 Datum zu einer ANDEREN Karte hinzu. Identifiziere 2 beliebige unterirdische Ressourcen auf dem Mars.",
+"Identify 3 underground resources. Claim 1 of them.": "",
 
 "Geologist Team": "Geologen-Team",
 "Action: Identify 1 underground resource.": "AKTION: Identifiziere 1 unterirdische Ressource.",
@@ -110,7 +112,7 @@
 
 "Geoscan Satellite": "Geoscan Satellit",
 "// Place 2 data on any card. Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces.": "FÜge 2 Daten einer beliebigen Karte hinzu. Wähle ein Feld auf dem Spielbrett. Identifiziere die unterirdische Ressource in diesem Feld und in allen angrenzenden Feldern.",
-"Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces. Then claim one of them.": "",
+"Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces. Claim one of them.": "",
 
 "Geothermal Network": "Geothermisches Netzwerk",
 "// Requires 3 excavation markers. Increase your heat production 3 steps.": "Benötigt 3 Ausgrabungsmarker. Erhöhe die Wärmeproduktion um 3.",
@@ -182,7 +184,8 @@
 "Action: Spend any amount of energy to identify that many underground resources on the board and put the same number of data on this card.": "AKTION: Bezahle eine beliebige Menge an Energie, um so viele unterirdische Ressourcen auf dem Spielbrett zu identifizieren und die gleiche Anzahl an Daten auf diese Karte zu legen.",
 
 "Microprobing Technology": "Mikroskopische Technologie",
-"Requires 1 science tag. Gain 3 plants. Add 2 data to any card. Identify 3 underground resources.": "Benötigt 1 Wissenschafts-Symbol. Erhalte 3 Pflanzen. Füge 2 Daten einer beliebigen Karte hinzu. Identifiziere 3 unterirdische Ressourcen.",
+"// Requires 1 science tag. Gain 3 plants. Add 2 data to any card. Identify 3 underground resources.": "Benötigt 1 Wissenschafts-Symbol. Erhalte 3 Pflanzen. Füge 2 Daten einer beliebigen Karte hinzu. Identifiziere 3 unterirdische Ressourcen.",
+"Requires 1 science tag. Gain 3 plants. Identify 2 underground resources. Claim 1 of them.": "Benötigt 1 Wissenschafts-Symbol. Erhalte 3 Pflanzen. Identifiziere 2 unterirdische Ressourcen. Beanspruche 1 davon.",
 
 "Mining Market Insider": "Bergbau-Markt-Insider",
 "Effect: After any player identifies 1 or more underground spaces (at once), add 1 data resource to this card.": "EFFEKT: Nachdem ein beliebiger Spieler 1 oder mehr unterirdische Ressourcen (auf einmal) identifiziert hat, füge dieser Karte 1 Datum hinzu.",
@@ -198,8 +201,8 @@
 "Requires 1 Earth tag. Gain 2 corruption.": "Benötigt 1 Erd-Symbol. Erhalte 2 Korruption.",
 
 "Neutrinograph": "Neutrinographie",
-"Effect: When identifying underground resources EXCEPT by placing a tile or excavating, you can re-identify spaces that already have an unclaimed token. When you do, replace that token with a new one.": "EFFEKT: Wenn du unterirdische Ressourcen identifizierst, AUSSER durch Platzieren eines Plättchens oder Ausgraben, kannst du Felder, die bereits ein nicht beanspruchtes Plättchen haben, erneut identifizieren. Wenn du das tust, ersetze das Plättchen durch ein neues.",
-"Requires 4 science tags. Identify 2 underground resources.": "Benötigt 4 Wissenschafts-Symbole. Identifiziere 2 unterirdische Ressourcen.",
+"// Requires 4 science tags. Identify 2 underground resources.": "Benötigt 4 Wissenschafts-Symbole. Identifiziere 2 unterirdische Ressourcen.",
+"Requires 5 science tags. Identify 7 underground resources. Claim 3 of them.": "Benötigt 5 Wissenschafts-Symbole. Identifiziere 7 unterirdische Ressourcen. Beanspruche 3 davon.",
 
 "Nightclubs": "Nachtclubs",
 "Requires that you own a city in play. Gain 1 corruption and increase your M€ production 2 steps.": "Benötigt eine eigene Stadt im Spiel. Erhalte 1 Korruption und erhöhe deine M€-Produktion um 2.",
@@ -257,7 +260,8 @@
 "1 VP for every 3 data resources on this card.": "1 SP für je 3 Datenressourcen auf dieser Karte.",
 
 "Robot Moles": "Roboter-Maulwürfe",
-"Action: Spend 1 steel to add 1 data to this card and identify 2 underground resources.": "AKTION: Bezahle 1 Stahl, um 1 Datun zu dieser Karte hinzuzufügen und 2 unterirdische Ressourcen zu identifizieren.",
+"// Action: Spend 1 steel to add 1 data to this card and identify 2 underground resources.": "AKTION: Bezahle 1 Stahl, um 1 Datun zu dieser Karte hinzuzufügen und 2 unterirdische Ressourcen zu identifizieren.",
+"Gain 2 steel. Identify 4 underground resources. Claim 1 of them.": "",
 
 "Scapegoat": "Sündenbock",
 "Gain 1 corruption.": "Erhalte 1 Korruption.",
@@ -297,8 +301,8 @@
 "Action: Use a standard project that you've already used this generation, with its cost reduced by 8 M€.": "AKTION: Benutze ein Standardprojekt, das du in dieser Generation bereits durchgeführt hast, wobei die Kosten um 8 M€ reduziert werden.",
 
 "Stem Field Subsidies": "Subventionen für Stammzellen",
-"Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "EFFEKT: Immer wenn du eine Wissenschaftssymbol spielst (einschließlich dieses), lege 1 Datum auf eine beliebige Karte und identifiziere eine unterirdische Ressource.",
-"1 VP per 3 data resources on this card.": "1 SP pro 3 Datenressourcen auf dieser Karte.",
+"// Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "EFFEKT: Immer wenn du eine Wissenschaftssymbol spielst (einschließlich dieses), lege 1 Datum auf eine beliebige Karte und identifiziere eine unterirdische Ressource.",
+"Whenever you play a science tag (including this), add 1 data to this card": "",
 
 "Sting Operation": "Verdeckte Operation",
 "Target a player that has at least 4 corruption. Draw 2 cards.": "Ziele auf einen Spieler, der mindestens 4 Korruption hat. Ziehe 2 Karten.",

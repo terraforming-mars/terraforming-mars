@@ -275,15 +275,8 @@ export class Executor implements BehaviorExecutor {
     if (behavior.underworld !== undefined) {
       const underworld = behavior.underworld;
       if (underworld.identify !== undefined) {
-        if (card.name === CardName.NEUTRINOGRAPH || player.tableau.has(CardName.NEUTRINOGRAPH)) {
-          // Special case for Neutrinograph. Excavatable spaces are ones that are unidentified or reidentifiable.
-          if (UnderworldExpansion.excavatableSpaces(player).length === 0) {
-            return false;
-          }
-        } else {
-          if (UnderworldExpansion.identifiableSpaces(player).length === 0) {
-            return false;
-          }
+        if (UnderworldExpansion.identifiableSpaces(player).length === 0) {
+          return false;
         }
       }
     }

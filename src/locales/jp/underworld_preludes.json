@@ -24,7 +24,8 @@
     "Gain 1 corruption, 3 titanium, and a trade fleet.": "1汚職獲得. 3チタン獲得. 1交易艦隊獲得.",
 
     "Geological Expertise": "地質学の専門知識",
-    "Identify 4 underground resources. Draw 2 cards with science tags.": "4回地下資源を調査する. 科学タグカードを2枚入手.",
+    "// Identify 4 underground resources. Draw 2 cards with science tags.": "4回地下資源を調査する. 科学タグカードを2枚入手.",
+    "Identify 4 underground resources. Claim one of them. Draw 2 cards with science tags.": "",
 
     "Inherited Fortune": "受け継がれた財産",
     "Gain 1 corruption and 10 M€. Increase your M€ production 1 step.": "1汚職獲得. 10MC獲得. MC産出+1.",

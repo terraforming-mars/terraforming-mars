@@ -36,7 +36,8 @@
   "Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. IF SOLO: gain 1 corruption.": "Вимагає 2 одиниці корупції. Видаліть 1 ресурс з карти, що належить іншому гравцю. Потім, якщо у вас є карта, на якій можна його зберігати, помістіть його на таку карту. Якщо ціль заблокувала це, ви отримуєте 1 одиницю корупції. ЯКЩО СОЛО: отримати 1 пошкодження.",
 
   "Crater Survey": "Дослідження кратера",
-  "Add 2 data resources to ANOTHER card. Identify 4 underground resources.": "Додайте 2 ресурси даних на ІНШУ карту. Визначте 4 підземні ресурси.",
+  "// Add 2 data resources to ANOTHER card. Identify 4 underground resources.": "Додайте 2 ресурси даних на ІНШУ карту. Визначте 4 підземні ресурси.",
+  "Identify 4 underground resources. Claim one of them.": "",
 
   "Cut-throat Budgeting": "Жорстоке бюджетування",
   "Requires 1 corruption. Increase your M€, steel, and energy production 1 step each.": "Вимагає 1 одиницю корупції. Збільште ваше виробництво M€, сталі та енергії на 1 крок кожне.",
@@ -74,7 +75,8 @@
   "Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (including adjacencies.) Regular placement restriction still apply.": "Зменште ваше виробництво енергії на 1 крок і збільште ваше виробництво M€ на 2 кроки. Розмістіть місто на місці з маркером розкопок БУДЬ-ЯКОГО гравця. Його бонус за розміщення подвоюється (включаючи сусідність). Звичайні обмеження розміщення все ще застосовуються.",
 
   "Geological Survey": "Геологічне дослідження",
-  "Add 1 data resource to ANOTHER card. Identify any 2 underground resources on Mars.": "Додайте 1 ресурс даних на ІНШУ карту. Визначте будь-які 2 підземні ресурси на Марсі.",
+  "// Add 1 data resource to ANOTHER card. Identify any 2 underground resources on Mars.": "Додайте 1 ресурс даних на ІНШУ карту. Визначте будь-які 2 підземні ресурси на Марсі.",
+"Identify 3 underground resources. Claim 1 of them.": "",
 
   "Geologist Team": "Команда геологів",
   "Action: Identify 1 underground resource.": "Дія: Визначте 1 підземний ресурс.",
@@ -82,7 +84,7 @@
 
   "Geoscan Satellite": "Геоскан-супутник",
   "// Place 2 data on any card. Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces.": "Розмістіть 2 ресурси даних на будь-якій карті. Виберіть місце на дошці. Визначте підземний ресурс у цьому місці та в усіх сусідніх місцях.",
-  "Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces. Then claim one of them.": "",
+  "Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces. Claim one of them.": "",
 
   "Geothermal Network": "Геотермальна мережа",
   "// Requires 3 excavation markers. Increase your heat production 3 steps.": "Вимагає 3 маркери розкопок. Збільште ваше виробництво тепла на 3 кроки.",
@@ -147,7 +149,9 @@
   "Action: Spend any amount of energy to identify that many underground resources on the board and put the same number of data on this card.": "Дія: Витратити будь-яку кількість енергії, щоб визначити таку ж кількість підземних ресурсів на дошці і покласти таку ж кількість даних на цю картку.",
 
   "Microprobing Technology": "Мікроскопічна технологія",
-  "Requires 1 science tag. Gain 3 plants. Add 2 data to any card. Identify 3 underground resources.": "Вимагає 1 символ науки. Отримайте 3 рослини. Додайте 2 ресурси даних на будь-яку карту. Визначте 3 підземні ресурси.",
+  "// Requires 1 science tag. Gain 3 plants. Add 2 data to any card. Identify 3 underground resources.": "Вимагає 1 символ науки. Отримайте 3 рослини. Додайте 2 ресурси даних на будь-яку карту. Визначте 3 підземні ресурси.",
+  "Requires 1 science tag. Gain 3 plants. Identify 2 underground resources. Claim 1 of them.": "Вимагає 1 символ науки. Отримайте 3 рослини. Визначте 2 підземні ресурси. Виберіть 1 з них.",
+
   "Mining Market Insider": "Бергбау-Маркт-Інсайдер",
   "Effect: After any player identifies 1 or more underground spaces (at once), add 1 data resource to this card.": "Ефект: Після того, як будь-який гравець визначає 1 або більше підземних просторів (одночасно), додайте 1 ресурс даних на цю картку.",
   "Action: Spend 4 data resources on this card to draw a card.": "Дія: Витратити 4 ресурси даних на цю картку, щоб взяти карту.",
@@ -162,8 +166,8 @@
   "Requires 1 Earth tag. Gain 2 corruption.": "Вимагає 1 символ Землі. Отримайте 2 одиниці корупції.",
 
   "Neutrinograph": "Нейтринограф",
-  "Effect: When identifying underground resources EXCEPT by placing a tile or excavating, you can re-identify spaces that already have an unclaimed token. When you do, replace that token with a new one.": "Ефект: При визначенні підземних ресурсів, КРІМ розміщення плитки або розкопування, ви можете повторно визначити простори, в яких вже є непридатний жетон. Коли ви це робите, замініть цей жетон новим.",
-  "Requires 4 science tags. Identify 2 underground resources.": "Вимагає 4 символи науки. Визначте 2 підземні ресурси.",
+  "// Requires 4 science tags. Identify 2 underground resources.": "Вимагає 4 символи науки. Визначте 2 підземні ресурси.",
+  "Requires 5 science tags. Identify 7 underground resources. Claim 3 of them.": "Вимагає 5 символів науки. Визначте 7 підземних ресурсів. Виберіть 3 з них.",
 
   "Nightclubs": "Нічні клуби",
   "Requires that you own a city in play. Gain 1 corruption and increase your M€ production 2 steps.": "Вимагає, щоб у вас було місто в грі. Отримайте 1 одиницю корупції і збільште ваше виробництво M€ на 2 кроки.",
@@ -217,7 +221,8 @@
   "1 VP for every 3 data resources on this card.": "1 ПО за кожні 3 одиниці даних на цій картці.",
 
   "Robot Moles": "Робот-кроти",
-  "Action: Spend 1 steel to add 1 data to this card and identify 2 underground resources.": "Дія: Витратити 1 одиницю сталі, щоб додати 1 одиницю даних на цю картку та визначити 2 підземні ресурси.",
+  "// Action: Spend 1 steel to add 1 data to this card and identify 2 underground resources.": "Дія: Витратити 1 одиницю сталі, щоб додати 1 одиницю даних на цю картку та визначити 2 підземні ресурси.",
+  "Gain 2 steel. Identify 4 underground resources. Claim 1 of them.": "",
 
   "Scapegoat": "Козел відпущення",
 
@@ -255,8 +260,8 @@
   "REPEAT": "ПОВТОРИТИ",
   "(Action: Use a standard project that you've already used this generation, with its cost reduced by 8 M€).": "Дія: Використовуйте стандартний проект, який ви вже виконали в цьому поколінні, зі знижкою вартості на 8 M€.",
   "Stem Field Subsidies": "Субсидії для стовбурових клітин",
-  "Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "Ефект: Кожного разу, коли ви граєте науковий символ (включаючи цей), додайте 1 одиницю даних на БУДЬ-ЯКУ картку та визначте підземний ресурс.",
-  "1 VP per 3 data resources on this card.": "1 ПО за кожні 3 одиниці даних на цій картці.",
+  "// Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "Ефект: Кожного разу, коли ви граєте науковий символ (включаючи цей), додайте 1 одиницю даних на БУДЬ-ЯКУ картку та визначте підземний ресурс.",
+  "Whenever you play a science tag (including this), add 1 data to this card": "",
 
   "Subnautic Pirates": "Пірати підводного світу",
   "// Requires 1 excavation marker and 1 corruption. Pick an ocean tile that has your excavation marker on it. Steal 6 M€ from each other player that owns a tile adjacent to that ocean. This can be blocked by corruption.": "Вимагає 1 маркеру розкопок та 1 одиниці корупції. Виберіть океанську плитку, на якій знаходиться ваш маркер розкопок. Вкрадіть 6 M€ у кожного іншого гравця, який володіє плиткою, прилеглою до цього океану. Це може бути заблоковано корупцією.",

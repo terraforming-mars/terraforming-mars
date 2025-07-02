@@ -24,4 +24,3 @@ export class TunnelingOperation extends PreludeCard {
     });
   }
 }
-

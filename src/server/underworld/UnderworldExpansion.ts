@@ -102,11 +102,7 @@ export class UnderworldExpansion {
    */
   public static identifiableSpaces(player: IPlayer): ReadonlyArray<Space> {
     const spaces = player.game.board.spaces.filter((space) => space.spaceType !== SpaceType.COLONY);
-    if (player.tableau.has(CardName.NEUTRINOGRAPH)) {
-      return spaces.filter((space) => space.excavator === undefined);
-    } else {
-      return spaces.filter((space) => space.undergroundResources === undefined);
-    }
+    return spaces.filter((space) => space.undergroundResources === undefined);
   }
 
   /**
@@ -131,16 +127,9 @@ export class UnderworldExpansion {
     }
 
     if (space.undergroundResources !== undefined) {
-      if (trigger === 'tile') {
-        return false;
-      }
-      if (player?.tableau.has(CardName.NEUTRINOGRAPH) && space.excavator === undefined) {
-        UnderworldExpansion.addTokens(game, [space.undergroundResources]);
-        space.undergroundResources = undefined;
-      } else {
-        return false;
-      }
+      return false;
     }
+
     const undergroundResource = this.drawExcavationToken(game);
     space.undergroundResources = undergroundResource;
 

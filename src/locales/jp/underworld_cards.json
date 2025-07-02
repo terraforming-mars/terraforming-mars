@@ -35,7 +35,8 @@
     "Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. IF SOLO: gain 1 corruption.": "条件：汚職2つ以上. 他のプレイヤーからカード上の資源を1つ盗む. これが防がれた場合、1腐敗獲得. ソロの場合: 腐敗を 1 つ獲得します。",
 
     "Crater Survey": "クレーター調査",
-    "Add 2 data resources to ANOTHER card. Identify 4 underground resources.": "2データ獲得. 4回地下資源を調査する.",
+    "// Add 2 data resources to ANOTHER card. Identify 4 underground resources.": "2データ獲得. 4回地下資源を調査する.",
+    "Identify 4 underground resources. Claim one of them.": "",
 
     "Cut-throat Budgeting": "熾烈な予算編成",
     "Requires 1 corruption. Increase your M€, steel, and energy production 1 step each.": "条件：汚職1つ以上. MC産出+1. 建材産出+1. 電力産出+1.",
@@ -75,7 +76,8 @@
     "Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (including adjacencies.) Regular placement restriction still apply.": "電力産出-1. MC産出+2. 採掘された空きマスに都市を配置. 配置ボーナスおよび隣接ボーナスを倍獲得. 通常の配置制限は引き続き適用されます。",
 
     "Geological Survey:underworld": "地質学的調査",
-    "Add 1 data resource to ANOTHER card. Identify any 2 underground resources on Mars.": "1データ獲得. 2回火星上の地下資源を調査する.",
+    "// Add 1 data resource to ANOTHER card. Identify any 2 underground resources on Mars.": "1データ獲得. 2回火星上の地下資源を調査する.",
+"Identify 3 underground resources. Claim 1 of them.": "",
 
     "Geologist Team": "地質学者チーム",
     "Action: Identify 1 underground resource.": "アクション：地下資源を調査する.",
@@ -83,7 +85,7 @@
 
     "Geoscan Satellite": "測量衛星",
     "// Place 2 data on any card. Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces.": "2データ獲得. ボード上の1マスを選ぶ. そのマスと隣接するマスの地下資源を調査する.",
-    "Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces. Then claim one of them.": "",
+    "Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces. Claim one of them.": "",
 
     "Geothermal Network": "地熱ネットワーク",
     "// Requires 3 excavation markers. Increase your heat production 3 steps.": "条件：地下採掘3回以上. 温熱産出+3.",
@@ -149,7 +151,8 @@
     "Action: Spend any amount of energy to identify that many underground resources on the board and put the same number of data on this card.": "アクション：電力を任意の数支払い、その数分、地下資源を調査する. 支払った電力の数分、1データ獲得.",
 
     "Microprobing Technology": "マイクロプローブ技術",
-    "Requires 1 science tag. Gain 3 plants. Add 2 data to any card. Identify 3 underground resources.": "条件：科学タグ1つ以上. 3植物獲得. 2データ獲得. 3回地下資源を調査する.",
+    "// Requires 1 science tag. Gain 3 plants. Add 2 data to any card. Identify 3 underground resources.": "条件：科学タグ1つ以上. 3植物獲得. 2データ獲得. 3回地下資源を調査する.",
+    "Requires 1 science tag. Gain 3 plants. Identify 2 underground resources. Claim 1 of them.": "条件：科学タグ1つ以上. 3植物獲得. 2回地下資源を調査する. そのうち1つを獲得.",
 
     "Mining Market Insider": "鉱山市場インサイダー",
     "Effect: After any player identifies 1 or more underground spaces (at once), add 1 data resource to this card.": "効果：地下資源が調査された時、このカード上に1データ追加(1アクションにつき1データまで).",
@@ -165,8 +168,8 @@
     "Requires 1 Earth tag. Gain 2 corruption.": "条件：地球タグ1つ以上. 2汚職獲得.",
 
     "Neutrinograph": "ニュートリノ",
-    "Effect: When identifying underground resources EXCEPT by placing a tile or excavating, you can re-identify spaces that already have an unclaimed token. When you do, replace that token with a new one.": "効果：地下資源を調査した時、採掘されていない資源トークンを再び調査することができる. そうした場合、その資源トークンを除去し新しい資源トークンに入れ替える.",
-    "Requires 4 science tags. Identify 2 underground resources.": "条件：科学タグ4つ以上. 2回地下資源を調査する.",
+    "// Requires 4 science tags. Identify 2 underground resources.": "条件：科学タグ4つ以上. 2回地下資源を調査する.",
+    "Requires 5 science tags. Identify 7 underground resources. Claim 3 of them.": "条件：科学タグ5つ以上. 7回地下資源を調査する. そのうち3つを獲得.",
 
     "Nightclubs": "ナイトクラブ",
     "Requires that you own a city in play. Gain 1 corruption and increase your M€ production 2 steps.": "条件：都市1枚以上所持. 1汚職獲得. MC産出+2.",
@@ -221,8 +224,8 @@
     "1 VP for every 3 data resources on this card.": "このカード上の3データ毎に1VP",
 
     "Robot Moles": "掘削ロボット",
-    "Action: Spend 1 steel to add 1 data to this card and identify 2 underground resources.": "アクション：1建材支払い、このカード上に1データ追加. 2回地下資源を調査する.",
-    "1 VP per 3 data resources on this card.": "このカード上の3データ毎に1VP.",
+    "// Action: Spend 1 steel to add 1 data to this card and identify 2 underground resources.": "アクション：1建材支払い、このカード上に1データ追加. 2回地下資源を調査する.",
+    "Gain 2 steel. Identify 4 underground resources. Claim 1 of them.": "",
 
     "Scapegoat": "生け贄",
 
@@ -261,7 +264,8 @@
     "(Action: Use a standard project that you've already used this generation, with its cost reduced by 8 M€).": "アクション：この世代、すでに行った標準プロジェクトをコスト-8MCでプレイする.",
 
     "Stem Field Subsidies": "STEMフィールド補助金",
-    "Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "効果：科学タグをプレイ時、1データ獲得. 地下資源を調査する.",
+    "// Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "効果：科学タグをプレイ時、1データ獲得. 地下資源を調査する.",
+    "Whenever you play a science tag (including this), add 1 data to this card": "",
 
     "Subnautic Pirates": "潜水海賊",
     "// Requires 1 excavation marker and 1 corruption. Pick an ocean tile that has your excavation marker on it. Steal 6 M€ from each other player that owns a tile adjacent to that ocean. This can be blocked by corruption.": "条件：地下採掘1回以上、汚職1つ以上. あなたが地下採掘している海洋を1枚選ぶ. そこに隣接するタイルを所有している他の全プレイヤーから6MC盗む.",

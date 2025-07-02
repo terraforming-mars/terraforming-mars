@@ -194,7 +194,6 @@ export const PaymentWidgetMixin = {
           case 'seeds':
           case 'graphene':
           case 'kuiperAsteroids':
-          case 'corruption':
             amount = input[unit];
           }
         }
@@ -268,7 +267,6 @@ export const PaymentWidgetMixin = {
         lunaArchivesScience: 'Science',
         microbes: 'Microbes',
         plants: 'Plants',
-        corruption: 'Corruption',
       };
     },
   },

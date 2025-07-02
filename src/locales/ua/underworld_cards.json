@@ -68,9 +68,8 @@
   "Gain 1 plant for each underground token you own.": "",
 
   "Friends in High Places": "Друзі на високих посадах",
-  "Effect: When paying for Earth cards, corruption resources may be spent as 10 M€ each.": "Ефект: При оплаті карт Землі, ресурси корупції можна витрачати по 10 M€ за кожен.",
-  "Requires 1 corruption and 1 Earth tag. Gain 1 corruption.": "Вимагає 1 одиницю корупції та 1 символ Землі. Отримайте 1 одиницю корупції.",
-
+  "// Requires 1 corruption and 1 Earth tag. Gain 1 corruption.": "Вимагає 1 одиницю корупції та 1 символ Землі. Отримайте 1 одиницю корупції.",
+  "Requires 2 Earth tags. Gain 1 corruption.": "Вимагає 2 символи Землі. Отримайте 1 одиницю корупції.",
   "Gaia City": "Місто Гаї",
   "Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (including adjacencies.) Regular placement restriction still apply.": "Зменште ваше виробництво енергії на 1 крок і збільште ваше виробництво M€ на 2 кроки. Розмістіть місто на місці з маркером розкопок БУДЬ-ЯКОГО гравця. Його бонус за розміщення подвоюється (включаючи сусідність). Звичайні обмеження розміщення все ще застосовуються.",
 

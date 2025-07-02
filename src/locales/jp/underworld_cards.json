@@ -68,8 +68,8 @@
     "Gain 1 plant for each underground token you own.": "",
 
     "Friends in High Places": "有力なコネ",
-    "Effect: When paying for Earth cards, corruption resources may be spent as 10 M€ each.": "効果：地球タグカードをプレイ時、汚職を10MCとして支払ってもよい.",
-    "Requires 1 corruption and 1 Earth tag. Gain 1 corruption.": "条件：地球タグ1つ以上、1汚職以上. 1汚職獲得.",
+    "// Requires 1 corruption and 1 Earth tag. Gain 1 corruption.": "条件：地球タグ1つ以上、1汚職以上. 1汚職獲得.",
+    "Requires 2 Earth tags. Gain 1 corruption.": "条件：地球タグ2つ以上. 1汚職獲得.",
 
     "Gaia City": "ガイアシティ",
     "Placement Bonus x2": "配置ボーナス2倍",

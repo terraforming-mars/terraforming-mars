@@ -18,7 +18,6 @@ export interface SerializedPlayer extends DeprecatedFields{
   alliedParty: AlliedParty | undefined;
   autoPass: boolean;
   beginner: boolean;
-  canUseCorruptionAsMegacredits: boolean;
   canUseHeatAsMegaCredits: boolean;
   canUseTitaniumAsMegacredits: boolean;
   canUsePlantsAsMegaCredits: boolean;

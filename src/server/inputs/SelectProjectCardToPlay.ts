@@ -52,13 +52,11 @@ export class SelectProjectCardToPlay extends BasePlayerInput<IProjectCard> {
         heat: player.canUseHeatAsMegaCredits,
         lunaTradeFederationTitanium: player.canUseTitaniumAsMegacredits,
         plants: player.canUsePlantsAsMegacredits,
-        corruption: player.canUseCorruptionAsMegacredits,
       },
       lunaArchivesScience: player.getSpendable('lunaArchivesScience'),
       seeds: player.getSpendable('seeds'),
       graphene: player.getSpendable('graphene'),
       kuiperAsteroids: player.getSpendable('kuiperAsteroids'),
-      corruption: player.underworldData.corruption,
     };
   }
 

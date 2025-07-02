@@ -115,7 +115,8 @@
   "Excavate an underground resource, then pick an adjacent space with an unclaimed resource token. Remove that token. The space can be identified again.": "Видобути підземний ресурс, потім вибрати сусіднє місце з невикористаним токеном ресурсу. Видаліть цей токен. Місце можна ідентифікувати знову.",
 
   "Infrastructure Overload": "Перевантаження інфраструктури",
-  "Requires 2 corruption. Reduce any energy production 2 steps.": "Вимагає 2 одиниці корупції. Зменште будь-яке виробництво енергії на 2 кроки.",
+  "// Requires 2 corruption. Reduce any energy production 2 steps.": "Вимагає 2 одиниці корупції. Зменште будь-яке виробництво енергії на 2 кроки.",
+  "Gain 1 corruption. Reduce any energy production 2 steps.": "Отримайте 1 одиницю корупції. Зменште будь-яке виробництво енергії на 2 кроки.",
 
   "Investigative Journalism": "Журналістика розслідувань",
   "Action: Spend 5 M€ and remove 1 corruption from ANOTHER player with more corruption than you to add 1 journalism resource on this card.": "Дія: Витратити 5 M€ і видалити 1 одиницю корупції з ІНШОГО гравця з більшою кількістю корупції, ніж у вас, щоб додати 1 ресурс журналістики на цю картку.",

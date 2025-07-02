@@ -1,11 +1,9 @@
-import {expect} from 'chai';
 import {GeologicalSurvey} from '../../../src/server/cards/underworld/GeologicalSurvey';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {assertIsIdentificationAction} from '../../underworld/underworldAssertions';
-import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
+import {assertIsExcavationAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 
 describe('GeologicalSurvey', () => {
   let card: GeologicalSurvey;
@@ -18,16 +16,17 @@ describe('GeologicalSurvey', () => {
   });
 
   it('play', () => {
-    const communicationCenter = new CommunicationCenter();
-    player.playedCards.push(communicationCenter);
     cast(card.play(player), undefined);
-    runAllActions(game);
 
+    runAllActions(game);
     assertIsIdentificationAction(player, player.popWaitingFor());
     runAllActions(game);
     assertIsIdentificationAction(player, player.popWaitingFor());
+    runAllActions(game);
+    assertIsIdentificationAction(player, player.popWaitingFor());
+    runAllActions(game);
+    assertIsExcavationAction(player, player.popWaitingFor());
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
-    expect(communicationCenter.resourceCount).eq(1);
   });
 });

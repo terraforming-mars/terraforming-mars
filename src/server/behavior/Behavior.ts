@@ -162,7 +162,7 @@ export type Behavior = {
   },
 
   underworld?: {
-    identify?: Countable,
+    identify?: number | {count: Countable, claim?: number},
     excavate?: number | {count: Countable, ignorePlacementRestrictions?: boolean},
     corruption?: Countable,
     markThisGeneration?: NoAttributes,

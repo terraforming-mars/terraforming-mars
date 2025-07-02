@@ -604,8 +604,20 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.underworld !== undefined) {
       const underworld = behavior.underworld;
-      if (underworld.identify !== undefined) {
-        player.game.defer(new IdentifySpacesDeferred(player, ctx.count(underworld.identify)));
+      const identify = underworld.identify;
+      if (identify !== undefined) {
+        if (typeof(identify) === 'number') {
+          player.game.defer(new IdentifySpacesDeferred(player, ctx.count(identify)));
+        } else {
+          const deferred = player.game.defer(new IdentifySpacesDeferred(player, ctx.count(identify.count)));
+          const claim = identify.claim ?? 0;
+          if (claim > 0) {
+            deferred.andThen((spaces) => {
+              player.game.defer(new ExcavateSpacesDeferred(player, ctx.count(claim),
+                /* ignorePlacementRestrictions= */ false, spaces));
+            });
+          }
+        }
       }
       if (underworld.excavate !== undefined) {
         const excavate = underworld.excavate;

@@ -1599,6 +1599,11 @@ export class Game implements IGame, Logger {
     f?.(builder);
     const logMessage = builder.build();
     logMessage.playerId = options?.reservedFor?.id;
+    if (!message || !logMessage) {
+      // TODO(kberg): throw
+      console.error('Log message is undefined. Message: ' + message);
+      return;
+    }
     this.gameLog.push(logMessage);
     this.gameAge++;
   }

@@ -10,8 +10,12 @@ export async function exportLogs(db: IDatabase, gameId: GameId): Promise<Array<s
     const {gameLog} = await db.getGameVersion(gameId, saveId);
     for (let idx = lastIdx; idx < gameLog.length; idx++) {
       const logEntry = gameLog[idx];
-      const text = Log.applyData(logEntry, (datum) => datum.value.toString());
-      entries.push(`[${saveId}/${idx}]: ${text}`);
+      try {
+        const text = Log.applyData(logEntry, (datum) => datum.value.toString());
+        entries.push(`[${saveId}/${idx}]: ${text}`);
+      } catch (e) {
+        entries.push(`[${saveId}/${idx}]: ${JSON.stringify(logEntry)} - Error processing log entry: ${e}`);
+      }
     }
     lastIdx = gameLog.length;
   }

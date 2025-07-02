@@ -11,6 +11,6 @@ export class VSpacefarer extends BaseMilestone {
   }
 
   public getScore(player: IPlayer): number {
-    return player.tags.count(Tag.SPACE);
+    return player.tags.count(Tag.SPACE, 'milestone');
   }
 }

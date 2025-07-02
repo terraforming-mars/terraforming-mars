@@ -4,6 +4,7 @@ export type ComponentType =
   'effect' |
   'corp-box-effect' |
   'corp-box-action' |
+  'corp-box-effect-action' |
   'symbol' |
   'item' |
   'tile';

@@ -3,7 +3,7 @@ import {getCards} from '@/client/cards/ClientCardManifest';
 import {allColonyNames} from '@/client/colonies/ClientColonyManifest';
 import {CardComponent} from '@/common/cards/render/CardComponent';
 import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
-import {isICardRenderCorpBoxAction, isICardRenderCorpBoxEffect, isICardRenderEffect, isICardRenderItem, isICardRenderProductionBox, isICardRenderRoot} from '@/common/cards/render/Types';
+import {isICardRenderCorpBoxAction, isICardRenderCorpBoxEffect, isICardRenderCorpBoxEffectAction, isICardRenderEffect, isICardRenderItem, isICardRenderProductionBox, isICardRenderRoot} from '@/common/cards/render/Types';
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {translateText} from '@/client/directives/i18n';
 import {getAward, getMilestone} from '../../MilestoneAwardManifest';
@@ -82,6 +82,7 @@ export class SearchIndex {
       isICardRenderRoot(component) ||
       isICardRenderCorpBoxEffect(component) ||
         isICardRenderCorpBoxAction(component) ||
+        isICardRenderCorpBoxEffectAction(component) ||
         isICardRenderEffect(component) ||
         isICardRenderProductionBox(component)) {
       component.rows.forEach((row) => {

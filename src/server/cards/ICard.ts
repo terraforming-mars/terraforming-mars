@@ -22,7 +22,6 @@ import {Warning} from '../../common/cards/Warning';
 import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
 import {SerializedCard} from '../SerializedCard';
-import {IdentificationTrigger} from '../underworld/underworldTypes';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -115,9 +114,8 @@ export interface ICard {
    * @param identifyingPlayer the player performing the identification action,
    *        or undefined if it is the neutral player (game setup or global event.)
    * @param space the space that was just identified.
-   * @param trigger what triggered the identification.
    */
-  onIdentificationByAnyPlayer?(cardOwner: IPlayer, identifyingPlayer: IPlayer | undefined, space: Space, trigger: IdentificationTrigger): void;
+  onIdentificationByAnyPlayer?(cardOwner: IPlayer, identifyingPlayer: IPlayer | undefined, space: Space): void;
   onIdentification?: never;
 
   /**

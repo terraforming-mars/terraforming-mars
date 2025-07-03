@@ -20,10 +20,11 @@
 
   "DEMETRON LABS": "Demetron Лабораторії",
   "Demetron Labs": "Demetron Лабораторії",
-  "Placement Bonus": "Бонус за розміщення",
-  "Effect: After you identify 1 or more underground resources in a single action EXCEPT BY EXCAVATING, put 1 data on ANY card": "Ефект: Після того, як ви визначите 1 або більше підземних ресурсів за одну дію, КРІМ ВИКОПУВАННЯ, покладіть 1 дані на БУДЬ-ЯКУ карту.",
-  "Action: Spend 3 data here and pick a space on Mars with no tile. Gain its placement bonus, and no adjacency bonuses.": "Дія: Витратити 3 дані тут і вибрати простір на Марсі без плитки. Отримайте його бонус за розміщення, а також жодних бонусів за сусідство.",
-  "You start with 45 M€ and 3 data on this card.": "Ви починаєте з 45 M€ і 3 дані на цій карті.",
+  "// Effect: After you identify 1 or more underground resources in a single action EXCEPT BY EXCAVATING, put 1 data on ANY card": "Ефект: Після того, як ви визначите 1 або більше підземних ресурсів за одну дію, КРІМ ВИКОПУВАННЯ, покладіть 1 дані на БУДЬ-ЯКУ карту.",
+  "After you play a science tag, including this, put 2 data on this card.": "Після того, як ви зіграєте наукову позначку, включаючи цю, покладіть 2 дані на цю карту.",
+  "// Action: Spend 3 data here and pick a space on Mars with no tile. Gain its placement bonus, and no adjacency bonuses.": "Дія: Витратити 3 дані тут і вибрати простір на Марсі без плитки. Отримайте його бонус за розміщення, а також жодних бонусів за сусідство.",
+  "Action: Spend 3 data here to identify 3 underground resources. Claim 1 of them.": "Дія: Витратити 3 дані тут, щоб визначити 3 підземні ресурси. Отримайте 1 з них.",
+  "You start with 45 M€ and 2 data on this card.": "Ви починаєте з 45 M€ і 2 дані на цій карті.",
 
   "HADESPHERE": "Сфера Гадеса",
   "Hadesphere": "Сфера Гадеса",

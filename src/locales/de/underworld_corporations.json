@@ -21,10 +21,11 @@
 
 "DEMETRON LABS": "Demetron Labor",
 "Demetron Labs": "Demetron Labor",
-"Placement Bonus": "Platzierungsbonus",
-"Effect: After you identify 1 or more underground resources in a single action EXCEPT BY EXCAVATING, put 1 data on ANY card": "EFFEKT: Nachdem du 1 oder mehr unterirdische Ressourcen in einer einzigen Aktion identifiziert hast, AUSSER DURCH AUSGRABEN, lege 1 Datum auf eine beliebige Karte.",
-"Action: Spend 3 data here and pick a space on Mars with no tile. Gain its placement bonus, and no adjacency bonuses.": "AKTION: Bezahle von hier 3 Daten und wähle ein Feld auf dem Mars, auf dem kein Plättchen liegt. Du erhältst den Platzierungsbonus, aber keine Nachbarschaftsboni.",
-"You start with 45 M€ and 3 data on this card.": "Du beginnst mit 45 M€ und 3 Daten auf dieser Karte.",
+"// Effect: After you identify 1 or more underground resources in a single action EXCEPT BY EXCAVATING, put 1 data on ANY card": "EFFEKT: Nachdem du 1 oder mehr unterirdische Ressourcen in einer einzigen Aktion identifiziert hast, AUSSER DURCH AUSGRABEN, lege 1 Datum auf eine beliebige Karte.",
+"After you play a science tag, including this, put 2 data on this card.": "Nachdem du ein Wissenschafts-Symbol gespielt hast, einschließlich dieses, lege 2 Daten auf diese Karte.",
+"// Action: Spend 3 data here and pick a space on Mars with no tile. Gain its placement bonus, and no adjacency bonuses.": "AKTION: Bezahle von hier 3 Daten und wähle ein Feld auf dem Mars, auf dem kein Plättchen liegt. Du erhältst den Platzierungsbonus, aber keine Nachbarschaftsboni.",
+"Action: Spend 3 data here to identify 3 underground resources. Claim 1 of them.": "AKTION: Bezahle von hier 3 Daten, um 3 unterirdische Ressourcen zu identifizieren. Beanspruche eine davon.",
+"You start with 45 M€ and 2 data on this card.": "Du beginnst mit 45 M€ und 2 Daten auf dieser Karte.",
 
 "HADESPHERE": "Sphäre des Hades",
 "Hadesphere": "Sphäre des Hades",

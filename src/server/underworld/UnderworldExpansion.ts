@@ -21,7 +21,6 @@ import {Phase} from '../../common/Phase';
 import {Units} from '../../common/Units';
 import {LogHelper} from '../LogHelper';
 import {Message} from '../../common/logs/Message';
-import {IdentificationTrigger} from './underworldTypes';
 
 export class UnderworldExpansion {
   private constructor() {}
@@ -121,7 +120,7 @@ export class UnderworldExpansion {
    *
    * Returns |true| if it identifies a space, and |false| if it does not.
    */
-  public static identify(game: IGame, space: Space, player: IPlayer | undefined, trigger: IdentificationTrigger = 'normal'): boolean {
+  public static identify(game: IGame, space: Space, player: IPlayer | undefined): boolean {
     if (game.gameOptions.underworldExpansion !== true) {
       throw new Error('Underworld expansion not in this game');
     }
@@ -135,7 +134,7 @@ export class UnderworldExpansion {
 
     for (const p of game.playersInGenerationOrder) {
       for (const card of p.tableau) {
-        card.onIdentificationByAnyPlayer?.(p, player, space, trigger);
+        card.onIdentificationByAnyPlayer?.(p, player, space);
       }
     }
     return true;
@@ -205,7 +204,7 @@ export class UnderworldExpansion {
     }
 
     if (space.undergroundResources === undefined) {
-      this.identify(player.game, space, player, 'excavation');
+      this.identify(player.game, space, player);
     }
 
     const undergroundResource = space.undergroundResources;
@@ -227,7 +226,7 @@ export class UnderworldExpansion {
     // TODO(kberg): The identification is supposed to be resolved after the benefit.
     game.board
       .getAdjacentSpaces(space)
-      .forEach((s) => UnderworldExpansion.identify(game, s, player, 'excavation'));
+      .forEach((s) => UnderworldExpansion.identify(game, s, player));
     const leaser = game.getCardPlayerOrUndefined(CardName.EXCAVATOR_LEASING);
     if (leaser !== undefined) {
       leaser.stock.add(Resource.MEGACREDITS, 1, {log: true});

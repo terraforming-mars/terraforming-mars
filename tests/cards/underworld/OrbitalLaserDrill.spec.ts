@@ -28,18 +28,18 @@ describe('OrbitalLaserDrill', () => {
   });
 
   it('play', () => {
+    // Set up an excavation space, which would limit excavation to its neighbors.
+    game.board.getAvailableSpacesOnLand(player)[0].excavator = player;
+
     cast(card.play(player), undefined);
 
     runAllActions(game);
-
-    assertIsExcavationAction(player, player.popWaitingFor(), true);
-
-    runAllActions(game);
-
-    assertIsExcavationAction(player, player.popWaitingFor(), true);
+    assertIsExcavationAction(player, player.popWaitingFor(), /* ignorePlacementRestrictions= */ true);
 
     runAllActions(game);
+    assertIsExcavationAction(player, player.popWaitingFor(), /* ignorePlacementRestrictions= */ true);
 
+    runAllActions(game);
     expect(player.popWaitingFor()).is.undefined;
   });
 });

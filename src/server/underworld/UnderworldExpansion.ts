@@ -1,5 +1,5 @@
-import {Board} from '../boards/Board';
 import {IPlayer} from '../IPlayer';
+import {Board} from '../boards/Board';
 import {Space} from '../boards/Space';
 import {UnderworldData, UnderworldPlayerData} from './UnderworldData';
 import {Random} from '../../common/utils/Random';
@@ -96,23 +96,10 @@ export class UnderworldExpansion {
 
   /**
    * Return the spaces that have not yet been identified.
-   *
-   * For the most part, the opposite of `identifiedSpaces`.
    */
   public static identifiableSpaces(player: IPlayer): ReadonlyArray<Space> {
     const spaces = player.game.board.spaces.filter((space) => space.spaceType !== SpaceType.COLONY);
     return spaces.filter((space) => space.undergroundResources === undefined);
-  }
-
-  /**
-   * Return the spaces that not yet been identified.
-   *
-   * For the most part, the opposite of `identifiableSpaces`.
-   */
-  public static identifiedSpaces(game: IGame): ReadonlyArray<Space> {
-    return game.board.spaces.filter(
-      (space) => space.undergroundResources !== undefined,
-    );
   }
 
   /**
@@ -140,17 +127,28 @@ export class UnderworldExpansion {
     return true;
   }
 
+  public static identifyAdjacentSpaces(player: IPlayer, space: Space): ReadonlyArray<Space> {
+    const game = player.game;
+    const spaces = [];
+    for (const adjacentSpace of game.board.getAdjacentSpaces(space)) {
+      this.identify(game, adjacentSpace, player);
+      if (adjacentSpace.undergroundResources !== undefined) {
+        spaces.push(adjacentSpace);
+      }
+    }
+    return spaces;
+  }
+
   /**
    * Return a list of spaces `player` may excavate.
    *
    * If `ignorePlacementRestictions` is true, `player` can excavate any space on Mars that has
    * not yet been excavated, even unidentified spaces.
    *
-   * Otherwise, it may excavate any unexcavated space (even unidentified spaces) that
-   *   1. they own
-   *   2. next to a space they own
+   * Otherwise, `player` may excavate any unexcavated space (even unidentified spaces) that
+   *   1. has no tile
+   *   2. next to their tiles.
    *   3. next to their excavation markers
-   *   4. that is not antother player's city.
    *
    * If a player played Concession Rights this generation, they automatically ignore placement restrictions.
    */
@@ -159,7 +157,15 @@ export class UnderworldExpansion {
 
     // Compute any space that any player can excavate.
     const anyExcavatableSpaces = board.spaces.filter((space) => {
+      if (space.spaceType === SpaceType.COLONY) {
+        return false;
+      }
+
       if (space.excavator !== undefined) {
+        return false;
+      }
+
+      if (space.tile !== undefined) {
         return false;
       }
 
@@ -167,7 +173,7 @@ export class UnderworldExpansion {
         return false;
       }
 
-      return space.spaceType !== SpaceType.COLONY;
+      return true;
     });
 
     if (options?.ignorePlacementRestrictions === true) {
@@ -181,18 +187,13 @@ export class UnderworldExpansion {
       }
     }
 
-    // Filter out the set of excavatable spaces that other players control.
-    const commonExcavatableSpaces = anyExcavatableSpaces.filter((space) => {
-      return !Board.isCitySpace(space) || space.player === player;
-    });
-    const spaces = commonExcavatableSpaces.filter((space) => {
-      if (space.tile !== undefined && space.player === player) {
-        return true;
-      }
-      return board.getAdjacentSpaces(space).some((s) => s.excavator === player);
+    const spaces = anyExcavatableSpaces.filter((space) => {
+      return board.getAdjacentSpaces(space).some((s) => {
+        return s.excavator === player || (s.player === player && Board.hasRealTile(s));
+      });
     });
     if (spaces.length === 0) {
-      return commonExcavatableSpaces;
+      return anyExcavatableSpaces;
     }
     return spaces;
   }
@@ -231,6 +232,28 @@ export class UnderworldExpansion {
     if (leaser !== undefined) {
       leaser.stock.add(Resource.MEGACREDITS, 1, {log: true});
     }
+  }
+
+  public static claim(player: IPlayer, space: Space) {
+    const game = player.game;
+    if (game.gameOptions.underworldExpansion !== true) {
+      throw new Error('Underworld expansion not in this game');
+    }
+
+    if (space.undergroundResources === undefined) {
+      this.identify(player.game, space, player);
+    }
+
+    const undergroundResource = space.undergroundResources;
+    if (undergroundResource === undefined) {
+      throw new Error('No available identification tokens');
+    }
+
+    LogHelper.logBoardTileAction(player, space, `${undergroundResourceTokenDescription[undergroundResource]}`, 'claimed');
+    this.grant(player, undergroundResource);
+
+    player.underworldData.tokens.push(undergroundResource);
+    space.undergroundResources = undefined;
   }
 
   public static grant(player: IPlayer, token: UndergroundResourceToken): void {
@@ -386,7 +409,7 @@ export class UnderworldExpansion {
     if (game.underworldData === undefined) {
       return;
     }
-    for (const space of UnderworldExpansion.identifiedSpaces(game)) {
+    for (const space of game.board.spaces.filter((space) => space.undergroundResources)) {
       if (space.undergroundResources !== undefined && space.excavator === undefined) {
         game.underworldData.tokens.push(space.undergroundResources);
         space.undergroundResources = undefined;
@@ -461,5 +484,12 @@ export class UnderworldExpansion {
       throw new Error('No underground token!');
     }
     return token;
+  }
+
+  public static onTilePlaced(game: IGame, space: Space) {
+    space.excavator = undefined;
+    if (space.undergroundResources !== undefined) {
+      UnderworldExpansion.removeUnclaimedToken(game, space);
+    }
   }
 }

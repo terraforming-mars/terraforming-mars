@@ -3,7 +3,6 @@ import {GeoscanSatellite} from '../../../src/server/cards/underworld/GeoscanSate
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
-import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
 
 describe('GeoscanSatellite', () => {
   it('play', () => {
@@ -16,14 +15,14 @@ describe('GeoscanSatellite', () => {
     runAllActions(game);
 
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
-    expect(UnderworldExpansion.identifiedSpaces(game)).is.empty;
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).is.empty;
     // Arbitrary space, closer to the middle, so has more selected.
     // I could do better than this. :D
     const space = selectSpace.spaces[10];
     selectSpace.cb(space);
 
     const expected = [space, ...game.board.getAdjacentSpaces(space)];
-    expect(UnderworldExpansion.identifiedSpaces(game)).to.have.members(expected);
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).to.have.members(expected);
 
     runAllActions(game);
 

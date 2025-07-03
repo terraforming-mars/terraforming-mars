@@ -22,7 +22,6 @@ describe('ArtesianAquifer', () => {
     runAllActions(game);
 
     expect(player.plants).eq(1);
-    expect(space.excavator).eq(player);
     expect(space.tile?.tileType).eq(TileType.OCEAN);
   });
 });

@@ -6,10 +6,10 @@ import {Priority} from '../deferredActions/Priority';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {UnderworldExpansion} from './UnderworldExpansion';
 
-export class ExcavateSpaceDeferred extends DeferredAction<Space> {
+export class ClaimSpaceDeferred extends DeferredAction<Space> {
   constructor(
     player: IPlayer,
-    private excavatableSpaces: ReadonlyArray<Space>,
+    private claimableSpaces: ReadonlyArray<Space>,
     private title: string = 'Select space to excavate',
   ) {
     super(player, Priority.EXCAVATE_UNDERGROUND_RESOURCE);
@@ -17,9 +17,9 @@ export class ExcavateSpaceDeferred extends DeferredAction<Space> {
 
   public execute(): PlayerInput {
     return new SelectSpace(this.title,
-      this.excavatableSpaces)
+      this.claimableSpaces)
       .andThen((space) => {
-        UnderworldExpansion.excavate(this.player, space);
+        UnderworldExpansion.claim(this.player, space);
         this.cb(space);
         return undefined;
       });

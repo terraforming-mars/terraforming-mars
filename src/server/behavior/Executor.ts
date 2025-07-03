@@ -29,6 +29,7 @@ import {SelectResources} from '../inputs/SelectResources';
 import {TITLES} from '../inputs/titles';
 import {message} from '../logs/MessageBuilder';
 import {IdentifySpacesDeferred} from '../underworld/IdentifySpacesDeferred';
+import {ClaimSpacesDeferred} from '../underworld/ClaimSpacesDeferred';
 import {ExcavateSpacesDeferred} from '../underworld/ExcavateSpacesDeferred';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 import {SelectResource} from '../inputs/SelectResource';
@@ -606,8 +607,7 @@ export class Executor implements BehaviorExecutor {
           const claim = identify.claim ?? 0;
           if (claim > 0) {
             deferred.andThen((spaces) => {
-              player.game.defer(new ExcavateSpacesDeferred(player, ctx.count(claim),
-                /* ignorePlacementRestrictions= */ false, spaces));
+              player.game.defer(new ClaimSpacesDeferred(player, ctx.count(claim), spaces));
             });
           }
         }
@@ -617,7 +617,8 @@ export class Executor implements BehaviorExecutor {
         if (typeof(excavate) === 'number') {
           player.game.defer(new ExcavateSpacesDeferred(player, excavate));
         } else {
-          player.game.defer(new ExcavateSpacesDeferred(player, ctx.count(excavate.count), excavate.ignorePlacementRestrictions));
+          player.game.defer(new ExcavateSpacesDeferred(
+            player, ctx.count(excavate.count), excavate.ignorePlacementRestrictions));
         }
       }
       if (underworld.corruption !== undefined) {

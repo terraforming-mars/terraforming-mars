@@ -49,7 +49,10 @@ export class StingOperation extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     return new SelectPlayer(this.targets(player), 'Select player to face a sting operation.')
       .andThen((target) => {
-        target.playedCards.push(this);
+        if (target !== player) {
+          player.playedCards.remove(this);
+          target.playedCards.push(this);
+        }
         return undefined;
       });
   }

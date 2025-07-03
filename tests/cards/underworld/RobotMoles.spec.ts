@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {RobotMoles} from '../../../src/server/cards/underworld/RobotMoles';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {assertIsExcavationAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
+import {assertIsClaimAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 
 describe('RobotMoles', () => {
   it('canPlay', () => {
@@ -28,7 +28,7 @@ describe('RobotMoles', () => {
     runAllActions(game);
     assertIsIdentificationAction(player, player.popWaitingFor());
     runAllActions(game);
-    assertIsExcavationAction(player, player.popWaitingFor());
+    assertIsClaimAction(player, player.popWaitingFor());
     cast(player.popWaitingFor(), undefined);
   });
 });

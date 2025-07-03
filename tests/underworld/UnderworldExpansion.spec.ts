@@ -124,12 +124,12 @@ describe('UnderworldExpansion', () => {
     const space = game.board.getAvailableSpacesOnLand(player1)[0];
 
     expect(UnderworldExpansion.identifiableSpaces(player1)).includes(space);
-    expect(UnderworldExpansion.identifiedSpaces(game)).does.not.include(space);
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).does.not.include(space);
 
     UnderworldExpansion.identify(game, space, player1);
 
     expect(UnderworldExpansion.identifiableSpaces(player1)).does.not.include(space);
-    expect(UnderworldExpansion.identifiedSpaces(game)).includes(space);
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).includes(space);
   });
 
   it('gainCorruption', () => {
@@ -354,17 +354,20 @@ describe('UnderworldExpansion', () => {
 
     space.excavator = player1;
     expect(UnderworldExpansion.excavatableSpaces(player1)).does.not.include(space);
-    // The only excavatable space now is the one next to the excavation space.
+    // The only excavatable spaces are those next to the excavation space.
     expect(UnderworldExpansion.excavatableSpaces(player1)).has.members(adjacentSpaces);
 
     // Reset for tile tests.
     space.excavator = undefined;
     space.tile = {tileType: TileType.GREENERY};
     space.player = player1;
-    expect(UnderworldExpansion.excavatableSpaces(player1)).has.members([space]);
-    expect(UnderworldExpansion.excavatableSpaces(player2)).includes(space);
-    space.tile = {tileType: TileType.CITY};
-    expect(UnderworldExpansion.excavatableSpaces(player2)).does.not.include(space);
+    expect(UnderworldExpansion.excavatableSpaces(player1)).does.not.include([space]);
+
+    // The only excavatable spaces are next to the tile.
+    console.log(UnderworldExpansion.excavatableSpaces(player1).map((s) => s.id));
+    console.log(adjacentSpaces.map((s) => s.id));
+
+    expect(UnderworldExpansion.excavatableSpaces(player1)).to.have.members(adjacentSpaces);
   });
 
   it('excavatableSpaces - cannot afford ocean bonus', () => {
@@ -387,14 +390,14 @@ describe('UnderworldExpansion', () => {
     const adjacentSpaces = game.board.getAdjacentSpaces(space);
     space.undergroundResources = 'plant2';
 
-    const identifiedSpacesBefore = UnderworldExpansion.identifiedSpaces(game);
+    const identifiedSpacesBefore = game.board.spaces.filter((space) => space.undergroundResources);
     expect(adjacentSpaces.map((space) => identifiedSpacesBefore.includes(space))).deep.eq([false, false, false]);
 
     UnderworldExpansion.excavate(player1, space);
 
     expect(player1.plants).eq(2);
     expect(space.excavator?.id).eq(player1.id);
-    const identifiedSpacesAfter = UnderworldExpansion.identifiedSpaces(game);
+    const identifiedSpacesAfter = game.board.spaces.filter((space) => space.undergroundResources);
     expect(adjacentSpaces.map((space) => identifiedSpacesAfter.includes(space))).deep.eq([true, true, true]);
   });
 
@@ -687,11 +690,11 @@ describe('UnderworldExpansion', () => {
     space3.undergroundResources = 'corruption1',
     game.underworldData.tokens = [];
 
-    expect(UnderworldExpansion.identifiedSpaces(game)).to.have.members([space, space2, space3]);
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).to.have.members([space, space2, space3]);
 
     UnderworldExpansion.removeAllUnclaimedTokens(game);
 
-    expect(UnderworldExpansion.identifiedSpaces(game)).to.have.members([space2]);
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).to.have.members([space2]);
     expect(space2.excavator).eq(player1);
     expect(space2.undergroundResources).eq('card2');
     expect(game.underworldData.tokens).to.have.members(['card1', 'corruption1']);
@@ -711,11 +714,11 @@ describe('UnderworldExpansion', () => {
     space3.undergroundResources = 'corruption1',
     game.underworldData.tokens = [];
 
-    expect(UnderworldExpansion.identifiedSpaces(game)).to.have.members([space, space2, space3]);
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).to.have.members([space, space2, space3]);
 
     UnderworldExpansion.removeUnclaimedToken(game, space);
 
-    expect(UnderworldExpansion.identifiedSpaces(game)).to.have.members([space2, space3]);
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).to.have.members([space2, space3]);
     expect(space2.excavator).eq(player1);
     expect(space2.undergroundResources).eq('card2');
     expect(game.underworldData.tokens).to.have.members(['card1']);

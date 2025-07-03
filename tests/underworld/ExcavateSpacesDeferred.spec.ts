@@ -12,7 +12,7 @@ describe('ExcavateSpacesDeferred', () => {
   let game: IGame;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {underworldExpansion: true});
+    [game, player] = testGame(2, {underworldExpansion: true});
     game.phase = Phase.ACTION;
   });
 
@@ -37,7 +37,7 @@ describe('ExcavateSpacesDeferred', () => {
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     const space = selectSpace.spaces[0];
 
-    expect(selectSpace.spaces).has.length(59);
+    expect(selectSpace.spaces).has.length(61);
     expect(space.excavator).is.undefined;
 
     cast(selectSpace.cb(space), undefined);

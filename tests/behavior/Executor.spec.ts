@@ -28,7 +28,6 @@ import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {StormCraftIncorporated} from '../../src/server/cards/colonies/StormCraftIncorporated';
 import {AndOptions} from '../../src/server/inputs/AndOptions';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
-import {UnderworldExpansion} from '../../src/server/underworld/UnderworldExpansion';
 import {SelectResources} from '../../src/server/inputs/SelectResources';
 import {SelectResource} from '../../src/server/inputs/SelectResource';
 import {MicroMills} from '../../src/server/cards/base/MicroMills';
@@ -705,41 +704,42 @@ describe('Executor', () => {
   it('underworld, identify', () => {
     executor.execute({underworld: {identify: 1}}, player, fake);
     runAllActions(game);
-    expect(UnderworldExpansion.identifiedSpaces(game)).has.length(0);
+
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).has.length(0);
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     selectSpace.cb(selectSpace.spaces[0]);
-    expect(UnderworldExpansion.identifiedSpaces(game)).has.length(1);
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).has.length(1);
   });
 
   it('underworld, identify and claim', () => {
     executor.execute({underworld: {identify: {count: 3, claim: 2}}}, player, fake);
     runAllActions(game);
-    expect(UnderworldExpansion.identifiedSpaces(game)).has.length(0);
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).has.length(0);
 
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     selectSpace.cb(selectSpace.spaces[0]);
-    expect(UnderworldExpansion.identifiedSpaces(game)).has.length(1);
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).has.length(1);
     runAllActions(game);
 
     const selectSpace2 = cast(player.popWaitingFor(), SelectSpace);
     selectSpace2.cb(selectSpace2.spaces[0]);
-    expect(UnderworldExpansion.identifiedSpaces(game)).has.length(2);
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).has.length(2);
     runAllActions(game);
 
     const selectSpace3 = cast(player.popWaitingFor(), SelectSpace);
     selectSpace3.cb(selectSpace3.spaces[0]);
-    expect(UnderworldExpansion.identifiedSpaces(game)).has.length(3);
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).has.length(3);
     runAllActions(game);
 
     const excavateSpace1 = cast(player.popWaitingFor(), SelectSpace);
-    expect(excavateSpace1.spaces).deep.eq(UnderworldExpansion.identifiedSpaces(game));
+    expect(excavateSpace1.spaces).deep.eq(game.board.spaces.filter((space) => space.undergroundResources));
     excavateSpace1.cb(excavateSpace1.spaces[0]);
-    expect(excavateSpace1.spaces[0].excavator).eq(player);
+    expect(excavateSpace1.spaces[0].excavator).is.undefined;
     runAllActions(game);
 
     const excavateSpace2 = cast(player.popWaitingFor(), SelectSpace);
     cast(excavateSpace2.cb(excavateSpace2.spaces[0]), undefined);
-    expect(excavateSpace2.spaces[0].excavator).eq(player);
+    expect(excavateSpace2.spaces[0].excavator).is.undefined;
     runAllActions(game);
 
     cast(player.popWaitingFor(), undefined);

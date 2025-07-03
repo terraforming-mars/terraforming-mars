@@ -3,7 +3,7 @@ import {StemFieldSubsidies} from '../../../src/server/cards/underworld/StemField
 import {testGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
-import {assertIsExcavationAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
+import {assertIsClaimAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {CardResource} from '../../../src/common/CardResource';
@@ -74,7 +74,7 @@ describe('StemFieldSubsidies', () => {
     runAllActions(game);
     assertIsIdentificationAction(player, player.popWaitingFor());
     runAllActions(game);
-    assertIsExcavationAction(player, player.popWaitingFor());
+    assertIsClaimAction(player, player.popWaitingFor());
     runAllActions(game);
     expect(player.popWaitingFor()).to.be.undefined;
   });

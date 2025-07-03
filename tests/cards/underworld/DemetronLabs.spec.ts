@@ -3,7 +3,7 @@ import {DemetronLabs} from '../../../src/server/cards/underworld/DemetronLabs';
 import {testGame} from '../../TestGame';
 import {cast, fakeCard, runAllActions} from '../../TestingUtils';
 import {Tag} from '../../../src/common/cards/Tag';
-import {assertIsExcavationAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
+import {assertIsClaimAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 
 describe('DemetronLabs', () => {
   it('play', () => {
@@ -50,7 +50,7 @@ describe('DemetronLabs', () => {
     runAllActions(game);
     runAllActions(game);
     runAllActions(game);
-    assertIsExcavationAction(player, player.popWaitingFor());
+    assertIsClaimAction(player, player.popWaitingFor());
     expect(player.underworldData.tokens).has.length(1);
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);

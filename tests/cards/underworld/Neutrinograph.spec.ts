@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Neutrinograph} from '../../../src/server/cards/underworld/Neutrinograph';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {assertIsExcavationAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
+import {assertIsClaimAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 
 describe('Neutrinograph', () => {
   it('canPlay', () => {
@@ -36,11 +36,11 @@ describe('Neutrinograph', () => {
     runAllActions(game);
     assertIsIdentificationAction(player, player.popWaitingFor());
     runAllActions(game);
-    assertIsExcavationAction(player, player.popWaitingFor());
+    assertIsClaimAction(player, player.popWaitingFor());
     runAllActions(game);
-    assertIsExcavationAction(player, player.popWaitingFor());
+    assertIsClaimAction(player, player.popWaitingFor());
     runAllActions(game);
-    assertIsExcavationAction(player, player.popWaitingFor());
+    assertIsClaimAction(player, player.popWaitingFor());
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
   });

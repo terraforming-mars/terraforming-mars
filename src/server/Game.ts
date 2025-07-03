@@ -67,7 +67,6 @@ import {IGame, Score} from './IGame';
 import {MarsBoard} from './boards/MarsBoard';
 import {UnderworldData} from './underworld/UnderworldData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
-import {SpaceType} from '../common/boards/SpaceType';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {BuildColony} from './deferredActions/BuildColony';
 import {newInitialDraft, newPreludeDraft, newCEOsDraft, newStandardDraft} from './Draft';
@@ -1323,6 +1322,9 @@ export class Game implements IGame, Logger {
     // Part 4. Place the tile
     this.simpleAddTile(player, space, tile);
 
+    // Clear out underworld components.
+    UnderworldExpansion.onTilePlaced(this, space);
+
     // Part 5. Collect the bonuses
     if (this.phase !== Phase.SOLAR) {
       this.grantPlacementBonuses(player, space, coveringExistingTile, arcadianCommunityBonus);
@@ -1344,12 +1346,6 @@ export class Game implements IGame, Logger {
       AresHandler.ifAres(this, () => {
         AresHandler.grantBonusForRemovingHazard(player, initialTileType);
       });
-    }
-
-    if (this.gameOptions.underworldExpansion) {
-      if (space.spaceType !== SpaceType.COLONY && space.player === player) {
-        UnderworldExpansion.identify(this, space, player);
-      }
     }
   }
 

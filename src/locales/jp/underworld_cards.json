@@ -236,7 +236,8 @@
     "Temperature must -18° C or colder.": "条件：気温-18℃以下.",
 
     "Server Sabotage": "サーバー妨害",
-    "Gain 1 corruption. Remove up to 2 data from any player. Remove all unclaimed underground resources from the board back into the pile. Their spaces can be identified again.": "1汚職獲得. プレイヤー1人の2データ除去. 採掘されていない資源トークンを全て除去する. それらは再び調査できる.",
+    "// Gain 1 corruption. Remove up to 2 data from any player. Remove all unclaimed underground resources from the board back into the pile. Their spaces can be identified again.": "1汚職獲得. プレイヤー1人の2データ除去. 採掘されていない資源トークンを全て除去する. それらは再び調査できる.",
+    "Gain 1 corruption. Draw a card. Remove all underground resources from the board.": "1汚職獲得. 1ドロー. 採掘されていない資源トークンを全て除去する.",
 
     "Soil Export": "土壌輸出",
     "Excavate an underground resource.": "地下資源を採掘する.",

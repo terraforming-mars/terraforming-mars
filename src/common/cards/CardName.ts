@@ -948,7 +948,7 @@ export enum CardName {
   DEEPMINING = 'Deepmining',
   BEHEMOTH_EXCAVATOR = 'Behemoth Excavator',
   LOBBYING_NETWORK = 'Lobbying Network',
-  CONCESSION_RIGHTS = 'Concession Rights',
+  TUNNELING_LOOPHOLE = 'Tunneling Loophole',
   ORBITAL_LASER_DRILL = 'Orbital Laser Drill',
   GREY_MARKET_EXPLOITATION = 'Grey Market Exploitation',
   EXCAVATOR_LEASING = 'Excavator Leasing',

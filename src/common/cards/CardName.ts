@@ -1016,6 +1016,7 @@ export enum CardName {
   EXPORT_CONVOY = 'Export Convoy',
   ACIDIZING = 'Acidizing',
   EXPLOITATION_OF_VENUS = 'Exploitation Of Venus',
+  DEEP_FOUNDATIONS = 'Deep Foundations',
 
   // Underworld Corporations
   HADESPHERE = 'Hadesphere',

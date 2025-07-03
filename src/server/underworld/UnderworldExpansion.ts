@@ -198,7 +198,7 @@ export class UnderworldExpansion {
     return spaces;
   }
 
-  public static excavate(player: IPlayer, space: Space) {
+  public static excavate(player: IPlayer, space: Space): void {
     const game = player.game;
     if (game.gameOptions.underworldExpansion !== true) {
       throw new Error('Underworld expansion not in this game');

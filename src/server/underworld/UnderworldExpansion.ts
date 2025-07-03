@@ -154,7 +154,7 @@ export class UnderworldExpansion {
    *
    * If a player played Concession Rights this generation, they automatically ignore placement restrictions.
    */
-  public static excavatableSpaces(player: IPlayer, options?: {ignorePlacementRestrictions?: boolean, ignoreConcsesionRights?: boolean}) {
+  public static excavatableSpaces(player: IPlayer, options?: {ignorePlacementRestrictions?: boolean, ignoreTunnelingLoophole?: boolean}) {
     const board = player.game.board;
 
     // Compute any space that any player can excavate.
@@ -174,9 +174,9 @@ export class UnderworldExpansion {
       return anyExcavatableSpaces;
     }
 
-    const concessionRights = player.tableau.get(CardName.CONCESSION_RIGHTS);
-    if (concessionRights?.generationUsed === player.game.generation) {
-      if (options?.ignoreConcsesionRights !== true) {
+    const tunnelingLoophole = player.tableau.get(CardName.TUNNELING_LOOPHOLE);
+    if (tunnelingLoophole?.generationUsed === player.game.generation) {
+      if (options?.ignoreTunnelingLoophole !== true) {
         return anyExcavatableSpaces;
       }
     }

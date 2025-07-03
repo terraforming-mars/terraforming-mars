@@ -232,7 +232,8 @@
   "Temperature must -18° C or colder.": "Температура повинна бути -18° C або холодніше.",
 
   "Server Sabotage": "Саботаж сервера",
-  "Gain 1 corruption. Remove up to 2 data from any player. Remove all unclaimed underground resources from the board back into the pile. Their spaces can be identified again.": "Отримайте 1 одиницю корупції. Видаліть до 2 одиниць даних від будь-якого гравця. Поверніть усі невикористані підземні ресурси з дошки назад у стопку. Їх місця можна визначити знову.",
+  "// Gain 1 corruption. Remove up to 2 data from any player. Remove all unclaimed underground resources from the board back into the pile. Their spaces can be identified again.": "Отримайте 1 одиницю корупції. Видаліть до 2 одиниць даних від будь-якого гравця. Поверніть усі невикористані підземні ресурси з дошки назад у стопку. Їх місця можна визначити знову.",
+  "Gain 1 corruption. Draw a card. Remove all underground resources from the board.": "Отримайте 1 одиницю корупції. Витягніть карту. Видаліть усі підземні ресурси з дошки.",
 
   "Soil Export": "Експорт ґрунту",
   "Excavate an underground resource.": "Розкопайте підземний ресурс.",

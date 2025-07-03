@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {StingOperation} from '../../../src/server/cards/underworld/StingOperation';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {zip} from '../../../src/common/utils/utils';
 
@@ -46,5 +46,28 @@ describe('StingOperation', () => {
     expect(player3.getVictoryPoints().victoryPoints).eq(0);
     player3.underworldData.corruption = 0;
     expect(player3.getVictoryPoints().victoryPoints).eq(-2);
+  });
+
+  it('play - target self', () => {
+    const card = new StingOperation();
+    const [game, player, player2, player3] = testGame(3, {underworldExpansion: true});
+
+    player.underworldData.corruption = 4;
+    player2.underworldData.corruption = 4;
+    player3.underworldData.corruption = 4;
+
+    cast(player.playCard(card), undefined);
+    runAllActions(game);
+    const selectPlayer = cast(player.popWaitingFor(), SelectPlayer);
+
+    expect(selectPlayer.players).to.have.members([player, player2, player3]);
+    expect(player3.getVictoryPoints().victoryPoints).eq(0);
+
+    selectPlayer.cb(player);
+
+    expect(player.cardsInHand).has.length(2);
+    expect(player.playedCards.asArray()).includes(card);
+    player.underworldData.corruption = 0;
+    expect(player.getVictoryPoints().victoryPoints).eq(-2);
   });
 });

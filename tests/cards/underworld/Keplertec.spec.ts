@@ -6,6 +6,7 @@ import {PersonalSpacecruiser} from '../../../src/server/cards/underworld/Persona
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
+import {oneWayDifference} from '../../../src/common/utils/utils';
 
 describe('Keplertec', () => {
   it('play', () => {
@@ -57,7 +58,7 @@ describe('Keplertec', () => {
 
     // Preload with reliable tokens, first one is draw a card.
     game.underworldData.tokens.push('card1');
-    const tokens = [...game.underworldData.tokens];
+    const savedTokens = [...game.underworldData.tokens];
 
     player.addResourceTo(card, 1);
     runAllActions(game);
@@ -69,7 +70,8 @@ describe('Keplertec', () => {
     orOptions.options[0].cb();
 
     expect(player.cardsInHand).has.length(1);
-    expect(game.underworldData.tokens).to.have.members(tokens);
+    expect(player.underworldData.tokens).deep.eq(['card1']);
+    expect(oneWayDifference(savedTokens, game.underworldData.tokens)).deep.eq(['card1']);
 
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
@@ -82,7 +84,7 @@ describe('Keplertec', () => {
 
     // Preload with reliable token.
     game.underworldData.tokens.push('card1');
-    const tokens = [...game.underworldData.tokens];
+    const savedTokens = [...game.underworldData.tokens];
 
     player.addResourceTo(card, 2);
     runAllActions(game);
@@ -94,7 +96,8 @@ describe('Keplertec', () => {
     orOptions.options[0].cb();
 
     expect(player.cardsInHand).has.length(1);
-    expect(game.underworldData.tokens).to.have.members(tokens);
+    expect(player.underworldData.tokens).deep.eq(['card1']);
+    expect(oneWayDifference(savedTokens, game.underworldData.tokens)).deep.eq(['card1']);
 
     // Preload again with reliable token.
     game.underworldData.tokens.push('card1');
@@ -104,6 +107,8 @@ describe('Keplertec', () => {
 
     orOptions2.options[0].cb();
 
+    expect(player.underworldData.tokens).deep.eq(['card1', 'card1']);
+    expect(oneWayDifference(savedTokens, game.underworldData.tokens)).deep.eq(['card1']);
     expect(player.cardsInHand).has.length(2);
 
     runAllActions(game);

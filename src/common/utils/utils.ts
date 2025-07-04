@@ -46,12 +46,18 @@ export function hasIntersection<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): bo
 /**
  * Returns elements in a that are not in b.
  *
+ * Friendly to duplicates in an array.
+ *
  * @param {Array<T>} a: the first array
  * @param {Array<T>} b: the second array
  */
 export function oneWayDifference<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): ReadonlyArray<T> {
   // Not optimized for large arrays.
-  return a.filter((e) => !b.includes(e));
+  const remainder = [...a];
+  for (const elem of b) {
+    inplaceRemove(remainder, elem);
+  }
+  return remainder;
 }
 
 /**

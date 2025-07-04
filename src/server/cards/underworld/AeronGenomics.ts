@@ -7,7 +7,6 @@ import {CardResource} from '../../../common/CardResource';
 import {IPlayer} from '../../IPlayer';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectCard} from '../../inputs/SelectCard';
-import {Space} from '../../boards/Space';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 
 export class AeronGenomics extends ActiveCorporationCard {
@@ -41,7 +40,7 @@ export class AeronGenomics extends ActiveCorporationCard {
     });
   }
 
-  onExcavation(player: IPlayer, _space: Space) {
+  onClaim(player: IPlayer) {
     player.addResourceTo(this, {qty: 1, log: true});
   }
 

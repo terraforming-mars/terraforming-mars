@@ -31,9 +31,7 @@ export class ChooseCards extends DeferredAction {
   }
 
   public execute() {
-    const options = this.options;
-    const cards = this.cards;
-    const player = this.player;
+    const {options, cards, player} = this;
 
     let max = options.keepMax || cards.length;
     let msg: string | Message = message('Select ${0} card(s) to keep', (b) => b.number(max));

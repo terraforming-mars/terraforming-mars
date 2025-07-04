@@ -68,6 +68,16 @@ describe('utils', () => {
     ]);
   });
 
+  it('oneWayDifference', () => {
+    expect(utils.oneWayDifference([], [])).is.empty;
+    expect(utils.oneWayDifference([1], [1])).is.empty;
+    expect(utils.oneWayDifference([1], [2, 3])).deep.eq([1]);
+    expect(utils.oneWayDifference([1, 2, 3], [2, 3])).deep.eq([1]);
+    expect(utils.oneWayDifference([1, 2, 3], [1, 3, 4, 2])).deep.eq([]);
+    expect(utils.oneWayDifference([1, 2, 3, 4], [1, 4, 2])).deep.eq([3]);
+    expect(utils.oneWayDifference([1, 1], [1])).deep.eq([1]);
+  });
+
   it('deNull', () => {
     expect(utils.deNull([])).deep.eq([]);
     expect(utils.deNull([1])).deep.eq([1]);

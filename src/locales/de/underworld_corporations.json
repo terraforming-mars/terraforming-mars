@@ -53,7 +53,7 @@
 "KEPLERTEC": "",
 "Keplertec": "",
 "Action: Spend 1 titanium to put a fighter resource on ANY card.": "AKTION: Benutze 1 Titan, um eine Jäger-Ressource auf eine beliebige Karte zu legen.",
-"Effect: When you place a fighter resource on this card, draw 4 random underground tokens. Pick one of them and claim the reward on it. Then shuffle the tokens back into the pile.": "EFFEKT: Wenn du eine Jäger-Ressource auf dieser Karte platzierst, ziehe 4 zufällige unterirdische Ressourcenplättchen. Wähle eine von ihnen und beanspruche die darauf befindliche Belohnung. Dann mischst du die Plättchen zurück in den Stapel.",
+"Effect: When you place a fighter on this card, identify 4 underground resources FROM THE PILE. Claim 1. Shuffle the remaining tokens back into the pile.": "EFFEKT: Wenn du eine Jäger-Ressource auf dieser Karte platzierst, ziehe 4 zufällige unterirdische Ressourcenplättchen. Wähle eine von ihnen und beanspruche die darauf befindliche Belohnung. Dann mischst du die Plättchen zurück in den Stapel.",
 "You start with 33 M€, 3 titanium, and 1 titanium production.": "Du beginnst mit 33 M€, 3 Titan und 1 Titan-Produktion.",
 
 "KINGDOM OF TAURARO": "Königreich von Tauraro",
@@ -63,7 +63,9 @@
 
 "VOLTAGON": "",
 "Voltagon": "",
-"Effect: After you excavate an underground resource, gain 2 energy.": "EFFEKT: Nachdem du eine unterirdische Ressource ausgegraben hast, erhältst du 2 Energie.",
+"// Effect: After you excavate an underground resource, gain 2 energy.": "EFFEKT: Nachdem du eine unterirdische Ressource ausgegraben hast, erhältst du 2 Energie.",
+"Effect: After you claim an underground resource, gain 2 energy.": "EFFEKT: Nachdem du eine unterirdische Ressource beansprucht hast, erhältst du 2 Energie.",
+
 "Action: Spend 8 energy to increase oxygen or Venus 1 step.": "AKTION: Bezahle 8 Energie, um den Sauerstoffgehalt oder die Venuswertung um 1 zu erhöhen.",
 "You start with 38 M€ and 1 energy production.": "Du beginnst mit 38 M€ und einer Energie-Produktion von 1."
 

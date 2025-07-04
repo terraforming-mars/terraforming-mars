@@ -401,26 +401,26 @@ describe('UnderworldExpansion', () => {
     expect(adjacentSpaces.map((space) => identifiedSpacesAfter.includes(space))).deep.eq([true, true, true]);
   });
 
-  it('onExcavation callback', () => {
+  it('onClaim callback', () => {
     const responses: Array<string> = [];
     const space = game.board.getAvailableSpacesOnLand(player1)[0];
     space.undergroundResources = 'nothing';
 
     player1.playedCards.push(fakeCard({
-      onExcavation(player, space) {
-        responses.push(`from player1: ${player.id} - ${space.id}`);
+      onClaim(player) {
+        responses.push(`from player1: ${player.id}`);
       },
     }));
     player2.playedCards.push(fakeCard({
-      onExcavation(player, space) {
-        responses.push(`from player2: ${player.id} - ${space.id}`);
+      onClaim(player) {
+        responses.push(`from player2: ${player.id}`);
       },
     }));
 
     UnderworldExpansion.excavate(player1, space);
 
     expect(responses).deep.eq([
-      'from player1: p-player1-id - 03',
+      'from player1: p-player1-id',
     ]);
   });
 

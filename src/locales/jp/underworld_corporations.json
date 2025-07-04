@@ -61,7 +61,7 @@
     "Keplertec": "ケプラーテック",
     " Keplertec ": "ケプラーテック",
     "Action: Spend 1 titanium to put a fighter resource on ANY card.": "アクション：1チタンを支払い、1戦闘機獲得.",
-    "Effect: When you place a fighter resource on this card, draw 4 random underground tokens. Pick one of them and claim the reward on it. Then shuffle the tokens back into the pile.": "効果：このカード上に戦闘機が追加された時、地下資源トークンを4枚見る. その内、1枚の資源を獲得し残りを山札に戻す.",
+    "Effect: When you place a fighter on this card, identify 4 underground resources FROM THE PILE. Claim 1. Shuffle the remaining tokens back into the pile.": "効果：このカード上に戦闘機が追加された時、地下資源トークンを4枚見る. その内、1枚の資源を獲得し残りを山札に戻す.",
     "You start with 33 M€, 3 titanium, and 1 titanium production.": "初期資源：33MC. 3チタン. 初期産出：チタン産出+1.",
 
     "KINGDOM OF TAURARO": "",
@@ -73,7 +73,9 @@
     "VOLTAGON": "",
     "Voltagon": "ボルタゴン",
     " Voltagon ": "ボルタゴン",
-    "Effect: After you excavate an underground resource, gain 2 energy.": "効果：地下資源が採掘した時、2電力獲得.",
+    "// Effect: After you excavate an underground resource, gain 2 energy.": "効果：地下資源が採掘した時、2電力獲得.",
+    "Effect: After you claim an underground resource, gain 2 energy.": "効果：地下資源を獲得した時、2電力獲得.",
+
     "Action: Spend 8 energy to increase oxygen or Venus 1 step.": "アクション：8電力支払い、酸素濃度+1段階 または 金星+1段階.",
     "You start with 38 M€ and 1 energy production.": "初期資源：38MC. 初期産出：電力産出+1."
 }

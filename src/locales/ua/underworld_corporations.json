@@ -52,7 +52,7 @@
   "KEPLERTEC": "",
   "Keplertec": "",
   "Action: Spend 1 titanium to put a fighter resource on ANY card.": "Дія: Витратити 1 титан, щоб покласти ресурс бійця на БУДЬ-ЯКУ карту.",
-  "Effect: When you place a fighter resource on this card, draw 4 random underground tokens. Pick one of them and claim the reward on it. Then shuffle the tokens back into the pile.": "Ефект: Коли ви розміщуєте ресурс бійця на цій карті, витягніть 4 випадкові токени підземних ресурсів. Виберіть один з них і отримайте на ньому винагороду. Потім перемішайте токени назад у стопку.",
+  "Effect: When you place a fighter on this card, identify 4 underground resources FROM THE PILE. Claim 1. Shuffle the remaining tokens back into the pile.": "Ефект: Коли ви розміщуєте ресурс бійця на цій карті, витягніть 4 випадкові токени підземних ресурсів. Виберіть один з них і отримайте на ньому винагороду. Потім перемішайте токени назад у стопку.",
   "You start with 33 M€, 3 titanium, and 1 titanium production.": "Ви починаєте з 33 M€, 3 титану і виробництвом титану на 1 крок.",
 
   "KINGDOM OF TAURARO": "Королівство Тауаро",
@@ -62,7 +62,9 @@
 
   "VOLTAGON": "",
   "Voltagon": "",
-  "Effect: After you excavate an underground resource, gain 2 energy.": "Ефект: Після того, як ви розкопаєте підземний ресурс, отримайте 2 одиниці енергії.",
+  "// Effect: After you excavate an underground resource, gain 2 energy.": "Ефект: Після того, як ви розкопаєте підземний ресурс, отримайте 2 одиниці енергії.",
+  "Effect: After you claim an underground resource, gain 2 energy.": "Ефект: Після того, як ви отримаєте підземний ресурс, отримайте 2 одиниці енергії.",
+
   "Action: Spend 8 energy to increase oxygen or Venus 1 step.": "Дія: Витратити 8 одиниць енергії, щоб збільшити кисень або Венеру на 1 крок.",
   "You start with 38 M€ and 1 energy production.": "Ви починаєте з 38 M€ і виробництвом енергії на 1 крок."
 }

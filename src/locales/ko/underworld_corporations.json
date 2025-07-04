@@ -52,7 +52,7 @@
 "KEPLERTEC": "",
 "Keplertec": "",
 "Action: Spend 1 titanium to put a fighter resource on ANY card.": "",
-"Effect: When you place a fighter resource on this card, draw 4 random underground tokens. Pick one of them and claim the reward on it. Then shuffle the tokens back into the pile.": "",
+"Effect: When you place a fighter on this card, identify 4 underground resources FROM THE PILE. Claim 1. Shuffle the remaining tokens back into the pile.": "",
 "You start with 33 M€, 3 titanium, and 1 titanium production.": "",
 
 "KINGDOM OF TAURARO": "",
@@ -62,7 +62,7 @@
 
 "VOLTAGON": "",
 "Voltagon": "",
-"Effect: After you excavate an underground resource, gain 2 energy.": "",
+"Effect: After you claim an underground resource, gain 2 energy.": "",
 "Action: Spend 8 energy to increase oxygen or Venus 1 step.": "",
 "You start with 38 M€ and 1 energy production.": ""
 

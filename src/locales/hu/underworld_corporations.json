@@ -44,7 +44,7 @@
   "KEPLERTEC": "",
   "Keplertec": "",
   "Action: Spend 1 titanium to put a fighter resource on ANY card.": "Akció: Költs el 1 titánt, hogy egy vadászgép erőforrást rakj BÁRMELYIK kártyára!",
-  "Effect: When you place a fighter resource on this card, draw 4 random underground tokens. Pick one of them and claim the reward on it. Then shuffle the tokens back into the pile.": "Hatás: Amikor vadászgép erőforrást helyezel erre a kártyára, húzz véletlenszerűen 4 földalatti erőforrás tokent! Ebből 1-et válassz ki, és megkapod a jutalmát. Aztán keverd vissza a maradékot a többibe!",
+  "Effect: When you place a fighter on this card, identify 4 underground resources FROM THE PILE. Claim 1. Shuffle the remaining tokens back into the pile.": "Hatás: Amikor vadászgép erőforrást helyezel erre a kártyára, húzz véletlenszerűen 4 földalatti erőforrás tokent! Ebből 1-et válassz ki, és megkapod a jutalmát. Aztán keverd vissza a maradékot a többibe!",
   "You start with 33 M€, 3 titanium, and 1 titanium production.": "33 M€-tel kezdesz. Kapsz 3 titánt és növeld 1 értékkel a titántermelésed!",
   "KINGDOM OF TAURARO": "Tauraro királysága",
   "Kingdom of Tauraro": "Tauraro királysága",
@@ -52,7 +52,9 @@
   "You start with 50 M€ and 6 M€ production. All opponents gain 2 M€ production. As your first action, place a city.": "50 M€-tel kezdesz. Növeld a M€-termelésed 6 értékkel! Minden ellenfeled kap 2 M€-termelést! Első akciódként helyezz le 1 várost!",
   "VOLTAGON": "",
   "Voltagon": "",
-  "Effect: After you excavate an underground resource, gain 2 energy.": "Hatás: Amikor kiásol egy földalatti erőforrást, kapsz 2 energiát.",
+  "// Effect: After you excavate an underground resource, gain 2 energy.": "Hatás: Amikor kiásol egy földalatti erőforrást, kapsz 2 energiát.",
+  "Effect: After you claim an underground resource, gain 2 energy.": "Hatás: Amikor megkapod egy földalatti erőforrást, kapsz 2 energiát.",
+
   "Action: Spend 8 energy to increase oxygen or Venus 1 step.": "Akció: Költs el 8 energiát, hogy növeld az oxigénszintet vagy a Vénusz szintet!",
   "You start with 38 M€ and 1 energy production.": "38 M€-tel kezdesz. Növeld az energiatermelésed 1 értékkel!"
 }

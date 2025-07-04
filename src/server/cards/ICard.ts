@@ -119,12 +119,11 @@ export interface ICard {
   onIdentification?: never;
 
   /**
-   * Optional callback when this card owner player excavates a space.
+   * Optional callback when this card owner claims an underground resource.
    *
-   * @param player the player performing the excavation action
-   * @param space the space that was just excavated.
+   * @param player the player performing the claim.
    */
-  onExcavation?(player: IPlayer, space: Space): void;
+  onClaim?(player: IPlayer): void;
 
   /**
    * Callback when `player` gains (or loses) production.

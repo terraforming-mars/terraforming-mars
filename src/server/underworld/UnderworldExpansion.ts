@@ -220,8 +220,9 @@ export class UnderworldExpansion {
     player.underworldData.tokens.push(undergroundResource);
     // space.undergroundResources = undefined; ADD THIS
 
+    // TODO(kberg): Remove this after fixing Aeron Genomics.
     for (const card of player.tableau) {
-      card.onExcavation?.(player, space);
+      card.onClaim?.(player);
     }
 
     // TODO(kberg): The identification is supposed to be resolved after the benefit.
@@ -249,13 +250,23 @@ export class UnderworldExpansion {
       throw new Error('No available identification tokens');
     }
 
-    LogHelper.logBoardTileAction(player, space, `${undergroundResourceTokenDescription[undergroundResource]}`, 'claimed');
-    this.grant(player, undergroundResource);
-
-    player.underworldData.tokens.push(undergroundResource);
     space.undergroundResources = undefined;
+    this.claimToken(player, undergroundResource);
+    LogHelper.logBoardTileAction(player, space, `${undergroundResourceTokenDescription[undergroundResource]}`, 'claimed');
   }
 
+  public static claimToken(player: IPlayer, token: UndergroundResourceToken) {
+    if (player.game.gameOptions.underworldExpansion !== true) {
+      throw new Error('Underworld expansion not in this game');
+    }
+    this.grant(player, token);
+    player.underworldData.tokens.push(token);
+    for (const card of player.tableau) {
+      card.onClaim?.(player);
+    }
+  }
+
+  /* public for tests */
   public static grant(player: IPlayer, token: UndergroundResourceToken): void {
     switch (token) {
     case 'nothing':

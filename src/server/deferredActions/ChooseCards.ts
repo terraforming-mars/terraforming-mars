@@ -69,9 +69,7 @@ export class ChooseCards extends DeferredAction {
               cost,
               {title: message('Select how to spend ${0} M€ for ${1} cards', (b) => b.number(cost).number(selected.length))})
               .andThen(() => keep(player, selected, unselected, LogType.BOUGHT)));
-          if (options.logDrawnCard === true) {
-            LogHelper.logDrawnCards(player, cards);
-          }
+          options.logDrawnCard === true && LogHelper.logDrawnCards(player, cards);
         } else if (options.logDrawnCard === true) {
           keep(player, selected, unselected, LogType.DREW_VERBOSE);
         } else {

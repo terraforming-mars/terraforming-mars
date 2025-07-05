@@ -38,7 +38,7 @@ export class ExcavateSpacesDeferred extends RunNTimes<void> {
           this.next();
           return undefined;
         });
-    });
+    }, Priority.EXCAVATE_UNDERGROUND_RESOURCE);
     return undefined;
   }
 }

@@ -13,9 +13,7 @@
     "Increase your plant production 1 step. Place an ocean. Then place a player cube on an adjacent unreserved space. Only you may place a tile there. Identify the underground resources in both spaces.": "植物産出+1. 海洋1枚配置. そこに隣接する非予定地にプレイヤーマーカーを配置. そこにタイル配置ができるのはあなただけ. 配置した海洋とプレイヤーマーカーの地下資源を調査する.",
 
     "Election Sponsorship": "選挙支援",
-    "Gain 1 corruption. Place 1 delegate in any party.": "1汚職獲得. 代議員を1名配置.",
-    "Gen 1-4": "1-4世代",
-    "Effect: For the first 4 generations, gain +2 influence": "効果：最初の4世代の間、影響力+2.",
+    "// Gain 1 corruption. Place 1 delegate in any party.": "1汚職獲得. 代議員を1名配置.",
 
     "Free Trade Port": "自由貿易港",
     "Gain 1 corruption. Place a colony.": "1汚職獲得. コロニー1つ配置.",

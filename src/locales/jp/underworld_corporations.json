@@ -9,9 +9,8 @@
     "ANUBIS SECURITIES": "",
     "Anubis Securities": "アヌビス証券",
     " Anubis Securities ": "アヌビス証券",
-    "Effect: When any player increases their TR by 1, they gain 2 M€.": "効果：TRが上昇された時、そのプレイヤーは2MC獲得.",
-    "PAYS": "支払う",
-    "At the end of the production phase, discard all your corruption and gain 6 M€ for each unit discarded. Then, each player must pay you 1 M€ per unit of corruption they have. If no one has any, gain 1 TR instead.": "産出フェイズ終了時、汚職を全て除去し、その数分6MC獲得. 全プレイヤーは汚職の数分、1MC支払う. 誰も汚職がない場合、TR+1段階.",
+    "// Effect: When any player increases their TR by 1, they gain 2 M€.": "効果：TRが上昇された時、そのプレイヤーは2MC獲得.",
+    "// At the end of the production phase, discard all your corruption and gain 6 M€ for each unit discarded. Then, each player must pay you 1 M€ per unit of corruption they have. If no one has any, gain 1 TR instead.": "産出フェイズ終了時、汚職を全て除去し、その数分6MC獲得. 全プレイヤーは汚職の数分、1MC支払う. 誰も汚職がない場合、TR+1段階.",
     "You start with 42 M€. As your first action, play a card ignoring global requirements.": "初期資源：42MC. 1アクション目：グローバルパラメーター参照の条件を無視してカード1枚をプレイ.",
 
     "ARBORIST COLLECTIVE": "",

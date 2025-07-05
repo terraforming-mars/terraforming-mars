@@ -16,8 +16,10 @@ import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
 import {
   ICardRenderCorpBoxAction,
   ICardRenderCorpBoxEffect,
+  ICardRenderCorpBoxEffectAction,
   isICardRenderCorpBoxAction,
   isICardRenderCorpBoxEffect,
+  isICardRenderCorpBoxEffectAction,
   isICardRenderEffect,
   isICardRenderItem,
   isICardRenderProductionBox,
@@ -61,14 +63,17 @@ export default Vue.extend({
     isProduction: isICardRenderProductionBox,
     isCorpBoxEffect: isICardRenderCorpBoxEffect,
     isCorpBoxAction: isICardRenderCorpBoxAction,
-    isCorpBox(item: ItemType): item is ICardRenderCorpBoxEffect | ICardRenderCorpBoxAction {
-      return this.isCorpBoxEffect(item) || this.isCorpBoxAction(item);
+    isCorpBoxEffectAction: isICardRenderCorpBoxEffectAction,
+    isCorpBox(item: ItemType): item is ICardRenderCorpBoxEffect | ICardRenderCorpBoxAction | ICardRenderCorpBoxEffectAction {
+      return this.isCorpBoxEffect(item) || this.isCorpBoxAction(item) || this.isCorpBoxEffectAction(item);
     },
     corpBoxLabel(): string {
       if (this.isCorpBoxEffect(this.componentData)) {
         return 'effect';
       } else if (this.isCorpBoxAction(this.componentData)) {
         return 'action';
+      } else if (this.isCorpBoxEffectAction(this.componentData)) {
+        return 'effect/action'
       }
       return 'n/a';
     },

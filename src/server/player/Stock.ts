@@ -1,94 +1,12 @@
 import {LawSuit} from '../cards/promo/LawSuit';
 import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
-import {Units} from '../../common/Units';
 import {CrashSiteCleanup} from '../cards/promo/CrashSiteCleanup';
 import {LogHelper} from '../LogHelper';
 import {From, isFromPlayer} from '../logs/From';
+import {BaseStock} from './StockBase';
 
-export class Stock {
-  private units: Units;
-  private player: IPlayer;
-
-  constructor(player: IPlayer, units: Units = Units.EMPTY) {
-    this.player = player;
-    this.units = Units.of(units);
-  }
-  public get megacredits() {
-    return this.units.megacredits;
-  }
-  public get steel() {
-    return this.units.steel;
-  }
-  public get titanium() {
-    return this.units.titanium;
-  }
-  public get plants() {
-    return this.units.plants;
-  }
-  public get energy() {
-    return this.units.energy;
-  }
-  public get heat() {
-    return this.units.heat;
-  }
-
-  public set megacredits(megacredits: number) {
-    this.units.megacredits = megacredits;
-  }
-
-  public set steel(steel: number) {
-    this.units.steel = steel;
-  }
-
-  public set titanium(titanium: number) {
-    this.units.titanium = titanium;
-  }
-
-  public set plants(plants: number) {
-    this.units.plants = plants;
-  }
-
-  public set energy(energy: number) {
-    this.units.energy = energy;
-  }
-
-  public set heat(heat: number) {
-    this.units.heat = heat;
-  }
-
-  public get(resource: Resource): number {
-    return this.units[resource];
-  }
-
-  public override(units: Partial<Units>) {
-    this.units = Units.of({...units});
-  }
-
-  public asUnits(): Units {
-    return {...this.units};
-  }
-
-  public has(units: Units): boolean {
-    return this.megacredits - units.megacredits >= 0 &&
-      this.steel - units.steel >= 0 &&
-      this.titanium - units.titanium >= 0 &&
-      this.plants - units.plants >= 0 &&
-      this.energy - units.energy >= 0 &&
-      this.heat - units.heat >= 0;
-  }
-
-  public deduct(
-    resource: Resource,
-    amount: number,
-    options? : {
-      log?: boolean,
-      from? : From,
-      stealing?: boolean
-    }) {
-    this.add(resource, -amount, options);
-  }
-
+export class Stock extends BaseStock {
   public add(
     resource: Resource,
     amount : number,
@@ -124,7 +42,7 @@ export class Stock {
         {player: {color: this.player.color, id: this.player.id, name: this.player.name}, resource, amount});
     }
 
-    this.units[resource] += delta;
+    this[resource] += delta;
 
     if (options?.log === true) {
       LogHelper.logUnitDelta(this.player, resource, delta, /* production*/ false, options.from, options.stealing);
@@ -141,40 +59,6 @@ export class Stock {
       this.player.resolveInsurance();
     }
   }
-
-  public addUnits(units: Units, options? : {
-    log?: boolean,
-    from? : From,
-  }) {
-    if (units.megacredits !== 0) {
-      this.add(Resource.MEGACREDITS, units.megacredits, options);
-    }
-    if (units.steel !== 0) {
-      this.add(Resource.STEEL, units.steel, options);
-    }
-    if (units.titanium !== 0) {
-      this.add(Resource.TITANIUM, units.titanium, options);
-    }
-    if (units.plants !== 0) {
-      this.add(Resource.PLANTS, units.plants, options);
-    }
-    if (units.energy !== 0) {
-      this.add(Resource.ENERGY, units.energy, options);
-    }
-    if (units.heat !== 0) {
-      this.add(Resource.HEAT, units.heat, options);
-    }
-  }
-
-  public deductUnits(units: Units) {
-    this.deduct(Resource.MEGACREDITS, units.megacredits);
-    this.deduct(Resource.STEEL, units.steel);
-    this.deduct(Resource.TITANIUM, units.titanium);
-    this.deduct(Resource.PLANTS, units.plants);
-    this.deduct(Resource.ENERGY, units.energy);
-    this.deduct(Resource.HEAT, units.heat);
-  }
-
 
   /**
    * `from` steals up to `qty` units of `resource` from this player. Or, at least as

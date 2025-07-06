@@ -317,7 +317,7 @@ export class UnderworldExpansion {
       player.production.add(Resource.PLANTS, 1, {log: true});
       break;
     case 'titaniumandplant':
-      player.stock.addUnits(Units.of({plants: 1, titanium: 1}), {log: true});
+      player.stock.adjust(Units.of({plants: 1, titanium: 1}), {log: true});
       break;
     case 'energy1production':
       player.production.add(Resource.ENERGY, 1, {log: true});

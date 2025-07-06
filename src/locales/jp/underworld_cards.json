@@ -48,7 +48,7 @@
     "Excavate 2 underground resources. Remove up to 3 plants from any player.": "2回地下資源を採掘する. 望むならプレイヤー1人から最大3植物除去.",
 
     "Earthquake Machine": "地震発生装置",
-    "Action: Spend 1 energy to excavate an underground resource on any space on Mars that has no tile on it.": "アクション：1電力を支払い、火星上の空きマスの地下資源を採掘する.",
+    "Action: // Spend 1 energy to excavate an underground resource on any space on Mars that has no tile on it.": "アクション：1電力を支払い、火星上の空きマスの地下資源を採掘する.",
     "Requires 2 science tags. Decrease any plant production 1 step": "条件：科学タグ2つ以上. プレイヤー1人の植物産出-1.",
 
     "Excavator Leasing": "貸し掘削機",
@@ -92,7 +92,7 @@
     "Requires 3 underground tokens. Increase your heat production 3 steps.": "",
 
     "Global Audit": "国際監査",
-    "Every player with 0 corruption gains 1 TR, if possible.": "汚職が0のプレイヤーは、可能であればTR+1段階.",
+    "// Every player with 0 corruption gains 1 TR, if possible.": "汚職が0のプレイヤーは、可能であればTR+1段階.",
 
     "Grey Market Exploitation": "グレーマーケットでの搾取",
     "Action: Spend 1 M€ to gain 1 standard resource.": "アクション：1MC支払い、1標準リソース獲得.",
@@ -188,8 +188,7 @@
     "RETURN 1 OF YOUR PLAYED GREEN OR BLUE CARDS TO YOUR HAND. IT MAY NOT BE A CARD THAT PLACES SPECIAL TILES OR RETURNS PLAYED CARDS TO YOUR HAND.": "プレイ済みの緑 または 青色カードを手札に戻す. 特殊タイルを置く または プレイしたカードを手札に戻すカードは選べない.",
 
     "Personal Spacecruiser": "個人用宇宙戦艦",
-    "Effect: During the production phase, if there is at least 1 fighter resource on this card, gain 2 M€ for each corruption resource you have.": "効果：生産フェイズ時、このカード上に戦闘機があれば、汚職の数分2MC獲得.",
-    "Put 1 fighter resource on this card. Gain 1 corruption.": "このカード上に1戦闘機追加. 1汚職獲得.",
+    "// Put 1 fighter resource on this card. Gain 1 corruption.": "このカード上に1戦闘機追加. 1汚職獲得.",
 
     "Planetary Rights Buyout": "惑星権買収",
     "Requires 5 corruption. Gain 7 TR": "条件：汚職5つ以上. TR+7段階.",
@@ -211,7 +210,7 @@
     "Add 1 fighter resource to this card.": "このカード上に1戦闘機追加.",
 
     "Private Resorts": "プライベート・リゾート",
-    "Requires 3 oceans. Reduce your heat production 1 step. At the end of this generation only, during the production phase, gain 12 M€ and 1 corruption.": "条件：海洋3枚以上. 温熱産出-1. 次の生産フェイズで12MCと1汚職獲得.",
+    "// Requires 3 oceans. Reduce your heat production 1 step. At the end of this generation only, during the production phase, gain 12 M€ and 1 corruption.": "条件：海洋3枚以上. 温熱産出-1. 次の生産フェイズで12MCと1汚職獲得.",
 
     "Public Spaceline": "個人用スペースライン",
     "Requires 5 space tags. This card has 2 Earth tags, 2 Jovian tags, 2 Venus tags, and 2 Mars tags.": "条件：宇宙タグ5つ以上. MC産出+2. このカードは地球タグ2つ、木星タグ2つ、金星タグ2つ、火星タグ2つとして数える.",
@@ -241,7 +240,7 @@
 
     "Soil Export": "土壌輸出",
     "Excavate an underground resource.": "地下資源を採掘する.",
-    "At the end of this generation only, during the production phase, gain 12 M€.": "次の生産フェイズで12MC獲得.",
+    "// At the end of this generation only, during the production phase, gain 12 M€.": "次の生産フェイズで12MC獲得.",
 
     "Space Privateers": "宇宙私掠船",
     "Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "アクション：このカード上に戦闘機がある場合、他の全プレイヤーから2MC盗む.",

@@ -108,9 +108,7 @@ export class UnderworldExpansion {
    * Returns |true| if it identifies a space, and |false| if it does not.
    */
   public static identify(game: IGame, space: Space, player: IPlayer | undefined): boolean {
-    if (game.gameOptions.underworldExpansion !== true) {
-      throw new Error('Underworld expansion not in this game');
-    }
+    validateUnderworldExpansion(game);
 
     if (space.undergroundResources !== undefined) {
       return false;
@@ -200,9 +198,7 @@ export class UnderworldExpansion {
 
   public static excavate(player: IPlayer, space: Space) {
     const game = player.game;
-    if (game.gameOptions.underworldExpansion !== true) {
-      throw new Error('Underworld expansion not in this game');
-    }
+    validateUnderworldExpansion(game);
 
     if (space.undergroundResources === undefined) {
       this.identify(player.game, space, player);
@@ -220,9 +216,8 @@ export class UnderworldExpansion {
     player.underworldData.tokens.push(undergroundResource);
     // space.undergroundResources = undefined; ADD THIS
 
-    // TODO(kberg): Remove this after fixing Aeron Genomics.
     for (const card of player.tableau) {
-      card.onClaim?.(player);
+      card.onClaim?.(player, /* isExcavate */ true, space);
     }
 
     // TODO(kberg): The identification is supposed to be resolved after the benefit.
@@ -237,9 +232,7 @@ export class UnderworldExpansion {
 
   public static claim(player: IPlayer, space: Space) {
     const game = player.game;
-    if (game.gameOptions.underworldExpansion !== true) {
-      throw new Error('Underworld expansion not in this game');
-    }
+    validateUnderworldExpansion(game);
 
     if (space.undergroundResources === undefined) {
       this.identify(player.game, space, player);
@@ -256,13 +249,11 @@ export class UnderworldExpansion {
   }
 
   public static claimToken(player: IPlayer, token: UndergroundResourceToken) {
-    if (player.game.gameOptions.underworldExpansion !== true) {
-      throw new Error('Underworld expansion not in this game');
-    }
+    validateUnderworldExpansion(player.game);
     this.grant(player, token);
     player.underworldData.tokens.push(token);
     for (const card of player.tableau) {
-      card.onClaim?.(player);
+      card.onClaim?.(player, false, undefined);
     }
   }
 
@@ -445,6 +436,8 @@ export class UnderworldExpansion {
 
   /** Add the set of tokens to the pool, and then shuffle the pool */
   static addTokens(game: IGame, tokens: Array<UndergroundResourceToken>) {
+    validateUnderworldExpansion(game);
+
     if (game.underworldData === undefined) {
       return;
     }
@@ -490,9 +483,10 @@ export class UnderworldExpansion {
   }
 
   public static drawExcavationToken(game: IGame): UndergroundResourceToken {
+    validateUnderworldExpansion(game);
     const token = game.underworldData?.tokens.pop();
     if (token === undefined) {
-      throw new Error('No underground token!');
+      throw new Error('No underground tokens');
     }
     return token;
   }
@@ -502,5 +496,11 @@ export class UnderworldExpansion {
     if (space.undergroundResources !== undefined) {
       UnderworldExpansion.removeUnclaimedToken(game, space);
     }
+  }
+}
+
+function validateUnderworldExpansion(game: IGame) {
+  if (game.gameOptions.underworldExpansion !== true) {
+    throw new Error('Underworld expansion not in this game');
   }
 }

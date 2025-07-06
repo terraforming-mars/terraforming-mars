@@ -2,11 +2,11 @@ import {expect} from 'chai';
 import {Keplertec} from '../../../src/server/cards/underworld/Keplertec';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {PersonalSpacecruiser} from '../../../src/server/cards/underworld/PersonalSpacecruiser';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {oneWayDifference} from '../../../src/common/utils/utils';
+import {SecurityFleet} from '../../../src/server/cards/base/SecurityFleet';
 
 describe('Keplertec', () => {
   it('play', () => {
@@ -33,20 +33,21 @@ describe('Keplertec', () => {
 
   it('action', () => {
     const card = new Keplertec();
-    const [game, player] = testGame(2);
+    const [game, player] = testGame(2, {underworldExpansion: true});
 
-    const personalSpaceCruiser = new PersonalSpacecruiser();
-    player.playedCards.push(card, personalSpaceCruiser, new Tardigrades());
+    expect(game.underworldData.tokens).has.length(89);
+    const securityFleet = new SecurityFleet();
+    player.playedCards.push(card, securityFleet, new Tardigrades());
     player.titanium = 1;
     cast(card.action(player), undefined);
     runAllActions(game);
 
     const selectCard = cast(player.popWaitingFor(), SelectCard);
-    expect(selectCard.cards).to.have.members([card, personalSpaceCruiser]);
+    expect(selectCard.cards).to.have.members([securityFleet, card]);
 
-    selectCard.cb([personalSpaceCruiser]);
+    selectCard.cb([securityFleet]);
 
-    expect(personalSpaceCruiser.resourceCount).eq(1);
+    expect(securityFleet.resourceCount).eq(1);
     expect(card.resourceCount).eq(0);
     expect(player.titanium).eq(0);
   });
@@ -59,18 +60,24 @@ describe('Keplertec', () => {
     // Preload with reliable tokens, first one is draw a card.
     game.underworldData.tokens.push('card1');
     const savedTokens = [...game.underworldData.tokens];
+    expect(game.underworldData.tokens).has.length(90);
 
     player.addResourceTo(card, 1);
     runAllActions(game);
 
     const orOptions = cast(player.popWaitingFor(), OrOptions);
 
+    expect(orOptions.options.length).eq(4);
     expect(player.cardsInHand).has.length(0);
+    expect(game.underworldData.tokens).has.length(86);
 
     orOptions.options[0].cb();
 
+    runAllActions(game);
+
     expect(player.cardsInHand).has.length(1);
     expect(player.underworldData.tokens).deep.eq(['card1']);
+    expect(game.underworldData.tokens).has.length(89);
     expect(oneWayDifference(savedTokens, game.underworldData.tokens)).deep.eq(['card1']);
 
     runAllActions(game);

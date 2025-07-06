@@ -49,7 +49,7 @@
   "Excavate 2 underground resources. Remove up to 3 plants from any player.": "Видобути 2 підземні ресурси. Видаліть до 3 рослин від будь-якого гравця.",
 
   "Earthquake Machine": "Машина землетрусу",
-  "Action: Spend 1 energy to excavate an underground resource on any space on Mars that has no tile on it.": "Дія: Витратити 1 одиницю енергії, щоб викопати підземний ресурс на будь-якому просторі на Марсі, на якому немає плитки.",
+  "Action: // Spend 1 energy to excavate an underground resource on any space on Mars that has no tile on it.": "Дія: Витратити 1 одиницю енергії, щоб викопати підземний ресурс на будь-якому просторі на Марсі, на якому немає плитки.",
   "Requires 2 science tags. Decrease any plant production 1 step": "Вимагає 2 символи науки. Зменште будь-яке виробництво рослин на 1 крок",
   "Excavator Leasing": "Оренда екскаватора",
   "Effect: The excavate standard project costs 1 M€ less for all players.": "Ефект: стандартний проект Видобування коштує на 1 M€ менше для всіх гравців.",
@@ -90,7 +90,7 @@
   "Requires 3 underground tokens. Increase your heat production 3 steps.": "",
 
   "Global Audit": "Глобальна аудиторія",
-  "Every player with 0 corruption gains 1 TR, if possible.": "Кожен гравець з 0 корупцією отримує 1 РТ, якщо це можливо.",
+  "// Every player with 0 corruption gains 1 TR, if possible.": "Кожен гравець з 0 корупцією отримує 1 РТ, якщо це можливо.",
 
   "Grey Market Exploitation": "Експлуатація сірого ринку",
   "Action: Spend 1 M€ to gain 1 standard resource.": "Дія: Витратити 1 M€, щоб отримати 1 стандартний ресурс.",
@@ -185,8 +185,7 @@
   "RETURN 1 OF YOUR PLAYED GREEN OR BLUE CARDS TO YOUR HAND. IT MAY NOT BE A CARD THAT PLACES SPECIAL TILES OR RETURNS PLAYED CARDS TO YOUR HAND.": "ПОВЕРНІТЬ 1 ЗІ СВОЇХ ЗІГРАНИХ ЗЕЛЕНИХ АБО СИНІХ КАРТ НА РУКУ. ЦЕ НЕ МОЖЕ БУТИ КАРТА, ЯКА РОЗМІЩУЄ СПЕЦІАЛЬНІ ПЛИТКИ АБО ПОВЕРТАЄ ЗІГРАНІ КАРТИ НА РУКУ.",
 
   "Personal Spacecruiser": "Особистий космічний крейсер",
-  "Effect: During the production phase, if there is at least 1 fighter resource on this card, gain 2 M€ for each corruption resource you have.": "Ефект: Під час фази виробництва, якщо на цій картці є принаймні 1 одиниця ресурсу-борця, отримайте 2 M€ за кожну одиницю корупційного ресурсу, яку у вас є.",
-  "Put 1 fighter resource on this card. Gain 1 corruption.": "Покладіть 1 одиницю ресурсу-борця на цю картку. Отримайте 1 одиницю корупції.",
+  "// Put 1 fighter resource on this card. Gain 1 corruption.": "Покладіть 1 одиницю ресурсу-борця на цю картку. Отримайте 1 одиницю корупції.",
 
   "Planetary Rights Buyout": "Викуп прав на планету",
   "Requires 5 corruption. Gain 7 TR": "Вимагає 5 одиниць корупції. Отримайте 7 РТ.",
@@ -208,7 +207,7 @@
   "Add 1 fighter resource to this card.": "Додайте 1 одиницю ресурсу-борця на цю картку.",
 
   "Private Resorts": "Приватні курорти",
-  "Requires 3 oceans. Reduce your heat production 1 step. At the end of this generation only, during the production phase, gain 12 M€ and 1 corruption.": "Вимагає 3 океани. Зменште ваше виробництво тепла на 1 крок. Тільки в кінці цього покоління, під час фази виробництва, отримайте 12 M€ і 1 одиницю корупції.",
+  "// Requires 3 oceans. Reduce your heat production 1 step. At the end of this generation only, during the production phase, gain 12 M€ and 1 corruption.": "Вимагає 3 океани. Зменште ваше виробництво тепла на 1 крок. Тільки в кінці цього покоління, під час фази виробництва, отримайте 12 M€ і 1 одиницю корупції.",
 
   "Public Spaceline": "Публічна космічна лінія",
   "Requires 5 space tags. This card has 2 Earth tags, 2 Jovian tags, 2 Venus tags, and 2 Mars tags.": "Вимагає 5 символів космосу. На цій картці є 2 символи Землі, 2 символи Юпітера, 2 символи Венери і 2 символи Марса.",
@@ -237,7 +236,7 @@
 
   "Soil Export": "Експорт ґрунту",
   "Excavate an underground resource.": "Розкопайте підземний ресурс.",
-  "At the end of this generation only, during the production phase, gain 12 M€.": "Тільки в кінці цього покоління, під час фази виробництва, отримайте 12 M€.",
+  "// At the end of this generation only, during the production phase, gain 12 M€.": "Тільки в кінці цього покоління, під час фази виробництва, отримайте 12 M€.",
 
   "Space Privateers": "Космічні пірати",
   "Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "Дія: Якщо на цій картці є принаймні 1 одиниця ресурсу-борця, вкрадіть 2 M€ у КОЖНОГО ІНШОГО гравця.",

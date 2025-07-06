@@ -62,7 +62,7 @@
 "Excavate 2 underground resources. Remove up to 3 plants from any player.": "Grabe 2 unterirdische Ressourcen aus. Entferne bis zu 3 Pflanzen von einem beliebigen Spieler.",
 
 "Earthquake Machine": "Erdbeben-Maschine",
-"Action: Spend 1 energy to excavate an underground resource on any space on Mars that has no tile on it.": "AKTION: Bazahle 1 Energie, um eine unterirdische Ressource auf einem beliebigen Feld auf dem Mars auszugraben, auf dem sich kein Plättchen befindet.",
+"Action: // Spend 1 energy to excavate an underground resource on any space on Mars that has no tile on it.": "AKTION: Bazahle 1 Energie, um eine unterirdische Ressource auf einem beliebigen Feld auf dem Mars auszugraben, auf dem sich kein Plättchen befindet.",
 "Requires 2 science tags. Decrease any plant production 1 step": "Benötigt 2 Wissenschafts-Symbole. Reduziere eine beliebige Pflanzenproduktion um 1.",
 
 "Excavator Leasing": "Bagger-Leasing",
@@ -119,7 +119,7 @@
 "Requires 3 underground tokens. Increase your heat production 3 steps.": "",
 
 "Global Audit": "Globale Prüfung",
-"Every player with 0 corruption gains 1 TR, if possible.": "Jeder Spieler mit 0 Korruption erhält 1 TW, wenn möglich.",
+"// Every player with 0 corruption gains 1 TR, if possible.": "Jeder Spieler mit 0 Korruption erhält 1 TW, wenn möglich.",
 
 "Grey Market Exploitation": "Ausbeutung des grauen Marktes",
 "Action: Spend 1 M€ to gain 1 standard resource.": "AKTION: Bezahle 1 M€, um 1 Standardressource zu erhalten.",
@@ -221,8 +221,7 @@
 "RETURN 1 OF YOUR PLAYED GREEN OR BLUE CARDS TO YOUR HAND. IT MAY NOT BE A CARD THAT PLACES SPECIAL TILES OR RETURNS PLAYED CARDS TO YOUR HAND.": "NIMM 1 DEINER AUSGESPIELTEN GRÜNEN ODER BLAUEN KARTEN AUF DIE HAND ZURÜCK. ES DARF KEINE KARTE SEIN, DIE SPEZIELLE PLÄTTCHEN PLATZIEREN ODER SELBST AUSGESPIELTE KARTEN AUF DIE HAND ZURÜCKNEHMEN.",
 
 "Personal Spacecruiser": "Persönlicher Raumkreuzer",
-"Effect: During the production phase, if there is at least 1 fighter resource on this card, gain 2 M€ for each corruption resource you have.": "EFFEKT: Wenn sich in der Produktionsphase mindestens 1 Jäger-Ressource auf dieser Karte befindet, erhältst du 2 M€ für jede Korruptionsressource, die du besitzt.",
-"Put 1 fighter resource on this card. Gain 1 corruption.": "Lege 1 Jäger-Ressource auf diese Karte. Erhalte 1 Korruption.",
+"// Put 1 fighter resource on this card. Gain 1 corruption.": "Lege 1 Jäger-Ressource auf diese Karte. Erhalte 1 Korruption.",
 
 "Planetary Rights Buyout": "Rückkauf von Planetenrechten",
 "Requires 5 corruption. Gain 7 TR": "Benötigt 5 Korruption. Erhalte 7 TW.",
@@ -244,7 +243,7 @@
 "Add 1 fighter resource to this card.": "Lege 1 Jäger-Ressource auf diese Karte.",
 
 "Private Resorts": "Privater Urlaubsort",
-"Requires 3 oceans. Reduce your heat production 1 step. At the end of this generation only, during the production phase, gain 12 M€ and 1 corruption.": "Benötigt 3 Ozeane. Verringere deine Wärme-Produktion um 1. Nur am Ende dieser Generation, während der Produktionsphase, erhalte 12 M€ und 1 Korruption.",
+"// Requires 3 oceans. Reduce your heat production 1 step. At the end of this generation only, during the production phase, gain 12 M€ and 1 corruption.": "Benötigt 3 Ozeane. Verringere deine Wärme-Produktion um 1. Nur am Ende dieser Generation, während der Produktionsphase, erhalte 12 M€ und 1 Korruption.",
 
 "Public Spaceline": "Öffentliche Raumfahrtlinie",
 "Increase your M€ production 2 steps": "Erhöhe deine M€-Produktion um 2.",
@@ -278,7 +277,7 @@
 
 "Soil Export": "Export von Böden",
 "Excavate an underground resource.": "Grabe eine unterirdische Ressource aus.",
-"At the end of this generation only, during the production phase, gain 12 M€.": "Nur am Ende dieser Generation erhalte während der Produktionsphase 12 M€.",
+"// At the end of this generation only, during the production phase, gain 12 M€.": "Nur am Ende dieser Generation erhalte während der Produktionsphase 12 M€.",
 
 "Space Privateers": "Weltraum-Freibeuter",
 "Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "AKTION: Wenn sich mindestens 1 Jäger auf dieser Karte befindet, klaue 2 M€ von JEDEM ANDEREN Spieler.",

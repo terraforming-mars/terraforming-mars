@@ -122,8 +122,9 @@ export interface ICard {
    * Optional callback when this card owner claims an underground resource.
    *
    * @param player the player performing the claim.
+   * @param space the space that was excavated.
    */
-  onClaim?(player: IPlayer): void;
+  onClaim?(player: IPlayer, isExcavate: boolean, space: Space | undefined): void;
 
   /**
    * Callback when `player` gains (or loses) production.

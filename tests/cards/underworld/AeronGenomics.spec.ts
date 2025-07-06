@@ -30,7 +30,7 @@ describe('AeronGenomics', () => {
     expect(player.steel).eq(5);
   });
 
-  it('onExcavate', () => {
+  it('onClaim', () => {
     player.corporations.push(card);
     card.resourceCount = 0;
     const spaces = UnderworldExpansion.excavatableSpaces(player);

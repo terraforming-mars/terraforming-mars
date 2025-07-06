@@ -401,23 +401,45 @@ describe('UnderworldExpansion', () => {
     expect(adjacentSpaces.map((space) => identifiedSpacesAfter.includes(space))).deep.eq([true, true, true]);
   });
 
-  it('onClaim callback', () => {
+  it('callback on excavate', () => {
     const responses: Array<string> = [];
     const space = game.board.getAvailableSpacesOnLand(player1)[0];
     space.undergroundResources = 'nothing';
 
-    player1.playedCards.push(fakeCard({
-      onClaim(player) {
-        responses.push(`from player1: ${player.id}`);
+    const card = fakeCard({
+      onClaim(player, isExcavate, space) {
+        expect(isExcavate).is.true;
+        responses.push(`from player1: ${player.id} - ${space!.id}`);
       },
-    }));
-    player2.playedCards.push(fakeCard({
-      onClaim(player) {
-        responses.push(`from player2: ${player.id}`);
-      },
-    }));
+    });
+
+    player1.playedCards.push(card);
+    player2.playedCards.push(card);
 
     UnderworldExpansion.excavate(player1, space);
+
+    expect(responses).deep.eq([
+      'from player1: p-player1-id - 03',
+    ]);
+  });
+
+  it('callback on claim', () => {
+    const responses: Array<string> = [];
+    const space = game.board.getAvailableSpacesOnLand(player1)[0];
+    space.undergroundResources = 'nothing';
+
+    const card = fakeCard({
+      onClaim(player, isExcavate, space) {
+        expect(isExcavate).is.false;
+        expect(space).is.undefined;
+        responses.push(`from player1: ${player.id}`);
+      },
+    });
+
+    player1.playedCards.push(card);
+    player2.playedCards.push(card);
+
+    UnderworldExpansion.claim(player1, space);
 
     expect(responses).deep.eq([
       'from player1: p-player1-id',

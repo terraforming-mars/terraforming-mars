@@ -43,7 +43,7 @@
 "Excavate 2 underground resources. Remove up to 3 plants from any player.": "",
 
 "Earthquake Machine": "",
-"Action: Spend 1 energy to excavate an underground resource on any space on Mars that has no tile on it.": "",
+"Action: // Spend 1 energy to excavate an underground resource on any space on Mars that has no tile on it.": "",
 "Requires 2 science tags. Decrease any plant production 1 step": "",
 
 "Excavator Leasing": "",
@@ -78,7 +78,7 @@
 "Requires 3 underground tokens. Increase your heat production 3 steps.": "",
 
 "Global Audit": "",
-"Every player with 0 corruption gains 1 TR, if possible.": "",
+"// Every player with 0 corruption gains 1 TR, if possible.": "",
 
 "Grey Market Exploitation": "",
 "Action: Spend 1 M€ to gain 1 standard resource.": "",
@@ -164,8 +164,7 @@
 "RETURN 1 OF YOUR PLAYED GREEN OR BLUE CARDS TO YOUR HAND. IT MAY NOT BE A CARD THAT PLACES SPECIAL TILES OR RETURNS PLAYED CARDS TO YOUR HAND.": "",
 
 "Personal Spacecruiser": "",
-"Effect: During the production phase, if there is at least 1 fighter resource on this card, gain 2 M€ for each corruption resource you have.": "",
-"Put 1 fighter resource on this card. Gain 1 corruption.": "",
+"// Put 1 fighter resource on this card. Gain 1 corruption.": "",
 
 "Planetary Rights Buyout": "",
 "Requires 5 corruption. Gain 7 TR": "",
@@ -187,7 +186,7 @@
 "Add 1 fighter resource to this card.": "",
 
 "Private Resorts": "",
-"Requires 3 oceans. Reduce your heat production 1 step. At the end of this generation only, during the production phase, gain 12 M€ and 1 corruption.": "",
+"// Requires 3 oceans. Reduce your heat production 1 step. At the end of this generation only, during the production phase, gain 12 M€ and 1 corruption.": "",
 
 "Public Spaceline": "",
 "Requires 5 space tags. This card has 2 Earth tags, 2 Jovian tags, 2 Venus tags, and 2 Mars tags.": "",
@@ -211,7 +210,7 @@
 
 "Soil Export": "",
 "Excavate an underground resource.": "",
-"At the end of this generation only, during the production phase, gain 12 M€.": "",
+"// At the end of this generation only, during the production phase, gain 12 M€.": "",
 
 "Space Privateers": "",
 "Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "",

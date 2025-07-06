@@ -377,7 +377,7 @@ export class Executor implements BehaviorExecutor {
     }
     if (behavior.stock) {
       const units = ctx.countUnits(behavior.stock);
-      player.stock.addUnits(units, {log: true});
+      player.stock.adjust(units, {log: true});
     }
     if (behavior.standardResource) {
       const entry = behavior.standardResource;
@@ -387,7 +387,7 @@ export class Executor implements BehaviorExecutor {
         player.defer(
           new SelectResources(message('Gain ${0} standard resources', (b) => b.number(count)), count)
             .andThen((units) => {
-              player.stock.addUnits(units, {log: true});
+              player.stock.adjust(units, {log: true});
               return undefined;
             }));
       } else {

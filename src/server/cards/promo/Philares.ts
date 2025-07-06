@@ -63,7 +63,7 @@ export class Philares extends CorporationCard implements ICorporationCard {
         cardOwner.game.log('${0} must select ${1} bonus resource(s) from ${2}\' ability', (b) => b.player(cardOwner).number(count).card(this));
         return new SelectResources(message('Gain ${0} standard resources', (b) => b.number(count)), count)
           .andThen((units) => {
-            cardOwner.stock.addUnits(units, {log: true});
+            cardOwner.stock.adjust(units, {log: true});
             return undefined;
           });
       },

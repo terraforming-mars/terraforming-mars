@@ -45,7 +45,7 @@ describe('Stock', () => {
   });
 
 
-  it('addUnits', () => {
+  it('adjust', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
 
     expect(player.stock.asUnits()).deep.eq({
@@ -64,7 +64,7 @@ describe('Stock', () => {
     player.energy = 16;
     player.heat = 15;
 
-    player.stock.addUnits(Units.of({megacredits: 10}));
+    player.stock.adjust(Units.of({megacredits: 10}));
     expect(player.stock.asUnits()).deep.eq({
       megacredits: 30,
       steel: 19,
@@ -74,7 +74,7 @@ describe('Stock', () => {
       heat: 15,
     });
 
-    player.stock.addUnits(Units.of({steel: 10}));
+    player.stock.adjust(Units.of({steel: 10}));
     expect(player.stock.asUnits()).deep.eq({
       megacredits: 30,
       steel: 29,
@@ -84,7 +84,7 @@ describe('Stock', () => {
       heat: 15,
     });
 
-    player.stock.addUnits(Units.of({titanium: 10}));
+    player.stock.adjust(Units.of({titanium: 10}));
     expect(player.stock.asUnits()).deep.eq({
       megacredits: 30,
       steel: 29,
@@ -94,7 +94,7 @@ describe('Stock', () => {
       heat: 15,
     });
 
-    player.stock.addUnits(Units.of({plants: 10}));
+    player.stock.adjust(Units.of({plants: 10}));
     expect(player.stock.asUnits()).deep.eq({
       megacredits: 30,
       steel: 29,
@@ -104,7 +104,7 @@ describe('Stock', () => {
       heat: 15,
     });
 
-    player.stock.addUnits(Units.of({energy: 10}));
+    player.stock.adjust(Units.of({energy: 10}));
     expect(player.stock.asUnits()).deep.eq({
       megacredits: 30,
       steel: 29,
@@ -114,7 +114,7 @@ describe('Stock', () => {
       heat: 15,
     });
 
-    player.stock.addUnits(Units.of({heat: 10}));
+    player.stock.adjust(Units.of({heat: 10}));
     expect(player.stock.asUnits()).deep.eq({
       megacredits: 30,
       steel: 29,

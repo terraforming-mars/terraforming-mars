@@ -622,6 +622,30 @@ describe('Executor', () => {
     expect(fake.resourceCount).eq(0);
   });
 
+  it('spend - resource on card - Reds in power', () => {
+    const behavior = {spend: {resourcesHere: 1}, tr: 1};
+    expect(executor.canExecute(behavior, player, fake)).is.false;
+    fake.resourceCount = 1;
+    expect(executor.canExecute(behavior, player, fake)).is.true;
+
+    setRulingParty(game, PartyName.REDS);
+
+    expect(executor.canExecute(behavior, player, fake)).is.false;
+
+    player.megaCredits = 3;
+
+    expect(executor.canExecute(behavior, player, fake)).is.true;
+
+    executor.execute(behavior, player, fake);
+    runAllActions(game);
+
+    expect(player.megaCredits).eq(0);
+    expect(player.terraformRating).eq(21);
+    expect(fake.resourceCount).eq(0);
+    expect(fake.resourceCount).eq(0);
+  });
+
+
   it('spend - cards', () => {
     const behavior = {spend: {cards: 2}};
     player.cardsInHand.push(fake);

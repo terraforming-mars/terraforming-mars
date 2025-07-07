@@ -76,8 +76,8 @@
     </template>
     <template v-else-if="title === CardName.STORMCRAFT_INCORPORATED">
       <div class="card-stormcraft-logo">
-      <div class="stormcraft1">STORM</div><div class="stormcraft2">CRAFT</div>
-      <div class="stormcraft3">INCOR</div><div class="stormcraft4">PORATED</div>
+        <div class="stormcraft1">STORM</div><div class="stormcraft2">CRAFT</div>
+        <div class="stormcraft3">INCOR</div><div class="stormcraft4">PORATED</div>
       </div>
     </template>
     <template v-else-if="title === CardName.THARSIS_REPUBLIC">
@@ -164,6 +164,18 @@
     <template v-else-if="title === CardName.ATHENA">
       <div class="card-athena-logo">Athena</div>
     </template>
+    <template v-else-if="title === CardName.HADESPHERE">
+      <div class="card-hadesphere-logo">
+        <div class="row1">HADESPHERE</div>
+        <div class="row2">INDUSTRIES</div>
+      </div>
+    </template>
+    <template v-else-if="title === CardName.DEMETRON_LABS">
+      <div class="card-demetron-labs-logo">
+        <div class="row1">DEMETRON</div>
+        <div class="row2">LABS</div>
+      </div>
+    </template>
     <template v-else>
       <div :class="logoClass">{{capsTitle}}</div>
     </template>
@@ -175,57 +187,66 @@
 import Vue from 'vue';
 import {CardName} from '@/common/cards/CardName';
 
-const imageOnlyLogos: Map<CardName, string> = new Map([
-  [CardName.NANOTECH_INDUSTRIES, 'card-nanotech-industries-logo'],
-  [CardName.TEMPEST_CONSULTANCY, 'card-tempest-consultancy-logo'],
-  [CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE, 'card-the-darkside-of-the-moon-syndicate-logo'],
-  [CardName.LUNA_HYPERLOOP_CORPORATION, 'card-luna-hyperloop-corporation-logo'],
-  [CardName.CRESCENT_RESEARCH_ASSOCIATION, 'card-crescent-research-association-logo'],
-  [CardName.LUNA_FIRST_INCORPORATED, 'card-luna-first-incorporated-logo'],
-  [CardName.THE_GRAND_LUNA_CAPITAL_GROUP, 'card-the-grand-luna-capital-group-logo'],
-  [CardName.INTRAGEN_SANCTUARY_HEADQUARTERS, 'card-intragen-sanctuary-headquarters-logo'],
-  [CardName.LUNA_TRADE_FEDERATION, 'card-luna-trade-federation-logo'],
-  [CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE, 'card-the-archaic-foundation-institute-logo'],
-  [CardName.POLARIS, 'card-polaris-logo'],
-  [CardName.RINGCOM, 'card-ringcom-logo'],
-  [CardName.CHIMERA, 'card-chimera-logo'],
-  [CardName.STEELARIS, 'card-steelaris-logo'],
-  [CardName.MARTIAN_INSURANCE_GROUP, 'card-martian-insurance-group-logo'],
-  [CardName.ROBIN_HAULINGS, 'card-robin-haulings-logo'],
-  [CardName.COLLEGIUM_COPERNICUS, 'card-collegium-copernicus-logo'],
-  [CardName.MARS_DIRECT, 'card-mars-direct-logo'],
-  [CardName.MARS_FRONTIER_ALLIANCE, 'card-mars-frontier-alliance-logo'],
-  [CardName.AMBIENT, 'card-ambient-logo'],
-  [CardName.SOYLENT_SEEDLING_SYSTEMS, 'card-soylent-logo'],
-  [CardName.BIO_SOL, 'card-bio-sol-logo'],
-  [CardName.MIND_SET_MARS, 'card-mind-set-mars-logo'],
-  [CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS, 'card-adhai-high-orbit-constructions-logo'],
-  [CardName.HABITAT_MARTE, 'card-habitat-marte-logo'],
-  [CardName.ODYSSEY, 'card-odyssey-logo'],
-  [CardName.AURORAI, 'card-aurorai-logo'],
-  [CardName.SPIRE, 'card-spire-logo'],
-]);
 
-const imageLogosWithNames: Map<CardName, string> = new Map([
-  [CardName.APHRODITE, 'card-aphrodite-logo'],
-  [CardName.ARKLIGHT, 'card-arklight-logo'],
-  [CardName.POSEIDON, 'card-poseidon-logo'],
-  [CardName.MORNING_STAR_INC, 'card-morning-star-logo'],
-  [CardName.PRISTAR, 'card-pristar-logo'],
-  [CardName.CREDICOR, 'card-credicor-logo'],
-  [CardName.ECOLINE, 'card-ecoline-logo'],
-  [CardName.HELION, 'card-helion-logo'],
-  [CardName.FACTORUM, 'card-factorum-logo'],
-  [CardName.PHOBOLOG, 'card-phobolog-logo'],
-  [CardName.POINT_LUNA, 'card-luna-logo'],
-  [CardName.POLYPHEMOS, 'card-polyphemos-logo'],
-  [CardName.THORGATE, 'card-thorgate-logo'],
-  [CardName.VIRON, 'card-viron-logo'],
-  [CardName.ARIDOR, 'card-aridor-logo'],
-  [CardName.TERACTOR, 'card-teractor-logo'],
-  [CardName.MIDAS, 'card-midas-logo'],
-  [CardName.MARS_MATHS, 'card-mars-maths-logo'],
-]);
+const logos: Partial<Record<CardName, 'image' | 'css' | 'bespoke'>> = {
+  [CardName.NANOTECH_INDUSTRIES]: 'image',
+  [CardName.TEMPEST_CONSULTANCY]: 'image',
+  [CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE]: 'image',
+  [CardName.LUNA_HYPERLOOP_CORPORATION]: 'image',
+  [CardName.CRESCENT_RESEARCH_ASSOCIATION]: 'image',
+  [CardName.LUNA_FIRST_INCORPORATED]: 'image',
+  [CardName.THE_GRAND_LUNA_CAPITAL_GROUP]: 'image',
+  [CardName.INTRAGEN_SANCTUARY_HEADQUARTERS]: 'image',
+  [CardName.LUNA_TRADE_FEDERATION]: 'image',
+  [CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE]: 'image',
+  [CardName.POLARIS]: 'image',
+  [CardName.RINGCOM]: 'image',
+  [CardName.CHIMERA]: 'image',
+  [CardName.STEELARIS]: 'image',
+  [CardName.MARTIAN_INSURANCE_GROUP]: 'image',
+  [CardName.ROBIN_HAULINGS]: 'image',
+  [CardName.COLLEGIUM_COPERNICUS]: 'image',
+  [CardName.MARS_DIRECT]: 'image',
+  [CardName.MARS_FRONTIER_ALLIANCE]: 'image',
+  [CardName.AMBIENT]: 'image',
+  [CardName.SOYLENT_SEEDLING_SYSTEMS]: 'image',
+  [CardName.BIO_SOL]: 'image',
+  [CardName.MIND_SET_MARS]: 'image',
+  [CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS]: 'image',
+  [CardName.HABITAT_MARTE]: 'image',
+  [CardName.ODYSSEY]: 'image',
+  [CardName.AURORAI]: 'image',
+  [CardName.SPIRE]: 'image',
+  [CardName.APHRODITE]: 'css',
+  [CardName.ARKLIGHT]: 'css',
+  [CardName.POSEIDON]: 'css',
+  [CardName.MORNING_STAR_INC]: 'css',
+  [CardName.PRISTAR]: 'css',
+  [CardName.CREDICOR]: 'css',
+  [CardName.ECOLINE]: 'css',
+  [CardName.HELION]: 'css',
+  [CardName.FACTORUM]: 'css',
+  [CardName.PHOBOLOG]: 'css',
+  [CardName.POINT_LUNA]: 'css',
+  [CardName.POLYPHEMOS]: 'css',
+  [CardName.THORGATE]: 'css',
+  [CardName.VIRON]: 'css',
+  [CardName.ARIDOR]: 'css',
+  [CardName.TERACTOR]: 'css',
+  [CardName.MIDAS]: 'css',
+  [CardName.MARS_MATHS]: 'css',
+  [CardName.HADESPHERE]: 'bespoke',
+  [CardName.DEMETRON_LABS]: 'css',
+  [CardName.JENSON_BOYLE_CO]: 'css',
+  [CardName.HENKEI_GENETICS]: 'css',
+  [CardName.ARBORIST_COLLECTIVE]: 'css',
+  [CardName.KINGDOM_OF_TAURARO]: 'css',
+  [CardName.AERON_GENOMICS]: 'css',
+  [CardName.KEPLERTEC]: 'css',
+  [CardName.VOLTAGON]: 'css',
+  [CardName.ANUBIS_SECURITIES]: 'css',
+  [CardName.HECATE_SPEDITIONS]: 'css',
+};
 
 export default Vue.extend({
   name: 'CardCorporationLogo',
@@ -240,10 +261,21 @@ export default Vue.extend({
       return CardName;
     },
     logoClass(): string {
-      return imageOnlyLogos.get(this.title) ?? imageLogosWithNames.get(this.title) ?? '';
+      const type = logos[this.title];
+      switch (type) {
+      case 'image':
+      case 'css':
+        const local = this.title.toLowerCase()
+          .replaceAll(' ', '-')
+          .replaceAll('&', '')
+          .replaceAll('--', '-');
+        return `card-${local}-logo`;
+      default:
+        return '';
+      }
     },
     capsTitle(): string {
-      return imageOnlyLogos.has(this.title) ? '' : this.title.toUpperCase();
+      return logos[this.title] === 'image' ? '' : this.title.toUpperCase();
     },
   },
 });

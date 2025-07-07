@@ -37,7 +37,6 @@ fs.watch(absolutePath, {/* recursive: true */}, (eventType, filename) => {
     debounceTimeout = setTimeout(() => {
       console.log('Running npm run make:css...');
       exec('npm run make:css', (error, stdout, stderr) => {
-        console.log('Done');
         if (error) {
           console.error(`exec error: ${error.message}`);
           return;
@@ -48,6 +47,7 @@ fs.watch(absolutePath, {/* recursive: true */}, (eventType, filename) => {
         if (stderr) {
           console.error(`stderr: ${stderr}`);
         }
+        console.log('Done');
       });
     }, DEBOUNCE_DELAY);
   }

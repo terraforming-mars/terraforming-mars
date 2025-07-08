@@ -75,7 +75,7 @@ describe('SuitableInfrastructure', () => {
 
     game.activePlayer = player.id;
     saturnSystems.onCardPlayedByAnyPlayer(player2, jovianLanterns);
-    
+
     expect(player.stock.megacredits).eq(2);
   });
 

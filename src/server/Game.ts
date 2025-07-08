@@ -124,7 +124,7 @@ export class Game implements IGame, Logger {
   private venusScaleLevel: number = constants.MIN_VENUS_SCALE;
 
   // Player data
-  public activePlayer: PlayerId;
+  public activePlayer: IPlayer;
   /** Players that are done with the game after final greenery placement. */
   private donePlayers = new Set<PlayerId>();
   private passedPlayers = new Set<PlayerId>();
@@ -211,7 +211,7 @@ export class Game implements IGame, Logger {
       throw new Error('Duplicate color found: [' + colors + ']');
     }
 
-    this.activePlayer = activePlayer;
+    this.activePlayer = this.getPlayerById(activePlayer);
     this.first = first; // To satisfy the constructor.
     this.setFirstPlayer(first);
     this.rng = rng;
@@ -438,7 +438,7 @@ export class Game implements IGame, Logger {
 
   public serialize(): SerializedGame {
     const result: SerializedGame = {
-      activePlayer: this.activePlayer,
+      activePlayer: this.activePlayer.id,
       awards: this.awards.map(toName),
       beholdTheEmperor: this.beholdTheEmperor,
       board: this.board.serialize(),
@@ -1021,12 +1021,12 @@ export class Game implements IGame, Logger {
       return;
     }
 
-    const nextPlayer = this.getPlayerAfter(this.getPlayerById(this.activePlayer));
+    const nextPlayer = this.getPlayerAfter(this.activePlayer);
     if (!this.hasPassedThisActionPhase(nextPlayer)) {
       this.startActionsForPlayer(nextPlayer);
     } else {
       // Recursively find the next player
-      this.activePlayer = nextPlayer.id;
+      this.activePlayer = nextPlayer;
       this.playerIsFinishedTakingActions();
     }
   }
@@ -1088,7 +1088,7 @@ export class Game implements IGame, Logger {
       }
 
       if (this.canPlaceGreenery(player)) {
-        this.activePlayer = player.id;
+        this.activePlayer = player;
         player.takeActionForFinalGreenery();
         return;
       } else if (player.getWaitingFor() !== undefined) {
@@ -1103,7 +1103,7 @@ export class Game implements IGame, Logger {
   }
 
   private startActionsForPlayer(player: IPlayer) {
-    this.activePlayer = player.id;
+    this.activePlayer = player;
     player.actionsTakenThisGame++;
     player.actionsTakenThisRound = 0;
 
@@ -1739,7 +1739,7 @@ export class Game implements IGame, Logger {
     game.undoCount = d.undoCount ?? 0;
     game.temperature = d.temperature;
     game.venusScaleLevel = d.venusScaleLevel;
-    game.activePlayer = d.activePlayer;
+    game.activePlayer = game.getPlayerById(d.activePlayer);
     game.draftRound = d.draftRound;
     game.initialDraftIteration = d.initialDraftIteration;
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
@@ -1779,7 +1779,7 @@ export class Game implements IGame, Logger {
       // There's nowhere that we need to go for end game.
     } else {
       // We should be in ACTION phase, let's prompt the active player for actions
-      game.getPlayerById(game.activePlayer).takeAction(/* saveBeforeTakingAction */ false);
+      game.activePlayer.takeAction(/* saveBeforeTakingAction */ false);
     }
 
     if (game.phase === Phase.END) GameLoader.getInstance().mark(game.id);
@@ -1791,7 +1791,7 @@ export class Game implements IGame, Logger {
       gameId: this.id,
       lastSaveId: this.lastSaveId,
       logAge: this.gameLog.length,
-      currentPlayer: this.activePlayer,
+      currentPlayer: this.activePlayer.id,
 
       metadata: metadata,
     };

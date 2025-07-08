@@ -57,7 +57,7 @@ export class Reset extends Handler {
       responses.notFound(req, res);
       return;
     }
-    if (player.game.activePlayer !== player.id) {
+    if (player.game.activePlayer.id !== player.id) {
       responses.badRequest(req, res, 'Not the active player');
       return;
     }

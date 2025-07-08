@@ -68,7 +68,7 @@ export interface IGame extends Logger {
   ceoDeck: CeoDeck;
   corporationDeck: CorporationDeck;
   board: MarsBoard;
-  activePlayer: PlayerId;
+  activePlayer: IPlayer;
   claimedMilestones: Array<ClaimedMilestone>;
   milestones: Array<IMilestone>;
   fundedAwards: Array<FundedAward>;

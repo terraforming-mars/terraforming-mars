@@ -106,7 +106,7 @@ describe('CommunicationCenter', () => {
 
   it('Works with data leak (checking code works)', () => {
     card.resourceCount = 2;
-    player.playedCards = [card];
+    player.playedCards.push(card);
 
     const dataLeak = new DataLeak();
     player.playCard(dataLeak);
@@ -121,7 +121,7 @@ describe('CommunicationCenter', () => {
   it('Works with Nobel Labs (checking code works)', () => {
     card.resourceCount = 2;
     const nobelLabs = new NobelLabs();
-    player.playedCards = [card, nobelLabs];
+    player.playedCards.push(card, nobelLabs);
 
     nobelLabs.action(player);
     runAllActions(game);
@@ -136,7 +136,7 @@ describe('CommunicationCenter', () => {
     // control order of operations, they get to remove data from Communication Center
     // before this player can remove them.
     card.resourceCount = 2;
-    player.playedCards = [card];
+    player.playedCards.push(card);
     const solarStorm = new SolarStorm();
     player2.playCard(solarStorm);
 

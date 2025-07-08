@@ -32,7 +32,7 @@ export class ReySkywalker extends Card implements IProjectCard {
           b.production((pb) => pb.megacredits(4)).nbsp;
           b.emptyTile().resource(CardResource.RESOURCE_CUBE).asterix();
         }),
-        description: 'Raise your M€ production 4 steps. Place a bronze cube on an empty unreserved space on Mars. No tile may be placed on that space for the rest of the game.',
+        description: 'Raise your M€ production 4 steps. Place a bronze cube on an empty unreserved space on Mars. No tile or token may be placed on that space for the rest of the game.',
       },
     });
   }

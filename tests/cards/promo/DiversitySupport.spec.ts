@@ -40,6 +40,28 @@ describe('DiversitySupport', () => {
 
     expect(card.canPlay(player)).is.true;
     card.play(player);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
+  });
+
+  it('Works with corruption', () => {
+    const fish = new Fish();
+    const dirigibles = new Dirigibles();
+    player.playedCards.push(fish, dirigibles);
+    dirigibles.resourceCount = 4;
+    fish.resourceCount = 3;
+
+    // 6 standard resources
+    player.megaCredits = 10;
+    player.steel = 2;
+    player.titanium = 1;
+    player.plants = 4;
+    player.energy = 1;
+    player.heat = 3;
+
+    expect(card.canPlay(player)).is.not.true;
+
+    player.underworldData.corruption = 1;
+
+    expect(card.canPlay(player)).is.true;
   });
 });

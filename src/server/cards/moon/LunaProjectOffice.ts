@@ -35,7 +35,7 @@ export class LunaProjectOffice extends Card implements IProjectCard {
   // Returns true when the current player has played Luna Project Office and the card is still valid
   public static isActive(player: IPlayer): boolean {
     return MoonExpansion.ifElseMoon(player.game, (moonData) => {
-      if (!player.cardIsInEffect(CardName.LUNA_PROJECT_OFFICE)) {
+      if (!player.tableau.has(CardName.LUNA_PROJECT_OFFICE)) {
         return false;
       }
       return player.game.generation <= (moonData.lunaProjectOfficeLastGeneration ?? -1);

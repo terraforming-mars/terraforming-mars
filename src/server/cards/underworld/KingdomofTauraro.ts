@@ -5,8 +5,9 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {all} from '../Options';
 import {Resource} from '../../../common/Resource';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class KingdomofTauraro extends CorporationCard {
+export class KingdomofTauraro extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.KINGDOM_OF_TAURARO,
@@ -19,7 +20,7 @@ export class KingdomofTauraro extends CorporationCard {
       },
 
       firstAction: {
-        text: 'Place a city.',
+        text: 'Place a city',
         city: {},
       },
 
@@ -35,7 +36,7 @@ export class KingdomofTauraro extends CorporationCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    for (const opponent of player.getOpponents()) {
+    for (const opponent of player.opponents) {
       opponent.production.add(Resource.MEGACREDITS, 2, {log: true});
     }
     return undefined;

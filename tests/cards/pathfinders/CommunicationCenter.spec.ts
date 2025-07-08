@@ -45,7 +45,7 @@ describe('CommunicationCenter', () => {
   });
 
   it('onCardPlayed', () => {
-    player.playedCards = [card];
+    player.playedCards.push(card);
     expect(card.resourceCount).eq(0);
 
     player.onCardPlayed(fakeCard({type: CardType.ACTIVE}));
@@ -82,7 +82,7 @@ describe('CommunicationCenter', () => {
 
   it('Works with CEOs favorite project', () => {
     card.resourceCount = 2;
-    player.playedCards = [card];
+    player.playedCards.push(card);
 
     const ceosFavoriteProject = new CEOsFavoriteProject();
     player.playCard(ceosFavoriteProject);
@@ -95,7 +95,7 @@ describe('CommunicationCenter', () => {
   });
 
   it('card.addResourceTo', () => {
-    player.playedCards = [card];
+    player.playedCards.push(card);
     card.resourceCount = 2;
     expect(player.cardsInHand).is.length(0);
     player.addResourceTo(card, 8);

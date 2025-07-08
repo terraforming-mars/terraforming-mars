@@ -5,27 +5,26 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 import {digit} from '../Options';
-import {CardResource} from '../../../common/CardResource';
 
+// TODO(kberg): Rename to Canyon Survey.
 export class GeologicalSurvey extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.GEOLOGICAL_SURVEY_UNDERWORLD,
       type: CardType.EVENT,
-      cost: 2,
-      tags: [Tag.MARS, Tag.SCIENCE],
+      cost: 4,
+      tags: [Tag.SCIENCE],
 
       behavior: {
-        addResourcesToAnyCard: {count: 1, type: CardResource.DATA},
-        underworld: {identify: 2},
+        underworld: {identify: {count: 3, claim: 1}},
       },
 
       metadata: {
         cardNumber: 'U81',
         renderData: CardRenderer.builder((b) => {
-          b.resource(CardResource.DATA).asterix().identify(2, {digit});
+          b.identify(3, {digit}).claim(1);
         }),
-        description: 'Add 1 data resource to ANOTHER card. Identify any 2 underground resources on Mars.',
+        description: 'Identify 3 underground resources. Claim 1 of them.',
       },
     });
   }

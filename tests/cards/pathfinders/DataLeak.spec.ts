@@ -17,7 +17,7 @@ describe('DataLeak', () => {
 
   it('play', () => {
     const lunarObservationPost = new LunarObservationPost();
-    player.playedCards = [lunarObservationPost];
+    player.playedCards.push(lunarObservationPost);
 
     card.play(player);
     runAllActions(game);

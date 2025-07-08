@@ -9,7 +9,7 @@ import {UnderworldExpansion} from './UnderworldExpansion';
 export class ExcavateSpaceDeferred extends DeferredAction<Space> {
   constructor(
     player: IPlayer,
-    private excavatableSpaces: Array<Space>,
+    private excavatableSpaces: ReadonlyArray<Space>,
     private title: string = 'Select space to excavate',
   ) {
     super(player, Priority.EXCAVATE_UNDERGROUND_RESOURCE);

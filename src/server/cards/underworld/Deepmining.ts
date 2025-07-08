@@ -51,7 +51,7 @@ export class Deepmining extends Card implements IProjectCard {
   }
 
   public getAvailableSpaces(player: IPlayer): ReadonlyArray<Space> {
-    return UnderworldExpansion.identifiedSpaces(player.game).filter((space) => {
+    return player.game.board.spaces.filter((space) => {
       if (space.excavator !== undefined) {
         return false;
       }
@@ -86,8 +86,7 @@ export class Deepmining extends Card implements IProjectCard {
   }
 
   protected spaceSelected(player: IPlayer, space: Space) {
-    UnderworldExpansion.excavate(player, space);
-    const token = space.undergroundResources;
+    const token = UnderworldExpansion.excavate(player, space);
     if (token === undefined) {
       throw new Error('unexpected failed deep mining');
     }

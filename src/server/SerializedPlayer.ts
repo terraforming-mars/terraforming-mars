@@ -3,7 +3,7 @@ import {CardName} from '../common/cards/CardName';
 import {Color} from '../common/Color';
 import {SerializedCard} from './SerializedCard';
 import {SerializedTimer} from '../common/SerializedTimer';
-import {UnderworldPlayerData} from './underworld/UnderworldData';
+import {SerializedUnderworldPlayerData} from './underworld/UnderworldData';
 import {AlliedParty} from '../common/turmoil/Types';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {DiscordId} from './server/auth/discord';
@@ -18,7 +18,6 @@ export interface SerializedPlayer extends DeprecatedFields{
   alliedParty: AlliedParty | undefined;
   autoPass: boolean;
   beginner: boolean;
-  canUseCorruptionAsMegacredits: boolean;
   canUseHeatAsMegaCredits: boolean;
   canUseTitaniumAsMegacredits: boolean;
   canUsePlantsAsMegaCredits: boolean;
@@ -29,7 +28,7 @@ export interface SerializedPlayer extends DeprecatedFields{
   colonyTradeOffset: number;
   colonyVictoryPoints: number;
   color: Color;
-  corporations: Array<SerializedCard>;
+  corporations?: Array<SerializedCard>;
   dealtCorporationCards: Array<CardName>;
   dealtCeoCards: Array<CardName>;
   dealtPreludeCards: Array<CardName>;
@@ -76,7 +75,7 @@ export interface SerializedPlayer extends DeprecatedFields{
   totalDelegatesPlaced: number;
   tradesThisGeneration: number;
   turmoilPolicyActionUsed: boolean;
-  underworldData: UnderworldPlayerData;
+  underworldData: SerializedUnderworldPlayerData;
   victoryPointsByGeneration: Array<number>;
   globalParameterSteps: Record<GlobalParameter, number>;
   user?: DiscordId;

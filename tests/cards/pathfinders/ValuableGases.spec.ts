@@ -33,11 +33,19 @@ describe('ValuableGases', () => {
     localShading = new LocalShading();
     // Air Raid is not a floater card
     airRaid = new AirRaid();
-    player.cardsInHand = [floatingHabs, jovianLanters, localShading, airRaid];
+  });
+
+  it('canPlay', () => {
+    expect(card.canPlay(player)).is.false;
+
+    player.cardsInHand = [localShading];
+
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', () => {
-    expect(player.getPlayableCardsForTest()).is.empty;
+    player.cardsInHand = [floatingHabs, jovianLanters, localShading, airRaid];
+    expect(player.getPlayableCards()).is.empty;
 
     card.play(player);
 

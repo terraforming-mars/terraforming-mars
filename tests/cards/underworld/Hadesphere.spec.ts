@@ -28,7 +28,7 @@ describe('Hadesphere', () => {
   });
 
   it('First action', () => {
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
 
     assertIsIdentificationAction(player, player.popWaitingFor());

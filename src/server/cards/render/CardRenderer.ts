@@ -383,6 +383,10 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
+  public claim(count: number = 1) {
+    return this.text('CLAIM').nbsp.text(count.toString());
+  }
+
   public corruption(count: number = 1, options?: ItemOptions) {
     const item = new CardRenderItem(CardRenderItemType.CORRUPTION, count, options);
     return this._appendToRow(item);

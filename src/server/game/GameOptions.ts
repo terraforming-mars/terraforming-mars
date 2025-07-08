@@ -44,6 +44,7 @@ export type GameOptions = {
   draftVariant: boolean;
   initialDraftVariant: boolean;
   preludeDraftVariant: boolean;
+  ceosDraftVariant: boolean;
   // corporationsDraft: boolean;
   startingCorporations: number;
   shuffleMapOption: boolean;
@@ -58,8 +59,7 @@ export type GameOptions = {
   customPreludes: ReadonlyArray<CardName>;
   customCeos: ReadonlyArray<CardName>;
   startingCeos: number;
-  // TODO(maserion): Remove '?' by 2025-01-01
-  startingPreludes?: number;
+  startingPreludes: number;
   /** Moon must be completed to end the game */
   requiresMoonTrackCompletion: boolean;
   /** Venus must be completed to end the game */
@@ -126,6 +126,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   pathfindersExpansion: false,
   politicalAgendasExtension: 'Standard',
   preludeDraftVariant: false,
+  ceosDraftVariant: false,
   preludeExtension: false,
   prelude2Expansion: false,
   promoCardsOption: false,

@@ -15,7 +15,6 @@ import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
 import {SerializedGame} from './SerializedGame';
 import {TerraCimmeriaBoard} from './boards/TerraCimmeriaBoard';
 import {AmazonisBoard} from './boards/AmazonisBoard';
-import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {UtopiaPlanitiaBoard} from './boards/UtopiaPlanitiaBoard';
 import {VastitasBorealisNovusBoard} from './boards/VastitasBorealisNovusBoard';
 import {TerraCimmeriaNovusBoard} from './boards/TerraCimmeriaNovusBoard';
@@ -62,11 +61,17 @@ export class GameSetup {
 
     function placeCityAndForest(game: IGame, direction: 'top' | 'bottom') {
       const board = game.board;
-      const citySpace = game.getSpaceByOffset(direction, TileType.CITY);
+
+      const cost = game.discardForCost(1, TileType.CITY);
+
+      const distance = Math.max(cost - 1, 0); // Some cards cost zero.
+      const citySpace = board.getNthAvailableLandSpace(distance, direction,
+        (space) => {
+          const adjacentSpaces = board.getAdjacentSpaces(space);
+          return adjacentSpaces.every((sp) => sp.tile?.tileType !== TileType.CITY) && // no cities nearby
+              adjacentSpaces.some((sp) => board.canPlaceTile(sp)); // can place forest nearby
+        });
       game.simpleAddTile(neutral, citySpace, {tileType: TileType.CITY});
-      if (game.gameOptions.underworldExpansion === true) {
-        UnderworldExpansion.identify(game, citySpace);
-      }
 
       const adjacentSpaces = board.getAdjacentSpaces(citySpace).filter((s) => game.board.canPlaceTile(s));
       if (adjacentSpaces.length === 0) {
@@ -76,9 +81,6 @@ export class GameSetup {
       idx = Math.max(idx-1, 0); // Some cards cost zero.
       const greenerySpace = adjacentSpaces[idx%adjacentSpaces.length];
       game.simpleAddTile(neutral, greenerySpace, {tileType: TileType.GREENERY});
-      if (game.gameOptions.underworldExpansion === true) {
-        UnderworldExpansion.identify(game, greenerySpace);
-      }
     }
 
     placeCityAndForest(game, 'top');

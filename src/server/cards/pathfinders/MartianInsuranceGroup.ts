@@ -5,9 +5,10 @@ import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class MartianInsuranceGroup extends CorporationCard {
+export class MartianInsuranceGroup extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.MARTIAN_INSURANCE_GROUP,
@@ -34,8 +35,8 @@ export class MartianInsuranceGroup extends CorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard): void {
-    if (player.isCorporation(this.name) && card.type === CardType.EVENT) {
+  public onCardPlayedForCorps(player: IPlayer, card: ICard): void {
+    if (card.type === CardType.EVENT) {
       player.production.add(Resource.MEGACREDITS, 1, {log: true});
     }
   }

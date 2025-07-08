@@ -141,12 +141,12 @@ describe('Philares', () => {
   });
 
   it('Should take initial action', () => {
-    philaresPlayer.deferInitialAction(card);
+    philaresPlayer.defer(card.initialAction(philaresPlayer));
     runAllActions(game);
 
     const action = cast(philaresPlayer.popWaitingFor(), SelectSpace);
     action.cb(action.spaces[0]);
-    expect(philaresPlayer.getTerraformRating()).to.eq(21);
+    expect(philaresPlayer.terraformRating).to.eq(21);
   });
 
   it('Can place final greenery if gains enough plants from earlier players placing adjacent greeneries', () => {

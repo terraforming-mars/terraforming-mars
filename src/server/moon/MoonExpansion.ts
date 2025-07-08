@@ -128,11 +128,11 @@ export class MoonExpansion {
       // Ideally, this should be part of game.addTile, but since it isn't it's convenient enough to
       // hard-code onTilePlaced here. I wouldn't be surprised if this introduces a problem, but for now
       // it's not a problem until it is.
-      game.getPlayers().forEach((p) => {
-        p.tableau.forEach((playedCard) => {
+      for (const p of game.players) {
+        for (const playedCard of p.tableau) {
           playedCard.onTilePlaced?.(p, player, space, BoardType.MOON);
-        });
-      });
+        }
+      }
     });
   }
 
@@ -318,7 +318,7 @@ export class MoonExpansion {
     // This is a bit hacky and uncoordinated only because this returns early when there's a moon card with LTF Privileges
     // even though the heat component below could be considered (and is, for LocalHeatTrapping.)
 
-    if (player.cardIsInEffect(CardName.LTF_PRIVILEGES) && card.tags.includes(Tag.MOON)) {
+    if (player.tableau.has(CardName.LTF_PRIVILEGES) && card.tags.includes(Tag.MOON)) {
       return Units.EMPTY;
     }
 
@@ -332,7 +332,7 @@ export class MoonExpansion {
     for (const tileBuilt of card.tilesBuilt) {
       switch (tileBuilt) {
       case TileType.MOON_HABITAT:
-        if (player.cardIsInEffect(CardName.SUBTERRANEAN_HABITATS)) {
+        if (player.tableau.has(CardName.SUBTERRANEAN_HABITATS)) {
           // Edge case: Momentum Virum is a space habitat, not a habitat
           // ON the moon.
           if (card.name !== CardName.MOMENTUM_VIRUM_HABITAT) {
@@ -342,13 +342,13 @@ export class MoonExpansion {
         break;
 
       case TileType.MOON_MINE:
-        if (player.cardIsInEffect(CardName.IMPROVED_MOON_CONCRETE)) {
+        if (player.tableau.has(CardName.IMPROVED_MOON_CONCRETE)) {
           titanium -= 1;
         }
         break;
 
       case TileType.MOON_ROAD:
-        if (player.cardIsInEffect(CardName.LUNAR_DUST_PROCESSING_PLANT)) {
+        if (player.tableau.has(CardName.LUNAR_DUST_PROCESSING_PLANT)) {
           steel = 0;
         }
       }

@@ -43,7 +43,7 @@
                             <input type="checkbox" name="prelude2" id="prelude2-checkbox" v-model="expansions.prelude2">
                             <label for="prelude2-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-prelude2"></div>
-                                <span v-i18n>Prelude 2(β)</span>
+                                <span v-i18n>Prelude 2</span>
                             </label>
 
                             <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="expansions.venus">
@@ -67,7 +67,7 @@
                             <input type="checkbox" name="promo" id="promo-checkbox" v-model="expansions.promo">
                             <label for="promo-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-promo"></div>
-                                <span v-i18n>Promos</span><span> 🆕</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
+                                <span v-i18n>Promos</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <div class="create-game-subsection-label" v-i18n>Fan-made</div>
@@ -161,14 +161,15 @@
                             <input type="checkbox" name="starwars" id="starwars-checkbox" v-model="expansions.starwars">
                             <label for="starwars-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-starwars"></div>
-                                <span v-i18n>Star Wars (β)</span><span> 🆕</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/StarWars" class="tooltip" target="_blank">&#9432;</a>
+                                <span v-i18n>Star Wars</span><span> </span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/StarWars" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <input type="checkbox" name="ceo" id="underworld-checkbox" v-model="expansions.underworld">
                             <label for="underworld-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-underworld"></div>
-                                <span v-i18n>Underworld</span><span> 🆕</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Underworld" class="tooltip" target="_blank">&#9432;</a>
+                                <span v-i18n>Underworld 2 (development)</span><span></span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Underworld" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+                            <div class="warning" v-if="expansions.underworld"><span v-i18n>Underworld is slowly migrating to Underworld 2. Rules WILL change, and things that were reliable WILL break.</span></div>
                         </div>
 
                         <div class="create-game-page-column">
@@ -343,14 +344,23 @@
                                     <span v-i18n>Initial Draft variant</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#initial-draft" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
                                 </div>
-
-                                <div v-if="initialDraft && expansions.prelude">
+                            </div>
+                            <div class="create-game-page-column-row" v-if="initialDraft">
+                              <div v-if="expansions.prelude">
                                 <input type="checkbox" name="preludeDraft" v-model="preludeDraftVariant" id="preludeDraft-checkbox">
                                 <label for="preludeDraft-checkbox">
-                                    <span v-i18n>Prelude Draft variant</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#initial-draft" class="tooltip" target="_blank">&#9432;</a>
+                                  <span v-i18n>Prelude Draft</span>
                                 </label>
-                                </div>
+                              </div>
+
+                              <div v-if="expansions.ceo">
+                                <input type="checkbox" name="ceosDraft" v-model="ceosDraftVariant" id="ceosDraft-checkbox">
+                                <label for="ceosDraft-checkbox">
+                                  <span v-i18n>CEO Draft</span>
+                                </label>
+                              </div>
                             </div>
+
                             <input type="checkbox" v-model="randomFirstPlayer" id="randomFirstPlayer-checkbox">
                             <label for="randomFirstPlayer-checkbox">
                                 <span v-i18n>Random first player</span>
@@ -643,6 +653,7 @@ export default (Vue as WithRefs<Refs>).extend({
       startingCeos: 3,
       startingPreludes: 4,
       preludeDraftVariant: undefined,
+      ceosDraftVariant: undefined,
       preludeToggled: false,
       uploading: false,
     };
@@ -662,6 +673,7 @@ export default (Vue as WithRefs<Refs>).extend({
       this.expansions.venus = value;
       this.expansions.colonies = value;
       this.expansions.turmoil = value;
+      this.expansions.prelude2 = value;
       this.expansions.promo = value;
       this.solarPhaseOption = value;
     },
@@ -676,6 +688,9 @@ export default (Vue as WithRefs<Refs>).extend({
     initialDraft(value: boolean) {
       if (value === true && this.preludeDraftVariant === undefined) {
         this.preludeDraftVariant = true;
+      }
+      if (value === true && this.ceosDraftVariant === undefined) {
+        this.ceosDraftVariant = true;
       }
     },
     prelude(value: boolean) {
@@ -1247,6 +1262,7 @@ export default (Vue as WithRefs<Refs>).extend({
         clonedGamedId,
         initialDraft,
         preludeDraftVariant: this.preludeDraftVariant ?? false,
+        ceosDraftVariant: this.ceosDraftVariant ?? false,
         randomMA,
         shuffleMapOption,
         // beginnerOption,
@@ -1283,7 +1299,7 @@ export default (Vue as WithRefs<Refs>).extend({
         }
       };
 
-      fetch(paths.API_CREATEGAME, {'method': 'PUT', 'body': dataToSend, 'headers': {'Content-Type': 'application/json'}})
+      fetch(paths.API_CREATEGAME, {'method': 'POST', 'body': dataToSend, 'headers': {'Content-Type': 'application/json'}})
         .then((response) => response.text())
         .then((text) => {
           try {

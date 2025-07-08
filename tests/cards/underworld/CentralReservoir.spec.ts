@@ -5,6 +5,7 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
+import {assertIsClaimAction} from '../../underworld/underworldAssertions';
 
 describe('CentralReservoir', () => {
   it('play', () => {
@@ -16,14 +17,25 @@ describe('CentralReservoir', () => {
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     const spaces = selectSpace.spaces;
     const space = spaces[0];
-    space.player = undefined;
-    space.undergroundResources = 'plant1';
-    space.bonus = [];
-    selectSpace.cb(space);
 
-    expect(spaces.map((s) => s.spaceType)).does.not.contain(SpaceType.OCEAN);
+    expect(space.spaceType).eq(SpaceType.LAND);
+    space.bonus = []; // Clear the bonus for a reliable test.
+
+    const adjacentSpaces = game.board.getAdjacentSpaces(space);
+
+    // Expect no adjacent space to have an underground resource.
+    expect(adjacentSpaces.some((s) => s.undergroundResources)).is.false;
+
+    selectSpace.cb(space);
     expect(space.tile?.tileType).eq(TileType.OCEAN);
-    expect(space.excavator).eq(player);
-    expect(player.plants).eq(1);
+    runAllActions(game);
+
+    expect(adjacentSpaces.some((s) => !s.undergroundResources)).is.false;
+
+    assertIsClaimAction(player, player.popWaitingFor());
+    runAllActions(game);
+    assertIsClaimAction(player, player.popWaitingFor());
+    runAllActions(game);
+    cast(player.popWaitingFor(), undefined);
   });
 });

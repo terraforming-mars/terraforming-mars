@@ -19,21 +19,21 @@ describe('TheWomb', () => {
 
     player.titanium = 1;
     player.production.override({energy: 2});
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 2;
     player.production.override({energy: 1});
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 2;
     player.production.override({energy: 2});
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
     player.production.override({energy: 2});
     player.titanium = 2;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     card.play(player);
 

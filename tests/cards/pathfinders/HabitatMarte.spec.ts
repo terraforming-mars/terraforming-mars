@@ -15,32 +15,42 @@ import {PrideoftheEarthArkship} from '../../../src/server/cards/moon/PrideoftheE
 import {FlatMarsTheory} from '../../../src/server/cards/pathfinders/FlatMarsTheory';
 
 describe('HabitatMarte', () => {
-  let card: HabitatMarte;
+  let habitatMarte: HabitatMarte;
   let player: TestPlayer;
   let game: IGame;
 
   beforeEach(() => {
-    card = new HabitatMarte();
+    habitatMarte = new HabitatMarte();
     [game, player] = testGame(1);
   });
 
   it('tag count', () => {
-    player.corporations.push(card);
+    player.playedCards.push(habitatMarte);
     expect(player.tags.count(Tag.SCIENCE, 'raw')).eq(0);
     expect(player.tags.count(Tag.SCIENCE)).eq(1);
   });
 
-  it('card cost', () => {
-    player.corporations.push(new ValleyTrust()); // -2 per science tag
-    expect(player.getCardCost(fakeCard({cost: 10, tags: [Tag.MARS]}))).eq(10);
-    expect(player.getCardCost(fakeCard({cost: 10, tags: [Tag.SCIENCE]}))).eq(8);
-    expect(player.getCardCost(fakeCard({cost: 10, tags: [Tag.MARS, Tag.MARS]}))).eq(10);
+  const getCardCostRuns = [
+    {cost: 10, includeHabitatMarte: false, tags: [Tag.MARS], expected: 10},
+    {cost: 10, includeHabitatMarte: false, tags: [Tag.SCIENCE], expected: 8},
+    {cost: 10, includeHabitatMarte: false, tags: [Tag.MARS, Tag.MARS], expected: 10},
+    {cost: 10, includeHabitatMarte: true, tags: [Tag.MARS], expected: 8},
+    {cost: 10, includeHabitatMarte: true, tags: [Tag.SCIENCE], expected: 8},
+    {cost: 10, includeHabitatMarte: true, tags: [Tag.MARS, Tag.MARS], expected: 6},
+  ] as const;
 
-    player.corporations.push(card);
-    expect(player.getCardCost(fakeCard({cost: 10, tags: [Tag.MARS]}))).eq(8);
-    expect(player.getCardCost(fakeCard({cost: 10, tags: [Tag.SCIENCE]}))).eq(8);
-    expect(player.getCardCost(fakeCard({cost: 10, tags: [Tag.MARS, Tag.MARS]}))).eq(6);
-  });
+  for (const run of getCardCostRuns) {
+    it('card cost ' + JSON.stringify(run), () => {
+      player.playedCards.push(new ValleyTrust()); // -2 per science tag
+      if (run.includeHabitatMarte) {
+        player.playedCards.push(habitatMarte);
+      }
+
+      const fake = fakeCard({cost: run.cost, tags: [...run.tags]});
+
+      expect(player.getCardCost(fake)).eq(run.expected);
+    });
+  }
 
   it('card requirements', () => {
     const fourScienceTags = fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE, Tag.SCIENCE]});
@@ -58,14 +68,14 @@ describe('HabitatMarte', () => {
 
     expect(player.canPlay(interstellar)).is.false;
 
-    player.corporations.push(card);
+    player.playedCards.push(habitatMarte);
     expect(player.canPlay(interstellar)).is.true;
 
-    player.playedCards = [fiveMarsTags];
+    player.playedCards.push(fiveMarsTags);
 
     expect(player.canPlay(interstellar)).is.true;
 
-    player.corporations = [];
+    player.playedCards.remove(habitatMarte);
 
     expect(player.canPlay(interstellar)).is.false;
   });
@@ -76,7 +86,7 @@ describe('HabitatMarte', () => {
 
     // When you play a science tag ... either add a science resource to this card, or remove a science resource from this card to draw a card.
     const olympusConference = new OlympusConference();
-    player.playedCards = [olympusConference];
+    player.playedCards.push(olympusConference);
     expect(olympusConference.resourceCount).eq(0);
 
     olympusConference.onCardPlayed(player, marsCard);
@@ -84,7 +94,7 @@ describe('HabitatMarte', () => {
     cast(player.getWaitingFor(), undefined);
     expect(olympusConference.resourceCount).eq(0);
 
-    player.corporations.push(card);
+    player.playedCards.push(habitatMarte);
     olympusConference.onCardPlayed(player, marsCard);
     runAllActions(game);
     cast(player.getWaitingFor(), undefined);
@@ -110,7 +120,7 @@ describe('HabitatMarte', () => {
     expect(card3.canPlay(player)).to.be.false;
     expect(card4.canPlay(player)).to.be.false;
 
-    player.corporations.push(card);
+    player.playedCards.push(habitatMarte);
 
     expect(card1.canPlay(player)).to.be.true;
     expect(card2.canPlay(player)).to.be.true;
@@ -125,7 +135,7 @@ describe('HabitatMarte', () => {
 
     expect(flatMarsTheory.canPlay(player)).to.be.true;
 
-    player.corporations.push(card);
+    player.playedCards.push(habitatMarte);
 
     expect(flatMarsTheory.canPlay(player)).to.be.false;
   });

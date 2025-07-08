@@ -2,33 +2,26 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
-import {CardResource} from '../../../common/CardResource';
 import {CardType} from '../../../common/cards/CardType';
-import {ActionCard} from '../ActionCard';
+import {Card} from '../Card';
 
-export class RobotMoles extends ActionCard implements IProjectCard {
+export class RobotMoles extends Card implements IProjectCard {
   constructor() {
     super({
-      type: CardType.ACTIVE,
+      type: CardType.AUTOMATED,
       name: CardName.ROBOT_MOLES,
-      cost: 6,
-      tags: [Tag.MARS],
-      victoryPoints: {resourcesHere: {}, per: 3},
-      resourceType: CardResource.DATA,
+      cost: 8,
+      tags: [Tag.BUILDING],
 
-      action: {
-        spend: {steel: 1},
-        addResources: 1,
-        underworld: {identify: 2},
+      behavior: {
+        stock: {steel: 2},
+        underworld: {identify: {count: 4, claim: 1}},
       },
 
       metadata: {
         cardNumber: 'U45',
-        renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 steel to add 1 data to this card and identify 2 underground resources.',
-            (ab) => ab.steel(1).startAction.resource(CardResource.DATA).identify(2));
-        }),
-        description: '1 VP per 3 data resources on this card.',
+        renderData: CardRenderer.builder((b) => b.steel(2).identify(4).claim(1)),
+        description: 'Gain 2 steel. Identify 4 underground resources. Claim 1 of them.',
       },
     });
   }

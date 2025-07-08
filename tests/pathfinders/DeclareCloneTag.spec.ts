@@ -84,7 +84,7 @@ describe('DeclareCloneTag', () => {
     const crewTraining = new CrewTraining(); // Has two clone tags
     const martianZoo = new MartianZoo(); // When you play an Earth tag, place an animal here
     player.cardsInHand = [crewTraining];
-    player.playedCards = [martianZoo];
+    player.playedCards.push(martianZoo);
 
     player.playCard(crewTraining);
 

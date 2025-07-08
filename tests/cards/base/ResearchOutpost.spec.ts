@@ -24,7 +24,7 @@ describe('ResearchOutpost', () => {
 
     action.cb(action.spaces[0]);
     expect(game.board.getCities()).has.length(1);
-    expect(card.getCardDiscount()).to.eq(1);
+    expect(card.getCardDiscount(player, card)).to.eq(1);
   });
 
   it('Can not play if no spaces available', () => {

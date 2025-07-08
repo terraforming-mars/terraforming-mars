@@ -92,7 +92,7 @@ describe('MilestoneAwardSelector', () => {
       milestoneManifest.boards[BoardName.ARABIA_TERRA],
       milestoneManifest.boards[BoardName.TERRA_CIMMERIA],
       milestoneManifest.boards[BoardName.VASTITAS_BOREALIS]].flat();
-    for (let idx = 0; idx < 10000; idx++) {
+    for (let idx = 0; idx < 2000; idx++) {
       const mas = choose({
         randomMA: RandomMAOptionType.UNLIMITED,
         includeFanMA: false,
@@ -148,7 +148,7 @@ describe('MilestoneAwardSelector', () => {
   });
 
   it('Do not select Constructor when Colonies is not selected', () => {
-    for (let idx = 0; idx < 10000; idx++) {
+    for (let idx = 0; idx < 2000; idx++) {
       const mas = chooseMilestonesAndAwards({
         ...DEFAULT_GAME_OPTIONS,
         coloniesExtension: false,

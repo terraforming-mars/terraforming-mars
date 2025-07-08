@@ -45,7 +45,7 @@ describe('ClassActionLawsuit', () => {
       player.playCard(card);
       runAllActions(game);
 
-      const target = game.getPlayers()[run.target];
+      const target = game.players[run.target];
       const startCorruption = run.corruption[run.target];
       const endCorruption = startCorruption - run.diff;
 

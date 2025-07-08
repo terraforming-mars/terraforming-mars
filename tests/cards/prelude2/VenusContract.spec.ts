@@ -18,13 +18,13 @@ describe('VenusContract', () => {
   });
 
   it('play', () => {
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     player.cardsInHand.length = 0;
-    player.playedCards.length = 0;
+    player.playedCards.set();
 
     card.play(player);
 
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(player.cardsInHand).length(1);
     expect(player.cardsInHand[0].tags).includes(Tag.VENUS);
   });

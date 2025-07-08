@@ -20,7 +20,7 @@ describe('KingdomofTauraro', () => {
     const card = new KingdomofTauraro();
     const [game, player] = testGame(2);
 
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
     assertPlaceCity(player, player.popWaitingFor());
   });

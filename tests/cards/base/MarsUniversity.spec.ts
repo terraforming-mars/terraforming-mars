@@ -72,7 +72,7 @@ describe('MarsUniversity', () => {
     player.cardsInHand = [new EarthOffice()];
     const olympusConference = new OlympusConference();
     const marsUniversity = new MarsUniversity();
-    player.playedCards = [marsUniversity, olympusConference, new Mine()];
+    player.playedCards.push(marsUniversity, olympusConference, new Mine());
     olympusConference.resourceCount = 1;
     const roboticWorkforce = new RoboticWorkforce();
     player.playCard(roboticWorkforce);

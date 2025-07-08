@@ -6,6 +6,7 @@ import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
+import {ICard} from '../ICard';
 
 export class OptimalAerobraking extends Card implements IProjectCard {
   constructor() {
@@ -24,10 +25,10 @@ export class OptimalAerobraking extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (card.type === CardType.EVENT && card.tags.includes(Tag.SPACE)) {
-      player.stock.add(Resource.MEGACREDITS, 3, {log: true, from: this});
-      player.stock.add(Resource.HEAT, 3, {log: true, from: this});
+      player.stock.add(Resource.MEGACREDITS, 3, {log: true, from: {card: this}});
+      player.stock.add(Resource.HEAT, 3, {log: true, from: {card: this}});
     }
   }
 }

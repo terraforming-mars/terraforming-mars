@@ -34,7 +34,7 @@ export function calculateVictoryPoints(player: IPlayer) {
   }
 
   // Victory points from TR
-  builder.setVictoryPoints('terraformRating', player.getTerraformRating());
+  builder.setVictoryPoints('terraformRating', player.terraformRating);
 
   // Victory points from awards
   giveAwards(player, builder);
@@ -69,7 +69,7 @@ export function calculateVictoryPoints(player: IPlayer) {
 
   Turmoil.ifTurmoil(player.game, (turmoil) => {
     if (includeTurmoilVP) {
-      builder.setVictoryPoints('victoryPoints', turmoil.getPlayerVictoryPoints(player), 'Turmoil Points');
+      builder.setVictoryPoints('victoryPoints', turmoil.getVictoryPoints(player), 'Turmoil Points');
     }
   });
 
@@ -121,7 +121,7 @@ function giveAwards(player: IPlayer, builder: VictoryPointsBreakdownBuilder) {
   player.game.fundedAwards.forEach((fundedAward) => {
     const award = fundedAward.award;
     const scorer = new AwardScorer(player.game, award);
-    const players: Array<IPlayer> = player.game.getPlayers().slice();
+    const players: Array<IPlayer> = player.game.players.slice();
     players.sort((p1, p2) => scorer.get(p2) - scorer.get(p1));
 
     // There is one rank 1 player

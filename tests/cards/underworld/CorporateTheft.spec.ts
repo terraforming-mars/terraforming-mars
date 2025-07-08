@@ -30,8 +30,8 @@ describe('CorporateTheft', () => {
 
       player.underworldData.corruption = run.corruption;
 
-      player.playedCards = run.cards.map(toCard);
-      opponent.playedCards = run.opponentCards.map(toCard);
+      player.playedCards.push(...run.cards.map(toCard));
+      opponent.playedCards.push(...run.opponentCards.map(toCard));
 
       expect(card.canPlay(player)).eq(run.expected);
     });
@@ -55,14 +55,14 @@ describe('CorporateTheft', () => {
 
       player.underworldData.corruption = run.player.corruption;
       opponent.underworldData.corruption = run.opponent.corruption;
-      player.playedCards = run.player.cards.map(toCard);
-      opponent.playedCards = run.opponent.cards.map(toCard);
+      player.playedCards.push(...run.player.cards.map(toCard));
+      opponent.playedCards.push(...run.opponent.cards.map(toCard));
 
       cast(card.play(player), undefined);
       runAllActions(game);
       const selectCard = cast(player.popWaitingFor(), SelectCard);
 
-      const selected = opponent.getPlayedCard(run.selection)!;
+      const selected = opponent.tableau.get(run.selection)!;
       selectCard.cb([selected]);
       runAllActions(game);
 
@@ -83,7 +83,7 @@ describe('CorporateTheft', () => {
 
         if (run.match !== undefined) {
           // const selectCard = cast(player.popWaitingFor(), SelectCard);
-          const playedCard = player.getPlayedCard(run.match)!;
+          const playedCard = player.tableau.get(run.match)!;
           // selectCard.cb([playedCard]);
           expect(playedCard.resourceCount).eq(1);
         }

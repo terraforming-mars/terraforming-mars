@@ -8,14 +8,13 @@ import {Capital} from '../../../src/server/cards/base/Capital';
 import {FoodFactory} from '../../../src/server/cards/base/FoodFactory';
 import {NoctisFarming} from '../../../src/server/cards/base/NoctisFarming';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
-import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
 import {UtopiaInvest} from '../../../src/server/cards/turmoil/UtopiaInvest';
 import {Tag} from '../../../src/common/cards/Tag';
 import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {ALL_RESOURCES, Resource} from '../../../src/common/Resource';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {runNextAction, cast, runAllActions, addCity, addOcean} from '../../TestingUtils';
+import {runNextAction, cast, runAllActions, addCity, addOcean, fakeCard} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {ICard} from '../../../src/server/cards/ICard';
 import {TestPlayer} from '../../TestPlayer';
@@ -332,7 +331,7 @@ describe('RoboticWorkforce', () => {
         expect(game.deferredActions).has.lengthOf(0);
 
         // Make sure to trigger any tag based production
-        player.playedCards.push(...Array(5).fill(new ResearchCoordination()));
+        player.playedCards.push(fakeCard({tags: [Tag.WILD, Tag.WILD, Tag.WILD, Tag.WILD, Tag.WILD]}));
 
         if (card.name === CardName.LUNAR_MINE_URBANIZATION) {
           game.moonData!.moon.spaces[4].tile = {tileType: TileType.MOON_MINE};

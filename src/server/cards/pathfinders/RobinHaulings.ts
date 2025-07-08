@@ -6,22 +6,19 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {digit} from '../Options';
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 import {MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '../../../common/constants';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class RobinHaulings extends CorporationCard {
+export class RobinHaulings extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ROBIN_HAULINGS,
       tags: [Tag.MARS, Tag.VENUS],
       startingMegaCredits: 39,
       resourceType: CardResource.FLOATER,
-
-      behavior: {
-        addResources: 1,
-      },
 
       metadata: {
         cardNumber: 'PfC17',
@@ -40,8 +37,8 @@ export class RobinHaulings extends CorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    if (player.isCorporation(CardName.ROBIN_HAULINGS) && card.tags.includes(Tag.VENUS)) {
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+    if (card.tags.includes(Tag.VENUS)) {
       player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER));
     }
   }

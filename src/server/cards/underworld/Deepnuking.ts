@@ -10,7 +10,7 @@ export class Deepnuking extends Card implements IProjectCard {
     super({
       type: CardType.EVENT,
       name: CardName.DEEPNUKING,
-      cost: 8,
+      cost: 6,
       victoryPoints: -1,
 
       behavior: {

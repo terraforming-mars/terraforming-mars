@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {ICard} from '../ICard';
 
-export class Ringcom extends CorporationCard {
+export class Ringcom extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.RINGCOM,
@@ -23,7 +23,6 @@ export class Ringcom extends CorporationCard {
         text: 'Draw 2 cards with a Jovian tag',
         drawCard: {count: 2, tag: Tag.JOVIAN},
       },
-
 
       metadata: {
         cardNumber: 'PfC4',
@@ -42,23 +41,9 @@ export class Ringcom extends CorporationCard {
     });
   }
 
-  public override bespokePlay(player: IPlayer) {
-    // Typically  onCardPlayed isn't necessary, but onCorpCardPlayed isn't called for your own corp card.
-    this.onCardPlayed(player, this);
-    return undefined;
-  }
-
-  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
-    this.onCardPlayed(player, card);
-  }
-
-  public onCardPlayed(player: IPlayer, card: ICard): void {
+  public onCardPlayedByAnyPlayer(player: IPlayer, card: ICard) {
     if (card.tags.includes(Tag.JOVIAN)) {
-      player.game.getPlayers().forEach((p) => {
-        if (p.isCorporation(this.name)) {
-          p.stock.add(Resource.TITANIUM, 1, {log: true});
-        }
-      });
+      player.stock.add(Resource.TITANIUM, 1, {log: true});
     }
   }
 }

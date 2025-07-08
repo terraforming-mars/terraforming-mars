@@ -25,15 +25,15 @@ describe('MareNectarisMine', () => {
     player.cardsInHand = [card];
     player.titanium = 0;
     player.megaCredits = card.cost;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
     player.titanium = 1;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
     player.titanium = 3;
     expect(player.production.steel).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.miningRate).eq(0);
 
     card.play(player);
@@ -41,7 +41,7 @@ describe('MareNectarisMine', () => {
 
     expect(player.titanium).eq(2);
     expect(player.production.steel).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(moonData.miningRate).eq(1);
 
     const mareNectaris = moonData.moon.getSpaceOrThrow(NamedMoonSpaces.MARE_NECTARIS);

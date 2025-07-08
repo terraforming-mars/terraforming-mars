@@ -25,10 +25,10 @@ export class BalancedDevelopment extends GlobalEvent implements IGlobalEvent {
   }
 
   public resolve(game: IGame, turmoil: Turmoil) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
+    game.playersInGenerationOrder.forEach((player) => {
       const tags = player.tags.count(Tag.MARS, 'raw');
-      const total = Math.min(tags, 5) + turmoil.getPlayerInfluence(player);
-      player.stock.add(Resource.MEGACREDITS, 2 * total, {log: true, from: this.name});
+      const total = Math.min(tags, 5) + turmoil.getInfluence(player);
+      player.stock.add(Resource.MEGACREDITS, 2 * total, {log: true, from: {globalEvent: this}});
     });
   }
 }

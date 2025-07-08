@@ -6,6 +6,7 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {assertPlaceCity} from '../../assertions';
 import {assertBuildColony} from '../../colonies/coloniesAssertions';
+import {runAllActions} from '../../TestingUtils';
 
 describe('StrategicBasePlanning', () => {
   let card: StrategicBasePlanning;
@@ -32,10 +33,12 @@ describe('StrategicBasePlanning', () => {
 
     player.megaCredits = 100;
     card.play(player);
-    expect(player.megaCredits).to.eq(97);
 
     // Expecting build colony before place city
     assertBuildColony(player, game.deferredActions.pop()!.execute());
     assertPlaceCity(player, game.deferredActions.pop()!.execute());
+
+    runAllActions(game);
+    expect(player.megaCredits).to.eq(97);
   });
 });

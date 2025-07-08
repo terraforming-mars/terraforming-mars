@@ -15,8 +15,9 @@ import {Phase} from '../../../common/Phase';
 import {all} from '../Options';
 import {Payment} from '../../../common/inputs/Payment';
 import {LogHelper} from '../../LogHelper';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class TheDarksideofTheMoonSyndicate extends CorporationCard {
+export class TheDarksideofTheMoonSyndicate extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE,
@@ -68,7 +69,7 @@ export class TheDarksideofTheMoonSyndicate extends CorporationCard {
           player.stock.add(Resource.MEGACREDITS, 2);
           LogHelper.logStealFromNeutralPlayer(player, Resource.MEGACREDITS, 2);
         } else {
-          for (const target of player.getOpponents()) {
+          for (const target of player.opponents) {
             target.attack(player, Resource.MEGACREDITS, 2, {stealing: true});
           }
         }

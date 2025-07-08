@@ -1,7 +1,7 @@
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CorporationCard} from '../corporation/CorporationCard';
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {IAward} from '../../awards/IAward';
@@ -9,8 +9,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
 import {message} from '../../logs/MessageBuilder';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Vitor extends CorporationCard {
+export class Vitor extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.VITOR,
@@ -41,7 +42,7 @@ export class Vitor extends CorporationCard {
     });
   }
 
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     const game = player.game;
 
     // Awards are disabled for 1 player games
@@ -56,10 +57,7 @@ export class Vitor extends CorporationCard {
     return freeAward;
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    if (!player.isCorporation(this.name)) {
-      return;
-    }
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
     const victoryPoints = card.metadata.victoryPoints;
     if (victoryPoints === undefined) return;
     if (typeof(victoryPoints) === 'number') {
@@ -69,6 +67,6 @@ export class Vitor extends CorporationCard {
       if (victoryPoints.points <= 0) return;
     }
 
-    player.stock.add(Resource.MEGACREDITS, 3, {log: true, from: this});
+    player.stock.add(Resource.MEGACREDITS, 3, {log: true, from: {card: this}});
   }
 }

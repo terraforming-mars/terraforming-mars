@@ -30,9 +30,9 @@ describe('CrediCor', () => {
   it('Runs onCardPlayed', () => {
     player.corporations.push(card);
     expect(player.megaCredits).to.eq(0);
-    card.onCardPlayed(player, new GiantIceAsteroid());
+    player.playCard(new GiantIceAsteroid());
     expect(player.megaCredits).to.eq(4);
-    card.onCardPlayed(player, new Bushes());
+    player.playCard(new Bushes());
     expect(player.megaCredits).to.eq(4);
   });
 });

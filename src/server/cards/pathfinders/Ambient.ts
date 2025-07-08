@@ -11,7 +11,7 @@ import {MAX_TEMPERATURE} from '../../../common/constants';
 import {Size} from '../../../common/cards/render/Size';
 import {Units} from '../../../common/Units';
 
-export class Ambient extends CorporationCard {
+export class Ambient extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.AMBIENT,
@@ -41,17 +41,8 @@ export class Ambient extends CorporationCard {
     });
   }
 
-  public override bespokePlay(player: IPlayer) {
-    this.onCorpCardPlayed(player, this);
-    return undefined;
-  }
-
-  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
-    this.onCardPlayed(player, card);
-  }
-
-  public onCardPlayed(player: IPlayer, card: ICard): void {
-    if (player.isCorporation(this.name) && card.tags.includes(Tag.VENUS)) {
+  public onCardPlayedForCorps(player: IPlayer, card: ICard): void {
+    if (card.tags.includes(Tag.VENUS)) {
       player.production.add(Resource.HEAT, 1, {log: true});
     }
   }

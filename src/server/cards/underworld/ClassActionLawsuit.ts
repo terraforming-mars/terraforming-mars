@@ -33,7 +33,7 @@ export class ClassActionLawsuit extends Card implements IProjectCard {
   }
 
   private analyzeCorruption(player: IPlayer) {
-    const players = player.game.getPlayers();
+    const players = player.game.players;
     const maxCorruption = Math.max(...players.map((p) => p.underworldData.corruption));
     const playersWithMaxCorruption = players.filter((p) => p.underworldData.corruption === maxCorruption);
     return {maxCorruption, playersWithMaxCorruption};
@@ -47,8 +47,10 @@ export class ClassActionLawsuit extends Card implements IProjectCard {
       if (analysis.playersWithMaxCorruption.length > 1) {
         return false;
       }
-      if (analysis.playersWithMaxCorruption.length === 1 && player.underworldData.corruption === analysis.maxCorruption) {
-        this.warnings.add('selfTarget');
+      if (player.game.players.length > 1) {
+        if (analysis.playersWithMaxCorruption.length === 1 && player.underworldData.corruption === analysis.maxCorruption) {
+          this.warnings.add('selfTarget');
+        }
       }
     }
     return true;
@@ -59,7 +61,7 @@ export class ClassActionLawsuit extends Card implements IProjectCard {
       return undefined;
     }
     const analysis = this.analyzeCorruption(player);
-    const players = player.game.getPlayers();
+    const players = player.game.players;
     if (analysis.playersWithMaxCorruption.length > 1) {
       return undefined;
     }
@@ -70,7 +72,7 @@ export class ClassActionLawsuit extends Card implements IProjectCard {
     const diff = analysis.maxCorruption - secondMost;
     const target = analysis.playersWithMaxCorruption[0];
     UnderworldExpansion.loseCorruption(target, diff, {log: true});
-    target.stock.deduct(Resource.MEGACREDITS, diff * 3, {log: true, from: player});
+    target.stock.deduct(Resource.MEGACREDITS, diff * 3, {log: true, from: {player: player}});
     return undefined;
   }
 }

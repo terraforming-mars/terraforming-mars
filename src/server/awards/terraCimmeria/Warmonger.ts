@@ -35,6 +35,7 @@ export class Warmonger implements IAward {
     // Base + Corp Era
     CardName.ANTS,
     CardName.ASTEROID_MINING_CONSORTIUM,
+    CardName.COMET_FOR_VENUS,
     CardName.ENERGY_TAPPING,
     CardName.FLOODING,
     CardName.GREAT_ESCARPMENT_CONSORTIUM,

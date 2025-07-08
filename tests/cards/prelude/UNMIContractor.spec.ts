@@ -8,7 +8,7 @@ describe('UNMIContractor', () => {
     const card = new UNMIContractor();
     card.play(player);
 
-    expect(player.getTerraformRating()).to.eq(17);
+    expect(player.terraformRating).to.eq(17);
     expect(player.cardsInHand).has.lengthOf(1);
   });
 });

@@ -28,7 +28,7 @@ describe('Electrician', () => {
     expect(award.getScore(player)).to.eq(2);
   });
 
-  it('Does count wild tags', () => {
+  it('Does not count wild tags', () => {
     expect(award.getScore(player)).to.eq(0);
 
     player.playedCards.push(fakeCard({tags: [Tag.POWER, Tag.BUILDING]}));

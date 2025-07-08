@@ -18,7 +18,7 @@ describe('WarOnEarth', () => {
     player2.setTerraformRating(15);
 
     card.resolve(game, turmoil);
-    expect(player.getTerraformRating()).to.eq(11);
-    expect(player2.getTerraformRating()).to.eq(14);
+    expect(player.terraformRating).to.eq(11);
+    expect(player2.terraformRating).to.eq(14);
   });
 });

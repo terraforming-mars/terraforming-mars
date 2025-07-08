@@ -31,7 +31,7 @@
   "Pharmacy": "파머시",
   "Union": "유니온",
   "Pharmacy Union": "파머시 유니온",
-  "You start with 54 M€ . Draw a Science card.": "54 M€을 가지고 게임 시작. 게임 첫 행동으로서 과학 카드 1장 획득.",
+  "You start with 54 M€. Draw a Science card.": "54 M€을 가지고 게임 시작. 게임 첫 행동으로서 과학 카드 1장 획득.",
   "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "지속 효과: 이 카드 포함, 아무나 사용한 카드의 미생물 태그 당 이 카드에 질병 자원 1개 추가 및 자신의 4 M€를 가능한 제거. / 지속 효과: 자신이 사용한 카드의 과학 태그 당 다음 중 하나 수행. [이 카드에서 질병 자원 1개 제거 및 1 TR 상승.] [만약 이 카드에 질병 자원이 없다면, 3 TR 상승 및 이 카드를 ‘사용한 사건형 카드’로서 해당 더미에 엎어둠.]",
 
   "PHIL": "필",
@@ -48,7 +48,7 @@
   "Tycho Magnetics": "",
   "You start with 42 M€. Increase your energy production 1 step.": "42 M€, 에너지 생산력 1.",
   "Action: Spend any amount of energy to draw the that many cards. Keep 1 and discard the rest.": "행동: 에너지 자원을 X개 제거하고, 카드를 X장 뽑아 그 중 1장만 획득하고 나머지는 버림.",
-  
+
   "SPLI": "스플라",
   "C": "이",
   "E": "스",

@@ -39,7 +39,7 @@ export class AncientShipyards extends Card {
 
   public action(player: IPlayer) {
     const game = player.game;
-    for (const target of player.getOpponents()) {
+    for (const target of player.opponents) {
       target.attack(player, Resource.MEGACREDITS, 2, {stealing: true});
     }
     if (game.isSoloMode()) {

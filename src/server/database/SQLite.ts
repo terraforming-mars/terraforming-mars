@@ -198,13 +198,13 @@ export class SQLite implements IDatabase {
     // Insert
     await this.runQuietly(
       'INSERT INTO games (game_id, save_id, game, players) VALUES (?, ?, ?, ?) ON CONFLICT (game_id, save_id) DO UPDATE SET game = ?',
-      [game.id, game.lastSaveId, gameJSON, game.getPlayers().length, gameJSON]);
+      [game.id, game.lastSaveId, gameJSON, game.players.length, gameJSON]);
 
     // Save IDs on the very first save for this game. That's when the incoming saveId is 0, and also
     // when the database operation was an insert. (We should figure out why multiple saves occur and
     // try to stop them. But that's for another day.)
     if (game.lastSaveId === 0) {
-      const participantIds: Array<ParticipantId> = game.getPlayers().map(toID);
+      const participantIds: Array<ParticipantId> = game.players.map(toID);
       if (game.spectatorId) participantIds.push(game.spectatorId);
       try {
         await this.storeParticipants({gameId: game.id, participantIds: participantIds});

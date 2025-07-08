@@ -87,7 +87,7 @@
       </div>
     </template>
     <template v-else-if="title === CardName.UNITED_NATIONS_MARS_INITIATIVE">
-      <span class="card-unmi-logo">UNITED<br/>NATIONS<br/>MARS<br/>INITIATIVE</span>
+      <span class="card-unmi-logo">UNITED NATIONS<br/>MARS INITIATIVE</span>
     </template>
     <template v-else-if="title === CardName.UTOPIA_INVEST">
       <div class="card-utopia-logo">

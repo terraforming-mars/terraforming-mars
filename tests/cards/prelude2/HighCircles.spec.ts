@@ -23,12 +23,12 @@ describe('HighCircles', () => {
     game.turmoil!.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
     game.turmoil!.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
     card.play(player);
-    expect(game.turmoil!.getPlayerInfluence(player)).to.eq(3);
+    expect(game.turmoil!.getInfluence(player)).to.eq(3);
   });
 
   it('TR check', () => {
     card.play(player);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
   });
 
   it('Delegates check', () => {

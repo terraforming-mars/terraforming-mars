@@ -27,7 +27,7 @@ describe('MagneticFieldGeneratorsAres', () => {
   it('Play and Adjacency Bonus Grants', () => {
     const microbeCard = fakeCard({name: 'microbeCard' as CardName, resourceType: CardResource.MICROBE});
     const dataCard = fakeCard({name: 'dataCard' as CardName, resourceType: CardResource.DATA});
-    player.playedCards = [microbeCard, dataCard];
+    player.playedCards.set(microbeCard, dataCard);
 
     player.production.add(Resource.ENERGY, 4);
     expect(card.canPlay(player)).is.true;
@@ -39,7 +39,7 @@ describe('MagneticFieldGeneratorsAres', () => {
     action.cb(space);
     expect(player.production.energy).to.eq(0);
     expect(player.production.plants).to.eq(2);
-    expect(player.getTerraformRating()).to.eq(23);
+    expect(player.terraformRating).to.eq(23);
 
     player.megaCredits = 0;
     player.plants = 0;

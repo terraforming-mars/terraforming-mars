@@ -15,7 +15,7 @@ describe('JovianLanterns', () => {
 
   it('Should play', () => {
     card.play(player);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
   });
 
   it('Can not act', () => {

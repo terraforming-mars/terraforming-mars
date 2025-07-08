@@ -6,6 +6,8 @@ import {Space} from './boards/Space';
 import {TileType, tileTypeToString} from '../common/TileType';
 import {IColony} from './colonies/IColony';
 import {Logger} from './logs/Logger';
+import {From, isFromPlayer} from './logs/From';
+import {CardResource} from '../common/CardResource';
 
 export class LogHelper {
   static logAddResource(player: IPlayer, card: ICard, qty: number = 1): void {
@@ -112,5 +114,86 @@ export class LogHelper {
 
   static logStealFromNeutralPlayer(player: IPlayer, resource: Resource, amount: number) {
     player.game.log('${0} stole ${1} ${2} from the neutral player', (b) => b.player(player).number(amount).string(resource));
+  }
+
+  static logUnitDelta(
+    player: IPlayer,
+    resource: Resource,
+    amount: number,
+    production: boolean,
+    from: From | undefined,
+    stealing = false,
+  ) {
+    if (amount === 0) {
+      // Logging zero units doesn't seem to happen
+      return;
+    }
+
+    // 1. Peter gained 5 MC
+    // 2. Peter gained 5 MC from Robotic Workforce
+    // 3. Peter gained 5 MC production
+    // 4. Peter gained 5 MC production beacuse of Robotic Workforce
+
+    // 5. Peter lost 5 MC
+    // 6. Peter lost 5 MC from Robotic Workforce
+    // 7. Peter lost 5 MC production
+    // 8. Peter lost 5 MC production beacuse of Robotic Workforce
+
+    // 9. Peter lost 1 MC production, stolen by Alan
+
+    const singular: Record<Resource, string> = {
+      [Resource.MEGACREDITS]: 'M€',
+      [Resource.STEEL]: 'steel',
+      [Resource.TITANIUM]: 'titanium',
+      [Resource.PLANTS]: 'plant',
+      [Resource.ENERGY]: 'energy',
+      [Resource.HEAT]: 'heat',
+    };
+
+    let resourceString = singular[resource];
+    if (resource === Resource.PLANTS && Math.abs(amount) > 1) {
+      resourceString = 'plants';
+    }
+    const modifier = amount > 0 ? 'gained' : 'lost';
+    let message = production ?
+      '${0} ' + modifier + ' ${1} ${2} production' :
+      '${0} ' + modifier + ' ${1} ${2}';
+      //  You   lost           1   plant production
+
+    if (from !== undefined) {
+      if (stealing === true) {
+        message = '${3} stole ${1} ${2} from ${0}';
+      } else {
+        message = message + ' because of ${3}';
+      }
+    }
+
+    player.game.log(message, (b) => {
+      b.player(player)
+        .number(Math.abs(amount))
+        .string(resourceString);
+
+      if (from !== undefined) {
+        if (isFromPlayer(from)) {
+          b.player(from.player);
+        } else if ('card' in from) {
+          if (typeof(from.card) === 'object') {
+            b.card(from.card);
+          } else {
+            b.cardName(from.card);
+          }
+        } else {
+          if (typeof(from.globalEvent) === 'object') {
+            b.globalEvent(from.globalEvent);
+          } else {
+            b.globalEventName(from.globalEvent);
+          }
+        }
+      }
+    });
+  }
+
+  public static logMoveResource(player: IPlayer, resource: CardResource, from: ICard, to: ICard) {
+    player.game.log('${0} moved 1 ${1} from ${2} to ${3}.', (b) => b.player(player).string(resource).card(from).card(to));
   }
 }

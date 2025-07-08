@@ -72,7 +72,7 @@ describe('GeologicalSurvey', () => {
     const microbeCard = new Ants();
     const animalCard = new Pets();
 
-    player.playedCards = [card, microbeCard, animalCard];
+    player.playedCards .set(card, microbeCard, animalCard);
 
     // firstSpace tile might grant resources, so resetting all the resource values.
     player.megaCredits = 0;
@@ -119,7 +119,7 @@ describe('GeologicalSurvey', () => {
       SpaceBonus.DRAW_CARD,
       SpaceBonus.HEAT,
     ],
-    player.playedCards = [card];
+    player.playedCards.set(card);
     game.addTile(player, space, {tileType: TileType.RESTRICTED_AREA});
 
     runAllActions(game);

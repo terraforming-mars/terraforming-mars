@@ -10,7 +10,7 @@ import {GainResources} from '../../deferredActions/GainResources';
 import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 
-export class SagittaFrontierServices extends CorporationCard {
+export class SagittaFrontierServices extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.SAGITTA_FRONTIER_SERVICES,
@@ -35,35 +35,23 @@ export class SagittaFrontierServices extends CorporationCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    // Gain the 4 MC for playing itself.
-    player.stock.megacredits += 4;
-    player.game.log('${0} gained 4 M€ for playing a card with no tags.', (b) => b.player(player));
-
     player.drawCard(1, {include: (c) => c.tags.length === 0 && c.type !== CardType.EVENT});
     return undefined;
   }
 
-  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard, cardOwner: IPlayer) {
-    if (player === cardOwner) {
-      this.onCardPlayed(cardOwner, card);
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+    const count = card.tags.filter((tag) => tag !== Tag.WILD).length + (card.type === CardType.EVENT ? 1 : 0);
+    if (count === 0) {
+      player.game.defer(new GainResources(player, Resource.MEGACREDITS, {count: 4}))
+        .andThen(() => {
+          player.game.log('${0} gained 4 M€ for playing ${1}, which has no tags.', (b) => b.player(player).card(card));
+        });
     }
-  }
-
-  public onCardPlayed(player: IPlayer, card: ICard) {
-    if (player.isCorporation(this.name)) {
-      const count = card.tags.filter((tag) => tag !== Tag.WILD).length + (card.type === CardType.EVENT ? 1 : 0);
-      if (count === 0) {
-        player.game.defer(new GainResources(player, Resource.MEGACREDITS, {count: 4}))
-          .andThen(() => {
-            player.game.log('${0} gained 4 M€ for playing ${1}, which has no tags.', (b) => b.player(player).card(card));
-          });
-      }
-      if (count === 1) {
-        player.game.defer(new GainResources(player, Resource.MEGACREDITS, {count: 1}))
-          .andThen(() => {
-            player.game.log('${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.', (b) => b.player(player).card(card));
-          });
-      }
+    if (count === 1) {
+      player.game.defer(new GainResources(player, Resource.MEGACREDITS, {count: 1}))
+        .andThen(() => {
+          player.game.log('${0} gained 1 M€ for playing ${1}, which has exactly 1 tag.', (b) => b.player(player).card(card));
+        });
     }
   }
 }

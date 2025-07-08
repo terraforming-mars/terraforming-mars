@@ -4,6 +4,7 @@ import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {CardRenderer} from '../render/CardRenderer';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export class AquiferTurbines extends PreludeCard {
   constructor() {
@@ -32,7 +33,9 @@ export class AquiferTurbines extends PreludeCard {
     return player.canAfford(3);
   }
   public override bespokePlay(player: IPlayer) {
-    player.game.defer(new SelectPaymentDeferred(player, 3));
+    player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits)).andThen(() => {
+      PathfindersExpansion.addToSolBank(player);
+    });
     return undefined;
   }
 }

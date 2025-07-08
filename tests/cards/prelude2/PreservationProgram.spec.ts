@@ -19,7 +19,7 @@ describe('PreservationProgram', () => {
 
   it('play', () => {
     card.play(player);
-    expect(player.getTerraformRating()).eq(25);
+    expect(player.terraformRating).eq(25);
   });
 
   it('Blocks first TR of each generation', () => {
@@ -28,24 +28,24 @@ describe('PreservationProgram', () => {
 
     game.phase = Phase.ACTION;
 
-    expect(player.getTerraformRating()).eq(25);
+    expect(player.terraformRating).eq(25);
 
     player.increaseTerraformRating();
-    expect(player.getTerraformRating()).eq(25);
+    expect(player.terraformRating).eq(25);
 
     player.increaseTerraformRating();
-    expect(player.getTerraformRating()).eq(26);
+    expect(player.terraformRating).eq(26);
 
     player.increaseTerraformRating();
-    expect(player.getTerraformRating()).eq(27);
+    expect(player.terraformRating).eq(27);
 
     forceGenerationEnd(game);
 
     player.increaseTerraformRating();
-    expect(player.getTerraformRating()).eq(27);
+    expect(player.terraformRating).eq(27);
 
     player.increaseTerraformRating();
-    expect(player.getTerraformRating()).eq(28);
+    expect(player.terraformRating).eq(28);
   });
 
   it('Allows multi TR to go partially through', () => {
@@ -54,10 +54,10 @@ describe('PreservationProgram', () => {
 
     game.phase = Phase.ACTION;
 
-    expect(player.getTerraformRating()).eq(25);
+    expect(player.terraformRating).eq(25);
 
     player.increaseTerraformRating(3);
-    expect(player.getTerraformRating()).eq(27);
+    expect(player.terraformRating).eq(27);
   });
 
   it('Compatible with Reds', () => {

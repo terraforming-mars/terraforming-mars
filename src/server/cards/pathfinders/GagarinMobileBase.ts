@@ -10,8 +10,9 @@ import {IActionCard} from '../ICard';
 import {BoardType} from '../../boards/BoardType';
 import {Board} from '../../boards/Board';
 import {message} from '../../logs/MessageBuilder';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class GagarinMobileBase extends CorporationCard implements IActionCard {
+export class GagarinMobileBase extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {
     super({
       name: CardName.GAGARIN_MOBILE_BASE,
@@ -95,7 +96,7 @@ export class GagarinMobileBase extends CorporationCard implements IActionCard {
     return undefined;
   }
 
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     return this.action(player);
   }
 

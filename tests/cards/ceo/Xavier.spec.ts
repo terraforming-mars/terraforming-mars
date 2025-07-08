@@ -14,7 +14,6 @@ import {Diversifier} from '../../../src/server/milestones/Diversifier';
 import {Tag} from '../../../src/common/cards/Tag';
 import {CommunityServices} from '../../../src/server/cards/colonies/CommunityServices';
 
-
 describe('Xavier', () => {
   let card: Xavier;
   let player: TestPlayer;
@@ -29,7 +28,7 @@ describe('Xavier', () => {
   it('Counts tags', () => {
     expect(card.tags).deep.eq([]);
 
-    card.action();
+    card.action(player);
 
     expect(card.tags).deep.eq([Tag.WILD, Tag.WILD]);
 
@@ -47,7 +46,7 @@ describe('Xavier', () => {
     expect(lightningHarvest.canPlay(player)).is.false;
 
     // Once per game, can gain 2 wild tags for the generation
-    card.action();
+    card.action(player);
     player.actionsThisGeneration.add(card.name);
 
     expect(lightningHarvest.canPlay(player)).is.true;
@@ -71,7 +70,7 @@ describe('Xavier', () => {
     player.cardsInHand.push(sulphurExports);
 
     // Once per game, can gain 2 wild tags for the generation
-    card.action();
+    card.action(player);
     player.actionsThisGeneration.add(card.name);
 
     // Resolve payment - 2 wild tags count for production effect
@@ -94,7 +93,7 @@ describe('Xavier', () => {
 
     expect(card.getCardDiscount(player, lightningHarvest)).eq(0);
     expect(card.getCardDiscount(player, geneRepair)).eq(0);
-    card.action();
+    card.action(player);
     player.actionsThisGeneration.add(card.name);
     expect(card.isDisabled).is.true;
     expect(card.getCardDiscount(player, lightningHarvest)).eq(1);
@@ -113,7 +112,7 @@ describe('Xavier', () => {
     expect(ecologist.getScore(player)).eq(0);
 
     // Once per game, can gain 2 wild tags for the generation
-    card.action();
+    card.action(player);
     player.actionsThisGeneration.add(card.name);
     expect(ecologist.getScore(player)).eq(2);
 
@@ -128,7 +127,7 @@ describe('Xavier', () => {
 
     expect(diversifier.getScore(player)).eq(0);
 
-    card.action();
+    card.action(player);
 
     expect(diversifier.getScore(player)).eq(2);
   });
@@ -136,7 +135,7 @@ describe('Xavier', () => {
   it('Stays out of the way of counting card with no tags', () => {
     expect(player.tags.numberOfCardsWithNoTags()).eq(1);
 
-    card.action();
+    card.action(player);
 
     expect(player.tags.numberOfCardsWithNoTags()).eq(1);
     expect(card.tags).deep.eq([Tag.WILD, Tag.WILD]);
@@ -155,7 +154,7 @@ describe('Xavier', () => {
 
     expect(player.production.megacredits).eq(2);
 
-    card.action();
+    card.action(player);
     communityServices.play(player);
 
     expect(player.production.megacredits).eq(4);

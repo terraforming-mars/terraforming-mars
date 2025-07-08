@@ -31,7 +31,6 @@ describe('Researcher', () => {
 
   it('Chimera Corp scenario', () => {
     player.corporations.push(new Chimera());
-    player.playedCards = [];
     expect(milestone.getScore(player)).eq(1);
 
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE]}));

@@ -45,7 +45,9 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
   }
 
   private adjustedCost(player: IPlayer) {
-    const discountFromCards = sum(player.tableau.map((card) => card.getStandardProjectDiscount?.(player, this) ?? 0));
+    const discountFromCards =
+      sum(player.tableau.asArray()
+        .map((card) => card.getStandardProjectDiscount?.(player, this) ?? 0));
     const discount = discountFromCards + this.discount(player);
     const adjusted = Math.max(0, this.cost - discount);
     return adjusted;
@@ -97,9 +99,9 @@ export abstract class StandardProjectCard extends Card implements IStandardProje
         canUseSteel: canPayWith.steel,
         canUseTitanium: canPayWith.titanium,
         canUseSeeds: canPayWith.seeds,
-        canUseAuroraiData: player.isCorporation(CardName.AURORAI),
-        canUseSpireScience: player.isCorporation(CardName.SPIRE),
-        canUseAsteroids: canPayWith.kuiperAsteroids && player.isCorporation(CardName.KUIPER_COOPERATIVE),
+        canUseAuroraiData: player.tableau.has(CardName.AURORAI),
+        canUseSpireScience: player.tableau.has(CardName.SPIRE),
+        canUseAsteroids: canPayWith.kuiperAsteroids && player.tableau.has(CardName.KUIPER_COOPERATIVE),
         title: message('Select how to pay for the ${0} standard project', (b) => b.cardName(this.name)),
       })).andThen(() => {
       this.projectPlayed(player);

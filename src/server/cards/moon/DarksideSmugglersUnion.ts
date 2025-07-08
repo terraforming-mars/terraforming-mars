@@ -55,7 +55,7 @@ export class TradeWithDarksideSmugglersUnion implements IColonyTrader {
   constructor(private player: IPlayer) {}
 
   public canUse() {
-    return this.player.getPlayedCard(CardName.DARKSIDE_SMUGGLERS_UNION) !== undefined &&
+    return this.player.tableau.get(CardName.DARKSIDE_SMUGGLERS_UNION) !== undefined &&
       !this.player.actionsThisGeneration.has(CardName.DARKSIDE_SMUGGLERS_UNION);
   }
 

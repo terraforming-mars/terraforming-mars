@@ -28,7 +28,7 @@ describe('HecateSpeditions', () => {
   });
 
   it('initial action', () => {
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
     assertBuildColony(player, player.popWaitingFor());
   });

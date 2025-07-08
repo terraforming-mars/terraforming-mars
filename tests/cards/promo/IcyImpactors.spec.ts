@@ -48,7 +48,7 @@ describe('IcyImpactors', () => {
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     selectSpace.cb(selectSpace.spaces[0]);
     expect(selectSpace.spaces[0].tile?.tileType).eq(TileType.OCEAN);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
     expect(card.resourceCount).eq(0);
   });
 
@@ -73,7 +73,7 @@ describe('IcyImpactors', () => {
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     selectSpace.cb(selectSpace.spaces[0]);
     expect(selectSpace.spaces[0].tile?.tileType).eq(TileType.OCEAN);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
     expect(card.resourceCount).eq(0);
   });
 
@@ -89,6 +89,6 @@ describe('IcyImpactors', () => {
     runAllActions(game);
     expect(player.game.deferredActions).has.lengthOf(0);
     expect(card.resourceCount).to.eq(0);
-    expect(player.getTerraformRating()).to.eq(20);
+    expect(player.terraformRating).to.eq(20);
   });
 });

@@ -130,7 +130,7 @@ export abstract class Board {
     return this.spaces.find((space) => space.tile?.card === cardName);
   }
 
-  public getSpaces(spaceType: SpaceType, _player: IPlayer): ReadonlyArray<Space> {
+  public getSpaces(spaceType: SpaceType): ReadonlyArray<Space> {
     return this.spaces.filter((space) => space.spaceType === spaceType);
   }
 
@@ -216,7 +216,7 @@ export abstract class Board {
 
   public getAvailableSpacesOnLand(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
     // Does this also apply to cove spaces?
-    const landSpaces = this.getSpaces(SpaceType.LAND, player).filter((space) => {
+    const landSpaces = this.getSpaces(SpaceType.LAND).filter((space) => {
       // A space is available if it doesn't have a player marker on it, or it belongs to |player|
       if (space.player !== undefined && space.player !== player) {
         return false;
@@ -240,7 +240,6 @@ export abstract class Board {
     });
     return landSpaces;
   }
-
 
   // |distance| represents the number of eligible spaces from the top left (or bottom right)
   // to count. So distance 0 means the first available space.

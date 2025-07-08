@@ -6,10 +6,10 @@ import {cast} from '../../TestingUtils';
 describe('UndergroundAmusementPark', () => {
   it('canPlay', () => {
     const card = new UndergroundAmusementPark();
-    const [game, player] = testGame(2);
+    const [/* game */, player] = testGame(2);
 
     expect(card.canPlay(player)).is.false;
-    game.board.getAvailableSpacesOnLand(player)[0].excavator = player;
+    player.underworldData.tokens.push('nothing');
     expect(card.canPlay(player)).is.true;
   });
 

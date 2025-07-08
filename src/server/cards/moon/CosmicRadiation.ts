@@ -34,7 +34,7 @@ export class CosmicRadiation extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
     const mines = MoonExpansion.spaces(game, TileType.MOON_MINE);
-    game.getPlayersInGenerationOrder().forEach((mineTileOwner) => {
+    game.playersInGenerationOrder.forEach((mineTileOwner) => {
       const owned = mines.filter((mine) => mine.player?.id === mineTileOwner.id).length;
       if (owned > 0) {
         const bill = owned * 4;

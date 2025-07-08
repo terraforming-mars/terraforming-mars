@@ -2,6 +2,9 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
+import {IPlayer} from '../../IPlayer';
+import {IdentifySpacesDeferred} from '../../underworld/IdentifySpacesDeferred';
+import {ExcavateSpacesDeferred} from '../../underworld/ExcavateSpacesDeferred';
 
 export class TunnelingOperation extends PreludeCard {
   constructor() {
@@ -10,7 +13,6 @@ export class TunnelingOperation extends PreludeCard {
       tags: [Tag.BUILDING],
 
       behavior: {
-        underworld: {identify: 1, excavate: 2},
         production: {steel: 2},
       },
 
@@ -23,5 +25,11 @@ export class TunnelingOperation extends PreludeCard {
       },
     });
   }
-}
 
+  public override bespokePlay(player: IPlayer) {
+    player.game.defer(new IdentifySpacesDeferred(player, 1)).andThen(() => {
+      player.game.defer(new ExcavateSpacesDeferred(player, 2));
+    });
+    return undefined;
+  }
+}

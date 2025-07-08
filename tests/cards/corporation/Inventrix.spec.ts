@@ -22,7 +22,7 @@ describe('Inventrix', () => {
   });
 
   it('Should take initial action', () => {
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
     expect(player.cardsInHand).has.lengthOf(3);
   });

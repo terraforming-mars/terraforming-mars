@@ -21,7 +21,7 @@ describe('Airliners', () => {
     const jovianLanterns = new JovianLanterns();
     const searchForLife = new SearchForLife();
 
-    player.playedCards = [jovianLanterns, searchForLife];
+    player.playedCards.push(jovianLanterns, searchForLife);
 
     player.megaCredits = card.cost;
 
@@ -49,7 +49,7 @@ describe('Airliners', () => {
     const jovianLanterns = new JovianLanterns();
     const searchForLife = new SearchForLife();
 
-    player.playedCards = [jovianLanterns, searchForLife];
+    player.playedCards.push(jovianLanterns, searchForLife);
 
     const action = card.play(player);
 

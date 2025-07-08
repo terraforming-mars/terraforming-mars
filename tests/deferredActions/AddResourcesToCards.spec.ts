@@ -27,20 +27,20 @@ describe('AddResourcesToCards', () => {
   });
 
   it('0 resources no action', () => {
-    player.playedCards = [ghgProducingBacteria];
+    player.playedCards.push(ghgProducingBacteria);
     const action = new AddResourcesToCards(player, CardResource.MICROBE, 0);
     expect(action.execute()).is.undefined;
   });
 
   it('one card autofill', () => {
-    player.playedCards = [ghgProducingBacteria];
+    player.playedCards.push(ghgProducingBacteria);
     const options = new AddResourcesToCards(player, CardResource.MICROBE, 5).execute();
     expect(options).is.undefined;
     expect(ghgProducingBacteria.resourceCount).eq(5);
   });
 
   it('many microbe cards', () => {
-    player.playedCards = [ghgProducingBacteria, tardigrades, ants];
+    player.playedCards.push(ghgProducingBacteria, tardigrades, ants);
 
     const options = cast(new AddResourcesToCards(player, CardResource.MICROBE, 9).execute(), AndOptions);
 
@@ -56,7 +56,7 @@ describe('AddResourcesToCards', () => {
   });
 
   it('many microbe cards, wrong input', () => {
-    player.playedCards = [ghgProducingBacteria, tardigrades, ants];
+    player.playedCards.push(ghgProducingBacteria, tardigrades, ants);
 
     const options = cast(new AddResourcesToCards(player, CardResource.MICROBE, 9).execute(), AndOptions);
 

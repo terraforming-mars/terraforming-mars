@@ -25,17 +25,17 @@ describe('Incite', () => {
   });
 
   it('Starts with +1 influence', () => {
-    expect(game.turmoil!.getPlayerInfluence(player)).to.eq(1);
+    expect(game.turmoil!.getInfluence(player)).to.eq(1);
   });
 
   it('Works with Event Analysts', () => {
     const eventAnalysts = new EventAnalysts();
     eventAnalysts.play(player);
-    expect(game.turmoil!.getPlayerInfluence(player)).to.eq(2);
+    expect(game.turmoil!.getInfluence(player)).to.eq(2);
   });
 
   it('Can perform initial action', () => {
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
 
     const sendDelegate = cast(player.getWaitingFor(), SelectParty);

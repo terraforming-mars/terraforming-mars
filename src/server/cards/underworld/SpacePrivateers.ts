@@ -63,7 +63,7 @@ export class SpacePrivateers extends Card implements IProjectCard, IActionCard {
     // TODO(kberg): devise a Mons Insurance solution.
     let blocked = false;
 
-    const targets = player.getOpponents();
+    const targets = player.opponents;
     const waitingFor = new Set(targets);
     for (const target of targets) {
       target.maybeBlockAttack(player, 'Lose 2 M€', (proceed) => {

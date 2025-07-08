@@ -6,7 +6,7 @@ import {ICard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class PointLuna extends CorporationCard {
+export class PointLuna extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.POINT_LUNA,
@@ -15,7 +15,6 @@ export class PointLuna extends CorporationCard {
 
       behavior: {
         production: {titanium: 1},
-        drawCard: 1,
       },
 
       metadata: {
@@ -33,16 +32,11 @@ export class PointLuna extends CorporationCard {
       },
     });
   }
-  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
-    return this.onCardPlayed(player, card);
-  }
 
-  public onCardPlayed(player: IPlayer, card: ICard) {
-    if (player.isCorporation(this.name)) {
-      const tagCount = player.tags.cardTagCount(card, Tag.EARTH);
-      if (tagCount > 0) {
-        player.drawCard(tagCount);
-      }
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+    const tagCount = player.tags.cardTagCount(card, Tag.EARTH);
+    if (tagCount > 0) {
+      player.drawCard(tagCount);
     }
   }
 }

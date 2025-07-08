@@ -11,8 +11,9 @@ import {Priority} from '../../deferredActions/Priority';
 import {Size} from '../../../common/cards/render/Size';
 import {Board} from '../../boards/Board';
 import {Phase} from '../../../common/Phase';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Polaris extends CorporationCard {
+export class Polaris extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.POLARIS,

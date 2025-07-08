@@ -16,16 +16,16 @@ export class UndergroundRailway extends Card implements IProjectCard {
 
       behavior: {
         production: {energy: -1},
-        tr: {underworld: {excavationMarkers: {}}, per: 4},
+        tr: {underworld: {undergroundTokens: {}}, per: 4},
       },
 
       metadata: {
         cardNumber: 'U04',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.minus().energy(1)).br;
-          b.tr(1).slash().excavate(4, {digit});
+          b.tr(1).slash().undergroundResources(4, {digit});
         }),
-        description: 'Decrease your energy production 1 step. Gain 1 TR for every 4 excavation markers you own.',
+        description: 'Decrease your energy production 1 step. Gain 1 TR for every 4 underground tokens you have.',
       },
     });
   }

@@ -34,7 +34,7 @@ export class PartyHooks {
     }
     return Turmoil.ifTurmoilElse(player.game, (turmoil) => {
       // Hook for CEO Zan's effect (Skip all Reds Policy effects)
-      if (partyName === PartyName.REDS && player.cardIsInEffect(CardName.ZAN)) {
+      if (partyName === PartyName.REDS && player.tableau.has(CardName.ZAN)) {
         return false;
       }
 

@@ -4,8 +4,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IPlayer} from '../../IPlayer';
 import {IStandardProjectCard} from '../IStandardProjectCard';
+import {ICorporationCard} from './ICorporationCard';
 
-export class Thorgate extends CorporationCard {
+export class Thorgate extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.THORGATE,

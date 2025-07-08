@@ -21,7 +21,7 @@ describe('StratosphericExpedition', () => {
   it('Should play', () => {
     const jovianLanterns = new JovianLanterns();
     const searchForLife = new SearchForLife();
-    player.playedCards = [jovianLanterns, searchForLife];
+    player.playedCards.push(jovianLanterns, searchForLife);
     const action = card.play(player);
 
     runAllActions(game);

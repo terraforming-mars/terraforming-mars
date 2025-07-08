@@ -6,7 +6,7 @@
   "Spend 1 steel and 1 energy to gain 3 plants.": "Bruk 1 stål og 1 energi for å få 3 planter.",
   "Requires -18° C or warmer.": "Krever -18° C eller varmere.",
 
-  "Anthozoa": "Anthozoa",
+  "Anthozoa": "",
   "Spend 1 plant to add an animal to this card.": "Bruk 1 plante for å legge til et dyr på dette kortet.",
   "Requires 3 oceans on Mars. 1 VP per 2 animals on this card.": "Krever 3 hav på Mars. 1 SP per 2 dyr på dette kortet.",
 
@@ -115,7 +115,7 @@
   "Interplanetary Transport": "Interplanetarisk transport",
   "(Increase your M€ production 1 step for every offworld city tile.)": "Øk M€-produksjonen din med 1 trinn for hvert byområde utenfor verden.",
 
-  "Kickstarter": "Kickstarter",
+  "Kickstarter": "",
   "(Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 3 steps in total.)": "Velg et planetsymbol. Dette kortet teller som om det har 1 av det symbolet. Øk det tilsvarende planetsporet med 3 trinn totalt.",
 
   "Last Resort Ingenuity": "Genistrek i siste liten",
@@ -220,7 +220,7 @@
   "Solar Storm": "Solstorm",
   "(Every player loses 2 plants. Remove up to 3 data from any player. Raise your heat production 1 step. Raise the temperature 1 step.)": "(Alle spillere mister 2 planter. Fjern opptil 3 data fra en spiller. Øk varmeproduksjonen din med 1 trinn. Øk temperaturen 1 trinn.)",
 
-  "Solarpedia": "Solarpedia",
+  "Solarpedia": "",
   "(Action: Add 2 data to ANY card.)": "(Handling: Legg til 2 data på et valgfritt kort.)",
   "(Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.)": "(Krever 1 Venus-, Jord-, Mars- og Jupitersymbol. Legg til 2 data på et valgfritt kort. 1 SP per 6 data her.)",
 

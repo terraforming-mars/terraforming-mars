@@ -23,31 +23,31 @@ describe('DarksideMiningSyndicate', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
     expect(player.production.titanium).eq(0);
     expect(moonData.miningRate).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     card.play(player);
     expect(moonData.miningRate).eq(1);
 
     expect(player.production.titanium).eq(2);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
 
     card.play(player);
     expect(moonData.miningRate).eq(2);
 
     expect(player.production.titanium).eq(4);
-    expect(player.getTerraformRating()).eq(16);
+    expect(player.terraformRating).eq(16);
 
     card.play(player);
     expect(moonData.miningRate).eq(3);
 
     expect(player.production.titanium).eq(5);
-    expect(player.getTerraformRating()).eq(17);
+    expect(player.terraformRating).eq(17);
   });
 
   const redsRuns = [

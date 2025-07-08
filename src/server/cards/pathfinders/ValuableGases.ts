@@ -24,28 +24,29 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
       metadata: {
         cardNumber: 'PfP02',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(10).br;
-          b.text('play', Size.MEDIUM, true).cards(1, {secondaryTag: AltSecondaryTag.FLOATER}).asterix().br;
+          b.megacredits(10);
+          b.text('play', Size.MEDIUM, true).cards(1, {secondaryTag: AltSecondaryTag.FLOATER}).asterix().br.projectRequirements().br;
           b.resource(CardResource.FLOATER, {amount: 5, digit});
         }),
-        description: 'Gain 10 M€. Play an active floater card from hand, ignoring requirements, and add 5 floaters to it.',
+        description: 'Gain 10 M€. PLAY AN ACTIVE FLOATER CARD FROM HAND, IGNORING GLOBAL REQUIREMENTS, and add 5 floaters to it.',
       },
     });
+  }
+
+  public override bespokeCanPlay(player: IPlayer): boolean {
+    // What a hack.
+    player.megaCredits += 10;
+    try {
+      return this.getPlayableCards(player).length > 0;
+    } finally {
+      player.megaCredits -= 10;
+    }
   }
 
   public override bespokePlay(player: IPlayer) {
     player.stock.add(Resource.MEGACREDITS, 10);
 
-    const playableCards = player.cardsInHand.filter((card) => {
-      return card.resourceType === CardResource.FLOATER &&
-        card.type === CardType.ACTIVE &&
-        player.canAfford(player.affordOptionsForCard(card));
-    }).map((card) => {
-      return {
-        card: card,
-        details: true,
-      };
-    });
+    const playableCards = this.getPlayableCards(player);
     if (playableCards.length !== 0) {
       player.defer(new SelectProjectCardToPlay(player, playableCards)
         .andThen((card) => {
@@ -55,5 +56,13 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
     }
 
     return undefined;
+  }
+
+  private getPlayableCards(player: IPlayer) {
+    return player.cardsInHand.filter((card) => {
+      return card.resourceType === CardResource.FLOATER &&
+        card.type === CardType.ACTIVE &&
+        player.canAfford(player.affordOptionsForCard(card));
+    });
   }
 }

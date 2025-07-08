@@ -30,17 +30,17 @@ export class SeismicPredictions extends GlobalEvent implements IGlobalEvent {
   public resolve(game: IGame, turmoil: Turmoil) {
     UnderworldExpansion.removeAllUnclaimedTokens(game);
 
-    game.getPlayersInGenerationOrder().forEach((player) => {
+    game.playersInGenerationOrder.forEach((player) => {
       const playerSpaces = player.game.board.spaces
         .filter(Board.ownedBy(player))
         .filter(Board.hasRealTile)
         .filter((space) => space.spaceType !== SpaceType.COLONY);
       const filtered = playerSpaces.filter(
         (space) => space.undergroundResources === undefined && space.excavator === undefined);
-      const penalty = Math.min(5, filtered.length) - turmoil.getPlayerInfluence(player);
+      const penalty = Math.min(5, filtered.length) - turmoil.getInfluence(player);
       const cost = penalty * 2;
       if (cost > 0) {
-        player.stock.deduct(Resource.MEGACREDITS, cost, {log: true, from: this.name});
+        player.stock.deduct(Resource.MEGACREDITS, cost, {log: true, from: {globalEvent: this}});
       }
     });
   }

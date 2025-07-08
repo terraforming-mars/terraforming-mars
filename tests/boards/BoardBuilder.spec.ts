@@ -8,7 +8,6 @@ import {SpaceName} from '../../src/common/boards/SpaceName';
 import {ArabiaTerraBoard} from '../../src/server/boards/ArabiaTerraBoard';
 import {preservingShuffle} from '../../src/server/boards/BoardBuilder';
 import {AmazonisBoard} from '../../src/server/boards/AmazonisBoard';
-import {TestPlayer} from '../TestPlayer';
 import {CardName} from '../../src/common/cards/CardName';
 
 describe('BoardBuilder', () => {
@@ -93,7 +92,7 @@ describe('BoardBuilder', () => {
         shuffleMapOption: true,
       },
       new SeededRandom(seed));
-      expect(board.getSpaces(SpaceType.RESTRICTED, TestPlayer.BLUE.newPlayer())[0].bonus).is.empty;
+      expect(board.getSpaces(SpaceType.RESTRICTED)[0].bonus).is.empty;
     }
   });
 

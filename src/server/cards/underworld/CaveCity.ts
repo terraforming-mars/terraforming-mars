@@ -12,12 +12,10 @@ export class CaveCity extends Card implements IProjectCard {
     super({
       name: CardName.CAVE_CITY,
       type: CardType.AUTOMATED,
-      cost: 14,
+      cost: 16,
       tags: [Tag.MARS, Tag.BUILDING, Tag.CITY],
 
-      requirements: {excavation: 1},
-
-      behavior: {production: {megacredits: 1}},
+      behavior: {production: {steel: 1}},
 
       metadata: {
         cardNumber: 'U27',
@@ -25,17 +23,17 @@ export class CaveCity extends Card implements IProjectCard {
           b.production((pb) => pb.megacredits(1)).br;
           b.city().excavate().asterix();
         }),
-        description: 'Requires 1 excavation marker. Increase your M€ production 1 step. ' +
-        'Place a city in a space where YOU have an excavation marker. ' +
-        'Regular placement restrictions still apply.',
+        description: 'Increase your steel production 1 step. ' +
+        'Place a city in a NON-RESERVED SPACE WITH YOUR EXCAVATION MARKER, ' +
+        'ignoring other placement restrictions',
       },
     });
   }
 
   private availableSpaces(player: IPlayer) {
-    const availableSpaceForCity = player.game.board.getAvailableSpacesForCity(
-      player, {cost: player.getCardCost(this)});
-    return availableSpaceForCity.filter((space) => space.excavator === player);
+    return player.game.board
+      .getAvailableSpacesOnLand(player)
+      .filter((space) => space.excavator === player);
   }
 
   public override bespokeCanPlay(player: IPlayer) {

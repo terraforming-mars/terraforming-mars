@@ -3,7 +3,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {any} from '../render/DynamicVictoryPoints';
 import {IPlayer} from '../../IPlayer';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {Size} from '../../../common/cards/render/Size';
@@ -13,7 +13,7 @@ export class PrivateInvestigator extends Card implements IProjectCard {
     super({
       name: CardName.PRIVATE_INVESTIGATOR,
       type: CardType.EVENT,
-      cost: 8,
+      cost: 4,
       victoryPoints: 'special',
 
       behavior: {
@@ -28,13 +28,13 @@ export class PrivateInvestigator extends Card implements IProjectCard {
           b.tr(1);
         }),
         description: 'Gain 1 TR.',
-        victoryPoints: CardRenderDynamicVictoryPoints.any(-1),
+        victoryPoints: any(-1),
       },
     });
   }
 
   private targets(player: IPlayer) {
-    return player.game.getPlayers().filter((p) => p.underworldData.corruption > player.underworldData.corruption);
+    return player.game.players.filter((p) => p.underworldData.corruption > player.underworldData.corruption);
   }
 
   public override bespokeCanPlay(player: IPlayer) {

@@ -26,6 +26,21 @@ class CardProcessor {
   public static json: Array<ClientCard> = [];
   public static makeJson() {
     ALL_MODULE_MANIFESTS.forEach(this.processManifest);
+    if (this.errors.length > 0) {
+      console.error(
+        'The following cards have methods which must be replaced.');
+      console.error(this.errors);
+      console.error(
+        'See more at https://github.com/terraforming-mars/terraforming-mars/wiki/API-Changes-2025%E2%80%9006');
+      throw new Error('The ICard and ICorporationCard APIs have changed. Read above.');
+    }
+  }
+
+  private static errors: Array<string> = [];
+  private static validate(card: ICard, methodName: string) {
+    if (Object.keys(card).includes(methodName)) {
+      this.errors.push(`${card.name}: ${methodName}`);
+    }
   }
 
   private static processManifest(manifest: ModuleManifest) {
@@ -44,7 +59,18 @@ class CardProcessor {
   }
 
   private static processCard(module: GameModule, card: ICard, compatibility: undefined | OneOrArray<Expansion>) {
-    if (card.type === CardType.PROXY) return;
+    if (card.type === CardType.PROXY) {
+      return;
+    }
+
+    this.validate(card, 'onCardPlayedFromAnyPlayer');
+    this.validate(card, 'onIncreaseTerraformRating');
+    this.validate(card, 'onIdentification');
+    this.validate(card, 'onColonyAdded');
+    if (isICorporationCard(card)) {
+      this.validate(card, 'onCardPlayed');
+    }
+
     let startingMegaCredits = undefined;
     let cardCost = undefined;
     if (isPreludeCard(card)) {

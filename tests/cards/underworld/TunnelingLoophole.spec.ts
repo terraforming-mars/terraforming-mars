@@ -1,13 +1,13 @@
 import {expect} from 'chai';
-import {ConcessionRights} from '../../../src/server/cards/underworld/ConcessionRights';
+import {TunnelingLoophole} from '../../../src/server/cards/underworld/TunnelingLoophole';
 import {testGame} from '../../TestGame';
 import {cast, forceGenerationEnd, runAllActions} from '../../TestingUtils';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
 
-describe('ConcessionRights', () => {
+describe('TunnelingLoophole', () => {
   it('Should play', () => {
-    const card = new ConcessionRights();
+    const card = new TunnelingLoophole();
     const [game, player] = testGame(2, {underworldExpansion: true});
 
     player.playedCards.push(card);

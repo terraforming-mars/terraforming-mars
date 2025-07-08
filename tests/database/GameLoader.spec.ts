@@ -86,7 +86,7 @@ describe('GameLoader', () => {
   });
 
   it('gets player when requested before database loaded', async () => {
-    const game1 = await instance.getGame(game.getPlayersInGenerationOrder()[0].id);
+    const game1 = await instance.getGame(game.playersInGenerationOrder[0].id);
     expect(game1).is.not.undefined;
   });
 
@@ -99,7 +99,7 @@ describe('GameLoader', () => {
   });
 
   it('gets player when it exists in database', async () => {
-    const players = game.getPlayersInGenerationOrder();
+    const players = game.playersInGenerationOrder;
     const game1 = await instance.getGame(players[Math.floor(Math.random() * players.length)].id);
     expect(game1!.id).to.eq(game.id);
   });
@@ -113,7 +113,7 @@ describe('GameLoader', () => {
   });
 
   it('gets player when added and not in database', async () => {
-    const players = game.getPlayersInGenerationOrder();
+    const players = game.playersInGenerationOrder;
     instance.add(game);
     const game1 = await instance.getGame(players[Math.floor(Math.random() * players.length)]!.id);
     expect(game1).is.not.undefined;
@@ -144,7 +144,7 @@ describe('GameLoader', () => {
   it('loads players available later', async () => {
     const game1 = await instance.getGame('gameid');
     expect(game1!.id).to.eq('gameid');
-    const game2 = await GameLoader.getInstance().getGame(game.getPlayersInGenerationOrder()[0].id);
+    const game2 = await GameLoader.getInstance().getGame(game.playersInGenerationOrder[0].id);
     expect(game2!.id).to.eq('gameid');
   });
 

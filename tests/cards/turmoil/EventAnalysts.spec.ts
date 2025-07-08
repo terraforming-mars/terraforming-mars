@@ -15,6 +15,6 @@ describe('EventAnalysts', () => {
     expect(card.canPlay(player)).is.true;
 
     card.play(player);
-    expect(game.turmoil!.getPlayerInfluence(player)).to.eq(3);
+    expect(game.turmoil!.getInfluence(player)).to.eq(3);
   });
 });

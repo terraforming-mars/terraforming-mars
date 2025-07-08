@@ -11,8 +11,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {BoardType} from '../../boards/BoardType';
 import {digit} from '../Options';
 import {AresHandler} from '../../ares/AresHandler';
+import {ICorporationCard} from './ICorporationCard';
 
-export class MiningGuild extends CorporationCard {
+export class MiningGuild extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.MINING_GUILD,

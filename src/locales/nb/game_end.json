@@ -24,7 +24,7 @@
     "generations": "generasjoner",
     "Player": "Spiller",
     "Corporation": "Konsern",
-    "TR": "TR",
+    "TR": "",
     "VP": "SP",
     "Total": "Totalt",
     "Timer": "Stoppeklokke",
@@ -34,7 +34,7 @@
     "Temperature": "Temperatur",
     "Oxygen": "Oksygen",
     "Oceans": "Hav",
-    "Venus": "Venus",
+    "Venus": "",
     "L. Habitat": "Habitat på Månen",
     "L. Mining": "Gruvedrift på Månen",
     "L. Logistics": "Logistikk på Månen",
@@ -53,8 +53,8 @@
     "1st place for ${0} award (funded by ${1})": "1. plass for ${0} utmerkelse (finansiert av ${1})",
     "2nd place for ${0} award (funded by ${1})": "2. plass for ${0} utmerkelse (finansiert av ${1})",
 
-    "M": "M",
-    "U": "U",
+    "M": "",
+    "U": "",
     "Milestones points": "Poeng for Milepæler",
     "Awards points": "Poeng for utmerkelser",
 
@@ -62,6 +62,6 @@
     "Escape Velocity penalty": "Minuspoeng for Unnslipningshastighet (Escape Velocity)",
     "Download game log": "Last ned spillelogg",
     "Completed!": "Fullført!",
-    "Gen: ": "Gen: ",
+    "Gen: ": "",
     "Generation": "Generasjon"
 }

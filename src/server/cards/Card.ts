@@ -9,9 +9,9 @@ import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {TRSource} from '../../common/cards/TRSource';
 import {Units} from '../../common/Units';
 import {GetVictoryPointsContext, ICard} from './ICard';
-import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
+import * as DynamicVictoryPoints from './render/DynamicVictoryPoints';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
-import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
+import {CountableVictoryPoints} from '../../common/cards/CountableVictoryPoints';
 import {IProjectCard} from './IProjectCard';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {PlayerInput} from '../PlayerInput';
@@ -24,7 +24,7 @@ import {CardRequirementsDescriptor} from './CardRequirementDescriptor';
 import {CardRequirements} from './requirements/CardRequirements';
 import {CardRequirementDescriptor} from '../../common/cards/CardRequirementDescriptor';
 import {asArray} from '../../common/utils/utils';
-import {YesAnd} from './requirements/CardRequirement';
+import {AdditionalProjectCosts} from '../../common/cards/Types';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {Warning} from '../../common/cards/Warning';
 
@@ -48,6 +48,7 @@ type SharedProperties = {
   cardDiscount?: OneOrArray<CardDiscount>;
   type: CardType;
   cost?: number;
+  // TODO(kberg): move initialActionText to Corp shared properties
   initialActionText?: string;
   firstAction?: Behavior & {text: string};
   globalParameterRequirementBonus?: GlobalParameterRequirementBonus;
@@ -66,7 +67,7 @@ type SharedProperties = {
    */
 
   tr?: TRSource,
-  victoryPoints?: number | 'special' | IVictoryPoints,
+  victoryPoints?: number | 'special' | CountableVictoryPoints,
 }
 
 /* Internal representation of card properties. */
@@ -109,6 +110,7 @@ export abstract class Card implements ICard {
   protected readonly properties: InternalProperties;
   public resourceCount = 0;
   public warnings = new Set<Warning>();
+  public additionalProjectCosts?: AdditionalProjectCosts = undefined;
 
   private internalize(external: StaticCardProperties): InternalProperties {
     const name = external.name;
@@ -228,30 +230,17 @@ export abstract class Card implements ICard {
   public get tr(): TRSource | undefined {
     return this.properties.tr;
   }
-  public get victoryPoints(): number | 'special' | IVictoryPoints | undefined {
+  public get victoryPoints(): number | 'special' | CountableVictoryPoints | undefined {
     return this.properties.victoryPoints;
   }
   public get tilesBuilt(): ReadonlyArray<TileType> {
     return this.properties.tilesBuilt;
   }
-  public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean | YesAnd {
-    let yesAnd: YesAnd | undefined = undefined;
-    const satisfied = this.properties.compiledRequirements.satisfies(player);
-    if (satisfied === false) {
+  public canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean {
+    if (!this.properties.compiledRequirements.satisfies(player, this)) {
       return false;
     }
-    if (satisfied !== true) {
-      yesAnd = satisfied;
-    }
-
-    if (this.canPlayPostRequirements(player, canAffordOptions) === false) {
-      return false;
-    }
-
-    if (yesAnd !== undefined) {
-      return yesAnd;
-    }
-    return true;
+    return this.canPlayPostRequirements(player, canAffordOptions);
   }
 
   public canPlayPostRequirements(player: IPlayer, canAffordOptions?: CanAffordOptions) {
@@ -273,7 +262,8 @@ export abstract class Card implements ICard {
   public play(player: IPlayer): PlayerInput | undefined {
     player.stock.deductUnits(MoonExpansion.adjustedReserveCosts(player, this));
     if (this.behavior !== undefined) {
-      getBehaviorExecutor().execute(this.behavior, player, this);
+      const executor = getBehaviorExecutor();
+      executor.execute(this.behavior, player, this);
     }
     return this.bespokePlay(player);
   }
@@ -374,18 +364,18 @@ export abstract class Card implements ICard {
       if (properties.resourceType === undefined) {
         throw new Error('When defining a card-resource based VP, resourceType must be defined.');
       }
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.resource(properties.resourceType, each, per);
+      properties.metadata.victoryPoints = DynamicVictoryPoints.resource(properties.resourceType, each, per);
       return;
     } else if (vps.tag !== undefined) {
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.tag(vps.tag, each, per);
+      properties.metadata.victoryPoints = DynamicVictoryPoints.tag(vps.tag, each, per);
     } else if (vps.cities !== undefined) {
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.cities(each, per, vps.all);
+      properties.metadata.victoryPoints = DynamicVictoryPoints.cities(each, per, vps.all);
     } else if (vps.colonies !== undefined) {
-      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.colonies(each, per, vps.all);
+      properties.metadata.victoryPoints = DynamicVictoryPoints.colonies(each, per, vps.all);
     } else if (vps.moon !== undefined) {
       if (vps.moon.road !== undefined) {
         // vps.per is ignored
-        properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.moonRoadTile(each, vps.all);
+        properties.metadata.victoryPoints = DynamicVictoryPoints.moonRoadTile(each, vps.all);
       } else {
         throw new Error('moon defined, but no valid sub-object defined');
       }
@@ -414,7 +404,7 @@ export abstract class Card implements ICard {
     }
   }
 
-  public getCardDiscount(_player?: IPlayer, card?: IProjectCard): number {
+  public getCardDiscount(player: IPlayer, card: IProjectCard): number {
     if (this.cardDiscount === undefined) {
       return 0;
     }
@@ -424,10 +414,10 @@ export abstract class Card implements ICard {
       if (discount.tag === undefined) {
         sum += discount.amount;
       } else {
-        const tags = card?.tags.filter((tag) => tag === discount.tag).length ?? 0;
+        const tagCount = player.tags.cardTagCount(card, discount.tag);
         if (discount.per !== 'card') {
-          sum += discount.amount * tags;
-        } else if (tags > 0) {
+          sum += discount.amount * tagCount;
+        } else if (tagCount > 0) {
           sum += discount.amount;
         }
       }
@@ -475,7 +465,7 @@ function populateCount(requirement: CardRequirementDescriptor): CardRequirementD
     requirement.miningTiles ??
     requirement.roadTiles ??
     requirement.corruption ??
-    requirement.excavation;
+    requirement.undergroundTokens;
 
   return requirement;
 }

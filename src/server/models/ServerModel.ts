@@ -28,7 +28,6 @@ import {AwardScorer} from '../awards/AwardScorer';
 import {SpaceId} from '../../common/Types';
 import {cardsToModel, coloniesToModel} from './ModelUtils';
 import {runId} from '../utils/server-ids';
-import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 import {toName} from '../../common/utils/utils';
 import {MAX_AWARDS, MAX_MILESTONES} from '../../common/constants';
 
@@ -38,7 +37,7 @@ export class Server {
       activePlayer: game.activePlayer.color,
       id: game.id,
       phase: game.phase,
-      players: game.getPlayersInGenerationOrder().map((player) => ({
+      players: game.playersInGenerationOrder.map((player) => ({
         color: player.color,
         id: player.id,
         name: player.name,
@@ -88,7 +87,7 @@ export class Server {
   public static getPlayerModel(player: IPlayer): PlayerViewModel {
     const game = player.game;
 
-    const players: Array<PublicPlayerModel> = game.getPlayersInGenerationOrder().map(this.getPlayer);
+    const players: Array<PublicPlayerModel> = game.playersInGenerationOrder.map(this.getPlayer);
 
     const thisPlayerIndex = players.findIndex((p) => p.color === player.color);
     const thisPlayer: PublicPlayerModel = players[thisPlayerIndex];
@@ -119,7 +118,7 @@ export class Server {
       color: 'neutral',
       id: game.spectatorId,
       game: this.getGameModel(game),
-      players: game.getPlayersInGenerationOrder().map(this.getPlayer),
+      players: game.playersInGenerationOrder.map(this.getPlayer),
       thisPlayer: undefined,
       runId: runId,
     };
@@ -148,7 +147,7 @@ export class Server {
       );
       let scores: Array<MilestoneScore> = [];
       if (claimed === undefined && claimedMilestones.length < MAX_MILESTONES) {
-        scores = game.getPlayers().map((player) => ({
+        scores = game.players.map((player) => ({
           playerColor: player.color,
           playerScore: milestone.getScore(player),
         }));
@@ -174,7 +173,7 @@ export class Server {
       const scorer = new AwardScorer(game, award);
       let scores: Array<AwardScore> = [];
       if (fundedAwards.length < MAX_AWARDS || funded !== undefined) {
-        scores = game.getPlayers().map((player) => ({
+        scores = game.players.map((player) => ({
           playerColor: player.color,
           playerScore: scorer.get(player),
         }));
@@ -207,11 +206,12 @@ export class Server {
 
   public static getPlayer(player: IPlayer): PublicPlayerModel {
     const game = player.game;
-    const useHandicap = game.getPlayers().some((p) => p.handicap !== 0);
+    const useHandicap = game.players.some((p) => p.handicap !== 0);
     const model: PublicPlayerModel = {
       actionsTakenThisRound: player.actionsTakenThisRound,
       actionsTakenThisGame: player.actionsTakenThisGame,
       actionsThisGeneration: Array.from(player.actionsThisGeneration),
+      alliedParty: player.alliedParty,
       availableBlueCardActionCount: player.getAvailableBlueActionCount(),
       cardCost: player.cardCost,
       cardDiscount: player.colonies.cardDiscount,
@@ -219,6 +219,7 @@ export class Server {
       citiesCount: game.board.getCities(player).length,
       coloniesCount: player.getColoniesCount(),
       color: player.color,
+      corruption: player.underworldData.corruption,
       energy: player.energy,
       energyProduction: player.production.energy,
       fleetSize: player.colonies.getFleetSize(),
@@ -226,7 +227,7 @@ export class Server {
       heat: player.heat,
       heatProduction: player.production.heat,
       id: game.phase === Phase.END ? player.id : undefined,
-      influence: Turmoil.ifTurmoilElse(game, (turmoil) => turmoil.getPlayerInfluence(player), () => 0),
+      influence: Turmoil.ifTurmoilElse(game, (turmoil) => turmoil.getInfluence(player), () => 0),
       isActive: player.id === game.activePlayer.id,
       lastCardPlayed: player.lastCardPlayed,
       megaCredits: player.megaCredits,
@@ -239,19 +240,19 @@ export class Server {
       plantProduction: player.production.plants,
       protectedResources: Server.getResourceProtections(player),
       protectedProduction: Server.getProductionProtections(player),
-      tableau: cardsToModel(player, player.tableau, {showResources: true}),
+      tableau: cardsToModel(player, player.tableau.asArray(), {showResources: true}),
       selfReplicatingRobotsCards: Server.getSelfReplicatingRobotsTargetCards(player),
       steel: player.steel,
       steelProduction: player.production.steel,
       steelValue: player.getSteelValue(),
       tags: player.tags.countAllTags(),
-      terraformRating: player.getTerraformRating(),
+      terraformRating: player.terraformRating,
       timer: player.timer.serialize(),
       titanium: player.titanium,
       titaniumProduction: player.production.titanium,
       titaniumValue: player.getTitaniumValue(),
       tradesThisGeneration: player.colonies.tradesThisGeneration,
-      corruption: player.underworldData.corruption,
+      undergroundTokens: player.underworldData.tokens.length,
       victoryPointsBreakdown: {
         terraformRating: 0,
         milestones: 0,
@@ -272,8 +273,6 @@ export class Server {
         negativeVP: 0,
       },
       victoryPointsByGeneration: [],
-      excavations: UnderworldExpansion.excavationMarkerCount(player),
-      alliedParty: player.alliedParty,
     };
 
     if (game.phase === Phase.END || game.isSoloMode() || game.gameOptions.showOtherPlayersVP === true) {
@@ -301,7 +300,7 @@ export class Server {
 
     if (player.plantsAreProtected()) {
       protection.plants = 'on';
-    } else if (player.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
+    } else if (player.tableau.has(CardName.BOTANICAL_EXPERIENCE)) {
       protection.plants = 'half';
     }
 
@@ -309,7 +308,7 @@ export class Server {
   }
 
   private static getProductionProtections(player: IPlayer) {
-    const defaultProteection = player.cardIsInEffect(CardName.PRIVATE_SECURITY) ? 'on' : 'off';
+    const defaultProteection = player.tableau.has(CardName.PRIVATE_SECURITY) ? 'on' : 'off';
     const protection: Record<Resource, Protection> = {
       megacredits: defaultProteection,
       steel: defaultProteection,
@@ -436,6 +435,7 @@ export class Server {
       includeFanMA: options.includeFanMA,
       initialDraftVariant: options.initialDraftVariant,
       preludeDraftVariant: options.preludeDraftVariant,
+      ceosDraftVariant: options.ceosDraftVariant,
       politicalAgendasExtension: options.politicalAgendasExtension,
       removeNegativeGlobalEvents: options.removeNegativeGlobalEventsOption,
       showOtherPlayersVP: options.showOtherPlayersVP,

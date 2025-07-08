@@ -41,7 +41,7 @@ export class SmallComet extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
-    for (const target of game.getPlayers()) {
+    for (const target of game.players) {
       game.defer(new RemoveResources(target, player, Resource.PLANTS, 2), Priority.ATTACK_OPPONENT);
     }
     return undefined;

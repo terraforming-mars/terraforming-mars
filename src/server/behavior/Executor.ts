@@ -29,6 +29,7 @@ import {SelectResources} from '../inputs/SelectResources';
 import {TITLES} from '../inputs/titles';
 import {message} from '../logs/MessageBuilder';
 import {IdentifySpacesDeferred} from '../underworld/IdentifySpacesDeferred';
+import {ClaimSpacesDeferred} from '../underworld/ClaimSpacesDeferred';
 import {ExcavateSpacesDeferred} from '../underworld/ExcavateSpacesDeferred';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 import {SelectResource} from '../inputs/SelectResource';
@@ -135,8 +136,13 @@ export class Executor implements BehaviorExecutor {
           return false;
         }
       }
-      if (spend.resourcesHere && card.resourceCount < spend.resourcesHere) {
-        return false;
+      if (spend.resourcesHere) {
+        if (card.resourceCount < spend.resourcesHere) {
+          return false;
+        }
+        if (!player.canAfford({cost: 0, tr: asTrSource})) {
+          return false;
+        }
       }
       if (spend.resourceFromAnyCard && player.getCardsWithResources(spend.resourceFromAnyCard.type).length === 0) {
         return false;
@@ -154,7 +160,7 @@ export class Executor implements BehaviorExecutor {
     if (behavior.decreaseAnyProduction !== undefined) {
       if (!game.isSoloMode()) {
         const dap = behavior.decreaseAnyProduction;
-        const targets = game.getPlayers().filter((p) => p.canHaveProductionReduced(dap.type, dap.count, player));
+        const targets = game.players.filter((p) => p.canHaveProductionReduced(dap.type, dap.count, player));
 
         if (targets.length === 0) {
           return false;
@@ -275,15 +281,8 @@ export class Executor implements BehaviorExecutor {
     if (behavior.underworld !== undefined) {
       const underworld = behavior.underworld;
       if (underworld.identify !== undefined) {
-        if (card.name === CardName.NEUTRINOGRAPH || player.cardIsInEffect(CardName.NEUTRINOGRAPH)) {
-          // Special case for Neutrinograph. Excavatable spaces are ones that are unidentified or reidentifiable.
-          if (UnderworldExpansion.excavatableSpaces(player).length === 0) {
-            return false;
-          }
-        } else {
-          if (UnderworldExpansion.identifiableSpaces(player).length === 0) {
-            return false;
-          }
+        if (UnderworldExpansion.identifiableSpaces(player).length === 0) {
+          return false;
         }
       }
     }
@@ -304,7 +303,6 @@ export class Executor implements BehaviorExecutor {
             });
         });
 
-      // TODO(kberg): move this behavior to OrOptions?
       if (options.length === 1 && behavior.or.autoSelect === true) {
         options[0].cb(undefined);
       } else {
@@ -358,7 +356,6 @@ export class Executor implements BehaviorExecutor {
       if ((spend.cards ?? 0) > 0) {
         const count: number = spend.cards ?? 0;
         const cards = player.cardsInHand.filter((c) => card !== c);
-        // TODO(kberg): this does not count preludes or CEOs. Same for canExecute.
         player.defer(
           new SelectCard(
             message('Select ${0} card(s) to discard', (b) => b.number(count)),
@@ -385,7 +382,7 @@ export class Executor implements BehaviorExecutor {
     }
     if (behavior.stock) {
       const units = ctx.countUnits(behavior.stock);
-      player.stock.addUnits(units, {log: true});
+      player.stock.adjust(units, {log: true});
     }
     if (behavior.standardResource) {
       const entry = behavior.standardResource;
@@ -395,7 +392,7 @@ export class Executor implements BehaviorExecutor {
         player.defer(
           new SelectResources(message('Gain ${0} standard resources', (b) => b.number(count)), count)
             .andThen((units) => {
-              player.stock.addUnits(units, {log: true});
+              player.stock.adjust(units, {log: true});
               return undefined;
             }));
       } else {
@@ -606,15 +603,27 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.underworld !== undefined) {
       const underworld = behavior.underworld;
-      if (underworld.identify !== undefined) {
-        player.game.defer(new IdentifySpacesDeferred(player, ctx.count(underworld.identify)));
+      const identify = underworld.identify;
+      if (identify !== undefined) {
+        if (typeof(identify) === 'number') {
+          player.game.defer(new IdentifySpacesDeferred(player, ctx.count(identify)));
+        } else {
+          const deferred = player.game.defer(new IdentifySpacesDeferred(player, ctx.count(identify.count)));
+          const claim = identify.claim ?? 0;
+          if (claim > 0) {
+            deferred.andThen((spaces) => {
+              player.game.defer(new ClaimSpacesDeferred(player, ctx.count(claim), spaces));
+            });
+          }
+        }
       }
       if (underworld.excavate !== undefined) {
         const excavate = underworld.excavate;
         if (typeof(excavate) === 'number') {
           player.game.defer(new ExcavateSpacesDeferred(player, excavate));
         } else {
-          player.game.defer(new ExcavateSpacesDeferred(player, ctx.count(excavate.count), excavate.ignorePlacementRestrictions));
+          player.game.defer(new ExcavateSpacesDeferred(
+            player, ctx.count(excavate.count), excavate.ignorePlacementRestrictions));
         }
       }
       if (underworld.corruption !== undefined) {

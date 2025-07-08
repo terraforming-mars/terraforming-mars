@@ -8,7 +8,6 @@ import {TestPlayer} from '../../TestPlayer';
 import {MoonHabitatStandardProject} from '../../../src/server/cards/moon/MoonHabitatStandardProject';
 import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectPaymentDeferred';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
-import {Payment} from '../../../src/common/inputs/Payment';
 import {assertPlaceTile} from '../../assertions';
 import {TileType} from '../../../src/common/TileType';
 
@@ -53,23 +52,21 @@ describe('MoonHabitatStandardProject', () => {
 
   it('act', () => {
     player.titanium = 3;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(player.production.megacredits).eq(0);
+    player.megaCredits = 22;
 
-    card.action(player);
-    const payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
-    payAction.cb(Payment.EMPTY);
+    cast(card.action(player), undefined);
+    runAllActions(game);
 
     expect(player.titanium).eq(2);
     expect(player.production.megacredits).eq(1);
-
     expect(moonData.habitatRate).eq(0);
 
-    runAllActions(game);
     assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_HABITAT);
 
     expect(moonData.habitatRate).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 
   it('can act when Reds are in power', () => {

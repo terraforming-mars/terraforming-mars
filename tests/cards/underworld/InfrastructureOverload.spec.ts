@@ -20,15 +20,12 @@ describe('InfrastructureOverload', () => {
   });
 
   const canPlayRuns = [
-    {it: '1', corruption: 1, opponentEnergyProduction: 1, expected: false},
-    {it: '2', corruption: 1, opponentEnergyProduction: 2, expected: false},
-    {it: '3', corruption: 2, opponentEnergyProduction: 1, expected: false},
-    {it: '4', corruption: 2, opponentEnergyProduction: 2, expected: true},
+    {opponentEnergyProduction: 1, expected: false},
+    {opponentEnergyProduction: 2, expected: true},
   ] as const;
 
   for (const run of canPlayRuns) {
-    it('canPlay ' + run.it, () => {
-      player.underworldData.corruption = run.corruption;
+    it('canPlay ' + JSON.stringify(run), () => {
       player3.production.override({energy: run.opponentEnergyProduction});
       expect(card.canPlay(player)).eq(run.expected);
     });

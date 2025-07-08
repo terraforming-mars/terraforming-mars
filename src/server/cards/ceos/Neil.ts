@@ -5,7 +5,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {all} from '../Options';
 import {Tag} from '../../../common/cards/Tag';
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Resource} from '../../../common/Resource';
 
@@ -25,7 +25,7 @@ export class Neil extends CeoCard {
     });
   }
 
-  public onCardPlayedFromAnyPlayer(thisCardOwner: IPlayer, _playedCardOwner: IPlayer, card: IProjectCard) {
+  public onCardPlayedByAnyPlayer(thisCardOwner: IPlayer, card: ICard) {
     for (const tag of card.tags) {
       if (tag === Tag.MOON) {
         thisCardOwner.game.getCardPlayerOrThrow(this.name).stock.add(Resource.MEGACREDITS, 1, {log: true});

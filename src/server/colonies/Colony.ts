@@ -64,7 +64,7 @@ export abstract class Colony implements IColony {
         this.visitor = undefined;
       } else {
         const raider = game.getPlayerById(game.syndicatePirateRaider);
-        if (raider.cardIsInEffect(CardName.HUAN)) {
+        if (raider.tableau.has(CardName.HUAN)) {
           this.visitor = undefined;
         }
       }
@@ -98,9 +98,9 @@ export abstract class Colony implements IColony {
       this.trackPosition = this.colonies.length;
     }
 
-    for (const cardOwner of player.game.getPlayers()) {
+    for (const cardOwner of player.game.players) {
       for (const card of cardOwner.tableau) {
-        card.onColonyAdded?.(player, cardOwner);
+        card.onColonyAddedByAnyPlayer?.(cardOwner, player);
       }
     }
 
@@ -163,7 +163,7 @@ export abstract class Colony implements IColony {
       player.colonies.tradesThisGeneration++;
     }
 
-    if (player.cardIsInEffect(CardName.VENUS_TRADE_HUB)) {
+    if (player.tableau.has(CardName.VENUS_TRADE_HUB)) {
       player.stock.add(Resource.MEGACREDITS, 3, {log: true});
     }
 
@@ -336,7 +336,7 @@ export abstract class Colony implements IColony {
       action = new SimpleDeferredAction(
         player,
         () => {
-          const playersWithCards = game.getPlayers().filter((p) => p.cardsInHand.length > 0);
+          const playersWithCards = game.players.filter((p) => p.cardsInHand.length > 0);
           if (playersWithCards.length === 0) return undefined;
           return new SelectPlayer(playersWithCards, 'Select player to discard a card', 'Select')
             .andThen((selectedPlayer) => {

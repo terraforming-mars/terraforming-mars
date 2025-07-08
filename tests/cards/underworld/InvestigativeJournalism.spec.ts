@@ -9,11 +9,11 @@ describe('InvestigativeJournalism', () => {
     const card = new InvestigativeJournalism();
     const [/* game */, player] = testGame(2);
 
-    player.production.override({megacredits: -4});
+    player.production.override({megacredits: -5});
 
     expect(card.canPlay(player)).is.false;
 
-    player.production.override({megacredits: -3});
+    player.production.override({megacredits: -4});
 
     expect(card.canPlay(player)).is.true;
   });
@@ -25,7 +25,7 @@ describe('InvestigativeJournalism', () => {
     cast(card.play(player), undefined);
     runAllActions(game);
 
-    expect(player.production.megacredits).eq(-2);
+    expect(player.production.megacredits).eq(-1);
   });
 
   const canActRuns = [

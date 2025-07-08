@@ -8,7 +8,7 @@
   "You start with 35 M€ and 3 asteroid resources.": "起始获得35M€和3个小行星资源。",
   "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "行动：选择在任意卡牌添加1个小行星资源并获得1个标准资源，或移除此卡1个小行星资源获得3个钛。",
 
-  "FACTORUM": "FACTORUM",
+  "FACTORUM": "",
   "You start with 37 M€. Increase your steel production 1 step.": "起始获得37M€。提升1点钢铁产能。",
   "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "行动：若你没有电力资源，提升1点电力产能；或支付3M€抽取1张建筑卡。",
 
@@ -22,21 +22,21 @@
   "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.": "效果：当玩家导致其他玩家降低产能或失去资源时，需向受害者支付3M€（若不足则支付全部）。",
 
   "Pharmacy Union": "制药联盟",
-  "You start with 54 M€ . Draw a Science card.": "起始获得54M€。抽取1张科学卡。",
+  "You start with 54 M€. Draw a Science card.": "起始获得54M€。抽取1张科学卡。",
   "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "效果：任何微生物标志被使用时，在此卡添加1个疾病标记并失去4M€（若不足则失去全部）。使用科学标志时，移除此卡1个疾病标记提升1点改造度；若无疾病标记，可将此卡放入事件牌堆提升3点改造度。",
 
-  "Philares": "Philares",
+  "Philares": "",
   "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.": "起始获得47M€。作为第一个行动，放置1个绿化板块并提升1级氧气浓度。",
   "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "效果：你的板块与对手板块新增相邻时，获得1个自选标准资源（无论谁放置板块）。",
 
-  "Recyclon": "Recyclon",
+  "Recyclon": "",
   "You start with 38 M€ and 1 steel production.": "起始获得38M€和1点钢铁产能。",
   "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "效果：打出建筑标志时（包括此牌），可在此卡添加1个微生物资源，或移除2个微生物资源提升1点植物产能。",
 
   "Tycho Magnetics": "第谷磁力",
   "You start with 42 M€. Increase your energy production 1 step.": "起始获得42M€。提升1点电力产能。",
   "Action: Spend any amount of energy to draw the that many cards. Keep 1 and discard the rest.": "行动：消耗任意数量的电力资源，抽取等量卡牌，保留1张并弃置其余。",
-  
+
   "Splice": "基因重组",
   "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "起始获得44M€。作为第一个行动，展示卡牌直至出现微生物标志，获得该牌并弃置其余。",
   "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "效果：当微生物标志（包括此牌）被使用时，该玩家选择获得2M€或在该卡添加1个微生物资源，且你获得2M€。"

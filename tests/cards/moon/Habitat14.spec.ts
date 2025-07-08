@@ -19,25 +19,25 @@ describe('Habitat14', () => {
 
     player.titanium = 0;
     player.production.override({megacredits: -4, energy: 1});
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 1;
     player.production.override({megacredits: -5, energy: 1});
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 1;
     player.production.override({megacredits: -4, energy: 0});
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 1;
     player.production.override({megacredits: -4, energy: 1});
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
     player.titanium = 1;
     player.production.override({megacredits: 1, energy: 1});
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     card.play(player);
 

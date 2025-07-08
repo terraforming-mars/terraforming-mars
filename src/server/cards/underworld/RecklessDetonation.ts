@@ -28,9 +28,9 @@ export class RecklessDetonation extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U09',
         renderData: CardRenderer.builder((b) => {
-          b.excavate(1).minus().steel(3, {digit, all}).asterix().or().titanium(2, {digit, all}).asterix();
+          b.excavate(1).minus().steel(3, {digit, all}).or().titanium(2, {digit, all});
         }),
-        description: 'Requires 2 corruption. Excavate an underground resource. Remove up to 3 steel or 2 titanium from another player.',
+        description: 'Requires 2 corruption. Excavate an underground resource. Remove up to 3 steel or 2 titanium from any player.',
       },
     });
   }
@@ -42,10 +42,9 @@ export class RecklessDetonation extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     if (player.game.isSoloMode()) return undefined;
 
-    const availablePlayerTargets = player.game.getPlayers().filter((p) => p.id !== player.id);
     const availableActions = new OrOptions();
 
-    availablePlayerTargets.forEach((target) => {
+    player.game.players.forEach((target) => {
       if (target.titanium > 0 && !target.alloysAreProtected()) {
         const amountRemoved = Math.min(2, target.titanium);
         const optionTitle = this.title(amountRemoved, 'titanium', target);

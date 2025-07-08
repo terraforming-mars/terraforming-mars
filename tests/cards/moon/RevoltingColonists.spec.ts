@@ -28,10 +28,10 @@ describe('RevoltingColonists', () => {
     player1.megaCredits = card.cost;
 
     moonData.habitatRate = 4;
-    expect(player1.getPlayableCardsForTest()).does.include(card);
+    expect(player1.getPlayableCards()).does.include(card);
 
     moonData.habitatRate = 3;
-    expect(player1.getPlayableCardsForTest()).does.not.include(card);
+    expect(player1.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {

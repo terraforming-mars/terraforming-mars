@@ -8,7 +8,6 @@ import {NewGameConfig} from '../../src/common/game/NewGameConfig';
 import {RandomBoardOption} from '../../src/common/boards/RandomBoardOption';
 import {RandomMAOptionType} from '../../src/common/ma/RandomMAOptionType';
 import {SimpleGameModel} from '../../src/common/models/SimpleGameModel';
-import {RecursivePartial} from '../../src/common/utils/utils';
 
 describe('ApiCreateGame', () => {
   let scaffolding: RouteTestScaffolding;
@@ -48,7 +47,7 @@ describe('ApiCreateGame', () => {
   });
 
   it('simple create', async () => {
-    const put = scaffolding.put(apiCreateGame, res);
+    const post = scaffolding.post(apiCreateGame, res);
     const emit = Promise.resolve().then(() => {
       const newGameConfig: NewGameConfig = {
         players: [{
@@ -90,6 +89,7 @@ describe('ApiCreateGame', () => {
         draftVariant: false,
         initialDraft: false,
         preludeDraftVariant: false,
+        ceosDraftVariant: false,
         startingCorporations: 0,
         shuffleMapOption: false,
         randomMA: RandomMAOptionType.NONE,
@@ -118,7 +118,7 @@ describe('ApiCreateGame', () => {
       req.emitter.emit('data', JSON.stringify(newGameConfig));
       req.emitter.emit('end');
     });
-    await Promise.all(([emit, put]));
+    await Promise.all(([emit, post]));
     expect(res.statusCode).eq(statusCode.ok);
     expect(res.headers.get('Content-Type')).eq('application/json');
     const model = JSON.parse(res.content) as SimpleGameModel;
@@ -126,21 +126,17 @@ describe('ApiCreateGame', () => {
     expect(model.id.startsWith('g')).is.true;
     const game = await scaffolding.ctx.gameLoader.getGame(model.id);
     expect(game).is.not.undefined;
-    expect(game!.getPlayers()[0].name).eq('Robot');
+    expect(game!.players[0].name).eq('Robot');
   });
 
 
-  async function create(data: RecursivePartial<NewGameConfig>) {
-    const put = scaffolding.put(apiCreateGame, res);
+  it('red rover solo game', async () => {
+    const post = scaffolding.post(apiCreateGame, res);
     const emit = Promise.resolve().then(() => {
-      scaffolding.req.emitter.emit('data', JSON.stringify(data));
+      scaffolding.req.emitter.emit('data', JSON.stringify({players: [{name: 'a player', color: 'red'}]}));
       scaffolding.req.emitter.emit('end');
     });
-    await Promise.all(([emit, put]));
-  }
-
-  it('red rover solo game', async () => {
-    await create({players: [{name: 'a player', color: 'red'}]});
+    await Promise.all(([emit, post]));
 
     expect(res.statusCode).eq(statusCode.internalServerError);
   });

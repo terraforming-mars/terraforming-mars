@@ -21,7 +21,7 @@ describe('VoteOfNoConfidence', () => {
     card.play(player);
     expect(turmoil.chairman).to.eq(player);
     runAllActions(game);
-    expect(player.getTerraformRating()).to.eq(15);
+    expect(player.terraformRating).to.eq(15);
   });
 
   it('Neutral Delegate returns to Reserve', () => {

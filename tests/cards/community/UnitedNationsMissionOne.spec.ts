@@ -20,12 +20,12 @@ describe('UnitedNationsMissionOne', () => {
   });
 
   it('Initializes correctly', () => {
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(player.megaCredits).eq(0);
 
     player.playCorporationCard(card);
 
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(player.megaCredits).eq(40);
   });
 
@@ -62,7 +62,7 @@ describe('UnitedNationsMissionOne', () => {
 
     const election = new Election();
     election.resolve(game, turmoil);
-    expect(player2.getTerraformRating()).eq(22);
+    expect(player2.terraformRating).eq(22);
     expect(player.megaCredits).eq(0); // no increase
   });
 });

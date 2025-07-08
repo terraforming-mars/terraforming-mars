@@ -77,8 +77,6 @@ describe('MarsMaths', () => {
     player.corporations.push(card);
     game.generation = 10;
 
-    player.playedCards = [card];
-
     // End the generation. Player will draw 5 cards
     finishGeneration(game);
     expect(game.getGeneration()).to.eq(11);

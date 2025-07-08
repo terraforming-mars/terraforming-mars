@@ -27,4 +27,17 @@ describe('Tradesman', () => {
     player.addResourceTo(dirigibles);
     expect(milestone.canClaim(player)).is.true;
   });
+
+  it('Can claim with corruption', () => {
+    const cometAiming = new CometAiming();
+    const birds = new Birds();
+    player.playedCards.push(cometAiming, birds);
+
+    player.addResourceTo(cometAiming);
+    player.underworldData.corruption = 1;
+    expect(milestone.canClaim(player)).is.false;
+
+    player.addResourceTo(birds);
+    expect(milestone.canClaim(player)).is.true;
+  });
 });

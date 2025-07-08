@@ -24,7 +24,7 @@ export class CityStandardProject extends StandardProjectCard {
   }
 
   public override canPayWith(player: IPlayer) {
-    if (player.getPlayedCard(CardName.PREFABRICATION_OF_HUMAN_HABITATS)) {
+    if (player.tableau.get(CardName.PREFABRICATION_OF_HUMAN_HABITATS)) {
       return {steel: true};
     } else {
       return {};

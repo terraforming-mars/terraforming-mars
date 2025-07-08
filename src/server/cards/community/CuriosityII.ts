@@ -13,8 +13,9 @@ import {SpaceType} from '../../../common/boards/SpaceType';
 import {SpaceBonus} from '../../../common/boards/SpaceBonus';
 import {Phase} from '../../../common/Phase';
 import {TITLES} from '../../inputs/titles';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class CuriosityII extends CorporationCard {
+export class CuriosityII extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.CURIOSITY_II,

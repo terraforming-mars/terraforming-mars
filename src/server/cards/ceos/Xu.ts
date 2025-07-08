@@ -28,7 +28,7 @@ export class Xu extends CeoCard {
 
   public action(player: IPlayer): PlayerInput | undefined {
     this.isDisabled = true;
-    const players = player.game.getPlayers();
+    const players = player.game.players;
 
     // If the player being counted is Me, include Wild tags. Dont include opponent wild tags
     const counts = players.map((p) => p.tags.count(Tag.VENUS, player.id === p.id ? 'default' : 'raw'));

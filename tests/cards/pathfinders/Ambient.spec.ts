@@ -23,34 +23,39 @@ describe('Ambient', () => {
   beforeEach(() => {
     card = new Ambient();
     [game, player, player2] = testGame(2);
-    player.corporations.push(card);
+  });
+
+  it('play', () => {
+    player.playCorporationCard(card);
+    expect(player.production.heat).eq(1);
   });
 
   it('initialAction', () => {
     expect(game.getVenusScaleLevel()).eq(0);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
 
     expect(game.getVenusScaleLevel()).eq(4);
-    expect(player.getTerraformRating()).eq(22);
+    expect(player.terraformRating).eq(22);
   });
 
-  it('onCardPlayed', () => {
+  it('effect', () => {
+    player.corporations.push(card);
     expect(player.production.heat).eq(0);
 
-    card.onCardPlayed(player, fakeCard({tags: []}));
+    player.playCard(fakeCard({tags: []}));
     expect(player.production.heat).eq(0);
 
-    card.onCardPlayed(player, fakeCard({tags: [Tag.EARTH]}));
+    player.playCard(fakeCard({tags: [Tag.EARTH]}));
     expect(player.production.heat).eq(0);
 
-    card.onCardPlayed(player, fakeCard({tags: [Tag.VENUS]}));
+    player.playCard(fakeCard({tags: [Tag.VENUS]}));
     expect(player.production.heat).eq(1);
     expect(player2.production.heat).eq(0);
 
-    card.onCardPlayed(player2, fakeCard({tags: [Tag.VENUS]}));
+    player2.playCard(fakeCard({tags: [Tag.VENUS]}));
     expect(player.production.heat).eq(1);
     expect(player2.production.heat).eq(0);
   });
@@ -75,16 +80,17 @@ describe('Ambient', () => {
     player.heat = 9;
     setTemperature(game, MAX_TEMPERATURE);
 
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     card.action(player);
 
     expect(player.heat).eq(1);
     expect(game.getTemperature()).eq(MAX_TEMPERATURE);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
   });
 
   it('action is repeatable', () => {
+    player.corporations.push(card);
     player.heat = 16;
     setTemperature(game, MAX_TEMPERATURE);
 
@@ -96,13 +102,13 @@ describe('Ambient', () => {
 
     expect(getBlueActions()!.cards.map(toName)).deep.eq([card.name]);
 
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     getBlueActions()!.cb([card]);
 
     expect(player.heat).eq(8);
     expect(game.getTemperature()).eq(MAX_TEMPERATURE);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
 
     expect(getBlueActions()).is.undefined;
     runAllActions(game);
@@ -112,7 +118,7 @@ describe('Ambient', () => {
 
     expect(player.heat).eq(0);
     expect(game.getTemperature()).eq(MAX_TEMPERATURE);
-    expect(player.getTerraformRating()).eq(22);
+    expect(player.terraformRating).eq(22);
 
     expect(getBlueActions()).is.undefined;
     runAllActions(game);

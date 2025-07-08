@@ -23,6 +23,6 @@ describe('RadChemFactory', () => {
 
     card.play(player);
     expect(player.production.energy).to.eq(0);
-    expect(player.getTerraformRating()).to.eq(22);
+    expect(player.terraformRating).to.eq(22);
   });
 });

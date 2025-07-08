@@ -29,7 +29,7 @@ describe('MarketingExperts', () => {
   // AresHandler.
   it('Bonus in the field', () => {
     // tile types in this test are irrelevant.
-    player.playedCards = [card];
+    player.playedCards.push(card);
 
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     firstSpace.adjacency = {bonus: [SpaceBonus.DRAW_CARD]};

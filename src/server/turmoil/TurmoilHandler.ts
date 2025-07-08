@@ -1,5 +1,5 @@
 import * as constants from '../../common/constants';
-import {IProjectCard} from '../cards/IProjectCard';
+import {ICard} from '../cards/ICard';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {SelectOption} from '../inputs/SelectOption';
 import {IPlayer} from '../IPlayer';
@@ -31,7 +31,7 @@ export class TurmoilHandler {
     return undefined;
   }
 
-  public static applyOnCardPlayedEffect(player: IPlayer, selectedCard: IProjectCard): void {
+  public static applyOnCardPlayedEffect(player: IPlayer, selectedCard: ICard): void {
     // PoliticalAgendas Greens P3 hook
     if (PartyHooks.shouldApplyPolicy(player, PartyName.GREENS, 'gp03')) {
       GREENS_POLICY_3.onCardPlayed(player, selectedCard);

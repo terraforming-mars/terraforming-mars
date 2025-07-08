@@ -12,9 +12,11 @@ export class LaborTrafficking extends Card implements IProjectCard {
     super({
       name: CardName.LABOR_TRAFFICKING,
       type: CardType.ACTIVE,
-      cost: 3,
+      cost: 6,
       tags: [Tag.SPACE, Tag.CRIME],
       victoryPoints: -2,
+
+      requirements: {corruption: 2},
 
       metadata: {
         cardNumber: 'U14',
@@ -23,6 +25,7 @@ export class LaborTrafficking extends Card implements IProjectCard {
               'except selling patents, costs 6 M€ less.', (eb) =>
             eb.text('1ST').plate('Standard projects').asterix().startEffect.megacredits(-6));
         }),
+        description: 'Requires 2 corruption.',
       },
     });
   }

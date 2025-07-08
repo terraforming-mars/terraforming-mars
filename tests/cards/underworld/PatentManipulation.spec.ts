@@ -27,7 +27,7 @@ describe('PatentManipulation', () => {
       const card = new PatentManipulation();
       const [/* game */, player] = testGame(2, {underworldExpansion: true});
       player.underworldData.corruption = run.corruption;
-      player.playedCards = cardsFromJSON([...run.playedCards]);
+      player.playedCards.push(...cardsFromJSON([...run.playedCards]));
       expect(card.canPlay(player)).eq(run.expected);
     });
   }
@@ -40,7 +40,7 @@ describe('PatentManipulation', () => {
     const bribedCommittee = new BribedCommittee();
     const moholeArea = new MoholeArea();
     const astraMechanica = new AstraMechanica();
-    player.playedCards = [microMills, aiCentral, bribedCommittee, moholeArea, astraMechanica];
+    player.playedCards.push(microMills, aiCentral, bribedCommittee, moholeArea, astraMechanica);
     player.cardsInHand = [];
     const selectCard = cast(card.play(player), SelectCard);
 
@@ -48,7 +48,7 @@ describe('PatentManipulation', () => {
 
     selectCard.cb([microMills]);
 
-    expect(player.playedCards).to.have.members([aiCentral, bribedCommittee, moholeArea, astraMechanica]);
+    expect(player.playedCards.asArray()).to.have.members([aiCentral, bribedCommittee, moholeArea, astraMechanica]);
     expect(player.cardsInHand).to.have.members([microMills]);
   });
 
@@ -56,7 +56,7 @@ describe('PatentManipulation', () => {
     const card = new PatentManipulation();
     const [/* game */, player] = testGame(2, {underworldExpansion: true});
     const tardigrades = newProjectCard(CardName.TARDIGRADES)!;
-    player.playedCards = [tardigrades];
+    player.playedCards.push(tardigrades);
     tardigrades.resourceCount = 5;
     player.cardsInHand = [];
     const selectCard = cast(card.play(player), SelectCard);
@@ -66,7 +66,7 @@ describe('PatentManipulation', () => {
     selectCard.cb([tardigrades]);
 
     expect(player.cardsInHand).to.have.members([tardigrades]);
-    expect(player.playedCards).to.be.empty;
+    expect(player.playedCards.length).eq(0);
     expect(tardigrades.resourceCount).eq(0);
   });
 });

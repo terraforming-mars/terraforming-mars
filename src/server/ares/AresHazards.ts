@@ -15,7 +15,12 @@ export class AresHazards {
   }
 
   public static randomlyPlaceHazard(game: IGame, tileType: TileType, direction: 'top' | 'bottom', cardCount: 1 | 2 = 1) {
-    const space = game.getSpaceByOffset(direction, tileType, cardCount);
+    const cost = game.discardForCost(cardCount, tileType);
+    const distance = Math.max(cost - 1, 0); // Some cards cost zero.
+    const space = game.board.getNthAvailableLandSpace(
+      distance, direction,
+      (space) => game.nomadSpace !== space.id);
+
     this.putHazardAt(space, tileType);
     return space;
   }

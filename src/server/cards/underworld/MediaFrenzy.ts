@@ -5,7 +5,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 import {all} from '../Options';
-import {IPlayer, CanAffordOptions} from '../../IPlayer';
+import {IPlayer} from '../../IPlayer';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
@@ -31,7 +31,7 @@ export class MediaFrenzy extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: IPlayer, _canAffordOptions: CanAffordOptions): boolean {
+  public override bespokeCanPlay(player: IPlayer): boolean {
     if (player.game.isSoloMode()) {
       return true;
     }
@@ -46,7 +46,7 @@ export class MediaFrenzy extends Card implements IProjectCard {
 
     player.defer(new SelectPlayer(this.opponentsWithCorruption(player), 'Select player to lose 1 corruption', 'Select player')
       .andThen((target) => {
-        const privateMilitaryContractor = target.getPlayedCard(CardName.PRIVATE_MILITARY_CONTRACTOR);
+        const privateMilitaryContractor = target.tableau.get(CardName.PRIVATE_MILITARY_CONTRACTOR);
         if (privateMilitaryContractor && privateMilitaryContractor.resourceCount > 0) {
           target.maybeBlockAttack(player, '', (proceed) => {
             if (proceed) {
@@ -63,6 +63,6 @@ export class MediaFrenzy extends Card implements IProjectCard {
   }
 
   private opponentsWithCorruption(player: IPlayer) {
-    return player.getOpponents().filter((opponent) => opponent.underworldData.corruption > 0);
+    return player.opponents.filter((opponent) => opponent.underworldData.corruption > 0);
   }
 }

@@ -9,7 +9,14 @@
   </label>
 
   <section v-trim-whitespace>
-    <div v-if="selectedCardHasWarning()" class="card-warning">{{ $t(card.warning) }}</div>
+    <template v-if="card.additionalProjectCosts">
+      <div v-if="card.additionalProjectCosts.thinkTankResources" class="card-warning">
+        Playing {{card.name}} consumes {{card.additionalProjectCosts.thinkTankResources}} data from Think Tank
+      </div>
+      <div v-if="card.additionalProjectCosts.redsCost" class="card-warning">
+        Playing {{card.name}} will cost {{card.additionalProjectCosts.redsCost}} M€ more because Reds are in power
+      </div>
+    </template>
     <warnings-component :warnings="card.warnings"></warnings-component>
 
     <h3 class="payments_title" v-i18n>How to pay?</h3>
@@ -99,7 +106,6 @@ export default Vue.extend({
         'seeds',
         'graphene',
         'megaCredits',
-        'corruption',
       ];
     },
   },
@@ -222,7 +228,7 @@ export default Vue.extend({
 
       // console.log('balance', megacreditBalance);
 
-      for (const unit of ['microbes', 'floaters', 'corruption'] as const) {
+      for (const unit of ['microbes', 'floaters'] as const) {
         if (megacreditBalance > 0 && this.canUse(unit)) {
           this.payment[unit] = deductUnits(this.getAvailableUnits(unit), this.getResourceRate(unit));
         }
@@ -264,7 +270,6 @@ export default Vue.extend({
           'seeds',
           'graphene',
           'lunaArchivesScience',
-          'corruption',
           'megaCredits'] as const) {
           this.payment[key] -= saveOverspendingUnits(this.payment[key], this.getResourceRate(key));
         }
@@ -302,8 +307,6 @@ export default Vue.extend({
       case 'graphene':
         return this.tags.includes(Tag.SPACE) ||
             this.tags.includes(Tag.CITY);
-      case 'corruption':
-        return this.tags.includes(Tag.EARTH) && this.playerinput.paymentOptions.corruption === true;
       default:
         throw new Error('Unknown unit ' + unit);
       }
@@ -337,9 +340,6 @@ export default Vue.extend({
     },
     hasWarning(): boolean {
       return this.warning !== undefined;
-    },
-    selectedCardHasWarning(): boolean {
-      return this.card !== undefined && this.card.warning !== undefined;
     },
     showReserveWarning(unit: SpendableResource): boolean {
       switch (unit) {

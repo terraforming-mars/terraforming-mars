@@ -65,26 +65,26 @@ describe('MoonExpansion', () => {
 
   it('raiseMiningRate', () => {
     expect(moonData.miningRate).to.eq(0);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     MoonExpansion.raiseMiningRate(player);
     expect(moonData.miningRate).to.eq(1);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
   });
 
   it('raiseHabitatRate', () => {
     expect(moonData.habitatRate).to.eq(0);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     MoonExpansion.raiseHabitatRate(player);
     expect(moonData.habitatRate).to.eq(1);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
   });
 
   it('raiseLogisticsRate', () => {
     expect(moonData.logisticRate).to.eq(0);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     MoonExpansion.raiseLogisticRate(player);
     expect(moonData.logisticRate).to.eq(1);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
   });
 
   it('computeVictoryPoints', () => {
@@ -176,39 +176,39 @@ describe('MoonExpansion', () => {
     player.titanium = 1;
     player.steel = 1;
     moonData.miningRate = 3;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     // Gives a +2/-2 on the next action
-    player.playedCards = [specialDesign];
+    player.playedCards.push(specialDesign);
     player.lastCardPlayed = specialDesign.name;
 
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('raiseMiningRate during WGT', () => {
     game.phase = Phase.SOLAR;
     expect(moonData.miningRate).to.eq(0);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     MoonExpansion.raiseMiningRate(player);
     expect(moonData.miningRate).to.eq(1);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
   });
 
   it('raiseHabitatRate during WGT', () => {
     game.phase = Phase.SOLAR;
     expect(moonData.habitatRate).to.eq(0);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     MoonExpansion.raiseHabitatRate(player);
     expect(moonData.habitatRate).to.eq(1);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
   });
 
   it('raiseLogisticsRate during WGT', () => {
     game.phase = Phase.SOLAR;
     expect(moonData.logisticRate).to.eq(0);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     MoonExpansion.raiseLogisticRate(player);
     expect(moonData.logisticRate).to.eq(1);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
   });
 });

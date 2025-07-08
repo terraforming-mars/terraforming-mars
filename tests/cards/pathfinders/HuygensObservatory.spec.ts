@@ -80,12 +80,12 @@ describe('HuygensObservatory', () => {
   });
 
   it('play, simple case (place colony, trade with it)', () => {
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     const action = card.play(player);
 
     cast(action, undefined);
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
 
     runAllActions(game);
 

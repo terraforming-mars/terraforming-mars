@@ -26,6 +26,13 @@ export class TradeAdvance extends PreludeCard implements IProjectCard {
     });
   }
 
+  public override bespokeCanPlay(player: IPlayer): boolean {
+    if (player.game.tradeEmbargo === true) {
+      return false;
+    }
+    return true;
+  }
+
   public override bespokePlay(player: IPlayer) {
     player.defer(() => {
       const activeColonies = player.game.colonies.filter((colony) => colony.isActive);

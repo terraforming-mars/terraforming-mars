@@ -22,11 +22,11 @@ describe('SponsoringNation', () => {
     const card = new SponsoringNation();
     const [game, player] = testGame(1, {turmoilExtension: true});
 
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     cast(card.play(player), undefined);
 
-    expect(player.getTerraformRating()).eq(17);
+    expect(player.terraformRating).eq(17);
 
     runAllActions(game);
 

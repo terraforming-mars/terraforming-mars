@@ -13,6 +13,7 @@ import {runId} from '../utils/server-ids';
 import {AppError} from '../server/AppError';
 import {statusCode} from '../../common/http/statusCode';
 import {InputError} from '../inputs/InputError';
+import {isIProjectCard} from '../cards/IProjectCard';
 
 export class PlayerInput extends Handler {
   public static readonly INSTANCE = new PlayerInput();
@@ -82,7 +83,12 @@ export class PlayerInput extends Handler {
 
   private processInput(req: Request, res: Response, ctx: Context, player: IPlayer): Promise<void> {
     // TODO(kberg): Find a better place for this optimization.
-    player.tableau.forEach((card) => card.warnings.clear());
+    for (const card of player.tableau) {
+      card.warnings.clear();
+      if (isIProjectCard(card)) {
+        card.additionalProjectCosts = undefined;
+      }
+    }
     return new Promise((resolve) => {
       let body = '';
       req.on('data', (data) => {

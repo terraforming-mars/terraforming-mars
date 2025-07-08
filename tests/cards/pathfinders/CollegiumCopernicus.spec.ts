@@ -25,7 +25,6 @@ describe('CollegiumCopernicus', () => {
   beforeEach(() => {
     card = new CollegiumCopernicus();
     [game, player] = testGame(2, {coloniesExtension: true, pathfindersExpansion: true});
-    player.corporations.push(card);
     // Looks as though when Enceladus is first, the test fails. So removing flakiness by defining colonies.
     game.colonies = [
       new Europa(),
@@ -68,6 +67,7 @@ describe('CollegiumCopernicus', () => {
 
 
   it('is available through standard trade action', () => {
+    player.corporations.push(card);
     const luna = new Luna();
     player.game.colonies = [luna];
 
@@ -102,16 +102,17 @@ describe('CollegiumCopernicus', () => {
 
   it('play', () => {
     expect(card.resourceCount).eq(0);
-    card.play(player);
+    player.playCorporationCard(card);
     runAllActions(game);
     expect(card.resourceCount).eq(1);
   });
 
   it('onCardPlayed', () => {
+    player.corporations.push(card);
     const lunarObservationPost = new LunarObservationPost();
-    player.playedCards = [lunarObservationPost];
+    player.playedCards.push(lunarObservationPost);
 
-    card.onCardPlayed(player, fakeCard({tags: [Tag.SCIENCE]}));
+    card.onCardPlayedForCorps(player, fakeCard({tags: [Tag.SCIENCE]}));
     runAllActions(game);
     const selectCard = cast(player.getWaitingFor(), SelectCard);
 
@@ -127,7 +128,7 @@ describe('CollegiumCopernicus', () => {
 
   it('initialAction', () => {
     expect(player.cardsInHand).is.empty;
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
     expect(player.cardsInHand).has.length(2);
     expect(player.cardsInHand.filter((card) => card.tags.includes(Tag.SCIENCE))).has.length(2);

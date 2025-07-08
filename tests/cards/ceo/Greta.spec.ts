@@ -15,16 +15,24 @@ describe('Greta', () => {
     card = new Greta();
   });
 
-  it('Gains 4 M€ per TR raise action when OPG action is used', () => {
+
+  it('Does not 4 M€ per TR raise action before OPG action is used', () => {
     const [game, player] = testGame(1, {ceoExtension: true});
     player.playCard(card);
 
-    // doesn't gain before card action
     runAllActions(game);
     game.phase = Phase.ACTION;
 
     player.playCard(new BigAsteroid());
     expect(player.megaCredits).to.eq(0);
+  });
+
+  it('Gains 4 M€ per TR raise action when OPG action is used', () => {
+    const [game, player] = testGame(1, {ceoExtension: true});
+    player.playCard(card);
+
+    runAllActions(game);
+    game.phase = Phase.ACTION;
 
     card.action();
 
@@ -97,9 +105,9 @@ describe('Greta', () => {
     turmoil.endGeneration(game);
     runAllActions(game);
     expect(turmoil.chairman).to.eq(player);
-    expect(player.getTerraformRating()).to.eq(20);
+    expect(player.terraformRating).to.eq(20);
     expect(player.megaCredits).to.eq(0);
-    expect(player2.getTerraformRating()).to.eq(19);
+    expect(player2.terraformRating).to.eq(19);
     expect(player2.megaCredits).to.eq(0);
   });
 
@@ -118,7 +126,7 @@ describe('Greta', () => {
 
     const serialized = game.serialize();
     const deserialized = Game.deserialize(serialized);
-    const deserailizedCard = deserialized.getPlayers()[0].tableau[0];
+    const deserailizedCard = deserialized.players[0].tableau.asArray()[0];
 
     expect(cast(deserailizedCard, Greta).data.effectTriggerCount).eq(2);
   });

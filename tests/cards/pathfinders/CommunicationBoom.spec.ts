@@ -16,11 +16,11 @@ describe('CommunicationBoom', () => {
     const b = fakeCard({name: 'B' as CardName, resourceType: CardResource.DATA});
     const c = fakeCard({name: 'C' as CardName, resourceType: CardResource.MICROBE});
     const d = fakeCard({name: 'D' as CardName, resourceType: CardResource.DATA});
-    player.playedCards = [a, b, c, d];
+    player.playedCards.push(a, b, c, d);
 
     const e = fakeCard({name: 'E' as CardName, resourceType: CardResource.DATA});
     const f = fakeCard({name: 'F' as CardName, resourceType: CardResource.DATA});
-    player2.playedCards = [e, f];
+    player2.playedCards.push(e, f);
 
     player.megaCredits = 8;
     player2.megaCredits = 12;

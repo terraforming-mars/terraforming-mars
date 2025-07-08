@@ -9,6 +9,7 @@ import {Priority} from './Priority';
 import {Message} from '../../common/logs/Message';
 import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 import {message} from '../logs/MessageBuilder';
+import {CardName} from '../../common/cards/CardName';
 
 export type Source = 'self' | 'opponents' | 'all';
 export type Response = {card: ICard, owner: IPlayer, proceed: boolean} | {card: undefined, owner: undefined, proceed: boolean};
@@ -113,7 +114,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
 
   public static getAvailableTargetCards(player: IPlayer, resourceType: CardResource | undefined, source: Source = 'all'): Array<ICard> {
     const resourceCards: Array<ICard> = [];
-    for (const p of player.game.getPlayers()) {
+    for (const p of player.game.players) {
       // Making this a function just to delay calling getCardsWithResources unless it's needed.
       const get = () => p.getCardsWithResources(resourceType).filter((card) => card.protectedResources !== true);
       if (p === player) {
@@ -122,7 +123,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
         }
       } else {
         if (source !== 'self') {
-          const hasProtetedHabitats = p.hasProtectedHabitats();
+          const hasProtetedHabitats = p.tableau.has(CardName.PROTECTED_HABITATS);
           for (const card of get()) {
             if (hasProtetedHabitats) {
               if (card.resourceType === CardResource.ANIMAL || card.resourceType === CardResource.MICROBE) {

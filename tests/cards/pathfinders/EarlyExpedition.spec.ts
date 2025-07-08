@@ -15,7 +15,6 @@ describe('EarlyExpedition', () => {
   beforeEach(() => {
     card = new EarlyExpedition();
     [game, player] = testGame(1);
-    player.playedCards.push(card);
   });
 
   it('canPlay', () => {
@@ -35,7 +34,7 @@ describe('EarlyExpedition', () => {
   it('play', () => {
     player.production.override({energy: 1});
     const lunarObservationPost = new LunarObservationPost(); // Holds data.
-    player.playedCards = [lunarObservationPost];
+    player.playedCards.push(lunarObservationPost);
 
     cast(card.play(player), undefined);
     runAllActions(game);

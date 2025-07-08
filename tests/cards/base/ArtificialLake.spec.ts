@@ -43,7 +43,7 @@ describe('ArtificialLake', () => {
     setTemperature(game, -6);
 
     // Set oceans count to the max value
-    for (const space of game.board.getSpaces(SpaceType.OCEAN, player)) {
+    for (const space of game.board.getSpaces(SpaceType.OCEAN)) {
       if (game.board.getOceanSpaces().length < constants.MAX_OCEAN_TILES) {
         game.addOcean(player, space);
       }

@@ -119,7 +119,7 @@ export class Colonies {
           return false;
         }
         if (colony.name === ColonyName.LEAVITT) {
-          const pharmacyUnion = this.player.getCorporation(CardName.PHARMACY_UNION);
+          const pharmacyUnion = this.player.tableau.get(CardName.PHARMACY_UNION);
           if ((pharmacyUnion?.resourceCount ?? 0) > 0 && !this.player.canAfford({cost: cost, tr: {tr: 1}})) {
             return false;
           }
@@ -160,8 +160,8 @@ export class Colonies {
     } else if (syndicatePirateRaider === this.player.id) {
       // CEO effect: Disable all other players from trading next gen,
       // but free up all colonies (don't leave their trade fleets stuck there)
-      if (this.player.cardIsInEffect(CardName.HUAN)) {
-        for (const player of this.player.getOpponents()) {
+      if (this.player.tableau.has(CardName.HUAN)) {
+        for (const player of this.player.opponents) {
           // Magic number high enough to disable other players' trading
           player.colonies.tradesThisGeneration = 50;
         }
@@ -219,7 +219,7 @@ export class TradeWithMegacredits implements IColonyTrader {
 
   constructor(private player: IPlayer) {
     this.tradeCost = MC_TRADE_COST- player.colonies.tradeDiscount;
-    const adhai = player.getCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS);
+    const adhai = player.tableau.get(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS);
     if (adhai !== undefined) {
       const adhaiDiscount = Math.floor(adhai.resourceCount / 2);
       this.tradeCost = Math.max(0, this.tradeCost - adhaiDiscount);

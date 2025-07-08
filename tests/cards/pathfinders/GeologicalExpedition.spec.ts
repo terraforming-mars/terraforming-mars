@@ -29,7 +29,7 @@ describe('GeologicalExpedition', () => {
     space = game.board.getAvailableSpacesOnLand(player)[0];
     microbeCard = fakeCard({resourceType: CardResource.MICROBE});
     scienceCard = fakeCard({resourceType: CardResource.SCIENCE});
-    player.playedCards = [card, microbeCard, scienceCard];
+    player.playedCards.push(card, microbeCard, scienceCard);
     player.popWaitingFor();
   });
 

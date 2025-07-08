@@ -71,7 +71,6 @@ describe('Atmoscoop', () => {
     orOptions.options[1].cb();
     expect(game.getVenusScaleLevel()).to.eq(4);
 
-
     // Then the floaters
     runAllActions(game);
     const selectCard = cast(player.popWaitingFor(), SelectCard<ICard>);

@@ -25,15 +25,15 @@ describe('TychoRoadNetwork', () => {
     player.cardsInHand = [card];
     player.steel = 0;
     player.megaCredits = card.cost;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
     player.steel = 1;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
     player.steel = 1;
     expect(player.production.megacredits).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.logisticRate).eq(0);
 
     card.play(player);
@@ -45,7 +45,7 @@ describe('TychoRoadNetwork', () => {
 
     assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
 
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(moonData.logisticRate).eq(1);
   });
 });

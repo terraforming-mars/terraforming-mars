@@ -7,10 +7,10 @@ import {CardResource} from '../../../common/CardResource';
 import {IPlayer} from '../../IPlayer';
 import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectCard} from '../../inputs/SelectCard';
-import {Space} from '../../boards/Space';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class AeronGenomics extends ActiveCorporationCard {
+export class AeronGenomics extends ActiveCorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.AERON_GENOMICS,
@@ -41,8 +41,10 @@ export class AeronGenomics extends ActiveCorporationCard {
     });
   }
 
-  onExcavation(player: IPlayer, _space: Space) {
-    player.addResourceTo(this, {qty: 1, log: true});
+  onClaim(player: IPlayer, isExcavate: boolean) {
+    if (isExcavate) {
+      player.addResourceTo(this, {qty: 1, log: true});
+    }
   }
 
   public override canAct(player: IPlayer): boolean {

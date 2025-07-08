@@ -22,7 +22,7 @@ describe('TharsisRepublic', () => {
   });
 
   it('Should take initial action', () => {
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
     action.cb(action.spaces[0]);

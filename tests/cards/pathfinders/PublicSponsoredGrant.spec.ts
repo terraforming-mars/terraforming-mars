@@ -45,7 +45,7 @@ describe('PublicSponsoredGrant', () => {
 
     const options = cast(card.play(player), OrOptions);
 
-    expect(player.megaCredits).eq(4);
+    expect(player.megaCredits).eq(2);
     expect(player2.megaCredits).eq(0);
     expect(player3.megaCredits).eq(0);
 
@@ -83,7 +83,7 @@ describe('PublicSponsoredGrant', () => {
   it('compatible with Mons Insurance', () => {
     player2.corporations.push(new MonsInsurance());
     // This isn't very clean but it's necessary for the test.
-    game.monsInsuranceOwner = player2.id;
+    game.monsInsuranceOwner = player2;
     player.megaCredits = 10;
     player2.megaCredits = 10;
     player3.megaCredits = 10;
@@ -92,7 +92,7 @@ describe('PublicSponsoredGrant', () => {
 
     // This is a great test, because player1 instigated the loss, so does not get an insurance
     // payout. Player 2 loses the payout and player 3 gets it.
-    expect(player.megaCredits).eq(10);
+    expect(player.megaCredits).eq(8);
     expect(player2.megaCredits).eq(5);
     expect(player3.megaCredits).eq(11);
   });

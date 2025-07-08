@@ -114,6 +114,6 @@ describe('Hygiea', () => {
 
     expect(player.megaCredits).to.eq(10);
     expect(player2.megaCredits).to.eq(10);
-    expect(player.playedCards).to.have.members([lawSuit]);
+    expect(player.playedCards.asArray()).to.have.members([lawSuit]);
   });
 });

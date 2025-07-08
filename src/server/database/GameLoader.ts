@@ -71,7 +71,7 @@ export class GameLoader implements IGameLoader {
     if (game.spectatorId !== undefined) {
       d.participantIds.set(game.spectatorId, game.id);
     }
-    for (const player of game.getPlayers()) {
+    for (const player of game.players) {
       d.participantIds.set(player.id, game.id);
     }
   }
@@ -188,6 +188,6 @@ function parseConfigString(stringValue: string): CacheConfig {
   const evictMillis = durationToMilliseconds(parsed.eviction_age);
   if (!isNaN(evictMillis)) options.evictMillis = evictMillis;
   const sleepMillis = durationToMilliseconds(parsed.sweep_freq);
-  if (isNaN(sleepMillis)) options.sleepMillis = sleepMillis;
+  if (!isNaN(sleepMillis)) options.sleepMillis = sleepMillis;
   return options;
 }

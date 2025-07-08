@@ -45,7 +45,7 @@ describe('DirectedImpactors', () => {
 
     // can remove resource to raise temperature
     card.action(player);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
     expect(player.game.getTemperature()).to.eq(-28);
     expect(card.resourceCount).to.eq(0);
   });
@@ -62,7 +62,7 @@ describe('DirectedImpactors', () => {
 
     // can remove resource to raise temperature
     action.options[0].cb();
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
     expect(player.game.getTemperature()).to.eq(-28);
     expect(card.resourceCount).to.eq(0);
 

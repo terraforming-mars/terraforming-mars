@@ -3,7 +3,7 @@
   "Effect: When you play a Moon tag, you pay 1 M€ less for each Moon tag you have.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Księżyca płacisz 1 M€ za każdy posiadany symbol Księżyca.",
   "You start with 50 M€. 1 VP for every 3 Moon tags you have.": "Rozpoczynasz grę z 50 M€. Otrzymujesz 1 PZ za każde posiadane 3 symbole Księżyca.",
 
-  "Intragen Sanctuary Headquarters": "Intragen Sanctuary Headquarters",
+  "Intragen Sanctuary Headquarters": "",
   "(Effect: When any player plays an animal tag (including this), add 1 animal on this card.)": "Efekt trwały: Gdy dowolny gracz zagrywa symbol Zwierząt (z tym włącznie) umieść 1 jednostkę zwierząt na tej karcie.",
   "You start with 38 M€. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step. 1 VP for every 2 animals on this card.": "Rozpoczynasz grę z 38 M€. W ramach pierwszej akcji umieść obszar habitatu na Księżycu i podnieś WK Księżyca o 1 poziom. Otrzymujesz 1 PZ za każde 2 jednostki zwierząt znajdujące się na tej karcie.",
 
@@ -17,7 +17,7 @@
   "1 VP for each road tile on The Moon.": "Otrzymujesz po 1 PZ za każdy obszar infrastruktury na Księżycu.",
   "You start with 38 M€ and 4 steel.": "Rozpoczynasz grę z 38 M€ i 4 jednostkami stali.",
 
-  "Nanotech Industries": "Nanotech Industries",
+  "Nanotech Industries": "",
   "Action: Add 1 science resource to ANY card [except those giving 2 or more VP per 1 science resource.]": "Akcja: Umieść 1 jednostkę nauki na dowolnej karcie dającej co najwyżej 1 PZ/jednostkę.",
   "You start with 42 M€. As your first action, draw 3 cards. Take 2 of them into hand, and discard the rest. 1 VP for every 2 science resources here.": "Rozpoczynasz grę z 42 M€. W ramach pierwszej akcji dobierz 3 karty, zatrzymaj 2 z nich a 1 odrzuć. Otrzymujesz 1 PZ za każde 2 jednostki nauki na tej karcie.",
 
@@ -41,8 +41,8 @@
   "You start with 40 M€ and 2 syndicate fleets on this card.": "Rozpoczynasz grę z 40 M€ oraz 2 jednostkami floty syndykatu na tej karcie.",
   "Effect: When you place a tile on The Moon, steal 2 M€ from opponents for each of their tiles next to yours.": "Efekt trwały: Gdy umieszczasz obszar na Księżycu ukradnij po 2 M€ od przeciwników za każdy ich obszar sąsiadujący z umieszczanym przez Ciebie obszarem.",
 
-  "The Grand Luna Capital Group": "The Grand Luna Capital Group",
+  "The Grand Luna Capital Group": "",
   "Effect: When you place a habitat tile, gain 2 M€ for each adjacent habitat tile.": "Efekt trwały: Kiedy umieszczasz obszar habitatu otrzymujesz 2 M€ za każdy sąsiadujący obszar habitatu.",
-  "1 VP for each habitat tile adjacent to your habitat tiles.": "Otrzymujesz 1 PZ za każdy obszar habitatu sąsiadujacy z Twoimi obszarami habitatów.",
+  "1 VP for each habitat tile adjacent to your habitat tiles.": "Otrzymujesz 1 PZ za każdy obszar habitatu sąsiadujący z Twoimi obszarami habitatów.",
   "You start with 32 M€ and 1 titanium. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step.": "Rozpoczynasz grę z 32 M€ i 1 jednostką tytanu. W ramach pierwszej akcji umieść obszar habitatu na Księżycu i podnieś WK Księżyca o 1 poziom."
 }

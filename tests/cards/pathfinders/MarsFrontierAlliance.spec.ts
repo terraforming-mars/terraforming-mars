@@ -106,14 +106,14 @@ describe('MarsFrontierAlliance', () => {
     const reds = game.turmoil!.getPartyByName(PartyName.REDS);
     player.setAlliedParty(reds);
     player.megaCredits = 3;
-    const tr = player.getTerraformRating();
+    const tr = player.terraformRating;
     addOcean(player);
     runNextAction(game);
-    expect(player.getTerraformRating()).to.equal(tr + 1);
+    expect(player.terraformRating).to.equal(tr + 1);
     expect(player.megaCredits).to.equal(3);
     player.megaCredits = 0;
     addOcean(player);
-    expect(player.getTerraformRating()).to.equal(tr + 2);
+    expect(player.terraformRating).to.equal(tr + 2);
   });
 
   it('Passive effect from Greens party should be applied', () => {

@@ -11,7 +11,7 @@ describe('EarthCatapult', () => {
 
     cast(action, undefined);
     expect(card.getVictoryPoints(player)).to.eq(2);
-    expect(card.getCardDiscount()).to.eq(2);
+    expect(card.getCardDiscount(player, card)).to.eq(2);
   });
 });
 

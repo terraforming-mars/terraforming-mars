@@ -8,8 +8,9 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 import {Resource} from '../../../common/Resource';
+import {ICeoCard} from './ICeoCard';
 
-export class Naomi extends CeoCard {
+export class Naomi extends CeoCard implements ICeoCard {
   constructor() {
     super({
       name: CardName.NAOMI,
@@ -52,10 +53,10 @@ export class Naomi extends CeoCard {
     return undefined;
   }
 
-  public onColonyAdded(player: IPlayer, cardOwner: IPlayer) {
-    if (player === cardOwner) {
-      player.stock.add(Resource.ENERGY, 2, {log: true});
-      player.stock.add(Resource.MEGACREDITS, 3, {log: true});
+  public onColonyAddedByAnyPlayer(cardOwner: IPlayer, colonyOwner: IPlayer) {
+    if (colonyOwner === cardOwner) {
+      cardOwner.stock.add(Resource.ENERGY, 2, {log: true});
+      cardOwner.stock.add(Resource.MEGACREDITS, 3, {log: true});
     }
   }
 }

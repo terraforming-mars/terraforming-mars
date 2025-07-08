@@ -14,7 +14,7 @@ import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {Tag} from '../../../common/cards/Tag';
 
-
+// TODO(kberg): Remove Corporate Blackmail from solo plays.
 export class CorporateBlackmail extends Card implements IProjectCard {
   constructor() {
     super({
@@ -29,30 +29,30 @@ export class CorporateBlackmail extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U39',
         renderData: CardRenderer.builder((b) => {
-          b.text('PAYS YOU', Size.SMALL).megacredits(10, {all}).or().minus().corruption(2).br;
+          b.text('PAYS YOU', Size.SMALL).megacredits(10, {all}).or().corruption(2).br;
           b.text('THIS CANNOT BE BLOCKED BY CORRUPTION', Size.SMALL).br;
         }),
-        description: 'Requires 1 corruption. Target a player that has at least 2 corruption. ' +
-          'Unless that player pays you 10 M€, they lose 2 corruption.',
+        description: 'Requires 1 corruption. Target a player that has at least 3 corruption. ' +
+          'That player pays you 10 M€ or 2 corruption - their choice.',
       },
     });
   }
 
 
   private targets(player: IPlayer) {
-    return player.getOpponents().filter((p) => p.underworldData.corruption >= 2);
+    return player.opponents.filter((p) => p.underworldData.corruption >= 3);
   }
 
   public override bespokeCanPlay(player: IPlayer) {
-    return player.game.isSoloMode() || this.targets(player).length > 0;
+    return !player.game.isSoloMode() && this.targets(player).length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {
-    if (player.game.isSoloMode()) {
-      player.stock.add(Resource.MEGACREDITS, 10);
-      player.game.log('${0} blackmailed the neutral player and was paid 10 M€.', (b) => b.player(player));
-      return undefined;
+    function megacreditConsequence(blackmailedPlayer: IPlayer) {
+      blackmailedPlayer.stock.steal(Resource.MEGACREDITS, 10, player);
+      player.game.log('${0} blackmailed ${1} and was paid 10 M€.', (b) => b.player(player).player(blackmailedPlayer));
     }
+
     function corruptionConsequence(blackmailedPlayer: IPlayer) {
       UnderworldExpansion.loseCorruption(blackmailedPlayer, 2);
       player.game.log('${0} blackmailed ${1} who lost 2 corruption.', (b) => b.player(player).player(blackmailedPlayer));
@@ -67,8 +67,7 @@ export class CorporateBlackmail extends Card implements IProjectCard {
           const orOptions = new OrOptions(
             new SelectOption(message('Pay ${0} 10 M€', (b) => b.player(player)), 'Pay 10 M€')
               .andThen(() => {
-                blackmailedPlayer.stock.steal(Resource.MEGACREDITS, 10, player);
-                player.game.log('${0} blackmailed ${1} and was paid 10 M€.', (b) => b.player(player).player(blackmailedPlayer));
+                megacreditConsequence(blackmailedPlayer);
                 return undefined;
               }),
             new SelectOption('Lose 2 corruption', 'Lose 2 corruption')

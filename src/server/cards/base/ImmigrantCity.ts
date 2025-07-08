@@ -38,7 +38,7 @@ export class ImmigrantCity extends Card implements IProjectCard {
   public override bespokeCanPlay(player: IPlayer): boolean {
     const hasEnergyProduction = player.production.energy >= 1;
     const canPlaceCityOnMars = player.game.board.getAvailableSpacesForCity(player).length > 0;
-    const canDecreaseMcProduction = player.production.megacredits >= -4 || player.isCorporation(CardName.THARSIS_REPUBLIC);
+    const canDecreaseMcProduction = player.production.megacredits >= -4 || player.tableau.has(CardName.THARSIS_REPUBLIC);
 
     return hasEnergyProduction && canDecreaseMcProduction && canPlaceCityOnMars;
   }

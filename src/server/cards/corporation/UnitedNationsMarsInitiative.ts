@@ -20,8 +20,8 @@ export class UnitedNationsMarsInitiative extends CorporationCard implements IAct
         description: 'You start with 40 M€.',
         renderData: CardRenderer.builder((b) => {
           // TODO(chosta): find a not so hacky solutions to spacing
-          b.br.br.br;
-          b.empty().nbsp.nbsp.nbsp.nbsp.megacredits(40);
+          // b.br.br.br;
+          b.empty().megacredits(40);
           b.corpBox('action', (ce) => {
             ce.action('If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.', (eb) => {
               eb.megacredits(3).startAction.tr(1).asterix();

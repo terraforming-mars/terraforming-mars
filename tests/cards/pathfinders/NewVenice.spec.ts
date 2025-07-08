@@ -28,21 +28,21 @@ describe('NewVenice', () => {
     player.megaCredits = card.cost;
 
     addOcean(player);
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
     // expect(card.canPlay(player)).is.false;
 
     addOcean(player);
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     addOcean(player);
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     player.plants = 1;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     player.plants = 2;
     // expect(card.canPlay(player)).is.true;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
@@ -144,7 +144,7 @@ describe('NewVenice', () => {
     capital.play(player);
     runAllActions(game);
     const capitalAction = cast(player.popWaitingFor(), SelectSpace);
-    player.playedCards = [capital];
+    player.playedCards.push(capital);
 
     const capitalSpace = game.board
       .getAdjacentSpaces(oceanSpace)
@@ -196,15 +196,15 @@ describe('NewVenice', () => {
     addOcean(player);
     addOcean(player);
     addOcean(player);
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     player.playCard(martianLumberCorp);
     player.megaCredits = card.cost - 3;
     player.plants = 3;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     player.plants = 2;
     player.steel = 0;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 });

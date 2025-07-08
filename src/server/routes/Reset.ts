@@ -43,7 +43,7 @@ export class Reset extends Handler {
     }
 
     // While prototyping, this is only available for solo games
-    if (game.getPlayers().length > 1) {
+    if (game.players.length > 1) {
       throw new Error('Reset is only available for solo games at the moment.');
     }
 

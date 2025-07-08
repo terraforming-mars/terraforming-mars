@@ -21,21 +21,21 @@ describe('DarksideMeteorBombardment', () => {
   it('can play', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
     player.titanium = 0;
     player.steel = 0;
     moonData.miningRate = 0;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     card.play(player);
 
     expect(player.titanium).eq(2);
     expect(player.titanium).eq(2);
     expect(moonData.miningRate).eq(2);
-    expect(player.getTerraformRating()).eq(16);
+    expect(player.terraformRating).eq(16);
   });
 });
 

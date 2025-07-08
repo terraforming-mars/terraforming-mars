@@ -32,7 +32,7 @@ describe('Cartel', () => {
       new LunarBeam(), // green card with earth tag
     ];
 
-    player.playedCards = player.playedCards.concat(cards);
+    player.playedCards.push(...cards);
     card.play(player);
     expect(player.production.megacredits).to.eq(2); // events are excluded
   });

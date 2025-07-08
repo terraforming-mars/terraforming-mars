@@ -10,7 +10,7 @@ describe('PlanetaryAlliance', () => {
     const [/* game*/, player] = testGame(1, {venusNextExtension: true});
     card.play(player);
 
-    expect(player.getTerraformRating()).to.eq(16);
+    expect(player.terraformRating).to.eq(16);
     expect(player.cardsInHand).has.lengthOf(2);
 
     const jovianCards = (c: IProjectCard) => c.tags.includes(Tag.JOVIAN);

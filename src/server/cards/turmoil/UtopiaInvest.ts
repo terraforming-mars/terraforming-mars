@@ -8,8 +8,9 @@ import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class UtopiaInvest extends CorporationCard implements IActionCard {
+export class UtopiaInvest extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {
     super({
       name: CardName.UTOPIA_INVEST,

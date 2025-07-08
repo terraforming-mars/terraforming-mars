@@ -17,8 +17,9 @@ import {PartyName} from '../../../common/turmoil/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../../common/constants';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {TITLES} from '../../inputs/titles';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class ProjectWorkshop extends CorporationCard {
+export class ProjectWorkshop extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.PROJECT_WORKSHOP,
@@ -56,8 +57,10 @@ export class ProjectWorkshop extends CorporationCard {
     });
   }
 
-  private getEligibleCards(player: IPlayer) {
-    const cards = player.playedCards.filter((card) => card.type === CardType.ACTIVE);
+  private getEligibleCards(player: IPlayer): ReadonlyArray<IProjectCard> {
+    const cards = player.playedCards.projects()
+      .filter((card) => card.type === CardType.ACTIVE);
+
     if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp01')) {
       return cards;
     }

@@ -51,7 +51,7 @@ export class Deepmining extends Card implements IProjectCard {
   }
 
   public getAvailableSpaces(player: IPlayer): ReadonlyArray<Space> {
-    return UnderworldExpansion.identifiedSpaces(player.game).filter((space) => {
+    return player.game.board.spaces.filter((space) => {
       if (space.excavator !== undefined) {
         return false;
       }

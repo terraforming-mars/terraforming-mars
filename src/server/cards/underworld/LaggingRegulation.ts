@@ -29,8 +29,8 @@ export class LaggingRegulation extends GlobalEvent implements IGlobalEvent {
   }
   public resolve(game: IGame, turmoil: Turmoil) {
     const map: MultiMap<number, IPlayer> = new MultiMap();
-    for (const player of game.getPlayers()) {
-      map.set(player.underworldData.corruption + turmoil.getPlayerInfluence(player), player);
+    for (const player of game.players) {
+      map.set(player.underworldData.corruption + turmoil.getInfluence(player), player);
     }
     const totals = Array.from(map.keys());
     totals.sort(); // Largest value at the back.

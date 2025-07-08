@@ -30,7 +30,7 @@ export abstract class Party {
 
   // Check if you are the new party leader
   public checkPartyLeader(delegate: Delegate, game: IGame): void {
-    const players = game.getPlayersInGenerationOrder();
+    const players = game.playersInGenerationOrder;
     if (this.delegates.size === 0) {
       this.partyLeader = undefined;
       return;

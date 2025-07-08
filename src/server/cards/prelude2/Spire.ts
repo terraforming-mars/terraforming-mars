@@ -35,7 +35,7 @@ export class Spire extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     player.drawCard(4);
     return new SelectCard('Select 3 cards to discard', 'Discard', player.cardsInHand, {min: 3, max: 3})
       .andThen((cards) => {
@@ -46,22 +46,10 @@ export class Spire extends CorporationCard implements ICorporationCard {
       });
   }
 
-  public override bespokePlay(player: IPlayer) {
-    // Including this.
-    this.onCardPlayed(player, this);
-    return undefined;
-  }
-
-  public onCardPlayed(player: IPlayer, card: ICard) {
-    if (player.isCorporation(this.name)) {
-      const count = card.tags.length + (card.type === CardType.EVENT ? 1 : 0);
-      if (count >= 2) {
-        player.addResourceTo(this, {qty: 1, log: true});
-      }
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+    const count = card.tags.length + (card.type === CardType.EVENT ? 1 : 0);
+    if (count >= 2) {
+      player.addResourceTo(this, {qty: 1, log: true});
     }
-  }
-
-  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
-    this.onCardPlayed(player, card);
   }
 }

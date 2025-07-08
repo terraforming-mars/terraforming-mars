@@ -124,29 +124,22 @@ export default Vue.extend({
       }
       return cards;
     },
+    getData(): Array<CardName> {
+      return Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name];
+    },
     hasCardWarning() {
       // This is pretty clunky, to be honest.
       if (Array.isArray(this.cards)) {
         if (this.cards.length === 1) {
           this.warnings = this.cards[0].warnings;
-          if (this.cards[0].warning !== undefined) {
-            this.warning = this.cards[0].warning;
-            return true;
-          }
         }
         return false;
       } else if (typeof this.cards === 'object') {
         this.warnings = this.cards.warnings;
-        if (this.cards.warning !== undefined) {
-          this.warning = this.cards.warning;
-          return true;
-        }
       }
       return false;
     },
-    getData(): Array<CardName> {
-      return Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name];
-    },
+
     canSave() {
       const len = this.getData().length;
       if (len > this.playerinput.min) {

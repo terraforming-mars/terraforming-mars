@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {SearchForLife} from '../../../src/server/cards/base/SearchForLife';
 import {TectonicStressPower} from '../../../src/server/cards/base/TectonicStressPower';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -13,13 +12,15 @@ describe('TectonicStressPower', () => {
     [/* game */, player] = testGame(1);
   });
 
-  it('Can not play', () => {
+  it('canPlay', () => {
     expect(card.canPlay(player)).is.not.true;
+    player.tagsForTest = {science: 1};
+    expect(card.canPlay(player)).is.not.true;
+    player.tagsForTest = {science: 2};
+    expect(card.canPlay(player)).is.true;
   });
 
-  it('Should play', () => {
-    player.playedCards.push(new SearchForLife(), new SearchForLife());
-    expect(card.canPlay(player)).is.true;
+  it('play', () => {
     card.play(player);
 
     expect(player.production.energy).to.eq(3);

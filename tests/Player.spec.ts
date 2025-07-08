@@ -35,11 +35,13 @@ import {OrOptions} from '../src/server/inputs/OrOptions';
 import {Payment} from '../src/common/inputs/Payment';
 import {PhysicsComplex} from '../src/server/cards/base/PhysicsComplex';
 import {GlobalParameter} from '../src/common/GlobalParameter';
+import {EnergyTapping} from '../src/server/cards/base/EnergyTapping';
 
 describe('Player', () => {
   it('should initialize with right defaults', () => {
     const player = new Player('name', 'blue', false, 0, 'p-blue');
-    expect(player.corporations).is.empty;
+    expect(player.playedCards.corporations()).is.empty;
+    expect(player.playedCards.length).eq(0);
   });
 
   it('Should throw error if nothing to process', () => {
@@ -59,7 +61,7 @@ describe('Player', () => {
     player2.production.add(Resource.ENERGY, 2);
     player3.production.add(Resource.ENERGY, 2);
     player.playedCards.push(new LunarBeam());
-    player.playedCards.push(new LunarBeam());
+    player.playedCards.push(new EnergyTapping());
     card.play(player);
     runAllActions(player.game);
     player.process({type: 'player', player: player2.color});
@@ -74,7 +76,7 @@ describe('Player', () => {
     (player as any).setWaitingFor(undefined, undefined);
 
     player.playedCards.push(new LunarBeam());
-    player.playedCards.push(new LunarBeam());
+    player.playedCards.push(new EnergyTapping());
     player.production.add(Resource.ENERGY, 1);
     player2.production.add(Resource.ENERGY, 1);
 
@@ -112,7 +114,7 @@ describe('Player', () => {
     const card = new IoMiningIndustries();
     const corporationCard = new SaturnSystems();
     expect(player1.production.megacredits).to.eq(0);
-    player1.corporations = [corporationCard];
+    player1.playedCards.push(corporationCard);
     player2.playCard(card, undefined);
     expect(player1.production.megacredits).to.eq(1);
   });
@@ -188,7 +190,6 @@ describe('Player', () => {
       heatProduction: 12,
       titaniumValue: 13,
       steelValue: 14,
-      canUseCorruptionAsMegacredits: true,
       canUseHeatAsMegaCredits: false,
       canUseTitaniumAsMegacredits: false,
       canUsePlantsAsMegaCredits: false,
@@ -254,7 +255,6 @@ describe('Player', () => {
 
     expect(newPlayer.color).eq('purple');
     expect(newPlayer.colonies.tradesThisGeneration).eq(100);
-    expect(newPlayer.canUseCorruptionAsMegacredits).eq(true);
     it('pulls self replicating robots target cards', () => {
       const player = new Player('blue', 'blue', false, 0, 'p-blue');
       expect(player.getSelfReplicatingRobotsTargetCards()).is.empty;
@@ -317,10 +317,10 @@ describe('Player', () => {
       player1.megaCredits = 0;
       player1.production.add(Resource.MEGACREDITS, -5);
       player2.megaCredits = 3;
-      game.monsInsuranceOwner = player2.id;
-      player1.stock.add(Resource.MEGACREDITS, -3, {from: player2, log: false});
+      game.monsInsuranceOwner = player2;
+      player1.stock.add(Resource.MEGACREDITS, -3, {from: {player: player2}, log: false});
       expect(player2.megaCredits).eq(3);
-      player1.production.add(Resource.MEGACREDITS, -3, {from: player2, log: false});
+      player1.production.add(Resource.MEGACREDITS, -3, {from: {player: player2}, log: false});
       expect(player2.megaCredits).eq(3);
     });
 
@@ -552,6 +552,77 @@ describe('Player', () => {
 
     game.increaseOxygenLevel(player2, 2);
     expect(player2.globalParameterSteps[GlobalParameter.OXYGEN]).eq(2);
+  });
+
+  it('run research phase', () => {
+    const [game, player] = testGame(1, {skipInitialCardSelection: true});
+    game.generation = 2;
+    player.megaCredits = 20;
+
+    game.gotoResearchPhase();
+
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    const cards = selectCard.cards;
+    selectCard.cb([cards[0], cards[2]]);
+    runAllActions(game);
+
+    expect(player.cardsInHand).to.have.members([cards[0], cards[2]]);
+    expect(player.megaCredits).eq(14);
+  });
+
+  it('run research phase, player has corruption, declines', () => {
+    const [game, player] = testGame(1, {underworldExpansion: true, skipInitialCardSelection: true});
+    game.generation = 2;
+    game.underworldDraftEnabled = true;
+    player.megaCredits = 20;
+    player.underworldData.corruption = 1;
+
+    game.gotoResearchPhase();
+
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+    const selectCard = cast(orOptions.options[0], SelectCard);
+    const selectedCards = selectCard.cards;
+    selectCard.cb([selectedCards[0], selectedCards[2]]);
+    runAllActions(game);
+
+    expect(player.cardsInHand).to.have.members([selectedCards[0], selectedCards[2]]);
+    expect(player.megaCredits).eq(14);
+    expect(player.underworldData.corruption).eq(1);
+  });
+
+  it('run research phase, player has corruption, accepts', () => {
+    const [game, player] = testGame(1, {underworldExpansion: true, skipInitialCardSelection: true});
+    game.underworldDraftEnabled = true;
+    game.generation = 2;
+    player.megaCredits = 20;
+    player.underworldData.corruption = 1;
+
+    game.gotoResearchPhase();
+
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+    const discardCards = cast(orOptions.options[1], SelectCard);
+    const [discard1, discard2] = [discardCards.cards[0], discardCards.cards[2]];
+    const [kept1, kept2] = [discardCards.cards[1], discardCards.cards[3]];
+    discardCards.cb([discard1, discard2]);
+
+    expect(player.game.projectDeck.discardPile).includes(discard1);
+    expect(player.game.projectDeck.discardPile).includes(discard2);
+    runAllActions(game);
+
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    const selectedCards = selectCard.cards;
+
+    expect(selectedCards).does.not.include(discard1);
+    expect(selectedCards).does.not.include(discard2);
+    expect(selectedCards).includes(kept1);
+    expect(selectedCards).includes(kept2);
+
+    selectCard.cb([selectedCards[0], selectedCards[2]]);
+    runAllActions(game);
+
+    expect(player.cardsInHand).to.have.members([selectedCards[0], selectedCards[2]]);
+    expect(player.megaCredits).eq(14);
+    expect(player.underworldData.corruption).eq(1);
   });
 });
 

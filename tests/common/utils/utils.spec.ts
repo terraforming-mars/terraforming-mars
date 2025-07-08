@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import * as utils from '../../../src/common/utils/utils';
+import {Tag} from '../../../src/common/cards/Tag';
 
 describe('utils', () => {
   it('range', () => {
@@ -67,6 +68,16 @@ describe('utils', () => {
     ]);
   });
 
+  it('oneWayDifference', () => {
+    expect(utils.oneWayDifference([], [])).is.empty;
+    expect(utils.oneWayDifference([1], [1])).is.empty;
+    expect(utils.oneWayDifference([1], [2, 3])).deep.eq([1]);
+    expect(utils.oneWayDifference([1, 2, 3], [2, 3])).deep.eq([1]);
+    expect(utils.oneWayDifference([1, 2, 3], [1, 3, 4, 2])).deep.eq([]);
+    expect(utils.oneWayDifference([1, 2, 3, 4], [1, 4, 2])).deep.eq([3]);
+    expect(utils.oneWayDifference([1, 1], [1])).deep.eq([1]);
+  });
+
   it('deNull', () => {
     expect(utils.deNull([])).deep.eq([]);
     expect(utils.deNull([1])).deep.eq([1]);
@@ -75,5 +86,55 @@ describe('utils', () => {
     expect(utils.deNull([undefined])).deep.eq([]);
     expect(utils.deNull([undefined, 1, undefined])).deep.eq([1]);
     expect(utils.deNull([undefined, undefined])).deep.eq([]);
+  });
+
+  it('partialize', () => {
+    expect(utils.partialize({})).deep.eq({});
+    expect(utils.partialize({'a': 0})).deep.eq({});
+    expect(utils.partialize({'a': 0, 'b': 1})).deep.eq({'b': 1});
+  });
+
+  it('getEnumKeys', () => {
+    expect(utils.getEnumKeys(Tag)).deep.eq([
+      'BUILDING',
+      'SPACE',
+      'SCIENCE',
+      'POWER',
+      'EARTH',
+      'JOVIAN',
+      'VENUS',
+      'PLANT',
+      'MICROBE',
+      'ANIMAL',
+      'CITY',
+      'MOON',
+      'MARS',
+      'CRIME',
+      'WILD',
+      'EVENT',
+      'CLONE',
+    ]);
+  });
+
+  it('getEnumStringValues', () => {
+    expect(utils.getEnumStringValues(Tag)).deep.eq([
+      'building',
+      'space',
+      'science',
+      'power',
+      'earth',
+      'jovian',
+      'venus',
+      'plant',
+      'microbe',
+      'animal',
+      'city',
+      'moon',
+      'mars',
+      'crime',
+      'wild',
+      'event',
+      'clone',
+    ]);
   });
 });

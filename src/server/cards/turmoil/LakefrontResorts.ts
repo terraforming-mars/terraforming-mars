@@ -10,8 +10,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all} from '../Options';
 import {Board} from '../../boards/Board';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class LakefrontResorts extends CorporationCard {
+export class LakefrontResorts extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.LAKEFRONT_RESORTS,

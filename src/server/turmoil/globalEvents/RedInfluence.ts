@@ -24,13 +24,13 @@ export class RedInfluence extends GlobalEvent implements IGlobalEvent {
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      const sets = Math.floor((player.getTerraformRating() - 10)/5);
+    game.playersInGenerationOrder.forEach((player) => {
+      const sets = Math.floor((player.terraformRating - 10)/5);
       if (sets > 0) {
         const amount = Math.min(sets, 5);
-        player.stock.deduct(Resource.MEGACREDITS, amount * 3, {log: true, from: this.name});
+        player.stock.deduct(Resource.MEGACREDITS, amount * 3, {log: true, from: {globalEvent: this}});
       }
-      player.production.add(Resource.MEGACREDITS, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
+      player.production.add(Resource.MEGACREDITS, turmoil.getInfluence(player), {log: true, from: {globalEvent: this}});
     });
   }
 }

@@ -7,7 +7,7 @@ import {TileType} from '../../../common/TileType';
 import {Behavior} from '../../behavior/Behavior';
 import {IPreludeCard} from './IPreludeCard';
 import {CardResource} from '../../../common/CardResource';
-import {IVictoryPoints} from '../../../common/cards/IVictoryPoints';
+import {CountableVictoryPoints} from '../../../common/cards/CountableVictoryPoints';
 import {CardDiscount, GlobalParameterRequirementBonus} from '../../../common/cards/Types';
 import {OneOrArray} from '../../../common/utils/types';
 import {TRSource} from '../../../common/cards/TRSource';
@@ -22,7 +22,7 @@ export type StaticPreludeProperties = {
   tilesBuilt?: ReadonlyArray<TileType>,
   resourceType?: CardResource;
   startingMegacredits?: number,
-  victoryPoints?: number | 'special' | IVictoryPoints,
+  victoryPoints?: number | 'special' | CountableVictoryPoints,
   cardDiscount?: OneOrArray<CardDiscount>;
   /**
    * Describes where the card's TR comes from.

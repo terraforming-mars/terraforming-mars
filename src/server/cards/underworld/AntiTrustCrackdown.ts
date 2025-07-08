@@ -13,7 +13,7 @@ export class AntiTrustCrackdown extends Card implements IProjectCard {
     super({
       name: CardName.ANTI_TRUST_CRACKDOWN,
       type: CardType.EVENT,
-      cost: 22,
+      cost: 18,
       tags: [Tag.EARTH],
       victoryPoints: 2,
 
@@ -30,7 +30,7 @@ export class AntiTrustCrackdown extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.game.getPlayersInGenerationOrder().forEach((p) => {
+    player.game.playersInGenerationOrder.forEach((p) => {
       if (p !== player) {
         const loss = Math.min(p.underworldData.corruption, 2);
         if (loss > 0) {

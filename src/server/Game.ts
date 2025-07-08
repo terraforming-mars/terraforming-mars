@@ -1791,7 +1791,7 @@ export class Game implements IGame, Logger {
       gameId: this.id,
       lastSaveId: this.lastSaveId,
       logAge: this.gameLog.length,
-      currentPlayer: this.activePlayer,
+      currentPlayer: this.activePlayer.id,
 
       metadata: metadata,
     };

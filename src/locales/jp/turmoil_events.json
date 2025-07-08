@@ -142,7 +142,7 @@
   "Gain 1 M€ production (max 5) for every 2 underworld tokens you own. Each point of influence counts as an extra underworld token.": "",
 
   "Seismic Predictions": "地震予知",
-  "Discard all unclaimed underground resources. Lose 2 M€ for each tile on Mars you own WITHOUT excavation markers (max 5) minus influence.": "採掘されていない資源トークンを全て除去する. 地下採掘していない所有するタイル(最大5)-影響力の数分、2MC支払う.",
+  "// Discard all unclaimed underground resources. Lose 2 M€ for each tile on Mars you own WITHOUT excavation markers (max 5) minus influence.": "採掘されていない資源トークンを全て除去する. 地下採掘していない所有するタイル(最大5)-影響力の数分、2MC支払う.",
 
   "1st:": "1位",
   "2nd:": "2位",

@@ -429,9 +429,8 @@ describe('UnderworldExpansion', () => {
     space.undergroundResources = 'nothing';
 
     const card = fakeCard({
-      onClaim(player, isExcavate, space) {
+      onClaim(player, isExcavate) {
         expect(isExcavate).is.false;
-        expect(space).is.undefined;
         responses.push(`from player1: ${player.id}`);
       },
     });

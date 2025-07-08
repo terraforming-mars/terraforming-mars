@@ -15,7 +15,6 @@ import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
 import {SerializedGame} from './SerializedGame';
 import {TerraCimmeriaBoard} from './boards/TerraCimmeriaBoard';
 import {AmazonisBoard} from './boards/AmazonisBoard';
-import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {UtopiaPlanitiaBoard} from './boards/UtopiaPlanitiaBoard';
 import {VastitasBorealisNovusBoard} from './boards/VastitasBorealisNovusBoard';
 import {TerraCimmeriaNovusBoard} from './boards/TerraCimmeriaNovusBoard';
@@ -73,9 +72,6 @@ export class GameSetup {
               adjacentSpaces.some((sp) => board.canPlaceTile(sp)); // can place forest nearby
         });
       game.simpleAddTile(neutral, citySpace, {tileType: TileType.CITY});
-      if (game.gameOptions.underworldExpansion === true) {
-        UnderworldExpansion.identify(game, citySpace, undefined);
-      }
 
       const adjacentSpaces = board.getAdjacentSpaces(citySpace).filter((s) => game.board.canPlaceTile(s));
       if (adjacentSpaces.length === 0) {
@@ -85,9 +81,6 @@ export class GameSetup {
       idx = Math.max(idx-1, 0); // Some cards cost zero.
       const greenerySpace = adjacentSpaces[idx%adjacentSpaces.length];
       game.simpleAddTile(neutral, greenerySpace, {tileType: TileType.GREENERY});
-      if (game.gameOptions.underworldExpansion === true) {
-        UnderworldExpansion.identify(game, greenerySpace, undefined);
-      }
     }
 
     placeCityAndForest(game, 'top');

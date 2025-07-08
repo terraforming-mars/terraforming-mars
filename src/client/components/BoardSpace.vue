@@ -27,6 +27,7 @@
           :space="space"
           :tileView="tileView"
         ></underground-resources>
+        <div v-if="space.excavator !== undefined" class="underground-excavator" :class="'underground-excavator--' + space.excavator"></div>
       </template>
     </template>
     </div>

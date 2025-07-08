@@ -36,7 +36,7 @@ describe('ToolWithTheFirstOrder', () => {
     player.cardsInHand = [ants, bactoviralResearch, card];
 
     expect(player.actionsTakenThisRound).eq(0);
-    expect(game.activePlayer).eq(player.id);
+    expect(game.activePlayer.id).eq(player.id);
 
     player.megaCredits = card.cost;
     player.takeAction();

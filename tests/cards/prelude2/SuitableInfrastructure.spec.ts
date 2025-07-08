@@ -9,7 +9,6 @@ import {SaturnSystems} from '../../../src/server/cards/corporation/SaturnSystems
 import {Manutech} from '../../../src/server/cards/venusNext/Manutech';
 import {JovianLanterns} from '../../../src/server/cards/colonies/JovianLanterns';
 import {RefugeeCamps} from '../../../src/server/cards/colonies/RefugeeCamps';
-import {ICorporationCard} from '../../../src/server/cards/corporation/ICorporationCard';
 import {SpaceLanes} from '../../../src/server/cards/prelude2/SpaceLanes';
 import {Aridor} from '../../../src/server/cards/colonies/Aridor';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
@@ -68,13 +67,13 @@ describe('SuitableInfrastructure', () => {
     player.corporations.push(saturnSystems);
     const jovianLanterns = new JovianLanterns();
 
-    game.activePlayer = player2.id;
-    saturnSystems.onCardPlayedByAnyPlayer(player2, jovianLanterns);
+    game.activePlayer = player2;
+    saturnSystems.onCardPlayedByAnyPlayer(player, jovianLanterns);
 
     expect(player.stock.megacredits).eq(0);
 
-    game.activePlayer = player.id;
-    saturnSystems.onCardPlayedByAnyPlayer(player2, jovianLanterns);
+    game.activePlayer = player;
+    saturnSystems.onCardPlayedByAnyPlayer(player, jovianLanterns);
 
     expect(player.stock.megacredits).eq(2);
   });

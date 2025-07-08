@@ -4,7 +4,7 @@
     " Aeron Genomics ": "アーロンゲノミクス",
     "Effect: After you excavate an underground resource, put an animal on this card.": "効果：地下資源を採掘した時、このカード上に1動物追加.",
     "Action: Spend 1 M€ to move an animal from here to another card.": "アクション：1MC支払い、このカード上の動物を他のカードに移動する.",
-    "You start with 35 M€, 5 steel, and 1 animal resource on this card. 1 VP per 3 animals on this card.": "初期資源：35MC. 5建材. このカード上に1動物追加. このカード上の3動物毎に1VP",
+    "// You start with 35 M€, 5 steel, and 1 animal resource on this card. 1 VP per 3 animals on this card.": "初期資源：35MC. 5建材. このカード上に1動物追加. このカード上の3動物毎に1VP",
 
     "ANUBIS SECURITIES": "",
     "Anubis Securities": "アヌビス証券",
@@ -46,9 +46,8 @@
     "HENKEI GENETICS": "",
     "Henkei Genetics": "ヘンケイ遺伝学",
     " Henkei Genetics ": "ヘンケイ遺伝学",
-    "Effect: After you play a microbe card that can hold microbes, add 2 microbes to it.": "効果：微生物を配置できるカードをプレイした時、そのカード上に2微生物追加.",
-    "Action: Pay 1 corruption to draw a card with a microbe tag.": "アクション：1汚職支払い、微生物タグカードを1枚入手.",
-    "You start with 47 M€ and 1 corruption.": "初期資源：47MC. 1汚職.",
+    "// Action: Pay 1 corruption to draw a card with a microbe tag.": "アクション：1汚職支払い、微生物タグカードを1枚入手.",
+    "// You start with 47 M€ and 1 corruption.": "初期資源：47MC. 1汚職.",
 
     "JENSON-BOYLE & CO": "",
     "Jenson-Boyle & Co": "ジェンソン・ボイル",

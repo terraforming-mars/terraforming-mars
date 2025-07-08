@@ -3,7 +3,7 @@
   "Aeron Genomics": "Aeron Генетика",
   "Effect: After you excavate an underground resource, put an animal on this card.": "Ефект: Після того, як ви розкопаєте підземний ресурс, покладіть тварину на цю карту.",
   "Action: Spend 1 M€ to move an animal from here to another card.": "Дія: Витратити 1 M€, щоб перемістити тварину звідси на іншу карту.",
-  "You start with 35 M€, 5 steel, and 1 animal resource on this card. 1 VP per 3 animals on this card.": "Ви починаєте з 35 M€, 5 сталі та 1 ресурсу тварини на цій карті. 1 VP за кожні 3 тварини на цій карті.",
+  "// You start with 35 M€, 5 steel, and 1 animal resource on this card. 1 VP per 3 animals on this card.": "Ви починаєте з 35 M€, 5 сталі та 1 ресурсу тварини на цій карті. 1 VP за кожні 3 тварини на цій карті.",
 
   "ANUBIS SECURITIES": "Anubis Цінні папери",
   "Anubis Securities": "Anubis Цінні папери",
@@ -39,9 +39,8 @@
 
   "HENKEI GENETICS": "Henkei Генетика",
   "Henkei Genetics": "Henkei Генетика",
-  "Effect: After you play a microbe card that can hold microbes, add 2 microbes to it.": "Ефект: Після того, як ви зіграєте карту мікробів, яка може утримувати мікробів, додайте до неї 2 мікроби.",
-  "Action: Pay 1 corruption to draw a card with a microbe tag.": "Дія: Заплатити 1 корупцію, щоб витягнути карту з позначкою мікробів.",
-  "You start with 47 M€ and 1 corruption.": "Ви починаєте з 47 M€ і 1 корупцією.",
+  "// Action: Pay 1 corruption to draw a card with a microbe tag.": "Дія: Заплатити 1 корупцію, щоб витягнути карту з позначкою мікробів.",
+  "// You start with 47 M€ and 1 corruption.": "Ви починаєте з 47 M€ і 1 корупцією.",
 
   "JENSON-BOYLE & CO": "",
   "Jenson-Boyle & Co": "",

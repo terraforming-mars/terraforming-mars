@@ -7,6 +7,7 @@ import {TileType, tileTypeToString} from '../common/TileType';
 import {IColony} from './colonies/IColony';
 import {Logger} from './logs/Logger';
 import {From, isFromPlayer} from './logs/From';
+import {CardResource} from '../common/CardResource';
 
 export class LogHelper {
   static logAddResource(player: IPlayer, card: ICard, qty: number = 1): void {
@@ -190,5 +191,9 @@ export class LogHelper {
         }
       }
     });
+  }
+
+  public static logMoveResource(player: IPlayer, resource: CardResource, from: ICard, to: ICard) {
+    player.game.log('${0} moved 1 ${1} from ${2} to ${3}.', (b) => b.player(player).string(resource).card(from).card(to));
   }
 }

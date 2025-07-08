@@ -274,12 +274,16 @@ export interface IPlayer {
   /**
    * Returns the set of cards in play that have actual resources on them.
    *
+   * Use |getResourceCards| to return all cards, even without resources on them.
+   *
    * If `resource` is absent, include cards that collect any resource.
    */
   getCardsWithResources(resource?: CardResource): Array<ICard>;
 
   /**
-   * Return the cards that collect `resource`.
+   * Return the cards that collect `resource`, even if they have none on the card.
+   *
+   * Use |getCardsWithResources| to return only cards with resources on them.
    *
    * If `resource` is absent, return the cards that collect any resource.
    */

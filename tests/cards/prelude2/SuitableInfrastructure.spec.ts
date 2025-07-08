@@ -64,11 +64,11 @@ describe('SuitableInfrastructure', () => {
     player.corporations.push(saturnSystems);
     const jovianLanterns = new JovianLanterns();
 
-    game.activePlayer = player2.id;
+    game.activePlayer = player2;
     saturnSystems.onCardPlayed(player2, jovianLanterns);
     expect(player.stock.megacredits).eq(0);
 
-    game.activePlayer = player.id;
+    game.activePlayer = player;
     saturnSystems.onCardPlayed(player2, jovianLanterns);
     expect(player.stock.megacredits).eq(2);
   });

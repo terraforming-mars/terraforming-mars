@@ -35,7 +35,7 @@ import {MAX_AWARDS, MAX_MILESTONES} from '../../common/constants';
 export class Server {
   public static getSimpleGameModel(game: IGame): SimpleGameModel {
     return {
-      activePlayer: game.getPlayerById(game.activePlayer).color,
+      activePlayer: game.activePlayer.color,
       id: game.id,
       phase: game.phase,
       players: game.getPlayersInGenerationOrder().map((player) => ({
@@ -227,7 +227,7 @@ export class Server {
       heatProduction: player.production.heat,
       id: game.phase === Phase.END ? player.id : undefined,
       influence: Turmoil.ifTurmoilElse(game, (turmoil) => turmoil.getPlayerInfluence(player), () => 0),
-      isActive: player.id === game.activePlayer,
+      isActive: player.id === game.activePlayer.id,
       lastCardPlayed: player.lastCardPlayed,
       megaCredits: player.megaCredits,
       megaCreditProduction: player.production.megacredits,

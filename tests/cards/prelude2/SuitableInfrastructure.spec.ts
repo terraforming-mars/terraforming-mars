@@ -69,12 +69,13 @@ describe('SuitableInfrastructure', () => {
     const jovianLanterns = new JovianLanterns();
 
     game.activePlayer = player2.id;
-
     saturnSystems.onCardPlayedByAnyPlayer(player2, jovianLanterns);
+
     expect(player.stock.megacredits).eq(0);
 
     game.activePlayer = player.id;
     saturnSystems.onCardPlayedByAnyPlayer(player2, jovianLanterns);
+    
     expect(player.stock.megacredits).eq(2);
   });
 

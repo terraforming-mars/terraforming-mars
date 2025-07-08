@@ -5,9 +5,10 @@ import {CardType} from '../../../common/cards/CardType';
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
-import {SelectCard} from '../../inputs/SelectCard';
+import {SelectCardDeferred} from '../../deferredActions/SelectCardDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 import {IPlayer} from '../../IPlayer';
+import {LogHelper} from '../../LogHelper';
 
 export class BioengineeringEnclosure extends Card implements IProjectCard, IActionCard {
   constructor() {
@@ -37,41 +38,29 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
     });
   }
 
+  private availableCards(player: IPlayer) {
+    return player.getResourceCards(this.resourceType).filter((card) => card.name !== this.name);
+  }
+
   public canAct(player: IPlayer): boolean {
-    // >1 because this player already has bioengineering enclosure.
-    return this.resourceCount > 0 && player.getResourceCards(this.resourceType).length > 1;
+    return this.resourceCount > 0 && this.availableCards(player).length > 0;
   }
 
   public action(player: IPlayer) {
-    player.defer(
-      () => {
-        const resourceCards = player.getResourceCards(this.resourceType).filter((card) => card.name !== CardName.BIOENGINEERING_ENCLOSURE);
-
-        if (resourceCards.length === 0) {
-          return undefined;
-        }
-
-        if (resourceCards.length === 1) {
-          this.resourceCount--;
-          player.addResourceTo(resourceCards[0], 1);
-          player.game.log('${0} moved 1 animal from Bioengineering Enclosure to ${1}.', (b) => b.player(player).card(resourceCards[0]));
-          return undefined;
-        }
-
-        return new SelectCard(
-          'Select card to add 1 animal',
-          'Add animal',
-          resourceCards)
-          .andThen(
-            ([card]) => {
-              this.resourceCount--;
-              player.addResourceTo(card, 1);
-              player.game.log('${0} moved 1 animal from Bioengineering Enclosure to ${1}.', (b) => b.player(player).card(card));
-              return undefined;
-            },
-          );
-      },
-    );
+    player.game.defer(
+      new SelectCardDeferred(
+        player,
+        this.availableCards(player),
+        {
+          title: 'Select card to add 1 animal',
+          buttonLabel: 'Add animal',
+        },
+      ))
+      .andThen((card) => {
+        this.resourceCount--;
+        player.addResourceTo(card, 1);
+        LogHelper.logMoveResource(player, CardResource.ANIMAL, this, card);
+      });
     return undefined;
   }
 }

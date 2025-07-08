@@ -4,7 +4,7 @@
 "Aeron Genomics": "Aeron Genetik",
 "Effect: After you excavate an underground resource, put an animal on this card.": "EFFEKT: Nachdem du eine unterirdische Ressource ausgegraben hast, lege ein Tier auf diese Karte.",
 "Action: Spend 1 M€ to move an animal from here to another card.": "AKTION: Bezahle 1 M€, um ein Tier von hier auf eine andere Karte zu bewegen.",
-"You start with 35 M€, 5 steel, and 1 animal resource on this card. 1 VP per 3 animals on this card.": "Du beginnst mit 35 M€, 5 Stahl und 1 Tierressource auf dieser Karte. 1 VP pro 3 Tiere auf dieser Karte.",
+"// You start with 35 M€, 5 steel, and 1 animal resource on this card. 1 VP per 3 animals on this card.": "Du beginnst mit 35 M€, 5 Stahl und 1 Tierressource auf dieser Karte. 1 VP pro 3 Tiere auf dieser Karte.",
 
 "ANUBIS SECURITIES": "Anubis-Wertpapiere",
 "Anubis Securities": "Anubis-Wertpapiere",
@@ -40,9 +40,8 @@
 
 "HENKEI GENETICS": "Henkei Gentechnik",
 "Henkei Genetics": "Henkei Gentechnik",
-"Effect: After you play a microbe card that can hold microbes, add 2 microbes to it.": "EFFEKT: Nachdem du eine Mikrobenkarte gespielt hast, die Mikroben aufnehmen kann, füge ihr 2 Mikroben hinzu.",
-"Action: Pay 1 corruption to draw a card with a microbe tag.": "AKTION: Zahle 1 Korruption, um eine Karte mit einem Mikroben-Symbol zu ziehen.",
-"You start with 47 M€ and 1 corruption.": "Du beginnst mit 47 M€ und 1 Koruption.",
+"// Action: Pay 1 corruption to draw a card with a microbe tag.": "AKTION: Zahle 1 Korruption, um eine Karte mit einem Mikroben-Symbol zu ziehen.",
+"// You start with 47 M€ and 1 corruption.": "Du beginnst mit 47 M€ und 1 Koruption.",
 
 "JENSON-BOYLE & CO": "",
 "Jenson-Boyle & Co": "",

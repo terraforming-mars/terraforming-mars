@@ -5,7 +5,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
-import {ExcavateSpaceDeferred} from '../../underworld/ExcavateSpaceDeferred';
+import {ClaimSpaceDeferred} from '../../underworld/ClaimSpaceDeferred';
 import {intersection} from '../../../common/utils/utils';
 
 export class UndergroundSettlement extends PreludeCard {
@@ -43,8 +43,8 @@ export class UndergroundSettlement extends PreludeCard {
       if (space === undefined) {
         return;
       }
-      const excavatableSpaces = UnderworldExpansion.identifyAdjacentSpaces(player, space);
-      player.game.defer(new ExcavateSpaceDeferred(player, excavatableSpaces));
+      const claimableSpaces = UnderworldExpansion.identifyAdjacentSpaces(player, space);
+      player.game.defer(new ClaimSpaceDeferred(player, claimableSpaces));
       return;
     });
     return undefined;

@@ -29,7 +29,7 @@
     "Corporate Blackmail": "企業恐喝",
     "PAYS YOU": "譲渡",
     "THIS CANNOT BE BLOCKED BY CORRUPTION": "これを汚職によって防ぐことはできない",
-    "Requires 1 corruption. Target a player that has at least 2 corruption. Unless that player pays you 10 M€, they lose 2 corruption.": "条件：汚職1つ以上. 汚職を2つ以上あるプレイヤーは、10MCをあなたに支払う または 2汚職除去.",
+    "// Requires 1 corruption. Target a player that has at least 2 corruption. Unless that player pays you 10 M€, they lose 2 corruption.": "条件：汚職1つ以上. 汚職を2つ以上あるプレイヤーは、10MCをあなたに支払う または 2汚職除去.",
 
     "Corporate Theft": "企業窃盗",
     "Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. IF SOLO: gain 1 corruption.": "条件：汚職2つ以上. 他のプレイヤーからカード上の資源を1つ盗む. これが防がれた場合、1腐敗獲得. ソロの場合: 腐敗を 1 つ獲得します。",
@@ -115,7 +115,7 @@
     "Excavate 2 underground resources.": "2回地下資源を採掘する.",
 
     "Induced Tremor": "振動を伴う採掘",
-    "Excavate an underground resource, then pick an adjacent space with an unclaimed resource token. Remove that token. The space can be identified again.": "地下資源を採掘し、それに隣接する採掘されていないマスを選ぶ. そのマスの資源トークンを除外する. そのマスは再び調査できる.",
+    "// Excavate an underground resource, then pick an adjacent space with an unclaimed resource token. Remove that token. The space can be identified again.": "地下資源を採掘し、それに隣接する採掘されていないマスを選ぶ. そのマスの資源トークンを除外する. そのマスは再び調査できる.",
 
     "Infrastructure Overload": "インフラの過負荷",
     "// Requires 2 corruption. Reduce any energy production 2 steps.": "条件：汚職2つ以上. プレイヤー1人の電力産出-2.",

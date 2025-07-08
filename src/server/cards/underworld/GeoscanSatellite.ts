@@ -7,7 +7,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 import {IdentifySpacesDeferred} from '../../underworld/IdentifySpacesDeferred';
-import {ExcavateSpaceDeferred} from '../../underworld/ExcavateSpaceDeferred';
+import {ClaimSpaceDeferred} from '../../underworld/ClaimSpaceDeferred';
 
 export class GeoscanSatellite extends Card implements IProjectCard {
   constructor() {
@@ -36,14 +36,14 @@ export class GeoscanSatellite extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     player.game.defer(
       new IdentifySpacesDeferred(player, 1).andThen(([space]) => {
-        const excavatableSpaces = [space];
+        const claimableSpaces = [space];
         for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
           const identified = UnderworldExpansion.identify(player.game, adjacentSpace, player);
           if (identified) {
-            excavatableSpaces.push(adjacentSpace);
+            claimableSpaces.push(adjacentSpace);
           }
         }
-        player.game.defer(new ExcavateSpaceDeferred(player, excavatableSpaces));
+        player.game.defer(new ClaimSpaceDeferred(player, claimableSpaces));
       }),
     );
     return undefined;

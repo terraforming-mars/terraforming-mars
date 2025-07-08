@@ -211,7 +211,7 @@ export class Game implements IGame, Logger {
       throw new Error('Duplicate color found: [' + colors + ']');
     }
 
-    this.activePlayer = activePlayer;
+    this.activePlayer = this.getPlayerById(activePlayer);
     this.first = first; // To satisfy the constructor.
     this.setFirstPlayer(first);
     this.rng = rng;
@@ -1103,7 +1103,7 @@ export class Game implements IGame, Logger {
   }
 
   private startActionsForPlayer(player: IPlayer) {
-    this.activePlayer = player.id;
+    this.activePlayer = player;
     player.actionsTakenThisGame++;
     player.actionsTakenThisRound = 0;
 

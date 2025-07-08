@@ -109,6 +109,9 @@ export class UnderworldExpansion {
    */
   public static identify(game: IGame, space: Space, player: IPlayer | undefined): boolean {
     validateUnderworldExpansion(game);
+    if (space.tile !== undefined) {
+      throw new Error(`cannot identify space ${space.id} which has a tile.`);
+    }
 
     if (space.undergroundResources !== undefined) {
       return false;
@@ -196,9 +199,12 @@ export class UnderworldExpansion {
     return spaces;
   }
 
-  public static excavate(player: IPlayer, space: Space): void {
+  public static excavate(player: IPlayer, space: Space): UndergroundResourceToken {
     const game = player.game;
     validateUnderworldExpansion(game);
+    if (space.tile !== undefined) {
+      throw new Error(`cannot excavate space ${space.id} which has a tile.`);
+    }
 
     if (space.undergroundResources === undefined) {
       this.identify(player.game, space, player);
@@ -210,24 +216,24 @@ export class UnderworldExpansion {
     }
 
     LogHelper.logBoardTileAction(player, space, `${undergroundResourceTokenDescription[undergroundResource]}`, 'excavated');
-    this.grant(player, undergroundResource);
 
     space.excavator = player;
-    player.underworldData.tokens.push(undergroundResource);
-    // space.undergroundResources = undefined; ADD THIS
+    space.undergroundResources = undefined;
 
-    for (const card of player.tableau) {
-      card.onClaim?.(player, /* isExcavate */ true, space);
+    this.claimToken(player, undergroundResource, /* isExcavate= */ true, space);
+
+    for (const adjacentSpace of game.board.getAdjacentSpaces(space)) {
+      if (adjacentSpace.tile === undefined) {
+        UnderworldExpansion.identify(game, adjacentSpace, player);
+      }
     }
 
-    // TODO(kberg): The identification is supposed to be resolved after the benefit.
-    game.board
-      .getAdjacentSpaces(space)
-      .forEach((s) => UnderworldExpansion.identify(game, s, player));
     const leaser = game.getCardPlayerOrUndefined(CardName.EXCAVATOR_LEASING);
     if (leaser !== undefined) {
       leaser.stock.add(Resource.MEGACREDITS, 1, {log: true});
     }
+
+    return undergroundResource;
   }
 
   public static claim(player: IPlayer, space: Space) {
@@ -243,17 +249,18 @@ export class UnderworldExpansion {
       throw new Error('No available identification tokens');
     }
 
-    space.undergroundResources = undefined;
-    this.claimToken(player, undergroundResource);
     LogHelper.logBoardTileAction(player, space, `${undergroundResourceTokenDescription[undergroundResource]}`, 'claimed');
+    space.undergroundResources = undefined;
+
+    this.claimToken(player, undergroundResource, /* isExcavate= */false, space);
   }
 
-  public static claimToken(player: IPlayer, token: UndergroundResourceToken) {
+  public static claimToken(player: IPlayer, token: UndergroundResourceToken, isExcavate: boolean, space: Space | undefined) {
     validateUnderworldExpansion(player.game);
     this.grant(player, token);
     player.underworldData.tokens.push(token);
     for (const card of player.tableau) {
-      card.onClaim?.(player, false, undefined);
+      card.onClaim?.(player, isExcavate, space);
     }
   }
 

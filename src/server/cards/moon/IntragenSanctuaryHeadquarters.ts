@@ -19,7 +19,7 @@ export class IntragenSanctuaryHeadquarters extends CorporationCard implements IC
       victoryPoints: {resourcesHere: {}, per: 2},
 
       firstAction: {
-        text: 'Place a habitat tile on The Moon.',
+        text: 'Place a habitat tile on The Moon',
         moon: {habitatTile: {}},
       },
 

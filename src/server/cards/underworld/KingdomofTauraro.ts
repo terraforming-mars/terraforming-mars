@@ -20,7 +20,7 @@ export class KingdomofTauraro extends CorporationCard implements ICorporationCar
       },
 
       firstAction: {
-        text: 'Place a city.',
+        text: 'Place a city',
         city: {},
       },
 

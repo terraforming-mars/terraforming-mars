@@ -67,7 +67,7 @@ export class Keplertec extends ActiveCorporationCard {
     const orOptions = new OrOptions();
     for (const token of tokens) {
       orOptions.options.push(new SelectOption(token).andThen(() => {
-        UnderworldExpansion.claimToken(player, token);
+        UnderworldExpansion.claimToken(player, token, /* isExcavate=*/ false, /* space= */undefined);
         inplaceRemove(tokens, token);
         UnderworldExpansion.addTokens(game, tokens);
         if (idx > 1) {

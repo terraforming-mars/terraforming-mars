@@ -45,9 +45,8 @@ export class RemoveAnyPlants extends DeferredAction {
 
     if (game.isSoloMode()) {
       const option = new SelectOption(
-        'Remove plants from the neutral oppponent', {
-          buttonLabel: 'Remove plants',
-        })
+        'Remove plants from the neutral oppponent',
+        'Remove plants')
         .andThen(() => {
           game.someoneHasRemovedOtherPlayersPlants = true;
           player.resolveInsuranceInSoloGame();
@@ -78,13 +77,13 @@ export class RemoveAnyPlants extends DeferredAction {
           .getMessage();
 
       return new SelectOption(
-        message, {
-          buttonLabel: 'Remove plants',
-          warnings: (target === player) ? ['removeOwnPlants'] : undefined,
-        }).andThen(() => {
-        target.attack(player, Resource.PLANTS, qtyToRemove, {log: true});
-        return undefined;
-      });
+        message,
+        'Remove plants',
+        (target === player) ? ['removeOwnPlants'] : undefined)
+        .andThen(() => {
+          target.attack(player, Resource.PLANTS, qtyToRemove, {log: true});
+          return undefined;
+        });
     }));
 
     removalOptions.push(new SelectOption('Skip removing plants').andThen(() => {

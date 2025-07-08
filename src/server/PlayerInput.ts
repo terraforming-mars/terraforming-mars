@@ -7,7 +7,7 @@ import {PlayerInputModel} from '../common/models/PlayerInputModel';
 
 export interface PlayerInput {
     type: PlayerInputType;
-    buttonLabel: string;
+    buttonLabel: string | Message;
     title: string | Message;
     warning?: string | Message;
     /**
@@ -37,7 +37,7 @@ const NULL_FUNCTION = () => undefined;
 
 export abstract class BasePlayerInput<T> implements PlayerInput {
   public readonly type: PlayerInputType;
-  public buttonLabel: string = 'Save';
+  public buttonLabel: string | Message = 'Save';
   public title: string | Message;
   public warning?: string | Message;
   public cb: (param: T) => PlayerInput | undefined = NULL_FUNCTION;

@@ -14,7 +14,7 @@ import {Units} from '../Units';
 export type BaseInputModel = {
   title: string | Message;
   warning?: string | Message;
-  buttonLabel: string;
+  buttonLabel: string | Message;
 }
 
 export type AndOptionsModel = BaseInputModel & {
@@ -37,7 +37,7 @@ export type SelectInitialCardsModel = BaseInputModel & {
 
 export type SelectOptionModel = BaseInputModel & {
   type: 'option';
-  warnings?: Array<Warning>;
+  warnings?: ReadonlyArray<Warning>;
 }
 
 export type SelectProjectCardToPlayModel = BaseInputModel & {

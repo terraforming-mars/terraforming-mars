@@ -391,6 +391,7 @@ export function isSpecialTile(tileType: TileType | undefined): boolean {
   case TileType.EROSION_SEVERE:
   case TileType.DUST_STORM_MILD:
   case TileType.DUST_STORM_SEVERE:
+  case TileType.REY_SKYWALKER:
   case undefined:
     return false;
   default:

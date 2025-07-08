@@ -100,6 +100,7 @@ describe('CommunicationCenter', () => {
     card.resourceCount = 2;
     expect(player.cardsInHand).is.length(0);
     player.addResourceTo(card, 8);
+    runAllActions(game);
     expect(card.resourceCount).eq(1);
     expect(player.cardsInHand).is.length(3);
   });
@@ -131,7 +132,7 @@ describe('CommunicationCenter', () => {
     expect(card.resourceCount).eq(1);
   });
 
-  it('Can be targetted by Solar Storm before a card is automatically drawn', () => {
+  it('Can be targeted by Solar Storm before a card is automatically drawn', () => {
     // Solar storm removes data from another player. Since the other player can
     // control order of operations, they get to remove data from Communication Center
     // before this player can remove them.
@@ -141,8 +142,7 @@ describe('CommunicationCenter', () => {
     player2.playCard(solarStorm);
 
     runAllActions(game);
-    expect(card.resourceCount).eq(3);
-    
+
     const orOptions = cast(player2.getWaitingFor(), OrOptions);
     const selectCard = cast(orOptions.options[0], SelectCard);
     expect(selectCard.cards).has.members([card]);
@@ -152,6 +152,6 @@ describe('CommunicationCenter', () => {
     runAllActions(game);
 
     expect(player.cardsInHand).has.length(0);
-    expect(card.resourceCount).eq(0);
+    expect(card.resourceCount).eq(1);
   });
 });

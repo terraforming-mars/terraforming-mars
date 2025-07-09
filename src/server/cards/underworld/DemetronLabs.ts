@@ -49,8 +49,10 @@ export class DemetronLabs extends ActiveCorporationCard implements ICorporationC
     const scienceTags = player.tags.cardTagCount(card, Tag.SCIENCE);
     this.onScienceTagAdded(player, scienceTags);
   }
-  public onColonyAddedToLeavitt(player: IPlayer) {
-    this.onScienceTagAdded(player, 1);
+  public onNonCardTagAdded(player: IPlayer, tag: Tag) {
+    if (tag === Tag.SCIENCE) {
+      this.onScienceTagAdded(player, 1);
+    }
   }
   public onScienceTagAdded(player: IPlayer, count: number) {
     player.addResourceTo(this, {qty: 2 * count, log: true});

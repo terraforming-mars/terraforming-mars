@@ -124,8 +124,10 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
     }
   }
 
-  public onColonyAddedToLeavitt(player: IPlayer) {
-    this.onScienceTagAdded(player, 1);
+  public onNonCardTagAdded(player: IPlayer, tag: Tag) {
+    if (tag === Tag.SCIENCE) {
+      this.onScienceTagAdded(player, 1);
+    }
   }
   public onScienceTagAdded(player: IPlayer, count: number) {
     const game = player.game;

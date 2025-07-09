@@ -148,8 +148,7 @@ export interface ICard {
   onColonyAddedByAnyPlayer?(cardOwner: IPlayer, colonyOwner: IPlayer): void;
   onColonyAdded?: never;
 
-  /** Callback when THIS player adds a colony to Leavitt. */
-  onColonyAddedToLeavitt?(player: IPlayer): void;
+  onNonCardTagAdded?(player: IPlayer, tag: Tag): void;
 
   readonly cost?: number; /** Used with IProjectCard and PreludeCard. */
   readonly type: CardType;

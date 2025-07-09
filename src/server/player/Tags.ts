@@ -40,8 +40,16 @@ export type MultipleCountMode =
  */
 export class Tags {
   private player: IPlayer;
+
+  // Leavitt Station, Underworld
+  public extraScienceTags: number;
+  // Underworld
+  public extraPlantTags: number;
+
   constructor(player: IPlayer) {
     this.player = player;
+    this.extraScienceTags = 0;
+    this.extraPlantTags = 0;
   }
 
   /**
@@ -68,9 +76,13 @@ export class Tags {
 
     let tagCount = this.rawCount(tag, includeEvents);
 
-    // Leavitt Station hook
-    if (tag === Tag.SCIENCE && this.player.scienceTagCount > 0) {
-      tagCount += this.player.scienceTagCount;
+    // Leavitt Station, Underworld
+    if (tag === Tag.SCIENCE) {
+      tagCount += this.extraScienceTags;
+    }
+
+    if (tag === Tag.PLANT) {
+      tagCount += this.extraPlantTags;
     }
 
     if (includeTagSubstitutions) {
@@ -234,8 +246,8 @@ export class Tags {
       uniqueTags.add(extraTag);
     }
 
-    // Leavitt Station hook
-    if (this.player.scienceTagCount > 0) uniqueTags.add(Tag.SCIENCE);
+    if (this.extraScienceTags > 0) uniqueTags.add(Tag.SCIENCE);
+    if (this.extraPlantTags > 0) uniqueTags.add(Tag.PLANT);
 
     // Global events occur outside the action phase. Stop counting here, before wild tags apply.
     if (mode === 'globalEvent') return uniqueTags.size;
@@ -267,10 +279,6 @@ export class Tags {
       return true;
     }
     return false;
-  }
-
-  public gainScienceTag(count: number) {
-    this.player.scienceTagCount += count;
   }
 
   /**

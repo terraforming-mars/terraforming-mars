@@ -35,8 +35,10 @@ export class MarsUniversity extends Card implements IProjectCard {
     const scienceTags = player.tags.cardTagCount(card, Tag.SCIENCE);
     this.onScienceTagAdded(player, scienceTags);
   }
-  public onColonyAddedToLeavitt(player: IPlayer) {
-    this.onScienceTagAdded(player, 1);
+  public onNonCardTagAdded(player: IPlayer, tag: Tag) {
+    if (tag === Tag.SCIENCE) {
+      this.onScienceTagAdded(player, 1);
+    }
   }
   public onScienceTagAdded(player: IPlayer, count: number) {
     for (let i = 0; i < count; i++) {

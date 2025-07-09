@@ -56,6 +56,8 @@ export interface SerializedPlayer extends DeprecatedFields{
   plantProduction: number;
   plants: number;
   plantsNeededForGreenery: number;
+  // TODO(kberg): Remove ? by 2025-08-01
+  plantTagCount?: number;
   playedCards: Array<SerializedCard>;
   politicalAgendasActionUsedCount: number;
   preludeCardsInHand: Array<CardName>;

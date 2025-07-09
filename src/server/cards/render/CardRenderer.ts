@@ -453,7 +453,7 @@ abstract class Builder<T> {
     this.br;
     if (type === 'action') {
       return this._appendToRow(CardRenderCorpBoxAction.builder(eb));
-    } else if (type === 'effect'){
+    } else if (type === 'effect') {
       return this._appendToRow(CardRenderCorpBoxEffect.builder(eb));
     } else {
       return this._appendToRow(CardRenderCorpBoxEffectAction.builder(eb));

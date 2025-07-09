@@ -73,7 +73,7 @@ export default Vue.extend({
       } else if (this.isCorpBoxAction(this.componentData)) {
         return 'action';
       } else if (this.isCorpBoxEffectAction(this.componentData)) {
-        return 'effect/action'
+        return 'effect/action';
       }
       return 'n/a';
     },

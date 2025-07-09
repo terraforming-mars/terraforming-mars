@@ -21,6 +21,7 @@ import {Phase} from '../../common/Phase';
 import {Units} from '../../common/Units';
 import {LogHelper} from '../LogHelper';
 import {Message} from '../../common/logs/Message';
+import {inplaceRemove} from '../../common/utils/utils';
 
 export class UnderworldExpansion {
   private constructor() {}
@@ -348,6 +349,12 @@ export class UnderworldExpansion {
       player.underworldData.temperatureBonus = token;
       player.game.log('For the rest of this generation, ${0} will gain ${1}', (b) => b.player(player).string(undergroundResourceTokenDescription[token]));
       break;
+    case 'sciencetag':
+      player.tags.extraScienceTags++;
+      break;
+    case 'planttag':
+      player.tags.extraPlantTags++;
+      break;
     default:
       throw new Error('Unknown reward: ' + token);
     }
@@ -441,8 +448,24 @@ export class UnderworldExpansion {
     inplaceShuffle(game.underworldData.tokens, game.rng);
   }
 
+  static removeClaimedToken(player: IPlayer, token: UndergroundResourceToken) {
+    const playerTokens = player.underworldData.tokens;
+    if (!inplaceRemove(playerTokens, token)) {
+      throw new Error('Token ${token} not found');
+    }
+    switch (token) {
+    case 'sciencetag':
+      player.tags.extraScienceTags = Math.max(player.tags.extraScienceTags - 1, 0);
+      break;
+    case 'planttag':
+      player.tags.extraPlantTags = Math.max(player.tags.extraPlantTags - 1, 0);
+      break;
+    }
+    this.addTokens(player.game, [token]);
+  }
+
   /** Add the set of tokens to the pool, and then shuffle the pool */
-  static addTokens(game: IGame, tokens: Array<UndergroundResourceToken>) {
+  static addTokens(game: IGame, tokens: ReadonlyArray<UndergroundResourceToken>) {
     validateUnderworldExpansion(game);
 
     if (game.underworldData === undefined) {

@@ -148,8 +148,6 @@ export class Player implements IPlayer {
   public oceanBonus: number = constants.OCEAN_BONUS;
 
   // Custom cards
-  // Community Leavitt Station and Pathfinders Leavitt Station
-  public scienceTagCount: number = 0;
   // PoliticalAgendas Scientists P41
   public hasTurmoilScienceTagBonus: boolean = false;
   // Ecoline
@@ -1752,7 +1750,8 @@ export class Player implements IPlayer {
       oceanBonus: this.oceanBonus,
       // Custom cards
       // Leavitt Station.
-      scienceTagCount: this.scienceTagCount,
+      scienceTagCount: this.tags.extraScienceTags,
+      plantTagCount: this.tags.extraPlantTags,
       // Ecoline
       plantsNeededForGreenery: this.plantsNeededForGreenery,
       // Lawsuit
@@ -1821,7 +1820,8 @@ export class Player implements IPlayer {
       titanium: d.titaniumProduction,
     }));
     player.removingPlayers = d.removingPlayers;
-    player.scienceTagCount = d.scienceTagCount;
+    player.tags.extraScienceTags = d.scienceTagCount;
+    player.tags.extraPlantTags = d.plantTagCount ?? 0;
     player.steel = d.steel;
     player.steelValue = d.steelValue;
     player.terraformRating = d.terraformRating;

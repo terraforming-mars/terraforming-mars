@@ -16,7 +16,8 @@ export type UndergroundResourceToken =
   'titaniumandplant' |
   'energy1production' | 'heat2production' |
   'microbe1' | 'microbe2' | 'tr' | 'ocean' |
-  'data1pertemp' | 'microbe1pertemp' | 'plant2pertemp' | 'steel2pertemp' | 'titanium1pertemp';
+  'data1pertemp' | 'microbe1pertemp' | 'plant2pertemp' | 'steel2pertemp' | 'titanium1pertemp' |
+  'sciencetag' | 'planttag';
 
 /**
  * Text descriptions of each Underground resource token.
@@ -50,4 +51,6 @@ export const undergroundResourceTokenDescription: Record<UndergroundResourceToke
   plant2pertemp: '2 plants / 2 °C',
   steel2pertemp: '2 steel / 2 °C',
   titanium1pertemp: '1 titanium / 2 °C',
+  sciencetag: '1 science tag',
+  planttag: '1 plant tag',
 };

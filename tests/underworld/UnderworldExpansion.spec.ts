@@ -19,6 +19,7 @@ import {LawSuit} from '../../src/server/cards/promo/LawSuit';
 import {PlayerInput} from '../../src/server/PlayerInput';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {PrivateMilitaryContractor} from '../../src/server/cards/underworld/PrivateMilitaryContractor';
+import {Tag} from '../../src/common/cards/Tag';
 
 describe('UnderworldExpansion', () => {
   let player1: TestPlayer;
@@ -340,6 +341,18 @@ describe('UnderworldExpansion', () => {
     expect(player1.underworldData.temperatureBonus).is.undefined;
     UnderworldExpansion.grant(player1, 'titanium1pertemp');
     expect(player1.underworldData.temperatureBonus).eq('titanium1pertemp');
+  });
+
+  it('grant bonus - science tag', () => {
+    expect(player1.tags.count(Tag.SCIENCE)).eq(2);
+    UnderworldExpansion.grant(player1, 'sciencetag');
+    expect(player1.tags.count(Tag.SCIENCE)).eq(3);
+  });
+
+  it('grant bonus - plant tag', () => {
+    expect(player1.tags.count(Tag.PLANT)).eq(0);
+    UnderworldExpansion.grant(player1, 'planttag');
+    expect(player1.tags.count(Tag.PLANT)).eq(1);
   });
 
   it('excavatableSpaces', () => {

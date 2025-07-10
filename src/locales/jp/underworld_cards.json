@@ -160,7 +160,7 @@
     "Action: Spend 4 data resources on this card to draw a card.": "アクション：このカード上から4データ除去し、1ドロー.",
 
     "Monopoly": "独占",
-    "Requires 3 corruption. Choose a standard production type. Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.": "条件：汚職3つ以上. 産出を1つ選ぶ. 他の全プレイヤーはその産出-1し、その合計数分産出+1. これは汚職で防ぐことができる.",
+    "// Requires 3 corruption. Choose a standard production type. Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.": "条件：汚職3つ以上. 産出を1つ選ぶ. 他の全プレイヤーはその産出-1し、その合計数分産出+1. これは汚職で防ぐことができる.",
 
     "Nanofoundry": "極小鋳物工場",
     "Requires 2 science tags. Reduce your energy production 5 steps. Draw 1 card for every power tag you have, including this.": "条件：科学タグ2つ以上. 電力産出-5. 電力タグの数分、1ドロー.",

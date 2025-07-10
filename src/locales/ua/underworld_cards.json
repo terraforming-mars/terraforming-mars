@@ -157,7 +157,7 @@
   "Action: Spend 4 data resources on this card to draw a card.": "Дія: Витратити 4 ресурси даних на цю картку, щоб взяти карту.",
 
   "Monopoly": "Монополія",
-  "Requires 3 corruption. Choose a standard production type. Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.": "Вимагає 3 одиниці корупції. Виберіть стандартний тип виробництва. Вкрадіть до 1 одиниці цього виробництва від КОЖНОГО ІНШОГО гравця. Вони можуть заблокувати це за допомогою корупції.",
+  "// Requires 3 corruption. Choose a standard production type. Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.": "Вимагає 3 одиниці корупції. Виберіть стандартний тип виробництва. Вкрадіть до 1 одиниці цього виробництва від КОЖНОГО ІНШОГО гравця. Вони можуть заблокувати це за допомогою корупції.",
 
   "Nanofoundry": "Наноливарня",
   "Requires 2 science tags. Reduce your energy production 5 steps. Draw 1 card for every power tag you have, including this.": "Вимагає 2 символи науки. Зменште ваше виробництво енергії на 5 кроків. Витягніть 1 карту за кожним символом енергії, який у вас є, включаючи цей.",

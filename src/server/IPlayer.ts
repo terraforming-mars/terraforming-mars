@@ -195,7 +195,10 @@ export interface IPlayer {
   getVictoryPoints(): VictoryPointsBreakdown;
   plantsAreProtected(): boolean;
   alloysAreProtected(): boolean;
-  isProtected(resource: Resource): boolean;
+  /**
+   * Return true when |resource| cannot be stolen from this player.
+   */
+  isProtected(resource: Resource | keyof Units): boolean;
   /**
    * Returns true when this player can lose |minQuantity| units of production.
    *

@@ -106,7 +106,7 @@
   "Effect: After any player identifies 1 or more underground spaces (at once), add 1 data resource to this card.": "",
   "Action: Spend 4 data resources on this card to draw a card.": "",
   "Monopoly": "",
-  "Requires 3 corruption. Choose a standard production type. Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.": "",
+  "// Requires 3 corruption. Choose a standard production type. Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.": "",
   "Nanofoundry": "",
   "Requires 2 science tags. Reduce your energy production 5 steps. Draw 1 card for every power tag you have, including this.": "",
   "Narrative Spin": "",

@@ -12,12 +12,12 @@ export class LeavittII extends Colony {
         type: ColonyBenefit.GAIN_SCIENCE_TAGS_AND_CLONE_TAG,
       },
       trade: {
-        description: 'Gain 2 M€',
+        description: 'Raise any planetary track n steps',
         type: ColonyBenefit.RAISE_PLANETARY_TRACK,
         quantity: [0, 1, 1, 2, 2, 3, 4],
       },
       colony: {
-        description: 'Raise any planetary track n steps',
+        description: 'Gain 2 M€',
         type: ColonyBenefit.GAIN_RESOURCES,
         quantity: 2,
         resource: Resource.MEGACREDITS,

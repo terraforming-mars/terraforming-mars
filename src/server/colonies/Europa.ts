@@ -23,7 +23,6 @@ export class Europa extends Colony {
       colony: {
         description: 'Gain 1 M€',
         type: ColonyBenefit.GAIN_RESOURCES,
-        quantity: 1,
         resource: Resource.MEGACREDITS,
       },
       shouldIncreaseTrack: 'ask',

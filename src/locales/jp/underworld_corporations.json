@@ -65,7 +65,7 @@
     "KINGDOM OF TAURARO": "",
     "Kingdom of Tauraro": "タウラロ王国",
     " Kingdom of Tauraro ": "タウラロ王国",
-    "Effect: You may place cities adjacent to other cities. You must always place cities adjacent to tiles you already own, if possible.": "効果：都市を配置時、他の都市に隣接して配置できる. 可能であれば、すでに所有しているタイルに隣接しなければならない.",
+    "// Effect: You may place cities adjacent to other cities. You must always place cities adjacent to tiles you already own, if possible.": "効果：都市を配置時、他の都市に隣接して配置できる. 可能であれば、すでに所有しているタイルに隣接しなければならない.",
     "You start with 50 M€ and 6 M€ production. All opponents gain 2 M€ production. As your first action, place a city.": "初期資源：50MC. 初期産出：MC産出+6. 他の全プレイヤーはMC産出+2. 1アクション目：都市1枚配置.",
 
     "VOLTAGON": "",

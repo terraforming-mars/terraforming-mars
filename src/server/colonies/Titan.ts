@@ -22,7 +22,6 @@ export class Titan extends Colony {
       colony: {
         description: 'Add 1 floater to ANY card',
         type: ColonyBenefit.ADD_RESOURCES_TO_CARD,
-        quantity: 1,
       },
     });
   }

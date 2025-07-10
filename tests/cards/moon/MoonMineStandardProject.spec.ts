@@ -8,7 +8,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {MoonMineStandardProject} from '../../../src/server/cards/moon/MoonMineStandardProject';
 import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectPaymentDeferred';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
-import {assertPlaceTile} from '../../assertions';
+import {assertPlaceMoonMine} from '../../assertions';
 import {TileType} from '../../../src/common/TileType';
 
 describe('MoonMineStandardProject', () => {
@@ -76,7 +76,7 @@ describe('MoonMineStandardProject', () => {
     expect(player.production.steel).eq(1);
     expect(moonData.miningRate).eq(0);
 
-    assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_MINE);
+    assertPlaceMoonMine(player, player.popWaitingFor());
 
     expect(moonData.miningRate).eq(1);
     expect(player.terraformRating).eq(15);

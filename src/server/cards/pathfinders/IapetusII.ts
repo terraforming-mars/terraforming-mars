@@ -21,7 +21,6 @@ export class IapetusII extends Colony {
       colony: {
         description: 'Add 1 data to ANY card',
         type: ColonyBenefit.ADD_RESOURCES_TO_CARD,
-        quantity: 1,
       },
     });
   }

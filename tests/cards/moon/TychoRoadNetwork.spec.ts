@@ -6,8 +6,7 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TychoRoadNetwork} from '../../../src/server/cards/moon/TychoRoadNetwork';
-import {assertPlaceTile} from '../../assertions';
-import {TileType} from '../../../src/common/TileType';
+import {assertPlaceMoonRoad} from '../../assertions';
 
 describe('TychoRoadNetwork', () => {
   let game: IGame;
@@ -43,7 +42,7 @@ describe('TychoRoadNetwork', () => {
 
     runAllActions(game);
 
-    assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
+    assertPlaceMoonRoad(player, player.popWaitingFor());
 
     expect(player.terraformRating).eq(15);
     expect(moonData.logisticRate).eq(1);

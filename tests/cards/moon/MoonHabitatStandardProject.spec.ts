@@ -8,7 +8,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {MoonHabitatStandardProject} from '../../../src/server/cards/moon/MoonHabitatStandardProject';
 import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectPaymentDeferred';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
-import {assertPlaceTile} from '../../assertions';
+import {assertPlaceMoonHabitat} from '../../assertions';
 import {TileType} from '../../../src/common/TileType';
 
 describe('MoonHabitatStandardProject', () => {
@@ -46,7 +46,7 @@ describe('MoonHabitatStandardProject', () => {
       const spaces = [...moonData.moon.getAvailableSpacesOnLand(player)];
       while (spaces.length > run.availableSpaces) {
         const space = spaces.pop();
-        space!.tile = {tileType: TileType.MOON_HABITAT};
+        space!.tile = {tileType: TileType.MOON_ROAD};
       }
       expect(card.canAct(player)).eq(run.expected);
     });
@@ -76,7 +76,7 @@ describe('MoonHabitatStandardProject', () => {
     expect(player.production.megacredits).eq(1);
     expect(moonData.habitatRate).eq(0);
 
-    assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_HABITAT);
+    assertPlaceMoonHabitat(player, player.popWaitingFor());
 
     expect(moonData.habitatRate).eq(1);
     expect(player.terraformRating).eq(15);

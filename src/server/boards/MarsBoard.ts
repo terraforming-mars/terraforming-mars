@@ -89,11 +89,11 @@ export class MarsBoard extends Board {
       return spacesOnLand;
     }
     // Kingdom of Tauraro can place cities next to cities, but also must place them
-    // next to tiles they own, if possible.
+    // next to tiles they own or have an excavation marker, if possible.
     if (player.tableau.has(CardName.KINGDOM_OF_TAURARO)) {
       const spacesNextToMySpaces = spacesOnLand.filter(
         (space) => this.getAdjacentSpaces(space).some(
-          (adj) => adj.tile !== undefined && adj.player === player));
+          (adj) => (adj.tile !== undefined && adj.player === player || adj.excavator?.id === player.id)));
 
       return (spacesNextToMySpaces.length > 0) ? spacesNextToMySpaces : spacesOnLand;
     }

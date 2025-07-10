@@ -239,10 +239,10 @@
   "// At the end of this generation only, during the production phase, gain 12 M€.": "Тільки в кінці цього покоління, під час фази виробництва, отримайте 12 M€.",
 
   "Space Privateers": "Космічні пірати",
-  "Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "Дія: Якщо на цій картці є принаймні 1 одиниця ресурсу-борця, вкрадіть 2 M€ у КОЖНОГО ІНШОГО гравця.",
+  "// Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "Дія: Якщо на цій картці є принаймні 1 одиниця ресурсу-борця, вкрадіть 2 M€ у КОЖНОГО ІНШОГО гравця.",
   "Effect: If 1 or more targets block this with corruption, remove 1 fighter from here.": "Ефект: Якщо 1 або більше цілей блокують це за допомогою корупції, видаліть 1 одиницю ресурсу-борця звідси.",
   "Solo: Gain 2 M€ and remove 1 fighter from this card.": "Соло: Отримайте 2 M€ і видаліть 1 одиницю ресурсу-борця з цієї картки.",
-  "Requires 3 corruption. Put 3 fighter resources on this card.": "Вимагає 3 одиниці корупції. Покладіть 3 одиниці ресурсу-борця на цю картку.",
+  "// Requires 3 corruption. Put 3 fighter resources on this card.": "Вимагає 3 одиниці корупції. Покладіть 3 одиниці ресурсу-борця на цю картку.",
 
   "Space Wargames": "Космічні військові ігри",
   "Action: Spend 1 titanium to gain 1 fighter resource to this card.": "Дія: Витратити 1 одиницю титану, щоб отримати 1 одиницю ресурсу-борця на цю картку.",

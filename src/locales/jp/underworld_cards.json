@@ -243,10 +243,10 @@
     "// At the end of this generation only, during the production phase, gain 12 M€.": "次の生産フェイズで12MC獲得.",
 
     "Space Privateers": "宇宙私掠船",
-    "Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "アクション：このカード上に戦闘機がある場合、他の全プレイヤーから2MC盗む.",
+    "// Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "アクション：このカード上に戦闘機がある場合、他の全プレイヤーから2MC盗む.",
     "Effect: If 1 or more targets block this with corruption, remove 1 fighter from here.": "効果：このカードのアクションが1人以上から防がれた時、このカード上から1戦闘機を除去.",
     "Solo: Gain 2 M€ and remove 1 fighter from this card.": "ソロ：2MC獲得し、1戦闘機を除去.",
-    "Requires 3 corruption. Put 3 fighter resources on this card.": "条件：汚職3つ以上. このカード上に3戦闘機追加.",
+    "// Requires 3 corruption. Put 3 fighter resources on this card.": "条件：汚職3つ以上. このカード上に3戦闘機追加.",
 
     "Space Wargames": "宇宙戦争ゲーム",
     "Action: Spend 1 titanium to gain 1 fighter resource to this card.": "アクション：1チタンを支払い、このカード上に1戦闘機追加.",

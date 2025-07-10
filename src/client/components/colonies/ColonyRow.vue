@@ -13,7 +13,7 @@
 
 import Vue from 'vue';
 
-import {IColonyMetadata} from '@/common/colonies/IColonyMetadata';
+import {ColonyMetadata} from '@/common/colonies/ColonyMetadata';
 import {ColonyModel} from '@/common/models/ColonyModel';
 import ColonySpace from './ColonySpace.vue';
 
@@ -24,7 +24,7 @@ export default Vue.extend({
   },
   props: {
     metadata: {
-      type: Object as () => IColonyMetadata,
+      type: Object as () => ColonyMetadata,
       required: true,
     },
     colony: {

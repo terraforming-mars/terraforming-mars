@@ -12,7 +12,7 @@
 import Vue from 'vue';
 
 import {ColonyName} from '@/common/colonies/ColonyName';
-import {IColonyMetadata} from '@/common/colonies/IColonyMetadata';
+import {ColonyMetadata} from '@/common/colonies/ColonyMetadata';
 import BuildBenefit from './BuildBenefit.vue';
 import {Color} from '@/common/Color';
 
@@ -24,7 +24,7 @@ export default Vue.extend({
       type: Number,
     },
     metadata: {
-      type: Object as () => IColonyMetadata,
+      type: Object as () => ColonyMetadata,
       required: true,
     },
     player: {

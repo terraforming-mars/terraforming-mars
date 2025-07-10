@@ -7,19 +7,22 @@ export class Ganymede extends Colony {
   constructor() {
     super({
       name: ColonyName.GANYMEDE,
-      description: {
-        buildBonus: 'Gain 1 plant production',
-        tradeBonus: 'Gain n plants',
-        colonyBonus: 'Gain 1 plant',
+      build: {
+        description: 'Gain 1 plant production',
+        type: ColonyBenefit.GAIN_PRODUCTION,
+        resource: Resource.PLANTS,
       },
-
-      buildType: ColonyBenefit.GAIN_PRODUCTION,
-      buildResource: Resource.PLANTS,
-      tradeType: ColonyBenefit.GAIN_RESOURCES,
-      tradeQuantity: [0, 1, 2, 3, 4, 5, 6],
-      tradeResource: Resource.PLANTS,
-      colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
-      colonyBonusResource: Resource.PLANTS,
+      trade: {
+        description: 'Gain n plants',
+        type: ColonyBenefit.GAIN_RESOURCES,
+        quantity: [0, 1, 2, 3, 4, 5, 6],
+        resource: Resource.PLANTS,
+      },
+      colony: {
+        description: 'Gain 1 plant',
+        type: ColonyBenefit.GAIN_RESOURCES,
+        resource: Resource.PLANTS,
+      },
     });
   }
 }

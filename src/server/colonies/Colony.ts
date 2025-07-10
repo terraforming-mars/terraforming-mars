@@ -23,7 +23,7 @@ import {IGame} from '../IGame';
 import {Turmoil} from '../turmoil/Turmoil';
 import {SerializedColony} from '../SerializedColony';
 import {IColony, TradeOptions} from './IColony';
-import {colonyMetadata, IColonyMetadata, IInputColonyMetadata} from '../../common/colonies/IColonyMetadata';
+import {ColonyMetadata, colonyMetadata, InputColonyMetadata} from '../../common/colonies/ColonyMetadata';
 import {ColonyName} from '../../common/colonies/ColonyName';
 import {sum} from '../../common/utils/utils';
 import {message} from '../logs/MessageBuilder';
@@ -42,9 +42,9 @@ export abstract class Colony implements IColony {
   public colonies: Array<PlayerId> = [];
   public trackPosition: number = 1;
 
-  public metadata: IColonyMetadata;
+  public metadata: ColonyMetadata;
 
-  protected constructor(metadata: IInputColonyMetadata) {
+  protected constructor(metadata: InputColonyMetadata) {
     this.metadata = colonyMetadata(metadata);
   }
 
@@ -88,9 +88,9 @@ export abstract class Colony implements IColony {
   public addColony(player: IPlayer, options?: {giveBonusTwice: boolean}): void {
     player.game.log('${0} built a colony on ${1}', (b) => b.player(player).colony(this));
 
-    this.giveBonus(player, this.metadata.buildType, this.metadata.buildQuantity[this.colonies.length], this.metadata.buildResource);
+    this.giveBonus(player, this.metadata.build.type, this.metadata.build.quantity[this.colonies.length], this.metadata.build.resource);
     if (options?.giveBonusTwice === true) { // Vital Colony hook.
-      this.giveBonus(player, this.metadata.buildType, this.metadata.buildQuantity[this.colonies.length], this.metadata.buildResource);
+      this.giveBonus(player, this.metadata.build.type, this.metadata.build.quantity[this.colonies.length], this.metadata.build.resource);
     }
 
     this.colonies.push(player.id);
@@ -134,7 +134,7 @@ export abstract class Colony implements IColony {
       return;
     }
 
-    if (this.metadata.shouldIncreaseTrack === 'yes' || (this.metadata.tradeResource !== undefined && this.metadata.tradeResource[this.trackPosition] === this.metadata.tradeResource[maxPossibleTrackPosition])) {
+    if (this.metadata.shouldIncreaseTrack === 'yes' || (this.metadata.trade.resource !== undefined && this.metadata.trade.resource[this.trackPosition] === this.metadata.trade.resource[maxPossibleTrackPosition])) {
       // No point in asking the player, just increase it
       this.increaseTrack(steps);
       LogHelper.logColonyTrackIncrease(player, this, steps);
@@ -148,9 +148,9 @@ export abstract class Colony implements IColony {
   }
 
   private handleTrade(player: IPlayer, options: TradeOptions) {
-    const resource = Array.isArray(this.metadata.tradeResource) ? this.metadata.tradeResource[this.trackPosition] : this.metadata.tradeResource;
+    const resource = Array.isArray(this.metadata.trade.resource) ? this.metadata.trade.resource[this.trackPosition] : this.metadata.trade.resource;
 
-    this.giveBonus(player, this.metadata.tradeType, this.metadata.tradeQuantity[this.trackPosition], resource);
+    this.giveBonus(player, this.metadata.trade.type, this.metadata.trade.quantity[this.trackPosition], resource);
 
     // !== false because default is true.
     if (options.giveColonyBonuses !== false) {
@@ -176,7 +176,7 @@ export abstract class Colony implements IColony {
   }
 
   public giveColonyBonus(player: IPlayer, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
-    return this.giveBonus(player, this.metadata.colonyBonusType, this.metadata.colonyBonusQuantity, this.metadata.colonyBonusResource, isGiveColonyBonus);
+    return this.giveBonus(player, this.metadata.colony.type, this.metadata.colony.quantity, this.metadata.colony.resource, isGiveColonyBonus);
   }
 
   private giveBonus(player: IPlayer, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {

@@ -7,22 +7,25 @@ export class Mercury extends Colony {
   constructor() {
     super({
       name: ColonyName.MERCURY,
-      description: {
-        buildBonus: 'Gain the trade bonus of any colony tile. (This does not move the markers.)',
-        tradeBonus: 'Gain 1 unit of production of the type below the track marker',
-        colonyBonus: 'Gain 2 M€',
+      build: {
+        description: 'Gain the trade bonus of any colony tile. (This does not move the markers.)',
+        type: ColonyBenefit.COPY_TRADE,
       },
-
-      buildType: ColonyBenefit.COPY_TRADE,
-      tradeType: ColonyBenefit.GAIN_PRODUCTION,
-      tradeResource: [
-        Resource.HEAT, Resource.HEAT, Resource.HEAT,
-        Resource.STEEL, Resource.STEEL,
-        Resource.TITANIUM, Resource.TITANIUM,
-      ],
-      colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
-      colonyBonusResource: Resource.MEGACREDITS,
-      colonyBonusQuantity: 2,
+      trade: {
+        description: 'Gain 1 unit of production of the type below the track marker',
+        type: ColonyBenefit.GAIN_PRODUCTION,
+        resource: [
+          Resource.HEAT, Resource.HEAT, Resource.HEAT,
+          Resource.STEEL, Resource.STEEL,
+          Resource.TITANIUM, Resource.TITANIUM,
+        ],
+      },
+      colony: {
+        description: 'Gain 2 M€',
+        type: ColonyBenefit.GAIN_RESOURCES,
+        quantity: 2,
+        resource: Resource.MEGACREDITS,
+      },
       shouldIncreaseTrack: 'ask',
     });
   }

@@ -119,6 +119,10 @@ export namespace Units {
     return keys.map((k) => u[k]);
   }
 
+  export function asResource(k: keyof Units): Resource {
+    return k as Resource;
+  }
+
   export const ResourceMap: Record<keyof Units, Resource> = {
     megacredits: Resource.MEGACREDITS,
     steel: Resource.STEEL,

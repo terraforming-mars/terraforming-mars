@@ -19,7 +19,6 @@ export class Pluto extends Colony {
       colony: {
         description: 'Draw 1 card and then discard 1 card',
         type: ColonyBenefit.DRAW_CARDS_AND_DISCARD_ONE,
-        quantity: 1, // Assuming quantity 1 for 'draw 1 card'
       },
     });
   }

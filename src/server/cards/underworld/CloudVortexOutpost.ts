@@ -22,8 +22,8 @@ export class CloudVortexOutpost extends PreludeCard {
       metadata: {
         cardNumber: 'UP15',
         renderData: CardRenderer.builder((b) => {
-          b.venus(2).br;
-          b.plainText('Raise Venus 2 steps. Place 3 microbes on this card.').br;
+          b.venus(2).resource(CardResource.FLOATER, 3).br;
+          b.plainText('Raise Venus 2 steps. Place 3 floaters on this card.').br;
           b.action('Remove 1 floater from THIS card to add 1 floater to ANOTHER card', (ab) => {
             ab.resource(CardResource.FLOATER).asterix().startAction.resource(CardResource.FLOATER).asterix();
           });

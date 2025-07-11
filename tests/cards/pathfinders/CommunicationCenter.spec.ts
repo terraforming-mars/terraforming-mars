@@ -104,7 +104,7 @@ describe('CommunicationCenter', () => {
     expect(player.cardsInHand).is.length(3);
   });
 
-  it('Works with data leak (checking code works)', () => {
+  it('Works with data leak', () => {
     card.resourceCount = 2;
     player.playedCards.push(card);
 
@@ -118,7 +118,7 @@ describe('CommunicationCenter', () => {
     expect(card.resourceCount).eq(2);
   });
 
-  it('Works with Nobel Labs (checking code works)', () => {
+  it('Works with Nobel Labs', () => {
     card.resourceCount = 2;
     const nobelLabs = new NobelLabs();
     player.playedCards.push(card, nobelLabs);

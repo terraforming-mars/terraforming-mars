@@ -22,13 +22,12 @@
       <template v-if="space.nomads === true">
         <div class='board-cube--nomad'></div>
       </template>
-      <template v-if="space.undergroundResources !== undefined">
-        <underground-resources
-          :space="space"
-          :tileView="tileView"
-        ></underground-resources>
-        <div v-if="space.excavator !== undefined" class="underground-excavator" :class="'underground-excavator--' + space.excavator"></div>
-      </template>
+      <underground-resources
+        v-if="space.undergroundResources !== undefined"
+        :space="space"
+        :tileView="tileView"
+      ></underground-resources>
+      <div v-if="space.excavator !== undefined" class="underground-excavator" :class="'underground-excavator--' + space.excavator"></div>
     </template>
     </div>
 </template>

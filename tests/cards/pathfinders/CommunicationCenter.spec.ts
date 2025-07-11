@@ -153,4 +153,26 @@ describe('CommunicationCenter', () => {
     expect(player.cardsInHand).has.length(0);
     expect(card.resourceCount).eq(1);
   });
+
+  it('Can be targeted by Solar Storm after adding a resource for playing the event', () => {
+    // If Communication Center has 0 or 1 data on it, it is preferential to add one data before removing.
+    card.resourceCount = 1;
+    player.playedCards.push(card);
+    const solarStorm = new SolarStorm();
+    player2.playCard(solarStorm);
+
+    runAllActions(game);
+    expect(card.resourceCount).eq(2);
+
+    const orOptions = cast(player2.getWaitingFor(), OrOptions);
+    const selectCard = cast(orOptions.options[0], SelectCard);
+    expect(selectCard.cards).has.members([card]);
+    selectCard.cb([card]);
+    expect(card.resourceCount).eq(0);
+
+    runAllActions(game);
+
+    expect(player.cardsInHand).has.length(0);
+    expect(card.resourceCount).eq(0);
+  });
 });

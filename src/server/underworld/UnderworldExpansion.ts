@@ -127,6 +127,10 @@ export class UnderworldExpansion {
       return false;
     }
 
+    if (space.excavator !== undefined) {
+      return false;
+    }
+
     const undergroundResource = this.drawExcavationToken(game);
     space.undergroundResources = undergroundResource;
 
@@ -142,8 +146,8 @@ export class UnderworldExpansion {
     const game = player.game;
     const spaces = [];
     for (const adjacentSpace of game.board.getAdjacentSpaces(space)) {
-      this.identify(game, adjacentSpace, player);
-      if (adjacentSpace.undergroundResources !== undefined) {
+      const identified = this.identify(game, adjacentSpace, player);
+      if (identified === true) {
         spaces.push(adjacentSpace);
       }
     }

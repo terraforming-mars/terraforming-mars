@@ -54,7 +54,7 @@ export class CommunicationCenter extends Card implements IProjectCard {
   public onCardPlayedByAnyPlayer(thisCardOwner: IPlayer, card: ICard) {
     if (card.type === CardType.EVENT) {
       // Resolve these cards before adding the resource.
-      const priority = (card.name === CardName.CEOS_FAVORITE_PROJECT || card.name === CardName.SOLAR_STORM) ? Priority.BACK_OF_THE_LINE : Priority.DEFAULT;
+      const priority = ((card.name === CardName.CEOS_FAVORITE_PROJECT || card.name === CardName.SOLAR_STORM) && this.resourceCount === 2) ? Priority.BACK_OF_THE_LINE : Priority.DEFAULT;
       thisCardOwner.defer(() => {
         thisCardOwner.addResourceTo(this, {qty: 1, log: true});
       }, priority);

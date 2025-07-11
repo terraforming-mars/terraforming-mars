@@ -1,7 +1,6 @@
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {CardName} from '../../common/cards/CardName';
 import {IGame} from '../IGame';
-import {GrantResourceDeferred} from './GrantResourceDeferred';
 import {ICard} from '../cards/ICard';
 import {PathfindersData, PlanetaryTag, isPlanetaryTag} from './PathfindersData';
 import {PlaceCityTile} from '../deferredActions/PlaceCityTile';
@@ -14,13 +13,15 @@ import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {CardResource} from '../../common/CardResource';
 import {Reward} from '../../common/pathfinders/Reward';
-import {GainResources} from '../inputs/GainResources';
+import {SelectResource} from '../inputs/SelectResource';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Tag} from '../../common/cards/Tag';
 import {Turmoil} from '../turmoil/Turmoil';
 import {VictoryPointsBreakdownBuilder} from '../game/VictoryPointsBreakdownBuilder';
 import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {Priority} from '../deferredActions/Priority';
+import {message} from '../logs/MessageBuilder';
+import {Units} from '../../common/Units';
 
 export const TRACKS = PlanetaryTracks.initialize();
 
@@ -151,9 +152,11 @@ export class PathfindersExpansion {
     case '6mc':
       player.stock.add(Resource.MEGACREDITS, 6, {log: true});
       break;
-    case 'any_resource':
-      game.defer(new GrantResourceDeferred(player, false));
-      break;
+    // case 'any_resource':
+    //   // TODO(kberg): this is no different from 'resource'.
+    //   // But with more complicated UI.
+    //   game.defer(new GrantResourceDeferred(player, false));
+    //   break;
     case 'card':
       player.drawCard();
       break;
@@ -202,8 +205,13 @@ export class PathfindersExpansion {
     case 'plant_production':
       player.production.add(Resource.PLANTS, 1, {log: true});
       break;
+    case 'any_resource':
     case 'resource':
-      player.defer(new GainResources(player, 1, 'Gain 1 resource for your Planetary track bonus.'));
+      player.defer(new SelectResource(message('Gain ${0} units of a standard resource', (b) => b.number(1)))
+        .andThen((unit) => {
+          player.stock.add(Units.ResourceMap[unit], 1, {log: true});
+          return undefined;
+        }));
       break;
     case 'steel':
       player.stock.add(Resource.STEEL, 1, {log: true});

@@ -298,7 +298,7 @@
   "Have the most tiles adjacent to special tiles.": "Die meisten Plättchen, die angrenzend zu Spezial-Plättchen liegen.",
   "Highlander": "Bergsteiger",
   "Own the most tiles that are NOT adjacent to ocean tiles": "Die meisten Plättchen, die NICHT an Ozean-Felder angrenzen.",
-  "Incorporator": "Firmeninhaber",
+  "Incorporator": "Starthelfer",
   "Have the most project cards in play with a base cost of at most 10 M€ (not events.)": "Die meisten Projektkarten mit Grundkosten von 10 M€ oder weniger im Spiel (keine Ereignisse).",
   "Investor": "Geldgeber",
   "Have the most Earth tags in play": "Die meisten Erd-Symbole im Spiel (Ereigniskarten zählen nicht).",
@@ -314,7 +314,7 @@
   "Have the most party leaders and influence combined.": "Die meisten Parteivorsitzenden und Einfluss (in Summe) haben.",
   "Traveller": "Passagier",
   "Have the most Jovian and Earth tags in play combined": "Die meisten Erd- und Jupiter-Symbole im Spiel (Ereigniskarten zählen nicht).",
-  "Suburbian": "Vorstädter",
+  "Suburbian": "Außenbezirkler",
   "Most tiles on areas along the edges of the map.": "Die meisten Plättchen an den Rändern des Spielfelds.",
 
   "Actions": "Aktionen",

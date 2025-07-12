@@ -27,11 +27,13 @@ export class GlobalAudit extends Card implements IProjectCard {
   } // x
 
   public override bespokePlay(player: IPlayer) {
-    const lowestCrimeTagCount = player.game.players
-      .map((p) => p.tags.count(Tag.CRIME, 'raw-underworld'))
+    const countByPlayer: Array<[IPlayer, number]> = player.game.players
+      .map((p) => [player, p.tags.count(Tag.CRIME, 'raw') + p.tags.count(Tag.CRIME, 'raw-events')]);
+
+    const lowestCrimeTagCount = countByPlayer
+      .map((e) => e[1])
       .reduce((a, b) => Math.min(a, b));
-    for (const p of player.game.players) {
-      const count = p.tags.count(Tag.CRIME, 'raw-underworld');
+    for (const [p, count] of countByPlayer) {
       const tr = (count === 0) ? 2 : count === lowestCrimeTagCount ? 1 : 0;
       if (tr > 0 && p.canAfford({cost: 0, tr: {tr: tr}})) {
         // TODO(kberg): Make it so players who get two but can only afford 1 get one.

@@ -39,7 +39,7 @@ export class DemetronLabs extends ActiveCorporationCard implements ICorporationC
             (eb) => eb.tag(Tag.SCIENCE).startEffect.resource(CardResource.DATA, 2));
           b.br;
           b.action('Spend 3 data here to identify 3 underground resources. Claim 1 of them.',
-            (ab) => ab.resource(CardResource.DATA, {amount: 3, digit}).startAction.identify(3).claim(1));
+            (ab) => ab.resource(CardResource.DATA, {amount: 3, digit}).startAction.identify(3, {digit}).claim(1));
         }),
       },
     });

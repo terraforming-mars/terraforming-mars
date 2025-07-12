@@ -36,9 +36,16 @@ export class MartianRepository extends Card implements IProjectCard {
     });
   }
 
-
   public onCardPlayed(player: IPlayer, card: ICard) {
     const qty = player.tags.cardTagCount(card, Tag.SCIENCE) + player.tags.cardTagCount(card, Tag. MARS);
-    if (qty > 0) player.addResourceTo(this, {qty, log: true});
+    if (qty > 0) {
+      player.addResourceTo(this, {qty, log: true});
+    }
+  }
+
+  public onNonCardTagAdded(player: IPlayer, tag: Tag) {
+    if (tag === Tag.SCIENCE) {
+      player.addResourceTo(this, {qty: 1, log: true});
+    }
   }
 }

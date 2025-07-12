@@ -7,6 +7,7 @@ import {CardResource} from '../../../common/CardResource';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {ICard} from '../ICard';
+import {digit} from '../Options';
 
 export class StemFieldSubsidies extends ActionCard implements IProjectCard {
   constructor() {
@@ -33,7 +34,7 @@ export class StemFieldSubsidies extends ActionCard implements IProjectCard {
             (eb) => eb.tag(Tag.SCIENCE).startEffect.resource(CardResource.DATA));
           b.br;
           b.action('Spend 2 resources here to identify 3 underground resources, . Claim 1 of them.',
-            (ab) => ab.resource(CardResource.DATA, {amount: 2}).startAction.identify(3).claim(1));
+            (ab) => ab.resource(CardResource.DATA, {amount: 2}).startAction.identify(3, {digit}).claim(1));
         }),
       },
     });

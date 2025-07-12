@@ -40,6 +40,11 @@ export class Decomposers extends Card implements IProjectCard {
     const qty = player.tags.cardTagCount(card, [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE]);
     player.addResourceTo(this, {qty, log: true});
   }
+  public onNonCardTagAdded(player: IPlayer, tag: Tag): void {
+    if (tag === Tag.PLANT) {
+      player.addResourceTo(this, {qty: 1, log: true});
+    }
+  }
   public override bespokePlay(player: IPlayer) {
     // Get two extra microbes from EcoExperts if played during prelude while having just played EcoExperts
     if (player.game.phase === Phase.PRELUDES && player.playedCards.last()?.name === CardName.ECOLOGY_EXPERTS) {

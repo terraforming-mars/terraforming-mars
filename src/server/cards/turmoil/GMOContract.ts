@@ -31,6 +31,12 @@ export class GMOContract extends Card implements IProjectCard {
     });
   }
 
+  public onNonCardTagAdded(player: IPlayer, tag: Tag): void {
+    if (tag === Tag.PLANT) {
+      player.defer(() => player.stock.add(Resource.MEGACREDITS, 2, {log: true}));
+    }
+  }
+
   public onCardPlayed(player: IPlayer, card: ICard): void {
     const amount = player.tags.cardTagCount(card, [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE]);
     if (amount > 0) {

@@ -10,6 +10,7 @@ import {cast, churn, runAllActions, setVenusScaleLevel} from '../../TestingUtils
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {FloaterUrbanism} from '../../../src/server/cards/pathfinders/FloaterUrbanism';
+import {AppliedScience} from '../../../src/server/cards/prelude2/AppliedScience';
 
 describe('MaxwellBase', () => {
   let card: MaxwellBase;
@@ -76,5 +77,14 @@ describe('MaxwellBase', () => {
     player.playedCards.push(fake);
 
     expect(card.canAct(player)).is.true;
+  });
+
+  it('Works with Applied Science #7530', () => {
+    const appliedScience = new AppliedScience();
+    player.playedCards.push(appliedScience);
+    card.action(player);
+    runAllActions(game);
+
+    expect(appliedScience.resourceCount).eq(1);
   });
 });

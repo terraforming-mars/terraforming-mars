@@ -744,7 +744,7 @@ describe('UnderworldExpansion', () => {
 
     expect(game.board.spaces.filter((space) => space.undergroundResources)).to.have.members([space, space2, space3]);
 
-    UnderworldExpansion.removeUnclaimedToken(game, space);
+    UnderworldExpansion.removeTokenFromSpace(game, space);
 
     expect(game.board.spaces.filter((space) => space.undergroundResources)).to.have.members([space2, space3]);
     expect(space2.excavator).eq(player1);

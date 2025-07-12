@@ -9,12 +9,12 @@ import {OneOrArray} from '../../common/utils/types';
 import {intersection} from '../../common/utils/utils';
 
 export type CountingMode =
-  'raw' | // Count face-up tags literally, including Leavitt Station.
+  'raw' | // Count face-up tags literally, including bonuses from Leavitt Station, etc.
   'default' | // Like raw, but include the wild tags and other deafult substitutions. Typical when performing an action.
   'milestone' | // Like raw with special conditions for milestones (Chimera)
   'award' | // Like raw with special conditions for awards (Chimera)
   'raw-pf' | // Like raw, but includes Mars Tags when tag is Science (Habitat Marte)
-  'raw-underworld' // Like raw, but includes tags on events
+  'raw-events' // Like raw, but only for events
 
 export type DistinctCountMode =
   'default' | // Count all tags in played cards, and then add in all the wild tags.
@@ -71,7 +71,11 @@ export class Tags {
    * Get the number of tags this player has.
    */
   public count(tag: Tag, mode: CountingMode = 'default') {
-    const includeEvents = mode === 'raw-underworld' || this.player.tableau.has(CardName.ODYSSEY);
+    if (mode === 'raw-events') {
+      return this.rawCountFromEvents(tag);
+    }
+
+    const includeEvents = this.player.tableau.has(CardName.ODYSSEY);
     const includeTagSubstitutions = (mode === 'default' || mode === 'milestone');
 
     let tagCount = this.rawCount(tag, includeEvents);
@@ -153,18 +157,25 @@ export class Tags {
   }
 
   // Counts the tags in the player's play area only.
+  // Visible for tests
   protected rawCount(tag: Tag, includeEventsTags: boolean) {
     let tagCount = this.player.playedCards.tags[tag];
 
     if (includeEventsTags) {
-      for (const card of this.player.playedCards) {
-        if (card.type === CardType.EVENT) {
-          tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
-        }
-      }
+      tagCount += this.rawCountFromEvents(tag);
     }
 
     return tagCount;
+  }
+
+  private rawCountFromEvents(tag: Tag) {
+    let count = 0;
+    for (const card of this.player.playedCards) {
+      if (card.type === CardType.EVENT) {
+        count += card.tags.filter((cardTag) => cardTag === tag).length;
+      }
+    }
+    return count;
   }
 
   /**

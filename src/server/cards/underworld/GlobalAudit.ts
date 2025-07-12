@@ -24,7 +24,7 @@ export class GlobalAudit extends Card implements IProjectCard {
           'Players with 0 crime tags gain 1 additional TR.',
       },
     });
-  }
+  } // x
 
   public override bespokePlay(player: IPlayer) {
     const lowestCrimeTagCount = player.game.players

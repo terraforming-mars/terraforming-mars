@@ -29,7 +29,7 @@ export class Racketeering extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     // +1 for includes this.
-    const tags = player.tags.count(Tag.CRIME, 'raw-underworld') + player.tags.count(Tag.WILD) + 1;
+    const tags = player.tags.count(Tag.CRIME) + player.tags.count(Tag.CRIME, 'raw-events') + 1;
     player.production.add(Resource.MEGACREDITS, tags, {log: true});
     return undefined;
   }

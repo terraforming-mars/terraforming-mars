@@ -108,7 +108,7 @@ describe('AresHandler', () => {
 
   it('Pay adjacent hazard costs - mild', () => {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    AresHazards.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
+    AresHazards.putHazardAt(game, firstSpace, TileType.DUST_STORM_MILD);
 
     // No resources available to play the tile.
     player.production.add(Resource.MEGACREDITS, -5);
@@ -129,7 +129,7 @@ describe('AresHandler', () => {
 
   it('pay adjacent hazard costs - severe', () => {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    AresHazards.putHazardAt(firstSpace, TileType.DUST_STORM_SEVERE);
+    AresHazards.putHazardAt(game, firstSpace, TileType.DUST_STORM_SEVERE);
 
     // No resources available to play the tile.
     player.production.add(Resource.MEGACREDITS, -5);
@@ -153,7 +153,7 @@ describe('AresHandler', () => {
 
   it('Adjacenct hazard costs do not apply to oceans', () => {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    AresHazards.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
+    AresHazards.putHazardAt(game, firstSpace, TileType.DUST_STORM_MILD);
 
     const before = player.production.asUnits();
 
@@ -167,7 +167,7 @@ describe('AresHandler', () => {
 
   it('cover mild hazard', () => {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
-    AresHazards.putHazardAt(space, TileType.EROSION_MILD);
+    AresHazards.putHazardAt(game, space, TileType.EROSION_MILD);
     player.megaCredits = 8;
     expect(player.terraformRating).eq(20);
 
@@ -181,7 +181,7 @@ describe('AresHandler', () => {
 
   it('cover severe hazard', () => {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
-    AresHazards.putHazardAt(space, TileType.EROSION_SEVERE);
+    AresHazards.putHazardAt(game, space, TileType.EROSION_SEVERE);
     player.megaCredits = 16;
     expect(player.terraformRating).eq(20);
 
@@ -248,7 +248,7 @@ describe('AresHandler', () => {
 
   it('No adjacency hazard costs during WGT', () => {
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    AresHazards.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
+    AresHazards.putHazardAt(game, firstSpace, TileType.DUST_STORM_MILD);
     game.phase = Phase.SOLAR;
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
@@ -260,7 +260,7 @@ describe('AresHandler', () => {
 
   it('No hazard coverage cost or bonus during WGT', () => {
     const space = game.board.getAvailableSpacesOnLand(player)[0];
-    AresHazards.putHazardAt(space, TileType.EROSION_SEVERE);
+    AresHazards.putHazardAt(game, space, TileType.EROSION_SEVERE);
     player.megaCredits = 8;
     expect(player.terraformRating).eq(20);
     game.phase = Phase.SOLAR;
@@ -416,6 +416,24 @@ describe('Hazard tests', () => {
     tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     expect(tiles.get(TileType.EROSION_MILD)).is.undefined;
     expect(tiles.get(TileType.EROSION_SEVERE)).has.lengthOf(2);
+  });
+
+  it('Placing a hazard tile removes underground components', () => {
+    const [game, player] = testGame(2, {aresExtension: true, underworldExpansion: true});
+    const [space1, space2] = game.board.getAvailableSpacesOnLand(player);
+
+    space1.undergroundResources = 'card1';
+    space2.excavator = player;
+
+    AresHazards.putHazardAt(game, space1, TileType.EROSION_MILD);
+
+    expect(space1.excavator).is.undefined;
+    expect(space1.undergroundResources).is.undefined;
+
+    AresHazards.putHazardAt(game, space2, TileType.EROSION_MILD);
+
+    expect(space2.excavator).is.undefined;
+    expect(space2.undergroundResources).is.undefined;
   });
 });
 

@@ -37,7 +37,7 @@ export class InducedTremor extends Card implements IProjectCard {
     const game = player.game;
     const identifiedSpaces = game.board.spaces.filter((space) => space.undergroundResources !== undefined);
     player.defer(new SelectSpace('Select unclaimed resource token to remove', identifiedSpaces).andThen((s) => {
-      UnderworldExpansion.removeUnclaimedToken(game, s);
+      UnderworldExpansion.removeTokenFromSpace(game, s);
       game.defer(new ExcavateSpaceDeferred(player, UnderworldExpansion.excavatableSpaces(player)));
       return undefined;
     }));

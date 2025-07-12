@@ -75,6 +75,15 @@ export function isICardRenderCorpBoxAction(item: ItemType): item is ICardRenderC
   return typeof(item) !== 'string' && item?.is === 'corp-box-action';
 }
 
+export interface ICardRenderCorpBoxEffectAction extends CardComponent {
+  readonly is: 'corp-box-effect-action';
+  rows: Array<Array<ItemType>>,
+}
+
+export function isICardRenderCorpBoxEffectAction(item: ItemType): item is ICardRenderCorpBoxEffectAction {
+  return typeof(item) !== 'string' && item?.is === 'corp-box-effect-action';
+}
+
 export interface ICardRenderItem extends CardComponent {
   readonly is: 'item';
   /** The thing being drawn */

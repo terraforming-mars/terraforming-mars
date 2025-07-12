@@ -41,11 +41,7 @@ export class ArtesianAquifer extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     player.game.defer(new ExcavateSpaceDeferred(player, this.availableSpaces(player)))
       .andThen((space) => {
-        if (player.game.board.getAvailableSpacesForOcean(player).includes(space)) {
-          player.game.addOcean(player, space);
-        } else {
-          // TODO(kberg): log about how they player couldn't place an ocean.
-        }
+        player.game.addOcean(player, space);
       });
     return undefined;
   }

@@ -8,6 +8,7 @@ import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IActionCard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
+import {digit} from '../Options';
 
 export class HenkeiGenetics extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {
@@ -25,7 +26,6 @@ export class HenkeiGenetics extends CorporationCard implements ICorporationCard,
 
       action: {
         spend: {corruption: 1},
-        // drawCard: {count: 1, tag: Tag.MICROBE},
       },
 
       firstAction: {
@@ -40,7 +40,9 @@ export class HenkeiGenetics extends CorporationCard implements ICorporationCard,
         renderData: CardRenderer.builder((b) => {
           b.megacredits(47).corruption(1).br;
           b.action('Pay 1 corruption to place 3 microbes on each card, up 2 to cards.', (ab) => {
-            ab.corruption(1).startAction.cards(1, {secondaryTag: Tag.MICROBE});
+            ab.corruption(1).startAction
+              .resource(CardResource.MICROBE, {amount: 3, digit}).asterix()
+              .resource(CardResource.MICROBE, {amount: 3, digit}).asterix();
           });
         }),
       },

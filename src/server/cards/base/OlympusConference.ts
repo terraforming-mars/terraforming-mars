@@ -44,6 +44,9 @@ export class OlympusConference extends Card implements IProjectCard {
     }
   }
   public onScienceTagAdded(player: IPlayer, count: number) {
+    // For cards like Hyperspace Drive Prototype, we want to defer adding a resource from the tag
+    // until after resource is added via the card (so the tag can be used to remove the resource).
+    const priority = (this.resourceCount === 0 && count === 1) ? Priority.DEFAULT : Priority.SUPERPOWER;
     for (let i = 0; i < count; i++) {
       player.defer(() => {
         // Can't remove a resource
@@ -63,7 +66,7 @@ export class OlympusConference extends Card implements IProjectCard {
           }),
         ).setTitle('Select an option for Olympus Conference');
       },
-      Priority.SUPERPOWER); // Unshift that deferred action
+      priority); // Unshift that deferred action
     }
     return undefined;
   }

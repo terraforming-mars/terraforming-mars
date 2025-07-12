@@ -487,7 +487,7 @@ export class UnderworldExpansion {
     game.log('All unidentified underground resources have been shuffled back into the pile.');
   }
 
-  static removeUnclaimedToken(game: IGame, space: Space) {
+  static removeTokenFromSpace(game: IGame, space: Space) {
     if (game.underworldData === undefined) {
       return;
     }
@@ -500,7 +500,7 @@ export class UnderworldExpansion {
     inplaceShuffle(game.underworldData.tokens, game.rng);
   }
 
-  static removeClaimedToken(player: IPlayer, token: UndergroundResourceToken) {
+  static removeTokenFromPlayer(player: IPlayer, token: UndergroundResourceToken) {
     const playerTokens = player.underworldData.tokens;
     if (!inplaceRemove(playerTokens, token)) {
       throw new Error('Token ${token} not found');
@@ -584,7 +584,7 @@ export class UnderworldExpansion {
   public static onTilePlaced(game: IGame, space: Space) {
     space.excavator = undefined;
     if (space.undergroundResources !== undefined) {
-      UnderworldExpansion.removeUnclaimedToken(game, space);
+      UnderworldExpansion.removeTokenFromSpace(game, space);
     }
   }
 

@@ -15,7 +15,7 @@ type Options = {
   creditedPlayer?: IPlayer,
 };
 
-export class PlaceOceanTile extends DeferredAction<Space> {
+export class PlaceOceanTile extends DeferredAction<Space | undefined> {
   constructor(
     player: IPlayer,
     private options: Options = {}) {
@@ -27,6 +27,7 @@ export class PlaceOceanTile extends DeferredAction<Space> {
       const whales = this.player.tableau.get(CardName.WHALES);
       if (whales !== undefined) {
         this.player.addResourceTo(whales, {qty: 1, log: true});
+        this.cb(undefined);
       }
       return undefined;
     }

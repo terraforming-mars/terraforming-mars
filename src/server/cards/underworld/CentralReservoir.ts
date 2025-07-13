@@ -41,6 +41,9 @@ export class CentralReservoir extends PreludeCard {
     player.game.defer(new PlaceOceanTile(player, {
       spaces: this.availableSpaces(player),
     })).andThen((space) => {
+      if (!space) {
+        return;
+      }
       const spaces = UnderworldExpansion.identifyAdjacentSpaces(player, space);
       player.game.defer(new ClaimSpacesDeferred(player, 2, spaces));
     });

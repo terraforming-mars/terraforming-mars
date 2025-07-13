@@ -38,6 +38,9 @@ export class Flooding extends Card implements IProjectCard {
     }
 
     game.defer(new PlaceOceanTile(player)).andThen((space) => {
+      if (!space) {
+        return;
+      }
       const adjacentPlayers: Set<IPlayer> = new Set();
       game.board.getAdjacentSpaces(space).forEach((space) => {
         if (space.player && space.player !== player && space.tile) {

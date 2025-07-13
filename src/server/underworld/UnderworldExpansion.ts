@@ -105,9 +105,6 @@ export class UnderworldExpansion {
   }
 
   public static canIdentify(space: Space): boolean {
-    if (space.spaceType === SpaceType.COLONY) {
-      return false;
-    }
     if (space.undergroundResources !== undefined) {
       return false;
     }
@@ -115,6 +112,9 @@ export class UnderworldExpansion {
       return false;
     }
     if (space.tile !== undefined) {
+      return false;
+    }
+    if (space.spaceType === SpaceType.COLONY || space.spaceType === SpaceType.RESTRICTED) {
       return false;
     }
     return true;
@@ -181,7 +181,7 @@ export class UnderworldExpansion {
 
     // Compute any space that any player can excavate.
     const anyExcavatableSpaces = board.spaces.filter((space) => {
-      if (space.spaceType === SpaceType.COLONY) {
+      if (space.spaceType === SpaceType.COLONY || space.spaceType === SpaceType.RESTRICTED) {
         return false;
       }
 

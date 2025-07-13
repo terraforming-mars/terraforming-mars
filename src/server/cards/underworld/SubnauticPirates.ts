@@ -45,7 +45,7 @@ export class SubnauticPirates extends Card implements IProjectCard {
 
   public override bespokeCanPlay(player: IPlayer) {
     if (player.game.isSoloMode()) {
-      return true;
+      return false;
     }
     return this.availableTargets(player).length > 0;
   }

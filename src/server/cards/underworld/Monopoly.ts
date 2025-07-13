@@ -15,10 +15,10 @@ import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 export class Monopoly extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
-      type: CardType.EVENT,
+      type: CardType.ACTIVE,
       name: CardName.MONOPOLY,
       tags: [Tag.CRIME],
-      cost: 12,
+      cost: 8,
 
       requirements: {corruption: 2},
       victoryPoints: -2,
@@ -26,14 +26,16 @@ export class Monopoly extends Card implements IProjectCard, IActionCard {
       metadata: {
         cardNumber: 'U65',
         renderData: CardRenderer.builder((b) => {
-          b.text('STEAL').production((pb) => pb.wild(1, {all})).br;
+          b.action('Spend 1 corruption to increase any production 1 step.', (ab) => {
+            ab.corruption(1).startAction.production((pb) => pb.wild(1));
+          }).br;
+          b.text('STEAL').wild(2, {all}).asterix().br;
         }),
-        description: 'Requires 3 corruption. Choose a standard resource type. ' +
+        description: 'Requires 2 corruption. Choose a standard resource type. ' +
           'Steal 2 units of that resource from EACH OTHER player.',
       },
     });
   }
-
 
   private stealableResources(player: IPlayer): Array<keyof Units> {
     const targets = player.opponents;

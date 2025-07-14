@@ -41,6 +41,11 @@
   "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.": "Du beginnst mit 47 M€. Als deine erste Aktion, platziere ein Grünflächenplättchen und erhöhe den Sauerstoffgehalt um 1%.",
   "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "EFFEKT: Sobald eines deiner Plättchen an ein Plättchen eines Mitspielers angrenzt, erhalte eine Standard-Ressource deiner Wahl (unabhängig davon, wer das Plätcchen gelegt hat).",
 
+  "PolderTECH Dutch": "Polder-Technologie Niederland",
+  "You start with 32 M€. As your first action, place an ocean tile and a greenery tile next to each other. Raise oxygen 1 step.": "Du beginnst mit 32 M€. Als deine erste Aktion platziere 1 Ozean- und 1 Grünflächenplättchen nebeneinander. Erhöhe den Sauerstoffgehalt um 1%.",
+  "Effect: When you place an ocean tile, gain 1 energy.": "EFFEKT: Wenn du ein Ozeanplättchen legst, erhalte 1 Energie.",
+  "Effect: When you place a greenery, gain 1 plant.": "EFFEKT: Wenn du eine Grünflächenplättchen platzierst, erhalte 1 Pflanze.",
+  
   "Recyclon": "",
   "You start with 38 M€ and 1 steel production.": "Du beginnst mit 38 M€ und 1 Stahl-Produktion.",
   "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "EFFEKT: Wenn du ein Gebäudesymbol spielst (inklusive diesem), füge dieser Karte 1 Mikrobe hinzu oder entferne 2 Mikroben von dieser Karte, um deine Pflanzen-Produktiom um 1 zu erhöhen.",

@@ -7,6 +7,7 @@ import {IPlayer} from '../../IPlayer';
 import {PlayerInput} from '../../PlayerInput';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
+import {AncientShipyards} from '../moon/AncientShipyards';
 
 export class L1TradeTerminal extends Card {
   constructor() {
@@ -55,7 +56,8 @@ export class L1TradeTerminal extends Card {
 
   public override bespokePlay(player: IPlayer): PlayerInput | undefined {
     const cards = this.getEligibleCards(player);
-    if (cards.length <= 3) {
+    const ancientShipyards = new AncientShipyards();
+    if (cards.length <= 3 && !cards.includes(ancientShipyards)) {
       this.addResources(player, cards);
       return undefined;
     }

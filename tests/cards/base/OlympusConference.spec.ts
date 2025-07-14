@@ -137,7 +137,7 @@ describe('OlympusConference', () => {
     expect(card.resourceCount).to.eq(1);
   });
 
-  it ('Allows for resource to be added first when Hyperspace Drive Prototype is played', () => {
+  it('Allows for resource to be added first when Hyperspace Drive Prototype is played', () => {
     player.playedCards.push(card);
     card.resourceCount = 0;
     const hyperspaceDrivePrototype = new HyperspaceDrivePrototype();

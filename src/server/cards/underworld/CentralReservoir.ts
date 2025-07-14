@@ -17,7 +17,7 @@ export class CentralReservoir extends PreludeCard {
       metadata: {
         cardNumber: 'UP09',
         renderData: CardRenderer.builder((b) => {
-          b.oceans(1).asterix().geoscan().asterix().claim(2);
+          b.oceans(1).asterix().geoscan().asterix().br.claim(2);
         }),
         description: 'Place an ocean ON AN AREA NOT RESERVED FOR OCEAN. ' +
           'Then identify the underground resources in all adjacent spaces. Claim 2 of them.',
@@ -41,6 +41,9 @@ export class CentralReservoir extends PreludeCard {
     player.game.defer(new PlaceOceanTile(player, {
       spaces: this.availableSpaces(player),
     })).andThen((space) => {
+      if (!space) {
+        return;
+      }
       const spaces = UnderworldExpansion.identifyAdjacentSpaces(player, space);
       player.game.defer(new ClaimSpacesDeferred(player, 2, spaces));
     });

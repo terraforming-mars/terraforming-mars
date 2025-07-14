@@ -4,7 +4,7 @@ import {testGame} from '../../TestGame';
 import {addCity, cast, churn, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
-import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
+import {assertIsClaimAction} from '../../underworld/underworldAssertions';
 
 describe('UndergroundSettlement', () => {
   it('play', () => {
@@ -30,7 +30,7 @@ describe('UndergroundSettlement', () => {
 
     runAllActions(game);
 
-    assertIsExcavationAction(player, player.popWaitingFor());
+    assertIsClaimAction(player, player.popWaitingFor());
   });
 
   // #7073

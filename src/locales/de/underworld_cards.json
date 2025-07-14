@@ -40,7 +40,7 @@
 "Corporate Blackmail": "Erpressung durch Unternehmen",
 "PAYS YOU": "BEZAHLE",
 "THIS CANNOT BE BLOCKED BY CORRUPTION": "DIES KANN NICHT DURCH KORRUPTION BLOCKIERT WERDEN",
-"Requires 1 corruption. Target a player that has at least 2 corruption. Unless that player pays you 10 M€, they lose 2 corruption.": "Benötigt 1 Korruption. Visiere einen Spieler, der mindestens 2 Korruption hat. Wenn dieser Spieler nicht 10 M€ an dich zahlt, verliert er 2 Korruptionspunkte.",
+"// Requires 1 corruption. Target a player that has at least 2 corruption. Unless that player pays you 10 M€, they lose 2 corruption.": "Benötigt 1 Korruption. Visiere einen Spieler, der mindestens 2 Korruption hat. Wenn dieser Spieler nicht 10 M€ an dich zahlt, verliert er 2 Korruptionspunkte.",
 
 "Corporate Theft": "Unternehmensdiebstahl",
 "Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. IF SOLO: gain 1 corruption.": "Benötigt 2 Korruption. Entferne 1 Ressource von einer Karte, die einem anderen Spieler gehört. Wenn du dann eine Karte hast, die sie aufnehmen kann, lege sie auf eine solche Karte. Wenn das Ziel dies blockiert, erhältst du 1 Korruption. WENN ALLEIN: 1 Korruption erhalten.",
@@ -96,7 +96,7 @@
 "Requires 2 earth tags. Gain 1 corruption.": "Benötigt 2 Erdsymbole. Erhalte 1 Korruption.",
 
 "Gaia City": "Gaia-Stadt",
-"Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (including adjacencies.) Regular placement restriction still apply.": "Verringere deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 2. Platziere eine Stadt auf einem Feld mit einem Ausgrabungsmarker eines beliebigen Spielers. Der Platzierungsbonus wird verdoppelt (einschließlich der Nachbarschaftsboni). Die normalen Platzierungsbeschränkungen gelten weiterhin.",
+"// Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (including adjacencies.) Regular placement restriction still apply.": "Verringere deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 2. Platziere eine Stadt auf einem Feld mit einem Ausgrabungsmarker eines beliebigen Spielers. Der Platzierungsbonus wird verdoppelt (einschließlich der Nachbarschaftsboni). Die normalen Platzierungsbeschränkungen gelten weiterhin.",
 "Placement Bonus x2": "2x Platzierungsbonus",
 
 "Gas Trust": "Gas Treuhand",
@@ -142,7 +142,7 @@
 "Excavate 2 underground resources.": "Grabe 2 unterirdische Ressourcen aus.",
 
 "Induced Tremor": "Induziertes Zittern",
-"Excavate an underground resource, then pick an adjacent space with an unclaimed resource token. Remove that token. The space can be identified again.": "Grabe eine unterirdische Ressource aus und wähle dann ein angrenzendes Feld mit einem nicht beanspruchten Ressourcenplättchen. Entferne dieses Plättchen. Das Feld kann wieder identifiziert werden.",
+"// Excavate an underground resource, then pick an adjacent space with an unclaimed resource token. Remove that token. The space can be identified again.": "Grabe eine unterirdische Ressource aus und wähle dann ein angrenzendes Feld mit einem nicht beanspruchten Ressourcenplättchen. Entferne dieses Plättchen. Das Feld kann wieder identifiziert werden.",
 
 "Infrastructure Overload": "Überlastung der Infrastruktur",
 "// Requires 2 corruption. Reduce any energy production 2 steps.": "Benötigt 2 Korruption. Reduziere eine beliebige Energieproduktion um 2.",
@@ -193,7 +193,7 @@
 "Action: Spend 4 data resources on this card to draw a card.": "Aktion: Bezahle 4 Daten von dieser Karte, um eine Karte zu ziehen.",
 
 "Monopoly": "Monopol",
-"Requires 3 corruption. Choose a standard production type. Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.": "Benötigt 3 Korruption. Wähle eine Standard-Produktion. Stiehl bis zu 1 Einheit dieser Produktion von JEDEM ANDEREN Spieler. Er kann dies mit Korruption blockieren.",
+"// Requires 3 corruption. Choose a standard production type. Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.": "Benötigt 3 Korruption. Wähle eine Standard-Produktion. Stiehl bis zu 1 Einheit dieser Produktion von JEDEM ANDEREN Spieler. Er kann dies mit Korruption blockieren.",
 
 "Nanofoundry": "Nanogießerei",
 "Requires 2 science tags. Reduce your energy production 5 steps. Draw 1 card for every power tag you have, including this.": "Benötigt 2 Wissenschafts-Symbole. Verringere deine Energieproduktion um 5. Ziehe 1 Karte für jedes Energiesymbol, das du hast, einschließlich diesem.",
@@ -280,10 +280,10 @@
 "// At the end of this generation only, during the production phase, gain 12 M€.": "Nur am Ende dieser Generation erhalte während der Produktionsphase 12 M€.",
 
 "Space Privateers": "Weltraum-Freibeuter",
-"Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "AKTION: Wenn sich mindestens 1 Jäger auf dieser Karte befindet, klaue 2 M€ von JEDEM ANDEREN Spieler.",
+"// Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "AKTION: Wenn sich mindestens 1 Jäger auf dieser Karte befindet, klaue 2 M€ von JEDEM ANDEREN Spieler.",
 "Effect: If 1 or more targets block this with corruption, remove 1 fighter from here.": "EFFEKT: Wenn 1 oder mehrere Spieler diese Karte mit Korruption blockieren, entferne 1 Jäger von dieser Karte.",
 "Solo: Gain 2 M€ and remove 1 fighter from this card.": "Solo: Erhalte 2 M€ und entferne 1 Jäger von dieser Karte.",
-"Requires 3 corruption. Put 3 fighter resources on this card.": "Benötigt 3 Korruption. Lege 3 Jäger auf diese Karte.",
+"// Requires 3 corruption. Put 3 fighter resources on this card.": "Benötigt 3 Korruption. Lege 3 Jäger auf diese Karte.",
 
 "Space Wargames": "Weltraum-Wargames",
 "Action: Spend 1 titanium to gain 1 fighter resource to this card.": "AKTION: Bezahle 1 Titan, um 1 Jäger-Ressource für diese Karte zu erhalten.",

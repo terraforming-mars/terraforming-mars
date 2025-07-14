@@ -35,19 +35,18 @@ export class Ecotec extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
-    const resourceCount = player.tags.cardTagCount(card, [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE]);
-    if (resourceCount === 0) {
-      return undefined;
+  public process(player: IPlayer, count: number): void {
+    if (count === 0) {
+      return;
     }
 
     const microbeCards = player.getResourceCards(CardResource.MICROBE);
     if (microbeCards.length === 0) {
-      player.stock.add(Resource.PLANTS, resourceCount, {log: true});
-      return undefined;
+      player.stock.add(Resource.PLANTS, count, {log: true});
+      return;
     }
 
-    for (let i = 0; i < resourceCount; i++) {
+    for (let i = 0; i < count; i++) {
       player.defer(
         () => new OrOptions(
           new SelectCard(
@@ -66,6 +65,16 @@ export class Ecotec extends CorporationCard implements ICorporationCard {
         ),
       );
     }
+  }
+
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+    this.process(player, player.tags.cardTagCount(card, [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE]));
     return undefined;
+  }
+
+  public onNonCardTagAdded(player: IPlayer, tag: Tag): void {
+    if (tag === Tag.PLANT) {
+      this.process(player, 1);
+    }
   }
 }

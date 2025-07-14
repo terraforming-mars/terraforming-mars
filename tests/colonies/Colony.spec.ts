@@ -403,7 +403,7 @@ describe('Colony', () => {
     expect(player.colonies.tradesThisGeneration).eq(3);
   });
 
-  it('../../../src if player should move the track', () => {
+  it('if player should move the track', () => {
     const l1TradeTerminal = new L1TradeTerminal();
     cast(l1TradeTerminal.play(player), undefined);
     // Mercury has different rewards, so the player will want to choose how far up to move the track.

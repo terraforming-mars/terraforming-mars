@@ -136,8 +136,13 @@ export class Executor implements BehaviorExecutor {
           return false;
         }
       }
-      if (spend.resourcesHere && card.resourceCount < spend.resourcesHere) {
-        return false;
+      if (spend.resourcesHere) {
+        if (card.resourceCount < spend.resourcesHere) {
+          return false;
+        }
+        if (!player.canAfford({cost: 0, tr: asTrSource})) {
+          return false;
+        }
       }
       if (spend.resourceFromAnyCard && player.getCardsWithResources(spend.resourceFromAnyCard.type).length === 0) {
         return false;

@@ -30,7 +30,7 @@
   "Corporate Blackmail": "Корпоративний шантаж",
   "PAYS YOU": "ПЛАТИТЬ ВАМ",
   "THIS CANNOT BE BLOCKED BY CORRUPTION": "ЦЕ НЕ МОЖЕ БУТИ ЗАБЛОКОВАНО КОРУПЦІЄЮ",
-  "Requires 1 corruption. Target a player that has at least 2 corruption. Unless that player pays you 10 M€, they lose 2 corruption.": "Вимагає 1 одиницю корупції. Виберіть гравця, у якого є принаймні 2 одиниці корупції. Якщо цей гравець не заплатить вам 10 M€, він втрачає 2 одиниці корупції.",
+  "// Requires 1 corruption. Target a player that has at least 2 corruption. Unless that player pays you 10 M€, they lose 2 corruption.": "Вимагає 1 одиницю корупції. Виберіть гравця, у якого є принаймні 2 одиниці корупції. Якщо цей гравець не заплатить вам 10 M€, він втрачає 2 одиниці корупції.",
 
   "Corporate Theft": "Корпоративна крадіжка",
   "Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. IF SOLO: gain 1 corruption.": "Вимагає 2 одиниці корупції. Видаліть 1 ресурс з карти, що належить іншому гравцю. Потім, якщо у вас є карта, на якій можна його зберігати, помістіть його на таку карту. Якщо ціль заблокувала це, ви отримуєте 1 одиницю корупції. ЯКЩО СОЛО: отримати 1 пошкодження.",
@@ -71,7 +71,7 @@
   "// Requires 1 corruption and 1 Earth tag. Gain 1 corruption.": "Вимагає 1 одиницю корупції та 1 символ Землі. Отримайте 1 одиницю корупції.",
   "Requires 2 Earth tags. Gain 1 corruption.": "Вимагає 2 символи Землі. Отримайте 1 одиницю корупції.",
   "Gaia City": "Місто Гаї",
-  "Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (including adjacencies.) Regular placement restriction still apply.": "Зменште ваше виробництво енергії на 1 крок і збільште ваше виробництво M€ на 2 кроки. Розмістіть місто на місці з маркером розкопок БУДЬ-ЯКОГО гравця. Його бонус за розміщення подвоюється (включаючи сусідність). Звичайні обмеження розміщення все ще застосовуються.",
+  "// Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (including adjacencies.) Regular placement restriction still apply.": "Зменште ваше виробництво енергії на 1 крок і збільште ваше виробництво M€ на 2 кроки. Розмістіть місто на місці з маркером розкопок БУДЬ-ЯКОГО гравця. Його бонус за розміщення подвоюється (включаючи сусідність). Звичайні обмеження розміщення все ще застосовуються.",
 
   "Geological Survey": "Геологічне дослідження",
   "// Add 1 data resource to ANOTHER card. Identify any 2 underground resources on Mars.": "Додайте 1 ресурс даних на ІНШУ карту. Визначте будь-які 2 підземні ресурси на Марсі.",
@@ -112,7 +112,7 @@
   "Excavate 2 underground resources.": "Видобути 2 підземні ресурси.",
 
   "Induced Tremor": "Індуковані тремори",
-  "Excavate an underground resource, then pick an adjacent space with an unclaimed resource token. Remove that token. The space can be identified again.": "Видобути підземний ресурс, потім вибрати сусіднє місце з невикористаним токеном ресурсу. Видаліть цей токен. Місце можна ідентифікувати знову.",
+  "// Excavate an underground resource, then pick an adjacent space with an unclaimed resource token. Remove that token. The space can be identified again.": "Видобути підземний ресурс, потім вибрати сусіднє місце з невикористаним токеном ресурсу. Видаліть цей токен. Місце можна ідентифікувати знову.",
 
   "Infrastructure Overload": "Перевантаження інфраструктури",
   "// Requires 2 corruption. Reduce any energy production 2 steps.": "Вимагає 2 одиниці корупції. Зменште будь-яке виробництво енергії на 2 кроки.",
@@ -157,7 +157,7 @@
   "Action: Spend 4 data resources on this card to draw a card.": "Дія: Витратити 4 ресурси даних на цю картку, щоб взяти карту.",
 
   "Monopoly": "Монополія",
-  "Requires 3 corruption. Choose a standard production type. Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.": "Вимагає 3 одиниці корупції. Виберіть стандартний тип виробництва. Вкрадіть до 1 одиниці цього виробництва від КОЖНОГО ІНШОГО гравця. Вони можуть заблокувати це за допомогою корупції.",
+  "// Requires 3 corruption. Choose a standard production type. Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.": "Вимагає 3 одиниці корупції. Виберіть стандартний тип виробництва. Вкрадіть до 1 одиниці цього виробництва від КОЖНОГО ІНШОГО гравця. Вони можуть заблокувати це за допомогою корупції.",
 
   "Nanofoundry": "Наноливарня",
   "Requires 2 science tags. Reduce your energy production 5 steps. Draw 1 card for every power tag you have, including this.": "Вимагає 2 символи науки. Зменште ваше виробництво енергії на 5 кроків. Витягніть 1 карту за кожним символом енергії, який у вас є, включаючи цей.",
@@ -239,10 +239,10 @@
   "// At the end of this generation only, during the production phase, gain 12 M€.": "Тільки в кінці цього покоління, під час фази виробництва, отримайте 12 M€.",
 
   "Space Privateers": "Космічні пірати",
-  "Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "Дія: Якщо на цій картці є принаймні 1 одиниця ресурсу-борця, вкрадіть 2 M€ у КОЖНОГО ІНШОГО гравця.",
+  "// Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "Дія: Якщо на цій картці є принаймні 1 одиниця ресурсу-борця, вкрадіть 2 M€ у КОЖНОГО ІНШОГО гравця.",
   "Effect: If 1 or more targets block this with corruption, remove 1 fighter from here.": "Ефект: Якщо 1 або більше цілей блокують це за допомогою корупції, видаліть 1 одиницю ресурсу-борця звідси.",
   "Solo: Gain 2 M€ and remove 1 fighter from this card.": "Соло: Отримайте 2 M€ і видаліть 1 одиницю ресурсу-борця з цієї картки.",
-  "Requires 3 corruption. Put 3 fighter resources on this card.": "Вимагає 3 одиниці корупції. Покладіть 3 одиниці ресурсу-борця на цю картку.",
+  "// Requires 3 corruption. Put 3 fighter resources on this card.": "Вимагає 3 одиниці корупції. Покладіть 3 одиниці ресурсу-борця на цю картку.",
 
   "Space Wargames": "Космічні військові ігри",
   "Action: Spend 1 titanium to gain 1 fighter resource to this card.": "Дія: Витратити 1 одиницю титану, щоб отримати 1 одиницю ресурсу-борця на цю картку.",

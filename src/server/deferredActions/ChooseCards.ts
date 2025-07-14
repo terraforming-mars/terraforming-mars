@@ -31,9 +31,7 @@ export class ChooseCards extends DeferredAction {
   }
 
   public execute() {
-    const options = this.options;
-    const cards = this.cards;
-    const player = this.player;
+    const {options, cards, player} = this;
 
     let max = options.keepMax || cards.length;
     let msg: string | Message = message('Select ${0} card(s) to keep', (b) => b.number(max));
@@ -69,6 +67,9 @@ export class ChooseCards extends DeferredAction {
               cost,
               {title: message('Select how to spend ${0} M€ for ${1} cards', (b) => b.number(cost).number(selected.length))})
               .andThen(() => keep(player, selected, unselected, LogType.BOUGHT)));
+          if (options.logDrawnCard === true) {
+            LogHelper.logDrawnCards(player, cards);
+          }
         } else if (options.logDrawnCard === true) {
           keep(player, selected, unselected, LogType.DREW_VERBOSE);
         } else {

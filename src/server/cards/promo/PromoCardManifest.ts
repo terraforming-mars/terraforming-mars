@@ -60,6 +60,7 @@ import {OutdoorSports} from './OutdoorSports';
 import {Penguins} from './Penguins';
 import {PharmacyUnion} from './PharmacyUnion';
 import {Philares} from './Philares';
+import {PolderTechDutch} from './PolderTechDutch';
 import {Potatoes} from './Potatoes';
 import {ProjectInspection} from './ProjectInspection';
 import {ProtectedGrowth} from './ProtectedGrowth';
@@ -192,5 +193,6 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.SPLICE]: {Factory: Splice},
     [CardName.TYCHO_MAGNETICS]: {Factory: TychoMagnetics},
     [CardName.KUIPER_COOPERATIVE]: {Factory: KuiperCooperative},
+    [CardName.POLDERTECH_DUTCH]: {Factory: PolderTechDutch},
   },
 });

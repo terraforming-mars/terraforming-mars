@@ -7,20 +7,24 @@ export class Europa extends Colony {
   constructor() {
     super({
       name: ColonyName.EUROPA,
-      description: {
-        buildBonus: 'Place an ocean tile',
-        tradeBonus: 'Gain 1 unit of production of the type under the track marker',
-        colonyBonus: 'Gain 1 M€',
+      build: {
+        description: 'Place an ocean tile',
+        type: ColonyBenefit.PLACE_OCEAN_TILE,
       },
-      buildType: ColonyBenefit.PLACE_OCEAN_TILE,
-      tradeType: ColonyBenefit.GAIN_PRODUCTION,
-      tradeResource: [
-        Resource.MEGACREDITS, Resource.MEGACREDITS,
-        Resource.ENERGY, Resource.ENERGY,
-        Resource.PLANTS, Resource.PLANTS, Resource.PLANTS,
-      ],
-      colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
-      colonyBonusResource: Resource.MEGACREDITS,
+      trade: {
+        description: 'Gain 1 unit of production of the type under the track marker',
+        type: ColonyBenefit.GAIN_PRODUCTION,
+        resource: [
+          Resource.MEGACREDITS, Resource.MEGACREDITS,
+          Resource.ENERGY, Resource.ENERGY,
+          Resource.PLANTS, Resource.PLANTS, Resource.PLANTS,
+        ],
+      },
+      colony: {
+        description: 'Gain 1 M€',
+        type: ColonyBenefit.GAIN_RESOURCES,
+        resource: Resource.MEGACREDITS,
+      },
       shouldIncreaseTrack: 'ask',
     });
   }

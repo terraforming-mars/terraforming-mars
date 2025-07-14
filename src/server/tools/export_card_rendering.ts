@@ -10,7 +10,7 @@ import {IClientGlobalEvent} from '../../common/turmoil/IClientGlobalEvent';
 import {ClientCard} from '../../common/cards/ClientCard';
 import {isICorporationCard} from '../cards/corporation/ICorporationCard';
 import {isPreludeCard} from '../cards/prelude/IPreludeCard';
-import {IColonyMetadata} from '../../common/colonies/IColonyMetadata';
+import {ColonyMetadata} from '../../common/colonies/ColonyMetadata';
 import {Units} from '../../common/Units';
 import {ALL_COLONIES_TILES, getColonyModule} from '../colonies/ColonyManifest';
 import {milestoneManifest} from '../milestones/Milestones';
@@ -136,7 +136,7 @@ class GlobalEventProcessor {
 }
 
 class ColoniesProcessor {
-  public static json: Array<IColonyMetadata> = [];
+  public static json: Array<ColonyMetadata> = [];
   public static makeJson() {
     ALL_COLONIES_TILES.forEach((entry) => {
       const colony = new entry.Factory();
@@ -144,24 +144,17 @@ class ColoniesProcessor {
     });
   }
 
-  private static processColony(metadata: IColonyMetadata) {
+  private static processColony(metadata: ColonyMetadata) {
     // This seems extraneous but it prevents extra fields from creeping
     // into the JSON. Could do some other form, but this works and matches
     // the patterns above.
-    const clientMetadata: IColonyMetadata = {
+    const clientMetadata: ColonyMetadata = {
       module: getColonyModule(metadata.name),
       name: metadata.name,
-      description: metadata.description,
-      buildType: metadata.buildType,
-      buildQuantity: metadata.buildQuantity,
-      buildResource: metadata.buildResource,
       cardResource: metadata.cardResource,
-      tradeType: metadata.tradeType,
-      tradeQuantity: metadata.tradeQuantity,
-      tradeResource: metadata.tradeResource,
-      colonyBonusType: metadata.colonyBonusType,
-      colonyBonusQuantity: metadata.colonyBonusQuantity,
-      colonyBonusResource: metadata.colonyBonusResource,
+      build: metadata.build,
+      trade: metadata.trade,
+      colony: metadata.colony,
       shouldIncreaseTrack: metadata.shouldIncreaseTrack,
     };
 

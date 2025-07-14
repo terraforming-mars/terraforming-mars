@@ -55,8 +55,10 @@ export class Faraday extends CeoCard {
     this.processTags(player, card.tags);
   }
 
-  public onColonyAddedToLeavitt(player: IPlayer) {
-    this.processTags(player, [Tag.SCIENCE]);
+  public onNonCardTagAdded(player: IPlayer, tag: Tag) {
+    if (tag === Tag.SCIENCE) {
+      this.processTags(player, [Tag.SCIENCE]);
+    }
   }
 
   private processTags(player: IPlayer, tags: ReadonlyArray<Tag>) {

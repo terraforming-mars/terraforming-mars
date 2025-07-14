@@ -48,7 +48,7 @@ export abstract class Party {
     if (this.delegates.count(this.partyLeader) !== max) {
       let currentIndex = 0;
       if (this.partyLeader === 'NEUTRAL') {
-        currentIndex = players.indexOf(game.getPlayerById(game.activePlayer));
+        currentIndex = players.indexOf(game.activePlayer);
       } else {
         currentIndex = players.indexOf(this.partyLeader);
       }

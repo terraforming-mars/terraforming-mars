@@ -39,6 +39,7 @@ export class HyperspaceDrivePrototype extends Card implements IProjectCard {
       player.game.log('${0} has no fighter resource cards and gained 1 titanium.', (b) => b.player(player));
       player.stock.titanium += 1;
     }
+    // TODO(kberg): If the player has olympus conference, its effect should take place after this gets a resource on it.
     const scienceCards = player.getResourceCards(CardResource.SCIENCE);
     if (scienceCards.length > 0) {
       player.game.defer(new AddResourcesToCard(player, CardResource.SCIENCE));

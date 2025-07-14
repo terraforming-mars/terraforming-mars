@@ -5,13 +5,15 @@ import {Phase} from '../../common/Phase';
 import {IPlayer} from '../IPlayer';
 import {TileType} from '../../common/TileType';
 import {AresData, HazardConstraint} from '../../common/ares/AresData';
+import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
 
 /**
  * Support for placing and upgrading hazard tiles.
  */
 export class AresHazards {
-  public static putHazardAt(space: Space, tileType: TileType) {
+  public static putHazardAt(game: IGame, space: Space, tileType: TileType) {
     space.tile = {tileType: tileType, protectedHazard: false};
+    UnderworldExpansion.onTilePlaced(game, space);
   }
 
   public static randomlyPlaceHazard(game: IGame, tileType: TileType, direction: 'top' | 'bottom', cardCount: 1 | 2 = 1) {
@@ -21,7 +23,7 @@ export class AresHazards {
       distance, direction,
       (space) => game.nomadSpace !== space.id);
 
-    this.putHazardAt(space, tileType);
+    this.putHazardAt(game, space, tileType);
     return space;
   }
 

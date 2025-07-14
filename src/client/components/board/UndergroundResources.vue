@@ -4,7 +4,6 @@
       <div class="underground-token-background"></div>
       <div :class='resourceClass'></div>
     </template>
-    <div v-if="this.space.excavator !== undefined" :class='excavatorClass'></div>
   </div>
 </template>
 
@@ -28,9 +27,6 @@ export default Vue.extend({
   computed: {
     resourceClass(): string {
       return 'underground-token-resource underground-token--' + this.space.undergroundResources;
-    },
-    excavatorClass(): string {
-      return ' underground-excavator underground-excavator--' + this.space.excavator;
     },
   },
 });

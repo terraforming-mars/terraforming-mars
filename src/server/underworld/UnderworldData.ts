@@ -1,20 +1,19 @@
-import {UndergroundResourceToken} from '../../common/underworld/UndergroundResourceToken';
+import {TemporaryBonusToken, UndergroundResourceToken} from '../../common/underworld/UndergroundResourceToken';
 
 export type UnderworldData = {
   tokens: Array<UndergroundResourceToken>;
 };
 
-type TemperatureBonuses = 'data1pertemp' | 'microbe1pertemp' | 'plant2pertemp' | 'steel2pertemp' | 'titanium1pertemp';
-
 export type UnderworldPlayerData = {
   corruption: number;
-  temperatureBonus?: TemperatureBonuses,
+  activeBonus: TemporaryBonusToken | undefined;
   tokens: Array<UndergroundResourceToken>,
 }
 
 export type SerializedUnderworldPlayerData = {
   corruption: number;
-  temperatureBonus?: TemperatureBonuses,
+  temperatureBonus?: TemporaryBonusToken,
+  activeBonus?: TemporaryBonusToken | undefined;
   // TODO(kberg): Remove ? 2025-10-01
   tokens?: Array<UndergroundResourceToken>,
 }

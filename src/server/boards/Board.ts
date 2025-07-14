@@ -131,7 +131,13 @@ export abstract class Board {
   }
 
   public getSpaces(spaceType: SpaceType): ReadonlyArray<Space> {
-    return this.spaces.filter((space) => space.spaceType === spaceType);
+    // TODO(kberg): How to make this not bother with the special case when
+    // Underworld is not in play? It's not very expensive.
+    if (spaceType !== SpaceType.OCEAN) {
+      return this.spaces.filter((space) => space.spaceType === spaceType);
+    } else {
+      return this.spaces.filter((space) => space.spaceType === spaceType || space.undergroundResources === 'volcanicoceanspace');
+    }
   }
 
   /**
@@ -200,6 +206,10 @@ export abstract class Board {
       const plan: CanAffordOptions = canAffordOptions !== undefined ? {...canAffordOptions} : {cost: 0, tr: {}};
       plan.cost += additionalCosts.megacredits;
       plan.tr = additionalCosts.tr;
+
+      if (space.undergroundResources === 'place6mc') {
+        plan.cost -= 6;
+      }
 
       const afford = player.canAfford(plan);
       if (afford === false) {
@@ -391,6 +401,7 @@ export function isSpecialTile(tileType: TileType | undefined): boolean {
   case TileType.EROSION_SEVERE:
   case TileType.DUST_STORM_MILD:
   case TileType.DUST_STORM_SEVERE:
+  case TileType.REY_SKYWALKER:
   case undefined:
     return false;
   default:

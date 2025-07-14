@@ -176,6 +176,11 @@
         <div class="row2">LABS</div>
       </div>
     </template>
+   <template v-else-if="title === CardName.POLDERTECH_DUTCH">
+      <div class="card-poldertech-1-logo">PolderTECH</div>
+      <div class="card-poldertech-2-logo">Dutch</div>
+    </template>
+
     <template v-else>
       <div :class="logoClass">{{capsTitle}}</div>
     </template>
@@ -246,6 +251,7 @@ const logos: Partial<Record<CardName, 'image' | 'css' | 'bespoke'>> = {
   [CardName.VOLTAGON]: 'css',
   [CardName.ANUBIS_SECURITIES]: 'css',
   [CardName.HECATE_SPEDITIONS]: 'css',
+  [CardName.POLDERTECH_DUTCH]: 'css',
 };
 
 export default Vue.extend({

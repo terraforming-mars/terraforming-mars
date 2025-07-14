@@ -20,8 +20,8 @@ export class CaveCity extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U27',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.megacredits(1)).br;
-          b.city().excavate().asterix();
+          b.production((pb) => pb.steel(1)).br;
+          b.city().super((b) => b.excavate(1)).asterix();
         }),
         description: 'Increase your steel production 1 step. ' +
         'Place a city in a NON-RESERVED SPACE WITH YOUR EXCAVATION MARKER, ' +

@@ -20,7 +20,7 @@ export class KingdomofTauraro extends CorporationCard implements ICorporationCar
       },
 
       firstAction: {
-        text: 'Place a city.',
+        text: 'Place a city',
         city: {},
       },
 
@@ -28,8 +28,9 @@ export class KingdomofTauraro extends CorporationCard implements ICorporationCar
         cardNumber: 'UC06',
         description: 'You start with 50 M€ and 6 M€ production. All opponents gain 2 M€ production. As your first action, place a city.',
         renderData: CardRenderer.builder((b) => {
+          // TODO(kberg): Iconograpy to match the official card?
           b.megacredits(50).production((pb) => pb.megacredits(6)).production((pb) => pb.megacredits(2, {all})).city().br;
-          b.plainText('(Effect: You may place cities adjacent to other cities. You must always place cities adjacent to tiles you already own, if possible.)');
+          b.plainText('(Effect: You may place cities adjacent to other cities. You must always place cities adjacent to your tiles or excavation markers, if possible.)');
         }),
       },
     });

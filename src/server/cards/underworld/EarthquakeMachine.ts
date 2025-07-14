@@ -29,7 +29,7 @@ export class EarthquakeMachine extends ActionCard implements IProjectCard {
         cardNumber: 'U55',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 energy to excavate an underground resource.',
-            (ab) => ab.energy(1).startAction.excavate(1).asterix());
+            (ab) => ab.energy(1).startAction.excavate(1));
           b.br;
           b.production((pb) => pb.minus().plants(1, {all})).br;
           b.plainText('Requires 2 science tags. Decrease any plant production 1 step');

@@ -7,20 +7,22 @@ export class Titania extends Colony {
   constructor() {
     super({
       name: ColonyName.TITANIA,
-      description: {
-        buildBonus: 'Gain 5, 3, or 2 VP',
-        tradeBonus: 'Gain n VP',
-        colonyBonus: 'Lose 3 M€',
+      build: {
+        description: 'Gain 5, 3, or 2 VP',
+        type: ColonyBenefit.GAIN_VP,
+        quantity: [5, 3, 2],
       },
-
-
-      buildType: ColonyBenefit.GAIN_VP,
-      buildQuantity: [5, 3, 2],
-      tradeType: ColonyBenefit.GAIN_VP,
-      tradeQuantity: [2, 2, 2, 1, 1, 0, 0],
-      colonyBonusType: ColonyBenefit.LOSE_RESOURCES,
-      colonyBonusQuantity: 3,
-      colonyBonusResource: Resource.MEGACREDITS,
+      trade: {
+        description: 'Gain n VP',
+        type: ColonyBenefit.GAIN_VP,
+        quantity: [2, 2, 2, 1, 1, 0, 0],
+      },
+      colony: {
+        description: 'Lose 3 M€',
+        type: ColonyBenefit.LOSE_RESOURCES,
+        quantity: 3,
+        resource: Resource.MEGACREDITS,
+      },
       shouldIncreaseTrack: 'no',
     });
   }

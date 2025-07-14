@@ -148,8 +148,6 @@ export class Player implements IPlayer {
   public oceanBonus: number = constants.OCEAN_BONUS;
 
   // Custom cards
-  // Community Leavitt Station and Pathfinders Leavitt Station
-  public scienceTagCount: number = 0;
   // PoliticalAgendas Scientists P41
   public hasTurmoilScienceTagBonus: boolean = false;
   // Ecoline
@@ -480,6 +478,8 @@ export class Player implements IPlayer {
     if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, 'sp02')) {
       requirementsBonus += 2;
     }
+
+    requirementsBonus += UnderworldExpansion.getGlobalParameterRequirementBonus(this, parameter);
 
     return requirementsBonus;
   }
@@ -1752,7 +1752,8 @@ export class Player implements IPlayer {
       oceanBonus: this.oceanBonus,
       // Custom cards
       // Leavitt Station.
-      scienceTagCount: this.scienceTagCount,
+      scienceTagCount: this.tags.extraScienceTags,
+      plantTagCount: this.tags.extraPlantTags,
       // Ecoline
       plantsNeededForGreenery: this.plantsNeededForGreenery,
       // Lawsuit
@@ -1821,7 +1822,8 @@ export class Player implements IPlayer {
       titanium: d.titaniumProduction,
     }));
     player.removingPlayers = d.removingPlayers;
-    player.scienceTagCount = d.scienceTagCount;
+    player.tags.extraScienceTags = d.scienceTagCount;
+    player.tags.extraPlantTags = d.plantTagCount ?? 0;
     player.steel = d.steel;
     player.steelValue = d.steelValue;
     player.terraformRating = d.terraformRating;
@@ -1866,8 +1868,13 @@ export class Player implements IPlayer {
     player.timer = Timer.deserialize(d.timer);
 
     if (d.underworldData !== undefined) {
-      // TODO(kberg): Remove the {tokens, ...} wrapper by 2025-10-01
-      player.underworldData = {tokens: [], ...d.underworldData};
+      const dunerworldData = d.underworldData;
+      // TODO(kberg): Remove the wrapper by 2025-10-01
+      player.underworldData = {
+        tokens: dunerworldData.tokens ?? [],
+        corruption: dunerworldData.corruption,
+        activeBonus: dunerworldData.temperatureBonus ?? dunerworldData.activeBonus,
+      };
     }
     if (d.alliedParty !== undefined) {
       // TODO(kberg): Remove after 2025-08-01

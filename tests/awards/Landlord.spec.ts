@@ -45,7 +45,7 @@ describe('Landlord', () => {
     const [game, player/* , player2 */] = testGame(2, {aresExtension: true});
 
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    AresHazards.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
+    AresHazards.putHazardAt(game, firstSpace, TileType.DUST_STORM_MILD);
 
     expect(award.getScore(player)).to.eq(0);
 

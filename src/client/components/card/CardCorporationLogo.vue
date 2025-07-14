@@ -164,6 +164,11 @@
     <template v-else-if="title === CardName.ATHENA">
       <div class="card-athena-logo">Athena</div>
     </template>
+   <template v-else-if="title === CardName.POLDERTECH_DUTCH">
+      <div class="card-poldertech-1-logo">PolderTECH</div>
+      <div class="card-poldertech-2-logo">Dutch</div>
+    </template>
+
     <template v-else>
       <div :class="logoClass">{{capsTitle}}</div>
     </template>

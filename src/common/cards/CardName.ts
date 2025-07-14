@@ -568,11 +568,12 @@ export enum CardName {
   PUBLIC_BATHS = 'Public Baths',
   PROTECTED_GROWTH = 'Protected Growth',
   VERMIN = 'Vermin',
-
-  // Promo from contest
-  FLOYD_CONTINUUM = 'Floyd Continuum',
   CASINOS = 'Casinos',
+
+  // Promo cards from Dutch Open
+  FLOYD_CONTINUUM = 'Floyd Continuum',
   NEW_HOLLAND = 'New Holland',
+  POLDERTECH_DUTCH = 'PolderTECH Dutch',
 
   // End of promo cards
 

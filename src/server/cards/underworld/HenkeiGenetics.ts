@@ -38,7 +38,7 @@ export class HenkeiGenetics extends CorporationCard implements ICorporationCard,
         description: 'You start with 47 M€ and 1 corruption. As your first action, draw 2 microbe cards. ' +
           '1 VP per 3 microbes on this card.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(47).corruption(1).br;
+          b.megacredits(47).corruption(1).cards(2, {secondaryTag: Tag.MICROBE}).br;
           b.action('Pay 1 corruption to place 3 microbes on each card, up 2 to cards.', (ab) => {
             ab.corruption(1).startAction
               .resource(CardResource.MICROBE, {amount: 3, digit}).asterix()

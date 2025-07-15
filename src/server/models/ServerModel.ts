@@ -219,7 +219,6 @@ export class Server {
       citiesCount: game.board.getCities(player).length,
       coloniesCount: player.getColoniesCount(),
       color: player.color,
-      corruption: player.underworldData.corruption,
       energy: player.energy,
       energyProduction: player.production.energy,
       fleetSize: player.colonies.getFleetSize(),
@@ -252,7 +251,7 @@ export class Server {
       titaniumProduction: player.production.titanium,
       titaniumValue: player.getTitaniumValue(),
       tradesThisGeneration: player.colonies.tradesThisGeneration,
-      undergroundTokens: player.underworldData.tokens,
+      underworldData: player.underworldData,
       victoryPointsBreakdown: {
         terraformRating: 0,
         milestones: 0,

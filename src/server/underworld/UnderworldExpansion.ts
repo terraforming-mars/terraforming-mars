@@ -1,7 +1,7 @@
 import {IPlayer} from '../IPlayer';
 import {Board} from '../boards/Board';
 import {Space} from '../boards/Space';
-import {UnderworldData, UnderworldPlayerData} from './UnderworldData';
+import {UnderworldData} from './UnderworldData';
 import {Random} from '../../common/utils/Random';
 import {TemporaryBonusToken, UndergroundResourceToken, undergroundResourceTokenDescription} from '../../common/underworld/UndergroundResourceToken';
 import {inplaceShuffle} from '../utils/shuffle';
@@ -24,6 +24,7 @@ import {Message} from '../../common/logs/Message';
 import {inplaceRemove} from '../../common/utils/utils';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {Tag} from '../../common/cards/Tag';
+import {UnderworldPlayerData} from '../../common/underworld/UnderworldPlayerData';
 
 export class UnderworldExpansion {
   private constructor() {}

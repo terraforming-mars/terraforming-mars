@@ -28,7 +28,7 @@ import {VictoryPointsBreakdown} from '../common/game/VictoryPointsBreakdown';
 import {Color} from '../common/Color';
 import {OrOptions} from './inputs/OrOptions';
 import {Stock} from './player/Stock';
-import {UnderworldPlayerData} from './underworld/UnderworldData';
+import {UnderworldPlayerData} from '../common/underworld/UnderworldPlayerData';
 import {AlliedParty} from '../common/turmoil/Types';
 import {IParty} from './turmoil/parties/IParty';
 import {Message} from '../common/logs/Message';

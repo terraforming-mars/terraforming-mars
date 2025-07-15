@@ -63,7 +63,7 @@ export class OlympusConference extends Card implements IProjectCard {
           }),
         ).setTitle('Select an option for Olympus Conference');
       },
-      Priority.SUPERPOWER); // Unshift that deferred action
+      Priority.OLYMPUS_CONFERENCE); // Unshift that deferred action
     }
     return undefined;
   }

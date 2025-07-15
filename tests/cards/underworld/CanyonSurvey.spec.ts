@@ -1,17 +1,17 @@
-import {GeologicalSurvey} from '../../../src/server/cards/underworld/GeologicalSurvey';
+import {CanyonSurvey} from '../../../src/server/cards/underworld/CanyonSurvey';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {assertIsClaimAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 
-describe('GeologicalSurvey', () => {
-  let card: GeologicalSurvey;
+describe('CanyonSurvey', () => {
+  let card: CanyonSurvey;
   let game: IGame;
   let player: TestPlayer;
 
   beforeEach(() => {
-    card = new GeologicalSurvey();
+    card = new CanyonSurvey();
     [game, player] = testGame(1, {underworldExpansion: true});
   });
 

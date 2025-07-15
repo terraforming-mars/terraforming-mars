@@ -7,7 +7,6 @@ import {IPlayer} from '../../IPlayer';
 import {RemoveResources} from '../../deferredActions/RemoveResources';
 import {Resource} from '../../../common/Resource';
 import {all} from '../Options';
-import {Tag} from '../../../common/cards/Tag';
 
 export class PlantTax extends Card implements IProjectCard {
   public generationUsed: number = -1;
@@ -17,7 +16,6 @@ export class PlantTax extends Card implements IProjectCard {
       name: CardName.PLANT_TAX,
       type: CardType.EVENT,
       cost: 7,
-      tags: [Tag.MARS],
 
       behavior: {
         underworld: {corruption: 1},

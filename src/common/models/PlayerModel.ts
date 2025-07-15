@@ -10,6 +10,7 @@ import {Resource} from '../Resource';
 import {PartyName} from '../turmoil/PartyName';
 import {Agenda} from '../turmoil/Types';
 import {Tag} from '../cards/Tag';
+import {UndergroundResourceToken} from '../underworld/UndergroundResourceToken';
 
 export interface ViewModel {
   game: GameModel;
@@ -75,7 +76,7 @@ export type PublicPlayerModel = {
   titaniumProduction: number;
   titaniumValue: number;
   tradesThisGeneration: number;
-  undergroundTokens: number;
+  undergroundTokens: Array<UndergroundResourceToken>;
   victoryPointsBreakdown: VictoryPointsBreakdown;
   victoryPointsByGeneration: ReadonlyArray<number>;
 }

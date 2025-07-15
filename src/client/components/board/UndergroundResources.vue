@@ -1,32 +1,25 @@
 <template>
   <div>
-    <template v-if="this.space.undergroundResources !== undefined">
-      <div class="underground-token-background"></div>
-      <div :class='resourceClass'></div>
-    </template>
+    <div class="underground-token-background"></div>
+    <div :class='resourceClass'></div>
   </div>
 </template>
 
 <script lang="ts">
 
+import {UndergroundResourceToken} from '@/common/underworld/UndergroundResourceToken';
 import Vue from 'vue';
-import {SpaceModel} from '@/common/models/SpaceModel';
-import {TileView} from './TileView';
 
 export default Vue.extend({
   name: 'underground-resources',
   props: {
-    space: {
-      type: Object as () => SpaceModel,
+    token: {
+      type: String as () => UndergroundResourceToken,
     },
-    tileView: {
-      type: String as () => TileView,
-    },
-
   },
   computed: {
     resourceClass(): string {
-      return 'underground-token-resource underground-token--' + this.space.undergroundResources;
+      return 'underground-token-resource underground-token--' + this.token;
     },
   },
 });

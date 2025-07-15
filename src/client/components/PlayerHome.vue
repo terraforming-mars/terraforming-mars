@@ -140,9 +140,20 @@
           </div>
         </div>
       </div>
-
     </div>
 
+    <div v-if="thisPlayer.undergroundTokens.length > 0">
+      <dynamic-title title="Claimed Underground Resource Tokens" :color="thisPlayer.color"/>
+      <div class="player_home_block--underground-tokens">
+          <div
+          v-for="(token, idx) in thisPlayer.undergroundTokens"
+          :key="idx"
+          :token="token">
+          <div class="underground-token-background"></div>
+          <div :class="'underground-token-resource underground-token--' + token"></div>
+        </div>
+      </div>
+    </div>
     <div class="player_home_block player_home_block--setup nofloat"  v-if="thisPlayer.tableau.length === 0">
       <template v-if="isInitialDraftingPhase()">
         <div v-for="card in playerView.dealtCorporationCards" :key="card.name" class="cardbox">

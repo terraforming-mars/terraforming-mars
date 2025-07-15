@@ -43,7 +43,7 @@ export class HyperspaceDrivePrototype extends Card implements IProjectCard {
     // If the player has Olympus Conference, its effect should take place after this gets a resource on it.
     const scienceCards = player.getResourceCards(CardResource.SCIENCE);
     if (scienceCards.length > 0) {
-      player.game.defer(new AddResourcesToCard(player, CardResource.SCIENCE), Priority.SUPERPOWER);
+      player.game.defer(new AddResourcesToCard(player, CardResource.SCIENCE), Priority.HYPERSPACE_DRIVE_PROTOTYPE);
     } else {
       player.game.log('${0} has no science cards and gained 1 TR.', (b) => b.player(player));
       player.increaseTerraformRating();

@@ -22,7 +22,7 @@ export class MicroprobingTechnology extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U22',
+        cardNumber: 'U022',
         renderData: CardRenderer.builder((b) => {
           b.plants(3, {digit}).identify(2, {digit}).claim(1);
         }),

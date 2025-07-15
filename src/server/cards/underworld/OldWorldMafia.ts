@@ -18,7 +18,7 @@ export class OldWorldMafia extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U07',
+        cardNumber: 'U007',
         renderData: CardRenderer.builder((b) => {
           b.corruption(1).slash().tag(Tag.EARTH, 2);
         }),

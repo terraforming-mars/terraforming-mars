@@ -28,7 +28,7 @@ export class SearchforLifeUnderground extends Card implements IActionCard, IProj
 
       requirements: {temperature: -18, max},
       metadata: {
-        cardNumber: 'U23',
+        cardNumber: 'U023',
         description: 'Temperature must -18° C or colder.',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 M€ to identify an underground resource. If it depicts at least 1 microbe, add a science resource here.', (eb) => {

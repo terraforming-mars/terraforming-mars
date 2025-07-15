@@ -18,7 +18,7 @@ export class GeoscanSatellite extends Card implements IProjectCard {
       tags: [Tag.SCIENCE, Tag.SPACE],
 
       metadata: {
-        cardNumber: 'U02',
+        cardNumber: 'U002',
         renderData: CardRenderer.builder((b) => {
           b.geoscan().claim(1);
         }),

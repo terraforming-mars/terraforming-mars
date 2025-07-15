@@ -24,7 +24,7 @@ export class Biobatteries extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U96',
+        cardNumber: 'U096',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(1));
           b.nbsp;

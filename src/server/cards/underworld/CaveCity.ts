@@ -18,7 +18,7 @@ export class CaveCity extends Card implements IProjectCard {
       behavior: {production: {steel: 1}},
 
       metadata: {
-        cardNumber: 'U27',
+        cardNumber: 'U027',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.steel(1)).br;
           b.city().super((b) => b.excavate(1)).asterix();

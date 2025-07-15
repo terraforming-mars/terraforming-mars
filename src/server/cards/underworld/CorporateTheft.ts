@@ -20,7 +20,7 @@ export class CorporateTheft extends Card implements IProjectCard {
       requirements: {corruption: 2},
 
       metadata: {
-        cardNumber: 'U61',
+        cardNumber: 'U061',
         renderData: CardRenderer.builder((b) => {
           b.text('STEAL').wild(1).corruption().asterix();
         }),

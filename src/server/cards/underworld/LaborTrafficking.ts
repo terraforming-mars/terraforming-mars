@@ -19,7 +19,7 @@ export class LaborTrafficking extends Card implements IProjectCard {
       requirements: {corruption: 2},
 
       metadata: {
-        cardNumber: 'U14',
+        cardNumber: 'U014',
         renderData: CardRenderer.builder((b) => {
           b.effect('The first standard project action you take each generation, ' +
               'except selling patents, costs 6 M€ less.', (eb) =>

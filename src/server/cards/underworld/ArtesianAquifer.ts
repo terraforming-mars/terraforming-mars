@@ -18,7 +18,7 @@ export class ArtesianAquifer extends Card implements IProjectCard {
       tr: {oceans: 1},
 
       metadata: {
-        cardNumber: 'U59',
+        cardNumber: 'U059',
         renderData: CardRenderer.builder((b) => {
           b.excavate().asterix().oceans(1);
         }),

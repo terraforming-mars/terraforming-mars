@@ -22,7 +22,7 @@ export class PlantTax extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U67',
+        cardNumber: 'U067',
         renderData: CardRenderer.builder((b) => {
           b.minus().plants(2, {all}).asterix().corruption();
         }),

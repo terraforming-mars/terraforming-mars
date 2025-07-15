@@ -20,7 +20,7 @@ export class UndergroundRailway extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U04',
+        cardNumber: 'U004',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.minus().energy(1)).br;
           b.tr(1).slash().undergroundResources(4, {digit});

@@ -15,7 +15,7 @@ export class ExcavatorLeasing extends Card implements IProjectCard {
       cost: 8,
 
       metadata: {
-        cardNumber: 'U35',
+        cardNumber: 'U035',
         renderData: CardRenderer.builder((b) => {
           b.effect('The excavate standard project costs 1 M€ less for all players.',
             (eb) => eb.excavate(1, {all}).startEffect.minus().megacredits(1)).br;

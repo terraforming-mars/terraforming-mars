@@ -18,7 +18,7 @@ export class Racketeering extends Card implements IProjectCard {
       requirements: {corruption: 1},
 
       metadata: {
-        cardNumber: 'U92',
+        cardNumber: 'U092',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1).slash().tag(Tag.CRIME).asterix());
         }),

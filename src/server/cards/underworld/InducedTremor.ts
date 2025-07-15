@@ -18,7 +18,7 @@ export class InducedTremor extends Card implements IProjectCard {
       cost: 5,
 
       metadata: {
-        cardNumber: 'U70',
+        cardNumber: 'U070',
         renderData: CardRenderer.builder((b) => {
           b.undergroundResources(1, {cancelled}).asterix().excavate();
         }),

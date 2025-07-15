@@ -26,7 +26,7 @@ export class RecklessDetonation extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U09',
+        cardNumber: 'U009',
         renderData: CardRenderer.builder((b) => {
           b.excavate(1).minus().steel(3, {digit, all}).or().titanium(2, {digit, all});
         }),

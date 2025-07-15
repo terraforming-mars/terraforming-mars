@@ -22,7 +22,7 @@ export class InfrastructureOverload extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U68',
+        cardNumber: 'U068',
         renderData: CardRenderer.builder((b) => {
           b.corruption(1);
           b.production((pb) => pb.text('-2').energy(1, {all}));

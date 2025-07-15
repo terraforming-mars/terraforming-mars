@@ -27,7 +27,7 @@ export class ThiolavaVents extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U90',
+        cardNumber: 'U090',
         renderData: CardRenderer.builder((b) => {
           b.effect('Each time you increase your heat production, including this, put 1 microbe on this card.',
             (eb) => eb.production((pb) => pb.heat(1)).startEffect.resource(CardResource.MICROBE));

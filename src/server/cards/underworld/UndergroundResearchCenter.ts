@@ -24,7 +24,7 @@ export class UndergroundResearchCenter extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U62',
+        cardNumber: 'U062',
         renderData: CardRenderer.builder((b) => {
           // TODO(kberg): can this look like an any tag superscript thing?
           b.excavate().cards(1).asterix();

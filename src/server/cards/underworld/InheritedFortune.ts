@@ -16,7 +16,7 @@ export class InheritedFortune extends PreludeCard {
       },
 
       metadata: {
-        cardNumber: 'UP03',
+        cardNumber: 'U0P03',
         renderData: CardRenderer.builder((b) => {
           b.corruption().megacredits(10).production((pb) => pb.megacredits(1));
         }),

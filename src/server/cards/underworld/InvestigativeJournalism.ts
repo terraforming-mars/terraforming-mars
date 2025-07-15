@@ -27,7 +27,7 @@ export class InvestigativeJournalism extends Card implements IProjectCard, IActi
       },
 
       metadata: {
-        cardNumber: 'U87',
+        cardNumber: 'U087',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 5 M€ and remove 1 corruption from ANOTHER player with more corruption than you to add 1 journalism resource on this card.',
             (ab) => ab.megacredits(5).corruption(1).asterix().startAction.resource(CardResource.JOURNALISM)).br;

@@ -57,7 +57,7 @@ export class StarVegas extends Card {
       },
 
       metadata: {
-        cardNumber: 'U53',
+        cardNumber: 'U053',
         renderData: CardRenderer.builder((b) => {
           b.city().asterix().corruption(2).br;
           b.production((pb) => pb.megacredits(1).slash().city({all}));

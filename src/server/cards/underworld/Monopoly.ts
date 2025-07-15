@@ -24,7 +24,7 @@ export class Monopoly extends Card implements IProjectCard, IActionCard {
       victoryPoints: -2,
 
       metadata: {
-        cardNumber: 'U65',
+        cardNumber: 'U065',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 corruption to increase any production 1 step.', (ab) => {
             ab.corruption(1).startAction.production((pb) => pb.wild(1));

@@ -40,7 +40,7 @@ export class SpaceWargames extends ActionCard implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U48',
+        cardNumber: 'U048',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 titanium to gain 1 fighter resource to this card.',
             (ab) => ab.titanium(1).startAction.resource(CardResource.FIGHTER)).br;

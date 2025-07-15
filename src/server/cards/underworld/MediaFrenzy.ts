@@ -22,7 +22,7 @@ export class MediaFrenzy extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U86',
+        cardNumber: 'U086',
         renderData: CardRenderer.builder((b) => {
           b.minus().corruption(1, {all}).cards(2, {secondaryTag: Tag.EVENT});
         }),

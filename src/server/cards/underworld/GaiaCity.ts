@@ -18,7 +18,7 @@ export class GaiaCity extends Card implements IProjectCard {
       behavior: {production: {energy: -1, plants: 2}},
 
       metadata: {
-        cardNumber: 'U05',
+        cardNumber: 'U005',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.minus().energy(1).plants(2)).br;
           b.city().super((b) => b.excavate(1)).asterix();

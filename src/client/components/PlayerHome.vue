@@ -142,11 +142,11 @@
       </div>
     </div>
 
-    <div v-if="thisPlayer.undergroundTokens.length > 0">
+    <div v-if="thisPlayer.underworldData.tokens.length > 0">
       <dynamic-title title="Claimed Underground Resource Tokens" :color="thisPlayer.color"/>
       <div class="player_home_block--underground-tokens">
           <div
-          v-for="(token, idx) in thisPlayer.undergroundTokens"
+          v-for="(token, idx) in thisPlayer.underworldData.tokens"
           :key="idx"
           :token="token">
           <div class="underground-token-background"></div>

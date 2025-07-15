@@ -4,12 +4,6 @@ export type UnderworldData = {
   tokens: Array<UndergroundResourceToken>;
 };
 
-export type UnderworldPlayerData = {
-  corruption: number;
-  activeBonus: TemporaryBonusToken | undefined;
-  tokens: Array<UndergroundResourceToken>,
-}
-
 export type SerializedUnderworldPlayerData = {
   corruption: number;
   temperatureBonus?: TemporaryBonusToken,

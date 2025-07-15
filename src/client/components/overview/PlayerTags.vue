@@ -108,7 +108,7 @@ const getTagCount = (tagName: InterfaceTagsType, player: PublicPlayerModel): num
   case SpecialTags.NONE:
     return player.noTagsCount || 0;
   case SpecialTags.UNDERGROUND_TOKEN_COUNT:
-    return player.undergroundTokens;
+    return player.undergroundTokens.length;
   case SpecialTags.CORRUPTION:
     return player.corruption;
   case SpecialTags.NEGATIVE_VP:

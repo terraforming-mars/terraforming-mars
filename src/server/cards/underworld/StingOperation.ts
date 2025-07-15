@@ -22,7 +22,7 @@ export class StingOperation extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U94',
+        cardNumber: 'U094',
         renderData: CardRenderer.builder((b) => {
           b.cards(2);
           b.text('Target a player that has at least 4 corruption. Draw 2 cards.');

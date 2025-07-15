@@ -19,7 +19,7 @@ export class Deepnuking extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U06',
+        cardNumber: 'U006',
         renderData: CardRenderer.builder((b) => {
           b.excavate(2).minus().plants(3, {all});
         }),

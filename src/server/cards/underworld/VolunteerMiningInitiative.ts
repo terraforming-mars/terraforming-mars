@@ -18,7 +18,7 @@ export class VolunteerMiningInitiative extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U73',
+        cardNumber: 'U073',
         renderData: CardRenderer.builder((b) => {
           b.excavate(1).slash().text('3').city({all});
         }),

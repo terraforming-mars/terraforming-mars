@@ -20,7 +20,7 @@ export class FamilyConnections extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U95',
+        cardNumber: 'U095',
         renderData: CardRenderer.builder((b) => {
           b.corruption(1).slash().tag(Tag.CITY);
         }),

@@ -23,7 +23,7 @@ export class Acidizing extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U98',
+        cardNumber: 'U098',
         renderData: CardRenderer.builder((b) => {
           b.venus(1).excavate(1);
         }),

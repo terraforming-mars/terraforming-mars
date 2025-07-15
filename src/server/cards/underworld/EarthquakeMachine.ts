@@ -26,7 +26,7 @@ export class EarthquakeMachine extends ActionCard implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U55',
+        cardNumber: 'U055',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 energy to excavate an underground resource.',
             (ab) => ab.energy(1).startAction.excavate(1));

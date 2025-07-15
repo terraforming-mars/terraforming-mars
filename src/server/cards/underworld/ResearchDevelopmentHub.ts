@@ -20,7 +20,7 @@ export class ResearchDevelopmentHub extends Card implements IProjectCard {
       victoryPoints: {resourcesHere: {}, per: 3},
 
       metadata: {
-        cardNumber: 'U84',
+        cardNumber: 'U084',
         renderData: CardRenderer.builder((b) => {
           // TODO(kberg): This is supposed to be at the START of each production phase.
           b.effect(

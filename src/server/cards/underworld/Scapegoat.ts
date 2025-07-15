@@ -18,7 +18,7 @@ export class Scapegoat extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U40',
+        cardNumber: 'U040',
         renderData: CardRenderer.builder((b) => {
           b.corruption(1);
         }),

@@ -20,7 +20,7 @@ export class FriendsInHighPlaces extends Card {
       cardDiscount: {amount: 1},
 
       metadata: {
-        cardNumber: 'U41',
+        cardNumber: 'U041',
         description: 'Requires 2 Earth tags. Gain 1 corruption.',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a card, you pay 1 M€ less for it.', (eb) => {

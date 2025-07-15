@@ -25,7 +25,7 @@ export class StagedProtests extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U66',
+        cardNumber: 'U066',
         renderData: CardRenderer.builder((b) => {
           b.corruption(1).br;
           // TODO(kberg): replace with award().slash.milestone() when award and milestone can be stacked.

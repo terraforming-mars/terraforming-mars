@@ -20,7 +20,7 @@ export class ClassActionLawsuit extends Card implements IProjectCard {
       victoryPoints: 3,
 
       metadata: {
-        cardNumber: 'U82',
+        cardNumber: 'U082',
         renderData: CardRenderer.builder((b) => {
           b.text('-X').corruption(1).asterix().text('-X').megacredits(3).asterix().br;
           b.text('THIS CAN\'T BE BLOCKED BY CORRUPTION', Size.SMALL);

@@ -18,7 +18,7 @@ export class LobbyingNetwork extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U31',
+        cardNumber: 'U031',
         renderData: CardRenderer.builder((b) => {
           b.corruption(1);
         }),

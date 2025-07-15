@@ -15,7 +15,7 @@ export class GlobalAudit extends Card implements IProjectCard {
       tags: [Tag.EARTH],
 
       metadata: {
-        cardNumber: 'U25',
+        cardNumber: 'U025',
         renderData: CardRenderer.builder((b) => {
           b.text('Min.').tag(Tag.CRIME).colon().tr(1).br;
           b.text('0').tag(Tag.CRIME).colon().tr(1);

@@ -20,7 +20,7 @@ export class GuerillaEcologists extends Card implements IProjectCard {
       requirements: {corruption: 1},
 
       metadata: {
-        cardNumber: 'U89',
+        cardNumber: 'U089',
         renderData: CardRenderer.builder((b) => {
           b.minus().plants(4, {digit}).greenery().asterix();
         }),

@@ -21,7 +21,7 @@ export class PrivateResorts extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U54',
+        cardNumber: 'U054',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.minus().heat(1).megacredits(3)).br;
           b.corruption(1);

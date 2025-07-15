@@ -21,7 +21,7 @@ export class GeologistTeam extends ActionCard implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U01',
+        cardNumber: 'U001',
         renderData: CardRenderer.builder((b) => {
           b.action('Identify 1 underground resource.',
             (ab) => ab.empty().startAction.identify(1));

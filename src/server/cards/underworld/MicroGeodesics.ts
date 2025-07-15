@@ -23,7 +23,7 @@ export class MicroGeodesics extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U56',
+        cardNumber: 'U056',
         renderData: CardRenderer.builder((b) => {
           b.minus().resource(CardResource.MICROBE).excavate().plants(3, {digit}).resource(CardResource.DATA).asterix();
         }),

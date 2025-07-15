@@ -25,7 +25,7 @@ export class TunnelingLoophole extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U32',
+        cardNumber: 'U032',
         renderData: CardRenderer.builder((b) => {
           b.excavate().emptyTile().asterix().nbsp.excavate().corruption();
         }),

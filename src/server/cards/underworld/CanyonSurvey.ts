@@ -4,25 +4,26 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
+import {digit} from '../Options';
 
-export class PlanetaryRightsBuyout extends Card implements IProjectCard {
+export class CanyonSurvey extends Card implements IProjectCard {
   constructor() {
     super({
-      name: CardName.PLANETARY_RIGHTS_BUYOUT,
+      name: CardName.CANYON_SURVEY,
       type: CardType.EVENT,
-      cost: 28,
-      tags: [Tag.CRIME, Tag.CRIME],
+      cost: 4,
+      tags: [Tag.SCIENCE],
 
-      requirements: {corruption: 5},
-      behavior: {tr: 7},
-      victoryPoints: -3,
+      behavior: {
+        underworld: {identify: {count: 3, claim: 1}},
+      },
 
       metadata: {
-        cardNumber: 'U085',
+        cardNumber: 'U081',
         renderData: CardRenderer.builder((b) => {
-          b.tr(7);
+          b.identify(3, {digit}).claim(1);
         }),
-        description: 'Requires 5 corruption. Gain 7 TR',
+        description: 'Identify 3 underground resources. Claim 1 of them.',
       },
     });
   }

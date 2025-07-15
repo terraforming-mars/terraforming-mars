@@ -20,9 +20,9 @@ export class CorporateBlackmail extends Card implements IProjectCard {
     super({
       name: CardName.CORPORATE_BLACKMAIL,
       type: CardType.EVENT,
-      cost: 2,
+      cost: 5,
       tags: [Tag.CRIME],
-      victoryPoints: -2,
+      victoryPoints: -1,
 
       requirements: {corruption: 1},
 

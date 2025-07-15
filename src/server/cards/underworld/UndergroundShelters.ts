@@ -14,7 +14,7 @@ export class UndergroundShelters extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
       name: CardName.UNDERGROUND_SHELTERS,
       cost: 14,
-      tags: [Tag.MARS, Tag.BUILDING],
+      tags: [Tag.BUILDING],
       victoryPoints: 'special',
 
       behavior: {

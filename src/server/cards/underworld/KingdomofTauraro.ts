@@ -11,7 +11,7 @@ export class KingdomofTauraro extends CorporationCard implements ICorporationCar
   constructor() {
     super({
       name: CardName.KINGDOM_OF_TAURARO,
-      tags: [Tag.MARS],
+      tags: [Tag.CITY],
       startingMegaCredits: 50,
       victoryPoints: -2,
 

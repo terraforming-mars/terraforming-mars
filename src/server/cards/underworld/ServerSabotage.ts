@@ -13,7 +13,7 @@ export class ServerSabotage extends Card implements IProjectCard {
       type: CardType.EVENT,
       name: CardName.SERVER_SABOTAGE,
       tags: [Tag.CRIME],
-      cost: 7,
+      cost: 9,
 
       behavior: {
         underworld: {corruption: 1},

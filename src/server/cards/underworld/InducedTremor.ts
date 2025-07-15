@@ -15,7 +15,7 @@ export class InducedTremor extends Card implements IProjectCard {
     super({
       type: CardType.EVENT,
       name: CardName.INDUCED_TREMOR,
-      cost: 6,
+      cost: 5,
 
       metadata: {
         cardNumber: 'U70',

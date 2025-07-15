@@ -998,7 +998,7 @@ export enum CardName {
   MARTIAN_EXPRESS = 'Martian Express',
   EXPEDITION_VEHICLES = 'Expedition Vehicles',
   CUT_THROAT_BUDGETING = 'Cut-throat Budgeting',
-  GEOLOGICAL_SURVEY_UNDERWORLD = 'Geological Survey:underworld',
+  CANYON_SURVEY = 'Canyon Survey',
   CLASS_ACTION_LAWSUIT = 'Class-action Lawsuit',
   MERCENARY_SQUAD = 'Mercenary Squad',
   RESEARCH_DEVELOPMENT_HUB = 'Research & Development Hub',

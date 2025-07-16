@@ -48,7 +48,7 @@ export class Faraday extends CeoCard {
   }
 
   public onCardPlayed(player: IPlayer, card: ICard) {
-    if (card.tags.length === 0 || card.type === CardType.EVENT || !player.canAfford(2)) {
+    if (card.tags.length === 0 || card.type === CardType.EVENT || !player.canAfford(3)) {
       return;
     }
 

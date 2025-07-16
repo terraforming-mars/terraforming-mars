@@ -56,9 +56,7 @@ export class Faraday extends CeoCard {
   }
 
   public onNonCardTagAdded(player: IPlayer, tag: Tag) {
-    if (tag === Tag.SCIENCE) {
-      this.processTags(player, [Tag.SCIENCE]);
-    }
+    this.processTags(player, [tag]);
   }
 
   private processTags(player: IPlayer, tags: ReadonlyArray<Tag>) {

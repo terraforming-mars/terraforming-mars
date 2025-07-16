@@ -17,6 +17,12 @@
             &#x2195;
         </button>
 
+        <button id="show-vps-only" v-on:click="toggleVps()" style="width: 63px;">
+            <span v-if="vps === 0">all</span>
+            <span v-if="vps === 1">VPS</span>
+            <span v-if="vps === 2">-VPs</span>
+        </button>
+
         <button id="show-metadata" v-on:click="toggleShowMetadata()" style="width: 30px;">
             <span v-if="showMetadata === true">■</span>
             <span v-else>□</span>
@@ -383,6 +389,18 @@ export default (Vue as WithRefs<Refs>).extend({
 
       if (!this.filterByTags(card)) return false;
       if (!this.types[card.type]) return false;
+      switch (this.vps) {
+      case 1:
+        if (card.victoryPoints === undefined) {
+          return false;
+        }
+        break;
+      case 2:
+        if (card.victoryPoints !== undefined) {
+          return false;
+        }
+        break;
+      }
       return this.expansions[card.module] === true;
     },
     showGlobalEvent(name: GlobalEventName): boolean {
@@ -438,6 +456,9 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     toggleSortOrder(): void {
       this.sortOrder = this.sortOrder === 'a' ? '1' : 'a';
+    },
+    toggleVps(): void {
+      this.vps = (this.vps + 1) % 3;
     },
     toggleShowMetadata(): void {
       this.showMetadata = !this.showMetadata;

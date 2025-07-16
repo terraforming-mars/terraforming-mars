@@ -1,4 +1,3 @@
-import {MultiSet} from 'mnemonist';
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
@@ -35,20 +34,16 @@ export class Faraday extends CeoCard {
     });
   }
 
+  public data: {counts: Partial<Record<Tag, number>>} = {
+    counts: {},
+  };
+
   public override canAct(): boolean {
     return false;
   }
 
-  private gainedMultiple(tagsOnCard: number, total: number): boolean {
-    const priorTagCount = total - tagsOnCard;
-    // Modulo 5 what the tag count was before the card was played.
-    // Sum that pre-played count with the new cards tags.  If this sum is >=5, offer a card draw.
-    // this wont work if someone makes a card with > 5 tags of one type, but...
-    return priorTagCount % 5 + tagsOnCard >= 5;
-  }
-
   public onCardPlayed(player: IPlayer, card: ICard) {
-    if (card.tags.length === 0 || card.type === CardType.EVENT || !player.canAfford(3)) {
+    if (card.tags.length === 0 || card.type === CardType.EVENT) {
       return;
     }
 
@@ -60,23 +55,40 @@ export class Faraday extends CeoCard {
   }
 
   private processTags(player: IPlayer, tags: ReadonlyArray<Tag>) {
-    const counts = player.tags.countAllTags();
+    const rewards: Array<Tag> = [];
 
-    const tagsOnCard = MultiSet.from(tags);
-    tagsOnCard.forEachMultiplicity((countOnCard, tagOnCard) => {
-      if (INVALID_TAGS.includes(tagOnCard)) return;
-      if (this.gainedMultiple(countOnCard, counts[tagOnCard])) {
-        player.defer(this.effectOptions(player, tagOnCard));
+    for (const tag of tags) {
+      if (INVALID_TAGS.includes(tag)) {
+        return;
       }
-    });
+
+      const count = player.tags.count(tag, 'raw');
+      const lastReward = this.data.counts[tag] ?? 0;
+      if (count >= lastReward + 5) {
+        this.data.counts[tag] = count;
+        rewards.push(tag);
+      }
+    }
+
+    // TODO(kberg): If a player only has 4MC and surpasses with 2 tags, this is awkward
+    player.defer(this.effectOptions(player, rewards));
   }
 
-  public effectOptions(player: IPlayer, tag: Tag) {
-    if (!player.canAfford(3)) return;
+  public effectOptions(player: IPlayer, tags: Array<Tag>) {
+    const tag = tags.shift();
+    if (!player.canAfford(3)) {
+      return;
+    }
+    if (tag === undefined) {
+      return;
+    }
     return new OrOptions(
       new SelectOption(message('Pay 3 M€ to draw a ${0} card', (b) => b.string(tag))).andThen(() => {
         player.game.defer(new SelectPaymentDeferred(player, 3, {title: TITLES.payForCardAction(this.name)}))
-          .andThen(() => player.drawCard(1, {tag: tag}));
+          .andThen(() => {
+            player.drawCard(1, {tag: tag});
+            player.defer(this.effectOptions(player, tags));
+          });
         return undefined;
       }),
       new SelectOption('Do nothing'),

@@ -71,7 +71,7 @@ describe('Warmonger', () => {
         console.log('Skipping ' + cardName);
         return;
       }
-      expect(Warmonger.autoInclude(card)).to.be.false;
+      expect(Warmonger.autoInclude(card), 'This card is manually listed but is automatically identified.').to.be.false;
     });
   }
 });

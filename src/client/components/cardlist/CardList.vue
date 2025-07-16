@@ -78,6 +78,21 @@
           </span>
         </div>
 
+        <!-- card resources -->
+        <div class="selection-row">
+          <button id="toggle-checkbox" v-on:click="invertResources()">
+              <span v-i18n>-</span>
+          </button>
+          <span v-for="resource in allResources" :key="resource">
+            <input type="checkbox" :name="`${resource}-cardType`" :id="`${resource}-resource-checkbox`" v-model="resources[resource]">
+            <label :for="`${resource}-resource-checkbox`" class="expansion-button">
+              <!-- a terrible hack, using expansion-icon because card-resource isn't enough to show the resource.-->
+              <div v-if="resource !== 'none'" class="expansion-icon card-resource" :class="cardResourceCSS[resource]"></div>
+              <div v-else class="expansion-icon card-tag tag-none"></div>
+            </label>
+          </span>
+        </div>
+
       </div>
       <!-- start cards -->
 
@@ -188,7 +203,7 @@
 import Vue from 'vue';
 import {CardType} from '@/common/cards/CardType';
 import {CardName} from '@/common/cards/CardName';
-import {partition, toName} from '@/common/utils/utils';
+import {getEnumStringValues, partition, toName} from '@/common/utils/utils';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import {allGlobalEventNames, getGlobalEvent} from '@/client/turmoil/ClientGlobalEventManifest';
@@ -206,7 +221,7 @@ import {AwardName, awardNames} from '@/common/ma/AwardName';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {WithRefs} from 'vue-typed-refs';
-import {TypeOption, CardListModel, hashToModel, modelToHash} from '@/client/components/cardlist/CardListModel';
+import {TypeOption, CardListModel, hashToModel, modelToHash, ResourceOption, TagOption} from '@/client/components/cardlist/CardListModel';
 import {getAward, getMilestone} from '@/client/MilestoneAwardManifest';
 import {BonusId, BONUS_IDS, PolicyId, POLICY_IDS} from '@/common/turmoil/Types';
 import Card from '@/client/components/card/Card.vue';
@@ -216,6 +231,8 @@ import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 import Milestone from '@/client/components/Milestone.vue';
 import Award from '@/client/components/Award.vue';
 import TurmoilAgenda from '@/client/components/turmoil/TurmoilAgenda.vue';
+import {CardResource} from '@/common/CardResource';
+import {cardResourceCSS} from '../common/cardResources';
 
 type Refs = {
   filter: HTMLInputElement,
@@ -259,14 +276,17 @@ export default (Vue as WithRefs<Refs>).extend({
         'agendas',
       ];
     },
-    allTags(): Array<Tag | 'none'> {
-      const results: Array<Tag | 'none'> = [];
+    allTags(): Array<TagOption> {
+      const results: Array<TagOption> = [];
       for (const tag in Tag) {
         if (Object.prototype.hasOwnProperty.call(Tag, tag)) {
           results.push((<any>Tag)[tag]);
         }
       }
       return results.concat('none');
+    },
+    allResources(): Array<ResourceOption> {
+      return [...getEnumStringValues(CardResource), 'none'];
     },
     allMilestoneNames(): ReadonlyArray<MilestoneName> {
       return [...milestoneNames].sort();
@@ -280,6 +300,9 @@ export default (Vue as WithRefs<Refs>).extend({
       official.sort(); // This puts matching party content together.
       expansion.sort();
       return [...official, ...expansion];
+    },
+    cardResourceCSS(): typeof cardResourceCSS {
+      return cardResourceCSS;
     },
   },
   methods: {
@@ -300,6 +323,9 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     invertTags() {
       this.allTags.forEach((tag) => this.tags[tag] = !this.tags[tag]);
+    },
+    invertResources() {
+      this.allResources.forEach((resource) => this.resources[resource] = !this.resources[resource]);
     },
     invertTypes() {
       this.allTypes.forEach((type) => this.types[type] = !this.types[type]);
@@ -389,6 +415,13 @@ export default (Vue as WithRefs<Refs>).extend({
 
       if (!this.filterByTags(card)) return false;
       if (!this.types[card.type]) return false;
+      if (card.resourceType === undefined) {
+        if (this.resources.none === false) {
+          return false;
+        }
+      } else {
+        if (!this.resources[card.resourceType]) return false;
+      }
       switch (this.vps) {
       case 1:
         if (card.victoryPoints === undefined) {

@@ -14,7 +14,7 @@ import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
 import {Size} from '@/common/cards/render/Size';
 import {Tag} from '@/common/cards/Tag';
 import {ICardRenderItem, isICardRenderItem} from '@/common/cards/render/Types';
-import {CardResource} from '@/common/CardResource';
+import {cardResourceCSS} from '../common/cardResources';
 
 export default Vue.extend({
   name: 'CardRenderItemComponent',
@@ -30,13 +30,7 @@ export default Vue.extend({
   },
   computed: {
     resourceClass(): string {
-      if (this.item.resource === undefined) {
-        return '';
-      }
-      if (this.item.resource === CardResource.RESOURCE_CUBE) {
-        return 'card-resource-cube';
-      }
-      return 'card-resource-' + this.item.resource.toLowerCase().replaceAll(' ', '-');
+      return (this.item.resource === undefined) ? '' : cardResourceCSS[this.item.resource];
     },
     resourceSizeClass(): string {
       if (this.item.size !== undefined) {

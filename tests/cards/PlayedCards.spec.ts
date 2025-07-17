@@ -65,9 +65,11 @@ describe('PlayedCards', () => {
     const comet = new Comet();
     playedCards.push(comet);
     expect(partialize(playedCards.tags)).deep.eq({});
+    expect(partialize(playedCards.eventTags)).deep.eq({space: 1});
     // Removing the event doesn't change the count.
     playedCards.remove(comet);
     expect(partialize(playedCards.tags)).deep.eq({});
+    expect(partialize(playedCards.eventTags)).deep.eq({});
   });
 
   it('Counts tags, retag', () => {

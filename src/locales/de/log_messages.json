@@ -398,6 +398,7 @@
   "${0} gained 0 M€ from ${1} action.": "${0} erhielt 0 M€ aus der Aktion ${1}.",
   "${0} gained ${1} M€ from ${2} action.": "${0} erhielt ${1} M€ aus der Aktion ${2}.",
   "${0} cannot afford to use the ${1} effect": "${0} kann es sich nicht leisten, den ${1}-Effekt zu nutzen",
+  "${0} cannot afford to take advantage of the ${1} effect to draw a ${2} card": "${0} kann es sich nicht leisten, den ${1}-Effekt zu nutzen, um eine ${2}-Karte zu ziehen",
   "${0} declined to use the ${1} effect": "${0} entschied, den ${1}-Effekt nicht zu nutzen",
   "${0} has no fighter resource cards and gained 1 titanium.": "${0} hat keine Jäger-Ressourcen Karten und erhielt 1 Titan.",
   "${0} has no science cards and gained 1 TR.": "${0} hat keine Wissenschafts-Ressourcen Karten und erhielt 1 TW.",

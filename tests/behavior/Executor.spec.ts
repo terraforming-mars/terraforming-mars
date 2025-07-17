@@ -736,6 +736,7 @@ describe('Executor', () => {
   });
 
   it('underworld, identify and claim', () => {
+    game.underworldData.tokens.push('nothing', 'nothing', 'nothing');
     executor.execute({underworld: {identify: {count: 3, claim: 2}}}, player, fake);
     runAllActions(game);
     expect(game.board.spaces.filter((space) => space.undergroundResources)).has.length(0);
@@ -768,7 +769,6 @@ describe('Executor', () => {
 
     cast(player.popWaitingFor(), undefined);
   });
-
 
   it('underworld, corruption', () => {
     player.underworldData.corruption = 0;

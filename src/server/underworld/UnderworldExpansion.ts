@@ -25,6 +25,7 @@ import {inplaceRemove} from '../../common/utils/utils';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {Tag} from '../../common/cards/Tag';
 import {UnderworldPlayerData} from '../../common/underworld/UnderworldPlayerData';
+import {GainAnyResourceButScienceDeferred} from '../deferredActions/GainAnyResourceButScienceDeferred';
 
 export class UnderworldExpansion {
   private constructor() {}
@@ -87,7 +88,7 @@ export class UnderworldExpansion {
     add(2, 'ocean');
     add(2, 'sciencetag');
     add(2, 'planttag');
-    add(2, 'volcanicoceanspace');
+    add(2, 'anyresource1');
     add(2, 'place6mc');
 
     add(2, 'oceanrequirementmod');
@@ -357,6 +358,9 @@ export class UnderworldExpansion {
     case 'microbe2':
       player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));
       break;
+    case 'anyresource1':
+      player.game.defer(new GainAnyResourceButScienceDeferred(player));
+      break;
     case 'tr':
       player.increaseTerraformRating();
       break;
@@ -404,8 +408,7 @@ export class UnderworldExpansion {
       }
       break;
 
-    // These don't reward anything.
-    case 'volcanicoceanspace':
+    // This doesn't reward anything.
     case 'place6mc':
       break;
     default:

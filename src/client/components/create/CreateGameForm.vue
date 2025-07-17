@@ -1206,7 +1206,7 @@ export default (Vue as WithRefs<Refs>).extend({
 
       // Clone game checks
       if (this.clonedGameId !== undefined && this.seededGame) {
-        const gameData = await fetch('api/cloneablegame?id=' + this.clonedGameId)
+        const gameData = await fetch(paths.API_CLONEABLEGAME + '?id=' + this.clonedGameId)
           .then((response) => {
             if (response.ok) {
               return response.json();

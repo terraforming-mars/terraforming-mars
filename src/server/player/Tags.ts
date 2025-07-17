@@ -152,16 +152,12 @@ export class Tags {
     return count;
   }
 
-  // Counts the tags in the player's play area only.
+  // Counts the tags in the player's play area.
   protected rawCount(tag: Tag, includeEventsTags: boolean) {
     let tagCount = this.player.playedCards.tags[tag];
 
     if (includeEventsTags) {
-      for (const card of this.player.playedCards) {
-        if (card.type === CardType.EVENT) {
-          tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
-        }
-      }
+      tagCount += this.player.playedCards.eventTags[tag];
     }
 
     return tagCount;

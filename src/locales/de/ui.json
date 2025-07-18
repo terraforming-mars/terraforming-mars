@@ -367,6 +367,7 @@
   "Played Cards": "Gespielte Karten",
   "played cards": "gespielte Karten",
   "Self-replicating Robots cards": "Selbstreplizierende Roboter Karten",
+  "Claimed Underground Resource Tokens": "Beanspruchte unterirdische Ressourcenmarker",
 
   "Select which cards to take into hand": "Wähle, welche Karten du auf die Hand nehmen möchtest",
   "Select which resource type to steal from all other players.": "Wähle, welche Art von Ressourcen-Produktion du von allen anderen Spielern klauen willst.",
@@ -1040,6 +1041,7 @@
   "Lose 2 corruption": "Verliere 2 Korruption",
   "Lose ${0} ${1}": "Verliere ${0} ${1}",
   "lose ${0} ${1}": "Verliere ${0} ${1}",
+  "lose 3 M€": "Verliere 3 M€",
   "lose ${0} ${1} production": "Verliere ${0} ${1} Produktion",
   "${0} ${1} from ${2}": "${0} ${1} von ${2}",
 

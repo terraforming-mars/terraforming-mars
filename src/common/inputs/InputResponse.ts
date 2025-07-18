@@ -5,6 +5,7 @@ import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../turmoil/PartyName';
 import {PolicyId} from '../turmoil/Types';
 import {SpaceId} from '../Types';
+import {ClaimedToken} from '../underworld/UnderworldPlayerData';
 import {Units} from '../Units';
 import {twoWayDifference} from '../utils/utils';
 import {AresGlobalParametersResponse} from './AresGlobalParametersResponse';
@@ -191,6 +192,15 @@ export function isSelectResourcesResponse(response: InputResponse): response is 
   return response.type === 'resources' && matches(response, ['type', 'units']);
 }
 
+export interface SelectClaimedTokenResponse {
+  type: 'claimedtoken',
+  tokens: Array<ClaimedToken>,
+}
+
+export function isSelectClaimedTokenResponse(response: InputResponse): response is SelectClaimedTokenResponse {
+  return response.type === 'claimedtoken' && matches(response, ['type', 'tokens']);
+}
+
 export type InputResponse =
   AndOptionsResponse |
   OrOptionsResponse |
@@ -210,4 +220,5 @@ export type InputResponse =
   SelectGlobalEventResponse |
   SelectPolicyResponse |
   SelectResourceResponse |
-  SelectResourcesResponse;
+  SelectResourcesResponse |
+  SelectClaimedTokenResponse;

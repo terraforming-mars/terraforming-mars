@@ -1,8 +1,7 @@
 <template>
   <div class="player_home_block--underground-tokens">
     <div v-for="(token, idx) in underworldData.tokens" :key="idx">
-        <div class="underground-token-background" :class="border(token)"></div>
-        <div :class="'underground-token-resource underground-token--' + token"></div>
+      <claimed-token :token="token"></claimed-token>
     </div>
   </div>
 </template>
@@ -10,8 +9,8 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {ClaimedToken, UnderworldPlayerData} from '@/common/underworld/UnderworldPlayerData';
-
+import {UnderworldPlayerData} from '@/common/underworld/UnderworldPlayerData';
+import ClaimedToken from '@/client/components/underworld/ClaimedToken.vue';
 export default Vue.extend({
   name: 'UndergroundTokens',
   props: {
@@ -19,10 +18,8 @@ export default Vue.extend({
       type: Object as () => UnderworldPlayerData,
     },
   },
-  methods: {
-    border(token: ClaimedToken): string {
-      return token.active ? 'underworld-token-border' : '';
-    },
+  components: {
+    ClaimedToken,
   },
 });
 </script>

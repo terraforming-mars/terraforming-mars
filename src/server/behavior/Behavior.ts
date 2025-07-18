@@ -35,6 +35,9 @@ export type Spend = Units & {
 
   /** discard project cards from your hand */
   cards: number,
+
+  /** discard claimed underground resource tokens */
+  claimedUndergroundResourceTokens: number,
 }
 
 /** A set of steps that an action can perform in any specific order. */

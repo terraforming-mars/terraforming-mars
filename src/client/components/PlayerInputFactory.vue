@@ -33,6 +33,7 @@ import ShiftAresGlobalParameters from '@/client/components/ShiftAresGlobalParame
 import SelectGlobalEvent from '@/client/components/SelectGlobalEvent.vue';
 import SelectResource from '@/client/components/SelectResource.vue';
 import SelectResources from '@/client/components/SelectResources.vue';
+import SelectClaimedToken from '@/client/components/SelectClaimedToken.vue';
 
 const typeToComponentName: Record<PlayerInputType, string> = {
   'and': 'and-options',
@@ -54,6 +55,7 @@ const typeToComponentName: Record<PlayerInputType, string> = {
   'policy': 'select-policy',
   'resource': 'select-resource',
   'resources': 'select-resources',
+  'claimedtoken': 'select-token',
 };
 
 export default Vue.component('player-input-factory', {
@@ -96,6 +98,7 @@ export default Vue.component('player-input-factory', {
     SelectGlobalEvent,
     'select-resource': SelectResource,
     'select-resources': SelectResources,
+    'select-token': SelectClaimedToken,
   },
   methods: {
     saveData() {

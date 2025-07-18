@@ -23,7 +23,7 @@ import {LogHelper} from '../LogHelper';
 import {Message} from '../../common/logs/Message';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {Tag} from '../../common/cards/Tag';
-import {UnderworldPlayerData} from '../../common/underworld/UnderworldPlayerData';
+import {ClaimedToken, UnderworldPlayerData} from '../../common/underworld/UnderworldPlayerData';
 import {GainAnyResourceButScienceDeferred} from '../deferredActions/GainAnyResourceButScienceDeferred';
 
 export class UnderworldExpansion {
@@ -617,6 +617,24 @@ export class UnderworldExpansion {
       return 3;
     }
     return 0;
+  }
+
+  static findToken(array: Array<ClaimedToken>, token: ClaimedToken): number {
+    return array.findIndex((t) => {
+      return t.token === token.token && t.active === token.active && t.shelter === token.shelter;
+    });
+  }
+
+  static removeClaimedToken(player: IPlayer, token: ClaimedToken) {
+    const tokens = player.underworldData.tokens;
+    const idx = this.findToken(tokens, token);
+    if (idx === -1) {
+      throw new Error('Token not found');
+    }
+    tokens.splice(idx, 1);
+    if (token.active) {
+      player.underworldData.activeBonus = undefined;
+    }
   }
 }
 

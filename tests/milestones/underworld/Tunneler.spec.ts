@@ -13,16 +13,16 @@ describe('Tunneler', () => {
   });
 
   it('Can claim', () => {
-    player.underworldData.tokens.push('nothing');
-    player.underworldData.tokens.push('nothing');
-    player.underworldData.tokens.push('nothing');
-    player.underworldData.tokens.push('nothing');
-    player.underworldData.tokens.push('nothing');
-    player.underworldData.tokens.push('nothing');
+    player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
+    player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
+    player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
+    player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
+    player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
+    player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
 
     expect(milestone.canClaim(player)).is.false;
 
-    player.underworldData.tokens.push('nothing');
+    player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
 
     expect(milestone.canClaim(player)).is.true;
   });

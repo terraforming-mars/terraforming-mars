@@ -75,7 +75,9 @@ describe('Keplertec', () => {
     runAllActions(game);
 
     expect(player.cardsInHand).has.length(1);
-    expect(player.underworldData.tokens).deep.eq(['card1']);
+    expect(player.underworldData.tokens).deep.eq([
+      {'active': false, 'shelter': false, 'token': 'card1'},
+    ]);
     expect(game.underworldData.tokens).has.length(91);
     expect(oneWayDifference(savedTokens, game.underworldData.tokens)).deep.eq(['card1']);
 
@@ -102,7 +104,9 @@ describe('Keplertec', () => {
     orOptions.options[0].cb();
 
     expect(player.cardsInHand).has.length(1);
-    expect(player.underworldData.tokens).deep.eq(['card1']);
+    expect(player.underworldData.tokens).deep.eq([
+      {'active': false, 'shelter': false, 'token': 'card1'},
+    ]);
     expect(oneWayDifference(savedTokens, game.underworldData.tokens)).deep.eq(['card1']);
 
     // Preload again with reliable token.
@@ -113,7 +117,10 @@ describe('Keplertec', () => {
 
     orOptions2.options[0].cb();
 
-    expect(player.underworldData.tokens).deep.eq(['card1', 'card1']);
+    expect(player.underworldData.tokens).deep.eq([
+      {'active': false, 'shelter': false, 'token': 'card1'},
+      {'active': false, 'shelter': false, 'token': 'card1'},
+    ]);
     expect(oneWayDifference(savedTokens, game.underworldData.tokens)).deep.eq(['card1']);
     expect(player.cardsInHand).has.length(2);
 

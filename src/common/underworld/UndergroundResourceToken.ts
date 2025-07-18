@@ -28,7 +28,9 @@ export type UndergroundResourceToken = TemporaryBonusToken |
   'titaniumandplant' |
   'energy2' | 'energy1production' | 'heat2production' |
   'microbe1' | 'microbe2' | 'tr' | 'ocean' |
-  'sciencetag' | 'planttag' | 'volcanicoceanspace' | 'place6mc';
+  // TODO(kberg): Remove volcanicoceanspace by 2025-08-01
+  'sciencetag' | 'planttag' | 'volcanicoceanspace' | 'place6mc' |
+  'anyresource1';
 
 /**
  * Text descriptions of each Underground resource token.
@@ -72,4 +74,5 @@ export const undergroundResourceTokenDescription: Record<UndergroundResourceToke
   oceanrequirementmod: 'Ocean requirements are ±3',
   oxygenrequirementmod: 'Oxygen requirements are ±3',
   temprequirementmod: 'Tempoerature requirements are ±6 °C',
+  anyresource1: 'Any resource except science',
 };

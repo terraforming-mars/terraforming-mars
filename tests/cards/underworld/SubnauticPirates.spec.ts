@@ -30,7 +30,7 @@ describe('SubnauticPirates', () => {
     it('canPlay ' + JSON.stringify(run), () => {
       player.underworldData.corruption = run.corruption;
       if (run.tokens) {
-        player.underworldData.tokens.push('nothing');
+        player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
       }
 
       expect(card.canPlay(player)).eq(run.expected);

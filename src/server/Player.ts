@@ -1871,7 +1871,7 @@ export class Player implements IPlayer {
       const dunerworldData = d.underworldData;
       // TODO(kberg): Remove the wrapper by 2025-10-01
       player.underworldData = {
-        tokens: dunerworldData.tokens ?? [],
+        tokens: (dunerworldData.tokens ?? []).map((e) => typeof(e) === 'object' ? e : {token: e, shelter: false, active: false}),
         corruption: dunerworldData.corruption,
         activeBonus: dunerworldData.temperatureBonus ?? dunerworldData.activeBonus,
       };

@@ -15,14 +15,14 @@ describe('Forest Tunnels', () => {
     const [game, player] = testGame(1, {underworldExpansion: true});
 
     player.plants = 0;
-    player.underworldData.tokens.push('nothing');
+    player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
     card.play(player);
     runAllActions(game);
 
     expect(player.plants).eq(1);
 
     player.plants = 0;
-    player.underworldData.tokens.push('nothing');
+    player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
     card.play(player);
     runAllActions(game);
 

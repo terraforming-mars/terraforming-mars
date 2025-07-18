@@ -123,7 +123,7 @@ export class ProjectWorkshop extends CorporationCard implements ICorporationCard
     if (steps > 0) {
       player.increaseTerraformRating(steps, {log: true});
     } else if (steps < 0) {
-      player.decreaseTerraformRating(-steps, {log: true});
+      player.decreaseTerraformRating(-steps, {log: true, from: {card: card}});
     }
   }
 }

@@ -36,7 +36,7 @@ export class GeologistTeam extends ActionCard implements IProjectCard {
   public onIdentificationByAnyPlayer(cardOwner: IPlayer, _identifyingPlayer: IPlayer | undefined, space: Space) {
     if (space.undergroundResources === 'ocean') {
       if (cardOwner.canAfford({cost: 0, tr: {tr: 1}})) {
-        cardOwner.increaseTerraformRating(1, {log: true});
+        cardOwner.increaseTerraformRating(1, {log: true, from: {card: this}});
       }
     }
   }

@@ -6,7 +6,7 @@ import {Space} from './boards/Space';
 import {TileType, tileTypeToString} from '../common/TileType';
 import {IColony} from './colonies/IColony';
 import {Logger} from './logs/Logger';
-import {From, isFromPlayer} from './logs/From';
+import {From} from './logs/From';
 import {CardResource} from '../common/CardResource';
 
 export class LogHelper {
@@ -172,23 +172,8 @@ export class LogHelper {
       b.player(player)
         .number(Math.abs(amount))
         .string(resourceString);
-
       if (from !== undefined) {
-        if (isFromPlayer(from)) {
-          b.player(from.player);
-        } else if ('card' in from) {
-          if (typeof(from.card) === 'object') {
-            b.card(from.card);
-          } else {
-            b.cardName(from.card);
-          }
-        } else {
-          if (typeof(from.globalEvent) === 'object') {
-            b.globalEvent(from.globalEvent);
-          } else {
-            b.globalEventName(from.globalEvent);
-          }
-        }
+        b.from(from);
       }
     });
   }

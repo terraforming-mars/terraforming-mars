@@ -21,7 +21,7 @@ describe('UndergroundResearchCenter', () => {
       const [/* game */, player/* , opponent */] = testGame(2, {underworldExpansion: true});
 
       for (let idx = 0; idx < run.excavationTokens; idx++) {
-        player.underworldData.tokens.push('nothing');
+        player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
       }
       expect(card.canPlay(player)).eq(run.expected);
     });

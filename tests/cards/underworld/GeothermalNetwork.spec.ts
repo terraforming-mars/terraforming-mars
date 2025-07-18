@@ -9,11 +9,11 @@ describe('GeothermalNetwork', () => {
     const [/* game */, player] = testGame(2);
 
     expect(card.canPlay(player)).is.false;
-    player.underworldData.tokens.push('nothing');
+    player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
     expect(card.canPlay(player)).is.false;
-    player.underworldData.tokens.push('nothing');
+    player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
     expect(card.canPlay(player)).is.false;
-    player.underworldData.tokens.push('nothing');
+    player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
     expect(card.canPlay(player)).is.true;
   });
 

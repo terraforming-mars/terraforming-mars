@@ -41,7 +41,7 @@ describe('SeismicPredictions', () => {
       turmoil.addInfluenceBonus(player, run.influence);
       player.tagsForTest = {building: run.tags};
       for (let idx = 0; idx < run.claimed; idx++) {
-        player.underworldData.tokens.push('nothing');
+        player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
       }
 
       card.resolve(game, turmoil);

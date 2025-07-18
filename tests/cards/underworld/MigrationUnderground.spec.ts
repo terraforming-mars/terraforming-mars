@@ -48,7 +48,7 @@ describe('MigrationUnderground', () => {
       turmoil.addInfluenceBonus(player, run.influence);
 
       for (let idx = 0; idx < run.tokens; idx++) {
-        player.underworldData.tokens.push('nothing');
+        player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
       }
 
       card.resolve(game, turmoil);

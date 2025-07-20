@@ -1,12 +1,13 @@
 <template>
   <div class="wf-component wf-options">
     <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
-    <label v-for="included in playerinput.include" :key="included">
-        <input type="radio" v-model="unit" :value="included" />
-        <i :data-tooltip="included" :class="'resource_icon tooltip tooltip-bottom resource_icon--' + included"></i>
-        {{ included }}
-        <br/>
-    </label>
+    <div class="form-group">
+      <label v-for="included in playerinput.include" :key="included" v-trim-whitespace class="form-inline d-flex align-items-center mb-2">
+          <input type="radio" v-model="unit" :value="included" class="form-radio mr-2" />
+          <i :data-tooltip="included" :class="'resource_icon mr-2 tooltip tooltip-bottom resource_icon--' + included" />
+          {{ $t(included) }}
+      </label>
+    </div>
     <div v-if="showsave === true" class="nofloat">
         <AppButton @click="saveData" :title="playerinput.buttonLabel" />
     </div>

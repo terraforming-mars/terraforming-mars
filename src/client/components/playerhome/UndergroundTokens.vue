@@ -21,7 +21,7 @@ export default Vue.extend({
   },
   methods: {
     border(token: ClaimedToken): string {
-      return token.active ? 'underworld-token-border' : '';
+      return token.active ? 'underground-token-border' : '';
     },
   },
 });

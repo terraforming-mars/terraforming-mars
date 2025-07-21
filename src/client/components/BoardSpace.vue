@@ -22,10 +22,7 @@
       <template v-if="space.nomads === true">
         <div class='board-cube--nomad'></div>
       </template>
-      <underground-resources
-        v-if="space.undergroundResources !== undefined"
-        :token="space.undergroundResources"
-      ></underground-resources>
+      <underground-token v-if="claimedToken !== undefined" :token="claimedToken" location="board"></underground-token>
       <div v-if="space.excavator !== undefined" class="underground-excavator" :class="'underground-excavator--' + space.excavator"></div>
     </template>
     </div>
@@ -36,10 +33,11 @@
 import Vue from 'vue';
 import Bonus from '@/client/components/Bonus.vue';
 import BoardSpaceTile from '@/client/components/board/BoardSpaceTile.vue';
-import UndergroundResources from '@/client/components/board/UndergroundResources.vue';
+import UndergroundToken from '@/client/components/underworld/UndergroundToken.vue';
 import {TileView} from '@/client/components/board/TileView';
 import {SpaceModel} from '@/common/models/SpaceModel';
 import {getPreferences} from '../utils/PreferencesManager';
+import {ClaimedToken} from '@/common/underworld/UnderworldPlayerData';
 
 export default Vue.extend({
   name: 'board-space',
@@ -63,7 +61,7 @@ export default Vue.extend({
   components: {
     'bonus': Bonus,
     'board-space-tile': BoardSpaceTile,
-    'underground-resources': UndergroundResources,
+    'underground-token': UndergroundToken,
   },
   methods: {
     getMainClass(): string {
@@ -82,6 +80,12 @@ export default Vue.extend({
       }
       const css = 'board-cube board-cube--' + this.space.color;
       return getPreferences().symbol_overlay ? css + ' overlay' : css;
+    },
+    claimedToken(): ClaimedToken | undefined {
+      if (this.space.undergroundResource === undefined) {
+        return undefined;
+      }
+      return {token: this.space.undergroundResource, shelter: false, active: false};
     },
   },
 });

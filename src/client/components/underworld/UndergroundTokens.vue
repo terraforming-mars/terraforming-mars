@@ -1,8 +1,12 @@
 <template>
   <div class="player_home_block--underground-tokens">
-    <div v-for="(token, idx) in underworldData.tokens" :key="idx">
-        <div class="underground-token-background" :class="border(token)"></div>
-        <div :class="'underground-token-resource underground-token--' + token.token"></div>
+    <div class="underground-tokens">
+      <underground-token
+      v-for="(token, idx) in underworldData.tokens"
+      :token="token"
+      :key="idx"
+      location="player-home"
+      ></underground-token>
     </div>
   </div>
 </template>
@@ -14,6 +18,9 @@ import {ClaimedToken, UnderworldPlayerData} from '@/common/underworld/Underworld
 
 export default Vue.extend({
   name: 'UndergroundTokens',
+  components: {
+    UndergroundToken: () => import('./UndergroundToken.vue'),
+  },
   props: {
     underworldData: {
       type: Object as () => UnderworldPlayerData,

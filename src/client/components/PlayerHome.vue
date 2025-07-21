@@ -283,7 +283,7 @@ import TopBar from '@/client/components/TopBar.vue';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import StackedCards from '@/client/components/StackedCards.vue';
 import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
-import UndergroundTokens from '@/client/components/playerhome/UndergroundTokens.vue';
+import UndergroundTokens from '@/client/components/underworld/UndergroundTokens.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {KeyboardNavigation} from '@/client/components/KeyboardNavigation';

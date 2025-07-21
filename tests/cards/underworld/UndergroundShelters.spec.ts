@@ -1,8 +1,10 @@
 import {expect} from 'chai';
 import {UndergroundShelters} from '../../../src/server/cards/underworld/UndergroundShelters';
 import {testGame} from '../../TestGame';
-import {addCity, cast, runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
+import {ClaimedToken} from '../../../src/common/underworld/UnderworldPlayerData';
+import {SelectClaimedUndergroundToken} from '../../../src/server/inputs/SelectClaimedUndergroundToken';
 
 describe('UndergroundShelters', () => {
   it('Should play', () => {
@@ -19,42 +21,56 @@ describe('UndergroundShelters', () => {
     cast(player.popWaitingFor(), undefined);
   });
 
-  it('VPs', () => {
-    // Spaces 31 and 35 have 6 spaces around them, none of which intersect.
+  it('canAct', () => {
     const card = new UndergroundShelters();
-    const [game, player] = testGame(2, {underworldExpansion: true});
-    const board = game.board;
+    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    player.playedCards.push(card);
 
-    expect(card.getVictoryPoints(player)).eq(0);
-    const city1 = board.getSpaceOrThrow('31');
-    addCity(player, city1.id);
-    const adjacent1 = board.getAdjacentSpaces(city1);
+    expect(card.canAct(player)).to.be.false;
 
-    adjacent1[0].excavator = player;
-    expect(card.getVictoryPoints(player)).eq(0);
-    adjacent1[1].excavator = player;
-    expect(card.getVictoryPoints(player)).eq(0);
-    adjacent1[2].excavator = player;
-    expect(card.getVictoryPoints(player)).eq(1);
-    adjacent1[3].excavator = player;
-    expect(card.getVictoryPoints(player)).eq(1);
-    adjacent1[4].excavator = player;
-    expect(card.getVictoryPoints(player)).eq(1);
-    adjacent1[5].excavator = player;
-    expect(card.getVictoryPoints(player)).eq(2);
+    const claimedToken: ClaimedToken = {token: 'nothing', active: false, shelter: false};
+    player.underworldData.tokens.push(claimedToken);
 
-    const city2 = board.getSpaceOrThrow('35');
-    addCity(player, city2.id);
-    const adjacent2 = board.getAdjacentSpaces(city2);
+    expect(card.canAct(player)).to.be.true;
 
-    city2.excavator = player;
-    expect(card.getVictoryPoints(player)).eq(2);
-    adjacent2[0].excavator = player;
-    expect(card.getVictoryPoints(player)).eq(2);
-    adjacent2[1].excavator = player;
-    expect(card.getVictoryPoints(player)).eq(3);
+    claimedToken.shelter = true;
 
-    // If necessary, add more cases where excavators are other players, and also where excavation spaces
-    // are not next to cities.
+    expect(card.canAct(player)).to.be.false;
+  });
+
+  it('action', () => {
+    const card = new UndergroundShelters();
+    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    player.playedCards.push(card);
+
+    for (let index = 0; index < 3; index++) {
+      player.underworldData.tokens.push({token: 'nothing', active: false, shelter: false});
+    }
+
+    const selectClaimedUndergroundToken = cast(card.action(player), SelectClaimedUndergroundToken);
+    expect(selectClaimedUndergroundToken.tokens).to.have.lengthOf(3);
+
+    selectClaimedUndergroundToken.cb([2]);
+
+    expect(player.underworldData.tokens).deep.equal([
+      {token: 'nothing', active: false, shelter: false},
+      {token: 'nothing', active: false, shelter: false},
+      {token: 'nothing', active: false, shelter: true}]);
+  });
+
+  it('VPs', () => {
+    const card = new UndergroundShelters();
+    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+
+    for (let index = 0; index < 3; index++) {
+      player.underworldData.tokens.push({token: 'nothing', active: false, shelter: false});
+    }
+    expect(card.getVictoryPoints(player)).to.equal(0);
+
+    player.underworldData.tokens[0].shelter = true;
+    expect(card.getVictoryPoints(player)).to.equal(1);
+
+    player.underworldData.tokens[1].shelter = true;
+    expect(card.getVictoryPoints(player)).to.equal(2);
   });
 });

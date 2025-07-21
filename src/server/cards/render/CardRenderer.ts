@@ -408,6 +408,11 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
+  public undergroundShelters() {
+    const item = new CardRenderItem(CardRenderItemType.UNDERGROUND_SHELTERS);
+    return this._appendToRow(item);
+  }
+
   public corruptionShield() {
     const item = new CardRenderItem(CardRenderItemType.CORRUPTION_SHIELD);
     return this._appendToRow(item);

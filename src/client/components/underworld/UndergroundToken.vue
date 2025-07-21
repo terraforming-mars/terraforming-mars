@@ -2,6 +2,7 @@
   <div :class="wrapper">
     <div class="underground-token-background" :class="style + ' ' + border"></div>
     <div :class="style + ' ' + tokenClass"></div>
+    <div :class="shelter"></div>
   </div>
 </template>
 
@@ -32,6 +33,9 @@ export default Vue.extend({
     },
     tokenClass(): string {
       return 'underground-token--' + this.token.token;
+    },
+    shelter(): string {
+      return this.token.shelter ? 'underground-token-shelter' : '';
     },
   },
 });

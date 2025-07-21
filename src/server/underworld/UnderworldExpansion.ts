@@ -282,7 +282,7 @@ export class UnderworldExpansion {
   public static claimToken(player: IPlayer, token: UndergroundResourceToken, isExcavate: boolean, space: Space | undefined) {
     validateUnderworldExpansion(player.game);
     this.grant(player, token);
-    player.underworldData.tokens.push({token, shelter: false, active: false});
+    player.underworldData.tokens.push({token, shelter: false, active: player.underworldData.activeBonus === token});
     for (const card of player.tableau) {
       card.onClaim?.(player, isExcavate, space);
     }
@@ -409,6 +409,7 @@ export class UnderworldExpansion {
     for (const claimedToken of player.underworldData.tokens) {
       claimedToken.active = false;
     }
+    player.underworldData.activeBonus = token;
     if (activeBonus !== undefined) {
       player.game.log('For the rest of this generation, ${0} will gain ${1}, replacing ${2}',
         (b) => b.player(player)
@@ -509,22 +510,6 @@ export class UnderworldExpansion {
     }
     inplaceShuffle(game.underworldData.tokens, game.rng);
   }
-
-  // static removeTokenFromPlayer(player: IPlayer, token: UndergroundResourceToken) {
-  //   const playerTokens = player.underworldData.tokens;
-  //   if (!inplaceRemove(playerTokens, token)) {
-  //     throw new Error('Token ${token} not found');
-  //   }
-  //   switch (token) {
-  //   case 'sciencetag':
-  //     player.tags.extraScienceTags = Math.max(player.tags.extraScienceTags - 1, 0);
-  //     break;
-  //   case 'planttag':
-  //     player.tags.extraPlantTags = Math.max(player.tags.extraPlantTags - 1, 0);
-  //     break;
-  //   }
-  //   this.addTokens(player.game, [token]);
-  // }
 
   /** Add the set of tokens to the pool, and then shuffle the pool */
   static addTokens(game: IGame, tokens: ReadonlyArray<UndergroundResourceToken>) {

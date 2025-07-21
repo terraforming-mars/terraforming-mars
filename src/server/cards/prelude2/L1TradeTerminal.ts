@@ -55,7 +55,7 @@ export class L1TradeTerminal extends Card {
 
   public override bespokePlay(player: IPlayer): PlayerInput | undefined {
     const cards = this.getEligibleCards(player);
-    const includesAncientShipyardsOrVermin = (cards.some(card => card.name === CardName.ANCIENT_SHIPYARDS || card.name === CardName.VERMIN));
+    const includesAncientShipyardsOrVermin = (cards.some((card) => card.name === CardName.ANCIENT_SHIPYARDS || card.name === CardName.VERMIN));
     if (cards.length <= 3 && !includesAncientShipyardsOrVermin) {
       this.addResources(player, cards);
       return undefined;

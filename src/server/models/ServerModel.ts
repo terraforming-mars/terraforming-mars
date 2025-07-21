@@ -388,7 +388,7 @@ export class Server {
         model.nomads = true;
       }
       if (space.undergroundResources !== undefined) {
-        model.undergroundResources = space.undergroundResources;
+        model.undergroundResource = space.undergroundResources;
       }
       if (space.excavator !== undefined) {
         model.excavator = space.excavator.color;

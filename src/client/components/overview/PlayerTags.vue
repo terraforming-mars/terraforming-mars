@@ -14,12 +14,17 @@
         </div>
         <div class="player-tags-secondary">
           <div class="tag-count-container" v-for="tagDetail of tags" :key="tagDetail.name">
-            <div class="tag-and-discount" v-if="tagDetail.name !== 'separator'">
+            <template v-if="tagDetail.name === SpecialTags.UNDERGROUND_TOKEN_COUNT">
+              <div class="tag-and-discount">
+              <tag-count :tag="tagDetail.name" :undergroundToken="player.underworldData.activeBonus" :count="tagDetail.count" :size="'big'" :type="'secondary'"/>
+              </div>
+            </template>
+            <div v-else-if="tagDetail.name === 'separator'" class="tag-separator"></div>
+            <div class="tag-and-discount" v-else>
               <PlayerTagDiscount v-if="tagDetail.discount > 0" :color="player.color" :amount="tagDetail.discount" :data-test="'discount-' + tagDetail.name"/>
               <PointsPerTag :points="tagDetail"/>
               <tag-count :tag="tagDetail.name" :count="tagDetail.count" :size="'big'" :type="'secondary'"/>
             </div>
-            <div v-else-if="tagDetail.name === 'separator'" class="tag-separator"></div>
           </div>
         </div>
     </div>
@@ -232,6 +237,9 @@ export default Vue.extend({
         }
         return true;
       });
+    },
+    SpecialTags() {
+      return SpecialTags;
     },
   },
 });

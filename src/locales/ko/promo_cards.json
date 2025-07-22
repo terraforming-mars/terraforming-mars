@@ -127,7 +127,7 @@
   "Asteroid Deflection System": "소행성 궤도 굴절 방어체계",
   "Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.": "행동: 카드 1장 공개, 우주 태그 있으면 이 카드에 소행성 자원 1개 추가.",
   "opponents may not remove your plants": "자신의 식물 자원을 다른 플레이어가 제거 불가.",
-  "Decrease your energy production 1 step. 1VP per asteroid on this card.": "에너지 생산력 1감소. 이 카드의 소행성 자원 1개당 승점 1점.",
+  "Decrease your energy production 1 step. 1 VP per asteroid on this card.": "에너지 생산력 1감소. 이 카드의 소행성 자원 1개당 승점 1점.",
 
   "Jovian Embassy": "목성 대사관",
 
@@ -155,7 +155,7 @@
 
   "Asteroid Hollowing": "소행성 내부 공동화 사업",
   "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "행동: 티타늄 자원 1개 소비해서 이 카드에 소행성 자원 1개 추가 및 메가크레딧 생산력 1 증가.",
-  "1VP for each 2 asteroids on this card.": "이 카드의 소행성 자원 2개당 승점 1점.",
+  "1 VP for each 2 asteroids on this card.": "이 카드의 소행성 자원 2개당 승점 1점.",
 
   "Advertising": "광고",
   "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "지속 효과: 추진 비용의 기본값이 20MC 이상인 카드를 사용할 때마다, 메가크레딧 생산력 1증가.",

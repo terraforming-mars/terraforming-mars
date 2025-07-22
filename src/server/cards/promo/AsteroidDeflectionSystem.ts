@@ -33,7 +33,7 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
           b.production((pb) => pb.minus().energy(1)).text('opponents may not remove your plants', Size.SMALL, true);
         }),
         description: {
-          text: 'Decrease your energy production 1 step. 1VP per asteroid on this card.',
+          text: 'Decrease your energy production 1 step. 1 VP per asteroid on this card.',
           align: 'left',
         },
       },

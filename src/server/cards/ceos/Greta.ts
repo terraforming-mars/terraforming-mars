@@ -38,7 +38,7 @@ export class Greta extends CeoCard implements ICeoCard {
     const game = player.game;
     if (this.opgActionIsActive === true && this.data.effectTriggerCount < 10) {
       if (player === cardOwner && game.phase === Phase.ACTION) {
-        player.stock.add(Resource.MEGACREDITS, 4, {log: true});
+        player.stock.add(Resource.MEGACREDITS, 4, {log: true, from: {card: this}});
         this.data.effectTriggerCount++;
       }
     }

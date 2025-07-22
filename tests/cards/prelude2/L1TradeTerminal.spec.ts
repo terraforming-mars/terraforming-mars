@@ -8,7 +8,6 @@ import {CardName} from '../../../src/common/cards/CardName';
 import {cardsFromJSON} from '../../../src/server/createCard';
 import {SelfReplicatingRobots} from '../../../src/server/cards/promo/SelfReplicatingRobots';
 import {toName, zip} from '../../../src/common/utils/utils';
-import {OrOptions} from '../../../src/server/inputs/OrOptions';
 
 describe('L1TradeTerminal', () => {
   let card: L1TradeTerminal;

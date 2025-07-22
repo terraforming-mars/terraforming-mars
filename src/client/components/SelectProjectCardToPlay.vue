@@ -10,11 +10,11 @@
 
   <section v-trim-whitespace>
     <template v-if="card.additionalProjectCosts">
-      <div v-if="card.additionalProjectCosts.thinkTankResources" class="card-warning">
-        Playing {{card.name}} consumes {{card.additionalProjectCosts.thinkTankResources}} data from Think Tank
+      <div v-if="card.additionalProjectCosts.thinkTankResources" class="card-warning" v-i18n="[$t(card.name), card.additionalProjectCosts.thinkTankResources, $t('Think Tank')]">
+        Playing ${0} consumes ${1} data from ${2}
       </div>
-      <div v-if="card.additionalProjectCosts.redsCost" class="card-warning">
-        Playing {{card.name}} will cost {{card.additionalProjectCosts.redsCost}} M€ more because Reds are in power
+      <div v-if="card.additionalProjectCosts.redsCost" class="card-warning" v-i18n="[$t(card.name), card.additionalProjectCosts.redsCost, $t('Reds')]">
+        Playing ${0} will cost ${1} M€ more because ${2} are in power
       </div>
     </template>
     <warnings-component :warnings="card.warnings"></warnings-component>

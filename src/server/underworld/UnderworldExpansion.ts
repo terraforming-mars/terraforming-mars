@@ -603,6 +603,15 @@ export class UnderworldExpansion {
     }
     return 0;
   }
+
+  static removeClaimedToken(player: IPlayer, idx: number) {
+    const tokens = player.underworldData.tokens;
+    const [token] = tokens.splice(idx, 1);
+    if (token.active) {
+      // TODO(kberg): Log the discard.
+      player.underworldData.activeBonus = undefined;
+    }
+  }
 }
 
 function validateUnderworldExpansion(game: IGame) {

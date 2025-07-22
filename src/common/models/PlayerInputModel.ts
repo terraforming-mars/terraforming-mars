@@ -132,7 +132,8 @@ export type SelectResourcesModel = BaseInputModel & {
 
 export type SelectClaimedUndergroundTokenModel = BaseInputModel & {
   type: 'claimedUndergroundToken';
-  count: number;
+  max: number;
+  min: number;
   tokens: ReadonlyArray<ClaimedToken>;
 }
 

@@ -59,6 +59,15 @@ export default Vue.extend({
     UndergroundToken,
   },
   methods: {
+    canSave() {
+      if (this.selected.length > this.playerinput.max) {
+        return false;
+      }
+      if (this.selected.length < this.playerinput.min) {
+        return false;
+      }
+      return true;
+    },
     saveData() {
       this.onsave({type: 'claimedUndergroundToken', selected: this.selected.sort()});
     },

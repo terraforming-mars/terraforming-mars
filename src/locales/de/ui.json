@@ -989,9 +989,8 @@
   "Orient Crashlanding": "Orientiere Bruchlandung",
   "Leave as it is": "Lass es wie es ist",
   "Rotate Crashlanding": "Rotiere Bruchlandung",
-  "Playing ${0} consumes ${1} data from Think Tank": "Um ${0} zu spielen, werden ${1} Daten von der Denkfabrik verbraucht",
-  "Playing ${0} consumes ${1} data from Aeron Genomics": "Um ${0} zu spielen, werden ${1} Daten von Aeron Genomics verbraucht",
-  "Playing ${0} will cost ${1} M€ more because Reds are in power": "Um ${0} zu spielen, wird die Karte ${1} M€ mehr kosten, weil die ROTEN an der Macht sind.",
+  "Playing ${0} consumes ${1} data from ${2}": "Um ${0} zu spielen, werden ${1} Daten von der ${2} verbraucht",
+  "Playing ${0} will cost ${1} M€ more because ${2} are in power": "Um ${0} zu spielen, wird die Karte ${1} M€ mehr kosten, weil die ${2} an der Macht sind.",
 
   "Search for ${0} tags": "Suche nach ${0}-Symbol",
   "Spend 1 M€ to gain 1 standard resource.": "Bezahle 1 M€, um 1 Standardressource zu erhalten.",

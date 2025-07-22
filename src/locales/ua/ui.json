@@ -840,10 +840,7 @@
   "Orient Crashlanding": "Орієнтувати аварійну посадку",
   "Leave as it is": "Залишити як є",
   "Rotate Crashlanding": "Повернути аварійну посадку",
-  "Playing ${0} Consumes ${1} data from Think Tank": "Граючи ${0}, витрачається ${1} данних з Думкового бака",
-  "Playing Anthozoa Consumes 1 data from Think Tank": "Граючи Anthozoa, витрачається 1 данних з Думкового бака",
-  "Playing Anthozoa Consumes 2 data from Think Tank": "Граючи Anthozoa, витрачається 2 данних з Думкового бака",
-  "Playing Anthozoa Consumes 3 data from Think Tank": "Граючи Anthozoa, витрачається 3 данних з Думкового бака",
+  "Playing ${0} consumes ${1} data from ${2}": "Граючи ${0}, витрачається ${1} данних з картки ${2}",
 
   "Search for ${0} tags": "Шукати теги ${0}",
   "Spend 1 M€ to gain 1 standard resource.": "Витратити 1 M€, щоб отримати 1 стандартний ресурс.",

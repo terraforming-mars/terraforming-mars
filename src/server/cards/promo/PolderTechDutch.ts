@@ -10,20 +10,22 @@ import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {intersection} from '../../../common/utils/utils';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Size} from '../../../common/cards/render/Size';
+import {Tag} from '../../../common/cards/Tag';
 
 export class PolderTechDutch extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.POLDERTECH_DUTCH,
-      startingMegaCredits: 32,
+      tags: [Tag.EARTH],
+      startingMegaCredits: 35,
 
       initialActionText: 'Place an ocean tile and a greenery tile next to each other',
 
       metadata: {
         cardNumber: 'X-3',
-        description: 'You start with 32 M€. As your first action, place an ocean tile and a greenery tile next to each other. Raise oxygen 1 step.',
+        description: 'You start with 35 M€. As your first action, place an ocean tile and a greenery tile next to each other. Raise oxygen 1 step.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(32).oceans(1, {size: Size.SMALL}).greenery({size: Size.SMALL}).asterix().br;
+          b.megacredits(35).oceans(1, {size: Size.SMALL}).greenery({size: Size.SMALL}).asterix().br;
           b.effect('When you place an ocean tile, gain 1 energy.', (eb) => eb.oceans(1, {size: Size.SMALL}).startEffect.energy(1)).br;
           b.effect('When you place a greenery, gain 1 plant.', (eb) => eb.greenery({size: Size.SMALL}).startEffect.plants(1)).br;
         }),

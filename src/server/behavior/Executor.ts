@@ -443,10 +443,11 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.tr !== undefined) {
       const count = ctx.count(behavior.tr);
+      const log = typeof(behavior.tr) === 'object';
       if (count >= 0) {
-        player.increaseTerraformRating(count);
+        player.increaseTerraformRating(count, {log: log});
       } else {
-        player.decreaseTerraformRating(-count);
+        player.decreaseTerraformRating(-count, {log: log});
       }
     }
     const addResources = behavior.addResources;

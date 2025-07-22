@@ -18,10 +18,6 @@ export class TheArchaicFoundationInstitute extends CorporationCard implements IC
       startingMegaCredits: 55,
       resourceType: CardResource.RESOURCE_CUBE,
 
-      behavior: {
-        addResources: 2,
-      },
-
       metadata: {
         hasExternalHelp: true,
         cardNumber: 'MC10',

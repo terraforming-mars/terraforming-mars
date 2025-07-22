@@ -178,7 +178,7 @@ export class Game implements IGame, Logger {
   /* The set of tags available in this game. */
   public readonly tags: ReadonlyArray<Tag>;
 
-  public underworldDraftEnabled = false;
+  public underworldDraftEnabled = true;
 
   private constructor(
     id: GameId,

@@ -212,7 +212,7 @@ export class Server {
       actionsTakenThisGame: player.actionsTakenThisGame,
       actionsThisGeneration: Array.from(player.actionsThisGeneration),
       alliedParty: player.alliedParty,
-      availableBlueCardActionCount: player.getAvailableBlueActionCount(),
+      availableBlueCardActionCount: player.getPlayableActionCards().length,
       cardCost: player.cardCost,
       cardDiscount: player.colonies.cardDiscount,
       cardsInHandNbr: player.cardsInHand.length,

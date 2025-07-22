@@ -51,7 +51,7 @@
 	"Asteroid Deflection System": "Zakrzywianie Trajektorii Asteroid",
     "(Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.)": "Akcja: Odkryj i odrzuć kartę. Jeśli ma symboli Przestrzeni Kosmicznej, umieść 1 jednostkę asteroid na tej karcie.",
     "opponents may not remove your plants": "Wrogowie nie mogą usuwać Twoich jednostek roślinności.",
-    "(Decrease your energy production 1 step. 1VP per asteroid on this card.)": "Obniż swoją produkcję energii o 1 poziom. Otrzymujesz 1 PZ za każdą jednostkę asteroid na tej karcie.",
+    "(Decrease your energy production 1 step. 1 VP per asteroid on this card.)": "Obniż swoją produkcję energii o 1 poziom. Otrzymujesz 1 PZ za każdą jednostkę asteroid na tej karcie.",
 
 	"Jovian Embassy": "Ambasada Jowisza",
     "(Raise your TR 1 step.)": "Podnieś swój WT o 1 poziom.",
@@ -77,7 +77,7 @@
 
 	"Asteroid Hollowing": "Holowanie Asteroid",
     "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "Akcja: Wydaj 1 jednostkę tytanu, aby umieścić tu 1 jednostkę asteroid i podnieść swoją produkcję M€ o 1 poziom.",
-    "1VP for each 2 asteroids on this card.": "Otrzymujesz 1 PZ za każde 2 jednostki asteroid na tej karcie.",
+    "1 VP for each 2 asteroids on this card.": "Otrzymujesz 1 PZ za każde 2 jednostki asteroid na tej karcie.",
 
 	"Advertising": "Reklama",
     "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "Efekt trwały: Gdy zagrywasz kartę o podstawowym koszcie wynoszącym 20 M€ lub więcej, podnieś swoją produkcję M€ o 1 poziom.",

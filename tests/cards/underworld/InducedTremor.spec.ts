@@ -40,7 +40,7 @@ describe('InducedTremor', () => {
 
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
     expect(selectSpace.spaces).to.have.members(spaces.slice(0, 3));
-    selectSpace.cb(spaces[1]);
+    const nextSelectSpace = selectSpace.cb(spaces[1]);
 
     expect(spaces[0].undergroundResources).is.not.undefined;
     expect(spaces[1].undergroundResources).is.undefined;
@@ -48,6 +48,6 @@ describe('InducedTremor', () => {
     expect(game.underworldData.tokens).has.length(89);
 
     runAllActions(game);
-    assertIsExcavationAction(player, player.popWaitingFor());
+    assertIsExcavationAction(player, nextSelectSpace);
   });
 });

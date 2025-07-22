@@ -10,9 +10,7 @@ describe('ArtesianAquifer', () => {
     const card = new ArtesianAquifer();
     const [game, player] = testGame(2, {underworldExpansion: true});
 
-    cast(card.play(player), undefined);
-    runAllActions(game);
-    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    const selectSpace = cast(card.play(player), SelectSpace);
     const space = selectSpace.spaces[0];
     space.undergroundResources = 'plant2';
     space.bonus = [];

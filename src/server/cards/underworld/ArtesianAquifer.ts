@@ -5,7 +5,8 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
-import {ExcavateSpaceDeferred} from '../../underworld/ExcavateSpaceDeferred';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
+import {SelectSpace} from '../../inputs/SelectSpace';
 
 export class ArtesianAquifer extends Card implements IProjectCard {
   constructor() {
@@ -39,10 +40,12 @@ export class ArtesianAquifer extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.game.defer(new ExcavateSpaceDeferred(player, this.availableSpaces(player)))
+    return new SelectSpace('Select space to excavate and place ocean',
+      this.availableSpaces(player))
       .andThen((space) => {
+        UnderworldExpansion.excavate(player, space);
         player.game.addOcean(player, space);
+        return undefined;
       });
-    return undefined;
   }
 }

@@ -6,7 +6,6 @@ import {Card} from '../Card';
 import {IPlayer} from '../../IPlayer';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 import {cancelled} from '../Options';
-import {ExcavateSpaceDeferred} from '../../underworld/ExcavateSpaceDeferred';
 import {SelectSpace} from '../../inputs/SelectSpace';
 
 
@@ -36,10 +35,14 @@ export class InducedTremor extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     const game = player.game;
     const identifiedSpaces = game.board.spaces.filter((space) => space.undergroundResources !== undefined);
-    player.defer(new SelectSpace('Select unclaimed resource token to remove', identifiedSpaces).andThen((s) => {
-      UnderworldExpansion.removeTokenFromSpace(game, s);
-      game.defer(new ExcavateSpaceDeferred(player, UnderworldExpansion.excavatableSpaces(player)));
-      return undefined;
+    player.defer(new SelectSpace('Select unclaimed resource token to remove', identifiedSpaces).andThen((space) => {
+      UnderworldExpansion.removeTokenFromSpace(game, space);
+      return new SelectSpace('Select space to excavate',
+        UnderworldExpansion.excavatableSpaces(player))
+        .andThen((excavatedSpace) => {
+          UnderworldExpansion.excavate(player, excavatedSpace);
+          return undefined;
+        });
     }));
 
     return undefined;

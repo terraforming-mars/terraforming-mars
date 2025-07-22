@@ -294,7 +294,6 @@ export interface IPlayer {
    */
   getResourceCount(resource: CardResource): number;
   runInput(input: InputResponse, pi: PlayerInput): void;
-  getAvailableBlueActionCount(): number;
   getPlayableActionCards(): Array<ICard & IActionCard>;
   runProductionPhase(): void;
   finishProductionPhase(): void;

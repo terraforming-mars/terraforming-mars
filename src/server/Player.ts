@@ -485,6 +485,7 @@ export class Player implements IPlayer {
   }
 
   public onGlobalParameterIncrease(parameter: GlobalParameter, steps: number): void {
+    // Tracks this player's contributition to global parmeters for end-of-game reporting.
     this.globalParameterSteps[parameter] += steps;
   }
 
@@ -568,10 +569,6 @@ export class Player implements IPlayer {
   public runInput(input: InputResponse, pi: PlayerInput): void {
     const result = pi.process(input, this);
     this.defer(result, Priority.DEFAULT);
-  }
-
-  public getAvailableBlueActionCount(): number {
-    return this.getPlayableActionCards().length;
   }
 
   public getPlayableActionCards(): Array<ICard & IActionCard> {

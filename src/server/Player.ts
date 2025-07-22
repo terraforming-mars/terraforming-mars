@@ -566,11 +566,6 @@ export class Player implements IPlayer {
     return sum(this.getCardsWithResources(resource).map((card) => card.resourceCount));
   }
 
-  public runInput(input: InputResponse, pi: PlayerInput): void {
-    const result = pi.process(input, this);
-    this.defer(result, Priority.DEFAULT);
-  }
-
   public getPlayableActionCards(): Array<ICard & IActionCard> {
     const result: Array<ICard & IActionCard> = [];
     for (const card of this.tableau) {
@@ -1635,7 +1630,7 @@ export class Player implements IPlayer {
     this.waitingForCb = undefined;
     try {
       this.timer.stop();
-      this.runInput(input, waitingFor);
+      this.defer(waitingFor.process(input, this));
       waitingForCb();
     } catch (err) {
       this.setWaitingFor(waitingFor, waitingForCb);

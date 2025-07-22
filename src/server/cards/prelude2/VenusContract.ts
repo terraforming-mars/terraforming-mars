@@ -34,7 +34,7 @@ export class VenusContract extends PreludeCard {
 
   public onGlobalParameterIncrease(player: IPlayer, parameter: GlobalParameter, steps: number) {
     if (parameter === GlobalParameter.VENUS) {
-      player.stock.add(Resource.MEGACREDITS, 3 * steps, {log: true});
+      player.stock.add(Resource.MEGACREDITS, 3 * steps, {log: true, from: {card: this}});
     }
   }
 }

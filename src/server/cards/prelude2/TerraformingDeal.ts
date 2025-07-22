@@ -30,7 +30,7 @@ export class TerraformingDeal extends PreludeCard implements IPreludeCard {
     if (cardOwner === player) {
       const phase = player.game.phase;
       if (phase === Phase.ACTION || phase === Phase.PRELUDES || player.game.inTurmoil) {
-        cardOwner.stock.add(Resource.MEGACREDITS, 2 * steps, {log: true});
+        cardOwner.stock.add(Resource.MEGACREDITS, 2 * steps, {log: true, from: {card: this}});
       }
     }
   }

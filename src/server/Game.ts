@@ -1184,7 +1184,7 @@ export class Game implements IGame, Logger {
         card.onGlobalParameterIncrease?.(player, GlobalParameter.VENUS, steps);
       }
       if (this.exploitationOfVenusInEffect) {
-        player.stock.add(Resource.MEGACREDITS, steps * 2, {log: true});
+        player.stock.add(Resource.MEGACREDITS, steps * 2, {log: true, from: {card: CardName.EXPLOITATION_OF_VENUS}});
       }
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.VENUS, steps);
       player.onGlobalParameterIncrease(GlobalParameter.VENUS, steps);
@@ -1194,7 +1194,7 @@ export class Game implements IGame, Logger {
     // Check for Aphrodite corporation
     const aphrodite = this.players.find((player) => player.tableau.has(CardName.APHRODITE));
     if (aphrodite !== undefined) {
-      aphrodite.megaCredits += steps * 2;
+      aphrodite.stock.add(Resource.MEGACREDITS, 2 * steps, {log: true, from: {card: CardName.APHRODITE}});
     }
 
     this.venusScaleLevel += steps * 2;

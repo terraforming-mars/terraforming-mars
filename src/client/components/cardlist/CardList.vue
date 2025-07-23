@@ -18,9 +18,9 @@
         </button>
 
         <button id="show-vps-only" v-on:click="toggleVps()" style="width: 63px;">
-            <span v-if="vps === 0">all</span>
-            <span v-if="vps === 1">VPS</span>
-            <span v-if="vps === 2">-VPs</span>
+            <span v-if="vps === 0" v-i18n>all</span>
+            <span v-if="vps === 1" v-i18n>VPS</span>
+            <span v-if="vps === 2" v-i18n>-VPs</span>
         </button>
 
         <button id="show-metadata" v-on:click="toggleShowMetadata()" style="width: 30px;">

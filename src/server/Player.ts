@@ -649,15 +649,22 @@ export class Player implements IPlayer {
     const cards = copyAndClear(this.draftedCards);
 
     const chooseCardsToBuy = () => {
-      return new ChooseCards(this, cards, {paying: true, keepMax: selectable}).execute();
-    };
-
-    const buyDraftedCards = () => {
       // TODO(kberg): Using .execute to rely on directly calling setWaitingFor is not great.
       // It's because all players is drafting at the same time. Once again, the server isn't ideal
       // when it comes to handling multiple players at once.
-      const action = chooseCardsToBuy();
-      this.setWaitingFor(action, () => this.game.playerIsFinishedWithResearchPhase(this));
+      const action = new ChooseCards(this, cards, {paying: true, keepMax: selectable}).execute();
+
+      // ChooseCards.execute returns an action with an andThen set. That means
+      // this has to wrap it around and do clever things.
+      // Fortunately it's callback returns void, so this doesn't have to pass
+      // something back another PlayerInput.
+      const saved = action.cb;
+      action.cb = ((response) => {
+        saved(response);
+        this.game.playerIsFinishedWithResearchPhase(this);
+        return undefined;
+      });
+      return action;
     };
 
     if (this.game.underworldDraftEnabled &&
@@ -669,18 +676,19 @@ export class Player implements IPlayer {
       options.options.push(chooseCardsToBuy());
       options.options.push(new SelectCard('Spend 1 corruption to replace 2 cards', 'Spend Corruption', cards, {min: 2, max: 2}).andThen((discards) => {
         this.game.projectDeck.discard(...discards);
+        UnderworldExpansion.loseCorruption(this, 1, {log: true});
         for (const discard of discards) {
           inplaceRemove(cards, discard);
         }
         // Drawing from the top to maintain seeds.
         cards.push(...this.game.projectDeck.drawN(this.game, 2, 'top'));
-        buyDraftedCards();
+        this.setWaitingFor(chooseCardsToBuy());
 
         return undefined;
       }));
       this.setWaitingFor(options);
     } else {
-      buyDraftedCards();
+      this.setWaitingFor(chooseCardsToBuy());
     }
   }
 

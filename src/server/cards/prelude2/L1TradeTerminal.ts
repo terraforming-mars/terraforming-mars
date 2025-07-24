@@ -60,7 +60,6 @@ export class L1TradeTerminal extends Card {
       return !(typeof vp === 'object' && vp.resourcesHere !== undefined && (vp.per ?? 0) < 0);
     });
 
-    console.log(noCardsWithNegativeVP);
     if (cards.length <= 3 && noCardsWithNegativeVP) {
       this.addResources(player, cards);
       return undefined;

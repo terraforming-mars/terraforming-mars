@@ -24,7 +24,7 @@ export class PlantTax extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U067',
         renderData: CardRenderer.builder((b) => {
-          b.minus().plants(2, {all}).asterix().corruption();
+          b.minus().plants(2, {all}).asterix().nbsp.nbsp.corruption();
         }),
         description: 'ALL players lose 2 plants. Players can block this with corruption. Gain 1 corruption.',
       },

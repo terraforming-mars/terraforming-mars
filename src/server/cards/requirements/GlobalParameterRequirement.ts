@@ -3,6 +3,7 @@ import {InequalityRequirement} from './InequalityRequirement';
 import {GlobalParameter} from '../../../common/GlobalParameter';
 import {CardName} from '../../../common/cards/CardName';
 import {IProjectCard} from '../IProjectCard';
+import {CardResource} from '../../../common/CardResource';
 
 
 /**
@@ -22,12 +23,23 @@ export abstract class GlobalParameterRequirement extends InequalityRequirement {
     if (super.satisfies(player, card)) {
       return true;
     }
-    const thinkTankResources = player.tableau.get(CardName.THINK_TANK)?.resourceCount;
-    if (thinkTankResources) {
+    const aeronGenomicsResources = (card.resourceType === CardResource.ANIMAL) ?
+      (player.tableau.get(CardName.AERON_GENOMICS)?.resourceCount ?? 0):
+      0;
+    const thinkTankResources = player.tableau.get(CardName.THINK_TANK)?.resourceCount ?? 0;
+    const sum = aeronGenomicsResources + thinkTankResources;
+    if (sum > 0) {
       const distance = this.distance(player);
-      if (distance <= thinkTankResources) {
+      if (distance <= sum) {
         card.additionalProjectCosts = card.additionalProjectCosts ?? {};
-        card.additionalProjectCosts.thinkTankResources = distance;
+        const animals = Math.min(distance, aeronGenomicsResources);
+        const data = Math.min(distance - aeronGenomicsResources, thinkTankResources);
+        if (animals > 0) {
+          card.additionalProjectCosts.aeronGenomicsResources = animals;
+        }
+        if (data > 0) {
+          card.additionalProjectCosts.thinkTankResources = data;
+        }
         return true;
       }
     }

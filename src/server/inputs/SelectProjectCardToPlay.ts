@@ -96,6 +96,14 @@ export class SelectProjectCardToPlay extends BasePlayerInput<IProjectCard> {
   public payAndPlay(card: IProjectCard, payment: Payment) {
     this.player.checkPaymentAndPlayCard(card, payment, this.config?.action);
     const additionalProjectCosts = card.additionalProjectCosts;
+    if ((additionalProjectCosts?.aeronGenomicsResources ?? 0) > 0) {
+      const aeronGenomics = this.player.playedCards.get(CardName.AERON_GENOMICS);
+      // TODO(kberg): this processing ought to be done while paying for the card.
+      if (aeronGenomics !== undefined) {
+        this.player.removeResourceFrom(aeronGenomics, additionalProjectCosts?.aeronGenomicsResources, {log: true});
+      }
+    }
+
     if ((additionalProjectCosts?.thinkTankResources ?? 0) > 0) {
       const thinkTank = this.player.playedCards.get(CardName.THINK_TANK);
       // TODO(kberg): this processing ought to be done while paying for the card.

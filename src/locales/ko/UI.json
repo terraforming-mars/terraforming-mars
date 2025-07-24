@@ -873,7 +873,7 @@
     "Orient Crashlanding": "",
     "Leave as it is": "그대로 두기",
     "Rotate Crashlanding": "",
-    "Playing ${0} consumes ${1} data from ${2}": "",
+    "Playing ${0} consumes ${1} ${2} from ${3}": "",
 
     "Search for ${0} tags": "${0} 태그가 있는 카드 찾기",
     "Spend 1 M€ to gain 1 standard resource.": "1 M€을 소비하여 기본 자원 1개 획득.",

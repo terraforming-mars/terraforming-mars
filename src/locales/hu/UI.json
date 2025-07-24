@@ -924,7 +924,7 @@
   "Orient Crashlanding": "Kényszerleszállás irányítása",
   "Leave as it is": "Maradjon így",
   "Rotate Crashlanding": "Kényszerleszállás forgatása",
-  "Playing ${0} consumes ${1} data from ${2}": "${0} kijátszásához ${1} adatot használ fel az ${2}",
+  "Playing ${0} consumes ${1} ${2} from ${3}": "${0} kijátszásához ${1} ${2} használ fel az ${3}",
   "Search for ${0} tags": "${0} ikonok keresése",
   "Spend 1 M€ to gain 1 standard resource.": "Költs el 1 M€-et, hogy kapj 1 standard erőforrást!",
   "Spend 1 science resource here to gain 1 standard resource": "Költs el 1 tudományos erőforrást, hogy kapj 1 standard erőforrást",

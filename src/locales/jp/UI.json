@@ -761,7 +761,7 @@
     "Orient Crashlanding": "タイルの回転",
     "Leave as it is": "何もしない",
     "Rotate Crashlanding": "回転する",
-    "Playing ${0} consumes ${1} data from ${2}": "${2}から${1}データを消費することで${0}をプレイ可能",
+    "Playing ${0} consumes ${1} ${2} from ${3}": "",
 
     "Choose your resource bonus": "ボーナスを選択",
     "Choose your wild resource bonus, after which you will gain ${0} more distinct standard resources.": "",

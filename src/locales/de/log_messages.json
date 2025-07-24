@@ -330,7 +330,6 @@
   "${0} moved 1 animal from ${1} to ${2}.": "${0} verschob 1 Tier von ${1} nach ${2}",
   "${0} gained a bonus ${1} because of ${2}": "${0} erhielt Bonus-${1} aufgrund von ${2}",
   "${0} removed an asteroid resource to increase Venus scale 1 step": "${0} entfernte eine Asteroiden-Ressource, um die Venuswertung um 2% zu erhöhen",
-  "${0} gained ${1} ${2}": "${0} erhielt ${1} ${2}",
   "${0} sold ${1} ${2}": "${0} verkaufte ${1} ${2}",
   "${0} spends ${1} M€ for the ${2} habitat tiles they own.": "${0} bezahlt ${1} M€ für die eigenen ${2} Habitate.",
   "${0} spends ${1} M€ for the ${2} mining tiles they own.": "${0} bezahlt ${1} M€ für die eigenen ${2} Minen.",

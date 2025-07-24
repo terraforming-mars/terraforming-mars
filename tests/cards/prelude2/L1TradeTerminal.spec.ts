@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {L1TradeTerminal} from '../../../src/server/cards/prelude2/L1TradeTerminal';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions} from '../../TestingUtils';
+import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {CardName} from '../../../src/common/cards/CardName';

@@ -38,8 +38,9 @@ export class Microgravimetry extends Card implements IProjectCard {
   }
 
   public action(player: IPlayer) {
+    const max = Math.min(player.energy, UnderworldExpansion.identifiableSpaces(player).length);
     return new SelectAmount(
-      'Select amount of energy to spend', undefined, 1, player.energy)
+      'Select amount of energy to spend', undefined, 1, max)
       .andThen((amount) => {
         player.stock.deduct(Resource.ENERGY, amount);
         player.game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));

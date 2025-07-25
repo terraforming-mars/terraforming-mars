@@ -18,9 +18,9 @@ export class ForestTunnels extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U16',
+        cardNumber: 'U016',
         renderData: CardRenderer.builder((b) => {
-          b.plants(1).slash().excavate(1);
+          b.plants(1).slash().undergroundResources(1);
         }),
         description: 'Gain 1 plant for each underground token you own.',
       },

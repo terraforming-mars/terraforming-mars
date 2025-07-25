@@ -23,7 +23,7 @@ export class ExportConvoy extends Card implements IProjectCard {
       victoryPoints: -1,
 
       metadata: {
-        cardNumber: 'U97',
+        cardNumber: 'U097',
         renderData: CardRenderer.builder((b) => {
           b.minus().plants(4, {digit}).or()
             .minus().resource(CardResource.MICROBE, {amount: 3, digit}).asterix().br

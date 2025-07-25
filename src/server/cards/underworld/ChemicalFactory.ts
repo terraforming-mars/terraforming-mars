@@ -23,7 +23,7 @@ export class ChemicalFactory extends ActionCard implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U60',
+        cardNumber: 'U060',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 plant to excavate an underground resource.',
             (ab) => ab.plants(1).startAction.excavate(1));

@@ -140,7 +140,11 @@
           </div>
         </div>
       </div>
+    </div>
 
+    <div v-if="thisPlayer.underworldData.tokens.length > 0">
+      <dynamic-title title="Claimed Underground Resource Tokens" :color="thisPlayer.color"/>
+      <underground-tokens :underworldData="thisPlayer.underworldData"></underground-tokens>
     </div>
 
     <div class="player_home_block player_home_block--setup nofloat"  v-if="thisPlayer.tableau.length === 0">
@@ -272,24 +276,24 @@ import Sidebar from '@/client/components/Sidebar.vue';
 import Colony from '@/client/components/colonies/Colony.vue';
 import LogPanel from '@/client/components/logpanel/LogPanel.vue';
 import Turmoil from '@/client/components/turmoil/Turmoil.vue';
-import {playerColorClass} from '@/common/utils/utils';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import DynamicTitle from '@/client/components/common/DynamicTitle.vue';
 import SortableCards from '@/client/components/SortableCards.vue';
 import TopBar from '@/client/components/TopBar.vue';
-import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
-import {KeyboardNavigation} from '@/client/components/KeyboardNavigation';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
-import {Phase} from '@/common/Phase';
 import StackedCards from '@/client/components/StackedCards.vue';
 import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
+import UndergroundTokens from '@/client/components/underworld/UndergroundTokens.vue';
+import {playerColorClass} from '@/common/utils/utils';
+import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
+import {KeyboardNavigation} from '@/client/components/KeyboardNavigation';
+import {Phase} from '@/common/Phase';
 import {GameModel} from '@/common/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {CardType} from '@/common/cards/CardType';
 import {nextTileView, TileView} from './board/TileView';
 import {getCardsByType, isCardActivated} from '@/client/utils/CardUtils';
 import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
-
 import {CardModel} from '@/common/models/CardModel';
 import {getCardOrThrow} from '../cards/ClientCardManifest';
 
@@ -382,6 +386,7 @@ export default Vue.extend({
     PlanetaryTracks,
     'stacked-cards': StackedCards,
     PurgeWarning,
+    UndergroundTokens,
   },
   methods: {
     navigatePage(event: KeyboardEvent) {

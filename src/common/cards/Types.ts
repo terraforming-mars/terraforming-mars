@@ -31,6 +31,8 @@ export type GlobalParameterRequirementBonus = {
 export type AdditionalProjectCosts = {
   /** Any resources that need to come off Think Tank to meet global requirements. */
   thinkTankResources?: number,
+  /** Any resources that need to come off Aeron Genomics to meet global requirements. */
+  aeronGenomicsResources?: number,
   /** Any predicted fees required to play this card because Reds are in power. */
   redsCost?: number,
 }

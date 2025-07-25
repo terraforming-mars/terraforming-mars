@@ -18,7 +18,7 @@ export class ImportedHeavyMachinery extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U21',
+        cardNumber: 'U021',
         renderData: CardRenderer.builder((b) => {
           b.excavate(2);
         }),

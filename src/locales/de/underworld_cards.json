@@ -96,7 +96,7 @@
 "Requires 2 earth tags. Gain 1 corruption.": "Benötigt 2 Erdsymbole. Erhalte 1 Korruption.",
 
 "Gaia City": "Gaia-Stadt",
-"Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (including adjacencies.) Regular placement restriction still apply.": "Verringere deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 2. Platziere eine Stadt auf einem Feld mit einem Ausgrabungsmarker eines beliebigen Spielers. Der Platzierungsbonus wird verdoppelt (einschließlich der Nachbarschaftsboni). Die normalen Platzierungsbeschränkungen gelten weiterhin.",
+"// Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (including adjacencies.) Regular placement restriction still apply.": "Verringere deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 2. Platziere eine Stadt auf einem Feld mit einem Ausgrabungsmarker eines beliebigen Spielers. Der Platzierungsbonus wird verdoppelt (einschließlich der Nachbarschaftsboni). Die normalen Platzierungsbeschränkungen gelten weiterhin.",
 "Placement Bonus x2": "2x Platzierungsbonus",
 
 "Gas Trust": "Gas Treuhand",
@@ -182,7 +182,7 @@
 "Spend 1 microbe from any card to excavate an underground resource and gain 3 plants. Add 1 data resource to ANOTHER card.": "Bezahle 1 Mikrobe von einer eigenen beliebigen Karte, um eine unterirdische Ressource auszugraben und 3 Pflanzen zu erhalten. Füge 1 Datum EINER ANDEREN Karte hinzu.",
 
 "Microgravimetry": "Mikrogravimetrie",
-"Action: Spend any amount of energy to identify that many underground resources on the board and put the same number of data on this card.": "AKTION: Bezahle eine beliebige Menge an Energie, um so viele unterirdische Ressourcen auf dem Spielbrett zu identifizieren und die gleiche Anzahl an Daten auf diese Karte zu legen.",
+"// Action: Spend any amount of energy to identify that many underground resources on the board and put the same number of data on this card.": "AKTION: Bezahle eine beliebige Menge an Energie, um so viele unterirdische Ressourcen auf dem Spielbrett zu identifizieren und die gleiche Anzahl an Daten auf diese Karte zu legen.",
 
 "Microprobing Technology": "Mikroskopische Technologie",
 "// Requires 1 science tag. Gain 3 plants. Add 2 data to any card. Identify 3 underground resources.": "Benötigt 1 Wissenschafts-Symbol. Erhalte 3 Pflanzen. Füge 2 Daten einer beliebigen Karte hinzu. Identifiziere 3 unterirdische Ressourcen.",
@@ -193,7 +193,7 @@
 "Action: Spend 4 data resources on this card to draw a card.": "Aktion: Bezahle 4 Daten von dieser Karte, um eine Karte zu ziehen.",
 
 "Monopoly": "Monopol",
-"Requires 3 corruption. Choose a standard production type. Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.": "Benötigt 3 Korruption. Wähle eine Standard-Produktion. Stiehl bis zu 1 Einheit dieser Produktion von JEDEM ANDEREN Spieler. Er kann dies mit Korruption blockieren.",
+"// Requires 3 corruption. Choose a standard production type. Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.": "Benötigt 3 Korruption. Wähle eine Standard-Produktion. Stiehl bis zu 1 Einheit dieser Produktion von JEDEM ANDEREN Spieler. Er kann dies mit Korruption blockieren.",
 
 "Nanofoundry": "Nanogießerei",
 "Requires 2 science tags. Reduce your energy production 5 steps. Draw 1 card for every power tag you have, including this.": "Benötigt 2 Wissenschafts-Symbole. Verringere deine Energieproduktion um 5. Ziehe 1 Karte für jedes Energiesymbol, das du hast, einschließlich diesem.",
@@ -280,15 +280,15 @@
 "// At the end of this generation only, during the production phase, gain 12 M€.": "Nur am Ende dieser Generation erhalte während der Produktionsphase 12 M€.",
 
 "Space Privateers": "Weltraum-Freibeuter",
-"Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "AKTION: Wenn sich mindestens 1 Jäger auf dieser Karte befindet, klaue 2 M€ von JEDEM ANDEREN Spieler.",
+"// Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "AKTION: Wenn sich mindestens 1 Jäger auf dieser Karte befindet, klaue 2 M€ von JEDEM ANDEREN Spieler.",
 "Effect: If 1 or more targets block this with corruption, remove 1 fighter from here.": "EFFEKT: Wenn 1 oder mehrere Spieler diese Karte mit Korruption blockieren, entferne 1 Jäger von dieser Karte.",
 "Solo: Gain 2 M€ and remove 1 fighter from this card.": "Solo: Erhalte 2 M€ und entferne 1 Jäger von dieser Karte.",
-"Requires 3 corruption. Put 3 fighter resources on this card.": "Benötigt 3 Korruption. Lege 3 Jäger auf diese Karte.",
+"// Requires 3 corruption. Put 3 fighter resources on this card.": "Benötigt 3 Korruption. Lege 3 Jäger auf diese Karte.",
 
 "Space Wargames": "Weltraum-Wargames",
 "Action: Spend 1 titanium to gain 1 fighter resource to this card.": "AKTION: Bezahle 1 Titan, um 1 Jäger-Ressource für diese Karte zu erhalten.",
 "Action: Spend 1 fighter resource on this card to gain 3 M€ for each fighter resource on this card INCLUDING THE PAID FIGHTER.": "AKTION: Bezahle 1 Jäger-Ressource von dieser Karte, um 3 M€ für jede Jäger-Ressource auf dieser Karte zu erhalten, EINSCHLIESSLICH des bezahlten Jägers.",
-"Put 1 fighter resource on this card. 1VP for each Jovian tag you have.": "Lege 1 Jäger auf diese Karte. 1 SP für jedes Jupiter-Symbol, das du hast.",
+"Put 1 fighter resource on this card. 1 VP for each Jovian tag you have.": "Lege 1 Jäger auf diese Karte. 1 SP für jedes Jupiter-Symbol, das du hast.",
 
 "Staged Protests": "Inszenierte Proteste",
 "Awards and Milestones": "Auszeichnungen und Meilensteine",

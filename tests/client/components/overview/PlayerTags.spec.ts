@@ -51,7 +51,11 @@ describe('PlayerTags', () => {
         [Tag.MICROBE]: 0,
         [Tag.ANIMAL]: 0,
         [Tag.CITY]: 0,
+        [Tag.CRIME]: 0,
         [Tag.EVENT]: 0,
+      },
+      underworldData: {
+        tokens: [],
       },
       victoryPointsBreakdown: {
         total: 1,

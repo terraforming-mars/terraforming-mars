@@ -19,4 +19,5 @@ export type Warning =
  'noEffect' |
  'selfTarget' |
  'pharmacyUnion' |
- 'kaguyaTech';
+ 'kaguyaTech' |
+ 'underworldtokendiscard';

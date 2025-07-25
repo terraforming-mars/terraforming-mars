@@ -23,7 +23,7 @@ export class GasTrust extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U92',
+        cardNumber: 'U092',
         renderData: CardRenderer.builder((b) => {
           b.corruption(1).nbsp.nbsp.heat(3, {digit}).slash().tag(Tag.CRIME).asterix();
         }),
@@ -34,7 +34,7 @@ export class GasTrust extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     // +1 is for including this.
-    const tags = player.tags.count(Tag.CRIME, 'raw-underworld') + 1;
+    const tags = player.tags.count(Tag.CRIME, 'raw-underworld') + player.tags.count(Tag.WILD) + 1;
     player.stock.add(Resource.HEAT, tags * 3, {log: true});
     return undefined;
   }

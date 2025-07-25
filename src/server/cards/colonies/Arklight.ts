@@ -36,6 +36,11 @@ export class Arklight extends CorporationCard implements ICorporationCard {
     });
   }
 
+  public onNonCardTagAdded(player: IPlayer, tag: Tag): void {
+    if (tag === Tag.PLANT) {
+      player.addResourceTo(this, {qty: 1, log: true});
+    }
+  }
   public onCardPlayedForCorps(player: IPlayer, card: ICard): void {
     const qty = card.tags.filter((cardTag) => cardTag === Tag.ANIMAL || cardTag === Tag.PLANT).length;
     if (qty > 0) {

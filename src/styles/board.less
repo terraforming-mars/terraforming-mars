@@ -548,28 +548,6 @@
 	border: 1px solid black;
 }
 
-
-.underground-token-background {
-	position: absolute;
-	width: 20px;
-	height: 18px;
-  background-size: 20px 18px;
-	z-index: 3;
-	margin: 8px 0 0 20px;
-	filter: drop-shadow(2px 2px 3px black);
-  background-image: url("assets/underworld/underground-token-background.png");
-}
-
-.underground-token-resource {
-	position: absolute;
-	width: 22px;
-	height: 22px;
-  background-size: 22px;
-	z-index: 3;
-	margin: 6px 0 0 19px;
-	filter: drop-shadow(2px 2px 3px black);
-}
-
 @token_types:
 	// nothing,
 	card1, card2,
@@ -577,11 +555,15 @@
 	data1, data2, data3,
 	steel2, steel1production,
 	titanium2, titanium1production,
-	plant1, plant2, plant3, plant1production,
+	plant2, plant3, plant1production,
 	titaniumandplant,
 	energy1production, heat2production,
 	microbe1, microbe2, tr, ocean,
-	data1pertemp, microbe1pertemp, plant2pertemp, steel2pertemp, titanium1pertemp;
+	data1pertemp, microbe1pertemp, plant2pertemp, steel2pertemp, titanium1pertemp,
+  mcprod1pertemp, microbe2pertemp,oceanrequirementmod,
+  oxygenrequirementmod, temprequirementmod,
+  steel2plant, energy2, sciencetag, planttag, volcanicoceanspace, place6mc,
+  anyresource1;
 each(@token_types, {
   .underground-token--@{value} {
     background-image: url("assets/underworld/underground-resource--@{value}.png");

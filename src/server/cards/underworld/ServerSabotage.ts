@@ -13,7 +13,7 @@ export class ServerSabotage extends Card implements IProjectCard {
       type: CardType.EVENT,
       name: CardName.SERVER_SABOTAGE,
       tags: [Tag.CRIME],
-      cost: 7,
+      cost: 9,
 
       behavior: {
         underworld: {corruption: 1},
@@ -21,7 +21,7 @@ export class ServerSabotage extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U47',
+        cardNumber: 'U047',
         renderData: CardRenderer.builder((b) => {
           // TODO(kberg): Use icon.
           b.corruption(1).cards(1).undergroundResources(1, {cancelled});

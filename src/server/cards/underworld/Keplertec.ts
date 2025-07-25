@@ -46,7 +46,7 @@ export class Keplertec extends ActiveCorporationCard {
           }).br;
           b.effect('When you place a fighter on this card, identify 4 underground resources FROM THE PILE. ' +
             'Claim 1. Shuffle the remaining tokens back into the pile.', (eb) => {
-            eb.resource(CardResource.FIGHTER).startEffect.identify(4).asterix().claim(1);
+            eb.resource(CardResource.FIGHTER).startEffect.identify(4, {digit}).asterix().claim(1);
           }).br;
         }),
       },
@@ -67,7 +67,7 @@ export class Keplertec extends ActiveCorporationCard {
     const orOptions = new OrOptions();
     for (const token of tokens) {
       orOptions.options.push(new SelectOption(token).andThen(() => {
-        UnderworldExpansion.claimToken(player, token);
+        UnderworldExpansion.claimToken(player, token, /* isExcavate=*/ false, /* space= */undefined);
         inplaceRemove(tokens, token);
         UnderworldExpansion.addTokens(game, tokens);
         if (idx > 1) {

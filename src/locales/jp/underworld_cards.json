@@ -73,7 +73,7 @@
 
     "Gaia City": "ガイアシティ",
     "Placement Bonus x2": "配置ボーナス2倍",
-    "Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (including adjacencies.) Regular placement restriction still apply.": "電力産出-1. MC産出+2. 採掘された空きマスに都市を配置. 配置ボーナスおよび隣接ボーナスを倍獲得. 通常の配置制限は引き続き適用されます。",
+    "// Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (including adjacencies.) Regular placement restriction still apply.": "電力産出-1. MC産出+2. 採掘された空きマスに都市を配置. 配置ボーナスおよび隣接ボーナスを倍獲得. 通常の配置制限は引き続き適用されます。",
 
     "Geological Survey:underworld": "地質学的調査",
     "// Add 1 data resource to ANOTHER card. Identify any 2 underground resources on Mars.": "1データ獲得. 2回火星上の地下資源を調査する.",
@@ -149,7 +149,7 @@
     "Spend 1 microbe from any card to excavate an underground resource and gain 3 plants. Add 1 data resource to ANOTHER card.": "1微生物支払い、地下資源を採掘する. 3植物獲得. 1データ獲得.",
 
     "Microgravimetry": "微小重力測定",
-    "Action: Spend any amount of energy to identify that many underground resources on the board and put the same number of data on this card.": "アクション：電力を任意の数支払い、その数分、地下資源を調査する. 支払った電力の数分、1データ獲得.",
+    "// Action: Spend any amount of energy to identify that many underground resources on the board and put the same number of data on this card.": "アクション：電力を任意の数支払い、その数分、地下資源を調査する. 支払った電力の数分、1データ獲得.",
 
     "Microprobing Technology": "マイクロプローブ技術",
     "// Requires 1 science tag. Gain 3 plants. Add 2 data to any card. Identify 3 underground resources.": "条件：科学タグ1つ以上. 3植物獲得. 2データ獲得. 3回地下資源を調査する.",
@@ -160,7 +160,7 @@
     "Action: Spend 4 data resources on this card to draw a card.": "アクション：このカード上から4データ除去し、1ドロー.",
 
     "Monopoly": "独占",
-    "Requires 3 corruption. Choose a standard production type. Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.": "条件：汚職3つ以上. 産出を1つ選ぶ. 他の全プレイヤーはその産出-1し、その合計数分産出+1. これは汚職で防ぐことができる.",
+    "// Requires 3 corruption. Choose a standard production type. Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.": "条件：汚職3つ以上. 産出を1つ選ぶ. 他の全プレイヤーはその産出-1し、その合計数分産出+1. これは汚職で防ぐことができる.",
 
     "Nanofoundry": "極小鋳物工場",
     "Requires 2 science tags. Reduce your energy production 5 steps. Draw 1 card for every power tag you have, including this.": "条件：科学タグ2つ以上. 電力産出-5. 電力タグの数分、1ドロー.",
@@ -243,15 +243,15 @@
     "// At the end of this generation only, during the production phase, gain 12 M€.": "次の生産フェイズで12MC獲得.",
 
     "Space Privateers": "宇宙私掠船",
-    "Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "アクション：このカード上に戦闘機がある場合、他の全プレイヤーから2MC盗む.",
+    "// Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "アクション：このカード上に戦闘機がある場合、他の全プレイヤーから2MC盗む.",
     "Effect: If 1 or more targets block this with corruption, remove 1 fighter from here.": "効果：このカードのアクションが1人以上から防がれた時、このカード上から1戦闘機を除去.",
     "Solo: Gain 2 M€ and remove 1 fighter from this card.": "ソロ：2MC獲得し、1戦闘機を除去.",
-    "Requires 3 corruption. Put 3 fighter resources on this card.": "条件：汚職3つ以上. このカード上に3戦闘機追加.",
+    "// Requires 3 corruption. Put 3 fighter resources on this card.": "条件：汚職3つ以上. このカード上に3戦闘機追加.",
 
     "Space Wargames": "宇宙戦争ゲーム",
     "Action: Spend 1 titanium to gain 1 fighter resource to this card.": "アクション：1チタンを支払い、このカード上に1戦闘機追加.",
     "Action: Spend 1 fighter resource on this card to gain 3 M€ for each fighter resource on this card INCLUDING THE PAID FIGHTER.": "アクション：このカード上の1戦闘機毎に3MC獲得し、このカード上から1戦闘機を除去.",
-    "Put 1 fighter resource on this card. 1VP for each Jovian tag you have.": "このカード上に1戦闘機追加. 木星タグ1つ毎に1VP.",
+    "Put 1 fighter resource on this card. 1 VP for each Jovian tag you have.": "このカード上に1戦闘機追加. 木星タグ1つ毎に1VP.",
 
     "Staged Protests": "仕組まれた抗議",
     "Awards and Milestones": "称号と褒賞",

@@ -21,7 +21,7 @@ export class Casino extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U20',
+        cardNumber: 'U020',
         renderData: CardRenderer.builder((b) => {
           b.corruption();
           b.production((pb) => pb.megacredits(4));

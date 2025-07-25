@@ -34,7 +34,7 @@ export class SuitableInfrastructure extends PreludeCard {
   // When the server restarts, the player has to take an action anyway.
   private lastAction = -1;
   public onProductionGain(player: IPlayer, _resource: Resource, amount: number) {
-    if (player.game.activePlayer !== player.id || amount <= 0) {
+    if (player.game.activePlayer.id !== player.id || amount <= 0) {
       return;
     }
     const actionCount = player.game.getActionCount();

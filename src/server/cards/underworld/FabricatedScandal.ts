@@ -20,7 +20,7 @@ export class FabricatedScandal extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U13',
+        cardNumber: 'U013',
         renderData: CardRenderer.builder((b) => {
           b.corruption().br;
           b.text('most').tr(1, {all}).colon().minus().tr(1).br;

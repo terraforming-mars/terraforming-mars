@@ -14,12 +14,17 @@
         </div>
         <div class="player-tags-secondary">
           <div class="tag-count-container" v-for="tagDetail of tags" :key="tagDetail.name">
-            <div class="tag-and-discount" v-if="tagDetail.name !== 'separator'">
+            <template v-if="tagDetail.name === SpecialTags.UNDERGROUND_TOKEN_COUNT">
+              <div class="tag-and-discount">
+              <tag-count :tag="tagDetail.name" :undergroundToken="player.underworldData.activeBonus" :count="tagDetail.count" :size="'big'" :type="'secondary'"/>
+              </div>
+            </template>
+            <div v-else-if="tagDetail.name === 'separator'" class="tag-separator"></div>
+            <div class="tag-and-discount" v-else>
               <PlayerTagDiscount v-if="tagDetail.discount > 0" :color="player.color" :amount="tagDetail.discount" :data-test="'discount-' + tagDetail.name"/>
               <PointsPerTag :points="tagDetail"/>
               <tag-count :tag="tagDetail.name" :count="tagDetail.count" :size="'big'" :type="'secondary'"/>
             </div>
-            <div v-else-if="tagDetail.name === 'separator'" class="tag-separator"></div>
           </div>
         </div>
     </div>
@@ -108,9 +113,9 @@ const getTagCount = (tagName: InterfaceTagsType, player: PublicPlayerModel): num
   case SpecialTags.NONE:
     return player.noTagsCount || 0;
   case SpecialTags.UNDERGROUND_TOKEN_COUNT:
-    return player.undergroundTokens;
+    return player.underworldData.tokens.length;
   case SpecialTags.CORRUPTION:
-    return player.corruption;
+    return player.underworldData.corruption;
   case SpecialTags.NEGATIVE_VP:
     return player.victoryPointsBreakdown.negativeVP;
   case 'all':
@@ -232,6 +237,9 @@ export default Vue.extend({
         }
         return true;
       });
+    },
+    SpecialTags() {
+      return SpecialTags;
     },
   },
 });

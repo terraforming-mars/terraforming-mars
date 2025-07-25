@@ -22,7 +22,7 @@ export class Neutrinograph extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U57',
+        cardNumber: 'U057',
         renderData: CardRenderer.builder((b) => {
           b.identify(7, {digit}).claim(3);
         }),

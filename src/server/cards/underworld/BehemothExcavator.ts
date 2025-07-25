@@ -19,7 +19,7 @@ export class BehemothExcavator extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U30',
+        cardNumber: 'U030',
         renderData: CardRenderer.builder((b) => {
           b.excavate(3, {digit});
         }),

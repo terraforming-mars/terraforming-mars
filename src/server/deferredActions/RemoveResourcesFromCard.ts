@@ -74,7 +74,7 @@ export class RemoveResourcesFromCard extends DeferredAction<Response> {
       this.title,
       'Remove resource(s)',
       cards,
-      {showOwner: true})
+      {showOwner: this.source !== 'self'})
       .andThen(([card]) => {
         this.attack(card);
         return undefined;

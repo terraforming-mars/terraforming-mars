@@ -9,65 +9,85 @@ import {all} from '../Options';
 import {Units} from '../../../common/Units';
 import {message} from '../../logs/MessageBuilder';
 import {Tag} from '../../../common/cards/Tag';
+import {IActionCard} from '../ICard';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
-export class Monopoly extends Card implements IProjectCard {
+export class Monopoly extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
-      type: CardType.EVENT,
+      type: CardType.ACTIVE,
       name: CardName.MONOPOLY,
       tags: [Tag.CRIME],
-      cost: 12,
+      cost: 8,
 
-      requirements: {corruption: 3},
+      requirements: {corruption: 2},
       victoryPoints: -2,
 
       metadata: {
-        cardNumber: 'U65',
+        cardNumber: 'U065',
         renderData: CardRenderer.builder((b) => {
-          b.text('STEAL').production((pb) => pb.wild(1, {all})).br;
+          b.action('Spend 1 corruption to increase any production 1 step.', (ab) => {
+            ab.corruption(1).startAction.production((pb) => pb.wild(1));
+          }).br;
+          b.text('STEAL').wild(2, {all}).asterix().br;
         }),
-        description: 'Requires 3 corruption. Choose a standard production type. ' +
-          'Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.',
+        description: 'Requires 2 corruption. Choose a standard resource type. ' +
+          'Steal 2 units of that resource from EACH OTHER player.',
       },
     });
   }
 
-  private availableProductions(player: IPlayer): Array<keyof Units> {
+  private stealableResources(player: IPlayer): Array<keyof Units> {
     const targets = player.opponents;
     return Units.keys.filter((unit) => {
-      const resource = Units.ResourceMap[unit];
-      return targets.some((target) => target.canHaveProductionReduced(resource, 1, player));
+      return targets.some((target) => target.stock[unit] > 0 && !target.isProtected(unit));
     });
   }
 
   public override bespokeCanPlay(player: IPlayer) {
-    return this.availableProductions(player).length > 0;
+    return this.stealableResources(player).length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {
     return new SelectResource(
-      'Select which resource type to steal from all other players.',
-      this.availableProductions(player))
+      'Select which resource type to steal 2 units from all other players.',
+      this.stealableResources(player))
       .andThen((unitKey) => {
         const resource = Units.ResourceMap[unitKey];
         if (player.game.isSoloMode()) {
-          player.production.add(resource, 1, {log: true});
+          player.stock.add(resource, 2, {log: true});
           player.resolveInsuranceInSoloGame();
           return undefined;
         }
         for (const target of player.opponents) {
-          if (target.canHaveProductionReduced(resource, 1, player)) {
-            const msg = message('Lose ${0} ${1} production', (b) => b.number(1).string(resource));
+          if (!target.isProtected(resource) && target.stock[resource] > 0) {
+            const msg = message('Lose ${0} ${1}', (b) => b.number(2).string(resource));
             target.maybeBlockAttack(player, msg, (proceed: boolean) => {
               if (proceed) {
-                target.production.add(resource, -1, {log: true, from: {player: player}, stealing: true});
-                player.production.add(resource, 1, {log: false});
-                target.resolveInsurance();
+                target.stock.steal(resource, 2, player, {log: true});
+                // TODO(kberg): Confirm this is done.
+                // target.resolveInsurance();
               }
               return undefined;
             });
           }
         }
+        return undefined;
+      });
+  }
+
+  public canAct(player: IPlayer): boolean {
+    return player.underworldData.corruption > 0;
+  }
+
+  public action(player: IPlayer) {
+    return new SelectResource(
+      'Select which resource type to steal 2 units from all other players.')
+      .andThen((unitKey) => {
+        UnderworldExpansion.loseCorruption(player, 1);
+        const units = {...Units.EMPTY};
+        units[unitKey] = 1;
+        player.production.adjust(units, {log: true});
         return undefined;
       });
   }

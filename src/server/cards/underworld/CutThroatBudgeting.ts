@@ -21,7 +21,7 @@ export class CutThroatBudgeting extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U80',
+        cardNumber: 'U080',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1).steel(1).energy(1));
         }),

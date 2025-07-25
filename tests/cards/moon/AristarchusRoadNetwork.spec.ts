@@ -6,8 +6,7 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {AristarchusRoadNetwork} from '../../../src/server/cards/moon/AristarchusRoadNetwork';
-import {TileType} from '../../../src/common/TileType';
-import {assertPlaceTile} from '../../assertions';
+import {assertPlaceMoonRoad} from '../../assertions';
 
 describe('AristarchusRoadNetwork', () => {
   let game: IGame;
@@ -43,7 +42,7 @@ describe('AristarchusRoadNetwork', () => {
 
     runAllActions(game);
     expect(moonData.logisticRate).eq(0);
-    assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
+    assertPlaceMoonRoad(player, player.popWaitingFor());
 
     expect(player.terraformRating).eq(15);
     expect(moonData.logisticRate).eq(1);

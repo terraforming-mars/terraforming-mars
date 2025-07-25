@@ -48,8 +48,8 @@ export function hasIntersection<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): bo
  *
  * Friendly to duplicates in an array.
  *
- * @param {Array<T>} a: the first array
- * @param {Array<T>} b: the second array
+ * @param {Array} a the first array
+ * @param {Array} b the second array
  */
 export function oneWayDifference<T>(a: ReadonlyArray<T>, b: ReadonlyArray<T>): ReadonlyArray<T> {
   // Not optimized for large arrays.

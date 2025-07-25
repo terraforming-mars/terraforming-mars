@@ -12,7 +12,7 @@ export class AnubisSecurities extends CorporationCard implements ICorporationCar
   constructor() {
     super({
       name: CardName.ANUBIS_SECURITIES,
-      tags: [Tag.MARS],
+      tags: [Tag.EARTH],
       startingMegaCredits: 42,
       initialActionText: 'Play a card, ignoring global requirements',
 
@@ -25,7 +25,7 @@ export class AnubisSecurities extends CorporationCard implements ICorporationCar
             eb.tr(1, {all}).text('Min.').corruption(1).asterix().startEffect.megacredits(2, {all});
           }).br;
           b.action('Discard ALL of your corruption and gain 6 M€ for each unit discarded.', (ab) => {
-            ab.text('X').corruption(1, {all}).asterix().startAction.megacredits(6, {all}).text('X');
+            ab.text('X').corruption(1).asterix().startAction.megacredits(6).text('X');
           });
         }),
       },

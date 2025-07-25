@@ -65,7 +65,7 @@ import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {copyAndClear, inplaceRemove, sum, toName} from '../common/utils/utils';
 import {PreludesExpansion} from './preludes/PreludesExpansion';
 import {ChooseCards} from './deferredActions/ChooseCards';
-import {UnderworldPlayerData} from './underworld/UnderworldData';
+import {UnderworldPlayerData} from '../common/underworld/UnderworldPlayerData';
 import {UnderworldExpansion} from './underworld/UnderworldExpansion';
 import {Counter} from './behavior/Counter';
 import {TRSource} from '../common/cards/TRSource';
@@ -148,8 +148,6 @@ export class Player implements IPlayer {
   public oceanBonus: number = constants.OCEAN_BONUS;
 
   // Custom cards
-  // Community Leavitt Station and Pathfinders Leavitt Station
-  public scienceTagCount: number = 0;
   // PoliticalAgendas Scientists P41
   public hasTurmoilScienceTagBonus: boolean = false;
   // Ecoline
@@ -481,10 +479,13 @@ export class Player implements IPlayer {
       requirementsBonus += 2;
     }
 
+    requirementsBonus += UnderworldExpansion.getGlobalParameterRequirementBonus(this, parameter);
+
     return requirementsBonus;
   }
 
   public onGlobalParameterIncrease(parameter: GlobalParameter, steps: number): void {
+    // Tracks this player's contributition to global parmeters for end-of-game reporting.
     this.globalParameterSteps[parameter] += steps;
   }
 
@@ -563,15 +564,6 @@ export class Player implements IPlayer {
 
   public getResourceCount(resource: CardResource): number {
     return sum(this.getCardsWithResources(resource).map((card) => card.resourceCount));
-  }
-
-  public runInput(input: InputResponse, pi: PlayerInput): void {
-    const result = pi.process(input, this);
-    this.defer(result, Priority.DEFAULT);
-  }
-
-  public getAvailableBlueActionCount(): number {
-    return this.getPlayableActionCards().length;
   }
 
   public getPlayableActionCards(): Array<ICard & IActionCard> {
@@ -657,15 +649,22 @@ export class Player implements IPlayer {
     const cards = copyAndClear(this.draftedCards);
 
     const chooseCardsToBuy = () => {
-      return new ChooseCards(this, cards, {paying: true, keepMax: selectable}).execute();
-    };
-
-    const buyDraftedCards = () => {
       // TODO(kberg): Using .execute to rely on directly calling setWaitingFor is not great.
       // It's because all players is drafting at the same time. Once again, the server isn't ideal
       // when it comes to handling multiple players at once.
-      const action = chooseCardsToBuy();
-      this.setWaitingFor(action, () => this.game.playerIsFinishedWithResearchPhase(this));
+      const action = new ChooseCards(this, cards, {paying: true, keepMax: selectable}).execute();
+
+      // ChooseCards.execute returns an action with an andThen set. That means
+      // this has to wrap it around and do clever things.
+      // Fortunately it's callback returns void, so this doesn't have to pass
+      // something back another PlayerInput.
+      const saved = action.cb;
+      action.cb = ((response) => {
+        saved(response);
+        this.game.playerIsFinishedWithResearchPhase(this);
+        return undefined;
+      });
+      return action;
     };
 
     if (this.game.underworldDraftEnabled &&
@@ -677,18 +676,19 @@ export class Player implements IPlayer {
       options.options.push(chooseCardsToBuy());
       options.options.push(new SelectCard('Spend 1 corruption to replace 2 cards', 'Spend Corruption', cards, {min: 2, max: 2}).andThen((discards) => {
         this.game.projectDeck.discard(...discards);
+        UnderworldExpansion.loseCorruption(this, 1, {log: true});
         for (const discard of discards) {
           inplaceRemove(cards, discard);
         }
         // Drawing from the top to maintain seeds.
         cards.push(...this.game.projectDeck.drawN(this.game, 2, 'top'));
-        buyDraftedCards();
+        this.setWaitingFor(chooseCardsToBuy());
 
         return undefined;
       }));
       this.setWaitingFor(options);
     } else {
-      buyDraftedCards();
+      this.setWaitingFor(chooseCardsToBuy());
     }
   }
 
@@ -1638,7 +1638,7 @@ export class Player implements IPlayer {
     this.waitingForCb = undefined;
     try {
       this.timer.stop();
-      this.runInput(input, waitingFor);
+      this.defer(waitingFor.process(input, this));
       waitingForCb();
     } catch (err) {
       this.setWaitingFor(waitingFor, waitingForCb);
@@ -1752,7 +1752,8 @@ export class Player implements IPlayer {
       oceanBonus: this.oceanBonus,
       // Custom cards
       // Leavitt Station.
-      scienceTagCount: this.scienceTagCount,
+      scienceTagCount: this.tags.extraScienceTags,
+      plantTagCount: this.tags.extraPlantTags,
       // Ecoline
       plantsNeededForGreenery: this.plantsNeededForGreenery,
       // Lawsuit
@@ -1821,7 +1822,8 @@ export class Player implements IPlayer {
       titanium: d.titaniumProduction,
     }));
     player.removingPlayers = d.removingPlayers;
-    player.scienceTagCount = d.scienceTagCount;
+    player.tags.extraScienceTags = d.scienceTagCount;
+    player.tags.extraPlantTags = d.plantTagCount ?? 0;
     player.steel = d.steel;
     player.steelValue = d.steelValue;
     player.terraformRating = d.terraformRating;
@@ -1866,8 +1868,13 @@ export class Player implements IPlayer {
     player.timer = Timer.deserialize(d.timer);
 
     if (d.underworldData !== undefined) {
-      // TODO(kberg): Remove the {tokens, ...} wrapper by 2025-10-01
-      player.underworldData = {tokens: [], ...d.underworldData};
+      const dunerworldData = d.underworldData;
+      // TODO(kberg): Remove the wrapper by 2025-10-01
+      player.underworldData = {
+        tokens: (dunerworldData.tokens ?? []).map((e) => typeof(e) === 'object' ? e : {token: e, shelter: false, active: false}),
+        corruption: dunerworldData.corruption,
+        activeBonus: dunerworldData.temperatureBonus ?? dunerworldData.activeBonus,
+      };
     }
     if (d.alliedParty !== undefined) {
       // TODO(kberg): Remove after 2025-08-01

@@ -48,17 +48,13 @@ export class CardRequirements {
     if (tags.length > 1 && !player.tags.playerHas(tags)) {
       return false;
     }
-    let result = true;
     for (const requirement of this.requirements) {
       const satisfies = requirement.satisfies(player, card);
       if (satisfies === false) {
         return false;
       }
-      if (typeof(satisfies) === 'object') {
-        result = satisfies;
-      }
     }
-    return result;
+    return true;
   }
 
   public static compile(descriptors: Array<CardRequirementDescriptor> | undefined): CardRequirements {

@@ -281,11 +281,22 @@ export class Executor implements BehaviorExecutor {
     if (behavior.underworld !== undefined) {
       const underworld = behavior.underworld;
       if (underworld.identify !== undefined) {
-        if (UnderworldExpansion.identifiableSpaces(player).length === 0) {
+        const count = typeof(underworld.identify) === 'number' ? underworld.identify : underworld.identify.count;
+        if (UnderworldExpansion.canIdentifyN(player, count) === false) {
+          return false;
+        }
+        // Right now identifies are always more than excavates, so there's no reason to count excavates.
+      }
+
+      if (underworld.excavate !== undefined) {
+        const excavate = underworld.excavate;
+        const count = typeof(excavate) === 'number' ? excavate : ctx.count(excavate.count);
+        if (UnderworldExpansion.canExcavateN(player, count) === false) {
           return false;
         }
       }
     }
+
     return true;
   }
 
@@ -443,10 +454,11 @@ export class Executor implements BehaviorExecutor {
 
     if (behavior.tr !== undefined) {
       const count = ctx.count(behavior.tr);
+      const log = typeof(behavior.tr) === 'object';
       if (count >= 0) {
-        player.increaseTerraformRating(count);
+        player.increaseTerraformRating(count, {log: log});
       } else {
-        player.decreaseTerraformRating(-count);
+        player.decreaseTerraformRating(-count, {log: log});
       }
     }
     const addResources = behavior.addResources;
@@ -606,9 +618,9 @@ export class Executor implements BehaviorExecutor {
       const identify = underworld.identify;
       if (identify !== undefined) {
         if (typeof(identify) === 'number') {
-          player.game.defer(new IdentifySpacesDeferred(player, ctx.count(identify)));
+          player.game.defer(new IdentifySpacesDeferred(player, identify));
         } else {
-          const deferred = player.game.defer(new IdentifySpacesDeferred(player, ctx.count(identify.count)));
+          const deferred = player.game.defer(new IdentifySpacesDeferred(player, identify.count));
           const claim = identify.claim ?? 0;
           if (claim > 0) {
             deferred.andThen((spaces) => {

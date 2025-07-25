@@ -22,9 +22,9 @@ export class MicroprobingTechnology extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U22',
+        cardNumber: 'U022',
         renderData: CardRenderer.builder((b) => {
-          b.plants(3, {digit}).identify(3, {digit}).claim(1);
+          b.plants(3, {digit}).identify(2, {digit}).claim(1);
         }),
         description: 'Requires 1 science tag. Gain 3 plants. Identify 2 underground resources. Claim 1 of them.',
       },

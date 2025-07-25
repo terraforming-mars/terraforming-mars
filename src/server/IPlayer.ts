@@ -28,7 +28,7 @@ import {VictoryPointsBreakdown} from '../common/game/VictoryPointsBreakdown';
 import {Color} from '../common/Color';
 import {OrOptions} from './inputs/OrOptions';
 import {Stock} from './player/Stock';
-import {UnderworldPlayerData} from './underworld/UnderworldData';
+import {UnderworldPlayerData} from '../common/underworld/UnderworldPlayerData';
 import {AlliedParty} from '../common/turmoil/Types';
 import {IParty} from './turmoil/parties/IParty';
 import {Message} from '../common/logs/Message';
@@ -130,9 +130,6 @@ export interface IPlayer {
   oceanBonus: number;
 
   // Custom cards
-  // Community Leavitt Station and Pathfinders Leavitt Station
-  // Additional science tags (currently only granted from placing colonies)
-  scienceTagCount: number;
   // PoliticalAgendas Scientists P41
   hasTurmoilScienceTagBonus: boolean;
   // Ecoline
@@ -198,7 +195,10 @@ export interface IPlayer {
   getVictoryPoints(): VictoryPointsBreakdown;
   plantsAreProtected(): boolean;
   alloysAreProtected(): boolean;
-  isProtected(resource: Resource): boolean;
+  /**
+   * Return true when |resource| cannot be stolen from this player.
+   */
+  isProtected(resource: Resource | keyof Units): boolean;
   /**
    * Returns true when this player can lose |minQuantity| units of production.
    *
@@ -293,8 +293,6 @@ export interface IPlayer {
    * Count all the resources of a given type in the tableau.
    */
   getResourceCount(resource: CardResource): number;
-  runInput(input: InputResponse, pi: PlayerInput): void;
-  getAvailableBlueActionCount(): number;
   getPlayableActionCards(): Array<ICard & IActionCard>;
   runProductionPhase(): void;
   finishProductionPhase(): void;
@@ -344,6 +342,7 @@ export interface IPlayer {
   setWaitingFor(input: PlayerInput, cb?: () => void): void;
   setWaitingForSafely(input: PlayerInput, cb?: () => void): void;
   serialize(): SerializedPlayer;
+
   /** Shorthand for deferring evaluating a PlayerInput */
   defer(input: PlayerInput | undefined | void | (() => PlayerInput | undefined | void), priority?: Priority): void;
   setAlliedParty(party: IParty): void;

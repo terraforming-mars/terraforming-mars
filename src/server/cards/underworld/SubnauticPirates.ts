@@ -20,7 +20,7 @@ export class SubnauticPirates extends Card implements IProjectCard {
       requirements: [{undergroundTokens: 1}, {corruption: 1}],
 
       metadata: {
-        cardNumber: 'U11',
+        cardNumber: 'U011',
         renderData: CardRenderer.builder((b) => {
           b.text('STEAL').megacredits(7).asterix();
         }),
@@ -45,7 +45,7 @@ export class SubnauticPirates extends Card implements IProjectCard {
 
   public override bespokeCanPlay(player: IPlayer) {
     if (player.game.isSoloMode()) {
-      return true;
+      return false;
     }
     return this.availableTargets(player).length > 0;
   }

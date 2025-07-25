@@ -18,7 +18,7 @@ export class PlanetaryRightsBuyout extends Card implements IProjectCard {
       victoryPoints: -3,
 
       metadata: {
-        cardNumber: 'U85',
+        cardNumber: 'U085',
         renderData: CardRenderer.builder((b) => {
           b.tr(7);
         }),

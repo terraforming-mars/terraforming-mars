@@ -23,7 +23,7 @@ export class ElectionSponsorship extends PreludeCard implements ICard {
       metadata: {
         cardNumber: 'UP14',
         renderData: CardRenderer.builder((b) => {
-          b.corruption().delegates(1).br;
+          b.corruption().delegates(2).br;
           b.plainText('Gain 1 corruption. Place 2 delegates in any party.').br;
 
           b.effect('You have +1 influence.', (eb) => eb.startEffect.influence());

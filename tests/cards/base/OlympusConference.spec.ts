@@ -11,6 +11,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Leavitt} from '../../../src/server/cards/community/Leavitt';
+import {HyperspaceDrivePrototype} from '../../../src/server/cards/underworld/HyperspaceDrivePrototype';
 
 describe('OlympusConference', () => {
   let card: OlympusConference;
@@ -134,5 +135,20 @@ describe('OlympusConference', () => {
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
     expect(card.resourceCount).to.eq(1);
+  });
+
+  it('Allows for resource to be added first when Hyperspace Drive Prototype is played', () => {
+    player.playedCards.push(card);
+    card.resourceCount = 0;
+    const hyperspaceDrivePrototype = new HyperspaceDrivePrototype();
+    player.playCard(hyperspaceDrivePrototype);
+    runAllActions(game);
+
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+    game.deferredActions.pop();
+    orOptions.options[0].cb();
+
+    expect(card.resourceCount).to.eq(0);
+    expect(player.cardsInHand).has.lengthOf(1);
   });
 });

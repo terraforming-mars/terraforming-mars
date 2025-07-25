@@ -18,7 +18,7 @@ export class GeoscanSatellite extends Card implements IProjectCard {
       tags: [Tag.SCIENCE, Tag.SPACE],
 
       metadata: {
-        cardNumber: 'U02',
+        cardNumber: 'U002',
         renderData: CardRenderer.builder((b) => {
           b.geoscan().claim(1);
         }),
@@ -36,6 +36,9 @@ export class GeoscanSatellite extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     player.game.defer(
       new IdentifySpacesDeferred(player, 1).andThen(([space]) => {
+        if (typeof space === 'string') {
+          throw new Error(`Expected space, got ${space}`);
+        }
         const claimableSpaces = [space];
         for (const adjacentSpace of player.game.board.getAdjacentSpaces(space)) {
           const identified = UnderworldExpansion.identify(player.game, adjacentSpace, player);

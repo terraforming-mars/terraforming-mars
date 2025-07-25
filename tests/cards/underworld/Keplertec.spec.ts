@@ -35,7 +35,6 @@ describe('Keplertec', () => {
     const card = new Keplertec();
     const [game, player] = testGame(2, {underworldExpansion: true});
 
-    expect(game.underworldData.tokens).has.length(89);
     const securityFleet = new SecurityFleet();
     player.playedCards.push(card, securityFleet, new Tardigrades());
     player.titanium = 1;
@@ -60,7 +59,7 @@ describe('Keplertec', () => {
     // Preload with reliable tokens, first one is draw a card.
     game.underworldData.tokens.push('card1');
     const savedTokens = [...game.underworldData.tokens];
-    expect(game.underworldData.tokens).has.length(90);
+    expect(game.underworldData.tokens).has.length(92);
 
     player.addResourceTo(card, 1);
     runAllActions(game);
@@ -69,15 +68,17 @@ describe('Keplertec', () => {
 
     expect(orOptions.options.length).eq(4);
     expect(player.cardsInHand).has.length(0);
-    expect(game.underworldData.tokens).has.length(86);
+    expect(game.underworldData.tokens).has.length(88);
 
     orOptions.options[0].cb();
 
     runAllActions(game);
 
     expect(player.cardsInHand).has.length(1);
-    expect(player.underworldData.tokens).deep.eq(['card1']);
-    expect(game.underworldData.tokens).has.length(89);
+    expect(player.underworldData.tokens).deep.eq([
+      {'active': false, 'shelter': false, 'token': 'card1'},
+    ]);
+    expect(game.underworldData.tokens).has.length(91);
     expect(oneWayDifference(savedTokens, game.underworldData.tokens)).deep.eq(['card1']);
 
     runAllActions(game);
@@ -103,7 +104,9 @@ describe('Keplertec', () => {
     orOptions.options[0].cb();
 
     expect(player.cardsInHand).has.length(1);
-    expect(player.underworldData.tokens).deep.eq(['card1']);
+    expect(player.underworldData.tokens).deep.eq([
+      {'active': false, 'shelter': false, 'token': 'card1'},
+    ]);
     expect(oneWayDifference(savedTokens, game.underworldData.tokens)).deep.eq(['card1']);
 
     // Preload again with reliable token.
@@ -114,7 +117,10 @@ describe('Keplertec', () => {
 
     orOptions2.options[0].cb();
 
-    expect(player.underworldData.tokens).deep.eq(['card1', 'card1']);
+    expect(player.underworldData.tokens).deep.eq([
+      {'active': false, 'shelter': false, 'token': 'card1'},
+      {'active': false, 'shelter': false, 'token': 'card1'},
+    ]);
     expect(oneWayDifference(savedTokens, game.underworldData.tokens)).deep.eq(['card1']);
     expect(player.cardsInHand).has.length(2);
 

@@ -1,16 +1,12 @@
 import {expect} from 'chai';
 import {GaiaCity} from '../../../src/server/cards/underworld/GaiaCity';
 import {testGame} from '../../TestGame';
-import {cast, churn, setRulingParty} from '../../TestingUtils';
+import {addCity, cast, churn} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Space} from '../../../src/server/boards/Space';
-import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {BoardName} from '../../../src/common/boards/BoardName';
-import {SpaceName} from '../../../src/common/boards/SpaceName';
-import {HELLAS_BONUS_OCEAN_COST} from '../../../src/common/constants';
-import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {intersection} from '../../../src/common/utils/utils';
 
 describe('GaiaCity', () => {
   const canPlayRuns = [
@@ -56,7 +52,7 @@ describe('GaiaCity', () => {
     const card = new GaiaCity();
     const [/* game */, player] = testGame(2);
 
-    player.production.override({energy: 1});
+    player.production.energy = 1;
 
     const [space1, space2] = player.game.board.getAvailableSpacesForCity(player);
     space1.excavator = player;
@@ -64,49 +60,47 @@ describe('GaiaCity', () => {
 
     const selectSpace = cast(churn(card.play(player), player), SelectSpace);
 
-    expect(player.production.megacredits).eq(2);
+    expect(player.production.plants).eq(2);
     expect(player.production.energy).eq(0);
 
     expect(selectSpace.spaces).to.have.members([space1, space2]);
 
-    space1.bonus = [SpaceBonus.PLANT];
     const space = selectSpace.spaces[0];
     selectSpace.cb(space);
 
     expect(space.tile?.tileType).eq(TileType.CITY);
-    expect(player.plants).eq(2);
   });
 
-  it('Manages double placement costs', () => {
+  it('play next to another city', () => {
     const card = new GaiaCity();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true, boardName: BoardName.HELLAS});
+    const [/* game */, player, player2] = testGame(2);
+    const board = player.game.board;
 
-    player.production.override({energy: 1});
+    player.production.energy = 1;
 
-    const hellasOceanSpace = player.game.board.getSpaceOrThrow(SpaceName.HELLAS_OCEAN_TILE);
-    hellasOceanSpace.excavator = player;
+    const [firstCity] = board.getAvailableSpacesForCity(player);
+    addCity(player, firstCity.id);
+    const landSpacesNextToCity = intersection(
+      board.getAdjacentSpaces(firstCity),
+      board.getAvailableSpacesOnLand(player),
+    );
 
-    player.megaCredits = card.cost + HELLAS_BONUS_OCEAN_COST + HELLAS_BONUS_OCEAN_COST - 1;
-    expect(card.canPlay(player)).is.false;
+    const nextCity = landSpacesNextToCity[0];
+    nextCity.excavator = player;
 
-    player.megaCredits++;
-    expect(card.canPlay(player)).is.true;
-  });
+    // This space will not be eligible because someone else excavated it.
+    landSpacesNextToCity[1].excavator = player2;
 
-  it('Manages double placement and Reds costs', () => {
-    const card = new GaiaCity();
-    const [game, player] = testGame(2, {underworldExpansion: true, turmoilExtension: true, boardName: BoardName.HELLAS});
-    setRulingParty(game, PartyName.REDS);
+    expect(board.getAvailableSpacesForCity(player)).does.not.include([nextCity]);
 
-    player.production.override({energy: 1});
+    const selectSpace = cast(churn(card.play(player), player), SelectSpace);
 
-    const hellasOceanSpace = player.game.board.getSpaceOrThrow(SpaceName.HELLAS_OCEAN_TILE);
-    hellasOceanSpace.excavator = player;
+    expect(selectSpace.spaces).deep.eq([nextCity]);
 
-    player.megaCredits = card.cost + HELLAS_BONUS_OCEAN_COST + HELLAS_BONUS_OCEAN_COST + 6 - 1;
-    expect(card.canPlay(player)).is.false;
+    const space = selectSpace.spaces[0];
+    selectSpace.cb(space);
 
-    player.megaCredits++;
-    expect(card.canPlay(player)).is.true;
+    expect(space.tile?.tileType).eq(TileType.CITY);
+    expect(space.excavator).is.undefined;
   });
 });

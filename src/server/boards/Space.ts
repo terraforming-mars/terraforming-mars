@@ -25,6 +25,7 @@ export type Space = {
   /** The bonuses granted to players when placing tiles NEXT TO this space. */
   adjacency?: AdjacencyBonus,
 
+  // TODO(kberg): Rename to undergroundResource or undergroundResourceToken
   /** Optional underworld expansion resource token. */
   undergroundResources?: UndergroundResourceToken;
   /** Optional underworld player who excavated this resource token. */

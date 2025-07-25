@@ -17,7 +17,7 @@ export class UndergroundSettlement extends PreludeCard {
       metadata: {
         cardNumber: 'UP07',
         renderData: CardRenderer.builder((b) => {
-          b.city().geoscan().asterix().claim(1);
+          b.city().geoscan().asterix().br.claim(1);
         }),
         description: 'Place a city. Then identify the underground resources in all adjacent spaces. Claim 1 of them.',
       },

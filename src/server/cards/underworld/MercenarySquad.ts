@@ -21,7 +21,7 @@ export class MercenarySquad extends Card implements IProjectCard {
       requirements: {corruption: 1},
 
       metadata: {
-        cardNumber: 'U83',
+        cardNumber: 'U083',
         renderData: CardRenderer.builder((b) => {
           b.minus().wild(2, {all});
         }),

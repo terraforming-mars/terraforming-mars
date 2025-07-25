@@ -21,7 +21,7 @@ export class NarrativeSpin extends Card implements IProjectCard {
       victoryPoints: -1,
 
       metadata: {
-        cardNumber: 'U37',
+        cardNumber: 'U037',
         renderData: CardRenderer.builder((b) => {
           b.corruption(2);
         }),

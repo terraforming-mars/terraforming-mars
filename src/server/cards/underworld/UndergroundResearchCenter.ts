@@ -24,9 +24,10 @@ export class UndergroundResearchCenter extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U62',
+        cardNumber: 'U062',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.minus().energy(1)).excavate().cards(2).asterix();
+          // TODO(kberg): can this look like an any tag superscript thing?
+          b.excavate().cards(1).asterix();
         }),
 
         description: 'Requires you have 4 underground tokens. ' +

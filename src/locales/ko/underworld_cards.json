@@ -62,7 +62,7 @@
 "Gain 1 plant for each underground token you own.": "",
 
 "Gaia City": "",
-"Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (incluing adjacencies.) Regular placement restriction still apply.": "",
+"// Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (incluing adjacencies.) Regular placement restriction still apply.": "",
 
 "Geological Survey": "",
 "Identify 3 underground resources. Claim 1 of them.": "",
@@ -130,7 +130,7 @@
 "Spend 1 microbe from any card to excavate an underground resource and gain 3 plants. Add 1 data resource to ANOTHER card.": "",
 
 "Microgravimetry": "",
-"Action: Spend any amount of energy to identify that many underground resources on the board and put the same number of data on this card.": "",
+"// Action: Spend any amount of energy to identify that many underground resources on the board and put the same number of data on this card.": "",
 
 "Microprobing Technology": "",
 "Requires 1 science tag. Gain 3 plants. Identify 2 underground resources. Claim 1 of them.": "",
@@ -140,7 +140,7 @@
 "Action: Spend 4 data resources on this card to draw a card.": "",
 
 "Monopoly": "",
-"Requires 3 corruption. Choose a standard production type. Steal 1 unit of that production from EACH OTHER player. They can block this with corruption.": "",
+"// Requires 3 corruption. Choose a standard production type. Steal 1 unit of that production from EACH OTHER player. They can block this with corruption.": "",
 
 "Nanofoundry": "",
 "Requires 2 science tags. Reduce your energy production 5 steps. Draw 1 card for every power tag you have, including this.": "",
@@ -213,15 +213,15 @@
 "// At the end of this generation only, during the production phase, gain 12 M€.": "",
 
 "Space Privateers": "",
-"Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "",
+"// Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "",
 "Effect: If 1 or more targets block this with corruption, remove 1 fighter from here.": "",
 "Solo: Gain 2 M€ and remove 1 fighter from this card.": "",
-"Requires 3 corruption. Put 3 fighter resources on this card.": "",
+"// Requires 3 corruption. Put 3 fighter resources on this card.": "",
 
 "Space Wargames": "",
 "Action: Spend 1 titanium to gain 1 fighter resource to this card.": "",
 "Action: Spend 1 fighter resource on this card to gain 3 M€ for each fighter resource on this card INCLUDING THE PAID FIGHTER.": "",
-"Put 1 fighter resource on this card. 1VP for each Jovian tag you have.": "",
+"Put 1 fighter resource on this card. 1 VP for each Jovian tag you have.": "",
 
 "Staged Protests": "",
 "Awards and Milestones": "",

@@ -11,6 +11,7 @@ import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred
 import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 import {TITLES} from '../../inputs/titles';
+import {all} from '../Options';
 
 export class InvestigativeJournalism extends Card implements IProjectCard, IActionCard {
   constructor() {
@@ -27,10 +28,10 @@ export class InvestigativeJournalism extends Card implements IProjectCard, IActi
       },
 
       metadata: {
-        cardNumber: 'U87',
+        cardNumber: 'U087',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 5 M€ and remove 1 corruption from ANOTHER player with more corruption than you to add 1 journalism resource on this card.',
-            (ab) => ab.megacredits(5).corruption(1).asterix().startAction.resource(CardResource.JOURNALISM)).br;
+            (ab) => ab.megacredits(5).corruption(1, {all}).asterix().startAction.resource(CardResource.JOURNALISM)).br;
           b.production((pb) => pb.megacredits(-1));
         }),
         description: 'Decrease your M€ production 1 step. 1 VP per journalism resource on this card.',

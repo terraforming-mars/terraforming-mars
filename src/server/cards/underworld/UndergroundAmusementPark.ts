@@ -21,7 +21,7 @@ export class UndergroundAmusementPark extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U19',
+        cardNumber: 'U019',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1));
         }),

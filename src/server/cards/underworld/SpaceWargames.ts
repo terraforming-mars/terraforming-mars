@@ -40,7 +40,7 @@ export class SpaceWargames extends ActionCard implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U48',
+        cardNumber: 'U048',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 titanium to gain 1 fighter resource to this card.',
             (ab) => ab.titanium(1).startAction.resource(CardResource.FIGHTER)).br;
@@ -48,7 +48,7 @@ export class SpaceWargames extends ActionCard implements IProjectCard {
             (ab) => ab.or().resource(CardResource.FIGHTER).startAction.megacredits(3, {digit}).slash().resource(CardResource.FIGHTER).asterix()).br;
           b.resource(CardResource.FIGHTER);
         }),
-        description: 'Put 1 fighter resource on this card. 1VP for each Jovian tag you have.',
+        description: 'Put 1 fighter resource on this card. 1 VP for each Jovian tag you have.',
       },
     });
   }

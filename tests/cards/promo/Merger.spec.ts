@@ -428,7 +428,7 @@ describe('Merger', () => {
     expect(player.actionsTakenThisRound).eq(1);
 
     // first player is still active player;
-    expect(game.activePlayer).eq(player.id);
+    expect(game.activePlayer.id).eq(player.id);
     expect(player.getWaitingFor()).is.not.undefined;
     expect(player2.getWaitingFor()).is.undefined;
   });

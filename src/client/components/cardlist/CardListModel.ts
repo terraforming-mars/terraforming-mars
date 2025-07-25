@@ -2,9 +2,25 @@ import {Tag} from '@/common/cards/Tag';
 import {CardType} from '@/common/cards/CardType';
 import {GameModule, GAME_MODULES} from '@/common/cards/GameModule';
 import {SearchIndex} from '@/client/components/cardlist/SearchIndex';
+import {CardResource} from '@/common/CardResource';
 
 export type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards' | 'agendas';
-type TagOption = Tag | 'none';
+export type TagOption = Tag | 'none';
+export type ResourceOption = CardResource | 'none';
+
+export type CardListModel = {
+  filterText: string,
+  expansions: Record<GameModule, boolean>,
+  types: Record<TypeOption, boolean>,
+  tags: Record<TagOption, boolean>,
+  resources: Record<ResourceOption, boolean>,
+  searchIndex: SearchIndex,
+  namesOnly: boolean,
+  showAdvanced: boolean;
+  sortOrder: 'a' | '1';
+  showMetadata: boolean;
+  vps: number; // 0: all, 1: VPs, 2: no vps
+}
 
 const MODULE_ABBREVIATIONS: Record<GameModule, string> = {
   base: 'b',
@@ -62,18 +78,6 @@ const TAG_ABBREVIATIONS: Record<TagOption, string> = {
   [Tag.CRIME]: 'h',
 };
 
-export type CardListModel = {
-  filterText: string,
-  expansions: Record<GameModule, boolean>,
-  types: Record<TypeOption, boolean>,
-  tags: Record<TagOption, boolean>,
-  searchIndex: SearchIndex,
-  namesOnly: boolean,
-  showAdvanced: boolean;
-  sortOrder: 'a' | '1';
-  showMetadata: boolean;
-}
-
 export function hashToModel(windowLocationHash: string): CardListModel {
   const model: CardListModel = {
     filterText: '',
@@ -130,9 +134,39 @@ export function hashToModel(windowLocationHash: string): CardListModel {
       clone: true,
       none: true,
     },
+    resources: {
+      none: true,
+      [CardResource.ANIMAL]: true,
+      [CardResource.MICROBE]: true,
+      [CardResource.FIGHTER]: true,
+      [CardResource.SCIENCE]: true,
+      [CardResource.FLOATER]: true,
+      [CardResource.ASTEROID]: true,
+      [CardResource.CAMP]: true,
+      [CardResource.PRESERVATION]: true,
+      [CardResource.DIRECTOR]: true,
+      [CardResource.DISEASE]: true,
+      [CardResource.GRAPHENE]: true,
+      [CardResource.HYDROELECTRIC_RESOURCE]: true,
+      [CardResource.RESOURCE_CUBE]: true,
+      [CardResource.DATA]: true,
+      [CardResource.SYNDICATE_FLEET]: true,
+      [CardResource.VENUSIAN_HABITAT]: true,
+      [CardResource.SPECIALIZED_ROBOT]: true,
+      [CardResource.SEED]: true,
+      [CardResource.AGENDA]: true,
+      [CardResource.ORBITAL]: true,
+      [CardResource.CLONE_TROOPER]: true,
+      [CardResource.TOOL]: true,
+      [CardResource.WARE]: true,
+      [CardResource.JOURNALISM]: true,
+      [CardResource.ACTIVIST]: true,
+      [CardResource.SUPPLY_CHAIN]: true,
+    },
     searchIndex: SearchIndex.create(),
     namesOnly: true,
     showAdvanced: false,
+    vps: 0,
     sortOrder: 'a',
     showMetadata: true,
   };

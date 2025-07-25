@@ -115,9 +115,7 @@ export function any(points: number): CardRenderDynamicVictoryPoints {
 export function undergroundShelters(): CardRenderDynamicVictoryPoints {
   return {
     item: new CardRenderItem(CardRenderItemType.UNDERGROUND_SHELTERS),
+    target: 1,
     points: 1,
-    target: 3,
-    asterisk: true,
-    asFraction: true,
   };
 }

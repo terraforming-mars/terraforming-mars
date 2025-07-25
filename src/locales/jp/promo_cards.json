@@ -125,7 +125,7 @@
   "Asteroid Deflection System": "微天体斥退システム",
   "Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.": "アクション: デッキトップを1枚確認し捨てる. そのカードに宇宙タグがあればこのカード上に1小惑星追加.",
   "opponents may not remove your plants": "除去無効：あなたの植物",
-  "Decrease your energy production 1 step. 1VP per asteroid on this card.": "電力産出-1. このカード上の1小惑星毎に1VP",
+  "Decrease your energy production 1 step. 1 VP per asteroid on this card.": "電力産出-1. このカード上の1小惑星毎に1VP",
 
   "Jovian Embassy": "木星大使館",
   "Raise your TR 1 step.": "TR+1段階.",
@@ -153,7 +153,7 @@
 
   "Asteroid Hollowing": "小惑星中空化",
   "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "アクション：1チタンを支払い、このカード上に小惑星追加し、MC産出+1.",
-  "1VP for each 2 asteroids on this card.": "このカード上の2小惑星毎に1VP.",
+  "1 VP for each 2 asteroids on this card.": "このカード上の2小惑星毎に1VP.",
 
   "Advertising": "広告戦略",
   "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "効果：元のプレイコスト20MC以上のカードをプレイ時、MC産出+1.",

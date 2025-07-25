@@ -21,7 +21,7 @@ export class OffWorldTaxHaven extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U10',
+        cardNumber: 'U010',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(5));
         }),

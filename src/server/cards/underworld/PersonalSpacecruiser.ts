@@ -25,11 +25,11 @@ export class PersonalSpacecruiser extends ActionCard implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U51',
+        cardNumber: 'U051',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 energy to gain 2 M€ for each corruption resource you have.',
-            (ab) => ab.energy(1).startEffect.megacredits(2).slash().corruption()).br;
-          b.resource(CardResource.FIGHTER).asterix().corruption(1).br;
+            (ab) => ab.energy(1).startAction.megacredits(2).slash().corruption()).br;
+          b.corruption(1).resource(CardResource.FIGHTER).asterix().br;
         }),
         description: 'Gain 1 corruption. Put 1 fighter on ANY card.',
       },

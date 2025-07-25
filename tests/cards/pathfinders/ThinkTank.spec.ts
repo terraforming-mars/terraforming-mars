@@ -125,7 +125,7 @@ describe('ThinkTank', () => {
     expect(thinkTank.resourceCount).eq(1);
   });
 
-  it('effect ', () => {
+  it('effect', () => {
     // Breathing filters requires 7% oxygen
     const breathingFilters = new BreathingFilters();
     player.cardsInHand.push(breathingFilters);

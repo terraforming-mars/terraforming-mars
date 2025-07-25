@@ -23,7 +23,7 @@ export class TitanManufacturingColony extends ActionCard implements IProjectCard
       },
 
       metadata: {
-        cardNumber: 'U44',
+        cardNumber: 'U044',
         renderData: CardRenderer.builder((b) => {
           b.effect('Whenever you play a Jovian tag, (including this one), add 1 tool resource on this card.',
             (ab) => ab.tag(Tag.JOVIAN).startEffect.resource(CardResource.TOOL)).br;

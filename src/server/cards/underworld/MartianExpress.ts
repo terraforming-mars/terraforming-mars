@@ -18,7 +18,7 @@ export class MartianExpress extends Card implements IActionCard {
       resourceType: CardResource.WARE,
 
       metadata: {
-        cardNumber: 'U78',
+        cardNumber: 'U078',
         renderData: CardRenderer.builder((b) => {
           b.effect('This card can receive any resource that can be placed on ANY card. Resources placed here get converted to wares resources.',
             (ab) => ab.wild(1).asterix().startEffect.resource(CardResource.WARE)).br;

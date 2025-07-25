@@ -18,7 +18,7 @@ export class Racketeering extends Card implements IProjectCard {
       requirements: {corruption: 1},
 
       metadata: {
-        cardNumber: 'U92',
+        cardNumber: 'U092',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1).slash().tag(Tag.CRIME).asterix());
         }),
@@ -29,7 +29,7 @@ export class Racketeering extends Card implements IProjectCard {
 
   public override bespokePlay(player: IPlayer) {
     // +1 for includes this.
-    const tags = player.tags.count(Tag.CRIME, 'raw-underworld') + 1;
+    const tags = player.tags.count(Tag.CRIME, 'raw-underworld') + player.tags.count(Tag.WILD) + 1;
     player.production.add(Resource.MEGACREDITS, tags, {log: true});
     return undefined;
   }

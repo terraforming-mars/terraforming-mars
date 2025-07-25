@@ -22,7 +22,7 @@ export class UndergroundSmugglingRing extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U28',
+        cardNumber: 'U028',
         renderData: CardRenderer.builder((b) => {
           b.corruption(1).wild(2, {digit}).asterix();
         }),

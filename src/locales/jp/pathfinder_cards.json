@@ -80,7 +80,7 @@
 
   "Economic Espionage": "産業スパイ",
   "(Action: Spend 2 M€ to Add 1 data to ANY card.)": "(アクション：2MC支払い、1データ獲得.)",
-  "(1VP for every 3 data here.)": "(このカード上の3データ毎に1VP.)",
+  "1 VP for every 3 data here.": "(このカード上の3データ毎に1VP.)",
 
   "Economic Help": "経済支援",
   "(Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. Increase your M€ production 1 step)": "(影響度が最も低い惑星の影響度+3. 該当するものが複数ある場合、その全ての影響度+2. MC産出+1.)",

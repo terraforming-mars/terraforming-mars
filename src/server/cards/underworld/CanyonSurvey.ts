@@ -6,11 +6,10 @@ import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 import {digit} from '../Options';
 
-// TODO(kberg): Rename to Canyon Survey.
-export class GeologicalSurvey extends Card implements IProjectCard {
+export class CanyonSurvey extends Card implements IProjectCard {
   constructor() {
     super({
-      name: CardName.GEOLOGICAL_SURVEY_UNDERWORLD,
+      name: CardName.CANYON_SURVEY,
       type: CardType.EVENT,
       cost: 4,
       tags: [Tag.SCIENCE],
@@ -20,7 +19,7 @@ export class GeologicalSurvey extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U81',
+        cardNumber: 'U081',
         renderData: CardRenderer.builder((b) => {
           b.identify(3, {digit}).claim(1);
         }),

@@ -10,6 +10,7 @@ import {Resource} from '../Resource';
 import {PartyName} from '../turmoil/PartyName';
 import {Agenda} from '../turmoil/Types';
 import {Tag} from '../cards/Tag';
+import {UnderworldPlayerData} from '../underworld/UnderworldPlayerData';
 
 export interface ViewModel {
   game: GameModel;
@@ -42,7 +43,6 @@ export type PublicPlayerModel = {
   citiesCount: number;
   coloniesCount: number;
   color: Color;
-  corruption: number,
   energy: number;
   energyProduction: number;
   fleetSize: number;
@@ -75,7 +75,7 @@ export type PublicPlayerModel = {
   titaniumProduction: number;
   titaniumValue: number;
   tradesThisGeneration: number;
-  undergroundTokens: number;
+  underworldData: UnderworldPlayerData,
   victoryPointsBreakdown: VictoryPointsBreakdown;
   victoryPointsByGeneration: ReadonlyArray<number>;
 }

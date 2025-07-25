@@ -8,7 +8,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {MoonMineStandardProject} from '../../../src/server/cards/moon/MoonMineStandardProject';
 import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectPaymentDeferred';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
-import {assertPlaceTile} from '../../assertions';
+import {assertPlaceMoonMine} from '../../assertions';
 import {TileType} from '../../../src/common/TileType';
 
 describe('MoonMineStandardProject', () => {
@@ -23,21 +23,34 @@ describe('MoonMineStandardProject', () => {
     card = new MoonMineStandardProject();
   });
 
-  it('can act', () => {
-    player.titanium = 1;
-    player.megaCredits = 19;
-    expect(player.canPlay(card)).is.false;
+  for (const run of [
+    {titanium: 0, mc: 20, expected: false},
+    {titanium: 1, mc: 19, expected: false},
+    {titanium: 1, mc: 20, expected: true},
+  ] as const) {
+    it('can act ' + JSON.stringify(run), () => {
+      player.titanium = run.titanium;
+      player.megaCredits = run.mc;
+      expect(card.canAct(player)).eq(run.expected);
+    });
+  }
 
-    player.titanium = 0;
-    player.megaCredits = 20;
-    expect(player.canPlay(card)).is.false;
-
-    player.titanium = 1;
-    player.megaCredits = 20;
-    expect(player.canPlay(card)).is.true;
-
-    // 2. Are there spaces on the moon for a Mine?
-  });
+  for (const run of [
+    {availableSpaces: 1, expected: true},
+    {availableSpaces: 0, expected: false},
+  ] as const) {
+    it('can act, available space ' + JSON.stringify(run), () => {
+      player.titanium = 1;
+      player.megaCredits = 20;
+      const moonData = MoonExpansion.moonData(player.game);
+      const spaces = [...moonData.moon.getAvailableSpacesForMine(player)];
+      while (spaces.length > run.availableSpaces) {
+        const space = spaces.pop();
+        space!.tile = {tileType: TileType.MOON_MINE};
+      }
+      expect(card.canAct(player)).eq(run.expected);
+    });
+  }
 
   it('has discount', () => {
     card.action(player);
@@ -63,7 +76,7 @@ describe('MoonMineStandardProject', () => {
     expect(player.production.steel).eq(1);
     expect(moonData.miningRate).eq(0);
 
-    assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_MINE);
+    assertPlaceMoonMine(player, player.popWaitingFor());
 
     expect(moonData.miningRate).eq(1);
     expect(player.terraformRating).eq(15);

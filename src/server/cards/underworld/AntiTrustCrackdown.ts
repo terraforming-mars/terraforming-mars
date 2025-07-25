@@ -20,7 +20,7 @@ export class AntiTrustCrackdown extends Card implements IProjectCard {
       requirements: {corruption: 0, max},
 
       metadata: {
-        cardNumber: 'U64',
+        cardNumber: 'U064',
         renderData: CardRenderer.builder((b) => {
           b.text('-2').corruption(1, {all}).asterix().br;
           b.plainText('Requires that you have no more than 0 corruption. ALL players lose 2 corruption each.');

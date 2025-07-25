@@ -10,7 +10,7 @@ export class GeothermalNetwork extends Card implements IProjectCard {
     super({
       type: CardType.AUTOMATED,
       name: CardName.GEOTHERMAL_NETWORK,
-      tags: [Tag.MARS, Tag.BUILDING],
+      tags: [Tag.BUILDING],
       cost: 14,
 
       requirements: {undergroundTokens: 3},
@@ -22,7 +22,7 @@ export class GeothermalNetwork extends Card implements IProjectCard {
       victoryPoints: 1,
 
       metadata: {
-        cardNumber: 'U24',
+        cardNumber: 'U024',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.heat(3));
         }),

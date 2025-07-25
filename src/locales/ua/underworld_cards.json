@@ -71,7 +71,7 @@
   "// Requires 1 corruption and 1 Earth tag. Gain 1 corruption.": "Вимагає 1 одиницю корупції та 1 символ Землі. Отримайте 1 одиницю корупції.",
   "Requires 2 Earth tags. Gain 1 corruption.": "Вимагає 2 символи Землі. Отримайте 1 одиницю корупції.",
   "Gaia City": "Місто Гаї",
-  "Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (including adjacencies.) Regular placement restriction still apply.": "Зменште ваше виробництво енергії на 1 крок і збільште ваше виробництво M€ на 2 кроки. Розмістіть місто на місці з маркером розкопок БУДЬ-ЯКОГО гравця. Його бонус за розміщення подвоюється (включаючи сусідність). Звичайні обмеження розміщення все ще застосовуються.",
+  "// Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (including adjacencies.) Regular placement restriction still apply.": "Зменште ваше виробництво енергії на 1 крок і збільште ваше виробництво M€ на 2 кроки. Розмістіть місто на місці з маркером розкопок БУДЬ-ЯКОГО гравця. Його бонус за розміщення подвоюється (включаючи сусідність). Звичайні обмеження розміщення все ще застосовуються.",
 
   "Geological Survey": "Геологічне дослідження",
   "// Add 1 data resource to ANOTHER card. Identify any 2 underground resources on Mars.": "Додайте 1 ресурс даних на ІНШУ карту. Визначте будь-які 2 підземні ресурси на Марсі.",
@@ -146,7 +146,7 @@
   "Spend 1 microbe from any card to excavate an underground resource and gain 3 plants. Add 1 data resource to ANOTHER card.": "Витратити 1 мікроб з будь-якої карти, щоб видобути підземний ресурс і отримати 3 рослини. Додайте 1 ресурс даних на ІНШУ карту.",
 
   "Microgravimetry": "Мікрогравіметрія",
-  "Action: Spend any amount of energy to identify that many underground resources on the board and put the same number of data on this card.": "Дія: Витратити будь-яку кількість енергії, щоб визначити таку ж кількість підземних ресурсів на дошці і покласти таку ж кількість даних на цю картку.",
+  "// Action: Spend any amount of energy to identify that many underground resources on the board and put the same number of data on this card.": "Дія: Витратити будь-яку кількість енергії, щоб визначити таку ж кількість підземних ресурсів на дошці і покласти таку ж кількість даних на цю картку.",
 
   "Microprobing Technology": "Мікроскопічна технологія",
   "// Requires 1 science tag. Gain 3 plants. Add 2 data to any card. Identify 3 underground resources.": "Вимагає 1 символ науки. Отримайте 3 рослини. Додайте 2 ресурси даних на будь-яку карту. Визначте 3 підземні ресурси.",
@@ -157,7 +157,7 @@
   "Action: Spend 4 data resources on this card to draw a card.": "Дія: Витратити 4 ресурси даних на цю картку, щоб взяти карту.",
 
   "Monopoly": "Монополія",
-  "Requires 3 corruption. Choose a standard production type. Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.": "Вимагає 3 одиниці корупції. Виберіть стандартний тип виробництва. Вкрадіть до 1 одиниці цього виробництва від КОЖНОГО ІНШОГО гравця. Вони можуть заблокувати це за допомогою корупції.",
+  "// Requires 3 corruption. Choose a standard production type. Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.": "Вимагає 3 одиниці корупції. Виберіть стандартний тип виробництва. Вкрадіть до 1 одиниці цього виробництва від КОЖНОГО ІНШОГО гравця. Вони можуть заблокувати це за допомогою корупції.",
 
   "Nanofoundry": "Наноливарня",
   "Requires 2 science tags. Reduce your energy production 5 steps. Draw 1 card for every power tag you have, including this.": "Вимагає 2 символи науки. Зменште ваше виробництво енергії на 5 кроків. Витягніть 1 карту за кожним символом енергії, який у вас є, включаючи цей.",
@@ -239,15 +239,15 @@
   "// At the end of this generation only, during the production phase, gain 12 M€.": "Тільки в кінці цього покоління, під час фази виробництва, отримайте 12 M€.",
 
   "Space Privateers": "Космічні пірати",
-  "Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "Дія: Якщо на цій картці є принаймні 1 одиниця ресурсу-борця, вкрадіть 2 M€ у КОЖНОГО ІНШОГО гравця.",
+  "// Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "Дія: Якщо на цій картці є принаймні 1 одиниця ресурсу-борця, вкрадіть 2 M€ у КОЖНОГО ІНШОГО гравця.",
   "Effect: If 1 or more targets block this with corruption, remove 1 fighter from here.": "Ефект: Якщо 1 або більше цілей блокують це за допомогою корупції, видаліть 1 одиницю ресурсу-борця звідси.",
   "Solo: Gain 2 M€ and remove 1 fighter from this card.": "Соло: Отримайте 2 M€ і видаліть 1 одиницю ресурсу-борця з цієї картки.",
-  "Requires 3 corruption. Put 3 fighter resources on this card.": "Вимагає 3 одиниці корупції. Покладіть 3 одиниці ресурсу-борця на цю картку.",
+  "// Requires 3 corruption. Put 3 fighter resources on this card.": "Вимагає 3 одиниці корупції. Покладіть 3 одиниці ресурсу-борця на цю картку.",
 
   "Space Wargames": "Космічні військові ігри",
   "Action: Spend 1 titanium to gain 1 fighter resource to this card.": "Дія: Витратити 1 одиницю титану, щоб отримати 1 одиницю ресурсу-борця на цю картку.",
   "Action: Spend 1 fighter resource on this card to gain 3 M€ for each fighter resource on this card INCLUDING THE PAID FIGHTER.": "Дія: Витратити 1 одиницю ресурсу-борця на цій картці, щоб отримати 3 M€ за кожну одиницю ресурсу-борця на цій картці, ВКЛЮЧАЮЧИ ОПЛАЧЕНОГО БОРЦЯ.",
-  "Put 1 fighter resource on this card. 1VP for each Jovian tag you have.": "Покладіть 1 одиницю ресурсу-борця на цю картку. 1 ПО за кожен символ Юпітера, який у вас є.",
+  "Put 1 fighter resource on this card. 1 VP for each Jovian tag you have.": "Покладіть 1 одиницю ресурсу-борця на цю картку. 1 ПО за кожен символ Юпітера, який у вас є.",
 
   "Staged Protests": "Сценічні протести",
   "Awards and Milestones": "Нагороди та віхи",

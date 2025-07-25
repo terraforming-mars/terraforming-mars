@@ -15,7 +15,7 @@ import {ClaimedToken} from '../underworld/UnderworldPlayerData';
 export type BaseInputModel = {
   title: string | Message;
   warning?: string | Message;
-  buttonLabel: string | Message;
+  buttonLabel: string;
 }
 
 export type AndOptionsModel = BaseInputModel & {

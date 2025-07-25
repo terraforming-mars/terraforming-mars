@@ -58,7 +58,7 @@ export class CorporateTheft extends Card implements IProjectCard {
         }
         options.options.push(new SelectOption(
           message('Steal 1 ${0} from ${1}', (b) => b.string(resource).player(target)),
-          message('Steal ${0}', (b) => b.string(resource)))
+          'Steal ' + resource)
           .andThen(() => {
             target.attack(player, resource, 1, {log: true, stealing: true});
             return undefined;
@@ -69,7 +69,7 @@ export class CorporateTheft extends Card implements IProjectCard {
       if (target.underworldData.corruption > 0) {
         options.options.push(new SelectOption(
           message('Steal 1 ${0} from ${1}', (b) => b.string('corruption').player(target)),
-          message('Steal ${0}', (b) => b.string('corruption')))
+          'Steal corruption')
           .andThen(() => {
             target.maybeBlockAttack(player, message('${0} corruption', (b) => b.number(1)), (proceed: boolean) => {
               if (proceed) {

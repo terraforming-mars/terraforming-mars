@@ -10,7 +10,7 @@ export class SelectOption extends BasePlayerInput<undefined> {
   public warnings: ReadonlyArray<Warning> | undefined = undefined;
   constructor(
     title: string | Message,
-    buttonLabel: string | Message = 'Confirm',
+    buttonLabel: string = 'Confirm',
     warnings: ReadonlyArray<Warning> | undefined = undefined,
   ) {
     super('option', title);

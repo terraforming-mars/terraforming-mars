@@ -22,8 +22,8 @@ describe('HiredRaiders', () => {
     const orOptions = cast(card.play(player), OrOptions);
     expect(orOptions.options).has.lengthOf(2);
     orOptions.options[0].cb();
-    expect(player2.megaCredits).to.eq(7);
-    expect(player.megaCredits).to.eq(13);
+    expect(player2.megaCredits).to.eq(6);
+    expect(player.megaCredits).to.eq(14);
   });
 
   it('Play, corruption', () => {
@@ -34,8 +34,8 @@ describe('HiredRaiders', () => {
     const orOptions = cast(card.play(player), OrOptions);
     expect(orOptions.options).has.lengthOf(2);
     orOptions.options[0].cb();
-    expect(player2.megaCredits).to.eq(3);
-    expect(player.megaCredits).to.eq(17);
+    expect(player2.megaCredits).to.eq(4);
+    expect(player.megaCredits).to.eq(16);
   });
 
   it('Works in solo', () => {
@@ -43,6 +43,6 @@ describe('HiredRaiders', () => {
 
     cast(card.play(player), undefined);
 
-    expect(player.megaCredits).to.eq(3);
+    expect(player.megaCredits).to.eq(4);
   });
 });

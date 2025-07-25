@@ -2,10 +2,9 @@ import {expect} from 'chai';
 import {Microgravimetry} from '../../../src/server/cards/underworld/Microgravimetry';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
-import {assertIsIdentificationAction} from '../../underworld/underworldAssertions';
+import {assertIsClaimAction, assertIsIdentificationAction} from '../../underworld/underworldAssertions';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
-import {SelectAmount} from '../../../src/server/inputs/SelectAmount';
 
 describe('Microgravimetry', () => {
   let card: Microgravimetry;
@@ -18,35 +17,32 @@ describe('Microgravimetry', () => {
     player.playedCards.push(card);
   });
 
-  it('canAct - no energy', () => {
-    expect(card.canAct(player)).is.false;
+  it('canAct', () => {
     player.energy = 1;
+    expect(card.canAct(player)).is.false;
+    player.energy = 2;
     expect(card.canAct(player)).is.true;
   });
 
-  it('action: 1 energy', () => {
-    player.energy = 1;
-    const selectAmount = cast(card.action(player), SelectAmount);
-    selectAmount.cb(1);
-    runAllActions(game);
-    assertIsIdentificationAction(player, player.popWaitingFor());
-    runAllActions(game);
-    cast(player.popWaitingFor(), undefined);
-    expect(card.resourceCount).eq(1);
-  });
+  it('action', () => {
+    player.energy = 2;
+    cast(card.action(player), undefined);
 
-  it('action: 3 energy', () => {
-    player.energy = 4;
-    const selectAmount = cast(card.action(player), SelectAmount);
-    selectAmount.cb(3);
+    expect(player.energy).eq(0);
+
     runAllActions(game);
     assertIsIdentificationAction(player, player.popWaitingFor());
+
     runAllActions(game);
     assertIsIdentificationAction(player, player.popWaitingFor());
+
     runAllActions(game);
     assertIsIdentificationAction(player, player.popWaitingFor());
+
+    runAllActions(game);
+    assertIsClaimAction(player, player.popWaitingFor());
+
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
-    expect(card.resourceCount).eq(3);
   });
 });

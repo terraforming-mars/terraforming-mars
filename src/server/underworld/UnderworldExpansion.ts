@@ -129,6 +129,17 @@ export class UnderworldExpansion {
     return spaces;
   }
 
+  public static canIdentifyN(player: IPlayer, count: number): boolean {
+    const tokens = player.game.underworldData.tokens.length;
+    // Optimization
+    if (tokens >= count) {
+      return true;
+    }
+
+    const spaces = this.identifiableSpaces(player).length;
+    return tokens + spaces >= count;
+  }
+
   /**
    * Identify the token at `space`, optionally trigger callbacks.
    *
@@ -223,6 +234,20 @@ export class UnderworldExpansion {
     return spaces;
   }
 
+  public static canExcavateN(player: IPlayer, count: number): boolean {
+    const tokens = player.game.underworldData.tokens.length;
+    // Optimization
+    if (tokens >= count) {
+      return true;
+    }
+
+    // Ignoring placement restrictions is acceptable since the player might have
+    // to choose spaces outside their excavatable area.
+    const spaces = this.excavatableSpaces(player, {ignorePlacementRestrictions: true}).length;
+    return tokens + spaces >= count;
+  }
+
+
   public static excavate(player: IPlayer, space: Space): UndergroundResourceToken {
     const game = player.game;
     validateUnderworldExpansion(game);
@@ -273,13 +298,18 @@ export class UnderworldExpansion {
       throw new Error('No available identification tokens');
     }
 
-    LogHelper.logBoardTileAction(player, space, `${undergroundResourceTokenDescription[undergroundResource]}`, 'claimed');
     space.undergroundResources = undefined;
 
     this.claimToken(player, undergroundResource, /* isExcavate= */false, space);
   }
 
   public static claimToken(player: IPlayer, token: UndergroundResourceToken, isExcavate: boolean, space: Space | undefined) {
+    if (space) {
+      LogHelper.logBoardTileAction(player, space, `${undergroundResourceTokenDescription[token]}`, 'claimed');
+    } else {
+      player.game.log('${0} claimed ${1}', (b) => b.player(player).string(undergroundResourceTokenDescription[token]));
+    }
+
     validateUnderworldExpansion(player.game);
     this.grant(player, token);
     player.underworldData.tokens.push({token, shelter: false, active: player.underworldData.activeBonus === token});

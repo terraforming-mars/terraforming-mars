@@ -13,6 +13,7 @@ import {max} from '../Options';
 import {IdentifySpacesDeferred} from '../../underworld/IdentifySpacesDeferred';
 import {undergroundResourceTokenDescription} from '../../../common/underworld/UndergroundResourceToken';
 import {TITLES} from '../../inputs/titles';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
 // TODO(kberg): Copies a lot of Search For Life.
 export class SearchforLifeUnderground extends Card implements IActionCard, IProjectCard {
@@ -48,7 +49,7 @@ export class SearchforLifeUnderground extends Card implements IActionCard, IProj
     return 0;
   }
   public canAct(player: IPlayer): boolean {
-    return player.canAfford(1);
+    return player.canAfford(1) && UnderworldExpansion.canIdentifyN(player, 1);
   }
   public action(player: IPlayer) {
     player.game.defer(new SelectPaymentDeferred(player, 1, {title: TITLES.payForCardAction(this.name)}))
@@ -56,6 +57,9 @@ export class SearchforLifeUnderground extends Card implements IActionCard, IProj
         const identify = new IdentifySpacesDeferred(player, 1);
         player.game.defer(identify);
         identify.andThen(([space]) => {
+          if (typeof space === 'string') {
+            throw new Error(`Expected space, got ${space}`);
+          }
           const undergroundResources = space.undergroundResources;
           if (undergroundResources === undefined) {
             player.game.log('${0} had no underground resources to discard', (b) => b.player(player));

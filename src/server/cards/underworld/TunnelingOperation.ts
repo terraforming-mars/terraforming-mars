@@ -6,6 +6,7 @@ import {IPlayer} from '../../IPlayer';
 import {IdentifySpacesDeferred} from '../../underworld/IdentifySpacesDeferred';
 import {ExcavateSpacesDeferred} from '../../underworld/ExcavateSpacesDeferred';
 import {digit} from '../Options';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
 export class TunnelingOperation extends PreludeCard {
   constructor() {
@@ -25,6 +26,10 @@ export class TunnelingOperation extends PreludeCard {
         description: 'Identify 1 underground resource. Then excavate 2 underground resources. Increase your steel production 2 steps.',
       },
     });
+  }
+
+  public override canPlay(player: IPlayer): boolean {
+    return UnderworldExpansion.canIdentifyN(player, 1) && UnderworldExpansion.canExcavateN(player, 2);
   }
 
   public override bespokePlay(player: IPlayer) {

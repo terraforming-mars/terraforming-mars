@@ -20,11 +20,6 @@ export class AdhaiHighOrbitConstructions extends CorporationCard implements ICor
       startingMegaCredits: 43,
       resourceType: CardResource.ORBITAL,
 
-      behavior: {
-        // This is the onCardPlayed effect.
-        addResources: 1,
-      },
-
       metadata: {
         cardNumber: 'PfC23',
         description: 'You start with 43 M€.',

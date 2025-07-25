@@ -129,6 +129,6 @@ describe('ApiGameLogs', () => {
     game.phase = Phase.END;
     await scaffolding.ctx.gameLoader.add(game);
     await scaffolding.get(ApiGameLogs.INSTANCE, res);
-    expect(res.content).to.match(/^Drew and discarded/);
+    expect(res.content).to.match(/^First player this generation is/);
   });
 });

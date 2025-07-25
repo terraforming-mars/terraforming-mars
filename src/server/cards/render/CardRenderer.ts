@@ -395,7 +395,7 @@ abstract class Builder<T> {
   }
 
   public claim(count: number = 1) {
-    return this.text('CLAIM').text(count.toString());
+    return this.text('CLAIM').nbsp.text(count.toString());
   }
 
   public corruption(count: number = 1, options?: ItemOptions) {

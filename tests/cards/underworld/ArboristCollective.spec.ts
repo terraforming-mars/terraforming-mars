@@ -20,8 +20,8 @@ describe('ArboristCollective', () => {
     player.playCorporationCard(card);
     runAllActions(game);
 
-    expect(player.stock.plants).eq(3);
-    expect(player.production.plants).eq(1);
+    expect(player.stock.plants).eq(2);
+    expect(player.production.plants).eq(2);
   });
 
   it('canAct', () => {

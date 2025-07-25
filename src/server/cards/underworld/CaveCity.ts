@@ -13,7 +13,7 @@ export class CaveCity extends Card implements IProjectCard {
       name: CardName.CAVE_CITY,
       type: CardType.AUTOMATED,
       cost: 16,
-      tags: [Tag.MARS, Tag.BUILDING, Tag.CITY],
+      tags: [Tag.BUILDING, Tag.CITY],
 
       behavior: {production: {steel: 1}},
 

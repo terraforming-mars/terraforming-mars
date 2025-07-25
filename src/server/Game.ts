@@ -232,6 +232,7 @@ export class Game implements IGame, Logger {
   }
 
   private setFirstPlayer(first: IPlayer) {
+    this.log('First player this generation is ${0}', (b) => b.player(first));
     this.first = first;
     const e = [...this.players, ...this.players];
     const idx = e.findIndex((p) => p.id === this.first.id);
@@ -661,18 +662,31 @@ export class Game implements IGame, Logger {
     return this.passedPlayers.has(player.id);
   }
 
+  private setNextFirstPlayer() {
+    const spaceWargamesOwner = this.getCardPlayerOrUndefined(CardName.SPACE_WARGAMES);
+    if (spaceWargamesOwner) {
+      const spaceWargames = spaceWargamesOwner.tableau.get(CardName.SPACE_WARGAMES);
+      // This was set last generation hence the -1.
+      if (spaceWargames?.generationUsed === this.generation - 1) {
+        this.overrideFirstPlayer(spaceWargamesOwner);
+        return;
+      }
+    }
+    this.incrementFirstPlayer();
+  }
+
   // Public for testing.
   public incrementFirstPlayer(): void {
     let firstIndex = this.players.map(toID).indexOf(this.first.id);
     if (firstIndex === -1) {
-      throw new Error('Didn\'t even find player');
+      throw new Error('Didn\'t find player');
     }
     firstIndex = (firstIndex + 1) % this.players.length;
     const first = this.players[firstIndex];
     this.setFirstPlayer(first);
   }
 
-  // Only used in the prelude The New Space Race.
+  // Only used in the prelude The New Space Race and card Space Wargames.
   public overrideFirstPlayer(newFirstPlayer: IPlayer): void {
     if (newFirstPlayer.game.id !== this.id) {
       throw new Error(`player ${newFirstPlayer.id} is not part of this game`);
@@ -834,9 +848,10 @@ export class Game implements IGame, Logger {
     this.phase = Phase.INTERGENERATION;
     this.updatePlayerVPForTheGeneration();
     this.updateGlobalsForTheGeneration();
+
     this.generation++;
     this.log('Generation ${0}', (b) => b.forNewGeneration().number(this.generation));
-    this.incrementFirstPlayer();
+    this.setNextFirstPlayer();
 
     this.players.forEach((player) => {
       player.hasIncreasedTerraformRatingThisGeneration = false;
@@ -1532,17 +1547,10 @@ export class Game implements IGame, Logger {
   }
 
   /**
-   * Returns the Player holding this card, or throws.
+   * Returns the Player holding this card, or returns undefined.
    */
   public getCardPlayerOrUndefined(name: CardName): IPlayer | undefined {
-    for (const player of this.players) {
-      for (const card of player.tableau) {
-        if (card.name === name) {
-          return player;
-        }
-      }
-    }
-    return undefined;
+    return this.players.find((player) => player.tableau.has(name));
   }
 
   private potentiallyChangeFirstPlayer() {

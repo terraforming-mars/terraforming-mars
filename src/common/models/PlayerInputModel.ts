@@ -38,7 +38,7 @@ export type SelectInitialCardsModel = BaseInputModel & {
 
 export type SelectOptionModel = BaseInputModel & {
   type: 'option';
-  warnings?: Array<Warning>;
+  warnings?: ReadonlyArray<Warning>;
 }
 
 export type SelectProjectCardToPlayModel = BaseInputModel & {

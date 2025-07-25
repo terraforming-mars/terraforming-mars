@@ -37,7 +37,7 @@ import {Urbanist} from './terraCimmeria/Urbanist';
 import {Warmonger} from './terraCimmeria/Warmonger';
 import {AZoologist} from './amazonisPlanitia/AZoologist';
 import {Kingpin} from './underworld/Kingpin';
-import {EdgeLord} from './underworld/EdgeLord';
+import {Excavator} from './underworld/Excavator';
 import {Administrator} from './modular/Administrator';
 import {Constructor} from './modular/Constructor';
 import {Founder} from './modular/Founder';
@@ -97,7 +97,7 @@ export const awardManifest: MAManifest<AwardName, IAward> = {
     'Naturalist': {Factory: Naturalist},
     'Voyager': {Factory: Voyager},
     'Kingpin': {Factory: Kingpin, compatibility: 'underworld'},
-    'EdgeLord': {Factory: EdgeLord, compatibility: 'underworld'},
+    'Excavator': {Factory: Excavator, compatibility: 'underworld'},
     'Administrator': {Factory: Administrator},
     'Constructor': {Factory: Constructor, compatibility: 'colonies'},
     'Founder': {Factory: Founder},
@@ -130,7 +130,7 @@ export const awardManifest: MAManifest<AwardName, IAward> = {
     venus: ['Venuphile'],
     ares: ['Entrepreneur', 'Rugged'],
     moon: ['Full Moon', 'Lunar Magnate'],
-    underworld: ['Kingpin', 'EdgeLord'],
+    underworld: ['Kingpin', 'Excavator'],
   },
   modular: [
     'Administrator',

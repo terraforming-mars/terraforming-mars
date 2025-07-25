@@ -71,4 +71,32 @@ describe('L1TradeTerminal', () => {
     expect(tardigrades.resourceCount).eq(0);
     expect(appliedScience.resourceCount).eq(2);
   });
+
+  it('automatically adds resources if there are 3 or fewer candidates', () => {
+    const [aerialMappers, tardigrades, ants] = cardsFromJSON([CardName.AERIAL_MAPPERS, CardName.TARDIGRADES, CardName.ANTS]);
+    player.playedCards.push(aerialMappers, tardigrades, ants);
+    aerialMappers.resourceCount = 1;
+    tardigrades.resourceCount = 1;
+    ants.resourceCount = 1;
+
+    cast(card.play(player), undefined);
+
+    expect(aerialMappers.resourceCount).eq(2);
+    expect(tardigrades.resourceCount).eq(2);
+    expect(ants.resourceCount).eq(2);
+  });
+
+  it('does not automatically add resources for vermin', () => {
+    const [aerialMappers, tardigrades, vermin] = cardsFromJSON([CardName.AERIAL_MAPPERS, CardName.TARDIGRADES, CardName.VERMIN]);
+    player.playedCards.push(aerialMappers, tardigrades, vermin);
+    aerialMappers.resourceCount = 1;
+    tardigrades.resourceCount = 1;
+    vermin.resourceCount = 1;
+
+    const selectCard = cast(card.play(player), SelectCard);
+    expect(selectCard.cards.map(toName)).deep.eq([CardName.AERIAL_MAPPERS, CardName.TARDIGRADES, CardName.VERMIN]);
+    expect(aerialMappers.resourceCount).eq(1);
+    expect(tardigrades.resourceCount).eq(1);
+    expect(vermin.resourceCount).eq(1);
+  });
 });

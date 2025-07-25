@@ -55,7 +55,12 @@ export class L1TradeTerminal extends Card {
 
   public override bespokePlay(player: IPlayer): PlayerInput | undefined {
     const cards = this.getEligibleCards(player);
-    if (cards.length <= 3) {
+    const noCardsWithNegativeVP = cards.every((card) => {
+      const vp = card.victoryPoints;
+      return !(typeof vp === 'object' && vp.resourcesHere !== undefined && (vp.per ?? 0) < 0);
+    });
+
+    if (cards.length <= 3 && noCardsWithNegativeVP) {
       this.addResources(player, cards);
       return undefined;
     }

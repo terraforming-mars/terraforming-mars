@@ -31,7 +31,7 @@ export class CorporateTheft extends Card implements IProjectCard, IActionCard {
         renderData: CardRenderer.builder((b) => {
           b.action('Pay 5 M€ to steal ANY 1 resource from another player. ' +
           'If it is a card resource, you may put it on a suitable card.',
-          (ab) => ab.megacredits(5).startEffect.text('STEAL').wild(1).asterix());
+          (ab) => ab.megacredits(5).startAction.text('STEAL').wild(1).asterix());
           b.br.text('DOES NOT WORK IN SOLO GAMES');
         }),
         description: 'Requires 2 corruption.',

@@ -13,16 +13,18 @@ import {ALL_RESOURCES} from '../../../common/Resource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {message} from '../../logs/MessageBuilder';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {IActionCard} from '../ICard';
 
-export class CorporateTheft extends Card implements IProjectCard {
+export class CorporateTheft extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
       name: CardName.CORPORATE_THEFT,
-      type: CardType.EVENT,
+      type: CardType.ACTIVE,
       tags: [Tag.CRIME],
       cost: 10,
 
       requirements: {corruption: 2},
+      victoryPoints: -1,
 
       metadata: {
         cardNumber: 'U061',
@@ -37,13 +39,13 @@ export class CorporateTheft extends Card implements IProjectCard {
     });
   }
 
-  public override bespokeCanPlay(player: IPlayer): boolean {
+  public canAct(player: IPlayer): boolean {
     // Could also confirm that opponents have any resources, corruption, or resource cards.
     // Must take into account blocking abilities.
     return !player.game.isSoloMode();
   }
 
-  public override bespokePlay(player: IPlayer) {
+  public action(player: IPlayer) {
     const game = player.game;
     const options = new OrOptions().setTitle('Select one option').andThen(() => {
       player.game.defer(new SelectPaymentDeferred(player, 5));

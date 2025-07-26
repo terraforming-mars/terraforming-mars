@@ -32,6 +32,6 @@ describe('CorporateTheft', () => {
     const [/* game */, player] = testGame(1, {underworldExpansion: true});
 
     player.underworldData.corruption = 2;
-    expect(card.canPlay(player)).is.false;
+    expect(card.canAct(player)).is.false;
   });
 });

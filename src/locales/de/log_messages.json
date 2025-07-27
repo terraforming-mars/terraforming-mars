@@ -19,6 +19,7 @@
   "Take action": "Führe Aktion aus",
   "${0} took the first action of ${1} corporation": "${0} hat die erste Aktion des ${1}-Konzerns durchgeführt",
   "Take first action of ${0} corporation": "Führe die erste Aktion des ${0}-Konzerns aus",
+  "First player this generation is ${0}": "Der Startspieler dieser Generation ist ${0}",
   "Don\u2019t place a greenery": "Platziere KEINE Grünfläche",
   "All players lose 1 TR.": "Alle Spieler verlieren 1 TW.",
 

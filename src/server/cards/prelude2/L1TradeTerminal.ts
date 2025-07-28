@@ -55,6 +55,7 @@ export class L1TradeTerminal extends Card {
 
   public override bespokePlay(player: IPlayer): PlayerInput | undefined {
     const cards = this.getEligibleCards(player);
+    // TODO(kberg): Make compatible with https://github.com/terraforming-mars/terraforming-mars/pull/7539#discussion_r2219661618
     const noCardsWithNegativeVP = !(cards.some((card) => card.name === CardName.ANCIENT_SHIPYARDS || card.name === CardName.VERMIN));
 
     if (cards.length <= 3 && noCardsWithNegativeVP) {

@@ -2,10 +2,12 @@ import {IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {DeferredAction} from './DeferredAction';
 import {Priority} from './Priority';
+import {From} from '../logs/From';
 
 export type Options = {
   count?: number;
   log?: boolean;
+  from?: From;
 }
 
 export class GainProduction extends DeferredAction {
@@ -25,7 +27,7 @@ export class GainProduction extends DeferredAction {
     }
 
     if (this.options.count > 0) {
-      this.player.production.add(this.resource, this.options.count, {log: this.options.log ?? true});
+      this.player.production.add(this.resource, this.options.count, {log: this.options.log ?? true, from: this.options.from});
     }
     this.cb(undefined);
     return undefined;

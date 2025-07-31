@@ -105,6 +105,10 @@ export class GameCards {
       // remove it from the deck to avoid possible conflicts (e.g. Valley Trust / New Partner)
       preludes = preludes.filter((c) => c.name !== CardName.MERGER);
     }
+    // Suitable Infrastructure should not be in games until it is fixed.
+    // TODO(kberg): Remove this line, by 2025-08-15, and remove it from the manifest altogether
+    preludes = preludes.filter((c) => c.name !== CardName.SUITABLE_INFRASTRUCTURE);
+
     return preludes;
   }
 

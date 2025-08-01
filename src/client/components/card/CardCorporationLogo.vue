@@ -1,186 +1,285 @@
 <template>
   <div class="card-corporation-logo">
-    <template v-if="title === CardName.SATURN_SYSTEMS">
-      <div class="card-saturn-logo">
-        SATURN <span style="font-size:20px;display:inline-block;">&#x25CF;</span> SYSTEMS
-      </div>
+    <template v-if="logos[title] === 'bespoke'">
+      <template v-if="title === CardName.AERON_GENOMICS">
+        <div class="card-aeron-genomics-logo">
+          <div class="aeron-genomics-svg-logo">
+            <svg version="1.1" viewBox="0.0 0.0 108.33333333333333 77.1504811898446" fill="none" stroke="none"
+              stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink"
+              xmlns="http://www.w3.org/2000/svg">
+              <clipPath id="p.0">
+                <path d="m0 0l108.33333 0l0 77.15048l-108.33333 0l0 -77.15048z" clip-rule="nonzero" />
+              </clipPath>
+              <g clip-path="url(#p.0)">
+                <path fill="#000000" fill-opacity="0.0" d="m0 0l108.33333 0l0 77.15048l-108.33333 0z"
+                  fill-rule="evenodd" />
+                <path fill="#85c588" d="m0 77.21785l37.84678 -77.21785l32.74738 0l37.84679 77.21785z"
+                  fill-rule="evenodd" />
+                <path fill="#0a8503" d="m1.700038 76.00293l36.65812 -74.79265l31.72312 0l36.65813 74.79265z"
+                  fill-rule="evenodd" />
+                <path fill="#bbe2e3" d="m17.10987 67.46523l28.29118 -57.72179l17.63286 0l28.29118 57.72179z"
+                  fill-rule="evenodd" />
+                <path fill="#072600" d="m46.71572 32.31165l6.72031 -13.71129l8.50163 0l6.72031 13.71129z"
+                  fill-rule="evenodd" />
+                <path fill="#072600" d="m19.36677 76.00486l4.18347 -8.53543l61.34434 0l4.18348 8.53543z"
+                  fill-rule="evenodd" />
+                <path fill="#072600" d="m34.31274 57.93857l5.51621 -11.25459l28.81009 0l5.51621 11.25459z"
+                  fill-rule="evenodd" />
+                <path fill="#0a8503"
+                  d="m46.72185 32.31136l6.93755 0l5.72145 10.11339l6.86338 0l2.41043 4.26077l-28.87036 0z"
+                  fill-rule="evenodd" />
+                <path fill="#0a8503" d="m61.92246 18.60006l6.71185 13.71128l6.96794 0l-6.71185 -13.71128z"
+                  fill-rule="evenodd" />
+              </g>
+            </svg>
+          </div>
+          <div class="aeron-genomics-title">AERON GENOMICS</div>
+        </div>
+      </template>
+      <template v-else-if="title === CardName.AGRICOLA_INC">
+        <span class="card-agricola-logo">Agricola Inc</span>
+      </template>
+      <template v-else-if="title === CardName.ANUBIS_SECURITIES">
+        <div class="card-anubis-securities-logo">
+          <div class="anubis-securities-svg-logo">
+            <svg version="1.1" viewBox="0.0 0.0 695.0 540.0" fill="none" stroke="none" stroke-linecap="square"
+              stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+              <clipPath id="p.0">
+                <path d="m0 0l695.0 0l0 540.0l-695.0 0l0 -540.0z" clip-rule="nonzero" />
+              </clipPath>
+              <g clip-path="url(#p.0)">
+                <path fill="#000000" fill-opacity="0.0" d="m0 0l695.0 0l0 540.0l-695.0 0z" fill-rule="evenodd" />
+                <path fill="#ff5400"
+                  d="m72.144356 275.17322l0 0c0 -143.88974 117.28025 -260.53543 261.95276 -260.53543l0 0c69.47418 0 136.1029 27.449192 185.22858 76.30906c49.12567 48.85988 76.72418 115.12808 76.72418 184.22636l0 0c0 143.88977 -117.28024 260.53546 -261.95276 260.53546l0 0c-144.6725 0 -261.95276 -116.64569 -261.95276 -260.53546z"
+                  fill-rule="evenodd" />
+                <path stroke="#b82729" stroke-width="8.0" stroke-linejoin="round" stroke-linecap="butt"
+                  d="m72.144356 275.17322l0 0c0 -143.88974 117.28025 -260.53543 261.95276 -260.53543l0 0c69.47418 0 136.1029 27.449192 185.22858 76.30906c49.12567 48.85988 76.72418 115.12808 76.72418 184.22636l0 0c0 143.88977 -117.28024 260.53546 -261.95276 260.53546l0 0c-144.6725 0 -261.95276 -116.64569 -261.95276 -260.53546z"
+                  fill-rule="evenodd" />
+                <path fill="#ffd800"
+                  d="m152.46452 453.55118l0.29397583 12.509186l358.87408 0l28.792908 -29.097107l30.326843 -54.763794l15.409302 -43.963257l-219.41544 -253.6929l-217.216 251.53018z"
+                  fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0"
+                  d="m72.144356 275.63196l0 0c0 -143.88976 117.28025 -260.53546 261.95276 -260.53546l0 0c69.47418 0 136.1029 27.449188 185.22858 76.30906c49.12567 48.85987 76.72418 115.128075 76.72418 184.22638l0 0c0 143.88974 -117.28024 260.5354 -261.95276 260.5354l0 0c-144.6725 0 -261.95276 -116.64566 -261.95276 -260.5354z"
+                  fill-rule="evenodd" />
+                <path stroke="#b82729" stroke-width="8.0" stroke-linejoin="round" stroke-linecap="butt"
+                  d="m72.144356 275.63196l0 0c0 -143.88976 117.28025 -260.53546 261.95276 -260.53546l0 0c69.47418 0 136.1029 27.449188 185.22858 76.30906c49.12567 48.85987 76.72418 115.128075 76.72418 184.22638l0 0c0 143.88974 -117.28024 260.5354 -261.95276 260.5354l0 0c-144.6725 0 -261.95276 -116.64566 -261.95276 -260.5354z"
+                  fill-rule="evenodd" />
+                <path fill="#3e3e3e"
+                  d="m116.42148 226.16447l0 0c3.7309952 91.577835 -13.118149 151.82521 -38.770866 138.63274c-25.652718 -13.192474 -51.560608 -95.42859 -59.615578 -189.23013c-8.054967 -93.80155 4.4271927 -167.91048 28.722183 -170.529z"
+                  fill-rule="evenodd" />
+                <path fill="#3e3e3e"
+                  d="m44.98163 5.39895l11.34383 -4.3805776l115.674545 270.8084l47.56955 -9.729675l155.67453 24.86615l30.811035 54.595795l283.7848 41.078735l4.8635254 10.270355l-20.54071 56.758514l-531.2441 1.115509l-60.65355 -84.35959z"
+                  fill-rule="evenodd" />
+                <path fill="#ffd800"
+                  d="m240.45145 313.05774l103.22571 8.603668l-1.2283325 19.661438l-105.83728 -7.834656z"
+                  fill-rule="evenodd" />
+              </g>
+            </svg>
+          </div>
+          <div class="anubis-securities-title"><span class="anubis-row-1">ANUBIS</span><br><span class="anubis-row-2">SECURITIES</span></div>
+        </div>
+      </template>
+      <template v-else-if="title === CardName.ARCADIAN_COMMUNITIES">
+        <span class="card-arcadian-logo"><span>Arcadian</span><br><span>Communities</span></span>
+      </template>
+      <template v-else-if="title === CardName.ASTRODRILL">
+        <span class="card-astrodril-logo">Astrodrill</span>
+      </template>
+      <template v-else-if="title === CardName.ATHENA">
+        <div class="card-athena-logo">Athena</div>
+      </template>
+      <template v-else-if="title === CardName.CELESTIC">
+        <div class="card-celestic-logo">
+          <span
+            style="background: linear-gradient(to right, rgb(251,192,137),rgb(251,192,137),rgb(23,185,236));padding-left: 5px;">CEL</span>
+          <span style="background:linear-gradient(to right,rgb(23,185,236),rgb(251,192,137))">ES</span>
+          <span style="background:rgb(251,192,137);padding-right:5px;">TIC</span>
+        </div>
+      </template>
+      <template v-else-if="title === CardName.CHEUNG_SHING_MARS">
+        <div class="card-cheung-shing-logo">
+          <span
+            style="color:red;border:4px solid red;border-radius:50%;padding:3px 5px 3px 5px;font-size:30px;line-height:14px;box-shadow: 3px 3px 3px grey, inset 0 0 3px 3px grey;text-shadow: 3px 3px 3px grey;">㨐</span>
+        </div>
+        <div
+          style="display: inline-block; width:140px; font-size:19px; line-height: 22px; vertical-align: middle; margin-bottom: 15px;font-weight:normal;">
+          &nbsp;Cheung Shing <br>
+          <div style="margin-left:10px"> ■■MARS■■ </div>
+        </div>
+      </template>
+      <template v-else-if="title === CardName.CURIOSITY_II">
+        <div class="card-curiosity-ii-logo">Curiosity II</div>
+      </template>
+      <template v-else-if="title === CardName.DEMETRON_LABS">
+        <div class="card-demetron-labs-logo">
+          <div class="row1">DEMETRON</div>
+          <div class="row2">LABS</div>
+        </div>
+      </template>
+      <template v-else-if="title === CardName.ECOTEC">
+        <div class="card-ecotec-logo"></div>
+      </template>
+      <template v-else-if="title === CardName.ERIS">
+        <div class="card-eris-logo">Eris</div>
+      </template>
+      <template v-else-if="title === CardName.HADESPHERE">
+        <div class="card-hadesphere-logo">
+          <div class="row1">HADESPHERE</div>
+          <div class="row2">INDUSTRIES</div>
+        </div>
+      </template>
+      <template v-else-if="title === CardName.INCITE">
+        <span class="card-incite-logo">Incite</span>
+      </template>
+      <template v-else-if="title === CardName.INTERPLANETARY_CINEMATICS">
+        <div style="color: #020202;font-size:17px;margin-top:10px;margin-left:-87px;">INTERPLANETARY</div>
+        <div
+          style="height:5px;margin-top:-2px;width:143px;background:linear-gradient(to right,yellow,black,yellow,black,yellow);border:5px solid #cc3333;box-shadow:3px 3px 6px grey;">
+        </div>
+        <div
+          style="color: #020202;font-size:24px;margin-left:-89px;margin-top:-5px; display:inline-block; -webkit-transform:scale(0.5,1); -moz-transform:scale(0.5,1); -ms-transform:scale(0.5,1); -o-transform:scale(0.5,1); transform:scale(1,0.5); margin-bottom:15px;">
+          CINEMATICS</div>
+      </template>
+      <template v-else-if="title === CardName.INVENTRIX">
+        <span class="card-inventrix-logo">
+          <span
+            style="color: #020202;background-color:#6bb5c7;padding-left:4px;padding-right:4px;font-size:26px;box-shadow: 6px 6px 10px grey;">X</span>
+          INVENTRIX</span>
+      </template>
+      <template v-else-if="title === CardName.KUIPER_COOPERATIVE">
+        <div class="card-kuiper-logo">Kuiper<br />Cooperative</div>
+      </template>
+      <template v-else-if="title === CardName.LAKEFRONT_RESORTS">
+        <div class="card-lakefront-logo">LAKEFRONT <br> &nbsp;&nbsp;RESORTS</div>
+      </template>
+      <template v-else-if="title === CardName.MANUTECH">
+        <span class="card-manutech-logo"><span
+            style="color:white;background:#e63900;text-shadow:none;padding-left:2px;">MA</span>NUTECH</span>
+      </template>
+      <template v-else-if="title === CardName.MARS_MATHS">
+        <div class="card-mars-maths-logo" style="font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif">
+          <span style="color: rgb(0, 0, 0);">MARS</span>
+          <span style="color: rgb(208, 96, 3);box-shadow: -6px -6px #d58c56;">MATHS</span>
+        </div>
+      </template>
+      <template v-else-if="title === CardName.MINING_GUILD">
+        <span class="card-mining-guild-logo">MINING<br>GUILD</span>
+      </template>
+      <template v-else-if="title === CardName.MONS_INSURANCE">
+        <div class="card-mons-logo">
+          <div class="mons0">▲</div>
+          <div class="mons1">mons</div>
+          <div class="mons2">INSURANCE</div>
+        </div>
+      </template>
+      <template v-else-if="title === CardName.NIRGAL_ENTERPRISES">
+        <div class="card-nirgal-enterprises-logo">
+          <div>NIRGAL</div>
+          <div>ENTERPRISES</div>
+        </div>
+      </template>
+      <template v-else-if="title === CardName.PALLADIN_SHIPPING">
+        <div class="card-palladin-shipping-logo"></div>
+      </template>
+      <template v-else-if="title === CardName.PHARMACY_UNION">
+        <div class="card-pharmacy-union-logo">Pharmacy<br />Union</div>
+      </template>
+      <template v-else-if="title === CardName.PHILARES">
+        <div class="card-philares-logo">PHIL<span style="color:#ff5858">A</span>RES</div>
+      </template>
+      <template v-else-if="title === CardName.PLAYWRIGHTS">
+        <div class="card-playwrights-logo">Playwrights</div>
+      </template>
+      <template v-else-if="title === CardName.POLDERTECH_DUTCH">
+        <div class="card-poldertech-1-logo">PolderTECH</div>
+        <div class="card-poldertech-2-logo">Dutch</div>
+      </template>
+      <template v-else-if="title === CardName.PROJECT_WORKSHOP">
+        <div class="card-project-workshop-logo">PROJECT<br />WORKSHOP</div>
+      </template>
+      <template v-else-if="title === CardName.RECYCLON">
+        <div class="card-recyclon-logo">Recyclon</div>
+      </template>
+      <template v-else-if="title === CardName.ROBINSON_INDUSTRIES">
+        <div class="card-robinson-logo">
+          <div style="letter-spacing:4px;border-bottom:3px solid #ccc;margin-top:5px;">ROBINSON</div>
+          <div style="border-bottom:3px solid #ccc;">•—•—•—•—•—•—•&nbsp;</div>
+          <div style="letter-spacing:2px;">INDUSTRIES</div>
+        </div>
+      </template>
+      <template v-else-if="title === CardName.SAGITTA_FRONTIER_SERVICES">
+        <div class="card-sagitta-logo">Sagitta</div>
+      </template>
+      <template v-if="title === CardName.SATURN_SYSTEMS">
+        <div class="card-saturn-logo">
+          SATURN <span style="font-size:20px;display:inline-block;">&#x25CF;</span> SYSTEMS
+        </div>
+      </template>
+      <template v-else-if="title === CardName.SEPTUM_TRIBUS">
+        <span class="card-septem-tribus-logo">Septem Tribus</span>
+      </template>
+      <template v-else-if="title === CardName.SPLICE">
+        <div class="card-splice-logo">
+          <div>SPLI<span style="color:red">C</span>E</div>
+          <div style="height:3px;background:red;margin-top:-3px;"></div>
+          <div style="font-size:10px;line-height:18px;">TACTICAL GENOMICS</div>
+        </div>
+      </template>
+      <template v-else-if="title === CardName.STORMCRAFT_INCORPORATED">
+        <div class="card-stormcraft-logo">
+          <div class="stormcraft1">STORM</div>
+          <div class="stormcraft2">CRAFT</div>
+          <div class="stormcraft3">INCOR</div>
+          <div class="stormcraft4">PORATED</div>
+        </div>
+      </template>
+      <template v-else-if="title === CardName.TERRALABS_RESEARCH">
+        <div
+          style="font-size: 13px;left:32px;top:10px;font-family:Prototype;color:#222;transform:scale(2,1);position:absolute;">
+          TERRALABS</div>
+        <div
+          style="position:absolute;top:28px;left:46px;font-size:8px;letter-spacing:2px;font-family:Prototype;transform:scale(2,1)">
+          RESEARCH</div>
+      </template>
+      <template v-else-if="title === CardName.THARSIS_REPUBLIC">
+        <div class="card-tharsis-logo">
+          <div class="card-tharsis-logo-image"></div>
+          <div class="card-tharsis-logo-text">Tharsis Republic</div>
+        </div>
+      </template>
+      <template v-else-if="title === CardName.TYCHO_MAGNETICS">
+        <div class="card-tycho-magnetics-logo">
+          <div>TYCHO</div>
+          <div>MAGNETICS</div>
+        </div>
+      </template>
+      <template v-else-if="title === CardName.UNITED_NATIONS_MARS_INITIATIVE">
+        <span class="card-unmi-logo">UNITED NATIONS<br />MARS INITIATIVE</span>
+      </template>
+      <template v-else-if="title === CardName.UNITED_NATIONS_MISSION_ONE">
+        <span class="card-unmo-logo">UNITED NATIONS<br />MISSION ONE</span>
+      </template>
+      <template v-else-if="title === CardName.UTOPIA_INVEST">
+        <div class="card-utopia-logo">
+          <div class="utopia-corp-name-1">UTOPIA</div>
+          <div class="utopia-corp-name-2">INVEST</div>
+        </div>
+      </template>
+      <template v-else-if="title === CardName.VALLEY_TRUST">
+        <div class="card-valley-trust-logo">
+          <div
+            style="display:inline-block;margin-left:25px;padding-top: 2px;margin-bottom:0px;font-size:26px;text-shadow: 2px 2px #ccc;text-align:center">
+            VALLEY<br /> TRUST</div>
+        </div>
+      </template>
+      <template v-else-if="title === CardName.VITOR">
+        <div class="card-vitor-logo">
+          <span style="color:white;background:orangered;padding-left:3px;">VIT</span>
+          <span style="background:linear-gradient(to right, orangered,white);">O</span>
+          <span style="background:white;padding-right:3px;">R</span>
+        </div>
+      </template>
     </template>
-    <template v-else-if="title === CardName.CELESTIC">
-      <div class="card-celestic-logo">
-        <span style="background: linear-gradient(to right, rgb(251,192,137),rgb(251,192,137),rgb(23,185,236));padding-left: 5px;">CEL</span>
-        <span style="background:linear-gradient(to right,rgb(23,185,236),rgb(251,192,137))">ES</span>
-        <span style="background:rgb(251,192,137);padding-right:5px;">TIC</span>
-      </div>
-    </template>
-    <template v-else-if="title === CardName.CHEUNG_SHING_MARS">
-      <div class="card-cheung-shing-logo">
-        <span style="color:red;border:4px solid red;border-radius:50%;padding:3px 5px 3px 5px;font-size:30px;line-height:14px;box-shadow: 3px 3px 3px grey, inset 0 0 3px 3px grey;text-shadow: 3px 3px 3px grey;">㨐</span></div>
-      <div style="display: inline-block; width:140px; font-size:19px; line-height: 22px; vertical-align: middle; margin-bottom: 15px;font-weight:normal;">
-      &nbsp;Cheung Shing <br><div style="margin-left:10px"> ■■MARS■■ </div>
-      </div>
-    </template>
-    <template v-else-if="title === CardName.INTERPLANETARY_CINEMATICS">
-      <div style="color: #020202;font-size:17px;margin-top:10px;margin-left:-87px;">INTERPLANETARY</div>
-      <div style="height:5px;margin-top:-2px;width:143px;background:linear-gradient(to right,yellow,black,yellow,black,yellow);border:5px solid #cc3333;box-shadow:3px 3px 6px grey;"></div>
-      <div style="color: #020202;font-size:24px;margin-left:-89px;margin-top:-5px; display:inline-block; -webkit-transform:scale(0.5,1); -moz-transform:scale(0.5,1); -ms-transform:scale(0.5,1); -o-transform:scale(0.5,1); transform:scale(1,0.5); margin-bottom:15px;">CINEMATICS</div>
-    </template>
-    <template v-else-if="title === CardName.INVENTRIX">
-      <span class="card-inventrix-logo">
-      <span style="color: #020202;background-color:#6bb5c7;padding-left:4px;padding-right:4px;font-size:26px;box-shadow: 6px 6px 10px grey;">X</span>
-      INVENTRIX</span>
-    </template>
-    <template v-else-if="title === CardName.SEPTUM_TRIBUS">
-      <span class="card-septem-tribus-logo">Septem Tribus</span>
-    </template>
-    <template v-else-if="title === CardName.TERRALABS_RESEARCH">
-      <div style="font-size: 13px;left:32px;top:10px;font-family:Prototype;color:#222;transform:scale(2,1);position:absolute;">TERRALABS</div>
-      <div style="position:absolute;top:28px;left:46px;font-size:8px;letter-spacing:2px;font-family:Prototype;transform:scale(2,1)">RESEARCH</div>
-    </template>
-    <template v-else-if="title === CardName.ASTRODRILL">
-      <span class="card-astrodril-logo">Astrodrill</span>
-    </template>
-    <template v-else-if="title === CardName.MANUTECH">
-      <span class="card-manutech-logo"><span style="color:white;background:#e63900;text-shadow:none;padding-left:2px;">MA</span>NUTECH</span>
-    </template>
-    <template v-else-if="title === CardName.AGRICOLA_INC">
-      <span class="card-agricola-logo">Agricola Inc</span>
-    </template>
-    <template v-else-if="title === CardName.ARCADIAN_COMMUNITIES">
-      <span class="card-arcadian-logo"><span>Arcadian</span><br><span>Communities</span></span>
-    </template>
-    <template v-else-if="title === CardName.INCITE">
-      <span class="card-incite-logo">Incite</span>
-    </template>
-    <template v-else-if="title === CardName.LAKEFRONT_RESORTS">
-      <div class="card-lakefront-logo">LAKEFRONT <br> &nbsp;&nbsp;RESORTS</div>
-    </template>
-    <template v-else-if="title === CardName.MINING_GUILD">
-      <span class="card-mining-guild-logo">MINING<br>GUILD</span>
-    </template>
-    <template v-else-if="title === CardName.PHILARES">
-      <div class="card-philares-logo">PHIL<span style="color:#ff5858">A</span>RES</div>
-    </template>
-    <template v-else-if="title === CardName.RECYCLON">
-      <div class="card-recyclon-logo">Recyclon</div>
-    </template>
-    <template v-else-if="title === CardName.ROBINSON_INDUSTRIES">
-      <div class="card-robinson-logo"><div style="letter-spacing:4px;border-bottom:3px solid #ccc;margin-top:5px;">ROBINSON</div>
-      <div style="border-bottom:3px solid #ccc;">•—•—•—•—•—•—•&nbsp;</div>
-      <div style="letter-spacing:2px;">INDUSTRIES</div></div>
-    </template>
-    <template v-else-if="title === CardName.SPLICE">
-      <div class="card-splice-logo"><div>SPLI<span style="color:red">C</span>E</div>
-      <div style="height:3px;background:red;margin-top:-3px;"></div>
-      <div style="font-size:10px;line-height:18px;">TACTICAL GENOMICS</div>
-      </div>
-    </template>
-    <template v-else-if="title === CardName.STORMCRAFT_INCORPORATED">
-      <div class="card-stormcraft-logo">
-        <div class="stormcraft1">STORM</div><div class="stormcraft2">CRAFT</div>
-        <div class="stormcraft3">INCOR</div><div class="stormcraft4">PORATED</div>
-      </div>
-    </template>
-    <template v-else-if="title === CardName.THARSIS_REPUBLIC">
-      <div class="card-tharsis-logo">
-      <div class="card-tharsis-logo-image"></div>
-      <div class="card-tharsis-logo-text">Tharsis Republic</div>
-      </div>
-    </template>
-    <template v-else-if="title === CardName.UNITED_NATIONS_MARS_INITIATIVE">
-      <span class="card-unmi-logo">UNITED NATIONS<br/>MARS INITIATIVE</span>
-    </template>
-    <template v-else-if="title === CardName.UTOPIA_INVEST">
-      <div class="card-utopia-logo">
-      <div class="utopia-corp-name-1">UTOPIA</div>
-      <div class="utopia-corp-name-2">INVEST</div>
-      </div>
-    </template>
-    <template v-else-if="title === CardName.VALLEY_TRUST">
-      <div class="card-valley-trust-logo">
-      <div style="display:inline-block;margin-left:25px;padding-top: 2px;margin-bottom:0px;font-size:26px;text-shadow: 2px 2px #ccc;text-align:center">VALLEY<br/> TRUST</div>
-      </div>
-    </template>
-    <template v-else-if="title === CardName.VITOR">
-      <div class="card-vitor-logo">
-      <span style="color:white;background:orangered;padding-left:3px;">VIT</span>
-      <span style="background:linear-gradient(to right, orangered,white);">O</span>
-      <span style="background:white;padding-right:3px;">R</span></div>
-    </template>
-    <template v-else-if="title === CardName.PHARMACY_UNION">
-      <div class="card-pharmacy-union-logo">Pharmacy<br/>Union</div>
-    </template>
-    <template v-else-if="title === CardName.PLAYWRIGHTS">
-      <div class="card-playwrights-logo">Playwrights</div>
-    </template>
-    <template v-else-if="title === CardName.PROJECT_WORKSHOP">
-      <div class="card-project-workshop-logo">PROJECT<br/>WORKSHOP</div>
-    </template>
-    <template v-else-if="title === CardName.UNITED_NATIONS_MISSION_ONE">
-      <span class="card-unmo-logo">UNITED NATIONS<br/>MISSION ONE</span>
-    </template>
-    <template v-else-if="title === CardName.MONS_INSURANCE">
-      <div class="card-mons-logo">
-      <div class="mons0">▲</div>
-      <div class="mons1">mons</div>
-      <div class="mons2">INSURANCE</div>
-      </div>
-    </template>
-    <template v-else-if="title ===  CardName.CURIOSITY_II">
-      <div class="card-curiosity-ii-logo">Curiosity II</div>
-    </template>
-    <template v-else-if="title === CardName.MARS_MATHS">
-      <div class="card-mars-maths-logo" style="font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif">
-        <span style="color: rgb(0, 0, 0);">MARS</span>
-        <span style="color: rgb(208, 96, 3);box-shadow: -6px -6px #d58c56;">MATHS</span>
-      </div>
-    </template>
-    <template v-else-if="title === CardName.TYCHO_MAGNETICS">
-      <div class="card-tycho-magnetics-logo">
-        <div>TYCHO</div>
-        <div>MAGNETICS</div>
-      </div>
-    </template>
-    <template v-else-if="title === CardName.NIRGAL_ENTERPRISES">
-      <div class="card-nirgal-enterprises-logo">
-        <div>NIRGAL</div>
-        <div>ENTERPRISES</div>
-      </div>
-    </template>
-    <template v-else-if="title === CardName.ECOTEC">
-      <div class="card-ecotec-logo"></div>
-    </template>
-    <template v-else-if="title === CardName.PALLADIN_SHIPPING">
-      <div class="card-palladin-shipping-logo"></div>
-    </template>
-    <template v-else-if="title === CardName.SAGITTA_FRONTIER_SERVICES">
-      <div class="card-sagitta-logo">Sagitta</div>
-    </template>
-    <template v-else-if="title === CardName.KUIPER_COOPERATIVE">
-      <div class="card-kuiper-logo">Kuiper<br/>Cooperative</div>
-    </template>
-    <template v-else-if="title === CardName.ERIS">
-      <div class="card-eris-logo">Eris</div>
-    </template>
-    <template v-else-if="title === CardName.ATHENA">
-      <div class="card-athena-logo">Athena</div>
-    </template>
-    <template v-else-if="title === CardName.HADESPHERE">
-      <div class="card-hadesphere-logo">
-        <div class="row1">HADESPHERE</div>
-        <div class="row2">INDUSTRIES</div>
-      </div>
-    </template>
-    <template v-else-if="title === CardName.DEMETRON_LABS">
-      <div class="card-demetron-labs-logo">
-        <div class="row1">DEMETRON</div>
-        <div class="row2">LABS</div>
-      </div>
-    </template>
-   <template v-else-if="title === CardName.POLDERTECH_DUTCH">
-      <div class="card-poldertech-1-logo">PolderTECH</div>
-      <div class="card-poldertech-2-logo">Dutch</div>
-    </template>
-
     <template v-else>
       <div :class="logoClass">{{capsTitle}}</div>
     </template>
@@ -194,64 +293,102 @@ import {CardName} from '@/common/cards/CardName';
 
 
 const logos: Partial<Record<CardName, 'image' | 'css' | 'bespoke'>> = {
-  [CardName.NANOTECH_INDUSTRIES]: 'image',
-  [CardName.TEMPEST_CONSULTANCY]: 'image',
-  [CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE]: 'image',
-  [CardName.LUNA_HYPERLOOP_CORPORATION]: 'image',
-  [CardName.CRESCENT_RESEARCH_ASSOCIATION]: 'image',
-  [CardName.LUNA_FIRST_INCORPORATED]: 'image',
-  [CardName.THE_GRAND_LUNA_CAPITAL_GROUP]: 'image',
-  [CardName.INTRAGEN_SANCTUARY_HEADQUARTERS]: 'image',
-  [CardName.LUNA_TRADE_FEDERATION]: 'image',
-  [CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE]: 'image',
-  [CardName.POLARIS]: 'image',
-  [CardName.RINGCOM]: 'image',
+  [CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS]: 'image',
+  [CardName.AERON_GENOMICS]: 'bespoke',
+  [CardName.AGRICOLA_INC]: 'bespoke',
+  [CardName.AMBIENT]: 'image',
+  [CardName.ANUBIS_SECURITIES]: 'bespoke',
+  [CardName.APHRODITE]: 'css',
+  [CardName.ARBORIST_COLLECTIVE]: 'css',
+  [CardName.ARCADIAN_COMMUNITIES]: 'bespoke',
+  [CardName.ARIDOR]: 'css',
+  [CardName.ARKLIGHT]: 'css',
+  [CardName.ASTRODRILL]: 'bespoke',
+  [CardName.ATHENA]: 'bespoke',
+  [CardName.AURORAI]: 'image',
+  [CardName.BIO_SOL]: 'image',
+  [CardName.CELESTIC]: 'bespoke',
+  [CardName.CHEUNG_SHING_MARS]: 'bespoke',
   [CardName.CHIMERA]: 'image',
-  [CardName.STEELARIS]: 'image',
-  [CardName.MARTIAN_INSURANCE_GROUP]: 'image',
-  [CardName.ROBIN_HAULINGS]: 'image',
   [CardName.COLLEGIUM_COPERNICUS]: 'image',
+  [CardName.CREDICOR]: 'css',
+  [CardName.CRESCENT_RESEARCH_ASSOCIATION]: 'image',
+  [CardName.CURIOSITY_II]: 'bespoke',
+  [CardName.DEMETRON_LABS]: 'bespoke',
+  [CardName.ECOLINE]: 'css',
+  [CardName.ECOTEC]: 'bespoke',
+  [CardName.ERIS]: 'bespoke',
+  [CardName.FACTORUM]: 'css',
+  [CardName.HABITAT_MARTE]: 'image',
+  [CardName.HADESPHERE]: 'bespoke',
+  [CardName.HECATE_SPEDITIONS]: 'css',
+  [CardName.HELION]: 'css',
+  [CardName.HENKEI_GENETICS]: 'css',
+  [CardName.INCITE]: 'bespoke',
+  [CardName.INTERPLANETARY_CINEMATICS]: 'bespoke',
+  [CardName.INTRAGEN_SANCTUARY_HEADQUARTERS]: 'image',
+  [CardName.INVENTRIX]: 'bespoke',
+  [CardName.JENSON_BOYLE_CO]: 'css',
+  [CardName.KEPLERTEC]: 'css',
+  [CardName.KINGDOM_OF_TAURARO]: 'css',
+  [CardName.KUIPER_COOPERATIVE]: 'bespoke',
+  [CardName.LAKEFRONT_RESORTS]: 'bespoke',
+  [CardName.LUNA_FIRST_INCORPORATED]: 'image',
+  [CardName.LUNA_HYPERLOOP_CORPORATION]: 'image',
+  [CardName.LUNA_TRADE_FEDERATION]: 'image',
+  [CardName.MANUTECH]: 'bespoke',
   [CardName.MARS_DIRECT]: 'image',
   [CardName.MARS_FRONTIER_ALLIANCE]: 'image',
-  [CardName.AMBIENT]: 'image',
-  [CardName.SOYLENT_SEEDLING_SYSTEMS]: 'image',
-  [CardName.BIO_SOL]: 'image',
-  [CardName.MIND_SET_MARS]: 'image',
-  [CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS]: 'image',
-  [CardName.HABITAT_MARTE]: 'image',
-  [CardName.ODYSSEY]: 'image',
-  [CardName.AURORAI]: 'image',
-  [CardName.SPIRE]: 'image',
-  [CardName.APHRODITE]: 'css',
-  [CardName.ARKLIGHT]: 'css',
-  [CardName.POSEIDON]: 'css',
-  [CardName.MORNING_STAR_INC]: 'css',
-  [CardName.PRISTAR]: 'css',
-  [CardName.CREDICOR]: 'css',
-  [CardName.ECOLINE]: 'css',
-  [CardName.HELION]: 'css',
-  [CardName.FACTORUM]: 'css',
-  [CardName.PHOBOLOG]: 'css',
-  [CardName.POINT_LUNA]: 'css',
-  [CardName.POLYPHEMOS]: 'css',
-  [CardName.THORGATE]: 'css',
-  [CardName.VIRON]: 'css',
-  [CardName.ARIDOR]: 'css',
-  [CardName.TERACTOR]: 'css',
+  [CardName.MARS_MATHS]: 'bespoke',
+  [CardName.MARTIAN_INSURANCE_GROUP]: 'image',
   [CardName.MIDAS]: 'css',
-  [CardName.MARS_MATHS]: 'css',
-  [CardName.HADESPHERE]: 'bespoke',
-  [CardName.DEMETRON_LABS]: 'css',
-  [CardName.JENSON_BOYLE_CO]: 'css',
-  [CardName.HENKEI_GENETICS]: 'css',
-  [CardName.ARBORIST_COLLECTIVE]: 'css',
-  [CardName.KINGDOM_OF_TAURARO]: 'css',
-  [CardName.AERON_GENOMICS]: 'css',
-  [CardName.KEPLERTEC]: 'css',
+  [CardName.MIND_SET_MARS]: 'image',
+  [CardName.MINING_GUILD]: 'bespoke',
+  [CardName.MONS_INSURANCE]: 'bespoke',
+  [CardName.MORNING_STAR_INC]: 'css',
+  [CardName.NANOTECH_INDUSTRIES]: 'image',
+  [CardName.NIRGAL_ENTERPRISES]: 'bespoke',
+  [CardName.ODYSSEY]: 'image',
+  [CardName.PALLADIN_SHIPPING]: 'bespoke',
+  [CardName.PHARMACY_UNION]: 'bespoke',
+  [CardName.PHILARES]: 'bespoke',
+  [CardName.PHOBOLOG]: 'css',
+  [CardName.PLAYWRIGHTS]: 'bespoke',
+  [CardName.POINT_LUNA]: 'css',
+  [CardName.POLARIS]: 'image',
+  [CardName.POLDERTECH_DUTCH]: 'bespoke',
+  [CardName.POLYPHEMOS]: 'css',
+  [CardName.POSEIDON]: 'css',
+  [CardName.PRISTAR]: 'css',
+  [CardName.PROJECT_WORKSHOP]: 'bespoke',
+  [CardName.RECYCLON]: 'bespoke',
+  [CardName.RINGCOM]: 'image',
+  [CardName.ROBIN_HAULINGS]: 'image',
+  [CardName.ROBINSON_INDUSTRIES]: 'bespoke',
+  [CardName.SAGITTA_FRONTIER_SERVICES]: 'bespoke',
+  [CardName.SATURN_SYSTEMS]: 'bespoke',
+  [CardName.SEPTUM_TRIBUS]: 'bespoke',
+  [CardName.SOYLENT_SEEDLING_SYSTEMS]: 'image',
+  [CardName.SPIRE]: 'image',
+  [CardName.SPLICE]: 'bespoke',
+  [CardName.STEELARIS]: 'image',
+  [CardName.STORMCRAFT_INCORPORATED]: 'bespoke',
+  [CardName.TEMPEST_CONSULTANCY]: 'image',
+  [CardName.TERACTOR]: 'css',
+  [CardName.TERRALABS_RESEARCH]: 'bespoke',
+  [CardName.THARSIS_REPUBLIC]: 'bespoke',
+  [CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE]: 'image',
+  [CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE]: 'image',
+  [CardName.THE_GRAND_LUNA_CAPITAL_GROUP]: 'image',
+  [CardName.THORGATE]: 'css',
+  [CardName.TYCHO_MAGNETICS]: 'bespoke',
+  [CardName.UNITED_NATIONS_MARS_INITIATIVE]: 'bespoke',
+  [CardName.UNITED_NATIONS_MISSION_ONE]: 'bespoke',
+  [CardName.UTOPIA_INVEST]: 'bespoke',
+  [CardName.VALLEY_TRUST]: 'bespoke',
+  [CardName.VIRON]: 'css',
+  [CardName.VITOR]: 'bespoke',
   [CardName.VOLTAGON]: 'css',
-  [CardName.ANUBIS_SECURITIES]: 'css',
-  [CardName.HECATE_SPEDITIONS]: 'css',
-  [CardName.POLDERTECH_DUTCH]: 'css',
 };
 
 export default Vue.extend({
@@ -263,6 +400,9 @@ export default Vue.extend({
     },
   },
   computed: {
+    logos(): typeof logos {
+      return logos;
+    },
     CardName(): typeof CardName {
       return CardName;
     },

@@ -7,10 +7,10 @@
             <svg version="1.1" viewBox="0.0 0.0 108.33333333333333 77.1504811898446" fill="none" stroke="none"
               stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink"
               xmlns="http://www.w3.org/2000/svg">
-              <clipPath id="p.0">
+              <clipPath id="p.aeron-genomics">
                 <path d="m0 0l108.33333 0l0 77.15048l-108.33333 0l0 -77.15048z" clip-rule="nonzero" />
               </clipPath>
-              <g clip-path="url(#p.0)">
+              <g clip-path="url(#p.aeron-genomics)">
                 <path fill="#000000" fill-opacity="0.0" d="m0 0l108.33333 0l0 77.15048l-108.33333 0z"
                   fill-rule="evenodd" />
                 <path fill="#85c588" d="m0 77.21785l37.84678 -77.21785l32.74738 0l37.84679 77.21785z"
@@ -44,10 +44,10 @@
           <div class="anubis-securities-svg-logo">
             <svg version="1.1" viewBox="0.0 0.0 695.0 540.0" fill="none" stroke="none" stroke-linecap="square"
               stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-              <clipPath id="p.0">
+              <clipPath id="p.anubis-securities">
                 <path d="m0 0l695.0 0l0 540.0l-695.0 0l0 -540.0z" clip-rule="nonzero" />
               </clipPath>
-              <g clip-path="url(#p.0)">
+              <g clip-path="url(#p.anubis-securities)">
                 <path fill="#000000" fill-opacity="0.0" d="m0 0l695.0 0l0 540.0l-695.0 0z" fill-rule="evenodd" />
                 <path fill="#ff5400"
                   d="m72.144356 275.17322l0 0c0 -143.88974 117.28025 -260.53543 261.95276 -260.53543l0 0c69.47418 0 136.1029 27.449192 185.22858 76.30906c49.12567 48.85988 76.72418 115.12808 76.72418 184.22636l0 0c0 143.88977 -117.28024 260.53546 -261.95276 260.53546l0 0c-144.6725 0 -261.95276 -116.64569 -261.95276 -260.53546z"
@@ -76,7 +76,8 @@
               </g>
             </svg>
           </div>
-          <div class="anubis-securities-title"><span class="anubis-row-1">ANUBIS</span><br><span class="anubis-row-2">SECURITIES</span></div>
+          <div class="anubis-securities-title"><span class="anubis-row-1">ANUBIS</span><br><span
+              class="anubis-row-2">SECURITIES</span></div>
         </div>
       </template>
       <template v-else-if="title === CardName.ARCADIAN_COMMUNITIES">
@@ -279,6 +280,61 @@
           <span style="background:white;padding-right:3px;">R</span>
         </div>
       </template>
+      <template v-else-if="title === CardName.VOLTAGON">
+        <div class="card-voltagon-logo">
+          <div class="voltagon-svg-logo">
+            <svg version="1.1" viewBox="0.0 0.0 254.11023622047244 247.95538057742783" fill="none" stroke="none"
+              stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink"
+              xmlns="http://www.w3.org/2000/svg">
+              <clipPath id="p.voltagon">
+                <path d="m0 0l254.11023 0l0 247.95538l-254.11023 0l0 -247.95538z" clip-rule="nonzero" />
+              </clipPath>
+              <g clip-path="url(#p.voltagon)">
+                <path fill="#000000" fill-opacity="0.0" d="m0 0l254.11023 0l0 247.95538l-254.11023 0z"
+                  fill-rule="evenodd" />
+                <path fill="#5d3483"
+                  d="m5.577428 76.81672l70.800964 -70.80097l100.13035 0l70.800964 70.80097l0 100.13035l-70.800964 70.800964l-100.13035 0l-70.800964 -70.800964z"
+                  fill-rule="evenodd" />
+                <defs>
+                  <radialGradient id="p.1" gradientUnits="userSpaceOnUse"
+                    gradientTransform="matrix(13.31445796292349 0.0 0.0 13.31445796292349 0.0 0.0)" spreadMethod="pad"
+                    cx="9.518593133073773" cy="9.30973446960006" fx="9.518593133073773" fy="9.30973446960006"
+                    r="13.314457893371582">
+                    <stop offset="0.0" stop-color="#bfbfbf" />
+                    <stop offset="1.0" stop-color="#737373" />
+                  </radialGradient>
+                </defs>
+                <path fill="url(#p.1)"
+                  d="m0 71.937004l71.71391 -71.26509l40.51706 92.8084l27.929138 -0.45144653l39.88713 -93.02887l73.42258 72.07087l-73.02887 175.83728l-108.0525 -0.16011047z"
+                  fill-rule="evenodd" />
+                <path fill="#e0de7c"
+                  d="m92.42782 112.98106l19.658226 -19.658218l28.715057 0l19.658218 19.658218l0 27.801659l-19.658218 19.658234l-28.715057 0l-19.658226 -19.658234z"
+                  fill-rule="evenodd" />
+                <path stroke="#000000" stroke-width="1.0" stroke-linejoin="round" stroke-linecap="butt"
+                  d="m92.42782 112.98106l19.658226 -19.658218l28.715057 0l19.658218 19.658218l0 27.801659l-19.658218 19.658234l-28.715057 0l-19.658226 -19.658234z"
+                  fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m253.21523 71.8472l-92.755905 41.133858"
+                  fill-rule="evenodd" />
+                <path stroke="#000000" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="butt"
+                  d="m253.21523 71.8472l-92.755905 41.133858" fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m0.27034122 71.87869l92.15748 41.102364"
+                  fill-rule="evenodd" />
+                <path stroke="#000000" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="butt"
+                  d="m0.27034122 71.87869l92.15748 41.102364" fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m72.49549 247.59055l39.590553 -87.1496"
+                  fill-rule="evenodd" />
+                <path stroke="#000000" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="butt"
+                  d="m72.49549 247.59055l39.590553 -87.1496" fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m180.29715 247.59055l-39.496048 -87.1496"
+                  fill-rule="evenodd" />
+                <path stroke="#000000" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="butt"
+                  d="m180.29715 247.59055l-39.496048 -87.1496" fill-rule="evenodd" />
+              </g>
+            </svg>
+          </div>
+          <div class="voltagon-title">VOLTAGON</div>
+        </div>
+      </template>
     </template>
     <template v-else>
       <div :class="logoClass">{{capsTitle}}</div>
@@ -388,7 +444,7 @@ const logos: Partial<Record<CardName, 'image' | 'css' | 'bespoke'>> = {
   [CardName.VALLEY_TRUST]: 'bespoke',
   [CardName.VIRON]: 'css',
   [CardName.VITOR]: 'bespoke',
-  [CardName.VOLTAGON]: 'css',
+  [CardName.VOLTAGON]: 'bespoke',
 };
 
 export default Vue.extend({

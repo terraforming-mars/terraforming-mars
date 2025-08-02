@@ -4,6 +4,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IPlayer} from '../../IPlayer';
 import {ActiveCorporationCard} from '../corporation/CorporationCard';
 import {Resource} from '../../../common/Resource';
+import {Size} from '../../../common/cards/render/Size';
 
 export class Voltagon extends ActiveCorporationCard {
   constructor() {
@@ -44,7 +45,7 @@ export class Voltagon extends ActiveCorporationCard {
             eb.undergroundResources().startEffect.energy(2);
           }).br;
           b.action('Spend 8 energy to increase oxygen or Venus 1 step.', (ab) => {
-            ab.energy(8).startAction.oxygen(1).or().venus(1);
+            ab.energy(8).startAction.oxygen(1, {size: Size.SMALL}).or().venus(1, {size: Size.SMALL});
           });
         }),
       },

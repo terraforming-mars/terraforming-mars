@@ -102,7 +102,11 @@ export default Vue.extend({
       case CardRenderItemType.TEMPERATURE:
         return ['card-global-requirement', 'card-temperature-global-requirement'];
       case CardRenderItemType.OXYGEN:
-        return ['card-global-requirement', 'card-oxygen-global-requirement'];
+        if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
+          return ['card-global-requirement', 'card-oxygen-global-requirement', `card-oxygen--${this.item.size}`];
+        } else {
+          return ['card-global-requirement', 'card-oxygen-global-requirement'];
+        }
       case CardRenderItemType.OCEANS:
         if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
           return ['card-global-requirement', 'card-ocean-global-requirement', `card-ocean--${this.item.size}`];
@@ -110,7 +114,11 @@ export default Vue.extend({
           return ['card-global-requirement', 'card-ocean-global-requirement'];
         }
       case CardRenderItemType.VENUS:
-        return ['card-global-requirement', 'card-venus-global-requirement'];
+        if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
+          return ['card-global-requirement', 'card-venus-global-requirement', `card-venus--${this.item.size}`];
+        } else {
+          return ['card-global-requirement', 'card-venus-global-requirement'];
+        }
       case CardRenderItemType.TR:
         if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
           return ['card-tile', 'card-tr', `card-tr--${this.item.size}`];

@@ -439,6 +439,7 @@ const logos: Partial<Record<CardName, 'image' | 'css' | 'bespoke'>> = {
   [CardName.SAGITTA_FRONTIER_SERVICES]: 'bespoke',
   [CardName.SATURN_SYSTEMS]: 'bespoke',
   [CardName.SEPTUM_TRIBUS]: 'bespoke',
+  [CardName.SOLBANK]: 'css',
   [CardName.SOYLENT_SEEDLING_SYSTEMS]: 'image',
   [CardName.SPIRE]: 'image',
   [CardName.SPLICE]: 'bespoke',

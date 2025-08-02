@@ -400,6 +400,7 @@ const logos: Partial<Record<CardName, 'image' | 'css' | 'bespoke'>> = {
   [CardName.INTRAGEN_SANCTUARY_HEADQUARTERS]: 'image',
   [CardName.INVENTRIX]: 'bespoke',
   [CardName.JENSON_BOYLE_CO]: 'css',
+  [CardName.JUNK_VENTURES]: 'css',
   [CardName.KEPLERTEC]: 'css',
   [CardName.KINGDOM_OF_TAURARO]: 'css',
   [CardName.KUIPER_COOPERATIVE]: 'bespoke',

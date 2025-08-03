@@ -11,16 +11,25 @@
                 <path d="m0 0l108.33333 0l0 77.15048l-108.33333 0l0 -77.15048z" clip-rule="nonzero" />
               </clipPath>
               <g clip-path="url(#p.aeron-genomics)">
-                <path fill="#000000" fill-opacity="0.0" d="m0 0l108.33333 0l0 77.15048l-108.33333 0z" fill-rule="evenodd" />
-                <path fill="#85c588" d="m0 77.21785l37.84678 -77.21785l32.74738 0l37.84679 77.21785z" fill-rule="evenodd" />
-                <path fill="#0a8503" d="m1.700038 76.00293l36.65812 -74.79265l31.72312 0l36.65813 74.79265z" fill-rule="evenodd" />
-                <path fill="#bbe2e3" d="m17.10987 67.46523l28.29118 -57.72179l17.63286 0l28.29118 57.72179z" fill-rule="evenodd" />
-                <path fill="#072600" d="m46.71572 32.31165l6.72031 -13.71129l8.50163 0l6.72031 13.71129z" fill-rule="evenodd" />
-                <path fill="#072600" d="m19.36677 76.00486l4.18347 -8.53543l61.34434 0l4.18348 8.53543z" fill-rule="evenodd" />
-                <path fill="#072600" d="m34.31274 57.93857l5.51621 -11.25459l28.81009 0l5.51621 11.25459z" fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m0 0l108.33333 0l0 77.15048l-108.33333 0z"
+                  fill-rule="evenodd" />
+                <path fill="#85c588" d="m0 77.21785l37.84678 -77.21785l32.74738 0l37.84679 77.21785z"
+                  fill-rule="evenodd" />
+                <path fill="#0a8503" d="m1.700038 76.00293l36.65812 -74.79265l31.72312 0l36.65813 74.79265z"
+                  fill-rule="evenodd" />
+                <path fill="#bbe2e3" d="m17.10987 67.46523l28.29118 -57.72179l17.63286 0l28.29118 57.72179z"
+                  fill-rule="evenodd" />
+                <path fill="#072600" d="m46.71572 32.31165l6.72031 -13.71129l8.50163 0l6.72031 13.71129z"
+                  fill-rule="evenodd" />
+                <path fill="#072600" d="m19.36677 76.00486l4.18347 -8.53543l61.34434 0l4.18348 8.53543z"
+                  fill-rule="evenodd" />
+                <path fill="#072600" d="m34.31274 57.93857l5.51621 -11.25459l28.81009 0l5.51621 11.25459z"
+                  fill-rule="evenodd" />
                 <path fill="#0a8503"
-                  d="m46.72185 32.31136l6.93755 0l5.72145 10.11339l6.86338 0l2.41043 4.26077l-28.87036 0z" fill-rule="evenodd" />
-                <path fill="#0a8503" d="m61.92246 18.60006l6.71185 13.71128l6.96794 0l-6.71185 -13.71128z" fill-rule="evenodd" />
+                  d="m46.72185 32.31136l6.93755 0l5.72145 10.11339l6.86338 0l2.41043 4.26077l-28.87036 0z"
+                  fill-rule="evenodd" />
+                <path fill="#0a8503" d="m61.92246 18.60006l6.71185 13.71128l6.96794 0l-6.71185 -13.71128z"
+                  fill-rule="evenodd" />
               </g>
             </svg>
           </div>
@@ -41,21 +50,29 @@
               <g clip-path="url(#p.anubis-securities)">
                 <path fill="#000000" fill-opacity="0.0" d="m0 0l695.0 0l0 540.0l-695.0 0z" fill-rule="evenodd" />
                 <path fill="#ff5400"
-                  d="m72.144356 275.17322l0 0c0 -143.88974 117.28025 -260.53543 261.95276 -260.53543l0 0c69.47418 0 136.1029 27.449192 185.22858 76.30906c49.12567 48.85988 76.72418 115.12808 76.72418 184.22636l0 0c0 143.88977 -117.28024 260.53546 -261.95276 260.53546l0 0c-144.6725 0 -261.95276 -116.64569 -261.95276 -260.53546z" fill-rule="evenodd" />
+                  d="m72.144356 275.17322l0 0c0 -143.88974 117.28025 -260.53543 261.95276 -260.53543l0 0c69.47418 0 136.1029 27.449192 185.22858 76.30906c49.12567 48.85988 76.72418 115.12808 76.72418 184.22636l0 0c0 143.88977 -117.28024 260.53546 -261.95276 260.53546l0 0c-144.6725 0 -261.95276 -116.64569 -261.95276 -260.53546z"
+                  fill-rule="evenodd" />
                 <path stroke="#b82729" stroke-width="8.0" stroke-linejoin="round" stroke-linecap="butt"
-                  d="m72.144356 275.17322l0 0c0 -143.88974 117.28025 -260.53543 261.95276 -260.53543l0 0c69.47418 0 136.1029 27.449192 185.22858 76.30906c49.12567 48.85988 76.72418 115.12808 76.72418 184.22636l0 0c0 143.88977 -117.28024 260.53546 -261.95276 260.53546l0 0c-144.6725 0 -261.95276 -116.64569 -261.95276 -260.53546z" fill-rule="evenodd" />
+                  d="m72.144356 275.17322l0 0c0 -143.88974 117.28025 -260.53543 261.95276 -260.53543l0 0c69.47418 0 136.1029 27.449192 185.22858 76.30906c49.12567 48.85988 76.72418 115.12808 76.72418 184.22636l0 0c0 143.88977 -117.28024 260.53546 -261.95276 260.53546l0 0c-144.6725 0 -261.95276 -116.64569 -261.95276 -260.53546z"
+                  fill-rule="evenodd" />
                 <path fill="#ffd800"
-                  d="m152.46452 453.55118l0.29397583 12.509186l358.87408 0l28.792908 -29.097107l30.326843 -54.763794l15.409302 -43.963257l-219.41544 -253.6929l-217.216 251.53018z" fill-rule="evenodd" />
+                  d="m152.46452 453.55118l0.29397583 12.509186l358.87408 0l28.792908 -29.097107l30.326843 -54.763794l15.409302 -43.963257l-219.41544 -253.6929l-217.216 251.53018z"
+                  fill-rule="evenodd" />
                 <path fill="#000000" fill-opacity="0.0"
-                  d="m72.144356 275.63196l0 0c0 -143.88976 117.28025 -260.53546 261.95276 -260.53546l0 0c69.47418 0 136.1029 27.449188 185.22858 76.30906c49.12567 48.85987 76.72418 115.128075 76.72418 184.22638l0 0c0 143.88974 -117.28024 260.5354 -261.95276 260.5354l0 0c-144.6725 0 -261.95276 -116.64566 -261.95276 -260.5354z" fill-rule="evenodd" />
+                  d="m72.144356 275.63196l0 0c0 -143.88976 117.28025 -260.53546 261.95276 -260.53546l0 0c69.47418 0 136.1029 27.449188 185.22858 76.30906c49.12567 48.85987 76.72418 115.128075 76.72418 184.22638l0 0c0 143.88974 -117.28024 260.5354 -261.95276 260.5354l0 0c-144.6725 0 -261.95276 -116.64566 -261.95276 -260.5354z"
+                  fill-rule="evenodd" />
                 <path stroke="#b82729" stroke-width="8.0" stroke-linejoin="round" stroke-linecap="butt"
-                  d="m72.144356 275.63196l0 0c0 -143.88976 117.28025 -260.53546 261.95276 -260.53546l0 0c69.47418 0 136.1029 27.449188 185.22858 76.30906c49.12567 48.85987 76.72418 115.128075 76.72418 184.22638l0 0c0 143.88974 -117.28024 260.5354 -261.95276 260.5354l0 0c-144.6725 0 -261.95276 -116.64566 -261.95276 -260.5354z" fill-rule="evenodd" />
+                  d="m72.144356 275.63196l0 0c0 -143.88976 117.28025 -260.53546 261.95276 -260.53546l0 0c69.47418 0 136.1029 27.449188 185.22858 76.30906c49.12567 48.85987 76.72418 115.128075 76.72418 184.22638l0 0c0 143.88974 -117.28024 260.5354 -261.95276 260.5354l0 0c-144.6725 0 -261.95276 -116.64566 -261.95276 -260.5354z"
+                  fill-rule="evenodd" />
                 <path fill="#3e3e3e"
-                  d="m116.42148 226.16447l0 0c3.7309952 91.577835 -13.118149 151.82521 -38.770866 138.63274c-25.652718 -13.192474 -51.560608 -95.42859 -59.615578 -189.23013c-8.054967 -93.80155 4.4271927 -167.91048 28.722183 -170.529z" fill-rule="evenodd" />
+                  d="m116.42148 226.16447l0 0c3.7309952 91.577835 -13.118149 151.82521 -38.770866 138.63274c-25.652718 -13.192474 -51.560608 -95.42859 -59.615578 -189.23013c-8.054967 -93.80155 4.4271927 -167.91048 28.722183 -170.529z"
+                  fill-rule="evenodd" />
                 <path fill="#3e3e3e"
-                  d="m44.98163 5.39895l11.34383 -4.3805776l115.674545 270.8084l47.56955 -9.729675l155.67453 24.86615l30.811035 54.595795l283.7848 41.078735l4.8635254 10.270355l-20.54071 56.758514l-531.2441 1.115509l-60.65355 -84.35959z" fill-rule="evenodd" />
+                  d="m44.98163 5.39895l11.34383 -4.3805776l115.674545 270.8084l47.56955 -9.729675l155.67453 24.86615l30.811035 54.595795l283.7848 41.078735l4.8635254 10.270355l-20.54071 56.758514l-531.2441 1.115509l-60.65355 -84.35959z"
+                  fill-rule="evenodd" />
                 <path fill="#ffd800"
-                  d="m240.45145 313.05774l103.22571 8.603668l-1.2283325 19.661438l-105.83728 -7.834656z" fill-rule="evenodd" />
+                  d="m240.45145 313.05774l103.22571 8.603668l-1.2283325 19.661438l-105.83728 -7.834656z"
+                  fill-rule="evenodd" />
               </g>
             </svg>
           </div>
@@ -76,23 +93,39 @@
                 <path d="m0 0l236.39108 0l0 212.61942l-236.39108 0l0 -212.61942z" clip-rule="nonzero" />
               </clipPath>
               <g clip-path="url(#p.arborist-collective)">
-                <path fill="#000000" fill-opacity="0.0" d="m0 0l236.39108 0l0 212.61942l-236.39108 0z" fill-rule="evenodd" />
-                <path fill="#ffffff" d="m49.784782 199.81627l9.6850395 -50.89763l19.370083 0l9.685036 50.89763z" fill-rule="evenodd" />
-                <path fill="#ffffff" d="m27.047245 100.467186l42.45669 -62.83464l42.456696 62.83464z" fill-rule="evenodd" />
-                <path fill="#ffffff" d="m13.307107 138.4725l56.740158 -84.661415l56.740158 84.661415z" fill-rule="evenodd" />
-                <path fill="#ffffff" d="m5.734908E-4 180.55641l70.04725 -119.81103l70.04724 119.81103z" fill-rule="evenodd" />
-                <path fill="#7a5c29" d="m54.6168 193.86089l7.4094467 -38.960617l14.818901 0l7.4094467 38.960617z" fill-rule="evenodd" />
-                <path fill="#266719" d="m38.918636 92.67979l30.236217 -44.7559l30.236221 44.7559z" fill-rule="evenodd" />
-                <path fill="#266719" d="m24.85136 131.63518l45.19685 -67.433075l45.196854 67.433075z" fill-rule="evenodd" />
-                <path fill="#266719" d="m14.506561 172.18636l54.645668 -93.44882l54.645668 93.44882z" fill-rule="evenodd" />
-                <path fill="#ffffff" d="m129.40945 212.09448l12.070862 -70.45668l24.141724 0l12.070877 70.45668z" fill-rule="evenodd" />
-                <path fill="#ffffff" d="m102.726746 77.98416l50.472443 -77.98425l50.472443 77.98425z" fill-rule="evenodd" />
-                <path fill="#ffffff" d="m83.16005 130.26231l70.944885 -110.48819l70.944885 110.48819z" fill-rule="evenodd" />
-                <path fill="#ffffff" d="m70.0262 185.19942l83.18111 -148.47244l83.18111 148.47244z" fill-rule="evenodd" />
-                <path fill="#7a5c29" d="m135.0304 206.16403l9.259842 -50.834656l18.519684 0l9.259842 50.834656z" fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m0 0l236.39108 0l0 212.61942l-236.39108 0z"
+                  fill-rule="evenodd" />
+                <path fill="#ffffff" d="m49.784782 199.81627l9.6850395 -50.89763l19.370083 0l9.685036 50.89763z"
+                  fill-rule="evenodd" />
+                <path fill="#ffffff" d="m27.047245 100.467186l42.45669 -62.83464l42.456696 62.83464z"
+                  fill-rule="evenodd" />
+                <path fill="#ffffff" d="m13.307107 138.4725l56.740158 -84.661415l56.740158 84.661415z"
+                  fill-rule="evenodd" />
+                <path fill="#ffffff" d="m5.734908E-4 180.55641l70.04725 -119.81103l70.04724 119.81103z"
+                  fill-rule="evenodd" />
+                <path fill="#7a5c29" d="m54.6168 193.86089l7.4094467 -38.960617l14.818901 0l7.4094467 38.960617z"
+                  fill-rule="evenodd" />
+                <path fill="#266719" d="m38.918636 92.67979l30.236217 -44.7559l30.236221 44.7559z"
+                  fill-rule="evenodd" />
+                <path fill="#266719" d="m24.85136 131.63518l45.19685 -67.433075l45.196854 67.433075z"
+                  fill-rule="evenodd" />
+                <path fill="#266719" d="m14.506561 172.18636l54.645668 -93.44882l54.645668 93.44882z"
+                  fill-rule="evenodd" />
+                <path fill="#ffffff" d="m129.40945 212.09448l12.070862 -70.45668l24.141724 0l12.070877 70.45668z"
+                  fill-rule="evenodd" />
+                <path fill="#ffffff" d="m102.726746 77.98416l50.472443 -77.98425l50.472443 77.98425z"
+                  fill-rule="evenodd" />
+                <path fill="#ffffff" d="m83.16005 130.26231l70.944885 -110.48819l70.944885 110.48819z"
+                  fill-rule="evenodd" />
+                <path fill="#ffffff" d="m70.0262 185.19942l83.18111 -148.47244l83.18111 148.47244z"
+                  fill-rule="evenodd" />
+                <path fill="#7a5c29" d="m135.0304 206.16403l9.259842 -50.834656l18.519684 0l9.259842 50.834656z"
+                  fill-rule="evenodd" />
                 <path fill="#46a233" d="m115.40769 74.1617l37.79528 -58.3937l37.795273 58.3937z" fill-rule="evenodd" />
-                <path fill="#46a233" d="m97.6157 124.97306l56.488182 -87.968506l56.48819 87.968506z" fill-rule="evenodd" />
-                <path fill="#46a233" d="m84.8926 177.88875l68.314964 -121.921265l68.31496 121.921265z" fill-rule="evenodd" />
+                <path fill="#46a233" d="m97.6157 124.97306l56.488182 -87.968506l56.48819 87.968506z"
+                  fill-rule="evenodd" />
+                <path fill="#46a233" d="m84.8926 177.88875l68.314964 -121.921265l68.31496 121.921265z"
+                  fill-rule="evenodd" />
               </g>
             </svg>
           </div>
@@ -170,6 +203,46 @@
           <span
             style="color: #020202;background-color:#6bb5c7;padding-left:4px;padding-right:4px;font-size:26px;box-shadow: 6px 6px 10px grey;">X</span>
           INVENTRIX</span>
+      </template>
+      <template v-else-if="title === CardName.KEPLERTEC">
+        <div class="card-keplertec-logo">
+          <div class="keplertec-svg-logo">
+            <svg version="1.1" viewBox="0.0 0.0 112.33070866141732 112.50393700787401" fill="none" stroke="none"
+              stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink"
+              xmlns="http://www.w3.org/2000/svg">
+              <clipPath id="p.keplertec">
+                <path d="m0 0l112.33071 0l0 112.50394l-112.33071 0l0 -112.50394z" clip-rule="nonzero" />
+              </clipPath>
+              <g clip-path="url(#p.keplertec)">
+                <path fill="#000000" fill-opacity="0.0" d="m0 0l112.33071 0l0 112.50394l-112.33071 0z"
+                  fill-rule="evenodd" />
+                <defs>
+                  <linearGradient id="p.1" gradientUnits="userSpaceOnUse"
+                    gradientTransform="matrix(10.556205549592645 0.0 0.0 10.556205549592645 0.0 0.0)" spreadMethod="pad"
+                    x1="0.017901922908279133" y1="0.05366742744995899" x2="0.01786370872945341" y2="10.609872976973433">
+                    <stop offset="0.0" stop-color="#bfbfbf" />
+                    <stop offset="1.0" stop-color="#000000" />
+                  </linearGradient>
+                </defs>
+                <path fill="url(#p.1)"
+                  d="m0.18897638 56.283466l0 0c0 -30.771395 25.02975 -55.716537 55.905514 -55.716537l0 0c14.8270645 0 29.046844 5.870118 39.531166 16.318996c10.484314 10.448877 16.374344 24.620594 16.374344 39.39754l0 0c0 30.771389 -25.029747 55.716534 -55.90551 55.716534l0 0c-30.875763 0 -55.905514 -24.945145 -55.905514 -55.716534z"
+                  fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m56.174488 32.283466l0 47.999996" fill-rule="evenodd" />
+                <path stroke="#ffff00" stroke-width="8.0" stroke-linejoin="round" stroke-linecap="butt"
+                  d="m56.174488 32.283466l0 47.999996" fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m80.01449 80.28346l-15.370079 -23.999996l15.370079 -24.0z"
+                  fill-rule="evenodd" />
+                <path stroke="#ffff00" stroke-width="8.0" stroke-linejoin="bevel"
+                  d="m80.01449 80.28346l-15.370079 -23.999996l15.370079 -24.0z" fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m32.174488 32.283466l15.370079 24.0l-15.370079 23.999996z"
+                  fill-rule="evenodd" />
+                <path stroke="#f1c232" stroke-width="8.0" stroke-linejoin="bevel"
+                  d="m32.174488 32.283466l15.370079 24.0l-15.370079 23.999996z" fill-rule="evenodd" />
+              </g>
+            </svg>
+          </div>
+          <div class="keplertec-title">KEPLERTEC</div>
+        </div>
       </template>
       <template v-else-if="title === CardName.KUIPER_COOPERATIVE">
         <div class="card-kuiper-logo">Kuiper<br />Cooperative</div>
@@ -314,9 +387,11 @@
                 <path d="m0 0l254.11023 0l0 247.95538l-254.11023 0l0 -247.95538z" clip-rule="nonzero" />
               </clipPath>
               <g clip-path="url(#p.voltagon)">
-                <path fill="#000000" fill-opacity="0.0" d="m0 0l254.11023 0l0 247.95538l-254.11023 0z" fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m0 0l254.11023 0l0 247.95538l-254.11023 0z"
+                  fill-rule="evenodd" />
                 <path fill="#5d3483"
-                  d="m5.577428 76.81672l70.800964 -70.80097l100.13035 0l70.800964 70.80097l0 100.13035l-70.800964 70.800964l-100.13035 0l-70.800964 -70.800964z" fill-rule="evenodd" />
+                  d="m5.577428 76.81672l70.800964 -70.80097l100.13035 0l70.800964 70.80097l0 100.13035l-70.800964 70.800964l-100.13035 0l-70.800964 -70.800964z"
+                  fill-rule="evenodd" />
                 <defs>
                   <radialGradient id="p.1" gradientUnits="userSpaceOnUse"
                     gradientTransform="matrix(13.31445796292349 0.0 0.0 13.31445796292349 0.0 0.0)" spreadMethod="pad"
@@ -327,21 +402,28 @@
                   </radialGradient>
                 </defs>
                 <path fill="url(#p.1)"
-                  d="m0 71.937004l71.71391 -71.26509l40.51706 92.8084l27.929138 -0.45144653l39.88713 -93.02887l73.42258 72.07087l-73.02887 175.83728l-108.0525 -0.16011047z" fill-rule="evenodd" />
+                  d="m0 71.937004l71.71391 -71.26509l40.51706 92.8084l27.929138 -0.45144653l39.88713 -93.02887l73.42258 72.07087l-73.02887 175.83728l-108.0525 -0.16011047z"
+                  fill-rule="evenodd" />
                 <path fill="#e0de7c"
-                  d="m92.42782 112.98106l19.658226 -19.658218l28.715057 0l19.658218 19.658218l0 27.801659l-19.658218 19.658234l-28.715057 0l-19.658226 -19.658234z" fill-rule="evenodd" />
+                  d="m92.42782 112.98106l19.658226 -19.658218l28.715057 0l19.658218 19.658218l0 27.801659l-19.658218 19.658234l-28.715057 0l-19.658226 -19.658234z"
+                  fill-rule="evenodd" />
                 <path stroke="#000000" stroke-width="1.0" stroke-linejoin="round" stroke-linecap="butt"
-                  d="m92.42782 112.98106l19.658226 -19.658218l28.715057 0l19.658218 19.658218l0 27.801659l-19.658218 19.658234l-28.715057 0l-19.658226 -19.658234z" fill-rule="evenodd" />
-                <path fill="#000000" fill-opacity="0.0" d="m253.21523 71.8472l-92.755905 41.133858" fill-rule="evenodd" />
+                  d="m92.42782 112.98106l19.658226 -19.658218l28.715057 0l19.658218 19.658218l0 27.801659l-19.658218 19.658234l-28.715057 0l-19.658226 -19.658234z"
+                  fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m253.21523 71.8472l-92.755905 41.133858"
+                  fill-rule="evenodd" />
                 <path stroke="#000000" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="butt"
                   d="m253.21523 71.8472l-92.755905 41.133858" fill-rule="evenodd" />
-                <path fill="#000000" fill-opacity="0.0" d="m0.27034122 71.87869l92.15748 41.102364" fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m0.27034122 71.87869l92.15748 41.102364"
+                  fill-rule="evenodd" />
                 <path stroke="#000000" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="butt"
                   d="m0.27034122 71.87869l92.15748 41.102364" fill-rule="evenodd" />
-                <path fill="#000000" fill-opacity="0.0" d="m72.49549 247.59055l39.590553 -87.1496" fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m72.49549 247.59055l39.590553 -87.1496"
+                  fill-rule="evenodd" />
                 <path stroke="#000000" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="butt"
                   d="m72.49549 247.59055l39.590553 -87.1496" fill-rule="evenodd" />
-                <path fill="#000000" fill-opacity="0.0" d="m180.29715 247.59055l-39.496048 -87.1496" fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m180.29715 247.59055l-39.496048 -87.1496"
+                  fill-rule="evenodd" />
                 <path stroke="#000000" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="butt"
                   d="m180.29715 247.59055l-39.496048 -87.1496" fill-rule="evenodd" />
               </g>
@@ -401,7 +483,7 @@ const logos: Partial<Record<CardName, 'image' | 'css' | 'bespoke'>> = {
   [CardName.INVENTRIX]: 'bespoke',
   [CardName.JENSON_BOYLE_CO]: 'css',
   [CardName.JUNK_VENTURES]: 'css',
-  [CardName.KEPLERTEC]: 'css',
+  [CardName.KEPLERTEC]: 'bespoke',
   [CardName.KINGDOM_OF_TAURARO]: 'css',
   [CardName.KUIPER_COOPERATIVE]: 'bespoke',
   [CardName.LAKEFRONT_RESORTS]: 'bespoke',

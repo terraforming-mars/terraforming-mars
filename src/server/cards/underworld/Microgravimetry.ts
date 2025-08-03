@@ -23,7 +23,7 @@ export class Microgravimetry extends ActionCard implements IProjectCard {
       metadata: {
         cardNumber: 'U042',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 2 energy identify 3 underground resources. Thgen claim 1 of them.',
+          b.action('Spend 2 energy identify 3 underground resources. Then claim 1 of them.',
             (ab) => ab.energy(2, {digit}).startAction.identify(3, {digit}).claim(1),
           );
         }),

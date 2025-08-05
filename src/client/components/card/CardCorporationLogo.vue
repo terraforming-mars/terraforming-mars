@@ -186,6 +186,12 @@
           <div class="row2">INDUSTRIES</div>
         </div>
       </template>
+      <template v-else-if="title === CardName.HENKEI_GENETICS">
+        <div class="card-henkei-genetics-logo">
+          <span class="jp"></span>
+          <span class="eng">Henkei Genetics</span>
+        </div>
+      </template>
       <template v-else-if="title === CardName.INCITE">
         <span class="card-incite-logo">Incite</span>
       </template>
@@ -476,7 +482,7 @@ const logos: Partial<Record<CardName, 'image' | 'css' | 'bespoke'>> = {
   [CardName.HADESPHERE]: 'bespoke',
   [CardName.HECATE_SPEDITIONS]: 'css',
   [CardName.HELION]: 'css',
-  [CardName.HENKEI_GENETICS]: 'css',
+  [CardName.HENKEI_GENETICS]: 'bespoke',
   [CardName.INCITE]: 'bespoke',
   [CardName.INTERPLANETARY_CINEMATICS]: 'bespoke',
   [CardName.INTRAGEN_SANCTUARY_HEADQUARTERS]: 'image',

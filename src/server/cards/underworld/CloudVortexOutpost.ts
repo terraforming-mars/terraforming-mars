@@ -55,7 +55,7 @@ export class CloudVortexOutpost extends PreludeCard {
       .andThen((card) => {
         this.resourceCount--;
         player.addResourceTo(card, 1);
-        LogHelper.logMoveResource(player, CardResource.ANIMAL, this, card);
+        LogHelper.logMoveResource(player, CardResource.FLOATER, this, card);
       });
     return undefined;
   }

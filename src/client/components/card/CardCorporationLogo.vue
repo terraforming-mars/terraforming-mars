@@ -332,6 +332,12 @@
       <template v-else-if="title === CardName.SEPTUM_TRIBUS">
         <span class="card-septem-tribus-logo">Septem Tribus</span>
       </template>
+      <template v-else-if="title === CardName.SOLBANK">
+        <div class="card-solbank-logo">
+          <span class="solbank-first">SOL</span>
+          <span class="solbank-second">Bank</span>
+        </div>
+      </template>
       <template v-else-if="title === CardName.SPLICE">
         <div class="card-splice-logo">
           <div>SPLI<span style="color:red">C</span>E</div>
@@ -529,7 +535,7 @@ const logos: Partial<Record<CardName, 'image' | 'css' | 'bespoke'>> = {
   [CardName.SAGITTA_FRONTIER_SERVICES]: 'bespoke',
   [CardName.SATURN_SYSTEMS]: 'bespoke',
   [CardName.SEPTUM_TRIBUS]: 'bespoke',
-  [CardName.SOLBANK]: 'css',
+  [CardName.SOLBANK]: 'bespoke',
   [CardName.SOYLENT_SEEDLING_SYSTEMS]: 'image',
   [CardName.SPIRE]: 'image',
   [CardName.SPLICE]: 'bespoke',

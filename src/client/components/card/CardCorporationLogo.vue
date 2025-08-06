@@ -180,6 +180,100 @@
       <template v-else-if="title === CardName.ERIS">
         <div class="card-eris-logo">Eris</div>
       </template>
+      <template v-else-if="title === CardName.GAGARIN_MOBILE_BASE">
+        <div class="card-gagarin-mobile-base-logo">
+          <div class="gagarin-mobile-base-svg-logo">
+            <svg version="1.1" viewBox="0.0 0.0 651.2204724409448 148.7795275590551" fill="none" stroke="none"
+              stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink"
+              xmlns="http://www.w3.org/2000/svg">
+              <clipPath id="p.gagarin">
+                <path d="m0 0l651.22046 0l0 148.77953l-651.22046 0l0 -148.77953z" clip-rule="nonzero" />
+              </clipPath>
+              <g clip-path="url(#p.gagarin)">
+                <path fill="#000000" fill-opacity="0.0" d="m0 0l651.22046 0l0 148.77953l-651.22046 0z"
+                  fill-rule="evenodd" />
+                <path fill="#ffffff"
+                  d="m1.2204725 26.381056l0 0c0 -13.223207 10.719528 -23.942736 23.942736 -23.942736l603.32715 0c6.3499756 0 12.439941 2.522531 16.930054 7.012665c4.4901123 4.4901342 7.0126343 10.580063 7.0126343 16.93007l0 95.76807c0 13.223206 -10.719482 23.942734 -23.942688 23.942734l-603.32715 0c-13.223207 0 -23.942736 -10.719528 -23.942736 -23.942734z"
+                  fill-rule="evenodd" />
+                <path stroke="#000000" stroke-width="8.0" stroke-linejoin="round" stroke-linecap="butt"
+                  d="m1.2204725 26.381056l0 0c0 -13.223207 10.719528 -23.942736 23.942736 -23.942736l603.32715 0c6.3499756 0 12.439941 2.522531 16.930054 7.012665c4.4901123 4.4901342 7.0126343 10.580063 7.0126343 16.93007l0 95.76807c0 13.223206 -10.719482 23.942734 -23.942688 23.942734l-603.32715 0c-13.223207 0 -23.942736 -10.719528 -23.942736 -23.942734z"
+                  fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m200.28346 112.35614l39.51181 -67.87401l39.511826 67.87401z"
+                  fill-rule="evenodd" />
+                <path stroke="#000000" stroke-width="16.0" stroke-miterlimit="8.0" stroke-linecap="butt"
+                  d="m200.28346 112.35614l39.51181 -67.87401l39.511826 67.87401z" fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m81.632545 112.35614l39.51181 -67.87401l39.511818 67.87401z"
+                  fill-rule="evenodd" />
+                <path stroke="#000000" stroke-width="16.0" stroke-miterlimit="8.0" stroke-linecap="butt"
+                  d="m81.632545 112.35614l39.51181 -67.87401l39.511818 67.87401z" fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m316.40027 113.518875l39.51181 -67.87402l39.51181 67.87402z"
+                  fill-rule="evenodd" />
+                <path stroke="#000000" stroke-width="16.0" stroke-miterlimit="8.0" stroke-linecap="butt"
+                  d="m316.40027 113.518875l39.51181 -67.87402l39.51181 67.87402z" fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0"
+                  d="m100.05249 37.06349l-39.511806 67.874016l-39.51181 -67.874016z" fill-rule="evenodd" />
+                <path stroke="#000000" stroke-width="16.0" stroke-miterlimit="8.0" stroke-linecap="butt"
+                  d="m100.05249 37.06349l-39.511806 67.874016l-39.51181 -67.874016z" fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0"
+                  d="m334.82022 35.900764l-39.51181 67.874016l-39.511826 -67.874016z" fill-rule="evenodd" />
+                <path stroke="#000000" stroke-width="2.0" stroke-miterlimit="8.0" stroke-linecap="butt"
+                  d="m334.82022 35.900764l-39.51181 67.874016l-39.511826 -67.874016z" fill-rule="evenodd" />
+                <path fill="#ffffff" d="m153.13762 117.72628l-6.8215027 -13.952751l-14.123383 0l6.8215027 13.952751z"
+                  fill-rule="evenodd" />
+                <path fill="#ffffff" d="m271.84338 118.169586l-6.8215027 -13.952751l-14.123383 0l6.8215027 13.952751z"
+                  fill-rule="evenodd" />
+                <path fill="#ffffff"
+                  d="m102.29766 44.87064l-16.350365 0.13980103l-25.378014 43.87788l8.027588 14.250038z"
+                  fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0"
+                  d="m217.43701 35.900764l-39.51181 67.874016l-39.51181 -67.874016z" fill-rule="evenodd" />
+                <path stroke="#000000" stroke-width="16.0" stroke-miterlimit="8.0" stroke-linecap="butt"
+                  d="m217.43701 35.900764l-39.51181 67.874016l-39.51181 -67.874016z" fill-rule="evenodd" />
+                <path fill="#ffffff"
+                  d="m219.68217 43.70791l-16.350357 0.13980103l-25.378021 43.877876l8.027588 14.250038z"
+                  fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m372.06665 36.51831l78.53543 0.26771545l-39.007874 68.17323z"
+                  fill-rule="evenodd" />
+                <path stroke="#000000" stroke-width="16.0" stroke-miterlimit="8.0" stroke-linecap="butt"
+                  d="m372.06665 36.51831l78.53543 0.26771545l-39.007874 68.17323z" fill-rule="evenodd" />
+                <path fill="#ffffff"
+                  d="m377.68256 30.659147l8.308838 14.086515l50.689392 0.047439575l8.308868 -14.070963z"
+                  fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0"
+                  d="m511.26254 112.29271l-78.519684 -0.2992096l39.02362 -68.14173z" fill-rule="evenodd" />
+                <path stroke="#000000" stroke-width="16.0" stroke-miterlimit="8.0" stroke-linecap="butt"
+                  d="m511.26254 112.29271l-78.519684 -0.2992096l39.02362 -68.14173z" fill-rule="evenodd" />
+                <path fill="#ffffff"
+                  d="m505.6456 118.115715l-10.706696 -18.151749l-45.893677 -0.04295349l-10.706696 18.131714z"
+                  fill-rule="evenodd" />
+                <path fill="#ffffff" d="m323.5431 119.29904l6.8215027 -13.952751l14.123383 0l-6.8215027 13.952751z"
+                  fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m551.16797 112.35614l39.51184 -67.87401l39.51178 67.87401z"
+                  fill-rule="evenodd" />
+                <path stroke="#000000" stroke-width="16.0" stroke-miterlimit="8.0" stroke-linecap="butt"
+                  d="m551.16797 112.35614l39.51184 -67.87401l39.51178 67.87401z" fill-rule="evenodd" />
+                <path fill="#ffffff" d="m541.3044 118.108116l41.827637 -73.354324l42.36133 73.354324z"
+                  fill-rule="evenodd" />
+                <path fill="#000000"
+                  d="m616.14984 84.07361l-8.308838 -14.083359l-40.075195 -0.022262573l-8.308838 14.07412z"
+                  fill-rule="evenodd" />
+                <path fill="#000000" fill-opacity="0.0" d="m569.91113 36.409954l-39.51178 67.87402l-39.51181 -67.87402z"
+                  fill-rule="evenodd" />
+                <path stroke="#000000" stroke-width="16.0" stroke-miterlimit="8.0" stroke-linecap="butt"
+                  d="m569.91113 36.409954l-39.51178 67.87402l-39.51181 -67.87402z" fill-rule="evenodd" />
+                <path fill="#ffffff" d="m579.7747 30.65798l-41.827576 73.35433l-42.36139 -73.35433z"
+                  fill-rule="evenodd" />
+                <path fill="#000000"
+                  d="m504.92926 64.69249l8.308838 14.083359l40.075256 0.022262573l8.308838 -14.07412z"
+                  fill-rule="evenodd" />
+              </g>
+            </svg>
+          </div>
+          <div class="gagarin-mobile-base-title">
+            Gagarin Mobile Base
+          </div>
+        </div>
+      </template>
       <template v-else-if="title === CardName.HADESPHERE">
         <div class="card-hadesphere-logo">
           <div class="row1">HADESPHERE</div>
@@ -321,6 +415,12 @@
       </template>
       <template v-else-if="title === CardName.SEPTUM_TRIBUS">
         <span class="card-septem-tribus-logo">Septem Tribus</span>
+      </template>
+      <template v-else-if="title === CardName.SOLBANK">
+        <div class="card-solbank-logo">
+          <span class="solbank-first">SOL</span>
+          <span class="solbank-second">Bank</span>
+        </div>
       </template>
       <template v-else-if="title === CardName.SPLICE">
         <div class="card-splice-logo">
@@ -478,6 +578,7 @@ const logos: Partial<Record<CardName, 'image' | 'css' | 'bespoke'>> = {
   [CardName.ECOTEC]: 'bespoke',
   [CardName.ERIS]: 'bespoke',
   [CardName.FACTORUM]: 'css',
+  [CardName.GAGARIN_MOBILE_BASE]: 'bespoke',
   [CardName.HABITAT_MARTE]: 'image',
   [CardName.HADESPHERE]: 'bespoke',
   [CardName.HECATE_SPEDITIONS]: 'css',
@@ -528,7 +629,7 @@ const logos: Partial<Record<CardName, 'image' | 'css' | 'bespoke'>> = {
   [CardName.SAGITTA_FRONTIER_SERVICES]: 'bespoke',
   [CardName.SATURN_SYSTEMS]: 'bespoke',
   [CardName.SEPTUM_TRIBUS]: 'bespoke',
-  [CardName.SOLBANK]: 'css',
+  [CardName.SOLBANK]: 'bespoke',
   [CardName.SOYLENT_SEEDLING_SYSTEMS]: 'image',
   [CardName.SPIRE]: 'image',
   [CardName.SPLICE]: 'bespoke',

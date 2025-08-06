@@ -66,6 +66,7 @@ import {ProjectInspection} from './ProjectInspection';
 import {ProtectedGrowth} from './ProtectedGrowth';
 import {Psyche} from './16Psyche';
 import {PublicBaths} from './PublicBaths';
+import {PublicPlans} from './PublicPlans';
 import {Recyclon} from './Recyclon';
 import {RedShips} from './RedShips';
 import {RegoPlastics} from './RegoPlastics';
@@ -163,6 +164,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.PROTECTED_GROWTH]: {Factory: ProtectedGrowth},
     [CardName.NEW_HOLLAND]: {Factory: NewHolland},
     [CardName.VERMIN]: {Factory: Vermin},
+    [CardName.PUBLIC_PLANS]: {Factory: PublicPlans},
   },
 
   preludeCards: {

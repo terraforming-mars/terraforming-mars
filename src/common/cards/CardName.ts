@@ -569,6 +569,7 @@ export enum CardName {
   PROTECTED_GROWTH = 'Protected Growth',
   VERMIN = 'Vermin',
   CASINOS = 'Casinos',
+  PUBLIC_PLANS = 'Public Plans',
 
   // Promo cards from Dutch Open
   FLOYD_CONTINUUM = 'Floyd Continuum',

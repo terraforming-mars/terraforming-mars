@@ -35,7 +35,7 @@ export class HecateSpeditions extends CorporationCard implements ICorporationCar
           b.effect('When you play an Earth, Mars, Venus, Moon, or Jovian tag, including this, put 1 supply chain resource on this card.',
             (eb) => eb.tag(Tag.EARTH).tag(Tag.MARS).tag(Tag.VENUS).tag(Tag.MOON).tag(Tag.JOVIAN).startEffect.resource(CardResource.SUPPLY_CHAIN));
           b.br;
-          b.effect('Effect: Spend 2 supply chain resources to trade. THIS COST CANNOT BE REDUCED BY OTHER EFFECTS.',
+          b.effect('Spend 2 supply chain resources to trade. THIS COST CANNOT BE REDUCED BY OTHER EFFECTS.',
             (eb) => eb.resource(CardResource.SUPPLY_CHAIN, {amount: 2, digit}).startEffect.trade({size: Size.SMALL}));
         }),
       },

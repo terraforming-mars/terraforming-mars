@@ -151,7 +151,7 @@ export class LogHelper {
     };
 
     let resourceString = singular[resource];
-    if (resource === Resource.PLANTS && Math.abs(amount) > 1) {
+    if (resource === Resource.PLANTS && production === false && Math.abs(amount) > 1) {
       resourceString = 'plants';
     }
     const modifier = amount > 0 ? 'gained' : 'lost';
@@ -162,7 +162,9 @@ export class LogHelper {
 
     if (from !== undefined) {
       if (stealing === true) {
-        message = '${3} stole ${1} ${2} from ${0}';
+          message = production ?
+            '${3} stole ${1} ${2} production from ${0}' :
+            '${3} stole ${1} ${2} from ${0}';
       } else {
         message = message + ' because of ${3}';
       }

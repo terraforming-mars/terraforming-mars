@@ -42,7 +42,7 @@ export class CorporateTheft extends Card implements IProjectCard, IActionCard {
   public canAct(player: IPlayer): boolean {
     // Could also confirm that opponents have any resources, corruption, or resource cards.
     // Must take into account blocking abilities.
-    return !player.game.isSoloMode();
+    return !player.game.isSoloMode() && player.canAfford(5);
   }
 
   public action(player: IPlayer) {

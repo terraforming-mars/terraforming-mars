@@ -34,4 +34,19 @@ describe('CorporateTheft', () => {
     player.underworldData.corruption = 2;
     expect(card.canAct(player)).is.false;
   });
+
+  const canActRuns = [
+    {mc: 4, expected: false},
+    {mc: 5, expected: true},
+  ] as const;
+  for (const run of canActRuns) {
+    it('canAct ' + JSON.stringify(run), () => {
+      const card = new CorporateTheft();
+      const [/* game */, player, _opponent] = testGame(2, {underworldExpansion: true});
+
+      player.megaCredits = run.mc;
+
+      expect(card.canAct(player)).eq(run.expected);
+    });
+  }
 });

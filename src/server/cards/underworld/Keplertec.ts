@@ -6,7 +6,7 @@ import {ActiveCorporationCard} from '../corporation/CorporationCard';
 import {CardResource} from '../../../common/CardResource';
 import {digit} from '../Options';
 import {ICard} from '../ICard';
-import {UndergroundResourceToken} from '../../../common/underworld/UndergroundResourceToken';
+import {UndergroundResourceToken, undergroundResourceTokenDescription} from '../../../common/underworld/UndergroundResourceToken';
 import {UnderworldExpansion} from '../../../server/underworld/UnderworldExpansion';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -66,7 +66,7 @@ export class Keplertec extends ActiveCorporationCard {
 
     const orOptions = new OrOptions();
     for (const token of tokens) {
-      orOptions.options.push(new SelectOption(token).andThen(() => {
+      orOptions.options.push(new SelectOption(undergroundResourceTokenDescription[token]).andThen(() => {
         UnderworldExpansion.claimToken(player, token, /* isExcavate=*/ false, /* space= */undefined);
         inplaceRemove(tokens, token);
         UnderworldExpansion.addTokens(game, tokens);

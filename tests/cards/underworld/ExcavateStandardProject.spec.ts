@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-
 import {ExcavateStandardProject} from '../../../src/server/cards/underworld/ExcavateStandardProject';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
@@ -7,6 +6,7 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {Units} from '../../../src/common/Units';
+import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
 
 describe('ExcavateStandardProject', () => {
   let game: IGame;
@@ -26,18 +26,24 @@ describe('ExcavateStandardProject', () => {
     cast(card.play(player), undefined);
   });
 
-  it('can act', () => {
-    player.megaCredits = 6;
-    expect(card.canAct(player)).is.false;
+  for (const run of [
+    {mc: 6, steel: 0, expected: false},
+    {mc: 7, steel: 0, expected: true},
+    {mc: 2, steel: 2, expected: false},
+    {mc: 3, steel: 2, expected: true},
+  ] as const) {
+    it('can act ' + JSON.stringify(run), () => {
+      player.megaCredits = run.mc;
+      player.steel = run.steel;
+      expect(card.canAct(player)).eq(run.expected);
+    });
+  }
+
+  it('can act, no excavatable spaces', () => {
     player.megaCredits = 7;
-    expect(card.canAct(player)).is.true;
-
-    player.megaCredits = 2;
-    player.steel = 2;
-    expect(card.canAct(player)).is.false;
-
-    player.megaCredits = 3;
-    player.steel = 2;
+    for (const space of UnderworldExpansion.excavatableSpaces(player, {ignorePlacementRestrictions: true})) {
+      space.excavator = player;
+    }
     expect(card.canAct(player)).is.true;
   });
 

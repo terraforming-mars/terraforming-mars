@@ -1,7 +1,7 @@
 import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
 import {IPlayer} from '../IPlayer';
-import {From} from '../logs/From';
+import {From, isFromPlayer} from '../logs/From';
 
 export abstract class BaseStock {
   public megacredits: number = 0;
@@ -111,5 +111,83 @@ export abstract class BaseStock {
     this.deduct(Resource.PLANTS, units.plants);
     this.deduct(Resource.ENERGY, units.energy);
     this.deduct(Resource.HEAT, units.heat);
+  }
+
+  protected logUnitDelta(
+    resource: Resource,
+    amount: number,
+    production: boolean,
+    from: From | undefined,
+    stealing = false,
+  ) {
+    if (amount === 0) {
+      // Logging zero units doesn't seem to happen
+      return;
+    }
+
+    // 1. Peter gained 5 MC
+    // 2. Peter gained 5 MC from Robotic Workforce
+    // 3. Peter gained 5 MC production
+    // 4. Peter gained 5 MC production beacuse of Robotic Workforce
+
+    // 5. Peter lost 5 MC
+    // 6. Peter lost 5 MC from Robotic Workforce
+    // 7. Peter lost 5 MC production
+    // 8. Peter lost 5 MC production beacuse of Robotic Workforce
+
+    // 9. Peter lost 1 MC production, stolen by Alan
+
+    const singular: Record<Resource, string> = {
+      [Resource.MEGACREDITS]: 'M€',
+      [Resource.STEEL]: 'steel',
+      [Resource.TITANIUM]: 'titanium',
+      [Resource.PLANTS]: 'plant',
+      [Resource.ENERGY]: 'energy',
+      [Resource.HEAT]: 'heat',
+    };
+
+    let resourceString = singular[resource];
+    if (resource === Resource.PLANTS && production === false && Math.abs(amount) > 1) {
+      resourceString = 'plants';
+    }
+    const modifier = amount > 0 ? 'gained' : 'lost';
+    let message = production ?
+      '${0} ' + modifier + ' ${1} ${2} production' :
+      '${0} ' + modifier + ' ${1} ${2}';
+      //  You   lost           1   plant production
+
+    if (from !== undefined) {
+      if (stealing === true) {
+        message = production ?
+          '${3} stole ${1} ${2} production from ${0}' :
+          '${3} stole ${1} ${2} from ${0}';
+      } else {
+        message = message + ' because of ${3}';
+      }
+    }
+
+    this.player.game.log(message, (b) => {
+      b.player(this.player)
+        .number(Math.abs(amount))
+        .string(resourceString);
+
+      if (from !== undefined) {
+        if (isFromPlayer(from)) {
+          b.player(from.player);
+        } else if ('card' in from) {
+          if (typeof(from.card) === 'object') {
+            b.card(from.card);
+          } else {
+            b.cardName(from.card);
+          }
+        } else {
+          if (typeof(from.globalEvent) === 'object') {
+            b.globalEvent(from.globalEvent);
+          } else {
+            b.globalEventName(from.globalEvent);
+          }
+        }
+      }
+    });
   }
 }

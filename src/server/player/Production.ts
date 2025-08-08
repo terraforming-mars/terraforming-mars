@@ -1,6 +1,5 @@
 import {LawSuit} from '../cards/promo/LawSuit';
 import {Resource} from '../../common/Resource';
-import {LogHelper} from '../LogHelper';
 import {From, isFromPlayer} from '../logs/From';
 import {BaseStock} from './StockBase';
 import {IPlayer} from '../IPlayer';
@@ -19,7 +18,7 @@ export class Production extends BaseStock {
     this[resource] += delta;
 
     if (options?.log === true) {
-      LogHelper.logUnitDelta(this.player, resource, amount, /* production*/ true, options.from, options.stealing);
+      this.logUnitDelta(resource, amount, /* production*/ true, options.from, options.stealing);
     }
 
     const from = options?.from;

@@ -401,7 +401,6 @@
   "${0} is in effect for the rest of this generation.": "",
   "Steel and titanium are worth 1 M€ less, except for ${0}, whose steel and titanium are worth 1 M€ more.": "",
   "${0} blackmailed the neutral player and was paid 10 M€.": "",
-  "${0} blackmailed ${1} who lost 2 corruption.": "",
   "${0} blackmailed ${1} and was paid 10 M€.": "",
   "${0} sued ${1} who had ${2} M€.": "",
   "${0} selected Global Event ${1} for the current global event": "",

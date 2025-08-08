@@ -29,7 +29,7 @@ export class CorporateBlackmail extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U039',
         renderData: CardRenderer.builder((b) => {
-          b.text('PAYS YOU', Size.SMALL).megacredits(10, {all}).or().corruption(2).br;
+          b.text('PAYS YOU', Size.SMALL).megacredits(10, {all}).or().corruption(2, {all}).br;
           b.text('THIS CANNOT BE BLOCKED BY CORRUPTION', Size.SMALL).br;
         }),
         description: 'Requires 1 corruption. Target a player that has at least 3 corruption. ' +
@@ -55,7 +55,8 @@ export class CorporateBlackmail extends Card implements IProjectCard {
 
     function corruptionConsequence(blackmailedPlayer: IPlayer) {
       UnderworldExpansion.loseCorruption(blackmailedPlayer, 2);
-      player.game.log('${0} blackmailed ${1} who lost 2 corruption.', (b) => b.player(player).player(blackmailedPlayer));
+      UnderworldExpansion.gainCorruption(player, 2);
+      player.game.log('${0} blackmailed ${1} and took 2 corruption.', (b) => b.player(player).player(blackmailedPlayer));
     }
 
     return new SelectPlayer(this.targets(player), 'Select player to blackmail', 'blackmail')

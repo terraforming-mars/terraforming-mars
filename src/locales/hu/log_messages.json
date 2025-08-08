@@ -403,7 +403,7 @@
   "${0} is in effect for the rest of this generation.": "${0} a generáció végéig érvényben van.",
   "Steel and titanium are worth 1 M€ less, except for ${0}, whose steel and titanium are worth 1 M€ more.": "Az acél és titán 1 M€-tel kevesebbet ér, kivéve ${0}, az ő acél és titánja 1 M€-tel többet ér.",
   "${0} blackmailed the neutral player and was paid 10 M€.": "${0} megzsarolta a semleges játékost, és 10 M€-tet fizettek neki.",
-  "${0} blackmailed ${1} who lost 2 corruption.": "${0} megzsarolta ${1} játékost, aki 2 korrupciót veszített.",
+  "// ${0} blackmailed ${1} who lost 2 corruption.": "${0} megzsarolta ${1} játékost, aki 2 korrupciót veszített.",
   "${0} blackmailed ${1} and was paid 10 M€.": "${0} megzsarolta ${1} játékost, és kapott 10 M€-tet.",
   "${0} sued ${1} who had ${2} M€.": "${0} beperelte ${1} játékost, akinek ${2} M€-e volt.",
   "${0} selected Global Event ${1} for the current global event": "${0} ${1} Globális eseményt választott ki az aktuális globális eseményhez.",

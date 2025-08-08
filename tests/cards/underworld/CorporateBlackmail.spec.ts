@@ -70,6 +70,7 @@ describe('CorporateBlackmail', () => {
     expect(player2.megaCredits).eq(1);
     expect(player2.underworldData.corruption).eq(3);
     expect(player.megaCredits).eq(10);
+    expect(player.underworldData.corruption).eq(0);
   });
 
   it('play, choose corruption', () => {
@@ -84,6 +85,7 @@ describe('CorporateBlackmail', () => {
 
     expect(player2.megaCredits).eq(11);
     expect(player2.underworldData.corruption).eq(1);
+    expect(player.underworldData.corruption).eq(2);
     expect(player.megaCredits).eq(0);
   });
 });

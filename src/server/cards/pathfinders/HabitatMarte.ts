@@ -25,5 +25,5 @@ export class HabitatMarte extends CorporationCard implements ICorporationCard {
       },
     });
   }
-  // Behavior in Player.getTagCount
+  // Behavior in Tags.ts
 }

@@ -14,7 +14,6 @@ import {SelectAmount} from '../../inputs/SelectAmount';
 import {Resource} from '../../../common/Resource';
 import {sum} from '../../../common/utils/utils';
 import {Message} from '../../../common/logs/Message';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {Priority} from '../../deferredActions/Priority';
 
 export class RoadPiracy extends Card implements IProjectCard {
@@ -76,7 +75,7 @@ export class RoadPiracy extends Card implements IProjectCard {
 
 
   public override bespokePlay(player: IPlayer) {
-    player.game.defer(new SimpleDeferredAction(player, () => this.do(player)), Priority.ATTACK_OPPONENT);
+    player.defer(() => this.do(player), Priority.ATTACK_OPPONENT);
     return undefined;
   }
 

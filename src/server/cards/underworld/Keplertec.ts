@@ -10,7 +10,6 @@ import {UndergroundResourceToken, undergroundResourceTokenDescription} from '../
 import {UnderworldExpansion} from '../../../server/underworld/UnderworldExpansion';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {inplaceRemove} from '../../../common/utils/utils';
 
 export class Keplertec extends ActiveCorporationCard {
@@ -75,9 +74,7 @@ export class Keplertec extends ActiveCorporationCard {
         inplaceRemove(tokens, token);
         UnderworldExpansion.addTokens(game, tokens);
         if (idx > 1) {
-          game.defer(new SimpleDeferredAction(player, () => {
-            return this.effect(player, idx - 1);
-          }));
+          player.defer(() => this.effect(player, idx - 1));
         }
         return undefined;
       }));

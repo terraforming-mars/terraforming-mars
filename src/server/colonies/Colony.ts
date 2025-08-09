@@ -177,17 +177,35 @@ export abstract class Colony implements IColony {
   }
 
   private giveBonus(player: IPlayer, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
-    const game = player.game;
+    const action: undefined | DeferredAction<any> = this.computeBonus(player, bonusType, quantity, resource);
+    if (action === undefined) {
+      return undefined;
+    }
+    if (isGiveColonyBonus) {
+      /*
+        * When this method is called from within the GiveColonyBonus deferred action
+        * we return the player input directly instead of deferring it.
+        *
+        * This is related to how certain colony bonuses require player interaction.
+        * The deferred action queue doesn't work well when asking for inputs for
+        * multple players.
+        */
+      return action.execute();
+    } else {
+      player.game.defer(action);
+      return undefined;
+    }
+  }
 
-    let action: undefined | DeferredAction<any> = undefined;
+  private computeBonus(player: IPlayer, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined): DeferredAction<any> | undefined {
+    const game = player.game;
     switch (bonusType) {
     case ColonyBenefit.ADD_RESOURCES_TO_CARD:
       const cardResource = this.metadata.cardResource;
-      action = new AddResourcesToCard(player, cardResource, {count: quantity});
-      break;
+      return new AddResourcesToCard(player, cardResource, {count: quantity});
 
     case ColonyBenefit.ADD_RESOURCES_TO_VENUS_CARD:
-      action = new AddResourcesToCard(
+      return new AddResourcesToCard(
         player,
         undefined,
         {
@@ -195,11 +213,10 @@ export abstract class Colony implements IColony {
           restrictedTag: Tag.VENUS,
           title: message('Select Venus card to add ${0} resource(s)', (b) => b.number(quantity)),
         });
-      break;
 
     case ColonyBenefit.COPY_TRADE:
       const openColonies = game.colonies.filter((colony) => colony.isActive);
-      action = new SimpleDeferredAction(
+      return new SimpleDeferredAction(
         player,
         () => new SelectColony('Select colony to gain trade income from', 'Select', openColonies)
           .andThen((colony) => {
@@ -212,64 +229,60 @@ export abstract class Colony implements IColony {
             return undefined;
           }),
       );
-      break;
 
     case ColonyBenefit.DRAW_CARDS:
-      action = DrawCards.keepAll(player, quantity);
-      break;
+      return DrawCards.keepAll(player, quantity);
 
     case ColonyBenefit.DRAW_CARDS_AND_BUY_ONE:
-      action = DrawCards.keepSome(player, 1, {paying: true, logDrawnCard: true});
-      break;
+      return DrawCards.keepSome(player, 1, {paying: true, logDrawnCard: true});
 
     case ColonyBenefit.DRAW_CARDS_AND_DISCARD_ONE:
       player.defer(() => {
         player.drawCard();
-        player.game.defer(new DiscardCards(player, 1, 1, this.name + ' colony bonus. Select a card to discard'), Priority.SUPERPOWER);
+        game.defer(new DiscardCards(player, 1, 1, this.name + ' colony bonus. Select a card to discard'), Priority.SUPERPOWER);
       });
-      break;
+      return undefined;
 
     case ColonyBenefit.DRAW_CARDS_AND_KEEP_ONE:
-      action = DrawCards.keepSome(player, quantity, {keepMax: 1});
-      break;
+      return DrawCards.keepSome(player, quantity, {keepMax: 1});
 
     case ColonyBenefit.GAIN_CARD_DISCOUNT:
       player.colonies.cardDiscount += 1;
       game.log('Cards played by ${0} cost 1 M€ less this generation', (b) => b.player(player));
-      break;
+      return undefined;
 
     case ColonyBenefit.GAIN_PRODUCTION:
       if (resource === undefined) {
         throw new Error('Resource cannot be undefined');
       }
       player.production.add(resource, quantity, {log: true});
-      break;
+      return undefined;
 
     case ColonyBenefit.GAIN_RESOURCES:
       if (resource === undefined) {
         throw new Error('Resource cannot be undefined');
       }
       player.stock.add(resource, quantity, {log: true});
-      break;
+      return undefined;
 
     case ColonyBenefit.GAIN_SCIENCE_TAG:
       player.tags.extraScienceTags += 1;
       player.playCard(new ScienceTagCard(), undefined, 'nothing');
       game.log('${0} gained 1 Science tag', (b) => b.player(player));
-      break;
+      return undefined;
 
     case ColonyBenefit.GAIN_SCIENCE_TAGS_AND_CLONE_TAG:
       player.tags.extraScienceTags += 2;
       player.playCard(new ScienceTagCard(), undefined, 'nothing');
       game.log('${0} gained 2 Science tags', (b) => b.player(player));
-      break;
+      return undefined;
 
     case ColonyBenefit.GAIN_INFLUENCE:
       if (game.turmoil) {
         game.turmoil.addInfluenceBonus(player);
         game.log('${0} gained 1 influence', (b) => b.player(player));
       }
-      break;
+      return undefined;
 
     case ColonyBenefit.PLACE_DELEGATES:
       if (game.turmoil) {
@@ -279,14 +292,14 @@ export abstract class Colony implements IColony {
           game.defer(new SendDelegateToArea(player));
         }
       }
-      break;
+      return undefined;
 
     case ColonyBenefit.GIVE_MC_PER_DELEGATE:
       if (game.turmoil) {
         const partyDelegateCount = sum(game.turmoil.parties.map((party) => party.delegates.get(player)));
         player.stock.add(Resource.MEGACREDITS, partyDelegateCount, {log: true});
       }
-      break;
+      return undefined;
 
     case ColonyBenefit.PLACE_HAZARD_TILE:
       const spaces = game.board.getAvailableSpacesOnLand(player)
@@ -296,47 +309,45 @@ export abstract class Colony implements IColony {
           return adjacentSpaces.filter((space) => space.tile !== undefined).length === 0;
         });
 
-      game.defer(new PlaceHazardTile(player, TileType.EROSION_MILD, {title: 'Select space next to no other tile for hazard', spaces}));
-      break;
+      return new PlaceHazardTile(player, TileType.EROSION_MILD, {title: 'Select space next to no other tile for hazard', spaces});
 
     case ColonyBenefit.ERODE_SPACES_ADJACENT_TO_HAZARDS:
-      game.defer(new ErodeSpacesDeferred(player, quantity));
-      break;
+      return new ErodeSpacesDeferred(player, quantity);
 
     case ColonyBenefit.GAIN_MC_PER_HAZARD_TILE:
       player.stock.megacredits += game.board.getHazards().length;
-      break;
+      return undefined;
 
     case ColonyBenefit.GAIN_TR:
       if (quantity > 0) {
         player.increaseTerraformRating(quantity, {log: true});
       }
-      break;
+      return undefined;
 
     case ColonyBenefit.GAIN_VP:
       if (quantity > 0) {
         player.colonies.victoryPoints += quantity;
         game.log('${0} gained ${1} VP', (b) => b.player(player).number(quantity));
       }
-      break;
+      return undefined;
 
     case ColonyBenefit.INCREASE_VENUS_SCALE:
       game.increaseVenusScaleLevel(player, quantity as 3|2|1);
       game.log('${0} increased Venus scale ${1} step(s)', (b) => b.player(player).number(quantity));
-      break;
+      return undefined;
 
     case ColonyBenefit.LOSE_RESOURCES:
       if (resource === undefined) {
         throw new Error('Resource cannot be undefined');
       }
       player.stock.deduct(resource, Math.min(player.stock.get(resource), quantity), {log: true});
-      break;
+      return undefined;
 
     case ColonyBenefit.OPPONENT_DISCARD:
       if (game.isSoloMode()) {
-        break;
+        return undefined;
       }
-      action = new SimpleDeferredAction(
+      return new SimpleDeferredAction(
         player,
         () => {
           const playersWithCards = game.players.filter((p) => p.cardsInHand.length > 0);
@@ -349,22 +360,19 @@ export abstract class Colony implements IColony {
               return undefined;
             });
         });
-      break;
 
     case ColonyBenefit.PLACE_OCEAN_TILE:
-      action = new PlaceOceanTile(player);
-      break;
+      return new PlaceOceanTile(player);
 
     case ColonyBenefit.STEAL_RESOURCES:
       if (resource === undefined) {
         throw new Error('Resource cannot be undefined');
       }
-      action = new StealResources(player, resource, quantity);
-      break;
+      return new StealResources(player, resource, quantity);
 
     case ColonyBenefit.DRAW_EARTH_CARD:
       player.drawCard(quantity, {tag: Tag.EARTH});
-      break;
+      return undefined;
 
     case ColonyBenefit.WGT_RAISE_GLOBAL_PARAMETER:
       const globalParameters = [GlobalParameter.TEMPERATURE, GlobalParameter.OXYGEN, GlobalParameter.OCEANS];
@@ -384,7 +392,7 @@ export abstract class Colony implements IColony {
           });
         }));
       }
-      break;
+      return undefined;
 
     case ColonyBenefit.GAIN_MC_FOR_EARTH_TAGS:
       const tagCount = sum(game.players.map((p) => p.tags.count(Tag.EARTH, p.id === player.id ? 'default' : 'raw')));
@@ -392,29 +400,10 @@ export abstract class Colony implements IColony {
       if (mc > 0) {
         player.stock.add(Resource.MEGACREDITS, mc, {log: true});
       }
-      break;
+      return undefined;
 
     default:
       throw new Error('Unsupported benefit type');
-    }
-
-    if (action !== undefined) {
-      if (isGiveColonyBonus) {
-        /*
-         * When this method is called from within the GiveColonyBonus deferred action
-         * we return the player input directly instead of deferring it.
-         *
-         * This is related to how certain colony bonuses require player interaction.
-         * The deferred action queue doesn't work well when asking for inputs for
-         * multple players.
-         */
-        return action.execute();
-      } else {
-        game.defer(action);
-        return undefined;
-      }
-    } else {
-      return undefined;
     }
   }
 

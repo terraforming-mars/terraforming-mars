@@ -91,13 +91,6 @@ export class Deck<T extends Named<CardName>> {
     return card;
   }
 
-  /**
-   * @deprecated use drawByConditionOrThrow, or create a safer version of drawByCondition
-   */
-  public drawByConditionLegacy(logger: Logger, total: number, include: (card: T) => boolean) {
-    return this.drawByConditionOrThrow(logger, total, include);
-  }
-
   public drawByConditionOrThrow(logger: Logger, total: number, include: (card: T) => boolean) {
     const result: Array<T> = [];
     const discardedCards = new Array<CardName>();

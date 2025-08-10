@@ -835,12 +835,42 @@
             margin-top: 10px;
         }
         .card-crescent-research-association-logo {
-            background-image: url(./assets/moon/corp-logo-crescent-research.png);
-            height: 50px;
-            width: 150px;
-            background-size: 150px 50px;
-            margin-top: 10px;
+          display: flex;
+          .crescent-research-association-image {
+              background-image: url(./assets/moon/corp-logo-crescent-research.png);
+              height: 50px;
+              width: 52px;
+              background-size: 52px 50px;
+              margin-top: 10px;
+          }
+          .crescent-research-association-title {
+            margin-left: 2px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+            text-shadow:
+              .5px .5px 0 black,
+              -.5px .5px 0 black,
+              .5px -.5px 0 black,
+              -.5px -.5px 0 black;
+            margin-top: 25px;
+            font-size: 7.5px;
+            font-weight: bold;
+            transform: scaleY(1.6);
+            line-height: .4rem;
+            text-align: left;
+          }
+          .crescent-research-association-row1 {
+            transform: scaleY(1.6);
+          }
+          hr {
+            border-color: white;
+            border-width: 0.5px;
+          }
+          .crescent-research-association-row2 {
+            transform: scaleY(1.6);
+          }
         }
+
         .card-luna-first-incorporated-logo {
             background-image: url(./assets/moon/corp-logo-luna-first.png);
             height: 50px;

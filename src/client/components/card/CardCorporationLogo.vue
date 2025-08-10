@@ -165,6 +165,16 @@
           <div style="margin-left:10px"> ■■MARS■■ </div>
         </div>
       </template>
+      <template v-else-if="title === CardName.CRESCENT_RESEARCH_ASSOCIATION">
+        <div class="card-crescent-research-association-logo">
+          <div class="crescent-research-association-image"></div>
+          <div class="crescent-research-association-title">
+            <div class="crescent-research-association-row1">CRESCENT RESEARCH</div>
+            <hr>
+            <div class="crescent-research-association-row2">ASSOCIATION</div>
+          </div>
+        </div>
+      </template>
       <template v-else-if="title === CardName.CURIOSITY_II">
         <div class="card-curiosity-ii-logo">Curiosity II</div>
       </template>
@@ -660,7 +670,7 @@ const logos: Partial<Record<CardName, 'image' | 'css' | 'bespoke'>> = {
   [CardName.CHIMERA]: 'image',
   [CardName.COLLEGIUM_COPERNICUS]: 'image',
   [CardName.CREDICOR]: 'css',
-  [CardName.CRESCENT_RESEARCH_ASSOCIATION]: 'image',
+  [CardName.CRESCENT_RESEARCH_ASSOCIATION]: 'bespoke',
   [CardName.CURIOSITY_II]: 'bespoke',
   [CardName.DEMETRON_LABS]: 'bespoke',
   [CardName.ECOLINE]: 'css',

@@ -1,6 +1,7 @@
 {
   "${0} revealed and discarded ${1}": "${0} deckte ${1} auf und warf es ab",
   "${0} revealed ${1}": "${0} deckte ${1} auf",
+  "${0} has no cards to show": "${0} hat keine Karten vorzuweisen.",
   "${0} used ${1} standard action": "${0} führte Standardaktion ${1} aus",
   "Generation ${0}": "",
   "${0} added ${1} ${2} to ${3}": "${0} fügte ${3} ${1} ${2} hinzu",
@@ -91,6 +92,7 @@
   "${0} gained ${1}": "${0} erhielt ${1}",
   "${0} gained 1 ${1} and 1 ${2} from ${3}": "${0} erhielt 1 ${1} und 1 ${2} von ${3}",
   "${0} gained ${1} M€ by discarding ${2} cards": "${0} erhielt ${1} M€ durch Abwerfen von ${2} Karten",
+  "claimed": "beanspruchte",
   "1 TR": "1 TW",
   "nothing": "nichts",
   "card": "Karte",

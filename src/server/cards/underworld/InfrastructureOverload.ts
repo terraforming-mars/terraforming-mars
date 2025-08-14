@@ -18,6 +18,7 @@ export class InfrastructureOverload extends Card implements IProjectCard {
       victoryPoints: -1,
 
       behavior: {
+        underworld: {corruption: 1},
         decreaseAnyProduction: {count: 2, type: Resource.ENERGY},
       },
 

@@ -439,6 +439,7 @@
   "${0} sued ${1} who had ${2} M€.": "${0} beklagt ${1}, der ${2} M€ hatte.",
   "${0} selected Global Event ${1} for the current global event": "${0} wählte globales Ereignis ${1} für das aktuelle globale Ereignis aus",
   "Neutral delegate added to ${0}": "Neutrale Delegierte zu ${0} hinzugefügt",
+  "${0} sent 1 Neutral delegate in ${1} area": "${0} schickt 1 neutralen Delegierten in die ${1} Partei",
 
   "${0} searched for ${1} tags": "${0} suchte nach ${1} Symbol",
   "earth": "Erde",

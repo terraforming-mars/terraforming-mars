@@ -1,4 +1,7 @@
 {
+  "Public Plans": "Öffentliche Pläne",
+  "REVEAL ANY NUMBER OF OTHER CARDS FROM YOUR HAND. (YOUR OPPONENTS MAY INSPECT THEM.) GAIN 1 M€ FOR EACH REVEALED CARD.": "ZEIGE BELIEBIG VIELE ANDERE KARTEN AUS DEINER HAND. (DEINE GEGNER KÖNNEN SIE ANSEHEN.) ERHALTE 1 M€ FÜR JEDE GEZEIGTE KARTE.",
+  
   "Vermin": "Ratten",
   "Effect: When any city is placed, add 1 animal here.": "EFFEKT: Jedes Mal, wenn eine Stadt platziert wird, wird hier 1 Tier hinzugefügt.",
   "Action: Add 1 animal here or 1 microbe to ANOTHER card.": "AKTION: Füge 1 Tier hier oder 1 Mikrobe zu einer ANDEREN Karte hinzu.",
@@ -34,7 +37,7 @@
   "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "AKTION: Gib 10 M€ aus (Titan kann verwendet werden), um hier 2 Asteroiden hinzuzufügen.",
   "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "AKTION: Gib 1 Asteroid von hier aus, um ein Ozeanplättchen zu platzieren. DER ERSTE SPIELER WÄHLT, WO DU ES PLATZIEREN MUSST.",
 
-  "Floyd Continuum": "",
+  "Floyd Continuum": "Floyd-Kontinuum",
   "Action: Gain 3 M€ per completed terraforming parameter.": "AKTION: Erhalte 3 M€ pro abgeschlossenem Terraform-Parameter.",
 
   "Martian Lumber Corp": "Mars-Holz Konzern",
@@ -98,7 +101,7 @@
   "Robot Pollinators": "Roboter-Bestäuber",
   "Requires 4% oxygen. Increase your plant production 1 step. Gain 1 plant for every plant tag you have.": "Erfordet 4% Sauerstoffgehalt. Erhöhe deine Pflanzen-Produktion um 1. Erhalte 1 Pflanze für jedes Pflanzensymbol, das du hast.",
 
-  "16 Psyche": "",
+  "16 Psyche": "Psyche 16",
   "Increase titanium production 2 steps. Gain 3 titanium.": "Erhöhe deine Titan-Produktion um 2. Erhalte 3 Titan.",
 
   "Comet Aiming": "Kometenzielen",

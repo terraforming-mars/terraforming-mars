@@ -1,6 +1,7 @@
 {
   "${0} revealed and discarded ${1}": "${0} deckte ${1} auf und warf es ab",
   "${0} revealed ${1}": "${0} deckte ${1} auf",
+  "${0} has no cards to show": "${0} hat keine Karten vorzuweisen.",
   "${0} used ${1} standard action": "${0} führte Standardaktion ${1} aus",
   "Generation ${0}": "",
   "${0} added ${1} ${2} to ${3}": "${0} fügte ${3} ${1} ${2} hinzu",
@@ -45,7 +46,9 @@
   "${0} lost ${1} ${2}": "${0} verliert ${1} ${2}",
   "${0} lost ${1} ${2} because of ${3}": "${0} verliert ${1} ${2} wegen ${3}",
   "${3} stole ${1} ${2} from ${0}": "${3} stahl ${1} ${2} von ${0}",
+  "${3} stole ${1} ${2} production from ${0}": "${3} stahl ${1} ${2} Produktion von ${0}",
   "${3} stole ${1} ${2} from ${0} because of ${3}": "${3} stahl ${1} ${2} von ${0} wegen ${3}",
+  "${0} stole ${1} ${2} from the neutral player": "${0} hat ${1} ${2} von dem neutralen Spieler gestohlen",
   "${0} moved 1 ${1} from ${2} to ${3}.": "${0} bewegt 1 ${1} von ${2} nach ${3}.",
 
   "Card not found": "Karte nicht gefunden",
@@ -91,6 +94,7 @@
   "${0} gained ${1}": "${0} erhielt ${1}",
   "${0} gained 1 ${1} and 1 ${2} from ${3}": "${0} erhielt 1 ${1} und 1 ${2} von ${3}",
   "${0} gained ${1} M€ by discarding ${2} cards": "${0} erhielt ${1} M€ durch Abwerfen von ${2} Karten",
+  "claimed": "beanspruchte",
   "1 TR": "1 TW",
   "nothing": "nichts",
   "card": "Karte",
@@ -188,6 +192,7 @@
   "selected": "Auswahl",
   "1 corruption": "1 Koruption",
   "2 corruption": "2 Koruption",
+  "Gain 6 M€ when placing a tile here": "Erhalte 6 M€, wenn du hier eine Plättchen platzieren.",
 
   "${0} played ${1}": "${0} hat ${1} gespielt",
   "${0} used ${1} action": "${0} hat eine Aktion von ${1} genutzt",
@@ -367,7 +372,6 @@
   "${0} found life!": "${0} hat Leben gefunden!",
   "${0} gained ${1} energy": "${0} erhielt ${1} Energie",
   "${0} decreased energy production 1 step to gain 8 M€": "${0} senkte Energie-Produktion um 1, um 8 M€ zu erhalten",
-  "${0} stole ${1} ${2} from the neutral player": "${0} hat ${1} ${2} von dem neutralen Spieler gestohlen",
   "Neutral player received ${0} M€ from ${1} owner (${2})": "Der neutrale Spieler erhielt ${0} M€ vom Besitzer des ${1} (${2})",
   "${0} placed a Community (player marker)": "${0} platzierte eine Gemeinde (Spieler-Marker)",
   "${0} doubled resources on ${1} from ${2} to ${3}": "${0} verdoppelte Ressourcen auf ${1} von ${2} auf ${3}",
@@ -436,6 +440,7 @@
   "${0} sued ${1} who had ${2} M€.": "${0} beklagt ${1}, der ${2} M€ hatte.",
   "${0} selected Global Event ${1} for the current global event": "${0} wählte globales Ereignis ${1} für das aktuelle globale Ereignis aus",
   "Neutral delegate added to ${0}": "Neutrale Delegierte zu ${0} hinzugefügt",
+  "${0} sent 1 Neutral delegate in ${1} area": "${0} schickt 1 neutralen Delegierten in die ${1} Partei",
 
   "${0} searched for ${1} tags": "${0} suchte nach ${1} Symbol",
   "earth": "Erde",

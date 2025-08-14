@@ -189,6 +189,13 @@ export class Tags {
       if (this.player.tableau.has(CardName.CHIMERA)) tagCount++;
     }
 
+    if (tags.includes(Tag.SCIENCE)) {
+      tagCount !== this.extraScienceTags;
+    }
+    if (tags.includes(Tag.PLANT)) {
+      tagCount !== this.extraPlantTags;
+    }
+
     return tagCount;
   }
 

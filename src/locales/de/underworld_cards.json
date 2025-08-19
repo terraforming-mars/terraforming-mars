@@ -182,7 +182,7 @@
 
 "Microprobing Technology": "Mikroskopische Technologie",
 "Requires 1 science tag. Gain 3 plants. Identify 2 underground resources. Claim 1 of them.": "Benötigt 1 Wissenschafts-Symbol. Erhalte 3 Pflanzen. Identifiziere 2 unterirdische Ressourcen. Beanspruche 1 davon.",
-  
+
 "Mining Market Insider": "Bergbau-Markt-Insider",
 "Effect: After any player identifies 1 or more underground spaces (at once), add 1 data resource to this card.": "EFFEKT: Nachdem ein beliebiger Spieler 1 oder mehr unterirdische Ressourcen (auf einmal) identifiziert hat, füge dieser Karte 1 Datum hinzu.",
 "Action: Spend 4 data resources on this card to draw a card.": "Aktion: Bezahle 4 Daten von dieser Karte, um eine Karte zu ziehen.",
@@ -296,7 +296,7 @@
 "Action: Use a standard project that you've already used this generation, with its cost reduced by 8 M€.": "AKTION: Benutze ein Standardprojekt, das du in dieser Generation bereits durchgeführt hast, wobei die Kosten um 8 M€ reduziert werden.",
 
 "Stem Field Subsidies": "Subventionen für Stammzellen",
-"Action: Spend 2 resources here to identify 3 underground resources, . Claim 1 of them.": "AKTION: Bezahle 2 Daten von hier, um 3 unterirdische Ressourcen zu identifizieren. Beanspruche 1 von ihnen.",
+"Action: Spend 2 resources here to identify 3 underground resources. Claim 1 of them.": "AKTION: Bezahle 2 Daten von hier, um 3 unterirdische Ressourcen zu identifizieren. Beanspruche 1 von ihnen.",
 "Whenever you play a science tag (including this), add 1 data to this card": "EFFEKT: Immer wenn du eine Wissenschaftssymbol spielst (einschließlich dieses), lege 1 Datum auf diese Karte.",
 
 "Sting Operation": "Verdeckte Operation",

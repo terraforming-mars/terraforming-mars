@@ -33,7 +33,7 @@ export class StemFieldSubsidies extends ActionCard implements IProjectCard {
           b.effect('Whenever you play a science tag (including this), add 1 data to this card.',
             (eb) => eb.tag(Tag.SCIENCE).startEffect.resource(CardResource.DATA));
           b.br;
-          b.action('Spend 2 resources here to identify 3 underground resources, . Claim 1 of them.',
+          b.action('Spend 2 resources here to identify 3 underground resources. Claim 1 of them.',
             (ab) => ab.resource(CardResource.DATA, {amount: 2}).startAction.identify(3, {digit}).claim(1));
         }),
       },

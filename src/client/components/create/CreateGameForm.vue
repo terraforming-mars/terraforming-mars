@@ -641,7 +641,7 @@ export default (Vue as WithRefs<Refs>).extend({
       fastModeOption: false,
       removeNegativeGlobalEventsOption: false,
       includeFanMA: false,
-      startingCorporations: 4,
+      startingCorporations: 3,
       soloTR: false,
       clonedGameId: undefined,
       allOfficialExpansions: false,
@@ -658,7 +658,7 @@ export default (Vue as WithRefs<Refs>).extend({
       twoCorpsVariant: false,
       customCeos: [],
       startingCeos: 3,
-      startingPreludes: 4,
+      startingPreludes: 6,
       preludeDraftVariant: undefined,
       ceosDraftVariant: undefined,
 >>>>>>> 5832fc8d7 (update defaults)

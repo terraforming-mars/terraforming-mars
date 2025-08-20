@@ -26,7 +26,7 @@ export class AerospaceMission extends PreludeCard {
   }
 
   public override bespokeCanPlay(player: IPlayer) {
-    return player.canAfford(14);
+    return player.canAfford(14) && player.colonies.getPlayableColonies().length >= 2;
   }
 
   public override bespokePlay(player: IPlayer) {

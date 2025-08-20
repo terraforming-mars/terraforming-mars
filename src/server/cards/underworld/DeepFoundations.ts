@@ -49,7 +49,7 @@ export class DeepFoundations extends Card implements IActionCard {
       })
       .andThen(() => {
         player.defer(new SelectSpace('Select space for city', availableSpaces).andThen((space) => {
-          if (space.excavator === undefined) {
+          if (UnderworldExpansion.excavatableSpaces(player, {ignorePlacementRestrictions: true}).includes(space)) {
             UnderworldExpansion.excavate(player, space);
           }
           player.game.addCity(player, space, this.name);

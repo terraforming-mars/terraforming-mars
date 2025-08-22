@@ -1643,25 +1643,6 @@ export class Game implements IGame, Logger {
   }
 
   public static deserialize(d: SerializedGame): Game {
-    // TODO(kberg): Remove by 2025-08-01
-    if (d.gameOptions.expansions === undefined) {
-      d.gameOptions.expansions = {
-        corpera: d.gameOptions.corporateEra,
-        venus: d.gameOptions.venusNextExtension,
-        colonies: d.gameOptions.coloniesExtension,
-        prelude: d.gameOptions.preludeExtension,
-        prelude2: d.gameOptions.prelude2Expansion,
-        turmoil: d.gameOptions.turmoilExtension,
-        promo: d.gameOptions.promoCardsOption,
-        community: d.gameOptions.communityCardsOption,
-        ares: d.gameOptions.aresExtension,
-        moon: d.gameOptions.moonExpansion,
-        pathfinders: d.gameOptions.pathfindersExpansion,
-        ceo: d.gameOptions.ceoExtension,
-        starwars: d.gameOptions.starWarsExpansion,
-        underworld: d.gameOptions.underworldExpansion,
-      };
-    }
     const gameOptions = d.gameOptions;
 
     const players = d.players.map((element) => Player.deserialize(element));

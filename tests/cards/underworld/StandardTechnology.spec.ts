@@ -76,7 +76,8 @@ describe('Underworld / StandardTechnology', () => {
 
   it('action', () => {
     player.playedCards.push(card);
-    card.data.projects.push(CardName.ASTEROID_STANDARD_PROJECT, CardName.AQUIFER_STANDARD_PROJECT);
+    player.standardProjectsThisGeneration.add(CardName.ASTEROID_STANDARD_PROJECT);
+    player.standardProjectsThisGeneration.add(CardName.AQUIFER_STANDARD_PROJECT);
     player.megaCredits = 9;
 
     expect(card.canAct(player)).is.true;

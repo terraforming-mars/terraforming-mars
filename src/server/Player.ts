@@ -1806,8 +1806,7 @@ export class Player implements IPlayer {
     player.hasTurmoilScienceTagBonus = d.hasTurmoilScienceTagBonus;
     player.heat = d.heat;
     player.lastCardPlayed = d.lastCardPlayed;
-    // TODO(kberg): Remove ?? [] by 2025-08-01
-    player.standardProjectsThisGeneration = new Set(d.standardProjectsThisGeneration ?? []);
+    player.standardProjectsThisGeneration = new Set(d.standardProjectsThisGeneration);
     player.megaCredits = d.megaCredits;
     player.needsToDraft = d.needsToDraft;
     player.oceanBonus = d.oceanBonus;

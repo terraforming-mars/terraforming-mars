@@ -5,7 +5,6 @@ import {Game} from '../../src/server/Game';
 import {cast, runAllActions} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {PoliticalAgendas} from '../../src/server/turmoil/PoliticalAgendas';
-import {PolicyId} from '../../src/common/turmoil/Types';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 
 describe('PoliticalAgendas', () => {
@@ -120,7 +119,6 @@ describe('PoliticalAgendas', () => {
 
     expect(PoliticalAgendas.currentAgenda(turmoil).policyId).eq('mp01');
 
-    turmoil.politicalAgendasData.agendas.get(PartyName.MARS)!.policyId = 'mfp01' as PolicyId;
     game = Game.deserialize(game.serialize());
     turmoil = game.turmoil!;
 

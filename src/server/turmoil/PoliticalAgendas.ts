@@ -5,7 +5,7 @@ import {IParty} from './parties/IParty';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {IPolicy} from './Policy';
 import {Turmoil} from './Turmoil';
-import {Agenda, AgendaStyle, PolicyId} from '../../common/turmoil/Types';
+import {Agenda, AgendaStyle} from '../../common/turmoil/Types';
 
 export type PoliticalAgendasData = {
   agendas: Map<PartyName, Agenda>;
@@ -97,12 +97,6 @@ export class PoliticalAgendas {
   }
 
   public static deserialize(d: SerializedPoliticalAgendasData): PoliticalAgendasData {
-    // TODO(kberg): Remove after 2025-08-01
-    for (const [_, agendas] of d.agendas) {
-      if (agendas.policyId.startsWith('mfp')) {
-        agendas.policyId = (agendas.policyId.slice(0, 1) + agendas.policyId.slice(2)) as PolicyId;
-      }
-    }
     return {
       agendas: new Map(d.agendas),
       agendaStyle: d.agendaStyle,

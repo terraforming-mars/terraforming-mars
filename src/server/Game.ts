@@ -40,7 +40,7 @@ import {TileType} from '../common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
 import {RandomMAOptionType} from '../common/ma/RandomMAOptionType';
 import {AresHandler} from './ares/AresHandler';
-import {AresData, deserializeAresData} from '../common/ares/AresData';
+import {AresData} from '../common/ares/AresData';
 import {GameSetup} from './GameSetup';
 import {GameCards} from './GameCards';
 import {GlobalParameter} from '../common/GlobalParameter';
@@ -1710,7 +1710,7 @@ export class Game implements IGame, Logger {
     game.fundedAwards = deserializeFundedAwards(d.fundedAwards, players, awards);
 
     if (gameOptions.aresExtension) {
-      game.aresData = deserializeAresData(d.aresData);
+      game.aresData = d.aresData;
     }
     // Reload colonies elements if needed
     if (gameOptions.coloniesExtension) {
@@ -1762,8 +1762,8 @@ export class Game implements IGame, Logger {
     game.tradeEmbargo = d.tradeEmbargo ?? false;
     game.beholdTheEmperor = d.beholdTheEmperor ?? false;
     game.globalsPerGeneration = d.globalsPerGeneration;
-    game.verminInEffect = d.verminInEffect ?? false; // TODO(kberg): remove ?? false by 2025-08-01
-    game.exploitationOfVenusInEffect = d.exploitationOfVenusInEffect ?? false; // TODO(kberg): remove ?? false by 2025-08-01
+    game.verminInEffect = d.verminInEffect;
+    game.exploitationOfVenusInEffect = d.exploitationOfVenusInEffect;
     // Still in Draft or Research of generation 1
     if (game.generation === 1 && players.some((p) => p.playedCards.filter(isICorporationCard).length === 0)) {
       if (game.phase === Phase.INITIALDRAFTING) {

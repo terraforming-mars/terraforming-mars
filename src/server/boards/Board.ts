@@ -131,13 +131,7 @@ export abstract class Board {
   }
 
   public getSpaces(spaceType: SpaceType): ReadonlyArray<Space> {
-    // TODO(kberg): How to make this not bother with the special case when
-    // Underworld is not in play? It's not very expensive.
-    if (spaceType !== SpaceType.OCEAN) {
-      return this.spaces.filter((space) => space.spaceType === spaceType);
-    } else {
-      return this.spaces.filter((space) => space.spaceType === spaceType || space.undergroundResources === 'volcanicoceanspace');
-    }
+    return this.spaces.filter((space) => space.spaceType === spaceType);
   }
 
   /**

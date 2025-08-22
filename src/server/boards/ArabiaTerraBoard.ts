@@ -61,7 +61,7 @@ export class ArabiaTerraBoard extends MarsBoard {
     switch (spaceType) {
     case SpaceType.LAND:
     case SpaceType.OCEAN:
-      return this.spaces.filter((space) => space.spaceType === spaceType || space.spaceType === SpaceType.COVE || space.undergroundResources === 'volcanicoceanspace');
+      return this.spaces.filter((space) => space.spaceType === spaceType || space.spaceType === SpaceType.COVE);
     default:
       return this.spaces.filter((space) => space.spaceType === spaceType);
     }

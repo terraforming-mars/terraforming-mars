@@ -11,7 +11,6 @@ import {addOcean} from '../../TestingUtils';
 import {Phase} from '../../../src/common/Phase';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
-import {PolicyId} from '../../../src/common/turmoil/Types';
 import {Game} from '../../../src/server/Game';
 
 describe('MarsFrontierAlliance', () => {
@@ -156,7 +155,6 @@ describe('MarsFrontierAlliance', () => {
 
     expect(player.alliedParty?.agenda.policyId).eq('mp01');
 
-    player.alliedParty!.agenda.policyId = 'mfp01' as PolicyId;
     game = Game.deserialize(game.serialize());
 
     expect(player.alliedParty?.agenda.policyId).eq('mp01');

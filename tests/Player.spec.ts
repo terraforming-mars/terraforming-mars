@@ -227,6 +227,7 @@ describe('Player', () => {
       color: 'purple' as Color,
       beginner: true,
       handicap: 4,
+      plantTagCount: 0,
       timer: {
         sumElapsed: 0,
         startedAt: 0,

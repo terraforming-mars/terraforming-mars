@@ -31,9 +31,7 @@ export class MediaStir extends GlobalEvent implements IGlobalEvent {
         player.stock.deduct(Resource.MEGACREDITS, cost, {log: true, from: {globalEvent: this}});
       }
       if (player.underworldData.corruption === 0) {
-        // TODO(kberg): Add "from"
-        // player.increaseTerraformRating(1, {log: true, from: {card: this}});
-        player.increaseTerraformRating(1, {log: true});
+        player.increaseTerraformRating(1, {log: true, from: {globalEvent: this}});
       }
     });
   }

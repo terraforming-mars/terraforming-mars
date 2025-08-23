@@ -1,7 +1,7 @@
 import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
 import {IPlayer} from '../IPlayer';
-import {From, isFromPlayer} from '../logs/From';
+import {From} from '../logs/From';
 
 export abstract class BaseStock {
   public megacredits: number = 0;
@@ -172,21 +172,7 @@ export abstract class BaseStock {
         .string(resourceString);
 
       if (from !== undefined) {
-        if (isFromPlayer(from)) {
-          b.player(from.player);
-        } else if ('card' in from) {
-          if (typeof(from.card) === 'object') {
-            b.card(from.card);
-          } else {
-            b.cardName(from.card);
-          }
-        } else {
-          if (typeof(from.globalEvent) === 'object') {
-            b.globalEvent(from.globalEvent);
-          } else {
-            b.globalEventName(from.globalEvent);
-          }
-        }
+        b.from(from);
       }
     });
   }

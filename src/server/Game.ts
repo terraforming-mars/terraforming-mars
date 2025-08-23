@@ -76,7 +76,6 @@ import {SelectOption} from './inputs/SelectOption';
 import {SelectSpace} from './inputs/SelectSpace';
 import {maybeRenamedMilestone} from '../common/ma/MilestoneName';
 import {maybeRenamedAward} from '../common/ma/AwardName';
-import {Eris} from './cards/community/Eris';
 import {AresHazards} from './ares/AresHazards';
 import {hazardSeverity} from '../common/AresTileType';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
@@ -587,8 +586,9 @@ export class Game implements IGame, Logger {
 
     // Ares Extreme: Solo player must remove all unprotected hazards to win
     if (this.gameOptions.aresExtension && this.gameOptions.aresExtremeVariant) {
-      const unprotectedHazardsRemaining = Eris.getAllUnprotectedHazardSpaces(this);
-      if (unprotectedHazardsRemaining.length > 0) return false;
+      if (this.board.getHazards(/* includeProtected= */ false).length > 0) {
+        return false;
+      }
     }
 
     // This last conditional doesn't make much sense to me. It's only ever really used
@@ -914,8 +914,8 @@ export class Game implements IGame, Logger {
     }
 
     if (this.gameOptions.aresExtension && this.gameOptions.aresExtremeVariant && this.isSoloMode()) {
-      // TODO(kberg): move the eris method elsewhere
-      const unprotectedHazardSpaces = Eris.getAllUnprotectedHazardSpaces(this);
+      const unprotectedHazardSpaces = this.board.getHazards(/* includeProtected= */ false);
+
 
       if (unprotectedHazardSpaces.length > 0) {
         orOptions.options.push(

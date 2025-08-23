@@ -45,18 +45,12 @@ export class Polaris extends CorporationCard implements ICorporationCard {
 
   public onTilePlaced(cardOwner: IPlayer, activePlayer: IPlayer, space: Space) {
     if (Board.isUncoveredOceanSpace(space)) {
-      // TODO(kberg): Find a way to add Card to addProduction log options.
-      cardOwner.production.add(Resource.MEGACREDITS, 1);
-      activePlayer.game.log(
-        '${0} gained 1 ${1} production from ${2}',
-        (b) => b.player(cardOwner).string(Resource.MEGACREDITS).cardName(this.name));
+      cardOwner.production.add(Resource.MEGACREDITS, 1, {log: true, from: {card: this}});
       if (activePlayer.id === cardOwner.id && cardOwner.game.phase !== Phase.SOLAR) {
         cardOwner.game.defer(
           new GainResources(cardOwner, Resource.MEGACREDITS, {
-            count: 4,
-          }).andThen(() => activePlayer.game.log(
-            '${0} gained ${1} from ${2}',
-            (b) => b.player(cardOwner).string(Resource.MEGACREDITS).cardName(this.name))),
+            count: 4, log: true, from: {card: this},
+          }),
           cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
         );
       }

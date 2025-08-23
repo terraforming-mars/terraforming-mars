@@ -142,6 +142,6 @@ export class Eris extends CorporationCard implements ICorporationCard {
   }
 
   public static getAllUnprotectedHazardSpaces(game: IGame) {
-    return game.board.getHazards().filter((space) => space.tile?.protectedHazard !== true);
+    return game.board.getHazards(/* includeProtected= */ false);
   }
 }

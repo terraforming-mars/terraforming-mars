@@ -34,6 +34,7 @@ import {IParty} from './turmoil/parties/IParty';
 import {Message} from '../common/logs/Message';
 import {DiscordId} from './server/auth/discord';
 import {PlayedCards} from './cards/PlayedCards';
+import {From} from './logs/From';
 
 /**
  * Represents additional costs a player must pay to execute an action.
@@ -186,7 +187,7 @@ export interface IPlayer {
   decreaseSteelValue(): void;
   /** @deprecated use #terraformRating. */
   getTerraformRating(): number;
-  increaseTerraformRating(steps?: number, opts?: {log?: boolean}): void;
+  increaseTerraformRating(steps?: number, opts?: {log?: boolean, from?: From}): void;
   decreaseTerraformRating(steps?: number, opts?: {log?: boolean}): void;
   setTerraformRating(value: number): void;
 

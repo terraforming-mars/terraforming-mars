@@ -365,7 +365,9 @@ export abstract class Colony implements IColony {
          * When this method is called from within the GiveColonyBonus deferred action
          * we return the player input directly instead of deferring it.
          *
-         * TODO(kberg): why?
+         * This is related to how certain colony bonuses require player interaction.
+         * The deferred action queue doesn't work well when asking for inputs for
+         * multple players.
          */
         return action.execute();
       } else {

@@ -28,12 +28,15 @@ function _createCard<T extends ICard>(cardName: CardName, cardManifestNames: Arr
       }
     }
   }
-  console.warn(`card not found ${cardName}`);
   return undefined;
 }
 
-export function newCard(cardName: CardName): ICard | undefined {
-  return _createCard(cardName, ['corporationCards', 'projectCards', 'preludeCards', 'ceoCards']);
+export function newCard(cardName: CardName): ICard {
+  const card = _createCard(cardName, ['corporationCards', 'projectCards', 'preludeCards', 'ceoCards']);
+  if (card === undefined) {
+    throw new Error(`Card [${cardName}] not found`);
+  }
+  return card;
 }
 
 export function newCorporationCard(cardName: CardName): ICorporationCard | undefined {

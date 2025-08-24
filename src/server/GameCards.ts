@@ -119,12 +119,7 @@ export class GameCards {
       const idx = cards.findIndex((c) => c.name === cardName);
       if (idx === -1) {
         const card = newCard(cardName);
-        if (card === undefined) {
-          // TODO(kberg): throw an error.
-          console.warn(`Unknown card: ${cardName}`);
-        } else {
-          cards.push(<T> card);
-        }
+        cards.push(<T> card);
       }
     }
     return cards;

@@ -425,6 +425,7 @@
   "${0} excavated ${1} from the draw pile": "${0} hat ${1} vom Nachziehstapel ausgegraben",
   "${0} had no underground resources to discard": "${0} hatte keine unterirdische Ressource zum Abwerfen",
   "${0} claimed ${1}": "${0} beanspruchte ${1}",
+  "${0} gained ${1} TR from ${2}": "${0} erhielt ${1} TW von ${2}",
   "${0} gained ${1} TR": "${0} erhielt ${1} TW",
   "${0} lost ${1} TR": "${0} verlor ${1} TW",
   "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} entfernte ${1} Ressource(n) von ${2}'s ${3}",

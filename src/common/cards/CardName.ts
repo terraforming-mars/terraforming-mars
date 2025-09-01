@@ -570,6 +570,7 @@ export enum CardName {
   VERMIN = 'Vermin',
   CASINOS = 'Casinos',
   PUBLIC_PLANS = 'Public Plans',
+  STATIC_HARVESTING = 'Static Harvesting',
 
   // Promo cards from Dutch Open
   FLOYD_CONTINUUM = 'Floyd Continuum',

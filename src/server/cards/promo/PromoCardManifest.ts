@@ -79,6 +79,7 @@ import {SoilEnrichment} from './SoilEnrichment';
 import {SolarLogistics} from './SolarLogistics';
 import {Splice} from './Splice';
 import {StanfordTorus} from './StanfordTorus';
+import {StaticHarvesting} from './StaticHarvesting';
 import {StJosephOfCupertinoMission} from './StJosephOfCupertinoMission';
 import {SubCrustMeasurements} from './SubCrustMeasurements';
 import {Supercapacitors} from './Supercapacitors';
@@ -165,6 +166,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.NEW_HOLLAND]: {Factory: NewHolland},
     [CardName.VERMIN]: {Factory: Vermin},
     [CardName.PUBLIC_PLANS]: {Factory: PublicPlans},
+    [CardName.STATIC_HARVESTING]: {Factory: StaticHarvesting},
   },
 
   preludeCards: {

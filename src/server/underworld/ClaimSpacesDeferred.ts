@@ -22,8 +22,30 @@ export class ClaimSpacesDeferred extends RunNTimes<void> {
     this.spaces = spaces.slice();
   }
 
-  protected run() {
+  public createSelectSpace(spaces: Array<Space>) {
     const title = 'Select space to claim' + this.titleSuffix();
+    return new SelectSpace(title, spaces)
+      .andThen((space) => {
+        UnderworldExpansion.claim(this.player, space);
+        if (this.spaces) {
+          inplaceRemove(this.spaces, space);
+        }
+        this.next();
+        return undefined;
+      });
+  }
+
+  public createSelectToken(tokens: Array<ClaimedToken>) {
+    return new SelectClaimedUndergroundToken(tokens, 1, 1).andThen(([idx]) => {
+      const token = tokens[idx];
+      if (this.spaces) {
+        inplaceRemove(this.spaces, token.token);
+      }
+      UnderworldExpansion.claimToken(this.player, token.token, /* isExavate= */ true, /* space= */ undefined);
+      return this.next();
+    }).setTitle('Select underground token to claim');
+  }
+  protected run() {
     this.player.defer(() => {
       // slicing a copy because the spaces array is mutated between calls.
       const p = partition(this.spaces, (s) => typeof s === 'object');
@@ -36,30 +58,13 @@ export class ClaimSpacesDeferred extends RunNTimes<void> {
         };
       });
 
-      const selectSpace = new SelectSpace(title, spaces)
-        .andThen((space) => {
-          UnderworldExpansion.claim(this.player, space);
-          if (this.spaces) {
-            inplaceRemove(this.spaces, space);
-          }
-          this.next();
-          return undefined;
-        });
-      const selectToken = new SelectClaimedUndergroundToken(tokens, 1, 1).andThen(([idx]) => {
-        const token = tokens[idx];
-        if (this.spaces) {
-          inplaceRemove(this.spaces, token.token);
-        }
-        UnderworldExpansion.claimToken(this.player, token.token, /* isExavate= */ true, /* space= */ undefined);
-        return this.next();
-      }).setTitle('Select underground token to claim');
 
       if (spaces.length > 0 && tokens.length > 0) {
-        return new OrOptions(selectSpace, selectToken);
+        return new OrOptions(this.createSelectSpace(spaces), this.createSelectToken(tokens));
       } else if (spaces.length > 0) {
-        return selectSpace;
+        return this.createSelectSpace(spaces);
       } else if (tokens.length > 0) {
-        return selectToken;
+        return this.createSelectToken(tokens);
       } else {
         throw new Error('No spaces or tokens to claim');
       }

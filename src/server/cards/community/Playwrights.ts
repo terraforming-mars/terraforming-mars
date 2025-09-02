@@ -60,6 +60,9 @@ export class Playwrights extends CorporationCard implements ICorporationCard {
         ([card]) => {
           const selectedCard: IProjectCard = card;
 
+          // Save the original owner before removing the card
+          const originalOwner = players.find((originalPlayer) => originalPlayer.playedCards.get(selectedCard.name))?.id;
+
           players.forEach((p) => {
             if (p.playedCards.get(selectedCard.name)) {
               p.playedCards.remove(card);
@@ -71,6 +74,14 @@ export class Playwrights extends CorporationCard implements ICorporationCard {
             .andThen(() => {
               player.playCard(selectedCard, undefined, 'nothing'); // Play the card but don't add it to played cards
               player.removedFromPlayCards.push(selectedCard); // Remove card from the game
+              // Store ownership information in the card itself for now
+              if (originalOwner) {
+                Object.defineProperty(selectedCard, 'originalOwner', {
+                  value: originalOwner,
+                  enumerable: false,
+                  writable: true,
+                });
+              }
               if (selectedCard.name === CardName.SPECIAL_DESIGN) {
                 player.playedCards.push(new SpecialDesignProxy());
               } else if (selectedCard.name === CardName.LAW_SUIT) {

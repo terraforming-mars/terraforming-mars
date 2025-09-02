@@ -18,6 +18,7 @@ import {ICard} from '../../../src/server/cards/ICard';
 import {GlobalParameter} from '../../../src/common/GlobalParameter';
 import {Worms} from '../../../src/server/cards/base/Worms';
 import {testGame} from '../../TestGame';
+import {CardName} from '../../../src/common/cards/CardName';
 
 describe('Playwrights', () => {
   let card: Playwrights;
@@ -105,6 +106,27 @@ describe('Playwrights', () => {
 
     player.playCard(deimosDown);
     expect(player.getCardCost(deimosDown)).to.eq(deimosDown.cost); // no more discount
+  });
+
+  it('Original player can still use discount from Indentured Workers after Playwrights replays their card', () => {
+    // Player2 plays Indentured Workers first
+    const indenturedWorkers = new IndenturedWorkers();
+    player2.playCard(indenturedWorkers);
+    player2.lastCardPlayed = CardName.INDENTURED_WORKERS;
+
+    // Playwrights (player1) replays Indentured Workers
+    const selectCard = cast(card.action(player), SelectCard<IProjectCard>);
+    selectCard.cb([indenturedWorkers]);
+    game.deferredActions.pop()!.execute();
+
+    // Player1 (Playwrights) should have the discount available
+    const deimosDown = new DeimosDown();
+    expect(player.getCardCost(deimosDown)).to.eq(deimosDown.cost - 8);
+    player.playCard(deimosDown);
+
+    // Player2 should have the discount too
+    const worms = new Worms();
+    expect(player2.getCardCost(worms)).to.eq(worms.cost - 8);
   });
 
   it('Works with Law Suit', () => {

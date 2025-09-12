@@ -205,4 +205,26 @@ describe('SolBank', () => {
     expect(player.megaCredits).eq(18);
     expect(solBank.resourceCount).eq(0);
   });
+
+  it('Initial card selection - add resource', () => {
+    [game, player] = testGame(1, {});
+    solBank = new SolBank();
+
+    player.cardsInHand.push(new MicroMills(), new BiomassCombustors(), new AerobrakedAmmoniaAsteroid());
+    player.playCorporationCard(solBank);
+
+    // Starting 40 - paying for 3 played cards.
+    expect(player.megaCredits).eq(31);
+    expect(solBank.resourceCount).eq(1);
+  });
+
+  it('Initial card selection - no cards chosen, no resource', () => {
+    [game, player] = testGame(1, {});
+    solBank = new SolBank();
+
+    player.playCorporationCard(solBank);
+
+    expect(player.megaCredits).eq(40);
+    expect(solBank.resourceCount).eq(0);
+  });
 });

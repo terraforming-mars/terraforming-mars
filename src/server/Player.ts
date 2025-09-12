@@ -971,6 +971,9 @@ export class Player implements IPlayer {
     if (additionalCorp === false && corporationCard.name !== CardName.BEGINNER_CORPORATION) {
       const diff = this.cardsInHand.length * this.cardCost;
       this.stock.deduct(Resource.MEGACREDITS, diff);
+      if (diff > 0) {
+        PathfindersExpansion.addToSolBank(this);
+      }
     }
     this.game.log('${0} played ${1}', (b) => b.player(this).card(corporationCard));
     // Calculating this before playing the corporation card, which might change the player's hand size.

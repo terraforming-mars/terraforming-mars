@@ -1,7 +1,7 @@
 import {PolderTechDutch} from '../../../src/server/cards/promo/PolderTechDutch';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {expect} from 'chai';
-import {addGreenery, addOcean, cast, runAllActions} from '../../TestingUtils';
+import {addCity, addGreenery, addOcean, cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
 import {BoardName} from '../../../src/common/boards/BoardName';
@@ -17,6 +17,29 @@ describe('PolderTechDutch', () => {
     runAllActions(game);
 
     const oceanSpace = assertPlaceOcean(player, player.popWaitingFor());
+
+    runAllActions(game);
+
+    const selectSpace = cast(player.popWaitingFor(), SelectSpace);
+    const spacesNextToOcean = game.board.getAdjacentSpaces(oceanSpace);
+
+    expect(selectSpace.spaces).to.have.members(spacesNextToOcean);
+
+    assertPlaceGreenery(player, selectSpace);
+  });
+
+  it('Initial action - ignore existing tiles', () => {
+    const card = new PolderTechDutch();
+    const [game, player] = testGame(2);
+
+    card.initialAction(player);
+    runAllActions(game);
+
+    const oceanSpace = assertPlaceOcean(player, player.popWaitingFor());
+    expect(oceanSpace.id).eq('04');
+
+    // City is all the way on the other side of the map.
+    addCity(player, '42');
 
     runAllActions(game);
 

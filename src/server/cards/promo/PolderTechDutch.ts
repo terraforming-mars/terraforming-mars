@@ -12,6 +12,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {Size} from '../../../common/cards/render/Size';
 import {Tag} from '../../../common/cards/Tag';
 
+// TODO(kberg): PolderTech is not yet compatible with Ares or Red City.
 export class PolderTechDutch extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
@@ -23,7 +24,7 @@ export class PolderTechDutch extends CorporationCard implements ICorporationCard
 
       metadata: {
         cardNumber: 'X-3',
-        description: 'You start with 35 M€. As your first action, place an ocean tile and a greenery tile next to each other. Raise oxygen 1 step.',
+        description: 'You start with 35 M€. As your first action, place an ocean tile and a greenery tile next to each other IGNORING GREENERY PLACEMENT RESTRICTIONS. Raise oxygen 1 step.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(35).oceans(1, {size: Size.SMALL}).greenery({size: Size.SMALL}).asterix().br;
           b.effect('When you place an ocean tile, gain 1 energy.', (eb) => eb.oceans(1, {size: Size.SMALL}).startEffect.energy(1)).br;
@@ -35,19 +36,22 @@ export class PolderTechDutch extends CorporationCard implements ICorporationCard
 
   public override initialAction(player: IPlayer) {
     const board = player.game.board;
+
+    // Find valid ocean space. They have to be next to a place to put the greenery.
+    // Greenery spaces can be any space because this corp ignores greenery placement restrictions.
     const oceanSpaces = board.getAvailableSpacesForOcean(player);
-    const greenerySpaces = board.getAvailableSpacesForGreenery(player);
+    const greenerySpaces = board.getAvailableSpacesOnLand(player);
     const oceanSpacesNextToGreenerySpaces = oceanSpaces.filter((space) => {
       return board.getAdjacentSpaces(space).some((adjacentSpace) => greenerySpaces.includes(adjacentSpace));
     });
+
     player.game.defer(new PlaceOceanTile(player, {spaces: oceanSpacesNextToGreenerySpaces}))
       .andThen((space) => {
         // Should not happen.
         if (space === undefined) {
           return;
         }
-        // Recalculating available greenery spaces may not be necessary.
-        const greenerySpaces = board.getAvailableSpacesForGreenery(player);
+        const greenerySpaces = board.getAvailableSpacesOnLand(player);
         const adjacentSpaces = board.getAdjacentSpaces(space);
         const validGreenerySpaces = intersection(greenerySpaces, adjacentSpaces);
         player.defer(

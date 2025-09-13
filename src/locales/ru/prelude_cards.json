@@ -13,5 +13,7 @@
     "(Temperature must be -20 C or lower.)": "(Требование: температура -20 градусов или ниже)",
     "Research Coordination": "Координация исследований",
     "(After being played, when you perform an action, the wild tag counts as any tag of your choice.)": "(После розыгрыша, при выполнении действия, универсальная метка считается любой меткой на ваш выбор.)",
-    "SF Memorial": "Мемориал СФ"
+    "SF Memorial": "Мемориал СФ",
+    "Colonial Envoys": "Делегаты колоний",
+    "Requires that Unity is ruling or that you have 2 delegates there. Place 1 delegate for each colony you have. YOU MAY PLACE THEM IN SEPERATE PARTIES.": "Требуется чтобы Союз был правящей партией или в этой партии было 2 ваших делегата. Разместите по 1 делегату за каждую вашу колонию. Вы можете разместить их в разных партиях."
 }

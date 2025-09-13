@@ -1,4 +1,7 @@
 {
+    "New Holland": "Новая Голландия",
+    "Requires 4 city tiles ON MARS. Increase your M€ production 3 steps. Place a city tile on top of an already placed ocean tile, FOLLOWING NORMAL CITY PLACEMENT RESTRICTIONS. The tile counts as a city and an ocean.": "Требуется 4 тайла города на Марсе. Увеличьте своё производство M€ на 3. Разместите тайл города на уже выложенный тайл океана, соблюдая обычные правила размещения городов. Этот тайл считается одновременно городом и океаном.",
+
     "Vermin": "Крысы",
     "Effect: When any city is placed, add 1 animal here.": "Эффект: Каждый раз, когда размещается город, добавьте сюда 1 животное.",
     "Action: Add 1 animal here or 1 microbe to ANOTHER card.": "Действие: Добавьте сюда 1 животное или 1 микроб на другую карту.",

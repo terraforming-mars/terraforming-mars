@@ -1,4 +1,9 @@
 {
+    "Hospitals": "Госпитали",
+    "Effect: Each time a city is placed, gain a disease here.": "Эффект: Каждый раз, когда размещается город, добавьте сюда 1 болезнь.",
+    "Action: Remove a disease from ANY OF YOUR CARDS to gain 1 M€ per city in play.": "Действие: Удалите болезнь с любой вашей карты, чтобы получить 1 M€ за каждый город в игре.",
+    "Decrease your energy production 1 step.": "Уменьшите своё производство энергии на 1.",
+
     "Casinos": "Казино",
     "Requires that you have a city. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Требуется наличие города. Уменьшите своё производство энергии на 1 и увеличьте производство M€ на 4.",
 

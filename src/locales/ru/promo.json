@@ -1,4 +1,9 @@
 {
+    "Vermin": "Крысы",
+    "Effect: When any city is placed, add 1 animal here.": "Эффект: Каждый раз, когда размещается город, добавьте сюда 1 животное.",
+    "Action: Add 1 animal here or 1 microbe to ANOTHER card.": "Действие: Добавьте сюда 1 животное или 1 микроб на другую карту.",
+    "Each player, including you, gets -1 VP per city they have IF THERE ARE AT LEAST 10 ANIMALS HERE.": "Каждый игрок, включая вас, теряет 1 ПО за каждый город, если здесь есть как минимум 10 животных.",
+
     "Public Plans": "Общественные планы",
     "REVEAL ANY NUMBER OF OTHER CARDS FROM YOUR HAND. (YOUR OPPONENTS MAY INSPECT THEM.) GAIN 1 M€ FOR EACH REVEALED CARD.": "ОТКРОЙТЕ ЛЮБОЕ КОЛИЧЕСТВО КАРТ ИЗ ВАШЕЙ РУКИ. (ПРОТИВНИКИ МОГУТ ИХ ПРОСМОТРЕТЬ) ПОЛУЧИТЕ 1 M€ ЗА КАЖДУЮ ОТКРЫТУЮ КАРТУ.",
 

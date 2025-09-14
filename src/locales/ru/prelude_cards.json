@@ -108,5 +108,9 @@
 
 	"World Government Advisor": "Советник Мирового правительства",
     "Action: RAISE 1 GLOBAL PARAMETER WITHOUT GETTING ANY TR OR OTHER BONUSES.": "Действие: Повысить 1 глобальный параметр без получения РТ или других бонусов.",
-    "Raise your TR 2 steps. Draw 1 card.": "Повысьте РТ на 2. Возьмите 1 карту."
+    "Raise your TR 2 steps. Draw 1 card.": "Повысьте РТ на 2. Возьмите 1 карту.",
+
+    "High Circles": "Высшие круги",
+    "Raise your TR 1 step and draw 1 card with PARTY REQUIREMENT. Place 2 delegates in one party.": "Повысьте ваш РТ на 1 и возьмите 1 карту с требованием к партии. Разместите 2 делегатов в одной партии.",
+    "Effect: You have +1 influence.": "Эффект: ваш уровень влияния +1."
 }

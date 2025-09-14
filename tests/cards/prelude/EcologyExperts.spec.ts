@@ -4,8 +4,11 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions, testGame} from '../../TestingUtils';
 import {AICentral} from '../../../src/server/cards/base/AICentral';
 import {Ants} from '../../../src/server/cards/base/Ants';
+import {Livestock} from '../../../src/server/cards/base/Livestock';
+import {GuerillaEcologists} from '../../../src/server/cards/underworld/GuerillaEcologists';
 import {SelectProjectCardToPlay} from '../../../src/server/inputs/SelectProjectCardToPlay';
 import {MicroMills} from '../../../src/server/cards/base/MicroMills';
+import {Manutech} from '../../../src/server/cards/venusNext/Manutech';
 
 describe('EcologyExperts', () => {
   let card: EcologyExperts;
@@ -60,5 +63,29 @@ describe('EcologyExperts', () => {
     expect(player.canPlay(aiCentral)).is.false;
     // But it does touch global requirements.
     expect(player.canPlay(ants)).is.true;
+  });
+
+  it('canplay Livestock, which requres global parameter and production', () => {
+    // Livestock needs 9% oxygen, and 1 plant production.
+    const livestock = new Livestock();
+    player.cardsInHand.push(livestock);
+    player.megaCredits = livestock.cost;
+    expect(card.canPlay(player)).is.true;
+  });
+
+  it('canplay Guerilla Ecologists, which requires plants, player has Manutech', () => {
+    // Guerilla Ecologists requires 4 plants
+    const guerillaEcologists = new GuerillaEcologists();
+    player.underworldData.corruption = 1;
+    player.plants = 2;
+    player.cardsInHand.push(guerillaEcologists);
+    player.playedCards.push(new Manutech());
+    player.megaCredits = guerillaEcologists.cost;
+
+    expect(card.canPlay(player)).is.false;
+
+    player.plants = 3;
+
+    expect(card.canPlay(player)).is.true;
   });
 });

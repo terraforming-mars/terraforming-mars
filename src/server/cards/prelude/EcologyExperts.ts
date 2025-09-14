@@ -34,13 +34,20 @@ export class EcologyExperts extends PreludeCard {
   }
 
   public override canPlay(player: IPlayer) {
-    // NOTE: when a card comes into play with a plant production, this will
-    // get more complicated.
+    // NOTE: If the player has production-based benefits from this prelude (like )
     player.temporaryGlobalParameterRequirementBonus += 50;
+    player.production.plants++;
+    if (player.playedCards.has(CardName.MANUTECH)) {
+      player.plants++;
+    }
     try {
       return player.getPlayableCards().length > 0;
     } finally {
       player.temporaryGlobalParameterRequirementBonus -= 50;
+      player.production.plants--;
+      if (player.playedCards.has(CardName.MANUTECH)) {
+        player.plants--;
+      }
     }
   }
 

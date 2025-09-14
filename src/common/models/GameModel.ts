@@ -21,6 +21,7 @@ export type GameModel = {
   colonies: ReadonlyArray<ColonyModel>;
   discardedColonies: ReadonlyArray<ColonyName>;
   deckSize: number;
+  discardPileSize: number;
   expectedPurgeTimeMs: number;
   experimentalReset?: boolean;
   gameAge: number;

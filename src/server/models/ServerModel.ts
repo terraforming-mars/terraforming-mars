@@ -57,6 +57,7 @@ export class Server {
       awards: this.getAwards(game),
       colonies: coloniesToModel(game, game.colonies, false, true),
       deckSize: game.projectDeck.drawPile.length,
+      discardPileSize: game.projectDeck.discardPile.length,
       discardedColonies: game.discardedColonies.map(toName),
       expectedPurgeTimeMs: game.expectedPurgeTimeMs(),
       gameAge: game.gameAge,

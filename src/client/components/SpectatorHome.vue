@@ -13,8 +13,9 @@
       :moonData="game.moon"
       :gameOptions = "game.gameOptions"
       :playerNumber = "spectator.players.length"
-      :lastSoloGeneration = "game.lastSoloGeneration">
-        <div class="deck-size">{{ game.deckSize }}</div>
+      :lastSoloGeneration = "game.lastSoloGeneration"
+      :deckSize = "game.deckSize"
+      :discardPileSize = "game.discardPileSize">
     </sidebar>
 
     <div class="player_home_block nofloat">

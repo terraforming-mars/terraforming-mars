@@ -40,7 +40,6 @@ export class MoonHabitatStandardProject extends StandardProjectCard {
     return super.canAct(player);
   }
 
-  // TODO(kberg): subclass MoonCard? This is starting to show the problems with just using subclassing.
   actionEssence(player: IPlayer): void {
     const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
     player.stock.deductUnits(adjustedReserveUnits);

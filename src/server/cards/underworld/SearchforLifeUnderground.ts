@@ -15,7 +15,6 @@ import {undergroundResourceTokenDescription} from '../../../common/underworld/Un
 import {TITLES} from '../../inputs/titles';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
-// TODO(kberg): Copies a lot of Search For Life.
 export class SearchforLifeUnderground extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({

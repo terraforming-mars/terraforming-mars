@@ -224,5 +224,15 @@
     "(Requires any city adjacent to an ocean. Increase your M€ production 2 steps.)": "(Требуется город рядом с океаном. Увеличьте производство M€ на 2.)",
     "Supercapacitors": "Суперконденсаторы",
     "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.": "Эффект: Конвертация энергии в тепло не обязатаельна для каждой из единиц ресурса",
-    "Increase M€ production 1 step.": "Увеличьте своё производство М€ на 1"
+    "Increase M€ production 1 step.": "Увеличьте своё производство М€ на 1",
+
+    "Icy Impactors": "Ледяные метеоры",
+    "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "Действие: Потратьте 10 М€ (можно использовать титан), чтобы добавить сюда 2 астероида.",
+    "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "Действие: Потратьте 1 астероид здесь, чтобы разместить тайл океана. Первый игрок выбирает, где вы должны его разместить.",
+	
+	"Soil Enrichment": "Удобрение почвы",
+    "Spend 1 microbe from ANY of your cards to gain 5 plants": "Потратьте 1 микроб с любой вашей карты, чтобы получить 5 растений.",
+
+	"Supermarkets": "Супермаркеты",
+    "Requires two cities in play. Increase your M€ production 2 steps.": "Требуется наличие 2 городов в игре. Увеличьте производство M€ на 2."
 }

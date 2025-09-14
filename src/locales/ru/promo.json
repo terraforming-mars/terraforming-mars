@@ -1,4 +1,32 @@
 {
+    "Hospitals": "Госпитали",
+    "Effect: Each time a city is placed, gain a disease here.": "Эффект: Каждый раз, когда размещается город, добавьте сюда 1 болезнь.",
+    "Action: Remove a disease from ANY OF YOUR CARDS to gain 1 M€ per city in play.": "Действие: Удалите болезнь с любой вашей карты, чтобы получить 1 M€ за каждый город в игре.",
+    "Decrease your energy production 1 step.": "Уменьшите своё производство энергии на 1.",
+
+    "Casinos": "Казино",
+    "Requires that you have a city. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Требуется наличие города. Уменьшите своё производство энергии на 1 и увеличьте производство M€ на 4.",
+
+    "Protected Growth": "Защищённый рост",
+    "Oxygen must be 7% or less. Gain 1 plant per power tag you have.": "Требуется уровень кислорода 7% или ниже. Получите 1 растение за каждую вашу метку энергии.",
+
+    "Public Baths": "Общественные бани",
+    "Requires 6 oceans. Gain 6 M€.": "Требуется 6 выложенных тайлов океана. Получите 6 M€.",
+
+    "New Holland": "Новая Голландия",
+    "Requires 4 city tiles ON MARS. Increase your M€ production 3 steps. Place a city tile on top of an already placed ocean tile, FOLLOWING NORMAL CITY PLACEMENT RESTRICTIONS. The tile counts as a city and an ocean.": "Требуется 4 тайла города на Марсе. Увеличьте своё производство M€ на 3. Разместите тайл города на уже выложенный тайл океана, соблюдая обычные правила размещения городов. Этот тайл считается одновременно городом и океаном.",
+
+    "Vermin": "Крысы",
+    "Effect: When any city is placed, add 1 animal here.": "Эффект: Каждый раз, когда размещается город, добавьте сюда 1 животное.",
+    "Action: Add 1 animal here or 1 microbe to ANOTHER card.": "Действие: Добавьте сюда 1 животное или 1 микроб на другую карту.",
+    "Each player, including you, gets -1 VP per city they have IF THERE ARE AT LEAST 10 ANIMALS HERE.": "Каждый игрок, включая вас, теряет 1 ПО за каждый город, если здесь есть как минимум 10 животных.",
+
+    "Public Plans": "Общественные планы",
+    "REVEAL ANY NUMBER OF OTHER CARDS FROM YOUR HAND. (YOUR OPPONENTS MAY INSPECT THEM.) GAIN 1 M€ FOR EACH REVEALED CARD.": "ОТКРОЙТЕ ЛЮБОЕ КОЛИЧЕСТВО КАРТ ИЗ ВАШЕЙ РУКИ. (ПРОТИВНИКИ МОГУТ ИХ ПРОСМОТРЕТЬ) ПОЛУЧИТЕ 1 M€ ЗА КАЖДУЮ ОТКРЫТУЮ КАРТУ.",
+
+    "Static Harvesting": "Сбор статики",
+    "Requires 3 or fewer ocean tiles. Increase your energy production 1 step. Gain 1 M€ per building tag you have.": "Требует не более 3 выложенных океанских тайлов. Увеличьте ваше производство энергии на 1 шаг. Получите 1 М€ за каждую вашу метку здания.",
+    
     "Pharmacy Union": "",
     "You start with 54 M€. Draw a Science card.": "Вы начинаете с 54М€. доберите карту с меткой Науки.",
     "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "Эффект: Когда разыгрывается любая метка Микроб, добавьте сюда болезнь. Когда вы разыгрываете метку Науки удалите болезнь отсюда и получите 1 РТ ИЛИ если на этой карте нет болезней можете однократно получить 3 РТ",

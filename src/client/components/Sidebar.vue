@@ -8,11 +8,11 @@
     <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss()"> <span v-i18n>{{ getRulingParty() }}</span></div>
   </div>
   <div class="global_params">
-    <global-parameter-value :param="this.globalParameter.TEMPERATURE" :value="this.temperature"></global-parameter-value>
-    <global-parameter-value :param="this.globalParameter.OXYGEN" :value="this.oxygen"></global-parameter-value>
-    <global-parameter-value :param="this.globalParameter.OCEANS" :value="this.oceans"></global-parameter-value>
-    <global-parameter-value v-if="gameOptions.expansions.venus" :param="this.globalParameter.VENUS" :value="this.venus"></global-parameter-value>
-    <MoonGlobalParameterValue v-if="gameOptions.expansions.moon" :moonData="this.moonData"></MoonGlobalParameterValue>
+    <global-parameter-value :param="globalParameter.TEMPERATURE" :value="temperature"></global-parameter-value>
+    <global-parameter-value :param="globalParameter.OXYGEN" :value="oxygen"></global-parameter-value>
+    <global-parameter-value :param="globalParameter.OCEANS" :value="oceans"></global-parameter-value>
+    <global-parameter-value v-if="gameOptions.expansions.venus" :param="globalParameter.VENUS" :value="venus"></global-parameter-value>
+    <MoonGlobalParameterValue v-if="gameOptions.expansions.moon" :moonData="moonData"></MoonGlobalParameterValue>
   </div>
   <div class="sidebar_item preferences_player" :title="$t('Player Color Cube')">
     <div :class="getPlayerColorCubeClass()+' player_bg_color_' + player_color"></div>
@@ -29,8 +29,10 @@
       </div>
   </a>
   <a href="#cards" :title="$t('Jump to cards')">
-      <div class="sidebar_item goto-cards sidebar_item_shortcut">
-          <i class="sidebar_icon sidebar_icon--cards"><slot></slot></i>
+      <div class="sidebar_item goto-cards sidebar_item_shortcut-long">
+          <i class="sidebar_icon sidebar_icon--cards">
+            <div class="deck-size">🂠{{ deckSize }}<br>🗑{{ discardPileSize }}</div>
+          </i>
       </div>
   </a>
   <a v-if="coloniesCount > 0" href="#colonies" :title="$t('Jump to colonies')">
@@ -123,6 +125,12 @@ export default Vue.extend({
       type: Object as () => TurmoilModel || undefined,
     },
     lastSoloGeneration: {
+      type: Number,
+    },
+    deckSize: {
+      type: Number,
+    },
+    discardPileSize: {
       type: Number,
     },
   },

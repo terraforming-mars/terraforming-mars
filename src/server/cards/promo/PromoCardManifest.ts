@@ -174,7 +174,10 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.MERGER]: {Factory: Merger},
     [CardName.CORPORATE_ARCHIVES]: {Factory: CorporateArchives},
     [CardName.DOUBLE_DOWN]: {Factory: DoubleDown, compatibility: 'prelude'},
+
+    // https://github.com/terraforming-mars/terraforming-mars/issues/5852
     // [CardName.HEAD_START]: {Factory: HeadStart}, // Head Start is disabled because it's not working well.
+
     [CardName.ANTI_DESERTIFICATION_TECHNIQUES]: {Factory: AntidesertificationTechniques},
     // [CardName.ESTABLISHED_METHODS]: {Factory: EstablishedMethods}, // X54
     [CardName.GIANT_SOLAR_COLLECTOR]: {Factory: GiantSolarCollector, compatibility: 'venus'},

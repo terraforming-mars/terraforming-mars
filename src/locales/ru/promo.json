@@ -25,7 +25,7 @@
     "REVEAL ANY NUMBER OF OTHER CARDS FROM YOUR HAND. (YOUR OPPONENTS MAY INSPECT THEM.) GAIN 1 M€ FOR EACH REVEALED CARD.": "ОТКРОЙТЕ ЛЮБОЕ КОЛИЧЕСТВО КАРТ ИЗ ВАШЕЙ РУКИ. (ПРОТИВНИКИ МОГУТ ИХ ПРОСМОТРЕТЬ) ПОЛУЧИТЕ 1 M€ ЗА КАЖДУЮ ОТКРЫТУЮ КАРТУ.",
 
     "Static Harvesting": "Сбор статики",
-    "Requires 3 or fewer ocean tiles. Increase your energy production 1 step. Gain 1 M€ per building tag you have.": "Требует не более 3 выложенных океанских тайлов. Увеличьте ваше производство энергии на 1 шаг. Получите 1 М€ за каждую вашу метку здания.",
+    "Requires 3 or fewer ocean tiles. Increase your energy production 1 step. Gain 1 M€ per building tag you have.": "Требует не более 3 выложенных тайлов океана. Увеличьте ваше производство энергии на 1 шаг. Получите 1 М€ за каждую вашу метку здания.",
     
     "Pharmacy Union": "",
     "You start with 54 M€. Draw a Science card.": "Вы начинаете с 54М€. доберите карту с меткой Науки.",
@@ -95,7 +95,7 @@
     "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Требует 4 океана. Увеличьте своё производство энергии на 2. Добавьте этот тайл на область рядом с океаном",
 
     "Magnetic Field Generators": "Генераторы магнитного поля",
-    "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps and place this tile.": "Уменьшите своё производство энергии на 4, увеличьте свое производство растений на 2. Увеличьте своё РТ на 3 и разместите этот тайл",
+    "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.": "Уменьшите своё производство энергии на 4, увеличьте свое производство растений на 2. Увеличьте своё РТ на 3 и разместите этот тайл.",
 
     "Orbital Cleanup": "Очистка орбиты",
     "Action: Gain 1 M€ per science tag you have.": "Действие: Получите 1 М€ за каждую свою метку Науки",
@@ -224,5 +224,15 @@
     "(Requires any city adjacent to an ocean. Increase your M€ production 2 steps.)": "(Требуется город рядом с океаном. Увеличьте производство M€ на 2.)",
     "Supercapacitors": "Суперконденсаторы",
     "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.": "Эффект: Конвертация энергии в тепло не обязатаельна для каждой из единиц ресурса",
-    "Increase M€ production 1 step.": "Увеличьте своё производство М€ на 1"
+    "Increase M€ production 1 step.": "Увеличьте своё производство М€ на 1",
+
+    "Icy Impactors": "Ледяные метеоры",
+    "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "Действие: Потратьте 10 М€ (можно использовать титан), чтобы добавить сюда 2 астероида.",
+    "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "Действие: Потратьте 1 астероид здесь, чтобы разместить тайл океана. Первый игрок выбирает, где вы должны его разместить.",
+	
+	"Soil Enrichment": "Удобрение почвы",
+    "Spend 1 microbe from ANY of your cards to gain 5 plants": "Потратьте 1 микроб с любой вашей карты, чтобы получить 5 растений.",
+
+	"Supermarkets": "Супермаркеты",
+    "Requires two cities in play. Increase your M€ production 2 steps.": "Требуется наличие 2 городов в игре. Увеличьте производство M€ на 2."
 }

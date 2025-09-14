@@ -48,5 +48,17 @@
 
      "Saturn Systems": "",
      "You start with 1 titanium production and 42 M€.": "Вы начинаете с 42 M€ и 1 дополнительным уровнем производства титана.",
-     "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "Эффект: При розыгрыше каждой метки Юпитера, включая эту, ваше производство M€ увеличивается на 1."
+     "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "Эффект: При розыгрыше каждой метки Юпитера, включая эту, ваше производство M€ увеличивается на 1.",
+
+     "PolderTECH Dutch": "",
+     "Dutch": "",
+     "You start with 35 M€. As your first action, place an ocean tile and a greenery tile next to each other IGNORING GREENERY PLACEMENT RESTRICTIONS. Raise oxygen 1 step.": "Вы начинаете с 35 М€. Первым действием разместите тайл океана и рядом с ним тайл озеленения (Игнорируя ограничения на размещение озеленения). Повысьте уровень кислорода на 1 шаг.",
+     "Effect: When you place an ocean tile, gain 1 energy.": "Когда вы размещаете тайл океана, получите 1 единицу энергии.",
+     "Effect: When you place a greenery, gain 1 plant.": "Когда вы размещаете тайл озеленения, получите 1 растение.",
+	 
+	"NIRGAL ENTERPRISES": "",
+     "Nirgal Enterprises": "",
+     "You start with 30 M€. Increase your energy, plant, and steel production 1 step each.": "Вы начинаете с 30 М€. Повысьте ваше производство энергии, растений и стали на 1 шаг.",
+     "Awards and Milestones": "Награды и Достижения",
+     "Effect: AWARDS AND MILESTONES ALWAYS COST 0 M€ FOR YOU.": "Эффект: Награды и достижения всегда стоят для вас 0 М€."
 }

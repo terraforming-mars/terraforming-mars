@@ -6,6 +6,9 @@
 
 <script lang="ts">
 
+const ONE_THIRD = 1/3;
+const TWO_THIRDS = 2/3;
+
 import Vue from 'vue';
 
 export type Points = {
@@ -33,8 +36,10 @@ export default Vue.extend({
       let vulgarFraction = '';
       if (fraction === 0.5) {
         vulgarFraction = '½';
-      } else if (Math.abs(fraction - (1/3)) < Number.EPSILON) {
+      } else if (Math.abs(fraction - ONE_THIRD) < Number.EPSILON) {
         vulgarFraction = '⅓';
+      } else if (Math.abs(fraction - TWO_THIRDS) < Number.EPSILON) {
+        vulgarFraction = '⅔';
       }
       return `${integer || ''}${vulgarFraction}`;
     },

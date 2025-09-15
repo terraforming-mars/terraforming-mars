@@ -20,7 +20,7 @@
               </div>
             </template>
             <div v-else-if="tagDetail.name === 'separator'" class="tag-separator"></div>
-            <div class="tag-and-discount" v-else>
+            <div v-else class="tag-and-discount">
               <PlayerTagDiscount v-if="tagDetail.discount > 0" :color="player.color" :amount="tagDetail.discount" :data-test="'discount-' + tagDetail.name"/>
               <PointsPerTag :points="tagDetail"/>
               <tag-count :tag="tagDetail.name" :count="tagDetail.count" :size="'big'" :type="'secondary'"/>
@@ -170,13 +170,19 @@ export default Vue.extend({
       // Special case Cultivation of Venus & Venera Base.
       // See https://github.com/terraforming-mars/terraforming-mars/issues/5236
       if (card.name === CardName.CULTIVATION_OF_VENUS || card.name === CardName.VENERA_BASE) {
-        details[Tag.VENUS].halfPoints ++;
+        details[Tag.VENUS].halfPoints++;
       } else {
         const vps = getCard(card.name)?.victoryPoints;
-        if (vps !== undefined && typeof(vps) !== 'number' && vps !== 'special' && vps.tag !== undefined) {
-          details[vps.tag].points += ((vps.each ?? 1) / (vps.per ?? 1));
+        if (vps !== undefined && typeof(vps) !== 'number' && vps !== 'special') {
+          if (vps.tag !== undefined) {
+            details[vps.tag].points += ((vps.each ?? 1) / (vps.per ?? 1));
+          }
+          if (vps.cities !== undefined) {
+            details['city'].points += ((vps.each ?? 1) / (vps.per ?? 1));
+          }
         }
       }
+      // Special case Off-world City Living and Immigration Shuttles
     }
 
     // Other modifiers

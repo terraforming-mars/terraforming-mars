@@ -1,4 +1,5 @@
 export type Warning =
+ 'pass' |
  'maxtemp' |
  'maxoxygen' |
  'maxoceans' |

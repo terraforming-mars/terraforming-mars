@@ -61,7 +61,6 @@ export class SpacePrivateers extends Card implements IProjectCard, IActionCard {
       target.maybeBlockAttack(player, message('Lose ${0} M€', (b) => b.number(mc)), (proceed) => {
         if (proceed) {
           target.stock.steal(Resource.MEGACREDITS, mc, player, {log: true});
-          target.resolveInsurance();
         } else {
           player.removeResourceFrom(this, 1, {log: true});
         }

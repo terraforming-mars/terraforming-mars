@@ -398,5 +398,6 @@
     "colony-count": "Колонии",
     "corruption-count": "Коррупция",
     "influence-count": "Влияние",
-    "excavation-count": "Раскопки"
+    "excavation-count": "Раскопки",
+    "You will not take any more actions this generation.": "Вы больше не сможете совершить какие либо действия в этом поколении."
 }

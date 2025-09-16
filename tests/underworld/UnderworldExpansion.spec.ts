@@ -520,11 +520,11 @@ describe('UnderworldExpansion', () => {
     expect(player1.stock.titanium).eq(2);
   });
 
-  it('temperature bonus does not apply to Solar Phase', () => {
+  it('temperature bonus applies to Solar Phase', () => {
     player1.underworldData.activeBonus = 'titanium1pertemp';
     game.phase = Phase.SOLAR;
     game.increaseTemperature(player2, 2);
-    expect(player1.stock.titanium).eq(0);
+    expect(player1.stock.titanium).eq(2);
   });
 
   it('temperature bonus does not apply next generation', () => {

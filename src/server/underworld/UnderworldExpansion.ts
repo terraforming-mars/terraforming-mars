@@ -17,7 +17,6 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {message} from '../logs/MessageBuilder';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
-import {Phase} from '../../common/Phase';
 import {Units} from '../../common/Units';
 import {LogHelper} from '../LogHelper';
 import {Message} from '../../common/logs/Message';
@@ -563,9 +562,6 @@ export class UnderworldExpansion {
 
   //   // TODOc(kberg): add viz for temperature bonus.
   static onTemperatureChange(game: IGame, steps: number) {
-    if (game.phase !== Phase.ACTION) {
-      return;
-    }
     game.playersInGenerationOrder.forEach((player) => {
       switch (player.underworldData.activeBonus) {
       case 'data1pertemp':

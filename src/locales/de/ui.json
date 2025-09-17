@@ -1299,7 +1299,7 @@
   "Astra Mechanica does not apply to events that return cards to a player's hand.": "Astra Mechanica gilt nicht für Ereignisse, die Karten auf die Hand des Spielers zurückbringen.",
   "No cards gain the reward of this action.": "Diese Aktion belohnt keine Karten.",
   "This action will have no effect.": "Diese Aktion hat keine Auswirkungen.",
-  "Lose 2 M€": "Verliere 2 M€",
+  "Lose ${0} M€": "Verliere ${0} M€",
 
   "Cards List": "Kartenliste",
   "legacy card UI": "Alte Kartenliste",

@@ -36,6 +36,9 @@ export class SolarStorm extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
+    if (player.game.isSoloMode()) {
+      player.game.someoneHasRemovedOtherPlayersPlants = true;
+    }
     for (const p of player.game.players) {
       if (!p.plantsAreProtected()) {
         // Botanical Experience reduces the impact in half.

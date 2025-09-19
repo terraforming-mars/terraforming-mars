@@ -1453,6 +1453,7 @@ export class Player implements IPlayer {
         // Null out ceoCardsInHand, anything left was unplayable.
         this.ceoCardsInHand = [];
         this.takeAction(); // back to top
+        return;
       } else {
         game.phase = Phase.ACTION;
       }

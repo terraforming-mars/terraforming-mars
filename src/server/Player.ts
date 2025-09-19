@@ -132,7 +132,7 @@ export class Player implements IPlayer {
   public dealtProjectCards: Array<IProjectCard> = [];
   public cardsInHand: Array<IProjectCard> = [];
   public preludeCardsInHand: Array<IPreludeCard> = [];
-  public ceoCardsInHand: Array<IProjectCard> = [];
+  public ceoCardsInHand: Set<IProjectCard> = new Set();
   public playedCards: PlayedCards = new PlayedCards();
   public draftedCards: Array<IProjectCard> = [];
   public draftHand: Array<IProjectCard> = [];
@@ -1440,18 +1440,18 @@ export class Player implements IPlayer {
         return;
       }
 
-      if (this.ceoCardsInHand.length > 0) {
+      if (this.ceoCardsInHand.size > 0) {
         // The CEO phase occurs between the Prelude phase and before the Action phase.
         // All CEO cards are played before players take their first normal actions.
         game.phase = Phase.CEOS;
 
         // start from the end of the list and work backwards, not sure why.
-        const playableCeoCards = this.ceoCardsInHand.filter((card) => card.canPlay?.(this) === true).reverse();
+        const playableCeoCards = Array.from(this.ceoCardsInHand).filter((card) => card.canPlay?.(this) === true).reverse();
         for (const ceo of playableCeoCards) {
           this.playCard(ceo);
         }
         // Null out ceoCardsInHand, anything left was unplayable.
-        this.ceoCardsInHand = [];
+        this.ceoCardsInHand.clear();
         this.takeAction(); // back to top
         return;
       } else {
@@ -1745,7 +1745,7 @@ export class Player implements IPlayer {
       dealtProjectCards: this.dealtProjectCards.map(toName),
       cardsInHand: this.cardsInHand.map(toName),
       preludeCardsInHand: this.preludeCardsInHand.map(toName),
-      ceoCardsInHand: this.ceoCardsInHand.map(toName),
+      ceoCardsInHand: Array.from(this.ceoCardsInHand).map(toName),
       playedCards: this.playedCards.serialize(),
       draftedCards: this.draftedCards.map(toName),
       cardCost: this.cardCost,
@@ -1870,7 +1870,7 @@ export class Player implements IPlayer {
     player.cardsInHand = cardsFromJSON(d.cardsInHand);
     // I don't like "as IPreludeCard" but this is pretty safe.
     player.preludeCardsInHand = cardsFromJSON(d.preludeCardsInHand) as Array<IPreludeCard>;
-    player.ceoCardsInHand = ceosFromJSON(d.ceoCardsInHand);
+    player.ceoCardsInHand = new Set(ceosFromJSON(d.ceoCardsInHand));
     player.playedCards.deserialize(d.playedCards);
     player.draftedCards = cardsFromJSON(d.draftedCards);
     player.autopass = d.autoPass ?? false;

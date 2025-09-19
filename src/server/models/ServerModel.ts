@@ -95,7 +95,7 @@ export class Server {
 
     const rv: PlayerViewModel = {
       cardsInHand: cardsToModel(player, player.cardsInHand, {showCalculatedCost: true}),
-      ceoCardsInHand: cardsToModel(player, player.ceoCardsInHand),
+      ceoCardsInHand: cardsToModel(player, Array.from(player.ceoCardsInHand)),
       dealtCorporationCards: cardsToModel(player, player.dealtCorporationCards),
       dealtPreludeCards: cardsToModel(player, player.dealtPreludeCards),
       dealtCeoCards: cardsToModel(player, player.dealtCeoCards),

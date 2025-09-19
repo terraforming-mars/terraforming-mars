@@ -1154,10 +1154,8 @@ export class Player implements IPlayer {
             this.game.addGreenery(this, space, false);
             this.stock.deduct(Resource.PLANTS, this.plantsNeededForGreenery);
 
-            this.takeActionForFinalGreenery();
-
-            // Resolve Philares deferred actions
-            if (this.game.deferredActions.length > 0) resolveFinalGreeneryDeferredActions();
+            // Resolve Philares deferred actions and maybe place another greenery
+            resolveFinalGreeneryDeferredActions();
             return undefined;
           }));
       action.options.push(
@@ -1518,7 +1516,7 @@ export class Player implements IPlayer {
     this.actionsTakenThisGame++;
   }
 
-  public getActions() {
+  public /* for testing */ getActions() {
     const action = new OrOptions()
       .setTitle(this.actionsTakenThisRound === 0 ? 'Take your first action' : 'Take your next action')
       .setButtonLabel('Take action');

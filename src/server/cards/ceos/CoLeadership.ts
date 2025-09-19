@@ -38,7 +38,7 @@ export class CoLeadership extends PreludeCard {
             game.ceoDeck.discard(card);
           }
         } else {
-          player.ceoCardsInHand.push(card);
+          player.ceoCardsInHand.add(card);
         }
       }
     });

@@ -72,7 +72,7 @@ export class SelectInitialCards extends OptionsInput<undefined> {
           if (ceoCards.length !== 1) {
             throw new InputError('Only select 1 CEO');
           }
-          player.ceoCardsInHand.push(ceoCards[0]);
+          player.ceoCardsInHand.add(ceoCards[0]);
           return undefined;
         }));
     }
@@ -122,7 +122,7 @@ export class SelectInitialCards extends OptionsInput<undefined> {
     }
 
     for (const card of player.dealtCeoCards) {
-      if (player.ceoCardsInHand.includes(card) === false) {
+      if (player.ceoCardsInHand.has(card) === false) {
         game.ceoDeck.discard(card);
       }
     }

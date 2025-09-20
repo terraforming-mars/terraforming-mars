@@ -36,11 +36,7 @@ export class SaturnSystems extends CorporationCard implements ICorporationCard {
   }
 
   public onCardPlayedByAnyPlayer(thisCardOwner: IPlayer, card: ICard) {
-    // TODO(kberg): count the tags first. I don't know any cards with 2 jovian tags, though.
-    for (const tag of card.tags) {
-      if (tag === Tag.JOVIAN) {
-        thisCardOwner.production.add(Resource.MEGACREDITS, 1, {log: true});
-      }
-    }
+    const count = thisCardOwner.tags.cardTagCount(card, Tag.JOVIAN);
+    thisCardOwner.production.add(Resource.MEGACREDITS, count, {log: true, from: {card: this}});
   }
 }

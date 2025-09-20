@@ -137,6 +137,9 @@ export class Tags {
     return false;
   }
 
+  /**
+   * Returns the number of tags on `card`. Takes Habitat Marte into account.
+   */
   public cardTagCount(card: ICard, target: OneOrArray<Tag>): number {
     let count = 0;
     for (const tag of card.tags) {

@@ -3,6 +3,8 @@ import {MirandaResort} from '../../../src/server/cards/base/MirandaResort';
 import {SaturnSystems} from '../../../src/server/cards/corporation/SaturnSystems';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
+import {fakeCard} from '../../TestingUtils';
+import {Tag} from '../../../src/common/cards/Tag';
 
 describe('SaturnSystems', () => {
   let card: SaturnSystems;
@@ -21,13 +23,19 @@ describe('SaturnSystems', () => {
   });
 
   it('Runs onCardPlayedByAnyPlayer', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     player.playCard(new MirandaResort());
     expect(player.production.megacredits).to.eq(1);
   });
 
+  it('Multiple tags', () => {
+    player.playedCards.push(card);
+    player.playCard(fakeCard({tags: [Tag.JOVIAN, Tag.JOVIAN, Tag.WILD]}));
+    expect(player.production.megacredits).to.eq(2);
+  });
+
   it('Runs onCardPlayedByAnyPlayer when other player plays card', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     player2.playCard(new MirandaResort());
     expect(player.production.megacredits).to.eq(1);
   });

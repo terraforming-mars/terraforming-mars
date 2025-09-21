@@ -51,7 +51,7 @@ describe('Prospecting', () => {
   });
 
   it('Venus can be activated, so is not selectable', () => {
-    player.corporations.push(new Celestic());
+    player.playedCards.push(new Celestic());
     const venus = new Venus();
     game.discardedColonies = [];
     game.discardedColonies.push(venus);

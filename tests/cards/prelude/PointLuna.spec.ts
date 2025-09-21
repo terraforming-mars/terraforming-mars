@@ -15,7 +15,7 @@ describe('PointLuna', () => {
   });
 
   it('Gets card when earth tag played', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     card.onCardPlayedForCorps(player, new Ants());
     expect(player.cardsInHand).has.lengthOf(0);
 

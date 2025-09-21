@@ -30,7 +30,7 @@ describe('Aridor', () => {
 
   it('Should play', () => {
     cast(card.play(player), undefined);
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     // Predators has an Animal tag
     player.playCard(new Predators());
@@ -85,7 +85,7 @@ describe('Aridor', () => {
   });
 
   it('initialAction - chooses Venus, which is activated', () => {
-    player2.corporations.push(new Celestic());
+    player2.playedCards.push(new Celestic());
     const venus = new Venus();
     game.discardedColonies.push(venus);
     player.defer(card.initialAction(player));
@@ -101,7 +101,7 @@ describe('Aridor', () => {
 
   it('serialization test for Player with Aridor', () => {
     card.play(player);
-    player.corporations.push(card);
+    player.playedCards.push(card);
     player.playCard(new Predators());
     player2.playCard(new ResearchOutpost());
     player.playCard(new ResearchOutpost());
@@ -119,7 +119,7 @@ describe('Aridor', () => {
   });
 
   it('Compatible with Leavitt #6349', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     expect(player.production.megacredits).eq(0);
 

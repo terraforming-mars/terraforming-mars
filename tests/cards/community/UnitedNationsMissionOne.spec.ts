@@ -30,7 +30,7 @@ describe('UnitedNationsMissionOne', () => {
   });
 
   it('Gains 1 MC whenever any player raises TR during action phase', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     game.phase = Phase.ACTION;
 
     player.increaseTerraformRating();
@@ -44,7 +44,7 @@ describe('UnitedNationsMissionOne', () => {
   });
 
   it('Gives MC during initial preludes phase', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     game.phase = Phase.PRELUDES;
 
     const contractor = new UNMIContractor();
@@ -53,7 +53,7 @@ describe('UnitedNationsMissionOne', () => {
   });
 
   it('Does not give MC during turmoil phase', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     game.phase = Phase.PRODUCTION;
 
     const turmoil = game.turmoil!;

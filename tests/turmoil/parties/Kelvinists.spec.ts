@@ -75,7 +75,7 @@ describe('Kelvinists', () => {
     setRulingParty(game, PartyName.KELVINISTS, KELVINISTS_POLICY_3.id);
 
     const stormcraft = new StormCraftIncorporated();
-    player.corporations.push(stormcraft);
+    player.playedCards.push(stormcraft);
     stormcraft.resourceCount = 2;
     player.stock.add(Resource.HEAT, 8);
 

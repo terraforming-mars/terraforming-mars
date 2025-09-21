@@ -60,7 +60,7 @@ describe('EarthEmbassy', () => {
 
   it('Does not work with Point Luna', () => {
     const pointLuna = new PointLuna();
-    player.corporations.push(pointLuna);
+    player.playedCards.push(pointLuna);
 
     const fake = fakeCard({tags: [Tag.MOON]});
     pointLuna.onCardPlayedForCorps(player, fake);

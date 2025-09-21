@@ -20,7 +20,7 @@ describe('AirRaid', () => {
     [/* game */, player, player2] = testGame(3);
 
     stormcraftIncorporated = new StormCraftIncorporated();
-    player.corporations.push(stormcraftIncorporated);
+    player.playedCards.push(stormcraftIncorporated);
   });
 
   it('Can not play', () => {

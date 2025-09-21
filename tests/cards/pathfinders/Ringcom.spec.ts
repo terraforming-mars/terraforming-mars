@@ -40,7 +40,7 @@ describe('Ringcom', () => {
   });
 
   it('when you play a jovian tag', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     const a = fakeCard({name: 'A' as CardName, tags: [Tag.JOVIAN]});
     expect(player.titanium).eq(0);
     player.playCard(a);
@@ -48,7 +48,7 @@ describe('Ringcom', () => {
   });
 
   it('when opponent plays a jovian tag', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     const a = fakeCard({name: 'A' as CardName, tags: [Tag.JOVIAN]});
     expect(player.titanium).eq(0);
     player2.playCard(a);

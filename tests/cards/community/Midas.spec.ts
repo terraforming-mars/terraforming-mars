@@ -15,7 +15,7 @@ describe('Midas', () => {
     const initialTR = player.terraformRating;
 
     card.play(player);
-    player.corporations.push(card);
+    player.playedCards.push(card);
     expect(player.terraformRating).to.eq(initialTR - 7);
   });
 });

@@ -15,7 +15,7 @@ describe('Astrodrill', () => {
   beforeEach(() => {
     card = new Astrodrill();
     [/* game */, player/* , player2 */] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
     card.play(player);
     runAllActions(player.game);
   });

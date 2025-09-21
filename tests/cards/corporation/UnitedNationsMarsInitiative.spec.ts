@@ -16,7 +16,7 @@ describe('UnitedNationsMarsInitiative', () => {
   beforeEach(() => {
     card = new UnitedNationsMarsInitiative();
     [game, player] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('Can not act if TR was not raised', () => {
@@ -44,7 +44,7 @@ describe('UnitedNationsMarsInitiative', () => {
   it('Helion + UNMI', () => {
     const helion = new Helion();
     helion.play(player);
-    player.corporations.push(helion);
+    player.playedCards.push(helion);
 
     player.increaseTerraformRating();
     expect(player.terraformRating).to.eq(21);

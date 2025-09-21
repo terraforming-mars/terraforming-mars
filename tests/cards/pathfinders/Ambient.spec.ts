@@ -42,7 +42,7 @@ describe('Ambient', () => {
   });
 
   it('effect', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     expect(player.production.heat).eq(0);
 
     player.playCard(fakeCard({tags: []}));
@@ -90,7 +90,7 @@ describe('Ambient', () => {
   });
 
   it('action is repeatable', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     player.heat = 16;
     setTemperature(game, MAX_TEMPERATURE);
 
@@ -133,7 +133,7 @@ describe('Ambient', () => {
   for (const run of redsRuns) {
     it('is compatible with Reds + Helion ' + JSON.stringify(run), () => {
       [game, player, player2] = testGame(2, {turmoilExtension: true});
-      player.corporations.push(card);
+      player.playedCards.push(card);
       player.canUseHeatAsMegaCredits = true;
       player.game.phase = Phase.ACTION;
       const turmoil = Turmoil.getTurmoil(game);

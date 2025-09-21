@@ -26,7 +26,7 @@ describe('GasTrust', () => {
     // Prelude with crime tag
     player.playedCards.push(new InheritedFortune());
     // Corporation with crime tag
-    player.corporations.push(new JensonBoyleCo());
+    player.playedCards.push(new JensonBoyleCo());
     // No crime tag
     player.playedCards.push(new MicroMills());
     cast(card.play(player), undefined);

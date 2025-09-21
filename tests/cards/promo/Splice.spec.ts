@@ -25,7 +25,7 @@ describe('Splice', () => {
     const tardigrades = new Tardigrades();
     cast(card.play(player), undefined);
 
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     player2.playedCards.push(tardigrades);
     cast(card.onCardPlayedByAnyPlayer(player, tardigrades, player2), undefined);
@@ -46,14 +46,14 @@ describe('Splice', () => {
   it('Should play with multiple microbe tags', () => {
     const pharmacyUnion = new PharmacyUnion();
     cast(card.play(player), undefined);
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     runAllActions(game);
     cast(player.getWaitingFor(), undefined);
     cast(player2.popWaitingFor(), undefined);
 
     cast(pharmacyUnion.play(player), undefined);
-    player2.corporations.push(pharmacyUnion);
+    player2.playedCards.push(pharmacyUnion);
 
     cast(card.onCardPlayedByAnyPlayer(player, pharmacyUnion, player2), undefined);
 

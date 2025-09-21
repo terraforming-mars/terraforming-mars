@@ -20,7 +20,7 @@ describe('Incite', () => {
     [game, player] = testGame(1, {turmoilExtension: true});
 
     card.play(player);
-    player.corporations.push(card);
+    player.playedCards.push(card);
     turmoil = game.turmoil!;
   });
 

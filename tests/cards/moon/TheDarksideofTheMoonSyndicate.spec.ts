@@ -127,7 +127,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.
     player2.megaCredits = 10;
     player.megaCredits = 0;
-    player.corporations.push(card);
+    player.playedCards.push(card);
     // Trigger the effect.
     MoonExpansion.addMineTile(player, centerSpace.id);
     expect(player2.megaCredits).eq(4);
@@ -161,7 +161,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.
     player2.megaCredits = 10;
     player.megaCredits = 0;
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     player.game.phase = Phase.SOLAR;
 

@@ -140,7 +140,7 @@ describe('LunarMineUrbanization', () => {
   });
 
   it('Is compatible with the Grand Lunar Capital Group, #6648, place LMU', () => {
-    player.corporations.push(new TheGrandLunaCapitalGroup());
+    player.playedCards.push(new TheGrandLunaCapitalGroup());
     MoonExpansion.addTile(player, 'm02', {tileType: TileType.MOON_HABITAT});
     MoonExpansion.addTile(player, 'm03', {tileType: TileType.MOON_MINE});
     card.play(player);
@@ -156,7 +156,7 @@ describe('LunarMineUrbanization', () => {
   });
 
   it('Is compatible with the Grand Lunar Capital Group, #6648, place next to LMU', () => {
-    player.corporations.push(new TheGrandLunaCapitalGroup());
+    player.playedCards.push(new TheGrandLunaCapitalGroup());
     MoonExpansion.addTile(player, 'm02', {tileType: TileType.LUNAR_MINE_URBANIZATION});
 
     expect(player.megaCredits).eq(0);

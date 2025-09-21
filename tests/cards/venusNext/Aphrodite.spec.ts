@@ -9,7 +9,7 @@ describe('Aphrodite', () => {
     const [game, player, player2] = testGame(2);
     cast(card.play(player), undefined);
     expect(player.production.plants).to.eq(1);
-    player.corporations.push(card);
+    player.playedCards.push(card);
     expect(player.megaCredits).to.eq(0);
     game.increaseVenusScaleLevel(player2, 2);
     expect(game.getVenusScaleLevel()).to.eq(4);

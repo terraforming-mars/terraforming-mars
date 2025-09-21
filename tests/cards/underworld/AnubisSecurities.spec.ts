@@ -40,7 +40,7 @@ describe('AnubisSecurities', () => {
     const card = new AnubisSecurities();
     const [/* game */, player] = testGame(2);
 
-    player.corporations.push(card);
+    player.playedCards.push(card);
     player.megaCredits = 0;
 
     player.increaseTerraformRating(1);
@@ -54,7 +54,7 @@ describe('AnubisSecurities', () => {
     const card = new AnubisSecurities();
     const [/* game */, player, player2] = testGame(2);
 
-    player.corporations.push(card);
+    player.playedCards.push(card);
     player.megaCredits = 0;
     player2.megaCredits = 0;
 
@@ -77,7 +77,7 @@ describe('AnubisSecurities', () => {
   it('canAct', () => {
     const card = new AnubisSecurities();
     const [/* game */, player] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
     player.underworldData.corruption = 0;
     expect(card.canAct(player)).is.false;
     player.underworldData.corruption = 1;
@@ -87,7 +87,7 @@ describe('AnubisSecurities', () => {
   it('action', () => {
     const card = new AnubisSecurities();
     const [/* game */, player] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
     player.underworldData.corruption = 3;
     player.megaCredits = 0;
 

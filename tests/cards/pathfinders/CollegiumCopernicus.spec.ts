@@ -67,7 +67,7 @@ describe('CollegiumCopernicus', () => {
 
 
   it('is available through standard trade action', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     const luna = new Luna();
     player.game.colonies = [luna];
 
@@ -108,7 +108,7 @@ describe('CollegiumCopernicus', () => {
   });
 
   it('onCardPlayed', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     const lunarObservationPost = new LunarObservationPost();
     player.playedCards.push(lunarObservationPost);
 

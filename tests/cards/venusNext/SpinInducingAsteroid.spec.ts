@@ -28,7 +28,7 @@ describe('SpinInducingAsteroid', () => {
   });
 
   it('Should play with Morning Star', () => {
-    player.corporations.push(new MorningStarInc());
+    player.playedCards.push(new MorningStarInc());
     setVenusScaleLevel(game, 12);
     expect(card.canPlay(player)).is.true;
 

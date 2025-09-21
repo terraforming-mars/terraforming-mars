@@ -17,7 +17,7 @@ describe('RobinsonIndustries', () => {
   beforeEach(() => {
     card = new RobinsonIndustries();
     [game, player] = testGame(1);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('Can not act', () => {
@@ -54,7 +54,7 @@ describe('RobinsonIndustries', () => {
   it('Helion + Robinson Industries', () => {
     const helion = new Helion();
     helion.play(player);
-    player.corporations.push(helion);
+    player.playedCards.push(helion);
     player.megaCredits = 3;
     expect(card.canAct(player)).is.false;
     player.heat = 1;

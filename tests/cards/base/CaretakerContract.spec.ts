@@ -67,7 +67,7 @@ describe('CaretakerContract', () => {
   it('Do not double-account heat with Helion using Reds tax', () => {
     const [game, player] = testGame(1, {turmoilExtension: true});
     const helion = new Helion();
-    player.corporations.push(helion);
+    player.playedCards.push(helion);
     helion.play(player);
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
@@ -90,7 +90,7 @@ describe('CaretakerContract', () => {
 
   it('Can use Stormcraft Incorporated', () => {
     const stormcraft = new StormCraftIncorporated();
-    player.corporations.push(stormcraft);
+    player.playedCards.push(stormcraft);
     stormcraft.play(player);
     stormcraft.resourceCount = 3;
     player.heat = 1;

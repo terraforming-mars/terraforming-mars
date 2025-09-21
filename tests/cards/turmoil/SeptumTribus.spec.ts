@@ -9,7 +9,7 @@ describe('SeptumTribus', () => {
     const [game, player] = testGame(1, {turmoilExtension: true});
     card.play(player);
 
-    player.corporations.push(card);
+    player.playedCards.push(card);
     player.megaCredits = 0;
 
     const turmoil = game.turmoil!;

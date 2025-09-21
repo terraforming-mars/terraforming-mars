@@ -30,7 +30,7 @@ describe('Biologist', () => {
   });
 
   it('score, with Chimera', () => {
-    player.corporations.push(new Chimera());
+    player.playedCards.push(new Chimera());
     expect(award.getScore(player)).eq(1);
     player.playedCards.push(fakeCard({tags: [Tag.MICROBE]}));
     expect(award.getScore(player)).eq(2);

@@ -77,7 +77,7 @@ describe('Oscar', () => {
 
   it('OPG gains 1 TR with Tempest Consultancy', () => {
     const tempcons = new TempestConsultancy();
-    player.corporations.push(tempcons);
+    player.playedCards.push(tempcons);
     const tr = player.terraformRating;
     card.action(player);
     runAllActions(game);

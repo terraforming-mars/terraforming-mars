@@ -569,7 +569,7 @@ describe('Executor', () => {
 
   it('spend - heat - Stormcraft', () => {
     const stormcraft = new StormCraftIncorporated();
-    player.corporations.push(stormcraft);
+    player.playedCards.push(stormcraft);
     const behavior = {spend: {heat: 3}};
     expect(executor.canExecute(behavior, player, fake)).is.false;
     stormcraft.resourceCount = 1;
@@ -589,7 +589,7 @@ describe('Executor', () => {
   it('spend - heat - Helion, reds are in power', () => {
     const helion = new Helion();
     helion.play(player);
-    player.corporations.push(helion);
+    player.playedCards.push(helion);
     const behavior = {spend: {heat: 3}, tr: 1};
     player.heat = 3;
 

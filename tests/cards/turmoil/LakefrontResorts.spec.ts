@@ -11,7 +11,7 @@ describe('LakefrontResorts', () => {
 
     expect(play).is.undefined;
 
-    player.corporations.push(card);
+    player.playedCards.push(card);
     addOcean(player, '06');
     addOcean(player, '07');
     runAllActions(game);

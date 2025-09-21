@@ -98,7 +98,7 @@ describe('SurveyMission', () => {
   });
 
   it('Compatible with Mining Guild', () => {
-    player.corporations.push(new MiningGuild());
+    player.playedCards.push(new MiningGuild());
     const selectSpace = cast(card.play(player), SelectSpace);
 
     expect(player.steel).eq(5); // Comes from playing the Prelude

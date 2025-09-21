@@ -18,7 +18,7 @@ describe('TharsisRepublic', () => {
     card = new TharsisRepublic();
     [game, player, player2] = testGame(2);
 
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('Should take initial action', () => {

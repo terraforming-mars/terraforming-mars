@@ -149,7 +149,7 @@ describe('CardRequirements', () => {
   it('satisfies properly for floaters', () => {
     const requirements = {floaters: 2};
     const corp = new Celestic();
-    player.corporations.push(corp);
+    player.playedCards.push(corp);
     churn(corp.action(player), player);
     expect(satisfies(requirements, player)).eq(false);
     churn(corp.action(player), player);

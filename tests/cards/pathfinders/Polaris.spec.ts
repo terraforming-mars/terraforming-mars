@@ -16,7 +16,7 @@ describe('Polaris', () => {
   beforeEach(() => {
     card = new Polaris();
     [game, player, player2] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('initial action', () => {

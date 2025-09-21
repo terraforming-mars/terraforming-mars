@@ -221,7 +221,7 @@ describe('Odyssey', () => {
     expect(player.megaCredits).to.eq(0);
 
     // Now there will be enough tags, with the event.
-    player.corporations.push(odyssey);
+    player.playedCards.push(odyssey);
     diversity.resolve(game, turmoil);
 
     expect(player.megaCredits).to.eq(10);

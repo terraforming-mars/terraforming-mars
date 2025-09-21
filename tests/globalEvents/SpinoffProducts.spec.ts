@@ -36,7 +36,7 @@ describe('SpinoffProducts', () => {
   });
 
   it('resolve play, with Habitat Marte', () => {
-    player.corporations.push(new HabitatMarte());
+    player.playedCards.push(new HabitatMarte());
     player.tagsForTest = {science: 3, mars: 2};
 
     turmoil.chairman = player2;

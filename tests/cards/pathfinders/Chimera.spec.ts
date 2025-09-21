@@ -24,7 +24,7 @@ describe('Chimera', () => {
   beforeEach(() => {
     card = new Chimera();
     [/* game */, player] = testGame(1);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('as action', () => {

@@ -272,7 +272,7 @@ describe('PharmacyUnion', () => {
 
     // The test should have Splice first. I think it's not vital, but
     // that's how onCardPlayed actions are resolved.
-    player.corporations.push(new Splice(), card);
+    player.playedCards.push(new Splice(), card);
 
     player.megaCredits = 1;
     // Symbiotic Fungus has a microbe tag, and doesn't hold microbes, which simplifies Splice's decision.
@@ -299,7 +299,7 @@ describe('PharmacyUnion', () => {
     const card = new PharmacyUnion();
     const [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
 
-    player.corporations.push(card);
+    player.playedCards.push(card);
     player.playedCards.push(new GMOContract());
     player.megaCredits = 2;
     player.playCard(new Tardigrades());
@@ -314,7 +314,7 @@ describe('PharmacyUnion', () => {
     const card = new PharmacyUnion();
     const [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
 
-    player.corporations.push(card);
+    player.playedCards.push(card);
     setRulingParty(game, PartyName.GREENS, 'gp03');
     player.megaCredits = 2;
     player.playCard(new Tardigrades());
@@ -329,11 +329,11 @@ describe('PharmacyUnion', () => {
     const pharmacyUnion = new PharmacyUnion();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
 
-    player.corporations.push(pharmacyUnion);
+    player.playedCards.push(pharmacyUnion);
     player.megaCredits = 12;
     pharmacyUnion.resourceCount = 1;
 
-    player2.corporations.push(new Splice());
+    player2.playedCards.push(new Splice());
 
     setRulingParty(game, PartyName.REDS);
 

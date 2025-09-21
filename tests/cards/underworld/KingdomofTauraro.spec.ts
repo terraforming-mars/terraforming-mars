@@ -28,7 +28,7 @@ describe('KingdomofTauraro', () => {
   it('May place next to own cities', () => {
     const card = new KingdomofTauraro();
     const [game, player] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     const board = game.board;
     const space = board.getSpaceOrThrow('35');
@@ -41,7 +41,7 @@ describe('KingdomofTauraro', () => {
   it('May place next to own excavation tokens', () => {
     const card = new KingdomofTauraro();
     const [game, player] = testGame(2, {underworldExpansion: true});
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     const board = game.board;
     const space = board.getSpaceOrThrow('35');
@@ -54,7 +54,7 @@ describe('KingdomofTauraro', () => {
   it('Must place next to own tiles', () => {
     const card = new KingdomofTauraro();
     const [game, player, player2] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     const board = game.board;
     // Spot 55 has 6 land spaces next to it. Makes testing easier.

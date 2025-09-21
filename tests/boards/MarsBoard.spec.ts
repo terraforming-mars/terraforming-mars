@@ -107,7 +107,7 @@ describe('MarsBoard', () => {
   it('Do not include land claimed hazard spaces for Arcadian Communities', () => {
     const card = new ArcadianCommunities();
     const [/* game */, player] = testGame(2, {aresExtension: true, aresHazards: true});
-    player.corporations.push(card);
+    player.playedCards.push(card);
     const board = player.game.board;
     const space = board.spaces.find(AresHandler.hasHazardTile);
     space!.player = player;

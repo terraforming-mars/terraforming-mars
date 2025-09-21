@@ -14,7 +14,7 @@ describe('BioSol', () => {
   beforeEach(() => {
     card = new BioSol();
     [game, player] = testGame(1);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('initialAction', () => {

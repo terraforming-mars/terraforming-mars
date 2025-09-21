@@ -38,7 +38,7 @@ describe('Vitor', () => {
   });
 
   it('Give megacredits when card played', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     // Dust Seals has victory points
     card.onCardPlayedForCorps(player, new DustSeals());

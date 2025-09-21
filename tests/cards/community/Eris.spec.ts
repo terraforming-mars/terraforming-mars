@@ -20,7 +20,7 @@ describe('Eris', () => {
     card = new Eris();
     [game, player/* , player2 */] = testGame(2, {aresExtension: true, aresHazards: true});
     card.play(player);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('Starts with 1 Ares card', () => {

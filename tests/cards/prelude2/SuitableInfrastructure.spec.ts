@@ -64,7 +64,7 @@ describe('SuitableInfrastructure', () => {
     const saturnSystems = new SaturnSystems();
     player.playedCards.push(card);
     // Gain 1 MC prouduction when anybody plays a card with a jovian tag.
-    player.corporations.push(saturnSystems);
+    player.playedCards.push(saturnSystems);
     const jovianLanterns = new JovianLanterns();
 
     game.activePlayer = player2;
@@ -86,7 +86,7 @@ describe('SuitableInfrastructure', () => {
 
     const saturnSystems = new SaturnSystems();
     player.playedCards.push(card, refugeeCamps);
-    player.corporations.push(saturnSystems);
+    player.playedCards.push(saturnSystems);
 
     refugeeCamps.action(player);
     runAllActions(game);
@@ -100,7 +100,7 @@ describe('SuitableInfrastructure', () => {
 
     // Manutech: also has an onProductionGain() method
     const manutech = new Manutech();
-    player.corporations.push(manutech);
+    player.playedCards.push(manutech);
     player.playedCards.push(card);
 
     expect(player.stock.megacredits).eq(0);

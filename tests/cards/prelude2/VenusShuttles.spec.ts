@@ -24,7 +24,7 @@ describe('VenusShuttles', () => {
 
   it('Should play, one option', () => {
     const celestic = new Celestic(); // Stores floaters, has Venus tag.
-    player.corporations.push(celestic);
+    player.playedCards.push(celestic);
 
     card.play(player);
     runAllActions(game);
@@ -35,7 +35,7 @@ describe('VenusShuttles', () => {
   it('Should Play, multiple cards.', () => {
     const celestic = new Celestic(); // Stores floaters. has Venus tag
     const jsr = new JetStreamMicroscrappers(); // Stores floaters, has Venus tag.
-    player.corporations.push(celestic);
+    player.playedCards.push(celestic);
     player.playedCards.push(jsr);
     cast(card.play(player), undefined);
     runAllActions(game);

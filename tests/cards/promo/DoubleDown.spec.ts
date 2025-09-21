@@ -95,7 +95,7 @@ describe('DoubleDown', () => {
   it('Does not count tags of copied prelude', () => {
     // When a plant or animal tag is played, add one resource to thi9s card.
     const corp = new Arklight();
-    player.corporations.push(corp);
+    player.playedCards.push(corp);
 
     expect(corp.resourceCount).eq(0);
 
@@ -203,7 +203,7 @@ describe('DoubleDown', () => {
 
   it('Make compatible with Merger + Corp with resources', () => {
     // Merger doesn't work without at least one starting corporation
-    player.corporations.push(new Helion());
+    player.playedCards.push(new Helion());
     // player needs some MC to help pay for Merger.
     player.megaCredits = 100;
 

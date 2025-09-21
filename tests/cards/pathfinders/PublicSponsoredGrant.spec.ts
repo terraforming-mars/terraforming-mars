@@ -81,7 +81,7 @@ describe('PublicSponsoredGrant', () => {
   });
 
   it('compatible with Mons Insurance', () => {
-    player2.corporations.push(new MonsInsurance());
+    player2.playedCards.push(new MonsInsurance());
     // This isn't very clean but it's necessary for the test.
     game.monsInsuranceOwner = player2;
     player.megaCredits = 10;

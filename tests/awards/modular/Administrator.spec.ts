@@ -51,7 +51,7 @@ describe('Administrator', () => {
 
   it('Chimera Corp scenario', () => {
     // A wild tag counts as no tag when determining Award winners (via rulebook)
-    player.corporations.push(new Chimera());
+    player.playedCards.push(new Chimera());
     expect(award.getScore(player)).eq(1);
 
     player.playedCards.push(fakeCard({tags: []}));

@@ -21,13 +21,13 @@ describe('SaturnSystems', () => {
   });
 
   it('Runs onCardPlayedByAnyPlayer', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     player.playCard(new MirandaResort());
     expect(player.production.megacredits).to.eq(1);
   });
 
   it('Runs onCardPlayedByAnyPlayer when other player plays card', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     player2.playCard(new MirandaResort());
     expect(player.production.megacredits).to.eq(1);
   });

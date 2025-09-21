@@ -20,7 +20,7 @@ describe('CuriosityII', () => {
     [game, player, player2] = testGame(2, {aresExtension: true, aresHazards: false});
     game.phase = Phase.ACTION;
 
-    player.corporations.push(card);
+    player.playedCards.push(card);
     player.megaCredits = 2;
   });
 

@@ -36,7 +36,7 @@ describe('RotatorImpacts', () => {
   it('Works with MSI corporation', () => {
     const corp = new MorningStarInc();
     corp.play(player);
-    player.corporations.push(corp);
+    player.playedCards.push(corp);
 
     setVenusScaleLevel(game, 18);
     expect(card.canPlay(player)).is.true;

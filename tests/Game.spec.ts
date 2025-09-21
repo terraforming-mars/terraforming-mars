@@ -520,7 +520,7 @@ describe('Game', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const game = Game.newInstance('gto', [player], player);
     const card = new SaturnSystems();
-    player.corporations.push(card);
+    player.playedCards.push(card);
     expect(game.getCardPlayerOrThrow(card.name)).to.eq(player);
   });
 

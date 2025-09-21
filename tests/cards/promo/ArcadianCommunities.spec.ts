@@ -18,7 +18,7 @@ describe('ArcadianCommunities', () => {
   beforeEach(() => {
     card = new ArcadianCommunities();
     [game, player] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
     board = player.game.board;
   });
 

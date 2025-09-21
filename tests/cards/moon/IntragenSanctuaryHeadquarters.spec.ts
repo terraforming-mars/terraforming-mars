@@ -26,7 +26,7 @@ describe('IntragenSanctuaryHeadquarters', () => {
   });
 
   it('onCardPlayedByAnyPlayer', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     expect(card.resourceCount).eq(0);
 
     // This can't reasonably be tested without setting up a research phase.
@@ -58,7 +58,7 @@ describe('IntragenSanctuaryHeadquarters', () => {
 
 
   it('onCardPlayed by other player', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     expect(card.resourceCount).eq(0);
     // This can't reasonably be tested without setting up a research phase.
     // Game-play tests would help, as would making sure the initial set-up
@@ -71,7 +71,7 @@ describe('IntragenSanctuaryHeadquarters', () => {
   });
 
   it('works with Meat Industry', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     const meatIndustry = new MeatIndustry();
     player.playedCards.push(meatIndustry);
     const pets = new Pets();
@@ -82,7 +82,7 @@ describe('IntragenSanctuaryHeadquarters', () => {
   });
 
   it('works when opponent plays Meat Industry #7329', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     const meatIndustry = new MeatIndustry();
     player.playedCards.push(meatIndustry);
     const pets = new Pets();

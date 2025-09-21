@@ -78,7 +78,7 @@ describe('IndustrialComplex', () => {
           player.canUseTitaniumAsMegacredits = true;
         }
         if (corp === CardName.MANUTECH) {
-          player.corporations.push(newCorporationCard(corp)!);
+          player.playedCards.push(newCorporationCard(corp)!);
         }
       }
       player.stock.override(run.stock);
@@ -96,7 +96,7 @@ describe('IndustrialComplex', () => {
             player.canUseTitaniumAsMegacredits = true;
           }
           if (corp === CardName.MANUTECH) {
-            player.corporations.push(newCorporationCard(corp)!);
+            player.playedCards.push(newCorporationCard(corp)!);
           }
         }
         player.stock.override(run.stock);

@@ -26,7 +26,7 @@ describe('MonsInsurance', () => {
 
     [/* game */, player, player2, player3] = testGame(3);
     card.play(player);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('Should play', () => {
@@ -137,7 +137,7 @@ describe('MonsInsurance - Solo', () => {
 
     [game, player] = testGame(1, {preludeExtension: true});
     card.play(player);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('Should play', () => {

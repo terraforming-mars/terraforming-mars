@@ -17,7 +17,7 @@ describe('Thorgate', () => {
   it('Discounts power tags', () => {
     const card = new Thorgate();
     const [/* game */, player] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     expect(card.getCardDiscount(player, new EnergySaving())).to.eq(3);
     expect(card.getCardDiscount(player, new Pets())).to.eq(0);
@@ -26,7 +26,7 @@ describe('Thorgate', () => {
   it('Discounts Power Plant standard project', () => {
     const card = new Thorgate();
     const [/* game */, player] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     const powerPlant = new PowerPlantStandardProject();
     player.megaCredits = powerPlant.cost - 3;

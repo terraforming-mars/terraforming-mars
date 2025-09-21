@@ -35,7 +35,7 @@ describe('Warmonger', () => {
     player.playedCards.push(new BigAsteroid());
     expect(award.getScore(player)).eq(2);
 
-    player.corporations.push(new TheDarksideofTheMoonSyndicate());
+    player.playedCards.push(new TheDarksideofTheMoonSyndicate());
     expect(award.getScore(player)).eq(3);
   });
 

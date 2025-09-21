@@ -60,7 +60,7 @@ describe('SelectInitialCards', () => {
       {type: 'card', cards: [CardName.ANTS]},
     ]}, player);
 
-    expect(player.corporations).has.length(0); // This input object doesn't set the player's corporation card
+    expect(player.playedCards.corporations()).is.empty; // This input object doesn't set the player's corporation card
     expect(corp!.name).eq(CardName.INVENTRIX);
     expect(player.cardsInHand.map(toName)).to.have.members([CardName.ANTS]); // But it does set their cards in hand.
 
@@ -85,7 +85,7 @@ describe('SelectInitialCards', () => {
       {type: 'card', cards: [CardName.ANTS]},
     ]}, player);
 
-    expect(player.corporations).has.length(0); // This input object doesn't set the player's corporation card
+    expect(player.playedCards.corporations()).is.empty; // This input object doesn't set the player's corporation card
     expect(corp!.name).eq(CardName.INVENTRIX);
     expect(player.cardsInHand.map(toName)).to.have.members([CardName.ANTS]); // But it does set their cards in hand.
     expect(Array.from(player.ceoCardsInHand).map(toName)).to.have.members([CardName.ASIMOV]);

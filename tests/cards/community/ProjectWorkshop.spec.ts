@@ -38,7 +38,7 @@ describe('ProjectWorkshop', () => {
     [game, player] = testGame(1);
 
     card.play(player);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('Starts with correct resources', () => {
@@ -174,7 +174,7 @@ describe('ProjectWorkshop', () => {
   it('Project Workshop and Reds taxes', () => {
     [game, player] = testGame(1, {turmoilExtension: true});
     card.play(player);
-    player.corporations.push(card);
+    player.playedCards.push(card);
     player.game.phase = Phase.ACTION;
 
     const turmoil = game.turmoil!;
@@ -224,7 +224,7 @@ describe('ProjectWorkshop', () => {
   it('Project Workshop + Helion', () => {
     const helion = new Helion();
     helion.play(player);
-    player.corporations.push(helion);
+    player.playedCards.push(helion);
 
     player.megaCredits = 2;
     expect(card.canAct(player)).is.false;

@@ -48,7 +48,6 @@ export class Flooding extends Card implements IProjectCard {
         }
       });
 
-      // TODO(kberg) This has got to be a common thing, right? Reuse this, right?
       if (adjacentPlayers.size > 0) {
         return new OrOptions(
           new SelectPlayer(

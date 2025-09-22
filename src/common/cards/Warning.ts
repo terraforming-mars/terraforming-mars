@@ -1,5 +1,6 @@
 export type Warning =
  'pass' |
+ 'undoBestEffort' |
  'maxtemp' |
  'maxoxygen' |
  'maxoceans' |

@@ -232,7 +232,12 @@
                             <label for="undo-checkbox">
                                 <span v-i18n>Allow undo</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#allow-undo" class="tooltip" target="_blank">&#9432;</a>
                             </label>
-
+                            <div v-if="undoOption">
+                              Undo is now in best effort support.
+                              <a href="https://github.com/terraforming-mars/terraforming-mars/discussions/7647" target="_blank">&#9432;</a>
+                              <br/>
+                              No effort will be spent to fix it.
+                            </div>
                             <input type="checkbox" v-model="showTimers" id="timer-checkbox">
                             <label for="timer-checkbox">
                                 <span v-i18n>Show timers</span>

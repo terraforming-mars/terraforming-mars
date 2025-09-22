@@ -140,6 +140,13 @@ export class GameCards {
 
   /* Remove cards excluded by choice in game options */
   private filterBannedCards<T extends ICard>(cards: Array<T>): Array<T> {
+    const BROKEN_CARDS = [
+      CardName.SUITABLE_INFRASTRUCTURE, // #7610
+      CardName.MARS_FRONTIER_ALLIANCE, // #7519
+    ];
+    // Remove the broken cards.
+    // TODO(kberg): Remove this block, and comment out the cards, after 2025-10-10
+    cards = cards.filter((card) => !BROKEN_CARDS.includes(card.name));
     return cards.filter((card) => {
       return this.gameOptions.bannedCards.includes(card.name) !== true;
     });

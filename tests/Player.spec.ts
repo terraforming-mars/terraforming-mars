@@ -174,7 +174,6 @@ describe('Player', () => {
       autoPass: false,
       pickedCorporationCard: CardName.THARSIS_REPUBLIC,
       terraformRating: 20,
-      corporations: [],
       hasIncreasedTerraformRatingThisGeneration: false,
       megaCredits: 1,
       megaCreditProduction: 2,

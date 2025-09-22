@@ -152,10 +152,6 @@ export class PathfindersExpansion {
     case '6mc':
       player.stock.add(Resource.MEGACREDITS, 6, {log: true});
       break;
-    // case 'any_resource':
-    //   // TODO(kberg): this is no different from 'resource'.
-    //   // But with more complicated UI.
-    //   game.defer(new GrantResourceDeferred(player, false));
     //   break;
     case 'card':
       player.drawCard();

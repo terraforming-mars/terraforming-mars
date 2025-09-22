@@ -75,7 +75,6 @@ import {Message} from '../common/logs/Message';
 import {DiscordId} from './server/auth/discord';
 import {AlliedParty} from '../common/turmoil/Types';
 import {PlayedCards} from './cards/PlayedCards';
-import {deserializeCorporationCard} from './cards/cardSerialization';
 import {From} from './logs/From';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
@@ -1703,7 +1702,6 @@ export class Player implements IPlayer {
     const result: SerializedPlayer = {
       id: this.id,
       user: this.user,
-      corporations: undefined, // Moving to playedCards
       // Used only during set-up
       pickedCorporationCard: this.pickedCorporationCard?.name,
       // Terraforming Rating
@@ -1849,15 +1847,6 @@ export class Player implements IPlayer {
 
     if (d.pickedCorporationCard !== undefined) {
       player.pickedCorporationCard = newCorporationCard(d.pickedCorporationCard);
-    }
-
-    // Rebuild corporation cards
-    // TODO(kberg): Remove by 2025-10-01
-    if (d.corporations) {
-      for (const entry of d.corporations) {
-        const card = deserializeCorporationCard(entry);
-        player.playedCards.push(card);
-      }
     }
 
     player.pendingInitialActions = corporationCardsFromJSON(d.pendingInitialActions ?? []);

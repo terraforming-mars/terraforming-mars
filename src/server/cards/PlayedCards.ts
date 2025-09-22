@@ -150,8 +150,6 @@ export class PlayedCards {
   }
 
   private pushCard(card: ICard) {
-    // TODO(kberg): consider whether corporations should be put in the front
-    // of the array in the way tableau works.
     this.array.push(card);
     this.byName.set(card.name, card);
     if (card.type === CardType.EVENT) {

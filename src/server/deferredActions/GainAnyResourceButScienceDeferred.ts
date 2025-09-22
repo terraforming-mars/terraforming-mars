@@ -31,7 +31,7 @@ export class GainAnyResourceButScienceDeferred extends DeferredAction {
         this.player.stock.add(Units.ResourceMap[resource], 1, {log: true});
         return undefined;
       }));
-    orOptions.options.push(new SelectOption('Gain 1 corrution')
+    orOptions.options.push(new SelectOption('Gain 1 corruption')
       .andThen(() => {
         UnderworldExpansion.gainCorruption(this.player, 1, {log: true});
         return undefined;

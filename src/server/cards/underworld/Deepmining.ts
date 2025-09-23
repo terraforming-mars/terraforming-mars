@@ -37,6 +37,7 @@ export class Deepmining extends Card implements IProjectCard {
   steelTokens: ReadonlyArray<UndergroundResourceToken> = [
     'steel1production',
     'steel2',
+    'steel2plant',
     'steel2pertemp',
   ] as const;
   titaniumTokens: ReadonlyArray<UndergroundResourceToken> = [

@@ -15,6 +15,7 @@ import {tileTypeToString} from '@/common/TileType';
 import {Log} from '@/common/logs/Log';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {ClientCard} from '@/common/cards/ClientCard';
+import {undergroundResourceTokenDescription} from '@/common/underworld/UndergroundResourceToken';
 
 const cardTypeToCss: Record<CardType, string | undefined> = {
   event: 'background-color-events',
@@ -88,6 +89,9 @@ export default Vue.extend({
 
       case LogMessageDataType.COLONY:
         return '<span class="log-card background-color-colony">' + this.$t(data.value) + '</span>';
+
+      case LogMessageDataType.UNDERGROUND_TOKEN:
+        return '<span class="log-excavation-token">' + this.$t(undergroundResourceTokenDescription[data.value]) + '</span>';
 
       default:
         if (data.type !== LogMessageDataType.RAW_STRING) {

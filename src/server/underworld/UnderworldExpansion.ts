@@ -18,7 +18,6 @@ import {SelectOption} from '../inputs/SelectOption';
 import {message} from '../logs/MessageBuilder';
 import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
 import {Units} from '../../common/Units';
-import {LogHelper} from '../LogHelper';
 import {Message} from '../../common/logs/Message';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {Tag} from '../../common/cards/Tag';
@@ -263,9 +262,8 @@ export class UnderworldExpansion {
       throw new Error('No available identification tokens');
     }
 
-    const {row, position} = LogHelper.loggingCoordintes(space);
-    player.game.log('${0} excavated ${1} on row ${2} position ${3}', (b) =>
-      b.player(player).undergroundToken(undergroundResource).number(row).number(position));
+    player.game.log('${0} excavated ${1} at ${2}', (b) =>
+      b.player(player).undergroundToken(undergroundResource).space(space));
 
     space.excavator = player;
     space.undergroundResources = undefined;
@@ -306,9 +304,8 @@ export class UnderworldExpansion {
 
   public static claimToken(player: IPlayer, token: UndergroundResourceToken, isExcavate: boolean, space: Space | undefined) {
     if (space) {
-      const {row, position} = LogHelper.loggingCoordintes(space);
-      player.game.log('${0} claimed ${1} on row ${2} position ${3}', (b) =>
-        b.player(player).undergroundToken(token).number(row).number(position));
+      player.game.log('${0} claimed ${1} at ${2}', (b) =>
+        b.player(player).undergroundToken(token).space(space));
     } else {
       player.game.log('${0} claimed ${1}', (b) => b.player(player).undergroundToken(token));
     }

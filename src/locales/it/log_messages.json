@@ -44,7 +44,7 @@
     "${0} drew ${1}, ${2} and ${3}": "${0} ha pescato ${1}, ${2} e ${3}",
     "${0} sold ${1} patents":"${0} ha venduto ${1} brevetto/i",
     "${0}'s ${1} production increased by ${2}":"La Produzione di ${1} di ${0} è incrementata di ${2}",
-    "${0} ${1} ${2} on row ${3} position ${4}": "${0} ${1} ${2} sulla riga ${3} posizione ${4}",
+    "${0} ${1} ${2} at ${3}": "${0} ${1} ${2} sulla ${3}",
 
 "A neutral delegate is the new chairman." :"Un Delegato neutrale è il nuovo Presidente",
 "Greens are in power in the first generation.":"I Verdi sono al potere durante la prima generazione",

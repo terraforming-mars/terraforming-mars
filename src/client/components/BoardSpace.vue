@@ -8,7 +8,7 @@
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
     <bonus :bonus="space.bonus" v-if="showBonus"></bonus>
     <template v-if="tileView === 'coords'">
-      <div class="board-space-coords">({{ space.y }}, {{ space.x }}) ({{ space.id }})</div>
+      <div class="board-space-coords">{{  getSpaceName(space.id) }}</div>
     </template>
     <template v-if="tileView === 'show'">
       <div :class="playerColorCss" v-if="space.color !== undefined"></div>
@@ -38,7 +38,7 @@ import {TileView} from '@/client/components/board/TileView';
 import {SpaceModel} from '@/common/models/SpaceModel';
 import {getPreferences} from '../utils/PreferencesManager';
 import {ClaimedToken} from '@/common/underworld/UnderworldPlayerData';
-
+import {getSpaceName} from '@/common/boards/spaces';
 export default Vue.extend({
   name: 'board-space',
   props: {
@@ -86,6 +86,9 @@ export default Vue.extend({
         return undefined;
       }
       return {token: this.space.undergroundResource, shelter: false, active: false};
+    },
+    getSpaceName(): typeof getSpaceName {
+      return getSpaceName;
     },
   },
 });

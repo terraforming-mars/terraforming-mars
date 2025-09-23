@@ -10,12 +10,13 @@ import {LogMessage} from '@/common/logs/LogMessage';
 import {LogMessageType} from '@/common/logs/LogMessageType';
 import {LogMessageData, LogMessageDataAttrs} from '@/common/logs/LogMessageData';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
-import {PublicPlayerModel} from '@/common/models/PlayerModel';
+import {ViewModel} from '@/common/models/PlayerModel';
 import {tileTypeToString} from '@/common/TileType';
 import {Log} from '@/common/logs/Log';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {ClientCard} from '@/common/cards/ClientCard';
 import {undergroundResourceTokenDescription} from '@/common/underworld/UndergroundResourceToken';
+import {isMoonSpace, getSpaceName} from '@/common/boards/spaces';
 
 const cardTypeToCss: Record<CardType, string | undefined> = {
   event: 'background-color-events',
@@ -35,8 +36,8 @@ export default Vue.extend({
     message: {
       type: Object as () => LogMessage,
     },
-    players: {
-      type: Array as () => Array<PublicPlayerModel>,
+    viewModel: {
+      type: Object as () => ViewModel,
     },
   },
   methods: {
@@ -65,12 +66,13 @@ export default Vue.extend({
 
       switch (data.type) {
       case LogMessageDataType.PLAYER:
-        for (const player of this.players) {
-          if (data.value === player.color) {
-            return '<span class="log-player player_bg_color_'+player.color+'">'+player.name+'</span>';
-          }
+        const player = this.viewModel.players.find((player) => player.color === data.value);
+        if (player !== undefined) {
+          return '<span class="log-player player_bg_color_'+player.color+'">'+player.name+'</span>';
+        } else {
+          console.log(`Cannot find player ${data.value}`);
+          break;
         }
-        break;
 
       case LogMessageDataType.CARD:
         const card = getCard(data.value);
@@ -78,8 +80,8 @@ export default Vue.extend({
           return this.cardToHtml(card, data.attrs);
         } else {
           console.log(`Cannot render ${data.value}`);
+          break;
         }
-        break;
 
       case LogMessageDataType.GLOBAL_EVENT:
         return '<span class="log-card background-color-global-event">' + this.$t(data.value) + '</span>';
@@ -92,6 +94,13 @@ export default Vue.extend({
 
       case LogMessageDataType.UNDERGROUND_TOKEN:
         return '<span class="log-excavation-token">' + this.$t(undergroundResourceTokenDescription[data.value]) + '</span>';
+
+      case LogMessageDataType.SPACE:
+        const fill = isMoonSpace(data.value) ? 'gray' : '#b7410e';
+        const icon =
+          '<svg width="20" height="14" viewBox="0 0 28 37"><circle cx="14" cy="19" r="16" stroke="black" stroke-width="1" transform="translate(0, 2)" fill="' + fill + '" /></svg>';
+
+        return '<span class="log-space-id">' +icon + getSpaceName(data.value) + '</span>';
 
       default:
         if (data.type !== LogMessageDataType.RAW_STRING) {

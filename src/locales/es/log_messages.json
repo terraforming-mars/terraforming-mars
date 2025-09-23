@@ -80,7 +80,7 @@
     "${0} drew ${1}, ${2} and ${3}": "${0} ha robado ${1}, ${2} y ${3}",
     "${0} sold ${1} patents": "${0} vendió ${1} patente(s)",
     "${0}'s ${1} production increased by ${2}":"La producción de ${1} de ${0} ha sido incrementada en ${2}",
-    "${0} ${1} ${2} on row ${3} position ${4}": "${0} ${1} ${2} en la fila ${3} posición ${4}",
+    "${0} ${1} ${2} at ${3}": "${0} ${1} ${2} en ${3}",
     "placed":"ha colocado",
     "greenery tile":"loseta de vegetación",
     "ocean tile":"loseta de océano",

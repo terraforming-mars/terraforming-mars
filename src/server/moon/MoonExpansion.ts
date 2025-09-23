@@ -137,14 +137,11 @@ export class MoonExpansion {
   }
 
   private static logTilePlacement(player: IPlayer, space: Space, tileType: TileType) {
+    // TODO(kberg): this can probably be removed now.
     // Skip off-grid tiles
     if (space.x !== -1 && space.y !== -1) {
-      const offsets = [-1, 0, 1, 1, 1, 0, -1];
-      const row = space.y + 1;
-      const position = space.x + offsets[space.y];
-
-      player.game.log('${0} placed a ${1} tile on The Moon at (${2}, ${3})', (b) =>
-        b.player(player).tileType(tileType).number(row).number(position));
+      player.game.log('${0} placed a ${1} tile at ${2}', (b) =>
+        b.player(player).tileType(tileType).space(space));
     }
   }
 

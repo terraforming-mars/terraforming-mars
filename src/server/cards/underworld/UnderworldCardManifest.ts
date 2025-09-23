@@ -279,7 +279,7 @@ export const UNDERWORLD_CARD_MANIFEST = new ModuleManifest({
     [CardName.VOLTAGON]: {Factory: Voltagon, compatibility: ['venus', 'underworld']},
     // // [CardName.ARES_MEDIA]: {Factory: AresMedia}, // Not another events are up card.
     [CardName.ANUBIS_SECURITIES]: {Factory: AnubisSecurities, compatibility: 'underworld'},
-    [CardName.HECATE_SPEDITIONS]: {Factory: HecateSpeditions, compatibility: ['colonies', 'underworld']},
+    [CardName.HECATE_SPEDITIONS]: {Factory: HecateSpeditions, compatibility: ['colonies']},
   },
 
   preludeCards: {

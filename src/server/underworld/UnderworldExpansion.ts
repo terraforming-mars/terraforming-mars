@@ -393,11 +393,18 @@ export class UnderworldExpansion {
       player.increaseTerraformRating();
       break;
     case 'ocean':
-      if (player.canAfford({cost: 4, tr: {oceans: 1}})) {
-        if (player.game.canAddOcean() || player.tableau.has(CardName.WHALES)) {
+      const canAddOcean = player.game.canAddOcean();
+      const canAfford = player.canAfford({cost: 4, tr: {oceans: 1}});
+      const hasWhales = player.tableau.has(CardName.WHALES);
+      if (canAddOcean || hasWhales) {
+        if (canAfford) {
           player.game.defer(new SelectPaymentDeferred(player, 4, {title: message('Select how to pay 4 M€ for ocean bonus')}))
             .andThen(() => player.game.defer(new PlaceOceanTile(player)));
+        } else {
+          player.game.log('${0} cannot afford to place an ocean', (b) => b.player(player));
         }
+      } else {
+        player.game.log('There is no room to place an ocean');
       }
       break;
     case 'data1pertemp':

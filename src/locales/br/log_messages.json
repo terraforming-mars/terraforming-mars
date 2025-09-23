@@ -87,7 +87,7 @@
   "${0} drew ${1}, ${2} and ${3}": "${0} comprou ${1}, ${2} e ${3}",
   "${0} sold ${1} patents": "${0} vendeu ${1} patente(s)",
   "${0}'s ${1} production increased by ${2}": "A produção de ${1} de ${0} foi aumentada em ${2}",
-  "${0} ${1} ${2} on row ${3} position ${4}": "${0} ${1} ${2} na linha ${3} posição ${4}",
+  "${0} ${1} ${2} at ${3}": "${0} ${1} ${2} em ${3}",
   "placed": "colocou",
   "greenery tile": "tile de vegetação",
   "ocean tile": "tile de oceano",

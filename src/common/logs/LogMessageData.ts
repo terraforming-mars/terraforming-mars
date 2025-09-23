@@ -1,5 +1,6 @@
 import {Color} from '../Color';
 import {TileType} from '../TileType';
+import {SpaceId} from '../Types';
 import {SpaceBonus} from '../boards/SpaceBonus';
 import {CardName} from '../cards/CardName';
 import {ColonyName} from '../colonies/ColonyName';
@@ -53,6 +54,9 @@ type Types = {
 } | {
   type: LogMessageDataType.UNDERGROUND_TOKEN;
   value: UndergroundResourceToken,
+} | {
+  type: LogMessageDataType.SPACE;
+  value: SpaceId,
 };
 
 export type LogMessageData = Types & {

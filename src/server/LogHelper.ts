@@ -35,22 +35,14 @@ export class LogHelper {
     this.logBoardTileAction(player, space, tileTypeToString[tileType] + ' tile');
   }
 
-  static loggingCoordintes(space: Space) {
-    const offset = Math.abs(space.y - 4);
-    const row = space.y + 1;
-    const position = space.x - offset + 1;
-    return {row, position};
-  }
-
   static logBoardTileAction(player: IPlayer, space: Space, description: string, action: string = 'placed') {
     // Skip off-grid tiles
     if (space.x === -1 && space.y === -1) return;
     // Skip solo play random tiles
     if (player.name === 'neutral') return;
 
-    const {row, position} = this.loggingCoordintes(space);
-    player.game.log('${0} ${1} ${2} on row ${3} position ${4}', (b) =>
-      b.player(player).string(action).string(description).number(row).number(position));
+    player.game.log('${0} ${1} ${2} at ${3}', (b) =>
+      b.player(player).string(action).string(description).space(space));
   }
 
   static logColonyTrackIncrease(player: IPlayer, colony: IColony, steps: number = 1) {

@@ -15,7 +15,7 @@
     <div class="panel log-panel">
       <div id="logpanel-scrollable" class="panel-body">
         <ul v-if="messages">
-          <log-message-component v-for="(message, index) in messages" :key="index" :message="message" :players="players" v-on:click="messageClicked(message)"></log-message-component>
+          <log-message-component v-for="(message, index) in messages" :key="index" :message="message" :viewModel="viewModel" v-on:click="messageClicked(message)"></log-message-component>
         </ul>
       </div>
       <div class='debugid'>(debugid {{step}})</div>
@@ -30,7 +30,7 @@ import Vue from 'vue';
 import {paths} from '@/common/app/paths';
 import {statusCode} from '@/common/http/statusCode';
 import {LogMessage} from '@/common/logs/LogMessage';
-import {PublicPlayerModel} from '@/common/models/PlayerModel';
+import {PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
 import {playerColorClass} from '@/common/utils/utils';
 import {Color} from '@/common/Color';
 import {SoundManager} from '@/client/utils/SoundManager';
@@ -50,17 +50,8 @@ type LogPanelModel = {
 export default Vue.extend({
   name: 'log-panel',
   props: {
-    id: {
-      type: String as () => ParticipantId,
-    },
-    generation: {
-      type: Number,
-    },
-    lastSoloGeneration: {
-      type: Number,
-    },
-    players: {
-      type: Array as () => Array<PublicPlayerModel>,
+    viewModel: {
+      type: Object as () => ViewModel,
     },
     color: {
       type: String as () => Color,
@@ -74,7 +65,7 @@ export default Vue.extend({
   data(): LogPanelModel {
     return {
       messages: [],
-      selectedGeneration: this.generation,
+      selectedGeneration: -1,
       selectedMessage: undefined,
     };
   },
@@ -153,7 +144,22 @@ export default Vue.extend({
       return this.lastSoloGeneration === this.generation ? 'last-generation blink-animation' : '';
     },
   },
+  computed: {
+    generation(): number {
+      return this.viewModel.game.generation;
+    },
+    lastSoloGeneration(): number {
+      return this.viewModel.game.lastSoloGeneration;
+    },
+    players(): Array<PublicPlayerModel> {
+      return this.viewModel.players;
+    },
+    id(): ParticipantId | undefined {
+      return this.viewModel.id;
+    },
+  },
   mounted() {
+    this.selectedGeneration = this.generation;
     this.getLogsForGeneration(this.generation);
   },
 });

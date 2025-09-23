@@ -7,6 +7,7 @@ import {AwardName} from '../ma/AwardName';
 import {MilestoneName} from '../ma/MilestoneName';
 import {PartyName} from '../turmoil/PartyName';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
+import {UndergroundResourceToken} from '../underworld/UndergroundResourceToken';
 import {LogMessageDataType} from './LogMessageDataType';
 
 export type LogMessageDataAttrs = {
@@ -47,9 +48,11 @@ type Types = {
   type: LogMessageDataType.PARTY,
   value: PartyName,
 } | {
-  type:
-  LogMessageDataType.GLOBAL_EVENT;
+  type: LogMessageDataType.GLOBAL_EVENT;
   value: GlobalEventName,
+} | {
+  type: LogMessageDataType.UNDERGROUND_TOKEN;
+  value: UndergroundResourceToken,
 };
 
 export type LogMessageData = Types & {

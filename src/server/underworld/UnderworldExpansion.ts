@@ -3,7 +3,7 @@ import {Board} from '../boards/Board';
 import {Space} from '../boards/Space';
 import {UnderworldData} from './UnderworldData';
 import {Random} from '../../common/utils/Random';
-import {TemporaryBonusToken, UndergroundResourceToken, undergroundResourceTokenDescription} from '../../common/underworld/UndergroundResourceToken';
+import {TemporaryBonusToken, UndergroundResourceToken} from '../../common/underworld/UndergroundResourceToken';
 import {inplaceShuffle} from '../utils/shuffle';
 import {Resource} from '../../common/Resource';
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
@@ -263,7 +263,9 @@ export class UnderworldExpansion {
       throw new Error('No available identification tokens');
     }
 
-    LogHelper.logBoardTileAction(player, space, `${undergroundResourceTokenDescription[undergroundResource]}`, 'excavated');
+    const {row, position} = LogHelper.loggingCoordintes(space);
+    player.game.log('${0} excavated ${1} on row ${2} position ${3}', (b) =>
+      b.player(player).undergroundToken(undergroundResource).number(row).number(position));
 
     space.excavator = player;
     space.undergroundResources = undefined;
@@ -304,9 +306,11 @@ export class UnderworldExpansion {
 
   public static claimToken(player: IPlayer, token: UndergroundResourceToken, isExcavate: boolean, space: Space | undefined) {
     if (space) {
-      LogHelper.logBoardTileAction(player, space, `${undergroundResourceTokenDescription[token]}`, 'claimed');
+      const {row, position} = LogHelper.loggingCoordintes(space);
+      player.game.log('${0} claimed ${1} on row ${2} position ${3}', (b) =>
+        b.player(player).undergroundToken(token).number(row).number(position));
     } else {
-      player.game.log('${0} claimed ${1}', (b) => b.player(player).string(undergroundResourceTokenDescription[token]));
+      player.game.log('${0} claimed ${1}', (b) => b.player(player).undergroundToken(token));
     }
 
     validateUnderworldExpansion(player.game);
@@ -448,13 +452,10 @@ export class UnderworldExpansion {
     player.underworldData.activeBonus = token;
     if (activeBonus !== undefined) {
       player.game.log('For the rest of this generation, ${0} will gain ${1}, replacing ${2}',
-        (b) => b.player(player)
-          .string(undergroundResourceTokenDescription[token])
-          .string(undergroundResourceTokenDescription[activeBonus]));
+        (b) => b.player(player).undergroundToken(token).undergroundToken(activeBonus));
     } else {
       player.game.log('For the rest of this generation, ${0} will gain ${1}',
-        (b) => b.player(player)
-          .string(undergroundResourceTokenDescription[token]));
+        (b) => b.player(player).undergroundToken(token));
     }
     player.underworldData.activeBonus = token;
   }

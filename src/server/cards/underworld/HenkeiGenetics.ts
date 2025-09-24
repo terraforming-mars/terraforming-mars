@@ -30,7 +30,7 @@ export class HenkeiGenetics extends CorporationCard implements ICorporationCard,
 
       firstAction: {
         text: 'Draw 2 microbe cards',
-        drawCard: {count: 2, resource: CardResource.MICROBE},
+        drawCard: {count: 2, tag: Tag.MICROBE},
       },
 
       metadata: {

@@ -160,7 +160,7 @@ export abstract class Colony implements IColony {
     // !== false because default is true.
     if (options.usesTradeFleet !== false) {
       this.visitor = player.id;
-      player.colonies.tradesThisGeneration++;
+      player.colonies.usedTradeFleets++;
     }
 
     if (player.tableau.has(CardName.VENUS_TRADE_HUB)) {

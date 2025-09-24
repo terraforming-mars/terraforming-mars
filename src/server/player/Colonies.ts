@@ -22,9 +22,10 @@ import {ColonyName} from '../../../src/common/colonies/ColonyName';
 export class Colonies {
   private player: IPlayer;
 
-  // Each ship in the player's fleet allows a single trade.
+  /** The number of trade fleets assigned to this player. */
   private fleetSize: number = 1;
-  public tradesThisGeneration: number = 0;
+  /** The number of consumed trade fleets. When this == `fleetSize` the player has no trade fleets. */
+  public usedTradeFleets: number = 0;
   // When trading you may increase the Colony track this many steps.
   public tradeOffset: number = 0;
 
@@ -43,7 +44,7 @@ export class Colonies {
    */
   public canTrade() {
     return ColoniesHandler.tradeableColonies(this.player.game).length > 0 &&
-      this.getFleetSize() > this.tradesThisGeneration &&
+      this.getFleetSize() > this.usedTradeFleets &&
       this.player.game.tradeEmbargo !== true;
   }
 
@@ -156,17 +157,17 @@ export class Colonies {
     // retrieve their fleets.
     // See Colony.ts for the other half of this effect, and Game.ts which disables it.
     if (syndicatePirateRaider === undefined) {
-      this.tradesThisGeneration = 0;
+      this.usedTradeFleets = 0;
     } else if (syndicatePirateRaider === this.player.id) {
       // CEO effect: Disable all other players from trading next gen,
       // but free up all colonies (don't leave their trade fleets stuck there)
       if (this.player.tableau.has(CardName.HUAN)) {
         for (const player of this.player.opponents) {
           // Magic number high enough to disable other players' trading
-          player.colonies.tradesThisGeneration = 50;
+          player.colonies.usedTradeFleets = 50;
         }
       }
-      this.tradesThisGeneration = 0;
+      this.usedTradeFleets = 0;
     }
   }
 }

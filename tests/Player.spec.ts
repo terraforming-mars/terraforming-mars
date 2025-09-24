@@ -254,7 +254,7 @@ describe('Player', () => {
     const newPlayer = Player.deserialize(json);
 
     expect(newPlayer.color).eq('purple');
-    expect(newPlayer.colonies.tradesThisGeneration).eq(100);
+    expect(newPlayer.colonies.usedTradeFleets).eq(100);
     it('pulls self replicating robots target cards', () => {
       const player = new Player('blue', 'blue', false, 0, 'p-blue');
       expect(player.getSelfReplicatingRobotsTargetCards()).is.empty;

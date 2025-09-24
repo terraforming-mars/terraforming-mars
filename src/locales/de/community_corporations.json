@@ -7,7 +7,7 @@
   "You start with 62 M€. As your first action, place 2 hazard tiles adjacent to no other tiles.": "Du beginnst mit 62 M€. Als erste Aktion platziere 2 Gefahrenplättchen, die an keine anderen Plättchen angrenzen dürfen.",
   "Effect: You do not lose production when placing adjacent to hazard tiles.": "EFFEKT: Du verlierst keine Produktion, wenn du angrenzend an Gefahrenplättchen platzierst.",
 
-  "Curosity II": "",
+  "Curosity II": "Kuriosität II",
   "You start with 40 M€ and 2 steel production.": "Du beginnst mit 40 M€ und einer Stahl-Produktion von 2.",
   "Effect: When you place a tile on an area that has a RESOURCE placement bonus, or on top of another tile, you may pay 2 M€ to draw a card.": "EFFEKT: Wenn du ein Plättchen auf ein Gebiet platzierst, das einen RESSOURCEN-Platzierungsbonus hat, oder auf ein anderes Plättchen, darfst du 2 M€ zahlen, um eine Karte zu ziehen.",
 
@@ -35,6 +35,7 @@
   "ACTION: SHUFFLE THE DISCARD PILE, THEN DRAW 3 CARDS FROM IT. KEEP 1 AND DISCARD THE OTHER 2.": "AKTION: MISCHE DEN ABLAGESTAPEL UND ZIEHE DANN 3 KARTEN DAVON. BEHALTE 1 UND LEGE DIE ANDEREN 2 AB.",
 
   "UNITED NATIONS MISSION ONE": "VEREINTEN NATIONEN, MISSION ONE",
+  "United Nations Mission One": "Vereinten Nationen, Mission Eins",
   "You start with 39 M€. Increase your TR 1 step.": "Du beginnst mit 39 M€. Erhöhe deinen TR um 1.",
   "Effect: When any player takes an action or plays a card that increases TR, including this, gain 1 M€ for each step.": "EFFEKT: Wenn ein Spieler eine Aktion durchführt oder eine Karte ausspielt, die den TR erhöht, einschließlich dieser, erhalte 1 M€ für jeden Schritt."
 }

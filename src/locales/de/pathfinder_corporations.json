@@ -9,7 +9,7 @@
   "(Action: When temperature is maxed, spend 8 heat gain 1 TR. You may repeat this action like a standard project.)": "(AKTION: Verbrauche beliebig oft 8 Wärme um deinen TW um 1 zu erhöhen, nachdem die Temperatur maximiert wurde.)",
   "(You start with 38 M€. As your first action, raise the Venus scale 2 steps.)": "(Du beginnst mit 38 M€. Als deine erste Aktion im Spiel, erhöhe Venus um 4%.)",
 
-  "AURORAI": "DIE AURORAI",
+  "Aurorai": "Die Aurorai",
   "(Effect: Whenever you increase your terraform rating, add 1 data per step to ANY card.)": "(EFFEKT: Wenn du deinen TW erhöhst, füge einer beliebigen Karte 1 Datenressource hinzu.)",
   "(Effect: You can use data on this card as 3M€ each to pay for standard projects.)": "(EFFEKT: Wenn du ein Standardprojekt nutzt, darfst du Daten von dieser Karte zum Bezahlen verwenden. Wert: je 3 M€.)",
   "(You start with 33 M€. and 2 data on this card)": "(Du beginnst mit 33 M€. Füge dieser Karte 2 Daten hinzu.)",
@@ -54,7 +54,7 @@
   "(Action: Spend 5 agenda resources to place a city tile on Mars.)": "(AKTION: Entferne 5 Agenden von dieser Karte, um ein Stadtplättchen zu platzieren.)",
   "(You start with 44 M€ and 1 agenda resource to this card.)": "(Du beginnst mit 44 M€. Füge dieser Karte 1 Agenda hinzu.)",
 
-  "GAGARIN MOBILE BASE": "Gagarin",
+  "Gagarin Mobile Base": "Gagarin",
   "move": "bewege",
   "(Action: Move the Base to ANY nearest empty area where it has not yet been. Collect the bonus.)": "(AKTION: Bewege den Gagarin-Marker auf das nächste freie benachbarte (auch reservierte) Feld. Erhalte den Platzierungsbonus des Feldes.)",
   "(Effect: When another player places a tile where the Base is, move the Base.)": "(EFFEKT: Wenn ein anderer Spieler ein Plättchen auf das Gagarin-Feld platziert, bewege den Marker wieder auf das nächste freie benachbarte Feld und erhalte den Platzierungsbonus.)",

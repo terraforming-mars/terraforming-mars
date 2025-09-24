@@ -12,7 +12,7 @@
     </template>
     <div v-if="space.color !== undefined && tileView === 'show'" :class="playerColorCss"></div>
     <div v-if="space.coOwner !== undefined && tileView === 'show'" :class="coOwnerColorCss"></div>
-
+    <div class="board-log-highlight" :data_log_highlight_id="space.id"></div>
   </div>
 </template>
 

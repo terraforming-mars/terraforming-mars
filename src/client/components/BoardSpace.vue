@@ -25,6 +25,7 @@
       <underground-token v-if="claimedToken !== undefined" :token="claimedToken" location="board"></underground-token>
       <div v-if="space.excavator !== undefined" class="underground-excavator" :class="'underground-excavator--' + space.excavator"></div>
     </template>
+    <div class="board-log-highlight" :data_log_highlight_id="space.id"></div>
     </div>
 </template>
 

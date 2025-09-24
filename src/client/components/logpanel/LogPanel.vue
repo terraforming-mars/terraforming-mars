@@ -15,7 +15,7 @@
     <div class="panel log-panel">
       <div id="logpanel-scrollable" class="panel-body">
         <ul v-if="messages">
-          <log-message-component v-for="(message, index) in messages" :key="index" :message="message" :viewModel="viewModel" v-on:click="messageClicked(message)"></log-message-component>
+          <log-message-component v-for="(message, index) in messages" :key="index" :message="message" :viewModel="viewModel" v-on:click="messageClicked(message)" @spaceClicked="spaceClicked"></log-message-component>
         </ul>
       </div>
       <div class='debugid'>(debugid {{step}})</div>
@@ -35,9 +35,10 @@ import {playerColorClass} from '@/common/utils/utils';
 import {Color} from '@/common/Color';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {getPreferences} from '@/client/utils/PreferencesManager';
-import {ParticipantId} from '@/common/Types';
+import {ParticipantId, SpaceId} from '@/common/Types';
 import LogMessageComponent from '@/client/components/logpanel/LogMessageComponent.vue';
 import CardPanel from '@/client/components/logpanel/CardPanel.vue';
+import {isMarsSpace} from '@/common/boards/spaces';
 
 let logRequest: XMLHttpRequest | undefined;
 
@@ -76,6 +77,29 @@ export default Vue.extend({
   methods: {
     messageClicked(message: LogMessage) {
       this.selectedMessage = message;
+    },
+    spaceClicked(spaceId: SpaceId) {
+      const id = isMarsSpace(spaceId) ? 'shortkey-board' : 'shortkey-moonBoard';
+      const el = document.getElementById(id);
+      el?.scrollIntoView({block: 'center', inline: 'center', behavior: 'auto'});
+
+      const regions = ['main_board', 'moon_board', 'moon_board_outer_spaces'];
+      for (const region of regions) {
+        const board = document.getElementById(region);
+        if (board !== null) {
+          const array = board.getElementsByClassName('board-log-highlight');
+          for (let i = 0, length = array.length; i < length; i++) {
+            const element = array[i] as HTMLElement;
+            if (element.getAttribute('data_log_highlight_id') === spaceId) {
+              element.classList.add('highlight');
+              setTimeout(() => {
+                element.classList.remove('highlight');
+              }, 3000);
+              return;
+            }
+          }
+        }
+      }
     },
     selectGeneration(gen: number): void {
       if (gen !== this.selectedGeneration) {

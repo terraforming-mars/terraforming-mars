@@ -447,6 +447,18 @@
 		animation: board-tile-blink-animation 2s infinite;
 		cursor: pointer;
 	}
+
+  .board-log-highlight {
+		clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+		width: 46px;
+		height: 51px;
+
+    &.highlight {
+      animation: board-tile-highlight-animation 1s infinite;
+      cursor: pointer;
+      background-color: white;
+    }
+  }
 }
 
 @keyframes board-tile-blink-animation {
@@ -455,6 +467,15 @@
 	70% { filter: opacity(0.4)}
 	99% { filter: opacity(0.4)}
 	100% { filter: opacity(1)}
+}
+
+@keyframes board-tile-highlight-animation {
+  0% { opacity: 1; }
+  10% { opacity: 0; }
+  20% { opacity: 1; }
+  30% { opacity: 0; }
+  40% { opacity: 0; }
+  100% { opacity: 0; }
 }
 
 .board-space-type-land {

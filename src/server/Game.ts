@@ -231,7 +231,9 @@ export class Game implements IGame, Logger {
   }
 
   private setFirstPlayer(first: IPlayer) {
-    this.log('First player this generation is ${0}', (b) => b.player(first));
+    if (!this.isSoloMode()) {
+      this.log('First player this generation is ${0}', (b) => b.player(first));
+    }
     this.first = first;
     const e = [...this.players, ...this.players];
     const idx = e.findIndex((p) => p.id === this.first.id);

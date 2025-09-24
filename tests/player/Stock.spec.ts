@@ -278,7 +278,7 @@ describe('Stock', () => {
       {
         'gameId': 'game-id',
         'lastSaveId': 0,
-        'logAge': 8,
+        'logAge': 7,
         'currentPlayer': 'p-player1-id',
         'metadata': {
           'player': {

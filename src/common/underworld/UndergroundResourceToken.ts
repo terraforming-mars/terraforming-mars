@@ -71,6 +71,6 @@ export const undergroundResourceTokenDescription: Record<UndergroundResourceToke
   place6mc: 'Gain 6 M€ when placing a tile here',
   oceanrequirementmod: 'Ocean requirements are ±3',
   oxygenrequirementmod: 'Oxygen requirements are ±3',
-  temprequirementmod: 'Tempoerature requirements are ±6 °C',
+  temprequirementmod: 'Temperature requirements are ±6 °C',
   anyresource1: 'Any resource except science',
 };

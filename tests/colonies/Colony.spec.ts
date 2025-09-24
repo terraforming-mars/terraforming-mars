@@ -389,18 +389,18 @@ describe('Colony', () => {
   });
 
   it('usesTradeFleet', () => {
-    expect(player.colonies.tradesThisGeneration).eq(0);
+    expect(player.colonies.usedTradeFleets).eq(0);
     luna.trade(player);
-    expect(player.colonies.tradesThisGeneration).eq(1);
+    expect(player.colonies.usedTradeFleets).eq(1);
 
     luna.trade(player, {});
-    expect(player.colonies.tradesThisGeneration).eq(2);
+    expect(player.colonies.usedTradeFleets).eq(2);
 
     luna.trade(player, {usesTradeFleet: false});
-    expect(player.colonies.tradesThisGeneration).eq(2);
+    expect(player.colonies.usedTradeFleets).eq(2);
 
     luna.trade(player, {usesTradeFleet: true});
-    expect(player.colonies.tradesThisGeneration).eq(3);
+    expect(player.colonies.usedTradeFleets).eq(3);
   });
 
   it('if player should move the track', () => {

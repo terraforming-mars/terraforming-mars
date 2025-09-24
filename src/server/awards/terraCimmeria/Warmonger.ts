@@ -76,7 +76,6 @@ export class Warmonger implements IAward {
     CardName.MONOPOLY,
     CardName.PLANT_TAX,
     CardName.RECKLESS_DETONATION,
-    CardName.SERVER_SABOTAGE,
     CardName.SPACE_PRIVATEERS,
     // Prelude 2
     CardName.RECESSION,

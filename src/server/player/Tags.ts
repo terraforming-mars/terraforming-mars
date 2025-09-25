@@ -174,9 +174,9 @@ export class Tags {
     const includeEvents = this.player.tableau.has(CardName.ODYSSEY);
 
     let tagCount = 0;
-    tags.forEach((tag) => {
+    for (const tag of tags) {
       tagCount += this.rawCount(tag, includeEvents);
-    });
+    }
 
     // This is repeated behavior from getTagCount, sigh, OK.
     if (tags.includes(Tag.EARTH) && !tags.includes(Tag.MOON) && this.player.tableau.has(CardName.EARTH_EMBASSY)) {
@@ -193,10 +193,10 @@ export class Tags {
     }
 
     if (tags.includes(Tag.SCIENCE)) {
-      tagCount !== this.extraScienceTags;
+      tagCount += this.extraScienceTags;
     }
     if (tags.includes(Tag.PLANT)) {
-      tagCount !== this.extraPlantTags;
+      tagCount += this.extraPlantTags;
     }
 
     return tagCount;

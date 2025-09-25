@@ -341,14 +341,18 @@ describe('UnderworldExpansion', () => {
 
   it('grant bonus - science tag', () => {
     expect(player1.tags.count(Tag.SCIENCE)).eq(2);
+    expect(player1.tags.multipleCount([Tag.SCIENCE])).eq(2);
     UnderworldExpansion.grant(player1, 'sciencetag');
     expect(player1.tags.count(Tag.SCIENCE)).eq(3);
+    expect(player1.tags.multipleCount([Tag.SCIENCE])).eq(3);
   });
 
   it('grant bonus - plant tag', () => {
     expect(player1.tags.count(Tag.PLANT)).eq(0);
+    expect(player1.tags.multipleCount([Tag.PLANT])).eq(0);
     UnderworldExpansion.grant(player1, 'planttag');
     expect(player1.tags.count(Tag.PLANT)).eq(1);
+    expect(player1.tags.multipleCount([Tag.PLANT])).eq(1);
   });
 
   it('excavatableSpaces', () => {

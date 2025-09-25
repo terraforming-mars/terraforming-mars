@@ -5,6 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions, setOxygenLevel, setTemperature} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+import {UnderworldExpansion} from '../../../src/server/underworld/UnderworldExpansion';
 
 describe('SearchForLifeUnderground', () => {
   let card: SearchforLifeUnderground;
@@ -41,10 +42,8 @@ describe('SearchForLifeUnderground', () => {
     expect(card.getVictoryPoints()).to.eq(3);
   });
 
-
   it('action fails, no microbes', () => {
     player.playedCards.push(card);
-
     player.megaCredits = 1;
 
     card.action(player);
@@ -61,7 +60,6 @@ describe('SearchForLifeUnderground', () => {
 
   it('action succeeds', () => {
     player.playedCards.push(card);
-
     player.megaCredits = 1;
 
     card.action(player);
@@ -74,5 +72,51 @@ describe('SearchForLifeUnderground', () => {
 
     expect(player.megaCredits).to.eq(0);
     expect(card.resourceCount).eq(1);
+  });
+
+  it('No places on the map to identify, draws from pile', () => {
+    player.playedCards.push(card);
+    player.megaCredits = 1;
+    // Spaces can be identified if they don't have a tile or an identification marker.
+    // This uses an identification marker.
+    for (const space of UnderworldExpansion.identifiableSpaces(player)) {
+      space.excavator = player;
+    }
+
+    expect(UnderworldExpansion.identifiableSpaces(player)).is.empty;
+    expect(card.canAct(player)).is.true;
+
+    game.underworldData.tokens.push('microbe1');
+    const size = game.underworldData.tokens.length;
+    card.action(player);
+    runAllActions(game); // pays for card.
+    cast(player.popWaitingFor(), undefined);
+
+    expect(player.megaCredits).to.eq(0);
+    expect(card.resourceCount).eq(1);
+    // Token goes back into the supply.
+    expect(game.underworldData.tokens).to.have.length(size);
+  });
+
+  it('Spaces identifiable, but no tokens are available', () => {
+    player.playedCards.push(card);
+    player.megaCredits = 1;
+    game.underworldData.tokens.length = 0;
+
+    expect(card.canAct(player)).is.false;
+  });
+
+  it('No places on the map to identify, nothing in the pile', () => {
+    player.playedCards.push(card);
+    player.megaCredits = 1;
+    // Spaces can be identified if they don't have a tile or an identification marker.
+    // This uses an identification marker.
+    for (const space of UnderworldExpansion.identifiableSpaces(player)) {
+      space.excavator = player;
+    }
+    game.underworldData.tokens.length = 0;
+
+    expect(UnderworldExpansion.identifiableSpaces(player)).is.empty;
+    expect(card.canAct(player)).is.false;
   });
 });

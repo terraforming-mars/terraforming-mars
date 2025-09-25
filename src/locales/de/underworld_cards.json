@@ -36,7 +36,7 @@
 "THIS CAN'T BE BLOCKED BY CORRUPTION": "DIES KANN NICHT DURCH KORRUPTION VERHINDERT WERDEN",
 "The player with more corruption than anybody else discards corruption until they have the same amount as the 2nd highest player, along with 3 M€ per unit of corruption removed this way.": "Der Spieler, der mehr Korruption als alle anderen hat, wirft so lange Korruption ab, bis er die gleiche Menge wie der zweithöchste Spieler hat, zusammen mit 3 M€ pro auf diese Weise entfernter Einheit Korruption.",
 
-"Concession Rights": "Konzessionsrechte",
+"Tunneling Loophole": "Tunnelbau-Lücke",
 "Requires 1 Earth tag. Until the end of this generation, you can excavate ignoring placement restrictions. Excavate 1 underground resource. Gain 1 corruption.": "Benötigt 1 Erd-Symbol. Bis zum Ende dieser Generation kannst du ohne Rücksicht auf Platzierungsbeschränkungen graben. Grabe 1 unterirdische Ressource aus. Erhalte 1 Korruption.",
 
 "Corporate Blackmail": "Erpressung durch Unternehmen",
@@ -155,7 +155,7 @@
 "Effect: The first standard project action you take each generation, except selling patents, costs 6 M€ less.": "EFFEKT: Die erste Standard-Projekt-Aktion, die Du pro Generation durchführst, außer dem Verkauf von Patenten, kostet 6 M€ weniger.",
 
 "Landfill": "Mülldeponie",
-"Increase your M€ production 1 step for each different TYPE of production you have at least 1 step of.": "Erhöhe deine M€-Produktion um 1 für jede andere Produktionsart, von der du mindestens 1 Stufe hast.",
+"Increase your M€ production 1 step for each different TYPE of production you have at least 1 step of.": "Erhöhe deine M€-Produktion um 1 für jede unterschiedliche Produktionsart, von der du mindestens 1 hast.",
 
 "Lobbying Network": "Lobbying-Netzwerk",
 
@@ -298,7 +298,7 @@
 
 "Stem Field Subsidies": "Subventionen für Stammzellen",
 "Action: Spend 2 resources here to identify 3 underground resources. Claim 1 of them.": "AKTION: Bezahle 2 Daten von hier, um 3 unterirdische Ressourcen zu identifizieren. Beanspruche 1 von ihnen.",
-"Effect: Whenever you play a science tag (including this), add 1 data to this card": "EFFEKT: Immer wenn du eine Wissenschaftssymbol spielst (einschließlich dieses), lege 1 Datum auf diese Karte.",
+"Effect: Whenever you play a science tag (including this), add 1 data to this card.": "EFFEKT: Immer wenn du eine Wissenschaftssymbol spielst (einschließlich dieses), lege 1 Datum auf diese Karte.",
 
 "Sting Operation": "Verdeckte Operation",
 "Target a player that has at least 4 corruption. Draw 2 cards.": "Ziele auf einen Spieler, der mindestens 4 Korruption hat. Ziehe 2 Karten.",

@@ -178,7 +178,7 @@ export default Vue.extend({
             details[vps.tag].points += ((vps.each ?? 1) / (vps.per ?? 1));
           }
           if (vps.cities !== undefined) {
-            details['city'].points += ((vps.each ?? 1) / (vps.per ?? 1));
+            details['city-count'].points += ((vps.each ?? 1) / (vps.per ?? 1));
           }
         }
       }

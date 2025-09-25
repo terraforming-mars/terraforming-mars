@@ -121,21 +121,22 @@ export class UnderworldExpansion {
 
   /**
    * Return the spaces that have not yet been identified.
+   *
+   * This doesn't take into account that there may not be available tokens in the supply.
+   * But canIdentifyN supports that.
    */
   public static identifiableSpaces(player: IPlayer): ReadonlyArray<Space> {
-    const spaces = player.game.board.spaces.filter(UnderworldExpansion.canIdentify);
-    return spaces;
+    return player.game.board.spaces.filter(UnderworldExpansion.canIdentify);
   }
 
   public static canIdentifyN(player: IPlayer, count: number): boolean {
     const tokens = player.game.underworldData.tokens.length;
-    // Optimization
     if (tokens >= count) {
       return true;
     }
 
     const spaces = this.identifiableSpaces(player).length;
-    return tokens + spaces >= count;
+    return spaces >= count;
   }
 
   /**

@@ -46,29 +46,32 @@ export class SearchforLifeUnderground extends Card implements IActionCard, IProj
     }
     return 0;
   }
+
   public canAct(player: IPlayer): boolean {
-    return player.canAfford(1) && UnderworldExpansion.canIdentifyN(player, 1);
+    return player.canAfford(1) && player.game.underworldData.tokens.length > 0;
   }
+
   public action(player: IPlayer) {
     player.game.defer(new SelectPaymentDeferred(player, 1, {title: TITLES.payForCardAction(this.name)}))
       .andThen(() => {
-        const identify = new IdentifySpacesDeferred(player, 1);
+        const identify = new IdentifySpacesDeferred(player, 1)
+          .andThen(([space]) => {
+            const undergroundResources = typeof space === 'string' ? space : space.undergroundResources;
+            if (undergroundResources === undefined) {
+              player.game.log('${0} had no underground resources to discard', (b) => b.player(player));
+              return;
+            } else if (typeof space === 'string') {
+              // Put it back into the pile. It still gets evaluated.
+              UnderworldExpansion.addTokens(player.game, [space]);
+            }
+
+            player.game.log('${0} revealed ${1}', (b) => b.player(player).undergroundToken(undergroundResources));
+            if (['microbe1', 'microbe2', 'microbe1pertemp'].includes(undergroundResources)) {
+              player.addResourceTo(this, 1);
+              player.game.log('${0} found life!', (b) => b.player(player));
+            }
+          });
         player.game.defer(identify);
-        identify.andThen(([space]) => {
-          if (typeof space === 'string') {
-            throw new Error(`Expected space, got ${space}`);
-          }
-          const undergroundResources = space.undergroundResources;
-          if (undergroundResources === undefined) {
-            player.game.log('${0} had no underground resources to discard', (b) => b.player(player));
-            return;
-          }
-          player.game.log('${0} revealed ${1}', (b) => b.player(player).undergroundToken(undergroundResources));
-          if (['microbe1', 'microbe2', 'microbe1pertemp'].includes(undergroundResources)) {
-            player.addResourceTo(this, 1);
-            player.game.log('${0} found life!', (b) => b.player(player));
-          }
-        });
       });
     return undefined;
   }

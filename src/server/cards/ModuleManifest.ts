@@ -2,7 +2,7 @@ import {CardName} from '../../common/cards/CardName';
 import {GameModule} from '../../common/cards/GameModule';
 import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {ICorporationCard} from './corporation/ICorporationCard';
-import {CardFactorySpec} from './ICardFactory';
+import {CardFactorySpec} from './CardFactorySpec';
 import {IProjectCard} from './IProjectCard';
 import {ICard} from './ICard';
 import {IStandardProjectCard} from './IStandardProjectCard';
@@ -53,7 +53,7 @@ export namespace GlobalEventManifest {
 export class ModuleManifest {
   module: GameModule;
   projectCards : CardManifest<IProjectCard>;
-  cardsToRemove: Set<CardName>;
+  cardsToRemove: ReadonlySet<CardName>;
   corporationCards : CardManifest<ICorporationCard>;
   preludeCards : CardManifest<IPreludeCard>;
   ceoCards: CardManifest<ICeoCard>;

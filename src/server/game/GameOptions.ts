@@ -5,6 +5,7 @@ import {ColonyName} from '../../common/colonies/ColonyName';
 import {GameId} from '../../common/Types';
 import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
 import {AgendaStyle} from '../../common/turmoil/Types';
+import {Expansion} from '../../common/cards/GameModule';
 
 export type GameOptions = {
   boardName: BoardName;
@@ -16,7 +17,7 @@ export type GameOptions = {
   fastModeOption: boolean;
   showOtherPlayersVP: boolean;
 
-  // Extensions
+  // Extensions -- Deprecated, except when importing JSON
   corporateEra: boolean;
   venusNextExtension: boolean;
   coloniesExtension: boolean;
@@ -27,20 +28,23 @@ export type GameOptions = {
   communityCardsOption: boolean;
   aresExtension: boolean;
   aresHazards: boolean;
+  aresExtremeVariant: boolean;
   politicalAgendasExtension: AgendaStyle;
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
-  includeVenusMA: boolean;
   moonExpansion: boolean;
   pathfindersExpansion: boolean;
   ceoExtension: boolean;
   starWarsExpansion: boolean;
   underworldExpansion: boolean;
 
+  expansions: Record<Expansion, boolean>,
+
   // Variants
   draftVariant: boolean;
   initialDraftVariant: boolean;
   preludeDraftVariant: boolean;
+  ceosDraftVariant: boolean;
   // corporationsDraft: boolean;
   startingCorporations: number;
   shuffleMapOption: boolean;
@@ -48,15 +52,14 @@ export type GameOptions = {
   includeFanMA: boolean;
   modularMA: boolean;
   soloTR: boolean; // Solo victory by getting TR 63 by game end
-  customCorporationsList: Array<CardName>;
-  bannedCards: Array<CardName>;
-  includedCards: Array<CardName>;
-  customColoniesList: Array<ColonyName>;
-  customPreludes: Array<CardName>;
-  customCeos: Array<CardName>;
+  customCorporationsList: ReadonlyArray<CardName>;
+  bannedCards: ReadonlyArray<CardName>;
+  includedCards: ReadonlyArray<CardName>;
+  customColoniesList: ReadonlyArray<ColonyName>;
+  customPreludes: ReadonlyArray<CardName>;
+  customCeos: ReadonlyArray<CardName>;
   startingCeos: number;
-  // TODO(maserion): Remove '?' by 2025-01-01
-  startingPreludes?: number;
+  startingPreludes: number;
   /** Moon must be completed to end the game */
   requiresMoonTrackCompletion: boolean;
   /** Venus must be completed to end the game */
@@ -78,6 +81,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   altVenusBoard: false,
   aresExtension: false,
   aresHazards: true,
+  aresExtremeVariant: false,
   boardName: BoardName.THARSIS,
   bannedCards: [],
   includedCards: [],
@@ -96,8 +100,23 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   escapeVelocityBonusSeconds: constants.DEFAULT_ESCAPE_VELOCITY_BONUS_SECONDS, // Number of seconds a player gets back with every action.
   escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD, // VP a player loses for every `escapeVelocityPenalty` minutes after `escapeVelocityThreshold`.
   escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
+  expansions: {
+    corpera: false,
+    promo: false,
+    venus: false,
+    colonies: false,
+    prelude: false,
+    prelude2: false,
+    turmoil: false,
+    community: false,
+    ares: false,
+    moon: false,
+    pathfinders: false,
+    ceo: false,
+    starwars: false,
+    underworld: false,
+  },
   fastModeOption: false,
-  includeVenusMA: true,
   includeFanMA: false,
   initialDraftVariant: false,
   modularMA: false,
@@ -105,8 +124,9 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   moonStandardProjectVariant: false,
   moonStandardProjectVariant1: false,
   pathfindersExpansion: false,
-  politicalAgendasExtension: AgendaStyle.STANDARD,
+  politicalAgendasExtension: 'Standard',
   preludeDraftVariant: false,
+  ceosDraftVariant: false,
   preludeExtension: false,
   prelude2Expansion: false,
   promoCardsOption: false,

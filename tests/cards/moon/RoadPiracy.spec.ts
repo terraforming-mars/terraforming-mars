@@ -21,7 +21,7 @@ describe('RoadPiracy', () => {
   });
 
   it('No players have resources', () => {
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
   });

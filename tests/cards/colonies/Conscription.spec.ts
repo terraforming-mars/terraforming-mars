@@ -4,7 +4,7 @@ import {Conscription} from '../../../src/server/cards/colonies/Conscription';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, testGame} from '../../TestingUtils';
 
-describe('Conscription', function() {
+describe('Conscription', () => {
   let card: Conscription;
   let player: TestPlayer;
 

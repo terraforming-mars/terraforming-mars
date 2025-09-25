@@ -41,11 +41,11 @@ describe('HyperspaceDrivePrototype', () => {
       if (run.science) {
         player.playedCards.push(scienceCard);
       }
-      expect(player.getTerraformRating()).eq(20);
+      expect(player.terraformRating).eq(20);
       cast(card.play(player), undefined);
       runAllActions(game);
       expect(player.stock.titanium).eq(run.titanium);
-      expect(player.getTerraformRating()).eq(run.tr);
+      expect(player.terraformRating).eq(run.tr);
       expect(fighterCard.resourceCount).eq(run.fighter ? 1 : 0);
       expect(scienceCard.resourceCount).eq(run.science ? 1 : 0);
     });

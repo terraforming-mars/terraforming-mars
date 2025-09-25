@@ -8,17 +8,17 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('MiningAreaAres', function() {
+describe('MiningAreaAres', () => {
   let card: MiningAreaAres;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MiningAreaAres();
     [game, player] = testGame(2, {aresExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const lands = game.board.getAvailableSpacesOnLand(player);
     for (const land of lands) {
       if (land.bonus.includes(SpaceBonus.STEEL) || land.bonus.includes(SpaceBonus.TITANIUM)) {

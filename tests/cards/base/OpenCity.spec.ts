@@ -7,32 +7,32 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('OpenCity', function() {
+describe('OpenCity', () => {
   let card: OpenCity;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new OpenCity();
     [game, player] = testGame(2);
   });
 
-  it('Can not play without energy production', function() {
+  it('Can not play without energy production', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can not play if oxygen level too low', function() {
+  it('Can not play if oxygen level too low', () => {
     player.production.add(Resource.ENERGY, 1);
     setOxygenLevel(game, 11);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.production.add(Resource.ENERGY, 1);
     setOxygenLevel(game, 12);
     expect(card.canPlay(player)).is.true;
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(player.game);
     const action = cast(player.popWaitingFor(), SelectSpace);
 

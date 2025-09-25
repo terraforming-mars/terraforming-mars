@@ -3,8 +3,8 @@ import {FueledGenerators} from '../../../src/server/cards/base/FueledGenerators'
 import {Resource} from '../../../src/common/Resource';
 import {testGame} from '../../TestGame';
 
-describe('FueledGenerators', function() {
-  it('Should play', function() {
+describe('FueledGenerators', () => {
+  it('Should play', () => {
     const card = new FueledGenerators();
     const [/* game */, player] = testGame(1);
 

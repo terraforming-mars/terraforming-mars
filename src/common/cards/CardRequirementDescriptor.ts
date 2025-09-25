@@ -59,7 +59,7 @@ export type CardRequirementDescriptor = {
   logisticRate?: number,
 
   // Underworld
-  excavation?: number,
+  undergroundTokens?: number,
   corruption?: number,
 
   // Adjectives
@@ -115,8 +115,8 @@ export function requirementType(descriptor: CardRequirementDescriptor): Requirem
     return RequirementType.MINING_TILES;
   } else if (descriptor.roadTiles !== undefined) {
     return RequirementType.ROAD_TILES;
-  } else if (descriptor.excavation !== undefined) {
-    return RequirementType.EXCAVATION;
+  } else if (descriptor.undergroundTokens !== undefined) {
+    return RequirementType.UNDERGROUND_TOKENS;
   } else if (descriptor.corruption !== undefined) {
     return RequirementType.CORRUPTION;
   } else {

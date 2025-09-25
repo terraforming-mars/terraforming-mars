@@ -1,6 +1,6 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {BoardBuilder} from './BoardBuilder';
-import {SpaceName} from '../SpaceName';
+import {SpaceName} from '../../common/boards/SpaceName';
 import {Random} from '../../common/utils/Random';
 import {Space} from './Space';
 import {GameOptions} from '../game/GameOptions';
@@ -8,7 +8,7 @@ import {MarsBoard} from './MarsBoard';
 
 export class TerraCimmeriaBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): TerraCimmeriaBoard {
-    const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
+    const builder = new BoardBuilder(gameOptions);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;

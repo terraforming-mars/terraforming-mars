@@ -7,31 +7,31 @@ import {IGame} from '../../../../src/server/IGame';
 import {testGame} from '../../../TestGame';
 import {assertPlaceOcean} from '../../../assertions';
 
-describe('AquiferStandardProject', function() {
+describe('AquiferStandardProject', () => {
   let card: AquiferStandardProject;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AquiferStandardProject();
     [game, player] = testGame(1);
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     player.megaCredits = card.cost - 1;
     expect(card.canAct(player)).is.false;
     player.megaCredits = card.cost;
     expect(card.canAct(player)).is.true;
   });
 
-  it('action', function() {
+  it('action', () => {
     player.megaCredits = card.cost;
     player.setTerraformRating(20);
     expect(game.board.getOceanSpaces()).is.empty;
 
     assertPlaceOcean(player, churn(card.action(player), player));
 
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(game.board.getOceanSpaces()).has.length(1);
   });
 
@@ -42,14 +42,14 @@ describe('AquiferStandardProject', function() {
     maxOutOceans(player);
 
     player.megaCredits = 18;
-    expect(player.getTerraformRating()).eq(23);
+    expect(player.terraformRating).eq(23);
     expect(card.canAct(player)).eq(true);
 
     cast(card.action(player), undefined);
     runAllActions(game);
 
     expect(game.board.getOceanSpaces()).has.length(9);
-    expect(player.getTerraformRating()).eq(23);
+    expect(player.terraformRating).eq(23);
     expect(player.megaCredits).eq(0);
   });
 

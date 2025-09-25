@@ -42,8 +42,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     player.titanium = 3;
     card.resourceCount = 0;
 
-    const options = card.action(player);
-    expect(options).is.undefined;
+    cast(card.action(player), undefined);
     expect(game.deferredActions).has.length(0);
 
     expect(player.titanium).eq(2);
@@ -58,8 +57,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     player2.megaCredits = 5;
     player3.megaCredits = 5;
 
-    const options = card.action(player);
-    expect(options).is.undefined;
+    cast(card.action(player), undefined);
 
     runAllActions(game);
     cast(player.getWaitingFor(), undefined);
@@ -96,6 +94,22 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     expect(player3.megaCredits).eq(3);
   });
 
+  it('steal in solo mode', () => {
+    [game, player] = testGame(1, {moonExpansion: true});
+    moonData = MoonExpansion.moonData(game);
+
+    player.titanium = 0;
+    card.resourceCount = 3;
+
+    player.megaCredits = 5;
+
+    cast(card.action(player), undefined);
+    runAllActions(game);
+
+    expect(card.resourceCount).eq(2);
+    expect(player.megaCredits).eq(7);
+  });
+
   it('effect', () => {
     const centerSpace = moonData.moon.getSpaceOrThrow('m07');
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
@@ -113,7 +127,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.
     player2.megaCredits = 10;
     player.megaCredits = 0;
-    player.corporations.push(card);
+    player.playedCards.push(card);
     // Trigger the effect.
     MoonExpansion.addMineTile(player, centerSpace.id);
     expect(player2.megaCredits).eq(4);
@@ -147,7 +161,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.
     player2.megaCredits = 10;
     player.megaCredits = 0;
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     player.game.phase = Phase.SOLAR;
 

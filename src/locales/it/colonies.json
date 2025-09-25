@@ -1,21 +1,21 @@
 {
-  "Aridor":"Aridor",
+  "Aridor":"",
   "You start with 40 M€. As your first action, put an additional Colony Tile of your choice into play":"Inizi con 40 M€. Come tua prima azione, colloca una tessera Colonia aggiuntiva a tua scelta in gioco.",
   "Effect: When you get a new type of tag in play [event cards do not count], increase your M€ production 1 step.":"Effetto: quando metti in gioco un simbolo nuovo (le carte Evento non contano), incrementi la tua Produzione di M€ di 1 livello.",
 
-  "Arklight":"Arklight",
+  "Arklight":"",
   "You start with 45 M€. Increase your M€ production 2 steps. 1 VP per 2 animals on this card.":"Inizi con 45 M€. Incrementa la tua Produzione di M€ di 2 livelli. 1 PV per ogni coppia di Animali su questa carta.",
   "Effect: When you play an animal or plant tag, including<br> this, add 1 animal<br> to this card.":"Effetto: quando giochi un simbolo Animale o Pianta, incluso questo, aggiungi 1 Animale a questa carta.",
 
-  "Polyphemos":"Polyphemos",
+  "Polyphemos":"",
   "You start with 50 M€. Increase your M€ production 5 steps. Gain 5 titanium.":"Inizi con 50 M€. Incrementa la tua Produzione di M€ di 5 livelli. Ottieni 5 risorse Titanio.",
   "Effect: When you buy a card to hand, pay 5 M€ instead of 3, including the starting hand.":"Effetto: quando acquisti una carta da aggiungere alla tua mano, inclusa la mano iniziale, la paghi 5 M€ invece di 3 M€.",
 
-  "Poseidon":"Poseidon",
+  "Poseidon":"",
   "You start with 45 M€. As your first action, place a colony.":"Inizi con 45 M€. Come prima azione, colloca una Colonia.",
   "Effect: When any colony is placed, including this, raise your M€ production 1 step.":"Effetto: quando viene collocata una qualunque Colonia, inclusa quella associata a questa carta, incrementa la tua Produzione di M€ di 1 livello.",
 
-  "StorM€raft Incorporated":"StorM€raft Incorporated",
+  "StorM€raft Incorporated":"",
   "You start with 48 M€.":"Inizi con 48 M€.",
   "Action: Add a floater to ANY card.":"Azione: aggiungi 1 Galleggiante ad una carta QUALUNQUE.",
   "Effect: Floaters on this card may be used as 2 heat each.":"Effetto: i Galleggianti su questa carta possono essere utilizzati come 2 risorse Calore ciascuno.",
@@ -73,7 +73,7 @@
   "Space Port Colony":"Colonia dello Spazioporto",
   "Colony":"Colonia",
   "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.":"Richiede 1 Colonia. Colloca 1 Colonia. PUÒ ESSERE COLLOCATA SU UNA TESSERA COLONIA SULLA QUALE POSSIEDI GIÀ UNA COLONIA. Ottieni 1 Flotta Commerciale.",
-  "1VP per 2 colonies in play.":"1 PV per ogni coppia di Colonie in gioco.",
+  "1 VP per 2 colonies in play.":"1 PV per ogni coppia di Colonie in gioco.",
 
   "Trade Envoys":"Inviati Commerciali",
 
@@ -178,12 +178,11 @@
   "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.":"Richiede 4 simboli Scienza. Incrementa la tua Produzione di M€ di 1 livello per ogni Colonia in gioco.",
   "Requires 3 science tags. Draw 2 cards.":"Richiede 3 simboli Scienza. Pesca 2 carte.",
   "Rim Freighters":"Mercantili del Margine",
-  "Refugee Camps":"Campi dei Rifugiati",
   "Solar Probe":"Sonda Solare",
   "Draw 1 card for every 3 science tags you have, including this.":"Pesca una carta per ogni terna di simboli Scienza che possiedi in gioco, incluso questo.",
   "Space Port":"Spazioporto",
   "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a city tile. Gain 1 Trade Fleet.":"Richiede 1 Colonia. Ottieni 1 Flotta Commerciale. Colloca 1 tessera Città. Diminuisci la tua Produzione di Energia di 1 livello e incrementa la tua Produzione di M€ di 4 livelli.",
-  "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet. 1VP per 2 colonies in play.":"Richiede 1 Colonia. Colloca 1 Colonia. PUÒ ESSERE COLLOCATA SU UNA TESSERA COLONIA SULLA QUALE POSSIEDI GIÀ UNA COLONIA. Ottieni 1 Flotta Commerciale. 1 PV per ogni coppia di Colonie in gioco.",
+  "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet. 1 VP per 2 colonies in play.":"Richiede 1 Colonia. Colloca 1 Colonia. PUÒ ESSERE COLLOCATA SU UNA TESSERA COLONIA SULLA QUALE POSSIEDI GIÀ UNA COLONIA. Ottieni 1 Flotta Commerciale. 1 PV per ogni coppia di Colonie in gioco.",
   "Spin-off Department":"Dipartimento Spin-Off",
   "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20 M€ OR MORE, draw a card.":"Effetto: QUANDO GIOCHI UNA CARTA CON UN COSTO DI PARTENZA MAGGIORE O UGUALE A 20 M€, pesca una carta.",
 
@@ -199,14 +198,14 @@
 
   "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.":"Effetto: quando giochi un simbolo Animale o Pianta, incluso questo, aggiungi 1 Animale a questa carta.",
 
-      "Callisto":"Callisto",
-    "Ceres":"Ceres",
-    "Enceladus":"Enceladus",
-    "Europa":"Europa",
-    "Ganymede":"Ganymede",
-    "Io":"Io",
-    "Luna":"Luna",
-    "Miranda":"Miranda",
+      "Callisto":"",
+    "Ceres":"",
+    "Enceladus":"",
+    "Europa":"",
+    "Ganymede":"",
+    "Io":"",
+    "Luna":"",
+    "Miranda":"",
     "Pluto":"Plutone",
     "Titan":"Titano",
     "Triton":"Tritone",

@@ -87,7 +87,7 @@
     "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile. It provides adjacency bonus of 1 plant and 1 microbe.": "電力産出-4し、植物産出+2. TR+3段階. 特殊タイルを配置. このタイルは1植物と1微生物の隣接ボーナスがある.",
 
     "Deimos Down:ares": "ダイモス落とし",
-    "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. It provides adjacency bonus of 1 asteroid and 1 steel.": "温度+3段階. 4建材獲得. 都市タイルに隣接しないように特殊タイルを配置. 望むならプレイヤー1人から最大6植物除去. このタイルは1小惑星と1建材の隣接ボーナスがある.",
+    "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. It provides adjacency bonus of 1 asteroid and 1 steel. Remove up to 6 plants from any player.": "温度+3段階. 4建材獲得. 都市タイルに隣接しないように特殊タイルを配置. 望むならプレイヤー1人から最大6植物除去. このタイルは1小惑星と1建材の隣接ボーナスがある. 望むならプレイヤー1人から最大6植物除去.",
 
     "Great Dam:ares": "水力発電",
     "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile. The tile grants an ADJACENCY BONUS of 2 Energy.": "条件：海洋4枚以上. 電力産出+2. 海洋タイルに隣接させて特殊タイルを配置. このタイルは2電力の隣接ボーナスがある."

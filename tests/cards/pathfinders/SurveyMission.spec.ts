@@ -4,7 +4,7 @@ import {SurveyMission} from '../../../src/server/cards/pathfinders/SurveyMission
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {Space} from '../../../src/server/boards/Space';
@@ -32,7 +32,7 @@ describe('SurveyMission', () => {
   //
   // O is an ocean space, and G is another claimed space.
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SurveyMission();
     [game, player] = testGame(1, {pathfindersExpansion: true});
     board = EmptyBoard.newInstance();
@@ -98,7 +98,7 @@ describe('SurveyMission', () => {
   });
 
   it('Compatible with Mining Guild', () => {
-    player.corporations.push(new MiningGuild());
+    player.playedCards.push(new MiningGuild());
     const selectSpace = cast(card.play(player), SelectSpace);
 
     expect(player.steel).eq(5); // Comes from playing the Prelude

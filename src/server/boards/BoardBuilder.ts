@@ -1,10 +1,13 @@
 import {Space} from './Space';
 import {SpaceId, isSpaceId, safeCast} from '../../common/Types';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {SpaceName} from '../SpaceName';
+import {NamedSpace, SpaceName} from '../../common/boards/SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {Random} from '../../common/utils/Random';
 import {inplaceShuffle} from '../utils/shuffle';
+import {GameOptions} from '../game/GameOptions';
+import {expansionSpaceColonies} from '../../common/boards/expansionSpaceColonies';
+import {CardName} from '../../common/cards/CardName';
 
 function colonySpace(id: SpaceId): Space {
   return {id, spaceType: SpaceType.COLONY, x: -1, y: -1, bonus: []};
@@ -22,8 +25,10 @@ export class BoardBuilder {
   private bonuses: Array<Array<SpaceBonus>> = [];
   private spaces: Array<Space> = [];
   private unshufflableSpaces: Array<number> = [];
+  private gameOptions: GameOptions;
 
-  constructor(private includeVenus: boolean, private includePathfinders: boolean) {
+  constructor(gameOptions: GameOptions) {
+    this.gameOptions = gameOptions;
   }
 
   ocean(...bonus: Array<SpaceBonus>): this {
@@ -82,23 +87,19 @@ export class BoardBuilder {
       }
     }
 
-    this.spaces.push(colonySpace(SpaceName.STANFORD_TORUS));
-    if (this.includeVenus) {
-      this.spaces.push(
-        colonySpace(SpaceName.DAWN_CITY),
-        colonySpace(SpaceName.LUNA_METROPOLIS),
-        colonySpace(SpaceName.MAXWELL_BASE),
-        colonySpace(SpaceName.STRATOPOLIS),
-      );
-    }
-    if (this.includePathfinders) {
-      this.spaces.push(
-        // Space.colony(SpaceName.MARTIAN_TRANSHIPMENT_STATION),
-        colonySpace(SpaceName.CERES_SPACEPORT),
-        colonySpace(SpaceName.DYSON_SCREENS),
-        colonySpace(SpaceName.LUNAR_EMBASSY),
-        colonySpace(SpaceName.VENERA_BASE),
-      );
+    // Include space colonies if the expansion is included, or if the card is included.
+    for (const entry of expansionSpaceColonies) {
+      // Special case for Venera Base when Pathfinders is included, but Turmoil or Venus is not
+      if (entry.card === CardName.VENERA_BASE) {
+        const pathfindersTurmoilVenusInPlay = this.gameOptions.pathfindersExpansion && this.gameOptions.turmoilExtension && this.gameOptions.venusNextExtension;
+        if (this.gameOptions.includedCards.includes(entry.card) || pathfindersTurmoilVenusInPlay) {
+          this.spaces.push(colonySpace(entry.name));
+        }
+        continue;
+      }
+      if (this.gameOptions.expansions[entry.expansion] || this.gameOptions.includedCards.includes(entry.card)) {
+        this.spaces.push(colonySpace(entry.name));
+      }
     }
 
     return this.spaces;
@@ -121,7 +122,7 @@ export class BoardBuilder {
 
   // Shuffle the ocean spaces and bonus spaces. But protect the land spaces supplied by
   // |lands| so that those IDs most definitely have land spaces.
-  public shuffle(rng: Random, ...preservedSpaceIds: Array<SpaceName>) {
+  public shuffle(rng: Random, ...preservedSpaceIds: Array<NamedSpace>) {
     const preservedSpaces = [...this.unshufflableSpaces];
     for (const spaceId of preservedSpaceIds) {
       const idx = Number(spaceId) - 3;

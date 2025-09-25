@@ -7,7 +7,7 @@ import {Phase} from '../../../src/common/Phase';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 import {addGreenery, setRulingParty, runAllActions, cast, forceGenerationEnd, maxOutOceans, setOxygenLevel, setTemperature} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {OceanCity} from '../../../src/server/cards/ares/OceanCity';
@@ -72,7 +72,7 @@ describe('GeologicalSurvey', () => {
     const microbeCard = new Ants();
     const animalCard = new Pets();
 
-    player.playedCards = [card, microbeCard, animalCard];
+    player.playedCards .set(card, microbeCard, animalCard);
 
     // firstSpace tile might grant resources, so resetting all the resource values.
     player.megaCredits = 0;
@@ -119,7 +119,7 @@ describe('GeologicalSurvey', () => {
       SpaceBonus.DRAW_CARD,
       SpaceBonus.HEAT,
     ],
-    player.playedCards = [card];
+    player.playedCards.set(card);
     game.addTile(player, space, {tileType: TileType.RESTRICTED_AREA});
 
     runAllActions(game);

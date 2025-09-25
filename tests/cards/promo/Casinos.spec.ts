@@ -38,7 +38,7 @@ describe('Casinos', () => {
   it('Should play', () => {
     player.production.add(Resource.ENERGY, 1);
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(player.game);
 
     expect(player.production.energy).to.eq(0);

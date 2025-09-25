@@ -33,7 +33,9 @@ export class AddResourcesToCard extends DeferredAction {
     let cards = this.player.getResourceCards(this.resourceType);
     const restrictedTag = this.options.restrictedTag;
     if (restrictedTag !== undefined) {
-      cards = cards.filter((card) => card.tags.includes(restrictedTag));
+      cards = cards.filter((card) => {
+        return card.tags.includes(restrictedTag) || card.tags.includes(Tag.WILD);
+      });
     }
     if (this.options.filter !== undefined) {
       cards = cards.filter(this.options.filter);

@@ -1,6 +1,6 @@
 import {IPlayer} from '../../IPlayer';
 import {IAward} from '../IAward';
-import {isHazardTileType} from '../../../common/AresTileType';
+import {hazardSeverity} from '../../../common/AresTileType';
 
 // This could probably be computed with board.getAdjacentSpaces().length < 6.
 const EDGE_IDS = new Set([
@@ -24,7 +24,7 @@ export class Suburbian implements IAward {
       if (!EDGE_IDS.has(space.id)) {
         return false;
       }
-      if (space.tile === undefined || isHazardTileType(space.tile.tileType)) {
+      if (space.tile === undefined || hazardSeverity(space.tile.tileType) !== 'none') {
         return false;
       }
       return space.player === player;

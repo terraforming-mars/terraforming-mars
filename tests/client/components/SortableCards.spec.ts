@@ -31,7 +31,7 @@ describe('SortableCards', () => {
     let cards = sortable.findAllComponents({
       name: 'Card',
     });
-    expect(cards.length).to.eq(2);
+    expect(cards).has.length(2);
     expect(cards.at(0).props().card.name).to.eq(CardName.ANTS);
     expect(cards.at(1).props().card.name).to.eq(CardName.CARTEL);
     const draggers = sortable.findAllComponents({
@@ -77,7 +77,7 @@ describe('SortableCards', () => {
     let cards = sortable.findAllComponents({
       name: 'Card',
     });
-    expect(cards.length).to.eq(3);
+    expect(cards).has.length(3);
     expect(cards.at(0).props().card.name).to.eq(CardName.CARTEL);
     expect(cards.at(1).props().card.name).to.eq(CardName.ANTS);
     expect(cards.at(2).props().card.name).to.eq(CardName.BIRDS);

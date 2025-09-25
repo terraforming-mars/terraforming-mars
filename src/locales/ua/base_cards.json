@@ -482,7 +482,6 @@
   "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.": "Підняти температуру на 2 кроки і розмістити цю плитку НА THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS АБО ARSIA MONS.",
 
   "Power Plant": "Електростанція",
-  "Increase your energy production 1 step.": "Збільшити виробництво енергії на 1 крок.",
 
   "Mohole Area": "Могольська область",
   "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.": "Збільшити виробництво тепла на 4 кроки. Розмістити цю плитку НА ОБЛАСТІ, ЗАРЕЗЕРВОВАНІЙ ДЛЯ ОКЕАНУ.",
@@ -666,7 +665,7 @@
 
   "Immigration Shuttles": "Імміграційні шатли",
   "Increase your M€ production 5 steps.": "Збільшити виробництво M€ на 5 одиниць.",
-  "1 VP for every 3rd City in play.": "1 VP за кожне третє міське плитку в грі.",
+  "1 VP for every 3rd city in play.": "1 VP за кожне третє міське плитку в грі.",
 
   "Restricted Area": "Обмежена зона",
   "Action: Spend 2 M€ to draw a card.": "Дія: Витратити 2 M€, щоб взяти карту.",

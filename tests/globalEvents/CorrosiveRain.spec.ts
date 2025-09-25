@@ -13,7 +13,7 @@ import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {testGame} from '../TestGame';
 
-describe('CorrosiveRain', function() {
+describe('CorrosiveRain', () => {
   let card: CorrosiveRain;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -26,7 +26,7 @@ describe('CorrosiveRain', function() {
     turmoil = game.turmoil!;
   });
 
-  it('resolve play', function() {
+  it('resolve play', () => {
     turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2;
@@ -50,7 +50,7 @@ describe('CorrosiveRain', function() {
     const titanShuttles = new TitanShuttles();
     const titanAirScrapping = new TitanAirScrapping();
     const birds = new Birds();
-    player.playedCards = [titanShuttles, titanAirScrapping, birds];
+    player.playedCards.push(titanShuttles, titanAirScrapping, birds);
 
     titanShuttles.resourceCount = 3;
     titanAirScrapping.resourceCount = 1;

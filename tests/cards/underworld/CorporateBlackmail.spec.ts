@@ -20,22 +20,19 @@ describe('CorporateBlackmail', () => {
     [game, player, player2, player3, player4] = testGame(4, {underworldExpansion: true});
   });
 
-  it('canPlay', () => {
-    player.underworldData.corruption = 1;
-    player2.underworldData.corruption = 1;
+  for (const run of [
+    {corruption: [1, 2], expected: false},
+    {corruption: [0, 3], expected: false},
+    {corruption: [1, 3], expected: true},
+    {corruption: [3, 2], expected: false},
+  ] as const) {
+    it('canPlay ' + JSON.stringify(run), () => {
+      player.underworldData.corruption = run.corruption[0];
+      player2.underworldData.corruption = run.corruption[1];
 
-    expect(card.canPlay(player)).is.false;
-
-    player.underworldData.corruption = 1;
-    player2.underworldData.corruption = 2;
-
-    expect(card.canPlay(player)).is.true;
-
-    player.underworldData.corruption = 2;
-    player2.underworldData.corruption = 1;
-
-    expect(card.canPlay(player)).is.false;
-  });
+      expect(card.canPlay(player)).eq(run.expected);
+    });
+  }
 
   it('play, selectplayer', () => {
     player.underworldData.corruption = 3;
@@ -73,6 +70,7 @@ describe('CorporateBlackmail', () => {
     expect(player2.megaCredits).eq(1);
     expect(player2.underworldData.corruption).eq(3);
     expect(player.megaCredits).eq(10);
+    expect(player.underworldData.corruption).eq(0);
   });
 
   it('play, choose corruption', () => {
@@ -87,6 +85,7 @@ describe('CorporateBlackmail', () => {
 
     expect(player2.megaCredits).eq(11);
     expect(player2.underworldData.corruption).eq(1);
+    expect(player.underworldData.corruption).eq(2);
     expect(player.megaCredits).eq(0);
   });
 });

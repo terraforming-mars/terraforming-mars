@@ -9,7 +9,7 @@ import {use} from 'chai';
 import chaiAsPromised = require('chai-as-promised');
 use(chaiAsPromised);
 
-describe('ApiGameLogs', function() {
+describe('ApiGameLogs', () => {
   let scaffolding: RouteTestScaffolding;
   let res: MockResponse;
 
@@ -124,11 +124,12 @@ describe('ApiGameLogs', function() {
 
   it('Pulls full logs at game end', async () => {
     const player = TestPlayer.BLACK.newPlayer();
+    const player2 = TestPlayer.BLUE.newPlayer();
     scaffolding.url = '/api/game/logs?id=' + player.id + '&full';
-    const game = Game.newInstance('game-id', [player], player);
+    const game = Game.newInstance('game-id', [player, player2], player);
     game.phase = Phase.END;
     await scaffolding.ctx.gameLoader.add(game);
     await scaffolding.get(ApiGameLogs.INSTANCE, res);
-    expect(res.content).to.match(/^Drew and discarded/);
+    expect(res.content).to.match(/^First player this generation is player-black/);
   });
 });

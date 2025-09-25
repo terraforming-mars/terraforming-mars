@@ -53,17 +53,25 @@ export class DeferredActionsQueue {
     return j;
   }
 
-  public runAll(cb: () => void): void {
+  private popNextItem(): IDeferredAction<any> | undefined {
     const next = this.nextItemIndex();
     const action = this.queue[next];
-    if (action === undefined) {
+    if (action !== undefined) {
+      this.queue.splice(next, 1);
+    }
+    return action;
+  }
+
+  public runAll(cb: () => void): void {
+    const action = this.popNextItem();
+    if (action !== undefined) {
+      this.run(action, () => {
+        this.runAll(cb);
+      });
+    } else {
       cb();
       return;
     }
-    this.queue.splice(next, 1);
-    this.run(action, () => {
-      this.runAll(cb);
-    });
   }
 
   // The following methods are used in tests

@@ -144,7 +144,7 @@ describe('ServeAsset', () => {
     scaffolding.url = '/sw.js';
     scaffolding.req.headers['accept-encoding'] = '';
     await scaffolding.get(instance, res);
-    expect(res.content).eq('data: build/src/client/sw.js');
+    expect(res.content).eq('data: build/sw.js');
     expect(fileApi.counts).deep.eq({
       ...primedCache,
       readFile: 1,

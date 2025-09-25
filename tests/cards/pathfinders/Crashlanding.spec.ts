@@ -14,7 +14,7 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TileType} from '../../../src/common/TileType';
 import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Units} from '../../../src/common/Units';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 
 /*
  * Partial map of Tharsis used in this test.
@@ -141,7 +141,7 @@ describe('Crashlanding', () => {
   });
 
   it('play - resources', () => {
-    player.playedCards = [dataCard, animalCard, microbeCard];
+    player.playedCards.push(dataCard, animalCard, microbeCard);
 
     card.play(player);
     runAllActions(game);

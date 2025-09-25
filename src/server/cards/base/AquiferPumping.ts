@@ -30,7 +30,11 @@ export class AquiferPumping extends Card implements IActionCard, IProjectCard {
   }
 
   public canAct(player: IPlayer): boolean {
-    return player.canAfford({cost: OCEAN_COST, steel: true, tr: {oceans: 1}});
+    const canAct = player.canAfford({cost: OCEAN_COST, steel: true, tr: {oceans: 1}});
+    if (!player.game.canAddOcean()) {
+      this.warnings.add('maxoceans');
+    }
+    return canAct;
   }
   public action(player: IPlayer) {
     player.game.defer(new SelectPaymentDeferred(player, 8, {canUseSteel: true, title: TITLES.payForCardAction(this.name)}))

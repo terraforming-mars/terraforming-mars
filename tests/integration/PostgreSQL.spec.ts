@@ -49,7 +49,7 @@ class TestPostgreSQL extends PostgreSQL implements ITestDatabase {
     response['size-bytes-database'] = 'any';
     response['size-bytes-participants'] = 'any';
 
-    const extraFields = ['rows-game', 'size-bytes-game', 'rows-completed-game', 'size-bytes-completed-game'];
+    const extraFields = ['rows-game', 'size-bytes-game', 'rows-completed-game', 'size-bytes-completed-game', 'rows-session', 'size-bytes-session'];
     for (const field of extraFields) {
       expect(response[field], 'For ' + field).is.not.undefined;
       delete response[field];

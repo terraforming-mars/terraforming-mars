@@ -5,7 +5,7 @@ import {TestPlayer} from '../TestPlayer';
 import {TileType} from '../../src/common/TileType';
 import {testGame} from '../TestGame';
 
-describe('Lunarchitect', function() {
+describe('Lunarchitect', () => {
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
 
@@ -13,7 +13,7 @@ describe('Lunarchitect', function() {
     [/* game */, player, otherPlayer] = testGame(2, {moonExpansion: true});
   });
 
-  it('Basic test', function() {
+  it('Basic test', () => {
     const milestone = new Lunarchitect();
     expect(milestone.canClaim(player)).is.not.true;
     MoonExpansion.addTile(player, 'm01', {tileType: TileType.MOON_MINE});
@@ -30,7 +30,7 @@ describe('Lunarchitect', function() {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('Other player tokens do not count', function() {
+  it('Other player tokens do not count', () => {
     const milestone = new Lunarchitect();
     expect(milestone.canClaim(player)).is.not.true;
     MoonExpansion.addTile(player, 'm01', {tileType: TileType.MOON_MINE});

@@ -22,7 +22,7 @@ export class ImmigrationShuttles extends Card implements IProjectCard {
         cardNumber: '198',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(5)).br;
-          b.vpText('1 VP for every 3rd City in play.');
+          b.vpText('1 VP for every 3rd city in play.');
         }),
         description: 'Increase your M€ production 5 steps.',
       },

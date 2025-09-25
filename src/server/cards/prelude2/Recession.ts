@@ -4,6 +4,7 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {all} from '../Options';
+import {message} from '../../logs/MessageBuilder';
 
 
 export class Recession extends PreludeCard {
@@ -26,7 +27,7 @@ export class Recession extends PreludeCard {
   }
 
   public override bespokeCanPlay(player: IPlayer) {
-    for (const target of player.getOpponents()) {
+    for (const target of player.opponents) {
       if (target.production.megacredits === -5) {
         return false;
       }
@@ -35,11 +36,12 @@ export class Recession extends PreludeCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    for (const target of player.getOpponents()) {
-      target.maybeBlockAttack(player, (proceed) => {
+    for (const target of player.opponents) {
+      const m = message('Lose 5 M€ and 1 M€ production');
+      target.maybeBlockAttack(player, m, (proceed) => {
         if (proceed) {
-          target.production.add(Resource.MEGACREDITS, -1, {log: true, from: player});
-          target.stock.deduct(Resource.MEGACREDITS, Math.min(target.megaCredits, 5), {log: true, from: player});
+          target.production.add(Resource.MEGACREDITS, -1, {log: true, from: {player}});
+          target.stock.deduct(Resource.MEGACREDITS, Math.min(target.megaCredits, 5), {log: true, from: {player}});
         }
         return undefined;
       });

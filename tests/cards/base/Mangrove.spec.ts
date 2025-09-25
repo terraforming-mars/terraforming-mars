@@ -3,21 +3,21 @@ import {Mangrove} from '../../../src/server/cards/base/Mangrove';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {TileType} from '../../../src/common/TileType';
-import {runAllActions, setOxygenLevel, setTemperature, testRedsCosts} from '../../TestingUtils';
+import {cast, runAllActions, setOxygenLevel, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {assertPlaceTile} from '../../assertions';
 
-describe('Mangrove', function() {
+describe('Mangrove', () => {
   let card: Mangrove;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Mangrove();
     [game, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     expect(card.canPlay(player)).is.not.true;
     setTemperature(game, 2);
     expect(card.canPlay(player)).is.not.true;
@@ -25,8 +25,8 @@ describe('Mangrove', function() {
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Should play', function() {
-    expect(card.play(player)).is.undefined;
+  it('Should play', () => {
+    cast(card.play(player), undefined);
     runAllActions(game);
 
     assertPlaceTile(player, player.popWaitingFor(), TileType.GREENERY);

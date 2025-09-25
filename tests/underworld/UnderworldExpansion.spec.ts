@@ -19,8 +19,11 @@ import {LawSuit} from '../../src/server/cards/promo/LawSuit';
 import {PlayerInput} from '../../src/server/PlayerInput';
 import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {PrivateMilitaryContractor} from '../../src/server/cards/underworld/PrivateMilitaryContractor';
+import {Tag} from '../../src/common/cards/Tag';
+import {BoardName} from '../../src/common/boards/BoardName';
+import {SpaceName} from '../../src/common/boards/SpaceName';
 
-describe('UnderworldExpansion', function() {
+describe('UnderworldExpansion', () => {
   let player1: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
@@ -37,7 +40,7 @@ describe('UnderworldExpansion', function() {
     dataCard2 = new MartianCulture();
     microbeCard1 = new GHGProducingBacteria();
     microbeCard2 = new RegolithEaters();
-    player1.playedCards = [dataCard1, dataCard2, microbeCard1, microbeCard2];
+    player1.playedCards.set(dataCard1, dataCard2, microbeCard1, microbeCard2);
     game.phase = Phase.ACTION;
   });
 
@@ -52,19 +55,19 @@ describe('UnderworldExpansion', function() {
   });
 
   it('sanity', () => {
-    expect(underworldData.tokens).has.length(89);
+    expect(underworldData.tokens).has.length(91);
   });
 
   it('identify', () => {
     const space = game.board.getAvailableSpacesOnLand(player1)[0];
 
     expect(space.undergroundResources).is.undefined;
-    expect(underworldData.tokens).has.length(89);
+    expect(underworldData.tokens).has.length(91);
 
     UnderworldExpansion.identify(game, space, player1);
 
     expect(space.undergroundResources).is.not.undefined;
-    expect(underworldData.tokens).has.length(88);
+    expect(underworldData.tokens).has.length(90);
     expect(space.excavator).is.undefined;
   });
 
@@ -72,7 +75,7 @@ describe('UnderworldExpansion', function() {
     const responses: Array<string> = [];
     const space = game.board.getAvailableSpacesOnLand(player1)[0];
     const fake = fakeCard({
-      onIdentification(identifyingPlayer, cardOwner, space) {
+      onIdentificationByAnyPlayer(cardOwner, identifyingPlayer, space) {
         responses.push(`${identifyingPlayer?.id} - ${cardOwner.id} - ${space.id}`);
       },
     });
@@ -89,7 +92,7 @@ describe('UnderworldExpansion', function() {
 
   it('serializing and deserializing board spaces', () => {
     const spaces = game.board.getAvailableSpacesOnLand(player1);
-    spaces[0].undergroundResources = 'data3';
+    spaces[0].undergroundResources = 'nothing';
     spaces[1].undergroundResources = 'corruption2';
     spaces[2].undergroundResources = 'ocean';
     spaces[0].excavator = player1;
@@ -99,7 +102,7 @@ describe('UnderworldExpansion', function() {
     const serialized = game.serialize();
     const serializedSpaces = serialized.board.spaces.filter((space) => spaceIds.includes(space.id));
 
-    expect(serializedSpaces[0].undergroundResources).eq('data3');
+    expect(serializedSpaces[0].undergroundResources).eq('nothing');
     expect(serializedSpaces[1].undergroundResources).eq('corruption2');
     expect(serializedSpaces[2].undergroundResources).eq('ocean');
     expect(serializedSpaces[3]).does.not.haveOwnPropertyDescriptor('undergroundResources');
@@ -110,7 +113,7 @@ describe('UnderworldExpansion', function() {
 
     const game2 = Game.deserialize(serialized);
     const deserializedSpaces = game2.board.spaces.filter((space) => spaceIds.includes(space.id));
-    expect(deserializedSpaces[0].undergroundResources).eq('data3');
+    expect(deserializedSpaces[0].undergroundResources).eq('nothing');
     expect(deserializedSpaces[1].undergroundResources).eq('corruption2');
     expect(deserializedSpaces[2].undergroundResources).eq('ocean');
     expect(deserializedSpaces[3]).does.not.haveOwnPropertyDescriptor('undergroundResources');
@@ -124,12 +127,12 @@ describe('UnderworldExpansion', function() {
     const space = game.board.getAvailableSpacesOnLand(player1)[0];
 
     expect(UnderworldExpansion.identifiableSpaces(player1)).includes(space);
-    expect(UnderworldExpansion.identifiedSpaces(game)).does.not.include(space);
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).does.not.include(space);
 
     UnderworldExpansion.identify(game, space, player1);
 
     expect(UnderworldExpansion.identifiableSpaces(player1)).does.not.include(space);
-    expect(UnderworldExpansion.identifiedSpaces(game)).includes(space);
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).includes(space);
   });
 
   it('gainCorruption', () => {
@@ -228,12 +231,6 @@ describe('UnderworldExpansion', function() {
     expect(player1.production.asUnits()).deep.eq(Units.of({titanium: 1}));
   });
 
-  it('grant bonus - plant1', () => {
-    expect(player1.stock.asUnits()).deep.eq(Units.of({}));
-    UnderworldExpansion.grant(player1, 'plant1');
-    expect(player1.stock.asUnits()).deep.eq(Units.of({plants: 1}));
-  });
-
   it('grant bonus - plant2', () => {
     expect(player1.stock.asUnits()).deep.eq(Units.of({}));
     UnderworldExpansion.grant(player1, 'plant2');
@@ -295,9 +292,9 @@ describe('UnderworldExpansion', function() {
   });
 
   it('grant bonus - tr', () => {
-    expect(player1.getTerraformRating()).eq(20);
+    expect(player1.terraformRating).eq(20);
     UnderworldExpansion.grant(player1, 'tr');
-    expect(player1.getTerraformRating()).eq(21);
+    expect(player1.terraformRating).eq(21);
   });
 
   // it('grant bonus - ocean', () => {
@@ -313,33 +310,45 @@ describe('UnderworldExpansion', function() {
   // });
 
   it('grant bonus - data1pertemp', () => {
-    expect(player1.underworldData.temperatureBonus).is.undefined;
+    expect(player1.underworldData.activeBonus).is.undefined;
     UnderworldExpansion.grant(player1, 'data1pertemp');
-    expect(player1.underworldData.temperatureBonus).eq('data1pertemp');
+    expect(player1.underworldData.activeBonus).eq('data1pertemp');
   });
 
   it('grant bonus - microbe1pertemp', () => {
-    expect(player1.underworldData.temperatureBonus).is.undefined;
+    expect(player1.underworldData.activeBonus).is.undefined;
     UnderworldExpansion.grant(player1, 'microbe1pertemp');
-    expect(player1.underworldData.temperatureBonus).eq('microbe1pertemp');
+    expect(player1.underworldData.activeBonus).eq('microbe1pertemp');
   });
 
   it('grant bonus - plant2pertemp', () => {
-    expect(player1.underworldData.temperatureBonus).is.undefined;
+    expect(player1.underworldData.activeBonus).is.undefined;
     UnderworldExpansion.grant(player1, 'plant2pertemp');
-    expect(player1.underworldData.temperatureBonus).eq('plant2pertemp');
+    expect(player1.underworldData.activeBonus).eq('plant2pertemp');
   });
 
   it('grant bonus - steel2pertemp', () => {
-    expect(player1.underworldData.temperatureBonus).is.undefined;
+    expect(player1.underworldData.activeBonus).is.undefined;
     UnderworldExpansion.grant(player1, 'steel2pertemp');
-    expect(player1.underworldData.temperatureBonus).eq('steel2pertemp');
+    expect(player1.underworldData.activeBonus).eq('steel2pertemp');
   });
 
   it('grant bonus - titanium1pertemp', () => {
-    expect(player1.underworldData.temperatureBonus).is.undefined;
+    expect(player1.underworldData.activeBonus).is.undefined;
     UnderworldExpansion.grant(player1, 'titanium1pertemp');
-    expect(player1.underworldData.temperatureBonus).eq('titanium1pertemp');
+    expect(player1.underworldData.activeBonus).eq('titanium1pertemp');
+  });
+
+  it('grant bonus - science tag', () => {
+    expect(player1.tags.count(Tag.SCIENCE)).eq(2);
+    UnderworldExpansion.grant(player1, 'sciencetag');
+    expect(player1.tags.count(Tag.SCIENCE)).eq(3);
+  });
+
+  it('grant bonus - plant tag', () => {
+    expect(player1.tags.count(Tag.PLANT)).eq(0);
+    UnderworldExpansion.grant(player1, 'planttag');
+    expect(player1.tags.count(Tag.PLANT)).eq(1);
   });
 
   it('excavatableSpaces', () => {
@@ -354,17 +363,20 @@ describe('UnderworldExpansion', function() {
 
     space.excavator = player1;
     expect(UnderworldExpansion.excavatableSpaces(player1)).does.not.include(space);
-    // The only excavatable space now is the one next to the excavation space.
+    // The only excavatable spaces are those next to the excavation space.
     expect(UnderworldExpansion.excavatableSpaces(player1)).has.members(adjacentSpaces);
 
     // Reset for tile tests.
     space.excavator = undefined;
     space.tile = {tileType: TileType.GREENERY};
     space.player = player1;
-    expect(UnderworldExpansion.excavatableSpaces(player1)).has.members([space]);
-    expect(UnderworldExpansion.excavatableSpaces(player2)).includes(space);
-    space.tile = {tileType: TileType.CITY};
-    expect(UnderworldExpansion.excavatableSpaces(player2)).does.not.include(space);
+    expect(UnderworldExpansion.excavatableSpaces(player1)).does.not.include([space]);
+
+    // The only excavatable spaces are next to the tile.
+    console.log(UnderworldExpansion.excavatableSpaces(player1).map((s) => s.id));
+    console.log(adjacentSpaces.map((s) => s.id));
+
+    expect(UnderworldExpansion.excavatableSpaces(player1)).to.have.members(adjacentSpaces);
   });
 
   it('excavatableSpaces - cannot afford ocean bonus', () => {
@@ -387,32 +399,31 @@ describe('UnderworldExpansion', function() {
     const adjacentSpaces = game.board.getAdjacentSpaces(space);
     space.undergroundResources = 'plant2';
 
-    const identifiedSpacesBefore = UnderworldExpansion.identifiedSpaces(game);
+    const identifiedSpacesBefore = game.board.spaces.filter((space) => space.undergroundResources);
     expect(adjacentSpaces.map((space) => identifiedSpacesBefore.includes(space))).deep.eq([false, false, false]);
 
     UnderworldExpansion.excavate(player1, space);
 
     expect(player1.plants).eq(2);
     expect(space.excavator?.id).eq(player1.id);
-    const identifiedSpacesAfter = UnderworldExpansion.identifiedSpaces(game);
+    const identifiedSpacesAfter = game.board.spaces.filter((space) => space.undergroundResources);
     expect(adjacentSpaces.map((space) => identifiedSpacesAfter.includes(space))).deep.eq([true, true, true]);
   });
 
-  it('onExcavation callback', () => {
+  it('callback on excavate', () => {
     const responses: Array<string> = [];
     const space = game.board.getAvailableSpacesOnLand(player1)[0];
     space.undergroundResources = 'nothing';
 
-    player1.playedCards.push(fakeCard({
-      onExcavation(player, space) {
-        responses.push(`from player1: ${player.id} - ${space.id}`);
+    const card = fakeCard({
+      onClaim(player, isExcavate, space) {
+        expect(isExcavate).is.true;
+        responses.push(`from player1: ${player.id} - ${space!.id}`);
       },
-    }));
-    player2.playedCards.push(fakeCard({
-      onExcavation(player, space) {
-        responses.push(`from player2: ${player.id} - ${space.id}`);
-      },
-    }));
+    });
+
+    player1.playedCards.push(card);
+    player2.playedCards.push(card);
 
     UnderworldExpansion.excavate(player1, space);
 
@@ -421,8 +432,30 @@ describe('UnderworldExpansion', function() {
     ]);
   });
 
+  it('callback on claim', () => {
+    const responses: Array<string> = [];
+    const space = game.board.getAvailableSpacesOnLand(player1)[0];
+    space.undergroundResources = 'nothing';
+
+    const card = fakeCard({
+      onClaim(player, isExcavate) {
+        expect(isExcavate).is.false;
+        responses.push(`from player1: ${player.id}`);
+      },
+    });
+
+    player1.playedCards.push(card);
+    player2.playedCards.push(card);
+
+    UnderworldExpansion.claim(player1, space);
+
+    expect(responses).deep.eq([
+      'from player1: p-player1-id',
+    ]);
+  });
+
   it('on temperature change - data1pertemp', () => {
-    player1.underworldData.temperatureBonus = 'data1pertemp';
+    player1.underworldData.activeBonus = 'data1pertemp';
 
     expect(player1.getCardsWithResources()).is.empty;
 
@@ -446,7 +479,7 @@ describe('UnderworldExpansion', function() {
   });
 
   it('on temperature change - microbe1pertemp', () => {
-    player1.underworldData.temperatureBonus = 'microbe1pertemp';
+    player1.underworldData.activeBonus = 'microbe1pertemp';
 
     expect(player1.getCardsWithResources()).is.empty;
 
@@ -470,39 +503,39 @@ describe('UnderworldExpansion', function() {
   });
 
   it('on temperature change - plant2pertemp', () => {
-    player1.underworldData.temperatureBonus = 'plant2pertemp';
+    player1.underworldData.activeBonus = 'plant2pertemp';
     game.increaseTemperature(player2, 2);
     expect(player1.stock.plants).eq(4);
   });
 
   it('on temperature change - steel2pertemp', () => {
-    player1.underworldData.temperatureBonus = 'steel2pertemp';
+    player1.underworldData.activeBonus = 'steel2pertemp';
     game.increaseTemperature(player2, 2);
     expect(player1.stock.steel).eq(4);
   });
 
   it('on temperature change - titanium1pertemp', () => {
-    player1.underworldData.temperatureBonus = 'titanium1pertemp';
+    player1.underworldData.activeBonus = 'titanium1pertemp';
     game.increaseTemperature(player2, 2);
     expect(player1.stock.titanium).eq(2);
   });
 
-  it('temperature bonus does not apply to Solar Phase', () => {
-    player1.underworldData.temperatureBonus = 'titanium1pertemp';
+  it('temperature bonus applies to Solar Phase', () => {
+    player1.underworldData.activeBonus = 'titanium1pertemp';
     game.phase = Phase.SOLAR;
     game.increaseTemperature(player2, 2);
-    expect(player1.stock.titanium).eq(0);
+    expect(player1.stock.titanium).eq(2);
   });
 
   it('temperature bonus does not apply next generation', () => {
-    player1.underworldData.temperatureBonus = 'steel2pertemp';
+    player1.underworldData.activeBonus = 'steel2pertemp';
     game.increaseTemperature(player2, 2);
     expect(player1.stock.steel).eq(4);
     player1.stock.steel = 0;
 
     forceGenerationEnd(game);
 
-    expect(player1.underworldData.temperatureBonus).is.undefined;
+    expect(player1.underworldData.activeBonus).is.undefined;
     game.increaseTemperature(player2, 1);
     expect(player1.stock.steel).eq(0);
   });
@@ -537,7 +570,7 @@ describe('UnderworldExpansion', function() {
     public playerInput: PlayerInput | undefined = undefined;
 
     public run() {
-      this.playerInput = UnderworldExpansion.maybeBlockAttack(this.target, this.perpetrator, (proceed) => {
+      this.playerInput = UnderworldExpansion.maybeBlockAttack(this.target, this.perpetrator, '', (proceed) => {
         this.proceed = proceed;
         this.called = true;
         return undefined;
@@ -687,11 +720,11 @@ describe('UnderworldExpansion', function() {
     space3.undergroundResources = 'corruption1',
     game.underworldData.tokens = [];
 
-    expect(UnderworldExpansion.identifiedSpaces(game)).to.have.members([space, space2, space3]);
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).to.have.members([space, space2, space3]);
 
     UnderworldExpansion.removeAllUnclaimedTokens(game);
 
-    expect(UnderworldExpansion.identifiedSpaces(game)).to.have.members([space2]);
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).to.have.members([space2]);
     expect(space2.excavator).eq(player1);
     expect(space2.undergroundResources).eq('card2');
     expect(game.underworldData.tokens).to.have.members(['card1', 'corruption1']);
@@ -711,13 +744,25 @@ describe('UnderworldExpansion', function() {
     space3.undergroundResources = 'corruption1',
     game.underworldData.tokens = [];
 
-    expect(UnderworldExpansion.identifiedSpaces(game)).to.have.members([space, space2, space3]);
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).to.have.members([space, space2, space3]);
 
-    UnderworldExpansion.removeUnclaimedToken(game, space);
+    UnderworldExpansion.removeTokenFromSpace(game, space);
 
-    expect(UnderworldExpansion.identifiedSpaces(game)).to.have.members([space2, space3]);
+    expect(game.board.spaces.filter((space) => space.undergroundResources)).to.have.members([space2, space3]);
     expect(space2.excavator).eq(player1);
     expect(space2.undergroundResources).eq('card2');
     expect(game.underworldData.tokens).to.have.members(['card1']);
+  });
+
+  it('Cannot identify the restricted space on Amazonis Planitia', () => {
+    const [game, player1] = testGame(2, {underworldExpansion: true, boardName: BoardName.AMAZONIS});
+    expect(UnderworldExpansion.identifiableSpaces(player1)).to.not.include(game.board.getSpaceOrThrow(SpaceName.MEDUSAE_FOSSAE));
+    expect(UnderworldExpansion.excavatableSpaces(player1)).to.not.include(game.board.getSpaceOrThrow(SpaceName.MEDUSAE_FOSSAE));
+  });
+
+  it('Can identify the space that would be restricted if it were Amazonis Planitia', () => {
+    const [game, player1] = testGame(2, {underworldExpansion: true, boardName: BoardName.THARSIS});
+    expect(UnderworldExpansion.identifiableSpaces(player1)).to.include(game.board.getSpaceOrThrow(SpaceName.MEDUSAE_FOSSAE));
+    expect(UnderworldExpansion.excavatableSpaces(player1)).to.include(game.board.getSpaceOrThrow(SpaceName.MEDUSAE_FOSSAE));
   });
 });

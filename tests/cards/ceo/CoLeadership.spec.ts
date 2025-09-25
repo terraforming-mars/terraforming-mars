@@ -6,8 +6,8 @@ import {ICeoCard} from '../../../src/server/cards/ceos/ICeoCard';
 import {cast, runAllActions} from '../../TestingUtils';
 import {Phase} from '../../../src/common/Phase';
 
-describe('Co Leadership', function() {
-  it('Should play', function() {
+describe('Co Leadership', () => {
+  it('Should play', () => {
     const card = new CoLeadership();
     const [game, player] = testGame(1, {ceoExtension: true});
     expect(player.ceoCardsInHand).is.empty;
@@ -39,7 +39,7 @@ describe('Co Leadership', function() {
     game.phase = Phase.ACTION;
 
     expect(player.ceoCardsInHand).is.empty;
-    expect(player.playedCards).includes(ceo);
+    expect(player.playedCards.get(ceo.name)).deep.eq(ceo);
     expect(game.ceoDeck.discardPile).has.length(2);
   });
 });

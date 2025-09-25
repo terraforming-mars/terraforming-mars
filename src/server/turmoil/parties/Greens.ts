@@ -7,7 +7,7 @@ import {Bonus} from '../Bonus';
 import {IPolicy} from '../Policy';
 import {Space} from '../../boards/Space';
 import {IPlayer} from '../../IPlayer';
-import {IProjectCard} from '../../cards/IProjectCard';
+import {ICard} from '../../cards/ICard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -79,7 +79,7 @@ class GreensPolicy03 implements IPolicy {
   readonly id = 'gp03' as const;
   readonly description = 'When you play an animal, plant or microbe tag, gain 2 M€';
 
-  onCardPlayed(player: IPlayer, card: IProjectCard) {
+  onCardPlayed(player: IPlayer, card: ICard) {
     const tags = [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE];
     const tagCount = card.tags.filter((tag) => tags.includes(tag)).length;
 

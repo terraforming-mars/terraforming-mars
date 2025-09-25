@@ -26,6 +26,9 @@ export class ProxyCard implements IProjectCard {
   public canPlay() {
     return false;
   }
+  public canPlayPostRequirements(): boolean {
+    return false;
+  }
   public get metadata(): CardMetadata {
     throw new Error(this.name + ' is a proxy card, not a real card. Should not render');
   }

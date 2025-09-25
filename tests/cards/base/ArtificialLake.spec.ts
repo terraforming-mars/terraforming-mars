@@ -10,22 +10,22 @@ import {cast, maxOutOceans, runAllActions, setTemperature, testRedsCosts} from '
 import {testGame} from '../../TestGame';
 import {assertPlaceOcean} from '../../assertions';
 
-describe('ArtificialLake', function() {
+describe('ArtificialLake', () => {
   let card: ArtificialLake;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ArtificialLake();
     [game, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
-    expect(card.play(player)).is.undefined;
+  it('Should play', () => {
+    cast(card.play(player), undefined);
     runAllActions(game);
 
     const selectSpace = cast(player.popWaitingFor(), SelectSpace);
@@ -38,12 +38,12 @@ describe('ArtificialLake', function() {
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
-  it('Cannot place ocean if all oceans are already placed', function() {
+  it('Cannot place ocean if all oceans are already placed', () => {
     // Set temperature level to fit requirements
     setTemperature(game, -6);
 
     // Set oceans count to the max value
-    for (const space of game.board.getSpaces(SpaceType.OCEAN, player)) {
+    for (const space of game.board.getSpaces(SpaceType.OCEAN)) {
       if (game.board.getOceanSpaces().length < constants.MAX_OCEAN_TILES) {
         game.addOcean(player, space);
       }
@@ -56,7 +56,7 @@ describe('ArtificialLake', function() {
     cast(card.play(player), undefined);
   });
 
-  it('Cannot place ocean if all land spaces are occupied', function() {
+  it('Cannot place ocean if all land spaces are occupied', () => {
     // Set temperature level to fit requirements
     setTemperature(game, -6);
 
@@ -79,7 +79,7 @@ describe('ArtificialLake', function() {
     expect(card.canPlay(player)).is.false;
   });
 
-  it('Can still play if oceans are maxed but no land spaces are available', function() {
+  it('Can still play if oceans are maxed but no land spaces are available', () => {
     setTemperature(game, -6);
     maxOutOceans(player);
 

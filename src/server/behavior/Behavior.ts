@@ -7,7 +7,7 @@ import {Tag} from '../../common/cards/Tag';
 // import {CardResource} from '../../common/CardResource';
 // import {TileType} from '../../common/TileType';
 import {SpaceId} from '../../common/Types';
-import {MoonSpaces} from '../../common/moon/MoonSpaces';
+import {NamedMoonSpace} from '../../common/moon/NamedMoonSpaces';
 import {TileType} from '../../common/TileType';
 import {Countable, CountableUnits} from './Countable';
 import {PlacementType} from '../boards/PlacementType';
@@ -33,7 +33,7 @@ export type Spend = Units & {
   /** corruption from your personal supply. */
   corruption: number,
 
-  /** discard cards from your hand */
+  /** discard project cards from your hand */
   cards: number,
 }
 
@@ -43,7 +43,7 @@ export type Behavior = {
   or?: OrBehavior;
 
   /**
-   * Spend one of resources before taking the action.
+   * Spend one of resources bdecreaseTerraformRatingefore taking the action.
    *
    * This is specifically designed to spend only one resource type.
    */
@@ -75,8 +75,7 @@ export type Behavior = {
   decreaseAnyProduction?: DecreaseAnyProduction;
   removeAnyPlants?: number,
 
-  /** Gain units of TR */
-  // TODO(kberg) permit losing TR for TerralabsResearch
+  /** Gain or lose units of TR */
   tr?: Countable;
 
   /** Raise certain global parameters. */
@@ -163,7 +162,7 @@ export type Behavior = {
   },
 
   underworld?: {
-    identify?: Countable,
+    identify?: number | {count: number, claim?: number},
     excavate?: number | {count: Countable, ignorePlacementRestrictions?: boolean},
     corruption?: Countable,
     markThisGeneration?: NoAttributes,
@@ -180,7 +179,7 @@ export type Behavior = {
 }
 
 export interface PlaceMoonTile {
-  space?: MoonSpaces;
+  space?: NamedMoonSpace;
 }
 
 export interface DrawCard {

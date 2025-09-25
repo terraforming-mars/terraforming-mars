@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Geologist} from '../../../src/server/milestones/modular/Geologist';
 import {TileType} from '../../../src/common/TileType';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 import {testGame} from '../../TestingUtils';
 
 describe('Geologist Milestone', () => {

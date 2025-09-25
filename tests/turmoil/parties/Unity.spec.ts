@@ -11,15 +11,15 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {testGame} from '../../TestGame';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 
-describe('Unity', function() {
+describe('Unity', () => {
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     [game, player] = testGame(1, {turmoilExtension: true});
   });
 
-  it('Ruling bonus 1: Gain 1 M€ for each Venus, Earth and Jovian tag you have', function() {
+  it('Ruling bonus 1: Gain 1 M€ for each Venus, Earth and Jovian tag you have', () => {
     player.playedCards.push(new SisterPlanetSupport(), new VestaShipyard());
 
     const bonus = UNITY_BONUS_1;
@@ -27,7 +27,7 @@ describe('Unity', function() {
     expect(player.megaCredits).to.eq(3);
   });
 
-  it('Ruling bonus 2: Gain 1 M€ for each Space tag you have', function() {
+  it('Ruling bonus 2: Gain 1 M€ for each Space tag you have', () => {
     player.playedCards.push(new VestaShipyard());
 
     const bonus = UNITY_BONUS_2;
@@ -35,7 +35,7 @@ describe('Unity', function() {
     expect(player.megaCredits).to.eq(1);
   });
 
-  it('Ruling policy 1: Your titanium resources are worth 1 M€ extra', function() {
+  it('Ruling policy 1: Your titanium resources are worth 1 M€ extra', () => {
     expect(player.getTitaniumValue()).to.eq(3);
     setRulingParty(game, PartyName.UNITY, 'up01');
     expect(player.getTitaniumValue()).to.eq(4);
@@ -43,7 +43,7 @@ describe('Unity', function() {
     expect(player.getTitaniumValue()).to.eq(3);
   });
 
-  it('Ruling policy 2: Spend 4 M€ to gain 2 titanium or add 2 floaters to any card', function() {
+  it('Ruling policy 2: Spend 4 M€ to gain 2 titanium or add 2 floaters to any card', () => {
     setRulingParty(game, PartyName.UNITY, 'up02');
 
     const unityPolicy = UNITY_POLICY_2;
@@ -67,7 +67,7 @@ describe('Unity', function() {
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('Ruling policy 3: Spend 4 M€ to draw a Space card', function() {
+  it('Ruling policy 3: Spend 4 M€ to draw a Space card', () => {
     setRulingParty(game, PartyName.UNITY, 'up03');
 
     const unityPolicy = UNITY_POLICY_3;
@@ -83,7 +83,7 @@ describe('Unity', function() {
     expect(unityPolicy.canAct(player)).to.be.false;
   });
 
-  it('Ruling policy 4: Cards with Space tags cost 2 M€ less to play', function() {
+  it('Ruling policy 4: Cards with Space tags cost 2 M€ less to play', () => {
     setRulingParty(game, PartyName.UNITY, 'up04');
 
     const card = new VestaShipyard();

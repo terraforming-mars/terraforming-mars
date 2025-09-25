@@ -4,8 +4,8 @@ import {MirandaResort} from '../../../src/server/cards/base/MirandaResort';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('MirandaResort', function() {
-  it('Should play', function() {
+describe('MirandaResort', () => {
+  it('Should play', () => {
     const card = new MirandaResort();
     const [/* game */, player] = testGame(2);
 

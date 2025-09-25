@@ -5,16 +5,15 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CeoCard} from './CeoCard';
 import {inplaceShuffle} from '../../utils/shuffle';
 import {UnseededRandom} from '../../../common/utils/Random';
-
-import {IAward} from '../../awards/IAward';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Size} from '../../../common/cards/render/Size';
-
-import {ALL_AWARDS} from '../../awards/Awards';
+import {awardManifest} from '../../awards/Awards';
 import {AwardScorer} from '../../awards/AwardScorer';
 import {message} from '../../logs/MessageBuilder';
-import {AWARD_COMPATIBILITY} from '../../../common/ma/compatibilities';
+import {AwardName, awardNames} from '../../../common/ma/AwardName';
+import {inplaceRemove} from '../../../common/utils/utils';
+import {isCompatible} from '../../ma/MAManifest';
 
 export class Asimov extends CeoCard {
   constructor() {
@@ -50,9 +49,9 @@ export class Asimov extends CeoCard {
     const validAwards = this.getValidAwards(player);
     inplaceShuffle(validAwards, UnseededRandom.INSTANCE);
 
-    const freeAward = new OrOptions();
-    freeAward.title = 'Select award to put into play and fund';
-    freeAward.buttonLabel = 'Confirm';
+    const freeAward = new OrOptions()
+      .setTitle('Select award to put into play and fund')
+      .setButtonLabel('Confirm');
 
     freeAward.options = validAwards.slice(0, awardCount).map((award) => this.selectAwardToFund(player, award));
     freeAward.options.push(
@@ -65,11 +64,12 @@ export class Asimov extends CeoCard {
     return freeAward;
   }
 
-  private selectAwardToFund(player: IPlayer, award: IAward): SelectOption {
+  private selectAwardToFund(player: IPlayer, awardName: AwardName): SelectOption {
     const game = player.game;
+    const award = awardManifest.createOrThrow(awardName);
     const scorer = new AwardScorer(game, award);
     // Sort the players by score:
-    const players: Array<IPlayer> = game.getPlayers().slice();
+    const players: Array<IPlayer> = game.players.slice();
     players.sort((p1, p2) => scorer.get(p2) - scorer.get(p1));
     const title = message('Fund ${0} award [${1}]', (b) => b.award(award).string(
       players.map((player) => player.name + ': ' + scorer.get(player)).join(' / ')));
@@ -81,26 +81,14 @@ export class Asimov extends CeoCard {
     });
   }
 
-  private getValidAwards(player: IPlayer): Array<IAward> {
+  private getValidAwards(player: IPlayer): Array<AwardName> {
     // NB: This makes no effort to maintain Award synergy.
     const gameOptions = player.game.gameOptions;
-    const validAwards = ALL_AWARDS.filter((award) => {
-      // TODO(kberg): Centralize this so this card doesn't have to be updated.
-
-      // Remove awards already in the game
-      if (player.game.awards.includes(award)) return false;
-      // Remove awards that require unused variants/expansions
-      switch (AWARD_COMPATIBILITY[award.name].compatibility) {
-      case 'venus': return gameOptions.venusNextExtension;
-      case 'colonies': return gameOptions.coloniesExtension;
-      case 'turmoil': return gameOptions.turmoilExtension;
-      case 'ares': return gameOptions.aresExtension;
-      case 'moon': return gameOptions.moonExpansion;
-      case 'underworld': return gameOptions.underworldExpansion;
-      }
-
-      return true;
-    });
+    const candidates = [...awardNames];
+    for (const award of player.game.awards) {
+      inplaceRemove(candidates, award.name);
+    }
+    const validAwards = candidates.filter((awardName) => isCompatible(awardName, awardManifest, gameOptions));
     if (validAwards.length === 0) throw new Error('getValidAwards award list is empty.');
     return validAwards;
   }

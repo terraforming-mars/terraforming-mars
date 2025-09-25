@@ -1,9 +1,10 @@
 {
   "Lose 1 M€ for each card in your hand over 6 (no limit) reduced by 2 M€ per influence (min 0M€). Draw 2 cards if your hand contains 6 cards or less.": "Втратити 1 M€ за кожну карту у вашій руці понад 6 (без обмежень), зменшену на 2 M€ за кожен вплив (мінімум 0M€). Витягнути 2 карти, якщо у вашій руці є 6 карт або менше.",
-  "Count corruption and ADD influence. Players with the most get 1 corruption and 3 M€ production. Players with 2nd most get 1 corruption and 1 M€ production. Min 1 to place. (SOLO: Place 1st with sum of 5 or more.)": "Порахуйте корупцію та ДОДАЙТЕ вплив. Гравці з найбільшою кількістю отримують 1 корупцію та 3 M€ виробництва. Гравці з другою найбільшою кількістю отримують 1 корупцію та 1 M€ виробництва. Мінімум 1 для розміщення. (SOLO: Розмістіть 1-мим з сумою 5 або більше.)",
+  "// Count corruption and ADD influence. Players with the most get 1 corruption and 3 M€ production. Players with 2nd most get 1 corruption and 1 M€ production. Min 1 to place. (SOLO: Place 1st with sum of 5 or more.)": "Порахуйте корупцію та ДОДАЙТЕ вплив. Гравці з найбільшою кількістю отримують 1 корупцію та 3 M€ виробництва. Гравці з другою найбільшою кількістю отримують 1 корупцію та 1 M€ виробництва. Мінімум 1 для розміщення. (SOLO: Розмістіть 1-мим з сумою 5 або більше.)",
   "Lose 3 M€ per corruption resource you have (max 5), minus influence. Players with 0 corruption gain 1 TR.": "Втратити 3 M€ за кожен ресурс корупції, який у вас є (максимум 5), мінус вплив. Гравці з 0 корупцією отримують 1 РТ.",
-  "Gain 1 M€ production (max 5) for every 2 excavation markers you own. Each point of influence counts as an extra excavation marker.": "Отримати 1 M€ виробництва (максимум 5) за кожні 2 маркера розкопок, які ви володієте. Кожен пункт впливу вважається додатковим маркером розкопок.",
-  "Discard all unclaimed underground resources. Lose 2 M€ for each tile on Mars you own WITHOUT excavation markers (max 5) minus influence.": "Відкинути всі непридатні підземні ресурси. Втратити 2 M€ за кожну плитку на Марсі, яку ви володієте БЕЗ маркерів розкопок (максимум 5), мінус вплив.",
+  "// Gain 1 M€ production (max 5) for every 2 excavation markers you own. Each point of influence counts as an extra excavation marker.": "Отримати 1 M€ виробництва (максимум 5) за кожні 2 маркера розкопок, які ви володієте. Кожен пункт впливу вважається додатковим маркером розкопок.",
+  "Gain 1 M€ production (max 5) for every 2 underworld tokens you own. Each point of influence counts as an extra underworld token.": "",
+  "// Discard all unclaimed underground resources. Lose 2 M€ for each tile on Mars you own WITHOUT excavation markers (max 5) minus influence.": "Відкинути всі непридатні підземні ресурси. Втратити 2 M€ за кожну плитку на Марсі, яку ви володієте БЕЗ маркерів розкопок (максимум 5), мінус вплив.",
 
   "Discard 2 cards from hand. Gain 2 M€ per influence.": "Відкинути 2 карти з руки. Отримати 2 M€ за кожен вплив.",
   "Gain 2 M€ per Venus tag (max 5) and influence.": "Отримати 2 M€ за кожен символ Венери (максимум 5) та вплив.",
@@ -95,7 +96,7 @@
   "Tired Earth": "Втомлена Земля",
   "Magnetic Field Stimulation Delays": "Затримки в стимуляції магнітного поля",
   "Communication Boom": "Бум комунікацій",
-  "x": "x",
+  "x": "",
   "w/rsrs": "з/рес.",
   "over 15": "понад 15",
   "over 10": "понад 10",

@@ -52,13 +52,15 @@ describe('ThinkTank', () => {
     expect(bushes.canPlay(player)).is.false;
 
     thinkTank.resourceCount = 1;
-    expect(bushes.canPlay(player)).deep.eq({thinkTankResources: 1});
+    expect(bushes.canPlay(player)).is.true;
+    expect(bushes.additionalProjectCosts).deep.eq({thinkTankResources: 1});
 
     setTemperature(game, -14);
     expect(bushes.canPlay(player)).is.false;
 
     thinkTank.resourceCount = 2;
-    expect(bushes.canPlay(player)).deep.eq({thinkTankResources: 2});
+    expect(bushes.canPlay(player)).is.true;
+    expect(bushes.additionalProjectCosts).deep.eq({thinkTankResources: 2});
   });
 
   it('canPlay, temperature, negative', () => {
@@ -72,13 +74,15 @@ describe('ThinkTank', () => {
     expect(archaeBacteria.canPlay(player)).is.false;
 
     thinkTank.resourceCount = 1;
-    expect(archaeBacteria.canPlay(player)).deep.eq({thinkTankResources: 1});
+    expect(archaeBacteria.canPlay(player)).is.true;
+    expect(archaeBacteria.additionalProjectCosts).deep.eq({thinkTankResources: 1});
 
     setTemperature(game, -14);
     expect(archaeBacteria.canPlay(player)).is.false;
 
     thinkTank.resourceCount = 2;
-    expect(archaeBacteria.canPlay(player)).deep.eq({thinkTankResources: 2});
+    expect(archaeBacteria.canPlay(player)).is.true;
+    expect(archaeBacteria.additionalProjectCosts).deep.eq({thinkTankResources: 2});
   });
 
   it('canPlay, oxygen', () => {
@@ -92,13 +96,15 @@ describe('ThinkTank', () => {
     expect(breathingFilters.canPlay(player)).is.false;
 
     thinkTank.resourceCount = 1;
-    expect(breathingFilters.canPlay(player)).deep.eq({thinkTankResources: 1});
+    expect(breathingFilters.canPlay(player)).is.true;
+    expect(breathingFilters.additionalProjectCosts).deep.eq({thinkTankResources: 1});
 
     setOxygenLevel(game, 5);
     expect(breathingFilters.canPlay(player)).is.false;
 
     thinkTank.resourceCount = 2;
-    expect(breathingFilters.canPlay(player)).deep.eq({thinkTankResources: 2});
+    expect(breathingFilters.canPlay(player)).is.true;
+    expect(breathingFilters.additionalProjectCosts).deep.eq({thinkTankResources: 2});
   });
 
   it('effect', () => {
@@ -119,7 +125,7 @@ describe('ThinkTank', () => {
     expect(thinkTank.resourceCount).eq(1);
   });
 
-  it('effect ', () => {
+  it('effect', () => {
     // Breathing filters requires 7% oxygen
     const breathingFilters = new BreathingFilters();
     player.cardsInHand.push(breathingFilters);
@@ -157,7 +163,8 @@ describe('ThinkTank', () => {
 
     thinkTank.resourceCount = 5;
 
-    expect(oceanCity.canPlay(player)).deep.eq({thinkTankResources: 5});
+    expect(oceanCity.canPlay(player)).is.true;
+    expect(oceanCity.additionalProjectCosts).deep.eq({thinkTankResources: 5});
 
     game.removeTile(ocean.id);
     expect(game.board.getOceanSpaces()).is.empty;

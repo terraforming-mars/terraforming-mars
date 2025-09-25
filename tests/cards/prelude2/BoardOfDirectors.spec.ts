@@ -52,7 +52,7 @@ describe('BoardOfDirectors', () => {
     selectCard.cb([prelude]);
     runAllActions(game);
 
-    expect(player.playedCards).contains(loan);
+    expect(player.playedCards.get(loan.name)).deep.eq(loan);
     expect(card.resourceCount).eq(0);
     expect(player.megaCredits).eq(33);
     expect(player.production.megacredits).eq(-2);

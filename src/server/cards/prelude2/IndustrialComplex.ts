@@ -5,6 +5,7 @@ import {IPlayer} from '../../IPlayer';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {Units} from '../../../common/Units';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export class IndustrialComplex extends PreludeCard {
   constructor() {
@@ -26,7 +27,7 @@ export class IndustrialComplex extends PreludeCard {
 
   public override bespokeCanPlay(player: IPlayer) {
     let megaCredits = -this.startingMegaCredits;
-    if (player.isCorporation(CardName.MANUTECH)) {
+    if (player.tableau.has(CardName.MANUTECH)) {
       if (player.production.megacredits === 0) {
         megaCredits--;
       }
@@ -55,7 +56,9 @@ export class IndustrialComplex extends PreludeCard {
     }
     player.production.adjust(production, {log: true});
 
-    player.game.defer(new SelectPaymentDeferred(player, 18));
+    player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits)).andThen(() => {
+      PathfindersExpansion.addToSolBank(player);
+    });
     return undefined;
   }
 }

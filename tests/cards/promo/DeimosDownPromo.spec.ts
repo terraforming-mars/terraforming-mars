@@ -20,7 +20,7 @@ describe('DeimosDownPromo', () => {
   });
 
   it('Should play without plants', () => {
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     cast(player.popWaitingFor(), SelectSpace);
     expect(player.game.getTemperature()).to.eq(-24);
@@ -32,7 +32,7 @@ describe('DeimosDownPromo', () => {
   it('Can remove plants', () => {
     player2.plants = 5;
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     cast(player.popWaitingFor(), SelectSpace);
     expect(player.game.getTemperature()).to.eq(-24);
@@ -51,7 +51,7 @@ describe('DeimosDownPromo', () => {
     const [game, player] = testGame(1);
 
     player.plants = 15;
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     cast(player.popWaitingFor(), SelectSpace);
 
@@ -62,7 +62,7 @@ describe('DeimosDownPromo', () => {
 
   it('Compatible with Kingdom of Tauraro', () => {
     const [game, player] = testGame(2);
-    player.corporations.push(new KingdomofTauraro());
+    player.playedCards.push(new KingdomofTauraro());
 
     const space35 = game.board.getSpaceOrThrow('35');
     const adjacentSpace = game.board.getAdjacentSpaces(space35)[0];

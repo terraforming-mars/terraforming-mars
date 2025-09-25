@@ -24,9 +24,10 @@ describe('Deepnuking', () => {
   });
 
   it('play', () => {
+    player.plants = 5;
     player2.plants = 5;
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     assertIsExcavationAction(player, player.popWaitingFor());
     runAllActions(game);

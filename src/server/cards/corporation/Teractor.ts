@@ -2,8 +2,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {CorporationCard} from './CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {ICorporationCard} from './ICorporationCard';
 
-export class Teractor extends CorporationCard {
+export class Teractor extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.TERACTOR,

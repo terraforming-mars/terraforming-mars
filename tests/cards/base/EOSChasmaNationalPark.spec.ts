@@ -32,7 +32,7 @@ describe('EosChasmaNationalPark', () => {
     player.playedCards.push(birds, fish);
 
     expect(card.canPlay(player)).is.true;
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     expect(player.getVictoryPoints().victoryPoints).to.eq(0);
     player.playedCards.push(card);
     expect(player.getVictoryPoints().victoryPoints).to.eq(1);

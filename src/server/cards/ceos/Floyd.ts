@@ -22,8 +22,6 @@ export class Floyd extends CeoCard {
     });
   }
 
-  public opgActionIsActive = false;
-
   public override canAct(player: IPlayer): boolean {
     if (!super.canAct(player)) {
       return false;

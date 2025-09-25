@@ -1,15 +1,15 @@
 import {expect} from 'chai';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {MoonBoard} from '../../src/server/moon/MoonBoard';
-import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
+import {NamedMoonSpaces} from '../../src/common/moon/NamedMoonSpaces';
 import {SpaceId} from '../../src/common/Types';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 
-describe('MoonBoard', function() {
+describe('MoonBoard', () => {
   let board: MoonBoard;
 
-  beforeEach(function() {
+  beforeEach(() => {
     board = MoonBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
   });
 
@@ -58,7 +58,7 @@ describe('MoonBoard', function() {
   it('getSpace', () => {
     expect(() => board.getSpaceOrThrow('01').id).to.throw(Error, /Can't find space with id 01/);
     expect(board.getSpaceOrThrow('m01').spaceType).eq(SpaceType.COLONY);
-    expect(board.getSpaceOrThrow(MoonSpaces.LUNA_TRADE_STATION).id).eq('m01');
+    expect(board.getSpaceOrThrow(NamedMoonSpaces.LUNA_TRADE_STATION).id).eq('m01');
   });
 
   const testCases: Array<[SpaceId, Array<SpaceId>]> = [
@@ -117,12 +117,12 @@ describe('MoonBoard', function() {
         shuffleMapOption: true,
       },
       new SeededRandom(seed));
-      const reservedSpaces = [MoonSpaces.LUNA_TRADE_STATION,
-        MoonSpaces.MARE_IMBRIUM,
-        MoonSpaces.MARE_NECTARIS,
-        MoonSpaces.MARE_NUBIUM,
-        MoonSpaces.MARE_SERENITATIS,
-        MoonSpaces.MOMENTUM_VIRIUM,
+      const reservedSpaces = [NamedMoonSpaces.LUNA_TRADE_STATION,
+        NamedMoonSpaces.MARE_IMBRIUM,
+        NamedMoonSpaces.MARE_NECTARIS,
+        NamedMoonSpaces.MARE_NUBIUM,
+        NamedMoonSpaces.MARE_SERENITATIS,
+        NamedMoonSpaces.MOMENTUM_VIRIUM,
       ].map((id) => board.getSpaceOrThrow(id).spaceType);
       expect(reservedSpaces, `for seed ${seed}`).deep.eq([SpaceType.COLONY, SpaceType.LUNAR_MINE, SpaceType.LUNAR_MINE, SpaceType.LUNAR_MINE, SpaceType.LUNAR_MINE, SpaceType.COLONY]);
     }

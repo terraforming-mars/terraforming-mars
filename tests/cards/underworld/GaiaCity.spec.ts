@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {GaiaCity} from '../../../src/server/cards/underworld/GaiaCity';
 import {testGame} from '../../TestGame';
-import {cast, churn} from '../../TestingUtils';
+import {addCity, cast, churn} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Space} from '../../../src/server/boards/Space';
-import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
+import {intersection} from '../../../src/common/utils/utils';
 
 describe('GaiaCity', () => {
   const canPlayRuns = [
@@ -52,7 +52,7 @@ describe('GaiaCity', () => {
     const card = new GaiaCity();
     const [/* game */, player] = testGame(2);
 
-    player.production.override({energy: 1});
+    player.production.energy = 1;
 
     const [space1, space2] = player.game.board.getAvailableSpacesForCity(player);
     space1.excavator = player;
@@ -60,16 +60,47 @@ describe('GaiaCity', () => {
 
     const selectSpace = cast(churn(card.play(player), player), SelectSpace);
 
-    expect(player.production.megacredits).eq(2);
+    expect(player.production.plants).eq(2);
     expect(player.production.energy).eq(0);
 
     expect(selectSpace.spaces).to.have.members([space1, space2]);
 
-    space1.bonus = [SpaceBonus.PLANT];
     const space = selectSpace.spaces[0];
     selectSpace.cb(space);
 
     expect(space.tile?.tileType).eq(TileType.CITY);
-    expect(player.plants).eq(2);
+  });
+
+  it('play next to another city', () => {
+    const card = new GaiaCity();
+    const [/* game */, player, player2] = testGame(2);
+    const board = player.game.board;
+
+    player.production.energy = 1;
+
+    const [firstCity] = board.getAvailableSpacesForCity(player);
+    addCity(player, firstCity.id);
+    const landSpacesNextToCity = intersection(
+      board.getAdjacentSpaces(firstCity),
+      board.getAvailableSpacesOnLand(player),
+    );
+
+    const nextCity = landSpacesNextToCity[0];
+    nextCity.excavator = player;
+
+    // This space will not be eligible because someone else excavated it.
+    landSpacesNextToCity[1].excavator = player2;
+
+    expect(board.getAvailableSpacesForCity(player)).does.not.include([nextCity]);
+
+    const selectSpace = cast(churn(card.play(player), player), SelectSpace);
+
+    expect(selectSpace.spaces).deep.eq([nextCity]);
+
+    const space = selectSpace.spaces[0];
+    selectSpace.cb(space);
+
+    expect(space.tile?.tileType).eq(TileType.CITY);
+    expect(space.excavator).is.undefined;
   });
 });

@@ -19,7 +19,7 @@ export class Whales extends Card implements IProjectCard {
       requirements: {oceans: 6},
 
       metadata: {
-        cardNumber: 'U88',
+        cardNumber: 'U088',
         renderData: CardRenderer.builder((b) => {
           b.effect('Whenever you would gain an ocean when there are already 9 oceans on the board, add an animal to this card',
             (b) => b.oceans(1).text('(9)', Size.SMALL, true).startEffect.resource(CardResource.ANIMAL));

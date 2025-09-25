@@ -12,34 +12,34 @@ import {cast, formatMessage} from '../../TestingUtils';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {AndOptions} from '../../../src/server/inputs/AndOptions';
 
-describe('AdhaiHighOrbitConstructions', function() {
+describe('AdhaiHighOrbitConstructions', () => {
   let player: TestPlayer;
   let card: AdhaiHighOrbitConstructions;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AdhaiHighOrbitConstructions();
     [/* game */, player] = testGame(1, {coloniesExtension: true});
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
-  it('onCardPlayed', function() {
-    card.onCardPlayed(player, new SearchForLife()); // Science
+  it('onCardPlayed', () => {
+    card.onCardPlayedForCorps(player, new SearchForLife()); // Science
     expect(card.resourceCount).eq(0);
 
-    card.onCardPlayed(player, new Soletta()); // Space
+    card.onCardPlayedForCorps(player, new Soletta()); // Space
     expect(card.resourceCount).eq(1);
 
-    card.onCardPlayed(player, new GanymedeColony()); // Jovian, Space, City
+    card.onCardPlayedForCorps(player, new GanymedeColony()); // Jovian, Space, City
     expect(card.resourceCount).eq(1);
 
-    card.onCardPlayed(player, new PhobosSpaceHaven()); // Space, City
+    card.onCardPlayedForCorps(player, new PhobosSpaceHaven()); // Space, City
     expect(card.resourceCount).eq(2);
 
-    card.onCardPlayed(player, new SolarWindPower()); // Science, Space, Power
+    card.onCardPlayedForCorps(player, new SolarWindPower()); // Science, Space, Power
     expect(card.resourceCount).eq(3);
   });
 
-  it('project card discount', function() {
+  it('project card discount', () => {
     card.resourceCount = 4;
     expect(card.getCardDiscount(player, new SearchForLife())).eq(0); // Science
     expect(card.getCardDiscount(player, new Soletta())).eq(2); // Space
@@ -62,7 +62,7 @@ describe('AdhaiHighOrbitConstructions', function() {
     expect(card.getCardDiscount(player, new SolarWindPower())).eq(3); // Science, Space, Power
   });
 
-  it('STANDARD COLONY PROJECT', function() {
+  it('STANDARD COLONY PROJECT', () => {
     const colonyStandardProject = new BuildColonyStandardProject();
 
     player.megaCredits = 15;
@@ -76,7 +76,7 @@ describe('AdhaiHighOrbitConstructions', function() {
   });
 
 
-  it('trade discount', function() {
+  it('trade discount', () => {
     expect(player.colonies.coloniesTradeAction()).is.undefined;
 
     player.megaCredits = 8;

@@ -1,108 +1,107 @@
 {
-    "Ceres Tech Market": "Ceres Tech-Markt",
-    "Action: Discard any number of cards from your hand to gain 2 M€ for each discarded card.": "AKTION: Werfe eine beliebige Anzahl von Karten aus deiner Hand ab, um 2 M€ für jede abgeworfene Karte zu erhalten.",
-    "Gain 2 M€ per colony you own.": "Erhalte 2 M€ pro Kolonie, die du hast.",
+  "Ceres Tech Market": "Ceres-Technikmarkt",
+  "Action: Discard any number of cards from your hand to gain 2 M€ for each discarded card.": "AKTION: Wirf Karten deiner Wahl von deiner Hand ab, um 2 M€ für jede abgeworfene Karte zu erhalten.",
+  "Gain 2 M€ per colony you own.": "Erhalte 2 M€ je eigene Kolonie.",
 
-    "Cloud Tourism": "Wolkentourismus",
-    "Increase your M€ production 1 step for each pair of Earth and Venus tags you own. 1 VP for every 3rd floater on this card.": "Erhöhe deine M€-Produktion um 1 für jedes Paar aus Erd- und Venus-Symbolen, das du besitzt. 1 VP für je 3 Schweber auf dieser Karte.",
+  "Cloud Tourism": "Wolkentourismus",
+  "Increase your M€ production 1 step for each pair of Earth and Venus tags you own. 1 VP for every 3rd floater on this card.": "Erhöhe deine M€-Produktion um 1 je eigenen Satz aus Erde- und Venussymbol. 1 SP für je 3 Schweber auf dieser Karte.",
 
-    "Colonial Envoys": "Koloniale Gesandte",
-    "Requires that Unity is ruling or that you have 2 delegates there. Place 1 delegate for each colony you have. YOU MAY PLACE THEM IN SEPERATE PARTIES.": "Benötigt Regierungspartei: EINIGKEIT oder 2+ eigene Delegierte dort. Platziere 1 Delegierten für jede deiner Kolonien. DU KANNST SIE IN VERSCHIEDENEN PARTEIEN PLATZIEREN.",
-    
-    "Colonial Representation": "Koloniale Vertretung",
-    "Effect: You have +1 influence.": "EFFEKT: Du erhältst 1 Einfluss",
-    "Gain 3 M€ per colony you have.": "Erhalte 3 M€ pro Kolonie, die du hast.",
+  "Colonial Envoys": "Koloniegesandte",
+  "Requires that Unity is ruling or that you have 2 delegates there. Place 1 delegate for each colony you have. YOU MAY PLACE THEM IN SEPERATE PARTIES.": "Benötigt Regierungspartei: EINIGKEIT oder 2+ eigene Delegierte dort. Setze je eigene Kolonie 1 Delegierten. Du darfst sie in verschiedene Parteien setzen.",
 
-    "Envoys From Venus": "Abgesandte der Venus",
-    "Requires 3 Venus tags. Place 2 delegates in 1 party.": "Benötigt 3 Venussymbole. Platziere 2 Delegierte in eine Partei.",
+  "Colonial Representation": "Kolonievertretung",
+  "Effect: You have +1 influence.": "EFFEKT: Du hast +1 Einfluss.",
+  "Gain 3 M€ per colony you have.": "Erhalte 3 M€ je eigene Kolonie.",
 
-    "Floating Refinery": "Schwebende Raffinerie",
-    "Action: Add 1 floater here.": "AKTION: Füge hier 1 Schweber hinzu.",
-    "Action: Remove 2 floaters from ANY CARD to gain 1 titanium and 2 M€.": "AKTION: Entferne 2 Schweber von einer beliebigen Karte und erhalte 1 Titan und 2 M€.",
-    "Add 1 floater here for each Venus tag you have.": "Füge hier für jedes Venussymbol, das du hast, 1 Schweber hinzu.",
+  "Envoys From Venus": "Gesandte der Venus",
+  "Requires 3 Venus tags. Place 2 delegates in 1 party.": "Benötigt 3 Venussymbole. Setze 2 Delegierte in 1 Partei.",
 
-    "Frontier Town": "Grenzstadt",
-    "Requires that Mars First is ruling or that you have 2 delegates there. Decrease your energy production one step. Place a city tile. GAIN THE PRINTED PLACEMENT BONUS 2 ADDITIONAL TIMES.": "Benötigt Regierungspartei: MARS FIRST oder 2+ eigene Delegierte dort. Reduziere deine Energieproduktion um 1. Platziere ein Stadtplättchen. ERHALTE DEN AUFGEDRUCKTEN PLATZIERUNGSBONUS 2 WEITERE MALE.",
-    
-    "GHG Shipment": "Treibhausgasverfrachtung",
-    "Requires that Kelvinists are in power or that you have 2 delegates there. Increase your heat production 1 step. Gain 1 heat for each floater you have.": "Benötigt Regierungspartei: KELVINISTEN oder 2+ eigene Delegierte dort. Erhöhe deine Wärmeproduktion um 1. Du erhältst 1 Wärme für jeden Schweber, den du hast.",
+  "Floating Refinery": "Schwebende Raffinerie",
+  "Action: Add 1 floater here.": "AKTION: Füge dieser Karte 1 Schweber hinzu.",
+  "Action: Remove 2 floaters from ANY CARD to gain 1 titanium and 2 M€.": "AKTION: Entferne 2 Schweber von Karten, um 1 Titan und 2 M€ zu erhalten.",
+  "Add 1 floater here for each Venus tag you have.": "Füge dieser Karte 1 Schweber je eigenes Venussymbol hinzu.",
 
-    "Ishtar Expedition": "Ishtar-Expedition",
-    "Requires Venus 10%. Gain 3 titanium and draw 2 Venus cards.": "Erfordert Venuswertung von 10%., erhalte 3 Titan und zieht 2 Venus-Karten.",
+  "Frontier Town": "Grenzstadt",
+  "Requires that Mars First is ruling or that you have 2 delegates there. Decrease your energy production one step. Place a city tile. GAIN THE PRINTED PLACEMENT BONUS 2 ADDITIONAL TIMES.": "Benötigt Regierungspartei: MARS FIRST oder 2+ eigene Delegierte dort. Reduziere deine Energie-Produktion um 1. Platziere 1 Stadtplättchen. ERHALTE DEN AUFGEDRUCKTEN PLATZIERUNGSBONUS 2 ZUSÄTZLICHE MALE.",
 
-    "Jovian Envoys": "Abgesandter des Jupiters",
-    "Requires 2 Jovian tags. Place 2 delegates in 1 party.": "Benötigt 2 Jupitersymbole. Platziere 2 Delegierte in eine Partei.",
+  "GHG Shipment": "CO2-Lieferung",
+  "Requires that Kelvinists are in power or that you have 2 delegates there. Increase your heat production 1 step. Gain 1 heat for each floater you have.": "Benötigt Regierungspartei: KELVINISTEN oder 2+ eigene Delegierte dort. Erhöhe deine Wärme-Produktion um 1. Erhalte 1 Wärme je eigenen Schweber.",
 
-    "L1 Trade Terminal": "L1 Handelsterminal",
-    "Effect: When you trade, first increase that colony tile track 2 steps.": "EFFEKT: Wenn du Handel treibst, erhöhe zuerst die Leiste der Kolonieplättchen um 2 Schritte.",
-    "Add a resource to 3 different cards that already have resources.": "Füge bis zu 3 verschiedenen Karten, auf der bereits mindestens 1 Ressource ist, 1 weitere Ressource hinzu.",
+  "Ishtar Expedition": "Ishtar-Expedition",
+  "Requires Venus 10%. Gain 3 titanium and draw 2 Venus cards.": "Erfordert Venuswertung von 10% oder mehr. Erhalte 3 Titan und ziehe 2 Venuskarten.",
 
-    "Microgravity Nutrition": "Ernährung unter Schwerelosigkeit",
-    "Increase your M€ production 1 step for each colony you have.": "Erhöhe deine M€-Produktion um 1 für jede Kolonie, die du hast.",
-    
-    "Red Appeasement": "Rote Beschwichtigungspolitik",
-    "Requires that Reds are ruling or that you have 2 delegates there, AND THAT NO OTHER PLAYER HAS PASSED.": "Benötigt Regierungspartei: DIE ROTEN oder 2+ eigene Delegierte dort, und dass kein anderer Spieler gepasst hat.",
-    "Increase M€ production 2 steps. This counts as passing. You get no other turns this generation.": "Erhöhe die M€-Produktion um 2. Dies zählt als Passen. Du bekommst keine weiteren Züge in dieser Generation.",
-    "PASS": "PASSEN",
+  "Jovian Envoys": "Gesandte vom Jupiter",
+  "Requires 2 Jovian tags. Place 2 delegates in 1 party.": "Benötigt 2 Jupitersymbole. Setze 2 Delegierte in 1 Partei.",
 
-    "Soil Studies": "Bodenstudien",
-    "steal": "klaue",
-    "Requires that temperature is -4 C or lower. Gain 1 plant per Venus tag, plant tag, and colony you have.": "Temperatur muss -4 °C oder kälter sein. Du erhältst 1 Pflanze pro Venussymbol, Pflanzensymbol und Kolonie, die du hast.",
+  "L1 Trade Terminal": "L1 Handelsstation",
+  "Effect: When you trade, you may first increase that colony tile track 2 steps.": "EFFEKT: Beim Handeln darfst du zuerst die Kolonieleiste um 2 erhöhen.",
+  "Add a resource to 3 different cards that already have resources.": "Füge bis zu 3 verschiedenen Karten je 1 weitere Ressource hinzu, auf denen sich bereits welche befinden.",
 
-    "Special Permit": "Sondergenehmigung",
-    "Requires that Greens are ruling or that you have 2 delegates there. Steal 4 plants from any player.": "Benötigt Regierungspartei: DIE GRÜNEN oder 2+ eigene Delegierte dort. Stehle 4 Pflanzen von einem beliebigen Spieler.",
-    
-    "Sponsoring Nation": "Fördernde Nation",
-    "Requires 4 Earth tags. Gain 3 TR. Place 2 delegates.": "Benötigt 4 Erdsymbole. Erhalte 3 TW. Platziere 2 Delegierte in eine Partei.",
+  "Microgravity Nutrition": "Schwerelosigkeits-Nahrung",
+  "Increase your M€ production 1 step for each colony you have.": "Erhöhe deine M€-Produktion um 1 je eigene Kolonie.",
 
-    "Stratospheric Expedition": "Stratosphärische Expedition",
-    "Add two floaters to ANY CARD. Draw 2 Venus cards.": "Füge zwei Schweber auf eine beliebige Karte hinzu. Ziehe 2 Venus-Karten.",
+  "Red Appeasement": "Rote Besänftigung",
+  "Requires that Reds are ruling or that you have 2 delegates there, AND THAT NO OTHER PLAYER HAS PASSED.": "Benötigt Regierungspartei: DIE ROTEN oder 2+ eigene Delegierte dort, und dass kein anderer Spieler gepasst hat.",
+  "Increase M€ production 2 steps. This counts as passing. You get no other turns this generation.": "Erhöhe die M€-Produktion um 2. Dies zählt als Passen, du hast in dieser Generation keine weiteren Spielzüge.",
+  "PASS": "PASSEN",
 
-    "Summit Logistics": "Gipfel-Logistik",
-    "Requires that Scientists are ruling or that you have 2 delegates there. Gain 1 M€ per planet tag and colony you have. Draw 2 cards.": "Benötigt Regierungspartei: FORSCHUNG oder 2+ eigene Delegierte dort. Erhalte 1 M€ pro Planetensymbol und Kolonie, die du hast. Ziehe 2 Karten.",
-    "FAN EXPANSION NOTE: This includes Mars but not The Moon.": "ANMERKUNG ZUR FANERWEITERUNG: Dies beinhaltet den Mars, aber nicht den Mond.",
+  "Soil Studies": "Bodenproben",
+  "Requires that temperature is -4 C or lower. Gain 1 plant per Venus tag, plant tag, and colony you have.": "Temperatur muss -4 °C oder kälter sein. Erhalte 1 Pflanze je Venus- und Pflanzensymbol (einschließlich dieser) und eigener Kolonie.",
 
-    "Unexpected Application": "Unerwartete Anwendung",
-    "Discard 1 card to terraform Venus 1 step.": "Werfe 1 Karte ab, um die Venuswertung um 2% zu erhöhen.",
+  "Special Permit": "Sondergenehmigung",
+  "steal": "klaue",
+  "Requires that Greens are ruling or that you have 2 delegates there. Steal 4 plants from any player.": "Benötigt Regierungspartei: DIE GRÜNEN oder 2+ eigene Delegierte dort. Stehle einem Spieler 4 Pflanzen.",
 
-    "Venus Allies": "Venus Verbündete",
-    "Raise Venus 2 steps. Gain 4 M€ per colony you have.": "Erhöhe die Venuswertung um 4%. Erhalte 4 M€ pro Kolonie, die du hast.",
+  "Sponsoring Nation": "Fördernde Nation",
+  "Requires 4 Earth tags. Gain 3 TR. Place 2 delegates.": "Benötigt 4 Erdesymbole. Erhöhe deinen TW um 3. Setze 2 Delegierte in 1 Partei.",
 
-    "Venus Orbital Survey": "Venus Orbitale Vermessung",
-    "Action: Reveal the top 2 cards, take any venus cards to hand for free. Any other card you either buy or discard": "AKTION: Schaue Dir die obersten 2 Karten an, nehme eine beliebige Venuskarte kostenlos auf die Hand. Jede andere Karte kannst du entweder kaufen oder abwerfen.",
+  "Stratospheric Expedition": "Stratosphären-Expedition",
+  "Add two floaters to ANY CARD. Draw 2 Venus cards.": "Füge einer Karte 2 Schweber hinzu. Ziehe 2 Venuskarten.",
 
-    "Venus Shuttles": "Venus-Shuttles",
-    "Action: Spend 12 M€ to raise Venus 1 step. This cost is REDUCED BY 1 FOR EACH VENUS TAG you have.": "AKTION: Bezahle 12 M€, um die Venuswertung um 2% zu erhöhen. Diese Kosten werden für jedes Venussymbol, das du hast, um 1 reduziert.",
-    "Add 2 floaters to ANY VENUS CARD.": "Füge 2 Schweber zu einer beliebigen Venuskarte hinzu.",
-    
-    "Venus Trade Hub": "Venus Handelszentrum",
-    "Effect: When you trade, gain 3 M€.": "EFFEKT: Wenn du handelst, erhalte 3 M€.",
-    "Requires 2 Venus tags.": "Benötigt 2 Venussymbole.",
+  "Summit Logistics": "Gipfellogistik",
+  "Requires that Scientists are ruling or that you have 2 delegates there. Gain 1 M€ per planet tag and colony you have. Draw 2 cards.": "Benötigt Regierungspartei: FORSCHUNG oder 2+ eigene Delegierte dort. Erhalte 1 M€ je eigenes Planetensymbol und Kolonie. Ziehe 2 Karten.",
+  "FAN EXPANSION NOTE: This includes Mars but not The Moon.": "ANMERKUNG ZUR FANERWEITERUNG: Dies beinhaltet den Mars, aber nicht den Mond.",
 
-    "WG Project": "Weltregierung Projekt",
-    "Requires that you are Chairman. DRAW 3 PRELUDE CARDS AND PLAY 1 OF THEM, Discard the other 2.": "Benötigt eigenen Vorsitzenden. Ziehe 3 PRÄLUDIUM-KARTEN und spiele 1 davon aus, lege die anderen 2 ab.",
+  "Unexpected Application": "Unerwartete Anwendung",
+  "Discard 1 card to terraform Venus 1 step.": "Wirf 1 Karte ab, um die Venuswertung um 2% zu erhöhen.",
 
-    
-    "Psychrophiles": "Psychrophilen",
-    "Action: Add 1 microbe to this card.": "AKTION: Füge dieser Karte 1 Mikrobe hinzu.",
-    "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "EFFEKT: Wenn du eine Pflanzenkarte bezahlst, darfst Du Mikroben von dieser Karte für je 2 M€ verwenden.",
-    "Temperature must be -20 C or lower.": "Temperatur muss -20 °C oder niedriger sein.",
+  "Venus Allies": "Verbündete der Venus",
+  "Raise Venus 2 steps. Gain 4 M€ per colony you have.": "Erhöhe die Venuswertung um 4%. Erhalte 4 M€ je eigene Kolonie.",
 
-    "Research Coordination": "Koordinierte Forschung",
-    "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Wenn du eine Aktion ausführst, zählt das Joker-Symbol als ein Symbol deiner Wahl.",
+  "Venus Orbital Survey": "Orbitalvermessung der Venus",
+  "Action: Reveal the top 2 cards, take any venus cards to hand for free. Any other card you either buy or discard": "AKTION: Decke die obersten 2 Karten des Stapels auf. Nimm Venuskarten kostenlos auf die Hand. Andere aufgedeckte Karten darfst du entweder kaufen oder abwerfen.",
 
-    "SF Memorial": "Sci-Fi-Gedenkstätte",
-    "Draw 1 card.": "Ziehe 1 Karte.",
+  "Venus Shuttles": "Venus-Shuttles",
+  "Action: Spend 12 M€ to raise Venus 1 step. This cost is REDUCED BY 1 FOR EACH VENUS TAG you have.": "AKTION: Bezahle 12 M€, um die Venuswertung um 2% zu erhöhen. Diese Aktion kostet dich je eigenes Venussymbol 1 M€ weniger.",
+  "Add 2 floaters to ANY VENUS CARD.": "Füge 2 Schweber zu einer beliebigen Venuskarte hinzu.",
 
-    "Martian Survey": "Marsvermessung",
-    "Oxygen must be 4% or lower. Draw two cards.": "Sauerstoffgehalt muss 4% oder niedriger sein. Ziehe zwei Karten.",
+  "Venus Trade Hub": "Venus-Handelsstation",
+  "Effect: When you trade, gain 3 M€.": "EFFEKT: Wenn du handelst, erhalte 3 M€.",
+  "Requires 2 Venus tags.": "Benötigt 2 Venussymbole.",
 
-    "House Printing": "Häuserdruck",
-    "Increase your steel production 1 step.": "Erhöhe deine Stahlproduktion um 1.",
+  "WG Project": "Weltregierungsprojekt",
+  "Requires that you are Chairman. DRAW 3 PRELUDE CARDS AND PLAY 1 OF THEM, Discard the other 2.": "Benötigt eigenen Vorsitzenden. Ziehe 3 PRÄLUDIUM-KARTEN und spiele 1 von ihnen aus. Wirf die anderen beiden ab.",
 
-    "Space Hotels": "Weltraumhotels",
-    "Requires 2 Earth tags. Increase M€ production 4 steps.": "Erfordert 2 Erdsymbole. Erhöhe deine M€-Produktion um 4.",
+  "Psychrophiles": "Psychrophilen",
+  "Action: Add 1 microbe to this card.": "AKTION: Füge dieser Karte 1 Mikrobe hinzu.",
+  "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "EFFEKT: Wenn du eine Pflanzenkarte bezahlst, darfst Du Mikroben von dieser Karte für je 2 M€ verwenden.",
+  "Temperature must be -20 C or lower.": "Temperatur muss -20 °C oder niedriger sein.",
 
-    "Lava Tube Settlement": "Lavaröhren-Siedlung",
-    "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "Senke deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 2. Platziere ein Stadtplättchen auf einem VULKAN unabhängig von angrenzenden Stadtplättchen."
+  "Research Coordination": "Koordinierte Forschung",
+  "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Wenn du eine Aktion ausführst, zählt das Joker-Symbol als ein Symbol deiner Wahl.",
+
+  "SF Memorial": "Sci-Fi-Gedenkstätte",
+  "Draw 1 card.": "Ziehe 1 Karte.",
+
+  "Martian Survey": "Marsvermessung",
+  "Oxygen must be 4% or lower. Draw two cards.": "Sauerstoffgehalt muss 4% oder niedriger sein. Ziehe zwei Karten.",
+
+  "House Printing": "Häuserdruck",
+  "Increase your steel production 1 step.": "Erhöhe deine Stahlproduktion um 1.",
+
+  "Space Hotels": "Weltraumhotels",
+  "Requires 2 Earth tags. Increase M€ production 4 steps.": "Erfordert 2 Erdsymbole. Erhöhe deine M€-Produktion um 4.",
+
+  "Lava Tube Settlement": "Lavaröhren-Siedlung",
+  "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "Senke deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 2. Platziere ein Stadtplättchen auf einem VULKAN unabhängig von angrenzenden Stadtplättchen."
 }

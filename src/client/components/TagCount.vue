@@ -1,16 +1,20 @@
 <template>
-    <div :class="getClasses()">
-        <Tag :tag="tag" :size="size" :type="type"/>
-        <span :class="getCountClasses()">{{ getCount() }}</span>
-    </div>
+  <div :class="outerClass">
+    <underground-token v-if="claimedToken !== undefined" :token="claimedToken" location="tag-count"/>
+    <Tag v-else :tag="tag" :size="size" :type="type"/>
+    <span :class="innerClass">{{ count }}</span>
+  </div>
 </template>
 
 <script lang="ts">
 
 import Vue from 'vue';
 import Tag from '@/client/components/Tag.vue';
+import UndergroundToken from '@/client/components/underworld/UndergroundToken.vue';
 import {Tag as CardTag} from '@/common/cards/Tag';
 import {SpecialTags} from '@/client/cards/SpecialTags';
+import {TemporaryBonusToken} from '@/common/underworld/UndergroundResourceToken';
+import {ClaimedToken} from '@/common/underworld/UnderworldPlayerData';
 
 export default Vue.extend({
   name: 'tag-count',
@@ -18,8 +22,13 @@ export default Vue.extend({
     tag: {
       type: String as () => CardTag|SpecialTags|'escape',
     },
+    undergroundToken: {
+      type: String as () => TemporaryBonusToken | undefined,
+      required: false,
+      default: undefined,
+    },
     count: {
-      type: Number,
+      type: Number as () => Number | String,
     },
     size: {
       type: String,
@@ -27,33 +36,39 @@ export default Vue.extend({
     type: {
       type: String,
     },
-    hideCount: {
+    showWhenZero: {
+      // When true, show even if the value is zero.
       required: false,
-      type: Boolean,
+      default: false,
     },
   },
   components: {
     Tag,
+    UndergroundToken,
   },
-  methods: {
-    getClasses(): string {
+  computed: {
+    outerClass(): string {
       const classes = ['tag-display'];
-      if (this.count === 0 && this.tag !== 'escape') {
+      if (this.count === 0 && this.showWhenZero === false) {
         classes.push('tag-no-show');
       }
       return classes.join(' ');
     },
-    getCountClasses(): string {
+    innerClass(): string {
       const classes = ['tag-count-display'];
-      if (this.count === 0 && this.tag !== 'escape') {
+      if (this.count === 0 && this.showWhenZero === false) {
         classes.push('tag-count-no-show');
       }
 
       return classes.join(' ');
     },
-    getCount(): number | string {
-      return this.hideCount === true ? '?' : this.count;
+    claimedToken(): ClaimedToken | undefined {
+      if (this.undergroundToken === undefined) {
+        return undefined;
+      }
+      return {token: this.undergroundToken, shelter: false, active: true};
     },
+
   },
 });
 </script>

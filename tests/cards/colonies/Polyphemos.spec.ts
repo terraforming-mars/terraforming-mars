@@ -7,8 +7,8 @@ import {SelectInitialCards} from '../../../src/server/inputs/SelectInitialCards'
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestingUtils';
 
-describe('Polyphemos', function() {
-  it('Should play', function() {
+describe('Polyphemos', () => {
+  it('Should play', () => {
     const card = new Polyphemos();
     const card2 = new PowerPlant();
     const card3 = new BusinessNetwork();

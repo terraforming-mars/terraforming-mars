@@ -28,7 +28,7 @@
 
     "Greenery": "Obszar Zieleni",
     "City": "Miasto",
-    "Ocean": "Ocean",
+    "Ocean": "",
     "Special": "Specjalny",
 
     "Temperature": "Temperatura",
@@ -117,8 +117,8 @@
     "Hot Keys" : "Skróty klawiszowe",
     "Hotkeys Mapping" : "Mapowanie Skrótów Klawiszowych",
     "Main Board": "Główna Plansza",
-    "Players Overview Table": "Tabele Graczy", 
-    "Cards in Hand": "Karty na Ręce", 
+    "Players Overview Table": "Tabele Graczy",
+    "Cards in Hand": "Karty na Ręce",
     "Colonies": "Kolonie",
     "Fan Expansion Tags": "Symbole z rozszerzeń fanowskich"
 }

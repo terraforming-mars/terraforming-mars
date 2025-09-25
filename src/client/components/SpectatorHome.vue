@@ -13,12 +13,13 @@
       :moonData="game.moon"
       :gameOptions = "game.gameOptions"
       :playerNumber = "spectator.players.length"
-      :lastSoloGeneration = "game.lastSoloGeneration">
-        <div class="deck-size">{{ game.deckSize }}</div>
+      :lastSoloGeneration = "game.lastSoloGeneration"
+      :deckSize = "game.deckSize"
+      :discardPileSize = "game.discardPileSize">
     </sidebar>
 
     <div class="player_home_block nofloat">
-        <log-panel v-if="spectator.id !== undefined" :id="spectator.id" :players="spectator.players" :generation="game.generation" :lastSoloGeneration="game.lastSoloGeneration" :color="spectator.color"></log-panel>
+        <log-panel v-if="spectator.id !== undefined" :viewModel="spectator" :color="spectator.color" :step="game.step"></log-panel>
     </div>
 
     <players-overview class="player_home_block player_home_block--players nofloat" :playerView="spectator" v-trim-whitespace id="shortkey-playersoverview"/>
@@ -26,14 +27,12 @@
     <a name="board" class="player_home_anchor"></a>
     <board
       :spaces="game.spaces"
-      :venusNextExtension="game.gameOptions.venusNextExtension"
+      :expansions="game.gameOptions.expansions"
       :venusScaleLevel="game.venusScaleLevel"
       :boardName ="game.gameOptions.boardName"
       :oceans_count="game.oceans"
       :oxygen_level="game.oxygenLevel"
       :temperature="game.temperature"
-      :aresExtension="game.gameOptions.aresExtension"
-      :pathfindersExpansion="game.gameOptions.pathfindersExpansion"
       :altVenusBoard="game.gameOptions.altVenusBoard"
       :aresData="game.aresData"
       :tileView="tileView"
@@ -43,9 +42,9 @@
 
     <turmoil v-if="game.turmoil" :turmoil="game.turmoil"/>
 
-    <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :tileView="tileView"/>
+    <MoonBoard v-if="game.gameOptions.expansions.moon" :model="game.moon" :tileView="tileView"/>
 
-    <PlanetaryTracks v-if="game.gameOptions.pathfindersExpansion" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
+    <PlanetaryTracks v-if="game.gameOptions.expansions.pathfinders" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
 
     <div v-if="spectator.players.length > 1" class="player_home_block--milestones-and-awards">
         <Milestone :milestones="game.milestones" />
@@ -66,7 +65,7 @@
             <colony :colony="colony" :active="colony.isActive"></colony>
         </div>
       </div>
-        <div v-if="game.gameOptions.pathfindersExpansion">
+        <div v-if="game.gameOptions.expansions.pathfinders">
           <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
         </div>
     </div>

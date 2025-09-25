@@ -104,8 +104,6 @@ export default Vue.extend({
       return classes;
     },
     componentClassArray(): Array<string> {
-      // TODO(kberg): This duplicates CardRenderItemComponent. That shouldn't be
-      // necessary.
       switch (this.type) {
       case RequirementType.OXYGEN:
         return ['card-global-requirement', 'card-oxygen--req'];
@@ -134,7 +132,7 @@ export default Vue.extend({
       case RequirementType.TAG:
         return ['card-resource-tag--S', 'card-tag-' + this.requirement.tag];
       case RequirementType.HABITAT_RATE:
-        return ['card-colony-rate', 'card-colony-rate--req'];
+        return ['card-habitat-rate', 'card-habitat-rate--req'];
       case RequirementType.MINING_RATE:
         return ['card-mining-rate', 'card-mining-rate--req'];
       case RequirementType.LOGISTIC_RATE:
@@ -145,8 +143,8 @@ export default Vue.extend({
         return ['card-tile-lunar-mine--S', 'tile--req'];
       case RequirementType.ROAD_TILES:
         return ['card-tile-lunar-road--S', 'tile--req'];
-      case RequirementType.EXCAVATION:
-        return ['card-excavation req'];
+      case RequirementType.UNDERGROUND_TOKENS:
+        return ['card-underground-resources'];
       case RequirementType.CORRUPTION:
         return ['card-resource', 'card-resource-corruption'];
       case RequirementType.PRODUCTION:
@@ -182,6 +180,7 @@ export default Vue.extend({
       case RequirementType.VENUS:
       case RequirementType.PARTY:
       case RequirementType.REMOVED_PLANTS:
+      case RequirementType.UNDERGROUND_TOKENS:
         return false;
       }
       return this.count > 0 && this.count < 4;

@@ -10,12 +10,12 @@
           {{ n }}
         </div>
       </div>
-      <span class="label-additional" v-if="players.length === 1"><span :class="lastGenerationClass" v-i18n>of {{this.lastSoloGeneration}}</span></span>
+      <span class="label-additional" v-if="players.length === 1"><span :class="lastGenerationClass" v-i18n>of {{lastSoloGeneration}}</span></span>
     </div>
     <div class="panel log-panel">
       <div id="logpanel-scrollable" class="panel-body">
         <ul v-if="messages">
-          <log-message-component v-for="(message, index) in messages" :key="index" :message="message" :players="players" v-on:click="messageClicked(message)"></log-message-component>
+          <log-message-component v-for="(message, index) in messages" :key="index" :message="message" :viewModel="viewModel" v-on:click="messageClicked(message)" @spaceClicked="spaceClicked"></log-message-component>
         </ul>
       </div>
       <div class='debugid'>(debugid {{step}})</div>
@@ -30,14 +30,15 @@ import Vue from 'vue';
 import {paths} from '@/common/app/paths';
 import {statusCode} from '@/common/http/statusCode';
 import {LogMessage} from '@/common/logs/LogMessage';
-import {PublicPlayerModel} from '@/common/models/PlayerModel';
+import {PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
 import {playerColorClass} from '@/common/utils/utils';
 import {Color} from '@/common/Color';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {getPreferences} from '@/client/utils/PreferencesManager';
-import {ParticipantId} from '@/common/Types';
+import {ParticipantId, SpaceId} from '@/common/Types';
 import LogMessageComponent from '@/client/components/logpanel/LogMessageComponent.vue';
 import CardPanel from '@/client/components/logpanel/CardPanel.vue';
+import {isMarsSpace} from '@/common/boards/spaces';
 
 let logRequest: XMLHttpRequest | undefined;
 
@@ -50,17 +51,8 @@ type LogPanelModel = {
 export default Vue.extend({
   name: 'log-panel',
   props: {
-    id: {
-      type: String as () => ParticipantId,
-    },
-    generation: {
-      type: Number,
-    },
-    lastSoloGeneration: {
-      type: Number,
-    },
-    players: {
-      type: Array as () => Array<PublicPlayerModel>,
+    viewModel: {
+      type: Object as () => ViewModel,
     },
     color: {
       type: String as () => Color,
@@ -74,7 +66,7 @@ export default Vue.extend({
   data(): LogPanelModel {
     return {
       messages: [],
-      selectedGeneration: this.generation,
+      selectedGeneration: -1,
       selectedMessage: undefined,
     };
   },
@@ -85,6 +77,29 @@ export default Vue.extend({
   methods: {
     messageClicked(message: LogMessage) {
       this.selectedMessage = message;
+    },
+    spaceClicked(spaceId: SpaceId) {
+      const id = isMarsSpace(spaceId) ? 'shortkey-board' : 'shortkey-moonBoard';
+      const el = document.getElementById(id);
+      el?.scrollIntoView({block: 'center', inline: 'center', behavior: 'auto'});
+
+      const regions = ['main_board', 'moon_board', 'moon_board_outer_spaces'];
+      for (const region of regions) {
+        const board = document.getElementById(region);
+        if (board !== null) {
+          const array = board.getElementsByClassName('board-log-highlight');
+          for (let i = 0, length = array.length; i < length; i++) {
+            const element = array[i] as HTMLElement;
+            if (element.getAttribute('data_log_highlight_id') === spaceId) {
+              element.classList.add('highlight');
+              setTimeout(() => {
+                element.classList.remove('highlight');
+              }, 3000);
+              return;
+            }
+          }
+        }
+      }
     },
     selectGeneration(gen: number): void {
       if (gen !== this.selectedGeneration) {
@@ -153,7 +168,22 @@ export default Vue.extend({
       return this.lastSoloGeneration === this.generation ? 'last-generation blink-animation' : '';
     },
   },
+  computed: {
+    generation(): number {
+      return this.viewModel.game.generation;
+    },
+    lastSoloGeneration(): number {
+      return this.viewModel.game.lastSoloGeneration;
+    },
+    players(): Array<PublicPlayerModel> {
+      return this.viewModel.players;
+    },
+    id(): ParticipantId | undefined {
+      return this.viewModel.id;
+    },
+  },
   mounted() {
+    this.selectedGeneration = this.generation;
     this.getLogsForGeneration(this.generation);
   },
 });

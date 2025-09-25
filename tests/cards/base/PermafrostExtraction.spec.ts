@@ -6,21 +6,21 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {runAllActions, cast, setTemperature} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('PermafrostExtraction', function() {
+describe('PermafrostExtraction', () => {
   let card: PermafrostExtraction;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new PermafrostExtraction();
     [game, player] = testGame(2);
   });
 
-  it('Cannot play', function() {
+  it('Cannot play', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     setTemperature(game, -8);
     expect(card.canPlay(player)).is.true;
 

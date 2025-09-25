@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {MoonSpaces} from '../../../common/moon/MoonSpaces';
+import {NamedMoonSpaces} from '../../../common/moon/NamedMoonSpaces';
 import {TileType} from '../../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
@@ -25,7 +25,7 @@ export class LunaTradeStation extends ActionCard implements IActionCard {
         moon: {
           tile: {
             type: TileType.LUNA_TRADE_STATION,
-            space: MoonSpaces.LUNA_TRADE_STATION,
+            space: NamedMoonSpaces.LUNA_TRADE_STATION,
           },
         },
       },

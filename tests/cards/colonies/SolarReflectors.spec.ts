@@ -3,8 +3,8 @@ import {SolarReflectors} from '../../../src/server/cards/colonies/SolarReflector
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('SolarReflectors', function() {
-  it('Should play', function() {
+describe('SolarReflectors', () => {
+  it('Should play', () => {
     const card = new SolarReflectors();
     const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);

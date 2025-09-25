@@ -6,18 +6,18 @@ import {CardName} from '../../../src/common/cards/CardName';
 import {fakeCard} from '../../TestingUtils';
 import {CardType} from '../../../src/common/cards/CardType';
 
-describe('MartianInsuranceGroup', function() {
+describe('MartianInsuranceGroup', () => {
   let card: MartianInsuranceGroup;
   let player: TestPlayer;
   let player2: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MartianInsuranceGroup();
     [/* game */, player, player2] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
-  it('when you play an event', function() {
+  it('when you play an event', () => {
     const event = fakeCard({name: 'A' as CardName, type: CardType.EVENT});
     expect(player.production.megacredits).eq(0);
     expect(player2.production.megacredits).eq(0);
@@ -26,7 +26,7 @@ describe('MartianInsuranceGroup', function() {
     expect(player2.production.megacredits).eq(0);
   });
 
-  it('when opponent plays an event', function() {
+  it('when opponent plays an event', () => {
     const event = fakeCard({name: 'A' as CardName, type: CardType.EVENT});
     expect(player.production.megacredits).eq(0);
     expect(player2.production.megacredits).eq(0);

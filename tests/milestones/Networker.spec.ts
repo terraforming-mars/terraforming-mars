@@ -5,7 +5,7 @@ import {testGame} from '../TestGame';
 import {addGreenery, addCity, cast, runAllActions} from '../TestingUtils';
 import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {NaturalPreserveAres} from '../../src/server/cards/ares/NaturalPreserveAres';
-import {EmptyBoard} from '../ares/EmptyBoard';
+import {EmptyBoard} from '../testing/EmptyBoard';
 import {Networker} from '../../src/server/milestones/Networker';
 
 describe('Networker', () => {
@@ -28,7 +28,7 @@ describe('Networker', () => {
       networker.getScore(player3)];
   }
 
-  it('Takes action, Networker Milestone does not get a benefit', function() {
+  it('Takes action, Networker Milestone does not get a benefit', () => {
     // Place a tile that grants 1MC adjacency bonuses
     const naturalPreserveAres = new NaturalPreserveAres();
     naturalPreserveAres.play(player2);

@@ -12,7 +12,7 @@ import {AsteroidDeflectionSystem} from '../../../src/server/cards/promo/Asteroid
 import {AsteroidRights} from '../../../src/server/cards/promo/AsteroidRights';
 import {CardResource} from '../../../src/common/CardResource';
 
-describe('DeimosDownAres', function() {
+describe('DeimosDownAres', () => {
   let card: DeimosDownAres;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -28,8 +28,8 @@ describe('DeimosDownAres', function() {
   });
 
   // Identical to the Deimos Down Promo test
-  it('Should play without plants', function() {
-    expect(card.play(player)).is.undefined;
+  it('Should play without plants', () => {
+    cast(card.play(player), undefined);
     runAllActions(game);
     cast(player.popWaitingFor(), SelectSpace);
     expect(player.game.getTemperature()).to.eq(-24);
@@ -39,10 +39,10 @@ describe('DeimosDownAres', function() {
   });
 
   // Identical to the Deimos Down Promo test
-  it('Can remove plants', function() {
+  it('Can remove plants', () => {
     player2.plants = 5;
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     cast(player.popWaitingFor(), SelectSpace);
     expect(player.game.getTemperature()).to.eq(-24);
@@ -58,11 +58,11 @@ describe('DeimosDownAres', function() {
   });
 
   // Identical to the Deimos Down Promo test
-  it('Works fine in solo mode', function() {
+  it('Works fine in solo mode', () => {
     const [game, player] = testGame(1);
 
     player.plants = 15;
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
     cast(player.popWaitingFor(), SelectSpace);
 
@@ -71,7 +71,7 @@ describe('DeimosDownAres', function() {
     expect(player.plants).to.eq(15); // not removed
   });
 
-  it('Adjacency bonus', function() {
+  it('Adjacency bonus', () => {
     card.play(player);
     runAllActions(game);
 
@@ -83,7 +83,7 @@ describe('DeimosDownAres', function() {
     expect(space.adjacency).to.deep.eq({bonus: [SpaceBonus.ASTEROID, SpaceBonus.STEEL]});
   });
 
-  it('Adjacency bonus - Tile Placement - Self', function() {
+  it('Adjacency bonus - Tile Placement - Self', () => {
     player.playedCards.push(new AsteroidDeflectionSystem());
     player2.playedCards.push(new AsteroidRights());
 
@@ -115,7 +115,7 @@ describe('DeimosDownAres', function() {
     expect(player2.getResourceCount(CardResource.ASTEROID)).eq(0);
   });
 
-  it('Adjacency bonus - Tile Placement - Opponent', function() {
+  it('Adjacency bonus - Tile Placement - Opponent', () => {
     player.playedCards.push(new AsteroidDeflectionSystem());
     player2.playedCards.push(new AsteroidRights());
 

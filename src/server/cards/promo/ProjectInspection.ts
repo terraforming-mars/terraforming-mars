@@ -38,7 +38,7 @@ export class ProjectInspection extends Card implements IProjectCard {
       if (isIHasCheckLoops(playedCard) && playedCard.getCheckLoops() >= 2) {
         continue;
       }
-      if (player.getActionsThisGeneration().has(playedCard.name) && playedCard.canAct(player)) {
+      if (player.actionsThisGeneration.has(playedCard.name) && playedCard.canAct(player)) {
         result.push(playedCard);
       }
     }

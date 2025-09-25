@@ -1,6 +1,6 @@
+import * as constants from '../src/common/constants';
 import {expect} from 'chai';
 import {IGame} from '../src/server/IGame';
-import * as constants from '../src/common/constants';
 import {Space} from '../src/server/boards/Space';
 import {Phase} from '../src/common/Phase';
 import {Turmoil} from '../src/server/turmoil/Turmoil';
@@ -10,7 +10,7 @@ import {Log} from '../src/common/logs/Log';
 import {Greens} from '../src/server/turmoil/parties/Greens';
 import {PoliticalAgendas} from '../src/server/turmoil/PoliticalAgendas';
 import {Reds} from '../src/server/turmoil/parties/Reds';
-import {CanPlayResponse, IProjectCard} from '../src/server/cards/IProjectCard';
+import {IProjectCard} from '../src/server/cards/IProjectCard';
 import {CardName} from '../src/common/cards/CardName';
 import {CardType} from '../src/common/cards/CardType';
 import {SpaceId} from '../src/common/Types';
@@ -109,7 +109,7 @@ export function runNextAction(game: IGame) {
 
 export function forceGenerationEnd(game: IGame) {
   while (game.deferredActions.pop() !== undefined) {} // eslint-disable-line no-empty
-  game.getPlayersInGenerationOrder().forEach((player) => player.pass());
+  game.playersInGenerationOrder.forEach((player) => player.pass());
   game.playerIsFinishedTakingActions();
 }
 
@@ -132,7 +132,7 @@ export function formatMessage(message: Message | string): string {
  * @param initialMegacredits starting money
  * @param passingDelta additional money required to take this action when Reds are in power.. Typically a multiple of 3
  */
-export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initialMegacredits: number, passingDelta: number) {
+export function testRedsCosts(cb: () => boolean, player: IPlayer, initialMegacredits: number, passingDelta: number) {
   const turmoil = Turmoil.getTurmoil(player.game);
 
   {
@@ -163,16 +163,21 @@ export function testRedsCosts(cb: () => CanPlayResponse, player: IPlayer, initia
 }
 
 class FakeCard implements IProjectCard {
+  static idx = 0;
+
   public name = 'Fake Card' as CardName;
   public cost = 0;
   public tags = [];
   public requirements = [];
   public warnings = new Set<Warning>();
-  public canPlay(player: IPlayer) {
+  public canPlay(player: IPlayer): boolean {
     if (this.requirements.length === 0) {
       return true;
     }
-    return CardRequirements.compile(this.requirements).satisfies(player);
+    return CardRequirements.compile(this.requirements).satisfies(player, this);
+  }
+  public canPlayPostRequirements(): boolean {
+    return true;
   }
   public play() {
     return undefined;
@@ -192,6 +197,9 @@ class FakeCard implements IProjectCard {
 export function fakeCard(attrs: Partial<IProjectCard> = {}): IProjectCard {
   const card = new FakeCard();
   Object.assign(card, attrs);
+  if (attrs.name === undefined) {
+    card.name = 'Fake Card ' + FakeCard.idx++ as CardName;
+  }
   return card;
 }
 
@@ -225,7 +233,7 @@ export async function sleep(ms: number): Promise<void> {
 
 export function finishGeneration(game: IGame): void {
   const priorGeneration = game.generation;
-  game.getPlayersInGenerationOrder().forEach((player) => {
+  game.playersInGenerationOrder.forEach((player) => {
     game.playerHasPassed(player);
     game.playerIsFinishedTakingActions();
   });
@@ -263,12 +271,4 @@ export function doWait<T>(player: TestPlayer, klass: new (...args: any[]) => T, 
   const [waitingFor, cb] = player.popWaitingFor2();
   f(cast(waitingFor, klass));
   cb?.();
-}
-
-/**
- * Returns the name of any named item. Ideal for iterating with the Array.map and other iterative functions.
- */
-// Use common/utils/utils/toName
-export function toName<T>(item: {name: T}): T {
-  return item.name;
 }

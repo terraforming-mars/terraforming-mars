@@ -80,7 +80,7 @@
 
   "Economic Espionage": "産業スパイ",
   "(Action: Spend 2 M€ to Add 1 data to ANY card.)": "(アクション：2MC支払い、1データ獲得.)",
-  "(1VP for every 3 data here.)": "(このカード上の3データ毎に1VP.)",
+  "1 VP for every 3 data here.": "(このカード上の3データ毎に1VP.)",
 
   "Economic Help": "経済支援",
   "(Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. Increase your M€ production 1 step)": "(影響度が最も低い惑星の影響度+3. 該当するものが複数ある場合、その全ての影響度+2. MC産出+1.)",
@@ -163,8 +163,8 @@
 
   "Oumuamua Type Object Survey": "恒星間小惑星の形状調査",
   "play ": "プレイ ",
-  "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "2ドローし、それを公開する. 1枚目に科学 もしくは 微生物タグがある場合、条件とコストを無視してプレイ. そうでなく宇宙タグがある場合、電力産出+3. いずれのタグもない場合、2枚目で同様の処理をする.",
-  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card. )": "(条件：宇宙タグ1つ以上、科学タグ1つ以上. 2データ獲得)",
+  "Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.": "2ドローし、それを公開する. 1枚目に科学 もしくは 微生物タグがある場合、条件とコストを無視してプレイ. そうでなく宇宙タグがある場合、電力産出+3. いずれのタグもない場合、2枚目で同様の処理をする.",
+  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card.)": "(条件：宇宙タグ1つ以上、科学タグ1つ以上. 2データ獲得)",
 
   "Ozone Generators": "オゾン生成器",
   "(Action: Spend 3 energy to gain 1 TR.)": "(アクション：3電力支払い、TR+1段階.)",

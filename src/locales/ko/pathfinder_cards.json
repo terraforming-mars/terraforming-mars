@@ -80,7 +80,7 @@
 
   "Economic Espionage": "경제적 첩보",
   "(Action: Spend 2 M€ to Add 1 data to ANY card.)": "(행동: 2 M€을 소비해서 아무 카드에 데이터 자원 1개 추가.)",
-  "(1VP for every 3 data here.)": "(게임 종료 시, 이 카드에 놓인 데이터 자원 3개당 승점 1점.)",
+  "1 VP for every 3 data here.": "(게임 종료 시, 이 카드에 놓인 데이터 자원 3개당 승점 1점.)",
 
   "Economic Help": "경제적 지원",
   "(Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. Increase your M€ production 1 step)": "(가장 낮은 행성 영향력 트랙을 3만큼 전진. 최하위가 동률인 경우에는 모두 2만큼 전진. 메가크레딧 생산력 1 증가.)",
@@ -162,8 +162,8 @@
   "(Increase your plant production 2 steps. Gain 1 plant.)": "(식물 생산력 2 증가. 식물 자원 1개 획득.)",
 
   "Oumuamua Type Object Survey": "오무아무아 혜성 조사작업",
-  "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "카드를 앞면으로 2장 펼쳐, 첫 번째 카드가 과학 또는 미생물 태그를 가진 경우, 추진 조건을 무시하고 그 카드를 추진. 그렇지 않고 우주 태그라면, 에너지 생산력 3 증가. 이러한 태그가 3개 모두에도 없다면 두 번째 카드에도 동일하게 적용. 나머지 카드는 모두 손으로 가져옴.",
-  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card. )": "(조건: 과학, 우주 태그 각 1개 이상.) (아무 카드에 데이터 자원 2개 추가.)",
+  "Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.": "카드를 앞면으로 2장 펼쳐, 첫 번째 카드가 과학 또는 미생물 태그를 가진 경우, 추진 조건을 무시하고 그 카드를 추진. 그렇지 않고 우주 태그라면, 에너지 생산력 3 증가. 이러한 태그가 3개 모두에도 없다면 두 번째 카드에도 동일하게 적용. 나머지 카드는 모두 손으로 가져옴.",
+  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card.)": "(조건: 과학, 우주 태그 각 1개 이상.) (아무 카드에 데이터 자원 2개 추가.)",
 
   "Ozone Generators": "오존 생성기",
   "(Action: Spend 3 energy to gain 1 TR.)": "(행동: 에너지 자원 3개를 소비해서 테라포밍 등급 1 TR 상승.)",
@@ -240,7 +240,7 @@
   "Terraforming Robots": "테라포밍 로봇",
   "(Effect: When you play a Mars tag, add 1 specialized robot on this card.)": "(지속 효과: 화성 태그가 있는 카드를 추진할 때마다, 이 카드에 특화 로봇 자원 1개 추가.)",
   "1 VP for every specialized robot on this card.": "이 카드의 특화 로봇 자원마다 승점 1점.",
-  
+
   "Think Tank": "씽크 탱크",
   "(Action: Spend 2 M€ to place 1 data on any card.)": "(행동: 2 M€을 지불하여 아무 카드에 데이터 자원 1개 추가.)",
   "+/-1 global parameter": "±1 행성 지표",

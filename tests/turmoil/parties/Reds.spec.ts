@@ -8,52 +8,52 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {testGame} from '../../TestGame';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 
-describe('Reds', function() {
+describe('Reds', () => {
   let player: TestPlayer;
   let secondPlayer: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     [game, player, secondPlayer] = testGame(2, {turmoilExtension: true});
   });
 
-  it('Ruling bonus 1: The player(s) with the lowest TR gains 1 TR', function() {
+  it('Ruling bonus 1: The player(s) with the lowest TR gains 1 TR', () => {
     player.increaseTerraformRating();
 
-    const secondPlayerInitialTR = secondPlayer.getTerraformRating();
+    const secondPlayerInitialTR = secondPlayer.terraformRating;
     const bonus = REDS_BONUS_1;
     bonus.grant(game);
-    expect(secondPlayer.getTerraformRating()).to.eq(secondPlayerInitialTR + 1);
+    expect(secondPlayer.terraformRating).to.eq(secondPlayerInitialTR + 1);
   });
 
-  it('Ruling bonus 1: Ties for lowest TR are resolved correctly', function() {
-    const initialPlayerTR = player.getTerraformRating();
+  it('Ruling bonus 1: Ties for lowest TR are resolved correctly', () => {
+    const initialPlayerTR = player.terraformRating;
     const bonus = REDS_BONUS_1;
 
     bonus.grant(game);
-    expect(player.getTerraformRating()).to.eq(initialPlayerTR + 1);
-    expect(secondPlayer.getTerraformRating()).to.eq(initialPlayerTR + 1);
+    expect(player.terraformRating).to.eq(initialPlayerTR + 1);
+    expect(secondPlayer.terraformRating).to.eq(initialPlayerTR + 1);
   });
 
-  it('Ruling bonus 2: The player(s) with the highest TR loses 1 TR', function() {
+  it('Ruling bonus 2: The player(s) with the highest TR loses 1 TR', () => {
     player.increaseTerraformRating();
 
-    const playerInitialTR = player.getTerraformRating();
+    const playerInitialTR = player.terraformRating;
     const bonus = REDS_BONUS_2;
     bonus.grant(game);
-    expect(player.getTerraformRating()).to.eq(playerInitialTR - 1);
+    expect(player.terraformRating).to.eq(playerInitialTR - 1);
   });
 
-  it('Ruling bonus 2: Ties for highest TR are resolved correctly', function() {
-    const initialPlayerTR = player.getTerraformRating();
+  it('Ruling bonus 2: Ties for highest TR are resolved correctly', () => {
+    const initialPlayerTR = player.terraformRating;
     const bonus = REDS_BONUS_2;
 
     bonus.grant(game);
-    expect(player.getTerraformRating()).to.eq(initialPlayerTR - 1);
-    expect(secondPlayer.getTerraformRating()).to.eq(initialPlayerTR - 1);
+    expect(player.terraformRating).to.eq(initialPlayerTR - 1);
+    expect(secondPlayer.terraformRating).to.eq(initialPlayerTR - 1);
   });
 
-  it('Ruling policy 1: When you take an action that raises TR, you MUST pay 3 M€ per step raised', function() {
+  it('Ruling policy 1: When you take an action that raises TR, you MUST pay 3 M€ per step raised', () => {
     setRulingParty(game, PartyName.REDS, 'rp01');
 
     player.megaCredits = 3;
@@ -62,7 +62,7 @@ describe('Reds', function() {
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('Ruling policy 2: When you place a tile, pay 3 M€ or as much as possible', function() {
+  it('Ruling policy 2: When you place a tile, pay 3 M€ or as much as possible', () => {
     setRulingParty(game, PartyName.REDS, 'rp02');
 
     player.megaCredits = 3;
@@ -71,7 +71,7 @@ describe('Reds', function() {
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('Ruling policy 3: Pay 4 M€ to reduce a non-maxed global parameter 1 step', function() {
+  it('Ruling policy 3: Pay 4 M€ to reduce a non-maxed global parameter 1 step', () => {
     setRulingParty(game, PartyName.REDS, 'rp03');
 
     const redsPolicy = REDS_POLICY_3;
@@ -88,7 +88,7 @@ describe('Reds', function() {
     expect(redsPolicy.canAct(player)).to.be.false;
   });
 
-  it('Ruling policy 3: Pay 4 M€ to reduce a non-maxed global parameter 1 step: Moon', function() {
+  it('Ruling policy 3: Pay 4 M€ to reduce a non-maxed global parameter 1 step: Moon', () => {
     // Reset the whole game infrastructure to include the Moon
     [game, player, secondPlayer] = testGame(2, {turmoilExtension: true, moonExpansion: true});
     setRulingParty(game, PartyName.REDS, 'rp03');
@@ -113,7 +113,7 @@ describe('Reds', function() {
     expect(MoonExpansion.moonData(game).logisticRate).eq(1);
   });
 
-  it('Ruling policy 4: When you raise a global parameter, decrease your M€ production 1 step per step raised if possible', function() {
+  it('Ruling policy 4: When you raise a global parameter, decrease your M€ production 1 step per step raised if possible', () => {
     setRulingParty(game, PartyName.REDS, 'rp04');
 
     game.increaseOxygenLevel(player, 1);

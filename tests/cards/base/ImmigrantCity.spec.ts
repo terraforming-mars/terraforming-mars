@@ -8,21 +8,21 @@ import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
 
-describe('ImmigrantCity', function() {
+describe('ImmigrantCity', () => {
   let card: ImmigrantCity;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ImmigrantCity();
     [game, player] = testGame(2);
   });
 
-  it('Can not play without energy production', function() {
+  it('Can not play without energy production', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.production.add(Resource.ENERGY, 1);
     const selectSpace = cast(churn(card.play(player), player), SelectSpace);
     selectSpace.cb(selectSpace.spaces[0]);
@@ -37,7 +37,7 @@ describe('ImmigrantCity', function() {
     expect(player.production.megacredits).to.eq(-1);
   });
 
-  it('Can play at -4 M€ production', function() {
+  it('Can play at -4 M€ production', () => {
     player.production.add(Resource.ENERGY, 1);
     player.production.add(Resource.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.true;
@@ -56,8 +56,8 @@ describe('ImmigrantCity', function() {
     expect(player.production.megacredits).to.eq(-4);
   });
 
-  it('Tharsis can play at -5 M€ production', function() {
-    player.corporations.push(new TharsisRepublic());
+  it('Tharsis can play at -5 M€ production', () => {
+    player.playedCards.push(new TharsisRepublic());
     player.production.add(Resource.ENERGY, 1);
     player.production.add(Resource.MEGACREDITS, -5);
     expect(card.canPlay(player)).is.true;

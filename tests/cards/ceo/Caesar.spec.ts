@@ -8,10 +8,10 @@ import {Resource} from '../../../src/common/Resource';
 import {SelectProductionToLose} from '../../../src/server/inputs/SelectProductionToLose';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {AresTestHelper} from '../../ares/AresTestHelper';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Caesar} from '../../../src/server/cards/ceos/Caesar';
 
-describe('Caesar', function() {
+describe('Caesar', () => {
   let card: Caesar;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -27,18 +27,18 @@ describe('Caesar', function() {
     runAllActions(game);
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     expect(card.canAct(player)).is.true;
     card.action(player);
     expect(card.isDisabled).is.true;
     expect(card.canAct(player)).is.false;
   });
 
-  it('Takes action - 5 or less hazards', function() {
+  it('Takes action - 5 or less hazards', () => {
     // Sanity checks
     game.generation = 3;
     let hazards = AresTestHelper.getHazards(player);
-    expect(hazards.length).to.eq(0);
+    expect(hazards).has.length(0);
 
     // Take Caesar OPG, generation X (place X hazards)
     card.action(player);
@@ -52,7 +52,7 @@ describe('Caesar', function() {
 
     // Make sure all 3 hazards were placed
     hazards = AresTestHelper.getHazards(player);
-    expect(hazards.length).to.eq(3);
+    expect(hazards).has.length(3);
     game.deferredActions.runNext();
 
     // Opponents lose 1 production
@@ -63,11 +63,11 @@ describe('Caesar', function() {
     expect(player2.production.plants).eq(startingPlants - 1);
   });
 
-  it('Takes action - more than 5 hazards', function() {
+  it('Takes action - more than 5 hazards', () => {
     game.generation = 6;
     // Sanity check to make sure there are no Hazards on the map
     let hazards = AresTestHelper.getHazards(player);
-    expect(hazards.length).to.eq(0);
+    expect(hazards).has.length(0);
 
     card.action(player);
     expect(game.deferredActions).has.lengthOf(game.generation+1);
@@ -79,7 +79,7 @@ describe('Caesar', function() {
 
     // Make sure there are now 6 hazards
     hazards = AresTestHelper.getHazards(player);
-    expect(hazards.length).to.eq(game.generation);
+    expect(hazards).has.length(game.generation);
     game.deferredActions.runNext();
 
     // Opponents lose 2 production

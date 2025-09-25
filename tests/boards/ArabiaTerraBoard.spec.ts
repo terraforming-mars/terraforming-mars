@@ -15,18 +15,19 @@ import {SelectSpace} from '../../src/server/inputs/SelectSpace';
 import {testGame} from '../TestGame';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {SeededRandom} from '../../src/common/utils/Random';
+import {toID} from '../../src/common/utils/utils';
 
-describe('ArabiaTerraBoard', function() {
+describe('ArabiaTerraBoard', () => {
   let board: ArabiaTerraBoard;
   let game: IGame;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     [game, player/* , player2 */] = testGame(2, {boardName: BoardName.ARABIA_TERRA});
     board = cast(game.board, ArabiaTerraBoard);
   });
 
-  it('sanity test', function() {
+  it('sanity test', () => {
     const board = ArabiaTerraBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     expect(board.spaces).to.deep.eq([
       {'id': '01', 'spaceType': 'colony', 'x': -1, 'y': -1, 'bonus': []},
@@ -92,7 +93,6 @@ describe('ArabiaTerraBoard', function() {
       {'id': '61', 'spaceType': 'land', 'x': 6, 'y': 8, 'bonus': []},
       {'id': '62', 'spaceType': 'land', 'x': 7, 'y': 8, 'bonus': []},
       {'id': '63', 'spaceType': 'land', 'x': 8, 'y': 8, 'bonus': [1]},
-      {'id': '69', 'spaceType': 'colony', 'x': -1, 'y': -1, 'bonus': []},
     ]);
   });
 
@@ -166,7 +166,7 @@ describe('ArabiaTerraBoard', function() {
     const landClaim = new LandClaim();
     const selectSpace = cast(landClaim.play(player), SelectSpace);
     const space = board.getSpaces(SpaceType.COVE)[0];
-    expect(selectSpace.spaces.map((space) => space.id)).contains(space.id);
+    expect(selectSpace.spaces.map(toID)).contains(space.id);
 
     selectSpace.cb(space);
 

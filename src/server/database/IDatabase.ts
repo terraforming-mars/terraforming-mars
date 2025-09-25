@@ -2,6 +2,7 @@ import {IGame, Score} from '../IGame';
 import {GameOptions} from '../game/GameOptions';
 import {GameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
+import {Session, SessionId} from '../auth/Session';
 
 export type GameIdLedger = {gameId: GameId, participantIds: Array<ParticipantId>}
 
@@ -130,4 +131,8 @@ export interface IDatabase {
 
     storeParticipants(entry: GameIdLedger): Promise<void>;
     getParticipants(): Promise<Array<GameIdLedger>>;
+
+    createSession(session: Session): Promise<void>;
+    deleteSession(sessionId: SessionId): Promise<void>;
+    getSessions(): Promise<Array<Session>>;
 }

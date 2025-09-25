@@ -4,20 +4,20 @@ import * as fs from 'fs';
 import {ALL_MODULE_MANIFESTS} from '../cards/AllManifests';
 import {CardManifest, GlobalEventManifest, ModuleManifest} from '../cards/ModuleManifest';
 import {ICard, isIActionCard} from '../cards/ICard';
-import {GameModule} from '../../common/cards/GameModule';
+import {Expansion, GameModule} from '../../common/cards/GameModule';
 import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 import {IClientGlobalEvent} from '../../common/turmoil/IClientGlobalEvent';
 import {ClientCard} from '../../common/cards/ClientCard';
 import {isICorporationCard} from '../cards/corporation/ICorporationCard';
 import {isPreludeCard} from '../cards/prelude/IPreludeCard';
-import {IColonyMetadata} from '../../common/colonies/IColonyMetadata';
+import {ColonyMetadata} from '../../common/colonies/ColonyMetadata';
 import {Units} from '../../common/Units';
 import {ALL_COLONIES_TILES, getColonyModule} from '../colonies/ColonyManifest';
-import {ALL_MILESTONES} from '../milestones/Milestones';
-import {ALL_AWARDS} from '../awards/Awards';
-import {MilestoneAwardMetadata} from '../../common/ma/MilestoneAwardMetadata';
-import {AwardName} from '../../common/ma/AwardName';
-import {MilestoneName} from '../../common/ma/MilestoneName';
+import {milestoneManifest} from '../milestones/Milestones';
+import {awardManifest} from '../awards/Awards';
+import {awardNames} from '../../common/ma/AwardName';
+import {milestoneNames} from '../../common/ma/MilestoneName';
+import {ClientAward, ClientMilestone} from '../../common/ma/ClientMilestoneAward';
 import {CardType} from '../../common/cards/CardType';
 import {OneOrArray} from '../../common/utils/types';
 import {globalInitialize} from '../globalInitialize';
@@ -26,6 +26,21 @@ class CardProcessor {
   public static json: Array<ClientCard> = [];
   public static makeJson() {
     ALL_MODULE_MANIFESTS.forEach(this.processManifest);
+    if (this.errors.length > 0) {
+      console.error(
+        'The following cards have methods which must be replaced.');
+      console.error(this.errors);
+      console.error(
+        'See more at https://github.com/terraforming-mars/terraforming-mars/wiki/API-Changes-2025%E2%80%9006');
+      throw new Error('The ICard and ICorporationCard APIs have changed. Read above.');
+    }
+  }
+
+  private static errors: Array<string> = [];
+  private static validate(card: ICard, methodName: string) {
+    if (Object.keys(card).includes(methodName)) {
+      this.errors.push(`${card.name}: ${methodName}`);
+    }
   }
 
   private static processManifest(manifest: ModuleManifest) {
@@ -43,8 +58,19 @@ class CardProcessor {
     }
   }
 
-  private static processCard(module: GameModule, card: ICard, compatibility: undefined | OneOrArray<GameModule>) {
-    if (card.type === CardType.PROXY) return;
+  private static processCard(module: GameModule, card: ICard, compatibility: undefined | OneOrArray<Expansion>) {
+    if (card.type === CardType.PROXY) {
+      return;
+    }
+
+    this.validate(card, 'onCardPlayedFromAnyPlayer');
+    this.validate(card, 'onIncreaseTerraformRating');
+    this.validate(card, 'onIdentification');
+    this.validate(card, 'onColonyAdded');
+    if (isICorporationCard(card)) {
+      this.validate(card, 'onCardPlayed');
+    }
+
     let startingMegaCredits = undefined;
     let cardCost = undefined;
     if (isPreludeCard(card)) {
@@ -110,7 +136,7 @@ class GlobalEventProcessor {
 }
 
 class ColoniesProcessor {
-  public static json: Array<IColonyMetadata> = [];
+  public static json: Array<ColonyMetadata> = [];
   public static makeJson() {
     ALL_COLONIES_TILES.forEach((entry) => {
       const colony = new entry.Factory();
@@ -118,24 +144,17 @@ class ColoniesProcessor {
     });
   }
 
-  private static processColony(metadata: IColonyMetadata) {
+  private static processColony(metadata: ColonyMetadata) {
     // This seems extraneous but it prevents extra fields from creeping
     // into the JSON. Could do some other form, but this works and matches
     // the patterns above.
-    const clientMetadata: IColonyMetadata = {
+    const clientMetadata: ColonyMetadata = {
       module: getColonyModule(metadata.name),
       name: metadata.name,
-      description: metadata.description,
-      buildType: metadata.buildType,
-      buildQuantity: metadata.buildQuantity,
-      buildResource: metadata.buildResource,
       cardResource: metadata.cardResource,
-      tradeType: metadata.tradeType,
-      tradeQuantity: metadata.tradeQuantity,
-      tradeResource: metadata.tradeResource,
-      colonyBonusType: metadata.colonyBonusType,
-      colonyBonusQuantity: metadata.colonyBonusQuantity,
-      colonyBonusResource: metadata.colonyBonusResource,
+      build: metadata.build,
+      trade: metadata.trade,
+      colony: metadata.colony,
       shouldIncreaseTrack: metadata.shouldIncreaseTrack,
     };
 
@@ -143,22 +162,28 @@ class ColoniesProcessor {
   }
 }
 
-class MAProcessor {
-  public static json: Array<MilestoneAwardMetadata> = [];
+class MilestoneProcessor {
+  public static json: Array<ClientMilestone> = [];
   public static makeJson() {
-    ALL_MILESTONES.forEach((entry) => {
-      MAProcessor.processEntry(entry);
-    });
-
-    ALL_AWARDS.forEach((entry) => {
-      MAProcessor.processEntry(entry);
+    milestoneNames.forEach((name) => {
+      MilestoneProcessor.json.push({
+        name,
+        description: milestoneManifest.createOrThrow(name).description,
+        requirements: milestoneManifest.all[name].compatibility,
+      });
     });
   }
+}
 
-  private static processEntry(metadata: {name: MilestoneName | AwardName, description: string}) {
-    MAProcessor.json.push({
-      name: metadata.name,
-      description: metadata.description,
+class AwardProcessor {
+  public static json: Array<ClientAward> = [];
+  public static makeJson() {
+    awardNames.forEach((name) => {
+      AwardProcessor.json.push({
+        name,
+        description: awardManifest.createOrThrow(name).description,
+        requirements: awardManifest.all[name].compatibility,
+      });
     });
   }
 }
@@ -171,9 +196,11 @@ globalInitialize();
 CardProcessor.makeJson();
 GlobalEventProcessor.makeJson();
 ColoniesProcessor.makeJson();
-MAProcessor.makeJson();
+MilestoneProcessor.makeJson();
+AwardProcessor.makeJson();
 
 fs.writeFileSync('src/genfiles/cards.json', JSON.stringify(CardProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/events.json', JSON.stringify(GlobalEventProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/colonies.json', JSON.stringify(ColoniesProcessor.json, null, 2));
-fs.writeFileSync('src/genfiles/ma.json', JSON.stringify(MAProcessor.json, null, 2));
+fs.writeFileSync('src/genfiles/milestones.json', JSON.stringify(MilestoneProcessor.json, null, 2));
+fs.writeFileSync('src/genfiles/awards.json', JSON.stringify(AwardProcessor.json, null, 2));

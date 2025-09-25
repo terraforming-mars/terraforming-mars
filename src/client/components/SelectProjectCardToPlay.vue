@@ -9,7 +9,20 @@
   </label>
 
   <section v-trim-whitespace>
-    <div v-if="selectedCardHasWarning()" class="card-warning">{{ $t(card.warning) }}</div>
+    <template v-if="card.additionalProjectCosts">
+      <div v-if="card.additionalProjectCosts.aeronGenomicsResources" class="card-warning"
+        v-i18n="[$t(card.name), card.additionalProjectCosts.thinkTankResources, 'animals', $t(CardName.AERON_GENOMICS)]"
+      >
+        Playing ${0} consumes ${1} ${2} from ${3}
+      </div>
+      <div v-if="card.additionalProjectCosts.thinkTankResources" class="card-warning"
+        v-i18n="[$t(card.name), card.additionalProjectCosts.thinkTankResources, 'data', $t(CardName.THINK_TANK)]">
+        Playing ${0} consumes ${1} ${2} from ${3}
+      </div>
+      <div v-if="card.additionalProjectCosts.redsCost" class="card-warning" v-i18n="[$t(card.name), card.additionalProjectCosts.redsCost, $t('Reds')]">
+        Playing ${0} will cost ${1} M€ more because ${2} are in power
+      </div>
+    </template>
     <warnings-component :warnings="card.warnings"></warnings-component>
 
     <h3 class="payments_title" v-i18n>How to pay?</h3>
@@ -25,8 +38,8 @@
           @minus="reduceValue(unit)"
           @max="setMaxValue(unit)">
         </payment-unit-component>
-        <div v-if="showReserveWarning(unit)" class="card-warning" v-i18n>
-        (Some {{unit}} are unavailable here in reserve for the project card.)
+        <div v-if="showReserveWarning(unit)" class="card-warning" v-i18n="$t(unit)">
+        (Some ${0} are unavailable here in reserve for the project card.)
         </div>
       </div>
     </template>
@@ -99,8 +112,10 @@ export default Vue.extend({
         'seeds',
         'graphene',
         'megaCredits',
-        'corruption',
       ];
+    },
+    CardName(): typeof CardName {
+      return CardName;
     },
   },
   data(): SelectProjectCardToPlayDataModel {
@@ -140,7 +155,6 @@ export default Vue.extend({
       this.cost = this.card.calculatedCost ?? 0;
       this.tags = this.getCardTags(),
       this.reserveUnits = this.card.reserveUnits ?? Units.EMPTY;
-      this.payment.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
       this.setDefaultValues();
     });
@@ -158,23 +172,6 @@ export default Vue.extend({
       return getCardOrThrow(this.cardName).tags;
     },
     setDefaultValues() {
-      for (const target of SPENDABLE_RESOURCES) {
-        if (target === 'megaCredits') {
-          continue;
-        }
-        this.payment[target] = 0;
-      }
-
-      // Automatically use as many MC as possible, saving the rest for special resources.
-      //
-      // If the player wanted to maximize all standard resources / card resources, that line would have to be
-      // let megacreditBalance = this.cost;
-      // along with the last line in the function setting the MC value.
-      //
-      let megacreditBalance = Math.max(this.cost - this.thisPlayer.megaCredits, 0);
-
-      // console.log(this.cost, this.thisPlayer.megaCredits, megacreditBalance);
-
       // Calculates the optimal number of units to use given the unit value.
       //
       // It reads `megacreditBalance` as the remaining balance, and deducts the
@@ -214,7 +211,33 @@ export default Vue.extend({
         return toSaveUnits;
       }
 
-      for (const unit of ['seeds', 'microbes', 'floaters', 'lunaArchivesScience', 'graphene', 'corruption'] as const) {
+      for (const target of SPENDABLE_RESOURCES) {
+        this.payment[target] = 0;
+      }
+      // This is defined down here, but is used in the functions above.
+      let megacreditBalance = this.cost;
+
+      // Prioritize special resource types that are only ever used for buying cards.
+      // Of course this runs the risk of a player not having special resources for some award,
+      // milestone, or requirement.
+      for (const unit of ['seeds', 'lunaArchivesScience', 'graphene'] as const) {
+        if (megacreditBalance > 0 && this.canUse(unit)) {
+          this.payment[unit] = deductUnits(this.getAvailableUnits(unit), this.getResourceRate(unit), false);
+        }
+      }
+
+      // Set MC payment after knowning how much of other resources are consumed
+      this.payment.megaCredits = Math.max(0, Math.min(this.thisPlayer.megaCredits, megacreditBalance));
+
+      // console.log('units: ' + JSON.stringify(this.payment, null, 2));
+      // console.log('balance', megacreditBalance);
+
+      // Use as much MC as possible.
+      megacreditBalance = Math.max(megacreditBalance - this.thisPlayer.megaCredits, 0);
+
+      // console.log('balance', megacreditBalance);
+
+      for (const unit of ['microbes', 'floaters'] as const) {
         if (megacreditBalance > 0 && this.canUse(unit)) {
           this.payment[unit] = deductUnits(this.getAvailableUnits(unit), this.getResourceRate(unit));
         }
@@ -256,7 +279,6 @@ export default Vue.extend({
           'seeds',
           'graphene',
           'lunaArchivesScience',
-          'corruption',
           'megaCredits'] as const) {
           this.payment[key] -= saveOverspendingUnits(this.payment[key], this.getResourceRate(key));
         }
@@ -294,8 +316,6 @@ export default Vue.extend({
       case 'graphene':
         return this.tags.includes(Tag.SPACE) ||
             this.tags.includes(Tag.CITY);
-      case 'corruption':
-        return this.tags.includes(Tag.EARTH) && this.playerinput.paymentOptions.corruption === true;
       default:
         throw new Error('Unknown unit ' + unit);
       }
@@ -317,7 +337,6 @@ export default Vue.extend({
       this.cost = this.card.calculatedCost || 0;
       this.tags = this.getCardTags();
       this.reserveUnits = this.card.reserveUnits ?? Units.EMPTY;
-      this.payment.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
       this.setDefaultValues();
     },
@@ -330,9 +349,6 @@ export default Vue.extend({
     },
     hasWarning(): boolean {
       return this.warning !== undefined;
-    },
-    selectedCardHasWarning(): boolean {
-      return this.card !== undefined && this.card.warning !== undefined;
     },
     showReserveWarning(unit: SpendableResource): boolean {
       switch (unit) {

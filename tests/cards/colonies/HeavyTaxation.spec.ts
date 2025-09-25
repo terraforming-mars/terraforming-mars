@@ -3,8 +3,8 @@ import {HeavyTaxation} from '../../../src/server/cards/colonies/HeavyTaxation';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('HeavyTaxation', function() {
-  it('Should play', function() {
+describe('HeavyTaxation', () => {
+  it('Should play', () => {
     const card = new HeavyTaxation();
     const [/* game */, player] = testGame(1);
     expect(card.canPlay(player)).is.not.true;

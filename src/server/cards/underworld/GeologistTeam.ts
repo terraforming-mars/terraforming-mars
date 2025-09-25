@@ -14,14 +14,14 @@ export class GeologistTeam extends ActionCard implements IProjectCard {
       type: CardType.ACTIVE,
       name: CardName.GEOLOGIST_TEAM,
       cost: 6,
-      tags: [Tag.MARS, Tag.SCIENCE],
+      tags: [Tag.SCIENCE],
 
       action: {
         underworld: {identify: 1},
       },
 
       metadata: {
-        cardNumber: 'U01',
+        cardNumber: 'U001',
         renderData: CardRenderer.builder((b) => {
           b.action('Identify 1 underground resource.',
             (ab) => ab.empty().startAction.identify(1));
@@ -33,7 +33,7 @@ export class GeologistTeam extends ActionCard implements IProjectCard {
     });
   }
 
-  public onIdentification(_identifyingPlayer: IPlayer | undefined, cardOwner: IPlayer, space: Space) {
+  public onIdentificationByAnyPlayer(cardOwner: IPlayer, _identifyingPlayer: IPlayer | undefined, space: Space) {
     if (space.undergroundResources === 'ocean') {
       if (cardOwner.canAfford({cost: 0, tr: {tr: 1}})) {
         cardOwner.increaseTerraformRating(1, {log: true});

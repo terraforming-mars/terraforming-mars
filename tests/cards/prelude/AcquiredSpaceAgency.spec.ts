@@ -3,8 +3,8 @@ import {AcquiredSpaceAgency} from '../../../src/server/cards/prelude/AcquiredSpa
 import {Tag} from '../../../src/common/cards/Tag';
 import {testGame} from '../../TestingUtils';
 
-describe('AcquiredSpaceAgency', function() {
-  it('Should play', function() {
+describe('AcquiredSpaceAgency', () => {
+  it('Should play', () => {
     const card = new AcquiredSpaceAgency();
     const [/* game*/, player] = testGame(1);
     card.play(player);

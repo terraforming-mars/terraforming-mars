@@ -562,14 +562,20 @@ export enum CardName {
 
   ICY_IMPACTORS = 'Icy Impactors',
   SOIL_ENRICHMENT = 'Soil Enrichment',
-  CITY_PARK = 'City Park',
+  CITY_PARKS = 'City Parks',
   SUPERMARKETS = 'Supermarkets',
   HOSPITALS = 'Hospitals',
   PUBLIC_BATHS = 'Public Baths',
-
-  // Promo from contest
-  FLOYD_CONTINUUM = 'Floyd Continuum',
+  PROTECTED_GROWTH = 'Protected Growth',
+  VERMIN = 'Vermin',
   CASINOS = 'Casinos',
+  PUBLIC_PLANS = 'Public Plans',
+  STATIC_HARVESTING = 'Static Harvesting',
+
+  // Promo cards from Dutch Open
+  FLOYD_CONTINUUM = 'Floyd Continuum',
+  NEW_HOLLAND = 'New Holland',
+  POLDERTECH_DUTCH = 'PolderTECH Dutch',
 
   // End of promo cards
 
@@ -945,7 +951,7 @@ export enum CardName {
   DEEPMINING = 'Deepmining',
   BEHEMOTH_EXCAVATOR = 'Behemoth Excavator',
   LOBBYING_NETWORK = 'Lobbying Network',
-  CONCESSION_RIGHTS = 'Concession Rights',
+  TUNNELING_LOOPHOLE = 'Tunneling Loophole',
   ORBITAL_LASER_DRILL = 'Orbital Laser Drill',
   GREY_MARKET_EXPLOITATION = 'Grey Market Exploitation',
   EXCAVATOR_LEASING = 'Excavator Leasing',
@@ -994,9 +1000,9 @@ export enum CardName {
   MARTIAN_EXPRESS = 'Martian Express',
   EXPEDITION_VEHICLES = 'Expedition Vehicles',
   CUT_THROAT_BUDGETING = 'Cut-throat Budgeting',
-  GEOLOGICAL_SURVEY_UNDERWORLD = 'Geological Survey:underworld',
+  CANYON_SURVEY = 'Canyon Survey',
   CLASS_ACTION_LAWSUIT = 'Class-action Lawsuit',
-  MERCENARY_ASSAULT = 'Mercenary Assault',
+  MERCENARY_SQUAD = 'Mercenary Squad',
   RESEARCH_DEVELOPMENT_HUB = 'Research & Development Hub',
   PLANETARY_RIGHTS_BUYOUT = 'Planetary Rights Buyout',
   MEDIA_FRENZY = 'Media Frenzy',
@@ -1004,6 +1010,17 @@ export enum CardName {
   WHALES = 'Whales',
   GUERILLA_ECOLOGISTS = 'Guerilla Ecologists',
   THIOLAVA_VENTS = 'Thiolava Vents',
+  DETECTIVE_TV_SERIES = 'Detective TV Series',
+  RACKETEERING = 'Racketeering',
+  GAS_TRUST = 'Gas Trust',
+  STING_OPERATION = 'Sting Operation',
+  FAMILY_CONNECTIONS = 'Family Connections',
+  BIOBATTERIES = 'Biobatteries',
+  EXPORT_CONVOY = 'Export Convoy',
+  ACIDIZING = 'Acidizing',
+  EXPLOITATION_OF_VENUS = 'Exploitation Of Venus',
+  DEEP_FOUNDATIONS = 'Deep Foundations',
+
   // Underworld Corporations
   HADESPHERE = 'Hadesphere',
   DEMETRON_LABS = 'Demetron Labs',

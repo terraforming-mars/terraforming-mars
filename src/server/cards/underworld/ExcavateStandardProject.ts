@@ -34,7 +34,7 @@ export class ExcavateStandardProject extends StandardProjectCard {
   }
 
   public override canAct(player: IPlayer): boolean {
-    if (UnderworldExpansion.excavatableSpaces(player).length === 0) {
+    if (!UnderworldExpansion.canExcavateN(player, 1)) {
       return false;
     }
     return super.canAct(player);

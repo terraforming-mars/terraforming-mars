@@ -201,6 +201,12 @@ export default (Vue as WithRefs<Refs>).extend({
       let starting = corporation.startingMegaCredits ?? 0;
       const cardCost = corporation.cardCost === undefined ? constants.CARD_COST : corporation.cardCost;
       starting -= this.selectedCards.length * cardCost;
+
+      if (corpName === CardName.SAGITTA_FRONTIER_SERVICES) {
+        // Effect for playing itself.
+        starting += 4;
+      }
+
       return starting;
     },
     saveIfConfirmed() {

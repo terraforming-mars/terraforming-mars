@@ -1,7 +1,6 @@
 import {CardModel} from './CardModel';
 import {Color} from '../Color';
-import {IVictoryPointsBreakdown} from '../game/IVictoryPointsBreakdown';
-import {TagCount} from '../cards/TagCount';
+import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
 import {PlayerInputModel} from './PlayerInputModel';
 import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
@@ -10,6 +9,8 @@ import {CardName} from '../cards/CardName';
 import {Resource} from '../Resource';
 import {PartyName} from '../turmoil/PartyName';
 import {Agenda} from '../turmoil/Types';
+import {Tag} from '../cards/Tag';
+import {UnderworldPlayerData} from '../underworld/UnderworldPlayerData';
 
 export interface ViewModel {
   game: GameModel;
@@ -34,6 +35,7 @@ export type PublicPlayerModel = {
   actionsTakenThisRound: number;
   actionsThisGeneration: ReadonlyArray<CardName>;
   actionsTakenThisGame: number;
+  alliedParty?: AlliedPartyModel;
   availableBlueCardActionCount: number;
   cardCost: number;
   cardDiscount: number;
@@ -41,11 +43,10 @@ export type PublicPlayerModel = {
   citiesCount: number;
   coloniesCount: number;
   color: Color;
-  corruption: number,
   energy: number;
   energyProduction: number;
-  excavations: number,
   fleetSize: number;
+  handicap: number | undefined;
   heat: number;
   heatProduction: number;
   id: PlayerId | undefined;
@@ -67,16 +68,16 @@ export type PublicPlayerModel = {
   steel: number;
   steelProduction: number;
   steelValue: number;
-  tags: ReadonlyArray<TagCount>;
+  tags: Record<Tag, number>
   terraformRating: number;
   timer: TimerModel;
   titanium: number;
   titaniumProduction: number;
   titaniumValue: number;
   tradesThisGeneration: number;
-  victoryPointsBreakdown: IVictoryPointsBreakdown;
+  underworldData: UnderworldPlayerData,
+  victoryPointsBreakdown: VictoryPointsBreakdown;
   victoryPointsByGeneration: ReadonlyArray<number>;
-  alliedParty?: AlliedPartyModel;
 }
 
 /** A player's view of the game, including their secret information. */

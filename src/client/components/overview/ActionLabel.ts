@@ -1,8 +1,2 @@
-export enum ActionLabel {
-    ACTIVE = 'active',
-    PASSED = 'passed',
-    NEXT = 'next',
-    NONE = 'none',
-    DRAFTING = 'drafting',
-    RESEARCHING = 'researching',
-}
+// Labels describing the player's current state
+export type ActionLabel = 'active' | 'passed' | 'next' | 'none' | 'drafting' | 'researching';

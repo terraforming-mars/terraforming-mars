@@ -10,7 +10,7 @@ import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 import {SerializedCard} from '../../SerializedCard';
 import {ICard} from '../ICard';
 
-export class Aridor extends CorporationCard {
+export class Aridor extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ARIDOR,
@@ -50,7 +50,7 @@ export class Aridor extends CorporationCard {
     return undefined;
   }
 
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     ColoniesHandler.addColonyTile(
       player,
       {title: 'Aridor first action - Select colony tile to add'},
@@ -63,24 +63,18 @@ export class Aridor extends CorporationCard {
       const currentSize = this.allTags.size;
       this.allTags.add(tag);
       if (this.allTags.size > currentSize) {
-        player.game.log('${0} gained 1 M€ production from ${1} for ${2}', (b) => b.player(player).card(this).string(tag));
-        player.production.add(Resource.MEGACREDITS, 1, {log: true});
+        player.game.log('${0} gained 1 M€ production from ${1} for the ${2} tag',
+          (b) => b.player(player).card(this).string(tag));
+        player.production.add(Resource.MEGACREDITS, 1);
       }
     }
   }
 
-  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
-    return this.onCardPlayed(player, card);
+  public onNonCardTagAdded(player: IPlayer, tag: Tag) {
+    this.processTags(player, [tag]);
   }
 
-  public onColonyAddedToLeavitt(player: IPlayer) {
-    this.processTags(player, [Tag.SCIENCE]);
-  }
-
-  public onCardPlayed(player: IPlayer, card: ICard) {
-    if (!player.isCorporation(this.name)) {
-      return;
-    }
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
     this.processTags(player, this.tagsForCard(card));
   }
 

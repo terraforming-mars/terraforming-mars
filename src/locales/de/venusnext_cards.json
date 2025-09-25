@@ -1,5 +1,5 @@
 {
-  "% Venus": "% Venus",
+  "% Venus": "",
 
   "Stratospheric Birds": "Stratosphären-Vögel",
   "Action: Add 1 animal to this card.": "AKTION: Füge dieser Karte 1 Tier hinzu.",
@@ -33,7 +33,7 @@
 
   "Thermophiles": "Thermophile",
   "Action: Add 1 microbe to ANY Venus CARD.": "AKTION: Füge einer BELIEBIGEN Venus-Karte 1 Mikrobe hinzu.",
-  "Action: Spend 2 microbes here to raise Venus 1 step.": "AKTION: Entferne 2 Mikroben von dieser Karte, um die Venuswertung um 2% zu erhöhen.",
+  "Action: Remove 2 microbes to raise Venus 1 step": "AKTION: Entferne 2 Mikroben, um die Venuswertung um 2% zu erhöhen.",
 
   "Sponsored Academies": "Gesponsorte Akademien",
   "Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card.": "Wirf eine Karte von deiner Hand ab, DANN ziehe 3 Karten. Alle MITSPIELER ziehen 1 Karte.",
@@ -47,18 +47,18 @@
   "Terraforming Contract": "Terraforming-Vertrag",
   "Requires that you have at least 25 TR. Increase your M€ production 4 steps.": "Erfordert, dass dein TW mindestens 25 beträgt. Erhöhe deine M€-Produktion um 4.",
 
-  "Solarnet": "Solarnet",
+  "Solarnet": "",
   "Requires Venus, Earth and Jovian tags. Draw 2 cards.": "Erfordert Venus-, Erd- und Jupitersymbole. Ziehe 2 Karten.",
 
   "Atalanta Planitia Lab": "Atalanta-Planitia-Labor",
   "Requires 3 science tags. Draw 2 cards.": "Erfordert 3 Wissenschaftssymbole. Ziehe 2 Karten.",
 
   "Rotator Impacts": "Rotatoren-Einschlag",
-  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "AKTION: Bezahle 6 M€, um dieser Karte eine Asteroiden-Ressource hinzuzufügen [TITAN KANN VERWENDET WERDEN].",
+  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "AKTION: Bezahle 6 M€, um dieser Karte eine Asteroiden-Ressource hinzuzufügen (Titan darf benutzt werden).",
   "Action: Spend 1 resource from this card to increase Venus 1 step.": "AKTION: Entferne 1 Ressource von dieser Karte, um die Venuswertung um 2% zu erhöhen.",
   "Venus must be 14% or lower": "Venuswertung muss 14% oder niedriger sein",
 
-  "Omnicourt": "Omnicourt",
+  "Omnicourt": "",
   "Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.": "Erfordert Venus-, Erd- und Jupitersymbole. Erhöhe deine TW um 2.",
 
   "Jet Stream Microscrappers": "Jet-Stream-Mikrostanzer",
@@ -126,7 +126,7 @@
   "Giant Solar Shade": "Gigantischer Sonnenschatten",
   "Raise Venus 3 steps.": "Erhöhe die Venuswertung um 6%.",
 
-  "Gyropolis": "Gyropolis",
+  "Gyropolis": "",
   "Decrease your energy production 2 steps. Increase your M€ production 1 step for each Venus and Earth tag you have. Place a city tile.": "Senke deine Energie-Produktion um 2. Erhöhe deine M€-Produktion um 1 für jedes Venus- und Erdsymbol, das du besitzt. Platziere ein Stadtteilchen.",
 
   "Io Sulphur Research": "Io-Sulfurforschung",
@@ -136,7 +136,7 @@
   "8% Venus": "8% Venuswertung",
   "Requires Venus 8%. Increase your titanium production 1 step.": "Erfordert Venuswertung von 8%. Erhöhe deine Titan-Produktion um 1.",
 
-  "Luna Metropolis": "Luna Metropolis",
+  "Luna Metropolis": "",
   "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.": "Erhöhe deine M€-Produktion um 1 für jedes Erdsymbol, das du besitzt (inklusive diesem). Platziere ein Stadtplättchen auf dem RESERVIERTEN FELD.",
 
   "Local Shading": "Lokaler Schatten",
@@ -150,7 +150,7 @@
   "Venus Earth": "Venus Erde",
   "Requires Venus and Earth tags. Increase your M€ production 3 steps.": "Erfordert Venus- und Erdsymbole. Erhöhe deine M€-Produktion um 3.",
 
-  "Stratopolis": "Stratopolis",
+  "Stratopolis": "",
   "Action: Add 2 floaters to ANY VENUS CARD.": "AKTION: Füge einer BELIEBIGEN VENUS-KARTE 2 Schweber hinzu.",
   "1 VP for every 3rd Floater on this card.": "1 SP für jeden dritten Schweber auf dieser Karte.",
   "Requires 2 science tags. Increase your M€ production 2 steps. Place a city tile ON THE RESERVED AREA": "Erfordert 2 Wissenschaftssymbole. Erhöhe deine M€-Produktion um 2. Platziere ein Stadtplättchen auf dem RESERVIERTEN FELD.",

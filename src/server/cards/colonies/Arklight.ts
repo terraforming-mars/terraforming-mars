@@ -2,11 +2,12 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
-import {IProjectCard} from '../IProjectCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {ICard} from '../ICard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Arklight extends CorporationCard {
+export class Arklight extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ARKLIGHT,
@@ -17,7 +18,6 @@ export class Arklight extends CorporationCard {
 
       behavior: {
         production: {megacredits: 2},
-        addResources: 1,
       },
 
       metadata: {
@@ -36,9 +36,15 @@ export class Arklight extends CorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard): void {
-    if (player.isCorporation(CardName.ARKLIGHT)) {
-      player.addResourceTo(this, {qty: card.tags.filter((cardTag) => cardTag === Tag.ANIMAL || cardTag === Tag.PLANT).length, log: true});
+  public onNonCardTagAdded(player: IPlayer, tag: Tag): void {
+    if (tag === Tag.PLANT) {
+      player.addResourceTo(this, {qty: 1, log: true});
+    }
+  }
+  public onCardPlayedForCorps(player: IPlayer, card: ICard): void {
+    const qty = card.tags.filter((cardTag) => cardTag === Tag.ANIMAL || cardTag === Tag.PLANT).length;
+    if (qty > 0) {
+      player.addResourceTo(this, {qty: qty, log: true});
     }
   }
 }

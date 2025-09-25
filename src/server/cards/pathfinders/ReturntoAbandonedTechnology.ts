@@ -26,7 +26,7 @@ export class ReturntoAbandonedTechnology extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: IPlayer) {
-    return player.game.projectDeck.discardPile.length > 0;
+    return player.game.projectDeck.discardPile.length >= 4;
   }
 
   public override bespokePlay(player: IPlayer) {

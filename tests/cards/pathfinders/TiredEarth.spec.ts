@@ -1,18 +1,16 @@
 import {expect} from 'chai';
-import {AcquiredCompany} from '../../../src/server/cards/base/AcquiredCompany';
 import {TiredEarth} from '../../../src/server/cards/pathfinders/TiredEarth';
 import {testGame} from '../../TestingUtils';
 
-describe('TiredEarth', function() {
-  it('resolve play', function() {
+describe('TiredEarth', () => {
+  it('resolve play', () => {
     const card = new TiredEarth();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;
 
     turmoil.initGlobalEvent(game);
-    player.playedCards.push(new AcquiredCompany());
-    player2.playedCards.push(new AcquiredCompany());
-    player2.playedCards.push(new AcquiredCompany());
+    player.tagsForTest = {earth: 1};
+    player2.tagsForTest = {earth: 2};
 
     player.plants = 20;
     player2.plants = 20;

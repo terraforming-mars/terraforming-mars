@@ -2,20 +2,20 @@ import {expect} from 'chai';
 import {Midas} from '../../../src/server/cards/community/Midas';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('Midas', function() {
+describe('Midas', () => {
   let card: Midas;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Midas();
     player = TestPlayer.BLUE.newPlayer();
   });
 
-  it('Starts with correct TR', function() {
-    const initialTR = player.getTerraformRating();
+  it('Starts with correct TR', () => {
+    const initialTR = player.terraformRating;
 
     card.play(player);
-    player.corporations.push(card);
-    expect(player.getTerraformRating()).to.eq(initialTR - 7);
+    player.playedCards.push(card);
+    expect(player.terraformRating).to.eq(initialTR - 7);
   });
 });

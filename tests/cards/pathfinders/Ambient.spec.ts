@@ -14,48 +14,53 @@ import {Reds} from '../../../src/server/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/server/turmoil/PoliticalAgendas';
 import {toName} from '../../../src/common/utils/utils';
 
-describe('Ambient', function() {
+describe('Ambient', () => {
   let card: Ambient;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Ambient();
     [game, player, player2] = testGame(2);
-    player.corporations.push(card);
   });
 
-  it('initialAction', function() {
-    expect(game.getVenusScaleLevel()).eq(0);
-    expect(player.getTerraformRating()).eq(20);
+  it('play', () => {
+    player.playCorporationCard(card);
+    expect(player.production.heat).eq(1);
+  });
 
-    player.deferInitialAction(card);
+  it('initialAction', () => {
+    expect(game.getVenusScaleLevel()).eq(0);
+    expect(player.terraformRating).eq(20);
+
+    player.defer(card.initialAction(player));
     runAllActions(game);
 
     expect(game.getVenusScaleLevel()).eq(4);
-    expect(player.getTerraformRating()).eq(22);
+    expect(player.terraformRating).eq(22);
   });
 
-  it('onCardPlayed', function() {
+  it('effect', () => {
+    player.playedCards.push(card);
     expect(player.production.heat).eq(0);
 
-    card.onCardPlayed(player, fakeCard({tags: []}));
+    player.playCard(fakeCard({tags: []}));
     expect(player.production.heat).eq(0);
 
-    card.onCardPlayed(player, fakeCard({tags: [Tag.EARTH]}));
+    player.playCard(fakeCard({tags: [Tag.EARTH]}));
     expect(player.production.heat).eq(0);
 
-    card.onCardPlayed(player, fakeCard({tags: [Tag.VENUS]}));
+    player.playCard(fakeCard({tags: [Tag.VENUS]}));
     expect(player.production.heat).eq(1);
     expect(player2.production.heat).eq(0);
 
-    card.onCardPlayed(player2, fakeCard({tags: [Tag.VENUS]}));
+    player2.playCard(fakeCard({tags: [Tag.VENUS]}));
     expect(player.production.heat).eq(1);
     expect(player2.production.heat).eq(0);
   });
 
-  it('canAct', function() {
+  it('canAct', () => {
     player.heat = 7;
     setTemperature(game, MAX_TEMPERATURE);
 
@@ -75,20 +80,21 @@ describe('Ambient', function() {
     player.heat = 9;
     setTemperature(game, MAX_TEMPERATURE);
 
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     card.action(player);
 
     expect(player.heat).eq(1);
     expect(game.getTemperature()).eq(MAX_TEMPERATURE);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
   });
 
   it('action is repeatable', () => {
+    player.playedCards.push(card);
     player.heat = 16;
     setTemperature(game, MAX_TEMPERATURE);
 
-    const getBlueActions = function() {
+    const getBlueActions = () => {
       const orOptions = cast(player.getActions(), OrOptions);
       const option = orOptions.options.find((o) => o.title === 'Perform an action from a played card');
       return option === undefined ? undefined : cast(option, SelectCard);
@@ -96,13 +102,13 @@ describe('Ambient', function() {
 
     expect(getBlueActions()!.cards.map(toName)).deep.eq([card.name]);
 
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     getBlueActions()!.cb([card]);
 
     expect(player.heat).eq(8);
     expect(game.getTemperature()).eq(MAX_TEMPERATURE);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
 
     expect(getBlueActions()).is.undefined;
     runAllActions(game);
@@ -112,7 +118,7 @@ describe('Ambient', function() {
 
     expect(player.heat).eq(0);
     expect(game.getTemperature()).eq(MAX_TEMPERATURE);
-    expect(player.getTerraformRating()).eq(22);
+    expect(player.terraformRating).eq(22);
 
     expect(getBlueActions()).is.undefined;
     runAllActions(game);
@@ -127,7 +133,7 @@ describe('Ambient', function() {
   for (const run of redsRuns) {
     it('is compatible with Reds + Helion ' + JSON.stringify(run), () => {
       [game, player, player2] = testGame(2, {turmoilExtension: true});
-      player.corporations.push(card);
+      player.playedCards.push(card);
       player.canUseHeatAsMegaCredits = true;
       player.game.phase = Phase.ACTION;
       const turmoil = Turmoil.getTurmoil(game);

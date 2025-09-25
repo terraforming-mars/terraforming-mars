@@ -77,7 +77,7 @@
   "Space Port Colony":"太空港殖民地",
   "Colony":"殖民地",
   "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.":"需要1个殖民地，放置1个殖民地,可以放置在你已经放置过的殖民地版图上,获得1支交易舰队",
-  "1VP per 2 colonies in play.":"每2个殖民地获得1VP",
+  "1 VP per 2 colonies in play.":"每2个殖民地获得1VP",
 
   "Trade Envoys":"贸易特使",
 
@@ -182,12 +182,11 @@
   "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.":"需求：4个科技标志。场上每有1块殖民地，你的金钱产量便+1。",
   "Requires 3 science tags. Draw 2 cards.":"需求：3个科技标志。抽2张牌。",
   "Rim Freighters":"里姆货船",
-  "Refugee Camps":"难民营",
   "Solar Probe":"太阳探测器",
   "Draw 1 card for every 3 science tags you have, including this.":"每有3个科技标志（包括此牌），便摸1张牌。",
   "Space Port":"太空港",
   "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a city tile. Gain 1 Trade Fleet.":"需求：1块殖民地。你的电力产量-1，金钱产量+4。放置1座城市。获得1艘贸易飞船。",
-  "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet. 1VP per 2 colonies in play.":"需求：1块殖民地。放置1块殖民地。可以放在你已经拥有殖民地的那块殖民地板块上。获得1艘贸易飞船。每有2块殖民地算1分。",
+  "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet. 1 VP per 2 colonies in play.":"需求：1块殖民地。放置1块殖民地。可以放在你已经拥有殖民地的那块殖民地板块上。获得1艘贸易飞船。每有2块殖民地算1分。",
   "Spin-off Department":"副产品部门",
   "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.":"效果：打出1张原始费用为20或更多的牌时，摸1张牌。",
 

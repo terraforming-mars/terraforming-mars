@@ -10,7 +10,7 @@ import {Ants} from '../../../src/server/cards/base/Ants';
 import {Birds} from '../../../src/server/cards/base/Birds';
 import {Capital} from '../../../src/server/cards/base/Capital';
 
-describe('JunkVentures', function() {
+describe('JunkVentures', () => {
   let card: JunkVentures;
   let player: TestPlayer;
   let game: IGame;
@@ -21,7 +21,7 @@ describe('JunkVentures', function() {
     player.playCorporationCard(card);
   });
 
-  it('Cannot act', function() {
+  it('Cannot act', () => {
     expect(game.projectDeck.discardPile).is.empty;
     expect(card.canAct(player)).is.false;
 
@@ -35,7 +35,7 @@ describe('JunkVentures', function() {
     expect(card.canAct(player)).is.true;
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     const ants = new Ants();
     const birds = new Birds();
     const capital = new Capital();

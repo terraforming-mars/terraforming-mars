@@ -1,10 +1,10 @@
 <template>
   <div class="pathfinders_cont">
-    <div class="track track-background-venus" v-if="gameOptions.venusNextExtension">
+    <div class="track track-background-venus" v-if="tracks.venus >= 0">
       <div class="track-tag track-tag-venus"></div>
       <table class="track-venus">
-        <PlanetaryTrack type='risingPlayer' v-if="gameOptions.venusNextExtension" :val="tracks.venus" :rewards="rewards.venus" :gameOptions="gameOptions" />
-        <PlanetaryTrack type='everyone' v-if="gameOptions.venusNextExtension" :val="tracks.venus" :rewards="rewards.venus" :gameOptions="gameOptions" />
+        <PlanetaryTrack type='risingPlayer' :val="tracks.venus" :rewards="rewards.venus" :gameOptions="gameOptions" />
+        <PlanetaryTrack type='everyone' :val="tracks.venus" :rewards="rewards.venus" :gameOptions="gameOptions" />
       </table>
     </div>
 
@@ -32,11 +32,11 @@
       </table>
     </div>
 
-    <div class="track track-background-moon" v-if="gameOptions.moonExpansion">
+    <div class="track track-background-moon" v-if="tracks.moon >= 0">
       <div class="track-tag track-tag-moon"></div>
       <table class="track-moon">
-        <PlanetaryTrack type='risingPlayer' v-if="gameOptions.moonExpansion" :val="tracks.moon" :rewards="rewards.moon" :gameOptions="gameOptions" />
-        <PlanetaryTrack type='everyone' v-if="gameOptions.moonExpansion" :val="tracks.moon" :rewards="rewards.moon" :gameOptions="gameOptions" />
+        <PlanetaryTrack type='risingPlayer' :val="tracks.moon" :rewards="rewards.moon" :gameOptions="gameOptions" />
+        <PlanetaryTrack type='everyone' :val="tracks.moon" :rewards="rewards.moon" :gameOptions="gameOptions" />
       </table>
     </div>
 

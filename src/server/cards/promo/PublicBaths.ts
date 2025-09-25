@@ -24,7 +24,7 @@ export class PublicBaths extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(6);
         }),
-        description: 'Requires 6 oceans. Gain 6 M€',
+        description: 'Requires 6 oceans. Gain 6 M€.',
       },
     });
   }

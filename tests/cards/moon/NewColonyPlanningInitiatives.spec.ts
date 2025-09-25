@@ -23,19 +23,19 @@ describe('NewColonyPlanningInitiatives', () => {
     player.megaCredits = card.cost;
 
     moonData.habitatRate = 2;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     moonData.habitatRate = 1;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {
     moonData.habitatRate = 2;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     card.play(player);
 
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(moonData.habitatRate).eq(3);
   });
 });

@@ -6,7 +6,7 @@
     "(Action: Spend 1 steel and 1 energy to gain 3 plants.)": "(ACTIE: Verbruik 1 staal en 1 energie om 3 planten te krijgen.)",
     "(Requires -18° C or warmer.)": "(Vereist een temperatuur van -18 °C of warmer.)",
 
-    "Anthozoa": "Anthozoa",
+    "Anthozoa": "",
     "(Action: Spend 1 plant to add an animal to this card.)": "(ACTIE: Verbruik 1 plant om 1 dier aan deze kaart toe te voegen.)",
     "(Requires 3 oceans on Mars. 1 VP per 2 animals on this card.)": "(Vereist 3 oceaantegels. 1 OP voor elke 2 dieren op deze kaart.)",
 
@@ -74,7 +74,7 @@
 
     "Economic Espionage": "Bedrijfsspionage",
     "(Action: Spend 2 M€ to Add 1 data to ANY card.)": "(ACTIE: Betaal 2 M€ om 1 data toe te voegen aan een willekeurige kaart.)",
-    "(1VP for every 3 data here.)": "(1 OP voor elke 3 data op deze kaart.)",
+    "1 VP for every 3 data here.": "(1 OP voor elke 3 data op deze kaart.)",
 
     "Economic Help": "Economische hulp",
     "(Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. Increase your M€ production 1 step)": "(Verhoog het laagste planetaire invloedsspoor 3 stappen. In het geval van een gelijkspel, verplaats alle laagste fiches met 2 stappen. Verhoog je M€-productie met 1.)",
@@ -83,7 +83,7 @@
     "(Draw 2 cards. Raise Venus 1 step. Gain 1M€ for each of your Venus tags, including this.)": "(Trek 2 kaarten. Verhoog Venus met 2%. Verdien 1 M€ voor elk Venussymbool dat je bezit (inclusief deze).)",
 
     "Flat Mars Theory": "Platte Mars-theorie",
-    "GENERATION": "Generation",
+    "GENERATION": "",
     "(Requires maximum 1 science tag. Increase your M€ production 1 step for every generation played so far.)": "(Vereist 1 of minder van je eigen Wetenschapssymbolen. Verhoog je M€-productie met 1 per gespeelde generatie, inclusief de huidige.)",
 
     "Floater-Urbanism": "Floater stedenbouw",
@@ -107,7 +107,7 @@
     "Interplanetary Transport": "Interplanetair transport",
     "(Increase your M€ production 1 step for every offworld city tile.)": "(Verhoog je M€-productie met 1 stap voor elke stadstegel buiten de wereld.)",
 
-    "Kickstarter": "Kickstarter",
+    "Kickstarter": "",
     "(Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 3 steps in total.)": "Kies een planeetsymbool. Deze kaart telt als het hebben van dit symbool. Verhoog het corresponderende planetenspoor met in totaal 3 stappen in plaats van 1.",
 
     "Last Resort Ingenuity": "Improvisatietalent",
@@ -156,8 +156,8 @@
     "(Increase your plant production 2 steps. Gain 1 plant.)": "(Verhoog je plantproductie met 2. Ontvang 1 plant.)",
 
     "Oumuamua Type Object Survey": "Oumuamua-onderzoek",
-    "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "(Trek 2 kaarten. Als de eerste een wetenschaps- of microbesymbool heeft, speel deze dan (negeer de voorwaarden). Zo niet, en het heeft een ruimtesymbool, verhoog dan je energieproductie met 3. Als er niets van toepassing is, doe dan hetzelfde voor de 2e kaart.)",
-    "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card. )": "(Vereist 1 eigen ruimte- en wetenschapssymbool. Voeg 2 data toe aan een willekeurige kaart.)",
+    "Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.": "(Trek 2 kaarten. Als de eerste een wetenschaps- of microbesymbool heeft, speel deze dan (negeer de voorwaarden). Zo niet, en het heeft een ruimtesymbool, verhoog dan je energieproductie met 3. Als er niets van toepassing is, doe dan hetzelfde voor de 2e kaart.)",
+    "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card.)": "(Vereist 1 eigen ruimte- en wetenschapssymbool. Voeg 2 data toe aan een willekeurige kaart.)",
 
     "Ozone Generators": "Ozongenerator",
     "(Action: Spend 3 energy to gain 1 TR.)": "(ACTIE: besteed 3 energie om je TW met 1 te verhogen.)",
@@ -213,7 +213,7 @@
     "Solar Storm": "Zonnestorm",
     "(Every player loses 2 plants. Remove up to 3 data from any player. Raise your heat production 1 step. Raise the temperature 1 step.)": "(Verhoog de temperatuur met 2°C. Verhoog je warmteproductie met 1. Verwijder maximaal 3 data van een andere speler. Alle spelers verliezen 2 planten.)",
 
-    "Solarpedia": "Solarpedia",
+    "Solarpedia": "",
     "(Action: Add 2 data to ANY card.)": "(ACTIE: voeg 2 data toe aan een willekeurige kaart.)",
     "(Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.)": "(Vereist 1 Venus-, Aarde-, Mars- en Jupitersymbool. Voeg 2 data toe aan een willekeurige kaart. 1 OP voor elke 6 data op die kaart.)",
 
@@ -241,7 +241,7 @@
     "1 VP per 2 Venus tags you have.": "1 OP voor elk 2 eigen Venussymbolen.",
     "Requires Unity is ruling or that you have 2 delegates there. Raise your M€ production 3 steps and place a city tile ON THE RESERVED AREA.": "Vereist regerende partij: EENHEID of 2+ eigen afgevaardigden daar. Verhoog je M€-productie met 3. Plaats een stadstegel op het gereserveerde gebied.",
 
-    "Wetlands": "Wetlands",
+    "Wetlands": "",
     "(Requires 2 ocean tiles. Lose 4 plants. Place this tile on an UNRESERVED SPACE ADJACENT TO AT LEAST 2 OCEANS. Raise oxygen 1 step. Gain 1 TR.)": "(Vereist 2 oceaantegels. Verbruikt 4 planten. Verhoog de zuurstof met 1%. Verhoog je TW met 1. Plaats deze tegel naast 2 oceaantegels.)",
     "(Effect: Wetlands counts as a greenery tile and an ocean tile, except it can't be covered and is not one of the 9 oceans required to end the game.)": "(EFFECT: Het telt als een groentegel en een oceaantegel. Andere tegels kunnen het niet bedekken en het telt niet mee voor de 9 te plaatsen oceanen.)"
 }

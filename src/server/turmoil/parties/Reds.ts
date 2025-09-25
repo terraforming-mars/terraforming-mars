@@ -27,19 +27,19 @@ class RedsBonus01 extends Bonus {
 
   getScore(player: IPlayer) {
     const game = player.game;
-    const players = [...game.getPlayersInGenerationOrder()];
+    const players = [...game.playersInGenerationOrder];
 
-    if (game.isSoloMode() && players[0].getTerraformRating() <= 20) return 1;
+    if (game.isSoloMode() && players[0].terraformRating <= 20) return 1;
 
-    players.sort((p1, p2) => p1.getTerraformRating() - p2.getTerraformRating());
-    const min = players[0].getTerraformRating();
+    players.sort((p1, p2) => p1.terraformRating - p2.terraformRating);
+    const min = players[0].terraformRating;
 
-    if (player.getTerraformRating() === min) return 1;
+    if (player.terraformRating === min) return 1;
     return 0;
   }
 
   override grant(game: IGame) {
-    const players = game.getPlayersInGenerationOrder();
+    const players = game.playersInGenerationOrder;
     const scores = players.map((player) => this.getScore(player));
 
     players.forEach((player, idx) => {
@@ -62,19 +62,19 @@ class RedsBonus02 implements IBonus {
 
   getScore(player: IPlayer) {
     const game = player.game;
-    const players = [...game.getPlayersInGenerationOrder()];
+    const players = [...game.playersInGenerationOrder];
 
-    if (game.isSoloMode() && players[0].getTerraformRating() > 20) return -1;
+    if (game.isSoloMode() && players[0].terraformRating > 20) return -1;
 
-    players.sort((p1, p2) => p2.getTerraformRating() - p1.getTerraformRating());
-    const max = players[0].getTerraformRating();
+    players.sort((p1, p2) => p2.terraformRating - p1.terraformRating);
+    const max = players[0].terraformRating;
 
-    if (player.getTerraformRating() === max) return -1;
+    if (player.terraformRating === max) return -1;
     return 0;
   }
 
   grant(game: IGame) {
-    const players = game.getPlayersInGenerationOrder();
+    const players = game.playersInGenerationOrder;
     const scores = players.map((player) => this.getScore(player));
 
     players.forEach((player, idx) => {
@@ -94,7 +94,7 @@ class RedsPolicy02 implements IPolicy {
 
   onTilePlaced(player: IPlayer) {
     let amountPlayerHas = player.megaCredits;
-    if (player.isCorporation(CardName.HELION)) amountPlayerHas += player.heat;
+    if (player.tableau.has(CardName.HELION)) amountPlayerHas += player.heat;
 
     const amountToPay = Math.min(amountPlayerHas, 3);
     if (amountToPay > 0) {

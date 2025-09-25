@@ -5,8 +5,8 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {cast, runAllActions} from '../../TestingUtils';
 
-describe('MoholeArea', function() {
-  it('Should play', function() {
+describe('MoholeArea', () => {
+  it('Should play', () => {
     const card = new MoholeArea();
     const [game, player] = testGame(2);
     card.play(player);

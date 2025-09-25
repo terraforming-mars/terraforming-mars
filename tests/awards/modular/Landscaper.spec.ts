@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Landscaper} from '../../../src/server/awards/modular/Landscaper';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
@@ -19,8 +19,8 @@ describe('Landscaper Award with Board Setup', () => {
     award = new Landscaper();
   });
 
-  it('Counts largest connected group of tiles', function() {
-    const colonySpaces = game.board.getSpaces(SpaceType.COLONY, player);
+  it('Counts largest connected group of tiles', () => {
+    const colonySpaces = game.board.getSpaces(SpaceType.COLONY);
     const landSpaces = game.board.getAvailableSpacesOnLand(player);
 
     game.simpleAddTile(player, landSpaces[0], {tileType: TileType.CITY});

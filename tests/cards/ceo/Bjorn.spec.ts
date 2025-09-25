@@ -6,7 +6,7 @@ import {testGame} from '../../TestGame';
 import {Bjorn} from '../../../src/server/cards/ceos/Bjorn';
 import {LawSuit} from '../../../src/server/cards/promo/LawSuit';
 
-describe('Bjorn', function() {
+describe('Bjorn', () => {
   let card: Bjorn;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -22,14 +22,14 @@ describe('Bjorn', function() {
     stealValue = game.generation + 2;
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     card.action(player);
     forceGenerationEnd(game);
     expect(card.isDisabled).is.true;
     expect(card.canAct(player)).is.false;
   });
 
-  it('Takes OPG action, Everyone is richer than me, and has more MC than Current Generation+2.  Steal the maximum amount of MC', function() {
+  it('Takes OPG action, Everyone is richer than me, and has more MC than Current Generation+2.  Steal the maximum amount of MC', () => {
     player.megaCredits = 10;
     player2.megaCredits = 20;
     player3.megaCredits = 30;
@@ -41,7 +41,7 @@ describe('Bjorn', function() {
     expect(player4.megaCredits).eq(40-stealValue);
   });
 
-  it('Takes OPG action, two players have more money than me and one has less', function() {
+  it('Takes OPG action, two players have more money than me and one has less', () => {
     player.megaCredits = 10;
     player2.megaCredits = 0;
     player3.megaCredits = 30;
@@ -53,7 +53,7 @@ describe('Bjorn', function() {
     expect(player4.megaCredits).eq(40-stealValue);
   });
 
-  it('Takes OPG action, First player has plenty of MC, Second player has more MC than me but _less than the current generation_, third player is broke', function() {
+  it('Takes OPG action, First player has plenty of MC, Second player has more MC than me but _less than the current generation_, third player is broke', () => {
     player.megaCredits = 5;
     player2.megaCredits = 40; // Steal stealValue from this player
     player3.megaCredits = 7; // Steal 7 (everything) from this player
@@ -65,7 +65,7 @@ describe('Bjorn', function() {
     expect(player4.megaCredits).eq(3);
   });
 
-  it('Takes OPG action, Everybody has more money than me, but less than current generation, steal as much as possible', function() {
+  it('Takes OPG action, Everybody has more money than me, but less than current generation, steal as much as possible', () => {
     player.megaCredits = 0;
     player2.megaCredits = 5;
     player3.megaCredits = 5;
@@ -77,7 +77,7 @@ describe('Bjorn', function() {
     expect(player4.megaCredits).eq(0);
   });
 
-  it('Takes OPG action, but nobody has more money than me.', function() {
+  it('Takes OPG action, but nobody has more money than me.', () => {
     player.megaCredits = 10;
     player2.megaCredits = 2;
     player3.megaCredits = 3;

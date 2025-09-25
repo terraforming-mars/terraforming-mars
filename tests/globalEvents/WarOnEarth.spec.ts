@@ -3,8 +3,8 @@ import {WarOnEarth} from '../../src/server/turmoil/globalEvents/WarOnEarth';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('WarOnEarth', function() {
-  it('resolve play', function() {
+describe('WarOnEarth', () => {
+  it('resolve play', () => {
     const card = new WarOnEarth();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;
@@ -18,7 +18,7 @@ describe('WarOnEarth', function() {
     player2.setTerraformRating(15);
 
     card.resolve(game, turmoil);
-    expect(player.getTerraformRating()).to.eq(11);
-    expect(player2.getTerraformRating()).to.eq(14);
+    expect(player.terraformRating).to.eq(11);
+    expect(player2.terraformRating).to.eq(14);
   });
 });

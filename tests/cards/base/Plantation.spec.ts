@@ -1,31 +1,30 @@
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {expect} from 'chai';
 import {cast, runAllActions, setOxygenLevel, testRedsCosts} from '../../TestingUtils';
-import {InventorsGuild} from '../../../src/server/cards/base/InventorsGuild';
 import {Plantation} from '../../../src/server/cards/base/Plantation';
 import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('Plantation', function() {
+describe('Plantation', () => {
   let card: Plantation;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Plantation();
     [game, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('canPlay', () => {
+    player.tagsForTest = {science: 1};
     expect(card.canPlay(player)).is.not.true;
+    player.tagsForTest = {science: 2};
+    expect(card.canPlay(player)).is.true;
   });
 
-  it('Should play', function() {
-    player.playedCards.push(new InventorsGuild(), new InventorsGuild());
-    expect(card.canPlay(player)).is.true;
-
-    expect(card.play(player)).is.undefined;
+  it('Should play', () => {
+    cast(card.play(player), undefined);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);
     action.cb(action.spaces[0]);

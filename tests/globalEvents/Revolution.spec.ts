@@ -7,14 +7,14 @@ import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestingUtils';
 
-describe('Revolution', function() {
+describe('Revolution', () => {
   let card: Revolution;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
   let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Revolution();
     [game, player, player2] = testGame(2, {turmoilExtension: true});
     turmoil = game.turmoil!;
@@ -24,20 +24,20 @@ describe('Revolution', function() {
     turmoil.dominantParty.delegates.add(player2);
   });
 
-  it('resolve play', function() {
+  it('resolve play', () => {
     player.playedCards.push(new Sponsors());
     player2.playedCards.push(new Sponsors());
 
     card.resolve(game, turmoil);
-    expect(player.getTerraformRating()).to.eq(19);
-    expect(player2.getTerraformRating()).to.eq(18);
+    expect(player.terraformRating).to.eq(19);
+    expect(player2.terraformRating).to.eq(18);
   });
 
-  it('doesn not reduce TR for players with 0 Earth tags + influence', function() {
+  it('doesn not reduce TR for players with 0 Earth tags + influence', () => {
     player2.playedCards.push(new Sponsors());
 
     card.resolve(game, turmoil);
-    expect(player.getTerraformRating()).to.eq(20);
-    expect(player2.getTerraformRating()).to.eq(18);
+    expect(player.terraformRating).to.eq(20);
+    expect(player2.terraformRating).to.eq(18);
   });
 });

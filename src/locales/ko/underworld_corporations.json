@@ -4,15 +4,14 @@
 "Aeron Genomics": "",
 "Effect: After you excavate an underground resource, put an animal on this card.": "",
 "Action: Spend 1 M€ to move an animal from here to another card.": "",
-"You start with 35 M€, 5 steel, and 1 animal resource on this card. 1 VP per 3 animals on this card.": "",
+"// You start with 35 M€, 5 steel, and 1 animal resource on this card. 1 VP per 3 animals on this card.": "",
 
 "ANUBIS SECURITIES": "",
 "Anubis Securities": "",
-"Effect: When any player increases their TR by 1, they gain 2 M€.": "",
-"PAYS": "",
-"At the end of the production phase, discard all your corruption and gain 6 M€ for each unit discarded. Then, each player must pay you 1 M€ per unit of corruption they have. If no one has any, gain 1 TR instead.": "",
+"// Effect: When any player increases their TR by 1, they gain 2 M€.": "",
+"// At the end of the production phase, discard all your corruption and gain 6 M€ for each unit discarded. Then, each player must pay you 1 M€ per unit of corruption they have. If no one has any, gain 1 TR instead.": "",
 "You start with 42 M€. As your first action, play a card ignoring global requirements.": "",
-  
+
 "ARBORIST COLLECTIVE": "",
 "Arborist Collective": "",
 "Effect: After you play an event card with a base cost of 14 or less, put an activist resource on this card.": "",
@@ -21,10 +20,9 @@
 
 "DEMETRON LABS": "",
 "Demetron Labs": "",
-"Placement Bonus": "",
-"Effect: After you identify 1 or more underground resources in a single action EXCEPT BY EXCAVATING, put 1 data on ANY card": "",
-"Action: Spend 3 data here and pick a space on Mars with no tile. Gain its placement bonus, and no adjacency bonuses.": "",
-"You start with 45 M€ and 3 data on this card.": "",
+"After you play a science tag, including this, put 2 data on this card.": "",
+"Action: Spend 3 data here to identify 3 underground resources. Claim 1 of them.": "",
+"You start with 45 M€ and 2 data on this card.": "",
 
 "HADESPHERE": "",
 "Hadesphere": "",
@@ -41,9 +39,8 @@
 
 "HENKEI GENETICS": "",
 "Henkei Genetics": "",
-"Effect: After you play a microbe card that can hold microbes, add 2 microbes to it.": "",
-"Action: Pay 1 corruption to draw a card with a microbe tag.": "",
-"You start with 47 M€ and 1 corruption.": "",
+"// Action: Pay 1 corruption to draw a card with a microbe tag.": "",
+"// You start with 47 M€ and 1 corruption.": "",
 
 "JENSON-BOYLE & CO": "",
 "Jenson-Boyle & Co": "",
@@ -53,17 +50,17 @@
 "KEPLERTEC": "",
 "Keplertec": "",
 "Action: Spend 1 titanium to put a fighter resource on ANY card.": "",
-"Effect: When you place a fighter resource on this card, draw 4 random underground resource tokens. Pick one of them and claim the reward on it. Then shuffle the tokens back into the pile.": "",
+"Effect: When you place a fighter on this card, identify 4 underground resources FROM THE PILE. Claim 1. Shuffle the remaining tokens back into the pile.": "",
 "You start with 33 M€, 3 titanium, and 1 titanium production.": "",
 
 "KINGDOM OF TAURARO": "",
 "Kingdom of Tauraro": "",
-"Effect: You may place cities adjacent to other cities. You must always place cities adjacent to tiles you already own, if possible.": "",
+"// Effect: You may place cities adjacent to other cities. You must always place cities adjacent to tiles you already own, if possible.": "",
 "You start with 50 M€ and 6 M€ production. All opponents gain 2 M€ production. As your first action, place a city.": "",
 
 "VOLTAGON": "",
 "Voltagon": "",
-"Effect: After you excavate an underground resource, gain 2 energy.": "",
+"Effect: After you claim an underground resource, gain 2 energy.": "",
 "Action: Spend 8 energy to increase oxygen or Venus 1 step.": "",
 "You start with 38 M€ and 1 energy production.": ""
 

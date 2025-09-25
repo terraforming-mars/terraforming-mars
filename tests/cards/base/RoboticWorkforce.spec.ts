@@ -8,14 +8,13 @@ import {Capital} from '../../../src/server/cards/base/Capital';
 import {FoodFactory} from '../../../src/server/cards/base/FoodFactory';
 import {NoctisFarming} from '../../../src/server/cards/base/NoctisFarming';
 import {RoboticWorkforce} from '../../../src/server/cards/base/RoboticWorkforce';
-import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCoordination';
 import {UtopiaInvest} from '../../../src/server/cards/turmoil/UtopiaInvest';
 import {Tag} from '../../../src/common/cards/Tag';
 import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {ALL_RESOURCES, Resource} from '../../../src/common/Resource';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {runNextAction, cast, runAllActions, addCity, addOcean} from '../../TestingUtils';
+import {runNextAction, cast, runAllActions, addCity, addOcean, fakeCard} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {ICard} from '../../../src/server/cards/ICard';
 import {TestPlayer} from '../../TestPlayer';
@@ -162,7 +161,7 @@ describe('RoboticWorkforce', () => {
 
   it('Should play with corporation cards', () => {
     const corporationCard = new UtopiaInvest();
-    player.corporations.push(corporationCard);
+    player.playedCards.push(corporationCard);
 
 
     cast(card.play(player), undefined);
@@ -306,8 +305,6 @@ describe('RoboticWorkforce', () => {
     });
 
     const testCard = function(card: ICard) {
-      const researchCoordination = new ResearchCoordination();
-
       let include = false;
       if ((card.tags.includes(Tag.BUILDING) || card.tags.includes(Tag.WILD)) && card.play !== undefined) {
         // Create new players, set all productions to 2
@@ -334,7 +331,7 @@ describe('RoboticWorkforce', () => {
         expect(game.deferredActions).has.lengthOf(0);
 
         // Make sure to trigger any tag based production
-        player.playedCards.push(...Array(5).fill(researchCoordination));
+        player.playedCards.push(fakeCard({tags: [Tag.WILD, Tag.WILD, Tag.WILD, Tag.WILD, Tag.WILD]}));
 
         if (card.name === CardName.LUNAR_MINE_URBANIZATION) {
           game.moonData!.moon.spaces[4].tile = {tileType: TileType.MOON_MINE};
@@ -344,8 +341,7 @@ describe('RoboticWorkforce', () => {
         player.game.board.getAvailableSpacesOnLand(player)[0].excavator = player;
         if (card.name === CardName.DEEPMINING) {
           const space = player.game.board.getAvailableSpacesOnLand(player)[1];
-          space.undergroundResources = 'nothing';
-          space.bonus = [SpaceBonus.STEEL];
+          space.undergroundResources = 'steel2';
         }
 
         if (isICorporationCard(card)) {

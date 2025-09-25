@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {PublicSpaceline} from '../../../src/server/cards/underworld/PublicSpaceline';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
+import {Tag} from '../../../src/common/cards/Tag';
 
 describe('PublicSpaceline', () => {
   it('Can play', () => {
@@ -25,13 +26,12 @@ describe('PublicSpaceline', () => {
 
     player.playedCards.push(card);
 
-    expect(player.tags.countAllTags()).to.have.deep.members([
-      {tag: 'earth', count: 2},
-      {tag: 'jovian', count: 2},
-      {tag: 'venus', count: 2},
-      {tag: 'mars', count: 2},
-      {tag: 'event', count: 0},
-    ]);
+    const counts = player.tags.countAllTags();
+    expect(counts[Tag.EARTH]).eq(2);
+    expect(counts[Tag.JOVIAN]).eq(2);
+    expect(counts[Tag.VENUS]).eq(2);
+    expect(counts[Tag.MARS]).eq(2);
+    expect(counts[Tag.EVENT]).eq(0);
     expect(player.production.megacredits).eq(2);
   });
 });

@@ -6,7 +6,7 @@ import {TileType} from '../../src/common/TileType';
 import {testGame} from '../TestGame';
 import {IGame} from '../../src/server/IGame';
 
-describe('LunarMagnate', function() {
+describe('LunarMagnate', () => {
   let player: TestPlayer;
   let game: IGame;
   let otherPlayer: TestPlayer;
@@ -15,7 +15,7 @@ describe('LunarMagnate', function() {
     [game, player, otherPlayer] = testGame(2, {moonExpansion: true});
   });
 
-  it('Basic test', function() {
+  it('Basic test', () => {
     const award = new LunarMagnate();
     expect(award.getScore(player)).eq(0);
     MoonExpansion.addTile(player, 'm01', {tileType: TileType.MOON_MINE});
@@ -37,7 +37,7 @@ describe('LunarMagnate', function() {
     expect(award.getScore(otherPlayer)).eq(1);
   });
 
-  it('Comatible with Hostile Takeover', function() {
+  it('Comatible with Hostile Takeover', () => {
     const award = new LunarMagnate();
     MoonExpansion.addTile(player, 'm01', {tileType: TileType.MOON_MINE});
 

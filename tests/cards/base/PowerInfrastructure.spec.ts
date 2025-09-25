@@ -3,21 +3,21 @@ import {testGame} from '../../TestGame';
 import {PowerInfrastructure} from '../../../src/server/cards/base/PowerInfrastructure';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('PowerInfrastructure', function() {
+describe('PowerInfrastructure', () => {
   let card: PowerInfrastructure;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new PowerInfrastructure();
     [/* game */, player] = testGame(2);
   });
 
-  it('Can not act', function() {
+  it('Can not act', () => {
     card.play(player);
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.energy = 1;
     expect(card.canAct(player)).is.true;
     const action = card.action(player);

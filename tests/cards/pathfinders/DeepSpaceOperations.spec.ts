@@ -5,16 +5,16 @@ import {Units} from '../../../src/common/Units';
 import {Tag} from '../../../src/common/cards/Tag';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('DeepSpaceOperations', function() {
+describe('DeepSpaceOperations', () => {
   let card: DeepSpaceOperations;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DeepSpaceOperations();
     [/* game */, player] = testGame(1);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
 
     expect(player.production.asUnits()).deep.eq(Units.EMPTY);

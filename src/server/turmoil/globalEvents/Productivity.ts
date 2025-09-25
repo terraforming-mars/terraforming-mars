@@ -23,8 +23,13 @@ export class Productivity extends GlobalEvent implements IGlobalEvent {
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      player.stock.add(Resource.STEEL, Math.min(5, player.production.steel) + turmoil.getPlayerInfluence(player), {log: true, from: this.name});
+    game.playersInGenerationOrder.forEach((player) => {
+      player.stock.add(
+        Resource.STEEL,
+        Math.min(5, player.production.steel) +
+          turmoil.getInfluence(player),
+        {log: true, from: {globalEvent: this}},
+      );
     });
   }
 }

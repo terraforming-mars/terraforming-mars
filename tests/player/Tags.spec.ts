@@ -3,11 +3,12 @@ import {Tag} from '../../src/common/cards/Tag';
 import {IPlayer} from '../../src/server/IPlayer';
 import {TestPlayer} from '../TestPlayer';
 import {Tags} from '../../src/server/player/Tags';
-import {isICorporationCard} from '../../src/server/cards/corporation/ICorporationCard';
-import {fakeCard} from '../TestingUtils';
+import {fakeCard, testGame} from '../TestingUtils';
 import {CardType} from '../../src/common/cards/CardType';
 import {CardName} from '../../src/common/cards/CardName';
-import {newCard} from '../../src/server/createCard';
+import {newCard, newProjectCard} from '../../src/server/createCard';
+import {GameOptions} from '../../src/server/game/GameOptions';
+import {Odyssey} from '../../src/server/cards/pathfinders/Odyssey';
 
 // Exposes rawCount available for testing.
 class TestableTags extends Tags {
@@ -19,7 +20,7 @@ class TestableTags extends Tags {
   }
 }
 
-describe('Tags', function() {
+describe('Tags', () => {
   let player: IPlayer;
   let tags: TestableTags;
 
@@ -30,11 +31,7 @@ describe('Tags', function() {
 
   function playFakeCorporation(...tags: Array<Tag>) {
     const card = fakeCard({type: CardType.CORPORATION, tags: tags});
-    if (isICorporationCard(card)) {
-      player.corporations.push(card);
-    } else {
-      throw new Error('Internal error while making a fake corporation card)');
-    }
+    player.playedCards.push(card);
   }
 
   function playFakeEvent(...tags: Array<Tag>) {
@@ -61,9 +58,71 @@ describe('Tags', function() {
     });
   }
 
+  it('count ignores event', () => {
+    const [_, player] = testGame(1);
+    const card = fakeCard({tags: [Tag.JOVIAN]});
+    player.playedCards.push(card);
+
+    expect(player.tags.count(Tag.JOVIAN)).eq(1);
+
+    const event = fakeCard({type: CardType.EVENT, tags: [Tag.JOVIAN]});
+    player.playedCards.set(event);
+
+    expect(player.tags.count(Tag.JOVIAN)).eq(0);
+  });
+
+  it('count and distinctCount for Odyssey', () => {
+    const [_, player] = testGame(1);
+    const event = fakeCard({type: CardType.EVENT, tags: [Tag.JOVIAN]});
+    const nonEvent = fakeCard({tags: [Tag.JOVIAN, Tag.BUILDING]});
+    const odyssey = new Odyssey();
+    player.playedCards.push(odyssey);
+    player.playedCards.push(event);
+    player.playedCards.push(nonEvent);
+
+    expect(player.tags.count(Tag.JOVIAN)).eq(2);
+    expect(player.tags.distinctCount('default')).eq(3);
+
+    player.playedCards.remove(odyssey);
+
+    expect(player.tags.count(Tag.JOVIAN)).eq(1);
+    expect(player.tags.distinctCount('default')).eq(2);
+  });
+
   // cardTagCount()
   // multipleCount
+
+  const tagsInGameRuns: ReadonlyArray<{options: Partial<GameOptions>, expected: number}> = [
+    {options: {}, expected: 10},
+    {options: {venusNextExtension: true}, expected: 11},
+    {options: {coloniesExtension: true}, expected: 10},
+    {options: {pathfindersExpansion: true}, expected: 12},
+    {options: {venusNextExtension: true, pathfindersExpansion: true}, expected: 12},
+    {options: {moonExpansion: true}, expected: 11},
+  ] as const;
+  for (const run of tagsInGameRuns) {
+    it('tagsInGame ' + JSON.stringify(run), () => {
+      const [_, player] = testGame(1, run.options);
+      expect(player.tags.tagsInGame()).eq(run.expected);
+    });
+  }
+
   // distinctCount
+  it('distinctCount', () => {
+    const [_, player] = testGame(1);
+    const tags = player.tags;
+    expect(tags.distinctCount('default')).eq(0);
+    expect(tags.distinctCount('default', Tag.ANIMAL)).eq(1);
+
+    player.playedCards.push(newProjectCard(CardName.ADAPTATION_TECHNOLOGY)!);
+    expect(tags.distinctCount('default')).eq(1);
+    expect(tags.distinctCount('default', Tag.ANIMAL)).eq(2);
+    expect(tags.distinctCount('default', Tag.SCIENCE)).eq(1);
+    // Ignore disabled cards
+    // Odyssey special case, events
+    // Odyssey special case, event + wild + max
+  });
+
   // playerHas
   it('rawCount', () => {
     expect(tags.rawCount(Tag.BUILDING, false)).eq(0);

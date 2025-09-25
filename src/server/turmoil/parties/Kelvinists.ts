@@ -50,7 +50,7 @@ class KelvinistsPolicy01 implements IPolicy {
   }
 
   cost(player: IPlayer): number {
-    return player.cardIsInEffect(CardName.HIGH_TEMP_SUPERCONDUCTORS) ? 7: 10;
+    return player.tableau.has(CardName.HIGH_TEMP_SUPERCONDUCTORS) ? 7: 10;
   }
   canAct(player: IPlayer) {
     return player.canAfford(this.cost(player));

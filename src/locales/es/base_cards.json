@@ -52,7 +52,7 @@
 
 
 
-    "Capital": "Capital",
+    "Capital": "",
     "2 Oceans": "2 Océanos",
     "3 Oceans": "3 Océanos",
     "4 Oceans": "4 Océanos",
@@ -198,7 +198,7 @@
     "Action: Add 1 microbe to this card.": "Acción: añade 1 microbio a esta carta.",
     "1 VP per 4 Microbes on this card.": "1 PV por cada 4 microbios en esta carta.",
 
-    "Virus": "Virus",
+    "Virus": "",
     "Remove up to 2 animals or 5 plants from any player.": "Elimina hasta 2 animales o hasta 5 plantas de cualquier jugador.",
 
     "Miranda Resort": "Centro Turístico Miranda",
@@ -489,7 +489,6 @@
     "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.": "Aumenta la temperatura 2 niveles y coloca esta loseta en THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS O ARSIA MONS.",
 
     "Power Plant": "Central Eléctrica",
-    "Increase your energy production 1 step.": "Aumenta tu producción de energía 1 nivel.",
 
     "Mohole Area": "Área Mohole",
     "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.": "Aumenta tu producción de calor 4 niveles. Coloca esta loseta EN UN ÁREA RESERVADA PARA OCÉANO.",
@@ -669,7 +668,7 @@
 
     "Immigration Shuttles": "Lanzaderas de Inmigración",
     "Increase your M€ production 5 steps.": "Aumenta tu producción de M€ 5 niveles.",
-    "1 VP for every 3rd City in play.": "1 PV por cada tercera ciudad en juego.",
+    "1 VP for every 3rd city in play.": "1 PV por cada tercera ciudad en juego.",
 
     "Restricted Area": "Área Restringida",
     "Action: Spend 2 M€ to draw a card.": "Acción: gasta 2 M€ para robar 1 carta.",

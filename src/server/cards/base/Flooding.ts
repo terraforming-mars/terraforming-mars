@@ -38,6 +38,9 @@ export class Flooding extends Card implements IProjectCard {
     }
 
     game.defer(new PlaceOceanTile(player)).andThen((space) => {
+      if (!space) {
+        return;
+      }
       const adjacentPlayers: Set<IPlayer> = new Set();
       game.board.getAdjacentSpaces(space).forEach((space) => {
         if (space.player && space.player !== player && space.tile) {
@@ -45,7 +48,6 @@ export class Flooding extends Card implements IProjectCard {
         }
       });
 
-      // TODO(kberg) This has got to be a common thing, right? Reuse this, right?
       if (adjacentPlayers.size > 0) {
         return new OrOptions(
           new SelectPlayer(
@@ -53,12 +55,7 @@ export class Flooding extends Card implements IProjectCard {
             'Select adjacent player to remove 4 M€ from',
             'Remove credits',
           ).andThen((target) => {
-            target.maybeBlockAttack(player, (proceed) => {
-              if (proceed) {
-                target.stock.deduct(Resource.MEGACREDITS, 4, {log: true, from: player});
-              }
-              return undefined;
-            });
+            target.attack(player, Resource.MEGACREDITS, 4, {log: true});
             return undefined;
           }),
           new SelectOption('Don\'t remove M€ from adjacent player'));

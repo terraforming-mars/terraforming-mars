@@ -8,7 +8,7 @@ import {cast, churn} from '../../TestingUtils';
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
-describe('StandardTechnology', function() {
+describe('StandardTechnology', () => {
   let card: StandardTechnology;
   let player: TestPlayer;
 
@@ -17,24 +17,24 @@ describe('StandardTechnology', function() {
     card = new StandardTechnology();
   });
 
-  it('play', function() {
+  it('play', () => {
     expect(churn(card.play(player), player)).is.undefined;
   });
 
-  it('Rebate for Asteroid Standard Project', function() {
+  it('Rebate for Asteroid Standard Project', () => {
     player.playedCards.push(card);
     card.onStandardProject(player, new AsteroidStandardProject());
     expect(player.megaCredits).to.eq(3);
   });
 
-  it('No rebate for Asteroid standard project', function() {
+  it('No rebate for Asteroid standard project', () => {
     player.playedCards.push(card);
     card.onStandardProject(player, new SellPatentsStandardProject());
     expect(player.megaCredits).to.eq(0);
   });
 
 
-  it('Rebate for Greenery standard project -- using fuller operation', function() {
+  it('Rebate for Greenery standard project -- using fuller operation', () => {
     player.playedCards.push(card);
     player.megaCredits = 23;
     player.setTerraformRating(20);

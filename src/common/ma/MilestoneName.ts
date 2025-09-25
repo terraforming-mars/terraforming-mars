@@ -32,7 +32,6 @@ export const milestoneNames = [
 
   // Amazonis Planitia
   'Colonizer',
-  'Farmer', // TODO(kberg): Rename to Forester.
   'Minimalist',
   'Terran',
   'Tropicalist',
@@ -42,7 +41,6 @@ export const milestoneNames = [
   'Pioneer',
   'Land Specialist',
   'Martian',
-  'Businessperson',
 
   // Terra Cimmeria
   'T. Collector',
@@ -58,20 +56,27 @@ export const milestoneNames = [
   'Irrigator',
   'Capitalist',
 
+  // Vastitas Borealis Novus
+  'Agronomist',
+  'Engineer',
+  'V. Spacefarer',
+  'Geologist',
+  'Farmer',
+
   // Underworld
   'Tunneler',
   'Risktaker',
 
+  // Ares Extreme
+  'Purifier',
+
   // Modular
-  'Breeder',
   // 'Briber',
   // 'Builder', // But 7 building tags
   // 'Coastguard', // NEW 3 tiles adjacent to oceans
-  // 'Engineer', // Currently it is ThermoEngineer, with a name conflict.
-  // 'Farmer', // Cuirrently it is Breeder.
-  // 'Forester', // T's Farmer should be renamed Forester.
+  // 'Farmer',
+  'Forester',
   'Fundraiser',
-  'Geologist',
   'Hydrologist',
   'Landshaper',
   // 'Legend', // But 4 events
@@ -89,7 +94,6 @@ export const milestoneNames = [
   // 'Terraformer', // but 29 TR
   // 'Terran', // But 5 Earth tags.
   'Thawer',
-  'ThermoEngineer', // TODO(kberg): Rename to Engineer after the Engineer rename TODO is removed.
   // 'Trader', // NEW 3 types of resources on cards.
   // 'Tycoon', // But, 10 Green and Blue cards combined.
 ] as const;

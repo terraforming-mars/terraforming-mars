@@ -56,8 +56,8 @@ describe('Voltagon', () => {
     expect(game.getVenusScaleLevel()).eq(2);
   });
 
-  it('onExcavate', () => {
-    player.corporations.push(card);
+  it('onClaim', () => {
+    player.playedCards.push(card);
     player.energy = 0;
     const spaces = UnderworldExpansion.excavatableSpaces(player);
     spaces[0].undergroundResources = 'nothing';

@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {Landlord} from '../../src/server/awards/Landlord';
-import {SpaceName} from '../../src/server/SpaceName';
+import {SpaceName} from '../../src/common/boards/SpaceName';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
-import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
-import {EmptyBoard} from '../ares/EmptyBoard';
-import {_AresHazardPlacement} from '../../src/server/ares/AresHazards';
+import {NamedMoonSpaces} from '../../src/common/moon/NamedMoonSpaces';
+import {EmptyBoard} from '../testing/EmptyBoard';
+import {AresHazards} from '../../src/server/ares/AresHazards';
 import {TileType} from '../../src/common/TileType';
 import {LandClaim} from '../../src/server/cards/base/LandClaim';
 import {addCity, addGreenery, cast, testGame} from '../TestingUtils';
@@ -37,15 +37,15 @@ describe('Landlord', () => {
     addGreenery(player, '35');
     expect(award.getScore(player)).to.eq(2);
 
-    MoonExpansion.addMineTile(player, MoonSpaces.MARE_IMBRIUM);
+    MoonExpansion.addMineTile(player, NamedMoonSpaces.MARE_IMBRIUM);
     expect(award.getScore(player)).to.eq(3);
   });
 
-  it('Exclude Landclaimed Ares hazard tile from land-based award', function() {
+  it('Exclude Landclaimed Ares hazard tile from land-based award', () => {
     const [game, player/* , player2 */] = testGame(2, {aresExtension: true});
 
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    _AresHazardPlacement.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
+    AresHazards.putHazardAt(game, firstSpace, TileType.DUST_STORM_MILD);
 
     expect(award.getScore(player)).to.eq(0);
 

@@ -6,7 +6,7 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MareNubiumMine} from '../../../src/server/cards/moon/MareNubiumMine';
-import {MoonSpaces} from '../../../src/common/moon/MoonSpaces';
+import {NamedMoonSpaces} from '../../../src/common/moon/NamedMoonSpaces';
 import {TileType} from '../../../src/common/TileType';
 
 describe('MareNubiumMine', () => {
@@ -22,13 +22,21 @@ describe('MareNubiumMine', () => {
   });
 
   it('can play', () => {
-    // TODO(kberg): Ensuring resources is going to require changes coming later.
+    player.megaCredits = card.cost;
+    player.steel = 0;
+    player.titanium = 0;
+
+    expect(player.canPlay(card)).is.false;
+
+    player.titanium = 1;
+
+    expect(player.canPlay(card)).is.true;
   });
 
   it('play', () => {
     player.titanium = 3;
     expect(player.production.steel).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.miningRate).eq(0);
 
     card.play(player);
@@ -36,10 +44,10 @@ describe('MareNubiumMine', () => {
 
     expect(player.titanium).eq(2);
     expect(player.production.titanium).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(moonData.miningRate).eq(1);
 
-    const mareNubium = moonData.moon.getSpaceOrThrow(MoonSpaces.MARE_NUBIUM);
+    const mareNubium = moonData.moon.getSpaceOrThrow(NamedMoonSpaces.MARE_NUBIUM);
     expect(mareNubium.player).eq(player);
     expect(mareNubium.tile!.tileType).eq(TileType.MOON_MINE);
   });

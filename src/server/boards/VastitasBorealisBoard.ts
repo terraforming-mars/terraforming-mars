@@ -1,5 +1,5 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {SpaceName} from '../SpaceName';
+import {SpaceName} from '../../common/boards/SpaceName';
 import {SpaceCosts} from './Board';
 import {Space} from './Space';
 import {BoardBuilder} from './BoardBuilder';
@@ -10,7 +10,7 @@ import {MarsBoard} from './MarsBoard';
 
 export class VastitasBorealisBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): VastitasBorealisBoard {
-    const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
+    const builder = new BoardBuilder(gameOptions);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -62,7 +62,7 @@ export class VastitasBorealisBoard extends MarsBoard {
   public override spaceCosts(space: Space): SpaceCosts {
     const costs = super.spaceCosts(space);
     if (space.id === SpaceName.VASTITAS_BOREALIS_NORTH_POLE) {
-      costs.stock.megacredits = VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST;
+      costs.megacredits = VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST;
       costs.tr.temperature = 1;
     }
     return costs;

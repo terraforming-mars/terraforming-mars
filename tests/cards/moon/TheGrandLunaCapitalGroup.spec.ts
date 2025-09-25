@@ -29,7 +29,7 @@ describe('TheGrandLunaCapitalGroup', () => {
 
     // Test 1: place non-colony
     player.megaCredits = 0;
-    player.corporations.push(card);
+    player.playedCards.push(card);
     // Trigger the effect.
     MoonExpansion.addMineTile(player, centerSpace.id);
     expect(player.megaCredits).eq(0);

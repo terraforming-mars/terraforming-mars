@@ -1,5 +1,5 @@
 {
-  "% Venus":"% Venus",
+  "% Venus":"",
 
   "Stratospheric Birds":"Aves Estratosféricas",
   "Action: Add 1 animal to this card.":"Acción: añade 1 animal a esta carta.",
@@ -25,7 +25,6 @@
   "Requires Venus 12%.":"Requiere 12% en la escala de Venus.",
 
   "Sulphur-Eating Bacteria":"Bacteria Devora-Sulfuro",
-  "Action: add 1 Microbe to this card.":"Acción: añade 1 microbio a esta carta.",
   "Action: Spend any number of microbes here to gain triple amount of M€.":"Acción: gasta cualquier número de microbios de esta carta para ganar el triple en M€.",
   "Requires Venus 6%":"Requiere 6% en la escala de Venus.",
 
@@ -69,7 +68,7 @@
   "Spin-Inducing Asteroid":"Asteroide Inductor de Giro",
   "Venus must be 10% or lower. Raise Venus 2 steps.":"La escala de Venus debe estar al 10% o inferior. Aumenta la escala de Venus 2 niveles.",
 
-  "Dirigibles":"Dirigibles",
+  "Dirigibles":"",
   "Action: Add 1 floater to ANY card":"Acción: añade 1 flotador a CUALQUIER carta.",
   "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.":"Efecto: al jugar una carta tipo Venus, los flotadores de esta carta pueden usarse para pagar el coste, con un valor de 3 M€ cada uno.",
 
@@ -107,11 +106,9 @@
   "Requires 4 science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a city tile on the RESERVED AREA.":"Requiere 4 símbolos tipo ciencia. Reduce tu producción de energíá 1 nivel. Aumenta tu producción de titanio 1 nivel. Coloca una loseta de ciudad EN EL ÁREA RESERVADA.",
 
   "Deuterium Export":"Exportación de Deuterio",
-  "Action: Add 1 floater to this card.":"Acción: añade 1 flotador a esta carta.",
   "Action: Spend 1 floater here to increase your energy production 1 step.":"Acción: gasta 1 flotador de esta carta para incrementar tu producción de energía 1 nivel.",
 
   "Extractor Balloons":"Globos Extractores",
-  "Action: Add 1 floater to this card.":"Acción: añade 1 flotador a esta carta.",
   "Action: Remove 2 floaters here to raise Venus 1 step.":"Acción: elimina 2 flotadores de esta carta para aumentar la escala de Venus 1 nivel.",
   "Add 3 floaters to this card":"Añade 3 flotadores a esta carta.",
 
@@ -120,7 +117,6 @@
   "Action: Spend 2 floaters here to increase Venus 1 step.":"Acción: gasta 2 flotadores de esta carta para aumentar la escala de Venus 1 nivel.",
 
   "Freyja Biodomes":"Biodomos de Freya",
-  "10% Venus":"10% Venus",
   "Requires 10% on the Venus track. Add 2 microbes or 2 animals to another Venus card. Production: energy -1, M€ +2.":"Requiere 10% en la escala de Venus. Añade 2 microbios o 2 animales a CUALQUIER OTRA CARTA TIPO VENUS. Reduce tu producción de energía 1 nivel e incrementa tu producción de M€ 2 niveles.",
 
   "Giant Solar Shade":"Protección Solar Gigante",
@@ -133,7 +129,6 @@
   "Draw 1 card, or draw 3 if you have at least 3 Venus tags.":"Roba 1 carta, o roba 3 cartas si tienes al menos 3 símbolos tipo Venus.",
 
   "Ishtar Mining":"Minado en Ishtar",
-  "8% Venus":"8% Venus",
   "Requires Venus 8%. Increase your titanium production 1 step.":"Requiere 8% en la escala de Venus. Aumenta tu producción de titanio 1 nivel.",
 
   "Luna Metropolis":"Metrópolis Luna",
@@ -160,7 +155,6 @@
   "Requires 2 Venus tags. Increase your M€ production 2 steps.":"Requiere 2 símbolos tipo Venus. Aumenta tu producción de M€ 2 niveles.",
 
   "Venusian Animals":"Animales Venusianos",
-  "18% Venus":"18% Venus",
   "Effect: When you play a science tag, including this, add 1 animal to this card.":"Efecto: cuando juegues una carta tipo Ciencia, incluyendo esta, añade 1 animal a esta carta.",
   "Requires Venus 18%":"Requiere 18% en la escala de Venus.",
 

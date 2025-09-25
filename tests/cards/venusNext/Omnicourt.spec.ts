@@ -3,8 +3,8 @@ import {Omnicourt} from '../../../src/server/cards/venusNext/Omnicourt';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('Omnicourt', function() {
-  it('Should play', function() {
+describe('Omnicourt', () => {
+  it('Should play', () => {
     const card = new Omnicourt();
     const [/* game */, player] = testGame(2);
     expect(card.canPlay(player)).is.not.true;
@@ -31,6 +31,6 @@ describe('Omnicourt', function() {
     expect(card.canPlay(player)).is.true;
 
     cast(card.play(player), undefined);
-    expect(player.getTerraformRating()).to.eq(22);
+    expect(player.terraformRating).to.eq(22);
   });
 });

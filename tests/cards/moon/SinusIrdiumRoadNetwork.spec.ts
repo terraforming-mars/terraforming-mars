@@ -19,16 +19,16 @@ describe('SinusIrdiumRoadNetwork', () => {
 
     player.steel = 0;
     player.production.override({energy: 1});
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     player.steel = 1;
     player.production.override({energy: 0});
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
 
     player.steel = 1;
     player.production.override({energy: 1});
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {

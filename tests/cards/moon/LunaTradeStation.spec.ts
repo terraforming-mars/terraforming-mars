@@ -6,7 +6,7 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaTradeStation} from '../../../src/server/cards/moon/LunaTradeStation';
-import {MoonSpaces} from '../../../src/common/moon/MoonSpaces';
+import {NamedMoonSpaces} from '../../../src/common/moon/NamedMoonSpaces';
 import {TileType} from '../../../src/common/TileType';
 
 describe('LunaTradeStation', () => {
@@ -25,9 +25,9 @@ describe('LunaTradeStation', () => {
     player.cardsInHand = [card];
     player.titanium = 1;
     player.megaCredits = card.cost;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
     player.titanium = 2;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
@@ -38,7 +38,7 @@ describe('LunaTradeStation', () => {
 
     expect(player.titanium).eq(1);
 
-    const lunaTradeStation = moonData.moon.getSpaceOrThrow(MoonSpaces.LUNA_TRADE_STATION);
+    const lunaTradeStation = moonData.moon.getSpaceOrThrow(NamedMoonSpaces.LUNA_TRADE_STATION);
     expect(lunaTradeStation.player).eq(player);
     expect(lunaTradeStation.tile!.tileType).eq(TileType.LUNA_TRADE_STATION);
   });

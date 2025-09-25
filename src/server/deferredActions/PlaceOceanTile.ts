@@ -15,18 +15,22 @@ type Options = {
   creditedPlayer?: IPlayer,
 };
 
-export class PlaceOceanTile extends DeferredAction<Space> {
+export class PlaceOceanTile extends DeferredAction<Space | undefined> {
+  private creditedPlayer: IPlayer;
   constructor(
     player: IPlayer,
     private options: Options = {}) {
     super(player, Priority.PLACE_OCEAN_TILE);
+    this.creditedPlayer = this.options.creditedPlayer ?? this.player;
   }
 
   public execute() {
     if (!this.player.game.canAddOcean()) {
-      const whales = this.player.getPlayedCard(CardName.WHALES);
+      const whales = this.player.tableau.get(CardName.WHALES);
       if (whales !== undefined) {
         this.player.addResourceTo(whales, {qty: 1, log: true});
+        const input = this.cb(undefined);
+        this.creditedPlayer?.defer(input);
       }
       return undefined;
     }
@@ -43,9 +47,8 @@ export class PlaceOceanTile extends DeferredAction<Space> {
 
     return new SelectSpace(title, availableSpaces)
       .andThen((space) => {
-        const creditedPlayer = this.options.creditedPlayer ?? this.player;
-        creditedPlayer.game.addOcean(creditedPlayer, space);
-        creditedPlayer.defer(this.cb(space));
+        this.creditedPlayer.game.addOcean(this.creditedPlayer, space);
+        this.creditedPlayer.defer(this.cb(space));
         return undefined;
       });
   }

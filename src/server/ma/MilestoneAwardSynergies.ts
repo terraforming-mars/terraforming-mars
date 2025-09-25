@@ -1,7 +1,8 @@
-import {MilestoneName} from '../../common/ma/MilestoneName';
-import {AwardName} from '../../common/ma/AwardName';
-import {ALL_AWARDS} from '../awards/Awards';
-import {ALL_MILESTONES} from '../milestones/Milestones';
+import {MilestoneName, milestoneNames} from '../../common/ma/MilestoneName';
+import {AwardName, awardNames} from '../../common/ma/AwardName';
+import {milestoneManifest} from '../milestones/Milestones';
+import {BoardName} from '../../common/boards/BoardName';
+import {awardManifest} from '../awards/Awards';
 
 // Higher synergies represent similar milestones or awards. For instance, Terraformer rewards for high TR
 // and the Benefactor award is given to the player with the highest TR. Their synergy weight is 9, very high.
@@ -142,7 +143,7 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
 
   ['Networker', 'Terraformer', 1],
   ['Lunarchitect', 'Terraformer', 2],
-  ['Farmer', 'Terraformer', 2],
+  ['Forester', 'Terraformer', 2],
   ['Tropicalist', 'Terraformer', 1],
   ['Economizer', 'Terraformer', 2],
   ['Firestarter', 'Terraformer', 1],
@@ -165,7 +166,7 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['Urbanist', 'Mayor', 5],
   ['Edgedancer', 'Mayor', 2],
   ['Networker', 'Gardener', 2],
-  ['Farmer', 'Gardener', 5],
+  ['Forester', 'Gardener', 5],
   ['Tropicalist', 'Gardener', 4],
   ['Terra Pioneer', 'Gardener', 4],
   ['Gambler', 'Gardener', 0.5],
@@ -186,14 +187,14 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['Gambler', 'Planner', 0.5],
   ['A. Manufacturer', 'Planner', 1],
   ['Visionary', 'Planner', 4],
-  ['Farmer', 'Generalist', 1],
+  ['Forester', 'Generalist', 1],
   ['Economizer', 'Generalist', 1],
   ['Gambler', 'Generalist', 0.5],
   ['Smith', 'Generalist', 2],
   ['A. Engineer', 'Generalist', 4],
   ['Botanist', 'Generalist', 1],
   ['Naturalist', 'Generalist', 2],
-  ['Farmer', 'Specialist', 3],
+  ['Forester', 'Specialist', 3],
   ['Economizer', 'Specialist', 4],
   ['Gambler', 'Specialist', 0.5],
   ['Smith', 'Specialist', 5],
@@ -201,7 +202,7 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['A. Engineer', 'Specialist', 4],
   ['Botanist', 'Specialist', 3],
   ['Naturalist', 'Specialist', 1],
-  ['Farmer', 'Ecologist', 3],
+  ['Forester', 'Ecologist', 3],
   ['Gambler', 'Ecologist', 0.5],
   ['Tradesman', 'Ecologist', 6],
   ['Curator', 'Ecologist', 1],
@@ -218,7 +219,6 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['Terran', 'Tycoon', 1],
   ['Land Specialist', 'Tycoon', 1],
   ['Martian', 'Tycoon', 1],
-  ['Businessperson', 'Tycoon', 1],
   ['T. Collector', 'Tycoon', 3],
   ['Spacefarer', 'Tycoon', 2],
   ['Gambler', 'Tycoon', 0.5],
@@ -234,7 +234,7 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['A. Manufacturer', 'Tycoon', 4],
   ['Zoologist', 'Tycoon', 2],
   ['Biologist', 'Tycoon', 1],
-  ['T. Economizer', 'Tycoon', 2],
+  ['Incorporator', 'Tycoon', 2],
   ['Warmonger', 'Tycoon', 1],
   ['Forecaster', 'Tycoon', 1],
   ['Naturalist', 'Tycoon', 1],
@@ -254,7 +254,7 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['A. Manufacturer', 'Tactician', 1],
   ['Forecaster', 'Tactician', 9],
   ['Networker', 'Polar Explorer', 3],
-  ['Farmer', 'Polar Explorer', 1],
+  ['Forester', 'Polar Explorer', 1],
   ['Land Specialist', 'Polar Explorer', 4],
   ['Terra Pioneer', 'Polar Explorer', 6],
   ['Gambler', 'Polar Explorer', 0.5],
@@ -278,7 +278,7 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['A. Manufacturer', 'Hoverlord', 1],
   ['Networker', 'Landlord', 4],
   ['Lunarchitect', 'Landlord', 7],
-  ['Farmer', 'Landlord', 1],
+  ['Forester', 'Landlord', 1],
   ['Tropicalist', 'Landlord', 6],
   ['Land Specialist', 'Landlord', 4],
   ['Terra Pioneer', 'Landlord', 9],
@@ -298,7 +298,7 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['Colonizer', 'Banker', 1],
   ['Pioneer', 'Banker', 1],
   ['Capitalist', 'Banker', 2],
-  ['T. Economizer', 'Banker', 1],
+  ['Incorporator', 'Banker', 1],
   ['Economizer', 'Thermalist', 8],
   ['Firestarter', 'Thermalist', 7],
   ['Naturalist', 'Thermalist', 6],
@@ -323,7 +323,7 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['A. Engineer', 'Industrialist', 2],
   ['Urbanist', 'Industrialist', 1],
   ['Networker', 'Desert Settler', 3],
-  ['Farmer', 'Desert Settler', 1],
+  ['Forester', 'Desert Settler', 1],
   ['Tropicalist', 'Desert Settler', 2],
   ['Land Specialist', 'Desert Settler', 4],
   ['Terra Pioneer', 'Desert Settler', 6],
@@ -334,7 +334,7 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['Edgedancer', 'Desert Settler', 5],
   ['Naturalist', 'Desert Settler', 1],
   ['Networker', 'Estate Dealer', 3],
-  ['Farmer', 'Estate Dealer', 1],
+  ['Forester', 'Estate Dealer', 1],
   ['Tropicalist', 'Estate Dealer', 5],
   ['Land Specialist', 'Estate Dealer', 4],
   ['Terra Pioneer', 'Estate Dealer', 6],
@@ -345,14 +345,14 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['Edgedancer', 'Estate Dealer', 2],
   ['Naturalist', 'Estate Dealer', 1],
   ['Lunarchitect', 'Benefactor', 1],
-  ['Farmer', 'Benefactor', 3],
+  ['Forester', 'Benefactor', 3],
   ['Economizer', 'Benefactor', 3],
   ['Firestarter', 'Benefactor', 1],
   ['Lunar Magnate', 'Benefactor', 1],
   ['Botanist', 'Benefactor', 3],
   ['Naturalist', 'Benefactor', 5],
   ['Networker', 'Cultivator', 2],
-  ['Farmer', 'Cultivator', 5],
+  ['Forester', 'Cultivator', 5],
   ['Tropicalist', 'Cultivator', 4],
   ['Terra Pioneer', 'Cultivator', 4],
   ['Irrigator', 'Cultivator', 4],
@@ -367,7 +367,6 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['Terran', 'Magnate', 1],
   ['Land Specialist', 'Magnate', 1],
   ['Martian', 'Magnate', 1],
-  ['Businessperson', 'Magnate', 1],
   ['T. Collector', 'Magnate', 3],
   ['Spacefarer', 'Magnate', 2],
   ['V. Electrician', 'Magnate', 1],
@@ -377,7 +376,7 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['A. Engineer', 'Magnate', 1],
   ['Botanist', 'Magnate', 1],
   ['Biologist', 'Magnate', 1],
-  ['T. Economizer', 'Magnate', 2],
+  ['Incorporator', 'Magnate', 2],
   ['Forecaster', 'Magnate', 1],
   ['Naturalist', 'Magnate', 1],
   ['Voyager', 'Magnate', 1],
@@ -436,18 +435,17 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['Spacefarer', 'Colonizer', 4],
   ['Gambler', 'Colonizer', 0.5],
   ['A. Engineer', 'Colonizer', 1],
-  ['Tropicalist', 'Farmer', 1],
-  ['Gambler', 'Farmer', 0.5],
-  ['Irrigator', 'Farmer', 1],
-  ['A. Engineer', 'Farmer', 4],
-  ['Tourist', 'Farmer', 1],
-  ['Botanist', 'Farmer', 9],
-  ['Biologist', 'Farmer', 3],
-  ['Forecaster', 'Farmer', 1],
-  ['Naturalist', 'Farmer', 6],
+  ['Tropicalist', 'Forester', 1],
+  ['Gambler', 'Forester', 0.5],
+  ['Irrigator', 'Forester', 1],
+  ['A. Engineer', 'Forester', 4],
+  ['Tourist', 'Forester', 1],
+  ['Botanist', 'Forester', 9],
+  ['Biologist', 'Forester', 3],
+  ['Forecaster', 'Forester', 1],
+  ['Naturalist', 'Forester', 6],
   ['Pioneer', 'Minimalist', 2],
   ['Gambler', 'Minimalist', 0.5],
-  ['Businessperson', 'Terran', 9],
   ['Gambler', 'Terran', 0.5],
   ['Curator', 'Terran', 1],
   ['A. Engineer', 'Terran', 1],
@@ -477,10 +475,6 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['Gambler', 'Martian', 0.5],
   ['Curator', 'Martian', 1],
   ['A. Manufacturer', 'Martian', 1],
-  ['Gambler', 'Businessperson', 0.5],
-  ['Curator', 'Businessperson', 1],
-  ['A. Engineer', 'Businessperson', 1],
-  ['A. Manufacturer', 'Businessperson', 1],
   ['Spacefarer', 'T. Collector', 1],
   ['Gambler', 'T. Collector', 0.5],
   ['V. Electrician', 'T. Collector', 1],
@@ -528,7 +522,7 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['Tourist', 'Irrigator', 1],
   ['Urbanist', 'Irrigator', 1],
   ['Edgedancer', 'Irrigator', 1],
-  ['T. Economizer', 'Capitalist', 2],
+  ['Incorporator', 'Capitalist', 2],
   ['Voyager', 'Capitalist', 1],
   ['A. Manufacturer', 'Entrepreneur', 1],
   ['Lunar Magnate', 'Full Moon', 9],
@@ -555,8 +549,8 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['Naturalist', 'Zoologist', 2],
 
   ['Risktaker', 'Kingpin', 9],
-  ['Tunneler', 'EdgeLord', 8],
-  ['EdgeLord', 'Edgedancer', 9],
+  // ['Tunneler', 'Excavator', 8],
+  // ['Excavator', 'Edgedancer', 9],
 ];
 
 // This map uses keys of the format "X|Y" where X and Y are MA names. Entries are stored as "X|Y"
@@ -581,13 +575,18 @@ class SynergyMap {
 
 export const synergies: SynergyMap = new SynergyMap();
 
-ALL_MILESTONES.forEach((ma) => {
-  // synergies.set(ma.name, 'Gambler', 1);
-  synergies.set(ma.name, ma.name, 1000);
+const VBN = [...milestoneManifest.boards[BoardName.VASTITAS_BOREALIS_NOVUS], ...awardManifest.boards[BoardName.VASTITAS_BOREALIS_NOVUS]];
+milestoneNames.forEach((name) => {
+  for (const entry of VBN) {
+    synergies.set(name, entry, 5);
+  }
+  synergies.set(name, name, 1000);
 });
-ALL_AWARDS.forEach((ma) => {
-  // synergies.set(ma.name, 'Gambler', 1);
-  synergies.set(ma.name, ma.name, 1000);
+awardNames.forEach((name) => {
+  for (const entry of VBN) {
+    synergies.set(name, entry, 5);
+  }
+  synergies.set(name, name, 1000);
 });
 
 for (const [a, b, weight] of synergiesData) {

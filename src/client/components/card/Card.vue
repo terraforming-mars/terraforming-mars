@@ -1,17 +1,18 @@
 <template>
-  <div :class="getCardClasses(card)">
+  <div class="card-container filterDiv hover-hide-res" :class="cardClasses">
       <div class="card-content-wrapper" v-i18n @mouseover="hovering = true" @mouseleave="hovering = false">
-          <div v-if="!isStandardProject()" class="card-cost-and-tags">
-              <CardCost :amount="getCost()" :newCost="getReducedCost()" />
+          <div v-if="!isStandardProject" class="card-cost-and-tags">
+              <CardCost :amount="cost" :newCost="reducedCost" />
               <div v-if="showPlayerCube" :class="playerCubeClass"></div>
               <card-help v-show="hasHelp" :name="card.name" />
-              <CardTags :tags="getTags()" />
+              <CardTags :tags="tags" />
           </div>
-          <CardTitle :title="card.name" :type="getCardType()"/>
-          <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :requirements="getCardRequirements()" :isCorporation="isCorporationCard()" :padBottom="hasResourceType" />
+          <CardTitle :title="card.name" :type="cardType"/>
+          <CardContent :metadata="cardMetadata" :requirements="cardRequirements" :isCorporation="isCorporationCard" :bottomPadding="bottomPadding" />
       </div>
-      <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()" :isResourceCard="isResourceCard()" :compatibility="getCardCompatibility()" />
-      <CardResourceCounter v-if="hasResourceType" :amount="getResourceAmount()" :type="resourceType" />
+      <CardExpansion :expansion="cardExpansion" :isCorporation="isCorporationCard" :isResourceCard="isResourceCard" :compatibility="cardCompatibility" />
+      <CardResourceCounter v-if="hasResourceType" :amount="resourceAmount" :type="resourceType" />
+      <CardVictoryPoints v-if="cardMetadata.victoryPoints" :victoryPoints="cardMetadata.victoryPoints" />
       <CardExtraContent :card="card" />
       <slot/>
   </div>
@@ -28,9 +29,10 @@ import CardCost from './CardCost.vue';
 import CardExtraContent from './CardExtraContent.vue';
 import CardExpansion from './CardExpansion.vue';
 import CardTags from './CardTags.vue';
-import {CardType} from '@/common/cards/CardType';
+import CardVictoryPoints from './CardVictoryPoints.vue';
 import CardContent from './CardContent.vue';
 import CardHelp from './CardHelp.vue';
+import {CardType} from '@/common/cards/CardType';
 import {CardMetadata} from '@/common/cards/CardMetadata';
 import {Tag} from '@/common/cards/Tag';
 import {getPreferences} from '@/client/utils/PreferencesManager';
@@ -51,6 +53,7 @@ export default Vue.extend({
     CardExpansion,
     CardTags,
     CardContent,
+    CardVictoryPoints,
   },
   props: {
     card: {
@@ -70,7 +73,7 @@ export default Vue.extend({
     cubeColor: {
       type: String as () => Color,
       required: false,
-      default: Color.NEUTRAL,
+      default: 'neutral',
     },
   },
   data() {
@@ -82,11 +85,11 @@ export default Vue.extend({
       hovering: false,
     };
   },
-  methods: {
-    getCardExpansion(): GameModule {
+  computed: {
+    cardExpansion(): GameModule {
       return this.cardInstance.module;
     },
-    getCardCompatibility(): Array<GameModule> {
+    cardCompatibility(): Array<GameModule> {
       return this.cardInstance.compatibility;
     },
     isResourceCard(): boolean {
@@ -96,8 +99,8 @@ export default Vue.extend({
         return false;
       }
     },
-    getTags(): Array<string> {
-      const type = this.getCardType();
+    tags(): Array<Tag> {
+      const type = this.cardType;
       const tags = [...this.cardInstance.tags || []];
       tags.forEach((tag, idx) => {
         // Clone are changed on card implementations but that's not passed down directly through the
@@ -111,55 +114,53 @@ export default Vue.extend({
       }
       return tags;
     },
-    getCost(): number | undefined {
-      return this.isProjectCard() ? this.cardInstance.cost : undefined;
+    cost(): number | undefined {
+      return this.isProjectCard ? this.cardInstance.cost : undefined;
     },
-    getReducedCost(): number | undefined {
-      return this.isProjectCard() ? this.card.calculatedCost : undefined;
+    reducedCost(): number | undefined {
+      return this.isProjectCard ? this.card.calculatedCost : undefined;
     },
-    getCardType(): CardType {
+    cardType(): CardType {
       return this.cardInstance.type;
     },
-    getCardClasses(card: CardModel): string {
-      const classes = ['card-container', 'filterDiv', 'hover-hide-res'];
-      classes.push('card-' + card.name.toLowerCase().replace(/ /g, '-'));
+    cardClasses(): string {
+      const classes = [];
+      classes.push('card-' + this.card.name.toLowerCase().replace(/ /g, '-'));
 
-      if (card.isDisabled) {
+      if (this.card.isDisabled) {
         classes.push('card-unavailable');
       } else if (!getPreferences().experimental_ui && this.actionUsed) {
         classes.push('card-unavailable');
       }
 
-      if (this.isStandardProject()) {
+      if (this.isStandardProject) {
         classes.push('card-standard-project');
       }
       const learnerModeOff = !getPreferences().learner_mode;
-      if (learnerModeOff && this.isStandardProject() && card.isDisabled) {
+      if (learnerModeOff && this.isStandardProject && this.card.isDisabled) {
         classes.push('card-hide');
       }
       return classes.join(' ');
     },
-    getCardMetadata(): CardMetadata {
+    cardMetadata(): CardMetadata {
       return this.cardInstance.metadata;
     },
-    getCardRequirements(): Array<CardRequirementDescriptor> {
+    cardRequirements(): ReadonlyArray<CardRequirementDescriptor> {
       return this.cardInstance.requirements;
     },
-    getResourceAmount(): number {
+    resourceAmount(): number {
       return this.card.resources || this.robotCard?.resources || 0;
     },
     isCorporationCard() : boolean {
-      return this.getCardType() === CardType.CORPORATION;
+      return this.cardType === CardType.CORPORATION;
     },
     isProjectCard(): boolean {
-      const type = this.getCardType();
+      const type = this.cardType;
       return type !== CardType.PRELUDE && type !== CardType.CORPORATION && type !== CardType.CEO;
     },
     isStandardProject() : boolean {
-      return this.getCardType() === CardType.STANDARD_PROJECT || this.getCardType() === CardType.STANDARD_ACTION;
+      return this.cardType === CardType.STANDARD_PROJECT || this.cardType === CardType.STANDARD_ACTION;
     },
-  },
-  computed: {
     hasResourceType(): boolean {
       return this.card.isSelfReplicatingRobotsCard === true || this.cardInstance.resourceType !== undefined || this.robotCard !== undefined;
     },
@@ -167,6 +168,15 @@ export default Vue.extend({
       if (this.robotCard !== undefined || this.card.isSelfReplicatingRobotsCard === true) return CardResource.RESOURCE_CUBE;
       // This last RESOURCE_CUBE is functionally unnecessary and serves to satisfy the type contract.
       return this.cardInstance.resourceType ?? CardResource.RESOURCE_CUBE;
+    },
+    bottomPadding(): string {
+      if (this.cardMetadata.victoryPoints !== undefined) {
+        return 'long';
+      }
+      if (this.hasResourceType) {
+        return 'short';
+      }
+      return '';
     },
     hasHelp(): boolean {
       return this.hovering && this.cardInstance.metadata.hasExternalHelp === true;

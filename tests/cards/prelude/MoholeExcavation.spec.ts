@@ -3,8 +3,8 @@ import {MoholeExcavation} from '../../../src/server/cards/prelude/MoholeExcavati
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('MoholeExcavation', function() {
-  it('Should play', function() {
+describe('MoholeExcavation', () => {
+  it('Should play', () => {
     const card = new MoholeExcavation();
     const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);

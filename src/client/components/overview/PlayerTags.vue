@@ -1,24 +1,30 @@
 <template>
     <div class="player-tags">
         <div class="player-tags-main">
-            <tag-count :tag="'vp'" :count="player.victoryPointsBreakdown.total" :size="'big'" :type="'main'" :hideCount="hideVpCount" />
+            <tag-count tag="vp" :count="hideVpCount ? '?' : player.victoryPointsBreakdown.total" :size="'big'" :type="'main'" />
             <div v-if="isEscapeVelocityOn" :class="tooltipCss" :data-tooltip="$t('Escape Velocity penalty')">
-              <tag-count :tag="'escape'" :count="escapeVelocityPenalty" :size="'big'" :type="'main'"/>
+              <tag-count tag="escape" :count="escapeVelocityPenalty" :size="'big'" type="'main'" :showWhenZero="true"/>
             </div>
-            <tag-count :tag="'tr'" :count="player.terraformRating" :size="'big'" :type="'main'"/>
+            <tag-count tag="tr" :count="player.terraformRating" :size="'big'" :type="'main'"/>
+            <tag-count v-if="player.handicap !== undefined" :tag="'handicap'" :count="player.handicap" :size="'big'" :type="'main'" :showWhenZero="true"/>
             <div class="tag-and-discount">
               <PlayerTagDiscount v-if="all.discount" :amount="all.discount" :color="player.color"  :data-test="'discount-all'"/>
-              <tag-count :tag="'cards'" :count="cardsInHandCount" :size="'big'" :type="'main'"/>
+              <tag-count tag="cards" :count="cardsInHandCount" :size="'big'" :type="'main'"/>
             </div>
         </div>
         <div class="player-tags-secondary">
           <div class="tag-count-container" v-for="tagDetail of tags" :key="tagDetail.name">
-            <div class="tag-and-discount" v-if="tagDetail.name !== 'separator'">
+            <template v-if="tagDetail.name === SpecialTags.UNDERGROUND_TOKEN_COUNT">
+              <div class="tag-and-discount">
+              <tag-count :tag="tagDetail.name" :undergroundToken="player.underworldData.activeBonus" :count="tagDetail.count" :size="'big'" :type="'secondary'"/>
+              </div>
+            </template>
+            <div v-else-if="tagDetail.name === 'separator'" class="tag-separator"></div>
+            <div v-else class="tag-and-discount">
               <PlayerTagDiscount v-if="tagDetail.discount > 0" :color="player.color" :amount="tagDetail.discount" :data-test="'discount-' + tagDetail.name"/>
               <PointsPerTag :points="tagDetail"/>
               <tag-count :tag="tagDetail.name" :count="tagDetail.count" :size="'big'" :type="'secondary'"/>
             </div>
-            <div v-else-if="tagDetail.name === 'separator'" class="tag-separator"></div>
           </div>
         </div>
     </div>
@@ -62,6 +68,7 @@ const ORDER: Array<InterfaceTagsType> = [
   Tag.CITY,
   Tag.MOON,
   Tag.MARS,
+  Tag.CRIME,
   'separator',
   Tag.EVENT,
   SpecialTags.NONE,
@@ -69,8 +76,9 @@ const ORDER: Array<InterfaceTagsType> = [
   SpecialTags.INFLUENCE,
   SpecialTags.CITY_COUNT,
   SpecialTags.COLONY_COUNT,
-  SpecialTags.EXCAVATIONS,
+  SpecialTags.UNDERGROUND_TOKEN_COUNT,
   SpecialTags.CORRUPTION,
+  SpecialTags.NEGATIVE_VP,
 ];
 
 const isInGame = (tag: InterfaceTagsType, game: GameModel): boolean => {
@@ -78,18 +86,18 @@ const isInGame = (tag: InterfaceTagsType, game: GameModel): boolean => {
   if (game.turmoil === undefined && tag === SpecialTags.INFLUENCE) return false;
   switch (tag) {
   case SpecialTags.COLONY_COUNT:
-    return gameOptions.coloniesExtension !== false;
+    return gameOptions.expansions.colonies !== false;
   case SpecialTags.INFLUENCE:
     return game.turmoil !== undefined;
-  case SpecialTags.EXCAVATIONS:
+  case SpecialTags.UNDERGROUND_TOKEN_COUNT:
   case SpecialTags.CORRUPTION:
-    return gameOptions.underworldExpansion !== false;
+  case SpecialTags.NEGATIVE_VP:
+    return gameOptions.expansions.underworld !== false;
   case Tag.VENUS:
-    return game.gameOptions.venusNextExtension !== false;
   case Tag.MOON:
-    return game.gameOptions.moonExpansion !== false;
   case Tag.MARS:
-    return (gameOptions.pathfindersExpansion || gameOptions.underworldExpansion);
+  case Tag.CRIME:
+    return game.tags.includes(tag);
   }
   return true;
 };
@@ -104,12 +112,18 @@ const getTagCount = (tagName: InterfaceTagsType, player: PublicPlayerModel): num
     return player.citiesCount || 0;
   case SpecialTags.NONE:
     return player.noTagsCount || 0;
-  case SpecialTags.EXCAVATIONS:
-    return player.excavations;
+  case SpecialTags.UNDERGROUND_TOKEN_COUNT:
+    return player.underworldData.tokens.length;
   case SpecialTags.CORRUPTION:
-    return player.corruption;
+    return player.underworldData.corruption;
+  case SpecialTags.NEGATIVE_VP:
+    return player.victoryPointsBreakdown.negativeVP;
+  case 'all':
+  case 'separator':
+    return -1;
+  default:
+    return player.tags[tagName];
   }
-  return player.tags.find((tag) => tag.tag === tagName)?.count ?? 0;
 };
 
 export default Vue.extend({
@@ -156,13 +170,19 @@ export default Vue.extend({
       // Special case Cultivation of Venus & Venera Base.
       // See https://github.com/terraforming-mars/terraforming-mars/issues/5236
       if (card.name === CardName.CULTIVATION_OF_VENUS || card.name === CardName.VENERA_BASE) {
-        details[Tag.VENUS].halfPoints ++;
+        details[Tag.VENUS].halfPoints++;
       } else {
         const vps = getCard(card.name)?.victoryPoints;
-        if (vps !== undefined && typeof(vps) !== 'number' && vps !== 'special' && vps.tag !== undefined) {
-          details[vps.tag].points += ((vps.each ?? 1) / (vps.per ?? 1));
+        if (vps !== undefined && typeof(vps) !== 'number' && vps !== 'special') {
+          if (vps.tag !== undefined) {
+            details[vps.tag].points += ((vps.each ?? 1) / (vps.per ?? 1));
+          }
+          if (vps.cities !== undefined) {
+            details['city'].points += ((vps.each ?? 1) / (vps.per ?? 1));
+          }
         }
       }
+      // Special case Off-world City Living and Immigration Shuttles
     }
 
     // Other modifiers
@@ -223,6 +243,9 @@ export default Vue.extend({
         }
         return true;
       });
+    },
+    SpecialTags() {
+      return SpecialTags;
     },
   },
 });

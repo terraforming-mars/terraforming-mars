@@ -5,8 +5,8 @@ import {testGame} from '../../TestGame';
 import {runAllActions} from '../../TestingUtils';
 import {cast} from '../../TestingUtils';
 
-describe('MediaGroup', function() {
-  it('Should play', function() {
+describe('MediaGroup', () => {
+  it('Should play', () => {
     const card = new MediaGroup();
     const [game, player] = testGame(2);
     cast(card.play(player), undefined);

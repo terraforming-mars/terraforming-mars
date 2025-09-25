@@ -19,7 +19,7 @@
     "+ Victory Points?": " VP以上取れるかな？",
     "Go to main page": "メインページへ移動",
 
-    "Victory points breakdown after": "VP内訳",
+    "Victory point breakdown after": "VP内訳",
     "Victory points details": "VP詳細",
     "Victory points details for": "VP詳細",
     "Victory points": "VP",
@@ -27,8 +27,8 @@
     "generations": "世代数",
     "Player": "プレイヤー名",
     "Corporation": "企業",
-    "TR": "TR",
-    "VP": "VP",
+    "TR": "",
+    "VP": "",
     "Total": "合計",
     "Timer": "時間",
     "Colony VP": "チタニア(交易・コロニー建設)",
@@ -50,8 +50,8 @@
     "${0} place for ${1} award (funded by ${2})": "褒賞${0}：${1}（${2}が設立）",
     "Claimed ${0} milestone": "称号：${0}",
 
-    "M": "M",
-    "A": "A",
+    "M": "",
+    "A": "",
     "Milestones points": "称号",
     "Awards points": "褒賞",
 

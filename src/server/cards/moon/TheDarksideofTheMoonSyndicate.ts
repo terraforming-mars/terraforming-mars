@@ -14,8 +14,10 @@ import {Size} from '../../../common/cards/render/Size';
 import {Phase} from '../../../common/Phase';
 import {all} from '../Options';
 import {Payment} from '../../../common/inputs/Payment';
+import {LogHelper} from '../../LogHelper';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class TheDarksideofTheMoonSyndicate extends CorporationCard {
+export class TheDarksideofTheMoonSyndicate extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE,
@@ -63,13 +65,13 @@ export class TheDarksideofTheMoonSyndicate extends CorporationCard {
     if (this.resourceCount > 0) {
       orOptions.options.push(new SelectOption('Remove 1 syndicate fleet from this card to steal 2M€ from every opponent.', 'Remove syndicate fleet').andThen(() => {
         player.removeResourceFrom(this);
-        for (const target of player.getOpponents()) {
-          target.maybeBlockAttack(player, (proceed) => {
-            if (proceed) {
-              target.stock.steal(Resource.MEGACREDITS, 2, player);
-            }
-            return undefined;
-          });
+        if (player.game.isSoloMode()) {
+          player.stock.add(Resource.MEGACREDITS, 2);
+          LogHelper.logStealFromNeutralPlayer(player, Resource.MEGACREDITS, 2);
+        } else {
+          for (const target of player.opponents) {
+            target.attack(player, Resource.MEGACREDITS, 2, {stealing: true});
+          }
         }
         return undefined;
       }));
@@ -101,11 +103,8 @@ export class TheDarksideofTheMoonSyndicate extends CorporationCard {
         }
       });
       costs.forEachMultiplicity((qty, target) => {
-        // TODO(kberg): Create a Game.steal method that manages this, both here
-        // and in StealResources.
         const adjustedQuantity = Math.min(qty, target.megaCredits);
-        activePlayer.stock.add(Resource.MEGACREDITS, adjustedQuantity, {log: true});
-        target.stock.deduct(Resource.MEGACREDITS, adjustedQuantity, {log: true, from: activePlayer});
+        target.attack(cardOwner, Resource.MEGACREDITS, adjustedQuantity, {log: true, stealing: true});
       });
     }
     return undefined;

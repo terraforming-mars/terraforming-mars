@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {TunnelBoringMachine} from '../../../src/server/cards/underworld/TunnelBoringMachine';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
-import {runAllActions} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {assertIsExcavationAction} from '../../underworld/underworldAssertions';
 
@@ -22,7 +22,7 @@ describe('TunnelBoringMachine', () => {
   });
 
   it('play', () => {
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
   });
 
   it('can act', () => {

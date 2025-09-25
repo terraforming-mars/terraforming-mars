@@ -8,13 +8,13 @@ import {RiseToPower} from '../../../src/server/cards/prelude2/RiseToPower';
 import {SelectParty} from '../../../src/server/inputs/SelectParty';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 
-describe('RiseToPower', function() {
+describe('RiseToPower', () => {
   let card: RiseToPower;
   let game: IGame;
   let player: TestPlayer;
   let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new RiseToPower();
     [game, player] = testGame(1, {turmoilExtension: true});
     turmoil = game.turmoil!;
@@ -25,7 +25,7 @@ describe('RiseToPower', function() {
     expect(card.canPlay(player)).is.false;
   });
 
-  it('play', function() {
+  it('play', () => {
     expect(turmoil.getAvailableDelegateCount(player)).eq(7);
     const marsFirst = turmoil.getPartyByName(PartyName.MARS);
     const greens = turmoil.getPartyByName(PartyName.GREENS);

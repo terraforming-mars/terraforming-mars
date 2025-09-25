@@ -22,8 +22,9 @@
       :moonData="game.moon"
       :gameOptions = "game.gameOptions"
       :playerNumber = "playerView.players.length"
-      :lastSoloGeneration = "game.lastSoloGeneration">
-        <div class="deck-size">{{ game.deckSize }}</div>
+      :lastSoloGeneration = "game.lastSoloGeneration"
+      :deckSize = "game.deckSize"
+      :discardPileSize = "game.discardPileSize">
     </sidebar>
 
     <div v-if="thisPlayer.tableau.length > 0">
@@ -31,14 +32,12 @@
         <a name="board" class="player_home_anchor"></a>
         <board
           :spaces="game.spaces"
-          :venusNextExtension="game.gameOptions.venusNextExtension"
+          :expansions="game.gameOptions.expansions"
           :venusScaleLevel="game.venusScaleLevel"
           :boardName ="game.gameOptions.boardName"
           :oceans_count="game.oceans"
           :oxygen_level="game.oxygenLevel"
           :temperature="game.temperature"
-          :aresExtension="game.gameOptions.aresExtension"
-          :pathfindersExpansion="game.gameOptions.pathfindersExpansion"
           :altVenusBoard="game.gameOptions.altVenusBoard"
           :aresData="game.aresData"
           :tileView="tileView"
@@ -48,26 +47,20 @@
 
         <turmoil v-if="game.turmoil" :turmoil="game.turmoil"/>
 
-        <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :tileView="tileView" id="shortkey-moonBoard"/>
+        <MoonBoard v-if="game.gameOptions.expansions.moon" :model="game.moon" :tileView="tileView" id="shortkey-moonBoard"/>
 
-        <PlanetaryTracks v-if="game.gameOptions.pathfindersExpansion" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
+        <PlanetaryTracks v-if="game.gameOptions.expansions.pathfinders" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
 
         <div v-if="playerView.players.length > 1" class="player_home_block--milestones-and-awards">
           <Milestones :milestones="game.milestones" />
-          <Awards :awards="game.awards" show-scores />
+          <Awards :awards="game.awards" />
         </div>
       </div>
 
       <players-overview class="player_home_block player_home_block--players nofloat" :playerView="playerView" v-trim-whitespace id="shortkey-playersoverview"/>
 
       <div class="player_home_block nofloat">
-        <log-panel
-          :id="playerView.id"
-          :players="playerView.players"
-          :generation="game.generation"
-          :lastSoloGeneration="game.lastSoloGeneration"
-          :color="thisPlayer.color"
-          :step="game.step"></log-panel>
+        <log-panel :viewModel="playerView" :color="thisPlayer.color" :step="game.step"></log-panel>
       </div>
 
       <div class="player_home_block player_home_block--actions nofloat">
@@ -142,7 +135,11 @@
           </div>
         </div>
       </div>
+    </div>
 
+    <div v-if="thisPlayer.underworldData.tokens.length > 0">
+      <dynamic-title title="Claimed Underground Resource Tokens" :color="thisPlayer.color"/>
+      <underground-tokens :underworldData="thisPlayer.underworldData"></underground-tokens>
     </div>
 
     <div class="player_home_block player_home_block--setup nofloat"  v-if="thisPlayer.tableau.length === 0">
@@ -176,12 +173,12 @@
           <div class="cardbox">
             <Card :card="playerView.pickedCorporationCard[0]"/>
           </div>
-          <template v-if="game.gameOptions.preludeExtension">
+          <template v-if="game.gameOptions.expansions.prelude">
             <div v-for="card in playerView.preludeCardsInHand" :key="card.name" class="cardbox">
               <Card :card="card"/>
             </div>
           </template>
-          <template v-if="game.gameOptions.ceoExtension">
+          <template v-if="game.gameOptions.expansions.ceo">
             <div v-for="card in playerView.ceoCardsInHand" :key="card.name" class="cardbox">
             <Card :card="card"/>
             </div>
@@ -224,11 +221,9 @@
         <div class="accordion-body">
           <board
             :spaces="game.spaces"
-            :venusNextExtension="game.gameOptions.venusNextExtension"
+            :expansions="game.gameOptions.expansions"
             :venusScaleLevel="game.venusScaleLevel"
             :boardName ="game.gameOptions.boardName"
-            :aresExtension="game.gameOptions.aresExtension"
-            :pathfindersExpansion="game.gameOptions.pathfindersExpansion"
             :aresData="game.aresData"
             :altVenusBoard="game.gameOptions.altVenusBoard">
           </board>
@@ -236,7 +231,7 @@
           <turmoil v-if="game.turmoil" :turmoil="game.turmoil"></turmoil>
 
           <a name="moonBoard" class="player_home_anchor"></a>
-          <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :tileView="tileView"></MoonBoard>
+          <MoonBoard v-if="game.gameOptions.expansions.moon" :model="game.moon" :tileView="tileView"></MoonBoard>
         </div>
       </details>
     </div>
@@ -276,24 +271,24 @@ import Sidebar from '@/client/components/Sidebar.vue';
 import Colony from '@/client/components/colonies/Colony.vue';
 import LogPanel from '@/client/components/logpanel/LogPanel.vue';
 import Turmoil from '@/client/components/turmoil/Turmoil.vue';
-import {playerColorClass} from '@/common/utils/utils';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import DynamicTitle from '@/client/components/common/DynamicTitle.vue';
 import SortableCards from '@/client/components/SortableCards.vue';
 import TopBar from '@/client/components/TopBar.vue';
-import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
-import {KeyboardNavigation} from '@/client/components/KeyboardNavigation';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
-import {Phase} from '@/common/Phase';
 import StackedCards from '@/client/components/StackedCards.vue';
 import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
+import UndergroundTokens from '@/client/components/underworld/UndergroundTokens.vue';
+import {playerColorClass} from '@/common/utils/utils';
+import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
+import {KeyboardNavigation} from '@/client/components/KeyboardNavigation';
+import {Phase} from '@/common/Phase';
 import {GameModel} from '@/common/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {CardType} from '@/common/cards/CardType';
 import {nextTileView, TileView} from './board/TileView';
 import {getCardsByType, isCardActivated} from '@/client/utils/CardUtils';
 import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
-
 import {CardModel} from '@/common/models/CardModel';
 import {getCardOrThrow} from '../cards/ClientCardManifest';
 
@@ -386,6 +381,7 @@ export default Vue.extend({
     PlanetaryTracks,
     'stacked-cards': StackedCards,
     PurgeWarning,
+    UndergroundTokens,
   },
   methods: {
     navigatePage(event: KeyboardEvent) {

@@ -107,48 +107,48 @@
     "Add resource to card Fish": "Umieść jednostkę zwierząt na karcie Ryby",
     "Add resource": "Dodaj zasób",
     "Gain plant": "Otrzymujesz jednostkę roślinności",
-  
+
   "Frontier Town": "Miasto Graniczne",
     "Requires that Mars First is ruling or that you have 2 delegates there. Decrease your energy production one step. Place a city tile. GAIN THE PRINTED PLACEMENT BONUS 2 ADDITIONAL TIMES.": "Wymaga, aby partia Mars First rządziła lub aby miała tam 2 delegatów. Obniż swoją produkcję energii o jeden poziom. Umieść na planszy obszar miasta. Otrzymujesz bonus z umieszczenia DWUKROTNIE.",
-  
+
   "Cloud Tourism": "Podniebna Turystyka",
     "Increase your M€ production 1 step for each pair of Earth and Venus tags you own. 1 VP for every 3rd floater on this card.": "Podnieś swoją produkcję M€ o 1 poziom za każdą parę symboli Ziemi i Wenus, które posiadasz. Każde 3 dryfowce na tej karcie dają 1 PZ.",
-  
+
   "Ceres Tech Market": "Rynek Technologii Ceres",
     "Action: Discard any number of cards from your hand to gain 2 M€ for each discarded card.": "Akcja: Odrzuć dowolną liczbę kart z ręki, aby otrzymać 2 M€ za każdą odrzuconą kartę.",
     "Gain 2 M€ per colony you own.": "Otrzymujesz 2 M€ za każdą posiadaną kolonię.",
-  
+
   "WG Project": "Projekt WG",
     "Requires that you are Chairman. DRAW 3 PRELUDE CARDS AND PLAY 1 OF THEM, Discard the other 2.": "Wymaga, abyś był Przewodniczącym. Dobierz 3 karty Preludium i zagraj jedną z nich. Pozostałe 2 odrzuć.",
-  
+
   "Unexpected Application": "Niespodziewane Zastosowanie",
     "Discard 1 card to terraform Venus 1 step.": "Odrzuć 1 kartę, aby terraformować Wenus o 1 poziom.",
-    
+
   "Venus Allies": "Sojusznicy z Wenus",
     "Raise Venus 2 steps. Gain 4 M€ per colony you have.": "Podnieś poziom Wenus o 2 poziomy. Otrzymujesz 4 M€ za każdą posiadaną kolonię.",
-    
+
   "Venus Trade Hub": "Centrum Handlu Wenus",
     "Effect: When you trade, gain 3 M€.": "Efekt: Podczas handlu otrzymujesz 3 M€.",
     "Requires 2 Venus tags.": "Wymaga 2 symboli Wenus.",
-    
+
   "Venus Shuttles": "Promy Wenus",
     "Action: Spend 12 M€ to raise Venus 1 step. This cost is REDUCED BY 1 FOR EACH VENUS TAG you have.": "Akcja: Wydaj 12 M€, aby podnieść poziom Wenus o 1 poziom. Koszt ten jest mniejszy o 1 za każdy posiadany symbol Wenus.",
     "Add 2 floaters to ANY VENUS CARD.": "Dodaj 2 dryfowce do dowolnej karty Wenus.",
-    
+
   "Venus Orbital Survey": "Orbitalne Badania Wenus",
     "Action: Reveal the top 2 cards, take any venus cards to hand for free. Any other card you either buy or discard": "Akcja: Odkryj wierzchnie 2 karty, weź dowolne karty Wenus za darmo. Pozostałe karty możesz albo kupić albo odrzucić.",
-    
+
   "Red Appeasement": "Czerwone Ustępstwo",
     "Requires that Reds are ruling or that you have 2 delegates there, AND THAT NO OTHER PLAYER HAS PASSED.": "Wymaga, aby Czerwoni rządzili lub aby mieli tam 2 delegatów, oraz że żaden inny gracz jeszcze nie spasował.",
     "PASS": "PAS",
     "Increase M€ production 2 steps. This counts as passing. You get no other turns this generation.": "Podnieś produkcję M€ o 2 poziomy. To jest równoznaczne z spasowaniem w tej generacji. Nie masz już więcej tur.",
-    
+
   "Special Permit": "Specjalne Pozwolenie",
     "Requires that Greens are ruling or that you have 2 delegates there. Steal 4 plants from any player.": "Wymaga, aby Zieloni rządzili lub aby mieli tam 2 delegatów. Ukradnij 4 jednostki roślinności od dowolnego gracza.",
 
   "Soil Studies": "Studia Glebowe",
     "Requires that temperature is -4 C or lower. Gain 1 plant per Venus tag, plant tag, and colony you have.": "Wymaga, aby temperatura była -4°C lub niższa. Otrzymujesz 1 jedn. roślinności za każdy symbol Wenus, symbol roślin i kolonie, które posiadasz.",
-    
+
   "GHG Shipment": "Dostawa GHG",
     "Requires that Kelvinists are in power or that you have 2 delegates there. Increase your heat production 1 step. Gain 1 heat for each floater you have.": "Wymaga, aby Kelwiniści byli u władzy lub aby mieli tam 2 delegatów. Podnieś produkcję ciepła o 1 poziom. Otrzymujesz 1 jedn. ciepła za każdego posiadanego dryfowca.",
 
@@ -156,7 +156,7 @@
     "Requires Venus 10%. Gain 3 titanium and draw 2 Venus cards.": "Wymaga minimum 10% terraformacji Wenus. Otrzymujesz 3 tytanu i dobierasz 2 karty Wenus",
 
   "L1 Trade Terminal": "Terminal Handlowy L1",
-    "Effect: When you trade, first increase that colony tile track 2 steps.": "Efekt: Podczas handlu najpierw podnieś postęp kolonii o 2 kroki.",
+    "Effect: When you trade, you may first increase that colony tile track 2 steps.": "Efekt: Podczas handlu możesz najpierw podnieś postęp kolonii o 2 kroki.",
     "Add a resource to 3 different cards that already have resources.": "Dodaj zasób do 3 różnych kart, które już mają zasoby.",
 
   "Floating Refinery": "Podniebna Rafineria",

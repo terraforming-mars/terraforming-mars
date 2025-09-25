@@ -3,25 +3,25 @@ import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
 import {CardType} from '../../common/cards/CardType';
-import {YesAnd} from './requirements/CardRequirement';
-
-export type CanPlayResponse = boolean | YesAnd;
-
-export type PlayableCard = {
-  card: IProjectCard,
-  details?: CanPlayResponse,
-};
+import {AdditionalProjectCosts} from '../../common/cards/Types';
 
 export interface IProjectCard extends ICard {
-  canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): CanPlayResponse;
+  canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean;
+
+  // The only card that is going to call this is Oumuamua Type Object Survey.
+  canPlayPostRequirements(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean;
   cost: number;
 
   /**
    * The bonus resource gained when playing this card. This value is a serialized value.
    *
    * This field serves two purposes.
-   * It's used by Robotic Workforce to track production bonuses that are game-specific
-   * (Mining Rights, Mining Area, their Ares equivalents, and Pathfinders' Specialized Settlement all apply.)
+   * It's used by Robotic Workforce to track production bonuses that are game-specific.
+   * Applies to
+   *   Mining Rights, Mining Area,
+   *   their Ares equivalents
+   *   Pathfinders' Specialized Settlement
+   *   Underworld's Deepmining.
    *
    * It's also used when rendering the card to indicate which production bonus it might have received, as
    * a visual cue for someone playing Robotic Workforce.
@@ -36,6 +36,16 @@ export interface IProjectCard extends ICard {
    * the Convert Heat standard action, and other cards.
    */
   reserveUnits?: Units;
+
+  /**
+   * Per-instance state-specific additional costs to play this card.
+   *
+   * This is ephemeral data that gets reset between evaluations.
+   * It is not serialized.
+   *
+   * See: ICard.warnings.
+   */
+  additionalProjectCosts?: AdditionalProjectCosts;
 }
 
 export function isIProjectCard(card: ICard): card is IProjectCard {

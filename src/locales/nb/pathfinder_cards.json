@@ -6,7 +6,7 @@
   "Spend 1 steel and 1 energy to gain 3 plants.": "Bruk 1 stål og 1 energi for å få 3 planter.",
   "Requires -18° C or warmer.": "Krever -18° C eller varmere.",
 
-  "Anthozoa": "Anthozoa",
+  "Anthozoa": "",
   "Spend 1 plant to add an animal to this card.": "Bruk 1 plante for å legge til et dyr på dette kortet.",
   "Requires 3 oceans on Mars. 1 VP per 2 animals on this card.": "Krever 3 hav på Mars. 1 SP per 2 dyr på dette kortet.",
 
@@ -82,7 +82,7 @@
 
   "Economic Espionage": "Økonomisk spionasje",
   "Spend 2 M€ to Add 1 data to ANY card.": "Bruk 2 M€ for å legge til 1 data på et valgfritt kort.",
-  "1VP for every 3 data here.": "1 SP per 3 data her.",
+  "1 VP for every 3 data here.": "1 SP per 3 data her.",
 
   "Economic Help": "Økonomisk hjelp",
   "Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. Increase your M€ production 1 step": "Øk det laveste ikke-fullførte planetsporet med 3 trinn. Dersom to er like lave, øk alle de laveste sporene med 2 trinn. Øk M€-produksjonen din med 1 trinn.",
@@ -115,7 +115,7 @@
   "Interplanetary Transport": "Interplanetarisk transport",
   "(Increase your M€ production 1 step for every offworld city tile.)": "Øk M€-produksjonen din med 1 trinn for hvert byområde utenfor verden.",
 
-  "Kickstarter": "Kickstarter",
+  "Kickstarter": "",
   "(Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 3 steps in total.)": "Velg et planetsymbol. Dette kortet teller som om det har 1 av det symbolet. Øk det tilsvarende planetsporet med 3 trinn totalt.",
 
   "Last Resort Ingenuity": "Genistrek i siste liten",
@@ -163,8 +163,8 @@
   "(Increase your plant production by 2. Gain 1 plant.)": "(Øk planteproduksjonen din med 2. Få 1 plante.)",
 
   "Oumuamua Type Object Survey": "Oumuamua-type objektundersøkelse",
-  "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "Trekk 2 kort og vis dem frem. Hvis det første har et vitenskapssymbol eller mikrobesymbol, spill det umiddelbart, og ignorer krav og kostnader. Hvis ikke, og det har et romsymbol, få 3 energiproduksjon. Hvis det ikke har noen av disse, gjelder sjekken for det andre kortet.",
-  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card. )": "(Krever 1 romsymbol og 1 vitenskapssymbol. Legg til 2 data på et valgfritt kort.)",
+  "Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.": "Trekk 2 kort og vis dem frem. Hvis det første har et vitenskapssymbol eller mikrobesymbol, spill det umiddelbart, og ignorer krav og kostnader. Hvis ikke, og det har et romsymbol, få 3 energiproduksjon. Hvis det ikke har noen av disse, gjelder sjekken for det andre kortet.",
+  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card.)": "(Krever 1 romsymbol og 1 vitenskapssymbol. Legg til 2 data på et valgfritt kort.)",
 
   "Ozone Generators": "Ozongeneratorer",
   "(Action: Spend 3 energy to gain 1 TR.)": "(Handling: Bruk 3 energi for å få 1 TR.)",
@@ -220,7 +220,7 @@
   "Solar Storm": "Solstorm",
   "(Every player loses 2 plants. Remove up to 3 data from any player. Raise your heat production 1 step. Raise the temperature 1 step.)": "(Alle spillere mister 2 planter. Fjern opptil 3 data fra en spiller. Øk varmeproduksjonen din med 1 trinn. Øk temperaturen 1 trinn.)",
 
-  "Solarpedia": "Solarpedia",
+  "Solarpedia": "",
   "(Action: Add 2 data to ANY card.)": "(Handling: Legg til 2 data på et valgfritt kort.)",
   "(Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.)": "(Krever 1 Venus-, Jord-, Mars- og Jupitersymbol. Legg til 2 data på et valgfritt kort. 1 SP per 6 data her.)",
 
@@ -243,7 +243,7 @@
   "(Effect: When you play a Mars tag, add 1 specialized robot on this card.)": "(Effekt: Når du spiller et Marssymbol, legg til 1 spesialisert robot på dette kortet.)",
   "1 VP for every specialized robot on this card.": "1 SP per spesialiserte robot på dette kortet.",
   "(Requires 4 science tags.)": "(Krever 4 vitenskapssymboler.)",
-  
+
   "Think Tank": "Tenketank",
   "(Action: Spend 2 M€ to place 1 data on any card.)": "(Handling: Bruk 2 M€ for å legge til 1 data på et valgfritt kort.)",
   "+/-1 global parameter": "+/-1 globale parametre",

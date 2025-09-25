@@ -263,10 +263,21 @@
 
 .tag-tr {
     background-image: url(./assets/resources/tr.png);
-    background-image: url(./assets/resources/tr.png);
     background-size: 49px 38px !important;
     background-position: -4px -2px !important;
 }
+.tag-handicap {
+    background-image: url(./assets/resources/handicap.png);
+    background-size: 42px 35px !important;
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: unset;
+    filter: drop-shadow(.5px .5px 0 black)
+        drop-shadow(-.5px .5px 0 black)
+        drop-shadow(.5px -.5px 0 black)
+        drop-shadow(-.5px -.5px 0 black);
+}
+
 .tag-escape {
     background-image: url(./assets/expansion_icons/expansion_icon_escapeVelocity.png);
     background-size: 56px;
@@ -307,7 +318,6 @@
     background-position: 0px !important;
 }
 
-
 .tag-excavation-count {
   background-image: url(./assets/underworld/excavate.png);
   border: none !important;
@@ -321,8 +331,34 @@
   background-position: 0px !important;
 }
 
+.tag-underground-token-count {
+  background-image: url(./assets/underworld/underground-token-background.png);
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  background-size: 34px !important;
+  width: 34px !important;
+  height: 34px !important;
+  filter: brightness(0.8);
+  border-radius: 0px !important;
+  background-position: 0px !important;
+}
+
 .tag-corruption-count {
   background-image: url(./assets/underworld/corruption.png);
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  background-size: 34px !important;
+  width: 34px !important;
+  height: 34px !important;
+  filter: brightness(0.8);
+  border-radius: 0px !important;
+  background-position: 0px !important;
+}
+
+.tag-negative-vp {
+  background-image: url(./assets/underworld/negative-vp.png);
   border: none !important;
   background-color: transparent !important;
   box-shadow: none !important;
@@ -569,8 +605,6 @@
             text-transform: uppercase;
             text-align: center;
             font-weight: bold;
-            background-size: 200px;
-            background-position: -30px -5px;
             border-radius: 10px 10px 0 0;
         }
 
@@ -590,74 +624,39 @@
 
           lunar-magnate, lunarchitect, full-moon, one-giant-step,
 
-          economizer, pioneer, land-specialist, martian, businessperson,
+          economizer, pioneer, land-specialist, martian,
           cosmic-settler, botanist, promoter, zoologist, a-manufacturer,
 
-          v-electrician, smith, tradesman, irrigator, capitalist,
+          v-electrician, v-spacefarer, smith, tradesman, irrigator, capitalist,
           forecaster, edgedancer, visionary, naturalist, voyager,
-          ;
-        each(@ma-name, {
-          .ma-name--@{value} {
-            background-image: url("assets/ma/@{value}.png");
-          }
-        })
 
-        /* TODO(kberg): move these files up a level. */
-        @ma-name-fanmade:
-          colonizer, farmer, minimalist, terran, tropicalist,
-          curator, tourist, engineer, a-zoologist,
+          rugged, purifier,
+
+          agronomist, engineer, farmer,
+
+          colonizer, minimalist, terran, tropicalist,
+          curator, tourist, a-engineer, a-zoologist,
 
           t-collector, firestarter, terra-pioneer, spacefarer, gambler,
-          biologist, t-economizer, t-politician, urbanist, warmonger,
-        ;
-        each(@ma-name-fanmade, {
-          .ma-name--@{value} {
-            background-image: url("assets/ma/fanmade/@{value}.png");
-          }
-        })
+          biologist, t-politician, urbanist, warmonger,
+          incorporator, manufacturer, politician,
 
-        @ma-name-modular:
           administrator, constructor, founder, highlander, hydrologist, investor,
           landscaper, metropolist, mogul, thawer, traveller,
 
           collector, electrician, fundraiser, geologist, landshaper, lobbyist, philantropist,
-          planetologist, producer, researcher, sponsor
+          planetologist, producer, researcher, sponsor, forester, breeder, thermoengineer,
+
+          kingpin, excavator, tunneler, risktaker,
         ;
-        each(@ma-name-modular, {
+        each(@ma-name, {
           .ma-name--@{value} {
-            background-image: url("assets/ma/modular/@{value}.png");
+            background-image: url("assets/ma/@{value}.png");
+            // Images are expected to be 140px x 83px
+            // background-size: 200px;
+            // background-position: -30px -5px;
           }
         })
-
-        // TODO(kberg): Set better background sizes.
-        // Underworld
-        .ma-name--kingpin {
-          background-image: url(./assets/ma/underworld/kingpin.png);
-          background-repeat: no-repeat;
-          background-size: 153px !important;
-          background-position: -6px -5px !important;
-        }
-
-        .ma-name--edgelord {
-          background-image: url(./assets/ma/underworld/edgelord.png);
-          background-repeat: no-repeat;
-          background-size: 153px !important;
-          background-position: -6px -5px !important;
-        }
-
-        .ma-name--tunneler {
-          background-image: url(./assets/ma/underworld/tunneler.png);
-          background-repeat: no-repeat;
-          background-size: 180px !important;
-          background-position: -21px -7px !important;
-        }
-
-        .ma-name--risktaker {
-          background-image: url(./assets/ma/underworld/risktaker.png);
-          background-size: 165px !important;
-          background-position: -11px -5px !important;
-          background-repeat: no-repeat;
-        }
 
         .ma-description {
             display: inline-block;
@@ -668,14 +667,6 @@
             font-size: 14px;
             line-height: 15px;
             text-align: center;
-
-        }
-    }
-
-    .pwned-item {
-        .ma-name,
-        .ma-description {
-            opacity: 1;
         }
     }
 }
@@ -835,12 +826,16 @@
     }
 }
 
+.player_home_block--underground-tokens {
+  height: 50px;
+}
+
 .deck-size {
     position: absolute;
     width: 33px;
     margin: 30px 0 0 0;
     font-family: Prototype;
-    font-size: 15px;
+    font-size: 11px;
     text-align: center;
     color: #fff;
 }

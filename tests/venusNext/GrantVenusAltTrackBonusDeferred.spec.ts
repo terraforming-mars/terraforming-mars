@@ -9,7 +9,7 @@ import {SelectCard} from '../../src/server/inputs/SelectCard';
 import {Birds} from '../../src/server/cards/base/Birds';
 import {testGame} from '../TestGame';
 
-describe('GrantVenusAltTrackBonusDeferred', function() {
+describe('GrantVenusAltTrackBonusDeferred', () => {
   let player: TestPlayer;
 
   beforeEach(() => {

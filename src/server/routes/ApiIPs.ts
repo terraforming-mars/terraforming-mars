@@ -11,7 +11,7 @@ export class ApiIPs extends Handler {
   }
 
   public override get(_req: Request, res: Response, ctx: Context): Promise<void> {
-    responses.writeJson(res, ctx.ipTracker.toJSON(), 2);
+    responses.writeJson(res, ctx, ctx.ipTracker.toJSON(), 2);
     return Promise.resolve();
   }
 }

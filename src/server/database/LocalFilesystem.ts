@@ -4,6 +4,8 @@ import {GameOptions} from '../game/GameOptions';
 import {GameId, isGameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
 import {Dirent, existsSync, mkdirSync, readdirSync, readFileSync, unlinkSync, writeFileSync} from 'fs';
+import {Session, SessionId} from '../auth/Session';
+import {toID} from '../../common/utils/utils';
 
 const path = require('path');
 const defaultDbFolder = path.resolve(process.cwd(), './db/files');
@@ -12,39 +14,42 @@ export class LocalFilesystem implements IDatabase {
   protected readonly dbFolder: string;
   private readonly historyFolder: string;
   private readonly completedFolder: string;
+  private readonly sessionsFolder: string;
   public static quiet: boolean = false;
 
   constructor(dbFolder: string = defaultDbFolder) {
     this.dbFolder = dbFolder;
     this.historyFolder = path.resolve(dbFolder, 'history');
     this.completedFolder = path.resolve(dbFolder, 'completed');
+    this.sessionsFolder = path.resolve(dbFolder, 'sessions');
   }
 
   public initialize(): Promise<void> {
     console.log(`Starting local database at ${this.dbFolder}`);
-    if (!existsSync(this.dbFolder)) {
-      mkdirSync(this.dbFolder);
-    }
-    if (!existsSync(this.historyFolder)) {
-      mkdirSync(this.historyFolder);
-    }
-    if (!existsSync(this.completedFolder)) {
-      mkdirSync(this.completedFolder);
+    const dirs = [this.dbFolder, this.historyFolder, this.completedFolder, this.sessionsFolder];
+    for (const folder of dirs) {
+      if (!existsSync(folder)) {
+        mkdirSync(folder);
+      }
     }
     return Promise.resolve();
   }
 
-  private filename(gameId: string): string {
+  private filename(gameId: GameId): string {
     return path.resolve(this.dbFolder, `${gameId}.json`);
   }
 
-  private historyFilename(gameId: string, saveId: number) {
+  private historyFilename(gameId: GameId, saveId: number) {
     const saveIdString = saveId.toString().padStart(5, '0');
     return path.resolve(this.historyFolder, `${gameId}-${saveIdString}.json`);
   }
 
-  private completedFilename(gameId: string) {
+  private completedFilename(gameId: GameId) {
     return path.resolve(this.completedFolder, `${gameId}.json`);
+  }
+
+  private sessionFilename(sessionId: SessionId) {
+    return path.resolve(this.sessionsFolder, `${sessionId}.json`);
   }
 
   saveGame(game: IGame): Promise<void> {
@@ -192,22 +197,51 @@ export class LocalFilesystem implements IDatabase {
 
   public getParticipants(): Promise<Array<GameIdLedger>> {
     const gameIds: Array<GameIdLedger> = [];
-
-    readdirSync(this.dbFolder, {withFileTypes: true}).forEach((dirent: Dirent) => {
+    const entries = readdirSync(this.dbFolder, {withFileTypes: true});
+    for (const dirent of entries) {
       const gameId = this.asGameId(dirent);
       if (gameId !== undefined) {
         try {
           const text = readFileSync(this.filename(gameId));
           const game: SerializedGame = JSON.parse(text.toString());
-          const participantIds: Array<ParticipantId> = game.players.map((p) => p.id);
+          const participantIds: Array<ParticipantId> = game.players.map(toID);
           if (game.spectatorId) participantIds.push(game.spectatorId);
           gameIds.push({gameId, participantIds});
         } catch (e) {
           console.error(`While reading ${gameId} `, e);
         }
       }
-    });
+    }
     return Promise.resolve(gameIds);
+  }
+
+  createSession(session: Session): Promise<void> {
+    const text = JSON.stringify(session, null, 2);
+    writeFileSync(this.sessionFilename(session.id), text);
+    return Promise.resolve();
+  }
+  deleteSession(sessionId: SessionId): Promise<void> {
+    unlinkSync(this.sessionFilename(sessionId));
+    return Promise.resolve();
+  }
+  getSessions(): Promise<Array<Session>> {
+    const sessions: Array<Session> = [];
+    const now = Date.now();
+    const entries = readdirSync(this.sessionsFolder, {withFileTypes: true});
+    for (const dirent of entries) {
+      if (dirent.isFile() && dirent.name.endsWith('.json')) {
+        try {
+          const text = readFileSync(this.sessionsFolder + '/' + dirent.name);
+          const session: Session = JSON.parse(text.toString());
+          if (session.expirationTimeMillis > now) {
+            sessions.push(session);
+          }
+        } catch (e) {
+          console.error(`While reading ${dirent.name} `, e);
+        }
+      }
+    }
+    return Promise.resolve(sessions);
   }
 
   private deleteVersion(gameId: GameId, version: number) {

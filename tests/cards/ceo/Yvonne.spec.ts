@@ -10,7 +10,7 @@ import {Ceres} from '../../../src/server/colonies/Ceres';
 import {Triton} from '../../../src/server/colonies/Triton';
 
 
-describe('Yvonne', function() {
+describe('Yvonne', () => {
   let card: Yvonne;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -41,11 +41,11 @@ describe('Yvonne', function() {
     player2.titanium = 0;
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     expect(card.canAct(player)).is.true;
   });
 
-  it('Takes action', function() {
+  it('Takes action', () => {
     // Sanity check before OPG
     expect(player2.energy).eq(0);
     expect(player2.steel).eq(0);
@@ -57,7 +57,7 @@ describe('Yvonne', function() {
     expect(player.titanium).eq(2);
   });
 
-  it('Opponents dont get the bonuses', function() {
+  it('Opponents dont get the bonuses', () => {
     // Sanity check before OPG
     expect(player2.energy).eq(0);
     expect(player2.steel).eq(0);
@@ -69,7 +69,7 @@ describe('Yvonne', function() {
     expect(player2.titanium).eq(0);
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     card.action(player);
     game.deferredActions.runAll(() => { });
     forceGenerationEnd(game);

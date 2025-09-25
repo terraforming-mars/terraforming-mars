@@ -6,8 +6,8 @@ import {CardResource} from '../../../src/common/CardResource';
 import {CardManifest} from '../../../src/server/cards/ModuleManifest';
 import {CardType} from '../../../src/common/cards/CardType';
 
-describe('floaterCards', function() {
-  it('Ensure static list contains all cards that mention floaters', function() {
+describe('floaterCards', () => {
+  it('Ensure static list contains all cards that mention floaters', () => {
     const found: Array<CardName> = [];
     ALL_MODULE_MANIFESTS.forEach((manifest) => {
       CardManifest.entries(manifest.projectCards).forEach((entry) => {

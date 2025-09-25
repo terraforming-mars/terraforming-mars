@@ -9,7 +9,7 @@ import {forceGenerationEnd, setRulingParty, runAllActions} from '../../TestingUt
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {TPolitician} from '../../../src/server/awards/terraCimmeria/TPolitician';
 
-describe('Zan', function() {
+describe('Zan', () => {
   let card: Zan;
   let player: TestPlayer;
   let game: IGame;
@@ -21,7 +21,7 @@ describe('Zan', function() {
     player.playedCards.push(card);
   });
 
-  it('Not affected by Reds policy when raising TR', function() {
+  it('Not affected by Reds policy when raising TR', () => {
     setRulingParty(game, PartyName.REDS);
 
     player.megaCredits = 3;
@@ -30,13 +30,13 @@ describe('Zan', function() {
     expect(player.megaCredits).eq(3);
   });
 
-  it('Not affected by Reds policy when checking canPlay for cards that give TR', function() {
+  it('Not affected by Reds policy when checking canPlay for cards that give TR', () => {
     player.megaCredits = 14;
     const releaseOfInertGases = new ReleaseOfInertGases();
     expect(releaseOfInertGases.canPlay(player)).is.true;
   });
 
-  it('Takes OPG action', function() {
+  it('Takes OPG action', () => {
     const turmoil = game.turmoil!;
     player.megaCredits = 0;
     const expectedMegagredits = turmoil.getAvailableDelegateCount(player);
@@ -53,7 +53,7 @@ describe('Zan', function() {
     expect(card.isDisabled).is.true;
   });
 
-  it('OPG Counts for POLITICAN Award', function() {
+  it('OPG Counts for POLITICAN Award', () => {
     const politician = new TPolitician();
     game.awards = [];
     game.awards.push(politician);
@@ -63,7 +63,7 @@ describe('Zan', function() {
     expect(game.awards[0].getScore(player)).eq(preOPGScore+7);
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     card.action(player);
     forceGenerationEnd(game);
 

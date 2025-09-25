@@ -6,24 +6,24 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('NitriteReducingBacteria', function() {
+describe('NitriteReducingBacteria', () => {
   let card: NitriteReducingBacteria;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new NitriteReducingBacteria();
     [game, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.playedCards.push(card);
     card.play(player);
     game.deferredActions.runNext();
     expect(card.resourceCount).to.eq(3);
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.playedCards.push(card);
 
     expect(churn(card.action(player), player)).is.undefined;
@@ -37,6 +37,6 @@ describe('NitriteReducingBacteria', function() {
 
     expect(churn(() => orOptions.options[0].cb(), player)).is.undefined;
     expect(card.resourceCount).to.eq(2);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
   });
 });

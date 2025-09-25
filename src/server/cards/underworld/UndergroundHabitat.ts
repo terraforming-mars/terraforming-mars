@@ -12,7 +12,7 @@ export class UndergroundHabitat extends Card implements IProjectCard {
       type: CardType.AUTOMATED,
       name: CardName.UNDERGROUND_HABITAT,
       cost: 12,
-      tags: [Tag.MARS, Tag.BUILDING, Tag.PLANT],
+      tags: [Tag.BUILDING, Tag.PLANT, Tag.ANIMAL],
 
       behavior: {
         production: {plants: 1},
@@ -21,7 +21,7 @@ export class UndergroundHabitat extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U71',
+        cardNumber: 'U071',
         renderData: CardRenderer.builder((b) => {
           b.excavate(1).production((pb) => pb.plants(1)).resource(CardResource.ANIMAL).asterix();
         }),

@@ -42,7 +42,7 @@
   "Lose 1 plant for each Earth tag you own (max 5) then reduced by influence.": "Mist 1 plante for hvert Jordsymbol du eier (maks. 5), deretter redusert av innflytelse.",
   "Lower the temperature and oxygen 2 steps each. (-4C, -2% O2)": "Senk temperaturen og oksygenet 2 trinn hver. (-4C, -2% O2)",
   "Pay 10M€. Add 2 data to EVERY data card. Add 1 data to any data card for each influence you have.": "Betal 10 M€. Legg til 2 data på HVERT datakort. Legg til 1 data på et valgfritt datakort for hver innflytelse du har.",
-  "Diaspora": "Diaspora",
+  "Diaspora": "",
   "Sponsored Projects": "Sponsede prosjekter",
   "Generous Funding": "Generøs finansiering",
   "Successful Organisms": "Suksessfulle organismer",
@@ -85,11 +85,11 @@
   "Magnetic Field Stimulation Delays": "Forsinkelser i magnetfelt-stimulering",
   "Communication Boom": "Kommunikasjons-boom",
   "w/rsrs": "m. Res.",
-  "over 15": "over 15",
+  "over 15": "",
   "1st:": "1.:",
   "2nd:": "2.:",
   "lose all": "mist alle",
   "max 3": "max. 3",
-  "over 10": "over 10",
+  "over 10": "",
   "OR": "ELLER"
 }

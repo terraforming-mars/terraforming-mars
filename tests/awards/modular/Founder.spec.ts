@@ -5,7 +5,7 @@ import {testGame} from '../../TestGame';
 import {addGreenery, addCity, cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {NaturalPreserve} from '../../../src/server/cards/base/NaturalPreserve';
-import {EmptyBoard} from '../../ares/EmptyBoard';
+import {EmptyBoard} from '../../testing/EmptyBoard';
 import {Founder} from '../../../src/server/awards/modular/Founder';
 
 describe('Founder', () => {
@@ -28,7 +28,7 @@ describe('Founder', () => {
       founder.getScore(player3)];
   }
 
-  it('Takes action, Founder Milestone does not get a benefit', function() {
+  it('Takes action, Founder Milestone does not get a benefit', () => {
     const naturalPreserve = new NaturalPreserve();
     naturalPreserve.play(player2);
     runAllActions(game);

@@ -22,7 +22,7 @@ describe('GagarinMobileBase', () => {
     [game, player, player2] = testGame(2);
     card = new GagarinMobileBase();
     space13 = game.board.getSpaceOrThrow('13');
-    player.playedCards = [card];
+    player.playedCards.push(card);
   });
 
   it('solo game, initial action includes fewer spaces', () => {

@@ -12,3 +12,11 @@ export interface IGlobalEvent {
   renderData: ICardRenderRoot;
   resolve: (game: IGame, turmoil: Turmoil) => void;
 }
+
+export function isIGlobalEvent(object: any): object is IGlobalEvent {
+  return (
+    object !== undefined &&
+    object.hasOwnProperty('revealedDelegate') &&
+    object.hasOwnProperty('revealedDelegate')
+  );
+}

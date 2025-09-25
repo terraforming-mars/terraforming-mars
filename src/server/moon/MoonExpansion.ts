@@ -14,7 +14,7 @@ import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from 
 import {Resource} from '../../common/Resource';
 import {Phase} from '../../common/Phase';
 import {BoardType} from '../boards/BoardType';
-import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
+import {VictoryPointsBreakdownBuilder} from '../game/VictoryPointsBreakdownBuilder';
 import {SpaceId} from '../../common/Types';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
@@ -128,23 +128,20 @@ export class MoonExpansion {
       // Ideally, this should be part of game.addTile, but since it isn't it's convenient enough to
       // hard-code onTilePlaced here. I wouldn't be surprised if this introduces a problem, but for now
       // it's not a problem until it is.
-      game.getPlayers().forEach((p) => {
-        p.tableau.forEach((playedCard) => {
+      for (const p of game.players) {
+        for (const playedCard of p.tableau) {
           playedCard.onTilePlaced?.(p, player, space, BoardType.MOON);
-        });
-      });
+        }
+      }
     });
   }
 
   private static logTilePlacement(player: IPlayer, space: Space, tileType: TileType) {
+    // TODO(kberg): this can probably be removed now.
     // Skip off-grid tiles
     if (space.x !== -1 && space.y !== -1) {
-      const offsets = [-1, 0, 1, 1, 1, 0, -1];
-      const row = space.y + 1;
-      const position = space.x + offsets[space.y];
-
-      player.game.log('${0} placed a ${1} tile on The Moon at (${2}, ${3})', (b) =>
-        b.player(player).tileType(tileType).number(row).number(position));
+      player.game.log('${0} placed a ${1} tile at ${2}', (b) =>
+        b.player(player).tileType(tileType).space(space));
     }
   }
 
@@ -318,7 +315,7 @@ export class MoonExpansion {
     // This is a bit hacky and uncoordinated only because this returns early when there's a moon card with LTF Privileges
     // even though the heat component below could be considered (and is, for LocalHeatTrapping.)
 
-    if (player.cardIsInEffect(CardName.LTF_PRIVILEGES) && card.tags.includes(Tag.MOON)) {
+    if (player.tableau.has(CardName.LTF_PRIVILEGES) && card.tags.includes(Tag.MOON)) {
       return Units.EMPTY;
     }
 
@@ -332,7 +329,7 @@ export class MoonExpansion {
     for (const tileBuilt of card.tilesBuilt) {
       switch (tileBuilt) {
       case TileType.MOON_HABITAT:
-        if (player.cardIsInEffect(CardName.SUBTERRANEAN_HABITATS)) {
+        if (player.tableau.has(CardName.SUBTERRANEAN_HABITATS)) {
           // Edge case: Momentum Virum is a space habitat, not a habitat
           // ON the moon.
           if (card.name !== CardName.MOMENTUM_VIRUM_HABITAT) {
@@ -342,13 +339,13 @@ export class MoonExpansion {
         break;
 
       case TileType.MOON_MINE:
-        if (player.cardIsInEffect(CardName.IMPROVED_MOON_CONCRETE)) {
+        if (player.tableau.has(CardName.IMPROVED_MOON_CONCRETE)) {
           titanium -= 1;
         }
         break;
 
       case TileType.MOON_ROAD:
-        if (player.cardIsInEffect(CardName.LUNAR_DUST_PROCESSING_PLANT)) {
+        if (player.tableau.has(CardName.LUNAR_DUST_PROCESSING_PLANT)) {
           steel = 0;
         }
       }
@@ -359,7 +356,7 @@ export class MoonExpansion {
     return Units.of({steel, titanium, heat, plants});
   }
 
-  public static calculateVictoryPoints(player: IPlayer, vpb: VictoryPointsBreakdown): void {
+  public static calculateVictoryPoints(player: IPlayer, builder: VictoryPointsBreakdownBuilder): void {
     MoonExpansion.ifMoon(player.game, (moonData) => {
       // Each road tile on the map awards 1VP to the player owning it.
       // Each mine and colony (habitat) tile on the map awards 1VP per road tile touching them.
@@ -370,17 +367,17 @@ export class MoonExpansion {
           const type = space.tile.tileType;
           switch (type) {
           case TileType.MOON_ROAD:
-            vpb.setVictoryPoints('moon road', 1);
+            builder.setVictoryPoints('moon road', 1);
             break;
           case TileType.MOON_MINE:
           case TileType.MOON_HABITAT:
           case TileType.LUNAR_MINE_URBANIZATION:
             const points = moon.getAdjacentSpaces(space).filter((adj) => MoonExpansion.spaceHasType(adj, TileType.MOON_ROAD)).length;
             if (type === TileType.MOON_MINE || type === TileType.LUNAR_MINE_URBANIZATION) {
-              vpb.setVictoryPoints('moon mine', points);
+              builder.setVictoryPoints('moon mine', points);
             }
             if (type === TileType.MOON_HABITAT || type === TileType.LUNAR_MINE_URBANIZATION) {
-              vpb.setVictoryPoints('moon habitat', points);
+              builder.setVictoryPoints('moon habitat', points);
             }
             break;
           }

@@ -7,7 +7,7 @@ import {IGame} from '../../../src/server/IGame';
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Pluto} from '../../../src/server/colonies/Pluto';
 
-describe('ColonialRepresentation', function() {
+describe('ColonialRepresentation', () => {
   let card: ColonialRepresentation;
   let player: TestPlayer;
   let game: IGame;
@@ -16,15 +16,15 @@ describe('ColonialRepresentation', function() {
     [game, player] = testGame(1, {turmoilExtension: true});
   });
 
-  it('Influence check', function() {
+  it('Influence check', () => {
     game.turmoil!.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
     game.turmoil!.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
     game.turmoil!.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
     card.play(player);
-    expect(game.turmoil!.getPlayerInfluence(player)).to.eq(3);
+    expect(game.turmoil!.getInfluence(player)).to.eq(3);
   });
 
-  it('Megacredits check', function() {
+  it('Megacredits check', () => {
     const colony1 = new Luna();
     const colony2 = new Pluto();
     colony1.colonies.push(player.id);

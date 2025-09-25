@@ -19,7 +19,7 @@ export class BatteryFactory extends ActionCard implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U75',
+        cardNumber: 'U075',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 energy to gain 1 M€ for each power tag you have.',
             (ab) => ab.energy(1).startAction.megacredits(1).slash().tag(Tag.POWER));

@@ -4,18 +4,18 @@ import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {runAllActions} from '../../TestingUtils';
 
-describe('MartianCulture', function() {
+describe('MartianCulture', () => {
   let card: MartianCulture;
   let player: TestPlayer;
   let player2: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MartianCulture();
     [/* game */, player, player2] = testGame(2);
     player.playedCards.push(card);
   });
 
-  it('can play', function() {
+  it('can play', () => {
     player.megaCredits = card.cost;
     player.tagsForTest = {mars: 2};
     expect(player.canPlay(card)).is.true;
@@ -32,13 +32,13 @@ describe('MartianCulture', function() {
     expect(player.canPlay(card)).is.true;
   });
 
-  it('action', function() {
+  it('action', () => {
     card.action(player);
     runAllActions(player.game);
     expect(card.resourceCount).eq(1);
   });
 
-  it('victoryPoints', function() {
+  it('victoryPoints', () => {
     card.resourceCount = 1;
     expect(card.getVictoryPoints(player)).eq(0);
 

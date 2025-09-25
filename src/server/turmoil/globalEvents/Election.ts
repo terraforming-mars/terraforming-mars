@@ -29,7 +29,7 @@ export class Election extends GlobalEvent implements IGlobalEvent {
   public resolve(game: IGame, turmoil: Turmoil) {
     // Solo
     if (game.isSoloMode()) {
-      const player = game.getPlayers()[0];
+      const player = game.players[0];
       const score = this.getScore(player, turmoil, game);
       if (score >= 10) {
         player.increaseTerraformRating(2, {log: true});
@@ -37,7 +37,7 @@ export class Election extends GlobalEvent implements IGlobalEvent {
         player.increaseTerraformRating(1, {log: true});
       }
     } else {
-      const players = game.getPlayers().slice().sort(
+      const players = game.players.slice().sort(
         (p1, p2) => this.getScore(p2, turmoil, game) - this.getScore(p1, turmoil, game),
       );
 
@@ -73,7 +73,7 @@ export class Election extends GlobalEvent implements IGlobalEvent {
   }
 
   public getScore(player: IPlayer, turmoil: Turmoil, game: IGame) {
-    const score = player.tags.count(Tag.BUILDING, 'raw') + turmoil.getPlayerInfluence(player);
+    const score = player.tags.count(Tag.BUILDING, 'raw') + turmoil.getInfluence(player);
 
     const cities = game.board.spaces.filter(
       (space) => Board.isCitySpace(space) && space.player === player,

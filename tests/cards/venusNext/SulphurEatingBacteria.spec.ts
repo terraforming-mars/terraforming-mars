@@ -6,28 +6,28 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('SulphurEatingBacteria', function() {
+describe('SulphurEatingBacteria', () => {
   let card: SulphurEatingBacteria;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SulphurEatingBacteria();
     [game, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     setVenusScaleLevel(game, 4);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     setVenusScaleLevel(game, 6);
     expect(card.canPlay(player)).is.true;
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
   });
 
-  it('Should act - both actions available', function() {
+  it('Should act - both actions available', () => {
     player.playedCards.push(card);
     player.addResourceTo(card, 5);
 
@@ -37,7 +37,7 @@ describe('SulphurEatingBacteria', function() {
     expect(card.resourceCount).to.eq(2);
   });
 
-  it('Should act - only one action available', function() {
+  it('Should act - only one action available', () => {
     player.playedCards.push(card);
     expect(card.resourceCount).to.eq(0);
 

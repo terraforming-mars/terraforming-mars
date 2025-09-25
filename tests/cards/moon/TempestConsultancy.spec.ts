@@ -88,26 +88,26 @@ describe('TempestConsultancy', () => {
   });
 
   it('new chairman', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     turmoil.dominantParty = new Greens();
     turmoil.dominantParty.partyLeader = player;
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     turmoil.setRulingParty(game);
     runAllActions(game);
 
     expect(turmoil.chairman).eq(player);
-    expect(player.getTerraformRating()).eq(22);
+    expect(player.terraformRating).eq(22);
   });
 
   it('With Vote of No Confidence', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
     turmoil.chairman = 'NEUTRAL';
 
     const greens = turmoil.getPartyByName(PartyName.GREENS);
     greens.partyLeader = player;
 
-    expect(player.getTerraformRating()).to.eq(20);
+    expect(player.terraformRating).to.eq(20);
 
     const voteOfNoConfidence = new VoteOfNoConfidence();
     voteOfNoConfidence.play(player);
@@ -115,7 +115,7 @@ describe('TempestConsultancy', () => {
     expect(turmoil.chairman).eq(player);
     runAllActions(game);
     // With Vote of No Confidence, player becomes chairman and gains 1 TR. Tempest gives player a second TR.
-    expect(player.getTerraformRating()).to.eq(22);
+    expect(player.terraformRating).to.eq(22);
   });
 });
 

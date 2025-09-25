@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {TollStation} from '../../../src/server/cards/base/TollStation';
 import {cast, testGame} from '../../TestingUtils';
 
-describe('TollStation', function() {
-  it('Should play', function() {
+describe('TollStation', () => {
+  it('Should play', () => {
     const card = new TollStation();
     const [/* game */, player, anotherPlayer] = testGame(2);
     cast(card.play(player), undefined);

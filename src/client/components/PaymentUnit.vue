@@ -48,9 +48,10 @@ export default Vue.extend({
       case 'kuiperAsteroids': return 'resource_icon--asteroid';
       case 'lunaArchivesScience': return 'resource_icon--science';
       case 'spireScience': return 'resource_icon--science';
+      case 'auroraiData': return 'resource_icon--auroraidata';
       case 'seeds': return 'resource_icon--seed';
-      // TODO(kberg): remove toLowerCase
-      default: return 'resource_icon--' + this.unit.toLowerCase();
+      case 'megaCredits': return 'resource_icon--megacredits';
+      default: return 'resource_icon--' + this.unit;
       }
     },
   },

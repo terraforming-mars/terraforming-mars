@@ -25,7 +25,7 @@ describe('AstraMechanica', () => {
     it('canPlay ' + JSON.stringify(run), () => {
       const card = new AstraMechanica();
       const [/* game */, player] = testGame(2);
-      player.playedCards = cardsFromJSON([...run.playedCards]);
+      player.playedCards.push(...cardsFromJSON([...run.playedCards]));
       expect(card.canPlay(player)).eq(run.expected);
     });
   }
@@ -38,7 +38,7 @@ describe('AstraMechanica', () => {
     const bribedCommittee = new BribedCommittee();
     const moholeArea = new MoholeArea();
     const lavaFlows = new LavaFlows();
-    player.playedCards = [microMills, aiCentral, bribedCommittee, moholeArea, lavaFlows];
+    player.playedCards.push(microMills, aiCentral, bribedCommittee, moholeArea, lavaFlows);
     player.cardsInHand = [];
     const selectCard = cast(card.play(player), SelectCard);
 
@@ -46,7 +46,7 @@ describe('AstraMechanica', () => {
 
     selectCard.cb([bribedCommittee]);
 
-    expect(player.playedCards).to.have.members([microMills, aiCentral, moholeArea, lavaFlows]);
+    expect(player.playedCards.asArray()).to.have.members([microMills, aiCentral, moholeArea, lavaFlows]);
     expect(player.cardsInHand).to.have.members([bribedCommittee]);
   });
 });

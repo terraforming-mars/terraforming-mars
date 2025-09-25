@@ -11,7 +11,7 @@
     "Language": "Язык",
     "refresh page": "обновите страницу",
     "to see changes": "чтобы увидеть изменения",
-    
+
     "Hide non-blue played cards": "Скрыть не-синие сыгранные карты",
     "Hide log": "Скрыть лог",
     "Hide tag overview": "Скрыть обзор тэгов",
@@ -28,6 +28,6 @@
     "Experimental UI": "Экспериментальный UI",
     "Debug View": "Дебаг режим",
     "Tutorial Mode (req. refresh)": "Обучение (треб. обновить)",
-    "Ok": "OK",
+    "Ok": "",
     "Report a bug": "Сообщить о баге"
 }

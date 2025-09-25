@@ -20,7 +20,7 @@ describe('KingdomofTauraro', () => {
     const card = new KingdomofTauraro();
     const [game, player] = testGame(2);
 
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
     assertPlaceCity(player, player.popWaitingFor());
   });
@@ -28,7 +28,7 @@ describe('KingdomofTauraro', () => {
   it('May place next to own cities', () => {
     const card = new KingdomofTauraro();
     const [game, player] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     const board = game.board;
     const space = board.getSpaceOrThrow('35');
@@ -38,10 +38,23 @@ describe('KingdomofTauraro', () => {
     expect(availableSpacesForCity).includes(spacesNextToCity[0]);
   });
 
+  it('May place next to own excavation tokens', () => {
+    const card = new KingdomofTauraro();
+    const [game, player] = testGame(2, {underworldExpansion: true});
+    player.playedCards.push(card);
+
+    const board = game.board;
+    const space = board.getSpaceOrThrow('35');
+    space.excavator = player;
+    const availableSpacesForCity = board.getAvailableSpacesForCity(player);
+    const spacesNextToExcavationToken = board.getAdjacentSpaces(space);
+    expect(availableSpacesForCity).includes(spacesNextToExcavationToken[0]);
+  });
+
   it('Must place next to own tiles', () => {
     const card = new KingdomofTauraro();
     const [game, player, player2] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     const board = game.board;
     // Spot 55 has 6 land spaces next to it. Makes testing easier.

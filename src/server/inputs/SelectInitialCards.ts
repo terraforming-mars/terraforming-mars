@@ -8,8 +8,27 @@ import {SelectInitialCardsModel} from '../../common/models/PlayerInputModel';
 import {InputError} from './InputError';
 import {OptionsInput} from './OptionsPlayerInput';
 import {InputResponse, isSelectInitialCardsResponse} from '../../common/inputs/InputResponse';
+import {PlayerInput} from '../PlayerInput';
 
+type Inputs = {
+  corp: PlayerInput | undefined,
+  project: PlayerInput | undefined,
+  prelude: PlayerInput | undefined,
+  ceo: PlayerInput | undefined
+}
 export class SelectInitialCards extends OptionsInput<undefined> {
+  public readonly inputs: Inputs = {
+    corp: undefined,
+    project: undefined,
+    prelude: undefined,
+    ceo: undefined,
+  };
+
+  private push(name: keyof Inputs, input: PlayerInput) {
+    this.inputs[name] = input;
+    this.options.push(input);
+  }
+
   constructor(private player: IPlayer, cb: (corporation: ICorporationCard) => undefined) {
     super('initialCards', '', []);
     const game = player.game;
@@ -17,7 +36,8 @@ export class SelectInitialCards extends OptionsInput<undefined> {
     this.title = ' ';
     this.buttonLabel = 'Start';
 
-    this.options.push(
+
+    this.push('corp',
       new SelectCard<ICorporationCard>(
         titles.SELECT_CORPORATION_TITLE, undefined, player.dealtCorporationCards, {min: 1, max: 1}).andThen(
         (cards) => {
@@ -35,7 +55,7 @@ export class SelectInitialCards extends OptionsInput<undefined> {
     }
 
     if (game.gameOptions.preludeExtension) {
-      this.options.push(
+      this.push('prelude',
         new SelectCard(titles.SELECT_PRELUDE_TITLE, undefined, player.dealtPreludeCards, {min: 2, max: 2})
           .andThen((preludeCards) => {
             if (preludeCards.length !== 2) {
@@ -47,17 +67,17 @@ export class SelectInitialCards extends OptionsInput<undefined> {
     }
 
     if (game.gameOptions.ceoExtension) {
-      this.options.push(
+      this.push('ceo',
         new SelectCard(titles.SELECT_CEO_TITLE, undefined, player.dealtCeoCards, {min: 1, max: 1}).andThen((ceoCards) => {
           if (ceoCards.length !== 1) {
             throw new InputError('Only select 1 CEO');
           }
-          player.ceoCardsInHand.push(ceoCards[0]);
+          player.ceoCardsInHand.add(ceoCards[0]);
           return undefined;
         }));
     }
 
-    this.options.push(
+    this.push('project',
       new SelectCard(titles.SELECT_PROJECTS_TITLE, undefined, player.dealtProjectCards, {min: 0, max: 10})
         .andThen((cards) => {
           player.cardsInHand.push(...cards);
@@ -102,7 +122,7 @@ export class SelectInitialCards extends OptionsInput<undefined> {
     }
 
     for (const card of player.dealtCeoCards) {
-      if (player.ceoCardsInHand.includes(card) === false) {
+      if (player.ceoCardsInHand.has(card) === false) {
         game.ceoDeck.discard(card);
       }
     }
@@ -125,7 +145,7 @@ export class SelectInitialCards extends OptionsInput<undefined> {
       throw new InputError('Incorrect options provided');
     }
     for (let i = 0; i < input.responses.length; i++) {
-      player.runInput(input.responses[i], this.options[i]);
+      player.defer(this.options[i].process(input.responses[i], player));
     }
     return this.cb(undefined);
   }

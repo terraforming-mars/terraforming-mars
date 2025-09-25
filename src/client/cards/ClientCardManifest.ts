@@ -32,8 +32,6 @@ export function byModule(module: GameModule): (card: ClientCard) => boolean {
   return (card) => card.module === module;
 }
 
-export const toName = (card: ClientCard) => card.name;
-
 function initialize() {
   (cardJson as any as Array<ClientCard>).forEach((card) => {
     cards.set(card.name, card);

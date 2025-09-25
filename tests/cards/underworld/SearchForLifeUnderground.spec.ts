@@ -6,31 +6,31 @@ import {cast, runAllActions, setOxygenLevel, setTemperature} from '../../Testing
 import {testGame} from '../../TestGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
-describe('SearchForLifeUnderground', function() {
+describe('SearchForLifeUnderground', () => {
   let card: SearchforLifeUnderground;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SearchforLifeUnderground();
     [game, player] = testGame(2, {underworldExpansion: true});
   });
 
-  it('Can not act if no MC', function() {
+  it('Can not act if no MC', () => {
     player.megaCredits = 0;
     expect(card.canAct(player)).is.not.true;
     player.megaCredits = 1;
     expect(card.canAct(player)).is.true;
   });
 
-  it('Can not play if temperature too high', function() {
+  it('Can not play if temperature too high', () => {
     setTemperature(game, -18);
     expect(card.canPlay(player)).is.true;
     setTemperature(game, -16);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     setOxygenLevel(game, 6);
     expect(card.canPlay(player)).is.true;
     player.playedCards.push(card);
@@ -42,7 +42,7 @@ describe('SearchForLifeUnderground', function() {
   });
 
 
-  it('action fails, no microbes', function() {
+  it('action fails, no microbes', () => {
     player.playedCards.push(card);
 
     player.megaCredits = 1;
@@ -59,7 +59,7 @@ describe('SearchForLifeUnderground', function() {
     expect(card.resourceCount).eq(0);
   });
 
-  it('action succeeds', function() {
+  it('action succeeds', () => {
     player.playedCards.push(card);
 
     player.megaCredits = 1;

@@ -17,10 +17,10 @@ describe('CopernicusSolarArrays', () => {
     player.megaCredits = card.cost;
 
     player.titanium = 1;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     player.titanium = 0;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {

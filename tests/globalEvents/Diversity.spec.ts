@@ -6,8 +6,8 @@ import {Diversity} from '../../src/server/turmoil/globalEvents/Diversity';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestGame';
 
-describe('Diversity', function() {
-  it('resolve play', function() {
+describe('Diversity', () => {
+  it('resolve play', () => {
     const card = new Diversity();
 
     const [game, player, player2] = testGame(2, {turmoilExtension: true});

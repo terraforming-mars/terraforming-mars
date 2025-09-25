@@ -11,20 +11,19 @@ import {Tag} from '../../../src/common/cards/Tag';
 import {Helion} from '../../../src/server/cards/corporation/Helion';
 import {testGame} from '../../TestGame';
 
-describe('Factorum', function() {
+describe('Factorum', () => {
   let card: Factorum;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Factorum();
     [game, player] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
-  it('Should play', function() {
-    const play = card.play(player);
-    expect(play).is.undefined;
+  it('Should play', () => {
+    cast(card.play(player), undefined);
     expect(player.production.steel).to.eq(1);
     player.megaCredits = 10;
 
@@ -42,9 +41,8 @@ describe('Factorum', function() {
     expect(player.production.energy).to.eq(1);
   });
 
-  it('Only offer building card if player has energy', function() {
-    const play = card.play(player);
-    expect(play).is.undefined;
+  it('Only offer building card if player has energy', () => {
+    cast(card.play(player), undefined);
     player.megaCredits = 10;
     player.energy = 1;
 
@@ -56,10 +54,10 @@ describe('Factorum', function() {
     expect(player.megaCredits).to.eq(7);
   });
 
-  it('Factorum + Helion', function() {
+  it('Factorum + Helion', () => {
     const helion = new Helion();
     helion.play(player);
-    player.corporations.push(helion);
+    player.playedCards.push(helion);
 
     player.megaCredits = 2;
     player.energy = 5;

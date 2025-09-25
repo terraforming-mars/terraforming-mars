@@ -5,8 +5,8 @@ import {MicrogravityHealthProblems} from '../../src/server/turmoil/globalEvents/
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('MicrogravityHealthProblems', function() {
-  it('resolve play', function() {
+describe('MicrogravityHealthProblems', () => {
+  it('resolve play', () => {
     const card = new MicrogravityHealthProblems();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

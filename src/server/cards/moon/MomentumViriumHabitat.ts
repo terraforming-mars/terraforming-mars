@@ -1,7 +1,7 @@
 import {CardName} from '../../../common/cards/CardName';
 import {CardType} from '../../../common/cards/CardType';
 import {Tag} from '../../../common/cards/Tag';
-import {MoonSpaces} from '../../../common/moon/MoonSpaces';
+import {NamedMoonSpaces} from '../../../common/moon/NamedMoonSpaces';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
@@ -17,7 +17,7 @@ export class MomentumViriumHabitat extends Card {
       behavior: {
         production: {heat: 2, megacredits: 3},
         moon: {
-          habitatTile: {space: MoonSpaces.MOMENTUM_VIRIUM},
+          habitatTile: {space: NamedMoonSpaces.MOMENTUM_VIRIUM},
         },
       },
       reserveUnits: {titanium: 1},

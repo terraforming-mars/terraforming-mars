@@ -1,7 +1,7 @@
 {
   "Adhai High Orbit Constructions": "",
   "(Effect: Whenever you play a card with a space tag BUT NO PLANETARY TAG (including this) add 1 orbital on this card.)": "(지속 효과: 이 카드를 포함해서 행성 태그가 없는 우주 태그를 가진 카드를 추진할 때마다 궤도 자원 1개를 추가.)",
-  "(Effect: For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1M€ less.)": "(지속 효과: 이 카드의 궤도 자원 2개마다, 이 카드를 포함해서 행성 태그가 없는 우주 태그를 가진 카드를 추진하거나 개척기지 일반 프로젝트를 추진하거나 무역사업 행동을 수행할 때마다 1 M€씩 할인.)",
+  "(Effect: For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1 M€ less.)": "(지속 효과: 이 카드의 궤도 자원 2개마다, 이 카드를 포함해서 행성 태그가 없는 우주 태그를 가진 카드를 추진하거나 개척기지 일반 프로젝트를 추진하거나 무역사업 행동을 수행할 때마다 1 M€씩 할인.)",
   "(You start with 43 M€.)": "(43 M€을 가지고 게임 시작.)",
 
   "Ambient": "",
@@ -53,7 +53,7 @@
   "(Action: Spend 2 agenda resources to place 1 delegate in any party.)": "(행동: 의제 자원을 2개 소비해서 아무 정당에 의원을 1명 배치.)",
   "(Action: Spend 5 agenda resources to place a city tile on Mars.)": "(행동: 의제 자원을 5개 소비해서 화성에 도시 타일을 배치.)",
   "(You start with 44 M€ and 1 agenda resource to this card.)": "(44 M€, 이 카드에 의제 자원을 1개 가지고 게임 시작.)",
-  
+
   "GAGARIN MOBILE BASE": "",
   "move": "이동",
   "(Action: Move the Base to ANY nearest empty area where it has not yet been. Collect the bonus.)": "(행동: 아직 배치한 적 없는 인접한 빈 구역으로 기지를 이동. 배치 보너스 획득.)",
@@ -72,7 +72,7 @@
   "(Effect: Whenever you play a card with a Venus tag add 1 floater to ANY card.)": "(지속 효과: 금성 태그가 있는 프로젝트 카드를 추진할 때마다, 아무 카드에 부양체 자원을 1개 추가.)",
   "(Action: Remove 3 floaters from this card to raise Venus 1 step or raise oxygen 1 step)": "(행동: 이 카드의 부양체 자원 3개를 제거하여 금성 지표나 산소 농도를 1단계 올림.)",
   "(You start with 39 M€.)": "(39 M€을 가지고 게임 시작.)",
-  
+
   "Solbank": "",
   "(Effect: Whenever you spend M€ (or steel or titanium) add 1 data to this card.)": "(지속 효과: 메가크레딧이나 강철 자원 또는 티타늄 자원을 소비할 때마다, 이 카드에 데이터 자원을 1개 추가.)",
   "(Effect: During the production phase convert each data from this card into 1M€ each.)": "(지속 효과: 생산 단계 동안, 이 카드 위에 있는 데이터 자원을 1 M€으로 변환할 수 있음.)",

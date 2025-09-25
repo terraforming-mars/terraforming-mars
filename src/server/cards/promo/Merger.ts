@@ -7,7 +7,6 @@ import {Size} from '../../../common/cards/render/Size';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {LogHelper} from '../../LogHelper';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {CARD_COST} from '../../../common/constants';
 import {CorporationDeck} from '../Deck';
 import {Countable} from '../../behavior/Countable';
 import {PreludesExpansion} from '../../preludes/PreludesExpansion';
@@ -44,7 +43,9 @@ export class Merger extends PreludeCard {
     player.defer(() => {
       return new SelectCard('Choose corporation card to play', 'Play', dealtCorps, {enabled: enabled})
         .andThen(([card]) => {
-          player.playAdditionalCorporationCard(card);
+          // Allow merged corps to add resources to themselves.
+          player.game.inDoubleDown = false;
+          player.playCorporationCard(card);
           dealtCorps.forEach((corp) => {
             if (corp.name !== card.name) {
               game.corporationDeck.discard(corp);
@@ -67,13 +68,6 @@ export class Merger extends PreludeCard {
     LogHelper.logDrawnCards(player, cards, /* privateMessage= */true);
     return cards;
   }
-
-  public static setCardCost(player: IPlayer) {
-    return player.corporations
-      .map((card) => (card.cardCost ?? CARD_COST) - CARD_COST) // Convert every card cost to delta from zero. (e.g. -2, 0, +2)
-      .reduce((prev, curr) => prev + curr, CARD_COST); // Add them up, and add CARD_COST back.
-  }
-
 
   // Returns the delta of spendable MC made avialable by a merged corporation.
   // Much of this code is similar to Player.spendableMegaCredits, but that can't
@@ -103,7 +97,7 @@ export class Merger extends PreludeCard {
     // const titaniumValue = player.getTitaniumValue() + (behavior?.titanumValue ?? 0);
     const titaniumValue = player.getTitaniumValue();
 
-    if (player.isCorporation(CardName.MANUTECH)) {
+    if (player.tableau.has(CardName.MANUTECH)) {
       sum += asNumber(production?.megacredits);
       incomingTitanium += asNumber(production?.titanium);
     }

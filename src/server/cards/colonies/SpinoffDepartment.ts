@@ -1,10 +1,11 @@
-import {IProjectCard} from '../IProjectCard';
+import {IProjectCard, isIProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardType} from '../../../common/cards/CardType';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {ICard} from '../ICard';
 
 export class SpinoffDepartment extends Card implements IProjectCard {
   constructor() {
@@ -31,8 +32,8 @@ export class SpinoffDepartment extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    if (card.cost >= 20) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
+    if (isIProjectCard(card) && card.cost >= 20) {
       player.drawCard();
     }
   }

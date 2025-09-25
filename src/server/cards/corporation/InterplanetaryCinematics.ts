@@ -1,14 +1,15 @@
 import {CorporationCard} from './CorporationCard';
 import {Tag} from '../../../common/cards/Tag';
-import {IProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 import {IPlayer} from '../../IPlayer';
 import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 import {Resource} from '../../../common/Resource';
+import {ICorporationCard} from './ICorporationCard';
 
-export class InterplanetaryCinematics extends CorporationCard {
+export class InterplanetaryCinematics extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.INTERPLANETARY_CINEMATICS,
@@ -34,9 +35,9 @@ export class InterplanetaryCinematics extends CorporationCard {
       },
     });
   }
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    if (player.isCorporation(this.name) && card.type === CardType.EVENT) {
-      player.stock.add(Resource.MEGACREDITS, 2, {log: true, from: this});
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+    if (card.type === CardType.EVENT) {
+      player.stock.add(Resource.MEGACREDITS, 2, {log: true, from: {card: this}});
     }
   }
 }

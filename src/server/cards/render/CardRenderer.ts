@@ -3,7 +3,7 @@ import {CardRenderSymbol} from './CardRenderSymbol';
 import {Size} from '../../../common/cards/render/Size';
 import {CardRenderItemType} from '../../../common/cards/render/CardRenderItemType';
 import {TileType} from '../../../common/TileType';
-import {ICardRenderCorpBoxAction, ICardRenderCorpBoxEffect, ICardRenderEffect, ICardRenderProductionBox, ICardRenderRoot, ICardRenderTile, ItemType, isICardRenderItem} from '../../../common/cards/render/Types';
+import {ICardRenderCorpBoxAction, ICardRenderCorpBoxEffect, ICardRenderCorpBoxEffectAction, ICardRenderEffect, ICardRenderProductionBox, ICardRenderRoot, ICardRenderTile, ItemType, isICardRenderItem} from '../../../common/cards/render/Types';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {CardResource} from '../../../common/CardResource';
 import {Tag} from '../../../common/cards/Tag';
@@ -82,6 +82,17 @@ class CardRenderCorpBoxAction implements ICardRenderCorpBoxAction {
 
   public static builder(f: (builder: CorpEffectBuilderAction) => void): CardRenderCorpBoxAction {
     const builder = new CorpEffectBuilderAction();
+    f(builder);
+    return builder.build();
+  }
+}
+
+class CardRenderCorpBoxEffectAction implements ICardRenderCorpBoxEffectAction {
+  public readonly is = 'corp-box-effect-action';
+  constructor(public rows: Array<Array<ItemType>>) { }
+
+  public static builder(f: (builder: CorpEffectBuilderEffectAction) => void): CardRenderCorpBoxEffectAction {
+    const builder = new CorpEffectBuilderEffectAction();
     f(builder);
     return builder.build();
   }
@@ -168,8 +179,8 @@ abstract class Builder<T> {
   public trade(options?: ItemOptions): this {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.TRADE, -1, options));
   }
-  public tradeFleet(): this {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.TRADE_FLEET));
+  public tradeFleet(options?: ItemOptions): this {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.TRADE_FLEET, -1, options));
   }
 
   public colonies(amount: number = 1, options?: ItemOptions): this {
@@ -383,6 +394,10 @@ abstract class Builder<T> {
     return this._appendToRow(item);
   }
 
+  public claim(count: number = 1) {
+    return this.text('CLAIM').nbsp.text(count.toString());
+  }
+
   public corruption(count: number = 1, options?: ItemOptions) {
     const item = new CardRenderItem(CardRenderItemType.CORRUPTION, count, options);
     return this._appendToRow(item);
@@ -390,6 +405,11 @@ abstract class Builder<T> {
 
   public undergroundResources(count: number = 1, options?: ItemOptions) {
     const item = new CardRenderItem(CardRenderItemType.UNDERGROUND_RESOURCES, count, options);
+    return this._appendToRow(item);
+  }
+
+  public undergroundShelters() {
+    const item = new CardRenderItem(CardRenderItemType.UNDERGROUND_SHELTERS);
     return this._appendToRow(item);
   }
 
@@ -438,12 +458,14 @@ abstract class Builder<T> {
     return this._appendToRow(builder);
   }
 
-  public corpBox(type: 'action' | 'effect', eb: (builder: CorpEffectBuilderEffect | CorpEffectBuilderAction) => void): this {
+  public corpBox(type: 'action' | 'effect' | 'effect-action', eb: (builder: CorpEffectBuilderEffect | CorpEffectBuilderAction | CorpEffectBuilderEffectAction) => void): this {
     this.br;
     if (type === 'action') {
       return this._appendToRow(CardRenderCorpBoxAction.builder(eb));
-    } else {
+    } else if (type === 'effect') {
       return this._appendToRow(CardRenderCorpBoxEffect.builder(eb));
+    } else {
+      return this._appendToRow(CardRenderCorpBoxEffectAction.builder(eb));
     }
   }
 
@@ -630,5 +652,11 @@ class CorpEffectBuilderEffect extends Builder<CardRenderCorpBoxEffect> {
 class CorpEffectBuilderAction extends Builder<CardRenderCorpBoxAction> {
   public override build(): CardRenderCorpBoxAction {
     return new CardRenderCorpBoxAction(this._data);
+  }
+}
+
+class CorpEffectBuilderEffectAction extends Builder<CardRenderCorpBoxEffectAction> {
+  public override build(): CardRenderCorpBoxEffectAction {
+    return new CardRenderCorpBoxEffectAction(this._data);
   }
 }

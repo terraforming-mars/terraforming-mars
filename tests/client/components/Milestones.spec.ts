@@ -6,15 +6,15 @@ import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 import Milestone from '@/client/components/Milestone.vue';
 import {Preferences} from '@/client/utils/PreferencesManager';
 
-describe('Milestones', function() {
+describe('Milestones', () => {
   const mockMilestone: ClaimedMilestoneModel = {
-    name: 'Farmer',
+    name: 'Forester',
     playerName: 'foo',
     playerColor: 'blue',
     scores: [],
   };
 
-  it('shows list and milestones', async function() {
+  it('shows list and milestones', async () => {
     const milestone = mount(Milestones, {
       localVue: getLocalVue(),
       propsData: {
@@ -27,7 +27,7 @@ describe('Milestones', function() {
     await toggler.trigger('click');
     const test = milestone.find('div[class*="ma-name--milestones');
     expect(test.classes()).to.contain('ma-name');
-    expect(test.classes()).to.contain('ma-name--farmer');
+    expect(test.classes()).to.contain('ma-name--forester');
   });
 
   it('milestones show details if previously set to show details', async () => {

@@ -62,6 +62,16 @@
           <span class="tooltip tooltip-left" :data-tooltip="$t('Show information that can be helpful\n to players who are still learning the games')">&#9432;</span>
         </label>
       </div>
+
+      <div class="preferences_panel_item">
+        <label class="form-switch">
+          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.symbol_overlay" data-test="symbol_overlay">
+          <i class="form-icon"></i>
+          <span v-i18n>Symbol Overlay</span>
+          <span class="tooltip tooltip-left" :data-tooltip="$t('Add symbols on top of player colors.')">&#9432;</span>
+        </label>
+      </div>
+
       <div class="preferences_panel_item">
         <label class="form-switch">
           <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.experimental_ui" data-test="experimental_ui">

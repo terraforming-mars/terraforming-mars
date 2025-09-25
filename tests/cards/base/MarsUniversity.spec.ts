@@ -14,17 +14,17 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
 import {Leavitt} from '../../../src/server/cards/community/Leavitt';
 
-describe('MarsUniversity', function() {
+describe('MarsUniversity', () => {
   let card: MarsUniversity;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MarsUniversity();
     [game, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
     expect(card.onCardPlayed(player, new Pets())).is.undefined;
     expect(game.deferredActions).has.lengthOf(0);
@@ -43,12 +43,12 @@ describe('MarsUniversity', function() {
     expect(game.deferredActions).has.lengthOf(0);
   });
 
-  it('Gives victory point', function() {
+  it('Gives victory point', () => {
     card.play(player);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
-  it('Runs twice for multiple science tags', function() {
+  it('Runs twice for multiple science tags', () => {
     player.cardsInHand.push(card, card);
     card.onCardPlayed(player, new Research());
 
@@ -72,7 +72,7 @@ describe('MarsUniversity', function() {
     player.cardsInHand = [new EarthOffice()];
     const olympusConference = new OlympusConference();
     const marsUniversity = new MarsUniversity();
-    player.playedCards = [marsUniversity, olympusConference, new Mine()];
+    player.playedCards.push(marsUniversity, olympusConference, new Mine());
     olympusConference.resourceCount = 1;
     const roboticWorkforce = new RoboticWorkforce();
     player.playCard(roboticWorkforce);

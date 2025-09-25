@@ -58,7 +58,7 @@ export class GainResources extends AndOptions {
         throw new InputError(`Select ${this.count} resource(s)`);
       }
 
-      this.player.stock.addUnits(this.units, {log: true});
+      this.player.stock.adjust(this.units, {log: true});
       return undefined;
     });
   }

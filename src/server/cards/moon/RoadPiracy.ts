@@ -41,7 +41,7 @@ export class RoadPiracy extends Card implements IProjectCard {
   private generateOption(player: IPlayer, resource: Resource, title: Message, limit: number) {
     const selectAmounts = [];
     const ledger: Map<IPlayer, number> = new Map();
-    for (const opponent of player.getOpponents()) {
+    for (const opponent of player.opponents) {
       if (opponent.stock.get(resource) > 0 && !opponent.alloysAreProtected()) {
         const selectAmount =
           new SelectAmount(
@@ -65,22 +65,13 @@ export class RoadPiracy extends Card implements IProjectCard {
         throw new Error(`You may only steal up to ${limit} ${resource} from all players`);
       }
       for (const [target, count] of ledger) {
-        if (count === 0) {
-          continue;
+        if (count > 0) {
+          target.attack(player, resource, count, {stealing: true});
         }
-        target.maybeBlockAttack(player, (proceed) => {
-          if (proceed) {
-            target.stock.steal(resource, count, player);
-          }
-          return undefined;
-        });
       }
       return undefined;
     };
-    // TODO(kberg): does title always have to be set separately? That's fixable.
-    const option = new AndOptions(...selectAmounts).andThen(cb);
-    option.title = title;
-    return option;
+    return new AndOptions(...selectAmounts).andThen(cb).setTitle(title);
   }
 
 

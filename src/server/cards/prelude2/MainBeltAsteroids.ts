@@ -7,6 +7,7 @@ import {IPlayer} from '../../IPlayer';
 import {ActivePreludeCard} from './ActivePreludeCard';
 import {Resource} from '../../../common/Resource';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export class MainBeltAsteroids extends ActivePreludeCard implements IActionCard {
   constructor() {
@@ -38,7 +39,7 @@ export class MainBeltAsteroids extends ActivePreludeCard implements IActionCard 
 
   public onResourceAdded(player: IPlayer, card: ICard, count: number) {
     if (card === this) {
-      player.stock.add(Resource.TITANIUM, count, {log: true, from: this});
+      player.stock.add(Resource.TITANIUM, count, {log: true, from: {card: this}});
     }
   }
 
@@ -47,7 +48,9 @@ export class MainBeltAsteroids extends ActivePreludeCard implements IActionCard 
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.game.defer(new SelectPaymentDeferred(player, 5));
+    player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits)).andThen(() => {
+      PathfindersExpansion.addToSolBank(player);
+    });
     return undefined;
   }
 }

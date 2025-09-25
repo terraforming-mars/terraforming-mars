@@ -11,18 +11,19 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {Leavitt} from '../../../src/server/cards/community/Leavitt';
+import {HyperspaceDrivePrototype} from '../../../src/server/cards/underworld/HyperspaceDrivePrototype';
 
-describe('OlympusConference', function() {
+describe('OlympusConference', () => {
   let card: OlympusConference;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new OlympusConference();
     [game, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.playedCards.push(card);
     card.play(player);
 
@@ -52,7 +53,7 @@ describe('OlympusConference', function() {
     expect(game.deferredActions).has.lengthOf(0);
   });
 
-  it('including this', function() {
+  it('including this', () => {
     player.cardsInHand = [card];
     player.playCard(card, undefined);
     expect(card.resourceCount).to.eq(0);
@@ -60,7 +61,7 @@ describe('OlympusConference', function() {
     expect(card.resourceCount).to.eq(1);
   });
 
-  it('Plays twice for Research', function() {
+  it('Plays twice for Research', () => {
     player.playedCards.push(card);
     card.onCardPlayed(player, new Research());
     expect(game.deferredActions).has.lengthOf(2);
@@ -81,7 +82,7 @@ describe('OlympusConference', function() {
     expect(game.deferredActions).has.lengthOf(0);
   });
 
-  it('Triggers before Mars University', function() {
+  it('Triggers before Mars University', () => {
     const marsUniversity = new MarsUniversity();
     const scienceTagCard = new AdaptationTechnology();
 
@@ -105,7 +106,7 @@ describe('OlympusConference', function() {
 
     // Reset the state
     game.deferredActions = new DeferredActionsQueue();
-    player.playedCards = [];
+    player.playedCards.set();
 
 
     // Mars University played before Olympus Conference
@@ -134,5 +135,20 @@ describe('OlympusConference', function() {
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
     expect(card.resourceCount).to.eq(1);
+  });
+
+  it('Allows for resource to be added first when Hyperspace Drive Prototype is played', () => {
+    player.playedCards.push(card);
+    card.resourceCount = 0;
+    const hyperspaceDrivePrototype = new HyperspaceDrivePrototype();
+    player.playCard(hyperspaceDrivePrototype);
+    runAllActions(game);
+
+    const orOptions = cast(player.popWaitingFor(), OrOptions);
+    game.deferredActions.pop();
+    orOptions.options[0].cb();
+
+    expect(card.resourceCount).to.eq(0);
+    expect(player.cardsInHand).has.lengthOf(1);
   });
 });

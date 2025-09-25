@@ -5,7 +5,7 @@ import {CardType} from '../../../common/cards/CardType';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
-import {ALL_TAGS, Tag} from '../../../common/cards/Tag';
+import {Tag} from '../../../common/cards/Tag';
 import {PartyName} from '../../../common/turmoil/PartyName';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -36,16 +36,11 @@ export class PublicSponsoredGrant extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    player.getOpponents().forEach((target) => {
-      target.maybeBlockAttack(player, (proceed) => {
-        if (proceed) {
-          target.stock.deduct(Resource.MEGACREDITS, Math.min(target.megaCredits, 2), {log: true, from: player});
-        }
-        return undefined;
-      });
+    player.game.players.forEach((target) => {
+      target.attack(player, Resource.MEGACREDITS, Math.min(target.megaCredits, 2), {log: true});
     });
 
-    const tags = [...ALL_TAGS];
+    const tags = [...player.game.tags, Tag.EVENT];
     inplaceRemove(tags, Tag.CITY);
     inplaceRemove(tags, Tag.WILD);
     inplaceRemove(tags, Tag.CLONE);

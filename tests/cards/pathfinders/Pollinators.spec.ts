@@ -6,17 +6,17 @@ import {testGame} from '../../TestGame';
 import {Units} from '../../../src/common/Units';
 import {runAllActions} from '../../TestingUtils';
 
-describe('Pollinators', function() {
+describe('Pollinators', () => {
   let card: Pollinators;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Pollinators();
     [game, player] = testGame(1);
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.megaCredits = card.cost;
     player.tagsForTest = {plant: 2};
     expect(player.canPlay(card)).is.false;

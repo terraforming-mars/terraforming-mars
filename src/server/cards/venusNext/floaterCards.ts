@@ -30,5 +30,8 @@ export const floaterCards: ReadonlySet<CardName> = new Set([
 
   // Star Wars
   CardName.CLOUD_CITY,
+
+  // Underworld
+  CardName.SOIL_EXPORT,
 ]);
 

@@ -8,7 +8,7 @@ import {Resource} from '../../../common/Resource';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {any} from '../render/DynamicVictoryPoints';
 import {all} from '../Options';
 
 export class LawSuit extends Card implements IProjectCard {
@@ -26,13 +26,13 @@ export class LawSuit extends Card implements IProjectCard {
           b.text('steal', Size.SMALL, true).megacredits(3, {all}).asterix();
         }),
         description: 'Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER\'S EVENT PILE.',
-        victoryPoints: CardRenderDynamicVictoryPoints.any(-1),
+        victoryPoints: any(-1),
       },
     });
   }
 
   private targets(player: IPlayer) {
-    return player.game.getPlayersById(player.removingPlayers);
+    return player.removingPlayers.map((id) => player.game.getPlayerById(id));
   }
 
   public override bespokeCanPlay(player: IPlayer) {
@@ -47,9 +47,9 @@ export class LawSuit extends Card implements IProjectCard {
           player.game.log('${0} sued ${1} who had 0 MC.', (b) => b.player(player).player(suedPlayer));
         }
         suedPlayer.playedCards.push(this);
-        suedPlayer.maybeBlockAttack(player, (proceed) => {
+        suedPlayer.maybeBlockAttack(player, 'lose 3 M€', (proceed) => {
           if (proceed) {
-            suedPlayer.stock.deduct(Resource.MEGACREDITS, amount, {log: true, from: player, stealing: true});
+            suedPlayer.stock.deduct(Resource.MEGACREDITS, amount, {log: true, from: {player}, stealing: true});
           }
           player.stock.add(Resource.MEGACREDITS, amount);
           return undefined;

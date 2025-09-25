@@ -2,15 +2,14 @@ import {shallowMount} from '@vue/test-utils';
 import {getLocalVue} from '../getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
-import {Color} from '@/common/Color';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {RecursivePartial} from '@/common/utils/utils';
 
-describe('PlayerInfo', function() {
-  it('Played card count test', function() {
+describe('PlayerInfo', () => {
+  it('Played card count test', () => {
     const thisPlayer: RecursivePartial<PublicPlayerModel> = {
-      color: Color.BLUE,
+      color: 'blue',
       tableau: [
         {name: CardName.HELION},
         {name: CardName.ACQUIRED_COMPANY},
@@ -19,7 +18,7 @@ describe('PlayerInfo', function() {
       victoryPointsBreakdown: {
         total: 1,
       },
-      tags: [],
+      tags: {},
     };
     const playerView: RecursivePartial<PlayerViewModel> = {
       thisPlayer: thisPlayer,
@@ -35,7 +34,7 @@ describe('PlayerInfo', function() {
       localVue: getLocalVue(),
       parentComponent: {
         methods: {
-          getVisibilityState: function() {},
+          getVisibilityState: () => {},
         },
       },
       propsData: {

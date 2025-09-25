@@ -1,20 +1,53 @@
 <template>
-   <li v-on:click.prevent="$emit('click')" v-html="messageToHTML(message)"></li>
+   <li v-if="message !== undefined && message.data !== undefined && message.message !== undefined" v-on:click.prevent="$emit('click')">
+    <span v-if="message.type !== LogMessageType.NEW_GENERATION" :title="when" v-html="icon"></span>
+    <template v-for="(data, idx) of entries">
+      <span class="log-plain-text" v-if="typeof(data) === 'string'" v-bind:key="idx">{{ data }}</span>
+      <span v-else v-bind:key="idx">
+        <span v-if="data.type === undefined || data.value === undefined"></span>
+        <span v-else-if="data.type === LogMessageDataType.PLAYER" class="log-player" :class="'player_bg_color_' + data.value"> {{ getPlayerName(data.value) }} </span>
+        <span v-else-if="data.type === LogMessageDataType.CARD" v-html="cardToHtml(data)"></span>
+        <span v-else-if="data.type === LogMessageDataType.GLOBAL_EVENT" class="log-card background-color-global-event" v-i18n>
+          {{data.value}}
+        </span>
+        <span v-else-if="data.type === LogMessageDataType.TILE_TYPE" v-i18n>
+          {{tileTypeToString[data.value]}}
+        </span>
+        <span v-else-if="data.type === LogMessageDataType.COLONY" class="log-card background-color-colony" v-i18n>
+          {{data.value}}
+        </span>
+        <span v-else-if="data.type === LogMessageDataType.UNDERGROUND_TOKEN" class="log-excavation-token" v-i18n>
+          {{undergroundResourceTokenDescription[data.value]}}
+        </span>
+        <span v-else-if="data.type === LogMessageDataType.SPACE" class="log-space-id" v-on:click.prevent="$emit('spaceClicked', data.value)">
+            <svg width="20" height="14" viewBox="0 0 28 37">
+              <circle cx="14" cy="19" r="16" stroke="black" stroke-width="1" transform="translate(0, 2)" :fill="isMoonSpace(data.value) ? 'gray' : '#b7410e'" />
+            </svg>
+            {{ getSpaceName(data.value) }}
+        </span>
+        <span v-else-if="data.type === LogMessageDataType.RAW_STRING">{{ data.value }}</span>
+        <span v-else v-i18n>{{ data.value }}</span>
+      </span>
+    </template>
+   </li>
 </template>
 
 <script lang="ts">
 
 import Vue from 'vue';
+import {Color} from '@/common/Color';
+import {CardName} from '@/common/cards/CardName';
 import {CardType} from '@/common/cards/CardType';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {LogMessageType} from '@/common/logs/LogMessageType';
-import {LogMessageData, LogMessageDataAttrs} from '@/common/logs/LogMessageData';
+import {LogMessageData} from '@/common/logs/LogMessageData';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
-import {PublicPlayerModel} from '@/common/models/PlayerModel';
+import {ViewModel} from '@/common/models/PlayerModel';
 import {tileTypeToString} from '@/common/TileType';
 import {Log} from '@/common/logs/Log';
 import {getCard} from '@/client/cards/ClientCardManifest';
-import {ClientCard} from '@/common/cards/ClientCard';
+import {undergroundResourceTokenDescription} from '@/common/underworld/UndergroundResourceToken';
+import {isMoonSpace, getSpaceName} from '@/common/boards/spaces';
 
 const cardTypeToCss: Record<CardType, string | undefined> = {
   event: 'background-color-events',
@@ -34,12 +67,18 @@ export default Vue.extend({
     message: {
       type: Object as () => LogMessage,
     },
-    players: {
-      type: Array as () => Array<PublicPlayerModel>,
+    viewModel: {
+      type: Object as () => ViewModel,
     },
   },
   methods: {
-    cardToHtml(card: ClientCard, attrs: LogMessageDataAttrs | undefined) {
+    cardToHtml(data: LogMessageData & {type: LogMessageDataType.CARD, value: CardName}) {
+      const card = getCard(data.value);
+      if (card === undefined) {
+        return '';
+      }
+
+      const attrs = data.attrs;
       const suffixFreeCardName = card.name.split(':')[0];
       const className = cardTypeToCss[card.type];
 
@@ -57,83 +96,46 @@ export default Vue.extend({
       }
       return '<span class="log-card '+ className + '">' + this.$t(suffixFreeCardName) + tagHTML + costHTML +'</span>';
     },
-    messageDataToHTML(data: LogMessageData): string {
-      if (data.type === undefined || data.value === undefined) {
-        return '';
-      }
-
-      switch (data.type) {
-      case LogMessageDataType.PLAYER:
-        for (const player of this.players) {
-          if (data.value === player.color) {
-            return '<span class="log-player player_bg_color_'+player.color+'">'+player.name+'</span>';
-          }
-        }
-        break;
-
-      case LogMessageDataType.CARD:
-        const card = getCard(data.value);
-        if (card !== undefined) {
-          return this.cardToHtml(card, data.attrs);
-        } else {
-          console.log(`Cannot render ${data.value}`);
-        }
-        break;
-
-      case LogMessageDataType.GLOBAL_EVENT:
-        return '<span class="log-card background-color-global-event">' + this.$t(data.value) + '</span>';
-
-      case LogMessageDataType.TILE_TYPE:
-        return this.$t(tileTypeToString[data.value]);
-
-      case LogMessageDataType.COLONY:
-        return '<span class="log-card background-color-colony">' + this.$t(data.value) + '</span>';
-
-      default:
-        if (data.type !== LogMessageDataType.RAW_STRING) {
-          return this.$t(data.value);
-        }
-      }
-      return data.value.toString();
+    getPlayerName(color: Color) {
+      const player = this.viewModel.players.find((player) => player.color === color);
+      return player?.name ?? color;
     },
-    // Called in the event that a bad log message comes down. Does its best to return something.
-    safeMessage(message: LogMessage) {
-      try {
-        if (message === undefined) {
-          return 'undefined';
-        }
-        if (message.data === undefined) {
-          return `BUG: Unparseable message: ${message.message}`;
-        }
-        const data = message.data.map((datum) => {
-          return (datum === undefined) ?
-            'undefined' :
-            ('(' + datum.type + ') ' + datum.value);
-        });
-        return `BUG: Unparseable message: ${message.message}, (${data.join(', ')})`;
-      } catch (err) {
-        return `BUG: Unparseable message: ${message.message} ${String(err)}`;
+  },
+  computed: {
+    entries() {
+      if (this.message === undefined) {
+        return [];
       }
+      const e = {
+        message: this.$t(this.message.message),
+        data: this.message.data,
+      };
+      return Log.parse(e);
     },
-    messageToHTML(message: LogMessage) {
-      try {
-        let logEntryBullet = '';
+    when() {
+      return new Date(this.message.timestamp).toLocaleString();
+    },
+    icon() {
+      return this.message.playerId === undefined ? '&#x1f551;' : '&#x1f4ac;';
+    },
 
-        if (message.type !== LogMessageType.NEW_GENERATION) {
-          const when = new Date(message.timestamp).toLocaleString();
-          // clock or speaking.
-          const icon = message.playerId === undefined ? '&#x1f551;' : '&#x1f4ac;';
-          logEntryBullet = `<span title="${when}">${icon}</span>`;
-        }
-        if (message.message !== undefined) {
-          message.message = this.$t(message.message);
-          return logEntryBullet + Log.applyData(message, this.messageDataToHTML);
-        }
-      } catch (err) {
-        console.log(err);
-        return this.safeMessage(message);
-      }
-      return '';
+    LogMessageType(): typeof LogMessageType {
+      return LogMessageType;
+    },
+    LogMessageDataType(): typeof LogMessageDataType {
+      return LogMessageDataType;
+    },
+    getSpaceName(): typeof getSpaceName {
+      return getSpaceName;
+    },
+    isMoonSpace(): typeof isMoonSpace {
+      return isMoonSpace;
+    },
+    undergroundResourceTokenDescription(): typeof undergroundResourceTokenDescription {
+      return undergroundResourceTokenDescription;
+    },
+    tileTypeToString(): typeof tileTypeToString {
+      return tileTypeToString;
     },
   },
 });

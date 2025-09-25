@@ -27,8 +27,8 @@ describe('ElectionSponsorship', () => {
     const selectParty = cast(player.popWaitingFor(), SelectParty);
     selectParty.cb(marsFirst.name);
 
-    expect(turmoil.getAvailableDelegateCount(player)).eq(6);
-    expect(marsFirst.delegates.get(player)).eq(1);
+    expect(turmoil.getAvailableDelegateCount(player)).eq(5);
+    expect(marsFirst.delegates.get(player)).eq(2);
 
     expect(player.underworldData.corruption).eq(1);
   });
@@ -38,19 +38,8 @@ describe('ElectionSponsorship', () => {
     const [game, player] = testGame(2, {turmoilExtension: true});
     const turmoil = Turmoil.getTurmoil(game);
 
-    expect(turmoil.getPlayerInfluence(player)).eq(0);
+    card.play(player);
 
-    player.playedCards = [card];
-
-    expect(turmoil.getPlayerInfluence(player)).eq(2);
-
-    game.generation = 3;
-    expect(turmoil.getPlayerInfluence(player)).eq(2);
-
-    game.generation = 4;
-    expect(turmoil.getPlayerInfluence(player)).eq(2);
-
-    game.generation = 5;
-    expect(turmoil.getPlayerInfluence(player)).eq(0);
+    expect(turmoil.getInfluence(player)).eq(1);
   });
 });

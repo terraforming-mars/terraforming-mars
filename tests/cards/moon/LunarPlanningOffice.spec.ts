@@ -1,7 +1,8 @@
 import {expect} from 'chai';
 import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
-import {cast, runAllActions, toName} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
+import {toName} from '../../../src/common/utils/utils';
 import {TestPlayer} from '../../TestPlayer';
 import {LunarPlanningOffice} from '../../../src/server/cards/moon/LunarPlanningOffice';
 import {MareNectarisMine} from '../../../src/server/cards/moon/MareNectarisMine';
@@ -32,7 +33,7 @@ describe('LunarPlanningOffice', () => {
     game.projectDeck.drawPile.push(new MareImbriumMine());
     game.projectDeck.discardPile = [];
 
-    expect(card.play(player)).is.undefined;
+    cast(card.play(player), undefined);
     runAllActions(game);
 
     expect(player.steel).eq(6);

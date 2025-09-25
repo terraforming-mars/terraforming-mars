@@ -4,8 +4,8 @@ import {CardManifest} from '../../src/server/cards/ModuleManifest';
 import {ICard} from '../../src/server/cards/ICard';
 import {CardType} from '../../src/common/cards/CardType';
 
-describe('CardMetadata', function() {
-  it('should have a VP icon', function() {
+describe('CardMetadata', () => {
+  it('should have a VP icon', () => {
     ALL_MODULE_MANIFESTS.forEach((manifest) => {
       const factories: CardManifest<ICard> = {...manifest.projectCards, ...manifest.corporationCards};
 

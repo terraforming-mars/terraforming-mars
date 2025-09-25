@@ -4,17 +4,26 @@
       <i :title="award.playerName" class="board-cube" :class="`board-cube--${award.playerColor}`" />
     </div>
 
-    <div class="ma-name ma-name--awards award-block" :class="maAwardClass">
+    <div class="ma-name ma-name--awards award-block" :class="nameCss">
       <span v-i18n>{{ award.name }}</span>
-      <div class="ma-scores player_home_block--milestones-and-awards-scores" v-if="showScores">
-        <p
-          v-for="score in sortedScores"
-          :key="score.playerColor"
-          class="ma-score"
-          :class="`player_bg_color_${score.playerColor}`"
-          v-text="score.playerScore"
-          data-test="player-score"
-        />
+      <div v-if="showScores" class="ma-scores player_home_block--milestones-and-awards-scores">
+        <template v-for="score in sortedScores">
+          <p
+            v-if="playerSymbol(score.playerColor).length > 0"
+            :key="score.playerColor"
+            class="ma-score"
+            :class="`player_bg_color_${score.playerColor}`"
+            v-text="playerSymbol(score.playerColor)"
+            data-test="player-score"
+          />
+          <p
+            :key="score.playerColor"
+            class="ma-score"
+            :class="`player_bg_color_${score.playerColor}`"
+            v-text="score.playerScore"
+            data-test="player-score"
+          />
+      </template>
       </div>
     </div>
 
@@ -27,7 +36,9 @@
 <script lang="ts">
 import Vue from 'vue';
 import {FundedAwardModel, AwardScore} from '@/common/models/FundedAwardModel';
-import {getMilestoneAwardDescription} from '@/client/MilestoneAwardManifest';
+import {getAward} from '@/client/MilestoneAwardManifest';
+import {playerSymbol} from '@/client/utils/playerSymbol';
+import {Color} from '@/common/Color';
 
 export default Vue.extend({
   name: 'Award',
@@ -38,25 +49,26 @@ export default Vue.extend({
     },
     showScores: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     showDescription: {
       type: Boolean,
     },
   },
-  data() {
-    return {
-    };
+  methods: {
+    playerSymbol(color: Color) {
+      return playerSymbol(color);
+    },
   },
   computed: {
-    maAwardClass(): string {
+    nameCss(): string {
       return 'ma-name--' + this.award.name.replace(/ /g, '-').replace(/\./g, '').toLowerCase();
     },
-    sortedScores(): AwardScore[] {
+    sortedScores(): Array<AwardScore> {
       return [...this.award.scores].sort((s1, s2) => s2.playerScore - s1.playerScore);
     },
     description(): string {
-      return getMilestoneAwardDescription(this.award.name);
+      return getAward(this.award.name).description;
     },
   },
 });

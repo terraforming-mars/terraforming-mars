@@ -8,21 +8,21 @@ import {IoMiningIndustries} from '../../../src/server/cards/base/IoMiningIndustr
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 import {PublicSpaceline} from '../../../src/server/cards/underworld/PublicSpaceline';
 
-describe('SpaceLanes', function() {
+describe('SpaceLanes', () => {
   let card: SpaceLanes;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SpaceLanes();
     [/* game */, player] = testGame(2);
   });
 
-  it('play', function() {
+  it('play', () => {
     card.play(player);
     expect(player.titanium).eq(3);
   });
 
-  it('card discount', function() {
+  it('card discount', () => {
     player.playedCards.push(card);
     expect(card.getCardDiscount(player, new Ants())).eq(0);
     expect(card.getCardDiscount(player, new CorroderSuits())).eq(2);

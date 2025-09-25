@@ -3,8 +3,9 @@ import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {ICorporationCard} from './ICorporationCard';
 
-export class Helion extends CorporationCard {
+export class Helion extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.HELION,

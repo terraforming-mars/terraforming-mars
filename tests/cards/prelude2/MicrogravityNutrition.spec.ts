@@ -6,13 +6,13 @@ import {testGame} from '../../TestingUtils';
 import {cast} from '../../TestingUtils';
 import {expect} from 'chai';
 
-describe('MicrogravityNutrition', function() {
+describe('MicrogravityNutrition', () => {
   let card: MicrogravityNutrition;
   let player: TestPlayer;
   let game: IGame;
   let colony1: Luna;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MicrogravityNutrition();
     [game, player/* , player2 */] = testGame(2, {coloniesExtension: true});
 
@@ -21,7 +21,7 @@ describe('MicrogravityNutrition', function() {
     game.colonies.push(colony1);
   });
 
-  it('Should play without targets', function() {
+  it('Should play without targets', () => {
     cast(card.play(player), undefined);
     expect(player.production.megacredits).to.eq(1);
   });

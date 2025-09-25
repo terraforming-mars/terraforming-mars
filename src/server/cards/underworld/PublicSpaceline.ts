@@ -8,7 +8,7 @@ import {Tag} from '../../../common/cards/Tag';
 export class PublicSpaceline extends Card implements IProjectCard {
   constructor() {
     super({
-      type: CardType.ACTIVE,
+      type: CardType.AUTOMATED,
       name: CardName.PUBLIC_SPACELINE,
       cost: 18,
       tags: [Tag.EARTH, Tag.EARTH, Tag.JOVIAN, Tag.JOVIAN, Tag.VENUS, Tag.VENUS, Tag.MARS, Tag.MARS],
@@ -20,7 +20,7 @@ export class PublicSpaceline extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U77',
+        cardNumber: 'U077',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(2)).br;
           b.plainText('Increase your M€ production 2 steps').br;

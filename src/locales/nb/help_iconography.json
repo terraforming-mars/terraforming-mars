@@ -11,7 +11,7 @@
     "Science": "Vitenskap",
     "Power": "Kraft",
     "Earth": "Jord",
-    "Venus": "Venus",
+    "Venus": "",
     "Plant": "Plante",
     "Microbe": "Mikrobe",
     "Animal": "Dyr",
@@ -22,7 +22,7 @@
     "Camp": "Leir",
     "Disease": "Sykdom",
     "Clone": "Klone",
-    "MegaCredits (M€)": "MegaCredits (M€)",
+    "MegaCredits (M€)": "",
     "Steel": "Stål",
     "Titanium": "Titan",
     "Energy": "Energi",
@@ -121,8 +121,8 @@
     "Hot Keys" : "Tastekombinasjoner",
     "Hotkeys Mapping" : "Tastekombinasjoner",
     "Main Board": "Hovedbrett",
-    "Players Overview Table": "Spilleroversiktstabell", 
-    "Cards in Hand": "Kort på hånden", 
+    "Players Overview Table": "Spilleroversiktstabell",
+    "Cards in Hand": "Kort på hånden",
     "Colonies": "Kolonier",
     "Fan Expansion Tags": "Symboler fra fan-lagde utvidelser"
 }

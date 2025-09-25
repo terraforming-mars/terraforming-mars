@@ -69,9 +69,9 @@ export class Colonies {
 
     let selected: IColonyTrader | undefined = undefined;
 
-    const howToPayForTrade = new OrOptions();
-    howToPayForTrade.title = 'Pay trade fee';
-    howToPayForTrade.buttonLabel = 'Pay';
+    const howToPayForTrade = new OrOptions()
+      .setTitle('Pay trade fee')
+      .setButtonLabel('Pay');
     handlers.forEach((handler) => {
       if (handler.canUse()) {
         howToPayForTrade.options.push(new SelectOption(
@@ -95,11 +95,9 @@ export class Colonies {
         return undefined;
       });
 
-    const trade = new AndOptions(howToPayForTrade, selectColony);
-    trade.title = 'Trade with a colony tile';
-    trade.buttonLabel = 'Trade';
-
-    return trade;
+    return new AndOptions(howToPayForTrade, selectColony)
+      .setTitle('Trade with a colony tile')
+      .setButtonLabel('Trade');
   }
 
   public getPlayableColonies(allowDuplicate: boolean = false, cost: number = 0) {
@@ -121,7 +119,7 @@ export class Colonies {
           return false;
         }
         if (colony.name === ColonyName.LEAVITT) {
-          const pharmacyUnion = this.player.getCorporation(CardName.PHARMACY_UNION);
+          const pharmacyUnion = this.player.tableau.get(CardName.PHARMACY_UNION);
           if ((pharmacyUnion?.resourceCount ?? 0) > 0 && !this.player.canAfford({cost: cost, tr: {tr: 1}})) {
             return false;
           }
@@ -160,13 +158,21 @@ export class Colonies {
     if (syndicatePirateRaider === undefined) {
       this.tradesThisGeneration = 0;
     } else if (syndicatePirateRaider === this.player.id) {
+      // CEO effect: Disable all other players from trading next gen,
+      // but free up all colonies (don't leave their trade fleets stuck there)
+      if (this.player.tableau.has(CardName.HUAN)) {
+        for (const player of this.player.opponents) {
+          // Magic number high enough to disable other players' trading
+          player.colonies.tradesThisGeneration = 50;
+        }
+      }
       this.tradesThisGeneration = 0;
     }
   }
 }
 
 export class TradeWithEnergy implements IColonyTrader {
-  private tradeCost;
+  private tradeCost: number;
 
   constructor(private player: IPlayer) {
     this.tradeCost = ENERGY_TRADE_COST - player.colonies.tradeDiscount;
@@ -187,7 +193,7 @@ export class TradeWithEnergy implements IColonyTrader {
 }
 
 export class TradeWithTitanium implements IColonyTrader {
-  private tradeCost;
+  private tradeCost: number;
 
   constructor(private player: IPlayer) {
     this.tradeCost = TITANIUM_TRADE_COST - player.colonies.tradeDiscount;
@@ -209,11 +215,11 @@ export class TradeWithTitanium implements IColonyTrader {
 
 
 export class TradeWithMegacredits implements IColonyTrader {
-  private tradeCost;
+  private tradeCost: number;
 
   constructor(private player: IPlayer) {
     this.tradeCost = MC_TRADE_COST- player.colonies.tradeDiscount;
-    const adhai = player.getCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS);
+    const adhai = player.tableau.get(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS);
     if (adhai !== undefined) {
       const adhaiDiscount = Math.floor(adhai.resourceCount / 2);
       this.tradeCost = Math.max(0, this.tradeCost - adhaiDiscount);

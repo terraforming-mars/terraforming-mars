@@ -2,8 +2,9 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class NirgalEnterprises extends CorporationCard {
+export class NirgalEnterprises extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.NIRGAL_ENTERPRISES,

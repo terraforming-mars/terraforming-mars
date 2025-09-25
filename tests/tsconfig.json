@@ -5,7 +5,7 @@
     },
     "extends": "../tsconfig.json",
     "include": [
-        "utils/setup.ts",
+        "testing/setup.ts",
         "**/*.spec.ts",
         "vue-shims.d.ts"
     ]

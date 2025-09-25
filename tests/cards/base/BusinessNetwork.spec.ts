@@ -7,32 +7,32 @@ import {TestPlayer} from '../../TestPlayer';
 import {churn, cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('BusinessNetwork', function() {
+describe('BusinessNetwork', () => {
   let card: BusinessNetwork;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new BusinessNetwork();
     [game, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     expect(card.canPlay(player)).is.true;
     card.play(player);
     expect(player.production.megacredits).to.eq(-1);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     player.production.add(Resource.MEGACREDITS, -5);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     expect(card.canAct(player)).is.true;
   });
 
-  it('Cannot buy card if cannot pay', function() {
+  it('Cannot buy card if cannot pay', () => {
     player.megaCredits = 2;
     const selectCard = cast(churn(card.action(player), player), SelectCard);
     expect(selectCard.config.max).to.eq(0);
@@ -43,7 +43,7 @@ describe('BusinessNetwork', function() {
     expect(player.megaCredits).to.eq(2);
   });
 
-  it('Should action as not helion', function() {
+  it('Should action as not helion', () => {
     player.megaCredits = 3;
     const selectCard = cast(churn(card.action(player), player), SelectCard);
     selectCard.cb([]);

@@ -9,19 +9,19 @@ import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
 import {TileType} from '../../../src/common/TileType';
 
-describe('SoylentSeedlingSystems', function() {
+describe('SoylentSeedlingSystems', () => {
   let soylent: SoylentSeedlingSystems;
   let celestic: Celestic;
   let player: TestPlayer;
   let player2: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     soylent = new SoylentSeedlingSystems();
     [/* game */, player, player2] = testGame(2);
-    player.corporations.push(soylent);
+    player.playedCards.push(soylent);
     // Giving it a corporation card that stores resources to show it doesn't have any.
     celestic = new Celestic();
-    player2.corporations.push(celestic);
+    player2.playedCards.push(celestic);
   });
 
   it('on greenery placed', () => {

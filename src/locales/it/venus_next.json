@@ -1,22 +1,22 @@
 {
-  "Aphrodite":"Aphrodite",
+  "Aphrodite":"",
   "You start with 1 plant production and 47 M€.":"Inizi con 47 M€ e con una Produzione di Piante pari a 1.",
   "Effect: Whenever Venus is terraformed 1 step, you gain 2 M€.":"Effetto: ogni volta che la terraformazione di Venere avanza di 1 livello, ottieni 2 M€.",
 
-  "Celestic":"Celestic",
+  "Celestic":"",
   "You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.":"Inizi con 42 M€. Come prima azione, rivela carta dal mazzo di pesca fino a che non trovi 2 carte provviste del simbolo Galleggiante. Colloca tali carte nella tua mano, e scarta le altre.",
   "Action: Add a floater to ANY card. 1 VP per 3 floaters on this card.":"Azione: aggiungi 1 Galleggiante ad una carta QUALUNQUE. 1 PV ogni 3 Galleggianti su questa carta.",
 
-  "Manutech":"Manutech",
+  "Manutech":"",
   "You start with 1 steel production, and 35 M€.":"Inizi con Produzione di Acciaio pari a 1 e 35 M€.",
   "Effect: For each step you increase the production of a resource, including this, you also gain that resource.":"Effetto: per ogni livello di cui incrementi la Produzione di una risorsa (incluso quello iniziale della Manutech) ottieni anche la risorsa stessa.",
 
-  "Morning Star Inc.":"Morning Star Inc.",
+  "Morning Star Inc.":"",
   "You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.":"Inizi con 50 M€. Come prima azione, rivela carte dal mazzo di pesca fino a che non trovi 3 carte provviste del simbolo Venere. Colloca tali carte nella tua mano, e scarta le altre.",
   "Effect: Your Venus requirements are +/- 2 steps, your choice in each case.":"Effetto: a tua discrezione in ogni caso, il requisito su Venere vale +2 livelli oppure -2 livelli.",
   "Venus requirements":"Requisiti Venere",
 
-  "Viron":"Viron",
+  "Viron":"",
    "Action: Use a blue card action that has already been used this generation.":"Azione: usa l'azione di una carta blu che è già stata utilizzata durante la Generazione in corso.",
    "You start with 48 M€.":"Inizi con 48 M€.",
 
@@ -80,7 +80,7 @@
   "Terraforming Contract":"Contratto di Terraformazione",
   "Requires that you have at least 25 TR. Increase your M€ production 4 steps.":"Richiede che tu abbia un TT almeno pari a 25. Incrementa la tua Produzione di M€ di 4 livelli.",
 
-  "Solarnet":"Solarnet",
+  "Solarnet":"",
   "Venus Earth Jovian":"Venere Terra Gioviano",
   "Requires Venus, Earth and Jovian tags. Draw 2 cards.":"Richiede 1 simbolo Venere, 1 simbolo Terra ed 1 simbolo Gioviano. Pesca 2 carte.",
 
@@ -109,7 +109,6 @@
   "Floating Habs":"Abitazioni Fluttuanti",
   "Action: Spend 2 M€ to add 1 floater to ANY card":"Azione: spendi 2 M€ per aggiungere 1 Galleggiante ad una carta QUALUNQUE.",
   "Requires 2 science tags. 1 VP for every 2nd Floater on this card).":"Richiede 2 simboli Scienza. 1 PV per ogni coppia di Galleggianti su questa carta.",
-  "Requires 2 science tags.":"Richiede 2 simboli Scienza.",
   "1 VP for every 2nd Floater on this card.":"1 PV per ogni coppia di Galleggianti su questa carta.",
 
 
@@ -152,7 +151,7 @@
 
   "Increase your M€ production 2 steps. Add 1 resource to ANY Venus CARD":"Incrementa la tua Produzione di M€ di 2 livelli. Aggiungi 1 risorsa AD UNA QUALUNQUE CARTA Venere.",
 
-  "Dawn City":"Dawn City",
+  "Dawn City":"",
   "4 Science":"4 simboli Scienza",
   "Requires 4 science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a city tile on the RESERVED AREA.":"Richiede 4 simboli Scienza. Diminuisci la tua Produzione di Energia di 1 livello. Incrementa la tua Produzione di Titanio di 1 livello. Colloca una tessera Città SULL'AREA RISERVATA.",
 
@@ -161,7 +160,6 @@
   "Action: Spend 1 floater here to increase your energy production 1 step.":"Azione: rimuovi 1 Galleggiante da questa carta per incrementare la tua Produzione di Energia di 1 livello.",
 
   "Extractor Balloons":"Palloni Estrattori",
-  "Action: Add 1 floater to this card.":"Azione: aggiungi 1 Galleggiante a questa carta.",
   "OR":"OPPURE",
   "Action: Remove 2 floaters here to raise Venus 1 step.":"Azione: rimuovi 2 Galleggianti da questa carta per incrementare Venere di 1 livello.",
   "Add 3 floaters to this card":"Aggiungi 3 Galleggianti a questa carta.",
@@ -186,7 +184,7 @@
 
   "Raise Venus 1 step. Increase your heat production 3 steps":"Incrementa Venere di 1 livello. Incrementa la tua Produzione di Calore di 3 livelli.",
 
-  "Gyropolis":"Gyropolis",
+  "Gyropolis":"",
   "Decrease your energy production 2 steps. Increase your M€ production 1 step for each Venus and Earth tag you have. Place a city tile.":"Diminuisci la tua Produzione di Energia di 2 livelli. Incrementa la tua Produzione di M€ di 1 livello per ogni simbolo Venere e Terra che possiedi. Colloca una tessera Città.",
 
   "Raise Venus 1 step. Add 1 floater to A VENUS CARD for each Jovian tag you have":"Incrementa Venere di 1 livello. Aggiungi 1 Galleggiante ad una CARTA Venere per ogni simbolo Gioviano in tuo possesso.",
@@ -199,11 +197,10 @@
 
   "Action: Spend 1 titanium to add 2 floaters here, OR spend 2 floaters here to raise Venus 1 step":"Azione: spendi 1 Titanio per aggiungere 2 Galleggianti a questa carta, OPPURE rimuovi 2 Galleggianti da questa carta per incrementare Venere di 1 livello.",
 
-  "Luna Metropolis":"Luna Metropolis",
+  "Luna Metropolis":"",
   "Increase your M€ production 1 step for each Earth tag you have, including this. Place a city tile on the RESERVED AREA.":"Incrementa la tua Produzione di M€ di 1 livello per ogni simbolo Terra in tuo possesso, incluso questo. Colloca una tessera Città SULL'AREA RISERVATA.",
 
   "Local Shading":"Schermatura Locale",
-  "Action: Add 1 floater to this card.":"Azione: aggiungi 1 Galleggiante a questa carta.",
   "Action: Spend 1 floater here to raise your M€ production 1 step.":"Azione: rimuovi 1 Galleggiante da questa carta per incrementare la tua Produzione di M€ di 1 livello.",
 
   "Maxwell Base":"Base Maxwell",
@@ -224,7 +221,7 @@
   "Venus must be 10% or lower. Raise Venus 2 steps":"Venere dev'essere al più al 10%. Incrementa Venere di 2 livelli.",
   "Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card":"Scarta 1 carta dalla tua mano e POI pesca 3 carte. Tutti i giocatori avversari pescano 1 carta.",
 
-  "Stratopolis":"Stratopolis",
+  "Stratopolis":"",
   "Action: Add 2 floaters to ANY VENUS CARD.":"Azione: aggiungi 2 Galleggianti ad una QUALUNQUE CARTA DI TIPO VENERE.",
   "Requires 2 science tags. Increase your M€ production 2 steps. Place a city tile ON THE RESERVED AREA)":"Richiede 2 simboli Scienza. Incrementa la tua Produzione di M€ di 2 livelli. Colloca una tessera Città SULL'AREA RISERVATA.",
   "1 VP for every 3rd Floater on this card.":"1 PV per ogni terna di Galleggianti su questa carta.",

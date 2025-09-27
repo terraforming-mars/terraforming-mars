@@ -307,7 +307,6 @@
   "Venus Scale": "Мащаб на Венера",
   "Ruling Party": "Управляваща партия",
   "Spectator link": "Връзка за наблюдатели",
-  "Warning: This server automatically purges unfinished games. Try to complete this game by ${0}.": "Внимание: Този сървър автоматично изтрива незавършени игри. Опитайте да завършите тази игра до ${0}.",
   "Warning: This game will be purged in approximately ${0} hours.": "Внимание: Тази игра ще бъде изтрита след приблизително ${0} часа.",
   "Unable to reach the server. The server may be restarting or down for maintenance.": "Невъзможно е да се свържете със сървъра. Възможно е сървърът да се рестартира или да е изключен за поддръжка.",
   "Unable to restore game ${game_id}": "Невъзможно е да се възстанови игра ${game_id}",

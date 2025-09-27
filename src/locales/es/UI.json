@@ -346,6 +346,5 @@
     "Show information that can be helpful to players who are still learning the games": "Mostrar información que podría ser útil\npara nuevos jugadores",
     "Test out any possible new experimental UI features for feedback.": "Pruebe nuevas funciones experimentales de interfaz\npara proporcionar comentarios",
 
-    "Warning: This server automatically purges unfinished games. Try to complete this game by ${0}.": "Advertencia: este servidor limpia automáticamente las partidas no terminadas. Complete esta partida antes de ${0}.",
     "Why?": "Por qué?"
 }

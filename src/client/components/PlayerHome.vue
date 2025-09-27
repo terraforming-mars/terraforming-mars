@@ -254,6 +254,7 @@
       <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
     </div>
     <purge-warning :expectedPurgeTimeMs="playerView.game.expectedPurgeTimeMs"></purge-warning>
+    <KeyboardShortcuts v-show="keyboardShortcutOpened" @close="keyboardShortcutOpened = false"></KeyboardShortcuts>
   </div>
 </template>
 
@@ -279,6 +280,7 @@ import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import StackedCards from '@/client/components/StackedCards.vue';
 import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
 import UndergroundTokens from '@/client/components/underworld/UndergroundTokens.vue';
+import KeyboardShortcuts from '@/client/components/KeyboardShortcuts.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {KeyboardNavigation} from '@/client/components/KeyboardNavigation';
@@ -298,6 +300,7 @@ export interface PlayerHomeModel {
   showAutomatedCards: boolean;
   showEventCards: boolean;
   tileView: TileView;
+  keyboardShortcutOpened: boolean;
 }
 
 class TerraformedAlertDialog {
@@ -314,6 +317,7 @@ export default Vue.extend({
       showAutomatedCards: !preferences.hide_automated_cards,
       showEventCards: !preferences.hide_event_cards,
       tileView: 'show',
+      keyboardShortcutOpened: false,
     };
   },
   watch: {
@@ -382,18 +386,24 @@ export default Vue.extend({
     'stacked-cards': StackedCards,
     PurgeWarning,
     UndergroundTokens,
+    KeyboardShortcuts,
   },
   methods: {
     navigatePage(event: KeyboardEvent) {
+      // Most '?' are shifted, so process this before the action that exits early with modifiers
+      if (event.key === '?') {
+        this.keyboardShortcutOpened = true;
+        return;
+      }
+      if (event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) {
+        return;
+      }
       const ids: Partial<Record<string, string>> = {
         [KeyboardNavigation.GAMEBOARD]: 'shortkey-board',
         [KeyboardNavigation.PLAYERSOVERVIEW]: 'shortkey-playersoverview',
         [KeyboardNavigation.HAND]: 'shortkey-hand',
         [KeyboardNavigation.COLONIES]: 'shortkey-colonies',
       };
-      if (event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) {
-        return;
-      }
       const inputSource = event.target as Node;
       if (inputSource.nodeName.toLowerCase() !== 'input') {
         const id = ids[event.code];

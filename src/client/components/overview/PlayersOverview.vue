@@ -1,12 +1,12 @@
 <template>
-        <div class="players-overview" v-if="hasPlayers()">
+        <div class="players-overview" v-if="players.length > 0">
             <overview-settings />
             <div class="other_player" v-if="thisPlayer === undefined || players.length > 1">
-                <div v-for="(otherPlayer, index) in getPlayersInOrder()" :key="otherPlayer.color">
+                <div v-for="(otherPlayer, index) in playersInOrder" :key="otherPlayer.color">
                     <other-player v-if="thisPlayer === undefined || otherPlayer.color !== thisPlayer.color" :player="otherPlayer" :playerIndex="index"/>
                 </div>
             </div>
-            <player-info v-for="(p, index) in getPlayersInOrder()"
+            <player-info v-for="(p, index) in playersInOrder"
               :player="p"
               :key="p.color"
               :playerView="playerView"
@@ -37,20 +37,17 @@ import {Color} from '@/common/Color';
 
 const SHOW_NEXT_LABEL_MIN = 2;
 
-export const playerIndex = (
-  color: Color,
-  players: Array<PublicPlayerModel>,
-): number => {
-  for (let idx = 0; idx < players.length; idx++) {
-    if (players[idx].color === color) {
-      return idx;
-    }
-  }
-  return -1;
-};
+function playerIndex(color: Color, players: Array<PublicPlayerModel>): number {
+  return players.findIndex((player) => player.color === color);
+}
 
 export default Vue.extend({
   name: 'PlayersOverview',
+  components: {
+    'player-info': PlayerInfo,
+    'overview-settings': OverviewSettings,
+    'other-player': OtherPlayer,
+  },
   props: {
     playerView: {
       type: Object as () => ViewModel,
@@ -63,23 +60,7 @@ export default Vue.extend({
     thisPlayer(): PublicPlayerModel | undefined {
       return this.playerView.thisPlayer;
     },
-  },
-  components: {
-    'player-info': PlayerInfo,
-    'overview-settings': OverviewSettings,
-    'other-player': OtherPlayer,
-  },
-  data() {
-    return {};
-  },
-  methods: {
-    hasPlayers(): boolean {
-      return this.players.length > 0;
-    },
-    getIsFirstForGen(player: PublicPlayerModel): boolean {
-      return playerIndex(player.color, this.players) === 0;
-    },
-    getPlayersInOrder(): Array<PublicPlayerModel> {
+    playersInOrder(): Array<PublicPlayerModel> {
       const players = this.players;
       if (this.thisPlayer === undefined) {
         return players;
@@ -87,10 +68,7 @@ export default Vue.extend({
 
       let result = [];
       let currentPlayerOffset = 0;
-      const currentPlayerIndex = playerIndex(
-        this.thisPlayer.color,
-        this.players,
-      );
+      const currentPlayerIndex = playerIndex(this.thisPlayer.color, this.players);
 
       // shift the array by putting the player on focus at the tail
       currentPlayerOffset = currentPlayerIndex + 1;
@@ -99,6 +77,11 @@ export default Vue.extend({
         .concat(players.slice(0, currentPlayerOffset));
       // return all but the focused user
       return result.slice(0, -1);
+    },
+  },
+  methods: {
+    getIsFirstForGen(player: PublicPlayerModel): boolean {
+      return playerIndex(player.color, this.players) === 0;
     },
     getActionLabel(player: PublicPlayerModel): ActionLabel {
       if (this.playerView.game.phase === Phase.DRAFTING) {

@@ -28,7 +28,8 @@ export default Vue.extend({
       default: undefined,
     },
     count: {
-      type: Number as () => Number | String,
+      type: Number,
+      default: undefined,
     },
     size: {
       type: String,
@@ -68,7 +69,6 @@ export default Vue.extend({
       }
       return {token: this.undergroundToken, shelter: false, active: true};
     },
-
   },
 });
 </script>

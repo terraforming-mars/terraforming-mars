@@ -156,15 +156,7 @@
                 :yAxisLabel="'% completed'"
               ></victory-point-chart>
               <h2 v-i18n>Final situation on the board</h2>
-              <board
-                  :spaces="game.spaces"
-                  :expansions="game.gameOptions.expansions"
-                  :venusScaleLevel="game.venusScaleLevel"
-                  :altVenusBoard="game.gameOptions.altVenusBoard"
-                  :boardName ="game.gameOptions.boardName"
-                  :oceans_count="game.oceans"
-                  :oxygen_level="game.oxygenLevel"
-                  :temperature="game.temperature"></board>
+              <board :game="game" />
             <MoonBoard v-if="game.gameOptions.expansions.moon" :model="game.moon"></MoonBoard>
             <div v-if="game.gameOptions.expansions.pathfinders">
               <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>

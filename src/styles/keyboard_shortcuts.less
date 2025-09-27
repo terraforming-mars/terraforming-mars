@@ -1,0 +1,53 @@
+// .keyboard-shortcuts-container {
+//     padding: 15px 15px 15px 20px;
+//     display: inline-block;
+//     position: absolute;
+//     bottom: 0px;
+//     left: 53px;
+//     color: #c6c6c6;
+//     background: #000000;
+//     max-height: calc(85vh);
+//     overflow-y: auto;
+//     white-space: nowrap;
+// }
+
+.keyboard-shortcuts-container {
+  position: fixed; /* Fixes the overlay to the viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  display: flex; /* Centers the popup panel */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensures the overlay is on top of other content */
+
+  .popup-panel {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90vw; /* Takes up 90% of the viewport width */
+    height: 90vh; /* Takes up 90% of the viewport height */
+    max-width: 800px; /* Optional: Set a maximum width for larger screens */
+    max-height: 600px; /* Optional: Set a maximum height for larger screens */
+    overflow-y: auto; /* Adds scrollbar if content exceeds height */
+    position: relative; /* For positioning the close button */
+    color: black;
+  }
+
+  h2 {
+    filter: none; // Overrides parent
+  }
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+}

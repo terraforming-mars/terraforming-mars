@@ -31,15 +31,7 @@
       <div class="player_home_block">
         <a name="board" class="player_home_anchor"></a>
         <board
-          :spaces="game.spaces"
-          :expansions="game.gameOptions.expansions"
-          :venusScaleLevel="game.venusScaleLevel"
-          :boardName ="game.gameOptions.boardName"
-          :oceans_count="game.oceans"
-          :oxygen_level="game.oxygenLevel"
-          :temperature="game.temperature"
-          :altVenusBoard="game.gameOptions.altVenusBoard"
-          :aresData="game.aresData"
+          :game="game"
           :tileView="tileView"
           @toggleTileView="cycleTileView()"
           id="shortkey-board"
@@ -219,14 +211,7 @@
           </div>
         </summary>
         <div class="accordion-body">
-          <board
-            :spaces="game.spaces"
-            :expansions="game.gameOptions.expansions"
-            :venusScaleLevel="game.venusScaleLevel"
-            :boardName ="game.gameOptions.boardName"
-            :aresData="game.aresData"
-            :altVenusBoard="game.gameOptions.altVenusBoard">
-          </board>
+          <board :game="game" />
 
           <turmoil v-if="game.turmoil" :turmoil="game.turmoil"></turmoil>
 

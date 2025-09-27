@@ -26,15 +26,7 @@
 
     <a name="board" class="player_home_anchor"></a>
     <board
-      :spaces="game.spaces"
-      :expansions="game.gameOptions.expansions"
-      :venusScaleLevel="game.venusScaleLevel"
-      :boardName ="game.gameOptions.boardName"
-      :oceans_count="game.oceans"
-      :oxygen_level="game.oxygenLevel"
-      :temperature="game.temperature"
-      :altVenusBoard="game.gameOptions.altVenusBoard"
-      :aresData="game.aresData"
+      :game="game"
       :tileView="tileView"
       @toggleTileView="cycleTileView()"
       id="shortkey-board"

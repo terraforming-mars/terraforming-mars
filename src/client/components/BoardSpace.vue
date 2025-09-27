@@ -12,16 +12,12 @@
     </template>
     <template v-if="tileView === 'show'">
       <div :class="playerColorCss" v-if="space.color !== undefined"></div>
-      <template v-if="space.gagarin !== undefined">
-        <div v-if="space.gagarin === 0" class='gagarin'></div>
-        <div v-else class='gagarin visited'></div>
-      </template>
-      <template v-if="space.cathedral === true">
-        <div class='board-cube--cathedral'></div>
-      </template>
-      <template v-if="space.nomads === true">
-        <div class='board-cube--nomad'></div>
-      </template>
+
+      <div v-if="space.gagarin === 0" class='gagarin'></div>
+      <div v-if="space.gagarin !== undefined" class='gagarin visited'></div>
+      <div v-if="space.cathedral === true" class='board-cube--cathedral'></div>
+      <div v-if="space.nomads === true" class='board-cube--nomad'></div>
+
       <underground-token v-if="claimedToken !== undefined" :token="claimedToken" location="board"></underground-token>
       <div v-if="space.excavator !== undefined" class="underground-excavator" :class="'underground-excavator--' + space.excavator"></div>
     </template>

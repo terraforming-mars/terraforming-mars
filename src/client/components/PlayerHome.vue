@@ -405,7 +405,6 @@ export default Vue.extend({
   },
   methods: {
     navigatePage(event: KeyboardEvent) {
-      console.log(event.key.charCodeAt(0), ',', event.key, event.code);
       // Most '?' are shifted, so process this before the action that exits early with modifiers
       if (event.key === '?') {
         this.keyboardShortcutOpened = !this.keyboardShortcutOpened;

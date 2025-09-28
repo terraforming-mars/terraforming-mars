@@ -15,7 +15,7 @@
       ESC - close this help<br/>
       <br/>More coming.
     <button class="close-button" @click="onclick">Close</button>
-  </div>top-bar-collapser
+  </div>
 </div>
 </template>
 <script lang="ts">

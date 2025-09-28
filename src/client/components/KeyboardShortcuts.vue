@@ -6,6 +6,10 @@
       S - Players Overview Table<br/>
       D - Cards in Hand<br/>
       F - Colonies<br/>
+      <template v-if="preferences().experimental_ui">
+        <br/>
+        1-9 - Scroll through the player board.
+      </template>"
       <br/>
       ? - Show this help<br/>
       ESC - close this help<br/>
@@ -16,6 +20,7 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
+import {getPreferences} from '../utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'KeyboardShortcuts',
@@ -30,12 +35,16 @@ export default Vue.extend({
       }
     },
   },
+  computed: {
+    preferences(): typeof getPreferences {
+      return getPreferences;
+    },
+  },
   destroyed() {
     window.removeEventListener('keydown', this.keylistener);
   },
   mounted() {
     window.addEventListener('keydown', this.keylistener);
   },
-
 });
 </script>

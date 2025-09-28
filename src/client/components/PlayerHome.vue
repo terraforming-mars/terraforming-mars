@@ -29,7 +29,7 @@
 
     <div v-if="thisPlayer.tableau.length > 0">
       <div class="player_home_block">
-        <a name="board" class="player_home_anchor"></a>
+        <a name="board" class="player_home_anchor hotkey-target"></a>
         <board
           :spaces="game.spaces"
           :expansions="game.gameOptions.expansions"
@@ -45,24 +45,37 @@
           id="shortkey-board"
         />
 
-        <turmoil v-if="game.turmoil" :turmoil="game.turmoil"/>
+        <template v-if="game.turmoil">
+          <a class="hotkey-target"></a>
+          <turmoil :turmoil="game.turmoil"/>
+        </template>
 
-        <MoonBoard v-if="game.gameOptions.expansions.moon" :model="game.moon" :tileView="tileView" id="shortkey-moonBoard"/>
+        <template v-if="game.gameOptions.expansions.moon">
+          <a class="hotkey-target"></a>
+          <MoonBoard :model="game.moon" :tileView="tileView" id="shortkey-moonBoard"/>
+        </template>
 
-        <PlanetaryTracks v-if="game.gameOptions.expansions.pathfinders" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
+        <template v-if="game.gameOptions.expansions.pathfinders" >
+          <a class="hotkey-target"></a>
+          <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
+        </template>
 
         <div v-if="playerView.players.length > 1" class="player_home_block--milestones-and-awards">
+          <a class="hotkey-target"></a>
           <Milestones :milestones="game.milestones" />
           <Awards :awards="game.awards" />
         </div>
       </div>
 
-      <players-overview class="player_home_block player_home_block--players nofloat" :playerView="playerView" v-trim-whitespace id="shortkey-playersoverview"/>
+    <a class="hotkey-target"></a>
+    <players-overview class="player_home_block player_home_block--players nofloat" :playerView="playerView" v-trim-whitespace id="shortkey-playersoverview"/>
 
+      <a class="hotkey-target"></a>
       <div class="player_home_block nofloat">
         <log-panel :viewModel="playerView" :color="thisPlayer.color" :step="game.step"></log-panel>
       </div>
 
+      <a class="hotkey-target"></a>
       <div class="player_home_block player_home_block--actions nofloat">
         <a name="actions" class="player_home_anchor"></a>
         <dynamic-title title="Actions" :color="thisPlayer.color"/>
@@ -237,7 +250,7 @@
     </div>
 
     <div v-if="game.colonies.length > 0" class="player_home_block" ref="colonies" id="shortkey-colonies">
-      <a name="colonies" class="player_home_anchor"></a>
+      <a name="colonies" class="player_home_anchor hotkey-target"></a>
       <dynamic-title title="Colonies" :color="thisPlayer.color"/>
       <div class="colonies-fleets-cont">
         <div class="colonies-player-fleets" v-for="colonyPlayer in playerView.players" :key="colonyPlayer.color">
@@ -301,6 +314,7 @@ export interface PlayerHomeModel {
   showEventCards: boolean;
   tileView: TileView;
   keyboardShortcutOpened: boolean;
+  hotkeyTargets: Array<Element>
 }
 
 class TerraformedAlertDialog {
@@ -318,6 +332,7 @@ export default Vue.extend({
       showEventCards: !preferences.hide_event_cards,
       tileView: 'show',
       keyboardShortcutOpened: false,
+      hotkeyTargets: [],
     };
   },
   watch: {
@@ -392,7 +407,7 @@ export default Vue.extend({
     navigatePage(event: KeyboardEvent) {
       // Most '?' are shifted, so process this before the action that exits early with modifiers
       if (event.key === '?') {
-        this.keyboardShortcutOpened = true;
+        this.keyboardShortcutOpened = !this.keyboardShortcutOpened;
         return;
       }
       if (event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) {
@@ -405,13 +420,25 @@ export default Vue.extend({
         [KeyboardNavigation.COLONIES]: 'shortkey-colonies',
       };
       const inputSource = event.target as Node;
+      console.log(inputSource.nodeName);
       if (inputSource.nodeName.toLowerCase() !== 'input') {
         const id = ids[event.code];
         if (id) {
           const el = document.getElementById(id);
           if (el) {
             event.preventDefault();
-            el.scrollIntoView({block: 'center', inline: 'center', behavior: 'auto'});
+            el.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'});
+          }
+        } else if (event.code.startsWith('Digit')) {
+          const ASCII_ONE = '1'.charCodeAt(0);
+          const index = event.code.charCodeAt(5) - ASCII_ONE;
+          if (index >= 0 && index < this.hotkeyTargets.length) {
+            const el = this.hotkeyTargets[index];
+            console.log(el);
+            if (el) {
+              // event.preventDefault();
+              el.scrollIntoView({block: 'start', inline: 'center', behavior: 'smooth'});
+            }
           }
         }
       }
@@ -518,6 +545,13 @@ export default Vue.extend({
       alert('Mars is Terraformed!');
       // Avoids repeated calls.
       TerraformedAlertDialog.shouldAlert = false;
+    }
+    const targets = this.$el.getElementsByClassName('hotkey-target');
+    for (let i = 0; i < targets.length; i++) {
+      const element = targets.item(i);
+      if (element) {
+        this.hotkeyTargets.push(element);
+      }
     }
   },
 });

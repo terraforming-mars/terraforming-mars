@@ -27,7 +27,7 @@ export class Hollandia extends MarsBoard {
     // y=4
     builder.land(TITANIUM).land().land(PLANT).ocean(PLANT, PLANT).land().land().deflectionZone().deflectionZone(PLANT).deflectionZone();
     // y=5
-    builder.land(STEEL, PLANT).land().land().land(PLANT, STEEL).land().land().land(PLANT, PLANT).land(TITANIUM, TITANIUM);
+    builder.land(STEEL, PLANT).land().land().land(PLANT, STEEL).land().land().land(PLANT, PLANT).ocean(TITANIUM, TITANIUM);
     // y=6
     builder.ocean(PLANT, PLANT).land().land().land(HEAT, HEAT).land(HEAT, HEAT, HEAT).land(PLANT).ocean(PLANT);
     // y=7

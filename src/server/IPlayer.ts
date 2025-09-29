@@ -156,6 +156,12 @@ export interface IPlayer {
    */
   standardProjectsThisGeneration: Set<CardName>;
 
+  /**
+   * For Hollandia Regels. When true, player has tiles on Mars, and all of them are in the deflection zone.
+   * False when the player has any tiles on Mars outside the deflection zone, and also false when the
+   * player has no tiles on Mars.
+   */
+  withinDeflectionZone: boolean;
 
   // The number of actions a player can take this round.
   // It's almost always 2, but certain cards can change this value.

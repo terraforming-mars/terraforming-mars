@@ -506,6 +506,14 @@
 	background-color: #8304;
 }
 
+.board-space-type-deflection-zone {
+	background: url(./assets/hex_white.png) no-repeat;
+	clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background-color: rgba(251, 255, 16, 0.3);
+  width: 100%; // Necessary for placing on top of existing tiles, to give a 'shield' appearance.
+  height: 100%;
+}
+
 .board-ocean-checkmark{
 	margin-left: 20px;
     margin-bottom: -1px;

@@ -1349,7 +1349,7 @@ export class Game implements IGame, Logger {
         AresHandler.maybeIncrementMilestones(aresData, player, space, hazardSeverity(initialTileType));
       });
 
-      if (this.gameOptions.boardName === BoardName.HOLLANDIA_REGELS) {
+      if (this.gameOptions.boardName === BoardName.HOLLANDIA) {
         const spaces = this.board.spaces.filter(Board.ownedBy(player));
         const part = partition(spaces, ((space) => space.spaceType === SpaceType.DEFLECTION_ZONE));
         player.withinDeflectionZone = part[0].length > 0 && part[1].length === 0;

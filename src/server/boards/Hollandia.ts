@@ -6,8 +6,8 @@ import {BoardBuilder} from './BoardBuilder';
 import {Space} from './Space';
 import {MarsBoard} from './MarsBoard';
 
-export class HollandiaRegels extends MarsBoard {
-  public static newInstance(gameOptions: GameOptions, _rng: Random): HollandiaRegels {
+export class Hollandia extends MarsBoard {
+  public static newInstance(gameOptions: GameOptions, _rng: Random): Hollandia {
     const builder = new BoardBuilder(gameOptions);
 
     const PLANT = SpaceBonus.PLANT;
@@ -41,7 +41,7 @@ export class HollandiaRegels extends MarsBoard {
     }
 
     const spaces = builder.build();
-    return new HollandiaRegels(spaces);
+    return new Hollandia(spaces);
   }
 
   public constructor(spaces: ReadonlyArray<Space>) {

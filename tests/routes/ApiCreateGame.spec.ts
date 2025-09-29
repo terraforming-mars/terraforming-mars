@@ -37,7 +37,7 @@ describe('ApiCreateGame', () => {
       BoardName.VASTITAS_BOREALIS,
       BoardName.AMAZONIS,
       BoardName.TERRA_CIMMERIA,
-      BoardName.HOLLANDIA_REGELS,
+      BoardName.HOLLANDIA,
     ]);
   });
 

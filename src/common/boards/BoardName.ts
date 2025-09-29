@@ -11,5 +11,5 @@ export enum BoardName {
   VASTITAS_BOREALIS = 'vastitas borealis',
   AMAZONIS = 'amazonis p.',
   TERRA_CIMMERIA = 't. cimmeria',
-  HOLLANDIA_REGELS = 'Hollandia regels',
+  HOLLANDIA = 'Hollandia',
 }

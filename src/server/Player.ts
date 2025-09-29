@@ -169,6 +169,8 @@ export class Player implements IPlayer {
   // This value isn't serialized. Probably ought to be.
   public availableActionsThisRound = 2;
 
+  public withinDeflectionZone = false;
+
   // Stats
   public actionsTakenThisGame: number = 0;
   public victoryPointsByGeneration: Array<number> = [];
@@ -375,7 +377,8 @@ export class Player implements IPlayer {
   }
 
   public plantsAreProtected(): boolean {
-    return this.playedCards.has(CardName.PROTECTED_HABITATS) ||
+    return this.withinDeflectionZone ||
+      this.playedCards.has(CardName.PROTECTED_HABITATS) ||
       this.playedCards.has(CardName.ASTEROID_DEFLECTION_SYSTEM);
   }
 
@@ -1770,6 +1773,7 @@ export class Player implements IPlayer {
       removedFromPlayCards: this.removedFromPlayCards.map(toName),
       // Standard Technology: Underworld
       standardProjectsThisGeneration: Array.from(this.standardProjectsThisGeneration),
+      withinDeflectionZone: this.withinDeflectionZone,
 
       name: this.name,
       color: this.color,
@@ -1882,6 +1886,7 @@ export class Player implements IPlayer {
     if (d.globalParameterSteps) {
       player.globalParameterSteps = {...DEFAULT_GLOBAL_PARAMETER_STEPS, ...d.globalParameterSteps};
     }
+    player.withinDeflectionZone = d.withinDeflectionZone ?? false;
     return player;
   }
 

@@ -37,6 +37,7 @@ export interface SerializedPlayer extends DeprecatedFields{
   energy: number;
   energyProduction: number;
   fleetSize: number;
+  globalParameterSteps: Record<GlobalParameter, number>;
   handicap: number;
   hasIncreasedTerraformRatingThisGeneration: boolean;
   hasTurmoilScienceTagBonus: boolean;
@@ -77,6 +78,6 @@ export interface SerializedPlayer extends DeprecatedFields{
   turmoilPolicyActionUsed: boolean;
   underworldData: SerializedUnderworldPlayerData;
   victoryPointsByGeneration: Array<number>;
-  globalParameterSteps: Record<GlobalParameter, number>;
   user?: DiscordId;
+  withinDeflectionZone: boolean;
 }

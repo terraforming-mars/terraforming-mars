@@ -625,6 +625,7 @@ export default (Vue as WithRefs<Refs>).extend({
         BoardName.AMAZONIS,
         BoardName.TERRA_CIMMERIA,
         BoardName.VASTITAS_BOREALIS,
+        BoardName.HOLLANDIA_REGELS,
         RandomBoardOption.ALL,
       ],
       seed: Math.random(),
@@ -976,6 +977,8 @@ export default (Vue as WithRefs<Refs>).extend({
         return 'create-game-board-hexagon create-game-terra-cimmeria';
       case BoardName.VASTITAS_BOREALIS:
         return 'create-game-board-hexagon create-game-vastitas-borealis';
+      case BoardName.HOLLANDIA_REGELS:
+        return 'create-game-board-hexagon create-game-hollandia-regels';
       default:
         return 'create-game-board-hexagon create-game-random';
       }
@@ -1002,6 +1005,7 @@ export default (Vue as WithRefs<Refs>).extend({
         [BoardName.AMAZONIS]: 'amazonis-planatia',
         [BoardName.TERRA_CIMMERIA]: 'terra-cimmeria',
         [BoardName.TERRA_CIMMERIA_NOVUS]: 'terra-cimmeria-novus',
+        [BoardName.HOLLANDIA_REGELS]: 'hollandia-regels',
         [RandomBoardOption.OFFICIAL]: '',
         [RandomBoardOption.ALL]: '',
       };

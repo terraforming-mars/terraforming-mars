@@ -72,4 +72,3 @@ export type SerializedGame = {
     venusScaleLevel: number;
     verminInEffect: boolean;
 }
-

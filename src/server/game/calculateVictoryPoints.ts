@@ -88,15 +88,23 @@ export function calculateVictoryPoints(player: IPlayer) {
 
   // Escape velocity VP penalty
   if (player.game.gameOptions.escapeVelocityMode) {
-    const threshold = player.game.gameOptions.escapeVelocityThreshold;
-    const bonusSecondsPerAction = player.game.gameOptions.escapeVelocityBonusSeconds;
-    const period = player.game.gameOptions.escapeVelocityPeriod;
-    const penaltyPerMin = player.game.gameOptions.escapeVelocityPenalty ?? 1;
-    const elapsedTimeInMinutes = player.timer.getElapsedTimeInMinutes();
-    if (threshold !== undefined && bonusSecondsPerAction !== undefined && period !== undefined && elapsedTimeInMinutes > threshold) {
-      const overTimeInMinutes = Math.max(elapsedTimeInMinutes - threshold - (player.actionsTakenThisGame * (bonusSecondsPerAction / 60)), 0);
-      const vpPenalty = penaltyPerMin * Math.floor(overTimeInMinutes / period);
-      builder.setVictoryPoints('escapeVelocity', -vpPenalty);
+    const options = player.game.gameOptions;
+
+    const thresholdMin = options.escapeVelocityThreshold;
+    const bonusSecondsPerAction = options.escapeVelocityBonusSeconds;
+    const periodMin = options.escapeVelocityPeriod;
+    const penaltyPerMin = options.escapeVelocityPenalty ?? 1;
+
+    // Make Typescript happy
+    if (thresholdMin !== undefined && bonusSecondsPerAction !== undefined && periodMin !== undefined) {
+      const elapsedTimeMin = player.timer.getElapsedTimeInMinutes();
+      const bonusActionMin = player.actionsTakenThisGame * (bonusSecondsPerAction / 60);
+      const overageMin = elapsedTimeMin + bonusActionMin - thresholdMin;
+
+      if (overageMin > 0) {
+        const vpPenalty = penaltyPerMin * Math.floor(overageMin / periodMin);
+        builder.setVictoryPoints('escapeVelocity', -vpPenalty);
+      }
     }
   }
 

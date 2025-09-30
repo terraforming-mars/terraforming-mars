@@ -220,7 +220,7 @@ export default Vue.extend({
       return !this.playerView.game.gameOptions.showOtherPlayersVP && !this.isThisPlayer;
     },
     isEscapeVelocityOn(): boolean {
-      return this.playerView.game.gameOptions.escapeVelocityMode;
+      return this.playerView.game.gameOptions.escapeVelocity !== undefined;
     },
     escapeVelocityPenalty(): number {
       return this.player.victoryPointsBreakdown.escapeVelocity;

@@ -58,7 +58,7 @@ export class BoardBuilder {
   deflectionZone(...bonus: Array<SpaceBonus>): this {
     this.spaceTypes.push(SpaceType.DEFLECTION_ZONE);
     this.bonuses.push(bonus);
-    return this;
+    return this.doNotShuffleLastSpace();
   }
 
   doNotShuffleLastSpace(): this {

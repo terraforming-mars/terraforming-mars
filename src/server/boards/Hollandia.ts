@@ -7,7 +7,7 @@ import {Space} from './Space';
 import {MarsBoard} from './MarsBoard';
 
 export class Hollandia extends MarsBoard {
-  public static newInstance(gameOptions: GameOptions, _rng: Random): Hollandia {
+  public static newInstance(gameOptions: GameOptions, rng: Random): Hollandia {
     const builder = new BoardBuilder(gameOptions);
 
     const PLANT = SpaceBonus.PLANT;
@@ -36,8 +36,8 @@ export class Hollandia extends MarsBoard {
     builder.land(DRAW_CARD, DRAW_CARD).land(PLANT, PLANT).land().land().land(DRAW_CARD);
 
     if (gameOptions.shuffleMapOption) {
-      // builder.shuffle(rng);
-      throw new Error('Shuffling does not work with Hollandia yet');
+      // TODO(kberg): This only shuffles the spaces outside the zone. The spaces inside the zone could be shuffled too.
+      builder.shuffle(rng);
     }
 
     const spaces = builder.build();

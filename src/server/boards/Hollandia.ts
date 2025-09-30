@@ -37,7 +37,7 @@ export class Hollandia extends MarsBoard {
 
     if (gameOptions.shuffleMapOption) {
       // builder.shuffle(rng);
-      throw new Error('Shuffling does not work with Hollandia Regels yet');
+      throw new Error('Shuffling does not work with Hollandia yet');
     }
 
     const spaces = builder.build();

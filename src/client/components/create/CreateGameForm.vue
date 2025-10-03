@@ -296,6 +296,7 @@
                             <input type="checkbox" v-model="showCorporationList" id="customCorps-checkbox">
                             <label for="customCorps-checkbox">
                                 <span v-i18n>Custom Corporation list</span>
+                                <span v-if="customCorporations.length">&nbsp;({{ customCorporations.length }})</span>
                             </label>
 
                             <template v-if="expansions.prelude">
@@ -488,11 +489,12 @@
             </div>
 
 
-            <div class="create-game--block" v-if="showCorporationList">
+            <div class="create-game--block" v-show="showCorporationList">
               <CorporationsFilter
                   ref="corporationsFilter"
                   v-on:corporation-list-changed="updatecustomCorporations"
                   v-bind:expansions="expansions"
+                  @close="showCorporationList = false"
               ></CorporationsFilter>
             </div>
 
@@ -963,7 +965,6 @@ export default (Vue as WithRefs<Refs>).extend({
 
       // Check Prelude 2 + Pathfinders
       let energyProductionBug = true;
-      console.log(this.showCorporationList, this.customCorporations.length);
       if (this.showCorporationList && customCorporations.length > 0 && !customCorporations.includes(CardName.THORGATE)) {
         energyProductionBug = false;
       }

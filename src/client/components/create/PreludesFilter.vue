@@ -1,5 +1,6 @@
 <template>
-    <div class="corporations-filter">
+    <PopupPanel @close="$emit('close')">
+    <template v-slot:header>
         <div class="corporations-filter-toolbox-cont">
             <h2 v-i18n>Preludes</h2>
             <div class="corporations-filter-toolbox corporations-filter-toolbox--topmost">
@@ -9,32 +10,37 @@
                 <input ref="filter" class="filter" :placeholder="$t('filter')" v-model="filterText">
             </div>
         </div>
-        <br/>
-        <template v-for="module in GAME_MODULES">
-          <div class="corporations-filter-group" v-if="cardsByModule[module].length > 0" v-bind:key="module">
-            <div class="corporations-filter-toolbox-cont">
-                <div><span v-i18n>{{MODULE_NAMES[module]}}</span>&nbsp;<div :class="icon(module)"></div></div><br>
-                <div class="corporations-filter-toolbox">
-                    <a href="#" v-i18n v-on:click.prevent="selectAll(module)">All</a> |
-                    <a href="#" v-i18n v-on:click.prevent="selectNone(module)">None</a> |
-                    <a href="#" v-i18n v-on:click.prevent="invertSelection(module)">Invert</a>
-                </div>
+    </template>
+    <div>
+      <div class="corporations-filter">
+          <template v-for="module in GAME_MODULES">
+            <div class="corporations-filter-group" v-if="cardsByModule[module].length > 0" v-bind:key="module">
+              <div class="corporations-filter-toolbox-cont">
+                  <div><span v-i18n>{{MODULE_NAMES[module]}}</span>&nbsp;<div :class="icon(module)"></div></div><br>
+                  <div class="corporations-filter-toolbox">
+                      <a href="#" v-i18n v-on:click.prevent="selectAll(module)">All</a> |
+                      <a href="#" v-i18n v-on:click.prevent="selectNone(module)">None</a> |
+                      <a href="#" v-i18n v-on:click.prevent="invertSelection(module)">Invert</a>
+                  </div>
+              </div>
+              <div v-for="prelude in cardsByModule[module]" v-bind:key="prelude" v-show="include(prelude)">
+                  <label class="form-checkbox">
+                      <input type="checkbox" v-model="selectedPreludes" :value="prelude"/>
+                      <i class="form-icon"></i><span v-i18n>{{ prelude }}</span>
+                      <div v-for="expansion in compatibility(prelude)" :key="expansion" :class="icon(expansion)"></div>
+                  </label>
+              </div>
             </div>
-            <div v-for="prelude in cardsByModule[module]" v-bind:key="prelude" v-show="include(prelude)">
-                <label class="form-checkbox">
-                    <input type="checkbox" v-model="selectedPreludes" :value="prelude"/>
-                    <i class="form-icon"></i><span v-i18n>{{ prelude }}</span>
-                    <div v-for="expansion in compatibility(prelude)" :key="expansion" :class="icon(expansion)"></div>
-                </label>
-            </div>
-          </div>
-        </template>
+          </template>
+      </div>
     </div>
+    </PopupPanel>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 
+import PopupPanel from '../common/PopupPanel.vue';
 import {CardName} from '@/common/cards/CardName';
 import {Expansion, GameModule, GAME_MODULES, MODULE_NAMES} from '@/common/cards/GameModule';
 import {byModule, byType, getCard, getCards} from '@/client/cards/ClientCardManifest';
@@ -51,6 +57,9 @@ type Group = GameModule | 'All';
 
 export default Vue.extend({
   name: 'PreludesFilter',
+  components: {
+    PopupPanel,
+  },
   props: {
     expansions: Object as () => Record<Expansion, boolean>,
   },

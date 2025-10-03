@@ -296,18 +296,21 @@
                             <input type="checkbox" v-model="showCorporationList" id="customCorps-checkbox">
                             <label for="customCorps-checkbox">
                                 <span v-i18n>Custom Corporation list</span>
+                                <span v-if="customCorporations.length">&nbsp;({{ customCorporations.length }})</span>
                             </label>
 
                             <template v-if="expansions.prelude">
                               <input type="checkbox" v-model="showPreludesList" id="customPreludes-checkbox">
                               <label for="customPreludes-checkbox">
                                   <span v-i18n>Custom Preludes list</span>
+                                  <span v-if="customPreludes.length">&nbsp;({{ customPreludes.length }})</span>
                               </label>
                             </template>
 
                             <input type="checkbox" v-model="showBannedCards" id="bannedCards-checkbox">
                             <label for="bannedCards-checkbox">
                                 <span v-i18n>Exclude some cards</span>
+                                <span v-if="customPreludes.length">&nbsp;({{ customPreludes.length }})</span>
                             </label>
 
                             <input type="checkbox" v-model="showIncludedCards" id="includedCards-checkbox">
@@ -488,11 +491,12 @@
             </div>
 
 
-            <div class="create-game--block" v-if="showCorporationList">
+            <div class="create-game--block" v-show="showCorporationList">
               <CorporationsFilter
                   ref="corporationsFilter"
                   v-on:corporation-list-changed="updatecustomCorporations"
                   v-bind:expansions="expansions"
+                  @close="showCorporationList = false"
               ></CorporationsFilter>
             </div>
 
@@ -509,6 +513,7 @@
                   ref="preludesFilter"
                   v-on:prelude-list-changed="updateCustomPreludes"
                   v-bind:expansions="expansions"
+                  @close="showPreludesList = false"
               ></PreludesFilter>
             </div>
 
@@ -777,14 +782,13 @@ export default (Vue as WithRefs<Refs>).extend({
               warnings.push('Corporations draft is no longer available. Future versions might just raise an error, so edit your JSON file.');
             }
 
-            const customCorporations = results[json_constants.CUSTOM_CORPORATIONS] || results[json_constants.OLD_CUSTOM_CORPORATIONS] || [];
+            // const customCorporations = results[json_constants.CUSTOM_CORPORATIONS] || results[json_constants.OLD_CUSTOM_CORPORATIONS] || [];
             const customColonies = results[json_constants.CUSTOM_COLONIES] || results[json_constants.OLD_CUSTOM_COLONIES] || [];
             const bannedCards = results[json_constants.BANNED_CARDS] || results[json_constants.OLD_BANNED_CARDS] || [];
             const includedCards = results[json_constants.INCLUDED_CARDS] || [];
             const customPreludes = results[json_constants.CUSTOM_PRELUDES] || [];
 
             component.playersCount = players.length;
-            component.showCorporationList = customCorporations.length > 0;
             component.showColoniesList = customColonies.length > 0;
             component.showBannedCards = bannedCards.length > 0;
             component.showIncludedCards = includedCards.length > 0;
@@ -848,7 +852,6 @@ export default (Vue as WithRefs<Refs>).extend({
             Vue.nextTick(() => {
               try {
                 if (component.showColoniesList) refs.coloniesFilter.updateColoniesByNames(customColonies);
-                if (component.showCorporationList) refs.corporationsFilter.selectedCorporations = customCorporations;
                 if (component.showPreludesList) refs.preludesFilter.updatePreludes(customPreludes);
                 if (component.showBannedCards) refs.cardsFilter.selected = bannedCards;
                 if (component.showIncludedCards) refs.cardsFilter2.selected = includedCards;
@@ -1119,8 +1122,7 @@ export default (Vue as WithRefs<Refs>).extend({
 
       // Check Prelude 2 + Pathfinders
       let energyProductionBug = true;
-      console.log(this.showCorporationList, this.customCorporations.length);
-      if (this.showCorporationList && customCorporations.length > 0 && !customCorporations.includes(CardName.THORGATE)) {
+      if (customCorporations.length > 0 && !customCorporations.includes(CardName.THORGATE)) {
         energyProductionBug = false;
       }
       if (this.bannedCards.includes(CardName.STANDARD_TECHNOLOGY)) {
@@ -1189,7 +1191,7 @@ export default (Vue as WithRefs<Refs>).extend({
 
       // TODO(kberg): this is a direct copy of the code right above.
       // Check custom prelude count
-      if (this.showPreludesList && customPreludes.length > 0) {
+      if (customPreludes.length > 0) {
         const requiredPreludeCount = players.length * startingPreludes;
         if (customPreludes.length < requiredPreludeCount) {
           window.alert(translateTextWithParams('Must select at least ${0} Preludes', [requiredPreludeCount.toString()]));

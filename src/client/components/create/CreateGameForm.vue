@@ -777,9 +777,9 @@ export default (Vue as WithRefs<Refs>).extend({
               warnings.push('Corporations draft is no longer available. Future versions might just raise an error, so edit your JSON file.');
             }
 
-            const customCorporations = results[json_constants.CUSTOM_CORPORATIONS] || results[json_constants.OLD_CUSTOM_CORPORATIONS] || [];
-            const customColonies = results[json_constants.CUSTOM_COLONIES] || results[json_constants.OLD_CUSTOM_COLONIES] || [];
-            const bannedCards = results[json_constants.BANNED_CARDS] || results[json_constants.OLD_BANNED_CARDS] || [];
+            const customCorporations = results[json_constants.CUSTOM_CORPORATIONS] || [];
+            const customColonies = results[json_constants.CUSTOM_COLONIES] || [];
+            const bannedCards = results[json_constants.BANNED_CARDS] || [];
             const includedCards = results[json_constants.INCLUDED_CARDS] || [];
             const customPreludes = results[json_constants.CUSTOM_PRELUDES] || [];
 
@@ -821,13 +821,10 @@ export default (Vue as WithRefs<Refs>).extend({
 
             const specialFields = [
               json_constants.CUSTOM_CORPORATIONS,
-              json_constants.OLD_CUSTOM_CORPORATIONS,
               json_constants.CUSTOM_COLONIES,
-              json_constants.OLD_CUSTOM_COLONIES,
               json_constants.CUSTOM_PRELUDES,
               json_constants.BANNED_CARDS,
               json_constants.INCLUDED_CARDS,
-              json_constants.OLD_BANNED_CARDS,
               ...Object.values(oldFields),
               'players',
               'solarPhaseOption',

@@ -303,12 +303,14 @@
                               <input type="checkbox" v-model="showPreludesList" id="customPreludes-checkbox">
                               <label for="customPreludes-checkbox">
                                   <span v-i18n>Custom Preludes list</span>
+                                  <span v-if="customPreludes.length">&nbsp;({{ customPreludes.length }})</span>
                               </label>
                             </template>
 
                             <input type="checkbox" v-model="showBannedCards" id="bannedCards-checkbox">
                             <label for="bannedCards-checkbox">
                                 <span v-i18n>Exclude some cards</span>
+                                <span v-if="customPreludes.length">&nbsp;({{ customPreludes.length }})</span>
                             </label>
 
                             <input type="checkbox" v-model="showIncludedCards" id="includedCards-checkbox">
@@ -511,6 +513,7 @@
                   ref="preludesFilter"
                   v-on:prelude-list-changed="updateCustomPreludes"
                   v-bind:expansions="expansions"
+                  @close="showPreludesList = false"
               ></PreludesFilter>
             </div>
 
@@ -1119,7 +1122,7 @@ export default (Vue as WithRefs<Refs>).extend({
 
       // Check Prelude 2 + Pathfinders
       let energyProductionBug = true;
-      if (this.showCorporationList && customCorporations.length > 0 && !customCorporations.includes(CardName.THORGATE)) {
+      if (customCorporations.length > 0 && !customCorporations.includes(CardName.THORGATE)) {
         energyProductionBug = false;
       }
       if (this.bannedCards.includes(CardName.STANDARD_TECHNOLOGY)) {
@@ -1188,7 +1191,7 @@ export default (Vue as WithRefs<Refs>).extend({
 
       // TODO(kberg): this is a direct copy of the code right above.
       // Check custom prelude count
-      if (this.showPreludesList && customPreludes.length > 0) {
+      if (customPreludes.length > 0) {
         const requiredPreludeCount = players.length * startingPreludes;
         if (customPreludes.length < requiredPreludeCount) {
           window.alert(translateTextWithParams('Must select at least ${0} Preludes', [requiredPreludeCount.toString()]));

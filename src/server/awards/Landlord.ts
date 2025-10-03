@@ -17,7 +17,7 @@ export class Landlord implements IAward {
 
     const moonSpaces = MoonExpansion.ifElseMoon(player.game,
       (moonData) => moonData.moon.spaces.filter(
-        (space) => space.tile !== undefined && space.player === player).length,
+        (space) => space.tile !== undefined && (space.player === player || space.coOwner === player)).length,
       () => 0);
 
     return marsSpaces + moonSpaces;

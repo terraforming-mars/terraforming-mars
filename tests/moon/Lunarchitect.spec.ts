@@ -46,4 +46,19 @@ describe('Lunarchitect', () => {
     MoonExpansion.addTile(player, 'm07', {tileType: TileType.MOON_MINE});
     expect(milestone.canClaim(player)).is.true;
   });
+
+  it('Co-owner counts', () => {
+    const milestone = new Lunarchitect();
+    expect(milestone.canClaim(player)).is.not.true;
+    MoonExpansion.addTile(player, 'm01', {tileType: TileType.MOON_MINE});
+    const space = player.game.moonData!.moon.getSpaceOrThrow('m01');
+
+    expect(milestone.getScore(player)).eq(1);
+    expect(milestone.getScore(otherPlayer)).eq(0);
+
+    space.coOwner = otherPlayer;
+
+    expect(milestone.getScore(player)).eq(1);
+    expect(milestone.getScore(otherPlayer)).eq(1);
+  });
 });

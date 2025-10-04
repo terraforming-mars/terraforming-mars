@@ -613,21 +613,6 @@ export default (Vue as WithRefs<Refs>).extend({
       bannedCards: [],
       includedCards: [],
       board: BoardName.THARSIS,
-      boards: [
-        BoardName.THARSIS,
-        BoardName.HELLAS,
-        BoardName.ELYSIUM,
-        RandomBoardOption.OFFICIAL,
-        BoardName.UTOPIA_PLANITIA,
-        BoardName.VASTITAS_BOREALIS_NOVUS,
-        BoardName.TERRA_CIMMERIA_NOVUS,
-        BoardName.ARABIA_TERRA,
-        BoardName.AMAZONIS,
-        BoardName.TERRA_CIMMERIA,
-        BoardName.VASTITAS_BOREALIS,
-        BoardName.HOLLANDIA,
-        RandomBoardOption.ALL,
-      ],
       seed: Math.random(),
       seededGame: false,
       solarPhaseOption: false,
@@ -739,6 +724,23 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     PLAYER_COLORS(): typeof PLAYER_COLORS {
       return PLAYER_COLORS;
+    },
+    boards() {
+      return [
+        BoardName.THARSIS,
+        BoardName.HELLAS,
+        BoardName.ELYSIUM,
+        RandomBoardOption.OFFICIAL,
+        BoardName.UTOPIA_PLANITIA,
+        BoardName.VASTITAS_BOREALIS_NOVUS,
+        BoardName.TERRA_CIMMERIA_NOVUS,
+        BoardName.ARABIA_TERRA,
+        BoardName.AMAZONIS,
+        BoardName.TERRA_CIMMERIA,
+        BoardName.VASTITAS_BOREALIS,
+        BoardName.HOLLANDIA,
+        RandomBoardOption.ALL,
+      ];
     },
   },
   methods: {

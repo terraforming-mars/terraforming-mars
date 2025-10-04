@@ -51,7 +51,8 @@ export type GameOptions = {
   randomMA: RandomMAOptionType;
   includeFanMA: boolean;
   modularMA: boolean;
-  soloTR: boolean; // Solo victory by getting TR 63 by game end
+  /** Solo victory by getting TR 63 by game end */
+  soloTR: boolean;
   customCorporationsList: ReadonlyArray<CardName>;
   bannedCards: ReadonlyArray<CardName>;
   includedCards: ReadonlyArray<CardName>;
@@ -69,10 +70,15 @@ export type GameOptions = {
   /** Standard projects can be paid for with steel or titanium at a 1MC loss per alloy */
   moonStandardProjectVariant1: boolean;
   altVenusBoard: boolean;
+  /** When true, Escape Velocity is enabled */
   escapeVelocityMode: boolean;
+  /** Time in minutes a player has to complete a game. */
   escapeVelocityThreshold?: number;
+  /** Number of seconds a player gets back with every action. */
   escapeVelocityBonusSeconds?: number;
+  /** Period in minutes after `escapeVelocityThreshold` after which player loses `escapeVelocityPenalty` VP. */
   escapeVelocityPeriod?: number;
+  /** VP (default is 1) a player loses for every `escapeVelocityPeriod` minutes after `escapeVelocityThreshold`. */
   escapeVelocityPenalty?: number;
   twoCorpsVariant: boolean;
 }
@@ -95,10 +101,10 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   customCorporationsList: [],
   customPreludes: [],
   draftVariant: false,
-  escapeVelocityMode: false, // When true, escape velocity is enabled.
-  escapeVelocityThreshold: constants.DEFAULT_ESCAPE_VELOCITY_THRESHOLD, // Time in minutes a player has to complete a game.
-  escapeVelocityBonusSeconds: constants.DEFAULT_ESCAPE_VELOCITY_BONUS_SECONDS, // Number of seconds a player gets back with every action.
-  escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD, // VP a player loses for every `escapeVelocityPenalty` minutes after `escapeVelocityThreshold`.
+  escapeVelocityMode: false,
+  escapeVelocityThreshold: constants.DEFAULT_ESCAPE_VELOCITY_THRESHOLD,
+  escapeVelocityBonusSeconds: constants.DEFAULT_ESCAPE_VELOCITY_BONUS_SECONDS,
+  escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD,
   escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
   expansions: {
     corpera: false,

@@ -157,7 +157,7 @@ export interface IPlayer {
   standardProjectsThisGeneration: Set<CardName>;
 
   /**
-   * For Hollandia Regels. When true, player has tiles on Mars, and all of them are in the deflection zone.
+   * For Hollandia. When true, player has tiles on Mars, and all of them are in the deflection zone.
    * False when the player has any tiles on Mars outside the deflection zone, and also false when the
    * player has no tiles on Mars.
    */

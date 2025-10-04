@@ -4,7 +4,7 @@ import {trimEmptyTextNodes} from '@/client/directives/TrimWhitespace';
 import {mainAppSettings} from '@/client/components/App';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import i18nPlugin from '@/client/plugins/i18n.plugin';
-import customMiddlewares from '@/client/plugins/customMiddlewares';
+import customMiddleware from '@/client/plugins/customMiddleware';
 import {startOauth} from '@/client/oauth';
 
 declare global {
@@ -14,7 +14,7 @@ declare global {
 }
 
 async function bootstrap() {
-  await customMiddlewares()
+  await customMiddleware()
   const lang = getPreferences().lang;
 
   if (lang !== 'en') {

@@ -21,7 +21,7 @@ import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {isPlayerId, isSpectatorId} from '@/common/Types';
 import {hasShowModal, showModal, windowHasHTMLDialogElement} from './HTMLDialogElementCompatibility';
 import {statusCode} from '@/common/http/statusCode';
-import { runCustomMiddlewares } from '@/client/plugins/customMiddlewares';
+import { runCustomMiddleware } from '@/client/plugins/customMiddleware';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -243,7 +243,7 @@ export const mainAppSettings = {
     }
   },
   updated() {
-    runCustomMiddlewares({})
+    runCustomMiddleware({})
   },
 };
 

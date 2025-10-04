@@ -131,7 +131,12 @@ export const mainAppSettings = {
       const url = 'api/' + path + window.location.search.replace('&noredirect', '');
 
       fetch(url)
-        .then((resp) => resp.json())
+        .then((resp) => {
+          if (!resp.ok) {
+            throw new Error(resp.statusText || 'Error getting game data');
+          }
+          return resp.json();
+        })
         .then((model) => {
           if (path === paths.PLAYER) {
             app.playerView = model as PlayerViewModel;
@@ -167,7 +172,7 @@ export const mainAppSettings = {
             }
           }
         })
-        .catch((err) => alert(err));
+        .catch(() => alert('Error getting game data'));
     },
     updatePlayer() {
       this.update(paths.PLAYER);
@@ -201,7 +206,12 @@ export const mainAppSettings = {
       const url = paths.API_GAME + window.location.search;
 
       fetch(url)
-        .then((resp) => resp.json())
+        .then((resp) => {
+          if (!resp.ok) {
+            throw new Error(resp.statusText || 'Error getting game data');
+          }
+          return resp.json();
+        })
         .then((appGame: SimpleGameModel) => {
           window.history.replaceState(
             appGame,
@@ -210,7 +220,7 @@ export const mainAppSettings = {
           );
           app.game = appGame;
         })
-        .catch(err => alert(err));
+        .catch(() => alert('Error getting game data'));
     } else if (currentPathname === paths.GAMES_OVERVIEW) {
       app.screen = 'games-overview';
     } else if (currentPathname === paths.NEW_GAME) {

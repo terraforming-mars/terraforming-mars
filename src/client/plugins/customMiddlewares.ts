@@ -2,42 +2,37 @@ const originalFetch = window.fetch;
 
 declare global {
   interface Window {
-    tfMarsFetchOverrideMiddlewares: ((ctx: {
-      args: any;
-      response: any;
-    }) => any)[];
+    customMiddlewares: ((ctx: { args: any; response: any }) => any)[];
   }
 }
 
-window.tfMarsFetchOverrideMiddlewares = [];
+window.customMiddlewares = [];
 
-async function runMiddlewares(ctx: any) {
+export async function runCustomMiddlewares(ctx: any) {
   await Promise.all(
-    window.tfMarsFetchOverrideMiddlewares.map((mw) =>
-      Promise.resolve().then(mw(ctx))
-    )
+    window.customMiddlewares.map((mw) => Promise.resolve().then(mw(ctx)))
   );
 }
 
 window.fetch = async (...args) => {
   const ctx = { args, response: undefined as any };
-  await runMiddlewares(ctx);
+  await runCustomMiddlewares(ctx);
   const res = await originalFetch(...args);
   ctx.response = res.clone();
-  await runMiddlewares(ctx);
+  await runCustomMiddlewares(ctx);
   return res;
 };
 
-export default async function customFetchOverride() {
+export default async function customMiddlewares() {
   const params = new URLSearchParams(window.location.search);
-  const src = params.get("customFetchOverride");
+  const src = params.get("customMiddlewaresSrc");
   if (!src) return;
   return new Promise((resolve) => {
     const script = document.createElement("script");
     // script.src =
-    //   "https://dcep93.github.io/tfMarsCustomFetchOverride.example.js";
+    //   "https://dcep93.github.io/tfMarsCustomMiddleware.example.js";
 
-    //    // window.tfMarsFetchOverrideMiddlewares.push((ctx) => {
+    //    // window.customMiddlewares.push((ctx) => {
     //    //   console.log(ctx);
     //    // });
 

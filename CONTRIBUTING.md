@@ -32,7 +32,7 @@ If you both agree that the code doesn't need any tests, don't be surprised if yo
 
 ## Readability
 
-The code needs to be readable as well as correct. Far too often we have accepted code from a casual or regular contributor, said contributor has disappeared, and nobody today understand what it does. So before sending  PR for review, consider these things: _Is your code structured well? Do comments explain the tricky parts? Do variable names make sense? If you weren’t around to maintain the change, would someone else understand?_
+The code needs to be readable as well as correct. Far too often we have accepted code from a casual or regular contributor, said contributor has disappeared, and nobody today understand what it does. So before sending PR for review, consider these things: _Is your code structured well? Do comments explain the tricky parts? Do variable names make sense? If you weren’t around to maintain the change, would someone else understand?_
 
 If these things seem difficult, just ask us for help, even if your code is in a partially-completed state.
 
@@ -41,6 +41,7 @@ If these things seem difficult, just ask us for help, even if your code is in a 
 Once in a while the group will decide that it doesn’t make sense to include a particular feature or change. This is why we’d prefer you contact us before spending all that time writing a feature! We commit to giving a clear reason why we are declining a feature. While not ideal, remember that you can fork the repo and host your own copy of the game.
 
 ## Technical Considerations
+
 ### Technical Compatibility
 
 We endeavor to have this app run on home Windows, Linux, Mac computers, and support modern popular browsers (sorry, IE11) so any changes that might seem browser / platform specific may get extra scrutiny.
@@ -51,7 +52,8 @@ This project is designed to run on single node servers or locally. Any change sh
 
 ## Pull Requests
 
-Your pull requests should either conssist of:
+Your pull requests should either consist of:
+
 1. one or more commits addressing the same issue, or
 2. several commits, each independently addressing an issue.
 

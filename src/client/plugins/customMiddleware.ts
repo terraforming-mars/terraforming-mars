@@ -11,7 +11,11 @@ const originalFetch = window.fetch;
 
 declare global {
   interface Window {
-    customMiddlewareF: (ctx: { app: any; args: any; response: any }) => any;
+    customMiddlewareF: (ctx: {
+      app: any;
+      fetchArgs: any;
+      fetchResponse: any;
+    }) => any;
   }
 }
 
@@ -37,7 +41,7 @@ window.customMiddlewareF = (ctx) => {
       action: labels[0]?.textContent.trim(),
       selectedCard: labels[1]?.querySelector(".card-title")!.textContent.trim(),
     });
-    ctx.app.updatePlayer();
+    ctx.app.playerkey++;
   };
   const options = Array.from(
     playerHomeBlock.querySelectorAll(".wf-options > div")
@@ -89,12 +93,12 @@ export async function runCustomMiddleware(ctx: any) {
 }
 
 window.fetch = async (...args) => {
-  const ctx = { args, response: undefined as any };
-  await runCustomMiddleware(ctx);
-  const res = await originalFetch(...args);
-  ctx.response = res.clone();
-  const altered = await runCustomMiddleware(ctx);
-  return altered ?? res;
+  const ctx = { fetchArgs: args, fetchResponse: undefined as any };
+  args = (await runCustomMiddleware(ctx)) ?? args;
+  var res = await originalFetch(...args);
+  ctx.fetchResponse = res.clone();
+  res = (await runCustomMiddleware(ctx)) ?? res;
+  return res;
 };
 
 export default async function customMiddleware() {

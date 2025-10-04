@@ -235,3 +235,23 @@ export function getEnumStringValues<T extends Record<string, string>>(enumObject
 export function getEnumStringEntries<T extends Record<string, string>>(enumObject: T): Array<[string, T[keyof T]]> {
   return Object.entries(enumObject) as Array<[string, T[keyof T]]>;
 }
+
+/**
+ * Confirms `obj` is defined and of type `klass`, otherwise it throws an Error.
+ *
+ * Accepts `undefined` as class and fails when obj is not undefined.
+ */
+export function cast<T>(obj: any, klass: new (...args: any[]) => T): T;
+export function cast<T>(obj: any, klass: undefined): undefined;
+export function cast<T>(obj: any, klass: (new (...args: any[]) => T) | undefined): T | undefined {
+  if (klass === undefined) {
+    if (obj !== undefined) {
+      throw new Error(`Expected undefined, got type ${obj.constructor.name}`);
+    }
+    return undefined;
+  }
+  if (!(obj instanceof klass)) {
+    throw new Error(`Not an instance of ${klass.name}: ${obj?.constructor?.name}`);
+  }
+  return obj;
+}

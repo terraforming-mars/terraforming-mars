@@ -137,4 +137,10 @@ describe('utils', () => {
       'clone',
     ]);
   });
+
+  it('cast', () => {
+    expect(utils.cast(undefined, undefined));
+    expect(utils.cast([], Array));
+    expect(() => utils.cast(undefined, Array)).to.throw();
+  });
 });

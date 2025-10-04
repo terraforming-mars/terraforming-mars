@@ -243,7 +243,7 @@ export const mainAppSettings = {
     }
   },
   updated() {
-    runCustomMiddleware({})
+    runCustomMiddleware({app:this})
   },
 };
 

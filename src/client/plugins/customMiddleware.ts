@@ -11,12 +11,25 @@ const originalFetch = window.fetch;
 
 declare global {
   interface Window {
-    customMiddleware: (ctx: { args: any; response: any }) => any;
+    customMiddleware: (ctx: { app: any; args: any; response: any }) => any;
   }
 }
 
 window.customMiddleware = (ctx) => {
-  if (ctx.args) return;
+  if (ctx.response) {
+    if (ctx.args[0].startsWith("api/player?")) {
+      return ctx.response.json().then((resp: any) => ({
+        json: Promise.resolve().then(() => ({
+          ...resp,
+          waitingFor: {
+            ...resp.waitingFor,
+            options: resp.waitingFor.options,
+          },
+        })),
+      }));
+    }
+  }
+  if (!ctx.app) return;
   const wfAction = document.querySelector(
     ".player_home_block--actions .wf-action"
   );
@@ -27,7 +40,7 @@ window.customMiddleware = (ctx) => {
   newButton.textContent = "disregard";
   // @ts-ignore / Property 'onclick' does not exist on type 'Node'.ts(2339)
   newButton.onclick = () => {
-    alert("gotem");
+    ctx.app.updatePlayer();
   };
   wfAction.appendChild(newButton);
 };

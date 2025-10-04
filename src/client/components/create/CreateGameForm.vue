@@ -989,10 +989,6 @@ export default (Vue as WithRefs<Refs>).extend({
     getPlayerContainerColorClass(color: Color): string {
       return playerColorClass(color, 'bg_transparent');
     },
-    isEnabled(expansion: Expansion): boolean {
-      const model: CreateGameModel = this;
-      return model.expansions[expansion];
-    },
     boardHref(boardName: BoardName | RandomBoardOption) {
       const options: Record<BoardName | RandomBoardOption, string> = {
         [BoardName.THARSIS]: 'tharsis',
@@ -1173,7 +1169,7 @@ export default (Vue as WithRefs<Refs>).extend({
         for (const corp of customCorporations) {
           const card = getCard(corp);
           for (const module of card?.compatibility ?? []) {
-            if (!this.isEnabled(module)) {
+            if (!this.expansions[module]) {
               valid = false;
             }
           }
@@ -1199,7 +1195,7 @@ export default (Vue as WithRefs<Refs>).extend({
         for (const prelude of customPreludes) {
           const card = getCard(prelude);
           for (const module of card?.compatibility ?? []) {
-            if (!this.isEnabled(module)) {
+            if (!this.expansions[module]) {
               valid = false;
             }
           }

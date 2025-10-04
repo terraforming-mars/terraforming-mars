@@ -41,8 +41,8 @@ window.fetch = async (...args) => {
   await runCustomMiddleware(ctx);
   const res = await originalFetch(...args);
   ctx.response = res.clone();
-  await runCustomMiddleware(ctx);
-  return res;
+  const altered = await runCustomMiddleware(ctx);
+  return altered ?? res;
 };
 
 export default async function customMiddleware() {

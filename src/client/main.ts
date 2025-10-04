@@ -4,6 +4,7 @@ import {trimEmptyTextNodes} from '@/client/directives/TrimWhitespace';
 import {mainAppSettings} from '@/client/components/App';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import i18nPlugin from '@/client/plugins/i18n.plugin';
+import customFetchOverride from '@/client/plugins/customFetchOverride';
 import {startOauth} from '@/client/oauth';
 
 declare global {
@@ -13,6 +14,7 @@ declare global {
 }
 
 async function bootstrap() {
+  await customFetchOverride()
   const lang = getPreferences().lang;
 
   if (lang !== 'en') {

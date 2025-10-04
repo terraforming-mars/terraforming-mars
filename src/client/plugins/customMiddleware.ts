@@ -11,28 +11,15 @@ const originalFetch = window.fetch;
 
 declare global {
   interface Window {
-    customMiddleware: (ctx: { app: any; args: any; response: any }) => any;
+    customMiddlewareF: (ctx: { app: any; args: any; response: any }) => any;
   }
 }
 
-window.customMiddleware = (ctx) => {
-  if (ctx.response) {
-    if (ctx.args[0].startsWith("api/player?")) {
-      return ctx.response.json().then((resp: any) => ({
-        json: Promise.resolve().then(() => ({
-          ...resp,
-          waitingFor: {
-            ...resp.waitingFor,
-            options: resp.waitingFor.options,
-          },
-        })),
-      }));
-    }
-  }
+window.customMiddlewareF = (ctx) => {
   if (!ctx.app) return;
-  const wfAction = document.querySelector(
-    ".player_home_block--actions .wf-action"
-  );
+  const playerHomeBlock = document.querySelector(".player_home_block--actions");
+  if (!playerHomeBlock) return;
+  const wfAction = playerHomeBlock.querySelector(".wf-action");
   if (!wfAction) return;
   const oldButton = wfAction.querySelector(".btn-submit");
   if (!oldButton) return;
@@ -40,13 +27,38 @@ window.customMiddleware = (ctx) => {
   newButton.textContent = "disregard";
   // @ts-ignore / Property 'onclick' does not exist on type 'Node'.ts(2339)
   newButton.onclick = () => {
+    const labels = Array.from(
+      playerHomeBlock.querySelectorAll(".wf-options label")
+    ).filter((label) => label.querySelector('input[type="radio"]:checked'));
+    disregarded.push({
+      action: labels[0]?.textContent,
+      selectedCard: labels[1]
+        ?.querySelector(".card-title.card-title")!
+        .textContent.trim(),
+    });
     ctx.app.updatePlayer();
   };
+  const options = Array.from(
+    playerHomeBlock.querySelectorAll(".wf-options > div")
+  ) as HTMLElement[];
+  disregarded.forEach(({ action, selectedCard }) => {
+    const optionDiv = options.find(
+      (div) => div.querySelector(".form-radio")?.textContent === action
+    )!;
+    if (!selectedCard) {
+      optionDiv.style.display = "none";
+    }
+  });
+  options
+    .find((o) => o.style.display !== "none")!
+    .querySelector("label")!
+    .click();
   wfAction.appendChild(newButton);
 };
+const disregarded: any[] = [];
 
 export async function runCustomMiddleware(ctx: any) {
-  await Promise.resolve().then(() => window.customMiddleware(ctx));
+  await Promise.resolve().then(() => window.customMiddlewareF(ctx));
 }
 
 window.fetch = async (...args) => {

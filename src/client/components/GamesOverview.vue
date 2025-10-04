@@ -47,29 +47,24 @@ export default Vue.extend({
   methods: {
     getGames() {
       const vueApp = this;
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', 'api/games?serverId='+this.serverId);
-      xhr.onerror = function() {
-        alert('Error getting games data');
-      };
-      xhr.onload = () => {
-        if (xhr.status === statusCode.ok) {
-          const result = xhr.response;
+
+      const url = 'api/games?serverId='+this.serverId;
+      fetch(url)
+        .then((resp) => resp.json())
+        .then((result: Response[]) => {
           if (result instanceof Array) {
-            result.forEach(function(response: Response) {
+            result.forEach(function (response) {
               vueApp.entries.push({
                 id: response.gameId,
                 game: undefined,
-                status: 'loading'});
+                status: "loading",
+              });
             });
             vueApp.getGame(0);
             return;
           }
-        }
-        alert('Unexpected response fetching games from API');
-      };
-      xhr.responseType = 'json';
-      xhr.send();
+        })
+        .catch((err) => alert(err));
     },
     getGame(idx: number) {
       if (idx >= this.entries.length) {
@@ -77,29 +72,22 @@ export default Vue.extend({
       }
       const entry = this.entries[idx];
       const gameId = entry.id;
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', 'api/game?id='+gameId);
-      xhr.onerror = () => {
-        entry.status = 'error';
-        this.getGame(idx + 1);
-      };
-      xhr.onload = () => {
-        if (xhr.status === statusCode.ok) {
-          const result = xhr.response;
-          if (result instanceof Object) {
-            const game = result as SimpleGameModel;
+
+      const url = 'api/game?id='+gameId;
+      fetch(url)
+        .then((resp) => resp.json())
+        .then((game: SimpleGameModel) => {
+          if (game instanceof Object) {
             entry.status = 'done';
             entry.game = game;
             this.getGame(idx + 1);
             return;
           }
-        }
-        entry.status = 'error';
-        this.getGame(idx + 1);
-      };
-      xhr.responseType = 'json';
-      // setTimeout(() => xhr.send(), 500);
-      xhr.send();
+        })
+        .catch(() => {
+          entry.status = 'error';
+          this.getGame(idx + 1);
+        });
     },
   },
   computed: {

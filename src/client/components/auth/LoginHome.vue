@@ -29,22 +29,27 @@ export default Vue.extend({
     };
   },
   mounted() {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', paths.API_PROFILE);
-    xhr.onerror = () => alert('Error getting session profile data');
-    xhr.onload = () => {
-      try {
-        if (xhr.status === statusCode.ok) {
-          this.user = xhr.response._user.userid;
-        } else {
-          console.error('Unexpected server response: ' + xhr.statusText);
+    const url = paths.API_PROFILE;
+
+    fetch(url)
+      .then((resp) => {
+        if (!resp.ok) {
+          console.error('Unexpected server response: ' + resp.statusText);
+          return null;
         }
-      } catch (e) {
-        console.log('Error processing XHR response: ' + e);
-      }
-    };
-    xhr.responseType = 'json';
-    xhr.send();
+        return resp.json();
+      })
+      .then((data) => {
+        if (!data) return;
+        try {
+          this.user = data._user.userid;
+        } catch (e) {
+          console.log('Error processing fetch response: ' + e);
+        }
+      })
+      .catch(() => {
+        alert('Error getting session profile data');
+      });
   },
   computed: {
     loginUrl(): string {

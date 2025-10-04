@@ -126,60 +126,48 @@ export const mainAppSettings = {
     },
     update(path: typeof paths.PLAYER | typeof paths.SPECTATOR): void {
       const currentPathname = getLastPathSegment();
-      const xhr = new XMLHttpRequest();
       const app = this as unknown as MainAppData;
 
       const url = 'api/' + path + window.location.search.replace('&noredirect', '');
-      xhr.open('GET', url);
-      xhr.onerror = function() {
-        alert('Error getting game data');
-      };
-      xhr.onload = function() {
-        try {
-          if (xhr.status === statusCode.ok) {
-            const model = xhr.response as ViewModel;
-            if (path === paths.PLAYER) {
-              app.playerView = model as PlayerViewModel;
-              setTranslationContext(app.playerView);
-            } else if (path === paths.SPECTATOR) {
-              app.spectator = model as SpectatorModel;
-            }
-            app.playerkey++;
-            if (
-              model.game.phase === 'end' &&
-              window.location.search.includes('&noredirect') === false
-            ) {
-              app.screen = 'the-end';
-              if (currentPathname !== paths.THE_END) {
-                window.history.replaceState(
-                  xhr.response,
-                  `${constants.APP_NAME} - Player`,
-                  `${paths.THE_END}?id=${model.id}`,
-                );
-              }
-            } else {
-              if (path === paths.PLAYER) {
-                app.screen = 'player-home';
-              } else if (path === paths.SPECTATOR) {
-                app.screen = 'spectator-home';
-              }
-              if (currentPathname !== path) {
-                window.history.replaceState(
-                  xhr.response,
-                  `${constants.APP_NAME} - Game`,
-                  `${path}?id=${model.id}`,
-                );
-              }
+
+      fetch(url)
+        .then((resp) => resp.json())
+        .then((model) => {
+          if (path === paths.PLAYER) {
+            app.playerView = model as PlayerViewModel;
+            setTranslationContext(app.playerView);
+          } else if (path === paths.SPECTATOR) {
+            app.spectator = model as SpectatorModel;
+          }
+          app.playerkey++;
+          if (
+            model.game.phase === "end" &&
+            window.location.search.includes("&noredirect") === false
+          ) {
+            app.screen = "the-end";
+            if (currentPathname !== paths.THE_END) {
+              window.history.replaceState(
+                model,
+                `${constants.APP_NAME} - Player`,
+                `${paths.THE_END}?id=${model.id}`
+              );
             }
           } else {
-            alert('Unexpected server response: ' + xhr.statusText);
+            if (path === paths.PLAYER) {
+              app.screen = "player-home";
+            } else if (path === paths.SPECTATOR) {
+              app.screen = "spectator-home";
+            }
+            if (currentPathname !== path) {
+              window.history.replaceState(
+                model,
+                `${constants.APP_NAME} - Game`,
+                `${path}?id=${model.id}`
+              );
+            }
           }
-        } catch (e) {
-          console.log('Error processing XHR response: ' + e);
-        }
-      };
-      xhr.responseType = 'json';
-      xhr.send();
+        })
+        .catch((err) => alert(err));
     },
     updatePlayer() {
       this.update(paths.PLAYER);
@@ -209,25 +197,20 @@ export const mainAppSettings = {
       }
     } else if (currentPathname === paths.GAME) {
       app.screen = 'game-home';
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', paths.API_GAME + window.location.search);
-      xhr.onerror = function() {
-        alert('Error getting game data');
-      };
-      xhr.onload = function() {
-        if (xhr.status === statusCode.ok) {
+
+      const url = paths.API_GAME + window.location.search;
+
+      fetch(url)
+        .then((resp) => resp.json())
+        .then((appGame: SimpleGameModel) => {
           window.history.replaceState(
-            xhr.response,
+            appGame,
             `${constants.APP_NAME} - Game`,
-            `${paths.GAME}?id=${xhr.response.id}`,
+            `${paths.GAME}?id=${appGame.id}`,
           );
-          app.game = xhr.response as SimpleGameModel;
-        } else {
-          alert('Unexpected server response');
-        }
-      };
-      xhr.responseType = 'json';
-      xhr.send();
+          app.game = appGame;
+        })
+        .catch(err => alert(err));
     } else if (currentPathname === paths.GAMES_OVERVIEW) {
       app.screen = 'games-overview';
     } else if (currentPathname === paths.NEW_GAME) {

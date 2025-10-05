@@ -26,23 +26,23 @@
 
 <script lang="ts">
 
-import { vueRoot } from '@/client/components/vueRoot';
-import { getPreferences } from '@/client/utils/PreferencesManager';
-import { SoundManager } from '@/client/utils/SoundManager';
-import { INVALID_RUN_ID } from '@/common/app/AppErrorId';
-import { paths } from '@/common/app/paths';
-import { Color } from '@/common/Color';
-import * as constants from '@/common/constants';
-import { statusCode } from '@/common/http/statusCode';
-import { InputResponse } from '@/common/inputs/InputResponse';
-import { PlayerInputModel } from '@/common/models/PlayerInputModel';
-import { PlayerViewModel, PublicPlayerModel } from '@/common/models/PlayerModel';
-import { WaitingForModel } from '@/common/models/WaitingForModel';
-import { Phase } from '@/common/Phase';
-import { isPlayerId } from '@/common/Types';
-import { playerColorClass } from '@/common/utils/utils';
-import * as raw_settings from '@/genfiles/settings.json';
 import Vue from 'vue';
+import * as constants from '@/common/constants';
+import * as raw_settings from '@/genfiles/settings.json';
+import {vueRoot} from '@/client/components/vueRoot';
+import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {playerColorClass} from '@/common/utils/utils';
+import {PublicPlayerModel, PlayerViewModel} from '@/common/models/PlayerModel';
+import {getPreferences} from '@/client/utils/PreferencesManager';
+import {SoundManager} from '@/client/utils/SoundManager';
+import {WaitingForModel} from '@/common/models/WaitingForModel';
+import {Phase} from '@/common/Phase';
+import {paths} from '@/common/app/paths';
+import {statusCode} from '@/common/http/statusCode';
+import {isPlayerId} from '@/common/Types';
+import {InputResponse} from '@/common/inputs/InputResponse';
+import {INVALID_RUN_ID} from '@/common/app/AppErrorId';
+import {Color} from '@/common/Color';
 
 let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;

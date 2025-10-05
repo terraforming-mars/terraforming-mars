@@ -52,11 +52,11 @@ export default Vue.extend({
         .then((resp) => resp.json())
         .then((result: Response[]) => {
           if (result instanceof Array) {
-            result.forEach(function (response) {
+            result.forEach(function(response) {
               vueApp.entries.push({
                 id: response.gameId,
                 game: undefined,
-                status: "loading",
+                status: 'loading',
               });
             });
             vueApp.getGame(0);

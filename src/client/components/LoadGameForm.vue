@@ -50,8 +50,8 @@ export default Vue.extend({
         return;
       }
       fetch(paths.LOAD_GAME, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
           gameId,
           rollbackCount,
@@ -60,21 +60,21 @@ export default Vue.extend({
         .then((res) => res.json())
         .then((response: SimpleGameModel) => {
           if (response.players.length === 1) {
-            window.location.href = "player?id=" + response.players[0].id;
+            window.location.href = 'player?id=' + response.players[0].id;
             return;
           }
 
           window.history.replaceState(
             response,
             `${constants.APP_NAME} - Game`,
-            "game?id=" + response.id
+            'game?id=' + response.id,
           );
           const root = vueRoot(this);
           root.game = response;
-          root.screen = "game-home";
+          root.screen = 'game-home';
         })
         .catch(() => {
-          alert("Error loading game");
+          alert('Error loading game');
         });
     },
   },

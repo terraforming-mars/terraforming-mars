@@ -102,8 +102,8 @@ export default Vue.extend({
       const url = paths.PLAYER_INPUT + '?id=' + this.playerView.id;
 
       fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
           runId: this.playerView.runId,
           ...out,
@@ -114,13 +114,13 @@ export default Vue.extend({
             .json()
             .then((response) => ({
               status: resp.status,
-              responseType: "json",
+              responseType: 'json',
               response,
             }))
             .catch((err) => ({
               status: resp.status,
               err,
-            }))
+            })),
         )
         .then((xhr) => {
           this.loadPlayerViewResponse(xhr);
@@ -146,13 +146,13 @@ export default Vue.extend({
             .json()
             .then((response) => ({
               status: resp.status,
-              responseType: "json",
+              responseType: 'json',
               response,
             }))
             .catch((err) => ({
               status: resp.status,
               err,
-            }))
+            })),
         )
         .then((xhr) => {
           this.loadPlayerViewResponse(xhr);
@@ -162,7 +162,7 @@ export default Vue.extend({
           root.isServerSideRequestInProgress = false;
         });
     },
-    loadPlayerViewResponse(xhr: {status:any,response:any,responseType:string}) {
+    loadPlayerViewResponse(xhr: {status:any, response:any, responseType:string}) {
       const root = vueRoot(this);
       const showAlert = vueRoot(this).showAlert;
       if (xhr.status === statusCode.ok) {

@@ -14,7 +14,7 @@ declare global {
 }
 
 async function bootstrap() {
-  await customMiddleware()
+  await customMiddleware();
   const lang = getPreferences().lang;
 
   if (lang !== 'en') {

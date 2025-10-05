@@ -118,7 +118,7 @@ export default Vue.extend({
       const controller = new AbortController();
       logAbortController = controller;
 
-      fetch(url, { signal: controller.signal })
+      fetch(url, {signal: controller.signal})
         .then((resp) => {
           if (!resp.ok) {
             console.error(`error updating messages, response code ${resp.status}`);

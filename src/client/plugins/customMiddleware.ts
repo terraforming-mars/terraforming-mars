@@ -24,20 +24,19 @@ export async function runCustomMiddleware(ctx: any) {
 }
 
 window.fetch = async (...args) => {
-  const ctx = { fetchArgs: args, fetchResponse: undefined as any };
+  const ctx = {fetchArgs: args, fetchResponse: undefined as any};
   args = (await runCustomMiddleware(ctx)) ?? args;
-  var res = await originalFetch(...args);
+  const res = await originalFetch(...args);
   ctx.fetchResponse = res.clone();
-  res = (await runCustomMiddleware(ctx)) ?? res;
-  return res;
+  return (await runCustomMiddleware(ctx)) ?? res;
 };
 
-export default async function customMiddleware() {
+export default function customMiddleware() {
   const params = new URLSearchParams(window.location.search);
-  const src = params.get("customMiddlewaresSrc");
+  const src = params.get('customMiddlewaresSrc');
   if (!src) return;
   return new Promise((resolve) => {
-    const script = document.createElement("script");
+    const script = document.createElement('script');
     // script.src =
     //   "https://dcep93.github.io/tfMarsCustomMiddleware.example.js";
 

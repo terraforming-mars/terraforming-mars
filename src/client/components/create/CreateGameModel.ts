@@ -13,7 +13,6 @@ export type CreateGameModel = {
   aresExtremeVariant: boolean;
   bannedCards: Array<CardName>;
   board: BoardNameType;
-  boards: Array<BoardNameType>;
   ceosDraftVariant: boolean | undefined;
   clonedGameId: GameId | undefined;
   customCeos: Array<CardName>;

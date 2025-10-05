@@ -41,7 +41,8 @@ export class ExportConvoy extends Card implements IProjectCard {
   }
 
   public animalCards(player: IPlayer) {
-    return player.playedCards.filter((card) => card.resourceType === CardResource.ANIMAL && card.resourceCount >= 2);
+    return player.playedCards.filter((card) => card.name !== CardName.PETS && card.resourceType === CardResource.ANIMAL && card.resourceCount >= 2);
+    // NB Animals can't be removed from Pets.
   }
 
   public override bespokeCanPlay(player: IPlayer, _canAffordOptions: CanAffordOptions): boolean {

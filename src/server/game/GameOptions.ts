@@ -94,10 +94,6 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   customPreludes: [],
   draftVariant: false,
   escapeVelocity: undefined,
-  // escapeVelocityThreshold: constants.DEFAULT_ESCAPE_VELOCITY_THRESHOLD,
-  // escapeVelocityBonusSeconds: constants.DEFAULT_ESCAPE_VELOCITY_BONUS_SECONDS,
-  // escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD,
-  // escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
   expansions: {
     corpera: false,
     promo: false,

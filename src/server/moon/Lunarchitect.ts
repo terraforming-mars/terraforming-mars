@@ -14,7 +14,7 @@ export class Lunarchitect extends BaseMilestone {
 
   public getScore(player: IPlayer): number {
     return MoonExpansion.ifElseMoon(player.game, (moonData) => {
-      return moonData.moon.spaces.filter((space) => space.player?.id === player.id).length;
+      return moonData.moon.spaces.filter((space) => space.player?.id === player.id || space.coOwner?.id === player.id).length;
     }, () => 0) || 0;
   }
 }

@@ -92,7 +92,7 @@ export function calculateVictoryPoints(player: IPlayer) {
 
     const elapsedTimeMinutes = player.timer.getElapsedTimeInMinutes();
     const bonusActionMinutes = player.actionsTakenThisGame * (options.bonusSectionsPerAction / 60);
-    const overageMin = elapsedTimeMinutes + bonusActionMinutes - options.thresholdMinutes;
+    const overageMin = elapsedTimeMinutes - bonusActionMinutes - options.thresholdMinutes;
 
     if (overageMin > 0) {
       const vpPenalty = options.penaltyVPPerPeriod * Math.floor(overageMin / options.penaltyPeriodMinutes);

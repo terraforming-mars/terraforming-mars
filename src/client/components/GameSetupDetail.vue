@@ -47,7 +47,7 @@
               <div v-if="gameOptions.preludeDraftVariant">Prelude</div>
             </li>
 
-            <li v-if="gameOptions.escapeVelocityMode">
+            <li v-if="gameOptions.escapeVelocity !== undefined">
               <div class="create-game-expansion-icon expansion-icon-escape-velocity"></div>
               <span>{{escapeVelocityDescription}}</span>
             </li>

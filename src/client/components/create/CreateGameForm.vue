@@ -831,7 +831,7 @@ export default (Vue as WithRefs<Refs>).extend({
       case BoardName.VASTITAS_BOREALIS:
         return 'create-game-board-hexagon create-game-vastitas-borealis';
       case BoardName.HOLLANDIA:
-        return 'create-game-board-hexagon create-game-hollandia';
+        return 'create-game-board-hexagon create-game-hollandia-regels';
       default:
         return 'create-game-board-hexagon create-game-random';
       }
@@ -854,7 +854,7 @@ export default (Vue as WithRefs<Refs>).extend({
         [BoardName.AMAZONIS]: 'amazonis-planatia',
         [BoardName.TERRA_CIMMERIA]: 'terra-cimmeria',
         [BoardName.TERRA_CIMMERIA_NOVUS]: 'terra-cimmeria-novus',
-        [BoardName.HOLLANDIA]: 'hollandia',
+        [BoardName.HOLLANDIA]: 'hollandia-regels',
         [RandomBoardOption.OFFICIAL]: '',
         [RandomBoardOption.ALL]: '',
       };
@@ -932,11 +932,6 @@ export default (Vue as WithRefs<Refs>).extend({
       // const beginnerOption = this.beginnerOption;
       const randomFirstPlayer = this.randomFirstPlayer;
       const requiresVenusTrackCompletion = this.requiresVenusTrackCompletion;
-      const escapeVelocityMode = this.escapeVelocityMode;
-      const escapeVelocityThreshold = this.escapeVelocityMode ? this.escapeVelocityThreshold : undefined;
-      const escapeVelocityBonusSeconds = this.escapeVelocityBonusSeconds ? this.escapeVelocityBonusSeconds : undefined;
-      const escapeVelocityPeriod = this.escapeVelocityMode ? this.escapeVelocityPeriod : undefined;
-      const escapeVelocityPenalty = this.escapeVelocityMode ? this.escapeVelocityPenalty : undefined;
       const twoCorpsVariant = this.twoCorpsVariant;
       const customCeos = this.customCeos;
       const startingCeos = this.startingCeos;
@@ -1129,11 +1124,13 @@ export default (Vue as WithRefs<Refs>).extend({
         moonStandardProjectVariant: this.moonStandardProjectVariant,
         moonStandardProjectVariant1: this.moonStandardProjectVariant1,
         altVenusBoard: this.altVenusBoard,
-        escapeVelocityMode,
-        escapeVelocityThreshold,
-        escapeVelocityBonusSeconds,
-        escapeVelocityPeriod,
-        escapeVelocityPenalty,
+        escapeVelocity: this.escapeVelocityMode ?
+          {
+            thresholdMinutes: this.escapeVelocityThreshold,
+            bonusSectionsPerAction: this.escapeVelocityBonusSeconds,
+            penaltyPeriodMinutes: this.escapeVelocityPeriod,
+            penaltyVPPerPeriod: this.escapeVelocityPenalty,
+          } : undefined,
         twoCorpsVariant,
         customCeos,
         startingCeos,

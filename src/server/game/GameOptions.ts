@@ -6,6 +6,7 @@ import {GameId} from '../../common/Types';
 import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
 import {AgendaStyle} from '../../common/turmoil/Types';
 import {Expansion} from '../../common/cards/GameModule';
+import {EscapeVelocityOptions} from '../../common/game/NewGameConfig';
 
 export type GameOptions = {
   boardName: BoardName;
@@ -70,16 +71,7 @@ export type GameOptions = {
   /** Standard projects can be paid for with steel or titanium at a 1MC loss per alloy */
   moonStandardProjectVariant1: boolean;
   altVenusBoard: boolean;
-  /** When true, Escape Velocity is enabled */
-  escapeVelocityMode: boolean;
-  /** Time in minutes a player has to complete a game. */
-  escapeVelocityThreshold?: number;
-  /** Number of seconds a player gets back with every action. */
-  escapeVelocityBonusSeconds?: number;
-  /** Period in minutes after `escapeVelocityThreshold` after which player loses `escapeVelocityPenalty` VP. */
-  escapeVelocityPeriod?: number;
-  /** VP (default is 1) a player loses for every `escapeVelocityPeriod` minutes after `escapeVelocityThreshold`. */
-  escapeVelocityPenalty?: number;
+  escapeVelocity?: EscapeVelocityOptions;
   twoCorpsVariant: boolean;
 }
 
@@ -101,11 +93,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   customCorporationsList: [],
   customPreludes: [],
   draftVariant: false,
-  escapeVelocityMode: false,
-  escapeVelocityThreshold: constants.DEFAULT_ESCAPE_VELOCITY_THRESHOLD,
-  escapeVelocityBonusSeconds: constants.DEFAULT_ESCAPE_VELOCITY_BONUS_SECONDS,
-  escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD,
-  escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
+  escapeVelocity: undefined,
   expansions: {
     corpera: false,
     promo: false,

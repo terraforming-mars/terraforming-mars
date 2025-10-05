@@ -59,11 +59,6 @@ describe('ApiGame', () => {
           'bannedCards': [],
           'boardName': 'tharsis',
           'draftVariant': false,
-          'escapeVelocityBonusSeconds': 2,
-          'escapeVelocityMode': false,
-          'escapeVelocityPenalty': 1,
-          'escapeVelocityPeriod': 2,
-          'escapeVelocityThreshold': 30,
           'expansions': {
             'ares': false,
             'ceo': false,

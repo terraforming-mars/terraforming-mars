@@ -831,7 +831,7 @@ export default (Vue as WithRefs<Refs>).extend({
       case BoardName.VASTITAS_BOREALIS:
         return 'create-game-board-hexagon create-game-vastitas-borealis';
       case BoardName.HOLLANDIA:
-        return 'create-game-board-hexagon create-game-hollandia-regels';
+        return 'create-game-board-hexagon create-game-hollandia';
       default:
         return 'create-game-board-hexagon create-game-random';
       }
@@ -854,7 +854,7 @@ export default (Vue as WithRefs<Refs>).extend({
         [BoardName.AMAZONIS]: 'amazonis-planatia',
         [BoardName.TERRA_CIMMERIA]: 'terra-cimmeria',
         [BoardName.TERRA_CIMMERIA_NOVUS]: 'terra-cimmeria-novus',
-        [BoardName.HOLLANDIA]: 'hollandia-regels',
+        [BoardName.HOLLANDIA]: 'hollandia',
         [RandomBoardOption.OFFICIAL]: '',
         [RandomBoardOption.ALL]: '',
       };

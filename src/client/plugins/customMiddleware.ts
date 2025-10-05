@@ -19,77 +19,8 @@ declare global {
   }
 }
 
-window.customMiddlewareF = (ctx) => {
-  if (!ctx.app) return;
-  const playerHomeBlock = document.querySelector(".player_home_block--actions");
-  if (!playerHomeBlock) return;
-  const wfAction = playerHomeBlock.querySelector(".wf-action");
-  if (!wfAction) return;
-  const oldButton = wfAction.querySelector(".btn-submit");
-  if (!oldButton) return;
-  const newButton = oldButton.cloneNode(true);
-  newButton.textContent = "disregard";
-  // @ts-ignore / Property 'onclick' does not exist on type 'Node'.ts(2339)
-  newButton.onclick = () => {
-    const labels = Array.from(
-      playerHomeBlock.querySelectorAll(".wf-options label")
-    ).filter((label) => label.querySelector('input[type="radio"]:checked'));
-    if (labels.length === 1 && playerHomeBlock.querySelector(".card-title")) {
-      return;
-    }
-    disregarded.push({
-      action: labels[0]?.textContent.trim(),
-      selectedCard: labels[1]?.querySelector(".card-title")!.textContent.trim(),
-    });
-    ctx.app.playerkey++;
-  };
-  const options = Array.from(
-    playerHomeBlock.querySelectorAll(".wf-options > div")
-  ) as HTMLElement[];
-  disregarded.forEach(({ action, selectedCard }) => {
-    const optionDiv = options.find(
-      (div) => div.querySelector(".form-radio")?.textContent.trim() === action
-    )!;
-    if (selectedCard) {
-      optionDiv
-        .querySelector('input[type="radio"]')!
-        .addEventListener("change", () => {
-          const allCards = Array.from(
-            optionDiv.querySelectorAll("label")
-          ).filter((label) => !label.matches(".form-radio"));
-          const cardDiv = allCards.find(
-            (cardLabel) =>
-              cardLabel.querySelector(".card-title")!.textContent.trim() ===
-              selectedCard
-          ) as HTMLElement;
-          if (cardDiv) {
-            cardDiv.style.display = "none";
-            const nextCard = allCards.find((o) => o.style.display !== "none");
-            if (nextCard) {
-              nextCard.click();
-            } else {
-              optionDiv.style.display = "none";
-              options
-                .find((o) => o.style.display !== "none")!
-                .querySelector("label")!
-                .click();
-            }
-          }
-        });
-    } else {
-      optionDiv.style.display = "none";
-    }
-  });
-  options
-    .find((o) => o.style.display !== "none")!
-    .querySelector("label")!
-    .click();
-  wfAction.appendChild(newButton);
-};
-const disregarded: any[] = [];
-
 export async function runCustomMiddleware(ctx: any) {
-  await Promise.resolve().then(() => window.customMiddlewareF(ctx));
+  await Promise.resolve().then(() => window.customMiddlewareF?.(ctx));
 }
 
 window.fetch = async (...args) => {

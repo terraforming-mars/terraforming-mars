@@ -20,7 +20,7 @@ import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {isPlayerId, isSpectatorId} from '@/common/Types';
 import {hasShowModal, showModal, windowHasHTMLDialogElement} from './HTMLDialogElementCompatibility';
-import { runCustomMiddleware } from '@/client/plugins/customMiddleware';
+import {runCustomMiddleware} from '@/client/plugins/customMiddleware';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -146,28 +146,28 @@ export const mainAppSettings = {
           }
           app.playerkey++;
           if (
-            model.game.phase === "end" &&
-            window.location.search.includes("&noredirect") === false
+            model.game.phase === 'end' &&
+            window.location.search.includes('&noredirect') === false
           ) {
-            app.screen = "the-end";
+            app.screen = 'the-end';
             if (currentPathname !== paths.THE_END) {
               window.history.replaceState(
                 model,
                 `${constants.APP_NAME} - Player`,
-                `${paths.THE_END}?id=${model.id}`
+                `${paths.THE_END}?id=${model.id}`,
               );
             }
           } else {
             if (path === paths.PLAYER) {
-              app.screen = "player-home";
+              app.screen = 'player-home';
             } else if (path === paths.SPECTATOR) {
-              app.screen = "spectator-home";
+              app.screen = 'spectator-home';
             }
             if (currentPathname !== path) {
               window.history.replaceState(
                 model,
                 `${constants.APP_NAME} - Game`,
-                `${path}?id=${model.id}`
+                `${path}?id=${model.id}`,
               );
             }
           }
@@ -242,7 +242,7 @@ export const mainAppSettings = {
     }
   },
   updated() {
-    runCustomMiddleware({app:this})
+    runCustomMiddleware({app: this})
   },
 };
 

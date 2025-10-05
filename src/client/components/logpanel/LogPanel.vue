@@ -28,7 +28,6 @@
 
 import Vue from 'vue';
 import {paths} from '@/common/app/paths';
-import {statusCode} from '@/common/http/statusCode';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
 import {playerColorClass} from '@/common/utils/utils';

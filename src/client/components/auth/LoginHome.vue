@@ -15,7 +15,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import {paths} from '@/common/app/paths';
-import {statusCode} from '@/common/http/statusCode';
 
 type Data = {
   user: string | undefined;

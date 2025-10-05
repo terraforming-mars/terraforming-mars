@@ -17,7 +17,6 @@ import * as constants from '@/common/constants';
 import GameOverview from '@/client/components/admin/GameOverview.vue';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {GameId, ParticipantId} from '@/common/Types';
-import {statusCode} from '@/common/http/statusCode';
 
 type FetchStatus = {
   id: GameId;

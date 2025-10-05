@@ -20,7 +20,7 @@ declare global {
 }
 
 export async function runCustomMiddleware(ctx: any) {
-  await Promise.resolve().then(() => window.customMiddlewareF?.(ctx));
+  return await Promise.resolve().then(() => window.customMiddlewareF?.(ctx));
 }
 
 window.fetch = async (...args) => {

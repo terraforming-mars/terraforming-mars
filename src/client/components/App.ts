@@ -15,12 +15,11 @@ import SpectatorHome from '@/client/components/SpectatorHome.vue';
 import StartScreen from '@/client/components/StartScreen.vue';
 import {$t, setTranslationContext} from '@/client/directives/i18n';
 import {paths} from '@/common/app/paths';
-import {PlayerViewModel, ViewModel} from '@/common/models/PlayerModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {isPlayerId, isSpectatorId} from '@/common/Types';
 import {hasShowModal, showModal, windowHasHTMLDialogElement} from './HTMLDialogElementCompatibility';
-import {statusCode} from '@/common/http/statusCode';
 import { runCustomMiddleware } from '@/client/plugins/customMiddleware';
 
 const dialogPolyfill = require('dialog-polyfill');

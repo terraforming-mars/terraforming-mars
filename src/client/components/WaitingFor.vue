@@ -44,6 +44,7 @@ import {InputResponse} from '@/common/inputs/InputResponse';
 import {INVALID_RUN_ID} from '@/common/app/AppErrorId';
 import {Color} from '@/common/Color';
 
+
 let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;
 
@@ -161,7 +162,7 @@ export default Vue.extend({
           root.isServerSideRequestInProgress = false;
         });
     },
-    loadPlayerViewResponse(xhr: XMLHttpRequest) {
+    loadPlayerViewResponse(xhr: {status:any,response:any,responseType:string}) {
       const root = vueRoot(this);
       const showAlert = vueRoot(this).showAlert;
       if (xhr.status === statusCode.ok) {

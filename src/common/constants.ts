@@ -58,6 +58,7 @@ export const VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST = 3;
 export const TERRA_CIMMERIA_COLONY_COST = 5;
 
 // Moon
+export const MAXIMUM_MOON_RATE = 8;
 export const MAXIMUM_HABITAT_RATE = 8;
 export const MAXIMUM_MINING_RATE = 8;
 export const MAXIMUM_LOGISTICS_RATE = 8;

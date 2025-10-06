@@ -1,5 +1,5 @@
 <template>
-  <div ref="waiting-for-ref">
+  <div data-ref="waiting-for-ref">
   <template v-if="waitingfor === undefined">
     {{ $t('Not your turn to take any actions') }}
     <template v-if="playersWaitingFor.length > 0">
@@ -52,6 +52,7 @@ type DataModel = {
   playersWaitingFor: Array<Color>
   suspend: boolean,
   savedPlayerView: PlayerViewModel | undefined;
+  beforeMountSize: number | null;
 }
 
 export default Vue.extend({
@@ -76,6 +77,7 @@ export default Vue.extend({
       playersWaitingFor: [],
       suspend: false,
       savedPlayerView: undefined,
+      beforeMountSize: null,
     };
   },
   methods: {
@@ -240,12 +242,26 @@ export default Vue.extend({
     showRefresh(): boolean {
       return this.suspend === true && this.savedPlayerView !== undefined;
     },
-    getRef() {
-      return getRef("waiting-for-ref");
+    getRef(): HTMLElement | null {
+      return document.querySelector('[data-ref="waiting-for-ref"]') as HTMLElement | null;
+    },
+    isInViewport(element: HTMLElement): boolean {
+      const rect = element.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+      return rect.top >= 0 && rect.left >= 0 && rect.bottom <= windowHeight && rect.right <= windowWidth;
+    },
+    innerHeight(element: HTMLElement): number {
+      return element.getBoundingClientRect().height;
     },
   },
   beforeMount() {
-    this.beforeMountSize = this.getRef().isInViewport() ? null : this.getRef().innerHeight
+    const element = this.getRef();
+    if (element === null) {
+      this.beforeMountSize = null;
+      return;
+    }
+    this.beforeMountSize = this.isInViewport(element) ? null : this.innerHeight(element);
   },
   mounted() {
     document.title = this.$t(constants.APP_NAME);
@@ -253,8 +269,12 @@ export default Vue.extend({
     if (this.waitingfor === undefined) {
       this.waitForUpdate();
     } else if (this.beforeMountSize !== null) {
-      const currentSize = this.getRef().innerHeight
-      const delta = currentSize - this.beforeMountSize
+      const element = this.getRef();
+      if (element === null) {
+        return;
+      }
+      const currentSize = this.innerHeight(element);
+      const delta = currentSize - this.beforeMountSize;
       if (Math.abs(delta) > 0.5) {
         window.scrollBy(0, delta);
       }

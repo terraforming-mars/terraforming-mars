@@ -245,11 +245,10 @@ export default Vue.extend({
     getRef(): HTMLElement | null {
       return document.querySelector('[data-ref="waiting-for-ref"]') as HTMLElement | null;
     },
-    isInViewport(element: HTMLElement): boolean {
+    isAboveViewportBottom(element: HTMLElement): boolean {
       const rect = element.getBoundingClientRect();
       const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-      const windowWidth = window.innerWidth || document.documentElement.clientWidth;
-      return rect.top >= 0 && rect.left >= 0 && rect.bottom <= windowHeight && rect.right <= windowWidth;
+      return rect.top >= 0
     },
     innerHeight(element: HTMLElement): number {
       return element.getBoundingClientRect().height;
@@ -261,7 +260,7 @@ export default Vue.extend({
       this.beforeMountSize = null;
       return;
     }
-    this.beforeMountSize = this.isInViewport(element) ? null : this.innerHeight(element);
+    this.beforeMountSize = this.isAboveViewportBottom(element) ? null : this.innerHeight(element);
   },
   mounted() {
     document.title = this.$t(constants.APP_NAME);

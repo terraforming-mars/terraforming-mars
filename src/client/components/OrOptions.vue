@@ -3,7 +3,7 @@
     <label v-if="showtitle"><div>{{ $t(playerinput.title) }}</div></label>
     <label v-if="playerinput.warning !== undefined" class="card-warning"><div>({{ $t(playerinput.warning) }})</div></label>
     <div v-for="(option, idx) in displayedOptions" :key="idx">
-      <label class="form-radio">
+      <label class="form-radio" ref="optionLabels">
         <input v-model="selectedOption" type="radio" :name="radioElementName" :value="option" />
         <i class="form-icon" />
         <span>{{ $t(option.title) }}</span>
@@ -31,7 +31,7 @@
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
-import {OrOptionsModel} from '@/common/models/PlayerInputModel';
+import {OrOptionsModel, PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {InputResponse, OrOptionsResponse} from '@/common/inputs/InputResponse';
 
@@ -87,7 +87,50 @@ export default Vue.extend({
       selectedOption,
     };
   },
+  watch: {
+    selectedOption(newOption: PlayerInputModel | undefined) {
+      if (typeof window === 'undefined' || newOption === undefined) {
+        return;
+      }
+      const anchorElement = this.getOptionLabelElement(newOption);
+      const anchorTop = anchorElement?.getBoundingClientRect().top;
+      if (anchorTop === undefined) {
+        return;
+      }
+      this.$nextTick(() => {
+        if (typeof window === 'undefined') {
+          return;
+        }
+        const updatedElement = this.getOptionLabelElement(newOption);
+        if (!updatedElement) {
+          return;
+        }
+        const newTop = updatedElement.getBoundingClientRect().top;
+        const delta = newTop - anchorTop;
+        if (Math.abs(delta) > 0.5) {
+          window.scrollBy(0, delta);
+        }
+      });
+    },
+  },
   methods: {
+    getOptionLabelElement(option: PlayerInputModel | undefined): HTMLElement | null {
+      if (option === undefined) {
+        return null;
+      }
+      const idx = this.displayedOptions.indexOf(option);
+      if (idx === -1) {
+        return null;
+      }
+      const refs = this.$refs.optionLabels;
+      if (!refs) {
+        return null;
+      }
+      if (Array.isArray(refs)) {
+        return refs[idx] as HTMLElement;
+      }
+      return refs as HTMLElement;
+    },
     playerFactorySaved() {
       const idx = this.playerinput.options.indexOf(this.selectedOption);
       if (idx === undefined || idx === -1) {

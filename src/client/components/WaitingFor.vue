@@ -162,7 +162,7 @@ export default Vue.extend({
           root.isServerSideRequestInProgress = false;
         });
     },
-    loadPlayerViewResponse(xhr: {status:any, response:any, responseType:string}) {
+    loadPlayerViewResponse(xhr: {status:number, response:any, responseType:string}|{status:number, err:string}) {
       const root = vueRoot(this);
       const showAlert = vueRoot(this).showAlert;
       if (xhr.status === statusCode.ok) {

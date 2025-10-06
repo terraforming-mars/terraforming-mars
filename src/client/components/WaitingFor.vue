@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="waiting-for-ref">
   <template v-if="waitingfor === undefined">
     {{ $t('Not your turn to take any actions') }}
     <template v-if="playersWaitingFor.length > 0">
@@ -240,12 +240,24 @@ export default Vue.extend({
     showRefresh(): boolean {
       return this.suspend === true && this.savedPlayerView !== undefined;
     },
+    getRef() {
+      return getRef("waiting-for-ref");
+    },
+  },
+  beforeMount() {
+    this.beforeMountSize = this.getRef().isInViewport() ? null : this.getRef().innerHeight
   },
   mounted() {
     document.title = this.$t(constants.APP_NAME);
     window.clearInterval(documentTitleTimer);
     if (this.waitingfor === undefined) {
       this.waitForUpdate();
+    } else if (this.beforeMountSize !== null) {
+      const currentSize = this.getRef().innerHeight
+      const delta = currentSize - this.beforeMountSize
+      if (Math.abs(delta) > 0.5) {
+        window.scrollBy(0, delta);
+      }
     }
     if (this.playerView.players.length > 1 && this.waitingfor !== undefined) {
       documentTitleTimer = window.setInterval(() => this.animateTitle(), 1000);

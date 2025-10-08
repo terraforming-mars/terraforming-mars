@@ -189,7 +189,6 @@ export default Vue.extend({
         )
         .filter(Boolean)
         .reverse()
-        .slice(0,5)
     },
     isSelfReplicatingRobotsCard(cardName: CardName) {
       for (const player of this.players) {

@@ -2,7 +2,7 @@
   <div class="sortable-cards">
     <div ref="draggers" :class="{ 'dragging': Boolean(dragCard) }" v-for="card in getSortedCards()" :key="card.name" draggable="true" v-on:dragend="onDragEnd()" v-on:dragstart="onDragStart(card.name)">
       <div v-if="dragCard" ref="droppers" class="drop-target" v-on:dragover="onDragOver(card.name)"></div>
-      <div ref="cardbox" class="cardbox">
+      <div ref="cardbox" class="cardbox" @click="clickMethod">
         <Card :card="card"/>
       </div>
     </div>
@@ -12,6 +12,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import {vueRoot} from '@/client/components/vueRoot';
 import Card from '@/client/components/card/Card.vue';
 import {CardModel} from '@/common/models/CardModel';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
@@ -88,6 +89,24 @@ export default Vue.extend({
         this.cardOrder[this.dragCard] = temp;
       }
       CardOrderStorage.updateCardOrder(this.playerId, this.cardOrder);
+    },
+    clickMethod(e) {
+      const target = e.currentTarget
+      if (target.matches(".sortable-cards *") {
+        const rect = target.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const direction = x <= 0.25 ? -1.5 : x >= 0.75 ? 1.5 : null;
+        if (direction) {
+          const thisCard = target.querySelector(".card-title").textContent.trim()
+          this.cardOrder[thisCard] += direction
+          Object.entries(this.cardOrder)
+            .sort((a,b) => a[1]-b[1])
+            .forEach((entry, i) => {
+              this.cardOrder[entry[0]] = i+1
+            })
+          CardOrderStorage.updateCardOrder(this.playerId, this.cardOrder);
+        }
+      }
     },
   },
 });

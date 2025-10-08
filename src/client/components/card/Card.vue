@@ -1,5 +1,5 @@
 <template>
-  <div class="card-container filterDiv hover-hide-res" :class="cardClasses">
+  <div class="card-container filterDiv hover-hide-res" :class="cardClasses" @click="clickMethod">
       <div class="card-content-wrapper" v-i18n @mouseover="hovering = true" @mouseleave="hovering = false">
           <div v-if="!isStandardProject" class="card-cost-and-tags">
               <CardCost :amount="cost" :newCost="reducedCost" />
@@ -187,6 +187,13 @@ export default Vue.extend({
     playerCubeClass(): string {
       return `board-cube board-cube--${this.cubeColor}`;
     },
+  },
+  methods: {
+    clickMethod(e) {
+      if (e.target.matches(".wf-root *")) {
+        document.querySelector(".wf-action .btn-submit").scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+      }
+    }
   },
 });
 

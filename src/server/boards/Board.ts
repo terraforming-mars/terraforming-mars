@@ -296,7 +296,7 @@ export abstract class Board {
   }
 
   public static ownedBy(player: IPlayer): (space: Space) => boolean {
-    return (space: Space) => space.player?.id === player.id;
+    return (space: Space) => space.player?.id === player.id || space.coOwner?.id === player.id;
   }
 
   public static spaceOwnedBy(space: Space, player: IPlayer): boolean {

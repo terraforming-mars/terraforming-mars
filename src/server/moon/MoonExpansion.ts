@@ -18,6 +18,7 @@ import {VictoryPointsBreakdownBuilder} from '../game/VictoryPointsBreakdownBuild
 import {SpaceId} from '../../common/Types';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
+import {Board} from '../boards/Board';
 
 export class MoonExpansion {
   public static readonly MOON_TILES: Set<TileType> = new Set([
@@ -260,7 +261,7 @@ export class MoonExpansion {
           include = space.spaceType !== SpaceType.COLONY;
         }
         if (include && options?.ownedBy !== undefined) {
-          include = space.player === options.ownedBy || space.coOwner === options.ownedBy;
+          include = Board.spaceOwnedBy(space, options.ownedBy);
         }
 
         return include;
@@ -320,8 +321,8 @@ export class MoonExpansion {
       // Each road tile on the map awards 1VP to the player owning it.
       // Each mine and colony (habitat) tile on the map awards 1VP per road tile touching them.
       const moon = moonData.moon;
-      const mySpaces = moon.spaces.filter((space) => space.player?.id === player.id || space.coOwner?.id === player.id);
-      mySpaces.forEach((space) => {
+      const mySpaces = moon.spaces.filter(Board.ownedBy(player));
+      for (const space of mySpaces) {
         if (space.tile !== undefined) {
           const type = space.tile.tileType;
           switch (type) {
@@ -341,7 +342,7 @@ export class MoonExpansion {
             break;
           }
         }
-      });
+      }
     });
   }
 }

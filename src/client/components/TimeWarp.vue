@@ -70,7 +70,7 @@ export default Vue.extend({
     waitingfor: {
       immediate: true,
       handler(newVal: PlayerInputModel | undefined) {
-        if (newVal) {
+        if (newVal && newVal.type === "or") {
           if (!this.queue) {
             const clone =
               typeof structuredClone === "function"

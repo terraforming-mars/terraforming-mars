@@ -1,5 +1,6 @@
 import {BaseMilestone} from '../milestones/IMilestone';
 import {IPlayer} from '../IPlayer';
+import {Board} from '../boards/Board';
 
 export class Lunarchitect extends BaseMilestone {
   constructor() {
@@ -13,7 +14,7 @@ export class Lunarchitect extends BaseMilestone {
 
   public getScore(player: IPlayer): number {
     if (player.game.moonData) {
-      return player.game.moonData.moon.spaces.filter((space) => space.player?.id === player.id || space.coOwner?.id === player.id).length;
+      return player.game.moonData.moon.spaces.filter((space) => Board.spaceOwnedBy(space, player)).length;
     }
     return 0;
   }

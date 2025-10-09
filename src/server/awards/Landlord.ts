@@ -9,15 +9,16 @@ export class Landlord implements IAward {
   public getScore(player: IPlayer): number {
     const marsSpaceCount = player.game.board.spaces
       .filter(Board.hasRealTile)
+      .filter(Board.ownedBy(player))
       .filter((space) =>
         // Don't simplifiy this to "space.tile?.tileType !== TileType.OCEAN" because that will make
         // Land Claim a valid space for Landlord.
         space.tile?.tileType !== TileType.OCEAN && space.player === player).length;
 
     const moonSpaces = player.game.moonData?.moon.spaces ?? [];
-    const moonSpaceCount = moonSpaces.filter((space) => {
-      return space.tile !== undefined && (space.player === player || space.coOwner === player);
-    }).length;
+    const moonSpaceCount = moonSpaces
+      .filter(Board.hasRealTile)
+      .filter(Board.ownedBy(player)).length;
 
     return marsSpaceCount + moonSpaceCount;
   }

@@ -79,7 +79,7 @@
       <div class="player_home_block player_home_block--actions nofloat">
         <a name="actions" class="player_home_anchor"></a>
         <dynamic-title title="Actions" :color="thisPlayer.color"/>
-        <waiting-for v-if="game.phase !== 'end'" :players="playerView.players" :playerView="playerView" :settings="settings" :waitingfor="playerView.waitingFor"></waiting-for>
+        <time-warp v-if="game.phase !== 'end'" :players="playerView.players" :playerView="playerView" :settings="settings" :waitingfor="playerView.waitingFor"></time-warp>
       </div>
 
       <div class="player_home_block player_home_block--hand" v-if="playerView.draftedCards.length > 0">
@@ -280,6 +280,7 @@ import Card from '@/client/components/card/Card.vue';
 import Milestones from '@/client/components/Milestones.vue';
 import Awards from '@/client/components/Awards.vue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
+import TimeWarp from '@/client/components/TimeWarp.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
 import Sidebar from '@/client/components/Sidebar.vue';
 import Colony from '@/client/components/colonies/Colony.vue';
@@ -388,6 +389,7 @@ export default Vue.extend({
     Card,
     'players-overview': PlayersOverview,
     'waiting-for': WaitingFor,
+    'time-warp':TimeWarp,
     Milestones,
     Awards,
     'sidebar': Sidebar,

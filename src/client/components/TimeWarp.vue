@@ -15,12 +15,12 @@
 import Vue, { PropType } from "vue";
 import * as raw_settings from "@/genfiles/settings.json";
 import WaitingFor from "@/client/components/WaitingFor.vue";
-import type {
-  PlayerViewModel,
+import {
   PublicPlayerModel,
-  PlayerInputModel,
-  Color,
-} from "@/client/models";
+  PlayerViewModel,
+} from "@/common/models/PlayerModel";
+import { PlayerInputModel } from "@/common/models/PlayerInputModel";
+import { Color } from "@/common/Color";
 
 export default Vue.extend({
   name: "time-warp",

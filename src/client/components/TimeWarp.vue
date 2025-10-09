@@ -71,18 +71,24 @@ export default Vue.extend({
       immediate: true,
       handler(newVal: PlayerInputModel | undefined) {
         if (newVal) {
-          const clone =
-            typeof structuredClone === "function"
-              ? structuredClone(newVal)
-              : JSON.parse(JSON.stringify(newVal));
-          this.cachedWaitingFor = clone;
-
-          if (!!this.queue) {
+          if (!this.queue) {
+            const clone =
+              typeof structuredClone === "function"
+                ? structuredClone(newVal)
+                : JSON.parse(JSON.stringify(newVal));
+            this.cachedWaitingFor = clone;
+          } else {
             const payload = this.queue.shift();
             if (!payload) {
               this.deactivate();
               return;
             }
+            const selectedOptionStr = JSON.stringify(
+              this.cachedWaitingFor.options[payload.index]
+            );
+            const optionsStrs = newVal.options.map((o) => JSON.stringify(o));
+            const index = optionsStrs.indexOf(selectedOptionStr);
+            payload.index = index;
             const root = vueRoot(this);
             if (root.isServerSideRequestInProgress) {
               console.warn("Server request in progress");

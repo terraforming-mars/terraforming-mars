@@ -1,17 +1,23 @@
 <template>
-  <div :style="styleF">
+  <div style="display: content">
     <waiting-for
       :players="players"
       :playerView="playerView"
       :settings="settings"
-      :waitingfor="getWaitingFor"
-      :timeWarpQueue="queue"
+      :waitingfor="waitingfor"
     />
     <div v-if="showActivate">
       <button @click="activate">time warp</button>
     </div>
-    <div v-if="showDeactivate">
+    <div v-if="showDeactivate" style="background-color: #444444">
       <button @click="deactivate">reality anchor</button>
+      <waiting-for
+        :players="players"
+        :playerView="playerView"
+        :settings="settings"
+        :waitingfor="cachedWaitingFor"
+        :timeWarpQueue="queue"
+      />
       <pre>{{ JSON.stringify(queue, null, 2) }}</pre>
     </div>
   </div>
@@ -20,6 +26,8 @@
 <script lang="ts">
 import Vue, { PropType } from "vue";
 import * as raw_settings from "@/genfiles/settings.json";
+import { vueRoot } from "@/client/components/vueRoot";
+import { paths } from "@/common/app/paths";
 import WaitingFor from "@/client/components/WaitingFor.vue";
 import {
   PublicPlayerModel,
@@ -54,11 +62,6 @@ export default Vue.extend({
     showDeactivate(): boolean {
       return this.showTrinary() === false;
     },
-    getWaitingFor(): PlayerInputModel | undefined {
-      return this.showTrinary() === false
-        ? this.cachedWaitingFor
-        : this.waitingfor;
-    },
     styleF(): Record<string, string> {
       return this.showDeactivate ? { backgroundColor: "#444444" } : {};
     },
@@ -67,12 +70,44 @@ export default Vue.extend({
     waitingfor: {
       immediate: true,
       handler(newVal: PlayerInputModel | undefined) {
-        if (!newVal) return;
-        const clone =
-          typeof structuredClone === "function"
-            ? structuredClone(newVal)
-            : JSON.parse(JSON.stringify(newVal));
-        this.cachedWaitingFor = clone;
+        if (newVal) {
+          const clone =
+            typeof structuredClone === "function"
+              ? structuredClone(newVal)
+              : JSON.parse(JSON.stringify(newVal));
+          this.cachedWaitingFor = clone;
+
+          if (!!this.queue) {
+            const payload = this.queue.shift();
+            if (!payload) {
+              this.deactivate();
+              return;
+            }
+            const root = vueRoot(this);
+            if (root.isServerSideRequestInProgress) {
+              console.warn("Server request in progress");
+              return;
+            }
+            root.isServerSideRequestInProgress = true;
+
+            fetch(paths.PLAYER_INPUT + "?id=" + this.playerView.id, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(payload),
+            })
+              .then((res) => res.json())
+              .then(() => {
+                root.isServerSideRequestInProgress = false;
+                if (!this.queue || this.queue.length === 0) this.deactivate();
+              })
+              .catch(() => {
+                root.isServerSideRequestInProgress = false;
+                this.deactivate();
+              });
+          }
+        }
       },
     },
   },
@@ -88,30 +123,6 @@ export default Vue.extend({
       if (this.queue) return false;
       return !this.waitingfor && this.cachedWaitingFor ? true : null;
     },
-  },
-  updated() {
-    if (!!this.waitingfor && !!this.queue && this.queue.length) {
-      const payload = this.queue.shift();
-      const root = vueRoot(this);
-      if (root.isServerSideRequestInProgress) {
-        console.warn("Server request in progress");
-        return;
-      }
-      root.isServerSideRequestInProgress = true;
-
-      const xhr = new XMLHttpRequest();
-      xhr.open("POST", paths.PLAYER_INPUT + "?id=" + this.playerView.id);
-      xhr.responseType = "json";
-      xhr.onload = () => {
-        root.isServerSideRequestInProgress = false;
-        if (!this.queue || this.queue.length === 0) this.deactivate();
-      };
-      xhr.onerror = () => {
-        root.isServerSideRequestInProgress = false;
-        this.deactivate();
-      };
-      xhr.send(JSON.stringify(payload));
-    }
   },
 });
 </script>

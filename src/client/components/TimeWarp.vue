@@ -27,6 +27,11 @@ import {
 } from "@/common/models/PlayerModel";
 import { PlayerInputModel } from "@/common/models/PlayerInputModel";
 
+let DATA_STATE = {
+  cachedWaitingFor: undefined as PlayerInputModel | undefined,
+  queue: undefined as any[] | undefined,
+};
+
 export default Vue.extend({
   name: "time-warp",
   components: { WaitingFor },
@@ -39,10 +44,7 @@ export default Vue.extend({
   },
 
   data() {
-    return {
-      cachedWaitingFor: undefined as PlayerInputModel | undefined,
-      queue: undefined as any[] | undefined,
-    };
+    return DATA_STATE;
   },
 
   computed: {
@@ -53,10 +55,9 @@ export default Vue.extend({
       return this.showTrinary() === false;
     },
     getWaitingFor(): PlayerInputModel | undefined {
-      if (this.showTrinary() === false) {
-        return this.cachedWaitingFor;
-      }
-      return this.waitingfor;
+      return this.showTrinary() === false
+        ? this.cachedWaitingFor
+        : this.waitingfor;
     },
     styleF(): Record<string, string> {
       return this.showDeactivate ? { backgroundColor: "#444444" } : {};
@@ -66,10 +67,7 @@ export default Vue.extend({
     waitingfor: {
       immediate: true,
       handler(newVal: PlayerInputModel | undefined) {
-        if (!newVal) {
-          this.cachedWaitingFor = undefined;
-          return;
-        }
+        if (!newVal) return;
         const clone =
           typeof structuredClone === "function"
             ? structuredClone(newVal)
@@ -87,36 +85,33 @@ export default Vue.extend({
     },
     showTrinary(): boolean | null {
       // true = time warp, false = reality anchor, null = neither
-      if (this.queue) {
-        return false;
-      }
+      if (this.queue) return false;
       return !this.waitingfor && this.cachedWaitingFor ? true : null;
     },
-    updated(): void {
-      if (!!this.waitingfor && !!this.queue) {
-        const payload = this.queue.shift();
-        const root = vueRoot(this);
-        if (root.isServerSideRequestInProgress) {
-          console.warn("Server request in progress");
-          return;
-        }
-        root.isServerSideRequestInProgress = true;
-
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", paths.PLAYER_INPUT + "?id=" + this.playerView.id);
-        xhr.responseType = "json";
-        xhr.onload = () => {
-          root.isServerSideRequestInProgress = false;
-          if (this.queue.length === 0) this.deactivate();
-        };
-        xhr.onerror = function () {
-          // todo(kberg): Report error to caller
-          root.isServerSideRequestInProgress = false;
-          this.deactivate();
-        };
-        xhr.send(JSON.stringify(payload));
+  },
+  updated() {
+    if (!!this.waitingfor && !!this.queue && this.queue.length) {
+      const payload = this.queue.shift();
+      const root = vueRoot(this);
+      if (root.isServerSideRequestInProgress) {
+        console.warn("Server request in progress");
+        return;
       }
-    },
+      root.isServerSideRequestInProgress = true;
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", paths.PLAYER_INPUT + "?id=" + this.playerView.id);
+      xhr.responseType = "json";
+      xhr.onload = () => {
+        root.isServerSideRequestInProgress = false;
+        if (!this.queue || this.queue.length === 0) this.deactivate();
+      };
+      xhr.onerror = () => {
+        root.isServerSideRequestInProgress = false;
+        this.deactivate();
+      };
+      xhr.send(JSON.stringify(payload));
+    }
   },
 });
 </script>

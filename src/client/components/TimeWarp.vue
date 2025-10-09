@@ -20,7 +20,6 @@ import {
   PlayerViewModel,
 } from "@/common/models/PlayerModel";
 import { PlayerInputModel } from "@/common/models/PlayerInputModel";
-import { Color } from "@/common/Color";
 
 export default Vue.extend({
   name: "time-warp",
@@ -51,7 +50,7 @@ export default Vue.extend({
     },
     styleF(): Record<string, string> {
       // spooky season
-      return { backgroundColor: "#444444" };
+      return this.showDeactivate ? { backgroundColor: "#444444" } : {};
     },
   },
 
@@ -81,7 +80,7 @@ export default Vue.extend({
       alert("deactivate");
     },
     showTrinary(): boolean | null {
-      // true = time warp, false = reality anchor, undefined = neither
+      // true = time warp, false = reality anchor, null = neither
       return null;
     },
   },

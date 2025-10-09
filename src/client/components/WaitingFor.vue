@@ -91,8 +91,6 @@ export default Vue.extend({
       document.title = next + ' ' + this.$t(constants.APP_NAME);
     },
     onsave(out: InputResponse) {
-      const root = vueRoot(this);
-
       const payload = {runId: this.playerView.runId, ...out};
 
       if (this.timeWarpQueue) {
@@ -101,6 +99,7 @@ export default Vue.extend({
         return
       }
 
+      const root = vueRoot(this);
       if (root.isServerSideRequestInProgress) {
         console.warn('Server request in progress');
         return;

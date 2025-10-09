@@ -1,5 +1,5 @@
 <template>
-  <div style="display: contents">
+  <div :style="styleF">
     <waiting-for
       :players="players"
       :playerView="playerView"
@@ -35,33 +35,44 @@ export default Vue.extend({
 
   data() {
     return {
-      waitingForTimeout:
-        raw_settings.waitingForTimeout as typeof raw_settings.waitingForTimeout,
-      playersWaitingFor: [] as Color[],
-      suspend: false,
-      savedPlayerView: undefined as PlayerViewModel | undefined,
-
       cachedWaitingFor: undefined as PlayerInputModel | undefined,
     };
   },
 
   computed: {
     showActivate(): boolean {
-      return true;
+      return this.showTrinary() === true;
     },
     showDeactivate(): boolean {
-      return true;
+      return this.showTrinary() === false;
     },
     getWaitingFor(): PlayerInputModel | undefined {
       return this.waitingfor;
     },
+    styleF(): Record<string, string> {
+      // spooky season
+      return { backgroundColor: "#444444" };
+    },
   },
-  mounted() {
-    this.receiveData();
+
+  watch: {
+    // clone only when the prop changes; run immediately on mount
+    waitingfor: {
+      immediate: true,
+      handler(newVal: PlayerInputModel | undefined) {
+        if (!newVal) {
+          this.cachedWaitingFor = undefined;
+          return;
+        }
+        const clone =
+          typeof structuredClone === "function"
+            ? structuredClone(newVal)
+            : JSON.parse(JSON.stringify(newVal));
+        this.cachedWaitingFor = clone;
+      },
+    },
   },
-  updated() {
-    this.receiveData();
-  },
+
   methods: {
     activate() {
       alert("activate");
@@ -69,14 +80,9 @@ export default Vue.extend({
     deactivate() {
       alert("deactivate");
     },
-    receiveData() {
-      if (this.waitingfor) {
-        const clone =
-          typeof structuredClone === "function"
-            ? structuredClone(this.waitingfor)
-            : JSON.parse(JSON.stringify(this.waitingfor));
-        this.cachedWaitingFor = clone;
-      }
+    showTrinary(): boolean | null {
+      // true = time warp, false = reality anchor, undefined = neither
+      return null;
     },
   },
 });

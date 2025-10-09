@@ -5,6 +5,7 @@
       :playerView="playerView"
       :settings="settings"
       :waitingfor="getWaitingFor"
+      :timeWarpQueue="queue"
     />
     <div v-if="showActivate">
       <button @click="activate">time warp</button>
@@ -40,7 +41,7 @@ export default Vue.extend({
   data() {
     return {
       cachedWaitingFor: undefined as PlayerInputModel | undefined,
-      queue: [{ test: "x" }] as any[] | undefined,
+      queue: undefined as any[] | undefined,
     };
   },
 
@@ -52,20 +53,22 @@ export default Vue.extend({
       return this.showTrinary() === false;
     },
     getWaitingFor(): PlayerInputModel | undefined {
+      if (this.showTrinary() === false) {
+        return this.cachedWaitingFor;
+      }
       return this.waitingfor;
     },
     styleF(): Record<string, string> {
       return this.showDeactivate ? { backgroundColor: "#444444" } : {};
     },
   },
-
   watch: {
     waitingfor: {
       immediate: true,
       handler(newVal: PlayerInputModel | undefined) {
         if (!newVal) {
           this.cachedWaitingFor = undefined;
-          return;
+          //return;
         }
         const clone =
           {
@@ -298,21 +301,20 @@ export default Vue.extend({
               },
             ],
             initialIdx: 0,
-          } || typeof structuredClone === "function"
+          } ||
+          (typeof structuredClone === "function"
             ? structuredClone(newVal)
-            : JSON.parse(JSON.stringify(newVal));
-        console.log(JSON.parse(JSON.stringify(clone)));
+            : JSON.parse(JSON.stringify(newVal)));
         this.cachedWaitingFor = clone;
       },
     },
   },
-
   methods: {
     activate() {
-      alert("activate");
+      this.queue = []
     },
     deactivate() {
-      alert("deactivate");
+      this.queue = undefined
     },
     showTrinary(): boolean | null {
       // true = time warp, false = reality anchor, null = neither

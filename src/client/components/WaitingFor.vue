@@ -69,6 +69,7 @@ export default Vue.extend({
     waitingfor: {
       type: Object as () => PlayerInputModel | undefined,
     },
+    timeWarpQueue: Array as PropType<any[] | undefined>,
   },
   data(): DataModel {
     return {
@@ -92,6 +93,14 @@ export default Vue.extend({
     onsave(out: InputResponse) {
       const root = vueRoot(this);
 
+      const payload = {runId: this.playerView.runId, ...out};
+
+      if (this.timeWarpQueue) {
+        this.timeWarpQueue.push(payload);
+        this.$emit("queue-updated", this.timeWarpQueue);
+        return
+      }
+
       if (root.isServerSideRequestInProgress) {
         console.warn('Server request in progress');
         return;
@@ -105,7 +114,7 @@ export default Vue.extend({
         this.loadPlayerViewResponse(xhr);
         root.isServerSideRequestInProgress = false;
       };
-      xhr.send(JSON.stringify({runId: this.playerView.runId, ...out}));
+      xhr.send(JSON.stringify(payload));
       xhr.onerror = function() {
         // todo(kberg): Report error to caller
         root.isServerSideRequestInProgress = false;

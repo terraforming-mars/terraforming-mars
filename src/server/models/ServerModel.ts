@@ -21,7 +21,6 @@ import {SpectatorModel} from '../../common/models/SpectatorModel';
 import {GameModel} from '../../common/models/GameModel';
 import {Turmoil} from '../turmoil/Turmoil';
 import {createPathfindersModel} from './PathfindersModel';
-import {MoonExpansion} from '../moon/MoonExpansion';
 import {MoonModel} from '../../common/models/MoonModel';
 import {CardName} from '../../common/cards/CardName';
 import {AwardScorer} from '../awards/AwardScorer';
@@ -448,13 +447,15 @@ export class Server {
   }
 
   private static getMoonModel(game: IGame): MoonModel | undefined {
-    return MoonExpansion.ifElseMoon(game, (moonData) => {
+    const moonData = game.moonData;
+    if (moonData) {
       return {
         logisticsRate: moonData.logisticRate,
         miningRate: moonData.miningRate,
         habitatRate: moonData.habitatRate,
         spaces: this.getSpaces(moonData.moon),
       };
-    }, () => undefined);
+    }
+    return undefined;
   }
 }

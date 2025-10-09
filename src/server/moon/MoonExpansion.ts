@@ -45,18 +45,6 @@ export class MoonExpansion {
     return undefined;
   }
 
-  // If the moon expansion is enabled, execute this callback, otherwise execute the else callback.
-  public static ifElseMoon<T>(game: IGame, cb: (moonData: MoonData) => T, elseCb: () => T): T {
-    if (game.gameOptions.moonExpansion) {
-      if (game.moonData === undefined) {
-        console.log(`Assertion failure: game.moonData is undefined for ${game.id}`);
-      } else {
-        return cb(game.moonData);
-      }
-    }
-    return elseCb();
-  }
-
   // If the moon expansion is enabled, return with the game's MoonData instance, otherwise throw an error.
   public static moonData(game: IGame): MoonData {
     if (game.gameOptions.moonExpansion === true && game.moonData !== undefined) {
@@ -256,26 +244,27 @@ export class MoonExpansion {
       ownedBy? : IPlayer,
       upgradedTiles?: boolean,
     }): Array<Space> {
-    return MoonExpansion.ifElseMoon(game, (moonData) => {
-      return moonData.moon.spaces.filter(
-        (space) => {
-          if (space.tile === undefined) {
-            return false;
-          }
-          let include = true;
-          if (tileType) {
-            include = MoonExpansion.spaceHasType(space, tileType, options?.upgradedTiles);
-          }
-          if (include && options?.surfaceOnly) {
-            include = space.spaceType !== SpaceType.COLONY;
-          }
-          if (include && options?.ownedBy !== undefined) {
-            include = space.player === options.ownedBy || space.coOwner === options.ownedBy;
-          }
+    if (game.moonData === undefined) {
+      return [];
+    }
+    return game.moonData.moon.spaces.filter(
+      (space) => {
+        if (space.tile === undefined) {
+          return false;
+        }
+        let include = true;
+        if (tileType) {
+          include = MoonExpansion.spaceHasType(space, tileType, options?.upgradedTiles);
+        }
+        if (include && options?.surfaceOnly) {
+          include = space.spaceType !== SpaceType.COLONY;
+        }
+        if (include && options?.ownedBy !== undefined) {
+          include = space.player === options.ownedBy || space.coOwner === options.ownedBy;
+        }
 
-          return include;
-        });
-    }, () => []);
+        return include;
+      });
   }
 
   /*

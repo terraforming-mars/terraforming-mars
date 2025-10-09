@@ -6,7 +6,8 @@
       :settings="settings"
       :waitingfor="getWaitingFor"
     />
-    <button v-if="showButton" @click="activate">time warp</button>
+    <button v-if="showActivate" @click="activate">time warp</button>
+    <button v-if="showDeactivate" @click="deactivate">reality anchor</button>
   </div>
 </template>
 
@@ -45,27 +46,37 @@ export default Vue.extend({
   },
 
   computed: {
-    showButton(): boolean {
+    showActivate(): boolean {
+      return true;
+    },
+    showDeactivate(): boolean {
       return true;
     },
     getWaitingFor(): PlayerInputModel | undefined {
       return this.waitingfor;
     },
   },
-
   mounted() {
-    if (this.waitingfor) {
-      const clone =
-        typeof structuredClone === "function"
-          ? structuredClone(this.waitingfor)
-          : JSON.parse(JSON.stringify(this.waitingfor));
-      this.cachedWaitingFor = clone;
-    }
+    this.receiveData();
   },
-
+  updated() {
+    this.receiveData();
+  },
   methods: {
     activate() {
       alert("activate");
+    },
+    deactivate() {
+      alert("deactivate");
+    },
+    receiveData() {
+      if (this.waitingfor) {
+        const clone =
+          typeof structuredClone === "function"
+            ? structuredClone(this.waitingfor)
+            : JSON.parse(JSON.stringify(this.waitingfor));
+        this.cachedWaitingFor = clone;
+      }
     },
   },
 });

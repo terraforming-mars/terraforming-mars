@@ -9,7 +9,7 @@
     <div ref="draggers" :class="{ 'dragging': Boolean(dragCard) }" v-for="card in getSortedCards()" :key="card.name" draggable="true" v-on:dragend="onDragEnd()" v-on:dragstart="onDragStart(card.name)">
       <div v-if="dragCard" ref="droppers" class="drop-target" v-on:dragover="onDragOver(card.name)"></div>
       <div ref="cardbox" class="cardbox" @click="clickMethod" style="position:relative;width:100%">
-        <Card :card="card"/>
+        <Card :card="card" :style="handJiveIsChecked ? handJiveCardStyle : undefined"/>
         <div v-if="handJiveIsChecked" style="
           position:absolute;inset:0;pointer-events:none;z-index:400;
           transform:translate(-6%,0%);opacity:0.5;
@@ -61,6 +61,9 @@ export default Vue.extend({
     }
     return {
       handJiveIsChecked: false,
+      handJiveCardStyle: Object.freeze({
+        pointerEvents: 'none',
+      }),
       cardOrder,
       dragCard: undefined as string | undefined,
     };

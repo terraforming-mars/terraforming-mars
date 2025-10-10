@@ -1,11 +1,17 @@
 <template>
+<div>
+  <div>
+    <label>
+      <input type="checkbox" v-model="handJiveIsChecked" /> hand jive
+    </label>
+  </div>
   <div class="sortable-cards">
     <div ref="draggers" :class="{ 'dragging': Boolean(dragCard) }" v-for="card in getSortedCards()" :key="card.name" draggable="true" v-on:dragend="onDragEnd()" v-on:dragstart="onDragStart(card.name)">
       <div v-if="dragCard" ref="droppers" class="drop-target" v-on:dragover="onDragOver(card.name)"></div>
       <div ref="cardbox" class="cardbox" @click="clickMethod" style="position:relative;width:100%">
         <Card :card="card"/>
-        <div style="
-          position:absolute;inset:0;pointer-events:none;z-index:4;
+        <div v-if="handJiveIsChecked" style="
+          position:absolute;inset:0;pointer-events:none;z-index:400;
           transform:translate(-6%,0%);opacity:0.5;
           background:linear-gradient(to right,transparent 0%,transparent 10%,red 10%,red 20%,transparent 20%,transparent 80%,red 80%,red 90%,transparent 90%,transparent 100%)
         "></div>
@@ -13,6 +19,7 @@
     </div>
     <div v-if="dragCard" ref="dropend" class="drop-target" v-on:dragover="onDragOver('end')"></div>
   </div>
+</div>
 </template>
 
 <script lang="ts">
@@ -53,6 +60,7 @@ export default Vue.extend({
       }
     }
     return {
+      handJiveIsChecked: false,
       cardOrder,
       dragCard: undefined as string | undefined,
     };
@@ -96,6 +104,7 @@ export default Vue.extend({
       CardOrderStorage.updateCardOrder(this.playerId, this.cardOrder);
     },
     clickMethod(e) {
+      if (!this.handJiveIsChecked) return;
       const target = e.currentTarget
       if (target.matches(".sortable-cards *") {
         const rect = target.getBoundingClientRect();

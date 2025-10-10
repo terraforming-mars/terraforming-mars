@@ -215,10 +215,7 @@ export default Vue.extend({
         fetch(url)
           .then((resp) => {
             if (!resp.ok) {
-              root.showAlert(
-                `Received unexpected response from server (${resp.status}). This is often due to the server restarting.`,
-                () => vueApp.waitForUpdate(),
-              );
+              root.showAlert('Unable to reach the server. The server may be restarting or down for maintenance.', () => vueApp.waitForUpdate());
               // still return to continue chain safely
               return null;
             }
@@ -230,17 +227,19 @@ export default Vue.extend({
             this.playersWaitingFor = result.waitingFor;
 
             if (result.result === 'GO') {
+              // Will only apply to player, not spectator.
               root.updatePlayer();
               this.notify();
+              // We don't need to wait anymore - it's our turn
               return;
-            }
-
-            if (result.result === 'REFRESH') {
+            } else if (result.result === 'REFRESH') {
+              // Something changed, let's refresh UI
               if (isPlayerId(this.playerView.id)) {
                 root.updatePlayer();
               } else {
                 root.updateSpectator();
               }
+
               return;
             }
 

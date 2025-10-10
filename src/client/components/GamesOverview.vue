@@ -49,8 +49,16 @@ export default Vue.extend({
 
       const url = 'api/games?serverId='+this.serverId;
       fetch(url)
-        .then((resp) => resp.json())
-        .then((result: Response[]) => {
+        .then((resp) => {
+          if (!resp.ok) {
+            alert('Unexpected response fetching games from API');
+            return null;
+          }
+          return resp.json();
+        })
+        .then((result: Response[] | null) => {
+          if (!result) return;
+
           if (result instanceof Array) {
             result.forEach(function(response) {
               vueApp.entries.push({
@@ -62,8 +70,10 @@ export default Vue.extend({
             vueApp.getGame(0);
             return;
           }
+
+          alert('Unexpected response fetching games from API');
         })
-        .catch((err) => alert(err));
+        .catch(() => alert('Error getting games data'));
     },
     getGame(idx: number) {
       if (idx >= this.entries.length) {
@@ -74,14 +84,26 @@ export default Vue.extend({
 
       const url = 'api/game?id='+gameId;
       fetch(url)
-        .then((resp) => resp.json())
-        .then((game: SimpleGameModel) => {
+        .then((resp) => {
+          if (!resp.ok) {
+            entry.status = 'error';
+            this.getGame(idx + 1);
+            return null;
+          }
+          return resp.json();
+        })
+        .then((game: SimpleGameModel | null) => {
+          if (!game) return;
+
           if (game instanceof Object) {
             entry.status = 'done';
             entry.game = game;
             this.getGame(idx + 1);
             return;
           }
+
+          entry.status = 'error';
+          this.getGame(idx + 1);
         })
         .catch(() => {
           entry.status = 'error';

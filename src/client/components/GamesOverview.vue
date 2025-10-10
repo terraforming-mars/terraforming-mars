@@ -49,7 +49,12 @@ export default Vue.extend({
 
       const url = 'api/games?serverId='+this.serverId;
       fetch(url)
-        .then((resp) => resp.json())
+        .then((resp) => {
+          if (!resp.ok) {
+            throw new Error(`Error getting game data: ${resp.statusText}`);
+          }
+          return resp.json();
+        })
         .then((result: Response[]) => {
           if (result instanceof Array) {
             result.forEach(function(response) {
@@ -63,7 +68,10 @@ export default Vue.extend({
             return;
           }
         })
-        .catch((err) => alert(err));
+        .catch((err) => {
+          alert('Error getting games data');
+          console.error(err);
+        });
     },
     getGame(idx: number) {
       if (idx >= this.entries.length) {
@@ -74,7 +82,12 @@ export default Vue.extend({
 
       const url = 'api/game?id='+gameId;
       fetch(url)
-        .then((resp) => resp.json())
+        .then((resp) => {
+          if (!resp.ok) {
+            throw new Error(`Error getting game data: ${resp.statusText}`);
+          }
+          return resp.json();
+        })
         .then((game: SimpleGameModel) => {
           if (game instanceof Object) {
             entry.status = 'done';

@@ -57,7 +57,12 @@ export default Vue.extend({
           rollbackCount,
         }),
       })
-        .then((res) => res.json())
+        .then((resp) => {
+          if (!resp.ok) {
+            throw new Error(`Error getting game data: ${resp.statusText}`);
+          }
+          return resp.json();
+        })
         .then((response: SimpleGameModel) => {
           if (response.players.length === 1) {
             window.location.href = 'player?id=' + response.players[0].id;

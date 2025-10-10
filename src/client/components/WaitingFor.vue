@@ -109,18 +109,21 @@ export default Vue.extend({
           ...out,
         }),
       })
-        .then((resp) =>
-          resp
-            .json()
-            .then((response) => ({
-              status: resp.status,
-              responseType: 'json',
-              response,
-            }))
-            .catch((err) => ({
-              status: resp.status,
-              err,
-            })),
+        .then((resp) => {
+          if (!resp.ok) {
+            throw new Error(`Error getting game data: ${resp.statusText}`);
+          }
+          return resp.json();
+        })
+        .then((response) => ({
+          status: resp.status,
+          responseType: 'json',
+          response,
+        }))
+        .catch((err) => ({
+          status: resp.status,
+          err,
+        })),
         )
         .then((xhr) => {
           this.loadPlayerViewResponse(xhr);
@@ -141,18 +144,21 @@ export default Vue.extend({
       root.isServerSideRequestInProgress = true;
       const url = paths.RESET + '?id=' + this.playerView.id;
       fetch(url)
-        .then((resp) =>
-          resp
-            .json()
-            .then((response) => ({
-              status: resp.status,
-              responseType: 'json',
-              response,
-            }))
-            .catch((err) => ({
-              status: resp.status,
-              err,
-            })),
+        .then((resp) => {
+          if (!resp.ok) {
+            throw new Error(`Error getting game data: ${resp.statusText}`);
+          }
+          return resp.json();
+        })
+        .then((response) => ({
+          status: resp.status,
+          responseType: 'json',
+          response,
+        }))
+        .catch((err) => ({
+          status: resp.status,
+          err,
+        })),
         )
         .then((xhr) => {
           this.loadPlayerViewResponse(xhr);

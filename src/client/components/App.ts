@@ -132,7 +132,7 @@ export const mainAppSettings = {
       fetch(url)
         .then((resp) => {
           if (!resp.ok) {
-            throw new Error(resp.statusText || 'Error getting game data');
+            throw new Error(`Error getting game data: ${resp.statusText}`);
           }
           return resp.json();
         })
@@ -210,7 +210,7 @@ export const mainAppSettings = {
       fetch(url)
         .then((resp) => {
           if (!resp.ok) {
-            throw new Error(resp.statusText || 'Error getting game data');
+            throw new Error(`Error getting game data: ${resp.statusText}`);
           }
           return resp.json();
         })

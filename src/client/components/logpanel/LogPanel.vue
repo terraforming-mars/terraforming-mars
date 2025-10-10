@@ -134,7 +134,6 @@ export default Vue.extend({
           if (getPreferences().enable_sounds && window.location.search.includes('experimental=1') ) {
             SoundManager.newLog();
           }
-
           if (generation === this.generation) {
             this.$nextTick(this.scrollToEnd);
           }

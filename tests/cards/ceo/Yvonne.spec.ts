@@ -57,7 +57,7 @@ describe('Yvonne', () => {
     expect(player.titanium).eq(2);
   });
 
-  it("Opponents don't get the bonuses", () => {
+  it('Opponents dont get the bonuses', () => {
     // Sanity check before OPG
     expect(player2.energy).eq(0);
     expect(player2.steel).eq(0);

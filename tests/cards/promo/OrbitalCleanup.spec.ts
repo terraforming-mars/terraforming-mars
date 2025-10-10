@@ -45,7 +45,7 @@ describe('OrbitalCleanup', () => {
     expect(card.getVictoryPoints(player)).to.eq(2);
   });
 
-  it("Turmoil Science Tag Requirements doesn't increase Income", () => {
+  it('Turmoil Science Tag Requirements doesnt increase Income', () => {
     const [game, player] = testGame(2, {ceoExtension: true, turmoilExtension: true});
 
     // Sanity check that Science Ruling Policy is working as intended:

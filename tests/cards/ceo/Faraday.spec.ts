@@ -165,7 +165,7 @@ describe('Faraday', () => {
     expect(player.megaCredits).to.eq(PLAYER_INITIALMC);
   });
 
-  it("Wild tags don't count", () => {
+  it('Wild tags dont count', () => {
     player.playedCards.push(fakeCard({tags: [Tag.WILD, Tag.WILD]}));
     player.playedCards.push(fakeCard({tags: [Tag.SCIENCE, Tag.SCIENCE]}));
     player.playCard(fakeCard({tags: [Tag.SCIENCE]}));

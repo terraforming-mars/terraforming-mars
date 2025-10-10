@@ -2,9 +2,14 @@
   <div class="sortable-cards">
     <div ref="draggers" :class="{ 'dragging': Boolean(dragCard) }" v-for="card in getSortedCards()" :key="card.name" draggable="true" v-on:dragend="onDragEnd()" v-on:dragstart="onDragStart(card.name)">
       <div v-if="dragCard" ref="droppers" class="drop-target" v-on:dragover="onDragOver(card.name)"></div>
-      <div ref="cardbox" class="cardbox" @click="clickMethod">
+      <div ref="cardbox" class="cardbox" @click="clickMethod" style="position:relative;width:100%">
         <Card :card="card"/>
-      </div>
+        <div style="
+          position:absolute;inset:0;pointer-events:none;z-index:4;
+          transform:translate(-6%,0%);opacity:0.5;
+          background:linear-gradient(to right,transparent 0%,transparent 10%,red 10%,red 20%,transparent 20%,transparent 80%,red 80%,red 90%,transparent 90%,transparent 100%)
+        "></div>
+        </div>
     </div>
     <div v-if="dragCard" ref="dropend" class="drop-target" v-on:dragover="onDragOver('end')"></div>
   </div>

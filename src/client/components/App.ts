@@ -171,7 +171,10 @@ export const mainAppSettings = {
             }
           }
         })
-        .catch(() => alert('Error getting game data'));
+        .catch((err) => {
+          alert('Error getting game data');
+          console.error(err);
+        });
     },
     updatePlayer() {
       this.update(paths.PLAYER);
@@ -219,7 +222,10 @@ export const mainAppSettings = {
           );
           app.game = appGame;
         })
-        .catch(() => alert('Error getting game data'));
+        .catch((err) => {
+          alert('Error getting game data');
+          console.error(err);
+        });
     } else if (currentPathname === paths.GAMES_OVERVIEW) {
       app.screen = 'games-overview';
     } else if (currentPathname === paths.NEW_GAME) {

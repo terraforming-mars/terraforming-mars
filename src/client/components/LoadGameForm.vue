@@ -73,8 +73,9 @@ export default Vue.extend({
           root.game = response;
           root.screen = 'game-home';
         })
-        .catch(() => {
+        .catch((err) => {
           alert('Error loading game');
+          console.error(err);
         });
     },
   },

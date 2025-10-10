@@ -1,50 +1,50 @@
 {
 
-"CLAIM": "NIMM",
+"CLAIM": "VARAA",
 
-"Battery Shipment": "Batterieversand",
-"Gain 12 energy. Increase your energy production 2 steps.": "Erhalte 12 Energie. Erhöhe deine Energie-Produktion um 2.",
+"Battery Shipment": "Akkutoimitus",
+"Gain 12 energy. Increase your energy production 2 steps.": "Saa 12 energiaa. Lisää energiatuotantoasi 2 askelta.",
 
-"Central Reservoir": "Zentrales Reservoir",
-"Place an ocean ON AN AREA NOT RESERVED FOR OCEAN. Then identify the underground resources in all adjacent spaces. Claim 2 of them.": "Platziere ein Ozeanplättchen auf ein Feld, das nicht für Ozeane reserviert ist. Dann identifiziere die unterirdischen Ressourcen in allen angrenzenden Feldern. Beanspruche 2 von ihnen.",
+"Central Reservoir": "Keskussäiliö",
+"Place an ocean ON AN AREA NOT RESERVED FOR OCEAN. Then identify the underground resources in all adjacent spaces. Claim 2 of them.": "Aseta meri ALUEELLE JOKA EI OLE VARATTU MERELLE. Sitten tunnista maanalaiset resurssit kaikissa vierekkäisissä tiloissa. Varaa 2 niistä.",
 
-"Cloud Vortex Outpost": "Wolkenvortex-Außenposten",
-"Raise Venus 2 steps. Place 3 floaters on this card.": "Erhöhe die Venuswertung um 4%. Platziere 3 Schweber auf dieser Karte.",
-"Action: Remove 1 floater from THIS card to add 1 floater to ANOTHER card": "AKTION: Entferne 1 Schweber von DIESER Karte, um 1 Schweber zu einer ANDEREN Karte hinzuzufügen.",
+"Cloud Vortex Outpost": "Pilvipyörre-etuvartio",
+"Raise Venus 2 steps. Place 3 floaters on this card.": "Nosta Venusta 2 askelta. Aseta 3 kellujaa tähän korttiin.",
+"Action: Remove 1 floater from THIS card to add 1 floater to ANOTHER card": "AKTION: Poista 1 kelluja TÄSTÄ kortista lisätäksesi 1 kellujan TOISEEN korttiin",
 
-"Deepwater Dome": "Tiefseekuppel",
-"Effect: When you excavate next to an ocean, gain 2 M€.": "EFFEKT: Wenn du in der Nähe eines Ozeans gräbst, erhalte 2 M€.",
-"Increase your plant production 1 step. Place an ocean.": "Erhöhe deine Pflanzenproduktion um 1. Platziere einen Ozean.",
+"Deepwater Dome": "Syvänmeren kupoli",
+"Effect: When you excavate next to an ocean, gain 2 M€.": "EFEKTI: Kun kaivat meren vieressä, saa 2 M€.",
+"Increase your plant production 1 step. Place an ocean.": "Lisää kasvituotantoasi 1 askel. Aseta meri.",
 
-"Election Sponsorship": "Wahlpatenschaft",
-"Gain 1 corruption. Place 2 delegates in any party.": "Erhalte 1 Korruption. Platziere 2 Delegierten in einer beliebigen Partei.",
-"Effect: You have +1 influence.": "EFFEKT: Du erhältst 1 Einfluss.",
+"Election Sponsorship": "Vaalisponsori",
+"Gain 1 corruption. Place 2 delegates in any party.": "Saa 1 korruptio. Aseta 2 edustajaa mihin tahansa puolueeseen.",
+"Effect: You have +1 influence.": "EFEKTI: Sinulla on +1 vaikutus.",
 
-"Free Trade Port": "Freihandelshafen",
-"Gain 1 corruption. Place a colony.": "Erhalte 1 Korruption. Platziere eine Kolonie.",
+"Free Trade Port": "Vapaakauppasatama",
+"Gain 1 corruption. Place a colony.": "Saa 1 korruptio. Aseta siirtokunta.",
 
-"Ganymede Trading Company": "Ganymede Handelsgesellschaft",
-"Gain 1 corruption, 3 titanium, and a trade fleet.": "Erhalte 1 Korruption, 3 Titan und eine Handelsflotte.",
+"Ganymede Trading Company": "Ganymede Kauppayritys",
+"Gain 1 corruption, 3 titanium, and a trade fleet.": "Saa 1 korruptio, 3 titaania ja kauppalaivasto.",
 
-"Geological Expertise": "Geologisches Fachwissen",
-"Identify 4 underground resources. Claim one of them. Draw 2 cards with science tags.": "Identifiziere 4 unterirdische Ressourcen. Beanspruche 1 von ihnen. Ziehe 2 Karten mit Wissenschafts-Symbol.",
+"Geological Expertise": "Geologinen asiantuntemus",
+"Identify 4 underground resources. Claim one of them. Draw 2 cards with science tags.": "Tunnista 4 maanalaista resurssia. Varaa yksi niistä. Nosta 2 korttia joissa tiede-tunniste.",
 
-"Inherited Fortune": "Geerbtes Vermögen",
-"Gain 1 corruption and 10 M€. Increase your M€ production 1 step.": "Erhalte 1 Korruption und 10 M€. Erhöhe deine M€-Produktion um 1.",
+"Inherited Fortune": "Peritty omaisuus",
+"Gain 1 corruption and 10 M€. Increase your M€ production 1 step.": "Saa 1 korruptio ja 10 M€. Lisää M€-tuotantoasi 1 askel.",
 
-"Investor Plaza": "Investorenplatz",
-"Place a city and gain 1 corruption.": "Platziere eine Stadt und erhalte 1 Korruption.",
+"Investor Plaza": "Sijoittajatori",
+"Place a city and gain 1 corruption.": "Aseta kaupunki ja saa 1 korruptio.",
 
-"Prospecting": "Schürfen",
-"Pay 4 M€. Put an additional colony tile of your choice into play. Then place a colony on it.": "Zahle 4 M€. Lege ein zusätzliches Kolonieplättchen deiner Wahl ins Spiel. Platziere dann eine Kolonie darauf.",
+"Prospecting": "Etsintä",
+"Pay 4 M€. Put an additional colony tile of your choice into play. Then place a colony on it.": "Maksa 4 M€. Tuo valitsemasi ylimääräinen siirtokuntalaatta peliin. Sitten aseta siirtokunta siihen.",
 
-"Secret Research": "Geheime Forschung",
-"Gain 1 corruption and draw 3 cards.": "Erhalte 1 Korruption und ziehe 3 Karten.",
+"Secret Research": "Salainen tutkimus",
+"Gain 1 corruption and draw 3 cards.": "Saa 1 korruptio ja nosta 3 korttia.",
 
-"Tunneling Operation": "Tunnelbauarbeiten",
-"Identify 1 underground resource. Then excavate 2 underground resources. Increase your steel production 2 steps.": "Identifiziere 1 unterirdische Ressource. Grabe dann 2 unterirdische Ressourcen aus. Erhöhe deine Stahlproduktion um 2.",
+"Tunneling Operation": "Tunnelointioperaatio",
+"Identify 1 underground resource. Then excavate 2 underground resources. Increase your steel production 2 steps.": "Tunnista 1 maanalainen resurssi. Sitten kaiva 2 maanalaista resurssia. Lisää terästuotantoasi 2 askelta.",
 
-"Underground Settlement": "Unterirdische Siedlung",
-"Place a city. Then identify the underground resources in all adjacent spaces. Claim 1 of them.": "Platziere ein Stadtplättchen. Dann identifiziere die unterirdischen Ressourcen in allen angrenzenden Feldern. Beanspruche 1 von ihnen."
+"Underground Settlement": "Maanalainen asutus",
+"Place a city. Then identify the underground resources in all adjacent spaces. Claim 1 of them.": "Aseta kaupunki. Sitten tunnista maanalaiset resurssit kaikissa vierekkäisissä tiloissa. Varaa 1 niistä."
 
 }

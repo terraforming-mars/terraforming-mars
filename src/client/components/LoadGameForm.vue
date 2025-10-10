@@ -67,16 +67,11 @@ export default Vue.extend({
           if (response.players.length === 1) {
             window.location.href = 'player?id=' + response.players[0].id;
             return;
+          } else {
+            window.history.replaceState(response, `${constants.APP_NAME} - Game`, 'game?id=' + response.id);
+            vueRoot(this).game = response;
+            vueRoot(this).screen = 'game-home';
           }
-
-          window.history.replaceState(
-            response,
-            `${constants.APP_NAME} - Game`,
-            'game?id=' + response.id,
-          );
-          const root = vueRoot(this);
-          root.game = response;
-          root.screen = 'game-home';
         })
         .catch((err) => {
           alert('Error loading game');

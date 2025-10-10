@@ -200,7 +200,9 @@ class Parties {
   public unity: IParty;
   public kelvinists: IParty;
   public marsFirst: IParty;
-  constructor(public turmoil: Turmoil) {
+  public turmoil: Turmoil;
+  constructor(turmoil: Turmoil) {
+    this.turmoil = turmoil;
     this.greens = turmoil.getPartyByName(PartyName.GREENS);
     this.reds = turmoil.getPartyByName(PartyName.REDS);
     this.scientists = turmoil.getPartyByName(PartyName.SCIENTISTS);

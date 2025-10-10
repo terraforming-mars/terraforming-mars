@@ -196,7 +196,7 @@ describe('DoubleDown', () => {
     expect(boardOfDirectors.resourceCount).eq(4);
     expect(player.playedCards.asArray()).deep.eq([boardOfDirectors, doubleDown]);
 
-    const modelCard = (<SelectCardModel>model.waitingFor).cards[0];
+    const modelCard = (model.waitingFor as SelectCardModel).cards[0];
     expect(modelCard.name).eq(CardName.BOARD_OF_DIRECTORS);
     expect(modelCard.warnings).deep.eq(['ineffectiveDoubleDown', 'cannotAffordBoardOfDirectors']);
   });

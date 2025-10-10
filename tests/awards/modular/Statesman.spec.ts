@@ -8,14 +8,14 @@ describe('Politician', () => {
   const [game, player, player2] = testGame(2, {turmoilExtension: true});
 
   it('Influence and party leader check', () => {
-    // Have hope I didn's mess anything -_-
+    // Have hope I didn't mess anything -_-
     award = new Politician();
     const turmoil = game.turmoil!;
     turmoil.chairman = 'NEUTRAL';
     game.turmoil!.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
 
     expect(award.getScore(player)).to.eq(1); // 1 as player have 1 party leader and is this is dominant party (so 1 party leader)
-    expect(award.getScore(player2)).to.eq(0); // 0 as player2 dont have any delegates in any parties
+    expect(award.getScore(player2)).to.eq(0); // 0 as player2 don't have any delegates in any parties
 
     game.turmoil!.sendDelegateToParty(player2, PartyName.SCIENTISTS, game);
     game.turmoil!.sendDelegateToParty(player2, PartyName.SCIENTISTS, game);

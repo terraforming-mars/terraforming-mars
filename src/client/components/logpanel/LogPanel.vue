@@ -130,12 +130,8 @@ export default Vue.extend({
           if (!data) return;
 
           messages.splice(0, messages.length);
-          messages.push(...data);
-
-          if (
-            getPreferences().enable_sounds &&
-            window.location.search.includes('experimental=1')
-          ) {
+          messages.push(...xhr.response);
+          if (getPreferences().enable_sounds && window.location.search.includes('experimental=1') ) {
             SoundManager.newLog();
           }
 

@@ -225,7 +225,6 @@ export default Vue.extend({
             if (!result) return;
 
             this.playersWaitingFor = result.waitingFor;
-
             if (result.result === 'GO') {
               // Will only apply to player, not spectator.
               root.updatePlayer();

@@ -1,5 +1,5 @@
 <template>
-  <div style="display: contents">
+  <div style="display: contents" :key="componentKey">
     <waiting-for
       :players="players"
       :playerView="playerView"
@@ -34,7 +34,10 @@ import {
   PublicPlayerModel,
   PlayerViewModel,
 } from "@/common/models/PlayerModel";
-import { PlayerInputModel } from "@/common/models/PlayerInputModel";
+import {
+  OrOptionsModel,
+  PlayerInputModel,
+} from "@/common/models/PlayerInputModel";
 
 type TimeWarpPayload = {
   runId: string | number;
@@ -42,10 +45,10 @@ type TimeWarpPayload = {
   [key: string]: unknown;
 };
 
-type TimeWarpState = {
-  cachedWaitingFor: PlayerInputModel | undefined;
-  queue: TimeWarpPayload[] | undefined;
-};
+let timeWarpState: {
+  cachedWaitingFor?: OrOptionsModel;
+  queue?: TimeWarpPayload[];
+} = {};
 
 export default Vue.extend({
   name: "time-warp",
@@ -56,13 +59,6 @@ export default Vue.extend({
     players: Array as PropType<PublicPlayerModel[]>,
     settings: Object as PropType<typeof raw_settings>,
     waitingfor: Object as PropType<PlayerInputModel | undefined>,
-  },
-
-  data(): TimeWarpState {
-    return {
-      cachedWaitingFor: undefined,
-      queue: undefined,
-    };
   },
 
   computed: {
@@ -85,26 +81,25 @@ export default Vue.extend({
           return;
         }
 
-        if (!this.queue) {
+        if (!timeWarpState.queue) {
           const clone =
             typeof structuredClone === "function"
               ? structuredClone(newVal)
               : JSON.parse(JSON.stringify(newVal));
-          console.log(clone);
-          this.cachedWaitingFor = clone;
+          timeWarpState.cachedWaitingFor = clone;
           return;
         }
 
-        const payload = this.queue.shift();
+        const payload = timeWarpState.queue.shift();
         if (!payload) {
           this.deactivate();
           return;
         }
 
         if (
-          this.cachedWaitingFor === undefined ||
+          timeWarpState.cachedWaitingFor === undefined ||
           payload.index === undefined ||
-          !this.cachedWaitingFor.options[payload.index]
+          !timeWarpState.cachedWaitingFor.options[payload.index]
         ) {
           console.warn("Time warp queue desynced; deactivating.");
           this.deactivate();
@@ -112,7 +107,7 @@ export default Vue.extend({
         }
 
         const selectedOptionStr = JSON.stringify(
-          this.cachedWaitingFor.options[payload.index]
+          timeWarpState.cachedWaitingFor!.options[payload.index]
         );
         const optionsStrs = newVal.options.map((o) => JSON.stringify(o));
         const index = optionsStrs.indexOf(selectedOptionStr);
@@ -148,8 +143,10 @@ export default Vue.extend({
           })
           .then(() => {
             root.isServerSideRequestInProgress = false;
-            if (!this.queue || this.queue.length === 0) {
+            if (!timeWarpState.queue || timeWarpState.queue.length === 0) {
               this.deactivate();
+            } else {
+              this.rerender();
             }
           })
           .catch((err) => {
@@ -161,19 +158,31 @@ export default Vue.extend({
     },
   },
 
+  data() {
+    return {
+      componentKey: 0,
+    };
+  },
+
   methods: {
+    rerender() {
+      this.componentKey += 1;
+    },
     activate() {
-      this.queue = [];
+      timeWarpState.queue = [];
+      this.rerender();
     },
     deactivate() {
-      this.queue = undefined;
+      timeWarpState.queue = undefined;
+      this.rerender();
     },
     onQueueUpdated(queue: TimeWarpPayload[]) {
-      this.queue = queue;
+      timeWarpState.queue = queue;
+      this.rerender();
     },
     showTrinary(): boolean | null {
-      if (this.queue) return false;
-      return !this.waitingfor && this.cachedWaitingFor ? true : null;
+      if (timeWarpState.queue) return false;
+      return !this.waitingfor && timeWarpState.cachedWaitingFor ? true : null;
     },
   },
 });

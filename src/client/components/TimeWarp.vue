@@ -101,7 +101,7 @@ export default Vue.extend({
           const selectedOptionTitle =
             this.cachedWaitingFor?.options[payload.index].title;
           const optionsTitles = newVal.options.map((o) => o.title);
-          const index = optionsTitles.indexOf(selectedOptionTitle);
+          const index = optionsTitles.indexOf(selectedOptionTitle!);
           if (index === -1) {
             this.deactivate();
             return;

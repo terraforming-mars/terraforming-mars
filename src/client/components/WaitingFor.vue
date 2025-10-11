@@ -26,7 +26,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import Vue, { PropType } from "vue";
 import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
 import {vueRoot} from '@/client/components/vueRoot';

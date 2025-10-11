@@ -33,10 +33,13 @@ import {
   PublicPlayerModel,
   PlayerViewModel,
 } from "@/common/models/PlayerModel";
-import { PlayerInputModel } from "@/common/models/PlayerInputModel";
+import {
+  OrOptionsModel,
+  PlayerInputModel,
+} from "@/common/models/PlayerInputModel";
 
 let DATA_STATE = {
-  cachedWaitingFor: undefined as PlayerInputModel | undefined,
+  cachedWaitingFor: undefined as OrOptionsModel | undefined,
   queue: undefined as any[] | undefined,
 };
 
@@ -84,7 +87,7 @@ export default Vue.extend({
               return;
             }
             const selectedOptionStr = JSON.stringify(
-              this.cachedWaitingFor.options[payload.index]
+              this.cachedWaitingFor?.options[payload.index]
             );
             const optionsStrs = newVal.options.map((o) => JSON.stringify(o));
             const index = optionsStrs.indexOf(selectedOptionStr);
@@ -104,9 +107,13 @@ export default Vue.extend({
               body: JSON.stringify(payload),
             })
               .then((res) => res.json())
-              .then(() => {
+              .then((playerView: PlayerViewModel | undefined) => {
                 root.isServerSideRequestInProgress = false;
                 if (!this.queue || this.queue.length === 0) this.deactivate();
+
+                root.screen = "empty";
+                root.playerView = playerView;
+                root.playerkey++;
               })
               .catch(() => {
                 root.isServerSideRequestInProgress = false;

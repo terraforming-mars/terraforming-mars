@@ -34,11 +34,14 @@ import {ServeAsset} from '../routes/ServeAsset';
 import {serverId, statsId} from '../utils/server-ids';
 import {newIpBlocklist} from './IPBlocklist';
 import {newIpTracker} from './IPTracker';
+import {proxyServerRequest} from './proxyServerRequest';
 import {SessionManager} from './auth/SessionManager';
 import * as authcookies from './auth/authcookies';
 import {DiscordUser} from './auth/discord';
 import {getHerokuIpAddress} from './heroku';
 import * as responses from './responses';
+
+const SHOULD_PROXY = process.env.ENABLE_PROXY !== undefined;
 
 const metrics = {
   count: new prometheus.Counter({
@@ -175,7 +178,9 @@ export function processRequest(req: Request, res: Response): void {
     const pathname = url.pathname.substring(1); // Remove leading '/'
     pathnameForLatency = pathname;
     const handler = getHandler(pathname);
-    if (handler !== undefined) {
+    if (handler !== ServeAsset.INSTANCE && SHOULD_PROXY) {
+      proxyServerRequest(req, res);
+    } else if (handler !== undefined) {
       metrics.count.inc({path: pathname, method: req.method});
       handler.processRequest(req, res, ctx);
     } else {

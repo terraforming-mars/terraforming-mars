@@ -7,7 +7,7 @@ import {SelectAmount} from '../../src/server/inputs/SelectAmount';
 describe('AndOptions', () => {
   let player: TestPlayer;
   let called = false;
-  const vals = <Array<number>>[];
+  const vals = [] as number[];
   function cb() {
     called = true;
     return undefined;

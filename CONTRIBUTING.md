@@ -7,7 +7,7 @@ Our contributors vary in experience. Many of our contributors have very little s
 experience, but a great understanding of the game, and some have over 30 years of software industry
 experience. Wherever you fit in that level of experience, your contribution is welcome.
 
-Before taking on a substantial amout of work for your favorite feature, please first discuss the
+Before taking on a substantial amount of work for your favorite feature, please first discuss the
 change you wish to make via issue, email, Discord, or any other method with the repository owners.
 
 Our codebase is growing and changing all the time, and with each change we ask ourselves if it
@@ -51,7 +51,7 @@ This project is designed to run on single node servers or locally. Any change sh
 
 ## Pull Requests
 
-Your pull requests should either conssist of:
+Your pull requests should either consist of:
 1. one or more commits addressing the same issue, or
 2. several commits, each independently addressing an issue.
 

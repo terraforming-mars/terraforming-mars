@@ -5,9 +5,9 @@ import {TestPlayer} from '../TestPlayer';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 import {Phase} from '../../src/common/Phase';
-import {use} from 'chai';
-import chaiAsPromised = require('chai-as-promised');
-use(chaiAsPromised);
+// import {use} from 'chai';
+// import chaiAsPromised = require('chai-as-promised');
+// use(chaiAsPromised);
 
 describe('ApiGameLogs', () => {
   let scaffolding: RouteTestScaffolding;

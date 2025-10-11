@@ -5,7 +5,7 @@ import { Request } from "../Request";
 import { Response } from "../Response";
 import * as responses from "./responses";
 
-export function proxyApiRequest(_req: Request, _res: Response): void {
+export function proxyServerRequest(_req: Request, _res: Response): void {
   const req = _req as http.IncomingMessage;
   const res = _res as http.ServerResponse;
   const host = "https://terraforming-mars.herokuapp.com/";

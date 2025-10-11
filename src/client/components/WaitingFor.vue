@@ -94,7 +94,7 @@ export default Vue.extend({
       const payload = {runId: this.playerView.runId, ...out};
 
       if (this.timeWarpQueue) {
-        this.timeWarpQueue.push(payload);
+        this.timeWarpQueue.push(JSON.parse(JSON.stringify(payload)));
         this.$emit("queue-updated", this.timeWarpQueue);
         return
       }

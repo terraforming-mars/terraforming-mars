@@ -69,60 +69,8 @@ export default Vue.extend({
       return this.showDeactivate ? { backgroundColor: "#444444" } : {};
     },
   },
-  watch: {
-    waitingfor: {
-      immediate: true,
-      handler(newVal: PlayerInputModel | undefined) {
-        if (newVal && newVal.type === "or") {
-          if (!this.queue) {
-            const clone =
-              typeof structuredClone === "function"
-                ? structuredClone(newVal)
-                : JSON.parse(JSON.stringify(newVal));
-            this.cachedWaitingFor = clone;
-          } else {
-            const payload = this.queue.shift();
-            if (!payload) {
-              this.deactivate();
-              return;
-            }
-            const selectedOptionStr = JSON.stringify(
-              this.cachedWaitingFor?.options[payload.index]
-            );
-            const optionsStrs = newVal.options.map((o) => JSON.stringify(o));
-            const index = optionsStrs.indexOf(selectedOptionStr);
-            payload.index = index;
-            const root = vueRoot(this);
-            if (root.isServerSideRequestInProgress) {
-              console.warn("Server request in progress");
-              return;
-            }
-            root.isServerSideRequestInProgress = true;
-
-            fetch(paths.PLAYER_INPUT + "?id=" + this.playerView.id, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(payload),
-            })
-              .then((res) => res.json())
-              .then((playerView: PlayerViewModel | undefined) => {
-                root.isServerSideRequestInProgress = false;
-                if (!this.queue || this.queue.length === 0) this.deactivate();
-
-                root.screen = "empty";
-                root.playerView = playerView;
-                root.playerkey++;
-              })
-              .catch(() => {
-                root.isServerSideRequestInProgress = false;
-                this.deactivate();
-              });
-          }
-        }
-      },
-    },
+  mounted() {
+    this.handleNewVal(this.waitingfor);
   },
   methods: {
     activate() {
@@ -135,6 +83,65 @@ export default Vue.extend({
       // true = time warp, false = reality anchor, null = neither
       if (this.queue) return false;
       return !this.waitingfor && this.cachedWaitingFor ? true : null;
+    },
+    handleNewVal(newVal: PlayerInputModel | undefined): void {
+      if (newVal && newVal.type === "or") {
+        if (!this.queue) {
+          const clone =
+            typeof structuredClone === "function"
+              ? structuredClone(newVal)
+              : JSON.parse(JSON.stringify(newVal));
+          this.cachedWaitingFor = clone;
+        } else {
+          const payload = this.queue.shift();
+          if (!payload) {
+            this.deactivate();
+            return;
+          }
+          const selectedOptionTitle =
+            this.cachedWaitingFor?.options[payload.index].title;
+          const optionsTitles = newVal.options.map((o) => o.title);
+          const index = optionsTitles.indexOf(selectedOptionTitle);
+          if (index === -1) {
+            this.deactivate();
+            return;
+          }
+          payload.index = index;
+          const root = vueRoot(this);
+          if (root.isServerSideRequestInProgress) {
+            console.warn("Server request in progress");
+            return;
+          }
+          root.isServerSideRequestInProgress = true;
+
+          fetch(paths.PLAYER_INPUT + "?id=" + this.playerView.id, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          })
+            .then((resp) => {
+              if (!resp.ok) {
+                throw new Error(`Error getting game data: ${resp.statusText}`);
+              }
+              return resp.json();
+            })
+            .then((playerView: PlayerViewModel | undefined) => {
+              root.isServerSideRequestInProgress = false;
+              if (!this.queue || this.queue.length === 0) this.deactivate();
+
+              root.screen = "empty";
+              root.playerView = playerView;
+              root.playerkey++;
+              root.screen = "player-home";
+            })
+            .catch(() => {
+              root.isServerSideRequestInProgress = false;
+              this.deactivate();
+            });
+        }
+      }
     },
   },
 });

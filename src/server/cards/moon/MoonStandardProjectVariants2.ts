@@ -37,7 +37,7 @@ export class MoonMineStandardProjectVariant2 extends MoonMineStandardProject {
   constructor() {
     super({
       name: CardName.MOON_MINE_STANDARD_PROJECT_VARIANT_2,
-      cost: 23,
+      cost: 24,
       reserveUnits: Units.EMPTY,
       tr: {moonMining: 1},
       tilesBuilt: [TileType.MOON_MINE],
@@ -45,7 +45,7 @@ export class MoonMineStandardProjectVariant2 extends MoonMineStandardProject {
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 23 M€ to place a mine on The Moon, raise the mining rate 1 step, and raise steel production 1 step.', (eb) => {
+          b.standardProject('Spend 24 M€ to place a mine on The Moon, raise the mining rate 1 step, and raise steel production 1 step.', (eb) => {
             eb.megacredits(23).startAction.moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).production((pb) => pb.steel(1));
           }),
         ),

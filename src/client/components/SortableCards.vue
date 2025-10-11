@@ -8,14 +8,14 @@
   <div class="sortable-cards">
     <div ref="draggers" :class="{ 'dragging': Boolean(dragCard) }" v-for="card in getSortedCards()" :key="card.name" draggable="true" v-on:dragend="onDragEnd()" v-on:dragstart="onDragStart(card.name)">
       <div v-if="dragCard" ref="droppers" class="drop-target" v-on:dragover="onDragOver(card.name)"></div>
-      <div ref="cardbox" class="cardbox" @click="clickMethod" style="position:relative;width:100%">
+      <div ref="cardbox" class="cardbox" @click="clickMethod" style="position:relative">
         <Card :card="card" :style="handJiveIsChecked ? handJiveCardStyle : undefined"/>
         <div v-if="handJiveIsChecked" style="
           position:absolute;inset:0;pointer-events:none;z-index:400;
           transform:translate(-6%,0%);opacity:0.5;
           background:linear-gradient(to right,transparent 0%,transparent 10%,red 10%,red 20%,transparent 20%,transparent 80%,red 80%,red 90%,transparent 90%,transparent 100%)
         "></div>
-        </div>
+      </div>
     </div>
     <div v-if="dragCard" ref="dropend" class="drop-target" v-on:dragover="onDragOver('end')"></div>
   </div>

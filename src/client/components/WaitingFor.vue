@@ -44,6 +44,7 @@ import {InputResponse} from '@/common/inputs/InputResponse';
 import {INVALID_RUN_ID} from '@/common/app/AppErrorId';
 import {Color} from '@/common/Color';
 
+
 let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;
 
@@ -98,21 +99,39 @@ export default Vue.extend({
       }
       root.isServerSideRequestInProgress = true;
 
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', paths.PLAYER_INPUT + '?id=' + this.playerView.id);
-      xhr.responseType = 'json';
-      xhr.onload = () => {
-        this.loadPlayerViewResponse(xhr);
-        root.isServerSideRequestInProgress = false;
-      };
-      xhr.send(JSON.stringify({runId: this.playerView.runId, ...out}));
-      xhr.onerror = function() {
-        // todo(kberg): Report error to caller
-        root.isServerSideRequestInProgress = false;
-      };
+      const url = paths.PLAYER_INPUT + '?id=' + this.playerView.id;
+
+      fetch(url, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          runId: this.playerView.runId,
+          ...out,
+        }),
+      })
+        .then((resp) =>
+          resp
+            .json()
+            .then((response) => ({
+              status: resp.status,
+              responseType: 'json',
+              response,
+            }))
+            .catch((err) => ({
+              status: resp.status,
+              err,
+            })),
+        )
+        .then((xhr) => {
+          this.loadPlayerViewResponse(xhr);
+          root.isServerSideRequestInProgress = false;
+        })
+        .catch(() => {
+          // todo(kberg): Report error to caller
+          root.isServerSideRequestInProgress = false;
+        });
     },
     reset() {
-      const xhr = new XMLHttpRequest();
       const root = vueRoot(this);
       if (root.isServerSideRequestInProgress) {
         console.warn('Server request in progress');
@@ -120,18 +139,30 @@ export default Vue.extend({
       }
 
       root.isServerSideRequestInProgress = true;
-      xhr.open('GET', paths.RESET + '?id=' + this.playerView.id);
-      xhr.responseType = 'json';
-      xhr.onload = () => {
-        this.loadPlayerViewResponse(xhr);
-      };
-      xhr.send();
-      xhr.onerror = function() {
-        // todo(kberg): Report error to caller
-        root.isServerSideRequestInProgress = false;
-      };
+      const url = paths.RESET + '?id=' + this.playerView.id;
+      fetch(url)
+        .then((resp) =>
+          resp
+            .json()
+            .then((response) => ({
+              status: resp.status,
+              responseType: 'json',
+              response,
+            }))
+            .catch((err) => ({
+              status: resp.status,
+              err,
+            })),
+        )
+        .then((xhr) => {
+          this.loadPlayerViewResponse(xhr);
+        })
+        .catch(() => {
+          // todo(kberg): Report error to caller
+          root.isServerSideRequestInProgress = false;
+        });
     },
-    loadPlayerViewResponse(xhr: XMLHttpRequest) {
+    loadPlayerViewResponse(xhr: {status:number, response:any, responseType:string}|{status:number, err:string}) {
       const root = vueRoot(this);
       const showAlert = vueRoot(this).showAlert;
       if (xhr.status === statusCode.ok) {
@@ -167,38 +198,54 @@ export default Vue.extend({
       const root = vueRoot(this);
       clearTimeout(ui_update_timeout_id);
       const askForUpdate = () => {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', paths.API_WAITING_FOR + window.location.search + '&gameAge=' + this.playerView.game.gameAge + '&undoCount=' + this.playerView.game.undoCount);
-        xhr.onerror = function() {
-          root.showAlert('Unable to reach the server. The server may be restarting or down for maintenance.', () => vueApp.waitForUpdate());
-        };
-        xhr.onload = () => {
-          if (xhr.status === statusCode.ok) {
-            const result = xhr.response as WaitingForModel;
+        const url =
+          paths.API_WAITING_FOR +
+          window.location.search +
+          '&gameAge=' +
+          this.playerView.game.gameAge +
+          '&undoCount=' +
+          this.playerView.game.undoCount;
+
+        fetch(url)
+          .then((resp) => {
+            if (!resp.ok) {
+              root.showAlert(
+                `Received unexpected response from server (${resp.status}). This is often due to the server restarting.`,
+                () => vueApp.waitForUpdate(),
+              );
+              // still return to continue chain safely
+              return null;
+            }
+            return resp.json();
+          })
+          .then((result: WaitingForModel | null) => {
+            if (!result) return;
+
             this.playersWaitingFor = result.waitingFor;
+
             if (result.result === 'GO') {
-              // Will only apply to player, not spectator.
               root.updatePlayer();
               this.notify();
-              // We don't need to wait anymore - it's our turn
               return;
-            } else if (result.result === 'REFRESH') {
-              // Something changed, let's refresh UI
+            }
+
+            if (result.result === 'REFRESH') {
               if (isPlayerId(this.playerView.id)) {
                 root.updatePlayer();
               } else {
                 root.updateSpectator();
               }
-
               return;
             }
+
             vueApp.waitForUpdate();
-          } else {
-            root.showAlert(`Received unexpected response from server (${xhr.status}). This is often due to the server restarting.`, () => vueApp.waitForUpdate());
-          }
-        };
-        xhr.responseType = 'json';
-        xhr.send();
+          })
+          .catch(() => {
+            root.showAlert(
+              'Unable to reach the server. The server may be restarting or down for maintenance.',
+              () => vueApp.waitForUpdate(),
+            );
+          });
       };
       ui_update_timeout_id = window.setTimeout(askForUpdate, this.waitingForTimeout);
     },

@@ -26,7 +26,7 @@
 
 <script lang="ts">
 
-import Vue, {PropType} from 'vue';
+import Vue from 'vue';
 import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
 import {vueRoot} from '@/client/components/vueRoot';
@@ -69,11 +69,7 @@ export default Vue.extend({
     waitingfor: {
       type: Object as () => PlayerInputModel | undefined,
     },
-    timeWarpQueue: {
-      type: Array as PropType<any[] | undefined>,
-      required: false,
-      default: undefined,
-    },
+    timeWarpQueue: Array as PropType<any[] | undefined>,
   },
   data(): DataModel {
     return {
@@ -98,10 +94,9 @@ export default Vue.extend({
       const payload = {runId: this.playerView.runId, ...out};
 
       if (this.timeWarpQueue) {
-        const updatedQueue = this.timeWarpQueue.slice();
-        updatedQueue.push(payload);
-        this.$emit('queue-updated', updatedQueue);
-        return;
+        this.timeWarpQueue.push(payload);
+        this.$emit("queue-updated", this.timeWarpQueue);
+        return
       }
 
       const root = vueRoot(this);

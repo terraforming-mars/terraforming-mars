@@ -1,27 +1,10 @@
 <template>
     <div class="wf-component wf-component--select-card">
         <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
-        <label
-          v-for="card in getOrderedCards()"
-          :key="card.name"
-          :class="getCardBoxClass(card)"
-          @pointerup.prevent="onCardPointerUp(card, $event)"
-        >
+        <label v-for="card in getOrderedCards()" :key="card.name" :class="getCardBoxClass(card)">
             <template v-if="!card.isDisabled">
-              <input
-                v-if="selectOnlyOneCard"
-                type="radio"
-                :name="radioGroupName"
-                :checked="isCardSelected(card)"
-                @change="onCardInputChange(card, $event)"
-              />
-              <input
-                v-else
-                type="checkbox"
-                :checked="isCardSelected(card)"
-                :disabled="isCardDisabled(card)"
-                @change="onCardInputChange(card, $event)"
-              />
+              <input v-if="selectOnlyOneCard" type="radio" v-model="cards" :value="card" />
+              <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.max !== undefined && Array.isArray(cards) && cards.length >= playerinput.max && cards.includes(card) === false" />
             </template>
             <Card :card="card" :actionUsed="isCardActivated(card)" :robotCard="robotCard(card)">
               <template v-if="playerinput.showOwner">
@@ -68,10 +51,7 @@ type WidgetDataModel = {
   warning: string | Message | undefined;
   warnings: ReadonlyArray<Warning> | undefined;
   owners: Map<CardName, Owner>,
-  instanceId: number,
 }
-
-let selectCardInstanceCounter = 0;
 
 export default Vue.extend({
   name: 'SelectCard',
@@ -100,7 +80,6 @@ export default Vue.extend({
       warning: undefined,
       owners: new Map(),
       warnings: undefined,
-      instanceId: selectCardInstanceCounter++,
     };
   },
   components: {
@@ -115,7 +94,12 @@ export default Vue.extend({
   },
   methods: {
     cardsSelected(): number {
-      return this.getSelectedCards().length;
+      if (Array.isArray(this.cards)) {
+        return this.cards.length;
+      } else if (this.cards === undefined) {
+        return 0;
+      }
+      return 1;
     },
     getOrderedCards(): ReadonlyArray<CardModel> {
       let cards: ReadonlyArray<CardModel> = [];
@@ -141,7 +125,7 @@ export default Vue.extend({
       return cards;
     },
     getData(): Array<CardName> {
-      return this.getSelectedCards().map((card) => card.name);
+      return Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name];
     },
     hasCardWarning() {
       // This is pretty clunky, to be honest.
@@ -190,90 +174,14 @@ export default Vue.extend({
       // Copied from PlayerMixin.
       return this.playerView.thisPlayer.actionsThisGeneration.includes(card.name);
     },
-    getSelectedCards(): Array<CardModel> {
-      if (Array.isArray(this.cards)) {
-        return this.cards;
-      }
-      if (this.cards === undefined) {
-        return [];
-      }
-      return [this.cards];
-    },
-    isCardSelected(card: CardModel): boolean {
-      return this.getSelectedCards().some((selected) => selected.name === card.name);
-    },
-    isCardDisabled(card: CardModel): boolean {
-      if (this.selectOnlyOneCard) {
-        return false;
-      }
-      if (this.playerinput.max === undefined) {
-        return false;
-      }
-      const selected = this.getSelectedCards();
-      if (selected.length < this.playerinput.max) {
-        return false;
-      }
-      return selected.some((selectedCard) => selectedCard.name === card.name) === false;
-    },
     buttonLabel(): string {
       return this.selectOnlyOneCard ? this.playerinput.buttonLabel : this.playerinput.buttonLabel + ' ' + this.cardsSelected();
     },
     robotCard(card: CardModel): CardModel | undefined {
       return this.playerView.thisPlayer.selfReplicatingRobotsCards?.find((r) => r.name === card.name);
     },
-    onCardPointerUp(card: CardModel, event: PointerEvent): void {
-      if (event.button !== 0 && event.pointerType === 'mouse') {
-        return;
-      }
-      if (card.isDisabled || this.isCardDisabled(card)) {
-        return;
-      }
-      const shouldSelect = this.selectOnlyOneCard ? true : !this.isCardSelected(card);
-      this.applySelectionChange(card, shouldSelect, event);
-    },
-    onCardInputChange(card: CardModel, event: Event): void {
-      const target = event.target;
-      if (!(target instanceof HTMLInputElement)) {
-        return;
-      }
-      this.applySelectionChange(card, target.checked, event);
-    },
-    applySelectionChange(card: CardModel, shouldSelect: boolean, event?: Event): void {
-      if (this.selectOnlyOneCard) {
-        if (shouldSelect) {
-          this.cards = card;
-        }
-        return;
-      }
-
-      const selected = [...this.getSelectedCards()];
-      const idx = selected.findIndex((selectedCard) => selectedCard.name === card.name);
-
-      if (shouldSelect) {
-        if (idx !== -1) {
-          return;
-        }
-        if (this.playerinput.max !== undefined && selected.length >= this.playerinput.max) {
-          if (event?.target instanceof HTMLInputElement) {
-            event.target.checked = false;
-          }
-          return;
-        }
-        selected.push(card);
-        this.cards = selected;
-        return;
-      }
-
-      if (idx !== -1) {
-        selected.splice(idx, 1);
-        this.cards = selected;
-      }
-    },
   },
   computed: {
-    radioGroupName(): string {
-      return `select-card-${this.instanceId}`;
-    },
     selectOnlyOneCard() : boolean {
       return this.playerinput.max === 1 && this.playerinput.min === 1;
     },

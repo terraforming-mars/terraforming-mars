@@ -1,5 +1,5 @@
 <template>
-  <div style="display:contents">
+  <div style="display: contents">
     <waiting-for
       :players="players"
       :playerView="playerView"
@@ -25,13 +25,16 @@
 </template>
 
 <script lang="ts">
-import Vue, {PropType} from 'vue';
-import * as raw_settings from '@/genfiles/settings.json';
-import {vueRoot} from '@/client/components/vueRoot';
-import {paths} from '@/common/app/paths';
-import WaitingFor from '@/client/components/WaitingFor.vue';
-import {PublicPlayerModel, PlayerViewModel} from '@/common/models/PlayerModel';
-import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import Vue, { PropType } from "vue";
+import * as raw_settings from "@/genfiles/settings.json";
+import { vueRoot } from "@/client/components/vueRoot";
+import { paths } from "@/common/app/paths";
+import WaitingFor from "@/client/components/WaitingFor.vue";
+import {
+  PublicPlayerModel,
+  PlayerViewModel,
+} from "@/common/models/PlayerModel";
+import { PlayerInputModel } from "@/common/models/PlayerInputModel";
 
 type TimeWarpPayload = {
   runId: string | number;
@@ -45,8 +48,8 @@ type TimeWarpState = {
 };
 
 export default Vue.extend({
-  name: 'time-warp',
-  components: {WaitingFor},
+  name: "time-warp",
+  components: { WaitingFor },
 
   props: {
     playerView: Object as PropType<PlayerViewModel>,
@@ -70,7 +73,7 @@ export default Vue.extend({
       return this.showTrinary() === false;
     },
     styleF(): Record<string, string> {
-      return this.showDeactivate ? {backgroundColor: '#444444'} : {};
+      return this.showDeactivate ? { backgroundColor: "#444444" } : {};
     },
   },
 
@@ -78,12 +81,16 @@ export default Vue.extend({
     waitingfor: {
       immediate: true,
       handler(newVal: PlayerInputModel | undefined) {
-        if (!newVal || newVal.type !== 'or') {
+        if (!newVal || newVal.type !== "or") {
           return;
         }
 
         if (!this.queue) {
-          const clone = typeof structuredClone === 'function' ? structuredClone(newVal) : JSON.parse(JSON.stringify(newVal));
+          const clone =
+            typeof structuredClone === "function"
+              ? structuredClone(newVal)
+              : JSON.parse(JSON.stringify(newVal));
+          console.log(clone);
           this.cachedWaitingFor = clone;
           return;
         }
@@ -94,23 +101,25 @@ export default Vue.extend({
           return;
         }
 
-        if (this.cachedWaitingFor === undefined ||
+        if (
+          this.cachedWaitingFor === undefined ||
           payload.index === undefined ||
-          !this.cachedWaitingFor.options[payload.index]) {
-          console.warn('Time warp queue desynced; deactivating.');
+          !this.cachedWaitingFor.options[payload.index]
+        ) {
+          console.warn("Time warp queue desynced; deactivating.");
           this.deactivate();
           return;
         }
 
         const selectedOptionStr = JSON.stringify(
-          this.cachedWaitingFor.options[payload.index],
+          this.cachedWaitingFor.options[payload.index]
         );
         const optionsStrs = newVal.options.map((o) => JSON.stringify(o));
         const index = optionsStrs.indexOf(selectedOptionStr);
 
         if (index === -1) {
           console.warn(
-            'Time warp option was not available in the new prompt; deactivating.',
+            "Time warp option was not available in the new prompt; deactivating."
           );
           this.deactivate();
           return;
@@ -119,15 +128,15 @@ export default Vue.extend({
         payload.index = index;
         const root = vueRoot(this);
         if (root.isServerSideRequestInProgress) {
-          console.warn('Server request in progress');
+          console.warn("Server request in progress");
           return;
         }
         root.isServerSideRequestInProgress = true;
 
-        fetch(paths.PLAYER_INPUT + '?id=' + this.playerView.id, {
-          method: 'POST',
+        fetch(paths.PLAYER_INPUT + "?id=" + this.playerView.id, {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(payload),
         })
@@ -144,7 +153,7 @@ export default Vue.extend({
             }
           })
           .catch((err) => {
-            console.warn('Time warp replay failed', err);
+            console.warn("Time warp replay failed", err);
             root.isServerSideRequestInProgress = false;
             this.deactivate();
           });

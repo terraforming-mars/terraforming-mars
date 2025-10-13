@@ -43,6 +43,7 @@
   "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "EFFEKT: Sobald eines deiner Plättchen an ein Plättchen eines Mitspielers angrenzt, erhalte eine Standard-Ressource deiner Wahl (unabhängig davon, wer das Plätcchen gelegt hat).",
 
   "PolderTECH Dutch": "Polder-Technologie Niederland",
+  "PolderTECH": "Polder-Technologie",
   "Dutch": "Niederland",
   "You start with 35 M€. As your first action, place an ocean tile and a greenery tile next to each other IGNORING GREENERY PLACEMENT RESTRICTIONS. Raise oxygen 1 step.": "Du beginnst mit 35 M€. Als deine erste Aktion platziere 1 Ozean- und 1 Grünflächenplättchen nebeneinander, ignoriere dabei Grunflächenplättchen-Beschränkungen. Erhöhe den Sauerstoffgehalt um 1%.",
   "Effect: When you place an ocean tile, gain 1 energy.": "EFFEKT: Wenn du ein Ozeanplättchen legst, erhalte 1 Energie.",
@@ -53,7 +54,7 @@
   "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "EFFEKT: Wenn du ein Gebäudesymbol spielst (inklusive diesem), füge dieser Karte 1 Mikrobe hinzu oder entferne 2 Mikroben von dieser Karte, um deine Pflanzen-Produktiom um 1 zu erhöhen.",
 
   "Tycho Magnetics": "Tycho Magnetik",
-  "Magnetics": "Magnetik",
+  "MAGNETICS": "Magnetik",
   "You start with 42 M€. Increase your energy production 1 step.": "Du beginnst mit 42 M€ und 1 Energie-Produktion.",
   "Action: Spend any amount of energy to draw the that many cards. Keep 1 and discard the rest.": "AKTION: Du kannst X Energie bezahlen, um X Karten zu ziehen. Behalte 1 von ihnen und wirf den Rest ab.",
   "KEEP 1": "BEHALTE 1",

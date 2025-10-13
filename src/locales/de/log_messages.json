@@ -438,7 +438,6 @@
   "${0} had no underground resources to discard": "${0} hatte keine unterirdische Ressource zum Abwerfen",
   "${0} cannot afford to place an ocean": "${0} kann es sich nicht leisten, einen Ozean zu platzieren",
   "There is no room to place an ocean": "Es gibt keinen Platz, um einen Ozean zu platzieren",
-  "${0} ${1} ${2} at ${3}": "${0} ${1} ${2} in ${3}",
   "${0} excavated ${1} at ${2}": "${0} hat ${1} in ${2} ausgegraben",
   "${0} claimed ${1} at ${2}": "${0} hat ${1} in ${2} beansprucht",
   "${0} claimed ${1}": "${0} beanspruchte ${1}",

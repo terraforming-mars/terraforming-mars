@@ -931,7 +931,7 @@
   "Select up to 2 cards to gain 3 microbes each": "Wähle bis zu 2 Karten, um diesen je 3 Mikroben hinzu zufügen",
   "Select 1 card to return to your hand": "Wähle 1 Karte, um sie auf deine Hand zurückzunehmen",
   "Select 1 card to discard": "Wähle 1 Karte, um sie abzuwerfen",
-  "Select 1 card(s) to discard": "Wähle 1 Karte, um sie abzuwerfen",
+  "Select ${0} card(s) to discard": "Wähle ${0} Karte, um sie abzuwerfen",
   "Select 2 cards to discard": "Wähle 2 Karten, um sie abzuwerfen",
   "Select 3 cards to discard": "Wähle 3 Karten, um sie abzuwerfen",
   "Discard": "Abwerfen",

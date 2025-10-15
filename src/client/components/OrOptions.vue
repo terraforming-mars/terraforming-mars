@@ -30,6 +30,7 @@
 
 import Vue from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
+import {isHTMLElement} from '@/client/utils/vueUtils';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {OrOptionsModel, PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
@@ -88,48 +89,39 @@ export default Vue.extend({
     };
   },
   watch: {
-    selectedOption(newOption: PlayerInputModel | undefined) {
-      if (typeof window === 'undefined' || newOption === undefined) {
-        return;
-      }
-      const anchorElement = this.getOptionLabelElement(newOption);
-      const anchorTop = anchorElement?.getBoundingClientRect().top;
-      if (anchorTop === undefined) {
-        return;
-      }
+    selectedOption(newOption: PlayerInputModel) {
+      // Clicking the option can shift elements on the page.
+      // This preserves the location of the option button the user just clicked by
+      // tracking where it was on the screen, where it moved, and then repositioning it.
+      const anchorTop = this.getTop(newOption);
       this.$nextTick(() => {
-        if (typeof window === 'undefined') {
-          return;
-        }
-        const updatedElement = this.getOptionLabelElement(newOption);
-        if (!updatedElement) {
-          return;
-        }
-        const newTop = updatedElement.getBoundingClientRect().top;
-        const delta = newTop - anchorTop;
-        if (Math.abs(delta) > 0.5) {
-          window.scrollBy(0, delta);
+        const newTop = this.getTop(newOption);
+        if (anchorTop !== undefined && newTop !== undefined) {
+          const delta = newTop - anchorTop;
+          if (Math.abs(delta) > 0.5) {
+            window.scrollBy(0, delta);
+          }
         }
       });
     },
   },
   methods: {
-    getOptionLabelElement(option: PlayerInputModel | undefined): HTMLElement | null {
+    getTop(option: PlayerInputModel | undefined): number | undefined {
       if (option === undefined) {
-        return null;
+        return undefined;
       }
+      const element = this.getOptionLabelElement(option);
+      return element?.getBoundingClientRect().top;
+    },
+    getOptionLabelElement(option: PlayerInputModel): HTMLElement | undefined {
       const idx = this.displayedOptions.indexOf(option);
-      if (idx === -1) {
-        return null;
-      }
       const refs = this.$refs.optionLabels;
-      if (!refs) {
-        return null;
+      if (idx === -1 || !refs) {
+        return undefined;
       }
-      if (Array.isArray(refs)) {
-        return refs[idx] as HTMLElement;
-      }
-      return refs as HTMLElement;
+
+      const val = Array.isArray(refs) ? refs[idx] : refs;
+      return isHTMLElement(val) ? val : undefined;
     },
     playerFactorySaved() {
       const idx = this.playerinput.options.indexOf(this.selectedOption);

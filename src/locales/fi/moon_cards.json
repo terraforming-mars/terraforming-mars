@@ -1,6 +1,6 @@
 {
   "Basic Infrastructure": "Perusinfrastruktuuri",
-  "Place a road tile on The Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.": "Aseta tielaatta Kuuhun ja nosta logistiikka-astetta 1 askel. Saa 1 kauppalaivasto.",
+  "Place a road tile on The Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.": "Aseta tielaatta Kuuhun ja nosta logistiikka-astetta 1 askel. Saat 1 kauppalaivaston.",
 
   "Core Mine": "Ydinkaivos",
   "Place a mine tile on The Moon and raise the mining rate 1 step. Increase your titanium production 1 step.": "Aseta kaivoslaatta Kuuhun ja nosta kaivosastetta 1 askel. Nosta titaanituotantoasi 1 askel.",
@@ -9,7 +9,7 @@
   "Place a habitat tile on The Moon and raise the habitat rate 1 step. Increase your M€ production 1 step.": "Aseta asutuslaatta Kuuhun ja nosta asutusastetta 1 askel. Nosta M€-tuotantoasi 1 askel.",
 
   "Lunar Planning Office": "Kuun suunnittelutoimisto",
-  "Draw 2 cards with a Moon tag. Gain 6 steel.": "Nosta 2 korttia kuusymbolilla. Saa 6 terästä.",
+  "Draw 2 cards with a Moon tag. Gain 6 steel.": "Nosta 2 Kuu-korttia. Saat 6 terästä.",
 
   "Mining Complex": "Kaivoskompleksi",
   "Place a mine tile on The Moon and raise the mining rate 1 step. Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. Pay 7 M€.": "Aseta kaivoslaatta Kuuhun ja nosta kaivosastetta 1 askel. Aseta tielaatta asetetun kaivoslaatan viereen ja nosta logistiikka-astetta 1 askel. Maksa 7 M€.",
@@ -25,7 +25,7 @@
 
   "Ancient Shipyards": "Muinaiset telakat",
   "Ancient Shipyards (Nerfed)": "Muinaiset telakat (Heikennetty)",
-  "Action: Steal 2 M€ from each player and add a resource cube here.": "TOIMINTO: Varasta 2 M€ jokaiselta pelaajalta ja lisää resurssinoppa tähän korttiin.",
+  "Action: Steal 2 M€ from each player and add a resource cube here.": "TOIMINTO: Varasta 2 M€ jokaiselta pelaajalta ja lisää resurssinoppa tälle kortille.",
   "Spend 3 titanium. -1 VP for every resource here.": "Käytä 3 titaania. -1 VP jokaisesta resurssista täällä.",
 
   "Archimedes Hydroponics Station": "Arkhimedeen hydroponiikka-asema",
@@ -35,15 +35,15 @@
   "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Käytä 2 terästä. Nosta M€-tuotantoasi 2 askelta. Aseta tielaatta Kuuhun ja nosta logistiikka-astetta 1 askel.",
 
   "Colonist Shuttles": "Siirtolaisten sukkulat",
-  "Spend 1 titanium. Raise the habitat rate 1 step. Gain 2M€ for each habitat tile on The Moon.": "Käytä 1 titaani. Nosta asutusastetta 1 askel. Saa 2M€ jokaisesta asutuslaatasta Kuussa.",
+  "Spend 1 titanium. Raise the habitat rate 1 step. Gain 2M€ for each habitat tile on The Moon.": "Käytä 1 titaani. Nosta asutusastetta 1 askel. Saat 2M€ jokaisesta asutuslaatasta Kuussa.",
 
   "Copernicus Solar Arrays": "Kopernikus aurinkokennot",
-  "Spend 1 titanium. Gain 2 heat. Incease your energy production 1 step.": "Käytä 1 titaani. Saa 2 lämpöä. Nosta energiatuotantoasi 1 askel.",
+  "Spend 1 titanium. Gain 2 heat. Incease your energy production 1 step.": "Käytä 1 titaani. Saat 2 lämpöä. Nosta energiatuotantoasi 1 askel.",
 
   "Copernicus Tower": "Kopernikus torni",
   "Requires you have 2 titanium production.": "Vaatii 2 titaanituotantoa.",
-  "Action: Add 1 science resource here, or spend 1 science resource here to raise your TR 1 step.": "TOIMINTO: Lisää 1 tiederesurssi tähän, tai käytä 1 tiederesurssi täältä nostaaksesi TR:ää 1 askel.",
-  "1 VP PER MOON TAG YOU HAVE.": "1 VP JOKAISESTA KUUSYMBOLISTASI.",
+  "Action: Add 1 science resource here, or spend 1 science resource here to raise your TR 1 step.": "TOIMINTO: Lisää 1 tiederesurssi tähän, tai käytä 1 tiederesurssi täältä nostaaksesi MKL:ääsi 1 askel.",
+  "1 VP PER MOON TAG YOU HAVE.": "1 VP jokaisesta Kuu-ympyrästäsi.",
 
   "Cosmic Radiation": "Kosminen säteily",
   "Requires 4 mining rate. All players pay 4M€ for each mining tile they own.": "Vaatii 4 kaivosasteen. Kaikki pelaajat maksavat 4M€ jokaisesta omistamastaan kaivoslaatasta.",
@@ -54,14 +54,14 @@
   "Spend 1 titanium. 1 VP for every 2 microbes here.": "Käytä 1 titaani. 1 VP jokaisesta 2 mikrobista täällä.",
 
   "Darkside Meteor Bombardment": "Pimeän puolen meteoriittipommitus",
-  "Gain 2 steel and 2 titanium. Raise the mining rate 2 steps.": "Saa 2 terästä ja 2 titaania. Nosta kaivosastetta 2 askelta.",
+  "Gain 2 steel and 2 titanium. Raise the mining rate 2 steps.": "Saat 2 terästä ja 2 titaania. Nosta kaivosastetta 2 askelta.",
 
   "Darkside Mining Syndicate": "Pimeän puolen kaivossyndikaatti",
   "Increase your titanium production 2 steps, or 1 step if the mining rate is at least 2. And then raise the mining rate 1 step.": "Nosta titaanituotantoasi 2 askelta, tai 1 askel jos kaivosaste on vähintään 2. Nosta sitten kaivosastetta 1 askel.",
 
   "Darkside Observatory": "Pimeän puolen observatorio",
-  "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.]": "TOIMINTO: Lisää 1 tiede MIHIN TAHANSA korttiin [PAITSI niihin jotka antavat 2 VP tai enemmän per tiederesurssi.]",
-  "Action: Add 2 data to ANY card.": "TOIMINTO: Lisää 2 dataa MIHIN TAHANSA korttiin.",
+  "Action: Add 1 science to ANY card [EXCEPT those giving 2 VP or more per science resource.]": "TOIMINTO: Lisää 1 tiede MILLE TAHANSA kortille [PAITSI niihin jotka antavat 2 VP tai enemmän per tiederesurssi.]",
+  "Action: Add 2 data to ANY card.": "TOIMINTO: Lisää 2 dataa MILLE TAHANSA kortille.",
 
   "Darkside Smugglers' Union": "Pimeän puolen salakuljettajien liitto",
   "Action: Perform a trade action.": "TOIMINTO: Suorita kauppatoiminto.",
@@ -71,34 +71,34 @@
   "Spend 1 titanium. Increase your titanium production 2 steps. Raise the mining rate 1 step.": "Käytä 1 titaani. Nosta titaanituotantoasi 2 askelta. Nosta kaivosastetta 1 askel.",
 
   "Earth Embassy": "Maan suurlähetystö",
-  "Effect: When you perform an action, your PLAYED Moon tags count as Earth tags, but not vice versa.": "VAIKUTUS: Kun suoritat toiminnon, PELATUT kuusymbolisi lasketaan Maa-symboleiksi, mutta ei päinvastoin.",
+  "Effect: When you perform an action, your PLAYED Moon tags count as Earth tags, but not vice versa.": "VAIKUTUS: Kun suoritat toiminnon, PELAAMASI Kuu-ympyrät lasketaan Maa-ympyröiksi, mutta ei päinvastoin.",
 
   "Geodesic Tents": "Geodeettinen teltat",
   "Decrease your energy production 1 step and increase your plant production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Vähennä energiatuotantoasi 1 askel ja nosta kasvituotantoasi 1 askel. Käytä 1 titaani. Aseta asutuslaatta Kuuhun ja nosta asutusastetta 1 askel.",
 
-  "Grand Luna Academy": "Große Mond-Akademie",
-  "Draw 1 card per 2 Moon tags you have, including this.": "Ziehe 1 Karte pro 2 Mondsymbol, die du besitzt, einschließlich dieser.",
+  "Grand Luna Academy": "Suuri Luna-akatemia",
+  "Draw 1 card per 2 Moon tags you have, including this.": "Nosta 1 kortti jokaisesta 2 Kuu-ympyrästäsi, mukaan lukien tämä.",
 
-  "HE3 Fusion Plant": "HE3-Fusionskraftwerk",
-  "Requires the mining rate of 2 or higher. Increase your energy production 1 step for each mining tile on The Moon.": "Benötigt eine Minenwertung von 2 oder höher. Erhöhe deine Energie-Produktion um 1 für jedes Minenplättchen auf dem Mond.",
+  "HE3 Fusion Plant": "HE3 fuusiovoimala",
+  "Requires the mining rate of 2 or higher. Increase your energy production 1 step for each mining tile on The Moon.": "Vaatii kaivosasteen 2 tai korkeampi. Nosta energiatuotantoasi 1 askel jokaisesta kaivoslaatasta Kuussa.",
 
-  "HE3 Lobbyists": "HE3-Lobbyisten",
-  "Increase your M€ production 1 step for each Moon tag you have (including this).": "Erhöhe deine M€-Produktion um 1 für jedes eigene Mondsymbol (einschließlich dieser).",
+  "HE3 Lobbyists": "HE3 lobbaajat",
+  "Increase your M€ production 1 step for each Moon tag you have (including this).": "Nosta M€-tuotantoasi 1 askel jokaisesta Kuu-ympyrästäsi (mukaan lukien tämä).",
 
-  "HE3 Production Quotas": "HE3-Produktionsquoten",
-  "Requires that Kelvinists are ruling or that you have 2 delegates there, and 1 mine tile on The Moon. Pay 1 steel per mine tile on The Moon to gain 4 heat per mine tile on The Moon. Raise the mining rate 1 step.": "Benötigt Regierungspartei: KELVINISTEN oder 2+ eigene Delegierte dort, und 1 Minenplättchen auf dem Mond. Bezahle 1 Stahl pro Minenplättchen auf dem Mond, um 4 Wärme pro Minenplättchen auf dem Mond zu erhalten. Erhöhe die Minenwertung um 1.",
+  "HE3 Production Quotas": "HE3 tuotantokiintiöt",
+  "Requires that Kelvinists are ruling or that you have 2 delegates there, and 1 mine tile on The Moon. Pay 1 steel per mine tile on The Moon to gain 4 heat per mine tile on The Moon. Raise the mining rate 1 step.": "Vaatii että kelvinistit hallitsevat tai sinulla on 2 edustajaa siellä, ja 1 kaivoslaatta Kuussa. Maksa 1 teräs per kaivoslaatta Kuussa saadaksesi 4 lämpöä per kaivoslaatta Kuussa. Nosta kaivosastetta 1 askel.",
 
-  "HE3 Refinery": "HE3-Raffinerie",
-  "Action: Gain 1 M€ for each level of mining rate.": "AKTION: Erhalte 1 M€ für jede Minenwertung.",
+  "HE3 Refinery": "HE3 jalostamo",
+  "Action: Gain 1 M€ for each level of mining rate.": "TOIMINTO: Saat 1 M€ jokaisesta kaivosasteen tasosta.",
 
-  "Habitat 14": "",
-  "Decrease your energy production 1 step and your M€ production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Reduziere deine Energie-Produktion und deine M€-Produktion um 1. Bezahle 1 Titan. Platziere ein Habitatplättchen auf dem Mond und erhöhe die Habitatwertung um 1.",
+  "Habitat 14": "Asutus 14",
+  "Decrease your energy production 1 step and your M€ production 1 step. Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Vähennä energiatuotantoasi 1 askel ja M€-tuotantoasi 1 askel. Käytä 1 titaani. Aseta asutuslaatta Kuuhun ja nosta asutusastetta 1 askel.",
 
-  "Heavy Duty Rovers": "Schwerlast-Rover",
-  "Gain 4 M€ for each mining tile adjacent to a road tile. Raise the logistic rate 1 step.": "Erhalte 4 M€ für jedes Minenplättchen, das an ein Straßenplättchen angrenzt. Erhöhe die Logistikwertung um 1.",
+  "Heavy Duty Rovers": "Raskaiden töiden kuljetusajoneuvot",
+  "Gain 4 M€ for each mining tile adjacent to a road tile. Raise the logistic rate 1 step.": "Saat 4 M€ jokaisesta tielaatan vieressä olevasta kaivoslaatasta. Nosta logistiikka-astetta 1 askel.",
 
   "Heliostat Mirror Array": "Heliostat peilisarja",
-  "Spend 1 titanium. Gain 1 heat. Increase your energy production 2 steps.": "Käytä 1 titaani. Saa 1 lämpö. Nosta energiatuotantoasi 2 askelta.",
+  "Spend 1 titanium. Gain 1 heat. Increase your energy production 2 steps.": "Käytä 1 titaani. Saat 1 lämmön. Nosta energiatuotantoasi 2 askelta.",
 
   "Hostile Takeover": "Vihamielinen haltuunotto",
   "Requires a habitat rate of 2 or higher, and a mining rate of 4 or higher. Add your player marker to a habitat tile and a mining tile owned by any opponent. Those now also count as yours. Increase your M€ production 2 steps.": "Vaatii asutusasteen 2 tai korkeampi ja kaivosasteen 4 tai korkeampi. Lisää pelaajanmerkkisi vastustajan omistamaan asutus- ja kaivoslaattaan. Ne lasketaan nyt myös omiksi. Nosta M€-tuotantoasi 2 askelta.",
@@ -114,13 +114,13 @@
   "Spend 1 titanium. Increase your steel production 1 step for every 2 raised steps of mining rate.": "Käytä 1 titaani. Nosta terästuotantoasi 1 askel jokaisesta 2 kaivosasteen askeleesta.",
 
   "L.T.F. Headquarters": "L.T.F. päämaja",
-  "Raise the habitat rate 1 step. Place a colony. Gain 1 Trade Fleet.": "Nosta asutusastetta 1 askel. Aseta siirtokunta. Saa 1 kauppalaivasto.",
+  "Raise the habitat rate 1 step. Place a colony. Gain 1 Trade Fleet.": "Nosta asutusastetta 1 askel. Aseta siirtokunta. Saat 1 kauppalaivaston.",
 
   "L.T.F. Privileges": "L.T.F. etuoikeudet",
-  "Effect: When playing a Moon tag, you do not pay additional steel or titanium for playing it.": "VAIKUTUS: Kun pelaat kuusymbolin, et maksa ylimääräistä terästä tai titaania sen pelaamisesta.",
+  "Effect: When playing a Moon tag, you do not pay additional steel or titanium for playing it.": "VAIKUTUS: Kun pelaat Kuu-ympyrän, et maksa ylimääräistä terästä tai titaania sen pelaamisesta.",
 
   "Luna Conference": "Luna konferenssi",
-  "Requires that Scientists are ruling or that you have 2 delegates there. Gain 2 M€ per road tile on The Moon. Gain 2M€ per habitat tile on The Moon.": "Vaatii että tiedemiehet hallitsevat tai sinulla on 2 edustajaa siellä. Saa 2 M€ per tielaatta Kuussa. Saa 2M€ per asutuslaatta Kuussa.",
+  "Requires that Scientists are ruling or that you have 2 delegates there. Gain 2 M€ per road tile on The Moon. Gain 2M€ per habitat tile on The Moon.": "Vaatii että tutkijat hallitsevat tai sinulla on 2 edustajaa siellä. Saat 2 M€ per tielaatta Kuussa. Saat 2M€ per asutuslaatta Kuussa.",
 
   "Luna Mining Hub": "Luna kaivoskeskus",
   "Requires a mining rate of 5 or higher.": "Vaatii kaivosasteen 5 tai korkeampi.",
@@ -130,7 +130,7 @@
 
   "Luna Political Institute": "Luna poliittinen instituutti",
   "Action: Place one of your delegates in any party.": "TOIMINTO: Aseta yksi edustajistasi mihin tahansa puolueeseen.",
-  "Requires that you have 2 Moon tags.": "Vaatii että sinulla on 2 kuusymbolia.",
+  "Requires that you have 2 Moon tags.": "Vaatii että sinulla on 2 Kuu-ympyrää.",
 
   "Luna Project Office": "Luna projektitoimisto",
   "DRAW 5 CARDS DURING THE RESEARCH PHASE FOR THE NEXT 2 GENERATIONS.": "NOSTA 5 KORTTIA TUTKIMUSVAIHEESSA SEURAAVIEN 2 SUKUPOLVEN AJAN.",
@@ -139,14 +139,14 @@
   "Requires 2 habitats on The Moon. Spend 2 titanium. Decrease your energy production 1 step and increase your M€ production 3 steps. Raise the habitat rate 1 step.": "Vaatii 2 asutusta Kuussa. Käytä 2 titaania. Vähennä energiatuotantoasi 1 askel ja nosta M€-tuotantoasi 3 askelta. Nosta asutusastetta 1 askel.",
 
   "Luna Senate": "Luna senaatti",
-  "1 VP per Moon tag you have.": "1 VP jokaisesta kuusymbolistasi.",
-  "Requires that you have 3 Moon tags. Increase your M€ production 1 step per Moon tag your OPPONENTS have.": "Vaatii että sinulla on 3 kuusymbolia. Nosta M€-tuotantoasi 1 askel per vastustajien kuusymboli.",
+  "1 VP per Moon tag you have.": "1 VP jokaisesta Kuu-ympyrästäsi.",
+  "Requires that you have 3 Moon tags. Increase your M€ production 1 step per Moon tag your OPPONENTS have.": "Vaatii että sinulla on 3 Kuu-ympyrää. Nosta M€-tuotantoasi 1 askel per vastustajien Kuu-ympyrä.",
 
   "Luna Staging Station": "Luna väliasema",
   "Requires the logistic rate to be 2 or higher. Spend 1 titanium. Raise the logistic rate 2 steps.": "Vaatii logistiikka-asteen 2 tai korkeampi. Käytä 1 titaani. Nosta logistiikka-astetta 2 askelta.",
 
   "Luna Trade Station": "Luna kauppa-asema",
-  "Action: Gain 2 M€ for each habitat tile on The Moon.": "TOIMINTO: Saa 2 M€ jokaisesta asutuslaatasta Kuussa.",
+  "Action: Gain 2 M€ for each habitat tile on The Moon.": "TOIMINTO: Saat 2 M€ jokaisesta asutuslaatasta Kuussa.",
   "Spend 2 titanium. Place this tile ON THE RESERVED AREA.": "Käytä 2 titaania. Aseta tämä laatta VARATULLE ALUEELLE.",
 
   "Luna Train Station": "Luna rautatieasema",
@@ -160,10 +160,10 @@
   "Spend 2 titanium. Place a mine tile on The Moon and raise the mining rate 1 step. Increase your steel, titanium, and heat production 1 step each. Increase your energy production 2 steps.": "Käytä 2 titaania. Aseta kaivoslaatta Kuuhun ja nosta kaivosastetta 1 askel. Nosta teräs-, titaani- ja lämpötuotantoasi 1 askel kukin. Nosta energiatuotantoasi 2 askelta.",
 
   "Lunar Mine Urbanization": "Kuun kaivos-urbanisointi",
-  "Requires you have 1 mine tile. Increase your M€ production 1 step. Raise the habitat rate 1 step. Remove 1 of your mine tiles (does not affect the mining rate.) Place this special tile there, regardless of placement rules. Gain placement bonuses as usual. This tile counts both as a habitat and a mine tile.": "Vaatii että sinulla on 1 kaivoslaatta. Nosta M€-tuotantoasi 1 askel. Nosta asutusastetta 1 askel. Poista 1 kaivoslaattasi (ei vaikuta kaivosasteeseen.) Aseta tämä erikoislaatta siihen, sijoitussäännöistä riippumatta. Saa sijoitusbonukset tavallisesti. Tämä laatta lasketaan sekä asutus- että kaivoslaataksi.",
+  "Requires you have 1 mine tile. Increase your M€ production 1 step. Raise the habitat rate 1 step. Remove 1 of your mine tiles (does not affect the mining rate.) Place this special tile there, regardless of placement rules. Gain placement bonuses as usual. This tile counts both as a habitat and a mine tile.": "Vaatii että sinulla on 1 kaivoslaatta. Nosta M€-tuotantoasi 1 askel. Nosta asutusastetta 1 askel. Poista 1 kaivoslaattasi (ei vaikuta kaivosasteeseen.) Aseta tämä erikoislaatta siihen, sijoitussäännöistä riippumatta. Saat sijoitusbonukset tavallisesti. Tämä laatta lasketaan sekä asutus- että kaivoslaataksi.",
 
   "Lunar Observation Post": "Kuun tarkkailuasema",
-  "Action: Add 1 data resource to ANY card": "TOIMINTO: Lisää 1 dataresurssi MIHIN TAHANSA korttiin",
+  "Action: Add 1 data resource to ANY card": "TOIMINTO: Lisää 1 dataresurssi MILLE TAHANSA kortille",
   "Spend 1 titanium. 1 VP for every 3 data resources here.": "Käytä 1 titaani. 1 VP jokaisesta 3 dataresurssista täällä.",
 
   "Lunar Security Stations": "Kuun turva-asemat",
@@ -199,7 +199,7 @@
 
   "Moon Tether": "Kuun köysi",
   "Effect: When you play a card, you pay 2 M€ less for it.": "VAIKUTUS: Kun pelaat kortin, maksat siitä 2 M€ vähemmän.",
-  "Requires 6 space tags.": "Vaatii 6 avaruussymbolia.",
+  "Requires 6 space tags.": "Vaatii 6 avaruusympyrää.",
 
   "Mooncrate Block Factory": "Kuukraatterin lohkotehdas",
   "Lunar standard projects": "Kuun vakioprojektit",
@@ -219,16 +219,16 @@
   "Increase your energy production 1 step per city tile NOT ON MARS.": "Nosta energiatuotantoasi 1 askel per kaupunkilaatta EI MARSISSA.",
 
   "Preliminary Darkside": "Alustava pimeä puoli",
-  "Gain 3 titanium or 4 steel. Raise the mining rate 1 step.": "Saa 3 titaania tai 4 terästä. Nosta kaivosastetta 1 askel.",
+  "Gain 3 titanium or 4 steel. Raise the mining rate 1 step.": "Saat 3 titaania tai 4 terästä. Nosta kaivosastetta 1 askel.",
 
   "Pride of the Earth Arkship": "Maan ylpeys arkkilaiva",
   "Science 2 Space": "Tiede 2 Avaruus",
-  "Action: Add 1 science resource here per every 5 science tags you have.": "TOIMINTO: Lisää 1 tiederesurssi tähän jokaisesta 5 tiedesymbolistasi.",
-  "Requires 1 science and 2 space tags. Spend 2 titanium. 1 VP per science resource here.": "Vaatii 1 tiede- ja 2 avaruussymbolia. Käytä 2 titaania. 1 VP per tiederesurssi täällä.",
+  "Action: Add 1 science resource here per every 5 science tags you have.": "TOIMINTO: Lisää tähän 1 tiederesurssi tähän jokaista 5 tiedeympyrääsi kohden.",
+  "Requires 1 science and 2 space tags. Spend 2 titanium. 1 VP per science resource here.": "Vaatii 1 tiede- ja 2 avaruusympyrää. Käytä 2 titaania. 1 VP per tiederesurssi tällä kortilla.",
 
   "Processor Factory": "Prosessoritehdas",
   "1 VP for every 3 data resources here.": "1 VP jokaisesta 3 dataresurssista täällä.",
-  "Action: Spend 1 steel to add 2 data resources to ANY card.": "TOIMINTO: Käytä 1 teräs lisätäksesi 2 dataresurssia MIHIN TAHANSA korttiin.",
+  "Action: Spend 1 steel to add 2 data resources to ANY card.": "TOIMINTO: Käytä 1 teräs lisätäksesi 2 dataresurssia MILLE TAHANSA kortille.",
 
   "Revolting Colonists": "Kapinalliset siirtolaiset",
   "Requires 4 habitat rate. All players pay 3M€ for each habitat tile they own.": "Vaatii 4 asutusaste. Kaikki pelaajat maksavat 3M€ jokaisesta omistamastaan asutuslaatasta.",
@@ -247,7 +247,7 @@
   "Decrease your energy production 1 step and increase your M€ production 3 steps. Spend 1 steel. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Reduziere deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 3. Bezahle 1 Stahl. Platziere ein Straßenplättchen auf dem Mond und erhöhe die Logistikwertung um 1.",
 
   "Small Duty Rovers": "Pienet työkuljetusajoneuvot",
-  "Spend 1 titanium. Raise the logistic rate 1 step. Gain 1 M€ per habitat tile, mine tile and road tile on The Moon.": "Käytä 1 titaani. Nosta logistiikka-astetta 1 askel. Saa 1 M€ per asutus-, kaivos- ja tielaatta Kuussa.",
+  "Spend 1 titanium. Raise the logistic rate 1 step. Gain 1 M€ per habitat tile, mine tile and road tile on The Moon.": "Käytä 1 titaani. Nosta logistiikka-astetta 1 askel. Saat 1 M€ per asutus-, kaivos- ja tielaatta Kuussa.",
  
   "Solar Panel Foundry": "Aurinkopaneelien valimonoa",
   "Action: Spend 2 steel to increase your energy production 1 step.": "TOIMINTO: Käytä 2 terästä nostaaksesi energiatuotantoasi 1 askel.",
@@ -255,8 +255,8 @@
   "Sphere Habitats": "Palloasutukset",
   "Spend 1 titanium. Place a habitat tile on The Moon and raise the habitat rate 1 step.": "Käytä 1 titaani. Aseta asutuslaatta Kuuhun ja nosta asutusastetta 1 askel.",
  
-  "Staging Station \"Behemoth\"": "Schattenbahnhof \"Behemoth\"",
-  "Gain 2 Trade Fleets. Raise the logistic rate 1 step.": "Erhalte 2 Handelsflotten. Erhöhe die Logistikwertung um 1.",
+  "Staging Station \"Behemoth\"": "Väliasema \"Behemoth\"",
+  "Gain 2 Trade Fleets. Raise the logistic rate 1 step.": "Saat 2 kauppalaivastoa. Nosta logistiikka-astetta 1 askel.",
 
   "Steel Market Monopolists": "Teräsmarkkinoiden monopolistit",
   "Requires the mining rate to be 3 or higher.": "Vaatii kaivosasteen 3 tai korkeampi.",
@@ -283,30 +283,30 @@
   "Action: Spend 2X M€ to gain X titanium [max 8 M€]": "TOIMINTO: Käytä 2X M€ saadaksesi X titaania [enintään 8 M€]",
   "Action: Spend X titanium to gain 4X M€ [max 4 titanium].": "TOIMINTO: Käytä X titaania saadaksesi 4X M€ [enintään 4 titaania].",
 
-  "Tycho Road Network": "Tycho-Straßennetz",
-  "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Bezahle 1 Stahl. Erhöhe deine M€-Produktion um 1. Platziere ein Straßenplättchen auf dem Mond und erhöhe die Logistikwertung um 1.",
+  "Tycho Road Network": "Tycho tieverkosto",
+  "Spend 1 steel. Increase your M€ production 1 step. Place a road tile on The Moon and raise the Logistics Rate 1 step.": "Käytä 1 teräs. Nosta M€-tuotantoasi 1 askel. Aseta tielaatta Kuuhun ja nosta logistiikka-astetta 1 askel.",
 
   "Underground Detonators": "Maanalaiset räjäytteet",
-  "Gain 1 steel and 1 titanium. Raise the mining rate 1 step.": "Saa 1 teräs ja 1 titaani. Nosta kaivosastetta 1 askel.",
+  "Gain 1 steel and 1 titanium. Raise the mining rate 1 step.": "Saat 1 teräksen ja 1 titaanin. Nosta kaivosastetta 1 askel.",
 
-  "Undermoon Drug Lords Network": "Untergrundnetzwerk der Drogenbarone",
-  "Increase your M€ production 1 step per 2 steps of habitat rate.": "Erhöhe deine M€-Produktion um 1 je 2 erhöhte Habitatwertung.",
+  "Undermoon Drug Lords Network": "Kuun alaisten huumeparonien verkosto",
+  "Increase your M€ production 1 step per 2 steps of habitat rate.": "Nosta M€-tuotantoasi 1 askel jokaisesta 2 asutusasteen askeleesta.",
 
   "Water Treatment Complex": "Vedenkäsittelykompleksi",
   "Requires 1 habitat tile on The Moon. Spend 1 titanium. Raise the habitat rate 2 steps.": "Vaatii 1 asutuslaatta Kuussa. Käytä 1 titaani. Nosta asutusastetta 2 askelta.",
 
-  "We Grow As One": "Wir wachsen als Einheit",
-  "Requires that Unity are ruling or that you have 2 delegates there. Increase ALL colony tile tracks 1 step. Increase each colony tile track 1 step if you have a colony on that colony tile.": "Benötigt Regierungspartei EINIGKEIT oder 2+ eigene Delegierte dort. Erhöhe ALLE Kolonieleisten um 1. Erhöhe jede Kolonieleiste um 1, wenn du eine Kolonie auf diesem Kolonieplättchen hast.",
+  "We Grow As One": "Kasvamme yhdessä",
+  "Requires that Unity are ruling or that you have 2 delegates there. Increase ALL colony tile tracks 1 step. Increase each colony tile track 1 step if you have a colony on that colony tile.": "Vaatii että yhtenäisyys hallitsee tai sinulla on 2 edustajaa siellä. Nosta KAIKKIA siirtokuntalaattojen ratoja 1 askel. Nosta jokaista siirtokuntalaatan rataa 1 askel jos sinulla on siirtokunta kyseisellä siirtokuntalaatalla.",
 
-  "Martian Embassy": "Botschaft des Mars",
-  "Raise the Mars Planetary Track 1 step for every 3 Moon tags you have, including this.": "Erhöhe die Mars-Planetenbahn um 1 je eigene 3 Mondsymbole, einschließlich dieser.",
-  
-  "Luna Archives": "Luna arkistot",
-  "Action: Add 1 science resource here for each Moon tag you have.": "TOIMINTO: Lisää 1 tiederesurssi tähän jokaisesta kuusymbolistasi.",
-  "Effect: When playing a Moon tag, science resources here may be used as payment, and are worth 1M€ each.": "VAIKUTUS: Kun pelaat kuusymbolin, tiederesursseja täältä voi käyttää maksuna, ja ne ovat 1M€ arvoisia.",
+  "Martian Embassy": "Marsin suurlähetystö",
+  "Raise the Mars Planetary Track 1 step for every 3 Moon tags you have, including this.": "Nosta Marsin planeettarataa 1 askel jokaisesta 3 Kuu-ympyrästäsi, mukaan lukien tämä."
+,  
+  "Luna Archives": "Luna-arkistot",
+  "Action: Add 1 science resource here for each Moon tag you have.": "TOIMINTO: Lisää 1 tiederesurssi tähän jokaisesta Kuu-ympyrästäsi.",
+  "Effect: When playing a Moon tag, science resources here may be used as payment, and are worth 1M€ each.": "VAIKUTUS: Kun pelaat Kuu-ympyrän, tiederesursseja täältä voi käyttää maksuna, ja ne ovat 1M€ arvoisia.",
 
   "Luna Ecumenopolis": "Luna ekumenopolis",
-  "Spend 2 titanium. Place 2 habitat tiles adjacent to at least 2 other habitat tiles and raise habitat rate 2 steps. Increase your TR 1 step for each 2 steps of the habitat rate.": "Käytä 2 titaania. Aseta 2 asutuslaattaa vähintään 2 muun asutuslaatan viereen ja nosta asutusastetta 2 askelta. Nosta TR:ää 1 askel jokaisesta 2 asutusasteen askeleesta.",
+  "Spend 2 titanium. Place 2 habitat tiles adjacent to at least 2 other habitat tiles and raise habitat rate 2 steps. Increase your TR 1 step for each 2 steps of the habitat rate.": "Käytä 2 titaania. Aseta 2 asutuslaattaa vähintään 2 muun asutuslaatan viereen ja nosta asutusastetta 2 askelta. Nosta MKL:ääsi 1 askel jokaisesta 2 asutusasteen askeleesta.",
 
   "Steal": "Varasta",
   "Habitat rate": "Asutusaste",

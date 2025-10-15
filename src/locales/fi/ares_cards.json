@@ -15,24 +15,24 @@
 
   "Bioengineering Enclosure": "Biotekniikan suoja-alue",
   "Action: Remove 1 animal from THIS card to add 1 animal to ANOTHER card.": "TOIMINTO: Poista 1 eläin TÄLTÄ kortilta lisätäksesi 1 eläimen TOISELLE kortille.",
-  "Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.": "Vaatii 1 tiede-tunnisteen. Lisää 2 eläintä tälle kortille. MUUT EIVÄT VOI POISTAA ELÄIMIÄ TÄLTÄ KORTILTA.",
+  "Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.": "Vaatii 1 tiedeympyrän. Lisää 2 eläintä tälle kortille. MUUT EIVÄT VOI POISTAA ELÄIMIÄ TÄLTÄ KORTILTA.",
 
-  "Butterfly Effect": "Perhosefekti",
-  "Gain 1 TR. Move each hazard marker up to 1 step up or down along its terraforming track.": "Hanki 1 TR. Siirrä jokaista vaaramarkeria enintään 1 askel ylös tai alas sen terraformointiuralla.",
-  "All hazard markers": "Kaikki vaaramarkerit",
+  "Butterfly Effect": "Perhosvaikutus",
+  "Gain 1 TR. Move each hazard marker up to 1 step up or down along its terraforming track.": "Nosta MKL:ääsi 1 askel. Siirrä jokaista vaaramerkkiä enintään 1 askel ylös tai alas sen maankaltaistuspolulla.",
+  "All hazard markers": "Kaikki vaaramerkit",
 
   "Geological Survey": "Geologinen tutkimus",
-  "Any max 5 Greeneries": "Enintään 5 viheraluetta",
+  "Any max 5 Greeneries": "Enintään 5 kasvillisuuslaattaa",
   "Effect: When placing a tile ON MARS grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain.": "VAIKUTUS: Kun laatan asettaminen MARSIIN antaa sinulle terästä, titaania tai lämpöä, saat yhden lisäresurssin jokaisesta saamastasi resurssista.",
-  "Requires 5 or fewer greeneries on Mars.": "Vaatii 5 tai vähemmän viheraluetta Marsissa.",
+  "Requires 5 or fewer greeneries on Mars.": "Vaatii 5 tai vähemmän kasvillisuuslaattaa Marsissa.",
 
   "Ecological Survey": "Ekologinen tutkimus",
-  "Any 3 Greeneries": "3 viheraluetta",
+  "Any 3 Greeneries": "3 kasvillisuuslaattaa",
   "Effect: When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain.": "VAIKUTUS: Kun laatan asettaminen antaa sinulle kasveja, eläimiä tai mikrobeja, saat yhden lisäresurssin jokaisesta saamastasi resurssista.",
-  "Requires 3 greeneries on Mars.": "Vaatii 3 viheraluetta Marsissa.",
+  "Requires 3 greeneries on Mars.": "Vaatii 3 kasvillisuuslaattaa Marsissa.",
 
   "Magnetic Field Generators": "Magneettikentän generaattorit",
-  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile. It provides adjacency bonus of 1 plant and 1 microbe.": "Vähennä energiatuotantoasi 4 askelta ja lisää kasvintuotantoasi 2 askelta. Nosta TR:ää 3 askelta. Aseta tämä laatta. Se antaa vierekkäisyysbonuksen 1 kasvi ja 1 mikrobi.",
+  "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile. It provides adjacency bonus of 1 plant and 1 microbe.": "Vähennä energiatuotantoasi 4 askelta ja lisää kasvintuotantoasi 2 askelta. Nosta MKL:ääsi 3 askelta. Aseta tämä laatta. Se antaa vierekkäisyysbonuksen 1 kasvi ja 1 mikrobi.",
 
   "Mining Rights": "Kaivososikeudet",
   "Place one of these tiles on an area with a steel or titanium placement bonus. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "Aseta yksi näistä laatoista alueelle jossa on teräs- tai titaaniasettamisbonus. Tämä laatta antaa VIEREKKÄISYYSBONUKSEN samasta resurssista kuin alue. Lisää kyseisen resurssin tuotantoasi 1 askel.",
@@ -61,12 +61,12 @@
   "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. It provides adjacency bonus of 1 asteroid and 1 steel. Remove up to 6 plants from any player.": "Nosta lämpötilaa 3 askelta ja hanki 4 terästä. Aseta tämä laatta EI KAUPUNKILAATAN VIEREEN. Se antaa vierekkäisyysbonuksen 1 asteroidi ja 1 teräs. Poista enintään 6 kasvia miltä tahansa pelaajalta.",
 
   "Ecological Zone": "Ekologinen vyöhyke",
-  "Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.": "VAIKUTUS: Kun pelaat eläin- tai kasvi-tunnisteen NÄITÄ MUKAAN LUKIEN, lisää eläin tälle kortille.",
+  "Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.": "VAIKUTUS: Kun pelaat eläin- tai kasviympyrän NÄMÄ MUKAAN LUKIEN, lisää eläin tälle kortille.",
   "The tile grants an ADJACENCY BONUS of 1 animal. 1 VP per 2 animals on this card.": "Laatta antaa VIEREKKÄISYYSBONUKSEN 1 eläin. 1 VP jokaista 2 eläintä kohden tällä kortilla.",
-  "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "Vaatii että SINULLA on viherlaatta. Aseta tämä laatta MINKÄ TAHANSA viheralueen viereen.",
+  "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "Vaatii että SINULLA on viherlaatta. Aseta tämä laatta MINKÄ TAHANSA kasvillisuuslaatan viereen.",
 
   "Bio-Fertilizer Facility": "Biolannoitetehdas",
-  "Requires 1 science tag. Increase your plant production 1 step. Add up to 2 microbes to ANY card. Place this tile which grants an ADJACENCY BONUS of 1 plant and 1 microbe.": "Vaatii 1 tiede-tunnisteen. Lisää kasvintuotantoasi 1 askel. Lisää enintään 2 mikrobia MIHIN TAHANSA korttiin. Aseta tämä laatta joka antaa VIEREKKÄISYYSBONUKSEN 1 kasvi ja 1 mikrobi.",
+  "Requires 1 science tag. Increase your plant production 1 step. Add up to 2 microbes to ANY card. Place this tile which grants an ADJACENCY BONUS of 1 plant and 1 microbe.": "Vaatii 1 tiedeympyrän. Lisää kasvintuotantoasi 1 askel. Lisää enintään 2 mikrobia MILLE TAHANSA kortille. Aseta tämä laatta joka antaa VIEREKKÄISYYSBONUKSEN 1 kasvi ja 1 mikrobi.",
 
   "Metallic Asteroid": "Metalliasteroidi",
   "Raise temperature 1 step and gain 1 titanium. Remove up to 4 plants from any player. Place this tile which grants an ADJACENCY BONUS of 1 titanium.": "Nosta lämpötilaa 1 askel ja hanki 1 titaani. Poista enintään 4 kasvia miltä tahansa pelaajalta. Aseta tämä laatta joka antaa VIEREKKÄISYYSBONUKSEN 1 titaani.",
@@ -74,7 +74,7 @@
   "Ocean Farm": "Meriviljelmä",
   "Requires 4 ocean tiles. Increase your heat production 1 step and increase your plant production 1 step. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 plant.": "Vaatii 4 merilaattaa. Lisää lämpötuotantoasi 1 askel ja kasvintuotantoasi 1 askel. Aseta tämä laatta olemassa olevan merilaatan päälle. Laatta antaa VIEREKKÄISYYSBONUKSEN 1 kasvi.",
 
-  "Commercial District": "Kauppakortelli",
+  "Commercial District": "Liikekeskusta",
   "1 VP per adjacent city tile.": "1 VP jokaista viereistä kaupunkilaattaa kohden.",
   "Place this tile which grants an ADJACENCY BONUS of 2 M€. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Aseta tämä laatta joka antaa VIEREKKÄISYYSBONUKSEN 2 M€. Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 4 askelta.",
 

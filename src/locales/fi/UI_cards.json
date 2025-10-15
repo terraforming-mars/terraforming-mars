@@ -72,7 +72,7 @@
   "max 6 Oceans": "maks. 6 valtamerta",
   "max 7 Oceans": "maks. 7 valtamerta",
   "max 8 Oceans": "maks. 8 valtamerta",
-  "25 TR": "25 TR",
+  "25 TR": "25 MKL",
   "1% O2": "1% O2",
   "2% O2": "2% O2",
   "3% O2": "3% O2",
@@ -145,7 +145,7 @@
   "Venus requirements": "Venus-vaatimukset",
   ": +/- 2": ": +/- 2",
   "Project Requirements": "Hankevaatimukset",
-  "effect": "efekti",
+  "effect": "vaikutus",
   "action": "toiminto",
   "Action": "Toiminto",
   "flip": "käännä",
@@ -177,7 +177,7 @@
   "Sell": "Myy",
   "Select prelude card to play": "Valitse pelattava alkusoittokortti",
   "Select space for ocean tile": "Valitse tila valtamerenlattalle",
-  "Gain 3 plants.": "Saa 3 kasvia.",
+  "Gain 3 plants.": "Saat 3 kasvia.",
   "colony": "Siirtokunta",
   "awards": "Palkinnot",
   "corporation": "yhtiö",
@@ -187,9 +187,9 @@
   "play": "pelaa",
   "replay": "pelaa uudelleen",
 
-  "1 VP for each animal on this card.": "1 VP per eläin tässä kortissa.",
-  "1 VP per animal on this card.": "1 VP per eläin tässä kortissa.",
-  "1 VP per 2 animals on this card.": "1 VP per 2 eläintä tässä kortissa.",
+  "1 VP for each animal on this card.": "1 VP per eläin tällä kortilla.",
+  "1 VP per animal on this card.": "1 VP per eläin tällä kortilla.",
+  "1 VP per 2 animals on this card.": "1 VP per 2 eläintä tällä kortilla.",
 
   "${0} placed ${1} tile on (${2}, ${3}": "${0} asetti \"${1}\" laatan kohtaan (${2}, ${3}."
 }

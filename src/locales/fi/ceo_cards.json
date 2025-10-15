@@ -17,123 +17,123 @@
   "Draw 3 CEO cards and take one to your hand, it will be played on your first turn. Discard the other 2.": "Nosta 3 CEO-korttia ja ota yksi käteesi, se pelataan ensimmäisellä vuorollasi. Hylkää muut 2.",
 
   "Apollo": "Apollo",
-  "Once per game, gain 3 M€ for each tile on The Moon.": "Kerran per peli, saa 3 M€ per laatta Kuussa.",
+  "Once per game, gain 3 M€ for each tile on The Moon.": "Kerran pelissä, saat 3 M€ per laatta Kuussa.",
 
   "Asimov": "Asimov",
-  "Effect: You have +2 score for all awards.": "EFEKTI: Sinulla on +2 pistettä kaikkiin palkintoihin.",
-  "Once per game, draw 10-X awards (min. 1), where X is the current generation number. You may put one into the game and fund it for free.": "Kerran per peli, nosta 10-X palkintoa (min. 1), missä X on nykyinen sukupolvinumero. Saat laittaa yhden peliin ja rahoittaa sen ilmaiseksi.",
+  "Effect: You have +2 score for all awards.": "VAIKUTUS: Sinulla on +2 pistettä kaikkiin palkintoihin.",
+  "Once per game, draw 10-X awards (min. 1), where X is the current generation number. You may put one into the game and fund it for free.": "Kerran pelissä, nosta 10-X palkintoa (min. 1), missä X on nykyinen sukupolvinumero. Saat laittaa yhden peliin ja rahoittaa sen ilmaiseksi.",
 
   "Bjorn": "Björn",
-  "Once per game, steal X+2 M€ from each player that has more M€ than you, where X is the current generation number.": "Kerran per peli, varasta X+2 M€ jokaiselta pelaajalta, jolla on enemmän M€ kuin sinulla, missä X on nykyinen sukupolvinumero.",
+  "Once per game, steal X+2 M€ from each player that has more M€ than you, where X is the current generation number.": "Kerran pelissä, varasta X+2 M€ jokaiselta pelaajalta, jolla on enemmän M€ kuin sinulla, missä X on nykyinen sukupolvinumero.",
 
   "Caesar": "Caesar",
-  "Once per game, place X hazard tiles where X is the current generation number. Each opponent loses 1 unit of production of their choice, or 2 units if there are 6 or more hazard tiles.": "Kerran per peli, aseta X vaaralattaa missä X on nykyinen sukupolvinumero. Jokainen vastustaja menettää 1 tuotantoyksikön valintansa mukaan, tai 2 yksikköä jos on 6 tai enemmän vaaralaattaa.",
+  "Once per game, place X hazard tiles where X is the current generation number. Each opponent loses 1 unit of production of their choice, or 2 units if there are 6 or more hazard tiles.": "Kerran pelissä, aseta X vaaralattaa missä X on nykyinen sukupolvinumero. Jokainen vastustaja menettää 1 tuotantoyksikön valintansa mukaan, tai 2 yksikköä jos on 6 tai enemmän vaaralaattaa.",
 
   "Clarke": "Clarke",
-  "Once per game, increase your plant and heat production 1 step each. Gain plants and heat equal to your production +4.": "Kerran per peli, lisää kasvi- ja lämpötuotantoasi 1 askel kumpikin. Saa kasveja ja lämpöä tuotantosi verran +4.",
+  "Once per game, increase your plant and heat production 1 step each. Gain plants and heat equal to your production +4.": "Kerran pelissä, lisää kasvi- ja lämpötuotantoasi 1 askel kumpikin. Saatkasveja ja lämpöä tuotantosi verran +4.",
 
   "Duncan": "Duncan",
-  "Once per game, gain 7-X VP and 4X M€, where X is the current generation number.": "Kerran per peli, saa 7-X VP ja 4X M€, missä X on nykyinen sukupolvinumero.",
+  "Once per game, gain 7-X VP and 4X M€, where X is the current generation number.": "Kerran pelissä, saat 7-X VP ja 4X M€, missä X on nykyinen sukupolvinumero.",
 
   "Ender": "Ender",
-  "Once per game, discard any number of cards up to twice the current generation number to draw that many cards.": "Kerran per peli, hylkää mikä tahansa määrä kortteja enintään kaksi kertaa nykyinen sukupolvinumero nostaaksesi saman verran kortteja.",
+  "Once per game, discard any number of cards up to twice the current generation number to draw that many cards.": "Kerran pelissä, hylkää mikä tahansa määrä kortteja enintään kaksi kertaa nykyinen sukupolvinumero nostaaksesi saman verran kortteja.",
 
   "Faraday": "Faraday",
-  "When you gain a multiple of 5 for any tag type IN PLAY, you may pay 3 M€ to draw a card with that tag. Wild tags do not count for this effect.": "EFEKTI: Kun sinulla on 5:n monikerta mitä tahansa symbolityyppiä PELISSÄ, saat maksaa 3 M€ nostaaksesi kortin tällä symbolilla. Villisymbolit eivät laske tähän efektiin.",
+  "When you gain a multiple of 5 for any tag type IN PLAY, you may pay 3 M€ to draw a card with that tag. Wild tags do not count for this effect.": "VAIKUTUS: Kun olet PELANNUT 5:n monikerran mitä tahansa ympyrätyyppiä, saat maksaa 3 M€ nostaaksesi sen ympyrätyypin kortin. Jokeriympyröitä ei huomioida.",
 
   "Floyd": "Floyd",
-  "Once per game, play a card from hand for 13 + 2X M€ less, where X is the current generation number.": "Kerran per peli, pelaa kortti kädestä 13 + 2X M€ halvemmalla, missä X on nykyinen sukupolvinumero.",
+  "Once per game, play a card from hand for 13 + 2X M€ less, where X is the current generation number.": "Kerran pelissä, pelaa kortti kädestä 13 + 2X M€ halvemmalla, missä X on nykyinen sukupolvinumero.",
 
   "Gaia": "Gaia",
-  "Once per game, gain the Ares adjacency bonuses of all player-owned tiles on Mars.": "Kerran per peli, saa Ares-viereisilllabonukset kaikista pelaajien omistamista laatoista Marsissa.",
+  "Once per game, gain the Ares adjacency bonuses of all player-owned tiles on Mars.": "Kerran pelissä, saat Ares-viereisilllabonukset kaikista pelaajien omistamista laatoista Marsissa.",
 
   "Gordon": "Gordon",
-  "Effect: Ignore placement restrictions for greenery and city tiles on Mars.": "EFEKTI: Sivuuta sijoitusrajoitukset vihreille alueille ja kaupunkilaatoille Marsissa.",
-  "Effect: Gain 2 M€ when you place a greenery or city tile on Mars.": "EFEKTI: Saa 2 M€ kun asetat vihreän alueen tai kaupunkilaatan Marsiin.",
+  "Effect: Ignore placement restrictions for greenery and city tiles on Mars.": "VAIKUTUS: Sivuuta sijoitusrajoitukset vihreille alueille ja kaupunkilaatoille Marsissa.",
+  "Effect: Gain 2 M€ when you place a greenery or city tile on Mars.": "VAIKUTUS: Saat2 M€ kun asetat vihreän alueen tai kaupunkilaatan Marsiin.",
 
   "Greta": "Greta",
-  "When you take an action or play a card that increases your TR THIS GENERATION (max 10 times), gain 4 M€.": "Kun teet toiminnon tai pelaat kortin, joka lisää TR:ääsi TÄSSÄ SUKUPOLVESSA (max 10 kertaa), saa 4 M€.",
+  "When you take an action or play a card that increases your TR THIS GENERATION (max 10 times), gain 4 M€.": "Kun teet toiminnon tai pelaat kortin, joka nostaa MKL:ääsi TÄSSÄ SUKUPOLVESSA (max 10 kertaa), saat 4 M€.",
 
   "HAL 9000": "HAL 9000",
-  "Once per game, decrease each of your productions 1 step to gain 4 of that resource.": "Kerran per peli, vähennä kutakin tuotantoasi 1 askel saadaksesi 4 kyseistä resurssia.",
+  "Once per game, decrease each of your productions 1 step to gain 4 of that resource.": "Kerran pelissä, vähennä kutakin tuotantoasi 1 askel saadaksesi 4 kyseistä resurssia.",
 
   "Huan": "Huan",
-  "ALL OPPONENTS CANNOT TRADE NEXT GENERATION. Gain 1 Trade Fleet.": "KAIKKI VASTUSTAJAT EIVÄT VOI KÄYDÄ KAUPPAA SEURAAVASSA SUKUPOLVESSA. Saa 1 kauppalaivasto.",
+  "ALL OPPONENTS CANNOT TRADE NEXT GENERATION. Gain 1 Trade Fleet.": "KAIKKI VASTUSTAJAT EIVÄT VOI KÄYDÄ KAUPPAA SEURAAVASSA SUKUPOLVESSA. Saat 1 kauppalaivaston.",
 
   "Ingrid": "Ingrid",
   "When you take an action that places a tile on Mars THIS GENERATION, draw a card.": "Kun teet toiminnon, joka asettaa laatan Marsiin TÄSSÄ SUKUPOLVESSA, nosta kortti.",
 
   "Jansson": "Jansson",
-  "Once per game, gain all placement bonuses under your tiles on Mars.": "Kerran per peli, saa kaikki sijoitusbonukset latattojesi alta Marsissa.",
+  "Once per game, gain all placement bonuses under your tiles on Mars.": "Kerran pelissä, saat kaikki sijoitusbonukset latattojesi alta Marsissa.",
 
   "Karen": "Karen",
-  "Once per game, draw Prelude cards equal to the current generation number and choose one to play, and discard the rest.": "Kerran per peli, nosta Prelude-kortteja nykyisen sukupolvinumeron verran ja valitse yksi pelattavaksi, hylkää loput.",
+  "Once per game, draw Prelude cards equal to the current generation number and choose one to play, and discard the rest.": "Kerran pelissä, nosta Prelude-kortteja nykyisen sukupolvinumeron verran ja valitse yksi pelattavaksi, hylkää loput.",
 
   "Lowell": "Lowell",
-  "Once per game, pay 8 M€ to draw 3 CEO cards and choose one to play. Discard this card.": "Kerran per peli, maksa 8 M€ nostaaksesi 3 CEO-korttia ja valitse yksi pelattavaksi. Hylkää tämä kortti.",
+  "Once per game, pay 8 M€ to draw 3 CEO cards and choose one to play. Discard this card.": "Kerran pelissä, maksa 8 M€ nostaaksesi 3 CEO-korttia ja valitse yksi pelattavaksi. Hylkää tämä kortti.",
 
   "Maria": "Maria",
-  "Once per game, draw colony tiles equal to the current generation number. Put one into play and build a colony on it for free if possible.": "Kerran per peli, nosta siirtokuntalaattoja nykyisen sukupolvinumeron verran. Laita yksi peliin ja rakenna siihen siirtokunta ilmaiseksi jos mahdollista.",
+  "Once per game, draw colony tiles equal to the current generation number. Put one into play and build a colony on it for free if possible.": "Kerran pelissä, nosta siirtokuntalaattoja nykyisen sukupolvinumeron verran. Laita yksi peliin ja rakenna siihen siirtokunta ilmaiseksi jos mahdollista.",
 
   "Musk": "Musk",
-  "Once per game, discard any number of Earth cards to draw that many space cards, and gain that many units of titanium, plus 6.": "Kerran per peli, hylkää mikä tahansa määrä Maa-kortteja nostaaksesi saman verran avaruuskortteja, ja saa saman verran titaaniyksikköjä, plus 6.",
+  "Once per game, discard any number of Earth cards to draw that many space cards, and gain that many units of titanium, plus 6.": "Kerran pelissä, hylkää mikä tahansa määrä Maa-kortteja nostaaksesi saman verran avaruuskortteja, ja saat saman verran titaaniyksikköjä, plus 6.",
 
   "Naomi": "Naomi",
-  "Effect: When you build a colony, gain 2 energy and 3 M€.": "EFEKTI: Kun rakennat siirtokunnan, saa 2 energiaa ja 3 M€.",
-  "Once per game, move each colony tile track marker to its highest or lowest value.": "Kerran per peli, siirrä jokainen siirtokuntalaatan arvosanan merkki korkeimpaan tai matalimpaan arvoon.",
+  "Effect: When you build a colony, gain 2 energy and 3 M€.": "VAIKUTUS: Kun rakennat siirtokunnan, saat 2 energiaa ja 3 M€.",
+  "Once per game, move each colony tile track marker to its highest or lowest value.": "Kerran pelissä, siirrä jokainen siirtokuntalaatan arvosanan merkki korkeimpaan tai matalimpaan arvoon.",
 
   "Neil": "Neil",
-  "Effect: Gain 1 M€ when any player plays a Moon tag.": "EFEKTI: Saa 1 M€ kun kuka tahansa pelaaja pelaa Kuu-symbolin.",
-  "Once per game, increase your M€ production by the value of the LOWEST Moon rate.": "Kerran per peli, lisää M€-tuotantoasi MATALIMMAN Kuu-arvosanan verran.",
+  "Effect: Gain 1 M€ when any player plays a Moon tag.": "VAIKUTUS: Saat 1 M€ kun kuka tahansa pelaaja pelaa Kuu-ympyrän.",
+  "Once per game, increase your M€ production by the value of the LOWEST Moon rate.": "Kerran pelissä, lisää M€-tuotantoasi MATALIMMAN Kuu-arvosanan verran.",
 
   "Oscar": "Oscar",
-  "Effect: You have +1 influence": "EFEKTI: Sinulla on +1 vaikutusvalta.",
-  "Once per game, replace the Chairman with one of your delegates.": "Kerran per peli, korvaa puheenjohtaja yhdellä edustajistasi.",
+  "Effect: You have +1 influence": "VAIKUTUS: Sinulla on +1 vaikutusvalta.",
+  "Once per game, replace the Chairman with one of your delegates.": "Kerran pelissä, korvaa puheenjohtaja yhdellä edustajistasi.",
 
   "Petra": "Petra",
-  "Once per game, replace all Neutral delegates with your delegates. Gain 3 M€ for each delegate replaced this way. Place 3 Neutral delegates.": "Kerran per peli, korvaa kaikki neutraalit edustajat edustajillasi. Saa 3 M€ per tällä tavoin korvattu edustaja. Aseta 3 neutraalia edustajaa.",
+  "Once per game, replace all Neutral delegates with your delegates. Gain 3 M€ for each delegate replaced this way. Place 3 Neutral delegates.": "Kerran pelissä, korvaa kaikki neutraalit edustajat edustajillasi. Saat 3 M€ per tällä tavoin korvattu edustaja. Aseta 3 neutraalia edustajaa.",
 
   "Quill": "Quill",
-  "Once per game, add 2 floaters to each of your cards that collect floaters, then add 2 floaters to ANY card. Gain 1 M€ for every 2 floaters added this way.": "Kerran per peli, lisää 2 kelluketta jokaiseen korttiisi, joka kerää kellukkeita, sitten lisää 2 kelluketta MIHIN TAHANSA korttiin. Saa 1 M€ per 2 kelluketta, jotka lisäsit tällä tavoin.",
+  "Once per game, add 2 floaters to each of your cards that collect floaters, then add 2 floaters to ANY card. Gain 1 M€ for every 2 floaters added this way.": "Kerran pelissä, lisää 2 kelluketta jokaiseen korttiisi, joka kerää kellukkeita, sitten lisää 2 kelluketta MILLE TAHANSA kortille. Saat 1 M€ per 2 kelluketta, jotka lisäsit tällä tavoin.",
 
   "Rogers": "Rogers",
-  "Ignore global requirements for your Venus cards THIS GENERATION. When you play a Venus tag THIS GENERATION, you pay 3 M€ less for it.": "Sivuuta globaalit vaatimukset Venus-korteillesi TÄSSÄ SUKUPOLVESSA. Kun pelaat Venus-symbolin TÄSSÄ SUKUPOLVESSA, maksat siitä 3 M€ vähemmän.",
+  "Ignore global requirements for your Venus cards THIS GENERATION. When you play a Venus tag THIS GENERATION, you pay 3 M€ less for it.": "Sivuuta globaalit vaatimukset Venus-korteillesi TÄSSÄ SUKUPOLVESSA. Kun pelaat Venus-ympyrän TÄSSÄ SUKUPOLVESSA, maksat siitä 3 M€ vähemmän.",
 
   "Ryu": "Ryu",
   "SWAP X+2": "VAIHDA X+2",
-  "Once per game, swap up to X+2 units of production between two resources, where X is the current generation number.": "Kerran per peli, vaihda enintään X+2 tuotantoyksikköä kahden resurssin välillä, missä X on nykyinen sukupolvinumero.",
+  "Once per game, swap up to X+2 units of production between two resources, where X is the current generation number.": "Kerran pelissä, vaihda enintään X+2 tuotantoyksikköä kahden resurssin välillä, missä X on nykyinen sukupolvinumero.",
 
   "Shara": "Shara",
-  "Once per game, choose a planet tag. This card counts as having immediately played 2 of that tag. Then gain M€ equal to that tags planety influence track.": "Kerran per peli, valitse planeettasymboli. Tämä kortti lasketaan ikään kuin olisit pelannut heti 2 kyseistä symbolia. Sitten saa M€ kyseisen symbolin planeetan vaikutusvallan verran.",
+  "Once per game, choose a planet tag. This card counts as having immediately played 2 of that tag. Then gain M€ equal to that tags planety influence track.": "Kerran pelissä, valitse planeettaympyrä. Tämä kortti lasketaan ikään kuin olisit pelannut heti 2 kyseistä ympyrää. Sitten saat M€ kyseisen ympyrän planeetan vaikutusvallan verran.",
 
   "Stefan": "Stefan",
-  "Once per game, sell any number of cards from your hand for 3 M€ each.": "Kerran per peli, myy mikä tahansa määrä kortteja kädestäsi 3 M€ per kortti.",
+  "Once per game, sell any number of cards from your hand for 3 M€ each.": "Kerran pelissä, myy mikä tahansa määrä kortteja kädestäsi 3 M€ per kortti.",
 
   "Tate": "Tate",
-  "Once per game, name a tag. Reveal cards from the deck until you find 5 cards with that tag. BUY up to 2 cards and discard the rest.": "Kerran per peli, nimeä symboli. Paljasta kortteja pakasta kunnes löydät 5 korttia tällä symbolilla. OSTA enintään 2 korttia ja hylkää loput.",
+  "Once per game, name a tag. Reveal cards from the deck until you find 5 cards with that tag. BUY up to 2 cards and discard the rest.": "Kerran pelissä, nimeä ympyrä. Paljasta kortteja pakasta kunnes löydät 5 korttia, joissa on kyseinen ympyrä. OSTA enintään 2 korttia ja hylkää loput.",
 
   "Ulrich": "Ulrich",
-  "Once per game, gain 4 M€ for each ocean placed. If all oceans are aleady placed, gain only 15 M€.": "Kerran per peli, saa 4 M€ per asetettu meri. Jos kaikki meret on jo asetettu, saa vain 15 M€.",
+  "Once per game, gain 4 M€ for each ocean placed. If all oceans are aleady placed, gain only 15 M€.": "Kerran pelissä, saat 4 M€ per asetettu meri. Jos kaikki meret on jo asetettu, saat vain 15 M€.",
 
   "Van Allen": "Van Allen",
-  "Effect: MILESTONES ALWAYS COST 0 M€ FOR YOU.": "EFEKTI: VÄLITAVOITTEET MAKSAVAT SINULLE AINA 0 M€.",
-  "Effect: When any milestone is claimed, gain 3 M€.": "EFEKTI: Kun mikä tahansa välitavoite lunastetaan, saa 3 M€.",
+  "Effect: MILESTONES ALWAYS COST 0 M€ FOR YOU.": "VAIKUTUS: VÄLITAVOITTEET MAKSAVAT SINULLE AINA 0 M€.",
+  "Effect: When any milestone is claimed, gain 3 M€.": "VAIKUTUS: Kun mikä tahansa välitavoite lunastetaan, saat 3 M€.",
 
   "Will": "Will",
-  "Once per game, add the following resources to your cards: 2 animals, 2 microbes, 2 floaters, 2 wild.": "Kerran per peli, lisää seuraavat resurssit kortteihisi: 2 eläintä, 2 mikrobia, 2 kelluketta, 2 villiä.",
+  "Once per game, add the following resources to your cards: 2 animals, 2 microbes, 2 floaters, 2 wild.": "Kerran pelissä, lisää seuraavat resurssit kortteihisi: 2 eläintä, 2 mikrobia, 2 kelluketta, 2 villiä.",
 
   "Xavier": "Xavier",
-  "Once per game, gain 2 wild tags for THIS GENERATION.": "Kerran per peli, saa 2 villisymbolia TÄLLE SUKUPOLVELLE.",
-  "Effect: AFTER this action has been used, when playing a card with a requirement, you pay 1 M€ less for it.": "EFEKTI: Sen JÄLKEEN kun tämä toiminto on käytetty, kun pelaat kortin, jolla on vaatimus, maksat siitä 1 M€ vähemmän.",
+  "Once per game, gain 2 wild tags for THIS GENERATION.": "Kerran pelissä, saat 2 jokeriympyrää TÄLLE SUKUPOLVELLE.",
+  "Effect: AFTER this action has been used, when playing a card with a requirement, you pay 1 M€ less for it.": "VAIKUTUS: Sen JÄLKEEN kun tämä toiminto on käytetty, kun pelaat kortin, jolla on vaatimus, maksat siitä 1 M€ vähemmän.",
 
   "Xu": "Xu",
   "Most": "Eniten",
-  "Once per game, gain 2 M€ for each Venus tag in play. Gain an additional 8 M€ if you have the most Venus tags in play.": "Kerran per peli, saa 2 M€ per Venus-symboli pelissä. Saa lisäksi 8 M€ jos sinulla on eniten Venus-symboleja pelissä.",
+  "Once per game, gain 2 M€ for each Venus tag in play. Gain an additional 8 M€ if you have the most Venus tags in play.": "Kerran pelissä, saat 2 M€ per pelattu Venus-ympyrä. Saat lisäksi 8 M€ jos sinulla on eniten pelattuja Venus-ympyröitä.",
 
   "Yvonne": "Yvonne",
-  "Once per game, gain all your colony bonuses twice.": "Kerran per peli, saa kaikki siirtokuntabonuksesi kaksi kertaa.",
+  "Once per game, gain all your colony bonuses twice.": "Kerran pelissä, saat kaikki siirtokuntabonuksesi kaksi kertaa.",
 
   "Zan": "Zan",
-  "Effect: You are immune to Reds' ruling policy.": "EFEKTI: Olet immuuni Punaisten hallintopolitiikalle.",
-  "Once per game, place all of your available delegates in Reds. Gain 1 M€ for each delegate placed this way.": "Kerran per peli, aseta kaikki käytettävissä olevat edustajasi Punaisiin. Saa 1 M€ per tällä tavoin asetettu edustaja."
+  "Effect: You are immune to Reds' ruling policy.": "VAIKUTUS: Olet immuuni Punaisten hallintopolitiikalle.",
+  "Once per game, place all of your available delegates in Reds. Gain 1 M€ for each delegate placed this way.": "Kerran pelissä, aseta kaikki käytettävissä olevat edustajasi Punaisiin. Saat 1 M€ per tällä tavoin asetettu edustaja."
 }

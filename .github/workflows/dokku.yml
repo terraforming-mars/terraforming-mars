@@ -16,6 +16,8 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      # mount storage
+      # dokku storage:mount mars.howardchung.net /home/howardc/mars:/app/db
       - name: Push to dokku
         uses: dokku/github-action@master
         with:

@@ -296,6 +296,7 @@
                             <input type="checkbox" v-model="showCorporationList" id="customCorps-checkbox">
                             <label for="customCorps-checkbox">
                                 <span v-i18n>Custom Corporation list</span>
+                                <span v-if="customCorporations.length">&nbsp;({{ customCorporations.length }})</span>
                             </label>
 
                             <template v-if="expansions.prelude">
@@ -488,11 +489,12 @@
             </div>
 
 
-            <div class="create-game--block" v-if="showCorporationList">
+            <div class="create-game--block" v-show="showCorporationList">
               <CorporationsFilter
                   ref="corporationsFilter"
                   v-on:corporation-list-changed="updatecustomCorporations"
                   v-bind:expansions="expansions"
+                  @close="showCorporationList = false"
               ></CorporationsFilter>
             </div>
 
@@ -701,7 +703,7 @@ export default (Vue as WithRefs<Refs>).extend({
             Vue.nextTick(() => {
               try {
                 if (component.showColoniesList) refs.coloniesFilter.updateColoniesByNames(processor.colonies);
-                if (component.showCorporationList) refs.corporationsFilter.selectedCorporations = processor.corporations;
+                if (processor.corporations.length > 0) refs.corporationsFilter.selectedCorporations = processor.corporations;
                 if (component.showPreludesList) refs.preludesFilter.updatePreludes(processor.preludes);
                 if (component.showBannedCards) refs.cardsFilter.selected = processor.bannedCards;
                 if (component.showIncludedCards) refs.cardsFilter2.selected = processor.includedCards;
@@ -963,8 +965,7 @@ export default (Vue as WithRefs<Refs>).extend({
 
       // Check Prelude 2 + Pathfinders
       let energyProductionBug = true;
-      console.log(this.showCorporationList, this.customCorporations.length);
-      if (this.showCorporationList && customCorporations.length > 0 && !customCorporations.includes(CardName.THORGATE)) {
+      if (customCorporations.length > 0 && !customCorporations.includes(CardName.THORGATE)) {
         energyProductionBug = false;
       }
       if (this.bannedCards.includes(CardName.STANDARD_TECHNOLOGY)) {
@@ -994,7 +995,7 @@ export default (Vue as WithRefs<Refs>).extend({
       }
 
       // Check custom corp count
-      if (this.showCorporationList && customCorporations.length > 0) {
+      if (customCorporations.length > 0) {
         let neededCorpsCount = players.length * startingCorporations;
         if (REVISED_COUNT_ALGORITHM) {
           if (this.twoCorpsVariant) {

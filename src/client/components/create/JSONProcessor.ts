@@ -67,7 +67,6 @@ export class JSONProcessor {
     this.preludes = set(json_constants.CUSTOM_PRELUDES);
 
     this.model.playersCount = players.length;
-    this.model.showColoniesList = this.colonies.length > 0;
     this.model.showBannedCards = this.bannedCards.length > 0;
     this.model.showIncludedCards = this.includedCards.length > 0;
 

@@ -321,6 +321,7 @@
                                 <input type="checkbox" v-model="showColoniesList" id="customColonies-checkbox">
                                 <label for="customColonies-checkbox">
                                     <span v-i18n>Custom Colonies list</span>
+                                  <span v-if="customColonies.length">&nbsp;({{ customColonies.length }})</span>
                                 </label>
                             </template>
 
@@ -499,14 +500,6 @@
               ></CorporationsFilter>
             </div>
 
-            <div class="create-game--block" v-if="showColoniesList">
-              <ColoniesFilter
-                  ref="coloniesFilter"
-                  v-on:colonies-list-changed="updateCustomColonies"
-                  v-bind:expansions="expansions"
-              ></ColoniesFilter>
-            </div>
-
             <div class="create-game--block" v-show="showPreludesList">
               <PreludesFilter
                   ref="preludesFilter"
@@ -514,6 +507,15 @@
                   v-bind:expansions="expansions"
                   @close="showPreludesList = false"
               ></PreludesFilter>
+            </div>
+
+            <div class="create-game--block" v-show="showColoniesList">
+              <ColoniesFilter
+                  ref="coloniesFilter"
+                  v-on:colonies-list-changed="updateCustomColonies"
+                  v-bind:expansions="expansions"
+                  @close="showColoniesList = false"
+              ></ColoniesFilter>
             </div>
 
             <div class="create-game--block" v-if="showBannedCards">
@@ -704,7 +706,7 @@ export default (Vue as WithRefs<Refs>).extend({
 
             Vue.nextTick(() => {
               try {
-                if (component.showColoniesList) refs.coloniesFilter.updateColoniesByNames(processor.colonies);
+                if (processor.colonies.length > 0) refs.coloniesFilter.updateColoniesByNames(processor.colonies);
                 if (processor.corporations.length > 0) refs.corporationsFilter.selectedCorporations = processor.corporations;
                 if (processor.preludes.length > 0) refs.preludesFilter.updatePreludes(processor.preludes);
                 if (component.showBannedCards) refs.cardsFilter.selected = processor.bannedCards;

@@ -303,6 +303,7 @@
                               <input type="checkbox" v-model="showPreludesList" id="customPreludes-checkbox">
                               <label for="customPreludes-checkbox">
                                   <span v-i18n>Custom Preludes list</span>
+                                  <span v-if="customPreludes.length">&nbsp;({{ customPreludes.length }})</span>
                               </label>
                             </template>
 
@@ -492,7 +493,7 @@
             <div class="create-game--block" v-show="showCorporationList">
               <CorporationsFilter
                   ref="corporationsFilter"
-                  v-on:corporation-list-changed="updatecustomCorporations"
+                  v-on:corporation-list-changed="updateCustomCorporations"
                   v-bind:expansions="expansions"
                   @close="showCorporationList = false"
               ></CorporationsFilter>
@@ -501,16 +502,17 @@
             <div class="create-game--block" v-if="showColoniesList">
               <ColoniesFilter
                   ref="coloniesFilter"
-                  v-on:colonies-list-changed="updatecustomColonies"
+                  v-on:colonies-list-changed="updateCustomColonies"
                   v-bind:expansions="expansions"
               ></ColoniesFilter>
             </div>
 
-            <div class="create-game--block" v-if="showPreludesList">
+            <div class="create-game--block" v-show="showPreludesList">
               <PreludesFilter
                   ref="preludesFilter"
                   v-on:prelude-list-changed="updateCustomPreludes"
                   v-bind:expansions="expansions"
+                  @close="showPreludesList = false"
               ></PreludesFilter>
             </div>
 
@@ -704,7 +706,7 @@ export default (Vue as WithRefs<Refs>).extend({
               try {
                 if (component.showColoniesList) refs.coloniesFilter.updateColoniesByNames(processor.colonies);
                 if (processor.corporations.length > 0) refs.corporationsFilter.selectedCorporations = processor.corporations;
-                if (component.showPreludesList) refs.preludesFilter.updatePreludes(processor.preludes);
+                if (processor.preludes.length > 0) refs.preludesFilter.updatePreludes(processor.preludes);
                 if (component.showBannedCards) refs.cardsFilter.selected = processor.bannedCards;
                 if (component.showIncludedCards) refs.cardsFilter2.selected = processor.includedCards;
                 if (!component.seededGame) component.seed = Math.random();
@@ -734,7 +736,7 @@ export default (Vue as WithRefs<Refs>).extend({
     getPlayerNamePlaceholder(index: number): string {
       return translateTextWithParams('Player ${0} name', [String(index + 1)]);
     },
-    updatecustomCorporations(customCorporations: Array<CardName>) {
+    updateCustomCorporations(customCorporations: Array<CardName>) {
       this.customCorporations = customCorporations;
     },
     updateCustomPreludes(customPreludes: Array<CardName>) {
@@ -746,7 +748,7 @@ export default (Vue as WithRefs<Refs>).extend({
     updateIncludedCards(includedCards: Array<CardName>) {
       this.includedCards = includedCards;
     },
-    updatecustomColonies(customColonies: Array<ColonyName>) {
+    updateCustomColonies(customColonies: Array<ColonyName>) {
       this.customColonies = customColonies;
     },
     getPlayers(): Array<NewPlayerModel> {
@@ -1034,7 +1036,7 @@ export default (Vue as WithRefs<Refs>).extend({
 
       // TODO(kberg): this is a direct copy of the code right above.
       // Check custom prelude count
-      if (this.showPreludesList && customPreludes.length > 0) {
+      if (customPreludes.length > 0) {
         const requiredPreludeCount = players.length * startingPreludes;
         if (customPreludes.length < requiredPreludeCount) {
           window.alert(translateTextWithParams('Must select at least ${0} Preludes', [requiredPreludeCount.toString()]));

@@ -70,7 +70,6 @@ export class JSONProcessor {
     this.model.showColoniesList = this.colonies.length > 0;
     this.model.showBannedCards = this.bannedCards.length > 0;
     this.model.showIncludedCards = this.includedCards.length > 0;
-    this.model.showPreludesList = this.preludes.length > 0;
 
     const oldExpansionFields: Record<Expansion, string> = {
       corpera: json_constants.CORPORATEERA,

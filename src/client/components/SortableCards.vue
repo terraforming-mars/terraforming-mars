@@ -109,19 +109,25 @@ export default Vue.extend({
       if (!this.handJiveIsChecked) return;
       const target = e.currentTarget as HTMLElement;
       if (!target) return;
-      if (target.matches(".sortable-cards *")) {
+      if (target.matches('.sortable-cards *')) {
         const rect = target.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width;
         const direction = x <= 0.25 ? -1.5 : x >= 0.75 ? 1.5 : null;
         if (direction) {
-          const thisCard = target.querySelector(".card-title")!.textContent!.trim()
-          this.cardOrder[thisCard] += direction
-          Object.entries(this.cardOrder)
-            .sort((a,b) => a[1]-b[1])
-            .forEach((entry, i) => {
-              this.cardOrder[entry[0]] = i+1
-            })
-          CardOrderStorage.updateCardOrder(this.playerId, this.cardOrder);
+          const cardTitle = target.querySelector('.card-title');
+          if (cardTitle) {
+            const textContent = cardTitle.textContent;
+            if (textContent) {
+              const thisCard = textContent.trim();
+              this.cardOrder[thisCard] += direction;
+              Object.entries(this.cardOrder)
+                .sort((a, b) => a[1]-b[1])
+                .forEach((entry, i) => {
+                  this.cardOrder[entry[0]] = i+1;
+                });
+              CardOrderStorage.updateCardOrder(this.playerId, this.cardOrder);
+            }
+          }
         }
       }
     },

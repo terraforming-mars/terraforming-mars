@@ -491,32 +491,29 @@
             </div>
 
 
-            <div class="create-game--block" v-show="showCorporationList">
-              <CorporationsFilter
-                  ref="corporationsFilter"
-                  v-on:corporation-list-changed="updateCustomCorporations"
-                  v-bind:expansions="expansions"
-                  @close="showCorporationList = false"
-              ></CorporationsFilter>
-            </div>
+            <CorporationsFilter
+                ref="corporationsFilter"
+                v-show="showCorporationList"
+                v-on:corporation-list-changed="updateCustomCorporations"
+                v-bind:expansions="expansions"
+                @close="showCorporationList = false"
+            ></CorporationsFilter>
 
-            <div class="create-game--block" v-show="showPreludesList">
-              <PreludesFilter
-                  ref="preludesFilter"
-                  v-on:prelude-list-changed="updateCustomPreludes"
-                  v-bind:expansions="expansions"
-                  @close="showPreludesList = false"
-              ></PreludesFilter>
-            </div>
+            <PreludesFilter
+                ref="preludesFilter"
+                v-show="showPreludesList"
+                v-on:prelude-list-changed="updateCustomPreludes"
+                v-bind:expansions="expansions"
+                @close="showPreludesList = false"
+            ></PreludesFilter>
 
-            <div class="create-game--block" v-show="showColoniesList">
-              <ColoniesFilter
-                  ref="coloniesFilter"
-                  v-on:colonies-list-changed="updateCustomColonies"
-                  v-bind:expansions="expansions"
-                  @close="showColoniesList = false"
-              ></ColoniesFilter>
-            </div>
+            <ColoniesFilter
+                ref="coloniesFilter"
+                v-show="showColoniesList"
+                v-on:colonies-list-changed="updateCustomColonies"
+                v-bind:expansions="expansions"
+                @close="showColoniesList = false"
+            ></ColoniesFilter>
 
             <div class="create-game--block" v-if="showBannedCards">
               <CardsFilter

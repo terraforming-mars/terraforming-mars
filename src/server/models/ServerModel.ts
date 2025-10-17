@@ -91,6 +91,13 @@ export class Server {
 
     const thisPlayerIndex = players.findIndex((p) => p.color === player.color);
     const thisPlayer: PublicPlayerModel = players[thisPlayerIndex];
+    if (thisPlayer.victoryPointsBreakdown.total === 0) {
+      // 0 points should not occur normally in a game and should just mean
+      // other players victory points are hidden. In this case, explicitely add
+      // victory points for the player requesting data to be able to show their
+      // own score.
+      thisPlayer.victoryPointsBreakdown = player.getVictoryPoints();
+    }
 
     const rv: PlayerViewModel = {
       cardsInHand: cardsToModel(player, player.cardsInHand, {showCalculatedCost: true}),

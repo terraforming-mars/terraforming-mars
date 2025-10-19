@@ -15,33 +15,31 @@
     padding: 20px;
     border-radius: 8px;
     border: 2px solid white;
-    // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 90vw; /* Takes up 90% of the viewport width */
-    height: 90vh; /* Takes up 90% of the viewport height */
-    // max-width: 800px; /* Optional: Set a maximum width for larger screens */
-    // max-height: 600px; /* Optional: Set a maximum height for larger screens */
+    width: 90vw;
+    height: 90vh;
     overflow-y: auto; /* Adds scrollbar if content exceeds height */
     position: relative; /* For positioning the close button */
     color: white;
   }
 
   .popup-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
     display: flex;
     justify-content: space-between; /* Pushes items to opposite edges */
     align-items: center; /* Vertically aligns items in the center (optional, but good practice) */
     width: 100%;
+    background-color: black;
   }
 
   .close-button {
     position: absolute;
     top: 10px;
     right: 10px;
-    // background: none;
     border: none;
     font-size: 20px;
     cursor: pointer;
   }
 
-  // .popup-body {
-  // }
 }

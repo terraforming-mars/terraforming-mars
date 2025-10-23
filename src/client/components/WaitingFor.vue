@@ -80,6 +80,10 @@ export default Vue.extend({
   },
   methods: {
     animateTitle() {
+      if (!getPreferences().animated_title) {
+        return;
+      }
+
       const sequence = '\u25D1\u25D2\u25D0\u25D3';
       const first = document.title[0];
       const position = sequence.indexOf(first);

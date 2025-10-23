@@ -74,6 +74,15 @@
 
       <div class="preferences_panel_item">
         <label class="form-switch">
+          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.animated_title" data-test="animated_title">
+          <i class="form-icon"></i>
+          <span v-i18n>Animated Title</span>
+          <span class="tooltip tooltip-left" :data-tooltip="$t('Show spinning circle in window title on your turn.')">&#9432;</span>
+        </label>
+      </div>
+
+      <div class="preferences_panel_item">
+        <label class="form-switch">
           <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.experimental_ui" data-test="experimental_ui">
           <i class="form-icon"></i>
           <span v-i18n>Experimental UI</span>

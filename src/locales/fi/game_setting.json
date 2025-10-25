@@ -28,11 +28,11 @@
   "Fanmade expansion:": "Fanien tekemä laajennus:",
   "Board:": "Pelilauta:",
   "(randomized tiles)": "(satunnaistetut laatat)",
-  "WGT:": "Maailmanhallituksen terraformointi:",
+  "WGT:": "Maailmanhallituksen maankaltaistus:",
   "On": "Päällä",
   "Off": "Pois",
-  "Require terraforming Venus to end the game": "Vaadi Venuksen terraformointi pelin päättämiseksi",
-  "Require terraforming The Moon to end the game": "Vaadi Kuun terraformointi pelin päättämiseksi",
+  "Require terraforming Venus to end the game": "Vaadi Venuksen maankaltaistamisen pelin päättämiseksi",
+  "Require terraforming The Moon to end the game": "Vaadi Kuun maankaltaistamisen pelin päättämiseksi",
   "Milestones and Awards:": "Saavutukset ja palkinnot:",
   "Full randomized": "Täysin satunnaistettu",
   "Randomized with limited synergy": "Satunnaistettu rajoitetulla synergialla",
@@ -51,5 +51,7 @@
   "fast mode": "nopea tila",
   "Banned cards:": "Kielletyt kortit:",
   "Game Setup Details": "Pelin asetusten yksityiskohdat",
-  "Board-defined": "pelilaudan määrittämä"
+  "Board-defined": "pelilaudan määrittämä",
+
+  "Hollandia": ""
 }

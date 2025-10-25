@@ -14,6 +14,7 @@
 
   "ECOTEC": "EKOTEK",
   "Ecotec": "Ekotek",
+  "EcoTec": "EkoTek",
   "You start with 42 M€. Increase your plant production 1 step.": "Aloitat 42 M€:llä. Lisää kasvituotantoasi 1 askel.",
   "Effect: When you play a bio tag, gain 1 plant or add a microbe to ANY card.": "VAIKUTUS: Kun pelaat bio-tunnisteen, saat 1 kasvin tai lisää mikrobi MILLE TAHANSA kortille.",
 
@@ -24,8 +25,8 @@
   "Effect: When you play a space event, gain 1 titanium.": "VAIKUTUS: Kun pelaat avaruustapahtuman, saat 1 titaanin.",
   "Action: Spend 2 titanium to raise the temperature 1 step.": "AKTION: Kuluta 2 titaania nostaaksesi lämpötilaa 1 askel.",
 
-  "NIGRAL ENTERPRISES": "NIRGAL YRITYKSET",
-  "Nigral Enterprises": "Nirgal Yritykset",
+  "NIRGAL ENTERPRISES": "NIRGAL YRITYKSET",
+  "Nirgal Enterprises": "Nirgal Yritykset",
   "You start with 30 M€. Increase your energy, plant, and steel production 1 step each.": "Aloitat 30 M€:llä. Lisää energia-, kasvi- ja terästuotantoasi 1 askel kukin.",
   "Effect: AWARDS AND MILESTONES ALWAYS COST 0 M€ FOR YOU.": "VAIKUTUS: Palkinnot ja saavutukset maksavat sinulle aina 0 M€.",
 
@@ -59,5 +60,7 @@
   "R": "",
   "Vitor": "",
   "You start with 45 M€. As your first action, fund an award for free.": "Aloitat 45 M€:llä. Ensimmäisenä toimintona rahoita palkinto ilmaiseksi.",
-  "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.": "VAIKUTUS: Kun pelaat kortin jossa on EI-NEGATIIVINEN VP-kuvake, sisältäen tämän, saat 3 M€."
+  "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.": "VAIKUTUS: Kun pelaat kortin jossa on EI-NEGATIIVINEN VP-kuvake, sisältäen tämän, saat 3 M€.",
+
+  "Curiosity II": ""
 }

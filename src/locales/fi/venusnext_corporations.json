@@ -1,0 +1,30 @@
+{
+    "APHRODITE": "AFRODITE",
+    "Aphrodite": "Afrodite",
+    "You start with 1 plant production and 47 M€.": "Aloitat 1 kasvituotannolla ja 47 M€:llä.",
+    "Effect: Whenever Venus is terraformed 1 step, you gain 2 M€.": "VAIKUTUS: Aina kun Venusta maankaltaistetaan 1 askel, saat 2 M€.",
+
+    "CEL": "",
+    "ES": "",
+    "TIC": "",
+    "Celestic": "",
+    "You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.": "Aloitat 42 M€:llä. Ensimmäisenä toimintona paljasta kortteja pakasta kunnes olet paljastanut 2 korttia joissa on kelluja-kuvake. Ota ne käteen ja hylkää loput.",
+    "Action: Add a floater to ANY card. 1 VP per 3 floaters on this card.": "TOIMINTO: Lisää kelluja MILLE TAHANSA kortille. 1 VP jokaista 3 kellujaa kohden tällä kortilla.",
+
+    "MA": "",
+    "NUTECH": "NUTEK",
+    "Manutech": "Manutek",
+    "You start with 1 steel production, and 35 M€.": "Aloitat 1 terästuotannolla ja 35 M€:llä.",
+    "Effect: For each step you increase the production of a resource, including this, you also gain that resource.": "VAIKUTUS: Jokaisesta askeleesta jonka lisäät resurssin tuotantoon, sisältäen tämän, saat myös kyseisen resurssin.",
+
+    "MORNING STAR INC.": "AAMUTÄHTI OY",
+    "Morning Star Inc.": "Aamutähti Oy",
+    "You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.": "Aloitat 50 M€:llä. Ensimmäisenä toimintona paljasta kortteja pakasta kunnes olet paljastanut 3 Venus-korttia. Ota ne käteen ja hylkää loput.",
+    "Effect: Your Venus requirements are +/- 2 steps, your choice in each case.": "VAIKUTUS: Venus-vaatimuksesi ovat +/- 2 askelta, valintasi kussakin tapauksessa.",
+    "Draw 3 cards with a Venus tag": "Nosta 3 korttia joissa Venus-tunniste",
+
+    "VIRON": "",
+    "Viron": "",
+    "You start with 48 M€.": "Aloitat 48 M€:llä.",
+    "Action: Use a blue card action that has already been used this generation.": "TOIMINTO: Käytä sinisen kortin toimintoa joka on jo käytetty tässä sukupolvessa."
+}

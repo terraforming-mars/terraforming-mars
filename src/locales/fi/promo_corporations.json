@@ -1,18 +1,18 @@
 {
-  "Arcadian": "Arcadian",
+  "Arcadian": "Arkadian",
   "Communities": "Yhteisöt",
-  "Arcadian Communities": "Arcadian Yhteisöt",
+  "Arcadian Communities": "Arkadian Yhteisöt",
   "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "Aloitat 40 M€:lla ja 10 teräksellä. ENSIMMÄISENÄ TOIMINTANASI ASETA YHTEISÖ [PELAAJAMERKKI] VAPAALLE ALUEELLE.",
   "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.": "TOIMINTO: Aseta yhteisö (pelaajamerkki) vapaalle alueelle jonkin oman laattasi tai merkityn alueen viereen.",
   "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.": "VAIKUTUS: Merkityt alueet on varattu sinulle. Kun asetat sinne laatan, saat 3 M€.",
 
-  "Astrodrill": "",
-  "Astrodrill ENT": "Astrodrill",
+  "Astrodrill": "Astroporaus",
+  "Astrodrill ENT": "Astroporaus OYJ",
   "You start with 35 M€ and 3 asteroid resources.": "Aloitat 35 M€:lla ja 3 asteroidoresurssilla.",
   "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "TOIMINTO: Lisää asteroidiresurssi MILLE TAHANSA kortille TAI saa mikä tahansa perusresurssi TAI poista asteroidiresurssi tältä kortilta saadaksesi 3 titaania.",
 
-  "FACTORUM": "",
-  "Factorum": "",
+  "FACTORUM": "FAKTORUM",
+  "Factorum": "Faktorum",
   "You start with 37 M€. Increase your steel production 1 step.": "Aloitat 37 M€:lla. Nosta terästuotantoasi 1 askeleella.",
   "Action: Increase your energy production 1 step IF YOU have NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "TOIMINTO: Nosta energiatuotantoasi 1 askeleella JOS SINULLA EI OLE ENERGIARESURSSEJA, tai maksa 3 M€ nostaaksesi rakennuskortin.",
 
@@ -52,16 +52,16 @@
   "You start with 38 M€ and 1 steel production.": "Aloitat 38 M€:lla ja 1 terästuotannolla.",
   "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "VAIKUTUS: Kun pelaat rakennusympyrän, tämä mukaan lukien, saat 1 mikrobin tälle kortille tai poista 2 mikrobia täältä ja nosta kasvintuotantoasi 1 askeleella.",
 
-  "Tycho Magnetics": "Tycho Magnetics",
-  "Magnetics": "Magnetics",
+  "Tycho Magnetics": "",
+  "Magnetics": "",
   "You start with 42 M€. Increase your energy production 1 step.": "Aloitat 42 M€:lla. Nosta energiatuotantoasi 1 askeleella.",
   "Action: Spend any amount of energy to draw the that many cards. Keep 1 and discard the rest.": "TOIMINTO: Käytä mikä tahansa määrä energiaa nostaaksesi saman verran kortteja. Pidä 1 ja hylkää loput.",
 
-  "SPLI": "",
-  "C": "",
-  "E": "",
+  "SPLI": "PIL",
+  "C": "KON",
+  "E": "TA",
   "TACTICAL GENOMICS": "TAKTINEN GENOMIIKKA",
-  "Splice": "",
+  "Splice": "Pilkonta",
   "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Aloitat 44 M€:lla. Ensimmäisenä toimintanasi paljasta kortteja kunnes olet paljastanut mikrobiympyrän. Ota se ja hylkää loput.",
   "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "VAIKUTUS: Kun mikrobiympyrä pelataan, tämä mukaan lukien, KYSEINEN PELAAJA saa 2 M€ tai lisää mikrobin KYSEISELLE kortille, ja sinä saat 2 M€."
 }

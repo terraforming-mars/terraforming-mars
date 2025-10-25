@@ -1,6 +1,6 @@
 {
   "game id: ": "peli-ID: ",
-  "Terraforming Mars": "Terraforming Mars",
+  "Terraforming Mars": "Maankaltaistetaan Mars",
   "Instructions: To start the game, separately copy and share the links with all players, and then click on your name.": "Ohjeet: Aloittaaksesi pelin, kopioi ja jaa linkit erikseen kaikille pelaajille, ja klikkaa sitten nimeäsi.",
   "Save this page in case you or one of your opponents loses a link.": "Tallenna tämä sivu siltä varalta, että sinä tai joku vastustajistasi kadottaa linkin.",
   "Read our changelog to get the latest updates.": "Lue muutoslogimme saadaksesi viimeisimmät päivitykset.",
@@ -47,7 +47,7 @@
   "No negative Turmoil event": "Ei negatiivisia myllerrys-tapahtumia",
   "Game configs:": "Pelikonfiguraatiot:",
   "timer": "ajastin",
-  "real-time vp": "reaaliaikaiset VP",
+  "real-time vp": "reaaliaikainen VP",
   "fast mode": "nopea tila",
   "Banned cards:": "Kielletyt kortit:",
   "Game Setup Details": "Pelin asetusten yksityiskohdat",

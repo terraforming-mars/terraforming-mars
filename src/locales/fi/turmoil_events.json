@@ -46,7 +46,7 @@
   "Increase your M€ production 1 step for every special tile you own (max 5.) Gain 1 energy for every influence you have": "Lisää M€-tuotantoasi 1 askel per erikoislaatta, jonka omistat (max 5). Saat 1 energian per vaikutusvalta, joka sinulla on.",
   "Pay 10M€, reduced by 1M€ per influence. Raise every planetary track 2 steps. Nobody gains the \"rising player\" bonus.": "Maksa 10 M€, vähennetty 1 M€:llä per vaikutusvalta. Nosta jokaista planeettarataa 2 askelta. Kukaan ei saa \"nouseva pelaaja\" -bonusta.",
   "Lose 1 plant for each Earth tag you own (max 5) then reduced by influence.": "Menetät 1 kasvin per Maa-ympyrä, jonka omistat (max 5), sitten vähennetty vaikutusvallalla.",
-  "Lower the temperature and oxygen 2 steps each. (-4C, -2% O2)": "Laske lämpötilaa ja happea 2 askelta kumpikin. (-4°C, -2% O2)",
+  "Lower the temperature and oxygen 2 steps each. (-4C, -2% O2)": "Laske lämpötilaa ja happea 2 askelta kumpikin. (-4°C, -2 % O₂)",
   "Pay 10M€. Add 2 data to EVERY data card. Add 1 data to any data card for each influence you have.": "Maksa 10 M€. Lisää 2 dataa JOKAISELLE datakortille. Lisää mille tahansa datakortille 1 data per vaikutusvalta, joka sinulla on.",
 
   "Seismic Predictions": "Seismiset ennusteet",
@@ -54,7 +54,7 @@
   "Media Stir": "Mediakohutus",
   "Lagging Regulation": "Viivästynyt sääntely",
   "Fair Trade Complaint": "Reilun kaupan valitus",
-  "Diaspora": "Diaspora",
+  "Diaspora": "Hajaannus",
   "Sponsored Projects": "Sponsoroidut projektit",
   "Generous Funding": "Runsas rahoitus",
   "Successful Organisms": "Menestyvät organismit",
@@ -104,7 +104,7 @@
   "2nd:": "2.:",
   "1st/2nd": "1./2.",
   "Lose all": "Menetä kaikki",
-  "max 3": "max 3",
-  "MAX 6": "MAX 6",
+  "max 3": "enint. 3",
+  "MAX 6": "ENINT. 6",
   "OR": "TAI"
 }

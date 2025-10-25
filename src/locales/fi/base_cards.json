@@ -1,6 +1,6 @@
 {
   "Colonizer Training Camp": "Kolonistien koulutusleiri",
-  "Oxygen must be 5% or less.": "Hapen on oltava 5% tai vähemmän.",
+  "Oxygen must be 5% or less.": "Hapen on oltava 5 % tai vähemmän.",
 
   "Asteroid Mining Consortium": "Asteroidien louhintakonsortio",
   "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.": "Vaatii että sinulla on titaanintuotanto. Vähennä mitä tahansa titaanintuotantoa 1 askel ja lisää omaasi 1 askel.",
@@ -15,7 +15,7 @@
   "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a microbe tag, add a science resource here.": "TOIMINTO: Kuluta 1 M€ paljastaaksesi nostopakan päällimmäisen kortin. Jos siinä on mikrobiympyrä, lisää tiede-resurssi tähän.",
   "3 VPs if you have one or more science resources here.": "3 VP jos sinulla on yksi tai useampi tiede-resurssi tässä.",
 
-  "Oxygen must be 6% or less.": "Hapen on oltava 6% tai vähemmän.",
+  "Oxygen must be 6% or less.": "Hapen on oltava 6 % tai vähemmän.",
 
   "Aerospace Mission": "Ilmailu- ja avaruusmissio",
   "Place 2 colonies. Pay 14 M€.": "Aseta 2 siirtokuntaa. Maksa 14 M€.",
@@ -81,16 +81,16 @@
   "Action: Spend 1 energy to draw a card.": "AKTION: Kuluta 1 energia nostaaksesi kortin.",
 
   "Equatorial Magnetizer": "Päiväntasaajan magnetisoija",
-  "Action: Decrease your energy production 1 step to increase your terraform rating 1 step.": "AKTION: Vähennä energiatuotantoasi 1 askel lisätäksesi terraformointiarvoasi 1 askel.",
+  "Action: Decrease your energy production 1 step to increase your terraform rating 1 step.": "AKTION: Vähennä energiatuotantoasi 1 askel nostaaksesi MKL:ääsi 1 askel.",
 
   "Domed Crater": "Kupolikrateri",
-  "Oxygen must be 7% or less. Gain 3 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Hapen tulee olla 7% tai vähemmän. Saa 3 kasvia. Aseta kaupunkilaatta. Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 3 askelta.",
+  "Oxygen must be 7% or less. Gain 3 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Hapen tulee olla 7 % tai vähemmän. Saa 3 kasvia. Aseta kaupunkilaatta. Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 3 askelta.",
 
   "Noctis City": "Noctis-kaupunki",
   "(Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile ON THE RESERVED AREA, disregarding normal placement restrictions.)": "(Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 3 askelta. Aseta kaupunkilaatta VARATULLE ALUEELLE, sivuuttaen normaalit sijoitusrajoitukset.)",
 
   "Methane From Titan": "Metaani Titanilta",
-  "(Requires 2% oxygen. Increase your heat production 2 steps and your plant production 2 steps.)": "(Vaatii 2% happea. Lisää lämpötuotantoasi 2 askelta ja kasvituotantoasi 2 askelta.)",
+  "(Requires 2% oxygen. Increase your heat production 2 steps and your plant production 2 steps.)": "(Vaatii 2 % happea. Lisää lämpötuotantoasi 2 askelta ja kasvituotantoasi 2 askelta.)",
 
   "Imported Hydrogen": "Tuotu vety",
   "Gain 3 plants, or add 3 microbes or 2 animals to ANOTHER card. Place an ocean tile.": "Saa 3 kasvia, tai lisää 3 mikrobia tai 2 eläintä TOISELLE kortille. Aseta merilaatta.",
@@ -112,7 +112,7 @@
   "Predators": "Petoeläimet",
   "Action: Remove 1 animal from any card and add it to this card.": "AKTION: Poista 1 eläin miltä tahansa kortilta ja lisää se tälle kortille.",
   "1 VP per animal on this card.": "1 VP jokaista eläintä kohden tällä kortilla.",
-  "Requires 11% oxygen.": "Vaatii 11% happea.",
+  "Requires 11% oxygen.": "Vaatii 11 % happea.",
 
   "Space Station": "Avaruusasema",
   "Effect: When you play a space card, you pay 2 M€ less for it.": "VAIKUTUS: Kun pelaat avaruuskortin, maksat siitä 2 M€ vähemmän.",
@@ -128,7 +128,7 @@
   "1 VP for each fighter resource on this card.": "1 VP jokaista hävittäjä-resurssia kohden tällä kortilla.",
 
   "Cupola City": "Kupolikaupunki",
-  "Oxygen must be 9% or less. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Hapen tulee olla 9% tai vähemmän. Aseta kaupunkilaatta. Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 3 askelta.",
+  "Oxygen must be 9% or less. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Hapen tulee olla 9 % tai vähemmän. Aseta kaupunkilaatta. Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 3 askelta.",
 
   "Lunar Beam": "Kuusäde",
   "Decrease your M€ production 2 steps and increase your heat production and energy production 2 steps each.": "Vähennä M€-tuotantoasi 2 askelta ja lisää lämpö- ja energiatuotantoasi 2 askelta kumpaankin.",
@@ -146,17 +146,17 @@
   "GHG Producing Bacteria": "Kasvihuonekaasuja tuottavat bakteerit",
   "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "AKTION: Lisää 1 mikrobi tälle kortille, tai poista 2 mikrobia nostaaksesi lämpötilaa 1 askel.",
   "Action: Remove 2 microbes to raise temperature 1 step.": "AKTION: Poista 2 mikrobia tältä kortilta nostaaksesi lämpötilaa 1 askel.",
-  "Requires 4% oxygen.": "Vaatii 4% happea.",
+  "Requires 4% oxygen.": "Vaatii 4 % happea.",
 
   "Ants": "Muurahaiset",
   "Action: Remove 1 microbe from any card to add 1 to this card.": "AKTION: Poista 1 mikrobi miltä tahansa kortilta lisätäksesi 1 tälle kortille.",
   "1 VP per 2 microbes on this card.": "1 VP jokaista 2 mikrobia kohden tällä kortilla.",
 
   "Release of Inert Gases": "Inerttikaasut vapaiksi",
-  "Raise your terraforming rating 2 steps.": "Nosta terraformointiarvoasi 2 askelta.",
+  "Raise your terraforming rating 2 steps.": "Nosta MKL:ääsi 2 askelta.",
 
   "Nitrogen-Rich Asteroid": "Typpipitoinen asteroidi",
-  "Raise your terraforming rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 plant tags.": "Nosta terraformointiarvoasi 2 askelta ja lämpötilaa 1 askel. Lisää kasvituotantoasi 1 askel, tai 4 askelta jos sinulla on 3 kasviympyrää.",
+  "Raise your terraforming rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 plant tags.": "Nosta MKL:ääsi 2 askelta ja lämpötilaa 1 askel. Lisää kasvituotantoasi 1 askel, tai 4 askelta jos sinulla on 3 kasviympyrää.",
 
   "Rover Construction": "Kulkijien rakentaminen",
   "Effect: When any city tile is placed, gain 2 M€.": "VAIKUTUS: Kun mikä tahansa kaupunkilaatta asetetaan, saa 2 M€.",
@@ -177,7 +177,7 @@
   "Decrease your energy production 1 step and increase your heat production 3 steps.": "Vähennä energiatuotantoasi 1 askel ja lisää lämpötuotantoasi 3 askelta.",
 
   "Natural Preserve": "Luonnonsuojelualue",
-  "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your M€ production 1 step.": "Hapen tulee olla 4% tai vähemmän. Aseta tämä laatta EI MINKÄÄN MUUN LAATAN VIEREEN. Lisää M€-tuotantoasi 1 askel.",
+  "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your M€ production 1 step.": "Hapen tulee olla 4 % tai vähemmän. Aseta tämä laatta EI MINKÄÄN MUUN LAATAN VIEREEN. Lisää M€-tuotantoasi 1 askel.",
 
   "Nuclear Power": "Atomivoimala",
   "Decrease your M€ production 2 steps and increase your energy production 3 steps.": "Vähennä M€-tuotantoasi 2 askelta ja lisää energiatuotantoasi 3 askelta.",
@@ -210,7 +210,7 @@
   "Requires 0° C or warmer. Place 2 ocean tiles.": "Vaatii 0°C tai lämpimämmän. Aseta 2 valtamerilaattaa.",
 
   "Small Animals": "Pienet eläimet",
-  "Requires 6% oxygen. Decrease any plant production 1 step.": "Vaatii 6% happea. Vähennä mitä tahansa kasvituotantoa 1 askel.",
+  "Requires 6% oxygen. Decrease any plant production 1 step.": "Vaatii 6 % happea. Vähennä mitä tahansa kasvituotantoa 1 askel.",
 
   "Kelp Farming": "Rakkoleväkasvatus",
   "Requires 6 ocean tiles. Increase your M€ production 2 steps and your plant production 3 steps. Gain 2 plants.": "Vaatii 6 valtamerilaattaa. Lisää M€-tuotantoasi 2 askelta ja kasvituotantoasi 3 askelta. Saa 2 kasvia.",
@@ -255,7 +255,7 @@
 
   "Electro Catapult": "Sähkökatapultti",
   "Action: Spend 1 plant or 1 steel to gain 7 M€.": "TOIMINTO: Käytä 1 kasvi tai 1 teräs saadaksesi 7 M€.",
-  "Oxygen must be 8% or less. Decrease your energy production 1 step.": "Hapen tulee olla 8% tai vähemmän. Vähennä energiatuotantoasi 1 askel.",
+  "Oxygen must be 8% or less. Decrease your energy production 1 step.": "Hapen tulee olla 8 % tai vähemmän. Vähennä energiatuotantoasi 1 askel.",
 
   "Earth Catapult": "Maa-katapultti",
   "Effect: When you play a card, you pay 2 M€ less for it.": "VAIKUTUS: Kun pelaat kortin, maksat siitä 2 M€ vähemmän.",
@@ -266,7 +266,7 @@
 
   "Birds": "Linnut",
   "Action: Add an animal to this card.": "TOIMINTO: Lisää eläin tälle kortille.",
-  "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Vaatii 13% happea. Vähennä mitä tahansa kasvituotantoa 2 askelta. 1 VP per eläin tällä kortilla.",
+  "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per animal on this card.": "Vaatii 13 % happea. Vähennä mitä tahansa kasvituotantoa 2 askelta. 1 VP per eläin tällä kortilla.",
 
   "Mars University": "Mars-yliopisto",
   "Effect: When you play a science tag, including this, you may discard a card from hand to draw a card.": "VAIKUTUS: Kun pelaat tiedeympyrän, tämä mukaan lukien, saat hylätä kortin kädestäsi nostaaksesi kortin.",
@@ -377,7 +377,7 @@
   "Gain 1 M€ for each event EVER PLAYED by all players.": "Saa 1 M€ jokaista kaikkien pelaajien KOSKAAN PELAAMAA tapahtumaa kohden.",
 
   "Open City": "Avoin kaupunki",
-  "Requires 12% oxygen. Gain 2 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Vaatii 12% happea. Saa 2 kasvia. Aseta kaupunkilaatta. Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 4 askelta.",
+  "Requires 12% oxygen. Gain 2 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Vaatii 12 % happea. Saa 2 kasvia. Aseta kaupunkilaatta. Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 4 askelta.",
 
   "Media Group": "Mediaryhmä",
   "Effect: After you play an event card, you gain 3 M€.": "VAIKUTUS: Kun olet pelannut tapahtumakortin, saat 3 M€.",
@@ -395,7 +395,7 @@
   "Increase your energy production 1 step.": "Lisää energiatuotantoasi 1 askel.",
 
   "Breathing Filters": "Hengityssuodattimet",
-  "Requires 7% oxygen.": "Vaatii 7% happea.",
+  "Requires 7% oxygen.": "Vaatii 7 % happea.",
 
   "Artificial Photosynthesis": "Keinotekoinen fotosynteesi",
   "Increase your plant production 1 step or your energy production 2 steps.": "Lisää kasvituotantoasi 1 askel TAI energiatuotantoasi 2 askelta.",
@@ -444,14 +444,14 @@
   "1 VP per 2 animals on this card.": "1 VP per 2 eläintä tällä kortilla.",
 
   "Zeppelins": "Zeppeliinit",
-  "Requires 5% oxygen. Increase your M€ production 1 step for each city tile ON MARS.": "Vaatii 5% happea. Lisää M€-tuotantoasi 1 askel per kaupunkilaatta MARSISSA.",
+  "Requires 5% oxygen. Increase your M€ production 1 step for each city tile ON MARS.": "Vaatii 5 % happea. Lisää M€-tuotantoasi 1 askel per kaupunkilaatta MARSISSA.",
 
   "Worms": "Madot",
-  "Requires 4% oxygen. Increase your plant production 1 step for every 2 microbe tags you have, including this.": "Vaatii 4% happea. Lisää kasvituotantoasi 1 askel per 2 mikrobiympyrää, joka sinulla on, tämä mukaan lukien.",
+  "Requires 4% oxygen. Increase your plant production 1 step for every 2 microbe tags you have, including this.": "Vaatii 4 % happea. Lisää kasvituotantoasi 1 askel per 2 mikrobiympyrää, joka sinulla on, tämä mukaan lukien.",
 
   "Decomposers": "Hajottajat",
   "Effect: When you play an animal, plant, or microbe tag, including this, add a microbe to this card.": "VAIKUTUS: Kun pelaat eläin-, kasvi- tai mikrobiympyrän, tämä mukaan lukien, lisää mikrobi tälle kortille.",
-  "Requires 3% oxygen.": "Vaatii 3% happea.",
+  "Requires 3% oxygen.": "Vaatii 3 % happea.",
   "1 VP per 3 microbes on this card.": "1 VP per 3 mikrobia tällä kortilla.",
 
   "Fusion Power": "Fuusiovoima",
@@ -503,10 +503,10 @@
 
   "Herbivores": "Kasvinsyöjät",
   "Effect: When you place a greenery tile, add an animal to this card.": "VAIKUTUS: Kun asetat vihreän laatan, lisää eläin tälle kortille.",
-  "Requires 8% oxygen. +1 animal to this card. -1 any plant production": "Vaatii 8% happea. +1 eläin tälle kortille. -1 mitä tahansa kasvituotantoa",
+  "Requires 8% oxygen. +1 animal to this card. -1 any plant production": "Vaatii 8 % happea. +1 eläin tälle kortille. -1 mitä tahansa kasvituotantoa",
 
   "Insects": "Hyönteiset",
-  "Requires 6% oxygen. Increase your plant production 1 step for each plant tag you have.": "Vaatii 6% happea. Lisää kasvituotantoasi 1 askel per kasviympyrä, joka sinulla on.",
+  "Requires 6% oxygen. Increase your plant production 1 step for each plant tag you have.": "Vaatii 6 % happea. Lisää kasvituotantoasi 1 askel per kasviympyrä, joka sinulla on.",
 
   "CEO's Favorite Project": "Toimitusjohtajan suosikkiprojekti",
   "Add 1 resource to a card with at least 1 resource on it": "Lisää 1 resurssi kortille, jossa on vähintään 1 resurssi",
@@ -525,7 +525,7 @@
   "Effect: Your global requirements are +2 or -2 steps, your choice in each case.": "VAIKUTUS: Kun pelaat kortin, globaalit vaatimukset ovat valintasi mukaan +2 tai -2 askelta.",
 
   "Caretaker Contract": "Huoltosopimus",
-  "Action: Spend 8 heat to increase your terraform rating 1 step.": "TOIMINTO: Käytä 8 lämpöä lisätäksesi terraformausluokitustasi 1 askel.",
+  "Action: Spend 8 heat to increase your terraform rating 1 step.": "TOIMINTO: Käytä 8 lämpöä lisätäksesi MKL:ääsi 1 askel.",
   "Requires 0° C or warmer.": "Vaatii 0°C tai lämpimämmän.",
 
   "Designed Microorganisms": "Suunnitellut mikro-organismit",
@@ -538,7 +538,7 @@
   "Action: Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.": "TOIMINTO: Lisää 1 mikrobi tälle kortille TAI poista 3 mikrobia nostaaksesi MKL:ääsi 1 askel.",
   "Action: Remove 3 microbes to increase your TR 1 step.": "TOIMINTO: Poista 3 mikrobia nostaaksesi MKL:ääsi 1 askel.",
   "Add 3 microbes to this card.": "Lisää 3 mikrobia tälle kortille.",
-  "Remove 3 microbes to increase your terraform rating 1 step": "Poista 3 mikrobia lisätäksesi terraformausluokitustasi 1 askel",
+  "Remove 3 microbes to increase your terraform rating 1 step": "Poista 3 mikrobia lisätäksesi MKL:ääsi 1 askel",
   "Remove microbes": "Poista mikrobeja",
   "Add 1 microbe to this card": "Lisää 1 mikrobi tälle kortille",
   "Add microbe": "Lisää mikrobi",
@@ -568,13 +568,13 @@
   "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps.": "Vähennä energiatuotantoasi 4 askelta ja lisää kasvituotantoasi 2 askelta. Nosta MKL:ääsi 3 askelta.",
 
   "Shuttles": "Sukkulat",
-  "Requires 5% oxygen. Decrease your energy production 1 step and increase your M€ production 2 steps.": "Vaatii 5% happea. Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 2 askelta.",
+  "Requires 5% oxygen. Decrease your energy production 1 step and increase your M€ production 2 steps.": "Vaatii 5 % happea. Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 2 askelta.",
 
   "Import of Advanced GHG": "Kehittyneiden kasvihuonekaasujen tuonti",
   "Increase your heat production 2 steps.": "Lisää lämpötuotantoasi 2 askelta.",
 
   "Windmills": "Tuulimyllyt",
-  "Requires 7% oxygen. Increase your energy production 1 step.": "Vaatii 7% happea. Lisää energiatuotantoasi 1 askel.",
+  "Requires 7% oxygen. Increase your energy production 1 step.": "Vaatii 7 % happea. Lisää energiatuotantoasi 1 askel.",
 
   "Tundra Farming": "Tundran maanviljely",
   "Requires -6° C or warmer. Increase your plant production 1 step and your M€ production 2 steps. Gain 1 plant.": "Vaatii -6°C tai lämpimämmän. Lisää kasvituotantoasi 1 askel ja M€-tuotantoasi 2 askelta. Saa 1 kasvi.",
@@ -625,10 +625,10 @@
   "Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile.": "Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 3 askelta. Aseta kaupunkilaatta.",
 
   "Biomass Combustors": "Biomassan poltin",
-  "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Vaatii 6% happea. Vähennä mitä tahansa kasvituotantoa 1 askel ja lisää energiatuotantoasi 2 askelta.",
+  "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.": "Vaatii 6 % happea. Vähennä mitä tahansa kasvituotantoa 1 askel ja lisää energiatuotantoasi 2 askelta.",
 
   "Livestock": "Karja",
-  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Vaatii 9% happea. Vähennä kasvituotantoasi 1 askel ja lisää M€-tuotantoasi 2 askelta.",
+  "Requires 9% oxygen. Decrease your plant production 1 step and increase your M€ production 2 steps": "Vaatii 9 % happea. Vähennä kasvituotantoasi 1 askel ja lisää M€-tuotantoasi 2 askelta.",
 
   "Olympus Conference": "Olympus-konferenssi",
   "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.": "VAIKUTUS: Kun pelaat tiedeympyrän, tämä mukaan lukien, joko lisää tiederesurssi tälle kortille tai poista tiederesurssi tältä kortilta nostaaksesi kortin.",
@@ -666,7 +666,7 @@
   "Lagrange Observatory": "Lagrangen observatorio",
   "Draw 1 card.": "Nosta 1 kortti.",
 
-  "Terraforming Ganymede": "Ganymedin terraformointi",
+  "Terraforming Ganymede": "Ganymedin maankaltaistus",
   "Raise your TR 1 step for each Jovian tag you have, including this.": "Nosta MKL:ääsi 1 askel per Jupiter-ympyrä, joka sinulla on, tämä mukaan lukien.",
 
   "Immigration Shuttles": "Maahanmuuttosukkulat",
@@ -729,7 +729,7 @@
   "Standard projects": "Standardiprojektit",
 
   "Requires 2 Earth tags. Increase M€ production 4 steps.": "Vaatii 2 Maa-ympyrää. Lisää M€-tuotantoasi 4 askelta.",
-  "Oxygen must be 4% or lower. Draw two cards.": "Hapen tulee olla 4% tai vähemmän. Nosta kaksi korttia.",
+  "Oxygen must be 4% or lower. Draw two cards.": "Hapen tulee olla 4 % tai vähemmän. Nosta kaksi korttia.",
   "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Kun olet pelannut tämän, kun suoritat toiminnon, jokeriympyrä lasketaan valitsemaksesi ympyräksi.",
   "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 2 askelta. Aseta kaupunkilaatta TULIVUORIALUEELLE riippumatta vierekkäisistä kaupungeista.",
   "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "VAIKUTUS: Kun maksat kasvikorttia, täällä olevia mikrobeja saa käyttää 2 M€:n arvosta kukin.",

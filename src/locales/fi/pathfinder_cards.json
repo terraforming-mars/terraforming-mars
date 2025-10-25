@@ -57,7 +57,7 @@
   "1 VP for every 2 Venus tags you own.": "1 VP jokaista 2 omaamaasi Venus-ympyrää kohti.",
 
   "Cyanobacteria": "Sinilevät",
-  "Raise the oxygen level 1%. For every ocean tile, add a microbe to ANY card.": "Nosta happitasoa 1%. Jokaisesta valtamerilaatasta lisää mikrobi MILLE TAHANSA kortille.",
+  "Raise the oxygen level 1%. For every ocean tile, add a microbe to ANY card.": "Nosta happitasoa 1 %. Jokaisesta valtamerilaatasta lisää mikrobi MILLE TAHANSA kortille.",
 
   "Data Leak": "Datavuoto",
   "(Add 5 data to ANY card.)": "(Lisää 5 dataa MILLE TAHANSA kortille.)",
@@ -108,7 +108,7 @@
   "(Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Trade for free. You may use a Trade Fleet that is already on a colony tile, but you may not trade with the tile that fleet came from. Gain 1 TR.)": "(Aseta siirtokunta. VOI ASETTAA SIIRTOKUNTALAATALLE JOSSA ON JO SIIRTOKUNTASI. Käy kauppaa ilmaiseksi. Voit käyttää kauppalaivastoa joka on jo siirtokuntalaatalla, mutta et voi käydä kauppaa sen laatan kanssa josta laivasto tuli. Nosta MKL:ääsi 1 askel.)",
 
   "Hydrogen Processing Plant": "Vetykäsittelylaitos",
-  "(Oxygen level must be 3% or higher. Decrease oxygen level 1% Raise your energy production 1 step for every two ocean tiles on Mars.)": "(Happitason täytyy olla 3% tai korkeampi. Vähennä happitasoa 1%. Lisää energiatuotantoasi 1 askel jokaista 2 valtamerilaattaa kohti Marsissa.)",
+  "(Oxygen level must be 3% or higher. Decrease oxygen level 1% Raise your energy production 1 step for every two ocean tiles on Mars.)": "(Happitason täytyy olla 3 % tai korkeampi. Vähennä happitasoa 1%. Lisää energiatuotantoasi 1 askel jokaista 2 valtamerilaattaa kohti Marsissa.)",
 
   "Interplanetary Transport": "Planeettojen välinen kuljetus",
   "(Increase your M€ production 1 step for every offworld city tile.)": "(Lisää M€-tuotantoasi 1 askel jokaisesta avaruuden kaupunkilaatasta.)",
@@ -126,7 +126,7 @@
   "(Increase your M€ production 3 steps, and plant production 1 step for every 2 Earth tags (including this.) Draw a card. Place a city tile ON THE RESERVED AREA.)": "(Nosta kortti. Aseta kaupunkilaatta VARATULLE ALUEELLE. Lisää kasvintuotantoasi 1 askel jokaista 2 Maa-ympyrääsi kohti (tämä mukaan lukien). Lisää M€-tuotantoasi 3 askelta.)",
 
   "Luxury Estate": "Luksuskiinteistö",
-  "(Oxygen must be 7% or greater. Gain 1 titanium for each city tile and greenery tile you own.)": "(Hapen täytyy olla 7% tai enemmän. Saat 1 titaania jokaisesta omistamastasi kaupunki- ja viherlaatasta.)",
+  "(Oxygen must be 7% or greater. Gain 1 titanium for each city tile and greenery tile you own.)": "(Hapen täytyy olla 7 % tai enemmän. Saat 1 titaania jokaisesta omistamastasi kaupunki- ja viherlaatasta.)",
 
   "Martian Culture": "Marsilainen kulttuuri",
   "(Action: Add 1 data to ANY card.)": "(TOIMINTO: Lisää 1 data MILLE TAHANSA kortille.)",
@@ -166,7 +166,7 @@
 
   "Ozone Generators": "Otsoni generaattorit",
   "(Action: Spend 3 energy to gain 1 TR.)": "(TOIMINTO: Kuluta 3 energiaa nostaaksesi MKL:ääsi 1 askeleen.)",
-  "(Requires 6% Oxygen.)": "(Vaatii 6% happea.)",
+  "(Requires 6% Oxygen.)": "(Vaatii 6 % happea.)",
 
   "Pollinators": "Pölyttäjät",
   "(Action: Add 1 animal on this card)": "(TOIMINTO: Lisää 1 eläin tälle kortille)",

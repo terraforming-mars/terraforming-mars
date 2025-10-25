@@ -3,7 +3,7 @@
   "You start with 1 plant production, 1 M€ production, 1 heat production and 40 M€.": "Aloitat 1 kasvituotannolla, 1 M€-tuotannolla, 1 lämpötuotannolla ja 40 M€:llä.",
   "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "VAIKUTUS: Pelin lopussa, saat −2 / 0 / 1 / 2 VP YMPYRÄTYYPIN MUKAAN 0 / 1-2 / 3-4 / 5+ ympyrästä.",
 
-  "Athena": "Athena",
+  "Athena": "",
   "You start with 62 M€. As your first action, place 2 hazard tiles adjacent to no other tiles.": "Aloitat 62 M€:llä. Ensimmäisenä toimintona aseta 2 vaaralattaa ei minkään muun laatan viereen.",
   "Effect: You do not lose production when placing adjacent to hazard tiles.": "VAIKUTUS: Et menetä tuotantoa kun asetat viereen vaaralaatat.",
 
@@ -11,7 +11,7 @@
   "You start with 40 M€ and 2 steel production.": "Aloitat 40 M€:llä ja 2 terästuotannolla.",
   "Effect: When you place a tile on an area that has a RESOURCE placement bonus, or on top of another tile, you may pay 2 M€ to draw a card.": "VAIKUTUS: Kun asetat laatan alueelle jossa on RESURSSI-sijoitusbonus, tai toisen laatan päälle, voit maksaa 2 M€ nostaaksesi kortin.",
 
-  "Eris": "Eris",
+  "Eris": "",
   "You start with 46 M€. As your first action, draw an Ares card.": "Aloitat 46 M€:llä. Ensimmäisenä toimintona nosta Ares-kortti.",
   "Action: Place a new hazard tile adjacent to NO OTHER TILE, OR remove a hazard tile to gain 1 TR.": "TOIMINTO: Aseta uusi vaaralaatta EI MINKÄÄN MUUN LAATAN viereen, TAI poista vaaralaatta nostaaksesi MKL:ääsi 1 askeleen.",
 
@@ -19,7 +19,7 @@
   "You start with 32 M€. As your first action, place two delegates in one party.": "Aloitat 32 M€:llä. Ensimmäisenä toimintona aseta kaksi edustajaa yhteen puolueeseen.",
   "Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.": "VAIKUTUS: Sinulla on +1 vaikutus. Kun lähetät edustajan lobbaus-toiminnolla, maksat siitä 2 M€ vähemmän.",
 
-  "Midas": "Midas",
+  "Midas": "",
   "You start with 120 M€. Lower your TR 7 steps.": "Aloitat 120 M€:llä. Laske MKL:ääsi 7 askelta.",
 
   "Playwrights": "Näytelmäkirjailijat",

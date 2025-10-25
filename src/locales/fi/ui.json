@@ -9,7 +9,7 @@
   "Promos": "",
   "Starting Corporations": "yhtiötä alussa",
   "Starting Preludes": "alkusoittoa alussa",
-  "Starting CEOs": "Aloitus toimitusjohtajat",
+  "Starting CEOs": "Toimitusjohtajaa alussa",
   "Corporations": "Yhtiöt",
   "Create Game": "Luo peli",
   "Color:": "Väri:",
@@ -67,9 +67,9 @@
   "Star Wars": "Tähtien sota",
   "agendas": "Asialista",
   "Extreme": "Äärimmäinen",
-  "CEO": "Toimitusjohtaja",
-  "CEOs": "Toimitusjohtajat",
-  "ceo": "Toimitusjohtaja",
+  "CEO": "TJ",
+  "CEOs": "TJ:t",
+  "ceo": "tj",
   "A-Z": "A–Ö",
   "all": "kaikki",
   "VPS": "on VP",
@@ -90,6 +90,7 @@
   "7 Heat Into Temperature": "7 lämpöä lämpötilaksi",
   "NEXT CARD:": "SEURAAVA KORTTI: ",
   "GENERATION 1 OF 12": "SUKUPOLVI ${0} / ${1}",
+  "of 12": "/ 12",
   "of 14": "/ 14",
   "You": "Sinä",
   "you": "sinä",
@@ -431,7 +432,7 @@
 
   "Select action for World Government Terraforming": "Valitse toiminto maailmanhallituksen maankaltaistukseen",
   "Increase temperature": "Nosta lämpötilaa",
-  "Increase oxygen": "Nosta happisisältöä",
+  "Increase oxygen": "Nosta happitasoa",
   "Add an ocean": "Lisää valtameri",
   "Increase Venus scale": "Nosta Venus-asteikkoa",
   "Increase the Moon habitat rate": "Nosta Kuun asuinastetta",
@@ -1186,8 +1187,8 @@
   "Multiplayer Options": "Monipelaajavalinnat",
   "Community": "Yhteisö",
   "Tags Overview": "Ympyröiden yleiskatsaus",
-  "Must select at least ${0} corporations": "Täytyy valita vähintään ${0} konsernia",
-  "corporation": "konserni",
+  "Must select at least ${0} corporations": "Täytyy valita vähintään ${0} yhtiötä",
+  "corporation": "yhtiö",
   "Hide discount on cards": "Piilota alennukset korteissa",
   "Hide sidebar notification": "Piilota sivupalkin ilmoitukset",
   "Learner Mode (req. refresh)": "Opettelutila (vaatii päivityksen)",
@@ -1485,5 +1486,10 @@
 
   "It is possible with Thorgate, Standard Technology, Suitable Infrastructure, and High Temp. Superconductors for a player to have infinite energy production. Press OK to continue or Cancel to change your selections.": "Thorgaten, Vakioteknologian, Sopivan infrastruktuurin ja Korkean lämpötilan suprajohtimien avulla pelaajalla voi olla ääretön energiatuotanto. Paina OK jatkaaksesi tai Peruuta muuttaaksesi valintojasi.",
 
-  "game id:": "pelin tunniste:"
+  "game id:": "pelin tunniste:",
+  "Don't show this again": "Älä näytä tätä enää",
+  "Yes": "Kyllä",
+  "No": "Ei",
+  "Pay with M€": "Maksa M€:lla"
+
 }

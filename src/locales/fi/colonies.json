@@ -99,7 +99,7 @@
 
   "Deimos": "",
   "Place a hazard tile next to no other tile": "Aseta vaarallaatta ei muiden laattojen viereen",
-  "Erode n spaces adjacent to hazard tiles (gaining placement bonuses)": "Kuluta n tilaa vaaralaattojen vierestä (saat sijoitusbonukset)",
+  "Erode n spaces adjacent to hazard tiles (gaining placement bonuses)": "Käytä n tilaa vaaralaattojen vierestä (saat sijoitusbonukset)",
   "Gain 1 M€ per hazard tile on Mars": "Saat 1 M€ jokaista vaaralaattaa kohden Marsissa",
 
   "Select colony tile to remove": "Valitse poistettava siirtokuntalaatta",
@@ -114,7 +114,7 @@
   "BUY OR DISCARD IT.": "OSTA TAI HYLKÄÄ SE.",
   "Trade Income: Draw X cards and keep 1": "Kauppatulot: Nosta X korttia ja pidä 1",
   "Trade Income: Steal 3 indicated resources": "Kauppatulot: Varasta 3 merkittyä resurssia",
-  "Trade Income: Erode X adjacent spaces": "Kauppatulot: Kuluta X viereistä tilaa",
+  "Trade Income: Erode X adjacent spaces": "Kauppatulot: Käytä X viereistä tilaa",
   "Copy Trade": "Kopioi kauppa",
   "Party": "Puolue",
 
@@ -138,5 +138,6 @@
   "Mercury - (Production)": "Merkurius - (Tuotanto)",
   "Pallas - (Politics)": "Pallas - (Politiikka)",
   "Iapetus II - (Data)": "",
-  "Deimos - (Hazards)": "Deimos - (Vaarat)"
+  "Deimos - (Hazards)": "Deimos - (Vaarat)",
+  "Bonus": ""
 }

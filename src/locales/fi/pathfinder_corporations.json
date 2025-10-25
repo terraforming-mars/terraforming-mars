@@ -24,7 +24,7 @@
 
   "Collegium Copernicus": "Kollegium Kopernikus",
   "(Effect: When you play a card with a science tag (including this) Add 1 data to ANY card.)": "(VAIKUTUS: Kun pelaat kortin jossa on tiedeympyrä (tämä mukaan lukien), lisää 1 data MILLE TAHANSA kortille.)",
-  "(Action: Spend 3 data from this card to trade.)": "(TOIMINTO: Kuluta 3 dataa tältä kortilta käydäksesi kauppaa.)",
+  "(Action: Spend 3 data from this card to trade.)": "(TOIMINTO: Käytä 3 dataa tältä kortilta käydäksesi kauppaa.)",
   "(You start with 33 M€. As your first action, draw 2 cards with a science tag.)": "(Aloitat 33 M€:lla. Ensimmäisenä toimintonasi nosta 2 korttia joissa on tiedeympyrä.)",
 
   "Habitat Marte": "",
@@ -50,8 +50,8 @@
 
   "Mind Set Mars": "Mars-ajattelutapa",
   "(Action: When you play a card with a building tag, add 1 agenda on this card.)": "(VAIKUTUS: Kun pelaat kortin jossa on rakennusympyrä, lisää 1 agenda tälle kortille.)",
-  "(Action: Spend 2 agenda resources to place 1 delegate in any party.)": "(TOIMINTO: Kuluta 2 agenda-resurssia asettaaksesi 1 delegaatin mihin tahansa puolueeseen.)",
-  "(Action: Spend 5 agenda resources to place a city tile on Mars.)": "(TOIMINTO: Kuluta 5 agenda-resurssia asettaaksesi kaupunkilaatan Marsiin.)",
+  "(Action: Spend 2 agenda resources to place 1 delegate in any party.)": "(TOIMINTO: Käytä 2 agenda-resurssia asettaaksesi 1 delegaatin mihin tahansa puolueeseen.)",
+  "(Action: Spend 5 agenda resources to place a city tile on Mars.)": "(TOIMINTO: Käytä 5 agenda-resurssia asettaaksesi kaupunkilaatan Marsiin.)",
   "(You start with 44 M€ and 1 agenda resource to this card.)": "(Aloitat 44 M€:lla ja 1 agenda-resurssilla tällä kortilla.)",
 
   "Gagarin Mobile Base": "Gagarin liikkuva tukikohta",

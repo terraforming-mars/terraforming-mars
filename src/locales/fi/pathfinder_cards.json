@@ -3,22 +3,22 @@
   "Increase your energy production 2 steps. Increase your M€ production 1 step per power tag you have, including this.": "Lisää energiatuotantoasi 2 askelta. Lisää M€-tuotantoasi 1 askel jokaista energiaympyrääsi kohti, tämä mukaan lukien.",
 
   "Agro-Drones": "Maatalousdroonit",
-  "Action: Spend 1 steel and 1 energy to gain 3 plants.": "TOIMINTO: Kuluta 1 terästä ja 1 energiaa saadaksesi 3 kasvia.",
+  "Action: Spend 1 steel and 1 energy to gain 3 plants.": "TOIMINTO: Käytä 1 terästä ja 1 energiaa saadaksesi 3 kasvia.",
   "Requires -18° C or warmer.": "Vaatii -18°C tai lämpimämmän.",
 
   "Anthozoa": "Kukkaeläimet",
-  "Action: Spend 1 plant to add an animal to this card.": "TOIMINTO: Kuluta 1 kasvia lisätäksesi eläimen tälle kortille.",
+  "Action: Spend 1 plant to add an animal to this card.": "TOIMINTO: Käytä 1 kasvia lisätäksesi eläimen tälle kortille.",
   "Requires 3 oceans on Mars. 1 VP per 2 animals on this card.": "Vaatii 3 valtamerta Marsissa. 1 VP jokaista 2 eläintä kohti tällä kortilla.",
 
   "Asteroid Resources": "Asteroidin resurssit",
-  "Spend 3 energy. Either increase your steel and titanium production one step, OR place an ocean, and gain 2 steel and one titanium.": "Kuluta 3 energiaa. Joko lisää teräs- ja titaanituotantoasi 1 askel TAI aseta valtameri ja saat 2 terästä ja 1 titaanin.",
+  "Spend 3 energy. Either increase your steel and titanium production one step, OR place an ocean, and gain 2 steel and one titanium.": "Käytä 3 energiaa. Joko lisää teräs- ja titaanituotantoasi 1 askel TAI aseta valtameri ja saat 2 terästä ja 1 titaanin.",
 
   "Botanical Experience": "Kasvitieteellinen kokemus",
   "(EFFECT: Whenever a greenery tile is placed, add 1 data on this card.) (EFFECT: Whenever this card has at least 3 data, automatically remove 3 data to raise your plant production 1 step.) (EFFECT: Players may remove your plants, but you only lose half, rounded up.)": "(VAIKUTUS: Aina kun viherlaatat asetetaan, lisää 1 data tälle kortille.) (VAIKUTUS: Aina kun tällä kortilla on vähintään 3 dataa, poista automaattisesti 3 dataa lisätäksesi kasvatuotantoasi 1 askel.) (VAIKUTUS: Pelaajat voivat poistaa kasvejasi, mutta menetät vain puolet, pyöristettynä ylöspäin.)",
   "Requires one greenery tile on Mars.": "Vaatii yhden viherlaatan Marsissa.",
 
   "Breeding Farms": "Jalostustilat",
-  "Action: Spend 1 plant to add 1 animal to ANY card.": "TOIMINTO: Kuluta 1 kasvia lisätäksesi 1 eläimen MILLE TAHANSA kortille.",
+  "Action: Spend 1 plant to add 1 animal to ANY card.": "TOIMINTO: Käytä 1 kasvia lisätäksesi 1 eläimen MILLE TAHANSA kortille.",
   "Requires 1 science tag and 1 animal tag. Raise the temperature 1 step.": "Vaatii 1 tiedeympyrän ja 1 eläinympyrän. Nosta lämpötilaa 1 askel.",
 
   "Cassini Station": "Cassini-asema",
@@ -49,11 +49,11 @@
   "Add 1 data to any card. Add 1 resource to any card.": "Lisää 1 data mille kortille tahansa. Lisää 1 resurssi mille kortille tahansa.",
 
   "Cryptocurrency": "Kryptovaluutta",
-  "Action: Spend 1 energy to add 1 data to this card.": "TOIMINTO: Kuluta 1 energiaa lisätäksesi 1 datan tälle kortille.",
+  "Action: Spend 1 energy to add 1 data to this card.": "TOIMINTO: Käytä 1 energiaa lisätäksesi 1 datan tälle kortille.",
   "Action: Remove all data from this card to gain 3M€ per data removed.": "TOIMINTO: Poista kaikki data tältä kortilta saadaksesi 3M€ jokaista poistettua dataa kohti.",
 
   "Cultivation of Venus": "Venuksen viljely",
-  "Action: Spend 3 plants to raise Venus 1 step.": "TOIMINTO: Kuluta 3 kasvia nostaaksesi Venusta 1 askel.",
+  "Action: Spend 3 plants to raise Venus 1 step.": "TOIMINTO: Käytä 3 kasvia nostaaksesi Venusta 1 askel.",
   "1 VP for every 2 Venus tags you own.": "1 VP jokaista 2 omaamaasi Venus-ympyrää kohti.",
 
   "Cyanobacteria": "Sinilevät",
@@ -79,7 +79,7 @@
   "(Temperature must be -18 C or lower. Decrease your energy production 1 step and Raise your M€ production 3 steps. Add 1 data to ANY card. Place a city tile on Mars NEXT TO NO OTHER TILE.)": "(Lämpötilan täytyy olla -18°C tai alhaisempi. Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 3 askelta. Aseta kaupunkilaatta Marsiin EI MINKÄÄN MUUN LAATAN VIEREEN. Lisää 1 data MILLE TAHANSA kortille.)",
 
   "Economic Espionage": "Talousvakoilu",
-  "(Action: Spend 2 M€ to Add 1 data to ANY card.)": "(TOIMINTO: Kuluta 2 M€ lisätäksesi 1 datan MILLE TAHANSA kortille.)",
+  "(Action: Spend 2 M€ to Add 1 data to ANY card.)": "(TOIMINTO: Käytä 2 M€ lisätäksesi 1 datan MILLE TAHANSA kortille.)",
   "1 VP for every 3 data here.": "(1 VP jokaista 3 dataa kohti täällä.)",
 
   "Economic Help": "Talousapu",
@@ -93,7 +93,7 @@
   "(Requires maximum 1 science tag. Increase your M€ production 1 step for every generation played so far.)": "(Vaatii enintään 1 tiedeympyrän. Lisää M€-tuotantoasi 1 askel jokaisesta tähän mennessä pelatusta sukupolvesta.)",
 
   "Floater-Urbanism": "Kellukkeiden kaupungistuminen",
-  "(Action: Spend 1 floater from any card to add 1 Venusian habitat on this card.)": "(TOIMINTO: Kuluta 1 kelluke miltä tahansa kortilta lisätäksesi 1 Venus-habitaatin tälle kortille.)",
+  "(Action: Spend 1 floater from any card to add 1 Venusian habitat on this card.)": "(TOIMINTO: Käytä 1 kelluke miltä tahansa kortilta lisätäksesi 1 Venus-habitaatin tälle kortille.)",
   "1 VP for every Venusian habitat on this card.": "(1 VP jokaisesta Venus-habitaatista tällä kortilla.)",
   "(Requires 4 Venus tags.)": "(Vaatii 4 Venus-ympyrää.)",
 
@@ -165,7 +165,7 @@
   "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card.)": "(Vaatii 1 avaruusympyrän ja 1 tiedeympyrän. Lisää 2 dataa MILLE TAHANSA kortille.)",
 
   "Ozone Generators": "Otsoni generaattorit",
-  "(Action: Spend 3 energy to gain 1 TR.)": "(TOIMINTO: Kuluta 3 energiaa nostaaksesi MKL:ääsi 1 askeleen.)",
+  "(Action: Spend 3 energy to gain 1 TR.)": "(TOIMINTO: Käytä 3 energiaa nostaaksesi MKL:ääsi 1 askeleen.)",
   "(Requires 6% Oxygen.)": "(Vaatii 6 % happea.)",
 
   "Pollinators": "Pölyttäjät",
@@ -242,7 +242,7 @@
   "(Requires 4 science tags.)": "(Vaatii 4 tiedeympyrää.)",
 
   "Think Tank": "Ajatushautomo",
-  "(Action: Spend 2 M€ to place 1 data on any card.)": "(TOIMINTO: Kuluta 2 M€ asettaaksesi 1 datan mille kortille tahansa.)",
+  "(Action: Spend 2 M€ to place 1 data on any card.)": "(TOIMINTO: Käytä 2 M€ asettaaksesi 1 datan mille kortille tahansa.)",
   "+/-1 global parameter": "+/-1 globaali parametri",
   "(Effect: When playing a card, you can remove data from this card to change the card's global requirement by 1 step for every 1 data removed.)": "(VAIKUTUS: Kun pelaat kortin, voit poistaa dataa tältä kortilta muuttaaksesi kortin globaaleja vaatimuksia 1 askel jokaista poistettua dataa kohti.)",
 

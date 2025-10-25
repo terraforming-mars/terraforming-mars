@@ -10,7 +10,7 @@
 "Excavate 1 underground resource on ANY SPACE RESERVED FOR AN OCEAN. Then, place an ocean tile there, if possible.": "Kaiva 1 maanalainen resurssi MISTÄ TAHANSA VALTAMERELLE VARATUSTA TILASTA. Aseta sitten valtamerialuelaatta sinne, jos mahdollista.",
 
 "Battery Factory": "Akkutehdas",
-"Action: Spend 1 energy to gain 1 M€ for each power tag you have.": "TOIMINTO: Kuluta 1 energiaa saadaksesi 1 M€ jokaista energiaympyrääsi kohti.",
+"Action: Spend 1 energy to gain 1 M€ for each power tag you have.": "TOIMINTO: Käytä 1 energiaa saadaksesi 1 M€ jokaista energiaympyrääsi kohti.",
 
 "Behemoth Excavator": "Behemoth-kaivinkone",
 "Excavate 3 underground resources.": "Kaiva 3 maanalaista resurssia.",
@@ -29,7 +29,7 @@
 "Increase your steel production 1 step. Place a city in a NON-RESERVED SPACE WITH YOUR EXCAVATION MARKER, ignoring other placement restrictions": "Lisää terästuotantoasi 1 askel. Aseta kaupunki EI-VARATTUUN TILAAN KAIVAUSMERKKISI KANSSA, sivuuttaen muut sijoitusrajoitukset.",
 
 "Chemical Factory": "Kemiantehdas",
-"Action: Spend 1 plant to excavate an underground resource.": "TOIMINTO: Kuluta 1 kasvi kaivaaksesi maanalaisen resurssin.",
+"Action: Spend 1 plant to excavate an underground resource.": "TOIMINTO: Käytä 1 kasvi kaivaaksesi maanalaisen resurssin.",
 "Gain 2 corruption.": "Saat 2 korruptiota.",
 
 "Class-action Lawsuit": "Ryhmäkanne",
@@ -68,7 +68,7 @@
 "Excavate 2 underground resources. Remove up to 3 plants from any player.": "Kaiva 2 maanalaista resurssia. Poista enintään 3 kasvia keneltä tahansa pelaajalta.",
 
 "Earthquake Machine": "Maanjäristyskone",
-"Action: Spend 1 energy to excavate an underground resource.": "TOIMINTO: Kuluta 1 energia kaivaaksesi maanalaisen resurssin.",
+"Action: Spend 1 energy to excavate an underground resource.": "TOIMINTO: Käytä 1 energia kaivaaksesi maanalaisen resurssin.",
 "Requires 2 science tags. Decrease any plant production 1 step": "Vaatii 2 tiedeympyrää. Vähennä jonkun kasvihuonetuotantoa 1 askel",
 
 "Excavator Leasing": "Kaivukoneiden vuokraus",
@@ -120,12 +120,12 @@
 "Every player with the lowest number of crime tags INCLUDING EVENTS gains 1 TR, if possible. Players with 0 crime tags gain 1 additional TR.": "Jokainen pelaaja jolla on vähiten rikosympyröitä TAPAHTUMAT MUKAAN LUKIEN nostaa MKL:äänsä 1 askeleen, jos mahdollista. Pelaajat joilla on 0 rikosympyrää nostavat MKL:äänsä 1 ylimääräisen askeleen.",
 
 "Grey Market Exploitation": "Harmaan markkinan hyväksikäyttö",
-"Action: Spend 1 M€ to gain 1 standard resource.": "TOIMINTO: Kuluta 1 M€ saadaksesi 1 standardiresurssin.",
-"Action: Spend 1 corruption to gain 3 of the same standard resource.": "TOIMINTO: Kuluta 1 korruptio saadaksesi 3 samaa standardiresurssia.",
+"Action: Spend 1 M€ to gain 1 standard resource.": "TOIMINTO: Käytä 1 M€ saadaksesi 1 standardiresurssin.",
+"Action: Spend 1 corruption to gain 3 of the same standard resource.": "TOIMINTO: Käytä 1 korruptio saadaksesi 3 samaa standardiresurssia.",
 "Requires 2 corruption.": "Vaatii 2 korruptiota.",
 
 "Guerilla Ecologists": "Sissiekologit",
-"Requires 1 corruption. Spend 4 plants to place a greenery tile IGNORING ADJACENCY RESTRICTIONS.": "Vaatii 1 korruption. Kuluta 4 kasvia asettaaksesi viherlaatan SIVUUTTAEN VIEREKKÄISYYSRAJOITUKSET.",
+"Requires 1 corruption. Spend 4 plants to place a greenery tile IGNORING ADJACENCY RESTRICTIONS.": "Vaatii 1 korruption. Käytä 4 kasvia asettaaksesi viherlaatan SIVUUTTAEN VIEREKKÄISYYSRAJOITUKSET.",
 
 "Hackers": "Hakkerit",
 "Requires 2 corruption. Decrease any M€ production 2 steps. Increase your M€ production 1 step for every unit of corruption you have.": "Vaatii 2 korruptiota. Vähennä jonkun M€-tuotantoa 2 askelta. Lisää M€-tuotantoasi 1 askel jokaista korruptio-yksikköäsi kohti.",
@@ -146,7 +146,7 @@
 "Gain 1 corruption. Reduce any energy production 2 steps.": "Saat 1 korruption. Vähennä jonkun energiatuotantoa 2 askelta.",
 
 "Investigative Journalism": "Tutkiva journalismi",
-"Action: Spend 5 M€ and remove 1 corruption from ANOTHER player with more corruption than you to add 1 journalism resource on this card.": "TOIMINTO: Kuluta 5 M€ ja poista 1 korruptio TOISELTA pelaajalta jolla on enemmän korruptiota kuin sinulla lisätäksesi 1 journalismiresurssin tälle kortille.",
+"Action: Spend 5 M€ and remove 1 corruption from ANOTHER player with more corruption than you to add 1 journalism resource on this card.": "TOIMINTO: Käytä 5 M€ ja poista 1 korruptio TOISELTA pelaajalta jolla on enemmän korruptiota kuin sinulla lisätäksesi 1 journalismiresurssin tälle kortille.",
 "Decrease your M€ production 1 step. 1 VP per journalism resource on this card.": "Vähennä M€-tuotantoasi 1 askel. 1 VP jokaista journalismiresurssia kohti tällä kortilla.",
 
 "Labor Trafficking": "Työvoiman salakuljetus",
@@ -175,21 +175,21 @@
 "Requires 1 corruption. Remove up to 2 resources from ANY card": "Vaatii 1 korruption. Poista enintään 2 resurssia MILTÄ TAHANSA kortilta",
 
 "Micro-Geodesics": "Mikrogeodesiat",
-"Action: Spend 1 microbe from ANY card and discard 1 of your claimed underground resource tokens to gain 3 plants.": "TOIMINTO: Kuluta 1 mikrobi MILTÄ TAHANSA kortilta ja hylkää 1 lunastetuista maanalaisista resurssimerkinnöistäsi saadaksesi 3 kasvia.",
+"Action: Spend 1 microbe from ANY card and discard 1 of your claimed underground resource tokens to gain 3 plants.": "TOIMINTO: Käytä 1 mikrobi MILTÄ TAHANSA kortilta ja hylkää 1 lunastetuista maanalaisista resurssimerkinnöistäsi saadaksesi 3 kasvia.",
 "Excavate an underground resource. Put 1 microbe on this card.": "Kaiva maanalainen resurssi. Aseta 1 mikrobi tälle kortille.",
 
 "Microgravimetry": "Mikrogravimetria",
-"Action: Spend 2 energy identify 3 underground resources. Then claim 1 of them.": "TOIMINTO: Kuluta 2 energiaa tunnistaaksesi 3 maanalaista resurssia. Sitten lunasta 1 niistä.",
+"Action: Spend 2 energy identify 3 underground resources. Then claim 1 of them.": "TOIMINTO: Käytä 2 energiaa tunnistaaksesi 3 maanalaista resurssia. Sitten lunasta 1 niistä.",
 
 "Microprobing Technology": "Mikrotunnusteluteknologia",
 "Requires 1 science tag. Gain 3 plants. Identify 2 underground resources. Claim 1 of them.": "Vaatii tiedeympyrän. Saat 3 kasvia. Tunnista 2 maanalaista resurssia. Lunasta 1 niistä.",
 
 "Mining Market Insider": "Kaivosmarkkinoiden sisäpiiriläinen",
 "Effect: After any player identifies 1 or more underground spaces (at once), add 1 data resource to this card.": "VAIKUTUS: Kun kuka tahansa pelaaja tunnistaa 1 tai useamman maanalaisen tilan (kerralla), lisää 1 dataresurssi tälle kortille.",
-"Action: Spend 4 data resources on this card to draw a card.": "TOIMINTO: Kuluta 4 dataresurssia tältä kortilta nostaaksesi kortin.",
+"Action: Spend 4 data resources on this card to draw a card.": "TOIMINTO: Käytä 4 dataresurssia tältä kortilta nostaaksesi kortin.",
 
 "Monopoly": "Monopoli",
-"Action: Spend 1 corruption to increase any production 1 step.": "TOIMINTO: Kuluta 1 korruptio lisätäksesi jonkun tuotantoa 1 askel.",
+"Action: Spend 1 corruption to increase any production 1 step.": "TOIMINTO: Käytä 1 korruptio lisätäksesi jonkun tuotantoa 1 askel.",
 "Requires 2 corruption. Choose a standard resource type. Steal 2 units of that resource from EACH OTHER player.": "Vaatii 2 korruptiota. Valitse standardiresurssityyppi. Varasta 2 yksikköä kyseistä resurssia JOKAISELTA MUULTA pelaajalta.",
 
 "Nanofoundry": "Nanovaliomo",
@@ -217,7 +217,7 @@
 "RETURN 1 OF YOUR PLAYED GREEN OR BLUE CARDS TO YOUR HAND. IT MAY NOT BE A CARD THAT PLACES SPECIAL TILES OR RETURNS PLAYED CARDS TO YOUR HAND.": "PALAUTA 1 PELATUISTA VIHREISTÄ TAI SINISISTÄ KORTEISTASI KÄTEESI. SE EI SAA OLLA KORTTI JOKA ASETTAA ERIKOISLAATTOJA TAI PALAUTTAA PELATTUJA KORTTEJA KÄTEESI.",
 
 "Personal Spacecruiser": "Henkilökohtainen avaruusristeilijä",
-"Action: Spend 1 energy to gain 2 M€ for each corruption resource you have.": "TOIMINTO: Kuluta 1 energia saadaksesi 2 M€ jokaista korruptioresurssiasi kohti.",
+"Action: Spend 1 energy to gain 2 M€ for each corruption resource you have.": "TOIMINTO: Käytä 1 energia saadaksesi 2 M€ jokaista korruptioresurssiasi kohti.",
 "Gain 1 corruption. Put 1 fighter on ANY card.": "Saat 1 korruption. Aseta 1 hävittäjä MILLE TAHANSA kortille.",
 
 "Planetary Rights Buyout": "Planeettaoikeuksien takaisniosto",
@@ -236,7 +236,7 @@
 
 "Private Military Contractor": "Yksityinen sotilasurakoitsija",
 "Effect: When blocking damage from other players, you can use fighters here as if they were corruption resources. You cannot use them for score bribing or collusion.": "VAIKUTUS: Kun estät vahinkoa muilta pelaajilta, voit käyttää täällä olevia hävittäjiä ikään kuin ne olisivat korruptioresursseja. Et voi käyttää niitä pistemittelöön lahjontaan tai salayhteistyöhön.",
-"Action: Spend 1 titanium to add 1 fighter resource to this card.": "TOIMINTO: Kuluta 1 titaania lisätäksesi 1 hävittäjäresurssin tälle kortille.",
+"Action: Spend 1 titanium to add 1 fighter resource to this card.": "TOIMINTO: Käytä 1 titaania lisätäksesi 1 hävittäjäresurssin tälle kortille.",
 "Add 1 fighter resource to this card.": "Lisää 1 hävittäjäresurssi tälle kortille.",
 
 "Private Resorts": "Yksityiset lomakeskukset",
@@ -263,7 +263,7 @@
 "Gain 1 corruption.": "Saat 1 korruption.",
 
 "Search for Life Underground": "Maanalaisen elämän etsintä",
-"Action: Spend 1 M€ to identify an underground resource. If it depicts at least 1 microbe, add a science resource here.": "TOIMINTO: Kuluta 1 M€ tunnistaaksesi maanalaisen resurssin. Jos siinä on vähintään 1 mikrobi, lisää tiederesurssi tähän.",
+"Action: Spend 1 M€ to identify an underground resource. If it depicts at least 1 microbe, add a science resource here.": "TOIMINTO: Käytä 1 M€ tunnistaaksesi maanalaisen resurssin. Jos siinä on vähintään 1 mikrobi, lisää tiederesurssi tähän.",
 "3 VPs if you have one or more science resources here.": "3 VP jos sinulla on yksi tai useampi tiederesurssi täällä.",
 "Temperature must -18° C or colder.": "Lämpötilan täytyy olla -18° C tai kylmempi.",
 
@@ -280,8 +280,8 @@
 "Requires 3 corruption.": "Vaatii 3 korruptiota.",
 
 "Space Wargames": "Avaruussotapelit",
-"Action: Spend 1 titanium to put 2 fighters on this card.": "TOIMINTO: Kuluta 1 titaania asettaaksesi 2 hävittäjää tälle kortille.",
-"Action: Spend 6 fighter resource on this card to take first player next generation.": "TOIMINTO: Kuluta 6 hävittäjäresurssia tältä kortilta tullaksesi ensimmäiseksi pelaajaksesi seuraavassa sukupolvessa.",
+"Action: Spend 1 titanium to put 2 fighters on this card.": "TOIMINTO: Käytä 1 titaania asettaaksesi 2 hävittäjää tälle kortille.",
+"Action: Spend 6 fighter resource on this card to take first player next generation.": "TOIMINTO: Käytä 6 hävittäjäresurssia tältä kortilta tullaksesi ensimmäiseksi pelaajaksesi seuraavassa sukupolvessa.",
 "1 VP for each Jovian tag you have.": "1 VP jokaista Jupiter-ympyrääsi kohti.",
 "Put 4 fighters on this card.": "Aseta 4 hävittäjää tälle kortille.",
 
@@ -297,7 +297,7 @@
 "Action: Use a standard project that you've already used this generation, with its cost reduced by 8 M€.": "TOIMINTO: Käytä standardiprojektia jota olet jo käyttänyt tällä sukupolvella, sen hinta alennettuna 8 M€:llä.",
 
 "Stem Field Subsidies": "STEM-alan tuet",
-"Action: Spend 2 resources here to identify 3 underground resources. Claim 1 of them.": "TOIMINTO: Kuluta 2 resurssia täältä tunnistaaksesi 3 maanalaista resurssia. Lunasta 1 niistä.",
+"Action: Spend 2 resources here to identify 3 underground resources. Claim 1 of them.": "TOIMINTO: Käytä 2 resurssia täältä tunnistaaksesi 3 maanalaista resurssia. Lunasta 1 niistä.",
 "Effect: Whenever you play a science tag (including this), add 1 data to this card.": "VAIKUTUS: Aina kun pelaat tiedeympyrän (tämä mukaan lukien), lisää 1 data tälle kortille.",
 
 "Sting Operation": "Salaoperaatio",
@@ -316,7 +316,7 @@
 
 "Titan Manufacturing Colony": "Titanin valmistussiirtokunta",
 "Effect: Whenever you play a Jovian tag, (including this one), add 1 tool resource on this card.": "VAIKUTUS: Aina kun pelaat Jupiter-ympyrän (tämä mukaan lukien), lisää 1 työkaluresurssi tälle kortille.",
-"Action: Spend 1 tool resource on this card to excavate an underground resource.": "TOIMINTO: Kuluta 1 työkaluresurssi tältä kortilta kaivaaksesi maanalaisen resurssin.",
+"Action: Spend 1 tool resource on this card to excavate an underground resource.": "TOIMINTO: Käytä 1 työkaluresurssi tältä kortilta kaivaaksesi maanalaisen resurssin.",
 
 "Tunnel Boring Machine": "Tunnelporauskone",
 "Action: Pay 3 energy to excavate 2 underground resources.": "TOIMINTO: Maksa 3 energiaa kaivaaksesi 2 maanalaista resurssia.",
@@ -345,7 +345,7 @@
 "Requires you have 1 underground token. Gain 1 corruption and 2 of the same standard resource.": "Vaatii että sinulla on 1 lunastetussa maanalaisessa resurssimerkintä. Saat 1 korruption ja 2 samaa standardiresurssia.",
 
 "Voltaic Metallurgy": "Sähkömetallurgia",
-"Action: Spend any number of steel to gain the same amount of titanium (max is the number of power tags you have.)": "TOIMINTO: Kuluta mikä tahansa määrä terästä saadaksesi saman määrän titaania (maksimi on energiaympyröittesi määrä).",
+"Action: Spend any number of steel to gain the same amount of titanium (max is the number of power tags you have.)": "TOIMINTO: Käytä mikä tahansa määrä terästä saadaksesi saman määrän titaania (maksimi on energiaympyröittesi määrä).",
 "Requires 1 science tag.": "Vaatii 1 tiedeympyrän.",
 
 "Volunteer Mining Initiative": "Vapaaehtoinen kaivostoimintahanke",

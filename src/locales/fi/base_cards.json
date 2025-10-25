@@ -12,7 +12,7 @@
   "Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your plant production 2 steps.": "Vaatii 3 merilaattaa. Vähennä M€-tuotantoasi 1 askel ja mitä tahansa lämmöntuotantoa 1 askel. Lisää kasvintuotantoasi 2 askelta.",
 
   "Search For Life": "Elämän etsintä",
-  "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a microbe tag, add a science resource here.": "TOIMINTO: Kuluta 1 M€ paljastaaksesi nostopakan päällimmäisen kortin. Jos siinä on mikrobiympyrä, lisää tiede-resurssi tähän.",
+  "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a microbe tag, add a science resource here.": "TOIMINTO: Käytä 1 M€ paljastaaksesi nostopakan päällimmäisen kortin. Jos siinä on mikrobiympyrä, lisää tiede-resurssi tähän.",
   "3 VPs if you have one or more science resources here.": "3 VP jos sinulla on yksi tai useampi tiede-resurssi tässä.",
 
   "Oxygen must be 6% or less.": "Hapen on oltava 6 % tai vähemmän.",
@@ -49,7 +49,7 @@
   "Action: Look at the top card and either buy it or discard it": "TOIMINTO: Katso päällimmäistä korttia ja joko osta se tai hylkää se",
 
   "Martian Rails": "Marsin rautatie",
-  "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "TOIMINTO: Kuluta 1 energia hankkiaksesi 1 M€ jokaisesta kaupunkilaatasta MARSISSA.",
+  "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "TOIMINTO: Käytä 1 energia hankkiaksesi 1 M€ jokaisesta kaupunkilaatasta MARSISSA.",
 
   "Capital": "Pääkaupunki",
   "2 Oceans": "2 merta",
@@ -74,11 +74,11 @@
   "1 VP for each Jovian tag you have.": "1 VP jokaisesta Jupiter-ympyrästäsi.",
 
   "Space Elevator": "Avaruushissi",
-  "Action: Spend 1 steel to gain 5 M€.": "TOIMINTO: Kuluta 1 teräs hankkiaksesi 5 M€.",
+  "Action: Spend 1 steel to gain 5 M€.": "TOIMINTO: Käytä 1 teräs hankkiaksesi 5 M€.",
   "Increase your titanium production 1 step.": "Lisää titaanintuotantoasi 1 askel.",
 
   "Development Center": "Kehityskeskus",
-  "Action: Spend 1 energy to draw a card.": "AKTION: Kuluta 1 energia nostaaksesi kortin.",
+  "Action: Spend 1 energy to draw a card.": "AKTION: Käytä 1 energia nostaaksesi kortin.",
 
   "Equatorial Magnetizer": "Päiväntasaajan magnetisoija",
   "Action: Decrease your energy production 1 step to increase your terraform rating 1 step.": "AKTION: Vähennä energiatuotantoasi 1 askel nostaaksesi MKL:ääsi 1 askel.",
@@ -124,7 +124,7 @@
   "Requires that you have 5 science tags.": "Vaatii että sinulla on 5 tiedeympyrää.",
 
   "Security Fleet": "Turvallisuuslaivasto",
-  "Action: Spend 1 titanium to add 1 fighter resource to this card.": "AKTION: Kuluta 1 titaani lisätäksesi 1 hävittäjä-resurssin tälle kortille.",
+  "Action: Spend 1 titanium to add 1 fighter resource to this card.": "AKTION: Käytä 1 titaani lisätäksesi 1 hävittäjä-resurssin tälle kortille.",
   "1 VP for each fighter resource on this card.": "1 VP jokaista hävittäjä-resurssia kohden tällä kortilla.",
 
   "Cupola City": "Kupolikaupunki",

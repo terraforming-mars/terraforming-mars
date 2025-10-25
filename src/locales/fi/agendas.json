@@ -10,7 +10,7 @@
   "When you place a tile ON MARS, gain 1 steel": "Kun asetat laatan MARSIIN, saat 1 teräksen",
   "When you play a building tag, gain 2 M€": "Kun pelaat rakennusympyrän, saat 2 M€",
   "Your steel resources are worth 1 M€ extra": "Teräsresurssisi ovat 1 M€ arvokkaampia",
-  "Spend 4 M€ to draw a Building card (Turmoil Mars First)": "Kuluta 4 M€ nostaaksesi rakennuskortin (Myllerrys Mars Ensin)",
+  "Spend 4 M€ to draw a Building card (Turmoil Mars First)": "Käytä 4 M€ nostaaksesi rakennuskortin (Myllerrys Mars Ensin)",
 
   "Gain 1 M€ for each science tag you have": "Saat 1 M€ jokaisesta tiedeympyrästä jonka omistat",
   "Gain 1 M€ for every 3 cards in hand": "Saat 1 M€ jokaisesta kolmesta kortista kädessäsi",
@@ -27,8 +27,8 @@
   "Gain 1 M€ for each Space tag you have (${0})": "Saat 1 M€ jokaisesta avaruusympyrästä jonka omistat (${0})",
 
   "Your titanium resources are worth 1 M€ extra": "Titaaniresurssisi ovat 1 M€ arvokkaampia",
-  "Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)": "Kuluta 4 M€ hankkiaksesi 2 titaania tai lisätäksesi 2 kellutinta MILLE TAHANSA kortille (Myllerrys Yhtenäisyys)",
-  "Spend 4 M€ to draw a Space card (Turmoil Unity)": "Kuluta 4 M€ nostaaksesi avaruus-kortin (Myllerrys Yhtenäisyys)",
+  "Spend 4 M€ to gain 2 titanium or add 2 floaters to ANY card (Turmoil Unity)": "Käytä 4 M€ hankkiaksesi 2 titaania tai lisätäksesi 2 kellutinta MILLE TAHANSA kortille (Myllerrys Yhtenäisyys)",
+  "Spend 4 M€ to draw a Space card (Turmoil Unity)": "Käytä 4 M€ nostaaksesi avaruus-kortin (Myllerrys Yhtenäisyys)",
   "Cards with Space tags cost 2 M€ less to play": "Kortit, joissa on avaruusympyrä, maksavat 2 M€ vähemmän",
 
   "Gain 1 M€ for each Plant, Microbe and Animal tag you have": "Saat 1 M€ jokaisesta kasvi-, mikrobi- ja eläinympyrästä jonka omistat",
@@ -39,7 +39,7 @@
   "When you place a greenery tile, gain 4 M€": "Kun asetat viherlaatan, saat 4 M€",
   "When you place a tile, gain 1 plant": "Kun asetat laatan, saat 1 kasvin",
   "When you play an animal, plant or microbe tag, gain 2 M€": "Kun pelaat eläin-, kasvi- tai mikrobiympyrän, saat 2 M€",
-  "Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)": "Kuluta 5 M€ hankkiaksesi 3 kasvia tai lisätäksesi 2 mikrobia MILLE TAHANSA kortille (Myllerrys Vihreät)",
+  "Spend 5 M€ to gain 3 plants or add 2 microbes to ANY card (Turmoil Greens)": "Käytä 5 M€ hankkiaksesi 3 kasvia tai lisätäksesi 2 mikrobia MILLE TAHANSA kortille (Myllerrys Vihreät)",
 
   "The player(s) with the lowest TR gains 1 TR": "Pelaaja(t), jo(i)lla on alin MKL, nostaa MKL:äänsä 1 askeleen",
   "The player(s) with the highest TR loses 1 TR": "Pelaaja(t), jo(i)lla on korkein MKL, laskee MKL:äänsä 1 askeleen",

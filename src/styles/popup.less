@@ -12,17 +12,19 @@
 
   .popup-inner {
     background-color: black;
-    padding: 20px;
+    padding: 0px 20px 20px; /* 0 for the top, 20 for the rest */
     border-radius: 8px;
     border: 2px solid white;
     width: 90vw;
     height: 90vh;
     overflow-y: auto; /* Adds scrollbar if content exceeds height */
+    overscroll-behavior: contain;
     position: relative; /* For positioning the close button */
     color: white;
   }
 
   .popup-header {
+    margin-top: 20px; /* This makes up for the padding 0 for popup-inner */
     position: sticky;
     top: 0;
     z-index: 10;

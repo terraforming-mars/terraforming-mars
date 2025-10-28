@@ -1,15 +1,7 @@
 <template>
   <PopupPanel @close="$emit('close')">
     <template v-slot:header>
-      <div class="corporations-filter-toolbox-cont">
-        <h2 v-i18n>Corporations</h2>
-        <div class="corporations-filter-toolbox corporations-filter-toolbox--topmost">
-            <a href="#" v-i18n v-on:click.prevent="selectAll('All')">All*</a> |
-            <a href="#" v-i18n v-on:click.prevent="selectNone('All')">None*</a> |
-            <a href="#" v-i18n v-on:click.prevent="invertSelection('All')">Invert*</a>
-            <input ref="filter" class="filter" :placeholder="$t('filter')" v-model="filterText">
-        </div>
-      </div>
+      <FilterHeader :title="Corporations"></FilterHeader>
     </template>
     <div>
       <div class="corporations-filter">
@@ -41,6 +33,7 @@
 import Vue from 'vue';
 
 import PopupPanel from '../common/PopupPanel.vue';
+import FilterHeader from './FilterHeader.vue';
 import {CardName} from '@/common/cards/CardName';
 import {Expansion, GameModule, GAME_MODULES, MODULE_NAMES} from '@/common/cards/GameModule';
 import {byModule, byType, getCard, getCards} from '@/client/cards/ClientCardManifest';
@@ -70,6 +63,7 @@ GAME_MODULES.forEach((module) => ALL_CARDS_BY_MODULE[module].sort());
 export default Vue.extend({
   name: 'CorporationsFilter',
   components: {
+    FilterHeader,
     PopupPanel,
   },
   props: {

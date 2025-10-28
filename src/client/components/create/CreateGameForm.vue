@@ -504,7 +504,7 @@
             <PreludesFilter
                 ref="preludesFilter"
                 v-show="showPreludesList"
-                v-if="showCorporationList"
+                v-if="showPreludesList"
                 v-on:prelude-list-changed="updateCustomPreludes"
                 v-bind:expansions="expansions"
                 v-bind:selected="customPreludes"
@@ -514,7 +514,7 @@
             <ColoniesFilter
                 ref="coloniesFilter"
                 v-show="showColoniesList"
-                v-if="showCorporationList"
+                v-if="showColoniesList"
                 v-on:colonies-list-changed="updateCustomColonies"
                 v-bind:expansions="expansions"
                 v-bind:selected="customColonies"

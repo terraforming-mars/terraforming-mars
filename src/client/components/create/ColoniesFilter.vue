@@ -56,6 +56,7 @@ export default Vue.extend({
   },
   props: {
     expansions: Object as () => Record<Expansion, boolean>,
+    selected: Object as () => Array<ColonyName>,
   },
   data() {
     const officialColonies = [...OFFICIAL_COLONY_NAMES].sort();
@@ -68,7 +69,7 @@ export default Vue.extend({
       officialColonies,
       communityColonies,
       pathfindersColonies,
-      selectedColonies: [
+      selectedColonies: this.selected.length > 0 ? this.selected : [
         ...officialColonies,
         ...this.expansions.community ? communityColonies: [],
         ...this.expansions.pathfinders ? pathfindersColonies: [],

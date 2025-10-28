@@ -14,7 +14,7 @@
     <div>
       <div class="corporations-filter">
         <template v-for="module in GAME_MODULES">
-          <div class="corporations-filter-group" v-if="cardsByModule[module].length > 0" v-bind:key="module">
+          <div class="corporations-filter-group" v-if="ALL_CARDS_BY_MODULE[module].length > 0" v-bind:key="module">
             <div class="corporations-filter-toolbox-cont">
                 <div><span v-i18n>{{MODULE_NAMES[module]}}</span>&nbsp;<div :class="icon(module)"></div></div>
                 <div class="corporations-filter-toolbox">
@@ -23,7 +23,7 @@
                     <a href="#" v-i18n v-on:click.prevent="invertSelection(module)">Invert</a>
                 </div>
             </div>
-            <div v-for="corporation in cardsByModule[module]" v-bind:key="corporation" v-show="include(corporation)">
+            <div v-for="corporation in ALL_CARDS_BY_MODULE[module]" v-bind:key="corporation" v-show="include(corporation)">
                 <label class="form-checkbox">
                     <input type="checkbox" v-model="selectedCorporations" :value="corporation"/>
                     <i class="form-icon"></i><span v-i18n>{{ corporation }}</span>
@@ -56,6 +56,17 @@ function corpCardNames(module: GameModule): Array<CardName> {
 
 type Group = GameModule | 'All';
 
+// Start by giving every entry a default value
+// Ideally, remove 'interim' and inline it into Object.fromEntries, but Typescript doesn't like it.
+const interim = GAME_MODULES.map((module) => [module, []]);
+const ALL_CARDS_BY_MODULE: Record<GameModule, Array<CardName>> = Object.fromEntries(interim);
+getCards(byType(CardType.CORPORATION)).forEach((card) => {
+  if (card.name !== CardName.BEGINNER_CORPORATION) {
+    ALL_CARDS_BY_MODULE[card.module].push(card.name);
+  }
+});
+GAME_MODULES.forEach((module) => ALL_CARDS_BY_MODULE[module].sort());
+
 export default Vue.extend({
   name: 'CorporationsFilter',
   components: {
@@ -63,25 +74,12 @@ export default Vue.extend({
   },
   props: {
     expansions: Object as () => Record<Expansion, boolean>,
+    selected: Object as () => Array<CardName>,
   },
   data() {
-    // Start by giving every entry a default value
-    // Ideally, remove 'x' and inline it into Object.fromEntries, but Typescript doesn't like it.
-    const x = GAME_MODULES.map((module) => [module, []]);
-    const cardsByModule: Record<GameModule, Array<CardName>> = Object.fromEntries(x);
-
-    getCards(byType(CardType.CORPORATION)).forEach((card) => {
-      if (card.name !== CardName.BEGINNER_CORPORATION) {
-        cardsByModule[card.module].push(card.name);
-      }
-    });
-    GAME_MODULES.forEach((module) => cardsByModule[module].sort());
-
     return {
       filterText: '',
-      cardsByModule: cardsByModule,
-      customCorporationsList: false,
-      selectedCorporations: [
+      selectedCorporations: this.selected.length > 0 ? this.selected : [
         // A bit sloppy since map is just above, but it will do.
         ...corpCardNames('base'),
         ...this.expansions.corpera ? corpCardNames('corpera') : [],
@@ -95,14 +93,23 @@ export default Vue.extend({
         ...this.expansions.moon ? corpCardNames('moon') : [],
         ...this.expansions.pathfinders ? corpCardNames('pathfinders') : [],
       ],
-      GAME_MODULES: GAME_MODULES,
-      MODULE_NAMES: MODULE_NAMES,
     };
+  },
+  computed: {
+    GAME_MODULES(): typeof GAME_MODULES {
+      return GAME_MODULES;
+    },
+    MODULE_NAMES(): typeof MODULE_NAMES {
+      return MODULE_NAMES;
+    },
+    ALL_CARDS_BY_MODULE(): typeof ALL_CARDS_BY_MODULE {
+      return ALL_CARDS_BY_MODULE;
+    },
   },
   methods: {
     getItemsByGroup(group: Group): Array<CardName> {
-      if (group === 'All') return GAME_MODULES.map((module) => this.cardsByModule[module]).flat();
-      const corps = this.cardsByModule[group];
+      if (group === 'All') return GAME_MODULES.map((module) => ALL_CARDS_BY_MODULE[module]).flat();
+      const corps = ALL_CARDS_BY_MODULE[group];
       if (corps === undefined) {
         console.log('module %s not found', group);
         return [];

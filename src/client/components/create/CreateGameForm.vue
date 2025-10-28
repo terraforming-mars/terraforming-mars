@@ -494,24 +494,30 @@
             <CorporationsFilter
                 ref="corporationsFilter"
                 v-show="showCorporationList"
+                v-if="showCorporationList"
                 v-on:corporation-list-changed="updateCustomCorporations"
                 v-bind:expansions="expansions"
+                v-bind:selected="customCorporations"
                 @close="showCorporationList = false"
             ></CorporationsFilter>
 
             <PreludesFilter
                 ref="preludesFilter"
                 v-show="showPreludesList"
+                v-if="showCorporationList"
                 v-on:prelude-list-changed="updateCustomPreludes"
                 v-bind:expansions="expansions"
+                v-bind:selected="customPreludes"
                 @close="showPreludesList = false"
             ></PreludesFilter>
 
             <ColoniesFilter
                 ref="coloniesFilter"
                 v-show="showColoniesList"
+                v-if="showCorporationList"
                 v-on:colonies-list-changed="updateCustomColonies"
                 v-bind:expansions="expansions"
+                v-bind:selected="customColonies"
                 @close="showColoniesList = false"
             ></ColoniesFilter>
 

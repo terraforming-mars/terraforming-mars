@@ -322,7 +322,7 @@
     "Ruling Party": "Управляющая группа",
     "Spectator link": "Ссылка для зрителей",
     "Warning: This game will be purged in approximately ${0} hours.": "Внимание: эта игровая партия будет удалена примерно через ${0} часов.",
-    "Unable to reach the server. The server may be restarting or down for maintenance.": "Невозможно соединиться с сервером. Сервер мог быть отправлен на перезагрузку или выключен для обслуживания.",
+    "Unable to reach the server. It may be restarting or down for maintenance.": "Невозможно соединиться с сервером. Сервер мог быть отправлен на перезагрузку или выключен для обслуживания.",
     "Unable to restore game ${game_id}": "Невозможно восстановить игру ${game_id}",
     "Game not found": "Игра не найдена",
 

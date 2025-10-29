@@ -709,9 +709,6 @@ export default (Vue as WithRefs<Refs>).extend({
 
             Vue.nextTick(() => {
               try {
-                if (processor.colonies.length > 0) refs.coloniesFilter.updateColoniesByNames(processor.colonies);
-                if (processor.corporations.length > 0) refs.corporationsFilter.selectedCorporations = processor.corporations;
-                if (processor.preludes.length > 0) refs.preludesFilter.updatePreludes(processor.preludes);
                 if (component.showBannedCards) refs.cardsFilter.selected = processor.bannedCards;
                 if (component.showIncludedCards) refs.cardsFilter2.selected = processor.includedCards;
                 if (!component.seededGame) component.seed = Math.random();

@@ -22,7 +22,7 @@ export class LaggingRegulation extends GlobalEvent implements IGlobalEvent {
     super({
       name: GlobalEventName.LAGGING_REGULATION,
       description: 'Count crime tags (INCLUDING EVENTS) and ADD influence. Players with the most get 1 corruption and 9 M€. ' +
-      'Players with 2nd most get 1 corruption and 5 M€. Min 1 to place. (SOLO: Place 1st with sum of 5 or more.)',
+      'Players with 2nd most get 1 corruption and 3 M€. Min 1 to place. (SOLO: Place 1st with sum of 5 or more.)',
       revealedDelegate: PartyName.SCIENTISTS,
       currentDelegate: PartyName.REDS,
       renderData: RENDER_DATA,

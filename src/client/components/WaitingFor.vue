@@ -54,6 +54,8 @@ type DataModel = {
   savedPlayerView: PlayerViewModel | undefined;
 }
 
+const CANNOT_CONTACT_SERVER = 'Unable to reach the server. It may be restarting or down for maintenance.';
+
 export default Vue.extend({
   name: 'waiting-for',
   props: {
@@ -111,7 +113,7 @@ export default Vue.extend({
       };
       xhr.send(JSON.stringify({runId: this.playerView.runId, ...out}));
       xhr.onerror = function() {
-        // todo(kberg): Report error to caller
+        root.showAlert(CANNOT_CONTACT_SERVER);
         root.isServerSideRequestInProgress = false;
       };
     },
@@ -174,7 +176,7 @@ export default Vue.extend({
         const xhr = new XMLHttpRequest();
         xhr.open('GET', paths.API_WAITING_FOR + window.location.search + '&gameAge=' + this.playerView.game.gameAge + '&undoCount=' + this.playerView.game.undoCount);
         xhr.onerror = function() {
-          root.showAlert('Unable to reach the server. The server may be restarting or down for maintenance.', () => vueApp.waitForUpdate());
+          root.showAlert(CANNOT_CONTACT_SERVER, () => vueApp.waitForUpdate());
         };
         xhr.onload = () => {
           if (xhr.status === statusCode.ok) {

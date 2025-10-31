@@ -615,10 +615,10 @@ export default (Vue as WithRefs<Refs>).extend({
       this.expansions.promo = value;
       this.solarPhaseOption = value;
     },
-    venusNext(value: boolean) {
+    'expansions.venus': function(value: boolean) {
       this.solarPhaseOption = value;
     },
-    turmoil(value: boolean) {
+    'expansions.turmoil': function(value: boolean) {
       if (value === false) {
         this.politicalAgendasExtension = 'Standard';
       }
@@ -631,12 +631,12 @@ export default (Vue as WithRefs<Refs>).extend({
         this.ceosDraftVariant = true;
       }
     },
-    prelude(value: boolean) {
+    'expansions.prelude': function(value: boolean) {
       if (value === true && this.preludeDraftVariant === undefined) {
         this.preludeDraftVariant = true;
       }
     },
-    prelude2Expansion(value: boolean) {
+    'expansions.prelude2': function(value: boolean) {
       if (value === true && this.preludeToggled === false && this.uploading === false) {
         this.expansions.prelude = true;
         this.preludeToggled = true;

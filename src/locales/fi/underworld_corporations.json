@@ -1,0 +1,69 @@
+{
+
+"AERON GENOMICS": "AERON GENOMIIKKA",
+"Aeron Genomics": "Aeron Genomiikka",
+"Effect: When playing an animal card, you can remove animals from here to change the card's global requirement by 1 step for every 1 animal removed.": "VAIKUTUS: Kun pelaat eläinkortin, voit poistaa eläimiä täältä muuttaaksesi kortin globaalia vaatimusta 1 askeleella jokaista poistettua eläintä kohden.",
+"Action: Discard up to 2 of your claimed underground resource tokens to place the same number of animals on ANY card.": "TOIMINTO: Hylkää korkeintaan 2 vaatimaasi maanalaista resurssimerkkiä asettaaksesi saman määrän eläimiä MILLE TAHANSA kortille.",
+"You start with 35 M€, 5 steel, and 2 animals on this card. 1 VP per 3 animals on this card.": "Aloitat 35 M€:lla, 5 teräksellä ja 2 eläimellä tällä kortilla. 1 VP per 3 eläintä tällä kortilla.",
+
+"ANUBIS SECURITIES": "ANUBIS ARVOPAPERIT",
+"Anubis Securities": "Anubis Arvopaperit",
+"Effect: When any player WITH THE LOWEST CORRUPTION increases their TR by 1, they gain 2 M€.": "VAIKUTUS: Kun kuka tahansa pelaaja PIENIMMÄLLÄ KORRUPTIOLLA nostaa MKL:äänsä 1 askeleella, hän saa 2 M€.",
+"Action: Discard ALL of your corruption and gain 6 M€ for each unit discarded.": "TOIMINTO: Hylkää KAIKKI korruptiosi ja saat 6 M€ jokaista hylättyä yksikköä kohden.",
+"You start with 42 M€. As your first action, play a card ignoring global requirements.": "Aloitat 42 M€:lla. Ensimmäisenä toimintanasi pelaa kortti jättäen huomioimatta globaalit vaatimukset.",
+
+"ARBORIST COLLECTIVE": "ARBORISTIEN KOLLEKTIIVI",
+"Arborist Collective": "Arboristien kollektiivi",
+"Effect: After you play an event card with a base cost of 14 or less, put an activist resource on this card.": "VAIKUTUS: Kun olet pelannut tapahtumakortin, jonka perushinta on 14 tai vähemmän, aseta aktivistiresurssi tälle kortille.",
+"Action: Spend 2 activists here to increase your plant production 1 step and gain 2 plants.": "TOIMINTO: Käytä 2 aktivistia täältä nostaaksesi kasvintuotantoasi 1 askeleella ja saadaksesi 2 kasvia.",
+"You start with 40 M€, 2 plants and 2 plant production.": "Aloitat 40 M€:lla, 2 kasvilla ja 2 kasvintuotannolla.",
+
+"DEMETRON LABS": "DEMETRON-LABORATORIOT",
+"Demetron Labs": "Demetron-laboratoriot",
+"DEMETRON": "",
+"LABS": "LABORATORIOT",
+"Effect: After you play a science tag, including this, put 2 data on this card.": "VAIKUTUS: Kun olet pelannut tiedeympyrän, tämä mukaan lukien, aseta 2 dataa tälle kortille.",
+"Action: Spend 3 data here to identify 3 underground resources. Claim 1 of them.": "TOIMINTO: Käytä 3 dataa täältä tunnistaaksesi 3 maanalaista resurssia. Vaadi 1 niistä.",
+"You start with 45 M€ and 2 data on this card.": "Aloitat 45 M€:lla ja 2 datalla tällä kortilla.",
+
+"HADESPHERE": "",
+"Hadesphere": "",
+"INDUSTRIES": "",
+"Action: Excavate an underground resource.": "TOIMINTO: Kaiva maanalainen resurssi.",
+"You start with 40 M€ and 5 steel. As your first action, identify any 3 underground resources on Mars.": "Aloitat 40 M€:lla ja 5 teräksellä. Ensimmäisenä toimintanasi tunnista mitkä tahansa 3 maanalaista resurssia Marsissa.",
+
+"HECATE SPEDITIONS": "HECATEN HUOLINTA",
+"Hecate Speditions": "Hecaten Huolinta",
+"Effect: When you play an Earth, Mars, Venus, Moon, or Jovian tag, including this, put 1 supply chain resource on this card.": "VAIKUTUS: Kun pelaat Maa-, Mars-, Venus-, Kuu- tai Jupiter-ympyrän, tämä mukaan lukien, aseta 1 toimitusketjuresurssi tälle kortille.",
+"Effect: Spend 2 supply chain resources to trade. THIS COST CANNOT BE REDUCED BY OTHER EFFECTS.": "VAIKUTUS: Käytä 2 toimitusketjuresurssia kaupankäyntiin. NÄITÄ KUSTANNUKSIA EI VOI VÄHENTÄÄ MUILLA EFEKTEILLÄ.",
+"You start with 38 M€, 2 supply chain resources here, and an extra trade fleet.": "Aloitat 38 M€:lla, 2 toimitusketjuresurssilla täällä ja ylimääräisellä kauppalaivastolla.",
+
+"HENKEI GENETICS": "HENKEIN GENETIIKKA",
+"Henkei Genetics": "Henkein Genetiikka",
+"Action: Pay 1 corruption to place 3 microbes on each card, up 2 to cards.": "TOIMINTO: Maksa 1 korruptio asettaaksesi 3 mikrobia 1 tai 2 kortille.",
+"You start with 47 M€ and 1 corruption. As your first action, draw 2 microbe cards. 1 VP per 3 microbes on this card.": "Aloitat 47 M€:lla ja 1 korruptiolla. Ensimmäisenä toimintanasi nosta 2 mikrobikorttia. 1 VP per 3 mikrobia tällä kortilla.",
+
+"JENSON-BOYLE & CO": "",
+"Jenson-Boyle & Co": "",
+"Action: Pay 1 corruption to gain either 5 steel, 3 titanium, 4 plants or 8 heat.": "TOIMINTO: Maksa 1 korruptio saadaksesi joko 5 terästä, 3 titaania, 4 kasvia tai 8 lämpöä.",
+"You start with 46 M€ and 2 corruption.": "Aloitat 46 M€:lla ja 2 korruptiolla.",
+
+"KEPLERTEC": "KEPLERTEK",
+"Keplertec": "Keplertek",
+"Action: Spend 1 titanium to put a fighter resource on ANY card.": "TOIMINTO: Käytä 1 titaani asettaaksesi hävittäjäresurssin MILLE TAHANSA kortille.",
+"Effect: When you place a fighter on this card, identify 4 underground resources FROM THE PILE. Claim 1. Shuffle the remaining tokens back into the pile.": "VAIKUTUS: Kun asetat hävittäjän tälle kortille, tunnista 4 maanalaista resurssia KASASTA. Vaadi 1. Sekoita loput merkit takaisin kasaan.",
+"You start with 33 M€, 3 titanium, and 1 titanium production.": "Aloitat 33 M€:lla, 3 titaanilla ja 1 titaanituotannolla.",
+
+"KINGDOM OF TAURARO": "TAURARON KUNINGASKUNTA",
+"Kingdom of Tauraro": "Tauraron kuningaskunta",
+"Kingdom of": "kuningaskunta",
+"Effect: You may place cities adjacent to other cities. You must always place cities adjacent to your tiles or excavation markers, if possible.": "VAIKUTUS: Saat asettaa kaupunkeja muiden kaupunkien viereen. Sinun on aina asetettava kaupungit omien laattojesi tai kaivausmerkkiejsi viereen, jos mahdollista.",
+"You start with 50 M€ and 6 M€ production. All opponents gain 2 M€ production. As your first action, place a city.": "Aloitat 50 M€:lla ja 6 M€-tuotannolla. Kaikki vastustajat saavat 2 M€-tuotantoa. Ensimmäisenä toimintanasi aseta kaupunki.",
+
+"VOLTAGON": "",
+"Voltagon": "",
+"Effect: After you claim an underground resource, gain 2 energy.": "VAIKUTUS: Kun olet vaatinut maanalaisen resurssin, saat 2 energiaa.",
+"Action: Spend 8 energy to increase oxygen or Venus 1 step.": "TOIMINTO: Käytä 8 energiaa nostaaksesi happea tai Venusta 1 askeleella.",
+"You start with 38 M€ and 1 energy production.": "Aloitat 38 M€:lla ja 1 energiatuotannolla."
+
+}

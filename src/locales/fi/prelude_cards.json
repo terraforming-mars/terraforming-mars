@@ -1,0 +1,107 @@
+{
+  "Ceres Tech Market": "Ceres-teknologiamarkkinat",
+  "Action: Discard any number of cards from your hand to gain 2 M€ for each discarded card.": "TOIMINTO: Hylkää mikä tahansa määrä kortteja kädestäsi saadaksesi 2 M€ per hylätty kortti.",
+  "Gain 2 M€ per colony you own.": "Saat 2 M€ jokaista omistamaasi siirtokuntaa kohti.",
+
+  "Cloud Tourism": "Pilviturismi",
+  "Increase your M€ production 1 step for each pair of Earth and Venus tags you own. 1 VP for every 3rd floater on this card.": "Lisää M€-tuotantoasi 1 askel jokaisesta Maa- ja Venus-ympyräparistasi. 1 VP per 3. kelluke tällä kortilla.",
+
+  "Colonial Envoys": "Siirtokuntalähettiläät",
+  "Requires that Unity is ruling or that you have 2 delegates there. Place 1 delegate for each colony you have. YOU MAY PLACE THEM IN SEPERATE PARTIES.": "Vaatii että Yhtenäisyys hallitsee tai että sinulla on 2 edustajaa siellä. Aseta 1 edustaja siirtokuntaasi kohti. SAAT ASETTAA NE ERI PUOLUEISIIN.",
+
+  "Colonial Representation": "Siirtokuntaedustus",
+  "Effect: You have +1 influence.": "VAIKUTUS: Sinulla on +1 vaikutusvalta.",
+  "Gain 3 M€ per colony you have.": "Saat 3 M€ jokaista siirtokuntaasi kohti.",
+
+  "Envoys From Venus": "Venuksen lähettiläät",
+  "Requires 3 Venus tags. Place 2 delegates in 1 party.": "Vaatii 3 Venus-ympyrää. Aseta 2 edustajaa yhteen puolueeseen.",
+
+  "Floating Refinery": "Kelluva jalostamo",
+  "Action: Add 1 floater here.": "TOIMINTO: Lisää 1 kelluke tänne.",
+  "Action: Remove 2 floaters from ANY CARD to gain 1 titanium and 2 M€.": "TOIMINTO: Poista 2 kelluketta MILTÄ TAHANSA KORTILTA saadaksesi 1 titaani ja 2 M€.",
+  "Add 1 floater here for each Venus tag you have.": "Lisää tälle kortille 1 kelluke jokaista Venus-ympyrääsi kohti.",
+
+  "Frontier Town": "Rajakaupunki",
+  "Requires that Mars First is ruling or that you have 2 delegates there. Decrease your energy production one step. Place a city tile. GAIN THE PRINTED PLACEMENT BONUS 2 ADDITIONAL TIMES.": "Vaatii että Mars Ensin hallitsee tai että sinulla on 2 edustajaa siellä. Vähennä energiatuotantoasi yhden askeleen. Aseta kaupunkilaatta. SAA PAINETTU SIJOITUSBONUS 2 LISÄKERTAA.",
+
+  "GHG Shipment": "Kasvihuonekaasu-toimitus",
+  "Requires that Kelvinists are in power or that you have 2 delegates there. Increase your heat production 1 step. Gain 1 heat for each floater you have.": "Vaatii että Kelvininistit ovat vallassa tai että sinulla on 2 edustajaa siellä. Lisää lämpötuotantoasi 1 askel. Saat 1 lämmön jokaista kellukeresurssiasi kohti.",
+
+  "Ishtar Expedition": "Ishtar-retkikunta",
+  "Requires Venus 10%. Gain 3 titanium and draw 2 Venus cards.": "Vaatii Venus 10 %. Saat 3 titaania ja nosta 2 Venus-korttia.",
+
+  "Jovian Envoys": "Jupiterin lähettiläät",
+  "Requires 2 Jovian tags. Place 2 delegates in 1 party.": "Vaatii 2 Jupiter-ympyrää. Aseta 2 edustajaa yhteen puolueeseen.",
+
+  "L1 Trade Terminal": "L1-kauppaterminaali",
+  "Effect: When you trade, you may first increase that colony tile track 2 steps.": "VAIKUTUS: Kun käyt kauppaa, saat ensin nostaa kyseisen siirtokunnan laattaraidetta 2 askelta.",
+  "Add a resource to 3 different cards that already have resources.": "Lisää resurssi 3 eri kortille, joilla on jo resursseja.",
+
+  "Microgravity Nutrition": "Mikropainovoimaravinto",
+  "Increase your M€ production 1 step for each colony you have.": "Lisää M€-tuotantoasi 1 askel jokaista siirtokuntaasi kohti.",
+
+  "Red Appeasement": "Punaisten rauhoittelu",
+  "Requires that Reds are ruling or that you have 2 delegates there, AND THAT NO OTHER PLAYER HAS PASSED.": "Vaatii että Punaiset hallitsevat tai että sinulla on 2 edustajaa siellä, JA ETTÄ MIKÄÄN MUU PELAAJA EI OLE PASSANNUT.",
+  "Increase M€ production 2 steps. This counts as passing. You get no other turns this generation.": "Lisää M€-tuotantoasi 2 askelta. Tämä lasketaan passaamiseksi. Sinulla ei ole muita vuoroja tässä sukupolvessa.",
+  "PASS": "PASSI",
+
+  "Soil Studies": "Maaperätutkimukset",
+  "Requires that temperature is -4 C or lower. Gain 1 plant per Venus tag, plant tag, and colony you have.": "Vaatii että lämpötila on -4°C tai alhaisempi. Saat 1 kasvin jokaista Venus-ympyrääsi, kasviympyrääsi ja siirtokuntaasi kohti.",
+
+  "Special Permit": "Erityislupa",
+  "steal": "varasta",
+  "Requires that Greens are ruling or that you have 2 delegates there. Steal 4 plants from any player.": "Vaatii että Vihreät hallitsevat tai että sinulla on 2 edustajaa siellä. Varasta 4 kasvia keneltä tahansa pelaajalta.",
+
+  "Sponsoring Nation": "Sponsoroiva kansakunta",
+  "Requires 4 Earth tags. Gain 3 TR. Place 2 delegates.": "Vaatii 4 Maa-ympyrää. Nosta MKL:ääsi 3 askelta. Aseta 2 edustajaa.",
+
+  "Stratospheric Expedition": "Stratosfääriretkikunta",
+  "Add two floaters to ANY CARD. Draw 2 Venus cards.": "Lisää kaksi kelluketta MILLE TAHANSA KORTILLE. Nosta 2 Venus-korttia.",
+
+  "Summit Logistics": "Huippulogistiikka",
+  "Requires that Scientists are ruling or that you have 2 delegates there. Gain 1 M€ per planet tag and colony you have. Draw 2 cards.": "Vaatii että Tutkijat hallitsevat tai että sinulla on 2 edustajaa siellä. Saat 1 M€ jokaista planeettaympyrää ja siirtokuntasi kohti. Nosta 2 korttia.",
+  "FAN EXPANSION NOTE: This includes Mars but not The Moon.": "FANILAAJENNUKSEN HUOMIO: Tämä sisältää Marsin mutta ei Kuuta.",
+
+  "Unexpected Application": "Odottamaton sovellus",
+  "Discard 1 card to terraform Venus 1 step.": "Hylkää 1 kortti terraformoidaksesi Venusta 1 askel.",
+
+  "Venus Allies": "Venuksen liittolaiset",
+  "Raise Venus 2 steps. Gain 4 M€ per colony you have.": "Nosta Venusta 2 askelta. Saat 4 M€ jokaista siirtokuntaasi kohti.",
+
+  "Venus Orbital Survey": "Venuksen kiertorata-aluetutkimus",
+  "Action: Reveal the top 2 cards, take any venus cards to hand for free. Any other card you either buy or discard": "TOIMINTO: Paljasta 2 päällimmäistä korttia, ota Venus-kortit käteen ilmaiseksi. Muut kortit voit joko ostaa tai hylätä",
+
+  "Venus Shuttles": "Venus-sukkulat",
+  "Action: Spend 12 M€ to raise Venus 1 step. This cost is REDUCED BY 1 FOR EACH VENUS TAG you have.": "TOIMINTO: Maksa 12 M€ nostaaksesi Venusta 1 askel. Tämä hinta VÄHENEE 1:LLÄ JOKAISELLA VENUS-YMPYRÄLLÄSI.",
+  "Add 2 floaters to ANY VENUS CARD.": "Lisää 2 kelluketta MIHIN TAHANSA VENUS-KORTILLE.",
+
+  "Venus Trade Hub": "Venuksen kauppakeskus",
+  "Effect: When you trade, gain 3 M€.": "VAIKUTUS: Kun käyt kauppaa, saat 3 M€.",
+  "Requires 2 Venus tags.": "Vaatii 2 Venus-ympyrää.",
+
+  "WG Project": "Maailmanhallitusprojekti",
+  "Requires that you are Chairman. DRAW 3 PRELUDE CARDS AND PLAY 1 OF THEM, Discard the other 2.": "Vaatii että olet Puheenjohtaja. NOSTA 3 PRELUDE-KORTTIA JA PELAA 1 NIISTÄ, hylkää muut 2.",
+
+  "Psychrophiles": "Psykrofilit",
+  "Action: Add 1 microbe to this card.": "TOIMINTO: Lisää 1 mikrobi tälle kortille.",
+  "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "VAIKUTUS: Kun maksat kasvikorttia, täällä olevia mikrobeja saa käyttää 2 M€:n arvosta kukin.",
+  "Temperature must be -20 C or lower.": "Lämpötilan tulee olla -20°C tai alhaisempi.",
+
+  "Research Coordination": "Tutkimuskoordinaatio",
+  "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Kun olet pelannut tämän, kun suoritat toiminnon, jokeriympyrä lasketaan valitsemaksesi ympyräksi.",
+
+  "SF Memorial": "SF-muistomerkki",
+  "Draw 1 card.": "Nosta 1 kortti.",
+
+  "Martian Survey": "Mars-tutkimus",
+  "Oxygen must be 4% or lower. Draw two cards.": "Hapen tulee olla 4 % tai vähemmän. Nosta kaksi korttia.",
+
+  "House Printing": "Talon tulostus",
+  "Increase your steel production 1 step.": "Lisää terästuotantoasi 1 askel.",
+
+  "Space Hotels": "Avaruushotellit",
+  "Requires 2 Earth tags. Increase M€ production 4 steps.": "Vaatii 2 Maa-ympyrää. Lisää M€-tuotantoasi 4 askelta.",
+
+  "Lava Tube Settlement": "Laavaputkiasumus",
+  "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a city tile on a VOLCANIC AREA regardless of adjacent cities.": "Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 2 askelta. Aseta kaupunkilaatta TULIVUORIALUEELLE riippumatta vierekkäisistä kaupungeista."
+}

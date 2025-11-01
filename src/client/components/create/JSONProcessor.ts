@@ -51,6 +51,14 @@ export class JSONProcessor {
     initializeArrayFieldWithBackup(json_constants.OLD_CUSTOM_CORPORATIONS, json_constants.CUSTOM_CORPORATIONS);
     initializeArrayFieldWithBackup(json_constants.OLD_CUSTOM_COLONIES, json_constants.CUSTOM_COLONIES);
     initializeArrayFieldWithBackup(json_constants.OLD_BANNED_CARDS, json_constants.BANNED_CARDS);
+    const ev = json.escapeVelocity as JSONObject;
+    if (ev !== undefined && typeof ev === 'object') {
+      json.escapeVelocityMode = true;
+      json.escapeVelocityBonusSeconds = ev['bonusSectionsPerAction'];
+      json.escapeVelocityPenalty = ev['penaltyVPPerPeriod'];
+      json.escapeVelocityPeriod = ev['penaltyPeriodMinutes'];
+      json.escapeVelocityThreshold = Number.parseInt(ev['thresholdMinutes'] as string ?? '');
+    }
 
     function set<T>(field: string): Array<T> {
       return cast(json[field] ?? [], Array) as Array<T>;
@@ -102,6 +110,7 @@ export class JSONProcessor {
       json_constants.OLD_CUSTOM_COLONIES,
       json_constants.OLD_CUSTOM_CORPORATIONS,
       ...Object.values(oldExpansionFields),
+      'escapeVelocity',
       'players',
       'solarPhaseOption',
       'constants'];

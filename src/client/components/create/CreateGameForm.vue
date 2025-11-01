@@ -936,7 +936,6 @@ export default (Vue as WithRefs<Refs>).extend({
       const includeFanMA = this.includeFanMA;
       const startingCorporations = this.startingCorporations;
       const soloTR = this.soloTR;
-      // const beginnerOption = this.beginnerOption;
       const randomFirstPlayer = this.randomFirstPlayer;
       const requiresVenusTrackCompletion = this.requiresVenusTrackCompletion;
       const twoCorpsVariant = this.twoCorpsVariant;

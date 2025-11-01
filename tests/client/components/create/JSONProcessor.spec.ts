@@ -11,6 +11,7 @@ type Case = {
   description: string,
   input: JSONObject,
   expected: CreateGameModel,
+  expectedWarnings?: Array<string>,
 }
 
 const TEMPLATE_INPUT = {
@@ -171,7 +172,28 @@ const cases: Array<Case> = [
     }, expected: {
       ...TEMPLATE_EXPECTED,
       customCorporations: [CardName.ECOLINE],
-    }},
+    },
+  },
+  {
+    description: 'new escape velocity values',
+    input: {
+      ...TEMPLATE_INPUT,
+      escapeVelocity: {
+        thresholdMinutes: '35',
+        bonusSectionsPerAction: 2,
+        penaltyPeriodMinutes: 2,
+        penaltyVPPerPeriod: 1,
+      },
+    },
+    expected: {
+      ...TEMPLATE_EXPECTED,
+      escapeVelocityBonusSeconds: 2,
+      escapeVelocityMode: true,
+      escapeVelocityPenalty: 1,
+      escapeVelocityPeriod: 2,
+      escapeVelocityThreshold: 35,
+    },
+  },
 ];
 
 
@@ -182,7 +204,7 @@ describe('JSONProcessor', () => {
       const processor = new JSONProcessor(model);
       processor.applyJSON(testCase.input);
 
-      expect(processor.warnings).deep.eq([]);
+      expect(processor.warnings).deep.eq(testCase.expectedWarnings ?? []);
       expect(model).deep.eq(testCase.expected);
     });
   }

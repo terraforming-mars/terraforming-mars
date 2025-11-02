@@ -33,7 +33,7 @@
   "Camp": "Leiri",
   "Disease": "Sairaus",
 
-  "Greenery": "Vihreä alue",
+  "Greenery": "Viheralue",
   "City": "Kaupunki",
   "Ocean": "Meri",
   "Special": "Erikois",
@@ -77,7 +77,7 @@
   "play card": "pelaa kortti",
   "use active card action": "käytä aktiivisen kortin toimintoa",
   "standard project": "standardiprojekti",
-  "convert plants to greenery": "muunna kasvit vihreäksi alueeksi",
+  "convert plants to greenery": "muunna kasvit viheralueeksi",
   "convert heat to temperature": "muunna lämpö lämpötilaksi",
   "claim milestone": "lunasta välitavoite",
   "fund award": "rahoita palkinto",
@@ -116,7 +116,7 @@
   "Reveal a new Global Event in the distant (left) position. Add its top neutral delegate": "Paljasta uusi globaali tapahtuma kaukaisessa (vasen) asemassa. Lisää sen ylempi neutraali edustaja",
 
   "End Game": "Pelin loppu",
-  "In turn order, convert plants to greeneries.": "Vuorojärjestyksessä, muunna kasvit vihreiksi alueiksi.",
+  "In turn order, convert plants to greeneries.": "Vuorojärjestyksessä, muunna kasvit viheralueiksi.",
   "Assign awards": "Myönnä palkinnot",
   "Score: TR + tiles + card + milestones + awards + (1 VP per chairman and party leader": "Pisteet: MKL + laatat + kortit + välitavoitteet + palkinnot + (1 VP per puheenjohtaja ja puoluejohtaja",
 

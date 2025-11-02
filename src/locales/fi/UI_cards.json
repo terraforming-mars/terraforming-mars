@@ -3,7 +3,7 @@
   "event": "Tapahtuma", 
   "active": "aktiivinen",
   "automated": "automaattinen",
-  "standard_project": "perushanke",
+  "standard_project": "standardiprojekti",
   "Steel production": "Terästuotanto",
   "Titanium production": "Titaanituotanto",
   "Power": "Energia",
@@ -176,10 +176,10 @@
   "*    +": "×    +",
   "Sell": "Myy",
   "Select prelude card to play": "Valitse pelattava alkusoittokortti",
-  "Select space for ocean tile": "Valitse tila valtamerenlattalle",
+  "Select space for ocean tile": "Valitse tila valtamerilaatalle",
   "Gain 3 plants.": "Saat 3 kasvia.",
-  "colony": "Siirtokunta",
-  "awards": "Palkinnot",
+  "colony": "siirtokunta",
+  "awards": "palkinnot",
   "corporation": "yhtiö",
 
   "Colony City": "Siirtokunnan kaupunki",
@@ -191,5 +191,5 @@
   "1 VP per animal on this card.": "1 VP per eläin tällä kortilla.",
   "1 VP per 2 animals on this card.": "1 VP per 2 eläintä tällä kortilla.",
 
-  "${0} placed ${1} tile on (${2}, ${3}": "${0} asetti \"${1}\" laatan kohtaan (${2}, ${3}."
+  "${0} placed ${1} tile on (${2}, ${3}": "${0} asetti laatan \"${1}\" kohtaan (${2}, ${3}."
 }

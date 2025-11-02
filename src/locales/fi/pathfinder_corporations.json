@@ -1,5 +1,5 @@
 {
-  "Adhai High Orbit Constructions": "Adhai korkean kiertoradan rakennusyhtiö",
+  "Adhai High Orbit Constructions": "Adhai - korkean kiertoradan rakennusyhtiö",
   "(Effect: Whenever you play a card with a space tag BUT NO PLANETARY TAG (including this) add 1 orbital on this card.)": "(VAIKUTUS: Kun pelaat kortin jossa on avaruusympyrä MUTTA EI PLANEETTASIMBOLIA (tämä mukaan lukien), lisää 1 kiertorata tälle kortille.)",
   "(Effect: For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1 M€ less.)": "(VAIKUTUS: Jokaista 2 kiertorataa kohti tällä kortilla, kortit joissa on avaruusympyrä mutta ei planeettasimbolia tai SIIRTOKUNTA-STANDARDIPROJEKTI tai KAUPPATOIMINTO maksaa 1 M€ vähemmän.)",
   "(You start with 43 M€.)": "(Aloitat 43 M€:lla.)",
@@ -39,7 +39,7 @@
   "(Effect: After new ruling party is chosen, place the political program tile of the second most popular party on this card (you may use its effect as a passive effect of your corporation or as ruling party this generation).)": "(VAIKUTUS: Kun uusi hallitseva puolue on valittu, aseta toiseksi suosituimman puolueen poliittinen ohjelmaalaatta tälle kortille (voit käyttää sen vaikutusta yrityksesi passiivisena vaikutuksena tai hallitsevana puolueena tällä sukupolvella).)",
   "(You start with 40 M€. When you reveal this card, select any remaining political program tile (you may use its effect as a passive effect of your corporation or as ruling party this generation).)": "(Aloitat 40 M€:lla. Kun paljastaat tämän kortin, valitse mikä tahansa jäljellä oleva poliittinen ohjelmaalaatta (voit käyttää sen vaikutusta yrityksesi passiivisena vaikutuksena tai hallitsevana puolueena tällä sukupolvella).)",
 
-  "Mars Maths": "Mars Matematiikka",
+  "Mars Maths": "",
   "(Effect: At the beginning of the Research phase, you draw 5 cards, but may STILL only buy 4 cards. If you are drafting, keep 2 cards for your first draft.)": "(VAIKUTUS: Tutkimusvaiheen alussa nostat 5 korttia, mutta voit SILTI ostaa vain 4 korttia. Jos käytät draftia, pidä 2 korttia ensimmäisessä draftissasi.)",
   "(Action: Take another two actions this turn.)": "(TOIMINTO: Tee tässä vuorossa kaksi lisätoimintoa.)",
   "(You start with 40 M€. As your first action, draw 2 cards)": "(Aloitat 40 M€:lla. Ensimmäisenä toimintonasi nosta 2 korttia.)",
@@ -48,7 +48,7 @@
   "(Effect: Whenever you play an event card, raise your M€ production 1 step.)": "(VAIKUTUS: Kun pelaat tapahtumakortin, lisää M€-tuotantoasi 1 askel.)",
   "(You start with 42 M€ and 1 M€ production.)": "(Aloitat 42 M€:lla ja 1 M€-tuotannolla.)",
 
-  "Mind Set Mars": "Mars-ajattelutapa",
+  "Mind Set Mars": "",
   "(Action: When you play a card with a building tag, add 1 agenda on this card.)": "(VAIKUTUS: Kun pelaat kortin jossa on rakennusympyrä, lisää 1 agenda tälle kortille.)",
   "(Action: Spend 2 agenda resources to place 1 delegate in any party.)": "(TOIMINTO: Käytä 2 agenda-resurssia asettaaksesi 1 delegaatin mihin tahansa puolueeseen.)",
   "(Action: Spend 5 agenda resources to place a city tile on Mars.)": "(TOIMINTO: Käytä 5 agenda-resurssia asettaaksesi kaupunkilaatan Marsiin.)",
@@ -78,7 +78,7 @@
   "(Effect: During the production phase convert each data from this card into 1M€ each.)": "(VAIKUTUS: Tuotantovaiheen aikana muunna jokainen data tältä kortilta 1M€:ksi.)",
   "(You start with 40 M€.)": "(Aloitat 40 M€:lla.)",
 
-  "Soylent Seedling Systems": "Soylent taimijärjestelmät",
+  "Soylent Seedling Systems": "Soylent-taimijärjestelmät",
   "(Effect: When you place a greenery tile, add 1 seed resource to this card.)": "(VAIKUTUS: Kun asetat viherlaatan, lisää 1 siemen-resurssi tälle kortille.)",
   "(Effect: When paying for a plant card, or the STANDARD GREENERY PROJECT, seeds here may be used as 5 M€ each.)": "(VAIKUTUS: Kun maksat kasvikortin tai STANDARDI VIHERLAATTA-PROJEKTIN, voit käyttää siemeniä täältä 5 M€ kutakin.)",
   "(You start with 38M€ and 2 seeds on this card.)": "(Aloitat 38M€:lla ja 2 siemenellä tällä kortilla.)",

@@ -224,7 +224,7 @@
   "Requires a Jovian tag. Increase your heat production and energy production 3 steps each.": "Vaatii Jupiter-ympyrän. Lisää lämpötuotantoasi ja energiatuotantoasi kumpaaksi 3 askelta.",
 
   "Mangrove": "Mangrovemetsät",
-  "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "Vaatii +4°C tai lämpimämmän. Aseta vihreä laatta VALTAMERILLE VARATULLE ALUEELLE ja nosta happea 1 askel. Ohita tässä normaalit sijoitusrajoitukset.",
+  "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "Vaatii +4°C tai lämpimämmän. Aseta viheralue VALTAMERILLE VARATULLE ALUEELLE ja nosta happea 1 askel. Ohita tässä normaalit sijoitusrajoitukset.",
 
   "Trees": "Puut",
   "Requires -4 C or warmer. Increase your plant production 3 steps. Gain 1 plant.": "Vaatii -4°C tai lämpimämmän. Lisää kasvituotantoasi 3 askelta. Saa 1 kasvi.",
@@ -440,7 +440,7 @@
 
   "Ecological Zone": "Ekologinen vyöhyke",
   "Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.": "VAIKUTUS: Kun pelaat eläin- tai kasviympyrän NÄMÄ MUKAAN LUKIEN, lisää eläin tälle kortille.",
-  "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "Vaatii että SINULLA on vihreä laatta. Aseta tämä laatta MINKÄ TAHANSA vihreän laatan viereen.",
+  "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "Vaatii että SINULLA on viheralue. Aseta tämä laatta MINKÄ TAHANSA viheralueen viereen.",
   "1 VP per 2 animals on this card.": "1 VP per 2 eläintä tällä kortilla.",
 
   "Zeppelins": "Zeppeliinit",
@@ -502,7 +502,7 @@
   "Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.": "Vaatii 3 valtamerilaattaa ja että menetät 2 kasvia. Lisää kasvituotantoasi 2 askelta.",
 
   "Herbivores": "Kasvinsyöjät",
-  "Effect: When you place a greenery tile, add an animal to this card.": "VAIKUTUS: Kun asetat vihreän laatan, lisää eläin tälle kortille.",
+  "Effect: When you place a greenery tile, add an animal to this card.": "VAIKUTUS: Kun asetat viheralueen, lisää eläin tälle kortille.",
   "Requires 8% oxygen. +1 animal to this card. -1 any plant production": "Vaatii 8 % happea. +1 eläin tälle kortille. -1 mitä tahansa kasvituotantoa",
 
   "Insects": "Hyönteiset",
@@ -595,7 +595,7 @@
   "Opponents may not remove your": "Vastustajat eivät saa poistaa seuraavia resurssejasi:",
 
   "Protected Valley": "Suojeltu laakso",
-  "Increase your M€ production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.": "Lisää M€-tuotantoasi 2 askelta. Aseta vihreä laatta VALTAMERELLE VARATULLE ALUEELLE (ohita normaalit sijoitusrajoitukset) ja nosta happea 1 askel.",
+  "Increase your M€ production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.": "Lisää M€-tuotantoasi 2 askelta. Aseta viheralue VALTAMERELLE VARATULLE ALUEELLE (ohita normaalit sijoitusrajoitukset) ja nosta happea 1 askel.",
 
   "Satellites": "Satelliitit",
   "Increase your M€ production 1 step for each space tag you have, including this one.": "Lisää M€-tuotantoasi 1 askel per avaruusympyrä, joka sinulla on, tämä mukaan lukien.",
@@ -655,7 +655,7 @@
   "Look at the top 3 cards from the deck. Take 1 of them into hand and discard the other two": "Katso pakan 3 päällimmäistä korttia. Ota 1 niistä käteesi ja hylkää 2 muuta",
 
   "Plantation": "Plantaasi",
-  "Requires 2 science tags. Place a greenery tile and raise oxygen 1 step.": "Vaatii 2 tiedeympyrää. Aseta vihreä laatta ja nosta happea 1 askel.",
+  "Requires 2 science tags. Place a greenery tile and raise oxygen 1 step.": "Vaatii 2 tiedeympyrää. Aseta viheralue ja nosta happea 1 askel.",
 
   "Power Infrastructure": "Energiainfrastruktuuri",
   "Action: Spend any amount of energy and gain that amount of M€.": "TOIMINTO: Käytä mikä tahansa määrä energiaa ja saa sama määrä M€.",

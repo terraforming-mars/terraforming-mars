@@ -1,5 +1,5 @@
 {
-  "Static Harvesting": "Staattinen korjuu",
+  "Static Harvesting": "Staattisen sähkön keräys",
   "Requires 3 or fewer ocean tiles. Increase your energy production 1 step. Gain 1 M€ per building tag you have.": "Vaatii 3 tai vähemmän valtamerilaattaa. Lisää energiatuotantoasi 1 askel. Saat 1 M€ jokaista rakennusympyrääsi kohti.",
   
   "Public Plans": "Julkiset suunnitelmat",
@@ -10,7 +10,7 @@
   "Action: Add 1 animal here or 1 microbe to ANOTHER card.": "TOIMINTO: Lisää 1 eläin tähän tai 1 mikrobi TOISELLE kortille.",
   "Each player, including you, gets -1 VP per city they have IF THERE ARE AT LEAST 10 ANIMALS HERE.": "Jokainen pelaaja, sinä mukaan lukien, saa −1 VP jokaista omistamaansa kaupunkia kohti JOS TÄÄLLÄ ON VÄHINTÄÄN 10 ELÄINTÄ.",
 
-  "New Holland": "Uusi-Hollanti",
+  "New Holland": "Uusi Hollanti",
   "Requires 4 city tiles ON MARS. Increase your M€ production 3 steps. Place a city tile on top of an already placed ocean tile, FOLLOWING NORMAL CITY PLACEMENT RESTRICTIONS. The tile counts as a city and an ocean.": "Vaatii 4 kaupunkilaattaa MARSISSA. Lisää M€-tuotantoasi 3 askelta. Aseta kaupunkilaatta jo asetetun valtamerilaatan päälle, NOUDATTAEN NORMAALEJA KAUPUNGIN SIJOITUSRAJOITUKSIA. Laatta lasketaan sekä kaupungiksi että valtamereksi.",
 
   "Protected Growth": "Suojattu kasvu",
@@ -43,11 +43,11 @@
   "Floyd Continuum": "Floydin jatkumo",
   "Action: Gain 3 M€ per completed terraforming parameter.": "TOIMINTO: Saat 3 M€ jokaista valmistunutta maankaltaistusmuuttujaa kohti.",
 
-  "Martian Lumber Corp": "Marsilainen puunjalostusjyväskylä",
+  "Martian Lumber Corp": "Marsilainen puunjalostus",
   "Effect: When playing a building tag, plants may be used as 3 M€ each.": "VAIKUTUS: Kun pelaat rakennusympyrän, kasveja voi käyttää 3 M€ kutakin.",
   "Requires that you have 2 greenery tiles. Increase plant production 1 step.": "Vaatii että sinulla on 2 viherlaattaa. Lisää kasvatuotantoa 1 askel.",
 
-  "Solar Logistics": "Aurinko logistiikka",
+  "Solar Logistics": "Aurinkologistiikka",
   "Effect: When you play an Earth tag, you pay 2 M€ less.": "VAIKUTUS: Kun pelaat Maa-ympyrän, maksat 2 M€ vähemmän.",
   "Effect: When any player plays a space event, draw a card.": "VAIKUTUS: Kun kuka tahansa pelaaja pelaa avaruustapahtuman, nosta kortti.",
   "Gain 2 titanium.": "Saat 2 titaania.",
@@ -68,7 +68,7 @@
   "PLACE THE NOMADS on a non-reserved, empty area on the game board.": "ASETA PAIMENTOLAISET ei-varatulle, tyhjälle alueelle pelilaudalla.",
 
   "Kaguya Tech": "",
-  "Increase M€ production 2 steps. Draw 1 card. Remove 1 of your greenery tiles (does not affect oxygen.) Place a city tile there, regardless of placement rules. Gain placement bonuses as usual.": "Lisää M€-tuotantoa 2 askelta. Nosta 1 kortti. Poista 1 viherlaattasi (ei vaikuta happeen.) Aseta kaupunkilaatta sinne sijoitussäännöistä riippumatta. Saat sijoitusbonukset tavalliseen tapaan.",
+  "Increase M€ production 2 steps. Draw 1 card. Remove 1 of your greenery tiles (does not affect oxygen.) Place a city tile there, regardless of placement rules. Gain placement bonuses as usual.": "Lisää M€-tuotantoa 2 askelta. Nosta 1 kortti. Poista 1 viheralueesi (ei vaikuta happeen.) Aseta kaupunki samaan paikkaan sijoitussäännöistä välittämättä. Saat sijoitusbonukset tavalliseen tapaan.",
 
   "Homeostasis Bureau": "Homeostaasitoimisto",
   "Effect: When you raise the temperature, gain 3 M€.": "VAIKUTUS: Kun nostat lämpötilaa, saat 3 M€.",
@@ -246,7 +246,7 @@
   "Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.": "TOIMINTO: Käytä 2 energiaa saadaksesi 2 kasvia TAI lisätäksesi 1 eläimen TOISELLE kortille.",
 
   "Harvest": "Sadonkorjuu",
-  "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "Vaatii että sinulla on 3 viherlaattaa pelissä. Saat 12 M€.",
+  "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "Vaatii että sinulla on 3 viheraluetta pelissä. Saat 12 M€.",
 
   "Outdoor Sports": "Ulkoilma-urheilut",
   "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "Vaatii minkä tahansa kaupungin valtameren vieressä. Lisää M€-tuotantoasi 2 askelta."

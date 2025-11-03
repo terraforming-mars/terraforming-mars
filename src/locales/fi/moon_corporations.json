@@ -1,0 +1,48 @@
+{
+  "Crescent Research Association": "Crescent tutkimusyhdistys",
+  "Effect: When you play a Moon tag, you pay 1 M€ less for each Moon tag you have.": "VAIKUTUS: Kun pelaat Kuu-ympyrän, maksat 1 M€ vähemmän jokaisesta Kuu-ympyrästäsi.",
+  "You start with 50 M€. 1 VP for every 3 Moon tags you have.": "Aloitat 50 M€. 1 VP jokaisesta 3 Kuu-ympyrästäsi.",
+  "Intragen Sanctuary Headquarters": "Intragen suojeluspaikan päämaja",
+  "Effect: When any player plays an animal tag (including this), add 1 animal on this card.": "VAIKUTUS: Kun kuka tahansa pelaaja pelaa eläinympyrän (mukaan lukien tämä), lisää 1 eläin tälle kortille.",
+  "You start with 38 M€. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step. 1 VP for every 2 animals on this card.": "Aloitat 38 M€. Ensimmäisenä toimintona aseta asutuslaatta Kuuhun ja nosta asutusastetta 1 askel. 1 VP jokaisesta 2 eläimestä tällä kortilla.",
+
+  "Luna First Incorporated": "Luna Ensin Oy",
+  "Effect: When you raise any Moon Rate, increase your M€ production 1 step per step.": "VAIKUTUS: Kun nostat mitä tahansa kuuastetta, nosta M€-tuotantoasi 1 askel per askel.",
+  "Effect: When any player raises any Moon Rate, gain 1M€ per step.": "VAIKUTUS: Kun kuka tahansa pelaaja nostaa mitä tahansa kuuastetta, saat 1 M€ per askel.",
+  "You start with 40 M€, 1 steel, and 1 titanium.": "Aloitat 40 M€, 1 teräs ja 1 titaani.",
+
+  "Luna Hyperloop Corporation": "Luna Hyperloop Oy",
+  "Action: Gain 1 M€ for each road tile on The Moon.": "TOIMINTO: Saat 1 M€ jokaisesta tielaatasta Kuussa.",
+  "1 VP for each road tile on The Moon.": "1 VP jokaisesta tielaatasta Kuussa.",
+  "You start with 38 M€ and 4 steel.": "Aloitat 38 M€ ja 4 terästä.",
+
+  "Nanotech Industries": "",
+  "Action: Add 1 science resource to ANY card [except those giving 2 or more VP per 1 science resource.]": "TOIMINTO: Lisää 1 tiederesurssi MILLE TAHANSA kortille [paitsi niihin, jotka antavat 2 tai enemmän VP per 1 tiederesurssi.]",
+  "You start with 42 M€. As your first action, draw 3 cards. Take 2 of them into hand, and discard the rest. 1 VP for every 2 science resources here.": "Aloitat 42 M€. Ensimmäisenä toimintona nosta 3 korttia. Ota 2 niistä käteen ja hylkää loput. 1 VP jokaisesta 2 tiederesurssista täällä.",
+
+  "Tempest Consultancy": "Tempest-konsultointi",
+  "Action: Place 1 delegate in any party for every 5 Moon tags you have [max 3.]": "TOIMINTO: Aseta 1 edustaja mihin tahansa puolueeseen jokaisesta 5 Kuu-ympyrästäsi [enintään 3.]",
+  "Effect: When your delegate becomes the chairman, increase your TR 1 step.": "VAIKUTUS: Kun edustajasi tulee puheenjohtajaksi, nosta MKL:ääsi 1 askel.",
+  "You start with 37 M€. As your first action, place 2 delegates in one party.": "Aloitat 37 M€. Ensimmäisenä toimintona aseta 2 edustajaa yhteen puolueeseen.",
+
+  "The Archaic Foundation Institute": "Arkaainen säätiön instituutti",
+  "Effect: When you play a Moon tag, including these, add a cube to this card.": "VAIKUTUS: Kun pelaat Kuu-ympyrän, mukaan lukien nämä, lisää noppa tälle kortille.",
+  "Effect: Automatically remove 3 cubes here and gain 1 TR.": "VAIKUTUS: Poista automaattisesti 3 noppaa täältä ja nosta MKL:ääsi 1 askel.",
+  "Action: Remove 3 cubes here; gain 1 TR.": "TOIMINTO: Poista 3 noppaa täältä; nosta MKL:ääsi 1 askel.",
+  "You start with 55 M€.": "Aloitat 55 M€.",
+
+  "Luna Trade Federation": "Lunan kauppafederaatio",
+  "Effect: When you place a mine tile on The Moon, raise your titanium production 1 step.": "VAIKUTUS: Kun asetat kaivoslaatan Kuuhun, nosta titaanituotantoasi 1 askel.",
+  "Effect: You may use titanium resources as 2M€ each.": "VAIKUTUS: Voit käyttää titaaniresursseja 2M€ per kappale.",
+  "You start with 15 M€ and 10 titanium.": "Aloitat 15 M€ ja 10 titaania.",
+
+  "The Darkside of The Moon Syndicate": "Kuun pimeän puolen syndikaatti",
+  "Action: Spend 1 titanium to add 1 syndicate fleet on this card OR remove 1 syndicate fleet from this card to steal 2M€ from every opponent.": "TOIMINTO: Käytä 1 titaani lisätäksesi 1 syndikaatin laivasto tälle kortille TAI poista 1 syndikaatin laivasto tältä kortilta varastaaksesi 2M€ jokaiselta vastustajalta.",
+  "You start with 40 M€ and 2 syndicate fleets on this card.": "Aloitat 40 M€ ja 2 syndikaatin laivastoa tällä kortilla.",
+  "Effect: When you place a tile on The Moon, steal 2 M€ from opponents for each of their tiles next to yours.": "VAIKUTUS: Kun asetat laatan Kuuhun, varasta 2 M€ vastustajilta jokaisesta heidän laatastaan omiesi vieressä.",
+
+  "The Grand Luna Capital Group": "Grand Luna Capital -ryhmä",
+  "Effect: When you place a habitat tile, gain 2 M€ for each adjacent habitat tile.": "VAIKUTUS: Kun asetat asutuslaatan, saat 2 M€ jokaisesta viereisestä asutuslaatasta.",
+  "1 VP for each habitat tile adjacent to your habitat tiles.": "1 VP jokaisesta asutuslaatasta joka on vierekkäin asutuslaattojesi kanssa.",
+  "You start with 32 M€ and 1 titanium. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step.": "Aloitat 32 M€ ja 1 titaania. Ensimmäisenä toimintona aseta asutuslaatta Kuuhun ja nosta asutusastetta 1 askel."
+}

@@ -1,0 +1,165 @@
+{
+  "Airliners": "Matkustajalentokoneet",
+  "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.": "Vaatii että sinulla on 3 kelluketta. Lisää M€-tuotantoasi 2 askelta. Lisää 2 kelluketta MILLE TAHANSA kortille.",
+
+  "Air Raid": "Ilmahyökkäys",
+  "Requires that you lose 1 floater. Steal 5 M€ from any player.": "Vaatii että menetät 1 kellukkeen. Varasta 5 M€ keneltä tahansa pelaajalta.",
+
+  "Atmo Collectors": "Ilmakehänkeräilijät",
+  "Action: Add one floater here.": "TOIMINTO: Lisää yksi kelluke tänne.",
+  "Action: Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.": "TOIMINTO: Käytä 1 kelluke täältä saadaksesi 2 titaania, tai 3 energiaa, tai 4 lämpöä.",
+  "Add 2 floaters to ANY card.": "Lisää 2 kelluketta MILLE TAHANSA kortille.",
+
+  "Community Services": "Yhteisöpalvelut",
+  "Increase your M€ production 1 step per CARD WITH NO TAGS, including this.": "Lisää M€-tuotantoasi 1 askel per KORTTI ILMAN YMPYRÖITÄ, mukaan lukien tämä.",
+
+  "Conscription": "Asevelvollisuus",
+  "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "Vaatii 2 Maa-ympyrää. Seuraava kortti, jonka pelaat tässä sukupolvessa, maksaa 16 M€ vähemmän.",
+
+  "Corona Extractor": "Koronanpoistin",
+  "Requires 4 science tags. Increase your energy production 4 steps.": "Vaatii 4 tiedeympyrää. Lisää energiatuotantoasi 4 askelta.",
+
+  "Cryo-Sleep": "Kryouniteho",
+  "Effect: When you trade, you pay 1 less resource for it.": "VAIKUTUS: Kun käyt kauppaa, maksat 1 resurssin vähemmän siitä.",
+
+  "Earth Elevator": "Maahissi",
+  "Increase your titanium production 3 steps.": "Lisää titaanituotantoasi 3 askelta.",
+
+  "Ecology Research": "Ekologiatutkimus",
+  "Increase your plant production 1 step for each colony you own. Add 1 animal to ANOTHER card and 2 microbes to ANOTHER card.": "Lisää kasvituotantoasi 1 askel per siirtokunta, jonka omistat. Lisää 1 eläin TOISELLE kortille ja 2 mikrobia TOISELLE kortille.",
+
+  "Floater Leasing": "Kellukevuokraus",
+  "Increase your M€ production 1 step PER 3 floaters you have.": "Lisää M€-tuotantoasi 1 askel per 3 kelluketta, jotka sinulla on.",
+
+  "Floater Prototypes": "Kellukeprototyypit",
+  "Add two floaters to ANOTHER card.": "Lisää kaksi kelluketta TOISELLE kortille.",
+
+  "Floater Technology": "Kelluketeknologia",
+  "Action: Add 1 floater to ANOTHER card.": "TOIMINTO: Lisää 1 kelluke TOISELLE kortille.",
+
+  "Galilean Waystation": "Galileilainen välipysäkki",
+  "Increase your M€ production 1 step for every Jovian tag in play.": "Lisää M€-tuotantoasi 1 askel per pelattu Jupiter-ympyrä.",
+
+  "Heavy Taxation": "Raskas verotus",
+  "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "Vaatii 2 Maa-ympyrää. Lisää M€-tuotantoasi 2 askelta ja saat 4 M€.",
+
+  "Ice Moon Colony": "Jääkuusiirtokunta",
+  "Place 1 colony and 1 ocean tile.": "Aseta 1 siirtokunta ja 1 meren laatta.",
+
+  "Impactor Swarm": "Törmäysparvi",
+  "Requires 2 Jovian tags. Gain 12 heat. Remove up to 2 plants from any player.": "Vaatii 2 Jupiter-ympyrää. Saat 12 lämpöä. Poista enintään 2 kasvia keneltä tahansa pelaajalta.",
+
+  "Interplanetary Colony Ship": "Planeettojenvälinen siirtokuntalaiva",
+  "Place a colony.": "Aseta siirtokunta.",
+
+  "Jovian Lanterns": "Jupiter-lyhdyt",
+  "1 VP per 2 floaters here.": "1 VP per 2 kelluketta täällä.",
+  "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.": "Vaatii 1 Jupiter-ympyrän. Nosta MKL:ääsi 1 askel. Lisää 2 kelluketta MILLE TAHANSA kortille.",
+
+  "Jupiter Floating Station": "Jupiterin kelluva asema",
+  "Action: Add 1 floater to a JOVIAN CARD.": "TOIMINTO: Lisää 1 kelluke JUPITER-KORTILLE.",
+  "Action: Gain 1 M€ for every floater here [MAX 4].": "TOIMINTO: Saat 1 M€ per kelluke täällä [MAX 4].",
+  "Requires 3 science tags.": "Vaatii 3 tiedeympyrää.",
+
+  "Luna Governor": "Kuun kuvernööri",
+  "Requires 3 Earth tags. Increase your M€ production 2 steps.": "Vaatii 3 Maa-ympyrää. Lisää M€-tuotantoasi 2 askelta.",
+
+  "Lunar Exports": "Kuun vienti",
+  "Increase your plant production 2 steps, or your M€ production 5 steps.": "Lisää kasvituotantoasi 2 askelta tai M€-tuotantoasi 5 askelta.",
+
+  "Lunar Mining": "Kuun kaivostoiminta",
+  "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": "Lisää titaanituotantoasi 1 askel per 2 Maa-ympyrää, jotka sinulla on pelissä, mukaan lukien tämä.",
+
+  "Market Manipulation": "Markkinamanipulaatio",
+  "Increase one colony tile track 1 step. Decrease another colony tile track 1 step.": "Lisää yhtä siirtokuntalaatan uraa 1 askel. Vähennä toista siirtokuntalaatan uraa 1 askel.",
+
+  "Martian Zoo": "Mars-eläintarha",
+  "Effect: When you play an Earth tag, place an animal here.": "VAIKUTUS: Kun pelaat Maa-ympyrän, aseta eläin tänne.",
+  "Action: Gain 1M€ per animal here.": "TOIMINTO: Saat 1 M€ per eläin täällä.",
+  "Requires 2 city tiles in play.": "Vaatii 2 kaupunkilaattaa pelissä.",
+
+  "Mining Colony": "Kaivossiirtokunta",
+  "Increase your titanium production 1 step. Place a colony.": "Lisää titaanituotantoasi 1 askel. Aseta siirtokunta.",
+
+  "Minority Refuge": "Vähemmistöjen turvapaikka",
+  "Decrease your M€ production 2 steps. Place a colony.": "Vähennä M€-tuotantoasi 2 askelta. Aseta siirtokunta.",
+
+  "Molecular Printing": "Molekyylitulostus",
+  "Gain 1 M€ for each city tile in play. Gain 1 M€ for each colony in play.": "Saat 1 M€ per kaupunkilaatta pelissä. Saat 1 M€ per siirtokunta pelissä.",
+
+  "Nitrogen from Titan": "Typpeä Titanista",
+  "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.": "Nosta MKL:ääsi 2 askelta. Lisää 2 kelluketta JUPITER-KORTILLE.",
+
+  "Pioneer Settlement": "Pioneeriasutus",
+  "Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.": "Vaatii että sinulla on enintään 1 siirtokunta. Vähennä M€-tuotantoasi 2 askelta. Aseta siirtokunta.",
+
+  "Productive Outpost": "Tuottava etuvartio",
+  "Gain all your colony bonuses.": "Saat kaikki siirtokuntabonuksesi.",
+
+  "Quantum Communications": "Kvanttikommunikaatio",
+  "Requires 4 science tags. Increase your M€ production 1 step for each colony in play.": "Vaatii 4 tiedeympyrää. Lisää M€-tuotantoasi 1 askel per siirtokunta pelissä.",
+
+  "Red Spot Observatory": "Punaisen täplän observatorio",
+  "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": "TOIMINTO: Lisää 1 kelluke tälle kortille, tai käytä 1 kelluke täältä nostaaksesi kortin.",
+  "Requires 3 science tags. Draw 2 cards.": "Vaatii 3 tiedeympyrää. Nosta 2 korttia.",
+
+  "Refugee Camps": "Pakolaisleirit",
+  "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "TOIMINTO: Vähennä M€-tuotantoasi 1 askel lisätäksesi leirinresurssin tälle kortille.",
+  "1 VP for each camp resource on this card.": "1 VP per leirinresurssi tällä kortilla.",
+
+  "Research Colony": "Tutkimussiirtokunta",
+  "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.": "Aseta siirtokunta. SAAT ASETTAA MISSÄ SINULLA JO ON SIIRTOKUNTA. Nosta 2 korttia.",
+
+  "Rim Freighters": "Reunanrahtilaivat",
+
+  "Sky Docks": "Taivastelakoat",
+  "Effect: When you play a card, you pay 1 M€ less for it.": "VAIKUTUS: Kun pelaat kortin, maksat siitä 1 M€ vähemmän.",
+  "Requires 2 Earth tags. Gain 1 Trade Fleet.": "Vaatii 2 Maa-ympyrää. Saat 1 kauppalaivaston.",
+
+  "Solar Probe": "Aurinkotutkain",
+  "Draw 1 card for every 3 science tags you have, including this.": "Nosta 1 kortti per 3 tiedeympyrää, jotka sinulla on, mukaan lukien tämä.",
+
+  "Solar Reflectors": "Aurinkoheijastimet",
+  "Increase your heat production 5 steps.": "Lisää lämpötuotantoasi 5 askelta.",
+
+  "Space Port": "Avaruussatama",
+  "Requires 1 colony. Decrease your energy production 1 step and increase your M€ production 4 steps. Place a city tile. Gain 1 Trade Fleet.": "Vaatii 1 siirtokunnan. Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 4 askelta. Aseta kaupunkilaatta. Saat 1 kauppalaivaston.",
+
+  "Space Port Colony": "Avaruussatama-siirtokunta",
+  "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.": "Vaatii siirtokunnan. Aseta siirtokunta. SAAT ASETTAA SIIRTOKUNTALAATALLE MISSÄ SINULLA JO ON SIIRTOKUNTA. Saat 1 kauppalaivaston.",
+  "1 VP per 2 colonies in play.": "1 VP per 2 siirtokuntaa pelissä.",
+
+  "Spin-off Department": "Sivuosasto",
+  "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "VAIKUTUS: KUN PELAAT KORTIN, JONKA PERUSHINTA ON 20 M€ TAI ENEMMÄN, nosta kortti.",
+  "Increase your M€ production 2 steps.": "Lisää M€-tuotantoasi 2 askelta.",
+
+  "Sub-zero Salt Fish": "Jääpakkasen suolakala",
+  "Action: Add 1 animal to this card.": "TOIMINTO: Lisää 1 eläin tälle kortille.",
+  "1 VP per 2 animals on this card.": "1 VP per 2 eläintä tällä kortilla.",
+  "Requires -6 C. Decrease any plant production 1 step.": "Vaatii -6°C. Vähennä kenenkään kasvituotantoa 1 askel.",
+
+  "Titan Air-scrapping": "Titanin ilmankierrätys",
+  "Action: Spend 1 titanium to add 2 floaters here.": "TOIMINTO: Käytä 1 titaania lisätäksesi 2 kelluketta tänne.",
+  "Action: Spend 2 floaters here to increase your TR 1 step.": "TOIMINTO: Käytä 2 kelluketta täältä nostaaksesi MKL:ääsi 1 askel.",
+
+  "Titan Floating Launch-pad": "Titanin kelluva laukaisualusta",
+  "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "TOIMINTO: Lisää 1 kelluke MIHIN TAHANSA JUPITER-KORTILLE tai käytä 1 kelluke täältä käydäksesi kauppaa ilmaiseksi.",
+  "Add two floaters to ANY JOVIAN CARD.": "Lisää kaksi kelluketta MIHIN TAHANSA JUPITER-KORTILLE.",
+
+  "Titan Shuttles": "Titanin sukkulat",
+  "Action: Add 2 floaters to ANY JOVIAN CARD.": "TOIMINTO: Lisää 2 kelluketta MIHIN TAHANSA JUPITER-KORTILLE.",
+  "Action: Spend any number of floaters here to gain the same number of titanium.": "TOIMINTO: Käytä mikä tahansa määrä kellukkeita täältä saadaksesi saman määrän titaania.",
+
+  "Trade Envoys": "Kauppaedustajat",
+
+  "Trading Colony": "Kauppasiirtokunta",
+  "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "VAIKUTUS: Kun käyt kauppaa, saat ensin lisätä kyseisen siirtokuntalaatan uraa 1 askel.",
+  "Place a colony": "Aseta siirtokunta.",
+
+  "Urban Decomposers": "Kaupunkimädättäjät",
+  "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "Vaatii että sinulla on 1 kaupunkilaatta ja 1 siirtokunta pelissä. Lisää kasvituotantoasi 1 askel ja lisää 2 mikrobia TOISELLE kortille.",
+
+  "Warp Drive": "Warp-käyttö",
+  "Effect: When you play a space card, you pay 4 M€ less for it.": "VAIKUTUS: Kun pelaat avaruuskortin, maksat siitä 4 M€ vähemmän.",
+  "Requires 5 science tags.": "Vaatii 5 tiedeympyrää."
+}

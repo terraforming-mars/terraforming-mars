@@ -1,0 +1,94 @@
+{
+  "Adhai High Orbit Constructions": "Adhai - korkean kiertoradan rakennusyhtiö",
+  "(Effect: Whenever you play a card with a space tag BUT NO PLANETARY TAG (including this) add 1 orbital on this card.)": "(VAIKUTUS: Kun pelaat kortin jossa on avaruusympyrä MUTTA EI PLANEETTASIMBOLIA (tämä mukaan lukien), lisää 1 kiertorata tälle kortille.)",
+  "(Effect: For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the STANDARD COLONY PROJECT or TRADE ACTION costs 1 M€ less.)": "(VAIKUTUS: Jokaista 2 kiertorataa kohti tällä kortilla, kortit joissa on avaruusympyrä mutta ei planeettasimbolia tai SIIRTOKUNTA-STANDARDIPROJEKTI tai KAUPPATOIMINTO maksaa 1 M€ vähemmän.)",
+  "(You start with 43 M€.)": "(Aloitat 43 M€:lla.)",
+
+  "Ambient": "",
+  "(Effect: When you play a card with a Venus tag (including this) increase your heat production 1 step.)": "(VAIKUTUS: Kun pelaat kortin jossa on Venus-ympyrä (tämä mukaan lukien), lisää lämpötuotantoasi 1 askel.)",
+  "(Action: When temperature is maxed, spend 8 heat gain 1 TR. You may repeat this action like a standard project.)": "(TOIMINTO: Kun lämpötila on maksimissa, kuluta 8 lämpöä nostaaksesi MKL:ääsi 1 askeleen. Voit toistaa tämän toiminnon kuten standardiprojektin.)",
+  "(You start with 38 M€. As your first action, raise the Venus scale 2 steps.)": "(Aloitat 38 M€:lla. Ensimmäisenä toimintonasi nosta Venus-rataa 2 askelta.)",
+
+  "Aurorai": "",
+  "(Effect: Whenever you increase your terraform rating, add 1 data per step to ANY card.)": "(VAIKUTUS: Kun lisäät terraformaatio-arviointiasi, lisää 1 data per askel MILLE TAHANSA kortille.)",
+  "(Effect: You can use data on this card as 3M€ each to pay for standard projects.)": "(VAIKUTUS: Voit käyttää dataa tällä kortilla 3M€ kutakin standardiprojektien maksamiseen.)",
+  "(You start with 33 M€. and 2 data on this card)": "(Aloitat 33 M€:lla ja 2 datalla tällä kortilla.)",
+
+  "Bio-Sol": "",
+  "(Action: Add 1 microbe to ANY card)": "(TOIMINTO: Lisää 1 mikrobi MILLE TAHANSA kortille)",
+  "(You start with 42 M€. As your first action, draw 2 cards with a microbe tag.)": "(Aloitat 42 M€:lla. Ensimmäisenä toimintonasi nosta 2 korttia joissa on mikrobiympyrä. 1 VP jokaista 3 mikrobia kohti tällä kortilla.)",
+
+  "Chimera": "",
+  "(Effect: When you perform an action, these wild tags count as any tags of your choice. For claiming milestones and funding awards, both symbols count as one. (Other wild tags still do not count toward awards.))": "(VAIKUTUS: Kun suoritat toiminnon, nämä jokeriympyrät lasketaan valitsemaksesi ympyräksi. Saavutusten julistamisessa ja palkintojen rahoittamisessa molemmat ympyrät lasketaan yhdeksi. (Muita jokeriympyröitä ei edelleenkään lasketa palkintoihin.))",
+  "(You start with 36 M€, 1 steel, and 1 titanium.)": "(Aloitat 36 M€:lla, 1 teräksellä ja 1 titaanilla.)",
+
+  "Collegium Copernicus": "Kollegium Kopernikus",
+  "(Effect: When you play a card with a science tag (including this) Add 1 data to ANY card.)": "(VAIKUTUS: Kun pelaat kortin jossa on tiedeympyrä (tämä mukaan lukien), lisää 1 data MILLE TAHANSA kortille.)",
+  "(Action: Spend 3 data from this card to trade.)": "(TOIMINTO: Käytä 3 dataa tältä kortilta käydäksesi kauppaa.)",
+  "(You start with 33 M€. As your first action, draw 2 cards with a science tag.)": "(Aloitat 33 M€:lla. Ensimmäisenä toimintonasi nosta 2 korttia joissa on tiedeympyrä.)",
+
+  "Habitat Marte": "",
+  "(Effect: Mars tags also count as science tags.)": "(VAIKUTUS: Mars-ympyrät lasketaan myös tiedeympyröiksi.)",
+  "(You start with 40 M€)": "(Aloitat 40 M€:lla.)",
+
+  "Mars Direct": "",
+  "(Effect: When you play a Mars tag, you pay 1 M€ less for each Mars tag you have.)": "(VAIKUTUS: Kun pelaat Mars-ympyrän, maksat 1 M€ vähemmän jokaista omaamaasi Mars-ympyrää kohti.)",
+  "(You start with 52 M€.)": "(Aloitat 52 M€:lla.)",
+
+  "Mars Frontier Alliance": "Mars Frontier -liittoutuma",
+  "(Effect: After new ruling party is chosen, place the political program tile of the second most popular party on this card (you may use its effect as a passive effect of your corporation or as ruling party this generation).)": "(VAIKUTUS: Kun uusi hallitseva puolue on valittu, aseta toiseksi suosituimman puolueen poliittinen ohjelmaalaatta tälle kortille (voit käyttää sen vaikutusta yrityksesi passiivisena vaikutuksena tai hallitsevana puolueena tällä sukupolvella).)",
+  "(You start with 40 M€. When you reveal this card, select any remaining political program tile (you may use its effect as a passive effect of your corporation or as ruling party this generation).)": "(Aloitat 40 M€:lla. Kun paljastaat tämän kortin, valitse mikä tahansa jäljellä oleva poliittinen ohjelmaalaatta (voit käyttää sen vaikutusta yrityksesi passiivisena vaikutuksena tai hallitsevana puolueena tällä sukupolvella).)",
+
+  "Mars Maths": "",
+  "(Effect: At the beginning of the Research phase, you draw 5 cards, but may STILL only buy 4 cards. If you are drafting, keep 2 cards for your first draft.)": "(VAIKUTUS: Tutkimusvaiheen alussa nostat 5 korttia, mutta voit SILTI ostaa vain 4 korttia. Jos käytät draftia, pidä 2 korttia ensimmäisessä draftissasi.)",
+  "(Action: Take another two actions this turn.)": "(TOIMINTO: Tee tässä vuorossa kaksi lisätoimintoa.)",
+  "(You start with 40 M€. As your first action, draw 2 cards)": "(Aloitat 40 M€:lla. Ensimmäisenä toimintonasi nosta 2 korttia.)",
+
+  "Martian Insurance Group": "Mars-vakuutusryhmä",
+  "(Effect: Whenever you play an event card, raise your M€ production 1 step.)": "(VAIKUTUS: Kun pelaat tapahtumakortin, lisää M€-tuotantoasi 1 askel.)",
+  "(You start with 42 M€ and 1 M€ production.)": "(Aloitat 42 M€:lla ja 1 M€-tuotannolla.)",
+
+  "Mind Set Mars": "",
+  "(Action: When you play a card with a building tag, add 1 agenda on this card.)": "(VAIKUTUS: Kun pelaat kortin jossa on rakennusympyrä, lisää 1 agenda tälle kortille.)",
+  "(Action: Spend 2 agenda resources to place 1 delegate in any party.)": "(TOIMINTO: Käytä 2 agenda-resurssia asettaaksesi 1 delegaatin mihin tahansa puolueeseen.)",
+  "(Action: Spend 5 agenda resources to place a city tile on Mars.)": "(TOIMINTO: Käytä 5 agenda-resurssia asettaaksesi kaupunkilaatan Marsiin.)",
+  "(You start with 44 M€ and 1 agenda resource to this card.)": "(Aloitat 44 M€:lla ja 1 agenda-resurssilla tällä kortilla.)",
+
+  "Gagarin Mobile Base": "Gagarin liikkuva tukikohta",
+  "move": "siirrä",
+  "(Action: Move the Base to ANY nearest empty area where it has not yet been. Collect the bonus.)": "(TOIMINTO: Siirrä tukikohta MIHIN TAHANSA lähimpään tyhjään alueeseen jossa se ei ole vielä ollut. Kerää bonus.)",
+  "(Effect: When another player places a tile where the Base is, move the Base.)": "(VAIKUTUS: Kun toinen pelaaja asettaa laatan sinne missä tukikohta on, siirrä tukikohta.)",
+  "(You start with 42 M€. As your first action, put Gagarin Mobile Base on ANY area on Mars. Collect the bonus.)": "(Aloitat 42 M€:lla. Ensimmäisenä toimintonasi aseta Gagarin liikkuva tukikohta MIHIN TAHANSA alueeseen Marsissa. Kerää bonus.)",
+
+  "Polaris": "",
+  "(Effect: When any ocean tile is placed ON MARS, increase your M€ production 1 step. When you place an ocean tile, gain 4M€.)": "(VAIKUTUS: Kun valtamerilaatta asetetaan MARSIIN, lisää M€-tuotantoasi 1 askel. Kun asetat valtamerilaatan, saat 4M€.)",
+  "(You start with 32 M€. As your first action, place an ocean tile.)": "(Aloitat 32 M€:lla. Ensimmäisenä toimintonasi aseta valtamerilaatta.)",
+
+  "Ringcom": "",
+  "(Effect: When any player plays a card with a Jovian tag (including this) gain 1 titanium.)": "(VAIKUTUS: Kun kuka tahansa pelaaja pelaa kortin jossa on Jupiter-ympyrä (tämä mukaan lukien), saat 1 titaanin.)",
+  "(You start with 39 M€. and 3 M€ production. As your first action, draw 2 cards with a Jovian tag.)": "(Aloitat 39 M€:lla ja 3 M€-tuotannolla. Ensimmäisenä toimintonasi nosta 2 korttia joissa on Jupiter-ympyrä.)",
+
+  "Robin Haulings": "Roopen Kuljetukset",
+  "(Effect: Whenever you play a card with a Venus tag add 1 floater to ANY card.)": "(VAIKUTUS: Kun pelaat kortin jossa on Venus-ympyrä, lisää 1 kelluke MILLE TAHANSA kortille.)",
+  "(Action: Remove 3 floaters from this card to raise Venus 1 step or raise oxygen 1 step)": "(TOIMINTO: Poista 3 kelluketta tältä kortilta nostaaksesi Venusta 1 askel tai happea 1 askel)",
+  "(You start with 39 M€.)": "(Aloitat 39 M€:lla.)",
+
+  "SolBank": "",
+  "(Effect: Whenever you spend M€ (or steel or titanium) add 1 data to this card.)": "(VAIKUTUS: Kun kulitat M€:ä (tai terästä tai titaania), lisää 1 data tälle kortille.)",
+  "(Effect: During the production phase convert each data from this card into 1M€ each.)": "(VAIKUTUS: Tuotantovaiheen aikana muunna jokainen data tältä kortilta 1M€:ksi.)",
+  "(You start with 40 M€.)": "(Aloitat 40 M€:lla.)",
+
+  "Soylent Seedling Systems": "Soylent-taimijärjestelmät",
+  "(Effect: When you place a greenery tile, add 1 seed resource to this card.)": "(VAIKUTUS: Kun asetat viherlaatan, lisää 1 siemen-resurssi tälle kortille.)",
+  "(Effect: When paying for a plant card, or the STANDARD GREENERY PROJECT, seeds here may be used as 5 M€ each.)": "(VAIKUTUS: Kun maksat kasvikortin tai STANDARDI VIHERLAATTA-PROJEKTIN, voit käyttää siemeniä täältä 5 M€ kutakin.)",
+  "(You start with 38M€ and 2 seeds on this card.)": "(Aloitat 38M€:lla ja 2 siemenellä tällä kortilla.)",
+
+  "Steelaris": "",
+  "(Effect: When any city or special tile is placed ON MARS, gain 1 steel and 1 plant.)": "(VAIKUTUS: Kun kaupunki- tai erikoislaatta asetetaan MARSIIN, saat 1 teräksen ja 1 kasvin.)",
+  "(You start with 42 M€.)": "(Aloitat 42 M€:lla.)",
+
+  "Odyssey": "Odysseia",
+  "(Effect: Your event cards stay face up, and their tags are in use as if those were automated (green) cards.)": "(VAIKUTUS: Tapahtumakorttisi pysyvät näkyvillä ja niiden ympyröitä voi käyttää ikään kuin ne olisivat automaattisia (vihreitä) kortteja.)",
+  "(Action: Pay for and play an event card you have already played that has a base cost of 16M€ or less (INCLUDING events that place special tiles,) after which discard that card.)": "(TOIMINTO: Maksa ja pelaa jo pelaamasi tapahtumakortti jonka peruskustannus on 16M€ tai vähemmän (MUKAAN LUKIEN tapahtumat jotka asettavat erikoislaattoja), jonka jälkeen heitä kortti pois.)",
+  "(You start with 33 M€.)": "(Aloitat 33 M€:lla.)"
+}

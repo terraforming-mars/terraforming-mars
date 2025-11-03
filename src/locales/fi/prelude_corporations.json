@@ -21,9 +21,9 @@
   "PALLADIN SHIPPING": "PALLADIN KULJETUS",
   "Palladin Shipping": "Palladin Kuljetus",
   "You start with 36 M€. Gain 5 titanium.": "Aloitat 36 M€:llä. Saat 5 titaania.",
-  "effect/action": "VAIKUTUS/aktion",
+  "effect/action": "VAIKUTUS/TOIMINTO",
   "Effect: When you play a space event, gain 1 titanium.": "VAIKUTUS: Kun pelaat avaruustapahtuman, saat 1 titaanin.",
-  "Action: Spend 2 titanium to raise the temperature 1 step.": "AKTION: Käytä 2 titaania nostaaksesi lämpötilaa 1 askel.",
+  "Action: Spend 2 titanium to raise the temperature 1 step.": "TOIMINTO: Käytä 2 titaania nostaaksesi lämpötilaa 1 askel.",
 
   "NIRGAL ENTERPRISES": "NIRGAL YHTIÖT",
   "Nirgal Enterprises": "Nirgal Yhtiöt",
@@ -47,7 +47,7 @@
   "INDUSTRIES": "TEOLLISUUS",
   "Robinson Industries": "Robinson Teollisuus",
   "You start with 47 M€.": "Aloitat 47 M€:llä.",
-  "Action: Spend 4 M€ to increase (one of) your LOWEST production 1 step.": "AKTION: Käytä 4 M€ lisätäksesi (yhtä) MATALINTA tuotantoasi 1 askel.",
+  "Action: Spend 4 M€ to increase (one of) your LOWEST production 1 step.": "TOIMINTO: Käytä 4 M€ lisätäksesi (yhtä) MATALINTA tuotantoasi 1 askel.",
 
   "VALLEY": "LAAKSO",
   "TRUST": "SÄÄTIÖ",

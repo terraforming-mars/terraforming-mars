@@ -29,5 +29,7 @@
   "refresh page": "päivitä sivu",
   "to see changes": "nähdäksesi muutokset",
   "Ok": "OK",
-  "Report a bug": "Ilmoita virheestä"
+  "Report a bug": "Ilmoita virheestä",
+  "Animated Title": "Animoitu otsikko",
+  "Show spinning circle in window title on your turn.": "Näytä pyörivä ympyrä ikkunan otsikossa vuorosi aikana."
 }

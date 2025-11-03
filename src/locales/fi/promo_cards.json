@@ -151,7 +151,7 @@
 
   "Asteroid Deflection System": "Asteroidien torjuntajärjestelmä",
   "Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.": "TOIMINTO: PALJASTA JA HYLKÄÄ pakan ylin kortti. Jos siinä on avaruusympyrä, lisää asteroidi tähän.",
-  "opponents may not remove your plants": "vastustajat eivät voi poistaa kasveijasi",
+  "opponents may not remove your plants": "vastustajat eivät voi poistaa kasvejasi",
   "Decrease your energy production 1 step. 1 VP per asteroid on this card.": "Vähennä energiatuotantoasi 1 askel. 1 VP jokaista asteroidia kohti tällä kortilla.",
 
   "Jovian Embassy": "Jupiterin lähetystö",
@@ -226,10 +226,10 @@
   "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "TOIMINTO: Käytä 1 asteroidi täältä lisätäksesi M€-tuotantoa 1 askel TAI saadaksesi 2 titaania.",
   "Add 2 asteroids to this card.": "Lisää 2 asteroidia tälle kortille.",
 
-  "Stanford Torus": "Stanfordin toorus",
+  "Stanford Torus": "Stanfordin torus",
   "Place a city tile IN SPACE, outside and separate from the planet.": "Aseta kaupunkilaatta AVARUUTEEN, planetan ulkopuolelle ja erillään siitä.",
 
-  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. Remove up to 6 plants from any player.": "Nosta lämpötilaa 3 askelta ja saat 4 terästä. Aseta tämä laatta VIEREEN EI kaupunkilaatan. Poista enintään 6 kasvia keneltä tahansa pelaajalta.",
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. Remove up to 6 plants from any player.": "Nosta lämpötilaa 3 askelta ja saat 4 terästä. Aseta tämä laatta EI YHDENKÄÄN kaupunkilaatan viereen. Poista enintään 6 kasvia keneltä tahansa pelaajalta.",
 
   "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Vaatii 4 valtamerialuelaattaa. Lisää energiatuotantoasi 2 askelta. Aseta tämä laatta valtamerialuelaatan VIEREEN.",
 
@@ -248,6 +248,6 @@
   "Harvest": "Sadonkorjuu",
   "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "Vaatii että sinulla on 3 viheraluetta pelissä. Saat 12 M€.",
 
-  "Outdoor Sports": "Ulkoilma-urheilut",
+  "Outdoor Sports": "Ulkoilmaurheilu",
   "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "Vaatii minkä tahansa kaupungin valtameren vieressä. Lisää M€-tuotantoasi 2 askelta."
 }

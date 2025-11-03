@@ -78,13 +78,13 @@
   "Increase your titanium production 1 step.": "Lisää titaanintuotantoasi 1 askel.",
 
   "Development Center": "Kehityskeskus",
-  "Action: Spend 1 energy to draw a card.": "AKTION: Käytä 1 energia nostaaksesi kortin.",
+  "Action: Spend 1 energy to draw a card.": "TOIMINTO: Käytä 1 energia nostaaksesi kortin.",
 
   "Equatorial Magnetizer": "Päiväntasaajan magnetisoija",
-  "Action: Decrease your energy production 1 step to increase your terraform rating 1 step.": "AKTION: Vähennä energiatuotantoasi 1 askel nostaaksesi MKL:ääsi 1 askel.",
+  "Action: Decrease your energy production 1 step to increase your terraform rating 1 step.": "TOIMINTO: Vähennä energiatuotantoasi 1 askel nostaaksesi MKL:ääsi 1 askel.",
 
-  "Domed Crater": "Kupolikrateri",
-  "Oxygen must be 7% or less. Gain 3 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Hapen tulee olla 7 % tai vähemmän. Saa 3 kasvia. Aseta kaupunkilaatta. Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 3 askelta.",
+  "Domed Crater": "Katettu kraatteri",
+  "Oxygen must be 7% or less. Gain 3 plants. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Hapen tulee olla 7 % tai vähemmän. Saat 3 kasvia. Aseta kaupunkilaatta. Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 3 askelta.",
 
   "Noctis City": "Noctis-kaupunki",
   "(Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile ON THE RESERVED AREA, disregarding normal placement restrictions.)": "(Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 3 askelta. Aseta kaupunkilaatta VARATULLE ALUEELLE, sivuuttaen normaalit sijoitusrajoitukset.)",
@@ -110,7 +110,7 @@
   "It must be -12 C or colder to play. Gain 1 plant.": "Lämpötilan tulee olla -12°C tai kylmempi pelattaessa. Saa 1 kasvi.",
 
   "Predators": "Petoeläimet",
-  "Action: Remove 1 animal from any card and add it to this card.": "AKTION: Poista 1 eläin miltä tahansa kortilta ja lisää se tälle kortille.",
+  "Action: Remove 1 animal from any card and add it to this card.": "TOIMINTO: Poista 1 eläin miltä tahansa kortilta ja lisää se tälle kortille.",
   "1 VP per animal on this card.": "1 VP jokaista eläintä kohden tällä kortilla.",
   "Requires 11% oxygen.": "Vaatii 11 % happea.",
 
@@ -124,8 +124,8 @@
   "Requires that you have 5 science tags.": "Vaatii että sinulla on 5 tiedeympyrää.",
 
   "Security Fleet": "Turvallisuuslaivasto",
-  "Action: Spend 1 titanium to add 1 fighter resource to this card.": "AKTION: Käytä 1 titaani lisätäksesi 1 hävittäjä-resurssin tälle kortille.",
-  "1 VP for each fighter resource on this card.": "1 VP jokaista hävittäjä-resurssia kohden tällä kortilla.",
+  "Action: Spend 1 titanium to add 1 fighter resource to this card.": "TOIMINTO: Käytä 1 titaani lisätäksesi 1 hävittäjäresurssin tälle kortille.",
+  "1 VP for each fighter resource on this card.": "1 VP jokaista hävittäjäresurssia kohden tällä kortilla.",
 
   "Cupola City": "Kupolikaupunki",
   "Oxygen must be 9% or less. Place a city tile. Decrease your energy production 1 step and increase your M€ production 3 steps.": "Hapen tulee olla 9 % tai vähemmän. Aseta kaupunkilaatta. Vähennä energiatuotantoasi 1 askel ja lisää M€-tuotantoasi 3 askelta.",
@@ -139,17 +139,17 @@
   "Underground City": "Maanalainen kaupunki",
   "Place a city tile. Decrease your energy production 2 steps and increase your steel production 2 steps.": "Aseta kaupunkilaatta. Vähennä energiatuotantoasi 2 askelta ja lisää terästuotantoasi 2 askelta.",
 
-  "Regolith Eaters": "Regolitinsyöjät",
-  "Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "AKTION: Lisää 1 mikrobi tälle kortille, tai poista 2 mikrobia tältä kortilta nostaaksesi happitasoa 1 askel.",
-  "Action: Remove 2 microbes from this card to raise oxygen level 1 step.": "AKTION: Poista 2 mikrobia tältä kortilta nostaaksesi happitasoa 1 askel.",
+  "Regolith Eaters": "Regoliitinsyöjät",
+  "Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "TOIMINTO: Lisää 1 mikrobi tälle kortille, tai poista 2 mikrobia tältä kortilta nostaaksesi happitasoa 1 askel.",
+  "Action: Remove 2 microbes from this card to raise oxygen level 1 step.": "TOIMINTO: Poista 2 mikrobia tältä kortilta nostaaksesi happitasoa 1 askel.",
 
   "GHG Producing Bacteria": "Kasvihuonekaasuja tuottavat bakteerit",
-  "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "AKTION: Lisää 1 mikrobi tälle kortille, tai poista 2 mikrobia nostaaksesi lämpötilaa 1 askel.",
-  "Action: Remove 2 microbes to raise temperature 1 step.": "AKTION: Poista 2 mikrobia tältä kortilta nostaaksesi lämpötilaa 1 askel.",
+  "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "TOIMINTO: Lisää 1 mikrobi tälle kortille, tai poista 2 mikrobia nostaaksesi lämpötilaa 1 askel.",
+  "Action: Remove 2 microbes to raise temperature 1 step.": "TOIMINTO: Poista 2 mikrobia tältä kortilta nostaaksesi lämpötilaa 1 askel.",
   "Requires 4% oxygen.": "Vaatii 4 % happea.",
 
   "Ants": "Muurahaiset",
-  "Action: Remove 1 microbe from any card to add 1 to this card.": "AKTION: Poista 1 mikrobi miltä tahansa kortilta lisätäksesi 1 tälle kortille.",
+  "Action: Remove 1 microbe from any card to add 1 to this card.": "TOIMINTO: Poista 1 mikrobi miltä tahansa kortilta lisätäksesi 1 tälle kortille.",
   "1 VP per 2 microbes on this card.": "1 VP jokaista 2 mikrobia kohden tällä kortilla.",
 
   "Release of Inert Gases": "Inerttikaasut vapaiksi",
@@ -158,7 +158,7 @@
   "Nitrogen-Rich Asteroid": "Typpipitoinen asteroidi",
   "Raise your terraforming rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 plant tags.": "Nosta MKL:ääsi 2 askelta ja lämpötilaa 1 askel. Lisää kasvituotantoasi 1 askel, tai 4 askelta jos sinulla on 3 kasviympyrää.",
 
-  "Rover Construction": "Kulkijien rakentaminen",
+  "Rover Construction": "Kulkijoiden rakentaminen",
   "Effect: When any city tile is placed, gain 2 M€.": "VAIKUTUS: Kun mikä tahansa kaupunkilaatta asetetaan, saa 2 M€.",
 
   "Deimos Down": "Deimosin tuho",
@@ -191,7 +191,7 @@
   "Adapted Lichen": "Mukautunut jäkälä",
   "Increase your plant production 1 step.": "Lisää kasvituotantoasi 1 askel.",
 
-  "Tardigrades": "Karhukasvaiset",
+  "Tardigrades": "Karhukaiset",
   "Action: Add 1 microbe to this card.": "TOIMINTO: Lisää 1 mikrobi tälle kortille.",
   "1 VP per 4 Microbes on this card.": "1 VP jokaista 4 mikrobia kohden tällä kortilla.",
 
@@ -292,7 +292,7 @@
   "Giant Ice Asteroid": "Jättijääasteroidi",
   "Raise temperature 2 steps and place 2 ocean tiles. Remove up to 6 plants from any player.": "Nosta lämpötilaa 2 askelta ja aseta 2 valtamerilaattaa. Poista enintään 6 kasvia keneltä tahansa pelaajalta.",
 
-  "Ganymede Colony": "Ganymed-siirtokunta",
+  "Ganymede Colony": "Ganymeden siirtokunta",
   "Place a city tile ON THE RESERVED AREA.": "Aseta kaupunkilaatta VARATULLE ALUEELLE.",
   "1 VP per Jovian tag you have.": "1 VP per Jupiter-ympyrä, joka sinulla on.",
 
@@ -666,7 +666,7 @@
   "Lagrange Observatory": "Lagrangen observatorio",
   "Draw 1 card.": "Nosta 1 kortti.",
 
-  "Terraforming Ganymede": "Ganymedin maankaltaistus",
+  "Terraforming Ganymede": "Ganymeden maankaltaistus",
   "Raise your TR 1 step for each Jovian tag you have, including this.": "Nosta MKL:ääsi 1 askel per Jupiter-ympyrä, joka sinulla on, tämä mukaan lukien.",
 
   "Immigration Shuttles": "Maahanmuuttosukkulat",

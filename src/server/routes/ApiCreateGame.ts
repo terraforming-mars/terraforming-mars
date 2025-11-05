@@ -10,7 +10,7 @@ import {GameOptions} from '../game/GameOptions';
 import {Player} from '../Player';
 import {Server} from '../models/ServerModel';
 import {NewGameConfig} from '../../common/game/NewGameConfig';
-import {safeCast, isGameId, isSpectatorId, isPlayerId} from '../../common/Types';
+import {isGameId, isPlayerId, isSpectatorId, safeCast} from '../../common/Types';
 import {generateRandomId} from '../utils/server-ids';
 import {IGame} from '../IGame';
 import {Request} from '../Request';
@@ -58,17 +58,11 @@ export class ApiCreateGame extends Handler {
   }
 
   public static boardOptions(board: RandomBoardOption | BoardName): Array<BoardName> {
-    const allBoards = Object.values(BoardName);
-
-    if (board === RandomBoardOption.ALL) return allBoards;
-    if (board === RandomBoardOption.OFFICIAL) {
-      return allBoards.filter((name) => {
-        return name === BoardName.THARSIS ||
-          name === BoardName.HELLAS ||
-          name === BoardName.ELYSIUM;
-      });
+    switch (board) {
+    case RandomBoardOption.ALL: return Object.values(BoardName);
+    case RandomBoardOption.OFFICIAL: return [BoardName.THARSIS, BoardName.HELLAS, BoardName.ELYSIUM, BoardName.UTOPIA_PLANITIA];
+    default: return [board];
     }
-    return [board];
   }
 
   // TODO(kberg): much of this code can be moved outside of handler, and that

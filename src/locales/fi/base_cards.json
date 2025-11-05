@@ -69,8 +69,8 @@
   "Big Asteroid": "Suuri asteroidi",
   "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 plants from any player.": "Nosta lämpötilaa 2 askelta ja hanki 4 titaania. Poista enintään 4 kasvia miltä tahansa pelaajalta.",
 
-  "Water Import From Europa": "Vedentuonti Europasta",
-  "Action: Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a space card.": "TOIMINTO: Maksa 12 M€ asettaaksesi merilaatan. TITAANIA VOI KÄYTTÄÄ ikään kuin pelaisit avaruus-korttia.",
+  "Water Import From Europa": "Vettä Europasta",
+  "Action: Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a space card.": "TOIMINTO: Maksa 12 M€ asettaaksesi merilaatan. TITAANIA VOI KÄYTTÄÄ ikään kuin pelaisit avaruuskortin.",
   "1 VP for each Jovian tag you have.": "1 VP jokaisesta Jupiter-ympyrästäsi.",
 
   "Space Elevator": "Avaruushissi",
@@ -182,7 +182,7 @@
   "Nuclear Power": "Atomivoimala",
   "Decrease your M€ production 2 steps and increase your energy production 3 steps.": "Vähennä M€-tuotantoasi 2 askelta ja lisää energiatuotantoasi 3 askelta.",
 
-  "Lightning Harvest": "Salamasato",
+  "Lightning Harvest": "Salamien keräys",
   "Requires 3 science tags. Increase your energy production and your M€ production one step each.": "Vaatii 3 tiedeympyrää. Lisää energiatuotantoasi ja M€-tuotantoasi kumpaaksi 1 askel.",
 
   "Algae": "Levät",
@@ -418,7 +418,7 @@
   "Sabotage": "",
   "Remove up to 3 titanium from any player, or 4 steel, or 7 M€.": "Poista enintään 3 titaania TAI 4 terästä TAI 7 M€ keneltä tahansa pelaajalta.",
 
-  "Moss": "Samakko",
+  "Moss": "Sammalikko",
   "Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.": "Vaatii 3 valtamerilaattaa ja että menetät 1 kasvin. Lisää kasvituotantoasi 1 askel.",
 
   "Industrial Center": "Teollisuuskeskus",
@@ -498,7 +498,7 @@
   "Tectonic Stress Power": "Tektoninen stressivoima",
   "Requires 2 science tags. Increase your energy production 3 steps.": "Vaatii 2 tiedeympyrää. Lisää energiatuotantoasi 3 askelta.",
 
-  "Nitrophilic Moss": "Typpeä rakastava samakko",
+  "Nitrophilic Moss": "Typpeä kuluttava sammal",
   "Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.": "Vaatii 3 valtamerilaattaa ja että menetät 2 kasvia. Lisää kasvituotantoasi 2 askelta.",
 
   "Herbivores": "Kasvinsyöjät",

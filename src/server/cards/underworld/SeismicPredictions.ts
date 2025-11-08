@@ -9,11 +9,10 @@ import {CardRenderer} from '../../cards/render/CardRenderer';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 import {Size} from '../../../common/cards/render/Size';
 import {cancelled} from '../../cards/Options';
-import {SpaceType} from '../../../common/boards/SpaceType';
-import {Board} from '../../boards/Board';
+import {Tag} from '../../../common/cards/Tag';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.text('ALL').undergroundResources(1, {cancelled}).nbsp.megacredits(-2).slash().emptyTile().asterix().influence({size: Size.SMALL});
+  b.text('ALL').undergroundResources(1, {cancelled}).nbsp.megacredits(-2).slash().tag(Tag.BUILDING).minus().undergroundResources().influence({size: Size.SMALL});
 });
 
 export class SeismicPredictions extends GlobalEvent implements IGlobalEvent {
@@ -21,7 +20,7 @@ export class SeismicPredictions extends GlobalEvent implements IGlobalEvent {
     super({
       name: GlobalEventName.SEISMIC_PREDICTIONS,
       description: 'Discard all unclaimed underground resources. ' +
-      'Lose 2 M€ for each tile on Mars you own WITHOUT excavation markers (max 5) minus influence.',
+      'Lose 2 M€ for each building tag (max 7) minus influence and claimed underground resource tokens.',
       revealedDelegate: PartyName.SCIENTISTS,
       currentDelegate: PartyName.MARS,
       renderData: RENDER_DATA,
@@ -30,18 +29,13 @@ export class SeismicPredictions extends GlobalEvent implements IGlobalEvent {
   public resolve(game: IGame, turmoil: Turmoil) {
     UnderworldExpansion.removeAllUnclaimedTokens(game);
 
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      const playerSpaces = player.game.board.spaces
-        .filter(Board.ownedBy(player))
-        .filter(Board.hasRealTile)
-        .filter((space) => space.spaceType !== SpaceType.COLONY);
-      const filtered = playerSpaces.filter(
-        (space) => space.undergroundResources === undefined && space.excavator === undefined);
-      const penalty = Math.min(5, filtered.length) - turmoil.getPlayerInfluence(player);
-      const cost = penalty * 2;
+    for (const player of game.playersInGenerationOrder) {
+      const penalty = Math.min(7, player.tags.count(Tag.BUILDING, 'raw'));
+      const rebate = turmoil.getInfluence(player) + player.underworldData.tokens.length;
+      const cost = (penalty - rebate) * 2;
       if (cost > 0) {
-        player.stock.deduct(Resource.MEGACREDITS, cost, {log: true, from: this.name});
+        player.stock.deduct(Resource.MEGACREDITS, cost, {log: true, from: {globalEvent: this}});
       }
-    });
+    }
   }
 }

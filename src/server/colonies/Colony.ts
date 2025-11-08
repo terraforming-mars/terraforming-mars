@@ -23,7 +23,7 @@ import {IGame} from '../IGame';
 import {Turmoil} from '../turmoil/Turmoil';
 import {SerializedColony} from '../SerializedColony';
 import {IColony, TradeOptions} from './IColony';
-import {colonyMetadata, IColonyMetadata, IInputColonyMetadata} from '../../common/colonies/IColonyMetadata';
+import {ColonyMetadata, colonyMetadata, InputColonyMetadata} from '../../common/colonies/ColonyMetadata';
 import {ColonyName} from '../../common/colonies/ColonyName';
 import {sum} from '../../common/utils/utils';
 import {message} from '../logs/MessageBuilder';
@@ -42,9 +42,9 @@ export abstract class Colony implements IColony {
   public colonies: Array<PlayerId> = [];
   public trackPosition: number = 1;
 
-  public metadata: IColonyMetadata;
+  public metadata: ColonyMetadata;
 
-  protected constructor(metadata: IInputColonyMetadata) {
+  protected constructor(metadata: InputColonyMetadata) {
     this.metadata = colonyMetadata(metadata);
   }
 
@@ -62,6 +62,11 @@ export abstract class Colony implements IColony {
     if (game.syndicatePirateRaider) {
       if (game.syndicatePirateRaider === this.visitor) {
         this.visitor = undefined;
+      } else {
+        const raider = game.getPlayerById(game.syndicatePirateRaider);
+        if (raider.tableau.has(CardName.HUAN)) {
+          this.visitor = undefined;
+        }
       }
     } else {
       this.visitor = undefined;
@@ -83,9 +88,9 @@ export abstract class Colony implements IColony {
   public addColony(player: IPlayer, options?: {giveBonusTwice: boolean}): void {
     player.game.log('${0} built a colony on ${1}', (b) => b.player(player).colony(this));
 
-    this.giveBonus(player, this.metadata.buildType, this.metadata.buildQuantity[this.colonies.length], this.metadata.buildResource);
+    this.giveBonus(player, this.metadata.build.type, this.metadata.build.quantity[this.colonies.length], this.metadata.build.resource);
     if (options?.giveBonusTwice === true) { // Vital Colony hook.
-      this.giveBonus(player, this.metadata.buildType, this.metadata.buildQuantity[this.colonies.length], this.metadata.buildResource);
+      this.giveBonus(player, this.metadata.build.type, this.metadata.build.quantity[this.colonies.length], this.metadata.build.resource);
     }
 
     this.colonies.push(player.id);
@@ -93,15 +98,15 @@ export abstract class Colony implements IColony {
       this.trackPosition = this.colonies.length;
     }
 
-    for (const cardOwner of player.game.getPlayers()) {
+    for (const cardOwner of player.game.players) {
       for (const card of cardOwner.tableau) {
-        card.onColonyAdded?.(player, cardOwner);
+        card.onColonyAddedByAnyPlayer?.(cardOwner, player);
       }
     }
 
     if (this.name === ColonyName.LEAVITT) {
       for (const card of player.tableau) {
-        card.onColonyAddedToLeavitt?.(player);
+        card.onNonCardTagAdded?.(player, Tag.SCIENCE);
       }
     }
   }
@@ -118,8 +123,8 @@ export abstract class Colony implements IColony {
     */
   public trade(player: IPlayer, tradeOptions: TradeOptions = {}, bonusTradeOffset = 0): void {
     const tradeOffset = player.colonies.tradeOffset + bonusTradeOffset;
-    const maxTrackPosition = Math.min(this.trackPosition + tradeOffset, MAX_COLONY_TRACK_POSITION);
-    const steps = maxTrackPosition - this.trackPosition;
+    const maxPossibleTrackPosition = Math.min(this.trackPosition + tradeOffset, MAX_COLONY_TRACK_POSITION);
+    const steps = maxPossibleTrackPosition - this.trackPosition;
 
     if (steps === 0 ||
         this.metadata.shouldIncreaseTrack === 'no' ||
@@ -129,7 +134,7 @@ export abstract class Colony implements IColony {
       return;
     }
 
-    if (this.metadata.shouldIncreaseTrack === 'yes' || (this.metadata.tradeResource !== undefined && this.metadata.tradeResource[this.trackPosition] === this.metadata.tradeResource[maxTrackPosition])) {
+    if (this.metadata.shouldIncreaseTrack === 'yes' || (this.metadata.trade.resource !== undefined && this.metadata.trade.resource[this.trackPosition] === this.metadata.trade.resource[maxPossibleTrackPosition])) {
       // No point in asking the player, just increase it
       this.increaseTrack(steps);
       LogHelper.logColonyTrackIncrease(player, this, steps);
@@ -143,9 +148,9 @@ export abstract class Colony implements IColony {
   }
 
   private handleTrade(player: IPlayer, options: TradeOptions) {
-    const resource = Array.isArray(this.metadata.tradeResource) ? this.metadata.tradeResource[this.trackPosition] : this.metadata.tradeResource;
+    const resource = Array.isArray(this.metadata.trade.resource) ? this.metadata.trade.resource[this.trackPosition] : this.metadata.trade.resource;
 
-    this.giveBonus(player, this.metadata.tradeType, this.metadata.tradeQuantity[this.trackPosition], resource);
+    this.giveBonus(player, this.metadata.trade.type, this.metadata.trade.quantity[this.trackPosition], resource);
 
     // !== false because default is true.
     if (options.giveColonyBonuses !== false) {
@@ -155,10 +160,10 @@ export abstract class Colony implements IColony {
     // !== false because default is true.
     if (options.usesTradeFleet !== false) {
       this.visitor = player.id;
-      player.colonies.tradesThisGeneration++;
+      player.colonies.usedTradeFleets++;
     }
 
-    if (player.cardIsInEffect(CardName.VENUS_TRADE_HUB)) {
+    if (player.tableau.has(CardName.VENUS_TRADE_HUB)) {
       player.stock.add(Resource.MEGACREDITS, 3, {log: true});
     }
 
@@ -171,7 +176,7 @@ export abstract class Colony implements IColony {
   }
 
   public giveColonyBonus(player: IPlayer, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
-    return this.giveBonus(player, this.metadata.colonyBonusType, this.metadata.colonyBonusQuantity, this.metadata.colonyBonusResource, isGiveColonyBonus);
+    return this.giveBonus(player, this.metadata.colony.type, this.metadata.colony.quantity, this.metadata.colony.resource, isGiveColonyBonus);
   }
 
   private giveBonus(player: IPlayer, bonusType: ColonyBenefit, quantity: number, resource: Resource | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
@@ -247,13 +252,13 @@ export abstract class Colony implements IColony {
       break;
 
     case ColonyBenefit.GAIN_SCIENCE_TAG:
-      player.tags.gainScienceTag(1);
+      player.tags.extraScienceTags += 1;
       player.playCard(new ScienceTagCard(), undefined, 'nothing');
       game.log('${0} gained 1 Science tag', (b) => b.player(player));
       break;
 
     case ColonyBenefit.GAIN_SCIENCE_TAGS_AND_CLONE_TAG:
-      player.tags.gainScienceTag(2);
+      player.tags.extraScienceTags += 2;
       player.playCard(new ScienceTagCard(), undefined, 'nothing');
       game.log('${0} gained 2 Science tags', (b) => b.player(player));
       break;
@@ -331,7 +336,7 @@ export abstract class Colony implements IColony {
       action = new SimpleDeferredAction(
         player,
         () => {
-          const playersWithCards = game.getPlayers().filter((p) => p.cardsInHand.length > 0);
+          const playersWithCards = game.players.filter((p) => p.cardsInHand.length > 0);
           if (playersWithCards.length === 0) return undefined;
           return new SelectPlayer(playersWithCards, 'Select player to discard a card', 'Select')
             .andThen((selectedPlayer) => {
@@ -360,7 +365,9 @@ export abstract class Colony implements IColony {
          * When this method is called from within the GiveColonyBonus deferred action
          * we return the player input directly instead of deferring it.
          *
-         * TODO(kberg): why?
+         * This is related to how certain colony bonuses require player interaction.
+         * The deferred action queue doesn't work well when asking for inputs for
+         * multple players.
          */
         return action.execute();
       } else {

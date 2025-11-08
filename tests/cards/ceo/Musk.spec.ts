@@ -9,7 +9,7 @@ import {testGame} from '../../TestGame';
 import {EarthOffice} from '../../../src/server/cards/base/EarthOffice';
 
 
-describe('Musk', function() {
+describe('Musk', () => {
   let card: Musk;
   let player: TestPlayer;
 
@@ -19,11 +19,11 @@ describe('Musk', function() {
     player.playedCards.push(card);
   });
 
-  it('Can act without cards', function() {
+  it('Can act without cards', () => {
     expect(card.canAct(player)).is.true;
   });
 
-  it('Takes action with no Earth cards', function() {
+  it('Takes action with no Earth cards', () => {
     expect(player.titanium).to.eq(0);
     expect(card.canAct(player)).is.true;
     card.action(player);
@@ -31,7 +31,7 @@ describe('Musk', function() {
     expect(player.titanium).to.eq(6);
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     expect(player.titanium).to.eq(0);
     expect(card.canAct(player)).is.true;
     card.action(player);
@@ -40,7 +40,7 @@ describe('Musk', function() {
     expect(card.canAct(player)).is.false;
   });
 
-  it('Takes action with one Earth card, discards it', function() {
+  it('Takes action with one Earth card, discards it', () => {
     const earthCard = new EarthOffice();
     player.cardsInHand.push(earthCard);
     const selectCard = cast(card.action(player), SelectCard);
@@ -50,7 +50,7 @@ describe('Musk', function() {
     expect(player.cardsInHand).has.length(1);
   });
 
-  it('Takes action with three Earth cards, discards all', function() {
+  it('Takes action with three Earth cards, discards all', () => {
     const earthCard1 = fakeCard({tags: [Tag.EARTH]});
     const earthCard2 = fakeCard({tags: [Tag.EARTH]});
     const earthCard3 = fakeCard({tags: [Tag.EARTH]});
@@ -65,7 +65,7 @@ describe('Musk', function() {
     expect(player.cardsInHand.some((card) => !card.tags.includes(Tag.SPACE))).is.false;
   });
 
-  it('Takes action with two Earth cards, discards two, keeps one', function() {
+  it('Takes action with two Earth cards, discards two, keeps one', () => {
     const earthCard1 = fakeCard({tags: [Tag.EARTH]});
     const earthCard2 = fakeCard({tags: [Tag.EARTH]});
     const earthCard3 = fakeCard({tags: [Tag.EARTH]});

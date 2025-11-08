@@ -6,28 +6,28 @@ import {ResearchCoordination} from '../../../src/server/cards/prelude/ResearchCo
 import {SeptumTribus} from '../../../src/server/cards/turmoil/SeptumTribus';
 import {cast, testGame} from '../../TestingUtils';
 
-describe('CommunityServices', function() {
-  it('Should play', function() {
+describe('CommunityServices', () => {
+  it('Should play', () => {
     const card = new CommunityServices();
     const corp = new Aridor();
     const prelude = new EccentricSponsor();
     const researchCoordination = new ResearchCoordination();
     const [/* game*/, player] = testGame(1);
     player.playedCards.push(prelude, researchCoordination);
-    player.corporations.push(corp);
+    player.playedCards.push(corp);
     cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(1);
     expect(player.production.megacredits).to.eq(4);
   });
 
-  it('Wild Tags', function() {
+  it('Wild Tags', () => {
     const card = new CommunityServices();
     const septumTribus = new SeptumTribus();
     const prelude = new EccentricSponsor();
     const researchCoordination = new ResearchCoordination();
     const [/* game*/, player] = testGame(1);
     player.playedCards.push(prelude, researchCoordination);
-    player.corporations.push(septumTribus);
+    player.playedCards.push(septumTribus);
     cast(card.play(player), undefined);
     expect(card.getVictoryPoints(player)).to.eq(1);
     expect(player.production.megacredits).to.eq(4);

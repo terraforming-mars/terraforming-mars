@@ -4,16 +4,16 @@ import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
 import {testGame} from '../../TestingUtils';
 
-describe('AdvancedPowerGrid', function() {
+describe('AdvancedPowerGrid', () => {
   let card: AdvancedPowerGrid;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AdvancedPowerGrid();
     [/* game */, player] = testGame(1);
   });
 
-  it('play', function() {
+  it('play', () => {
     player.production.override(Units.EMPTY);
     card.play(player);
     expect(player.production.asUnits()).deep.eq(Units.of({energy: 2, megacredits: 1}));

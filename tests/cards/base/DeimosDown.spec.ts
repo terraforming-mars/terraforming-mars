@@ -6,18 +6,18 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('DeimosDown', function() {
+describe('DeimosDown', () => {
   let card: DeimosDown;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DeimosDown();
     [game, player, player2] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player2.plants = 8;
     card.play(player);
 
@@ -30,7 +30,7 @@ describe('DeimosDown', function() {
     expect(player2.plants).to.eq(0);
   });
 
-  it('Works fine in solo mode', function() {
+  it('Works fine in solo mode', () => {
     const [game, player] = testGame(1);
 
     player.plants = 15;

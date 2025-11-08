@@ -8,31 +8,31 @@ import {DeclareCloneTag} from '../../../src/server/pathfinders/DeclareCloneTag';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {cast} from '../../TestingUtils';
 
-describe('CrewTraining', function() {
+describe('CrewTraining', () => {
   let card: CrewTraining;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CrewTraining();
     [game, player] = testGame(1, {pathfindersExpansion: true});
   });
 
-  it('Should play', function() {
-    expect(player.getTerraformRating()).eq(14);
+  it('Should play', () => {
+    expect(player.terraformRating).eq(14);
     expect(card.tags).deep.eq([Tag.CLONE, Tag.CLONE]);
 
     card.play(player);
 
-    expect(player.getTerraformRating()).eq(16);
+    expect(player.terraformRating).eq(16);
 
     expect(game.deferredActions).has.length(1);
     const action = cast(game.deferredActions.pop(), DeclareCloneTag);
     const options = cast(action.execute(), OrOptions);
 
-    expect(options.options[0].title).to.match(/earth/);
+    expect(options.options[1].title).to.match(/earth/);
     expect(game.pathfindersData).deep.eq({
-      venus: -1,
+      venus: 0,
       earth: 0,
       mars: 0,
       jovian: 0,
@@ -40,10 +40,10 @@ describe('CrewTraining', function() {
       vps: [],
     });
 
-    options.options[0].cb();
+    options.options[1].cb();
 
     expect(game.pathfindersData).deep.eq({
-      venus: -1,
+      venus: 0,
       earth: 2,
       mars: 0,
       jovian: 0,

@@ -1,9 +1,10 @@
 import {MarsBoard} from '../../src/server/boards/MarsBoard';
 import {BoardBuilder} from '../../src/server/boards/BoardBuilder';
+import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 
 export class EmptyBoard extends MarsBoard {
   public static newInstance() {
-    const builder = new BoardBuilder(false, false);
+    const builder = new BoardBuilder(DEFAULT_GAME_OPTIONS);
 
     // y=0
     builder.land().land().land().land().land();

@@ -6,22 +6,18 @@
           </div>
         </div>
         <div class="board-outer-spaces" id="colony_spaces">
-            <board-space :space="getSpaceById('01')" text="Ganymede Colony" :tileView="tileView"></board-space>
-            <board-space :space="getSpaceById('02')" text="Phobos Space Haven" :tileView="tileView"></board-space>
-            <board-space :space="getSpaceById('69')" text="Stanford Torus" :tileView="tileView"></board-space>
-            <template v-if="expansions.venus">
-              <board-space :space="getSpaceById('70')" text="Luna Metropolis" :tileView="tileView"></board-space>
-              <board-space :space="getSpaceById('71')" text="Dawn City" :tileView="tileView"></board-space>
-              <board-space :space="getSpaceById('72')" text="Stratopolis" :tileView="tileView"></board-space>
-              <board-space :space="getSpaceById('73')" text="Maxwell Base" :tileView="tileView"></board-space>
-            </template>
-            <template v-if="expansions.pathfinders">
-              <!-- <board-space :space="getSpaceById('74')" text="Martian Transhipment Station" :tileView="tileView"></board-space> -->
-              <board-space :space="getSpaceById('75')" text="Ceres Spaceport" :tileView="tileView"></board-space>
-              <board-space :space="getSpaceById('76')" text="Dyson Screens" :tileView="tileView"></board-space>
-              <board-space :space="getSpaceById('77')" text="Lunar Embassy" :tileView="tileView"></board-space>
-              <board-space :space="getSpaceById('78')" text="Venera Base" :tileView="tileView"></board-space>
-            </template>
+          <board-space :v-if="hasSpace(SpaceName.GANYMEDE_COLONY)" :space="getSpace(SpaceName.GANYMEDE_COLONY)" text="Ganymede Colony" :tileView="tileView"></board-space>
+          <board-space :v-if="hasSpace(SpaceName.PHOBOS_SPACE_HAVEN)" :space="getSpace(SpaceName.PHOBOS_SPACE_HAVEN)" text="Phobos Space Haven" :tileView="tileView"></board-space>
+          <board-space :v-if="hasSpace(SpaceName.STANFORD_TORUS)" :space="getSpace(SpaceName.STANFORD_TORUS)" text="Stanford Torus" :tileView="tileView"></board-space>
+          <board-space :v-if="hasSpace(SpaceName.LUNA_METROPOLIS)" :space="getSpace(SpaceName.LUNA_METROPOLIS)" text="Luna Metropolis" :tileView="tileView"></board-space>
+          <board-space :v-if="hasSpace(SpaceName.DAWN_CITY)" :space="getSpace(SpaceName.DAWN_CITY)" text="Dawn City" :tileView="tileView"></board-space>
+          <board-space :v-if="hasSpace(SpaceName.STRATOPOLIS)" :space="getSpace(SpaceName.STRATOPOLIS)" text="Stratopolis" :tileView="tileView"></board-space>
+          <board-space :v-if="hasSpace(SpaceName.MAXWELL_BASE)" :space="getSpace(SpaceName.MAXWELL_BASE)" text="Maxwell Base" :tileView="tileView"></board-space>
+          <!-- <board-space :space="getSpace('74')" text="Martian Transhipment Station" :tileView="tileView"></board-space> -->
+          <board-space :v-if="hasSpace(SpaceName.CERES_SPACEPORT)" :space="getSpace(SpaceName.CERES_SPACEPORT)" text="Ceres Spaceport" :tileView="tileView"></board-space>
+          <board-space :v-if="hasSpace(SpaceName.DYSON_SCREENS)" :space="getSpace(SpaceName.DYSON_SCREENS)" text="Dyson Screens" :tileView="tileView"></board-space>
+          <board-space :v-if="hasSpace(SpaceName.LUNAR_EMBASSY)" :space="getSpace(SpaceName.LUNAR_EMBASSY)" text="Lunar Embassy" :tileView="tileView"></board-space>
+          <board-space :v-if="hasSpace(SpaceName.VENERA_BASE)" :space="getSpace(SpaceName.VENERA_BASE)" text="Venera Base" :tileView="tileView"></board-space>
         </div>
 
         <div class="global-numbers">
@@ -38,11 +34,11 @@
             </div>
 
             <div class="global-numbers-oceans">
-              <span v-if="this.oceans_count === this.constants.MAX_OCEAN_TILES">
+              <span v-if="oceans_count === constants.MAX_OCEAN_TILES">
                 <img width="26" src="assets/misc/circle-checkmark.png" class="board-ocean-checkmark" :alt="$t('Completed!')">
               </span>
               <span v-else>
-                {{this.oceans_count}}/{{this.constants.MAX_OCEAN_TILES}}
+                {{oceans_count}}/{{constants.MAX_OCEAN_TILES}}
               </span>
             </div>
 
@@ -366,6 +362,7 @@ import {TileView} from '@/client/components/board/TileView';
 import {BoardName} from '@/common/boards/BoardName';
 import {LEGENDS} from '@/client/components/Legends';
 import {Expansion} from '@/common/cards/GameModule';
+import {SpaceName} from '@/common/boards/SpaceName';
 
 class GlobalParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {
@@ -413,6 +410,7 @@ export default Vue.extend({
   data() {
     return {
       constants,
+      spaceMap: new Map<string, SpaceModel>(this.spaces.map((s) => [s.id, s])),
     };
   },
   methods: {
@@ -427,13 +425,18 @@ export default Vue.extend({
         return s.spaceType !== SpaceType.COLONY;
       });
     },
-    getSpaceById(spaceId: SpaceId): SpaceModel {
-      for (const space of this.spaces) {
-        if (space.id === spaceId) {
-          return space;
-        }
+    hasSpace(spaceId: SpaceId): boolean {
+      return this.spaceMap.has(spaceId);
+    },
+    getSpace(spaceId: SpaceId): SpaceModel {
+      const space = this.spaceMap.get(spaceId);
+      if (space === undefined) {
+        // For some reason Vue still calls getSpace when hasSpace is false. I thought it didn't.
+        // Returning undefined as SpaceModel satisfies the type checker, but the value isn't
+        // used.
+        return undefined as unknown as SpaceModel;
       }
-      throw new Error('Board space not found by id \'' + spaceId + '\'');
+      return space;
     },
     getValuesForParameter(targetParameter: string): Array<GlobalParamLevel> {
       const values = [];
@@ -500,6 +503,9 @@ export default Vue.extend({
     },
     LEGENDS(): typeof LEGENDS {
       return LEGENDS;
+    },
+    SpaceName(): typeof SpaceName {
+      return SpaceName;
     },
   },
 });

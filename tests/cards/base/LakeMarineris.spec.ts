@@ -6,21 +6,21 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('LakeMarineris', function() {
+describe('LakeMarineris', () => {
   let card: LakeMarineris;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new LakeMarineris();
     [game, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     setTemperature(game, 0);
     expect(card.canPlay(player)).is.true;
     card.play(player);
@@ -30,7 +30,7 @@ describe('LakeMarineris', function() {
     firstOcean.cb(firstOcean.spaces[0]);
     const secondOcean = cast(game.deferredActions.pop()!.execute(), SelectSpace);
     secondOcean.cb(secondOcean.spaces[1]);
-    expect(player.getTerraformRating()).to.eq(22);
+    expect(player.terraformRating).to.eq(22);
 
     expect(card.getVictoryPoints(player)).to.eq(2);
   });

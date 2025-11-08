@@ -147,14 +147,14 @@ describe('MarsNomads', () => {
     selectSpace.cb(space3);
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
 
     space3.bonus = [SpaceBonus.TEMPERATURE];
     selectSpace.cb(space3);
     runAllActions(game);
     cast(player.popWaitingFor(), undefined);
     expect(game.getTemperature()).eq(-30);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
   });
 
   it('Compatible with Land Claim on placement', () => {
@@ -197,7 +197,7 @@ describe('MarsNomads', () => {
     beforeEach(() => {
       game.board = EmptyBoard.newInstance();
       philares = new Philares();
-      player2.corporations.push(philares);
+      player2.playedCards.push(philares);
     });
 
     it('Placement does not trigger Philares', () => {
@@ -238,7 +238,7 @@ describe('MarsNomads', () => {
     beforeEach(() => {
       game.board = EmptyBoard.newInstance();
       miningGuild = new MiningGuild();
-      player.corporations.push(miningGuild);
+      player.playedCards.push(miningGuild);
     });
 
     it('Placement does not trigger Mining Guild', () => {

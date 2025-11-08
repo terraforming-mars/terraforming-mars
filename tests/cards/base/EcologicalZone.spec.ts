@@ -9,21 +9,21 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('EcologicalZone', function() {
+describe('EcologicalZone', () => {
   let card: EcologicalZone;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new EcologicalZone();
     [game, player] = testGame(2);
   });
 
-  it('Cannot play', function() {
+  it('Cannot play', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     expect(card.canPlay(player)).is.false;
 
     const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
@@ -45,7 +45,7 @@ describe('EcologicalZone', function() {
     expect(adjacentSpace.adjacency?.bonus).eq(undefined);
   });
 
-  it('Should get triggered by EcoExperts if played together', function() {
+  it('Should get triggered by EcoExperts if played together', () => {
     game.phase = Phase.PRELUDES;
 
     const landSpace = game.board.getAvailableSpacesOnLand(player)[0];

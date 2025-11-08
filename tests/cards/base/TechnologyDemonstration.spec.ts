@@ -3,8 +3,8 @@ import {TechnologyDemonstration} from '../../../src/server/cards/base/Technology
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('TechnologyDemonstration', function() {
-  it('Should play', function() {
+describe('TechnologyDemonstration', () => {
+  it('Should play', () => {
     const card = new TechnologyDemonstration();
     const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);

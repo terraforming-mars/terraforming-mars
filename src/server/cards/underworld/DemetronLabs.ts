@@ -1,19 +1,14 @@
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CorporationCard} from '../corporation/CorporationCard';
-import {IPlayer} from '../../IPlayer';
-import {SpaceType} from '../../../common/boards/SpaceType';
-import {IActionCard} from '../ICard';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {LogHelper} from '../../LogHelper';
+import {ActiveCorporationCard} from '../corporation/CorporationCard';
+import {IActionCard, ICard} from '../ICard';
 import {digit} from '../Options';
-import {sum} from '../../../common/utils/utils';
-import {Space} from '../../boards/Space';
 import {CardResource} from '../../../common/CardResource';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {IPlayer} from '../../IPlayer';
 
-export class DemetronLabs extends CorporationCard implements IActionCard {
+export class DemetronLabs extends ActiveCorporationCard implements ICorporationCard, IActionCard {
   constructor() {
     super({
       name: CardName.DEMETRON_LABS,
@@ -22,60 +17,44 @@ export class DemetronLabs extends CorporationCard implements IActionCard {
       resourceType: CardResource.DATA,
 
       behavior: {
-        addResources: 3,
+        addResources: 2,
+      },
+
+      action: {
+        spend: {
+          resourcesHere: 3,
+        },
+        underworld: {
+          identify: {count: 3, claim: 1},
+        },
       },
 
       metadata: {
         cardNumber: 'UC02',
-        description: 'You start with 45 M€ and 3 data on this card.',
+        description: 'You start with 45 M€ and 2 data on this card.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(45).resource(CardResource.DATA, 3);
+          b.megacredits(45).resource(CardResource.DATA, 2);
           b.br;
-          b.effect('After you identify 1 or more underground resources in a single action ' +
-            'EXCEPT BY EXCAVATING, put 1 data on ANY card',
-          (eb) => eb.text('X').identify().asterix().startEffect.resource(CardResource.DATA).asterix());
+          b.effect('After you play a science tag, including this, put 2 data on this card.',
+            (eb) => eb.tag(Tag.SCIENCE).startEffect.resource(CardResource.DATA, 2));
           b.br;
-          b.action('Spend 3 data here and pick a space on Mars with no tile. ' +
-            'Gain its placement bonus, and no adjacency bonuses.',
-          (ab) => ab.resource(CardResource.DATA, {amount: 3, digit}).startAction.text('Placement Bonus').asterix());
+          b.action('Spend 3 data here to identify 3 underground resources. Claim 1 of them.',
+            (ab) => ab.resource(CardResource.DATA, {amount: 3, digit}).startAction.identify(3, {digit}).claim(1));
         }),
       },
     });
   }
 
-  private availableSpaces(player: IPlayer) {
-    return player.game.board.spaces
-      .filter((space) => space.spaceType !== SpaceType.COLONY && space.tile === undefined);
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+    const scienceTags = player.tags.cardTagCount(card, Tag.SCIENCE);
+    this.onScienceTagAdded(player, scienceTags);
   }
-
-  public canAct(player: IPlayer) {
-    return this.resourceCount >= 3 && this.availableSpaces(player).length > 0;
-  }
-
-  public action(player: IPlayer) {
-    player.removeResourceFrom(this, 3);
-    return new SelectSpace(
-      'Select a space to gain its placement bonus',
-      this.availableSpaces(player))
-      .andThen((space) => {
-        LogHelper.logBoardTileAction(player, space, 'selected');
-        player.game.grantSpaceBonuses(player, space);
-        return undefined;
-      });
-  }
-
-  // Behavior is similar in Mining Market Insider.
-  // This doesn't need to be serialized. It ensures this is only evaluated once per action.
-  // When the server restarts, the player has to take an action anyway.
-  private lastActionId = -1;
-  public onIdentification(identifyingPlayer: IPlayer | undefined, cardOwner: IPlayer, _space: Space, fromExcavate: boolean) {
-    if (identifyingPlayer !== cardOwner || fromExcavate === true) {
-      return;
+  public onNonCardTagAdded(player: IPlayer, tag: Tag) {
+    if (tag === Tag.SCIENCE) {
+      this.onScienceTagAdded(player, 1);
     }
-    const actionId = sum(identifyingPlayer.game.getPlayers().map((p) => p.actionsTakenThisGame));
-    if (this.lastActionId !== actionId) {
-      cardOwner.game.defer(new AddResourcesToCard(cardOwner, CardResource.DATA));
-      this.lastActionId = actionId;
-    }
+  }
+  public onScienceTagAdded(player: IPlayer, count: number) {
+    player.addResourceTo(this, {qty: 2 * count, log: true});
   }
 }

@@ -9,16 +9,16 @@ import {Unity} from '../../../src/server/turmoil/parties/Unity';
 import {Greens} from '../../../src/server/turmoil/parties/Greens';
 import {Units} from '../../../src/common/Units';
 
-describe('SoilDetoxification', function() {
+describe('SoilDetoxification', () => {
   let card: SoilDetoxification;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SoilDetoxification();
     [/* game */, player] = testGame(1, {turmoilExtension: true});
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.megaCredits = card.cost;
     const turmoil = Turmoil.getTurmoil(player.game);
     turmoil.rulingParty = new Unity();
@@ -27,13 +27,13 @@ describe('SoilDetoxification', function() {
     expect(player.canPlay(card)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     expect(player.production.asUnits()).deep.eq(Units.of({}));
     card.play(player);
     expect(player.production.asUnits()).deep.eq(Units.of({plants: 1}));
   });
 
-  it('standard project', function() {
+  it('standard project', () => {
     card.play(player);
 
     expect(player.plantsNeededForGreenery).to.eq(7);
@@ -45,7 +45,7 @@ describe('SoilDetoxification', function() {
     expect(convert.canAct(player)).eq(true);
   });
 
-  it('standard project plus ecoline', function() {
+  it('standard project plus ecoline', () => {
     const ecoline = new EcoLine();
     ecoline.play(player);
     card.play(player);

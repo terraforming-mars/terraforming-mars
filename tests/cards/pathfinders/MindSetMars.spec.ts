@@ -14,35 +14,35 @@ import {PlaceCityTile} from '../../../src/server/deferredActions/PlaceCityTile';
 import {SendDelegateToArea} from '../../../src/server/deferredActions/SendDelegateToArea';
 import {assertAddDelegateAction} from '../../turmoil/turmoilAssertions';
 
-describe('MindSetMars', function() {
+describe('MindSetMars', () => {
   let card: MindSetMars;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
   let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MindSetMars();
     [game, player, player2] = testGame(3, {turmoilExtension: true});
-    player.corporations.push(card);
+    player.playedCards.push(card);
     turmoil = game.turmoil!;
   });
 
-  it('play', function() {
+  it('play', () => {
     expect(card.resourceCount).eq(0);
     card.play(player);
     runAllActions(game);
     expect(card.resourceCount).eq(1);
   });
 
-  it('when you play a jovian tag', function() {
+  it('when you play a jovian tag', () => {
     const a = fakeCard({name: 'A' as CardName, tags: [Tag.JOVIAN]});
     expect(card.resourceCount).eq(0);
     player.playCard(a);
     expect(card.resourceCount).eq(0);
   });
 
-  it('when opponent plays a building tag', function() {
+  it('when opponent plays a building tag', () => {
     const a = fakeCard({name: 'A' as CardName, tags: [Tag.BUILDING]});
     expect(card.resourceCount).eq(0);
     player2.playCard(a);

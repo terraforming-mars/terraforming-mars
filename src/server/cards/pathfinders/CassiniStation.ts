@@ -34,7 +34,6 @@ export class CassiniStation extends Card implements IProjectCard {
     });
   }
 
-  // TODO(kberg): Repalce this with counter / behavior.
   public override bespokePlay(player: IPlayer) {
     const cards = [
       ...player.getResourceCards(CardResource.FLOATER),

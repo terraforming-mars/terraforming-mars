@@ -7,7 +7,7 @@ import {testGame} from '../../TestGame';
 import {addGreenery, addCity, runAllActions} from '../../TestingUtils';
 import {Gordon} from '../../../src/server/cards/ceos/Gordon';
 
-describe('Gordon', function() {
+describe('Gordon', () => {
   let card: Gordon;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -19,12 +19,12 @@ describe('Gordon', function() {
     player.playedCards.push(card);
   });
 
-  it('Can place greenery tile on any available land space, not just adjacent to exising greenery', function() {
+  it('Can place greenery tile on any available land space, not just adjacent to exising greenery', () => {
     addGreenery(player, '35');
     expect(game.board.getAvailableSpacesForGreenery(player).length).greaterThan(6);
   });
 
-  it('Can place cities next to other cities', function() {
+  it('Can place cities next to other cities', () => {
     const board = game.board;
     const space = board.getSpaceOrThrow('35');
     addCity(player, space.id);
@@ -33,7 +33,7 @@ describe('Gordon', function() {
     expect(availableSpacesForCity).includes(spacesNextToCity[0]);
   });
 
-  it('Gains 2 MC when placing city or greenery tile', function() {
+  it('Gains 2 MC when placing city or greenery tile', () => {
     player.megaCredits = 0;
     addGreenery(player, '35');
     game.deferredActions.runNext();
@@ -43,7 +43,7 @@ describe('Gordon', function() {
     expect(player.megaCredits).eq(4);
   });
 
-  it('Does not give MC production for city off Mars', function() {
+  it('Does not give MC production for city off Mars', () => {
     game.addTile(player, game.board.spaces.find((space) => space.spaceType === SpaceType.COLONY)!, {
       tileType: TileType.CITY,
     });
@@ -51,7 +51,7 @@ describe('Gordon', function() {
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('Does not gain MC when opponent places city or greenery tile', function() {
+  it('Does not gain MC when opponent places city or greenery tile', () => {
     player.megaCredits = 0;
     addGreenery(player2, '35');
     runAllActions(game);

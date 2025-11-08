@@ -1,0 +1,1 @@
+type AgentAlgo = 'random' | 'first' | 'osla';

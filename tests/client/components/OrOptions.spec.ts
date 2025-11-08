@@ -6,8 +6,8 @@ import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {InputResponse} from '@/common/inputs/InputResponse';
 import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
 
-describe('OrOptions', function() {
-  it('saves the options ignoring hidden', async function() {
+describe('OrOptions', () => {
+  it('saves the options ignoring hidden', async () => {
     let savedData: InputResponse | undefined;
     PreferencesManager.INSTANCE.set('learner_mode', false);
     const component = mount(OrOptions, {
@@ -47,7 +47,7 @@ describe('OrOptions', function() {
     }).at(0).trigger('click');
     expect(savedData).to.deep.eq({type: 'or', index: 1, response: {type: 'option'}});
   });
-  it('clicks 2nd option', async function() {
+  it('clicks 2nd option', async () => {
     let savedData: InputResponse | undefined;
     const component = mount(OrOptions, {
       localVue: getLocalVue(),

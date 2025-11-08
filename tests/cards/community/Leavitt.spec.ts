@@ -11,19 +11,19 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {testGame} from '../../TestGame';
 import {VenusianAnimals} from '../../../src/server/cards/venusNext/VenusianAnimals';
 
-describe('Leavitt', function() {
+describe('Leavitt', () => {
   let leavitt: Leavitt;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     leavitt = new Leavitt();
     [game, player, player2] = testGame(2, {coloniesExtension: true});
     game.colonies.push(leavitt);
   });
 
-  it('Should build', function() {
+  it('Should build', () => {
     expect(player.tags.count(Tag.SCIENCE)).to.eq(0);
     leavitt.addColony(player);
     expect(player.tags.count(Tag.SCIENCE)).to.eq(1);
@@ -31,7 +31,7 @@ describe('Leavitt', function() {
     expect(player.tags.count(Tag.SCIENCE)).to.eq(2);
   });
 
-  it('Science tag bonus should survive deserialization', function() {
+  it('Science tag bonus should survive deserialization', () => {
     expect(player.tags.count(Tag.SCIENCE)).to.eq(0);
     leavitt.addColony(player);
     expect(player.tags.count(Tag.SCIENCE)).to.eq(1);
@@ -44,7 +44,7 @@ describe('Leavitt', function() {
     expect(newPlayer.tags.count(Tag.SCIENCE)).to.eq(2);
   });
 
-  it('Should trade + bonus', function() {
+  it('Should trade + bonus', () => {
     leavitt.addColony(player2);
     leavitt.trackPosition = 4;
     leavitt.trade(player);
@@ -75,7 +75,7 @@ describe('Leavitt', function() {
     expect(player2.cardsInHand).deep.eq([selectCard2.cards[0]]);
   });
 
-  it('Should trade + bonus, player cannot afford bonus', function() {
+  it('Should trade + bonus, player cannot afford bonus', () => {
     leavitt.addColony(player2);
     leavitt.trackPosition = 4;
     leavitt.trade(player);
@@ -112,7 +112,7 @@ describe('Leavitt', function() {
     // This test verifies that a regression doesn't reoccur.
     // Merely completing these is sufficient because
     // it doesn't throw an Error.
-    player.corporations.push(new Vitor());
+    player.playedCards.push(new Vitor());
     expect(player.tags.count(Tag.SCIENCE)).to.eq(0);
     leavitt.addColony(player);
     expect(player.tags.count(Tag.SCIENCE)).to.eq(1);

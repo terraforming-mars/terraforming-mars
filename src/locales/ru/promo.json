@@ -1,6 +1,34 @@
 {
-    "Pharmacy Union": "Pharmacy Union",
-    "You start with 54 M€ . Draw a Science card.": "Вы начинаете с 54М€. доберите карту с меткой Науки.",
+    "Hospitals": "Госпитали",
+    "Effect: Each time a city is placed, gain a disease here.": "Эффект: Каждый раз, когда размещается город, добавьте сюда 1 болезнь.",
+    "Action: Remove a disease from ANY OF YOUR CARDS to gain 1 M€ per city in play.": "Действие: Удалите болезнь с любой вашей карты, чтобы получить 1 M€ за каждый город в игре.",
+    "Decrease your energy production 1 step.": "Уменьшите своё производство энергии на 1.",
+
+    "Casinos": "Казино",
+    "Requires that you have a city. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Требуется наличие города. Уменьшите своё производство энергии на 1 и увеличьте производство M€ на 4.",
+
+    "Protected Growth": "Защищённый рост",
+    "Oxygen must be 7% or less. Gain 1 plant per power tag you have.": "Требуется уровень кислорода 7% или ниже. Получите 1 растение за каждую вашу метку энергии.",
+
+    "Public Baths": "Общественные бани",
+    "Requires 6 oceans. Gain 6 M€.": "Требуется 6 выложенных тайлов океана. Получите 6 M€.",
+
+    "New Holland": "Новая Голландия",
+    "Requires 4 city tiles ON MARS. Increase your M€ production 3 steps. Place a city tile on top of an already placed ocean tile, FOLLOWING NORMAL CITY PLACEMENT RESTRICTIONS. The tile counts as a city and an ocean.": "Требуется 4 тайла города на Марсе. Увеличьте своё производство M€ на 3. Разместите тайл города на уже выложенный тайл океана, соблюдая обычные правила размещения городов. Этот тайл считается одновременно городом и океаном.",
+
+    "Vermin": "Крысы",
+    "Effect: When any city is placed, add 1 animal here.": "Эффект: Каждый раз, когда размещается город, добавьте сюда 1 животное.",
+    "Action: Add 1 animal here or 1 microbe to ANOTHER card.": "Действие: Добавьте сюда 1 животное или 1 микроб на другую карту.",
+    "Each player, including you, gets -1 VP per city they have IF THERE ARE AT LEAST 10 ANIMALS HERE.": "Каждый игрок, включая вас, теряет 1 ПО за каждый город, если здесь есть как минимум 10 животных.",
+
+    "Public Plans": "Общественные планы",
+    "REVEAL ANY NUMBER OF OTHER CARDS FROM YOUR HAND. (YOUR OPPONENTS MAY INSPECT THEM.) GAIN 1 M€ FOR EACH REVEALED CARD.": "ОТКРОЙТЕ ЛЮБОЕ КОЛИЧЕСТВО КАРТ ИЗ ВАШЕЙ РУКИ. (ПРОТИВНИКИ МОГУТ ИХ ПРОСМОТРЕТЬ) ПОЛУЧИТЕ 1 M€ ЗА КАЖДУЮ ОТКРЫТУЮ КАРТУ.",
+
+    "Static Harvesting": "Сбор статики",
+    "Requires 3 or fewer ocean tiles. Increase your energy production 1 step. Gain 1 M€ per building tag you have.": "Требует не более 3 выложенных тайлов океана. Увеличьте ваше производство энергии на 1 шаг. Получите 1 М€ за каждую вашу метку здания.",
+    
+    "Pharmacy Union": "",
+    "You start with 54 M€. Draw a Science card.": "Вы начинаете с 54М€. доберите карту с меткой Науки.",
     "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "Эффект: Когда разыгрывается любая метка Микроб, добавьте сюда болезнь. Когда вы разыгрываете метку Науки удалите болезнь отсюда и получите 1 РТ ИЛИ если на этой карте нет болезней можете однократно получить 3 РТ",
     "You start with 54 M€ . When this corporation is revealed, draw a Science card.": "Вы начинаете с 54М€. Когда корпорация входит в игру доберите карту с меткой Науки",
     "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you may turn this card face down to gain 3 TR": "Эффект: Когда разыгрывается любая метка Микроб, добавьте сюда болезнь. Когда вы разыгрываете метку Науки удалите болезнь отсюда и получите 1 РТ ИЛИ если на этой карте нет болезней можете однократно получить 3 РТ",
@@ -47,7 +75,7 @@
     "Asteroid Deflection System": "Защита от астероидов",
     "Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.": "Действие: Покажите и сбростье верхнюю карту из добора. Если на ней была метка Космоса, добавьте сюда астероид",
     "opponents may not remove your plants": "У вас нельзя убирать растения",
-    "Decrease your energy production 1 step. 1VP per asteroid on this card.": "Уменьшите своё пр-во энергии на 1. 1 ПО за каждый астероид здесь",
+    "Decrease your energy production 1 step. 1 VP per asteroid on this card.": "Уменьшите своё пр-во энергии на 1. 1 ПО за каждый астероид здесь",
 
     "Jovian Embassy": "Посольство Юпитера",
     "Raise your TR 1 step.": "Повысьте свой РТ на 1",
@@ -62,12 +90,12 @@
     "Meat Industry": "Мясное производство",
     "Effect: When you gain an animal to ANY CARD, gain 2 M€.": "Эффект: Получая животное на любую карту, получайте дополнительно 2 М€",
 
-    "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.": "Повысьте температуру на 3 шага и получите 4 стали. Разместите дембу НЕ по соседству с городом. Удалите до 6 растений у любого игрока",
+    "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. Remove up to 6 plants from any player.": "Повысьте температуру на 3 шага и получите 4 стали. Разместите дембу НЕ по соседству с городом. Удалите до 6 растений у любого игрока",
 
     "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Требует 4 океана. Увеличьте своё производство энергии на 2. Добавьте этот тайл на область рядом с океаном",
 
     "Magnetic Field Generators": "Генераторы магнитного поля",
-    "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps and place this tile.": "Уменьшите своё производство энергии на 4, увеличьте свое производство растений на 2. Увеличьте своё РТ на 3 и разместите этот тайл",
+    "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps. Place this tile.": "Уменьшите своё производство энергии на 4, увеличьте свое производство растений на 2. Увеличьте своё РТ на 3 и разместите этот тайл.",
 
     "Orbital Cleanup": "Очистка орбиты",
     "Action: Gain 1 M€ per science tag you have.": "Действие: Получите 1 М€ за каждую свою метку Науки",
@@ -81,7 +109,7 @@
 
     "Asteroid Hollowing": "Полости в астероидах",
     "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "Действие: потратьте 1 титан, чтобы добавить астероид сюда и увеличьте своё производство М€ на 1",
-    "1VP for each 2 asteroids on this card.": "1 ПО за каждые 2 астероида здесь",
+    "1 VP for each 2 asteroids on this card.": "1 ПО за каждые 2 астероида здесь",
 
     "Project Inspection": "Проверка проекта",
     "Use a card action that has been used this generation.": "Выполните действие с карты, которое уже выполняли в этом поколении",
@@ -131,35 +159,35 @@
     "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Действие: Потратьте 1 астероид отсюда, чтобы увеличить на 1 производство М€ или получить 2 титана",
     "Add 2 asteroids to this card.": "Добавьте 2 астероида на эту карту",
 
-    "Splice": "Splice",
+    "Splice": "",
     "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Вы начинаете с 44 М€. Первым действием доберите карту с меткой бактерии",
     "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.":
     "Каждый игрок разыгрывающий карту с меткой бактерии (вкл. эту) получает 2 M€ или добавляет на ТУ карту бактерию, а вы получаете 2 M€",
 
-    "Recyclon": "Recyclon",
+    "Recyclon": "",
     "You start with 38 M€ and 1 steel production.": "Вы начинаете c 36 М€ и 1 дополнительным уровнем производства стали",
     "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.":
     "Когда вы разыгрываете метку строителя, включая эту, добавьте сюда 1 бактерию, или удалите отсюда 2 бактерии, чтобы повысить ваше производство растений на 1",
 
-    "Philares": "Philares",
+    "Philares": "",
     "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.":
     "Вы начинаете c 47 М€. Первым действием разместите тайл озеленения и повысьте уровень кислорода на 1",
     "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].":
     "Каждое новое соседство вашего тайла с тайлом другого игрока даёт вам стандартный ресурс на ваш выбор вне зависимости от того кто разметил тайл",
 
-    "Mons Insurance": "Mons Insurance",
+    "Mons Insurance": "",
     "You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.":
     "Вы начинаете c 48 М€. Увеличьте ваш доход на 4. Все противники уменьшают свой доход на 2, но это уменьшение не включает эффект с этой карты",
     "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.":
     "Когда один из игроков заставляет другого игрока потерять производство или ресурсы, заплатите жертве 3 М€ или столько сколько у вас есть",
 
-    "Factorum": "Factorum",
+    "Factorum": "",
     "You start with 37 M€. Increase your steel production 1 step.":
     "Вы начинаете c 37 М€ и 1 дополнительным уровнем производства стали",
     "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.":
     "Действие: Увеличьте ваше производство энергии, если у вас нет ресурсов-энергии или потратьте 3 M€, чтобы добрать карту с меткой строителя",
 
-    "Arcadian Communities": "Arcadian Communities",
+    "Arcadian Communities": "",
     "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.":
     "Вы начинаете c 37 М€ и 10 стали. Первым действием разместите СООБЩЕСТВО [свой кубик] на незарезервированном месте на карте",
     "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.":
@@ -167,7 +195,7 @@
     "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.":
     "Эффект: Никто кроме вас не может размещать тайлы на места с вашими СООБЩЕСВАМИ. Когда вы размещаете тайл в таком месте получайте 3 M€",
 
-    "Astrodrill": "Astrodrill",
+    "Astrodrill": "",
     "You start with 38 M€ and 3 asteroid resources.": "Вы начинаете c 38 М€ и 3 астероидами",
     "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.":
     "Действие: Добавьте астероид на ЛЮБУЮ карту или получите любой стандартный ресурс. ИЛИ удалите отсюда астероид и получите 3 титана",
@@ -181,7 +209,7 @@
 
     "Stanford Torus": "Стэнфордский тор",
     "Place a city tile IN SPACE, outside and separate from the planet.": "Разместите город в локации Стэнфордский тор",
-		
+
     "Bactoviral Research": "Бактериологические исследования",
     "(Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.)": "(Возьмите 1 карту. Выберите 1 из сыгранных вами карт и выложите на неё 1 жетон бактерий за каждый жетон науки, включая этот.)",
 
@@ -196,5 +224,15 @@
     "(Requires any city adjacent to an ocean. Increase your M€ production 2 steps.)": "(Требуется город рядом с океаном. Увеличьте производство M€ на 2.)",
     "Supercapacitors": "Суперконденсаторы",
     "EFFECT: CONVERTING ENERGY TO HEAT DURING PRODUCTION IS OPTIONAL FOR EACH ENERGY RESOURCE.": "Эффект: Конвертация энергии в тепло не обязатаельна для каждой из единиц ресурса",
-    "Increase M€ production 1 step.": "Увеличьте своё производство М€ на 1"
+    "Increase M€ production 1 step.": "Увеличьте своё производство М€ на 1",
+
+    "Icy Impactors": "Ледяные метеоры",
+    "Action: Spend 10 M€ (titanium may be used) to add 2 asteroids here.": "Действие: Потратьте 10 М€ (можно использовать титан), чтобы добавить сюда 2 астероида.",
+    "Action: Spend 1 asteroid here to place an ocean tile. FIRST PLAYER CHOOSES WHERE YOU MUST PLACE IT.": "Действие: Потратьте 1 астероид здесь, чтобы разместить тайл океана. Первый игрок выбирает, где вы должны его разместить.",
+	
+	"Soil Enrichment": "Удобрение почвы",
+    "Spend 1 microbe from ANY of your cards to gain 5 plants": "Потратьте 1 микроб с любой вашей карты, чтобы получить 5 растений.",
+
+	"Supermarkets": "Супермаркеты",
+    "Requires two cities in play. Increase your M€ production 2 steps.": "Требуется наличие 2 городов в игре. Увеличьте производство M€ на 2."
 }

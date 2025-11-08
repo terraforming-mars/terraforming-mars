@@ -6,6 +6,7 @@ import {IPlayer} from '../../IPlayer';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 import {intersection} from '../../../common/utils/utils';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
+import {ClaimSpacesDeferred} from '../../underworld/ClaimSpacesDeferred';
 
 export class CentralReservoir extends PreludeCard {
   constructor() {
@@ -13,29 +14,26 @@ export class CentralReservoir extends PreludeCard {
       name: CardName.CENTRAL_RESERVOIR,
       tags: [Tag.BUILDING],
 
-      behavior: {tr: 1},
-
       metadata: {
         cardNumber: 'UP09',
         renderData: CardRenderer.builder((b) => {
-          b.tr(1).oceans(1).asterix().excavate().asterix();
+          b.oceans(1).asterix().geoscan().asterix().br.claim(2);
         }),
-        description: 'Gain 1 TR. Place an ocean tile ON AN AREA NOT RESERVED FOR OCEAN. ' +
-          'Then excavate the underground resource in that space.',
+        description: 'Place an ocean ON AN AREA NOT RESERVED FOR OCEAN. ' +
+          'Then identify the underground resources in all adjacent spaces. Claim 2 of them.',
       },
     });
   }
 
   private availableSpaces(player: IPlayer) {
-    return intersection(
-      player.game.board.getAvailableSpacesOnLand(player),
-      UnderworldExpansion.excavatableSpaces(player));
+    const excavatableSpaces = UnderworldExpansion.excavatableSpaces(player, {ignorePlacementRestrictions: true});
+    const oceanSpaces = player.game.board.getAvailableSpacesOnLand(player);
+    return oceanSpaces.filter((space) => {
+      return intersection(player.game.board.getAdjacentSpaces(space), excavatableSpaces).length > 0;
+    });
   }
 
   public override bespokeCanPlay(player: IPlayer) {
-    if (!player.game.canAddOcean()) {
-      this.warnings.add('maxoceans');
-    }
     return this.availableSpaces(player).length > 0;
   }
 
@@ -43,7 +41,11 @@ export class CentralReservoir extends PreludeCard {
     player.game.defer(new PlaceOceanTile(player, {
       spaces: this.availableSpaces(player),
     })).andThen((space) => {
-      UnderworldExpansion.excavate(player, space);
+      if (!space) {
+        return;
+      }
+      const spaces = UnderworldExpansion.identifyAdjacentSpaces(player, space);
+      player.game.defer(new ClaimSpacesDeferred(player, 2, spaces));
     });
     return undefined;
   }

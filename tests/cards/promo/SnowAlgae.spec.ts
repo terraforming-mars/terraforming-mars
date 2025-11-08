@@ -3,21 +3,21 @@ import {SnowAlgae} from '../../../src/server/cards/promo/SnowAlgae';
 import {maxOutOceans, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('SnowAlgae', function() {
+describe('SnowAlgae', () => {
   let card: SnowAlgae;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SnowAlgae();
     [/* game */, player] = testGame(1);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     maxOutOceans(player, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     maxOutOceans(player, 2);
     expect(card.canPlay(player)).is.true;
 

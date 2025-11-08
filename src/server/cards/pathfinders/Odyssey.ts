@@ -7,8 +7,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {Size} from '../../../common/cards/render/Size';
 import {SelectProjectCardToPlay} from '../../inputs/SelectProjectCardToPlay';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Odyssey extends CorporationCard implements IActionCard {
+export class Odyssey extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {
     super({
       name: CardName.ODYSSEY,
@@ -18,7 +19,7 @@ export class Odyssey extends CorporationCard implements IActionCard {
         cardNumber: 'PfC18',
         description: 'You start with 33 M€.',
         renderData: CardRenderer.builder((b) => {
-          b.br.br.br.br.br.br.megacredits(33).nbsp.nbsp.nbsp;
+          b.megacredits(33);
           b.colon().cards(1, {secondaryTag: Tag.EVENT}).asterix().br;
           b.text('(Effect: Your event cards stay face up, and their tags are in use as if those were automated (green) cards.)',
             Size.TINY, false, false).br;
@@ -42,15 +43,14 @@ export class Odyssey extends CorporationCard implements IActionCard {
     this.checkLoops++;
     try {
       const array = [];
-      for (const card of player.playedCards) {
+      for (const card of player.playedCards.projects()) {
         // Special case Price Wars, which is not easy to work with.
         if (card.name === CardName.PRICE_WARS) {
           continue;
         }
         if (card.type === CardType.EVENT && card.cost <= 16) {
-          const details = player.canPlay(card);
-          if (details !== false) {
-            array.push({card, details});
+          if (player.canPlay(card)) {
+            array.push(card);
           }
         }
       }

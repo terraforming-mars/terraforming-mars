@@ -12,6 +12,13 @@ export class ApiCloneableGame extends Handler {
     super();
   }
 
+  /**
+   * Returns information about the identified game. Specifically, the number of
+   * players it is for.
+   *
+   * This is used by the frontend to ensure that the cloned game will match the
+   * player count in the game the frontend wants to create.
+   */
   public override async get(req: Request, res: Response, ctx: Context): Promise<void> {
     const gameId = ctx.url.searchParams.get('id');
     if (gameId === null) {
@@ -24,7 +31,7 @@ export class ApiCloneableGame extends Handler {
     }
     await Database.getInstance().getPlayerCount(gameId)
       .then((playerCount) => {
-        responses.writeJson(res, {gameId, playerCount});
+        responses.writeJson(res, ctx, {gameId, playerCount});
       })
       .catch((err) => {
         console.warn('Could not load cloneable game: ', err);

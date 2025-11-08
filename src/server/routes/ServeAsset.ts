@@ -134,9 +134,9 @@ export class ServeAsset extends Handler {
   }
 
   private toServiceWorkerFile(urlPath: string): { file?: string, encoding?: Encoding } {
-    const file = `build/src/client/${urlPath}`;
-
-    return {file};
+    return {
+      file: `build/${urlPath}`,
+    };
   }
 
   private toFile(urlPath: string, encodings: Set<Encoding>): { file?: string, encoding?: Encoding } {
@@ -161,7 +161,11 @@ export class ServeAsset extends Handler {
     case 'main.js.map':
       return this.toMainFile(urlPath, encodings);
 
+    // sw.js is empty. Although not confirmed, it seems sw.js is necessary
+    // for mobile notifications. If confirmed that it is not necessary, this
+    // can be removed.
     case 'sw.js':
+    case '/sw.js':
       return this.toServiceWorkerFile(urlPath);
 
     case 'favicon.ico':

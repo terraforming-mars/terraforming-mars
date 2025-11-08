@@ -64,7 +64,7 @@ describe('EcologicalSurvey', () => {
     const microbeCard = new Ants();
     const animalCard = new Pets();
 
-    player.playedCards = [card, microbeCard, animalCard];
+    player.playedCards.push(card, microbeCard, animalCard);
 
     // firstSpace tile might grant resources, so resetting all the resource values.
     player.megaCredits = 0;
@@ -111,7 +111,7 @@ describe('EcologicalSurvey', () => {
       SpaceBonus.DRAW_CARD,
       SpaceBonus.HEAT,
     ],
-    player.playedCards = [card];
+    player.playedCards.push(card);
     game.addTile(player, space, {tileType: TileType.RESTRICTED_AREA});
 
     runAllActions(game);
@@ -174,7 +174,7 @@ describe('EcologicalSurvey', () => {
 
   it('When logging card card resources, log properly', () => {
     const microbeCard = new Ants();
-    player.playedCards = [card, microbeCard];
+    player.playedCards.push(card, microbeCard);
 
     const space = game.board.getAvailableSpacesOnLand(player)[0];
     space.bonus = [SpaceBonus.MICROBE],

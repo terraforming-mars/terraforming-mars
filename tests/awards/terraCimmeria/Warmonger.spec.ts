@@ -8,6 +8,9 @@ import {Ants} from '../../../src/server/cards/base/Ants';
 import {BigAsteroid} from '../../../src/server/cards/base/BigAsteroid';
 import {TheDarksideofTheMoonSyndicate} from '../../../src/server/cards/moon/TheDarksideofTheMoonSyndicate';
 import {CardType} from '../../../src/common/cards/CardType';
+import {CardName} from '../../../src/common/cards/CardName';
+import {ALL_MODULE_MANIFESTS} from '../../../src/server/cards/AllManifests';
+import {CardManifest} from '../../../src/server/cards/ModuleManifest';
 
 describe('Warmonger', () => {
   let award: Warmonger;
@@ -19,7 +22,6 @@ describe('Warmonger', () => {
   });
 
   it('score', () => {
-    player.playedCards = [];
     expect(award.getScore(player)).eq(0);
 
     // Tardigrades does not take from another card or player.
@@ -29,31 +31,47 @@ describe('Warmonger', () => {
     player.playedCards.push(new Ants());
     expect(award.getScore(player)).eq(1);
 
-    // Big Asteroid is an event and does not count.
+    // Big Asteroid is an event, and counts.
     player.playedCards.push(new BigAsteroid());
-    expect(award.getScore(player)).eq(1);
-
-    player.corporations.push(new TheDarksideofTheMoonSyndicate());
     expect(award.getScore(player)).eq(2);
+
+    player.playedCards.push(new TheDarksideofTheMoonSyndicate());
+    expect(award.getScore(player)).eq(3);
   });
 
-  // A good way to prevent future failures is to duplicate the Robotic Workforce style of test.
-  it('verify if attack cards list is accurate', () => {
-    const failures = [];
-    for (const cardName of Warmonger.attackCards) {
-      const card = newCard(cardName);
-      // TODO(kberg): Remove === undefined by 2024-02-01
-      if (card === undefined) {
-        console.log('Skipping ' + cardName);
+  const expectedEvents: ReadonlyArray<CardName> = [CardName.AIR_RAID, CardName.ASTEROID, CardName.ANTI_TRUST_CRACKDOWN, CardName.BIG_ASTEROID,
+    CardName.CORPORATE_THEFT, CardName.COMET, CardName.CLASS_ACTION_LAWSUIT, CardName.CORPORATE_BLACKMAIL, CardName.COMET_FOR_VENUS,
+    CardName.DEEPNUKING, CardName.DEIMOS_DOWN, CardName.DEIMOS_DOWN_ARES, CardName.DEIMOS_DOWN_PROMO,
+    CardName.DUST_STORM, CardName.FLOODING, CardName.GIANT_ICE_ASTEROID, CardName.HIRED_RAIDERS, CardName.HIRED_RAIDERS_UNDERWORLD,
+    CardName.IMPACTOR_SWARM, CardName.INFRASTRUCTURE_OVERLOAD, /* CardName.LAW_SUIT is ignored */
+    CardName.METALLIC_ASTEROID, CardName.MINING_EXPEDITION, CardName.MONOPOLY, CardName.PUBLIC_SPONSORED_GRANT, CardName.PLANT_TAX,
+    CardName.RECKLESS_DETONATION, CardName.REVOLTING_COLONISTS, CardName.ROAD_PIRACY, CardName.SABOTAGE,
+    CardName.SMALL_ASTEROID, CardName.SMALL_COMET, CardName.SOLAR_STORM, CardName.SPECIAL_PERMIT,
+    CardName.VIRUS,
+  ] as const;
+  for (const manifest of ALL_MODULE_MANIFESTS) {
+    for (const projectCard of CardManifest.values(manifest.projectCards)) {
+      const card = new projectCard.Factory();
+      if (card.type !== CardType.EVENT) {
         continue;
       }
-      if (card.type === CardType.EVENT) {
-        failures.push(cardName);
-      }
-      if (Warmonger.autoInclude(card)) {
-        failures.push(cardName);
-      }
+      it('Testing event ' + card.name, () => {
+        const actual = Warmonger.include(card);
+        const expected = expectedEvents.includes(card.name);
+        expect(actual).to.eq(expected);
+      });
     }
-    expect(failures, failures.toString()).has.length(0);
-  });
+  }
+
+  // A good way to prevent future failures is to duplicate the Robotic Workforce style of test.
+  for (const cardName of Warmonger.attackCards) {
+    it('verify manual card ' + cardName, () => {
+      const card = newCard(cardName);
+      if (card === undefined) {
+        console.log('Skipping ' + cardName);
+        return;
+      }
+      expect(Warmonger.autoInclude(card), 'This card is manually listed but is automatically identified.').to.be.false;
+    });
+  }
 });

@@ -3,8 +3,8 @@ import {ImmigrationShuttles} from '../../../src/server/cards/base/ImmigrationShu
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('ImmigrationShuttles', function() {
-  it('Should play', function() {
+describe('ImmigrationShuttles', () => {
+  it('Should play', () => {
     const card = new ImmigrationShuttles();
     const [game, player, player2] = testGame(2);
     cast(card.play(player), undefined);

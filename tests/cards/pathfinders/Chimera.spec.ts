@@ -17,28 +17,28 @@ import {ArcticAlgae} from '../../../src/server/cards/base/ArcticAlgae';
 import {Diversifier} from '../../../src/server/milestones/Diversifier';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 
-describe('Chimera', function() {
+describe('Chimera', () => {
   let card: Chimera;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Chimera();
     [/* game */, player] = testGame(1);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
-  it('as action', function() {
+  it('as action', () => {
     const a = fakeCard({name: 'A' as CardName, requirements: [{tag: Tag.EARTH, count: 4}]});
     player.megaCredits = card.cost;
-    player.playedCards = [new BusinessNetwork()];
+    player.playedCards.push(new BusinessNetwork());
     expect(player.canPlay(a)).is.false;
-    player.playedCards = [new BusinessNetwork(), new EarthCatapult()];
+    player.playedCards.push(new EarthCatapult());
     expect(player.canPlay(a)).is.true;
   });
 
-  it('during an action', function() {
+  it('during an action', () => {
     // Cartel: Increase your M€ production 1 step for each Earth tag you have, including this.
-    player.playedCards = [new BusinessNetwork(), new EarthCatapult()];
+    player.playedCards.push(new BusinessNetwork(), new EarthCatapult());
     expect(player.production.megacredits).to.eq(0);
     new Cartel().play(player);
     // Megacredit count is 2 for the played cards, one for Cartel ("including this")
@@ -46,33 +46,33 @@ describe('Chimera', function() {
     expect(player.production.megacredits).to.eq(5);
   });
 
-  it('as award', function() {
+  it('as award', () => {
     // Scientist: Have the most science tags in play
     const award = new Scientist();
     expect(award.getScore(player)).eq(1);
-    player.playedCards = [new AdaptationTechnology()];
+    player.playedCards.push(new AdaptationTechnology());
     expect(award.getScore(player)).eq(2);
   });
 
-  it('as milestone, single tag count', function() {
+  it('as milestone, single tag count', () => {
     // Terran: Have at least 6 Earth tags in play
     const milestone = new Terran();
-    player.playedCards = [new BusinessNetwork(), new EarthCatapult(), new Cartel()];
+    player.playedCards.push(new BusinessNetwork(), new EarthCatapult(), new Cartel());
     expect(milestone.getScore(player)).eq(4);
   });
 
-  it('as milestone - sum of multiple tags', function() {
+  it('as milestone - sum of multiple tags', () => {
     // Requires 4 plant tags in play
     const milestone = new Ecologist();
-    player.playedCards = [new Algae(), new ArcticAlgae()];
+    player.playedCards.push(new Algae(), new ArcticAlgae());
     expect(milestone.getScore(player)).eq(3);
     expect(milestone.canClaim(player)).is.false;
   });
 
-  it('as a milestone - counting unique tags', function() {
+  it('as a milestone - counting unique tags', () => {
     // Requires 8 distinct tags.
     const milestone = new Diversifier();
-    player.playedCards = [new Algae(), new Tardigrades(), new EarthCatapult()];
+    player.playedCards.push(new Algae(), new Tardigrades(), new EarthCatapult());
     expect(milestone.getScore(player)).eq(4);
   });
 });

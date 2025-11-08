@@ -4,8 +4,9 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class CrescentResearchAssociation extends CorporationCard {
+export class CrescentResearchAssociation extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.CRESCENT_RESEARCH_ASSOCIATION,

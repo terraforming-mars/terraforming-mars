@@ -15,19 +15,27 @@ export class GlobalAudit extends Card implements IProjectCard {
       tags: [Tag.EARTH],
 
       metadata: {
-        cardNumber: 'U25',
+        cardNumber: 'U025',
         renderData: CardRenderer.builder((b) => {
-          b.text('0').corruption(1).colon().tr(1);
+          b.text('Min.').tag(Tag.CRIME).colon().tr(1).br;
+          b.text('0').tag(Tag.CRIME).colon().tr(1);
         }),
-        description: 'Every player with 0 corruption gains 1 TR, if possible.',
+        description: 'Every player with the lowest number of crime tags INCLUDING EVENTS gains 1 TR, if possible. ' +
+          'Players with 0 crime tags gain 1 additional TR.',
       },
     });
   }
 
   public override bespokePlay(player: IPlayer) {
-    for (const p of player.game.getPlayers()) {
-      if (p.underworldData.corruption === 0 && player.canAfford({cost: 0, tr: {tr: 1}})) {
-        p.increaseTerraformRating(1, {log: true});
+    const lowestCrimeTagCount = player.game.players
+      .map((p) => p.tags.count(Tag.CRIME, 'raw-underworld'))
+      .reduce((a, b) => Math.min(a, b));
+    for (const p of player.game.players) {
+      const count = p.tags.count(Tag.CRIME, 'raw-underworld');
+      const tr = (count === 0) ? 2 : count === lowestCrimeTagCount ? 1 : 0;
+      if (tr > 0 && p.canAfford({cost: 0, tr: {tr: tr}})) {
+        // TODO(kberg): Make it so players who get two but can only afford 1 get one.
+        p.increaseTerraformRating(tr, {log: true});
       }
     }
     return undefined;

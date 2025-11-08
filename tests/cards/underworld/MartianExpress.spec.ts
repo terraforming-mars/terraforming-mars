@@ -6,6 +6,8 @@ import {AddResourcesToCard} from '../../../src/server/deferredActions/AddResourc
 import {CardResource} from '../../../src/common/CardResource';
 import {JupiterFloatingStation} from '../../../src/server/cards/colonies/JupiterFloatingStation';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
+import {ColonyName} from '../../../src/common/colonies/ColonyName';
+import {ColoniesHandler} from '../../../src/server/colonies/ColoniesHandler';
 
 describe('MartianExpress', () => {
   it('canPlay', () => {
@@ -72,5 +74,35 @@ describe('MartianExpress', () => {
 
     expect(player.megaCredits).eq(7);
     expect(card.resourceCount).eq(0);
+  });
+
+  it('activates colonies', () => {
+    const card = new MartianExpress();
+    const [game, player] = testGame(2, {
+      coloniesExtension: true,
+      customColoniesList: [
+        ColonyName.TRITON,
+        ColonyName.CERES,
+        ColonyName.LEAVITT,
+        ColonyName.EUROPA,
+        ColonyName.TITAN, // Titan has floaters
+      ],
+    });
+
+    const colony = ColoniesHandler.getColony(game, ColonyName.TITAN);
+
+    expect(colony.metadata.cardResource).eq(CardResource.FLOATER);
+    expect(colony.isActive).is.false;
+
+    player.playCard(card);
+
+    expect(colony.isActive).is.true;
+    colony.trackPosition = 4;
+
+    colony.trade(player);
+    runAllActions(game);
+
+    expect(card.resourceCount).eq(3);
+    expect(colony.trackPosition).eq(0);
   });
 });

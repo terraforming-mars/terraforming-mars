@@ -4,16 +4,16 @@ import {AntidesertificationTechniques} from '../../../src/server/cards/promo/Ant
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('AntidesertificationTechniques', function() {
+describe('AntidesertificationTechniques', () => {
   let card: AntidesertificationTechniques;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AntidesertificationTechniques();
     [/* game */, player] = testGame(1);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
     expect(player.megaCredits).eq(3);
     expect(player.production.asUnits()).deep.eq(Units.of({plants: 1, steel: 1}));

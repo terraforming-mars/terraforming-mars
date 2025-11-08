@@ -9,7 +9,16 @@ export enum Priority {
   PHARMACY_UNION,
   /** Any effect from one of your opponent's card that triggers during your turn. */
   OPPONENT_TRIGGER,
-
+  /**
+   * Resolve Hyperspace Drive Prototype before Olympus Conference
+   *
+   * https://docs.google.com/drawings/d/1VXfVmoJWU_QmMDwZ-liVh5ZvWVmmpl2kuo_3ANz4omY/edit?usp=sharing
+   */
+  HYPERSPACE_DRIVE_PROTOTYPE,
+  /**
+   * Resolve Olympus Conference before Sponsored Academies and Mars U.
+   */
+  OLYMPUS_CONFERENCE,
   /** When you must discard before you can draw. Making a determination that Sponsored Academies should come before Mars U. */
   SPONSORED_ACADEMIES,
   DRAW_CARDS,

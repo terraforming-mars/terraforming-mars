@@ -7,17 +7,17 @@ import {cast} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestingUtils';
 
-describe('PoliticalUprising', function() {
+describe('PoliticalUprising', () => {
   let card: PoliticalUprising;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new PoliticalUprising();
     [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     card.play(player);
     expect(game.deferredActions).has.lengthOf(4);
 

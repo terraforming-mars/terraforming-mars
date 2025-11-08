@@ -22,7 +22,7 @@ describe('StagingStationBehemoth', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
@@ -33,7 +33,7 @@ describe('StagingStationBehemoth', () => {
 
     expect(moonData.logisticRate).eq(1);
     expect(player.colonies.getFleetSize()).to.eq(3);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 });
 

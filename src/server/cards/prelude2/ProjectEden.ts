@@ -15,6 +15,7 @@ export class ProjectEden extends PreludeCard {
     super({
       name: CardName.PROJECT_EDEN,
       tags: [Tag.CITY, Tag.PLANT],
+      tr: {oceans: 1, oxygen: 1},
 
       metadata: {
         cardNumber: 'P58',
@@ -40,7 +41,7 @@ export class ProjectEden extends PreludeCard {
   private selectNextAction(player: IPlayer): void {
     const options: Array<SelectOption> = [];
 
-    if (!player.game.canAddOcean()) {
+    if (!player.game.canAddOcean() && !player.playedCards.has(CardName.WHALES)) {
       this.selected.push('ocean');
     }
     if (!this.selected.includes('ocean')) {

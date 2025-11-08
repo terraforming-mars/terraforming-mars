@@ -26,6 +26,10 @@ export class RoboticWorkforce extends RoboticWorkforceBase {
     });
   }
 
+  public override bespokeCanPlay(player: IPlayer): boolean {
+    return this.getPlayableBuildingCards(player).length > 0;
+  }
+
   public override bespokePlay(player: IPlayer) {
     player.defer(
       this.selectBuildingCard(

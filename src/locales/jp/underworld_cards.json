@@ -3,7 +3,8 @@
     "Requires that you have no more than 0 corruption. ALL players lose 2 corruption each.": "条件：汚職0以下. 全プレイヤーは2汚職除去.",
 
     "Artesian Aquifer": "被圧帯水層",
-    "Place an ocean, then excavate the underground resource in its space, if possible.": "海洋1枚配置し、可能であればそこの地下資源を採掘する.",
+    "// Place an ocean, then excavate the underground resource in its space, if possible.": "海洋1枚配置し、可能であればそこの地下資源を採掘する.",
+    "Excavate 1 underground resource on ANY SPACE RESERVED FOR AN OCEAN. Then, place an ocean tile there, if possible.": "",
 
     "Battery Factory": "電池工場",
     "Action: Spend 1 energy to gain 1 M€ for each power tag you have.": "アクション：1電力支払い、電力タグの数分1MC獲得.",
@@ -15,7 +16,8 @@
     "Requires at least 1 city tile in play. Gain 1 corruption. Increase your M€ production 2 steps.": "条件：都市タイル1枚以上. 1汚職獲得. MC産出+2.",
 
     "Cave City": "洞窟都市",
-    "Requires 1 excavation marker. Increase your M€ production 1 step. Place a city in a space where YOU have an excavation marker. Regular placement restrictions still apply.": "条件：地下採掘1回以上. MC産出+1. あなたが地下採掘した空きマスに都市を1枚配置. 通常の配置制限は引き続き適用されます。",
+    "// Requires 1 excavation marker. Increase your M€ production 1 step. Place a city in a space where YOU have an excavation marker. Regular placement restrictions still apply.": "条件：地下採掘1回以上. MC産出+1. あなたが地下採掘した空きマスに都市を1枚配置. 通常の配置制限は引き続き適用されます。",
+    "Increase your steel production 1 step. Place a city in a NON-RESERVED SPACE WITH YOUR EXCAVATION MARKER, ignoring other placement restrictions.": "",
 
     "Chemical Factory": "化学工場",
     "Action: Spend 1 plant to excavate an underground resource.": "アクション：1植物を支払い、地下資源を採掘する.",
@@ -27,25 +29,26 @@
     "Corporate Blackmail": "企業恐喝",
     "PAYS YOU": "譲渡",
     "THIS CANNOT BE BLOCKED BY CORRUPTION": "これを汚職によって防ぐことはできない",
-    "Requires 1 corruption. Target a player that has at least 2 corruption. Unless that player pays you 10 M€, they lose 2 corruption.": "条件：汚職1つ以上. 汚職を2つ以上あるプレイヤーは、10MCをあなたに支払う または 2汚職除去.",
+    "// Requires 1 corruption. Target a player that has at least 2 corruption. Unless that player pays you 10 M€, they lose 2 corruption.": "条件：汚職1つ以上. 汚職を2つ以上あるプレイヤーは、10MCをあなたに支払う または 2汚職除去.",
 
     "Corporate Theft": "企業窃盗",
-    "Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. NOTE: Do not use in single player games.": "条件：汚職2つ以上. 他のプレイヤーからカード上の資源を1つ盗む. これが防がれた場合、1腐敗獲得. ※ソロでは使用不可.",
+    "// Requires 2 corruption. Remove 1 resource from a card belonging to a different player. Then, if you have a card that can hold it, put it on such a card. If the target blocked this, you gain 1 corruption. IF SOLO: gain 1 corruption.": "条件：汚職2つ以上. 他のプレイヤーからカード上の資源を1つ盗む. これが防がれた場合、1腐敗獲得. ソロの場合: 腐敗を 1 つ獲得します。",
 
     "Crater Survey": "クレーター調査",
-    "Add 2 data resources to ANOTHER card. Identify 4 underground resources.": "2データ獲得. 4回地下資源を調査する.",
+    "// Add 2 data resources to ANOTHER card. Identify 4 underground resources.": "2データ獲得. 4回地下資源を調査する.",
+    "Identify 4 underground resources. Claim one of them.": "",
 
     "Cut-throat Budgeting": "熾烈な予算編成",
     "Requires 1 corruption. Increase your M€, steel, and energy production 1 step each.": "条件：汚職1つ以上. MC産出+1. 建材産出+1. 電力産出+1.",
 
     "Deepmining": "深掘り",
-    "Excavate an IDENTIFIED underground resource ANYWHERE ON MARS with a steel or titanium placement bonus. Increase that production 1 step.": "配置ボーナスに建材 または チタンを含む地下資源が判明したマスで地下資源を採掘する. 入手した資材の産出+1.",
+    "Excavate an underground resource that depicts steel or titanium ANYWHERE ON THE BOARD. Increase your production of that resource 1 step.": "配置ボーナスに建材 または チタンを含む地下資源が判明したマスで地下資源を採掘する. 入手した資材の産出+1.",
 
     "Deepnuking": "核掘り",
     "Excavate 2 underground resources. Remove up to 3 plants from any player.": "2回地下資源を採掘する. 望むならプレイヤー1人から最大3植物除去.",
 
     "Earthquake Machine": "地震発生装置",
-    "Action: Spend 1 energy to excavate an underground resource on any space on Mars that has no tile on it.": "アクション：1電力を支払い、火星上の空きマスの地下資源を採掘する.",
+    "Action: // Spend 1 energy to excavate an underground resource on any space on Mars that has no tile on it.": "アクション：1電力を支払い、火星上の空きマスの地下資源を採掘する.",
     "Requires 2 science tags. Decrease any plant production 1 step": "条件：科学タグ2つ以上. プレイヤー1人の植物産出-1.",
 
     "Excavator Leasing": "貸し掘削機",
@@ -61,31 +64,35 @@
     "Gain 1 corruption. The players with the highest TR lose 1 TR. Then the players with the lowest TR gain 1 TR, if possible.": "1汚職獲得. TRが最も高いプレイヤーはTR-1段階. TRが最も低いプレイヤーはTR+1段階.",
 
     "Forest Tunnels": "森林トンネル",
-    "Requires an excavation marker. Gain 1 plant for every excavation marker you have.": "条件：地下採掘1回以上. 採掘した数分、1植物獲得.",
+    "// Requires an excavation marker. Gain 1 plant for every excavation marker you have.": "条件：地下採掘1回以上. 採掘した数分、1植物獲得.",
+    "Gain 1 plant for each underground token you own.": "",
 
     "Friends in High Places": "有力なコネ",
-    "Effect: When paying for Earth cards, corruption resources may be spent as 10 M€ each.": "効果：地球タグカードをプレイ時、汚職を10MCとして支払ってもよい.",
-    "Requires 1 corruption and 1 Earth tag. Gain 1 corruption.": "条件：地球タグ1つ以上、1汚職以上. 1汚職獲得.",
+    "// Requires 1 corruption and 1 Earth tag. Gain 1 corruption.": "条件：地球タグ1つ以上、1汚職以上. 1汚職獲得.",
+    "Requires 2 Earth tags. Gain 1 corruption.": "条件：地球タグ2つ以上. 1汚職獲得.",
 
     "Gaia City": "ガイアシティ",
     "Placement Bonus x2": "配置ボーナス2倍",
-    "Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (including adjacencies.) Regular placement restriction still apply.": "電力産出-1. MC産出+2. 採掘された空きマスに都市を配置. 配置ボーナスおよび隣接ボーナスを倍獲得. 通常の配置制限は引き続き適用されます。",
+    "// Reduce your energy production one step and increase your M€ production 2 steps. Place a city in a space with ANY player's excavation marker. Its placement bonus is doubled (including adjacencies.) Regular placement restriction still apply.": "電力産出-1. MC産出+2. 採掘された空きマスに都市を配置. 配置ボーナスおよび隣接ボーナスを倍獲得. 通常の配置制限は引き続き適用されます。",
 
     "Geological Survey:underworld": "地質学的調査",
-    "Add 1 data resource to ANOTHER card. Identify any 2 underground resources on Mars.": "1データ獲得. 2回火星上の地下資源を調査する.",
+    "// Add 1 data resource to ANOTHER card. Identify any 2 underground resources on Mars.": "1データ獲得. 2回火星上の地下資源を調査する.",
+"Identify 3 underground resources. Claim 1 of them.": "",
 
     "Geologist Team": "地質学者チーム",
     "Action: Identify 1 underground resource.": "アクション：地下資源を調査する.",
     "Effect: When ANY player identifies an underground resource that depicts an ocean, YOU gain 1 TR.": "効果：地下資源が調査されて、それに海洋が描かれていた時、TR+1段階.",
 
     "Geoscan Satellite": "測量衛星",
-    "Place 2 data on any card. Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces.": "2データ獲得. ボード上の1マスを選ぶ. そのマスと隣接するマスの地下資源を調査する.",
+    "// Place 2 data on any card. Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces.": "2データ獲得. ボード上の1マスを選ぶ. そのマスと隣接するマスの地下資源を調査する.",
+    "Pick a space on the board. Identify the underground resource in that space and in all adjacent spaces. Claim one of them.": "",
 
     "Geothermal Network": "地熱ネットワーク",
-    "Requires 3 excavation markers. Increase your heat production 3 steps.": "条件：地下採掘3回以上. 温熱産出+3.",
+    "// Requires 3 excavation markers. Increase your heat production 3 steps.": "条件：地下採掘3回以上. 温熱産出+3.",
+    "Requires 3 underground tokens. Increase your heat production 3 steps.": "",
 
     "Global Audit": "国際監査",
-    "Every player with 0 corruption gains 1 TR, if possible.": "汚職が0のプレイヤーは、可能であればTR+1段階.",
+    "// Every player with 0 corruption gains 1 TR, if possible.": "汚職が0のプレイヤーは、可能であればTR+1段階.",
 
     "Grey Market Exploitation": "グレーマーケットでの搾取",
     "Action: Spend 1 M€ to gain 1 standard resource.": "アクション：1MC支払い、1標準リソース獲得.",
@@ -108,14 +115,16 @@
     "Excavate 2 underground resources.": "2回地下資源を採掘する.",
 
     "Induced Tremor": "振動を伴う採掘",
-    "Excavate an underground resource, then pick an adjacent space with an unclaimed resource token. Remove that token. The space can be identified again.": "地下資源を採掘し、それに隣接する採掘されていないマスを選ぶ. そのマスの資源トークンを除外する. そのマスは再び調査できる.",
+    "// Excavate an underground resource, then pick an adjacent space with an unclaimed resource token. Remove that token. The space can be identified again.": "地下資源を採掘し、それに隣接する採掘されていないマスを選ぶ. そのマスの資源トークンを除外する. そのマスは再び調査できる.",
 
     "Infrastructure Overload": "インフラの過負荷",
-    "Requires 2 corruption. Reduce any energy production 2 steps.": "条件：汚職2つ以上. プレイヤー1人の電力産出-2.",
+    "// Requires 2 corruption. Reduce any energy production 2 steps.": "条件：汚職2つ以上. プレイヤー1人の電力産出-2.",
+    "Gain 1 corruption. Reduce any energy production 2 steps.": "1汚職獲得. プレイヤー1人の電力産出-2.",
 
     "Investigative Journalism": "調査報道",
     "Action: Spend 5 M€ and remove 1 corruption from ANOTHER player with more corruption than you to add 1 journalism resource on this card.": "アクション：5MC支払い、あなたより汚職を多く所持しているプレイヤー1人から1汚職除去. このカード上に1記事追加.",
-    "Decrease your M€ production 2 steps. 1 VP per 2 journalism resources on this card.": "MC産出-2. このカード上の2記事毎に1VP",
+    "// Decrease your M€ production 2 steps. 1 VP per 2 journalism resources on this card.": "MC産出-2. このカード上の2記事毎に1VP",
+    "Decrease your M€ production 1 step. 1 VP per journalism resource on this card.": "",
 
     "Labor Trafficking": "労働者人身売買",
     "FIRST": "最初の",
@@ -140,17 +149,18 @@
     "Spend 1 microbe from any card to excavate an underground resource and gain 3 plants. Add 1 data resource to ANOTHER card.": "1微生物支払い、地下資源を採掘する. 3植物獲得. 1データ獲得.",
 
     "Microgravimetry": "微小重力測定",
-    "Action: Spend any amount of energy to identify that many underground resources on the board and put the same number of data on this card.": "アクション：電力を任意の数支払い、その数分、地下資源を調査する. 支払った電力の数分、1データ獲得.",
+    "// Action: Spend any amount of energy to identify that many underground resources on the board and put the same number of data on this card.": "アクション：電力を任意の数支払い、その数分、地下資源を調査する. 支払った電力の数分、1データ獲得.",
 
     "Microprobing Technology": "マイクロプローブ技術",
-    "Requires 1 science tag. Gain 3 plants. Add 2 data to any card. Identify 3 underground resources.": "条件：科学タグ1つ以上. 3植物獲得. 2データ獲得. 3回地下資源を調査する.",
+    "// Requires 1 science tag. Gain 3 plants. Add 2 data to any card. Identify 3 underground resources.": "条件：科学タグ1つ以上. 3植物獲得. 2データ獲得. 3回地下資源を調査する.",
+    "Requires 1 science tag. Gain 3 plants. Identify 2 underground resources. Claim 1 of them.": "条件：科学タグ1つ以上. 3植物獲得. 2回地下資源を調査する. そのうち1つを獲得.",
 
     "Mining Market Insider": "鉱山市場インサイダー",
     "Effect: After any player identifies 1 or more underground spaces (at once), add 1 data resource to this card.": "効果：地下資源が調査された時、このカード上に1データ追加(1アクションにつき1データまで).",
     "Action: Spend 4 data resources on this card to draw a card.": "アクション：このカード上から4データ除去し、1ドロー.",
 
     "Monopoly": "独占",
-    "Requires 3 corruption. Choose a standard production type. Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.": "条件：汚職3つ以上. 産出を1つ選ぶ. 他の全プレイヤーはその産出-1し、その合計数分産出+1. これは汚職で防ぐことができる.",
+    "// Requires 3 corruption. Choose a standard production type. Steal up to 1 unit of that production from EACH OTHER player. They can block this with corruption.": "条件：汚職3つ以上. 産出を1つ選ぶ. 他の全プレイヤーはその産出-1し、その合計数分産出+1. これは汚職で防ぐことができる.",
 
     "Nanofoundry": "極小鋳物工場",
     "Requires 2 science tags. Reduce your energy production 5 steps. Draw 1 card for every power tag you have, including this.": "条件：科学タグ2つ以上. 電力産出-5. 電力タグの数分、1ドロー.",
@@ -159,8 +169,8 @@
     "Requires 1 Earth tag. Gain 2 corruption.": "条件：地球タグ1つ以上. 2汚職獲得.",
 
     "Neutrinograph": "ニュートリノ",
-    "Effect: When identifying underground resources EXCEPT by placing a tile or excavating, you can re-identify spaces that already have an unclaimed token. When you do, replace that token with a new one.": "効果：地下資源を調査した時、採掘されていない資源トークンを再び調査することができる. そうした場合、その資源トークンを除去し新しい資源トークンに入れ替える.",
-    "Requires 4 science tags. Identify 2 underground resources.": "条件：科学タグ4つ以上. 2回地下資源を調査する.",
+    "// Requires 4 science tags. Identify 2 underground resources.": "条件：科学タグ4つ以上. 2回地下資源を調査する.",
+    "Requires 5 science tags. Identify 7 underground resources. Claim 3 of them.": "条件：科学タグ5つ以上. 7回地下資源を調査する. そのうち3つを獲得.",
 
     "Nightclubs": "ナイトクラブ",
     "Requires that you own a city in play. Gain 1 corruption and increase your M€ production 2 steps.": "条件：都市1枚以上所持. 1汚職獲得. MC産出+2.",
@@ -178,8 +188,7 @@
     "RETURN 1 OF YOUR PLAYED GREEN OR BLUE CARDS TO YOUR HAND. IT MAY NOT BE A CARD THAT PLACES SPECIAL TILES OR RETURNS PLAYED CARDS TO YOUR HAND.": "プレイ済みの緑 または 青色カードを手札に戻す. 特殊タイルを置く または プレイしたカードを手札に戻すカードは選べない.",
 
     "Personal Spacecruiser": "個人用宇宙戦艦",
-    "Effect: During the production phase, if there is at least 1 fighter resource on this card, gain 2 M€ for each corruption resource you have.": "効果：生産フェイズ時、このカード上に戦闘機があれば、汚職の数分2MC獲得.",
-    "Put 1 fighter resource on this card. Gain 1 corruption.": "このカード上に1戦闘機追加. 1汚職獲得.",
+    "// Put 1 fighter resource on this card. Gain 1 corruption.": "このカード上に1戦闘機追加. 1汚職獲得.",
 
     "Planetary Rights Buyout": "惑星権買収",
     "Requires 5 corruption. Gain 7 TR": "条件：汚職5つ以上. TR+7段階.",
@@ -201,24 +210,24 @@
     "Add 1 fighter resource to this card.": "このカード上に1戦闘機追加.",
 
     "Private Resorts": "プライベート・リゾート",
-    "Requires 3 oceans. Reduce your heat production 1 step. At the end of this generation only, during the production phase, gain 12 M€ and 1 corruption.": "条件：海洋3枚以上. 温熱産出-1. 次の生産フェイズで12MCと1汚職獲得.",
+    "// Requires 3 oceans. Reduce your heat production 1 step. At the end of this generation only, during the production phase, gain 12 M€ and 1 corruption.": "条件：海洋3枚以上. 温熱産出-1. 次の生産フェイズで12MCと1汚職獲得.",
 
     "Public Spaceline": "個人用スペースライン",
     "Requires 5 space tags. This card has 2 Earth tags, 2 Jovian tags, 2 Venus tags, and 2 Mars tags.": "条件：宇宙タグ5つ以上. MC産出+2. このカードは地球タグ2つ、木星タグ2つ、金星タグ2つ、火星タグ2つとして数える.",
 
     "Reckless Detonation": "無謀な爆破",
-    "Requires 2 corruption. Excavate an underground resource. Remove up to 3 steel or 2 titanium from another player.": "条件：汚職2つ以上. 地下資源を採掘する. 望むならプレイヤー1人から最大3建材 または 2チタン除去.",
+    "// Requires 2 corruption. Excavate an underground resource. Remove up to 3 steel or 2 titanium from another player.": "条件：汚職2つ以上. 地下資源を採掘する. 望むならプレイヤー1人から最大3建材 または 2チタン除去.",
+    "Requires 2 corruption. Excavate an underground resource. Remove up to 3 steel or 2 titanium from any player.": "",
 
     "Research & Development Hub": "研究開発拠点",
     "Effect: At the end of each production phase, add 1 data here for EACH OTHER PLAYER that has 7 or more cards in their hand.": "効果：生産フェイズ終了時、他の手札が7枚以上のプレイヤーの人数分、このカード上に1データ追加.",
     "1 VP for every 3 data resources on this card.": "このカード上の3データ毎に1VP",
 
     "Robot Moles": "掘削ロボット",
-    "Action: Spend 1 steel to add 1 data to this card and identify 2 underground resources.": "アクション：1建材支払い、このカード上に1データ追加. 2回地下資源を調査する.",
-    "1 VP per 3 data resources on this card.": "このカード上の3データ毎に1VP.",
+    "// Action: Spend 1 steel to add 1 data to this card and identify 2 underground resources.": "アクション：1建材支払い、このカード上に1データ追加. 2回地下資源を調査する.",
+    "Gain 2 steel. Identify 4 underground resources. Claim 1 of them.": "",
 
     "Scapegoat": "生け贄",
-    "Gain 1 corruption.": "1汚職獲得.",
 
     "Search for Life Underground": "地下生命探査",
     "Action: Spend 1 M€ to identify an underground resource. If it depicts at least 1 microbe, add a science resource here.": "アクション：1MC支払い、地下資源を調査する. そこに微生物があればこのカード上に1科学リソースを追加する.",
@@ -226,22 +235,23 @@
     "Temperature must -18° C or colder.": "条件：気温-18℃以下.",
 
     "Server Sabotage": "サーバー妨害",
-    "Gain 1 corruption. Remove up to 2 data fromany player. Remove all unclaimed underground resources from the board back into the pile. Their spaces can be identified again.": "1汚職獲得. プレイヤー1人の2データ除去. 採掘されていない資源トークンを全て除去する. それらは再び調査できる.",
+    "// Gain 1 corruption. Remove up to 2 data from any player. Remove all unclaimed underground resources from the board back into the pile. Their spaces can be identified again.": "1汚職獲得. プレイヤー1人の2データ除去. 採掘されていない資源トークンを全て除去する. それらは再び調査できる.",
+    "Gain 1 corruption. Draw a card. Remove all underground resources from the board.": "1汚職獲得. 1ドロー. 採掘されていない資源トークンを全て除去する.",
 
     "Soil Export": "土壌輸出",
     "Excavate an underground resource.": "地下資源を採掘する.",
-    "At the end of this generation only, during the production phase, gain 12 M€.": "次の生産フェイズで12MC獲得.",
+    "// At the end of this generation only, during the production phase, gain 12 M€.": "次の生産フェイズで12MC獲得.",
 
     "Space Privateers": "宇宙私掠船",
-    "Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "アクション：このカード上に戦闘機がある場合、他の全プレイヤーから2MC盗む.",
+    "// Action: If there is at least 1 fighter on this card, steal 2 M€ from EACH OTHER player.": "アクション：このカード上に戦闘機がある場合、他の全プレイヤーから2MC盗む.",
     "Effect: If 1 or more targets block this with corruption, remove 1 fighter from here.": "効果：このカードのアクションが1人以上から防がれた時、このカード上から1戦闘機を除去.",
     "Solo: Gain 2 M€ and remove 1 fighter from this card.": "ソロ：2MC獲得し、1戦闘機を除去.",
-    "Requires 3 corruption. Put 3 fighter resources on this card.": "条件：汚職3つ以上. このカード上に3戦闘機追加.",
+    "// Requires 3 corruption. Put 3 fighter resources on this card.": "条件：汚職3つ以上. このカード上に3戦闘機追加.",
 
     "Space Wargames": "宇宙戦争ゲーム",
     "Action: Spend 1 titanium to gain 1 fighter resource to this card.": "アクション：1チタンを支払い、このカード上に1戦闘機追加.",
     "Action: Spend 1 fighter resource on this card to gain 3 M€ for each fighter resource on this card INCLUDING THE PAID FIGHTER.": "アクション：このカード上の1戦闘機毎に3MC獲得し、このカード上から1戦闘機を除去.",
-    "Put 1 fighter resource on this card. 1VP for each Jovian tag you have.": "このカード上に1戦闘機追加. 木星タグ1つ毎に1VP.",
+    "// Put 1 fighter resource on this card. 1 VP for each Jovian tag you have.": "このカード上に1戦闘機追加. 木星タグ1つ毎に1VP.",
 
     "Staged Protests": "仕組まれた抗議",
     "Awards and Milestones": "称号と褒賞",
@@ -252,14 +262,15 @@
 
     "Standard Technology": "標準テクノロジー",
     "REPEAT": "",
-    "Action: Use a standard project that you've already done this generation, with its cost reduced by 8 M€.": "アクション：この世代、すでに行った標準プロジェクトをコスト-8MCでプレイする.",
+    "(Action: Use a standard project that you've already used this generation, with its cost reduced by 8 M€).": "アクション：この世代、すでに行った標準プロジェクトをコスト-8MCでプレイする.",
 
     "Stem Field Subsidies": "STEMフィールド補助金",
-    "Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "効果：科学タグをプレイ時、1データ獲得. 地下資源を調査する.",
-    "1 VP per 3 data resources on this card.": "このカード上の3データ毎に1VP.",
+    "// Effect: Whenever you play a science tag (including this), add 1 data to ANY card and identify an underground resource.": "効果：科学タグをプレイ時、1データ獲得. 地下資源を調査する.",
+    "Whenever you play a science tag (including this), add 1 data to this card": "",
 
     "Subnautic Pirates": "潜水海賊",
-    "Requires 1 excavation marker and 1 corruption. Pick an ocean tile that has your excavation marker on it. Steal 6 M€ from each other player that owns a tile adjacent to that ocean. This can be blocked by corruption.": "条件：地下採掘1回以上、汚職1つ以上. あなたが地下採掘している海洋を1枚選ぶ. そこに隣接するタイルを所有している他の全プレイヤーから6MC盗む.",
+    "// Requires 1 excavation marker and 1 corruption. Pick an ocean tile that has your excavation marker on it. Steal 6 M€ from each other player that owns a tile adjacent to that ocean. This can be blocked by corruption.": "条件：地下採掘1回以上、汚職1つ以上. あなたが地下採掘している海洋を1枚選ぶ. そこに隣接するタイルを所有している他の全プレイヤーから6MC盗む.",
+    "Requires you have 1 corruption and 1 underground token. Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.": "",
 
     "Subterranean Sea": "地底の海",
     "Place an ocean tile ON AN AREA NOT RESERVED FOR OCEAN where you have an excavation marker.": "あなたが地下採掘している、海洋予定地以外に海洋1枚配置.",
@@ -273,19 +284,21 @@
     "Action: Spend 1 tool resource on this card to excavate an underground resource.": "アクション：このカード上から1工具除去し、地下資源を採掘する.",
 
     "Tunnel Boring Machine": "トンネルボーリングマシン",
-    "Action: Pay 3 energy to excavate 2 underground resources": "アクション：3電力支払い、2回地下資源を採掘する.",
+    "Action: Pay 3 energy to excavate 2 underground resources.": "アクション：3電力支払い、2回地下資源を採掘する.",
 
     "Tunneling Subcontractor": "トンネル工事請負業者",
     "Gain 1 corruption. Excavate an underground resource.": "1汚職獲得. 地下資源を採掘する.",
 
     "Underground Amusement Park": "地下遊園地",
-    "Requires an excavation marker. Increase your M€ production 1 step.": "条件：地下採掘1回以上. MC産出+1.",
+    "// Requires an excavation marker. Increase your M€ production 1 step.": "条件：地下採掘1回以上. MC産出+1.",
+    "Requires you have 1 underground token. Increase your M€ production 1 step.": "",
 
     "Underground Habitat": "地下居住区",
     "Excavate an underground resource. Increase your plant production 1 step. Add 1 animal on another card.": "地下資源を採掘する. 植物産出+1. 1動物獲得.",
 
     "Underground Railway": "地下鉄道",
-    "Decrease your energy production 1 step. Gain 1 TR for every 4 excavation markers you own.": "電力産出-1. 採掘した回数4回毎にTR+1段階.",
+    "// Decrease your energy production 1 step. Gain 1 TR for every 4 excavation markers you own.": "電力産出-1. 採掘した回数4回毎にTR+1段階.",
+    "Decrease your energy production 1 step. Gain 1 TR for every 4 underground tokens you have.": "",
 
     "Underground Research Center": "地下研究センター",
     "Requires 5 excavation markers. Decrease your energy production 1 step. Excavate an underground resource. Choose a tag that is not the wild tag or clone tag. Draw 2 cards with that tag.": "条件：地下採掘5回以上. 電力産出-1. 地下資源を採掘する. ワイルド、惑星選択タグ以外のタグを1つ選び、そのタグのカードを2枚入手.",
@@ -294,7 +307,8 @@
     "Excavate an underground resource. At the end of the game, your cities score 1 VP per 3 excavation markers YOU have in that city space and adjacent spaces.": "地下資源を採掘する. あなたの都市は、そこと周りのあなたが採掘したマス3つ毎に1VP.",
 
     "Underground Smuggling Ring": "地下密輸組織",
-    "Requires an excavation marker. Gain 1 corruption and 2 of the same standard resource.": "条件：地下採掘1回以上. 1汚職獲得. 1種類の2標準リソース獲得.",
+    "// Requires an excavation marker. Gain 1 corruption and 2 of the same standard resource.": "条件：地下採掘1回以上. 1汚職獲得. 1種類の2標準リソース獲得.",
+    "Requires you have 1 underground token. Gain 1 corruption and 2 of the same standard resource.": "",
 
     "Voltaic Metallurgy": "ボルタ冶金",
     "Action: Spend any number of steel to gain the same amount of titanium (max is the number of power tags you have.)": "アクション：x建材支払い、xチタン獲得(電力タグの数分まで可能).",

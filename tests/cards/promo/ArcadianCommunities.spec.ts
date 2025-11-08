@@ -9,7 +9,7 @@ import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {IGame} from '../../../src/server/IGame';
 
-describe('ArcadianCommunities', function() {
+describe('ArcadianCommunities', () => {
   let card: ArcadianCommunities;
   let player: TestPlayer;
   let game: IGame;
@@ -18,7 +18,7 @@ describe('ArcadianCommunities', function() {
   beforeEach(() => {
     card = new ArcadianCommunities();
     [game, player] = testGame(2);
-    player.corporations.push(card);
+    player.playedCards.push(card);
     board = player.game.board;
   });
 

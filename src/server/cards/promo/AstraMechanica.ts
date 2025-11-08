@@ -27,15 +27,18 @@ export class AstraMechanica extends Card implements IProjectCard {
     });
   }
 
+  private static UNUSABLE_CARDS = [
+    CardName.PATENT_MANIPULATION,
+    CardName.RETURN_TO_ABANDONED_TECHNOLOGY,
+    CardName.HOSTILE_TAKEOVER,
+  ];
+
   private getCards(player: IPlayer): ReadonlyArray<IProjectCard> {
-    return player.playedCards.filter((card) => {
+    return player.playedCards.projects().filter((card) => {
       if (card.type !== CardType.EVENT) {
         return false;
       }
-      if (card.name === CardName.PATENT_MANIPULATION || card.name === CardName.RETURN_TO_ABANDONED_TECHNOLOGY) {
-        return false;
-      }
-      if (card.name === CardName.HOSTILE_TAKEOVER) {
+      if (AstraMechanica.UNUSABLE_CARDS.includes(card.name)) {
         return false;
       }
       if (card.tilesBuilt.some(isSpecialTile)) {
@@ -45,7 +48,14 @@ export class AstraMechanica extends Card implements IProjectCard {
     });
   }
 
+  private hasUnusableCards(player: IPlayer): boolean {
+    return AstraMechanica.UNUSABLE_CARDS.some((cardName) => player.playedCards.get(cardName) !== undefined);
+  }
+
   public override bespokeCanPlay(player: IPlayer) {
+    if (this.hasUnusableCards(player)) {
+      this.warnings.add('unusableEventsForAstraMechanica');
+    }
     return this.getCards(player).length > 0;
   }
 
@@ -63,7 +73,7 @@ export class AstraMechanica extends Card implements IProjectCard {
       .andThen(
         (cards) => {
           for (const card of cards) {
-            player.playedCards = player.playedCards.filter((c) => c.name !== card.name);
+            player.playedCards.remove(card);
             player.cardsInHand.push(card);
             card.onDiscard?.(player);
             player.game.log('${0} returned ${1} to their hand', (b) => b.player(player).card(card));

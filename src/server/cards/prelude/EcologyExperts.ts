@@ -32,6 +32,25 @@ export class EcologyExperts extends PreludeCard {
     }
     return 0;
   }
+
+  public override canPlay(player: IPlayer) {
+    // NOTE: If the player has production-based benefits from this prelude (like )
+    player.temporaryGlobalParameterRequirementBonus += 50;
+    player.production.plants++;
+    if (player.playedCards.has(CardName.MANUTECH)) {
+      player.plants++;
+    }
+    try {
+      return player.getPlayableCards().length > 0;
+    } finally {
+      player.temporaryGlobalParameterRequirementBonus -= 50;
+      player.production.plants--;
+      if (player.playedCards.has(CardName.MANUTECH)) {
+        player.plants--;
+      }
+    }
+  }
+
   public override bespokePlay(player: IPlayer) {
     player.game.defer(new PlayProjectCard(player));
     return undefined;

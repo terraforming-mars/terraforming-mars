@@ -11,6 +11,13 @@ import {CardResource} from '../../common/CardResource';
  * Counts things in game state.
  */
 export interface ICounter {
+  /**
+   * Count using the applied countable definition.
+   *
+   * context: describes what to do in different counting contexts. Most of the time 'default' is correct, but
+   * when counting victory points, use 'vp'. 'vp' applies to counting victory points. As of now, this only applies
+   * to how it counts wild tags and other substitutions that only apply during an action.
+   */
   count(countable: Countable, context?: 'default' | 'vps'): number;
   countUnits(countableUnits: Partial<CountableUnits>): Units;
 }
@@ -36,7 +43,7 @@ export class Counter {
   private cardIsUnplayed: boolean;
 
   public constructor(private player: IPlayer, private card: ICard) {
-    this.cardIsUnplayed = !player.cardIsInEffect(card.name);
+    this.cardIsUnplayed = !player.tableau.has(card.name);
   }
 
   public count(countable: Countable, context: 'default' | 'vps' = 'default'): number {
@@ -102,7 +109,7 @@ export class Counter {
 
         // When counting all the other players' tags, just count raw, so as to disregard their wild tags.
         if (countable.all === true || countable.others === true) {
-          player.getOpponents()
+          player.opponents
             .forEach((p) => sum += p.tags.count(tag, 'raw'));
         }
       }
@@ -150,7 +157,7 @@ export class Counter {
       const underworld = countable.underworld;
       if (underworld.corruption !== undefined) {
         if (countable.all === true) {
-          sum += utils.sum(game.getPlayers().map((p) => p.underworldData.corruption));
+          sum += utils.sum(game.players.map((p) => p.underworldData.corruption));
         } else {
           sum += player.underworldData.corruption;
         }
@@ -160,6 +167,15 @@ export class Counter {
           sum += player.game.board.spaces.filter((space) => space.excavator !== undefined).length;
         } else {
           sum += player.game.board.spaces.filter((space) => space.excavator === player).length;
+        }
+      }
+      if (underworld.undergroundTokens !== undefined) {
+        if (countable.all) {
+          for (const p of game.players) {
+            sum += p.underworldData.tokens.length;
+          }
+        } else {
+          sum += player.underworldData.tokens.length;
         }
       }
     }

@@ -46,10 +46,10 @@ export const awardNames = [
 
   // Terra Cimmeria
   'Biologist',
-  'T. Economizer',
   'T. Politician',
   'Urbanist',
   'Warmonger',
+  // NB: the fifth award for Terra Cimmeria is Incorporator, a modular award.
 
   // Vastitas Borealis
   'Forecaster',
@@ -58,9 +58,15 @@ export const awardNames = [
   'Naturalist',
   'Voyager',
 
+  // Vastitas Borealis Novus
+  'Traveller',
+  'Landscaper',
+  'Highlander',
+  'Blacksmith',
+
   // Underworld
   'Kingpin',
-  'EdgeLord',
+  'Excavator',
 
   // Ares Extreme
   'Rugged',
@@ -71,16 +77,13 @@ export const awardNames = [
   'Constructor',
   'Electrician',
   'Founder',
-  'Highlander',
   'Incorporator',
   'Investor',
-  'Landscaper',
-  'Manufacturer',
   'Metropolist',
   'Mogul',
   'Politician', // New Most party leaders and influence compbined
-  // 'Suburbian', // NEW Most tiles on areas along the edges of the map.
-  'Traveller',
+  'Suburbian',
+  // 'Traveller',
   // 'Zoologist', // Most animal and microbe resources. Currently Zoologist2
 ] as const;
 
@@ -91,13 +94,8 @@ export const AWARD_RENAMES = new Map<string, AwardName>([
   // And remember to add a test in spec.ts.
 
   // TODO(yournamehere): remove after 2021-04-05
-  // TODO(kberg): remove after 2024-12-15
-  ['Engineer', 'A. Engineer'],
-
-  // TODO(kberg): remove after 2025-01-01
-  ['Adapter', 'Forecaster'],
-  ['Hoarder', 'Visionary'],
-  ['Coordinator', 'Promoter'],
+  // TODO(kberg): Remove after 2021-08-15
+  ['EdgeLord', 'Excavator'],
 ]);
 
 export function maybeRenamedAward(name: string): AwardName {

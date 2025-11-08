@@ -6,7 +6,6 @@ import {CardType} from '../../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../../common/TileType';
-import {AresHandler} from '../../ares/AresHandler';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 
@@ -30,7 +29,7 @@ export class DesperateMeasures extends Card implements IProjectCard {
   }
 
   private getHazardTiles(game: IGame) {
-    return game.board.spaces.filter((space) => AresHandler.hasHazardTile(space));
+    return game.board.getHazards(/* includeProtected= */ false);
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {

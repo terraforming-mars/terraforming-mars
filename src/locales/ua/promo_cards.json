@@ -1,5 +1,5 @@
 {
-  "City Park": "Стадіон",
+  "City Parks": "Стадіон",
   "Requires that you have 3 cities. Gain 2 plants.": "Вимагає наявності 3 міст. Отримайте 2 рослини.",
 
   "Soil Enrichment": "Збагачення грунту",
@@ -23,7 +23,6 @@
 
   "Teslaract": "Тесларакт",
   "Action: Spend 1 energy production to gain 1 plant production.": "Дія: Витратити 1 виробництво енергії, щоб отримати 1 виробництво рослин.",
-  "Raise your TR 1 step.": "Підвищте ваш РТ на 1 крок.",
 
   "Red Ships": "Червоні кораблі",
   "Action: Gain 1 M€ for each CITY AND SPECIAL TILE adjacent to an ocean.": "Дія: Отримайте 1 M€ за кожне МІСТО І СПЕЦІАЛЬНЕ ПЛИТКА, прилеглі до океану.",
@@ -120,14 +119,13 @@
   "Asteroid Deflection System": "Система відхилення астероїдів",
   "Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.": "Дія: РОЗКРИТИ І ВИКЛАСТИ верхню карту з колоди. Якщо вона має значок космосу, додати астероїд сюди.",
   "opponents may not remove your plants": "супротивники не можуть видаляти ваші рослини",
-  "Decrease your energy production 1 step. 1VP per asteroid on this card.": "Зменшити виробництво енергії на 1 крок. 1 ПО за кожен астероїд на цій карті.",
+  "Decrease your energy production 1 step. 1 VP per asteroid on this card.": "Зменшити виробництво енергії на 1 крок. 1 ПО за кожен астероїд на цій карті.",
 
   "Jovian Embassy": "Юпітерське посольство",
   "Raise your TR 1 step.": "Підвищити ваш РТ на 1 крок.",
 
   "Sub-Crust Measurements": "Вимірювання підшорсткового шару",
   "Action: Draw a card.": "Дія: Витягнути карту.",
-  "Requires 2 science tags.": "Вимагає 2 значки науки.",
 
   "Potatoes": "Картопля",
   "Lose 2 plants. Increase your M€ production 2 steps.": "Втратити 2 рослини. Збільшити виробництво M€ на 2 кроки.",
@@ -149,7 +147,7 @@
 
   "Asteroid Hollowing": "Видобування астероїдів",
   "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "Дія: Витратити 1 титану, щоб додати 1 астероїдний ресурс сюди і збільшити виробництво M€ на 1 крок.",
-  "1VP for each 2 asteroids on this card.": "1 ПО за кожні 2 астероїди на цій карті.",
+  "1 VP for each 2 asteroids on this card.": "1 ПО за кожні 2 астероїди на цій карті.",
 
   "Advertising": "Реклама",
   "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "Ефект: Коли ви граєте карту з базовою вартістю 20 M€ або більше, збільште виробництво M€ на 1 крок.",
@@ -197,7 +195,7 @@
   "Stanford Torus": "Стенфордський торус",
   "Place a city tile IN SPACE, outside and separate from the planet.": "Розмістити плитку міста В КОСМОСІ, поза і окремо від планети.",
 
-  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 plants from any player.": "Підвищити температуру на 3 кроки і отримати 4 сталі. Розмістити цю плитку НЕ ПРИЛЕГЛО до жодної іншої плитки міста. Видалити до 6 рослин у будь-якого гравця.",
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no city tile. Remove up to 6 plants from any player.": "Підвищити температуру на 3 кроки і отримати 4 сталі. Розмістити цю плитку НЕ ПРИЛЕГЛО до жодної іншої плитки міста. Видалити до 6 рослин у будь-якого гравця.",
 
   "Requires 4 ocean tiles. Increase your energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Вимагає 4 океанських плиток. Збільшити виробництво енергії на 2 кроки. Розмістити цю плитку ПРИЛЕГЛО до океанської плитки.",
 

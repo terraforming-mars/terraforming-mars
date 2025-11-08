@@ -43,7 +43,7 @@ export class Sabotage extends Card implements IProjectCard {
 
     const availableActions = new OrOptions();
 
-    player.getOpponents().forEach((target) => {
+    player.opponents.forEach((target) => {
       if (target.titanium > 0 && !target.alloysAreProtected()) {
         const amountRemoved = Math.min(3, target.titanium);
         const optionTitle = this.title(amountRemoved, 'titanium', target);

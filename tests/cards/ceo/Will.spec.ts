@@ -10,7 +10,7 @@ import {Birds} from '../../../src/server/cards/base/Birds';
 import {CommunicationCenter} from '../../../src/server/cards/pathfinders/CommunicationCenter';
 import {Will} from '../../../src/server/cards/ceos/Will';
 
-describe('Will', function() {
+describe('Will', () => {
   let card: Will;
   let player: TestPlayer;
   let game: IGame;
@@ -21,14 +21,14 @@ describe('Will', function() {
     player.playedCards.push(card);
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     card.action(player);
     forceGenerationEnd(game);
     expect(card.isDisabled).is.true;
     expect(card.canAct(player)).is.false;
   });
 
-  it('Takes OPG action', function() {
+  it('Takes OPG action', () => {
     const birds = new Birds();
     const ants = new Ants();
     player.playedCards.push(birds, ants);
@@ -52,7 +52,7 @@ describe('Will', function() {
     expect(ants.resourceCount).eq(4);
   });
 
-  it('Takes OPG w/ Communication Center', function() {
+  it('Takes OPG w/ Communication Center', () => {
     const comms = new CommunicationCenter();
     player.playedCards.push(comms);
     comms.resourceCount = 2; // Put 2 data onto CommCenter
@@ -65,9 +65,10 @@ describe('Will', function() {
     card.action(player);
     expect(game.deferredActions).has.length(4);
     game.deferredActions.runNext(); // No animals
-    game.deferredActions.runNext(); // No bugs
+    game.deferredActions.runNext(); // No microbes
     game.deferredActions.runNext(); // No Floaters
-    game.deferredActions.runNext(); // Two Wild on comms
+    game.deferredActions.runNext(); // Two Wild on Communication Center
+    game.deferredActions.runNext(); // Communication Center responds
 
     // We should have drawn a card here AND added another science to Comms
     expect(comms.resourceCount).eq(1);

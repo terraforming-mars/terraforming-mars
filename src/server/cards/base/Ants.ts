@@ -42,7 +42,7 @@ export class Ants extends Card implements IActionCard, IProjectCard {
   }
 
   public action(player: IPlayer) {
-    player.game.defer(new RemoveResourcesFromCard(player, CardResource.MICROBE).andThen((response) => {
+    player.game.defer(new RemoveResourcesFromCard(player, CardResource.MICROBE, 1, {log: true}).andThen((response) => {
       if (response.proceed) {
         player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {filter: (c) => c.name === this.name}));
       }

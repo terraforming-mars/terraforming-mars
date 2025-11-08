@@ -4,20 +4,20 @@ import {TestPlayer} from '../../TestPlayer';
 import {maxOutOceans} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('KelpFarming', function() {
+describe('KelpFarming', () => {
   let card: KelpFarming;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new KelpFarming();
     [/* game */, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     maxOutOceans(player, 6);
     expect(card.canPlay(player)).is.true;
 

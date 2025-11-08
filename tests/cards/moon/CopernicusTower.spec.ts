@@ -19,10 +19,10 @@ describe('CopernicusTower', () => {
     player.megaCredits = card.cost;
 
     player.production.override({titanium: 2});
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     player.production.override({titanium: 1});
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('act', () => {
@@ -39,10 +39,10 @@ describe('CopernicusTower', () => {
 
     // The first option decreases resource count by 1 and raise the TR 1 step.
     input = cast(churn(card.action(player), player), OrOptions);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     churn(() => input.options[0].cb(), player);
     expect(card.resourceCount).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 
   it('victory points', () => {

@@ -3,7 +3,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {any} from '../render/DynamicVictoryPoints';
 import {IPlayer} from '../../IPlayer';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {Size} from '../../../common/cards/render/Size';
@@ -13,7 +13,7 @@ export class PrivateInvestigator extends Card implements IProjectCard {
     super({
       name: CardName.PRIVATE_INVESTIGATOR,
       type: CardType.EVENT,
-      cost: 8,
+      cost: 4,
       victoryPoints: 'special',
 
       behavior: {
@@ -21,20 +21,20 @@ export class PrivateInvestigator extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U38',
+        cardNumber: 'U038',
         renderData: CardRenderer.builder((b) => {
           b.text('TARGET A PLAYER WITH MORE CORRUPTION THAN YOU.', Size.SMALL, true).br;
           b.text('PLACE THIS CARD FACE DOWN IN THAT PLAYER\'S PROJECT CARD PILE.', Size.SMALL, true).br;
           b.tr(1);
         }),
         description: 'Gain 1 TR.',
-        victoryPoints: CardRenderDynamicVictoryPoints.any(-1),
+        victoryPoints: any(-1),
       },
     });
   }
 
   private targets(player: IPlayer) {
-    return player.game.getPlayers().filter((p) => p.underworldData.corruption > player.underworldData.corruption);
+    return player.game.players.filter((p) => p.underworldData.corruption > player.underworldData.corruption);
   }
 
   public override bespokeCanPlay(player: IPlayer) {

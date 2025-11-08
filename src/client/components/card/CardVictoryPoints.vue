@@ -1,58 +1,72 @@
 <template>
-  <div v-if="isObject(victoryPoints)" :class="getClasses()">
-    <template v-if="!victoryPoints.targetOneOrMore">
-      <div>{{ points() }}</div>
-      <CardRenderItemComponent v-if="victoryPoints.item !== undefined" :item="victoryPoints.item" data-test="item"/>
-    </template>
-    <template v-else>
+  <div v-if="typeof victoryPoints !== 'number'" :class="classes">
+    <template v-if="victoryPoints.targetOneOrMore">
+       <!-- This is the Search for Life special case. -->
       <div class="card-points-item-first">
         <CardRenderItemComponent v-if="victoryPoints.item !== undefined" :item="victoryPoints.item" data-test="item"/>
         *:3
       </div>
     </template>
+    <template v-else-if="victoryPoints.vermin">
+      10
+      <CardRenderItemComponent :item="animal"/>
+      : -1/
+      <CardRenderItemComponent :item="city"/>
+      *
+    </template>
+    <template v-else>
+      <div>{{ points }}</div>
+      <CardRenderItemComponent v-if="victoryPoints.item !== undefined" :item="victoryPoints.item" data-test="item"/>
+    </template>
     <div v-if="victoryPoints.asterisk === true">*</div>
   </div>
-  <div v-else :class="getClasses()">{{ victoryPoints }}</div>
+  <div v-else class="card-points card-points-big">{{ victoryPoints }}</div>
 </template>
 
 <script lang="ts">
 
 import Vue from 'vue';
-import {ICardRenderDynamicVictoryPoints} from '@/common/cards/render/ICardRenderDynamicVictoryPoints';
 import CardRenderItemComponent from '@/client/components/card/CardRenderItemComponent.vue';
+import {CardRenderDynamicVictoryPoints} from '@/common/cards/render/CardRenderDynamicVictoryPoints';
+import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
+import {CardResource} from '@/common/CardResource';
+import {ICardRenderItem} from '@/common/cards/render/Types';
+import {Size} from '@/common/cards/render/Size';
 
 export default Vue.extend({
   name: 'CardVictoryPoints',
   props: {
     victoryPoints: {
-      type: [Number, Object as () => ICardRenderDynamicVictoryPoints],
+      type: [Number, Object as () => CardRenderDynamicVictoryPoints],
       required: true,
     },
   },
   components: {
     CardRenderItemComponent,
   },
-  methods: {
-    getClasses(): string {
-      const classes: string[] = ['card-points'];
-      if (this.isObject(this.victoryPoints)) {
-        const item = this.victoryPoints;
-        if (item.anyPlayer) {
+  computed: {
+    classes(): string {
+      if (typeof this.victoryPoints === 'number') {
+        return '';
+      } else {
+        const classes: string[] = ['card-points'];
+        if (this.victoryPoints.vermin) {
+          classes.push('card-points-normal');
+          classes.push('card-points-vermin');
+          classes.push('red-outline');
+        } else if (this.victoryPoints.anyPlayer) {
           classes.push('card-points-big');
           classes.push('red-outline');
         } else {
           classes.push('card-points-normal');
         }
-      } else {
-        classes.push('card-points-big');
+        return classes.join(' ');
       }
-      return classes.join(' ');
-    },
-    isObject(item: any): item is ICardRenderDynamicVictoryPoints {
-      return item.points !== undefined;
     },
     points(): string {
-      if (!this.isObject(this.victoryPoints)) return '';
+      if (typeof this.victoryPoints === 'number') {
+        return '';
+      }
       const vps = this.victoryPoints;
       if (vps.item === undefined && vps.points === 0 && vps.target === 0) {
         return '?';
@@ -69,6 +83,12 @@ export default Vue.extend({
         }
       }
       return `${vps.points}/${vps.target}`;
+    },
+    animal(): ICardRenderItem {
+      return {is: 'item', type: CardRenderItemType.RESOURCE, resource: CardResource.ANIMAL, size: Size.SMALL, amount: 1};
+    },
+    city(): ICardRenderItem {
+      return {is: 'item', type: CardRenderItemType.CITY, size: Size.SMALL, amount: 1};
     },
   },
 });

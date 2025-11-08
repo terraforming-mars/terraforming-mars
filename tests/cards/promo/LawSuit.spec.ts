@@ -22,30 +22,30 @@ describe('LawSuit', () => {
 
   it('Cannot play if resource loss is zero', () => {
     player.megaCredits = 0;
-    player.stock.add(Resource.MEGACREDITS, -1, {log: true, from: player2});
+    player.stock.add(Resource.MEGACREDITS, -1, {log: true, from: {player: player2}});
     expect(card.canPlay(player)).is.false;
   });
 
   it('Can play if resources removed this turn by other player', () => {
     player.megaCredits = 1;
-    player.stock.add(Resource.MEGACREDITS, -1, {log: true, from: player2});
+    player.stock.add(Resource.MEGACREDITS, -1, {log: true, from: {player: player2}});
     expect(card.canPlay(player)).is.true;
   });
 
   it('Cannot play if resources removed by self', () => {
     player.megaCredits = 1;
-    player.stock.add(Resource.MEGACREDITS, -1, {log: true, from: player});
+    player.stock.add(Resource.MEGACREDITS, -1, {log: true, from: {player}});
     expect(card.canPlay(player)).is.false;
   });
 
   it('Can play if production decreased this turn by other player', () => {
-    player.production.add(Resource.MEGACREDITS, -1, {log: true, from: player2});
+    player.production.add(Resource.MEGACREDITS, -1, {log: true, from: {player: player2}});
     expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', () => {
-    player.stock.add(Resource.MEGACREDITS, -1, {log: true, from: player2});
-    player.production.add(Resource.MEGACREDITS, -1, {log: true, from: player2});
+    player.stock.add(Resource.MEGACREDITS, -1, {log: true, from: {player: player2}});
+    player.production.add(Resource.MEGACREDITS, -1, {log: true, from: {player: player2}});
 
     const play = card.play(player);
     expect(play).instanceOf(SelectPlayer);

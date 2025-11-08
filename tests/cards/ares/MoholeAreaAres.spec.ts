@@ -6,8 +6,8 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('MoholeAreaAres', function() {
-  it('Should play', function() {
+describe('MoholeAreaAres', () => {
+  it('Should play', () => {
     const card = new MoholeAreaAres();
     const [game, player] = testGame(2, {aresExtension: true});
     card.play(player);

@@ -9,22 +9,22 @@ import {runAllActions, cast, testGame} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 
-describe('CuriosityII', function() {
+describe('CuriosityII', () => {
   let card: CuriosityII;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CuriosityII();
     [game, player, player2] = testGame(2, {aresExtension: true, aresHazards: false});
     game.phase = Phase.ACTION;
 
-    player.corporations.push(card);
+    player.playedCards.push(card);
     player.megaCredits = 2;
   });
 
-  it('Can pay 2 M€ to draw card when placing a tile on a non-empty space', function() {
+  it('Can pay 2 M€ to draw card when placing a tile on a non-empty space', () => {
     const nonEmptySpace = game.board.getAvailableSpacesOnLand(player).find((space) => space.bonus.length > 0)!;
     game.addCity(player, nonEmptySpace);
     player.cardsInHand = [];
@@ -42,7 +42,7 @@ describe('CuriosityII', function() {
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('Does not trigger when placing a tile on an empty space', function() {
+  it('Does not trigger when placing a tile on an empty space', () => {
     const emptySpace = game.board.getAvailableSpacesOnLand(player).find((space) => space.bonus.length === 0)!;
     game.addCity(player, emptySpace);
     runAllActions(game);
@@ -51,7 +51,7 @@ describe('CuriosityII', function() {
     expect(player.megaCredits).to.eq(2);
   });
 
-  it('Does not trigger when opponent places a tile', function() {
+  it('Does not trigger when opponent places a tile', () => {
     const nonEmptySpace = game.board.getAvailableSpacesOnLand(player2).find((space) => space.bonus.length > 0)!;
     game.addCity(player2, nonEmptySpace);
     runAllActions(game);

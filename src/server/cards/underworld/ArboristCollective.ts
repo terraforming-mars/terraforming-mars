@@ -6,19 +6,20 @@ import {ActiveCorporationCard} from '../corporation/CorporationCard';
 import {digit} from '../Options';
 import {CardResource} from '../../../common/CardResource';
 import {IPlayer} from '../../IPlayer';
-import {IProjectCard} from '../IProjectCard';
+import {isIProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 
 export class ArboristCollective extends ActiveCorporationCard {
   constructor() {
     super({
       name: CardName.ARBORIST_COLLECTIVE,
       tags: [Tag.PLANT],
-      startingMegaCredits: 36,
+      startingMegaCredits: 40,
       resourceType: CardResource.ACTIVIST,
 
       behavior: {
-        production: {plants: 1},
-        stock: {plants: 3},
+        production: {plants: 2},
+        stock: {plants: 2},
       },
 
       action: {
@@ -29,9 +30,9 @@ export class ArboristCollective extends ActiveCorporationCard {
 
       metadata: {
         cardNumber: 'UC05',
-        description: 'You start with 36 M€, 3 plants and 1 plant production.',
+        description: 'You start with 40 M€, 2 plants and 2 plant production.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(36).plants(3, {digit}).production((pb) => pb.plants(1)).br;
+          b.megacredits(40).plants(2, {digit}).production((pb) => pb.plants(2)).br;
           b.effect('After you play an event card with a base cost of 14 or less, put an activist resource on this card.', (eb) => {
             eb.text('≤').megacredits(14, {secondaryTag: Tag.EVENT}).startEffect.resource(CardResource.ACTIVIST);
           }).br;
@@ -43,11 +44,8 @@ export class ArboristCollective extends ActiveCorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    if (!player.isCorporation(this.name)) {
-      return;
-    }
-    if (card.type === CardType.EVENT && card.cost <= 14) {
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+    if (isIProjectCard(card) && card.type === CardType.EVENT && card.cost <= 14) {
       player.addResourceTo(this, {qty: 1, log: true});
     }
   }

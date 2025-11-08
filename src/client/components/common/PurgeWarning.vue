@@ -1,7 +1,8 @@
 <template>
   <span v-if="expectedPurgeTimeMs != 0">
-    <div :class="klass">{{ warningText }}
-      <a href="https://github.com/terraforming-mars/terraforming-mars/wiki/FAQ#purge">
+    <div :class="hoursLeft < 48 ? 'general-warning' : ''">
+      <span v-i18n>{{translateTextWithParams('Warning: This game will be purged in approximately ${0} hours.', [Math.floor(hoursLeft).toString()])}}</span>
+      <a href="https://github.com/terraforming-mars/terraforming-mars/wiki/FAQ#purge" target="_blank">
         <span v-i18n>Why?</span>
       </a>
     </div>
@@ -25,28 +26,9 @@ export default Vue.extend({
       const diffh = diffMs / 3_600_000;
       return diffh;
     },
-    purgeTime(): string {
-      const date = new Date(this.expectedPurgeTimeMs);
-      function pad(n: number): string {
-        return ('0' + n).slice(-2);
-      }
-      return '' + date.getFullYear() + '-' + pad(date.getMonth()+1) + '-' + pad(date.getDate()) + ' ' + pad(date.getHours()) + ':' + pad(date.getMinutes());
+    translateTextWithParams(): typeof translateTextWithParams {
+      return translateTextWithParams;
     },
-    soon(): boolean {
-      return this.hoursLeft < 48;
-    },
-    klass(): string {
-      return this.soon ? 'general-warning' : '';
-    },
-    warningText(): string {
-      if (this.soon) {
-        return translateTextWithParams('Warning: This game will be purged in approximately ${0} hours.', [Math.floor(this.hoursLeft).toString()]);
-      } else {
-        return translateTextWithParams('Warning: This server automatically purges unfinished games. Try to complete this game by ${0}.', [this.purgeTime]);
-      }
-    },
-  },
-  methods: {
   },
 });
 </script>

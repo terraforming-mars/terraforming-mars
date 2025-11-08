@@ -5,8 +5,8 @@ import {PROffice} from '../../../src/server/cards/turmoil/PROffice';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {testGame} from '../../TestGame';
 
-describe('PROffice', function() {
-  it('Should play', function() {
+describe('PROffice', () => {
+  it('Should play', () => {
     const card = new PROffice();
     const card2 = new Sponsors();
     const card3 = new AcquiredCompany();
@@ -21,6 +21,6 @@ describe('PROffice', function() {
     player.playedCards.push(card2, card3);
     card.play(player);
     expect(player.megaCredits).to.eq(3);
-    expect(player.getTerraformRating()).to.eq(15);
+    expect(player.terraformRating).to.eq(15);
   });
 });

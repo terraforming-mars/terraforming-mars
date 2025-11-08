@@ -76,7 +76,7 @@
 
   "Economic Espionage": "Szpiegostwo Gospodarcze",
   "Action: Spend 2 M€ to Add 1 data to ANY card.": "Akcja: Wydaj 2 M€ aby umieścić 1 jednostkę danych na dowolnej karcie.",
-  "1VP for every 3 data here.": "Otrzymujesz 1 PZ za każde 3 jednostki danych na tej karcie.",
+  "1 VP for every 3 data here.": "Otrzymujesz 1 PZ za każde 3 jednostki danych na tej karcie.",
 
   "Economic Help": "Pomoc Ekonomiczna",
   "Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. Increase your M€ production 1 step": "Podnieś rozwój społeczeństwa o najniższym poziomie o 3 poziomy (w przypadku remisu podnieś wszystkie najniższe tory o 2). Podnieś swoją produkcję M€ o 1 poziom.",
@@ -109,7 +109,7 @@
   "Interplanetary Transport": "Transport Kosmiczny",
   "Increase your M€ production 1 step for every offworld city tile.": "Podnieś swoją produkcję M€ o 1 poziom za każdy obszar miasta poza planszą Marsa.",
 
-  "Kickstarter": "Kickstarter",
+  "Kickstarter": "",
   "Choose a planetary track and raise it 3 steps. This card counts as a card with a tag of the chosen planet.": "Podnieś poziom rozwoju wybranego społeczeństwa o 3 poziomy. Symbol tej karty liczy się jako symbol wybranego społeczeństwa.",
 
   "Last Resort Ingenuity": "Potrzeba Matką Wynalazków",
@@ -158,8 +158,8 @@
   "Increase your plant production 2 steps. Gain 1 plant.": "Podnieś swoją produkcję roślinności o 2 poziomy. Otrzymujesz 1 jednostkę roślinności.",
 
   "Oumuamua Type Object Survey": "Przechwycenie Obiektu Typu Oumuamua",
-  "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "Dobierz 2 odkryte karty. Jeśli pierwsza z nich posiada symbol Nauki lub Mikrobów zagraj ją za darmo ignorując wymagania. Jeśli nie, ale posiada symboli Przestrzeni Kosmicznej, podnieś swoją produkcję energii o 3 poziomy. Jeśli pierwsza karta nie posiada żadnego z wymienionych symboli zastosuj tą zasadę do drugiej karty.",
-  "Requires 1 space tag and 1 science tag. Add 2 data to ANY card. ": "Musisz posiadać co najmniej 1 symbol Nauki i Przestrzeni Kosmicznej. Umieść 2 jednostki danych na dowolnej karcie.",
+  "Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.": "Dobierz 2 odkryte karty. Jeśli pierwsza z nich posiada symbol Nauki lub Mikrobów zagraj ją za darmo ignorując wymagania. Jeśli nie, ale posiada symboli Przestrzeni Kosmicznej, podnieś swoją produkcję energii o 3 poziomy. Jeśli pierwsza karta nie posiada żadnego z wymienionych symboli zastosuj tą zasadę do drugiej karty.",
+  "Requires 1 space tag and 1 science tag. Add 2 data to ANY card.": "Musisz posiadać co najmniej 1 symbol Nauki i Przestrzeni Kosmicznej. Umieść 2 jednostki danych na dowolnej karcie.",
 
   "Ozone Generators": "Generatory Ozonu",
   "Action: Spend 3 energy to gain 1 TR.": "Akcja: Wydaj 3 jednostki energii, aby podnieść swój WT o 1 poziom.",
@@ -214,7 +214,7 @@
   "Solar Storm": "Burza Słoneczna",
   "Every player loses 2 plants. Remove up to 3 data from any player. Raise your heat production 1 step. Raise the temperature 1 step.": "Każdy gracz traci po 2 jednostki roślinności. Usuń do 3 jednostek danych należących do dowolnego gracza. Podnieś swoją produkcję ciepła o 1 poziom. Podnieś temperaturę o 1 poziom.",
 
-  "Solarpedia": "Solarpedia",
+  "Solarpedia": "",
   "Action: Add 2 data to ANY card.": "Akcja: Umieść 2 jednostki danych na dowolnej karcie.",
   "Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to ANY card. 1 VP for every 6 data resources here.": "Musisz posiadać co najmniej po 1 symbolu Wenus, Ziemi, Marsa i Jowisza. Umieść 2 jednostki danych na dowolnej karcie. Otrzymujesz 1 PZ za każde 6 jednostek danych na tej karcie.",
 

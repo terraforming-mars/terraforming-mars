@@ -10,14 +10,14 @@ import {newProjectCard} from '../../../src/server/createCard';
 import {AerialMappers} from '../../../src/server/cards/venusNext/AerialMappers';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
 
-describe('Venus', function() {
+describe('Venus', () => {
   let venus: Venus;
   let aerialMappers: AerialMappers;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     venus = new Venus();
     aerialMappers = new AerialMappers();
     [game, player, player2] = testGame(2, {coloniesExtension: true, venusNextExtension: true});
@@ -31,7 +31,7 @@ describe('Venus', function() {
     {card: CardName.AERIAL_MAPPERS, expected: true},
   ] as const;
   for (const run of activateRuns) {
-    it('Should activate ' + JSON.stringify(run), function() {
+    it('Should activate ' + JSON.stringify(run), () => {
       if (run.card !== undefined) {
         player.playCard(newProjectCard(run.card)!);
       }
@@ -39,7 +39,7 @@ describe('Venus', function() {
     });
   }
 
-  it('Should build', function() {
+  it('Should build', () => {
     expect(game.getVenusScaleLevel()).eq(0);
 
     player.playCard(aerialMappers);
@@ -54,7 +54,7 @@ describe('Venus', function() {
     expect(game.getVenusScaleLevel()).eq(2);
   });
 
-  it('Should build, reds', function() {
+  it('Should build, reds', () => {
     [game, player, player2] = testGame(2, {coloniesExtension: true, venusNextExtension: true, turmoilExtension: true});
     game.colonies.push(venus);
     venus.isActive = true;
@@ -88,7 +88,7 @@ describe('Venus', function() {
     {position: 6, expected: 4},
   ];
   for (const run of tradeRuns) {
-    it('Should trade ' + JSON.stringify(run), function() {
+    it('Should trade ' + JSON.stringify(run), () => {
       player.playedCards.push(aerialMappers);
       venus.isActive = true;
       venus.trackPosition = run.position;
@@ -101,7 +101,7 @@ describe('Venus', function() {
     });
   }
 
-  it('Should give trade bonus', function() {
+  it('Should give trade bonus', () => {
     const deuteriumExport = new DeuteriumExport();
     player.playedCards.push(aerialMappers);
     player2.playedCards.push(deuteriumExport);

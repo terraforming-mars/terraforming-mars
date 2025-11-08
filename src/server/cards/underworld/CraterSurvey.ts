@@ -5,7 +5,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Tag} from '../../../common/cards/Tag';
 import {digit} from '../Options';
-import {CardResource} from '../../../common/CardResource';
 
 export class CraterSurvey extends Card implements IProjectCard {
   constructor() {
@@ -13,19 +12,18 @@ export class CraterSurvey extends Card implements IProjectCard {
       name: CardName.CRATER_SURVEY,
       type: CardType.EVENT,
       cost: 5,
-      tags: [Tag.MARS],
+      tags: [Tag.SCIENCE],
 
       behavior: {
-        addResourcesToAnyCard: {count: 2, type: CardResource.DATA},
-        underworld: {identify: 4},
+        underworld: {identify: {count: 4, claim: 1}},
       },
 
       metadata: {
-        cardNumber: 'U69',
+        cardNumber: 'U069',
         renderData: CardRenderer.builder((b) => {
-          b.resource(CardResource.DATA, 2).asterix().identify(4, {digit});
+          b.identify(4, {digit}).claim(1);
         }),
-        description: 'Add 2 data resources to ANOTHER card. Identify 4 underground resources.',
+        description: 'Identify 4 underground resources. Claim one of them.',
       },
     });
   }

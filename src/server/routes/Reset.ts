@@ -43,7 +43,7 @@ export class Reset extends Handler {
     }
 
     // While prototyping, this is only available for solo games
-    if (game.getPlayers().length > 1) {
+    if (game.players.length > 1) {
       throw new Error('Reset is only available for solo games at the moment.');
     }
 
@@ -57,7 +57,7 @@ export class Reset extends Handler {
       responses.notFound(req, res);
       return;
     }
-    if (player.game.activePlayer !== player.id) {
+    if (player.game.activePlayer.id !== player.id) {
       responses.badRequest(req, res, 'Not the active player');
       return;
     }
@@ -67,7 +67,7 @@ export class Reset extends Handler {
       if (game !== undefined) {
         const reloadedPlayer = game.getPlayerById(player.id);
         game.inputsThisRound = 0;
-        responses.writeJson(res, Server.getPlayerModel(reloadedPlayer));
+        responses.writeJson(res, ctx, Server.getPlayerModel(reloadedPlayer));
         return;
       }
     } catch (err) {

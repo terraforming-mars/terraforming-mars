@@ -9,23 +9,23 @@ import {MAX_TEMPERATURE} from '../../../../src/common/constants';
 import {testGame} from '../../../TestGame';
 import {IGame} from '../../../../src/server/IGame';
 
-describe('ConvertHeat', function() {
+describe('ConvertHeat', () => {
   let card: ConvertHeat;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ConvertHeat();
     [game, player] = testGame(2, {turmoilExtension: true});
   });
 
-  it('Can not act without heat', function() {
+  it('Can not act without heat', () => {
     expect(card.canAct(player)).eq(false);
     player.heat = 7;
     expect(card.canAct(player)).eq(false);
   });
 
-  it('Can not act with reds', function() {
+  it('Can not act with reds', () => {
     player.heat = 8;
     game.phase = Phase.ACTION;
     game.turmoil!.rulingParty = new Reds();
@@ -37,27 +37,27 @@ describe('ConvertHeat', function() {
     expect(card.canAct(player)).eq(true);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.heat = 8;
     expect(card.canAct(player)).eq(true);
     expect(churn(card.action(player), player)).eq(undefined);
     expect(game.getTemperature()).eq(-28);
   });
 
-  it('Spending heat when the global parameter is at its goal is a valid stall action', function() {
+  it('Spending heat when the global parameter is at its goal is a valid stall action', () => {
     player.heat = 8;
 
     expect(card.canAct(player)).eq(true);
 
     setTemperature(game, MAX_TEMPERATURE);
 
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(card.canAct(player)).eq(true);
 
     cast(card.action(player), undefined);
 
     expect(game.getTemperature()).eq(MAX_TEMPERATURE);
     expect(player.heat).eq(0);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
   });
 });

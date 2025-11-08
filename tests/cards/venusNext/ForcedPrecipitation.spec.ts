@@ -6,21 +6,21 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('ForcedPrecipitation', function() {
+describe('ForcedPrecipitation', () => {
   let card: ForcedPrecipitation;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ForcedPrecipitation();
     [game, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
   });
 
-  it('Should act - both actions available', function() {
+  it('Should act - both actions available', () => {
     player.playedCards.push(card);
     player.megaCredits = 10;
 
@@ -39,7 +39,7 @@ describe('ForcedPrecipitation', function() {
     expect(game.getVenusScaleLevel()).to.eq(2);
   });
 
-  it('Should act - only one action available', function() {
+  it('Should act - only one action available', () => {
     player.playedCards.push(card);
     player.megaCredits = 0;
     player.addResourceTo(card, 2);

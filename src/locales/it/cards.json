@@ -17,7 +17,6 @@
     "3 VPs if you have one or more science resources here.": "Il livello di Ossigeno deve essere minore o uguale al 6%. 3 PV se hai una o più risorse Scienza su questa carta.",
 
     "Inventors' Guild": "Associazione degli Inventori",
-    "Action: Look at the top card and either buy it or discard it": "Azione: guarda la prima carta del mazzo e comprala, oppure scartala.",
 
     "Martian Rails": "Ferrovie Marziane",
     "Action: Spend 1 energy to gain 1 M€ for each city tile ON MARS.": "Azione: spendi una risorsa Energia per ottenere 1 M€ per ogni tessera Città SU MARTE.",
@@ -37,7 +36,6 @@
 
     "Space Elevator": "Montacarichi Spaziale",
     "Action: Spend 1 steel to gain 5 M€.": "Azione: spendi una risorsa Acciaio per ottenere 5 M€.",
-    "Increase your titanium production 1 step.": "Incrementa la tua Produzione di Titanio di 1 livello.",
 
     "Development Center": "Centro di Sviluppo",
     "Action: Spend 1 energy to draw a card.": "Azione: spendi 1 risorsa Energia per pescare 1 carta.",
@@ -77,7 +75,6 @@
     "1 VP per animal on this card.":"1 PV per ogni Animale su questa carta.",
 
     "Space Station": "Stazione Spaziale",
-    "Effect: When you play a space card, you pay 2 M€ less for it.": "Effetto: quando giochi una carta Spazio, la paghi 2 M€ in meno.",
 
     "Eos Chasma National Park": "Parco Nazionale dell'Eos Chasma",
     "Requires -12 C or warmer. Add 1 animal TO ANY ANIMAL CARD. Gain 3 plants. Increase your M€ production 2 steps.": "Richiede una Temperatura di -12°C o superiore. Aggiungi 1 Animale AD UNA QUALUNQUE CARTA ANIMALE. Ottieni 3 Piante. Incrementa la tua Produzione di M€ di 2 livelli.",
@@ -156,16 +153,14 @@
     "Action: Add 1 microbe to this card.": "Azione: aggiungi 1 Microbo a questa carta.",
     "1 VP per 4 Microbes on this card.": "1 PV per ogni 4 Microbi su questa carta.",
 
-    "Virus": "Virus",
+    "Virus": "",
     "Remove up to 2 animals or 5 plants from any player.": "Rimuovi fino a 2 Animali oppure fino a 5 Piante da un qualunque giocatore.",
 
     "Miranda Resort": "Resort su Miranda",
     "Increase your M€ production 1 step for each Earth tag you have.": "Incrementa la tua Produzione di M€ di 1 livello per ogni simbolo Terra in tuo possesso.",
 
     "Fish": "Pesce",
-    "Action: Add 1 animal to this card.": "Azione: aggiungi un Animale a questa carta.",
     "(Requires +2 C° or warmer. Decrease any plant production 1 step.)": "(Richiede una Temperatura maggiore o uguale a +2°C. Diminuisci una qualunque Produzione di Piante di 1 livello.)",
-    "1 VP for each animal on this card.": "1 PV per ogni Animale su questa carta.",
 
 
     "Lake Marineris": "Lago Marineris",
@@ -247,7 +242,6 @@
     "Place 2 ocean tiles.": "Colloca due tessere Oceano.",
 
     "Quantum Extractor": "Estrattore Quantistico",
-    "Effect: When you play a space card, you pay 2 M€ less for it.": "Effetto: quando giochi una carta Spazio, la paghi 2 M€ in meno.",
     "Requires 4 science tags. Increase your energy production 4 steps.": "Richiede 4 simboli Scienza. Incrementa la tua Produzione di Energia di 4 livelli.",
 
     "Giant Ice Asteroid": "Asteroide Ghiacciato Gigante",
@@ -255,7 +249,6 @@
 
     "Ganymede Colony": "Colonia di Ganimede",
     "(Place a city tile ON THE RESERVED AREA.)": "(Colloca una tessera Città SULL'AREA RISERVATA.)",
-    "1 VP per Jovian tag you have.": "1 PV per ogni simbolo Gioviano in tuo possesso.",
 
     "Callisto Penal Mines": "Miniere Penali di Callisto",
     "Increase your M€ production 3 steps.": "Incrementa la tua Produzione di M€ di 3 livelli.",
@@ -347,7 +340,6 @@
     "Raise your TR 2 steps.": "Incrementa il tuo TT di 2 livelli.",
 
     "Solar Power": "Energia Solare",
-    "Increase your energy production 1 step.": "Incrementa la tua Produzione di Energia di 1 livello.",
 
     "Breathing Filters": "Filtri per la Respirazione",
     "Requires 7% oxygen.": "Richiede almeno il 7% di Ossigeno.",
@@ -609,7 +601,7 @@
 
   "Immigration Shuttles": "Navette per l'Immigrazione",
   "(Increase your M€ production 5 steps.)": "(Incrementa la tua Produzione di M€ di 5 livelli.)",
-  "1 VP for every 3rd City in play.": "1 PV per ogni terna di Città in gioco.",
+  "1 VP for every 3rd city in play.": "1 PV per ogni terna di Città in gioco.",
 
   "Place this tile.": "Colloca questa tessera",
 
@@ -623,7 +615,7 @@
   "Underground Detonations": "Detonazioni Sotterranee",
   "Action: Spend 10 M€ to increase your heat production 2 steps.": "Azione: spendi 10 M€ per incrementare la tua Produzione di Calore di 2 livelli.",
 
-  "Soletta": "Soletta",
+  "Soletta": "",
   "Increase your heat production 7 steps.": "Incrementa la tua Produzione di Calore di 7 livelli.",
 
   "Technology Demonstration": "Dimostrazione di Tecnologia",

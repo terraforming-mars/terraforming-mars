@@ -5,8 +5,8 @@ import {Units} from '../../../src/common/Units';
 import {cast, runAllActions} from '../../TestingUtils';
 import {assertPlaceCity} from '../../assertions';
 
-describe('SelfSufficientSettlement', function() {
-  it('Should play', function() {
+describe('SelfSufficientSettlement', () => {
+  it('Should play', () => {
     const [game, player] = testGame(1);
     const card = new SelfSufficientSettlement();
 

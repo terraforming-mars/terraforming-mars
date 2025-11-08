@@ -7,26 +7,30 @@ export class Hygiea extends Colony {
   constructor() {
     super({
       name: ColonyName.HYGIEA,
-      description: [
-        'Choose opponent to discard 1 card',
-        'Steal 3 units of the listed type',
-        'Gain 3 M€',
-      ],
-      buildType: ColonyBenefit.OPPONENT_DISCARD,
-      tradeType: ColonyBenefit.STEAL_RESOURCES,
-      tradeQuantity: [3, 3, 3, 3, 3, 3, 3],
-      tradeResource: [
-        Resource.MEGACREDITS,
-        Resource.MEGACREDITS,
-        Resource.HEAT,
-        Resource.ENERGY,
-        Resource.PLANTS,
-        Resource.STEEL,
-        Resource.TITANIUM,
-      ],
-      colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
-      colonyBonusQuantity: 3,
-      colonyBonusResource: Resource.MEGACREDITS,
+      build: {
+        description: 'Choose opponent to discard 1 card',
+        type: ColonyBenefit.OPPONENT_DISCARD,
+      },
+      trade: {
+        description: 'Steal 3 units of the listed type',
+        type: ColonyBenefit.STEAL_RESOURCES,
+        quantity: [3, 3, 3, 3, 3, 3, 3],
+        resource: [
+          Resource.MEGACREDITS,
+          Resource.MEGACREDITS,
+          Resource.HEAT,
+          Resource.ENERGY,
+          Resource.PLANTS,
+          Resource.STEEL,
+          Resource.TITANIUM,
+        ],
+      },
+      colony: {
+        description: 'Gain 3 M€',
+        type: ColonyBenefit.GAIN_RESOURCES,
+        quantity: 3,
+        resource: Resource.MEGACREDITS,
+      },
       shouldIncreaseTrack: 'ask',
     });
   }

@@ -3,12 +3,14 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {Tag} from '../../../common/cards/Tag';
 
 export class TunnelingSubcontractor extends Card implements IProjectCard {
   constructor() {
     super({
       type: CardType.AUTOMATED,
       name: CardName.TUNNELING_SUBCONTRACTOR,
+      tags: [Tag.CRIME],
       cost: 9,
 
       behavior: {
@@ -16,7 +18,7 @@ export class TunnelingSubcontractor extends Card implements IProjectCard {
       },
 
       metadata: {
-        cardNumber: 'U18',
+        cardNumber: 'U018',
         renderData: CardRenderer.builder((b) => {
           b.corruption(1).excavate(1);
         }),

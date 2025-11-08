@@ -25,7 +25,7 @@ export interface ITestDatabase extends IDatabase {
    */
   completedTime(gameId: GameId): Promise<number | undefined>;
   /**
-   *
+   * Updates completed_game with the specified time.
    */
-   setCompletedTime(gameId: GameId, timestampSeconds: number): Promise<unknown>;
+  setCompletedTime(gameId: GameId, timestampSeconds: number): Promise<unknown>;
 }

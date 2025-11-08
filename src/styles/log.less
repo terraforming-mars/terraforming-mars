@@ -53,8 +53,8 @@
         list-style-type: none;
 
         span {
-            margin-right: 5px;
-            font-size: 15px;
+            // margin-right: 5px;
+            // font-size: 15px;
         }
 
     }
@@ -75,6 +75,7 @@
     padding: 2px 10px;
     border-radius: 2px;
     font-weight: bold;
+    margin-right: 5px;
 }
 
 .log-card {
@@ -90,10 +91,35 @@
 
 .log-tag {
   display: inline-block;
+  background-position: 0; // Override any tag-specific background position, which science currently has
   background-size: 18px;
   width: 18px;
   height: 18px;
   margin: 0 -6px -4px 0px;
+}
+
+.log-excavation-token {
+    color: #fff;
+    background: linear-gradient(-60deg, #805700 10%, #816a4c, #805700 90%);    // TODO(kberg): Add a pointer when this is clickable?
+    // cursor: pointer;
+    padding: 2px 5px;
+    border-radius: 2px;
+    font-family: Ubuntu;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.log-space-id {
+    color: black;
+    background: linear-gradient(-60deg, #a0a0a7 10%, #c0c0c0, #a0a0a7 90%);
+    cursor: pointer;
+    padding: 2px 5px;
+    border-radius: 2px;
+    font-family: Ubuntu;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
 }
 
 .log-resource-megacredits {

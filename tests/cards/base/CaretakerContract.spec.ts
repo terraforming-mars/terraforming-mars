@@ -11,40 +11,40 @@ import {StormCraftIncorporated} from '../../../src/server/cards/colonies/StormCr
 import {testGame} from '../../TestGame';
 import {setTemperature} from '../../TestingUtils';
 
-describe('CaretakerContract', function() {
+describe('CaretakerContract', () => {
   let card: CaretakerContract;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CaretakerContract();
     [game, player] = testGame(2);
   });
 
-  it('Cannot play or act', function() {
+  it('Cannot play or act', () => {
     expect(card.canPlay(player)).is.not.true;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     setTemperature(game, 0);
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Cannot act', function() {
+  it('Cannot act', () => {
     player.heat = 7;
     expect(card.canAct(player)).is.false;
     player.heat = 8;
     expect(card.canAct(player)).is.true;
   });
-  it('Should act', function() {
+  it('Should act', () => {
     player.heat = 8;
     card.action(player);
     expect(player.heat).to.eq(0);
-    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.terraformRating).to.eq(21);
   });
 
-  it('Cannot act if cannot afford reds tax', function() {
+  it('Cannot act if cannot afford reds tax', () => {
     [game, player] = testGame(1, {turmoilExtension: true});
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
@@ -64,10 +64,10 @@ describe('CaretakerContract', function() {
     expect(card.canAct(player)).is.true;
   });
 
-  it('Do not double-account heat with Helion using Reds tax', function() {
+  it('Do not double-account heat with Helion using Reds tax', () => {
     const [game, player] = testGame(1, {turmoilExtension: true});
     const helion = new Helion();
-    player.corporations.push(helion);
+    player.playedCards.push(helion);
     helion.play(player);
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
@@ -88,9 +88,9 @@ describe('CaretakerContract', function() {
     expect(card.canAct(player)).is.false;
   });
 
-  it('Can use Stormcraft Incorporated', function() {
+  it('Can use Stormcraft Incorporated', () => {
     const stormcraft = new StormCraftIncorporated();
-    player.corporations.push(stormcraft);
+    player.playedCards.push(stormcraft);
     stormcraft.play(player);
     stormcraft.resourceCount = 3;
     player.heat = 1;

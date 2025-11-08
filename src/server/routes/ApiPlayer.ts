@@ -29,9 +29,14 @@ export class ApiPlayer extends Handler {
       return;
     }
     try {
-      ctx.ipTracker.addParticipant(playerId, ctx.ip);
       const player = game.getPlayerById(playerId);
-      responses.writeJson(res, Server.getPlayerModel(player));
+      if (!this.isUser(player.user, ctx)) {
+        responses.notAuthorized(req, res);
+        return;
+      }
+
+      ctx.ipTracker.addParticipant(playerId, ctx.ip);
+      responses.writeJson(res, ctx, Server.getPlayerModel(player));
     } catch (err) {
       console.warn(`unable to find player ${playerId}`, err);
       responses.notFound(req, res);

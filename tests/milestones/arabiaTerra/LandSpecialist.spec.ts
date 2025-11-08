@@ -9,7 +9,7 @@ import {TileType} from '../../../src/common/TileType';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {testGame} from '../../TestingUtils';
 
-describe('LandSpecialist', function() {
+describe('LandSpecialist', () => {
   let milestone: LandSpecialist;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -17,7 +17,7 @@ describe('LandSpecialist', function() {
   let board: Board;
   let spaces: ReadonlyArray<Space>;
 
-  beforeEach(function() {
+  beforeEach(() => {
     milestone = new LandSpecialist();
     [game, player, player2] = testGame(2, {boardName: BoardName.ARABIA_TERRA, moonExpansion: true});
     board = game.board;

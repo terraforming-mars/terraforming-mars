@@ -7,8 +7,8 @@ import {Game} from '../src/server/Game';
 import {LogHelper} from '../src/server/LogHelper';
 import {TestPlayer} from './TestPlayer';
 
-describe('LogHelper', function() {
-  it('logs drawn cards by card', function() {
+describe('LogHelper', () => {
+  it('logs drawn cards by card', () => {
     const player1 = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     const card1 = new Algae();
@@ -41,7 +41,7 @@ describe('LogHelper', function() {
     expect(msg.message).to.eq('${0} drew ${1}, ${2} and ${3}');
   });
 
-  it('logs drawn cards by card name', function() {
+  it('logs drawn cards by card name', () => {
     const player1 = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     const card1 = new Algae();
@@ -74,7 +74,7 @@ describe('LogHelper', function() {
     expect(msg.message).to.eq('${0} drew ${1}, ${2} and ${3}');
   });
 
-  it('logs drawn cards privately', function() {
+  it('logs drawn cards privately', () => {
     const player1 = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     const card1 = new Algae();

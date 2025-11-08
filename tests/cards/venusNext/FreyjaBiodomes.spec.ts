@@ -10,28 +10,28 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast, setVenusScaleLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('FreyjaBiodomes', function() {
+describe('FreyjaBiodomes', () => {
   let card: FreyjaBiodomes;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new FreyjaBiodomes();
     [game, player] = testGame(2);
   });
 
-  it('Can not play without energy production', function() {
+  it('Can not play without energy production', () => {
     setVenusScaleLevel(game, 10);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can not play if Venus requirement not met', function() {
+  it('Can not play if Venus requirement not met', () => {
     player.production.add(Resource.ENERGY, 1);
     setVenusScaleLevel(game, 8);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play - single target', function() {
+  it('Should play - single target', () => {
     const card2 = new Extremophiles();
     player.playedCards.push(card2);
 
@@ -45,7 +45,7 @@ describe('FreyjaBiodomes', function() {
     expect(card2.resourceCount).to.eq(2);
   });
 
-  it('Should play - multiple targets', function() {
+  it('Should play - multiple targets', () => {
     const card2 = new Extremophiles();
     const card3 = new VenusianAnimals();
     player.production.add(Resource.ENERGY, 1);

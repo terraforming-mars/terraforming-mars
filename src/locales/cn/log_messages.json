@@ -24,8 +24,6 @@
     "${0} acted as World Government and increased oxygen level": "${0} 作为世界政府,提升了氧气浓度",
     "${0} acted as World Government and increased temperature": "${0} 作为世界政府,提升了火星温度",
     "${0} loses ${1} resource(s) on ${2} by ${3}": "${0} 被 ${3} 的行动导致 在 ${2} 上失去了 ${1} 资源 ",
-    "${0}'s ${1} production modified by ${2} by ${3}": "${0} 的 ${1} 产量被 ${3} 导致 ${2}",
-    "${0}'s ${1} amount modified by ${2} by ${3}": "${0} 的 ${1} 资源值被 ${3} 导致 ${2}",
     "${0} received ${1} M€ from ${2} owner (${3})": "${0} 获得 ${1} M€ 从 ${2} 拥有者(${3})",
     "${0} copied ${1} production with ${2}": "${0} 用 ${2} 复制 ${1} 的产量 ",
     "${0} used ${1} action with ${2}": "${0} 用 ${2} 执行 ${1} 行动 ",
@@ -65,8 +63,7 @@
     "${0} drew ${1}, ${2} and ${3}": "${0} 摸了 ${1}, ${2} 以及 ${3}",
     "${0} sold ${1} patents":"${0} 卖了 ${1} 张专利牌",
     "${0}'s ${1} production increased by ${2}":"${0}的 ${1}产量 增加 ${2}",
-    "${0} ${1} ${2} on row ${3} position ${4}": "${0} 在第 ${3} 排的第 ${4} 个位置上 ${1} ${2}",
-
+    "${0} ${1} ${2} at ${3}": "${0} 在 ${3} ${1} ${2}",
     "gain 1 TR":"获得1改造度",
     "draw a card" :"抽一张牌",
 

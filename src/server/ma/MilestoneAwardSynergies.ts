@@ -1,7 +1,8 @@
-import {MilestoneName} from '../../common/ma/MilestoneName';
-import {AwardName} from '../../common/ma/AwardName';
-import {ALL_AWARDS} from '../awards/Awards';
-import {ALL_MILESTONES} from '../milestones/Milestones';
+import {MilestoneName, milestoneNames} from '../../common/ma/MilestoneName';
+import {AwardName, awardNames} from '../../common/ma/AwardName';
+import {milestoneManifest} from '../milestones/Milestones';
+import {BoardName} from '../../common/boards/BoardName';
+import {awardManifest} from '../awards/Awards';
 
 // Higher synergies represent similar milestones or awards. For instance, Terraformer rewards for high TR
 // and the Benefactor award is given to the player with the highest TR. Their synergy weight is 9, very high.
@@ -233,7 +234,7 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['A. Manufacturer', 'Tycoon', 4],
   ['Zoologist', 'Tycoon', 2],
   ['Biologist', 'Tycoon', 1],
-  ['T. Economizer', 'Tycoon', 2],
+  ['Incorporator', 'Tycoon', 2],
   ['Warmonger', 'Tycoon', 1],
   ['Forecaster', 'Tycoon', 1],
   ['Naturalist', 'Tycoon', 1],
@@ -297,7 +298,7 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['Colonizer', 'Banker', 1],
   ['Pioneer', 'Banker', 1],
   ['Capitalist', 'Banker', 2],
-  ['T. Economizer', 'Banker', 1],
+  ['Incorporator', 'Banker', 1],
   ['Economizer', 'Thermalist', 8],
   ['Firestarter', 'Thermalist', 7],
   ['Naturalist', 'Thermalist', 6],
@@ -375,7 +376,7 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['A. Engineer', 'Magnate', 1],
   ['Botanist', 'Magnate', 1],
   ['Biologist', 'Magnate', 1],
-  ['T. Economizer', 'Magnate', 2],
+  ['Incorporator', 'Magnate', 2],
   ['Forecaster', 'Magnate', 1],
   ['Naturalist', 'Magnate', 1],
   ['Voyager', 'Magnate', 1],
@@ -521,7 +522,7 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['Tourist', 'Irrigator', 1],
   ['Urbanist', 'Irrigator', 1],
   ['Edgedancer', 'Irrigator', 1],
-  ['T. Economizer', 'Capitalist', 2],
+  ['Incorporator', 'Capitalist', 2],
   ['Voyager', 'Capitalist', 1],
   ['A. Manufacturer', 'Entrepreneur', 1],
   ['Lunar Magnate', 'Full Moon', 9],
@@ -548,8 +549,8 @@ const synergiesData: Array<[MilestoneName | AwardName, MilestoneName | AwardName
   ['Naturalist', 'Zoologist', 2],
 
   ['Risktaker', 'Kingpin', 9],
-  ['Tunneler', 'EdgeLord', 8],
-  ['EdgeLord', 'Edgedancer', 9],
+  // ['Tunneler', 'Excavator', 8],
+  // ['Excavator', 'Edgedancer', 9],
 ];
 
 // This map uses keys of the format "X|Y" where X and Y are MA names. Entries are stored as "X|Y"
@@ -574,13 +575,18 @@ class SynergyMap {
 
 export const synergies: SynergyMap = new SynergyMap();
 
-ALL_MILESTONES.forEach((ma) => {
-  // synergies.set(ma.name, 'Gambler', 1);
-  synergies.set(ma.name, ma.name, 1000);
+const VBN = [...milestoneManifest.boards[BoardName.VASTITAS_BOREALIS_NOVUS], ...awardManifest.boards[BoardName.VASTITAS_BOREALIS_NOVUS]];
+milestoneNames.forEach((name) => {
+  for (const entry of VBN) {
+    synergies.set(name, entry, 5);
+  }
+  synergies.set(name, name, 1000);
 });
-ALL_AWARDS.forEach((ma) => {
-  // synergies.set(ma.name, 'Gambler', 1);
-  synergies.set(ma.name, ma.name, 1000);
+awardNames.forEach((name) => {
+  for (const entry of VBN) {
+    synergies.set(name, entry, 5);
+  }
+  synergies.set(name, name, 1000);
 });
 
 for (const [a, b, weight] of synergiesData) {

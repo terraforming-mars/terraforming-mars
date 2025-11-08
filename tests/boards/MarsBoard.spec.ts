@@ -9,13 +9,14 @@ import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/server/game/GameOptio
 import {ArcadianCommunities} from '../../src/server/cards/promo/ArcadianCommunities';
 import {testGame} from '../TestGame';
 import {AresHandler} from '../../src/server/ares/AresHandler';
+import {toID} from '../../src/common/utils/utils';
 
-describe('MarsBoard', function() {
+describe('MarsBoard', () => {
   let board: MarsBoard;
   let player: TestPlayer;
   let player2: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     board = TharsisBoard.newInstance(DEFAULT_GAME_OPTIONS, new SeededRandom(0));
     player = TestPlayer.BLUE.newPlayer();
     player2 = TestPlayer.RED.newPlayer();
@@ -26,12 +27,12 @@ describe('MarsBoard', function() {
     (player2 as any).game = {gameOptions};
   });
 
-  it('Can have greenery placed on any available land when player has no tile placed', function() {
+  it('Can have greenery placed on any available land when player has no tile placed', () => {
     const availableSpaces = board.getAvailableSpacesForGreenery(player);
     expect(availableSpaces).has.lengthOf(board.getAvailableSpacesOnLand(player).length);
   });
 
-  it('Can have greenery placed on any available land when player has a tile placed that is land locked', function() {
+  it('Can have greenery placed on any available land when player has a tile placed that is land locked', () => {
     board.spaces[2].player = player;
     board.spaces[2].tile = {tileType: TileType.GREENERY};
     board.spaces[7].player = player2;
@@ -42,7 +43,7 @@ describe('MarsBoard', function() {
     expect(availableSpaces).has.lengthOf(board.getAvailableSpacesOnLand(player).length);
   });
 
-  it('Can only place greenery adjacent to a tile a player owns', function() {
+  it('Can only place greenery adjacent to a tile a player owns', () => {
     board.spaces[2].player = player;
     board.spaces[2].tile = {tileType: TileType.GREENERY};
     board.spaces[7].player = player2;
@@ -58,7 +59,7 @@ describe('MarsBoard', function() {
   // }
 
 
-  it('getOceanSpaces', function() {
+  it('getOceanSpaces', () => {
     expect(board.getOceanSpaces()).is.empty;
 
     const space1 = board.spaces[1];
@@ -89,7 +90,7 @@ describe('MarsBoard', function() {
   });
 
   it('edges', () => {
-    expect(board.getEdges().map((space) => space.id)).to.have.members(
+    expect(board.getEdges().map(toID)).to.have.members(
       [
         '03', '04', '05', '06', '07',
         '08', '13',
@@ -106,7 +107,7 @@ describe('MarsBoard', function() {
   it('Do not include land claimed hazard spaces for Arcadian Communities', () => {
     const card = new ArcadianCommunities();
     const [/* game */, player] = testGame(2, {aresExtension: true, aresHazards: true});
-    player.corporations.push(card);
+    player.playedCards.push(card);
     const board = player.game.board;
     const space = board.spaces.find(AresHandler.hasHazardTile);
     space!.player = player;

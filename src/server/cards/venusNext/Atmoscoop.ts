@@ -41,17 +41,14 @@ export class Atmoscoop extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {
-    const remainingTemperatureSteps = (constants.MAX_TEMPERATURE - player.game.getTemperature()) / 2;
-    const remainingVenusSteps = (constants.MAX_VENUS_SCALE - player.game.getVenusScaleLevel()) / 2;
-    const stepsRaised = Math.min(remainingTemperatureSteps, remainingVenusSteps, 2);
-
     if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp01')) {
+      const cost = player.getCardCost(this);
+      if (!player.canAfford(cost)) {
+        return false;
+      }
       // TODO(kberg): this is not correct, because the titanium can't be used for the reds cost.
-      // TODO(kberg): this.cost does not take the card discount into account.
-      return player.canAfford({
-        cost: this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised,
-        titanium: true,
-      });
+      return player.canAfford({cost, tr: {temperature: 2}, titanium: true}) ||
+        player.canAfford({cost, tr: {venus: 2}, titanium: true});
     }
 
     return true;
@@ -71,8 +68,8 @@ export class Atmoscoop extends Card implements IProjectCard {
       game.increaseVenusScaleLevel(player, 2);
       return undefined;
     });
-    const increaseTempOrVenus = new OrOptions(increaseTemp, increaseVenus);
-    increaseTempOrVenus.title = 'Choose global parameter to raise';
+    const increaseTempOrVenus = new OrOptions(increaseTemp, increaseVenus)
+      .setTitle('Choose global parameter to raise');
 
     if (!this.temperatureIsMaxed(game) && this.venusIsMaxed(game)) {
       player.game.increaseTemperature(player, 2);

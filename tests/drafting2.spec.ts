@@ -9,7 +9,8 @@ import {SelectCard} from '../src/server/inputs/SelectCard';
 import {SerializedGame} from '../src/server/SerializedGame';
 import {testGame} from './TestGame';
 import {InMemoryDatabase} from './testing/InMemoryDatabase';
-import {cast, finishGeneration, toName} from './TestingUtils';
+import {cast, finishGeneration} from './TestingUtils';
+import {toName} from '../src/common/utils/utils';
 import {restoreTestDatabase, setTestDatabase} from './testing/setup';
 
 // Tests for deserializing a game at the start of the drafting phase.
@@ -27,7 +28,7 @@ describe('drafting and serialization', () => {
 
   it('2 player - project draft', () => {
     const game = Game.deserialize(stored as unknown as SerializedGame);
-    const [p1, p2] = game.getPlayers();
+    const [p1, p2] = game.players;
     const p1w = cast(p1.getWaitingFor(), SelectCard);
     const p2w = cast(p2.getWaitingFor(), SelectCard);
     expect(game.phase).eq(Phase.DRAFTING);
@@ -73,7 +74,7 @@ describe('drafting and serialization', () => {
 
     expect(game2.phase).eq(Phase.DRAFTING);
     expect(game2.draftRound).eq(1);
-    const players2 = game2.getPlayers();
+    const players2 = game2.players;
 
     const selectCard = cast(players2[0].getWaitingFor(), SelectCard);
     selectCard.process({type: 'card', cards: [selectCard.cards[0].name]});
@@ -776,7 +777,6 @@ const stored = {
       'canUseHeatAsMegaCredits': true,
       'canUsePlantsAsMegaCredits': false,
       'canUseTitaniumAsMegacredits': false,
-      'canUseCorruptionAsMegacredits': false,
       'actionsTakenThisRound': 0,
       'actionsThisGeneration': [],
       'pendingInitialActions': [],
@@ -870,7 +870,6 @@ const stored = {
       'canUseHeatAsMegaCredits': false,
       'canUsePlantsAsMegaCredits': false,
       'canUseTitaniumAsMegacredits': false,
-      'canUseCorruptionAsMegacredits': false,
       'actionsTakenThisRound': 0,
       'actionsThisGeneration': [],
       'pendingInitialActions': [],

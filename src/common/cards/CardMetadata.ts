@@ -1,4 +1,4 @@
-import {ICardRenderDynamicVictoryPoints} from './render/ICardRenderDynamicVictoryPoints';
+import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {ICardRenderDescription} from './render/ICardRenderDescription';
 import {CardComponent} from './render/CardComponent';
 
@@ -13,5 +13,5 @@ export type CardMetadata = {
   hasExternalHelp?: true;
   description?: string | ICardRenderDescription;
   renderData?: CardComponent;
-  victoryPoints?: number | ICardRenderDynamicVictoryPoints;
+  victoryPoints?: number | CardRenderDynamicVictoryPoints;
 }

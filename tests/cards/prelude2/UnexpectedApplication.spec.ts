@@ -9,7 +9,7 @@ import {IGame} from '../../../src/server/IGame';
 import {TestPlayer} from '../../TestPlayer';
 import {UnexpectedApplication} from '../../../src/server/cards/prelude2/UnexpectedApplication';
 
-describe('UnexpectedApplication', function() {
+describe('UnexpectedApplication', () => {
   let card: UnexpectedApplication;
   let game: IGame;
   let player: TestPlayer;
@@ -24,7 +24,11 @@ describe('UnexpectedApplication', function() {
     housePrinting = new HousePrinting();
   });
 
-  it('Should play', function() {
+  it('can not play', () => {
+    expect(card.canPlay(player)).is.false;
+  });
+
+  it('Should play', () => {
     player.cardsInHand.push(housePrinting, tardigrades);
     expect(card.canPlay(player)).is.true;
 
@@ -39,7 +43,7 @@ describe('UnexpectedApplication', function() {
     expect(game.projectDeck.discardPile).contains(housePrinting);
   });
 
-  it('Does not expect itself to be the discarded card', function() {
+  it('Does not expect itself to be the discarded card', () => {
     player.cardsInHand.push(card);
 
     expect(card.canPlay(player)).is.false;

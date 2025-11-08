@@ -7,7 +7,7 @@ import {Space} from './Space';
 
 export class UtopiaPlanitiaBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): UtopiaPlanitiaBoard {
-    const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
+    const builder = new BoardBuilder(gameOptions);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;

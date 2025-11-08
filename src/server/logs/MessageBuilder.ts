@@ -14,6 +14,9 @@ import {IColony} from '../colonies/IColony';
 import {Message} from '../../common/logs/Message';
 import {Color} from '../../common/Color';
 import {LogMessageData, LogMessageDataAttrs} from '../../common/logs/LogMessageData';
+import {UndergroundResourceToken} from '../../common/underworld/UndergroundResourceToken';
+import {Space} from '../boards/Space';
+import {SpaceId} from '../../common/Types';
 
 export class MessageBuilder {
   protected message: Message;
@@ -101,6 +104,21 @@ export class MessageBuilder {
 
   public globalEventName(value: GlobalEventName): this {
     this.message.data.push({type: LogMessageDataType.GLOBAL_EVENT, value: value});
+    return this;
+  }
+
+  public undergroundToken(value: UndergroundResourceToken): this {
+    this.message.data.push({type: LogMessageDataType.UNDERGROUND_TOKEN, value: value});
+    return this;
+  }
+
+  public space(value: Space): this {
+    this.message.data.push({type: LogMessageDataType.SPACE, value: value.id});
+    return this;
+  }
+
+  public spaceId(value: SpaceId): this {
+    this.message.data.push({type: LogMessageDataType.SPACE, value: value});
     return this;
   }
 

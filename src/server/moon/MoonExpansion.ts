@@ -10,14 +10,15 @@ import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../../common/Units';
 import {Tag} from '../../common/cards/Tag';
 import {Space} from '../boards/Space';
-import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../../common/constants';
+import {MAXIMUM_MOON_RATE} from '../../common/constants';
 import {Resource} from '../../common/Resource';
 import {Phase} from '../../common/Phase';
 import {BoardType} from '../boards/BoardType';
-import {VictoryPointsBreakdown} from '../game/VictoryPointsBreakdown';
+import {VictoryPointsBreakdownBuilder} from '../game/VictoryPointsBreakdownBuilder';
 import {SpaceId} from '../../common/Types';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
+import {Board} from '../boards/Board';
 
 export class MoonExpansion {
   public static readonly MOON_TILES: Set<TileType> = new Set([
@@ -43,18 +44,6 @@ export class MoonExpansion {
       }
     }
     return undefined;
-  }
-
-  // If the moon expansion is enabled, execute this callback, otherwise execute the else callback.
-  public static ifElseMoon<T>(game: IGame, cb: (moonData: MoonData) => T, elseCb: () => T): T {
-    if (game.gameOptions.moonExpansion) {
-      if (game.moonData === undefined) {
-        console.log(`Assertion failure: game.moonData is undefined for ${game.id}`);
-      } else {
-        return cb(game.moonData);
-      }
-    }
-    return elseCb();
   }
 
   // If the moon expansion is enabled, return with the game's MoonData instance, otherwise throw an error.
@@ -128,102 +117,69 @@ export class MoonExpansion {
       // Ideally, this should be part of game.addTile, but since it isn't it's convenient enough to
       // hard-code onTilePlaced here. I wouldn't be surprised if this introduces a problem, but for now
       // it's not a problem until it is.
-      game.getPlayers().forEach((p) => {
-        p.tableau.forEach((playedCard) => {
+      for (const p of game.players) {
+        for (const playedCard of p.tableau) {
           playedCard.onTilePlaced?.(p, player, space, BoardType.MOON);
-        });
-      });
+        }
+      }
     });
   }
 
   private static logTilePlacement(player: IPlayer, space: Space, tileType: TileType) {
+    // TODO(kberg): this can probably be removed now.
     // Skip off-grid tiles
     if (space.x !== -1 && space.y !== -1) {
-      const offsets = [-1, 0, 1, 1, 1, 0, -1];
-      const row = space.y + 1;
-      const position = space.x + offsets[space.y];
-
-      player.game.log('${0} placed a ${1} tile on The Moon at (${2}, ${3})', (b) =>
-        b.player(player).tileType(tileType).number(row).number(position));
+      player.game.log('${0} placed a ${1} tile at ${2}', (b) =>
+        b.player(player).tileType(tileType).space(space));
     }
   }
 
-  private static bonus(originalRate: number, increment: number, value: number, cb: () => void): void {
-    if (originalRate < value && originalRate + increment >= value) {
-      cb();
-    }
+  private static maybeBonus(originalRate: number, increment: number, value: number): boolean {
+    return originalRate < value && originalRate + increment >= value;
   }
 
-  public static raiseMiningRate(player: IPlayer, count: number = 1) {
+  private static RateData = {
+    'mining': {field: 'miningRate', bonusAt6: Resource.TITANIUM},
+    'habitat': {field: 'habitatRate', bonusAt6: Resource.ENERGY},
+    'logistic': {field: 'logisticRate', bonusAt6: Resource.STEEL},
+  } as const;
+
+  private static raiseRate(player: IPlayer, count: number, field: 'mining' | 'logistic' | 'habitat') {
     MoonExpansion.ifMoon(player.game, (moonData) => {
-      const available = MAXIMUM_MINING_RATE - moonData.miningRate;
+      const rateData = MoonExpansion.RateData[field];
+      // This relies on all three tracks being the same value. If they were different
+      // that could be part of the structure.
+      const available = MAXIMUM_MOON_RATE - moonData[rateData.field];
       const increment = Math.min(count, available);
       if (increment > 0) {
         if (player.game.phase === Phase.SOLAR) {
-          player.game.log('${0} acted as World Government and raised the mining rate ${1} step(s)', (b) => b.player(player).number(increment));
+          player.game.log('${0} acted as World Government and raised the ' + field + ' rate ${1} step(s)', (b) => b.player(player).number(increment));
           this.activateLunaFirst(undefined, player.game, increment);
         } else {
-          player.game.log('${0} raised the mining rate ${1} step(s)', (b) => b.player(player).number(increment));
+          player.game.log('${0} raised the ' + field + ' rate ${1} step(s)', (b) => b.player(player).number(increment));
           player.increaseTerraformRating(increment);
-          this.bonus(moonData.miningRate, increment, 3, () => {
+          if (this.maybeBonus(moonData[rateData.field], increment, 3)) {
             player.drawCard();
-          });
-          this.bonus(moonData.miningRate, increment, 6, () => {
-            player.production.add(Resource.TITANIUM, 1, {log: true});
-          });
+          }
+          if (this.maybeBonus(moonData[rateData.field], increment, 6)) {
+            player.production.add(rateData.bonusAt6, 1, {log: true});
+          }
           this.activateLunaFirst(player, player.game, increment);
         }
-        moonData.miningRate += increment;
+        moonData[rateData.field] += increment;
       }
     });
+  }
+  public static raiseMiningRate(player: IPlayer, count: number = 1) {
+    this.raiseRate(player, count, 'mining');
   }
 
   public static raiseHabitatRate(player: IPlayer, count: number = 1) {
-    MoonExpansion.ifMoon(player.game, (moonData) => {
-      const available = MAXIMUM_HABITAT_RATE - moonData.habitatRate;
-      const increment = Math.min(count, available);
-      if (increment > 0) {
-        if (player.game.phase === Phase.SOLAR) {
-          player.game.log('${0} acted as World Government and raised the habitat rate ${1} step(s)', (b) => b.player(player).number(increment));
-          this.activateLunaFirst(undefined, player.game, count);
-        } else {
-          player.game.log('${0} raised the habitat rate ${1} step(s)', (b) => b.player(player).number(increment));
-          player.increaseTerraformRating(increment);
-          this.bonus(moonData.habitatRate, increment, 3, () => {
-            player.drawCard();
-          });
-          this.bonus(moonData.habitatRate, increment, 6, () => {
-            player.production.add(Resource.ENERGY, 1, {log: true});
-          });
-          this.activateLunaFirst(player, player.game, count);
-        }
-        moonData.habitatRate += increment;
-      }
-    });
+    this.raiseRate(player, count, 'habitat');
   }
 
   public static raiseLogisticRate(player: IPlayer, count: number = 1) {
-    MoonExpansion.ifMoon(player.game, (moonData) => {
-      const available = MAXIMUM_LOGISTICS_RATE - moonData.logisticRate;
-      const increment = Math.min(count, available);
-      if (increment > 0) {
-        if (player.game.phase === Phase.SOLAR) {
-          player.game.log('${0} acted as World Government and raised the logistic rate ${1} step(s)', (b) => b.player(player).number(increment));
-          this.activateLunaFirst(undefined, player.game, increment);
-        } else {
-          player.game.log('${0} raised the logistic rate ${1} step(s)', (b) => b.player(player).number(increment));
-          player.increaseTerraformRating(increment);
-          this.bonus(moonData.logisticRate, increment, 3, () => {
-            player.drawCard();
-          });
-          this.bonus(moonData.logisticRate, increment, 6, () => {
-            player.production.add(Resource.STEEL, 1, {log: true});
-          });
-          this.activateLunaFirst(player, player.game, increment);
-        }
-        moonData.logisticRate += increment;
-      }
-    });
+    this.raiseRate(player, count, 'logistic');
   }
 
   private static activateLunaFirst(sourcePlayer: IPlayer | undefined, game: IGame, count: number) {
@@ -289,26 +245,27 @@ export class MoonExpansion {
       ownedBy? : IPlayer,
       upgradedTiles?: boolean,
     }): Array<Space> {
-    return MoonExpansion.ifElseMoon(game, (moonData) => {
-      return moonData.moon.spaces.filter(
-        (space) => {
-          if (space.tile === undefined) {
-            return false;
-          }
-          let include = true;
-          if (tileType) {
-            include = MoonExpansion.spaceHasType(space, tileType, options?.upgradedTiles);
-          }
-          if (include && options?.surfaceOnly) {
-            include = space.spaceType !== SpaceType.COLONY;
-          }
-          if (include && options?.ownedBy !== undefined) {
-            include = space.player === options.ownedBy || space.coOwner === options.ownedBy;
-          }
+    if (game.moonData === undefined) {
+      return [];
+    }
+    return game.moonData.moon.spaces.filter(
+      (space) => {
+        if (space.tile === undefined) {
+          return false;
+        }
+        let include = true;
+        if (tileType) {
+          include = MoonExpansion.spaceHasType(space, tileType, options?.upgradedTiles);
+        }
+        if (include && options?.surfaceOnly) {
+          include = space.spaceType !== SpaceType.COLONY;
+        }
+        if (include && options?.ownedBy !== undefined) {
+          include = Board.spaceOwnedBy(space, options.ownedBy);
+        }
 
-          return include;
-        });
-    }, () => []);
+        return include;
+      });
   }
 
   /*
@@ -318,7 +275,7 @@ export class MoonExpansion {
     // This is a bit hacky and uncoordinated only because this returns early when there's a moon card with LTF Privileges
     // even though the heat component below could be considered (and is, for LocalHeatTrapping.)
 
-    if (player.cardIsInEffect(CardName.LTF_PRIVILEGES) && card.tags.includes(Tag.MOON)) {
+    if (player.tableau.has(CardName.LTF_PRIVILEGES) && card.tags.includes(Tag.MOON)) {
       return Units.EMPTY;
     }
 
@@ -332,7 +289,7 @@ export class MoonExpansion {
     for (const tileBuilt of card.tilesBuilt) {
       switch (tileBuilt) {
       case TileType.MOON_HABITAT:
-        if (player.cardIsInEffect(CardName.SUBTERRANEAN_HABITATS)) {
+        if (player.tableau.has(CardName.SUBTERRANEAN_HABITATS)) {
           // Edge case: Momentum Virum is a space habitat, not a habitat
           // ON the moon.
           if (card.name !== CardName.MOMENTUM_VIRUM_HABITAT) {
@@ -342,13 +299,13 @@ export class MoonExpansion {
         break;
 
       case TileType.MOON_MINE:
-        if (player.cardIsInEffect(CardName.IMPROVED_MOON_CONCRETE)) {
+        if (player.tableau.has(CardName.IMPROVED_MOON_CONCRETE)) {
           titanium -= 1;
         }
         break;
 
       case TileType.MOON_ROAD:
-        if (player.cardIsInEffect(CardName.LUNAR_DUST_PROCESSING_PLANT)) {
+        if (player.tableau.has(CardName.LUNAR_DUST_PROCESSING_PLANT)) {
           steel = 0;
         }
       }
@@ -359,33 +316,33 @@ export class MoonExpansion {
     return Units.of({steel, titanium, heat, plants});
   }
 
-  public static calculateVictoryPoints(player: IPlayer, vpb: VictoryPointsBreakdown): void {
+  public static calculateVictoryPoints(player: IPlayer, builder: VictoryPointsBreakdownBuilder): void {
     MoonExpansion.ifMoon(player.game, (moonData) => {
       // Each road tile on the map awards 1VP to the player owning it.
       // Each mine and colony (habitat) tile on the map awards 1VP per road tile touching them.
       const moon = moonData.moon;
-      const mySpaces = moon.spaces.filter((space) => space.player?.id === player.id || space.coOwner?.id === player.id);
-      mySpaces.forEach((space) => {
+      const mySpaces = moon.spaces.filter(Board.ownedBy(player));
+      for (const space of mySpaces) {
         if (space.tile !== undefined) {
           const type = space.tile.tileType;
           switch (type) {
           case TileType.MOON_ROAD:
-            vpb.setVictoryPoints('moon road', 1);
+            builder.setVictoryPoints('moon road', 1);
             break;
           case TileType.MOON_MINE:
           case TileType.MOON_HABITAT:
           case TileType.LUNAR_MINE_URBANIZATION:
             const points = moon.getAdjacentSpaces(space).filter((adj) => MoonExpansion.spaceHasType(adj, TileType.MOON_ROAD)).length;
             if (type === TileType.MOON_MINE || type === TileType.LUNAR_MINE_URBANIZATION) {
-              vpb.setVictoryPoints('moon mine', points);
+              builder.setVictoryPoints('moon mine', points);
             }
             if (type === TileType.MOON_HABITAT || type === TileType.LUNAR_MINE_URBANIZATION) {
-              vpb.setVictoryPoints('moon habitat', points);
+              builder.setVictoryPoints('moon habitat', points);
             }
             break;
           }
         }
-      });
+      }
     });
   }
 }

@@ -11,23 +11,23 @@ import {TestPlayer} from '../../TestPlayer';
 import {runAllActions, cast, churn, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('Ants', function() {
+describe('Ants', () => {
   let card: Ants;
   let player: TestPlayer;
   let player2: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Ants();
     [game, player, player2] = testGame(2);
   });
 
-  it('Can not play without oxygen', function() {
+  it('Can not play without oxygen', () => {
     setOxygenLevel(game, 3);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     setOxygenLevel(game, 4);
     expect(card.canPlay(player)).is.true;
 
@@ -36,7 +36,7 @@ describe('Ants', function() {
     expect(card.getVictoryPoints(player)).to.eq(2);
   });
 
-  it('Should action with multiple valid targets', function() {
+  it('Should action with multiple valid targets', () => {
     const tardigrades = new Tardigrades();
     const nitriteReducingBacteria = new NitriteReducingBacteria();
 
@@ -58,7 +58,7 @@ describe('Ants', function() {
     expect(tardigrades.resourceCount).to.eq(0);
   });
 
-  it('Respects protected habitats', function() {
+  it('Respects protected habitats', () => {
     const protectedHabitats = new ProtectedHabitats();
     const tardigrades = new Tardigrades();
 
@@ -71,7 +71,7 @@ describe('Ants', function() {
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Only microbes are available to steal', function() {
+  it('Only microbes are available to steal', () => {
     const tardigrades = new Tardigrades(); // card with microbes
     const fish = new Fish(); // card with animals
     const securityFleet = new SecurityFleet(); // card with fighters

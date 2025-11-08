@@ -10,7 +10,7 @@ import {CardMetadata} from '../../common/cards/CardMetadata';
 import {GlobalParameter} from '../../common/GlobalParameter';
 import {BoardType} from '../boards/BoardType';
 import {CardDiscount} from '../../common/cards/Types';
-import {IVictoryPoints} from '../../common/cards/IVictoryPoints';
+import {CountableVictoryPoints} from '../../common/cards/CountableVictoryPoints';
 import {TileType} from '../../common/TileType';
 import {Behavior} from '../behavior/Behavior';
 import {TRSource} from '../../common/cards/TRSource';
@@ -21,6 +21,7 @@ import {IStandardProjectCard} from './IStandardProjectCard';
 import {Warning} from '../../common/cards/Warning';
 import {Resource} from '../../common/Resource';
 import {Units} from '../../common/Units';
+import {SerializedCard} from '../SerializedCard';
 
 /*
  * Represents a card which has an action that itself allows a player
@@ -38,9 +39,12 @@ export function isIHasCheckLoops(object: any): object is IHasCheckLoops {
   return object.getCheckLoops !== undefined;
 }
 
+/** Defines how ICard.getVictoryPoints works. */
+export type GetVictoryPointsContext = 'default' | 'projectWorkshop';
+
 export interface ICard {
-  name: CardName;
-  tags: Array<Tag>;
+  readonly name: CardName;
+  readonly tags: ReadonlyArray<Tag>;
   play(player: IPlayer): PlayerInput | undefined;
   /**
    * Describes the M€ discount `player` could apply to playing `card`.
@@ -70,24 +74,26 @@ export interface ICard {
    * see `globalParameterRequirementBonus` for more information.
    */
   getGlobalParameterRequirementBonus(player: IPlayer, parameter: GlobalParameter): number;
-  victoryPoints?: number | 'special' | IVictoryPoints,
-  getVictoryPoints(player: IPlayer): number;
+  victoryPoints?: number | 'special' | CountableVictoryPoints,
+  getVictoryPoints(player: IPlayer, context?: GetVictoryPointsContext): number;
   /** Returns any dynamic influence value */
   getInfluenceBonus?: (player: IPlayer) => number;
-  /** Called when cards are played. However, if this is a corp, it'll be called when opponents play cards, too. */
+  /** Called when cards are played. Corps have a different callback */
   onCardPlayed?(player: IPlayer, card: ICard): PlayerInput | undefined | void;
-  onCardPlayedFromAnyPlayer?(thisCardOwner: IPlayer, playedCardOwner: IPlayer, card: IProjectCard): PlayerInput | undefined;
+  onCardPlayedByAnyPlayer?(thisCardOwner: IPlayer, card: ICard, activePlayer: IPlayer): PlayerInput | undefined | void;
+  onCardPlayedFromAnyPlayer?: never;
   onStandardProject?(player: IPlayer, project: IStandardProjectCard): void;
   onTilePlaced?(cardOwner: IPlayer, activePlayer: IPlayer, space: Space, boardType: BoardType): void;
   onDiscard?(player: IPlayer): void;
   /**
    * Called when anybody gains TR
    *
-   * @param player the player gaining TR
    * @param cardOwner the owner of this card
+   * @param player the player gaining TR
    * @param steps the number of steps gained
    */
-  onIncreaseTerraformRating?(player: IPlayer, cardOwner: IPlayer, steps: number): void;
+  onIncreaseTerraformRatingByAnyPlayer?(cardOwner: IPlayer, player: IPlayer, steps: number): void;
+  onIncreaseTerraformRating?: never;
   onGlobalParameterIncrease?(player: IPlayer, parameter: GlobalParameter, steps: number): void;
 
   /**
@@ -100,51 +106,73 @@ export interface ICard {
    */
   onResourceAdded?(player: IPlayer, playedCard: ICard, count: number): void;
 
+
   /**
    * Optional callback when any player identifies a space.
-   *
-   * @param identifyingPlayer the player performing the identification action
-   *   or undefined if added by a neutral player.
+  *
    * @param cardOwner the player who owns THIS CARD.
+   * @param identifyingPlayer the player performing the identification action,
+   *        or undefined if it is the neutral player (game setup or global event.)
    * @param space the space that was just identified.
-   * @param fromExcavate when true, this identifacation came from excavating an unidentified space.
    */
-  onIdentification?(identifyingPlayer: IPlayer | undefined, cardOwner: IPlayer, space: Space, fromExcavate: boolean): void;
+  onIdentificationByAnyPlayer?(cardOwner: IPlayer, identifyingPlayer: IPlayer | undefined, space: Space): void;
+  onIdentification?: never;
 
   /**
-   * Optional callback when any player excavates a space.
+   * Optional callback when this card owner claims an underground resource.
    *
-   * @param player the player performing the excavation action
-   * @param space the space that was just excavated.
+   * @param player the player performing the claim.
+   * @param space the space that was excavated.
    */
-  onExcavation?(player: IPlayer, space: Space): void;
+  onClaim?(player: IPlayer, isExcavate: boolean, space: Space | undefined): void;
 
+  /**
+   * Callback when `player` gains (or loses) production.
+   *
+  * @param player the card owner.
+   */
   onProductionGain?(player: IPlayer, resource: Resource, amount: number): void;
+  /**
+   * Callback during the production phase. Used to reset between generations.
+   *
+   * @param player the card owner.
+   */
   onProductionPhase?(player: IPlayer): void;
 
-  /** Optional callback when ANY player adds a colony. */
-  onColonyAdded?(player: IPlayer, cardOwner: IPlayer): void;
-  /** Optional callback when `player` adds a colony to Leavitt. */
-  onColonyAddedToLeavitt?(player: IPlayer): void;
+  /**
+   * Callback when ANY player adds a colony.
+   *
+   * @param cardOwner the player who owns this card.
+   * @param colonyOwner the player adding a colony.
+   */
+  onColonyAddedByAnyPlayer?(cardOwner: IPlayer, colonyOwner: IPlayer): void;
+  onColonyAdded?: never;
 
-  cost?: number; /** Used with IProjectCard and PreludeCard. */
-  type: CardType;
-  requirements: Array<CardRequirementDescriptor>;
-  metadata: CardMetadata;
+  onNonCardTagAdded?(player: IPlayer, tag: Tag): void;
+
+  readonly cost?: number; /** Used with IProjectCard and PreludeCard. */
+  readonly type: CardType;
+  readonly requirements: ReadonlyArray<CardRequirementDescriptor>;
+  readonly metadata: CardMetadata;
 
   /**
    * Per-instance state-specific warnings about this card's action.
+   * This is ephemeral data that gets reset between evaluations.
+   * It is not serialized.
+   *
+   * See: IProjectCard.additionalProjectCosts
    */
-  warnings: Set<Warning>;
+  readonly warnings: Set<Warning>;
 
-  behavior?: Behavior,
+  readonly behavior?: Behavior,
 
   /**
    * Returns the contents of the card's production box.
    *
    * Use with Robotic Workforce and Cyberia Systems.
    *
-   * Prefer this to `produce` and prefer `behavior` to this.
+   * Prefer this to `produce`.
+   * Prefer `behavior` to this.
    */
   productionBox?(player: IPlayer): Units;
 
@@ -166,15 +194,25 @@ export interface ICard {
   resourceCount: number;
   resourceType?: CardResource;
   protectedResources?: boolean;
-  /** Currently used for The Moon, but can be expanded to encompass other tile-placing cards. */
+  /** Indicates the tile built, which can be used in a variety of useful ways. */
   tilesBuilt: ReadonlyArray<TileType>;
-  isDisabled?: boolean; // For Pharmacy Union and CEO cards.
+  /** For Pharmacy Union, the card is effectively out of the game.. CEO uses it to ensure it can't be retriggered.  */
+  isDisabled?: boolean;
   /**
    * Extra data that the game will serialize and deserialize along with the card.
    *
    * ONLY store plain JSON data. Classes, objects, functions, will all be incorrectly serialized.
    */
   data?: JSONValue;
+
+  /**
+   * Additional custom serialization for this card.
+   */
+  serialize?(serialized: SerializedCard): void;
+  /**
+   * Additional custom deserialization for this card.
+   */
+  deserialize?(serialized: SerializedCard): void;
 
   /** The generation the card was activated. Used for Duncan and Underworld cards. */
   // TODO(kberg): move to json?

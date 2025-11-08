@@ -5,7 +5,7 @@ import {CorridorsOfPower} from '../../../src/server/cards/prelude2/CorridorsOfPo
 import {TestPlayer} from '../../TestPlayer';
 import {Delegate, Turmoil} from '../../../src/server/turmoil/Turmoil';
 import {PartyName} from '../../../src/common/turmoil/PartyName';
-import {Color, ColorWithNeutral} from '../../../src/common/Color';
+import {ColorWithNeutral} from '../../../src/common/Color';
 
 describe('CorridorsOfPower', () => {
   let player: TestPlayer;
@@ -21,7 +21,7 @@ describe('CorridorsOfPower', () => {
 
   it('play', () => {
     card.play(player);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(player.megaCredits).eq(4);
   });
 
@@ -29,16 +29,16 @@ describe('CorridorsOfPower', () => {
     if (color === undefined) {
       return undefined;
     }
-    return game.getPlayers().find((player) => player.color === color) ?? 'NEUTRAL';
+    return game.players.find((player) => player.color === color) ?? 'NEUTRAL';
   }
 
   const effectRuns = [
-    {playedCard: false, delegates: [], initialLeader: undefined, newDelegate: Color.BLUE, newLeader: Color.BLUE, expected: 0},
-    {playedCard: true, delegates: [], initialLeader: undefined, newDelegate: Color.BLUE, newLeader: Color.BLUE, expected: 1},
-    {playedCard: true, delegates: [], initialLeader: undefined, newDelegate: Color.RED, newLeader: Color.RED, expected: 0},
+    {playedCard: false, delegates: [], initialLeader: undefined, newDelegate: 'blue', newLeader: 'blue', expected: 0},
+    {playedCard: true, delegates: [], initialLeader: undefined, newDelegate: 'blue', newLeader: 'blue', expected: 1},
+    {playedCard: true, delegates: [], initialLeader: undefined, newDelegate: 'red', newLeader: 'red', expected: 0},
     {playedCard: true, delegates: [], initialLeader: undefined, newDelegate: 'NEUTRAL', newLeader: 'NEUTRAL', expected: 0},
-    {playedCard: true, delegates: [Color.BLUE], initialLeader: Color.BLUE, newDelegate: Color.BLUE, newLeader: Color.BLUE, expected: 0},
-    {playedCard: true, delegates: [Color.RED, Color.BLUE], initialLeader: Color.RED, newDelegate: Color.BLUE, newLeader: Color.BLUE, expected: 1},
+    {playedCard: true, delegates: ['blue'], initialLeader: 'blue', newDelegate: 'blue', newLeader: 'blue', expected: 0},
+    {playedCard: true, delegates: ['red', 'blue'], initialLeader: 'red', newDelegate: 'blue', newLeader: 'blue', expected: 1},
   ] as const;
   for (const run of effectRuns) {
     it('effect ' + JSON.stringify(run), () => {

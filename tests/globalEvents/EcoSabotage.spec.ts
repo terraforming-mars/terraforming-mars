@@ -3,8 +3,8 @@ import {EcoSabotage} from '../../src/server/turmoil/globalEvents/EcoSabotage';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('EcoSabotage', function() {
-  it('resolve play', function() {
+describe('EcoSabotage', () => {
+  it('resolve play', () => {
     const card = new EcoSabotage();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;
@@ -17,8 +17,8 @@ describe('EcoSabotage', function() {
     player.plants = 10;
     player2.plants = 10;
 
-    expect(turmoil.getPlayerInfluence(player)).eq(0);
-    expect(turmoil.getPlayerInfluence(player2)).eq(2);
+    expect(turmoil.getInfluence(player)).eq(0);
+    expect(turmoil.getInfluence(player2)).eq(2);
 
     card.resolve(game, turmoil);
 

@@ -10,14 +10,14 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
-describe('CharityDonation', function() {
+describe('CharityDonation', () => {
   let card: CharityDonation;
   let player1: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CharityDonation();
     [game, player1, player2, player3] = testGame(3);
   });
@@ -35,7 +35,7 @@ describe('CharityDonation', function() {
     });
   }
 
-  it('play', function() {
+  it('play', () => {
     const acquiredCompany = new AcquiredCompany();
     const beamFromAThoriumAsteroid = new BeamFromAThoriumAsteroid();
     const ceosFavoriteProject = new CEOsFavoriteProject();

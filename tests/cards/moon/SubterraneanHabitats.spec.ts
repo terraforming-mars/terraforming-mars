@@ -27,20 +27,20 @@ describe('SubterraneanHabitats', () => {
     player.megaCredits = 1000;
 
     player.steel = 1;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
     player.steel = 2;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('play', () => {
     player.steel = 12;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.habitatRate).eq(0);
 
     card.play(player);
 
     expect(player.steel).eq(10);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(moonData.habitatRate).eq(1);
   });
 
@@ -61,13 +61,13 @@ describe('SubterraneanHabitats', () => {
       player.titanium = run.titanium;
       player.megaCredits = 1000;
       if (run.played) {
-        player.playedCards = [card];
+        player.playedCards.push(card);
       }
 
       if (run.expected) {
-        expect(player.getPlayableCards().map((card) => card.card.name)).deep.eq([run.card]);
+        expect(player.getPlayableCards().map((card) => card.name)).deep.eq([run.card]);
       } else {
-        expect(player.getPlayableCards().map((card) => card.card.name)).is.empty;
+        expect(player.getPlayableCards().map((card) => card.name)).is.empty;
       }
     });
   }
@@ -83,7 +83,7 @@ describe('SubterraneanHabitats', () => {
     expect(projectCard.canAct(player)).is.false;
 
     // And this one shows that with Subterranean Habitats, titanium isn't necessary
-    player.playedCards = [card];
+    player.playedCards.push(card);
     expect(projectCard.canAct(player)).is.true;
   });
 });

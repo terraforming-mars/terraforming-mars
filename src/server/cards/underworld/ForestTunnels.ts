@@ -13,18 +13,16 @@ export class ForestTunnels extends Card implements IProjectCard {
       tags: [Tag.PLANT],
       cost: 7,
 
-      requirements: {excavation: 1},
-
       behavior: {
-        stock: {plants: {underworld: {excavationMarkers: {}}}},
+        stock: {plants: {underworld: {undergroundTokens: {}}}},
       },
 
       metadata: {
-        cardNumber: 'U16',
+        cardNumber: 'U016',
         renderData: CardRenderer.builder((b) => {
-          b.plants(1).slash().excavate(1);
+          b.plants(1).slash().undergroundResources(1);
         }),
-        description: 'Requires an excavation marker. Gain 1 plant for every excavation marker you have.',
+        description: 'Gain 1 plant for each underground token you own.',
       },
     });
   }

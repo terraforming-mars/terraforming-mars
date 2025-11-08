@@ -9,6 +9,7 @@ import {CardResource} from '../../../common/CardResource';
 import {CardName} from '../../../common/cards/CardName';
 import {Priority} from '../../deferredActions/Priority';
 import {CardRenderer} from '../render/CardRenderer';
+import {ICard} from '../ICard';
 
 export class OlympusConference extends Card implements IProjectCard {
   constructor() {
@@ -33,36 +34,37 @@ export class OlympusConference extends Card implements IProjectCard {
   }
 
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     const scienceTags = player.tags.cardTagCount(card, Tag.SCIENCE);
     this.onScienceTagAdded(player, scienceTags);
   }
-  public onColonyAddedToLeavitt(player: IPlayer) {
-    this.onScienceTagAdded(player, 1);
+  public onNonCardTagAdded(player: IPlayer, tag: Tag) {
+    if (tag === Tag.SCIENCE) {
+      this.onScienceTagAdded(player, 1);
+    }
   }
   public onScienceTagAdded(player: IPlayer, count: number) {
     for (let i = 0; i < count; i++) {
       player.defer(() => {
         // Can't remove a resource
         if (this.resourceCount === 0) {
-          player.addResourceTo(this, 1);
+          player.addResourceTo(this, {log: true});
           return undefined;
         }
-        const options = new OrOptions(
+        return new OrOptions(
           new SelectOption('Remove a science resource from this card to draw a card', 'Remove resource').andThen(() => {
             player.removeResourceFrom(this);
             player.drawCard();
+            player.game.log('${0} removed a resource from ${1} to draw a card', (b) => b.player(player).card(this));
             return undefined;
           }),
           new SelectOption('Add a science resource to this card', 'Add resource').andThen(() => {
-            player.addResourceTo(this, 1);
+            player.addResourceTo(this, {log: true});
             return undefined;
           }),
-        );
-        options.title = 'Select an option for Olympus Conference';
-        return options;
+        ).setTitle('Select an option for Olympus Conference');
       },
-      Priority.SUPERPOWER); // Unshift that deferred action
+      Priority.OLYMPUS_CONFERENCE); // Unshift that deferred action
     }
     return undefined;
   }

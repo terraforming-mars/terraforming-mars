@@ -13,4 +13,6 @@ export enum LogMessageDataType {
   TILE_TYPE, // 9
   SPACE_BONUS, // 10
   GLOBAL_EVENT, // 11
+  UNDERGROUND_TOKEN, // 12
+  SPACE, // 13
 }

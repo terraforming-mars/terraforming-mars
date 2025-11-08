@@ -4,8 +4,8 @@ import {LunarMining} from '../../../src/server/cards/colonies/LunarMining';
 import {SpaceHotels} from '../../../src/server/cards/prelude/SpaceHotels';
 import {cast, testGame} from '../../TestingUtils';
 
-describe('LunarMining', function() {
-  it('Should play', function() {
+describe('LunarMining', () => {
+  it('Should play', () => {
     const card = new LunarMining();
     const card2 = new SpaceHotels();
     const card3 = new LunaGovernor();

@@ -2,8 +2,8 @@ import {IPlayer} from '../../IPlayer';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export class StrategicBasePlanning extends PreludeCard {
@@ -28,9 +28,15 @@ export class StrategicBasePlanning extends PreludeCard {
       },
     });
   }
+
+  public override bespokeCanPlay(player: IPlayer): boolean {
+    return player.canAfford(3);
+  }
+
   public override bespokePlay(player: IPlayer) {
-    player.stock.deduct(Resource.MEGACREDITS, 3);
-    PathfindersExpansion.addToSolBank(player);
+    player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits)).andThen(() => {
+      PathfindersExpansion.addToSolBank(player);
+    });
     return undefined;
   }
 }

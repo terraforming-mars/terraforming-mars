@@ -10,8 +10,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {TITLES} from '../../inputs/titles';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Factorum extends CorporationCard implements IActionCard {
+export class Factorum extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {
     super({
       name: CardName.FACTORUM,

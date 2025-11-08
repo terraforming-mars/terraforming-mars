@@ -9,25 +9,25 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('AirRaid', function() {
+describe('AirRaid', () => {
   let card: AirRaid;
   let player: TestPlayer;
   let player2: TestPlayer;
   let stormcraftIncorporated: StormCraftIncorporated;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AirRaid();
     [/* game */, player, player2] = testGame(3);
 
     stormcraftIncorporated = new StormCraftIncorporated();
-    player.corporations.push(stormcraftIncorporated);
+    player.playedCards.push(stormcraftIncorporated);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play - multiple targets', function() {
+  it('Should play - multiple targets', () => {
     player.addResourceTo(stormcraftIncorporated);
     expect(card.canPlay(player)).is.true;
 
@@ -48,7 +48,7 @@ describe('AirRaid', function() {
     expect(stormcraftIncorporated.resourceCount).to.eq(0);
   });
 
-  it('Should play - single target for floater removal and MC removal', function() {
+  it('Should play - single target for floater removal and MC removal', () => {
     player.addResourceTo(stormcraftIncorporated);
     expect(card.canPlay(player)).is.true;
 

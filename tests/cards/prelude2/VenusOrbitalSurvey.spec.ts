@@ -7,7 +7,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 import {Tag} from '../../../src/common/cards/Tag';
 
-describe('VenusOrbitalSurvey', function() {
+describe('VenusOrbitalSurvey', () => {
   let card: VenusOrbitalSurvey;
   const emptyCard = () => fakeCard();
   const wildCard = () => fakeCard({tags: [Tag.WILD]});
@@ -16,16 +16,16 @@ describe('VenusOrbitalSurvey', function() {
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new VenusOrbitalSurvey();
     [game, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
   });
 
-  it('Should act if bought 0 of 2', function() {
+  it('Should act if bought 0 of 2', () => {
     player.megaCredits = 6;
     const selectCard = cast(churn(card.action(player), player), SelectCard);
     selectCard.cb([]);
@@ -34,7 +34,7 @@ describe('VenusOrbitalSurvey', function() {
     expect(player.megaCredits).to.eq(6);
   });
 
-  it('Should act if bought 1 of 2', function() {
+  it('Should act if bought 1 of 2', () => {
     player.megaCredits = 3;
     const selectCard = cast(churn(card.action(player), player), SelectCard);
 
@@ -46,7 +46,7 @@ describe('VenusOrbitalSurvey', function() {
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('Should act if bought 2 of 2', function() {
+  it('Should act if bought 2 of 2', () => {
     player.megaCredits = 6;
     const selectCard = cast(churn(card.action(player), player), SelectCard);
 
@@ -58,7 +58,7 @@ describe('VenusOrbitalSurvey', function() {
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('Should not offer if none to buy', function() {
+  it('Should not offer if none to buy', () => {
     player.megaCredits = 6;
     game.projectDeck.drawPile.push(venusCard(), venusCard());
     cast(churn(card.action(player), player), undefined);
@@ -68,7 +68,7 @@ describe('VenusOrbitalSurvey', function() {
     expect(player.megaCredits).to.eq(6);
   });
 
-  it('Should act if bought 0 of 1', function() {
+  it('Should act if bought 0 of 1', () => {
     player.megaCredits = 6;
     game.projectDeck.drawPile.push(venusCard(), wildCard());
     const selectCard = cast(churn(card.action(player), player), SelectCard);
@@ -81,7 +81,7 @@ describe('VenusOrbitalSurvey', function() {
     expect(player.megaCredits).to.eq(6);
   });
 
-  it('Should act if bought 1 of 1', function() {
+  it('Should act if bought 1 of 1', () => {
     player.megaCredits = 6;
     game.projectDeck.drawPile.push(earthCard(), venusCard());
     const selectCard = cast(churn(card.action(player), player), SelectCard);
@@ -94,7 +94,7 @@ describe('VenusOrbitalSurvey', function() {
     expect(player.megaCredits).to.eq(3);
   });
 
-  it('Cannot buy from 2 offered if cannot pay', function() {
+  it('Cannot buy from 2 offered if cannot pay', () => {
     player.megaCredits = 2;
     game.projectDeck.drawPile.push(earthCard(), emptyCard());
     const selectCard = cast(churn(card.action(player), player), SelectCard);
@@ -109,7 +109,7 @@ describe('VenusOrbitalSurvey', function() {
     expect(player.megaCredits).to.eq(2);
   });
 
-  it('Cannot buy from 1 offered if cannot pay', function() {
+  it('Cannot buy from 1 offered if cannot pay', () => {
     player.megaCredits = 2;
     game.projectDeck.drawPile.push(venusCard(), emptyCard());
     const selectCard = cast(churn(card.action(player), player), SelectCard);
@@ -124,7 +124,7 @@ describe('VenusOrbitalSurvey', function() {
     expect(player.megaCredits).to.eq(2);
   });
 
-  it('Cannot buy 2 offered if can pay for 1', function() {
+  it('Cannot buy 2 offered if can pay for 1', () => {
     player.megaCredits = 5;
     game.projectDeck.drawPile.push(wildCard(), emptyCard());
     const selectCard = cast(churn(card.action(player), player), SelectCard);

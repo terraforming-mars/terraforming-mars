@@ -4,13 +4,13 @@ import {SpaceType} from '../../src/common/boards/SpaceType';
 import {SeededRandom} from '../../src/common/utils/Random';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {MultiSet} from 'mnemonist';
-import {SpaceName} from '../../src/server/SpaceName';
+import {SpaceName} from '../../src/common/boards/SpaceName';
 import {ArabiaTerraBoard} from '../../src/server/boards/ArabiaTerraBoard';
 import {preservingShuffle} from '../../src/server/boards/BoardBuilder';
 import {AmazonisBoard} from '../../src/server/boards/AmazonisBoard';
-import {TestPlayer} from '../TestPlayer';
+import {CardName} from '../../src/common/cards/CardName';
 
-describe('BoardBuilder', function() {
+describe('BoardBuilder', () => {
   const preservingRuns = [
     {array: [0, 1, 2, 3, 4], preservedIndexes: [1], expected: [1]},
     {array: [0, 1, 2, 3, 4], preservedIndexes: [1, 2, 3], expected: [1, 2, 3]},
@@ -92,7 +92,41 @@ describe('BoardBuilder', function() {
         shuffleMapOption: true,
       },
       new SeededRandom(seed));
-      expect(board.getSpaces(SpaceType.RESTRICTED, TestPlayer.BLUE.newPlayer())[0].bonus).is.empty;
+      expect(board.getSpaces(SpaceType.RESTRICTED)[0].bonus).is.empty;
     }
+  });
+
+  it('Venera base spot shows when Pathfinders, Venus & Turmoil are all in play', () => {
+    const board = TharsisBoard.newInstance({
+      ...DEFAULT_GAME_OPTIONS,
+      pathfindersExpansion: true,
+      venusNextExtension: true,
+      turmoilExtension: true,
+    },
+    new SeededRandom(0));
+    expect(board.getSpaceOrThrow('78')).to.not.be.undefined;
+  });
+
+  it('Venera base spot does not show when Turmoil is not in play', () => {
+    const board = TharsisBoard.newInstance({
+      ...DEFAULT_GAME_OPTIONS,
+      pathfindersExpansion: true,
+      venusNextExtension: true,
+      turmoilExtension: false,
+    },
+    new SeededRandom(0));
+    expect(() => board.getSpaceOrThrow('78')).to.throw();
+  });
+
+  it('Venera base spot shows when added to deck, even when Pathfinders is not in play', () => {
+    const board = TharsisBoard.newInstance({
+      ...DEFAULT_GAME_OPTIONS,
+      pathfindersExpansion: false,
+      venusNextExtension: true,
+      turmoilExtension: true,
+      includedCards: [CardName.VENERA_BASE],
+    },
+    new SeededRandom(0));
+    expect(board.getSpaceOrThrow('78')).to.not.be.undefined;
   });
 });

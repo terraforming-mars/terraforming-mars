@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Space} from '../../../src/server/boards/Space';
 import {partition} from '../../../src/common/utils/utils';
 
-describe('OutdoorSports', function() {
+describe('OutdoorSports', () => {
   let card: OutdoorSports;
   let player: TestPlayer;
   let player2: TestPlayer;
@@ -13,7 +13,7 @@ describe('OutdoorSports', function() {
   let spaceNextToOcean: Space;
   let spaceNotNextToOcean: Space;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new OutdoorSports();
     [/* game */, player, player2] = testGame(2);
     const board = player.game.board;
@@ -27,7 +27,7 @@ describe('OutdoorSports', function() {
     );
   });
 
-  it('cannotPlay', function() {
+  it('cannotPlay', () => {
     player.megaCredits = card.cost;
     player.game.addOcean(player, oceanSpace);
     expect(player.canPlay(card)).is.not.true;
@@ -36,7 +36,7 @@ describe('OutdoorSports', function() {
     expect(player.canPlay(card)).is.not.true;
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.megaCredits = card.cost;
     player.game.addOcean(player, oceanSpace);
     expect(player.canPlay(card)).is.not.true;
@@ -45,7 +45,7 @@ describe('OutdoorSports', function() {
     expect(player.canPlay(card)).is.true;
   });
 
-  it('canPlay - other player owns the city', function() {
+  it('canPlay - other player owns the city', () => {
     player.megaCredits = card.cost;
     player.game.addOcean(player, oceanSpace);
     expect(player.canPlay(card)).is.not.true;
@@ -54,7 +54,7 @@ describe('OutdoorSports', function() {
     expect(player.canPlay(card)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     expect(player.production.megacredits).to.eq(0);
 
     card.play(player);

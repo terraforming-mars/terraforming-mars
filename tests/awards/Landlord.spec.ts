@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {Landlord} from '../../src/server/awards/Landlord';
-import {SpaceName} from '../../src/server/SpaceName';
+import {SpaceName} from '../../src/common/boards/SpaceName';
 import {MoonExpansion} from '../../src/server/moon/MoonExpansion';
-import {MoonSpaces} from '../../src/common/moon/MoonSpaces';
+import {NamedMoonSpaces} from '../../src/common/moon/NamedMoonSpaces';
 import {EmptyBoard} from '../testing/EmptyBoard';
 import {AresHazards} from '../../src/server/ares/AresHazards';
 import {TileType} from '../../src/common/TileType';
@@ -37,15 +37,32 @@ describe('Landlord', () => {
     addGreenery(player, '35');
     expect(award.getScore(player)).to.eq(2);
 
-    MoonExpansion.addMineTile(player, MoonSpaces.MARE_IMBRIUM);
+    MoonExpansion.addMineTile(player, NamedMoonSpaces.MARE_IMBRIUM);
     expect(award.getScore(player)).to.eq(3);
   });
 
-  it('Exclude Landclaimed Ares hazard tile from land-based award', function() {
+  it('Co-owner counts on The Moon', () => {
+    const [/* game */, player, player2] = testGame(2, {moonExpansion: true});
+
+    expect(award.getScore(player)).to.eq(0);
+
+    MoonExpansion.addMineTile(player, NamedMoonSpaces.MARE_IMBRIUM);
+    const space = player.game.moonData!.moon.getSpaceOrThrow(NamedMoonSpaces.MARE_IMBRIUM);
+
+    expect(award.getScore(player)).to.eq(1);
+    expect(award.getScore(player2)).to.eq(0);
+
+    space.coOwner = player2;
+
+    expect(award.getScore(player)).to.eq(1);
+    expect(award.getScore(player2)).to.eq(1);
+  });
+
+  it('Exclude Landclaimed Ares hazard tile from land-based award', () => {
     const [game, player/* , player2 */] = testGame(2, {aresExtension: true});
 
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    AresHazards.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
+    AresHazards.putHazardAt(game, firstSpace, TileType.DUST_STORM_MILD);
 
     expect(award.getScore(player)).to.eq(0);
 

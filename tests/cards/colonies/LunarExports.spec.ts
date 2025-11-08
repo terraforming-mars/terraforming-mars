@@ -4,8 +4,8 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {cast, runAllActions, testGame} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 
-describe('LunarExports', function() {
-  it('Should play', function() {
+describe('LunarExports', () => {
+  it('Should play', () => {
     const card = new LunarExports();
     const [game, player] = testGame(1);
     card.play(player);

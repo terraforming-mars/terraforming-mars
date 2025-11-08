@@ -3,8 +3,8 @@ import {VolcanicEruptions} from '../../src/server/turmoil/globalEvents/VolcanicE
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('VolcanicEruptions', function() {
-  it('resolve play', function() {
+describe('VolcanicEruptions', () => {
+  it('resolve play', () => {
     const card = new VolcanicEruptions();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

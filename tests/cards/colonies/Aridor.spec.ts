@@ -21,36 +21,36 @@ let game: IGame;
 let player: TestPlayer;
 let player2: TestPlayer;
 
-describe('Aridor', function() {
+describe('Aridor', () => {
   beforeEach(() => {
     card = new Aridor();
     // 2-player so as to not bother with pre-game action that drops a colony.
     [game, player, player2] = testGame(2, {coloniesExtension: true});
-    player.corporations.push(card);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
+    player.playedCards.push(card);
 
     // Predators has an Animal tag
-    card.onCardPlayed(player, new Predators());
+    player.playCard(new Predators());
     expect(player.production.megacredits).to.eq(1);
 
     // Research Outpost has a Science tag, City tag, and Building tag
-    card.onCardPlayed(player2, new ResearchOutpost());
+    player2.playCard(new ResearchOutpost());
     expect(player2.production.megacredits).to.eq(0);
-    card.onCardPlayed(player, new ResearchOutpost());
+    player.playCard(new ResearchOutpost());
     expect(player.production.megacredits).to.eq(4);
 
     // GHG Producing Bacteria has a Science tag and a Microbe tag.
-    card.onCardPlayed(player, new GHGProducingBacteria());
+    player.playCard(new GHGProducingBacteria());
     expect(player.production.megacredits).to.eq(5);
   });
 
   // A test that directly calls initialAction is also good, but this
   // is extra due to a bug #3882
   it('initialAction from input', () => {
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
 
     const colonyInPlay = game.colonies[0];
@@ -73,7 +73,7 @@ describe('Aridor', function() {
   it('initialAction - chooses Venus which cannot be activated', () => {
     const venus = new Venus();
     game.discardedColonies.push(venus);
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
     const playerInput = cast(player.popWaitingFor(), SelectColony);
     expect(playerInput?.colonies).contains(venus);
@@ -85,10 +85,10 @@ describe('Aridor', function() {
   });
 
   it('initialAction - chooses Venus, which is activated', () => {
-    player2.corporations.push(new Celestic());
+    player2.playedCards.push(new Celestic());
     const venus = new Venus();
     game.discardedColonies.push(venus);
-    player.deferInitialAction(card);
+    player.defer(card.initialAction(player));
     runAllActions(game);
     const playerInput = cast(player.popWaitingFor(), SelectColony);
     expect(playerInput?.colonies).contains(venus);
@@ -101,24 +101,25 @@ describe('Aridor', function() {
 
   it('serialization test for Player with Aridor', () => {
     card.play(player);
-    card.onCardPlayed(player, new Predators());
-    card.onCardPlayed(player2, new ResearchOutpost());
-    card.onCardPlayed(player, new ResearchOutpost());
+    player.playedCards.push(card);
+    player.playCard(new Predators());
+    player2.playCard(new ResearchOutpost());
+    player.playCard(new ResearchOutpost());
 
     expect(Array.from(card.allTags)).deep.eq([Tag.ANIMAL, Tag.SCIENCE, Tag.CITY, Tag.BUILDING]);
 
     const serializedPlayer = player.serialize();
 
-    expect(serializedPlayer.corporations?.[0].allTags).deep.eq([Tag.ANIMAL, Tag.SCIENCE, Tag.CITY, Tag.BUILDING]);
+    expect(serializedPlayer.playedCards?.[0].allTags).deep.eq([Tag.ANIMAL, Tag.SCIENCE, Tag.CITY, Tag.BUILDING]);
 
     const reserializedPlayer = Player.deserialize(serializedPlayer);
-    const reserializedAridor = cast(reserializedPlayer.corporations?.[0], Aridor);
+    const reserializedAridor = cast(reserializedPlayer.playedCards.corporations()[0], Aridor);
 
     expect(Array.from(reserializedAridor.allTags)).deep.eq([Tag.ANIMAL, Tag.SCIENCE, Tag.CITY, Tag.BUILDING]);
   });
 
   it('Compatible with Leavitt #6349', () => {
-    player.corporations.push(card);
+    player.playedCards.push(card);
 
     expect(player.production.megacredits).eq(0);
 

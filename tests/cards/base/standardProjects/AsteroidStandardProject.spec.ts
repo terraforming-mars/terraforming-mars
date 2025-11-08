@@ -6,24 +6,24 @@ import {IGame} from '../../../../src/server/IGame';
 import {MAX_TEMPERATURE} from '../../../../src/common/constants';
 import {testGame} from '../../../TestGame';
 
-describe('AsteroidStandardProject', function() {
+describe('AsteroidStandardProject', () => {
   let card: AsteroidStandardProject;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AsteroidStandardProject();
     [game, player] = testGame(2);
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     player.megaCredits = card.cost - 1;
     expect(card.canAct(player)).is.false;
     player.megaCredits = card.cost;
     expect(card.canAct(player)).is.true;
   });
 
-  it('action', function() {
+  it('action', () => {
     player.megaCredits = card.cost;
     player.setTerraformRating(20);
     expect(game.getTemperature()).eq(-30);
@@ -32,7 +32,7 @@ describe('AsteroidStandardProject', function() {
     runAllActions(game);
 
     expect(player.megaCredits).eq(0);
-    expect(player.getTerraformRating()).eq(21);
+    expect(player.terraformRating).eq(21);
     expect(game.getTemperature()).eq(-28);
   });
 
@@ -42,14 +42,14 @@ describe('AsteroidStandardProject', function() {
 
     setTemperature(game, MAX_TEMPERATURE);
 
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(card.canAct(player)).eq(true);
 
     cast(card.action(player), undefined);
     runAllActions(game);
 
     expect(game.getTemperature()).eq(MAX_TEMPERATURE);
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.terraformRating).eq(20);
     expect(player.megaCredits).eq(0);
   });
 

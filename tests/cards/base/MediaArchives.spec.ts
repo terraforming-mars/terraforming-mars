@@ -3,8 +3,8 @@ import {MediaArchives} from '../../../src/server/cards/base/MediaArchives';
 import {Virus} from '../../../src/server/cards/base/Virus';
 import {cast, testGame} from '../../TestingUtils';
 
-describe('MediaArchives', function() {
-  it('Should play', function() {
+describe('MediaArchives', () => {
+  it('Should play', () => {
     const card = new MediaArchives();
     const [/* game */, player] = testGame(1);
     player.playedCards.push(card, new Virus());

@@ -7,19 +7,19 @@ import {EmptyBoard} from '../../testing/EmptyBoard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('MarketingExperts', function() {
+describe('MarketingExperts', () => {
   let card: MarketingExperts;
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MarketingExperts();
     [game, player, otherPlayer] = testGame(2, {aresExtension: true});
     game.board = EmptyBoard.newInstance();
   });
 
-  it('Play', function() {
+  it('Play', () => {
     expect(player.production.megacredits).eq(0);
     card.play(player);
     expect(player.production.megacredits).eq(1);
@@ -27,9 +27,9 @@ describe('MarketingExperts', function() {
 
   // This doesn't test anything about this card, but about the behavior this card provides, from
   // AresHandler.
-  it('Bonus in the field', function() {
+  it('Bonus in the field', () => {
     // tile types in this test are irrelevant.
-    player.playedCards = [card];
+    player.playedCards.push(card);
 
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     firstSpace.adjacency = {bonus: [SpaceBonus.DRAW_CARD]};

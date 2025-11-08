@@ -9,12 +9,14 @@ import {IPlayer} from '../src/server/IPlayer';
 import {SelectCard} from '../src/server/inputs/SelectCard';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 import {TestPlayer} from './TestPlayer';
-import {Deck} from '../src/server/cards/Deck';
 
 // Tests for drafting
 describe('drafting', () => {
   it('2 player - project draft', () => {
-    const [game, player, otherPlayer] = testGame(2, {draftVariant: true});
+    const [game, player, otherPlayer] = testGame(2, {
+      skipInitialShuffling: true,
+      draftVariant: true,
+    });
     const drawPile = game.projectDeck.drawPile;
 
     unshiftCards(drawPile, [
@@ -368,15 +370,11 @@ describe('drafting', () => {
   });
 
   it('2 player - initial draft', () => {
-    const shuffle = Deck.shuffle;
-    let player: TestPlayer;
-    let otherPlayer: TestPlayer;
-    try {
-      Deck.shuffle = function() {};
-      [/* game */, player, otherPlayer] = testGame(2, {draftVariant: true, initialDraftVariant: true});
-    } finally {
-      Deck.shuffle = shuffle;
-    }
+    const [, /* game */ player, otherPlayer] = testGame(2, {
+      skipInitialShuffling: true,
+      draftVariant: true,
+      initialDraftVariant: true,
+    });
 
     // First round
 
@@ -610,7 +608,7 @@ describe('drafting', () => {
     expect(otherPlayer.draftedCards).is.empty;
 
     expect(initialCardSelection(player)).deep.eq({
-      'projectCards': [
+      projectCards: [
         CardName.ADAPTATION_TECHNOLOGY,
         CardName.ARCTIC_ALGAE,
         CardName.AEROBRAKED_AMMONIA_ASTEROID,
@@ -622,15 +620,16 @@ describe('drafting', () => {
         CardName.BIRDS,
         CardName.BIG_ASTEROID,
       ],
-      'corporationCards': [
+      corporationCards: [
         CardName.TERACTOR,
         CardName.SATURN_SYSTEMS,
       ],
-      'preludeCards': [],
+      preludeCards: [],
+      ceoCards: [],
     });
 
     expect(initialCardSelection(otherPlayer)).deep.eq({
-      'projectCards': [
+      projectCards: [
         CardName.ALGAE,
         CardName.ANTS,
         CardName.AQUIFER_PUMPING,
@@ -642,88 +641,33 @@ describe('drafting', () => {
         CardName.BEAM_FROM_A_THORIUM_ASTEROID,
         CardName.BIOMASS_COMBUSTORS,
       ],
-      'corporationCards': [
+      corporationCards: [
         CardName.UNITED_NATIONS_MARS_INITIATIVE,
         CardName.THORGATE,
       ],
-      'preludeCards': [],
+      preludeCards: [],
+      ceoCards: [],
     });
   });
 
-  it('2 player - initial draft + prelude - prelude draft', () => {
-    const shuffle = Deck.shuffle;
-    let player: TestPlayer;
-    let otherPlayer: TestPlayer;
-    try {
-      Deck.shuffle = function() {};
-      [/* game */, player, otherPlayer] = testGame(2, {draftVariant: true, initialDraftVariant: true, preludeExtension: true, preludeDraftVariant: false});
-    } finally {
-      Deck.shuffle = shuffle;
-    }
+  it('2 player - initial draft, with prelude, without prelude draft', () => {
+    const [, /* game */ player, otherPlayer] = testGame(2, {
+      skipInitialShuffling: true,
+      draftVariant: true,
+      initialDraftVariant: true,
+      preludeExtension: true,
+      preludeDraftVariant: false,
+    });
 
     // First round
-
-    expect(draftSelection(player)).deep.eq([
-      CardName.ADAPTATION_TECHNOLOGY,
-      CardName.ADAPTED_LICHEN,
-      CardName.ADVANCED_ECOSYSTEMS,
-      CardName.AEROBRAKED_AMMONIA_ASTEROID,
-      CardName.ANTS]);
-
-    expect(draftSelection(otherPlayer)).deep.eq([
-      CardName.AQUIFER_PUMPING,
-      CardName.ALGAE,
-      CardName.ARCHAEBACTERIA,
-      CardName.ARCTIC_ALGAE,
-      CardName.ARTIFICIAL_LAKE]);
-
-    selectCard(player, CardName.ADAPTATION_TECHNOLOGY);
-    selectCard(otherPlayer, CardName.ALGAE);
-
-    selectCard(player, CardName.ARCTIC_ALGAE);
-    selectCard(otherPlayer, CardName.ANTS);
-
-    selectCard(player, CardName.AEROBRAKED_AMMONIA_ASTEROID);
-    selectCard(otherPlayer, CardName.AQUIFER_PUMPING);
-
-    selectCard(player, CardName.ARCHAEBACTERIA);
-    selectCard(otherPlayer, CardName.ADAPTED_LICHEN);
-
-    // And now starts the second draft.
-
-    expect(draftSelection(player)).deep.eq([
-      CardName.ARTIFICIAL_PHOTOSYNTHESIS,
-      CardName.ASTEROID,
-      CardName.ASTEROID_MINING,
-      CardName.BEAM_FROM_A_THORIUM_ASTEROID,
-      CardName.BIG_ASTEROID,
-    ]);
-    expect(draftSelection(otherPlayer)).deep.eq([
-      CardName.BIOMASS_COMBUSTORS,
-      CardName.BIRDS,
-      CardName.BLACK_POLAR_DUST,
-      CardName.BREATHING_FILTERS,
-      CardName.BUSHES,
-    ]);
-
-    selectCard(player, CardName.ASTEROID_MINING);
-    selectCard(otherPlayer, CardName.BUSHES);
-
-    selectCard(player, CardName.BLACK_POLAR_DUST);
-    selectCard(otherPlayer, CardName.ARTIFICIAL_PHOTOSYNTHESIS);
-
-    selectCard(player, CardName.ASTEROID);
-    selectCard(otherPlayer, CardName.BREATHING_FILTERS);
-
-    selectCard(player, CardName.BIRDS);
-    selectCard(otherPlayer, CardName.BEAM_FROM_A_THORIUM_ASTEROID);
+    runInitialProjectDraft(player, otherPlayer);
 
     // No longer drafted cards, they're just cards to buy.
     expect(player.draftedCards).is.empty;
     expect(otherPlayer.draftedCards).is.empty;
 
     expect(initialCardSelection(player)).deep.eq({
-      'projectCards': [
+      projectCards: [
         CardName.ADAPTATION_TECHNOLOGY,
         CardName.ARCTIC_ALGAE,
         CardName.AEROBRAKED_AMMONIA_ASTEROID,
@@ -735,20 +679,21 @@ describe('drafting', () => {
         CardName.BIRDS,
         CardName.BIG_ASTEROID,
       ],
-      'corporationCards': [
+      corporationCards: [
         CardName.VITOR,
         CardName.VALLEY_TRUST,
       ],
-      'preludeCards': [
+      preludeCards: [
         CardName.EXPERIMENTAL_FOREST,
         CardName.ECOLOGY_EXPERTS,
         CardName.ECCENTRIC_SPONSOR,
         CardName.RESEARCH_NETWORK,
       ],
+      ceoCards: [],
     });
 
     expect(initialCardSelection(otherPlayer)).deep.eq({
-      'projectCards': [
+      projectCards: [
         CardName.ALGAE,
         CardName.ANTS,
         CardName.AQUIFER_PUMPING,
@@ -760,87 +705,31 @@ describe('drafting', () => {
         CardName.BEAM_FROM_A_THORIUM_ASTEROID,
         CardName.BIOMASS_COMBUSTORS,
       ],
-      'corporationCards': [
+      corporationCards: [
         CardName.ROBINSON_INDUSTRIES,
         CardName.POINT_LUNA,
       ],
-      'preludeCards': [
+      preludeCards: [
         CardName.ACQUIRED_SPACE_AGENCY,
         CardName.ORBITAL_CONSTRUCTION_YARD,
         CardName.METAL_RICH_ASTEROID,
         CardName.MOHOLE,
       ],
+      ceoCards: [],
     });
   });
 
 
   it('2 player - initial draft + prelude draft', () => {
-    const shuffle = Deck.shuffle;
-    let player: TestPlayer;
-    let otherPlayer: TestPlayer;
-    try {
-      Deck.shuffle = function() {};
-      [/* game */, player, otherPlayer] = testGame(2, {draftVariant: true, initialDraftVariant: true, preludeExtension: true, preludeDraftVariant: true});
-    } finally {
-      Deck.shuffle = shuffle;
-    }
+    const [/* game */, player, otherPlayer] = testGame(2, {
+      skipInitialShuffling: true,
+      draftVariant: true,
+      initialDraftVariant: true,
+      preludeExtension: true,
+      preludeDraftVariant: true,
+    });
 
-    // First round
-
-    expect(draftSelection(player)).deep.eq([
-      CardName.ADAPTATION_TECHNOLOGY,
-      CardName.ADAPTED_LICHEN,
-      CardName.ADVANCED_ECOSYSTEMS,
-      CardName.AEROBRAKED_AMMONIA_ASTEROID,
-      CardName.ANTS]);
-
-    expect(draftSelection(otherPlayer)).deep.eq([
-      CardName.AQUIFER_PUMPING,
-      CardName.ALGAE,
-      CardName.ARCHAEBACTERIA,
-      CardName.ARCTIC_ALGAE,
-      CardName.ARTIFICIAL_LAKE]);
-
-    selectCard(player, CardName.ADAPTATION_TECHNOLOGY);
-    selectCard(otherPlayer, CardName.ALGAE);
-
-    selectCard(player, CardName.ARCTIC_ALGAE);
-    selectCard(otherPlayer, CardName.ANTS);
-
-    selectCard(player, CardName.AEROBRAKED_AMMONIA_ASTEROID);
-    selectCard(otherPlayer, CardName.AQUIFER_PUMPING);
-
-    selectCard(player, CardName.ARCHAEBACTERIA);
-    selectCard(otherPlayer, CardName.ADAPTED_LICHEN);
-
-    // And now starts the second draft.
-
-    expect(draftSelection(player)).deep.eq([
-      CardName.ARTIFICIAL_PHOTOSYNTHESIS,
-      CardName.ASTEROID,
-      CardName.ASTEROID_MINING,
-      CardName.BEAM_FROM_A_THORIUM_ASTEROID,
-      CardName.BIG_ASTEROID,
-    ]);
-    expect(draftSelection(otherPlayer)).deep.eq([
-      CardName.BIOMASS_COMBUSTORS,
-      CardName.BIRDS,
-      CardName.BLACK_POLAR_DUST,
-      CardName.BREATHING_FILTERS,
-      CardName.BUSHES,
-    ]);
-
-    selectCard(player, CardName.ASTEROID_MINING);
-    selectCard(otherPlayer, CardName.BUSHES);
-
-    selectCard(player, CardName.BLACK_POLAR_DUST);
-    selectCard(otherPlayer, CardName.ARTIFICIAL_PHOTOSYNTHESIS);
-
-    selectCard(player, CardName.ASTEROID);
-    selectCard(otherPlayer, CardName.BREATHING_FILTERS);
-
-    selectCard(player, CardName.BIRDS);
-    selectCard(otherPlayer, CardName.BEAM_FROM_A_THORIUM_ASTEROID);
+    runInitialProjectDraft(player, otherPlayer);
 
     // Start of the prelude draft
 
@@ -912,7 +801,7 @@ describe('drafting', () => {
     // End of draft
 
     expect(initialCardSelection(player)).deep.eq({
-      'projectCards': [
+      projectCards: [
         CardName.ADAPTATION_TECHNOLOGY,
         CardName.ARCTIC_ALGAE,
         CardName.AEROBRAKED_AMMONIA_ASTEROID,
@@ -924,20 +813,21 @@ describe('drafting', () => {
         CardName.BIRDS,
         CardName.BIG_ASTEROID,
       ],
-      'corporationCards': [
+      corporationCards: [
         CardName.VITOR,
         CardName.VALLEY_TRUST,
       ],
-      'preludeCards': [
+      preludeCards: [
         CardName.EXPERIMENTAL_FOREST,
         CardName.ORBITAL_CONSTRUCTION_YARD,
         CardName.RESEARCH_NETWORK,
         CardName.METAL_RICH_ASTEROID,
       ],
+      ceoCards: [],
     });
 
     expect(initialCardSelection(otherPlayer)).deep.eq({
-      'projectCards': [
+      projectCards: [
         CardName.ALGAE,
         CardName.ANTS,
         CardName.AQUIFER_PUMPING,
@@ -949,18 +839,187 @@ describe('drafting', () => {
         CardName.BEAM_FROM_A_THORIUM_ASTEROID,
         CardName.BIOMASS_COMBUSTORS,
       ],
-      'corporationCards': [
+      corporationCards: [
         CardName.ROBINSON_INDUSTRIES,
         CardName.POINT_LUNA,
       ],
-      'preludeCards': [
+      preludeCards: [
         CardName.ACQUIRED_SPACE_AGENCY,
         CardName.ECOLOGY_EXPERTS,
         CardName.MOHOLE,
         CardName.ECCENTRIC_SPONSOR,
       ],
+      ceoCards: [],
     });
   });
+
+  it('2 player - initial draft + ceo draft', () => {
+    const [/* game */, player, otherPlayer] = testGame(2, {
+      skipInitialShuffling: true,
+      draftVariant: true,
+      initialDraftVariant: true,
+      ceoExtension: true,
+      ceosDraftVariant: true,
+    });
+
+    runInitialProjectDraft(player, otherPlayer);
+
+    // Start of the CEO draft
+
+    expect(player.draftedCards.map(toName)).deep.eq([]);
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([]);
+
+    expect(draftSelection(player)).deep.eq([
+      CardName.VANALLEN,
+      CardName.ULRICH,
+      CardName.TATE]);
+
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.STEFAN,
+      CardName.RYU,
+      CardName.MUSK]);
+
+    selectCard(player, CardName.VANALLEN);
+    selectCard(otherPlayer, CardName.STEFAN);
+
+    expect(player.draftedCards.map(toName)).deep.eq([
+      CardName.VANALLEN,
+    ]);
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([
+      CardName.STEFAN,
+    ]);
+
+    // Second CEO card
+
+    expect(draftSelection(player)).deep.eq([
+      CardName.RYU,
+      CardName.MUSK]);
+
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.ULRICH,
+      CardName.TATE]);
+
+    selectCard(player, CardName.RYU);
+    selectCard(otherPlayer, CardName.TATE);
+
+    expect(player.draftedCards.map(toName)).deep.eq([]);
+    expect(otherPlayer.draftedCards.map(toName)).deep.eq([]);
+
+    // End of draft
+
+    expect(initialCardSelection(player)).deep.eq({
+      projectCards: [
+        CardName.ADAPTATION_TECHNOLOGY,
+        CardName.ARCTIC_ALGAE,
+        CardName.AEROBRAKED_AMMONIA_ASTEROID,
+        CardName.ARCHAEBACTERIA,
+        CardName.ADVANCED_ECOSYSTEMS,
+        CardName.ASTEROID_MINING,
+        CardName.BLACK_POLAR_DUST,
+        CardName.ASTEROID,
+        CardName.BIRDS,
+        CardName.BIG_ASTEROID,
+      ],
+      corporationCards: [
+        CardName.TERACTOR,
+        CardName.SATURN_SYSTEMS,
+      ],
+      preludeCards: [],
+      ceoCards: [
+        CardName.VANALLEN,
+        CardName.RYU,
+        CardName.ULRICH,
+      ],
+    });
+
+    expect(initialCardSelection(otherPlayer)).deep.eq({
+      projectCards: [
+        CardName.ALGAE,
+        CardName.ANTS,
+        CardName.AQUIFER_PUMPING,
+        CardName.ADAPTED_LICHEN,
+        CardName.ARTIFICIAL_LAKE,
+        CardName.BUSHES,
+        CardName.ARTIFICIAL_PHOTOSYNTHESIS,
+        CardName.BREATHING_FILTERS,
+        CardName.BEAM_FROM_A_THORIUM_ASTEROID,
+        CardName.BIOMASS_COMBUSTORS,
+      ],
+      corporationCards: [
+        CardName.UNITED_NATIONS_MARS_INITIATIVE,
+        CardName.THORGATE,
+      ],
+      preludeCards: [
+      ],
+      ceoCards: [
+        CardName.STEFAN,
+        CardName.TATE,
+        CardName.MUSK,
+      ],
+    });
+  });
+
+  // Every initial draft includes project cards first.
+  // That shouldn't really be mandatory. Let's fix that.
+  // TODO(kberg): Allow prelude draft without project card draft.
+  function runInitialProjectDraft(player: TestPlayer, otherPlayer: TestPlayer) {
+    // First round
+
+    expect(draftSelection(player)).deep.eq([
+      CardName.ADAPTATION_TECHNOLOGY,
+      CardName.ADAPTED_LICHEN,
+      CardName.ADVANCED_ECOSYSTEMS,
+      CardName.AEROBRAKED_AMMONIA_ASTEROID,
+      CardName.ANTS]);
+
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.AQUIFER_PUMPING,
+      CardName.ALGAE,
+      CardName.ARCHAEBACTERIA,
+      CardName.ARCTIC_ALGAE,
+      CardName.ARTIFICIAL_LAKE]);
+
+    selectCard(player, CardName.ADAPTATION_TECHNOLOGY);
+    selectCard(otherPlayer, CardName.ALGAE);
+
+    selectCard(player, CardName.ARCTIC_ALGAE);
+    selectCard(otherPlayer, CardName.ANTS);
+
+    selectCard(player, CardName.AEROBRAKED_AMMONIA_ASTEROID);
+    selectCard(otherPlayer, CardName.AQUIFER_PUMPING);
+
+    selectCard(player, CardName.ARCHAEBACTERIA);
+    selectCard(otherPlayer, CardName.ADAPTED_LICHEN);
+
+    // And now starts the second draft.
+
+    expect(draftSelection(player)).deep.eq([
+      CardName.ARTIFICIAL_PHOTOSYNTHESIS,
+      CardName.ASTEROID,
+      CardName.ASTEROID_MINING,
+      CardName.BEAM_FROM_A_THORIUM_ASTEROID,
+      CardName.BIG_ASTEROID,
+    ]);
+    expect(draftSelection(otherPlayer)).deep.eq([
+      CardName.BIOMASS_COMBUSTORS,
+      CardName.BIRDS,
+      CardName.BLACK_POLAR_DUST,
+      CardName.BREATHING_FILTERS,
+      CardName.BUSHES,
+    ]);
+
+    selectCard(player, CardName.ASTEROID_MINING);
+    selectCard(otherPlayer, CardName.BUSHES);
+
+    selectCard(player, CardName.BLACK_POLAR_DUST);
+    selectCard(otherPlayer, CardName.ARTIFICIAL_PHOTOSYNTHESIS);
+
+    selectCard(player, CardName.ASTEROID);
+    selectCard(otherPlayer, CardName.BREATHING_FILTERS);
+
+    selectCard(player, CardName.BIRDS);
+    selectCard(otherPlayer, CardName.BEAM_FROM_A_THORIUM_ASTEROID);
+  }
 });
 
 function getWaitingFor(player: IPlayer): SelectCard<IProjectCard> {
@@ -972,14 +1031,18 @@ function unshiftCards(deck: Array<IProjectCard>, cards: Array<CardName>) {
 }
 
 function initialCardSelection(player: IPlayer) {
+  function map(input: any) {
+    if (input === undefined) {
+      return [];
+    }
+    return cast(input, SelectCard).cards.map(toName);
+  }
   const selectInitialCards = cast(player.getWaitingFor(), SelectInitialCards);
-  const corporationCards = cast(selectInitialCards.options[0], SelectCard);
-  const preludeCards = selectInitialCards.options.length === 3 ? cast(selectInitialCards.options[1], SelectCard) : undefined;
-  const projectCards = cast(selectInitialCards.options.length === 3 ? selectInitialCards.options[2] : selectInitialCards.options[1], SelectCard);
   return {
-    corporationCards: corporationCards.cards.map(toName),
-    preludeCards: preludeCards?.cards.map(toName) ?? [],
-    projectCards: projectCards.cards.map(toName),
+    corporationCards: map(selectInitialCards.inputs.corp),
+    preludeCards: map(selectInitialCards.inputs.prelude),
+    projectCards: map(selectInitialCards.inputs.project),
+    ceoCards: map(selectInitialCards.inputs.ceo),
   };
 }
 
@@ -1011,7 +1074,7 @@ function selectCard(player: TestPlayer, cardName: CardName) {
 //   expect(game.deferredActions).has.length(0);
 //   expect(restored.deferredActions).has.length(0);
 
-//   for (const id of game.getPlayers().map((p) => p.id)) {
+//   for (const id of game.players.map(toID)) {
 //     const livePlayer = game.getPlayerById(id);
 //     const restoredPlayer = restored.getPlayerById(id);
 
@@ -1025,3 +1088,4 @@ function selectCard(player: TestPlayer, cardName: CardName) {
 //     }
 //   }
 // }
+

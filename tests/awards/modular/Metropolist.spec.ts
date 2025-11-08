@@ -7,20 +7,20 @@ import {TileType} from '../../../src/common/TileType';
 import {testGame} from '../../TestGame';
 import {Metropolist} from '../../../src/server/awards/modular/Metropolist';
 
-describe('Metropolist', function() {
+describe('Metropolist', () => {
   let award : Metropolist;
   let player: TestPlayer;
   let game: IGame;
   let board: Board;
 
-  beforeEach(function() {
+  beforeEach(() => {
     award = new Metropolist();
     [game, player] = testGame(2);
     board = game.board;
   });
 
-  it('Is applied to all cities', function() {
-    const colonySpaces = board.getSpaces(SpaceType.COLONY, player);
+  it('Is applied to all cities', () => {
+    const colonySpaces = board.getSpaces(SpaceType.COLONY);
     const landSpaces = board.getAvailableSpacesOnLand(player);
 
     game.simpleAddTile(player, landSpaces[0], {tileType: TileType.GREENERY});

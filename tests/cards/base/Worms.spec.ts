@@ -6,22 +6,22 @@ import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('Worms', function() {
+describe('Worms', () => {
   let card: Worms;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Worms();
     [game, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     setOxygenLevel(game, 3);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     setOxygenLevel(game, 4);
     expect(card.canPlay(player)).is.true;
     const tardigrades = new Tardigrades();

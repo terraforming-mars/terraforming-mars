@@ -3,8 +3,8 @@ import {AquiferReleasedByPublicCouncil} from '../../src/server/turmoil/globalEve
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('AquiferReleasedByPublicCouncil', function() {
-  it('resolve play', function() {
+describe('AquiferReleasedByPublicCouncil', () => {
+  it('resolve play', () => {
     const card = new AquiferReleasedByPublicCouncil();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

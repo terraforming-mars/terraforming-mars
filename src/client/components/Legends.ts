@@ -24,4 +24,5 @@ export const LEGENDS: Record<BoardName, Array<Key>> = {
     {text: ['Apollinaris', 'Mons'], position: [500, 205], line: {from: [-3, 6], to: [-50, 28]}},
     {text: ['Hadriacus', 'Mons'], position: [90, 365], line: {from: [48, -7], to: [63, -18]}},
   ],
+  [BoardName.HOLLANDIA]: [],
 };

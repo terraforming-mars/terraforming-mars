@@ -8,23 +8,23 @@ import {Celestic} from '../../../src/server/cards/venusNext/Celestic';
 import {JetStreamMicroscrappers} from '../../../src/server/cards/venusNext/JetStreamMicroscrappers';
 import {IGame} from '../../../src/server/IGame';
 
-describe('VenusShuttles', function() {
+describe('VenusShuttles', () => {
   let card: VenusShuttles;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new VenusShuttles();
     [game, player] = testGame(1, {venusNextExtension: true});
   });
 
-  it('Should play, no cards', function() {
+  it('Should play, no cards', () => {
     card.play(player);
   });
 
-  it('Should play, one option', function() {
+  it('Should play, one option', () => {
     const celestic = new Celestic(); // Stores floaters, has Venus tag.
-    player.corporations.push(celestic);
+    player.playedCards.push(celestic);
 
     card.play(player);
     runAllActions(game);
@@ -32,10 +32,10 @@ describe('VenusShuttles', function() {
     expect(celestic.resourceCount).to.eq(2);
   });
 
-  it('Should Play, multiple cards.', function() {
+  it('Should Play, multiple cards.', () => {
     const celestic = new Celestic(); // Stores floaters. has Venus tag
     const jsr = new JetStreamMicroscrappers(); // Stores floaters, has Venus tag.
-    player.corporations.push(celestic);
+    player.playedCards.push(celestic);
     player.playedCards.push(jsr);
     cast(card.play(player), undefined);
     runAllActions(game);
@@ -56,7 +56,7 @@ describe('VenusShuttles', function() {
     {mc: 0, tags: 12, expected: true},
   ] as const;
   for (const run of canActRuns) {
-    it('canAct ' + JSON.stringify(run), function() {
+    it('canAct ' + JSON.stringify(run), () => {
       player.megaCredits = run.mc;
       player.tagsForTest = {venus: run.tags};
       expect(card.canAct(player)).eq(run.expected);
@@ -65,7 +65,7 @@ describe('VenusShuttles', function() {
 
   it('action', () => {
     player.megaCredits = 13;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(game.getVenusScaleLevel()).eq(0);
 
     cast(card.action(player), undefined);
@@ -74,10 +74,10 @@ describe('VenusShuttles', function() {
 
     expect(player.megaCredits).eq(1);
     expect(game.getVenusScaleLevel()).eq(2);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 
-  it('Action 15 venus tags', function() {
+  it('Action 15 venus tags', () => {
     expect(game.getVenusScaleLevel()).eq(0);
     player.tagsForTest = {venus: 15};
     player.megaCredits = 0;

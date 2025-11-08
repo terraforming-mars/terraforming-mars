@@ -7,27 +7,27 @@ import {cast, runAllActions, setOxygenLevel} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 import {assertPlaceCity} from '../../assertions';
 
-describe('CupolaCity', function() {
+describe('CupolaCity', () => {
   let card: CupolaCity;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CupolaCity();
     [game, player] = testGame(2);
   });
 
-  it('Can not play without energy production', function() {
+  it('Can not play without energy production', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can not play if oxygen level too high', function() {
+  it('Can not play if oxygen level too high', () => {
     player.production.add(Resource.ENERGY, 1);
     setOxygenLevel(game, 10);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     player.production.add(Resource.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 

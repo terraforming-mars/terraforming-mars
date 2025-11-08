@@ -6,8 +6,8 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectPlayer} from '../../../src/server/inputs/SelectPlayer';
 import {cast} from '../../TestingUtils';
 
-describe('CometForVenus', function() {
-  it('Should play', function() {
+describe('CometForVenus', () => {
+  it('Should play', () => {
     const card = new CometForVenus();
     const card2 = new AerialMappers();
     const [game, player, player2] = testGame(2);

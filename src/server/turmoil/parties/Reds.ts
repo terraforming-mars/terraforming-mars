@@ -27,19 +27,19 @@ class RedsBonus01 extends Bonus {
 
   getScore(player: IPlayer) {
     const game = player.game;
-    const players = [...game.getPlayersInGenerationOrder()];
+    const players = [...game.playersInGenerationOrder];
 
-    if (game.isSoloMode() && players[0].getTerraformRating() <= 20) return 1;
+    if (game.isSoloMode() && players[0].terraformRating <= 20) return 1;
 
-    players.sort((p1, p2) => p1.getTerraformRating() - p2.getTerraformRating());
-    const min = players[0].getTerraformRating();
+    players.sort((p1, p2) => p1.terraformRating - p2.terraformRating);
+    const min = players[0].terraformRating;
 
-    if (player.getTerraformRating() === min) return 1;
+    if (player.terraformRating === min) return 1;
     return 0;
   }
 
   override grant(game: IGame) {
-    const players = game.getPlayersInGenerationOrder();
+    const players = game.playersInGenerationOrder;
     const scores = players.map((player) => this.getScore(player));
 
     players.forEach((player, idx) => {
@@ -62,19 +62,19 @@ class RedsBonus02 implements IBonus {
 
   getScore(player: IPlayer) {
     const game = player.game;
-    const players = [...game.getPlayersInGenerationOrder()];
+    const players = [...game.playersInGenerationOrder];
 
-    if (game.isSoloMode() && players[0].getTerraformRating() > 20) return -1;
+    if (game.isSoloMode() && players[0].terraformRating > 20) return -1;
 
-    players.sort((p1, p2) => p2.getTerraformRating() - p1.getTerraformRating());
-    const max = players[0].getTerraformRating();
+    players.sort((p1, p2) => p2.terraformRating - p1.terraformRating);
+    const max = players[0].terraformRating;
 
-    if (player.getTerraformRating() === max) return -1;
+    if (player.terraformRating === max) return -1;
     return 0;
   }
 
   grant(game: IGame) {
-    const players = game.getPlayersInGenerationOrder();
+    const players = game.playersInGenerationOrder;
     const scores = players.map((player) => this.getScore(player));
 
     players.forEach((player, idx) => {
@@ -94,7 +94,7 @@ class RedsPolicy02 implements IPolicy {
 
   onTilePlaced(player: IPlayer) {
     let amountPlayerHas = player.megaCredits;
-    if (player.isCorporation(CardName.HELION)) amountPlayerHas += player.heat;
+    if (player.tableau.has(CardName.HELION)) amountPlayerHas += player.heat;
 
     const amountToPay = Math.min(amountPlayerHas, 3);
     if (amountToPay > 0) {
@@ -121,23 +121,23 @@ class RedsPolicy03 implements IPolicy {
       const venusScaleLevel = game.getVenusScaleLevel();
       return game.gameOptions.venusNextExtension === true && venusScaleLevel > MIN_VENUS_SCALE && venusScaleLevel !== MAX_VENUS_SCALE;
     case GlobalParameter.MOON_HABITAT_RATE:
-      return MoonExpansion.ifElseMoon(game, (moonData) => {
-        const rate = moonData.habitatRate;
+      if (game.moonData) {
+        const rate = game.moonData.habitatRate;
         return rate > 0 && rate !== MAXIMUM_HABITAT_RATE;
-      },
-      () => false);
+      }
+      return false;
     case GlobalParameter.MOON_LOGISTICS_RATE:
-      return MoonExpansion.ifElseMoon(game, (moonData) => {
-        const rate = moonData.logisticRate;
+      if (game.moonData) {
+        const rate = game.moonData.logisticRate;
         return rate > 0 && rate !== MAXIMUM_LOGISTICS_RATE;
-      },
-      () => false);
+      }
+      return false;
     case GlobalParameter.MOON_MINING_RATE:
-      return MoonExpansion.ifElseMoon(game, (moonData) => {
-        const rate = moonData.miningRate;
+      if (game.moonData) {
+        const rate = game.moonData.miningRate;
         return rate > 0 && rate !== MAXIMUM_MINING_RATE;
-      },
-      () => false);
+      }
+      return false;
     }
   }
 
@@ -156,10 +156,8 @@ class RedsPolicy03 implements IPolicy {
       oxygenLevel === MIN_OXYGEN_LEVEL &&
       venusScaleLevel === MIN_VENUS_SCALE;
 
-    const moonParametersAtMinimum= MoonExpansion.ifElseMoon(
-      game,
-      (moonData) => moonData.habitatRate === 0 && moonData.logisticRate === 0 && moonData.miningRate === 0,
-      () => false);
+    const moonData = player.game.moonData;
+    const moonParametersAtMinimum = moonData === undefined ? true : Math.max(moonData.habitatRate, moonData.logisticRate, moonData.miningRate) === 0;
 
     if (basicParametersAtMinimum && moonParametersAtMinimum) {
       return false;

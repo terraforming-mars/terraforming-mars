@@ -3,7 +3,7 @@ import {Space} from '../boards/Space';
 import {IPlayer} from '../IPlayer';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {MoonSpaces} from '../../common/moon/MoonSpaces';
+import {NamedMoonSpace, NamedMoonSpaces} from '../../common/moon/NamedMoonSpaces';
 import {SpaceId, isSpaceId, safeCast} from '../../common/Types';
 import {GameOptions} from '../../server/game/GameOptions';
 import {Random} from '../../common/utils/Random';
@@ -13,16 +13,15 @@ function colonySpace(id: SpaceId): Space {
   return {id, spaceType: SpaceType.COLONY, x: -1, y: -1, bonus: []};
 }
 
-
 export class MoonBoard extends Board {
   public getAvailableSpacesForMine(player: IPlayer): ReadonlyArray<Space> {
     const spaces = this.spaces.filter((space) => {
       const val = space.tile === undefined &&
         space.spaceType === SpaceType.LUNAR_MINE &&
-        space.id !== MoonSpaces.MARE_IMBRIUM &&
-        space.id !== MoonSpaces.MARE_SERENITATIS &&
-        space.id !== MoonSpaces.MARE_NUBIUM &&
-        space.id !== MoonSpaces.MARE_NECTARIS &&
+        space.id !== NamedMoonSpaces.MARE_IMBRIUM &&
+        space.id !== NamedMoonSpaces.MARE_SERENITATIS &&
+        space.id !== NamedMoonSpaces.MARE_NUBIUM &&
+        space.id !== NamedMoonSpaces.MARE_NECTARIS &&
         (space.player === undefined || space.player.id === player.id);
       return val;
     });
@@ -45,10 +44,10 @@ export class MoonBoard extends Board {
 
     if (gameOptions.shuffleMapOption!== undefined && gameOptions.shuffleMapOption) {
       b.shuffle(rng,
-        MoonSpaces.MARE_IMBRIUM,
-        MoonSpaces.MARE_NECTARIS,
-        MoonSpaces.MARE_NUBIUM,
-        MoonSpaces.MARE_SERENITATIS);
+        NamedMoonSpaces.MARE_IMBRIUM,
+        NamedMoonSpaces.MARE_NECTARIS,
+        NamedMoonSpaces.MARE_NUBIUM,
+        NamedMoonSpaces.MARE_SERENITATIS);
     }
     const spaces = b.build();
     return new MoonBoard(spaces);
@@ -82,7 +81,7 @@ class Builder {
     return safeCast('m' + strId, isSpaceId);
   }
   public build(): Array<Space> {
-    this.spaces.push(colonySpace(MoonSpaces.LUNA_TRADE_STATION));
+    this.spaces.push(colonySpace(NamedMoonSpaces.LUNA_TRADE_STATION));
 
     const tilesPerRow = [4, 5, 6, 5, 6, 5, 4];
     const idOffset = this.spaces.length + 1;
@@ -106,10 +105,10 @@ class Builder {
       }
     }
 
-    this.spaces.push(colonySpace(MoonSpaces.MOMENTUM_VIRIUM));
+    this.spaces.push(colonySpace(NamedMoonSpaces.MOMENTUM_VIRIUM));
     return this.spaces;
   }
-  public shuffle(rng: Random, ...preservedSpaceIds: Array<MoonSpaces>) {
+  public shuffle(rng: Random, ...preservedSpaceIds: Array<NamedMoonSpace>) {
     const preservedSpaces = [];
     for (const spaceId of preservedSpaceIds) {
       const idx = Number(spaceId.substring(1, 3));

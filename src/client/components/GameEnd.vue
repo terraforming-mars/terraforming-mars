@@ -52,7 +52,7 @@
               <span v-for="p in winners" :key="p.color"><span :class="'log-player ' + getEndGamePlayerRowColorClass(p.color)">{{ p.name }}</span></span> <span v-i18n>won!</span>
           </div>
           <div class="game_end_victory_points">
-              <h2><span v-i18n>Victory points breakdown after</span> {{game.generation}} <span v-i18n>generations</span></h2>
+              <h2><span v-i18n>Victory point breakdown after</span> {{game.generation}} <span v-i18n>generations</span></h2>
               <table class="table game_end_table">
                   <thead>
                       <tr v-i18n>
@@ -67,7 +67,7 @@
                           <th v-if="game.moon !== undefined"><div class="table-moon-mine-tile"></div></th>
                           <th v-if="game.pathfinders !== undefined"><div class="table-planetary-track"></div></th>
                           <th><div class="vp">VP</div></th>
-                          <th v-if="game.gameOptions.escapeVelocityMode" class="clock-icon tooltip tooltip-top" :data-tooltip="$t('Escape Velocity penalty')">&#x23F3;</th>
+                          <th v-if="game.gameOptions.escapeVelocity" class="clock-icon tooltip tooltip-top" :data-tooltip="$t('Escape Velocity penalty')">&#x23F3;</th>
                           <th class="game-end-total"><div class="game-end-total-column">Total</div></th>
                           <th><div class="mc-icon"></div></th>
                           <th v-if="game.gameOptions.showTimers" class="clock-icon">&#x1F551;</th>
@@ -92,7 +92,7 @@
                           <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonMines }}</td>
                           <td v-if="game.pathfinders !== undefined"> {{ p.victoryPointsBreakdown.planetaryTracks}}</td>
                           <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
-                          <td v-if="game.gameOptions.escapeVelocityMode">{{ p.victoryPointsBreakdown.escapeVelocity }}</td>
+                          <td v-if="game.gameOptions.escapeVelocity">{{ p.victoryPointsBreakdown.escapeVelocity }}</td>
                           <td class="game-end-total">{{ p.victoryPointsBreakdown.total }}</td>
                           <td class="game-end-mc">
                             <div>{{ p.megaCredits }}</div>
@@ -171,7 +171,7 @@
             </div>
           </div>
           <div class="game_end_block--log game-end-column">
-            <log-panel :color="color" :generation="game.generation" v-if="viewModel.id !== undefined" :id="viewModel.id" :lastSoloGeneration="game.lastSoloGeneration" :players="players"></log-panel>
+            <log-panel :color="color" :viewModel="viewModel"></log-panel>
             <a :href="downloadLogUrl" target="_blank" v-i18n>Download game log</a>
           </div>
         </div>
@@ -202,7 +202,7 @@ import {GlobalParameter} from '@/common/GlobalParameter';
 import {$t, translateTextWithParams, translateMessage} from '@/client/directives/i18n';
 import {Message} from '@/common/logs/Message';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
-import {MADetail} from '@/common/game/IVictoryPointsBreakdown';
+import {MADetail} from '@/common/game/VictoryPointsBreakdown';
 import {AwardName} from '@/common/ma/AwardName';
 
 function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | undefined): ViewModel {
@@ -279,7 +279,7 @@ export default Vue.extend({
       });
     },
     globalsDataset(): ReadonlyArray<DataSet> {
-      const dataset = [];
+      const dataset: Array<DataSet> = [];
 
       const gpg = this.game.globalsPerGeneration;
       function getValues(param: GlobalParameter, min: number, max: number): ReadonlyArray<number> {
@@ -289,16 +289,16 @@ export default Vue.extend({
         });
       }
 
-      dataset.push({label: $t('Temperature'), color: Color.RED, data: getValues(GlobalParameter.TEMPERATURE, -30, 8)});
-      dataset.push({label: $t('Oxygen'), color: Color.GREEN, data: getValues(GlobalParameter.OXYGEN, 0, 14)});
-      dataset.push({label: $t('Oceans'), color: Color.BLUE, data: getValues(GlobalParameter.OCEANS, 0, 9)});
+      dataset.push({label: $t('Temperature'), color: 'red', data: getValues(GlobalParameter.TEMPERATURE, -30, 8)});
+      dataset.push({label: $t('Oxygen'), color: 'green', data: getValues(GlobalParameter.OXYGEN, 0, 14)});
+      dataset.push({label: $t('Oceans'), color: 'blue', data: getValues(GlobalParameter.OCEANS, 0, 9)});
       if (this.game.gameOptions.expansions.venus === true) {
-        dataset.push({label: $t('Venus'), color: Color.YELLOW, data: getValues(GlobalParameter.VENUS, 0, 30)});
+        dataset.push({label: $t('Venus'), color: 'yellow', data: getValues(GlobalParameter.VENUS, 0, 30)});
       }
       if (this.game.gameOptions.expansions.moon === true) {
-        dataset.push({label: $t('L. Habitat'), color: Color.ORANGE, data: getValues(GlobalParameter.MOON_HABITAT_RATE, 0, 8)});
-        dataset.push({label: $t('L. Mining'), color: Color.PINK, data: getValues(GlobalParameter.MOON_MINING_RATE, 0, 8)});
-        dataset.push({label: $t('L. Logistics'), color: Color.PURPLE, data: getValues(GlobalParameter.MOON_LOGISTICS_RATE, 0, 8)});
+        dataset.push({label: $t('L. Habitat'), color: 'orange', data: getValues(GlobalParameter.MOON_HABITAT_RATE, 0, 8)});
+        dataset.push({label: $t('L. Mining'), color: 'pink', data: getValues(GlobalParameter.MOON_MINING_RATE, 0, 8)});
+        dataset.push({label: $t('L. Logistics'), color: 'purple', data: getValues(GlobalParameter.MOON_LOGISTICS_RATE, 0, 8)});
       }
       return dataset;
     },

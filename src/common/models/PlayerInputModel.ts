@@ -10,6 +10,7 @@ import {PaymentOptions} from '../inputs/Payment';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
 import {Warning} from '../cards/Warning';
 import {Units} from '../Units';
+import {ClaimedToken} from '../underworld/UnderworldPlayerData';
 
 export type BaseInputModel = {
   title: string | Message;
@@ -37,7 +38,7 @@ export type SelectInitialCardsModel = BaseInputModel & {
 
 export type SelectOptionModel = BaseInputModel & {
   type: 'option';
-  warnings?: Array<Warning>;
+  warnings?: ReadonlyArray<Warning>;
 }
 
 export type SelectProjectCardToPlayModel = BaseInputModel & {
@@ -50,7 +51,6 @@ export type SelectProjectCardToPlayModel = BaseInputModel & {
   seeds: number;
   graphene: number;
   kuiperAsteroids: number;
-  corruption: number;
 }
 
 export type SelectCardModel = BaseInputModel & {
@@ -130,6 +130,13 @@ export type SelectResourcesModel = BaseInputModel & {
   count: number;
 }
 
+export type SelectClaimedUndergroundTokenModel = BaseInputModel & {
+  type: 'claimedUndergroundToken';
+  max: number;
+  min: number;
+  tokens: ReadonlyArray<ClaimedToken>;
+}
+
 export type PlayerInputModel =
   AndOptionsModel |
   OrOptionsModel |
@@ -150,4 +157,5 @@ export type PlayerInputModel =
   ShiftAresGlobalParametersModel |
   SelectGlobalEventModel |
   SelectResourceModel |
-  SelectResourcesModel;
+  SelectResourcesModel |
+  SelectClaimedUndergroundTokenModel;

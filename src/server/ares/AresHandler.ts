@@ -115,7 +115,7 @@ export class AresHandler {
 
     if (giveAresTileOwnerBonus) {
       let ownerBonus = 1;
-      if (adjacentPlayer.cardIsInEffect(CardName.MARKETING_EXPERTS)) {
+      if (adjacentPlayer.tableau.has(CardName.MARKETING_EXPERTS)) {
         ownerBonus = 2;
       }
 
@@ -125,30 +125,37 @@ export class AresHandler {
   }
 
   public static maybeIncrementMilestones(aresData: AresData, player: IPlayer, space: Space, hazardSeverity: HazardSeverity) {
-    const hasAdjacencyBonus = player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => {
-      return (adjacentSpace.adjacency?.bonus?? []).length > 0;
-    });
-
     const entry : MilestoneCount | undefined = aresData.milestoneResults.find((e) => e.id === player.id);
     if (entry === undefined) {
       throw new Error('Player ID not in the Ares milestone results map: ' + player.id);
     }
 
+    const hasAdjacencyBonus = player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => {
+      return (adjacentSpace.adjacency?.bonus?? []).length > 0;
+    });
+
     if (hasAdjacencyBonus) {
-      entry.count++;
+      entry.networkerCount++;
     }
-    if (hazardSeverity !== HazardSeverity.NONE) {
-      // TODO(kberg): remove ?? 0 by 2025-02-01
-      entry.purifierCount = (entry.purifierCount ?? 0) + 1;
+    if (hazardSeverity !== 'none') {
+      entry.purifierCount++;
     }
+  }
+
+  public static incrementPurifier(aresData: AresData, player: IPlayer) {
+    const entry : MilestoneCount | undefined = aresData.milestoneResults.find((e) => e.id === player.id);
+    if (entry === undefined) {
+      throw new Error('Player ID not in the Ares milestone results map: ' + player.id);
+    }
+    entry.purifierCount++;
   }
 
   public static hasHazardTile(space: Space): boolean {
-    return hazardSeverity(space.tile?.tileType) !== HazardSeverity.NONE;
+    return hazardSeverity(space.tile?.tileType) !== 'none';
   }
 
   private static computeAdjacencyCosts(player: IPlayer, space: Space, subjectToHazardAdjacency: boolean): AdjacencyCost {
-    if (player.isCorporation(CardName.ATHENA)) {
+    if (player.tableau.has(CardName.ATHENA)) {
       subjectToHazardAdjacency = false;
     }
 

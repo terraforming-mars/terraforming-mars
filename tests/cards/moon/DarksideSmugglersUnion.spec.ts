@@ -11,18 +11,18 @@ import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 import {Message} from '../../../src/common/logs/Message';
 
-describe('DarksideSmugglersUnion', function() {
+describe('DarksideSmugglersUnion', () => {
   let card: DarksideSmugglersUnion;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DarksideSmugglersUnion();
     // Second player is ignored.
     [game, player] = testGame(2, {coloniesExtension: true});
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.playedCards.push(card);
     expect(card.canAct(player)).is.true;
   });
@@ -37,11 +37,11 @@ describe('DarksideSmugglersUnion', function() {
   it('Cannot act without trade fleets', () => {
     player.playedCards.push(card);
     expect(card.canAct(player)).is.true;
-    player.colonies.tradesThisGeneration = player.colonies.getFleetSize();
+    player.colonies.usedTradeFleets = player.colonies.getFleetSize();
     expect(card.canAct(player)).is.false;
   });
 
-  it('Should play with multiple and colonies', function() {
+  it('Should play with multiple and colonies', () => {
     game.colonies = [new Luna(), new Triton()];
 
     player.playedCards.push(card);

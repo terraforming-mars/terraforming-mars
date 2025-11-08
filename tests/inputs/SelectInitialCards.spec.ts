@@ -5,7 +5,7 @@ import {TestPlayer} from '../TestPlayer';
 import {CardName} from '../../src/common/cards/CardName';
 import {ICorporationCard} from '../../src/server/cards/corporation/ICorporationCard';
 import {cardsFromJSON, ceosFromJSON, corporationCardsFromJSON, preludesFromJSON} from '../../src/server/createCard';
-import {toName} from '../TestingUtils';
+import {toName} from '../../src/common/utils/utils';
 
 describe('SelectInitialCards', () => {
   let player: TestPlayer;
@@ -60,7 +60,7 @@ describe('SelectInitialCards', () => {
       {type: 'card', cards: [CardName.ANTS]},
     ]}, player);
 
-    expect(player.corporations).has.length(0); // This input object doesn't set the player's corporation card
+    expect(player.playedCards.corporations()).is.empty; // This input object doesn't set the player's corporation card
     expect(corp!.name).eq(CardName.INVENTRIX);
     expect(player.cardsInHand.map(toName)).to.have.members([CardName.ANTS]); // But it does set their cards in hand.
 
@@ -85,10 +85,10 @@ describe('SelectInitialCards', () => {
       {type: 'card', cards: [CardName.ANTS]},
     ]}, player);
 
-    expect(player.corporations).has.length(0); // This input object doesn't set the player's corporation card
+    expect(player.playedCards.corporations()).is.empty; // This input object doesn't set the player's corporation card
     expect(corp!.name).eq(CardName.INVENTRIX);
     expect(player.cardsInHand.map(toName)).to.have.members([CardName.ANTS]); // But it does set their cards in hand.
-    expect(player.ceoCardsInHand.map(toName)).to.have.members([CardName.ASIMOV]);
+    expect(Array.from(player.ceoCardsInHand).map(toName)).to.have.members([CardName.ASIMOV]);
     expect(player.preludeCardsInHand.map(toName)).to.have.members([CardName.LOAN, CardName.BIOLAB]);
 
     expect(player.game.projectDeck.discardPile.map(toName)).to.have.members([CardName.BACTOVIRAL_RESEARCH, CardName.COMET_AIMING, CardName.DIRIGIBLES]);

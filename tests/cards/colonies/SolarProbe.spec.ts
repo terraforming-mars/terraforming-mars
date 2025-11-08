@@ -1,17 +1,15 @@
 import {Tag} from '../../../src/common/cards/Tag';
 import {expect} from 'chai';
-import {Research} from '../../../src/server/cards/base/Research';
 import {SolarProbe} from '../../../src/server/cards/colonies/SolarProbe';
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('SolarProbe', function() {
-  it('Should play', function() {
+describe('SolarProbe', () => {
+  it('Should play', () => {
     const card = new SolarProbe();
-    const research = new Research();
     const [/* game */, player] = testGame(2);
 
-    player.playedCards.push(research);
+    player.tagsForTest = {science: 2};
 
     expect(player.tags.count(Tag.SCIENCE)).eq(2);
 
@@ -22,11 +20,8 @@ describe('SolarProbe', function() {
     expect(player.cardsInHand).has.lengthOf(1);
 
     // This part shows that it draws one card per 3 tags.
-    player.playedCards = [];
     player.cardsInHand = [];
-    player.playedCards.push(research);
-    player.playedCards.push(research);
-    player.playedCards.push(research);
+    player.tagsForTest = {science: 6};
 
     expect(player.tags.count(Tag.SCIENCE)).eq(6);
 

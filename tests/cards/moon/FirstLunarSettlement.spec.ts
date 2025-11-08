@@ -22,7 +22,7 @@ describe('FirstLunarSettlement', () => {
 
   it('play', () => {
     expect(player.production.megacredits).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.habitatRate).eq(0);
 
     card.play(player);
@@ -30,7 +30,7 @@ describe('FirstLunarSettlement', () => {
     placeTileAction.execute()!.cb(moonData.moon.spaces[2]);
 
     expect(moonData.habitatRate).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 });
 

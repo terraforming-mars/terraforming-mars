@@ -3,8 +3,8 @@ import {EarthCatapult} from '../../../src/server/cards/base/EarthCatapult';
 import {SpinoffDepartment} from '../../../src/server/cards/colonies/SpinoffDepartment';
 import {cast, testGame} from '../../TestingUtils';
 
-describe('SpinoffDepartment', function() {
-  it('Should play', function() {
+describe('SpinoffDepartment', () => {
+  it('Should play', () => {
     const card = new SpinoffDepartment();
     const card2 = new EarthCatapult();
     const [/* game */, player/* , player2 */] = testGame(2);

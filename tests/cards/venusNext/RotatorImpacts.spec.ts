@@ -36,13 +36,13 @@ describe('RotatorImpacts', () => {
   it('Works with MSI corporation', () => {
     const corp = new MorningStarInc();
     corp.play(player);
-    player.corporations.push(corp);
+    player.playedCards.push(corp);
 
     setVenusScaleLevel(game, 18);
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Should act', () => {
+  it('Should act - only add resource', () => {
     player.playedCards.push(card);
     player.megaCredits = 16;
     player.titanium = 2;
@@ -53,6 +53,28 @@ describe('RotatorImpacts', () => {
 
     card.action(player);
     expect(card.resourceCount).to.eq(1);
+  });
+
+  it('Should act - only spend resource', () => {
+    player.playedCards.push(card);
+    player.megaCredits = 1;
+    card.resourceCount = 1;
+
+    expect(card.canAct(player)).is.true;
+    expect(game.getVenusScaleLevel()).eq(0);
+
+    // only one possible action: spend resource
+    card.action(player);
+    expect(card.resourceCount).to.eq(0);
+    expect(game.getVenusScaleLevel()).eq(2);
+    expect(player.terraformRating).eq(21);
+  });
+
+  it('Should act', () => {
+    player.playedCards.push(card);
+    player.megaCredits = 16;
+    player.titanium = 2;
+    card.resourceCount = 1;
 
     // two possible actions: add resource or spend titanium
     const orOptions = cast(card.action(player), OrOptions);

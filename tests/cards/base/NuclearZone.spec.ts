@@ -5,8 +5,8 @@ import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast, runAllActions, setTemperature, testRedsCosts} from '../../TestingUtils';
 
-describe('NuclearZone', function() {
-  it('Should play', function() {
+describe('NuclearZone', () => {
+  it('Should play', () => {
     const card = new NuclearZone();
     const [game, player] = testGame(2);
     card.play(player);

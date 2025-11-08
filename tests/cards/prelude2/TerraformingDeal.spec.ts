@@ -7,6 +7,7 @@ import {TerraformingDeal} from '../../../src/server/cards/prelude2/TerraformingD
 import {UNMIContractor} from '../../../src/server/cards/prelude/UNMIContractor';
 import {IGame} from '../../../src/server/IGame';
 import {Election} from '../../../src/server/turmoil/globalEvents/Election';
+import {runAllActions} from '../../../tests/TestingUtils';
 
 describe('TerraformingDeal', () => {
   let card: TerraformingDeal;
@@ -42,9 +43,10 @@ describe('TerraformingDeal', () => {
     expect(player.megaCredits).eq(6);
   });
 
-  it('Does not give MC during turmoil phase', () => {
+  it('Gives MC during resolving global events', () => {
     player.playedCards.push(card);
-    game.phase = Phase.PRODUCTION;
+    game.phase = Phase.SOLAR;
+    game.inTurmoil = true;
 
     const turmoil = game.turmoil!;
     player2.playedCards.push(new Mine());
@@ -52,7 +54,22 @@ describe('TerraformingDeal', () => {
 
     const election = new Election();
     election.resolve(game, turmoil);
-    expect(player2.getTerraformRating()).eq(22);
-    expect(player.megaCredits).eq(0); // no increase
+    expect(player2.terraformRating).eq(22);
+    expect(player2.megaCredits).eq(0);
+    expect(player.terraformRating).eq(21);
+    expect(player.megaCredits).eq(2);
+  });
+
+  it('Gives resolving chairman', () => {
+    player.playedCards.push(card);
+    game.phase = Phase.SOLAR;
+    game.inTurmoil = true;
+
+    const turmoil = game.turmoil!;
+    turmoil.setNewChairman(player, game);
+    runAllActions(game);
+
+    expect(player.terraformRating).eq(21);
+    expect(player.megaCredits).eq(2);
   });
 });

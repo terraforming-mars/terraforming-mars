@@ -24,27 +24,27 @@ describe('LunaStagingStation', () => {
 
     player.titanium = 1;
     moonData.logisticRate = 2;
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     player.titanium = 0;
     moonData.logisticRate = 2;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 1;
     moonData.logisticRate = 1;
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {
     player.titanium = 1;
     moonData.logisticRate = 2;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
 
     card.play(player);
 
     expect(player.titanium).eq(0);
     expect(moonData.logisticRate).eq(4);
-    expect(player.getTerraformRating()).eq(16);
+    expect(player.terraformRating).eq(16);
   });
 });
 

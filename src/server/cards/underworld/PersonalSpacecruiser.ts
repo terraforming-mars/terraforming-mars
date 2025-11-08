@@ -3,41 +3,37 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
+import {ActionCard} from '../ActionCard';
 import {CardResource} from '../../../common/CardResource';
 
-export class PersonalSpacecruiser extends Card implements IProjectCard {
+export class PersonalSpacecruiser extends ActionCard implements IProjectCard {
   constructor() {
     super({
       type: CardType.ACTIVE,
       name: CardName.PERSONAL_SPACECRUISER,
-      cost: 15,
-      tags: [Tag.SPACE],
-      resourceType: CardResource.FIGHTER,
+      cost: 12,
+      tags: [Tag.CRIME, Tag.SPACE],
+
+      action: {
+        spend: {energy: 1},
+        stock: {megacredits: {underworld: {corruption: {}}, each: 2}},
+      },
 
       behavior: {
-        addResources: 1,
         underworld: {corruption: 1},
+        addResourcesToAnyCard: {count: 1, type: CardResource.FIGHTER},
       },
 
       metadata: {
-        cardNumber: 'U51',
+        cardNumber: 'U051',
         renderData: CardRenderer.builder((b) => {
-          b.effect('During the production phase, if there is at least 1 fighter resource on this card, ' +
-            'gain 2 M€ for each corruption resource you have.',
-          (eb) => eb.resource(CardResource.FIGHTER).startEffect.megacredits(2).slash().corruption().asterix).br;
-          b.resource(CardResource.FIGHTER).corruption(1).br;
+          b.action('Spend 1 energy to gain 2 M€ for each corruption resource you have.',
+            (ab) => ab.energy(1).startAction.megacredits(2).slash().corruption()).br;
+          b.corruption(1).resource(CardResource.FIGHTER).asterix().br;
         }),
-        description: 'Put 1 fighter resource on this card. Gain 1 corruption.',
+        description: 'Gain 1 corruption. Put 1 fighter on ANY card.',
       },
     });
-  }
-  public onProductionPhase(player: IPlayer) {
-    if (this.resourceCount > 0) {
-      player.megaCredits += (2 * player.underworldData.corruption);
-    }
-    return undefined;
   }
 }
 

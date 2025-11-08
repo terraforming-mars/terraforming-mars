@@ -80,7 +80,7 @@
 
   "Economic Espionage": "Економічна шпигунівля",
   "(Action: Spend 2 M€ to Add 1 data to ANY card.)": "(Дія: Витратити 2 M€, щоб додати 1 дані на БУДЬ-ЯКУ карту.)",
-  "(1VP for every 3 data here.)": "(1 ПО за кожні 3 дані тут.)",
+  "1 VP for every 3 data here.": "(1 ПО за кожні 3 дані тут.)",
 
   "Economic Help": "Економічна допомога",
   "(Raise the lowest non-completed planetary influence track 3 steps. When tied, raise all lowest tracks 2 steps. Increase your M€ production 1 step)": "(Підвищте найнижчий незавершений трек впливу на планету на 3 кроки. При рівній кількості, підвищте всі найнижчі треки на 2 кроки. Збільште виробництво M€ на 1 крок)",
@@ -112,7 +112,7 @@
   "Interplanetary Transport": "Міжпланетний транспорт",
   "(Increase your M€ production 1 step for every offworld city tile.)": "(Збільште виробництво M€ на 1 крок за кожну плитку міста поза Землею.)",
 
-  "Kickstarter": "Kickstarter",
+  "Kickstarter": "",
   "(Choose a planet tag. This card counts as having 1 of that tag. Raise the corresponding planetary track 3 steps in total.)": "(Виберіть планетний тег. Ця карта вважається маючи 1 такий тег. Підвищте відповідну планетну доріжку на 3 кроки в загальному.)",
 
   "Last Resort Ingenuity": "Останній варіант винахідливості",
@@ -155,13 +155,12 @@
 
   "Nobel Labs": "Нобелівські лабораторії",
   "(Action: Add 2 microbes OR 2 data OR 2 floaters to ANY card.)": "(Дія: Додайте 2 мікроби, 2 дані або 2 плаваючі на БУДЬ-ЯКУ карту.)",
-  "(Requires 4 science tags.)": "(Вимагає 4 теги науки.)",
   "Orbital Laboratories": "Орбітальні лабораторії",
   "(Increase your plant production 2 steps. Gain 1 plant.)": "(Збільшити виробництво рослин на 2 кроки. Отримати 1 рослину.)",
 
   "Oumuamua Type Object Survey": "Дослідження об'єкта типу Oumuamua",
-  "Draw 2 cards face up. If the first has a science or microbe tag, play it outright ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.": "(Витягнути 2 карти відкритими. Якщо перша має науковий або мікробний символ, зіграйте її без урахування вимог і вартості. Якщо ні, і вона має символ космосу, отримайте 3 одиниці енергії. Якщо ні одне з цих не відповідає, перевірте другу карту.)",
-  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card. )": "(Вимагає 1 символ космосу та 1 символ науки. Додайте 2 дані до БУДЬ-ЯКОЇ карти.)",
+  "Draw 2 cards face up. If the first has a science or microbe tag (and is playable), play it outright, ignoring requirements and cost. If not, and it has a space tag, gain 3 energy prod. Otherwise, apply the check to the second card.": "(Витягнути 2 карти відкритими. Якщо перша має науковий або мікробний символ, зіграйте її без урахування вимог і вартості. Якщо ні, і вона має символ космосу, отримайте 3 одиниці енергії. Якщо ні одне з цих не відповідає, перевірте другу карту.)",
+  "(Requires 1 space tag and 1 science tag. Add 2 data to ANY card.)": "(Вимагає 1 символ космосу та 1 символ науки. Додайте 2 дані до БУДЬ-ЯКОЇ карти.)",
 
   "Ozone Generators": "Озонові генератори",
   "(Action: Spend 3 energy to gain 1 TR.)": "(Дія: Витратити 3 одиниці енергії, щоб отримати 1 РТ.)",
@@ -247,7 +246,6 @@
 
   "Venera Base": "Венера База",
   "(Action: Add 1 floater to ANY Venus card)": "(Дія: Додати 1 плавучого на БУДЬ-ЯКУ карту Венери)",
-  "1 VP per 2 Venus tags you have.": "1 ПО за кожні 2 символи Венери, які у вас є.",
   "1 VP per 2 Venus tags you have.": "1 ПО за кожні 2 символи Венери, які у вас є.",
   "Requires Unity is ruling or that you have 2 delegates there. Raise your M€ production 3 steps and place a city tile ON THE RESERVED AREA.": "Вимагає, щоб Унітарні були у владі або у вас було 2 делегати там. Збільшити виробництво M€ на 3 кроки і розмістити плитку міста НА ЗАРЕЗЕРВОВАНІЙ ОБЛАСТІ.",
 

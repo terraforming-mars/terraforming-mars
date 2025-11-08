@@ -5,6 +5,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
+import {ClaimSpaceDeferred} from '../../underworld/ClaimSpaceDeferred';
 import {intersection} from '../../../common/utils/utils';
 
 export class UndergroundSettlement extends PreludeCard {
@@ -16,17 +17,19 @@ export class UndergroundSettlement extends PreludeCard {
       metadata: {
         cardNumber: 'UP07',
         renderData: CardRenderer.builder((b) => {
-          b.city().excavate().asterix();
+          b.city().geoscan().asterix().br.claim(1);
         }),
-        description: 'Place a city tile. Then excavate the underground resource in its space.',
+        description: 'Place a city. Then identify the underground resources in all adjacent spaces. Claim 1 of them.',
       },
     });
   }
 
   private availableSpaces(player: IPlayer) {
-    return intersection(
-      player.game.board.getAvailableSpacesForCity(player),
-      UnderworldExpansion.excavatableSpaces(player, {ignorePlacementRestrictions: true}));
+    const excavatableSpaces = UnderworldExpansion.excavatableSpaces(player, {ignorePlacementRestrictions: true});
+    const citySpaces = player.game.board.getAvailableSpacesForCity(player);
+    return citySpaces.filter((space) => {
+      return intersection(player.game.board.getAdjacentSpaces(space), excavatableSpaces).length > 0;
+    });
   }
 
   public override bespokeCanPlay(player: IPlayer) {
@@ -37,11 +40,13 @@ export class UndergroundSettlement extends PreludeCard {
     player.game.defer(new PlaceCityTile(player, {
       spaces: this.availableSpaces(player),
     })).andThen((space) => {
-      if (space) {
-        UnderworldExpansion.excavate(player, space);
+      if (space === undefined) {
+        return;
       }
+      const claimableSpaces = UnderworldExpansion.identifyAdjacentSpaces(player, space);
+      player.game.defer(new ClaimSpaceDeferred(player, claimableSpaces));
+      return;
     });
     return undefined;
   }
 }
-

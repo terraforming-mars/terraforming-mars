@@ -1,10 +1,26 @@
 import {Tag} from '@/common/cards/Tag';
 import {CardType} from '@/common/cards/CardType';
 import {GameModule, GAME_MODULES} from '@/common/cards/GameModule';
-import {CardListSearchIndex} from '@/client/components/cardlist/CardListSearchIndex';
+import {SearchIndex} from '@/client/components/cardlist/SearchIndex';
+import {CardResource} from '@/common/CardResource';
 
-export type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
-type TagOption = Tag | 'none';
+export type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards' | 'agendas';
+export type TagOption = Tag | 'none';
+export type ResourceOption = CardResource | 'none';
+
+export type CardListModel = {
+  filterText: string,
+  expansions: Record<GameModule, boolean>,
+  types: Record<TypeOption, boolean>,
+  tags: Record<TagOption, boolean>,
+  resources: Record<ResourceOption, boolean>,
+  searchIndex: SearchIndex,
+  namesOnly: boolean,
+  showAdvanced: boolean;
+  sortOrder: 'a' | '1';
+  showMetadata: boolean;
+  vps: number; // 0: all, 1: VPs, 2: no vps
+}
 
 const MODULE_ABBREVIATIONS: Record<GameModule, string> = {
   base: 'b',
@@ -38,6 +54,7 @@ const TYPE_ABBREVIATIONS: Record<TypeOption, string> = {
   globalEvents: 'e',
   milestones: 'm',
   awards: 'a',
+  agendas: 't',
 };
 
 const TAG_ABBREVIATIONS: Record<TagOption, string> = {
@@ -58,22 +75,12 @@ const TAG_ABBREVIATIONS: Record<TagOption, string> = {
   [Tag.EVENT]: 'e',
   [Tag.CLONE]: 'f',
   none: 'g',
+  [Tag.CRIME]: 'h',
 };
 
-export type CardListModel = {
-  filterText: string,
-  namesOnly: boolean,
-  expansions: Record<GameModule, boolean>,
-  types: Record<TypeOption, boolean>,
-  tags: Record<TagOption, boolean>,
-  searchIndex: CardListSearchIndex,
-  showAdvanced: boolean;
-}
-
-export function hashToModel(windowLocationHash: string) {
-  const model = {
+export function hashToModel(windowLocationHash: string): CardListModel {
+  const model: CardListModel = {
     filterText: '',
-    namesOnly: true,
     expansions: {
       base: true,
       corpera: true,
@@ -105,6 +112,7 @@ export function hashToModel(windowLocationHash: string) {
       milestones: true,
       awards: true,
       ceo: true,
+      agendas: true,
     },
     tags: {
       building: true,
@@ -120,23 +128,55 @@ export function hashToModel(windowLocationHash: string) {
       city: true,
       moon: true,
       mars: true,
+      crime: true,
       wild: true,
       event: true,
       clone: true,
       none: true,
     },
-    searchIndex: new CardListSearchIndex(),
+    resources: {
+      none: true,
+      [CardResource.ANIMAL]: true,
+      [CardResource.MICROBE]: true,
+      [CardResource.FIGHTER]: true,
+      [CardResource.SCIENCE]: true,
+      [CardResource.FLOATER]: true,
+      [CardResource.ASTEROID]: true,
+      [CardResource.CAMP]: true,
+      [CardResource.PRESERVATION]: true,
+      [CardResource.DIRECTOR]: true,
+      [CardResource.DISEASE]: true,
+      [CardResource.GRAPHENE]: true,
+      [CardResource.HYDROELECTRIC_RESOURCE]: true,
+      [CardResource.RESOURCE_CUBE]: true,
+      [CardResource.DATA]: true,
+      [CardResource.SYNDICATE_FLEET]: true,
+      [CardResource.VENUSIAN_HABITAT]: true,
+      [CardResource.SPECIALIZED_ROBOT]: true,
+      [CardResource.SEED]: true,
+      [CardResource.AGENDA]: true,
+      [CardResource.ORBITAL]: true,
+      [CardResource.CLONE_TROOPER]: true,
+      [CardResource.TOOL]: true,
+      [CardResource.WARE]: true,
+      [CardResource.JOURNALISM]: true,
+      [CardResource.ACTIVIST]: true,
+      [CardResource.SUPPLY_CHAIN]: true,
+    },
+    searchIndex: SearchIndex.create(),
+    namesOnly: true,
     showAdvanced: false,
+    vps: 0,
+    sortOrder: 'a',
+    showMetadata: true,
   };
   if (windowLocationHash.length > 1) {
     const hash = decodeURIComponent(windowLocationHash).slice(1);
     let remainder: Array<string> = [];
     [model.filterText, ...remainder] = hash.split('~');
 
-    // if (remainder.length > 0) {
-    //   model.showAdvanced = true;
-    // }
     for (const e of remainder) {
+      // modules
       if (e.startsWith('m')) {
         const modules = e.slice(1);
         for (const module of GAME_MODULES) {
@@ -144,6 +184,7 @@ export function hashToModel(windowLocationHash: string) {
           model.expansions[module] = modules.includes(abbrev);
         }
       }
+      // types
       if (e.startsWith('t')) {
         const types = e.slice(1);
         for (const type of <Array<TypeOption>>Object.keys(model.types)) {
@@ -151,11 +192,28 @@ export function hashToModel(windowLocationHash: string) {
           model.types[type] = types.includes(abbrev);
         }
       }
+      // tags
       if (e.startsWith('g')) {
         const tags = e.slice(1);
         for (const type of <Array<TagOption>>Object.keys(model.tags)) {
           const abbrev = TAG_ABBREVIATIONS[type];
           model.tags[type] = tags.includes(abbrev);
+        }
+      }
+      // metadata
+      if (e.startsWith('d')) {
+        const metadata = e.slice(1);
+        if (metadata.includes('f')) {
+          model.namesOnly = false;
+        }
+        if (metadata.includes('!')) {
+          model.showAdvanced = true;
+        }
+        if (metadata.includes('1')) {
+          model.sortOrder = '1';
+        }
+        if (metadata.includes('d')) {
+          model.showMetadata = false;
         }
       }
     }
@@ -170,16 +228,35 @@ function encode<T extends string>(vals: Record<T, boolean>, abbreviations: Recor
   return (text.length !== arry.length) ? text : undefined;
 }
 
+function encodeMetadata(model: CardListModel) {
+  let text = '';
+  if (model.namesOnly === false) {
+    text += 'f';
+  }
+  if (model.showAdvanced === true) {
+    text += '!';
+  }
+  if (model.sortOrder === '1') {
+    text += '1';
+  }
+  if (model.showMetadata === false) {
+    text += 'd';
+  }
+  return text;
+}
+
 export function modelToHash(model: CardListModel) {
   const parts: any = {};
 
   parts.m = encode(model.expansions, MODULE_ABBREVIATIONS);
   parts.t = encode(model.types, TYPE_ABBREVIATIONS);
   parts.g = encode(model.tags, TAG_ABBREVIATIONS);
+  parts.d = encodeMetadata(model);
 
-  const text = model.filterText +
-    (parts.m ? ('~m' + parts.m) : '') +
-    (parts.t ? ('~t' + parts.t) : '') +
-    (parts.g ? ('~g' + parts.g) : '');
+  function tostring(key: string): string {
+    const content = parts[key] ?? '';
+    return content === '' ? '' : `~${key}${content}`;
+  }
+  const text = model.filterText + tostring('m') + tostring('t') + tostring('g') + tostring('d');
   return '#' + encodeURIComponent(text);
 }

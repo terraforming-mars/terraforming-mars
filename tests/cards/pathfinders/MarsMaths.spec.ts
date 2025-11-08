@@ -4,26 +4,26 @@ import {MarsMaths} from '../../../src/server/cards/pathfinders/MarsMaths';
 import {cast, finishGeneration, runAllActions} from '../../TestingUtils';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 
-describe('MarsMaths', function() {
+describe('MarsMaths', () => {
   let card: MarsMaths;
 
   beforeEach(() => {
     card = new MarsMaths();
   });
 
-  it('On Action', function() {
+  it('On Action', () => {
     const [/* game */, player] = testGame(1);
     const previousActions = player.availableActionsThisRound;
     card.action(player);
     expect(player.availableActionsThisRound).eq(previousActions + 2);
   });
 
-  it('play - solo', function() {
+  it('play - solo', () => {
     const [game, player] = testGame(1, {
       pathfindersExpansion: true,
       turmoilExtension: false,
     });
-    player.corporations.push(card);
+    player.playedCards.push(card);
     game.generation = 10;
 
     // End the generation. Player will draw 5 cards
@@ -33,13 +33,13 @@ describe('MarsMaths', function() {
     expect(selectCard.cards).has.length(5);
   });
 
-  it('play - 2 player - draft', function() {
+  it('play - 2 player - draft', () => {
     const [game, player, player2] = testGame(2, {
       pathfindersExpansion: true,
       draftVariant: true,
       turmoilExtension: false,
     });
-    player.corporations.push(card);
+    player.playedCards.push(card);
     game.generation = 10;
 
     // End the generation. Player will draw 5 cards
@@ -68,16 +68,14 @@ describe('MarsMaths', function() {
     expect(selectCardb2.cards).has.length(3);
   });
 
-  it('play - 2 player - no draft', function() {
+  it('play - 2 player - no draft', () => {
     const [game, player, player2] = testGame(2, {
       pathfindersExpansion: true,
       draftVariant: false,
       turmoilExtension: false,
     });
-    player.corporations.push(card);
+    player.playedCards.push(card);
     game.generation = 10;
-
-    player.playedCards = [card];
 
     // End the generation. Player will draw 5 cards
     finishGeneration(game);

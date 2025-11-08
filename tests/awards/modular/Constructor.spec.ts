@@ -9,20 +9,20 @@ import {Constructor} from '../../../src/server/awards/modular/Constructor';
 import {Luna} from '../../../src/server/colonies/Luna';
 import {Pluto} from '../../../src/server/colonies/Pluto';
 
-describe('Constructor', function() {
+describe('Constructor', () => {
   let award : Constructor;
   let player: TestPlayer;
   let game: IGame;
   let board: Board;
 
-  beforeEach(function() {
+  beforeEach(() => {
     award = new Constructor();
     [game, player] = testGame(2, {coloniesExtension: true});
     board = game.board;
   });
 
-  it('It is applied to all cities (on mars and not on mars) and colonies', function() {
-    const colonySpaces = board.getSpaces(SpaceType.COLONY, player);
+  it('It is applied to all cities (on mars and not on mars) and colonies', () => {
+    const colonySpaces = board.getSpaces(SpaceType.COLONY);
     const landSpaces = board.getAvailableSpacesOnLand(player);
     const colony1 = new Luna();
     const colony2 = new Pluto();

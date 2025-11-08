@@ -10,7 +10,7 @@ import {LocalShading} from '../../../src/server/cards/venusNext/LocalShading';
 import {Dirigibles} from '../../../src/server/cards/venusNext/Dirigibles';
 import {Quill} from '../../../src/server/cards/ceos/Quill';
 
-describe('Quill', function() {
+describe('Quill', () => {
   let card: Quill;
   let player: TestPlayer;
   let game: IGame;
@@ -20,18 +20,18 @@ describe('Quill', function() {
     [game, player] = testGame(1);
   });
 
-  it('Can only act once per game', function() {
+  it('Can only act once per game', () => {
     card.action(player);
     forceGenerationEnd(game);
     expect(card.isDisabled).is.true;
     expect(card.canAct(player)).is.false;
   });
 
-  it('Cannot act if no Floaters are in play', function() {
+  it('Cannot act if no Floaters are in play', () => {
     expect(card.canAct(player)).is.false;
   });
 
-  it('Takes action', function() {
+  it('Takes action', () => {
     const dirigibles = new Dirigibles();
     const localShading = new LocalShading();
     player.playedCards.push(dirigibles, localShading);

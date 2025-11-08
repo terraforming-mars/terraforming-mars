@@ -7,7 +7,7 @@ import {AltSecondaryTag} from '../../../src/common/cards/render/AltSecondaryTag'
 import {CardResource} from '../../../src/common/CardResource';
 import {Tag} from '../../../src/common/cards/Tag';
 
-describe('CardRenderer', function() {
+describe('CardRenderer', () => {
   describe('temperature', () => {
     it('success', () => {
       const renderer = CardRenderer.builder((b) => b.temperature(1));

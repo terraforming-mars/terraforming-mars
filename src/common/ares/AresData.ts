@@ -21,7 +21,7 @@ export const HAZARD_CONSTRAINTS = [
 /*
  * This is the same as
  * type HazardData = {
- *    erosionOceanCount: HazardConstraint;
+ *   erosionOceanCount: HazardConstraint;
  *   removeDustStormsOceanCount: HazardConstraint;
  *   severeErosionTemperature: HazardConstraint;
  *   severeDustStormOxygen: HazardConstraint;
@@ -30,7 +30,7 @@ export const HAZARD_CONSTRAINTS = [
 export type HazardData = Record<typeof HAZARD_CONSTRAINTS[number], HazardConstraint>;
 
 export type MilestoneCount = {
-    id: PlayerId;
-    count: number;
-    purifierCount: number;
+  id: PlayerId;
+  networkerCount: number;
+  purifierCount: number;
 }

@@ -9,7 +9,7 @@ import {all} from '../Options';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {ICard} from '../ICard';
 
-export class IntragenSanctuaryHeadquarters extends CorporationCard {
+export class IntragenSanctuaryHeadquarters extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.INTRAGEN_SANCTUARY_HEADQUARTERS,
@@ -18,13 +18,8 @@ export class IntragenSanctuaryHeadquarters extends CorporationCard {
       resourceType: CardResource.ANIMAL,
       victoryPoints: {resourcesHere: {}, per: 2},
 
-      behavior: {
-        // Gains the initial resource from its own tag.
-        addResources: 1,
-      },
-
       firstAction: {
-        text: 'Place a habitat tile on The Moon.',
+        text: 'Place a habitat tile on The Moon',
         moon: {habitatTile: {}},
       },
 
@@ -42,12 +37,9 @@ export class IntragenSanctuaryHeadquarters extends CorporationCard {
     });
   }
 
-  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
-    this.onCardPlayed(player, card);
-  }
-
-  public onCardPlayed(player: IPlayer, card: ICard) {
-    const count = player.tags.cardTagCount(card, Tag.ANIMAL);
-    player.addResourceTo(this, {qty: count, log: true});
+  public onCardPlayedByAnyPlayer(player: IPlayer, card: ICard) {
+    const corporationOwner = player.game.getCardPlayerOrThrow(this.name);
+    const count = corporationOwner.tags.cardTagCount(card, Tag.ANIMAL);
+    corporationOwner.addResourceTo(this, {qty: count, log: true});
   }
 }

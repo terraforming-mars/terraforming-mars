@@ -5,7 +5,7 @@
         <ul>
           <li v-for="(player, index) in (game === undefined ? [] : game.players)" :key="player.color">
             <span class="turn-order" v-i18n>{{getTurnOrder(index)}}</span>
-            <span :class="'color-square ' + getPlayerCubeColorClass(player.color)"></span>
+            <span :class="'color-square ' + getPlayerCubeColorClass(player.color)">{{playerSymbol(player.color)}}</span>
             <span class="player-name"><a :href="getHref(player.id)">{{player.name}}</a></span>
             <AppButton title="copy" size="tiny" @click="copyUrl(player.id)"/>
             <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice"><span v-i18n>Copied!</span></span>
@@ -41,6 +41,7 @@ import {playerColorClass} from '@/common/utils/utils';
 import GameSetupDetail from '@/client/components/GameSetupDetail.vue';
 import {ParticipantId} from '@/common/Types';
 import {Color} from '@/common/Color';
+import {playerSymbol} from '@/client/utils/playerSymbol';
 
 // taken from https://stackoverflow.com/a/46215202/83336
 // The solution to copying to the clipboard in this case is
@@ -115,6 +116,9 @@ export default Vue.extend({
     },
     isPlayerUrlCopied(playerId: string): boolean {
       return playerId === this.urlCopiedPlayerId;
+    },
+    playerSymbol(color: Color) {
+      return playerSymbol(color);
     },
   },
 });

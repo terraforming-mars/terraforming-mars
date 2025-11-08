@@ -4,7 +4,7 @@
   "You start with 50 M€. 1 VP for every 3 Moon tags you have.": "Du beginnst mit 50 M€. Du erhälst 1 SP je 3 eigenen Mondsymbolen. ",
 
   "Intragen Sanctuary Headquarters": "Intragen Heiligtum",
-  "(Effect: When any player plays an animal tag (including this), add 1 animal on this card.)": "(EFFEKT: Immer wenn ein Tiersymbol ins Spiel kommt (einschließlich dieses), fügst du dieser Karte 1 Tier hinzu.)",
+  "Effect: When any player plays an animal tag (including this), add 1 animal on this card.": "EFFEKT: Immer wenn ein Tiersymbol ins Spiel kommt (einschließlich dieses), fügst du dieser Karte 1 Tier hinzu.",
   "You start with 38 M€. As your first action, place a habitat tile on The Moon and raise the habitat rate 1 step. 1 VP for every 2 animals on this card.": "Du beginnst mit 38 M€. Als deine erste Aktion im Spiel platzierst du ein Habitatplättchen auf dem Mond und erhöhst die Habitatwertung um 1. Du erhälst 1 SP je 2 Tiere auf dieser Karte. ",
 
   "Luna First Incorporated": "Luna First Inc.",
@@ -29,7 +29,8 @@
   "The Archaic Foundation Institute": "Das Institut der Archaischen Stiftung",
   "Effect: When you play a Moon tag, including these, add a cube to this card.": "EFFEKT: Wenn du eine Mondsymbol ausspielst, lege einen bronzenen Rohstoffwürfel auf diese Karte.",
   "Effect: Automatically remove 3 cubes here and gain 1 TR.": "EFFEKT: Entferne automatisch alle 3 hier gesammelten bronzenen Rohstoffwürfel und erhöhe deinen TW um 1.",
-  "You start with 55 M€.": "Du beginnst mit 55 M€. ",
+  "Action: Remove 3 cubes here; gain 1 TR.": "Aktion: Entferne hier 3 Würfel; erhalte 1 TW.",
+  "You start with 55 M€.": "Du beginnst mit 55 M€.",
 
   "Luna Trade Federation": "Mond Handelsföderation",
   "Effect: When you place a mine tile on The Moon, raise your titanium production 1 step.": "EFFEKT: Wenn Du ein Minenplättchen auf dem Mond platzierst, erhöhe deine Titan-Produktion um 1.",

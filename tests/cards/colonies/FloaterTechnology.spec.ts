@@ -9,27 +9,27 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('FloaterTechnology', function() {
+describe('FloaterTechnology', () => {
   let card: FloaterTechnology;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new FloaterTechnology();
     [game, player] = testGame(2);
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
     const result = card.play(player);
     expect(result).is.undefined;
   });
 
-  it('Can act without targets', function() {
+  it('Can act without targets', () => {
     expect(card.canAct(player)).is.true;
     expect(churn(card.action(player), player)).is.undefined;
   });
 
-  it('Acts automatically with single targets', function() {
+  it('Acts automatically with single targets', () => {
     const dirigibles = new Dirigibles();
     player.playedCards.push(dirigibles);
 
@@ -40,7 +40,7 @@ describe('FloaterTechnology', function() {
     expect(dirigibles.resourceCount).to.eq(1);
   });
 
-  it('Should act with multiple targets', function() {
+  it('Should act with multiple targets', () => {
     const dirigibles = new Dirigibles();
     const floatingHabs = new FloatingHabs();
     player.playedCards.push(dirigibles, floatingHabs);

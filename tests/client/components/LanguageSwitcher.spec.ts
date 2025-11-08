@@ -34,7 +34,7 @@ describe('LanguageSwitcher', () => {
       },
     });
     let called = false;
-    (wrapper.vm as unknown as typeof LanguageSwitcher.prototype.methods).reloadWindow = function() {
+    (wrapper.vm as unknown as typeof LanguageSwitcher.prototype.methods).reloadWindow = () => {
       called = true;
     };
     await wrapper.find('.language-icon--en').trigger('click');

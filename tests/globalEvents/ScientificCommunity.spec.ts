@@ -5,8 +5,8 @@ import {ScientificCommunity} from '../../src/server/turmoil/globalEvents/Scienti
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('ScientificCommunity', function() {
-  it('resolve play', function() {
+describe('ScientificCommunity', () => {
+  it('resolve play', () => {
     const card = new ScientificCommunity();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

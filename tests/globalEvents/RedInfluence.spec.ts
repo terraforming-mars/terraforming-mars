@@ -3,8 +3,8 @@ import {RedInfluence} from '../../src/server/turmoil/globalEvents/RedInfluence';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('RedInfluence', function() {
-  it('resolve play', function() {
+describe('RedInfluence', () => {
+  it('resolve play', () => {
     const card = new RedInfluence();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;
@@ -27,7 +27,7 @@ describe('RedInfluence', function() {
     expect(player2.production.megacredits).to.eq(3);
   });
 
-  it('Max 5', function() {
+  it('Max 5', () => {
     const card = new RedInfluence();
     const [game, player] = testGame(1, {turmoilExtension: true});
     const turmoil = game.turmoil!;

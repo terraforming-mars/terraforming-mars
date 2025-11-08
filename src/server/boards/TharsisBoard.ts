@@ -1,5 +1,5 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {SpaceName} from '../SpaceName';
+import {SpaceName} from '../../common/boards/SpaceName';
 import {Space} from './Space';
 import {BoardBuilder} from './BoardBuilder';
 import {Random} from '../../common/utils/Random';
@@ -8,7 +8,7 @@ import {MarsBoard} from './MarsBoard';
 
 export class TharsisBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): TharsisBoard {
-    const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
+    const builder = new BoardBuilder(gameOptions);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;

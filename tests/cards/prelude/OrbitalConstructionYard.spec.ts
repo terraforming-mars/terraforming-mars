@@ -3,8 +3,8 @@ import {testGame} from '../../TestGame';
 import {OrbitalConstructionYard} from '../../../src/server/cards/prelude/OrbitalConstructionYard';
 import {cast} from '../../TestingUtils';
 
-describe('OrbitalConstructionYard', function() {
-  it('Should play', function() {
+describe('OrbitalConstructionYard', () => {
+  it('Should play', () => {
     const card = new OrbitalConstructionYard();
     const [/* game */, player] = testGame(1);
     cast(card.play(player), undefined);

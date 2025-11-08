@@ -13,12 +13,13 @@
       :moonData="game.moon"
       :gameOptions = "game.gameOptions"
       :playerNumber = "spectator.players.length"
-      :lastSoloGeneration = "game.lastSoloGeneration">
-        <div class="deck-size">{{ game.deckSize }}</div>
+      :lastSoloGeneration = "game.lastSoloGeneration"
+      :deckSize = "game.deckSize"
+      :discardPileSize = "game.discardPileSize">
     </sidebar>
 
     <div class="player_home_block nofloat">
-        <log-panel v-if="spectator.id !== undefined" :id="spectator.id" :players="spectator.players" :generation="game.generation" :lastSoloGeneration="game.lastSoloGeneration" :color="spectator.color"></log-panel>
+        <log-panel v-if="spectator.id !== undefined" :viewModel="spectator" :color="spectator.color" :step="game.step"></log-panel>
     </div>
 
     <players-overview class="player_home_block player_home_block--players nofloat" :playerView="spectator" v-trim-whitespace id="shortkey-playersoverview"/>

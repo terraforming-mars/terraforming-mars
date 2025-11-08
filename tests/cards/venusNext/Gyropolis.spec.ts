@@ -14,17 +14,17 @@ import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {assertPlaceCity} from '../../assertions';
 import {IGame} from '../../../src/server/IGame';
 
-describe('Gyropolis', function() {
+describe('Gyropolis', () => {
   let card: Gyropolis;
   let game: IGame;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Gyropolis();
     [game, player] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const researchNetwork = new ResearchNetwork();
     const lunaGoveror = new LunaGovernor();
 
@@ -40,22 +40,22 @@ describe('Gyropolis', function() {
     expect(player.production.megacredits).to.eq(3);
   });
 
-  it('Compatible with Moon Embassy', function() {
-    player.playedCards = [new DeepLunarMining()];
+  it('Compatible with Moon Embassy', () => {
+    player.playedCards.set(new DeepLunarMining());
     card.play(player);
     expect(player.production.megacredits).to.eq(0);
 
-    player.playedCards = [new EarthEmbassy()];
+    player.playedCards.set(new EarthEmbassy());
     card.play(player);
     expect(player.production.megacredits).to.eq(2);
 
     player.production.override({megacredits: 0});
-    player.playedCards = [new DeepLunarMining(), new EarthEmbassy()];
+    player.playedCards.set(new DeepLunarMining(), new EarthEmbassy());
     card.play(player);
     expect(player.production.megacredits).to.eq(3);
   });
 
-  it('Compatible with Robotic Workforce', function() {
+  it('Compatible with Robotic Workforce', () => {
     const lunaGoveror = new LunaGovernor();
 
     player.playedCards.push(lunaGoveror, card);

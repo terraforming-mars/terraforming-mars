@@ -8,6 +8,7 @@ import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
 import {all} from '../Options';
+import {ICard} from '../ICard';
 
 export class MartianZoo extends Card implements IProjectCard {
   constructor() {
@@ -38,7 +39,7 @@ export class MartianZoo extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     const count = player.tags.cardTagCount(card, Tag.EARTH);
     if (count > 0) {
       player.addResourceTo(this, count);

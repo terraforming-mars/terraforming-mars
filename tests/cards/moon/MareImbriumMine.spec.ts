@@ -6,7 +6,7 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MareImbriumMine} from '../../../src/server/cards/moon/MareImbriumMine';
-import {MoonSpaces} from '../../../src/common/moon/MoonSpaces';
+import {NamedMoonSpaces} from '../../../src/common/moon/NamedMoonSpaces';
 import {TileType} from '../../../src/common/TileType';
 
 describe('MareImbriumMine', () => {
@@ -35,7 +35,7 @@ describe('MareImbriumMine', () => {
   it('play', () => {
     player.titanium = 3;
     expect(player.production.steel).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.miningRate).eq(0);
 
     card.play(player);
@@ -44,10 +44,10 @@ describe('MareImbriumMine', () => {
     expect(player.titanium).eq(2);
     expect(player.production.steel).eq(1);
     expect(player.production.titanium).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(moonData.miningRate).eq(1);
 
-    const mareImbrium = moonData.moon.getSpaceOrThrow(MoonSpaces.MARE_IMBRIUM);
+    const mareImbrium = moonData.moon.getSpaceOrThrow(NamedMoonSpaces.MARE_IMBRIUM);
     expect(mareImbrium.player).eq(player);
     expect(mareImbrium.tile!.tileType).eq(TileType.MOON_MINE);
   });

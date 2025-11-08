@@ -7,17 +7,17 @@ import {ResearchNetwork} from '../../../src/server/cards/prelude/ResearchNetwork
 import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 
-describe('GalileanWaystation', function() {
+describe('GalileanWaystation', () => {
   let card: GalileanWaystation;
   let player: TestPlayer;
   let player2: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new GalileanWaystation();
     [/* game */, player, player2] = testGame(2);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const card2 = new ColonizerTrainingCamp();
     const card3 = new MethaneFromTitan();
     player.playedCards.push(card2);
@@ -27,7 +27,7 @@ describe('GalileanWaystation', function() {
     expect(player.production.megacredits).to.eq(2);
   });
 
-  it('Corectly counts wildtags', function() {
+  it('Corectly counts wildtags', () => {
     const card2 = new ColonizerTrainingCamp();
     const card3 = new MethaneFromTitan();
     const researchCoordination = new ResearchCoordination();

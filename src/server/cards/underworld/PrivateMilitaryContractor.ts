@@ -11,7 +11,7 @@ export class PrivateMilitaryContractor extends ActionCard implements IProjectCar
     super({
       type: CardType.ACTIVE,
       name: CardName.PRIVATE_MILITARY_CONTRACTOR,
-      cost: 18,
+      cost: 14,
       tags: [Tag.JOVIAN, Tag.SPACE],
       resourceType: CardResource.FIGHTER,
 
@@ -25,7 +25,7 @@ export class PrivateMilitaryContractor extends ActionCard implements IProjectCar
       },
 
       metadata: {
-        cardNumber: 'U49',
+        cardNumber: 'U049',
         renderData: CardRenderer.builder((b) => {
           b.effect(
             'When blocking damage from other players, you can use fighters here as if they were corruption ' +

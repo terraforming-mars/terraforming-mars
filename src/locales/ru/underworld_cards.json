@@ -1,0 +1,7 @@
+{
+    "Monopoly": "Монополия",
+    "Select which resource type to steal 2 units from all other players.": "Выберите тип ресурса, который хотите украсть у каждого игрока. Вы можете украсть 2 единицы каждого типа ресурса.",
+    "Action: Spend 1 corruption to increase any production 1 step.": "Действие: потратьте 1 коррупцию, чтобы увеличить любую производсто на 1 шаг.",
+    "Requires 2 corruption. Choose a standard resource type. Steal 2 units of that resource from EACH OTHER player.": "Требует 2 коррупции. Выберите тип стандартного ресурса. Украдите 2 единицы этого типа ресурса у КАЖДОГО другого игрока.",
+    "Playing ${0} consumes ${1} ${2} from ${3}": "Розыгрыш карты ${0} потребует ${1} ед. ${2} с карты ${3}"
+}

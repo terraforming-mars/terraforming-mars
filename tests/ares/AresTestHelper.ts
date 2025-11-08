@@ -20,7 +20,7 @@ export const ALL_ADJACENCY_BONUSES = [
 
 export class AresTestHelper {
   public static getHazards(player: IPlayer): Array<Space> {
-    return player.game.board.getSpaces(SpaceType.LAND, player).filter((space) => AresHandler.hasHazardTile(space));
+    return player.game.board.getSpaces(SpaceType.LAND).filter((space) => AresHandler.hasHazardTile(space));
   }
 
   public static byTileType(spaces: Array<Space>): MultiMap<TileType, Space> {

@@ -2,8 +2,9 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class Midas extends CorporationCard {
+export class Midas extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.MIDAS,

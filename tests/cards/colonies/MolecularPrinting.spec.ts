@@ -5,8 +5,8 @@ import {Triton} from '../../../src/server/colonies/Triton';
 import {addCity, testGame} from '../../TestingUtils';
 import {cast} from '../../TestingUtils';
 
-describe('MolecularPrinting', function() {
-  it('Should play', function() {
+describe('MolecularPrinting', () => {
+  it('Should play', () => {
     const card = new MolecularPrinting();
     const [/* game */, player/* , player2 */] = testGame(2);
     const colonyTile1 = new Luna();

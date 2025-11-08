@@ -3,10 +3,7 @@ import {IGame} from '../IGame';
 import {Space} from '../boards/Space';
 import {IPlayer} from '../IPlayer';
 import {PlayerInput} from '../PlayerInput';
-
-type Party = 'mf' | 's' | 'u' | 'k' | 'r' | 'g';
-type Suffix = 'p01' | 'p02' | 'p03' | 'p04';
-export type PolicyId = `${Party}${Suffix}`
+import {PolicyId} from '../../common/turmoil/Types';
 
 // Represents a Turmoil policy.
 export interface IPolicy {
@@ -27,13 +24,13 @@ export abstract class Policy implements IPolicy {
   abstract readonly description: string | ((player: IPlayer | undefined) => string);
 
   public onPolicyStart(game: IGame): void {
-    game.getPlayersInGenerationOrder().forEach((p) => this.onPolicyStartForPlayer(p));
+    game.playersInGenerationOrder.forEach((p) => this.onPolicyStartForPlayer(p));
   }
 
   public abstract onPolicyStartForPlayer(_player: IPlayer): void;
 
   public onPolicyEnd(game: IGame): void {
-    game.getPlayersInGenerationOrder().forEach((p) => this.onPolicyEndForPlayer(p));
+    game.playersInGenerationOrder.forEach((p) => this.onPolicyEndForPlayer(p));
   }
 
   public abstract onPolicyEndForPlayer(_player: IPlayer): void;

@@ -1,236 +1,232 @@
 {
+  "Applied Science": "Angewandte Wissenschaft",
+  "Action: Remove 1 resource here to either add 1 resource to ANY CARD WITH A RESOURCE or gain 1 standard resource.": "AKTION: Entferne 1 Wissenschaft von dieser Karte, um einer Karte deiner Wahl mit einer Ressource 1 Ressource hinzuzufügen oder 1 Standard-Ressource zu erhalten.",
+  "Add 6 science resources here.": "Füge dieser Karte 6 Wissenschaft hinzu.",
 
-    "Applied Science": "Angewandte Wissenschaft",
-    "Action: Remove 1 resource here to either add 1 resource to ANY CARD WITH A RESOURCE or gain 1 standard resource.": "AKTION: Entferne 1 Ressource hier, um 1 Standardressource deiner Wahl zu erhalten oder füge 1 Ressource auf einer beliebigen Karte mit einer Ressource hinzu.",
-    "Add 6 science resources here.": "Füge hier 6 Ressourcen hinzu.",
-
-    "Atmospheric Enhancers": "Atmosphärische Verstärker",
-    "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "Effekt: Erhöhe entweder die Temperatur um 4°C oder den Sauerstoffsgehalt um 2% oder die Venuswertung um 4%. Decke Karten vom Stapel auf, bis du 2 Karten mit Schwebersymbol aufgedeckt hast. Nimm diese 2 Karten auf die Hand und wirf den Rest ab.",
-
-    "Board of Directors": "Direktorium",
-    "ACTION: ": "AKTION: ",
-    "DRAW 1 PRELUDE CARD: EITHER DISCARD IT, OR PAY 12 M€ AND REMOVE 1 DIRECTOR RESOURCE HERE TO PLAY IT.": "Ziehe 1 Präludium-Karte: Entweder du wirfst sie ab, oder du zahlst 12 M€ und entfernst 1 Direktorressource, um sie auszuspielen.",
-    "This is not the director icon yet.": "Dies ist noch nicht das Symbol des Direktors.",
-    "Add 4 director resources here.": "Füge hier 4 Direktor-Ressourcen hinzu.",
-    
-    "Colony Trade Hub": "Kolonie Handelszentrum",
-    "Increase your energy production 1 step. Gain 2 titanium": "Erhöhe deine Energieproduktion um 1. Erhalte 2 Titan.",
-    "Effect: When any colony is placed, gain 2 M€.": "EFFEKT: Wenn eine Kolonie platziert wird, erhalte 2 M€.",
-
-    "Corridors of Power": "Korridore der Macht",
-    "Effect: Each time you become party leader, draw 1 card.": "EFFEKT: Immer wenn einer deiner Delegierten ein Parteiführer wird, ziehe eine Karte.",
-    "Raise your TR 1 step and gain 4 M€": "Erhöhe dein TR um 1. Erhalte 4 M€.",
-
-    "Early Colonization": "Frühe Kolonisierung",
-    "INCREASE ALL COLONY TRACKS 2 STEPS": "ERHÖHE ALLE KOLONIEWERTUNGEN UM 2",
-    "Place a colony. Gain 3 energy.": "Platziere eine Kolonie. Erhalte 3 Energie.",
-
-    "Floating Trade Hub": "Schwebender Handelsplatz",
-    "Action: Add 2 floaters to ANY card.": "AKTION: Füge 2 Schweber zu einer beliebigen Karte hinzu.",
-    "Action: Remove any number of floaters here to gain that many of one standard resource.": "AKTION: Entferne hier eine beliebige Anzahl von Schwebern, um so viele von einer Standardressource zu erhalten.",
-
-    "Focused Organization": "Zielgerichtete Organisation",
-    "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource.": "AKTION: Wirf 1 Karte ab und gib 1 Standardressource aus, um 1 Karte zu ziehen und 1 Standardressource zu erhalten.",
-    "Draw 1 card and gain 1 standard resource.": "Ziehe 1 Karte und erhalte 1 Standardressource.",
-
-    "High Circles": "Hohe Kreise",
-    "Raise your TR 1 step and draw 1 card with PARTY REQUIREMENT. Place 2 delegates in one party.": "Erhöhe deinen TW um 1 und ziehe 1 Karte mit Partei-Bedingungen. Platziere 2 Delegierte in einer Partei.",
-    "Effect: You have +1 influence.": "EFFEKT: Du erhältst 1 Einfluss.",
+  "Atmospheric Enhancers": "Atmosphären-Aufwerter",
+  "Raise temperature 2 steps, or raise oxygen 2 steps, or raise Venus 2 steps. Draw 2 cards with floater icons.": "Effekt: Erhöhe entweder die Temperatur um 4°C oder den Sauerstoffsgehalt um 2% oder die Venuswertung um 4%. Ziehe 2 Karten mit Schwebern.",
 
-    "Industrial Complex": "Industriekomplex",
-    "Lose 18 M€. INCREASE ALL YOUR PRODUCTIONS THAT ARE LOWER THAN 1, TO 1.": "Verliere 18 M€. ERHÖHE ALLE DEINE PRODUKTIONEN, DIE KLEINER ALS 1 SIND, AUF 1.",
+  "Board of Directors": "Vorstandssitzung",
+  "ACTION:": "AKTION:",
+  "DRAW 1 PRELUDE CARD: EITHER DISCARD IT, OR PAY 12 M€ AND REMOVE 1 DIRECTOR RESOURCE HERE TO PLAY IT.": "Ziehe 1 Präludium-Karte: Entweder wirf sie ab, oder zahle 12 M€ und entferne 1 Vorstand von dieser Karte, um sie zu spielen.",
+  "Add 4 director resources here.": "Füge dieser Karte 4 Vorstand hinzu.",
 
-    "Main Belt Asteroids": "Asteroiden des Hauptgürtels",
-    "Action: Gain 1 asteroid to ANY CARD.": "AKTION: Erhalte 1 Asteroiden zu einer beliebigen Karte.",
-    "Effect: When gaining an asteroid HERE, gain 1 titanium.": "EFFEKT: Wenn du einen Asteroiden auf dieser Karte platzierst, erhalte 1 Titan.",
-    "Lose 5 M€. 1 VP per 2 asteroids here.": "Zahle 5 M€. 1 SP pro 2 Asteroiden hier.",
-    
-    "Nobel Prize": "Nobelpreis",
-    "Gain 5 M€. Draw 2 cards with requirements.": "Erhalte 5 M€. Ziehe 2 Karten mit Vorausetzungen.",
+  "Colony Trade Hub": "Kolonien-Handelsposten",
+  "Increase your energy production 1 step. Gain 2 titanium": "Erhöhe deine Energieproduktion um 1. Erhalte 2 Titan.",
+  "Effect: When any colony is placed, gain 2 M€.": "EFFEKT: Wenn eine Kolonie errichtet wird, erhalte 2 M€.",
 
-    "Old Mining Colony": "Alte Bergbaukolonie",
-    "Increase your titanium production 1 step. Place 1 colony. Discard 1 card.": "Erhöhe deine Titan-Produktion um 1. Platziere 1 Kolonie. Werfe 1 Karte ab.",
-    
-    "Planetary Alliance": "Planetarische Allianz",
-    "Raise your TR 2 steps. Draw 1 Jovian card and 1 Venus card.": "Erhöhe deinen TW um 2. Ziehe 1 Jupiter-Karte und 1 Venus-Karte.",
+  "Corridors of Power": "Hallen der Macht",
+  "Effect: Each time you become party leader, draw 1 card.": "EFFEKT: Ziehe jedes Mal 1 Karte, wenn einer deiner Delegierten ein Parteichef wird.",
+  "Raise your TR 1 step and gain 4 M€": "Erhöhe deinen TW um 1. Erhalte 4 M€.",
 
-    "Preservation Program": "Bewahrungsprogramm",
-    "Effect: SKIP THE FIRST TR YOU GAIN IN EACH GENERATION'S ACTION PHASE.": "Effekt: ÜBERSPRINGE DEN ERSTEN TW, DEN DU IN DER AKTIONSPHASE JEDER GENERATION ERHÄLTST.",
-    "Raise your TR 5 steps.": "Erhöhe dein TW um 5.",
+  "Early Colonization": "Frühe Kolonisierung",
+  "INCREASE ALL COLONY TRACKS 2 STEPS": "ERHÖHE ALLE KOLONIELEISTEN UM 2",
+  "Place a colony. Gain 3 energy.": "Errichte eine Kolonie. Erhalte 3 Energie.",
 
-    "Project Eden": "Projekt Eden",
-    "Place 1 ocean tile, 1 city tile, and 1 greenery tile. Discard 3 cards.": "Platziere 1 Ozean, 1 Stadtplätchen und 1 Grünfläche. Werfe 3 Karten ab.",
+  "Floating Trade Hub": "Schwebender Handelsposten",
+  "Action: Add 2 floaters to ANY card.": "AKTION: Füge einer Karte deiner Wahl 2 Schweber hinzu.",
+  "Action: Remove any number of floaters here to gain that many of one standard resource.": "AKTION: Entferne Schweber von dieser Karte, um in gleicher Anzahl Standard-Ressourcen einer Sorte zu erhalten.",
 
-    "Recession": "Rezession",
-    "EACH OPPONENT loses 5 M€ and decreases their M€ production 1 step. You gain 10 M€.": "Alle Mitspieler verlieren 5 M€ und reduzieren ihre M€-Produktion um 1. Du erhälst 10 M€.",
+  "Focused Organization": "Zielgerichtete Organisation",
+  "Action: Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource.": "AKTION: Wirf 1 Karte und 1 Standardressource ab, um 1 Karte zu ziehen und 1 Standard-Ressource zu erhalten.",
+  "Draw 1 card and gain 1 standard resource.": "Ziehe 1 Karte und erhalte 1 Standard-Ressource.",
 
-    "Rise To Power": "Aufstieg zur Macht",
-    "Increase your M€ production 3 steps and place 3 delegates. YOU MAY PLACE THEM IN SEPARATE PARTIES.": "Erhöhe deine M€-Produktion um 3 und platziere 3 Delegierte. DU DARFST SIE IN GETRENNTEN PARTEIEN PLATZIEREN.",
+  "High Circles": "Höhere Kreise",
+  "Raise your TR 1 step and draw 1 card with PARTY REQUIREMENT. Place 2 delegates in one party.": "Erhöhe deinen TW um 1 und ziehe 1 Karte mit Partei-Bedingung. Setze 2 Delegierte in 1 Partei ein.",
+  "Effect: You have +1 influence.": "EFFEKT: Du hast +1 Einfluss.",
 
-    "Soil Bacteria": "Bodenbakterien",
-    "Effect: When playing a plant tag or a microbe tag, including this, gain 1 plant.": "EFFEKT: Wenn du einen Pflanzen- oder Mikroben-Symbol spielst, einschließlich dieses, erhalte 1 Pflanze.",
-    "Draw 2 microbe cards and gain 3 plants.": "Ziehe 2 Mikrobenkarten und erhalte 3 Pflanzen.",
-    
-    "Space Lanes": "Weltraum-Linien",
-    "Effect: When you play a Jovian, Earth, or Venus tag, you pay 2 M€ less for it.": "EFFEKT: Wenn du ein Jupiter-, Erd- oder Venus-Symbol spielst, zahlst du 2 M€ weniger dafür.",
-    "Gain 3 titanium.": "Erhalte 3 Titan.",
+  "Industrial Complex": "Industriekomplex",
+  "Lose 18 M€. INCREASE ALL YOUR PRODUCTIONS THAT ARE LOWER THAN 1, TO 1.": "Enferne 18 eigene M€. Erhöhe alle eigenen Produktionen um 1, die geringer als 1 sind.",
 
-    "Suitable Infrastructure": "Geeignete Infrastruktur",
-    "Effect: Once per action you take, gain 2 M€ if you increase any productions.": "EFFEKT: Einmal pro Aktion erhältst du 2 M€, wenn du eine Produktion erhöht hast.",
-    "Gain 5 steel.": "Erhalte 5 Stahl.",
+  "Main Belt Asteroids": "Hauptgürtel-Asteroiden",
+  "Action: Gain 1 asteroid to ANY CARD.": "AKTION: Füge einer Karte 1 Asteroiden hinzu.",
+  "Effect: When gaining an asteroid HERE, gain 1 titanium.": "EFFEKT: Erhalte 1 Titan, wenn du dieser Karte 1 Asteroiden hinzufügst.",
+  "Lose 5 M€. 1 VP per 2 asteroids here.": "Enferne 5 eigene M€. 1 SP je 2 Asteroiden auf dieser Karte.",
 
-    "Terraforming Deal": "Terraforming-Abkommen",
-    "Effect: Each step your TR is raised, you gain 2 M€.": "EFFEKT: Für jedem Schritt, den du deinen TW erhöht hast, erhältst du 2 M€.",
+  "Nobel Prize": "Nobelpreis",
+  "Gain 5 M€. Draw 2 cards with requirements.": "Erhalte 5 M€. Ziehe 2 Karten mit Bedingungen.",
 
-    "Venus Contract": "Venus-Vertrag",
-    "Effect: Each step you raise Venus, gain 3 M€.": "EFFEKT: Immer wenn Du die Venuswertung erhöhst, erhalte 3 M€.",
-    "Draw 1 Venus card. Raise your TR 1 step.": "Ziehe 1 Venuskarte. Erhöhe deinen TW um 1.",
+  "Old Mining Colony": "Alte Bergbaukolonie",
+  "Increase your titanium production 1 step. Place 1 colony. Discard 1 card.": "Erhöhe deine Titan-Produktion um 1. Errichte 1 Kolonie. Wirf 1 Karte ab.",
 
-    "Venus L1 Shade": "Venus L1 Schatten",
-    "Raise Venus 3 steps.": "Erhöhe die Venuswertung um 6%.",
+  "Planetary Alliance": "Planetenallianz",
+  "Raise your TR 2 steps. Draw 1 Jovian card and 1 Venus card.": "Erhöhe deinen TW um 2. Ziehe 1 Jupiter- und 1 Venuskarte.",
 
-    "World Government Advisor": "Berater der Weltregierung",
-    "Action: RAISE 1 GLOBAL PARAMETER WITHOUT GETTING ANY TR OR OTHER BONUSES.": "AKTION: 1 GLOBALEN PARAMETER ERHÖHEN, OHNE EINEN TW ODER ANDERE BONI ZU ERHALTEN.",
-    "Raise your TR 2 steps. Draw 1 card.": "Erhöhe deinen TW um 2. Ziehe 1 Karte.",
+  "Preservation Program": "Erhaltungsprogramm",
+  "Effect: SKIP THE FIRST TR YOU GAIN IN EACH GENERATION'S ACTION PHASE.": "Effekt: ÜBERSPRINGE DEIN ERSTES ERHÖHEN DES TW IN DER AKTIONSPHASE JEDER GENERATION.",
+  "Raise your TR 5 steps.": "Erhöhe deinen TW um 5.",
 
+  "Project Eden": "Projekt Eden",
+  "Place 1 ocean tile, 1 city tile, and 1 greenery tile. Discard 3 cards.": "Platziere je 1 Ozean-, 1 Stadt- und 1 Grünflächenplättchen. Wirf 3 Karten ab.",
 
-    "Strategic Base Planning": "Strategische Basisplannung",
-    "Pay 3M€. Place a city. Place a colony.": "Zahle 3 M€. Errichte eine Kolonie. Platziere ein Stadtplättchen.",
-    
-    "Anti-desertification Techniques": "Anti-Wüstenbildungstechniken",
-    "Gain 3 M€. Increase your plant production 1 step and your steel production 1 step.": "Erhöhe deine Pfanzen- und Stahl-Produktion um 1. Erhalte 3 M€.",
+  "Recession": "Rezession",
+  "EACH OPPONENT loses 5 M€ and decreases their M€ production 1 step. You gain 10 M€.": "Jeder Gegner verliert 5 eigene M€ und verringert seine M€-Produktion um 1. Erhalte 10 M€.",
 
-    "Corporate Archives": "Konzernarchiv",
-    "Look at the top 7 cards from the deck. Take 2 of them into hand and discard the other 5.": "Sieh dir die obersten 7 Karten des Stapels an. Nimm 2 davon auf die Hand und wirf die anderen 5 ab.",
-    "Look at the top 7 cards from the deck.": "Sieh dir die obersten 7 Karten des Stapels an.",
-    "Take 2 of them into hand and discard the other 5.": "Nimm 2 davon auf die Hand und wirf die anderen 5 ab.",
-    "Gain 13 M€.": "Erhalte 13 M€.",
+  "Rise To Power": "Streben nach Macht",
+  "Increase your M€ production 3 steps and place 3 delegates. YOU MAY PLACE THEM IN SEPARATE PARTIES.": "Erhöhe deine M€-Produktion um 3. Setzte 3 Delegierte. Du darfst sie in verschiedene Parteien setzen.",
 
-    "Double Down": "Einsatz verdoppeln",
-    "Copy your other prelude's direct effect.": "Kopiere den Effekt deiner anderen Präludiumskarte.",
+  "Soil Bacteria": "Erdbakterium",
+  "Effect: When playing a plant tag or a microbe tag, including this, gain 1 plant.": "EFFEKT: Wenn du ein Pflanzen- oder Mikrobensymbol ausspielst (einschließlich dieses), erhalte 1 Pflanze.",
+  "Draw 2 microbe cards and gain 3 plants.": "Ziehe 2 Mikrobenkarten. Erhalte 3 Pflanzen.",
 
-    "Giant Solar Collector": "Riesiger Sonnenkollektor",
-    "Increase your energy production 2 steps. Raise Venus 1 step.": "Erhöhe die Energieproduktion um 2 Stufen. Erhöhe die Venuswertung um 2%.",
+  "Space Lanes": "Raumrouten",
+  "Effect: When you play a Jovian, Earth, or Venus tag, you pay 2 M€ less for it.": "EFFEKT: Wenn du ein Jupiter-, Erde- oder Venussymbol ausspielst, zahle 2 M€ weniger.",
+  "Gain 3 titanium.": "Erhalte 3 Titan.",
 
-    "Head Start": "Vorsprung",
-    "GAIN 2 STEEL.": "Erhalte 2 Stahl.",
-    "GAIN 2 M€ PER PROJECT CARD YOU HAVE IN HAND.": "Erhalte 2 M€ für jede Projektkarte auf deiner Hand.",
-    "IMMEDIATELY TAKE 2 ACTIONS.": "Führe sofort 2 Aktionen aus.",
+  "Suitable Infrastructure": "Sachgerechte Infrastruktur",
+  "Effect: Once per action you take, gain 2 M€ if you increase any productions.": "EFFEKT: Erhalte 1 Mal je Aktion 2 M€, wenn du irgendwelche Produktion(en) erhöhst.",
+  "Gain 5 steel.": "Erhalte 5 Stahl.",
 
-    "Merger": "Zusammenschluss",
-    "Draw 4 corporation cards. Play one of them and discard the other 3. Then pay 42 M€.": "Ziehe 4 Konzernkarten. Spiele 1 davon und wirf die anderen 3 ab. Zahle dann 42 M€.",
+  "Terraforming Deal": "Terraforming-Abmachung",
+  "Effect: Each step your TR is raised, you gain 2 M€.": "EFFEKT: Erhalte 2 M€ je Schritt, den dein TW erhöht wird.",
 
-    "New Partner": "Neuer Partner",
-    "Raise your M€ production 1 step. Immediately draw 2 prelude cards. Play 1 of them, and discard the other.": "Erhöhe deine M€-Produktion um 1. Ziehe sofort 2 Präludiumskarten. Spiele eine davon und wirf die andere ab.",
+  "Venus Contract": "Venus-Vertrag",
+  "Effect: Each step you raise Venus, gain 3 M€.": "EFFEKT: Erhalte 3 M€, immer wenn Du die Venuswertung um 2% erhöhst.",
+  "Draw 1 Venus card. Raise your TR 1 step.": "Ziehe 1 Venuskarte. Erhöhe deinen TW um 1.",
 
+  "Venus L1 Shade": "Venus-L1-Schatten",
+  "Raise Venus 3 steps.": "Erhöhe die Venuswertung um 6%.",
 
-    "Allied Bank": "Vereinigte Banken",
-    "Increase your M€ production 4 steps. Gain 3 M€.": "Erhöhe deine M€-Produktion um 4. Erhalte 3 M€.",
+  "World Government Advisor": "Weltregierungsberater",
+  "Action: RAISE 1 GLOBAL PARAMETER WITHOUT GETTING ANY TR OR OTHER BONUSES.": "AKTION: Erhöhe 1 Globalen Parameter. Erhalte weder TW-Erhöhung noch andere Boni.",
+  "Raise your TR 2 steps. Draw 1 card.": "Erhöhe deinen TW um 2. Ziehe 1 Karte.",
 
-    "Aquifer Turbines": "Grundwasserleiter-Turbinen",
-    "Place an ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "Platziere ein Ozeanplättchen. Erhöhe deine Energie-Produktion um 2. Zahle 3 M€.",
+  "Strategic Base Planning": "Strategische Basisplannung",
+  "Pay 3M€. Place a city. Place a colony.": "Zahle 3 M€. Platziere 1 Kolonie und 1 Stadtplättchen.",
 
-    "Biofuels": "Biotreibstoffe",
-    "Increase your energy and plant production 1 step. Gain 2 plants.": "Erhöhe deine Energie- und Pflanzenproduktion um 1. Erhalte 2 Pflanzen.",
+  "Anti-desertification Techniques": "Anti-Desertation-Techniken",
+  "Gain 3 M€. Increase your plant production 1 step and your steel production 1 step.": "Erhöhe deine Pfanzen- und Stahl-Produktion um 1. Erhalte 3 M€.",
 
-    "Biolab": "Biolaboratorium",
-    "Increase your plant production 1 step. Draw 3 cards.": "Erhöhe deine Pflanzen-Produktion um 1. Ziehe 3 Karten.",
+  "Corporate Archives": "Konzernarchiv",
+  "Look at the top 7 cards from the deck. Take 2 of them into hand and discard the other 5.": "Sieh dir die obersten 7 Karten des Stapels an. Nimm 2 davon auf die Hand und wirf die anderen 5 ab.",
+  "Look at the top 7 cards from the deck.": "Sieh dir die obersten 7 Karten des Stapels an.",
+  "Take 2 of them into hand and discard the other 5.": "Nimm 2 davon auf die Hand und wirf die anderen 5 ab.",
+  "Gain 13 M€.": "Erhalte 13 M€.",
 
-    "Biosphere Support": "Biosphären-Unterstützung",
-    "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "Erhöhe deine Pflanzen-Produktion um 2. Senke deine M€-Produktion um 1.",
+  "Double Down": "Einsatz verdoppeln",
+  "Copy your other prelude's direct effect.": "Kopiere den Effekt deiner anderen Präludiumskarte.",
 
-    "Business Empire": "Geschäftsimperium",
-    "Increase your M€ production 6 steps. Pay 6 M€.": "Erhöhe deine M€-Produktion um 6. Zahle 6 M€.",
+  "Giant Solar Collector": "Riesiger Sonnenkollektor",
+  "Increase your energy production 2 steps. Raise Venus 1 step.": "Erhöhe deine Energieproduktion um 2. Erhöhe die Venuswertung um 2%.",
 
-    "Dome Farming": "Kuppel-Ackerbau",
-    "Increase your M€ production 2 steps and plant production 1 step.": "Erhöhe deine M€-Produktion um 2 und deine Pflanzen-Produktion um 1.",
+  "Head Start": "Vorsprung",
+  "GAIN 2 STEEL.": "Erhalte 2 Stahl.",
+  "GAIN 2 M€ PER PROJECT CARD YOU HAVE IN HAND.": "Erhalte 2 M€ für jede Projektkarte auf deiner Hand.",
+  "IMMEDIATELY TAKE 2 ACTIONS.": "Führe sofort 2 Aktionen aus.",
 
-    "Donation": "Spende",
-    "Gain 21 M€.": "Erhalte 21 M€.",
+  "Merger": "Zusammenschluss",
+  "Draw 4 corporation cards. Play one of them and discard the other 3. Then pay 42 M€.": "Ziehe 4 Konzernkarten. Spiele 1 davon und wirf die anderen 3 ab. Zahle dann 42 M€.",
 
-    "Early Settlement": "Frühe Siedlung",
-    "Increase your plant production 1 step. Place a city tile.": "Erhöhe deine Pflanzen-Produktion um 1. Platziere ein Stadtplättchen.",
+  "New Partner": "Neuer Partner",
+  "Raise your M€ production 1 step. Immediately draw 2 prelude cards. Play 1 of them, and discard the other.": "Erhöhe deine M€-Produktion um 1. Ziehe sofort 2 Präludiumskarten. Spiele eine davon und wirf die andere ab.",
 
-    "Ecology Experts": "Ökologie-Experten",
-    "Increase your plant production 1 step. PLAY A CARD FROM HAND, IGNORING GLOBAL REQUIREMENTS.": "Erhöhe deine Pflanzen-Produktion um 1. Spiele eine Karte von deiner Hand und ignoriere dabei deren globale Bedingungen.",
+  "Allied Bank": "Vereinigte Banken",
+  "Increase your M€ production 4 steps. Gain 3 M€.": "Erhöhe deine M€-Produktion um 4. Erhalte 3 M€.",
 
-    "Eccentric Sponsor": "Exzentrischer Sponsor",
-    "Play a card from hand, reducing its cost by 25 M€": "Spiele eine Karte von deiner Hand und reduziere ihre Kosten um 25 M€.",
+  "Aquifer Turbines": "Grundwasserleiter-Turbinen",
+  "Place an ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "Platziere ein Ozeanplättchen. Erhöhe deine Energie-Produktion um 2. Zahle 3 M€.",
 
-    "Experimental Forest": "Experimentaler Wald",
-    "Place 1 greenery tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Platziere ein Grünflächenplättchen und erhöhe den Sauerstoffgehalt um 1%. Decke solange Karten auf, bis du zwei Karten mit einem Pflanzensymbol aufgedeckt hast. Nimm diese auf die Hand und wirf die anderen ab.",
+  "Biofuels": "Biotreibstoffe",
+  "Increase your energy and plant production 1 step. Gain 2 plants.": "Erhöhe deine Energie- und Pflanzenproduktion um 1. Erhalte 2 Pflanzen.",
 
-    "Galilean Mining": "Galileischer Bergbau",
-    "Increase your titanium production 2 steps. Pay 5 M€.": "Erhöhe deine Titan-Produktion um 2. Zahle 5 M€.",
+  "Biolab": "Biolaboratorium",
+  "Increase your plant production 1 step. Draw 3 cards.": "Erhöhe deine Pflanzen-Produktion um 1. Ziehe 3 Karten.",
 
-    "Great Aquifer": "Großer Grundwasserleiter",
-    "Place 2 ocean tiles.": "Platziere 2 Ozeanplättchen.",
+  "Biosphere Support": "Biosphären-Unterstützung",
+  "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "Erhöhe deine Pflanzen-Produktion um 2. Senke deine M€-Produktion um 1.",
 
-    "Huge Asteroid": "Riesiger Asteroid",
-    "Increase temperature 3 steps. Pay 5 M€.": "Erhöhe die Temperatur um 6 °C. Zahle 5 M€.",
+  "Business Empire": "Geschäftsimperium",
+  "Increase your M€ production 6 steps. Pay 6 M€.": "Erhöhe deine M€-Produktion um 6. Zahle 6 M€.",
 
-    "Io Research Outpost": "Io-Forschungsposten",
-    "Increase your titanium production 1 step. Draw a card.": "Erhöhe deine Titan-Produktion um 1. Ziehe eine Karte.",
+  "Dome Farming": "Kuppel-Ackerbau",
+  "Increase your M€ production 2 steps and plant production 1 step.": "Erhöhe deine M€-Produktion um 2 und deine Pflanzen-Produktion um 1.",
 
-    "Loan": "Kredit",
-    "Gain 30 M€. Decrease your M€ production 2 steps.": "Erhalte 30 M€. Senke deine M€-Produktion um 2.",
+  "Donation": "Spende",
+  "Gain 21 M€.": "Erhalte 21 M€.",
 
-    "Martian Industries": "Mars-Industrien",
-    "Increase your energy and steel production 1 step. Gain 6 M€.": "Erhöhe deine Energie- und Stahlproduktion um 1. Erhalte 6 M€.",
+  "Early Settlement": "Frühe Siedlung",
+  "Increase your plant production 1 step. Place a city tile.": "Erhöhe deine Pflanzen-Produktion um 1. Platziere ein Stadtplättchen.",
 
-    "Metal-Rich Asteroid": "Metallreicher Asteroid",
-    "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "Erhöhe die Temperatur um 2 °C. Erhalte 4 Titan und 4 Stahl.",
+  "Ecology Experts": "Ökologie-Experten",
+  "Increase your plant production 1 step. PLAY A CARD FROM HAND, IGNORING GLOBAL REQUIREMENTS.": "Erhöhe deine Pflanzen-Produktion um 1. Spiele eine Karte von deiner Hand und ignoriere dabei deren globale Bedingungen.",
 
-    "Metals Company": "Metallgesellschaft",
-    "Increase your M€, steel and titanium production 1 step.": "Erhöhe deine M€-, Stahl- und Titan-Produktion um 1.",
+  "Eccentric Sponsor": "Exzentrischer Sponsor",
+  "Play a card from hand, reducing its cost by 25 M€": "Spiele eine Karte von deiner Hand und reduziere ihre Kosten um 25 M€.",
 
-    "Mining Operations": "Bergbau-Betrieb",
-    "Increase your steel production 2 steps. Gain 4 steel.": "Erhöhe deine Stahlproduktion um 2. Erhalte 4 Stahl.",
+  "Experimental Forest": "Experimentaler Wald",
+  "Place 1 greenery tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Platziere ein Grünflächenplättchen und erhöhe den Sauerstoffgehalt um 1%. Decke solange Karten auf, bis du zwei Karten mit einem Pflanzensymbol aufgedeckt hast. Nimm diese auf die Hand und wirf die anderen ab.",
 
-    "Mohole": "Mohole",
-    "Increase your heat production 3 steps. Gain 3 heat.": "Erhöhe deine Wärme-Produktion um 3. Erhalte 3 Wärme.",
+  "Galilean Mining": "Galileischer Bergbau",
+  "Increase your titanium production 2 steps. Pay 5 M€.": "Erhöhe deine Titan-Produktion um 2. Zahle 5 M€.",
 
-    "Mohole Excavation": "Mohole-Ausgrabungsstätte",
-    "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": "Erhöhe deine Stahl-Produktion um 1 sowie deine Wärme-Produktion um 2. Erhalte 2 Wärme.",
+  "Great Aquifer": "Großer Grundwasserleiter",
+  "Place 2 ocean tiles.": "Platziere 2 Ozeanplättchen.",
 
-    "Nitrogen Shipment": "Stickstoff-Lieferung",
-    "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 M€.": "Erhöhe deine Pflanzen-Produktion um 1. Erhöhe deinen TW um 1. Erhalte 5 M€.",
+  "Huge Asteroid": "Riesiger Asteroid",
+  "Increase temperature 3 steps. Pay 5 M€.": "Erhöhe die Temperatur um 6 °C. Zahle 5 M€.",
 
-    "Orbital Construction Yard": "Orbitale Raumschiffwerft",
-    "Increase your titanium production 1 step. Gain 4 titanium.": "Erhöhe deine Titan-Produktion um 1. Erhalte 4 Titan.",
+  "Io Research Outpost": "Io-Forschungsposten",
+  "Increase your titanium production 1 step. Draw a card.": "Erhöhe deine Titan-Produktion um 1. Ziehe eine Karte.",
 
-    "Polar Industries": "Polarindustrien",
-    "Increase your heat production 2 steps. Place an ocean tile.": "Erhöhe deine Wärme-Produktion um 2. Platziere ein Ozeanplättchen.",
+  "Loan": "Kredit",
+  "Gain 30 M€. Decrease your M€ production 2 steps.": "Erhalte 30 M€. Senke deine M€-Produktion um 2.",
 
-    "Power Generation": "Stromerzeugung",
-    "Increase your energy production 3 steps.": "Erhöhe deine Energie-Produktion um 3.",
+  "Martian Industries": "Mars-Industrien",
+  "Increase your energy and steel production 1 step. Gain 6 M€.": "Erhöhe deine Energie- und Stahlproduktion um 1. Erhalte 6 M€.",
 
-    "Research Network": "Forschungsnetzwerk",
-    "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Erhöhe deine M€-Produktion um 1. Ziehe 3 Karten. Wenn du eine Aktion durchführst, zählt das Joker-Symbol als ein Symbol deiner Wahl.",
+  "Metal-Rich Asteroid": "Metallreicher Asteroid",
+  "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "Erhöhe die Temperatur um 2 °C. Erhalte 4 Titan und 4 Stahl.",
 
-    "Self-Sufficient Settlement": "Autarke Siedlung",
-    "Increase your M€ production 2 steps. Place a city tile.": "Erhöhe deine M€-Produktion um 2. Platziere ein Stadtplättchen.",
+  "Metals Company": "Metallgesellschaft",
+  "Increase your M€, steel and titanium production 1 step.": "Erhöhe deine M€-, Stahl- und Titan-Produktion um 1.",
 
-    "Smelting Plant": "Schmelzhütte",
-    "Raise oxygen 2 steps. Gain 5 steel.": "Erhöhe den Sauerstoffgehalt um 2%. Erhalte 5 Stahl.",
+  "Mining Operations": "Bergbau-Betrieb",
+  "Increase your steel production 2 steps. Gain 4 steel.": "Erhöhe deine Stahlproduktion um 2. Erhalte 4 Stahl.",
 
-    "Society Support": "Förderung der Gemeinschaft",
-    "Increase your plant, energy and heat production 1 step. Decrease M€ production 1 step.": "Erhöhe deine Pflanzen-, Energie- und Wärme-Produktion um 1. Senke deine M€-Produktion um 1.",
+  "Mohole": "",
+  "Increase your heat production 3 steps. Gain 3 heat.": "Erhöhe deine Wärme-Produktion um 3. Erhalte 3 Wärme.",
 
-    "Supplier": "Versorger",
-    "Increase your energy production 2 steps. Gain 4 steel.": "Erhöhe deine Energie-Produktion um 2. Erhalte 4 Stahl.",
+  "Mohole Excavation": "Mohole-Ausgrabungsstätte",
+  "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": "Erhöhe deine Stahl-Produktion um 1 sowie deine Wärme-Produktion um 2. Erhalte 2 Wärme.",
 
-    "Supply Drop": "Versorgungslieferung",
-    "Gain 3 titanium, 8 steel and 3 plants.": "Erhalte 3 Titan, 8 Stahl und 3 Pflanzen.",
+  "Nitrogen Shipment": "Stickstoff-Lieferung",
+  "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 M€.": "Erhöhe deine Pflanzen-Produktion um 1. Erhöhe deinen TW um 1. Erhalte 5 M€.",
 
-    "UNMI Contractor": "UNMI-Vertragspartner",
-    "Increase your TR 3 steps. Draw a card.": "Erhöhe deinen TW um 3. Ziehe eine Karte.",
+  "Orbital Construction Yard": "Orbitale Raumschiffwerft",
+  "Increase your titanium production 1 step. Gain 4 titanium.": "Erhöhe deine Titan-Produktion um 1. Erhalte 4 Titan.",
 
-    "Acquired Space Agency": "Erworbene Raumfahrtbehörde",
-    "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Erhalte 6 Titan. Decke solange Karten auf, bis du zwei Karten mit einem Weltraumsymbol aufgedeckt hast. Nimm diese auf die Hand und wirf die anderen ab.",
+  "Polar Industries": "Polarindustrien",
+  "Increase your heat production 2 steps. Place an ocean tile.": "Erhöhe deine Wärme-Produktion um 2. Platziere ein Ozeanplättchen.",
 
-    "Add resource to card GHG Producing Bacteria": "Eine Ressource der Karte CO₂ produzierende Bakterien hinzufügen",
-    "Add resource to card Fish": "Eine Ressource der Karte Raubfische hinzufügen",
-    "Add resource": "Ressource hinzufügen",
-    "Gain plant": "Pflanze erhalten"
+  "Power Generation": "Stromerzeugung",
+  "Increase your energy production 3 steps.": "Erhöhe deine Energie-Produktion um 3.",
+
+  "Research Network": "Forschungsnetzwerk",
+  "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Erhöhe deine M€-Produktion um 1. Ziehe 3 Karten. Wenn du eine Aktion durchführst, zählt das Joker-Symbol als ein Symbol deiner Wahl.",
+
+  "Self-Sufficient Settlement": "Autarke Siedlung",
+  "Increase your M€ production 2 steps. Place a city tile.": "Erhöhe deine M€-Produktion um 2. Platziere ein Stadtplättchen.",
+
+  "Smelting Plant": "Schmelzhütte",
+  "Raise oxygen 2 steps. Gain 5 steel.": "Erhöhe den Sauerstoffgehalt um 2%. Erhalte 5 Stahl.",
+
+  "Society Support": "Förderung der Gemeinschaft",
+  "Increase your plant, energy and heat production 1 step. Decrease M€ production 1 step.": "Erhöhe deine Pflanzen-, Energie- und Wärme-Produktion um 1. Senke deine M€-Produktion um 1.",
+
+  "Supplier": "Versorger",
+  "Increase your energy production 2 steps. Gain 4 steel.": "Erhöhe deine Energie-Produktion um 2. Erhalte 4 Stahl.",
+
+  "Supply Drop": "Versorgungslieferung",
+  "Gain 3 titanium, 8 steel and 3 plants.": "Erhalte 3 Titan, 8 Stahl und 3 Pflanzen.",
+
+  "UNMI Contractor": "UNMI-Vertragspartner",
+  "Increase your TR 3 steps. Draw a card.": "Erhöhe deinen TW um 3. Ziehe eine Karte.",
+
+  "Acquired Space Agency": "Erworbene Raumfahrtbehörde",
+  "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Erhalte 6 Titan. Decke solange Karten auf, bis du zwei Karten mit einem Weltraumsymbol aufgedeckt hast. Nimm diese auf die Hand und wirf die anderen ab.",
+
+  "Add resource to card GHG Producing Bacteria": "Eine Ressource der Karte CO₂ produzierende Bakterien hinzufügen",
+  "Add resource to card Fish": "Eine Ressource der Karte Raubfische hinzufügen",
+  "Add resource": "Ressource hinzufügen",
+  "Gain plant": "Pflanze erhalten"
 }

@@ -5,7 +5,7 @@ import {TestPlayer} from '../TestPlayer';
 import {MockResponse} from './HttpMocks';
 import {RouteTestScaffolding} from './RouteTestScaffolding';
 
-describe('ApiGames', function() {
+describe('ApiGames', () => {
   let res: MockResponse;
   let scaffolding: RouteTestScaffolding;
 

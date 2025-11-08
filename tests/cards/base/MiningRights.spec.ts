@@ -98,7 +98,7 @@ describe('MiningRights', () => {
     orOptions.options[0].cb();
     expect(player.production.asUnits()).deep.eq(Units.of({steel: 1}));
 
-    player.playedCards = [card];
+    player.playedCards.push(card);
 
     const roboticWorkforce = new RoboticWorkforce();
     cast(roboticWorkforce.play(player), undefined);

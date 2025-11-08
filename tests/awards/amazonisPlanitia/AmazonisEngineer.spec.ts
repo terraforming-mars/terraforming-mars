@@ -19,7 +19,6 @@ describe('AmazonisEngineer', () => {
   });
 
   it('score', () => {
-    player.playedCards = [];
     expect(award.getScore(player)).eq(0);
     player.playedCards.push(new Tardigrades());
     expect(award.getScore(player)).eq(0);
@@ -33,15 +32,14 @@ describe('AmazonisEngineer', () => {
     expect(award.getScore(player)).eq(4);
   });
 
-  // A good way to prevent future failures is to duplicate the Robotic Workforce style of test.
-  it('verify if production cards list is accurate', () => {
-    const failures = [];
-    for (const cardName of BESPOKE_PRODUCTION_CARDS) {
-      const card = newCard(cardName)!;
-      if (AmazonisEngineer.autoInclude(card)) {
-        failures.push(cardName);
+  for (const cardName of BESPOKE_PRODUCTION_CARDS) {
+    it('verify manual card ' + cardName, () => {
+      const card = newCard(cardName);
+      if (card === undefined) {
+        console.log('Skipping ' + cardName);
+        return;
       }
-    }
-    expect(failures, failures.toString()).has.length(0);
-  });
+      expect(AmazonisEngineer.autoInclude(card), 'This card is manually listed but is automatically identified.').to.be.false;
+    });
+  }
 });

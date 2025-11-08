@@ -55,8 +55,8 @@ export class TradeWithDarksideSmugglersUnion implements IColonyTrader {
   constructor(private player: IPlayer) {}
 
   public canUse() {
-    return this.player.getPlayedCard(CardName.DARKSIDE_SMUGGLERS_UNION) !== undefined &&
-      !this.player.getActionsThisGeneration().has(CardName.DARKSIDE_SMUGGLERS_UNION);
+    return this.player.tableau.get(CardName.DARKSIDE_SMUGGLERS_UNION) !== undefined &&
+      !this.player.actionsThisGeneration.has(CardName.DARKSIDE_SMUGGLERS_UNION);
   }
 
   public optionText() {
@@ -64,7 +64,7 @@ export class TradeWithDarksideSmugglersUnion implements IColonyTrader {
   }
 
   public trade(colony: IColony) {
-    this.player.addActionThisGeneration(CardName.DARKSIDE_SMUGGLERS_UNION);
+    this.player.actionsThisGeneration.add(CardName.DARKSIDE_SMUGGLERS_UNION);
     this.player.game.log('${0} used ${1} action to trade with ${2}', (b) => b.player(this.player).cardName(CardName.DARKSIDE_SMUGGLERS_UNION).colony(colony));
     colony.trade(this.player);
   }

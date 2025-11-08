@@ -9,10 +9,9 @@ import {CanAffordOptions, IPlayer} from '../IPlayer';
 import {TERRA_CIMMERIA_COLONY_COST} from '../../common/constants';
 
 const VOLCANIC_SPACE_IDS: ReadonlyArray<SpaceId> = ['05', '21', '27', '38'];
-const CURIOSITY_SPACE_ID: SpaceId = '16';
 export class TerraCimmeriaNovusBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): TerraCimmeriaNovusBoard {
-    const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
+    const builder = new BoardBuilder(gameOptions);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -58,14 +57,14 @@ export class TerraCimmeriaNovusBoard extends MarsBoard {
   public override spaceCosts(space: Space) {
     const costs = super.spaceCosts(space);
     if (space.bonus.includes(SpaceBonus.COLONY)) {
-      costs.stock.megacredits = TERRA_CIMMERIA_COLONY_COST;
+      costs.megacredits = TERRA_CIMMERIA_COLONY_COST;
     }
     return costs;
   }
 
   public override getAvailableSpacesOnLand(player: IPlayer, canAffordOptions?: CanAffordOptions) {
     return super.getAvailableSpacesOnLand(player, canAffordOptions).filter((space) => {
-      if (space.id === CURIOSITY_SPACE_ID) {
+      if (space.bonus.includes(SpaceBonus.COLONY)) {
         if (player.colonies.getPlayableColonies().length === 0) {
           return false;
         }

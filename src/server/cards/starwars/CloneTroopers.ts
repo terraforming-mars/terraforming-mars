@@ -58,20 +58,19 @@ export class CloneTroopers extends Card implements IActionCard, IProjectCard {
             return undefined;
           }));
       } else {
-        const allPlayers = player.getOpponents();
-        ALL_RESOURCES.forEach((resource) => {
-          allPlayers.forEach((target) => {
-            if (target.stock.get(resource) > 0) {
-              // TODO(kberg): Included protected resources
-              options.options.push(new SelectOption(
-                message('Steal 1 ${0} from ${1}', (b) => b.string(resource).player(target)), 'steal').andThen(() => {
-                player.removeResourceFrom(this, 1);
-                target.attack(player, resource, 1, {log: true, stealing: true});
-                return undefined;
-              }));
+        for (const resource of ALL_RESOURCES) {
+          for (const target of player.opponents) {
+            if (target.isProtected(resource) || target.stock.get(resource) < 1) {
+              continue;
             }
-          });
-        });
+            options.options.push(new SelectOption(
+              message('Steal 1 ${0} from ${1}', (b) => b.string(resource).player(target)), 'steal').andThen(() => {
+              player.removeResourceFrom(this, 1);
+              target.attack(player, resource, 1, {log: true, stealing: true});
+              return undefined;
+            }));
+          }
+        }
       }
       if (options.options.length > 1) {
         return options;

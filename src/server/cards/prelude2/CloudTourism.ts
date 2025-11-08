@@ -43,7 +43,7 @@ export class CloudTourism extends ActionCard {
       // The +1 is "including this"
       venus: player.tags.count(Tag.VENUS, 'raw') + 1,
     };
-    if (player.cardIsInEffect(CardName.EARTH_EMBASSY)) {
+    if (player.tableau.has(CardName.EARTH_EMBASSY)) {
       counts.earth += player.tags.count(Tag.MOON, 'raw');
     }
     let wildTags = player.tags.count(Tag.WILD, 'raw');

@@ -10,18 +10,19 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {addOcean, cast, runAllActions} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {testGame} from '../../TestGame';
+import {toID} from '../../../src/common/utils/utils';
 
-describe('OceanCity', function() {
+describe('OceanCity', () => {
   let card: OceanCity;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new OceanCity();
     [game, player] = testGame(2, {aresExtension: true});
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
     addOcean(player);
     expect(card.canPlay(player)).is.false;
 
@@ -44,7 +45,7 @@ describe('OceanCity', function() {
     expect(card.canPlay(player)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     const oceanSpace = addOcean(player);
     player.production.add(Resource.ENERGY, 1);
 
@@ -66,7 +67,7 @@ describe('OceanCity', function() {
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);
   });
 
-  it('Cannot place a city next to Ocean City', function() {
+  it('Cannot place a city next to Ocean City', () => {
     const oceanSpace = addOcean(player);
     player.production.add(Resource.ENERGY, 1);
 
@@ -79,14 +80,14 @@ describe('OceanCity', function() {
     const adjacentSpaces = game.board
       .getAdjacentSpaces(oceanSpace)
       .filter((space) => space.spaceType === SpaceType.LAND)
-      .map((space) => space.id);
+      .map(toID);
     const citySpaces = game.board
       .getAvailableSpacesForCity(player)
-      .map((space) => space.id);
+      .map(toID);
     expect(citySpaces).to.not.include.any.members(adjacentSpaces);
   });
 
-  it('Can place Ocean City next to a city', function() {
+  it('Can place Ocean City next to a city', () => {
     const oceanSpace = addOcean(player);
     player.production.add(Resource.ENERGY, 1);
 
@@ -104,7 +105,7 @@ describe('OceanCity', function() {
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);
   });
 
-  it('Ocean City counts as ocean for adjacency', function() {
+  it('Ocean City counts as ocean for adjacency', () => {
     const oceanSpace = addOcean(player);
     cast(card.play(player), undefined);
     runAllActions(game);
@@ -121,7 +122,7 @@ describe('OceanCity', function() {
     expect(player.megaCredits).eq(2);
   });
 
-  it('Ocean City counts for city-related VP', function() {
+  it('Ocean City counts for city-related VP', () => {
     const oceanSpace = addOcean(player);
     cast(card.play(player), undefined);
     runAllActions(game);
@@ -138,14 +139,14 @@ describe('OceanCity', function() {
     expect(player.getVictoryPoints().city).eq(1);
   });
 
-  it('Ocean City counts as VP for Capital', function() {
+  it('Ocean City counts as VP for Capital', () => {
     const oceanSpace = game.board.getAvailableSpacesForOcean(player)[0];
 
     const capital = new Capital();
     capital.play(player);
     runAllActions(game);
     const capitalAction = cast(player.popWaitingFor(), SelectSpace);
-    player.playedCards = [capital];
+    player.playedCards.push(capital);
 
     const capitalSpace = game.board
       .getAdjacentSpaces(oceanSpace)

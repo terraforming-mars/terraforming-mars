@@ -33,10 +33,10 @@ describe('LunaTradeFederation', () => {
   });
 
   // it('initialAction', () => {
-  //   player.corporations.push(lunaTradeFederation);
+  //   player.playedCards.push(lunaTradeFederation);
   //   player.production.override(Units.EMPTY);
   //   expect(moonData.miningRate).eq(0);
-  //   expect(player.getTerraformRating()).eq(20);
+  //   expect(player.terraformRating).eq(20);
 
   //   player.runInitialAction(lunaTradeFederation);
 
@@ -46,12 +46,12 @@ describe('LunaTradeFederation', () => {
   //   runAllActions(game);
 
   //   expect(moonData.miningRate).eq(1);
-  //   expect(player.getTerraformRating()).eq(21);
+  //   expect(player.terraformRating).eq(21);
   //   expect(player.production.asUnits()).deep.eq(Units.of({titanium: 1}));
   // });
 
   it('onTilePlaced', () => {
-    player.corporations.push(lunaTradeFederation);
+    player.playedCards.push(lunaTradeFederation);
 
     MoonExpansion.addRoadTile(player, 'm07');
     expect(player.production.asUnits()).deep.eq(Units.of({}));
@@ -68,7 +68,7 @@ describe('LunaTradeFederation', () => {
   });
 
   it('can use titanium to pay for space project cards as normal', () => {
-    player.corporations.push(lunaTradeFederation);
+    player.playedCards.push(lunaTradeFederation);
     lunaTradeFederation.play(player);
     expect(player.canUseTitaniumAsMegacredits).is.true;
 
@@ -84,7 +84,7 @@ describe('LunaTradeFederation', () => {
   });
 
   it('can use titanium to pay for non-space project cards at a discount', () => {
-    player.corporations.push(lunaTradeFederation);
+    player.playedCards.push(lunaTradeFederation);
     lunaTradeFederation.play(player);
     expect(player.canUseTitaniumAsMegacredits).is.true;
 

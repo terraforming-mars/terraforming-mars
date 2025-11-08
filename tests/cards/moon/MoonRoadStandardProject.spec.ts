@@ -8,8 +8,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {MoonRoadStandardProject} from '../../../src/server/cards/moon/MoonRoadStandardProject';
 import {SelectPaymentDeferred} from '../../../src/server/deferredActions/SelectPaymentDeferred';
 import {MooncrateBlockFactory} from '../../../src/server/cards/moon/MooncrateBlockFactory';
-import {Payment} from '../../../src/common/inputs/Payment';
-import {assertPlaceTile} from '../../assertions';
+import {assertPlaceMoonRoad} from '../../assertions';
 import {TileType} from '../../../src/common/TileType';
 
 describe('MoonRoadStandardProject', () => {
@@ -24,21 +23,34 @@ describe('MoonRoadStandardProject', () => {
     card = new MoonRoadStandardProject();
   });
 
-  it('can act', () => {
-    player.steel = 0;
-    player.megaCredits = 18;
-    expect(player.canPlay(card)).is.false;
+  for (const run of [
+    {steel: 0, mc: 18, expected: false},
+    {steel: 1, mc: 17, expected: false},
+    {steel: 1, mc: 18, expected: true},
+  ] as const) {
+    it('can act ' + JSON.stringify(run), () => {
+      player.steel = run.steel;
+      player.megaCredits = run.mc;
+      expect(card.canAct(player)).eq(run.expected);
+    });
+  }
 
-    player.steel = 1;
-    player.megaCredits = 17;
-    expect(player.canPlay(card)).is.false;
-
-    player.steel = 1;
-    player.megaCredits = 18;
-    expect(player.canPlay(card)).is.true;
-
-    // 2. Are there spaces on the moon for a Road?
-  });
+  for (const run of [
+    {availableSpaces: 1, expected: true},
+    {availableSpaces: 0, expected: false},
+  ] as const) {
+    it('can act, available space ' + JSON.stringify(run), () => {
+      player.steel = 1;
+      player.megaCredits = 18;
+      const moonData = MoonExpansion.moonData(player.game);
+      const spaces = [...moonData.moon.getAvailableSpacesOnLand(player)];
+      while (spaces.length > run.availableSpaces) {
+        const space = spaces.pop();
+        space!.tile = {tileType: TileType.MOON_ROAD};
+      }
+      expect(card.canAct(player)).eq(run.expected);
+    });
+  }
 
   it('has discount', () => {
     card.action(player);
@@ -53,20 +65,19 @@ describe('MoonRoadStandardProject', () => {
 
   it('act', () => {
     player.steel = 3;
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
+    player.megaCredits = 18;
 
-    card.action(player);
-    const payAction = cast(game.deferredActions.pop(), SelectPaymentDeferred);
-    payAction.cb(Payment.EMPTY);
+    cast(card.action(player), undefined);
+    runAllActions(game);
 
     expect(player.steel).eq(2);
     expect(moonData.logisticRate).eq(0);
 
-    runAllActions(game);
-    assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
+    assertPlaceMoonRoad(player, player.popWaitingFor());
 
     expect(moonData.logisticRate).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 
 

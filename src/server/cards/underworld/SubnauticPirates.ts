@@ -4,54 +4,56 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {IPlayer} from '../../IPlayer';
-import {SelectSpace} from '../../inputs/SelectSpace';
+import {Board} from '../../boards/Board';
+import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {Resource} from '../../../common/Resource';
+import {Tag} from '../../../common/cards/Tag';
 
 export class SubnauticPirates extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.SUBNAUTIC_PIRATES,
       type: CardType.EVENT,
-      cost: 3,
+      tags: [Tag.CRIME],
+      cost: 1,
 
-      requirements: [{excavation: 1}, {corruption: 1}],
-      victoryPoints: -1,
+      requirements: [{undergroundTokens: 1}, {corruption: 1}],
 
       metadata: {
-        cardNumber: 'U11',
+        cardNumber: 'U011',
         renderData: CardRenderer.builder((b) => {
-          b.oceans(1).excavate().asterix().colon().text('STEAL').megacredits(6);
+          b.text('STEAL').megacredits(7).asterix();
         }),
-        description: 'Requires 1 excavation marker and 1 corruption. Pick an ocean tile ' +
-        'that has your excavation marker on it. Steal 6 M€ from each other player that ' +
-        'owns a tile adjacent to that ocean. This can be blocked by corruption.',
+        description: 'Requires you have 1 corruption and 1 underground token. ' +
+          'Steal 7 M€ from a player that HAS A TILE NEXT TO AN OCEAN.',
       },
     });
   }
 
-  private availableSpaces(player: IPlayer) {
-    return player.game.board.getOceanSpaces().filter((space) => space.excavator === player);
+  private availableTargets(player: IPlayer) {
+    const targets = new Set<IPlayer>();
+    const spaces = player.game.board.getOceanSpaces({upgradedOceans: true, wetlands: true, newHolland: true});
+    for (const space of spaces) {
+      for (const adjacent of player.game.board.getAdjacentSpaces(space)) {
+        if (adjacent.player !== undefined && adjacent.player !== player && Board.hasRealTile(adjacent)) {
+          targets.add(adjacent.player);
+        }
+      }
+    }
+    return Array.from(targets);
   }
 
   public override bespokeCanPlay(player: IPlayer) {
-    return this.availableSpaces(player).length > 0;
+    if (player.game.isSoloMode()) {
+      return false;
+    }
+    return this.availableTargets(player).length > 0;
   }
 
   public override bespokePlay(player: IPlayer) {
-    return new SelectSpace('Select an ocean space you have excavated', this.availableSpaces(player))
-      .andThen((space) => {
-        const adjacentSpaces = player.game.board.getAdjacentSpaces(space);
-        const set = new Set<IPlayer>();
-        for (const space of adjacentSpaces) {
-          if (space.player !== undefined && space.player !== player) {
-            set.add(space.player);
-          }
-        }
-
-        set.forEach((target) => {
-          target.attack(player, Resource.MEGACREDITS, 6, {stealing: true, log: true});
-        });
-        return undefined;
-      });
+    return new SelectPlayer(this.availableTargets(player), 'Select target to steal 7 M€ from').andThen((target) => {
+      target.attack(player, Resource.MEGACREDITS, 7, {stealing: true, log: true});
+      return undefined;
+    });
   }
 }

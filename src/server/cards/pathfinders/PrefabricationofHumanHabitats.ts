@@ -6,6 +6,8 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Resource} from '../../../common/Resource';
 import {Tag} from '../../../common/cards/Tag';
 import {Size} from '../../../common/cards/render/Size';
+import {IPlayer} from '../../IPlayer';
+import {IStandardProjectCard} from '../IStandardProjectCard';
 
 export class PrefabricationofHumanHabitats extends Card implements IProjectCard {
   constructor() {
@@ -32,6 +34,13 @@ export class PrefabricationofHumanHabitats extends Card implements IProjectCard 
         description: 'Requires that you have steel production.',
       },
     });
+  }
+
+  public getStandardProjectDiscount(_player: IPlayer, card: IStandardProjectCard): number {
+    if (card.name === CardName.CITY_STANDARD_PROJECT) {
+      return 2;
+    }
+    return 0;
   }
 }
 

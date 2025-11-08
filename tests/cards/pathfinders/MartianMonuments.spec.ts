@@ -4,19 +4,19 @@ import {testGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {addCity} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
-import {SpaceName} from '../../../src/server/SpaceName';
+import {SpaceName} from '../../../src/common/boards/SpaceName';
 
-describe('MartianMonuments', function() {
+describe('MartianMonuments', () => {
   let card: MartianMonuments;
   let player: TestPlayer;
   let player2: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MartianMonuments();
     [/* game */, player, player2] = testGame(2);
   });
 
-  it('can play', function() {
+  it('can play', () => {
     expect(card.canPlay(player)).is.false;
     addCity(player);
     expect(card.canPlay(player)).is.true;
@@ -28,7 +28,7 @@ describe('MartianMonuments', function() {
     expect(card.canPlay(player2)).is.false;
   });
 
-  it('play', function() {
+  it('play', () => {
     player.tagsForTest = {mars: 8};
     card.play(player);
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 9})); // "including this"

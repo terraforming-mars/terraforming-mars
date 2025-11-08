@@ -27,27 +27,27 @@ describe('WaterTreatmentComplex', () => {
 
     player.titanium = 1;
     space.tile = {tileType: TileType.MOON_HABITAT};
-    expect(player.getPlayableCardsForTest()).does.include(card);
+    expect(player.getPlayableCards()).does.include(card);
 
     player.titanium = 0;
     space.tile = {tileType: TileType.MOON_HABITAT};
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
 
     player.titanium = 1;
     space.tile = {tileType: TileType.MOON_ROAD};
-    expect(player.getPlayableCardsForTest()).does.not.include(card);
+    expect(player.getPlayableCards()).does.not.include(card);
   });
 
   it('play', () => {
     expect(moonData.habitatRate).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     player.titanium = 1;
 
     card.play(player);
 
     expect(player.titanium).eq(0);
     expect(moonData.habitatRate).eq(2);
-    expect(player.getTerraformRating()).eq(16);
+    expect(player.terraformRating).eq(16);
   });
 });
 

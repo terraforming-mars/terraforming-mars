@@ -1,30 +1,29 @@
 import {expect} from 'chai';
 import {SpaceRelay} from '../../../src/server/cards/pathfinders/SpaceRelay';
-import {IProjectCard} from '../../../src/server/cards/IProjectCard';
 import {Tag} from '../../../src/common/cards/Tag';
 import {TestPlayer} from '../../TestPlayer';
-import {testGame} from '../../TestingUtils';
+import {fakeCard, testGame} from '../../TestingUtils';
 
-describe('SpaceRelay', function() {
+describe('SpaceRelay', () => {
   let card: SpaceRelay;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SpaceRelay();
     [/* game */, player] = testGame(1);
   });
 
-  it('play', function() {
+  it('play', () => {
     card.play(player);
     expect(player.production.megacredits).eq(1);
   });
 
-  it('onCardPlayed', function() {
-    card.onCardPlayed(player, {tags: [Tag.VENUS]} as IProjectCard);
+  it('onCardPlayed', () => {
+    card.onCardPlayed(player, fakeCard({tags: [Tag.VENUS]}));
     expect(player.cardsInHand).has.length(0);
-    card.onCardPlayed(player, {tags: [Tag.JOVIAN]} as IProjectCard);
+    card.onCardPlayed(player, fakeCard({tags: [Tag.JOVIAN]}));
     expect(player.cardsInHand).has.length(1);
-    card.onCardPlayed(player, {tags: [Tag.WILD]} as IProjectCard);
+    card.onCardPlayed(player, fakeCard({tags: [Tag.WILD]}));
     expect(player.cardsInHand).has.length(1);
   });
 });

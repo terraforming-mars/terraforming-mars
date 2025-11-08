@@ -8,20 +8,20 @@ import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {cast, maxOutOceans, runAllActions, setOxygenLevel, setTemperature, testRedsCosts} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('SmallComet', function() {
+describe('SmallComet', () => {
   let card: SmallComet;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SmallComet();
     [game, player, player2, player3] = testGame(3);
   });
 
-  it('play', function() {
-    expect(player.getTerraformRating()).eq(20);
+  it('play', () => {
+    expect(player.terraformRating).eq(20);
     expect(player.game.getTemperature()).eq(-30);
     player.plants = 5;
     player2.plants = 15;
@@ -41,7 +41,7 @@ describe('SmallComet', function() {
 
     runAllActions(game);
 
-    expect(player.getTerraformRating()).eq(23);
+    expect(player.terraformRating).eq(23);
     expect(player.game.getTemperature()).eq(-28);
     expect(player.game.getOxygenLevel()).eq(1);
     expect(player.plants).eq(3);

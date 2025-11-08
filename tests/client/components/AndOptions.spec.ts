@@ -7,8 +7,8 @@ import AndOptions from '@/client/components/AndOptions.vue';
 import {InputResponse} from '@/common/inputs/InputResponse';
 import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
 
-describe('AndOptions', function() {
-  it('saves the options', async function() {
+describe('AndOptions', () => {
+  it('saves the options', async () => {
     let savedData: InputResponse | undefined;
     const component = mount(AndOptions, {
       localVue: getLocalVue(),

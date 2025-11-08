@@ -24,15 +24,15 @@ export class MudSlides extends GlobalEvent implements IGlobalEvent {
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
+    game.playersInGenerationOrder.forEach((player) => {
       const tiles = game.board.spaces.filter(Board.ownedBy(player))
         .filter((space) => space.tile !== undefined &&
           game.board.getAdjacentSpaces(space)
             .filter((space) => Board.isOceanSpace(space)).length > 0,
         ).length;
-      const amount = Math.min(5, tiles) - turmoil.getPlayerInfluence(player);
+      const amount = Math.min(5, tiles) - turmoil.getInfluence(player);
       if (amount > 0) {
-        player.stock.deduct(Resource.MEGACREDITS, 4 * amount, {log: true, from: this.name});
+        player.stock.deduct(Resource.MEGACREDITS, 4 * amount, {log: true, from: {globalEvent: this}});
       }
     });
   }

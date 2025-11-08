@@ -7,16 +7,16 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast, maxOutOceans} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('LargeConvoy', function() {
+describe('LargeConvoy', () => {
   let card: LargeConvoy;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new LargeConvoy();
     [/* game */, player] = testGame(2);
   });
 
-  it('Should play without animal cards', function() {
+  it('Should play without animal cards', () => {
     card.play(player);
 
     expect(card.getVictoryPoints(player)).to.eq(2);
@@ -24,7 +24,7 @@ describe('LargeConvoy', function() {
     expect(player.plants).to.eq(5);
   });
 
-  it('Should play with single animal target', function() {
+  it('Should play with single animal target', () => {
     const pets = new Pets();
     player.playedCards.push(pets);
 
@@ -39,7 +39,7 @@ describe('LargeConvoy', function() {
     expect(player.plants).to.eq(0);
   });
 
-  it('Should play with multiple animal targets', function() {
+  it('Should play with multiple animal targets', () => {
     const pets = new Pets();
     const fish = new Fish();
     player.playedCards.push(pets, fish);
@@ -54,7 +54,7 @@ describe('LargeConvoy', function() {
     expect(pets.resourceCount).to.eq(4);
   });
 
-  it('Should play without oceans', function() {
+  it('Should play without oceans', () => {
     const pets = new Pets();
     player.playedCards.push(pets);
     maxOutOceans(player);

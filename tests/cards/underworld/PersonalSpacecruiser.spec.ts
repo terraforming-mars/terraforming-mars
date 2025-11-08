@@ -2,66 +2,44 @@ import {expect} from 'chai';
 import {PersonalSpacecruiser} from '../../../src/server/cards/underworld/PersonalSpacecruiser';
 import {testGame} from '../../TestGame';
 import {cast, runAllActions} from '../../TestingUtils';
+import {SecurityFleet} from '../../../src/server/cards/base/SecurityFleet';
 
 describe('PersonalSpacecruiser', () => {
   it('play', () => {
     const card = new PersonalSpacecruiser();
     const [game, player] = testGame(2);
-
-    player.underworldData.corruption = 0;
+    const securityFleet = new SecurityFleet();
+    player.playedCards.push(securityFleet);
 
     cast(card.play(player), undefined);
     runAllActions(game);
 
-    expect(card.resourceCount).eq(1);
+    expect(securityFleet.resourceCount).eq(1);
     expect(player.underworldData.corruption).to.eq(1);
   });
 
-  it('production phase, no corruption', () => {
+  it('canAct', () => {
     const card = new PersonalSpacecruiser();
     const [/* game */, player] = testGame(2);
+    expect(card.canAct(player)).is.false;
 
-    player.playedCards.push(card);
-    card.resourceCount = 1;
-    player.underworldData.corruption = 0;
-    card.onProductionPhase(player);
+    player.energy = 1;
 
-    expect(player.megaCredits).eq(0);
+    expect(card.canAct(player)).is.true;
   });
 
-  it('production phase, no fighter', () => {
-    const card = new PersonalSpacecruiser();
-    const [/* game */, player] = testGame(2);
+  for (const run of [
+    {corruption: 1, expected: 2},
+    {corruption: 4, expected: 8},
+  ] as const) {
+    it('action ' + JSON.stringify(run), () => {
+      const card = new PersonalSpacecruiser();
+      const [/* game */, player] = testGame(2);
+      player.energy = 1;
+      player.underworldData.corruption = run.corruption;
+      card.action(player);
 
-    player.playedCards.push(card);
-    card.resourceCount = 0;
-    player.underworldData.corruption = 1;
-    card.onProductionPhase(player);
-
-    expect(player.megaCredits).eq(0);
-  });
-
-  it('production phase', () => {
-    const card = new PersonalSpacecruiser();
-    const [/* game */, player] = testGame(2);
-
-    player.playedCards.push(card);
-    card.resourceCount = 1;
-    player.underworldData.corruption = 4;
-    card.onProductionPhase(player);
-
-    expect(player.megaCredits).eq(8);
-  });
-
-  it('production phase, no corruption', () => {
-    const card = new PersonalSpacecruiser();
-    const [/* game */, player] = testGame(2);
-
-    player.playedCards.push(card);
-    card.resourceCount = 2;
-    player.underworldData.corruption = 4;
-    card.onProductionPhase(player);
-
-    expect(player.megaCredits).eq(8);
-  });
+      expect(player.megaCredits).eq(run.expected);
+    });
+  }
 });

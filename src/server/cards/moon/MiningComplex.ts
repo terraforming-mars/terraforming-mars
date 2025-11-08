@@ -7,9 +7,10 @@ import {IPlayer} from '../../IPlayer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {SpaceType} from '../../../common/boards/SpaceType';
-import {Resource} from '../../../common/Resource';
 import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 import {TileType} from '../../../common/TileType';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export class MiningComplex extends PreludeCard {
   constructor() {
@@ -17,6 +18,10 @@ export class MiningComplex extends PreludeCard {
       name: CardName.MINING_COMPLEX,
       tags: [Tag.MOON],
       startingMegacredits: -7,
+      tr: {
+        moonMining: 1,
+        moonLogistics: 1,
+      },
       tilesBuilt: [TileType.MOON_MINE, TileType.MOON_ROAD],
 
       metadata: {
@@ -48,9 +53,14 @@ export class MiningComplex extends PreludeCard {
             player,
             availableRoadSpaces,
             'Select a space next to the mine for a road',
-          ));
+          ))
+          .andThen(() => {
+            player.game.defer(new SelectPaymentDeferred(player, -this.startingMegaCredits))
+              .andThen(() => {
+                PathfindersExpansion.addToSolBank(player);
+              });
+          });
       });
-    player.stock.deduct(Resource.MEGACREDITS, 7);
     return undefined;
   }
 }

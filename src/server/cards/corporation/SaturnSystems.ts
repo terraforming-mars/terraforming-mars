@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {ICard} from '../ICard';
 
-export class SaturnSystems extends CorporationCard {
+export class SaturnSystems extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.SATURN_SYSTEMS,
@@ -16,8 +16,7 @@ export class SaturnSystems extends CorporationCard {
       startingMegaCredits: 42,
 
       behavior: {
-        // The 1MC is for the card effect related to itself.
-        production: {titanium: 1, megacredits: 1},
+        production: {titanium: 1},
       },
 
       metadata: {
@@ -36,15 +35,8 @@ export class SaturnSystems extends CorporationCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: ICard) {
-    for (const tag of card.tags) {
-      if (tag === Tag.JOVIAN) {
-        player.game.getCardPlayerOrThrow(this.name).production.add(Resource.MEGACREDITS, 1, {log: true});
-      }
-    }
-  }
-
-  public onCorpCardPlayed(player: IPlayer, card: ICorporationCard) {
-    this.onCardPlayed(player, card);
+  public onCardPlayedByAnyPlayer(thisCardOwner: IPlayer, card: ICard) {
+    const count = thisCardOwner.tags.cardTagCount(card, Tag.JOVIAN);
+    thisCardOwner.production.add(Resource.MEGACREDITS, count, {log: true, from: {card: this}});
   }
 }

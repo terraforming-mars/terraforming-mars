@@ -8,8 +8,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {TITLES} from '../../inputs/titles';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class RobinsonIndustries extends CorporationCard implements IActionCard {
+export class RobinsonIndustries extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {
     super({
       name: CardName.ROBINSON_INDUSTRIES,

@@ -19,8 +19,8 @@ describe('Landscaper Award with Board Setup', () => {
     award = new Landscaper();
   });
 
-  it('Counts largest connected group of tiles', function() {
-    const colonySpaces = game.board.getSpaces(SpaceType.COLONY, player);
+  it('Counts largest connected group of tiles', () => {
+    const colonySpaces = game.board.getSpaces(SpaceType.COLONY);
     const landSpaces = game.board.getAvailableSpacesOnLand(player);
 
     game.simpleAddTile(player, landSpaces[0], {tileType: TileType.CITY});

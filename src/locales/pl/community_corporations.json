@@ -1,28 +1,28 @@
 {
-    "Agricola Inc": "Agricola Inc",
+    "Agricola Inc": "",
     "You start with 1 plant production, 1 M€ production, 1 heat production and 40 M€.": "Rozpoczynasz grę z 40 M€. Podnieś swoją produkcję M€ oraz roślinności oraz ciepła o 1 poziom.",
     "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "Efekt trwały: Otrzymujesz -2 / 0 / 1 / 2 PZ za następującą liczbę posiadanych symboli: 0 / 1-2 / 3-4 / 5+.",
 
-    "Project Workshop": "Project Workshop",
+    "Project Workshop": "",
     "You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.": "Rozpoczynasz grę z 39 M€. Otrzymujesz 1 jednostkę stali i tytanu. W ramach pierwszej akcji dobierz aktywną (niebieską) kartę.",
     "Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.": "Akcja: Odwróć i odrzuć zagraną aktywną (niebieską) kartę, aby otrzymać tyle WT, ile PZ miała odrzucona karta i dobierz 2 karty, lub wydaj 3 M€, aby dobrać kartę aktywną.",
 
-    "Incite": "Incite",
+    "Incite": "",
     "You start with 32 M€. As your first action, place two delegates in one party.": "Rozpoczynasz grę z 32 M€. W ramach pierwszej akcji umieść dwóch delegatów w wybranej partii.",
     "Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.": "Efekt trwały: Otrzymujesz 1 punkt wpływów. Gdy korzystasz z akcji Lobbingu, aby przenieść delegata z rezerwy, płacisz za nią 2 M€ mniej.",
 
-    "Playwrights": "Playwrights",
+    "Playwrights": "",
     "You start with 38 M€ and 1 energy production.": "Rozpoczynasz grę z 38 M€. Podnieś swoją produkcję energii o 1 poziom.",
     "Action: Replay a played event from any player by paying its cost ONLY in M€ (discounts and rebates apply), then REMOVE IT FROM PLAY.": "Akcja: Ponownie zagraj wykorzystaną kartę wydarzenia dowolnego gracza, płacąc za nią wyłącznie za pomocą M€ (wliczając wszelkie zniżki), a następnie usuń ją z gry.",
 
-    "Midas": "Midas",
+    "Midas": "",
     "You start with 120 M€. Lower your TR 7 steps.": "Rozpoczynasz grę z 120 M€. Obniż swój WT o 7 poziomów.",
 
-    "Curosity II": "Curosity II",
+    "Curosity II": "",
     "You start with 40 M€ and 2 steel production.": "Rozpoczynasz grę z 40 M€. Podnieś swoją produkcję stali o 2 poziomy.",
     "Effect: When you place a tile on an area that has a RESOURCE placement bonus, or on top of another tile, you may pay 2 M€ to draw a card.": "Efekt trwały: Gdy umieszczasz na planszy obszar na polu dającym premiowy zasób, lub na innym obszarze, możesz wydać 2 M€ aby dodatkowo dobrać kartę.",
 
-    "Junk Ventures": "Junk Ventures",
+    "Junk Ventures": "",
     "You start with 43 M€. As your first action, discard the top 3 cards of the deck.": "Rozpoczynasz grę z 43 M€. W ramach pierwszej akcji odrzuć 3 karty z talii projektów.",
     "ACTION: SHUFFLE THE DISCARD PILE, THEN DRAW 3 CARDS FROM IT. KEEP 1 AND DISCARD THE OTHER 2.": "Akcja: Przetasuj stos kart odrzuconych i dobierz 3 karty. Zatrzymaj 1 z nich a pozostałe 2 odrzuć.",
 

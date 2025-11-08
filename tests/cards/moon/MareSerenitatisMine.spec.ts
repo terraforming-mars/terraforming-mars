@@ -6,9 +6,9 @@ import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
 import {runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {MareSerenitatisMine} from '../../../src/server/cards/moon/MareSerenitatisMine';
-import {MoonSpaces} from '../../../src/common/moon/MoonSpaces';
+import {NamedMoonSpaces} from '../../../src/common/moon/NamedMoonSpaces';
 import {TileType} from '../../../src/common/TileType';
-import {assertPlaceTile} from '../../assertions';
+import {assertPlaceMoonRoad} from '../../assertions';
 
 describe('MareSerenitatisMine', () => {
   let game: IGame;
@@ -43,7 +43,7 @@ describe('MareSerenitatisMine', () => {
     player.steel = 3;
     expect(player.production.steel).eq(0);
     expect(player.production.titanium).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.miningRate).eq(0);
 
     card.play(player);
@@ -52,20 +52,20 @@ describe('MareSerenitatisMine', () => {
     expect(player.steel).eq(2);
     expect(player.production.steel).eq(1);
     expect(player.production.titanium).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
     expect(moonData.miningRate).eq(1);
 
-    const mareSerenitatis = moonData.moon.getSpaceOrThrow(MoonSpaces.MARE_SERENITATIS);
+    const mareSerenitatis = moonData.moon.getSpaceOrThrow(NamedMoonSpaces.MARE_SERENITATIS);
     expect(mareSerenitatis.player).eq(player);
     expect(mareSerenitatis.tile!.tileType).eq(TileType.MOON_MINE);
 
     runAllActions(game);
     expect(moonData.logisticRate).eq(0);
 
-    assertPlaceTile(player, player.popWaitingFor(), TileType.MOON_ROAD);
+    assertPlaceMoonRoad(player, player.popWaitingFor());
 
     expect(moonData.logisticRate).eq(1);
-    expect(player.getTerraformRating()).eq(16);
+    expect(player.terraformRating).eq(16);
   });
 });
 

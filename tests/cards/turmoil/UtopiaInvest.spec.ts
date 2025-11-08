@@ -4,8 +4,8 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {cast} from '../../TestingUtils';
 import {testGame} from '../../TestGame';
 
-describe('UtopiaInvest', function() {
-  it('Should play', function() {
+describe('UtopiaInvest', () => {
+  it('Should play', () => {
     const card = new UtopiaInvest();
     const [/* game */, player] = testGame(2, {turmoilExtension: true});
     cast(card.play(player), undefined);

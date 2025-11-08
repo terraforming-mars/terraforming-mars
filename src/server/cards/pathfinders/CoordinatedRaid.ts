@@ -28,7 +28,7 @@ export class CoordinatedRaid extends Card implements IProjectCard {
   }
 
   public override bespokeCanPlay(player: IPlayer): boolean {
-    return player.colonies.getFleetSize() > player.colonies.tradesThisGeneration;
+    return player.colonies.getFleetSize() > player.colonies.usedTradeFleets;
   }
 
   public override bespokePlay(player: IPlayer) {

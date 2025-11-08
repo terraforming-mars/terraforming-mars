@@ -3,8 +3,8 @@ import {ImportOfAdvancedGHG} from '../../../src/server/cards/base/ImportOfAdvanc
 import {testGame} from '../../TestGame';
 import {cast} from '../../TestingUtils';
 
-describe('ImportOfAdvancedGHG', function() {
-  it('Should play', function() {
+describe('ImportOfAdvancedGHG', () => {
+  it('Should play', () => {
     const card = new ImportOfAdvancedGHG();
     const [/* game */, player] = testGame(2);
     cast(card.play(player), undefined);

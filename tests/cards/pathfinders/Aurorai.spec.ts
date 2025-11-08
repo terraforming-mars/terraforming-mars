@@ -9,15 +9,15 @@ import {AsteroidStandardProject} from '../../../src/server/cards/base/standardPr
 import {SelectPayment} from '../../../src/server/inputs/SelectPayment';
 import {Payment} from '../../../src/common/inputs/Payment';
 
-describe('Aurorai', function() {
+describe('Aurorai', () => {
   let card: Aurorai;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Aurorai();
     [game, player] = testGame(1);
-    player.corporations.push(card);
+    player.playedCards.push(card);
   });
 
   it('on TR bump', () => {

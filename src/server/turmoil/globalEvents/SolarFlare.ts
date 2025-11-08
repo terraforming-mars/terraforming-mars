@@ -24,10 +24,10 @@ export class SolarFlare extends GlobalEvent implements IGlobalEvent {
     });
   }
   public resolve(game: IGame, turmoil: Turmoil) {
-    game.getPlayersInGenerationOrder().forEach((player) => {
-      const amount = Math.min(5, player.tags.count(Tag.SPACE, 'raw')) - turmoil.getPlayerInfluence(player);
+    game.playersInGenerationOrder.forEach((player) => {
+      const amount = Math.min(5, player.tags.count(Tag.SPACE, 'raw')) - turmoil.getInfluence(player);
       if (amount > 0) {
-        player.stock.deduct(Resource.MEGACREDITS, amount * 3, {log: true, from: this.name});
+        player.stock.deduct(Resource.MEGACREDITS, amount * 3, {log: true, from: {globalEvent: this}});
       }
     });
   }

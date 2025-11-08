@@ -47,7 +47,7 @@
               <div v-if="gameOptions.preludeDraftVariant">Prelude</div>
             </li>
 
-            <li v-if="gameOptions.escapeVelocityMode">
+            <li v-if="gameOptions.escapeVelocity !== undefined">
               <div class="create-game-expansion-icon expansion-icon-escape-velocity"></div>
               <span>{{escapeVelocityDescription}}</span>
             </li>
@@ -82,7 +82,6 @@ import Vue from 'vue';
 import {GameOptionsModel} from '@/common/models/GameOptionsModel';
 import {BoardName} from '@/common/boards/BoardName';
 import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
-import {AgendaStyle} from '@/common/turmoil/Types';
 import {translateTextWithParams} from '@/client/directives/i18n';
 
 const boardColorClass: Record<BoardName, string> = {
@@ -96,6 +95,7 @@ const boardColorClass: Record<BoardName, string> = {
   [BoardName.ARABIA_TERRA]: 'game-config board-arabia_terra map',
   [BoardName.VASTITAS_BOREALIS]: 'game-config board-vastitas_borealis map',
   [BoardName.TERRA_CIMMERIA]: 'game-config board-terra_cimmeria map',
+  [BoardName.HOLLANDIA]: 'game-config board-hollandia map',
 };
 
 export default Vue.extend({
@@ -112,20 +112,25 @@ export default Vue.extend({
     },
   },
   computed: {
-
     isPoliticalAgendasOn(): boolean {
-      return (this.gameOptions.politicalAgendasExtension !== AgendaStyle.STANDARD);
+      return (this.gameOptions.politicalAgendasExtension !== 'Standard');
     },
     boardColorClass(): string {
       return boardColorClass[this.gameOptions.boardName];
     },
     escapeVelocityDescription(): string {
-      const {escapeVelocityThreshold, escapeVelocityPenalty, escapeVelocityPeriod, escapeVelocityBonusSeconds} = this.gameOptions ?? {};
-
-      if (escapeVelocityThreshold === undefined || escapeVelocityPenalty === undefined || escapeVelocityPeriod === undefined || escapeVelocityBonusSeconds === undefined) {
+      if (this.gameOptions.escapeVelocity === undefined) {
         return '';
       }
-      return translateTextWithParams('After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per action.)', [escapeVelocityThreshold.toString(), escapeVelocityPenalty.toString(), escapeVelocityPeriod.toString(), escapeVelocityBonusSeconds.toString()]);
+      const ev = this.gameOptions.escapeVelocity;
+      return translateTextWithParams(
+        'After ${0} min, reduce ${1} VP every ${2} min. (${3} bonus sec. per action.)',
+        [
+          ev.thresholdMinutes.toString(),
+          ev.penaltyVPPerPeriod.toString(),
+          ev.penaltyPeriodMinutes.toString(),
+          ev.bonusSectionsPerAction.toString(),
+        ]);
     },
     RandomMAOptionType(): typeof RandomMAOptionType {
       return RandomMAOptionType;

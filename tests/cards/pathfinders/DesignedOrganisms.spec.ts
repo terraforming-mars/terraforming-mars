@@ -7,18 +7,17 @@ import {Penguins} from '../../../src/server/cards/promo/Penguins';
 import {Tardigrades} from '../../../src/server/cards/base/Tardigrades';
 import {runAllActions, testGame} from '../../TestingUtils';
 
-describe('DesignedOrganisms', function() {
+describe('DesignedOrganisms', () => {
   let card: DesignedOrganisms;
   let player: TestPlayer;
   let game: IGame;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DesignedOrganisms();
     [game, player] = testGame(1);
-    player.playedCards.push(card);
   });
 
-  it('canPlay', function() {
+  it('canPlay', () => {
     player.tagsForTest = {science: 4};
     expect(card.canPlay(player)).is.false;
 
@@ -26,10 +25,10 @@ describe('DesignedOrganisms', function() {
     expect(card.canPlay(player)).is.true;
   });
 
-  it('play', function() {
+  it('play', () => {
     const tardigrades = new Tardigrades();
     const penguins = new Penguins();
-    player.playedCards = [tardigrades, penguins];
+    player.playedCards.push(tardigrades, penguins);
 
     card.play(player);
     runAllActions(game);

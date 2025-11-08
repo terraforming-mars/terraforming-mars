@@ -4,21 +4,21 @@ import {Resource} from '../../../src/common/Resource';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestGame';
 
-describe('NuclearPower', function() {
+describe('NuclearPower', () => {
   let card: NuclearPower;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new NuclearPower();
     [/* game */, player] = testGame(2);
   });
 
-  it('Can not play', function() {
+  it('Can not play', () => {
     player.production.add(Resource.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     expect(card.canPlay(player)).is.true;
     card.play(player);
     expect(player.production.megacredits).to.eq(-2);

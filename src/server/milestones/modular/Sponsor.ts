@@ -11,8 +11,7 @@ export class Sponsor extends BaseMilestone {
       3);
   }
   public getScore(player: IPlayer): number {
-    return player.playedCards
+    return player.playedCards.projects()
       .filter((card) => (card.cost >= 20) && (card.type === CardType.ACTIVE || card.type === CardType.AUTOMATED)).length;
   }
 }
-

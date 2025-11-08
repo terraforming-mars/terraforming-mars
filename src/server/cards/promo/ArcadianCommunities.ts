@@ -7,8 +7,9 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {digit} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class ArcadianCommunities extends CorporationCard implements IActionCard {
+export class ArcadianCommunities extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {
     super({
       name: CardName.ARCADIAN_COMMUNITIES,
@@ -35,7 +36,7 @@ export class ArcadianCommunities extends CorporationCard implements IActionCard 
     });
   }
 
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     return new SelectSpace(
       'Select space for claim',
       player.game.board.getAvailableSpacesOnLand(player))

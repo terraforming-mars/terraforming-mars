@@ -1,9 +1,7 @@
-import {IPlayer} from '../../IPlayer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {PreludeCard} from '../prelude/PreludeCard';
-import {digit} from '../Options';
 import {ICard} from '../ICard';
 
 export class ElectionSponsorship extends PreludeCard implements ICard {
@@ -12,30 +10,25 @@ export class ElectionSponsorship extends PreludeCard implements ICard {
   constructor() {
     super({
       name: CardName.ELECTION_SPONSORSHIP,
-      tags: [Tag.MARS],
+      tags: [Tag.CRIME],
 
       behavior: {
         underworld: {corruption: 1},
-        turmoil: {sendDelegates: {count: 1}},
+        turmoil: {
+          sendDelegates: {count: 2},
+          influenceBonus: 1,
+        },
       },
 
       metadata: {
         cardNumber: 'UP14',
         renderData: CardRenderer.builder((b) => {
-          b.corruption().delegates(1).br;
-          b.plainText('Gain 1 corruption. Place 1 delegate in any party.').br;
+          b.corruption().delegates(2).br;
+          b.plainText('Gain 1 corruption. Place 2 delegates in any party.').br;
 
-          b.effect('For the first 4 generations, gain +2 influence',
-            (eb) => eb.text('Gen 1-4').startEffect.plus().influence({amount: 2, digit}).asterix());
+          b.effect('You have +1 influence.', (eb) => eb.startEffect.influence());
         }),
       },
     });
-  }
-
-  public getInfluenceBonus(player: IPlayer) {
-    if (player.game.generation <= 4) {
-      return 2;
-    }
-    return 0;
   }
 }

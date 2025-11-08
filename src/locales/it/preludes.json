@@ -1,21 +1,21 @@
 {
-  "Cheung Shing MARS":"Cheung Shing MARS",
+  "Cheung Shing MARS":"",
   "You start with 3 M€ production and 44 M€.":"Inizi con 44 M€ e una Produzione di M€ pari a 3.",
   "Effect: When you play a building tag, you pay 2 M€ less for it.":"Effetto: quando giochi una carta con un simbolo Edificio, la paghi 2 M€ in meno.",
 
-  "Point Luna":"Point Luna",
+  "Point Luna":"",
   "Effect: When you play an Earth tag, including this, draw a card.":"Effetto: quando giochi una carta con un simbolo Terra, inclusa questa, pesca 1 carta.",
   "You start with 1 titanium production and 38 M€.":"Inizi con 38 M€ e 1 Produzione di Titanio.",
 
-  "Robinson Industries":"Robinson Industries",
+  "Robinson Industries":"",
   "You start with 47 M€.":"Inizi con 47 M€.",
   "Action: Spend 4 M€ to increase (one of) your LOWEST production 1 step.":"Azione: spendi 4 M€ per incrementare di 1 livello la tua PRODUZIONE PIÙ BASSA (una sola).",
 
-  "Valley Trust":"Valley Trust",
+  "Valley Trust":"",
   "Effect: When you play a science tag, you pay 2 M€ less for it.":"Effetto: quando giochi una carta con un simbolo Scienza, la paghi 2 M€ in meno.",
   "You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.":"Inizi con 37 M€. Come prima azione, pesca 3 carte Prelude, giocane una e scarta le altre due.",
 
-  "Vitor":"Vitor",
+  "Vitor":"",
   "You start with 45 M€. As your first action, fund an award for free.":"Inizi con 45 M€. Come prima azione, finanzia un Riconoscimento senza spendere M€.",
   "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.":"Effetto: quando giochi una carta contenente una qualunque icona PV NON NEGATIVA, inclusa questa, guadagni 3 M€.",
 
@@ -63,7 +63,7 @@
     "Biofuels": "Biocarburanti",
     "Increase your energy and plant production 1 step. Gain 2 plants.": "Incrementa le tue produzioni di Piante e di Energia di 1 livello ciascuna. Ottieni 2 Piante.",
 
-    "Biolab": "Biolab",
+    "Biolab": "",
     "Increase your plant production 1 step. Draw 3 cards.": "Incrementa la tua Produzione di Piante di 1 livello. Pesca 3 carte.",
 
     "Biosphere Support": "Supporto alla Biosfera",
@@ -117,7 +117,7 @@
     "Mining Operations": "Operazioni di Estrazione Mineraria",
     "Increase your steel production 2 steps. Gain 4 steel.": "Incrementa la tua Produzione di Acciaio di 2 livelli. Ottieni 4 risorse Acciaio.",
 
-    "Mohole": "Mohole",
+    "Mohole": "",
     "Increase your heat production 3 steps. Gain 3 heat.": "Incrementa la tua Produzione di Calore di 3 livelli. Ottieni 3 risorse Calore.",
 
     "Mohole Excavation": "Scavo Mohole",

@@ -5,8 +5,8 @@ import {JovianTaxRights} from '../../src/server/turmoil/globalEvents/JovianTaxRi
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('JovianTaxRights', function() {
-  it('resolve play', function() {
+describe('JovianTaxRights', () => {
+  it('resolve play', () => {
     const card = new JovianTaxRights();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;

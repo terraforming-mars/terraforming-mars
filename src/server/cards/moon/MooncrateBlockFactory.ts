@@ -4,6 +4,8 @@ import {Tag} from '../../../common/cards/Tag';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {IProjectCard} from '../IProjectCard';
+import {IPlayer} from '../..//IPlayer';
+import {IStandardProjectCard} from '../IStandardProjectCard';
 
 export class MooncrateBlockFactory extends Card implements IProjectCard {
   constructor() {
@@ -12,7 +14,7 @@ export class MooncrateBlockFactory extends Card implements IProjectCard {
       type: CardType.ACTIVE,
       tags: [Tag.BUILDING],
       cost: 8,
-      requirements: {miningTiles: 1},
+      requirements: {miningTiles: 1, all: true},
 
       // Behavior is in MoonHabitatStandardProject, MoonMineStandardProject and MoonRoadStandardProject.
 
@@ -26,5 +28,25 @@ export class MooncrateBlockFactory extends Card implements IProjectCard {
         }),
       },
     });
+  }
+
+  private readonly standardProjects = new Set(Array.from(
+    [CardName.MOON_MINE_STANDARD_PROJECT,
+      CardName.MOON_ROAD_STANDARD_PROJECT,
+      CardName.MOON_MINE_STANDARD_PROJECT,
+      CardName.MOON_HABITAT_STANDARD_PROJECT,
+      CardName.MOON_ROAD_STANDARD_PROJECT_VARIANT_1,
+      CardName.MOON_MINE_STANDARD_PROJECT_VARIANT_1,
+      CardName.MOON_HABITAT_STANDARD_PROJECT_VARIANT_1,
+      CardName.MOON_ROAD_STANDARD_PROJECT_VARIANT_2,
+      CardName.MOON_MINE_STANDARD_PROJECT_VARIANT_2,
+      CardName.MOON_HABITAT_STANDARD_PROJECT_VARIANT_2,
+    ],
+  ));
+  public getStandardProjectDiscount(_player: IPlayer, card: IStandardProjectCard): number {
+    if (this.standardProjects.has(card.name)) {
+      return 4;
+    }
+    return 0;
   }
 }

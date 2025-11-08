@@ -71,7 +71,7 @@ describe('GuerillaEcologists', () => {
     expect(player.plants).eq(0);
   });
 
-  it('Can place greenery tile on any available land space, not just adjacent to exising greenery', function() {
+  it('Can place greenery tile on any available land space, not just adjacent to exising greenery', () => {
     const card = new GuerillaEcologists();
     const [game, player] = testGame(2);
     game.board = EmptyBoard.newInstance();

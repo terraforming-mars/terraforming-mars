@@ -6,22 +6,22 @@ import {cast, runAllActions} from '../../TestingUtils';
 import {NitrogenRichAsteroid} from '../../../src/server/cards/base/NitrogenRichAsteroid';
 import {testGame} from '../../TestGame';
 
-describe('EccentricSponsor', function() {
+describe('EccentricSponsor', () => {
   let eccentricSponsor: EccentricSponsor;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     eccentricSponsor = new EccentricSponsor();
     [/* game */, player] = testGame(1);
   });
 
-  it('Gets card discount', function() {
+  it('Gets card discount', () => {
     expect(eccentricSponsor.getCardDiscount(player)).to.eq(0);
     player.lastCardPlayed = eccentricSponsor.name;
     expect(eccentricSponsor.getCardDiscount(player)).to.eq(25);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const nitrogenRichAsteroid = new NitrogenRichAsteroid();
     player.cardsInHand = [nitrogenRichAsteroid];
     player.megaCredits = 6;
@@ -38,7 +38,7 @@ describe('EccentricSponsor', function() {
     expect(player.canPlay(nitrogenRichAsteroid)).is.true;
   });
 
-  it('Fizzle', function() {
+  it('Fizzle', () => {
     const nitrogenRichAsteroid = new NitrogenRichAsteroid();
     player.cardsInHand = [nitrogenRichAsteroid];
     player.megaCredits = 0;

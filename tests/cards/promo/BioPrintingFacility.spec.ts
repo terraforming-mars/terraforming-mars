@@ -7,32 +7,32 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {cast} from '../../TestingUtils';
 
-describe('BioPrintingFacility', function() {
+describe('BioPrintingFacility', () => {
   let card: BioPrintingFacility;
   let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new BioPrintingFacility();
     [/* game */, player] = testGame(2);
     player.playedCards.push(card);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     cast(card.play(player), undefined);
   });
 
 
-  it('Can not act', function() {
+  it('Can not act', () => {
     player.energy = 1;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Can act', function() {
+  it('Can act', () => {
     player.energy = 3;
     expect(card.canAct(player));
   });
 
-  it('Should act - single target', function() {
+  it('Should act - single target', () => {
     const smallanimals = new SmallAnimals();
     player.playedCards.push(smallanimals);
     player.energy = 2;
@@ -47,7 +47,7 @@ describe('BioPrintingFacility', function() {
     expect(player.plants).to.eq(2);
   });
 
-  it('Should act - multiple targets', function() {
+  it('Should act - multiple targets', () => {
     const smallanimals = new SmallAnimals();
     const fish = new Fish();
     player.playedCards.push(smallanimals, fish);

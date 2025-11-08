@@ -22,7 +22,7 @@ describe('CoreMine', () => {
 
   it('play', () => {
     expect(player.production.titanium).eq(0);
-    expect(player.getTerraformRating()).eq(14);
+    expect(player.terraformRating).eq(14);
     expect(moonData.miningRate).eq(0);
 
     card.play(player);
@@ -31,7 +31,7 @@ describe('CoreMine', () => {
     placeTileAction.execute()!.cb(moonData.moon.spaces[2]);
 
     expect(moonData.miningRate).eq(1);
-    expect(player.getTerraformRating()).eq(15);
+    expect(player.terraformRating).eq(15);
   });
 });
 

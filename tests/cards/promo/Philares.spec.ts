@@ -33,7 +33,7 @@ describe('Philares', () => {
     adjacentSpace = game.board.getAdjacentSpaces(space)[0];
     adjacentSpace2 = game.board.getAdjacentSpaces(space)[2];
 
-    philaresPlayer.corporations.push(card);
+    philaresPlayer.playedCards.push(card);
   });
 
   it('No bonus when placing next to self', () => {
@@ -140,16 +140,16 @@ describe('Philares', () => {
     ).to.throw('Select 2 resource(s)');
   });
 
-  it('Should take initial action', function() {
-    philaresPlayer.deferInitialAction(card);
+  it('Should take initial action', () => {
+    philaresPlayer.defer(card.initialAction(philaresPlayer));
     runAllActions(game);
 
     const action = cast(philaresPlayer.popWaitingFor(), SelectSpace);
     action.cb(action.spaces[0]);
-    expect(philaresPlayer.getTerraformRating()).to.eq(21);
+    expect(philaresPlayer.terraformRating).to.eq(21);
   });
 
-  it('Can place final greenery if gains enough plants from earlier players placing adjacent greeneries', function() {
+  it('Can place final greenery if gains enough plants from earlier players placing adjacent greeneries', () => {
     game.addGreenery(philaresPlayer, space);
 
     // Max out all global parameters

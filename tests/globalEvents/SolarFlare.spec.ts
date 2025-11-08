@@ -1,16 +1,15 @@
 import {expect} from 'chai';
-import {SpaceStation} from '../../src/server/cards/base/SpaceStation';
 import {SolarFlare} from '../../src/server/turmoil/globalEvents/SolarFlare';
 import {Kelvinists} from '../../src/server/turmoil/parties/Kelvinists';
 import {testGame} from '../TestingUtils';
 
-describe('SolarFlare', function() {
-  it('resolve play', function() {
+describe('SolarFlare', () => {
+  it('resolve play', () => {
     const card = new SolarFlare();
     const [game, player, player2] = testGame(2, {turmoilExtension: true});
     const turmoil = game.turmoil!;
-    player.playedCards.push(new SpaceStation());
-    player2.playedCards.push(new SpaceStation(), new SpaceStation(), new SpaceStation());
+    player.tagsForTest = {space: 1};
+    player2.tagsForTest = {space: 3};
     player.megaCredits = 10;
     player2.megaCredits = 10;
 

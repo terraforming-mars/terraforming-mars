@@ -1,12 +1,12 @@
 import {Tag} from '../../../common/cards/Tag';
 import {IPlayer} from '../../IPlayer';
 import {CorporationCard} from '../corporation/CorporationCard';
-import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {PreludesExpansion} from '../../preludes/PreludesExpansion';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
-export class ValleyTrust extends CorporationCard {
+export class ValleyTrust extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.VALLEY_TRUST,
@@ -31,13 +31,8 @@ export class ValleyTrust extends CorporationCard {
     });
   }
 
-  public override getCardDiscount(player: IPlayer, card: IProjectCard) {
-    // TODO(chosta) -> improve once the discounts property is given a go
-    return player.tags.cardTagCount(card, Tag.SCIENCE) * 2;
-  }
-
   // TODO(kberg): find a way to feed warnings for initialAction.
-  public initialAction(player: IPlayer) {
+  public override initialAction(player: IPlayer) {
     const game = player.game;
     const cards = game.preludeDeck.drawN(game, 3);
     return PreludesExpansion.selectPreludeToPlay(player, cards, 'discard');

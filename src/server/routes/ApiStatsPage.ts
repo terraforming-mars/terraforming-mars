@@ -20,7 +20,11 @@ export class ApiStatsPage extends Handler {
       const g = await db.getGame(r.game_id);
       const players = g.players.map(p => ({
         id: p.id,
+<<<<<<< HEAD
         name: p.name,
+=======
+        name: p.name.replace('Samuel Wesley Musselman', 'Sam'),
+>>>>>>> 41d53264345a7e86b7cf854f20cdcedf3039e786
         color: p.color,
         score: p.victoryPointsByGeneration.slice(-1)[0],
         tieBreakScore: p.victoryPointsByGeneration.slice(-1)[0] + p.megaCredits / 1000000,
@@ -154,11 +158,19 @@ export class ApiStatsPage extends Handler {
     return { data: final };
   }
 
+<<<<<<< HEAD
   public override async get(req: Request, res: Response, _ctx: Context): Promise<void> {
     try {
       res.setHeader('Access-Control-Allow-Origin', '*');
       const stats = await this.getStatsPage();
       responses.writeJson(res, stats, 2);
+=======
+  public override async get(req: Request, res: Response, ctx: Context): Promise<void> {
+    try {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      const stats = await this.getStatsPage();
+      responses.writeJson(res, ctx, stats, 2);
+>>>>>>> 41d53264345a7e86b7cf854f20cdcedf3039e786
     } catch (err) {
       console.error(err);
       responses.badRequest(req, res, 'could not load admin stats');

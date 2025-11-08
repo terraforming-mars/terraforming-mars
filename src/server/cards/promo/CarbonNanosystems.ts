@@ -7,6 +7,7 @@ import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardResource} from '../../../common/CardResource';
 import {Size} from '../../../common/cards/render/Size';
+import {ICard} from '../ICard';
 
 export class CarbonNanosystems extends Card implements IProjectCard {
   constructor() {
@@ -28,12 +29,14 @@ export class CarbonNanosystems extends Card implements IProjectCard {
     });
   }
 
-  public onCardPlayed(player: IPlayer, card: IProjectCard) {
-    const tags = card.tags.filter((tag) => tag === Tag.SCIENCE).length;
-    player.addResourceTo(this, {qty: tags, log: true});
+  public onCardPlayed(player: IPlayer, card: ICard) {
+    const qty = player.tags.cardTagCount(card, Tag.SCIENCE);
+    player.addResourceTo(this, {qty: qty, log: true});
     return undefined;
   }
-  public onColonyAddedToLeavitt(player: IPlayer): void {
-    player.addResourceTo(this, {qty: 1, log: true});
+  public onNonCardTagAdded(player: IPlayer, tag: Tag) {
+    if (tag === Tag.SCIENCE) {
+      player.addResourceTo(this, {qty: 1, log: true});
+    }
   }
 }

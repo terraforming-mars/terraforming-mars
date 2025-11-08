@@ -78,9 +78,13 @@ import {maybeRenamedMilestone} from '../common/ma/MilestoneName';
 import {maybeRenamedAward} from '../common/ma/AwardName';
 import {AresHazards} from './ares/AresHazards';
 import {hazardSeverity} from '../common/AresTileType';
+<<<<<<< Updated upstream
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 import {BoardName} from '../common/boards/BoardName';
 import {SpaceType} from '../common/boards/SpaceType';
+=======
+import { Log } from '@/common/logs/Log';
+>>>>>>> Stashed changes
 
 // Can be overridden by tests
 
@@ -110,6 +114,7 @@ export class Game implements IGame, Logger {
   public inputsThisRound = 0;
   public resettable: boolean = false;
   public globalsPerGeneration: Array<Partial<Record<GlobalParameter, number>>> = [];
+  public noLog = false;
 
   public generation: number = 1;
   public phase: Phase = Phase.RESEARCH;
@@ -437,7 +442,9 @@ export class Game implements IGame, Logger {
   }
 
   public save(): void {
-    GameLoader.getInstance().saveGame(this);
+    if (!this.noLog) {
+      GameLoader.getInstance().saveGame(this);
+    }
   }
 
   public serialize(): SerializedGame {
@@ -1618,6 +1625,11 @@ export class Game implements IGame, Logger {
     const logMessage = builder.build();
     logMessage.playerId = options?.reservedFor?.id;
     this.gameLog.push(logMessage);
+    if (!this.noLog) {
+      console.log('[LOG]: ', Log.applyData(logMessage, (d) => {
+        return d.value.toString();
+      }));
+    }
     this.gameAge++;
   }
 

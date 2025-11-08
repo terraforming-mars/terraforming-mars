@@ -339,6 +339,8 @@ export interface IPlayer {
    * any associated costs, and ways the player can pay.
    */
   affordOptionsForCard(card: IProjectCard): CanAffordOptions;
+  paymentOptionsForCard(card: IProjectCard): PaymentOptions;
+  getReasonablePayment(inputCost: number, paymentOptions: Partial<PaymentOptions>): Payment;
   canAfford(options: number | CanAffordOptions): boolean;
   getStandardProjectOption(): SelectCard<IStandardProjectCard>;
   takeAction(saveBeforeTakingAction?: boolean): void;

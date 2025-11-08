@@ -30,4 +30,13 @@ export class SelectPlayer extends BasePlayerInput<IPlayer> {
     }
     return this.cb(foundPlayer);
   }
+
+  public getActionSpace() {
+    return this.players.map(p => {
+      return {
+        label: this.title + ' ' + p.id,
+        input: { type: 'player', player: p.color }
+      };
+    });
+  }
 }

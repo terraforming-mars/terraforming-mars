@@ -31,6 +31,15 @@ export interface PlayerInput {
      * This is another mechainsm for calling cb() with a client-side response.
      */
     process(response: InputResponse, player: IPlayer): PlayerInput | undefined;
+
+    /**
+     * Return the inputresponse that an AI agent would make
+     * @param algo 
+     * @param player 
+     * @param rand 
+     */
+    // agent(algo: AgentAlgo, player: IPlayer, rand: Random): InputResponse;
+    // getActionSpace(player: IPlayer): string[];
 }
 
 const NULL_FUNCTION = () => undefined;
@@ -45,6 +54,8 @@ export abstract class BasePlayerInput<T> implements PlayerInput {
 
   public abstract toModel(player: IPlayer): PlayerInputModel;
   public abstract process(response: InputResponse, player: IPlayer): PlayerInput | undefined;
+  // public abstract agent(algo: AgentAlgo, player: IPlayer, rand: Random): InputResponse;
+  // public abstract getActionSpace(player: IPlayer): string[];
 
   constructor(type: PlayerInputType, title: string | Message = '') {
     this.type = type;

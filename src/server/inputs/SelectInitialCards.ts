@@ -7,8 +7,14 @@ import {CardName} from '../../common/cards/CardName';
 import {SelectInitialCardsModel} from '../../common/models/PlayerInputModel';
 import {InputError} from './InputError';
 import {OptionsInput} from './OptionsPlayerInput';
+<<<<<<< Updated upstream
 import {InputResponse, isSelectInitialCardsResponse} from '../../common/inputs/InputResponse';
 import {PlayerInput} from '../PlayerInput';
+=======
+import {InputResponse, isSelectInitialCardsResponse, SelectInitialCardsResponse} from '../../common/inputs/InputResponse';
+import { Random } from '@/common/utils/Random';
+import { ICard } from '../cards/ICard';
+>>>>>>> Stashed changes
 
 type Inputs = {
   corp: PlayerInput | undefined,
@@ -148,5 +154,21 @@ export class SelectInitialCards extends OptionsInput<undefined> {
       player.defer(this.options[i].process(input.responses[i], player));
     }
     return this.cb(undefined);
+  }
+
+  public getActionSpace(player: IPlayer, rand: Random) {
+    const choices = this.options.map((opt) => {
+      // This should be a selectcard for the corp and a selectcard for initial project cards
+      const choice = (opt as SelectCard<ICard>).getRandomSelection(player, rand).input;
+      return choice;
+    });
+    return [
+      { 
+        label: 'Select initial cards', 
+        input: {
+          type: "initialCards" as 'initialCards',
+          responses: choices,
+      }}
+    ];
   }
 }

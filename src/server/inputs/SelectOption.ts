@@ -32,4 +32,7 @@ export class SelectOption extends BasePlayerInput<undefined> {
     }
     return this.cb(undefined);
   }
+  public getActionSpace() {
+    return [{label: this.title + ' option', input: { type: 'option' }}];
+  }
 }

@@ -57,4 +57,11 @@ export class SelectPayment extends BasePlayerInput<Payment> {
     }
     return this.cb(input.payment);
   }
+
+  public getActionSpace(p: IPlayer) {
+    return [{
+      label: ((typeof this.title === 'string') ? this.title : this.title?.message) + ' payment', 
+      input: { type: 'payment', payment: p.getReasonablePayment(this.amount, this.paymentOptions) },
+    }];
+  }
 }

@@ -113,4 +113,21 @@ export class SelectProjectCardToPlay extends BasePlayerInput<IProjectCard> {
     }
     this.cb(card);
   }
+
+  public getActionable(p: IPlayer) {
+    return this.cards.filter(c => c.canPlay(p));
+  }
+
+  public getActionSpace(p: IPlayer) {
+    return this.getActionable(p).map(c => {
+      return { 
+        label: this.title + ' ' + c.name, 
+        input: { 
+          type: 'projectCard',
+          card: c.name,
+          payment: p.getReasonablePayment(p.getCardCost(c), p.paymentOptionsForCard(c)),
+      },
+    };
+  });
+  }
 }

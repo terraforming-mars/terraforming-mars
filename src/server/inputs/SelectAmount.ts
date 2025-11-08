@@ -3,6 +3,8 @@ import {BasePlayerInput} from '../PlayerInput';
 import {InputResponse, isSelectAmountResponse} from '../../common/inputs/InputResponse';
 import {SelectAmountModel} from '../../common/models/PlayerInputModel';
 import {InputError} from './InputError';
+import { IPlayer } from '../IPlayer';
+import { Random } from '@/common/utils/Random';
 
 export class SelectAmount extends BasePlayerInput<number> {
   public selected: number = -1;
@@ -44,5 +46,9 @@ export class SelectAmount extends BasePlayerInput<number> {
     }
     this.selected = input.amount;
     return this.cb(input.amount);
+  }
+  public getActionSpace(_p: IPlayer, rand: Random) {
+    const range = this.max - this.min;
+    return [{ label: this.title, input: { type: 'amount', amount: rand.nextInt(range + 1) + this.min }}];
   }
 }

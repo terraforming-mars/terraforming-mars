@@ -35,4 +35,13 @@ export class SelectSpace extends BasePlayerInput<Space> {
     }
     return this.cb(space);
   }
+
+  public getActionSpace() {
+    return this.spaces.map(sp => {
+      return { 
+        label: ((typeof this.title === 'string') ? this.title : this.title?.message) + ' ' + sp.id,
+        input: { type: 'space', spaceId: sp.id }
+      };
+    });
+  }
 }

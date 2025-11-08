@@ -723,7 +723,7 @@ export class Player implements IPlayer {
     return Math.max(cost, 0);
   }
 
-  private paymentOptionsForCard(card: IProjectCard): PaymentOptions {
+  public paymentOptionsForCard(card: IProjectCard): PaymentOptions {
     return {
       heat: this.canUseHeatAsMegaCredits,
       steel: this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tag.BUILDING),
@@ -739,6 +739,45 @@ export class Player implements IPlayer {
       graphene: card.tags.includes(Tag.CITY) || card.tags.includes(Tag.SPACE),
       kuiperAsteroids: card.name === CardName.AQUIFER_STANDARD_PROJECT || card.name === CardName.ASTEROID_STANDARD_PROJECT,
     };
+  }
+
+  public getReasonablePayment(inputCost: number, paymentOptions: Partial<PaymentOptions>): Payment {
+    // Check the card's discounted cost to us
+    let cost = inputCost;
+    const options = paymentOptions;
+    let titaniumToUse = 0;
+    let steelToUse = 0;
+    let mcToUse = 0;
+    if (options.titanium) {
+      // We can use titanium, up to however much we have
+      titaniumToUse = Math.min(Math.floor(cost / this.getTitaniumValue()), this.titanium);
+      cost -= titaniumToUse * this.getTitaniumValue();
+    }
+    if (options.steel) {
+      steelToUse = Math.min(Math.floor(cost / this.getSteelValue()), this.steel);
+      cost -= steelToUse * this.getSteelValue();
+    }
+    // Use mc to cover the difference
+    if (this.megaCredits >= cost) {
+      mcToUse = cost;
+    } else {
+      // If we don't have enough mc, it's ok to overpay in steel or titanium
+      if (cost > 0 && options.titanium) {
+        titaniumToUse += 1;
+        cost -= this.getTitaniumValue();
+      }
+      if (cost > 0 && options.steel) {
+        steelToUse += 1;
+        cost -= this.getSteelValue();
+      }
+    }
+    // TODO Doesn't account for the ability to spend stuff like microbes and heat (if helion)
+    return {
+      ...Payment.EMPTY,
+      steel: steelToUse,
+      titanium: titaniumToUse,
+      megaCredits: mcToUse,
+    }
   }
 
   public checkPaymentAndPlayCard(selectedCard: IProjectCard, payment: Payment, cardAction: CardAction = 'add') {

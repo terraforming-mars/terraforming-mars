@@ -26,7 +26,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import Vue, { PropType } from "vue";
 import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
 import {vueRoot} from '@/client/components/vueRoot';
@@ -71,6 +71,7 @@ export default Vue.extend({
     waitingfor: {
       type: Object as () => PlayerInputModel | undefined,
     },
+    timeWarpQueue: Array as PropType<any[] | undefined>,
   },
   data(): DataModel {
     return {
@@ -96,8 +97,15 @@ export default Vue.extend({
       document.title = next + ' ' + this.$t(constants.APP_NAME);
     },
     onsave(out: InputResponse) {
-      const root = vueRoot(this);
+      const payload = {runId: this.playerView.runId, ...out};
 
+      if (this.timeWarpQueue) {
+        this.timeWarpQueue.push(JSON.parse(JSON.stringify(payload)));
+        this.$emit("queue-updated", this.timeWarpQueue);
+        return
+      }
+
+      const root = vueRoot(this);
       if (root.isServerSideRequestInProgress) {
         console.warn('Server request in progress');
         return;
@@ -111,7 +119,7 @@ export default Vue.extend({
         this.loadPlayerViewResponse(xhr);
         root.isServerSideRequestInProgress = false;
       };
-      xhr.send(JSON.stringify({runId: this.playerView.runId, ...out}));
+      xhr.send(JSON.stringify(payload));
       xhr.onerror = function() {
         root.showAlert('Error sending input,', CANNOT_CONTACT_SERVER);
         root.isServerSideRequestInProgress = false;

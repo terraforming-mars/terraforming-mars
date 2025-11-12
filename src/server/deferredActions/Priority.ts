@@ -30,6 +30,7 @@ export enum Priority {
 
   /** Anything that doesn't fit into another category. */
   DEFAULT,
+
   /**
    * When you must discard before you can draw. Mars U, Ender (CEO).
    *

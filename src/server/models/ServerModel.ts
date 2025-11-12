@@ -87,7 +87,7 @@ export class Server {
   public static getPlayerModel(player: IPlayer): PlayerViewModel {
     const game = player.game;
 
-    const players: Array<PublicPlayerModel> = game.playersInGenerationOrder.map(this.getPlayer);
+    const players: Array<PublicPlayerModel> = game.playersInGenerationOrder.map((p) => this.getPlayer(p, p.color === player.color));
 
     const thisPlayerIndex = players.findIndex((p) => p.color === player.color);
     const thisPlayer: PublicPlayerModel = players[thisPlayerIndex];
@@ -118,7 +118,7 @@ export class Server {
       color: 'neutral',
       id: game.spectatorId,
       game: this.getGameModel(game),
-      players: game.playersInGenerationOrder.map(this.getPlayer),
+      players: game.playersInGenerationOrder.map((p) => this.getPlayer(p, false)),
       thisPlayer: undefined,
       runId: runId,
     };
@@ -204,7 +204,8 @@ export class Server {
     // showReset: player.game.inputsThisRound > 0 && player.game.resettable === true && player.game.phase === Phase.ACTION,
   }
 
-  public static getPlayer(player: IPlayer): PublicPlayerModel {
+  /** When the model is for this player, show the VP. Players like seeing their own VP even if the feature is off. */
+  public static getPlayer(player: IPlayer, modelIsForThisPlayer: boolean): PublicPlayerModel {
     const game = player.game;
     const useHandicap = game.players.some((p) => p.handicap !== 0);
     const model: PublicPlayerModel = {
@@ -274,7 +275,8 @@ export class Server {
       victoryPointsByGeneration: [],
     };
 
-    if (game.phase === Phase.END || game.isSoloMode() || game.gameOptions.showOtherPlayersVP === true) {
+    if (game.phase === Phase.END || game.isSoloMode() ||
+        game.gameOptions.showOtherPlayersVP === true || modelIsForThisPlayer) {
       model.victoryPointsBreakdown = player.getVictoryPoints();
       model.victoryPointsByGeneration = player.victoryPointsByGeneration;
     }

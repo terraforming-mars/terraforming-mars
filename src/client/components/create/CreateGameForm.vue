@@ -175,7 +175,6 @@
                             <h4 v-i18n>Board</h4>
 
                             <div v-for="boardName in boards" v-bind:key="boardName">
-                              <div v-if="boardName==='utopia planitia'" class="create-game-subsection-label" v-i18n>Fan-made</div>
                               <input type="radio" :value="boardName" name="board" v-model="board" :id="boardName+'-checkbox'">
                               <label :for="boardName+'-checkbox'" class="expansion-button">
                                   <span :class="getBoardColorClass(boardName)">&#x2B22;</span>
@@ -184,6 +183,7 @@
                                     &nbsp;<a :href="boardHref(boardName)" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
                                   </template>
                               </label>
+                              <div v-if="boardName==='random official'" class="create-game-subsection-label" v-i18n>Fan-made</div>
                             </div>
                         </div>
 
@@ -666,8 +666,8 @@ export default (Vue as WithRefs<Refs>).extend({
         BoardName.THARSIS,
         BoardName.HELLAS,
         BoardName.ELYSIUM,
-        RandomBoardOption.OFFICIAL,
         BoardName.UTOPIA_PLANITIA,
+        RandomBoardOption.OFFICIAL,
         BoardName.VASTITAS_BOREALIS_NOVUS,
         BoardName.TERRA_CIMMERIA_NOVUS,
         BoardName.ARABIA_TERRA,

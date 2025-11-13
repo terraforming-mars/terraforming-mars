@@ -8,7 +8,7 @@ import {UnseededRandom} from '../../common/utils/Random';
 import {MilestoneName, milestoneNames} from '../../common/ma/MilestoneName';
 import {AwardName, awardNames} from '../../common/ma/AwardName';
 import {synergies} from './MilestoneAwardSynergies';
-import {MAManifest, isCompatible} from './MAManifest';
+import {isCompatible, MAManifest} from './MAManifest';
 import {intersection} from '../../common/utils/utils';
 
 type DrawnMilestonesAndAwards = {
@@ -72,6 +72,7 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     case BoardName.THARSIS:
     case BoardName.HELLAS:
     case BoardName.ELYSIUM:
+    case BoardName.UTOPIA_PLANITIA:
     case BoardName.ARABIA_TERRA:
     case BoardName.AMAZONIS:
     case BoardName.TERRA_CIMMERIA:

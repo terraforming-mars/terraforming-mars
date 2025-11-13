@@ -23,7 +23,7 @@ describe('ApiCreateGame', () => {
   });
 
   it('Official random boards do not include fan maps', () => {
-    expect(ApiCreateGame.boardOptions(RandomBoardOption.OFFICIAL)).deep.eq([BoardName.THARSIS, BoardName.HELLAS, BoardName.ELYSIUM]);
+    expect(ApiCreateGame.boardOptions(RandomBoardOption.OFFICIAL)).deep.eq([BoardName.THARSIS, BoardName.HELLAS, BoardName.ELYSIUM, BoardName.UTOPIA_PLANITIA]);
   });
   it('Fully random boards do include fan maps', () => {
     expect(ApiCreateGame.boardOptions(RandomBoardOption.ALL)).deep.eq([

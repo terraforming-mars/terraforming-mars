@@ -775,7 +775,13 @@ export class Game implements IGame, Logger {
       const direction = Math.floor(this.rng.nextInt(2)) === 0 ? 'top' : 'bottom';
       const tileType = this.board.getOceanSpaces().length >= 3 ? TileType.EROSION_MILD : TileType.DUST_STORM_MILD;
 
-      AresHazards.randomlyPlaceHazard(this, tileType, direction);
+      try {
+        const space = AresHazards.randomlyPlaceHazard(this, tileType, direction);
+        this.log('${0} placed at ${1}', (b) => b.tileType(tileType).space(space));
+      } catch (e) {
+        // #7734, the map is probably full.
+        this.log('The map is full. No random hazard can be placed this generation.');
+      }
     }
 
     if (this.gameOptions.solarPhaseOption && ! this.marsIsTerraformed()) {

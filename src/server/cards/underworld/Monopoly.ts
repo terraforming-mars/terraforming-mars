@@ -37,7 +37,10 @@ export class Monopoly extends Card implements IProjectCard, IActionCard {
     });
   }
 
-  private stealableResources(player: IPlayer): Array<keyof Units> {
+  private stealableResources(player: IPlayer): ReadonlyArray<keyof Units> {
+    if (player.game.isSoloMode()) {
+      return Units.keys;
+    }
     const targets = player.opponents;
     return Units.keys.filter((unit) => {
       return targets.some((target) => target.stock[unit] > 0 && !target.isProtected(unit));

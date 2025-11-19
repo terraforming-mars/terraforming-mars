@@ -590,7 +590,7 @@ export class Game implements IGame, Logger {
 
     // Ares Extreme: Solo player must remove all unprotected hazards to win
     if (this.gameOptions.aresExtension && this.gameOptions.aresExtremeVariant) {
-      if (this.board.getHazards(/* includeProtected= */ false).length > 0) {
+      if (this.board.getUnprotectedHazards().length > 0) {
         return false;
       }
     }
@@ -924,8 +924,7 @@ export class Game implements IGame, Logger {
     }
 
     if (this.gameOptions.aresExtension && this.gameOptions.aresExtremeVariant && this.isSoloMode()) {
-      const unprotectedHazardSpaces = this.board.getHazards(/* includeProtected= */ false);
-
+      const unprotectedHazardSpaces = this.board.getUnprotectedHazards();
 
       if (unprotectedHazardSpaces.length > 0) {
         orOptions.options.push(

@@ -303,12 +303,12 @@ export abstract class Board {
     return Board.ownedBy(player)(space);
   }
 
-  public getHazards(includeProtected: boolean = false): ReadonlyArray<Space> {
-    const spaces = this.spaces.filter((space) => AresHandler.hasHazardTile(space));
-    if (includeProtected === false) {
-      return spaces.filter((space) => space.tile?.protectedHazard !== true);
-    }
-    return spaces;
+  public getHazards(): ReadonlyArray<Space> {
+    return this.spaces.filter(AresHandler.hasHazardTile);
+  }
+
+  public getUnprotectedHazards(): ReadonlyArray<Space> {
+    return this.getHazards().filter((space) => space.tile?.protectedHazard !== true);
   }
 
   /** Hazard tiles don't really count as tiles. */

@@ -1,7 +1,7 @@
 <template>
 <div class="payments_cont">
   <section v-trim-whitespace>
-    <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
+    <h3 class="payments_title" v-i18n>{{ playerinput.title }}</h3>
 
     <template v-for="unit of SPENDABLE_RESOURCES">
       <payment-unit-component
@@ -17,7 +17,7 @@
     </template>
 
     <div v-if="hasWarning()" class="tm-warning">
-      <label class="label label-error">{{ $t(warning) }}</label>
+      <label class="label label-error" v-i18n>{{ warning }}</label>
     </div>
 
     <div v-if="showsave === true" class="payments_save">

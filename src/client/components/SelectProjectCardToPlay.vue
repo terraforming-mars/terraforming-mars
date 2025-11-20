@@ -1,7 +1,7 @@
 <template>
 <div class="payments_cont">
 
-  <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
+  <div v-if="showtitle === true" v-i18n>{{ playerinput.title }}</div>
 
   <label v-for="availableCard in cards" class="payments_cards" :key="availableCard.name">
     <input class="hidden" type="radio" v-model="cardName" v-on:change="cardChanged()" :value="availableCard.name" />
@@ -45,7 +45,7 @@
     </template>
 
     <div v-if="hasWarning()" class="tm-warning">
-      <label class="label label-error">{{ $t(warning) }}</label>
+      <label class="label label-error" v-i18n>{{ warning }}</label>
     </div>
 
     <div v-if="showsave === true" class="payments_save">

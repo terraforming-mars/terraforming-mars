@@ -1,6 +1,6 @@
 <template>
   <div class="wf-component wf-options">
-    <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
+    <div v-if="showtitle === true" class="nofloat wf-component-title" v-i18n>{{ playerinput.title }}</div>
     <div class="form-group">
       <label v-for="included in playerinput.include" :key="included" v-trim-whitespace class="form-inline d-flex align-items-center mb-2">
           <input type="radio" v-model="unit" :value="included" class="form-radio mr-2" />

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
+    <div v-if="showtitle === true" v-i18n>{{ playerinput.title }}</div>
     <div class="flex">
       <input type="number" class="nes-input" value="playerinput.min" :min="playerinput.min" :max="playerinput.max" v-model="amount" />
       &nbsp;

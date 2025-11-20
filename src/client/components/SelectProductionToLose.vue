@@ -1,7 +1,7 @@
 <template>
   <!-- TODO(chosta): consolidate repetition into a reusable component. -->
   <div class="wf-component wf-component--select-production-to-lose">
-    <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
+    <div v-if="showtitle === true" class="nofloat wf-component-title" v-i18n>{{ playerinput.title }}</div>
 
     <h3 class="payments_title" v-i18n>Which resource production would you prefer to decrease?</h3>
 
@@ -43,11 +43,11 @@
     </div >
 
     <div v-if="hasWarning()" class="tm-warning">
-      <label class="label label-error">{{ $t(warning) }}</label>
+      <label class="label label-error" v-i18n>{{ warning }}</label>
     </div>
 
     <div v-if="showsave === true" class="nofloat">
-        <button class="btn btn-primary btn-submit" v-on:click="saveData">{{ $t(playerinput.buttonLabel) }}</button>
+        <button class="btn btn-primary btn-submit" v-on:click="saveData" v-i18n>{{ playerinput.buttonLabel }}</button>
     </div>
   </div>
 </template>

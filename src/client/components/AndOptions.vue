@@ -1,6 +1,6 @@
 <template>
   <div class='wf-options'>
-    <div v-if="showtitle" class="wf-title">{{ $t(playerinput.title) }}</div>
+    <div v-if="showtitle" class="wf-title" v-i18n>{{ playerinput.title }}</div>
     <player-input-factory v-for="(option, idx) in (playerinput.options || [])"
       :key="idx"
       :players="players"

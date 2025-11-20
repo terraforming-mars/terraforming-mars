@@ -107,8 +107,11 @@ export default Vue.extend({
     buttonText(): string {
       if (typeof this.title === 'string') {
         return translateText(this.title);
+      } else if (typeof this.title === 'object') {
+        return translateMessage(this.title);
+      } else {
+        return '';
       }
-      return translateMessage(this.title);
     },
   },
 });

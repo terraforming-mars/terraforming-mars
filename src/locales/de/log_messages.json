@@ -263,6 +263,8 @@
   "${0} sold ${1} patents": "${0} hat ${1} Patente verkauft",
   "${0}'s ${1} production increased by ${2}": "${0}s ${1}-Produktion hat sich um ${2} erhöht",
   "${0} ${1} ${2} at ${3}": "${0} ${1} ${2} in ${3}",
+  "${0} placed at ${1}": "${0} platziert bei ${1}",
+  "The map is full. No random hazard can be placed this generation.": "Die Karte ist voll. In dieser Generation können keine zufälligen Gefahren mehr platziert werden.",
   "placed": "platziert",
   "removed": "entfernte",
   "excavated": "gräbt",

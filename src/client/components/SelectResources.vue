@@ -1,6 +1,6 @@
 <template>
   <div class="wf-component wf-options">
-    <div v-if="showtitle === true" class="nofloat wf-component-title" v-i18n>{{ playerinput.title }}</div>
+    <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
     <template v-for="unit in keys">
         <payment-unit-component
           v-model.number="units[unit]"

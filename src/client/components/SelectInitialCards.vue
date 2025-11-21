@@ -21,7 +21,7 @@
       <div v-if="hasPrelude"><span v-i18n>After Preludes:</span> <div class="megacredits">{{getStartingMegacredits() + getAfterPreludes()}}</div></div>
     </template>
     <div v-if="warning !== undefined" class="tm-warning">
-      <label class="label label-error" v-i18n>{{ warning }}</label>
+      <label class="label label-error">{{ $t(warning) }}</label>
     </div>
     <!-- :key=warning is a way of validing that the state of the button should change. If the warning changes, or disappears, that's a signal that the button might change. -->
     <AppButton :disabled="!valid" v-if="showsave" @click="saveIfConfirmed" type="submit" :title="playerinput.buttonLabel"/>

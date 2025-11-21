@@ -1,6 +1,8 @@
 <template>
   <div v-if="warnings !== undefined">
-    <div v-for="(warning, idx) in (warnings || [])" :key="idx" class="card-warning" v-i18n>{{descriptions[warning]}}</div>
+    <div v-for="(warning, idx) in (warnings || [])" :key="idx" class="card-warning">
+      {{ $t(descriptions[warning]) }}
+    </div>
   </div>
 </template>
 

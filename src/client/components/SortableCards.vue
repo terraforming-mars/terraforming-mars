@@ -24,6 +24,15 @@ import Card from '@/client/components/card/Card.vue';
 import {CardModel} from '@/common/models/CardModel';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
 
+type DataModel = {
+  /** When true use the point-and-click reorder UI */
+  showReorder: boolean;
+  /** Mapping from card name to its order */
+  cardOrder: {[x: string]: number};
+  /** When defined, it is the name of the card being dragged. */
+  dragCard: string | undefined;
+};
+
 export default Vue.extend({
   name: 'SortableCards',
   components: {
@@ -37,7 +46,7 @@ export default Vue.extend({
       type: String,
     },
   },
-  data() {
+  data(): DataModel {
     const cache = CardOrderStorage.getCardOrder(this.playerId);
     const cardOrder: {[x: string]: number} = {};
     const keys = Object.keys(cache);
@@ -57,7 +66,7 @@ export default Vue.extend({
     return {
       showReorder: false,
       cardOrder: cardOrder,
-      dragCard: undefined as string | undefined,
+      dragCard: undefined,
     };
   },
   methods: {

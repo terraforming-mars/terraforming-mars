@@ -51,7 +51,7 @@ export class TharsisRepublic extends CorporationCard implements ICorporationCard
       }
       if (space.spaceType !== SpaceType.COLONY) {
         cardOwner.game.defer(
-          new GainProduction(cardOwner, Resource.MEGACREDITS),
+          new GainProduction(cardOwner, Resource.MEGACREDITS, {log: true}),
           cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
         );
       }

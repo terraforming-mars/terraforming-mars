@@ -8,13 +8,9 @@
   <div class="sortable-cards">
     <div ref="draggers" :class="{ 'dragging': Boolean(dragCard) }" v-for="card in getSortedCards()" :key="card.name" draggable="true" v-on:dragend="onDragEnd()" v-on:dragstart="onDragStart(card.name)">
       <div v-if="dragCard" ref="droppers" class="drop-target" v-on:dragover="onDragOver(card.name)"></div>
-      <div ref="cardbox" class="cardbox" @click="clickMethod" style="position:relative">
-        <Card :card="card" :style="showReorder ? handJiveCardStyle : undefined"/>
-        <div v-if="showReorder" style="
-          position:absolute;inset:0;pointer-events:none;z-index:400;
-          transform:translate(-6%,0%);opacity:0.5;
-          background:linear-gradient(to right,transparent 0%,transparent 10%,red 10%,red 20%,transparent 20%,transparent 80%,red 80%,red 90%,transparent 90%,transparent 100%)
-        "></div>
+      <div ref="cardbox" class="cardbox" @click="clickMethod">
+        <Card :card="card"/>
+        <div v-if="showReorder" class="reorder-banners"></div>
       </div>
     </div>
     <div v-if="dragCard" ref="dropend" class="drop-target" v-on:dragover="onDragOver('end')"></div>
@@ -60,10 +56,7 @@ export default Vue.extend({
     }
     return {
       showReorder: false,
-      handJiveCardStyle: Object.freeze({
-        pointerEvents: 'none',
-      }),
-      cardOrder,
+      cardOrder: cardOrder,
       dragCard: undefined as string | undefined,
     };
   },
@@ -104,6 +97,9 @@ export default Vue.extend({
         this.cardOrder[this.dragCard] = temp;
       }
       CardOrderStorage.updateCardOrder(this.playerId, this.cardOrder);
+    },
+    doNotDragAndDropOnReorder() {
+      return this.showReorder ? 'do-not-drag-and-drop' : '';
     },
     clickMethod(e: MouseEvent) {
       if (!this.showReorder) return;

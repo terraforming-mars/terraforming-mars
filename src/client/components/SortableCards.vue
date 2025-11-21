@@ -2,7 +2,7 @@
 <div>
   <div>
     <label>
-      <input type="checkbox" v-model="showReorder" /> hand jive
+      <input type="checkbox" v-model="showReorder" />Reorder cards
     </label>
   </div>
   <div class="sortable-cards">

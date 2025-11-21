@@ -69,13 +69,13 @@
         font-weight: bold;
 		background: #fff6;
 		border-left: 2px solid #222;
-		
+
  	}
 	td {
 		padding: 5px 14px;
 		text-align: center;
 		background: linear-gradient(transparent, #0008);
-		border-left: 2px solid #0008; 
+		border-left: 2px solid #0008;
 	}
 	tr {
 		height: 50px;
@@ -280,6 +280,8 @@
 
 .board-space-tile--martian-nature-wonders {
 	background: url("./assets/pathfinders/martian-nature-wonders.png");
+  // The z-index puts the image on top of the Underworld tile.
+  z-index: 1;
 }
 
 .card-tile-crashlanding {

@@ -21,6 +21,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import Card from '@/client/components/card/Card.vue';
+import {CardName} from '@/common/cards/CardName';
 import {CardModel} from '@/common/models/CardModel';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
 
@@ -30,7 +31,7 @@ type DataModel = {
   /** Mapping from card name to its order */
   cardOrder: {[x: string]: number};
   /** When defined, it is the name of the card being dragged. */
-  dragCard: string | undefined;
+  dragCard: CardName | undefined;
 };
 
 export default Vue.extend({
@@ -76,13 +77,13 @@ export default Vue.extend({
         this.cards,
       );
     },
-    onDragStart(source: string): void {
+    onDragStart(source: CardName): void {
       this.dragCard = source;
     },
     onDragEnd(): void {
       this.dragCard = undefined;
     },
-    onDragOver(source: string): void {
+    onDragOver(source: CardName | 'end'): void {
       if (this.dragCard === undefined || source === this.dragCard) {
         return;
       }

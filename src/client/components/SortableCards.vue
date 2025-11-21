@@ -2,15 +2,15 @@
 <div>
   <div>
     <label>
-      <input type="checkbox" v-model="handJiveIsChecked" /> hand jive
+      <input type="checkbox" v-model="showReorder" /> hand jive
     </label>
   </div>
   <div class="sortable-cards">
     <div ref="draggers" :class="{ 'dragging': Boolean(dragCard) }" v-for="card in getSortedCards()" :key="card.name" draggable="true" v-on:dragend="onDragEnd()" v-on:dragstart="onDragStart(card.name)">
       <div v-if="dragCard" ref="droppers" class="drop-target" v-on:dragover="onDragOver(card.name)"></div>
       <div ref="cardbox" class="cardbox" @click="clickMethod" style="position:relative">
-        <Card :card="card" :style="handJiveIsChecked ? handJiveCardStyle : undefined"/>
-        <div v-if="handJiveIsChecked" style="
+        <Card :card="card" :style="showReorder ? handJiveCardStyle : undefined"/>
+        <div v-if="showReorder" style="
           position:absolute;inset:0;pointer-events:none;z-index:400;
           transform:translate(-6%,0%);opacity:0.5;
           background:linear-gradient(to right,transparent 0%,transparent 10%,red 10%,red 20%,transparent 20%,transparent 80%,red 80%,red 90%,transparent 90%,transparent 100%)
@@ -59,7 +59,7 @@ export default Vue.extend({
       }
     }
     return {
-      handJiveIsChecked: false,
+      showReorder: false,
       handJiveCardStyle: Object.freeze({
         pointerEvents: 'none',
       }),
@@ -106,7 +106,7 @@ export default Vue.extend({
       CardOrderStorage.updateCardOrder(this.playerId, this.cardOrder);
     },
     clickMethod(e: MouseEvent) {
-      if (!this.handJiveIsChecked) return;
+      if (!this.showReorder) return;
       const target = e.currentTarget as HTMLElement;
       if (!target) return;
       if (target.matches('.sortable-cards *')) {

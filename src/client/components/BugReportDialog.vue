@@ -85,6 +85,7 @@ export default (Vue as WithRefs<Refs>).extend({
         url: this.url(playerView),
         color: playerView?.thisPlayer.color,
         step: playerView?.game.step,
+        expansions: playerView?.game.gameOptions.expansions,
         version: raw_settings.head,
         builtAt: raw_settings.builtAt,
         browser: browser(),

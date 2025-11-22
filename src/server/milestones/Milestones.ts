@@ -60,6 +60,7 @@ import {Agronomist} from './Agronomist';
 import {MAManifest} from '../ma/MAManifest';
 import {MilestoneName} from '../../common/ma/MilestoneName';
 import {BoardName} from '../../common/boards/BoardName';
+import {USmith} from './USmith';
 
 export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
   all: {
@@ -122,6 +123,7 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'Purifier': {Factory: Purifier, compatibility: 'ares'},
     'Agronomist': {Factory: Agronomist},
     'V. Spacefarer': {Factory: VSpacefarer},
+    'U. Smith': {Factory: USmith},
   },
   boards: {
     [BoardName.THARSIS]: ['Terraformer', 'Mayor', 'Gardener', 'Builder', 'Planner'],
@@ -131,7 +133,7 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     [BoardName.ARABIA_TERRA]: ['Economizer', 'Pioneer', 'Land Specialist', 'Martian', 'Terran'],
     [BoardName.TERRA_CIMMERIA]: ['T. Collector', 'Firestarter', 'Terra Pioneer', 'Spacefarer', 'Gambler'],
     [BoardName.VASTITAS_BOREALIS]: ['V. Electrician', 'Smith', 'Tradesman', 'Irrigator', 'Capitalist'],
-    [BoardName.UTOPIA_PLANITIA]: [/* 'Suburbian', 'Investor', 'Botanist', 'Incorporator', 'Metropolist' */],
+    [BoardName.UTOPIA_PLANITIA]: ['Land Specialist', 'Pioneer', 'Tradesman', 'U. Smith', 'Researcher'],
     [BoardName.VASTITAS_BOREALIS_NOVUS]: ['Agronomist', 'Spacefarer', 'Geologist', 'Engineer', 'Farmer'],
     [BoardName.TERRA_CIMMERIA_NOVUS]: [],
     [BoardName.HOLLANDIA]: [],

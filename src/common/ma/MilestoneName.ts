@@ -70,6 +70,9 @@ export const milestoneNames = [
   // Ares Extreme
   'Purifier',
 
+  // Utopia Planitia
+  'U. Smith',
+
   // Modular
   // 'Briber',
   // 'Builder', // But 7 building tags

@@ -143,8 +143,8 @@ describe('MilestoneAwardSelector', () => {
       'randomMA': RandomMAOptionType.NONE,
       'venusNextExtension': true,
     });
-    expect(mas.milestones).to.have.length(6);
-    expect(mas.awards).to.have.length(6);
+    expect(mas.milestones).to.have.length(8);
+    expect(mas.awards).to.have.length(8);
   });
 
   it('Do not select Constructor when Colonies is not selected', () => {

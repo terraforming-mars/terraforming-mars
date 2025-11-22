@@ -1,6 +1,6 @@
 <template>
     <div class="wf-component wf-component--select-card">
-        <div v-if="showtitle === true" class="nofloat wf-component-title" v-i18n>{{ playerinput.title }}</div>
+        <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
         <label v-for="card in getOrderedCards()" :key="card.name" :class="getCardBoxClass(card)">
             <template v-if="!card.isDisabled">
               <input v-if="selectOnlyOneCard" type="radio" v-model="cards" :value="card" />

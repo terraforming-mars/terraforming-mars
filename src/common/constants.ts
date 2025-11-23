@@ -58,6 +58,7 @@ export const VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST = 3;
 export const TERRA_CIMMERIA_COLONY_COST = 5;
 
 // Moon
+export const MAXIMUM_MOON_RATE = 8;
 export const MAXIMUM_HABITAT_RATE = 8;
 export const MAXIMUM_MINING_RATE = 8;
 export const MAXIMUM_LOGISTICS_RATE = 8;
@@ -76,7 +77,7 @@ export const BONUS_SECONDS_PER_ACTION = 5;
 // Leaders/CEOs
 export const ASIMOV_AWARD_BONUS = 2;
 
-export const ALL_LANGUAGES = ['en', 'de', 'fr', 'ru', 'cn', 'pl', 'es', 'br', 'it', 'ko', 'nl', 'hu', 'jp', 'bg', 'nb', 'ua'] as const;
+export const ALL_LANGUAGES = ['en', 'de', 'fr', 'ru', 'cn', 'pl', 'es', 'br', 'it', 'ko', 'nl', 'hu', 'jp', 'bg', 'nb', 'ua', 'fi'] as const;
 
 export const LANGUAGES: Record<typeof ALL_LANGUAGES[number], [string, string]> = {
   en: ['English', 'English'],
@@ -95,6 +96,7 @@ export const LANGUAGES: Record<typeof ALL_LANGUAGES[number], [string, string]> =
   bg: ['Български', 'Bulgarian'],
   nb: ['Norsk', 'Norwegian'],
   ua: ['Українська', 'Ukrainian'],
+  fi: ['Suomi', 'Finnish'],
 };
 
 export const APP_NAME = 'Terraforming Mars';

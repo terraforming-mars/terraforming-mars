@@ -1,0 +1,66 @@
+{
+  "SPIRE": "",
+  "Spire": "",
+  "Standard Project": "Standardiprojekti",
+  "You start with 50 M€. As your first action, draw 4 cards, then discard 3 cards from your hand.": "Aloitat 50 M€:llä. Ensimmäisenä toimintona nosta 4 korttia, sitten hylkää 3 korttia kädestäsi.",
+  "Effect: When you play a card with at least 2 tags. including this, add 1 science resource here.": "VAIKUTUS: Kun pelaat kortin jossa vähintään 2 tunnistetta, sisältäen tämän, lisää 1 tiede-resurssi tähän.",
+  "Effect: When you pay for a standard project, science resources here may be used as 2 M€ each.": "VAIKUTUS: Kun maksat standardiprojektista, tiede-resursseja täältä voidaan käyttää 2 M€ kukin.",
+
+  "SAGITTA FRONTIER SERVICES": "SAGITTA RAJAPALVELUT",
+  "Sagitta Frontier Services": "Sagitta Rajapalvelut",
+  "You start with 31 M€. Increase energy production 1 step and M€ production 2 steps. Draw a card that has no tag.": "Aloitat 31 M€:llä. Lisää energiatuotantoa 1 askel ja M€-tuotantoa 2 askelta. Nosta kortti jossa ei ole tunnistetta.",
+  "Effect: When you play a card with no tags, including this, gain 4 M€.": "VAIKUTUS: Kun pelaat kortin ilman tunnistetta, sisältäen tämän, saat 4 M€.",
+  "Effect: When you play a card with EXACTLY 1 TAG, you gain 1 M€.": "VAIKUTUS: Kun pelaat kortin jossa on TÄSMÄLLEEN 1 TUNNISTE, saat 1 M€.",
+
+  "ECOTEC": "EKOTEK",
+  "Ecotec": "Ekotek",
+  "EcoTec": "EkoTek",
+  "You start with 42 M€. Increase your plant production 1 step.": "Aloitat 42 M€:llä. Lisää kasvituotantoasi 1 askel.",
+  "Effect: When you play a bio tag, gain 1 plant or add a microbe to ANY card.": "VAIKUTUS: Kun pelaat bio-tunnisteen, saat 1 kasvin tai lisää mikrobi MILLE TAHANSA kortille.",
+
+  "PALLADIN SHIPPING": "PALLADIN KULJETUS",
+  "Palladin Shipping": "Palladin Kuljetus",
+  "You start with 36 M€. Gain 5 titanium.": "Aloitat 36 M€:llä. Saat 5 titaania.",
+  "effect/action": "VAIKUTUS/TOIMINTO",
+  "Effect: When you play a space event, gain 1 titanium.": "VAIKUTUS: Kun pelaat avaruustapahtuman, saat 1 titaanin.",
+  "Action: Spend 2 titanium to raise the temperature 1 step.": "TOIMINTO: Käytä 2 titaania nostaaksesi lämpötilaa 1 askel.",
+
+  "NIRGAL ENTERPRISES": "NIRGAL YHTIÖT",
+  "Nirgal Enterprises": "Nirgal Yhtiöt",
+  "You start with 30 M€. Increase your energy, plant, and steel production 1 step each.": "Aloitat 30 M€:llä. Lisää energia-, kasvi- ja terästuotantoasi 1 askel kukin.",
+  "Effect: AWARDS AND MILESTONES ALWAYS COST 0 M€ FOR YOU.": "VAIKUTUS: Palkinnot ja saavutukset maksavat sinulle aina 0 M€.",
+
+  "Cheung Shing": "",
+  "■■MARS■■": "",
+  "Cheung Sing Mars": "",
+  "Cheung Shing Mars": "",
+  "Cheung Shing MARS": "",
+  "You start with 3 M€ production and 44 M€.": "Aloitat 3 M€-tuotannolla ja 44 M€:llä.",
+  "Effect: When you play a building tag, you pay 2 M€ less for it.": "VAIKUTUS: Kun pelaat rakennus-tunnisteen, maksat siitä 2 M€ vähemmän.",
+
+  "POINT LUNA": "",
+  "Point Luna": "",
+  "You start with 1 titanium production and 38 M€.": "Aloitat 1 titaanituotannolla ja 38 M€:llä.",
+  "Effect: When you play an Earth tag, including this, draw a card.": "VAIKUTUS: Kun pelaat Maa-tunnisteen, sisältäen tämän, nosta kortti.",
+
+  "ROBINSON": "",
+  "INDUSTRIES": "TEOLLISUUS",
+  "Robinson Industries": "Robinson Teollisuus",
+  "You start with 47 M€.": "Aloitat 47 M€:llä.",
+  "Action: Spend 4 M€ to increase (one of) your LOWEST production 1 step.": "TOIMINTO: Käytä 4 M€ lisätäksesi (yhtä) MATALINTA tuotantoasi 1 askel.",
+
+  "VALLEY": "LAAKSO",
+  "TRUST": "SÄÄTIÖ",
+  "Valley Trust": "Laakso-säätiö",
+  "You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.": "Aloitat 37 M€:llä. Ensimmäisenä toimintona nosta 3 alkusoitto-korttia ja pelaa yksi niistä. Hylkää kaksi muuta.",
+  "Effect: When you play a science tag, you pay 2M€ less for it.": "VAIKUTUS: Kun pelaat tiede-tunnisteen, maksat siitä 2 M€ vähemmän.",
+
+  "VIT": "",
+  "O": "",
+  "R": "",
+  "Vitor": "",
+  "You start with 45 M€. As your first action, fund an award for free.": "Aloitat 45 M€:llä. Ensimmäisenä toimintona rahoita palkinto ilmaiseksi.",
+  "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.": "VAIKUTUS: Kun pelaat kortin jossa on EI-NEGATIIVINEN VP-kuvake, sisältäen tämän, saat 3 M€.",
+
+  "Curiosity II": ""
+}

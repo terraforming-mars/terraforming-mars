@@ -30,6 +30,7 @@ import AppButton from '@/client/components/common/AppButton.vue';
 import WarningsComponent from '@/client/components/WarningsComponent.vue';
 import {Color} from '@/common/Color';
 import {Message} from '@/common/logs/Message';
+import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import Card from '@/client/components/card/Card.vue';
@@ -174,8 +175,17 @@ export default Vue.extend({
       // Copied from PlayerMixin.
       return this.playerView.thisPlayer.actionsThisGeneration.includes(card.name);
     },
-    buttonLabel(): string {
-      return this.selectOnlyOneCard ? this.playerinput.buttonLabel : this.playerinput.buttonLabel + ' ' + this.cardsSelected();
+    buttonLabel(): string | Message {
+      if (this.selectOnlyOneCard) {
+        return this.playerinput.buttonLabel;
+      }
+      return {
+        message: this.playerinput.buttonLabel + ' ${0}',
+        data: [{
+          type: LogMessageDataType.RAW_STRING,
+          value: String(this.cardsSelected()),
+        }],
+      };
     },
     robotCard(card: CardModel): CardModel | undefined {
       return this.playerView.thisPlayer.selfReplicatingRobotsCards?.find((r) => r.name === card.name);

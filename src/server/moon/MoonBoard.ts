@@ -13,7 +13,6 @@ function colonySpace(id: SpaceId): Space {
   return {id, spaceType: SpaceType.COLONY, x: -1, y: -1, bonus: []};
 }
 
-
 export class MoonBoard extends Board {
   public getAvailableSpacesForMine(player: IPlayer): ReadonlyArray<Space> {
     const spaces = this.spaces.filter((space) => {

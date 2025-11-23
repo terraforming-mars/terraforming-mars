@@ -53,7 +53,7 @@ describe('Zan', () => {
     expect(card.isDisabled).is.true;
   });
 
-  it('OPG Counts for POLITICAN Award', () => {
+  it('OPG Counts for POLITICIAN Award', () => {
     const politician = new TPolitician();
     game.awards = [];
     game.awards.push(politician);

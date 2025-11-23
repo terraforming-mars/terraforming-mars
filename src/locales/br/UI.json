@@ -314,7 +314,7 @@
   "Greenery: 1 VP": "Vegetação: 1 PV",
   "Commercial District: 1 VP per adjacent city tile": "Distrito comercial: 1 PV por tile de cidade adjacente",
 
-  "Unable to reach the server. The server may be restarting or down for maintenance.": "Não foi possível acessar o servidor, que pode estar reiniciando ou desligado para manutenção.",
+  "Unable to reach the server. It may be restarting or down for maintenance.": "Não foi possível acessar o servidor, que pode estar reiniciando ou desligado para manutenção.",
   "Unable to restore game ${game_id}": "Não foi possível recuperar partida ${game_id}",
   "Game not found": "Partida não encontrada",
   "toggle cards filters": "alterar filtros de cartas",

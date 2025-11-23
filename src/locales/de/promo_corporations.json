@@ -13,20 +13,20 @@
 
   "FACTORUM": "",
   "Factorum": "",
-  "You start with 37 M€. Increase your steel production 1 step.": "Du beginnst mit 37 M€. Erhöhe deine Stahl-Produktion um 1.",
+  "You start with 37 M€. Increase your steel production 1 step.": "Du beginnst mit 37 M€ und einer Stahl-Produktion von 1.",
   "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "AKTION: Erhöhe deine Energie-Produktion um 1 WENN DU KEINE ENERGIE-RESSOURCE BESITZT oder bezahle 3 M€, um eine Gebäude-Karte zu ziehen.",
 
   "KUIPER COOPERATIVE": "KUIPER-KOOPERATIVE",
   "Kuiper Cooperative": "Kuiper-Kooperative",
   "Cooperative": "Kooperative",
-  "You start with 33 M€. Increase titanium production 1 step.": "Du beginnst mit 33 M€. Erhöhe deine Titan-Produktion um 1.",
-  "Action: Add 1 asteroid here for every space tag you have.": "AKTION: Füge hier 1 Asteroiden für jedes eigene Weltraumsymbol hinzu.",
-  "Effect: When you use the AQUIFER or ASTEROID standard projects, you can spend asteroids on card as 1M€ each.": "EFFEKT: Wenn du die Standardprojekte AQUIFER oder ASTEROID verwendest, darfst du Asteroiden auf dieser Karte für je 1 M€ einsetzen.",
+  "You start with 33 M€. Increase titanium production 1 step.": "Du beginnst mit 33 M€ und einer Titan-Produktion von 1.",
+  "Action: Add 1 asteroid here for every space tag you have.": "AKTION: Füge dieser Karte 1 Asteroid je eigenes Weltraumsymbol hinzu.",
+  "Effect: When you use the AQUIFER or ASTEROID standard projects, you can spend asteroids on card as 1M€ each.": "EFFEKT: Beim Bezahlen für die Standard-Projekte ASTEROID oder BEWÄSSERUNG kannst du jeden Asteroiden von dieser Karte als 1 M€ benutzen.",
 
   "mons": "Mons",
   "INSURANCE": "VERSICHERUNG",
   "Mons Insurance": "Mons Versicherung",
-  "You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "Du beginnst mit 48 M€. Erhöhe deine M€-Produktion um 4. Alle Mitspieler senken ihre M€-Produktion um 2. Dies löst nicht den unten beschriebenen Effekt aus.",
+  "You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "Du beginnst mit 48 M€ und einer M€-Produktion von 4. Alle Mitspieler senken ihre M€-Produktion um 2. Dies löst nicht den unten beschriebenen Effekt aus.",
   "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.": "EFFEKT: Wenn einem Mitspieler durch einen anderen Spieler eine Produktion gesenkt wird oder verliert ein Mitspieler durch einen anderen Spieler Ressourcen zahle 3 M€ (oder so viel, wie möglich) an den Geschädigten.",
 
   "Pharmacy": "Pharmazie",
@@ -43,19 +43,21 @@
   "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "EFFEKT: Sobald eines deiner Plättchen an ein Plättchen eines Mitspielers angrenzt, erhalte eine Standard-Ressource deiner Wahl (unabhängig davon, wer das Plätcchen gelegt hat).",
 
   "PolderTECH Dutch": "Polder-Technologie Niederland",
+  "PolderTECH": "Polder-Technologie",
   "Dutch": "Niederland",
-  "You start with 35 M€. As your first action, place an ocean tile and a greenery tile next to each other. Raise oxygen 1 step.": "Du beginnst mit 35 M€. Als deine erste Aktion platziere 1 Ozean- und 1 Grünflächenplättchen nebeneinander. Erhöhe den Sauerstoffgehalt um 1%.",
+  "You start with 35 M€. As your first action, place an ocean tile and a greenery tile next to each other IGNORING GREENERY PLACEMENT RESTRICTIONS. Raise oxygen 1 step.": "Du beginnst mit 35 M€. Als deine erste Aktion platziere 1 Ozean- und 1 Grünflächenplättchen nebeneinander, ignoriere dabei Grunflächenplättchen-Beschränkungen. Erhöhe den Sauerstoffgehalt um 1%.",
   "Effect: When you place an ocean tile, gain 1 energy.": "EFFEKT: Wenn du ein Ozeanplättchen legst, erhalte 1 Energie.",
   "Effect: When you place a greenery, gain 1 plant.": "EFFEKT: Wenn du eine Grünflächenplättchen platzierst, erhalte 1 Pflanze.",
   
   "Recyclon": "",
-  "You start with 38 M€ and 1 steel production.": "Du beginnst mit 38 M€ und 1 Stahl-Produktion.",
+  "You start with 38 M€ and 1 steel production.": "Du beginnst mit 38 M€ und einer Stahl-Produktion von 1.",
   "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "EFFEKT: Wenn du ein Gebäudesymbol spielst (inklusive diesem), füge dieser Karte 1 Mikrobe hinzu oder entferne 2 Mikroben von dieser Karte, um deine Pflanzen-Produktiom um 1 zu erhöhen.",
 
   "Tycho Magnetics": "Tycho Magnetik",
-  "Magnetics": "Magnetik",
+  "MAGNETICS": "Magnetik",
   "You start with 42 M€. Increase your energy production 1 step.": "Du beginnst mit 42 M€ und 1 Energie-Produktion.",
-  "Action: Spend any amount of energy to draw the that many cards. Keep 1 and discard the rest.": "AKTION: Zahle einen beliebigen Betrag an Energie, um dieselbe Anzahl an Karten zu ziehen. NEHME 1 KARTE IN DEINE HAND AUF UND WIRF DIE RESTLICHEN KARTEN AB.",
+  "Action: Spend any amount of energy to draw the that many cards. Keep 1 and discard the rest.": "AKTION: Du kannst X Energie bezahlen, um X Karten zu ziehen. Behalte 1 von ihnen und wirf den Rest ab.",
+  "KEEP 1": "BEHALTE 1",
 
   "SPLI": "",
   "C": "",

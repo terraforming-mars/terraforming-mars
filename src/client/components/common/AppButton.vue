@@ -1,21 +1,22 @@
 <template>
   <button @click="$emit('click')" class="btn" :class="outerClass" :disabled="isDisabled" v-i18n>
     <span v-if="hasIcon" class="icon" :class="iconClass" data-test="icon"/>
-    <span v-i18n v-else>{{ title }}</span>
+    <span v-else>{{ buttonText }}</span>
   </button>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import {vueRoot} from '@/client/components/vueRoot';
+import {Message} from '@/common/logs/Message';
+import {translateText, translateMessage} from '@/client/directives/i18n';
 
 export default Vue.extend({
   name: 'AppButton',
   props: {
     title: {
-      type: String,
+      type: [String, Object as () => Message],
       required: false,
-      default: '',
     },
     disabled: {
       type: Boolean,
@@ -102,6 +103,15 @@ export default Vue.extend({
         'icon-plus': this.type === 'plus',
         'icon-minus': this.type === 'minus',
       };
+    },
+    buttonText(): string {
+      if (typeof this.title === 'string') {
+        return translateText(this.title);
+      } else if (typeof this.title === 'object') {
+        return translateMessage(this.title);
+      } else {
+        return '';
+      }
     },
   },
 });

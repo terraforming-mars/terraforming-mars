@@ -1,0 +1,77 @@
+{
+  "BEGINNER CORPORATION": "ALOITTELIJAYRITYS",
+  "Beginner Corporation": "Aloittelijayritys",
+  "You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "Aloitat 42 M€:lla. Sen sijaan että valitsisit 10 korttia pelin alussa, saat 10 korttia ilmaiseksi.",
+
+  "CREDICOR": "",
+  "Credicor": "",
+  "CrediCor": "",
+  "You start with 57 M€.": "Aloitat 57 M€:lla.",
+  "Effect: After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4 M€.": "VAIKUTUS: Kun olet maksanut kortista tai standardiprojektista, jonka perushinta on 20 M€ tai enemmän, saat 4 M€.",
+
+  "ECOLINE": "",
+  "Ecoline": "",
+  "EcoLine": "",
+  "You start with 2 plant production, 3 plants, and 36 M€.": "Aloitat 2 kasvintuotannolla, 3 kasvilla ja 36 M€:lla.",
+  "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "VAIKUTUS: Voit aina maksaa 7 kasvia 8:n sijaan asettaaksesi vihreän laatan.",
+
+  "HELION": "",
+  "Helion": "",
+  "You start with 3 heat production and 42 M€.": "Aloitat 3 lämpötuotannolla ja 42 M€:lla.",
+  "Effect: You may use heat as M€. You may not use M€ as heat.": "VAIKUTUS: Voit käyttää lämpöä M€:na. Et voi käyttää M€:a lämpönä.",
+
+  "INTERPLANETARY": "",
+  "CINEMATICS": "",
+  "Interplanetary Cinematics": "",
+  "You start with 20 steel and 30 M€.": "Aloitat 20 teräksellä ja 30 M€:lla.",
+  "Effect: Each time you play an event, you gain 2 M€.": "VAIKUTUS: Joka kerta kun pelaat tapahtuman, saat 2 M€.",
+
+  "INVENTRIX": "",
+  "Inventrix": "",
+  "As your first action in the game, draw 3 cards. Start with 45 M€.": "Ensimmäisenä toimintanasi pelissä nosta 3 korttia. Aloitat 45 M€:lla.",
+  "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.": "VAIKUTUS: Lämpötila-, happi-, valtameri- ja Venus-vaatimuksesi ovat +2 tai -2 askelta, valintasi kussakin tapauksessa.",
+
+  "PHOBOLOG": "",
+  "Phobolog": "",
+  "PhoboLog": "",
+  "You start with 10 titanium and 23 M€.": "Aloitat 10 titaanilla ja 23 M€:lla.",
+  "Effect: Your titanium resources are each worth 1 M€ extra.": "VAIKUTUS: Titaaniresurssisi ovat kukin 1 M€ arvokkaampia.",
+
+  "THARSIS": "",
+  "REPUBLIC": "",
+  "Tharsis Republic": "",
+  "You start with 40 M€. As your first action in the game, place a city tile.": "Aloitat 40 M€:lla. Ensimmäisenä toimintanasi pelissä aseta kaupunkilaatta.",
+  "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "VAIKUTUS: Kun mikä tahansa kaupunkilaatta asetetaan MARSIIN, nosta M€-tuotantoasi 1 askeleella. Kun asetat kaupunkilaatan, saat 3 M€.",
+
+  "THORGATE": "",
+  "Thorgate": "",
+  "You start with 1 energy production and 48 M€.": "Aloitat 1 energiatuotannolla ja 48 M€:lla.",
+  "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "VAIKUTUS: Kun pelaat energiakortin TAI STANDARDIPROJEKTI VOIMALA, maksat siitä 3 M€ vähemmän.",
+
+  "UNITED NATIONS MARS INITIATIVE": "",
+  "UNITED NATIONS": "",
+  "MARS INITIATIVE": "",
+  "United Nations Mars Initiative": "",
+  "UNMI": "",
+  "You start with 40 M€.": "Aloitat 40 M€:lla.",
+  "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.": "TOIMINTO: Jos terraformausluokitustasi nostettiin tämän sukupolven aikana, voit maksaa 3 M€ nostaaksesi sitä 1 askeleella lisää.",
+
+  "MINING": "",
+  "GUILD": "",
+  "Mining Guild": "",
+  "You start with 30 M€, 5 steel and 1 steel production.": "Aloitat 30 M€:lla, 5 teräksellä ja 1 terästuotannolla.",
+  "Effect: Each time you place a tile on an area with a steel or titanium placement bonus, increase your steel production 1 step": "VAIKUTUS: Joka kerta kun asetat laatan alueelle, jossa on teräs- tai titaaniasennusbonus, nosta terästuotantoasi 1 askeleella.",
+
+  "TERACTOR": "",
+  "Teractor": "",
+  "You start with 60 M€.": "Aloitat 60 M€:lla.",
+  "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "VAIKUTUS: Kun pelaat Maa-ympyrän, maksat siitä 3 M€ vähemmän.",
+
+  "SATURN": "",
+  "SYSTEMS": "",
+  "Saturn Systems": "",
+  "You start with 1 titanium production and 42 M€.": "Aloitat 1 titaanituotannolla ja 42 M€:lla.",
+  "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "VAIKUTUS: Joka kerta kun joku pelaa Jupiter-ympyrän, tämä mukaan lukien, nosta M€-tuotantoasi 1 askeleella.",
+
+  "X": ""
+}

@@ -1,26 +1,29 @@
 <template>
-    <div class="corporations-filter">
-        <div class="corporations-filter-toolbox-cont">
-            <h2 v-i18n>Preludes</h2>
-            <div class="corporations-filter-toolbox corporations-filter-toolbox--topmost">
-                <a href="#" v-i18n v-on:click.prevent="selectAll('All')">All*</a> |
-                <a href="#" v-i18n v-on:click.prevent="selectNone('All')">None*</a> |
-                <a href="#" v-i18n v-on:click.prevent="invertSelection('All')">Invert*</a>
-                <input ref="filter" class="filter" :placeholder="$t('filter')" v-model="filterText">
-            </div>
+    <PopupPanel @close="$emit('close')">
+    <template v-slot:header>
+      <div class="corporations-filter-toolbox-cont">
+        <h2 v-i18n>Preludes</h2>
+        <div class="corporations-filter-toolbox corporations-filter-toolbox--topmost">
+          <a href="#" v-i18n v-on:click.prevent="selectAll('All')">All*</a> |
+          <a href="#" v-i18n v-on:click.prevent="selectNone('All')">None*</a> |
+          <a href="#" v-i18n v-on:click.prevent="invertSelection('All')">Invert*</a>
+          <input ref="filter" class="filter" :placeholder="$t('filter')" v-model="filterText">
         </div>
-        <br/>
+      </div>
+    </template>
+    <div>
+      <div class="corporations-filter">
         <template v-for="module in GAME_MODULES">
-          <div class="corporations-filter-group" v-if="cardsByModule[module].length > 0" v-bind:key="module">
+          <div class="corporations-filter-group" v-if="ALL_CARDS_BY_MODULE[module].length > 0" v-bind:key="module">
             <div class="corporations-filter-toolbox-cont">
-                <div><span v-i18n>{{MODULE_NAMES[module]}}</span>&nbsp;<div :class="icon(module)"></div></div><br>
+                <div><span v-i18n>{{MODULE_NAMES[module]}}</span>&nbsp;<div :class="icon(module)"></div></div>
                 <div class="corporations-filter-toolbox">
                     <a href="#" v-i18n v-on:click.prevent="selectAll(module)">All</a> |
                     <a href="#" v-i18n v-on:click.prevent="selectNone(module)">None</a> |
                     <a href="#" v-i18n v-on:click.prevent="invertSelection(module)">Invert</a>
                 </div>
             </div>
-            <div v-for="prelude in cardsByModule[module]" v-bind:key="prelude" v-show="include(prelude)">
+            <div v-for="prelude in ALL_CARDS_BY_MODULE[module]" v-bind:key="prelude" v-show="include(prelude)">
                 <label class="form-checkbox">
                     <input type="checkbox" v-model="selectedPreludes" :value="prelude"/>
                     <i class="form-icon"></i><span v-i18n>{{ prelude }}</span>
@@ -29,12 +32,15 @@
             </div>
           </div>
         </template>
+      </div>
     </div>
+    </PopupPanel>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 
+import PopupPanel from '../common/PopupPanel.vue';
 import {CardName} from '@/common/cards/CardName';
 import {Expansion, GameModule, GAME_MODULES, MODULE_NAMES} from '@/common/cards/GameModule';
 import {byModule, byType, getCard, getCards} from '@/client/cards/ClientCardManifest';
@@ -49,27 +55,29 @@ function preludeCardNames(module: GameModule): Array<CardName> {
 
 type Group = GameModule | 'All';
 
+// Start by giving every entry a default value
+// Ideally, remove 'interim' and inline it into Object.fromEntries, but Typescript doesn't like it.
+const interim = GAME_MODULES.map((module) => [module, []]);
+const ALL_CARDS_BY_MODULE: Record<GameModule, Array<CardName>> = Object.fromEntries(interim);
+getCards(byType(CardType.PRELUDE)).forEach((card) => {
+  ALL_CARDS_BY_MODULE[card.module].push(card.name);
+});
+GAME_MODULES.forEach((module) => ALL_CARDS_BY_MODULE[module].sort());
+
 export default Vue.extend({
   name: 'PreludesFilter',
+  components: {
+    PopupPanel,
+  },
   props: {
     expansions: Object as () => Record<Expansion, boolean>,
+    selected: Object as () => Array<CardName>,
   },
   data() {
-    // Start by giving every entry a default value
-    // Ideally, remove 'x' and inline it into Object.fromEntries, but Typescript doesn't like it.
-    const x = GAME_MODULES.map((module) => [module, []]);
-    const cardsByModule: Record<GameModule, Array<CardName>> = Object.fromEntries(x);
-
-    getCards(byType(CardType.PRELUDE)).forEach((card) => {
-      cardsByModule[card.module].push(card.name);
-    });
-    GAME_MODULES.forEach((module) => cardsByModule[module].sort());
-
     return {
       filterText: '',
-      cardsByModule: cardsByModule,
       customPreludesList: false,
-      selectedPreludes: [
+      selectedPreludes: this.selected.length > 0 ? this.selected : [
         // A bit sloppy since map is just above, but it will do.
         ...preludeCardNames('prelude'),
         ...this.expansions.promo ? preludeCardNames('promo') : [],
@@ -80,9 +88,18 @@ export default Vue.extend({
         ...this.expansions.underworld ? preludeCardNames('underworld') : [],
         ...this.expansions.prelude2 ? preludeCardNames('prelude2') : [],
       ],
-      GAME_MODULES: GAME_MODULES,
-      MODULE_NAMES: MODULE_NAMES,
     };
+  },
+  computed: {
+    GAME_MODULES(): typeof GAME_MODULES {
+      return GAME_MODULES;
+    },
+    MODULE_NAMES(): typeof MODULE_NAMES {
+      return MODULE_NAMES;
+    },
+    ALL_CARDS_BY_MODULE(): typeof ALL_CARDS_BY_MODULE {
+      return ALL_CARDS_BY_MODULE;
+    },
   },
   methods: {
     // Do not delete this method. It's used by CreateGameForm.
@@ -96,8 +113,8 @@ export default Vue.extend({
     },
 
     getItemsByGroup(group: Group): Array<CardName> {
-      if (group === 'All') return GAME_MODULES.map((module) => this.cardsByModule[module]).flat();
-      const corps = this.cardsByModule[group];
+      if (group === 'All') return GAME_MODULES.map((module) => ALL_CARDS_BY_MODULE[module]).flat();
+      const corps = ALL_CARDS_BY_MODULE[group];
       if (corps === undefined) {
         console.log('module %s not found', group);
         return [];

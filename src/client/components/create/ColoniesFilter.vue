@@ -1,29 +1,37 @@
 <template>
-    <div class="colonies-filter">
-        <div>
-            <h2 v-i18n>Colonies</h2>
-            <div class="corporations-filter-toolbox corporations-filter-toolbox--topmost">
-                <a href="#" v-i18n v-on:click.prevent="selectAll('All')">All*</a> |
-                <a href="#" v-i18n v-on:click.prevent="selectNone('All')">None*</a> |
-                <a href="#" v-i18n v-on:click.prevent="invertSelection('All')">Invert*</a>
-                <input :placeholder="$t('filter')" v-model="filterText">
-            </div>
+  <PopupPanel @close="$emit('close')">
+    <template v-slot:header>
+      <div>
+        <h2 v-i18n>Colonies</h2>
+        <div class="corporations-filter-toolbox corporations-filter-toolbox--topmost">
+          <a href="#" v-i18n v-on:click.prevent="selectAll('All')">All*</a> |
+          <a href="#" v-i18n v-on:click.prevent="selectNone('All')">None*</a> |
+          <a href="#" v-i18n v-on:click.prevent="invertSelection('All')">Invert*</a>
+          <input :placeholder="$t('filter')" v-model="filterText">
         </div>
+      </div>
+    </template>
+    <div>
+      <div class="colonies-filter">
         <div class="colonies-filter-list" v-for="module in modules" v-bind:key="module">
-            <h2 v-i18n>{{title(module)}}</h2>
-              <a href="#" v-i18n v-on:click.prevent="selectAll(module)">All</a> |
-              <a href="#" v-i18n v-on:click.prevent="selectNone(module)">None</a> |
-              <a href="#" v-i18n v-on:click.prevent="invertSelection(module)">Invert</a>
-            <label class="form-checkbox" v-for="colony in getColonies(module)" v-bind:key="colony" v-show="include(colony)">
-                <input type="checkbox" v-model="selectedColonies" :value="colony">
-                <i class="form-icon"></i><span v-i18n>{{ colony }} - ({{ COLONY_DESCRIPTIONS[colony] }})</span>
-            </label>
+          <h2 v-i18n>{{ title(module) }}</h2>
+          <a href="#" v-i18n v-on:click.prevent="selectAll(module)">All</a> |
+          <a href="#" v-i18n v-on:click.prevent="selectNone(module)">None</a> |
+          <a href="#" v-i18n v-on:click.prevent="invertSelection(module)">Invert</a>
+          <label class="form-checkbox" v-for="colony in getColonies(module)" v-bind:key="colony"
+            v-show="include(colony)">
+            <input type="checkbox" v-model="selectedColonies" :value="colony">
+            <i class="form-icon"></i><span v-i18n>{{ colony }} - ({{ COLONY_DESCRIPTIONS[ colony ] }})</span>
+          </label>
         </div>
+      </div>
     </div>
+  </PopupPanel>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import PopupPanel from '../common/PopupPanel.vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {COLONY_DESCRIPTIONS} from '@/common/colonies/ColonyDescription';
 import {OFFICIAL_COLONY_NAMES, COMMUNITY_COLONY_NAMES, PATHFINDERS_COLONY_NAMES} from '@/common/colonies/AllColonies';
@@ -43,8 +51,12 @@ type Group = ColonyModule | 'All';
 
 export default Vue.extend({
   name: 'ColoniesFilter',
+  components: {
+    PopupPanel,
+  },
   props: {
     expansions: Object as () => Record<Expansion, boolean>,
+    selected: Object as () => Array<ColonyName>,
   },
   data() {
     const officialColonies = [...OFFICIAL_COLONY_NAMES].sort();
@@ -57,7 +69,7 @@ export default Vue.extend({
       officialColonies,
       communityColonies,
       pathfindersColonies,
-      selectedColonies: [
+      selectedColonies: this.selected.length > 0 ? this.selected : [
         ...officialColonies,
         ...this.expansions.community ? communityColonies: [],
         ...this.expansions.pathfinders ? pathfindersColonies: [],

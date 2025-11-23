@@ -52,6 +52,10 @@ type DataModel = {
   playersWaitingFor: Array<Color>
   suspend: boolean,
   savedPlayerView: PlayerViewModel | undefined;
+  /**
+   * The size of this element before it's mounted. Compared after it is mounted,
+   * without which the page jars suddenly when the WaitingFor appears
+   */
   beforeMountSize: number | null;
 }
 
@@ -248,7 +252,7 @@ export default Vue.extend({
     isAboveViewportBottom(element: HTMLElement): boolean {
       const rect = element.getBoundingClientRect();
       const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-      return rect.top >= 0
+      return rect.top >= 0;
     },
     innerHeight(element: HTMLElement): number {
       return element.getBoundingClientRect().height;

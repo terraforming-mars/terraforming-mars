@@ -191,7 +191,7 @@ export default Vue.extend({
       return this.playerView.thisPlayer.selfReplicatingRobotsCards?.find((r) => r.name === card.name);
     },
     selectedChange(e) {
-      e.currentTarget.querySelector("input").click()
+      e.currentTarget.querySelector("input").click();
     },
   },
   computed: {

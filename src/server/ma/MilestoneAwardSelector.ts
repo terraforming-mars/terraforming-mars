@@ -126,6 +126,12 @@ export function getCandidates(gameOptions: GameOptions): [Array<MilestoneName>, 
       throw new Error('Not supporting modular awards yet.');
     }
 
+    // Never include deprecated MAs in random candidates.  They generally have "more official" versions that will be
+    // considered for inclusion.
+    if (manifest.all[name].deprecated) {
+      return false;
+    }
+
     if (!gameOptions.modularMA) {
       // The game boards this MA appears in, if any.
       const boards = Object.values(BoardName).filter((boardName) => manifest.boards[boardName].includes(name));

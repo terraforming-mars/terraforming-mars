@@ -176,6 +176,24 @@ describe('MilestoneAwardSelector', () => {
     expect(awards).to.contain('Landlord');
   });
 
+  it('Do not select deprecated milestones or awards', () => {
+    const [milestones, awards] = getCandidates({
+      ...DEFAULT_GAME_OPTIONS,
+      randomMA: RandomMAOptionType.UNLIMITED,
+      includeFanMA: true,
+    });
+
+    const deprecatedMilestones = Object.keys(milestoneManifest.all).filter(
+      (name) => milestoneManifest.all[name as MilestoneName].deprecated,
+    );
+    const deprecatedAwards = Object.keys(awardManifest.all).filter(
+      (name) => awardManifest.all[name as AwardName].deprecated,
+    );
+
+    expect(intersection(milestones, deprecatedMilestones)).is.empty;
+    expect(intersection(awards, deprecatedAwards)).is.empty;
+  });
+
   function choose(options: Partial<GameOptions>) {
     return chooseMilestonesAndAwards({...DEFAULT_GAME_OPTIONS, ...options});
   }

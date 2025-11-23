@@ -19,7 +19,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import * as constants from '@/common/constants';
-import {statusCode} from '@/common/http/statusCode';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {LoadGameFormModel} from '@/common/models/LoadGameFormModel';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
@@ -51,14 +50,23 @@ export default Vue.extend({
         alert('Specify a game id');
         return;
       }
-      const xhr = new XMLHttpRequest();
-      xhr.open('PUT', paths.LOAD_GAME);
-      xhr.onerror = function() {
-        alert('Error loading game');
+      const loadGameForm: LoadGameFormModel = {
+        gameId,
+        rollbackCount,
       };
-      xhr.onload = () => {
-        if (xhr.status === statusCode.ok) {
-          const response = xhr.response as SimpleGameModel;
+
+      fetch(paths.LOAD_GAME, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(loadGameForm),
+      })
+        .then((resp) => {
+          if (!resp.ok) {
+            throw new Error(`Error getting game data: ${resp.statusText}`);
+          }
+          return resp.json();
+        })
+        .then((response: SimpleGameModel) => {
           if (response.players.length === 1) {
             window.location.href = 'player?id=' + response.players[0].id;
             return;
@@ -67,16 +75,11 @@ export default Vue.extend({
             vueRoot(this).game = response;
             vueRoot(this).screen = 'game-home';
           }
-        } else {
-          alert('Unexpected server response');
-        }
-      };
-      const loadGameFormModel: LoadGameFormModel = {
-        gameId: gameId,
-        rollbackCount: rollbackCount,
-      };
-      xhr.responseType = 'json';
-      xhr.send(JSON.stringify(loadGameFormModel));
+        })
+        .catch((err) => {
+          alert('Error loading game');
+          console.error(err);
+        });
     },
   },
   computed: {

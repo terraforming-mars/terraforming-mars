@@ -22,6 +22,7 @@
             v-show="include(colony)">
             <input type="checkbox" v-model="selectedColonies" :value="colony">
             <i class="form-icon"></i><span v-i18n>{{ colony }} - ({{ COLONY_DESCRIPTIONS[ colony ] }})</span>
+            <div v-if="compatibility(colony)" :class="icon(compatibility(colony))"></div>
           </label>
         </div>
       </div>
@@ -36,6 +37,7 @@ import {ColonyName} from '@/common/colonies/ColonyName';
 import {COLONY_DESCRIPTIONS} from '@/common/colonies/ColonyDescription';
 import {OFFICIAL_COLONY_NAMES, COMMUNITY_COLONY_NAMES, PATHFINDERS_COLONY_NAMES} from '@/common/colonies/AllColonies';
 import {Expansion} from '@/common/cards/GameModule';
+import {getColony} from '@/client/colonies/ClientColonyManifest';
 
 type Data = {
   filterText: string,
@@ -56,7 +58,7 @@ export default Vue.extend({
   },
   props: {
     expansions: Object as () => Record<Expansion, boolean>,
-    selected: Object as () => Array<ColonyName>,
+    selected: Array as () => Array<ColonyName>,
   },
   data() {
     const officialColonies = [...OFFICIAL_COLONY_NAMES].sort();
@@ -146,6 +148,22 @@ export default Vue.extend({
         return true;
       }
       return name.toLocaleUpperCase().includes(normalized);
+    },
+    compatibility(colonyName: ColonyName): Expansion | undefined {
+      return getColony(colonyName)?.expansion;
+    },
+    icon(module: Expansion | undefined) {
+      if (module === undefined) {
+        return undefined;
+      }
+      let suffix: string = module;
+      if (module === 'colonies') {
+        suffix = 'colony';
+      }
+      if (module === 'moon') {
+        suffix = 'themoon';
+      }
+      return `create-game-expansion-icon expansion-icon-${suffix}`;
     },
   },
   computed: {

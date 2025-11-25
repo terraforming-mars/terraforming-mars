@@ -19,6 +19,7 @@ export class Pallas extends Colony {
         description: 'Gain 1 M€ for each delegate in any party',
         type: ColonyBenefit.GIVE_MC_PER_DELEGATE,
       },
+      expansion: 'turmoil',
     });
   }
 }

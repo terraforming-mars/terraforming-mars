@@ -75,6 +75,7 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     case BoardName.ARABIA_TERRA:
     case BoardName.AMAZONIS:
     case BoardName.TERRA_CIMMERIA:
+    case BoardName.TERRA_CIMMERIA_NOVUS:
     case BoardName.VASTITAS_BOREALIS:
     case BoardName.VASTITAS_BOREALIS_NOVUS:
       push(milestoneManifest.boards[boardName], awardManifest.boards[gameOptions.boardName]);
@@ -123,6 +124,12 @@ export function getCandidates(gameOptions: GameOptions): [Array<MilestoneName>, 
     // When using modular, don't include non-modular MAs.
     if (gameOptions.modularMA) {
       throw new Error('Not supporting modular awards yet.');
+    }
+
+    // Never include deprecated MAs in random candidates.  They generally have "more official" versions that will be
+    // considered for inclusion.
+    if (manifest.all[name].deprecated) {
+      return false;
     }
 
     if (!gameOptions.modularMA) {

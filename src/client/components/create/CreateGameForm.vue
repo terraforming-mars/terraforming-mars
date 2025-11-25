@@ -570,6 +570,7 @@ import {CreateGameModel} from './CreateGameModel';
 import {paths} from '@/common/app/paths';
 import {JSONProcessor} from './JSONProcessor';
 import {defaultCreateGameModel} from './defaultCreateGameModel';
+import {getColony} from '@/client/colonies/ClientColonyManifest';
 
 const REVISED_COUNT_ALGORITHM = false;
 
@@ -957,6 +958,20 @@ export default (Vue as WithRefs<Refs>).extend({
         if (customColonies.length < neededColoniesCount) {
           window.alert(translateTextWithParams('Must select at least ${0} colonies', [neededColoniesCount.toString()]));
           return;
+        }
+
+        let valid = true;
+        for (const colonyName of customColonies) {
+          const colony = getColony(colonyName);
+          if (colony.expansion !== undefined && !this.expansions[colony.expansion]) {
+            valid = false;
+            break;
+          }
+        }
+        if (valid === false) {
+          const confirm = window.confirm(translateText(
+            'Some of the colonies you selected need expansions you have not enabled. Using them might break your game. Press OK to continue or Cancel to change your selections.'));
+          if (confirm === false) return;
         }
       }
 

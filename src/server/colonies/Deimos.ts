@@ -19,6 +19,8 @@ export class Deimos extends Colony {
       colony: {
         description: 'Gain 1 M€ per hazard tile on Mars',
         type: ColonyBenefit.GAIN_MC_PER_HAZARD_TILE,
-      }});
+      },
+      expansion: 'ares',
+    });
   }
 }

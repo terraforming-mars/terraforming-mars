@@ -2,7 +2,7 @@ import {ColonyBenefit} from './ColonyBenefit';
 import {Resource} from '../Resource';
 import {ColonyName} from './ColonyName';
 import {CardResource} from '../CardResource';
-import {GameModule} from '../cards/GameModule';
+import {Expansion, GameModule} from '../cards/GameModule';
 import {OneOrArray} from '../utils/types';
 
 type Benefit<S, T> = {
@@ -19,6 +19,7 @@ export type ColonyMetadata = Readonly<{
   trade: Benefit<Array<number>, OneOrArray<Resource>>, // Default is [1,1,1,1,1,1,1]
   colony: Benefit<number, Resource>, // Default is 1
   cardResource?: CardResource,
+  expansion: Expansion | undefined,
 
   /**
    * If the player may increase the colony track, this determines whether to ask the player.
@@ -50,6 +51,7 @@ export type InputColonyMetadata = {
   trade: InputBenefit<ColonyMetadata['trade']>,
   colony: InputBenefit<ColonyMetadata['colony']>,
   cardResource?: CardResource,
+  expansion?: Expansion,
 } & Partial<{
   shouldIncreaseTrack: ColonyMetadata['shouldIncreaseTrack'],
 }>;
@@ -66,9 +68,7 @@ export function benefitMetadata<S, T>(partial: InputBenefit<Benefit<S, T>>, defa
 
 export function colonyMetadata(partial: InputColonyMetadata): ColonyMetadata {
   return {
-  //   buildQuantity: DEFAULT_BUILD_QUANTITY,
-  //   tradeQuantity: DEFAULT_TRADE_QUANTITY,
-  //   colonyBonusQuantity: 1,
+    expansion: partial.expansion,
     shouldIncreaseTrack: 'yes',
     ...partial,
     build: benefitMetadata(partial.build, DEFAULT_BUILD_QUANTITY),

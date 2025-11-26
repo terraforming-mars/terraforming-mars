@@ -1,13 +1,13 @@
-import {Card} from '../Card';
-import {CardName} from '../../../common/cards/CardName';
-import {ShiftAresGlobalParametersDeferred} from '../../deferredActions/ShiftAresGlobalParametersDeferred';
-import {IPlayer} from '../../IPlayer';
-import {CardType} from '../../../common/cards/CardType';
-import {IProjectCard} from '../IProjectCard';
-import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
-import {AresHandler} from '../../ares/AresHandler';
-import {HAZARD_CONSTRAINTS} from '../../../common/ares/AresData';
+import {Card} from '@/server/cards/Card';
+import {CardName} from '@/common/cards/CardName';
+import {ShiftAresGlobalParametersDeferred} from '@/server/deferredActions/ShiftAresGlobalParametersDeferred';
+import {IPlayer} from '@/server/IPlayer';
+import {CardType} from '@/common/cards/CardType';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
+import {AresHandler} from '@/server/ares/AresHandler';
+import {HAZARD_CONSTRAINTS} from '@/common/ares/AresData';
 
 export class ButterflyEffect extends Card implements IProjectCard {
   constructor() {

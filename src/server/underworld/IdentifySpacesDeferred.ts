@@ -1,10 +1,10 @@
-import {UndergroundResourceToken} from '../../common/underworld/UndergroundResourceToken';
-import {IPlayer} from '../IPlayer';
-import {Space} from '../boards/Space';
-import {Priority} from '../deferredActions/Priority';
-import {RunNTimes} from '../deferredActions/RunNTimes';
-import {SelectSpace} from '../inputs/SelectSpace';
-import {UnderworldExpansion} from './UnderworldExpansion';
+import {UndergroundResourceToken} from '@/common/underworld/UndergroundResourceToken';
+import {IPlayer} from '@/server/IPlayer';
+import {Space} from '@/server/boards/Space';
+import {Priority} from '@/server/deferredActions/Priority';
+import {RunNTimes} from '@/server/deferredActions/RunNTimes';
+import {SelectSpace} from '@/server/inputs/SelectSpace';
+import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
 
 export class IdentifySpacesDeferred extends RunNTimes<Space | UndergroundResourceToken> {
   constructor(player: IPlayer, count: number) {

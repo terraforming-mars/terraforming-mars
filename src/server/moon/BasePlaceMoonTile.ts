@@ -1,11 +1,11 @@
-import {Space} from '../boards/Space';
-import {DeferredAction} from '../deferredActions/DeferredAction';
-import {Priority} from '../deferredActions/Priority';
-import {SelectSpace} from '../inputs/SelectSpace';
-import {IPlayer} from '../IPlayer';
-import {PlayerInput} from '../PlayerInput';
-import {MoonData} from './MoonData';
-import {MoonExpansion} from './MoonExpansion';
+import {Space} from '@/server/boards/Space';
+import {DeferredAction} from '@/server/deferredActions/DeferredAction';
+import {Priority} from '@/server/deferredActions/Priority';
+import {SelectSpace} from '@/server/inputs/SelectSpace';
+import {IPlayer} from '@/server/IPlayer';
+import {PlayerInput} from '@/server/PlayerInput';
+import {MoonData} from '@/server/moon/MoonData';
+import {MoonExpansion} from '@/server/moon/MoonExpansion';
 
 export abstract class BasePlaceMoonTile extends DeferredAction<Space> {
   constructor(

@@ -1,12 +1,12 @@
-import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {message} from '../../logs/MessageBuilder';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {PlaceCityTile} from '@/server/deferredActions/PlaceCityTile';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {message} from '@/server/logs/MessageBuilder';
 
 export class NoctisCity extends Card implements IProjectCard {
   constructor() {

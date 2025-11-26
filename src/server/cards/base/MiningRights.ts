@@ -1,8 +1,8 @@
 
-import {CardName} from '../../../common/cards/CardName';
-import {MiningCard} from './MiningCard';
-import {TileType} from '../../../common/TileType';
-import {CardRenderer} from '../render/CardRenderer';
+import {CardName} from '@/common/cards/CardName';
+import {MiningCard} from '@/server/cards/base/MiningCard';
+import {TileType} from '@/common/TileType';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
 
 export class MiningRights extends MiningCard {
   protected readonly title: string = 'Select a space with a steel or titanium bonus';

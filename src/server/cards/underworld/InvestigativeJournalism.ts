@@ -1,17 +1,17 @@
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Tag} from '../../../common/cards/Tag';
-import {IProjectCard} from '../IProjectCard';
-import {CardType} from '../../../common/cards/CardType';
-import {Card} from '../Card';
-import {IActionCard} from '../ICard';
-import {CardResource} from '../../../common/CardResource';
-import {IPlayer} from '../../IPlayer';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {SelectPlayer} from '../../inputs/SelectPlayer';
-import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
-import {TITLES} from '../../inputs/titles';
-import {all} from '../Options';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Tag} from '@/common/cards/Tag';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardType} from '@/common/cards/CardType';
+import {Card} from '@/server/cards/Card';
+import {IActionCard} from '@/server/cards/ICard';
+import {CardResource} from '@/common/CardResource';
+import {IPlayer} from '@/server/IPlayer';
+import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
+import {SelectPlayer} from '@/server/inputs/SelectPlayer';
+import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
+import {TITLES} from '@/server/inputs/titles';
+import {all} from '@/server/cards/Options';
 
 export class InvestigativeJournalism extends Card implements IProjectCard, IActionCard {
   constructor() {

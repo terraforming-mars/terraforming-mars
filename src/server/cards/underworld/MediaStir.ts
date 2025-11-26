@@ -1,12 +1,12 @@
-import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
-import {GlobalEvent} from '../../turmoil/globalEvents/GlobalEvent';
-import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
-import {Turmoil} from '../../turmoil/Turmoil';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
-import {Resource} from '../../../common/Resource';
-import {CardRenderer} from '../../cards/render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
+import {IGlobalEvent} from '@/server/turmoil/globalEvents/IGlobalEvent';
+import {GlobalEvent} from '@/server/turmoil/globalEvents/GlobalEvent';
+import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
+import {Turmoil} from '@/server/turmoil/Turmoil';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {IGame} from '@/server/IGame';
+import {Resource} from '@/common/Resource';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.megacredits(-3).slash().corruption().influence({size: Size.SMALL}).nbsp.text('0').corruption().colon().tr(1);

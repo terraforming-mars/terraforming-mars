@@ -2,15 +2,15 @@ import * as fs from 'fs';
 import * as path from 'path';
 import type * as sqlite3 from 'sqlite3';
 
-import {GameIdLedger, IDatabase} from './IDatabase';
-import {IGame, Score} from '../IGame';
-import {GameOptions} from '../game/GameOptions';
-import {GameId, ParticipantId} from '../../common/Types';
-import {SerializedGame} from '../SerializedGame';
-import {daysAgoToSeconds} from './utils';
+import {GameIdLedger, IDatabase} from '@/server/database/IDatabase';
+import {IGame, Score} from '@/server/IGame';
+import {GameOptions} from '@/server/game/GameOptions';
+import {GameId, ParticipantId} from '@/common/Types';
+import {SerializedGame} from '@/server/SerializedGame';
+import {daysAgoToSeconds} from '@/server/database/utils';
 import {MultiMap} from 'mnemonist';
-import {Session, SessionId} from '../auth/Session';
-import {toID} from '../../common/utils/utils';
+import {Session, SessionId} from '@/server/auth/Session';
+import {toID} from '@/common/utils/utils';
 
 export const IN_MEMORY_SQLITE_PATH = ':memory:';
 

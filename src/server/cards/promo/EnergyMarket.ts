@@ -1,15 +1,15 @@
-import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
-import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {Resource} from '../../../common/Resource';
-import {SelectOption} from '../../inputs/SelectOption';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectAmount} from '../../inputs/SelectAmount';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {CardRenderer} from '../render/CardRenderer';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Card} from '@/server/cards/Card';
+import {CardName} from '@/common/cards/CardName';
+import {CardType} from '@/common/cards/CardType';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {Resource} from '@/common/Resource';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectAmount} from '@/server/inputs/SelectAmount';
+import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
 
 export class EnergyMarket extends Card implements IProjectCard {
   constructor() {

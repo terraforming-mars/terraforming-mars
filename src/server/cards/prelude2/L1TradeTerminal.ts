@@ -1,12 +1,12 @@
-import {Tag} from '../../../common/cards/Tag';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
-import {SelectCard} from '../../inputs/SelectCard';
-import {ICard} from '../ICard';
+import {Tag} from '@/common/cards/Tag';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {PlayerInput} from '@/server/PlayerInput';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {ICard} from '@/server/cards/ICard';
 
 export class L1TradeTerminal extends Card {
   constructor() {

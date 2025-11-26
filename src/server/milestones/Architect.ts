@@ -1,5 +1,5 @@
-import {TagBasedMilestone} from './TagBasedMilestone';
-import {Tag} from '../../common/cards/Tag';
+import {TagBasedMilestone} from '@/server/milestones/TagBasedMilestone';
+import {Tag} from '@/common/cards/Tag';
 
 export class Architect extends TagBasedMilestone {
   constructor() {

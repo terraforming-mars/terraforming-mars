@@ -1,11 +1,11 @@
-import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {TileType} from '../../../common/TileType';
-import {CardName} from '../../../common/cards/CardName';
-import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
-import {CardRenderer} from '../render/CardRenderer';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {TileType} from '@/common/TileType';
+import {CardName} from '@/common/cards/CardName';
+import {AdjacencyBonus} from '@/server/ares/AdjacencyBonus';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
 
 export class NuclearZone extends Card implements IProjectCard {
   constructor(

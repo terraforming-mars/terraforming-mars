@@ -1,6 +1,6 @@
-import {BaseMilestone} from '../IMilestone';
-import {IPlayer} from '../../IPlayer';
-import {CardType} from '../../../common/cards/CardType';
+import {BaseMilestone} from '@/server/milestones/IMilestone';
+import {IPlayer} from '@/server/IPlayer';
+import {CardType} from '@/common/cards/CardType';
 export class Philantropist extends BaseMilestone {
   constructor() {
     super(

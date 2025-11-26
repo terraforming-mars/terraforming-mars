@@ -1,5 +1,5 @@
-import {IPlayer} from './IPlayer';
-import {isCeoCard} from './cards/ceos/ICeoCard';
+import {IPlayer} from '@/server/IPlayer';
+import {isCeoCard} from '@/server/cards/ceos/ICeoCard';
 
 export class CeoExtension {
   public static ceoActionIsUsable(player: IPlayer): boolean {

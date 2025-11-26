@@ -1,10 +1,10 @@
-import {IPlayer} from '../IPlayer';
-import {AndOptions} from './AndOptions';
-import {SelectAmount} from './SelectAmount';
-import {Units} from '../../common/Units';
-import {sum} from '../../common/utils/utils';
-import {Message} from '../../common/logs/Message';
-import {InputError} from './InputError';
+import {IPlayer} from '@/server/IPlayer';
+import {AndOptions} from '@/server/inputs/AndOptions';
+import {SelectAmount} from '@/server/inputs/SelectAmount';
+import {Units} from '@/common/Units';
+import {sum} from '@/common/utils/utils';
+import {Message} from '@/common/logs/Message';
+import {InputError} from '@/server/inputs/InputError';
 
 export class GainResources extends AndOptions {
   private static makeOptions(count: number, units: Units) {

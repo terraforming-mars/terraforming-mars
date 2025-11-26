@@ -1,8 +1,8 @@
 
-import {IPlayer} from '../IPlayer';
-import {PlayerId} from '../../common/Types';
-import {IMilestone} from './IMilestone';
-import {maybeRenamedMilestone, MilestoneName} from '../../common/ma/MilestoneName';
+import {IPlayer} from '@/server/IPlayer';
+import {PlayerId} from '@/common/Types';
+import {IMilestone} from '@/server/milestones/IMilestone';
+import {maybeRenamedMilestone, MilestoneName} from '@/common/ma/MilestoneName';
 
 export type ClaimedMilestone = {
   milestone: IMilestone;

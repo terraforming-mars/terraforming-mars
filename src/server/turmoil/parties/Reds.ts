@@ -1,19 +1,19 @@
-import {IParty} from './IParty';
-import {Party} from './Party';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
-import {Bonus, IBonus} from '../Bonus';
-import {IPolicy} from '../Policy';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
-import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {MoonExpansion} from '../../moon/MoonExpansion';
-import {GlobalParameter} from '../../../common/GlobalParameter';
-import {TITLES} from '../../inputs/titles';
+import {IParty} from '@/server/turmoil/parties/IParty';
+import {Party} from '@/server/turmoil/parties/Party';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {IGame} from '@/server/IGame';
+import {Bonus, IBonus} from '@/server/turmoil/Bonus';
+import {IPolicy} from '@/server/turmoil/Policy';
+import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '@/common/constants';
+import {RemoveOceanTile} from '@/server/deferredActions/RemoveOceanTile';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {MoonExpansion} from '@/server/moon/MoonExpansion';
+import {GlobalParameter} from '@/common/GlobalParameter';
+import {TITLES} from '@/server/inputs/titles';
 
 export class Reds extends Party implements IParty {
   readonly name = PartyName.REDS;

@@ -1,8 +1,8 @@
-import {IPlayer} from '../../../IPlayer';
-import {CardName} from '../../../../common/cards/CardName';
-import {CardRenderer} from '../../render/CardRenderer';
-import {PlaceOceanTile} from '../../../deferredActions/PlaceOceanTile';
-import {StandardProjectCard} from '../../StandardProjectCard';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {PlaceOceanTile} from '@/server/deferredActions/PlaceOceanTile';
+import {StandardProjectCard} from '@/server/cards/StandardProjectCard';
 
 export class AquiferStandardProject extends StandardProjectCard {
   constructor() {

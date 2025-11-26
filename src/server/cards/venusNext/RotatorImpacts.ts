@@ -1,17 +1,17 @@
-import {IActionCard} from '../ICard';
-import {Tag} from '../../../common/cards/Tag';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {CardResource} from '../../../common/CardResource';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {MAX_VENUS_SCALE} from '../../../common/constants';
-import {CardName} from '../../../common/cards/CardName';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {max} from '../Options';
-import {TITLES} from '../../inputs/titles';
+import {IActionCard} from '@/server/cards/ICard';
+import {Tag} from '@/common/cards/Tag';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {CardResource} from '@/common/CardResource';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {MAX_VENUS_SCALE} from '@/common/constants';
+import {CardName} from '@/common/cards/CardName';
+import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Card} from '@/server/cards/Card';
+import {max} from '@/server/cards/Options';
+import {TITLES} from '@/server/inputs/titles';
 
 export class RotatorImpacts extends Card implements IActionCard {
   constructor() {

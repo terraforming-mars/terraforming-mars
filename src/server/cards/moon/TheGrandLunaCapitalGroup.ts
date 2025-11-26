@@ -1,18 +1,18 @@
-import {CardName} from '../../../common/cards/CardName';
-import {IPlayer} from '../../IPlayer';
-import {Tag} from '../../../common/cards/Tag';
-import {CorporationCard} from '../corporation/CorporationCard';
-import {CardRenderer} from '../render/CardRenderer';
-import {TileType} from '../../../common/TileType';
-import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Space} from '../../boards/Space';
-import {SpaceId} from '../../../common/Types';
-import {Resource} from '../../../common/Resource';
-import {moonHabitatTile} from '../render/DynamicVictoryPoints';
-import {Size} from '../../../common/cards/render/Size';
-import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {all} from '../Options';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CardName} from '@/common/cards/CardName';
+import {IPlayer} from '@/server/IPlayer';
+import {Tag} from '@/common/cards/Tag';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {TileType} from '@/common/TileType';
+import {MoonExpansion} from '@/server/moon/MoonExpansion';
+import {Space} from '@/server/boards/Space';
+import {SpaceId} from '@/common/Types';
+import {Resource} from '@/common/Resource';
+import {moonHabitatTile} from '@/server/cards/render/DynamicVictoryPoints';
+import {Size} from '@/common/cards/render/Size';
+import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
+import {all} from '@/server/cards/Options';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class TheGrandLunaCapitalGroup extends CorporationCard implements ICorporationCard {
   constructor() {

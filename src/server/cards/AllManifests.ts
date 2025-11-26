@@ -1,21 +1,21 @@
-import {ARES_CARD_MANIFEST} from './ares/AresCardManifest';
-import {ModuleManifest} from './ModuleManifest';
-import {COLONIES_CARD_MANIFEST} from './colonies/ColoniesCardManifest';
-import {COMMUNITY_CARD_MANIFEST} from './community/CommunityCardManifest';
-import {PRELUDE_CARD_MANIFEST} from './prelude/PreludeCardManifest';
-import {PROMO_CARD_MANIFEST} from './promo/PromoCardManifest';
-import {CEO_CARD_MANIFEST} from './ceos/CeoCardManifest';
+import {ARES_CARD_MANIFEST} from '@/server/cards/ares/AresCardManifest';
+import {ModuleManifest} from '@/server/cards/ModuleManifest';
+import {COLONIES_CARD_MANIFEST} from '@/server/cards/colonies/ColoniesCardManifest';
+import {COMMUNITY_CARD_MANIFEST} from '@/server/cards/community/CommunityCardManifest';
+import {PRELUDE_CARD_MANIFEST} from '@/server/cards/prelude/PreludeCardManifest';
+import {PROMO_CARD_MANIFEST} from '@/server/cards/promo/PromoCardManifest';
+import {CEO_CARD_MANIFEST} from '@/server/cards/ceos/CeoCardManifest';
 import {
   BASE_CARD_MANIFEST,
   CORP_ERA_CARD_MANIFEST,
-} from './StandardCardManifests';
-import {TURMOIL_CARD_MANIFEST} from './turmoil/TurmoilCardManifest';
-import {VENUS_CARD_MANIFEST} from './venusNext/VenusCardManifest';
-import {MOON_CARD_MANIFEST} from './moon/MoonCardManifest';
-import {PATHFINDERS_CARD_MANIFEST} from './pathfinders/PathfindersCardManifest';
-import {PRELUDE2_CARD_MANIFEST} from './prelude2/Prelude2CardManifest';
-import {STAR_WARS_CARD_MANIFEST} from './starwars/StarwarsCardManifest';
-import {UNDERWORLD_CARD_MANIFEST} from './underworld/UnderworldCardManifest';
+} from '@/server/cards/StandardCardManifests';
+import {TURMOIL_CARD_MANIFEST} from '@/server/cards/turmoil/TurmoilCardManifest';
+import {VENUS_CARD_MANIFEST} from '@/server/cards/venusNext/VenusCardManifest';
+import {MOON_CARD_MANIFEST} from '@/server/cards/moon/MoonCardManifest';
+import {PATHFINDERS_CARD_MANIFEST} from '@/server/cards/pathfinders/PathfindersCardManifest';
+import {PRELUDE2_CARD_MANIFEST} from '@/server/cards/prelude2/Prelude2CardManifest';
+import {STAR_WARS_CARD_MANIFEST} from '@/server/cards/starwars/StarwarsCardManifest';
+import {UNDERWORLD_CARD_MANIFEST} from '@/server/cards/underworld/UnderworldCardManifest';
 
 export const ALL_MODULE_MANIFESTS: Array<ModuleManifest> = [
   BASE_CARD_MANIFEST,

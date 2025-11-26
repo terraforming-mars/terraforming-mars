@@ -1,8 +1,8 @@
-import {CardName} from '../../../common/cards/CardName';
-import {Tag} from '../../../common/cards/Tag';
-import {PreludeCard} from '../prelude/PreludeCard';
-import {TileType} from '../../../common/TileType';
-import {CardRenderer} from '../render/CardRenderer';
+import {CardName} from '@/common/cards/CardName';
+import {Tag} from '@/common/cards/Tag';
+import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
+import {TileType} from '@/common/TileType';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
 
 export class BasicInfrastructure extends PreludeCard {
   constructor() {

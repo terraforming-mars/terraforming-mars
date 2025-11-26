@@ -1,8 +1,8 @@
-import {IPlayer} from '../IPlayer';
-import {PlayerId} from '../../common/Types';
-import {IColony} from '../colonies/IColony';
-import {DeferredAction} from './DeferredAction';
-import {Priority} from './Priority';
+import {IPlayer} from '@/server/IPlayer';
+import {PlayerId} from '@/common/Types';
+import {IColony} from '@/server/colonies/IColony';
+import {DeferredAction} from '@/server/deferredActions/DeferredAction';
+import {Priority} from '@/server/deferredActions/Priority';
 import {MultiSet} from 'mnemonist';
 
 export class GiveColonyBonus extends DeferredAction {

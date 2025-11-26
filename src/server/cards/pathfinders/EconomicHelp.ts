@@ -1,14 +1,14 @@
-import {IProjectCard} from '../IProjectCard';
-import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {isPlanetaryTag, PlanetaryTag} from '../../pathfinders/PathfindersData';
-import {PathfindersExpansion, TRACKS} from '../../pathfinders/PathfindersExpansion';
-import {Tag} from '../../../common/cards/Tag';
-import {Size} from '../../../common/cards/render/Size';
-import {PathfindersData} from '../../pathfinders/PathfindersData';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {IPlayer} from '@/server/IPlayer';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {isPlanetaryTag, PlanetaryTag} from '@/server/pathfinders/PathfindersData';
+import {PathfindersExpansion, TRACKS} from '@/server/pathfinders/PathfindersExpansion';
+import {Tag} from '@/common/cards/Tag';
+import {Size} from '@/common/cards/render/Size';
+import {PathfindersData} from '@/server/pathfinders/PathfindersData';
 
 export class EconomicHelp extends Card implements IProjectCard {
   constructor() {

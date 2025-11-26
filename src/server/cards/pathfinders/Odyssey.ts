@@ -1,13 +1,13 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
-import {CardRenderer} from '../render/CardRenderer';
-import {IActionCard} from '../ICard';
-import {Size} from '../../../common/cards/render/Size';
-import {SelectProjectCardToPlay} from '../../inputs/SelectProjectCardToPlay';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {CardType} from '@/common/cards/CardType';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {IActionCard} from '@/server/cards/ICard';
+import {Size} from '@/common/cards/render/Size';
+import {SelectProjectCardToPlay} from '@/server/inputs/SelectProjectCardToPlay';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class Odyssey extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {

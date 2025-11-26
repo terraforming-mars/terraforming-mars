@@ -1,11 +1,11 @@
-import {IPlayer} from '../IPlayer';
-import {SelectPayment} from '../inputs/SelectPayment';
-import {Payment} from '../../common/inputs/Payment';
-import {DeferredAction} from './DeferredAction';
-import {Priority} from './Priority';
-import {CardName} from '../../common/cards/CardName';
-import {Message} from '../../common/logs/Message';
-import {message} from '../logs/MessageBuilder';
+import {IPlayer} from '@/server/IPlayer';
+import {SelectPayment} from '@/server/inputs/SelectPayment';
+import {Payment} from '@/common/inputs/Payment';
+import {DeferredAction} from '@/server/deferredActions/DeferredAction';
+import {Priority} from '@/server/deferredActions/Priority';
+import {CardName} from '@/common/cards/CardName';
+import {Message} from '@/common/logs/Message';
+import {message} from '@/server/logs/MessageBuilder';
 
 export type Options = {
   canUseSteel?: boolean;

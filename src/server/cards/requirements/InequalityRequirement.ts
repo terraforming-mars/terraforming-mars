@@ -1,6 +1,6 @@
-import {CardRequirement} from './CardRequirement';
-import {IPlayer} from '../../IPlayer';
-import {IProjectCard} from '../IProjectCard';
+import {CardRequirement} from '@/server/cards/requirements/CardRequirement';
+import {IPlayer} from '@/server/IPlayer';
+import {IProjectCard} from '@/server/cards/IProjectCard';
 
 /**
  * Defines a class of requirements that compare to a given value. Subclasses provide that value

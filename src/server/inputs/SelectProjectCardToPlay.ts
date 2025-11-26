@@ -1,14 +1,14 @@
-import {BasePlayerInput} from '../PlayerInput';
-import {isPayment, Payment} from '../../common/inputs/Payment';
-import {IProjectCard} from '../cards/IProjectCard';
-import {Units} from '../../common/Units';
-import {MoonExpansion} from '../moon/MoonExpansion';
-import {CardAction, IPlayer} from '../IPlayer';
-import {InputResponse, isSelectProjectCardToPlayResponse} from '../../common/inputs/InputResponse';
-import {CardName} from '../../common/cards/CardName';
-import {cardsToModel} from '../models/ModelUtils';
-import {SelectProjectCardToPlayModel} from '../../common/models/PlayerInputModel';
-import {InputError} from './InputError';
+import {BasePlayerInput} from '@/server/PlayerInput';
+import {isPayment, Payment} from '@/common/inputs/Payment';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Units} from '@/common/Units';
+import {MoonExpansion} from '@/server/moon/MoonExpansion';
+import {CardAction, IPlayer} from '@/server/IPlayer';
+import {InputResponse, isSelectProjectCardToPlayResponse} from '@/common/inputs/InputResponse';
+import {CardName} from '@/common/cards/CardName';
+import {cardsToModel} from '@/server/models/ModelUtils';
+import {SelectProjectCardToPlayModel} from '@/common/models/PlayerInputModel';
+import {InputError} from '@/server/inputs/InputError';
 
 export type PlayCardMetadata = {
   reserveUnits: Readonly<Units>;

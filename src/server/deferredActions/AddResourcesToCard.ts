@@ -1,12 +1,12 @@
-import {IPlayer} from '../IPlayer';
-import {SelectCard} from '../inputs/SelectCard';
-import {CardResource} from '../../common/CardResource';
-import {ICard} from '../cards/ICard';
-import {Tag} from '../../common/cards/Tag';
-import {DeferredAction} from './DeferredAction';
-import {Priority} from './Priority';
-import {Message} from '../../common/logs/Message';
-import {message} from '../logs/MessageBuilder';
+import {IPlayer} from '@/server/IPlayer';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {CardResource} from '@/common/CardResource';
+import {ICard} from '@/server/cards/ICard';
+import {Tag} from '@/common/cards/Tag';
+import {DeferredAction} from '@/server/deferredActions/DeferredAction';
+import {Priority} from '@/server/deferredActions/Priority';
+import {Message} from '@/common/logs/Message';
+import {message} from '@/server/logs/MessageBuilder';
 
 export type Options = {
   count?: number;

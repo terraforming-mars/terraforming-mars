@@ -1,6 +1,6 @@
-import {ColonyBenefit} from '../../common/colonies/ColonyBenefit';
-import {ColonyName} from '../../common/colonies/ColonyName';
-import {Colony} from './Colony';
+import {ColonyBenefit} from '@/common/colonies/ColonyBenefit';
+import {ColonyName} from '@/common/colonies/ColonyName';
+import {Colony} from '@/server/colonies/Colony';
 
 export class Deimos extends Colony {
   constructor() {

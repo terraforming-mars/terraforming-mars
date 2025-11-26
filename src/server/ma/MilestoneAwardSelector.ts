@@ -1,15 +1,15 @@
-import {awardManifest} from '../awards/Awards';
-import {BoardName} from '../../common/boards/BoardName';
-import {GameOptions} from '../game/GameOptions';
-import {milestoneManifest} from '../milestones/Milestones';
-import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
-import {inplaceShuffle} from '../utils/shuffle';
-import {UnseededRandom} from '../../common/utils/Random';
-import {MilestoneName, milestoneNames} from '../../common/ma/MilestoneName';
-import {AwardName, awardNames} from '../../common/ma/AwardName';
-import {synergies} from './MilestoneAwardSynergies';
-import {isCompatible, MAManifest} from './MAManifest';
-import {intersection} from '../../common/utils/utils';
+import {awardManifest} from '@/server/awards/Awards';
+import {BoardName} from '@/common/boards/BoardName';
+import {GameOptions} from '@/server/game/GameOptions';
+import {milestoneManifest} from '@/server/milestones/Milestones';
+import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
+import {inplaceShuffle} from '@/server/utils/shuffle';
+import {UnseededRandom} from '@/common/utils/Random';
+import {MilestoneName, milestoneNames} from '@/common/ma/MilestoneName';
+import {AwardName, awardNames} from '@/common/ma/AwardName';
+import {synergies} from '@/server/ma/MilestoneAwardSynergies';
+import {isCompatible, MAManifest} from '@/server/ma/MAManifest';
+import {intersection} from '@/common/utils/utils';
 
 type DrawnMilestonesAndAwards = {
   milestones: Array<MilestoneName>,

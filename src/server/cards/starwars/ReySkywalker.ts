@@ -1,15 +1,15 @@
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
-import {Player} from '../../Player';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {TileType} from '../../../common/TileType';
-import {message} from '../../logs/MessageBuilder';
-import {CardResource} from '../../../common/CardResource';
-import {AresHandler} from '../../ares/AresHandler';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {Player} from '@/server/Player';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {SelectSpace} from '@/server/inputs/SelectSpace';
+import {TileType} from '@/common/TileType';
+import {message} from '@/server/logs/MessageBuilder';
+import {CardResource} from '@/common/CardResource';
+import {AresHandler} from '@/server/ares/AresHandler';
 
 export class ReySkywalker extends Card implements IProjectCard {
   constructor() {

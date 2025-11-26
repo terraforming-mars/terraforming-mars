@@ -1,14 +1,14 @@
-import * as titles from '../../common/inputs/SelectInitialCards';
-import {ICorporationCard} from '../cards/corporation/ICorporationCard';
-import {IPlayer} from '../IPlayer';
-import {SelectCard} from './SelectCard';
-import {Merger} from '../cards/promo/Merger';
-import {CardName} from '../../common/cards/CardName';
-import {SelectInitialCardsModel} from '../../common/models/PlayerInputModel';
-import {InputError} from './InputError';
-import {OptionsInput} from './OptionsPlayerInput';
-import {InputResponse, isSelectInitialCardsResponse} from '../../common/inputs/InputResponse';
-import {PlayerInput} from '../PlayerInput';
+import * as titles from '@/common/inputs/SelectInitialCards';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {IPlayer} from '@/server/IPlayer';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {Merger} from '@/server/cards/promo/Merger';
+import {CardName} from '@/common/cards/CardName';
+import {SelectInitialCardsModel} from '@/common/models/PlayerInputModel';
+import {InputError} from '@/server/inputs/InputError';
+import {OptionsInput} from '@/server/inputs/OptionsPlayerInput';
+import {InputResponse, isSelectInitialCardsResponse} from '@/common/inputs/InputResponse';
+import {PlayerInput} from '@/server/PlayerInput';
 
 type Inputs = {
   corp: PlayerInput | undefined,

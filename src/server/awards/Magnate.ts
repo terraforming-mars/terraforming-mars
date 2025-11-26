@@ -1,7 +1,7 @@
 
-import {IAward} from './IAward';
-import {IPlayer} from '../IPlayer';
-import {CardType} from '../../common/cards/CardType';
+import {IAward} from '@/server/awards/IAward';
+import {IPlayer} from '@/server/IPlayer';
+import {CardType} from '@/common/cards/CardType';
 
 export class Magnate implements IAward {
   public readonly name = 'Magnate';

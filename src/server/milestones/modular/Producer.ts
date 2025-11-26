@@ -1,7 +1,7 @@
-import {BaseMilestone} from '../IMilestone';
-import {IPlayer} from '../../IPlayer';
-import {sum} from '../../../common/utils/utils';
-import {Units} from '../../../common/Units';
+import {BaseMilestone} from '@/server/milestones/IMilestone';
+import {IPlayer} from '@/server/IPlayer';
+import {sum} from '@/common/utils/utils';
+import {Units} from '@/common/Units';
 
 export class Producer extends BaseMilestone {
   constructor() {

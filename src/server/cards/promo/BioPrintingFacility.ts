@@ -1,18 +1,18 @@
-import {IProjectCard} from '../IProjectCard';
-import {IActionCard} from '../ICard';
-import {Card} from '../Card';
-import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
-import {CardResource} from '../../../common/CardResource';
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {Resource} from '../../../common/Resource';
-import {SelectCard} from '../../inputs/SelectCard';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {CardRenderer} from '../render/CardRenderer';
-import {digit} from '../Options';
-import {message} from '../../logs/MessageBuilder';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {IActionCard} from '@/server/cards/ICard';
+import {Card} from '@/server/cards/Card';
+import {CardName} from '@/common/cards/CardName';
+import {CardType} from '@/common/cards/CardType';
+import {CardResource} from '@/common/CardResource';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {Resource} from '@/common/Resource';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {digit} from '@/server/cards/Options';
+import {message} from '@/server/logs/MessageBuilder';
 
 export class BioPrintingFacility extends Card implements IActionCard, IProjectCard {
   constructor() {

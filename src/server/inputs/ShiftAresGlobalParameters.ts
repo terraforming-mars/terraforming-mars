@@ -1,9 +1,9 @@
-import {BasePlayerInput} from '../PlayerInput';
-import {IPlayer} from '../IPlayer';
-import {AresGlobalParametersResponse} from '../../common/inputs/AresGlobalParametersResponse';
-import {InputResponse, isAresGlobalParametersResponse, isShiftAresGlobalParametersResponse} from '../../common/inputs/InputResponse';
-import {ShiftAresGlobalParametersModel} from '../../common/models/PlayerInputModel';
-import {InputError} from './InputError';
+import {BasePlayerInput} from '@/server/PlayerInput';
+import {IPlayer} from '@/server/IPlayer';
+import {AresGlobalParametersResponse} from '@/common/inputs/AresGlobalParametersResponse';
+import {InputResponse, isAresGlobalParametersResponse, isShiftAresGlobalParametersResponse} from '@/common/inputs/InputResponse';
+import {ShiftAresGlobalParametersModel} from '@/common/models/PlayerInputModel';
+import {InputError} from '@/server/inputs/InputError';
 
 export class ShiftAresGlobalParameters extends BasePlayerInput<AresGlobalParametersResponse> {
   constructor() {

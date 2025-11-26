@@ -1,14 +1,14 @@
-import {CardName} from '../../../common/cards/CardName';
-import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
-import {CardRenderer} from '../render/CardRenderer';
-import {CeoCard} from './CeoCard';
+import {CardName} from '@/common/cards/CardName';
+import {IPlayer} from '@/server/IPlayer';
+import {PlayerInput} from '@/server/PlayerInput';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CeoCard} from '@/server/cards/ceos/CeoCard';
 
-import {SelectProductionToLoseDeferred} from '../../deferredActions/SelectProductionToLoseDeferred';
-import {PlaceHazardTile} from '../../deferredActions/PlaceHazardTile';
-import {TileType} from '../../../common/TileType';
-import {Size} from '../../../common/cards/render/Size';
-import {all} from '../Options';
+import {SelectProductionToLoseDeferred} from '@/server/deferredActions/SelectProductionToLoseDeferred';
+import {PlaceHazardTile} from '@/server/deferredActions/PlaceHazardTile';
+import {TileType} from '@/common/TileType';
+import {Size} from '@/common/cards/render/Size';
+import {all} from '@/server/cards/Options';
 
 export class Caesar extends CeoCard {
   constructor() {

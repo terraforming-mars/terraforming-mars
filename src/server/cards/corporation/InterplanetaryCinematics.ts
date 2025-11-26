@@ -1,13 +1,13 @@
-import {CorporationCard} from './CorporationCard';
-import {Tag} from '../../../common/cards/Tag';
-import {ICard} from '../ICard';
-import {IPlayer} from '../../IPlayer';
-import {CardType} from '../../../common/cards/CardType';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {digit} from '../Options';
-import {Resource} from '../../../common/Resource';
-import {ICorporationCard} from './ICorporationCard';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {Tag} from '@/common/cards/Tag';
+import {ICard} from '@/server/cards/ICard';
+import {IPlayer} from '@/server/IPlayer';
+import {CardType} from '@/common/cards/CardType';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {digit} from '@/server/cards/Options';
+import {Resource} from '@/common/Resource';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class InterplanetaryCinematics extends CorporationCard implements ICorporationCard {
   constructor() {

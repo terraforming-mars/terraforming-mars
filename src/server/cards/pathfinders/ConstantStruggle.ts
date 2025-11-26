@@ -1,14 +1,14 @@
-import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
-import {GlobalEvent} from '../../turmoil/globalEvents/GlobalEvent';
-import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
-import {Turmoil} from '../../turmoil/Turmoil';
-import {Resource} from '../../../common/Resource';
-import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
-import {Tag} from '../../../common/cards/Tag';
-import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
+import {IGlobalEvent} from '@/server/turmoil/globalEvents/IGlobalEvent';
+import {GlobalEvent} from '@/server/turmoil/globalEvents/GlobalEvent';
+import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {IGame} from '@/server/IGame';
+import {Turmoil} from '@/server/turmoil/Turmoil';
+import {Resource} from '@/common/Resource';
+import {PathfindersExpansion} from '@/server/pathfinders/PathfindersExpansion';
+import {Tag} from '@/common/cards/Tag';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.minus().megacredits(10).influence({size: Size.SMALL}).planetaryTrack().text('2');

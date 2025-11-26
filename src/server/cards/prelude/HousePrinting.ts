@@ -1,9 +1,9 @@
-import {Tag} from '../../../common/cards/Tag';
-import {CardType} from '../../../common/cards/CardType';
-import {Card} from '../Card';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {IProjectCard} from '../IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardType} from '@/common/cards/CardType';
+import {Card} from '@/server/cards/Card';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {IProjectCard} from '@/server/cards/IProjectCard';
 
 export class HousePrinting extends Card implements IProjectCard {
   constructor() {

@@ -1,8 +1,8 @@
-import {IPlayer} from '../../../IPlayer';
-import {CardName} from '../../../../common/cards/CardName';
-import {CardRenderer} from '../../render/CardRenderer';
-import {StandardProjectCard} from '../../StandardProjectCard';
-import {Resource} from '../../../../common/Resource';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {StandardProjectCard} from '@/server/cards/StandardProjectCard';
+import {Resource} from '@/common/Resource';
 
 export class PowerPlantStandardProject extends StandardProjectCard {
   constructor() {

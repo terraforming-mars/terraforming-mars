@@ -1,7 +1,7 @@
-import {IActionCard, ICard} from '../ICard';
-import {IPlayer} from '../../IPlayer';
-import {IProjectCard} from '../IProjectCard';
-import {CardType} from '../../../common/cards/CardType';
+import {IActionCard, ICard} from '@/server/cards/ICard';
+import {IPlayer} from '@/server/IPlayer';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardType} from '@/common/cards/CardType';
 
 export interface ICeoCard extends IProjectCard, Partial<IActionCard> {
   /** If this card is active this generation. */

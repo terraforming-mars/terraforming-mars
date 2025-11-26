@@ -1,12 +1,12 @@
-import {IProjectCard} from '../IProjectCard';
-import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Tag} from '../../../common/cards/Tag';
-import {Resource} from '../../../common/Resource';
-import {ICard} from '../ICard';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {IPlayer} from '@/server/IPlayer';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Tag} from '@/common/cards/Tag';
+import {Resource} from '@/common/Resource';
+import {ICard} from '@/server/cards/ICard';
 
 export class MicrobiologyPatents extends Card implements IProjectCard {
   constructor() {

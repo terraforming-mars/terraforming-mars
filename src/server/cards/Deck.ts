@@ -1,16 +1,16 @@
-import {SerializedDeck} from './SerializedDeck';
-import {cardsFromJSON, ceosFromJSON, corporationCardsFromJSON, preludesFromJSON} from '../createCard';
-import {CardName} from '../../common/cards/CardName';
-import {LogHelper} from '../LogHelper';
-import {Random} from '../../common/utils/Random';
-import {ICard} from './ICard';
-import {ICorporationCard} from './corporation/ICorporationCard';
-import {IProjectCard} from './IProjectCard';
-import {inplaceShuffle} from '../utils/shuffle';
-import {Logger} from '../logs/Logger';
-import {IPreludeCard} from './prelude/IPreludeCard';
-import {ICeoCard} from './ceos/ICeoCard';
-import {toName} from '../../common/utils/utils';
+import {SerializedDeck} from '@/server/cards/SerializedDeck';
+import {cardsFromJSON, ceosFromJSON, corporationCardsFromJSON, preludesFromJSON} from '@/server/createCard';
+import {CardName} from '@/common/cards/CardName';
+import {LogHelper} from '@/server/LogHelper';
+import {Random} from '@/common/utils/Random';
+import {ICard} from '@/server/cards/ICard';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {inplaceShuffle} from '@/server/utils/shuffle';
+import {Logger} from '@/server/logs/Logger';
+import {IPreludeCard} from '@/server/cards/prelude/IPreludeCard';
+import {ICeoCard} from '@/server/cards/ceos/ICeoCard';
+import {toName} from '@/common/utils/utils';
 
 /**
  * A deck of cards to draw from, and also its discard pile.

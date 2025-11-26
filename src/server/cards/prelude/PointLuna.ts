@@ -1,10 +1,10 @@
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {CorporationCard} from '../corporation/CorporationCard';
-import {ICard} from '../ICard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {ICard} from '@/server/cards/ICard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
 
 export class PointLuna extends CorporationCard implements ICorporationCard {
   constructor() {

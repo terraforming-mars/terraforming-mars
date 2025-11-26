@@ -1,26 +1,26 @@
 require('dotenv').config();
 import * as fs from 'fs';
 
-import {ALL_MODULE_MANIFESTS} from '../cards/AllManifests';
-import {CardManifest, GlobalEventManifest, ModuleManifest} from '../cards/ModuleManifest';
-import {ICard, isIActionCard} from '../cards/ICard';
-import {Expansion, GameModule} from '../../common/cards/GameModule';
-import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
-import {IClientGlobalEvent} from '../../common/turmoil/IClientGlobalEvent';
-import {ClientCard} from '../../common/cards/ClientCard';
-import {isICorporationCard} from '../cards/corporation/ICorporationCard';
-import {isPreludeCard} from '../cards/prelude/IPreludeCard';
-import {ColonyMetadata} from '../../common/colonies/ColonyMetadata';
-import {Units} from '../../common/Units';
-import {ALL_COLONIES_TILES, getColonyModule} from '../colonies/ColonyManifest';
-import {milestoneManifest} from '../milestones/Milestones';
-import {awardManifest} from '../awards/Awards';
-import {awardNames} from '../../common/ma/AwardName';
-import {milestoneNames} from '../../common/ma/MilestoneName';
-import {ClientAward, ClientMilestone} from '../../common/ma/ClientMilestoneAward';
-import {CardType} from '../../common/cards/CardType';
-import {OneOrArray} from '../../common/utils/types';
-import {globalInitialize} from '../globalInitialize';
+import {ALL_MODULE_MANIFESTS} from '@/server/cards/AllManifests';
+import {CardManifest, GlobalEventManifest, ModuleManifest} from '@/server/cards/ModuleManifest';
+import {ICard, isIActionCard} from '@/server/cards/ICard';
+import {Expansion, GameModule} from '@/common/cards/GameModule';
+import {IGlobalEvent} from '@/server/turmoil/globalEvents/IGlobalEvent';
+import {IClientGlobalEvent} from '@/common/turmoil/IClientGlobalEvent';
+import {ClientCard} from '@/common/cards/ClientCard';
+import {isICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {isPreludeCard} from '@/server/cards/prelude/IPreludeCard';
+import {ColonyMetadata} from '@/common/colonies/ColonyMetadata';
+import {Units} from '@/common/Units';
+import {ALL_COLONIES_TILES, getColonyModule} from '@/server/colonies/ColonyManifest';
+import {milestoneManifest} from '@/server/milestones/Milestones';
+import {awardManifest} from '@/server/awards/Awards';
+import {awardNames} from '@/common/ma/AwardName';
+import {milestoneNames} from '@/common/ma/MilestoneName';
+import {ClientAward, ClientMilestone} from '@/common/ma/ClientMilestoneAward';
+import {CardType} from '@/common/cards/CardType';
+import {OneOrArray} from '@/common/utils/types';
+import {globalInitialize} from '@/server/globalInitialize';
 
 class CardProcessor {
   public static json: Array<ClientCard> = [];

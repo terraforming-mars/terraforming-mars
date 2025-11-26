@@ -1,11 +1,11 @@
-import {Tag} from '../../../common/cards/Tag';
-import {RoboticWorkforceBase} from './RoboticWorkforceBase';
-import {CardType} from '../../../common/cards/CardType';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
-import {IPlayer} from '../../IPlayer';
-import {Priority} from '../../deferredActions/Priority';
+import {Tag} from '@/common/cards/Tag';
+import {RoboticWorkforceBase} from '@/server/cards/base/RoboticWorkforceBase';
+import {CardType} from '@/common/cards/CardType';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
+import {IPlayer} from '@/server/IPlayer';
+import {Priority} from '@/server/deferredActions/Priority';
 
 export class RoboticWorkforce extends RoboticWorkforceBase {
   constructor() {

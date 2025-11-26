@@ -1,16 +1,16 @@
-import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {CanAffordOptions, IPlayer} from '../IPlayer';
-import {BoardBuilder} from './BoardBuilder';
-import {Random} from '../../common/utils/Random';
-import {GameOptions} from '../game/GameOptions';
-import {MarsBoard} from './MarsBoard';
-import {Turmoil} from '../turmoil/Turmoil';
-import {SpaceName} from '../../common/boards/SpaceName';
-import {Space} from './Space';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
+import {CanAffordOptions, IPlayer} from '@/server/IPlayer';
+import {BoardBuilder} from '@/server/boards/BoardBuilder';
+import {Random} from '@/common/utils/Random';
+import {GameOptions} from '@/server/game/GameOptions';
+import {MarsBoard} from '@/server/boards/MarsBoard';
+import {Turmoil} from '@/server/turmoil/Turmoil';
+import {SpaceName} from '@/common/boards/SpaceName';
+import {Space} from '@/server/boards/Space';
 import {
   VASTITAS_BOREALIS_NOVUS_BONUS_TEMPERATURE_COST,
-} from '../../common/constants';
-import {SpaceCosts} from './Board';
+} from '@/common/constants';
+import {SpaceCosts} from '@/server/boards/Board';
 
 export class VastitasBorealisNovusBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): VastitasBorealisNovusBoard {

@@ -1,7 +1,7 @@
-import {ICard} from '../../cards/ICard';
-import {CardName} from '../../../common/cards/CardName';
-import {IPlayer} from '../../IPlayer';
-import {IAward} from '../IAward';
+import {ICard} from '@/server/cards/ICard';
+import {CardName} from '@/common/cards/CardName';
+import {IPlayer} from '@/server/IPlayer';
+import {IAward} from '@/server/awards/IAward';
 
 export class Warmonger implements IAward {
   public readonly name = 'Warmonger';

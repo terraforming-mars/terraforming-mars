@@ -1,9 +1,9 @@
-import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
-import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
-import {CardRenderer} from '../render/CardRenderer';
-import {ActionCard} from '../ActionCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardType} from '@/common/cards/CardType';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {ActionCard} from '@/server/cards/ActionCard';
 
 export class SolarPanelFoundry extends ActionCard implements IProjectCard {
   constructor() {

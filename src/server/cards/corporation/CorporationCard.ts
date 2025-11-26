@@ -1,10 +1,10 @@
-import {CardType} from '../../../common/cards/CardType';
-import {ICorporationCard} from './ICorporationCard';
-import {Card, StaticCardProperties} from '../Card';
-import {IPlayer} from '../../IPlayer';
-import {getBehaviorExecutor} from '../../behavior/BehaviorExecutor';
-import {IActionCard} from '../ICard';
-import {PlayerInput} from '../../PlayerInput';
+import {CardType} from '@/common/cards/CardType';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {Card, StaticCardProperties} from '@/server/cards/Card';
+import {IPlayer} from '@/server/IPlayer';
+import {getBehaviorExecutor} from '@/server/behavior/BehaviorExecutor';
+import {IActionCard} from '@/server/cards/ICard';
+import {PlayerInput} from '@/server/PlayerInput';
 
 export abstract class CorporationCard extends Card implements ICorporationCard {
   constructor(external: Omit<StaticCardProperties, 'type'>) {

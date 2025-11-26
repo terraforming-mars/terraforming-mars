@@ -1,8 +1,8 @@
-import {PlayerId} from '../../common/Types';
-import {IPlayer} from '../IPlayer';
-import {Board} from '../boards/Board';
-import {MoonBoard} from './MoonBoard';
-import {SerializedMoonData} from './SerializedMoonData';
+import {PlayerId} from '@/common/Types';
+import {IPlayer} from '@/server/IPlayer';
+import {Board} from '@/server/boards/Board';
+import {MoonBoard} from '@/server/moon/MoonBoard';
+import {SerializedMoonData} from '@/server/moon/SerializedMoonData';
 
 export type MoonData = {
   moon: MoonBoard;

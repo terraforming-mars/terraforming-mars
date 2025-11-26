@@ -1,5 +1,5 @@
-import {BaseMilestone} from './IMilestone';
-import {IPlayer} from '../IPlayer';
+import {BaseMilestone} from '@/server/milestones/IMilestone';
+import {IPlayer} from '@/server/IPlayer';
 
 export class Capitalist extends BaseMilestone {
   constructor() {

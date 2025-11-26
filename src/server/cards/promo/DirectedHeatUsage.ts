@@ -1,8 +1,8 @@
-import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
-import {CardRenderer} from '../render/CardRenderer';
-import {ActionCard} from '../ActionCard';
-import {digit} from '../Options';
+import {CardName} from '@/common/cards/CardName';
+import {CardType} from '@/common/cards/CardType';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {ActionCard} from '@/server/cards/ActionCard';
+import {digit} from '@/server/cards/Options';
 
 export class DirectedHeatUsage extends ActionCard {
   constructor() {

@@ -1,14 +1,14 @@
-import {Tag} from '../../../common/cards/Tag';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {Priority} from '../../deferredActions/Priority';
-import {DiscardCards} from '../../deferredActions/DiscardCards';
-import {CardRenderer} from '../render/CardRenderer';
-import {DrawCards} from '../../deferredActions/DrawCards';
-import {Card} from '../Card';
-import {all, digit} from '../Options';
-import {IProjectCard} from '../IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {Priority} from '@/server/deferredActions/Priority';
+import {DiscardCards} from '@/server/deferredActions/DiscardCards';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {DrawCards} from '@/server/deferredActions/DrawCards';
+import {Card} from '@/server/cards/Card';
+import {all, digit} from '@/server/cards/Options';
+import {IProjectCard} from '@/server/cards/IProjectCard';
 
 export class SponsoredAcademies extends Card implements IProjectCard {
   constructor() {

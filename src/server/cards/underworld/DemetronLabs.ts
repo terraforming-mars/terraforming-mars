@@ -1,12 +1,12 @@
-import {Tag} from '../../../common/cards/Tag';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {ActiveCorporationCard} from '../corporation/CorporationCard';
-import {IActionCard, ICard} from '../ICard';
-import {digit} from '../Options';
-import {CardResource} from '../../../common/CardResource';
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {IPlayer} from '../../IPlayer';
+import {Tag} from '@/common/cards/Tag';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {ActiveCorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {IActionCard, ICard} from '@/server/cards/ICard';
+import {digit} from '@/server/cards/Options';
+import {CardResource} from '@/common/CardResource';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {IPlayer} from '@/server/IPlayer';
 
 export class DemetronLabs extends ActiveCorporationCard implements ICorporationCard, IActionCard {
   constructor() {

@@ -1,13 +1,13 @@
-import {Board} from '../boards/Board';
-import {Space} from '../boards/Space';
-import {IPlayer} from '../IPlayer';
-import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {SpaceType} from '../../common/boards/SpaceType';
-import {NamedMoonSpace, NamedMoonSpaces} from '../../common/moon/NamedMoonSpaces';
-import {SpaceId, isSpaceId, safeCast} from '../../common/Types';
-import {GameOptions} from '../../server/game/GameOptions';
-import {Random} from '../../common/utils/Random';
-import {preservingShuffle} from '../../server/boards/BoardBuilder';
+import {Board} from '@/server/boards/Board';
+import {Space} from '@/server/boards/Space';
+import {IPlayer} from '@/server/IPlayer';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
+import {SpaceType} from '@/common/boards/SpaceType';
+import {NamedMoonSpace, NamedMoonSpaces} from '@/common/moon/NamedMoonSpaces';
+import {SpaceId, isSpaceId, safeCast} from '@/common/Types';
+import {GameOptions} from '@/server/game/GameOptions';
+import {Random} from '@/common/utils/Random';
+import {preservingShuffle} from '@/server/boards/BoardBuilder';
 
 function colonySpace(id: SpaceId): Space {
   return {id, spaceType: SpaceType.COLONY, x: -1, y: -1, bonus: []};

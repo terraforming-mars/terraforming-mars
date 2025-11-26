@@ -1,11 +1,11 @@
-import {IProjectCard} from '../IProjectCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
-import {CardRenderer} from '../render/CardRenderer';
-import {Turmoil} from '../../turmoil/Turmoil';
-import {all} from '../Options';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {Card} from '@/server/cards/Card';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Turmoil} from '@/server/turmoil/Turmoil';
+import {all} from '@/server/cards/Options';
 
 export class VoteOfNoConfidence extends Card implements IProjectCard {
   constructor() {

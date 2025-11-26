@@ -1,6 +1,6 @@
-import {IAward} from './IAward';
-import {IPlayer} from '../IPlayer';
-import {Tag} from '../../common/cards/Tag';
+import {IAward} from '@/server/awards/IAward';
+import {IPlayer} from '@/server/IPlayer';
+import {Tag} from '@/common/cards/Tag';
 
 export class Venuphile implements IAward {
   public readonly name = 'Venuphile';

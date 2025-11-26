@@ -1,9 +1,9 @@
-import {PlayerId} from '../../common/Types';
-import {IGame} from '../IGame';
-import {IPlayer} from '../IPlayer';
-import {IAward} from './IAward';
-import {CardName} from '../../common/cards/CardName';
-import {ASIMOV_AWARD_BONUS} from '../../common/constants';
+import {PlayerId} from '@/common/Types';
+import {IGame} from '@/server/IGame';
+import {IPlayer} from '@/server/IPlayer';
+import {IAward} from '@/server/awards/IAward';
+import {CardName} from '@/common/cards/CardName';
+import {ASIMOV_AWARD_BONUS} from '@/common/constants';
 
 export class AwardScorer {
   private scores: Map<PlayerId, number> = new Map();

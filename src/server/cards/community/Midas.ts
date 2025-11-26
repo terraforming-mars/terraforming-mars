@@ -1,8 +1,8 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class Midas extends CorporationCard implements ICorporationCard {
   constructor() {

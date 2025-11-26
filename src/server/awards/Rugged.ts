@@ -1,8 +1,8 @@
-import {IAward} from './IAward';
-import {IPlayer} from '../IPlayer';
-import {Board} from '../boards/Board';
-import {HAZARD_TILES} from '../../common/TileType';
-import {AwardName} from '../../common/ma/AwardName';
+import {IAward} from '@/server/awards/IAward';
+import {IPlayer} from '@/server/IPlayer';
+import {Board} from '@/server/boards/Board';
+import {HAZARD_TILES} from '@/common/TileType';
+import {AwardName} from '@/common/ma/AwardName';
 
 export class Rugged implements IAward {
   public name: AwardName = 'Rugged';

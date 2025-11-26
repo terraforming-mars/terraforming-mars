@@ -1,6 +1,6 @@
-import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {ICardRenderRoot} from '../../../common/cards/render/Types';
+import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {ICardRenderRoot} from '@/common/cards/render/Types';
 
 type StaticGlobalEventProperties = {
   name: GlobalEventName,

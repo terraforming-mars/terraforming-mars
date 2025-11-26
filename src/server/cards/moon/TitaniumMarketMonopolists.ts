@@ -1,8 +1,8 @@
-import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
-import {CardRenderer} from '../render/CardRenderer';
-import {Resource} from '../../../common/Resource';
-import {MarketCard} from './MarketCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardType} from '@/common/cards/CardType';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Resource} from '@/common/Resource';
+import {MarketCard} from '@/server/cards/moon/MarketCard';
 
 export class TitaniumMarketMonopolists extends MarketCard {
   constructor() {

@@ -1,13 +1,13 @@
-import {Tag} from '../../../common/cards/Tag';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {CardResource} from '../../../common/CardResource';
-import {SelectCard} from '../../inputs/SelectCard';
-import {ICard} from '../ICard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {IProjectCard} from '../IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {CardResource} from '@/common/CardResource';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {ICard} from '@/server/cards/ICard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Card} from '@/server/cards/Card';
+import {IProjectCard} from '@/server/cards/IProjectCard';
 
 export class FreyjaBiodomes extends Card implements IProjectCard {
   constructor() {

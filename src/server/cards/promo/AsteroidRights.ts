@@ -1,18 +1,18 @@
-import {IProjectCard} from '../IProjectCard';
-import {IActionCard} from '../ICard';
-import {Card} from '../Card';
-import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
-import {CardResource} from '../../../common/CardResource';
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {Resource} from '../../../common/Resource';
-import {LogHelper} from '../../LogHelper';
-import {SelectCard} from '../../inputs/SelectCard';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {CardRenderer} from '../render/CardRenderer';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {IActionCard} from '@/server/cards/ICard';
+import {Card} from '@/server/cards/Card';
+import {CardName} from '@/common/cards/CardName';
+import {CardType} from '@/common/cards/CardType';
+import {CardResource} from '@/common/CardResource';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {Resource} from '@/common/Resource';
+import {LogHelper} from '@/server/LogHelper';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
 
 export class AsteroidRights extends Card implements IActionCard, IProjectCard {
   constructor() {

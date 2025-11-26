@@ -1,6 +1,6 @@
-import {BaseMilestone} from '../IMilestone';
-import {IPlayer} from '../../IPlayer';
-import {sum} from '../../../common/utils/utils';
+import {BaseMilestone} from '@/server/milestones/IMilestone';
+import {IPlayer} from '@/server/IPlayer';
+import {sum} from '@/common/utils/utils';
 
 export class Risktaker extends BaseMilestone {
   constructor() {

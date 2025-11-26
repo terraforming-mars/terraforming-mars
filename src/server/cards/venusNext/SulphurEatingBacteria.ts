@@ -1,14 +1,14 @@
-import {IActionCard} from '../ICard';
-import {Tag} from '../../../common/cards/Tag';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {CardResource} from '../../../common/CardResource';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {SelectAmount} from '../../inputs/SelectAmount';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {IActionCard} from '@/server/cards/ICard';
+import {Tag} from '@/common/cards/Tag';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {CardResource} from '@/common/CardResource';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {SelectAmount} from '@/server/inputs/SelectAmount';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Card} from '@/server/cards/Card';
 
 export class SulphurEatingBacteria extends Card implements IActionCard {
   constructor() {

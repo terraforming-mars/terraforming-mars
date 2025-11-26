@@ -1,16 +1,16 @@
-import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {Space} from '../../boards/Space';
-import {Resource} from '../../../common/Resource';
-import {CardResource} from '../../../common/CardResource';
-import {CardName} from '../../../common/cards/CardName';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {CardRenderer} from '../render/CardRenderer';
-import {all} from '../Options';
-import {Board} from '../../boards/Board';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {Space} from '@/server/boards/Space';
+import {Resource} from '@/common/Resource';
+import {CardResource} from '@/common/CardResource';
+import {CardName} from '@/common/cards/CardName';
+import {AddResourcesToCard} from '@/server/deferredActions/AddResourcesToCard';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {all} from '@/server/cards/Options';
+import {Board} from '@/server/boards/Board';
 
 export class Herbivores extends Card implements IProjectCard {
   constructor() {

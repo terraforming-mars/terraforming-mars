@@ -1,14 +1,14 @@
-import {PreludeCard} from '../prelude/PreludeCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../../server/IPlayer';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
-import {SelectOption} from '../../inputs/SelectOption';
-import {PlaceGreeneryTile} from '../../deferredActions/PlaceGreeneryTile';
-import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
-import {OrOptions} from '../../inputs/OrOptions';
-import {DiscardCards} from '../../deferredActions/DiscardCards';
+import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {PlaceOceanTile} from '@/server/deferredActions/PlaceOceanTile';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {PlaceGreeneryTile} from '@/server/deferredActions/PlaceGreeneryTile';
+import {PlaceCityTile} from '@/server/deferredActions/PlaceCityTile';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {DiscardCards} from '@/server/deferredActions/DiscardCards';
 
 export class ProjectEden extends PreludeCard {
   constructor() {

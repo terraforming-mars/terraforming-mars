@@ -1,19 +1,19 @@
-import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {CanAffordOptions, IPlayer} from '../../IPlayer';
-import {CardResource} from '../../../common/CardResource';
-import {TileType} from '../../../common/TileType';
-import {PlaceTile} from '../../../server/deferredActions/PlaceTile';
-import {Space} from '../../boards/Space';
-import {CardName} from '../../../common/cards/CardName';
-import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
-import {CardMetadata} from '../../../common/cards/CardMetadata';
-import {CardRenderer} from '../render/CardRenderer';
-import {Phase} from '../../../common/Phase';
-import {Board} from '../../boards/Board';
-import {ICard} from '../ICard';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {CanAffordOptions, IPlayer} from '@/server/IPlayer';
+import {CardResource} from '@/common/CardResource';
+import {TileType} from '@/common/TileType';
+import {PlaceTile} from '@/server/deferredActions/PlaceTile';
+import {Space} from '@/server/boards/Space';
+import {CardName} from '@/common/cards/CardName';
+import {AdjacencyBonus} from '@/server/ares/AdjacencyBonus';
+import {CardMetadata} from '@/common/cards/CardMetadata';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Phase} from '@/common/Phase';
+import {Board} from '@/server/boards/Board';
+import {ICard} from '@/server/cards/ICard';
 
 export class EcologicalZone extends Card implements IProjectCard {
   constructor(

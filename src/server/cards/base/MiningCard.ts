@@ -1,18 +1,18 @@
-import {Card} from '../Card';
-import {CardMetadata} from '../../../common/cards/CardMetadata';
-import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
-import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
-import {IProjectCard} from '../../cards/IProjectCard';
-import {Space} from '../../boards/Space';
-import {CanAffordOptions, IPlayer} from '../../IPlayer';
-import {Resource} from '../../../common/Resource';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {Tag} from '../../../common/cards/Tag';
-import {SpaceBonus} from '../../../common/boards/SpaceBonus';
-import {TileType} from '../../../common/TileType';
-import {SelectResourceTypeDeferred} from '../../deferredActions/SelectResourceTypeDeferred';
-import {Units} from '../../../common/Units';
+import {Card} from '@/server/cards/Card';
+import {CardMetadata} from '@/common/cards/CardMetadata';
+import {CardName} from '@/common/cards/CardName';
+import {CardType} from '@/common/cards/CardType';
+import {AdjacencyBonus} from '@/server/ares/AdjacencyBonus';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Space} from '@/server/boards/Space';
+import {CanAffordOptions, IPlayer} from '@/server/IPlayer';
+import {Resource} from '@/common/Resource';
+import {SelectSpace} from '@/server/inputs/SelectSpace';
+import {Tag} from '@/common/cards/Tag';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
+import {TileType} from '@/common/TileType';
+import {SelectResourceTypeDeferred} from '@/server/deferredActions/SelectResourceTypeDeferred';
+import {Units} from '@/common/Units';
 
 export abstract class MiningCard extends Card implements IProjectCard {
   public bonusResource?: Array<Resource>;

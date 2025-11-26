@@ -1,8 +1,8 @@
-import {IActionCard} from '../ICard';
-import {PreludeCard} from '../prelude/PreludeCard';
-import {IPlayer} from '../../IPlayer';
-import {getBehaviorExecutor} from '../../behavior/BehaviorExecutor';
-import {PlayerInput} from '../../PlayerInput';
+import {IActionCard} from '@/server/cards/ICard';
+import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
+import {IPlayer} from '@/server/IPlayer';
+import {getBehaviorExecutor} from '@/server/behavior/BehaviorExecutor';
+import {PlayerInput} from '@/server/PlayerInput';
 
 /**
  * A prelude card with an action property. Duplicates code from ActionCard.

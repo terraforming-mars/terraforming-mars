@@ -1,13 +1,13 @@
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Tag} from '../../../common/cards/Tag';
-import {ActionCard} from '../ActionCard';
-import {IProjectCard} from '../IProjectCard';
-import {CardResource} from '../../../common/CardResource';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {ICard} from '../ICard';
-import {digit} from '../Options';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Tag} from '@/common/cards/Tag';
+import {ActionCard} from '@/server/cards/ActionCard';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardResource} from '@/common/CardResource';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {ICard} from '@/server/cards/ICard';
+import {digit} from '@/server/cards/Options';
 
 export class StemFieldSubsidies extends ActionCard implements IProjectCard {
   constructor() {

@@ -1,15 +1,15 @@
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {CorporationCard} from '../corporation/CorporationCard';
-import {ICard} from '../ICard';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {IAward} from '../../awards/IAward';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Resource} from '../../../common/Resource';
-import {message} from '../../logs/MessageBuilder';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {ICard} from '@/server/cards/ICard';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {IAward} from '@/server/awards/IAward';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Resource} from '@/common/Resource';
+import {message} from '@/server/logs/MessageBuilder';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class Vitor extends CorporationCard implements ICorporationCard {
   constructor() {

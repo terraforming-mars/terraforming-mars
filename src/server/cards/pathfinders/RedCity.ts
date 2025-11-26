@@ -1,18 +1,18 @@
-import {Tag} from '../../../common/cards/Tag';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {questionmark} from '../render/DynamicVictoryPoints';
-import {TileType} from '../../../common/TileType';
-import {PlaceTile} from '../../deferredActions/PlaceTile';
-import {Board} from '../../boards/Board';
-import {IProjectCard} from '../IProjectCard';
-import {message} from '../../logs/MessageBuilder';
-import {Space} from '../../boards/Space';
-import {SpaceType} from '../../../common/boards/SpaceType';
+import {Tag} from '@/common/cards/Tag';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {Card} from '@/server/cards/Card';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {questionmark} from '@/server/cards/render/DynamicVictoryPoints';
+import {TileType} from '@/common/TileType';
+import {PlaceTile} from '@/server/deferredActions/PlaceTile';
+import {Board} from '@/server/boards/Board';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {message} from '@/server/logs/MessageBuilder';
+import {Space} from '@/server/boards/Space';
+import {SpaceType} from '@/common/boards/SpaceType';
 
 export class RedCity extends Card implements IProjectCard {
   constructor() {

@@ -1,10 +1,10 @@
-import {Tag} from '../../../common/cards/Tag';
-import {CorporationCard} from './CorporationCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {IPlayer} from '../../IPlayer';
-import {IStandardProjectCard} from '../IStandardProjectCard';
-import {ICorporationCard} from './ICorporationCard';
+import {Tag} from '@/common/cards/Tag';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {IPlayer} from '@/server/IPlayer';
+import {IStandardProjectCard} from '@/server/cards/IStandardProjectCard';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class Thorgate extends CorporationCard implements ICorporationCard {
   constructor() {

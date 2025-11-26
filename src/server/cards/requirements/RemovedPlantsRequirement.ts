@@ -1,6 +1,6 @@
-import {IPlayer} from '../../IPlayer';
-import {CardRequirement} from './CardRequirement';
-import {RequirementType} from '../../../common/cards/RequirementType';
+import {IPlayer} from '@/server/IPlayer';
+import {CardRequirement} from '@/server/cards/requirements/CardRequirement';
+import {RequirementType} from '@/common/cards/RequirementType';
 
 /**
  * Evaluate whether any player's plants have been removed this generation.

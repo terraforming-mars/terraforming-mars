@@ -1,12 +1,12 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {Tag} from '../../../common/cards/Tag';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {IPlayer} from '../../IPlayer';
-import {all} from '../Options';
-import {Phase} from '../../../common/Phase';
-import {Resource} from '../../../common/Resource';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {IPlayer} from '@/server/IPlayer';
+import {all} from '@/server/cards/Options';
+import {Phase} from '@/common/Phase';
+import {Resource} from '@/common/Resource';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class UnitedNationsMissionOne extends CorporationCard implements ICorporationCard {
   constructor() {

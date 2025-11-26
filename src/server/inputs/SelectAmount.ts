@@ -1,8 +1,8 @@
-import {Message} from '../../common/logs/Message';
-import {BasePlayerInput} from '../PlayerInput';
-import {InputResponse, isSelectAmountResponse} from '../../common/inputs/InputResponse';
-import {SelectAmountModel} from '../../common/models/PlayerInputModel';
-import {InputError} from './InputError';
+import {Message} from '@/common/logs/Message';
+import {BasePlayerInput} from '@/server/PlayerInput';
+import {InputResponse, isSelectAmountResponse} from '@/common/inputs/InputResponse';
+import {SelectAmountModel} from '@/common/models/PlayerInputModel';
+import {InputError} from '@/server/inputs/InputError';
 
 export class SelectAmount extends BasePlayerInput<number> {
   public selected: number = -1;

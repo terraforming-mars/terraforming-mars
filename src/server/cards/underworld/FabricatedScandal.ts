@@ -1,11 +1,11 @@
-import {CardType} from '../../../common/cards/CardType';
-import {IProjectCard} from '../IProjectCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {all} from '../Options';
-import {IPlayer} from '../../IPlayer';
-import {Tag} from '../../../common/cards/Tag';
+import {CardType} from '@/common/cards/CardType';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Card} from '@/server/cards/Card';
+import {all} from '@/server/cards/Options';
+import {IPlayer} from '@/server/IPlayer';
+import {Tag} from '@/common/cards/Tag';
 
 export class FabricatedScandal extends Card implements IProjectCard {
   constructor() {

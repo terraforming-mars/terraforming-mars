@@ -1,7 +1,7 @@
-import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {StandardProjectCard} from '../StandardProjectCard';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {StandardProjectCard} from '@/server/cards/StandardProjectCard';
 
 export class BufferGasStandardProject extends StandardProjectCard {
   constructor() {

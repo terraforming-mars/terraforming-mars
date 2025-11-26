@@ -1,17 +1,17 @@
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {CorporationCard} from './CorporationCard';
-import {Phase} from '../../../common/Phase';
-import {Space} from '../../boards/Space';
-import {SpaceBonus} from '../../../common/boards/SpaceBonus';
-import {Resource} from '../../../common/Resource';
-import {CardName} from '../../../common/cards/CardName';
-import {GainProduction} from '../../deferredActions/GainProduction';
-import {CardRenderer} from '../render/CardRenderer';
-import {BoardType} from '../../boards/BoardType';
-import {digit} from '../Options';
-import {AresHandler} from '../../ares/AresHandler';
-import {ICorporationCard} from './ICorporationCard';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {Phase} from '@/common/Phase';
+import {Space} from '@/server/boards/Space';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
+import {Resource} from '@/common/Resource';
+import {CardName} from '@/common/cards/CardName';
+import {GainProduction} from '@/server/deferredActions/GainProduction';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {BoardType} from '@/server/boards/BoardType';
+import {digit} from '@/server/cards/Options';
+import {AresHandler} from '@/server/ares/AresHandler';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class MiningGuild extends CorporationCard implements ICorporationCard {
   constructor() {

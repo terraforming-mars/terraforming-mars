@@ -1,11 +1,11 @@
-import {IPlayer} from '../../IPlayer';
-import {PreludeCard} from '../prelude/PreludeCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Tag} from '../../../common/cards/Tag';
-import {ICloneTagCard} from './ICloneTagCard';
-import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
-import {Size} from '../../../common/cards/render/Size';
+import {IPlayer} from '@/server/IPlayer';
+import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Tag} from '@/common/cards/Tag';
+import {ICloneTagCard} from '@/server/cards/pathfinders/ICloneTagCard';
+import {DeclareCloneTag} from '@/server/pathfinders/DeclareCloneTag';
+import {Size} from '@/common/cards/render/Size';
 
 export class CrewTraining extends PreludeCard implements ICloneTagCard {
   constructor() {

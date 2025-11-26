@@ -1,13 +1,13 @@
-import {Phase} from '../../common/Phase';
-import {IPlayer} from '../IPlayer';
-import {Board} from '../boards/Board';
-import {MoonExpansion} from '../moon/MoonExpansion';
-import {PathfindersExpansion} from '../pathfinders/PathfindersExpansion';
-import {Turmoil} from '../turmoil/Turmoil';
-import {VictoryPointsBreakdownBuilder} from './VictoryPointsBreakdownBuilder';
-import {FundedAward} from '../awards/FundedAward';
-import {AwardScorer} from '../awards/AwardScorer';
-import {CardName} from '../../common/cards/CardName';
+import {Phase} from '@/common/Phase';
+import {IPlayer} from '@/server/IPlayer';
+import {Board} from '@/server/boards/Board';
+import {MoonExpansion} from '@/server/moon/MoonExpansion';
+import {PathfindersExpansion} from '@/server/pathfinders/PathfindersExpansion';
+import {Turmoil} from '@/server/turmoil/Turmoil';
+import {VictoryPointsBreakdownBuilder} from '@/server/game/VictoryPointsBreakdownBuilder';
+import {FundedAward} from '@/server/awards/FundedAward';
+import {AwardScorer} from '@/server/awards/AwardScorer';
+import {CardName} from '@/common/cards/CardName';
 
 export function calculateVictoryPoints(player: IPlayer) {
   const builder = new VictoryPointsBreakdownBuilder();

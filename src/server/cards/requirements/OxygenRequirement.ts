@@ -1,9 +1,9 @@
-import {IPlayer} from '../../IPlayer';
-import {Options} from './CardRequirement';
-import {GlobalParameterRequirement} from './GlobalParameterRequirement';
-import {GlobalParameter} from '../../../common/GlobalParameter';
-import {RequirementType} from '../../../common/cards/RequirementType';
-import {MAX_OXYGEN_LEVEL, MIN_OXYGEN_LEVEL} from '../../../common/constants';
+import {IPlayer} from '@/server/IPlayer';
+import {Options} from '@/server/cards/requirements/CardRequirement';
+import {GlobalParameterRequirement} from '@/server/cards/requirements/GlobalParameterRequirement';
+import {GlobalParameter} from '@/common/GlobalParameter';
+import {RequirementType} from '@/common/cards/RequirementType';
+import {MAX_OXYGEN_LEVEL, MIN_OXYGEN_LEVEL} from '@/common/constants';
 
 /**
  * Evaluate whether the game's oxygel level is at least (or at most) a given value.

@@ -1,6 +1,6 @@
-import {PlayerId} from '../../common/Types';
-import {Tag} from '../../common/cards/Tag';
-import {SerializedPathfindersData} from './SerializedPathfindersData';
+import {PlayerId} from '@/common/Types';
+import {Tag} from '@/common/cards/Tag';
+import {SerializedPathfindersData} from '@/server/pathfinders/SerializedPathfindersData';
 
 /**
  * The possible tags with planetary tracks.

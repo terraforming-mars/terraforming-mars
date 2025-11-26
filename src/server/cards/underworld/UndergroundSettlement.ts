@@ -1,12 +1,12 @@
-import {PreludeCard} from '../prelude/PreludeCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
-import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
-import {ClaimSpaceDeferred} from '../../underworld/ClaimSpaceDeferred';
-import {intersection} from '../../../common/utils/utils';
+import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {PlaceCityTile} from '@/server/deferredActions/PlaceCityTile';
+import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
+import {ClaimSpaceDeferred} from '@/server/underworld/ClaimSpaceDeferred';
+import {intersection} from '@/common/utils/utils';
 
 export class UndergroundSettlement extends PreludeCard {
   constructor() {

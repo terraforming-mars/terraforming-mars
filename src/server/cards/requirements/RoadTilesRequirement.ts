@@ -1,8 +1,8 @@
-import {IPlayer} from '../../IPlayer';
-import {TileType} from '../../../common/TileType';
-import {MoonExpansion} from '../../moon/MoonExpansion';
-import {InequalityRequirement} from './InequalityRequirement';
-import {RequirementType} from '../../../common/cards/RequirementType';
+import {IPlayer} from '@/server/IPlayer';
+import {TileType} from '@/common/TileType';
+import {MoonExpansion} from '@/server/moon/MoonExpansion';
+import {InequalityRequirement} from '@/server/cards/requirements/InequalityRequirement';
+import {RequirementType} from '@/common/cards/RequirementType';
 
 /**
  * Evaluate whether the number of road tiles on The Moon is at least (or at most) a given value.

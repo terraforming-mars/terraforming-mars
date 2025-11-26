@@ -1,11 +1,11 @@
-import {IPlayer} from '../../IPlayer';
-import {Tag} from '../../../common/cards/Tag';
-import {CardResource} from '../../../common/CardResource';
-import {ActiveCorporationCard} from '../corporation/CorporationCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {floaterCards} from './floaterCards';
+import {IPlayer} from '@/server/IPlayer';
+import {Tag} from '@/common/cards/Tag';
+import {CardResource} from '@/common/CardResource';
+import {ActiveCorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
+import {floaterCards} from '@/server/cards/venusNext/floaterCards';
 
 export class Celestic extends ActiveCorporationCard {
   constructor() {

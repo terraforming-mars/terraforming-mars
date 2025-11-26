@@ -1,6 +1,6 @@
-import {BaseMilestone} from '../IMilestone';
-import {IPlayer} from '../../IPlayer';
-import {isSpecialTileSpace, Board} from '../../boards/Board';
+import {BaseMilestone} from '@/server/milestones/IMilestone';
+import {IPlayer} from '@/server/IPlayer';
+import {isSpecialTileSpace, Board} from '@/server/boards/Board';
 
 export class Landshaper extends BaseMilestone {
   constructor() {

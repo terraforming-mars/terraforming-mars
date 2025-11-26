@@ -1,13 +1,13 @@
-import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {CanAffordOptions, IPlayer} from '../../IPlayer';
-import {Space} from '../../boards/Space';
-import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
-import {CardName} from '../../../common/cards/CardName';
-import {Board} from '../../boards/Board';
-import {CardRenderer} from '../render/CardRenderer';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {CanAffordOptions, IPlayer} from '@/server/IPlayer';
+import {Space} from '@/server/boards/Space';
+import {PlaceCityTile} from '@/server/deferredActions/PlaceCityTile';
+import {CardName} from '@/common/cards/CardName';
+import {Board} from '@/server/boards/Board';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
 
 export class UrbanizedArea extends Card implements IProjectCard {
   constructor() {

@@ -1,13 +1,13 @@
-import {IProjectCard} from '../IProjectCard';
-import {IActionCard} from '../ICard';
-import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {CardResource} from '../../../common/CardResource';
-import {CardName} from '../../../common/cards/CardName';
-import {Resource} from '../../../common/Resource';
-import {CardRenderer} from '../render/CardRenderer';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {IActionCard} from '@/server/cards/ICard';
+import {Tag} from '@/common/cards/Tag';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {CardResource} from '@/common/CardResource';
+import {CardName} from '@/common/cards/CardName';
+import {Resource} from '@/common/Resource';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
 
 export class SaturnSurfing extends Card implements IActionCard, IProjectCard {
   constructor() {

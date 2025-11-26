@@ -1,12 +1,12 @@
-import {Card} from '../Card';
-import {CardName} from '../../../common/cards/CardName';
-import {CardResource} from '../../../common/CardResource';
-import {SpaceBonus} from '../../../common/boards/SpaceBonus';
-import {TileType} from '../../../common/TileType';
-import {CardType} from '../../../common/cards/CardType';
-import {Tag} from '../../../common/cards/Tag';
-import {CardRenderer} from '../render/CardRenderer';
-import {IProjectCard} from '../IProjectCard';
+import {Card} from '@/server/cards/Card';
+import {CardName} from '@/common/cards/CardName';
+import {CardResource} from '@/common/CardResource';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
+import {TileType} from '@/common/TileType';
+import {CardType} from '@/common/cards/CardType';
+import {Tag} from '@/common/cards/Tag';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {IProjectCard} from '@/server/cards/IProjectCard';
 
 export class OceanSanctuary extends Card implements IProjectCard {
   constructor() {

@@ -1,10 +1,10 @@
-import {AdjacencyBonus} from '../ares/AdjacencyBonus';
-import {Tile} from '../Tile';
-import {PlayerId} from '../../common/Types';
-import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {SpaceType} from '../../common/boards/SpaceType';
-import {SpaceId} from '../../common/Types';
-import {UndergroundResourceToken} from '../../common/underworld/UndergroundResourceToken';
+import {AdjacencyBonus} from '@/server/ares/AdjacencyBonus';
+import {Tile} from '@/server/Tile';
+import {PlayerId} from '@/common/Types';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
+import {SpaceType} from '@/common/boards/SpaceType';
+import {SpaceId} from '@/common/Types';
+import {UndergroundResourceToken} from '@/common/underworld/UndergroundResourceToken';
 
 export interface SerializedBoard {
   spaces: Array<SerializedSpace>;

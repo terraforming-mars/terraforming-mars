@@ -1,9 +1,9 @@
-import {LawSuit} from '../cards/promo/LawSuit';
-import {IPlayer} from '../IPlayer';
-import {Resource} from '../../common/Resource';
-import {CrashSiteCleanup} from '../cards/promo/CrashSiteCleanup';
-import {From, isFromPlayer} from '../logs/From';
-import {BaseStock} from './StockBase';
+import {LawSuit} from '@/server/cards/promo/LawSuit';
+import {IPlayer} from '@/server/IPlayer';
+import {Resource} from '@/common/Resource';
+import {CrashSiteCleanup} from '@/server/cards/promo/CrashSiteCleanup';
+import {From, isFromPlayer} from '@/server/logs/From';
+import {BaseStock} from '@/server/player/StockBase';
 
 export class Stock extends BaseStock {
   public add(

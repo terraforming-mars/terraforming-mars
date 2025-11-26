@@ -1,12 +1,12 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {CardResource} from '../../../common/CardResource';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {Priority} from '../../deferredActions/Priority';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CardResource} from '@/common/CardResource';
+import {AddResourcesToCard} from '@/server/deferredActions/AddResourcesToCard';
+import {Priority} from '@/server/deferredActions/Priority';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class Aurorai extends CorporationCard implements ICorporationCard {
   constructor() {

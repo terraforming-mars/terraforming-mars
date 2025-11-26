@@ -1,12 +1,12 @@
-import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
-import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {IPlayer} from '../../IPlayer';
-import {SellSteel} from '../../moon/SellSteel';
-import {all} from '../Options';
-import {IProjectCard} from '../IProjectCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardType} from '@/common/cards/CardType';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Card} from '@/server/cards/Card';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {IPlayer} from '@/server/IPlayer';
+import {SellSteel} from '@/server/moon/SellSteel';
+import {all} from '@/server/cards/Options';
+import {IProjectCard} from '@/server/cards/IProjectCard';
 
 export class MooncrateConvoysToMars extends Card implements IProjectCard {
   constructor() {

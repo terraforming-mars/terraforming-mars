@@ -1,6 +1,6 @@
-import {IAward} from '../IAward';
-import {IPlayer} from '../../IPlayer';
-import {Board, isSpecialTileSpace} from '../../boards/Board';
+import {IAward} from '@/server/awards/IAward';
+import {IPlayer} from '@/server/IPlayer';
+import {Board, isSpecialTileSpace} from '@/server/boards/Board';
 
 export class Founder implements IAward {
   public readonly name = 'Founder';

@@ -1,10 +1,10 @@
-import {Tag} from '../../../common/cards/Tag';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {CardResource} from '../../../common/CardResource';
-import {IActionCard} from '../ICard';
-import {digit} from '../Options';
-import {ActivePreludeCard} from './ActivePreludeCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CardResource} from '@/common/CardResource';
+import {IActionCard} from '@/server/cards/ICard';
+import {digit} from '@/server/cards/Options';
+import {ActivePreludeCard} from '@/server/cards/prelude2/ActivePreludeCard';
 
 export class AppliedScience extends ActivePreludeCard implements IActionCard {
   constructor() {

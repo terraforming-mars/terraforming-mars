@@ -1,16 +1,16 @@
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {PreludeCard} from '../prelude/PreludeCard';
-import {IProjectCard} from '../IProjectCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardResource} from '../../../common/CardResource';
-import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
-import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {Resource} from '../../../common/Resource';
-import {digit} from '../Options';
-import {CardType} from '../../../common/cards/CardType';
-import {SelectProjectCardToPlay} from '../../inputs/SelectProjectCardToPlay';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardResource} from '@/common/CardResource';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
+import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
+import {Resource} from '@/common/Resource';
+import {digit} from '@/server/cards/Options';
+import {CardType} from '@/common/cards/CardType';
+import {SelectProjectCardToPlay} from '@/server/inputs/SelectProjectCardToPlay';
 
 // TODO(kberg) like #3644, this card may have similar behavior.
 export class ValuableGases extends PreludeCard implements IProjectCard {

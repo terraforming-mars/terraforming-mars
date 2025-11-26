@@ -2,15 +2,15 @@ require('dotenv').config();
 
 import * as http from 'http';
 import * as fs from 'fs';
-import * as responses from '../server/responses';
+import * as responses from '@/server/server/responses';
 
-import {chooseMilestonesAndAwards} from '../ma/MilestoneAwardSelector';
-import {DEFAULT_GAME_OPTIONS, GameOptions} from '../game/GameOptions';
-import {BoardName} from '../../common/boards/BoardName';
-import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
+import {chooseMilestonesAndAwards} from '@/server/ma/MilestoneAwardSelector';
+import {DEFAULT_GAME_OPTIONS, GameOptions} from '@/server/game/GameOptions';
+import {BoardName} from '@/common/boards/BoardName';
+import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 import {MultiSet} from 'mnemonist';
-import {Request} from '../Request';
-import {Response} from '../Response';
+import {Request} from '@/server/Request';
+import {Response} from '@/server/Response';
 
 function processRequest(req: Request, res: Response): void {
   if (req.url === undefined) {

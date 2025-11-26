@@ -1,16 +1,16 @@
 import * as prometheus from 'prom-client';
-import {Database} from './Database';
-import {Game} from '../Game';
-import {IGame} from '../IGame';
-import {PlayerId, GameId, SpectatorId, isGameId, ParticipantId} from '../../common/Types';
-import {IGameLoader} from './IGameLoader';
-import {GameIdLedger} from './IDatabase';
-import {Cache} from './Cache';
+import {Database} from '@/server/database/Database';
+import {Game} from '@/server/Game';
+import {IGame} from '@/server/IGame';
+import {PlayerId, GameId, SpectatorId, isGameId, ParticipantId} from '@/common/Types';
+import {IGameLoader} from '@/server/database/IGameLoader';
+import {GameIdLedger} from '@/server/database/IDatabase';
+import {Cache} from '@/server/database/Cache';
 import {MultiMap} from 'mnemonist';
-import {timeAsync} from '../utils/timer';
-import {durationToMilliseconds} from '../utils/durations';
-import {CacheConfig} from './CacheConfig';
-import {Clock} from '../../common/Timer';
+import {timeAsync} from '@/server/utils/timer';
+import {durationToMilliseconds} from '@/server/utils/durations';
+import {CacheConfig} from '@/server/database/CacheConfig';
+import {Clock} from '@/common/Timer';
 
 const metrics = {
   initialize: new prometheus.Gauge({

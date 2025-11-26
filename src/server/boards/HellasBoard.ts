@@ -1,12 +1,12 @@
-import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {SpaceName} from '../../common/boards/SpaceName';
-import {SpaceCosts} from './Board';
-import {Space} from './Space';
-import {HELLAS_BONUS_OCEAN_COST} from '../../common/constants';
-import {BoardBuilder} from './BoardBuilder';
-import {Random} from '../../common/utils/Random';
-import {GameOptions} from '../game/GameOptions';
-import {MarsBoard} from './MarsBoard';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
+import {SpaceName} from '@/common/boards/SpaceName';
+import {SpaceCosts} from '@/server/boards/Board';
+import {Space} from '@/server/boards/Space';
+import {HELLAS_BONUS_OCEAN_COST} from '@/common/constants';
+import {BoardBuilder} from '@/server/boards/BoardBuilder';
+import {Random} from '@/common/utils/Random';
+import {GameOptions} from '@/server/game/GameOptions';
+import {MarsBoard} from '@/server/boards/MarsBoard';
 
 export class HellasBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): HellasBoard {

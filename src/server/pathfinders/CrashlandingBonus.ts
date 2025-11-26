@@ -1,7 +1,7 @@
-import {IGame} from '../IGame';
-import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {Board} from '../boards/Board';
-import {Space} from '../boards/Space';
+import {IGame} from '@/server/IGame';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
+import {Board} from '@/server/boards/Board';
+import {Space} from '@/server/boards/Space';
 
 // Reward portion of Crashlanding. It's split out to prevent recursive source loading.
 export class CrashlandingBonus {

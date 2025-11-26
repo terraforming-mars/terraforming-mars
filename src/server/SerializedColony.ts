@@ -1,6 +1,6 @@
 
-import {ColonyName} from '../common/colonies/ColonyName';
-import {PlayerId} from '../common/Types';
+import {ColonyName} from '@/common/colonies/ColonyName';
+import {PlayerId} from '@/common/Types';
 
 export type SerializedColony = {
     name: ColonyName;

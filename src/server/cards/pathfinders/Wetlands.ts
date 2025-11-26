@@ -1,16 +1,16 @@
-import {Card} from '../Card';
-import {CardName} from '../../../common/cards/CardName';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {Space} from '../../boards/Space';
-import {CanAffordOptions, IPlayer} from '../../IPlayer';
-import {TileType} from '../../../common/TileType';
-import {CardType} from '../../../common/cards/CardType';
-import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
-import {CardRenderer} from '../render/CardRenderer';
-import {Board} from '../../boards/Board';
-import {Size} from '../../../common/cards/render/Size';
-import {message} from '../../logs/MessageBuilder';
+import {Card} from '@/server/cards/Card';
+import {CardName} from '@/common/cards/CardName';
+import {SelectSpace} from '@/server/inputs/SelectSpace';
+import {Space} from '@/server/boards/Space';
+import {CanAffordOptions, IPlayer} from '@/server/IPlayer';
+import {TileType} from '@/common/TileType';
+import {CardType} from '@/common/cards/CardType';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Board} from '@/server/boards/Board';
+import {Size} from '@/common/cards/render/Size';
+import {message} from '@/server/logs/MessageBuilder';
 
 export class Wetlands extends Card implements IProjectCard {
   constructor() {

@@ -1,9 +1,9 @@
-import {IActionCard} from '../ICard';
-import {Tag} from '../../../common/cards/Tag';
-import {CardType} from '../../../common/cards/CardType';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {ActionCard} from '../ActionCard';
+import {IActionCard} from '@/server/cards/ICard';
+import {Tag} from '@/common/cards/Tag';
+import {CardType} from '@/common/cards/CardType';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {ActionCard} from '@/server/cards/ActionCard';
 
 export class VenusMagnetizer extends ActionCard implements IActionCard {
   constructor() {

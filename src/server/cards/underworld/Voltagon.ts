@@ -1,10 +1,10 @@
-import {Tag} from '../../../common/cards/Tag';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {IPlayer} from '../../IPlayer';
-import {ActiveCorporationCard} from '../corporation/CorporationCard';
-import {Resource} from '../../../common/Resource';
-import {Size} from '../../../common/cards/render/Size';
+import {Tag} from '@/common/cards/Tag';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {IPlayer} from '@/server/IPlayer';
+import {ActiveCorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {Resource} from '@/common/Resource';
+import {Size} from '@/common/cards/render/Size';
 
 export class Voltagon extends ActiveCorporationCard {
   constructor() {

@@ -1,10 +1,10 @@
-import {CardType} from '../../../common/cards/CardType';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
-import {Card} from '../Card';
-import {all} from '../Options';
-import {IProjectCard} from '../IProjectCard';
+import {CardType} from '@/common/cards/CardType';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
+import {Card} from '@/server/cards/Card';
+import {all} from '@/server/cards/Options';
+import {IProjectCard} from '@/server/cards/IProjectCard';
 
 
 export class AerosportTournament extends Card implements IProjectCard {

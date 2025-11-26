@@ -1,13 +1,13 @@
-import {CardType} from '../../../common/cards/CardType';
-import {IProjectCard} from '../IProjectCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {IPlayer} from '../../IPlayer';
-import {Board} from '../../boards/Board';
-import {SelectPlayer} from '../../inputs/SelectPlayer';
-import {Resource} from '../../../common/Resource';
-import {Tag} from '../../../common/cards/Tag';
+import {CardType} from '@/common/cards/CardType';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Card} from '@/server/cards/Card';
+import {IPlayer} from '@/server/IPlayer';
+import {Board} from '@/server/boards/Board';
+import {SelectPlayer} from '@/server/inputs/SelectPlayer';
+import {Resource} from '@/common/Resource';
+import {Tag} from '@/common/cards/Tag';
 
 export class SubnauticPirates extends Card implements IProjectCard {
   constructor() {

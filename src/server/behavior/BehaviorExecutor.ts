@@ -1,8 +1,8 @@
-import {ICard} from '../cards/ICard';
-import {CanAffordOptions, IPlayer} from '../IPlayer';
-import {Behavior} from './Behavior';
-import {TRSource} from '../../common/cards/TRSource';
-import {ICounter} from './Counter';
+import {ICard} from '@/server/cards/ICard';
+import {CanAffordOptions, IPlayer} from '@/server/IPlayer';
+import {Behavior} from '@/server/behavior/Behavior';
+import {TRSource} from '@/common/cards/TRSource';
+import {ICounter} from '@/server/behavior/Counter';
 
 export interface BehaviorExecutor {
   canExecute(behavior: Behavior, player: IPlayer, card: ICard, canAffordOptions?: CanAffordOptions): boolean;

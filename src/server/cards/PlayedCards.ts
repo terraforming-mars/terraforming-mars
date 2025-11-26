@@ -1,14 +1,14 @@
-import {CardName} from '../../common/cards/CardName';
-import {ICard} from './ICard';
-import {inplaceRemove} from '../../common/utils/utils';
-import {deserializeCard, serializeCard} from './cardSerialization';
-import {SerializedCard} from '../SerializedCard';
-import {CardType} from '../../common/cards/CardType';
-import {Tag} from '../../common/cards/Tag';
-import {ICorporationCard, isICorporationCard} from './corporation/ICorporationCard';
-import {IPreludeCard} from './prelude/IPreludeCard';
-import {IProjectCard, isIProjectCard} from './IProjectCard';
-import {ICeoCard, isCeoCard} from './ceos/ICeoCard';
+import {CardName} from '@/common/cards/CardName';
+import {ICard} from '@/server/cards/ICard';
+import {inplaceRemove} from '@/common/utils/utils';
+import {deserializeCard, serializeCard} from '@/server/cards/cardSerialization';
+import {SerializedCard} from '@/server/SerializedCard';
+import {CardType} from '@/common/cards/CardType';
+import {Tag} from '@/common/cards/Tag';
+import {ICorporationCard, isICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {IPreludeCard} from '@/server/cards/prelude/IPreludeCard';
+import {IProjectCard, isIProjectCard} from '@/server/cards/IProjectCard';
+import {ICeoCard, isCeoCard} from '@/server/cards/ceos/ICeoCard';
 
 const NO_TAGS = {
   [Tag.BUILDING]: 0,

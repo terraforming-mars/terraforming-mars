@@ -1,12 +1,12 @@
-import {CardName} from '../../../common/cards/CardName';
-import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
-import {CardRenderer} from '../render/CardRenderer';
-import {CeoCard} from './CeoCard';
-import {Space} from '../../boards/Space';
-import {Phase} from '../../../common/Phase';
-import {SpaceType} from '../../../common/boards/SpaceType';
-import {BoardType} from '../../boards/BoardType';
+import {CardName} from '@/common/cards/CardName';
+import {IPlayer} from '@/server/IPlayer';
+import {PlayerInput} from '@/server/PlayerInput';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CeoCard} from '@/server/cards/ceos/CeoCard';
+import {Space} from '@/server/boards/Space';
+import {Phase} from '@/common/Phase';
+import {SpaceType} from '@/common/boards/SpaceType';
+import {BoardType} from '@/server/boards/BoardType';
 
 export class Ingrid extends CeoCard {
   constructor() {

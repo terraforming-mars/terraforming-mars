@@ -1,14 +1,14 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {ICard} from '../ICard';
-import {Tag} from '../../../common/cards/Tag';
-import {digit} from '../Options';
-import {SelectCard} from '../../inputs/SelectCard';
-import {CardResource} from '../../../common/CardResource';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {ICard} from '@/server/cards/ICard';
+import {Tag} from '@/common/cards/Tag';
+import {digit} from '@/server/cards/Options';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {CardResource} from '@/common/CardResource';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class Spire extends CorporationCard implements ICorporationCard {
   constructor() {

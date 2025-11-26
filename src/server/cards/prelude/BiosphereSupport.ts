@@ -1,7 +1,7 @@
-import {Tag} from '../../../common/cards/Tag';
-import {PreludeCard} from './PreludeCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '@/common/cards/Tag';
+import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
 
 export class BiosphereSupport extends PreludeCard {
   constructor() {

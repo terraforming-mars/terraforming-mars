@@ -1,12 +1,12 @@
-import {CardName} from '../../../common/cards/CardName';
-import {PlayerInput} from '../../PlayerInput';
-import {IPlayer} from '../../IPlayer';
-import {CardRenderer} from '../render/CardRenderer';
-import {CeoCard} from './CeoCard';
-import {all} from '../Options';
-import {Tag} from '../../../common/cards/Tag';
-import {Resource} from '../../../common/Resource';
-import {sum} from '../../../common/utils/utils';
+import {CardName} from '@/common/cards/CardName';
+import {PlayerInput} from '@/server/PlayerInput';
+import {IPlayer} from '@/server/IPlayer';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CeoCard} from '@/server/cards/ceos/CeoCard';
+import {all} from '@/server/cards/Options';
+import {Tag} from '@/common/cards/Tag';
+import {Resource} from '@/common/Resource';
+import {sum} from '@/common/utils/utils';
 
 export class Xu extends CeoCard {
   constructor() {

@@ -1,10 +1,10 @@
-import {GameIdLedger, IDatabase} from './IDatabase';
-import {IGame, Score} from '../IGame';
-import {GameOptions} from '../game/GameOptions';
-import {GameId, ParticipantId} from '../../common/Types';
-import {SerializedGame} from '../SerializedGame';
-import {Session} from '../auth/Session';
-import {toID} from '../../common/utils/utils';
+import {GameIdLedger, IDatabase} from '@/server/database/IDatabase';
+import {IGame, Score} from '@/server/IGame';
+import {GameOptions} from '@/server/game/GameOptions';
+import {GameId, ParticipantId} from '@/common/Types';
+import {SerializedGame} from '@/server/SerializedGame';
+import {Session} from '@/server/auth/Session';
+import {toID} from '@/common/utils/utils';
 
 let storage: Storage;
 

@@ -1,12 +1,12 @@
-import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
-import {IGlobalEvent} from './IGlobalEvent';
-import {IGame} from '../../IGame';
-import {SerializedGlobalEventDealer} from './SerializedGlobalEventDealer';
-import {GlobalEventManifest, ModuleManifest} from '../../cards/ModuleManifest';
-import {isCompatibleWith} from '../../cards/CardFactorySpec';
-import {inplaceShuffle} from '../../utils/shuffle';
-import {GameModule} from '../../../common/cards/GameModule';
-import {toName} from '../../../common/utils/utils';
+import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
+import {IGlobalEvent} from '@/server/turmoil/globalEvents/IGlobalEvent';
+import {IGame} from '@/server/IGame';
+import {SerializedGlobalEventDealer} from '@/server/turmoil/globalEvents/SerializedGlobalEventDealer';
+import {GlobalEventManifest, ModuleManifest} from '@/server/cards/ModuleManifest';
+import {isCompatibleWith} from '@/server/cards/CardFactorySpec';
+import {inplaceShuffle} from '@/server/utils/shuffle';
+import {GameModule} from '@/common/cards/GameModule';
+import {toName} from '@/common/utils/utils';
 
 // When renaming, add the rename here and add a TODO (like the example below)
 // And remember to add a test in GlobalEventDealer.spec.ts

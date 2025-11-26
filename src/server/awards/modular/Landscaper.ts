@@ -1,8 +1,8 @@
-import {IAward} from '../IAward';
-import {IPlayer} from '../../IPlayer';
-import {Space} from '../../boards/Space';
-import {Board} from '../../boards/Board';
-import {MoonExpansion} from '../../moon/MoonExpansion';
+import {IAward} from '@/server/awards/IAward';
+import {IPlayer} from '@/server/IPlayer';
+import {Space} from '@/server/boards/Space';
+import {Board} from '@/server/boards/Board';
+import {MoonExpansion} from '@/server/moon/MoonExpansion';
 
 export class Landscaper implements IAward {
   public readonly name = 'Landscaper';

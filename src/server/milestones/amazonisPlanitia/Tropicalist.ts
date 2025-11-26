@@ -1,6 +1,6 @@
-import {IPlayer} from '../../IPlayer';
-import {BaseMilestone} from '../IMilestone';
-import {Board} from '../../boards/Board';
+import {IPlayer} from '@/server/IPlayer';
+import {BaseMilestone} from '@/server/milestones/IMilestone';
+import {Board} from '@/server/boards/Board';
 
 export class Tropicalist extends BaseMilestone {
   constructor() {

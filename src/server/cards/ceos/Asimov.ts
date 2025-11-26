@@ -1,19 +1,19 @@
-import {CardName} from '../../../common/cards/CardName';
-import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
-import {CardRenderer} from '../render/CardRenderer';
-import {CeoCard} from './CeoCard';
-import {inplaceShuffle} from '../../utils/shuffle';
-import {UnseededRandom} from '../../../common/utils/Random';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {Size} from '../../../common/cards/render/Size';
-import {awardManifest} from '../../awards/Awards';
-import {AwardScorer} from '../../awards/AwardScorer';
-import {message} from '../../logs/MessageBuilder';
-import {AwardName, awardNames} from '../../../common/ma/AwardName';
-import {inplaceRemove} from '../../../common/utils/utils';
-import {isCompatible} from '../../ma/MAManifest';
+import {CardName} from '@/common/cards/CardName';
+import {IPlayer} from '@/server/IPlayer';
+import {PlayerInput} from '@/server/PlayerInput';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CeoCard} from '@/server/cards/ceos/CeoCard';
+import {inplaceShuffle} from '@/server/utils/shuffle';
+import {UnseededRandom} from '@/common/utils/Random';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {Size} from '@/common/cards/render/Size';
+import {awardManifest} from '@/server/awards/Awards';
+import {AwardScorer} from '@/server/awards/AwardScorer';
+import {message} from '@/server/logs/MessageBuilder';
+import {AwardName, awardNames} from '@/common/ma/AwardName';
+import {inplaceRemove} from '@/common/utils/utils';
+import {isCompatible} from '@/server/ma/MAManifest';
 
 export class Asimov extends CeoCard {
   constructor() {

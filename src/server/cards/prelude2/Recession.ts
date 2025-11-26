@@ -1,10 +1,10 @@
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {PreludeCard} from '../prelude/PreludeCard';
-import {IPlayer} from '../../IPlayer';
-import {Resource} from '../../../common/Resource';
-import {all} from '../Options';
-import {message} from '../../logs/MessageBuilder';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
+import {IPlayer} from '@/server/IPlayer';
+import {Resource} from '@/common/Resource';
+import {all} from '@/server/cards/Options';
+import {message} from '@/server/logs/MessageBuilder';
 
 
 export class Recession extends PreludeCard {

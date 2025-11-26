@@ -1,6 +1,6 @@
-import {IAward} from '../awards/IAward';
-import {Tag} from '../../common/cards/Tag';
-import {IPlayer} from '../IPlayer';
+import {IAward} from '@/server/awards/IAward';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
 
 export class FullMoon implements IAward {
   public readonly name = 'Full Moon';

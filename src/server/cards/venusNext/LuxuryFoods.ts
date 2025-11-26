@@ -1,9 +1,9 @@
-import {Tag} from '../../../common/cards/Tag';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {Card} from '../Card';
-import {IProjectCard} from '../IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {Card} from '@/server/cards/Card';
+import {IProjectCard} from '@/server/cards/IProjectCard';
 
 export class LuxuryFoods extends Card implements IProjectCard {
   constructor() {

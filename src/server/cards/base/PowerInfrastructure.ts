@@ -1,13 +1,13 @@
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {IActionCard} from '../ICard';
-import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {SelectAmount} from '../../inputs/SelectAmount';
-import {CardName} from '../../../common/cards/CardName';
-import {Resource} from '../../../common/Resource';
-import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {IActionCard} from '@/server/cards/ICard';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {SelectAmount} from '@/server/inputs/SelectAmount';
+import {CardName} from '@/common/cards/CardName';
+import {Resource} from '@/common/Resource';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
 
 export class PowerInfrastructure extends Card implements IActionCard, IProjectCard {
   constructor() {

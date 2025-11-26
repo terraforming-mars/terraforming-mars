@@ -1,9 +1,9 @@
-import {Message} from '../../common/logs/Message';
-import {Units} from '../../common/Units';
-import {BasePlayerInput} from '../PlayerInput';
-import {SelectResourceModel} from '../../common/models/PlayerInputModel';
-import {InputResponse, isSelectResourceResponse} from '../../common/inputs/InputResponse';
-import {InputError} from './InputError';
+import {Message} from '@/common/logs/Message';
+import {Units} from '@/common/Units';
+import {BasePlayerInput} from '@/server/PlayerInput';
+import {SelectResourceModel} from '@/common/models/PlayerInputModel';
+import {InputResponse, isSelectResourceResponse} from '@/common/inputs/InputResponse';
+import {InputError} from '@/server/inputs/InputError';
 
 export class SelectResource extends BasePlayerInput<keyof Units> {
   public selected: keyof Units = 'megacredits';

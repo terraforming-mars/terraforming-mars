@@ -1,10 +1,10 @@
-import {inplaceRemove} from '../../common/utils/utils';
-import {IPlayer} from '../IPlayer';
-import {Space} from '../boards/Space';
-import {Priority} from '../deferredActions/Priority';
-import {RunNTimes} from '../deferredActions/RunNTimes';
-import {SelectSpace} from '../inputs/SelectSpace';
-import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
+import {inplaceRemove} from '@/common/utils/utils';
+import {IPlayer} from '@/server/IPlayer';
+import {Space} from '@/server/boards/Space';
+import {Priority} from '@/server/deferredActions/Priority';
+import {RunNTimes} from '@/server/deferredActions/RunNTimes';
+import {SelectSpace} from '@/server/inputs/SelectSpace';
+import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
 
 export class ExcavateSpacesDeferred extends RunNTimes<void> {
   private spaces: Array<Space> | undefined;

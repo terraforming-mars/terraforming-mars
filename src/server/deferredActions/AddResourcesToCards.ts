@@ -1,10 +1,10 @@
-import {DeferredAction} from './DeferredAction';
-import {Priority} from './Priority';
-import {IPlayer} from '../IPlayer';
-import {CardResource} from '../../common/CardResource';
-import {CardName} from '../../common/cards/CardName';
-import {SelectAmount} from '../inputs/SelectAmount';
-import {AndOptions} from '../inputs/AndOptions';
+import {DeferredAction} from '@/server/deferredActions/DeferredAction';
+import {Priority} from '@/server/deferredActions/Priority';
+import {IPlayer} from '@/server/IPlayer';
+import {CardResource} from '@/common/CardResource';
+import {CardName} from '@/common/cards/CardName';
+import {SelectAmount} from '@/server/inputs/SelectAmount';
+import {AndOptions} from '@/server/inputs/AndOptions';
 
 export class AddResourcesToCards extends DeferredAction {
   constructor(

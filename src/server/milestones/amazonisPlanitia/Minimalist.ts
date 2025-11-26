@@ -1,5 +1,5 @@
-import {IMilestone} from '../IMilestone';
-import {IPlayer} from '../../IPlayer';
+import {IMilestone} from '@/server/milestones/IMilestone';
+import {IPlayer} from '@/server/IPlayer';
 
 export class Minimalist implements IMilestone {
   public readonly name = 'Minimalist';

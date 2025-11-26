@@ -1,12 +1,12 @@
-import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {StandardProjectCard} from '../StandardProjectCard';
-import {MoonExpansion} from '../../moon/MoonExpansion';
-import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
-import {Resource} from '../../../common/Resource';
-import {TileType} from '../../../common/TileType';
-import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {StandardProjectCard} from '@/server/cards/StandardProjectCard';
+import {MoonExpansion} from '@/server/moon/MoonExpansion';
+import {PlaceMoonMineTile} from '@/server/moon/PlaceMoonMineTile';
+import {Resource} from '@/common/Resource';
+import {TileType} from '@/common/TileType';
+import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
 
 export class MoonMineStandardProject extends StandardProjectCard {
   constructor(properties = {

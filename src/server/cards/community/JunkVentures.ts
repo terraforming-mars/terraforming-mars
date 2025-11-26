@@ -1,10 +1,10 @@
-import {CardName} from '../../../common/cards/CardName';
-import {Size} from '../../../common/cards/render/Size';
-import {CorporationCard} from '../corporation/CorporationCard';
-import {CardRenderer} from '../render/CardRenderer';
-import {ChooseCards} from '../../deferredActions/ChooseCards';
-import {IPlayer} from '../../IPlayer';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CardName} from '@/common/cards/CardName';
+import {Size} from '@/common/cards/render/Size';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {ChooseCards} from '@/server/deferredActions/ChooseCards';
+import {IPlayer} from '@/server/IPlayer';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class JunkVentures extends CorporationCard implements ICorporationCard {
   constructor() {

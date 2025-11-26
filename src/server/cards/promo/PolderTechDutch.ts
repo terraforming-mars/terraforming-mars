@@ -1,16 +1,16 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Space} from '../../boards/Space';
-import {TileType} from '../../../common/TileType';
-import {Resource} from '../../../common/Resource';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
-import {intersection} from '../../../common/utils/utils';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {Size} from '../../../common/cards/render/Size';
-import {Tag} from '../../../common/cards/Tag';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {Space} from '@/server/boards/Space';
+import {TileType} from '@/common/TileType';
+import {Resource} from '@/common/Resource';
+import {PlaceOceanTile} from '@/server/deferredActions/PlaceOceanTile';
+import {intersection} from '@/common/utils/utils';
+import {SelectSpace} from '@/server/inputs/SelectSpace';
+import {Size} from '@/common/cards/render/Size';
+import {Tag} from '@/common/cards/Tag';
 
 // TODO(kberg): PolderTech is not yet compatible with Ares or Red City.
 export class PolderTechDutch extends CorporationCard implements ICorporationCard {

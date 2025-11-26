@@ -1,14 +1,14 @@
-import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {StandardProjectCard} from '../StandardProjectCard';
-import {Turmoil} from '../../turmoil/Turmoil';
-import {SelectParty} from '../../inputs/SelectParty';
-import {AndOptions} from '../../inputs/AndOptions';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {SelectAmount} from '../../inputs/SelectAmount';
-import {all} from '../Options';
-import {toName} from '../../../common/utils/utils';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {StandardProjectCard} from '@/server/cards/StandardProjectCard';
+import {Turmoil} from '@/server/turmoil/Turmoil';
+import {SelectParty} from '@/server/inputs/SelectParty';
+import {AndOptions} from '@/server/inputs/AndOptions';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {SelectAmount} from '@/server/inputs/SelectAmount';
+import {all} from '@/server/cards/Options';
+import {toName} from '@/common/utils/utils';
 
 export class CollusionStandardProject extends StandardProjectCard {
   constructor(properties = {

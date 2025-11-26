@@ -1,6 +1,6 @@
-import {BaseMilestone} from './IMilestone';
-import {IPlayer} from '../IPlayer';
-import {Board} from '../boards/Board';
+import {BaseMilestone} from '@/server/milestones/IMilestone';
+import {IPlayer} from '@/server/IPlayer';
+import {Board} from '@/server/boards/Board';
 import {MilestoneName} from '@/common/ma/MilestoneName';
 
 export class Irrigator extends BaseMilestone {

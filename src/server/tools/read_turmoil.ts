@@ -3,10 +3,10 @@
 require('dotenv').config();
 
 import {MultiSet} from 'mnemonist';
-import {isGameId} from '../../common/Types';
-import {Database} from '../database/Database';
-import {IDatabase} from '../database/IDatabase';
-import {SerializedDelegate} from '../turmoil/SerializedTurmoil';
+import {isGameId} from '@/common/Types';
+import {Database} from '@/server/database/Database';
+import {IDatabase} from '@/server/database/IDatabase';
+import {SerializedDelegate} from '@/server/turmoil/SerializedTurmoil';
 
 const args = process.argv.slice(2);
 const [gameId] = args;

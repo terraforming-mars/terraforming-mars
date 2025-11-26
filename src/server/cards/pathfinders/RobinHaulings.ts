@@ -1,16 +1,16 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {CardResource} from '../../../common/CardResource';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {digit} from '../Options';
-import {ICard} from '../ICard';
-import {MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '../../../common/constants';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CardResource} from '@/common/CardResource';
+import {AddResourcesToCard} from '@/server/deferredActions/AddResourcesToCard';
+import {digit} from '@/server/cards/Options';
+import {ICard} from '@/server/cards/ICard';
+import {MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '@/common/constants';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class RobinHaulings extends CorporationCard implements ICorporationCard {
   constructor() {

@@ -1,12 +1,12 @@
-import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
-import {ActionCard} from '../ActionCard';
-import {CardType} from '../../../common/cards/CardType';
-import {Resource} from '../../../common/Resource';
-import {CardResource} from '../../../common/CardResource';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {all} from '../Options';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {ActionCard} from '@/server/cards/ActionCard';
+import {CardType} from '@/common/cards/CardType';
+import {Resource} from '@/common/Resource';
+import {CardResource} from '@/common/CardResource';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {all} from '@/server/cards/Options';
 
 export class Birds extends ActionCard implements IProjectCard {
   constructor() {

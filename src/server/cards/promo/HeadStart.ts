@@ -1,10 +1,10 @@
-import {PreludeCard} from '../prelude/PreludeCard';
-import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {Resource} from '../../../common/Resource';
-import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
-import {CardType} from '../../../common/cards/CardType';
+import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {Resource} from '@/common/Resource';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
+import {CardType} from '@/common/cards/CardType';
 
 export class HeadStart extends PreludeCard {
   constructor() {

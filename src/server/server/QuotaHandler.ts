@@ -1,4 +1,4 @@
-import {Context} from '../routes/IHandler';
+import {Context} from '@/server/routes/IHandler';
 
 export type QuotaConfig = {
   limit: number;

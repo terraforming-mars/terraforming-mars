@@ -1,8 +1,8 @@
-import {Tag} from '../../../common/cards/Tag';
-import {CorporationCard} from './CorporationCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {ICorporationCard} from './ICorporationCard';
+import {Tag} from '@/common/cards/Tag';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class Teractor extends CorporationCard implements ICorporationCard {
   constructor() {

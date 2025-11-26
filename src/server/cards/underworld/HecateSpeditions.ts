@@ -1,17 +1,17 @@
-import {Tag} from '../../../common/cards/Tag';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {IPlayer} from '../../IPlayer';
-import {CorporationCard} from '../corporation/CorporationCard';
-import {Size} from '../../../common/cards/render/Size';
-import {ICard} from '../ICard';
-import {isPlanetaryTag} from '../../pathfinders/PathfindersData';
-import {IColonyTrader} from '../../colonies/IColonyTrader';
-import {message} from '../../logs/MessageBuilder';
-import {IColony} from '../../colonies/IColony';
-import {CardResource} from '../../../common/CardResource';
-import {digit} from '../Options';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {IPlayer} from '@/server/IPlayer';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {Size} from '@/common/cards/render/Size';
+import {ICard} from '@/server/cards/ICard';
+import {isPlanetaryTag} from '@/server/pathfinders/PathfindersData';
+import {IColonyTrader} from '@/server/colonies/IColonyTrader';
+import {message} from '@/server/logs/MessageBuilder';
+import {IColony} from '@/server/colonies/IColony';
+import {CardResource} from '@/common/CardResource';
+import {digit} from '@/server/cards/Options';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class HecateSpeditions extends CorporationCard implements ICorporationCard {
   constructor() {

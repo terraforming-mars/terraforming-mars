@@ -1,8 +1,8 @@
-import * as responses from '../server/responses';
-import {IHandler, Context} from './IHandler';
-import {Request} from '../Request';
-import {Response} from '../Response';
-import {DiscordId} from '../server/auth/discord';
+import * as responses from '@/server/server/responses';
+import {IHandler, Context} from '@/server/routes/IHandler';
+import {Request} from '@/server/Request';
+import {Response} from '@/server/Response';
+import {DiscordId} from '@/server/server/auth/discord';
 
 export type Options = {
   validateServerId: boolean;

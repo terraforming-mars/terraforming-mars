@@ -1,16 +1,16 @@
-import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {SelectResource} from '../../inputs/SelectResource';
-import {CardRenderer} from '../render/CardRenderer';
-import {all} from '../Options';
-import {Units} from '../../../common/Units';
-import {message} from '../../logs/MessageBuilder';
-import {Tag} from '../../../common/cards/Tag';
-import {IActionCard} from '../ICard';
-import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {SelectResource} from '@/server/inputs/SelectResource';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {all} from '@/server/cards/Options';
+import {Units} from '@/common/Units';
+import {message} from '@/server/logs/MessageBuilder';
+import {Tag} from '@/common/cards/Tag';
+import {IActionCard} from '@/server/cards/ICard';
+import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
 
 export class Monopoly extends Card implements IProjectCard, IActionCard {
   constructor() {

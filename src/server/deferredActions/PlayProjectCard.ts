@@ -1,8 +1,8 @@
-import {IProjectCard} from '../cards/IProjectCard';
-import {SelectProjectCardToPlay} from '../inputs/SelectProjectCardToPlay';
-import {IPlayer} from '../IPlayer';
-import {DeferredAction} from './DeferredAction';
-import {Priority} from './Priority';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {SelectProjectCardToPlay} from '@/server/inputs/SelectProjectCardToPlay';
+import {IPlayer} from '@/server/IPlayer';
+import {DeferredAction} from '@/server/deferredActions/DeferredAction';
+import {Priority} from '@/server/deferredActions/Priority';
 
 export class PlayProjectCard extends DeferredAction<IProjectCard | undefined> {
   constructor(player: IPlayer) {

@@ -1,10 +1,10 @@
-import {Message} from '../../common/logs/Message';
-import {Units} from '../../common/Units';
-import {BasePlayerInput} from '../PlayerInput';
-import {SelectResourcesModel} from '../../common/models/PlayerInputModel';
-import {InputResponse, isSelectResourcesResponse} from '../../common/inputs/InputResponse';
-import {InputError} from './InputError';
-import {sum} from '../../common/utils/utils';
+import {Message} from '@/common/logs/Message';
+import {Units} from '@/common/Units';
+import {BasePlayerInput} from '@/server/PlayerInput';
+import {SelectResourcesModel} from '@/common/models/PlayerInputModel';
+import {InputResponse, isSelectResourcesResponse} from '@/common/inputs/InputResponse';
+import {InputError} from '@/server/inputs/InputError';
+import {sum} from '@/common/utils/utils';
 
 export class SelectResources extends BasePlayerInput<Units> {
   constructor(

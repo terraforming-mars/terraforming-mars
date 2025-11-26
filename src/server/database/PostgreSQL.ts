@@ -1,13 +1,13 @@
 import type * as pg from 'pg';
-import {IDatabase} from './IDatabase';
-import {IGame, Score} from '../IGame';
-import {GameOptions} from '../game/GameOptions';
-import {GameId, ParticipantId, isGameId, safeCast} from '../../common/Types';
-import {SerializedGame} from '../SerializedGame';
-import {daysAgoToSeconds, stringToNumber} from './utils';
-import {GameIdLedger} from './IDatabase';
-import {Session, SessionId} from '../auth/Session';
-import {toID} from '../../common/utils/utils';
+import {IDatabase} from '@/server/database/IDatabase';
+import {IGame, Score} from '@/server/IGame';
+import {GameOptions} from '@/server/game/GameOptions';
+import {GameId, ParticipantId, isGameId, safeCast} from '@/common/Types';
+import {SerializedGame} from '@/server/SerializedGame';
+import {daysAgoToSeconds, stringToNumber} from '@/server/database/utils';
+import {GameIdLedger} from '@/server/database/IDatabase';
+import {Session, SessionId} from '@/server/auth/Session';
+import {toID} from '@/common/utils/utils';
 
 type StoredSerializedGame = Omit<SerializedGame, 'gameOptions' | 'gameLog'> & {logLength: number};
 

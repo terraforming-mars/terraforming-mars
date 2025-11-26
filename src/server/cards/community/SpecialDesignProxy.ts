@@ -1,6 +1,6 @@
-import {CardName} from '../../../common/cards/CardName';
-import {IPlayer} from '../../IPlayer';
-import {ProxyCard} from '../ProxyCard';
+import {CardName} from '@/common/cards/CardName';
+import {IPlayer} from '@/server/IPlayer';
+import {ProxyCard} from '@/server/cards/ProxyCard';
 
 /**
  * A special use card that stands in when Playwrights reactivates Special Design.

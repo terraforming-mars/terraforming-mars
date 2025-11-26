@@ -1,17 +1,17 @@
-import {IProjectCard} from '../IProjectCard';
-import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {all, digit} from '../Options';
-import {Tag} from '../../../common/cards/Tag';
-import {Size} from '../../../common/cards/render/Size';
-import {Space} from '../../boards/Space';
-import {Board} from '../../boards/Board';
-import {CardResource} from '../../../common/CardResource';
-import {ICard} from '../ICard';
-import {Resource} from '../../../common/Resource';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {IPlayer} from '@/server/IPlayer';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {all, digit} from '@/server/cards/Options';
+import {Tag} from '@/common/cards/Tag';
+import {Size} from '@/common/cards/render/Size';
+import {Space} from '@/server/boards/Space';
+import {Board} from '@/server/boards/Board';
+import {CardResource} from '@/common/CardResource';
+import {ICard} from '@/server/cards/ICard';
+import {Resource} from '@/common/Resource';
 
 export class BotanicalExperience extends Card implements IProjectCard {
   constructor() {

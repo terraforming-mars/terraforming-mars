@@ -1,6 +1,6 @@
-import {Tag} from '../../../common/cards/Tag';
-import {CardName} from '../../../common/cards/CardName';
-import {ProxyCard} from '../ProxyCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardName} from '@/common/cards/CardName';
+import {ProxyCard} from '@/server/cards/ProxyCard';
 
 export class ScienceTagCard extends ProxyCard {
   constructor() {

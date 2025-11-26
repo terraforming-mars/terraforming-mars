@@ -1,12 +1,12 @@
-import {CardName} from '../../../common/cards/CardName';
-import {IPlayer} from '../../IPlayer';
-import {CardType} from '../../../common/cards/CardType';
-import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
-import {CardRenderer} from '../render/CardRenderer';
-import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Resource} from '../../../common/Resource';
-import {Card} from '../Card';
+import {CardName} from '@/common/cards/CardName';
+import {IPlayer} from '@/server/IPlayer';
+import {CardType} from '@/common/cards/CardType';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {MoonExpansion} from '@/server/moon/MoonExpansion';
+import {Resource} from '@/common/Resource';
+import {Card} from '@/server/cards/Card';
 
 export class DarksideMiningSyndicate extends Card implements IProjectCard {
   constructor() {

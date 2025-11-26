@@ -1,12 +1,12 @@
-import {IActionCard} from '../ICard';
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {CorporationCard} from '../corporation/CorporationCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Resource} from '../../../common/Resource';
-import {Turmoil} from '../../turmoil/Turmoil';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {IActionCard} from '@/server/cards/ICard';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Resource} from '@/common/Resource';
+import {Turmoil} from '@/server/turmoil/Turmoil';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class SeptumTribus extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {

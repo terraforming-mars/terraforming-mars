@@ -1,9 +1,9 @@
-import {IProjectCard} from '../IProjectCard';
-import {CardType} from '../../../common/cards/CardType';
-import {Card} from '../Card';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {all} from '../Options';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardType} from '@/common/cards/CardType';
+import {Card} from '@/server/cards/Card';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {all} from '@/server/cards/Options';
 
 export class MiningExpedition extends Card implements IProjectCard {
   constructor() {

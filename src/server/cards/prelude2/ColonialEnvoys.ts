@@ -1,9 +1,9 @@
-import {IProjectCard} from '../IProjectCard';
-import {CardType} from '../../../common/cards/CardType';
-import {CardName} from '../../../common/cards/CardName';
-import {Card} from '../Card';
-import {CardRenderer} from '../render/CardRenderer';
-import {PartyName} from '../../../common/turmoil/PartyName';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardType} from '@/common/cards/CardType';
+import {CardName} from '@/common/cards/CardName';
+import {Card} from '@/server/cards/Card';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {PartyName} from '@/common/turmoil/PartyName';
 
 export class ColonialEnvoys extends Card implements IProjectCard {
   constructor() {

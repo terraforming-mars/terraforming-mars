@@ -20,6 +20,7 @@
 import Vue from 'vue';
 import * as constants from '@/common/constants';
 import AppButton from '@/client/components/common/AppButton.vue';
+import {LoadGameFormModel} from '@/common/models/LoadGameFormModel';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {vueRoot} from '@/client/components/vueRoot';
 import {GameId} from '@/common/Types';

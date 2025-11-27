@@ -50,7 +50,7 @@ let documentTitleTimer: number | undefined;
 
 type DataModel = {
   waitingForTimeout: typeof raw_settings.waitingForTimeout,
-  playersWaitingFor: Array<Color>
+  playersWaitingFor: Array<Color>,
   suspend: boolean,
   savedPlayerView: PlayerViewModel | undefined;
 }
@@ -100,6 +100,7 @@ export default Vue.extend({
       root.isServerSideRequestInProgress = true;
 
       const url = paths.PLAYER_INPUT + '?id=' + this.playerView.id;
+      let status: number = statusCode.internalServerError;
 
       fetch(url, {
         method: 'POST',
@@ -110,21 +111,24 @@ export default Vue.extend({
         }),
       })
         .then((resp) => {
+          status = resp.status;
           if (!resp.ok) {
             throw new Error(`Error getting game data: ${resp.statusText}`);
           }
           return resp.json();
         })
         .then((response) => ({
-          status: resp.status,
+          status: status,
           responseType: 'json',
           response,
+          err: null,
         }))
         .catch((err) => ({
-          status: resp.status,
+          status: status,
+          responseType: 'err',
+          response: null,
           err,
-        })),
-        )
+        }))
         .then((xhr) => {
           this.loadPlayerViewResponse(xhr);
           root.isServerSideRequestInProgress = false;
@@ -143,23 +147,27 @@ export default Vue.extend({
 
       root.isServerSideRequestInProgress = true;
       const url = paths.RESET + '?id=' + this.playerView.id;
+      let status: number = statusCode.internalServerError;
       fetch(url)
         .then((resp) => {
+          status = resp.status;
           if (!resp.ok) {
             throw new Error(`Error getting game data: ${resp.statusText}`);
           }
           return resp.json();
         })
         .then((response) => ({
-          status: resp.status,
+          status: status,
           responseType: 'json',
           response,
+          err: null,
         }))
         .catch((err) => ({
-          status: resp.status,
+          status: status,
+          responseType: 'err',
+          response: null,
           err,
-        })),
-        )
+        }))
         .then((xhr) => {
           this.loadPlayerViewResponse(xhr);
         })
@@ -168,7 +176,7 @@ export default Vue.extend({
           root.isServerSideRequestInProgress = false;
         });
     },
-    loadPlayerViewResponse(xhr: {status:number, response:any, responseType:string}|{status:number, err:string}) {
+    loadPlayerViewResponse(xhr: {status:number, response:any, responseType:string, err:string|null}) {
       const root = vueRoot(this);
       const showAlert = vueRoot(this).showAlert;
       if (xhr.status === statusCode.ok) {
@@ -316,4 +324,3 @@ export default Vue.extend({
 });
 
 </script>
-

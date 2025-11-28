@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div data-ref="waiting-for-ref">
   <template v-if="waitingfor === undefined">
     {{ $t('Not your turn to take any actions') }}
     <template v-if="playersWaitingFor.length > 0">
@@ -52,6 +52,11 @@ type DataModel = {
   playersWaitingFor: Array<Color>
   suspend: boolean,
   savedPlayerView: PlayerViewModel | undefined;
+  /**
+   * The size of this element before it's mounted. Compared after it is mounted,
+   * without which the page jars suddenly when the WaitingFor appears
+   */
+  beforeMountSize: number | null;
 }
 
 const CANNOT_CONTACT_SERVER = 'Unable to reach the server. It may be restarting or down for maintenance.';
@@ -78,6 +83,7 @@ export default Vue.extend({
       playersWaitingFor: [],
       suspend: false,
       savedPlayerView: undefined,
+      beforeMountSize: null,
     };
   },
   methods: {
@@ -246,12 +252,41 @@ export default Vue.extend({
     showRefresh(): boolean {
       return this.suspend === true && this.savedPlayerView !== undefined;
     },
+    getRef(): HTMLElement | null {
+      return document.querySelector('[data-ref="waiting-for-ref"]') as HTMLElement | null;
+    },
+    isAboveViewportBottom(element: HTMLElement): boolean {
+      const rect = element.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      return rect.top >= 0;
+    },
+    innerHeight(element: HTMLElement): number {
+      return element.getBoundingClientRect().height;
+    },
+  },
+  beforeMount() {
+    const element = this.getRef();
+    if (element === null) {
+      this.beforeMountSize = null;
+      return;
+    }
+    this.beforeMountSize = this.isAboveViewportBottom(element) ? null : this.innerHeight(element);
   },
   mounted() {
     document.title = this.$t(constants.APP_NAME);
     window.clearInterval(documentTitleTimer);
     if (this.waitingfor === undefined) {
       this.waitForUpdate();
+    } else if (this.beforeMountSize !== null) {
+      const element = this.getRef();
+      if (element === null) {
+        return;
+      }
+      const currentSize = this.innerHeight(element);
+      const delta = currentSize - this.beforeMountSize;
+      if (Math.abs(delta) > 0.5) {
+        window.scrollBy(0, delta);
+      }
     }
     if (this.playerView.players.length > 1 && this.waitingfor !== undefined) {
       documentTitleTimer = window.setInterval(() => this.animateTitle(), 1000);

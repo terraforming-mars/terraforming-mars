@@ -12,6 +12,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 import {message} from '../../logs/MessageBuilder';
 import {TITLES} from '../../inputs/titles';
+import {Priority} from '../../deferredActions/Priority';
 
 const INVALID_TAGS = [
   Tag.EVENT,
@@ -71,7 +72,7 @@ export class Faraday extends CeoCard {
     }
 
     // TODO(kberg): If a player only has 4MC and surpasses with 2 tags, this is awkward
-    player.defer(this.effectOptions(player, rewards));
+    player.defer(this.effectOptions(player, rewards), Priority.BEFORE_PHARMACY_UNION);
   }
 
   public effectOptions(player: IPlayer, tags: Array<Tag>) {
@@ -87,10 +88,12 @@ export class Faraday extends CeoCard {
     }
     return new OrOptions(
       new SelectOption(message('Pay 3 M€ to draw a ${0} card', (b) => b.string(tag))).andThen(() => {
-        player.game.defer(new SelectPaymentDeferred(player, 3, {title: TITLES.payForCardAction(this.name)}))
+        player.game.defer(
+          new SelectPaymentDeferred(
+            player, 3, {title: TITLES.payForCardAction(this.name)}), Priority.BEFORE_PHARMACY_UNION)
           .andThen(() => {
             player.drawCard(1, {tag: tag});
-            player.defer(this.effectOptions(player, tags));
+            player.defer(this.effectOptions(player, tags), Priority.BEFORE_PHARMACY_UNION);
           });
         return undefined;
       }),

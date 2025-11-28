@@ -133,7 +133,9 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
     const game = player.game;
     for (let i = 0; i < count; i++) {
       player.defer(() => {
-        if (this.isDisabled) return undefined;
+        if (this.isDisabled) {
+          return;
+        }
 
         if (this.resourceCount > 0) {
           if (player.canAfford({cost: 0, tr: {tr: 1}}) === false) {
@@ -150,7 +152,7 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
         if (player.canAfford({cost: 0, tr: {tr: 3}}) === false) {
           // TODO (Lynesth): Remove this when #1670 is fixed
           game.log('${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
-          return undefined;
+          return;
         }
 
         return new OrOptions(
@@ -171,6 +173,7 @@ export class PharmacyUnion extends CorporationCard implements ICorporationCard {
     });
     player.increaseTerraformRating(3);
   }
+
   public serialize(serialized: SerializedCard) {
     serialized.isDisabled = this.isDisabled;
   }

@@ -2,16 +2,26 @@ import {IAward} from '../IAward';
 import {IPlayer} from '../../IPlayer';
 import {Space} from '../../boards/Space';
 import {Board} from '../../boards/Board';
+import {MoonExpansion} from '../../moon/MoonExpansion';
 
 export class Landscaper implements IAward {
   public readonly name = 'Landscaper';
   public readonly description = 'Most tiles connected together (each player counts largest group of tiles)';
   public getScore(player: IPlayer): number {
     const board = player.game.board;
-    const playerOwnedSpaces = board.spaces.filter((space) =>
-      space.player === player && space.tile !== undefined);
+    const marsCount = new SpaceCounter(board, this.getSpaces(board, player)).compute();
 
-    return new SpaceCounter(board, playerOwnedSpaces).compute();
+    let moonCount = 0;
+    MoonExpansion.ifMoon(player.game, (moonData) => {
+      const moon = moonData.moon;
+      moonCount = new SpaceCounter(moon, this.getSpaces(moon, player)).compute();
+    });
+    return Math.max(marsCount, moonCount);
+  }
+
+  private getSpaces(board: Board, player: IPlayer) {
+    return board.spaces.filter((space) =>
+      space.player === player && space.tile !== undefined);
   }
 }
 

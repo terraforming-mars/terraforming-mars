@@ -6,13 +6,13 @@
     </label>
   </div>
   <div class="sortable-cards">
-    <div ref="draggers" :class="{ 'dragging': Boolean(dragCard) }" v-for="card in getSortedCards()" :key="card.name" draggable="true" v-on:dragend="onDragEnd()" v-on:dragstart="onDragStart(card.name)">
+    <div ref="draggers" :class="{ 'dragging': Boolean(dragCard) }" v-for="(card, index) in getSortedCards()" :key="card.name" draggable="true" v-on:dragend="onDragEnd()" v-on:dragstart="onDragStart(card.name)">
       <div v-if="dragCard" ref="droppers" class="drop-target" v-on:dragover="onDragOver(card.name)"></div>
       <div ref="cardbox" class="cardbox" @click="clickMethod">
         <Card :card="card"/>
         <div v-if="showReorder">
           <div class="reorder-banners-left" v-if="index > 0"></div>
-          <div class="reorder-banners-right" v-if="index < this.cards.length - 1"></div>
+          <div class="reorder-banners-right" v-if="index < cards.length - 1"></div>
         </div>
       </div>
     </div>

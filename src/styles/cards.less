@@ -2981,13 +2981,34 @@ input[type="radio"]:checked + .filterDiv::after {
     vertical-align: top
   }
 
-  .reorder-banners {
+  .reorder-banners-left,
+  .reorder-banners-right {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    transform: translate(-6%, 0%);
-    opacity: 0.5;
-    background: linear-gradient(to right, transparent 0%, transparent 10%, red 10%, red 20%, transparent 20%, transparent 80%, red 80%, red 90%, transparent 90%, transparent 100%)
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+  }
+
+  .reorder-banners-left {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+
+    &::before {
+      content: '\00AB';
+    }
+  }
+
+  .reorder-banners-right {
+    background: linear-gradient(270deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+
+    &::before {
+      content: '\00BB';
+    }
   }
 
   .do-not-drag-and-drop {

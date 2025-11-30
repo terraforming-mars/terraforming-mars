@@ -107,7 +107,7 @@ describe('VastitasBorealisNovusBoard', () => {
     const board = cast(game.board, VastitasBorealisNovusBoard);
     const space = board.spaces.find((space) => space.bonus.includes(SpaceBonus.TEMPERATURE_4ME))!;
 
-    player.megaCredits = 2;
+    player.megaCredits = 3;
     expect(board.getAvailableSpacesOnLand(player).map(toID)).does.not.include(space.id);
 
     player.megaCredits = 4;

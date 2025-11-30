@@ -12,6 +12,7 @@
 .cardbox {
     display: inline-block;
     vertical-align: top;
+    position:relative;
 }
 
 .cards-stack {
@@ -2978,5 +2979,18 @@ input[type="radio"]:checked + .filterDiv::after {
     height: 350px;
     display: inline-block;
     vertical-align: top
+  }
+
+  .reorder-banners {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transform: translate(-6%, 0%);
+    opacity: 0.5;
+    background: linear-gradient(to right, transparent 0%, transparent 10%, red 10%, red 20%, transparent 20%, transparent 80%, red 80%, red 90%, transparent 90%, transparent 100%)
+  }
+
+  .do-not-drag-and-drop {
+    pointer-events: none;
   }
 }

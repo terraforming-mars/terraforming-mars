@@ -7,7 +7,9 @@ import {MarsBoard} from './MarsBoard';
 import {Turmoil} from '../turmoil/Turmoil';
 import {SpaceName} from '../../common/boards/SpaceName';
 import {Space} from './Space';
-import {VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST} from '../../common/constants';
+import {
+  VASTITAS_BOREALIS_NOVUS_BONUS_TEMPERATURE_COST,
+} from '../../common/constants';
 import {SpaceCosts} from './Board';
 
 export class VastitasBorealisNovusBoard extends MarsBoard {
@@ -19,7 +21,7 @@ export class VastitasBorealisNovusBoard extends MarsBoard {
     const HEAT = SpaceBonus.HEAT;
     const DRAW_CARD = SpaceBonus.DRAW_CARD;
     const TITANIUM = SpaceBonus.TITANIUM;
-    const TEMPERATURE = SpaceBonus.TEMPERATURE;
+    const TEMPERATURE = SpaceBonus.TEMPERATURE_4MC;
     const DELEGATE = SpaceBonus.DELEGATE;
 
     // y=0
@@ -75,8 +77,8 @@ export class VastitasBorealisNovusBoard extends MarsBoard {
 
   public override spaceCosts(space: Space): SpaceCosts {
     const costs = super.spaceCosts(space);
-    if (space.bonus.includes(SpaceBonus.TEMPERATURE)) {
-      costs.megacredits = VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST;
+    if (space.bonus.includes(SpaceBonus.TEMPERATURE_4MC)) {
+      costs.megacredits = VASTITAS_BOREALIS_NOVUS_BONUS_TEMPERATURE_COST;
       costs.tr.temperature = 1;
     }
     return costs;

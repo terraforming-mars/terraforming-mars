@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div>
+  <div v-if="experimentalUI()">
     <label>
       <input type="checkbox" v-model="showReorder" />Reorder cards
     </label>
@@ -24,6 +24,7 @@ import Card from '@/client/components/card/Card.vue';
 import {CardName} from '@/common/cards/CardName';
 import {CardModel} from '@/common/models/CardModel';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 
 type DataModel = {
   /** When true use the point-and-click reorder UI */
@@ -136,6 +137,9 @@ export default Vue.extend({
           }
         }
       }
+    },
+    experimentalUI(): boolean {
+      return getPreferences().experimental_ui;
     },
   },
 });

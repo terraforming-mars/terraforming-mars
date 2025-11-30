@@ -1,8 +1,8 @@
 <template>
 <div>
-  <div v-if="experimentalUI()">
+  <div v-if="experimentalUI()" v-i18n>
     <label>
-      <input type="checkbox" v-model="showReorder" />Reorder cards
+      <input type="checkbox" v-model="showReorder" /> Reorder Cards
     </label>
   </div>
   <div class="sortable-cards">
@@ -10,7 +10,10 @@
       <div v-if="dragCard" ref="droppers" class="drop-target" v-on:dragover="onDragOver(card.name)"></div>
       <div ref="cardbox" class="cardbox" @click="clickMethod">
         <Card :card="card"/>
-        <div v-if="showReorder" class="reorder-banners"></div>
+        <div v-if="showReorder">
+          <div class="reorder-banners-left" v-if="index > 0"></div>
+          <div class="reorder-banners-right" v-if="index < this.cards.length - 1"></div>
+        </div>
       </div>
     </div>
     <div v-if="dragCard" ref="dropend" class="drop-target" v-on:dragover="onDragOver('end')"></div>

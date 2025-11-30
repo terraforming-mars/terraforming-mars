@@ -7,7 +7,6 @@ import {Turmoil} from '../../turmoil/Turmoil';
 import {Resource} from '../../../common/Resource';
 import {IPlayer} from '../../IPlayer';
 import {isSpecialTileSpace, Board} from '../../boards/Board';
-import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
@@ -36,19 +35,17 @@ export class SpaceRaceToMars extends GlobalEvent implements IGlobalEvent {
   }
 
   private specialTileCount(player: IPlayer) {
-    // This code is repeated in Land Specialist
-    const spaces = player.game.board.spaces
-      .filter(Board.ownedBy(player))
-      .filter(isSpecialTileSpace);
+    const marsSpaces = player.game.board.spaces;
+    const marsCount = marsSpaces.filter(Board.ownedBy(player))
+      .filter(isSpecialTileSpace).length;
 
-    const marsCount = spaces.length;
-    const moonCount = MoonExpansion.ifElseMoon(player.game, (moonData) => {
-      return moonData.moon.spaces
-        .filter(Board.ownedBy(player))
-        .filter(isSpecialTileSpace)
-        .length;
-    },
-    () => 0);
+    const moonSpaces = player.game.moonData?.moon.spaces ?? [];
+    const moonCount = moonSpaces
+      // TODO(kberg): include co-owner.
+      .filter(Board.ownedBy(player))
+      .filter(isSpecialTileSpace)
+      .length;
+
     return marsCount + moonCount;
   }
 }

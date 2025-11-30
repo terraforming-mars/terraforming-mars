@@ -79,9 +79,7 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     case BoardName.VASTITAS_BOREALIS_NOVUS:
       push(milestoneManifest.boards[boardName], awardManifest.boards[gameOptions.boardName]);
       break;
-    case BoardName.UTOPIA_PLANITIA:
-      return getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
-    case BoardName.TERRA_CIMMERIA_NOVUS:
+    default:
       return getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
     }
     if (gameOptions.venusNextExtension) {

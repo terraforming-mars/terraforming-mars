@@ -296,19 +296,19 @@ export abstract class Board {
   }
 
   public static ownedBy(player: IPlayer): (space: Space) => boolean {
-    return (space: Space) => space.player?.id === player.id;
+    return (space: Space) => space.player?.id === player.id || space.coOwner?.id === player.id;
   }
 
   public static spaceOwnedBy(space: Space, player: IPlayer): boolean {
     return Board.ownedBy(player)(space);
   }
 
-  public getHazards(includeProtected: boolean = false): ReadonlyArray<Space> {
-    const spaces = this.spaces.filter((space) => AresHandler.hasHazardTile(space));
-    if (includeProtected === false) {
-      return spaces.filter((space) => space.tile?.protectedHazard !== true);
-    }
-    return spaces;
+  public getHazards(): ReadonlyArray<Space> {
+    return this.spaces.filter(AresHandler.hasHazardTile);
+  }
+
+  public getUnprotectedHazards(): ReadonlyArray<Space> {
+    return this.getHazards().filter((space) => space.tile?.protectedHazard !== true);
   }
 
   /** Hazard tiles don't really count as tiles. */

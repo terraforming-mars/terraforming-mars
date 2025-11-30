@@ -8,6 +8,7 @@ import {IActionCard} from '../ICard';
 import {Player} from '../../Player';
 import {intersection} from '../../../common/utils/utils';
 import {message} from '../../logs/MessageBuilder';
+import {AresHandler} from '../../ares/AresHandler';
 export class MarsNomads extends Card implements IActionCard {
   /*
    * A good page about this card: https://boardgamegeek.com/thread/3154812.
@@ -80,7 +81,11 @@ export class MarsNomads extends Card implements IActionCard {
       spaces)
       .andThen((space) => {
         player.game.nomadSpace = space.id;
-        player.game.grantPlacementBonuses(player, space);
+
+        // Don't grant bonuses when moving onto hazard tiles. Even though you're allowed
+        // to move Mars Nomads onto that space.
+        const coveringExistingSpace = AresHandler.hasHazardTile(space);
+        player.game.grantPlacementBonuses(player, space, coveringExistingSpace);
 
         return undefined;
       });

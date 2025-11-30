@@ -8,7 +8,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import Vue, {PropType} from 'vue';
 import Tag from '@/client/components/Tag.vue';
 import UndergroundToken from '@/client/components/underworld/UndergroundToken.vue';
 import {Tag as CardTag} from '@/common/cards/Tag';
@@ -28,7 +28,7 @@ export default Vue.extend({
       default: undefined,
     },
     count: {
-      type: Number as () => Number | String,
+      type: [Number, String] as PropType<number | string>,
     },
     size: {
       type: String,

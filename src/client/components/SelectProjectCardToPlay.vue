@@ -8,23 +8,23 @@
     <Card class="cardbox" :card="availableCard" />
   </label>
 
-  <section v-trim-whitespace>
-    <template v-if="card.additionalProjectCosts">
-      <div v-if="card.additionalProjectCosts.aeronGenomicsResources" class="card-warning"
-        v-i18n="[$t(card.name), card.additionalProjectCosts.thinkTankResources, 'animals', $t(CardName.AERON_GENOMICS)]"
-      >
-        Playing ${0} consumes ${1} ${2} from ${3}
-      </div>
-      <div v-if="card.additionalProjectCosts.thinkTankResources" class="card-warning"
-        v-i18n="[$t(card.name), card.additionalProjectCosts.thinkTankResources, 'data', $t(CardName.THINK_TANK)]">
-        Playing ${0} consumes ${1} ${2} from ${3}
-      </div>
-      <div v-if="card.additionalProjectCosts.redsCost" class="card-warning" v-i18n="[$t(card.name), card.additionalProjectCosts.redsCost, $t('Reds')]">
-        Playing ${0} will cost ${1} M€ more because ${2} are in power
-      </div>
-    </template>
-    <warnings-component :warnings="card.warnings"></warnings-component>
+  <template v-if="card.additionalProjectCosts">
+    <div v-if="card.additionalProjectCosts.aeronGenomicsResources" class="card-warning"
+      v-i18n="[$t(card.name), card.additionalProjectCosts.aeronGenomicsResources, 'animals', $t(CardName.AERON_GENOMICS)]"
+    >
+      Playing ${0} consumes ${1} ${2} from ${3}
+    </div>
+    <div v-if="card.additionalProjectCosts.thinkTankResources" class="card-warning"
+      v-i18n="[$t(card.name), card.additionalProjectCosts.thinkTankResources, 'data', $t(CardName.THINK_TANK)]">
+      Playing ${0} consumes ${1} ${2} from ${3}
+    </div>
+    <div v-if="card.additionalProjectCosts.redsCost" class="card-warning" v-i18n="[$t(card.name), card.additionalProjectCosts.redsCost, $t('Reds')]">
+      Playing ${0} will cost ${1} M€ more because ${2} are in power
+    </div>
+  </template>
+  <warnings-component :warnings="card.warnings"></warnings-component>
 
+  <section v-trim-whitespace>
     <h3 class="payments_title" v-i18n>How to pay?</h3>
 
     <template v-for="unit of SPENDABLE_RESOURCES">

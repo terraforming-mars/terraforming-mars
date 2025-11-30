@@ -29,7 +29,6 @@ export default Vue.extend({
   },
   mounted() {
     const url = paths.API_PROFILE;
-
     fetch(url)
       .then((resp) => {
         if (!resp.ok) {

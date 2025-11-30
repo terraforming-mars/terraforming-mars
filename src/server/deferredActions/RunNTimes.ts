@@ -2,6 +2,8 @@ import {IPlayer} from '../IPlayer';
 import {DeferredAction} from '../deferredActions/DeferredAction';
 import {Priority} from '../deferredActions/Priority';
 import {PlayerInput} from '../PlayerInput';
+import {Message} from '../../common/logs/Message';
+import {message} from '../logs/MessageBuilder';
 
 /**
  * Run a deferred action many times, dynamically calculating each time.
@@ -24,8 +26,11 @@ export abstract class RunNTimes<T> extends DeferredAction<ReadonlyArray<T>> {
 
   protected abstract run(): PlayerInput | undefined;
 
-  protected titleSuffix(): string {
-    return this.count > 1 ? ` (${this.nth} of ${this.count})` : '';
+  protected createTitle(header: string): Message {
+    if (this.count < 1) {
+      return message(header, () => {});
+    }
+    return message(header + ' (${0} of ${1})', ((b) => b.number(this.nth).number(this.count)));
   }
 
   protected next() {

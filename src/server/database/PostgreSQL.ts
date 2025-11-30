@@ -29,7 +29,7 @@ export class PostgreSQL implements IDatabase {
 
   protected get client(): pg.Pool {
     if (this._client === undefined) {
-      throw new Error('attempt to get client before intialized');
+      throw new Error('attempt to get client before initialized');
     }
     return this._client;
   }

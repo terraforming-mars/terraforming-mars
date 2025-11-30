@@ -55,6 +55,8 @@ type DataModel = {
   savedPlayerView: PlayerViewModel | undefined;
 }
 
+const CANNOT_CONTACT_SERVER = 'Unable to reach the server. It may be restarting or down for maintenance.';
+
 export default Vue.extend({
   name: 'waiting-for',
   props: {
@@ -81,6 +83,10 @@ export default Vue.extend({
   },
   methods: {
     animateTitle() {
+      if (!getPreferences().animated_title) {
+        return;
+      }
+
       const sequence = '\u25D1\u25D2\u25D0\u25D3';
       const first = document.title[0];
       const position = sequence.indexOf(first);
@@ -186,9 +192,9 @@ export default Vue.extend({
         if (xhr.response.id === INVALID_RUN_ID) {
           cb = () => setTimeout(() => window.location.reload(), 100);
         }
-        showAlert(xhr.response.message, cb);
+        showAlert('Error with input', xhr.response.message, cb);
       } else {
-        showAlert('Unexpected response from server. Please try again.');
+        showAlert('Error processing response', 'Unexpected response from server. Please try again.');
       }
       root.isServerSideRequestInProgress = false;
     },

@@ -7,6 +7,8 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Tag} from '../../../common/cards/Tag';
 import {CardResource} from '../../../common/CardResource';
 import {AddResourcesToCards} from '../../deferredActions/AddResourcesToCards';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 
 export class Cyanobacteria extends Card implements IProjectCard {
   constructor() {
@@ -32,8 +34,11 @@ export class Cyanobacteria extends Card implements IProjectCard {
   }
 
   public override bespokePlay(player: IPlayer) {
-    const microbes = player.game.board.getOceanSpaces({upgradedOceans: true, wetlands: true}).length;
-    player.game.defer(new AddResourcesToCards(player, CardResource.MICROBE, microbes));
+    player.game.defer(new SimpleDeferredAction(player, () => {
+      const microbes = player.game.board.getOceanSpaces({upgradedOceans: true, wetlands: true}).length;
+      player.game.defer(new AddResourcesToCards(player, CardResource.MICROBE, microbes));
+      return undefined;
+    }), Priority.GAIN_RESOURCE_OR_PRODUCTION);
     return undefined;
   }
 }

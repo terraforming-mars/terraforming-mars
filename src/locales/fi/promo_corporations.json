@@ -1,0 +1,67 @@
+{
+  "Arcadian": "Arkadian",
+  "Communities": "Yhteisöt",
+  "Arcadian Communities": "Arkadian Yhteisöt",
+  "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "Aloitat 40 M€:lla ja 10 teräksellä. ENSIMMÄISENÄ TOIMINTANASI ASETA YHTEISÖ [PELAAJAMERKKI] VAPAALLE ALUEELLE.",
+  "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.": "TOIMINTO: Aseta yhteisö (pelaajamerkki) vapaalle alueelle jonkin oman laattasi tai merkityn alueen viereen.",
+  "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€.": "VAIKUTUS: Merkityt alueet on varattu sinulle. Kun asetat sinne laatan, saat 3 M€.",
+
+  "Astrodrill": "Astroporaus",
+  "Astrodrill ENT": "Astroporaus OYJ",
+  "You start with 35 M€ and 3 asteroid resources.": "Aloitat 35 M€:lla ja 3 asteroidoresurssilla.",
+  "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "TOIMINTO: Lisää asteroidiresurssi MILLE TAHANSA kortille TAI saa mikä tahansa perusresurssi TAI poista asteroidiresurssi tältä kortilta saadaksesi 3 titaania.",
+
+  "FACTORUM": "FAKTORUM",
+  "Factorum": "Faktorum",
+  "You start with 37 M€. Increase your steel production 1 step.": "Aloitat 37 M€:lla. Nosta terästuotantoasi 1 askeleella.",
+  "Action: Increase your energy production 1 step IF YOU have NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "TOIMINTO: Nosta energiatuotantoasi 1 askeleella JOS SINULLA EI OLE ENERGIARESURSSEJA, tai maksa 3 M€ nostaaksesi rakennuskortin.",
+
+  "KUIPER COOPERATIVE": "KUIPER-OSUUSKUNTA",
+  "Kuiper Cooperative": "Kuiper-osuuskunta",
+  "Cooperative": "Osuuskunta",
+  "You start with 33 M€. Increase titanium production 1 step.": "Aloitat 33 M€:lla. Nosta titaanituotantoasi 1 askeleella.",
+  "Action: Add 1 asteroid here for every space tag you have.": "TOIMINTO: Lisää tänne 1 asteroidi jokaisesta avaruusympyrästäsi.",
+  "Effect: When you use the AQUIFER or ASTEROID standard projects, you can spend asteroids on card as 1M€ each.": "VAIKUTUS: Kun käytät AKVIFERI- tai ASTEROIDI-standardiprojekteja, voit käyttää tämän kortin asteroideja 1 M€:na per kappale.",
+
+  "mons": "Mons",
+  "INSURANCE": "VAKUUTUS",
+  "Mons Insurance": "Mons Vakuutus",
+  "You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "Aloitat 48 M€:lla. Nosta M€-tuotantoasi 4 askeleella. KAIKKI VASTUSTAJAT LASKEVAT M€-TUOTANTOAAN 2 ASKELTA. TÄMÄ EI LAUKAISE ALLA OLEVAA VAIKUTUSÄ.",
+  "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.": "VAIKUTUS: Kun pelaaja aiheuttaa toiselle pelaajalle tuotannon laskun tai resurssien menetyksen, maksa 3 M€ uhrille tai niin paljon kuin mahdollista.",
+
+  "Pharmacy": "Lääketehtaiden",
+  "Union": "Liitto",
+  "Pharmacy Union": "Lääketehtaiden liitto",
+  "You start with 54 M€. Draw a Science card.": "Aloitat 54 M€:lla. Nosta tiedekortti.",
+  "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "VAIKUTUS: Kun MIKÄ TAHANSA mikrobiympyrä pelataan, lisää tauti tänne ja menetä 4 M€ tai niin paljon kuin mahdollista. Kun pelaat tiedeympyrän, poista tauti täältä ja nosta MKL:ääsi 1 askel TAI jos täällä ei ole tauteja, SAAT laittaa tämän kortin kuvapuoli alaspäin TAPAHTUMAKASAASI nostaaksesi MKL:ääsi 3 askelta.",
+
+  "PHIL": "",
+  "A": "",
+  "RES": "",
+  "Philares": "",
+  "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.": "Aloitat 47 M€:lla. Ensimmäisenä toimintanasi aseta viheralue ja nosta happea 1 askeleella.",
+  "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "VAIKUTUS: Jokainen uusi vierekkäisyys oman laattasi ja vastustajan laatan välillä antaa sinulle valitsemasi perusresurssin [riippumatta siitä, kuka äsken asetti laatan].",
+
+  "PolderTECH Dutch": "PolderTECH Hollanti",
+  "Dutch": "Hollanti",
+  "You start with 35 M€. As your first action, place an ocean tile and a greenery tile next to each other. Raise oxygen 1 step.": "Aloitat 35 M€:lla. Ensimmäisenä toimintanasi aseta valtameri ja viheralue vierekkäin. Nosta happea 1 askeleella.",
+  "Effect: When you place an ocean tile, gain 1 energy.": "VAIKUTUS: Kun asetat valtamerilaatan, saat 1 energian.",
+  "Effect: When you place a greenery, gain 1 plant.": "VAIKUTUS: Kun asetat viheralueen, saat 1 kasvin.",
+  
+  "Recyclon": "",
+  "You start with 38 M€ and 1 steel production.": "Aloitat 38 M€:lla ja 1 terästuotannolla.",
+  "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "VAIKUTUS: Kun pelaat rakennusympyrän, tämä mukaan lukien, saat 1 mikrobin tälle kortille tai poista 2 mikrobia täältä ja nosta kasvintuotantoasi 1 askeleella.",
+
+  "Tycho Magnetics": "",
+  "Magnetics": "",
+  "You start with 42 M€. Increase your energy production 1 step.": "Aloitat 42 M€:lla. Nosta energiatuotantoasi 1 askeleella.",
+  "Action: Spend any amount of energy to draw the that many cards. Keep 1 and discard the rest.": "TOIMINTO: Käytä mikä tahansa määrä energiaa nostaaksesi saman verran kortteja. Pidä 1 ja hylkää loput.",
+
+  "SPLI": "PIL",
+  "C": "KON",
+  "E": "TA",
+  "TACTICAL GENOMICS": "TAKTINEN GENOMIIKKA",
+  "Splice": "Pilkonta",
+  "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Aloitat 44 M€:lla. Ensimmäisenä toimintanasi paljasta kortteja kunnes olet paljastanut mikrobiympyrän. Ota se ja hylkää loput.",
+  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "VAIKUTUS: Kun mikrobiympyrä pelataan, tämä mukaan lukien, KYSEINEN PELAAJA saa 2 M€ tai lisää mikrobin KYSEISELLE kortille, ja sinä saat 2 M€."
+}

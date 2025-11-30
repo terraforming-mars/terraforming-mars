@@ -32,7 +32,7 @@ export enum SpaceBonus {
     DELEGATE, // 16
     // Terra Cimmeria Novus-specific
     COLONY, // 17
-    TEMPERATURE_4ME, // 18, Official variant, costs 4ME not 3
+    TEMPERATURE_4MC, // 18, Vastitas Borealis Novus-specific, costs 4MC not 3
 }
 
 const TO_STRING_MAP: Record<SpaceBonus, string> = {
@@ -54,7 +54,7 @@ const TO_STRING_MAP: Record<SpaceBonus, string> = {
   [SpaceBonus.ASTEROID]: 'Asteroid',
   [SpaceBonus.DELEGATE]: 'Delegate',
   [SpaceBonus.COLONY]: 'Colony',
-  [SpaceBonus.TEMPERATURE_4ME]: 'Temperature',
+  [SpaceBonus.TEMPERATURE_4MC]: 'Temperature',
 };
 
 export namespace SpaceBonus {

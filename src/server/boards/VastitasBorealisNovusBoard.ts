@@ -21,7 +21,7 @@ export class VastitasBorealisNovusBoard extends MarsBoard {
     const HEAT = SpaceBonus.HEAT;
     const DRAW_CARD = SpaceBonus.DRAW_CARD;
     const TITANIUM = SpaceBonus.TITANIUM;
-    const TEMPERATURE = SpaceBonus.TEMPERATURE_4ME;
+    const TEMPERATURE = SpaceBonus.TEMPERATURE_4MC;
     const DELEGATE = SpaceBonus.DELEGATE;
 
     // y=0
@@ -77,7 +77,7 @@ export class VastitasBorealisNovusBoard extends MarsBoard {
 
   public override spaceCosts(space: Space): SpaceCosts {
     const costs = super.spaceCosts(space);
-    if (space.bonus.includes(SpaceBonus.TEMPERATURE_4ME)) {
+    if (space.bonus.includes(SpaceBonus.TEMPERATURE_4MC)) {
       costs.megacredits = VASTITAS_BOREALIS_NOVUS_BONUS_TEMPERATURE_COST;
       costs.tr.temperature = 1;
     }

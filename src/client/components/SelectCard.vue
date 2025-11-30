@@ -14,7 +14,7 @@
               </template>
             </Card>
         </div>
-        <div v-if="hasCardWarning()" class="card-warning">{{ $t(warning) }}</div>
+        <div v-if="hasCardWarning()" class="card-warning" v-i18n>{{ warning }}</div>
         <warnings-component :warnings="warnings"></warnings-component>
         <div v-if="showsave === true" class="nofloat">
             <AppButton :disabled="isOptionalToManyCards && cardsSelected() === 0" type="submit" @click="saveData" :title="buttonLabel()" />

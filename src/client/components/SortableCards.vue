@@ -10,7 +10,7 @@
       <div v-if="dragCard" ref="droppers" class="drop-target" v-on:dragover="onDragOver(card.name)"></div>
       <div ref="cardbox" class="cardbox" @click="clickMethod">
         <Card :card="card"/>
-        <div v-if="showReorder">
+        <div v-if="showReorder" class="reorder-banners-container">
           <div class="reorder-banners-left" v-if="index > 0"></div>
           <div class="reorder-banners-right" v-if="index < cards.length - 1"></div>
         </div>

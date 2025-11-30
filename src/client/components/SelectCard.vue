@@ -190,8 +190,8 @@ export default Vue.extend({
     robotCard(card: CardModel): CardModel | undefined {
       return this.playerView.thisPlayer.selfReplicatingRobotsCards?.find((r) => r.name === card.name);
     },
-    selectedChange(e) {
-      e.currentTarget.querySelector("input").click();
+    selectedChange(e: Event) {
+      (e.currentTarget as HTMLElement).querySelector('input')?.click();
     },
   },
   computed: {

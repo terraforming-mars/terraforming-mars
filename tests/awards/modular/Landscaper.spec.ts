@@ -41,4 +41,18 @@ describe('Landscaper Award with Board Setup', () => {
     game.simpleAddTile(player2, landSpaces[6], {tileType: TileType.CITY});
     expect(award.getScore(player2)).eq(1);
   });
+
+  it('Does not count Land Claim', () => {
+    const landSpaces = game.board.getAvailableSpacesOnLand(player);
+
+    game.simpleAddTile(player, landSpaces[2], {tileType: TileType.CITY});
+    expect(award.getScore(player)).eq(1);
+
+    game.simpleAddTile(player, landSpaces[3], {tileType: TileType.GREENERY});
+    expect(award.getScore(player)).eq(2);
+
+    landSpaces[3].tile = undefined;
+    landSpaces[3].player = player;
+    expect(award.getScore(player)).eq(1);
+  });
 });

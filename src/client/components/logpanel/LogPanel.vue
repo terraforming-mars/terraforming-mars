@@ -25,7 +25,7 @@
       <div style="position:absolute">
         <div style="height:100%;width:100%;position:absolute;z-index:3"></div>
         <div style="display:flex;flex-direction:row;transform:scale(0.7);transform-origin: top left;">
-          <Card v-for="(name,index) in getPreview()" :key=index :card="{name, isSelfReplicatingRobotsCard: isSelfReplicatingRobotsCard(name), resources: getResourcesOnCard(name)}"/>
+          <Card v-for="name in getPreview()" :key="name" :card="{name, isSelfReplicatingRobotsCard: isSelfReplicatingRobotsCard(name), resources: getResourcesOnCard(name)}"/>
         </div>
       </div>
     </div>
@@ -181,17 +181,17 @@ export default Vue.extend({
     lastGenerationClass(): string {
       return this.lastSoloGeneration === this.generation ? 'last-generation blink-animation' : '';
     },
-    getPreview(): Array<string> {
+    getPreview(): Array<CardName> {
       const preview = this.messages
         .flatMap((message) =>
-          message.data.map((datum) => 
-            datum.type === LogMessageDataType.CARD ? datum.value : undefined
-          )
+          message.data.map((datum) =>
+            datum.type === LogMessageDataType.CARD ? datum.value : undefined,
+          ),
         )
         .filter(Boolean)
         .reverse();
       return preview.filter(
-        (card, index) => card !== preview[index + 1]
+        (card, index) => card !== preview[index + 1],
       ) as string[];
     },
     isSelfReplicatingRobotsCard(cardName: CardName) {

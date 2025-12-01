@@ -12,6 +12,7 @@
       </div>
       <span class="label-additional" v-if="players.length === 1"><span :class="lastGenerationClass" v-i18n>of {{lastSoloGeneration}}</span></span>
     </div>
+    <div style="width:90vw;display:flex;flex-direction:row">
     <div class="panel log-panel">
       <div id="logpanel-scrollable" class="panel-body">
         <ul v-if="messages">
@@ -19,6 +20,15 @@
         </ul>
       </div>
       <div class='debugid'>(debugid {{step}})</div>
+    </div>
+    <div style="flex-grow:1;position:relative;overflow-y:hidden">
+      <div style="position:absolute">
+        <div style="height:100%;width:100%;position:absolute;z-index:3"></div>
+        <div style="display:flex;flex-direction:row;transform:scale(0.7);transform-origin: top left;">
+          <Card v-for="name in getPreview()" :key="name" :card="{name, isSelfReplicatingRobotsCard: isSelfReplicatingRobotsCard(name), resources: getResourcesOnCard(name)}"/>
+        </div>
+      </div>
+    </div>
     </div>
     <card-panel :message="selectedMessage" :players="players" v-on:hide="selectedMessage = undefined"></card-panel>
   </div>
@@ -29,7 +39,9 @@
 import Vue from 'vue';
 import {paths} from '@/common/app/paths';
 import {statusCode} from '@/common/http/statusCode';
+import {CardName} from '@/common/cards/CardName';
 import {LogMessage} from '@/common/logs/LogMessage';
+import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
 import {playerColorClass} from '@/common/utils/utils';
 import {Color} from '@/common/Color';
@@ -37,6 +49,7 @@ import {SoundManager} from '@/client/utils/SoundManager';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {ParticipantId, SpaceId} from '@/common/Types';
 import LogMessageComponent from '@/client/components/logpanel/LogMessageComponent.vue';
+import Card from '@/client/components/card/Card.vue';
 import CardPanel from '@/client/components/logpanel/CardPanel.vue';
 import {isMarsSpace} from '@/common/boards/spaces';
 
@@ -72,6 +85,7 @@ export default Vue.extend({
   },
   components: {
     LogMessageComponent,
+    Card,
     CardPanel,
   },
   methods: {
@@ -166,6 +180,41 @@ export default Vue.extend({
     },
     lastGenerationClass(): string {
       return this.lastSoloGeneration === this.generation ? 'last-generation blink-animation' : '';
+    },
+    getPreview(): Array<CardName> {
+      const preview = this.messages
+        .flatMap((message) =>
+          message.data.map((datum) =>
+            datum.type === LogMessageDataType.CARD ? datum.value : undefined,
+          ),
+        )
+        .filter(Boolean)
+        .reverse();
+      return preview.filter(
+        (card, index) => card !== preview[index + 1],
+      ) as CardName[];
+    },
+    isSelfReplicatingRobotsCard(cardName: CardName) {
+      for (const player of this.players) {
+        if (player.selfReplicatingRobotsCards.some((card) => card.name === cardName)) {
+          return true;
+        }
+      }
+      return false;
+    },
+    getResourcesOnCard(cardName: CardName) {
+      for (const player of this.players) {
+        const playedCard = player.tableau.find((card) => card.name === cardName);
+        if (playedCard !== undefined) {
+          return playedCard.resources;
+        }
+        const srrCard = player.selfReplicatingRobotsCards.find((card) => card.name === cardName);
+        if (srrCard !== undefined) {
+          return srrCard.resources;
+        }
+      }
+
+      return undefined;
     },
   },
   computed: {

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div data-ref="waiting-for-ref">
   <template v-if="waitingfor === undefined">
     {{ $t('Not your turn to take any actions') }}
     <template v-if="playersWaitingFor.length > 0">
@@ -26,7 +26,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import Vue, { PropType } from "vue";
 import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
 import {vueRoot} from '@/client/components/vueRoot';
@@ -52,6 +52,7 @@ type DataModel = {
   playersWaitingFor: Array<Color>
   suspend: boolean,
   savedPlayerView: PlayerViewModel | undefined;
+  beforeMountSize: number | null;
 }
 
 const CANNOT_CONTACT_SERVER = 'Unable to reach the server. It may be restarting or down for maintenance.';
@@ -71,6 +72,7 @@ export default Vue.extend({
     waitingfor: {
       type: Object as () => PlayerInputModel | undefined,
     },
+    timeWarpQueue: Array as PropType<any[] | undefined>,
   },
   data(): DataModel {
     return {
@@ -78,6 +80,7 @@ export default Vue.extend({
       playersWaitingFor: [],
       suspend: false,
       savedPlayerView: undefined,
+      beforeMountSize: null,
     };
   },
   methods: {
@@ -96,8 +99,15 @@ export default Vue.extend({
       document.title = next + ' ' + this.$t(constants.APP_NAME);
     },
     onsave(out: InputResponse) {
-      const root = vueRoot(this);
+      const payload = {runId: this.playerView.runId, ...out};
 
+      if (this.timeWarpQueue) {
+        this.timeWarpQueue.push(JSON.parse(JSON.stringify(payload)));
+        this.$emit("queue-updated", this.timeWarpQueue);
+        return
+      }
+
+      const root = vueRoot(this);
       if (root.isServerSideRequestInProgress) {
         console.warn('Server request in progress');
         return;
@@ -111,7 +121,7 @@ export default Vue.extend({
         this.loadPlayerViewResponse(xhr);
         root.isServerSideRequestInProgress = false;
       };
-      xhr.send(JSON.stringify({runId: this.playerView.runId, ...out}));
+      xhr.send(JSON.stringify(payload));
       xhr.onerror = function() {
         root.showAlert('Error sending input,', CANNOT_CONTACT_SERVER);
         root.isServerSideRequestInProgress = false;
@@ -246,14 +256,42 @@ export default Vue.extend({
     showRefresh(): boolean {
       return this.suspend === true && this.savedPlayerView !== undefined;
     },
+    getRef(): HTMLElement | null {
+      return document.querySelector('[data-ref="waiting-for-ref"]') as HTMLElement | null;
+    },
+    isAboveViewportBottom(element: HTMLElement): boolean {
+      const rect = element.getBoundingClientRect();
+      return rect.top >= 0
+    },
+    innerHeight(element: HTMLElement): number {
+      return element.getBoundingClientRect().height;
+    },
+  },
+  beforeMount() {
+    const element = this.getRef();
+    if (element === null) {
+      this.beforeMountSize = null;
+      return;
+    }
+    this.beforeMountSize = this.isAboveViewportBottom(element) ? null : this.innerHeight(element);
   },
   mounted() {
     document.title = this.$t(constants.APP_NAME);
     window.clearInterval(documentTitleTimer);
     if (this.waitingfor === undefined) {
       this.waitForUpdate();
+    } else if (this.beforeMountSize !== null) {
+      const element = this.getRef();
+      if (element === null) {
+        return;
+      }
+      const currentSize = this.innerHeight(element);
+      const delta = currentSize - this.beforeMountSize;
+      if (Math.abs(delta) > 0.5) {
+        window.scrollBy(0, delta);
+      }
     }
-    if (this.playerView.players.length > 1 && this.waitingfor !== undefined) {
+    if (this.playerView.players.length > 1 && this.waitingfor !== undefined && !this.timeWarpQueue) {
       documentTitleTimer = window.setInterval(() => this.animateTitle(), 1000);
     }
   },

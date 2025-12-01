@@ -1288,5 +1288,6 @@
   "lose ${0} ${1} production": "veszíts ${0} ${1} termelést",
   "${0} ${1} from ${2}": "${0} ${1} a(z) ${2} kártyáról",
   "Please adjust payment amount": "Kérlek, módosítsd a fizetés összegét!",
-  "You cannot overspend megaCredits": "Nem költheted túl a M€-et!"
+  "You cannot overspend megaCredits": "Nem költheted túl a M€-et!",
+  "Reorder Cards": "Kártyák átrendezése"
 }

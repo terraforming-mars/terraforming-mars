@@ -377,5 +377,6 @@
   "Select resource to discard": "Изберете ресурс за изхвърляне",
   "Select resource to gain": "Изберете ресурс за печалба",
   "Select ${0} cards to discard": "Изберете ${0} карти за изхвърляне",
-  "Select between ${0} and ${1} cards to discard": "Изберете между ${0} и ${1} карти за изхвърляне"
+  "Select between ${0} and ${1} cards to discard": "Изберете между ${0} и ${1} карти за изхвърляне",
+  "Reorder Cards": "Пренаредете картите"
 }

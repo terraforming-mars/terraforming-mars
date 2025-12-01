@@ -169,7 +169,8 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
   // 5 is a fine number of attempts. A sample of 100,000 runs showed that this algorithm
   // didn't get past 3.
   // https://github.com/terraforming-mars/terraforming-mars/pull/1637#issuecomment-711411034
-  const maxAttempts = 5;
+  // 2025-11-30: raised to 6.
+  const maxAttempts = 6;
   if (attempt > maxAttempts) {
     throw new Error('No limited synergy milestones and awards set was generated after ' + maxAttempts + ' attempts. Please try again.');
   }

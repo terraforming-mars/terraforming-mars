@@ -192,7 +192,7 @@ export default Vue.extend({
         .reverse();
       return preview.filter(
         (card, index) => card !== preview[index + 1],
-      ) as string[];
+      ) as CardName[];
     },
     isSelfReplicatingRobotsCard(cardName: CardName) {
       for (const player of this.players) {

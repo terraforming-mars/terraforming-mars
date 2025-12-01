@@ -91,6 +91,8 @@ import {StrategicBasePlanning} from './StrategicBasePlanning';
 import {Hospitals} from './Hospitals';
 import {NewHolland} from './NewHolland';
 import {Vermin} from './Vermin';
+import {WeatherBalloons} from './WeatherBalloons';
+
 
 export const PROMO_CARD_MANIFEST = new ModuleManifest({
   module: 'promo',
@@ -167,6 +169,7 @@ export const PROMO_CARD_MANIFEST = new ModuleManifest({
     [CardName.VERMIN]: {Factory: Vermin},
     [CardName.PUBLIC_PLANS]: {Factory: PublicPlans},
     [CardName.STATIC_HARVESTING]: {Factory: StaticHarvesting},
+    [CardName.WEATHER_BALLOONS]: {Factory: WeatherBalloons},
   },
 
   preludeCards: {

@@ -2982,27 +2982,36 @@ input[type="radio"]:checked + .filterDiv::after {
   }
 
   .reorder-banners-container {
-    height: 100px;
-    width: 100px;
-    background-color: red;
+    display:flex;
+    align-items: center;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    // filterDiv:hover has z-index 100
+    // and we need this to be on top when visible
+    z-index: 101;
+    // ideally, this would exist in CardContainer with width: 100%
+    // but that would be a bigger change to pipe through SortableCards.vue
+    // for now, hard code to filterDiv's width + border
+    width: 248px;
   }
 
   .reorder-banners-left,
   .reorder-banners-right {
     position: absolute;
-    inset: 0;
-    pointer-events: none;
+    height: 80%;
+    width: 10%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 32px;
-    font-weight: bold;
-    color: rgba(255, 255, 255, 0.8);
-    text-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+    background-color: grey;
+    // capsule shape
+    border-radius: 9999px;
   }
 
   .reorder-banners-left {
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+    left: 0;
 
     &::before {
       content: '\00AB';
@@ -3010,7 +3019,7 @@ input[type="radio"]:checked + .filterDiv::after {
   }
 
   .reorder-banners-right {
-    background: linear-gradient(270deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+    right: 0;
 
     &::before {
       content: '\00BB';

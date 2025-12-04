@@ -1308,5 +1308,6 @@
     "No": "아니오",
     "Don't show this again": "다시 보지 않기",
     "The server has restarted. Click OK to refresh this page.": "서버가 재시작되었습니다. 확인 버튼을 눌러 이 페이지를 다시 불러오십시오.",
-    "OK": "확인"
+    "OK": "확인",
+    "Reorder Cards": "카드 재정렬"
 }

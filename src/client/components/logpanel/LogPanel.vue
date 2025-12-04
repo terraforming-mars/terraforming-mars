@@ -128,7 +128,6 @@ export default Vue.extend({
         })
         .then((data) => {
           if (!data) return;
-
           messages.splice(0, messages.length);
           messages.push(...data);
           if (getPreferences().enable_sounds && window.location.search.includes('experimental=1') ) {

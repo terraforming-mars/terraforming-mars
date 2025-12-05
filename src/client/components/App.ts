@@ -15,7 +15,7 @@ import SpectatorHome from '@/client/components/SpectatorHome.vue';
 import StartScreen from '@/client/components/StartScreen.vue';
 import {$t, setTranslationContext} from '@/client/directives/i18n';
 import {paths} from '@/common/app/paths';
-import {PlayerViewModel} from '@/common/models/PlayerModel';
+import {PlayerViewModel, ViewModel} from '@/common/models/PlayerModel';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {isPlayerId, isSpectatorId} from '@/common/Types';
@@ -138,7 +138,7 @@ export const mainAppSettings = {
           }
           return resp.json();
         })
-        .then((model) => {
+        .then((model: ViewModel) => {
           if (path === paths.PLAYER) {
             app.playerView = model as PlayerViewModel;
             setTranslationContext(app.playerView);
@@ -148,12 +148,12 @@ export const mainAppSettings = {
           app.playerkey++;
           if (
             model.game.phase === 'end' &&
-            window.location.search.includes('&noredirect') === false
+              window.location.search.includes('&noredirect') === false
           ) {
             app.screen = 'the-end';
             if (currentPathname !== paths.THE_END) {
               window.history.replaceState(
-                model,
+                xhr.response,
                 `${constants.APP_NAME} - Player`,
                 `${paths.THE_END}?id=${model.id}`,
               );
@@ -166,7 +166,7 @@ export const mainAppSettings = {
             }
             if (currentPathname !== path) {
               window.history.replaceState(
-                model,
+                xhr.response,
                 `${constants.APP_NAME} - Game`,
                 `${path}?id=${model.id}`,
               );
@@ -205,10 +205,7 @@ export const mainAppSettings = {
         alert('Bad id URL parameter.');
       }
     } else if (currentPathname === paths.GAME) {
-      app.screen = 'game-home';
-
       const url = paths.API_GAME + window.location.search;
-
       fetch(url)
         .then((resp) => {
           if (!resp.ok) {
@@ -217,12 +214,13 @@ export const mainAppSettings = {
           return resp.json();
         })
         .then((appGame: SimpleGameModel) => {
+          app.screen = 'game-home';
+          app.game = appGame;
           window.history.replaceState(
             appGame,
             `${constants.APP_NAME} - Game`,
             `${paths.GAME}?id=${appGame.id}`,
           );
-          app.game = appGame;
         })
         .catch((err) => {
           alert('Error getting game data');

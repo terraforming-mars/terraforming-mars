@@ -41,7 +41,7 @@ import {paths} from '@/common/app/paths';
 import {statusCode} from '@/common/http/statusCode';
 import {isPlayerId} from '@/common/Types';
 import {InputResponse} from '@/common/inputs/InputResponse';
-import {INVALID_RUN_ID} from '@/common/app/AppErrorId';
+import {INVALID_RUN_ID, AppErrorResponse} from '@/common/app/AppErrorId';
 import {Color} from '@/common/Color';
 
 let ui_update_timeout_id: number | undefined;
@@ -55,6 +55,10 @@ type DataModel = {
 }
 
 const CANNOT_CONTACT_SERVER = 'Unable to reach the server. It may be restarting or down for maintenance.';
+
+type ServerResponse =
+  {ok: true; response: PlayerViewModel} |
+  {ok: false; response: AppErrorResponse};
 
 export default Vue.extend({
   name: 'waiting-for',
@@ -108,7 +112,10 @@ export default Vue.extend({
       xhr.open('POST', paths.PLAYER_INPUT + '?id=' + this.playerView.id);
       xhr.responseType = 'json';
       xhr.onload = () => {
-        this.loadPlayerViewResponse(xhr);
+        this.loadPlayerViewResponse({
+          ok: xhr.status === statusCode.ok,
+          response: xhr.response,
+        });
         root.isServerSideRequestInProgress = false;
       };
       xhr.send(JSON.stringify({runId: this.playerView.runId, ...out}));
@@ -129,7 +136,10 @@ export default Vue.extend({
       xhr.open('GET', paths.RESET + '?id=' + this.playerView.id);
       xhr.responseType = 'json';
       xhr.onload = () => {
-        this.loadPlayerViewResponse(xhr);
+        this.loadPlayerViewResponse({
+          ok: xhr.status === statusCode.ok,
+          response: xhr.response,
+        });
       };
       xhr.send();
       xhr.onerror = function() {
@@ -137,17 +147,17 @@ export default Vue.extend({
         root.isServerSideRequestInProgress = false;
       };
     },
-    loadPlayerViewResponse(xhr: XMLHttpRequest) {
+    loadPlayerViewResponse(x: ServerResponse) {
       const root = vueRoot(this);
       const showAlert = vueRoot(this).showAlert;
-      if (xhr.status === statusCode.ok) {
-        this.updatePlayerView(xhr.response);
-      } else if (xhr.status === statusCode.badRequest && xhr.responseType === 'json') {
+      if (x.ok === true) {
+        this.updatePlayerView(x.response);
+      } else if (x.ok === false && x.response.id === INVALID_RUN_ID) {
         let cb = () => {};
-        if (xhr.response.id === INVALID_RUN_ID) {
+        if (x.response.id === INVALID_RUN_ID) {
           cb = () => setTimeout(() => window.location.reload(), 100);
         }
-        showAlert('Error with input', xhr.response.message, cb);
+        showAlert('Error with input', x.response.message, cb);
       } else {
         showAlert('Error processing response', 'Unexpected response from server. Please try again.');
       }

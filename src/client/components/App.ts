@@ -153,7 +153,7 @@ export const mainAppSettings = {
             app.screen = 'the-end';
             if (currentPathname !== paths.THE_END) {
               window.history.replaceState(
-                xhr.response,
+                model,
                 `${constants.APP_NAME} - Player`,
                 `${paths.THE_END}?id=${model.id}`,
               );
@@ -166,7 +166,7 @@ export const mainAppSettings = {
             }
             if (currentPathname !== path) {
               window.history.replaceState(
-                xhr.response,
+                model,
                 `${constants.APP_NAME} - Game`,
                 `${path}?id=${model.id}`,
               );

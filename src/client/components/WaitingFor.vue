@@ -25,6 +25,7 @@
 </template>
 
 <script lang="ts">
+/* global RequestInit */
 
 import Vue from 'vue';
 import * as constants from '@/common/constants';
@@ -55,10 +56,6 @@ type DataModel = {
 }
 
 const CANNOT_CONTACT_SERVER = 'Unable to reach the server. It may be restarting or down for maintenance.';
-
-type ServerResponse =
-  {ok: true; response: PlayerViewModel} |
-  {ok: false; response: AppErrorResponse};
 
 export default Vue.extend({
   name: 'waiting-for',
@@ -100,32 +97,20 @@ export default Vue.extend({
       document.title = next + ' ' + this.$t(constants.APP_NAME);
     },
     onsave(out: InputResponse) {
-      const root = vueRoot(this);
-
-      if (root.isServerSideRequestInProgress) {
-        console.warn('Server request in progress');
-        return;
-      }
-      root.isServerSideRequestInProgress = true;
-
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', paths.PLAYER_INPUT + '?id=' + this.playerView.id);
-      xhr.responseType = 'json';
-      xhr.onload = () => {
-        this.loadPlayerViewResponse({
-          ok: xhr.status === statusCode.ok,
-          response: xhr.response,
+      this.fetchPlayerInput(
+        paths.PLAYER_INPUT + '?id=' + this.playerView.id,
+        {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({runId: this.playerView.runId, ...out}),
         });
-        root.isServerSideRequestInProgress = false;
-      };
-      xhr.send(JSON.stringify({runId: this.playerView.runId, ...out}));
-      xhr.onerror = function() {
-        root.showAlert('Error sending input,', CANNOT_CONTACT_SERVER);
-        root.isServerSideRequestInProgress = false;
-      };
     },
     reset() {
-      const xhr = new XMLHttpRequest();
+      this.fetchPlayerInput(
+        paths.RESET + '?id=' + this.playerView.id,
+        {method: 'GET'});
+    },
+    fetchPlayerInput(url: string, options: RequestInit) {
       const root = vueRoot(this);
       if (root.isServerSideRequestInProgress) {
         console.warn('Server request in progress');
@@ -133,35 +118,33 @@ export default Vue.extend({
       }
 
       root.isServerSideRequestInProgress = true;
-      xhr.open('GET', paths.RESET + '?id=' + this.playerView.id);
-      xhr.responseType = 'json';
-      xhr.onload = () => {
-        this.loadPlayerViewResponse({
-          ok: xhr.status === statusCode.ok,
-          response: xhr.response,
+      fetch(url, options)
+        .then(async (response) => {
+          if (response.ok) {
+            this.updatePlayerView(await response.json());
+            return;
+          }
+
+          const showAlert = vueRoot(this).showAlert;
+          if (response.status === statusCode.badRequest) {
+            const resp = await response.json() as AppErrorResponse;
+            let cb = () => {};
+            if (resp.id === INVALID_RUN_ID) {
+              cb = () => setTimeout(() => window.location.reload(), 100);
+            }
+            showAlert('Error with input', resp.message, cb);
+          } else {
+            showAlert('Error processing response', 'Unexpected response from server. Please try again.');
+            console.error(response.statusText);
+          }
+        })
+        .catch((e) => {
+          root.showAlert('Error sending input,', CANNOT_CONTACT_SERVER);
+          console.error(e);
+        })
+        .finally(() => {
+          root.isServerSideRequestInProgress = false;
         });
-      };
-      xhr.send();
-      xhr.onerror = function() {
-        // todo(kberg): Report error to caller
-        root.isServerSideRequestInProgress = false;
-      };
-    },
-    loadPlayerViewResponse(x: ServerResponse) {
-      const root = vueRoot(this);
-      const showAlert = vueRoot(this).showAlert;
-      if (x.ok === true) {
-        this.updatePlayerView(x.response);
-      } else if (x.ok === false && x.response.id === INVALID_RUN_ID) {
-        let cb = () => {};
-        if (x.response.id === INVALID_RUN_ID) {
-          cb = () => setTimeout(() => window.location.reload(), 100);
-        }
-        showAlert('Error with input', x.response.message, cb);
-      } else {
-        showAlert('Error processing response', 'Unexpected response from server. Please try again.');
-      }
-      root.isServerSideRequestInProgress = false;
     },
     updatePlayerView(playerView: PlayerViewModel | undefined) {
       if (this.suspend === false) {

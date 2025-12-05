@@ -50,15 +50,14 @@ export default Vue.extend({
         alert('Specify a game id');
         return;
       }
-      const loadGameForm: LoadGameFormModel = {
-        gameId,
-        rollbackCount,
+      const loadGameFormModel: LoadGameFormModel = {
+        gameId: gameId,
+        rollbackCount: rollbackCount,
       };
-
       fetch(paths.LOAD_GAME, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(loadGameForm),
+        body: JSON.stringify(loadGameFormModel),
       })
         .then((resp) => {
           if (!resp.ok) {

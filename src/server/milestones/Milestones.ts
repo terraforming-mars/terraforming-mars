@@ -24,7 +24,7 @@ import {LandSpecialist} from './arabiaTerra/LandSpecialist';
 import {Martian} from './arabiaTerra/Martian';
 import {Capitalist} from './Capitalist';
 import {VElectrician} from './VElectrician';
-import {Irrigator} from './Irrigator';
+import {Coastguard, Irrigator} from './Irrigator';
 import {Smith} from './Smith';
 import {Tradesman} from './Tradesman';
 import {Colonizer} from './amazonisPlanitia/Colonizer';
@@ -38,7 +38,7 @@ import {Spacefarer} from './terraCimmeria/Spacefarer';
 import {TerraPioneer} from './terraCimmeria/TerraPioneer';
 import {Risktaker} from './underworld/Risktaker';
 import {Tunneler} from './underworld/Tunneler';
-import {Forester} from './modular/Forester';
+import {CForester, Forester} from './modular/Forester';
 import {Fundraiser} from './modular/Fundraiser';
 import {Geologist} from './modular/Geologist';
 import {Landshaper} from './modular/Landshaper';
@@ -60,6 +60,7 @@ import {Agronomist} from './Agronomist';
 import {MAManifest} from '../ma/MAManifest';
 import {MilestoneName} from '../../common/ma/MilestoneName';
 import {BoardName} from '../../common/boards/BoardName';
+import {Architect} from './Architect';
 
 export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
   all: {
@@ -83,7 +84,7 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'One Giant Step': {Factory: OneGiantStep, compatibility: 'moon'},
     'Lunarchitect': {Factory: Lunarchitect, compatibility: 'moon'},
     'Colonizer': {Factory: Colonizer, compatibility: 'colonies'},
-    'Forester': {Factory: Forester},
+    'Forester': {Factory: Forester, deprecated: true},
     'Minimalist': {Factory: Minimalist},
     'Terran': {Factory: Terran},
     'Tropicalist': {Factory: Tropicalist},
@@ -99,7 +100,7 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'V. Electrician': {Factory: VElectrician},
     'Smith': {Factory: Smith},
     'Tradesman': {Factory: Tradesman},
-    'Irrigator': {Factory: Irrigator},
+    'Irrigator': {Factory: Irrigator, deprecated: true},
     'Capitalist': {Factory: Capitalist},
     'Tunneler': {Factory: Tunneler, compatibility: 'underworld'},
     'Risktaker': {Factory: Risktaker, compatibility: 'underworld'},
@@ -122,6 +123,9 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'Purifier': {Factory: Purifier, compatibility: 'ares'},
     'Agronomist': {Factory: Agronomist},
     'V. Spacefarer': {Factory: VSpacefarer},
+    'Architect': {Factory: Architect},
+    'C. Forester': {Factory: CForester},
+    'Coastguard': {Factory: Coastguard},
   },
   boards: {
     [BoardName.THARSIS]: ['Terraformer', 'Mayor', 'Gardener', 'Builder', 'Planner'],
@@ -133,7 +137,7 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     [BoardName.VASTITAS_BOREALIS]: ['V. Electrician', 'Smith', 'Tradesman', 'Irrigator', 'Capitalist'],
     [BoardName.UTOPIA_PLANITIA]: [/* 'Suburbian', 'Investor', 'Botanist', 'Incorporator', 'Metropolist' */],
     [BoardName.VASTITAS_BOREALIS_NOVUS]: ['Agronomist', 'V. Spacefarer', 'Geologist', 'Engineer', 'Farmer'],
-    [BoardName.TERRA_CIMMERIA_NOVUS]: [],
+    [BoardName.TERRA_CIMMERIA_NOVUS]: ['Planetologist', 'Architect', 'Coastguard', 'C. Forester', 'Fundraiser'],
     [BoardName.HOLLANDIA]: [],
   },
   expansions: {

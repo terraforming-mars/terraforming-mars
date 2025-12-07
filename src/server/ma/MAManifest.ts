@@ -6,6 +6,9 @@ type MAManifestSpec<V> = {
   // Creates a new instance of this Milestone or Award.
   Factory: new () => V;
   compatibility?: Expansion | undefined;
+  // Should not be included in any new games when picking randomly.  Can only be set to true if set at all to avoid
+  // 3-value problem (unset, true, false).
+  deprecated?: true;
 }
 type ExpansionsWithMAs = 'venus' | 'ares' | 'moon' | 'underworld';
 

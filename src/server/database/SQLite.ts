@@ -189,7 +189,7 @@ export class SQLite implements IDatabase {
     const maxSaveId = await this.getMaxSaveId(gameId);
     return this.asyncRun('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [gameId, maxSaveId])
       .then(() => {
-        return this.asyncRun('DELETE FROM completed_games where game_id = ?', [gameId]);
+        return this.asyncRun('DELETE FROM completed_game where game_id = ?', [gameId]);
       });
   }
 

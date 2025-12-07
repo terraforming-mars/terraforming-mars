@@ -17,7 +17,6 @@ import * as constants from '@/common/constants';
 import GameOverview from '@/client/components/admin/GameOverview.vue';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {GameId, ParticipantId} from '@/common/Types';
-import {statusCode} from '@/common/http/statusCode';
 
 type FetchStatus = {
   id: GameId;
@@ -45,61 +44,46 @@ export default Vue.extend({
     GameOverview,
   },
   methods: {
-    getGames() {
-      const vueApp = this;
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', 'api/games?serverId='+this.serverId);
-      xhr.onerror = function() {
-        alert('Error getting games data');
-      };
-      xhr.onload = () => {
-        if (xhr.status === statusCode.ok) {
-          const result = xhr.response;
-          if (result instanceof Array) {
-            result.forEach(function(response: Response) {
-              vueApp.entries.push({
-                id: response.gameId,
-                game: undefined,
-                status: 'loading'});
-            });
-            vueApp.getGame(0);
-            return;
-          }
+    async getGames() {
+      try {
+        const response = await fetch('api/games?serverId=' + this.serverId);
+        if (!response.ok) {
+          alert('Unexpected response fetching games from API');
+          return;
         }
-        alert('Unexpected response fetching games from API');
-      };
-      xhr.responseType = 'json';
-      xhr.send();
+        const result: Response[] = await response.json();
+        if (result instanceof Array) {
+          this.entries = result.map((response) => ({
+            id: response.gameId,
+            game: undefined,
+            status: 'loading',
+          }));
+          this.entries.forEach((_, idx) => this.getGame(idx));
+        } else {
+          alert('Unexpected response fetching games from API');
+        }
+      } catch (error) {
+        alert('Error getting games data');
+      }
     },
-    getGame(idx: number) {
+    async getGame(idx: number) {
       if (idx >= this.entries.length) {
         return;
       }
       const entry = this.entries[idx];
       const gameId = entry.id;
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', 'api/game?id='+gameId);
-      xhr.onerror = () => {
-        entry.status = 'error';
-        this.getGame(idx + 1);
-      };
-      xhr.onload = () => {
-        if (xhr.status === statusCode.ok) {
-          const result = xhr.response;
-          if (result instanceof Object) {
-            const game = result as SimpleGameModel;
-            entry.status = 'done';
-            entry.game = game;
-            this.getGame(idx + 1);
-            return;
-          }
+      try {
+        const response = await fetch('api/game?id=' + gameId);
+        if (response.ok) {
+          const game = await response.json() as SimpleGameModel;
+          entry.status = 'done';
+          entry.game = game;
+        } else {
+          entry.status = 'error';
         }
+      } catch (error) {
         entry.status = 'error';
-        this.getGame(idx + 1);
-      };
-      xhr.responseType = 'json';
-      // setTimeout(() => xhr.send(), 500);
-      xhr.send();
+      }
     },
   },
   computed: {
@@ -112,4 +96,3 @@ export default Vue.extend({
   },
 });
 </script>
-

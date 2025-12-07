@@ -28,7 +28,6 @@
 
 import Vue from 'vue';
 import {paths} from '@/common/app/paths';
-import {statusCode} from '@/common/http/statusCode';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
 import {playerColorClass} from '@/common/utils/utils';
@@ -40,7 +39,7 @@ import LogMessageComponent from '@/client/components/logpanel/LogMessageComponen
 import CardPanel from '@/client/components/logpanel/CardPanel.vue';
 import {isMarsSpace} from '@/common/boards/spaces';
 
-let logRequest: XMLHttpRequest | undefined;
+let logAbortController: AbortController | undefined;
 
 type LogPanelModel = {
   messages: Array<LogMessage>,
@@ -110,34 +109,38 @@ export default Vue.extend({
     getLogsForGeneration(generation: number): void {
       const messages = this.messages;
       // abort any pending requests
-      if (logRequest !== undefined) {
-        logRequest.abort();
-        logRequest = undefined;
+      if (logAbortController) {
+        logAbortController.abort();
+        logAbortController = undefined;
       }
 
-      const xhr = new XMLHttpRequest();
-      logRequest = xhr;
+      const url = `${paths.API_GAME_LOGS}?id=${this.id}&generation=${generation}`;
+      const controller = new AbortController();
+      logAbortController = controller;
 
-      xhr.open('GET', `${paths.API_GAME_LOGS}?id=${this.id}&generation=${generation}`);
-      xhr.onerror = () => {
-        console.error('error updating messages, unable to reach server');
-      };
-      xhr.onload = () => {
-        if (xhr.status === statusCode.ok) {
+      fetch(url, {signal: controller.signal})
+        .then((resp) => {
+          if (!resp.ok) {
+            console.error(`error updating messages, response code ${resp.status}`);
+            return null;
+          }
+          return resp.json();
+        })
+        .then((data) => {
+          if (!data) return;
           messages.splice(0, messages.length);
-          messages.push(...xhr.response);
+          messages.push(...data);
           if (getPreferences().enable_sounds && window.location.search.includes('experimental=1') ) {
             SoundManager.newLog();
           }
           if (generation === this.generation) {
             this.$nextTick(this.scrollToEnd);
           }
-        } else {
-          console.error(`error updating messages, response code ${xhr.status}`);
-        }
-      };
-      xhr.responseType = 'json';
-      xhr.send();
+        })
+        .catch((err) => {
+          if (err.name === 'AbortError') return; // ignore aborted requests
+          console.error('error updating messages, unable to reach server');
+        });
     },
     scrollToEnd() {
       const scrollablePanel = document.getElementById('logpanel-scrollable');

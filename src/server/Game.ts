@@ -590,7 +590,7 @@ export class Game implements IGame, Logger {
 
     // Ares Extreme: Solo player must remove all unprotected hazards to win
     if (this.gameOptions.aresExtension && this.gameOptions.aresExtremeVariant) {
-      if (this.board.getHazards(/* includeProtected= */ false).length > 0) {
+      if (this.board.getUnprotectedHazards().length > 0) {
         return false;
       }
     }
@@ -924,8 +924,7 @@ export class Game implements IGame, Logger {
     }
 
     if (this.gameOptions.aresExtension && this.gameOptions.aresExtremeVariant && this.isSoloMode()) {
-      const unprotectedHazardSpaces = this.board.getHazards(/* includeProtected= */ false);
-
+      const unprotectedHazardSpaces = this.board.getUnprotectedHazards();
 
       if (unprotectedHazardSpaces.length > 0) {
         orOptions.options.push(
@@ -1469,10 +1468,12 @@ export class Game implements IGame, Logger {
       this.defer(new AddResourcesToCard(player, CardResource.SCIENCE, {count: count}));
       break;
     case SpaceBonus.TEMPERATURE:
+    case SpaceBonus.TEMPERATURE_4MC:
       if (this.getTemperature() < constants.MAX_TEMPERATURE) {
+        const cost = spaceBonus === SpaceBonus.TEMPERATURE ? constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST : constants.VASTITAS_BOREALIS_NOVUS_BONUS_TEMPERATURE_COST;
         this.defer(new SelectPaymentDeferred(
           player,
-          constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST,
+          cost,
           {title: 'Select how to pay for placement bonus temperature'}))
           .andThen(() => this.increaseTemperature(player, 1));
       }

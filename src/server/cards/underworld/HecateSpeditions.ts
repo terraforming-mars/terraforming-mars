@@ -31,7 +31,7 @@ export class HecateSpeditions extends CorporationCard implements ICorporationCar
         description: 'You start with 38 M€, 2 supply chain resources here, and an extra trade fleet.',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.megacredits(38).resource(CardResource.SUPPLY_CHAIN).tradeFleet().br;
+          b.megacredits(38).resource(CardResource.SUPPLY_CHAIN, 2).tradeFleet().br;
           b.effect('When you play an Earth, Mars, Venus, Moon, or Jovian tag, including this, put 1 supply chain resource on this card.',
             (eb) => eb.tag(Tag.EARTH).tag(Tag.MARS).tag(Tag.VENUS).tag(Tag.MOON).tag(Tag.JOVIAN).startEffect.resource(CardResource.SUPPLY_CHAIN));
           b.br;

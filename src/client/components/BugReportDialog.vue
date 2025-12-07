@@ -83,14 +83,27 @@ export default (Vue as WithRefs<Refs>).extend({
       const playerView = vueRoot(this).playerView;
       const content = {
         url: this.url(playerView),
-        color: playerView?.thisPlayer.color,
-        step: playerView?.game.step,
-        version: raw_settings.head,
-        builtAt: raw_settings.builtAt,
-        browser: browser(),
-        language: getPreferences().lang,
-        experimental_ui: getPreferences().experimental_ui,
       };
+      if (playerView !== undefined) {
+        Object.assign(
+          content,
+          {
+            color: playerView.thisPlayer.color,
+            expansions: Object.entries(playerView.game.gameOptions.expansions)
+              .filter(([_k, v]) => v === true)
+              .map(([k, _v]) => k)
+              .join(', '),
+            step: playerView.game.step,
+          });
+      }
+      Object.assign(content,
+        {
+          version: raw_settings.head,
+          builtAt: raw_settings.builtAt,
+          browser: browser(),
+          language: getPreferences().lang,
+          experimental_ui: getPreferences().experimental_ui,
+        });
       this.message = JSON.stringify(content, null, 2);
     },
   },

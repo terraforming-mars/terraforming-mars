@@ -57,6 +57,7 @@ import {BoardName} from '../../common/boards/BoardName';
 import {AwardName} from '../../common/ma/AwardName';
 import {MAManifest} from '../ma/MAManifest';
 import {Suburbian} from './modular/Suburbian';
+import {Blacksmith} from './Blacksmith';
 
 export const awardManifest: MAManifest<AwardName, IAward> = {
   all: {
@@ -115,6 +116,7 @@ export const awardManifest: MAManifest<AwardName, IAward> = {
     'Politician': {Factory: Politician, compatibility: 'turmoil'},
     'Suburbian': {Factory: Suburbian},
     'Rugged': {Factory: Rugged, compatibility: 'ares'},
+    'Blacksmith': {Factory: Blacksmith},
   },
   boards: {
     [BoardName.THARSIS]: ['Landlord', 'Scientist', 'Banker', 'Thermalist', 'Miner'],
@@ -125,7 +127,7 @@ export const awardManifest: MAManifest<AwardName, IAward> = {
     [BoardName.TERRA_CIMMERIA]: ['Biologist', 'Incorporator', 'T. Politician', 'Urbanist', 'Warmonger'],
     [BoardName.VASTITAS_BOREALIS]: ['Forecaster', 'Edgedancer', 'Visionary', 'Naturalist', 'Voyager'],
     [BoardName.UTOPIA_PLANITIA]: [/* 'Suburbian', 'Investor', 'Botanist', 'Incorporator', 'Metropolist' */],
-    [BoardName.VASTITAS_BOREALIS_NOVUS]: ['Traveller', 'Landscaper', 'Highlander', 'Promoter', 'Miner'],
+    [BoardName.VASTITAS_BOREALIS_NOVUS]: ['Traveller', 'Landscaper', 'Highlander', 'Promoter', 'Blacksmith'],
     [BoardName.TERRA_CIMMERIA_NOVUS]: ['Electrician', 'Founder', 'Mogul', 'A. Zoologist', 'Forecaster'],
     [BoardName.HOLLANDIA]: [],
   },

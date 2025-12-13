@@ -9,7 +9,7 @@
         <template v-for="score in sortedScores">
           <p
             v-if="playerSymbol(score.playerColor).length > 0"
-            :key="score.playerColor"
+            :key="score.playerColor + '-symbol'"
             class="ma-score"
             :class="`player_bg_color_${score.playerColor}`"
             v-text="playerSymbol(score.playerColor)"

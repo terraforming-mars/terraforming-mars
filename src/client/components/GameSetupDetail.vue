@@ -15,6 +15,7 @@
               <div v-if="isPoliticalAgendasOn" class="create-game-expansion-icon expansion-icon-agendas"></div>
               <div v-if="gameOptions.expansions.ceo" class="create-game-expansion-icon expansion-icon-ceo"></div>
               <div v-if="gameOptions.expansions.underworld" class="create-game-expansion-icon expansion-icon-underworld"></div>
+              <div v-if="gameOptions.expansions.starwars" class="create-game-expansion-icon expansion-icon-starwars"></div>
             </li>
 
             <li><div class="setup-item" v-i18n>Board:</div>

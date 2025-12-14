@@ -166,36 +166,38 @@ export default Vue.extend({
       const root = vueRoot(this);
       clearTimeout(ui_update_timeout_id);
       const askForUpdate = () => {
-        const url = paths.API_WAITING_FOR + window.location.search + '&gameAge=' + this.playerView.game.gameAge + '&undoCount=' + this.playerView.game.undoCount;
-        fetch(url, {method: 'GET'})
-          .then(async (response) => {
-            if (response.ok) {
-              const result = await response.json() as WaitingForModel;
-              this.playersWaitingFor = result.waitingFor;
-              if (result.result === 'GO') {
-                // Will only apply to player, not spectator.
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', paths.API_WAITING_FOR + window.location.search + '&gameAge=' + this.playerView.game.gameAge + '&undoCount=' + this.playerView.game.undoCount);
+        xhr.onerror = function() {
+          root.showAlert('Error fetching state', CANNOT_CONTACT_SERVER, () => vueApp.waitForUpdate());
+        };
+        xhr.onload = () => {
+          if (xhr.status === statusCode.ok) {
+            const result = xhr.response as WaitingForModel;
+            this.playersWaitingFor = result.waitingFor;
+            if (result.result === 'GO') {
+              // Will only apply to player, not spectator.
+              root.updatePlayer();
+              this.notify();
+              // We don't need to wait anymore - it's our turn
+              return;
+            } else if (result.result === 'REFRESH') {
+              // Something changed, let's refresh UI
+              if (isPlayerId(this.playerView.id)) {
                 root.updatePlayer();
-                this.notify();
-                // We don't need to wait anymore - it's our turn
-                return;
-              } else if (result.result === 'REFRESH') {
-                // Something changed, let's refresh UI
-                if (isPlayerId(this.playerView.id)) {
-                  root.updatePlayer();
-                } else {
-                  root.updateSpectator();
-                }
-
-                return;
+              } else {
+                root.updateSpectator();
               }
-              vueApp.waitForUpdate();
-            } else {
-              root.showAlert('Error with input', `Received unexpected response from server (${response.status}). This is often due to the server restarting.`, () => vueApp.waitForUpdate());
+
+              return;
             }
-          })
-          .catch(() => {
-            root.showAlert('Error fetching state', CANNOT_CONTACT_SERVER, () => vueApp.waitForUpdate());
-          });
+            vueApp.waitForUpdate();
+          } else {
+            root.showAlert('Error with input', `Received unexpected response from server (${xhr.status}). This is often due to the server restarting.`, () => vueApp.waitForUpdate());
+          }
+        };
+        xhr.responseType = 'json';
+        xhr.send();
       };
       ui_update_timeout_id = window.setTimeout(askForUpdate, this.waitingForTimeout);
     },

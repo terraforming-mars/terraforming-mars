@@ -8,7 +8,7 @@ import {UnseededRandom} from '../../common/utils/Random';
 import {MilestoneName, milestoneNames} from '../../common/ma/MilestoneName';
 import {AwardName, awardNames} from '../../common/ma/AwardName';
 import {synergies} from './MilestoneAwardSynergies';
-import {MAManifest, isCompatible} from './MAManifest';
+import {isCompatible, MAManifest} from './MAManifest';
 import {intersection} from '../../common/utils/utils';
 
 type DrawnMilestonesAndAwards = {
@@ -72,16 +72,16 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
     case BoardName.THARSIS:
     case BoardName.HELLAS:
     case BoardName.ELYSIUM:
+    case BoardName.UTOPIA_PLANITIA:
     case BoardName.ARABIA_TERRA:
     case BoardName.AMAZONIS:
     case BoardName.TERRA_CIMMERIA:
+    case BoardName.TERRA_CIMMERIA_NOVUS:
     case BoardName.VASTITAS_BOREALIS:
     case BoardName.VASTITAS_BOREALIS_NOVUS:
       push(milestoneManifest.boards[boardName], awardManifest.boards[gameOptions.boardName]);
       break;
-    case BoardName.UTOPIA_PLANITIA:
-      return getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
-    case BoardName.TERRA_CIMMERIA_NOVUS:
+    default:
       return getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
     }
     if (gameOptions.venusNextExtension) {
@@ -125,6 +125,12 @@ export function getCandidates(gameOptions: GameOptions): [Array<MilestoneName>, 
     // When using modular, don't include non-modular MAs.
     if (gameOptions.modularMA) {
       throw new Error('Not supporting modular awards yet.');
+    }
+
+    // Never include deprecated MAs in random candidates.  They generally have "more official" versions that will be
+    // considered for inclusion.
+    if (manifest.all[name].deprecated) {
+      return false;
     }
 
     if (!gameOptions.modularMA) {
@@ -171,7 +177,8 @@ function getRandomMilestonesAndAwards(gameOptions: GameOptions,
   // 5 is a fine number of attempts. A sample of 100,000 runs showed that this algorithm
   // didn't get past 3.
   // https://github.com/terraforming-mars/terraforming-mars/pull/1637#issuecomment-711411034
-  const maxAttempts = 5;
+  // 2025-11-30: raised to 6.
+  const maxAttempts = 6;
   if (attempt > maxAttempts) {
     throw new Error('No limited synergy milestones and awards set was generated after ' + maxAttempts + ' attempts. Please try again.');
   }

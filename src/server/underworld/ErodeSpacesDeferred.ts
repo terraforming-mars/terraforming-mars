@@ -29,7 +29,7 @@ export class ErodeSpacesDeferred extends RunNTimes<Space> {
       return undefined;
     }
 
-    return new SelectSpace('Select space to erode' + this.titleSuffix(), Array.from(spaces))
+    return new SelectSpace(this.createTitle('Select space to erode'), Array.from(spaces))
       .andThen((space) => {
         AresHazards.putHazardAt(this.player.game, space, TileType.EROSION_MILD);
         LogHelper.logBoardTileAction(this.player, space, 'space', 'eroded');

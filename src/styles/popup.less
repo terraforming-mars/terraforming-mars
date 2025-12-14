@@ -1,0 +1,47 @@
+.popup-outer {
+  position: fixed; /* Fixes the overlay to the viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  display: flex; /* Centers the popup panel */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensures the overlay is on top of other content */
+
+  .popup-inner {
+    background-color: black;
+    padding: 0px 20px 20px; /* 0 for the top, 20 for the rest */
+    border-radius: 8px;
+    border: 2px solid white;
+    width: 90vw;
+    height: 90vh;
+    overflow-y: auto; /* Adds scrollbar if content exceeds height */
+    overscroll-behavior: contain;
+    position: relative; /* For positioning the close button */
+    color: white;
+  }
+
+  .popup-header {
+    margin-top: 20px; /* This makes up for the padding 0 for popup-inner */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between; /* Pushes items to opposite edges */
+    align-items: center; /* Vertically aligns items in the center (optional, but good practice) */
+    width: 100%;
+    background-color: black;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+}

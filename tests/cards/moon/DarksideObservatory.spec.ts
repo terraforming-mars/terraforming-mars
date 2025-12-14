@@ -58,7 +58,7 @@ describe('DarksideObservatory', () => {
   it('act', () => {
     player.playedCards.set(physicsComplex, searchForLife, olympusConference, prideoftheEarthArkship, processorFactory);
     player.playedCards.push(nanotechIndustries);
-    const input = card.action(player);
+    const input = card.action(player)!;
 
     expect(input.cards).has.members([olympusConference, prideoftheEarthArkship, processorFactory, nanotechIndustries]);
 
@@ -77,6 +77,12 @@ describe('DarksideObservatory', () => {
     nanotechIndustries.resourceCount = 0;
     input.cb([nanotechIndustries]);
     expect(nanotechIndustries.resourceCount).eq(1);
+
+    const processorFactoryResources = processorFactory.resourceCount;
+    player.playedCards.set(processorFactory);
+    const input2 = card.action(player);
+    expect(input2).undefined;
+    expect(processorFactory.resourceCount).eq(processorFactoryResources + 2);
   });
 });
 

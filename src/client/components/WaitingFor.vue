@@ -25,6 +25,7 @@
 </template>
 
 <script lang="ts">
+/* global RequestInit */
 
 import Vue from 'vue';
 import * as constants from '@/common/constants';
@@ -41,9 +42,8 @@ import {paths} from '@/common/app/paths';
 import {statusCode} from '@/common/http/statusCode';
 import {isPlayerId} from '@/common/Types';
 import {InputResponse} from '@/common/inputs/InputResponse';
-import {INVALID_RUN_ID} from '@/common/app/AppErrorId';
+import {INVALID_RUN_ID, AppErrorResponse} from '@/common/app/AppErrorId';
 import {Color} from '@/common/Color';
-
 
 let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;
@@ -54,6 +54,8 @@ type DataModel = {
   suspend: boolean,
   savedPlayerView: PlayerViewModel | undefined;
 }
+
+const CANNOT_CONTACT_SERVER = 'Unable to reach the server. It may be restarting or down for maintenance.';
 
 export default Vue.extend({
   name: 'waiting-for',
@@ -81,6 +83,10 @@ export default Vue.extend({
   },
   methods: {
     animateTitle() {
+      if (!getPreferences().animated_title) {
+        return;
+      }
+
       const sequence = '\u25D1\u25D2\u25D0\u25D3';
       const first = document.title[0];
       const position = sequence.indexOf(first);
@@ -91,47 +97,20 @@ export default Vue.extend({
       document.title = next + ' ' + this.$t(constants.APP_NAME);
     },
     onsave(out: InputResponse) {
-      const root = vueRoot(this);
-
-      if (root.isServerSideRequestInProgress) {
-        console.warn('Server request in progress');
-        return;
-      }
-      root.isServerSideRequestInProgress = true;
-
-      const url = paths.PLAYER_INPUT + '?id=' + this.playerView.id;
-
-      fetch(url, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          runId: this.playerView.runId,
-          ...out,
-        }),
-      })
-        .then((resp) =>
-          resp
-            .json()
-            .then((response) => ({
-              status: resp.status,
-              responseType: 'json',
-              response,
-            }))
-            .catch((err) => ({
-              status: resp.status,
-              err,
-            })),
-        )
-        .then((xhr) => {
-          this.loadPlayerViewResponse(xhr);
-          root.isServerSideRequestInProgress = false;
-        })
-        .catch(() => {
-          // todo(kberg): Report error to caller
-          root.isServerSideRequestInProgress = false;
+      this.fetchPlayerInput(
+        paths.PLAYER_INPUT + '?id=' + this.playerView.id,
+        {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({runId: this.playerView.runId, ...out}),
         });
     },
     reset() {
+      this.fetchPlayerInput(
+        paths.RESET + '?id=' + this.playerView.id,
+        {method: 'GET'});
+    },
+    fetchPlayerInput(url: string, options: RequestInit) {
       const root = vueRoot(this);
       if (root.isServerSideRequestInProgress) {
         console.warn('Server request in progress');
@@ -139,44 +118,33 @@ export default Vue.extend({
       }
 
       root.isServerSideRequestInProgress = true;
-      const url = paths.RESET + '?id=' + this.playerView.id;
-      fetch(url)
-        .then((resp) =>
-          resp
-            .json()
-            .then((response) => ({
-              status: resp.status,
-              responseType: 'json',
-              response,
-            }))
-            .catch((err) => ({
-              status: resp.status,
-              err,
-            })),
-        )
-        .then((xhr) => {
-          this.loadPlayerViewResponse(xhr);
+      fetch(url, options)
+        .then(async (response) => {
+          if (response.ok) {
+            this.updatePlayerView(await response.json());
+            return;
+          }
+
+          const showAlert = vueRoot(this).showAlert;
+          if (response.status === statusCode.badRequest) {
+            const resp = await response.json() as AppErrorResponse;
+            let cb = () => {};
+            if (resp.id === INVALID_RUN_ID) {
+              cb = () => setTimeout(() => window.location.reload(), 100);
+            }
+            showAlert('Error with input', resp.message, cb);
+          } else {
+            showAlert('Error processing response', 'Unexpected response from server. Please try again.');
+            console.error(response.statusText);
+          }
         })
-        .catch(() => {
-          // todo(kberg): Report error to caller
+        .catch((e) => {
+          root.showAlert('Error sending input,', CANNOT_CONTACT_SERVER);
+          console.error(e);
+        })
+        .finally(() => {
           root.isServerSideRequestInProgress = false;
         });
-    },
-    loadPlayerViewResponse(xhr: {status:number, response:any, responseType:string}|{status:number, err:string}) {
-      const root = vueRoot(this);
-      const showAlert = vueRoot(this).showAlert;
-      if (xhr.status === statusCode.ok) {
-        this.updatePlayerView(xhr.response);
-      } else if (xhr.status === statusCode.badRequest && xhr.responseType === 'json') {
-        let cb = () => {};
-        if (xhr.response.id === INVALID_RUN_ID) {
-          cb = () => setTimeout(() => window.location.reload(), 100);
-        }
-        showAlert(xhr.response.message, cb);
-      } else {
-        showAlert('Unexpected response from server. Please try again.');
-      }
-      root.isServerSideRequestInProgress = false;
     },
     updatePlayerView(playerView: PlayerViewModel | undefined) {
       if (this.suspend === false) {
@@ -198,53 +166,35 @@ export default Vue.extend({
       const root = vueRoot(this);
       clearTimeout(ui_update_timeout_id);
       const askForUpdate = () => {
-        const url =
-          paths.API_WAITING_FOR +
-          window.location.search +
-          '&gameAge=' +
-          this.playerView.game.gameAge +
-          '&undoCount=' +
-          this.playerView.game.undoCount;
-
-        fetch(url)
-          .then((resp) => {
-            if (!resp.ok) {
-              root.showAlert(
-                `Received unexpected response from server (${resp.status}). This is often due to the server restarting.`,
-                () => vueApp.waitForUpdate(),
-              );
-              // still return to continue chain safely
-              return null;
-            }
-            return resp.json();
-          })
-          .then((result: WaitingForModel | null) => {
-            if (!result) return;
-
-            this.playersWaitingFor = result.waitingFor;
-
-            if (result.result === 'GO') {
-              root.updatePlayer();
-              this.notify();
-              return;
-            }
-
-            if (result.result === 'REFRESH') {
-              if (isPlayerId(this.playerView.id)) {
+        const url = paths.API_WAITING_FOR + window.location.search + '&gameAge=' + this.playerView.game.gameAge + '&undoCount=' + this.playerView.game.undoCount;
+        fetch(url, {method: 'GET'})
+          .then(async (response) => {
+            if (response.ok) {
+              const result = await response.json() as WaitingForModel;
+              this.playersWaitingFor = result.waitingFor;
+              if (result.result === 'GO') {
+                // Will only apply to player, not spectator.
                 root.updatePlayer();
-              } else {
-                root.updateSpectator();
-              }
-              return;
-            }
+                this.notify();
+                // We don't need to wait anymore - it's our turn
+                return;
+              } else if (result.result === 'REFRESH') {
+                // Something changed, let's refresh UI
+                if (isPlayerId(this.playerView.id)) {
+                  root.updatePlayer();
+                } else {
+                  root.updateSpectator();
+                }
 
-            vueApp.waitForUpdate();
+                return;
+              }
+              vueApp.waitForUpdate();
+            } else {
+              root.showAlert('Error with input', `Received unexpected response from server (${response.status}). This is often due to the server restarting.`, () => vueApp.waitForUpdate());
+            }
           })
           .catch(() => {
-            root.showAlert(
-              'Unable to reach the server. The server may be restarting or down for maintenance.',
-              () => vueApp.waitForUpdate(),
-            );
+            root.showAlert('Error fetching state', CANNOT_CONTACT_SERVER, () => vueApp.waitForUpdate());
           });
       };
       ui_update_timeout_id = window.setTimeout(askForUpdate, this.waitingForTimeout);

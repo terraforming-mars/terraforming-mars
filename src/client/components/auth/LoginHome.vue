@@ -29,7 +29,6 @@ export default Vue.extend({
   },
   mounted() {
     const url = paths.API_PROFILE;
-
     fetch(url)
       .then((resp) => {
         if (!resp.ok) {
@@ -46,8 +45,9 @@ export default Vue.extend({
           console.log('Error processing fetch response: ' + e);
         }
       })
-      .catch(() => {
+      .catch((err) => {
         alert('Error getting session profile data');
+        console.error(err);
       });
   },
   computed: {

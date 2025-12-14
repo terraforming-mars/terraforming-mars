@@ -44,71 +44,46 @@ export default Vue.extend({
     GameOverview,
   },
   methods: {
-    getGames() {
-      const vueApp = this;
-
-      const url = 'api/games?serverId='+this.serverId;
-      fetch(url)
-        .then((resp) => {
-          if (!resp.ok) {
-            alert('Unexpected response fetching games from API');
-            return null;
-          }
-          return resp.json();
-        })
-        .then((result: Response[] | null) => {
-          if (!result) return;
-
-          if (result instanceof Array) {
-            result.forEach(function(response) {
-              vueApp.entries.push({
-                id: response.gameId,
-                game: undefined,
-                status: 'loading',
-              });
-            });
-            vueApp.getGame(0);
-            return;
-          }
-
+    async getGames() {
+      try {
+        const response = await fetch('api/games?serverId=' + this.serverId);
+        if (!response.ok) {
           alert('Unexpected response fetching games from API');
-        })
-        .catch(() => alert('Error getting games data'));
+          return;
+        }
+        const result: Response[] = await response.json();
+        if (result instanceof Array) {
+          this.entries = result.map((response) => ({
+            id: response.gameId,
+            game: undefined,
+            status: 'loading',
+          }));
+          this.entries.forEach((_, idx) => this.getGame(idx));
+        } else {
+          alert('Unexpected response fetching games from API');
+        }
+      } catch (error) {
+        alert('Error getting games data');
+      }
     },
-    getGame(idx: number) {
+    async getGame(idx: number) {
       if (idx >= this.entries.length) {
         return;
       }
       const entry = this.entries[idx];
       const gameId = entry.id;
-
-      const url = 'api/game?id='+gameId;
-      fetch(url)
-        .then((resp) => {
-          if (!resp.ok) {
-            entry.status = 'error';
-            this.getGame(idx + 1);
-            return null;
-          }
-          return resp.json();
-        })
-        .then((game: SimpleGameModel | null) => {
-          if (!game) return;
-
-          if (game instanceof Object) {
-            entry.status = 'done';
-            entry.game = game;
-            this.getGame(idx + 1);
-            return;
-          }
-
+      try {
+        const response = await fetch('api/game?id=' + gameId);
+        if (response.ok) {
+          const game = await response.json() as SimpleGameModel;
+          entry.status = 'done';
+          entry.game = game;
+        } else {
           entry.status = 'error';
-          this.getGame(idx + 1);
-        })
-        .catch(() => {
-          entry.status = 'error';
-          this.getGame(idx + 1);
-        });
+        }
+      } catch (error) {
+        entry.status = 'error';
+      }
     },
   },
   computed: {
@@ -121,4 +96,3 @@ export default Vue.extend({
   },
 });
 </script>
-

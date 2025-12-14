@@ -15,12 +15,11 @@ import SpectatorHome from '@/client/components/SpectatorHome.vue';
 import StartScreen from '@/client/components/StartScreen.vue';
 import {$t, setTranslationContext} from '@/client/directives/i18n';
 import {paths} from '@/common/app/paths';
-import {PlayerViewModel} from '@/common/models/PlayerModel';
+import {PlayerViewModel, ViewModel} from '@/common/models/PlayerModel';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {isPlayerId, isSpectatorId} from '@/common/Types';
 import {hasShowModal, showModal, windowHasHTMLDialogElement} from './HTMLDialogElementCompatibility';
-import {runCustomMiddleware} from '@/client/plugins/customMiddleware';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -100,12 +99,14 @@ export const mainAppSettings = {
     'login-home': LoginHome,
   },
   'methods': {
-    showAlert(message: string, cb: () => void = () => {}): void {
+    showAlert(title: string, message: string, cb: () => void = () => {}): void {
       const dialogElement: HTMLElement | null = document.getElementById('alert-dialog');
       const buttonElement: HTMLElement | null = document.getElementById('alert-dialog-button');
       const messageElement: HTMLElement | null = document.getElementById('alert-dialog-message');
-      if (buttonElement !== null && messageElement !== null && dialogElement !== null && hasShowModal(dialogElement)) {
+      const titleElement: HTMLElement | null = document.getElementById('alert-dialog-title');
+      if (buttonElement !== null && titleElement !== null && messageElement !== null && dialogElement !== null && hasShowModal(dialogElement)) {
         messageElement.innerHTML = $t(message);
+        titleElement.textContent = $t(title);
         const handler = () => {
           buttonElement.removeEventListener('click', handler);
           cb();
@@ -133,11 +134,11 @@ export const mainAppSettings = {
       fetch(url)
         .then((resp) => {
           if (!resp.ok) {
-            throw new Error(resp.statusText || 'Error getting game data');
+            throw new Error(`Error getting game data: ${resp.statusText}`);
           }
           return resp.json();
         })
-        .then((model) => {
+        .then((model: ViewModel) => {
           if (path === paths.PLAYER) {
             app.playerView = model as PlayerViewModel;
             setTranslationContext(app.playerView);
@@ -147,7 +148,7 @@ export const mainAppSettings = {
           app.playerkey++;
           if (
             model.game.phase === 'end' &&
-            window.location.search.includes('&noredirect') === false
+              window.location.search.includes('&noredirect') === false
           ) {
             app.screen = 'the-end';
             if (currentPathname !== paths.THE_END) {
@@ -172,7 +173,10 @@ export const mainAppSettings = {
             }
           }
         })
-        .catch(() => alert('Error getting game data'));
+        .catch((err) => {
+          alert('Error getting game data');
+          console.error(err);
+        });
     },
     updatePlayer() {
       this.update(paths.PLAYER);
@@ -201,26 +205,27 @@ export const mainAppSettings = {
         alert('Bad id URL parameter.');
       }
     } else if (currentPathname === paths.GAME) {
-      app.screen = 'game-home';
-
       const url = paths.API_GAME + window.location.search;
-
       fetch(url)
         .then((resp) => {
           if (!resp.ok) {
-            throw new Error(resp.statusText || 'Error getting game data');
+            throw new Error(`Error getting game data: ${resp.statusText}`);
           }
           return resp.json();
         })
         .then((appGame: SimpleGameModel) => {
+          app.screen = 'game-home';
+          app.game = appGame;
           window.history.replaceState(
             appGame,
             `${constants.APP_NAME} - Game`,
             `${paths.GAME}?id=${appGame.id}`,
           );
-          app.game = appGame;
         })
-        .catch(() => alert('Error getting game data'));
+        .catch((err) => {
+          alert('Error getting game data');
+          console.error(err);
+        });
     } else if (currentPathname === paths.GAMES_OVERVIEW) {
       app.screen = 'games-overview';
     } else if (currentPathname === paths.NEW_GAME) {
@@ -240,9 +245,6 @@ export const mainAppSettings = {
     } else {
       app.screen = 'start-screen';
     }
-  },
-  updated() {
-    runCustomMiddleware({app: this});
   },
 };
 

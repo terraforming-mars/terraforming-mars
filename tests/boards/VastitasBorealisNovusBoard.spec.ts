@@ -46,7 +46,7 @@ describe('VastitasBorealisNovusBoard', () => {
       {'id': '30', 'spaceType': 'land', 'x': 1, 'y': 4, 'bonus': []},
       {'id': '31', 'spaceType': 'ocean', 'x': 2, 'y': 4, 'bonus': [2]},
       {'id': '32', 'spaceType': 'land', 'x': 3, 'y': 4, 'bonus': [2, 2]},
-      {'id': '33', 'spaceType': 'land', 'x': 4, 'y': 4, 'bonus': [13]},
+      {'id': '33', 'spaceType': 'land', 'x': 4, 'y': 4, 'bonus': [18]},
       {'id': '34', 'spaceType': 'ocean', 'x': 5, 'y': 4, 'bonus': [2, 2]},
       {'id': '35', 'spaceType': 'ocean', 'x': 6, 'y': 4, 'bonus': [2, 2]},
       {'id': '36', 'spaceType': 'ocean', 'x': 7, 'y': 4, 'bonus': [2, 2]},
@@ -105,12 +105,12 @@ describe('VastitasBorealisNovusBoard', () => {
   it('Grants temperature bonus', () => {
     const [game, player] = testGame(2, {boardName: BoardName.VASTITAS_BOREALIS_NOVUS});
     const board = cast(game.board, VastitasBorealisNovusBoard);
-    const space = board.spaces.find((space) => space.bonus.includes(SpaceBonus.TEMPERATURE))!;
-
-    player.megaCredits = 2;
-    expect(board.getAvailableSpacesOnLand(player).map(toID)).does.not.include(space.id);
+    const space = board.spaces.find((space) => space.bonus.includes(SpaceBonus.TEMPERATURE_4MC))!;
 
     player.megaCredits = 3;
+    expect(board.getAvailableSpacesOnLand(player).map(toID)).does.not.include(space.id);
+
+    player.megaCredits = 4;
     expect(board.getAvailableSpacesOnLand(player).map(toID)).includes(space.id);
     expect(game.getTemperature()).eq(-30);
 

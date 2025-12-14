@@ -1,0 +1,32 @@
+{
+  "POLYPHEMOS": "",
+  "Polyphemos": "",
+  "You start with 50 M€. Increase your M€ production 5 steps. Gain 5 titanium.": "Aloitat 50 M€:llä. Lisää M€-tuotantoasi 5 askelta. Saat 5 titaania.",
+  "Effect: When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.": "VAIKUTUS: Kun ostat kortin käteen, maksa 5 M€ 3 M€:n sijaan, sisältäen aloituskäden.",
+
+  "STORM": "MYRSKY",
+  "CRAFT": "TYÖ",
+  "INCOR": "OYJ",
+  "PORATED": "",
+  "STORMCRAFT INCORPORATED": "MYRSKYTYÖ OYJ",
+  "Stormcraft Incorporated": "Myrskytyö Oyj",
+  "You start with 48 M€.": "Aloitat 48 M€:llä.",
+  "Action: Add a floater to ANY card.": "TOIMINTO: Lisää kelluja MILLE TAHANSA kortille.",
+  "Effect: Floaters on this card may be used as 2 heat each.": "VAIKUTUS: Kellujat tällä kortilla voidaan käyttää 2 lämpönä kukin.",
+
+  "ARKLIGHT": "",
+  "Arklight": "",
+  "You start with 45 M€. Increase your M€ production 2 steps. 1 VP per 2 animals on this card.": "Aloitat 45 M€:llä. Lisää M€-tuotantoasi 2 askelta. 1 VP jokaista 2 eläintä kohden tällä kortilla.",
+  "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.": "VAIKUTUS: Kun pelaat eläin- tai kasviympyrän, sisältäen tämän, lisää 1 eläin tälle kortille.",
+
+  "ARIDOR": "",
+  "Aridor": "",
+  "COLONY": "SIIRTOKUNTA",
+  "You start with 40 M€. As your first action, put an additional Colony Tile of your choice into play": "Aloitat 40 M€:llä. Ensimmäisenä toimintona tuo valitsemasi ylimääräinen siirtokuntalaatta peliin.",
+  "Effect: When you get a new type of tag in play [event cards do not count], increase your M€ production 1 step.": "VAIKUTUS: Kun pelaat uuden tyyppisen ympyrän (tapahtumakortteja ei lasketa), lisää M€-tuotantoasi 1 askel.",
+
+  "POSEIDON": "",
+  "Poseidon": "",
+  "You start with 45 M€. As your first action, place a colony.": "Aloitat 45 M€:llä. Ensimmäisenä toimintona aseta siirtokunta.",
+  "Effect: When any colony is placed, including this, raise your M€ production 1 step.": "VAIKUTUS: Kun mikä tahansa siirtokunta asetetaan, sisältäen tämän, lisää M€-tuotantoasi 1 askel."
+}

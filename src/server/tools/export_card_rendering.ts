@@ -156,6 +156,7 @@ class ColoniesProcessor {
       trade: metadata.trade,
       colony: metadata.colony,
       shouldIncreaseTrack: metadata.shouldIncreaseTrack,
+      expansion: metadata.expansion,
     };
 
     ColoniesProcessor.json.push(clientMetadata);

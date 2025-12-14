@@ -1045,6 +1045,7 @@
     "Note: Moon habitat rate is already at its goal.": "Merk: Måne-habitatmengden har allerede nådd sitt mål.",
     "Note: Moon mining rate is already at its goal.": "Merk: Måne-gruvedriften har allerede nådd sitt mål.",
     "Note: Moon logistics rate is already at its goal.": "Merk: Måne-logistikken har allerede nådd sitt mål.",
-	"Yes": "Ja",
-	"No": "Nei"
+        "Yes": "Ja",
+        "No": "Nei",
+        "Reorder Cards": "Omorganiser kortene"
 }

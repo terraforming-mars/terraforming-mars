@@ -20,6 +20,7 @@
 import Vue from 'vue';
 import * as constants from '@/common/constants';
 import AppButton from '@/client/components/common/AppButton.vue';
+import {LoadGameFormModel} from '@/common/models/LoadGameFormModel';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {vueRoot} from '@/client/components/vueRoot';
 import {GameId} from '@/common/Types';
@@ -49,32 +50,35 @@ export default Vue.extend({
         alert('Specify a game id');
         return;
       }
+      const loadGameForm: LoadGameFormModel = {
+        gameId,
+        rollbackCount,
+      };
+
       fetch(paths.LOAD_GAME, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          gameId,
-          rollbackCount,
-        }),
+        body: JSON.stringify(loadGameForm),
       })
-        .then((res) => res.json())
+        .then((resp) => {
+          if (!resp.ok) {
+            throw new Error(`Error getting game data: ${resp.statusText}`);
+          }
+          return resp.json();
+        })
         .then((response: SimpleGameModel) => {
           if (response.players.length === 1) {
             window.location.href = 'player?id=' + response.players[0].id;
             return;
+          } else {
+            window.history.replaceState(response, `${constants.APP_NAME} - Game`, 'game?id=' + response.id);
+            vueRoot(this).game = response;
+            vueRoot(this).screen = 'game-home';
           }
-
-          window.history.replaceState(
-            response,
-            `${constants.APP_NAME} - Game`,
-            'game?id=' + response.id,
-          );
-          const root = vueRoot(this);
-          root.game = response;
-          root.screen = 'game-home';
         })
-        .catch(() => {
+        .catch((err) => {
           alert('Error loading game');
+          console.error(err);
         });
     },
   },

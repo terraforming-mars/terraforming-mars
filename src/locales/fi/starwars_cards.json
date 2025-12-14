@@ -1,0 +1,29 @@
+{
+  "Trade Embargo (I)": "Kauppasaarto (I)",
+  "Nobody may trade for the rest of this generation.": "Kukaan ei saa käydä kauppaa tämän sukupolven loppuun.",
+
+  "Clone Troopers (II)": "Kloonisotilaat (II)",
+  "Action: Add one Clone Trooper to this card OR remove one Clone Trooper from this card to steal one standard resource from any player.": "TOIMINTO: Lisää yksi kloonisoturi tälle kortille TAI poista yksi kloonisoturi tältä kortilta varastaaksesi yhden perusresurssin keneltä tahansa pelaajalta.",
+  "Requires 6 ocean tiles. 1 VP per Clone Trooper on this card.": "Vaatii 6 merilaattaa. 1 VP jokaista kloonisoturi kohden tällä kortilla.",
+
+  "Behold The Emperor! (III)": "Katsokaa keisaria! (III)",
+  "Requires that you are Chairman. The current ruling party will automatically be the ruling party during the next Solar phase, and you will remain the Chairman. (As if the current ruling party were dominant and you were its party leader.)": "Vaatii että olet puheenjohtaja. Nykyinen hallitseva puolue tulee automaattisesti olemaan hallitseva puolue seuraavan aurinkovaiheessa, ja pysyt puheenjohtajana. (Ikään kuin nykyinen hallitseva puolue olisi dominoiva ja olisit sen puoluejohtaja.)",
+
+  "Tosche Station (IV)": "Tosche-asema (IV)",
+  "Action: Spend X Energy and gain X-1 plants (max 4.)": "TOIMINTO: Käytä X energiaa ja saat X-1 kasvia (enintään 4).",
+
+  "Cloud City (V)": "Pilvikaupunki (V)",
+  "Requires Venus 6%. Raise Venus 1 step. Add 2 floaters to any card.": "Vaatii Venus 6 %. Nosta Venusta 1 askel. Lisää 2 kellujaa mille kortille tahansa.",
+
+  "Forest Moon (VI)": "Metsäkuu (VI)",
+  "Requires any 4 greeneries on Mars. Decrease any energy production 2 steps. Add an animal to any card.": "Vaatii 4 viheraluetta Marsissa. Vähennä mitä tahansa energiatuotantoa 2 askelta. Lisää eläin mille kortille tahansa.",
+
+  "Takonda Castle (VII)": "Takondan linna (VII)",
+  "Gain 1 M€ for each of your microbe tags and animal tags.": "Saa 1 M€ jokaisesta mikrobi- ja eläintunnisteestasi.",
+
+  "Tool with the First Order (VIII)": "Ensimmäisen Veljeskunnan työkalu (VIII)",
+  "Take another action this turn. Gain 1 TR.": "Nosta MKL:ääsi 1 askel. Suorita toinen toiminto tässä vuorossa.",
+
+  "Rey ... Skywalker?! (IX)": "",
+  "Raise your M€ production 4 steps. Place a bronze cube on an empty unreserved space on Mars. No tile or token may be placed on that space for the rest of the game.": "Lisää M€-tuotantoasi 4 askelta. Aseta pronssikuutio tyhjään, varaamattomaan tilaan Marsissa. Mihinkään laattaa tai merkkiä ei saa asettaa kyseiseen tilaan pelin loppuun asti."
+}

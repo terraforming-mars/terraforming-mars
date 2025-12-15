@@ -6,6 +6,7 @@ import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectColony} from '../../inputs/SelectColony';
 import {IColony} from '../../colonies/IColony';
+import {all} from '../Options';
 
 export class CoordinatedRaid extends Card implements IProjectCard {
   constructor() {
@@ -13,7 +14,7 @@ export class CoordinatedRaid extends Card implements IProjectCard {
       cost: 5,
       name: CardName.COORDINATED_RAID,
       type: CardType.EVENT,
-      requirements: {colonies: 1},
+      requirements: {colonies: 1, all},
 
       metadata: {
         cardNumber: 'Pf64',

@@ -611,43 +611,23 @@ each(@token_types, {
 
 .underground-excavator {
 	position: absolute;
-	width: 21px;
-	height: 21px;
+  width: 16px;
+  height: 16px;
 	z-index: 3;
+  border-radius: 50%;
 	margin: 7px 0 0 21px;
 	filter: drop-shadow(2px 2px 3px black);
-  transform: rotate(0.14turn);
+  // box-shadow: -5px 8.66px 5px 0 #00000080
 }
 
-// TODO(kberg): Replace with a different shape
-.underground-excavator--red {
-	background: url(./assets/board_icons.png) -24px -91px no-repeat;
-}
-
-.underground-excavator--blue {
-	background: url(./assets/board_icons.png) -94px -91px no-repeat;
-}
-
-.underground-excavator--black {
-	background: url(./assets/board_icons.png) -48px -91px no-repeat;
-}
-
-.underground-excavator--yellow {
-	background: url(./assets/board_icons.png) -72px -91px no-repeat;
-}
-
-.underground-excavator--green {
-	background: url(./assets/board_icons.png) -1px -91px no-repeat;
-}
-
-.underground-excavator--purple {
-	background: url(./assets/board_icons.png) -118px -91px no-repeat;
-}
-
-.underground-excavator--orange {
-	background: url(./assets/board_icons.png) -1px -117px no-repeat;
-}
-
-.underground-excavator--pink {
-	background: url(./assets/board_icons.png) -24px -117px no-repeat;
-}
+@underground_player_colors: red, blue, black, yellow, green, purple, orange, pink;
+each(@underground_player_colors, {
+  .underground-excavator--@{value} {
+    // @var_name: ~"player_@{value}";
+    // @player_color: ~"@@var_name";
+    // data-test: e(@var_name);
+    // data-test-2: @player_color;
+    // background-color: @player_color;
+    background-color: @value;
+  }
+})

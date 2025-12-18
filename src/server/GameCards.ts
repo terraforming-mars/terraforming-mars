@@ -24,11 +24,6 @@ import {PRELUDE2_CARD_MANIFEST} from './cards/prelude2/Prelude2CardManifest';
 import {STAR_WARS_CARD_MANIFEST} from './cards/starwars/StarwarsCardManifest';
 import {UNDERWORLD_CARD_MANIFEST} from './cards/underworld/UnderworldCardManifest';
 
-const BROKEN_CARDS = [
-  CardName.SUITABLE_INFRASTRUCTURE, // #7610
-  CardName.MARS_FRONTIER_ALLIANCE, // #7519
-];
-
 /**
  * Returns the cards available to a game based on its `GameOptions`.
  *
@@ -122,9 +117,6 @@ export class GameCards {
    */
   private addCustomCards<T extends ICard>(cards: Array<T>, customList: ReadonlyArray<CardName> = []): void {
     for (const cardName of customList) {
-      if (BROKEN_CARDS.includes(cardName)) {
-        continue;
-      }
       if (cards.findIndex((c) => c.name === cardName) > -1) {
         continue;
       }
@@ -148,9 +140,6 @@ export class GameCards {
 
   /* Remove cards excluded by choice in game options */
   private filterBannedCards<T extends ICard>(cards: Array<T>): Array<T> {
-    // Remove the broken cards.
-    // TODO(kberg): Remove this block, and comment out the cards, after 2025-10-10
-    cards = cards.filter((card) => !BROKEN_CARDS.includes(card.name));
     return cards.filter((card) => {
       return this.gameOptions.bannedCards.includes(card.name) !== true;
     });

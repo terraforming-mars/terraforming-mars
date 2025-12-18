@@ -3,10 +3,10 @@ import {CardName} from '../common/cards/CardName';
 import {Color} from '../common/Color';
 import {SerializedCard} from './SerializedCard';
 import {SerializedTimer} from '../common/SerializedTimer';
-import {SerializedUnderworldPlayerData} from './underworld/UnderworldData';
 import {AlliedParty} from '../common/turmoil/Types';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {DiscordId} from './server/auth/discord';
+import {UnderworldPlayerData} from '../common/underworld/UnderworldPlayerData';
 
 interface DeprecatedFields {
 }
@@ -76,7 +76,7 @@ export interface SerializedPlayer extends DeprecatedFields{
   totalDelegatesPlaced: number;
   tradesThisGeneration: number;
   turmoilPolicyActionUsed: boolean;
-  underworldData: SerializedUnderworldPlayerData;
+  underworldData: UnderworldPlayerData;
   victoryPointsByGeneration: Array<number>;
   user?: DiscordId;
   withinDeflectionZone: boolean;

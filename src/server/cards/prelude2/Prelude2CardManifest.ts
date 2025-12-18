@@ -42,7 +42,6 @@ import {SpecialPermit} from './SpecialPermit';
 import {Spire} from './Spire';
 import {SponsoringNation} from './SponsoringNation';
 import {StratosphericExpedition} from './StratosphericExpedition';
-import {SuitableInfrastructure} from './SuitableInfrastructure';
 import {SummitLogistics} from './SummitLogistics';
 import {TerraformingDeal} from './TerraformingDeal';
 import {UnexpectedApplication} from './UnexpectedApplication';
@@ -105,7 +104,8 @@ export const PRELUDE2_CARD_MANIFEST = new ModuleManifest({
     [CardName.RISE_TO_POWER]: {Factory: RiseToPower, compatibility: 'turmoil'},
     [CardName.SOIL_BACTERIA]: {Factory: SoilBacteria},
     [CardName.SPACE_LANES]: {Factory: SpaceLanes},
-    [CardName.SUITABLE_INFRASTRUCTURE]: {Factory: SuitableInfrastructure},
+    // Broken, #7610
+    // [CardName.SUITABLE_INFRASTRUCTURE]: {Factory: SuitableInfrastructure},
     [CardName.TERRAFORMING_DEAL]: {Factory: TerraformingDeal},
     [CardName.VENUS_CONTRACT]: {Factory: VenusContract, compatibility: 'venus'},
     [CardName.VENUS_L1_SHADE]: {Factory: VenusL1Shade, compatibility: 'venus'},

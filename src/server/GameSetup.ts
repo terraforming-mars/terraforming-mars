@@ -47,10 +47,6 @@ export class GameSetup {
   public static deserializeBoard(players: Array<IPlayer>, gameOptions: GameOptions, d: SerializedGame) {
     const playersForBoard = players.length !== 1 ? players : [players[0], GameSetup.neutralPlayerFor(d.id)];
     const deserialized = Board.deserialize(d.board, playersForBoard).spaces;
-    // TODO(kberg): Remove after 2025-10-25
-    if (gameOptions.boardName === 'Hollandia regels' as any) {
-      gameOptions.boardName = BoardName.HOLLANDIA;
-    }
     const Factory: BoardFactory = boards[gameOptions.boardName];
     return new Factory(deserialized);
   }

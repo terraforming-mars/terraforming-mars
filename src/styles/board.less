@@ -620,14 +620,34 @@ each(@token_types, {
   // box-shadow: -5px 8.66px 5px 0 #00000080
 }
 
-@underground_player_colors: red, blue, black, yellow, green, purple, orange, pink;
-each(@underground_player_colors, {
-  .underground-excavator--@{value} {
-    // @var_name: ~"player_@{value}";
-    // @player_color: ~"@@var_name";
-    // data-test: e(@var_name);
-    // data-test-2: @player_color;
-    // background-color: @player_color;
-    background-color: @value;
-  }
-})
+.underground-excavator--red {
+	background-color: @player_red;
+}
+
+.underground-excavator--blue {
+	background-color: @player_blue;
+}
+
+.underground-excavator--black {
+	background-color: @player_black;
+}
+
+.underground-excavator--yellow {
+	background-color: @player_yellow;
+}
+
+.underground-excavator--green {
+	background-color: @player_green;
+}
+
+.underground-excavator--purple {
+	background-color: @player_purple;
+}
+
+.underground-excavator--orange {
+	background-color: @player_orange;
+}
+
+.underground-excavator--pink {
+	background-color: @player_pink;
+}

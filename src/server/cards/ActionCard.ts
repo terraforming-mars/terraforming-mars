@@ -11,7 +11,6 @@ export interface StaticActionCardProperties extends StaticCardProperties {
 /**
  * A Card that has a data-defined behavior in `action`.
  */
-// TODO(kberg): Find a way to use mixins to share this with ActiveCorporationCard and ActivePreludeCard
 export abstract class ActionCard extends Card {
   // Add actionBehavior to StaticCardProperties, otherwise this will multiple memory consumption.
   constructor(properties: StaticActionCardProperties) {

@@ -47,6 +47,8 @@ export function isCompatibleWith(cf: CardFactorySpec<any>, gameOptions: GameOpti
       return gameOptions.starWarsExpansion;
     case 'underworld':
       return gameOptions.underworldExpansion;
+    case 'shil':
+      return gameOptions.shilExpansion;
     }
     throw new Error(`Unhandled expansion type ${expansion}`);
   });

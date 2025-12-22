@@ -1063,4 +1063,12 @@ export enum CardName {
 
   // Shil
   SOPHON_SURVEILLANCE_NETWORK = 'Sophon Surveillance Network',
+  EMMETT_VILLE = 'Emmett Ville',
+  MATING_SEASON = 'Mating Season',
+  PANDEMIC = 'Pandemic',
+  THE_JETSONS = 'The Jetsons',
+  COPPS_COLONY = 'Copps Colony',
+  RAINESTOWN_GREENS = 'Rainestown Greens',
+  STUDWELLINGTON_PLANITIA = 'Studwellington Planitia',
+  DRAW_TEST_CARD = 'Draw Test Card',
 }

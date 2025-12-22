@@ -1071,4 +1071,5 @@ export enum CardName {
   RAINESTOWN_GREENS = 'Rainestown Greens',
   STUDWELLINGTON_PLANITIA = 'Studwellington Planitia',
   DRAW_TEST_CARD = 'Draw Test Card',
+  POWER_OF_FRIENDSHIP = 'Power Of Friendship',
 }

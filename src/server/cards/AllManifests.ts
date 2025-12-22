@@ -16,6 +16,7 @@ import {PATHFINDERS_CARD_MANIFEST} from './pathfinders/PathfindersCardManifest';
 import {PRELUDE2_CARD_MANIFEST} from './prelude2/Prelude2CardManifest';
 import {STAR_WARS_CARD_MANIFEST} from './starwars/StarwarsCardManifest';
 import {UNDERWORLD_CARD_MANIFEST} from './underworld/UnderworldCardManifest';
+import {SHIL_CARD_MANIFEST} from './shil/ShilCardManifest';
 
 export const ALL_MODULE_MANIFESTS: Array<ModuleManifest> = [
   BASE_CARD_MANIFEST,
@@ -33,4 +34,5 @@ export const ALL_MODULE_MANIFESTS: Array<ModuleManifest> = [
   CEO_CARD_MANIFEST,
   STAR_WARS_CARD_MANIFEST,
   UNDERWORLD_CARD_MANIFEST,
+  SHIL_CARD_MANIFEST,
 ];

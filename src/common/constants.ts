@@ -10,6 +10,7 @@ export const FLOATERS_VALUE = 3;
 export const MICROBES_VALUE = 2;
 export const OCEAN_BONUS = 2;
 export const CORPORATION_CARDS_DEALT_PER_PLAYER = 2;
+export const PROJECT_CARDS_DEALT_PER_PLAYER = 10;
 
 // Global parameters
 export const HEAT_FOR_TEMPERATURE = 8;

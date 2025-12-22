@@ -70,6 +70,7 @@ export class GlobalEventDealer {
       ceo: gameOptions.ceoExtension,
       starwars: gameOptions.starWarsExpansion,
       underworld: gameOptions.underworldExpansion,
+      shil: gameOptions.shilExpansion,
     };
 
     for (const manifest of ALL_MODULE_MANIFESTS) {

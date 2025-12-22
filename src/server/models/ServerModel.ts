@@ -426,6 +426,7 @@ export class Server {
         ceo: options.ceoExtension,
         starwars: options.starWarsExpansion,
         underworld: options.underworldExpansion,
+        shil: options.shilExpansion,
       },
       fastModeOption: options.fastModeOption,
       includedCards: options.includedCards,

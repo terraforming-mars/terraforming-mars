@@ -264,6 +264,7 @@ export class Game implements IGame, Logger {
         ceo: options.ceoExtension ?? false,
         starwars: options.starWarsExpansion ?? false,
         underworld: options.underworldExpansion ?? false,
+        shil: options.shilExpansion ?? false,
       };
     }
     const gameOptions = {...DEFAULT_GAME_OPTIONS, ...options};
@@ -394,7 +395,8 @@ export class Game implements IGame, Logger {
         gameOptions.moonExpansion) {
         player.dealtCorporationCards.push(...corporationDeck.drawN(game, gameOptions.startingCorporations));
         if (gameOptions.initialDraftVariant === false) {
-          player.dealtProjectCards.push(...projectDeck.drawN(game, 10));
+          const projectCardsCount = gameOptions.shilExpansion ? gameOptions.startingProjectCards : 10;
+          player.dealtProjectCards.push(...projectDeck.drawN(game, projectCardsCount));
         }
         if (gameOptions.preludeExtension) {
           gameOptions.startingPreludes = Math.max(gameOptions.startingPreludes ?? 0, constants.PRELUDE_CARDS_DEALT_PER_PLAYER);

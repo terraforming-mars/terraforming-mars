@@ -169,6 +169,12 @@
                                 <div class="create-game-expansion-icon expansion-icon-underworld"></div>
                                 <span v-i18n>Underworld 2</span><span></span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Underworld" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
                             </label>
+
+                            <input type="checkbox" name="shil" id="shil-checkbox" v-model="expansions.shil">
+                            <label for="shil-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-shil"></div>
+                                <span v-i18n>Shil</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Shil" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
+                            </label>
                         </div>
 
                         <div class="create-game-page-column">
@@ -194,6 +200,14 @@
                             <input type="number" class="create-game-corporations-count" value="2" min="1" :max="6" v-model="startingCorporations" id="startingCorpNum-checkbox">
                                 <span v-i18n>Starting Corporations</span>
                             </label>
+
+                            <template v-if="expansions.shil">
+                              <label for="startingProjectCardsNum-checkbox">
+                              <div class="create-game-expansion-icon expansion-icon-shil"></div>
+                              <input type="number" class="create-game-corporations-count" value="10" min="4" :max="40" v-model="startingProjectCards" id="startingProjectCardsNum-checkbox">
+                                  <span v-i18n>Starting Project Cards</span>
+                              </label>
+                            </template>
 
                             <template v-if="expansions.prelude">
                               <label for="startingPreludeENum-checkbox">
@@ -1155,6 +1169,7 @@ export default (Vue as WithRefs<Refs>).extend({
         customCeos,
         startingCeos,
         startingPreludes,
+        startingProjectCards: this.startingProjectCards,
       };
       return JSON.stringify(dataToSend, undefined, 4);
     },

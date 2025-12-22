@@ -1060,4 +1060,7 @@ export enum CardName {
   STANDARD_TECHNOLOGY_UNDERWORLD = 'Standard Technology:u',
   HACKERS_UNDERWORLD = 'Hackers:u',
   HIRED_RAIDERS_UNDERWORLD = 'Hired Raiders:u',
+
+  // Shil
+  SOPHON_SURVEILLANCE_NETWORK = 'Sophon Surveillance Network',
 }

@@ -25,6 +25,7 @@ export class BoardBuilder {
   private bonuses: Array<Array<SpaceBonus>> = [];
   private spaces: Array<Space> = [];
   private unshufflableSpaces: Array<number> = [];
+  private volcanicSpaces: Array<number> = [];
   private gameOptions: GameOptions;
 
   constructor(gameOptions: GameOptions) {
@@ -45,6 +46,13 @@ export class BoardBuilder {
 
   land(...bonus: Array<SpaceBonus>): this {
     this.spaceTypes.push(SpaceType.LAND);
+    this.bonuses.push(bonus);
+    return this;
+  }
+
+  volcanic(...bonus: Array<SpaceBonus>): this {
+    this.spaceTypes.push(SpaceType.LAND);
+    this.volcanicSpaces.push(this.spaceTypes.length - 1);
     this.bonuses.push(bonus);
     return this;
   }
@@ -128,8 +136,8 @@ export class BoardBuilder {
 
   // Shuffle the ocean spaces and bonus spaces. But protect the land spaces supplied by
   // |lands| so that those IDs most definitely have land spaces.
-  public shuffle(rng: Random, ...preservedSpaceIds: Array<NamedSpace>) {
-    const preservedSpaces = [...this.unshufflableSpaces];
+  public shuffle(rng: Random, ...preservedSpaceIds: ReadonlyArray<NamedSpace>) {
+    const preservedSpaces = [...this.unshufflableSpaces, ...this.volcanicSpaces];
     for (const spaceId of preservedSpaceIds) {
       const idx = Number(spaceId) - 3;
       if (!preservedSpaces.includes(idx)) {

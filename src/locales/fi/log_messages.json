@@ -376,7 +376,7 @@
   "${0} removed ${1} data from ${2} to increase plant production ${3} steps.": "${0} poisti ${1} dataa kortilta ${2} lisätäkseen kasvituotantoa ${3} askelta.",
   "${0} spent 1 plant to place an animal on ${1}.": "${0} käytti 1 kasvin asettaakseen eläimen kortille ${1}.",
   "${0} flipped and discarded ${1}": "${0} käänsi ja heitti pois ${1}",
-  "${0} is using their ${1} effect to draw a card by discarding a card.": "${0} käyttää ${1} VAIKUTUSään nostaakseen kortin heittämällä kortin pois.",
+  "${0} is using their ${1} effect to draw a card by discarding a card.": "${0} käyttää ${1} vaikutustaan nostaakseen kortin heittämällä kortin pois.",
   "You discarded ${0}": "Heitit pois ${0}",
   "${0} spent 1 ${1} to gain 7 M€": "${0} käytti 1 ${1} saadakseen 7 M€",
   "${0} found life!": "${0} löysi elämää!",

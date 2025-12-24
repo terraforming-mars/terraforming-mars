@@ -20,13 +20,13 @@ export class VastitasBorealisBoard extends MarsBoard {
     const TEMPERATURE = SpaceBonus.TEMPERATURE;
 
     // y=0
-    builder.land(STEEL, STEEL).land(PLANT).land().land().land(TITANIUM, TITANIUM);
+    builder.land(STEEL, STEEL).land(PLANT).land().land().volcanic(TITANIUM, TITANIUM);
     // y=1
-    builder.land(STEEL, STEEL).land(STEEL).land().land().land(TITANIUM).land(PLANT);
+    builder.land(STEEL, STEEL).land(STEEL).land().land().volcanic(TITANIUM).land(PLANT);
     // y=2
     builder.land(TITANIUM).land().land().land().land(DRAW_CARD).ocean(PLANT, DRAW_CARD).ocean(PLANT);
     // y=3
-    builder.land(STEEL, TITANIUM).land(STEEL, DRAW_CARD).land(STEEL).ocean(HEAT, HEAT).ocean(HEAT, HEAT).ocean().ocean(PLANT, PLANT).land(STEEL, PLANT);
+    builder.volcanic(STEEL, TITANIUM).volcanic(STEEL, DRAW_CARD).land(STEEL).ocean(HEAT, HEAT).ocean(HEAT, HEAT).ocean().ocean(PLANT, PLANT).land(STEEL, PLANT);
     // y=4
     builder.land().land().land().ocean(HEAT, HEAT).land(TEMPERATURE).doNotShuffleLastSpace().land(STEEL).land().land(PLANT).ocean(TITANIUM);
     // y=5
@@ -39,11 +39,7 @@ export class VastitasBorealisBoard extends MarsBoard {
     builder.ocean(PLANT, PLANT).land().land(PLANT).land(PLANT, PLANT).land(STEEL, PLANT);
 
     if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng,
-        SpaceName.ELYSIUM_MONS_VASTITAS_BOREALIS,
-        SpaceName.ALBA_FOSSAE,
-        SpaceName.CERANIUS_FOSSAE,
-        SpaceName.ALBA_MONS);
+      builder.shuffle(rng);
     }
 
     const spaces = builder.build();

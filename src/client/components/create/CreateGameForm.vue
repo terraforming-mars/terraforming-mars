@@ -212,7 +212,7 @@
                             <template v-if="expansions.prelude">
                               <label for="startingPreludeENum-checkbox">
                               <div class="create-game-expansion-icon expansion-icon-prelude"></div>
-                              <input type="number" class="create-game-corporations-count" value="4" min="4" :max="8" v-model="startingPreludes" id="startingPreludeNum-checkbox">
+                              <input type="number" class="create-game-corporations-count" value="4" min="4" :max="12" v-model="startingPreludes" id="startingPreludeNum-checkbox">
                                   <span v-i18n>Starting Preludes</span>
                               </label>
                             </template>

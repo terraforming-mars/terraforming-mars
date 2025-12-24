@@ -91,6 +91,7 @@ describe('HellasBoard', () => {
       {'id': '62', 'spaceType': 'land', 'x': 7, 'y': 8, 'bonus': [4, 4]},
       {'id': '63', 'spaceType': 'land', 'x': 8, 'y': 8, 'bonus': []},
     ]);
+    expect(board.volcanicSpaceIds).is.empty;
   });
 
   it('Removes Hellas bonus ocean space if player cannot pay', () => {

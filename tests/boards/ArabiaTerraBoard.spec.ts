@@ -49,7 +49,7 @@ describe('ArabiaTerraBoard', () => {
       {'id': '17', 'spaceType': 'land', 'x': 5, 'y': 2, 'bonus': [1]},
       {'id': '18', 'spaceType': 'land', 'x': 6, 'y': 2, 'bonus': [1]},
       {'id': '19', 'spaceType': 'land', 'x': 7, 'y': 2, 'bonus': [1, 2]},
-      {'id': '20', 'spaceType': 'cove', 'x': 8, 'y': 2, 'bonus': [1, 0]},
+      {'id': '20', 'spaceType': 'cove', 'x': 8, 'y': 2, 'bonus': [1, 0], 'volcanic': true},
       {'id': '21', 'spaceType': 'land', 'x': 1, 'y': 3, 'bonus': [2, 2]},
       {'id': '22', 'spaceType': 'land', 'x': 2, 'y': 3, 'bonus': [2]},
       {'id': '23', 'spaceType': 'ocean', 'x': 3, 'y': 3, 'bonus': [2, 2]},
@@ -84,16 +84,17 @@ describe('ArabiaTerraBoard', () => {
       {'id': '52', 'spaceType': 'land', 'x': 8, 'y': 6, 'bonus': [0, 0]},
       {'id': '53', 'spaceType': 'ocean', 'x': 3, 'y': 7, 'bonus': [2, 2]},
       {'id': '54', 'spaceType': 'land', 'x': 4, 'y': 7, 'bonus': [2]},
-      {'id': '55', 'spaceType': 'land', 'x': 5, 'y': 7, 'bonus': [1, 3]},
+      {'id': '55', 'spaceType': 'land', 'x': 5, 'y': 7, 'bonus': [1, 3], 'volcanic': true},
       {'id': '56', 'spaceType': 'land', 'x': 6, 'y': 7, 'bonus': [1, 1]},
       {'id': '57', 'spaceType': 'land', 'x': 7, 'y': 7, 'bonus': [1]},
-      {'id': '58', 'spaceType': 'land', 'x': 8, 'y': 7, 'bonus': [3]},
+      {'id': '58', 'spaceType': 'land', 'x': 8, 'y': 7, 'bonus': [3], 'volcanic': true},
       {'id': '59', 'spaceType': 'land', 'x': 4, 'y': 8, 'bonus': []},
       {'id': '60', 'spaceType': 'land', 'x': 5, 'y': 8, 'bonus': []},
       {'id': '61', 'spaceType': 'land', 'x': 6, 'y': 8, 'bonus': []},
       {'id': '62', 'spaceType': 'land', 'x': 7, 'y': 8, 'bonus': []},
-      {'id': '63', 'spaceType': 'land', 'x': 8, 'y': 8, 'bonus': [1]},
+      {'id': '63', 'spaceType': 'land', 'x': 8, 'y': 8, 'bonus': [1], 'volcanic': true},
     ]);
+    expect(board.volcanicSpaceIds).deep.eq(['20', '55', '58', '63']);
   });
 
   it('Can place an ocean in a cove', () => {

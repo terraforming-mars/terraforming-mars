@@ -18,7 +18,7 @@ describe('VastitasBorealisNovusBoard', () => {
       {'id': '02', 'spaceType': 'colony', 'x': -1, 'y': -1, 'bonus': []},
       {'id': '03', 'spaceType': 'land', 'x': 4, 'y': 0, 'bonus': [2]},
       {'id': '04', 'spaceType': 'land', 'x': 5, 'y': 0, 'bonus': []},
-      {'id': '05', 'spaceType': 'land', 'x': 6, 'y': 0, 'bonus': [1]},
+      {'id': '05', 'spaceType': 'land', 'x': 6, 'y': 0, 'bonus': [1], 'volcanic': true},
       {'id': '06', 'spaceType': 'land', 'x': 7, 'y': 0, 'bonus': []},
       {'id': '07', 'spaceType': 'land', 'x': 8, 'y': 0, 'bonus': []},
       {'id': '08', 'spaceType': 'land', 'x': 3, 'y': 1, 'bonus': [2, 2]},
@@ -26,7 +26,7 @@ describe('VastitasBorealisNovusBoard', () => {
       {'id': '10', 'spaceType': 'land', 'x': 5, 'y': 1, 'bonus': []},
       {'id': '11', 'spaceType': 'land', 'x': 6, 'y': 1, 'bonus': []},
       {'id': '12', 'spaceType': 'land', 'x': 7, 'y': 1, 'bonus': [2]},
-      {'id': '13', 'spaceType': 'land', 'x': 8, 'y': 1, 'bonus': [3]},
+      {'id': '13', 'spaceType': 'land', 'x': 8, 'y': 1, 'bonus': [3], 'volcanic': true},
       {'id': '14', 'spaceType': 'land', 'x': 2, 'y': 2, 'bonus': [3]},
       {'id': '15', 'spaceType': 'ocean', 'x': 3, 'y': 2, 'bonus': [2, 2]},
       {'id': '16', 'spaceType': 'ocean', 'x': 4, 'y': 2, 'bonus': [2, 2]},
@@ -34,7 +34,7 @@ describe('VastitasBorealisNovusBoard', () => {
       {'id': '18', 'spaceType': 'land', 'x': 6, 'y': 2, 'bonus': [2]},
       {'id': '19', 'spaceType': 'land', 'x': 7, 'y': 2, 'bonus': []},
       {'id': '20', 'spaceType': 'land', 'x': 8, 'y': 2, 'bonus': []},
-      {'id': '21', 'spaceType': 'land', 'x': 1, 'y': 3, 'bonus': [1, 1]},
+      {'id': '21', 'spaceType': 'land', 'x': 1, 'y': 3, 'bonus': [1, 1], 'volcanic': true},
       {'id': '22', 'spaceType': 'land', 'x': 2, 'y': 3, 'bonus': [0]},
       {'id': '23', 'spaceType': 'ocean', 'x': 3, 'y': 3, 'bonus': [2, 2]},
       {'id': '24', 'spaceType': 'land', 'x': 4, 'y': 3, 'bonus': [2]},
@@ -59,7 +59,7 @@ describe('VastitasBorealisNovusBoard', () => {
       {'id': '43', 'spaceType': 'ocean', 'x': 6, 'y': 5, 'bonus': [3]},
       {'id': '44', 'spaceType': 'land', 'x': 7, 'y': 5, 'bonus': [2]},
       {'id': '45', 'spaceType': 'land', 'x': 8, 'y': 5, 'bonus': [0, 0]},
-      {'id': '46', 'spaceType': 'land', 'x': 2, 'y': 6, 'bonus': [0]},
+      {'id': '46', 'spaceType': 'land', 'x': 2, 'y': 6, 'bonus': [0], 'volcanic': true},
       {'id': '47', 'spaceType': 'land', 'x': 3, 'y': 6, 'bonus': [1]},
       {'id': '48', 'spaceType': 'ocean', 'x': 4, 'y': 6, 'bonus': []},
       {'id': '49', 'spaceType': 'ocean', 'x': 5, 'y': 6, 'bonus': [4, 4]},
@@ -78,6 +78,7 @@ describe('VastitasBorealisNovusBoard', () => {
       {'id': '62', 'spaceType': 'land', 'x': 7, 'y': 8, 'bonus': [1]},
       {'id': '63', 'spaceType': 'land', 'x': 8, 'y': 8, 'bonus': [0]},
     ]);
+    expect(board.volcanicSpaceIds).deep.eq(['05', '13', '21', '46']);
   });
 
   it('Delegate bonuses work without Turmoil', () => {

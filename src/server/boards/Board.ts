@@ -52,15 +52,15 @@ export abstract class Board {
     const computeVolcanicSpaceIds = () => this.spaces.filter((space) => space.volcanic).map((space) => space.id);
 
     if (volcanicSpaceIds !== undefined) {
-      // if (computeVolcanicSpaceIds().length === 0) {
-      //   for (const id of volcanicSpaceIds) {
-      //     const space = this.map.get(id);
-      //     if (space === undefined) {
-      //       throw new Error('space ' + id + ' not found');
-      //     }
-      //     space.volcanic = true;
-      //   }
-      // }
+      if (computeVolcanicSpaceIds().length === 0) {
+        for (const id of volcanicSpaceIds) {
+          const space = this.map.get(id);
+          if (space === undefined) {
+            throw new Error('space ' + id + ' not found');
+          }
+          space.volcanic = true;
+        }
+      }
       const computedVolcanicSpaceIds: ReadonlyArray<SpaceId> = computeVolcanicSpaceIds();
       if (computedVolcanicSpaceIds.length > 0) {
         if (twoWayDifference(computedVolcanicSpaceIds, volcanicSpaceIds).length > 0) {
@@ -382,7 +382,6 @@ export abstract class Board {
       bonus: serialized.bonus,
       x: serialized.x,
       y: serialized.y,
-      volcanic: serialized.volcanic,
     };
 
     if (serialized.tile !== undefined) {
@@ -402,6 +401,9 @@ export abstract class Board {
     }
     if (coOwner !== undefined) {
       space.coOwner = coOwner;
+    }
+    if (serialized.volcanic !== undefined) {
+      space.volcanic = serialized.volcanic;
     }
     return space;
   }

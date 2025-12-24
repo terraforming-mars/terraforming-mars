@@ -14,19 +14,19 @@ describe('ElysiumBoard', () => {
       {'id': '05', 'spaceType': 'ocean', 'x': 6, 'y': 0, 'bonus': [3]},
       {'id': '06', 'spaceType': 'ocean', 'x': 7, 'y': 0, 'bonus': [1]},
       {'id': '07', 'spaceType': 'land', 'x': 8, 'y': 0, 'bonus': [3]},
-      {'id': '08', 'spaceType': 'land', 'x': 3, 'y': 1, 'bonus': [0]},
+      {'id': '08', 'spaceType': 'land', 'x': 3, 'y': 1, 'bonus': [0], 'volcanic': true},
       {'id': '09', 'spaceType': 'land', 'x': 4, 'y': 1, 'bonus': []},
       {'id': '10', 'spaceType': 'land', 'x': 5, 'y': 1, 'bonus': []},
       {'id': '11', 'spaceType': 'ocean', 'x': 6, 'y': 1, 'bonus': []},
       {'id': '12', 'spaceType': 'ocean', 'x': 7, 'y': 1, 'bonus': []},
       {'id': '13', 'spaceType': 'land', 'x': 8, 'y': 1, 'bonus': [1, 1]},
-      {'id': '14', 'spaceType': 'land', 'x': 2, 'y': 2, 'bonus': [0, 0]},
+      {'id': '14', 'spaceType': 'land', 'x': 2, 'y': 2, 'bonus': [0, 0], 'volcanic': true},
       {'id': '15', 'spaceType': 'land', 'x': 3, 'y': 2, 'bonus': []},
       {'id': '16', 'spaceType': 'land', 'x': 4, 'y': 2, 'bonus': [3]},
       {'id': '17', 'spaceType': 'land', 'x': 5, 'y': 2, 'bonus': []},
       {'id': '18', 'spaceType': 'ocean', 'x': 6, 'y': 2, 'bonus': [2]},
       {'id': '19', 'spaceType': 'ocean', 'x': 7, 'y': 2, 'bonus': []},
-      {'id': '20', 'spaceType': 'land', 'x': 8, 'y': 2, 'bonus': [3, 3, 3]},
+      {'id': '20', 'spaceType': 'land', 'x': 8, 'y': 2, 'bonus': [3, 3, 3], 'volcanic': true},
       {'id': '21', 'spaceType': 'land', 'x': 1, 'y': 3, 'bonus': [2]},
       {'id': '22', 'spaceType': 'land', 'x': 2, 'y': 3, 'bonus': [2]},
       {'id': '23', 'spaceType': 'land', 'x': 3, 'y': 3, 'bonus': [2]},
@@ -43,7 +43,7 @@ describe('ElysiumBoard', () => {
       {'id': '34', 'spaceType': 'land', 'x': 5, 'y': 4, 'bonus': [2, 2, 2]},
       {'id': '35', 'spaceType': 'land', 'x': 6, 'y': 4, 'bonus': [2, 2]},
       {'id': '36', 'spaceType': 'land', 'x': 7, 'y': 4, 'bonus': [2, 2]},
-      {'id': '37', 'spaceType': 'land', 'x': 8, 'y': 4, 'bonus': [2, 0]},
+      {'id': '37', 'spaceType': 'land', 'x': 8, 'y': 4, 'bonus': [2, 0], 'volcanic': true},
       {'id': '38', 'spaceType': 'land', 'x': 1, 'y': 5, 'bonus': [1]},
       {'id': '39', 'spaceType': 'land', 'x': 2, 'y': 5, 'bonus': [2]},
       {'id': '40', 'spaceType': 'land', 'x': 3, 'y': 5, 'bonus': [2]},
@@ -71,5 +71,6 @@ describe('ElysiumBoard', () => {
       {'id': '62', 'spaceType': 'land', 'x': 7, 'y': 8, 'bonus': [3]},
       {'id': '63', 'spaceType': 'land', 'x': 8, 'y': 8, 'bonus': [1, 1]},
     ]);
+    expect(board.volcanicSpaceIds).deep.eq(['37', '14', '08', '20']);
   });
 });

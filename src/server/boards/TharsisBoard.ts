@@ -36,7 +36,7 @@ export class TharsisBoard extends MarsBoard {
     builder.land(STEEL).land(STEEL, STEEL).land().land().ocean(TITANIUM, TITANIUM);
 
     if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng, SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS);
+      builder.shuffle(rng, SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.PAVONIS_MONS, SpaceName.ARSIA_MONS);
     }
     const spaces = builder.build();
     return new TharsisBoard(spaces);
@@ -44,10 +44,10 @@ export class TharsisBoard extends MarsBoard {
 
   public constructor(spaces: ReadonlyArray<Space>) {
     super(spaces, SpaceName.NOCTIS_CITY, [
-      SpaceName.ASCRAEUS_MONS,
-      SpaceName.ARSIA_MONS,
-      SpaceName.PAVONIS_MONS,
       SpaceName.THARSIS_THOLUS,
+      SpaceName.ASCRAEUS_MONS,
+      SpaceName.PAVONIS_MONS,
+      SpaceName.ARSIA_MONS,
     ]);
   }
 }

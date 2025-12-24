@@ -30,12 +30,12 @@ describe('VastitasBorealisBoard', () => {
       {'id': '04', 'spaceType': 'land', 'x': 5, 'y': 0, 'bonus': [2]},
       {'id': '05', 'spaceType': 'land', 'x': 6, 'y': 0, 'bonus': []},
       {'id': '06', 'spaceType': 'land', 'x': 7, 'y': 0, 'bonus': []},
-      {'id': '07', 'spaceType': 'land', 'x': 8, 'y': 0, 'bonus': [0, 0]},
+      {'id': '07', 'spaceType': 'land', 'x': 8, 'y': 0, 'bonus': [0, 0], 'volcanic': true},
       {'id': '08', 'spaceType': 'land', 'x': 3, 'y': 1, 'bonus': [1, 1]},
       {'id': '09', 'spaceType': 'land', 'x': 4, 'y': 1, 'bonus': [1]},
       {'id': '10', 'spaceType': 'land', 'x': 5, 'y': 1, 'bonus': []},
       {'id': '11', 'spaceType': 'land', 'x': 6, 'y': 1, 'bonus': []},
-      {'id': '12', 'spaceType': 'land', 'x': 7, 'y': 1, 'bonus': [0]},
+      {'id': '12', 'spaceType': 'land', 'x': 7, 'y': 1, 'bonus': [0], 'volcanic': true},
       {'id': '13', 'spaceType': 'land', 'x': 8, 'y': 1, 'bonus': [2]},
       {'id': '14', 'spaceType': 'land', 'x': 2, 'y': 2, 'bonus': [0]},
       {'id': '15', 'spaceType': 'land', 'x': 3, 'y': 2, 'bonus': []},
@@ -44,8 +44,8 @@ describe('VastitasBorealisBoard', () => {
       {'id': '18', 'spaceType': 'land', 'x': 6, 'y': 2, 'bonus': [3]},
       {'id': '19', 'spaceType': 'ocean', 'x': 7, 'y': 2, 'bonus': [2, 3]},
       {'id': '20', 'spaceType': 'ocean', 'x': 8, 'y': 2, 'bonus': [2]},
-      {'id': '21', 'spaceType': 'land', 'x': 1, 'y': 3, 'bonus': [1, 0]},
-      {'id': '22', 'spaceType': 'land', 'x': 2, 'y': 3, 'bonus': [1, 3]},
+      {'id': '21', 'spaceType': 'land', 'x': 1, 'y': 3, 'bonus': [1, 0], 'volcanic': true},
+      {'id': '22', 'spaceType': 'land', 'x': 2, 'y': 3, 'bonus': [1, 3], 'volcanic': true},
       {'id': '23', 'spaceType': 'land', 'x': 3, 'y': 3, 'bonus': [1]},
       {'id': '24', 'spaceType': 'ocean', 'x': 4, 'y': 3, 'bonus': [4, 4]},
       {'id': '25', 'spaceType': 'ocean', 'x': 5, 'y': 3, 'bonus': [4, 4]},
@@ -88,6 +88,7 @@ describe('VastitasBorealisBoard', () => {
       {'id': '62', 'spaceType': 'land', 'x': 7, 'y': 8, 'bonus': [2, 2]},
       {'id': '63', 'spaceType': 'land', 'x': 8, 'y': 8, 'bonus': [1, 2]},
     ]);
+    expect(board.volcanicSpaceIds).deep.eq(['07', '12', '21', '22']);
   });
 
   it('Grants temperature bonus', () => {

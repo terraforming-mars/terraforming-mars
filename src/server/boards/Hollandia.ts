@@ -9,7 +9,7 @@ import {MarsBoard} from './MarsBoard';
 // TODO(kberg): Rename to HollandiaBoard.
 export class Hollandia extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): Hollandia {
-    const builder = new BoardBuilder(gameOptions);
+    const builder = new BoardBuilder(gameOptions, rng);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;

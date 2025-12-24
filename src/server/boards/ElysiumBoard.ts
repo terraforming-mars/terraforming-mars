@@ -8,7 +8,7 @@ import {Space} from './Space';
 
 export class ElysiumBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): ElysiumBoard {
-    const builder = new BoardBuilder(gameOptions);
+    const builder = new BoardBuilder(gameOptions, rng);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -34,9 +34,6 @@ export class ElysiumBoard extends MarsBoard {
     // y=8
     builder.land(STEEL).land().land(DRAW_CARD).land(DRAW_CARD).land(STEEL, STEEL);
 
-    if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng);
-    }
     const spaces = builder.build();
     return new ElysiumBoard(spaces);
   }

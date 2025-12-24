@@ -14,7 +14,7 @@ import {SpaceCosts} from './Board';
 
 export class VastitasBorealisNovusBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): VastitasBorealisNovusBoard {
-    const builder = new BoardBuilder(gameOptions);
+    const builder = new BoardBuilder(gameOptions, rng);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -43,9 +43,6 @@ export class VastitasBorealisNovusBoard extends MarsBoard {
     // y=8
     builder.land(DELEGATE).land().land(DRAW_CARD).land(STEEL).land(TITANIUM);
 
-    if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng);
-    }
     const spaces = builder.build();
     return new VastitasBorealisNovusBoard(spaces);
   }

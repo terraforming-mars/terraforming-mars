@@ -82,4 +82,5 @@ export interface NewGameConfig {
   startingCeos: number;
   startingPreludes: number;
   startingProjectCards: number;
+  preludesToPlay: number;
 }

@@ -217,6 +217,14 @@
                               </label>
                             </template>
 
+                            <template v-if="expansions.shil && expansions.prelude">
+                              <label for="preludesToPlayNum-checkbox">
+                              <div class="create-game-expansion-icon expansion-icon-shil"></div>
+                              <input type="number" class="create-game-corporations-count" value="2" min="2" :max="6" v-model="preludesToPlay" id="preludesToPlayNum-checkbox">
+                                  <span v-i18n>Preludes To Play</span>
+                              </label>
+                            </template>
+
                             <template v-if="expansions.ceo">
                               <label for="startingCEONum-checkbox">
                               <div class="create-game-expansion-icon expansion-icon-ceo"></div>
@@ -1170,6 +1178,7 @@ export default (Vue as WithRefs<Refs>).extend({
         startingCeos,
         startingPreludes,
         startingProjectCards: this.startingProjectCards,
+        preludesToPlay: this.preludesToPlay,
       };
       return JSON.stringify(dataToSend, undefined, 4);
     },

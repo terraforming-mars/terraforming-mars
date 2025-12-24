@@ -279,12 +279,13 @@ export default (Vue as WithRefs<Refs>).extend({
         return false;
       }
       if (this.hasPrelude) {
-        if (this.selectedPreludes.length < 2) {
-          this.warning = 'Select 2 preludes';
+        const requiredPreludes = this.preludeCardOption?.min ?? 2;
+        if (this.selectedPreludes.length < requiredPreludes) {
+          this.warning = `Select ${requiredPreludes} prelude${requiredPreludes !== 1 ? 's' : ''}`;
           return false;
         }
-        if (this.selectedPreludes.length > 2) {
-          this.warning = 'You selected too many preludes';
+        if (this.selectedPreludes.length > requiredPreludes) {
+          this.warning = `You selected too many preludes`;
           return false;
         }
       }
@@ -326,7 +327,7 @@ export default (Vue as WithRefs<Refs>).extend({
       return this.playerView.dealtCorporationCards.some((card) => card.name === CardName.ARIDOR);
     },
     hasPrelude() {
-      return hasOption(this.playerinput.options, titles.SELECT_PRELUDE_TITLE);
+      return hasPreludeOption(this.playerinput.options);
     },
     hasCeo() {
       return hasOption(this.playerinput.options, titles.SELECT_CEO_TITLE);
@@ -340,7 +341,7 @@ export default (Vue as WithRefs<Refs>).extend({
       return option;
     },
     preludeCardOption() {
-      const option = getOption(this.playerinput.options, titles.SELECT_PRELUDE_TITLE);
+      const option = getPreludeOption(this.playerinput.options);
       if (getPreferences().experimental_ui) {
         option.max = option.cards.length;
       }
@@ -376,5 +377,21 @@ function getOption(options: Array<PlayerInputModel>, title: string): SelectCardM
 function hasOption(options: Array<PlayerInputModel>, title: string): boolean {
   const option = options.find((option) => option.title === title);
   return option !== undefined;
+}
+
+function hasPreludeOption(options: Array<PlayerInputModel>): boolean {
+  const option = options.find((option) => option.type === 'card' && typeof option.title === 'string' && option.title.includes('Prelude'));
+  return option !== undefined;
+}
+
+function getPreludeOption(options: Array<PlayerInputModel>): SelectCardModel {
+  const option = options.find((option) => option.type === 'card' && typeof option.title === 'string' && option.title.includes('Prelude'));
+  if (option === undefined) {
+    throw new Error('invalid input, missing prelude option');
+  }
+  if (option.type !== 'card') {
+    throw new Error('invalid input, Not a SelectCard option');
+  }
+  return option;
 }
 </script>

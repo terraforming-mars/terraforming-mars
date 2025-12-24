@@ -67,6 +67,7 @@ export function defaultCreateGameModel(): CreateGameModel {
     startingCeos: 3,
     startingPreludes: 4,
     startingProjectCards: 10,
+    preludesToPlay: 2,
     preludeDraftVariant: undefined,
     ceosDraftVariant: undefined,
   };

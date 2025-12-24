@@ -59,6 +59,7 @@ export type CreateGameModel = {
   startingCorporations: number;
   startingPreludes: number;
   startingProjectCards: number;
+  preludesToPlay: number;
   twoCorpsVariant: boolean;
   undoOption: boolean;
 }

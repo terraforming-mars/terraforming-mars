@@ -15,7 +15,7 @@ describe('AmazonisBoard', () => {
       {'id': '06', 'spaceType': 'land', 'x': 7, 'y': 0, 'bonus': [8]},
       {'id': '07', 'spaceType': 'land', 'x': 8, 'y': 0, 'bonus': [7]},
       {'id': '08', 'spaceType': 'ocean', 'x': 3, 'y': 1, 'bonus': [0]},
-      {'id': '09', 'spaceType': 'land', 'x': 4, 'y': 1, 'bonus': [8, 8]},
+      {'id': '09', 'spaceType': 'land', 'x': 4, 'y': 1, 'bonus': [8, 8], 'volcanic': true},
       {'id': '10', 'spaceType': 'land', 'x': 5, 'y': 1, 'bonus': []},
       {'id': '11', 'spaceType': 'land', 'x': 6, 'y': 1, 'bonus': []},
       {'id': '12', 'spaceType': 'ocean', 'x': 7, 'y': 1, 'bonus': [3, 3]},
@@ -41,7 +41,7 @@ describe('AmazonisBoard', () => {
       {'id': '32', 'spaceType': 'land', 'x': 3, 'y': 4, 'bonus': [4, 4]},
       {'id': '33', 'spaceType': 'restricted', 'x': 4, 'y': 4, 'bonus': []},
       {'id': '34', 'spaceType': 'land', 'x': 5, 'y': 4, 'bonus': [4, 4]},
-      {'id': '35', 'spaceType': 'land', 'x': 6, 'y': 4, 'bonus': [2, 2]},
+      {'id': '35', 'spaceType': 'land', 'x': 6, 'y': 4, 'bonus': [2, 2], 'volcanic': true},
       {'id': '36', 'spaceType': 'land', 'x': 7, 'y': 4, 'bonus': []},
       {'id': '37', 'spaceType': 'land', 'x': 8, 'y': 4, 'bonus': [0, 0]},
       {'id': '38', 'spaceType': 'ocean', 'x': 1, 'y': 5, 'bonus': [2, 2]},
@@ -49,13 +49,13 @@ describe('AmazonisBoard', () => {
       {'id': '40', 'spaceType': 'land', 'x': 3, 'y': 5, 'bonus': [1]},
       {'id': '41', 'spaceType': 'land', 'x': 4, 'y': 5, 'bonus': [4, 2]},
       {'id': '42', 'spaceType': 'land', 'x': 5, 'y': 5, 'bonus': [2]},
-      {'id': '43', 'spaceType': 'land', 'x': 6, 'y': 5, 'bonus': [3]},
+      {'id': '43', 'spaceType': 'land', 'x': 6, 'y': 5, 'bonus': [3], 'volcanic': true},
       {'id': '44', 'spaceType': 'land', 'x': 7, 'y': 5, 'bonus': []},
       {'id': '45', 'spaceType': 'ocean', 'x': 8, 'y': 5, 'bonus': [2]},
       {'id': '46', 'spaceType': 'ocean', 'x': 2, 'y': 6, 'bonus': [2]},
       {'id': '47', 'spaceType': 'land', 'x': 3, 'y': 6, 'bonus': []},
       {'id': '48', 'spaceType': 'land', 'x': 4, 'y': 6, 'bonus': [8]},
-      {'id': '49', 'spaceType': 'land', 'x': 5, 'y': 6, 'bonus': [4, 2]},
+      {'id': '49', 'spaceType': 'land', 'x': 5, 'y': 6, 'bonus': [4, 2], 'volcanic': true},
       {'id': '50', 'spaceType': 'land', 'x': 6, 'y': 6, 'bonus': []},
       {'id': '51', 'spaceType': 'land', 'x': 7, 'y': 6, 'bonus': [2, 2]},
       {'id': '52', 'spaceType': 'ocean', 'x': 8, 'y': 6, 'bonus': [2, 2]},
@@ -71,5 +71,6 @@ describe('AmazonisBoard', () => {
       {'id': '62', 'spaceType': 'ocean', 'x': 7, 'y': 8, 'bonus': [2]},
       {'id': '63', 'spaceType': 'land', 'x': 8, 'y': 8, 'bonus': [1, 1]},
     ]);
+    expect(board.volcanicSpaceIds).deep.eq(['09', '35', '43', '49']);
   });
 });

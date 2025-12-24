@@ -71,5 +71,6 @@ describe('UtopiaPlanitiaBoard', () => {
       {'id': '62', 'spaceType': 'ocean', 'x': 7, 'y': 8, 'bonus': [2]},
       {'id': '63', 'spaceType': 'land', 'x': 8, 'y': 8, 'bonus': [2]},
     ]);
+    expect(board.volcanicSpaceIds).is.empty;
   });
 });

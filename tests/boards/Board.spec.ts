@@ -282,7 +282,7 @@ describe('Board', () => {
     ];
     const board = new TestBoard(spaces, ['02']);
     expect(board.getSpaceOrThrow('01').volcanic).is.undefined;
-    expect(board.getSpaceOrThrow('02').volcanic).is.undefined;
+    expect(board.getSpaceOrThrow('02').volcanic).is.true;
     expect(board.getSpaceOrThrow('03').volcanic).is.undefined;
     expect(board.volcanicSpaceIds).deep.eq(['02']);
   });

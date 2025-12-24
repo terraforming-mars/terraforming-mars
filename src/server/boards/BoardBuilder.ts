@@ -89,13 +89,16 @@ export class BoardBuilder {
       for (let i = 0; i < tilesInThisRow; i++) {
         const spaceId = idx + idOffset;
         const xCoordinate = xOffset + i;
-        const space = {
+        const space: Space = {
           id: BoardBuilder.spaceId(spaceId),
           spaceType: this.spaceTypes[idx],
           x: xCoordinate,
           y: row,
           bonus: this.bonuses[idx],
         };
+        if (this.volcanicSpaces.includes(idx)) {
+          space.volcanic = true;
+        }
         this.spaces.push(space);
         idx++;
       }

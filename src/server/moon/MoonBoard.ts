@@ -52,10 +52,6 @@ export class MoonBoard extends Board {
     const spaces = b.build();
     return new MoonBoard(spaces);
   }
-
-  public constructor(spaces: Array<Space>) {
-    super(spaces, undefined, []);
-  }
 }
 
 class Builder {

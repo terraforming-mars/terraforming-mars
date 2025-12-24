@@ -12,10 +12,10 @@ import {oneWayDifference} from '../../common/utils/utils';
 export class MarsBoard extends Board {
   private readonly edges: ReadonlyArray<Space>;
 
-  protected constructor(
+  public constructor(
     spaces: ReadonlyArray<Space>,
-    noctisCitySpaceId: SpaceId | undefined,
-    volcanicSpaceIds: ReadonlyArray<SpaceId>) {
+    noctisCitySpaceId?: SpaceId | undefined,
+    volcanicSpaceIds?: ReadonlyArray<SpaceId>) {
     super(spaces, noctisCitySpaceId, volcanicSpaceIds);
     this.edges = this.computeEdges();
   }

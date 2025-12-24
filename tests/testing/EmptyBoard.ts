@@ -25,6 +25,6 @@ export class EmptyBoard extends MarsBoard {
     // y=8
     builder.land().land().land().land().land();
 
-    return new EmptyBoard(builder.build(), undefined, []);
+    return new EmptyBoard(builder.build());
   }
 }

@@ -44,10 +44,6 @@ export class Hollandia extends MarsBoard {
     return new Hollandia(spaces);
   }
 
-  public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, undefined, []);
-  }
-
   public override getSpaces(spaceType: SpaceType): Array<Space> {
     switch (spaceType) {
     case SpaceType.LAND:

@@ -45,10 +45,6 @@ export class HellasBoard extends MarsBoard {
     return new HellasBoard(spaces);
   }
 
-  public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, undefined, []);
-  }
-
   public override spaceCosts(space: Space): SpaceCosts {
     const costs = super.spaceCosts(space);
     if (space.id === SpaceName.HELLAS_OCEAN_TILE) {

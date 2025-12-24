@@ -48,7 +48,8 @@ export class ColonyDealer {
       colonies = ALL_COLONIES_TILES.filter((c) => customColonies.includes(c.colonyName)).map((cf) => new cf.Factory());
     }
 
-    const count = (players + 2) +
+    const count = players === 4 ? 8 : // Hardcoded 8 colonies for 4-player games
+      (players + 2) +
       (players <= 2 ? 1 : 0); // Two-player games and solo games get one more colony.
 
     if (colonies.length < count) {

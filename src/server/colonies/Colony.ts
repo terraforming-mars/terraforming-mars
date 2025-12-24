@@ -88,9 +88,10 @@ export abstract class Colony implements IColony {
   public addColony(player: IPlayer, options?: {giveBonusTwice: boolean}): void {
     player.game.log('${0} built a colony on ${1}', (b) => b.player(player).colony(this));
 
-    this.giveBonus(player, this.metadata.build.type, this.metadata.build.quantity[this.colonies.length], this.metadata.build.resource);
+    const quantity = this.metadata.build.quantity[this.colonies.length] ?? 1;
+    this.giveBonus(player, this.metadata.build.type, quantity, this.metadata.build.resource);
     if (options?.giveBonusTwice === true) { // Vital Colony hook.
-      this.giveBonus(player, this.metadata.build.type, this.metadata.build.quantity[this.colonies.length], this.metadata.build.resource);
+      this.giveBonus(player, this.metadata.build.type, quantity, this.metadata.build.resource);
     }
 
     this.colonies.push(player.id);

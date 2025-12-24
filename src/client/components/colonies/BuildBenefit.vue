@@ -1,7 +1,7 @@
 <template>
   <div style="position:absolute">
   <div v-if="metadata.build.type === ColonyBenefit.ADD_RESOURCES_TO_CARD">
-    <template v-if="metadata.build.quantity[idx] === 3">
+    <template v-if="buildQuantity === 3">
       <div class="colony-placement-bonus triple-res resource white-x white-x--3" :class="resource"></div>
     </template>
     <template v-else>
@@ -12,7 +12,7 @@
   <div v-else-if="metadata.build.type === ColonyBenefit.COPY_TRADE">
     <div class="copy-trade-box">Copy Trade</div>
   </div>
-  <div v-else-if="metadata.build.type === ColonyBenefit.DRAW_CARDS && metadata.build.quantity[idx] === 2">
+  <div v-else-if="metadata.build.type === ColonyBenefit.DRAW_CARDS && buildQuantity === 2">
     <div class="resource card card-with-border" style="margin-top: 0px; margin-left: -5px; transform: scale(0.8);"></div>
     <div class="resource card card-with-border" style="position: absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
   </div>
@@ -72,8 +72,11 @@ export default Vue.extend({
     ColonyBenefit(): typeof ColonyBenefit {
       return ColonyBenefit;
     },
+    buildQuantity(): number {
+      return this.metadata.build.quantity[this.idx] ?? 1;
+    },
     buildQuantityText(): string {
-      return this.metadata.build.quantity[this.idx] > 1 ? String(this.metadata.build.quantity[this.idx]) : '';
+      return this.buildQuantity > 1 ? String(this.buildQuantity) : '';
     },
     resource(): string | undefined {
       return (this.metadata.build.resource ?? this.metadata.cardResource)?.toLowerCase();

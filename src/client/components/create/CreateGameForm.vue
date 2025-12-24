@@ -970,11 +970,15 @@ export default (Vue as WithRefs<Refs>).extend({
       // Check custom colony count
       if (customColonies.length > 0) {
         const playersCount = players.length;
-        let neededColoniesCount = playersCount + 2;
-        if (playersCount === 1) {
+        let neededColoniesCount: number;
+        if (playersCount === 4) {
+          neededColoniesCount = 8; // Hardcoded 8 colonies for 4-player games
+        } else if (playersCount === 1) {
           neededColoniesCount = 4;
         } else if (playersCount === 2) {
           neededColoniesCount = 5;
+        } else {
+          neededColoniesCount = playersCount + 2;
         }
 
         if (customColonies.length < neededColoniesCount) {

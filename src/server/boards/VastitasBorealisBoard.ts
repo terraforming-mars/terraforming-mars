@@ -10,7 +10,7 @@ import {MarsBoard} from './MarsBoard';
 
 export class VastitasBorealisBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): VastitasBorealisBoard {
-    const builder = new BoardBuilder(gameOptions);
+    const builder = new BoardBuilder(gameOptions, rng);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -38,9 +38,6 @@ export class VastitasBorealisBoard extends MarsBoard {
     // y=8
     builder.ocean(PLANT, PLANT).land().land(PLANT).land(PLANT, PLANT).land(STEEL, PLANT);
 
-    if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng);
-    }
 
     const spaces = builder.build();
     return new VastitasBorealisBoard(spaces);

@@ -8,7 +8,7 @@ import {MarsBoard} from './MarsBoard';
 
 export class TerraCimmeriaBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): TerraCimmeriaBoard {
-    const builder = new BoardBuilder(gameOptions);
+    const builder = new BoardBuilder(gameOptions, rng);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -36,9 +36,6 @@ export class TerraCimmeriaBoard extends MarsBoard {
     // y=8
     builder.ocean(PLANT, PLANT).ocean(PLANT, PLANT).ocean(PLANT, PLANT).land(PLANT).ocean(PLANT, PLANT);
 
-    if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng);
-    }
 
     const spaces = builder.build();
     return new TerraCimmeriaBoard(spaces);

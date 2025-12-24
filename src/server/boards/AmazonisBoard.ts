@@ -8,7 +8,7 @@ import {Space} from './Space';
 
 export class AmazonisBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): AmazonisBoard {
-    const builder = new BoardBuilder(gameOptions);
+    const builder = new BoardBuilder(gameOptions, rng);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -38,9 +38,6 @@ export class AmazonisBoard extends MarsBoard {
     // y=8
     builder.land().land(DRAW_CARD).land(STEEL).ocean(PLANT).land(STEEL, STEEL);
 
-    if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng);
-    }
 
     const spaces = builder.build();
     return new AmazonisBoard(spaces);

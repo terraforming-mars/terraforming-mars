@@ -1,7 +1,7 @@
 import {Space} from './Space';
 import {SpaceId, isSpaceId, safeCast} from '../../common/Types';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {NamedSpace, SpaceName} from '../../common/boards/SpaceName';
+import {SpaceName} from '../../common/boards/SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {Random} from '../../common/utils/Random';
 import {inplaceShuffle} from '../utils/shuffle';
@@ -27,9 +27,11 @@ export class BoardBuilder {
   private unshufflableSpaces: Array<number> = [];
   private volcanicSpaces: Array<number> = [];
   private gameOptions: GameOptions;
+  private rng: Random;
 
-  constructor(gameOptions: GameOptions) {
+  constructor(gameOptions: GameOptions, rng: Random) {
     this.gameOptions = gameOptions;
+    this.rng = rng;
   }
 
   ocean(...bonus: Array<SpaceBonus>): this {
@@ -81,6 +83,10 @@ export class BoardBuilder {
 
 
   build(): Array<Space> {
+    if (this.gameOptions.shuffleMapOption) {
+      this.shuffle(this.rng);
+    }
+
     this.spaces.push(colonySpace(SpaceName.GANYMEDE_COLONY));
     this.spaces.push(colonySpace(SpaceName.PHOBOS_SPACE_HAVEN));
 
@@ -144,17 +150,11 @@ export class BoardBuilder {
 
   // Shuffle the ocean spaces and bonus spaces. But protect the land spaces supplied by
   // |lands| so that those IDs most definitely have land spaces.
-  public shuffle(rng: Random, ...preservedSpaceIds: ReadonlyArray<NamedSpace>) {
+  public shuffle(rng: Random) {
     const preservedSpaces = [...this.unshufflableSpaces, ...this.volcanicSpaces];
-    for (const spaceId of preservedSpaceIds) {
-      const idx = Number(spaceId) - 3;
-      if (!preservedSpaces.includes(idx)) {
-        preservedSpaces.push(idx);
-      }
-    }
     preservedSpaces.sort((a, b) => a - b);
     preservingShuffle(this.spaceTypes, preservedSpaces, rng);
-    preservingShuffle(this.bonuses, this.unshufflableSpaces, rng);
+    preservingShuffle(this.bonuses, preservedSpaces, rng);
     return;
   }
 

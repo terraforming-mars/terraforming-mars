@@ -9,7 +9,7 @@ import {TERRA_CIMMERIA_COLONY_COST} from '../../common/constants';
 
 export class TerraCimmeriaNovusBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): TerraCimmeriaNovusBoard {
-    const builder = new BoardBuilder(gameOptions);
+    const builder = new BoardBuilder(gameOptions, rng);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -36,9 +36,6 @@ export class TerraCimmeriaNovusBoard extends MarsBoard {
     // y=8
     builder.ocean(PLANT, PLANT).ocean(PLANT).ocean(PLANT).land(PLANT).ocean(PLANT);
 
-    if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng);
-    }
     const spaces = builder.build();
 
     // Remove colony bonuses when colonies is not in the game.

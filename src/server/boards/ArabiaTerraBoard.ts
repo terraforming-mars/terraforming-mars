@@ -10,7 +10,7 @@ import {MarsBoard} from './MarsBoard';
 
 export class ArabiaTerraBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): ArabiaTerraBoard {
-    const builder = new BoardBuilder(gameOptions);
+    const builder = new BoardBuilder(gameOptions, rng);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -40,9 +40,6 @@ export class ArabiaTerraBoard extends MarsBoard {
     // y=8
     builder.land().land().land().land().volcanic(STEEL);
 
-    if (gameOptions.shuffleMapOption) {
-      builder.shuffle(rng);
-    }
 
     const spaces = builder.build();
     return new ArabiaTerraBoard(spaces);

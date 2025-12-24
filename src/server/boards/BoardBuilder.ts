@@ -52,8 +52,13 @@ export class BoardBuilder {
 
   volcanic(...bonus: Array<SpaceBonus>): this {
     this.spaceTypes.push(SpaceType.LAND);
-    this.volcanicSpaces.push(this.spaceTypes.length - 1);
+    this.lastSpaceIsVolcanic();
     this.bonuses.push(bonus);
+    return this;
+  }
+
+  lastSpaceIsVolcanic(): this {
+    this.volcanicSpaces.push(this.spaceTypes.length - 1);
     return this;
   }
 

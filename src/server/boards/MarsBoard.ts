@@ -176,11 +176,9 @@ export class MarsBoard extends Board {
   }
 
   public getAvailableVolcanicSpaces(player: IPlayer, canAffordOptions?: CanAffordOptions): ReadonlyArray<Space> {
-    const volcanicSpaceIds = this.volcanicSpaceIds;
-
     const spaces = this.getAvailableSpacesOnLand(player, canAffordOptions);
-    if (volcanicSpaceIds.length > 0) {
-      return spaces.filter((space) => volcanicSpaceIds.includes(space.id));
+    if (this.volcanicSpaceIds.length > 0) {
+      return spaces.filter((space) => space.volcanic === true);
     }
     return spaces;
   }

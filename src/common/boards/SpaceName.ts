@@ -61,5 +61,3 @@ export const SpaceName = {
   HADRIACUS_MONS: '38',
   TYRRHENUS_MONS: '21',
 } as const;
-
-export type NamedSpace = ValueOf<typeof SpaceName>;

@@ -143,7 +143,7 @@
   "Action: Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.": "TOIMINTO: Lisää 1 mikrobi tälle kortille, tai poista 2 mikrobia tältä kortilta nostaaksesi happitasoa 1 askel.",
   "Action: Remove 2 microbes from this card to raise oxygen level 1 step.": "TOIMINTO: Poista 2 mikrobia tältä kortilta nostaaksesi happitasoa 1 askel.",
 
-  "GHG Producing Bacteria": "Kasvihuonekaasuja tuottavat bakteerit",
+  "GHG Producing Bacteria": "Kasvihuonebakteerit",
   "Action: Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.": "TOIMINTO: Lisää 1 mikrobi tälle kortille, tai poista 2 mikrobia nostaaksesi lämpötilaa 1 askel.",
   "Action: Remove 2 microbes to raise temperature 1 step.": "TOIMINTO: Poista 2 mikrobia tältä kortilta nostaaksesi lämpötilaa 1 askel.",
   "Requires 4% oxygen.": "Vaatii 4 % happea.",
@@ -244,7 +244,7 @@
   "Building Industries": "Rakennusteollisuus",
   "Decrease your energy production 1 step and increase your steel production 2 steps.": "Vähennä energiatuotantoasi 1 askel ja lisää terästuotantoasi 2 askelta.",
 
-  "Land Claim": "Maanvaatimus",
+  "Land Claim": "Aluevaatimus",
   "Place your marker on a non-reserved area. Only you may place a tile there.": "Aseta merkkisi vapaalle alueelle. Vain sinä saat asettaa sinne laatan.",
 
   "Mining Rights": "Kaivosoikeudet",

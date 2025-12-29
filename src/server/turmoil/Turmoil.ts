@@ -250,9 +250,9 @@ export class Turmoil {
   public endGeneration(game: IGame): void {
     // 1 - All player lose 1 TR
     game.log('All players lose 1 TR.');
-    game.players.forEach((player) => {
-      player.decreaseTerraformRating();
-    });
+    // game.players.forEach((player) => {
+    //   player.decreaseTerraformRating();
+    // });
 
     // 2 - Global Event
     if (this.currentGlobalEvent !== undefined) {

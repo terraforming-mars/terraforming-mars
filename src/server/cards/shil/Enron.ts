@@ -1,5 +1,5 @@
 import {Colony} from '../../colonies/Colony';
-import {ColonyName} from '../../../common/colonies/ColonyName';
+// import {ColonyName} from '../../../common/colonies/ColonyName';
 import {ColonyBenefit} from '../../../common/colonies/ColonyBenefit';
 
 export class Enron extends Colony {

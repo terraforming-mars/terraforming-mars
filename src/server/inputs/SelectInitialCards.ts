@@ -82,7 +82,7 @@ export class SelectInitialCards extends OptionsInput<undefined> {
     }
 
     this.push('project',
-      new SelectCard(titles.SELECT_PROJECTS_TITLE, undefined, player.dealtProjectCards, {min: 0, max: 10})
+      new SelectCard(titles.SELECT_PROJECTS_TITLE, undefined, player.dealtProjectCards, {min: 0, max: game.gameOptions.startingProjectCards})
         .andThen((cards) => {
           player.cardsInHand.push(...cards);
           return undefined;
@@ -104,6 +104,7 @@ export class SelectInitialCards extends OptionsInput<undefined> {
     if (corporation.name !== CardName.BEGINNER_CORPORATION && player.cardsInHand.length * cardCost > corporation.startingMegaCredits) {
       player.cardsInHand = [];
       player.preludeCardsInHand = [];
+      console.log('we ARE here', player.cardsInHand.length * cardCost, corporation.startingMegaCredits);
       throw new InputError('Too many cards selected');
     }
 

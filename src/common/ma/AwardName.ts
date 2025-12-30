@@ -59,7 +59,7 @@ export const awardNames = [
   'Voyager',
 
   // Vastitas Borealis Novus
-  'Traveller',
+  'Traveller', // And modular
   'Landscaper',
   'Highlander',
   'Manufacturer',
@@ -82,9 +82,8 @@ export const awardNames = [
   'Investor',
   'Metropolist',
   'Mogul',
-  'Politician', // New Most party leaders and influence compbined
+  'Politician',
   'Suburbian',
-  // 'Traveller',
   // 'Zoologist', // Most animal and microbe resources. Currently Zoologist2
 ] as const;
 

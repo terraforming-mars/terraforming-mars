@@ -100,21 +100,21 @@ export const awardManifest: MAManifest<AwardName, IAward> = {
     'Voyager': {Factory: Voyager},
     'Kingpin': {Factory: Kingpin, compatibility: 'underworld'},
     'Excavator': {Factory: Excavator, compatibility: 'underworld'},
-    'Administrator': {Factory: Administrator},
-    'Constructor': {Factory: Constructor, compatibility: 'colonies'},
-    'Founder': {Factory: Founder},
-    'Highlander': {Factory: Highlander},
-    'Investor': {Factory: Investor},
-    'Incorporator': {Factory: Incorporator},
-    'Landscaper': {Factory: Landscaper},
-    'Metropolist': {Factory: Metropolist},
-    'Mogul': {Factory: Mogul},
-    'Traveller': {Factory: Traveller},
-    'Collector': {Factory: Collector},
-    'Electrician': {Factory: Electrician},
-    'Manufacturer': {Factory: Manufacturer},
-    'Politician': {Factory: Politician, compatibility: 'turmoil'},
-    'Suburbian': {Factory: Suburbian},
+    'Administrator': {Factory: Administrator, random: 'modular'},
+    'Constructor': {Factory: Constructor, compatibility: 'colonies', random: 'modular'},
+    'Founder': {Factory: Founder, random: 'modular'},
+    'Highlander': {Factory: Highlander, random: 'modular'},
+    'Investor': {Factory: Investor, random: 'modular'},
+    'Incorporator': {Factory: Incorporator, random: 'both'},
+    'Landscaper': {Factory: Landscaper, random: 'modular'},
+    'Metropolist': {Factory: Metropolist, random: 'modular'},
+    'Mogul': {Factory: Mogul, random: 'modular'},
+    'Traveller': {Factory: Traveller, random: 'modular'},
+    'Collector': {Factory: Collector, random: 'modular'},
+    'Electrician': {Factory: Electrician, random: 'modular'},
+    'Manufacturer': {Factory: Manufacturer, random: 'modular'},
+    'Politician': {Factory: Politician, compatibility: 'turmoil', random: 'modular'},
+    'Suburbian': {Factory: Suburbian, random: 'modular'},
     'Rugged': {Factory: Rugged, compatibility: 'ares'},
     'Blacksmith': {Factory: Blacksmith},
   },
@@ -137,31 +137,14 @@ export const awardManifest: MAManifest<AwardName, IAward> = {
     moon: ['Full Moon', 'Lunar Magnate'],
     underworld: ['Kingpin', 'Excavator'],
   },
-  modular: [
-    'Administrator',
-    'Collector',
-    'Constructor',
-    'Electrician',
-    'Founder',
-    'Highlander',
-    'Investor',
-    // 'Incorporator',
-    'Landscaper',
-    'Manufacturer',
-    'Metropolist',
-    'Mogul',
-    'Politician',
-    'Suburbian',
-    'Traveller',
-  ],
-  create: (name: string) => {
+  create: (name: string): IAward | undefined => {
     try {
       return awardManifest.createOrThrow(name);
     } catch (e) {
       return undefined;
     }
   },
-  createOrThrow(name: string) {
+  createOrThrow(name: string): IAward {
     try {
       return new awardManifest.all[name as AwardName].Factory();
     } catch (e) {

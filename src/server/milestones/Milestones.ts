@@ -104,22 +104,22 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'Capitalist': {Factory: Capitalist},
     'Tunneler': {Factory: Tunneler, compatibility: 'underworld'},
     'Risktaker': {Factory: Risktaker, compatibility: 'underworld'},
-    'Engineer': {Factory: Engineer},
-    'Fundraiser': {Factory: Fundraiser},
-    'Geologist': {Factory: Geologist},
-    'Landshaper': {Factory: Landshaper},
-    'Lobbyist': {Factory: Lobbyist, compatibility: 'turmoil'},
-    'Philantropist': {Factory: Philantropist},
+    'Engineer': {Factory: Engineer, random: 'modular'},
+    'Fundraiser': {Factory: Fundraiser, random: 'modular'},
+    'Geologist': {Factory: Geologist, random: 'modular'},
+    'Landshaper': {Factory: Landshaper, random: 'modular'},
+    'Lobbyist': {Factory: Lobbyist, compatibility: 'turmoil', random: 'modular'},
+    'Philantropist': {Factory: Philantropist, random: 'modular'},
     // TODO(kberg): Replace with compatibility based on, uh, tags?
-    'Planetologist': {Factory: Planetologist, compatibility: 'venus'},
-    'Producer': {Factory: Producer},
-    'Researcher': {Factory: Researcher},
-    'Sponsor': {Factory: Sponsor},
-    'Farmer': {Factory: Farmer},
-    // 'Briber': {Factory: Briber},
-    // 'Merchant': {Factory: Merchant},
-    'Thawer': {Factory: Thawer},
-    'Hydrologist': {Factory: Hydrologist},
+    'Planetologist': {Factory: Planetologist, compatibility: 'venus', random: 'modular'},
+    'Producer': {Factory: Producer, random: 'modular'},
+    'Researcher': {Factory: Researcher, random: 'modular'},
+    'Sponsor': {Factory: Sponsor, random: 'modular'},
+    'Farmer': {Factory: Farmer, random: 'modular'},
+    // 'Briber': {Factory: Briber, random: 'modular'},
+    // 'Merchant': {Factory: Merchant, random: 'modular'},
+    'Thawer': {Factory: Thawer, random: 'modular'},
+    'Hydrologist': {Factory: Hydrologist, random: 'modular'},
     'Purifier': {Factory: Purifier, compatibility: 'ares'},
     'Agronomist': {Factory: Agronomist},
     'V. Spacefarer': {Factory: VSpacefarer},
@@ -146,31 +146,14 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     moon: ['One Giant Step', 'Lunarchitect'],
     underworld: ['Risktaker', 'Tunneler'],
   },
-  modular: [
-    // 'Briber',
-    'Engineer',
-    'Farmer',
-    'Fundraiser',
-    'Geologist',
-    'Hydrologist',
-    'Landshaper',
-    'Lobbyist',
-    // 'Merchant',
-    'Philantropist',
-    'Planetologist',
-    'Producer',
-    'Researcher',
-    'Sponsor',
-    'Thawer',
-  ],
-  create: (name: string) => {
+  create: (name: string): IMilestone | undefined => {
     try {
       return milestoneManifest.createOrThrow(name);
     } catch (e) {
       return undefined;
     }
   },
-  createOrThrow(name: string) {
+  createOrThrow(name: string): IMilestone {
     try {
       return new milestoneManifest.all[name as MilestoneName].Factory();
     } catch (e) {

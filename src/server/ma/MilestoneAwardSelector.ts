@@ -122,18 +122,19 @@ export function chooseMilestonesAndAwards(gameOptions: GameOptions): DrawnMilest
  */
 export function getCandidates(gameOptions: GameOptions): [Array<MilestoneName>, Array<AwardName>] {
   function include<T extends string>(name: T, manifest: MAManifest<T, any>): boolean {
-    // When using modular, don't include non-modular MAs.
-    if (gameOptions.modularMA) {
-      throw new Error('Not supporting modular awards yet.');
-    }
-
     // Never include deprecated MAs in random candidates.  They generally have "more official" versions that will be
     // considered for inclusion.
     if (manifest.all[name].deprecated) {
       return false;
     }
 
-    if (!gameOptions.modularMA) {
+    const random = manifest.all[name].random;
+    if (gameOptions.modularMA) {
+      if (random === undefined) {
+        return false;
+      }
+      // TODO(kberg): Exclude Geologist if the board has no volcanic spaces
+    } else {
       // The game boards this MA appears in, if any.
       const boards = Object.values(BoardName).filter((boardName) => manifest.boards[boardName].includes(name));
 
@@ -145,9 +146,8 @@ export function getCandidates(gameOptions: GameOptions): [Array<MilestoneName>, 
       if (boards.length > 0 && gameOptions.includeFanMA === false) {
         return false;
       }
-
-      // Disable the new modular awards until they're weighted.
-      if (manifest.modular.includes(name)) {
+      // Modular MAs are not part of our own built random MAs.
+      if (random === 'modular') {
         return false;
       }
     }

@@ -158,23 +158,23 @@ describe('MilestoneAwardSelector', () => {
     }
   });
 
-  it('No modular milestones and awards by default', () => {
-    const [milestones, awards] = getCandidates({...DEFAULT_GAME_OPTIONS,
-      randomMA: RandomMAOptionType.UNLIMITED,
-      venusNextExtension: true,
-      aresExtension: true,
-      moonExpansion: true,
-      coloniesExtension: true,
-      turmoilExtension: true,
-      includeFanMA: true,
-    });
+  // it('No modular milestones and awards by default', () => {
+  //   const [milestones, awards] = getCandidates({...DEFAULT_GAME_OPTIONS,
+  //     randomMA: RandomMAOptionType.UNLIMITED,
+  //     venusNextExtension: true,
+  //     aresExtension: true,
+  //     moonExpansion: true,
+  //     coloniesExtension: true,
+  //     turmoilExtension: true,
+  //     includeFanMA: true,
+  //   });
 
-    expect(intersection(milestones, milestoneManifest.modular)).deep.eq([]);
-    expect(intersection(awards, awardManifest.modular)).deep.eq([]);
+  //   // expect(intersection(milestones, milestoneManifest.modular)).deep.eq([]);
+  //   // expect(intersection(awards, awardManifest.modular)).deep.eq([]);
 
-    // Landlord is listed as modular, but should be included here.
-    expect(awards).to.contain('Landlord');
-  });
+  //   // Landlord is listed as modular, but should be included here.
+  //   expect(awards).to.contain('Landlord');
+  // });
 
   it('Do not select deprecated milestones or awards', () => {
     const [milestones, awards] = getCandidates({

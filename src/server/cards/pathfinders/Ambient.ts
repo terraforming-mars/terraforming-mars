@@ -48,16 +48,17 @@ export class Ambient extends CorporationCard implements ICorporationCard {
   }
 
   public canAct(player: IPlayer) {
-    return player.heat >= 8 && player.game.getTemperature() === MAX_TEMPERATURE && player.canAfford({cost: 0, reserveUnits: Units.of({heat: 8}), tr: {tr: 1}});
+    return player.availableHeat() >= 8 && player.game.getTemperature() === MAX_TEMPERATURE && player.canAfford({cost: 0, reserveUnits: Units.of({heat: 8}), tr: {tr: 1}});
   }
 
   public action(player: IPlayer) {
-    player.heat -= 8;
-    player.increaseTerraformRating();
-    // A hack that allows this action to be replayable.
-    player.defer(() => {
-      player.actionsThisGeneration.delete(this.name);
+    return player.spendHeat(8, () => {
+      // A hack that allows this action to be replayable.
+      player.defer(() => {
+        player.actionsThisGeneration.delete(this.name);
+      });
+      player.increaseTerraformRating();
+      return undefined;
     });
-    return undefined;
   }
 }

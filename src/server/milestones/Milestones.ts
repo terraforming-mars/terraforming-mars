@@ -2,6 +2,7 @@ import {Terraformer} from './Terraformer';
 import {Mayor} from './Mayor';
 import {Gardener} from './Gardener';
 import {Builder} from './Builder';
+import {Builder7} from './Builder7';
 import {Planner} from './Planner';
 import {Hoverlord} from './Hoverlord';
 import {IMilestone} from './IMilestone';
@@ -61,6 +62,14 @@ import {MAManifest} from '../ma/MAManifest';
 import {MilestoneName} from '../../common/ma/MilestoneName';
 import {BoardName} from '../../common/boards/BoardName';
 import {Architect} from './Architect';
+import {Legend4} from './modular/Legend4';
+import {Metallurgist} from './Metallurgist';
+import {Spacefarer4} from './terraCimmeria/Spacefarer4';
+import {Terraformer29} from './modular/Terraformer29';
+import {Terran5} from './modular/Terran5';
+import {Tycoon10} from './modular/Tycoon10';
+import {Trader} from './modular/Trader';
+import {Tactician4} from './modular/Tactician4';
 
 export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
   all: {
@@ -68,22 +77,23 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'Architect': {Factory: Architect},
     // 'Briber': {Factory: Briber, random: 'modular'},
     'Builder': {Factory: Builder},
+    'Builder7': {Factory: Builder7, random: 'modular'},
     'C. Forester': {Factory: CForester},
     'Capitalist': {Factory: Capitalist},
-    'Coastguard': {Factory: Coastguard},
+    'Coastguard': {Factory: Coastguard, random: 'modular'},
     'Colonizer': {Factory: Colonizer, compatibility: 'colonies'},
-    'Diversifier': {Factory: Diversifier},
-    'Ecologist': {Factory: Ecologist},
+    'Diversifier': {Factory: Diversifier, random: 'modular'},
+    'Ecologist': {Factory: Ecologist, random: 'both'},
     'Economizer': {Factory: Economizer},
-    'Energizer': {Factory: Energizer},
+    'Energizer': {Factory: Energizer, random: 'both'},
     'Engineer': {Factory: Engineer, random: 'modular'},
     'Farmer': {Factory: Farmer, random: 'modular'},
     'Firestarter': {Factory: Firestarter},
     'Forester': {Factory: Forester, deprecated: true},
     'Fundraiser': {Factory: Fundraiser, random: 'modular'},
     'Gambler': {Factory: Gambler},
-    'Gardener': {Factory: Gardener},
-    'Generalist': {Factory: Generalist},
+    'Gardener': {Factory: Gardener, random: 'both'},
+    'Generalist': {Factory: Generalist, random: 'both'},
     'Geologist': {Factory: Geologist, random: 'modular'},
     'Hoverlord': {Factory: Hoverlord, compatibility: 'venus'},
     'Hydrologist': {Factory: Hydrologist, random: 'modular'},
@@ -91,38 +101,47 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'Land Specialist': {Factory: LandSpecialist},
     'Landshaper': {Factory: Landshaper, random: 'modular'},
     'Legend': {Factory: Legend},
+    'Legend4': {Factory: Legend4, random: 'modular'},
     'Lobbyist': {Factory: Lobbyist, compatibility: 'turmoil', random: 'modular'},
     'Lunarchitect': {Factory: Lunarchitect, compatibility: 'moon'},
     'Martian': {Factory: Martian, compatibility: 'pathfinders'},
-    'Mayor': {Factory: Mayor},
+    'Mayor': {Factory: Mayor, random: 'both'},
     // 'Merchant': {Factory: Merchant, random: 'modular'},
+    'Metallurgist': {Factory: Metallurgist, random: 'modular'},
     'Minimalist': {Factory: Minimalist},
     'Networker': {Factory: Networker, compatibility: 'ares'},
     'One Giant Step': {Factory: OneGiantStep, compatibility: 'moon'},
     'Philantropist': {Factory: Philantropist, random: 'modular'},
     'Pioneer': {Factory: Pioneer, compatibility: 'colonies'},
+    'Pioneer4': {Factory: Pioneer, compatibility: 'colonies', random: 'modular'},
     'Planetologist': {Factory: Planetologist, compatibility: 'venus', random: 'modular'},
-    'Planner': {Factory: Planner},
+    'Planner': {Factory: Planner, random: 'both'},
     'Polar Explorer': {Factory: PolarExplorer},
     'Producer': {Factory: Producer, random: 'modular'},
     'Purifier': {Factory: Purifier, compatibility: 'ares'},
     'Researcher': {Factory: Researcher, random: 'modular'},
-    'Rim Settler': {Factory: RimSettler},
+    'Rim Settler': {Factory: RimSettler, random: 'both'},
     'Risktaker': {Factory: Risktaker, compatibility: 'underworld'},
     'Smith': {Factory: Smith},
     'Spacefarer': {Factory: Spacefarer},
+    'Spacefarer4': {Factory: Spacefarer4, random: 'modular'},
     'Specialist': {Factory: Specialist},
     'Sponsor': {Factory: Sponsor, random: 'modular'},
     'T. Collector': {Factory: Collector},
     'Tactician': {Factory: Tactician},
+    'Tactician4': {Factory: Tactician4, random: 'modular'},
     'Terra Pioneer': {Factory: TerraPioneer},
     'Terraformer': {Factory: Terraformer},
+    'Terraformer29': {Factory: Terraformer29, random: 'modular'},
     'Terran': {Factory: Terran},
+    'Terran5': {Factory: Terran5, random: 'modular'},
     'Thawer': {Factory: Thawer, random: 'modular'},
+    'Trader': {Factory: Trader, random: 'modular'},
     'Tradesman': {Factory: Tradesman},
     'Tropicalist': {Factory: Tropicalist},
     'Tunneler': {Factory: Tunneler, compatibility: 'underworld'},
     'Tycoon': {Factory: Tycoon},
+    'Tycoon10': {Factory: Tycoon10, random: 'modular'},
     'V. Electrician': {Factory: VElectrician},
     'V. Spacefarer': {Factory: VSpacefarer},
   },

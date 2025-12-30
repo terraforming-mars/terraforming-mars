@@ -392,18 +392,18 @@
                                     <span v-i18n>{{ getRandomMaOptionType('full') }}</span>
                                 </label>
                                 </div>
-                                <!--
-                                  Remember to restore the behavior that creates variable dataToSend
-                                  <div>
+                                <div>
                                   <input type="checkbox" name="modularMA" v-model="modularMA" id="modularMA-checkbox">
                                    <label for="modularMA-checkbox">
                                     <span v-i18n>Official Random α</span>
-                                </label>
-                                </div> -->
+                                  </label>
+                                </div>
                             </div>
 
                             <div v-if="modularMA">
-                              The new Milestones and Awards are still in active development.<br/>Please don't report anything but functional issues.
+                              The new Milestones and Awards are still in active development.<br/>
+                              Please don't report anything unless it breaks the game.<br/>
+                              These are <b>always fully random</b>.
                             </div>
                             <template v-if="expansions.venus">
                                 <input type="checkbox" v-model="requiresVenusTrackCompletion" id="requiresVenusTrackCompletion-checkbox">
@@ -1127,8 +1127,7 @@ export default (Vue as WithRefs<Refs>).extend({
         fastModeOption,
         removeNegativeGlobalEventsOption,
         includeFanMA,
-        // modularMA: this.modularMA,
-        modularMA: false,
+        modularMA: this.modularMA,
         startingCorporations,
         soloTR,
         clonedGamedId,

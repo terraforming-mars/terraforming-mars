@@ -83,7 +83,7 @@ export const awardNames = [
   'Metropolist',
   'Mogul',
   'Politician',
-  'Suburbian',
+  'Suburbian', // Matches Edgedancer.
   // 'Zoologist', // Most animal and microbe resources. Currently Zoologist2
 ] as const;
 

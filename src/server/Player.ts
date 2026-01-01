@@ -1067,7 +1067,8 @@ export class Player implements IPlayer {
       vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: {player: this}});
     }
     if (!this.playedCards.has(CardName.VANALLEN)) { // Why isn't this an else clause to the statement above?
-      const cost = this.milestoneCost();
+      const baseCost = this.milestoneCost();
+      const cost = baseCost + ((milestone.name === 'Briber') ? 12 : 0);
       this.game.defer(new SelectPaymentDeferred(this, cost, {title: 'Select how to pay for milestone'}));
     }
     this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
@@ -1082,7 +1083,7 @@ export class Player implements IPlayer {
     return stagedProtests?.generationUsed === this.game.generation;
   }
 
-  private milestoneCost() {
+  public milestoneCost() {
     if (this.playedCards.has(CardName.NIRGAL_ENTERPRISES)) {
       return 0;
     }

@@ -148,14 +148,15 @@ export class Server {
       let scores: Array<MilestoneScore> = [];
       if (claimed === undefined && claimedMilestones.length < MAX_MILESTONES) {
         scores = game.players.map((player) => ({
-          playerColor: player.color,
-          playerScore: milestone.getScore(player),
+          color: player.color,
+          score: milestone.getScore(player),
+          claimable: milestone.canClaim(player),
         }));
       }
 
       milestoneModels.push({
         playerName: claimed?.player.name,
-        playerColor: claimed?.player.color,
+        color: claimed?.player.color,
         name: milestone.name,
         scores,
       });
@@ -174,14 +175,14 @@ export class Server {
       let scores: Array<AwardScore> = [];
       if (fundedAwards.length < MAX_AWARDS || funded !== undefined) {
         scores = game.players.map((player) => ({
-          playerColor: player.color,
-          playerScore: scorer.get(player),
+          color: player.color,
+          score: scorer.get(player),
         }));
       }
 
       awardModels.push({
         playerName: funded?.player.name,
-        playerColor: funded?.player.color,
+        color: funded?.player.color,
         name: award.name,
         scores: scores,
       });

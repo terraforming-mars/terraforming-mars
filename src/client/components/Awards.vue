@@ -14,8 +14,8 @@
           <span class="ma-player-cube">
             <i
               class="board-cube"
-              :class="`board-cube--${award.playerColor}`"
-              :data-test-player-cube="award.playerColor"
+              :class="`board-cube--${award.color}`"
+              :data-test-player-cube="award.color"
             />
           </span>
         </span>

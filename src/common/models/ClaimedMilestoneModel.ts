@@ -2,13 +2,14 @@ import {Color} from '../Color';
 import {MilestoneName} from '../ma/MilestoneName';
 
 export type MilestoneScore = {
-  playerColor: Color;
-  playerScore: number;
+  color: Color;
+  score: number;
+  claimable?: boolean;
 }
 
 export type ClaimedMilestoneModel = {
   name: MilestoneName;
   playerName: string | undefined;
-  playerColor: Color | undefined;
+  color: Color | undefined;
   scores: Array<MilestoneScore>;
 }

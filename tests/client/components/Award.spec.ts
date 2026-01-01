@@ -12,7 +12,7 @@ function createAward(
   return {
     name: `Cosmic Settler`,
     playerName: funded ? 'Bob' : undefined,
-    playerColor: funded ? 'red': undefined,
+    color: funded ? 'red': undefined,
     scores,
   };
 }
@@ -46,7 +46,7 @@ describe('Award', () => {
   ] as const;
   for (const run of showScoresRuns) {
     it('Show scores ' + run.value, () => {
-      const award = createAward({funded: true, scores: [{playerColor: 'red', playerScore: 2}]});
+      const award = createAward({funded: true, scores: [{color: 'red', score: 2}]});
       const wrapper = mount(Award, {localVue: getLocalVue(), propsData: {award, showScores: run.value}});
 
       expect(wrapper.find('[data-test=player-score]').exists()).to.eq(run.expected);
@@ -57,7 +57,7 @@ describe('Award', () => {
     const award = createAward({
       funded: true,
       scores: [
-        {playerColor: 'red', playerScore: 2},
+        {color: 'red', score: 2},
       ],
     });
 
@@ -67,17 +67,17 @@ describe('Award', () => {
     });
 
     const scoreWrapper = wrapper.find('[data-test=player-score]');
-    expect(scoreWrapper.classes()).to.includes(`player_bg_color_${award.scores[0].playerColor}`);
+    expect(scoreWrapper.classes()).to.includes(`player_bg_color_${award.scores[0].color}`);
   });
 
   it('shows sorted players scores', () => {
     const award = createAward({
       funded: false,
       scores: [
-        {playerColor: 'red', playerScore: 2},
-        {playerColor: 'blue', playerScore: 4},
-        {playerColor: 'yellow', playerScore: 0},
-        {playerColor: 'green', playerScore: 4},
+        {color: 'red', score: 2},
+        {color: 'blue', score: 4},
+        {color: 'yellow', score: 0},
+        {color: 'green', score: 4},
       ],
     });
 
@@ -99,7 +99,7 @@ describe('Award', () => {
       propsData: {award},
     });
 
-    expect(wrapper.find(`.board-cube--${award.playerColor}`).exists()).to.be.true;
+    expect(wrapper.find(`.board-cube--${award.color}`).exists()).to.be.true;
   });
 
   it('creates correct css class from award name', () => {

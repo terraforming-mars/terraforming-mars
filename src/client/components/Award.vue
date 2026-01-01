@@ -1,7 +1,7 @@
 <template>
   <div class="ma-block">
     <div class="ma-player" v-if="award.playerName">
-      <i :title="award.playerName" class="board-cube" :class="`board-cube--${award.playerColor}`" />
+      <i :title="award.playerName" class="board-cube" :class="`board-cube--${award.color}`" />
     </div>
 
     <div class="ma-name ma-name--awards award-block" :class="nameCss">
@@ -9,18 +9,18 @@
       <div v-if="showScores" class="ma-scores player_home_block--milestones-and-awards-scores">
         <template v-for="score in sortedScores">
           <p
-            v-if="playerSymbol(score.playerColor).length > 0"
-            :key="score.playerColor + '-symbol'"
+            v-if="playerSymbol(score.color).length > 0"
+            :key="score.color + '-symbol'"
             class="ma-score"
-            :class="`player_bg_color_${score.playerColor}`"
-            v-text="playerSymbol(score.playerColor)"
+            :class="`player_bg_color_${score.color}`"
+            v-text="playerSymbol(score.color)"
             data-test="player-score"
           />
           <p
-            :key="score.playerColor"
+            :key="score.color"
             class="ma-score"
-            :class="`player_bg_color_${score.playerColor}`"
-            v-text="score.playerScore"
+            :class="`player_bg_color_${score.color}`"
+            v-text="score.score"
             data-test="player-score"
           />
       </template>
@@ -65,7 +65,7 @@ export default Vue.extend({
       return 'ma-name--' + this.award.name.replace(/ /g, '-').replace(/\./g, '').toLowerCase();
     },
     sortedScores(): Array<AwardScore> {
-      return [...this.award.scores].sort((s1, s2) => s2.playerScore - s1.playerScore);
+      return [...this.award.scores].sort((s1, s2) => s2.score - s1.score);
     },
     description(): string {
       return getAward(this.award.name).description;

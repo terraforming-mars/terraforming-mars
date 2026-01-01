@@ -10,7 +10,7 @@ describe('Milestones', () => {
   const mockMilestone: ClaimedMilestoneModel = {
     name: 'Forester',
     playerName: 'foo',
-    playerColor: 'blue',
+    color: 'blue',
     scores: [],
   };
 

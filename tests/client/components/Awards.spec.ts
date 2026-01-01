@@ -15,7 +15,7 @@ function createAward({id = 1, funded = false}): FundedAwardModel {
   return {
     name: names[id - 1],
     playerName: funded ? 'Foo' : undefined,
-    playerColor: funded ? 'red': undefined,
+    color: funded ? 'red': undefined,
     scores: [],
   };
 }
@@ -113,7 +113,7 @@ describe('Awards', () => {
     expect(fundedAwards.text()).to.include(fundedAward.name);
     expect(fundedAwards.text()).to.not.include(notFundedAward.name);
 
-    const playerCube = fundedAwards.find(`[data-test-player-cube=${fundedAward.playerColor}]`);
+    const playerCube = fundedAwards.find(`[data-test-player-cube=${fundedAward.color}]`);
     expect(playerCube.exists()).to.be.true;
   });
 

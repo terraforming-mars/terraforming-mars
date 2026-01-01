@@ -76,7 +76,7 @@ export const milestoneNames = [
   'Purifier',
 
   // Modular
-  // 'Briber',
+  'Briber',
   'Builder7',
   'Forester',
   'Fundraiser',

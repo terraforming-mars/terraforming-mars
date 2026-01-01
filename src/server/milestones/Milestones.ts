@@ -70,12 +70,13 @@ import {Terran5} from './modular/Terran5';
 import {Tycoon10} from './modular/Tycoon10';
 import {Trader} from './modular/Trader';
 import {Tactician4} from './modular/Tactician4';
+import {Briber} from './Briber';
 
 export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
   all: {
     'Agronomist': {Factory: Agronomist},
     'Architect': {Factory: Architect},
-    // 'Briber': {Factory: Briber, random: 'modular'},
+    'Briber': {Factory: Briber, random: 'modular'},
     'Builder': {Factory: Builder},
     'Builder7': {Factory: Builder7, random: 'modular'},
     'C. Forester': {Factory: CForester},

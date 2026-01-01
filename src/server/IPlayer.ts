@@ -350,6 +350,9 @@ export interface IPlayer {
   setWaitingForSafely(input: PlayerInput, cb?: () => void): void;
   serialize(): SerializedPlayer;
 
+  /** Returns the cost a player must spend to claim a milestone. Public for Briber. */
+  milestoneCost(): number;
+
   /** Shorthand for deferring evaluating a PlayerInput */
   defer(input: PlayerInput | undefined | void | (() => PlayerInput | undefined | void), priority?: Priority): void;
   setAlliedParty(party: IParty): void;

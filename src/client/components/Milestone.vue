@@ -19,7 +19,7 @@
             :key="score.playerColor"
             class="ma-score"
             :class="`player_bg_color_${score.playerColor}`"
-            v-text="score.playerScore"
+            v-text="playerScore(score)"
             data-test="player-score"
           />
       </template>
@@ -57,6 +57,12 @@ export default Vue.extend({
   methods: {
     playerSymbol(color: Color): string {
       return playerSymbol(color);
+    },
+    playerScore(score: MilestoneScore): string {
+      if (this.milestone.name === 'Briber') {
+        return score.playerScore === 1 ? '👍' : '👎';
+      }
+      return score.playerScore.toString();
     },
   },
   computed: {

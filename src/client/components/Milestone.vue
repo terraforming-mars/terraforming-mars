@@ -4,7 +4,7 @@
       <i :title="milestone.playerName" class="board-cube" :class="`board-cube--${milestone.color}`" />
     </div>
     <div class="ma-name--milestones" :class="nameCss">
-      <span v-i18n>{{milestone.name}}</span>
+      <span v-i18n>{{name}}</span>
       <div v-if="showScores" class="ma-scores player_home_block--milestones-and-awards-scores">
         <template v-for="score in sortedScores">
           <p
@@ -69,6 +69,9 @@ export default Vue.extend({
     },
   },
   computed: {
+    name(): string {
+      return this.milestone.name.replace(/[0-9]+$/, '');
+    },
     nameCss(): string {
       return 'ma-name ma-name--' + this.milestone.name.replace(/ /g, '-').replace(/\./g, '').toLowerCase();
     },

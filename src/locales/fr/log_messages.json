@@ -409,7 +409,7 @@
   "earth": "terre",
   "venus": "vénus",
   "jovian": "jovien",
-  "mars": "mars",
+  "mars": "",
   "moon": "lune",
   "Player spent ${0} steel and gained ${1} heat": "Le joueur a dépensé ${0} acier(s) et a gagné ${1} chaleur(s)",
   "${0} turned the clone tag on ${1} into a ${2} tag": "${0} a changé le badge Clone sur ${1} en un badge ${2}",

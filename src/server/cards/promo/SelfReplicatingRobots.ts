@@ -33,6 +33,9 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
     });
   }
 
+  /**
+   * Cards hosted by Self-Replicating Robots. They are not considered "played" cards.
+   */
   public targetCards: Array<IProjectCard> = [];
 
   public override getCardDiscount(_player: IPlayer, card: IProjectCard): number {

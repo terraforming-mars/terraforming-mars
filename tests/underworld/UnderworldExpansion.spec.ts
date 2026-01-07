@@ -401,6 +401,10 @@ describe('UnderworldExpansion', () => {
 
     expect(UnderworldExpansion.identifiableSpaces(player1)).contains(space);
     expect(UnderworldExpansion.excavatableSpaces(player1)).contains(space);
+
+    UnderworldExpansion.excavate(player1, space);
+
+    expect(space.excavator?.id).eq(player1.id);
   });
 
   it('Martian Nature Wonders space is identifiable and excavatable', () => {
@@ -409,6 +413,10 @@ describe('UnderworldExpansion', () => {
 
     expect(UnderworldExpansion.identifiableSpaces(player1)).contains(space);
     expect(UnderworldExpansion.excavatableSpaces(player1)).contains(space);
+
+    UnderworldExpansion.excavate(player1, space);
+
+    expect(space.excavator?.id).eq(player1.id);
   });
 
   // TODO(kberg): Test excavatablespaces override

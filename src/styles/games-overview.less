@@ -1,0 +1,20 @@
+.games-overview-container {
+  .status-running {
+    display: inline-block; /* Element must be block or inline-block for transform to work well */
+    transform: scaleX(-1);
+  }
+
+  .status-running::after {
+    content: '🏎️';
+  }
+  .status-finished:after {
+    content: '🏁';
+
+  }
+  .status-error:after {
+    content: '⚠️';
+  }
+  .spectator {
+    background-color: gray;
+  }
+}

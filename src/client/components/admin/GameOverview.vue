@@ -1,28 +1,26 @@
 <template>
+  <tr>
+
   <!-- single item in GamesOverview -->
-  <span>
-    <a v-bind:href="'game?id='+id">{{id}}</a>
-    <template v-if="game === undefined">
-      ...{{status}}
-    </template>
-    <template v-else>
-      <span v-i18n>with {{game.players.length}} player(s) :</span>
-      <span class="player_home_block nofloat" >
-          <span v-for="player in game.players" class="player_name" :class="'player_bg_color_'+ player.color" :key="player.color">
-              <a target="blank" :href="'player?id=' + player.id">{{player.name}}</a>
-          </span>
-          <!-- TODO(kberg) Give spectator a color. -->
-          <a target="blank" :href="'spectator?id=' + game.spectatorId" v-i18n>Spectator</a>
-          <span v-if="isRunning()" v-i18n>is running</span><span v-else v-i18n>has ended</span>
+  <td><span :class="statusClass"></span></td>
+  <td><a :href="'game?id='+id" class="game-id">{{id}}</a></td>
+  <template v-if="game !== undefined">
+    <td v-for="player in game.players" :key="player.color">
+      <span class="player-name" :class="'player_bg_color_'+ player.color">
+        <a calassc target="blank" :href="'player?id=' + player.id">{{player.name}}</a>
       </span>
-    </template>
-  </span>
+    </td>
+    <td><a target="blank" :href="'spectator?id=' + game.spectatorId" v-i18n class="player-name spectator">Spectator</a></td>
+  </template>
+  </tr>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {Phase} from '@/common/Phase';
+
+type Status = 'loading' | 'error' | 'done';
 
 export default Vue.extend({
   name: 'GameOverview',
@@ -32,7 +30,7 @@ export default Vue.extend({
   },
   props: {
     status: {
-      type: String,
+      type: String as () => Status,
     },
     game: {
       type: Object as () => SimpleGameModel | undefined,
@@ -41,7 +39,23 @@ export default Vue.extend({
       type: String,
     },
   },
-  methods: {
+  computed: {
+    statusClass(): string {
+      switch (this.status) {
+      case 'loading':
+        return 'status-loading';
+      case 'error':
+        return 'status-error';
+      case 'done':
+        if (this.isRunning) {
+          return 'status-running';
+        } else {
+          return 'status-finished';
+        }
+      default:
+        return '';
+      }
+    },
     isRunning(): boolean {
       return this.game?.phase !== Phase.END;
     },

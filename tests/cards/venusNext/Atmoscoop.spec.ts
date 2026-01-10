@@ -10,9 +10,10 @@ import {IGame} from '../../../src/server/IGame';
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
-import {cast, runAllActions, setTemperature, setVenusScaleLevel} from '../../TestingUtils';
+import {cast, runAllActions, setRulingParty, setTemperature, setVenusScaleLevel} from '../../TestingUtils';
 import {SelectOption} from '../../../src/server/inputs/SelectOption';
 import {testGame} from '../../TestGame';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
 
 describe('Atmoscoop', () => {
   let card: Atmoscoop;
@@ -129,4 +130,34 @@ describe('Atmoscoop', () => {
     action.cb([dirigibles]);
     expect(dirigibles.resourceCount).to.eq(2);
   });
+
+  for (const run of [
+    {megacredits: 21, titanium: 0, reds: false, expected: false},
+    {megacredits: 22, titanium: 0, reds: false, expected: true},
+    {megacredits: 18, titanium: 1, reds: false, expected: false},
+    {megacredits: 20, titanium: 1, reds: false, expected: true},
+
+    {megacredits: 27, titanium: 0, reds: true, expected: false},
+    {megacredits: 28, titanium: 0, reds: true, expected: true},
+
+    {megacredits: 30, titanium: 0, reds: true, temperature: -2, venus: 14, expected: false},
+    {megacredits: 31, titanium: 0, reds: true, temperature: -2, venus: 14, expected: true},
+  ] as const) {
+    it('Can play ' + JSON.stringify(run), () => {
+      [game, player] = testGame(2, {venusNextExtension: true, turmoilExtension: true});
+      player.tagsForTest = {science: 3};
+      if (run.reds) {
+        setRulingParty(game, PartyName.REDS, 'rp01');
+      }
+      player.megaCredits = run.megacredits;
+      player.titanium = run.titanium;
+      if (run.temperature) {
+        setTemperature(game, run.temperature);
+      }
+      if (run.venus) {
+        setVenusScaleLevel(game, run.venus);
+      }
+      expect(player.canPlay(card)).eq(run.expected);
+    });
+  }
 });

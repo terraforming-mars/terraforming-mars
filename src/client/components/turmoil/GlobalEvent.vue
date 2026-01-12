@@ -1,5 +1,5 @@
 <template>
-  <div :class="getClass()">
+  <div :class="klass">
     <div class="card-container">
       <div class="card-content-wrapper" v-i18n>
         <CardParty class="card-party--revealed" :party="revealed" />
@@ -21,7 +21,6 @@ import Vue from 'vue';
 import CardRenderData from '@/client/components/card/CardRenderData.vue';
 import CardParty from '@/client/components/card/CardParty.vue';
 import {IClientGlobalEvent} from '@/common/turmoil/IClientGlobalEvent';
-import {CardComponent} from '@/common/cards/render/CardComponent';
 import {getGlobalEvent} from '@/client/turmoil/ClientGlobalEventManifest';
 import CardDescription from '@/client/components/card/CardDescription.vue';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
@@ -65,17 +64,8 @@ export default Vue.extend({
       description: globalEvent.description,
     };
   },
-  methods: {
-    getCardRenderer(): CardComponent | undefined {
-      return this.renderData;
-    },
-    partyNameClass(partyName: string): string {
-      if (partyName === undefined) {
-        return '';
-      }
-      return 'event-party--' + partyName.toLowerCase().split(' ').join('_');
-    },
-    getClass(): string {
+  computed: {
+    klass(): string {
       const common = 'global-event';
       switch (this.type) {
       case 'coming':

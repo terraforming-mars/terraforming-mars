@@ -1,5 +1,5 @@
 <template>
-  <div class="card-container filterDiv hover-hide-res" :class="cardClasses">
+  <div class="card-container filterDiv hover-hide-res" :class="cardClasses" ref="container">
       <div class="card-content-wrapper" v-i18n @mouseover="hovering = true" @mouseleave="hovering = false">
           <div v-if="!isStandardProject" class="card-cost-and-tags">
               <CardCost :amount="cost" :newCost="reducedCost" />
@@ -8,7 +8,12 @@
               <CardTags :tags="tags" />
           </div>
           <CardTitle :title="card.name" :type="cardType"/>
-          <CardContent :metadata="cardMetadata" :requirements="cardRequirements" :isCorporation="isCorporationCard" :bottomPadding="bottomPadding" />
+          <CardContent
+              ref="content"
+              :metadata="cardMetadata"
+              :requirements="cardRequirements"
+              :isCorporation="isCorporationCard"
+              :bottomPadding="bottomPadding" />
       </div>
       <CardExpansion :expansion="cardExpansion" :isCorporation="isCorporationCard" :isResourceCard="isResourceCard" :compatibility="cardCompatibility" />
       <CardResourceCounter v-if="hasResourceType" :amount="resourceAmount" :type="resourceType" />
@@ -23,6 +28,7 @@
 import Vue from 'vue';
 
 import {CardModel} from '@/common/models/CardModel';
+import {WithRefs} from 'vue-typed-refs';
 import CardTitle from './CardTitle.vue';
 import CardResourceCounter from './CardResourceCounter.vue';
 import CardCost from './CardCost.vue';
@@ -42,7 +48,12 @@ import {Color} from '@/common/Color';
 import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
 import {GameModule} from '@/common/cards/GameModule';
 
-export default Vue.extend({
+type Refs = {
+  container: HTMLElement,
+  content: Vue,
+}
+
+export default (Vue as WithRefs<Refs>).extend({
   name: 'Card',
   components: {
     CardTitle,
@@ -83,6 +94,7 @@ export default Vue.extend({
     return {
       cardInstance: card,
       hovering: false,
+      customHeight: 0,
     };
   },
   computed: {
@@ -156,7 +168,7 @@ export default Vue.extend({
     },
     isProjectCard(): boolean {
       const type = this.cardType;
-      return type !== CardType.PRELUDE && type !== CardType.CORPORATION && type !== CardType.CEO;
+      return type === CardType.AUTOMATED || type === CardType.ACTIVE || type === CardType.EVENT;
     },
     isStandardProject() : boolean {
       return this.cardType === CardType.STANDARD_PROJECT || this.cardType === CardType.STANDARD_ACTION;
@@ -186,6 +198,27 @@ export default Vue.extend({
     },
     playerCubeClass(): string {
       return `board-cube board-cube--${this.cubeColor}`;
+    },
+  },
+  mounted() {
+    this.customHeight = this.$refs.content.$el.scrollHeight;
+  },
+  watch: {
+    hovering(val: boolean) {
+      if (!this.isProjectCard) {
+        return;
+      }
+      const content = this.$refs.content.$el as HTMLElement;
+      if (content.scrollHeight <= 236) {
+        return;
+      }
+      if (val) {
+        this.$refs.container.style.height = (this.customHeight + 90) + 'px';
+        content.style.height = this.customHeight + 'px';
+      } else {
+        this.$refs.container.style.removeProperty('height');
+        content.style.removeProperty('height');
+      }
     },
   },
 });

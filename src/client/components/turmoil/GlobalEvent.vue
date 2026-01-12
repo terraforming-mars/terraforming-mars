@@ -1,6 +1,6 @@
 <template>
   <div :class="klass">
-    <div class="card-container">
+    <div class="card-container global-event-container">
       <div class="card-content-wrapper" v-i18n>
         <CardParty class="card-party--revealed" :party="revealed" />
         <CardParty class="card-party--current" :party="current" />
@@ -9,8 +9,9 @@
           <CardRenderData v-if="renderData !== undefined" :renderData="renderData" />
           <CardDescription :item='description' />
         </div>
-     </div>
+      </div>
     </div>
+    <span v-if="showDistance" class="global-event-distance" i18-n>{{ this.type }}</span>
     <slot/>
   </div>
 </template>
@@ -50,6 +51,10 @@ export default Vue.extend({
     type: {
       type: String as () => RenderType,
     },
+    showDistance: {
+      type: Boolean,
+      default: false,
+    },
   },
   data(): DataModel {
     const globalEvent: IClientGlobalEvent | undefined = getGlobalEvent(this.globalEventName);
@@ -66,15 +71,11 @@ export default Vue.extend({
   },
   computed: {
     klass(): string {
-      const common = 'global-event';
-      switch (this.type) {
-      case 'coming':
-        return common + ' global-event--coming';
-      case 'current':
-        return common + ' global-event--current';
-      default:
-        return common;
+      const common = 'global-event global-event--' + this.type;
+      if (this.showDistance) {
+        return common + ' global-event--show-distance';
       }
+      return common;
     },
   },
 });

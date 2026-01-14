@@ -232,7 +232,7 @@ export class Server {
       isActive: player.id === game.activePlayer.id,
       lastCardPlayed: player.lastCardPlayed,
       megaCredits: player.megaCredits,
-      megaCreditProduction: player.production.megacredits,
+      megacreditProduction: player.production.megacredits,
       name: player.name,
       needsToDraft: player.needsToDraft,
       needsToResearch: !game.hasResearched(player),

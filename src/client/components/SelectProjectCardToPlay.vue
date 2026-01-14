@@ -227,13 +227,13 @@ export default Vue.extend({
       }
 
       // Set MC payment after knowning how much of other resources are consumed
-      this.payment.megacredits = Math.max(0, Math.min(this.thisPlayer.megaCredits, megacreditBalance));
+      this.payment.megacredits = Math.max(0, Math.min(this.thisPlayer.megacredits, megacreditBalance));
 
       // console.log('units: ' + JSON.stringify(this.payment, null, 2));
       // console.log('balance', megacreditBalance);
 
       // Use as much MC as possible.
-      megacreditBalance = Math.max(megacreditBalance - this.thisPlayer.megaCredits, 0);
+      megacreditBalance = Math.max(megacreditBalance - this.thisPlayer.megacredits, 0);
 
       // console.log('balance', megacreditBalance);
 

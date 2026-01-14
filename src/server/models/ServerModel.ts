@@ -231,7 +231,7 @@ export class Server {
       influence: Turmoil.ifTurmoilElse(game, (turmoil) => turmoil.getInfluence(player), () => 0),
       isActive: player.id === game.activePlayer.id,
       lastCardPlayed: player.lastCardPlayed,
-      megaCredits: player.megaCredits,
+      megacredits: player.megaCredits,
       megacreditProduction: player.production.megacredits,
       name: player.name,
       needsToDraft: player.needsToDraft,

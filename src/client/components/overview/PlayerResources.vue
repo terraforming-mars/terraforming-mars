@@ -2,7 +2,7 @@
   <div class="resource_items_cont">
     <player-resource
       :type="Resource.MEGACREDITS"
-      :count="player.megaCredits"
+      :count="player.megacredits"
       :production="player.megacreditProduction"
       :resourceProtection="player.protectedResources.megacredits"
       :productionProtection="player.protectedProduction.megacredits"/>

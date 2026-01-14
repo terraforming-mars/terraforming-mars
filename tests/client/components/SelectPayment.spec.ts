@@ -11,7 +11,7 @@ describe('SelectPayment', () => {
   it('Uses heat', async () => {
     const wrapper = setupBill(
       10,
-      {heat: 5, megaCredits: 7},
+      {heat: 5, megacredits: 7},
       {paymentOptions: {heat: true}});
 
     const tester = new PaymentTester(wrapper);
@@ -34,7 +34,7 @@ describe('SelectPayment', () => {
   it('Uses steel', async () => {
     const wrapper = setupBill(
       10,
-      {steel: 4, megaCredits: 7, steelValue: 2},
+      {steel: 4, megacredits: 7, steelValue: 2},
       {paymentOptions: {steel: true}});
 
     const tester = new PaymentTester(wrapper);
@@ -45,7 +45,7 @@ describe('SelectPayment', () => {
   it('Check initial value, use steel and titanium, but not enough steel', async () => {
     const wrapper = setupBill(
       10,
-      {steel: 1, titanium: 2, megaCredits: 7, steelValue: 2, titaniumValue: 3},
+      {steel: 1, titanium: 2, megacredits: 7, steelValue: 2, titaniumValue: 3},
       {paymentOptions: {steel: true, titanium: true}});
 
     const tester = new PaymentTester(wrapper);
@@ -56,7 +56,7 @@ describe('SelectPayment', () => {
   it('Uses titanium bonus', async () => {
     const wrapper = setupBill(
       10,
-      {megaCredits: 2, titanium: 4, titaniumValue: 7},
+      {megacredits: 2, titanium: 4, titaniumValue: 7},
       {paymentOptions: {titanium: true}});
 
     const tester = new PaymentTester(wrapper);
@@ -67,7 +67,7 @@ describe('SelectPayment', () => {
   it('Uses seeds', async () => {
     const wrapper = setupBill(
       14,
-      {megaCredits: 6},
+      {megacredits: 6},
       {paymentOptions: {seeds: true}, seeds: 4});
 
     const tester = new PaymentTester(wrapper);
@@ -78,7 +78,7 @@ describe('SelectPayment', () => {
   it('Default seed value uses more than minimum when there are not enough MC', async () => {
     const wrapper = setupBill(
       14,
-      {megaCredits: 2},
+      {megacredits: 2},
       {paymentOptions: {seeds: true}, seeds: 4});
 
     const tester = new PaymentTester(wrapper);
@@ -89,7 +89,7 @@ describe('SelectPayment', () => {
   it('Uses auroraiData', async () => {
     const wrapper = setupBill(
       14,
-      {megaCredits: 6},
+      {megacredits: 6},
       {paymentOptions: {auroraiData: true}, auroraiData: 4});
 
     const tester = new PaymentTester(wrapper);
@@ -100,7 +100,7 @@ describe('SelectPayment', () => {
   it('initial values, multiple values', async () => {
     const wrapper = setupBill(
       10,
-      {megaCredits: 2, titanium: 4, titaniumValue: 4, heat: 3},
+      {megacredits: 2, titanium: 4, titaniumValue: 4, heat: 3},
       {paymentOptions: {titanium: true, heat: true}});
 
     const tester = new PaymentTester(wrapper);
@@ -114,7 +114,7 @@ describe('SelectPayment', () => {
   it('can pay, no resources', async () => {
     const wrapper = setupBill(
       10,
-      {megaCredits: 12, titanium: 0, titaniumValue: 3, steelValue: 2, heat: 0},
+      {megacredits: 12, titanium: 0, titaniumValue: 3, steelValue: 2, heat: 0},
       {paymentOptions: {titanium: true, heat: true, steel: true}});
 
     const tester = new PaymentTester(wrapper);
@@ -127,7 +127,7 @@ describe('SelectPayment', () => {
   it('max megacredits', async () => {
     const wrapper = setupBill(
       9,
-      {megaCredits: 16, heat: 3},
+      {megacredits: 16, heat: 3},
       {paymentOptions: {heat: true}});
 
     const tester = new PaymentTester(wrapper);
@@ -146,7 +146,7 @@ describe('SelectPayment', () => {
   it('max megacredits, 2', async () => {
     const wrapper = setupBill(
       10,
-      {megaCredits: 5, titanium: 4, titaniumValue: 4, heat: 3},
+      {megacredits: 5, titanium: 4, titaniumValue: 4, heat: 3},
       {paymentOptions: {titanium: true, heat: true}});
 
     const tester = new PaymentTester(wrapper);
@@ -164,7 +164,7 @@ describe('SelectPayment', () => {
       10,
       {
         heat: 2,
-        megaCredits: 3,
+        megacredits: 3,
         tableau: [
           {
             name: CardName.STORMCRAFT_INCORPORATED,
@@ -196,7 +196,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       10,
       {
-        heat: 3, megaCredits: 10, titaniumValue: 1, steelValue: 1,
+        heat: 3, megacredits: 10, titaniumValue: 1, steelValue: 1,
         tableau: [
           {
             name: CardName.STORMCRAFT_INCORPORATED,
@@ -218,7 +218,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       10,
       // Note here that titanium is valued at 4, so LTF titanium will be valued at 3.
-      {megaCredits: 10, titanium: 2, titaniumValue: 4},
+      {megacredits: 10, titanium: 2, titaniumValue: 4},
       {paymentOptions: {titanium: false, lunaTradeFederationTitanium: true}});
 
     const tester = new PaymentTester(wrapper);
@@ -233,7 +233,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       10,
       {
-        megaCredits: 10, titanium: 2, titaniumValue: 4,
+        megacredits: 10, titanium: 2, titaniumValue: 4,
       },
       {paymentOptions: {titanium: true, lunaTradeFederationTitanium: false}});
 
@@ -246,7 +246,7 @@ describe('SelectPayment', () => {
     const wrapper = setupBill(
       10,
       {
-        megaCredits: 10, titanium: 2, titaniumValue: 4,
+        megacredits: 10, titanium: 2, titaniumValue: 4,
       },
       {paymentOptions: {lunaTradeFederationTitanium: true, titanium: true}});
 

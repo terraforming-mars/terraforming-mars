@@ -95,7 +95,7 @@
                           <td v-if="game.gameOptions.escapeVelocity">{{ p.victoryPointsBreakdown.escapeVelocity }}</td>
                           <td class="game-end-total">{{ p.victoryPointsBreakdown.total }}</td>
                           <td class="game-end-mc">
-                            <div>{{ p.megaCredits }}</div>
+                            <div>{{ p.megacredits }}</div>
                           </td>
                           <td v-if="game.gameOptions.showTimers"><div class="game-end-timer">{{ getTimer(p) }}</div></td>
                           <td><div class="game-end-timer">{{ p.actionsTakenThisGame }}</div></td>
@@ -248,8 +248,8 @@ export default Vue.extend({
       copy.sort(function(a:PublicPlayerModel, b:PublicPlayerModel) {
         if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) return -1;
         if (a.victoryPointsBreakdown.total > b.victoryPointsBreakdown.total) return 1;
-        if (a.megaCredits < b.megaCredits) return -1;
-        if (a.megaCredits > b.megaCredits) return 1;
+        if (a.megacredits < b.megacredits) return -1;
+        if (a.megacredits > b.megacredits) return 1;
         return 0;
       });
       return copy.reverse();
@@ -260,7 +260,7 @@ export default Vue.extend({
       const winners: PublicPlayerModel[] = [firstWinner];
       for (let i = 1; i < sortedPlayers.length; i++) {
         if (sortedPlayers[i].victoryPointsBreakdown.total === firstWinner.victoryPointsBreakdown.total &&
-                    sortedPlayers[i].megaCredits === firstWinner.megaCredits) {
+                    sortedPlayers[i].megacredits === firstWinner.megacredits) {
           winners.push(sortedPlayers[i]);
         }
       }

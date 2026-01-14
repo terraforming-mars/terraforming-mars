@@ -173,7 +173,7 @@ export const PaymentWidgetMixin = {
         }
       // eslint-disable-next-line no-fallthrough
       case 'megacredits':
-        amount = thisPlayer['megaCredits'];
+        amount = thisPlayer[unit];
         break;
 
       default:

@@ -53,7 +53,7 @@ export type PublicPlayerModel = {
   influence: number;
   isActive: boolean;
   lastCardPlayed?: CardName;
-  megaCredits: number;
+  megacredits: number;
   megacreditProduction: number;
   name: string;
   needsToDraft: boolean | undefined;

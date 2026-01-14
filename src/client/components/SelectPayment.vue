@@ -152,7 +152,7 @@ export default Vue.extend({
       this.setDefaultValues(/* reserveMegacredits */ true);
     },
     canAffordWithMcOnly() {
-      return this.thisPlayer.megaCredits >= this.cost;
+      return this.thisPlayer.megacredits >= this.cost;
     },
     canUse(unit: SpendableResource): boolean {
       if (unit === 'megacredits') {

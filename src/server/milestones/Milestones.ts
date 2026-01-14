@@ -50,14 +50,13 @@ import {Researcher} from './modular/Researcher';
 import {Sponsor} from './modular/Sponsor';
 import {Lobbyist} from './modular/Lobbyist';
 import {Farmer} from './modular/Farmer';
-// import {Briber} from './modular/Briber';
 import {Engineer} from './modular/Engineer';
 import {Hydrologist} from './modular/Hydrologist';
 import {Thawer} from './modular/Thawer';
 import {Purifier} from './Purifier';
 import {VSpacefarer} from './VSpacefarer';
 import {Agronomist} from './Agronomist';
-// import {Merchant} from './modular/Merchant';
+import {Merchant} from './modular/Merchant';
 import {MAManifest} from '../ma/MAManifest';
 import {MilestoneName} from '../../common/ma/MilestoneName';
 import {BoardName} from '../../common/boards/BoardName';
@@ -107,7 +106,7 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'Lunarchitect': {Factory: Lunarchitect, compatibility: 'moon'},
     'Martian': {Factory: Martian, compatibility: 'pathfinders'},
     'Mayor': {Factory: Mayor, random: 'both'},
-    // 'Merchant': {Factory: Merchant, random: 'modular'},
+    'Merchant': {Factory: Merchant, random: 'modular'},
     'Metallurgist': {Factory: Metallurgist, random: 'modular'},
     'Minimalist': {Factory: Minimalist},
     'Networker': {Factory: Networker, compatibility: 'ares'},

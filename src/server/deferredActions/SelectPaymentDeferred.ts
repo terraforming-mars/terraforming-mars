@@ -6,8 +6,10 @@ import {Priority} from './Priority';
 import {CardName} from '../../common/cards/CardName';
 import {Message} from '../../common/logs/Message';
 import {message} from '../logs/MessageBuilder';
+import {Units} from '../../common/Units';
 
 export type Options = {
+  reserveUnits?: Units;
   canUseSteel?: boolean;
   canUseTitanium?: boolean;
   canUseSeeds?: boolean,
@@ -84,6 +86,8 @@ export class SelectPaymentDeferred extends DeferredAction<Payment> {
         spireScience: this.options.canUseSpireScience || false,
         lunaTradeFederationTitanium: this.player.canUseTitaniumAsMegacredits,
         kuiperAsteroids: this.options.canUseAsteroids || false,
+        graphene: this.options.canUseGraphene || false,
+        reserveUnits: this.options.reserveUnits,
       })
       .andThen((payment) => {
         this.player.pay(payment);

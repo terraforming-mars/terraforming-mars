@@ -76,6 +76,7 @@ import {DiscordId} from './server/auth/discord';
 import {AlliedParty} from '../common/turmoil/Types';
 import {PlayedCards} from './cards/PlayedCards';
 import {From} from './logs/From';
+import {Merchant} from './milestones/modular/Merchant';
 
 const THROW_STATE_ERRORS = Boolean(process.env.THROW_STATE_ERRORS);
 const DEFAULT_GLOBAL_PARAMETER_STEPS = {
@@ -1046,7 +1047,8 @@ export class Player implements IPlayer {
     if (this.game.allMilestonesClaimed()) {
       return [];
     }
-    if ((this.canAfford(this.milestoneCost()) || this.playedCards.has(CardName.VANALLEN))) {
+    const cost = this.milestoneCost();
+    if ((this.canAfford(cost) || this.playedCards.has(CardName.VANALLEN))) {
       return this.game.milestones
         .filter((milestone) => !this.game.milestoneClaimed(milestone) && milestone.canClaim(this));
     }
@@ -1057,21 +1059,24 @@ export class Player implements IPlayer {
     if (this.game.milestoneClaimed(milestone)) {
       throw new Error(milestone.name + ' is already claimed');
     }
-    this.game.claimedMilestones.push({
-      player: this,
-      milestone: milestone,
-    });
-    // VanAllen CEO Hook for Milestones
-    const vanAllen = this.game.getCardPlayerOrUndefined(CardName.VANALLEN);
-    if (vanAllen !== undefined) {
-      vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: {player: this}});
-    }
     if (!this.playedCards.has(CardName.VANALLEN)) { // Why isn't this an else clause to the statement above?
       const baseCost = this.milestoneCost();
       const cost = baseCost + ((milestone.name === 'Briber') ? 12 : 0);
-      this.game.defer(new SelectPaymentDeferred(this, cost, {title: 'Select how to pay for milestone'}));
+
+      const reserveUnits = (milestone instanceof Merchant) ? Merchant.TWO_OF_EACH : Units.EMPTY;
+      this.game.defer(new SelectPaymentDeferred(this, cost, {title: 'Select how to pay for milestone', reserveUnits: reserveUnits})).andThen(() => {
+        this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
+        this.game.claimedMilestones.push({
+          player: this,
+          milestone: milestone,
+        });
+        // VanAllen CEO Hook for Milestones
+        const vanAllen = this.game.getCardPlayerOrUndefined(CardName.VANALLEN);
+        if (vanAllen !== undefined) {
+          vanAllen.stock.add(Resource.MEGACREDITS, 3, {log: true, from: {player: this}});
+        }
+      });
     }
-    this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
   }
 
   private isStagedProtestsActive() {
@@ -1249,6 +1254,9 @@ export class Player implements IPlayer {
     return true;
   }
 
+  /**
+   * Returns the most you can spend if the given reserved units are excluded.
+   */
   private maxSpendable(reserveUnits: Units = Units.EMPTY): Payment {
     return {
       megaCredits: this.megaCredits - reserveUnits.megacredits,

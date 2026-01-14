@@ -787,7 +787,7 @@ export class Player implements IPlayer {
 
   public pay(payment: Payment) {
     const standardUnits = Units.of({
-      megacredits: payment.megaCredits,
+      megacredits: payment.megacredits,
       steel: payment.steel,
       titanium: payment.titanium,
       plants: payment.plants,
@@ -819,7 +819,7 @@ export class Player implements IPlayer {
     removeResourcesOnCard(CardName.AURORAI, payment.auroraiData);
     removeResourcesOnCard(CardName.KUIPER_COOPERATIVE, payment.kuiperAsteroids);
 
-    if (payment.megaCredits > 0 || payment.steel > 0 || payment.titanium > 0) {
+    if (payment.megacredits > 0 || payment.steel > 0 || payment.titanium > 0) {
       PathfindersExpansion.addToSolBank(this);
     }
   }
@@ -1251,7 +1251,7 @@ export class Player implements IPlayer {
 
   private maxSpendable(reserveUnits: Units = Units.EMPTY): Payment {
     return {
-      megaCredits: this.megaCredits - reserveUnits.megacredits,
+      megacredits: this.megaCredits - reserveUnits.megacredits,
       steel: this.steel - reserveUnits.steel,
       titanium: this.titanium - reserveUnits.titanium,
       plants: this.plants - reserveUnits.plants,
@@ -1292,7 +1292,7 @@ export class Player implements IPlayer {
     };
 
     const usable: {[key in SpendableResource]: boolean} = {
-      megaCredits: true,
+      megacredits: true,
       steel: options?.steel ?? false,
       titanium: options?.titanium ?? false,
       heat: this.canUseHeatAsMegaCredits,

@@ -66,7 +66,7 @@ export class SelectPaymentDeferred extends DeferredAction<Payment> {
       if (this.player.megaCredits < this.amount) {
         throw new Error(`Player does not have ${this.amount} M€`);
       }
-      const payment = Payment.of({megaCredits: this.amount});
+      const payment = Payment.of({megacredits: this.amount});
       this.player.pay(payment);
       this.cb(payment);
       return undefined;

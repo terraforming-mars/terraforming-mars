@@ -57,7 +57,7 @@ describe('UnitedNationsMarsInitiative', () => {
     player.heat = 5;
 
     const selectPayment = cast(churn(card.action(player), player), SelectPayment);
-    selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
+    selectPayment.cb({...Payment.EMPTY, megacredits: 1, heat: 2});
     expect(player.terraformRating).to.eq(22);
     expect(player.megaCredits).to.eq(1);
     expect(player.heat).to.eq(3);

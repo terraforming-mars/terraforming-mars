@@ -40,7 +40,7 @@ describe('SelectProjectCardToPlay', () => {
     expect(() => selectProjectCardToPlay.process({
       type: 'projectCard',
       card: CardName.AQUIFER_PUMPING,
-      payment: Payment.of({megaCredits: 18}),
+      payment: Payment.of({megacredits: 18}),
     })).to.throw(/You do not have that many resources to spend/);
 
     player.megaCredits = 20;
@@ -49,7 +49,7 @@ describe('SelectProjectCardToPlay', () => {
     selectProjectCardToPlay.process({
       type: 'projectCard',
       card: CardName.AQUIFER_PUMPING,
-      payment: Payment.of({megaCredits: 18}),
+      payment: Payment.of({megacredits: 18}),
     });
     expect(called).is.true;
     expect(player.megaCredits).eq(2);

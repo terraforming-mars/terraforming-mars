@@ -16,19 +16,19 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({heat: 3, megaCredits: 7});
+    tester.expectPayment({heat: 3, megacredits: 7});
 
     await tester.clickMax('heat');
-    tester.expectPayment({heat: 5, megaCredits: 5});
+    tester.expectPayment({heat: 5, megacredits: 5});
 
     await tester.clickMinus('heat');
-    tester.expectPayment({heat: 4, megaCredits: 6});
+    tester.expectPayment({heat: 4, megacredits: 6});
 
     await tester.clickMinus('heat');
-    tester.expectPayment({heat: 3, megaCredits: 7});
+    tester.expectPayment({heat: 3, megacredits: 7});
 
     await tester.clickPlus('heat');
-    tester.expectPayment({heat: 4, megaCredits: 6});
+    tester.expectPayment({heat: 4, megacredits: 6});
   });
 
   it('Uses steel', async () => {
@@ -39,7 +39,7 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({steel: 4, megaCredits: 2});
+    tester.expectPayment({steel: 4, megacredits: 2});
   });
 
   it('Check initial value, use steel and titanium, but not enough steel', async () => {
@@ -50,7 +50,7 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({steel: 1, titanium: 2, megaCredits: 2});
+    tester.expectPayment({steel: 1, titanium: 2, megacredits: 2});
   });
 
   it('Uses titanium bonus', async () => {
@@ -61,7 +61,7 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({titanium: 2, megaCredits: 0});
+    tester.expectPayment({titanium: 2, megacredits: 0});
   });
 
   it('Uses seeds', async () => {
@@ -72,7 +72,7 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({seeds: 2, megaCredits: 4});
+    tester.expectPayment({seeds: 2, megacredits: 4});
   });
 
   it('Default seed value uses more than minimum when there are not enough MC', async () => {
@@ -83,7 +83,7 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({seeds: 3, megaCredits: 0});
+    tester.expectPayment({seeds: 3, megacredits: 0});
   });
 
   it('Uses auroraiData', async () => {
@@ -94,7 +94,7 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({auroraiData: 4, megaCredits: 2});
+    tester.expectPayment({auroraiData: 4, megacredits: 2});
   });
 
   it('initial values, multiple values', async () => {
@@ -107,8 +107,8 @@ describe('SelectPayment', () => {
     await tester.nextTick();
 
     // Using this as a chance to test that other components aren't visible.
-    tester.expectAvailablePaymentComponents('titanium', 'heat', 'megaCredits');
-    tester.expectPayment({titanium: 2, heat: 0, megaCredits: 2});
+    tester.expectAvailablePaymentComponents('titanium', 'heat', 'megacredits');
+    tester.expectPayment({titanium: 2, heat: 0, megacredits: 2});
   });
 
   it('can pay, no resources', async () => {
@@ -120,8 +120,8 @@ describe('SelectPayment', () => {
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
-    tester.expectAvailablePaymentComponents('megaCredits');
-    tester.expectValue('megaCredits', 10);
+    tester.expectAvailablePaymentComponents('megacredits');
+    tester.expectValue('megacredits', 10);
   });
 
   it('max megacredits', async () => {
@@ -132,15 +132,15 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({heat: 0, megaCredits: 9});
+    tester.expectPayment({heat: 0, megacredits: 9});
 
     await tester.clickMax('heat');
     await tester.nextTick();
-    tester.expectPayment({heat: 3, megaCredits: 6});
+    tester.expectPayment({heat: 3, megacredits: 6});
 
-    await tester.clickMax('megaCredits');
+    await tester.clickMax('megacredits');
     await tester.nextTick();
-    tester.expectPayment({heat: 0, megaCredits: 9});
+    tester.expectPayment({heat: 0, megacredits: 9});
   });
 
   it('max megacredits, 2', async () => {
@@ -151,11 +151,11 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({titanium: 2, heat: 0, megaCredits: 2});
+    tester.expectPayment({titanium: 2, heat: 0, megacredits: 2});
 
-    await tester.clickMax('megaCredits');
+    await tester.clickMax('megacredits');
     await tester.nextTick();
-    tester.expectPayment({titanium: 2, heat: 0, megaCredits: 5});
+    tester.expectPayment({titanium: 2, heat: 0, megacredits: 5});
   });
 
   it('Stormcraft floaters count for heat', async () => {
@@ -182,7 +182,7 @@ describe('SelectPayment', () => {
     await tester.nextTick();
 
     tester.expectIsAvailable('heat');
-    tester.expectPayment({heat: 7, megaCredits: 3});
+    tester.expectPayment({heat: 7, megacredits: 3});
     await tester.clickSave();
   });
 
@@ -208,10 +208,10 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({heat: 0, megaCredits: 10});
+    tester.expectPayment({heat: 0, megacredits: 10});
 
     await tester.clickMax('heat');
-    tester.expectPayment({heat: 5, megaCredits: 5});
+    tester.expectPayment({heat: 5, megacredits: 5});
   });
 
   it('Luna Trade Federation: Can use titanium by default', async () => {
@@ -223,10 +223,10 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({titanium: 2, megaCredits: 4});
+    tester.expectPayment({titanium: 2, megacredits: 4});
 
     await tester.clickMinus('titanium');
-    tester.expectPayment({titanium: 1, megaCredits: 7});
+    tester.expectPayment({titanium: 1, megacredits: 7});
   });
 
   it('Pay with titanium', async () => {
@@ -239,7 +239,7 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({titanium: 2, megaCredits: 2});
+    tester.expectPayment({titanium: 2, megacredits: 2});
   });
 
   it('Luna Trade Federation: Can use titanium at normal rate when paymentOptions{titanium} is true', async () => {
@@ -252,13 +252,13 @@ describe('SelectPayment', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
-    tester.expectPayment({titanium: 2, megaCredits: 2});
+    tester.expectPayment({titanium: 2, megacredits: 2});
 
     await(tester.clickMinus('titanium'));
-    tester.expectPayment({titanium: 1, megaCredits: 6});
+    tester.expectPayment({titanium: 1, megacredits: 6});
 
     await tester.clickMax('titanium');
-    tester.expectPayment({titanium: 2, megaCredits: 2});
+    tester.expectPayment({titanium: 2, megacredits: 2});
   });
 
   function setupBill(

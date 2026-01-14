@@ -57,7 +57,7 @@ describe('ValuableGases', () => {
 
     selectProjectCardToPlay.payAndPlay(localShading, {
       ...Payment.EMPTY,
-      megaCredits: localShading.cost,
+      megacredits: localShading.cost,
     });
 
     expect(localShading.resourceCount).eq(5);

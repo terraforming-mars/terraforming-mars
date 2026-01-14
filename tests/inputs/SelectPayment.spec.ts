@@ -20,11 +20,11 @@ describe('SelectPayment', () => {
     player.megaCredits = 10;
     const selectPayment = new SelectPayment('', 10, {}).andThen(cb);
 
-    selectPayment.process({type: 'payment', payment: Payment.of({megaCredits: 10})}, player);
-    expect(selected).deep.eq(Payment.of({megaCredits: 10}));
+    selectPayment.process({type: 'payment', payment: Payment.of({megacredits: 10})}, player);
+    expect(selected).deep.eq(Payment.of({megacredits: 10}));
 
     player.megaCredits = 9;
-    expect(() => selectPayment.process({type: 'payment', payment: Payment.of({megaCredits: 10})}, player))
+    expect(() => selectPayment.process({type: 'payment', payment: Payment.of({megacredits: 10})}, player))
       .to.throw(/You do not have that many resources/);
   });
 
@@ -33,7 +33,7 @@ describe('SelectPayment', () => {
     player.steel = 2;
     const selectPayment = new SelectPayment('', 10, {steel: true}).andThen(cb);
 
-    selectPayment.process({type: 'payment', payment: Payment.of({megaCredits: 6, steel: 2})}, player);
-    expect(selected).deep.eq(Payment.of({megaCredits: 6, steel: 2}));
+    selectPayment.process({type: 'payment', payment: Payment.of({megacredits: 6, steel: 2})}, player);
+    expect(selected).deep.eq(Payment.of({megacredits: 6, steel: 2}));
   });
 });

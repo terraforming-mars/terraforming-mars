@@ -346,7 +346,7 @@ describe('PharmacyUnion', () => {
     // Play GHG Producing Bacteria, triggering the effects.
     expect(player.canPlay(ghgProducingBacteria)).is.true;
     expect(ghgProducingBacteria.additionalProjectCosts).deep.eq({redsCost: 3});
-    player.playCard(ghgProducingBacteria, Payment.of({megaCredits: 8}));
+    player.playCard(ghgProducingBacteria, Payment.of({megacredits: 8}));
     expect(player.megaCredits).eq(4);
 
     // Pharmacy Union science tag benefit.
@@ -401,7 +401,7 @@ describe('PharmacyUnion', () => {
     expect(player.canPlay(advancedAlloys)).is.true;
     expect(advancedAlloys.additionalProjectCosts).deep.eq({redsCost: 3});
 
-    player.playCard(advancedAlloys, Payment.of({megaCredits: 9}));
+    player.playCard(advancedAlloys, Payment.of({megacredits: 9}));
 
     expect(player.megaCredits).eq(4);
 

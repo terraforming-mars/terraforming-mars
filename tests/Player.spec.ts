@@ -275,7 +275,7 @@ describe('Player', () => {
       const action = cast(srr.action(player), OrOptions);
       action.options[0].cb([cast(action.options[0], SelectCard<IProjectCard>).cards[0]]);
       expect(srr.targetCards[0].resourceCount).to.eq(2);
-      player.playCard(physicsComplex, Payment.of({'megaCredits': 10}));
+      player.playCard(physicsComplex, Payment.of({megacredits: 10}));
       expect(player.playedCards).to.contain(physicsComplex);
       expect(physicsComplex.resourceCount).to.eq(0);
     });

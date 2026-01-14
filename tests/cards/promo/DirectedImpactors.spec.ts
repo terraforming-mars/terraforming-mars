@@ -37,7 +37,7 @@ describe('DirectedImpactors', () => {
     card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
     const selectPayment = cast(game.deferredActions.peek()!.execute(), SelectPayment);
-    selectPayment.cb({...Payment.EMPTY, titanium: 1, megaCredits: 3});
+    selectPayment.cb({...Payment.EMPTY, titanium: 1, megacredits: 3});
 
     expect(player.megaCredits).to.eq(0);
     expect(player.titanium).to.eq(0);
@@ -70,7 +70,7 @@ describe('DirectedImpactors', () => {
     const selectCard = cast(action.options[1].cb(), SelectCard);
     expect(game.deferredActions).has.lengthOf(1);
     const selectPayment = cast(game.deferredActions.peek()!.execute(), SelectPayment);
-    selectPayment.cb({...Payment.EMPTY, titanium: 1, megaCredits: 3});
+    selectPayment.cb({...Payment.EMPTY, titanium: 1, megacredits: 3});
 
     selectCard!.cb([card2]);
     expect(card2.resourceCount).to.eq(1);

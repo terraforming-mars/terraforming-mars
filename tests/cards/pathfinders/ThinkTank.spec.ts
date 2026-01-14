@@ -120,7 +120,7 @@ describe('ThinkTank', () => {
     selectProjectCardToPlay.process({
       type: 'projectCard',
       card: breathingFilters.name,
-      payment: Payment.of({megaCredits: breathingFilters.cost}),
+      payment: Payment.of({megacredits: breathingFilters.cost}),
     });
     expect(thinkTank.resourceCount).eq(1);
   });
@@ -138,7 +138,7 @@ describe('ThinkTank', () => {
     selectProjectCardToPlay.process({
       type: 'projectCard',
       card: breathingFilters.name,
-      payment: Payment.of({megaCredits: breathingFilters.cost}),
+      payment: Payment.of({megacredits: breathingFilters.cost}),
     });
     expect(thinkTank.resourceCount).eq(1);
   });

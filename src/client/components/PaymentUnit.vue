@@ -50,7 +50,6 @@ export default Vue.extend({
       case 'spireScience': return 'resource_icon--science';
       case 'auroraiData': return 'resource_icon--auroraidata';
       case 'seeds': return 'resource_icon--seed';
-      case 'megaCredits': return 'resource_icon--megacredits';
       default: return 'resource_icon--' + this.unit;
       }
     },

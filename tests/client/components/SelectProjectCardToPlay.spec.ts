@@ -168,7 +168,7 @@ describe('SelectProjectCardToPlay', () => {
     tester.expectPayment({megaCredits: 12});
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({megaCredits: 12}));
+    expect(saveResponse.payment).deep.eq(Payment.of({megacredits: 12}));
   });
 
   it('Paying for Stratospheric Birds with Dirigibles', async () => {
@@ -242,7 +242,7 @@ describe('SelectProjectCardToPlay', () => {
     tester.expectPayment({megaCredits: 6});
 
     await tester.clickSave();
-    expect(saveResponse.payment).deep.eq(Payment.of({megaCredits: 6}));
+    expect(saveResponse.payment).deep.eq(Payment.of({megacredits: 6}));
   });
 
   it('Paying for Soil Enrichment with Psychophriles', async () => {

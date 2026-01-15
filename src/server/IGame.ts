@@ -33,11 +33,6 @@ import {UnderworldData} from './underworld/UnderworldData';
 import {OrOptions} from './inputs/OrOptions';
 import {IStandardProjectCard} from './cards/IStandardProjectCard';
 
-export interface Score {
-  corporation: String;
-  playerScore: number;
-}
-
 export interface IGame extends Logger {
   readonly id: GameId;
   readonly gameOptions: Readonly<GameOptions>;

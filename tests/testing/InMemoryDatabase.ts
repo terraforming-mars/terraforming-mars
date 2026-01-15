@@ -1,7 +1,7 @@
-import {IGame, Score} from '../../src/server/IGame';
+import {IGame} from '../../src/server/IGame';
 import {GameOptions} from '../../src/server/game/GameOptions';
 import {SerializedGame} from '../../src/server/SerializedGame';
-import {GameIdLedger, IDatabase} from '../../src/server/database/IDatabase';
+import {GameIdLedger, IDatabase, Score} from '../../src/server/database/IDatabase';
 import {GameId, ParticipantId} from '../../src/common/Types';
 import {Session, SessionId} from '../../src/server/auth/Session';
 import {Clock} from '../../src/common/Timer';
@@ -77,7 +77,7 @@ export class InMemoryDatabase implements IDatabase {
     game.lastSaveId++;
     return Promise.resolve();
   }
-  saveGameResults(_gameId: GameId, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Score[]): void {
+  saveGameResults(_gameId: GameId, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Array<Score>): void {
     throw new Error('Method not implemented.');
   }
   loadCloneableGame(gameId: GameId): Promise<SerializedGame> {

@@ -1,6 +1,6 @@
 import type * as pg from 'pg';
 import {IDatabase} from './IDatabase';
-import {IGame, Score} from '../IGame';
+import {IGame} from '../IGame';
 import {GameOptions} from '../game/GameOptions';
 import {GameId, ParticipantId, isGameId, safeCast} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';

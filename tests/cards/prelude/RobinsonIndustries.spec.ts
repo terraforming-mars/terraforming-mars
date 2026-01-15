@@ -64,7 +64,7 @@ describe('RobinsonIndustries', () => {
     player.heat = 5;
 
     const selectResource = cast(card.action(player), OrOptions);
-    expect((selectResource.options[1].title as String).includes('steel')).is.true;
+    expect((selectResource.options[1].title as string).includes('steel')).is.true;
 
     selectResource.options[1].cb();
     runAllActions(game);

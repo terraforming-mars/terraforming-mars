@@ -1,10 +1,18 @@
-import {IGame, Score} from '../IGame';
+import {IGame} from '../IGame';
 import {GameOptions} from '../game/GameOptions';
 import {GameId, ParticipantId} from '../../common/Types';
 import {SerializedGame} from '../SerializedGame';
 import {Session, SessionId} from '../auth/Session';
 
-export type GameIdLedger = {gameId: GameId, participantIds: Array<ParticipantId>}
+export type GameIdLedger = {
+  gameId: GameId,
+  participantIds: Array<ParticipantId>
+};
+
+export type Score = {
+  corporation: string;
+  playerScore: number;
+};
 
 /**
  * A game store. Load, save, you know the drill.

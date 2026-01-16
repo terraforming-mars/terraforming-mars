@@ -205,6 +205,9 @@ export default (Vue as WithRefs<Refs>).extend({
   },
   watch: {
     hovering(val: boolean) {
+      if (!getPreferences().experimental_ui) {
+        return;
+      }
       if (!this.isProjectCard) {
         return;
       }

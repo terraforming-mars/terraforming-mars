@@ -1,7 +1,7 @@
-import {IAward} from './IAward';
-import {IPlayer} from '../IPlayer';
-import {TileType} from '../../common/TileType';
-import {Board} from '../boards/Board';
+import {IAward} from '@/server/awards/IAward';
+import {IPlayer} from '@/server/IPlayer';
+import {TileType} from '@/common/TileType';
+import {Board} from '@/server/boards/Board';
 
 export class Landlord implements IAward {
   public readonly name = 'Landlord';

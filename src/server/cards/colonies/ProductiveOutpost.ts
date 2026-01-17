@@ -1,12 +1,12 @@
-import {IProjectCard} from '../IProjectCard';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {Size} from '../../../common/cards/render/Size';
-import {IColony} from '../../colonies/IColony';
-import {ColonyName} from '../../../common/colonies/ColonyName';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Card} from '@/server/cards/Card';
+import {Size} from '@/common/cards/render/Size';
+import {IColony} from '@/server/colonies/IColony';
+import {ColonyName} from '@/common/colonies/ColonyName';
 
 export class ProductiveOutpost extends Card implements IProjectCard {
   constructor() {

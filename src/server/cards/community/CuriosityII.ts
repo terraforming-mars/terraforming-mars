@@ -1,19 +1,19 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {Space} from '../../boards/Space';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {DrawCards} from '../../deferredActions/DrawCards';
-import {SpaceType} from '../../../common/boards/SpaceType';
-import {SpaceBonus} from '../../../common/boards/SpaceBonus';
-import {Phase} from '../../../common/Phase';
-import {TITLES} from '../../inputs/titles';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {Space} from '@/server/boards/Space';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
+import {DrawCards} from '@/server/deferredActions/DrawCards';
+import {SpaceType} from '@/common/boards/SpaceType';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
+import {Phase} from '@/common/Phase';
+import {TITLES} from '@/server/inputs/titles';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class CuriosityII extends CorporationCard implements ICorporationCard {
   constructor() {

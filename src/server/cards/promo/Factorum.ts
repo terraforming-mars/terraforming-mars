@@ -1,16 +1,16 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {IPlayer} from '../../IPlayer';
-import {Tag} from '../../../common/cards/Tag';
-import {IActionCard} from '../ICard';
-import {Resource} from '../../../common/Resource';
-import {SelectOption} from '../../inputs/SelectOption';
-import {OrOptions} from '../../inputs/OrOptions';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {TITLES} from '../../inputs/titles';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {IPlayer} from '@/server/IPlayer';
+import {Tag} from '@/common/cards/Tag';
+import {IActionCard} from '@/server/cards/ICard';
+import {Resource} from '@/common/Resource';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
+import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
+import {TITLES} from '@/server/inputs/titles';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class Factorum extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {

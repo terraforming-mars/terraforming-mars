@@ -1,19 +1,19 @@
-import {CardType} from '../../../common/cards/CardType';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {IActionCard} from '../ICard';
-import {IPlayer} from '../../IPlayer';
-import {IGame} from '../../IGame';
-import {Space} from '../../boards/Space';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {cathedral} from '../render/DynamicVictoryPoints';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {SelectPayment} from '../../inputs/SelectPayment';
-import {TITLES} from '../../inputs/titles';
-import {message} from '../../logs/MessageBuilder';
+import {CardType} from '@/common/cards/CardType';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Card} from '@/server/cards/Card';
+import {IActionCard} from '@/server/cards/ICard';
+import {IPlayer} from '@/server/IPlayer';
+import {IGame} from '@/server/IGame';
+import {Space} from '@/server/boards/Space';
+import {SelectSpace} from '@/server/inputs/SelectSpace';
+import {cathedral} from '@/server/cards/render/DynamicVictoryPoints';
+import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {SelectPayment} from '@/server/inputs/SelectPayment';
+import {TITLES} from '@/server/inputs/titles';
+import {message} from '@/server/logs/MessageBuilder';
 
 export class StJosephOfCupertinoMission extends Card implements IActionCard {
   constructor() {

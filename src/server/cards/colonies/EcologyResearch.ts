@@ -1,13 +1,13 @@
-import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {CardResource} from '../../../common/CardResource';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {Size} from '../../../common/cards/render/Size';
-import {Card} from '../Card';
-import {CardRenderer} from '../render/CardRenderer';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {CardResource} from '@/common/CardResource';
+import {AddResourcesToCard} from '@/server/deferredActions/AddResourcesToCard';
+import {Size} from '@/common/cards/render/Size';
+import {Card} from '@/server/cards/Card';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
 
 export class EcologyResearch extends Card implements IProjectCard {
   constructor() {

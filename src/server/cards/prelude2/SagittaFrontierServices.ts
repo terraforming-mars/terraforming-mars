@@ -1,14 +1,14 @@
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {CorporationCard} from '../corporation/CorporationCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {ICard} from '../ICard';
-import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {GainResources} from '../../deferredActions/GainResources';
-import {Resource} from '../../../common/Resource';
-import {Tag} from '../../../common/cards/Tag';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {ICard} from '@/server/cards/ICard';
+import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
+import {GainResources} from '@/server/deferredActions/GainResources';
+import {Resource} from '@/common/Resource';
+import {Tag} from '@/common/cards/Tag';
 
 export class SagittaFrontierServices extends CorporationCard implements ICorporationCard {
   constructor() {

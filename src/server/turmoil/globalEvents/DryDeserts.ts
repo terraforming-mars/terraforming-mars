@@ -1,13 +1,13 @@
-import {IGlobalEvent} from './IGlobalEvent';
-import {GlobalEvent} from './GlobalEvent';
-import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
-import {Turmoil} from '../Turmoil';
-import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
-import {GainResources} from '../../inputs/GainResources';
-import {CardRenderer} from '../../cards/render/CardRenderer';
-import {message} from '../../logs/MessageBuilder';
+import {IGlobalEvent} from '@/server/turmoil/globalEvents/IGlobalEvent';
+import {GlobalEvent} from '@/server/turmoil/globalEvents/GlobalEvent';
+import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {IGame} from '@/server/IGame';
+import {Turmoil} from '@/server/turmoil/Turmoil';
+import {RemoveOceanTile} from '@/server/deferredActions/RemoveOceanTile';
+import {GainResources} from '@/server/inputs/GainResources';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {message} from '@/server/logs/MessageBuilder';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.minus().oceans(1).nbsp.nbsp.wild(1).slash().influence();

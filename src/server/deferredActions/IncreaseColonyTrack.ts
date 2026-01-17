@@ -1,11 +1,11 @@
-import {IPlayer} from '../IPlayer';
-import {IColony} from '../colonies/IColony';
-import {OrOptions} from '../inputs/OrOptions';
-import {SelectOption} from '../inputs/SelectOption';
-import {DeferredAction} from './DeferredAction';
-import {Priority} from './Priority';
-import {LogHelper} from '../LogHelper';
-import {message} from '../logs/MessageBuilder';
+import {IPlayer} from '@/server/IPlayer';
+import {IColony} from '@/server/colonies/IColony';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {DeferredAction} from '@/server/deferredActions/DeferredAction';
+import {Priority} from '@/server/deferredActions/Priority';
+import {LogHelper} from '@/server/LogHelper';
+import {message} from '@/server/logs/MessageBuilder';
 
 /**
  * Asks the player to increase the colony track as many steps as it can go.

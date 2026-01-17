@@ -1,8 +1,8 @@
 import {MultiSet} from 'mnemonist';
-import {IGame} from '../../IGame';
-import {IPlayer} from '../../IPlayer';
-import {Delegate, NeutralPlayer} from '../Turmoil';
-import {CardName} from '../../../common/cards/CardName';
+import {IGame} from '@/server/IGame';
+import {IPlayer} from '@/server/IPlayer';
+import {Delegate, NeutralPlayer} from '@/server/turmoil/Turmoil';
+import {CardName} from '@/common/cards/CardName';
 
 export abstract class Party {
   public partyLeader: undefined | Delegate = undefined;

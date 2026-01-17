@@ -1,10 +1,10 @@
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Tag} from '../../../common/cards/Tag';
-import {IProjectCard} from '../IProjectCard';
-import {CardType} from '../../../common/cards/CardType';
-import {ActionCard} from '../ActionCard';
-import {CardResource} from '../../../common/CardResource';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Tag} from '@/common/cards/Tag';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardType} from '@/common/cards/CardType';
+import {ActionCard} from '@/server/cards/ActionCard';
+import {CardResource} from '@/common/CardResource';
 
 export class PersonalSpacecruiser extends ActionCard implements IProjectCard {
   constructor() {

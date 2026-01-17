@@ -1,13 +1,13 @@
-import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {Space} from '../../boards/Space';
-import {SpaceBonus} from '../../../common/boards/SpaceBonus';
-import {Resource} from '../../../common/Resource';
-import {Tag} from '../../../common/cards/Tag';
-import {CardRenderer} from '../render/CardRenderer';
-import {SurveyCard} from './SurveyCard';
-import {all, max} from '../Options';
+import {CardName} from '@/common/cards/CardName';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {Space} from '@/server/boards/Space';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
+import {Resource} from '@/common/Resource';
+import {Tag} from '@/common/cards/Tag';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {SurveyCard} from '@/server/cards/ares/SurveyCard';
+import {all, max} from '@/server/cards/Options';
 
 export class GeologicalSurvey extends SurveyCard {
   constructor() {

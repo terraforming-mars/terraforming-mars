@@ -1,7 +1,7 @@
-import {Colony} from '../../colonies/Colony';
-import {ColonyName} from '../../../common/colonies/ColonyName';
-import {ColonyBenefit} from '../../../common/colonies/ColonyBenefit';
-import {Resource} from '../../../common/Resource';
+import {Colony} from '@/server/colonies/Colony';
+import {ColonyName} from '@/common/colonies/ColonyName';
+import {ColonyBenefit} from '@/common/colonies/ColonyBenefit';
+import {Resource} from '@/common/Resource';
 
 export class Hygiea extends Colony {
   constructor() {

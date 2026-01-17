@@ -1,18 +1,18 @@
-import {IActionCard} from '../ICard';
-import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {SelectCard} from '../../inputs/SelectCard';
-import {IProjectCard} from '../IProjectCard';
-import {CardResource} from '../../../common/CardResource';
-import {CardName} from '../../../common/cards/CardName';
-import {Resource} from '../../../common/Resource';
-import {CardRenderer} from '../render/CardRenderer';
-import {max} from '../Options';
-import {message} from '../../logs/MessageBuilder';
+import {IActionCard} from '@/server/cards/ICard';
+import {Tag} from '@/common/cards/Tag';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardResource} from '@/common/CardResource';
+import {CardName} from '@/common/cards/CardName';
+import {Resource} from '@/common/Resource';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {max} from '@/server/cards/Options';
+import {message} from '@/server/logs/MessageBuilder';
 
 export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard {
   constructor() {

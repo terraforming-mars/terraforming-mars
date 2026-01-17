@@ -1,11 +1,11 @@
-import {IPlayer} from '../../IPlayer';
-import {PreludeCard} from '../prelude/PreludeCard';
-import {IProjectCard} from '../IProjectCard';
-import {CardName} from '../../../common/cards/CardName';
-import {TURMOIL_CARD_MANIFEST} from '../turmoil/TurmoilCardManifest';
-import {CardRenderer} from '../render/CardRenderer';
-import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {CardManifest} from '../ModuleManifest';
+import {IPlayer} from '@/server/IPlayer';
+import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardName} from '@/common/cards/CardName';
+import {TURMOIL_CARD_MANIFEST} from '@/server/cards/turmoil/TurmoilCardManifest';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
+import {CardManifest} from '@/server/cards/ModuleManifest';
 
 export class PoliticalUprising extends PreludeCard implements IProjectCard {
   constructor() {

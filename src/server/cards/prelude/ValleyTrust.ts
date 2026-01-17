@@ -1,10 +1,10 @@
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {CorporationCard} from '../corporation/CorporationCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {PreludesExpansion} from '../../preludes/PreludesExpansion';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {PreludesExpansion} from '@/server/preludes/PreludesExpansion';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class ValleyTrust extends CorporationCard implements ICorporationCard {
   constructor() {

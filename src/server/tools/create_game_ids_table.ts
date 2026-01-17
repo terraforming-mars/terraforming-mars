@@ -1,7 +1,7 @@
 require('dotenv').config();
 
-import {GameLoader} from '../database/GameLoader';
-import {Database} from '../database/Database';
+import {GameLoader} from '@/server/database/GameLoader';
+import {Database} from '@/server/database/Database';
 
 const db = Database.getInstance();
 

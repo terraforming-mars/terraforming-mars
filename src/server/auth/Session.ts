@@ -1,4 +1,4 @@
-import {DiscordUser} from '../server/auth/discord';
+import {DiscordUser} from '@/server/server/auth/discord';
 
 export type SessionId = string;
 export type SessionData = {

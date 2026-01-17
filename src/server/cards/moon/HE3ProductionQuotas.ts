@@ -1,16 +1,16 @@
-import {CardName} from '../../../common/cards/CardName';
-import {IPlayer} from '../../IPlayer';
-import {CardType} from '../../../common/cards/CardType';
-import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
-import {CardRenderer} from '../render/CardRenderer';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {MoonExpansion} from '../../moon/MoonExpansion';
-import {TileType} from '../../../common/TileType';
-import {Card} from '../Card';
-import {Size} from '../../../common/cards/render/Size';
-import {all} from '../Options';
-import {Resource} from '../../../common/Resource';
+import {CardName} from '@/common/cards/CardName';
+import {IPlayer} from '@/server/IPlayer';
+import {CardType} from '@/common/cards/CardType';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {MoonExpansion} from '@/server/moon/MoonExpansion';
+import {TileType} from '@/common/TileType';
+import {Card} from '@/server/cards/Card';
+import {Size} from '@/common/cards/render/Size';
+import {all} from '@/server/cards/Options';
+import {Resource} from '@/common/Resource';
 
 export class HE3ProductionQuotas extends Card implements IProjectCard {
   constructor() {

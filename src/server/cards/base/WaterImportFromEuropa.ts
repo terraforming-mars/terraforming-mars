@@ -1,14 +1,14 @@
-import {IActionCard} from '../ICard';
-import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {CardRenderer} from '../render/CardRenderer';
-import {TITLES} from '../../inputs/titles';
+import {IActionCard} from '@/server/cards/ICard';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {PlaceOceanTile} from '@/server/deferredActions/PlaceOceanTile';
+import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {TITLES} from '@/server/inputs/titles';
 
 const ACTION_COST = 12;
 export class WaterImportFromEuropa extends Card implements IActionCard, IProjectCard {

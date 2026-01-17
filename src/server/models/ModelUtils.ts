@@ -1,16 +1,16 @@
-import {CardModel} from '../../common/models/CardModel';
-import {ColonyModel} from '../../common/models/ColonyModel';
-import {Color} from '../../common/Color';
-import {IGame} from '../IGame';
-import {ICard} from '../cards/ICard';
-import {isIProjectCard} from '../cards/IProjectCard';
-import {isICloneTagCard} from '../cards/pathfinders/ICloneTagCard';
-import {IPlayer} from '../IPlayer';
-import {PlayCardMetadata} from '../inputs/SelectProjectCardToPlay';
-import {IColony} from '../colonies/IColony';
-import {CardName} from '../../common/cards/CardName';
-import {Tag} from '../../common/cards/Tag';
-import {asArray} from '../../common/utils/utils';
+import {CardModel} from '@/common/models/CardModel';
+import {ColonyModel} from '@/common/models/ColonyModel';
+import {Color} from '@/common/Color';
+import {IGame} from '@/server/IGame';
+import {ICard} from '@/server/cards/ICard';
+import {isIProjectCard} from '@/server/cards/IProjectCard';
+import {isICloneTagCard} from '@/server/cards/pathfinders/ICloneTagCard';
+import {IPlayer} from '@/server/IPlayer';
+import {PlayCardMetadata} from '@/server/inputs/SelectProjectCardToPlay';
+import {IColony} from '@/server/colonies/IColony';
+import {CardName} from '@/common/cards/CardName';
+import {Tag} from '@/common/cards/Tag';
+import {asArray} from '@/common/utils/utils';
 
 export function cardsToModel(
   player: IPlayer,

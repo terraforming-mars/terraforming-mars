@@ -1,9 +1,9 @@
-import {Color} from '../../common/Color';
-import {PartyName} from '../../common/turmoil/PartyName';
-import {IGame} from '../IGame';
-import {PoliticalAgendas} from '../turmoil/PoliticalAgendas';
-import {Delegate, Turmoil} from '../turmoil/Turmoil';
-import {DelegatesModel, PartyModel, PoliticalAgendasModel, TurmoilModel} from '../../common/models/TurmoilModel';
+import {Color} from '@/common/Color';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {IGame} from '@/server/IGame';
+import {PoliticalAgendas} from '@/server/turmoil/PoliticalAgendas';
+import {Delegate, Turmoil} from '@/server/turmoil/Turmoil';
+import {DelegatesModel, PartyModel, PoliticalAgendasModel, TurmoilModel} from '@/common/models/TurmoilModel';
 
 export function getTurmoilModel(game: IGame): TurmoilModel | undefined {
   return Turmoil.ifTurmoilElse(game, (turmoil) => {

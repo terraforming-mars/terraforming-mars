@@ -1,11 +1,11 @@
-import {Space} from '../boards/Space';
-import {IGame} from '../IGame';
-import {LogHelper} from '../LogHelper';
-import {Phase} from '../../common/Phase';
-import {IPlayer} from '../IPlayer';
-import {TileType} from '../../common/TileType';
-import {AresData, HazardConstraint} from '../../common/ares/AresData';
-import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
+import {Space} from '@/server/boards/Space';
+import {IGame} from '@/server/IGame';
+import {LogHelper} from '@/server/LogHelper';
+import {Phase} from '@/common/Phase';
+import {IPlayer} from '@/server/IPlayer';
+import {TileType} from '@/common/TileType';
+import {AresData, HazardConstraint} from '@/common/ares/AresData';
+import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
 
 /**
  * Support for placing and upgrading hazard tiles.

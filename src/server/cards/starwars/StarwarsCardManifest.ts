@@ -1,14 +1,14 @@
-import {CardName} from '../../../common/cards/CardName';
-import {ModuleManifest} from '../ModuleManifest';
-import {ToscheStation} from './ToscheStation';
-import {CloudCity} from './CloudCity';
-import {TradeEmbargo} from './TradeEmbargo';
-import {CloneTroopers} from './CloneTroopers';
-import {BeholdTheEmperor} from './BeholdTheEmperor';
-import {ForestMoon} from './ForestMoon';
-import {TakondaCastle} from './TakondaCastle';
-import {ReySkywalker} from './ReySkywalker';
-import {ToolWithTheFirstOrder} from './ToolWithTheFirstOrder';
+import {CardName} from '@/common/cards/CardName';
+import {ModuleManifest} from '@/server/cards/ModuleManifest';
+import {ToscheStation} from '@/server/cards/starwars/ToscheStation';
+import {CloudCity} from '@/server/cards/starwars/CloudCity';
+import {TradeEmbargo} from '@/server/cards/starwars/TradeEmbargo';
+import {CloneTroopers} from '@/server/cards/starwars/CloneTroopers';
+import {BeholdTheEmperor} from '@/server/cards/starwars/BeholdTheEmperor';
+import {ForestMoon} from '@/server/cards/starwars/ForestMoon';
+import {TakondaCastle} from '@/server/cards/starwars/TakondaCastle';
+import {ReySkywalker} from '@/server/cards/starwars/ReySkywalker';
+import {ToolWithTheFirstOrder} from '@/server/cards/starwars/ToolWithTheFirstOrder';
 
 export const STAR_WARS_CARD_MANIFEST = new ModuleManifest({
   module: 'starwars',

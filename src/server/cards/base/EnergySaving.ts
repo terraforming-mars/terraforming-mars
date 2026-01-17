@@ -1,11 +1,11 @@
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {Tag} from '../../../common/cards/Tag';
-import {IProjectCard} from '../IProjectCard';
-import {CardName} from '../../../common/cards/CardName';
-import {Size} from '../../../common/cards/render/Size';
-import {CardRenderer} from '../render/CardRenderer';
-import {all} from '../Options';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {Tag} from '@/common/cards/Tag';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardName} from '@/common/cards/CardName';
+import {Size} from '@/common/cards/render/Size';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {all} from '@/server/cards/Options';
 
 export class EnergySaving extends Card implements IProjectCard {
   constructor() {

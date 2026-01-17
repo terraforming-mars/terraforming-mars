@@ -1,16 +1,16 @@
-import {CardName} from '../../../common/cards/CardName';
-import {IPlayer} from '../../IPlayer';
-import {Tag} from '../../../common/cards/Tag';
-import {CorporationCard} from '../corporation/CorporationCard';
-import {CardRenderer} from '../render/CardRenderer';
-import {TileType} from '../../../common/TileType';
-import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Space} from '../../boards/Space';
-import {Resource} from '../../../common/Resource';
-import {Size} from '../../../common/cards/render/Size';
-import {ICorporationCard} from '../corporation/ICorporationCard';
-// import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-// import {all, multiplier} from '../Options';
+import {CardName} from '@/common/cards/CardName';
+import {IPlayer} from '@/server/IPlayer';
+import {Tag} from '@/common/cards/Tag';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {TileType} from '@/common/TileType';
+import {MoonExpansion} from '@/server/moon/MoonExpansion';
+import {Space} from '@/server/boards/Space';
+import {Resource} from '@/common/Resource';
+import {Size} from '@/common/cards/render/Size';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+// import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
+// import {all, multiplier} from '@/server/cards/Options';
 
 export class LunaTradeFederation extends CorporationCard implements ICorporationCard {
   constructor() {

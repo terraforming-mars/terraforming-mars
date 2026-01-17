@@ -1,6 +1,6 @@
-import {IPlayer} from '../IPlayer';
-import {PlayerInput} from '../PlayerInput';
-import {Priority} from './Priority';
+import {IPlayer} from '@/server/IPlayer';
+import {PlayerInput} from '@/server/PlayerInput';
+import {Priority} from '@/server/deferredActions/Priority';
 
 export interface AndThen<T> {
   andThen(cb: (param: T) => void): this;

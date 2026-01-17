@@ -1,12 +1,12 @@
-import {IGlobalEvent} from './IGlobalEvent';
-import {GlobalEvent} from './GlobalEvent';
-import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
-import {Turmoil} from '../Turmoil';
-import {CorrosiveRainDeferredAction} from '../../deferredActions/CorrosiveRainDeferredAction';
-import {CardRenderer} from '../../cards/render/CardRenderer';
-import {CardResource} from '../../../common/CardResource';
+import {IGlobalEvent} from '@/server/turmoil/globalEvents/IGlobalEvent';
+import {GlobalEvent} from '@/server/turmoil/globalEvents/GlobalEvent';
+import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {IGame} from '@/server/IGame';
+import {Turmoil} from '@/server/turmoil/Turmoil';
+import {CorrosiveRainDeferredAction} from '@/server/deferredActions/CorrosiveRainDeferredAction';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CardResource} from '@/common/CardResource';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.minus().resource(CardResource.FLOATER, 2).or().megacredits(-10).nbsp.nbsp.cards(1).slash().influence();

@@ -1,9 +1,9 @@
-import {CardName} from '../../../common/cards/CardName';
-import {SpaceBonus} from '../../../common/boards/SpaceBonus';
-import {MoholeArea} from '../base/MoholeArea';
-import {TileType} from '../../../common/TileType';
-import {CardRenderer} from '../render/CardRenderer';
-import {digit} from '../Options';
+import {CardName} from '@/common/cards/CardName';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
+import {MoholeArea} from '@/server/cards/base/MoholeArea';
+import {TileType} from '@/common/TileType';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {digit} from '@/server/cards/Options';
 
 export class MoholeAreaAres extends MoholeArea {
   constructor() {

@@ -1,8 +1,8 @@
-import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {BoardBuilder} from './BoardBuilder';
-import {Random} from '../../common/utils/Random';
-import {GameOptions} from '../game/GameOptions';
-import {MarsBoard} from './MarsBoard';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
+import {BoardBuilder} from '@/server/boards/BoardBuilder';
+import {Random} from '@/common/utils/Random';
+import {GameOptions} from '@/server/game/GameOptions';
+import {MarsBoard} from '@/server/boards/MarsBoard';
 
 export class UtopiaPlanitiaBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): UtopiaPlanitiaBoard {

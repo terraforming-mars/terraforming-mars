@@ -1,17 +1,17 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {IPlayer} from '../../IPlayer';
-import {Tag} from '../../../common/cards/Tag';
-import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
-import {IProjectCard} from '../IProjectCard';
-import {SelectCard} from '../../inputs/SelectCard';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
-import {MoonExpansion} from '../../moon/MoonExpansion';
-import {all} from '../Options';
-import {SpecialDesignProxy} from './SpecialDesignProxy';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {IPlayer} from '@/server/IPlayer';
+import {Tag} from '@/common/cards/Tag';
+import {CardName} from '@/common/cards/CardName';
+import {CardType} from '@/common/cards/CardType';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
+import {MoonExpansion} from '@/server/moon/MoonExpansion';
+import {all} from '@/server/cards/Options';
+import {SpecialDesignProxy} from '@/server/cards/community/SpecialDesignProxy';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class Playwrights extends CorporationCard implements ICorporationCard {
   constructor() {

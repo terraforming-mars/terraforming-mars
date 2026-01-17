@@ -1,9 +1,9 @@
-import {ICard} from './cards/ICard';
-import {Message} from '../common/logs/Message';
-import {PlayerInputType} from '../common/input/PlayerInputType';
-import {InputResponse} from '../common/inputs/InputResponse';
-import {IPlayer} from './IPlayer';
-import {PlayerInputModel} from '../common/models/PlayerInputModel';
+import {ICard} from '@/server/cards/ICard';
+import {Message} from '@/common/logs/Message';
+import {PlayerInputType} from '@/common/input/PlayerInputType';
+import {InputResponse} from '@/common/inputs/InputResponse';
+import {IPlayer} from '@/server/IPlayer';
+import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 
 export interface PlayerInput {
     type: PlayerInputType;

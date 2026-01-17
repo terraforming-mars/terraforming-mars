@@ -1,9 +1,9 @@
-import {DeferredAction} from './DeferredAction';
-import {Priority} from './Priority';
-import {IPlayer} from '../IPlayer';
-import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
-import {AresHandler} from '../ares/AresHandler';
-import {PlayerInput} from '../PlayerInput';
+import {DeferredAction} from '@/server/deferredActions/DeferredAction';
+import {Priority} from '@/server/deferredActions/Priority';
+import {IPlayer} from '@/server/IPlayer';
+import {ShiftAresGlobalParameters} from '@/server/inputs/ShiftAresGlobalParameters';
+import {AresHandler} from '@/server/ares/AresHandler';
+import {PlayerInput} from '@/server/PlayerInput';
 
 export class ShiftAresGlobalParametersDeferred extends DeferredAction {
   constructor(player: IPlayer) {

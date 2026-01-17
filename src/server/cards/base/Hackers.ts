@@ -1,12 +1,12 @@
-import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {Resource} from '../../../common/Resource';
-import {CardName} from '../../../common/cards/CardName';
-import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
-import {CardRenderer} from '../render/CardRenderer';
-import {all} from '../Options';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {Resource} from '@/common/Resource';
+import {CardName} from '@/common/cards/CardName';
+import {DecreaseAnyProduction} from '@/server/deferredActions/DecreaseAnyProduction';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {all} from '@/server/cards/Options';
 
 export class Hackers extends Card implements IProjectCard {
   constructor() {

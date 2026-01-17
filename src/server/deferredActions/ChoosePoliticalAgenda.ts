@@ -1,13 +1,13 @@
-import {OrOptions} from '../inputs/OrOptions';
-import {SelectOption} from '../inputs/SelectOption';
-import {IPlayer} from '../IPlayer';
-import {PlayerInput} from '../PlayerInput';
-import {DeferredAction} from './DeferredAction';
-import {Priority} from './Priority';
-import {IParty} from '../turmoil/parties/IParty';
-import {BonusId, PolicyId} from '../../common/turmoil/Types';
-import {policyDescription} from '../turmoil/Policy';
-import {message} from '../logs/MessageBuilder';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {IPlayer} from '@/server/IPlayer';
+import {PlayerInput} from '@/server/PlayerInput';
+import {DeferredAction} from '@/server/deferredActions/DeferredAction';
+import {Priority} from '@/server/deferredActions/Priority';
+import {IParty} from '@/server/turmoil/parties/IParty';
+import {BonusId, PolicyId} from '@/common/turmoil/Types';
+import {policyDescription} from '@/server/turmoil/Policy';
+import {message} from '@/server/logs/MessageBuilder';
 
 export class ChoosePoliticalAgenda extends DeferredAction {
   constructor(

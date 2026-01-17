@@ -1,12 +1,12 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {IPlayer} from '../../IPlayer';
-import {Tag} from '../../../common/cards/Tag';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
-import {questionmark} from '../render/DynamicVictoryPoints';
-import {inplaceRemove} from '../../../common/utils/utils';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {IPlayer} from '@/server/IPlayer';
+import {Tag} from '@/common/cards/Tag';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
+import {questionmark} from '@/server/cards/render/DynamicVictoryPoints';
+import {inplaceRemove} from '@/common/utils/utils';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class AgricolaInc extends CorporationCard implements ICorporationCard {
   constructor() {

@@ -1,20 +1,20 @@
-import {IParty} from './IParty';
-import {Party} from './Party';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {Tag} from '../../../common/cards/Tag';
-import {Resource} from '../../../common/Resource';
-import {Bonus} from '../Bonus';
-import {Policy, IPolicy} from '../Policy';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {IPlayer} from '../../IPlayer';
-import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectCard} from '../../inputs/SelectCard';
-import {SelectOption} from '../../inputs/SelectOption';
-import {CardResource} from '../../../common/CardResource';
-import {sum} from '../../../common/utils/utils';
-import {TITLES} from '../../inputs/titles';
-import {message} from '../../logs/MessageBuilder';
+import {IParty} from '@/server/turmoil/parties/IParty';
+import {Party} from '@/server/turmoil/parties/Party';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {Tag} from '@/common/cards/Tag';
+import {Resource} from '@/common/Resource';
+import {Bonus} from '@/server/turmoil/Bonus';
+import {Policy, IPolicy} from '@/server/turmoil/Policy';
+import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
+import {IPlayer} from '@/server/IPlayer';
+import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '@/common/constants';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {CardResource} from '@/common/CardResource';
+import {sum} from '@/common/utils/utils';
+import {TITLES} from '@/server/inputs/titles';
+import {message} from '@/server/logs/MessageBuilder';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;

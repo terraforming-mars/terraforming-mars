@@ -1,11 +1,11 @@
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {IProjectCard} from '../IProjectCard';
-import {IPlayer} from '../../IPlayer';
-import {PreludeCard} from '../prelude/PreludeCard';
-import {Tag} from '../../../common/cards/Tag';
-import {Turmoil} from '../../turmoil/Turmoil';
-import {ChooseRulingPartyDeferred} from '../../turmoil/ChooseRulingPartyDeferred';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {IPlayer} from '@/server/IPlayer';
+import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
+import {Tag} from '@/common/cards/Tag';
+import {Turmoil} from '@/server/turmoil/Turmoil';
+import {ChooseRulingPartyDeferred} from '@/server/turmoil/ChooseRulingPartyDeferred';
 
 export class TheNewSpaceRace extends PreludeCard implements IProjectCard {
   constructor() {

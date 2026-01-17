@@ -1,12 +1,12 @@
-import {CardName} from '../../../common/cards/CardName';
-import {IPlayer} from '../../IPlayer';
-import {Tag} from '../../../common/cards/Tag';
-import {CorporationCard} from '../corporation/CorporationCard';
-import {CardRenderer} from '../render/CardRenderer';
-import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Size} from '../../../common/cards/render/Size';
-import {all} from '../Options';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CardName} from '@/common/cards/CardName';
+import {IPlayer} from '@/server/IPlayer';
+import {Tag} from '@/common/cards/Tag';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {MoonExpansion} from '@/server/moon/MoonExpansion';
+import {Size} from '@/common/cards/render/Size';
+import {all} from '@/server/cards/Options';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class LunaFirstIncorporated extends CorporationCard implements ICorporationCard {
   constructor() {

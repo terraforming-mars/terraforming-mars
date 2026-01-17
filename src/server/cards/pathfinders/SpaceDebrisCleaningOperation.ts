@@ -1,14 +1,14 @@
-import {IProjectCard} from '../IProjectCard';
-import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Tag} from '../../../common/cards/Tag';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {CardResource} from '../../../common/CardResource';
-import {ICard} from '../ICard';
-import {all} from '../Options';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {IPlayer} from '@/server/IPlayer';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Tag} from '@/common/cards/Tag';
+import {AddResourcesToCard} from '@/server/deferredActions/AddResourcesToCard';
+import {CardResource} from '@/common/CardResource';
+import {ICard} from '@/server/cards/ICard';
+import {all} from '@/server/cards/Options';
 
 export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
   constructor() {

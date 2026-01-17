@@ -1,15 +1,15 @@
-import {IPlayer} from '../../IPlayer';
-import {PreludeCard} from '../prelude/PreludeCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {SelectCard} from '../../inputs/SelectCard';
-import {Size} from '../../../common/cards/render/Size';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {LogHelper} from '../../LogHelper';
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {CorporationDeck} from '../Deck';
-import {Countable} from '../../behavior/Countable';
-import {PreludesExpansion} from '../../preludes/PreludesExpansion';
+import {IPlayer} from '@/server/IPlayer';
+import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {Size} from '@/common/cards/render/Size';
+import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
+import {LogHelper} from '@/server/LogHelper';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {CorporationDeck} from '@/server/cards/Deck';
+import {Countable} from '@/server/behavior/Countable';
+import {PreludesExpansion} from '@/server/preludes/PreludesExpansion';
 
 export class Merger extends PreludeCard {
   constructor() {

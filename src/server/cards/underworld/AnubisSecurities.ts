@@ -1,12 +1,12 @@
-import {Tag} from '../../../common/cards/Tag';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {CorporationCard} from '../corporation/CorporationCard';
-import {IPlayer} from '../../IPlayer';
-import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
-import {Resource} from '../../../common/Resource';
-import {all} from '../Options';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {IPlayer} from '@/server/IPlayer';
+import {PlayProjectCard} from '@/server/deferredActions/PlayProjectCard';
+import {Resource} from '@/common/Resource';
+import {all} from '@/server/cards/Options';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class AnubisSecurities extends CorporationCard implements ICorporationCard {
   constructor() {

@@ -1,15 +1,15 @@
-import {Tag} from '../../../common/cards/Tag';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {SelectPlayer} from '../../inputs/SelectPlayer';
-import {Resource} from '../../../common/Resource';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {all} from '../Options';
-import {IProjectCard} from '../IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {SelectPlayer} from '@/server/inputs/SelectPlayer';
+import {Resource} from '@/common/Resource';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Card} from '@/server/cards/Card';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {all} from '@/server/cards/Options';
+import {IProjectCard} from '@/server/cards/IProjectCard';
 
 export class CometForVenus extends Card implements IProjectCard {
   constructor() {

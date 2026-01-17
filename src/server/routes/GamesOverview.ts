@@ -1,9 +1,9 @@
-import {Handler} from './Handler';
-import {Context} from './IHandler';
-import {ServeApp} from './ServeApp';
-import {ServeAsset} from './ServeAsset';
-import {Request} from '../Request';
-import {Response} from '../Response';
+import {Handler} from '@/server/routes/Handler';
+import {Context} from '@/server/routes/IHandler';
+import {ServeApp} from '@/server/routes/ServeApp';
+import {ServeAsset} from '@/server/routes/ServeAsset';
+import {Request} from '@/server/Request';
+import {Response} from '@/server/Response';
 
 // A strange way to get a games overview, by serving index.html with a validated server id.
 // Is this hackable?

@@ -1,13 +1,13 @@
-import {IPlayer} from '../IPlayer';
-import {SelectSpace} from '../inputs/SelectSpace';
-import {DeferredAction} from './DeferredAction';
-import {Priority} from './Priority';
-import {AresHazards} from '../ares/AresHazards';
-import {TileType} from '../../common/TileType';
-import {Message} from '../../common/logs/Message';
-import {message} from '../logs/MessageBuilder';
-import {Space} from '../boards/Space';
-import {LogHelper} from '../LogHelper';
+import {IPlayer} from '@/server/IPlayer';
+import {SelectSpace} from '@/server/inputs/SelectSpace';
+import {DeferredAction} from '@/server/deferredActions/DeferredAction';
+import {Priority} from '@/server/deferredActions/Priority';
+import {AresHazards} from '@/server/ares/AresHazards';
+import {TileType} from '@/common/TileType';
+import {Message} from '@/common/logs/Message';
+import {message} from '@/server/logs/MessageBuilder';
+import {Space} from '@/server/boards/Space';
+import {LogHelper} from '@/server/LogHelper';
 
 export class PlaceHazardTile extends DeferredAction<Space> {
   constructor(

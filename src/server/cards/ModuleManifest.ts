@@ -1,15 +1,15 @@
-import {CardName} from '../../common/cards/CardName';
-import {GameModule} from '../../common/cards/GameModule';
-import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
-import {ICorporationCard} from './corporation/ICorporationCard';
-import {CardFactorySpec} from './CardFactorySpec';
-import {IProjectCard} from './IProjectCard';
-import {ICard} from './ICard';
-import {IStandardProjectCard} from './IStandardProjectCard';
-import {IStandardActionCard} from './IStandardActionCard';
-import {IPreludeCard} from './prelude/IPreludeCard';
-import {ICeoCard} from './ceos/ICeoCard';
-import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
+import {CardName} from '@/common/cards/CardName';
+import {GameModule} from '@/common/cards/GameModule';
+import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {CardFactorySpec} from '@/server/cards/CardFactorySpec';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {ICard} from '@/server/cards/ICard';
+import {IStandardProjectCard} from '@/server/cards/IStandardProjectCard';
+import {IStandardActionCard} from '@/server/cards/IStandardActionCard';
+import {IPreludeCard} from '@/server/cards/prelude/IPreludeCard';
+import {ICeoCard} from '@/server/cards/ceos/ICeoCard';
+import {IGlobalEvent} from '@/server/turmoil/globalEvents/IGlobalEvent';
 
 export type CardManifest<T extends ICard> = Partial<Record<CardName, CardFactorySpec<T>>>;
 export type GlobalEventManifest = Partial<Record<GlobalEventName, CardFactorySpec<IGlobalEvent>>>;

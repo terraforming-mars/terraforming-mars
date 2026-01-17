@@ -1,11 +1,11 @@
-import {CardType} from '../../common/cards/CardType';
-import {CardName} from '../../common/cards/CardName';
-import {CardMetadata} from '../../common/cards/CardMetadata';
-import {Tag} from '../../common/cards/Tag';
-import {IProjectCard} from './IProjectCard';
-import {IPlayer} from '../IPlayer';
-import {GlobalParameter} from '../../common/GlobalParameter';
-import {Warning} from '../../common/cards/Warning';
+import {CardType} from '@/common/cards/CardType';
+import {CardName} from '@/common/cards/CardName';
+import {CardMetadata} from '@/common/cards/CardMetadata';
+import {Tag} from '@/common/cards/Tag';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {IPlayer} from '@/server/IPlayer';
+import {GlobalParameter} from '@/common/GlobalParameter';
+import {Warning} from '@/common/cards/Warning';
 
 const EMPTY_SET: Readonly<Set<Warning>> = new Set();
 

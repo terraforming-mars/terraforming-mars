@@ -1,9 +1,9 @@
-import {Resource} from '../../common/Resource';
-import {OrOptions} from '../inputs/OrOptions';
-import {SelectOption} from '../inputs/SelectOption';
-import {IPlayer} from '../IPlayer';
-import {DeferredAction} from './DeferredAction';
-import {Priority} from './Priority';
+import {Resource} from '@/common/Resource';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {IPlayer} from '@/server/IPlayer';
+import {DeferredAction} from '@/server/deferredActions/DeferredAction';
+import {Priority} from '@/server/deferredActions/Priority';
 
 export class SelectResourceTypeDeferred extends DeferredAction<Resource> {
   constructor(

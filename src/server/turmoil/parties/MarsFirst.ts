@@ -1,18 +1,18 @@
-import {IParty} from './IParty';
-import {Party} from './Party';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {Tag} from '../../../common/cards/Tag';
-import {Resource} from '../../../common/Resource';
-import {Bonus} from '../Bonus';
-import {SpaceType} from '../../../common/boards/SpaceType';
-import {Space} from '../../boards/Space';
-import {IPlayer} from '../../IPlayer';
-import {Policy, IPolicy} from '../Policy';
-import {Phase} from '../../../common/Phase';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {ICard} from '../../cards/ICard';
-import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../../common/constants';
-import {TITLES} from '../../inputs/titles';
+import {IParty} from '@/server/turmoil/parties/IParty';
+import {Party} from '@/server/turmoil/parties/Party';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {Tag} from '@/common/cards/Tag';
+import {Resource} from '@/common/Resource';
+import {Bonus} from '@/server/turmoil/Bonus';
+import {SpaceType} from '@/common/boards/SpaceType';
+import {Space} from '@/server/boards/Space';
+import {IPlayer} from '@/server/IPlayer';
+import {Policy, IPolicy} from '@/server/turmoil/Policy';
+import {Phase} from '@/common/Phase';
+import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
+import {ICard} from '@/server/cards/ICard';
+import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '@/common/constants';
+import {TITLES} from '@/server/inputs/titles';
 
 export class MarsFirst extends Party implements IParty {
   readonly name = PartyName.MARS;

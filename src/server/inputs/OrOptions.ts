@@ -1,9 +1,9 @@
-import {PlayerInput} from '../PlayerInput';
-import {InputResponse, isOrOptionsResponse} from '../../common/inputs/InputResponse';
-import {IPlayer} from '../IPlayer';
-import {OrOptionsModel} from '../../common/models/PlayerInputModel';
-import {OptionsInput} from './OptionsPlayerInput';
-import {InputError} from './InputError';
+import {PlayerInput} from '@/server/PlayerInput';
+import {InputResponse, isOrOptionsResponse} from '@/common/inputs/InputResponse';
+import {IPlayer} from '@/server/IPlayer';
+import {OrOptionsModel} from '@/common/models/PlayerInputModel';
+import {OptionsInput} from '@/server/inputs/OptionsPlayerInput';
+import {InputError} from '@/server/inputs/InputError';
 
 export class OrOptions extends OptionsInput<undefined> {
   constructor(...options: Array<PlayerInput>) {

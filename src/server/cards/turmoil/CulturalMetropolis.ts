@@ -1,13 +1,13 @@
-import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
-import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
-import {CardRenderer} from '../render/CardRenderer';
-import {Turmoil} from '../../turmoil/Turmoil';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {Card} from '@/server/cards/Card';
+import {CardName} from '@/common/cards/CardName';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {SendDelegateToArea} from '@/server/deferredActions/SendDelegateToArea';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Turmoil} from '@/server/turmoil/Turmoil';
 
 export class CulturalMetropolis extends Card implements IProjectCard {
   constructor() {

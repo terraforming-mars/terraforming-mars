@@ -1,6 +1,6 @@
-import {IPlayer} from '../../IPlayer';
-import {RequirementType} from '../../../common/cards/RequirementType';
-import {InequalityRequirement} from './InequalityRequirement';
+import {IPlayer} from '@/server/IPlayer';
+import {RequirementType} from '@/common/cards/RequirementType';
+import {InequalityRequirement} from '@/server/cards/requirements/InequalityRequirement';
 
 /**
  * Evaluates whether this player (or all players) has a given number of cities on Mars.

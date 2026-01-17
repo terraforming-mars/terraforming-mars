@@ -1,11 +1,11 @@
-import {CardName} from '../../../common/cards/CardName';
-import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
-import {CardRenderer} from '../render/CardRenderer';
-import {CeoCard} from './CeoCard';
+import {CardName} from '@/common/cards/CardName';
+import {IPlayer} from '@/server/IPlayer';
+import {PlayerInput} from '@/server/PlayerInput';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CeoCard} from '@/server/cards/ceos/CeoCard';
 
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {CardResource} from '../../../common/CardResource';
+import {AddResourcesToCard} from '@/server/deferredActions/AddResourcesToCard';
+import {CardResource} from '@/common/CardResource';
 
 export class Will extends CeoCard {
   constructor() {

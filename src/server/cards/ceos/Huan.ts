@@ -1,9 +1,9 @@
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {PlayerInput} from '../../PlayerInput';
-import {Player} from '../../Player';
-import {CeoCard} from './CeoCard';
-import {all, cancelled} from '../Options';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {PlayerInput} from '@/server/PlayerInput';
+import {Player} from '@/server/Player';
+import {CeoCard} from '@/server/cards/ceos/CeoCard';
+import {all, cancelled} from '@/server/cards/Options';
 
 export class Huan extends CeoCard {
   constructor() {

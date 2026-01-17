@@ -1,15 +1,15 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {IPlayer} from '../../IPlayer';
-import {Tag} from '../../../common/cards/Tag';
-import {Resource} from '../../../common/Resource';
-import {CardResource} from '../../../common/CardResource';
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {ICard} from '../ICard';
-import {SelectOption} from '../../inputs/SelectOption';
-import {OrOptions} from '../../inputs/OrOptions';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {digit} from '../Options';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {IPlayer} from '@/server/IPlayer';
+import {Tag} from '@/common/cards/Tag';
+import {Resource} from '@/common/Resource';
+import {CardResource} from '@/common/CardResource';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {ICard} from '@/server/cards/ICard';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {digit} from '@/server/cards/Options';
 
 export class Recyclon extends CorporationCard implements ICorporationCard {
   constructor() {

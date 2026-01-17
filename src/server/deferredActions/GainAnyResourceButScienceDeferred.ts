@@ -1,14 +1,14 @@
-import {IPlayer} from '../IPlayer';
-import {SelectCard} from '../inputs/SelectCard';
-import {CardResource} from '../../common/CardResource';
-import {DeferredAction} from './DeferredAction';
-import {Priority} from './Priority';
-import {PlayerInput} from '../PlayerInput';
-import {Units} from '../../common/Units';
-import {OrOptions} from '../inputs/OrOptions';
-import {SelectOption} from '../inputs/SelectOption';
-import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
-import {SelectResource} from '../inputs/SelectResource';
+import {IPlayer} from '@/server/IPlayer';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {CardResource} from '@/common/CardResource';
+import {DeferredAction} from '@/server/deferredActions/DeferredAction';
+import {Priority} from '@/server/deferredActions/Priority';
+import {PlayerInput} from '@/server/PlayerInput';
+import {Units} from '@/common/Units';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
+import {SelectResource} from '@/server/inputs/SelectResource';
 
 export class GainAnyResourceButScienceDeferred extends DeferredAction {
   constructor(player: IPlayer) {

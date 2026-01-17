@@ -1,12 +1,12 @@
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Tag} from '../../../common/cards/Tag';
-import {IProjectCard} from '../IProjectCard';
-import {CardType} from '../../../common/cards/CardType';
-import {ActionCard} from '../ActionCard';
-import {all, digit} from '../Options';
-import {IPlayer} from '../../IPlayer';
-import {CardResource} from '../../../common/CardResource';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Tag} from '@/common/cards/Tag';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardType} from '@/common/cards/CardType';
+import {ActionCard} from '@/server/cards/ActionCard';
+import {all, digit} from '@/server/cards/Options';
+import {IPlayer} from '@/server/IPlayer';
+import {CardResource} from '@/common/CardResource';
 
 export class MiningMarketInsider extends ActionCard implements IProjectCard {
   constructor() {

@@ -1,8 +1,8 @@
-import {IPlayer} from '../IPlayer';
-import {AresData} from '../../common/ares/AresData';
-import {IGame} from '../IGame';
-import {TileType} from '../../common/TileType';
-import {AresHazards} from './AresHazards';
+import {IPlayer} from '@/server/IPlayer';
+import {AresData} from '@/common/ares/AresData';
+import {IGame} from '@/server/IGame';
+import {TileType} from '@/common/TileType';
+import {AresHazards} from '@/server/ares/AresHazards';
 
 export class AresSetup {
   private constructor() {}

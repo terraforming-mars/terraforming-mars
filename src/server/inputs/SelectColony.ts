@@ -1,11 +1,11 @@
-import {Message} from '../../common/logs/Message';
-import {BasePlayerInput} from '../PlayerInput';
-import {IColony} from '../colonies/IColony';
-import {InputResponse, isSelectColonyResponse} from '../../common/inputs/InputResponse';
-import {SelectColonyModel} from '../../common/models/PlayerInputModel';
-import {coloniesToModel} from '../models/ModelUtils';
-import {IPlayer} from '../IPlayer';
-import {InputError} from './InputError';
+import {Message} from '@/common/logs/Message';
+import {BasePlayerInput} from '@/server/PlayerInput';
+import {IColony} from '@/server/colonies/IColony';
+import {InputResponse, isSelectColonyResponse} from '@/common/inputs/InputResponse';
+import {SelectColonyModel} from '@/common/models/PlayerInputModel';
+import {coloniesToModel} from '@/server/models/ModelUtils';
+import {IPlayer} from '@/server/IPlayer';
+import {InputError} from '@/server/inputs/InputError';
 
 export class SelectColony extends BasePlayerInput<IColony> {
   // When true, show just the tile, and none of the cubes on top.

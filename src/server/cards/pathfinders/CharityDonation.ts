@@ -1,14 +1,14 @@
-import {IProjectCard} from '../IProjectCard';
-import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Tag} from '../../../common/cards/Tag';
-import {LogHelper} from '../../LogHelper';
-import {SelectCard} from '../../inputs/SelectCard';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
-import {Priority} from '../../deferredActions/Priority';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {IPlayer} from '@/server/IPlayer';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Tag} from '@/common/cards/Tag';
+import {LogHelper} from '@/server/LogHelper';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {DeferredAction} from '@/server/deferredActions/DeferredAction';
+import {Priority} from '@/server/deferredActions/Priority';
 
 export class CharityDonation extends Card implements IProjectCard {
   constructor() {

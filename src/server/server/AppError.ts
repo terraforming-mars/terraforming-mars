@@ -1,4 +1,4 @@
-import {AppErrorId} from '../../common/app/AppErrorId';
+import {AppErrorId} from '@/common/app/AppErrorId';
 
 export class AppError extends Error {
   public id: AppErrorId;

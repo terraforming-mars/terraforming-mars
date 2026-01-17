@@ -1,9 +1,9 @@
-import {IPlayer} from '../../IPlayer';
-import {GlobalParameterRequirement} from './GlobalParameterRequirement';
-import {GlobalParameter} from '../../../common/GlobalParameter';
-import {RequirementType} from '../../../common/cards/RequirementType';
-import {MAX_TEMPERATURE, MIN_TEMPERATURE} from '../../../common/constants';
-import {Options} from './CardRequirement';
+import {IPlayer} from '@/server/IPlayer';
+import {GlobalParameterRequirement} from '@/server/cards/requirements/GlobalParameterRequirement';
+import {GlobalParameter} from '@/common/GlobalParameter';
+import {RequirementType} from '@/common/cards/RequirementType';
+import {MAX_TEMPERATURE, MIN_TEMPERATURE} from '@/common/constants';
+import {Options} from '@/server/cards/requirements/CardRequirement';
 
 /**
  * Evaluate whether the game's temperature is at least (or at most) a given value.

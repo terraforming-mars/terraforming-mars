@@ -1,11 +1,11 @@
-import {Message} from '../../common/logs/Message';
-import {BasePlayerInput} from '../PlayerInput';
-import {IPlayer} from '../IPlayer';
-import {Units} from '../../common/Units';
-import {InputResponse, isSelectProductionToLoseResponse} from '../../common/inputs/InputResponse';
-import {sum} from '../../common/utils/utils';
-import {SelectProductionToLoseModel} from '../../common/models/PlayerInputModel';
-import {InputError} from './InputError';
+import {Message} from '@/common/logs/Message';
+import {BasePlayerInput} from '@/server/PlayerInput';
+import {IPlayer} from '@/server/IPlayer';
+import {Units} from '@/common/Units';
+import {InputResponse, isSelectProductionToLoseResponse} from '@/common/inputs/InputResponse';
+import {sum} from '@/common/utils/utils';
+import {SelectProductionToLoseModel} from '@/common/models/PlayerInputModel';
+import {InputError} from '@/server/inputs/InputError';
 
 export class SelectProductionToLose extends BasePlayerInput<Units> {
   constructor(

@@ -1,10 +1,10 @@
-import {Tag} from '../../../common/cards/Tag';
-import {CardType} from '../../../common/cards/CardType';
-import {SpaceName} from '../../../common/boards/SpaceName';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {IProjectCard} from '../IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardType} from '@/common/cards/CardType';
+import {SpaceName} from '@/common/boards/SpaceName';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Card} from '@/server/cards/Card';
+import {IProjectCard} from '@/server/cards/IProjectCard';
 
 export class LunaMetropolis extends Card implements IProjectCard {
   constructor() {

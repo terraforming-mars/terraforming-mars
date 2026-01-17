@@ -7,18 +7,18 @@ require('console-stamp')(
 import * as https from 'https';
 import * as http from 'http';
 import * as fs from 'fs';
-import * as raw_settings from '../genfiles/settings.json';
+import * as raw_settings from '@/genfiles/settings.json';
 import * as prometheus from 'prom-client';
-import * as responses from './server/responses';
+import * as responses from '@/server/server/responses';
 import * as ansi from 'ansi-escape-sequences';
 
-import {Database} from './database/Database';
-import {runId, serverId} from './utils/server-ids';
-import {processRequest} from './server/requestProcessor';
-import {timeAsync} from './utils/timer';
-import {GameLoader} from './database/GameLoader';
-import {globalInitialize} from './globalInitialize';
-import {SessionManager} from './server/auth/SessionManager';
+import {Database} from '@/server/database/Database';
+import {runId, serverId} from '@/server/utils/server-ids';
+import {processRequest} from '@/server/server/requestProcessor';
+import {timeAsync} from '@/server/utils/timer';
+import {GameLoader} from '@/server/database/GameLoader';
+import {globalInitialize} from '@/server/globalInitialize';
+import {SessionManager} from '@/server/server/auth/SessionManager';
 
 process.on('uncaughtException', (err: any) => {
   console.error('UNCAUGHT EXCEPTION', err);

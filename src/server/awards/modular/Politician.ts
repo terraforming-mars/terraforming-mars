@@ -1,6 +1,6 @@
-import {IPlayer} from '../../IPlayer';
-import {IAward} from '../IAward';
-import {Turmoil} from '../../turmoil/Turmoil';
+import {IPlayer} from '@/server/IPlayer';
+import {IAward} from '@/server/awards/IAward';
+import {Turmoil} from '@/server/turmoil/Turmoil';
 
 export class Politician implements IAward {
   public readonly name = 'Politician';

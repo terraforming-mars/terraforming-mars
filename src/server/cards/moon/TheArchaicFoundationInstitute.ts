@@ -1,14 +1,14 @@
-import {CardName} from '../../../common/cards/CardName';
-import {IPlayer} from '../../IPlayer';
-import {Tag} from '../../../common/cards/Tag';
-import {CorporationCard} from '../corporation/CorporationCard';
-import {CardResource} from '../../../common/CardResource';
-import {CardRenderer} from '../render/CardRenderer';
-import {ICard} from '../ICard';
-import {Size} from '../../../common/cards/render/Size';
-import {digit} from '../Options';
-import {LogHelper} from '../../LogHelper';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CardName} from '@/common/cards/CardName';
+import {IPlayer} from '@/server/IPlayer';
+import {Tag} from '@/common/cards/Tag';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {CardResource} from '@/common/CardResource';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {ICard} from '@/server/cards/ICard';
+import {Size} from '@/common/cards/render/Size';
+import {digit} from '@/server/cards/Options';
+import {LogHelper} from '@/server/LogHelper';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class TheArchaicFoundationInstitute extends CorporationCard implements ICorporationCard {
   constructor() {

@@ -1,16 +1,16 @@
-import {CardName} from '../../../common/cards/CardName';
-import {IPlayer} from '../../IPlayer';
-import {CardType} from '../../../common/cards/CardType';
-import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {Delegate, Turmoil} from '../../turmoil/Turmoil';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {SelectOption} from '../../inputs/SelectOption';
-import {OrOptions} from '../../inputs/OrOptions';
-import {IGame} from '../../IGame';
-import {IParty} from '../../turmoil/parties/IParty';
-import {all} from '../Options';
-import {message} from '../../logs/MessageBuilder';
+import {CardName} from '@/common/cards/CardName';
+import {IPlayer} from '@/server/IPlayer';
+import {CardType} from '@/common/cards/CardType';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Card} from '@/server/cards/Card';
+import {Delegate, Turmoil} from '@/server/turmoil/Turmoil';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {IGame} from '@/server/IGame';
+import {IParty} from '@/server/turmoil/parties/IParty';
+import {all} from '@/server/cards/Options';
+import {message} from '@/server/logs/MessageBuilder';
 
 export class AnOfferYouCantRefuse extends Card {
   constructor() {

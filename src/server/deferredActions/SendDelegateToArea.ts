@@ -1,10 +1,10 @@
-import {IPlayer} from '../IPlayer';
-import {SelectParty} from '../inputs/SelectParty';
-import {DeferredAction} from './DeferredAction';
-import {Priority} from './Priority';
-import {SelectPaymentDeferred} from './SelectPaymentDeferred';
-import {Delegate, Turmoil} from '../turmoil/Turmoil';
-import {toName} from '../../common/utils/utils';
+import {IPlayer} from '@/server/IPlayer';
+import {SelectParty} from '@/server/inputs/SelectParty';
+import {DeferredAction} from '@/server/deferredActions/DeferredAction';
+import {Priority} from '@/server/deferredActions/Priority';
+import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
+import {Delegate, Turmoil} from '@/server/turmoil/Turmoil';
+import {toName} from '@/common/utils/utils';
 
 export type Options = {
   /** The number of delegates to replace. Default is 1. */

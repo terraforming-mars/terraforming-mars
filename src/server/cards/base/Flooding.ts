@@ -1,15 +1,15 @@
-import {IProjectCard} from '../IProjectCard';
-import {IPlayer} from '../../IPlayer';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {SelectPlayer} from '../../inputs/SelectPlayer';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {CardName} from '../../../common/cards/CardName';
-import {Resource} from '../../../common/Resource';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
-import {CardRenderer} from '../render/CardRenderer';
-import {all} from '../Options';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {IPlayer} from '@/server/IPlayer';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {SelectPlayer} from '@/server/inputs/SelectPlayer';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {CardName} from '@/common/cards/CardName';
+import {Resource} from '@/common/Resource';
+import {PlaceOceanTile} from '@/server/deferredActions/PlaceOceanTile';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {all} from '@/server/cards/Options';
 
 export class Flooding extends Card implements IProjectCard {
   constructor() {

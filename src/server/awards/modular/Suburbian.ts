@@ -1,6 +1,6 @@
-import {IPlayer} from '../../IPlayer';
-import {IAward} from '../IAward';
-import {hazardSeverity} from '../../../common/AresTileType';
+import {IPlayer} from '@/server/IPlayer';
+import {IAward} from '@/server/awards/IAward';
+import {hazardSeverity} from '@/common/AresTileType';
 
 // This could probably be computed with board.getAdjacentSpaces().length < 6.
 const EDGE_IDS = new Set([

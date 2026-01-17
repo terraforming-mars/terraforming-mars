@@ -1,10 +1,10 @@
-import {PreludeCard} from '../prelude/PreludeCard';
-import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
-import {PreludesExpansion} from '../../preludes/PreludesExpansion';
-import {IPreludeCard} from '../prelude/IPreludeCard';
+import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
+import {PreludesExpansion} from '@/server/preludes/PreludesExpansion';
+import {IPreludeCard} from '@/server/cards/prelude/IPreludeCard';
 
 export class DoubleDown extends PreludeCard {
   constructor() {

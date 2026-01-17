@@ -1,17 +1,17 @@
-import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {SelectCard} from '../../inputs/SelectCard';
-import {CardResource} from '../../../common/CardResource';
-import {ICard} from '../ICard';
-import {CardName} from '../../../common/cards/CardName';
-import {Resource} from '../../../common/Resource';
-import {CardRenderer} from '../render/CardRenderer';
-import {digit} from '../Options';
-import {message} from '../../logs/MessageBuilder';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {CardResource} from '@/common/CardResource';
+import {ICard} from '@/server/cards/ICard';
+import {CardName} from '@/common/cards/CardName';
+import {Resource} from '@/common/Resource';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {digit} from '@/server/cards/Options';
+import {message} from '@/server/logs/MessageBuilder';
 
 export class LocalHeatTrapping extends Card implements IProjectCard {
   constructor() {

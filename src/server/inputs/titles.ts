@@ -1,6 +1,6 @@
-import {CardName} from '../../common/cards/CardName';
-import {PartyName} from '../../common/turmoil/PartyName';
-import {message} from '../logs/MessageBuilder';
+import {CardName} from '@/common/cards/CardName';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {message} from '@/server/logs/MessageBuilder';
 
 export const TITLES = {
   action: 'Select how to pay for action',

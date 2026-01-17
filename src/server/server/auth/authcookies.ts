@@ -1,4 +1,4 @@
-import {Request} from '../../Request';
+import {Request} from '@/server/Request';
 
 export const sessionIdCookieName = 'sessionId';
 export function extract(req: Request) {

@@ -1,15 +1,15 @@
-import {ActiveCorporationCard} from '../corporation/CorporationCard';
-import {IPlayer} from '../../IPlayer';
-import {Tag} from '../../../common/cards/Tag';
-import {CardResource} from '../../../common/CardResource';
-import {AndOptions} from '../../inputs/AndOptions';
-import {SelectAmount} from '../../inputs/SelectAmount';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
-import {PlayerInput} from '../../PlayerInput';
-import {Resource} from '../../../common/Resource';
-import {message} from '../../logs/MessageBuilder';
+import {ActiveCorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {IPlayer} from '@/server/IPlayer';
+import {Tag} from '@/common/cards/Tag';
+import {CardResource} from '@/common/CardResource';
+import {AndOptions} from '@/server/inputs/AndOptions';
+import {SelectAmount} from '@/server/inputs/SelectAmount';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
+import {PlayerInput} from '@/server/PlayerInput';
+import {Resource} from '@/common/Resource';
+import {message} from '@/server/logs/MessageBuilder';
 
 export class StormCraftIncorporated extends ActiveCorporationCard {
   constructor() {

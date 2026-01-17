@@ -1,14 +1,14 @@
-import {newCard, newCorporationCard, newProjectCard} from '../createCard';
-import {SerializedCard} from '../SerializedCard';
-import {IProjectCard, isIProjectCard} from './IProjectCard';
-import {isICloneTagCard} from './pathfinders/ICloneTagCard';
-import {CardType} from '../../common/cards/CardType';
-import {asArray} from '../../common/utils/utils';
-import {ICorporationCard, isICorporationCard} from './corporation/ICorporationCard';
-import {isPreludeCard} from './prelude/IPreludeCard';
-import {isCeoCard} from './ceos/ICeoCard';
-import {ICard} from './ICard';
-import {ProxyCard} from './ProxyCard';
+import {newCard, newCorporationCard, newProjectCard} from '@/server/createCard';
+import {SerializedCard} from '@/server/SerializedCard';
+import {IProjectCard, isIProjectCard} from '@/server/cards/IProjectCard';
+import {isICloneTagCard} from '@/server/cards/pathfinders/ICloneTagCard';
+import {CardType} from '@/common/cards/CardType';
+import {asArray} from '@/common/utils/utils';
+import {ICorporationCard, isICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {isPreludeCard} from '@/server/cards/prelude/IPreludeCard';
+import {isCeoCard} from '@/server/cards/ceos/ICeoCard';
+import {ICard} from '@/server/cards/ICard';
+import {ProxyCard} from '@/server/cards/ProxyCard';
 
 export function serializeCard(card: ICard): SerializedCard {
   if (isICorporationCard(card)) {

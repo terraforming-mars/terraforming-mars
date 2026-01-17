@@ -1,10 +1,10 @@
-import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
-import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardName} from '@/common/cards/CardName';
+import {CardType} from '@/common/cards/CardType';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Card} from '@/server/cards/Card';
 
 export class SponsoredMohole extends Card implements IProjectCard {
   constructor() {

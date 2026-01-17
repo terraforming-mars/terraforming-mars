@@ -1,5 +1,5 @@
-import {AwardName} from '../../common/ma/AwardName';
-import {IPlayer} from '../IPlayer';
+import {AwardName} from '@/common/ma/AwardName';
+import {IPlayer} from '@/server/IPlayer';
 
 export interface IAward {
     name: AwardName;

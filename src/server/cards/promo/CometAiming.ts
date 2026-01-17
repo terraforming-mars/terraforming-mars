@@ -1,18 +1,18 @@
-import {IProjectCard} from '../IProjectCard';
-import {IActionCard} from '../ICard';
-import {Card} from '../Card';
-import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
-import {CardResource} from '../../../common/CardResource';
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {SelectCard} from '../../inputs/SelectCard';
-import {SelectOption} from '../../inputs/SelectOption';
-import {OrOptions} from '../../inputs/OrOptions';
-import {LogHelper} from '../../LogHelper';
-import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
-import {CardRenderer} from '../render/CardRenderer';
-import {Payment} from '../../../common/inputs/Payment';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {IActionCard} from '@/server/cards/ICard';
+import {Card} from '@/server/cards/Card';
+import {CardName} from '@/common/cards/CardName';
+import {CardType} from '@/common/cards/CardType';
+import {CardResource} from '@/common/CardResource';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {LogHelper} from '@/server/LogHelper';
+import {PlaceOceanTile} from '@/server/deferredActions/PlaceOceanTile';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Payment} from '@/common/inputs/Payment';
 
 export class CometAiming extends Card implements IActionCard, IProjectCard {
   constructor() {

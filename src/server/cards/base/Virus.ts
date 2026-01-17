@@ -1,17 +1,17 @@
-import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {OrOptions} from '../../inputs/OrOptions';
-import {PlayerInput} from '../../PlayerInput';
-import {CardName} from '../../../common/cards/CardName';
-import {SelectOption} from '../../inputs/SelectOption';
-import {CardResource} from '../../../common/CardResource';
-import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
-import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
-import {CardRenderer} from '../render/CardRenderer';
-import {all, digit} from '../Options';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {PlayerInput} from '@/server/PlayerInput';
+import {CardName} from '@/common/cards/CardName';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {CardResource} from '@/common/CardResource';
+import {RemoveAnyPlants} from '@/server/deferredActions/RemoveAnyPlants';
+import {RemoveResourcesFromCard} from '@/server/deferredActions/RemoveResourcesFromCard';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {all, digit} from '@/server/cards/Options';
 
 export class Virus extends Card implements IProjectCard {
   constructor() {

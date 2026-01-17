@@ -1,9 +1,9 @@
-import {SpaceBonus} from '../../../common/boards/SpaceBonus';
-import {CardName} from '../../../common/cards/CardName';
-import {CommercialDistrict} from '../base/CommercialDistrict';
-import {CardRenderer} from '../render/CardRenderer';
-import {TileType} from '../../../common/TileType';
-import {cities} from '../render/DynamicVictoryPoints';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
+import {CardName} from '@/common/cards/CardName';
+import {CommercialDistrict} from '@/server/cards/base/CommercialDistrict';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {TileType} from '@/common/TileType';
+import {cities} from '@/server/cards/render/DynamicVictoryPoints';
 
 export class CommercialDistrictAres extends CommercialDistrict {
   constructor() {

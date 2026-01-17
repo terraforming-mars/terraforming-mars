@@ -1,12 +1,12 @@
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {ICorporationCard} from './ICorporationCard';
-import {CorporationCard} from './CorporationCard';
-import {Resource} from '../../../common/Resource';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {all} from '../Options';
-import {ICard} from '../ICard';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {Resource} from '@/common/Resource';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {all} from '@/server/cards/Options';
+import {ICard} from '@/server/cards/ICard';
 
 export class SaturnSystems extends CorporationCard implements ICorporationCard {
   constructor() {

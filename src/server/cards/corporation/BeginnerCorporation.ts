@@ -1,8 +1,8 @@
-import {CorporationCard} from './CorporationCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {digit} from '../Options';
-import {ICorporationCard} from './ICorporationCard';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {digit} from '@/server/cards/Options';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class BeginnerCorporation extends CorporationCard implements ICorporationCard {
   constructor() {

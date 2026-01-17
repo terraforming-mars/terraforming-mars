@@ -1,8 +1,8 @@
-import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
-import {IPlayer} from '../IPlayer';
-import {DeferredAction} from './DeferredAction';
-import {Priority} from './Priority';
-import {Units} from '../../common/Units';
+import {SelectProductionToLose} from '@/server/inputs/SelectProductionToLose';
+import {IPlayer} from '@/server/IPlayer';
+import {DeferredAction} from '@/server/deferredActions/DeferredAction';
+import {Priority} from '@/server/deferredActions/Priority';
+import {Units} from '@/common/Units';
 
 export class SelectProductionToLoseDeferred extends DeferredAction {
   constructor(

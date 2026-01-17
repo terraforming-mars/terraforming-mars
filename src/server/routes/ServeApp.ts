@@ -1,8 +1,8 @@
-import {Handler} from './Handler';
-import {Context} from './IHandler';
-import {ServeAsset} from './ServeAsset';
-import {Request} from '../Request';
-import {Response} from '../Response';
+import {Handler} from '@/server/routes/Handler';
+import {Context} from '@/server/routes/IHandler';
+import {ServeAsset} from '@/server/routes/ServeAsset';
+import {Request} from '@/server/Request';
+import {Response} from '@/server/Response';
 
 export class ServeApp extends Handler {
   public static INSTANCE: ServeApp = new ServeApp();

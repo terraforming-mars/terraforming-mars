@@ -1,10 +1,10 @@
-import {Tag} from '../../../common/cards/Tag';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {PreludeCard} from '../prelude/PreludeCard';
-import {IPlayer} from '../../IPlayer';
-import {DiscardCards} from '../../deferredActions/DiscardCards';
-import {Priority} from '../../deferredActions/Priority';
+import {Tag} from '@/common/cards/Tag';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
+import {IPlayer} from '@/server/IPlayer';
+import {DiscardCards} from '@/server/deferredActions/DiscardCards';
+import {Priority} from '@/server/deferredActions/Priority';
 
 export class OldMiningColony extends PreludeCard {
   constructor() {

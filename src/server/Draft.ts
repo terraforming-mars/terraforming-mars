@@ -1,13 +1,13 @@
-import {inplaceRemove, copyAndClear as copyAndEmpty, zip} from '../common/utils/utils';
-import {CardName} from '../common/cards/CardName';
-import {IGame} from './IGame';
-import {IPlayer} from './IPlayer';
-import {IProjectCard} from './cards/IProjectCard';
-import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
-import {SelectCard} from './inputs/SelectCard';
-import {message} from './logs/MessageBuilder';
-import {IPreludeCard} from './cards/prelude/IPreludeCard';
-import {ICeoCard} from './cards/ceos/ICeoCard';
+import {inplaceRemove, copyAndClear as copyAndEmpty, zip} from '@/common/utils/utils';
+import {CardName} from '@/common/cards/CardName';
+import {IGame} from '@/server/IGame';
+import {IPlayer} from '@/server/IPlayer';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {LunaProjectOffice} from '@/server/cards/moon/LunaProjectOffice';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {message} from '@/server/logs/MessageBuilder';
+import {IPreludeCard} from '@/server/cards/prelude/IPreludeCard';
+import {ICeoCard} from '@/server/cards/ceos/ICeoCard';
 
 export type DraftType = 'none' | 'initial' | 'prelude' | 'ceos' | 'standard';
 

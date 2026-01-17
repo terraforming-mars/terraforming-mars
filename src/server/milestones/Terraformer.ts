@@ -1,6 +1,6 @@
-import {IMilestone} from './IMilestone';
-import {IPlayer} from '../IPlayer';
-import {Turmoil} from '../turmoil/Turmoil';
+import {IMilestone} from '@/server/milestones/IMilestone';
+import {IPlayer} from '@/server/IPlayer';
+import {Turmoil} from '@/server/turmoil/Turmoil';
 
 export class Terraformer implements IMilestone {
   public readonly name = 'Terraformer';

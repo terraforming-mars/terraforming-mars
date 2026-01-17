@@ -1,9 +1,9 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {Tag} from '../../../common/cards/Tag';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../../common/GlobalParameter';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {GlobalParameter} from '@/common/GlobalParameter';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class MorningStarInc extends CorporationCard implements ICorporationCard {
   constructor() {

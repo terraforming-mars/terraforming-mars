@@ -1,9 +1,9 @@
-import {IProjectCard} from '../IProjectCard';
-import {ActionCard} from '../ActionCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
-import {Tag} from '../../../common/cards/Tag';
-import {CardRenderer} from '../render/CardRenderer';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {ActionCard} from '@/server/cards/ActionCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardType} from '@/common/cards/CardType';
+import {Tag} from '@/common/cards/Tag';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
 
 export class OrbitalCleanup extends ActionCard implements IProjectCard {
   constructor() {

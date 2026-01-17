@@ -1,12 +1,12 @@
-import {CorporationCard} from './CorporationCard';
-import {IPlayer} from '../../IPlayer';
-import {IProjectCard, isIProjectCard} from '../IProjectCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {IStandardProjectCard} from '../IStandardProjectCard';
-import {Resource} from '../../../common/Resource';
-import {ICorporationCard} from './ICorporationCard';
-import {ICard} from '../ICard';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {IPlayer} from '@/server/IPlayer';
+import {IProjectCard, isIProjectCard} from '@/server/cards/IProjectCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {IStandardProjectCard} from '@/server/cards/IStandardProjectCard';
+import {Resource} from '@/common/Resource';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {ICard} from '@/server/cards/ICard';
 
 export class CrediCor extends CorporationCard implements ICorporationCard {
   constructor() {

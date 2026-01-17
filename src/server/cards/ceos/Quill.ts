@@ -1,13 +1,13 @@
-import {CardName} from '../../../common/cards/CardName';
-import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
-import {CardRenderer} from '../render/CardRenderer';
-import {CeoCard} from './CeoCard';
-import {CardResource} from '../../../common/CardResource';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
-import {Resource} from '../../../common/Resource';
-import {GainResources} from '../../deferredActions/GainResources';
+import {CardName} from '@/common/cards/CardName';
+import {IPlayer} from '@/server/IPlayer';
+import {PlayerInput} from '@/server/PlayerInput';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CeoCard} from '@/server/cards/ceos/CeoCard';
+import {CardResource} from '@/common/CardResource';
+import {AddResourcesToCard} from '@/server/deferredActions/AddResourcesToCard';
+import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
+import {Resource} from '@/common/Resource';
+import {GainResources} from '@/server/deferredActions/GainResources';
 
 
 export class Quill extends CeoCard {

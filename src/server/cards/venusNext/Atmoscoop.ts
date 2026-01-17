@@ -1,18 +1,18 @@
-import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {IGame} from '../../IGame';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {CardResource} from '../../../common/CardResource';
-import {CardName} from '../../../common/cards/CardName';
-import * as constants from '../../../common/constants';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
-import {Card} from '../Card';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {IGame} from '@/server/IGame';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {CardResource} from '@/common/CardResource';
+import {CardName} from '@/common/cards/CardName';
+import * as constants from '@/common/constants';
+import {PartyHooks} from '@/server/turmoil/parties/PartyHooks';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
+import {Card} from '@/server/cards/Card';
 
 export class Atmoscoop extends Card implements IProjectCard {
   constructor() {

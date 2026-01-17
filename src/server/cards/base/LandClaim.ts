@@ -1,12 +1,12 @@
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {IProjectCard} from '../IProjectCard';
-import {IPlayer} from '../../IPlayer';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {CardName} from '../../../common/cards/CardName';
-import {LogHelper} from '../../LogHelper';
-import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {IPlayer} from '@/server/IPlayer';
+import {SelectSpace} from '@/server/inputs/SelectSpace';
+import {CardName} from '@/common/cards/CardName';
+import {LogHelper} from '@/server/LogHelper';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
 
 export class LandClaim extends Card implements IProjectCard {
   constructor() {

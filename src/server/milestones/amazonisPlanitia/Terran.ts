@@ -1,6 +1,6 @@
-import {Tag} from '../../../common/cards/Tag';
-import {BaseMilestone} from '../IMilestone';
-import {IPlayer} from '../../IPlayer';
+import {Tag} from '@/common/cards/Tag';
+import {BaseMilestone} from '@/server/milestones/IMilestone';
+import {IPlayer} from '@/server/IPlayer';
 
 export class Terran extends BaseMilestone {
   constructor() {

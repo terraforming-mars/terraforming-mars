@@ -1,12 +1,12 @@
-import {IPlayer} from '../../IPlayer';
-import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {Tag} from '../../../common/cards/Tag';
-import {SelectPlayer} from '../../inputs/SelectPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {any} from '../render/DynamicVictoryPoints';
+import {IPlayer} from '@/server/IPlayer';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {Tag} from '@/common/cards/Tag';
+import {SelectPlayer} from '@/server/inputs/SelectPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {any} from '@/server/cards/render/DynamicVictoryPoints';
 
 export class StingOperation extends Card implements IProjectCard {
   constructor() {

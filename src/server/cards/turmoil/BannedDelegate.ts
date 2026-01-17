@@ -1,14 +1,14 @@
-import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
-import {CardName} from '../../../common/cards/CardName';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectDelegate} from '../../inputs/SelectDelegate';
-import {IParty} from '../../turmoil/parties/IParty';
-import {CardRenderer} from '../render/CardRenderer';
-import {NeutralPlayer, Turmoil} from '../../turmoil/Turmoil';
-import {all} from '../Options';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Card} from '@/server/cards/Card';
+import {CardName} from '@/common/cards/CardName';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectDelegate} from '@/server/inputs/SelectDelegate';
+import {IParty} from '@/server/turmoil/parties/IParty';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {NeutralPlayer, Turmoil} from '@/server/turmoil/Turmoil';
+import {all} from '@/server/cards/Options';
 import {MultiSet} from 'mnemonist';
 
 export class BannedDelegate extends Card implements IProjectCard {

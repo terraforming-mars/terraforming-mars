@@ -1,14 +1,14 @@
-import {IPlayer} from '../../IPlayer';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {SpaceType} from '../../../common/boards/SpaceType';
-import {Phase} from '../../../common/Phase';
-import {PolicyId} from '../../../common/turmoil/Types';
-import {Resource} from '../../../common/Resource';
-import {Space} from '../../boards/Space';
-import {GREENS_POLICY_1} from './Greens';
-import {PoliticalAgendas} from '../PoliticalAgendas';
-import {Turmoil} from '../Turmoil';
-import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '@/server/IPlayer';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {SpaceType} from '@/common/boards/SpaceType';
+import {Phase} from '@/common/Phase';
+import {PolicyId} from '@/common/turmoil/Types';
+import {Resource} from '@/common/Resource';
+import {Space} from '@/server/boards/Space';
+import {GREENS_POLICY_1} from '@/server/turmoil/parties/Greens';
+import {PoliticalAgendas} from '@/server/turmoil/PoliticalAgendas';
+import {Turmoil} from '@/server/turmoil/Turmoil';
+import {CardName} from '@/common/cards/CardName';
 
 export class PartyHooks {
   static applyMarsFirstRulingPolicy(player: IPlayer, spaceType: SpaceType) {

@@ -1,14 +1,14 @@
-import {IGlobalEvent} from './IGlobalEvent';
-import {GlobalEvent} from './GlobalEvent';
-import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
-import {Resource} from '../../../common/Resource';
-import {Turmoil} from '../Turmoil';
-import {CardType} from '../../../common/cards/CardType';
-import {CardRenderer} from '../../cards/render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
-import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
+import {IGlobalEvent} from '@/server/turmoil/globalEvents/IGlobalEvent';
+import {GlobalEvent} from '@/server/turmoil/globalEvents/GlobalEvent';
+import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {IGame} from '@/server/IGame';
+import {Resource} from '@/common/Resource';
+import {Turmoil} from '@/server/turmoil/Turmoil';
+import {CardType} from '@/common/cards/CardType';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
+import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.minus().megacredits(3).slash().cards(1, {secondaryTag: AltSecondaryTag.BLUE}).influence({size: Size.SMALL});

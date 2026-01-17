@@ -1,12 +1,12 @@
-import {CardType} from '../../../common/cards/CardType';
-import {IProjectCard} from '../IProjectCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {IPlayer} from '../../IPlayer';
-import {RemoveResources} from '../../deferredActions/RemoveResources';
-import {Resource} from '../../../common/Resource';
-import {all} from '../Options';
+import {CardType} from '@/common/cards/CardType';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Card} from '@/server/cards/Card';
+import {IPlayer} from '@/server/IPlayer';
+import {RemoveResources} from '@/server/deferredActions/RemoveResources';
+import {Resource} from '@/common/Resource';
+import {all} from '@/server/cards/Options';
 
 export class PlantTax extends Card implements IProjectCard {
   public generationUsed: number = -1;

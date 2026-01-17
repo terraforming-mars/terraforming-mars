@@ -1,10 +1,10 @@
-import {Tag} from '../../../common/cards/Tag';
-import {ActionCard} from '../ActionCard';
-import {CardType} from '../../../common/cards/CardType';
-import {IProjectCard} from '../IProjectCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
+import {Tag} from '@/common/cards/Tag';
+import {ActionCard} from '@/server/cards/ActionCard';
+import {CardType} from '@/common/cards/CardType';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
 
 export class BusinessNetwork extends ActionCard implements IProjectCard {
   constructor() {

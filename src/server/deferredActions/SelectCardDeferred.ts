@@ -1,8 +1,8 @@
-import {IPlayer} from '../IPlayer';
-import {SelectCard} from '../inputs/SelectCard';
-import {ICard} from '../cards/ICard';
-import {DeferredAction} from './DeferredAction';
-import {Message} from '../../common/logs/Message';
+import {IPlayer} from '@/server/IPlayer';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {ICard} from '@/server/cards/ICard';
+import {DeferredAction} from '@/server/deferredActions/DeferredAction';
+import {Message} from '@/common/logs/Message';
 
 export type Options = {
   title?: string | Message;

@@ -1,8 +1,8 @@
-import {IPlayer} from '../IPlayer';
-import {SelectSpace} from '../inputs/SelectSpace';
-import {DeferredAction} from './DeferredAction';
-import {Priority} from './Priority';
-import {LogHelper} from '../LogHelper';
+import {IPlayer} from '@/server/IPlayer';
+import {SelectSpace} from '@/server/inputs/SelectSpace';
+import {DeferredAction} from '@/server/deferredActions/DeferredAction';
+import {Priority} from '@/server/deferredActions/Priority';
+import {LogHelper} from '@/server/LogHelper';
 
 export class RemoveOceanTile extends DeferredAction {
   constructor(

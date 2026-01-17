@@ -1,12 +1,12 @@
-import {CardName} from '../../../common/cards/CardName';
-import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
-import {CardRenderer} from '../render/CardRenderer';
-import {CeoCard} from './CeoCard';
-import {Tag} from '../../../common/cards/Tag';
-import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
-import {TITLES} from '../../inputs/titles';
-import {DrawCeoCardFromDeck} from '../../deferredActions/DrawCeoCardFromDeck';
+import {CardName} from '@/common/cards/CardName';
+import {IPlayer} from '@/server/IPlayer';
+import {PlayerInput} from '@/server/PlayerInput';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CeoCard} from '@/server/cards/ceos/CeoCard';
+import {Tag} from '@/common/cards/Tag';
+import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
+import {TITLES} from '@/server/inputs/titles';
+import {DrawCeoCardFromDeck} from '@/server/deferredActions/DrawCeoCardFromDeck';
 
 export class Lowell extends CeoCard {
   constructor() {

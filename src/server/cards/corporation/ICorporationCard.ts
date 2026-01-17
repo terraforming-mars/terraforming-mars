@@ -1,9 +1,9 @@
-import {ICard} from '../ICard';
-import {IPlayer} from '../../IPlayer';
-import {PlayerInput} from '../../PlayerInput';
-import {CardType} from '../../../common/cards/CardType';
-import {Behavior} from '../../behavior/Behavior';
-import {SerializedCard} from '../../SerializedCard';
+import {ICard} from '@/server/cards/ICard';
+import {IPlayer} from '@/server/IPlayer';
+import {PlayerInput} from '@/server/PlayerInput';
+import {CardType} from '@/common/cards/CardType';
+import {Behavior} from '@/server/behavior/Behavior';
+import {SerializedCard} from '@/server/SerializedCard';
 
 export interface ICorporationCard extends ICard {
   type: CardType.CORPORATION;

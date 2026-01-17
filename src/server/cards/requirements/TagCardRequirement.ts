@@ -1,8 +1,8 @@
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {InequalityRequirement} from './InequalityRequirement';
-import {Options} from './CardRequirement';
-import {RequirementType} from '../../../common/cards/RequirementType';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {InequalityRequirement} from '@/server/cards/requirements/InequalityRequirement';
+import {Options} from '@/server/cards/requirements/CardRequirement';
+import {RequirementType} from '@/common/cards/RequirementType';
 
 /**
  * Evaluate whether a player (or all players) have played at least (or at most) a given number of tags.

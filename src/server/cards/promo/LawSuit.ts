@@ -1,15 +1,15 @@
-import {IPlayer} from '../../IPlayer';
-import {IProjectCard} from '../IProjectCard';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {Tag} from '../../../common/cards/Tag';
-import {SelectPlayer} from '../../inputs/SelectPlayer';
-import {Resource} from '../../../common/Resource';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
-import {any} from '../render/DynamicVictoryPoints';
-import {all} from '../Options';
+import {IPlayer} from '@/server/IPlayer';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {Tag} from '@/common/cards/Tag';
+import {SelectPlayer} from '@/server/inputs/SelectPlayer';
+import {Resource} from '@/common/Resource';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
+import {any} from '@/server/cards/render/DynamicVictoryPoints';
+import {all} from '@/server/cards/Options';
 
 export class LawSuit extends Card implements IProjectCard {
   constructor() {

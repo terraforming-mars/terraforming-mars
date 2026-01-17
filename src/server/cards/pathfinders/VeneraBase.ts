@@ -1,11 +1,11 @@
-import {CardType} from '../../../common/cards/CardType';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {CardResource} from '../../../common/CardResource';
-import {Tag} from '../../../common/cards/Tag';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {SpaceName} from '../../../common/boards/SpaceName';
-import {ActionCard} from '../ActionCard';
+import {CardType} from '@/common/cards/CardType';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CardResource} from '@/common/CardResource';
+import {Tag} from '@/common/cards/Tag';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {SpaceName} from '@/common/boards/SpaceName';
+import {ActionCard} from '@/server/cards/ActionCard';
 
 export class VeneraBase extends ActionCard {
   constructor() {

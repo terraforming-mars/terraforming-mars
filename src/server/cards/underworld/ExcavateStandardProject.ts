@@ -1,9 +1,9 @@
-import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {StandardProjectCanPayWith, StandardProjectCard} from '../StandardProjectCard';
-import {ExcavateSpacesDeferred} from '../../underworld/ExcavateSpacesDeferred';
-import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {StandardProjectCanPayWith, StandardProjectCard} from '@/server/cards/StandardProjectCard';
+import {ExcavateSpacesDeferred} from '@/server/underworld/ExcavateSpacesDeferred';
+import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
 
 export class ExcavateStandardProject extends StandardProjectCard {
   constructor(properties = {

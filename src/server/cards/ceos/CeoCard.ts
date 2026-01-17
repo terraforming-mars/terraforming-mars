@@ -1,8 +1,8 @@
-import {Card, StaticCardProperties} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {ICeoCard} from './ICeoCard';
-import {IPlayer} from '../../IPlayer';
-import {SerializedCard} from '../../SerializedCard';
+import {Card, StaticCardProperties} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {ICeoCard} from '@/server/cards/ceos/ICeoCard';
+import {IPlayer} from '@/server/IPlayer';
+import {SerializedCard} from '@/server/SerializedCard';
 
 type StaticCeoProperties = Pick<StaticCardProperties, 'name' | 'tags' | 'victoryPoints' | 'metadata'>;
 

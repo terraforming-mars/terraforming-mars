@@ -1,8 +1,8 @@
-import {PostgreSQL} from './PostgreSQL';
-import {SQLite} from './SQLite';
-import {IDatabase} from './IDatabase';
-import {LocalFilesystem} from './LocalFilesystem';
-import {LocalStorage} from './LocalStorage';
+import {PostgreSQL} from '@/server/database/PostgreSQL';
+import {SQLite} from '@/server/database/SQLite';
+import {IDatabase} from '@/server/database/IDatabase';
+import {LocalFilesystem} from '@/server/database/LocalFilesystem';
+import {LocalStorage} from '@/server/database/LocalStorage';
 
 export class Database {
   private static instance: IDatabase;

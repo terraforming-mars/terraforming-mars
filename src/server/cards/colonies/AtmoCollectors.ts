@@ -1,11 +1,11 @@
-import {IProjectCard} from '../IProjectCard';
-import {CardType} from '../../../common/cards/CardType';
-import {CardName} from '../../../common/cards/CardName';
-import {CardResource} from '../../../common/CardResource';
-import {Size} from '../../../common/cards/render/Size';
-import {CardRenderer} from '../render/CardRenderer';
-import {digit} from '../Options';
-import {ActionCard} from '../ActionCard';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardType} from '@/common/cards/CardType';
+import {CardName} from '@/common/cards/CardName';
+import {CardResource} from '@/common/CardResource';
+import {Size} from '@/common/cards/render/Size';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {digit} from '@/server/cards/Options';
+import {ActionCard} from '@/server/cards/ActionCard';
 
 export class AtmoCollectors extends ActionCard implements IProjectCard {
   constructor() {

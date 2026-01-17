@@ -1,12 +1,12 @@
-import {IPlayer} from '../IPlayer';
-import {SelectCard} from '../inputs/SelectCard';
-import {OrOptions} from '../inputs/OrOptions';
-import {Resource} from '../../common/Resource';
-import {CardResource} from '../../common/CardResource';
-import {SelectOption} from '../inputs/SelectOption';
-import {DeferredAction} from './DeferredAction';
-import {Priority} from './Priority';
-import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
+import {IPlayer} from '@/server/IPlayer';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {Resource} from '@/common/Resource';
+import {CardResource} from '@/common/CardResource';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {DeferredAction} from '@/server/deferredActions/DeferredAction';
+import {Priority} from '@/server/deferredActions/Priority';
+import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 
 export class CorrosiveRainDeferredAction extends DeferredAction {
   constructor(

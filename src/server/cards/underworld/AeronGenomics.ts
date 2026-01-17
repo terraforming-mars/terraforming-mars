@@ -1,17 +1,17 @@
-import {Tag} from '../../../common/cards/Tag';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {CorporationCard} from '../corporation/CorporationCard';
-import {digit} from '../Options';
-import {CardResource} from '../../../common/CardResource';
-import {IPlayer} from '../../IPlayer';
-import {SelectCard} from '../../inputs/SelectCard';
-import {ICorporationCard} from '../corporation/ICorporationCard';
-import {Size} from '../../../common/cards/render/Size';
-import {AndOptions} from '../../inputs/AndOptions';
-import {ICard} from '../ICard';
-import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
-import {SelectClaimedUndergroundToken} from '../../inputs/SelectClaimedUndergroundToken';
+import {Tag} from '@/common/cards/Tag';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {digit} from '@/server/cards/Options';
+import {CardResource} from '@/common/CardResource';
+import {IPlayer} from '@/server/IPlayer';
+import {SelectCard} from '@/server/inputs/SelectCard';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {Size} from '@/common/cards/render/Size';
+import {AndOptions} from '@/server/inputs/AndOptions';
+import {ICard} from '@/server/cards/ICard';
+import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
+import {SelectClaimedUndergroundToken} from '@/server/inputs/SelectClaimedUndergroundToken';
 
 export class AeronGenomics extends CorporationCard implements ICorporationCard {
   constructor() {

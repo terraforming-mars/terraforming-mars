@@ -1,12 +1,12 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {IPlayer} from '../../IPlayer';
-import {Tag} from '../../../common/cards/Tag';
-import {CardName} from '../../../common/cards/CardName';
-import {PlaceHazardTile} from '../../deferredActions/PlaceHazardTile';
-import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../../../common/cards/render/Size';
-import {TileType} from '../../../common/TileType';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {IPlayer} from '@/server/IPlayer';
+import {Tag} from '@/common/cards/Tag';
+import {CardName} from '@/common/cards/CardName';
+import {PlaceHazardTile} from '@/server/deferredActions/PlaceHazardTile';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Size} from '@/common/cards/render/Size';
+import {TileType} from '@/common/TileType';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class Athena extends CorporationCard implements ICorporationCard {
   constructor() {

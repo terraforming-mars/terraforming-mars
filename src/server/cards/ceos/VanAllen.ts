@@ -1,7 +1,7 @@
-import {CardName} from '../../../common/cards/CardName';
-import {all} from '../Options';
-import {CardRenderer} from '../render/CardRenderer';
-import {CeoCard} from './CeoCard';
+import {CardName} from '@/common/cards/CardName';
+import {all} from '@/server/cards/Options';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CeoCard} from '@/server/cards/ceos/CeoCard';
 
 export class VanAllen extends CeoCard {
   constructor() {

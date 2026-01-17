@@ -1,6 +1,6 @@
-import {IDeferredAction} from './DeferredAction';
-import {GiveColonyBonus} from './GiveColonyBonus';
-import {IPlayer} from '../IPlayer';
+import {IDeferredAction} from '@/server/deferredActions/DeferredAction';
+import {GiveColonyBonus} from '@/server/deferredActions/GiveColonyBonus';
+import {IPlayer} from '@/server/IPlayer';
 
 export class DeferredActionsQueue {
   private insertId: number = 0;

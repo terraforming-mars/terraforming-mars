@@ -1,10 +1,10 @@
-import {DiscordUser} from './discord';
-import {Session, SessionId} from '../../auth/Session';
+import {DiscordUser} from '@/server/server/auth/discord';
+import {Session, SessionId} from '@/server/auth/Session';
 import {v4 as uuidv4} from 'uuid';
-import {Clock} from '../../../common/Timer';
-import {IDatabase} from '../../database/IDatabase';
-import {Database} from '../../database/Database';
-import {durationToMilliseconds} from '../../../server/utils/durations';
+import {Clock} from '@/common/Timer';
+import {IDatabase} from '@/server/database/IDatabase';
+import {Database} from '@/server/database/Database';
+import {durationToMilliseconds} from '@/server/utils/durations';
 
 export interface ISessionManager {
   initialize(): Promise<void>;

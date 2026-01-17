@@ -1,12 +1,12 @@
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {all} from '../Options';
-import {Resource} from '../../../common/Resource';
-import {Board, isSpecialTileSpace} from '../../boards/Board';
-import {IActionCard} from '../ICard';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {all} from '@/server/cards/Options';
+import {Resource} from '@/common/Resource';
+import {Board, isSpecialTileSpace} from '@/server/boards/Board';
+import {IActionCard} from '@/server/cards/ICard';
 
 export class RedShips extends Card implements IActionCard {
   constructor() {

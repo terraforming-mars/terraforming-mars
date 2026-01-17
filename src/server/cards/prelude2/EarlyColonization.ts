@@ -1,10 +1,10 @@
-import {PreludeCard} from '../prelude/PreludeCard';
-import {Tag} from '../../../common/cards/Tag';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {all} from '../Options';
-import {IPlayer} from '../../IPlayer';
-import {Size} from '../../../common/cards/render/Size';
+import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {all} from '@/server/cards/Options';
+import {IPlayer} from '@/server/IPlayer';
+import {Size} from '@/common/cards/render/Size';
 
 export class EarlyColonization extends PreludeCard {
   constructor() {

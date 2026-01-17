@@ -1,12 +1,12 @@
-import {IGlobalEvent} from './IGlobalEvent';
-import {GlobalEvent} from './GlobalEvent';
-import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
-import {PartyName} from '../../../common/turmoil/PartyName';
-import {IGame} from '../../IGame';
-import {Resource} from '../../../common/Resource';
-import {Turmoil} from '../Turmoil';
-import {CardRenderer} from '../../cards/render/CardRenderer';
-import {digit} from '../../cards/Options';
+import {IGlobalEvent} from '@/server/turmoil/globalEvents/IGlobalEvent';
+import {GlobalEvent} from '@/server/turmoil/globalEvents/GlobalEvent';
+import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {IGame} from '@/server/IGame';
+import {Resource} from '@/common/Resource';
+import {Turmoil} from '@/server/turmoil/Turmoil';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {digit} from '@/server/cards/Options';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.megacredits(2).slash().influence().plus().tr(5, {digit, over: 15}).br.br;

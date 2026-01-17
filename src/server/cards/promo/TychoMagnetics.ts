@@ -1,11 +1,11 @@
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Tag} from '../../../common/cards/Tag';
-import {CorporationCard} from '../corporation/CorporationCard';
-import {Resource} from '../../../common/Resource';
-import {IPlayer} from '../../IPlayer';
-import {SelectAmount} from '../../inputs/SelectAmount';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Tag} from '@/common/cards/Tag';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {Resource} from '@/common/Resource';
+import {IPlayer} from '@/server/IPlayer';
+import {SelectAmount} from '@/server/inputs/SelectAmount';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class TychoMagnetics extends CorporationCard implements ICorporationCard {
   constructor() {

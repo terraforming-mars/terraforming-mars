@@ -1,9 +1,9 @@
-import {BasePlayerInput} from '../PlayerInput';
-import {IPlayer} from '../IPlayer';
-import {InputResponse, isSelectClaimedUndergroundTokenResponse} from '../../common/inputs/InputResponse';
-import {SelectClaimedUndergroundTokenModel} from '../../common/models/PlayerInputModel';
-import {InputError} from './InputError';
-import {ClaimedToken} from '../../common/underworld/UnderworldPlayerData';
+import {BasePlayerInput} from '@/server/PlayerInput';
+import {IPlayer} from '@/server/IPlayer';
+import {InputResponse, isSelectClaimedUndergroundTokenResponse} from '@/common/inputs/InputResponse';
+import {SelectClaimedUndergroundTokenModel} from '@/common/models/PlayerInputModel';
+import {InputError} from '@/server/inputs/InputError';
+import {ClaimedToken} from '@/common/underworld/UnderworldPlayerData';
 
 export class SelectClaimedUndergroundToken extends BasePlayerInput<Array<number>> {
   constructor(public tokens: ReadonlyArray<ClaimedToken>, public min: number = 1, public max: number = 1) {

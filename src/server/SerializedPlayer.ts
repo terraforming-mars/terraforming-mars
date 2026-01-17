@@ -1,12 +1,12 @@
-import {PlayerId} from '../common/Types';
-import {CardName} from '../common/cards/CardName';
-import {Color} from '../common/Color';
-import {SerializedCard} from './SerializedCard';
-import {SerializedTimer} from '../common/SerializedTimer';
-import {AlliedParty} from '../common/turmoil/Types';
-import {GlobalParameter} from '../common/GlobalParameter';
-import {DiscordId} from './server/auth/discord';
-import {UnderworldPlayerData} from '../common/underworld/UnderworldPlayerData';
+import {PlayerId} from '@/common/Types';
+import {CardName} from '@/common/cards/CardName';
+import {Color} from '@/common/Color';
+import {SerializedCard} from '@/server/SerializedCard';
+import {SerializedTimer} from '@/common/SerializedTimer';
+import {AlliedParty} from '@/common/turmoil/Types';
+import {GlobalParameter} from '@/common/GlobalParameter';
+import {DiscordId} from '@/server/server/auth/discord';
+import {UnderworldPlayerData} from '@/common/underworld/UnderworldPlayerData';
 
 interface DeprecatedFields {
 }

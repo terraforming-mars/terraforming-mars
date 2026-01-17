@@ -1,7 +1,7 @@
-import {registerBehaviorExecutor} from './behavior/BehaviorExecutor';
-import {Executor} from './behavior/Executor';
-import {initializeGlobalEventDealer} from './turmoil/globalEvents/GlobalEventDealer';
-import {ALL_MODULE_MANIFESTS} from './cards/AllManifests';
+import {registerBehaviorExecutor} from '@/server/behavior/BehaviorExecutor';
+import {Executor} from '@/server/behavior/Executor';
+import {initializeGlobalEventDealer} from '@/server/turmoil/globalEvents/GlobalEventDealer';
+import {ALL_MODULE_MANIFESTS} from '@/server/cards/AllManifests';
 
 export function globalInitialize() {
   registerBehaviorExecutor(new Executor());

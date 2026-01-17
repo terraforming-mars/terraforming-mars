@@ -1,10 +1,10 @@
-import {Message} from '../../common/logs/Message';
-import {Space} from '../boards/Space';
-import {InputResponse, isSelectSpaceResponse} from '../../common/inputs/InputResponse';
-import {SelectSpaceModel} from '../../common/models/PlayerInputModel';
-import {BasePlayerInput} from '../PlayerInput';
-import {InputError} from './InputError';
-import {toID} from '../../common/utils/utils';
+import {Message} from '@/common/logs/Message';
+import {Space} from '@/server/boards/Space';
+import {InputResponse, isSelectSpaceResponse} from '@/common/inputs/InputResponse';
+import {SelectSpaceModel} from '@/common/models/PlayerInputModel';
+import {BasePlayerInput} from '@/server/PlayerInput';
+import {InputError} from '@/server/inputs/InputError';
+import {toID} from '@/common/utils/utils';
 
 export class SelectSpace extends BasePlayerInput<Space> {
   constructor(

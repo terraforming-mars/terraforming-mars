@@ -1,20 +1,20 @@
-import {IProjectCard} from '../IProjectCard';
-import {Tag} from '../../../common/cards/Tag';
-import {Card} from '../Card';
-import {CardType} from '../../../common/cards/CardType';
-import {IPlayer} from '../../IPlayer';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {CardResource} from '../../../common/CardResource';
-import {all} from '../Options';
-import {Resource} from '../../../common/Resource';
-import {Board} from '../../boards/Board';
-import {Space} from '../../boards/Space';
-import {OrOptions} from '../../inputs/OrOptions';
-import {SelectOption} from '../../inputs/SelectOption';
-import {SelectPayment} from '../../inputs/SelectPayment';
-import {Size} from '../../../common/cards/render/Size';
-import {Priority} from '../../deferredActions/Priority';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {Tag} from '@/common/cards/Tag';
+import {Card} from '@/server/cards/Card';
+import {CardType} from '@/common/cards/CardType';
+import {IPlayer} from '@/server/IPlayer';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CardResource} from '@/common/CardResource';
+import {all} from '@/server/cards/Options';
+import {Resource} from '@/common/Resource';
+import {Board} from '@/server/boards/Board';
+import {Space} from '@/server/boards/Space';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {SelectPayment} from '@/server/inputs/SelectPayment';
+import {Size} from '@/common/cards/render/Size';
+import {Priority} from '@/server/deferredActions/Priority';
 
 export class NeptunianPowerConsultants extends Card implements IProjectCard {
   constructor() {

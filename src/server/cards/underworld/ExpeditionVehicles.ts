@@ -1,14 +1,14 @@
-import {CardType} from '../../../common/cards/CardType';
-import {IProjectCard} from '../IProjectCard';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {Space} from '../../boards/Space';
-import {Board} from '../../boards/Board';
-import {BoardType} from '../../boards/BoardType';
-import {MoonExpansion} from '../../moon/MoonExpansion';
+import {CardType} from '@/common/cards/CardType';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {Card} from '@/server/cards/Card';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {Space} from '@/server/boards/Space';
+import {Board} from '@/server/boards/Board';
+import {BoardType} from '@/server/boards/BoardType';
+import {MoonExpansion} from '@/server/moon/MoonExpansion';
 
 export class ExpeditionVehicles extends Card implements IProjectCard {
   constructor() {

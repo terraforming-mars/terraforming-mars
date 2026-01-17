@@ -1,6 +1,6 @@
-import {IGame} from '../IGame';
-import {PlayerId, GameId, SpectatorId} from '../../common/Types';
-import {GameIdLedger} from './IDatabase';
+import {IGame} from '@/server/IGame';
+import {PlayerId, GameId, SpectatorId} from '@/common/Types';
+import {GameIdLedger} from '@/server/database/IDatabase';
 
 /**
  * Loads games from javascript memory or database

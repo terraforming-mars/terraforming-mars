@@ -1,6 +1,6 @@
-import {CardType} from '../../../common/cards/CardType';
-import {BaseMilestone} from '../IMilestone';
-import {IPlayer} from '../../IPlayer';
+import {CardType} from '@/common/cards/CardType';
+import {BaseMilestone} from '@/server/milestones/IMilestone';
+import {IPlayer} from '@/server/IPlayer';
 
 export class Collector extends BaseMilestone {
   constructor() {

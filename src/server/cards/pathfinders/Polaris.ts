@@ -1,17 +1,17 @@
-import {CorporationCard} from '../corporation/CorporationCard';
-import {Tag} from '../../../common/cards/Tag';
-import {IPlayer} from '../../IPlayer';
-import {Resource} from '../../../common/Resource';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {all, digit} from '../Options';
-import {Space} from '../../boards/Space';
-import {GainResources} from '../../deferredActions/GainResources';
-import {Priority} from '../../deferredActions/Priority';
-import {Size} from '../../../common/cards/render/Size';
-import {Board} from '../../boards/Board';
-import {Phase} from '../../../common/Phase';
-import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '@/server/IPlayer';
+import {Resource} from '@/common/Resource';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {all, digit} from '@/server/cards/Options';
+import {Space} from '@/server/boards/Space';
+import {GainResources} from '@/server/deferredActions/GainResources';
+import {Priority} from '@/server/deferredActions/Priority';
+import {Size} from '@/common/cards/render/Size';
+import {Board} from '@/server/boards/Board';
+import {Phase} from '@/common/Phase';
+import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
 
 export class Polaris extends CorporationCard implements ICorporationCard {
   constructor() {

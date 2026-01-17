@@ -1,8 +1,8 @@
-import {CardName} from '../../../common/cards/CardName';
-import {IPlayer} from '../../IPlayer';
-import {CardRenderer} from '../render/CardRenderer';
-import {CeoCard} from './CeoCard';
-import {ColoniesHandler} from '../../colonies/ColoniesHandler';
+import {CardName} from '@/common/cards/CardName';
+import {IPlayer} from '@/server/IPlayer';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CeoCard} from '@/server/cards/ceos/CeoCard';
+import {ColoniesHandler} from '@/server/colonies/ColoniesHandler';
 
 export class Maria extends CeoCard {
   constructor() {

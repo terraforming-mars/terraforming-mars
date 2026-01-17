@@ -1,10 +1,10 @@
-import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {SpaceType} from '../../common/boards/SpaceType';
-import {Tile} from '../Tile';
-import {AdjacencyBonus} from '../ares/AdjacencyBonus';
-import {SpaceId} from '../../common/Types';
-import {IPlayer} from '../IPlayer';
-import {UndergroundResourceToken} from '../../common/underworld/UndergroundResourceToken';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
+import {SpaceType} from '@/common/boards/SpaceType';
+import {Tile} from '@/server/Tile';
+import {AdjacencyBonus} from '@/server/ares/AdjacencyBonus';
+import {SpaceId} from '@/common/Types';
+import {IPlayer} from '@/server/IPlayer';
+import {UndergroundResourceToken} from '@/common/underworld/UndergroundResourceToken';
 
 export type Space = {
   /** The unique ID of this space*/

@@ -1,9 +1,9 @@
-import {IProjectCard} from '../IProjectCard';
-import {CardType} from '../../../common/cards/CardType';
-import {CardName} from '../../../common/cards/CardName';
-import {CardResource} from '../../../common/CardResource';
-import {Card} from '../Card';
-import {CardRenderer} from '../render/CardRenderer';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {CardType} from '@/common/cards/CardType';
+import {CardName} from '@/common/cards/CardName';
+import {CardResource} from '@/common/CardResource';
+import {Card} from '@/server/cards/Card';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
 
 export class Airliners extends Card implements IProjectCard {
   constructor() {

@@ -1,8 +1,8 @@
-import {LawSuit} from '../cards/promo/LawSuit';
-import {Resource} from '../../common/Resource';
-import {From, isFromPlayer} from '../logs/From';
-import {BaseStock} from './StockBase';
-import {IPlayer} from '../IPlayer';
+import {LawSuit} from '@/server/cards/promo/LawSuit';
+import {Resource} from '@/common/Resource';
+import {From, isFromPlayer} from '@/server/logs/From';
+import {BaseStock} from '@/server/player/StockBase';
+import {IPlayer} from '@/server/IPlayer';
 
 export class Production extends BaseStock {
   constructor(player: IPlayer) {

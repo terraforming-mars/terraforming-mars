@@ -1,12 +1,12 @@
 
-import {Tag} from '../../../common/cards/Tag';
-import {CardName} from '../../../common/cards/CardName';
-import {CardRenderer} from '../render/CardRenderer';
-import {IPlayer} from '../../IPlayer';
-import {Phase} from '../../../common/Phase';
-import {Resource} from '../../../common/Resource';
-import {PreludeCard} from '../prelude/PreludeCard';
-import {IPreludeCard} from '../prelude/IPreludeCard';
+import {Tag} from '@/common/cards/Tag';
+import {CardName} from '@/common/cards/CardName';
+import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {IPlayer} from '@/server/IPlayer';
+import {Phase} from '@/common/Phase';
+import {Resource} from '@/common/Resource';
+import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
+import {IPreludeCard} from '@/server/cards/prelude/IPreludeCard';
 
 export class TerraformingDeal extends PreludeCard implements IPreludeCard {
   constructor() {

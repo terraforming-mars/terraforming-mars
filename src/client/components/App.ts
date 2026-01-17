@@ -20,6 +20,7 @@ import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {isPlayerId, isSpectatorId} from '@/common/Types';
 import {hasShowModal, showModal, windowHasHTMLDialogElement} from './HTMLDialogElementCompatibility';
+import {runCustomMiddleware} from '@/client/plugins/customMiddleware';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -245,6 +246,9 @@ export const mainAppSettings = {
     } else {
       app.screen = 'start-screen';
     }
+  },
+  updated() {
+    runCustomMiddleware({app: this});
   },
 };
 

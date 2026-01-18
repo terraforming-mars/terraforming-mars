@@ -8,12 +8,16 @@
 
 "ANUBIS SECURITIES": "Anubis-Wertpapiere",
 "Anubis Securities": "Anubis-Wertpapiere",
+"Anubis": "Die Anubis",
+"Securities": "Wertpapiere",
 "Effect: When any player WITH THE LOWEST CORRUPTION increases their TR by 1, they gain 2 M€.": "EFFEKT: Wenn ein Spieler MIT DER NIEDRIGSTEN KORRUPTION seinen TR um 1 erhöht, erhält er 2 M€.",
 "Action: Discard ALL of your corruption and gain 6 M€ for each unit discarded.": "AKTION: Wirf ALLE deine Korruption ab und erhalte 6 M€ für jede abgeworfene Einheit Korruption.",
 "You start with 42 M€. As your first action, play a card ignoring global requirements.": "Du beginnst mit 42 M€. Als deine erste Aktion im Spiel, spiele eine Karte aus, die die globalen Anforderungen ignoriert.",
 
 "ARBORIST COLLECTIVE": "Arboristen Kollektiv",
 "Arborist Collective": "Arboristen Kollektiv",
+"Arborist": "Arboristen",
+"Collective": "Kollektiv",  
 "Effect: After you play an event card with a base cost of 14 or less, put an activist resource on this card.": "EFFEKT: Nachdem du eine Ereigniskarte mit Grundkosten von 14 oder weniger gespielt hast, lege eine Aktivistenressource auf diese Karte.",
 "Action: Spend 2 activists here to increase your plant production 1 step and gain 2 plants.": "AKTION: Bezahle 2 Aktivisten, um deine Pflanzenproduktion um 1 zu erhöhen und 2 Pflanzen zu erhalten.",
 "You start with 40 M€, 2 plants and 2 plant production.": "Du beginnst mit 40 M€, 2 Pflanzen und 2 Pflanzenproduktion.",
@@ -34,6 +38,8 @@
 
 "HECATE SPEDITIONS": "Hecate Speditionen",
 "Hecate Speditions": "Hecate Speditionen",
+"HECATE": "Die Hecate",
+"Speditions": "Speditionen",
 "Effect: When you play an Earth, Mars, Venus, Moon, or Jovian tag, including this, put 1 supply chain resource on this card.": "EFFEKT: Wenn du ein Erd-, Mars-, Venus-, Mond- oder Jupiter-Symbol spielst, einschließlich dieses, lege 1 Lieferketten-Ressource auf diese Karte.",
 "Effect: Spend 2 supply chain resources to trade. THIS COST CANNOT BE REDUCED BY OTHER EFFECTS.": "EFFEKT: Gib 2 Lieferkette-Ressourcen für den Handel aus. DIESE KOSTEN KÖNNEN NICHT DURCH ANDERE EFFEKTE REDUZIERT WERDEN.",
 "You start with 38 M€, 2 supply chain resources here, and an extra trade fleet.": "Du beginnst mit 38 M€, 2 Lieferkette-Ressourcen und einer zusätzlichen Handelsflotte.",

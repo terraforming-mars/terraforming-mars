@@ -5,6 +5,7 @@ import {mainAppSettings} from '@/client/components/App';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import i18nPlugin from '@/client/plugins/i18n.plugin';
 import {startOauth} from '@/client/oauth';
+import customMiddleware from '@/client/plugins/customMiddleware';
 
 declare global {
   interface Window {
@@ -13,6 +14,7 @@ declare global {
 }
 
 async function bootstrap() {
+  customMiddleware();
   const lang = getPreferences().lang;
 
   if (lang !== 'en') {

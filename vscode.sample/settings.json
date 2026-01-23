@@ -1,0 +1,35 @@
+{
+    "githubPullRequests.remotes": [
+        "origin",
+        "parent"
+    ],
+    "eslint.alwaysShowStatus": true,
+    "eslint.lintTask.enable": true,
+    "eslint.codeAction.disableRuleComment": {
+        "location": "sameLine"
+    },
+    "editor.tabSize": 2,
+    "javascript.preferences.quoteStyle": "single",
+    "typescript.preferences.quoteStyle": "single",
+    "js/ts.implicitProjectConfig.strictNullChecks": true,
+    "typescript.format.semicolons": "insert",
+    "references.preferredLocation": "view",
+    "debug.inlineValues": "on",
+    "terminal.integrated.shellIntegration.enabled": true,
+    "window.commandCenter": true,
+    "githubPullRequests.ignoredPullRequestBranches": [
+        "main"
+    ],
+    "mochaExplorer.require": "ts-node/register",
+    "mochaExplorer.files": "tests/**/*.ts",
+    "java.autobuild.enabled": false,
+    "javascript.inlayHints.enumMemberValues.enabled": true,
+    "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
+    "javascript.inlayHints.variableTypes.enabled": true,
+    "typescript.experimental.tsserver.web.enableProjectWideIntellisense": false,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "vue.features.codeActions.enable": false,
+    "editor.rulers": [
+      80, 120
+    ],
+}

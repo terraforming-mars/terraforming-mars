@@ -172,7 +172,7 @@
   "Tactician": "Taktiker",
   "Have 5 cards with requirements in play": "Benötigt mindestens 5 eigene Karten mit Bedingungen im Spiel.",
   "Have 4 cards with requirements in play": "Benötigt mindestens 4 eigene Karten mit Bedingungen im Spiel.",
-  "Terraformer": "Der Terraformer",
+  "Terraformer": "Terraformierer",
   "Have a terraform rating of 35 (or 26 with Turmoil.)": "Mindestens 35 (26 mit Aufruhr) als eigener Terraformwert.",
   "Have a terraform rating of 29": "Mindestens 29 als eigener Terraformwert.",
   "Terran": "Terraner",
@@ -341,7 +341,7 @@
   "Traveller": "Passagier",
   "Have the most Jovian and Earth tags in play combined": "Die meisten Erd- und Jupiter-Symbole im Spiel (Ereigniskarten zählen nicht).",
   "Suburbian": "Außenbezirkler",
-  "Most tiles on areas along the edges of the map.": "Die meisten Plättchen an den Rändern des Spielfelds.",
+  "Most tiles on areas along the edges of the map": "Die meisten Plättchen an den Rändern des Spielfelds.",
   "Blacksmith": "Schmied",
   "Have the highest production of steel and titanium combined": "Die höchste Stahl- und Titanproduktion (in Summe) haben.",
 
@@ -1197,6 +1197,9 @@
   "Select how to pay for action": "Wähle, wie du für die Aktion bezahlen möchtest",
   "Game Setup Details": "Spielaufbau Details",
 
+  "Distant": "Entfernte",
+  "Coming": "Kommende",
+  "Current": "Aktuelle",
   "Turmoil": "Aufruhr",
   "Select an allied party": "Wähle eine verbündete Partei",
   "[Mars First] - Bonus: Gain 1 M€ for each building tag you have - Policy: When you place a tile ON MARS, gain 1 steel": "[Mars First] - Bonus: Erhalte 1 M€ für jedes Gebäudesymbol, das du hast - Politik: Wenn du ein Plättchen auf dem MARS platzierst, erhältst du 1 Stahl.",

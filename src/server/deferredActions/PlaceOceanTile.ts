@@ -26,11 +26,11 @@ export class PlaceOceanTile extends DeferredAction<Space | undefined> {
 
   public execute() {
     if (!this.player.game.canAddOcean()) {
-      const whales = this.player.tableau.get(CardName.WHALES);
+      const whales = this.creditedPlayer.tableau.get(CardName.WHALES);
       if (whales !== undefined) {
         this.player.addResourceTo(whales, {qty: 1, log: true});
         const input = this.cb(undefined);
-        this.creditedPlayer?.defer(input);
+        this.player?.defer(input);
       }
       return undefined;
     }

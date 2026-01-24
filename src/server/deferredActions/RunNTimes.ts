@@ -1,9 +1,9 @@
-import {IPlayer} from '@/server/IPlayer';
-import {DeferredAction} from '@/server/deferredActions/DeferredAction';
-import {Priority} from '@/server/deferredActions/Priority';
-import {PlayerInput} from '@/server/PlayerInput';
-import {Message} from '@/common/logs/Message';
-import {message} from '@/server/logs/MessageBuilder';
+import {IPlayer} from '../IPlayer';
+import {DeferredAction} from '../deferredActions/DeferredAction';
+import {Priority} from '../deferredActions/Priority';
+import {PlayerInput} from '../PlayerInput';
+import {Message} from '../../common/logs/Message';
+import {message} from '../logs/MessageBuilder';
 
 /**
  * Run a deferred action many times, dynamically calculating each time.

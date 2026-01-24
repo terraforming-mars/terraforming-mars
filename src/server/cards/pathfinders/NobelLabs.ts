@@ -1,14 +1,14 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {IPlayer} from '@/server/IPlayer';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {IActionCard, ICard} from '@/server/cards/ICard';
-import {Tag} from '@/common/cards/Tag';
-import {CardResource} from '@/common/CardResource';
-import {AddResourcesToCard} from '@/server/deferredActions/AddResourcesToCard';
-import {digit} from '@/server/cards/Options';
+import {IProjectCard} from '../IProjectCard';
+import {IPlayer} from '../../IPlayer';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {IActionCard, ICard} from '../ICard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardResource} from '../../../common/CardResource';
+import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {digit} from '../Options';
 
 export class NobelLabs extends Card implements IProjectCard, IActionCard {
   constructor() {

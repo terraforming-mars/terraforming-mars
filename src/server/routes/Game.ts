@@ -1,9 +1,9 @@
-import {Handler} from '@/server/routes/Handler';
-import {Context} from '@/server/routes/IHandler';
-import {ServeAsset} from '@/server/routes/ServeAsset';
-import {Request} from '@/server/Request';
-import {Response} from '@/server/Response';
-import {ApiCreateGame} from '@/server/routes/ApiCreateGame';
+import {Handler} from './Handler';
+import {Context} from './IHandler';
+import {ServeAsset} from './ServeAsset';
+import {Request} from '../Request';
+import {Response} from '../Response';
+import {ApiCreateGame} from './ApiCreateGame';
 
 // Oh, this could be called Game, but that would introduce all kinds of issues.
 // Calling get() feeds the game to the player (I think, and calling put creates a game.)

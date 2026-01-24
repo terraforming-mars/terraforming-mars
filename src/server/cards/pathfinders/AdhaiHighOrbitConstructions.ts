@@ -1,16 +1,16 @@
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {Tag} from '@/common/cards/Tag';
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CardResource} from '@/common/CardResource';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {isPlanetaryTag} from '@/server/pathfinders/PathfindersData';
-import {Size} from '@/common/cards/render/Size';
-import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
-import {IStandardProjectCard} from '@/server/cards/IStandardProjectCard';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
-import {ICard} from '@/server/cards/ICard';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {Tag} from '../../../common/cards/Tag';
+import {IPlayer} from '../../IPlayer';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardResource} from '../../../common/CardResource';
+import {IProjectCard} from '../IProjectCard';
+import {isPlanetaryTag} from '../../pathfinders/PathfindersData';
+import {Size} from '../../../common/cards/render/Size';
+import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
+import {IStandardProjectCard} from '../IStandardProjectCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {ICard} from '../ICard';
 
 export class AdhaiHighOrbitConstructions extends CorporationCard implements ICorporationCard {
   constructor() {

@@ -1,13 +1,13 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {CardType} from '@/common/cards/CardType';
-import {Tag} from '@/common/cards/Tag';
-import {MoonExpansion} from '@/server/moon/MoonExpansion';
-import {TileType} from '@/common/TileType';
-import {moonRoadTile} from '@/server/cards/render/DynamicVictoryPoints';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Card} from '@/server/cards/Card';
-import {digit} from '@/server/cards/Options';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {CardType} from '../../../common/cards/CardType';
+import {Tag} from '../../../common/cards/Tag';
+import {MoonExpansion} from '../../moon/MoonExpansion';
+import {TileType} from '../../../common/TileType';
+import {moonRoadTile} from '../render/DynamicVictoryPoints';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {digit} from '../Options';
 
 export class LunaTrainStation extends Card {
   constructor() {

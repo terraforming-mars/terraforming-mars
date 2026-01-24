@@ -1,13 +1,13 @@
-import {CardType} from '@/common/cards/CardType';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Card} from '@/server/cards/Card';
-import {Tag} from '@/common/cards/Tag';
-import {undergroundShelters} from '@/server/cards/render/DynamicVictoryPoints';
-import {IPlayer} from '@/server/IPlayer';
-import {IActionCard} from '@/server/cards/ICard';
-import {SelectClaimedUndergroundToken} from '@/server/inputs/SelectClaimedUndergroundToken';
+import {CardType} from '../../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {Tag} from '../../../common/cards/Tag';
+import {undergroundShelters} from '../render/DynamicVictoryPoints';
+import {IPlayer} from '../../IPlayer';
+import {IActionCard} from '../ICard';
+import {SelectClaimedUndergroundToken} from '../../inputs/SelectClaimedUndergroundToken';
 
 export class UndergroundShelters extends Card implements IProjectCard, IActionCard {
   constructor() {

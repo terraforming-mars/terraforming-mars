@@ -1,8 +1,8 @@
-import {Tag} from '@/common/cards/Tag';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {ICard} from '@/server/cards/ICard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {PreludeCard} from '../prelude/PreludeCard';
+import {ICard} from '../ICard';
 
 export class ElectionSponsorship extends PreludeCard implements ICard {
   public isDisabled: boolean = false;

@@ -1,12 +1,12 @@
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
-import {Card} from '@/server/cards/Card';
-import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
-import {cancelled} from '@/server/cards/Options';
-import {Tag} from '@/common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {IProjectCard} from '../IProjectCard';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
+import {Card} from '../Card';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
+import {cancelled} from '../Options';
+import {Tag} from '../../../common/cards/Tag';
 export class ServerSabotage extends Card implements IProjectCard {
   constructor() {
     super({

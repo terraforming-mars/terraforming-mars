@@ -1,12 +1,12 @@
-import {Tag} from '@/common/cards/Tag';
-import {Card, StaticCardProperties} from '@/server/cards/Card';
-import {IPlayer} from '@/server/IPlayer';
-import {SelectCard} from '@/server/inputs/SelectCard';
-import {ICard} from '@/server/cards/ICard';
-import {Behavior} from '@/server/behavior/Behavior';
-import {getBehaviorExecutor} from '@/server/behavior/BehaviorExecutor';
-import {PlayerInput} from '@/server/PlayerInput';
-import {CardName} from '@/common/cards/CardName';
+import {Tag} from '../../../common/cards/Tag';
+import {Card, StaticCardProperties} from '../Card';
+import {IPlayer} from '../../IPlayer';
+import {SelectCard} from '../../inputs/SelectCard';
+import {ICard} from '../ICard';
+import {Behavior} from '../../behavior/Behavior';
+import {getBehaviorExecutor} from '../../behavior/BehaviorExecutor';
+import {PlayerInput} from '../../PlayerInput';
+import {CardName} from '../../../common/cards/CardName';
 
 export abstract class RoboticWorkforceBase extends Card {
   constructor(properties: StaticCardProperties) {

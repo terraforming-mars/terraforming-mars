@@ -1,16 +1,16 @@
-import {CardName} from '@/common/cards/CardName';
-import {CardType} from '@/common/cards/CardType';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Card} from '@/server/cards/Card';
-import {IActionCard} from '@/server/cards/ICard';
-import {Tag} from '@/common/cards/Tag';
-import {IPlayer} from '@/server/IPlayer';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
-import {message} from '@/server/logs/MessageBuilder';
-import {CardResource} from '@/common/CardResource';
-import {PlaceOceanTile} from '@/server/deferredActions/PlaceOceanTile';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {IActionCard} from '../ICard';
+import {Tag} from '../../../common/cards/Tag';
+import {IPlayer} from '../../IPlayer';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {message} from '../../logs/MessageBuilder';
+import {CardResource} from '../../../common/CardResource';
+import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 
 export class IcyImpactors extends Card implements IActionCard {
   constructor() {

@@ -1,12 +1,12 @@
 // Methods for a player's relationship to their card tags
 
-import {CardName} from '@/common/cards/CardName';
-import {CardType} from '@/common/cards/CardType';
-import {ALL_TAGS, Tag} from '@/common/cards/Tag';
-import {ICard} from '@/server/cards/ICard';
-import {IPlayer} from '@/server/IPlayer';
-import {OneOrArray} from '@/common/utils/types';
-import {intersection} from '@/common/utils/utils';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
+import {ALL_TAGS, Tag} from '../../common/cards/Tag';
+import {ICard} from '../cards/ICard';
+import {IPlayer} from '../IPlayer';
+import {OneOrArray} from '../../common/utils/types';
+import {intersection} from '../../common/utils/utils';
 
 export type CountingMode =
   'raw' | // Count face-up tags literally, including Leavitt Station.

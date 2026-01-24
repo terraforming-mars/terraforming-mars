@@ -1,13 +1,13 @@
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {IPlayer} from '@/server/IPlayer';
-import {SelectSpace} from '@/server/inputs/SelectSpace';
-import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
-import {Card} from '@/server/cards/Card';
-import {IActionCard} from '@/server/cards/ICard';
-import {CardType} from '@/common/cards/CardType';
-import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {IPlayer} from '../../IPlayer';
+import {SelectSpace} from '../../inputs/SelectSpace';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
+import {Card} from '../Card';
+import {IActionCard} from '../ICard';
+import {CardType} from '../../../common/cards/CardType';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
 
 export class DeepFoundations extends Card implements IActionCard {
   constructor() {

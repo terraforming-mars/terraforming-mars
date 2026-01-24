@@ -1,14 +1,14 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {CardType} from '@/common/cards/CardType';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {Resource} from '@/common/Resource';
-import {Card} from '@/server/cards/Card';
-import {digit} from '@/server/cards/Options';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {CardType} from '../../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardRenderer} from '../render/CardRenderer';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {Resource} from '../../../common/Resource';
+import {Card} from '../Card';
+import {digit} from '../Options';
 
 export class PreliminaryDarkside extends Card implements IProjectCard {
   constructor() {

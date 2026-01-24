@@ -1,20 +1,20 @@
-import {Card} from '@/server/cards/Card';
-import {CardName} from '@/common/cards/CardName';
-import {SelectSpace} from '@/server/inputs/SelectSpace';
-import {Space} from '@/server/boards/Space';
-import {CanAffordOptions, IPlayer} from '@/server/IPlayer';
-import {TileType} from '@/common/TileType';
-import {CardType} from '@/common/cards/CardType';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Board} from '@/server/boards/Board';
-import {Size} from '@/common/cards/render/Size';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {CardResource} from '@/common/CardResource';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {Tile} from '@/server/Tile';
-import {CrashlandingBonus} from '@/server/pathfinders/CrashlandingBonus';
-import {message} from '@/server/logs/MessageBuilder';
+import {Card} from '../Card';
+import {CardName} from '../../../common/cards/CardName';
+import {SelectSpace} from '../../inputs/SelectSpace';
+import {Space} from '../../boards/Space';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
+import {TileType} from '../../../common/TileType';
+import {CardType} from '../../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {CardRenderer} from '../render/CardRenderer';
+import {Board} from '../../boards/Board';
+import {Size} from '../../../common/cards/render/Size';
+import {OrOptions} from '../../inputs/OrOptions';
+import {CardResource} from '../../../common/CardResource';
+import {SelectOption} from '../../inputs/SelectOption';
+import {Tile} from '../../Tile';
+import {CrashlandingBonus} from '../../pathfinders/CrashlandingBonus';
+import {message} from '../../logs/MessageBuilder';
 
 export class Crashlanding extends Card implements IProjectCard {
   constructor() {

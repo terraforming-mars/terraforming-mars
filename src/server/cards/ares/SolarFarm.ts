@@ -1,15 +1,15 @@
-import {Card} from '@/server/cards/Card';
-import {CardName} from '@/common/cards/CardName';
-import {PlaceTile} from '@/server/deferredActions/PlaceTile';
-import {CanAffordOptions, IPlayer} from '@/server/IPlayer';
-import {SpaceBonus} from '@/common/boards/SpaceBonus';
-import {TileType} from '@/common/TileType';
-import {CardType} from '@/common/cards/CardType';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {message} from '@/server/logs/MessageBuilder';
-import {Units} from '@/common/Units';
+import {Card} from '../Card';
+import {CardName} from '../../../common/cards/CardName';
+import {PlaceTile} from '../../../server/deferredActions/PlaceTile';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
+import {SpaceBonus} from '../../../common/boards/SpaceBonus';
+import {TileType} from '../../../common/TileType';
+import {CardType} from '../../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardRenderer} from '../render/CardRenderer';
+import {message} from '../../logs/MessageBuilder';
+import {Units} from '../../../common/Units';
 
 export class SolarFarm extends Card implements IProjectCard {
   constructor() {

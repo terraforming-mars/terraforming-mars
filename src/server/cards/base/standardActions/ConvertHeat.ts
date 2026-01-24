@@ -1,9 +1,9 @@
-import {StandardActionCard} from '@/server/cards/StandardActionCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {IPlayer} from '@/server/IPlayer';
-import {HEAT_FOR_TEMPERATURE, MAX_TEMPERATURE} from '@/common/constants';
-import {Units} from '@/common/Units';
+import {StandardActionCard} from '../../StandardActionCard';
+import {CardName} from '../../../../common/cards/CardName';
+import {CardRenderer} from '../../render/CardRenderer';
+import {IPlayer} from '../../../IPlayer';
+import {HEAT_FOR_TEMPERATURE, MAX_TEMPERATURE} from '../../../../common/constants';
+import {Units} from '../../../../common/Units';
 
 
 export class ConvertHeat extends StandardActionCard {

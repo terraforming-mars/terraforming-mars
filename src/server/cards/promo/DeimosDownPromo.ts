@@ -1,12 +1,12 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
-import {TileType} from '@/common/TileType';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {all, digit} from '@/server/cards/Options';
-import {AdjacencyBonus} from '@/server/ares/AdjacencyBonus';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {CardName} from '../../../common/cards/CardName';
+import {TileType} from '../../../common/TileType';
+import {CardRenderer} from '../render/CardRenderer';
+import {all, digit} from '../Options';
+import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
 
 export class DeimosDownPromo extends Card implements IProjectCard {
   constructor(

@@ -1,10 +1,10 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CeoCard} from '@/server/cards/ceos/CeoCard';
-import {DrawCards} from '@/server/deferredActions/DrawCards';
-import {Priority} from '@/server/deferredActions/Priority';
-import {DiscardCards} from '@/server/deferredActions/DiscardCards';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {CardRenderer} from '../render/CardRenderer';
+import {CeoCard} from './CeoCard';
+import {DrawCards} from '../../deferredActions/DrawCards';
+import {Priority} from '../../deferredActions/Priority';
+import {DiscardCards} from '../../deferredActions/DiscardCards';
 
 export class Ender extends CeoCard {
   constructor() {

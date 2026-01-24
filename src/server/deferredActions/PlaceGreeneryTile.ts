@@ -1,9 +1,9 @@
-import {IPlayer} from '@/server/IPlayer';
-import {SelectSpace} from '@/server/inputs/SelectSpace';
-import {DeferredAction} from '@/server/deferredActions/DeferredAction';
-import {Priority} from '@/server/deferredActions/Priority';
-import {PlacementType} from '@/server/boards/PlacementType';
-import {Space} from '@/server/boards/Space';
+import {IPlayer} from '../IPlayer';
+import {SelectSpace} from '../inputs/SelectSpace';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
+import {PlacementType} from '../boards/PlacementType';
+import {Space} from '../boards/Space';
 
 export class PlaceGreeneryTile extends DeferredAction<Space | undefined> {
   constructor(

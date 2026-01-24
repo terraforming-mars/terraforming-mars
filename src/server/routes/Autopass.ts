@@ -1,10 +1,10 @@
-import * as responses from '@/server/server/responses';
-import {IPlayer} from '@/server/IPlayer';
-import {Handler} from '@/server/routes/Handler';
-import {Context} from '@/server/routes/IHandler';
-import {isPlayerId} from '@/common/Types';
-import {Request} from '@/server/Request';
-import {Response} from '@/server/Response';
+import * as responses from '../server/responses';
+import {IPlayer} from '../IPlayer';
+import {Handler} from './Handler';
+import {Context} from './IHandler';
+import {isPlayerId} from '../../common/Types';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 /**
  * Toggle the player's autopass setting.

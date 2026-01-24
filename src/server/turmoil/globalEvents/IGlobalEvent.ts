@@ -1,8 +1,8 @@
-import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
-import {PartyName} from '@/common/turmoil/PartyName';
-import {ICardRenderRoot} from '@/common/cards/render/Types';
-import {IGame} from '@/server/IGame';
-import {Turmoil} from '@/server/turmoil/Turmoil';
+import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
+import {PartyName} from '../../../common/turmoil/PartyName';
+import {ICardRenderRoot} from '../../../common/cards/render/Types';
+import {IGame} from '../../IGame';
+import {Turmoil} from '../Turmoil';
 
 export interface IGlobalEvent {
   name: GlobalEventName,

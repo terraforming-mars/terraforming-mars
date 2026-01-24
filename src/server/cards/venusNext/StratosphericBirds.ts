@@ -1,12 +1,12 @@
-import {IActionCard} from '@/server/cards/ICard';
-import {Tag} from '@/common/cards/Tag';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
-import {CardResource} from '@/common/CardResource';
-import {CardName} from '@/common/cards/CardName';
-import {RemoveResourcesFromCard} from '@/server/deferredActions/RemoveResourcesFromCard';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {ActionCard} from '@/server/cards/ActionCard';
+import {IActionCard} from '../ICard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
+import {CardResource} from '../../../common/CardResource';
+import {CardName} from '../../../common/cards/CardName';
+import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
+import {CardRenderer} from '../render/CardRenderer';
+import {ActionCard} from '../ActionCard';
 
 export class StratosphericBirds extends ActionCard implements IActionCard {
   constructor() {

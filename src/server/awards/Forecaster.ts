@@ -1,7 +1,7 @@
-import {IAward} from '@/server/awards/IAward';
-import {IPlayer} from '@/server/IPlayer';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
+import {IAward} from './IAward';
+import {IPlayer} from '../IPlayer';
+import {CardType} from '../../common/cards/CardType';
+import {CardName} from '../../common/cards/CardName';
 
 export class Forecaster implements IAward {
   public readonly name = 'Forecaster';

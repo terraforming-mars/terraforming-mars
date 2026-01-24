@@ -1,11 +1,11 @@
-import {DeferredAction} from '@/server/deferredActions/DeferredAction';
-import {Priority} from '@/server/deferredActions/Priority';
-import {SelectSpace} from '@/server/inputs/SelectSpace';
-import {Tile} from '@/server/Tile';
-import {IPlayer} from '@/server/IPlayer';
-import {MoonExpansion} from '@/server/moon/MoonExpansion';
+import {DeferredAction} from '../deferredActions/DeferredAction';
+import {Priority} from '../deferredActions/Priority';
+import {SelectSpace} from '../inputs/SelectSpace';
+import {Tile} from '../Tile';
+import {IPlayer} from '../IPlayer';
+import {MoonExpansion} from './MoonExpansion';
 import {Message} from '@/common/logs/Message';
-import {message} from '@/server/logs/MessageBuilder';
+import {message} from '../logs/MessageBuilder';
 
 export class PlaceSpecialMoonTile extends DeferredAction {
   constructor(

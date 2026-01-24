@@ -1,13 +1,13 @@
-import {ICard} from '@/server/cards/ICard';
-import {Message} from '@/common/logs/Message';
-import {getCardFromPlayerInput} from '@/server/PlayerInput';
-import {BasePlayerInput} from '@/server/PlayerInput';
-import {CardName} from '@/common/cards/CardName';
-import {InputResponse, isSelectCardResponse} from '@/common/inputs/InputResponse';
-import {SelectCardModel} from '@/common/models/PlayerInputModel';
-import {IPlayer} from '@/server/IPlayer';
-import {cardsToModel} from '@/server/models/ModelUtils';
-import {InputError} from '@/server/inputs/InputError';
+import {ICard} from '../cards/ICard';
+import {Message} from '../../common/logs/Message';
+import {getCardFromPlayerInput} from '../PlayerInput';
+import {BasePlayerInput} from '../PlayerInput';
+import {CardName} from '../../common/cards/CardName';
+import {InputResponse, isSelectCardResponse} from '../../common/inputs/InputResponse';
+import {SelectCardModel} from '../../common/models/PlayerInputModel';
+import {IPlayer} from '../IPlayer';
+import {cardsToModel} from '../models/ModelUtils';
+import {InputError} from './InputError';
 
 export type Options = {
   max: number,

@@ -1,12 +1,12 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {PlayerInput} from '@/server/PlayerInput';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CeoCard} from '@/server/cards/ceos/CeoCard';
-import {Tag} from '@/common/cards/Tag';
-import {DeclareCloneTag} from '@/server/pathfinders/DeclareCloneTag';
-import {Resource} from '@/common/Resource';
-import {clone} from '@/server/cards/Options';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {PlayerInput} from '../../PlayerInput';
+import {CardRenderer} from '../render/CardRenderer';
+import {CeoCard} from './CeoCard';
+import {Tag} from '../../../common/cards/Tag';
+import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
+import {Resource} from '../../../common/Resource';
+import {clone} from '../Options';
 
 export class Shara extends CeoCard {
   constructor() {

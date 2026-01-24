@@ -1,7 +1,7 @@
-import {CardName} from '@/common/cards/CardName';
-import {MiningArea} from '@/server/cards/base/MiningArea';
-import {TileType} from '@/common/TileType';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CardName} from '../../../common/cards/CardName';
+import {MiningArea} from '../base/MiningArea';
+import {TileType} from '../../../common/TileType';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class MiningAreaAres extends MiningArea {
   protected override readonly isAres = true;

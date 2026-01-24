@@ -1,11 +1,11 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
-import {MoonHabitatStandardProject} from '@/server/cards/moon/MoonHabitatStandardProject';
-import {MoonMineStandardProject} from '@/server/cards/moon/MoonMineStandardProject';
-import {MoonRoadStandardProject} from '@/server/cards/moon/MoonRoadStandardProject';
-import {TileType} from '@/common/TileType';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {CardRenderer} from '../render/CardRenderer';
+import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
+import {MoonHabitatStandardProject} from './MoonHabitatStandardProject';
+import {MoonMineStandardProject} from './MoonMineStandardProject';
+import {MoonRoadStandardProject} from './MoonRoadStandardProject';
+import {TileType} from '../../../common/TileType';
 
 export class MoonHabitatStandardProjectVariant1 extends MoonHabitatStandardProject {
   constructor() {

@@ -1,10 +1,10 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {all} from '@/server/cards/Options';
+import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {all} from '../Options';
 
 export class MuseumofEarlyColonisation extends Card implements IProjectCard {
   constructor() {

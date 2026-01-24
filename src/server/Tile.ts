@@ -1,5 +1,5 @@
-import {CardName} from '@/common/cards/CardName';
-import {TileType} from '@/common/TileType';
+import {CardName} from '../common/cards/CardName';
+import {TileType} from '../common/TileType';
 
 export type Tile = {
   tileType: TileType;

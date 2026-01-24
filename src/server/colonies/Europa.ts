@@ -1,7 +1,7 @@
-import {Colony} from '@/server/colonies/Colony';
-import {Resource} from '@/common/Resource';
-import {ColonyName} from '@/common/colonies/ColonyName';
-import {ColonyBenefit} from '@/common/colonies/ColonyBenefit';
+import {Colony} from './Colony';
+import {Resource} from '../../common/Resource';
+import {ColonyName} from '../../common/colonies/ColonyName';
+import {ColonyBenefit} from '../../common/colonies/ColonyBenefit';
 
 export class Europa extends Colony {
   constructor() {

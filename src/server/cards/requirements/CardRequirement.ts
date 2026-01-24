@@ -1,6 +1,6 @@
-import {RequirementType} from '@/common/cards/RequirementType';
-import {IPlayer} from '@/server/IPlayer';
-import {IProjectCard} from '@/server/cards/IProjectCard';
+import {RequirementType} from '../../../common/cards/RequirementType';
+import {IPlayer} from '../../IPlayer';
+import {IProjectCard} from '../IProjectCard';
 
 export type Options = {
   max: boolean,

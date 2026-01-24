@@ -1,5 +1,5 @@
-import {Tag} from '@/common/cards/Tag';
-import {VictoryPointsBreakdown} from '@/common/game/VictoryPointsBreakdown';
+import {Tag} from '../../common/cards/Tag';
+import {VictoryPointsBreakdown} from '../../common/game/VictoryPointsBreakdown';
 
 export type VictoryPoints = 'terraformRating' | 'milestones' | 'awards' | 'greenery' | 'city' | 'escapeVelocity' | 'moon habitat' | 'moon mine' | 'moon road' | 'planetary tracks' | 'victoryPoints';
 

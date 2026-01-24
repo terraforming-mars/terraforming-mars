@@ -1,12 +1,12 @@
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {CardResource} from '@/common/CardResource';
-import {Space} from '@/server/boards/Space';
-import {Board} from '@/server/boards/Board';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {IPlayer} from '../../IPlayer';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {CardResource} from '../../../common/CardResource';
+import {Space} from '../../boards/Space';
+import {Board} from '../../boards/Board';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
 export class SoylentSeedlingSystems extends CorporationCard implements ICorporationCard {
   constructor() {

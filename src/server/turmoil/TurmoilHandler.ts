@@ -1,20 +1,20 @@
-import * as constants from '@/common/constants';
-import {ICard} from '@/server/cards/ICard';
-import {GlobalParameter} from '@/common/GlobalParameter';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {IPlayer} from '@/server/IPlayer';
-import {PlayerInput} from '@/server/PlayerInput';
-import {Resource} from '@/common/Resource';
-import {SpaceType} from '@/common/boards/SpaceType';
-import {GREENS_POLICY_2, GREENS_POLICY_3} from '@/server/turmoil/parties/Greens';
-import {KELVINISTS_POLICY_4} from '@/server/turmoil/parties/Kelvinists';
-import {MARS_FIRST_POLICY_2} from '@/server/turmoil/parties/MarsFirst';
-import {PartyHooks} from '@/server/turmoil/parties/PartyHooks';
-import {PartyName} from '@/common/turmoil/PartyName';
-import {REDS_POLICY_2} from '@/server/turmoil/parties/Reds';
-import {MoonExpansion} from '@/server/moon/MoonExpansion';
-import {TRSource} from '@/common/cards/TRSource';
-import {IPolicy, policyDescription} from '@/server/turmoil/Policy';
+import * as constants from '../../common/constants';
+import {ICard} from '../cards/ICard';
+import {GlobalParameter} from '../../common/GlobalParameter';
+import {SelectOption} from '../inputs/SelectOption';
+import {IPlayer} from '../IPlayer';
+import {PlayerInput} from '../PlayerInput';
+import {Resource} from '../../common/Resource';
+import {SpaceType} from '../../common/boards/SpaceType';
+import {GREENS_POLICY_2, GREENS_POLICY_3} from './parties/Greens';
+import {KELVINISTS_POLICY_4} from './parties/Kelvinists';
+import {MARS_FIRST_POLICY_2} from './parties/MarsFirst';
+import {PartyHooks} from './parties/PartyHooks';
+import {PartyName} from '../../common/turmoil/PartyName';
+import {REDS_POLICY_2} from './parties/Reds';
+import {MoonExpansion} from '../moon/MoonExpansion';
+import {TRSource} from '../../common/cards/TRSource';
+import {IPolicy, policyDescription} from './Policy';
 
 export class TurmoilHandler {
   private constructor() {}

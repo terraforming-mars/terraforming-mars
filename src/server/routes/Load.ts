@@ -1,8 +1,8 @@
-import {Handler} from '@/server/routes/Handler';
-import {Context} from '@/server/routes/IHandler';
-import {ServeApp} from '@/server/routes/ServeApp';
-import {Request} from '@/server/Request';
-import {Response} from '@/server/Response';
+import {Handler} from './Handler';
+import {Context} from './IHandler';
+import {ServeApp} from './ServeApp';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 export class Load extends Handler {
   public static readonly INSTANCE = new Load();

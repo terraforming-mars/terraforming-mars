@@ -1,18 +1,18 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {IActionCard} from '@/server/cards/ICard';
-import {IPlayer} from '@/server/IPlayer';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CardResource} from '@/common/CardResource';
-import {Tag} from '@/common/cards/Tag';
-import {Resource} from '@/common/Resource';
-import {Board} from '@/server/boards/Board';
-import {Space} from '@/server/boards/Space';
-import {SelectCard} from '@/server/inputs/SelectCard';
-import {all} from '@/server/cards/Options';
-import {Size} from '@/common/cards/render/Size';
+import {IProjectCard} from '../IProjectCard';
+import {IActionCard} from '../ICard';
+import {IPlayer} from '../../IPlayer';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardResource} from '../../../common/CardResource';
+import {Tag} from '../../../common/cards/Tag';
+import {Resource} from '../../../common/Resource';
+import {Board} from '../../boards/Board';
+import {Space} from '../../boards/Space';
+import {SelectCard} from '../../inputs/SelectCard';
+import {all} from '../Options';
+import {Size} from '../../../common/cards/render/Size';
 
 export class Hospitals extends Card implements IProjectCard, IActionCard {
   constructor() {

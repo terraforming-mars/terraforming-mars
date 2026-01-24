@@ -1,7 +1,7 @@
-import {IPlayer} from '@/server/IPlayer';
-import {CardResource} from '@/common/CardResource';
-import {InequalityRequirement} from '@/server/cards/requirements/InequalityRequirement';
-import {RequirementType} from '@/common/cards/RequirementType';
+import {IPlayer} from '../../IPlayer';
+import {CardResource} from '../../../common/CardResource';
+import {InequalityRequirement} from './InequalityRequirement';
+import {RequirementType} from '../../../common/cards/RequirementType';
 
 /**
  * Evaluates whether this player has a number of floaters on their played cards.

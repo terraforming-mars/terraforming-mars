@@ -1,14 +1,14 @@
-import {ClaimedToken} from '@/common/underworld/UnderworldPlayerData';
-import {UndergroundResourceToken} from '@/common/underworld/UndergroundResourceToken';
-import {inplaceRemove, partition} from '@/common/utils/utils';
-import {IPlayer} from '@/server/IPlayer';
-import {Space} from '@/server/boards/Space';
-import {Priority} from '@/server/deferredActions/Priority';
-import {RunNTimes} from '@/server/deferredActions/RunNTimes';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectClaimedUndergroundToken} from '@/server/inputs/SelectClaimedUndergroundToken';
-import {SelectSpace} from '@/server/inputs/SelectSpace';
-import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
+import {ClaimedToken} from '../../common/underworld/UnderworldPlayerData';
+import {UndergroundResourceToken} from '../../common/underworld/UndergroundResourceToken';
+import {inplaceRemove, partition} from '../../common/utils/utils';
+import {IPlayer} from '../IPlayer';
+import {Space} from '../boards/Space';
+import {Priority} from '../deferredActions/Priority';
+import {RunNTimes} from '../deferredActions/RunNTimes';
+import {OrOptions} from '../inputs/OrOptions';
+import {SelectClaimedUndergroundToken} from '../inputs/SelectClaimedUndergroundToken';
+import {SelectSpace} from '../inputs/SelectSpace';
+import {UnderworldExpansion} from './UnderworldExpansion';
 
 export class ClaimSpacesDeferred extends RunNTimes<void> {
   private spaces: Array<Space | UndergroundResourceToken>;

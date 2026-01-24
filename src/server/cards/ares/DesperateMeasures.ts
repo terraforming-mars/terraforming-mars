@@ -1,12 +1,12 @@
-import {Card} from '@/server/cards/Card';
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {CardType} from '@/common/cards/CardType';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {SelectSpace} from '@/server/inputs/SelectSpace';
-import {TileType} from '@/common/TileType';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CardResource} from '@/common/CardResource';
+import {Card} from '../Card';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {CardType} from '../../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {SelectSpace} from '../../inputs/SelectSpace';
+import {TileType} from '../../../common/TileType';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardResource} from '../../../common/CardResource';
 
 export class DesperateMeasures extends Card implements IProjectCard {
   constructor() {

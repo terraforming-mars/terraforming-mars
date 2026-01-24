@@ -1,14 +1,14 @@
-import {IPlayer} from '@/server/IPlayer';
-import {DeferredAction} from '@/server/deferredActions/DeferredAction';
-import {Priority} from '@/server/deferredActions/Priority';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {ICloneTagCard} from '@/server/cards/pathfinders/ICloneTagCard';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {isPlanetaryTag, PLANETARY_TAGS, PlanetaryTag} from '@/server/pathfinders/PathfindersData';
-import {intersection} from '@/common/utils/utils';
-import {message} from '@/server/logs/MessageBuilder';
-import {Message} from '@/common/logs/Message';
+import {IPlayer} from '../IPlayer';
+import {DeferredAction} from '../deferredActions/DeferredAction';
+import {Priority} from '../deferredActions/Priority';
+import {OrOptions} from '../inputs/OrOptions';
+import {SelectOption} from '../inputs/SelectOption';
+import {ICloneTagCard} from '../cards/pathfinders/ICloneTagCard';
+import {IProjectCard} from '../cards/IProjectCard';
+import {isPlanetaryTag, PLANETARY_TAGS, PlanetaryTag} from '../pathfinders/PathfindersData';
+import {intersection} from '../../common/utils/utils';
+import {message} from '../logs/MessageBuilder';
+import {Message} from '../../common/logs/Message';
 
 /**
  * Declare what tag a new card has. Must occur before anything else, including

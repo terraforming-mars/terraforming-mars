@@ -1,13 +1,12 @@
-import {IPlayer} from '@/server/IPlayer';
-import {Resource} from '@/common/Resource';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {DeferredAction} from '@/server/deferredActions/DeferredAction';
-import {Priority} from '@/server/deferredActions/Priority';
-import {CardName} from '@/common/cards/CardName';
-import {MessageBuilder, message} from '@/server/logs/MessageBuilder';
-import {Message} from '@/common/logs/Message';
-
+import {IPlayer} from '../IPlayer';
+import {Resource} from '../../common/Resource';
+import {OrOptions} from '../inputs/OrOptions';
+import {SelectOption} from '../inputs/SelectOption';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
+import {CardName} from '../../common/cards/CardName';
+import {MessageBuilder, message} from '../logs/MessageBuilder';
+import {Message} from '../../common/logs/Message';
 export class RemoveAnyPlants extends DeferredAction {
   private title: string | Message;
   private count: number;

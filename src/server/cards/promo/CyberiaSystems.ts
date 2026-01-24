@@ -1,12 +1,12 @@
-import {Tag} from '@/common/cards/Tag';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {RoboticWorkforceBase} from '@/server/cards/base/RoboticWorkforceBase';
-import {Size} from '@/common/cards/render/Size';
-import {IPlayer} from '@/server/IPlayer';
-import {ICard} from '@/server/cards/ICard';
-import {Priority} from '@/server/deferredActions/Priority';
+import {Tag} from '../../../common/cards/Tag';
+import {CardType} from '../../../common/cards/CardType';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {RoboticWorkforceBase} from '../base/RoboticWorkforceBase';
+import {Size} from '../../../common/cards/render/Size';
+import {IPlayer} from '../../IPlayer';
+import {ICard} from '../ICard';
+import {Priority} from '../../deferredActions/Priority';
 
 export class CyberiaSystems extends RoboticWorkforceBase {
   constructor() {

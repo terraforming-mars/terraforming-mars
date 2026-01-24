@@ -1,7 +1,7 @@
-import {Colony} from '@/server/colonies/Colony';
-import {ColonyName} from '@/common/colonies/ColonyName';
-import {Resource} from '@/common/Resource';
-import {ColonyBenefit} from '@/common/colonies/ColonyBenefit';
+import {Colony} from '../../colonies/Colony';
+import {ColonyName} from '../../../common/colonies/ColonyName';
+import {Resource} from '../../../common/Resource';
+import {ColonyBenefit} from '../../../common/colonies/ColonyBenefit';
 
 export class LeavittII extends Colony {
   constructor() {

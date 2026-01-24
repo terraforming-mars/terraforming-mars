@@ -1,9 +1,9 @@
-import {Message} from '@/common/logs/Message';
-import {BasePlayerInput} from '@/server/PlayerInput';
-import {IPlayer} from '@/server/IPlayer';
-import {InputResponse, isSelectPlayerResponse} from '@/common/inputs/InputResponse';
-import {SelectPlayerModel} from '@/common/models/PlayerInputModel';
-import {InputError} from '@/server/inputs/InputError';
+import {Message} from '../../common/logs/Message';
+import {BasePlayerInput} from '../PlayerInput';
+import {IPlayer} from '../IPlayer';
+import {InputResponse, isSelectPlayerResponse} from '../../common/inputs/InputResponse';
+import {SelectPlayerModel} from '../../common/models/PlayerInputModel';
+import {InputError} from './InputError';
 
 export class SelectPlayer extends BasePlayerInput<IPlayer> {
   constructor(public players: ReadonlyArray<IPlayer>, title: string | Message, buttonLabel: string = 'Save') {

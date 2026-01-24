@@ -1,13 +1,13 @@
-import {Tag} from '@/common/cards/Tag';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CardResource} from '@/common/CardResource';
-import {IActionCard, ICard} from '@/server/cards/ICard';
-import {IPlayer} from '@/server/IPlayer';
-import {ActivePreludeCard} from '@/server/cards/prelude2/ActivePreludeCard';
-import {Resource} from '@/common/Resource';
-import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
-import {PathfindersExpansion} from '@/server/pathfinders/PathfindersExpansion';
+import {Tag} from '../../../common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardResource} from '../../../common/CardResource';
+import {IActionCard, ICard} from '../ICard';
+import {IPlayer} from '../../IPlayer';
+import {ActivePreludeCard} from './ActivePreludeCard';
+import {Resource} from '../../../common/Resource';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export class MainBeltAsteroids extends ActivePreludeCard implements IActionCard {
   constructor() {

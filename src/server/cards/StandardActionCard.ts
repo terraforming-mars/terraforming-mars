@@ -1,10 +1,10 @@
-import {CardType} from '@/common/cards/CardType';
-import {CardMetadata} from '@/common/cards/CardMetadata';
-import {CardName} from '@/common/cards/CardName';
-import {Card} from '@/server/cards/Card';
-import {PlayerInput} from '@/server/PlayerInput';
-import {IPlayer} from '@/server/IPlayer';
-import {IStandardActionCard} from '@/server/cards/IStandardActionCard';
+import {CardType} from '../../common/cards/CardType';
+import {CardMetadata} from '../../common/cards/CardMetadata';
+import {CardName} from '../../common/cards/CardName';
+import {Card} from './Card';
+import {PlayerInput} from '../PlayerInput';
+import {IPlayer} from '../IPlayer';
+import {IStandardActionCard} from './IStandardActionCard';
 
 interface StaticStandardActionCardProperties {
   name: CardName,

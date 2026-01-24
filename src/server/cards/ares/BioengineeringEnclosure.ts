@@ -1,14 +1,14 @@
-import {Card} from '@/server/cards/Card';
-import {CardName} from '@/common/cards/CardName';
-import {CardResource} from '@/common/CardResource';
-import {CardType} from '@/common/cards/CardType';
-import {IActionCard} from '@/server/cards/ICard';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {SelectCardDeferred} from '@/server/deferredActions/SelectCardDeferred';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {IPlayer} from '@/server/IPlayer';
-import {LogHelper} from '@/server/LogHelper';
+import {Card} from '../Card';
+import {CardName} from '../../../common/cards/CardName';
+import {CardResource} from '../../../common/CardResource';
+import {CardType} from '../../../common/cards/CardType';
+import {IActionCard} from '../ICard';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {SelectCardDeferred} from '../../deferredActions/SelectCardDeferred';
+import {CardRenderer} from '../render/CardRenderer';
+import {IPlayer} from '../../IPlayer';
+import {LogHelper} from '../../LogHelper';
 
 export class BioengineeringEnclosure extends Card implements IProjectCard, IActionCard {
   constructor() {

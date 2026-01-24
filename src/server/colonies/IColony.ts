@@ -1,10 +1,10 @@
-import {IPlayer} from '@/server/IPlayer';
-import {PlayerInput} from '@/server/PlayerInput';
-import {PlayerId} from '@/common/Types';
-import {IGame} from '@/server/IGame';
-import {SerializedColony} from '@/server/SerializedColony';
-import {ColonyMetadata} from '@/common/colonies/ColonyMetadata';
-import {ColonyName} from '@/common/colonies/ColonyName';
+import {IPlayer} from '../IPlayer';
+import {PlayerInput} from '../PlayerInput';
+import {PlayerId} from '../../common/Types';
+import {IGame} from '../IGame';
+import {SerializedColony} from '../SerializedColony';
+import {ColonyMetadata} from '../../common/colonies/ColonyMetadata';
+import {ColonyName} from '../../common/colonies/ColonyName';
 
 export type TradeOptions = {
   usesTradeFleet?: boolean;

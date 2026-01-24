@@ -1,15 +1,15 @@
-import {Tag} from '@/common/cards/Tag';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CardResource} from '@/common/CardResource';
-import {IActionCard} from '@/server/cards/ICard';
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {IPlayer} from '@/server/IPlayer';
-import {SelectCard} from '@/server/inputs/SelectCard';
-import {message} from '@/server/logs/MessageBuilder';
-import {PreludesExpansion} from '@/server/preludes/PreludesExpansion';
-import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
-import {IPreludeCard} from '@/server/cards/prelude/IPreludeCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardResource} from '../../../common/CardResource';
+import {IActionCard} from '../ICard';
+import {PreludeCard} from '../prelude/PreludeCard';
+import {IPlayer} from '../../IPlayer';
+import {SelectCard} from '../../inputs/SelectCard';
+import {message} from '../../logs/MessageBuilder';
+import {PreludesExpansion} from '../../preludes/PreludesExpansion';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {IPreludeCard} from '../prelude/IPreludeCard';
 
 export class BoardOfDirectors extends PreludeCard implements IActionCard {
   constructor() {

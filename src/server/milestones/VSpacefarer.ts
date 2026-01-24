@@ -1,6 +1,6 @@
-import {Tag} from '@/common/cards/Tag';
-import {IPlayer} from '@/server/IPlayer';
-import {BaseMilestone} from '@/server/milestones/IMilestone';
+import {Tag} from '../../common/cards/Tag';
+import {IPlayer} from '../IPlayer';
+import {BaseMilestone} from './IMilestone';
 
 export class VSpacefarer extends BaseMilestone {
   constructor() {

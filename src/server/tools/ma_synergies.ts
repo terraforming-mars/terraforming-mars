@@ -1,10 +1,10 @@
 require('dotenv').config();
 
-import {synergies} from '@/server/ma/MilestoneAwardSynergies';
-import {MilestoneName, milestoneNames} from '@/common/ma/MilestoneName';
-import {AwardName, awardNames} from '@/common/ma/AwardName';
-import {milestoneManifest} from '@/server/milestones/Milestones';
-import {awardManifest} from '@/server/awards/Awards';
+import {synergies} from '../ma/MilestoneAwardSynergies';
+import {MilestoneName, milestoneNames} from '../../common/ma/MilestoneName';
+import {AwardName, awardNames} from '../../common/ma/AwardName';
+import {milestoneManifest} from '../milestones/Milestones';
+import {awardManifest} from '../awards/Awards';
 
 function get(name: MilestoneName | AwardName) {
   try {

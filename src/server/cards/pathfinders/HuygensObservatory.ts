@@ -1,16 +1,16 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {BuildColony} from '@/server/deferredActions/BuildColony';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {Card} from '@/server/cards/Card';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {SelectColony} from '@/server/inputs/SelectColony';
-import {IColony} from '@/server/colonies/IColony';
-import {ColoniesHandler} from '@/server/colonies/ColoniesHandler';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
+import {CardName} from '../../../common/cards/CardName';
+import {BuildColony} from '../../deferredActions/BuildColony';
+import {OrOptions} from '../../inputs/OrOptions';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {SelectOption} from '../../inputs/SelectOption';
+import {SelectColony} from '../../inputs/SelectColony';
+import {IColony} from '../../colonies/IColony';
+import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 
 export class HuygensObservatory extends Card implements IProjectCard {
   constructor() {

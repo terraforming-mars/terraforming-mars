@@ -1,13 +1,13 @@
-import {CardType} from '@/common/cards/CardType';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Card} from '@/server/cards/Card';
-import {IPlayer} from '@/server/IPlayer';
-import {Tag} from '@/common/cards/Tag';
-import {Resource} from '@/common/Resource';
-import {all} from '@/server/cards/Options';
-import {ICard} from '@/server/cards/ICard';
+import {CardType} from '../../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {IPlayer} from '../../IPlayer';
+import {Tag} from '../../../common/cards/Tag';
+import {Resource} from '../../../common/Resource';
+import {all} from '../Options';
+import {ICard} from '../ICard';
 
 export class DetectiveTVSeries extends Card implements IProjectCard {
   constructor() {

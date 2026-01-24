@@ -1,10 +1,10 @@
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {IPlayer} from '@/server/IPlayer';
-import {Tag} from '@/common/cards/Tag';
-import {Resource} from '@/common/Resource';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {IPlayer} from '../../IPlayer';
+import {Tag} from '../../../common/cards/Tag';
+import {Resource} from '../../../common/Resource';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
 export class Manutech extends CorporationCard implements ICorporationCard {
   constructor() {

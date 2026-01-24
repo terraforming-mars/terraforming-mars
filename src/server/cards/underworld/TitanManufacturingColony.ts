@@ -1,12 +1,12 @@
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardType} from '@/common/cards/CardType';
-import {ActionCard} from '@/server/cards/ActionCard';
-import {IPlayer} from '@/server/IPlayer';
-import {CardResource} from '@/common/CardResource';
-import {ICard} from '@/server/cards/ICard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {IProjectCard} from '../IProjectCard';
+import {CardType} from '../../../common/cards/CardType';
+import {ActionCard} from '../ActionCard';
+import {IPlayer} from '../../IPlayer';
+import {CardResource} from '../../../common/CardResource';
+import {ICard} from '../ICard';
 
 export class TitanManufacturingColony extends ActionCard implements IProjectCard {
   constructor() {

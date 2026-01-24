@@ -1,8 +1,8 @@
-import {CardName} from '@/common/cards/CardName';
-import {SpaceBonus} from '@/common/boards/SpaceBonus';
-import {RestrictedArea} from '@/server/cards/base/RestrictedArea';
-import {TileType} from '@/common/TileType';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CardName} from '../../../common/cards/CardName';
+import {SpaceBonus} from '../../../common/boards/SpaceBonus';
+import {RestrictedArea} from '../base/RestrictedArea';
+import {TileType} from '../../../common/TileType';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class RestrictedAreaAres extends RestrictedArea {
   constructor() {

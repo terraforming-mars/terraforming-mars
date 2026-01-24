@@ -1,10 +1,10 @@
-import {ICard} from '@/server/cards/ICard';
-import {Tag} from '@/common/cards/Tag';
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {Resource} from '@/common/Resource';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {ICard} from '../ICard';
+import {Tag} from '../../../common/cards/Tag';
+import {PreludeCard} from '../prelude/PreludeCard';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {Resource} from '../../../common/Resource';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class SoilBacteria extends PreludeCard {
   constructor() {

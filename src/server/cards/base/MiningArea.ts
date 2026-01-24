@@ -1,8 +1,8 @@
-import {CanAffordOptions, IPlayer} from '@/server/IPlayer';
-import {TileType} from '@/common/TileType';
-import {CardName} from '@/common/cards/CardName';
-import {MiningCard} from '@/server/cards/base/MiningCard';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
+import {TileType} from '../../../common/TileType';
+import {CardName} from '../../../common/cards/CardName';
+import {MiningCard} from './MiningCard';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class MiningArea extends MiningCard {
   protected readonly title = 'Select a space with a steel or titanium bonus adjacent to one of your tiles';

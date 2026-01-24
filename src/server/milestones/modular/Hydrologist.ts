@@ -1,6 +1,6 @@
-import {BaseMilestone} from '@/server/milestones/IMilestone';
-import {IPlayer} from '@/server/IPlayer';
-import {GlobalParameter} from '@/common/GlobalParameter';
+import {BaseMilestone} from '../IMilestone';
+import {IPlayer} from '../../IPlayer';
+import {GlobalParameter} from '../../../common/GlobalParameter';
 
 export class Hydrologist extends BaseMilestone {
   constructor() {

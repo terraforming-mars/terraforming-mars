@@ -1,5 +1,5 @@
-import {IAward} from '@/server/awards/IAward';
-import {IPlayer} from '@/server/IPlayer';
+import {IAward} from './IAward';
+import {IPlayer} from '../IPlayer';
 
 export class Miner implements IAward {
   public readonly name = 'Miner';

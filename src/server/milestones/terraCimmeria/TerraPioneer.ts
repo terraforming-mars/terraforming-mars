@@ -1,8 +1,8 @@
-import {IPlayer} from '@/server/IPlayer';
-import {TileType} from '@/common/TileType';
-import {SpaceType} from '@/common/boards/SpaceType';
-import {BaseMilestone} from '@/server/milestones/IMilestone';
-import {Board} from '@/server/boards/Board';
+import {IPlayer} from '../../IPlayer';
+import {TileType} from '../../../common/TileType';
+import {SpaceType} from '../../../common/boards/SpaceType';
+import {BaseMilestone} from '../IMilestone';
+import {Board} from '../../boards/Board';
 
 export class TerraPioneer extends BaseMilestone {
   constructor() {

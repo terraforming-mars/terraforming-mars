@@ -1,13 +1,13 @@
-import {Tag} from '@/common/cards/Tag';
-import {CardName} from '@/common/cards/CardName';
-import {CardType} from '@/common/cards/CardType';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {ActiveCorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {digit} from '@/server/cards/Options';
-import {CardResource} from '@/common/CardResource';
-import {IPlayer} from '@/server/IPlayer';
-import {isIProjectCard} from '@/server/cards/IProjectCard';
-import {ICard} from '@/server/cards/ICard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {CardRenderer} from '../render/CardRenderer';
+import {ActiveCorporationCard} from '../corporation/CorporationCard';
+import {digit} from '../Options';
+import {CardResource} from '../../../common/CardResource';
+import {IPlayer} from '../../IPlayer';
+import {isIProjectCard} from '../IProjectCard';
+import {ICard} from '../ICard';
 
 export class ArboristCollective extends ActiveCorporationCard {
   constructor() {

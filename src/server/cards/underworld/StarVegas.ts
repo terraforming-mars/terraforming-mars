@@ -1,14 +1,14 @@
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {CardType} from '@/common/cards/CardType';
-import {Card} from '@/server/cards/Card';
-import {IPlayer} from '@/server/IPlayer';
-import {SpaceName} from '@/common/boards/SpaceName';
-import {PlaceCityTile} from '@/server/deferredActions/PlaceCityTile';
-import {Space} from '@/server/boards/Space';
-import {Resource} from '@/common/Resource';
-import {all} from '@/server/cards/Options';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {CardType} from '../../../common/cards/CardType';
+import {Card} from '../Card';
+import {IPlayer} from '../../IPlayer';
+import {SpaceName} from '../../../common/boards/SpaceName';
+import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
+import {Space} from '../../boards/Space';
+import {Resource} from '../../../common/Resource';
+import {all} from '../Options';
 
 const SPACE_CITIES = [
   SpaceName.GANYMEDE_COLONY,

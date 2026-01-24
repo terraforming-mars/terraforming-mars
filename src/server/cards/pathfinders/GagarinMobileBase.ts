@@ -1,16 +1,16 @@
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {IPlayer} from '@/server/IPlayer';
-import {SpaceType} from '@/common/boards/SpaceType';
-import {Tag} from '@/common/cards/Tag';
-import {Space} from '@/server/boards/Space';
-import {SelectSpace} from '@/server/inputs/SelectSpace';
-import {IActionCard} from '@/server/cards/ICard';
-import {BoardType} from '@/server/boards/BoardType';
-import {Board} from '@/server/boards/Board';
-import {message} from '@/server/logs/MessageBuilder';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {IPlayer} from '../../IPlayer';
+import {SpaceType} from '../../../common/boards/SpaceType';
+import {Tag} from '../../../common/cards/Tag';
+import {Space} from '../../boards/Space';
+import {SelectSpace} from '../../inputs/SelectSpace';
+import {IActionCard} from '../ICard';
+import {BoardType} from '../../boards/BoardType';
+import {Board} from '../../boards/Board';
+import {message} from '../../logs/MessageBuilder';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
 export class GagarinMobileBase extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {

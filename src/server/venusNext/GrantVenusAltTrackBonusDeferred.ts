@@ -1,10 +1,10 @@
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectCard} from '@/server/inputs/SelectCard';
-import {DeferredAction} from '@/server/deferredActions/DeferredAction';
-import {Priority} from '@/server/deferredActions/Priority';
-import {IPlayer} from '@/server/IPlayer';
-import {GainResources} from '@/server/inputs/GainResources';
-import {message} from '@/server/logs/MessageBuilder';
+import {OrOptions} from '../inputs/OrOptions';
+import {SelectCard} from '../inputs/SelectCard';
+import {DeferredAction} from '../deferredActions/DeferredAction';
+import {Priority} from '../deferredActions/Priority';
+import {IPlayer} from '../IPlayer';
+import {GainResources} from '../inputs/GainResources';
+import {message} from '../logs/MessageBuilder';
 
 export class GrantVenusAltTrackBonusDeferred extends DeferredAction {
   constructor(

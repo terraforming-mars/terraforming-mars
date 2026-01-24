@@ -1,15 +1,15 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Card} from '@/server/cards/Card';
-import {CardName} from '@/common/cards/CardName';
-import {CardType} from '@/common/cards/CardType';
-import {Tag} from '@/common/cards/Tag';
-import {IPlayer} from '@/server/IPlayer';
-import {SelectCard} from '@/server/inputs/SelectCard';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Size} from '@/common/cards/render/Size';
-import {SerializedCard} from '@/server/SerializedCard';
-import {newProjectCard} from '@/server/createCard';
+import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Tag} from '../../../common/cards/Tag';
+import {IPlayer} from '../../IPlayer';
+import {SelectCard} from '../../inputs/SelectCard';
+import {OrOptions} from '../../inputs/OrOptions';
+import {CardRenderer} from '../render/CardRenderer';
+import {Size} from '../../../common/cards/render/Size';
+import {SerializedCard} from '../../SerializedCard';
+import {newProjectCard} from '../../createCard';
 
 export class SelfReplicatingRobots extends Card implements IProjectCard {
   constructor() {

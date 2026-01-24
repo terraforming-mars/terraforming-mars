@@ -1,14 +1,14 @@
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {IPlayer} from '@/server/IPlayer';
-import {IActionCard} from '@/server/cards/ICard';
-import {Units} from '@/common/Units';
-import {sum} from '@/common/utils/utils';
-import {AndOptions} from '@/server/inputs/AndOptions';
-import {SelectCard} from '@/server/inputs/SelectCard';
-import {SelectResource} from '@/server/inputs/SelectResource';
-import {PathfindersExpansion} from '@/server/pathfinders/PathfindersExpansion';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {PreludeCard} from '../prelude/PreludeCard';
+import {IPlayer} from '../../IPlayer';
+import {IActionCard} from '../ICard';
+import {Units} from '../../../common/Units';
+import {sum} from '../../../common/utils/utils';
+import {AndOptions} from '../../inputs/AndOptions';
+import {SelectCard} from '../../inputs/SelectCard';
+import {SelectResource} from '../../inputs/SelectResource';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export class FocusedOrganization extends PreludeCard implements IActionCard {
   constructor() {

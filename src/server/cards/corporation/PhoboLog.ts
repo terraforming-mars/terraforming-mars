@@ -1,10 +1,10 @@
-import {Tag} from '@/common/cards/Tag';
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Size} from '@/common/cards/render/Size';
-import {digit} from '@/server/cards/Options';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CorporationCard} from './CorporationCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Size} from '../../../common/cards/render/Size';
+import {digit} from '../Options';
+import {ICorporationCard} from './ICorporationCard';
 
 export class PhoboLog extends CorporationCard implements ICorporationCard {
   constructor() {

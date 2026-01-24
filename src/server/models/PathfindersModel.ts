@@ -1,5 +1,5 @@
-import {PathfindersModel} from '@/common/models/PathfindersModel';
-import {IGame} from '@/server/IGame';
+import {PathfindersModel} from '../../common/models/PathfindersModel';
+import {IGame} from '../IGame';
 
 export function createPathfindersModel(game: IGame): PathfindersModel | undefined {
   if (game.pathfindersData === undefined) return undefined;

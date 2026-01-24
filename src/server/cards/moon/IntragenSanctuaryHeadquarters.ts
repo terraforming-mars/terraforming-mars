@@ -1,13 +1,13 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {Tag} from '@/common/cards/Tag';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CardResource} from '@/common/CardResource';
-import {all} from '@/server/cards/Options';
-import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
-import {ICard} from '@/server/cards/ICard';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {Tag} from '../../../common/cards/Tag';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardResource} from '../../../common/CardResource';
+import {all} from '../Options';
+import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
+import {ICard} from '../ICard';
 
 export class IntragenSanctuaryHeadquarters extends CorporationCard implements ICorporationCard {
   constructor() {

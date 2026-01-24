@@ -1,9 +1,9 @@
-import {ICard} from '@/server/cards/ICard';
-import {CanAffordOptions, IPlayer} from '@/server/IPlayer';
-import {Resource} from '@/common/Resource';
-import {Units} from '@/common/Units';
-import {CardType} from '@/common/cards/CardType';
-import {AdditionalProjectCosts} from '@/common/cards/Types';
+import {ICard} from './ICard';
+import {CanAffordOptions, IPlayer} from '../IPlayer';
+import {Resource} from '../../common/Resource';
+import {Units} from '../../common/Units';
+import {CardType} from '../../common/cards/CardType';
+import {AdditionalProjectCosts} from '../../common/cards/Types';
 
 export interface IProjectCard extends ICard {
   canPlay(player: IPlayer, canAffordOptions?: CanAffordOptions): boolean;

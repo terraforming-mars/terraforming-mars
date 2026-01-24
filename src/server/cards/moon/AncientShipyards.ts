@@ -1,12 +1,12 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {CardType} from '@/common/cards/CardType';
-import {Tag} from '@/common/cards/Tag';
-import {CardResource} from '@/common/CardResource';
-import {Resource} from '@/common/Resource';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Card} from '@/server/cards/Card';
-import {all} from '@/server/cards/Options';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {CardType} from '../../../common/cards/CardType';
+import {Tag} from '../../../common/cards/Tag';
+import {CardResource} from '../../../common/CardResource';
+import {Resource} from '../../../common/Resource';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {all} from '../Options';
 
 export class AncientShipyards extends Card {
   constructor() {

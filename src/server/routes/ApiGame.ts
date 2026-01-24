@@ -1,11 +1,11 @@
-import * as responses from '@/server/server/responses';
-import {Handler} from '@/server/routes/Handler';
-import {Context} from '@/server/routes/IHandler';
-import {Server} from '@/server/models/ServerModel';
-import {isGameId} from '@/common/Types';
-import {IGame} from '@/server/IGame';
-import {Request} from '@/server/Request';
-import {Response} from '@/server/Response';
+import * as responses from '../server/responses';
+import {Handler} from './Handler';
+import {Context} from './IHandler';
+import {Server} from '../models/ServerModel';
+import {isGameId} from '../../common/Types';
+import {IGame} from '../IGame';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 /**
  * Returns a light view of a game.

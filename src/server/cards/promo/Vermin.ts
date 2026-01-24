@@ -1,16 +1,16 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {ActionCard} from '@/server/cards/ActionCard';
-import {CardType} from '@/common/cards/CardType';
-import {CardResource} from '@/common/CardResource';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {all} from '@/server/cards/Options';
-import {IPlayer} from '@/server/IPlayer';
-import {Board} from '@/server/boards/Board';
-import {Space} from '@/server/boards/Space';
-import {IActionCard} from '@/server/cards/ICard';
-import {vermin} from '@/server/cards/render/DynamicVictoryPoints';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {ActionCard} from '../ActionCard';
+import {CardType} from '../../../common/cards/CardType';
+import {CardResource} from '../../../common/CardResource';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {all} from '../Options';
+import {IPlayer} from '../../IPlayer';
+import {Board} from '../../boards/Board';
+import {Space} from '../../boards/Space';
+import {IActionCard} from '../ICard';
+import {vermin} from '../render/DynamicVictoryPoints';
 
 export class Vermin extends ActionCard implements IProjectCard, IActionCard {
   constructor() {

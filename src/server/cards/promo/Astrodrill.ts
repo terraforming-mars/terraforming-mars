@@ -1,18 +1,18 @@
-import {Tag} from '@/common/cards/Tag';
-import {IPlayer} from '@/server/IPlayer';
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {IActionCard} from '@/server/cards/ICard';
-import {CardName} from '@/common/cards/CardName';
-import {CardResource} from '@/common/CardResource';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {SelectCard} from '@/server/inputs/SelectCard';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {LogHelper} from '@/server/LogHelper';
-import {Resource} from '@/common/Resource';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Size} from '@/common/cards/render/Size';
-import {digit} from '@/server/cards/Options';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {Tag} from '../../../common/cards/Tag';
+import {IPlayer} from '../../IPlayer';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {IActionCard} from '../ICard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardResource} from '../../../common/CardResource';
+import {SelectOption} from '../../inputs/SelectOption';
+import {SelectCard} from '../../inputs/SelectCard';
+import {OrOptions} from '../../inputs/OrOptions';
+import {LogHelper} from '../../LogHelper';
+import {Resource} from '../../../common/Resource';
+import {CardRenderer} from '../render/CardRenderer';
+import {Size} from '../../../common/cards/render/Size';
+import {digit} from '../Options';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
 export class Astrodrill extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {

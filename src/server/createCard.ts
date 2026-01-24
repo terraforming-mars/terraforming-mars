@@ -1,11 +1,11 @@
-import {ICard} from '@/server/cards/ICard';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardManifest, ModuleManifest} from '@/server/cards/ModuleManifest';
-import {CardName} from '@/common/cards/CardName';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
-import {IPreludeCard} from '@/server/cards/prelude/IPreludeCard';
-import {ICeoCard} from '@/server/cards/ceos/ICeoCard';
-import {ALL_MODULE_MANIFESTS} from '@/server/cards/AllManifests';
+import {ICard} from './cards/ICard';
+import {IProjectCard} from './cards/IProjectCard';
+import {CardManifest, ModuleManifest} from './cards/ModuleManifest';
+import {CardName} from '../common/cards/CardName';
+import {ICorporationCard} from './cards/corporation/ICorporationCard';
+import {IPreludeCard} from './cards/prelude/IPreludeCard';
+import {ICeoCard} from './cards/ceos/ICeoCard';
+import {ALL_MODULE_MANIFESTS} from './cards/AllManifests';
 
 const CARD_RENAMES = new Map<string, CardName>([
   // When renaming a card, add the old name here (like the example below), and add a TODO (like the example below)

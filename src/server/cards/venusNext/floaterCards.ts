@@ -1,4 +1,4 @@
-import {CardName} from '@/common/cards/CardName';
+import {CardName} from '../../../common/cards/CardName';
 
 export const floaterCards: ReadonlySet<CardName> = new Set([
   // Venus

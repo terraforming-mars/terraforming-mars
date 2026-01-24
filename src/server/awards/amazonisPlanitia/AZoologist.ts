@@ -1,6 +1,6 @@
-import {IPlayer} from '@/server/IPlayer';
-import {CardResource} from '@/common/CardResource';
-import {IAward} from '@/server/awards/IAward';
+import {IPlayer} from '../../IPlayer';
+import {CardResource} from '../../../common/CardResource';
+import {IAward} from '../IAward';
 
 export class AZoologist implements IAward {
   public readonly name = 'A. Zoologist';

@@ -1,12 +1,12 @@
-import {CardName} from '@/common/cards/CardName';
-import {CardType} from '@/common/cards/CardType';
-import {Tag} from '@/common/cards/Tag';
-import {NamedMoonSpaces} from '@/common/moon/NamedMoonSpaces';
-import {TileType} from '@/common/TileType';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {IActionCard} from '@/server/cards/ICard';
-import {ActionCard} from '@/server/cards/ActionCard';
-import {all} from '@/server/cards/Options';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Tag} from '../../../common/cards/Tag';
+import {NamedMoonSpaces} from '../../../common/moon/NamedMoonSpaces';
+import {TileType} from '../../../common/TileType';
+import {CardRenderer} from '../render/CardRenderer';
+import {IActionCard} from '../ICard';
+import {ActionCard} from '../ActionCard';
+import {all} from '../Options';
 
 export class LunaTradeStation extends ActionCard implements IActionCard {
   constructor() {

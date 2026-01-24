@@ -1,14 +1,14 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {PlayerInput} from '@/server/PlayerInput';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CeoCard} from '@/server/cards/ceos/CeoCard';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {PlayerInput} from '../../PlayerInput';
+import {CardRenderer} from '../render/CardRenderer';
+import {CeoCard} from './CeoCard';
 
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {ALL_RESOURCES, Resource} from '@/common/Resource';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {SelectAmount} from '@/server/inputs/SelectAmount';
-import {message} from '@/server/logs/MessageBuilder';
+import {OrOptions} from '../../inputs/OrOptions';
+import {ALL_RESOURCES, Resource} from '../../../common/Resource';
+import {SelectOption} from '../../inputs/SelectOption';
+import {SelectAmount} from '../../inputs/SelectAmount';
+import {message} from '../../logs/MessageBuilder';
 
 export class Ryu extends CeoCard {
   constructor() {

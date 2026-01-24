@@ -1,10 +1,10 @@
-import {CardName} from '@/common/cards/CardName';
-import {CardType} from '@/common/cards/CardType';
-import {Tag} from '@/common/cards/Tag';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {ActionCard} from '@/server/cards/ActionCard';
-import {CardResource} from '@/common/CardResource';
-import {IActionCard} from '@/server/cards/ICard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Tag} from '../../../common/cards/Tag';
+import {CardRenderer} from '../render/CardRenderer';
+import {ActionCard} from '../ActionCard';
+import {CardResource} from '../../../common/CardResource';
+import {IActionCard} from '../ICard';
 
 export class LunaArchives extends ActionCard implements IActionCard {
   constructor() {

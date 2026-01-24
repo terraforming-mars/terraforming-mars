@@ -1,15 +1,15 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {CardType} from '@/common/cards/CardType';
-import {Tag} from '@/common/cards/Tag';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
-import {Card} from '@/server/cards/Card';
-import {TileType} from '@/common/TileType';
-import {MoonExpansion} from '@/server/moon/MoonExpansion';
-import {PlaceMoonHabitatTile} from '@/server/moon/PlaceMoonHabitatTile';
-import {Space} from '@/server/boards/Space';
-import {MoonData} from '@/server/moon/MoonData';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {CardType} from '../../../common/cards/CardType';
+import {Tag} from '../../../common/cards/Tag';
+import {CardRenderer} from '../render/CardRenderer';
+import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
+import {Card} from '../Card';
+import {TileType} from '../../../common/TileType';
+import {MoonExpansion} from '../../moon/MoonExpansion';
+import {PlaceMoonHabitatTile} from '../../moon/PlaceMoonHabitatTile';
+import {Space} from '../../boards/Space';
+import {MoonData} from '../../moon/MoonData';
 
 export class LunaEcumenopolis extends Card {
   constructor() {

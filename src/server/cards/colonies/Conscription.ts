@@ -1,11 +1,11 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardType} from '@/common/cards/CardType';
-import {Tag} from '@/common/cards/Tag';
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {Card} from '@/server/cards/Card';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Size} from '@/common/cards/render/Size';
+import {IProjectCard} from '../IProjectCard';
+import {CardType} from '../../../common/cards/CardType';
+import {Tag} from '../../../common/cards/Tag';
+import {IPlayer} from '../../IPlayer';
+import {CardName} from '../../../common/cards/CardName';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {Size} from '../../../common/cards/render/Size';
 
 export class Conscription extends Card implements IProjectCard {
   constructor() {

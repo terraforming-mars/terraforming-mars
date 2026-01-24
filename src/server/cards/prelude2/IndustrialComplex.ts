@@ -1,11 +1,11 @@
-import {Tag} from '@/common/cards/Tag';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {IPlayer} from '@/server/IPlayer';
-import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {Units} from '@/common/Units';
-import {PathfindersExpansion} from '@/server/pathfinders/PathfindersExpansion';
+import {Tag} from '../../../common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {IPlayer} from '../../IPlayer';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {PreludeCard} from '../prelude/PreludeCard';
+import {Units} from '../../../common/Units';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export class IndustrialComplex extends PreludeCard {
   constructor() {

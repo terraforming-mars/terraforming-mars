@@ -1,12 +1,12 @@
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {IPlayer} from '@/server/IPlayer';
-import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
-import {intersection} from '@/common/utils/utils';
-import {PlaceOceanTile} from '@/server/deferredActions/PlaceOceanTile';
-import {ClaimSpacesDeferred} from '@/server/underworld/ClaimSpacesDeferred';
+import {PreludeCard} from '../prelude/PreludeCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {IPlayer} from '../../IPlayer';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
+import {intersection} from '../../../common/utils/utils';
+import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
+import {ClaimSpacesDeferred} from '../../underworld/ClaimSpacesDeferred';
 
 export class CentralReservoir extends PreludeCard {
   constructor() {

@@ -1,16 +1,16 @@
-import {CardType} from '@/common/cards/CardType';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {CardResource} from '@/common/CardResource';
-import {IActionCard} from '@/server/cards/ICard';
-import {Card} from '@/server/cards/Card';
-import {IPlayer} from '@/server/IPlayer';
-import {Resource} from '@/common/Resource';
-import {RemoveResourcesFromCard} from '@/server/deferredActions/RemoveResourcesFromCard';
-import {SelectClaimedUndergroundToken} from '@/server/inputs/SelectClaimedUndergroundToken';
-import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
+import {CardType} from '../../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {CardResource} from '../../../common/CardResource';
+import {IActionCard} from '../ICard';
+import {Card} from '../Card';
+import {IPlayer} from '../../IPlayer';
+import {Resource} from '../../../common/Resource';
+import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
+import {SelectClaimedUndergroundToken} from '../../inputs/SelectClaimedUndergroundToken';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
 export class MicroGeodesics extends Card implements IProjectCard, IActionCard {
   constructor() {

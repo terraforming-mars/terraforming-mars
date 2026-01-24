@@ -1,19 +1,19 @@
-import {CardType} from '@/common/cards/CardType';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Card} from '@/server/cards/Card';
-import {IPlayer} from '@/server/IPlayer';
-import {RemoveResourcesFromCard} from '@/server/deferredActions/RemoveResourcesFromCard';
-import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
-import {AddResourcesToCard} from '@/server/deferredActions/AddResourcesToCard';
-import {Tag} from '@/common/cards/Tag';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {ALL_RESOURCES} from '@/common/Resource';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {message} from '@/server/logs/MessageBuilder';
-import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
-import {IActionCard} from '@/server/cards/ICard';
+import {CardType} from '../../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {IPlayer} from '../../IPlayer';
+import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
+import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {Tag} from '../../../common/cards/Tag';
+import {OrOptions} from '../../inputs/OrOptions';
+import {ALL_RESOURCES} from '../../../common/Resource';
+import {SelectOption} from '../../inputs/SelectOption';
+import {message} from '../../logs/MessageBuilder';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {IActionCard} from '../ICard';
 
 export class CorporateTheft extends Card implements IProjectCard, IActionCard {
   constructor() {

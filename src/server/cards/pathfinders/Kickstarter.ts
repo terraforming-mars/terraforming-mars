@@ -1,13 +1,13 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {IPlayer} from '@/server/IPlayer';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {DeclareCloneTag} from '@/server/pathfinders/DeclareCloneTag';
-import {ICloneTagCard} from '@/server/cards/pathfinders/ICloneTagCard';
-import {PathfindersExpansion} from '@/server/pathfinders/PathfindersExpansion';
+import {IProjectCard} from '../IProjectCard';
+import {IPlayer} from '../../IPlayer';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
+import {ICloneTagCard} from './ICloneTagCard';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export class Kickstarter extends Card implements IProjectCard, ICloneTagCard {
   constructor() {

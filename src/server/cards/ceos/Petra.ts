@@ -1,14 +1,14 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {PlayerInput} from '@/server/PlayerInput';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CeoCard} from '@/server/cards/ceos/CeoCard';
-import {DELEGATES_FOR_NEUTRAL_PLAYER} from '@/common/constants';
-import {Turmoil} from '@/server/turmoil/Turmoil';
-import {SelectParty} from '@/server/inputs/SelectParty';
-import {Resource} from '@/common/Resource';
-import {Size} from '@/common/cards/render/Size';
-import {toName} from '@/common/utils/utils';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {PlayerInput} from '../../PlayerInput';
+import {CardRenderer} from '../render/CardRenderer';
+import {CeoCard} from './CeoCard';
+import {DELEGATES_FOR_NEUTRAL_PLAYER} from '../../../common/constants';
+import {Turmoil} from '../../turmoil/Turmoil';
+import {SelectParty} from '../../inputs/SelectParty';
+import {Resource} from '../../../common/Resource';
+import {Size} from '../../../common/cards/render/Size';
+import {toName} from '../../../common/utils/utils';
 
 export class Petra extends CeoCard {
   constructor() {

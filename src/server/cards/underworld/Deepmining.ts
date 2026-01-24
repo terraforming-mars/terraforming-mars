@@ -1,16 +1,16 @@
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {IPlayer} from '@/server/IPlayer';
-import {Space} from '@/server/boards/Space';
-import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Resource} from '@/common/Resource';
-import {SelectSpace} from '@/server/inputs/SelectSpace';
-import {Tag} from '@/common/cards/Tag';
-import {Units} from '@/common/Units';
-import {UndergroundResourceToken} from '@/common/underworld/UndergroundResourceToken';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {IPlayer} from '../../IPlayer';
+import {Space} from '../../boards/Space';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {IProjectCard} from '../../cards/IProjectCard';
+import {Resource} from '../../../common/Resource';
+import {SelectSpace} from '../../inputs/SelectSpace';
+import {Tag} from '../../../common/cards/Tag';
+import {Units} from '../../../common/Units';
+import {UndergroundResourceToken} from '../../../common/underworld/UndergroundResourceToken';
 
 export class Deepmining extends Card implements IProjectCard {
   public readonly title = 'Select an identified space with a steel or titanium bonus';

@@ -1,17 +1,17 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Space} from '@/server/boards/Space';
-import {Tag} from '@/common/cards/Tag';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {Resource} from '@/common/Resource';
-import {Priority} from '@/server/deferredActions/Priority';
-import {GainResources} from '@/server/deferredActions/GainResources';
-import {Board} from '@/server/boards/Board';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Size} from '@/common/cards/render/Size';
-import {all} from '@/server/cards/Options';
+import {IProjectCard} from '../IProjectCard';
+import {Space} from '../../boards/Space';
+import {Tag} from '../../../common/cards/Tag';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
+import {CardName} from '../../../common/cards/CardName';
+import {Resource} from '../../../common/Resource';
+import {Priority} from '../../deferredActions/Priority';
+import {GainResources} from '../../deferredActions/GainResources';
+import {Board} from '../../boards/Board';
+import {CardRenderer} from '../render/CardRenderer';
+import {Size} from '../../../common/cards/render/Size';
+import {all} from '../Options';
 
 export class RoverConstruction extends Card implements IProjectCard {
   constructor() {

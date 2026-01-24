@@ -1,6 +1,6 @@
-import {Tag} from '@/common/cards/Tag';
-import {BaseMilestone} from '@/server/milestones/IMilestone';
-import {IPlayer} from '@/server/IPlayer';
+import {Tag} from '../../common/cards/Tag';
+import {BaseMilestone} from '../milestones/IMilestone';
+import {IPlayer} from '../IPlayer';
 
 export class OneGiantStep extends BaseMilestone {
   constructor() {

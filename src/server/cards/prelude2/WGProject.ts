@@ -1,11 +1,11 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardType} from '@/common/cards/CardType';
-import {Card} from '@/server/cards/Card';
-import {Tag} from '@/common/cards/Tag';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {PreludesExpansion} from '@/server/preludes/PreludesExpansion';
-import {IPlayer} from '@/server/IPlayer';
+import {IProjectCard} from '../IProjectCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Card} from '../Card';
+import {Tag} from '../../../common/cards/Tag';
+import {CardRenderer} from '../render/CardRenderer';
+import {PreludesExpansion} from '../../preludes/PreludesExpansion';
+import {IPlayer} from '../../IPlayer';
 
 
 export class WGProject extends Card implements IProjectCard {

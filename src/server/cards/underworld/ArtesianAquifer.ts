@@ -1,12 +1,12 @@
-import {CardType} from '@/common/cards/CardType';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Card} from '@/server/cards/Card';
-import {Tag} from '@/common/cards/Tag';
-import {IPlayer} from '@/server/IPlayer';
-import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
-import {SelectSpace} from '@/server/inputs/SelectSpace';
+import {CardType} from '../../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {Tag} from '../../../common/cards/Tag';
+import {IPlayer} from '../../IPlayer';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
+import {SelectSpace} from '../../inputs/SelectSpace';
 
 export class ArtesianAquifer extends Card implements IProjectCard {
   constructor() {

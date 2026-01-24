@@ -1,11 +1,11 @@
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardResource} from '@/common/CardResource';
-import {CardType} from '@/common/cards/CardType';
-import {ActionCard} from '@/server/cards/ActionCard';
-import {digit} from '@/server/cards/Options';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {IProjectCard} from '../IProjectCard';
+import {CardResource} from '../../../common/CardResource';
+import {CardType} from '../../../common/cards/CardType';
+import {ActionCard} from '../ActionCard';
+import {digit} from '../Options';
 
 export class SpaceWargames extends ActionCard implements IProjectCard {
   constructor() {

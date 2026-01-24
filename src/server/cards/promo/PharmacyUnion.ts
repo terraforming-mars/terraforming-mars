@@ -1,18 +1,18 @@
-import {Tag} from '@/common/cards/Tag';
-import {IPlayer} from '@/server/IPlayer';
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardResource} from '@/common/CardResource';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {ICard} from '@/server/cards/ICard';
-import {Priority} from '@/server/deferredActions/Priority';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Size} from '@/common/cards/render/Size';
-import {Resource} from '@/common/Resource';
-import {all, digit} from '@/server/cards/Options';
-import {SerializedCard} from '@/server/SerializedCard';
+import {Tag} from '../../../common/cards/Tag';
+import {IPlayer} from '../../IPlayer';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardResource} from '../../../common/CardResource';
+import {SelectOption} from '../../inputs/SelectOption';
+import {OrOptions} from '../../inputs/OrOptions';
+import {ICard} from '../ICard';
+import {Priority} from '../../deferredActions/Priority';
+import {CardRenderer} from '../render/CardRenderer';
+import {Size} from '../../../common/cards/render/Size';
+import {Resource} from '../../../common/Resource';
+import {all, digit} from '../Options';
+import {SerializedCard} from '../../SerializedCard';
 
 export class PharmacyUnion extends CorporationCard implements ICorporationCard {
   constructor() {

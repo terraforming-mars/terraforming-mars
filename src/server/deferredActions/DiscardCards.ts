@@ -1,10 +1,10 @@
-import {IPlayer} from '@/server/IPlayer';
-import {SelectCard} from '@/server/inputs/SelectCard';
-import {DeferredAction} from '@/server/deferredActions/DeferredAction';
-import {Priority} from '@/server/deferredActions/Priority';
-import {Message} from '@/common/logs/Message';
-import {message} from '@/server/logs/MessageBuilder';
-import {IProjectCard} from '@/server/cards/IProjectCard';
+import {IPlayer} from '../IPlayer';
+import {SelectCard} from '../inputs/SelectCard';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
+import {Message} from '../../common/logs/Message';
+import {message} from '../logs/MessageBuilder';
+import {IProjectCard} from '../cards/IProjectCard';
 
 export class DiscardCards extends DeferredAction<ReadonlyArray<IProjectCard>> {
   constructor(

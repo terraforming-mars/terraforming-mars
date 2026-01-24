@@ -1,15 +1,15 @@
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
-import {Tag} from '@/common/cards/Tag';
-import {IPlayer} from '@/server/IPlayer';
-import {Resource} from '@/common/Resource';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {digit} from '@/server/cards/Options';
-import {ICard} from '@/server/cards/ICard';
-import {MAX_TEMPERATURE} from '@/common/constants';
-import {Size} from '@/common/cards/render/Size';
-import {Units} from '@/common/Units';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {Tag} from '../../../common/cards/Tag';
+import {IPlayer} from '../../IPlayer';
+import {Resource} from '../../../common/Resource';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {digit} from '../Options';
+import {ICard} from '../ICard';
+import {MAX_TEMPERATURE} from '../../../common/constants';
+import {Size} from '../../../common/cards/render/Size';
+import {Units} from '../../../common/Units';
 
 export class Ambient extends CorporationCard implements ICorporationCard {
   constructor() {

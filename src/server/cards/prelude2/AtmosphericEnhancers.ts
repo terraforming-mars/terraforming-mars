@@ -1,13 +1,13 @@
-import {CanAffordOptions, IPlayer} from '@/server/IPlayer';
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {CardResource} from '@/common/CardResource';
-import {TRSource} from '@/common/cards/TRSource';
-import {digit} from '@/server/cards/Options';
-import {floaterCards} from '@/server/cards/venusNext/floaterCards';
-import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
+import {PreludeCard} from '../prelude/PreludeCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {CardResource} from '../../../common/CardResource';
+import {TRSource} from '../../../common/cards/TRSource';
+import {digit} from '../Options';
+import {floaterCards} from '../venusNext/floaterCards';
+import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
 export class AtmosphericEnhancers extends PreludeCard {
   constructor() {

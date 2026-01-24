@@ -1,8 +1,8 @@
-import {PartyName} from '@/common/turmoil/PartyName';
-import {IGame} from '@/server/IGame';
-import {IBonus} from '@/server/turmoil/Bonus';
-import {IPolicy} from '@/server/turmoil/Policy';
-import {Delegate} from '@/server/turmoil/Turmoil';
+import {PartyName} from '../../../common/turmoil/PartyName';
+import {IGame} from '../../IGame';
+import {IBonus} from '../Bonus';
+import {IPolicy} from '../Policy';
+import {Delegate} from '../Turmoil';
 import {MultiSet} from 'mnemonist';
 
 export interface IParty {

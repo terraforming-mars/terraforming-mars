@@ -1,8 +1,8 @@
-import {Space} from '@/server/boards/Space';
-import {IPlayer} from '@/server/IPlayer';
-import {BasePlaceMoonTile} from '@/server/moon/BasePlaceMoonTile';
-import {MoonData} from '@/server/moon/MoonData';
-import {MoonExpansion} from '@/server/moon/MoonExpansion';
+import {Space} from '../boards/Space';
+import {IPlayer} from '../IPlayer';
+import {BasePlaceMoonTile} from './BasePlaceMoonTile';
+import {MoonData} from './MoonData';
+import {MoonExpansion} from './MoonExpansion';
 
 export class PlaceMoonMineTile extends BasePlaceMoonTile {
   constructor(

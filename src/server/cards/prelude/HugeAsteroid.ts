@@ -1,9 +1,9 @@
-import {IPlayer} from '@/server/IPlayer';
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {CardName} from '@/common/cards/CardName';
-import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {PathfindersExpansion} from '@/server/pathfinders/PathfindersExpansion';
+import {IPlayer} from '../../IPlayer';
+import {PreludeCard} from './PreludeCard';
+import {CardName} from '../../../common/cards/CardName';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {CardRenderer} from '../render/CardRenderer';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export class HugeAsteroid extends PreludeCard {
   constructor() {

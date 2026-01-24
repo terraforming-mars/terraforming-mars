@@ -1,13 +1,13 @@
-import {Tag} from '@/common/cards/Tag';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {IPlayer} from '@/server/IPlayer';
-import {digit} from '@/server/cards/Options';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {IActionCard} from '@/server/cards/ICard';
-import {PlayerInput} from '@/server/PlayerInput';
-import {SelectCard} from '@/server/inputs/SelectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {IPlayer} from '../../IPlayer';
+import {digit} from '../Options';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {IActionCard} from '../ICard';
+import {PlayerInput} from '../../PlayerInput';
+import {SelectCard} from '../../inputs/SelectCard';
 
 export class CeresTechMarket extends Card implements IActionCard {
   constructor() {

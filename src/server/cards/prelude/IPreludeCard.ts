@@ -1,6 +1,6 @@
-import {ICard} from '@/server/cards/ICard';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardType} from '@/common/cards/CardType';
+import {ICard} from '../ICard';
+import {IProjectCard} from '../IProjectCard';
+import {CardType} from '../../../common/cards/CardType';
 
 export interface IPreludeCard extends IProjectCard {
   startingMegaCredits: number;

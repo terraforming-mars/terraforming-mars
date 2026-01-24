@@ -1,11 +1,11 @@
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {IPlayer} from '@/server/IPlayer';
-import {PlayerInput} from '@/server/PlayerInput';
-import {Turmoil} from '@/server/turmoil/Turmoil';
-import {ChooseAlliedParty} from '@/server/deferredActions/ChooseAlliedParty';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {IPlayer} from '../../../server/IPlayer';
+import {PlayerInput} from '../../../server/PlayerInput';
+import {Turmoil} from '../../turmoil/Turmoil';
+import {ChooseAlliedParty} from '../../../server/deferredActions/ChooseAlliedParty';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
 export class MarsFrontierAlliance extends CorporationCard implements ICorporationCard {
   constructor() {

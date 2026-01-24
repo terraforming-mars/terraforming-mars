@@ -1,13 +1,13 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {IActionCard} from '@/server/cards/ICard';
-import {IPlayer} from '@/server/IPlayer';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CardResource} from '@/common/CardResource';
-import {Tag} from '@/common/cards/Tag';
-import {SelectCard} from '@/server/inputs/SelectCard';
+import {IProjectCard} from '../IProjectCard';
+import {IActionCard} from '../ICard';
+import {IPlayer} from '../../IPlayer';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardResource} from '../../../common/CardResource';
+import {Tag} from '../../../common/cards/Tag';
+import {SelectCard} from '../../inputs/SelectCard';
 
 export class FloaterUrbanism extends Card implements IProjectCard, IActionCard {
   constructor() {

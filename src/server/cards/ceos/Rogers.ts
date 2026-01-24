@@ -1,12 +1,12 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {PlayerInput} from '@/server/PlayerInput';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CeoCard} from '@/server/cards/ceos/CeoCard';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {PlayerInput} from '../../PlayerInput';
+import {CardRenderer} from '../render/CardRenderer';
+import {CeoCard} from './CeoCard';
 
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {GlobalParameter} from '@/common/GlobalParameter';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {GlobalParameter} from '../../../common/GlobalParameter';
 
 export class Rogers extends CeoCard {
   constructor() {

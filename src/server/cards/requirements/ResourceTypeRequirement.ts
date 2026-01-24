@@ -1,7 +1,7 @@
-import {ALL_RESOURCES} from '@/common/Resource';
-import {IPlayer} from '@/server/IPlayer';
-import {InequalityRequirement} from '@/server/cards/requirements/InequalityRequirement';
-import {RequirementType} from '@/common/cards/RequirementType';
+import {ALL_RESOURCES} from '../../../common/Resource';
+import {IPlayer} from '../../IPlayer';
+import {InequalityRequirement} from './InequalityRequirement';
+import {RequirementType} from '../../../common/cards/RequirementType';
 
 
 /**

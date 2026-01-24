@@ -1,6 +1,6 @@
-import {BoardName} from '@/common/boards/BoardName';
-import {Expansion, EXPANSIONS} from '@/common/cards/GameModule';
-import {GameOptions} from '@/server/game/GameOptions';
+import {BoardName} from '../../common/boards/BoardName';
+import {Expansion, EXPANSIONS} from '../../common/cards/GameModule';
+import {GameOptions} from '../game/GameOptions';
 
 type MAManifestSpec<V> = {
   /** Constructor that a new instance of this MA. */

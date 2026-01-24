@@ -1,17 +1,17 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
 
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {CardName} from '@/common/cards/CardName';
-import {CardResource} from '@/common/CardResource';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {message} from '@/server/logs/MessageBuilder';
-import {ICard} from '@/server/cards/ICard';
-import {Resource} from '@/common/Resource';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {CardName} from '../../../common/cards/CardName';
+import {CardResource} from '../../../common/CardResource';
+import {CardRenderer} from '../render/CardRenderer';
+import {message} from '../../logs/MessageBuilder';
+import {ICard} from '../ICard';
+import {Resource} from '../../../common/Resource';
 
 export class ViralEnhancers extends Card implements IProjectCard {
   constructor() {

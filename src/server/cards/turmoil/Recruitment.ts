@@ -1,12 +1,12 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Card} from '@/server/cards/Card';
-import {CardName} from '@/common/cards/CardName';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
-import {SendDelegateToArea} from '@/server/deferredActions/SendDelegateToArea';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Turmoil} from '@/server/turmoil/Turmoil';
-import {all} from '@/server/cards/Options';
+import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
+import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
+import {CardRenderer} from '../render/CardRenderer';
+import {Turmoil} from '../../turmoil/Turmoil';
+import {all} from '../Options';
 
 export class Recruitment extends Card implements IProjectCard {
   constructor() {

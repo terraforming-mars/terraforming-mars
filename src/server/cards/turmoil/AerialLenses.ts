@@ -1,10 +1,10 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Card} from '@/server/cards/Card';
-import {CardName} from '@/common/cards/CardName';
-import {CardType} from '@/common/cards/CardType';
-import {PartyName} from '@/common/turmoil/PartyName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {all} from '@/server/cards/Options';
+import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {PartyName} from '../../../common/turmoil/PartyName';
+import {CardRenderer} from '../render/CardRenderer';
+import {all} from '../Options';
 
 export class AerialLenses extends Card implements IProjectCard {
   constructor() {

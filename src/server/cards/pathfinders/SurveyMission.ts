@@ -1,14 +1,14 @@
-import {IPlayer} from '@/server/IPlayer';
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {MarsBoard} from '@/server/boards/MarsBoard';
-import {BoardType} from '@/server/boards/BoardType';
-import {Space} from '@/server/boards/Space';
-import {SelectSpace} from '@/server/inputs/SelectSpace';
-import {LogHelper} from '@/server/LogHelper';
-import {digit} from '@/server/cards/Options';
+import {IPlayer} from '../../IPlayer';
+import {PreludeCard} from '../prelude/PreludeCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {MarsBoard} from '../../boards/MarsBoard';
+import {BoardType} from '../../boards/BoardType';
+import {Space} from '../../boards/Space';
+import {SelectSpace} from '../../inputs/SelectSpace';
+import {LogHelper} from '../../LogHelper';
+import {digit} from '../Options';
 
 type Triplet = [Space, Space, Space];
 export class SurveyMission extends PreludeCard {

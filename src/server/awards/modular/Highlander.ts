@@ -1,6 +1,6 @@
-import {IAward} from '@/server/awards/IAward';
-import {IPlayer} from '@/server/IPlayer';
-import {Board} from '@/server/boards/Board';
+import {IAward} from '../IAward';
+import {IPlayer} from '../../IPlayer';
+import {Board} from '../../boards/Board';
 
 export class Highlander implements IAward {
   public readonly name = 'Highlander';

@@ -1,7 +1,7 @@
-import {ColonyName} from '@/common/colonies/ColonyName';
-import {SerializedColony} from '@/server/SerializedColony';
-import {ALL_COLONIES_TILES} from '@/server/colonies/ColonyManifest';
-import {IColony} from '@/server/colonies/IColony';
+import {ColonyName} from '../../common/colonies/ColonyName';
+import {SerializedColony} from '../SerializedColony';
+import {ALL_COLONIES_TILES} from './ColonyManifest';
+import {IColony} from './IColony';
 
 export class ColonyDeserializer {
   public static deserialize(serialized: SerializedColony | ColonyName): IColony | undefined {

@@ -1,16 +1,16 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {SelectSpace} from '@/server/inputs/SelectSpace';
-import {Space} from '@/server/boards/Space';
-import {Resource} from '@/common/Resource';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {SpaceBonus} from '@/common/boards/SpaceBonus';
-import {SelectResourceTypeDeferred} from '@/server/deferredActions/SelectResourceTypeDeferred';
-import {Units} from '@/common/Units';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {SelectSpace} from '../../inputs/SelectSpace';
+import {Space} from '../../boards/Space';
+import {Resource} from '../../../common/Resource';
+import {CardRenderer} from '../render/CardRenderer';
+import {SpaceBonus} from '../../../common/boards/SpaceBonus';
+import {SelectResourceTypeDeferred} from '../../deferredActions/SelectResourceTypeDeferred';
+import {Units} from '../../../common/Units';
 
 export class SpecializedSettlement extends Card implements IProjectCard {
   constructor() {

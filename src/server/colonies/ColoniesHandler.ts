@@ -1,12 +1,12 @@
-import {IGame} from '@/server/IGame';
-import {IColony} from '@/server/colonies/IColony';
-import {ColonyName} from '@/common/colonies/ColonyName';
-import {ICard} from '@/server/cards/ICard';
-import {Tag} from '@/common/cards/Tag';
-import {SelectColony} from '@/server/inputs/SelectColony';
-import {IPlayer} from '@/server/IPlayer';
-import {inplaceRemove} from '@/common/utils/utils';
-import {CardName} from '@/common/cards/CardName';
+import {IGame} from '../IGame';
+import {IColony} from './IColony';
+import {ColonyName} from '../../common/colonies/ColonyName';
+import {ICard} from '../cards/ICard';
+import {Tag} from '../../common/cards/Tag';
+import {SelectColony} from '../inputs/SelectColony';
+import {IPlayer} from '../IPlayer';
+import {inplaceRemove} from '../../common/utils/utils';
+import {CardName} from '../../common/cards/CardName';
 
 export class ColoniesHandler {
   public static getColony(game: IGame, colonyName: ColonyName, includeDiscardedColonies: boolean = false): IColony {

@@ -1,14 +1,14 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {IGame} from '@/server/IGame';
-import {Card} from '@/server/cards/Card';
-import {Size} from '@/common/cards/render/Size';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {SelectColony} from '@/server/inputs/SelectColony';
-import {LogHelper} from '@/server/LogHelper';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
+import {CardName} from '../../../common/cards/CardName';
+import {IGame} from '../../IGame';
+import {Card} from '../Card';
+import {Size} from '../../../common/cards/render/Size';
+import {CardRenderer} from '../render/CardRenderer';
+import {SelectColony} from '../../inputs/SelectColony';
+import {LogHelper} from '../../LogHelper';
 
 export class MarketManipulation extends Card implements IProjectCard {
   constructor() {

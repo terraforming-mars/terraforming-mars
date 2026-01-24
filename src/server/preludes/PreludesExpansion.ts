@@ -1,8 +1,8 @@
-import {inplaceRemove} from '@/common/utils/utils';
-import {Resource} from '@/common/Resource';
-import {CardAction, IPlayer} from '@/server/IPlayer';
-import {IPreludeCard} from '@/server/cards/prelude/IPreludeCard';
-import {SelectCard} from '@/server/inputs/SelectCard';
+import {inplaceRemove} from '../../common/utils/utils';
+import {Resource} from '../../common/Resource';
+import {CardAction, IPlayer} from '../IPlayer';
+import {IPreludeCard} from '../cards/prelude/IPreludeCard';
+import {SelectCard} from '../inputs/SelectCard';
 
 export class PreludesExpansion {
   public static fizzle(player: IPlayer, card: IPreludeCard): void {

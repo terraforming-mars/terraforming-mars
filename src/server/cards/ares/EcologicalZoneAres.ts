@@ -1,10 +1,10 @@
-import {CardName} from '@/common/cards/CardName';
-import {EcologicalZone} from '@/server/cards/base/EcologicalZone';
-import {SpaceBonus} from '@/common/boards/SpaceBonus';
-import {TileType} from '@/common/TileType';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CardResource} from '@/common/CardResource';
-import {Tag} from '@/common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {EcologicalZone} from '../base/EcologicalZone';
+import {SpaceBonus} from '../../../common/boards/SpaceBonus';
+import {TileType} from '../../../common/TileType';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardResource} from '../../../common/CardResource';
+import {Tag} from '../../../common/cards/Tag';
 
 export class EcologicalZoneAres extends EcologicalZone {
   constructor() {

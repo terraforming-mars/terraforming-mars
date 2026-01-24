@@ -1,12 +1,12 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {IActionCard, ICard, isIActionCard, isIHasCheckLoops} from '@/server/cards/ICard';
-import {SelectCard} from '@/server/inputs/SelectCard';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Size} from '@/common/cards/render/Size';
+import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
+import {CardName} from '../../../common/cards/CardName';
+import {IActionCard, ICard, isIActionCard, isIHasCheckLoops} from '../ICard';
+import {SelectCard} from '../../inputs/SelectCard';
+import {CardRenderer} from '../render/CardRenderer';
+import {Size} from '../../../common/cards/render/Size';
 
 export class ProjectInspection extends Card implements IProjectCard {
   constructor() {

@@ -1,11 +1,11 @@
-import * as utils from '@/common/utils/utils'; // Since there's already a sum variable.
-import {Units} from '@/common/Units';
-import {TileType} from '@/common/TileType';
-import {ICard} from '@/server/cards/ICard';
-import {IPlayer} from '@/server/IPlayer';
-import {Countable, CountableUnits} from '@/server/behavior/Countable';
-import {MoonExpansion} from '@/server/moon/MoonExpansion';
-import {CardResource} from '@/common/CardResource';
+import * as utils from '../../common/utils/utils'; // Since there's already a sum variable.
+import {Units} from '../../common/Units';
+import {TileType} from '../../common/TileType';
+import {ICard} from '../cards/ICard';
+import {IPlayer} from '../IPlayer';
+import {Countable, CountableUnits} from './Countable';
+import {MoonExpansion} from '../moon/MoonExpansion';
+import {CardResource} from '../../common/CardResource';
 
 /**
  * Counts things in game state.

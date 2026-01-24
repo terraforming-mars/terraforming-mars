@@ -1,6 +1,6 @@
-import {IAward} from '@/server/awards/IAward';
-import {Board} from '@/server/boards/Board';
-import {IPlayer} from '@/server/IPlayer';
+import {IAward} from '../awards/IAward';
+import {Board} from '../boards/Board';
+import {IPlayer} from '../IPlayer';
 
 export class LunarMagnate implements IAward {
   public readonly name = 'Lunar Magnate';

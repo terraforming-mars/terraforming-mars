@@ -1,9 +1,9 @@
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {IPlayer} from '@/server/IPlayer';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {PartyName} from '@/common/turmoil/PartyName';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {IPlayer} from '../../IPlayer';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {PartyName} from '../../../common/turmoil/PartyName';
 
 export class RedAppeasement extends Card {
   constructor() {

@@ -1,9 +1,9 @@
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CardResource} from '@/common/CardResource';
-import {IPlayer} from '@/server/IPlayer';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardResource} from '../../../common/CardResource';
+import {IPlayer} from '../../IPlayer';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
 export class SolBank extends CorporationCard implements ICorporationCard {
   constructor() {

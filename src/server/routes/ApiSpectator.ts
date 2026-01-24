@@ -1,11 +1,11 @@
-import * as responses from '@/server/server/responses';
-import {Server} from '@/server/models/ServerModel';
-import {Handler} from '@/server/routes/Handler';
-import {Context} from '@/server/routes/IHandler';
-import {IGame} from '@/server/IGame';
-import {isSpectatorId} from '@/common/Types';
-import {Request} from '@/server/Request';
-import {Response} from '@/server/Response';
+import * as responses from '../server/responses';
+import {Server} from '../models/ServerModel';
+import {Handler} from './Handler';
+import {Context} from './IHandler';
+import {IGame} from '../IGame';
+import {isSpectatorId} from '../../common/Types';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 export class ApiSpectator extends Handler {
   public static readonly INSTANCE = new ApiSpectator();

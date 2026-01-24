@@ -1,10 +1,10 @@
-import {GameOptions} from '@/server/game/GameOptions';
-import {Random} from '@/common/utils/Random';
-import {SpaceBonus} from '@/common/boards/SpaceBonus';
-import {SpaceType} from '@/common/boards/SpaceType';
-import {BoardBuilder} from '@/server/boards/BoardBuilder';
-import {Space} from '@/server/boards/Space';
-import {MarsBoard} from '@/server/boards/MarsBoard';
+import {GameOptions} from '../game/GameOptions';
+import {Random} from '../../common/utils/Random';
+import {SpaceBonus} from '../../common/boards/SpaceBonus';
+import {SpaceType} from '../../common/boards/SpaceType';
+import {BoardBuilder} from './BoardBuilder';
+import {Space} from './Space';
+import {MarsBoard} from './MarsBoard';
 
 // TODO(kberg): Rename to HollandiaBoard.
 export class Hollandia extends MarsBoard {

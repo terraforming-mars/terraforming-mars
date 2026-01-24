@@ -1,15 +1,14 @@
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {SelectSpace} from '@/server/inputs/SelectSpace';
-import {IActionCard} from '@/server/cards/ICard';
-import {Player} from '@/server/Player';
-import {intersection} from '@/common/utils/utils';
-import {message} from '@/server/logs/MessageBuilder';
-import {AresHandler} from '@/server/ares/AresHandler';
-
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {SelectSpace} from '../../inputs/SelectSpace';
+import {IActionCard} from '../ICard';
+import {Player} from '../../Player';
+import {intersection} from '../../../common/utils/utils';
+import {message} from '../../logs/MessageBuilder';
+import {AresHandler} from '../../ares/AresHandler';
 export class MarsNomads extends Card implements IActionCard {
   /*
    * A good page about this card: https://boardgamegeek.com/thread/3154812.

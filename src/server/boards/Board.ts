@@ -1,15 +1,15 @@
-import {Space} from '@/server/boards/Space';
-import {CanAffordOptions, IPlayer} from '@/server/IPlayer';
-import {PlayerId, SpaceId} from '@/common/Types';
-import {SpaceType} from '@/common/boards/SpaceType';
-import {BASE_OCEAN_TILES, CITY_TILES, GREENERY_TILES, HAZARD_TILES, OCEAN_TILES, TileType} from '@/common/TileType';
-import {SerializedBoard, SerializedSpace} from '@/server/boards/SerializedBoard';
-import {CardName} from '@/common/cards/CardName';
-import {AresHandler} from '@/server/ares/AresHandler';
-import {Units} from '@/common/Units';
-import {hazardSeverity} from '@/common/AresTileType';
-import {TR_SOURCES, TRSource} from '@/common/cards/TRSource';
-import {sum, twoWayDifference} from '@/common/utils/utils';
+import {Space} from './Space';
+import {CanAffordOptions, IPlayer} from '../IPlayer';
+import {PlayerId, SpaceId} from '../../common/Types';
+import {SpaceType} from '../../common/boards/SpaceType';
+import {BASE_OCEAN_TILES, CITY_TILES, GREENERY_TILES, HAZARD_TILES, OCEAN_TILES, TileType} from '../../common/TileType';
+import {SerializedBoard, SerializedSpace} from './SerializedBoard';
+import {CardName} from '../../common/cards/CardName';
+import {AresHandler} from '../ares/AresHandler';
+import {Units} from '../../common/Units';
+import {hazardSeverity} from '../../common/AresTileType';
+import {TR_SOURCES, TRSource} from '../../common/cards/TRSource';
+import {sum, twoWayDifference} from '../../common/utils/utils';
 
 /**
  * The bonus costs to place a tile on a space. For instance, spending 6MC to place an ocean,

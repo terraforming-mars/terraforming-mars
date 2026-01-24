@@ -1,11 +1,11 @@
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Resource} from '@/common/Resource';
-import {IActionCard} from '@/server/cards/ICard';
-import {CardResource} from '@/common/CardResource';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Resource} from '../../../common/Resource';
+import {IActionCard} from '../ICard';
+import {CardResource} from '../../../common/CardResource';
 
 export class MartianExpress extends Card implements IActionCard {
   constructor() {

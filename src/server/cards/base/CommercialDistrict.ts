@@ -1,14 +1,14 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
-import {TileType} from '@/common/TileType';
-import {CardName} from '@/common/cards/CardName';
-import {Board} from '@/server/boards/Board';
-import {AdjacencyBonus} from '@/server/ares/AdjacencyBonus';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {cities} from '@/server/cards/render/DynamicVictoryPoints';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
+import {TileType} from '../../../common/TileType';
+import {CardName} from '../../../common/cards/CardName';
+import {Board} from '../../boards/Board';
+import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
+import {CardRenderer} from '../render/CardRenderer';
+import {cities} from '../render/DynamicVictoryPoints';
 
 export class CommercialDistrict extends Card implements IProjectCard {
   constructor(

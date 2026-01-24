@@ -1,6 +1,6 @@
-import {IPlayer} from '@/server/IPlayer';
-import {InequalityRequirement} from '@/server/cards/requirements/InequalityRequirement';
-import {RequirementType} from '@/common/cards/RequirementType';
+import {IPlayer} from '../../IPlayer';
+import {InequalityRequirement} from './InequalityRequirement';
+import {RequirementType} from '../../../common/cards/RequirementType';
 
 /**
  * Evaluate whether the number of city tiles on Mars is at least (or at most) a given value.

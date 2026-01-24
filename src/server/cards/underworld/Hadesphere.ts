@@ -1,8 +1,8 @@
-import {Tag} from '@/common/cards/Tag';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {ActiveCorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {digit} from '@/server/cards/Options';
+import {Tag} from '../../../common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {ActiveCorporationCard} from '../corporation/CorporationCard';
+import {digit} from '../Options';
 
 export class Hadesphere extends ActiveCorporationCard {
   constructor() {

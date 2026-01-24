@@ -1,12 +1,12 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Card} from '@/server/cards/Card';
-import {CardName} from '@/common/cards/CardName';
-import {CardType} from '@/common/cards/CardType';
-import {Tag} from '@/common/cards/Tag';
-import {IPlayer} from '@/server/IPlayer';
-import {Resource} from '@/common/Resource';
-import {SelectAmount} from '@/server/inputs/SelectAmount';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Tag} from '../../../common/cards/Tag';
+import {IPlayer} from '../../IPlayer';
+import {Resource} from '../../../common/Resource';
+import {SelectAmount} from '../../inputs/SelectAmount';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class HiTechLab extends Card implements IProjectCard {
   constructor() {

@@ -1,10 +1,10 @@
-import * as responses from '@/server/server/responses';
-import {Handler} from '@/server/routes/Handler';
-import {Context} from '@/server/routes/IHandler';
-import {Database} from '@/server/database/Database';
-import {isGameId} from '@/common/Types';
-import {Request} from '@/server/Request';
-import {Response} from '@/server/Response';
+import * as responses from '../server/responses';
+import {Handler} from './Handler';
+import {Context} from './IHandler';
+import {Database} from '../database/Database';
+import {isGameId} from '../../common/Types';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 export class ApiGameHistory extends Handler {
   public static readonly INSTANCE = new ApiGameHistory();

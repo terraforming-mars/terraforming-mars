@@ -1,9 +1,9 @@
-import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
-import {CardRenderDynamicVictoryPoints} from '@/common/cards/render/CardRenderDynamicVictoryPoints';
-import {CardRenderItem} from '@/server/cards/render/CardRenderItem';
-import {Size} from '@/common/cards/render/Size';
-import {CardResource} from '@/common/CardResource';
-import {Tag} from '@/common/cards/Tag';
+import {CardRenderItemType} from '../../../common/cards/render/CardRenderItemType';
+import {CardRenderDynamicVictoryPoints} from '../../../common/cards/render/CardRenderDynamicVictoryPoints';
+import {CardRenderItem} from './CardRenderItem';
+import {Size} from '../../../common/cards/render/Size';
+import {CardResource} from '../../../common/CardResource';
+import {Tag} from '../../../common/cards/Tag';
 
 export function resource(resource: CardResource, points: number, target: number): CardRenderDynamicVictoryPoints {
   return {

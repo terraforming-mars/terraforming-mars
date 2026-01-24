@@ -1,11 +1,11 @@
-import {Tag} from '@/common/cards/Tag';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {IPlayer} from '@/server/IPlayer';
-import {all} from '@/server/cards/Options';
-import {Resource} from '@/common/Resource';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {IPlayer} from '../../IPlayer';
+import {all} from '../Options';
+import {Resource} from '../../../common/Resource';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
 export class KingdomofTauraro extends CorporationCard implements ICorporationCard {
   constructor() {

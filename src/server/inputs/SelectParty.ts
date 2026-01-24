@@ -1,11 +1,11 @@
-import {Message} from '@/common/logs/Message';
-import {BasePlayerInput} from '@/server/PlayerInput';
-import {PartyName} from '@/common/turmoil/PartyName';
-import {InputResponse, isSelectPartyResponse} from '@/common/inputs/InputResponse';
-import {IPlayer} from '@/server/IPlayer';
-import {SelectPartyModel} from '@/common/models/PlayerInputModel';
-import {getTurmoilModel} from '@/server/models/TurmoilModel';
-import {InputError} from '@/server/inputs/InputError';
+import {Message} from '../../common/logs/Message';
+import {BasePlayerInput} from '../PlayerInput';
+import {PartyName} from '../../common/turmoil/PartyName';
+import {InputResponse, isSelectPartyResponse} from '../../common/inputs/InputResponse';
+import {IPlayer} from '../IPlayer';
+import {SelectPartyModel} from '../../common/models/PlayerInputModel';
+import {getTurmoilModel} from '../models/TurmoilModel';
+import {InputError} from './InputError';
 
 export class SelectParty extends BasePlayerInput<PartyName> {
   constructor(

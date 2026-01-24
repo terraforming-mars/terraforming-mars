@@ -1,10 +1,10 @@
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {PlayProjectCard} from '@/server/deferredActions/PlayProjectCard';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Size} from '@/common/cards/render/Size';
-import {PreludesExpansion} from '@/server/preludes/PreludesExpansion';
+import {IPlayer} from '../../IPlayer';
+import {CardName} from '../../../common/cards/CardName';
+import {PreludeCard} from './PreludeCard';
+import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
+import {CardRenderer} from '../render/CardRenderer';
+import {Size} from '../../../common/cards/render/Size';
+import {PreludesExpansion} from '../../preludes/PreludesExpansion';
 
 export class EccentricSponsor extends PreludeCard {
   constructor() {

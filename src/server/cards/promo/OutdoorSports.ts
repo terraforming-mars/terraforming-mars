@@ -1,11 +1,11 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Card} from '@/server/cards/Card';
-import {all, nextTo} from '@/server/cards/Options';
-import {Board} from '@/server/boards/Board';
+import {IProjectCard} from '../IProjectCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {all, nextTo} from '../Options';
+import {Board} from '../../boards/Board';
 
 export class OutdoorSports extends Card implements IProjectCard {
   constructor() {

@@ -1,11 +1,11 @@
-import {IPlayer} from '@/server/IPlayer';
-import {Tag} from '@/common/cards/Tag';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {DeferredAction} from '@/server/deferredActions/DeferredAction';
-import {Priority} from '@/server/deferredActions/Priority';
-import {CardResource} from '@/common/CardResource';
-import {CardType} from '@/common/cards/CardType';
-import {ChooseCards, ChooseOptions, LogType, keep} from '@/server/deferredActions/ChooseCards';
+import {IPlayer} from '../IPlayer';
+import {Tag} from '../../common/cards/Tag';
+import {IProjectCard} from '../cards/IProjectCard';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
+import {CardResource} from '../../common/CardResource';
+import {CardType} from '../../common/cards/CardType';
+import {ChooseCards, ChooseOptions, LogType, keep} from './ChooseCards';
 
 export type DrawOptions = {
   tag?: Tag,

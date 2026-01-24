@@ -1,12 +1,12 @@
-import {IPlayer} from '@/server/IPlayer';
-import {SelectSpace} from '@/server/inputs/SelectSpace';
-import {Space} from '@/server/boards/Space';
-import {DeferredAction} from '@/server/deferredActions/DeferredAction';
-import {Priority} from '@/server/deferredActions/Priority';
-import {PlacementType} from '@/server/boards/PlacementType';
-import {Tile} from '@/server/Tile';
-import {AdjacencyBonus} from '@/server/ares/AdjacencyBonus';
-import {Message} from '@/common/logs/Message';
+import {IPlayer} from '../IPlayer';
+import {SelectSpace} from '../inputs/SelectSpace';
+import {Space} from '../boards/Space';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
+import {PlacementType} from '../boards/PlacementType';
+import {Tile} from '../Tile';
+import {AdjacencyBonus} from '../ares/AdjacencyBonus';
+import {Message} from '../../common/logs/Message';
 
 export class PlaceTile extends DeferredAction<Space> {
   constructor(

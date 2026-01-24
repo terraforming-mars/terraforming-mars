@@ -1,8 +1,8 @@
-import {ActiveCorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {Tag} from '@/common/cards/Tag';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CardResource} from '@/common/CardResource';
+import {ActiveCorporationCard} from '../corporation/CorporationCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardResource} from '../../../common/CardResource';
 
 export class BioSol extends ActiveCorporationCard {
   constructor() {

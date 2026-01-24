@@ -1,11 +1,11 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {IPlayer} from '@/server/IPlayer';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {ICard} from '@/server/cards/ICard';
-import {Tag} from '@/common/cards/Tag';
+import {IProjectCard} from '../IProjectCard';
+import {IPlayer} from '../../IPlayer';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {ICard} from '../ICard';
+import {Tag} from '../../../common/cards/Tag';
 
 export class SpaceRelay extends Card implements IProjectCard {
   constructor() {

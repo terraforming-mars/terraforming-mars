@@ -1,12 +1,12 @@
-import {IPlayer} from '@/server/IPlayer';
-import {Resource} from '@/common/Resource';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {DeferredAction} from '@/server/deferredActions/DeferredAction';
-import {Priority} from '@/server/deferredActions/Priority';
-import {CardName} from '@/common/cards/CardName';
-import {Message} from '@/common/logs/Message';
-import {message} from '@/server/logs/MessageBuilder';
+import {IPlayer} from '../IPlayer';
+import {Resource} from '../../common/Resource';
+import {OrOptions} from '../inputs/OrOptions';
+import {SelectOption} from '../inputs/SelectOption';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
+import {CardName} from '../../common/cards/CardName';
+import {Message} from '../../common/logs/Message';
+import {message} from '../logs/MessageBuilder';
 
 export class StealResources extends DeferredAction {
   constructor(

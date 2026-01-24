@@ -1,6 +1,6 @@
-import {IPlayer} from '@/server/IPlayer';
-import {IAward} from '@/server/awards/IAward';
-import {ALL_RESOURCES} from '@/common/Resource';
+import {IPlayer} from '../../IPlayer';
+import {IAward} from '../IAward';
+import {ALL_RESOURCES} from '../../../common/Resource';
 
 
 export class Collector implements IAward {

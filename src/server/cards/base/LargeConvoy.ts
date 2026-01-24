@@ -1,19 +1,19 @@
-import {IPlayer} from '@/server/IPlayer';
-import {Card} from '@/server/cards/Card';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {CardType} from '@/common/cards/CardType';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectCard} from '@/server/inputs/SelectCard';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {PlayerInput} from '@/server/PlayerInput';
-import {CardResource} from '@/common/CardResource';
-import {CardName} from '@/common/cards/CardName';
-import {Resource} from '@/common/Resource';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Size} from '@/common/cards/render/Size';
-import {digit} from '@/server/cards/Options';
-import {message} from '@/server/logs/MessageBuilder';
+import {IPlayer} from '../../IPlayer';
+import {Card} from '../Card';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardType} from '../../../common/cards/CardType';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectCard} from '../../inputs/SelectCard';
+import {SelectOption} from '../../inputs/SelectOption';
+import {PlayerInput} from '../../PlayerInput';
+import {CardResource} from '../../../common/CardResource';
+import {CardName} from '../../../common/cards/CardName';
+import {Resource} from '../../../common/Resource';
+import {CardRenderer} from '../render/CardRenderer';
+import {Size} from '../../../common/cards/render/Size';
+import {digit} from '../Options';
+import {message} from '../../logs/MessageBuilder';
 
 export class LargeConvoy extends Card implements IProjectCard {
   constructor() {

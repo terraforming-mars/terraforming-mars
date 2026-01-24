@@ -1,13 +1,13 @@
-import {CardType} from '@/common/cards/CardType';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Card} from '@/server/cards/Card';
-import {Tag} from '@/common/cards/Tag';
-import {IPlayer} from '@/server/IPlayer';
-import {IActionCard} from '@/server/cards/ICard';
-import {IStandardProjectCard} from '@/server/cards/IStandardProjectCard';
-import {SelectCard} from '@/server/inputs/SelectCard';
+import {CardType} from '../../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {Tag} from '../../../common/cards/Tag';
+import {IPlayer} from '../../IPlayer';
+import {IActionCard} from '../ICard';
+import {IStandardProjectCard} from '../IStandardProjectCard';
+import {SelectCard} from '../../inputs/SelectCard';
 
 export class StandardTechnology extends Card implements IActionCard, IProjectCard {
   constructor() {

@@ -1,10 +1,10 @@
-import {Message} from '@/common/logs/Message';
-import {PlayerInput} from '@/server/PlayerInput';
-import {BasePlayerInput} from '@/server/PlayerInput';
-import {InputResponse, isSelectOptionResponse} from '@/common/inputs/InputResponse';
-import {SelectOptionModel} from '@/common/models/PlayerInputModel';
-import {Warning} from '@/common/cards/Warning';
-import {InputError} from '@/server/inputs/InputError';
+import {Message} from '../../common/logs/Message';
+import {PlayerInput} from '../PlayerInput';
+import {BasePlayerInput} from '../PlayerInput';
+import {InputResponse, isSelectOptionResponse} from '../../common/inputs/InputResponse';
+import {SelectOptionModel} from '../../common/models/PlayerInputModel';
+import {Warning} from '../../common/cards/Warning';
+import {InputError} from './InputError';
 
 export class SelectOption extends BasePlayerInput<undefined> {
   public warnings: ReadonlyArray<Warning> | undefined = undefined;

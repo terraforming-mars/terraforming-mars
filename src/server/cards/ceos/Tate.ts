@@ -1,15 +1,15 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {PlayerInput} from '@/server/PlayerInput';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CeoCard} from '@/server/cards/ceos/CeoCard';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {PlayerInput} from '../../PlayerInput';
+import {CardRenderer} from '../render/CardRenderer';
+import {CeoCard} from './CeoCard';
 
-import {Tag} from '@/common/cards/Tag';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {Size} from '@/common/cards/render/Size';
-import {inplaceRemove} from '@/common/utils/utils';
-import {message} from '@/server/logs/MessageBuilder';
+import {Tag} from '../../../common/cards/Tag';
+import {SelectOption} from '../../inputs/SelectOption';
+import {OrOptions} from '../../inputs/OrOptions';
+import {Size} from '../../../common/cards/render/Size';
+import {inplaceRemove} from '../../../common/utils/utils';
+import {message} from '../../logs/MessageBuilder';
 
 export class Tate extends CeoCard {
   constructor() {

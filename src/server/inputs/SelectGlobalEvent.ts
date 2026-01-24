@@ -1,9 +1,9 @@
-import {BasePlayerInput} from '@/server/PlayerInput';
-import {InputResponse, isSelectGlobalEventResponse} from '@/common/inputs/InputResponse';
-import {SelectGlobalEventModel} from '@/common/models/PlayerInputModel';
-import {IGlobalEvent} from '@/server/turmoil/globalEvents/IGlobalEvent';
-import {InputError} from '@/server/inputs/InputError';
-import {toName} from '@/common/utils/utils';
+import {BasePlayerInput} from '../PlayerInput';
+import {InputResponse, isSelectGlobalEventResponse} from '../../common/inputs/InputResponse';
+import {SelectGlobalEventModel} from '../../common/models/PlayerInputModel';
+import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
+import {InputError} from './InputError';
+import {toName} from '../../common/utils/utils';
 
 export class SelectGlobalEvent extends BasePlayerInput<IGlobalEvent> {
   constructor(public globalEvents: ReadonlyArray<IGlobalEvent>) {

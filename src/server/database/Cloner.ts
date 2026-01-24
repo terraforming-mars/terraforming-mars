@@ -1,12 +1,12 @@
-import {Game} from '@/server/Game';
-import {IGame} from '@/server/IGame';
-import {GameId, isPlayerId} from '@/common/Types';
-import {GameSetup} from '@/server/GameSetup';
-import {IPlayer} from '@/server/IPlayer';
-import {PlayerId} from '@/common/Types';
-import {SerializedGame} from '@/server/SerializedGame';
-import {SerializedPlayer} from '@/server/SerializedPlayer';
-import {toID} from '@/common/utils/utils';
+import {Game} from '../Game';
+import {IGame} from '../IGame';
+import {GameId, isPlayerId} from '../../common/Types';
+import {GameSetup} from '../GameSetup';
+import {IPlayer} from '../IPlayer';
+import {PlayerId} from '../../common/Types';
+import {SerializedGame} from '../SerializedGame';
+import {SerializedPlayer} from '../SerializedPlayer';
+import {toID} from '../../common/utils/utils';
 
 export class Cloner {
   public static clone(

@@ -1,13 +1,13 @@
-import {OCEAN_UPGRADE_TILES, TileType} from '@/common/TileType';
-import {SpaceType} from '@/common/boards/SpaceType';
-import {CanAffordOptions, IPlayer} from '@/server/IPlayer';
-import {Board} from '@/server/boards/Board';
-import {Space} from '@/server/boards/Space';
-import {PlacementType} from '@/server/boards/PlacementType';
-import {AresHandler} from '@/server/ares/AresHandler';
-import {CardName} from '@/common/cards/CardName';
-import {SpaceId} from '@/common/Types';
-import {oneWayDifference} from '@/common/utils/utils';
+import {OCEAN_UPGRADE_TILES, TileType} from '../../common/TileType';
+import {SpaceType} from '../../common/boards/SpaceType';
+import {CanAffordOptions, IPlayer} from '../IPlayer';
+import {Board} from './Board';
+import {Space} from './Space';
+import {PlacementType} from './PlacementType';
+import {AresHandler} from '../ares/AresHandler';
+import {CardName} from '../../common/cards/CardName';
+import {SpaceId} from '../../common/Types';
+import {oneWayDifference} from '../../common/utils/utils';
 
 export class MarsBoard extends Board {
   private readonly edges: ReadonlyArray<Space>;

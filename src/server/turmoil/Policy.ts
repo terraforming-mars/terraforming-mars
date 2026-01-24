@@ -1,9 +1,9 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {IGame} from '@/server/IGame';
-import {Space} from '@/server/boards/Space';
-import {IPlayer} from '@/server/IPlayer';
-import {PlayerInput} from '@/server/PlayerInput';
-import {PolicyId} from '@/common/turmoil/Types';
+import {IProjectCard} from '../cards/IProjectCard';
+import {IGame} from '../IGame';
+import {Space} from '../boards/Space';
+import {IPlayer} from '../IPlayer';
+import {PlayerInput} from '../PlayerInput';
+import {PolicyId} from '../../common/turmoil/Types';
 
 // Represents a Turmoil policy.
 export interface IPolicy {

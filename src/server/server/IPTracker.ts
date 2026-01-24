@@ -1,4 +1,4 @@
-import {ParticipantId} from '@/common/Types';
+import {ParticipantId} from '../../common/Types';
 
 export interface IPTracker {
   addParticipant(participantId: ParticipantId, ip: string): void;

@@ -1,13 +1,13 @@
-import {IPlayer} from '@/server/IPlayer';
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardName} from '@/common/cards/CardName';
-import {SendDelegateToArea} from '@/server/deferredActions/SendDelegateToArea';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Resource} from '@/common/Resource';
-import {Turmoil} from '@/server/turmoil/Turmoil';
-import {IGlobalEvent} from '@/server/turmoil/globalEvents/IGlobalEvent';
-import {SelectGlobalEvent} from '@/server/inputs/SelectGlobalEvent';
+import {IPlayer} from '../../IPlayer';
+import {PreludeCard} from '../prelude/PreludeCard';
+import {IProjectCard} from '../IProjectCard';
+import {CardName} from '../../../common/cards/CardName';
+import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
+import {CardRenderer} from '../render/CardRenderer';
+import {Resource} from '../../../common/Resource';
+import {Turmoil} from '../../turmoil/Turmoil';
+import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
+import {SelectGlobalEvent} from '../../inputs/SelectGlobalEvent';
 
 export class ExecutiveOrder extends PreludeCard implements IProjectCard {
   constructor() {

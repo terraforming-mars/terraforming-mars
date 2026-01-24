@@ -1,9 +1,9 @@
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {Tag} from '@/common/cards/Tag';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {digit} from '@/server/cards/Options';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {CorporationCard} from './CorporationCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {digit} from '../Options';
+import {ICorporationCard} from './ICorporationCard';
 
 export class EcoLine extends CorporationCard implements ICorporationCard {
   constructor() {

@@ -1,6 +1,6 @@
-import {IPlayer} from '@/server/IPlayer';
-import {RequirementType} from '@/common/cards/RequirementType';
-import {InequalityRequirement} from '@/server/cards/requirements/InequalityRequirement';
+import {IPlayer} from '../../IPlayer';
+import {RequirementType} from '../../../common/cards/RequirementType';
+import {InequalityRequirement} from './InequalityRequirement';
 
 /**
  * Evaluates whether this player has excavated a given number of tiles.

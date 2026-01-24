@@ -1,18 +1,18 @@
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {IPlayer} from '@/server/IPlayer';
-import {Tag} from '@/common/cards/Tag';
-import {CardName} from '@/common/cards/CardName';
-import {PlaceHazardTile} from '@/server/deferredActions/PlaceHazardTile';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectSpace} from '@/server/inputs/SelectSpace';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
-import {Size} from '@/common/cards/render/Size';
-import {TileType, tileTypeToString} from '@/common/TileType';
-import {LogHelper} from '@/server/LogHelper';
-import {AresHandler} from '@/server/ares/AresHandler';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {IPlayer} from '../../IPlayer';
+import {Tag} from '../../../common/cards/Tag';
+import {CardName} from '../../../common//cards/CardName';
+import {PlaceHazardTile} from '../../deferredActions/PlaceHazardTile';
+import {SelectOption} from '../../inputs/SelectOption';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectSpace} from '../../inputs/SelectSpace';
+import {CardRenderer} from '../render/CardRenderer';
+import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
+import {Size} from '../../../common/cards/render/Size';
+import {TileType, tileTypeToString} from '../../../common/TileType';
+import {LogHelper} from '../../LogHelper';
+import {AresHandler} from '../../ares/AresHandler';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
 const ARES_CARDS = [
   CardName.BIOENGINEERING_ENCLOSURE,

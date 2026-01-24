@@ -1,9 +1,9 @@
-import {PlayerInput} from '@/server/PlayerInput';
-import {InputResponse, isAndOptionsResponse} from '@/common/inputs/InputResponse';
-import {IPlayer} from '@/server/IPlayer';
-import {AndOptionsModel} from '@/common/models/PlayerInputModel';
-import {OptionsInput} from '@/server/inputs/OptionsPlayerInput';
-import {InputError} from '@/server/inputs/InputError';
+import {PlayerInput} from '../PlayerInput';
+import {InputResponse, isAndOptionsResponse} from '../../common/inputs/InputResponse';
+import {IPlayer} from '../IPlayer';
+import {AndOptionsModel} from '../../common/models/PlayerInputModel';
+import {OptionsInput} from './OptionsPlayerInput';
+import {InputError} from './InputError';
 
 export class AndOptions extends OptionsInput<undefined> {
   constructor(...options: Array<PlayerInput>) {

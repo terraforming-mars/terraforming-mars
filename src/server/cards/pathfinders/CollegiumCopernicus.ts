@@ -1,17 +1,17 @@
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
-import {Tag} from '@/common/cards/Tag';
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {IActionCard, ICard} from '@/server/cards/ICard';
-import {CardResource} from '@/common/CardResource';
-import {ColoniesHandler} from '@/server/colonies/ColoniesHandler';
-import {SelectColony} from '@/server/inputs/SelectColony';
-import {IColonyTrader} from '@/server/colonies/IColonyTrader';
-import {IColony} from '@/server/colonies/IColony';
-import {AddResourcesToCard} from '@/server/deferredActions/AddResourcesToCard';
-import {message} from '@/server/logs/MessageBuilder';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {Tag} from '../../../common/cards/Tag';
+import {IPlayer} from '../../IPlayer';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {IActionCard, ICard} from '../ICard';
+import {CardResource} from '../../../common/CardResource';
+import {ColoniesHandler} from '../../colonies/ColoniesHandler';
+import {SelectColony} from '../../inputs/SelectColony';
+import {IColonyTrader} from '../../colonies/IColonyTrader';
+import {IColony} from '../../colonies/IColony';
+import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {message} from '../../logs/MessageBuilder';
 
 function tradeCost(player: IPlayer) {
   return Math.max(0, 3 - player.colonies.tradeDiscount);

@@ -1,9 +1,9 @@
-import {SpaceBonus} from '@/common/boards/SpaceBonus';
-import {CardName} from '@/common/cards/CardName';
-import {TileType} from '@/common/TileType';
-import {Capital} from '@/server/cards/base/Capital';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {oceans} from '@/server/cards/render/DynamicVictoryPoints';
+import {SpaceBonus} from '../../../common/boards/SpaceBonus';
+import {CardName} from '../../../common/cards/CardName';
+import {TileType} from '../../../common/TileType';
+import {Capital} from '../base/Capital';
+import {CardRenderer} from '../render/CardRenderer';
+import {oceans} from '../render/DynamicVictoryPoints';
 
 export class CapitalAres extends Capital {
   constructor() {

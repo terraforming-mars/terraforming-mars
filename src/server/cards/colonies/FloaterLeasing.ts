@@ -1,10 +1,10 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
-import {Card} from '@/server/cards/Card';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {digit} from '@/server/cards/Options';
-import {CardResource} from '@/common/CardResource';
+import {IProjectCard} from '../IProjectCard';
+import {CardType} from '../../../common/cards/CardType';
+import {CardName} from '../../../common/cards/CardName';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {digit} from '../Options';
+import {CardResource} from '../../../common/CardResource';
 
 export class FloaterLeasing extends Card implements IProjectCard {
   constructor() {

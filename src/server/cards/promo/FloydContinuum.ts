@@ -1,13 +1,13 @@
-import * as constants from '@/common/constants';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {Card} from '@/server/cards/Card';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Resource} from '@/common/Resource';
-import {IActionCard} from '@/server/cards/ICard';
+import * as constants from '../../../common/constants';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
+import {CardName} from '../../../common/cards/CardName';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {Resource} from '../../../common/Resource';
+import {IActionCard} from '../ICard';
 
 // Note: Floyd Continuum comes from the Dutch international open.
 // https://boardgamegeek.com/thread/3120204/dutch-open-terraformingmars-international-4th-tour

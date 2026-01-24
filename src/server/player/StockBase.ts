@@ -1,7 +1,7 @@
-import {Resource} from '@/common/Resource';
-import {Units} from '@/common/Units';
-import {IPlayer} from '@/server/IPlayer';
-import {From} from '@/server/logs/From';
+import {Resource} from '../../common/Resource';
+import {Units} from '../../common/Units';
+import {IPlayer} from '../IPlayer';
+import {From} from '../logs/From';
 
 export abstract class BaseStock {
   public megacredits: number = 0;

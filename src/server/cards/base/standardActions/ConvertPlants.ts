@@ -1,11 +1,11 @@
-import {StandardActionCard} from '@/server/cards/StandardActionCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {IPlayer} from '@/server/IPlayer';
-import {MAX_OXYGEN_LEVEL} from '@/common/constants';
-import {SelectSpace} from '@/server/inputs/SelectSpace';
-import {Units} from '@/common/Units';
-import {message} from '@/server/logs/MessageBuilder';
+import {StandardActionCard} from '../../StandardActionCard';
+import {CardName} from '../../../../common/cards/CardName';
+import {CardRenderer} from '../../render/CardRenderer';
+import {IPlayer} from '../../../IPlayer';
+import {MAX_OXYGEN_LEVEL} from '../../../../common/constants';
+import {SelectSpace} from '../../../inputs/SelectSpace';
+import {Units} from '../../../../common/Units';
+import {message} from '../../../logs/MessageBuilder';
 
 
 export class ConvertPlants extends StandardActionCard {

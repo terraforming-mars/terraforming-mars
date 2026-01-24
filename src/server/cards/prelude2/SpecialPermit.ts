@@ -1,15 +1,15 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {Resource} from '@/common/Resource';
-import {StealResources} from '@/server/deferredActions/StealResources';
-import {Card} from '@/server/cards/Card';
-import {Size} from '@/common/cards/render/Size';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {all, digit} from '@/server/cards/Options';
-import {PartyName} from '@/common/turmoil/PartyName';
-import {Tag} from '@/common/cards/Tag';
+import {IProjectCard} from '../IProjectCard';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
+import {CardName} from '../../../common/cards/CardName';
+import {Resource} from '../../../common/Resource';
+import {StealResources} from '../../deferredActions/StealResources';
+import {Card} from '../Card';
+import {Size} from '../../../common/cards/render/Size';
+import {CardRenderer} from '../render/CardRenderer';
+import {all, digit} from '../Options';
+import {PartyName} from '../../../common/turmoil/PartyName';
+import {Tag} from '../../../common/cards/Tag';
 
 export class SpecialPermit extends Card implements IProjectCard {
   constructor() {

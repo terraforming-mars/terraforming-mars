@@ -1,8 +1,8 @@
-import {SpaceBonus} from '@/common/boards/SpaceBonus';
-import {TileType} from '@/common/TileType';
-import {CardName} from '@/common/cards/CardName';
-import {NaturalPreserve} from '@/server/cards/base/NaturalPreserve';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {SpaceBonus} from '../../../common/boards/SpaceBonus';
+import {TileType} from '../../../common/TileType';
+import {CardName} from '../../../common/cards/CardName';
+import {NaturalPreserve} from '../base/NaturalPreserve';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class NaturalPreserveAres extends NaturalPreserve {
   constructor() {

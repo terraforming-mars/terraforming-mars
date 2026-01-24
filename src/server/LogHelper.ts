@@ -1,12 +1,12 @@
-import {CardName} from '@/common/cards/CardName';
-import {Resource} from '@/common/Resource';
-import {IPlayer} from '@/server/IPlayer';
-import {ICard} from '@/server/cards/ICard';
-import {Space} from '@/server/boards/Space';
-import {TileType, tileTypeToString} from '@/common/TileType';
-import {IColony} from '@/server/colonies/IColony';
-import {Logger} from '@/server/logs/Logger';
-import {CardResource} from '@/common/CardResource';
+import {CardName} from '../common/cards/CardName';
+import {Resource} from '../common/Resource';
+import {IPlayer} from './IPlayer';
+import {ICard} from './cards/ICard';
+import {Space} from './boards/Space';
+import {TileType, tileTypeToString} from '../common/TileType';
+import {IColony} from './colonies/IColony';
+import {Logger} from './logs/Logger';
+import {CardResource} from '../common/CardResource';
 
 export class LogHelper {
   static logAddResource(player: IPlayer, card: ICard, qty: number = 1): void {

@@ -1,15 +1,15 @@
-import {Card} from '@/server/cards/Card';
-import {CardName} from '@/common/cards/CardName';
-import {TileType} from '@/common/TileType';
-import {CardType} from '@/common/cards/CardType';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {IPlayer} from '@/server/IPlayer';
-import {PlayerInput} from '@/server/PlayerInput';
-import {PlaceTile} from '@/server/deferredActions/PlaceTile';
-import {message} from '@/server/logs/MessageBuilder';
-import {digit} from '@/server/cards/Options';
+import {Card} from '../Card';
+import {CardName} from '../../../common/cards/CardName';
+import {TileType} from '../../../common/TileType';
+import {CardType} from '../../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardRenderer} from '../render/CardRenderer';
+import {IPlayer} from '../../IPlayer';
+import {PlayerInput} from '../../PlayerInput';
+import {PlaceTile} from '../../deferredActions/PlaceTile';
+import {message} from '../../logs/MessageBuilder';
+import {digit} from '../Options';
 
 export class ManMadeVolcano extends Card implements IProjectCard {
   constructor() {

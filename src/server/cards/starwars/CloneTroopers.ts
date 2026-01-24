@@ -1,20 +1,20 @@
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {IActionCard} from '@/server/cards/ICard';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {Player} from '@/server/Player';
-import {CardName} from '@/common/cards/CardName';
-import {ALL_RESOURCES} from '@/common/Resource';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {all} from '@/server/cards/Options';
-import {CardResource} from '@/common/CardResource';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {Size} from '@/common/cards/render/Size';
-import {message} from '@/server/logs/MessageBuilder';
-import {SelectResource} from '@/server/inputs/SelectResource';
-import {Units} from '@/common/Units';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {IActionCard} from '../ICard';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {Player} from '../../Player';
+import {CardName} from '../../../common/cards/CardName';
+import {ALL_RESOURCES} from '../../../common/Resource';
+import {CardRenderer} from '../render/CardRenderer';
+import {all} from '../Options';
+import {CardResource} from '../../../common/CardResource';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {Size} from '../../../common/cards/render/Size';
+import {message} from '../../logs/MessageBuilder';
+import {SelectResource} from '../../inputs/SelectResource';
+import {Units} from '../../../common/Units';
 
 export class CloneTroopers extends Card implements IActionCard, IProjectCard {
   constructor() {

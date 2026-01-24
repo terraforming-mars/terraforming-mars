@@ -1,7 +1,7 @@
-import {Behavior} from '@/server/behavior/Behavior';
-import {IPlayer} from '@/server/IPlayer';
-import {Card, StaticCardProperties} from '@/server/cards/Card';
-import {getBehaviorExecutor} from '@/server/behavior/BehaviorExecutor';
+import {Behavior} from '../behavior/Behavior';
+import {IPlayer} from '../IPlayer';
+import {Card, StaticCardProperties} from './Card';
+import {getBehaviorExecutor} from '../behavior/BehaviorExecutor';
 
 // Same as StaticCardProperties, but action is expected.
 export interface StaticActionCardProperties extends StaticCardProperties {

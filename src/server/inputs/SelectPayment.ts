@@ -1,10 +1,10 @@
-import {Message} from '@/common/logs/Message';
-import {BasePlayerInput} from '@/server/PlayerInput';
-import {isPayment, Payment, PaymentOptions} from '@/common/inputs/Payment';
-import {InputResponse, isSelectPaymentResponse} from '@/common/inputs/InputResponse';
-import {IPlayer} from '@/server/IPlayer';
-import {SelectPaymentModel} from '@/common/models/PlayerInputModel';
-import {InputError} from '@/server/inputs/InputError';
+import {Message} from '../../common/logs/Message';
+import {BasePlayerInput} from '../PlayerInput';
+import {isPayment, Payment, PaymentOptions} from '../../common/inputs/Payment';
+import {InputResponse, isSelectPaymentResponse} from '../../common/inputs/InputResponse';
+import {IPlayer} from '../IPlayer';
+import {SelectPaymentModel} from '../../common/models/PlayerInputModel';
+import {InputError} from './InputError';
 
 export class SelectPayment extends BasePlayerInput<Payment> {
   constructor(

@@ -1,11 +1,11 @@
-import {ChoosePoliticalAgenda} from '@/server/deferredActions/ChoosePoliticalAgenda';
-import {IGame} from '@/server/IGame';
-import {IBonus} from '@/server/turmoil/Bonus';
-import {IParty} from '@/server/turmoil/parties/IParty';
-import {PartyName} from '@/common/turmoil/PartyName';
-import {IPolicy} from '@/server/turmoil/Policy';
-import {Turmoil} from '@/server/turmoil/Turmoil';
-import {Agenda, AgendaStyle} from '@/common/turmoil/Types';
+import {ChoosePoliticalAgenda} from '../deferredActions/ChoosePoliticalAgenda';
+import {IGame} from '../IGame';
+import {IBonus} from './Bonus';
+import {IParty} from './parties/IParty';
+import {PartyName} from '../../common/turmoil/PartyName';
+import {IPolicy} from './Policy';
+import {Turmoil} from './Turmoil';
+import {Agenda, AgendaStyle} from '../../common/turmoil/Types';
 
 export type PoliticalAgendasData = {
   agendas: Map<PartyName, Agenda>;

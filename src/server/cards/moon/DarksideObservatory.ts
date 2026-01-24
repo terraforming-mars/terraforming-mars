@@ -1,14 +1,14 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {CardType} from '@/common/cards/CardType';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CardResource} from '@/common/CardResource';
-import {MoonCards} from '@/server/moon/MoonCards';
-import {IActionCard, ICard} from '@/server/cards/ICard';
-import {Card} from '@/server/cards/Card';
-import {SelectCard} from '@/server/inputs/SelectCard';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {CardType} from '../../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardResource} from '../../../common/CardResource';
+import {MoonCards} from '../../moon/MoonCards';
+import {IActionCard, ICard} from '../ICard';
+import {Card} from '../Card';
+import {SelectCard} from '../../inputs/SelectCard';
 
 export class DarksideObservatory extends Card implements IProjectCard, IActionCard {
   constructor() {

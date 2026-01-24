@@ -1,7 +1,7 @@
-import {Units} from '@/common/Units';
-import {OneOrArray} from '@/common/utils/types';
-import {Tag} from '@/common/cards/Tag';
-import {NoAttributes} from '@/server/behavior/NoAttributes';
+import {Units} from '../../common/Units';
+import {OneOrArray} from '../../common/utils/types';
+import {Tag} from '../../common/cards/Tag';
+import {NoAttributes} from './NoAttributes';
 
 /**
  * Describes something that can be counted.

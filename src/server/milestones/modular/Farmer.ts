@@ -1,6 +1,6 @@
-import {BaseMilestone} from '@/server/milestones/IMilestone';
-import {IPlayer} from '@/server/IPlayer';
-import {CardResource} from '@/common/CardResource';
+import {BaseMilestone} from '../IMilestone';
+import {IPlayer} from '../../IPlayer';
+import {CardResource} from '../../../common/CardResource';
 
 export class Farmer extends BaseMilestone {
   constructor() {

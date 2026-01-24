@@ -1,10 +1,10 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {Card} from '@/server/cards/Card';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
+import {CardName} from '../../../common/cards/CardName';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class IceMoonColony extends Card implements IProjectCard {
   constructor() {

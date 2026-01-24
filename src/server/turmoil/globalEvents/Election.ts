@@ -1,14 +1,14 @@
-import {IGlobalEvent} from '@/server/turmoil/globalEvents/IGlobalEvent';
-import {GlobalEvent} from '@/server/turmoil/globalEvents/GlobalEvent';
-import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
-import {PartyName} from '@/common/turmoil/PartyName';
-import {IGame} from '@/server/IGame';
-import {Tag} from '@/common/cards/Tag';
-import {Turmoil} from '@/server/turmoil/Turmoil';
-import {IPlayer} from '@/server/IPlayer';
-import {Board} from '@/server/boards/Board';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Size} from '@/common/cards/render/Size';
+import {IGlobalEvent} from './IGlobalEvent';
+import {GlobalEvent} from './GlobalEvent';
+import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
+import {PartyName} from '../../../common/turmoil/PartyName';
+import {IGame} from '../../IGame';
+import {Tag} from '../../../common/cards/Tag';
+import {Turmoil} from '../Turmoil';
+import {IPlayer} from '../../IPlayer';
+import {Board} from '../../boards/Board';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+import {Size} from '../../../common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.influence().plus().tag(Tag.BUILDING, {size: Size.SMALL}).plus().city({size: Size.MEDIUM}).colon().br;

@@ -1,16 +1,16 @@
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {CardType} from '@/common/cards/CardType';
-import {digit} from '@/server/cards/Options';
-import {IPlayer} from '@/server/IPlayer';
-import {Resource} from '@/common/Resource';
-import {IActionCard, ICard} from '@/server/cards/ICard';
-import {Behavior} from '@/server/behavior/Behavior';
-import {getBehaviorExecutor} from '@/server/behavior/BehaviorExecutor';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
-import {Size} from '@/common/cards/render/Size';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {CardType} from '../../../common/cards/CardType';
+import {digit} from '../Options';
+import {IPlayer} from '../../IPlayer';
+import {Resource} from '../../../common/Resource';
+import {IActionCard, ICard} from '../ICard';
+import {Behavior} from '../../behavior/Behavior';
+import {getBehaviorExecutor} from '../../behavior/BehaviorExecutor';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {Size} from '../../../common/cards/render/Size';
 
 export class PalladinShipping extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {

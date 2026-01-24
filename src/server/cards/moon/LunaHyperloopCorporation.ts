@@ -1,8 +1,8 @@
-import {CardName} from '@/common/cards/CardName';
-import {all} from '@/server/cards/Options';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {ActiveCorporationCard} from '@/server/cards/corporation/CorporationCard';
+import {CardName} from '../../../common/cards/CardName';
+import {all} from '../Options';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {ActiveCorporationCard} from '../corporation/CorporationCard';
 
 export class LunaHyperloopCorporation extends ActiveCorporationCard {
   constructor() {

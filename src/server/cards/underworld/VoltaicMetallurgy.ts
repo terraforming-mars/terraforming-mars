@@ -1,14 +1,14 @@
-import {CardType} from '@/common/cards/CardType';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Card} from '@/server/cards/Card';
-import {IPlayer} from '@/server/IPlayer';
-import {Tag} from '@/common/cards/Tag';
-import {IActionCard} from '@/server/cards/ICard';
-import {SelectAmount} from '@/server/inputs/SelectAmount';
-import {message} from '@/server/logs/MessageBuilder';
-import {Resource} from '@/common/Resource';
+import {CardType} from '../../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {IPlayer} from '../../IPlayer';
+import {Tag} from '../../../common/cards/Tag';
+import {IActionCard} from '../ICard';
+import {SelectAmount} from '../../inputs/SelectAmount';
+import {message} from '../../logs/MessageBuilder';
+import {Resource} from '../../../common/Resource';
 
 export class VoltaicMetallurgy extends Card implements IProjectCard, IActionCard {
   constructor() {

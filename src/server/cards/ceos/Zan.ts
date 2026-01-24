@@ -1,12 +1,12 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {PlayerInput} from '@/server/PlayerInput';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CeoCard} from '@/server/cards/ceos/CeoCard';
-import {PartyName} from '@/common/turmoil/PartyName';
-import {Turmoil} from '@/server/turmoil/Turmoil';
-import {Size} from '@/common/cards/render/Size';
-import {Resource} from '@/common/Resource';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {PlayerInput} from '../../PlayerInput';
+import {CardRenderer} from '../render/CardRenderer';
+import {CeoCard} from './CeoCard';
+import {PartyName} from '../../../common/turmoil/PartyName';
+import {Turmoil} from '../../turmoil/Turmoil';
+import {Size} from '../../../common/cards/render/Size';
+import {Resource} from '../../../common/Resource';
 
 export class Zan extends CeoCard {
   constructor() {

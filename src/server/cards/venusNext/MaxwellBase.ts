@@ -1,10 +1,10 @@
-import {Tag} from '@/common/cards/Tag';
-import {CardType} from '@/common/cards/CardType';
-import {SpaceName} from '@/common/boards/SpaceName';
-import {IActionCard} from '@/server/cards/ICard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {ActionCard} from '@/server/cards/ActionCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardType} from '../../../common/cards/CardType';
+import {SpaceName} from '../../../common/boards/SpaceName';
+import {IActionCard} from '../ICard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {ActionCard} from '../ActionCard';
 
 export class MaxwellBase extends ActionCard implements IActionCard {
   constructor() {

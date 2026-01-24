@@ -1,19 +1,19 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {CardResource} from '@/common/CardResource';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {AddResourcesToCard} from '@/server/deferredActions/AddResourcesToCard';
-import {IColony} from '@/server/colonies/IColony';
-import {SelectColony} from '@/server/inputs/SelectColony';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Card} from '@/server/cards/Card';
-import {IColonyTrader} from '@/server/colonies/IColonyTrader';
-import {ColoniesHandler} from '@/server/colonies/ColoniesHandler';
-import {message} from '@/server/logs/MessageBuilder';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
+import {CardName} from '../../../common/cards/CardName';
+import {CardResource} from '../../../common/CardResource';
+import {SelectOption} from '../../inputs/SelectOption';
+import {OrOptions} from '../../inputs/OrOptions';
+import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {IColony} from '../../colonies/IColony';
+import {SelectColony} from '../../inputs/SelectColony';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {IColonyTrader} from '../../colonies/IColonyTrader';
+import {ColoniesHandler} from '../../colonies/ColoniesHandler';
+import {message} from '../../logs/MessageBuilder';
 
 export class TitanFloatingLaunchPad extends Card implements IProjectCard {
   constructor() {

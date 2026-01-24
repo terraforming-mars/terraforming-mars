@@ -1,13 +1,13 @@
-import {IGlobalEvent} from '@/server/turmoil/globalEvents/IGlobalEvent';
-import {GlobalEvent} from '@/server/turmoil/globalEvents/GlobalEvent';
-import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
-import {PartyName} from '@/common/turmoil/PartyName';
-import {IGame} from '@/server/IGame';
-import {Turmoil} from '@/server/turmoil/Turmoil';
-import {Resource} from '@/common/Resource';
-import {IPlayer} from '@/server/IPlayer';
-import {isSpecialTileSpace, Board} from '@/server/boards/Board';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
+import {GlobalEvent} from '../../turmoil/globalEvents/GlobalEvent';
+import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
+import {PartyName} from '../../../common/turmoil/PartyName';
+import {IGame} from '../../IGame';
+import {Turmoil} from '../../turmoil/Turmoil';
+import {Resource} from '../../../common/Resource';
+import {IPlayer} from '../../IPlayer';
+import {isSpecialTileSpace, Board} from '../../boards/Board';
+import {CardRenderer} from '../render/CardRenderer';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.production((pb) => pb.megacredits(1)).slash().specialTile().nbsp;

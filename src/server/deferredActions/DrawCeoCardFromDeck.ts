@@ -1,9 +1,9 @@
-import {inplaceRemove} from '@/common/utils/utils';
-import {ICeoCard} from '@/server/cards/ceos/ICeoCard';
-import {SelectCard} from '@/server/inputs/SelectCard';
-import {IPlayer} from '@/server/IPlayer';
-import {DeferredAction} from '@/server/deferredActions/DeferredAction';
-import {Priority} from '@/server/deferredActions/Priority';
+import {inplaceRemove} from '../../common/utils/utils';
+import {ICeoCard} from '../cards/ceos/ICeoCard';
+import {SelectCard} from '../inputs/SelectCard';
+import {IPlayer} from '../IPlayer';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 
 export class DrawCeoCardFromDeck extends DeferredAction<ICeoCard | undefined> {
   private count: number;

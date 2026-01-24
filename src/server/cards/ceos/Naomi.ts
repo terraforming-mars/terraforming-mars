@@ -1,14 +1,14 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {PlayerInput} from '@/server/PlayerInput';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CeoCard} from '@/server/cards/ceos/CeoCard';
-import {MAX_COLONY_TRACK_POSITION} from '@/common/constants';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {ColoniesHandler} from '@/server/colonies/ColoniesHandler';
-import {Resource} from '@/common/Resource';
-import {ICeoCard} from '@/server/cards/ceos/ICeoCard';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {PlayerInput} from '../../PlayerInput';
+import {CardRenderer} from '../render/CardRenderer';
+import {CeoCard} from './CeoCard';
+import {MAX_COLONY_TRACK_POSITION} from '../../../common/constants';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {ColoniesHandler} from '../../colonies/ColoniesHandler';
+import {Resource} from '../../../common/Resource';
+import {ICeoCard} from './ICeoCard';
 
 export class Naomi extends CeoCard implements ICeoCard {
   constructor() {

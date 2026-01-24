@@ -1,9 +1,9 @@
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {StandardProjectCard} from '@/server/cards/StandardProjectCard';
-import {PlaceCityTile} from '@/server/deferredActions/PlaceCityTile';
-import {Resource} from '@/common/Resource';
+import {IPlayer} from '../../../IPlayer';
+import {CardName} from '../../../../common/cards/CardName';
+import {CardRenderer} from '../../render/CardRenderer';
+import {StandardProjectCard} from '../../StandardProjectCard';
+import {PlaceCityTile} from '../../../deferredActions/PlaceCityTile';
+import {Resource} from '../../../../common/Resource';
 
 export class CityStandardProject extends StandardProjectCard {
   constructor() {

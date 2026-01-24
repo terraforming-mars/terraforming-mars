@@ -1,12 +1,12 @@
-import * as responses from '@/server/server/responses';
-import {Database} from '@/server/database/Database';
-import {Server} from '@/server/models/ServerModel';
-import {Handler} from '@/server/routes/Handler';
-import {Context} from '@/server/routes/IHandler';
-import {LoadGameFormModel} from '@/common/models/LoadGameFormModel';
-import {Request} from '@/server/Request';
-import {Response} from '@/server/Response';
-import {GameId, isGameId, isPlayerId, isSpectatorId} from '@/common/Types';
+import * as responses from '../server/responses';
+import {Database} from '../database/Database';
+import {Server} from '../models/ServerModel';
+import {Handler} from './Handler';
+import {Context} from './IHandler';
+import {LoadGameFormModel} from '../../common/models/LoadGameFormModel';
+import {Request} from '../Request';
+import {Response} from '../Response';
+import {GameId, isGameId, isPlayerId, isSpectatorId} from '../../common/Types';
 
 export class LoadGame extends Handler {
   public static readonly INSTANCE = new LoadGame();

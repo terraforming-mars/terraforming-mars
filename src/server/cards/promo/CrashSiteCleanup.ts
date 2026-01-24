@@ -1,12 +1,12 @@
-import {IPlayer} from '@/server/IPlayer';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {Resource} from '@/common/Resource';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {IPlayer} from '../../IPlayer';
+import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {CardName} from '../../../common/cards/CardName';
+import {SelectOption} from '../../inputs/SelectOption';
+import {OrOptions} from '../../inputs/OrOptions';
+import {Resource} from '../../../common/Resource';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class CrashSiteCleanup extends Card implements IProjectCard {
   constructor() {

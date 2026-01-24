@@ -1,11 +1,11 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {IPlayer} from '@/server/IPlayer';
-import {SelectAmount} from '@/server/inputs/SelectAmount';
-import {Card} from '@/server/cards/Card';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardType} from '../../../common/cards/CardType';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {IPlayer} from '../../IPlayer';
+import {SelectAmount} from '../../inputs/SelectAmount';
+import {Card} from '../Card';
 
 export class Supercapacitors extends Card implements IProjectCard {
   constructor() {

@@ -1,6 +1,6 @@
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {PreludeCard} from '../prelude/PreludeCard';
 
 
 export class RiseToPower extends PreludeCard {

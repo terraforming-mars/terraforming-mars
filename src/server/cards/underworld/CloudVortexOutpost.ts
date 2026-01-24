@@ -1,12 +1,12 @@
-import {IPlayer} from '@/server/IPlayer';
-import {Tag} from '@/common/cards/Tag';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {CardResource} from '@/common/CardResource';
-import {SelectCardDeferred} from '@/server/deferredActions/SelectCardDeferred';
-import {LogHelper} from '@/server/LogHelper';
-import {digit} from '@/server/cards/Options';
+import {IPlayer} from '../../IPlayer';
+import {Tag} from '../../../common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {PreludeCard} from '../prelude/PreludeCard';
+import {CardResource} from '../../../common/CardResource';
+import {SelectCardDeferred} from '../../deferredActions/SelectCardDeferred';
+import {LogHelper} from '../../LogHelper';
+import {digit} from '../Options';
 
 export class CloudVortexOutpost extends PreludeCard {
   constructor() {

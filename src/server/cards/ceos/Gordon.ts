@@ -1,14 +1,14 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CeoCard} from '@/server/cards/ceos/CeoCard';
-import {Board} from '@/server/boards/Board';
-import {Space} from '@/server/boards/Space';
-import {GainResources} from '@/server/deferredActions/GainResources';
-import {Resource} from '@/common/Resource';
-import {SpaceType} from '@/common/boards/SpaceType';
-import {BoardType} from '@/server/boards/BoardType';
-import {Phase} from '@/common/Phase';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {CardRenderer} from '../render/CardRenderer';
+import {CeoCard} from './CeoCard';
+import {Board} from '../../boards/Board';
+import {Space} from '../../boards/Space';
+import {GainResources} from '../../deferredActions/GainResources';
+import {Resource} from '../../../common/Resource';
+import {SpaceType} from '../../../common/boards/SpaceType';
+import {BoardType} from '../../boards/BoardType';
+import {Phase} from '../../../common/Phase';
 
 export class Gordon extends CeoCard {
   constructor() {

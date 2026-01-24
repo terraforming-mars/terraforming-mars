@@ -1,9 +1,9 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {ActionCard} from '@/server/cards/ActionCard';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
+import {IProjectCard} from '../IProjectCard';
+import {ActionCard} from '../ActionCard';
+import {CardType} from '../../../common/cards/CardType';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
 
 export class CultivationOfVenus extends ActionCard implements IProjectCard {
   constructor() {

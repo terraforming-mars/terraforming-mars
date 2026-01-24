@@ -1,8 +1,8 @@
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {StandardProjectCard} from '@/server/cards/StandardProjectCard';
-import {BuildColony} from '@/server/deferredActions/BuildColony';
+import {IPlayer} from '../../IPlayer';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {StandardProjectCard} from '../StandardProjectCard';
+import {BuildColony} from '../../deferredActions/BuildColony';
 
 export class BuildColonyStandardProject extends StandardProjectCard {
   constructor() {

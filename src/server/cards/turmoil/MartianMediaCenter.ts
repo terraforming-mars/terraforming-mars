@@ -1,10 +1,10 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {ActionCard} from '@/server/cards/ActionCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardType} from '@/common/cards/CardType';
-import {PartyName} from '@/common/turmoil/PartyName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {ActionCard} from '../ActionCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {PartyName} from '../../../common/turmoil/PartyName';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class MartianMediaCenter extends ActionCard implements IProjectCard {
   constructor() {

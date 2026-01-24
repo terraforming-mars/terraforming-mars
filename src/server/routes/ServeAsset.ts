@@ -1,14 +1,14 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as responses from '@/server/server/responses';
+import * as responses from '../server/responses';
 
-import {Context} from '@/server/routes/IHandler';
-import {BufferCache} from '@/server/routes/BufferCache';
-import {ContentType} from '@/server/routes/ContentType';
-import {Handler} from '@/server/routes/Handler';
-import {isProduction} from '@/server/utils/server';
-import {Request} from '@/server/Request';
-import {Response} from '@/server/Response';
+import {Context} from './IHandler';
+import {BufferCache} from './BufferCache';
+import {ContentType} from './ContentType';
+import {Handler} from './Handler';
+import {isProduction} from '../utils/server';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 type Encoding = 'gzip' | 'br';
 

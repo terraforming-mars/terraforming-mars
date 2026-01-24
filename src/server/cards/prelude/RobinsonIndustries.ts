@@ -1,14 +1,14 @@
-import {IActionCard} from '@/server/cards/ICard';
-import {IPlayer} from '@/server/IPlayer';
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {ALL_RESOURCES} from '@/common/Resource';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
-import {TITLES} from '@/server/inputs/titles';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {IActionCard} from '../ICard';
+import {IPlayer} from '../../IPlayer';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {ALL_RESOURCES} from '../../../common/Resource';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {TITLES} from '../../inputs/titles';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
 export class RobinsonIndustries extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {

@@ -1,7 +1,7 @@
-import {Colony} from '@/server/colonies/Colony';
-import {ColonyName} from '@/common/colonies/ColonyName';
-import {ColonyBenefit} from '@/common/colonies/ColonyBenefit';
-import {Resource} from '@/common/Resource';
+import {Colony} from './Colony';
+import {ColonyName} from '../../common/colonies/ColonyName';
+import {ColonyBenefit} from '../../common/colonies/ColonyBenefit';
+import {Resource} from '../../common/Resource';
 
 export class Io extends Colony {
   constructor() {

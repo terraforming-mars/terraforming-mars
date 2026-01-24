@@ -1,14 +1,14 @@
-import {Tag} from '@/common/cards/Tag';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {CardResource} from '@/common/CardResource';
-import {IPlayer} from '@/server/IPlayer';
-import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
-import {IActionCard} from '@/server/cards/ICard';
-import {SelectCard} from '@/server/inputs/SelectCard';
-import {digit} from '@/server/cards/Options';
+import {Tag} from '../../../common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {CardResource} from '../../../common/CardResource';
+import {IPlayer} from '../../IPlayer';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {IActionCard} from '../ICard';
+import {SelectCard} from '../../inputs/SelectCard';
+import {digit} from '../Options';
 
 export class HenkeiGenetics extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {

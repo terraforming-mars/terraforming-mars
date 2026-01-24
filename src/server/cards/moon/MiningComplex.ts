@@ -1,16 +1,16 @@
-import {CardName} from '@/common/cards/CardName';
-import {Tag} from '@/common/cards/Tag';
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {PlaceMoonMineTile} from '@/server/moon/PlaceMoonMineTile';
-import {IPlayer} from '@/server/IPlayer';
-import {MoonExpansion} from '@/server/moon/MoonExpansion';
-import {PlaceMoonRoadTile} from '@/server/moon/PlaceMoonRoadTile';
-import {SpaceType} from '@/common/boards/SpaceType';
-import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
-import {TileType} from '@/common/TileType';
-import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
-import {PathfindersExpansion} from '@/server/pathfinders/PathfindersExpansion';
+import {CardName} from '../../../common/cards/CardName';
+import {Tag} from '../../../common/cards/Tag';
+import {PreludeCard} from '../prelude/PreludeCard';
+import {CardRenderer} from '../render/CardRenderer';
+import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
+import {IPlayer} from '../../IPlayer';
+import {MoonExpansion} from '../../moon/MoonExpansion';
+import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
+import {SpaceType} from '../../../common/boards/SpaceType';
+import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
+import {TileType} from '../../../common/TileType';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export class MiningComplex extends PreludeCard {
   constructor() {

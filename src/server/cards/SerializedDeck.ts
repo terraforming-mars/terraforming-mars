@@ -1,4 +1,4 @@
-import {CardName} from '@/common/cards/CardName';
+import {CardName} from '../../common/cards/CardName';
 
 export type SerializedDeck = {
   drawPile: Array<CardName>;

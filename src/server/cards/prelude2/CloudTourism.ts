@@ -1,11 +1,11 @@
-import {Tag} from '@/common/cards/Tag';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
-import {ActionCard} from '@/server/cards/ActionCard';
-import {CardResource} from '@/common/CardResource';
-import {Resource} from '@/common/Resource';
+import {Tag} from '../../../common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
+import {ActionCard} from '../ActionCard';
+import {CardResource} from '../../../common/CardResource';
+import {Resource} from '../../../common/Resource';
 
 export class CloudTourism extends ActionCard {
   constructor() {

@@ -1,14 +1,14 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {CardResource} from '@/common/CardResource';
-import {Card} from '@/server/cards/Card';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Resource} from '@/common/Resource';
-import {all} from '@/server/cards/Options';
-import {ICard} from '@/server/cards/ICard';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
+import {CardName} from '../../../common/cards/CardName';
+import {CardResource} from '../../../common/CardResource';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {Resource} from '../../../common/Resource';
+import {all} from '../Options';
+import {ICard} from '../ICard';
 
 export class MartianZoo extends Card implements IProjectCard {
   constructor() {

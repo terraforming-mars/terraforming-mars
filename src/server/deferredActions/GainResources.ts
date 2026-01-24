@@ -1,8 +1,8 @@
-import {IPlayer} from '@/server/IPlayer';
-import {Resource} from '@/common/Resource';
-import {DeferredAction} from '@/server/deferredActions/DeferredAction';
-import {Priority} from '@/server/deferredActions/Priority';
-import {From} from '@/server/logs/From';
+import {IPlayer} from '../IPlayer';
+import {Resource} from '../../common/Resource';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
+import {From} from '../logs/From';
 
 export type Options = {
   count?: number;

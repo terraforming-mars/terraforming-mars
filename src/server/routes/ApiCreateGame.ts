@@ -1,22 +1,22 @@
-import * as responses from '@/server/server/responses';
-import {Handler} from '@/server/routes/Handler';
-import {Context} from '@/server/routes/IHandler';
-import {Database} from '@/server/database/Database';
-import {BoardName} from '@/common/boards/BoardName';
-import {RandomBoardOption} from '@/common/boards/RandomBoardOption';
-import {Cloner} from '@/server/database/Cloner';
-import {Game} from '@/server/Game';
-import {GameOptions} from '@/server/game/GameOptions';
-import {Player} from '@/server/Player';
-import {Server} from '@/server/models/ServerModel';
-import {NewGameConfig} from '@/common/game/NewGameConfig';
-import {safeCast, isGameId, isSpectatorId, isPlayerId} from '@/common/Types';
-import {generateRandomId} from '@/server/utils/server-ids';
-import {IGame} from '@/server/IGame';
-import {Request} from '@/server/Request';
-import {Response} from '@/server/Response';
-import {QuotaConfig, QuotaHandler} from '@/server/server/QuotaHandler';
-import {durationToMilliseconds} from '@/server/utils/durations';
+import * as responses from '../server/responses';
+import {Handler} from './Handler';
+import {Context} from './IHandler';
+import {Database} from '../database/Database';
+import {BoardName} from '../../common/boards/BoardName';
+import {RandomBoardOption} from '../../common/boards/RandomBoardOption';
+import {Cloner} from '../database/Cloner';
+import {Game} from '../Game';
+import {GameOptions} from '../game/GameOptions';
+import {Player} from '../Player';
+import {Server} from '../models/ServerModel';
+import {NewGameConfig} from '../../common/game/NewGameConfig';
+import {safeCast, isGameId, isSpectatorId, isPlayerId} from '../../common/Types';
+import {generateRandomId} from '../utils/server-ids';
+import {IGame} from '../IGame';
+import {Request} from '../Request';
+import {Response} from '../Response';
+import {QuotaConfig, QuotaHandler} from '../server/QuotaHandler';
+import {durationToMilliseconds} from '../utils/durations';
 
 function getQuotaConfig(): QuotaConfig {
   const defaultQuota = {limit: 1, perMs: 1}; // Effectively, no limit.

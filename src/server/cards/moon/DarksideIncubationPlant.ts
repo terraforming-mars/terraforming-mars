@@ -1,16 +1,16 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {CardType} from '@/common/cards/CardType';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {CardResource} from '@/common/CardResource';
-import {IActionCard} from '@/server/cards/ICard';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {MoonExpansion} from '@/server/moon/MoonExpansion';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Card} from '@/server/cards/Card';
-import {LogHelper} from '@/server/LogHelper';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {CardType} from '../../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardResource} from '../../../common/CardResource';
+import {IActionCard} from '../ICard';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {MoonExpansion} from '../../moon/MoonExpansion';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {LogHelper} from '../../LogHelper';
 
 export class DarksideIncubationPlant extends Card implements IActionCard, IProjectCard {
   constructor() {

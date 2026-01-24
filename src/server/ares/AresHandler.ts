@@ -1,22 +1,22 @@
-import {CardName} from '@/common/cards/CardName';
-import {IGame} from '@/server/IGame';
-import {SelectCard} from '@/server/inputs/SelectCard';
-import {Space} from '@/server/boards/Space';
-import {IPlayer} from '@/server/IPlayer';
-import {CardResource} from '@/common/CardResource';
-import {SpaceBonus} from '@/common/boards/SpaceBonus';
-import {HAZARD_STEPS, HazardSeverity, hazardSeverity} from '@/common/AresTileType';
-import {OCEAN_UPGRADE_TILES, TileType, tileTypeToString} from '@/common/TileType';
-import {Tile} from '@/server/Tile';
-import {AresData, MilestoneCount} from '@/common/ares/AresData';
-import {AdjacencyCost} from '@/server/ares/AdjacencyCost';
+import {CardName} from '../../common/cards/CardName';
+import {IGame} from '../IGame';
+import {SelectCard} from '../inputs/SelectCard';
+import {Space} from '../boards/Space';
+import {IPlayer} from '../IPlayer';
+import {CardResource} from '../../common/CardResource';
+import {SpaceBonus} from '../../common/boards/SpaceBonus';
+import {HAZARD_STEPS, HazardSeverity, hazardSeverity} from '../../common/AresTileType';
+import {OCEAN_UPGRADE_TILES, TileType, tileTypeToString} from '../../common/TileType';
+import {Tile} from '../Tile';
+import {AresData, MilestoneCount} from '../../common/ares/AresData';
+import {AdjacencyCost} from './AdjacencyCost';
 import {MultiSet} from 'mnemonist';
-import {Phase} from '@/common/Phase';
-import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
-import {SelectProductionToLoseDeferred} from '@/server/deferredActions/SelectProductionToLoseDeferred';
-import {AresHazards} from '@/server/ares/AresHazards';
-import {CrashlandingBonus} from '@/server/pathfinders/CrashlandingBonus';
-import {Board} from '@/server/boards/Board';
+import {Phase} from '../../common/Phase';
+import {SelectPaymentDeferred} from '../deferredActions/SelectPaymentDeferred';
+import {SelectProductionToLoseDeferred} from '../deferredActions/SelectProductionToLoseDeferred';
+import {AresHazards} from './AresHazards';
+import {CrashlandingBonus} from '../pathfinders/CrashlandingBonus';
+import {Board} from '../boards/Board';
 
 export class AresHandler {
   private constructor() {}

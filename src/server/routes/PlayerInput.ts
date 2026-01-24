@@ -1,20 +1,20 @@
-import * as responses from '@/server/server/responses';
-import {IPlayer} from '@/server/IPlayer';
-import {Server} from '@/server/models/ServerModel';
-import {Handler} from '@/server/routes/Handler';
-import {Context} from '@/server/routes/IHandler';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {UndoActionOption} from '@/server/inputs/UndoActionOption';
-import {InputResponse} from '@/common/inputs/InputResponse';
-import {isPlayerId} from '@/common/Types';
-import {Request} from '@/server/Request';
-import {Response} from '@/server/Response';
-import {runId} from '@/server/utils/server-ids';
-import {AppError} from '@/server/server/AppError';
-import {statusCode} from '@/common/http/statusCode';
-import {InputError} from '@/server/inputs/InputError';
-import {isIProjectCard} from '@/server/cards/IProjectCard';
-import {AppErrorResponse, INVALID_RUN_ID} from '@/common/app/AppErrorId';
+import * as responses from '../server/responses';
+import {IPlayer} from '../IPlayer';
+import {Server} from '../models/ServerModel';
+import {Handler} from './Handler';
+import {Context} from './IHandler';
+import {OrOptions} from '../inputs/OrOptions';
+import {UndoActionOption} from '../inputs/UndoActionOption';
+import {InputResponse} from '../../common/inputs/InputResponse';
+import {isPlayerId} from '../../common/Types';
+import {Request} from '../Request';
+import {Response} from '../Response';
+import {runId} from '../utils/server-ids';
+import {AppError} from '../server/AppError';
+import {statusCode} from '../../common/http/statusCode';
+import {InputError} from '../inputs/InputError';
+import {isIProjectCard} from '../cards/IProjectCard';
+import {AppErrorResponse, INVALID_RUN_ID} from '../../common/app/AppErrorId';
 
 export class PlayerInput extends Handler {
   public static readonly INSTANCE = new PlayerInput();

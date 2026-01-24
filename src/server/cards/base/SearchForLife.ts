@@ -1,16 +1,16 @@
-import {IActionCard} from '@/server/cards/ICard';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
-import {CardResource} from '@/common/CardResource';
-import {CardName} from '@/common/cards/CardName';
-import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {searchForLife} from '@/server/cards/render/DynamicVictoryPoints';
-import {max} from '@/server/cards/Options';
-import {TITLES} from '@/server/inputs/titles';
+import {IActionCard} from '../ICard';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
+import {CardResource} from '../../../common/CardResource';
+import {CardName} from '../../../common/cards/CardName';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {CardRenderer} from '../render/CardRenderer';
+import {searchForLife} from '../render/DynamicVictoryPoints';
+import {max} from '../Options';
+import {TITLES} from '../../inputs/titles';
 
 export class SearchForLife extends Card implements IActionCard, IProjectCard {
   constructor() {

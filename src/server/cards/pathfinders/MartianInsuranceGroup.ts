@@ -1,12 +1,12 @@
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {Tag} from '@/common/cards/Tag';
-import {IPlayer} from '@/server/IPlayer';
-import {Resource} from '@/common/Resource';
-import {CardName} from '@/common/cards/CardName';
-import {CardType} from '@/common/cards/CardType';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {ICard} from '@/server/cards/ICard';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {Tag} from '../../../common/cards/Tag';
+import {IPlayer} from '../../IPlayer';
+import {Resource} from '../../../common/Resource';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {CardRenderer} from '../render/CardRenderer';
+import {ICard} from '../ICard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
 export class MartianInsuranceGroup extends CorporationCard implements ICorporationCard {
   constructor() {

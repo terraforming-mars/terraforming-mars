@@ -1,12 +1,12 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {ActionCard} from '@/server/cards/ActionCard';
-import {CardType} from '@/common/cards/CardType';
-import {CardResource} from '@/common/CardResource';
-import {Resource} from '@/common/Resource';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {all} from '@/server/cards/Options';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {ActionCard} from '../ActionCard';
+import {CardType} from '../../../common/cards/CardType';
+import {CardResource} from '../../../common/CardResource';
+import {Resource} from '../../../common/Resource';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {all} from '../Options';
 
 export class Fish extends ActionCard implements IProjectCard {
   constructor() {

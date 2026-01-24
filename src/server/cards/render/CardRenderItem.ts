@@ -2,12 +2,12 @@
   Describes any distinct item on a card and prepare it for rendering in Vue
   e.g. Any tag, tile, production cube, ocean, temperature, etc.
  */
-import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
-import {Size} from '@/common/cards/render/Size';
-import {Tag} from '@/common/cards/Tag';
-import {ICardRenderItem} from '@/common/cards/render/Types';
-import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
-import {CardResource} from '@/common/CardResource';
+import {CardRenderItemType} from '../../../common/cards/render/CardRenderItemType';
+import {Size} from '../../../common/cards/render/Size';
+import {Tag} from '../../../common/cards/Tag';
+import {ICardRenderItem} from '../../../common/cards/render/Types';
+import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
+import {CardResource} from '../../../common/CardResource';
 
 export type ItemOptions = Partial<{
   size: Size;

@@ -1,12 +1,12 @@
-import {CardType} from '@/common/cards/CardType';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Card} from '@/server/cards/Card';
-import {any} from '@/server/cards/render/DynamicVictoryPoints';
-import {IPlayer} from '@/server/IPlayer';
-import {SelectPlayer} from '@/server/inputs/SelectPlayer';
-import {Size} from '@/common/cards/render/Size';
+import {CardType} from '../../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {any} from '../render/DynamicVictoryPoints';
+import {IPlayer} from '../../IPlayer';
+import {SelectPlayer} from '../../inputs/SelectPlayer';
+import {Size} from '../../../common/cards/render/Size';
 
 export class PrivateInvestigator extends Card implements IProjectCard {
   constructor() {

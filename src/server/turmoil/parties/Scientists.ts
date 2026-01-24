@@ -1,13 +1,13 @@
-import {IParty} from '@/server/turmoil/parties/IParty';
-import {Party} from '@/server/turmoil/parties/Party';
-import {PartyName} from '@/common/turmoil/PartyName';
-import {Tag} from '@/common/cards/Tag';
-import {Resource} from '@/common/Resource';
-import {Bonus} from '@/server/turmoil/Bonus';
-import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
-import {IPlayer} from '@/server/IPlayer';
-import {Policy, IPolicy} from '@/server/turmoil/Policy';
-import {TITLES} from '@/server/inputs/titles';
+import {IParty} from './IParty';
+import {Party} from './Party';
+import {PartyName} from '../../../common/turmoil/PartyName';
+import {Tag} from '../../../common/cards/Tag';
+import {Resource} from '../../../common/Resource';
+import {Bonus} from '../Bonus';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {IPlayer} from '../../IPlayer';
+import {Policy, IPolicy} from '../Policy';
+import {TITLES} from '../../inputs/titles';
 
 export class Scientists extends Party implements IParty {
   readonly name = PartyName.SCIENTISTS as const;

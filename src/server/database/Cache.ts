@@ -1,10 +1,10 @@
-import {IGame} from '@/server/IGame';
-import {GameId, ParticipantId} from '@/common/Types';
+import {IGame} from '../IGame';
+import {GameId, ParticipantId} from '../../common/Types';
 import {once} from 'events';
 import {EventEmitter} from 'events';
-import {Database} from '@/server/database/Database';
-import {CacheConfig} from '@/server/database/CacheConfig';
-import {Clock} from '@/common/Timer';
+import {Database} from './Database';
+import {CacheConfig} from './CacheConfig';
+import {Clock} from '../../common/Timer';
 
 export class Cache extends EventEmitter {
   private loaded = false;

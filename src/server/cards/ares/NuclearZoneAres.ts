@@ -1,7 +1,7 @@
-import {TileType} from '@/common/TileType';
-import {CardName} from '@/common/cards/CardName';
-import {NuclearZone} from '@/server/cards/base/NuclearZone';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {TileType} from '../../../common/TileType';
+import {CardName} from '../../../common/cards/CardName';
+import {NuclearZone} from '../base/NuclearZone';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class NuclearZoneAres extends NuclearZone {
   constructor() {

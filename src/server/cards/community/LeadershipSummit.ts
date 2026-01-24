@@ -1,10 +1,10 @@
-import {IGlobalEvent} from '@/server/turmoil/globalEvents/IGlobalEvent';
-import {GlobalEvent} from '@/server/turmoil/globalEvents/GlobalEvent';
-import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
-import {PartyName} from '@/common/turmoil/PartyName';
-import {IGame} from '@/server/IGame';
-import {Turmoil} from '@/server/turmoil/Turmoil';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
+import {GlobalEvent} from '../../turmoil/globalEvents/GlobalEvent';
+import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
+import {PartyName} from '../../../common/turmoil/PartyName';
+import {IGame} from '../../IGame';
+import {Turmoil} from '../../turmoil/Turmoil';
+import {CardRenderer} from '../render/CardRenderer';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.cards(1).slash().partyLeaders(1).plus().influence();

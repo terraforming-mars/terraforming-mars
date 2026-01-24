@@ -1,8 +1,8 @@
-import {Tag} from '@/common/cards/Tag';
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Size} from '@/common/cards/render/Size';
+import {Tag} from '../../../common/cards/Tag';
+import {PreludeCard} from '../prelude/PreludeCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Size} from '../../../common/cards/render/Size';
 
 export class CorporateArchives extends PreludeCard {
   constructor() {

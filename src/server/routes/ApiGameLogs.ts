@@ -1,10 +1,10 @@
-import * as responses from '@/server/server/responses';
-import {Handler} from '@/server/routes/Handler';
-import {Context} from '@/server/routes/IHandler';
-import {GameLogs} from '@/server/routes/GameLogs';
-import {isPlayerId, isSpectatorId} from '@/common/Types';
-import {Request} from '@/server/Request';
-import {Response} from '@/server/Response';
+import * as responses from '../server/responses';
+import {Handler} from './Handler';
+import {Context} from './IHandler';
+import {GameLogs} from './GameLogs';
+import {isPlayerId, isSpectatorId} from '../../common/Types';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 export class ApiGameLogs extends Handler {
   public static readonly INSTANCE = new ApiGameLogs();

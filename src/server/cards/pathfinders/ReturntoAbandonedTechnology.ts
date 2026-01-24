@@ -1,12 +1,12 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {IPlayer} from '@/server/IPlayer';
-import {Card} from '@/server/cards/Card';
-import {ChooseCards} from '@/server/deferredActions/ChooseCards';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {Size} from '@/common/cards/render/Size';
+import {IProjectCard} from '../IProjectCard';
+import {IPlayer} from '../../IPlayer';
+import {Card} from '../Card';
+import {ChooseCards} from '../../deferredActions/ChooseCards';
+import {CardType} from '../../../common/cards/CardType';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {Size} from '../../../common/cards/render/Size';
 
 export class ReturntoAbandonedTechnology extends Card implements IProjectCard {
   constructor() {

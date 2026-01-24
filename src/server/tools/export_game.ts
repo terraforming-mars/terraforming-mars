@@ -3,11 +3,11 @@
 
 import * as ansi from 'ansi-escape-sequences';
 import {mkdirSync, writeFileSync} from 'fs';
-import {GameId, isGameId, isPlayerId, isSpectatorId} from '@/common/Types';
-import {Database} from '@/server/database/Database';
-import {IDatabase} from '@/server/database/IDatabase';
-import {LocalFilesystem} from '@/server/database/LocalFilesystem';
-import {exportLogs} from '@/server/tools/exportLogs';
+import {GameId, isGameId, isPlayerId, isSpectatorId} from '../../common/Types';
+import {Database} from '../database/Database';
+import {IDatabase} from '../database/IDatabase';
+import {LocalFilesystem} from '../database/LocalFilesystem';
+import {exportLogs} from './exportLogs';
 
 const args = process.argv.slice(2);
 const id = args[0];

@@ -1,8 +1,8 @@
 import {escape} from 'html-escaper';
-import {Context} from '@/server/routes/IHandler';
-import {Request} from '@/server/Request';
-import {Response} from '@/server/Response';
-import {statusCode} from '@/common/http/statusCode';
+import {Context} from '../routes/IHandler';
+import {Request} from '../Request';
+import {Response} from '../Response';
+import {statusCode} from '../../common/http/statusCode';
 
 export function badRequest(req: Request, res: Response, err?: string): void {
   console.warn('bad request', req.url);

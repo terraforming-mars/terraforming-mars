@@ -1,8 +1,8 @@
-import {IPlayer} from '@/server/IPlayer';
-import {SelectColony} from '@/server/inputs/SelectColony';
-import {IColony} from '@/server/colonies/IColony';
-import {DeferredAction} from '@/server/deferredActions/DeferredAction';
-import {Priority} from '@/server/deferredActions/Priority';
+import {IPlayer} from '../IPlayer';
+import {SelectColony} from '../inputs/SelectColony';
+import {IColony} from '../colonies/IColony';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 
 export class BuildColony extends DeferredAction<IColony> {
   constructor(

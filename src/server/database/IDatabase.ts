@@ -1,8 +1,8 @@
-import {IGame, Score} from '@/server/IGame';
-import {GameOptions} from '@/server/game/GameOptions';
-import {GameId, ParticipantId} from '@/common/Types';
-import {SerializedGame} from '@/server/SerializedGame';
-import {Session, SessionId} from '@/server/auth/Session';
+import {IGame, Score} from '../IGame';
+import {GameOptions} from '../game/GameOptions';
+import {GameId, ParticipantId} from '../../common/Types';
+import {SerializedGame} from '../SerializedGame';
+import {Session, SessionId} from '../auth/Session';
 
 export type GameIdLedger = {gameId: GameId, participantIds: Array<ParticipantId>}
 

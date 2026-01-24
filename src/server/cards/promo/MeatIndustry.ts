@@ -1,13 +1,13 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {Card} from '@/server/cards/Card';
-import {CardName} from '@/common/cards/CardName';
-import {CardType} from '@/common/cards/CardType';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {IPlayer} from '@/server/IPlayer';
-import {ICard} from '@/server/cards/ICard';
-import {CardResource} from '@/common/CardResource';
-import {Resource} from '@/common/Resource';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {Card} from '../Card';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {CardRenderer} from '../render/CardRenderer';
+import {IPlayer} from '../../IPlayer';
+import {ICard} from '../ICard';
+import {CardResource} from '../../../common/CardResource';
+import {Resource} from '../../../common/Resource';
 
 export class MeatIndustry extends Card implements IProjectCard {
   constructor() {

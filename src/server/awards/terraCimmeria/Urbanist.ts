@@ -1,8 +1,8 @@
-import {Board} from '@/server/boards/Board';
-import {IPlayer} from '@/server/IPlayer';
-import {TileType} from '@/common/TileType';
-import {IAward} from '@/server/awards/IAward';
-import {Space} from '@/server/boards/Space';
+import {Board} from '../../boards/Board';
+import {IPlayer} from '../../IPlayer';
+import {TileType} from '../../../common/TileType';
+import {IAward} from '../IAward';
+import {Space} from '../../boards/Space';
 
 export class Urbanist implements IAward {
   public readonly name = 'Urbanist';

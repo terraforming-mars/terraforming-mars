@@ -1,8 +1,8 @@
-import {PartyName} from '@/common/turmoil/PartyName';
-import {IPlayer} from '@/server/IPlayer';
-import {Turmoil} from '@/server/turmoil/Turmoil';
-import {CardRequirement} from '@/server/cards/requirements/CardRequirement';
-import {RequirementType} from '@/common/cards/RequirementType';
+import {PartyName} from '../../../common/turmoil/PartyName';
+import {IPlayer} from '../../IPlayer';
+import {Turmoil} from '../../turmoil/Turmoil';
+import {CardRequirement} from './CardRequirement';
+import {RequirementType} from '../../../common/cards/RequirementType';
 
 
 /**

@@ -1,10 +1,10 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {Size} from '@/common/cards/render/Size';
-import {DrawCeoCardFromDeck} from '@/server/deferredActions/DrawCeoCardFromDeck';
-import {Phase} from '@/common/Phase';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {CardRenderer} from '../render/CardRenderer';
+import {PreludeCard} from '../prelude/PreludeCard';
+import {Size} from '../../../common/cards/render/Size';
+import {DrawCeoCardFromDeck} from '../../deferredActions/DrawCeoCardFromDeck';
+import {Phase} from '../../../common/Phase';
 
 export class CoLeadership extends PreludeCard {
   constructor() {

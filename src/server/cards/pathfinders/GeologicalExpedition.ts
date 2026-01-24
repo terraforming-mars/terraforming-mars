@@ -1,19 +1,19 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {SpaceBonus} from '@/common/boards/SpaceBonus';
-import {IPlayer} from '@/server/IPlayer';
-import {BoardType} from '@/server/boards/BoardType';
-import {Space} from '@/server/boards/Space';
-import {Resource} from '@/common/Resource';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {Priority} from '@/server/deferredActions/Priority';
-import {SpaceType} from '@/common/boards/SpaceType';
-import {Phase} from '@/common/Phase';
+import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {SpaceBonus} from '../../../common/boards/SpaceBonus';
+import {IPlayer} from '../../IPlayer';
+import {BoardType} from '../../boards/BoardType';
+import {Space} from '../../boards/Space';
+import {Resource} from '../../../common/Resource';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {Priority} from '../../deferredActions/Priority';
+import {SpaceType} from '../../../common/boards/SpaceType';
+import {Phase} from '../../../common/Phase';
 
 const VALID_BONUSES: Array<SpaceBonus> = [
   SpaceBonus.TITANIUM,

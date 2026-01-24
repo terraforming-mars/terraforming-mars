@@ -1,12 +1,12 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {PlayerInput} from '@/server/PlayerInput';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CeoCard} from '@/server/cards/ceos/CeoCard';
-import {SpaceType} from '@/common/boards/SpaceType';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {PlayerInput} from '../../PlayerInput';
+import {CardRenderer} from '../render/CardRenderer';
+import {CeoCard} from './CeoCard';
+import {SpaceType} from '../../../common/boards/SpaceType';
 
-import {AresHandler} from '@/server/ares/AresHandler';
-import {Board} from '@/server/boards/Board';
+import {AresHandler} from '../../ares/AresHandler';
+import {Board} from '../../boards/Board';
 
 export class Gaia extends CeoCard {
   constructor() {

@@ -1,7 +1,7 @@
-import {IPlayer} from '@/server/IPlayer';
-import {Units} from '@/common/Units';
-import {DeferredAction} from '@/server/deferredActions/DeferredAction';
-import {Priority} from '@/server/deferredActions/Priority';
+import {IPlayer} from '../IPlayer';
+import {Units} from '../../common/Units';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
 
 export type Options = {
   cb?(): void;

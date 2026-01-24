@@ -1,12 +1,12 @@
-import {CardRenderItem, ItemOptions} from '@/server/cards/render/CardRenderItem';
-import {CardRenderSymbol} from '@/server/cards/render/CardRenderSymbol';
-import {Size} from '@/common/cards/render/Size';
-import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
-import {TileType} from '@/common/TileType';
-import {ICardRenderCorpBoxAction, ICardRenderCorpBoxEffect, ICardRenderCorpBoxEffectAction, ICardRenderEffect, ICardRenderProductionBox, ICardRenderRoot, ICardRenderTile, ItemType, isICardRenderItem} from '@/common/cards/render/Types';
-import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
-import {CardResource} from '@/common/CardResource';
-import {Tag} from '@/common/cards/Tag';
+import {CardRenderItem, ItemOptions} from './CardRenderItem';
+import {CardRenderSymbol} from './CardRenderSymbol';
+import {Size} from '../../../common/cards/render/Size';
+import {CardRenderItemType} from '../../../common/cards/render/CardRenderItemType';
+import {TileType} from '../../../common/TileType';
+import {ICardRenderCorpBoxAction, ICardRenderCorpBoxEffect, ICardRenderCorpBoxEffectAction, ICardRenderEffect, ICardRenderProductionBox, ICardRenderRoot, ICardRenderTile, ItemType, isICardRenderItem} from '../../../common/cards/render/Types';
+import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
+import {CardResource} from '../../../common/CardResource';
+import {Tag} from '../../../common/cards/Tag';
 
 export class CardRenderer {
   public static builder(f: (builder: Builder<CardRenderRoot>) => void): ICardRenderRoot {

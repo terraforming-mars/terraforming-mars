@@ -1,12 +1,12 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardType} from '@/common/cards/CardType';
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {Card} from '@/server/cards/Card';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {SelectColony} from '@/server/inputs/SelectColony';
-import {IColony} from '@/server/colonies/IColony';
-import {all} from '@/server/cards/Options';
+import {IProjectCard} from '../IProjectCard';
+import {CardType} from '../../../common/cards/CardType';
+import {IPlayer} from '../../IPlayer';
+import {CardName} from '../../../common/cards/CardName';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {SelectColony} from '../../inputs/SelectColony';
+import {IColony} from '../../colonies/IColony';
+import {all} from '../Options';
 
 export class CoordinatedRaid extends Card implements IProjectCard {
   constructor() {

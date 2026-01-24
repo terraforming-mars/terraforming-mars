@@ -1,8 +1,8 @@
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {StandardProjectCard} from '@/server/cards/StandardProjectCard';
-import {PlaceGreeneryTile} from '@/server/deferredActions/PlaceGreeneryTile';
+import {IPlayer} from '../../../IPlayer';
+import {CardName} from '../../../../common/cards/CardName';
+import {CardRenderer} from '../../render/CardRenderer';
+import {StandardProjectCard} from '../../StandardProjectCard';
+import {PlaceGreeneryTile} from '../../../deferredActions/PlaceGreeneryTile';
 
 export class GreeneryStandardProject extends StandardProjectCard {
   constructor() {

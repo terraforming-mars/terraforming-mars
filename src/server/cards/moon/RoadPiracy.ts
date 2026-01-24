@@ -1,21 +1,21 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {CardType} from '@/common/cards/CardType';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Card} from '@/server/cards/Card';
-import {all, digit} from '@/server/cards/Options';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {message} from '@/server/logs/MessageBuilder';
-import {AndOptions} from '@/server/inputs/AndOptions';
-import {SelectAmount} from '@/server/inputs/SelectAmount';
-import {Resource} from '@/common/Resource';
-import {sum} from '@/common/utils/utils';
-import {Message} from '@/common/logs/Message';
-import {SimpleDeferredAction} from '@/server/deferredActions/DeferredAction';
-import {Priority} from '@/server/deferredActions/Priority';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {CardType} from '../../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {all, digit} from '../Options';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {message} from '../../logs/MessageBuilder';
+import {AndOptions} from '../../inputs/AndOptions';
+import {SelectAmount} from '../../inputs/SelectAmount';
+import {Resource} from '../../../common/Resource';
+import {sum} from '../../../common/utils/utils';
+import {Message} from '../../../common/logs/Message';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
+import {Priority} from '../../deferredActions/Priority';
 
 export class RoadPiracy extends Card implements IProjectCard {
   constructor() {

@@ -1,6 +1,6 @@
-import {IGame} from '@/server/IGame';
-import {IPlayer} from '@/server/IPlayer';
-import {BonusId} from '@/common/turmoil/Types';
+import {IGame} from '../IGame';
+import {IPlayer} from '../IPlayer';
+import {BonusId} from '../../common/turmoil/Types';
 
 // Represents a Turmoil Chairman bonus.
 export interface IBonus {

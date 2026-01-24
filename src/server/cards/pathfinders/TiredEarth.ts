@@ -1,13 +1,13 @@
-import {IGlobalEvent} from '@/server/turmoil/globalEvents/IGlobalEvent';
-import {GlobalEvent} from '@/server/turmoil/globalEvents/GlobalEvent';
-import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
-import {PartyName} from '@/common/turmoil/PartyName';
-import {IGame} from '@/server/IGame';
-import {Turmoil} from '@/server/turmoil/Turmoil';
-import {Tag} from '@/common/cards/Tag';
-import {Resource} from '@/common/Resource';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Size} from '@/common/cards/render/Size';
+import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
+import {GlobalEvent} from '../../turmoil/globalEvents/GlobalEvent';
+import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
+import {PartyName} from '../../../common/turmoil/PartyName';
+import {IGame} from '../../IGame';
+import {Turmoil} from '../../turmoil/Turmoil';
+import {Tag} from '../../../common/cards/Tag';
+import {Resource} from '../../../common/Resource';
+import {CardRenderer} from '../render/CardRenderer';
+import {Size} from '../../../common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.minus().plants(1).slash().tag(Tag.EARTH).influence({size: Size.SMALL});

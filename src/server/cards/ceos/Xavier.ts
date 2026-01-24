@@ -1,11 +1,11 @@
-import {CardName} from '@/common/cards/CardName';
-import {PlayerInput} from '@/server/PlayerInput';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CeoCard} from '@/server/cards/ceos/CeoCard';
-import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
-import {IPlayer} from '@/server/IPlayer';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {PlayerInput} from '../../PlayerInput';
+import {CardRenderer} from '../render/CardRenderer';
+import {CeoCard} from './CeoCard';
+import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
+import {IPlayer} from '../../IPlayer';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
 
 export class Xavier extends CeoCard {
   constructor() {

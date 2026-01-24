@@ -1,11 +1,11 @@
-import * as responses from '@/server/server/responses';
-import {Handler} from '@/server/routes/Handler';
-import {Context} from '@/server/routes/IHandler';
-import {Request} from '@/server/Request';
-import {Response} from '@/server/Response';
-import {getDiscordUser} from '@/server/server/auth/discord';
-import {paths} from '@/common/app/paths';
-import {sessionIdCookieName} from '@/server/server/auth/authcookies';
+import * as responses from '../server/responses';
+import {Handler} from './Handler';
+import {Context} from './IHandler';
+import {Request} from '../Request';
+import {Response} from '../Response';
+import {getDiscordUser} from '../server/auth/discord';
+import {paths} from '../../common/app/paths';
+import {sessionIdCookieName} from '../server/auth/authcookies';
 
 /** Receives the authentication response from Discord. */
 export class DiscordAuth extends Handler {

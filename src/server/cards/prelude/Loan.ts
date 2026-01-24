@@ -1,7 +1,7 @@
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {PreludeCard} from './PreludeCard';
+import {IProjectCard} from '../IProjectCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class Loan extends PreludeCard implements IProjectCard {
   constructor() {

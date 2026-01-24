@@ -1,10 +1,10 @@
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CardName} from '@/common/cards/CardName';
-import {CardResource} from '@/common/CardResource';
-import {Tag} from '@/common/cards/Tag';
-import {ActionCard} from '@/server/cards/ActionCard';
-import {CardType} from '@/common/cards/CardType';
-import {Size} from '@/common/cards/render/Size';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardName} from '../../../common/cards/CardName';
+import {CardResource} from '../../../common/CardResource';
+import {Tag} from '../../../common/cards/Tag';
+import {ActionCard} from '../ActionCard';
+import {CardType} from '../../../common/cards/CardType';
+import {Size} from '../../../common/cards/render/Size';
 
 export class ThinkTank extends ActionCard {
   constructor() {

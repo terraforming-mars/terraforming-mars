@@ -1,10 +1,10 @@
-import {SpaceBonus} from '@/common/boards/SpaceBonus';
-import {BoardBuilder} from '@/server/boards/BoardBuilder';
-import {SpaceName} from '@/common/boards/SpaceName';
-import {Random} from '@/common/utils/Random';
-import {Space} from '@/server/boards/Space';
-import {GameOptions} from '@/server/game/GameOptions';
-import {MarsBoard} from '@/server/boards/MarsBoard';
+import {SpaceBonus} from '../../common/boards/SpaceBonus';
+import {BoardBuilder} from './BoardBuilder';
+import {SpaceName} from '../../common/boards/SpaceName';
+import {Random} from '../../common/utils/Random';
+import {Space} from './Space';
+import {GameOptions} from '../game/GameOptions';
+import {MarsBoard} from './MarsBoard';
 
 export class TerraCimmeriaBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): TerraCimmeriaBoard {

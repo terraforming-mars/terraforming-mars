@@ -1,10 +1,10 @@
-import {IPlayer} from '@/server/IPlayer';
-import {PlayerInput} from '@/server/PlayerInput';
-import {Space} from '@/server/boards/Space';
-import {DeferredAction} from '@/server/deferredActions/DeferredAction';
-import {Priority} from '@/server/deferredActions/Priority';
-import {SelectSpace} from '@/server/inputs/SelectSpace';
-import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
+import {IPlayer} from '../IPlayer';
+import {PlayerInput} from '../PlayerInput';
+import {Space} from '../boards/Space';
+import {DeferredAction} from '../deferredActions/DeferredAction';
+import {Priority} from '../deferredActions/Priority';
+import {SelectSpace} from '../inputs/SelectSpace';
+import {UnderworldExpansion} from './UnderworldExpansion';
 
 export class ClaimSpaceDeferred extends DeferredAction<Space> {
   constructor(

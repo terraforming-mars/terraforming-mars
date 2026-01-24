@@ -1,8 +1,8 @@
-import {IPlayer} from '@/server/IPlayer';
-import {InequalityRequirement} from '@/server/cards/requirements/InequalityRequirement';
-import {RequirementType} from '@/common/cards/RequirementType';
-import {sum} from '@/common/utils/utils';
-import {PlayerId} from '@/common/Types';
+import {IPlayer} from '../../IPlayer';
+import {InequalityRequirement} from './InequalityRequirement';
+import {RequirementType} from '../../../common/cards/RequirementType';
+import {sum} from '../../../common/utils/utils';
+import {PlayerId} from '../../../common/Types';
 
 /**
  * Evaluates whether this player* has a given number of colonies all colony tiles.

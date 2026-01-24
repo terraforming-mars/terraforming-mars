@@ -1,9 +1,9 @@
-import {IPlayer} from '@/server/IPlayer';
-import {InequalityRequirement} from '@/server/cards/requirements/InequalityRequirement';
-import {GlobalParameter} from '@/common/GlobalParameter';
-import {CardName} from '@/common/cards/CardName';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardResource} from '@/common/CardResource';
+import {IPlayer} from '../../IPlayer';
+import {InequalityRequirement} from './InequalityRequirement';
+import {GlobalParameter} from '../../../common/GlobalParameter';
+import {CardName} from '../../../common/cards/CardName';
+import {IProjectCard} from '../IProjectCard';
+import {CardResource} from '../../../common/CardResource';
 
 
 /**

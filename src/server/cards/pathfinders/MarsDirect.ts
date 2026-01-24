@@ -1,10 +1,10 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {IProjectCard} from '../IProjectCard';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
 // TODO(kberg): This card is actually different: it uses resources to track on this card, which
 // means this result can be changed by cards like CEO's Favorite Project.

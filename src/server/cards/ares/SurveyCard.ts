@@ -1,20 +1,20 @@
-import {Card, StaticCardProperties} from '@/server/cards/Card';
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {Space} from '@/server/boards/Space';
-import {SpaceBonus} from '@/common/boards/SpaceBonus';
-import {Resource} from '@/common/Resource';
-import {CardResource} from '@/common/CardResource';
-import {AddResourcesToCard} from '@/server/deferredActions/AddResourcesToCard';
-import {GainResources} from '@/server/deferredActions/GainResources';
-import {Phase} from '@/common/Phase';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {BoardType} from '@/server/boards/BoardType';
-import {SpaceType} from '@/common/boards/SpaceType';
-import {PartyHooks} from '@/server/turmoil/parties/PartyHooks';
-import {PartyName} from '@/common/turmoil/PartyName';
-import {Board} from '@/server/boards/Board';
-import {AresHandler} from '@/server/ares/AresHandler';
+import {Card, StaticCardProperties} from '../Card';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {Space} from '../../boards/Space';
+import {SpaceBonus} from '../../../common/boards/SpaceBonus';
+import {Resource} from '../../../common/Resource';
+import {CardResource} from '../../../common/CardResource';
+import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {GainResources} from '../../deferredActions/GainResources';
+import {Phase} from '../../../common/Phase';
+import {IProjectCard} from '../IProjectCard';
+import {BoardType} from '../../boards/BoardType';
+import {SpaceType} from '../../../common/boards/SpaceType';
+import {PartyHooks} from '../../turmoil/parties/PartyHooks';
+import {PartyName} from '../../../common/turmoil/PartyName';
+import {Board} from '../../boards/Board';
+import {AresHandler} from '../../ares/AresHandler';
 
 /**
  * Abstraction for cards that give rewards based on tile placement.  (e.g. Ecological Survey, Geological Survey.)

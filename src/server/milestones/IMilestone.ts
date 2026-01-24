@@ -1,5 +1,5 @@
-import {MilestoneName} from '@/common/ma/MilestoneName';
-import {IPlayer} from '@/server/IPlayer';
+import {MilestoneName} from '../../common/ma/MilestoneName';
+import {IPlayer} from '../IPlayer';
 
 export interface IMilestone {
   name: MilestoneName;

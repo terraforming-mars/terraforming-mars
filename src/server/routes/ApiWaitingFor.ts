@@ -1,13 +1,13 @@
-import * as responses from '@/server/server/responses';
-import {Handler} from '@/server/routes/Handler';
-import {Context} from '@/server/routes/IHandler';
-import {Phase} from '@/common/Phase';
-import {IPlayer} from '@/server/IPlayer';
-import {WaitingForModel} from '@/common/models/WaitingForModel';
-import {IGame} from '@/server/IGame';
-import {isPlayerId, isSpectatorId} from '@/common/Types';
-import {Request} from '@/server/Request';
-import {Response} from '@/server/Response';
+import * as responses from '../server/responses';
+import {Handler} from './Handler';
+import {Context} from './IHandler';
+import {Phase} from '../../common/Phase';
+import {IPlayer} from '../IPlayer';
+import {WaitingForModel} from '../../common/models/WaitingForModel';
+import {IGame} from '../IGame';
+import {isPlayerId, isSpectatorId} from '../../common/Types';
+import {Request} from '../Request';
+import {Response} from '../Response';
 
 export class ApiWaitingFor extends Handler {
   public static readonly INSTANCE = new ApiWaitingFor();

@@ -1,13 +1,13 @@
-import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectAmount} from '@/server/inputs/SelectAmount';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {IPlayer} from '@/server/IPlayer';
-import {Resource} from '@/common/Resource';
-import {Card, StaticCardProperties} from '@/server/cards/Card';
-import {IActionCard} from '@/server/cards/ICard';
-import {message} from '@/server/logs/MessageBuilder';
-import {PathfindersExpansion} from '@/server/pathfinders/PathfindersExpansion';
+import {SelectPaymentDeferred} from '../../deferredActions/SelectPaymentDeferred';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectAmount} from '../../inputs/SelectAmount';
+import {SelectOption} from '../../inputs/SelectOption';
+import {IPlayer} from '../../IPlayer';
+import {Resource} from '../../../common/Resource';
+import {Card, StaticCardProperties} from '../Card';
+import {IActionCard} from '../ICard';
+import {message} from '../../logs/MessageBuilder';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export interface Terms {
   from: number,

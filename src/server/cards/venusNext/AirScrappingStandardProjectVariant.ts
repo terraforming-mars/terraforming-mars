@@ -1,9 +1,9 @@
-import {IPlayer} from '@/server/IPlayer';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {AirScrappingStandardProject} from '@/server/cards/venusNext/AirScrappingStandardProject';
-import {Size} from '@/common/cards/render/Size';
+import {IPlayer} from '../../IPlayer';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {AirScrappingStandardProject} from './AirScrappingStandardProject';
+import {Size} from '../../../common/cards/render/Size';
 
 export class AirScrappingStandardProjectVariant extends AirScrappingStandardProject {
   constructor() {

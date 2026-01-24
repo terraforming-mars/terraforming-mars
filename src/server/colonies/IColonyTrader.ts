@@ -1,5 +1,5 @@
 import {Message} from '@/common/logs/Message';
-import {IColony} from '@/server/colonies/IColony';
+import {IColony} from './IColony';
 
 /** Something that can pay for trading with colonies. */
 export interface IColonyTrader {

@@ -1,18 +1,18 @@
-import {CardType} from '@/common/cards/CardType';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Card} from '@/server/cards/Card';
-import {IPlayer} from '@/server/IPlayer';
-import {SelectPlayer} from '@/server/inputs/SelectPlayer';
-import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {Resource} from '@/common/Resource';
-import {message} from '@/server/logs/MessageBuilder';
-import {Size} from '@/common/cards/render/Size';
-import {all} from '@/server/cards/Options';
-import {Tag} from '@/common/cards/Tag';
+import {CardType} from '../../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {IPlayer} from '../../IPlayer';
+import {SelectPlayer} from '../../inputs/SelectPlayer';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {Resource} from '../../../common/Resource';
+import {message} from '../../../server/logs/MessageBuilder';
+import {Size} from '../../../common/cards/render/Size';
+import {all} from '../Options';
+import {Tag} from '../../../common/cards/Tag';
 
 // TODO(kberg): Remove Corporate Blackmail from solo plays.
 export class CorporateBlackmail extends Card implements IProjectCard {

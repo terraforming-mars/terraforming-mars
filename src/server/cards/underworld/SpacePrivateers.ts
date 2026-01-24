@@ -1,15 +1,15 @@
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardResource} from '@/common/CardResource';
-import {CardType} from '@/common/cards/CardType';
-import {Card} from '@/server/cards/Card';
-import {IActionCard, ICard} from '@/server/cards/ICard';
-import {IPlayer} from '@/server/IPlayer';
-import {PlayerInput} from '@/server/PlayerInput';
-import {Resource} from '@/common/Resource';
-import {message} from '@/server/logs/MessageBuilder';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {IProjectCard} from '../IProjectCard';
+import {CardResource} from '../../../common/CardResource';
+import {CardType} from '../../../common/cards/CardType';
+import {Card} from '../Card';
+import {IActionCard, ICard} from '../ICard';
+import {IPlayer} from '../../IPlayer';
+import {PlayerInput} from '../../PlayerInput';
+import {Resource} from '../../../common/Resource';
+import {message} from '../../logs/MessageBuilder';
 
 export class SpacePrivateers extends Card implements IProjectCard, IActionCard {
   constructor() {

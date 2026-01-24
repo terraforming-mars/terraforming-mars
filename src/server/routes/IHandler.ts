@@ -1,11 +1,11 @@
-import {IGameLoader} from '@/server/database/IGameLoader';
-import {IPTracker} from '@/server/server/IPTracker';
-import {Request} from '@/server/Request';
-import {Response} from '@/server/Response';
-import {Clock} from '@/common/Timer';
-import {SessionId} from '@/server/auth/Session';
-import {DiscordUser} from '@/server/server/auth/discord';
-import {ISessionManager} from '@/server/server/auth/SessionManager';
+import {IGameLoader} from '../database/IGameLoader';
+import {IPTracker} from '../server/IPTracker';
+import {Request} from '../Request';
+import {Response} from '../Response';
+import {Clock} from '../../common/Timer';
+import {SessionId} from '../auth/Session';
+import {DiscordUser} from '../server/auth/discord';
+import {ISessionManager} from '../server/auth/SessionManager';
 
 // Processes a request for a specific path.
 //

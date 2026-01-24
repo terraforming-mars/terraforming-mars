@@ -1,9 +1,9 @@
-import {IPlayer} from '@/server/IPlayer';
-import {GlobalParameterRequirement} from '@/server/cards/requirements/GlobalParameterRequirement';
-import {MAX_OCEAN_TILES} from '@/common/constants';
-import {GlobalParameter} from '@/common/GlobalParameter';
-import {RequirementType} from '@/common/cards/RequirementType';
-import {Options} from '@/server/cards/requirements/CardRequirement';
+import {IPlayer} from '../../IPlayer';
+import {GlobalParameterRequirement} from './GlobalParameterRequirement';
+import {MAX_OCEAN_TILES} from '../../../common/constants';
+import {GlobalParameter} from '../../../common/GlobalParameter';
+import {RequirementType} from '../../../common/cards/RequirementType';
+import {Options} from './CardRequirement';
 
 /**
  * Evaluate whether the game's ocean tile count is at least (or at most) a given value.

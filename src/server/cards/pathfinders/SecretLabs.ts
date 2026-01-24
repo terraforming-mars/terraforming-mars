@@ -1,19 +1,19 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CanAffordOptions, IPlayer} from '@/server/IPlayer';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {PlaceOceanTile} from '@/server/deferredActions/PlaceOceanTile';
-import {AddResourcesToCard} from '@/server/deferredActions/AddResourcesToCard';
-import {Resource} from '@/common/Resource';
-import {CardResource} from '@/common/CardResource';
-import {TRSource} from '@/common/cards/TRSource';
-import {digit} from '@/server/cards/Options';
-import {MAX_OCEAN_TILES} from '@/common/constants';
+import {IProjectCard} from '../IProjectCard';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
+import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {Resource} from '../../../common/Resource';
+import {CardResource} from '../../../common/CardResource';
+import {TRSource} from '../../../common/cards/TRSource';
+import {digit} from '../Options';
+import {MAX_OCEAN_TILES} from '../../../common/constants';
 
 export class SecretLabs extends Card implements IProjectCard {
   constructor() {

@@ -1,7 +1,7 @@
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {Tag} from '@/common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {PreludeCard} from '../prelude/PreludeCard';
+import {Tag} from '../../../common/cards/Tag';
 
 export class GiantSolarCollector extends PreludeCard {
   constructor() {

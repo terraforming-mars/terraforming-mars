@@ -1,10 +1,10 @@
-import {Message} from '@/common/logs/Message';
-import {BasePlayerInput} from '@/server/PlayerInput';
-import {IPlayer} from '@/server/IPlayer';
-import {NeutralPlayer} from '@/server/turmoil/Turmoil';
-import {InputResponse, isSelectDelegateResponse} from '@/common/inputs/InputResponse';
-import {SelectDelegateModel} from '@/common/models/PlayerInputModel';
-import {InputError} from '@/server/inputs/InputError';
+import {Message} from '../../common/logs/Message';
+import {BasePlayerInput} from '../PlayerInput';
+import {IPlayer} from '../IPlayer';
+import {NeutralPlayer} from '../turmoil/Turmoil';
+import {InputResponse, isSelectDelegateResponse} from '../../common/inputs/InputResponse';
+import {SelectDelegateModel} from '../../common/models/PlayerInputModel';
+import {InputError} from './InputError';
 
 export class SelectDelegate extends BasePlayerInput<IPlayer | NeutralPlayer> {
   constructor(

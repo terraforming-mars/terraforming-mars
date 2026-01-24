@@ -1,16 +1,16 @@
-import {IGlobalEvent} from '@/server/turmoil/globalEvents/IGlobalEvent';
-import {GlobalEvent} from '@/server/turmoil/globalEvents/GlobalEvent';
-import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
-import {Turmoil} from '@/server/turmoil/Turmoil';
-import {PartyName} from '@/common/turmoil/PartyName';
-import {IGame} from '@/server/IGame';
-import {Resource} from '@/common/Resource';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
+import {GlobalEvent} from '../../turmoil/globalEvents/GlobalEvent';
+import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
+import {Turmoil} from '../../turmoil/Turmoil';
+import {PartyName} from '../../../common/turmoil/PartyName';
+import {IGame} from '../../IGame';
+import {Resource} from '../../../common/Resource';
+import {CardRenderer} from '../../cards/render/CardRenderer';
 import {MultiMap} from 'mnemonist';
-import {IPlayer} from '@/server/IPlayer';
-import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
-import {Size} from '@/common/cards/render/Size';
-import {Tag} from '@/common/cards/Tag';
+import {IPlayer} from '../../IPlayer';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
+import {Size} from '../../../common/cards/render/Size';
+import {Tag} from '../../../common/cards/Tag';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.tag(Tag.CRIME).plus().influence().colon();

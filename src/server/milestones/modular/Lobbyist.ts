@@ -1,6 +1,6 @@
-import {BaseMilestone} from '@/server/milestones/IMilestone';
-import {IPlayer} from '@/server/IPlayer';
-import {Turmoil} from '@/server/turmoil/Turmoil';
+import {BaseMilestone} from '../IMilestone';
+import {IPlayer} from '../../IPlayer';
+import {Turmoil} from '../../turmoil/Turmoil';
 
 export class Lobbyist extends BaseMilestone {
   constructor() {

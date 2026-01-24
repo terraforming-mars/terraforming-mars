@@ -1,15 +1,15 @@
-import {IPlayer} from '@/server/IPlayer';
-import {CardResource} from '@/common/CardResource';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectCard} from '@/server/inputs/SelectCard';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {ICard} from '@/server/cards/ICard';
-import {DeferredAction} from '@/server/deferredActions/DeferredAction';
-import {Priority} from '@/server/deferredActions/Priority';
-import {Message} from '@/common/logs/Message';
-import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
-import {message} from '@/server/logs/MessageBuilder';
-import {CardName} from '@/common/cards/CardName';
+import {IPlayer} from '../IPlayer';
+import {CardResource} from '../../common/CardResource';
+import {OrOptions} from '../inputs/OrOptions';
+import {SelectCard} from '../inputs/SelectCard';
+import {SelectOption} from '../inputs/SelectOption';
+import {ICard} from '../cards/ICard';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
+import {Message} from '../../common/logs/Message';
+import {UnderworldExpansion} from '../underworld/UnderworldExpansion';
+import {message} from '../logs/MessageBuilder';
+import {CardName} from '../../common/cards/CardName';
 
 export type Source = 'self' | 'opponents' | 'all';
 export type Response = {card: ICard, owner: IPlayer, proceed: boolean} | {card: undefined, owner: undefined, proceed: boolean};

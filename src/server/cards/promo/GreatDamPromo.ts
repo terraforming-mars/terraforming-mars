@@ -1,16 +1,16 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
-import {TileType} from '@/common/TileType';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Card} from '@/server/cards/Card';
-import {AdjacencyBonus} from '@/server/ares/AdjacencyBonus';
-import {Board} from '@/server/boards/Board';
-import {Space} from '@/server/boards/Space';
-import {PlaceTile} from '@/server/deferredActions/PlaceTile';
-import {CanAffordOptions, IPlayer} from '@/server/IPlayer';
-import {message} from '@/server/logs/MessageBuilder';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {CardType} from '../../../common/cards/CardType';
+import {CardName} from '../../../common/cards/CardName';
+import {TileType} from '../../../common/TileType';
+import {CardRenderer} from '../render/CardRenderer';
+import {Card} from '../Card';
+import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
+import {Board} from '../../boards/Board';
+import {Space} from '../../boards/Space';
+import {PlaceTile} from '../../deferredActions/PlaceTile';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
+import {message} from '../../logs/MessageBuilder';
 
 export class GreatDamPromo extends Card implements IProjectCard {
   constructor(

@@ -1,16 +1,16 @@
-import {Tag} from '@/common/cards/Tag';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {CardResource} from '@/common/CardResource';
-import {IActionCard} from '@/server/cards/ICard';
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {IPlayer} from '@/server/IPlayer';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectCard} from '@/server/inputs/SelectCard';
-import {AndOptions} from '@/server/inputs/AndOptions';
-import {SelectAmount} from '@/server/inputs/SelectAmount';
-import {SelectResource} from '@/server/inputs/SelectResource';
-import {Units} from '@/common/Units';
+import {Tag} from '../../../common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {CardResource} from '../../../common/CardResource';
+import {IActionCard} from '../ICard';
+import {PreludeCard} from '../prelude/PreludeCard';
+import {IPlayer} from '../../IPlayer';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectCard} from '../../inputs/SelectCard';
+import {AndOptions} from '../../inputs/AndOptions';
+import {SelectAmount} from '../../inputs/SelectAmount';
+import {SelectResource} from '../../inputs/SelectResource';
+import {Units} from '../../../common/Units';
 
 export class FloatingTradeHub extends PreludeCard implements IActionCard {
   constructor() {

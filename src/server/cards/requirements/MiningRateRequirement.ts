@@ -1,8 +1,8 @@
-import {IPlayer} from '@/server/IPlayer';
-import {MoonExpansion} from '@/server/moon/MoonExpansion';
-import {GlobalParameterRequirement} from '@/server/cards/requirements/GlobalParameterRequirement';
-import {GlobalParameter} from '@/common/GlobalParameter';
-import {RequirementType} from '@/common/cards/RequirementType';
+import {IPlayer} from '../../IPlayer';
+import {MoonExpansion} from '../../moon/MoonExpansion';
+import {GlobalParameterRequirement} from './GlobalParameterRequirement';
+import {GlobalParameter} from '../../../common/GlobalParameter';
+import {RequirementType} from '../../../common/cards/RequirementType';
 
 /**
  * Evaluate whether the game's Moon mining rate is at least (or at most) a given value.

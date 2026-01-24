@@ -1,9 +1,9 @@
-import {CardName} from '@/common/cards/CardName';
-import {Tag} from '@/common/cards/Tag';
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
+import {CardName} from '../../../common/cards/CardName';
+import {Tag} from '../../../common/cards/Tag';
+import {PreludeCard} from '../prelude/PreludeCard';
+import {CardRenderer} from '../render/CardRenderer';
+import {IProjectCard} from '../IProjectCard';
+import {AltSecondaryTag} from '../../../common/cards/render/AltSecondaryTag';
 
 export class CoreMine extends PreludeCard implements IProjectCard {
   constructor() {

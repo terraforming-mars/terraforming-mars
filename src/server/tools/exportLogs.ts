@@ -1,6 +1,6 @@
-import {Log} from '@/common/logs/Log';
-import {GameId} from '@/common/Types';
-import {IDatabase} from '@/server/database/IDatabase';
+import {Log} from '../../common/logs/Log';
+import {GameId} from '../../common/Types';
+import {IDatabase} from '../database/IDatabase';
 
 export async function exportLogs(db: IDatabase, gameId: GameId): Promise<Array<string>> {
   const saveIds = await db.getSaveIds(gameId);

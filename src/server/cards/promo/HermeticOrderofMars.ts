@@ -1,13 +1,13 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {max} from '@/server/cards/Options';
-import {IPlayer} from '@/server/IPlayer';
-import {SpaceType} from '@/common/boards/SpaceType';
-import {Resource} from '@/common/Resource';
-import {Board} from '@/server/boards/Board';
+import {IProjectCard} from '../IProjectCard';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {max} from '../Options';
+import {IPlayer} from '../../IPlayer';
+import {SpaceType} from '../../../common/boards/SpaceType';
+import {Resource} from '../../../common/Resource';
+import {Board} from '../../boards/Board';
 
 export class HermeticOrderOfMars extends Card implements IProjectCard {
   constructor() {

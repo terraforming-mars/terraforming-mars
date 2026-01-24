@@ -2,10 +2,10 @@
 // e.g. node build/src/server/tools/dump_log.js g4940001dbc
 require('dotenv').config();
 
-import {isGameId} from '@/common/Types';
-import {Database} from '@/server/database/Database';
-import {IDatabase} from '@/server/database/IDatabase';
-import {exportLogs} from '@/server/tools/exportLogs';
+import {isGameId} from '../../common/Types';
+import {Database} from '../database/Database';
+import {IDatabase} from '../database/IDatabase';
+import {exportLogs} from './exportLogs';
 
 const args = process.argv.slice(2);
 const [gameId] = args;

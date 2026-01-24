@@ -1,7 +1,7 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {IAward} from '@/server/awards/IAward';
-import {ICard} from '@/server/cards/ICard';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {IAward} from '../IAward';
+import {ICard} from '../../cards/ICard';
 
 /**
  * The list of cards that have bespoke code to change production.

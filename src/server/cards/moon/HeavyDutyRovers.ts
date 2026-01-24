@@ -1,14 +1,14 @@
-import {CardName} from '@/common/cards/CardName';
-import {IPlayer} from '@/server/IPlayer';
-import {CardType} from '@/common/cards/CardType';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {MoonExpansion} from '@/server/moon/MoonExpansion';
-import {TileType} from '@/common/TileType';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Size} from '@/common/cards/render/Size';
-import {Card} from '@/server/cards/Card';
-import {Resource} from '@/common/Resource';
-import {all} from '@/server/cards/Options';
+import {CardName} from '../../../common/cards/CardName';
+import {IPlayer} from '../../IPlayer';
+import {CardType} from '../../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {MoonExpansion} from '../../moon/MoonExpansion';
+import {TileType} from '../../../common/TileType';
+import {CardRenderer} from '../render/CardRenderer';
+import {Size} from '../../../common/cards/render/Size';
+import {Card} from '../Card';
+import {Resource} from '../../../common/Resource';
+import {all} from '../Options';
 
 export class HeavyDutyRovers extends Card implements IProjectCard {
   constructor() {

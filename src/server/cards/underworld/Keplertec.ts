@@ -1,17 +1,17 @@
-import {Tag} from '@/common/cards/Tag';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {IPlayer} from '@/server/IPlayer';
-import {ActiveCorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {CardResource} from '@/common/CardResource';
-import {digit} from '@/server/cards/Options';
-import {ICard} from '@/server/cards/ICard';
-import {UndergroundResourceToken, undergroundResourceTokenDescription} from '@/common/underworld/UndergroundResourceToken';
-import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
-import {OrOptions} from '@/server/inputs/OrOptions';
-import {SelectOption} from '@/server/inputs/SelectOption';
-import {SimpleDeferredAction} from '@/server/deferredActions/DeferredAction';
-import {inplaceRemove} from '@/common/utils/utils';
+import {Tag} from '../../../common/cards/Tag';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {IPlayer} from '../../IPlayer';
+import {ActiveCorporationCard} from '../corporation/CorporationCard';
+import {CardResource} from '../../../common/CardResource';
+import {digit} from '../Options';
+import {ICard} from '../ICard';
+import {UndergroundResourceToken, undergroundResourceTokenDescription} from '../../../common/underworld/UndergroundResourceToken';
+import {UnderworldExpansion} from '../../../server/underworld/UnderworldExpansion';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
+import {inplaceRemove} from '../../../common/utils/utils';
 
 export class Keplertec extends ActiveCorporationCard {
   constructor() {

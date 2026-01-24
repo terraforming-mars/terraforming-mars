@@ -1,9 +1,9 @@
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {cancelled, digit} from '@/server/cards/Options';
-import {Size} from '@/common/cards/render/Size';
-import {IPlayer} from '@/server/IPlayer';
+import {PreludeCard} from '../prelude/PreludeCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {cancelled, digit} from '../Options';
+import {Size} from '../../../common/cards/render/Size';
+import {IPlayer} from '../../IPlayer';
 
 export class PreservationProgram extends PreludeCard {
   constructor() {

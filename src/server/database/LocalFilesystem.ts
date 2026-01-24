@@ -1,11 +1,11 @@
-import {GameIdLedger, IDatabase} from '@/server/database/IDatabase';
-import {IGame, Score} from '@/server/IGame';
-import {GameOptions} from '@/server/game/GameOptions';
-import {GameId, isGameId, ParticipantId} from '@/common/Types';
-import {SerializedGame} from '@/server/SerializedGame';
+import {GameIdLedger, IDatabase} from './IDatabase';
+import {IGame, Score} from '../IGame';
+import {GameOptions} from '../game/GameOptions';
+import {GameId, isGameId, ParticipantId} from '../../common/Types';
+import {SerializedGame} from '../SerializedGame';
 import {Dirent, existsSync, mkdirSync, readdirSync, readFileSync, unlinkSync, writeFileSync} from 'fs';
-import {Session, SessionId} from '@/server/auth/Session';
-import {toID} from '@/common/utils/utils';
+import {Session, SessionId} from '../auth/Session';
+import {toID} from '../../common/utils/utils';
 
 const path = require('path');
 const defaultDbFolder = path.resolve(process.cwd(), './db/files');

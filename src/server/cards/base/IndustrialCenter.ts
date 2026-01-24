@@ -1,15 +1,15 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {Tag} from '@/common/cards/Tag';
-import {ActionCard} from '@/server/cards/ActionCard';
-import {CardType} from '@/common/cards/CardType';
-import {CanAffordOptions, IPlayer} from '@/server/IPlayer';
-import {TileType} from '@/common/TileType';
-import {PlaceTile} from '@/server/deferredActions/PlaceTile';
-import {Space} from '@/server/boards/Space';
-import {CardName} from '@/common/cards/CardName';
-import {Board} from '@/server/boards/Board';
-import {AdjacencyBonus} from '@/server/ares/AdjacencyBonus';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
+import {IProjectCard} from '../IProjectCard';
+import {Tag} from '../../../common/cards/Tag';
+import {ActionCard} from '../ActionCard';
+import {CardType} from '../../../common/cards/CardType';
+import {CanAffordOptions, IPlayer} from '../../IPlayer';
+import {TileType} from '../../../common/TileType';
+import {PlaceTile} from '../../../server/deferredActions/PlaceTile';
+import {Space} from '../../boards/Space';
+import {CardName} from '../../../common/cards/CardName';
+import {Board} from '../../boards/Board';
+import {AdjacencyBonus} from '../../ares/AdjacencyBonus';
+import {CardRenderer} from '../render/CardRenderer';
 
 export class IndustrialCenter extends ActionCard implements IProjectCard {
   constructor(

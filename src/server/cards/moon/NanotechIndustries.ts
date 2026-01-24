@@ -1,13 +1,13 @@
-import {CardName} from '@/common/cards/CardName';
-import {Tag} from '@/common/cards/Tag';
-import {CorporationCard} from '@/server/cards/corporation/CorporationCard';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {IActionCard} from '@/server/cards/ICard';
-import {CardResource} from '@/common/CardResource';
-import {IPlayer} from '@/server/IPlayer';
-import {AddResourcesToCard} from '@/server/deferredActions/AddResourcesToCard';
-import {MoonCards} from '@/server/moon/MoonCards';
-import {ICorporationCard} from '@/server/cards/corporation/ICorporationCard';
+import {CardName} from '../../../common/cards/CardName';
+import {Tag} from '../../../common/cards/Tag';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {CardRenderer} from '../render/CardRenderer';
+import {IActionCard} from '../ICard';
+import {CardResource} from '../../../common/CardResource';
+import {IPlayer} from '../../IPlayer';
+import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {MoonCards} from '../../moon/MoonCards';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 
 export class NanotechIndustries extends CorporationCard implements ICorporationCard, IActionCard {
   constructor() {

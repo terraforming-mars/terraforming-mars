@@ -1,8 +1,8 @@
-import {DeferredAction} from '@/server/deferredActions/DeferredAction';
-import {Priority} from '@/server/deferredActions/Priority';
-import {SelectAmount} from '@/server/inputs/SelectAmount';
-import {IPlayer} from '@/server/IPlayer';
-import {Resource} from '@/common/Resource';
+import {DeferredAction} from '../deferredActions/DeferredAction';
+import {Priority} from '../deferredActions/Priority';
+import {SelectAmount} from '../inputs/SelectAmount';
+import {IPlayer} from '../IPlayer';
+import {Resource} from '../../common/Resource';
 
 export class SellSteel extends DeferredAction {
   constructor(

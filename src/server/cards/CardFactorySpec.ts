@@ -1,7 +1,7 @@
-import {Expansion, GameModule} from '@/common/cards/GameModule';
-import {OneOrArray} from '@/common/utils/types';
-import {asArray} from '@/common/utils/utils';
-import {GameOptions} from '@/server/game/GameOptions';
+import {Expansion, GameModule} from '../../common/cards/GameModule';
+import {OneOrArray} from '../../common/utils/types';
+import {asArray} from '../../common/utils/utils';
+import {GameOptions} from '../game/GameOptions';
 
 /**
  * Defines conditions for creating a card in a game, including conditions

@@ -1,15 +1,15 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {IPlayer} from '@/server/IPlayer';
-import {Card} from '@/server/cards/Card';
-import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {AddResourcesToCard} from '@/server/deferredActions/AddResourcesToCard';
-import {CardResource} from '@/common/CardResource';
-import {Tag} from '@/common/cards/Tag';
-import {digit} from '@/server/cards/Options';
-import {Resource} from '@/common/Resource';
-import {Size} from '@/common/cards/render/Size';
+import {IProjectCard} from '../IProjectCard';
+import {IPlayer} from '../../IPlayer';
+import {Card} from '../Card';
+import {CardType} from '../../../common/cards/CardType';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {CardResource} from '../../../common/CardResource';
+import {Tag} from '../../../common/cards/Tag';
+import {digit} from '../Options';
+import {Resource} from '../../../common/Resource';
+import {Size} from '../../../common/cards/render/Size';
 
 export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
   constructor() {

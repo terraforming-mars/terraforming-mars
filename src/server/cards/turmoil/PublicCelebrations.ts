@@ -1,7 +1,7 @@
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardType} from '@/common/cards/CardType';
-import {Card} from '@/server/cards/Card';
+import {IProjectCard} from '../IProjectCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
+import {Card} from '../Card';
 
 export class PublicCelebrations extends Card implements IProjectCard {
   constructor() {

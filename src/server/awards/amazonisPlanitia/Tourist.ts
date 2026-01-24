@@ -1,8 +1,8 @@
-import {RedTourismWave} from '@/server/cards/turmoil/RedTourismWave';
-import {IPlayer} from '@/server/IPlayer';
-import {IAward} from '@/server/awards/IAward';
-import {SpaceType} from '@/common/boards/SpaceType';
-import {Board} from '@/server/boards/Board';
+import {RedTourismWave} from '../../cards/turmoil/RedTourismWave';
+import {IPlayer} from '../../IPlayer';
+import {IAward} from '../IAward';
+import {SpaceType} from '../../../common/boards/SpaceType';
+import {Board} from '../../boards/Board';
 
 export class Tourist implements IAward {
   public readonly name = 'Tourist';

@@ -1,11 +1,11 @@
-import {LogMessage} from '@/common/logs/LogMessage';
-import {LogMessageType} from '@/common/logs/LogMessageType';
-import {ParticipantId} from '@/common/Types';
-import {IGame} from '@/server/IGame';
-import {Phase} from '@/common/Phase';
-import {Log} from '@/common/logs/Log';
-import {LogMessageData} from '@/common/logs/LogMessageData';
-import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
+import {LogMessage} from '../../common/logs/LogMessage';
+import {LogMessageType} from '../../common/logs/LogMessageType';
+import {ParticipantId} from '../../common/Types';
+import {IGame} from '../IGame';
+import {Phase} from '../../common/Phase';
+import {Log} from '../../common/logs/Log';
+import {LogMessageData} from '../../common/logs/LogMessageData';
+import {LogMessageDataType} from '../../common/logs/LogMessageDataType';
 
 export class GameLogs {
   private getLogsForGeneration(messages: Array<LogMessage>, generation: number): Array<LogMessage> {

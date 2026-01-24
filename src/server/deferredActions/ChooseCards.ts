@@ -1,13 +1,13 @@
-import {IPlayer} from '@/server/IPlayer';
-import {IProjectCard} from '@/server/cards/IProjectCard';
-import {DeferredAction} from '@/server/deferredActions/DeferredAction';
-import {Priority} from '@/server/deferredActions/Priority';
-import {SelectCard} from '@/server/inputs/SelectCard';
-import {SelectPaymentDeferred} from '@/server/deferredActions/SelectPaymentDeferred';
-import {LogHelper} from '@/server/LogHelper';
-import {oneWayDifference} from '@/common/utils/utils';
-import {message} from '@/server/logs/MessageBuilder';
-import {Message} from '@/common/logs/Message';
+import {IPlayer} from '../IPlayer';
+import {IProjectCard} from '../cards/IProjectCard';
+import {DeferredAction} from './DeferredAction';
+import {Priority} from './Priority';
+import {SelectCard} from '../inputs/SelectCard';
+import {SelectPaymentDeferred} from './SelectPaymentDeferred';
+import {LogHelper} from '../LogHelper';
+import {oneWayDifference} from '../../common/utils/utils';
+import {message} from '../logs/MessageBuilder';
+import {Message} from '../../common/logs/Message';
 
 export enum LogType {
   DREW = 'drew',

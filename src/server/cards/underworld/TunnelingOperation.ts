@@ -1,12 +1,12 @@
-import {PreludeCard} from '@/server/cards/prelude/PreludeCard';
-import {CardName} from '@/common/cards/CardName';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {Tag} from '@/common/cards/Tag';
-import {IPlayer} from '@/server/IPlayer';
-import {IdentifySpacesDeferred} from '@/server/underworld/IdentifySpacesDeferred';
-import {ExcavateSpacesDeferred} from '@/server/underworld/ExcavateSpacesDeferred';
-import {digit} from '@/server/cards/Options';
-import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
+import {PreludeCard} from '../prelude/PreludeCard';
+import {CardName} from '../../../common/cards/CardName';
+import {CardRenderer} from '../render/CardRenderer';
+import {Tag} from '../../../common/cards/Tag';
+import {IPlayer} from '../../IPlayer';
+import {IdentifySpacesDeferred} from '../../underworld/IdentifySpacesDeferred';
+import {ExcavateSpacesDeferred} from '../../underworld/ExcavateSpacesDeferred';
+import {digit} from '../Options';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
 
 export class TunnelingOperation extends PreludeCard {
   constructor() {

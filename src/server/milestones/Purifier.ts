@@ -1,5 +1,5 @@
-import {IPlayer} from '@/server/IPlayer';
-import {BaseMilestone} from '@/server/milestones/IMilestone';
+import {IPlayer} from '../IPlayer';
+import {BaseMilestone} from './IMilestone';
 
 export class Purifier extends BaseMilestone {
   constructor() {

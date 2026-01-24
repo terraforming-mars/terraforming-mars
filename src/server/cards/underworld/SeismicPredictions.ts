@@ -1,15 +1,15 @@
-import {IGlobalEvent} from '@/server/turmoil/globalEvents/IGlobalEvent';
-import {GlobalEvent} from '@/server/turmoil/globalEvents/GlobalEvent';
-import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
-import {PartyName} from '@/common/turmoil/PartyName';
-import {IGame} from '@/server/IGame';
-import {Resource} from '@/common/Resource';
-import {Turmoil} from '@/server/turmoil/Turmoil';
-import {CardRenderer} from '@/server/cards/render/CardRenderer';
-import {UnderworldExpansion} from '@/server/underworld/UnderworldExpansion';
-import {Size} from '@/common/cards/render/Size';
-import {cancelled} from '@/server/cards/Options';
-import {Tag} from '@/common/cards/Tag';
+import {IGlobalEvent} from '../../turmoil/globalEvents/IGlobalEvent';
+import {GlobalEvent} from '../../turmoil/globalEvents/GlobalEvent';
+import {GlobalEventName} from '../../../common/turmoil/globalEvents/GlobalEventName';
+import {PartyName} from '../../../common/turmoil/PartyName';
+import {IGame} from '../../IGame';
+import {Resource} from '../../../common/Resource';
+import {Turmoil} from '../../turmoil/Turmoil';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+import {UnderworldExpansion} from '../../underworld/UnderworldExpansion';
+import {Size} from '../../../common/cards/render/Size';
+import {cancelled} from '../../cards/Options';
+import {Tag} from '../../../common/cards/Tag';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.text('ALL').undergroundResources(1, {cancelled}).nbsp.megacredits(-2).slash().tag(Tag.BUILDING).minus().undergroundResources().influence({size: Size.SMALL});

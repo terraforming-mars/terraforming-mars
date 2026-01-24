@@ -1,8 +1,8 @@
-import {CardName} from '@/common/cards/CardName';
-import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
-import {ICard} from '@/server/cards/ICard';
-import {IPlayer} from '@/server/IPlayer';
-import {IGlobalEvent} from '@/server/turmoil/globalEvents/IGlobalEvent';
+import {CardName} from '../../common/cards/CardName';
+import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
+import {ICard} from '../cards/ICard';
+import {IPlayer} from '../IPlayer';
+import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 
 /**
  * The source of something gained or taken. Used when logging.

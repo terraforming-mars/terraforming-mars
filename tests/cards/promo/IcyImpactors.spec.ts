@@ -7,7 +7,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {cast, maxOutOceans, runAllActions} from '../../TestingUtils';
 import {IGame} from '../../../src/server/IGame';
 import {TileType} from '../../../src/common/TileType';
-import {Whales} from '@/server/cards/underworld/Whales';
+import {Whales} from '../../../src/server/cards/underworld/Whales';
 
 describe('IcyImpactors', () => {
   let card: IcyImpactors;

@@ -33,8 +33,6 @@ export class CrescentResearchAssociation extends CorporationCard implements ICor
     if (tags === 0) {
       return 0;
     }
-    const discount = player.tags.count(Tag.MOON) * tags;
-    console.log(card.name, card.tags, discount);
-    return discount;
+    return player.tags.count(Tag.MOON) * tags;
   }
 }

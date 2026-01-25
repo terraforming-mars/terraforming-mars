@@ -278,7 +278,7 @@
   "Select space next to greenery for special tile": "Sélectionnez une zone à côté d'une Forêt pour une tuile spéciale",
   "Gain plants": "Gagnez des plantes",
   "Add animals": "Ajoutez des animaux",
-  "All players except ${0} may not trade next generation.": "Tous les joueurs sauf ${0} ne commerceront pas à la prochaine génération.",
+  "No players may trade next generation, except ${0}.": "Aucun joueur ne peut commercer à la prochaine génération, sauf ${0}.",
   "${0} spent ${1} energy to trade with ${2}": "${0} a commercé avec ${2}",
   "${0} spent ${1} titanium to trade with ${2}": "${0} a commercé avec ${2}",
   "${0} spent ${1} M€ to trade with ${2}": "${0} a commercé avec ${2}",

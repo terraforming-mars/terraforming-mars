@@ -317,7 +317,7 @@
   "Gain plants": "Saat kasveja",
   "Add animals": "Lisää eläimiä",
 
-  "All players except ${0} may not trade next generation.": "Kaikki pelaajat paitsi ${0} eivät voi käydä kauppaa seuraavassa sukupolvessa.",
+  "No players may trade next generation, except ${0}.": "Kukaan pelaaja ei voi käydä kauppaa seuraavassa sukupolvessa, paitsi ${0}.",
   "${0} spent ${1} energy to trade with ${2}": "${0} käytti ${1} energiaa käydäkseen kauppaa ${2} kanssa",
   "${0} spent ${1} titanium to trade with ${2}": "${0} käytti ${1} titaania käydäkseen kauppaa ${2} kanssa",
   "${0} spent ${1} M€ to trade with ${2}": "${0} käytti ${1} M€ käydäkseen kauppaa ${2} kanssa",

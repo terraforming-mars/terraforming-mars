@@ -8,7 +8,7 @@
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
     <bonus :bonus="space.bonus" v-if="showBonus"></bonus>
     <template v-if="tileView === 'coords'">
-      <div class="board-space-coords">{{  getSpaceName(space.id) }}</div>
+      <div class="board-space-coords">{{ getSpaceName(space.id) }}</div>
     </template>
     <template v-if="tileView === 'show'">
       <div :class="playerColorCss" v-if="space.color !== undefined"></div>

@@ -211,6 +211,14 @@ export default (Vue as WithRefs<Refs>).extend({
       if (!this.isProjectCard) {
         return;
       }
+      // Was not initialized with a custom height, probably because it was not visible.
+      if (this.customHeight === 0) {
+        this.customHeight = this.$refs.content.$el.scrollHeight;
+        // If for some reason it still doesn't have a custom height, don't resize it.
+        if (this.customHeight === 0) {
+          return;
+        }
+      }
       const content = this.$refs.content.$el as HTMLElement;
       if (content.scrollHeight <= 236) {
         return;

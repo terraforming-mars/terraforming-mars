@@ -1,6 +1,6 @@
 <template>
   <div class="card-container filterDiv hover-hide-res" :class="cardClasses" ref="container">
-      <div class="card-content-wrapper" v-i18n @mouseover="hovering = true" @mouseleave="hovering = false">
+      <div class="card-content-wrapper" v-i18n @pointerover="pointerOver" @pointerout="pointerOut">
           <div v-if="!isStandardProject" class="card-cost-and-tags">
               <CardCost :amount="cost" :newCost="reducedCost" />
               <div v-if="showPlayerCube" :class="playerCubeClass"></div>
@@ -96,6 +96,16 @@ export default (Vue as WithRefs<Refs>).extend({
       hovering: false,
       customHeight: 0,
     };
+  },
+  methods: {
+    pointerOver(e: PointerEvent) {
+      if (e.pointerType === 'mouse') {
+        this.hovering = true;
+      }
+    },
+    pointerOut(_e: PointerEvent) {
+      this.hovering = false;
+    },
   },
   computed: {
     cardExpansion(): GameModule {

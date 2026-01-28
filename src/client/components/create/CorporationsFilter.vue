@@ -92,6 +92,7 @@ export default Vue.extend({
         ...this.expansions.community ? corpCardNames('community') : [],
         ...this.expansions.moon ? corpCardNames('moon') : [],
         ...this.expansions.pathfinders ? corpCardNames('pathfinders') : [],
+        ...this.expansions.underworld ? corpCardNames('underworld') : [],
       ],
     };
   },

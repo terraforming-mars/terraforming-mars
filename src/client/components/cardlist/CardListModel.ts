@@ -19,6 +19,7 @@ export type CardListModel = {
   showAdvanced: boolean;
   sortOrder: 'a' | '1';
   showMetadata: boolean;
+  tallCards: boolean;
   vps: number; // 0: all, 1: VPs, 2: no vps
 }
 
@@ -169,6 +170,7 @@ export function hashToModel(windowLocationHash: string): CardListModel {
     vps: 0,
     sortOrder: 'a',
     showMetadata: true,
+    tallCards: false,
   };
   if (windowLocationHash.length > 1) {
     const hash = decodeURIComponent(windowLocationHash).slice(1);

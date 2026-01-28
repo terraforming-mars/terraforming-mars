@@ -19,13 +19,18 @@
 
         <button id="show-vps-only" v-on:click="toggleVps()" style="width: 63px;">
             <span v-if="vps === 0" v-i18n>all</span>
-            <span v-if="vps === 1" v-i18n>VPS</span>
+            <span v-if="vps === 1" v-i18n>+VPs</span>
             <span v-if="vps === 2" v-i18n>-VPs</span>
         </button>
 
-        <button id="show-metadata" v-on:click="toggleShowMetadata()" style="width: 30px;">
-            <span v-if="showMetadata === true">■</span>
-            <span v-else>□</span>
+        <button id="show-metadata" v-on:click="toggleShowMetadata()" style="width: 60px;" title="Show/hide colony metadata">
+            <span v-if="showMetadata === true">🛰️■</span>
+            <span v-else>🛰️□</span>
+        </button>
+
+        <button id="tall-cards" v-on:click="toggleTallCards()" style="width: 90px;" title="Show tall / short cards">
+            <span v-if="tallCards === true">🂠→<span class="small-card">🂠</span></span>
+              <span v-else><span class="small-card">🂠</span>→🂠</span>
         </button>
 
         <button id="advanced-search-collapser" v-on:click="toggleAdvancedSearch()">
@@ -99,35 +104,35 @@
       <section class="card-list-cards-list">
           <h2 v-i18n>Project Cards</h2>
           <div class="cardbox" v-for="card in getAllProjectCards()" :key="card">
-              <Card v-if="showCard(card)" :card="{'name': card}" />
+              <Card v-if="showCard(card)" :card="{'name': card}" :autoTall="tallCards" />
           </div>
       </section>
       <br>
       <section class="card-list-cards-list">
           <h2 v-i18n>Corporations</h2>
           <div class="cardbox" v-for="card in getAllCorporationCards()" :key="card">
-              <Card v-if="showCard(card)" :card="{'name': card}" />
+              <Card v-if="showCard(card)" :card="{'name': card}" :autoTall="tallCards"/>
           </div>
       </section>
       <br>
       <section class="card-list-cards-list">
           <h2 v-i18n>Preludes</h2>
           <div class="cardbox" v-for="card in getAllPreludeCards()" :key="card">
-              <Card v-if="showCard(card)" :card="{'name': card}" />
+              <Card v-if="showCard(card)" :card="{'name': card}" :autoTall="tallCards"/>
           </div>
       </section>
       <br>
       <section class="card-list-cards-list">
           <h2 v-i18n>CEOs</h2>
           <div class="cardbox" v-for="card in getAllCeoCards()" :key="card">
-              <Card v-if="showCard(card)" :card="{'name': card}" />
+              <Card v-if="showCard(card)" :card="{'name': card}" :autoTall="tallCards" />
           </div>
       </section>
       <br>
       <section class="card-list-cards-list">
         <h2 v-i18n>Standard Projects</h2>
         <div class="cardbox" v-for="card in getAllStandardProjectCards()" :key="card">
-            <Card v-if="showCard(card)" :card="{'name': card}" />
+            <Card v-if="showCard(card)" :card="{'name': card}" :autoTall="tallCards" />
         </div>
       </section>
 
@@ -496,7 +501,9 @@ export default (Vue as WithRefs<Refs>).extend({
     toggleShowMetadata(): void {
       this.showMetadata = !this.showMetadata;
     },
+    toggleTallCards(): void {
+      this.tallCards = !this.tallCards;
+    },
   },
 });
-
 </script>

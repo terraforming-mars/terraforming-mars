@@ -53,7 +53,7 @@ export class Monopoly extends Card implements IProjectCard, IActionCard {
 
   public override bespokePlay(player: IPlayer) {
     return new SelectResource(
-      'Select which production to increase 1 step.',
+      'Select which resource type to steal 2 units from all other players.',
       this.stealableResources(player))
       .andThen((unitKey) => {
         const resource = Units.ResourceMap[unitKey];
@@ -85,7 +85,7 @@ export class Monopoly extends Card implements IProjectCard, IActionCard {
 
   public action(player: IPlayer) {
     return new SelectResource(
-      'Select which resource type to steal 2 units from all other players.')
+      'Select which production to increase 1 step.')
       .andThen((unitKey) => {
         UnderworldExpansion.loseCorruption(player, 1);
         const units = {...Units.EMPTY};

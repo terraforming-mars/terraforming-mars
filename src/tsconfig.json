@@ -6,6 +6,7 @@
     "include": [
         "**/*.ts",
         "genfiles/*.json",
+        "server/ma/*.json",
     ],
     "exclude": [
       "client/**/*.ts"

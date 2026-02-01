@@ -7,6 +7,7 @@ import {Behavior} from '../../behavior/Behavior';
 import {getBehaviorExecutor} from '../../behavior/BehaviorExecutor';
 import {PlayerInput} from '../../PlayerInput';
 import {CardName} from '../../../common/cards/CardName';
+import {CardType} from '../../../common/cards/CardType';
 
 export abstract class RoboticWorkforceBase extends Card {
   constructor(properties: StaticCardProperties) {
@@ -28,6 +29,11 @@ export abstract class RoboticWorkforceBase extends Card {
   }
 
   protected isCardApplicable(card: ICard, player: IPlayer, canAfford: boolean): boolean {
+    // Exclude events unless Odyssey is in play.
+    if (card.type === CardType.EVENT && !player.tableau.has(CardName.ODYSSEY)) {
+      return false;
+    }
+
     if (!card.tags.includes(Tag.BUILDING) && !card.tags.includes(Tag.WILD)) {
       return false;
     }

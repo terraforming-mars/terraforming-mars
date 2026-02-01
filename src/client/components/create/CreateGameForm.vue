@@ -981,37 +981,39 @@ export default (Vue as WithRefs<Refs>).extend({
         if (confirm === false) return;
       }
 
+      if (getCard(CardName.SUITABLE_INFRASTRUCTURE) !== undefined) {
+        throw new Error('Restore the infinite energy warning if Suitable Infrastructure is in play.');
+      }
+      // // Check Prelude 2 + Pathfinders
+      // let energyProductionBug = true;
+      // if (customCorporations.length > 0 && !customCorporations.includes(CardName.THORGATE)) {
+      //   energyProductionBug = false;
+      // }
+      // if (this.bannedCards.includes(CardName.STANDARD_TECHNOLOGY)) {
+      //   energyProductionBug = false;
+      // }
 
-      // Check Prelude 2 + Pathfinders
-      let energyProductionBug = true;
-      if (customCorporations.length > 0 && !customCorporations.includes(CardName.THORGATE)) {
-        energyProductionBug = false;
-      }
-      if (this.bannedCards.includes(CardName.STANDARD_TECHNOLOGY)) {
-        energyProductionBug = false;
-      }
+      // if (this.bannedCards.includes(CardName.SUITABLE_INFRASTRUCTURE)) {
+      //   energyProductionBug = false;
+      // } else {
+      //   if (this.expansions.prelude2 === false && !this.includedCards.includes(CardName.SUITABLE_INFRASTRUCTURE)) {
+      //     energyProductionBug = false;
+      //   }
+      // }
 
-      if (this.bannedCards.includes(CardName.SUITABLE_INFRASTRUCTURE)) {
-        energyProductionBug = false;
-      } else {
-        if (this.expansions.prelude2 === false && !this.includedCards.includes(CardName.SUITABLE_INFRASTRUCTURE)) {
-          energyProductionBug = false;
-        }
-      }
+      // if (this.bannedCards.includes(CardName.HIGH_TEMP_SUPERCONDUCTORS)) {
+      //   energyProductionBug = false;
+      // } else {
+      //   if (this.expansions.pathfinders === false && !this.includedCards.includes(CardName.HIGH_TEMP_SUPERCONDUCTORS)) {
+      //     energyProductionBug = false;
+      //   }
+      // }
 
-      if (this.bannedCards.includes(CardName.HIGH_TEMP_SUPERCONDUCTORS)) {
-        energyProductionBug = false;
-      } else {
-        if (this.expansions.pathfinders === false && !this.includedCards.includes(CardName.HIGH_TEMP_SUPERCONDUCTORS)) {
-          energyProductionBug = false;
-        }
-      }
-
-      if (energyProductionBug === true) {
-        const confirm = window.confirm(translateText(
-          'It is possible with Thorgate, Standard Technology, Suitable Infrastructure, and High Temp. Superconductors for a player to have infinite energy production. Press OK to continue or Cancel to change your selections.'));
-        if (confirm === false) return;
-      }
+      // if (energyProductionBug === true) {
+      //   const confirm = window.confirm(translateText(
+      //     'It is possible with Thorgate, Standard Technology, Suitable Infrastructure, and High Temp. Superconductors for a player to have infinite energy production. Press OK to continue or Cancel to change your selections.'));
+      //   if (confirm === false) return;
+      // }
 
       // Check custom corp count
       if (customCorporations.length > 0) {

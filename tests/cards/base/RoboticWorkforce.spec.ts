@@ -14,7 +14,7 @@ import {IGame} from '../../../src/server/IGame';
 import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
 import {ALL_RESOURCES, Resource} from '../../../src/common/Resource';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {runNextAction, cast, runAllActions, addCity, addOcean, fakeCard} from '../../TestingUtils';
+import {runNextAction, runAllActions, addCity, addOcean, fakeCard} from '../../TestingUtils';
 import {TileType} from '../../../src/common/TileType';
 import {ICard} from '../../../src/server/cards/ICard';
 import {TestPlayer} from '../../TestPlayer';
@@ -32,6 +32,10 @@ import {CardManifest} from '../../../src/server/cards/ModuleManifest';
 import {HeatTrappers} from '../../../src/server/cards/base/HeatTrappers';
 import {testGame} from '../../TestGame';
 import {SpecializedSettlement} from '../../../src/server/cards/pathfinders/SpecializedSettlement';
+import {LunarMineUrbanization} from '../../../src/server/cards/moon/LunarMineUrbanization';
+import {TitaniumMine} from '../../../src/server/cards/base/TitaniumMine';
+import {cast, toName} from '../../../src/common/utils/utils';
+import {Odyssey} from '../../../src/server/cards/pathfinders/Odyssey';
 
 describe('RoboticWorkforce', () => {
   let card: RoboticWorkforce;
@@ -288,6 +292,25 @@ describe('RoboticWorkforce', () => {
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 3}));
   });
 
+  it('Events with building tags should be unselectable without Odyssey', () => {
+    const lunarMineUrbanization = new LunarMineUrbanization();
+    const titaniumMine = new TitaniumMine();
+    player.playedCards.push(lunarMineUrbanization, titaniumMine);
+
+    card.play(player);
+    runAllActions(game);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+    expect(selectCard.cards.map(toName)).deep.eq([titaniumMine.name]);
+
+    const odyssey = new Odyssey();
+    player.playedCards.push(odyssey);
+
+    card.play(player);
+    runAllActions(game);
+    const selectCard2 = cast(player.popWaitingFor(), SelectCard);
+    expect(selectCard2.cards.map(toName)).to.have.members([titaniumMine.name, lunarMineUrbanization.name]);
+  });
+
   describe('test all cards', () => {
     ALL_MODULE_MANIFESTS.forEach((manifest) => {
       const cards: CardManifest<ICard> = {...manifest.projectCards, ...manifest.preludeCards, ...manifest.corporationCards};
@@ -305,6 +328,9 @@ describe('RoboticWorkforce', () => {
     });
 
     const testCard = function(card: ICard) {
+      if (card.name === CardName.LUNAR_MINE_URBANIZATION) {
+        console.log('hello');
+      }
       let include = false;
       if ((card.tags.includes(Tag.BUILDING) || card.tags.includes(Tag.WILD)) && card.play !== undefined) {
         // Create new players, set all productions to 2

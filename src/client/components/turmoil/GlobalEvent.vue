@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <span v-if="showDistance" class="global-event-distance" i18-n>{{ this.type }}</span>
+    <span v-if="showDistance" class="global-event-distance" v-i18n>{{ this.type }}</span>
     <slot/>
   </div>
 </template>

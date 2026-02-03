@@ -72,7 +72,7 @@ describe('AddResourcesToCard', () => {
     player.playedCards.push(ghgProducingBacteria, selfReplicatingRobots);
     selfReplicatingRobots.targetCards = [tardigrades];
 
-    const selectCard = cast(new AddResourcesToCard(player, CardResource.MICROBE).execute(), SelectCard);
+    const selectCard = cast(new AddResourcesToCard(player, CardResource.MICROBE, {robotCards: true}).execute(), SelectCard);
 
     expect(selectCard.cards).has.length(2);
     expect(selectCard.cards[0]).eq(ghgProducingBacteria);
@@ -87,7 +87,12 @@ describe('AddResourcesToCard', () => {
     player.playedCards.push(ghgProducingBacteria, ants, selfReplicatingRobots);
     selfReplicatingRobots.targetCards = [tardigrades];
 
-    const selectCard = cast(new AddResourcesToCard(player, CardResource.MICROBE, {filter: (c) => c.name.endsWith('s')}).execute(), SelectCard);
+    const addResourcesToCard = new AddResourcesToCard(
+      player, CardResource.MICROBE, {
+        robotCards: true,
+        filter: (c) => c.name.endsWith('s'),
+      });
+    const selectCard = cast(addResourcesToCard.execute(), SelectCard);
     expect(selectCard.cards).has.length(2);
     expect(selectCard.cards[0]).eq(ants);
     expect(selectCard.cards[1]).eq(tardigrades);

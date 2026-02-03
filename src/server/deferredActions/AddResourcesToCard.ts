@@ -35,7 +35,10 @@ export class AddResourcesToCard extends DeferredAction {
       return this.resourceType === undefined || card.resourceType === this.resourceType;
     });
 
-    let cards = playedCards.concat(srrCards);
+    let cards = playedCards;
+    if (this.options.robotCards === true) {
+      cards = cards.concat(srrCards);
+    }
     const restrictedTag = this.options.restrictedTag;
     if (restrictedTag !== undefined) {
       cards = cards.filter((card) => {

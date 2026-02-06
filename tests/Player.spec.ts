@@ -555,6 +555,31 @@ describe('Player', () => {
     expect(player2.globalParameterSteps[GlobalParameter.OXYGEN]).eq(2);
   });
 
+  it('Increasing venus sets globalParameterSteps', () => {
+    const [game, player, player2] = testGame(2, {venusNextExtension: true, solarPhaseOption: true});
+
+    game.phase = Phase.ACTION;
+    game.increaseVenusScaleLevel(player, 1);
+    expect(player.globalParameterSteps[GlobalParameter.VENUS]).eq(1);
+
+    game.increaseVenusScaleLevel(player, 2);
+    expect(player.globalParameterSteps[GlobalParameter.VENUS]).eq(3);
+
+    game.increaseVenusScaleLevel(player, -1);
+    expect(player.globalParameterSteps[GlobalParameter.VENUS]).eq(3);
+    expect(player2.globalParameterSteps[GlobalParameter.VENUS]).eq(0);
+
+    game.phase = Phase.SOLAR;
+
+    game.increaseVenusScaleLevel(player2, 2);
+    expect(player2.globalParameterSteps[GlobalParameter.VENUS]).eq(0);
+
+    game.phase = Phase.ACTION;
+
+    game.increaseVenusScaleLevel(player2, 2);
+    expect(player2.globalParameterSteps[GlobalParameter.VENUS]).eq(2);
+  });
+
   it('run research phase', () => {
     const [game, player] = testGame(1, {skipInitialCardSelection: true});
     game.generation = 2;

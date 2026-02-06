@@ -274,12 +274,14 @@ export class Server {
         negativeVP: 0,
       },
       victoryPointsByGeneration: [],
+      globalParameterSteps: {},
     };
 
     if (game.phase === Phase.END || game.isSoloMode() ||
         game.gameOptions.showOtherPlayersVP === true || modelIsForThisPlayer) {
       model.victoryPointsBreakdown = player.getVictoryPoints();
       model.victoryPointsByGeneration = player.victoryPointsByGeneration;
+      model.globalParameterSteps = player.globalParameterSteps;
     }
 
     return model;

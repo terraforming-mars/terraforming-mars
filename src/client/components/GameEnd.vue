@@ -146,6 +146,37 @@
                   </div>
               </div>
           </div>
+          <div class="game_end_victory_points">
+              <h2 v-i18n>Global Parameter Contributions</h2>
+              <table class="table game_end_table">
+                  <thead>
+                      <tr>
+                          <th><div class="card-delegate"></div></th>
+                          <th><div class="tile temperature-tile"></div></th>
+                          <th><div class="tile oxygen-tile"></div></th>
+                          <th><div class="tile ocean-tile"></div></th>
+                          <th v-if="game.gameOptions.expansions.venus"><div class="tile venus-tile"></div></th>
+                          <th v-if="game.gameOptions.expansions.moon"><div class="table-moon-colony-tile"></div></th>
+                          <th v-if="game.gameOptions.expansions.moon"><div class="table-moon-mine-tile"></div></th>
+                          <th v-if="game.gameOptions.expansions.moon"><div class="table-moon-road-tile"></div></th>
+                          <th><div class="game-end-total-column">Total</div></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr v-for="data in playerContributionsData" :key="data.color" :class="getEndGamePlayerRowColorClass(data.color)">
+                          <td>{{ data.player }}</td>
+                          <td>{{ data.temp }}</td>
+                          <td>{{ data.oxygen }}</td>
+                          <td>{{ data.oceans }}</td>
+                          <td v-if="game.gameOptions.expansions.venus">{{ data.venus }}</td>
+                          <td v-if="game.gameOptions.expansions.moon">{{ data.moonHabitat }}</td>
+                          <td v-if="game.gameOptions.expansions.moon">{{ data.moonMining }}</td>
+                          <td v-if="game.gameOptions.expansions.moon">{{ data.moonLogistics }}</td>
+                          <td class="game-end-total">{{ data.total }}</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
           <div class="game-end-flexrow">
           <div class="game_end_block--board game-end-column">
               <victory-point-chart
@@ -301,6 +332,31 @@ export default Vue.extend({
         dataset.push({label: $t('L. Logistics'), color: 'purple', data: getValues(GlobalParameter.MOON_LOGISTICS_RATE, 0, 8)});
       }
       return dataset;
+    },
+    playerContributionsData(): Array<{player: string, color: Color, temp: number, oxygen: number, oceans: number, venus?: number, moonHabitat?: number, moonMining?: number, moonLogistics?: number, total: number}> {
+      return this.players.map((player) => {
+        const steps = player.globalParameterSteps || {};
+        const temp = steps[GlobalParameter.TEMPERATURE] || 0;
+        const oxygen = steps[GlobalParameter.OXYGEN] || 0;
+        const oceans = steps[GlobalParameter.OCEANS] || 0;
+        const venus = steps[GlobalParameter.VENUS] || 0;
+        const moonHabitat = steps[GlobalParameter.MOON_HABITAT_RATE] || 0;
+        const moonMining = steps[GlobalParameter.MOON_MINING_RATE] || 0;
+        const moonLogistics = steps[GlobalParameter.MOON_LOGISTICS_RATE] || 0;
+        
+        return {
+          player: player.name,
+          color: player.color,
+          temp,
+          oxygen,
+          oceans,
+          venus,
+          moonHabitat,
+          moonMining,
+          moonLogistics,
+          total: temp + oxygen + oceans + venus + moonHabitat + moonMining + moonLogistics,
+        };
+      });
     },
   },
   data() {

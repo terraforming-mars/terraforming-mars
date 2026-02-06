@@ -19,6 +19,7 @@ import {SpaceId} from '../../common/Types';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
 import {Board} from '../boards/Board';
+import {GlobalParameter} from '../../common/GlobalParameter';
 
 export class MoonExpansion {
   public static readonly MOON_TILES: Set<TileType> = new Set([
@@ -139,9 +140,9 @@ export class MoonExpansion {
   }
 
   private static RateData = {
-    'mining': {field: 'miningRate', bonusAt6: Resource.TITANIUM},
-    'habitat': {field: 'habitatRate', bonusAt6: Resource.ENERGY},
-    'logistic': {field: 'logisticRate', bonusAt6: Resource.STEEL},
+    'mining': {field: 'miningRate', bonusAt6: Resource.TITANIUM, parameter: GlobalParameter.MOON_MINING_RATE},
+    'habitat': {field: 'habitatRate', bonusAt6: Resource.ENERGY, parameter: GlobalParameter.MOON_HABITAT_RATE},
+    'logistic': {field: 'logisticRate', bonusAt6: Resource.STEEL, parameter: GlobalParameter.MOON_LOGISTICS_RATE},
   } as const;
 
   private static raiseRate(player: IPlayer, count: number, field: 'mining' | 'logistic' | 'habitat') {
@@ -157,6 +158,7 @@ export class MoonExpansion {
           this.activateLunaFirst(undefined, player.game, increment);
         } else {
           player.game.log('${0} raised the ' + field + ' rate ${1} step(s)', (b) => b.player(player).number(increment));
+          player.onGlobalParameterIncrease(rateData.parameter, increment);
           player.increaseTerraformRating(increment);
           if (this.maybeBonus(moonData[rateData.field], increment, 3)) {
             player.drawCard();

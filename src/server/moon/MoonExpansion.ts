@@ -21,6 +21,8 @@ import {GameOptions} from '../game/GameOptions';
 import {Board} from '../boards/Board';
 import {GlobalParameter} from '../../common/GlobalParameter';
 
+type MoonGlobalParameter = GlobalParameter.MOON_MINING_RATE | GlobalParameter.MOON_HABITAT_RATE | GlobalParameter.MOON_LOGISTICS_RATE;
+
 export class MoonExpansion {
   public static readonly MOON_TILES: Set<TileType> = new Set([
     TileType.MOON_MINE,
@@ -140,25 +142,26 @@ export class MoonExpansion {
   }
 
   private static RateData = {
-    'mining': {field: 'miningRate', bonusAt6: Resource.TITANIUM, parameter: GlobalParameter.MOON_MINING_RATE},
-    'habitat': {field: 'habitatRate', bonusAt6: Resource.ENERGY, parameter: GlobalParameter.MOON_HABITAT_RATE},
-    'logistic': {field: 'logisticRate', bonusAt6: Resource.STEEL, parameter: GlobalParameter.MOON_LOGISTICS_RATE},
+    [GlobalParameter.MOON_MINING_RATE]: {field: 'miningRate', bonusAt6: Resource.TITANIUM},
+    [GlobalParameter.MOON_HABITAT_RATE]: {field: 'habitatRate', bonusAt6: Resource.ENERGY},
+    [GlobalParameter.MOON_LOGISTICS_RATE]: {field: 'logisticRate', bonusAt6: Resource.STEEL},
   } as const;
 
-  private static raiseRate(player: IPlayer, count: number, field: 'mining' | 'logistic' | 'habitat') {
+  private static raiseRate(player: IPlayer, count: number, parameter: MoonGlobalParameter) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
-      const rateData = MoonExpansion.RateData[field];
+      const rateData = MoonExpansion.RateData[parameter];
       // This relies on all three tracks being the same value. If they were different
       // that could be part of the structure.
       const available = MAXIMUM_MOON_RATE - moonData[rateData.field];
       const increment = Math.min(count, available);
       if (increment > 0) {
+        const parameterName = parameter.replace('moon-', '').replace('-', ' ');
         if (player.game.phase === Phase.SOLAR) {
-          player.game.log('${0} acted as World Government and raised the ' + field + ' rate ${1} step(s)', (b) => b.player(player).number(increment));
+          player.game.log('${0} acted as World Government and raised the ' + parameterName + ' rate ${1} step(s)', (b) => b.player(player).number(increment));
           this.activateLunaFirst(undefined, player.game, increment);
         } else {
-          player.game.log('${0} raised the ' + field + ' rate ${1} step(s)', (b) => b.player(player).number(increment));
-          player.onGlobalParameterIncrease(rateData.parameter, increment);
+          player.game.log('${0} raised the ' + parameterName + ' rate ${1} step(s)', (b) => b.player(player).number(increment));
+          player.onGlobalParameterIncrease(parameter, increment);
           player.increaseTerraformRating(increment);
           if (this.maybeBonus(moonData[rateData.field], increment, 3)) {
             player.drawCard();
@@ -173,15 +176,15 @@ export class MoonExpansion {
     });
   }
   public static raiseMiningRate(player: IPlayer, count: number = 1) {
-    this.raiseRate(player, count, 'mining');
+    this.raiseRate(player, count, GlobalParameter.MOON_MINING_RATE);
   }
 
   public static raiseHabitatRate(player: IPlayer, count: number = 1) {
-    this.raiseRate(player, count, 'habitat');
+    this.raiseRate(player, count, GlobalParameter.MOON_HABITAT_RATE);
   }
 
   public static raiseLogisticRate(player: IPlayer, count: number = 1) {
-    this.raiseRate(player, count, 'logistic');
+    this.raiseRate(player, count, GlobalParameter.MOON_LOGISTICS_RATE);
   }
 
   private static activateLunaFirst(sourcePlayer: IPlayer | undefined, game: IGame, count: number) {

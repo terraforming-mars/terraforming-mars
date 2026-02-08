@@ -343,7 +343,7 @@ export default Vue.extend({
         const moonHabitat = steps[GlobalParameter.MOON_HABITAT_RATE] || 0;
         const moonMining = steps[GlobalParameter.MOON_MINING_RATE] || 0;
         const moonLogistics = steps[GlobalParameter.MOON_LOGISTICS_RATE] || 0;
-        
+
         return {
           player: player.name,
           color: player.color,

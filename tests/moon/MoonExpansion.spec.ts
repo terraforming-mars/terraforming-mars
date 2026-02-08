@@ -68,12 +68,12 @@ describe('MoonExpansion', () => {
     expect(moonData.miningRate).to.eq(0);
     expect(player.terraformRating).eq(20);
     expect(player.globalParameterSteps[GlobalParameter.MOON_MINING_RATE]).to.eq(0);
-    
+
     MoonExpansion.raiseMiningRate(player);
     expect(moonData.miningRate).to.eq(1);
     expect(player.terraformRating).eq(21);
     expect(player.globalParameterSteps[GlobalParameter.MOON_MINING_RATE]).to.eq(1);
-    
+
     MoonExpansion.raiseMiningRate(player, 2);
     expect(moonData.miningRate).to.eq(3);
     expect(player.globalParameterSteps[GlobalParameter.MOON_MINING_RATE]).to.eq(3);
@@ -83,12 +83,12 @@ describe('MoonExpansion', () => {
     expect(moonData.habitatRate).to.eq(0);
     expect(player.terraformRating).eq(20);
     expect(player.globalParameterSteps[GlobalParameter.MOON_HABITAT_RATE]).to.eq(0);
-    
+
     MoonExpansion.raiseHabitatRate(player);
     expect(moonData.habitatRate).to.eq(1);
     expect(player.terraformRating).eq(21);
     expect(player.globalParameterSteps[GlobalParameter.MOON_HABITAT_RATE]).to.eq(1);
-    
+
     MoonExpansion.raiseHabitatRate(player, 3);
     expect(moonData.habitatRate).to.eq(4);
     expect(player.globalParameterSteps[GlobalParameter.MOON_HABITAT_RATE]).to.eq(4);
@@ -98,12 +98,12 @@ describe('MoonExpansion', () => {
     expect(moonData.logisticRate).to.eq(0);
     expect(player.terraformRating).eq(20);
     expect(player.globalParameterSteps[GlobalParameter.MOON_LOGISTICS_RATE]).to.eq(0);
-    
+
     MoonExpansion.raiseLogisticRate(player);
     expect(moonData.logisticRate).to.eq(1);
     expect(player.terraformRating).eq(21);
     expect(player.globalParameterSteps[GlobalParameter.MOON_LOGISTICS_RATE]).to.eq(1);
-    
+
     MoonExpansion.raiseLogisticRate(player, 2);
     expect(moonData.logisticRate).to.eq(3);
     expect(player.globalParameterSteps[GlobalParameter.MOON_LOGISTICS_RATE]).to.eq(3);
@@ -112,10 +112,10 @@ describe('MoonExpansion', () => {
   it('multiple players track separate globalParameterSteps', () => {
     expect(player.globalParameterSteps[GlobalParameter.MOON_MINING_RATE]).to.eq(0);
     expect(player2.globalParameterSteps[GlobalParameter.MOON_MINING_RATE]).to.eq(0);
-    
+
     MoonExpansion.raiseMiningRate(player, 2);
     MoonExpansion.raiseMiningRate(player2, 3);
-    
+
     expect(player.globalParameterSteps[GlobalParameter.MOON_MINING_RATE]).to.eq(2);
     expect(player2.globalParameterSteps[GlobalParameter.MOON_MINING_RATE]).to.eq(3);
   });

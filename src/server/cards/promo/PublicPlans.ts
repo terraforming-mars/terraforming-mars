@@ -31,7 +31,7 @@ export class PublicPlans extends Card implements IProjectCard {
       return undefined;
     }
 
-    return new SelectCard('Select cards to reveal', undefined, player.cardsInHand, {
+    return new SelectCard('Select cards to reveal', 'Reveal', player.cardsInHand, {
       min: 0,
       max: player.cardsInHand.length,
     }).andThen((cards) => {

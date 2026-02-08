@@ -7,6 +7,8 @@ import {Resource} from '../../src/common/Resource';
 import {TestPlayer} from '../TestPlayer';
 import {testGame} from '../TestGame';
 import {Server} from '../../src/server/models/ServerModel';
+import {GlobalParameter} from '../../src/common/GlobalParameter';
+import {Phase} from '../../src/common/Phase';
 
 describe('ServerModel', () => {
   let player: TestPlayer;
@@ -58,5 +60,66 @@ describe('ServerModel', () => {
     const response = Server.getSpectatorModel(game);
     expect(response.players[0].victoryPointsBreakdown.total).eq(0);
     expect(response.players[1].victoryPointsBreakdown.total).eq(0);
+  });
+
+  it('Should include globalParameterSteps at game end', () => {
+    createTestGame(false);
+    // Simulate players contributing to global parameters
+    player.globalParameterSteps[GlobalParameter.TEMPERATURE] = 5;
+    player.globalParameterSteps[GlobalParameter.OXYGEN] = 3;
+    player.globalParameterSteps[GlobalParameter.OCEANS] = 2;
+
+    player2.globalParameterSteps[GlobalParameter.TEMPERATURE] = 2;
+    player2.globalParameterSteps[GlobalParameter.OXYGEN] = 6;
+
+    game.phase = Phase.END;
+
+    const response = Server.getPlayerModel(player);
+
+    // Current player should always see their globalParameterSteps
+    expect(response.thisPlayer.globalParameterSteps[GlobalParameter.TEMPERATURE]).eq(5);
+    expect(response.thisPlayer.globalParameterSteps[GlobalParameter.OXYGEN]).eq(3);
+    expect(response.thisPlayer.globalParameterSteps[GlobalParameter.OCEANS]).eq(2);
+
+    // Other players' globalParameterSteps should be visible at game end
+    const otherPlayer = response.players.find((p) => p.id === player2.id);
+    expect(otherPlayer).is.not.undefined;
+    expect(otherPlayer!.globalParameterSteps[GlobalParameter.TEMPERATURE]).eq(2);
+    expect(otherPlayer!.globalParameterSteps[GlobalParameter.OXYGEN]).eq(6);
+  });
+
+  it('Should not include globalParameterSteps during game', () => {
+    createTestGame(false);
+    player.globalParameterSteps[GlobalParameter.TEMPERATURE] = 5;
+    player2.globalParameterSteps[GlobalParameter.OXYGEN] = 3;
+
+    game.phase = Phase.ACTION;
+
+    const response = Server.getPlayerModel(player);
+
+    // Current player should see their own steps
+    expect(response.thisPlayer.globalParameterSteps[GlobalParameter.TEMPERATURE]).eq(5);
+
+    // Other players' steps should be empty during game (player id is undefined during game)
+    const otherPlayer = response.players.find((p) => p.color === player2.color && p.name === player2.name);
+    expect(otherPlayer).is.not.undefined;
+    expect(Object.keys(otherPlayer!.globalParameterSteps).length).eq(0);
+  });
+
+  it('Should include globalParameterSteps when showOtherPlayersVP is true', () => {
+    createTestGame(true);
+    player.globalParameterSteps[GlobalParameter.TEMPERATURE] = 4;
+    player2.globalParameterSteps[GlobalParameter.OXYGEN] = 7;
+
+    game.phase = Phase.ACTION;
+
+    const response = Server.getPlayerModel(player);
+
+    // With showOtherPlayersVP, all players' steps should be visible
+    expect(response.thisPlayer.globalParameterSteps[GlobalParameter.TEMPERATURE]).eq(4);
+
+    const otherPlayer = response.players.find((p) => p.color === player2.color && p.name === player2.name);
+    expect(otherPlayer).is.not.undefined;
+    expect(otherPlayer!.globalParameterSteps[GlobalParameter.OXYGEN]).eq(7);
   });
 });

@@ -372,6 +372,9 @@ export default Vue.extend({
     PlanetaryTracks,
     VictoryPointChart,
   },
+  mounted() {
+    document.title = `End of Game | ${constants.APP_NAME}`;
+  },
   methods: {
     getEndGamePlayerRowColorClass(color: Color): string {
       return playerColorClass(color, 'bg_transparent');

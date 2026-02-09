@@ -649,6 +649,9 @@ export default (Vue as WithRefs<Refs>).extend({
       }
     },
   },
+  mounted() {
+    document.title = `Create New Game | ${constants.APP_NAME}`;
+  },
   computed: {
     RandomBoardOption(): typeof RandomBoardOption {
       return RandomBoardOption;

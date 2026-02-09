@@ -238,6 +238,7 @@ import Award from '@/client/components/Award.vue';
 import TurmoilAgenda from '@/client/components/turmoil/TurmoilAgenda.vue';
 import {CardResource} from '@/common/CardResource';
 import {cardResourceCSS} from '../common/cardResources';
+import {APP_NAME} from '@/common/constants';
 
 type Refs = {
   filter: HTMLInputElement,
@@ -258,6 +259,7 @@ export default (Vue as WithRefs<Refs>).extend({
     return hashToModel(window.location.hash);
   },
   mounted() {
+    document.title = `Cards List | ${APP_NAME}`;
     this.$refs.filter.focus();
     this.delayedSetLocationHash();
   },

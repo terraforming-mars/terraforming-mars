@@ -94,7 +94,9 @@ export default Vue.extend({
       if (position !== -1 && position < sequence.length - 1) {
         next = sequence[position + 1];
       }
-      document.title = next + ' ' + this.$t(constants.APP_NAME);
+      const playerCount = this.playerView.players.length;
+      const gameType = playerCount === 1 ? 'Solo Game' : `${playerCount} Player Game`;
+      document.title = next + ' ' + `${gameType} | ${this.$t(constants.APP_NAME)}`;
     },
     onsave(out: InputResponse) {
       this.fetchPlayerInput(
@@ -241,7 +243,9 @@ export default Vue.extend({
     },
   },
   mounted() {
-    document.title = this.$t(constants.APP_NAME);
+    const playerCount = this.playerView.players.length;
+    const gameType = playerCount === 1 ? 'Solo Game' : `${playerCount} Player Game`;
+    document.title = `${gameType} | ${this.$t(constants.APP_NAME)}`;
     window.clearInterval(documentTitleTimer);
     if (this.waitingfor === undefined) {
       this.waitForUpdate();

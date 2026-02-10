@@ -544,7 +544,7 @@
   "Remove 2 floaters from ANY CARD to gain 1 titanium and 2 M€": "Poista 2 kellujaa MILTÄ TAHANSA KORTILTA saadaksesi 1 titaania ja 2 M€",
   "Show timers": "Näytä ajastimet",
   "You cannot pay for this card": "Et voi maksaa tältä kortilta",
-  "You cannot afford any cards": "Et voi varaa mitään kortteja",
+  "You cannot afford any cards": "Sinulla ei ole varaa ostaa kortteja",
   "Select card(s) to buy": "Valitse ostettavat kortit",
   "Select up to ${0} card(s) to buy": "Valitse korkeintaan ${0} ostettavaa korttia",
   "Select up to 2 events to return to your hand": "Valitse korkeintaan 2 tapahtumaa palautettavaksi käteesi",

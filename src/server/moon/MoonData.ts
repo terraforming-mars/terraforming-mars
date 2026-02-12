@@ -10,6 +10,7 @@ export type MoonData = {
   miningRate: number;
   logisticRate: number;
   lunaFirstPlayer: IPlayer | undefined;
+  // TODO(kberg): Remove by 2026-03-01
   lunaProjectOfficeLastGeneration: number | undefined;
 }
 

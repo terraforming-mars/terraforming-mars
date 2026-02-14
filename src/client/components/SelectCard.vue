@@ -1,7 +1,7 @@
 <template>
     <div class="wf-component wf-component--select-card">
         <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
-        <label v-for="card in getOrderedCards()" :key="card.name" :class="getCardBoxClass(card)">
+        <div v-for="card in getOrderedCards()" :key="card.name" :class="getCardBoxClass(card)" @touchend.stop.prevent="selectedChange($event)" @mouseup.stop.prevent="selectedChange($event)">
             <template v-if="!card.isDisabled">
               <input v-if="selectOnlyOneCard" type="radio" v-model="cards" :value="card" />
               <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.max !== undefined && Array.isArray(cards) && cards.length >= playerinput.max && cards.includes(card) === false" />
@@ -13,7 +13,7 @@
                 </div>
               </template>
             </Card>
-        </label>
+        </div>
         <div v-if="hasCardWarning()" class="card-warning" v-i18n>{{ warning }}</div>
         <warnings-component :warnings="warnings"></warnings-component>
         <div v-if="showsave === true" class="nofloat">
@@ -189,6 +189,9 @@ export default Vue.extend({
     },
     robotCard(card: CardModel): CardModel | undefined {
       return this.playerView.thisPlayer.selfReplicatingRobotsCards?.find((r) => r.name === card.name);
+    },
+    selectedChange(e: Event) {
+      (e.currentTarget as HTMLElement)?.querySelector('input')?.click();
     },
   },
   computed: {

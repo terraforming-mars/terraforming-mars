@@ -16,6 +16,8 @@
 
 "ARBORIST COLLECTIVE": "Arboristen Kollektiv",
 "Arborist Collective": "Arboristen Kollektiv",
+"ARBORIST": "ABORISTEN",
+"COLLECTIVE": "KOLLEKTIV",  
 "Arborist": "Arboristen",
 "Collective": "Kollektiv",  
 "Effect: After you play an event card with a base cost of 14 or less, put an activist resource on this card.": "EFFEKT: Nachdem du eine Ereigniskarte mit Grundkosten von 14 oder weniger gespielt hast, lege eine Aktivistenressource auf diese Karte.",
@@ -40,6 +42,7 @@
 "Hecate Speditions": "Hecate Speditionen",
 "HECATE": "Die Hecate",
 "Speditions": "Speditionen",
+"SPEDITIONS": "SPEDITIONEN",
 "Effect: When you play an Earth, Mars, Venus, Moon, or Jovian tag, including this, put 1 supply chain resource on this card.": "EFFEKT: Wenn du ein Erd-, Mars-, Venus-, Mond- oder Jupiter-Symbol spielst, einschließlich dieses, lege 1 Lieferketten-Ressource auf diese Karte.",
 "Effect: Spend 2 supply chain resources to trade. THIS COST CANNOT BE REDUCED BY OTHER EFFECTS.": "EFFEKT: Gib 2 Lieferkette-Ressourcen für den Handel aus. DIESE KOSTEN KÖNNEN NICHT DURCH ANDERE EFFEKTE REDUZIERT WERDEN.",
 "You start with 38 M€, 2 supply chain resources here, and an extra trade fleet.": "Du beginnst mit 38 M€, 2 Lieferkette-Ressourcen und einer zusätzlichen Handelsflotte.",
@@ -63,6 +66,7 @@
 "KINGDOM OF TAURARO": "Königreich von Tauraro",
 "Kingdom of Tauraro": "Königreich von Tauraro",
 "Kingdom of": "Königreich von",
+"Tauraro": "Taura'ro",
 "Effect: You may place cities adjacent to other cities. You must always place cities adjacent to your tiles or excavation markers, if possible.": "EFFEKT: Du darfst Städte neben andere Städte legen. Du musst immer Städte neben deinen Plättchen oder Ausgrabungsmarkern platzieren, wenn möglich.",
 "You start with 50 M€ and 6 M€ production. All opponents gain 2 M€ production. As your first action, place a city.": "Du beginnst mit 50 M€ und 6 M€ Produktion. Alle Gegner erhalten 2 M€ Produktion. Als erste Aktion platziere eine Stadt.",
 

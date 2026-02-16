@@ -1,6 +1,6 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import PlayerHome from '@/client/components/PlayerHome.vue';
 import {fakePlayerViewModel} from './testHelpers';
 import {FakeLocalStorage} from './FakeLocalStorage';
@@ -20,14 +20,14 @@ describe('PlayerHome', () => {
 
   it('mounts without errors', () => {
     const wrapper = shallowMount(PlayerHome, {
-      localVue: getLocalVue(),
+      ...globalConfig,
       parentComponent: {
         methods: {
           getVisibilityState: () => true,
           setVisibilityState: () => {},
         },
       } as any,
-      propsData: {
+      props: {
         playerView: fakePlayerViewModel(),
         settings: raw_settings,
       },

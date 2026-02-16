@@ -57,8 +57,14 @@ export default defineComponent({
     PopupPanel,
   },
   props: {
-    expansions: Object as () => Record<Expansion, boolean>,
-    selected: Array as () => Array<ColonyName>,
+    expansions: {
+      type: Object as () => Record<Expansion, boolean>,
+      required: true,
+    },
+    selected: {
+      type: Array as () => Array<ColonyName>,
+      required: true,
+    },
   },
   data() {
     const officialColonies = [...OFFICIAL_COLONY_NAMES].sort();

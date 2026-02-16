@@ -1,5 +1,5 @@
 import {shallowMount} from '@vue/test-utils';
-import {getLocalVue} from '../getLocalVue';
+import {globalConfig} from '../getLocalVue';
 import {expect} from 'chai';
 import CardRequirementComponent from '@/client/components/card/CardRequirementComponent.vue';
 import {Tag} from '@/common/cards/Tag';
@@ -7,8 +7,8 @@ import {Tag} from '@/common/cards/Tag';
 describe('CardRequirementComponent', () => {
   it('renders temperature requirement', () => {
     const wrapper = shallowMount(CardRequirementComponent, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         requirement: {temperature: -14, count: -14},
       },
     });
@@ -18,8 +18,8 @@ describe('CardRequirementComponent', () => {
 
   it('renders tag requirement', () => {
     const wrapper = shallowMount(CardRequirementComponent, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         requirement: {tag: Tag.SCIENCE, count: 2},
       },
     });

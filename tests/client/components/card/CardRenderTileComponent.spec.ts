@@ -1,14 +1,14 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {getLocalVue} from '../getLocalVue';
+import {globalConfig} from '../getLocalVue';
 import CardRenderTileComponent from '@/client/components/card/CardRenderTileComponent.vue';
 import {TileType} from '@/common/TileType';
 
 describe('CardRenderTileComponent', () => {
   it('mounts without errors', () => {
     const wrapper = shallowMount(CardRenderTileComponent, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         item: {
           is: 'tile',
           tile: TileType.CITY,

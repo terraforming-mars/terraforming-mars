@@ -1,12 +1,12 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import LoadGameForm from '@/client/components/LoadGameForm.vue';
 
 describe('LoadGameForm', () => {
   it('mounts without errors', () => {
     const wrapper = shallowMount(LoadGameForm, {
-      localVue: getLocalVue(),
+      ...globalConfig,
       parentComponent: {
         data() {
           return {

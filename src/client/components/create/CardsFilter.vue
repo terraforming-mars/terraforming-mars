@@ -6,8 +6,8 @@
                 <label>{{ cardName }}
                   <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is a prelude" v-if="isPrelude(cardName)"></i>
                   <i class="create-game-expansion-icon expansion-icon-ceo" title="This card is a CEO" v-if="isCEO(cardName)"></i>
-                  <template v-for="expansion of expansions(cardName)">
-                    <i v-bind:key="expansion" :class="`create-game-expansion-icon expansion-icon-${expansion}`" :title="expansion"></i>
+                  <template v-for="expansion of expansions(cardName)" v-bind:key="expansion">
+                    <i :class="`create-game-expansion-icon expansion-icon-${expansion}`" :title="expansion"></i>
                   </template>
                 </label>
                 <AppButton size="small" type="close" @click="removeCard(cardName)" />
@@ -23,8 +23,8 @@
                       {{ cardName }}
                       <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is a Prelude" v-if="isPrelude(cardName)"></i>
                       <i class="create-game-expansion-icon expansion-icon-ceo" title="This card is a CEO" v-if="isCEO(cardName)"></i>
-                      <template v-for="expansion of expansions(cardName)">
-                        <i v-bind:key="expansion" :class="`create-game-expansion-icon expansion-icon-${expansion}`" :title="expansion"></i>
+                      <template v-for="expansion of expansions(cardName)" v-bind:key="expansion">
+                        <i :class="`create-game-expansion-icon expansion-icon-${expansion}`" :title="expansion"></i>
                       </template>
                     </a>
                 </div>
@@ -34,8 +34,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {WithRefs} from 'vue-typed-refs';
+import {defineComponent} from '@/client/vue3-compat';
 import {CardName} from '@/common/cards/CardName';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {byType, getCard, getCards} from '@/client/cards/ClientCardManifest';
@@ -51,9 +50,6 @@ const ALL_CARDS: Array<CardName> = [
 ].map(toName)
   .sort((a, b) => a.localeCompare(b));
 
-type Refs = {
-  filter: HTMLInputElement,
-};
 
 type CardsFilterModel = {
   selected: Array<CardName>;
@@ -61,7 +57,11 @@ type CardsFilterModel = {
   searchTerm: string;
 }
 
-export default (Vue as WithRefs<Refs>).extend({
+type Refs = {
+  filter: HTMLInputElement;
+};
+
+export default defineComponent({
   name: 'CardsFilter',
   props: {
     title: {
@@ -85,7 +85,7 @@ export default (Vue as WithRefs<Refs>).extend({
   },
   computed: {
     typedRefs(): Refs {
-      return this.$refs;
+      return this.$refs as unknown as Refs;
     },
   },
   methods: {
@@ -110,8 +110,11 @@ export default (Vue as WithRefs<Refs>).extend({
     },
   },
   watch: {
-    selected(value) {
-      this.$emit('cards-list-changed', value);
+    selected: {
+      handler(value) {
+        this.$emit('cards-list-changed', value);
+      },
+      deep: true,
     },
     searchTerm(value: string) {
       this.searchMatches = [];

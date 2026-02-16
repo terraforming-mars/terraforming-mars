@@ -11,7 +11,8 @@
         <meta name="description" content="Terraforming Mars Open Source Web Application" />
     </head>
     <body id="ts-preferences-target">
-        <div id="app" :class="'topmost-'+screen">
+        <div id="app">
+          <div :class="'topmost-'+screen">
             <section>
                 <dialog id="alert-dialog" class="alert-dialog">
                     <form method="dialog">
@@ -61,6 +62,7 @@
             <div class="notice" v-i18n>
                 Not affiliated with FryxGames, Asmodee Digital or Steam in any way.
             </div>
+          </div>
         </div>
         <script src="main.js"></script>
     </body>

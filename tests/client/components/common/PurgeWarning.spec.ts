@@ -1,13 +1,13 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {getLocalVue} from '../getLocalVue';
+import {globalConfig} from '../getLocalVue';
 import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
 
 describe('PurgeWarning', () => {
   it('mounts without errors', () => {
     const wrapper = shallowMount(PurgeWarning, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         expectedPurgeTimeMs: Date.now() + 86400000,
       },
     });

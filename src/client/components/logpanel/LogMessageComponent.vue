@@ -1,9 +1,9 @@
 <template>
    <li v-if="message !== undefined && message.data !== undefined && message.message !== undefined" v-on:click.prevent="$emit('click')">
     <span v-if="message.type !== LogMessageType.NEW_GENERATION" :title="when" v-html="icon"></span>
-    <template v-for="(data, idx) of entries">
-      <span class="log-plain-text" v-if="typeof(data) === 'string'" v-bind:key="idx">{{ data }}</span>
-      <span v-else v-bind:key="idx">
+    <template v-for="(data, idx) of entries" :key="idx">
+      <span class="log-plain-text" v-if="typeof(data) === 'string'">{{ data }}</span>
+      <span v-else>
         <span v-if="data.type === undefined || data.value === undefined"></span>
         <span v-else-if="data.type === LogMessageDataType.PLAYER" class="log-player" :class="'player_bg_color_' + data.value"> {{ getPlayerName(data.value) }} </span>
         <span v-else-if="data.type === LogMessageDataType.CARD" v-html="cardToHtml(data)"></span>

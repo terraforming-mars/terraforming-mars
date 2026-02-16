@@ -40,7 +40,7 @@ export default defineComponent({
   name: 'Milestones',
   props: {
     milestones: {
-      type: Array as () => Array<ClaimedMilestoneModel>,
+      type: Array as () => ReadonlyArray<ClaimedMilestoneModel>,
       required: true,
     },
     showScores: {

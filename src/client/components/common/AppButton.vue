@@ -7,12 +7,14 @@
 
 <script lang="ts">
 import {defineComponent} from '@/client/vue3-compat';
+import {ComponentPublicInstance} from 'vue';
 import {vueRoot} from '@/client/components/vueRoot';
 import {Message} from '@/common/logs/Message';
 import {translateText, translateMessage} from '@/client/directives/i18n';
 
 export default defineComponent({
   name: 'AppButton',
+  emits: ['click'],
   props: {
     title: {
       type: [String, Object as () => Message],
@@ -24,14 +26,14 @@ export default defineComponent({
     },
     align: {
       type: String,
-      validator: (align) => ['right', 'left', 'center'].includes(align),
+      validator: (align: string) => ['right', 'left', 'center'].includes(align),
       required: false,
       default: 'center',
     },
     size: {
       type: String,
       default: 'normal',
-      validator: (item) => ['tiny', 'small', 'normal', 'big', 'jumbo'].includes(item),
+      validator: (item: string) => ['tiny', 'small', 'normal', 'big', 'jumbo'].includes(item),
     },
     rounded: {
       type: Boolean,
@@ -44,7 +46,7 @@ export default defineComponent({
     type: {
       type: String,
       default: 'normal',
-      validator: (item) =>
+      validator: (item: string) =>
         [
           'normal',
           'action',
@@ -61,7 +63,7 @@ export default defineComponent({
   },
   computed: {
     isDisabledDueToServerBusy(): boolean {
-      return this.disableOnServerBusy && vueRoot(this).isServerSideRequestInProgress;
+      return this.disableOnServerBusy && vueRoot(this as ComponentPublicInstance).isServerSideRequestInProgress;
     },
     isDisabled(): boolean {
       return this.disabled || this.isDisabledDueToServerBusy;

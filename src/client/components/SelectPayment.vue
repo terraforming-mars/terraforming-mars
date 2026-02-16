@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent, nextTick} from 'vue';
 import {Payment} from '@/common/inputs/Payment';
 import {SpendableResource, SPENDABLE_RESOURCES} from '@/common/inputs/Spendable';
 import {PaymentWidgetMixin, SelectPaymentDataModel} from '@/client/mixins/PaymentWidgetMixin';
@@ -57,11 +57,9 @@ export default defineComponent({
     },
     showsave: {
       type: Boolean,
-      required: true,
     },
     showtitle: {
       type: Boolean,
-      default: true,
     },
   },
   computed: {
@@ -94,7 +92,7 @@ export default defineComponent({
     };
   },
   mounted() {
-    this.$nextTick(() => {
+    nextTick(() => {
       this.setInitialCost();
       this.payment.megaCredits = this.getMegaCreditsMax();
       this.setDefaultValues();

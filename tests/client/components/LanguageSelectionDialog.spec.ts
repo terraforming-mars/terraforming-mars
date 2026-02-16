@@ -1,6 +1,6 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import LanguageSelectionDialog from '@/client/components/LanguageSelectionDialog.vue';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {FakeLocalStorage} from './FakeLocalStorage';
@@ -19,8 +19,8 @@ describe('LanguageSelectionDialog', () => {
 
   it('mounts without errors', () => {
     const wrapper = shallowMount(LanguageSelectionDialog, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         preferencesManager: PreferencesManager.INSTANCE,
       },
     });

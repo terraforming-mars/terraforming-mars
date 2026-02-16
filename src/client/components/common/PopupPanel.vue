@@ -30,7 +30,7 @@ export default defineComponent({
   },
   computed: {
   },
-  destroyed() {
+  unmounted() {
     window.removeEventListener('keydown', this.keylistener);
   },
   mounted() {

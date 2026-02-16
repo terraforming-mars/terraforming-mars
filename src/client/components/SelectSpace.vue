@@ -19,8 +19,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {WithRefs} from 'vue-typed-refs';
+import {defineComponent} from '@/client/vue3-compat';
 import {SelectSpaceModel} from '@/common/models/PlayerInputModel';
 import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SelectSpaceResponse} from '@/common/inputs/InputResponse';
@@ -28,9 +27,10 @@ import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import GoToMap from '@/client/components/waitingFor/GoToMap.vue';
 import {SpaceId} from '@/common/Types';
 
+
 type Refs = {
-  confirmation: InstanceType<typeof ConfirmDialog>,
-}
+  confirmation: InstanceType<typeof ConfirmDialog>;
+};
 
 type DataModel = {
   spaces: Set<SpaceId>;
@@ -39,7 +39,7 @@ type DataModel = {
   warning: string | undefined;
 };
 
-export default (Vue as WithRefs<Refs>).extend({
+export default defineComponent({
   name: 'SelectSpace',
   props: {
     playerinput: {
@@ -56,7 +56,7 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     showtitle: {
       type: Boolean,
-      default: true,
+      required: true,
     },
   },
   data(): DataModel {
@@ -73,7 +73,7 @@ export default (Vue as WithRefs<Refs>).extend({
   },
   computed: {
     typedRefs(): Refs {
-      return this.$refs;
+      return this.$refs as unknown as Refs;
     },
   },
   methods: {

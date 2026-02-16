@@ -373,16 +373,15 @@ export default defineComponent({
   name: 'board',
   props: {
     spaces: {
-      type: Array as () => Array<SpaceModel>,
+      type: Array as () => ReadonlyArray<SpaceModel>,
       required: true,
     },
     venusScaleLevel: {
       type: Number,
-      default: undefined,
+      required: true,
     },
     altVenusBoard: {
       type: Boolean,
-      default: false,
     },
     boardName: {
       type: String as () => BoardName,
@@ -390,15 +389,15 @@ export default defineComponent({
     },
     oceans_count: {
       type: Number,
-      default: undefined,
+      default: 0,
     },
     oxygen_level: {
       type: Number,
-      default: undefined,
+      default: 0,
     },
     temperature: {
       type: Number,
-      default: undefined,
+      default: 0,
     },
     expansions: {
       type: Object as () => Record<Expansion, boolean>,

@@ -1,6 +1,6 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import Sidebar from '@/client/components/Sidebar.vue';
 import {fakeGameOptionsModel} from './testHelpers';
 import {FakeLocalStorage} from './FakeLocalStorage';
@@ -19,8 +19,8 @@ describe('Sidebar', () => {
 
   it('mounts without errors', () => {
     const wrapper = shallowMount(Sidebar, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         playerNumber: 2,
         gameOptions: fakeGameOptionsModel(),
         acting_player: true,

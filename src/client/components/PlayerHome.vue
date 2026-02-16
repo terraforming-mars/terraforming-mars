@@ -50,7 +50,7 @@
           <turmoil :turmoil="game.turmoil"/>
         </template>
 
-        <template v-if="game.gameOptions.expansions.moon">
+        <template v-if="game.moon">
           <a class="hotkey-target"></a>
           <MoonBoard :model="game.moon" :tileView="tileView" id="shortkey-moonBoard"/>
         </template>
@@ -244,7 +244,7 @@
           <turmoil v-if="game.turmoil" :turmoil="game.turmoil"></turmoil>
 
           <a name="moonBoard" class="player_home_anchor"></a>
-          <MoonBoard v-if="game.gameOptions.expansions.moon" :model="game.moon" :tileView="tileView"></MoonBoard>
+          <MoonBoard v-if="game.moon !== undefined" :model="game.moon" :tileView="tileView"></MoonBoard>
         </div>
       </details>
     </div>
@@ -539,7 +539,7 @@ export default defineComponent({
       return !getCardOrThrow(cardModel.name).hasAction;
     },
   },
-  destroyed() {
+  unmounted() {
     window.removeEventListener('keydown', this.navigatePage);
   },
   mounted() {

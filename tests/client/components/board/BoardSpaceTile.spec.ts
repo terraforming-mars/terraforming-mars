@@ -1,14 +1,14 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {getLocalVue} from '../getLocalVue';
+import {globalConfig} from '../getLocalVue';
 import BoardSpaceTile from '@/client/components/board/BoardSpaceTile.vue';
 import {SpaceType} from '@/common/boards/SpaceType';
 
 describe('BoardSpaceTile', () => {
   it('mounts without errors', () => {
     const wrapper = shallowMount(BoardSpaceTile, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         space: {
           id: '01',
           x: 0,

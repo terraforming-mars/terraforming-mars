@@ -1,6 +1,6 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {getLocalVue} from '../getLocalVue';
+import {globalConfig} from '../getLocalVue';
 import Card from '@/client/components/card/Card.vue';
 import {CardName} from '@/common/cards/CardName';
 import {FakeLocalStorage} from '../FakeLocalStorage';
@@ -19,8 +19,8 @@ describe('Card', () => {
 
   it('mounts without errors', () => {
     const wrapper = shallowMount(Card, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         card: {name: CardName.ECOLINE},
       },
     });

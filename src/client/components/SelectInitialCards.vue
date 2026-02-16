@@ -16,7 +16,7 @@
     <SelectCard v-if="hasPrelude" :playerView="playerView" :playerinput="preludeCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="preludesChanged" />
     <SelectCard v-if="hasCeo" :playerView="playerView" :playerinput="ceoCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="ceosChanged" />
     <SelectCard :playerView="playerView" :playerinput="projectCardOption" :onsave="noop" :showtitle="true" v-on:cardschanged="cardsChanged" />
-    <template v-if="this.selectedCorporations.length === 1">
+    <template v-if="selectedCorporations.length === 1">
       <div><span v-i18n>Starting Megacredits:</span> <div class="megacredits">{{getStartingMegacredits()}}</div></div>
       <div v-if="hasPrelude"><span v-i18n>After Preludes:</span> <div class="megacredits">{{getStartingMegacredits() + getAfterPreludes()}}</div></div>
     </template>
@@ -30,8 +30,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
-import {WithRefs} from 'vue-typed-refs';
+import {defineComponent} from '@/client/vue3-compat';
 
 import AppButton from '@/client/components/common/AppButton.vue';
 import {getCard, getCardOrThrow} from '@/client/cards/ClientCardManifest';
@@ -51,9 +50,6 @@ import {ColonyModel} from '@/common/models/ColonyModel';
 import * as titles from '@/common/inputs/SelectInitialCards';
 import {sum} from '@/common/utils/utils';
 
-type Refs = {
-  confirmation: InstanceType<typeof ConfirmDialog>,
-}
 
 type DataModel = {
   selectedCards: Array<CardName>,
@@ -66,7 +62,11 @@ type DataModel = {
   warning: string | undefined,
 }
 
-export default (Vue as WithRefs<Refs>).extend({
+type Refs = {
+  confirmation: InstanceType<typeof ConfirmDialog>;
+};
+
+export default defineComponent({
   name: 'SelectInitialCards',
   props: {
     playerView: {
@@ -327,6 +327,9 @@ export default (Vue as WithRefs<Refs>).extend({
     },
   },
   computed: {
+    typedRefs(): Refs {
+      return this.$refs as Refs;
+    },
     playerCanChooseAridor() {
       return this.playerView.dealtCorporationCards.some((card) => card.name === CardName.ARIDOR);
     },
@@ -360,9 +363,6 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     projectCardOption() {
       return getOption(this.playerinput.options, titles.SELECT_PROJECTS_TITLE);
-    },
-    typedRefs(): Refs {
-      return this.$refs;
     },
   },
   mounted() {

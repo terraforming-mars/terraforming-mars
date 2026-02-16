@@ -1,6 +1,6 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {getLocalVue} from '../getLocalVue';
+import {globalConfig} from '../getLocalVue';
 import LogPanel from '@/client/components/logpanel/LogPanel.vue';
 import {fakeViewModel} from '../testHelpers';
 
@@ -18,8 +18,8 @@ describe('LogPanel', () => {
 
   it('mounts without errors', () => {
     const wrapper = shallowMount(LogPanel, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         viewModel: fakeViewModel(),
         color: 'blue',
       },

@@ -1,6 +1,6 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {getLocalVue} from '../getLocalVue';
+import {globalConfig} from '../getLocalVue';
 import LoginHome from '@/client/components/auth/LoginHome.vue';
 
 describe('LoginHome', () => {
@@ -17,7 +17,7 @@ describe('LoginHome', () => {
 
   it('mounts without errors', () => {
     const wrapper = shallowMount(LoginHome, {
-      localVue: getLocalVue(),
+      ...globalConfig,
     });
     expect(wrapper.exists()).to.be.true;
   });

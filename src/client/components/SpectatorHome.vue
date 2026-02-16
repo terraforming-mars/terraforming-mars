@@ -42,7 +42,7 @@
 
     <turmoil v-if="game.turmoil" :turmoil="game.turmoil"/>
 
-    <MoonBoard v-if="game.gameOptions.expansions.moon" :model="game.moon" :tileView="tileView"/>
+    <MoonBoard v-if="game.moon !== undefined" :model="game.moon" :tileView="tileView"/>
 
     <PlanetaryTracks v-if="game.gameOptions.expansions.pathfinders" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
 
@@ -69,7 +69,7 @@
           <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
         </div>
     </div>
-    <waiting-for v-show="false" v-if="game.phase !== 'end'" :players="spectator.players" :playerView="spectator" :settings="settings" :waitingfor="undefined"></waiting-for>
+    <waiting-for v-show="false" v-if="game.phase !== 'end'" :players="spectator.players" :playerView="(spectator as any)" :settings="settings" :waitingfor="undefined"></waiting-for>
   </div>
 </template>
 

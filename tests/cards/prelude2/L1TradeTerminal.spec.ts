@@ -1,21 +1,23 @@
 import {expect} from 'chai';
 import {L1TradeTerminal} from '../../../src/server/cards/prelude2/L1TradeTerminal';
 import {testGame} from '../../TestGame';
-import {cast} from '../../TestingUtils';
+import {cast, runAllActions} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {CardName} from '../../../src/common/cards/CardName';
 import {cardsFromJSON} from '../../../src/server/createCard';
 import {SelfReplicatingRobots} from '../../../src/server/cards/promo/SelfReplicatingRobots';
 import {toName, zip} from '../../../src/common/utils/utils';
+import {IGame} from '../../../src/server/IGame';
 
 describe('L1TradeTerminal', () => {
   let card: L1TradeTerminal;
   let player: TestPlayer;
+  let game: IGame;
 
   beforeEach(() => {
     card = new L1TradeTerminal();
-    [/* game */, player] = testGame(2, {coloniesExtension: true});
+    [game, player] = testGame(2, {coloniesExtension: true});
   });
 
   const playRuns = [
@@ -47,6 +49,28 @@ describe('L1TradeTerminal', () => {
     cast(card.play(player), undefined);
 
     expect(cards[2].resourceCount).eq(2);
+  });
+
+  it('When in Self-Replicating Robots, do not count it', () => {
+    const srr = new SelfReplicatingRobots();
+    player.playedCards.push(srr);
+
+    const cards = cardsFromJSON([CardName.AERIAL_MAPPERS, CardName.ANTHOZOA, CardName.ANTS, CardName.TARDIGRADES]);
+    srr.targetCards.push(...cards, card);
+    card.resourceCount = 4;
+    cards.forEach((card) => card.resourceCount = 1);
+
+    player.playCard(card);
+    runAllActions(game);
+    const selectCard = cast(player.popWaitingFor(), SelectCard);
+
+    expect(selectCard.cards.map(toName)).to.have.members([
+      CardName.AERIAL_MAPPERS,
+      CardName.ANTHOZOA,
+      CardName.ANTS,
+      CardName.TARDIGRADES,
+    ]);
+    expect(card.resourceCount).eq(0);
   });
 
   it('more than 3 candidates', () => {

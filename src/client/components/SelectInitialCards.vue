@@ -71,18 +71,23 @@ export default (Vue as WithRefs<Refs>).extend({
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
+      required: true,
     },
     playerinput: {
       type: Object as () => SelectInitialCardsModel,
+      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectInitialCardsResponse) => void,
+      required: true,
     },
     showsave: {
       type: Boolean,
+      required: true,
     },
     showtitle: {
       type: Boolean,
+      required: true,
     },
     preferences: {
       type: Object as () => Readonly<Preferences>,

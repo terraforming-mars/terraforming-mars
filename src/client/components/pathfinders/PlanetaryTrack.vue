@@ -19,13 +19,16 @@ export default defineComponent({
   props: {
     val: {
       type: Number,
+      required: true,
     },
     type: String as () => 'risingPlayer' | 'everyone' | 'mostTags',
     rewards: {
       type: Object as () => Track,
+      required: true,
     },
     gameOptions: {
       type: Object as () => GameOptionsModel,
+      required: true,
     },
   },
   data() {

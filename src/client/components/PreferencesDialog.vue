@@ -122,6 +122,7 @@ export default (Vue as WithRefs<Refs>).extend({
   props: {
     preferencesManager: {
       type: Object as () => PreferencesManager,
+      required: true,
     },
   },
   components: {

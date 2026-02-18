@@ -70,15 +70,19 @@ export default defineComponent({
   props: {
     playerinput: {
       type: Object as () => SelectProductionToLoseModel,
+      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectProductionToLoseResponse) => void,
+      required: true,
     },
     showsave: {
       type: Boolean,
+      required: true,
     },
     showtitle: {
       type: Boolean,
+      required: true,
     },
   },
   data(): DataModel {

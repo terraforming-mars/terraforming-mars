@@ -90,48 +90,63 @@ export default defineComponent({
   props: {
     playerNumber: {
       type: Number,
+      required: true,
     },
     gameOptions: {
       type: Object as () => GameOptionsModel,
+      required: true,
     },
     acting_player: {
       type: Boolean,
+      required: true,
     },
     player_color: {
       type: String as () => Color,
+      required: true,
     },
     generation: {
       type: Number,
+      required: true,
     },
     coloniesCount: {
       type: Number,
+      required: true,
     },
     temperature: {
       type: Number,
+      required: true,
     },
     oxygen: {
       type: Number,
+      required: true,
     },
     oceans: {
       type: Number,
+      required: true,
     },
     venus: {
       type: Number,
+      required: true,
     },
     moonData: {
       type: Object as () => MoonModel,
+      required: true,
     },
     turmoil: {
       type: Object as () => TurmoilModel || undefined,
+      required: true,
     },
     lastSoloGeneration: {
       type: Number,
+      required: true,
     },
     deckSize: {
       type: Number,
+      required: true,
     },
     discardPileSize: {
       type: Number,
+      required: true,
     },
   },
   components: {

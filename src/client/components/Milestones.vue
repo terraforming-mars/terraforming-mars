@@ -41,6 +41,7 @@ export default defineComponent({
   props: {
     milestones: {
       type: Array as () => Array<ClaimedMilestoneModel>,
+      required: true,
     },
     showScores: {
       type: Boolean,

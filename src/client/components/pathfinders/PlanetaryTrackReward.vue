@@ -17,9 +17,11 @@ export default defineComponent({
   props: {
     reward: {
       type: String as () => Reward,
+      required: true,
     },
     gameOptions: {
       type: Object as () => GameOptionsModel,
+      required: true,
     },
   },
   computed: {

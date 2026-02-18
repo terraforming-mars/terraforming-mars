@@ -21,6 +21,7 @@ export default defineComponent({
   props: {
     points: {
       type: Object as () => Points,
+      required: true,
     },
   },
   computed: {

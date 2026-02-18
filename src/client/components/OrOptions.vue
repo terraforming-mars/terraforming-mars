@@ -43,21 +43,27 @@ export default defineComponent({
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
+      required: true,
     },
     players: {
       type: Array as () => Array<PublicPlayerModel>,
+      required: true,
     },
     playerinput: {
       type: Object as () => OrOptionsModel,
+      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: OrOptionsResponse) => void,
+      required: true,
     },
     showsave: {
       type: Boolean,
+      required: true,
     },
     showtitle: {
       type: Boolean,
+      required: true,
     },
   },
   components: {

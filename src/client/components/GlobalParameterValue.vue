@@ -37,9 +37,11 @@ export default defineComponent({
   props: {
     param: {
       type: String as () => BaseGlobalParameter,
+      required: true,
     },
     value: {
       type: Number,
+      required: true,
     },
   },
   computed: {

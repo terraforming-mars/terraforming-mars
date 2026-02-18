@@ -45,18 +45,23 @@ export default defineComponent({
   props: {
     playerView: {
       type: Object as () => PlayerViewModel,
+      required: true,
     },
     playerinput: {
       type: Object as () => SelectPaymentModel,
+      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectPaymentResponse) => void,
+      required: true,
     },
     showsave: {
       type: Boolean,
+      required: true,
     },
     showtitle: {
       type: Boolean,
+      required: true,
     },
   },
   computed: {

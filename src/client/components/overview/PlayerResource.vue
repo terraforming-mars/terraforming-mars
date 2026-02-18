@@ -29,12 +29,15 @@ export default defineComponent({
   props: {
     type: {
       type: String as () => Resource,
+      required: true,
     },
     count: {
       type: Number,
+      required: true,
     },
     production: {
       type: Number,
+      required: true,
     },
     resourceProtection: {
       type: String as () => Protection,

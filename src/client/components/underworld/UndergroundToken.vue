@@ -16,9 +16,11 @@ export default defineComponent({
   props: {
     token: {
       type: Object as () => ClaimedToken,
+      required: true,
     },
     location: {
       type: String as () => 'board' | 'player-home' | 'tag-count',
+      required: true,
     },
   },
   computed: {

@@ -27,15 +27,19 @@ export default defineComponent({
   props: {
     playerinput: {
       type: Object as () => SelectColonyModel,
+      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectColonyResponse) => void,
+      required: true,
     },
     showsave: {
       type: Boolean,
+      required: true,
     },
     showtitle: {
       type: Boolean,
+      required: true,
     },
   },
   data(): DataModel {

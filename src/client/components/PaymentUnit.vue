@@ -23,12 +23,15 @@ export default defineComponent({
   props: {
     value: {
       type: Number,
+      required: true,
     },
     unit: {
       type: String as () => SpendableResource,
+      required: true,
     },
     description: {
       type: String,
+      required: true,
     },
     showMax: {
       type: Boolean,

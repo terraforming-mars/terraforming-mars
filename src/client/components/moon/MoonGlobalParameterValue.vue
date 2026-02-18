@@ -30,6 +30,7 @@ export default defineComponent({
   props: {
     moonData: {
       type: Object as () => MoonModel,
+      required: true,
     },
   },
   computed: {

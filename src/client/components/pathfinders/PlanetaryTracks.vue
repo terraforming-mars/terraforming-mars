@@ -58,9 +58,11 @@ export default defineComponent({
   props: {
     tracks: {
       type: Object as () => PathfindersModel,
+      required: true,
     },
     gameOptions: {
       type: Object as () => GameOptionsModel,
+      required: true,
     },
   },
   components: {

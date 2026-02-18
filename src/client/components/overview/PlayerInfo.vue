@@ -62,9 +62,11 @@ export default defineComponent({
   props: {
     player: {
       type: Object as () => PublicPlayerModel,
+      required: true,
     },
     playerView: {
       type: Object as () => ViewModel,
+      required: true,
     },
     firstForGen: {
       type: Boolean,
@@ -76,6 +78,7 @@ export default defineComponent({
     },
     playerIndex: {
       type: Number,
+      required: true,
     },
     hideZeroTags: {
       type: Boolean,

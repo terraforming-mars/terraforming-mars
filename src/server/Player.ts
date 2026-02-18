@@ -829,6 +829,13 @@ export class Player implements IPlayer {
       this.pay(payment);
     }
 
+    const selfReplicatingRobots = this.tableau.get(CardName.SELF_REPLICATING_ROBOTS);
+    if (selfReplicatingRobots instanceof SelfReplicatingRobots) {
+      if (inplaceRemove(selfReplicatingRobots.targetCards, selectedCard)) {
+        selectedCard.resourceCount = 0;
+      }
+    }
+
     ColoniesHandler.maybeActivateColonies(this.game, selectedCard);
 
     if (selectedCard.type !== CardType.PROXY) {
@@ -862,13 +869,6 @@ export class Player implements IPlayer {
         this.cardsInHand.splice(projectCardIndex, 1);
       } else if (preludeCardIndex !== -1) {
         this.preludeCardsInHand.splice(preludeCardIndex, 1);
-      }
-
-      const selfReplicatingRobots = this.tableau.get(CardName.SELF_REPLICATING_ROBOTS);
-      if (selfReplicatingRobots instanceof SelfReplicatingRobots) {
-        if (inplaceRemove(selfReplicatingRobots.targetCards, selectedCard)) {
-          selectedCard.resourceCount = 0;
-        }
       }
     }
 

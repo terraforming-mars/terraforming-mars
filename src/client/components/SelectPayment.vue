@@ -140,7 +140,7 @@ export default Vue.extend({
       const megaCredits = this.getAvailableUnits('megaCredits');
 
       let amountCovered = reserveMegacredits ? megaCredits : 0;
-      for (const unit of ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'spireScience'] as const) {
+      for (const unit of ['seeds', 'auroraiData', 'steel', 'titanium', 'heat', 'spireScience', 'kuiperAsteroids'] as const) {
         amountCovered += this.setDefaultValue(amountCovered, unit);
       }
       if (!reserveMegacredits) {

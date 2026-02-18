@@ -27,7 +27,7 @@
 <script lang="ts">
 /* global RequestInit */
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
 import {vueRoot} from '@/client/components/vueRoot';
@@ -57,7 +57,7 @@ type DataModel = {
 
 const CANNOT_CONTACT_SERVER = 'Unable to reach the server. It may be restarting or down for maintenance.';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'waiting-for',
   props: {
     playerView: {

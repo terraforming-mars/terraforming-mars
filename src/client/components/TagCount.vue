@@ -8,7 +8,8 @@
 
 <script lang="ts">
 
-import Vue, {PropType} from 'vue';
+import {PropType} from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import Tag from '@/client/components/Tag.vue';
 import UndergroundToken from '@/client/components/underworld/UndergroundToken.vue';
 import {Tag as CardTag} from '@/common/cards/Tag';
@@ -16,7 +17,7 @@ import {SpecialTags} from '@/client/cards/SpecialTags';
 import {TemporaryBonusToken} from '@/common/underworld/UndergroundResourceToken';
 import {ClaimedToken} from '@/common/underworld/UnderworldPlayerData';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'tag-count',
   props: {
     tag: {

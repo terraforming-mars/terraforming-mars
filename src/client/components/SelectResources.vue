@@ -19,7 +19,7 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectResourcesModel} from '@/common/models/PlayerInputModel';
 import {SelectResourcesResponse} from '@/common/inputs/InputResponse';
@@ -28,7 +28,7 @@ import {Units} from '@/common/Units';
 import PaymentUnitComponent from '@/client/components/PaymentUnit.vue';
 import {sum} from '@/common/utils/utils';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SelectResource',
   props: {
     playerView: {

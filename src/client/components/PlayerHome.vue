@@ -272,7 +272,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import * as raw_settings from '@/genfiles/settings.json';
 
 import Board from '@/client/components/Board.vue';
@@ -322,7 +322,7 @@ class TerraformedAlertDialog {
   static shouldAlert = true;
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'player-home',
   data(): PlayerHomeModel {
     const preferences = getPreferences();

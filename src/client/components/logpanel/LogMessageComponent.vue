@@ -34,7 +34,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {Color} from '@/common/Color';
 import {CardName} from '@/common/cards/CardName';
 import {CardType} from '@/common/cards/CardType';
@@ -61,7 +61,7 @@ const cardTypeToCss: Record<CardType, string | undefined> = {
   proxy: undefined,
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'LogMessageComponent',
   props: {
     message: {

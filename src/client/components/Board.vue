@@ -351,7 +351,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import * as constants from '@/common/constants';
 import BoardSpace from '@/client/components/BoardSpace.vue';
 import {AresData} from '@/common/ares/AresData';
@@ -369,7 +369,7 @@ class GlobalParamLevel {
   }
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'board',
   props: {
     spaces: {

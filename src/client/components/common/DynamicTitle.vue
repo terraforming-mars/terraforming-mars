@@ -3,11 +3,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {playerColorClass} from '@/common/utils/utils';
 import {Color} from '@/common/Color';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'DynamicTitle',
   props: {
     title: {

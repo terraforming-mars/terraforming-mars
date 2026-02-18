@@ -8,13 +8,13 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectOptionModel} from '@/common/models/PlayerInputModel';
 import {SelectOptionResponse} from '@/common/inputs/InputResponse';
 import WarningsComponent from './WarningsComponent.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'select-option',
   props: {
     playerinput: {

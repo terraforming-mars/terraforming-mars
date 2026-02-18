@@ -9,10 +9,10 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {paths} from '@/common/app/paths';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'admin-home',
   data() {
     return {

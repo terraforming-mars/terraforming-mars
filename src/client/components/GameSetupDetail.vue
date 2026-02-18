@@ -79,7 +79,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {GameOptionsModel} from '@/common/models/GameOptionsModel';
 import {BoardName} from '@/common/boards/BoardName';
 import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
@@ -99,7 +99,7 @@ const boardColorClass: Record<BoardName, string> = {
   [BoardName.HOLLANDIA]: 'game-config board-hollandia map',
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'game-setup-detail',
   props: {
     playerNumber: {

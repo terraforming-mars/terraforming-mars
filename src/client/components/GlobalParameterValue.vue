@@ -14,7 +14,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '@/common/constants';
 import {GlobalParameter} from '@/common/GlobalParameter';
 
@@ -32,7 +32,7 @@ const attributes: Record<BaseGlobalParameter, {max: number, title: string, iconC
   [GlobalParameter.VENUS]: {max: MAX_VENUS_SCALE, title: 'Venus Scale', iconClass: 'venus-tile'},
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'global-parameter-value',
   props: {
     param: {

@@ -6,11 +6,11 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {ICardRenderRoot} from '@/common/cards/render/Types';
 import CardRowData from '@/client/components/card/CardRowData.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardRenderData',
   props: {
     renderData: {

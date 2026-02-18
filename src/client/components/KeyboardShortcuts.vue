@@ -18,11 +18,11 @@
   </PopupPanel>
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import PopupPanel from './common/PopupPanel.vue';
 import {getPreferences} from '../utils/PreferencesManager';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'KeyboardShortcuts',
   components: {
     PopupPanel,

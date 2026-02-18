@@ -13,7 +13,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
@@ -25,7 +25,7 @@ type DataModel = {
   selected: GlobalEventName | undefined;
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SelectGlobalEvent',
   props: {
     playerView: {

@@ -18,7 +18,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import CardRenderData from '@/client/components/card/CardRenderData.vue';
 import CardParty from '@/client/components/card/CardParty.vue';
 import {IClientGlobalEvent} from '@/common/turmoil/IClientGlobalEvent';
@@ -37,7 +37,7 @@ type DataModel = {
   current: PartyName;
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'global-event',
   components: {
     CardRenderData,

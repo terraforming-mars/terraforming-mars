@@ -11,7 +11,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
 import {
   ICardRenderCorpBoxAction,
@@ -35,7 +35,7 @@ import CardRenderTileComponent from '@/client/components/card/CardRenderTileComp
 import CardDescription from '@/client/components/card/CardDescription.vue';
 import CardRenderSymbolComponent from '@/client/components/card/CardRenderSymbolComponent.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardRowComponent',
   props: {
     componentData: {

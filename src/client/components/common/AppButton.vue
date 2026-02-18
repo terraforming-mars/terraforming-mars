@@ -6,12 +6,12 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {vueRoot} from '@/client/components/vueRoot';
 import {Message} from '@/common/logs/Message';
 import {translateText, translateMessage} from '@/client/directives/i18n';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'AppButton',
   props: {
     title: {

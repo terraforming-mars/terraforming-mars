@@ -15,7 +15,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {CardName} from '@/common/cards/CardName';
@@ -29,7 +29,7 @@ import Colony from '@/client/components/colonies/Colony.vue';
 import {deNull} from '@/common/utils/utils';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'log-panel',
   props: {
     message: Object as () => LogMessage | undefined,

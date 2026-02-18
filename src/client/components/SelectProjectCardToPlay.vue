@@ -56,7 +56,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 
 import AppButton from '@/client/components/common/AppButton.vue';
 import {Payment} from '@/common/inputs/Payment';
@@ -76,7 +76,7 @@ import {CardName} from '@/common/cards/CardName';
 import {SelectProjectCardToPlayResponse} from '@/common/inputs/InputResponse';
 import WarningsComponent from '@/client/components/WarningsComponent.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SelectProjectCardToPlay',
   props: {
     playerView: {
@@ -150,7 +150,7 @@ export default Vue.extend({
     WarningsComponent,
   },
   mounted() {
-    Vue.nextTick(() => {
+    this.$nextTick(() => {
       this.card = this.getCard();
       this.cost = this.card.calculatedCost ?? 0;
       this.tags = this.getCardTags(),

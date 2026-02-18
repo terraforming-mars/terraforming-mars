@@ -43,10 +43,10 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {PolicyId} from '@/common/turmoil/Types';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'AlliedPartyAgenda',
   props: {
     id: {

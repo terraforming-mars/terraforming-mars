@@ -17,12 +17,12 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {ALL_LANGUAGES, LANGUAGES} from '@/common/constants';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'LanguageSelectionDialog',
   props: {
     preferencesManager: {

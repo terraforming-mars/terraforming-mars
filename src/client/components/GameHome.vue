@@ -33,7 +33,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import AppButton from '@/client/components/common/AppButton.vue';
 import PurgeWarning from '@/client/components/common/PurgeWarning.vue';
@@ -60,7 +60,7 @@ function copyToClipboard(text: string): void {
 }
 const DEFAULT_COPIED_PLAYER_ID = '-1';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'game-home',
   props: {
     game: {

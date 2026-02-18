@@ -8,13 +8,13 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {range} from '@/common/utils/utils';
 import {PlanetaryTrack as Track} from '@/common/pathfinders/PlanetaryTrack';
 import {GameOptionsModel} from '@/common/models/GameOptionsModel';
 import PlanetaryTrackRewards from './PlanetaryTrackRewards.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PlanetaryTrack',
   props: {
     val: {

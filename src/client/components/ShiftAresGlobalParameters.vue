@@ -42,7 +42,7 @@
 </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {AresGlobalParametersResponse} from '@/common/inputs/AresGlobalParametersResponse';
 import {ShiftAresGlobalParametersModel} from '@/common/models/PlayerInputModel';
 import {ShiftAresGlobalParametersResponse} from '@/common/inputs/InputResponse';
@@ -52,7 +52,7 @@ type DataModel = AresGlobalParametersResponse & {
   hazardData: HazardData,
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'ShiftAresGlobalParameters',
   props: {
     playerinput: {

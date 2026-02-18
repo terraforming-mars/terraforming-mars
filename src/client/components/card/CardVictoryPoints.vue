@@ -25,7 +25,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import CardRenderItemComponent from '@/client/components/card/CardRenderItemComponent.vue';
 import {CardRenderDynamicVictoryPoints} from '@/common/cards/render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
@@ -33,7 +33,7 @@ import {CardResource} from '@/common/CardResource';
 import {ICardRenderItem} from '@/common/cards/render/Types';
 import {Size} from '@/common/cards/render/Size';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardVictoryPoints',
   props: {
     victoryPoints: {

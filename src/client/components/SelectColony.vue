@@ -11,7 +11,7 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import Colony from '@/client/components/colonies/Colony.vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectColonyModel} from '@/common/models/PlayerInputModel';
@@ -22,7 +22,7 @@ type DataModel = {
   selectedColony: ColonyName | undefined,
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SelectColony',
   props: {
     playerinput: {

@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import PlayerResources from '@/client/components/overview/PlayerResources.vue';
 import PlayerTags from '@/client/components/overview/PlayerTags.vue';
@@ -57,7 +57,7 @@ import {Phase} from '@/common/Phase';
 import {ActionLabel} from './ActionLabel';
 import {playerSymbol} from '@/client/utils/playerSymbol';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PlayerInfo',
   props: {
     player: {

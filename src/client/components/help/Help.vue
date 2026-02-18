@@ -41,7 +41,7 @@
     </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import HelpIconology from '@/client/components/help/HelpIconology.vue';
 import HelpPhases from '@/client/components/help/HelpPhases.vue';
 import HelpStandardProjects from '@/client/components/help/HelpStandardProjects.vue';
@@ -52,7 +52,7 @@ export interface HelpPageModel {
     currentPage: Tab;
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Help',
   data(): HelpPageModel {
     return {

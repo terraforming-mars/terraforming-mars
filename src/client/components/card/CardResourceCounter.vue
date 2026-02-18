@@ -7,11 +7,11 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {CardResource} from '@/common/CardResource';
 import {cardResourceCSS} from '../common/cardResources';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardResourceCounter',
   props: {
     amount: {

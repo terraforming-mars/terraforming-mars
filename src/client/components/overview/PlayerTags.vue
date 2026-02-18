@@ -32,7 +32,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import TagCount from '@/client/components/TagCount.vue';
 import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {GameModel} from '@/common/models/GameModel';
@@ -126,7 +126,7 @@ const getTagCount = (tagName: InterfaceTagsType, player: PublicPlayerModel): num
   }
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PlayerTags',
   props: {
     playerView: {

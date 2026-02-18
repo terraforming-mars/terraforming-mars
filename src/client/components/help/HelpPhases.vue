@@ -151,8 +151,8 @@
     </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
-export default Vue.extend({
+import {defineComponent} from '@/client/vue3-compat';
+export default defineComponent({
   name: 'HelpPhases',
 });
 </script>

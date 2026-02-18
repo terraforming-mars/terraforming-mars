@@ -45,7 +45,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {GameOptionsModel} from '@/common/models/GameOptionsModel';
 import {PathfindersModel} from '@/common/models/PathfindersModel';
 import {Tag} from '@/common/cards/Tag';
@@ -53,7 +53,7 @@ import {range} from '@/common/utils/utils';
 import PlanetaryTrack from '@/client/components/pathfinders/PlanetaryTrack.vue';
 import {PlanetaryTracks as Tracks} from '@/common/pathfinders/PlanetaryTracks';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PlanetaryTracks',
   props: {
     tracks: {

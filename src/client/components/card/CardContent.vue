@@ -28,6 +28,7 @@ export default defineComponent({
     },
     requirements: {
       type: Array<CardRequirementDescriptor>,
+      required: true,
     },
     isCorporation: {
       type: Boolean,
@@ -35,6 +36,7 @@ export default defineComponent({
     },
     bottomPadding: {
       type: String, // '', 'short', 'long'
+      required: true,
     },
   },
   components: {

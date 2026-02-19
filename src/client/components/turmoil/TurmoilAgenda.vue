@@ -192,6 +192,7 @@ export default defineComponent({
   props: {
     id: {
       type: String as () => BonusId | PolicyId | undefined,
+      required: true,
     },
   },
 });

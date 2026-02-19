@@ -47,9 +47,11 @@ export default defineComponent({
   props: {
     globalEventName: {
       type: String as () => GlobalEventName,
+      required: true,
     },
     type: {
       type: String as () => RenderType,
+      required: true,
     },
     showDistance: {
       type: Boolean,

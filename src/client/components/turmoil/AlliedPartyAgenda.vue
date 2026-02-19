@@ -51,6 +51,7 @@ export default defineComponent({
   props: {
     id: {
       type: String as () => PolicyId,
+      required: true,
     },
   },
 });

@@ -21,15 +21,19 @@ export default defineComponent({
   props: {
     timer: {
       type: Object as () => TimerModel,
+      required: true,
     },
     actionLabel: {
       type: String as () => ActionLabel,
+      required: true,
     },
     showTimer: {
       type: Boolean,
+      required: true,
     },
     liveTimer: {
       type: Boolean,
+      required: true,
     },
   },
   components: {

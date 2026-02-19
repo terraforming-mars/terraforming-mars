@@ -22,6 +22,7 @@ export default defineComponent({
   props: {
     tag: {
       type: String as () => CardTag|SpecialTags|'escape',
+      required: true,
     },
     undergroundToken: {
       type: String as () => TemporaryBonusToken | undefined,
@@ -30,12 +31,15 @@ export default defineComponent({
     },
     count: {
       type: [Number, String] as PropType<number | string>,
+      required: true,
     },
     size: {
       type: String,
+      required: true,
     },
     type: {
       type: String,
+      required: true,
     },
     showWhenZero: {
       // When true, show even if the value is zero.

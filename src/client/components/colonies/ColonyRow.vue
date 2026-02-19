@@ -29,6 +29,7 @@ export default defineComponent({
     },
     colony: {
       type: Object as () => ColonyModel,
+      required: true,
     },
   },
 });

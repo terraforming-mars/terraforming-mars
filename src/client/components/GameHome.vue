@@ -65,6 +65,7 @@ export default defineComponent({
   props: {
     game: {
       type: Object as () => SimpleGameModel,
+      required: true,
     },
   },
   components: {

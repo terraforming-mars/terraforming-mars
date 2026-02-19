@@ -55,15 +55,19 @@ export default defineComponent({
   props: {
     datasets: {
       type: Array as () => Array<DataSet>,
+      required: true,
     },
     generation: {
       type: Number,
+      required: true,
     },
     animation: {
       type: Boolean,
+      required: true,
     },
     id: {
       type: String,
+      required: true,
     },
     yAxisLabel: {
       type: String,

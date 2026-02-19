@@ -12,6 +12,7 @@ export default defineComponent({
   props: {
     name: {
       type: String as () => CardName,
+      required: true,
     },
   },
   methods: {

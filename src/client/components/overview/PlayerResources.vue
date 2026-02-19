@@ -55,6 +55,7 @@ export default defineComponent({
   props: {
     player: {
       type: Object as () => PublicPlayerModel,
+      required: true,
     },
   },
   computed: {

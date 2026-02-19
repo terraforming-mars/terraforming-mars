@@ -53,6 +53,7 @@ export default defineComponent({
     },
     showDescription: {
       type: Boolean,
+      required: true,
     },
   },
   methods: {

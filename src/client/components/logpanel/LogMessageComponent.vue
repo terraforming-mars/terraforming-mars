@@ -66,9 +66,11 @@ export default defineComponent({
   props: {
     message: {
       type: Object as () => LogMessage,
+      required: true,
     },
     viewModel: {
       type: Object as () => ViewModel,
+      required: true,
     },
   },
   methods: {

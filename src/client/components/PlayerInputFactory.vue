@@ -62,21 +62,27 @@ export default Vue.component('player-input-factory', {
   props: {
     players: {
       type: Array as () => Array<PublicPlayerModel>,
+      required: true,
     },
     playerView: {
       type: Object as () => PlayerViewModel,
+      required: true,
     },
     playerinput: {
       type: Object as () => PlayerInputModel,
+      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: InputResponse) => void,
+      required: true,
     },
     showsave: {
       type: Boolean,
+      required: true,
     },
     showtitle: {
       type: Boolean,
+      required: true,
     },
   },
   components: {

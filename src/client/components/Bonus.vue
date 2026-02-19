@@ -36,6 +36,7 @@ export default defineComponent({
   props: {
     bonus: {
       type: Array as () => Array<SpaceBonus>,
+      required: true,
     },
   },
   methods: {

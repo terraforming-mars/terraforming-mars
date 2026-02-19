@@ -27,6 +27,7 @@ export default defineComponent({
   props: {
     preferencesManager: {
       type: Object as () => PreferencesManager,
+      required: true,
     },
   },
   methods: {

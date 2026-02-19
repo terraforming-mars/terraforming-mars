@@ -44,6 +44,7 @@ export default defineComponent({
   props: {
     milestone: {
       type: Object as () => ClaimedMilestoneModel,
+      required: true,
     },
     showScores: {
       type: Boolean,
@@ -51,6 +52,7 @@ export default defineComponent({
     },
     showDescription: {
       type: Boolean,
+      required: true,
     },
   },
   methods: {

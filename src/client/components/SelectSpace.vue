@@ -44,15 +44,19 @@ export default (Vue as WithRefs<Refs>).extend({
   props: {
     playerinput: {
       type: Object as () => SelectSpaceModel,
+      required: true,
     },
     onsave: {
       type: Function as unknown as () => (out: SelectSpaceResponse) => void,
+      required: true,
     },
     showsave: {
       type: Boolean,
+      required: true,
     },
     showtitle: {
       type: Boolean,
+      required: true,
     },
   },
   data(): DataModel {

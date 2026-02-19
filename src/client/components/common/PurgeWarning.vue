@@ -17,6 +17,7 @@ export default defineComponent({
   props: {
     expectedPurgeTimeMs: {
       type: Number,
+      required: true,
     },
   },
   computed: {

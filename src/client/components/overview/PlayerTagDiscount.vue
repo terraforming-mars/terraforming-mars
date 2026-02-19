@@ -14,6 +14,7 @@ export default defineComponent({
   props: {
     amount: {
       type: Number,
+      required: true,
     },
   },
 });

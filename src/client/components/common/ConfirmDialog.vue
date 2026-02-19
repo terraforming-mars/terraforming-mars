@@ -30,6 +30,7 @@ export default (Vue as WithRefs<Refs>).extend({
   props: {
     message: {
       type: String,
+      required: true,
     },
     enableDontShowAgainCheckbox: {
       type: Boolean,

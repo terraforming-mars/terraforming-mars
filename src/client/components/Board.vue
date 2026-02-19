@@ -374,30 +374,39 @@ export default defineComponent({
   props: {
     spaces: {
       type: Array as () => Array<SpaceModel>,
+      required: true,
     },
     venusScaleLevel: {
       type: Number,
+      required: true,
     },
     altVenusBoard: {
       type: Boolean,
+      required: true,
     },
     boardName: {
       type: String as () => BoardName,
+      required: true,
     },
     oceans_count: {
       type: Number,
+      required: true,
     },
     oxygen_level: {
       type: Number,
+      required: true,
     },
     temperature: {
       type: Number,
+      required: true,
     },
     expansions: {
       type: Object as () => Record<Expansion, boolean>,
+      required: true,
     },
     aresData: {
       type: Object as () => AresData | undefined,
+      required: true,
     },
     tileView: {
       type: String as () => TileView,

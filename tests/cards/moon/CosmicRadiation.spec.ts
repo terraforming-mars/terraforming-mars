@@ -1,29 +1,18 @@
 import {expect} from 'chai';
-import {IGame} from '../../../src/server/IGame';
 import {testGame} from '../../TestGame';
 import {IPlayer} from '../../../src/server/IPlayer';
 import {runAllActions} from '../../TestingUtils';
-import {TestPlayer} from '../../TestPlayer';
 import {CosmicRadiation} from '../../../src/server/cards/moon/CosmicRadiation';
 import {MoonExpansion} from '../../../src/server/moon/MoonExpansion';
-import {MoonData} from '../../../src/server/moon/MoonData';
 import {TileType} from '../../../src/common/TileType';
+import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
 
 describe('CosmicRadiation', () => {
-  let game: IGame;
-  let player1: TestPlayer;
-  let player2: TestPlayer;
-  let player3: TestPlayer;
-  let card: CosmicRadiation;
-  let moonData: MoonData;
-
-  beforeEach(() => {
-    [game, player1, player2, player3] = testGame(3, {moonExpansion: true, turmoilExtension: true});
-    card = new CosmicRadiation();
-    moonData = MoonExpansion.moonData(game);
-  });
-
   it('can play', () => {
+    const [game, player1] = testGame(3, {moonExpansion: true});
+    const card = new CosmicRadiation();
+    const moonData = MoonExpansion.moonData(game);
+
     player1.cardsInHand = [card];
     player1.megaCredits = card.cost;
 
@@ -35,6 +24,10 @@ describe('CosmicRadiation', () => {
   });
 
   it('play', () => {
+    const [game, player1, player2, player3] = testGame(3, {moonExpansion: true});
+    const card = new CosmicRadiation();
+    const moonData = MoonExpansion.moonData(game);
+
     const spaces = moonData.moon.getAvailableSpacesOnLand(player1);
 
     const assignTile = function(idx: number, player: IPlayer) {
@@ -55,11 +48,35 @@ describe('CosmicRadiation', () => {
     player3.megaCredits = 20;
 
     card.play(player1);
-    runAllActions(player1.game);
+    runAllActions(game);
 
     expect(player1.megaCredits).eq(6);
     expect(player2.megaCredits).eq(0);
     expect(player3.megaCredits).eq(8);
+  });
+
+  it('Compatible with underworld', () => {
+    const [game, player1, player2] = testGame(2, {moonExpansion: true, underworldExpansion: true});
+    const card = new CosmicRadiation();
+    const moonData = MoonExpansion.moonData(game);
+
+    const spaces = moonData.moon.getAvailableSpacesOnLand(player1);
+
+    const assignTile = function(idx: number, player: IPlayer) {
+      spaces[idx].tile = {tileType: TileType.MOON_MINE};
+      spaces[idx].player = player;
+    };
+
+    assignTile(2, player2);
+    player2.megaCredits = 3;
+    player2.underworldData.corruption = 1;
+
+    card.play(player1);
+    runAllActions(game);
+
+    assertIsMaybeBlock(player2, player2.popWaitingFor(), 'corruption');
+    player2.megaCredits = 3;
+    player1.underworldData.corruption = 0;
   });
 });
 

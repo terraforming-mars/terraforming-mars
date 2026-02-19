@@ -42,7 +42,7 @@ export class RevoltingColonists extends Card implements IProjectCard {
         const owes = Math.min(bill, target.spendableMegacredits());
 
         if (owes > 0) {
-          const msg = message('${0} MC', (b) => b.number(owes));
+          const msg = message('${0} M€', (b) => b.number(owes));
           target.maybeBlockAttack(player, msg, (proceed) => {
             if (proceed) {
               game.defer(new SelectPaymentDeferred(target, owes, {

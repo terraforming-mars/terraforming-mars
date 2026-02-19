@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {Payment} from '@/common/inputs/Payment';
 import {SpendableResource, SPENDABLE_RESOURCES} from '@/common/inputs/Spendable';
 import {PaymentWidgetMixin, SelectPaymentDataModel} from '@/client/mixins/PaymentWidgetMixin';
@@ -40,7 +40,7 @@ import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectPaymentResponse} from '@/common/inputs/InputResponse';
 import PaymentUnitComponent from '@/client/components/PaymentUnit.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SelectPayment',
   props: {
     playerView: {
@@ -89,7 +89,7 @@ export default Vue.extend({
     };
   },
   mounted() {
-    Vue.nextTick(() => {
+    this.$nextTick(() => {
       this.setInitialCost();
       this.payment.megaCredits = this.getMegaCreditsMax();
       this.setDefaultValues();

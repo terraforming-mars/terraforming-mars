@@ -8,12 +8,12 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {CardModel} from '@/common/models/CardModel';
 import {CardName} from '@/common/cards/CardName';
 import {Resource} from '@/common/Resource';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardExtraContent',
   props: {
     card: {

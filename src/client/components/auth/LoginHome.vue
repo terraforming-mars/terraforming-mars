@@ -13,14 +13,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {paths} from '@/common/app/paths';
 
 type Data = {
   user: string | undefined;
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'login-home',
   data(): Data {
     return {

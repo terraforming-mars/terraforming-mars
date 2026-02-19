@@ -212,7 +212,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import * as constants from '@/common/constants';
 import {paths} from '@/common/app/paths';
 import {GameModel} from '@/common/models/GameModel';
@@ -242,7 +242,7 @@ function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | 
   throw new Error('Neither playerView nor spectator are defined');
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'game-end',
   props: {
     playerView: {

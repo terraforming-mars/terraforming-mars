@@ -9,14 +9,14 @@
 const ONE_THIRD = 1/3;
 const TWO_THIRDS = 2/3;
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 
 export type Points = {
   points: number;
   halfPoints: number;
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PointsPerTag',
   props: {
     points: {

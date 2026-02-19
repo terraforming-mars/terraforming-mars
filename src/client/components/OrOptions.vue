@@ -28,7 +28,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {isHTMLElement} from '@/client/utils/vueUtils';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
@@ -38,7 +38,7 @@ import {InputResponse, OrOptionsResponse} from '@/common/inputs/InputResponse';
 
 let unique = 0;
 
-export default Vue.extend({
+export default defineComponent({
   name: 'or-options',
   props: {
     playerView: {

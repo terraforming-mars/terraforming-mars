@@ -4,7 +4,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {SpaceType} from '@/common/boards/SpaceType';
 import {TileType, tileTypeToString} from '@/common/TileType';
 import {SpaceHighlight, SpaceModel} from '@/common/models/SpaceModel';
@@ -99,7 +99,7 @@ const descriptions: Record<TileType, string> = {
   [TileType.NEW_HOLLAND]: 'New Holland: counts as an ocean and a city',
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'board-space-tile',
   props: {
     space: {

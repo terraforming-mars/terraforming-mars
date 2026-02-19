@@ -32,7 +32,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import Bonus from '@/client/components/Bonus.vue';
 import BoardSpaceTile from '@/client/components/board/BoardSpaceTile.vue';
 import UndergroundToken from '@/client/components/underworld/UndergroundToken.vue';
@@ -42,7 +42,7 @@ import {getPreferences} from '../utils/PreferencesManager';
 import {ClaimedToken} from '@/common/underworld/UnderworldPlayerData';
 import {getSpaceName} from '@/common/boards/spaces';
 import {SpaceType} from '@/common/boards/SpaceType';
-export default Vue.extend({
+export default defineComponent({
   name: 'board-space',
   props: {
     space: {

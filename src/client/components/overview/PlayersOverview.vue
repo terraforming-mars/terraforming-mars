@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
 import OverviewSettings from '@/client/components/overview/OverviewSettings.vue';
 import OtherPlayer from '@/client/components/OtherPlayer.vue';
@@ -49,7 +49,7 @@ export const playerIndex = (
   return -1;
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PlayersOverview',
   props: {
     playerView: {

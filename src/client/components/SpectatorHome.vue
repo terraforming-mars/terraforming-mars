@@ -74,7 +74,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 
 import {GameModel} from '@/common/models/GameModel';
 import {vueRoot} from '@/client/components/vueRoot';
@@ -101,7 +101,7 @@ export interface SpectatorHomeModel {
   waitingForTimeout: number;
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SpectatorHome',
   data(): SpectatorHomeModel {
     return {

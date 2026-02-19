@@ -17,7 +17,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {AndOptionsModel} from '@/common/models/PlayerInputModel';
 import AppButton from '@/client/components/common/AppButton.vue';
@@ -27,7 +27,7 @@ interface DataModel {
   responded: Array<InputResponse | undefined>,
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'and-options',
   props: {
     playerView: {

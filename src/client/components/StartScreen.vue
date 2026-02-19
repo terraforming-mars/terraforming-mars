@@ -34,14 +34,14 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import LanguageSwitcher from '@/client/components/LanguageSwitcher.vue';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 
 import * as raw_settings from '@/genfiles/settings.json';
 import * as constants from '@/common/constants';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'start-screen',
   components: {
     LanguageSwitcher,

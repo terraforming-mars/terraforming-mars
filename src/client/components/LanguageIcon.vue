@@ -13,12 +13,12 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import LanguageSelectionDialog from '@/client/components/LanguageSelectionDialog.vue';
 import {LANGUAGES} from '@/common/constants';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'LanguageIcon',
   components: {
     'language-selection-dialog': LanguageSelectionDialog,

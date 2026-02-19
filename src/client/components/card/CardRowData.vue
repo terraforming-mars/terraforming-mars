@@ -6,10 +6,10 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import CardRowComponent from '@/client/components/card/CardRowComponent.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardRowData',
   props: {
     rowData: {

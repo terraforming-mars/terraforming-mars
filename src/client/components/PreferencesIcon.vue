@@ -7,11 +7,11 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import PreferencesDialog from '@/client/components/PreferencesDialog.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PreferencesIcon',
   components: {
     'preferences-dialog': PreferencesDialog,

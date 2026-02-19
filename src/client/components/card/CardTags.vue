@@ -11,11 +11,11 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import CardTag from '@/client/components/card/CardTag.vue';
 import {Tag} from '@/common/cards/Tag';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardTags',
   props: {
     tags: Array as () => Array<Tag>,

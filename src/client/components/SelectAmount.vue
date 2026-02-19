@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectAmountModel} from '@/common/models/PlayerInputModel';
 import {SelectAmountResponse} from '@/common/inputs/InputResponse';
@@ -22,7 +22,7 @@ interface DataModel {
   amount: string;
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SelectAmount',
   components: {
     AppButton,

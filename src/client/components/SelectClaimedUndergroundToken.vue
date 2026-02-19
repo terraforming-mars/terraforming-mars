@@ -19,7 +19,7 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectClaimedUndergroundTokenModel} from '@/common/models/PlayerInputModel';
 import {SelectClaimedUndergroundTokenResponse} from '@/common/inputs/InputResponse';
@@ -30,7 +30,7 @@ type DataModel = {
   selected: Array<number>,
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SelectClaimedUndergroundToken',
   props: {
     playerView: {

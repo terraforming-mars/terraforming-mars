@@ -9,14 +9,14 @@
 </template>
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {ColonyMetadata} from '@/common/colonies/ColonyMetadata';
 import BuildBenefit from './BuildBenefit.vue';
 import {Color} from '@/common/Color';
 
-export default Vue.extend({
+export default defineComponent({
   components: {BuildBenefit},
   name: 'ColonyRow',
   props: {

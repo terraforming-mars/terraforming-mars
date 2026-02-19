@@ -25,7 +25,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import CardRenderItemComponent from '@/client/components/card/CardRenderItemComponent.vue';
 import CardRenderSymbolComponent from '@/client/components/card/CardRenderSymbolComponent.vue';
 import {ICardRenderEffect, isICardRenderItem, isICardRenderProductionBox} from '@/common/cards/render/Types';
@@ -35,7 +35,7 @@ import {isICardRenderSymbol, isICardRenderTile, ItemType} from '@/common/cards/r
 
 import CardDescription from '@/client/components/card/CardDescription.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardRenderEffectBoxComponent',
   props: {
     effectData: {

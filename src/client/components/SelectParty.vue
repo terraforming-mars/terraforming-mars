@@ -13,7 +13,7 @@
     </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectPartyModel} from '@/common/models/PlayerInputModel';
 import Party from '@/client/components/Party.vue';
@@ -22,7 +22,7 @@ import {SelectPartyResponse} from '@/common/inputs/InputResponse';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {TurmoilModel} from '@/common/models/TurmoilModel';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SelectParty',
   props: {
     playerView: {

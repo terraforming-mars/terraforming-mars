@@ -74,7 +74,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {MoonModel} from '@/common/models/MoonModel';
 import {SpaceModel} from '@/common/models/SpaceModel';
 import {SpaceType} from '@/common/boards/SpaceType';
@@ -88,7 +88,7 @@ type MoonParamLevel = {
   strValue: string,
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'MoonBoard',
   props: {
     model: {

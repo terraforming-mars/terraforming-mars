@@ -4,7 +4,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {ICardRenderTile} from '@/common/cards/render/Types';
 import {TileType} from '@/common/TileType';
 
@@ -144,7 +144,7 @@ const TILE_CLASSES: Record<TileType, Classes> = {
   },
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardRenderTileComponent',
   props: {
     item: {

@@ -4,10 +4,10 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CardDescription',
   props: {
     item: {

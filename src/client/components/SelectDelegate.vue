@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {ColorWithNeutral} from '@/common/Color';
 import {SelectDelegateModel} from '@/common/models/PlayerInputModel';
@@ -24,7 +24,7 @@ interface DataModel {
   selectedPlayer: ColorWithNeutral | undefined;
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SelectDelegate',
   props: {
     players: {

@@ -34,13 +34,13 @@
 </template>
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {ColonyMetadata} from '@/common/colonies/ColonyMetadata';
 import {range} from '@/common/utils/utils';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'ColonyTradeRow',
   props: {
     metadata: {

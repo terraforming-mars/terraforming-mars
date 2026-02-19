@@ -10,7 +10,7 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import * as constants from '@/common/constants';
 import GameOverview from '@/client/components/admin/GameOverview.vue';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
@@ -28,7 +28,7 @@ type DataModel = {
 // Copied from routes/Game.ts and probably IDatabase. Should be centralized I suppose
 type Response = {gameId: GameId, participants: Array<ParticipantId>};
 
-export default Vue.extend({
+export default defineComponent({
   name: 'games-overview',
   data(): DataModel {
     return {

@@ -8,10 +8,10 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 import {ClaimedToken} from '@/common/underworld/UnderworldPlayerData';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'UndergroundToken',
   props: {
     token: {

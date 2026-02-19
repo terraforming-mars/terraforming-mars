@@ -9,6 +9,7 @@ import {Tag} from '../../../common/cards/Tag';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {CardResource} from '../../../common/CardResource';
 import {all, digit} from '../Options';
+import {message} from '../../logs/MessageBuilder';
 
 export class SolarStorm extends Card implements IProjectCard {
   constructor() {
@@ -39,13 +40,19 @@ export class SolarStorm extends Card implements IProjectCard {
     if (player.game.isSoloMode()) {
       player.game.someoneHasRemovedOtherPlayersPlants = true;
     }
-    for (const p of player.game.players) {
-      if (!p.plantsAreProtected()) {
+    for (const target of player.game.players) {
+      if (!target.plantsAreProtected()) {
         // Botanical Experience reduces the impact in half.
-        if (p.tableau.has(CardName.BOTANICAL_EXPERIENCE)) {
-          p.stock.deduct(Resource.PLANTS, 1, {log: true, from: {player}});
-        } else {
-          p.stock.deduct(Resource.PLANTS, 2, {log: true, from: {player}});
+        const qty = target.tableau.has(CardName.BOTANICAL_EXPERIENCE) ? 1 : 2;
+        const realAmount = Math.min(qty, target.plants);
+        if (realAmount > 0) {
+          const msg = message('${0} plants', (b) => b.number(realAmount));
+          target.maybeBlockAttack(player, msg, (proceed: boolean) => {
+            if (proceed) {
+              target.stock.deduct(Resource.PLANTS, realAmount, {log: true, from: {player}});
+            }
+            return undefined;
+          });
         }
       }
     }

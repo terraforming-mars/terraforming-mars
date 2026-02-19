@@ -10,6 +10,7 @@ import {CommunicationCenter} from '../../../src/server/cards/pathfinders/Communi
 import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {SelectCard} from '../../../src/server/inputs/SelectCard';
 import {BotanicalExperience} from '../../../src/server/cards/pathfinders/BotanicalExperience';
+import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
 
 describe('SolarStorm', () => {
   let card: SolarStorm;
@@ -99,5 +100,20 @@ describe('SolarStorm', () => {
     expect(player.plants).eq(3);
     expect(player2.plants).eq(14);
     expect(player3.plants).eq(398);
+  });
+
+  it('Compatible with underworld', () => {
+    const [game, player1, player2] = testGame(2, {underworldExpansion: true});
+    const card = new SolarStorm();
+
+    player2.plants = 3;
+    player2.underworldData.corruption = 1;
+
+    card.play(player1);
+    runAllActions(game);
+
+    assertIsMaybeBlock(player2, player2.popWaitingFor(), 'corruption');
+    player2.plants = 3;
+    player1.underworldData.corruption = 0;
   });
 });

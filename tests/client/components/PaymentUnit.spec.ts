@@ -14,7 +14,7 @@ describe('PaymentUnit', () => {
       },
     });
     const input = wrapper.find('input');
-    expect(input.element.value).to.eq('5');
+    expect((input.element as HTMLInputElement).value).to.eq('5');
   });
 
   it('emits input on input change', async () => {

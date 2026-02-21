@@ -5,7 +5,7 @@ import VictoryPointChart from '@/client/components/gameend/VictoryPointChart.vue
 
 describe('VictoryPointChart', () => {
   // VictoryPointChart uses canvas/Chart.js which JSDOM can't fully handle
-  it.skip('mounts without errors', () => {
+  it('mounts without errors', async () => {
     const wrapper = shallowMount(VictoryPointChart, {
       localVue: getLocalVue(),
       propsData: {

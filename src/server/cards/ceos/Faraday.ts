@@ -66,7 +66,7 @@ export class Faraday extends CeoCard {
       const count = player.tags.count(tag, 'raw');
       const lastReward = this.data.counts[tag] ?? 0;
       if (count >= lastReward + 5) {
-        this.data.counts[tag] = count;
+        this.data.counts[tag] = lastReward + 5;
         rewards.push(tag);
       }
     }

@@ -14,11 +14,11 @@
                               :playerView="playerView"
                               :playerinput="option"
                               :onsave="playerFactorySaved()"
-                              :showsave="false"
+                              :showsave="showsave && isMultiSelectCard(option)"
                               :showtitle="false" />
       </div>
     </div>
-    <div v-if="showsave && selectedOption">
+    <div v-if="showsave && selectedOption && !isMultiSelectCard(selectedOption)">
       <div style="margin: 5px 30px 10px" class="wf-action">
         <AppButton :title="$t(selectedOption.buttonLabel)" type="submit" size="normal" @click="saveData" />
       </div>
@@ -141,6 +141,9 @@ export default defineComponent({
           response: out,
         });
       };
+    },
+    isMultiSelectCard(option: PlayerInputModel): boolean {
+      return option.type === 'card' && !(option.max === 1 && option.min === 1);
     },
     saveData() {
       let ref = this.$refs['inputfactory'];

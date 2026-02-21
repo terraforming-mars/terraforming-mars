@@ -129,12 +129,12 @@ export default defineComponent({
       required: true,
     },
     moonData: {
-      type: Object as () => MoonModel,
-      required: true,
+      type: Object as () => MoonModel | undefined,
+      default: undefined,
     },
     turmoil: {
-      type: Object as () => TurmoilModel || undefined,
-      required: true,
+      type: Object as () => TurmoilModel | undefined,
+      default: undefined,
     },
     lastSoloGeneration: {
       type: Number,
@@ -175,14 +175,15 @@ export default defineComponent({
       return `${this.generation}`;
     },
     rulingPartyToCss(): string {
-      if (this.turmoil.ruling === undefined) {
+      if (this.turmoil?.ruling === undefined) {
         console.warn('no party provided');
         return '';
       }
       return this.turmoil.ruling.toLowerCase().split(' ').join('_');
     },
     getRulingParty(): string {
-      switch (this.turmoil.ruling) {
+      const ruling = this.turmoil?.ruling;
+      switch (ruling) {
       case PartyName.MARS:
         return 'Mars';
       case PartyName.SCIENTISTS:
@@ -192,7 +193,7 @@ export default defineComponent({
       case undefined:
         return '???';
       default:
-        return this.turmoil.ruling;
+        return ruling;
       }
     },
   },

@@ -11,6 +11,8 @@ import {Resource} from '@/common/Resource';
 import {Tag} from '@/common/cards/Tag';
 import {Protection} from '@/common/models/PlayerModel';
 import {DEFAULT_EXPANSIONS} from '@/common/cards/GameModule';
+import {PoliticalAgendasModel} from '@/common/models/TurmoilModel';
+import {SpectatorModel} from '@/common/models/SpectatorModel';
 
 function emptyProtection(): Record<Resource, Protection> {
   return {
@@ -23,7 +25,7 @@ function emptyProtection(): Record<Resource, Protection> {
   } as Record<Resource, Protection>;
 }
 
-function emptyTags(): Record<Tag, number> {
+export function emptyTags(): Record<Tag, number> {
   const tags: Partial<Record<Tag, number>> = {};
   for (const tag of Object.values(Tag)) {
     tags[tag] = 0;
@@ -165,7 +167,7 @@ export function fakePublicPlayerModel(overrides?: RecursivePartial<PublicPlayerM
       detailsCards: [],
       detailsMilestones: [],
       detailsAwards: [],
-    } as any,
+    },
     victoryPointsByGeneration: [],
     globalParameterSteps: {},
     ...overrides,
@@ -195,14 +197,51 @@ export function fakePlayerViewModel(overrides?: RecursivePartial<PlayerViewModel
   } as PlayerViewModel;
 }
 
+export function fakeSpectatorModel(): SpectatorModel {
+  return {
+    ...fakeViewModel(),
+    id: 'spectator-id',
+    color: 'neutral',
+  };
+}
+
 export function fakeViewModel(overrides?: RecursivePartial<ViewModel>): ViewModel {
   const thisPlayer = fakePublicPlayerModel();
   return {
     game: fakeGameModel(),
     players: [thisPlayer],
-    id: 'p-blue-id' as any,
+    id: 'p-blue-id',
     thisPlayer,
     runId: 'run-id',
     ...overrides,
   } as ViewModel;
+}
+
+export function fakePoliticalAgendasModel(): PoliticalAgendasModel {
+  return {
+    marsFirst: {
+      bonusId: 'mb01',
+      policyId: 'mp01',
+    },
+    scientists: {
+      bonusId: 'sb01',
+      policyId: 'sp01',
+    },
+    unity: {
+      bonusId: 'ub01',
+      policyId: 'up01',
+    },
+    greens: {
+      bonusId: 'gb01',
+      policyId: 'gp01',
+    },
+    reds: {
+      bonusId: 'rb01',
+      policyId: 'rp01',
+    },
+    kelvinists: {
+      bonusId: 'kb01',
+      policyId: 'kp01',
+    },
+  };
 }

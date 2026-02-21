@@ -74,7 +74,7 @@ export default defineComponent({
     },
     waitingfor: {
       type: Object as () => PlayerInputModel | undefined,
-      required: true,
+      default: undefined,
     },
   },
   data(): DataModel {

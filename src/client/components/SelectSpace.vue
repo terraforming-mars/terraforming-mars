@@ -56,7 +56,7 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     showtitle: {
       type: Boolean,
-      required: true,
+      default: true,
     },
   },
   data(): DataModel {

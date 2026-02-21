@@ -2,6 +2,8 @@ import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
 import {getLocalVue} from '../getLocalVue';
 import Turmoil from '@/client/components/turmoil/Turmoil.vue';
+import {PartyName} from '@/common/turmoil/PartyName';
+import {fakePoliticalAgendasModel} from '../testHelpers';
 
 describe('Turmoil', () => {
   it('mounts without errors', () => {
@@ -15,8 +17,8 @@ describe('Turmoil', () => {
       } as any,
       propsData: {
         turmoil: {
-          dominant: undefined,
-          ruling: undefined,
+          dominant: PartyName.REDS,
+          ruling: PartyName.REDS,
           chairman: undefined,
           parties: [],
           lobby: [],
@@ -24,7 +26,7 @@ describe('Turmoil', () => {
           distant: undefined,
           coming: undefined,
           current: undefined,
-          politicalAgendas: undefined,
+          politicalAgendas: fakePoliticalAgendasModel(),
           policyActionUsers: [],
         },
       },

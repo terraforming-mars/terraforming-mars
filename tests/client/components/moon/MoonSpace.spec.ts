@@ -8,7 +8,7 @@ describe('MoonSpace', () => {
     const wrapper = mount(MoonSpace, {
       localVue: getLocalVue(),
       propsData: {
-        space: {id: 'm1'},
+        space: {id: 'm1', bonus: []},
       },
     });
 
@@ -19,7 +19,7 @@ describe('MoonSpace', () => {
     const wrapper = mount(MoonSpace, {
       localVue: getLocalVue(),
       propsData: {
-        space: {id: 'm1'},
+        space: {id: 'm1', bonus: []},
         tileView: 'hide',
       },
     });

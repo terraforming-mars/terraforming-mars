@@ -82,7 +82,7 @@ export default Vue.component('player-input-factory', {
     },
     showtitle: {
       type: Boolean,
-      required: true,
+      default: true,
     },
   },
   components: {

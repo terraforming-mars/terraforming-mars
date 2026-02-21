@@ -5,6 +5,7 @@ import {CardName} from '@/common/cards/CardName';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {RecursivePartial} from '@/common/utils/utils';
+import {fakeTimerModel} from '../testHelpers';
 
 describe('PlayerInfo', () => {
   it('Played card count test', () => {
@@ -15,6 +16,7 @@ describe('PlayerInfo', () => {
         {name: CardName.ACQUIRED_COMPANY},
         {name: CardName.BACTOVIRAL_RESEARCH},
       ],
+      timer: fakeTimerModel(),
       victoryPointsBreakdown: {
         total: 1,
       },

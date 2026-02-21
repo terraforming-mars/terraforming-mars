@@ -7,6 +7,7 @@ import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {RecursivePartial} from '@/common/utils/utils';
 import {Tag} from '@/common/cards/Tag';
 import {Wrapper} from '@vue/test-utils';
+import {emptyTags} from '../testHelpers';
 
 describe('PlayerTags', () => {
   let wrapper: Wrapper<PlayerTags>;
@@ -39,21 +40,7 @@ describe('PlayerTags', () => {
           name: CardName.LUNA_SENATE,
         },
       ],
-      tags: {
-        [Tag.BUILDING]: 0,
-        [Tag.SPACE]: 0,
-        [Tag.SCIENCE]: 0,
-        [Tag.POWER]: 0,
-        [Tag.EARTH]: 0,
-        [Tag.JOVIAN]: 0,
-        [Tag.VENUS]: 0,
-        [Tag.PLANT]: 0,
-        [Tag.MICROBE]: 0,
-        [Tag.ANIMAL]: 0,
-        [Tag.CITY]: 0,
-        [Tag.CRIME]: 0,
-        [Tag.EVENT]: 0,
-      },
+      tags: emptyTags(),
       underworldData: {
         tokens: [],
       },

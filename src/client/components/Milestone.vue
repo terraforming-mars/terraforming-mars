@@ -52,7 +52,7 @@ export default defineComponent({
     },
     showDescription: {
       type: Boolean,
-      required: true,
+      default: false,
     },
   },
   methods: {

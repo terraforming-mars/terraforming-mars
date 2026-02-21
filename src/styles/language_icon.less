@@ -1,11 +1,17 @@
 .language-switcher {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 4px 0;
   text-align: center;
   position: relative;
   z-index: 1;
+  margin: 0 auto;
 }
 
 .language-icon {
-  display: inline-block;
   width: 44px;
   height: 30px;
   background: url(./assets/flags_responsive.png) no-repeat;
@@ -81,7 +87,7 @@
   &--jp {
     background-position: 0 -3210px;
   }
-  
+
   &--bg {
     background-position: 0 -660px;
   }

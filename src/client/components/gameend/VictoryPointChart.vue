@@ -49,7 +49,7 @@ export default defineComponent({
   name: 'VictoryPointChart',
   props: {
     datasets: {
-      type: Array as () => Array<DataSet>,
+      type: Array as () => ReadonlyArray<DataSet>,
       required: true,
     },
     generation: {

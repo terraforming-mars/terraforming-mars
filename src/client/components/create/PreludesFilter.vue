@@ -70,8 +70,14 @@ export default defineComponent({
     PopupPanel,
   },
   props: {
-    expansions: Object as () => Record<Expansion, boolean>,
-    selected: Array as () => Array<CardName>,
+    expansions: {
+      type: Object as () => Record<Expansion, boolean>,
+      required: true,
+    },
+    selected: {
+      type: Array as () => Array<CardName>,
+      required: true,
+    },
   },
   data() {
     return {

@@ -108,7 +108,7 @@ export default defineComponent({
     },
     aresExtension: {
       type: Boolean,
-      required: true,
+      default: false,
     },
     tileView: {
       type: String as () => TileView,

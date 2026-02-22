@@ -16,7 +16,7 @@ export default defineComponent({
   name: 'CardRequirementsComponent',
   props: {
     requirements: {
-      type: Array<CardRequirementDescriptor>,
+      type: Array as () => ReadonlyArray<CardRequirementDescriptor>,
       required: true,
     },
   },

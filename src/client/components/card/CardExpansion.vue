@@ -25,7 +25,7 @@ export default defineComponent({
       required: true,
     },
     compatibility: {
-      type: Array<GameModule>,
+      type: Array as () => Array<GameModule>,
       required: false,
     },
   },

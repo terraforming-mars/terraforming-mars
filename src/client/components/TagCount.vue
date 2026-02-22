@@ -35,11 +35,11 @@ export default defineComponent({
     },
     size: {
       type: String,
-      required: true,
+      default: undefined,
     },
     type: {
       type: String,
-      required: true,
+      default: undefined,
     },
     showWhenZero: {
       // When true, show even if the value is zero.

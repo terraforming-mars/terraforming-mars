@@ -50,16 +50,16 @@ export default defineComponent({
       required: true,
     },
     text: {
-      type: String,
-      required: true,
+      type: String as () => String | undefined,
+      default: undefined,
     },
     aresExtension: {
       type: Boolean,
-      required: true,
+      default: false,
     },
     tileView: {
       type: String as () => TileView,
-      required: true,
+      default: 'show',
     },
   },
   data() {

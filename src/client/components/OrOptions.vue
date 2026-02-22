@@ -63,7 +63,7 @@ export default defineComponent({
     },
     showtitle: {
       type: Boolean,
-      required: true,
+      default: true,
     },
   },
   components: {

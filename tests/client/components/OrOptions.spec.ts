@@ -13,9 +13,11 @@ describe('OrOptions', () => {
     const component = mount(OrOptions, {
       localVue: getLocalVue(),
       propsData: {
-        player: {
-          id: 'foo',
-        },
+        // player: {
+        //   id: 'foo',
+        // },
+        players: [],
+        playerView: {},
         playerinput: {
           type: 'or',
           title: 'foo',
@@ -52,9 +54,11 @@ describe('OrOptions', () => {
     const component = mount(OrOptions, {
       localVue: getLocalVue(),
       propsData: {
-        player: {
-          id: 'foo',
-        },
+        // player: {
+        //   id: 'foo',
+        // },
+        players: [],
+        playerView: {},
         playerinput: {
           type: 'or',
           title: 'foo',

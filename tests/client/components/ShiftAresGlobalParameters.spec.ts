@@ -39,6 +39,7 @@ describe('ShiftAresGlobalParameters', () => {
       localVue: getLocalVue(),
       propsData: {
         playerinput,
+        onsave: () => {},
       },
     });
     expect(

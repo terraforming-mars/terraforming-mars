@@ -71,7 +71,7 @@ export default defineComponent({
   },
   props: {
     expansions: Object as () => Record<Expansion, boolean>,
-    selected: Object as () => Array<CardName>,
+    selected: Array as () => Array<CardName>,
   },
   data() {
     return {

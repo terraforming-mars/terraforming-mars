@@ -3,12 +3,14 @@ import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import TagCount from '@/client/components/TagCount.vue';
+import {Tag} from '@/common/cards/Tag';
 
 describe('TagCount', () => {
   it('renders with no count', () => {
     const tagCount = mount(TagCount, {
       localVue: getLocalVue(),
       propsData: {
+        tag: Tag.ANIMAL,
         count: 0,
       },
     });
@@ -19,6 +21,7 @@ describe('TagCount', () => {
     const tagCount = mount(TagCount, {
       localVue: getLocalVue(),
       propsData: {
+        tag: Tag.ANIMAL,
         count: 2,
       },
     });

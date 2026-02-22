@@ -44,9 +44,9 @@ describe('OrOptions', () => {
       },
     });
     const buttons = component.findAllComponents({name: 'AppButton'});
-    await buttons.at(0).findAllComponents({
+    await buttons[0].findAllComponents({
       name: 'AppButton',
-    }).at(0).trigger('click');
+    })[0].trigger('click');
     expect(savedData).to.deep.eq({type: 'or', index: 1, response: {type: 'option'}});
   });
   it('clicks 2nd option', async () => {
@@ -81,12 +81,12 @@ describe('OrOptions', () => {
       },
     });
     const inputs = component.findAll('input');
-    await inputs.at(1).setChecked();
+    await inputs[1].setChecked();
 
     const buttons = component.findAllComponents({name: 'AppButton'});
-    await buttons.at(0).findAllComponents({
+    await buttons[0].findAllComponents({
       name: 'AppButton',
-    }).at(0).trigger('click');
+    })[0].trigger('click');
     expect(savedData).to.deep.eq({type: 'or', index: 1, response: {type: 'option'}});
   });
 });

@@ -70,8 +70,8 @@ describe('SelectProjectCardToPlay', () => {
       name: 'Card',
     });
     expect(cards).has.length(2);
-    expect(cards.at(0).props().card.name).to.eq(CardName.BIRDS);
-    expect(cards.at(1).props().card.name).to.eq(CardName.ANTS);
+    expect(cards[0].props().card.name).to.eq(CardName.BIRDS);
+    expect(cards[1].props().card.name).to.eq(CardName.ANTS);
   });
 
   it('using heat', async () => {

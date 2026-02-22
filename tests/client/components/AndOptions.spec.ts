@@ -39,9 +39,9 @@ describe('AndOptions', () => {
       },
     });
     const buttons = component.findAllComponents({name: 'AppButton'});
-    await buttons.at(0).findAllComponents({
+    await buttons[0].findAllComponents({
       name: 'AppButton',
-    }).at(0).trigger('click');
+    })[0].trigger('click');
     expect(savedData).to.deep.eq({type: 'and', responses: [{type: 'option'}, {type: 'option'}]});
   });
 });

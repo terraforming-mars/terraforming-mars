@@ -9,9 +9,8 @@
   </div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {computed} from 'vue';
 import {CardMetadata} from '@/common/cards/CardMetadata';
 import CardRequirementsComponent from './CardRequirementsComponent.vue';
 import CardDescription from './CardDescription.vue';
@@ -19,60 +18,39 @@ import CardRenderData from './CardRenderData.vue';
 import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
 import {ICardRenderRoot, isICardRenderRoot} from '@/common/cards/render/Types';
 
-export default defineComponent({
-  name: 'CardContent',
-  props: {
-    metadata: {
-      type: Object as () => CardMetadata,
-      required: true,
-    },
-    requirements: {
-      type: Array as () => ReadonlyArray<CardRequirementDescriptor>,
-      required: true,
-    },
-    isCorporation: {
-      type: Boolean,
-      required: true,
-    },
-    bottomPadding: {
-      type: String, // '', 'short', 'long'
-    },
-  },
-  components: {
-    CardRequirementsComponent,
-    CardDescription,
-    CardRenderData,
-  },
-  methods: {
-  },
-  computed: {
-    corporationClass(): string {
-      return this.isCorporation ? 'card-content-corporation' : '';
-    },
-    hasDescription(): boolean {
-      const description = this.metadata.description;
-      return description !== undefined && (typeof(description) !== 'string' || description.length > 0);
-    },
-    firstRow(): ICardRenderRoot | undefined {
-      if (isICardRenderRoot(this.metadata.renderData) && this.metadata.renderData.rows.length > 0) {
-        return {
-          is: 'root',
-          rows: [this.metadata.renderData.rows[0]],
-        };
-      }
-      return undefined;
-    },
-    remainingRows(): ICardRenderRoot | undefined {
-      if (isICardRenderRoot(this.metadata.renderData) && this.metadata.renderData.rows.length > 1) {
-        return {
-          is: 'root',
-          rows: this.metadata.renderData.rows.slice(1),
-        };
-      }
-      return undefined;
-    },
-  },
+const props = defineProps<{
+  metadata: CardMetadata;
+  requirements: ReadonlyArray<CardRequirementDescriptor>;
+  isCorporation: boolean;
+  bottomPadding?: string;
+}>();
+
+const corporationClass = computed<string>(() => {
+  return props.isCorporation ? 'card-content-corporation' : '';
 });
 
-</script>
+const hasDescription = computed<boolean>(() => {
+  const description = props.metadata.description;
+  return description !== undefined && (typeof(description) !== 'string' || description.length > 0);
+});
 
+const firstRow = computed<ICardRenderRoot | undefined>(() => {
+  if (isICardRenderRoot(props.metadata.renderData) && props.metadata.renderData.rows.length > 0) {
+    return {
+      is: 'root',
+      rows: [props.metadata.renderData.rows[0]],
+    };
+  }
+  return undefined;
+});
+
+const remainingRows = computed<ICardRenderRoot | undefined>(() => {
+  if (isICardRenderRoot(props.metadata.renderData) && props.metadata.renderData.rows.length > 1) {
+    return {
+      is: 'root',
+      rows: props.metadata.renderData.rows.slice(1),
+    };
+  }
+  return undefined;
+});
+</script>

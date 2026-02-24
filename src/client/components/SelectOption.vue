@@ -6,41 +6,20 @@
   </div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectOptionModel} from '@/common/models/PlayerInputModel';
 import {SelectOptionResponse} from '@/common/inputs/InputResponse';
 import WarningsComponent from './WarningsComponent.vue';
 
-export default defineComponent({
-  name: 'select-option',
-  props: {
-    playerinput: {
-      type: Object as () => SelectOptionModel,
-      required: true,
-    },
-    onsave: {
-      type: Function as unknown as () => (out: SelectOptionResponse) => void,
-      required: true,
-    },
-    showsave: {
-      type: Boolean,
-    },
-    showtitle: {
-      type: Boolean,
-    },
-  },
-  components: {
-    AppButton,
-    WarningsComponent,
-  },
-  methods: {
-    saveData() {
-      this.onsave({type: 'option'});
-    },
-  },
-});
+const props = defineProps<{
+  playerinput: SelectOptionModel;
+  onsave: (out: SelectOptionResponse) => void;
+  showsave?: boolean;
+  showtitle?: boolean;
+}>();
 
+function saveData() {
+  props.onsave({type: 'option'});
+}
 </script>

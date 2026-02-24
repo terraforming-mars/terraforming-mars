@@ -2,35 +2,26 @@
   <div :class="classes" v-i18n>({{ description }})</div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {computed} from 'vue';
 import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
 
-export default defineComponent({
-  name: 'CardDescription',
-  props: {
-    item: {
-      required: true,
-    },
-  },
-  computed: {
-    classes(): ReadonlyArray<string> {
-      const classes: string[] = ['card-description'];
-      if (isIDescription(this.item)) {
-        if (this.item.align !== 'center') {
-          // we want to reduce size for aligned left of right to 60%
-          classes.push('card-description-aligned');
-        }
-        classes.push('card-description-align--' + this.item.align);
-      }
-      return classes;
-    },
-    description(): string {
-      return isIDescription(this.item) ? this.item.text : String(this.item);
-    },
-  },
+const props = defineProps<{
+  item: unknown;
+}>();
+
+const classes = computed<ReadonlyArray<string>>(() => {
+  const classes: string[] = ['card-description'];
+  if (isIDescription(props.item)) {
+    if (props.item.align !== 'center') {
+      classes.push('card-description-aligned');
+    }
+    classes.push('card-description-align--' + props.item.align);
+  }
+  return classes;
 });
 
+const description = computed<string>(() => {
+  return isIDescription(props.item) ? props.item.text : String(props.item);
+});
 </script>
-

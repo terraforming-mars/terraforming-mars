@@ -2,19 +2,10 @@
   <span>{{player === undefined ? "" : player.name}}</span>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 
-export default defineComponent({
-  name: 'SelectPlayerRow',
-  props: {
-    player: {
-      type: Object as () => PublicPlayerModel | undefined,
-      required: true,
-    },
-  },
-});
-
+defineProps<{
+  player: PublicPlayerModel | undefined;
+}>();
 </script>

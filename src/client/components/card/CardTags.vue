@@ -9,24 +9,11 @@
   </div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
 import CardTag from '@/client/components/card/CardTag.vue';
 import {Tag} from '@/common/cards/Tag';
 
-export default defineComponent({
-  name: 'CardTags',
-  props: {
-    tags: {
-      type: Array as () => Array<Tag>,
-      required: true,
-    },
-  },
-  components: {
-    CardTag,
-  },
-});
-
+defineProps<{
+  tags: Array<Tag>;
+}>();
 </script>
-

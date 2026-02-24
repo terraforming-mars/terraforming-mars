@@ -18,62 +18,35 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {ref} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectClaimedUndergroundTokenModel} from '@/common/models/PlayerInputModel';
 import {SelectClaimedUndergroundTokenResponse} from '@/common/inputs/InputResponse';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import UndergroundToken from '@/client/components/underworld/UndergroundToken.vue';
 
-type DataModel = {
-  selected: Array<number>,
-};
+const props = defineProps<{
+  playerView: PlayerViewModel;
+  playerinput: SelectClaimedUndergroundTokenModel;
+  onsave: (out: SelectClaimedUndergroundTokenResponse) => void;
+  showsave?: boolean;
+  showtitle?: boolean;
+}>();
 
-export default defineComponent({
-  name: 'SelectClaimedUndergroundToken',
-  props: {
-    playerView: {
-      type: Object as () => PlayerViewModel,
-      required: true,
-    },
-    playerinput: {
-      type: Object as () => SelectClaimedUndergroundTokenModel,
-      required: true,
-    },
-    onsave: {
-      type: Function as unknown as () => (out: SelectClaimedUndergroundTokenResponse) => void,
-      required: true,
-    },
-    showsave: {
-      type: Boolean,
-    },
-    showtitle: {
-      type: Boolean,
-    },
-  },
-  data(): DataModel {
-    return {
-      selected: [],
-    };
-  },
-  components: {
-    AppButton,
-    UndergroundToken,
-  },
-  methods: {
-    canSave() {
-      if (this.selected.length > this.playerinput.max) {
-        return false;
-      }
-      if (this.selected.length < this.playerinput.min) {
-        return false;
-      }
-      return true;
-    },
-    saveData() {
-      this.onsave({type: 'claimedUndergroundToken', selected: this.selected.sort()});
-    },
-  },
-});
+const selected = ref<Array<number>>([]);
+
+function canSave() {
+  if (selected.value.length > props.playerinput.max) {
+    return false;
+  }
+  if (selected.value.length < props.playerinput.min) {
+    return false;
+  }
+  return true;
+}
+
+function saveData() {
+  props.onsave({type: 'claimedUndergroundToken', selected: selected.value.sort()});
+}
 </script>

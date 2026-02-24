@@ -20,27 +20,21 @@
   </div>
 </template>
 
-<script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+
+import {computed} from 'vue';
 import {MAXIMUM_HABITAT_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '@/common/constants';
 import {MoonModel} from '@/common/models/MoonModel';
 
-export default defineComponent({
-  name: 'MoonGlobalParameterValue',
-  props: {
-    moonData: {
-      type: Object as () => MoonModel,
-      required: true,
-    },
-  },
-  computed: {
-    isMax(): boolean {
-      return (
-        this.moonData.habitatRate >= MAXIMUM_HABITAT_RATE &&
-        this.moonData.miningRate >= MAXIMUM_MINING_RATE &&
-        this.moonData.logisticsRate >= MAXIMUM_LOGISTICS_RATE
-      );
-    },
-  },
+const props = defineProps<{
+  moonData: MoonModel;
+}>();
+
+const isMax = computed((): boolean => {
+  return (
+    props.moonData.habitatRate >= MAXIMUM_HABITAT_RATE &&
+    props.moonData.miningRate >= MAXIMUM_MINING_RATE &&
+    props.moonData.logisticsRate >= MAXIMUM_LOGISTICS_RATE
+  );
 });
 </script>

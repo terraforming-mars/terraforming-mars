@@ -2,34 +2,20 @@
   <div class="card-help" @click="click"><a :href="url" target="_blank">?</a></div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {computed} from 'vue';
 import {CardName} from '@/common/cards/CardName';
 
-export default defineComponent({
-  name: 'CardHelp',
-  props: {
-    name: {
-      type: String as () => CardName,
-      required: true,
-    },
-  },
-  methods: {
-    getClasses(): string {
-      const classes = ['card-help'];
-      return classes.join(' ');
-    },
-    click() {
-      window.open(this.url, '_blank');
-    },
-  },
-  computed: {
-    url(): string {
-      const anchor = this.name.toLowerCase().replaceAll(' ', '-');
-      return 'https://github.com/terraforming-mars/terraforming-mars/wiki/Card-Details#' + anchor;
-    },
-  },
-});
+const props = defineProps<{
+  name: CardName;
+}>();
 
+function click() {
+  window.open(url.value, '_blank');
+}
+
+const url = computed<string>(() => {
+  const anchor = props.name.toLowerCase().replaceAll(' ', '-');
+  return 'https://github.com/terraforming-mars/terraforming-mars/wiki/Card-Details#' + anchor;
+});
 </script>

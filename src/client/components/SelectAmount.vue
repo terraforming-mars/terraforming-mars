@@ -11,50 +11,26 @@
   </div>
 </template>
 
-<script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {ref} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectAmountModel} from '@/common/models/PlayerInputModel';
 import {SelectAmountResponse} from '@/common/inputs/InputResponse';
 
-interface DataModel {
-  // Why is amount type string?
-  amount: string;
+const props = defineProps<{
+  playerinput: SelectAmountModel;
+  onsave: (out: SelectAmountResponse) => void;
+  showsave?: boolean;
+  showtitle?: boolean;
+}>();
+
+const amount = ref<string>(props.playerinput.maxByDefault ? String(props.playerinput.max) : String(props.playerinput.min));
+
+function saveData() {
+  props.onsave({type: 'amount', amount: parseInt(amount.value)});
 }
 
-export default defineComponent({
-  name: 'SelectAmount',
-  components: {
-    AppButton,
-  },
-  props: {
-    playerinput: {
-      type: Object as () => SelectAmountModel,
-      required: true,
-    },
-    onsave: {
-      type: Function as unknown as () => (out: SelectAmountResponse) => void,
-      required: true,
-    },
-    showsave: {
-      type: Boolean,
-    },
-    showtitle: {
-      type: Boolean,
-    },
-  },
-  data(): DataModel {
-    return {
-      amount: this.playerinput.maxByDefault ? String(this.playerinput.max) : String(this.playerinput.min),
-    };
-  },
-  methods: {
-    saveData() {
-      this.onsave({type: 'amount', amount: parseInt(this.amount)});
-    },
-    setMaxValue() {
-      this.amount = String(this.playerinput.max);
-    },
-  },
-});
+function setMaxValue() {
+  amount.value = String(props.playerinput.max);
+}
 </script>

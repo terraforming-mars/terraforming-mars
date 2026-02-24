@@ -17,8 +17,8 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {ref, computed} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectResourcesModel} from '@/common/models/PlayerInputModel';
 import {SelectResourcesResponse} from '@/common/inputs/InputResponse';
@@ -28,74 +28,51 @@ import {SpendableResource} from '@/common/inputs/Spendable';
 import PaymentUnitComponent from '@/client/components/PaymentUnit.vue';
 import {sum} from '@/common/utils/utils';
 
-export default defineComponent({
-  name: 'SelectResource',
-  props: {
-    playerView: {
-      type: Object as () => PlayerViewModel,
-      required: true,
-    },
-    playerinput: {
-      type: Object as () => SelectResourcesModel,
-      required: true,
-    },
-    onsave: {
-      type: Function as unknown as () => (out: SelectResourcesResponse) => void,
-      required: true,
-    },
-    showsave: {
-      type: Boolean,
-    },
-    showtitle: {
-      type: Boolean,
-    },
-  },
-  data() {
-    return {
-      units: {...Units.EMPTY},
-    };
-  },
-  components: {
-    AppButton,
-    PaymentUnitComponent,
-  },
-  methods: {
-    saveData() {
-      this.onsave({type: 'resources', units: this.units});
-    },
-    /**
-     * Reduce `unit` by one.
-     */
-    reduceValue(unit: keyof Units): void {
-      const currentValue = this.units[unit];
-      if (currentValue === undefined) {
-        throw new Error(`can not reduceValue for ${unit} on this`);
-      }
+const props = defineProps<{
+  playerView: PlayerViewModel;
+  playerinput: SelectResourcesModel;
+  onsave: (out: SelectResourcesResponse) => void;
+  showsave?: boolean;
+  showtitle?: boolean;
+}>();
 
-      const adjustedDelta = Math.min(1, currentValue);
-      if (adjustedDelta === 0) return;
-      this.units[unit] -= adjustedDelta;
-    },
-    /**
-     * Increase `unit` by one.
-     */
-    addValue(unit: keyof Units): void {
-      const currentValue = this.units[unit];
-      if (currentValue === undefined) {
-        throw new Error(`can not addValue for ${unit} on this`);
-      }
+const units = ref<Units>({...Units.EMPTY});
 
-      if (sum(Units.values(this.units)) >= this.playerinput.count) {
-        return;
-      }
-
-      this.units[unit] += 1;
-    },
-  },
-  computed: {
-    keys(): typeof Units.keys {
-      return Units.keys;
-    },
-  },
+const keys = computed((): typeof Units.keys => {
+  return Units.keys;
 });
+
+function saveData() {
+  props.onsave({type: 'resources', units: units.value});
+}
+
+/**
+ * Reduce `unit` by one.
+ */
+function reduceValue(unit: keyof Units): void {
+  const currentValue = units.value[unit];
+  if (currentValue === undefined) {
+    throw new Error(`can not reduceValue for ${unit} on this`);
+  }
+
+  const adjustedDelta = Math.min(1, currentValue);
+  if (adjustedDelta === 0) return;
+  units.value[unit] -= adjustedDelta;
+}
+
+/**
+ * Increase `unit` by one.
+ */
+function addValue(unit: keyof Units): void {
+  const currentValue = units.value[unit];
+  if (currentValue === undefined) {
+    throw new Error(`can not addValue for ${unit} on this`);
+  }
+
+  if (sum(Units.values(units.value)) >= props.playerinput.count) {
+    return;
+  }
+
+  units.value[unit] += 1;
+}
 </script>

@@ -46,57 +46,44 @@
   </div>
 </template>
 
-<script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {ref, computed} from 'vue';
 import Award from '@/client/components/Award.vue';
 import {AWARD_COSTS} from '@/common/constants';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {Preferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 
-export default defineComponent({
-  name: 'Awards',
-  components: {Award},
-  props: {
-    awards: {
-      type: Array as () => ReadonlyArray<FundedAwardModel>,
-      required: true,
-    },
-    showScores: {
-      type: Boolean,
-      default: true,
-    },
-    preferences: {
-      type: Object as () => Readonly<Preferences>,
-      default: () => PreferencesManager.INSTANCE.values(),
-    },
-  },
-  data() {
-    return {
-      showAwardDetails: this.preferences?.show_award_details,
-      showDescription: false,
-    };
-  },
-  methods: {
-    toggleList() {
-      this.showAwardDetails = !this.showAwardDetails;
-      PreferencesManager.INSTANCE.set('show_award_details', this.showAwardDetails);
-    },
-    toggleDescription() {
-      this.showDescription = !this.showDescription;
-    },
+const props = withDefaults(defineProps<{
+  awards: ReadonlyArray<FundedAwardModel>;
+  showScores?: boolean;
+  preferences?: Readonly<Preferences>;
+}>(), {
+  showScores: true,
+  preferences: () => PreferencesManager.INSTANCE.values(),
+});
 
-  },
-  computed: {
-    fundedAwards(): FundedAwardModel[] {
-      const isFunded = (award: FundedAwardModel) => !!award.playerName;
-      return this.awards.filter(isFunded);
-    },
-    availableAwardSpots(): number[] {
-      return AWARD_COSTS.slice(this.fundedAwards.length);
-    },
-    isLearnerModeOn(): boolean {
-      return this.preferences.learner_mode;
-    },
-  },
+const showAwardDetails = ref(props.preferences?.show_award_details);
+const showDescription = ref(false);
+
+function toggleList() {
+  showAwardDetails.value = !showAwardDetails.value;
+  PreferencesManager.INSTANCE.set('show_award_details', showAwardDetails.value);
+}
+
+function toggleDescription() {
+  showDescription.value = !showDescription.value;
+}
+
+const fundedAwards = computed((): FundedAwardModel[] => {
+  const isFunded = (award: FundedAwardModel) => !!award.playerName;
+  return props.awards.filter(isFunded);
+});
+
+const availableAwardSpots = computed((): number[] => {
+  return AWARD_COSTS.slice(fundedAwards.value.length);
+});
+
+const isLearnerModeOn = computed((): boolean => {
+  return props.preferences.learner_mode;
 });
 </script>

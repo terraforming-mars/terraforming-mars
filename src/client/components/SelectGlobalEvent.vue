@@ -11,9 +11,8 @@
     </div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {ref} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
@@ -21,51 +20,22 @@ import {SelectGlobalEventModel} from '@/common/models/PlayerInputModel';
 import {SelectGlobalEventResponse} from '@/common/inputs/InputResponse';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 
-type DataModel = {
-  selected: GlobalEventName | undefined;
-};
-
-export default defineComponent({
-  name: 'SelectGlobalEvent',
-  props: {
-    playerView: {
-      type: Object as () => PlayerViewModel,
-      required: true,
-    },
-    playerinput: {
-      type: Object as () => SelectGlobalEventModel,
-      required: true,
-    },
-    onsave: {
-      type: Function as unknown as () => (out: SelectGlobalEventResponse) => void,
-      required: true,
-    },
-    showsave: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    showtitle: {
-      type: Boolean,
-    },
-  },
-  data(): DataModel {
-    return {
-      selected: undefined,
-    };
-  },
-  components: {
-    GlobalEvent,
-    AppButton,
-  },
-  methods: {
-    saveData() {
-      if (this.selected === undefined) {
-        throw new Error('Select a global event');
-      }
-      this.onsave({type: 'globalEvent', globalEventName: this.selected});
-    },
-  },
+const props = withDefaults(defineProps<{
+  playerView: PlayerViewModel;
+  playerinput: SelectGlobalEventModel;
+  onsave: (out: SelectGlobalEventResponse) => void;
+  showsave?: boolean;
+  showtitle?: boolean;
+}>(), {
+  showsave: false,
 });
 
+const selected = ref<GlobalEventName | undefined>(undefined);
+
+function saveData() {
+  if (selected.value === undefined) {
+    throw new Error('Select a global event');
+  }
+  props.onsave({type: 'globalEvent', globalEventName: selected.value});
+}
 </script>

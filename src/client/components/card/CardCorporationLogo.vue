@@ -644,11 +644,9 @@
   </div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {computed} from 'vue';
 import {CardName} from '@/common/cards/CardName';
-
 
 const logos: Partial<Record<CardName, 'image' | 'css' | 'bespoke'>> = {
   [CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS]: 'image',
@@ -752,40 +750,28 @@ const logos: Partial<Record<CardName, 'image' | 'css' | 'bespoke'>> = {
   [CardName.VOLTAGON]: 'bespoke',
 };
 
-export default defineComponent({
-  name: 'CardCorporationLogo',
-  props: {
-    title: {
-      type: String as () => CardName,
-      required: true,
-    },
-  },
-  computed: {
-    logos(): typeof logos {
-      return logos;
-    },
-    CardName(): typeof CardName {
-      return CardName;
-    },
-    logoClass(): string {
-      const type = logos[this.title];
-      switch (type) {
-      case 'image':
-      case 'css':
-        const local = this.title.toLowerCase()
-          .replaceAll(' ', '-')
-          .replaceAll('&', '')
-          .replaceAll('--', '-');
-        return `card-${local}-logo`;
-      default:
-        return '';
-      }
-    },
-    capsTitle(): string {
-      return logos[this.title] === 'image' ? '' : this.title.toUpperCase();
-    },
-  },
+const props = defineProps<{
+  title: CardName;
+}>();
+
+const logoClass = computed<string>(() => {
+  const type = logos[props.title];
+  switch (type) {
+  case 'image':
+  case 'css': {
+    const local = props.title.toLowerCase()
+      .replaceAll(' ', '-')
+      .replaceAll('&', '')
+      .replaceAll('--', '-');
+    return `card-${local}-logo`;
+  }
+  default:
+    return '';
+  }
 });
 
+const capsTitle = computed<string>(() => {
+  return logos[props.title] === 'image' ? '' : props.title.toUpperCase();
+});
 </script>
 

@@ -1,36 +1,26 @@
 <template>
   <div :class="getClasses">
     <div v-for="(req, idx) in requirements" :key="idx">
-      <card-requirement :requirement="req" :leftMargin="indentRight[idx]"/>
+      <CardRequirementComponent :requirement="req" :leftMargin="indentRight[idx]"/>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {computed} from 'vue';
 import CardRequirementComponent from './CardRequirementComponent.vue';
 import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
 
-export default defineComponent({
-  name: 'CardRequirementsComponent',
-  props: {
-    requirements: {
-      type: Array as () => ReadonlyArray<CardRequirementDescriptor>,
-      required: true,
-    },
-  },
-  components: {
-    'card-requirement': CardRequirementComponent,
-  },
-  computed: {
-    getClasses(): string {
-      const hasMax = this.requirements.some((req) => req.max);
-      return hasMax ? 'card-requirements card-requirements-max' : 'card-requirements';
-    },
-    indentRight(): ReadonlyArray<boolean> {
-      return [false, ...this.requirements.map((req) => (req.nextTo || false))];
-    },
-  },
+const props = defineProps<{
+  requirements: ReadonlyArray<CardRequirementDescriptor>;
+}>();
+
+const getClasses = computed<string>(() => {
+  const hasMax = props.requirements.some((req) => req.max);
+  return hasMax ? 'card-requirements card-requirements-max' : 'card-requirements';
+});
+
+const indentRight = computed<ReadonlyArray<boolean>>(() => {
+  return [false, ...props.requirements.map((req) => (req.nextTo || false))];
 });
 </script>

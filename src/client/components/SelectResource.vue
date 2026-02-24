@@ -13,53 +13,31 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {ref} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectResourceModel} from '@/common/models/PlayerInputModel';
 import {SelectResourceResponse} from '@/common/inputs/InputResponse';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 
-export default defineComponent({
-  name: 'SelectResource',
-  props: {
-    playerView: {
-      type: Object as () => PlayerViewModel,
-      required: true,
-    },
-    playerinput: {
-      type: Object as () => SelectResourceModel,
-      required: true,
-    },
-    onsave: {
-      type: Function as unknown as () => (out: SelectResourceResponse) => void,
-      required: true,
-    },
-    showsave: {
-      type: Boolean,
-    },
-    showtitle: {
-      type: Boolean,
-    },
-  },
-  data() {
-    return {
-      unit: undefined,
-    };
-  },
-  components: {
-    AppButton,
-  },
-  methods: {
-    canSave() {
-      return this.unit !== undefined;
-    },
-    saveData() {
-      if (this.unit === undefined) {
-        return;
-      }
-      this.onsave({type: 'resource', resource: this.unit});
-    },
-  },
-});
+const props = defineProps<{
+  playerView: PlayerViewModel;
+  playerinput: SelectResourceModel;
+  onsave: (out: SelectResourceResponse) => void;
+  showsave?: boolean;
+  showtitle?: boolean;
+}>();
+
+const unit = ref<string | undefined>(undefined);
+
+function canSave() {
+  return unit.value !== undefined;
+}
+
+function saveData() {
+  if (unit.value === undefined) {
+    return;
+  }
+  props.onsave({type: 'resource', resource: unit.value});
+}
 </script>

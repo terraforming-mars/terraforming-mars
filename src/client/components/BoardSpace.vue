@@ -30,9 +30,8 @@
     </div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {computed} from 'vue';
 import Bonus from '@/client/components/Bonus.vue';
 import BoardSpaceTile from '@/client/components/board/BoardSpaceTile.vue';
 import UndergroundToken from '@/client/components/underworld/UndergroundToken.vue';
@@ -42,64 +41,38 @@ import {getPreferences} from '../utils/PreferencesManager';
 import {ClaimedToken} from '@/common/underworld/UnderworldPlayerData';
 import {getSpaceName} from '@/common/boards/spaces';
 import {SpaceType} from '@/common/boards/SpaceType';
-export default defineComponent({
-  name: 'board-space',
-  props: {
-    space: {
-      type: Object as () => SpaceModel,
-      required: true,
-    },
-    text: {
-      type: String,
-      default: '',
-    },
-    aresExtension: {
-      type: Boolean,
-    },
-    tileView: {
-      type: String as () => TileView,
-      required: true,
-    },
-  },
-  data() {
-    return {};
-  },
-  components: {
-    'bonus': Bonus,
-    'board-space-tile': BoardSpaceTile,
-    'underground-token': UndergroundToken,
-  },
-  computed: {
-    mainClass(): string {
-      let css = 'board-space board-space-' + this.space?.id.toString();
-      css += ' board-space-selectable';
-      return css;
-    },
-    showBonus(): boolean {
-      return this.space.tileType === undefined || this.tileView === 'hide';
-    },
-    playerColorCss(): string {
-      if (this.space.color === undefined) {
-        return '';
-      }
-      const css = 'board-cube board-cube--' + this.space.color;
-      return getPreferences().symbol_overlay ? css + ' overlay' : css;
-    },
-    claimedToken(): ClaimedToken | undefined {
-      if (this.space.undergroundResource === undefined) {
-        return undefined;
-      }
-      return {token: this.space.undergroundResource, shelter: false, active: false};
-    },
 
-    getSpaceName(): typeof getSpaceName {
-      return getSpaceName;
-    },
-    SpaceType(): typeof SpaceType {
-      return SpaceType;
-    },
-  },
+const props = withDefaults(defineProps<{
+  space: SpaceModel;
+  text?: string;
+  aresExtension?: boolean;
+  tileView: TileView;
+}>(), {
+  text: '',
 });
 
-</script>
+const mainClass = computed((): string => {
+  let css = 'board-space board-space-' + props.space?.id.toString();
+  css += ' board-space-selectable';
+  return css;
+});
 
+const showBonus = computed((): boolean => {
+  return props.space.tileType === undefined || props.tileView === 'hide';
+});
+
+const playerColorCss = computed((): string => {
+  if (props.space.color === undefined) {
+    return '';
+  }
+  const css = 'board-cube board-cube--' + props.space.color;
+  return getPreferences().symbol_overlay ? css + ' overlay' : css;
+});
+
+const claimedToken = computed((): ClaimedToken | undefined => {
+  if (props.space.undergroundResource === undefined) {
+    return undefined;
+  }
+  return {token: props.space.undergroundResource, shelter: false, active: false};
+});
+</script>

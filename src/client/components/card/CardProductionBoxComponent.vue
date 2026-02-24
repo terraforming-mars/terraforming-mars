@@ -10,32 +10,17 @@
         </div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
 import CardRenderItemComponent from '@/client/components/card/CardRenderItemComponent.vue';
 import CardRenderSymbolComponent from '@/client/components/card/CardRenderSymbolComponent.vue';
 import {ItemType} from '@/common/cards/render/Types';
 
-export default defineComponent({
-  name: 'CardProductionBoxComponent',
-  props: {
-    rows: {
-      type: Array as () => Array<Array<ItemType>>,
-      required: true,
-    },
-  },
-  components: {
-    CardRenderItemComponent,
-    CardRenderSymbolComponent,
-  },
-  methods: {
-    getClasses(): string {
-      const classes: Array<string> = ['card-production-box'];
-      return classes.join(' ');
-    },
-  },
-});
+defineProps<{
+  rows: Array<Array<ItemType>>;
+}>();
 
+function getClasses(): string {
+  const classes: Array<string> = ['card-production-box'];
+  return classes.join(' ');
+}
 </script>
-

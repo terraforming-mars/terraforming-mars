@@ -6,33 +6,24 @@
     </div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
 import {CardModel} from '@/common/models/CardModel';
 import {CardName} from '@/common/cards/CardName';
 import {Resource} from '@/common/Resource';
 
-export default defineComponent({
-  name: 'CardExtraContent',
-  props: {
-    card: {
-      type: Object as () => CardModel,
-      required: true,
-    },
-  },
-  methods: {
-    isMiningTileOnSteel() {
-      return this.card.name !== CardName.SPECIALIZED_SETTLEMENT && this.card.bonusResource?.includes(Resource.STEEL);
-    },
-    isMiningTileOnTitanium() {
-      return this.card.name !== CardName.SPECIALIZED_SETTLEMENT && this.card.bonusResource?.includes(Resource.TITANIUM);
-    },
-    lifeFound() {
-      return this.card.name === CardName.SEARCH_FOR_LIFE && this.card.resources !== undefined && this.card.resources > 0;
-    },
-  },
-});
+const props = defineProps<{
+  card: CardModel;
+}>();
 
+function isMiningTileOnSteel() {
+  return props.card.name !== CardName.SPECIALIZED_SETTLEMENT && props.card.bonusResource?.includes(Resource.STEEL);
+}
+
+function isMiningTileOnTitanium() {
+  return props.card.name !== CardName.SPECIALIZED_SETTLEMENT && props.card.bonusResource?.includes(Resource.TITANIUM);
+}
+
+function lifeFound() {
+  return props.card.name === CardName.SEARCH_FOR_LIFE && props.card.resources !== undefined && props.card.resources > 0;
+}
 </script>
-

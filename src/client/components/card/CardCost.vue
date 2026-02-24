@@ -8,37 +8,27 @@
   </div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
 import {getPreferences} from '@/client/utils/PreferencesManager';
 
-export default defineComponent({
-  name: 'CardCost',
-  props: {
-    amount: {
-      type: Number as () => number | undefined,
-      default: undefined,
-    },
-    newCost: {
-      type: Number as () => number | undefined,
-      default: undefined,
-    },
-  },
-  methods: {
-    getClasses(): string {
-      const classes = ['card-cost'];
-      if (this.amount === undefined) {
-        classes.push('visibility-hidden');
-      }
-      return classes.join(' ');
-    },
-    displayTwoCosts(): boolean {
-      const hideDiscount = getPreferences().hide_discount_on_cards;
-      return this.newCost !== undefined && this.newCost !== this.amount && !hideDiscount;
-    },
-  },
+const props = withDefaults(defineProps<{
+  amount?: number;
+  newCost?: number;
+}>(), {
+  amount: undefined,
+  newCost: undefined,
 });
 
-</script>
+function getClasses(): string {
+  const classes = ['card-cost'];
+  if (props.amount === undefined) {
+    classes.push('visibility-hidden');
+  }
+  return classes.join(' ');
+}
 
+function displayTwoCosts(): boolean {
+  const hideDiscount = getPreferences().hide_discount_on_cards;
+  return props.newCost !== undefined && props.newCost !== props.amount && !hideDiscount;
+}
+</script>

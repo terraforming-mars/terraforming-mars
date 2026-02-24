@@ -31,43 +31,31 @@
   </div>
 </template>
 
-<script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+
+import {computed} from 'vue';
 import {FundedAwardModel, AwardScore} from '@/common/models/FundedAwardModel';
 import {getAward} from '@/client/MilestoneAwardManifest';
 import {playerSymbol} from '@/client/utils/playerSymbol';
 import {Color} from '@/common/Color';
 
-export default defineComponent({
-  name: 'Award',
-  props: {
-    award: {
-      type: Object as () => FundedAwardModel,
-      required: true,
-    },
-    showScores: {
-      type: Boolean,
-      default: true,
-    },
-    showDescription: {
-      type: Boolean,
-    },
-  },
-  methods: {
-    playerSymbol(color: Color) {
-      return playerSymbol(color);
-    },
-  },
-  computed: {
-    nameCss(): string {
-      return 'ma-name--' + this.award.name.replace(/ /g, '-').replace(/\./g, '').toLowerCase();
-    },
-    sortedScores(): Array<AwardScore> {
-      return [...this.award.scores].sort((s1, s2) => s2.score - s1.score);
-    },
-    description(): string {
-      return getAward(this.award.name).description;
-    },
-  },
+const props = withDefaults(defineProps<{
+  award: FundedAwardModel;
+  showScores?: boolean;
+  showDescription?: boolean;
+}>(), {
+  showScores: true,
+});
+
+const nameCss = computed((): string => {
+  return 'ma-name--' + props.award.name.replace(/ /g, '-').replace(/\./g, '').toLowerCase();
+});
+
+const sortedScores = computed((): Array<AwardScore> => {
+  return [...props.award.scores].sort((s1, s2) => s2.score - s1.score);
+});
+
+const description = computed((): string => {
+  return getAward(props.award.name).description;
 });
 </script>

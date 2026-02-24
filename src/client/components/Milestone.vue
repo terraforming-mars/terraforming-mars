@@ -29,57 +29,46 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {computed} from 'vue';
 import {ClaimedMilestoneModel, MilestoneScore} from '@/common/models/ClaimedMilestoneModel';
 import {getMilestone} from '@/client/MilestoneAwardManifest';
 import {playerSymbol} from '@/client/utils/playerSymbol';
 import {Color} from '@/common/Color';
 
-export default defineComponent({
-  name: 'Milestone',
-  props: {
-    milestone: {
-      type: Object as () => ClaimedMilestoneModel,
-      required: true,
-    },
-    showScores: {
-      type: Boolean,
-      default: true,
-    },
-    showDescription: {
-      type: Boolean,
-    },
-  },
-  methods: {
-    playerSymbol(color: Color): string {
-      return playerSymbol(color);
-    },
-    getClass(score: MilestoneScore): string {
-      let classes = 'ma-score';
-      classes += ` player_bg_color_${score.color}`;
-      if (score.claimable) {
-        classes += ' claimable';
-      } else {
-        classes += ' not-claimable';
-      }
-      return classes;
-    },
-  },
-  computed: {
-    name(): string {
-      return this.milestone.name.replace(/[0-9]+$/, '');
-    },
-    nameCss(): string {
-      return 'ma-name ma-name--' + this.milestone.name.replace(/ /g, '-').replace(/\./g, '').toLowerCase();
-    },
-    sortedScores(): Array<MilestoneScore> {
-      return [...this.milestone.scores].sort((s1, s2) => s2.score - s1.score);
-    },
-    description(): string {
-      return getMilestone(this.milestone.name).description;
-    },
-  },
+const props = withDefaults(defineProps<{
+  milestone: ClaimedMilestoneModel;
+  showScores?: boolean;
+  showDescription?: boolean;
+}>(), {
+  showScores: true,
+});
+
+function getClass(score: MilestoneScore): string {
+  let classes = 'ma-score';
+  classes += ` player_bg_color_${score.color}`;
+  if (score.claimable) {
+    classes += ' claimable';
+  } else {
+    classes += ' not-claimable';
+  }
+  return classes;
+}
+
+const name = computed((): string => {
+  return props.milestone.name.replace(/[0-9]+$/, '');
+});
+
+const nameCss = computed((): string => {
+  return 'ma-name ma-name--' + props.milestone.name.replace(/ /g, '-').replace(/\./g, '').toLowerCase();
+});
+
+const sortedScores = computed((): Array<MilestoneScore> => {
+  return [...props.milestone.scores].sort((s1, s2) => s2.score - s1.score);
+});
+
+const description = computed((): string => {
+  return getMilestone(props.milestone.name).description;
 });
 </script>

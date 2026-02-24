@@ -12,9 +12,9 @@
 </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import {computed} from 'vue';
 import {MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '@/common/constants';
 import {GlobalParameter} from '@/common/GlobalParameter';
 
@@ -32,32 +32,24 @@ const attributes: Record<BaseGlobalParameter, {max: number, title: string, iconC
   [GlobalParameter.VENUS]: {max: MAX_VENUS_SCALE, title: 'Venus Scale', iconClass: 'venus-tile'},
 };
 
-export default defineComponent({
-  name: 'global-parameter-value',
-  props: {
-    param: {
-      type: String as () => BaseGlobalParameter,
-      required: true,
-    },
-    value: {
-      type: Number,
-      required: true,
-    },
-  },
-  computed: {
-    isMax(): boolean {
-      return this.value === attributes[this.param].max;
-    },
-    title(): string {
-      return attributes[this.param].title;
-    },
-    iconClass(): string {
-      return attributes[this.param].iconClass;
-    },
-    suffix(): string {
-      return this.param === GlobalParameter.OXYGEN ? '%' : '';
-    },
-  },
+const props = defineProps<{
+  param: BaseGlobalParameter;
+  value: number;
+}>();
+
+const isMax = computed((): boolean => {
+  return props.value === attributes[props.param].max;
 });
 
+const title = computed((): string => {
+  return attributes[props.param].title;
+});
+
+const iconClass = computed((): string => {
+  return attributes[props.param].iconClass;
+});
+
+const suffix = computed((): string => {
+  return props.param === GlobalParameter.OXYGEN ? '%' : '';
+});
 </script>

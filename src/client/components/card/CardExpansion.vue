@@ -4,52 +4,35 @@
     <div v-for="module in modules" class="project-icon" :class="module + '-icon'" :key="module"></div>
   </div>
 </template>
-<script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {computed} from 'vue';
 import {GameModule} from '@/common/cards/GameModule';
 
-export default defineComponent({
-  name: 'CardExpansion',
-  props: {
-    expansion: {
-      type: String as () => GameModule,
-      required: true,
-    },
-    isCorporation: {
-      type: Boolean,
-      required: true,
-    },
-    isResourceCard: {
-      type: Boolean,
-      required: true,
-    },
-    compatibility: {
-      type: Array as () => Array<GameModule>,
-      required: true,
-    },
-  },
-  methods: {
-    iconClass(module: GameModule): string {
-      return module === 'base' ? '' : module + '-icon';
-    },
-  },
-  computed: {
-    modules(): ReadonlyArray<GameModule> {
-      return this.compatibility.filter((e) => e !== this.expansion);
-    },
-    templateClasses(): string {
-      if (this.isCorporation) {
-        return 'card-corporation-expansion';
-      } else {
-        if (this.isResourceCard) {
-          return 'resource-card-icon-expansion-container';
-        } else {
-          return 'project-icon-expansion-container';
-        }
-      }
-    },
-  },
+const props = defineProps<{
+  expansion: GameModule;
+  isCorporation: boolean;
+  isResourceCard: boolean;
+  compatibility: Array<GameModule>;
+}>();
+
+function iconClass(module: GameModule): string {
+  return module === 'base' ? '' : module + '-icon';
+}
+
+const modules = computed<ReadonlyArray<GameModule>>(() => {
+  return props.compatibility.filter((e) => e !== props.expansion);
 });
 
+const templateClasses = computed<string>(() => {
+  if (props.isCorporation) {
+    return 'card-corporation-expansion';
+  } else {
+    if (props.isResourceCard) {
+      return 'resource-card-icon-expansion-container';
+    } else {
+      return 'project-icon-expansion-container';
+    }
+  }
+});
 </script>

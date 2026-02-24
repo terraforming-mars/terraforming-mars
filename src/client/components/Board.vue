@@ -102,7 +102,7 @@
                           <tspan x="12" dy="12">Mons</tspan>
                       </text>
                       <line x1="38" y1="20" x2="88" y2="26" class="board-line"></line>
-                      <text x="86" y="29" class="board-caption board_caption--black">●</text>
+                      <text x="86" y="29" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
 
                   <g id="pavonis_mons" transform="translate(90, 230)">
@@ -111,7 +111,7 @@
                           <tspan x="4" dy="12">Mons</tspan>
                       </text>
                       <line x1="35" y1="25" x2="72" y2="30" class="board-line" />
-                      <text x="66" y="33" class="board-caption board_caption--black">●</text>
+                      <text x="66" y="33" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
 
                   <g id="arsia_mons" transform="translate(77, 275)">
@@ -120,7 +120,7 @@
                           <tspan x="-2" dy="12">Mons</tspan>
                       </text>
                       <line x1="25" y1="20" x2="49" y2="26" class="board-line" />
-                      <text x="47" y="29" class="board-caption board_caption--black">●</text>
+                      <text x="47" y="29" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
 
                   <g id="tharsis_tholus" transform="translate(85, 175)">
@@ -301,7 +301,7 @@
                           <tspan x="9" dy="12">Fossae</tspan>
                       </text>
                       <line x1="35" y1="25" x2="72" y2="30" class="board-line" />
-                      <text x="66" y="33" class="board-caption board_caption--black">●</text>
+                      <text x="66" y="33" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                   <g id="alba_mons" transform="translate(105, 200)">
                       <text class="board-caption">
@@ -309,7 +309,7 @@
                           <tspan x="9" dy="12">Mons</tspan>
                       </text>
                       <line x1="35" y1="25" x2="94" y2="31" class="board-line" />
-                      <text x="92" y="34" class="board-caption board_caption--black">●</text>
+                      <text x="92" y="34" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                 </template>
 
@@ -320,7 +320,7 @@
                           <tspan x="5" dy="12">Tholus</tspan>
                       </text>
                       <line x1="38" y1="26" x2="63" y2="38" class="board-line"></line>
-                      <text x="61" y="41" class="board-caption board_caption--black">●</text>
+                      <text x="61" y="41" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                   <g id="apollinaris_mons" transform="translate(500, 210)">
                       <text class="board-caption">
@@ -342,7 +342,7 @@
                           <tspan x="9" dy="12">Mons</tspan>
                       </text>
                       <line x1="35" y1="25" x2="72" y2="30" class="board-line" />
-                      <text x="66" y="33" class="board-caption board_caption--black">●</text>
+                      <text x="66" y="33" class="board-caption board_caption--black">&#x25cf;</text>
                   </g>
                 </template>
             </svg>
@@ -350,8 +350,8 @@
     </div>
 </template>
 
-<script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {ref} from 'vue';
 import * as constants from '@/common/constants';
 import BoardSpace from '@/client/components/BoardSpace.vue';
 import {AresData} from '@/common/ares/AresData';
@@ -369,152 +369,113 @@ class GlobalParamLevel {
   }
 }
 
-export default defineComponent({
-  name: 'board',
-  props: {
-    spaces: {
-      type: Array as () => ReadonlyArray<SpaceModel>,
-      required: true,
-    },
-    venusScaleLevel: {
-      type: Number,
-      required: true,
-    },
-    altVenusBoard: {
-      type: Boolean,
-    },
-    boardName: {
-      type: String as () => BoardName,
-      required: true,
-    },
-    oceans_count: {
-      type: Number,
-      default: 0,
-    },
-    oxygen_level: {
-      type: Number,
-      default: 0,
-    },
-    temperature: {
-      type: Number,
-      default: 0,
-    },
-    expansions: {
-      type: Object as () => Record<Expansion, boolean>,
-      required: true,
-    },
-    aresData: {
-      type: Object as () => AresData | undefined,
-      default: undefined,
-    },
-    tileView: {
-      type: String as () => TileView,
-      default: 'show',
-    },
-  },
-  components: {
-    BoardSpace,
-  },
-  data() {
-    return {
-      constants,
-      spaceMap: new Map<string, SpaceModel>(this.spaces.map((s) => [s.id, s])),
-    };
-  },
-  methods: {
-    getAllSpacesOnMars(): Array<SpaceModel> {
-      const boardSpaces: Array<SpaceModel> = [...this.spaces];
-      boardSpaces.sort(
-        (space1: SpaceModel, space2: SpaceModel) => {
-          return parseInt(space1.id) - parseInt(space2.id);
-        },
-      );
-      return boardSpaces.filter((s: SpaceModel) => {
-        return s.spaceType !== SpaceType.COLONY;
-      });
-    },
-    hasSpace(spaceId: SpaceId): boolean {
-      return this.spaceMap.has(spaceId);
-    },
-    getSpace(spaceId: SpaceId): SpaceModel {
-      const space = this.spaceMap.get(spaceId);
-      if (space === undefined) {
-        // For some reason Vue still calls getSpace when hasSpace is false. I thought it didn't.
-        // Returning undefined as SpaceModel satisfies the type checker, but the value isn't
-        // used.
-        return undefined as unknown as SpaceModel;
-      }
-      return space;
-    },
-    getValuesForParameter(targetParameter: string): Array<GlobalParamLevel> {
-      const values = [];
-      let startValue: number;
-      let endValue: number;
-      let step: number;
-      let curValue: number;
-      let strValue: string;
-
-      switch (targetParameter) {
-      case 'oxygen':
-        startValue = constants.MIN_OXYGEN_LEVEL;
-        endValue = constants.MAX_OXYGEN_LEVEL;
-        step = 1;
-        curValue = this.oxygen_level;
-        break;
-      case 'temperature':
-        startValue = constants.MIN_TEMPERATURE;
-        endValue = constants.MAX_TEMPERATURE;
-        step = 2;
-        curValue = this.temperature;
-        break;
-      case 'venus':
-        startValue = constants.MIN_VENUS_SCALE;
-        endValue = constants.MAX_VENUS_SCALE;
-        step = 2;
-        curValue = this.venusScaleLevel;
-        break;
-      default:
-        throw new Error('Wrong parameter to get values from: ' + targetParameter);
-      }
-
-      for (let value = endValue; value >= startValue; value -= step) {
-        strValue = (targetParameter === 'temperature' && value > 0) ? '+'+value : value.toString();
-        values.push(
-          new GlobalParamLevel(value, value === curValue, strValue),
-        );
-      }
-      return values;
-    },
-    getScaleCSS(paramLevel: GlobalParamLevel): string {
-      let css = 'global-numbers-value val-' + paramLevel.value + ' ';
-      if (paramLevel.isActive) {
-        css += 'val-is-active';
-      }
-      return css;
-    },
-    oceansValue() {
-      const oceans_count = this.oceans_count || 0;
-      const leftover = constants.MAX_OCEAN_TILES - oceans_count;
-      if (leftover === 0) {
-        return '<img width="26" src="assets/misc/circle-checkmark.png" class="board-ocean-checkmark" :alt="$t(\'Completed!\')">';
-      } else {
-        return `${oceans_count}/${constants.MAX_OCEAN_TILES}`;
-      }
-    },
-    getGameBoardClassName(): string {
-      return this.expansions.venus ? 'board-cont board-with-venus' : 'board-cont board-without-venus';
-    },
-  },
-  computed: {
-    BoardName(): typeof BoardName {
-      return BoardName;
-    },
-    LEGENDS(): typeof LEGENDS {
-      return LEGENDS;
-    },
-    SpaceName(): typeof SpaceName {
-      return SpaceName;
-    },
-  },
+const props = withDefaults(defineProps<{
+  spaces: ReadonlyArray<SpaceModel>;
+  venusScaleLevel: number;
+  altVenusBoard?: boolean;
+  boardName: BoardName;
+  oceans_count?: number;
+  oxygen_level?: number;
+  temperature?: number;
+  expansions: Record<Expansion, boolean>;
+  aresData?: AresData | undefined;
+  tileView?: TileView;
+}>(), {
+  oceans_count: 0,
+  oxygen_level: 0,
+  temperature: 0,
+  aresData: undefined,
+  tileView: 'show',
 });
+
+const spaceMap = ref(new Map<string, SpaceModel>(props.spaces.map((s) => [s.id, s])));
+
+function getAllSpacesOnMars(): Array<SpaceModel> {
+  const boardSpaces: Array<SpaceModel> = [...props.spaces];
+  boardSpaces.sort(
+    (space1: SpaceModel, space2: SpaceModel) => {
+      return parseInt(space1.id) - parseInt(space2.id);
+    },
+  );
+  return boardSpaces.filter((s: SpaceModel) => {
+    return s.spaceType !== SpaceType.COLONY;
+  });
+}
+
+function hasSpace(spaceId: SpaceId): boolean {
+  return spaceMap.value.has(spaceId);
+}
+
+function getSpace(spaceId: SpaceId): SpaceModel {
+  const space = spaceMap.value.get(spaceId);
+  if (space === undefined) {
+    // For some reason Vue still calls getSpace when hasSpace is false. I thought it didn't.
+    // Returning undefined as SpaceModel satisfies the type checker, but the value isn't
+    // used.
+    return undefined as unknown as SpaceModel;
+  }
+  return space;
+}
+
+function getValuesForParameter(targetParameter: string): Array<GlobalParamLevel> {
+  const values = [];
+  let startValue: number;
+  let endValue: number;
+  let step: number;
+  let curValue: number;
+  let strValue: string;
+
+  switch (targetParameter) {
+  case 'oxygen':
+    startValue = constants.MIN_OXYGEN_LEVEL;
+    endValue = constants.MAX_OXYGEN_LEVEL;
+    step = 1;
+    curValue = props.oxygen_level;
+    break;
+  case 'temperature':
+    startValue = constants.MIN_TEMPERATURE;
+    endValue = constants.MAX_TEMPERATURE;
+    step = 2;
+    curValue = props.temperature;
+    break;
+  case 'venus':
+    startValue = constants.MIN_VENUS_SCALE;
+    endValue = constants.MAX_VENUS_SCALE;
+    step = 2;
+    curValue = props.venusScaleLevel;
+    break;
+  default:
+    throw new Error('Wrong parameter to get values from: ' + targetParameter);
+  }
+
+  for (let value = endValue; value >= startValue; value -= step) {
+    strValue = (targetParameter === 'temperature' && value > 0) ? '+'+value : value.toString();
+    values.push(
+      new GlobalParamLevel(value, value === curValue, strValue),
+    );
+  }
+  return values;
+}
+
+function getScaleCSS(paramLevel: GlobalParamLevel): string {
+  let css = 'global-numbers-value val-' + paramLevel.value + ' ';
+  if (paramLevel.isActive) {
+    css += 'val-is-active';
+  }
+  return css;
+}
+
+function oceansValue() {
+  const oceans_count = props.oceans_count || 0;
+  const leftover = constants.MAX_OCEAN_TILES - oceans_count;
+  if (leftover === 0) {
+    return '<img width="26" src="assets/misc/circle-checkmark.png" class="board-ocean-checkmark" :alt="$t(\'Completed!\')">';
+  } else {
+    return `${oceans_count}/${constants.MAX_OCEAN_TILES}`;
+  }
+}
+
+function getGameBoardClassName(): string {
+  return props.expansions.venus ? 'board-cont board-with-venus' : 'board-cont board-without-venus';
+}
 </script>

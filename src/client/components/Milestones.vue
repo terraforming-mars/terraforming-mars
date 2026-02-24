@@ -28,54 +28,42 @@
     </div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {ref} from 'vue';
 import {MAX_MILESTONES, MILESTONE_COST} from '@/common/constants';
 import Milestone from '@/client/components/Milestone.vue';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 import {Preferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 
-export default defineComponent({
-  name: 'Milestones',
-  props: {
-    milestones: {
-      type: Array as () => ReadonlyArray<ClaimedMilestoneModel>,
-      required: true,
-    },
-    showScores: {
-      type: Boolean,
-      default: true,
-    },
-    preferences: {
-      type: Object as () => Readonly<Preferences>,
-      default: () => PreferencesManager.INSTANCE.values(),
-    },
-  },
-  data() {
-    return {
-      showMilestoneDetails: (this.milestones.filter((milestone) => milestone.playerName).length === MAX_MILESTONES ? false : this.preferences?.show_milestone_details),
-      showDescription: false,
-    };
-  },
-  components: {
-    Milestone,
-  },
-  methods: {
-    toggleDescription() {
-      this.showDescription = !this.showDescription;
-    },
-    toggleList() {
-      this.showMilestoneDetails = !this.showMilestoneDetails;
-      PreferencesManager.INSTANCE.set('show_milestone_details', this.showMilestoneDetails);
-    },
-    getAvailableMilestoneSpots(): Array<number> {
-      const count = this.milestones.filter((milestone) => milestone.playerName).length;
-      return Array(MAX_MILESTONES - count).fill(MILESTONE_COST);
-    },
-    isLearnerModeOn(): boolean {
-      return this.preferences.learner_mode;
-    },
-  },
+const props = withDefaults(defineProps<{
+  milestones: ReadonlyArray<ClaimedMilestoneModel>;
+  showScores?: boolean;
+  preferences?: Readonly<Preferences>;
+}>(), {
+  showScores: true,
+  preferences: () => PreferencesManager.INSTANCE.values(),
 });
+
+const showMilestoneDetails = ref(
+  props.milestones.filter((milestone) => milestone.playerName).length === MAX_MILESTONES ? false : props.preferences?.show_milestone_details,
+);
+const showDescription = ref(false);
+
+function toggleDescription() {
+  showDescription.value = !showDescription.value;
+}
+
+function toggleList() {
+  showMilestoneDetails.value = !showMilestoneDetails.value;
+  PreferencesManager.INSTANCE.set('show_milestone_details', showMilestoneDetails.value);
+}
+
+function getAvailableMilestoneSpots(): Array<number> {
+  const count = props.milestones.filter((milestone) => milestone.playerName).length;
+  return Array(MAX_MILESTONES - count).fill(MILESTONE_COST);
+}
+
+function isLearnerModeOn(): boolean {
+  return props.preferences.learner_mode;
+}
 </script>

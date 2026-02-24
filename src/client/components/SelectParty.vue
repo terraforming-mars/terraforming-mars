@@ -12,8 +12,8 @@
         </div>
     </div>
 </template>
-<script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {ref, computed} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectPartyModel} from '@/common/models/PlayerInputModel';
 import Party from '@/client/components/Party.vue';
@@ -22,59 +22,36 @@ import {SelectPartyResponse} from '@/common/inputs/InputResponse';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {TurmoilModel} from '@/common/models/TurmoilModel';
 
-export default defineComponent({
-  name: 'SelectParty',
-  props: {
-    playerView: {
-      type: Object as () => PlayerViewModel,
-      required: true,
-    },
-    playerinput: {
-      type: Object as () => SelectPartyModel,
-      required: true,
-    },
-    onsave: {
-      type: Function as unknown as () => (out: SelectPartyResponse) => void,
-      required: true,
-    },
-    showsave: {
-      type: Boolean,
-    },
-    showtitle: {
-      type: Boolean,
-    },
-  },
-  data() {
-    return {
-      selectedParty: undefined as PartyName | undefined,
-    };
-  },
-  components: {
-    AppButton,
-    Party,
-  },
-  methods: {
-    saveData() {
-      if (this.selectedParty === undefined) {
-        return;
-      }
-      this.onsave({type: 'party', partyName: this.selectedParty});
-    },
-    isDominant(partyName: PartyName): boolean {
-      return partyName === this.turmoil?.dominant;
-    },
-    partyAvailableToSelect(partyName: PartyName): boolean {
-      if (this.playerinput.parties === undefined) {
-        return false;
-      } else {
-        return this.playerinput.parties.includes(partyName);
-      }
-    },
-  },
-  computed: {
-    turmoil(): TurmoilModel | undefined {
-      return this.playerView.game.turmoil;
-    },
-  },
+const props = defineProps<{
+  playerView: PlayerViewModel;
+  playerinput: SelectPartyModel;
+  onsave: (out: SelectPartyResponse) => void;
+  showsave?: boolean;
+  showtitle?: boolean;
+}>();
+
+const selectedParty = ref<PartyName | undefined>(undefined);
+
+const turmoil = computed((): TurmoilModel | undefined => {
+  return props.playerView.game.turmoil;
 });
+
+function saveData() {
+  if (selectedParty.value === undefined) {
+    return;
+  }
+  props.onsave({type: 'party', partyName: selectedParty.value});
+}
+
+function isDominant(partyName: PartyName): boolean {
+  return partyName === turmoil.value?.dominant;
+}
+
+function partyAvailableToSelect(partyName: PartyName): boolean {
+  if (props.playerinput.parties === undefined) {
+    return false;
+  } else {
+    return props.playerinput.parties.includes(partyName);
+  }
+}
 </script>

@@ -41,61 +41,36 @@
     </div>
 </div>
 </template>
-<script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {ref} from 'vue';
 import {AresGlobalParametersResponse} from '@/common/inputs/AresGlobalParametersResponse';
 import {ShiftAresGlobalParametersModel} from '@/common/models/PlayerInputModel';
 import {ShiftAresGlobalParametersResponse} from '@/common/inputs/InputResponse';
 import {HazardData} from '@/common/ares/AresData';
 
-type DataModel = AresGlobalParametersResponse & {
-  hazardData: HazardData,
-};
+const props = defineProps<{
+  playerinput: ShiftAresGlobalParametersModel;
+  onsave: (out: ShiftAresGlobalParametersResponse) => void;
+  showsave?: boolean;
+  showtitle?: boolean;
+}>();
 
-export default defineComponent({
-  name: 'ShiftAresGlobalParameters',
-  props: {
-    playerinput: {
-      type: Object as () => ShiftAresGlobalParametersModel,
-      required: true,
-    },
-    onsave: {
-      type: Function as unknown as () => (out: ShiftAresGlobalParametersResponse) => void,
-      required: true,
-    },
-    showsave: {
-      type: Boolean,
-    },
-    showtitle: {
-      type: Boolean,
-    },
-  },
-  data(): DataModel {
-    const hazardData = this.playerinput.aresData.hazardData;
-    return {
-      hazardData: hazardData,
-      lowOceanDelta: 0,
-      highOceanDelta: 0,
-      temperatureDelta: 0,
-      oxygenDelta: 0,
-    };
-  },
-  methods: {
-    saveData() {
-      const response: AresGlobalParametersResponse = {
-        lowOceanDelta: this.lowOceanDelta,
-        highOceanDelta: this.highOceanDelta,
-        temperatureDelta: this.temperatureDelta,
-        oxygenDelta: this.oxygenDelta,
-      };
+const ADJUSTMENT_RANGE: [-1, 0, 1] = [-1, 0, 1];
 
-      this.onsave({type: 'aresGlobalParameters', response});
-    },
-  },
-  computed: {
-    ADJUSTMENT_RANGE(): [-1, 0, 1] {
-      return [-1, 0, 1];
-    },
-  },
-});
+const hazardData = ref<HazardData>(props.playerinput.aresData.hazardData);
+const lowOceanDelta = ref(0);
+const highOceanDelta = ref(0);
+const temperatureDelta = ref(0);
+const oxygenDelta = ref(0);
+
+function saveData() {
+  const response: AresGlobalParametersResponse = {
+    lowOceanDelta: lowOceanDelta.value,
+    highOceanDelta: highOceanDelta.value,
+    temperatureDelta: temperatureDelta.value,
+    oxygenDelta: oxygenDelta.value,
+  };
+
+  props.onsave({type: 'aresGlobalParameters', response});
+}
 </script>

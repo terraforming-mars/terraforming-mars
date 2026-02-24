@@ -6,8 +6,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+
 import {Warning} from '@/common/cards/Warning';
 
 const descriptions: Record<Warning, string> = {
@@ -37,20 +37,9 @@ const descriptions: Record<Warning, string> = {
   'underworldtokendiscard': 'Warning: You will have to discard an underworld resource token you rely on.',
 };
 
-export default defineComponent({
-  name: 'WarningsComponent',
-  props: {
-    warnings: {
-      type: Array as () => ReadonlyArray<Warning>,
-      default: () => {
-        return [];
-      },
-    },
-  },
-  computed: {
-    descriptions(): typeof descriptions {
-      return descriptions;
-    },
-  },
+withDefaults(defineProps<{
+  warnings?: ReadonlyArray<Warning>;
+}>(), {
+  warnings: () => [],
 });
 </script>

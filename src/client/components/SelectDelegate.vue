@@ -11,8 +11,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {ref} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {ColorWithNeutral} from '@/common/Color';
 import {SelectDelegateModel} from '@/common/models/PlayerInputModel';
@@ -20,47 +20,19 @@ import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import SelectPlayerRow from '@/client/components/SelectPlayerRow.vue';
 import {SelectDelegateResponse} from '@/common/inputs/InputResponse';
 
-interface DataModel {
-  selectedPlayer: ColorWithNeutral | undefined;
-}
+const props = defineProps<{
+  players: Array<PublicPlayerModel>;
+  playerinput: SelectDelegateModel;
+  onsave: (out: SelectDelegateResponse) => void;
+  showsave?: boolean;
+  showtitle?: boolean;
+}>();
 
-export default defineComponent({
-  name: 'SelectDelegate',
-  props: {
-    players: {
-      type: Array as () => Array<PublicPlayerModel>,
-      required: true,
-    },
-    playerinput: {
-      type: Object as () => SelectDelegateModel,
-      required: true,
-    },
-    onsave: {
-      type: Function as unknown as () => (out: SelectDelegateResponse) => void,
-      required: true,
-    },
-    showsave: {
-      type: Boolean,
-    },
-    showtitle: {
-      type: Boolean,
-    },
-  },
-  data(): DataModel {
-    return {
-      selectedPlayer: undefined,
-    };
-  },
-  components: {
-    AppButton,
-    'select-player-row': SelectPlayerRow,
-  },
-  methods: {
-    saveData() {
-      if (this.selectedPlayer !== undefined) {
-        this.onsave({type: 'delegate', player: this.selectedPlayer});
-      }
-    },
-  },
-});
+const selectedPlayer = ref<ColorWithNeutral | undefined>(undefined);
+
+function saveData() {
+  if (selectedPlayer.value !== undefined) {
+    props.onsave({type: 'delegate', player: selectedPlayer.value});
+  }
+}
 </script>

@@ -23,9 +23,8 @@
   <div v-else class="card-points card-points-big">{{ victoryPoints }}</div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {computed} from 'vue';
 import CardRenderItemComponent from '@/client/components/card/CardRenderItemComponent.vue';
 import {CardRenderDynamicVictoryPoints} from '@/common/cards/render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
@@ -33,65 +32,56 @@ import {CardResource} from '@/common/CardResource';
 import {ICardRenderItem} from '@/common/cards/render/Types';
 import {Size} from '@/common/cards/render/Size';
 
-export default defineComponent({
-  name: 'CardVictoryPoints',
-  props: {
-    victoryPoints: {
-      type: [Number, Object as () => CardRenderDynamicVictoryPoints],
-      required: true,
-    },
-  },
-  components: {
-    CardRenderItemComponent,
-  },
-  computed: {
-    classes(): string {
-      if (typeof this.victoryPoints === 'number') {
-        return '';
-      } else {
-        const classes: string[] = ['card-points'];
-        if (this.victoryPoints.vermin) {
-          classes.push('card-points-normal');
-          classes.push('card-points-vermin');
-          classes.push('red-outline');
-        } else if (this.victoryPoints.anyPlayer) {
-          classes.push('card-points-big');
-          classes.push('red-outline');
-        } else {
-          classes.push('card-points-normal');
-        }
-        return classes.join(' ');
-      }
-    },
-    points(): string {
-      if (typeof this.victoryPoints === 'number') {
-        return '';
-      }
-      const vps = this.victoryPoints;
-      if (vps.item === undefined && vps.points === 0 && vps.target === 0) {
-        return '?';
-      }
-      if (vps.item === undefined) {
-        return `${vps.points}`;
-      }
-      if (vps.target === vps.points || vps.target === 1) {
-        return `${vps.points}/`;
-      }
-      if (vps.asFraction) {
-        if (vps.target ===3 && vps.points === 1) {
-          return '⅓';
-        }
-      }
-      return `${vps.points}/${vps.target}`;
-    },
-    animal(): ICardRenderItem {
-      return {is: 'item', type: CardRenderItemType.RESOURCE, resource: CardResource.ANIMAL, size: Size.SMALL, amount: 1};
-    },
-    city(): ICardRenderItem {
-      return {is: 'item', type: CardRenderItemType.CITY, size: Size.SMALL, amount: 1};
-    },
-  },
+const props = defineProps<{
+  victoryPoints: number | CardRenderDynamicVictoryPoints;
+}>();
+
+const classes = computed<string>(() => {
+  if (typeof props.victoryPoints === 'number') {
+    return '';
+  } else {
+    const classes: string[] = ['card-points'];
+    if (props.victoryPoints.vermin) {
+      classes.push('card-points-normal');
+      classes.push('card-points-vermin');
+      classes.push('red-outline');
+    } else if (props.victoryPoints.anyPlayer) {
+      classes.push('card-points-big');
+      classes.push('red-outline');
+    } else {
+      classes.push('card-points-normal');
+    }
+    return classes.join(' ');
+  }
 });
 
-</script>
+const points = computed<string>(() => {
+  if (typeof props.victoryPoints === 'number') {
+    return '';
+  }
+  const vps = props.victoryPoints;
+  if (vps.item === undefined && vps.points === 0 && vps.target === 0) {
+    return '?';
+  }
+  if (vps.item === undefined) {
+    return `${vps.points}`;
+  }
+  if (vps.target === vps.points || vps.target === 1) {
+    return `${vps.points}/`;
+  }
+  if (vps.asFraction) {
+    if (vps.target ===3 && vps.points === 1) {
+      return '\u2153';
+    }
+  }
+  return `${vps.points}/${vps.target}`;
+});
 
+const animal = computed<ICardRenderItem>(() => {
+  return {is: 'item', type: CardRenderItemType.RESOURCE, resource: CardResource.ANIMAL, size: Size.SMALL, amount: 1};
+});
+
+const city = computed<ICardRenderItem>(() => {
+  return {is: 'item', type: CardRenderItemType.CITY, size: Size.SMALL, amount: 1};
+});
+</script>

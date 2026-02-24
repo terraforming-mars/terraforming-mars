@@ -5,30 +5,17 @@
   </div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {computed} from 'vue';
 import {CardResource} from '@/common/CardResource';
 import {cardResourceCSS} from '../common/cardResources';
 
-export default defineComponent({
-  name: 'CardResourceCounter',
-  props: {
-    amount: {
-      type: Number,
-      required: true,
-    },
-    type: {
-      type: String as () => CardResource,
-      required: true,
-    },
-  },
-  computed: {
-    cssClass(): string {
-      return cardResourceCSS[this.type];
-    },
-  },
+const props = defineProps<{
+  amount: number;
+  type: CardResource;
+}>();
+
+const cssClass = computed<string>(() => {
+  return cardResourceCSS[props.type];
 });
-
 </script>
-

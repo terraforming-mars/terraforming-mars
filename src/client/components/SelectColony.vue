@@ -10,54 +10,30 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {ref} from 'vue';
 import Colony from '@/client/components/colonies/Colony.vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectColonyModel} from '@/common/models/PlayerInputModel';
 import {SelectColonyResponse} from '@/common/inputs/InputResponse';
 import {ColonyName} from '@/common/colonies/ColonyName';
 
-type DataModel = {
-  selectedColony: ColonyName | undefined,
-};
+const props = defineProps<{
+  playerinput: SelectColonyModel;
+  onsave: (out: SelectColonyResponse) => void;
+  showsave?: boolean;
+  showtitle?: boolean;
+}>();
 
-export default defineComponent({
-  name: 'SelectColony',
-  props: {
-    playerinput: {
-      type: Object as () => SelectColonyModel,
-      required: true,
-    },
-    onsave: {
-      type: Function as unknown as () => (out: SelectColonyResponse) => void,
-      required: true,
-    },
-    showsave: {
-      type: Boolean,
-    },
-    showtitle: {
-      type: Boolean,
-    },
-  },
-  data(): DataModel {
-    return {
-      selectedColony: undefined,
-    };
-  },
-  components: {
-    'colony': Colony,
-    AppButton,
-  },
-  methods: {
-    canSave() {
-      return this.selectedColony !== undefined;
-    },
-    saveData() {
-      if (this.selectedColony !== undefined) {
-        this.onsave({type: 'colony', colonyName: this.selectedColony});
-      }
-    },
-  },
-});
+const selectedColony = ref<ColonyName | undefined>(undefined);
+
+function canSave() {
+  return selectedColony.value !== undefined;
+}
+
+function saveData() {
+  if (selectedColony.value !== undefined) {
+    props.onsave({type: 'colony', colonyName: selectedColony.value});
+  }
+}
 </script>

@@ -49,35 +49,22 @@
   </div>
 </div>
 </template>
-<script lang="ts">
+<script setup lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
-
+import {computed} from 'vue';
 import {ColonyMetadata} from '@/common/colonies/ColonyMetadata';
 import {ColonyBenefit} from '@/common/colonies/ColonyBenefit';
 
-export default defineComponent({
-  name: 'BuildBenefit',
-  props: {
-    metadata: {
-      type: Object as () => ColonyMetadata,
-      required: true,
-    },
-    idx: {
-      type: Number,
-      required: true,
-    },
-  },
-  computed: {
-    ColonyBenefit(): typeof ColonyBenefit {
-      return ColonyBenefit;
-    },
-    buildQuantityText(): string {
-      return this.metadata.build.quantity[this.idx] > 1 ? String(this.metadata.build.quantity[this.idx]) : '';
-    },
-    resource(): string | undefined {
-      return (this.metadata.build.resource ?? this.metadata.cardResource)?.toLowerCase();
-    },
-  },
+const props = defineProps<{
+  metadata: ColonyMetadata;
+  idx: number;
+}>();
+
+const buildQuantityText = computed((): string => {
+  return props.metadata.build.quantity[props.idx] > 1 ? String(props.metadata.build.quantity[props.idx]) : '';
+});
+
+const resource = computed((): string | undefined => {
+  return (props.metadata.build.resource ?? props.metadata.cardResource)?.toLowerCase();
 });
 </script>

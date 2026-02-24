@@ -51,101 +51,86 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
-
+<script setup lang="ts">
+import {ref} from 'vue';
 import {SelectProductionToLoseModel} from '@/common/models/PlayerInputModel';
 import {PayProductionModel} from '@/common/models/PayProductionUnitsModel';
 import {Units} from '@/common/Units';
 import {SelectProductionToLoseResponse} from '@/common/inputs/InputResponse';
 import {sum} from '@/common/utils/utils';
 
-type DataModel = {
-  units: Units,
-  warning: string | undefined;
+const props = defineProps<{
+  playerinput: SelectProductionToLoseModel;
+  onsave: (out: SelectProductionToLoseResponse) => void;
+  showsave?: boolean;
+  showtitle?: boolean;
+}>();
+
+const units = ref<Units>({...Units.EMPTY});
+const warning = ref<string | undefined>(undefined);
+
+function canDeductMegaCredits() {
+  return props.playerinput.payProduction.units.megacredits > -5;
 }
 
-export default defineComponent({
-  name: 'SelectProductionToLose',
-  props: {
-    playerinput: {
-      type: Object as () => SelectProductionToLoseModel,
-      required: true,
-    },
-    onsave: {
-      type: Function as unknown as () => (out: SelectProductionToLoseResponse) => void,
-      required: true,
-    },
-    showsave: {
-      type: Boolean,
-    },
-    showtitle: {
-      type: Boolean,
-    },
-  },
-  data(): DataModel {
-    return {
-      units: {...Units.EMPTY},
-      warning: undefined,
-    };
-  },
-  methods: {
-    canDeductMegaCredits() {
-      return this.playerinput.payProduction.units.megacredits > -5;
-    },
-    canDeductSteel() {
-      return this.playerinput.payProduction.units.steel > 0;
-    },
-    canDeductTitanium() {
-      return this.playerinput.payProduction.units.titanium > 0;
-    },
-    canDeductPlants() {
-      return this.playerinput.payProduction.units.plants > 0;
-    },
-    canDeductEnergy() {
-      return this.playerinput.payProduction.units.energy > 0;
-    },
-    canDeductHeat() {
-      return this.playerinput.payProduction.units.heat > 0;
-    },
-    hasWarning() {
-      return this.warning !== undefined;
-    },
-    delta(type: keyof Units, direction: number) {
-      const expendableProductionQuantity = function(type: keyof Units, model: PayProductionModel): number {
-        switch (type) {
-        case 'megacredits':
-          return model.units.megacredits + 5;
-        case 'steel':
-          return model.units.steel;
-        case 'titanium':
-          return model.units.titanium;
-        case 'plants':
-          return model.units.plants;
-        case 'energy':
-          return model.units.energy;
-        case 'heat':
-          return model.units.heat;
-        default:
-          return -1;
-        }
-      };
-      const current = this.units[type];
-      let newValue = current + direction;
-      const expendableQuantity = expendableProductionQuantity(type, this.playerinput.payProduction);
-      newValue = Math.min(Math.max(newValue, 0), expendableQuantity);
-      this.units[type] = newValue;
-    },
-    saveData() {
-      const total = sum(Units.values(this.units));
+function canDeductSteel() {
+  return props.playerinput.payProduction.units.steel > 0;
+}
 
-      if (total !== this.playerinput.payProduction.cost) {
-        this.warning = `Pay a total of ${this.playerinput.payProduction.cost} production units`;
-        return;
-      }
+function canDeductTitanium() {
+  return props.playerinput.payProduction.units.titanium > 0;
+}
 
-      this.onsave({type: 'productionToLose', units: this.units});
-    },
-  },
-});
+function canDeductPlants() {
+  return props.playerinput.payProduction.units.plants > 0;
+}
+
+function canDeductEnergy() {
+  return props.playerinput.payProduction.units.energy > 0;
+}
+
+function canDeductHeat() {
+  return props.playerinput.payProduction.units.heat > 0;
+}
+
+function hasWarning() {
+  return warning.value !== undefined;
+}
+
+function delta(type: keyof Units, direction: number) {
+  const expendableProductionQuantity = function(type: keyof Units, model: PayProductionModel): number {
+    switch (type) {
+    case 'megacredits':
+      return model.units.megacredits + 5;
+    case 'steel':
+      return model.units.steel;
+    case 'titanium':
+      return model.units.titanium;
+    case 'plants':
+      return model.units.plants;
+    case 'energy':
+      return model.units.energy;
+    case 'heat':
+      return model.units.heat;
+    default:
+      return -1;
+    }
+  };
+  const current = units.value[type];
+  let newValue = current + direction;
+  const expendableQuantity = expendableProductionQuantity(type, props.playerinput.payProduction);
+  newValue = Math.min(Math.max(newValue, 0), expendableQuantity);
+  units.value[type] = newValue;
+}
+
+function saveData() {
+  const total = sum(Units.values(units.value));
+
+  if (total !== props.playerinput.payProduction.cost) {
+    warning.value = `Pay a total of ${props.playerinput.payProduction.cost} production units`;
+    return;
+  }
+
+  props.onsave({type: 'productionToLose', units: units.value});
+}
 </script>

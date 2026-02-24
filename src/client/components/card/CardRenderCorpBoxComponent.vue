@@ -9,38 +9,19 @@
       </div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
 import CardRenderItemComponent from '@/client/components/card/CardRenderItemComponent.vue';
 import CardRenderEffectBoxComponent from '@/client/components/card/CardRenderEffectBoxComponent.vue';
 import CardRenderSymbolComponent from '@/client/components/card/CardRenderSymbolComponent.vue';
 import {ItemType} from '@/common/cards/render/Types';
 
-export default defineComponent({
-  name: 'CardRenderCorpBoxComponent',
-  props: {
-    rows: {
-      type: Array as () => Array<Array<ItemType>>,
-      required: true,
-    },
-    label: {
-      type: String,
-      required: true,
-    },
-  },
-  components: {
-    CardRenderSymbolComponent,
-    CardRenderItemComponent,
-    CardRenderEffectBoxComponent,
-  },
-  methods: {
-    getClasses(): string {
-      const classes: Array<string> = ['card-corporation-box'];
-      return classes.join(' ');
-    },
-  },
-});
+defineProps<{
+  rows: Array<Array<ItemType>>;
+  label: string;
+}>();
 
+function getClasses(): string {
+  const classes: Array<string> = ['card-corporation-box'];
+  return classes.join(' ');
+}
 </script>
-

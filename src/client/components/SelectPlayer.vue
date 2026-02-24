@@ -10,9 +10,8 @@
   </div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {ref} from 'vue';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {SelectPlayerModel} from '@/common/models/PlayerInputModel';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
@@ -20,49 +19,20 @@ import SelectPlayerRow from '@/client/components/SelectPlayerRow.vue';
 import {SelectPlayerResponse} from '@/common/inputs/InputResponse';
 import {ColorWithNeutral} from '@/common/Color';
 
-type DataModel = {
-  selectedPlayer: ColorWithNeutral | undefined;
+const props = defineProps<{
+  players: Array<PublicPlayerModel>;
+  playerinput: SelectPlayerModel;
+  onsave: (out: SelectPlayerResponse) => void;
+  showsave?: boolean;
+  showtitle?: boolean;
+}>();
+
+const selectedPlayer = ref<ColorWithNeutral | undefined>(undefined);
+
+function saveData() {
+  if (selectedPlayer.value === undefined) {
+    return;
+  }
+  props.onsave({type: 'player', player: selectedPlayer.value});
 }
-
-export default defineComponent({
-  name: 'SelectPlayer',
-  props: {
-    players: {
-      type: Array as () => Array<PublicPlayerModel>,
-      required: true,
-    },
-    playerinput: {
-      type: Object as () => SelectPlayerModel,
-      required: true,
-    },
-    onsave: {
-      type: Function as unknown as () => (out: SelectPlayerResponse) => void,
-      required: true,
-    },
-    showsave: {
-      type: Boolean,
-    },
-    showtitle: {
-      type: Boolean,
-    },
-  },
-  data(): DataModel {
-    return {
-      selectedPlayer: undefined,
-    };
-  },
-  components: {
-    SelectPlayerRow,
-    AppButton,
-  },
-  methods: {
-    saveData() {
-      if (this.selectedPlayer === undefined) {
-        return;
-      }
-      this.onsave({type: 'player', player: this.selectedPlayer});
-    },
-  },
-});
-
 </script>

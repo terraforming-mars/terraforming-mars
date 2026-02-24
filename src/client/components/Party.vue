@@ -17,39 +17,30 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+
 import {PartyModel} from '@/common/models/TurmoilModel';
 import {PartyName} from '@/common/turmoil/PartyName';
 
-export default defineComponent({
-  name: 'Party',
-  props: {
-    party: {
-      type: Object as () => PartyModel,
-      required: true,
-    },
-    isDominant: {
-      type: Boolean,
-    },
-    isAvailable: {
-      type: Boolean,
-    },
-  },
-  methods: {
-    partyNameToCss(party: PartyName | undefined): string {
-      if (party === undefined) {
-        console.warn('no party provided');
-        return '';
-      }
-      return party.toLowerCase().split(' ').join('_');
-    },
-    getDominantClass(): string {
-      return 'select-party-leader-spot' + (this.isDominant ? ' dominance-marker' : '');
-    },
-    getUnavailablePartyClass(): string {
-      return this.isAvailable ? '' : ' unavailable-party';
-    },
-  },
-});
+const props = defineProps<{
+  party: PartyModel;
+  isDominant?: boolean;
+  isAvailable?: boolean;
+}>();
+
+function partyNameToCss(party: PartyName | undefined): string {
+  if (party === undefined) {
+    console.warn('no party provided');
+    return '';
+  }
+  return party.toLowerCase().split(' ').join('_');
+}
+
+function getDominantClass(): string {
+  return 'select-party-leader-spot' + (props.isDominant ? ' dominance-marker' : '');
+}
+
+function getUnavailablePartyClass(): string {
+  return props.isAvailable ? '' : ' unavailable-party';
+}
 </script>

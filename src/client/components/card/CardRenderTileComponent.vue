@@ -2,20 +2,14 @@
   <div :class="tiles"><div v-if="symbols.length > 0" :class="symbols"></div></div>
 </template>
 
-<script lang="ts">
-
-import {defineComponent} from '@/client/vue3-compat';
+<script setup lang="ts">
+import {computed} from 'vue';
 import {ICardRenderTile} from '@/common/cards/render/Types';
 import {TileType} from '@/common/TileType';
 
 type Classes = {
-  // The tile div is used to display a full tile. If distinct version
-  // of the tile appears for Ares it uses aresTile, otherwise it ses tile.
   tile?: string;
   aresTile?: string;
-
-  // symbol is used for the inner div, and only used when the renderer isn't
-  // going to show a whole tile, just a symbol on top of a tile template.
   symbol?: string;
 }
 
@@ -135,49 +129,40 @@ const TILE_CLASSES: Record<TileType, Classes> = {
   [TileType.DUST_STORM_SEVERE]: {},
   [TileType.EROSION_MILD]: {},
   [TileType.EROSION_SEVERE]: {},
-  [TileType.RED_CITY]: {}, // This isn't shown on a card
-  [TileType.MARTIAN_NATURE_WONDERS]: {}, // This isn't shown on a card
-  [TileType.MARS_NOMADS]: {}, // This isn't shown on a card
-  [TileType.REY_SKYWALKER]: {}, // This isn't shown on a card
+  [TileType.RED_CITY]: {},
+  [TileType.MARTIAN_NATURE_WONDERS]: {},
+  [TileType.MARS_NOMADS]: {},
+  [TileType.REY_SKYWALKER]: {},
   [TileType.NEW_HOLLAND]: {
     tile: 'card-tile-new-holland',
   },
 };
 
-export default defineComponent({
-  name: 'CardRenderTileComponent',
-  props: {
-    item: {
-      type: Object as () => ICardRenderTile,
-      required: true,
-    },
-  },
-  computed: {
-    tiles(): ReadonlyArray<string> {
-      const classes: string[] = ['card-tile'];
-      if (this.item.hasSymbol) {
-        classes.push('card-tile-canvas');
-      }
-      const symbolClass = TILE_CLASSES[this.item.tile];
-      if (this.item.isAres && symbolClass.aresTile !== undefined) {
-        classes.push(symbolClass.aresTile);
-      } else if (symbolClass.tile !== undefined) {
-        classes.push(symbolClass.tile);
-      }
-      return classes;
-    },
-    // Symbols for tiles go on top of the tile canvas
-    symbols(): ReadonlyArray<string> {
-      if (this.item.hasSymbol) {
-        const symbolClass = TILE_CLASSES[this.item.tile];
-        if (symbolClass.symbol !== undefined) {
-          return ['card-tile-symbol', symbolClass.symbol];
-        }
-      }
-      return [];
-    },
-  },
+const props = defineProps<{
+  item: ICardRenderTile;
+}>();
+
+const tiles = computed<ReadonlyArray<string>>(() => {
+  const classes: string[] = ['card-tile'];
+  if (props.item.hasSymbol) {
+    classes.push('card-tile-canvas');
+  }
+  const symbolClass = TILE_CLASSES[props.item.tile];
+  if (props.item.isAres && symbolClass.aresTile !== undefined) {
+    classes.push(symbolClass.aresTile);
+  } else if (symbolClass.tile !== undefined) {
+    classes.push(symbolClass.tile);
+  }
+  return classes;
 });
 
+const symbols = computed<ReadonlyArray<string>>(() => {
+  if (props.item.hasSymbol) {
+    const symbolClass = TILE_CLASSES[props.item.tile];
+    if (symbolClass.symbol !== undefined) {
+      return ['card-tile-symbol', symbolClass.symbol];
+    }
+  }
+  return [];
+});
 </script>
-

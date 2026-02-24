@@ -260,7 +260,7 @@ export default (Vue as WithRefs<Refs>).extend({
   },
   mounted() {
     document.title = `Cards List | ${APP_NAME}`;
-    this.$refs.filter.focus();
+    this.typedRefs.filter.focus();
     this.delayedSetLocationHash();
   },
   computed: {
@@ -310,6 +310,9 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     cardResourceCSS(): typeof cardResourceCSS {
       return cardResourceCSS;
+    },
+    typedRefs(): Refs {
+      return this.$refs;
     },
   },
   methods: {

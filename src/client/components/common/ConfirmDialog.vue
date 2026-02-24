@@ -48,6 +48,11 @@ export default (Vue as WithRefs<Refs>).extend({
       this.$emit('hide', this.hide);
     },
   },
+  computed: {
+    typedRefs(): Refs {
+      return this.$refs;
+    },
+  },
   methods: {
     accept() {
       this.$emit('accept');
@@ -57,11 +62,11 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     show() {
       this.shown = true;
-      showModal(this.$refs.dialog);
+      showModal(this.typedRefs.dialog);
     },
   },
   mounted() {
-    if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(this.$refs.dialog);
+    if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(this.typedRefs.dialog);
   },
 });
 </script>

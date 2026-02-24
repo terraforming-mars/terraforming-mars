@@ -61,13 +61,18 @@ export default (Vue as WithRefs<Refs>).extend({
       showCopied: false,
     };
   },
+  computed: {
+    typedRefs(): Refs {
+      return this.$refs;
+    },
+  },
   methods: {
     show() {
-      showModal(this.$refs.dialog);
+      showModal(this.typedRefs.dialog);
     },
     copyTextArea() {
-      this.$refs.textarea.select();
-      navigator.clipboard.writeText(this.$refs.textarea.value);
+      this.typedRefs.textarea.select();
+      navigator.clipboard.writeText(this.typedRefs.textarea.value);
       this.showCopied = true;
     },
     url(playerView: PlayerViewModel | undefined) {
@@ -108,7 +113,7 @@ export default (Vue as WithRefs<Refs>).extend({
     },
   },
   mounted() {
-    if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(this.$refs.dialog);
+    if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(this.typedRefs.dialog);
     this.setMessage();
   },
 });

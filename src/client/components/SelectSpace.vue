@@ -71,6 +71,11 @@ export default (Vue as WithRefs<Refs>).extend({
     'confirm-dialog': ConfirmDialog,
     GoToMap,
   },
+  computed: {
+    typedRefs(): Refs {
+      return this.$refs;
+    },
+  },
   methods: {
     animateSpace(tile: Element, activate: boolean) {
       if (activate) {
@@ -145,7 +150,7 @@ export default (Vue as WithRefs<Refs>).extend({
       if (hideTileConfirmation) {
         this.confirmPlacement();
       } else {
-        this.$refs.confirmation.show();
+        this.typedRefs.confirmation.show();
       }
     },
     saveData() {

@@ -83,6 +83,11 @@ export default (Vue as WithRefs<Refs>).extend({
   components: {
     AppButton,
   },
+  computed: {
+    typedRefs(): Refs {
+      return this.$refs;
+    },
+  },
   methods: {
     isPrelude(cardName: CardName) {
       return getCard(cardName)?.type === CardType.PRELUDE;
@@ -101,7 +106,7 @@ export default (Vue as WithRefs<Refs>).extend({
       this.selected.push(cardName);
       this.selected.sort();
       this.searchTerm = '';
-      this.$refs.filter.focus();
+      this.typedRefs.filter.focus();
     },
   },
   watch: {
@@ -139,7 +144,7 @@ export default (Vue as WithRefs<Refs>).extend({
     },
   },
   mounted() {
-    this.$refs.filter.focus();
+    this.typedRefs.filter.focus();
   },
 });
 </script>

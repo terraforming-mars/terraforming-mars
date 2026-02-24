@@ -28,7 +28,8 @@
 
 <script lang="ts">
 
-import {defineComponent} from '@/client/vue3-compat';
+import Vue from 'vue';
+import {WithRefs} from 'vue-typed-refs';
 import AppButton from '@/client/components/common/AppButton.vue';
 import {isHTMLElement} from '@/client/utils/vueUtils';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
@@ -38,7 +39,12 @@ import {InputResponse, OrOptionsResponse} from '@/common/inputs/InputResponse';
 
 let unique = 0;
 
-export default defineComponent({
+type Refs = {
+  inputfactory: HTMLInputElement,
+  optionLabels: Array<HTMLElement> | HTMLElement,
+};
+
+export default (Vue as WithRefs<Refs>).extend({
   name: 'or-options',
   props: {
     playerView: {
@@ -111,6 +117,11 @@ export default defineComponent({
       });
     },
   },
+  computed: {
+    typedRefs(): Refs {
+      return this.$refs;
+    },
+  },
   methods: {
     getTop(option: PlayerInputModel | undefined): number | undefined {
       if (option === undefined) {
@@ -121,7 +132,7 @@ export default defineComponent({
     },
     getOptionLabelElement(option: PlayerInputModel): HTMLElement | undefined {
       const idx = this.displayedOptions.indexOf(option);
-      const refs = this.$refs.optionLabels;
+      const refs = this.typedRefs.optionLabels;
       if (idx === -1 || !refs) {
         return undefined;
       }
@@ -143,7 +154,7 @@ export default defineComponent({
       };
     },
     saveData() {
-      let ref = this.$refs['inputfactory'];
+      let ref = this.typedRefs.inputfactory;
       if (Array.isArray(ref)) {
         ref = ref[0];
       }

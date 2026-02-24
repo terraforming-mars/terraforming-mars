@@ -170,6 +170,9 @@ export default (Vue as WithRefs<Refs>).extend({
     },
   },
   computed: {
+    typedRefs(): Refs {
+      return this.$refs;
+    },
     getPreferences(): typeof getPreferences {
       return getPreferences;
     },

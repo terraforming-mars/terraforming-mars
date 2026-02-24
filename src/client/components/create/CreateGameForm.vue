@@ -682,6 +682,9 @@ export default (Vue as WithRefs<Refs>).extend({
         RandomBoardOption.ALL,
       ];
     },
+    typedRefs(): Refs {
+      return this.$refs;
+    },
   },
   methods: {
     async downloadSettings() {
@@ -696,8 +699,7 @@ export default (Vue as WithRefs<Refs>).extend({
       }
     },
     uploadSettings() {
-      const refs: Refs = this.$refs;
-      const file = refs.file.files !== null ? refs.file.files[0] : undefined;
+      const file = this.typedRefs.file.files !== null ? this.typedRefs.file.files[0] : undefined;
       const reader = new FileReader();
       const component: CreateGameModel = this;
       const root = vueRoot(this);
@@ -714,8 +716,8 @@ export default (Vue as WithRefs<Refs>).extend({
 
             Vue.nextTick(() => {
               try {
-                if (component.showBannedCards) refs.cardsFilter.selected = processor.bannedCards;
-                if (component.showIncludedCards) refs.cardsFilter2.selected = processor.includedCards;
+                if (component.showBannedCards) this.typedRefs.cardsFilter.selected = processor.bannedCards;
+                if (component.showIncludedCards) this.typedRefs.cardsFilter2.selected = processor.includedCards;
                 if (!component.seededGame) component.seed = Math.random();
                 // set to alter after any watched properties
                 component.solarPhaseOption = Boolean(processor.solarPhaseOption);

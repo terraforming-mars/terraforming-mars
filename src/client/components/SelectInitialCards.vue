@@ -219,7 +219,7 @@ export default (Vue as WithRefs<Refs>).extend({
       let showAlert = false;
       if (this.preferences.show_alerts && projectCards.length === 0) showAlert = true;
       if (showAlert) {
-        this.$refs.confirmation.show();
+        this.typedRefs.confirmation.show();
       } else {
         this.saveData();
       }
@@ -360,6 +360,9 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     projectCardOption() {
       return getOption(this.playerinput.options, titles.SELECT_PROJECTS_TITLE);
+    },
+    typedRefs(): Refs {
+      return this.$refs;
     },
   },
   mounted() {

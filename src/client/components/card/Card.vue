@@ -205,6 +205,9 @@ export default (Vue as WithRefs<Refs>).extend({
     playerCubeClass(): string {
       return `board-cube board-cube--${this.cubeColor}`;
     },
+    typedRefs(): Refs {
+      return this.$refs;
+    },
   },
   methods: {
     makeFullSize() {
@@ -213,17 +216,17 @@ export default (Vue as WithRefs<Refs>).extend({
       }
       // Was not initialized with a custom height, probably because it was not visible.
       if (this.customHeight === 0) {
-        this.customHeight = this.$refs.content.$el.scrollHeight;
+        this.customHeight = this.typedRefs.content.$el.scrollHeight;
         // If for some reason it still doesn't have a custom height, don't resize it.
         if (this.customHeight === 0) {
           return;
         }
       }
-      const content = this.$refs.content.$el as HTMLElement;
+      const content = this.typedRefs.content.$el as HTMLElement;
       if (content.scrollHeight <= 236) {
         return;
       }
-      this.$refs.container.style.height = (this.customHeight + 90) + 'px';
+      this.typedRefs.container.style.height = (this.customHeight + 90) + 'px';
       content.style.height = this.customHeight + 'px';
     },
     unmakeFullSize() {
@@ -233,13 +236,13 @@ export default (Vue as WithRefs<Refs>).extend({
       if (this.customHeight === 0) {
         return;
       }
-      const content = this.$refs.content.$el as HTMLElement;
-      this.$refs.container.style.removeProperty('height');
+      const content = this.typedRefs.content.$el as HTMLElement;
+      this.typedRefs.container.style.removeProperty('height');
       content.style.removeProperty('height');
     },
   },
   mounted() {
-    this.customHeight = this.$refs.content.$el.scrollHeight;
+    this.customHeight = this.typedRefs.content.$el.scrollHeight;
   },
   beforeUpdate() {
     if (this.autoTall === true) {

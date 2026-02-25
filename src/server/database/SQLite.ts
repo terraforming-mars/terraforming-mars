@@ -284,7 +284,6 @@ export class SQLite implements IDatabase {
         if (err) {
           reject(err);
         } else {
-          // eslint-disable-next-line no-invalid-this
           resolve(this);
         }
       }

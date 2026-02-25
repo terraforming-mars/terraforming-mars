@@ -233,9 +233,6 @@ describe('Board', () => {
   });
 
   class TestBoard extends Board {
-    public constructor(spaces: Array<Space>, volcanicSpaceIds?: ReadonlyArray<SpaceId>) {
-      super(spaces, undefined, volcanicSpaceIds);
-    }
   }
 
   it('deserialize', () => {
@@ -277,10 +274,10 @@ describe('Board', () => {
   it('Create specifying volcanic spaces', () => {
     const spaces: Array<Space> = [
       {id: '01', x: 0, y: 0, spaceType: SpaceType.LAND, bonus: []},
-      {id: '02', x: 1, y: 0, spaceType: SpaceType.LAND, bonus: []},
+      {id: '02', x: 1, y: 0, spaceType: SpaceType.LAND, volcanic: true, bonus: []},
       {id: '03', x: 2, y: 0, spaceType: SpaceType.LAND, bonus: []},
     ];
-    const board = new TestBoard(spaces, ['02']);
+    const board = new TestBoard(spaces);
     expect(board.getSpaceOrThrow('01').volcanic).is.undefined;
     expect(board.getSpaceOrThrow('02').volcanic).is.true;
     expect(board.getSpaceOrThrow('03').volcanic).is.undefined;
@@ -298,28 +295,6 @@ describe('Board', () => {
     expect(board.getSpaceOrThrow('02').volcanic).is.true;
     expect(board.getSpaceOrThrow('03').volcanic).is.undefined;
     expect(board.volcanicSpaceIds).deep.eq(['02']);
-  });
-
-  it('Create defining and specifying volcanic spaces', () => {
-    const spaces: Array<Space> = [
-      {id: '01', x: 0, y: 0, spaceType: SpaceType.LAND, bonus: []},
-      {id: '02', x: 1, y: 0, spaceType: SpaceType.LAND, bonus: [], volcanic: true},
-      {id: '03', x: 2, y: 0, spaceType: SpaceType.LAND, bonus: []},
-    ];
-    const board = new TestBoard(spaces, ['02']);
-    expect(board.getSpaceOrThrow('01').volcanic).is.undefined;
-    expect(board.getSpaceOrThrow('02').volcanic).is.true;
-    expect(board.getSpaceOrThrow('03').volcanic).is.undefined;
-    expect(board.volcanicSpaceIds).deep.eq(['02']);
-  });
-
-  it('Error when volcanic spaces mismatch', () => {
-    const spaces: Array<Space> = [
-      {id: '01', x: 0, y: 0, spaceType: SpaceType.LAND, bonus: []},
-      {id: '02', x: 1, y: 0, spaceType: SpaceType.LAND, bonus: [], volcanic: true},
-      {id: '03', x: 2, y: 0, spaceType: SpaceType.LAND, bonus: []},
-    ];
-    expect(() => new TestBoard(spaces, ['03'])).to.throw('volcanicSpaceIds do not match what is stored: ["02"] ["03"]');
   });
 
   const runs = [

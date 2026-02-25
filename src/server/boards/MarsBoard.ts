@@ -14,9 +14,8 @@ export class MarsBoard extends Board {
 
   public constructor(
     spaces: ReadonlyArray<Space>,
-    noctisCitySpaceId?: SpaceId | undefined,
-    volcanicSpaceIds?: ReadonlyArray<SpaceId>) {
-    super(spaces, noctisCitySpaceId, volcanicSpaceIds);
+    noctisCitySpaceId?: SpaceId | undefined) {
+    super(spaces, noctisCitySpaceId);
     this.edges = this.computeEdges();
   }
 

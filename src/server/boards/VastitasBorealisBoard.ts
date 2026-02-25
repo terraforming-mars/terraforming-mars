@@ -43,15 +43,6 @@ export class VastitasBorealisBoard extends MarsBoard {
     return new VastitasBorealisBoard(spaces);
   }
 
-  public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, undefined, [
-      SpaceName.ELYSIUM_MONS_VASTITAS_BOREALIS,
-      SpaceName.ALBA_FOSSAE,
-      SpaceName.CERANIUS_FOSSAE,
-      SpaceName.ALBA_MONS,
-    ]);
-  }
-
   public override spaceCosts(space: Space): SpaceCosts {
     const costs = super.spaceCosts(space);
     if (space.id === SpaceName.VASTITAS_BOREALIS_NORTH_POLE) {

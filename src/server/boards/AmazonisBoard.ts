@@ -1,10 +1,8 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {BoardBuilder} from './BoardBuilder';
-import {SpaceName} from '../../common/boards/SpaceName';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
 import {MarsBoard} from './MarsBoard';
-import {Space} from './Space';
 
 export class AmazonisBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): AmazonisBoard {
@@ -41,14 +39,5 @@ export class AmazonisBoard extends MarsBoard {
 
     const spaces = builder.build();
     return new AmazonisBoard(spaces);
-  }
-
-  public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, undefined, [
-      SpaceName.ALBOR_THOLUS,
-      SpaceName.ANSERIS_MONS,
-      SpaceName.PINDUS_MONS,
-      SpaceName.ULYSSES_THOLUS,
-    ]);
   }
 }

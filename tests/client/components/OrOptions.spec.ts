@@ -22,6 +22,8 @@ describe('OrOptions', () => {
         player: {
           id: 'foo',
         },
+        players: [],
+        playerView: {},
         playerinput: {
           type: 'or',
           title: 'foo',
@@ -63,6 +65,8 @@ describe('OrOptions', () => {
         player: {
           id: 'foo',
         },
+        players: [],
+        playerView: {},
         playerinput: {
           type: 'or',
           title: 'foo',
@@ -108,6 +112,8 @@ describe('OrOptions', () => {
         player: {
           id: 'foo',
         },
+        players: [],
+        playerView: {},
         playerinput: {
           type: 'or',
           title: 'foo',
@@ -152,6 +158,8 @@ describe('OrOptions', () => {
         player: {
           id: 'foo',
         },
+        players: [],
+        playerView: {},
         playerinput: {
           type: 'or',
           title: 'foo',
@@ -195,6 +203,8 @@ describe('OrOptions', () => {
         player: {
           id: 'foo',
         },
+        players: [],
+        playerView: {},
         playerinput: {
           type: 'or',
           title: 'foo',

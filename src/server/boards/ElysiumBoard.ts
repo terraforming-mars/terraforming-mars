@@ -1,10 +1,8 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {SpaceName} from '../../common/boards/SpaceName';
 import {BoardBuilder} from './BoardBuilder';
 import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
 import {MarsBoard} from './MarsBoard';
-import {Space} from './Space';
 
 export class ElysiumBoard extends MarsBoard {
   public static newInstance(gameOptions: GameOptions, rng: Random): ElysiumBoard {
@@ -36,14 +34,5 @@ export class ElysiumBoard extends MarsBoard {
 
     const spaces = builder.build();
     return new ElysiumBoard(spaces);
-  }
-
-  public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, undefined, [
-      SpaceName.ARSIA_MONS_ELYSIUM,
-      SpaceName.ELYSIUM_MONS,
-      SpaceName.HECATES_THOLUS,
-      SpaceName.OLYMPUS_MONS,
-    ]);
   }
 }

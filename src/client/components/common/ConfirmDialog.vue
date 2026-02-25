@@ -15,17 +15,17 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {WithRefs} from 'vue-typed-refs';
+import {defineComponent} from '@/client/vue3-compat';
 import {showModal, windowHasHTMLDialogElement} from '@/client/components/HTMLDialogElementCompatibility';
 
 const dialogPolyfill = require('dialog-polyfill');
 
-type Refs = {
-  dialog: HTMLElement,
-}
 
-export default (Vue as WithRefs<Refs>).extend({
+type Refs = {
+  dialog: HTMLDialogElement;
+};
+
+export default defineComponent({
   name: 'ConfirmDialog',
   props: {
     message: {
@@ -48,6 +48,11 @@ export default (Vue as WithRefs<Refs>).extend({
       this.$emit('hide', this.hide);
     },
   },
+  computed: {
+    typedRefs(): Refs {
+      return this.$refs as unknown as Refs;
+    },
+  },
   methods: {
     accept() {
       this.$emit('accept');
@@ -57,11 +62,11 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     show() {
       this.shown = true;
-      showModal(this.$refs.dialog);
+      showModal(this.typedRefs.dialog);
     },
   },
   mounted() {
-    if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(this.$refs.dialog);
+    if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(this.typedRefs.dialog);
   },
 });
 </script>

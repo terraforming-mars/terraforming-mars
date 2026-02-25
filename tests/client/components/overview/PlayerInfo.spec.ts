@@ -1,10 +1,11 @@
 import {shallowMount} from '@vue/test-utils';
-import {getLocalVue} from '../getLocalVue';
+import {globalConfig} from '../getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {RecursivePartial} from '@/common/utils/utils';
+import {fakeTimerModel} from '../testHelpers';
 
 describe('PlayerInfo', () => {
   it('Played card count test', () => {
@@ -15,6 +16,7 @@ describe('PlayerInfo', () => {
         {name: CardName.ACQUIRED_COMPANY},
         {name: CardName.BACTOVIRAL_RESEARCH},
       ],
+      timer: fakeTimerModel(),
       victoryPointsBreakdown: {
         total: 1,
       },
@@ -31,13 +33,16 @@ describe('PlayerInfo', () => {
       players: [thisPlayer],
     };
     const playerInfo = shallowMount(PlayerInfo, {
-      localVue: getLocalVue(),
-      parentComponent: {
-        methods: {
-          getVisibilityState: () => {},
+      ...globalConfig,
+      global: {
+        ...globalConfig.global,
+        mocks: {
+          getVisibilityState: () => false,
+          setVisibilityState: () => {},
+          isServerSideRequestInProgress: false,
         },
       },
-      propsData: {
+      props: {
         player: thisPlayer,
         playerView: playerView,
         playerIndex: 0,

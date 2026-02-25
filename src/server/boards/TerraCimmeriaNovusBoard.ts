@@ -45,10 +45,6 @@ export class TerraCimmeriaNovusBoard extends MarsBoard {
     return new TerraCimmeriaNovusBoard(spaces);
   }
 
-  public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, undefined, ['05', '21', '27', '38']);
-  }
-
   public override spaceCosts(space: Space) {
     const costs = super.spaceCosts(space);
     if (space.bonus.includes(SpaceBonus.COLONY)) {

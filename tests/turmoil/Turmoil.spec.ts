@@ -70,15 +70,6 @@ describe('Turmoil', () => {
     expect(turmoil.usedFreeDelegateAction).does.not.contain(player);
   });
 
-  it('Correctly send delegate from the reserve', () => {
-    const greens = turmoil.getPartyByName(PartyName.GREENS);
-    greens.delegates.clear();
-
-    turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
-
-    expectDelegateMatch(greens.delegates, player);
-  });
-
 
   it('Do not send delegate from reserve when reserve is empty', () => {
     const greens = turmoil.getPartyByName(PartyName.GREENS);

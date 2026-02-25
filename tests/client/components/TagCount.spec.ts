@@ -1,14 +1,14 @@
 
 import {mount} from '@vue/test-utils';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import {expect} from 'chai';
 import TagCount from '@/client/components/TagCount.vue';
 
 describe('TagCount', () => {
   it('renders with no count', () => {
     const tagCount = mount(TagCount, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         count: 0,
       },
     });
@@ -17,8 +17,8 @@ describe('TagCount', () => {
   });
   it('renders with count', () => {
     const tagCount = mount(TagCount, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         count: 2,
       },
     });

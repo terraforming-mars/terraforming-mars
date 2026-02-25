@@ -433,15 +433,15 @@
                         <div class="create-game-players-cont">
                             <div class="container">
                                 <div class="columns">
-                                  <template v-for="(newPlayer, index) in getPlayers()">
-                                    <div v-bind:key="index">
+                                  <template v-for="(newPlayer, index) in getPlayers()" v-bind:key="index">
+                                    <div>
                                       <div :class="'form-group col6 create-game-player '+getPlayerContainerColorClass(newPlayer.color)">
                                           <div>
                                               <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(index)" v-model="newPlayer.name" />
                                           </div>
                                           <div class="create-game-page-color-row">
-                                              <template v-for="color in PLAYER_COLORS">
-                                                <div v-bind:key="color">
+                                              <template v-for="color in PLAYER_COLORS" v-bind:key="color">
+                                                <div>
                                                   <input type="radio" :value="color" :name="'playerColor' + (index + 1)" v-model="newPlayer.color" :id="'radioBox' + color + (index + 1)">
                                                   <label :for="'radioBox' + color + (index + 1)">
                                                       <div :class="'create-game-colorbox '+getPlayerCubeColorClass(color)"></div>
@@ -545,8 +545,7 @@
 <script lang="ts">
 import * as constants from '@/common/constants';
 
-import Vue from 'vue';
-import {WithRefs} from 'vue-typed-refs';
+import {defineComponent, nextTick} from 'vue';
 import {Color, PLAYER_COLORS} from '@/common/Color';
 import {BoardName} from '@/common/boards/BoardName';
 import {RandomBoardOption} from '@/common/boards/RandomBoardOption';
@@ -574,21 +573,19 @@ import {getColony} from '@/client/colonies/ClientColonyManifest';
 
 const REVISED_COUNT_ALGORITHM = false;
 
+
 type Refs = {
-  coloniesFilter: InstanceType<typeof ColoniesFilter>,
-  corporationsFilter: InstanceType<typeof CorporationsFilter>,
-  preludesFilter: InstanceType<typeof PreludesFilter>,
-  cardsFilter: InstanceType<typeof CardsFilter>,
-  cardsFilter2: InstanceType<typeof CardsFilter>,
-  file: HTMLInputElement,
-}
+  file: HTMLInputElement;
+  cardsFilter: InstanceType<typeof CardsFilter>;
+  cardsFilter2: InstanceType<typeof CardsFilter>;
+};
 
 type FormModel = {
   preludeToggled: boolean;
   uploading: boolean;
 };
 
-export default (Vue as WithRefs<Refs>).extend({
+export default defineComponent({
   name: 'CreateGameForm',
   data(): CreateGameModel & FormModel {
     return {
@@ -653,6 +650,9 @@ export default (Vue as WithRefs<Refs>).extend({
     document.title = `Create New Game | ${constants.APP_NAME}`;
   },
   computed: {
+    typedRefs(): Refs {
+      return this.$refs as Refs;
+    },
     RandomBoardOption(): typeof RandomBoardOption {
       return RandomBoardOption;
     },
@@ -696,7 +696,7 @@ export default (Vue as WithRefs<Refs>).extend({
       }
     },
     uploadSettings() {
-      const refs: Refs = this.$refs;
+      const refs = this.typedRefs;
       const file = refs.file.files !== null ? refs.file.files[0] : undefined;
       const reader = new FileReader();
       const component: CreateGameModel = this;
@@ -712,7 +712,7 @@ export default (Vue as WithRefs<Refs>).extend({
             const results = JSON.parse(readerResults);
             processor.applyJSON(results);
 
-            Vue.nextTick(() => {
+            nextTick(() => {
               try {
                 if (component.showBannedCards) refs.cardsFilter.selected = processor.bannedCards;
                 if (component.showIncludedCards) refs.cardsFilter2.selected = processor.includedCards;

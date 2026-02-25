@@ -24,7 +24,6 @@ export default defineComponent({
     },
     live: {
       type: Boolean,
-      required: true,
     },
   },
   data() {

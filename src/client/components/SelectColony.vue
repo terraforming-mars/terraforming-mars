@@ -35,11 +35,9 @@ export default defineComponent({
     },
     showsave: {
       type: Boolean,
-      required: true,
     },
     showtitle: {
       type: Boolean,
-      required: true,
     },
   },
   data(): DataModel {

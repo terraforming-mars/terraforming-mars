@@ -18,7 +18,10 @@ import {Tag} from '@/common/cards/Tag';
 export default defineComponent({
   name: 'CardTags',
   props: {
-    tags: Array as () => Array<Tag>,
+    tags: {
+      type: Array as () => Array<Tag>,
+      required: true,
+    },
   },
   components: {
     CardTag,

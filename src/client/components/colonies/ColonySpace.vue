@@ -30,11 +30,10 @@ export default defineComponent({
     },
     player: {
       type: String as () => Color | undefined,
-      required: true,
+      default: undefined,
     },
     marker: {
       type: Boolean,
-      required: true,
     },
   },
   computed: {

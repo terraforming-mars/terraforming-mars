@@ -1,15 +1,14 @@
 <template>
   <div :class="outerClass">
     <underground-token v-if="claimedToken !== undefined" :token="claimedToken" location="tag-count"/>
-    <Tag v-else :tag="tag" :size="size" :type="type"/>
+    <Tag v-else :tag="(tag as CardTag)" :size="size" :type="type"/>
     <span :class="innerClass">{{ count }}</span>
   </div>
 </template>
 
 <script lang="ts">
 
-import {PropType} from 'vue';
-import {defineComponent} from '@/client/vue3-compat';
+import {defineComponent, PropType} from 'vue';
 import Tag from '@/client/components/Tag.vue';
 import UndergroundToken from '@/client/components/underworld/UndergroundToken.vue';
 import {Tag as CardTag} from '@/common/cards/Tag';
@@ -17,11 +16,14 @@ import {SpecialTags} from '@/client/cards/SpecialTags';
 import {TemporaryBonusToken} from '@/common/underworld/UndergroundResourceToken';
 import {ClaimedToken} from '@/common/underworld/UnderworldPlayerData';
 
+// Display-only tags used in PlayerTags for overview counts.
+type DisplayTag = 'vp' | 'tr' | 'handicap' | 'cards' | 'escape';
+
 export default defineComponent({
   name: 'tag-count',
   props: {
     tag: {
-      type: String as () => CardTag|SpecialTags|'escape',
+      type: String as () => CardTag | SpecialTags | DisplayTag,
       required: true,
     },
     undergroundToken: {
@@ -31,7 +33,6 @@ export default defineComponent({
     },
     count: {
       type: [Number, String] as PropType<number | string>,
-      required: true,
     },
     size: {
       type: String,
@@ -39,7 +40,6 @@ export default defineComponent({
     },
     type: {
       type: String,
-      required: true,
     },
     showWhenZero: {
       // When true, show even if the value is zero.

@@ -5,7 +5,7 @@ module.exports = { // eslint-disable-line no-undef
   },
   'extends': [
     'google',
-    'plugin:vue/essential',
+    'plugin:vue/vue3-essential',
     'eslint:recommended',
   ],
   'parserOptions': {

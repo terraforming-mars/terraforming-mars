@@ -1,5 +1,5 @@
 import {mount} from '@vue/test-utils';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import {expect} from 'chai';
 import Milestone from '@/client/components/Milestone.vue';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
@@ -21,8 +21,8 @@ describe('Milestone', () => {
   it('shows passed milestone', () => {
     const milestone = createMilestone({claimed: false});
     const wrapper = mount(Milestone, {
-      localVue: getLocalVue(),
-      propsData: {milestone},
+      ...globalConfig,
+      props: {milestone},
     });
 
     expect(wrapper.text()).to.include(milestone.name);
@@ -31,8 +31,8 @@ describe('Milestone', () => {
   it('does not show milestone description', () => {
     const milestone = createMilestone({claimed: false});
     const wrapper = mount(Milestone, {
-      localVue: getLocalVue(),
-      propsData: {milestone},
+      ...globalConfig,
+      props: {milestone},
     });
 
     const expected = getMilestone('Builder').description;
@@ -47,7 +47,7 @@ describe('Milestone', () => {
   for (const run of showScoresRuns) {
     it('Show scores ' + run.value, () => {
       const milestone = createMilestone({claimed: true, scores: [{color: 'red', score: 2}]});
-      const wrapper = mount(Milestone, {localVue: getLocalVue(), propsData: {milestone, showScores: run.value}});
+      const wrapper = mount(Milestone, {...globalConfig, props: {milestone, showScores: run.value}});
 
       expect(wrapper.find('[data-test=player-score]').exists()).to.eq(run.expected);
     });
@@ -61,7 +61,7 @@ describe('Milestone', () => {
       ],
     });
 
-    const wrapper = mount(Milestone, {localVue: getLocalVue(), propsData: {milestone, showScores: true}});
+    const wrapper = mount(Milestone, {...globalConfig, props: {milestone, showScores: true}});
 
     const scoreWrapper = wrapper.find('[data-test=player-score]');
     expect(scoreWrapper.classes()).to.includes(`player_bg_color_${milestone.scores[0].color}`);
@@ -78,24 +78,24 @@ describe('Milestone', () => {
       ],
     });
 
-    const wrapper = mount(Milestone, {localVue: getLocalVue(), propsData: {milestone, showScoresRuns: true}});
+    const wrapper = mount(Milestone, {...globalConfig, props: {milestone, showScoresRuns: true}});
 
     const scores = wrapper.findAll('[data-test=player-score]')
-      .wrappers.map((scoreWrapper) => parseInt(scoreWrapper.text()));
+      .map((scoreWrapper) => parseInt(scoreWrapper.text()));
 
     expect(scores).to.be.deep.eq([4, 4, 2, 0]);
   });
 
   it('shows player cube if milestone is claimed', () => {
     const milestone = createMilestone({claimed: true});
-    const wrapper = mount(Milestone, {localVue: getLocalVue(), propsData: {milestone}});
+    const wrapper = mount(Milestone, {...globalConfig, props: {milestone}});
 
     expect(wrapper.find(`.board-cube--${milestone.color}`).exists()).to.be.true;
   });
 
   it('creates correct css class from milestone name', () => {
     const milestone = createMilestone({claimed: true});
-    const wrapper = mount(Milestone, {localVue: getLocalVue(), propsData: {milestone}});
+    const wrapper = mount(Milestone, {...globalConfig, props: {milestone}});
 
     expect(wrapper.find('.ma-name--builder').exists()).to.be.true;
   });

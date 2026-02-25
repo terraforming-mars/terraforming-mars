@@ -10,7 +10,7 @@ export type Options = {
   from?: From;
 }
 
-export class GainResources extends DeferredAction {
+export class GainResourcesDeferred extends DeferredAction {
   constructor(
     player: IPlayer,
     public resource: Resource,
@@ -18,7 +18,7 @@ export class GainResources extends DeferredAction {
   ) {
     super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);
     if ((options.count ?? 0) < 0) {
-      throw new Error('GainResources count option must be >= 0');
+      throw new Error('GainResourcesDeferred count option must be >= 0');
     }
   }
 

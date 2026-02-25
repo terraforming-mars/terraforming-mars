@@ -76,7 +76,6 @@ export default defineComponent({
     },
     showtitle: {
       type: Boolean,
-      required: true,
     },
   },
   data(): WidgetDataModel {

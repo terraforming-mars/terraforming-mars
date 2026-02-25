@@ -5,7 +5,6 @@ import {Random} from '../../common/utils/Random';
 import {GameOptions} from '../game/GameOptions';
 import {MarsBoard} from './MarsBoard';
 import {Turmoil} from '../turmoil/Turmoil';
-import {SpaceName} from '../../common/boards/SpaceName';
 import {Space} from './Space';
 import {
   VASTITAS_BOREALIS_NOVUS_BONUS_TEMPERATURE_COST,
@@ -45,14 +44,6 @@ export class VastitasBorealisNovusBoard extends MarsBoard {
 
     const spaces = builder.build();
     return new VastitasBorealisNovusBoard(spaces);
-  }
-
-  public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, undefined, [SpaceName.VASTITAS_BOREALIS_NOVUS_HECATES_THOLUS,
-      SpaceName.VASTITAS_BOREALIS_NOVUS_ELYSIUM_MONS,
-      SpaceName.VASTITAS_BOREALIS_NOVUS_ALBA_MONS,
-      SpaceName.VASTITAS_BOREALIS_NOVUS_URANIUS_THOULS,
-    ]);
   }
 
   public override getAvailableSpacesOnLand(player: IPlayer, canAffordOptions?: CanAffordOptions) {

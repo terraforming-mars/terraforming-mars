@@ -7,7 +7,7 @@ import {Warning} from '../cards/Warning';
 
 export interface CardModel {
     name: CardName;
-    resources: number | undefined;
+    resources?: number | undefined;
     calculatedCost?: number;
     isSelfReplicatingRobotsCard?: boolean,
     discount?: Array<CardDiscount>,

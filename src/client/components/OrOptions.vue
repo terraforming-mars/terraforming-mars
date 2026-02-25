@@ -8,12 +8,12 @@
         <i class="form-icon" />
         <span>{{ $t(option.title) }}</span>
       </label>
-      <div v-if="selectedOption === option" style="margin-left: 30px">
+      <div v-if="selectedIdx === idx" style="margin-left: 30px">
         <player-input-factory ref="inputfactory"
                               :players="players"
                               :playerView="playerView"
                               :playerinput="option"
-                              :onsave="playerFactorySaved()"
+                              :onsave="playerFactorySaved(idx)"
                               :showsave="showsave && isMultiSelectCard(option)"
                               :showtitle="false" />
       </div>
@@ -59,49 +59,49 @@ export default defineComponent({
     },
     showsave: {
       type: Boolean,
-      required: true,
     },
     showtitle: {
       type: Boolean,
-      required: true,
     },
   },
   components: {
     AppButton,
   },
   data() {
-    const displayedOptions = this.playerinput.options.filter((option) => {
-      if (option.type !== 'card') {
-        return true;
+    const displayedOptions: Array<PlayerInputModel> = [];
+    const originalIndices: Array<number> = [];
+    this.playerinput.options.forEach((option, i) => {
+      if (option.type === 'card' && option.showOnlyInLearnerMode !== false && !getPreferences().learner_mode) {
+        return;
       }
-      if (option.showOnlyInLearnerMode === false) {
-        return true;
-      }
-
-      return getPreferences().learner_mode;
+      displayedOptions.push(option);
+      originalIndices.push(i);
     });
     const initialIdx = this.playerinput.initialIdx ?? 0;
     // Special case: If the first recommended displayed option is SelectCard, and none of them are enabled, skip it.
-    let selectedOption = displayedOptions[initialIdx];
+    let selectedIdx = initialIdx;
     if (displayedOptions.length > 1 &&
-      selectedOption.type === 'card' &&
-      !selectedOption.cards.some((card) => card.isDisabled !== true)) {
-      selectedOption = displayedOptions[initialIdx + 1];
+      displayedOptions[initialIdx].type === 'card' &&
+      !displayedOptions[initialIdx].cards.some((card) => card.isDisabled !== true)) {
+      selectedIdx = initialIdx + 1;
     }
     return {
       displayedOptions,
+      originalIndices,
       radioElementName: 'selectOption' + unique++,
-      selectedOption,
+      selectedOption: displayedOptions[selectedIdx],
+      selectedIdx,
     };
   },
   watch: {
     selectedOption(newOption: PlayerInputModel) {
+      this.selectedIdx = this.displayedOptions.indexOf(newOption);
       // Clicking the option can shift elements on the page.
       // This preserves the location of the option button the user just clicked by
       // tracking where it was on the screen, where it moved, and then repositioning it.
-      const anchorTop = this.getTop(newOption);
+      const anchorTop = this.getSelectedOptionTop();
       this.$nextTick(() => {
-        const newTop = this.getTop(newOption);
+        const newTop = this.getSelectedOptionTop();
         if (anchorTop !== undefined && newTop !== undefined) {
           const delta = newTop - anchorTop;
           if (Math.abs(delta) > 0.5) {
@@ -112,28 +112,22 @@ export default defineComponent({
     },
   },
   methods: {
-    getTop(option: PlayerInputModel | undefined): number | undefined {
-      if (option === undefined) {
-        return undefined;
-      }
-      const element = this.getOptionLabelElement(option);
+    getSelectedOptionTop(): number | undefined {
+      const element = this.getSelectedOptionLabelElement();
       return element?.getBoundingClientRect().top;
     },
-    getOptionLabelElement(option: PlayerInputModel): HTMLElement | undefined {
-      const idx = this.displayedOptions.indexOf(option);
-      const refs = this.$refs.optionLabels;
-      if (idx === -1 || !refs) {
+    getSelectedOptionLabelElement(): HTMLElement | undefined {
+      const idx = this.selectedIdx;
+      const optionLabels = this.$refs.optionLabels as HTMLElement | HTMLElement[] | undefined;
+      if (idx === -1 || !optionLabels) {
         return undefined;
       }
 
-      const val = Array.isArray(refs) ? refs[idx] : refs;
+      const val = Array.isArray(optionLabels) ? optionLabels[idx] : optionLabels;
       return isHTMLElement(val) ? val : undefined;
     },
-    playerFactorySaved() {
-      const idx = this.playerinput.options.indexOf(this.selectedOption);
-      if (idx === undefined || idx === -1) {
-        throw new Error('option not found');
-      }
+    playerFactorySaved(displayedIdx: number) {
+      const idx = this.originalIndices[displayedIdx];
       return (out: InputResponse) => {
         this.onsave({
           type: 'or',
@@ -146,11 +140,11 @@ export default defineComponent({
       return option.type === 'card' && !(option.max === 1 && option.min === 1);
     },
     saveData() {
-      let ref = this.$refs['inputfactory'];
+      let ref = this.$refs['inputfactory'] as {saveData: () => void} | Array<{saveData: () => void}>;
       if (Array.isArray(ref)) {
         ref = ref[0];
       }
-      (ref as any).saveData();
+      ref.saveData();
     },
   },
 });

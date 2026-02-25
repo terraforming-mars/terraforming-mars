@@ -13,7 +13,7 @@ export default defineComponent({
     index: {
       type: Number,
       required: true,
-      validator: (i) => i < 4,
+      validator: (i: number) => i < 4,
     },
     type: {
       type: String,

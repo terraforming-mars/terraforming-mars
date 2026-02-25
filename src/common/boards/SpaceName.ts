@@ -1,5 +1,3 @@
-import {ValueOf} from '../utils/utils';
-
 export const SpaceName = {
   ARSIA_MONS: '29', // TODO(kberg): Remove
   ASCRAEUS_MONS: '14', // TODO(kberg): Remove
@@ -36,5 +34,3 @@ export const SpaceName = {
   // Amazonis
   MEDUSAE_FOSSAE: '33', // TODO(kberg): Remove
 } as const;
-
-export type NamedSpace = ValueOf<typeof SpaceName>;

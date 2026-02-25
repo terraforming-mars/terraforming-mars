@@ -1,11 +1,11 @@
 <template>
-  <CardRenderItemComponent v-if="isItem(componentData)" :item="componentData"/>
-  <CardRenderSymbolComponent v-else-if="isSymbol(componentData)" :item="componentData" />
-  <CardProductionBoxComponent v-else-if="isProduction(componentData)" :rows="componentData.rows" />
-  <CardRenderEffectBoxComponent v-else-if="isEffect(componentData)" :effectData="componentData" />
-  <CardRenderTileComponent v-else-if="isTile(componentData)" :item="componentData" />
+  <CardRenderItemComponent v-if="isItem(componentData)" :item="(componentData as any)"/>
+  <CardRenderSymbolComponent v-else-if="isSymbol(componentData)" :item="(componentData as any)" />
+  <CardProductionBoxComponent v-else-if="isProduction(componentData)" :rows="(componentData as any).rows" />
+  <CardRenderEffectBoxComponent v-else-if="isEffect(componentData)" :effectData="(componentData as any)" />
+  <CardRenderTileComponent v-else-if="isTile(componentData)" :item="(componentData as any)" />
   <CardDescription v-else-if="isDescription(componentData)" :item="componentData" />
-  <CardRenderCorpBoxComponent v-else-if="isCorpBox(componentData)" :rows="componentData.rows" :label="corpBoxLabel()" />
+  <CardRenderCorpBoxComponent v-else-if="isCorpBox(componentData)" :rows="(componentData as any).rows" :label="corpBoxLabel()" />
   <div v-else>n/a</div>
 </template>
 

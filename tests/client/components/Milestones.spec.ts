@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {mount} from '@vue/test-utils';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import Milestones from '@/client/components/Milestones.vue';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 import Milestone from '@/client/components/Milestone.vue';
@@ -16,8 +16,8 @@ describe('Milestones', () => {
 
   it('shows list and milestones', async () => {
     const milestone = mount(Milestones, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         milestones: [
           mockMilestone,
         ],
@@ -32,8 +32,8 @@ describe('Milestones', () => {
 
   it('milestones show details if previously set to show details', async () => {
     const milestone = mount(Milestones, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         milestones: [
           mockMilestone,
         ],
@@ -45,14 +45,14 @@ describe('Milestones', () => {
 
 
     expect(
-      milestone.findAllComponents(Milestone).wrappers.every((milestoneWrapper) => milestoneWrapper.isVisible()),
+      milestone.findAllComponents(Milestone).every((milestoneWrapper) => milestoneWrapper.isVisible()),
     ).to.be.true;
   });
 
   it('milestones hide details if previously set to hide details', async () => {
     const milestone = mount(Milestones, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         milestones: [
           mockMilestone,
         ],
@@ -63,7 +63,7 @@ describe('Milestones', () => {
     });
 
     expect(
-      milestone.findAllComponents(Milestone).wrappers.every((milestoneWrapper) => !milestoneWrapper.isVisible()),
+      milestone.findAllComponents(Milestone).every((milestoneWrapper) => !milestoneWrapper.isVisible()),
     ).to.be.true;
   });
 });

@@ -29,11 +29,9 @@ export default defineComponent({
     },
     showTimer: {
       type: Boolean,
-      required: true,
     },
     liveTimer: {
       type: Boolean,
-      required: true,
     },
   },
   components: {

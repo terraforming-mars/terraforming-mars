@@ -36,7 +36,6 @@ export default defineComponent({
     },
     bottomPadding: {
       type: String, // '', 'short', 'long'
-      required: true,
     },
   },
   components: {

@@ -27,11 +27,9 @@ export default defineComponent({
     },
     showsave: {
       type: Boolean,
-      required: true,
     },
     showtitle: {
       type: Boolean,
-      default: true,
     },
   },
   components: {

@@ -21,8 +21,7 @@ export default defineComponent({
       required: true,
     },
     type: {
-      type: String as () => 'risingPlayer' | 'everyone',
-      required: true,
+      type: String as () => 'risingPlayer' | 'everyone' | 'mostTags',
     },
     gameOptions: {
       type: Object as () => GameOptionsModel,

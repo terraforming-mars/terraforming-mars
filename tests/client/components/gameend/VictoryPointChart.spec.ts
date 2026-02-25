@@ -1,14 +1,14 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {getLocalVue} from '../getLocalVue';
+import {globalConfig} from '../getLocalVue';
 import VictoryPointChart from '@/client/components/gameend/VictoryPointChart.vue';
 
 describe('VictoryPointChart', () => {
   // VictoryPointChart uses canvas/Chart.js which JSDOM can't fully handle
   it('mounts without errors', async () => {
     const wrapper = shallowMount(VictoryPointChart, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         datasets: [],
         generation: 5,
         animation: false,

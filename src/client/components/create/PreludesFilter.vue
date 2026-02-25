@@ -75,7 +75,7 @@ export default defineComponent({
       required: true,
     },
     selected: {
-      type: Array as () => Array<CardName>,
+      type: Object as () => Array<CardName>,
       required: true,
     },
   },

@@ -1,13 +1,13 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import SelectColony from '@/client/components/SelectColony.vue';
 
 describe('SelectColony', () => {
   it('mounts without errors', () => {
     const wrapper = shallowMount(SelectColony, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         playerinput: {
           title: 'Select a colony',
           buttonLabel: 'Save',

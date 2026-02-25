@@ -34,7 +34,6 @@ export default defineComponent({
     },
     marker: {
       type: Boolean,
-      required: true,
     },
   },
   computed: {

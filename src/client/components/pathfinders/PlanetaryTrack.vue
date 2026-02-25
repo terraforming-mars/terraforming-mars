@@ -1,6 +1,6 @@
 <template>
     <tr>
-      <div class="track-icon">{{icon}}</div>
+      <td><div class="track-icon">{{icon}}</div></td>
       <td v-for="idx in range" :key="idx" :class="getClass(idx)">
         <planetary-track-rewards :type="type" v-if="idx <= rewards.spaces.length && rewards.spaces[idx] !== undefined" :rewards="rewards.spaces[idx]" :gameOptions="gameOptions" />
       </td>
@@ -21,7 +21,10 @@ export default defineComponent({
       type: Number,
       required: true,
     },
-    type: String as () => 'risingPlayer' | 'everyone' | 'mostTags',
+    type: {
+      type: String as () => 'risingPlayer' | 'everyone' | 'mostTags',
+      required: true,
+    },
     rewards: {
       type: Object as () => Track,
       required: true,

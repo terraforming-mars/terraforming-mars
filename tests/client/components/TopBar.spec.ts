@@ -1,6 +1,6 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import TopBar from '@/client/components/TopBar.vue';
 import {fakePlayerViewModel} from './testHelpers';
 import {FakeLocalStorage} from './FakeLocalStorage';
@@ -19,14 +19,14 @@ describe('TopBar', () => {
 
   it('mounts without errors', () => {
     const wrapper = shallowMount(TopBar, {
-      localVue: getLocalVue(),
+      ...globalConfig,
       parentComponent: {
         methods: {
           getVisibilityState: () => true,
           setVisibilityState: () => {},
         },
       } as any,
-      propsData: {
+      props: {
         playerView: fakePlayerViewModel(),
       },
     });

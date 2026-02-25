@@ -1,6 +1,6 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {getLocalVue} from '../getLocalVue';
+import {globalConfig} from '../getLocalVue';
 import CardRenderSymbolComponent from '@/client/components/card/CardRenderSymbolComponent.vue';
 import {CardRenderSymbolType} from '@/common/cards/render/CardRenderSymbolType';
 import {Size} from '@/common/cards/render/Size';
@@ -8,8 +8,8 @@ import {Size} from '@/common/cards/render/Size';
 describe('CardRenderSymbolComponent', () => {
   it('mounts without errors', () => {
     const wrapper = shallowMount(CardRenderSymbolComponent, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         item: {
           is: 'symbol',
           type: CardRenderSymbolType.ARROW,

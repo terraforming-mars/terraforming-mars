@@ -1,34 +1,34 @@
 import {shallowMount} from '@vue/test-utils';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import {expect} from 'chai';
 import PaymentUnit from '@/client/components/PaymentUnit.vue';
 
 describe('PaymentUnit', () => {
-  it('renders value in the input', () => {
+  it('renders modelValue in the input', () => {
     const wrapper = shallowMount(PaymentUnit, {
-      localVue: getLocalVue(),
-      propsData: {
-        value: 5,
+      ...globalConfig,
+      props: {
+        modelValue: 5,
         unit: 'megaCredits',
         description: 'MegaCredits',
       },
     });
     const input = wrapper.find('input');
-    expect((input.element as HTMLInputElement).value).to.eq('5');
+    expect(input.element.value).to.eq('5');
   });
 
-  it('emits input on input change', async () => {
+  it('emits update:modelValue on input change', async () => {
     const wrapper = shallowMount(PaymentUnit, {
-      localVue: getLocalVue(),
-      propsData: {
-        value: 0,
+      ...globalConfig,
+      props: {
+        modelValue: 0,
         unit: 'megaCredits',
         description: 'MegaCredits',
       },
     });
     const input = wrapper.find('input');
     await input.setValue('3');
-    const emitted = wrapper.emitted('input');
+    const emitted = wrapper.emitted('update:modelValue');
     expect(emitted).to.not.be.undefined;
     expect(emitted!.length).to.be.greaterThanOrEqual(1);
     expect(emitted![0][0]).to.eq('3');
@@ -36,18 +36,19 @@ describe('PaymentUnit', () => {
 
   it('plus and minus buttons emit correct events', async () => {
     const wrapper = shallowMount(PaymentUnit, {
-      localVue: getLocalVue(),
-      propsData: {
-        value: 5,
+      ...globalConfig,
+      props: {
+        modelValue: 5,
         unit: 'megaCredits',
         description: 'MegaCredits',
         showMax: true,
       },
     });
     const buttons = wrapper.findAllComponents({name: 'AppButton'});
-    const minusBtn = buttons.wrappers.find((b) => b.props('type') === 'minus');
-    const plusBtn = buttons.wrappers.find((b) => b.props('type') === 'plus');
-    const maxBtn = buttons.wrappers.find((b) => b.props('type') === 'max');
+    // Buttons are: minus, plus, max
+    const minusBtn = buttons.find((b) => b.props('type') === 'minus');
+    const plusBtn = buttons.find((b) => b.props('type') === 'plus');
+    const maxBtn = buttons.find((b) => b.props('type') === 'max');
 
     expect(minusBtn).to.not.be.undefined;
     expect(plusBtn).to.not.be.undefined;

@@ -1,11 +1,10 @@
 <template>
   <div class="wf-component wf-options">
     <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
-    <template v-for="unit in keys">
+    <template v-for="unit in keys" :key="unit">
         <payment-unit-component
           v-model.number="units[unit]"
-          v-bind:key="unit"
-          :unit="unit"
+          :unit="(unit as SpendableResource)"
           :showMax="false"
           description=""
           @plus="addValue(unit)"
@@ -25,6 +24,7 @@ import {SelectResourcesModel} from '@/common/models/PlayerInputModel';
 import {SelectResourcesResponse} from '@/common/inputs/InputResponse';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {Units} from '@/common/Units';
+import {SpendableResource} from '@/common/inputs/Spendable';
 import PaymentUnitComponent from '@/client/components/PaymentUnit.vue';
 import {sum} from '@/common/utils/utils';
 
@@ -45,11 +45,9 @@ export default defineComponent({
     },
     showsave: {
       type: Boolean,
-      required: true,
     },
     showtitle: {
       type: Boolean,
-      default: true,
     },
   },
   data() {

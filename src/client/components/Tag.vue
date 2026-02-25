@@ -16,12 +16,10 @@ export default defineComponent({
     },
     size: {
       type: String,
-      default: undefined,
+      required: true,
     },
     type: {
-      // e.g. main or secondary
       type: String,
-      default: undefined,
     },
   },
   methods: {

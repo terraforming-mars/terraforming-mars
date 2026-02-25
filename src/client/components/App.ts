@@ -1,3 +1,4 @@
+import {defineComponent} from '@/client/vue3-compat';
 import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
 import AdminHome from '@/client/components/admin/AdminHome.vue';
@@ -10,7 +11,6 @@ import Help from '@/client/components/help/Help.vue';
 import LoginHome from '@/client/components/auth/LoginHome.vue';
 import LoadGameForm from '@/client/components/LoadGameForm.vue';
 import PlayerHome from '@/client/components/PlayerHome.vue';
-import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
 import SpectatorHome from '@/client/components/SpectatorHome.vue';
 import StartScreen from '@/client/components/StartScreen.vue';
 import {$t, setTranslationContext} from '@/client/directives/i18n';
@@ -57,34 +57,40 @@ export interface MainAppData {
     login: string | undefined;
 }
 
-const data: MainAppData = {
-  screen: 'empty',
-  playerkey: 0,
-  settings: raw_settings,
-  isServerSideRequestInProgress: false,
-  componentsVisibility: {
-    'milestones': true,
-    'awards_list': true,
-    'tags_concise': false,
-    'pinned_player_0': false,
-    'pinned_player_1': false,
-    'pinned_player_2': false,
-    'pinned_player_3': false,
-    'pinned_player_4': false,
-    'turmoil_parties': false,
-  } as {[x: string]: boolean},
-  game: undefined as SimpleGameModel | undefined,
-  playerView: undefined,
-  spectator: undefined,
-  login: undefined,
-};
+// NOTE: this simplistic truncation to the last segment might cause issues if
+// this page starts supporting paths more than one level deep.
+function getLastPathSegment() {
+  // Leave only the last part of /path
+  return window.location.pathname.replace(/.*\//g, '');
+}
 
-export const mainAppSettings = {
-  'el': '#app',
-  'data': data,
-  'components': {
+export default defineComponent({
+  name: 'App',
+  data(): MainAppData {
+    return {
+      screen: 'empty',
+      playerkey: 0,
+      settings: raw_settings,
+      isServerSideRequestInProgress: false,
+      componentsVisibility: {
+        'milestones': true,
+        'awards_list': true,
+        'tags_concise': false,
+        'pinned_player_0': false,
+        'pinned_player_1': false,
+        'pinned_player_2': false,
+        'pinned_player_3': false,
+        'pinned_player_4': false,
+        'turmoil_parties': false,
+      } as {[x: string]: boolean},
+      game: undefined as SimpleGameModel | undefined,
+      playerView: undefined,
+      spectator: undefined,
+      login: undefined,
+    };
+  },
+  components: {
     // These component keys match the screen values, and their entries in index.html.
-    'player-input-factory': PlayerInputFactory,
     'start-screen': StartScreen,
     'create-game-form': CreateGameForm,
     'load-game-form': LoadGameForm,
@@ -98,7 +104,7 @@ export const mainAppSettings = {
     'admin-home': AdminHome,
     'login-home': LoginHome,
   },
-  'methods': {
+  methods: {
     showAlert(title: string, message: string, cb: () => void = () => {}): void {
       const dialogElement: HTMLElement | null = document.getElementById('alert-dialog');
       const buttonElement: HTMLElement | null = document.getElementById('alert-dialog-button');
@@ -181,7 +187,7 @@ export const mainAppSettings = {
     updatePlayer() {
       this.update(paths.PLAYER);
     },
-    updateSpectator: function() {
+    updateSpectator() {
       this.update(paths.SPECTATOR);
     },
   },
@@ -191,7 +197,7 @@ export const mainAppSettings = {
       dialogPolyfill.default.registerDialog(document.getElementById('alert-dialog'));
     }
     const currentPathname = getLastPathSegment();
-    const app = this as unknown as (MainAppData) & (typeof mainAppSettings.methods);
+    const app = this as unknown as MainAppData & {updatePlayer(): void; updateSpectator(): void};
     if (currentPathname === paths.PLAYER) {
       app.updatePlayer();
     } else if (currentPathname === paths.THE_END) {
@@ -246,11 +252,4 @@ export const mainAppSettings = {
       app.screen = 'start-screen';
     }
   },
-};
-
-// NOTE: this simplistic truncation to the last segment might cause issues if
-// this page starts supporting paths more than one level deep.
-function getLastPathSegment() {
-  // Leave only the last part of /path
-  return window.location.pathname.replace(/.*\//g, '');
-}
+});

@@ -1,13 +1,13 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import GlobalParameterValue from '@/client/components/GlobalParameterValue.vue';
 
 describe('GlobalParameterValue', () => {
   it('mounts without errors', () => {
     const wrapper = shallowMount(GlobalParameterValue, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         param: 'temperature',
         value: -30,
       },

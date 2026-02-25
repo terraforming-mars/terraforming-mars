@@ -1,13 +1,13 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import Party from '@/client/components/Party.vue';
 
 describe('Party', () => {
   it('mounts without errors', () => {
     const wrapper = shallowMount(Party, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         party: {
           name: 'Mars First',
           partyLeader: undefined,

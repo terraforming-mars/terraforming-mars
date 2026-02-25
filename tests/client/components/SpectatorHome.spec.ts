@@ -1,6 +1,6 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import SpectatorHome from '@/client/components/SpectatorHome.vue';
 import {fakeGameModel, fakePublicPlayerModel} from './testHelpers';
 import * as raw_settings from '@/genfiles/settings.json';
@@ -9,7 +9,7 @@ describe('SpectatorHome', () => {
   it('mounts without errors', () => {
     const player = fakePublicPlayerModel();
     const wrapper = shallowMount(SpectatorHome, {
-      localVue: getLocalVue(),
+      ...globalConfig,
       parentComponent: {
         methods: {
           getVisibilityState: () => true,
@@ -17,7 +17,7 @@ describe('SpectatorHome', () => {
           updateSpectator: () => {},
         },
       } as any,
-      propsData: {
+      props: {
         spectator: {
           game: fakeGameModel(),
           players: [player],

@@ -1,14 +1,14 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import SelectResource from '@/client/components/SelectResource.vue';
 import {fakePlayerViewModel} from './testHelpers';
 
 describe('SelectResource', () => {
   it('mounts without errors', () => {
     const wrapper = shallowMount(SelectResource, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         playerView: fakePlayerViewModel(),
         playerinput: {
           title: 'Select a resource type',

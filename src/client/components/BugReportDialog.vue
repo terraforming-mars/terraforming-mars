@@ -18,8 +18,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {WithRefs} from 'vue-typed-refs';
+import {defineComponent} from '@/client/vue3-compat';
 import {showModal, windowHasHTMLDialogElement} from '@/client/components/HTMLDialogElementCompatibility';
 import * as raw_settings from '@/genfiles/settings.json';
 import {vueRoot} from '@/client/components/vueRoot';
@@ -29,11 +28,6 @@ import {getPreferences} from '../utils/PreferencesManager';
 
 const dialogPolyfill = require('dialog-polyfill');
 
-type Refs = {
-  dialog: HTMLElement,
-  textarea: HTMLTextAreaElement,
-  copied: HTMLSpanElement,
-}
 
 function browser(): string {
   // Taken from https://stackoverflow.com/questions/5916900/how-can-you-detect-the-version-of-a-browser
@@ -53,7 +47,12 @@ function browser(): string {
   return match.join(' ');
 }
 
-export default (Vue as WithRefs<Refs>).extend({
+type Refs = {
+  dialog: HTMLDialogElement;
+  textarea: HTMLTextAreaElement;
+};
+
+export default defineComponent({
   name: 'BugReportDialog',
   data() {
     return {
@@ -63,7 +62,7 @@ export default (Vue as WithRefs<Refs>).extend({
   },
   computed: {
     typedRefs(): Refs {
-      return this.$refs;
+      return this.$refs as unknown as Refs;
     },
   },
   methods: {

@@ -1,6 +1,6 @@
 import {shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import LanguageIcon from '@/client/components/LanguageIcon.vue';
 import {FakeLocalStorage} from './FakeLocalStorage';
 
@@ -18,7 +18,7 @@ describe('LanguageIcon', () => {
 
   it('mounts without errors', () => {
     const wrapper = shallowMount(LanguageIcon, {
-      localVue: getLocalVue(),
+      ...globalConfig,
     });
     expect(wrapper.exists()).to.be.true;
   });

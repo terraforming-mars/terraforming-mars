@@ -19,7 +19,7 @@ import {GameId, ParticipantId} from '@/common/Types';
 type FetchStatus = {
   id: GameId;
   game: SimpleGameModel | undefined;
-  status: string;
+  status: 'loading' | 'error' | 'done';
 }
 type DataModel = {
   entries: Array<FetchStatus>,

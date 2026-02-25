@@ -1,7 +1,8 @@
-import Vue from 'vue';
+import {createApp} from 'vue';
 
 import {trimEmptyTextNodes} from '@/client/directives/TrimWhitespace';
-import {mainAppSettings} from '@/client/components/App';
+import App from '@/client/components/App';
+import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import i18nPlugin from '@/client/plugins/i18n.plugin';
 import {startOauth} from '@/client/oauth';
@@ -24,11 +25,15 @@ async function bootstrap() {
     }
   }
 
-  Vue.use(i18nPlugin);
+  const app = createApp(App);
 
-  Vue.directive('trim-whitespace', {
-    inserted: trimEmptyTextNodes,
-    componentUpdated: trimEmptyTextNodes,
+  app.use(i18nPlugin);
+
+  app.component('player-input-factory', PlayerInputFactory);
+
+  app.directive('trim-whitespace', {
+    mounted: trimEmptyTextNodes,
+    updated: trimEmptyTextNodes,
   });
 
   if (window.isSecureContext && 'serviceWorker' in navigator) {
@@ -39,10 +44,9 @@ async function bootstrap() {
     });
   }
 
-  new Vue(mainAppSettings);
+  app.mount('#app');
 
   window.onload = startOauth;
 }
 
 bootstrap();
-

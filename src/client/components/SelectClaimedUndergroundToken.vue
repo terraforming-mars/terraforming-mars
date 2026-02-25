@@ -4,7 +4,7 @@
     <div class="underground-tokens">
       <label v-for="(token, idx) in playerinput.tokens" :key="idx">
          <!-- disabled="selected.length >= playerinput.count -->
-        <input type="checkbox" :name="idx" v-model="selected" :value="idx" />
+        <input type="checkbox" :name="String(idx)" v-model="selected" :value="idx" />
         <underground-token
           :token="token"
           :key="idx"
@@ -47,11 +47,9 @@ export default defineComponent({
     },
     showsave: {
       type: Boolean,
-      required: true,
     },
     showtitle: {
       type: Boolean,
-      default: true,
     },
   },
   data(): DataModel {

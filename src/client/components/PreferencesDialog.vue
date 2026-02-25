@@ -100,24 +100,24 @@
 
       <div class="preferences_panel_actions">
         <button class="btn btn-lg btn-primary" v-on:click="okClicked" v-i18n>Ok</button>
-        <button class="btn btn-lg btn-primary" v-on:click="$refs.bugDialog.show();" v-i18n>Report a bug</button>
+        <button class="btn btn-lg btn-primary" v-on:click="showBugDialog" v-i18n>Report a bug</button>
       </div>
       <bug-report-dialog ref="bugDialog"></bug-report-dialog>
     </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {WithRefs} from 'vue-typed-refs';
+import {defineComponent} from '@/client/vue3-compat';
 
 import {getPreferences, PreferencesManager, Preference} from '@/client/utils/PreferencesManager';
 import BugReportDialog from '@/client/components/BugReportDialog.vue';
 
-type Refs = {
-  bugDialog: InstanceType<typeof BugReportDialog>,
-}
 
-export default (Vue as WithRefs<Refs>).extend({
+type Refs = {
+  bugDialog: InstanceType<typeof BugReportDialog>;
+};
+
+export default defineComponent({
   name: 'PreferencesDialog',
   props: {
     preferencesManager: {
@@ -134,6 +134,9 @@ export default (Vue as WithRefs<Refs>).extend({
     };
   },
   methods: {
+    showBugDialog() {
+      this.typedRefs.bugDialog.show();
+    },
     setBoolPreferencesCSS(
       target: HTMLElement,
       val: boolean,
@@ -171,7 +174,7 @@ export default (Vue as WithRefs<Refs>).extend({
   },
   computed: {
     typedRefs(): Refs {
-      return this.$refs;
+      return this.$refs as unknown as Refs;
     },
     getPreferences(): typeof getPreferences {
       return getPreferences;

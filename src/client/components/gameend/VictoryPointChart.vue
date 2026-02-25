@@ -58,7 +58,6 @@ export default defineComponent({
     },
     animation: {
       type: Boolean,
-      required: true,
     },
     id: {
       type: String,

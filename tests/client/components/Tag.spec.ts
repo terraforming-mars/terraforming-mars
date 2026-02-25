@@ -1,14 +1,14 @@
 
 import {mount} from '@vue/test-utils';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import {expect} from 'chai';
 import Tag from '@/client/components/Tag.vue';
 
 describe('Tag', () => {
   it('getClasses with only tag', () => {
     const tag = mount(Tag, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         tag: 'vp',
         size: 'big',
         type: 'main',

@@ -25,10 +25,9 @@
 
 <script lang="ts">
 
-import Vue from 'vue';
+import {defineComponent} from '@/client/vue3-compat';
 
 import {CardModel} from '@/common/models/CardModel';
-import {WithRefs} from 'vue-typed-refs';
 import CardTitle from './CardTitle.vue';
 import CardResourceCounter from './CardResourceCounter.vue';
 import CardCost from './CardCost.vue';
@@ -48,12 +47,13 @@ import {Color} from '@/common/Color';
 import {CardRequirementDescriptor} from '@/common/cards/CardRequirementDescriptor';
 import {GameModule} from '@/common/cards/GameModule';
 
-type Refs = {
-  container: HTMLElement,
-  content: Vue,
-}
 
-export default (Vue as WithRefs<Refs>).extend({
+type Refs = {
+  container: HTMLElement;
+  content: {$el: HTMLElement};
+};
+
+export default defineComponent({
   name: 'Card',
   components: {
     CardTitle,
@@ -199,14 +199,14 @@ export default (Vue as WithRefs<Refs>).extend({
     hasHelp(): boolean {
       return this.hovering && this.cardInstance.metadata.hasExternalHelp === true;
     },
+    typedRefs(): Refs {
+      return this.$refs as unknown as Refs;
+    },
     showPlayerCube(): boolean {
       return getPreferences().experimental_ui && this.actionUsed;
     },
     playerCubeClass(): string {
       return `board-cube board-cube--${this.cubeColor}`;
-    },
-    typedRefs(): Refs {
-      return this.$refs;
     },
   },
   methods: {
@@ -216,13 +216,13 @@ export default (Vue as WithRefs<Refs>).extend({
       }
       // Was not initialized with a custom height, probably because it was not visible.
       if (this.customHeight === 0) {
-        this.customHeight = this.typedRefs.content.$el.scrollHeight;
+        this.customHeight = (this.typedRefs.content.$el).scrollHeight;
         // If for some reason it still doesn't have a custom height, don't resize it.
         if (this.customHeight === 0) {
           return;
         }
       }
-      const content = this.typedRefs.content.$el as HTMLElement;
+      const content = this.typedRefs.content.$el;
       if (content.scrollHeight <= 236) {
         return;
       }
@@ -236,13 +236,13 @@ export default (Vue as WithRefs<Refs>).extend({
       if (this.customHeight === 0) {
         return;
       }
-      const content = this.typedRefs.content.$el as HTMLElement;
+      const content = this.typedRefs.content.$el;
       this.typedRefs.container.style.removeProperty('height');
       content.style.removeProperty('height');
     },
   },
   mounted() {
-    this.customHeight = this.typedRefs.content.$el.scrollHeight;
+    this.customHeight = (this.typedRefs.content.$el).scrollHeight;
   },
   beforeUpdate() {
     if (this.autoTall === true) {

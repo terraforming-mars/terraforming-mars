@@ -33,7 +33,6 @@ const googleRules = {
   'key-spacing': 'error',
   'semi-spacing': 'error',
   'no-tabs': 'error',
-  'no-array-constructor': 'error',
   'no-new-object': 'error',
   'one-var': ['error', 'never'],
   'operator-linebreak': ['error', 'after'],
@@ -54,20 +53,17 @@ const projectRules = {
   'no-var': 'error',
   'prefer-const': 'error',
   'indent': ['error', 2],
-  'require-jsdoc': 'off',
-  'no-throw-literal': 'error',
   'no-extra-semi': 'error',
 
   // Disabled entries from eslint:recommended
-  'no-inner-declarations': 'off',
   'no-case-declarations': 'off',
   'no-redeclare': 'off',
   'no-prototype-builtins': 'off',
-  'valid-jsdoc': 'off',
 };
 
 // TypeScript and Vue rules
 const pluginRules = {
+  'no-throw-literal': 'error',
   '@typescript-eslint/prefer-for-of': 'error',
   '@typescript-eslint/no-non-null-assertion': 'error',
   'vue/multi-word-component-names': ['error', {
@@ -93,32 +89,50 @@ const pluginRules = {
   'vue/no-reserved-component-names': 'warn',
 };
 
+const sharedLanguageOptions = {
+  ecmaVersion: 2018,
+  sourceType: 'module',
+  globals: {
+    ...globals.browser,
+    ...globals.node,
+  },
+};
+
+const sharedConfig = {
+  plugins: {
+    '@typescript-eslint': tsPlugin,
+    'vue': vuePlugin,
+  },
+  rules: {
+    ...js.configs.recommended.rules,
+    ...googleRules,
+    ...projectRules,
+    ...pluginRules,
+  },
+};
+
 export default [
-  // Global defaults for all .ts and .vue files in src/ and tests/
+  // TypeScript files
   {
-    files: ['src/**/*.ts', 'src/**/*.vue', 'tests/**/*.ts'],
+    files: ['src/**/*.ts', 'tests/**/*.ts'],
     languageOptions: {
-      ecmaVersion: 2018,
-      sourceType: 'module',
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-      },
+      ...sharedLanguageOptions,
+      parser: tsParser,
+    },
+    ...sharedConfig,
+  },
+
+  // Vue files
+  {
+    files: ['src/**/*.vue'],
+    languageOptions: {
+      ...sharedLanguageOptions,
       parser: vueParser,
       parserOptions: {
         parser: tsParser,
       },
     },
-    plugins: {
-      '@typescript-eslint': tsPlugin,
-      'vue': vuePlugin,
-    },
-    rules: {
-      ...js.configs.recommended.rules,
-      ...googleRules,
-      ...projectRules,
-      ...pluginRules,
-    },
+    ...sharedConfig,
   },
 
   // src/ override

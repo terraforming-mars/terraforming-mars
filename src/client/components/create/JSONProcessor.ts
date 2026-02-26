@@ -118,11 +118,11 @@ export class JSONProcessor {
       if (ignoredFields.includes(k)) {
         continue;
       }
-      if (!Object.prototype.hasOwnProperty.call(this.model, k)) {
-        this.warnings.push('Unknown property: ' + k);
-      } else {
-        // This is safe because of the hasOwnProperty check, above. hasOwnProperty doesn't help with type declarations.
+      if (k in this.model) {
+        // This is safe because of the in check, above.
         (this.model as any)[k] = json[k];
+      } else {
+        this.warnings.push('Unknown property: ' + k);
       }
     }
 

@@ -45,10 +45,9 @@
           <button id="toggle-checkbox" v-on:click="invertExpansions()">-</button>
 
           <span v-for="expansion in allModules" :key="expansion">
-            <input type="checkbox" :name="expansion" :id="`${expansion}-checkbox`" v-model="expansions[expansion]">
-            <label :for="`${expansion}-checkbox`" class="expansion-button">
+            <toggle-button :name="expansion" v-model="expansions[expansion]">
               <div class='expansion-icon' :class="expansionIconClass(expansion)"></div>
-            </label>
+            </toggle-button>
           </span>
         </div>
 
@@ -59,12 +58,11 @@
           </button>
 
           <span v-for="type in allTypes" :key="type">
-            <input type="checkbox" :name="`${type}-cardType`" :id="`${type}-cardType-checkbox`" v-model="types[type]">
-            <label :for="`${type}-cardType-checkbox`" class="expansion-button">
+            <toggle-button :name="`${type}-cardType`" v-model="types[type]">
                 <span v-if="type === 'colonyTiles'" v-i18n>Colony Tiles</span>
                 <span v-else-if="type === 'globalEvents'" v-i18n>Global Events</span>
                 <span v-else v-i18n>{{type}}</span>
-            </label>
+            </toggle-button>
           </span>
         </div>
 
@@ -73,13 +71,20 @@
           <button id="toggle-checkbox" v-on:click="invertTags()">
               <span v-i18n>-</span>
           </button>
+          <!-- Explicit :id overrides are required here and in the resources row below.
+               Both rows use the same :name pattern as the types row above
+               (${x}-cardType), so without an override the computed default id
+               would collide with the types row for any matching name (e.g. "event"). -->
           <span v-for="tag in allTags" :key="tag">
-            <input v-if="tag === 'event'" type="checkbox" :name="`${tag}-cardType`" :id="`${tag}-tag-checkbox`" v-model="types.event">
-            <input v-else type="checkbox" :name="`${tag}-cardType`" :id="`${tag}-tag-checkbox`" v-model="tags[tag]">
-            <label :for="`${tag}-tag-checkbox`" class="expansion-button">
+            <toggle-button
+              :name="`${tag}-cardType`"
+              :id="`${tag}-tag-checkbox`"
+              :modelValue="tag === 'event' ? types.event : tags[tag]"
+              @update:modelValue="(val) => tag === 'event' ? types.event = val : tags[tag] = val"
+            >
               <!-- a terrible hack, using expansion-icon because card-tag isn't enough to show the tag.-->
               <div :class="`expansion-icon card-tag tag-${tag}`"></div>
-            </label>
+            </toggle-button>
           </span>
         </div>
 
@@ -89,12 +94,11 @@
               <span v-i18n>-</span>
           </button>
           <span v-for="resource in allResources" :key="resource">
-            <input type="checkbox" :name="`${resource}-cardType`" :id="`${resource}-resource-checkbox`" v-model="resources[resource]">
-            <label :for="`${resource}-resource-checkbox`" class="expansion-button">
+            <toggle-button :name="`${resource}-cardType`" :id="`${resource}-resource-checkbox`" v-model="resources[resource]">
               <!-- a terrible hack, using expansion-icon because card-resource isn't enough to show the resource.-->
               <div v-if="resource !== 'none'" class="expansion-icon card-resource" :class="cardResourceCSS[resource]"></div>
               <div v-else class="expansion-icon card-tag tag-none"></div>
-            </label>
+            </toggle-button>
           </span>
         </div>
 
@@ -238,6 +242,7 @@ import TurmoilAgenda from '@/client/components/turmoil/TurmoilAgenda.vue';
 import {CardResource} from '@/common/CardResource';
 import {cardResourceCSS} from '../common/cardResources';
 import {APP_NAME} from '@/common/constants';
+import ToggleButton from '@/client/components/common/ToggleButton.vue';
 
 
 type Refs = {
@@ -248,6 +253,7 @@ export default defineComponent({
   name: 'card-list',
   components: {
     Card,
+    ToggleButton,
     GlobalEvent,
     Colony,
     Milestone,

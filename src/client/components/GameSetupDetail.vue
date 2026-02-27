@@ -72,6 +72,7 @@
               <div v-if="gameOptions.undoOption" class="game-config undo" v-i18n>undo</div>
             </li>
             <li v-if="gameOptions.twoCorpsVariant"><div class="setup-item" v-i18n>Merger</div></li>
+            <li v-if="gameOptions.doubleDownVariant"><div class="setup-item" v-i18n>Double Down</div></li>
             <li v-if="gameOptions.bannedCards.length > 0"><div class="setup-item" v-i18n>Banned cards:</div>{{ gameOptions.bannedCards.join(', ') }}</li>
           </ul>
         </div>

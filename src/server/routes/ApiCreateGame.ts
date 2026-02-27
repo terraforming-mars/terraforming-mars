@@ -160,6 +160,7 @@ export class ApiCreateGame extends Handler {
             starWarsExpansion: gameReq.expansions.starwars,
             turmoilExtension: gameReq.expansions.turmoil,
             twoCorpsVariant: gameReq.twoCorpsVariant,
+            doubleDownVariant: gameReq.doubleDownVariant,
             underworldExpansion: gameReq.expansions.underworld,
             undoOption: gameReq.undoOption,
             venusNextExtension: gameReq.expansions.venus,

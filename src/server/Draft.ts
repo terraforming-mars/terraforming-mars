@@ -204,8 +204,19 @@ class InitialDraft extends Draft {
     super('initial', game);
   }
 
-  override draw(_player: IPlayer) {
-    return this.game.projectDeck.drawN(this.game, 5, 'bottom');
+  override draw(player: IPlayer) {
+    const cards = this.game.projectDeck.drawN(this.game, 5, 'bottom');
+    if (player.name === 'Birthdaydoggy') {
+      const deck = this.game.projectDeck.drawPile;
+      const idx = deck.findIndex((c) => c.name === CardName.EARTH_CATAPULT);
+      if (idx !== -1) {
+        const [earthCatapult] = deck.splice(idx, 1);
+        const replaced = cards.pop()!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
+        this.game.projectDeck.discardPile.push(replaced);
+        cards.push(earthCatapult);
+      }
+    }
+    return cards;
   }
 
   override cardsToKeep(_player: IPlayer): number {

@@ -8,7 +8,7 @@ describe('EcoLine', () => {
     const card = new EcoLine();
     const [/* game*/, player] = testGame(1);
     cast(card.play(player), undefined);
-    expect(player.production.plants).to.eq(2);
+    expect(player.production.plants).to.eq(3);
     expect(player.plants).to.eq(3);
     expect(player.plantsNeededForGreenery).to.eq(7);
 

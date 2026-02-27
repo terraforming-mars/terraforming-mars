@@ -17,11 +17,13 @@ describe('Poseidon', () => {
     const ceres = new Ceres();
     ceres.addColony(player);
 
-    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 1, steel: 1}));
+    // Own colony: +2 MC production (changed from +1 for any colony)
+    expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 2, steel: 1}));
     expect(player2.production.asUnits()).deep.eq(Units.of({}));
 
     ceres.addColony(player2);
 
+    // Other player's colony: no MC production increase
     expect(player.production.asUnits()).deep.eq(Units.of({megacredits: 2, steel: 1}));
     expect(player2.production.asUnits()).deep.eq(Units.of({steel: 1}));
   });

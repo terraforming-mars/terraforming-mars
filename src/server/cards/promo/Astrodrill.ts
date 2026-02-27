@@ -19,19 +19,19 @@ export class Astrodrill extends CorporationCard implements ICorporationCard, IAc
     super({
       name: CardName.ASTRODRILL,
       tags: [Tag.SPACE],
-      startingMegaCredits: 35,
+      startingMegaCredits: 40,
       resourceType: CardResource.ASTEROID,
 
       behavior: {
-        addResources: 3,
+        addResources: 4,
       },
 
       metadata: {
         cardNumber: 'R21',
-        description: 'You start with 35 M€ and 3 asteroid resources.',
+        description: 'You start with 40 M€ and 4 asteroid resources.',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.megacredits(35).nbsp.resource(CardResource.ASTEROID, {amount: 3, digit});
+          b.megacredits(40).nbsp.resource(CardResource.ASTEROID, {amount: 4, digit});
           b.corpBox('action', (ce) => {
             ce.vSpace(Size.LARGE);
             ce.action(undefined, (eb) => {

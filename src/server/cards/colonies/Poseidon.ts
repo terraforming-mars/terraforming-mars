@@ -1,7 +1,6 @@
 import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {all} from '../Options';
 import {IPlayer} from '../../IPlayer';
 import {Resource} from '../../../common/Resource';
 import {ICorporationCard} from '../corporation/ICorporationCard';
@@ -10,7 +9,7 @@ export class Poseidon extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
       name: CardName.POSEIDON,
-      startingMegaCredits: 45,
+      startingMegaCredits: 40,
 
       firstAction: {
         text: 'Place a colony',
@@ -19,13 +18,13 @@ export class Poseidon extends CorporationCard implements ICorporationCard {
       },
       metadata: {
         cardNumber: 'R02',
-        description: 'You start with 45 M€. As your first action, place a colony.',
+        description: 'You start with 40 M€. As your first action, place a colony and become a Miepdoggy',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
-          b.megacredits(45).nbsp.colonies(1);
+          b.megacredits(40).nbsp.colonies(1);
           b.corpBox('effect', (ce) => {
-            ce.effect('When any colony is placed, including this, raise your M€ production 1 step.', (eb) => {
-              eb.colonies(1, {all}).startEffect.production((pb) => pb.megacredits(1));
+            ce.effect('When you place a colony, including this, raise your M€ production 2 steps.', (eb) => {
+              eb.colonies(1).startEffect.production((pb) => pb.megacredits(2));
             });
           });
         }),
@@ -33,7 +32,9 @@ export class Poseidon extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public onColonyAddedByAnyPlayer(cardOwner: IPlayer) {
-    cardOwner.production.add(Resource.MEGACREDITS, 1, {log: true});
+  public onColonyAddedByAnyPlayer(cardOwner: IPlayer, colonyOwner: IPlayer) {
+    if (cardOwner === colonyOwner) {
+      cardOwner.production.add(Resource.MEGACREDITS, 2, {log: true});
+    }
   }
 }

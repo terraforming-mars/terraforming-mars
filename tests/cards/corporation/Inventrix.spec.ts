@@ -18,7 +18,7 @@ describe('Inventrix', () => {
 
   it('Should play', () => {
     card.play(player);
-    expect(card.getGlobalParameterRequirementBonus(player, GlobalParameter.OCEANS)).to.eq(2);
+    expect(card.getGlobalParameterRequirementBonus(player, GlobalParameter.OCEANS)).to.eq(3);
   });
 
   it('Should take initial action', () => {

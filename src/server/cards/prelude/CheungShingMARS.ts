@@ -3,6 +3,9 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {ICorporationCard} from '../corporation/ICorporationCard';
+import {Resource} from '../../../common/Resource';
+import {ICard} from '../ICard';
+import {IPlayer} from '../../IPlayer';
 
 export class CheungShingMARS extends CorporationCard implements ICorporationCard {
   constructor() {
@@ -23,12 +26,18 @@ export class CheungShingMARS extends CorporationCard implements ICorporationCard
           b.br.br;
           b.production((pb) => pb.megacredits(3)).nbsp.megacredits(44);
           b.corpBox('effect', (ce) => {
-            ce.effect('When you play a building tag, you pay 2 M€ less for it.', (eb) => {
-              eb.tag(Tag.BUILDING).startEffect.megacredits(-2);
+            ce.effect('When you play a building tag, including this, you gain 3 M€.', (eb) => {
+              eb.tag(Tag.BUILDING).startEffect.megacredits(3);
             });
           });
         }),
       },
     });
   }
+
+  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+      if (card.tags.includes(Tag.BUILDING)) {
+        player.stock.add(Resource.MEGACREDITS, 3, {log: true, from: {card: this}});
+      }
+    }
 }

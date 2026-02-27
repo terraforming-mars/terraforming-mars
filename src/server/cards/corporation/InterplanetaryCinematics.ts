@@ -14,21 +14,21 @@ export class InterplanetaryCinematics extends CorporationCard implements ICorpor
     super({
       name: CardName.INTERPLANETARY_CINEMATICS,
       tags: [Tag.BUILDING],
-      startingMegaCredits: 30,
+      startingMegaCredits: 42,
 
       behavior: {
-        stock: {steel: 20},
+        stock: {steel: 12},
       },
 
       metadata: {
         cardNumber: 'R19',
-        description: 'You start with 20 steel and 30 M€.',
+        description: 'You start with 12 steel and 42 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br.br.br;
-          b.megacredits(30).nbsp.steel(20, {digit});
+          b.megacredits(42).nbsp.steel(12, {digit});
           b.corpBox('effect', (ce) => {
-            ce.effect('Each time you play an event, you gain 2 M€.', (eb) => {
-              eb.tag(Tag.EVENT).startEffect.megacredits(2);
+            ce.effect('Each time you play an event, you gain 3 M€.', (eb) => {
+              eb.tag(Tag.EVENT).startEffect.megacredits(3);
             });
           });
         }),
@@ -37,7 +37,7 @@ export class InterplanetaryCinematics extends CorporationCard implements ICorpor
   }
   public onCardPlayedForCorps(player: IPlayer, card: ICard) {
     if (card.type === CardType.EVENT) {
-      player.stock.add(Resource.MEGACREDITS, 2, {log: true, from: {card: this}});
+      player.stock.add(Resource.MEGACREDITS, 3, {log: true, from: {card: this}});
     }
   }
 }

@@ -20,6 +20,13 @@ describe('RobinsonIndustries', () => {
     player.playedCards.push(card);
   });
 
+  it('Should play and give MC production', () => {
+    const newCard = new RobinsonIndustries();
+    const [/* g */, p] = testGame(1);
+    newCard.play(p);
+    expect(p.production.megacredits).to.eq(2);
+  });
+
   it('Can not act', () => {
     player.megaCredits = 3;
     expect(card.canAct(player)).is.not.true;

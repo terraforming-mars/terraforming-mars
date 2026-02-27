@@ -32,7 +32,7 @@ describe('UnitedNationsMarsInitiative', () => {
 
   it('Should act', () => {
     player.increaseTerraformRating();
-    player.megaCredits = 3;
+    player.megaCredits = 1;
     expect(card.canAct(player)).is.true;
 
     card.action(player);
@@ -48,7 +48,7 @@ describe('UnitedNationsMarsInitiative', () => {
 
     player.increaseTerraformRating();
     expect(player.terraformRating).to.eq(21);
-    player.megaCredits = 2;
+    player.megaCredits = 0;
     expect(card.canAct(player)).is.false;
     player.heat = 1;
     expect(card.canAct(player)).is.true;
@@ -57,9 +57,9 @@ describe('UnitedNationsMarsInitiative', () => {
     player.heat = 5;
 
     const selectPayment = cast(churn(card.action(player), player), SelectPayment);
-    selectPayment.cb({...Payment.EMPTY, megaCredits: 1, heat: 2});
+    selectPayment.cb({...Payment.EMPTY, megaCredits: 0, heat: 1});
     expect(player.terraformRating).to.eq(22);
-    expect(player.megaCredits).to.eq(1);
-    expect(player.heat).to.eq(3);
+    expect(player.megaCredits).to.eq(0);
+    expect(player.heat).to.eq(4);
   });
 });

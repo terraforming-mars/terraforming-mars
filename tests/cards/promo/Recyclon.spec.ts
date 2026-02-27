@@ -10,7 +10,7 @@ describe('Recyclon', () => {
     player.playCorporationCard(card);
     runAllActions(game);
 
-    expect(player.production.steel).to.eq(1);
+    expect(player.production.steel).to.eq(2);
     expect(card.resourceCount).to.eq(1);
   });
 });

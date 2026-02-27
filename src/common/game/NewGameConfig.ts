@@ -78,6 +78,7 @@ export interface NewGameConfig {
   altVenusBoard: boolean;
   escapeVelocity: EscapeVelocityOptions | undefined;
   twoCorpsVariant: boolean;
+  doubleDownVariant: boolean;
   customCeos: Array<CardName>;
   startingCeos: number;
   startingPreludes: number;

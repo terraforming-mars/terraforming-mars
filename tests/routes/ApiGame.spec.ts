@@ -92,6 +92,7 @@ describe('ApiGame', () => {
           'solarPhaseOption': false,
           'soloTR': false,
           'twoCorpsVariant': false,
+          'doubleDownVariant': false,
           'undoOption': false,
         },
       },

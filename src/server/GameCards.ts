@@ -103,6 +103,12 @@ export class GameCards {
       // remove it from the deck to avoid possible conflicts (e.g. Valley Trust / New Partner)
       preludes = preludes.filter((c) => c.name !== CardName.MERGER);
     }
+
+    if (this.gameOptions.doubleDownVariant) {
+      // As each player is dealt Double Down in SelectInitialCards.ts,
+      // remove it from the deck to avoid possible conflicts
+      preludes = preludes.filter((c) => c.name !== CardName.DOUBLE_DOWN);
+    }
     return preludes;
   }
 

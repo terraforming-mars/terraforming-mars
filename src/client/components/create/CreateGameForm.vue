@@ -275,6 +275,12 @@
                                     <div class="create-game-expansion-icon expansion-icon-prelude"></div>
                                     <span v-i18n>Merger</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#Merger" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
                               </label>
+
+                              <input type="checkbox" v-model="doubleDownVariant" id="doubleDown-checkbox">
+                              <label for="doubleDown-checkbox" title="Always gain the Double Down Prelude card (will be given post-draft)">
+                                    <div class="create-game-expansion-icon expansion-icon-prelude"></div>
+                                    <span v-i18n>Double Down</span>
+                              </label>
                             </template>
 
                             <input type="checkbox" v-model="shuffleMapOption" id="shuffleMap-checkbox">
@@ -943,6 +949,7 @@ export default defineComponent({
       const randomFirstPlayer = this.randomFirstPlayer;
       const requiresVenusTrackCompletion = this.requiresVenusTrackCompletion;
       const twoCorpsVariant = this.twoCorpsVariant;
+      const doubleDownVariant = this.doubleDownVariant;
       const customCeos = this.customCeos;
       const startingCeos = this.startingCeos;
       const startingPreludes = this.startingPreludes;
@@ -1156,6 +1163,7 @@ export default defineComponent({
             penaltyVPPerPeriod: this.escapeVelocityPenalty,
           } : undefined,
         twoCorpsVariant,
+        doubleDownVariant,
         customCeos,
         startingCeos,
         startingPreludes,

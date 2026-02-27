@@ -3,6 +3,7 @@ import {ICorporationCard} from '../cards/corporation/ICorporationCard';
 import {IPlayer} from '../IPlayer';
 import {SelectCard} from './SelectCard';
 import {Merger} from '../cards/promo/Merger';
+import {DoubleDown} from '../cards/promo/DoubleDown';
 import {CardName} from '../../common/cards/CardName';
 import {SelectInitialCardsModel} from '../../common/models/PlayerInputModel';
 import {InputError} from './InputError';
@@ -52,6 +53,11 @@ export class SelectInitialCards extends OptionsInput<undefined> {
     // Give each player Merger in this variant
     if (game.gameOptions.twoCorpsVariant) {
       player.dealtPreludeCards.push(new Merger());
+    }
+
+    // Give each player Double Down in this variant
+    if (game.gameOptions.doubleDownVariant) {
+      player.dealtPreludeCards.push(new DoubleDown());
     }
 
     if (game.gameOptions.preludeExtension) {

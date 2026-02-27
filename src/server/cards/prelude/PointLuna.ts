@@ -26,7 +26,7 @@ export class PointLuna extends CorporationCard implements ICorporationCard {
           b.production((pb) => pb.titanium(1)).nbsp.megacredits(48);
           b.corpBox('effect', (ce) => {
             ce.effect('When you play an Earth tag, including this, draw a card then discard a card.', (eb) => {
-              eb.tag(Tag.EARTH).startEffect.cards(1);
+              eb.tag(Tag.EARTH).startEffect.plus().cards(1).nbsp.minus().cards(1);
             });
           });
         }),

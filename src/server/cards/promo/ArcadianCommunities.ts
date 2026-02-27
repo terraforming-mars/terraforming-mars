@@ -13,19 +13,20 @@ export class ArcadianCommunities extends CorporationCard implements ICorporation
   constructor() {
     super({
       name: CardName.ARCADIAN_COMMUNITIES,
-      startingMegaCredits: 40,
+      startingMegaCredits: 42,
       initialActionText: 'Place a community (player marker) on a non-reserved area',
 
       behavior: {
         stock: {steel: 10},
+        production: {megacredits: 1},
       },
 
       metadata: {
         cardNumber: 'R44',
-        description: 'You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.',
+        description: 'You start with 42 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.megacredits(40).nbsp.steel(10, {digit}).nbsp.community().asterix();
+          b.production((pb) => pb.megacredits(1)).nbsp.megacredits(42).nbsp.steel(10, {digit}).nbsp.community().asterix();
           b.corpBox('action', (ce) => {
             ce.text('ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS.', Size.TINY, true);
             ce.vSpace(Size.MEDIUM);

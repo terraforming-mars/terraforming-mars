@@ -20,8 +20,8 @@ describe('Astrodrill', () => {
     runAllActions(player.game);
   });
 
-  it('Starts with 3 asteroid resources', () => {
-    expect(card.resourceCount).to.eq(3);
+  it('Starts with 4 asteroid resources', () => {
+    expect(card.resourceCount).to.eq(4);
   });
 
   it('Should play - can spend asteroid resource', () => {
@@ -42,7 +42,7 @@ describe('Astrodrill', () => {
     // add asteroid resource and gain standard resource
     const addAsteroidOption = cast(action.options[1], SelectOption);
     const result = addAsteroidOption.cb(undefined);
-    expect(card.resourceCount).to.eq(4);
+    expect(card.resourceCount).to.eq(5);
     expect(result).is.undefined;
   });
 

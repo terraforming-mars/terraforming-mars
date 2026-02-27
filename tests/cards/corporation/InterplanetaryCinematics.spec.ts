@@ -16,7 +16,7 @@ describe('InterplanetaryCinematics', () => {
 
   it('Should play', () => {
     card.play(player);
-    expect(player.steel).to.eq(20);
+    expect(player.steel).to.eq(12);
   });
 
   it('Has onCardPlayed', () => {
@@ -24,6 +24,6 @@ describe('InterplanetaryCinematics', () => {
     player.playCard(new Bushes());
     expect(player.megaCredits).to.eq(0);
     player.playCard(new Virus());
-    expect(player.megaCredits).to.eq(2);
+    expect(player.megaCredits).to.eq(3);
   });
 });

@@ -38,6 +38,7 @@ describe('ArcadianCommunities', () => {
   it('play', () => {
     cast(card.play(player), undefined);
     expect(player.steel).to.eq(10);
+    expect(player.production.megacredits).to.eq(1);
   });
 
   it('action + effect', () => {

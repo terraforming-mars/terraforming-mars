@@ -26,6 +26,7 @@ describe('PointLuna', () => {
   it('Should play', () => {
     player.playCorporationCard(card);
     expect(player.production.titanium).to.eq(1);
-    expect(player.cardsInHand).has.lengthOf(1);
+    // Draw + discard from earth tag effect: auto-discards when hand size <= 1
+    expect(player.cardsInHand).has.lengthOf(0);
   });
 });

@@ -11,7 +11,7 @@ export class MorningStarInc extends CorporationCard implements ICorporationCard 
       name: CardName.MORNING_STAR_INC,
       tags: [Tag.VENUS],
       startingMegaCredits: 50,
-      globalParameterRequirementBonus: {steps: 2, parameter: GlobalParameter.VENUS},
+      globalParameterRequirementBonus: {steps: 3, parameter: GlobalParameter.VENUS},
 
       firstAction: {
         text: 'Draw 3 cards with a Venus tag',
@@ -24,8 +24,8 @@ export class MorningStarInc extends CorporationCard implements ICorporationCard 
         renderData: CardRenderer.builder((b) => {
           b.megacredits(50).nbsp.cards(3, {secondaryTag: Tag.VENUS});
           b.corpBox('effect', (ce) => {
-            ce.effect('Your Venus requirements are +/- 2 steps, your choice in each case.', (eb) => {
-              eb.plate('Venus requirements').startEffect.text('+/- 2');
+            ce.effect('Your Venus requirements are +/- 3 steps, your choice in each case.', (eb) => {
+              eb.plate('Venus requirements').startEffect.text('+/- 3');
             });
           });
         }),

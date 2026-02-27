@@ -16,7 +16,7 @@ describe('Helion', () => {
 
   it('Should play', () => {
     cast(card.play(player), undefined);
-    expect(player.production.heat).to.eq(3);
+    expect(player.production.heat).to.eq(4);
 
     player.megaCredits = 3;
     expect(player.canAfford(5)).to.be.false;

@@ -4,6 +4,7 @@ import {BuildingIndustries} from '../../../src/server/cards/base/BuildingIndustr
 import {CheungShingMARS} from '../../../src/server/cards/prelude/CheungShingMARS';
 import {TestPlayer} from '../../TestPlayer';
 import {testGame} from '../../TestingUtils';
+import {Virus} from '../../../src/server/cards/base/Virus';
 
 describe('CheungShingMARS', () => {
   let card: CheungShingMARS;
@@ -24,5 +25,21 @@ describe('CheungShingMARS', () => {
   it('Should play', () => {
     card.play(player);
     expect(player.production.megacredits).to.eq(3);
+  });
+
+  it('Gains 3 MC when playing a building tag', () => {
+    player.playedCards.push(card);
+    player.megaCredits = 0;
+
+    card.onCardPlayedForCorps(player, new BuildingIndustries());
+    expect(player.megaCredits).to.eq(3);
+  });
+
+  it('Does not gain MC for non-building tags', () => {
+    player.playedCards.push(card);
+    player.megaCredits = 0;
+
+    card.onCardPlayedForCorps(player, new Virus());
+    expect(player.megaCredits).to.eq(0);
   });
 });

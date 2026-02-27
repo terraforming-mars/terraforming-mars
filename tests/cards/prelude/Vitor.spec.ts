@@ -42,18 +42,18 @@ describe('Vitor', () => {
 
     // Dust Seals has victory points
     card.onCardPlayedForCorps(player, new DustSeals());
-    expect(player.megaCredits).to.eq(3);
+    expect(player.megaCredits).to.eq(2);
 
     // Lava flows has none
     card.onCardPlayedForCorps(player, new LavaFlows());
-    expect(player.megaCredits).to.eq(3);
+    expect(player.megaCredits).to.eq(2);
 
     // Ants has dynamic victory points
     card.onCardPlayedForCorps(player, new Ants());
-    expect(player.megaCredits).to.eq(6);
+    expect(player.megaCredits).to.eq(4);
 
     // This card has negative dynamic victory points
     card.onCardPlayedForCorps(player, new AncientShipyards());
-    expect(player.megaCredits).to.eq(6);
+    expect(player.megaCredits).to.eq(4);
   });
 });

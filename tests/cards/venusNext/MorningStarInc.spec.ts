@@ -14,7 +14,7 @@ describe('MorningStarInc', () => {
     player.playedCards.push(corp);
 
     setVenusScaleLevel(game, 2);
-    expect(min8Card.canPlay(player)).is.false;
+    expect(min8Card.canPlay(player)).is.true;
     expect(max10Card.canPlay(player)).is.true;
 
     setVenusScaleLevel(game, 4);
@@ -42,6 +42,10 @@ describe('MorningStarInc', () => {
     expect(max10Card.canPlay(player)).is.true;
 
     setVenusScaleLevel(game, 16);
+    expect(min8Card.canPlay(player)).is.true;
+    expect(max10Card.canPlay(player)).is.true;
+
+    setVenusScaleLevel(game, 18);
     expect(min8Card.canPlay(player)).is.true;
     expect(max10Card.canPlay(player)).is.false;
   });

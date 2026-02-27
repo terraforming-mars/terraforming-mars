@@ -34,7 +34,7 @@ export class Thorgate extends CorporationCard implements ICorporationCard {
 
           b.corpBox('action', (cb) => {
             cb.action('Decrease your energy production 1 step to gain 6 M€.', (ab) => {
-              ab.startAction.text('x').energy(-1).equals().megacredits(6, {text: 'x'});
+              ab.production((pb) => pb.energy(-1)).nbsp.megacredits(6).asterix();
             });
           });
         }),

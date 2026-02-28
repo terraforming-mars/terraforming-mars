@@ -99,7 +99,7 @@ export class Counter {
           sum += player.tags.cardTagCount(card, tag);
         }
       } else { // Single tag
-        if (countable.others !== true) { // Just count player's own tags.
+        if (countable.others !== true && countable.othersMax !== true) { // Just count player's own tags.
           sum += player.tags.count(tag, context === 'vps' ? 'raw' : context);
 
           if (this.cardIsUnplayed) { // And include the card itself if it isn't already on the tableau.
@@ -111,6 +111,12 @@ export class Counter {
         if (countable.all === true || countable.others === true) {
           player.opponents
             .forEach((p) => sum += p.tags.count(tag, 'raw'));
+        }
+
+        // When counting only the opponent with the most tags.
+        if (countable.othersMax === true) {
+          const max = Math.max(0, ...player.opponents.map((p) => p.tags.count(tag, 'raw')));
+          sum += max;
         }
       }
     }

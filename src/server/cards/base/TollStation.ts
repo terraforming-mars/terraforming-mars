@@ -15,7 +15,7 @@ export class TollStation extends Card implements IProjectCard {
       cost: 12,
 
       behavior: {
-        production: {megacredits: {tag: Tag.SPACE, others: true}},
+        production: {megacredits: {tag: Tag.SPACE, othersMax: true}},
       },
 
       metadata: {
@@ -25,7 +25,7 @@ export class TollStation extends Card implements IProjectCard {
             pb.megacredits(1).slash().tag(Tag.SPACE, {all}).asterix();
           });
         }),
-        description: 'Increase your M€ production 1 step for each space tag your OPPONENTS have.',
+        description: 'Increase your M€ production 1 step for each space tag your opponents with the most tags has.',
       },
     });
   }

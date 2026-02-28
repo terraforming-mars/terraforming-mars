@@ -50,6 +50,10 @@ export type _Countable = {
    */
   others?: true;
   /**
+   * When counting tags, this counts only the tags of the opponent with the most of that tag.
+   */
+  othersMax?: true;
+  /**
    * When true, include events when counting tags.
    */
   includeEvents?: true;

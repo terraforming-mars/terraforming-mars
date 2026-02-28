@@ -337,7 +337,7 @@ export default defineComponent({
     },
     visibleAgendaIds(): Array<PolicyId | BonusId> {
       if (!this.types.agendas) return [];
-      return this.allAgendaIds;
+      return [...this.allAgendaIds];
     },
   },
   methods: {

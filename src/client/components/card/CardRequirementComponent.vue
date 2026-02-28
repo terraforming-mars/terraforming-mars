@@ -66,6 +66,7 @@ export default defineComponent({
       case RequirementType.HABITAT_RATE:
       case RequirementType.MINING_RATE:
       case RequirementType.LOGISTIC_RATE:
+      case RequirementType.GENERATION:
         return this.count;
       }
       if (this.requirement.max) {
@@ -86,6 +87,8 @@ export default defineComponent({
         return '%';
       case RequirementType.TEMPERATURE:
         return '°C';
+      case RequirementType.GENERATION:
+        return ' Gen.';
       }
       return '';
     },
@@ -177,6 +180,7 @@ export default defineComponent({
       case RequirementType.PARTY:
       case RequirementType.REMOVED_PLANTS:
       case RequirementType.UNDERGROUND_TOKENS:
+      case RequirementType.GENERATION:
         return false;
       }
       return this.count > 0 && this.count < 4;

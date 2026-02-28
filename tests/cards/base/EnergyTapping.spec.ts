@@ -17,6 +17,14 @@ describe('EnergyTapping', () => {
   beforeEach(() => {
     card = new EnergyTapping();
     [game, player, player2] = testGame(2);
+    game.generation = 5;
+  });
+
+  it('Cannot play before generation 5', () => {
+    game.generation = 4;
+    expect(card.canPlay(player)).is.false;
+    game.generation = 5;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('play - no targets', () => {

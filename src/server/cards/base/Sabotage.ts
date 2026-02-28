@@ -18,6 +18,7 @@ export class Sabotage extends Card implements IProjectCard {
       name: CardName.SABOTAGE,
       cost: 1,
 
+      requirements: {generation: 5},
       metadata: {
         cardNumber: '121',
         renderData: CardRenderer.builder((b) => {
@@ -25,7 +26,7 @@ export class Sabotage extends Card implements IProjectCard {
           b.minus().steel(4, {all, digit}).br.or(Size.SMALL).nbsp;
           b.minus().megacredits(7, {all});
         }),
-        description: 'Remove up to 3 titanium from any player, or 4 steel, or 7 M€.',
+        description: 'Requires generation 5 or later. Remove up to 3 titanium from any player, or 4 steel, or 7 M€.',
       },
     });
   }

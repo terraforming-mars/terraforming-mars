@@ -62,6 +62,9 @@ export type CardRequirementDescriptor = {
   undergroundTokens?: number,
   corruption?: number,
 
+  // General
+  generation?: number,
+
   // Adjectives
   count?: number,
   max?: boolean,
@@ -119,6 +122,8 @@ export function requirementType(descriptor: CardRequirementDescriptor): Requirem
     return RequirementType.UNDERGROUND_TOKENS;
   } else if (descriptor.corruption !== undefined) {
     return RequirementType.CORRUPTION;
+  } else if (descriptor.generation !== undefined) {
+    return RequirementType.GENERATION;
   } else {
     throw new Error('Unknown requirement: ' + JSON.stringify(descriptor));
   }

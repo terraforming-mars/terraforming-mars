@@ -6,9 +6,19 @@ import {OrOptions} from '../../../src/server/inputs/OrOptions';
 import {MonsInsurance} from '../../../src/server/cards/promo/MonsInsurance';
 
 describe('Sabotage', () => {
+  it('Cannot play before generation 5', () => {
+    const card = new Sabotage();
+    const [game, player] = testGame(2);
+    game.generation = 4;
+    expect(card.canPlay(player)).is.false;
+    game.generation = 5;
+    expect(card.canPlay(player)).is.true;
+  });
+
   it('Should play', () => {
     const card = new Sabotage();
-    const [/* game */, player, player2] = testGame(2);
+    const [game, player, player2] = testGame(2);
+    game.generation = 5;
     player2.titanium = 3;
     player2.steel = 4;
     player2.megaCredits = 7;

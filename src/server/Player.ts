@@ -715,6 +715,20 @@ export class Player implements IPlayer {
       }
     });
 
+    // Check for discounts from other players' removedFromPlayCards
+    // This allows the original player to still use discounts from cards that Playwrights replayed
+    for (const otherPlayer of this.game.players) {
+      if (otherPlayer === this) continue;
+      otherPlayer.removedFromPlayCards.forEach((removedFromPlayCard) => {
+        if (removedFromPlayCard.getCardDiscount !== undefined) {
+          const originalOwner = (removedFromPlayCard as any).originalOwner;
+          if (originalOwner === this.id) {
+            cost -= removedFromPlayCard.getCardDiscount(this, card);
+          }
+        }
+      });
+    }
+
     // TODO(kberg): put this in a callback.
     if (card.tags.includes(Tag.SPACE) && PartyHooks.shouldApplyPolicy(this, PartyName.UNITY, 'up04')) {
       cost -= 2;

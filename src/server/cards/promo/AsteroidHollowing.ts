@@ -21,7 +21,7 @@ export class AsteroidHollowing extends ActionCard implements IProjectCard {
         addResources: 1,
       },
 
-      victoryPoints: {resourcesHere: {}, per: 2},
+      victoryPoints: {resourcesHere: {}, per: 1},
 
       metadata: {
         cardNumber: 'X15',
@@ -29,7 +29,7 @@ export class AsteroidHollowing extends ActionCard implements IProjectCard {
           b.action('Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.', (eb) => {
             eb.titanium(1).startAction.resource(CardResource.ASTEROID).production((pb) => pb.megacredits(1));
           }).br;
-          b.vpText('1 VP for each 2 asteroids on this card.');
+          b.vpText('1 VP for each asteroid on this card.');
         }),
       },
     });

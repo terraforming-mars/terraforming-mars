@@ -329,15 +329,15 @@ export default defineComponent({
     },
     visibleMilestoneNames(): Array<MilestoneName> {
       if (!this.types.milestones) return [];
-      return [...this.allMilestoneNames].filter((m) => this.showMilestone(m));
+      return this.allMilestoneNames.filter((m) => this.showMilestone(m));
     },
     visibleAwardNames(): Array<AwardName> {
       if (!this.types.awards) return [];
-      return [...this.allAwardNames].filter((a) => this.showAward(a));
+      return this.allAwardNames.filter((a) => this.showAward(a));
     },
     visibleAgendaIds(): Array<PolicyId | BonusId> {
       if (!this.types.agendas) return [];
-      return [...this.allAgendaIds];
+      return this.allAgendaIds;
     },
   },
   methods: {

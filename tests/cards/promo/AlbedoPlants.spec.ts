@@ -30,8 +30,18 @@ describe('AlbedoPlants', () => {
     {tags: 1, expected: 3},
     {tags: 2, expected: 6},
   ]) {
-    it('onCardPlayed: ${run.tags} tags', () => {
+    it(`onCardPlayed: ${run.tags} tags`, () => {
       card.onCardPlayed(player, fakeCard({tags: Array(run.tags).fill(Tag.PLANT)}));
+      expect(player.heat).to.eq(run.expected);
+    });
+  }
+
+  for (const run of [
+    {tag: Tag.PLANT, expected: 3},
+    {tag: Tag.SCIENCE, expected: 0},
+  ]) {
+    it(`onNonCardTagAdded: ${run.tag} tag`, () => {
+      card.onNonCardTagAdded(player, run.tag);
       expect(player.heat).to.eq(run.expected);
     });
   }

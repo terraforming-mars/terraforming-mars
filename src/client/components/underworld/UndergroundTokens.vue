@@ -15,11 +15,12 @@
 
 import {defineComponent} from '@/client/vue3-compat';
 import {ClaimedToken, UnderworldPlayerData} from '@/common/underworld/UnderworldPlayerData';
+import UndergroundToken from './UndergroundToken.vue';
 
 export default defineComponent({
   name: 'UndergroundTokens',
   components: {
-    UndergroundToken: () => import('./UndergroundToken.vue'),
+    UndergroundToken,
   },
   props: {
     underworldData: {

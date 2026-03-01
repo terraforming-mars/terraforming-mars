@@ -170,8 +170,8 @@
 }
 
 .sidebar_item--settings {
-    position: absolute;
-    bottom: 10px;
+    position: fixed;
+    bottom: 4px;
     height: 46px;
 }
 
@@ -273,10 +273,16 @@
     left: 53px;
     color: #c6c6c6;
     background: #000000;
-    max-height: calc(85vh);
+    max-height: calc(75vh);
     overflow-y: auto;
     white-space: nowrap;
+
+    &.preferences_panel--language-switcher {
+        bottom: -140px;
+        left: 52px;
+    }
 }
+
 
 .sidebar_item--is-active::after {
     content: " ";
@@ -285,6 +291,11 @@
     position: absolute;
     background: #000;
     margin: -5px 0 0 38px;
+}
+
+.sidebar_icon--language.sidebar_item--is-active::after {
+    height: 46px;
+    margin: -38px 0 0 38px;
 }
 
 .preferences_panel .tooltip::after {
@@ -399,7 +410,7 @@
 }
 
 .free-floating-preferences-icon {
-  position: absolute;
+  position: fixed;
   bottom: 0px;
   left: 0px;
   padding: 16px;

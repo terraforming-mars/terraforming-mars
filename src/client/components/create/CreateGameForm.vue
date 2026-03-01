@@ -28,55 +28,47 @@
                                 <span v-i18n>All</span>
                             </label>
 
-                            <input type="checkbox" name="corporateEra" id="corporateEra-checkbox" v-model="expansions.corpera">
-                            <label for="corporateEra-checkbox" class="expansion-button">
+                            <toggle-button name="corporateEra" v-model="expansions.corpera">
                                 <div class="create-game-expansion-icon expansion-icon-CE"></div>
                                 <span v-i18n>Corporate Era</span>
-                            </label>
+                            </toggle-button>
 
-                            <input type="checkbox" name="prelude" id="prelude-checkbox" v-model="expansions.prelude">
-                            <label for="prelude-checkbox" class="expansion-button">
+                            <toggle-button name="prelude" v-model="expansions.prelude">
                                 <div class="create-game-expansion-icon expansion-icon-prelude"></div>
                                 <span v-i18n>Prelude</span>
-                            </label>
+                            </toggle-button>
 
-                            <input type="checkbox" name="prelude2" id="prelude2-checkbox" v-model="expansions.prelude2">
-                            <label for="prelude2-checkbox" class="expansion-button">
+                            <toggle-button name="prelude2" v-model="expansions.prelude2">
                                 <div class="create-game-expansion-icon expansion-icon-prelude2"></div>
                                 <span v-i18n>Prelude 2</span>
-                            </label>
+                            </toggle-button>
 
-                            <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="expansions.venus">
-                            <label for="venusNext-checkbox" class="expansion-button">
-                            <div class="create-game-expansion-icon expansion-icon-venus"></div>
+                            <toggle-button name="venusNext" v-model="expansions.venus">
+                                <div class="create-game-expansion-icon expansion-icon-venus"></div>
                                 <span v-i18n>Venus Next</span>
-                            </label>
+                            </toggle-button>
 
-                            <input type="checkbox" name="colonies" id="colonies-checkbox" v-model="expansions.colonies">
-                            <label for="colonies-checkbox" class="expansion-button">
-                            <div class="create-game-expansion-icon expansion-icon-colony"></div>
+                            <toggle-button name="colonies" v-model="expansions.colonies">
+                                <div class="create-game-expansion-icon expansion-icon-colony"></div>
                                 <span v-i18n>Colonies</span>
-                            </label>
+                            </toggle-button>
 
-                            <input type="checkbox" name="turmoil" id="turmoil-checkbox" v-model="expansions.turmoil">
-                            <label for="turmoil-checkbox" class="expansion-button">
+                            <toggle-button name="turmoil" v-model="expansions.turmoil">
                                 <div class="create-game-expansion-icon expansion-icon-turmoil"></div>
                                 <span v-i18n>Turmoil</span>
-                            </label>
+                            </toggle-button>
 
-                            <input type="checkbox" name="promo" id="promo-checkbox" v-model="expansions.promo">
-                            <label for="promo-checkbox" class="expansion-button">
+                            <toggle-button name="promo" v-model="expansions.promo">
                                 <div class="create-game-expansion-icon expansion-icon-promo"></div>
                                 <span v-i18n>Promos</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
-                            </label>
+                            </toggle-button>
 
                             <div class="create-game-subsection-label" v-i18n>Fan-made</div>
 
-                            <input type="checkbox" name="ares" id="ares-checkbox" v-model="expansions.ares">
-                            <label for="ares-checkbox" class="expansion-button">
+                            <toggle-button name="ares" v-model="expansions.ares">
                                 <div class="create-game-expansion-icon expansion-icon-ares"></div>
                                 <span v-i18n>Ares</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Ares" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
-                            </label>
+                            </toggle-button>
 
                             <template v-if="expansions.ares">
                                 <input type="checkbox" v-model="aresExtremeVariant" id="aresExtremeVariantVariant-checkbox">
@@ -86,17 +78,15 @@
                                 </label>
                             </template>
 
-                            <input type="checkbox" name="community" id="communityCards-checkbox" v-model="expansions.community">
-                            <label for="communityCards-checkbox" class="expansion-button">
+                            <toggle-button name="community" id="communityCards-checkbox" v-model="expansions.community">
                                 <div class="create-game-expansion-icon expansion-icon-community"></div>
                                 <span v-i18n>Community</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Variants#community" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
-                            </label>
+                            </toggle-button>
 
-                            <input type="checkbox" name="themoon" id="themoon-checkbox" v-model="expansions.moon">
-                            <label for="themoon-checkbox" class="expansion-button">
+                            <toggle-button name="themoon" v-model="expansions.moon">
                                 <div class="create-game-expansion-icon expansion-icon-themoon"></div>
                                 <span v-i18n>The Moon</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/The-Moon" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
-                            </label>
+                            </toggle-button>
 
                             <template v-if="expansions.moon">
                               <input type="checkbox" v-model="requiresMoonTrackCompletion" id="requiresMoonTrackCompletion-checkbox">
@@ -117,7 +107,7 @@
 
                             <template v-if="expansions.turmoil">
                                 <input type="checkbox" name="politicalAgendas" id="politicalAgendas-checkbox" v-on:change="politicalAgendasExtensionToggle()">
-                                <label for="politicalAgendas-checkbox" class="expansion-button">
+                                <label for="politicalAgendas-checkbox" class="toggle-button">
                                     <div class="create-game-expansion-icon expansion-icon-agendas"></div>
                                     <span v-i18n>Agendas</span>&nbsp;<a href="https://www.notion.so/Political-Agendas-8c6b0b018a884692be29b3ef44b340a9" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
                                 </label>
@@ -139,11 +129,10 @@
                                 </div>
                             </template>
 
-                            <input type="checkbox" name="pathfinders" id="pathfinders-checkbox" v-model="expansions.pathfinders">
-                            <label for="pathfinders-checkbox" class="expansion-button">
+                            <toggle-button name="pathfinders" v-model="expansions.pathfinders">
                                 <div class="create-game-expansion-icon expansion-icon-pathfinders"></div>
                                 <span v-i18n>Pathfinders</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Pathfinders" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
-                            </label>
+                            </toggle-button>
 
                             <template v-if="expansions.venus">
                                 <input type="checkbox" v-model="altVenusBoard" id="altVenusBoard-checkbox">
@@ -152,23 +141,20 @@
                                 </label>
                             </template>
 
-                            <input type="checkbox" name="ceo" id="ceo-checkbox" v-model="expansions.ceo">
-                            <label for="ceo-checkbox" class="expansion-button">
+                            <toggle-button name="ceo" v-model="expansions.ceo">
                                 <div class="create-game-expansion-icon expansion-icon-ceo"></div>
                                 <span v-i18n>CEOs</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/CEOs" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
-                            </label>
+                            </toggle-button>
 
-                            <input type="checkbox" name="starwars" id="starwars-checkbox" v-model="expansions.starwars">
-                            <label for="starwars-checkbox" class="expansion-button">
+                            <toggle-button name="starwars" v-model="expansions.starwars">
                                 <div class="create-game-expansion-icon expansion-icon-starwars"></div>
                                 <span v-i18n>Star Wars</span><span> </span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/StarWars" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
-                            </label>
+                            </toggle-button>
 
-                            <input type="checkbox" name="ceo" id="underworld-checkbox" v-model="expansions.underworld">
-                            <label for="underworld-checkbox" class="expansion-button">
+                            <toggle-button name="underworld" id="underworld-checkbox" v-model="expansions.underworld">
                                 <div class="create-game-expansion-icon expansion-icon-underworld"></div>
                                 <span v-i18n>Underworld 2</span><span></span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Underworld" class="tooltip" v-i18n data-tooltip="Link opens in a new tab/window" target="_blank">&#9432;</a>
-                            </label>
+                            </toggle-button>
                         </div>
 
                         <div class="create-game-page-column">
@@ -177,7 +163,7 @@
                             <div v-for="boardName in boards" v-bind:key="boardName">
                               <div v-if="boardName==='utopia planitia'" class="create-game-subsection-label" v-i18n>Fan-made</div>
                               <input type="radio" :value="boardName" name="board" v-model="board" :id="boardName+'-checkbox'">
-                              <label :for="boardName+'-checkbox'" class="expansion-button">
+                              <label :for="boardName+'-checkbox'" class="toggle-button">
                                   <span :class="getBoardColorClass(boardName)">&#x2B22;</span>
                                   <span class="capitalized" v-i18n>{{ boardName }}</span>
                                   <template v-if="boardName !== RandomBoardOption.OFFICIAL && boardName !== RandomBoardOption.ALL">
@@ -557,6 +543,7 @@ import ColoniesFilter from '@/client/components/create/ColoniesFilter.vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import CardsFilter from '@/client/components/create/CardsFilter.vue';
 import AppButton from '@/client/components/common/AppButton.vue';
+import ToggleButton from '@/client/components/common/ToggleButton.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 import {GameId} from '@/common/Types';
@@ -599,6 +586,7 @@ export default defineComponent({
     CardsFilter,
     ColoniesFilter,
     CorporationsFilter,
+    ToggleButton,
     PreludesFilter,
     PreferencesIcon,
   },

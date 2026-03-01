@@ -77,6 +77,10 @@ export class Cache extends EventEmitter {
     game.players.forEach((p) => p.tearDown());
     this.games.set(gameId, undefined); // Setting to undefied is the same as "not yet loaded."
   }
+
+  public countLoadedGames(): number {
+    return [...this.games.values()].filter((game) => game !== undefined).length;
+  }
 }
 
 function scheduleSweep(cache: Cache, sleepMillis: number) {

@@ -399,6 +399,7 @@
 
   "Select which cards to take into hand": "Wähle, welche Karten du auf die Hand nehmen möchtest",
   "Select which resource type to steal from all other players.": "Wähle, welche Art von Ressourcen-Produktion du von allen anderen Spielern klauen willst.",
+  "Select which production to increase 1 step.": "Wähle, welche Produktion um 1 erhöht werden soll.",
   "Select resource to discard": "Wähle Ressource, die du abgeben möchtest",
   "Select resource to gain": "Wähle Ressource, die du erhalten möchtest",
 
@@ -938,12 +939,7 @@
   "Discard": "Abwerfen",
   "Discard 3 cards": "3 Karten abwerfen",
   "Discard ${0}": "Abwerfen ${0}",
-  "Discard 0": "Abwerfen 0",
-  "Discard 1": "Abwerfen 1",
-  "Discard 2": "Abwerfen 2",
-  "Discard 3": "Abwerfen 3",
-  "Discard 4": "Abwerfen 4",
-  "Discard 5": "Abwerfen 5",
+  "Reveal ${0}": "Zeige ${0}",
   "Discard any number of cards from your hand to gain 2 M€ for each discarded card.": "Werfe eine beliebige Anzahl von Karten aus deiner Hand ab und erhalte 2 M€ für jede abgelegte Karte.",
   "Discard cards for 2 M€ each": "Karten abwerfen für je 2 M€",
   "Select ${0} card(s) to keep": "Wähle ${0} Karte, um sie zu behalten",

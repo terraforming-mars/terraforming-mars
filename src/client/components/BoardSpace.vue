@@ -51,11 +51,10 @@ export default defineComponent({
     },
     text: {
       type: String,
-      required: true,
+      default: '',
     },
     aresExtension: {
       type: Boolean,
-      required: true,
     },
     tileView: {
       type: String as () => TileView,

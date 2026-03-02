@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <span v-if="showDistance" class="global-event-distance" v-i18n>{{ this.type }}</span>
+    <span v-if="showDistance" class="global-event-distance" v-i18n>{{ type }}</span>
     <slot/>
   </div>
 </template>
@@ -28,7 +28,7 @@ import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import {ICardRenderRoot} from '@/common/cards/render/Types';
 import {PartyName} from '@/common/turmoil/PartyName';
 
-export type RenderType = 'coming' | 'current' | 'distant';
+export type RenderType = 'coming' | 'current' | 'distant' | 'prior';
 
 type DataModel = {
   renderData: ICardRenderRoot;

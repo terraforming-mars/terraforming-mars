@@ -31,11 +31,9 @@ export default defineComponent({
     },
     isDominant: {
       type: Boolean,
-      required: true,
     },
     isAvailable: {
       type: Boolean,
-      required: true,
     },
   },
   methods: {

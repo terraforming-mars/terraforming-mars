@@ -20,7 +20,6 @@ export default defineComponent({
     },
     type: {
       type: String,
-      required: true,
     },
   },
   methods: {

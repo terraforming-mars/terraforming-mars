@@ -2,7 +2,6 @@ import {GameOptions} from '../game/GameOptions';
 import {IPlayer} from '../IPlayer';
 import {Random} from '../../common/utils/Random';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {SpaceName} from '../../common/boards/SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {BoardBuilder} from './BoardBuilder';
 import {Space} from './Space';
@@ -43,15 +42,6 @@ export class ArabiaTerraBoard extends MarsBoard {
 
     const spaces = builder.build();
     return new ArabiaTerraBoard(spaces);
-  }
-
-  public constructor(spaces: ReadonlyArray<Space>) {
-    super(spaces, undefined, [
-      SpaceName.TIKHONAROV,
-      SpaceName.LADON,
-      SpaceName.FLAUGERGUES,
-      SpaceName.CHARYBDIS,
-    ]);
   }
 
   public override getSpaces(spaceType: SpaceType): Array<Space> {

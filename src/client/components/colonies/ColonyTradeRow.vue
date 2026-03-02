@@ -27,8 +27,8 @@
       <div><div class="production-box"><div class="production plant"></div></div></div>
       <div><div class="production-box"><div class="production plant"></div></div></div>
     </template>
-    <template v-else v-for="idx in range(7)">
-      <div :key="idx">{{metadata.trade.quantity[idx]}}</div>
+    <template v-else v-for="idx in range(7)" :key="idx">
+      <div>{{metadata.trade.quantity[idx]}}</div>
     </template>
   </div>
 </template>

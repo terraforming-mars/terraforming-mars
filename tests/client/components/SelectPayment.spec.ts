@@ -1,5 +1,5 @@
 import {mount} from '@vue/test-utils';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import SelectPayment from '@/client/components/SelectPayment.vue';
 import {SelectPaymentModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
@@ -293,8 +293,8 @@ describe('SelectPayment', () => {
     };
 
     return mount(SelectPayment, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         playerView: playerView,
         playerinput: playerInput,
         onsave: () => {},

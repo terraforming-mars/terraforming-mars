@@ -506,7 +506,7 @@ export class Player implements IPlayer {
 
       if (removingPlayer !== undefined && removingPlayer !== this) this.resolveInsurance();
 
-      if (options?.log ?? true === true) {
+      if (options?.log ?? true) {
         this.game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>
           b.player(options?.removingPlayer ?? this)
             .number(amountRemoved)

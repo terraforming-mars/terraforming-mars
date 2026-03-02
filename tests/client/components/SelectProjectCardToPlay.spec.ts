@@ -1,5 +1,5 @@
 import {mount} from '@vue/test-utils';
-import {getLocalVue} from './getLocalVue';
+import {globalConfig} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import SelectProjectCardToPlay from '@/client/components/SelectProjectCardToPlay.vue';
@@ -33,8 +33,8 @@ describe('SelectProjectCardToPlay', () => {
       [CardName.BIRDS]: 1,
     }));
     const sortable = mount(SelectProjectCardToPlay, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         playerView: {
           cardsInHand: [{
             calculatedCost: 4,
@@ -70,8 +70,8 @@ describe('SelectProjectCardToPlay', () => {
       name: 'Card',
     });
     expect(cards).has.length(2);
-    expect(cards.at(0).props().card.name).to.eq(CardName.BIRDS);
-    expect(cards.at(1).props().card.name).to.eq(CardName.ANTS);
+    expect(cards[0].props().card.name).to.eq(CardName.BIRDS);
+    expect(cards[1].props().card.name).to.eq(CardName.ANTS);
   });
 
   it('using heat', async () => {
@@ -673,8 +673,8 @@ describe('SelectProjectCardToPlay', () => {
     }
 
     return mount(SelectProjectCardToPlay, {
-      localVue: getLocalVue(),
-      propsData: {
+      ...globalConfig,
+      props: {
         playerView: playerView,
         playerinput: playerInput,
         onsave: (response: SelectProjectCardToPlayResponse) => {

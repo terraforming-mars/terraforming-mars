@@ -8,12 +8,13 @@
 
 import {defineComponent} from '@/client/vue3-compat';
 import CardRowComponent from '@/client/components/card/CardRowComponent.vue';
+import {ItemType} from '@/common/cards/render/Types';
 
 export default defineComponent({
   name: 'CardRowData',
   props: {
     rowData: {
-      type: Array,
+      type: Array as () => Array<ItemType>,
       required: true,
     },
   },

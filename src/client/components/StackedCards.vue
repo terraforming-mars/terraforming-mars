@@ -16,7 +16,7 @@ export default defineComponent({
   name: 'stacked-cards',
   props: {
     cards: {
-      type: Array as () => Array<CardModel>,
+      type: Array as () => ReadonlyArray<CardModel>,
       required: true,
     },
   },

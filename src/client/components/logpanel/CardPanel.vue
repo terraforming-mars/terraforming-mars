@@ -32,8 +32,13 @@ import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 export default defineComponent({
   name: 'log-panel',
   props: {
-    message: Object as () => LogMessage | undefined,
-    players: Array as () => Array<PublicPlayerModel>,
+    message: {
+      type: Object as () => LogMessage | undefined,
+    },
+    players: {
+      type: Array as () => Array<PublicPlayerModel>,
+      required: true,
+    },
   },
   components: {
     AppButton,

@@ -23,6 +23,31 @@ const metrics = {
     help: 'Game evictions count',
     registers: [prometheus.register],
   }),
+  gamesCreated: new prometheus.Counter({
+    name: 'game_created',
+    help: 'Number of games created',
+    labelNames: ['players'],
+    registers: [prometheus.register],
+  }),
+  gamesFinished: new prometheus.Counter({
+    name: 'game_finished',
+    help: 'Number of games finished',
+    labelNames: ['players'],
+    registers: [prometheus.register],
+  }),
+  gamesPurged: new prometheus.Counter({
+    name: 'game_purged',
+    help: 'Number of games deleted because they are too old',
+    registers: [prometheus.register],
+  }),
+  gamesInMemory: new prometheus.Gauge({
+    name: 'games_in_memory',
+    help: 'Number of games currently loaded in memory',
+    registers: [prometheus.register],
+    collect() {
+      this.set(GameLoader.getLoadedGameCount());
+    },
+  }),
 };
 
 /**
@@ -60,6 +85,10 @@ export class GameLoader implements IGameLoader {
     return new GameLoader(config, clock);
   }
 
+  public static getLoadedGameCount(): number {
+    return GameLoader.instance?.cache.countLoadedGames() ?? 0;
+  }
+
   public resetForTesting(): void {
     this.cache = new Cache(this.config, this.clock);
     this.cache.load();
@@ -67,12 +96,16 @@ export class GameLoader implements IGameLoader {
 
   public async add(game: IGame): Promise<void> {
     const d = await this.cache.getGames();
+    const isNew = !d.games.has(game.id);
     d.games.set(game.id, game);
     if (game.spectatorId !== undefined) {
       d.participantIds.set(game.spectatorId, game.id);
     }
     for (const player of game.players) {
       d.participantIds.set(player.id, game.id);
+    }
+    if (isNew) {
+      metrics.gamesCreated.inc({players: String(game.players.length)});
     }
   }
 
@@ -152,6 +185,7 @@ export class GameLoader implements IGameLoader {
     try {
       this.mark(game.id);
       await database.markFinished(game.id);
+      metrics.gamesFinished.inc({players: String(game.players.length)});
       await this.maintenance();
     } catch (err) {
       console.error(err);
@@ -169,6 +203,7 @@ export class GameLoader implements IGameLoader {
     const database = Database.getInstance();
     const purgedGames = await database.purgeUnfinishedGames();
     this.purgedGames.push(...purgedGames);
+    metrics.gamesPurged.inc(purgedGames.length);
     await database.compressCompletedGames();
   }
 }

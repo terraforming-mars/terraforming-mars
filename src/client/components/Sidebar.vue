@@ -12,7 +12,7 @@
     <global-parameter-value :param="globalParameter.OXYGEN" :value="oxygen"></global-parameter-value>
     <global-parameter-value :param="globalParameter.OCEANS" :value="oceans"></global-parameter-value>
     <global-parameter-value v-if="gameOptions.expansions.venus" :param="globalParameter.VENUS" :value="venus"></global-parameter-value>
-    <MoonGlobalParameterValue v-if="gameOptions.expansions.moon" :moonData="moonData"></MoonGlobalParameterValue>
+    <MoonGlobalParameterValue v-if="moonData" :moonData="moonData"></MoonGlobalParameterValue>
   </div>
   <div class="sidebar_item preferences_player" :title="$t('Player Color Cube')">
     <div :class="getPlayerColorCubeClass()+' player_bg_color_' + player_color"></div>
@@ -98,7 +98,6 @@ export default defineComponent({
     },
     acting_player: {
       type: Boolean,
-      required: true,
     },
     player_color: {
       type: String as () => Color,
@@ -129,12 +128,10 @@ export default defineComponent({
       required: true,
     },
     moonData: {
-      type: Object as () => MoonModel,
-      required: true,
+      type: Object as () => MoonModel | undefined,
     },
     turmoil: {
-      type: Object as () => TurmoilModel || undefined,
-      required: true,
+      type: Object as () => TurmoilModel | undefined,
     },
     lastSoloGeneration: {
       type: Number,
@@ -175,14 +172,15 @@ export default defineComponent({
       return `${this.generation}`;
     },
     rulingPartyToCss(): string {
-      if (this.turmoil.ruling === undefined) {
+      if (this.turmoil?.ruling === undefined) {
         console.warn('no party provided');
         return '';
       }
       return this.turmoil.ruling.toLowerCase().split(' ').join('_');
     },
     getRulingParty(): string {
-      switch (this.turmoil.ruling) {
+      const ruling = this.turmoil?.ruling;
+      switch (ruling) {
       case PartyName.MARS:
         return 'Mars';
       case PartyName.SCIENTISTS:
@@ -192,7 +190,7 @@ export default defineComponent({
       case undefined:
         return '???';
       default:
-        return this.turmoil.ruling;
+        return ruling;
       }
     },
   },

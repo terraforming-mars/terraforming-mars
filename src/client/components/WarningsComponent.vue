@@ -41,7 +41,7 @@ export default defineComponent({
   name: 'WarningsComponent',
   props: {
     warnings: {
-      type: Array as () => Array<Warning>,
+      type: Array as () => ReadonlyArray<Warning>,
       default: () => {
         return [];
       },

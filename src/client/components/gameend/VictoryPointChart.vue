@@ -1,8 +1,6 @@
 <template>
-    <div class="victory-point-chart-container">
-    <!-- <div></div> -->
-      <canvas :id="id"></canvas>
-    <!-- <div></div> -->
+  <div class="victory-point-chart-container">
+    <canvas :id="id"></canvas>
   </div>
 </template>
 <script lang="ts">
@@ -49,12 +47,9 @@ export type DataSet = {
 
 export default defineComponent({
   name: 'VictoryPointChart',
-  data: function() {
-    return {};
-  },
   props: {
     datasets: {
-      type: Array as () => Array<DataSet>,
+      type: Array as () => ReadonlyArray<DataSet>,
       required: true,
     },
     generation: {
@@ -63,7 +58,6 @@ export default defineComponent({
     },
     animation: {
       type: Boolean,
-      required: true,
     },
     id: {
       type: String,

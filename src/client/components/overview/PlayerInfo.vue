@@ -74,7 +74,7 @@ export default defineComponent({
     },
     actionLabel: {
       type: String as () => ActionLabel,
-      default: '',
+      required: true,
     },
     playerIndex: {
       type: Number,

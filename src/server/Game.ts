@@ -33,7 +33,7 @@ import {SelectPaymentDeferred} from './deferredActions/SelectPaymentDeferred';
 import {SelectInitialCards} from './inputs/SelectInitialCards';
 import {PlaceOceanTile} from './deferredActions/PlaceOceanTile';
 import {RemoveColonyFromGame} from './deferredActions/RemoveColonyFromGame';
-import {GainResources} from './deferredActions/GainResources';
+import {GainResourcesDeferred} from './deferredActions/GainResourcesDeferred';
 import {SerializedGame} from './SerializedGame';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {TileType} from '../common/TileType';
@@ -1401,11 +1401,11 @@ export class Game implements IGame, Logger {
       TurmoilHandler.resolveTilePlacementBonuses(player, space.spaceType);
 
       if (arcadianCommunityBonus) {
-        this.defer(new GainResources(player, Resource.MEGACREDITS, {count: 3}));
+        this.defer(new GainResourcesDeferred(player, Resource.MEGACREDITS, {count: 3}));
       }
 
       if (space.undergroundResources === 'place6mc') {
-        this.defer(new GainResources(player, Resource.MEGACREDITS, {count: 6}));
+        this.defer(new GainResourcesDeferred(player, Resource.MEGACREDITS, {count: 6}));
       }
     }
   }

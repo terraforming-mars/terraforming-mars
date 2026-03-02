@@ -58,7 +58,7 @@ export default defineComponent({
   components: {Award},
   props: {
     awards: {
-      type: Array as () => Array<FundedAwardModel>,
+      type: Array as () => ReadonlyArray<FundedAwardModel>,
       required: true,
     },
     showScores: {
@@ -91,7 +91,7 @@ export default defineComponent({
       const isFunded = (award: FundedAwardModel) => !!award.playerName;
       return this.awards.filter(isFunded);
     },
-    availableAwardSpots(): Number[] {
+    availableAwardSpots(): number[] {
       return AWARD_COSTS.slice(this.fundedAwards.length);
     },
     isLearnerModeOn(): boolean {

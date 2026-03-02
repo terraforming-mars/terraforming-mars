@@ -125,13 +125,13 @@
                         <div class="game-end-column-vp">&nbsp;</div>
                         <div class="game-end-column-text">&nbsp;</div>
                       </div>
-                      <div v-for="v in p.victoryPointsBreakdown.detailsMilestones" :key="v">
+                      <div v-for="v in p.victoryPointsBreakdown.detailsMilestones" :key="v.message">
                         <div class="game-end-column-row">
                           <div class="game-end-column-vp">{{v.victoryPoint}}</div>
                           <div class="game-end-column-text">{{translateMilestoneDetails(v)}}</div>
                         </div>
                       </div>
-                      <div v-for="v in p.victoryPointsBreakdown.detailsAwards" :key="v">
+                      <div v-for="v in p.victoryPointsBreakdown.detailsAwards" :key="v.message">
                         <div class="game-end-column-row">
                           <div class="game-end-column-vp">{{v.victoryPoint}}</div>
                           <div class="game-end-column-text">{{translateAwardDetails(v)}}</div>
@@ -196,7 +196,7 @@
                   :oceans_count="game.oceans"
                   :oxygen_level="game.oxygenLevel"
                   :temperature="game.temperature"></board>
-            <MoonBoard v-if="game.gameOptions.expansions.moon" :model="game.moon"></MoonBoard>
+            <MoonBoard v-if="game.moon !== undefined" :model="game.moon"></MoonBoard>
             <div v-if="game.gameOptions.expansions.pathfinders">
               <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
             </div>

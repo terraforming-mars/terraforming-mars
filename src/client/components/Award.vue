@@ -7,17 +7,15 @@
     <div class="ma-name ma-name--awards award-block" :class="nameCss">
       <span v-i18n>{{ award.name }}</span>
       <div v-if="showScores" class="ma-scores player_home_block--milestones-and-awards-scores">
-        <template v-for="score in sortedScores">
+        <template v-for="score in sortedScores" :key="score.color">
           <p
             v-if="playerSymbol(score.color).length > 0"
-            :key="score.color + '-symbol'"
             class="ma-score"
             :class="`player_bg_color_${score.color}`"
             v-text="playerSymbol(score.color)"
             data-test="player-score"
           />
           <p
-            :key="score.color"
             class="ma-score"
             :class="`player_bg_color_${score.color}`"
             v-text="score.score"
@@ -53,7 +51,6 @@ export default defineComponent({
     },
     showDescription: {
       type: Boolean,
-      required: true,
     },
   },
   methods: {

@@ -71,6 +71,6 @@ describe('TerraCimmeriaBoard', () => {
       {id: '62', spaceType: 'land', x: 7, y: 8, bonus: [2]},
       {id: '63', spaceType: 'ocean', x: 8, y: 8, bonus: [2, 2]},
     ]);
-    expect(board.volcanicSpaceIds).deep.eq(['05', '27', '38', '21']);
+    expect(board.volcanicSpaceIds).deep.eq(['05', '21', '27', '38']);
   });
 });

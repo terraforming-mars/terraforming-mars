@@ -12,9 +12,8 @@ export interface ICorporationCard extends ICard {
   firstAction?: Behavior,
   startingMegaCredits: number;
   cardCost?: number;
-  onCardPlayedForCorps?(player: IPlayer, card: ICard): PlayerInput | undefined | void;
-  onCardPlayed?: never;
-
+  // TODO(kberg): Remove after 2027-04-01
+  onCardPlayedForCorps?: never;
   serialize?(serialized: SerializedCard): void;
   deserialize?(serialized: SerializedCard): void;
 }

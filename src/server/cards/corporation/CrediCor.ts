@@ -34,7 +34,7 @@ export class CrediCor extends CorporationCard implements ICorporationCard {
       player.stock.add(Resource.MEGACREDITS, 4, {log: true});
     }
   }
-  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (isIProjectCard(card)) {
       this.effect(player, card);
     }

@@ -19,7 +19,7 @@ describe('DemetronLabs', () => {
     const card = new DemetronLabs();
     const [/* game */, player] = testGame(2, {underworldExpansion: true});
     player.playedCards.push(card);
-    card.onCardPlayedForCorps(player, fakeCard({tags: [Tag.SCIENCE]}));
+    card.onCardPlayed(player, fakeCard({tags: [Tag.SCIENCE]}));
     expect(card.resourceCount).eq(2);
   });
 

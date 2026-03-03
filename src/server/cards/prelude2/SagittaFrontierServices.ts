@@ -39,7 +39,7 @@ export class SagittaFrontierServices extends CorporationCard implements ICorpora
     return undefined;
   }
 
-  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     const count = card.tags.filter((tag) => tag !== Tag.WILD).length + (card.type === CardType.EVENT ? 1 : 0);
     if (count === 0) {
       player.game.defer(new GainResourcesDeferred(player, Resource.MEGACREDITS, {count: 4}))

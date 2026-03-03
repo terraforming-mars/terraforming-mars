@@ -41,7 +41,7 @@ export class Ambient extends CorporationCard implements ICorporationCard {
     });
   }
 
-  public onCardPlayedForCorps(player: IPlayer, card: ICard): void {
+  public onCardPlayed(player: IPlayer, card: ICard): void {
     if (card.tags.includes(Tag.VENUS)) {
       player.production.add(Resource.HEAT, 1, {log: true});
     }

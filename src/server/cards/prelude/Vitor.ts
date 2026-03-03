@@ -57,7 +57,7 @@ export class Vitor extends CorporationCard implements ICorporationCard {
     return freeAward;
   }
 
-  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     const victoryPoints = card.metadata.victoryPoints;
     if (victoryPoints === undefined) return;
     if (typeof(victoryPoints) === 'number') {

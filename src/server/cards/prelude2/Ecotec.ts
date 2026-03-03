@@ -67,7 +67,7 @@ export class Ecotec extends CorporationCard implements ICorporationCard {
     }
   }
 
-  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     this.process(player, player.tags.cardTagCount(card, [Tag.ANIMAL, Tag.PLANT, Tag.MICROBE]));
     return undefined;
   }

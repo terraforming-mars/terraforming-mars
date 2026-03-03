@@ -47,7 +47,7 @@ export class AdhaiHighOrbitConstructions extends CorporationCard implements ICor
     return spaceTag;
   }
 
-  public onCardPlayedForCorps(player: IPlayer, card: ICard) {
+  public onCardPlayed(player: IPlayer, card: ICard) {
     if (this.matchingTags(card.tags)) {
       player.addResourceTo(this, 1);
     }

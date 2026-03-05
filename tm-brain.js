@@ -277,10 +277,13 @@
     var temp   = typeof g.temperature  === 'number' ? g.temperature  : -30;
     var o2     = typeof g.oxygenLevel  === 'number' ? g.oxygenLevel  : 0;
     var oceans = typeof g.oceans       === 'number' ? g.oceans       : 0;
+    var venus  = typeof g.venusScaleLevel === 'number' ? g.venusScaleLevel : 30; // 30 = maxed/not in game
     var tempSteps  = Math.max(0, Math.round((8 - temp) / 2));
     var oxySteps   = Math.max(0, 14 - o2);
     var oceanSteps = Math.max(0, 9 - oceans);
-    return tempSteps + oxySteps + oceanSteps;
+    var venusSteps = Math.max(0, Math.round((30 - venus) / 2));
+    // Venus steps weighted 0.5x: WGT doesn't raise Venus, so it doesn't end the game
+    return tempSteps + oxySteps + oceanSteps + Math.round(venusSteps * 0.5);
   }
 
   function vpLead(state) {
@@ -476,9 +479,10 @@
     var name = card.name || '';
     var gen = (state && state.game && state.game.generation) || 5;
     var steps = remainingSteps(state);
-    var ratePerGen = 4;
+    // Rate includes WGT raises + all player SPs. In 3P Venus: ~6-8 steps/gen total.
+    var ratePerGen = 6;
     if (state && state.players) {
-      ratePerGen = Math.max(3, Math.min(6, (state.players.length || 3) + 1));
+      ratePerGen = Math.max(4, Math.min(8, (state.players.length || 3) * 2));
     }
     var gensLeft = Math.max(1, Math.ceil(steps / ratePerGen));
     var tp = (state && state.thisPlayer) || {};
@@ -497,11 +501,17 @@
 
     // ── PRODUCTION VALUE ──
     // Each +1 prod = gensLeft * MC-per-unit
+    // Negative production (self-cost) penalized 1.5x because it permanently removes capability
     var prod = beh.production;
     if (prod) {
       for (var pk in prod) {
         var pVal = PROD_MC[pk] || 1;
-        ev += prod[pk] * pVal * gensLeft;
+        var delta = prod[pk];
+        if (delta < 0) {
+          ev += delta * pVal * gensLeft * 1.5; // penalty multiplier for self-harm
+        } else {
+          ev += delta * pVal * gensLeft;
+        }
       }
     }
 
@@ -515,23 +525,27 @@
     }
 
     // ── GLOBAL PARAMETER RAISES ──
-    // Each raise = 1 TR
+    // Each raise = 1 TR + tempo bonus (pushing game to end locks in your lead)
+    // Tempo bonus: ending the game 1 gen sooner saves opponents ~10 MC of production
+    // and locks in VP lead. Scale with gensLeft (more valuable mid-game).
+    var tempoBonus = gensLeft >= 5 ? 7 : (gensLeft >= 3 ? 5 : 3);
     var glob = beh.global;
     if (glob) {
       var trRaises = 0;
       for (var gk in glob) trRaises += glob[gk];
-      ev += trRaises * trMC(gensLeft, redsTax);
+      ev += trRaises * (trMC(gensLeft, redsTax) + tempoBonus);
     }
-    if (beh.tr) ev += beh.tr * trMC(gensLeft, redsTax);
-    if (beh.ocean) ev += trMC(gensLeft, redsTax) + 2; // ocean = TR + ~2 MC board bonus
-    if (beh.greenery) ev += trMC(gensLeft, redsTax) + vpMC(gensLeft); // TR + 1 VP
+    if (beh.tr) ev += beh.tr * trMC(gensLeft, redsTax); // pure TR (no tempo, doesn't shorten game)
+    if (beh.ocean) ev += trMC(gensLeft, redsTax) + tempoBonus + 2; // TR + tempo + ~2 MC board bonus
+    if (beh.greenery) ev += trMC(gensLeft, redsTax) + tempoBonus + vpMC(gensLeft); // TR + tempo + 1 VP
 
     // ── CITY TILE ──
-    if (beh.city) ev += vpMC(gensLeft) * 1.5; // ~1.5 VP avg from adjacent greeneries
+    // City = ~2 VP avg (1 from adjacent greenery early, 2-3 late) + MC from Mayor award
+    if (beh.city) ev += vpMC(gensLeft) * 2 + 2; // VP from adj greeneries + positional value
 
     // ── COLONY ──
-    if (beh.colony) ev += 8; // colony slot ≈ 8 MC (prod bonus + trade target)
-    if (beh.tradeFleet) ev += gensLeft * 6; // extra trade ≈ 6 MC/gen
+    if (beh.colony) ev += 7; // colony slot ≈ 7 MC (prod bonus + trade target)
+    if (beh.tradeFleet) ev += gensLeft * 4; // extra trade ≈ 4 MC/gen (opp cost of energy)
 
     // ── DRAW CARDS ──
     if (beh.drawCard) ev += beh.drawCard * 3.5; // 1 card ≈ 3.5 MC
@@ -541,9 +555,10 @@
       if (vpInfo.type === 'static') {
         ev += (vpInfo.vp || 0) * vpMC(gensLeft);
       } else if (vpInfo.type === 'per_resource') {
-        // VP accumulator: gains ~1 resource/gen via action, VP = gensLeft / per
-        var expectedRes = Math.max(1, gensLeft - 1); // gens of accumulation
-        ev += (expectedRes / (vpInfo.per || 1)) * vpMC(gensLeft);
+        // VP accumulator: ~1 resource/gen via action, but loses 1 gen to play it
+        // Also discounted because action slot competes with other actions
+        var expectedRes = Math.max(1, gensLeft - 2); // gens of accumulation (play delay + ramp)
+        ev += (expectedRes / (vpInfo.per || 1)) * vpMC(gensLeft) * 0.8; // 0.8 = action slot cost
       } else if (vpInfo.type === 'per_tag') {
         var tagCount = (myTags[vpInfo.tag] || 0) + 2; // current + ~2 future
         ev += (tagCount / (vpInfo.per || 1)) * vpMC(gensLeft);
@@ -564,7 +579,7 @@
     if (act.drawCard) ev += gensLeft * act.drawCard * 3; // card/gen
     if (act.stock) {
       for (var ask in act.stock) {
-        ev += gensLeft * (act.stock[ask] || 0) * (STOCK_MC[ask] || 1) * 0.7; // 0.7 = opportunity cost of action
+        ev += gensLeft * (act.stock[ask] || 0) * (STOCK_MC[ask] || 1) * 0.5; // 0.5 = action costs a full turn (~20% of gen)
       }
     }
     if (act.production) {
@@ -713,6 +728,7 @@
     else dangerZone = 'green';
 
     var g = (state && state.game) || {};
+    var venus = typeof g.venusScaleLevel === 'number' ? g.venusScaleLevel : 30;
     var breakdown = {
       temp: typeof g.temperature === 'number' ? g.temperature : -30,
       tempSteps: Math.max(0, Math.round((8 - (g.temperature || -30)) / 2)),
@@ -720,6 +736,8 @@
       oxySteps: Math.max(0, 14 - (g.oxygenLevel || 0)),
       oceans: typeof g.oceans === 'number' ? g.oceans : 0,
       oceanSteps: Math.max(0, 9 - (g.oceans || 0)),
+      venus: venus,
+      venusSteps: Math.max(0, Math.round((30 - venus) / 2)),
     };
 
     return {

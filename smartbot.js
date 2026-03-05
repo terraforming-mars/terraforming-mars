@@ -266,20 +266,48 @@ function handleInput(wf, state, depth = 0) {
       }
     }
 
-    // PLAY CARDS — #1 priority (cards are more VP-efficient than SPs)
+    // === CARD vs SP COMPETITION ===
+    // Cards and Standard Projects compete on EV. Best action wins.
     const bl = state?._blacklist || new Set();
+    const gm = state?.game || {};
+    // Rate includes WGT raises + player SPs. In 3P Venus: ~6-8 steps/gen total.
+    const ratePerGen = Math.max(4, Math.min(8, (state?.players?.length || 3) * 2));
+    const gensLeftNow = Math.max(1, Math.ceil(steps / ratePerGen));
+
+    // Calculate best SP EV (if available)
+    let bestSpEV = -999;
+    const trMCNow = gensLeftNow + (gensLeftNow >= 6 ? 3 : gensLeftNow >= 3 ? 5 : 7) - redsTax;
+    const tempoNow = gensLeftNow >= 5 ? 7 : (gensLeftNow >= 3 ? 5 : 3);
+    const spAvailable = stdProjIdx >= 0 && mc >= 14 + redsTax;
+    if (spAvailable) {
+      const tempDone = (gm.temperature ?? -30) >= 8;
+      const o2Done = (gm.oxygenLevel ?? 0) >= 14;
+      const oceansDone = (gm.oceans ?? 0) >= 9;
+      // SP EV = TR value + tempo - cost
+      if (!tempDone) bestSpEV = Math.max(bestSpEV, trMCNow + tempoNow - 14); // asteroid
+      if (!oceansDone && mc >= 18 + redsTax) bestSpEV = Math.max(bestSpEV, trMCNow + tempoNow + 2 - 18); // aquifer
+      bestSpEV = Math.max(bestSpEV, trMCNow + tempoNow - 15); // air scrapping (Venus)
+      if (!o2Done && mc >= 23 + redsTax) {
+        const vpNow = gensLeftNow >= 6 ? 3 : gensLeftNow >= 3 ? 5 : 7;
+        bestSpEV = Math.max(bestSpEV, trMCNow + tempoNow + vpNow - 23); // greenery SP
+      }
+    }
+
+    // Calculate best card EV (if available)
+    let bestCard = null;
+    let bestCardEV = -999;
     if (playCardIdx >= 0) {
       const subWf = opts[playCardIdx] || {};
       const payOpts = subWf.paymentOptions || {};
       const hand = subWf.cards?.length > 0 ? subWf.cards : cardsInHand;
       if (hand.length > 0) {
         const extraMC = (payOpts.heat ? heat : 0) + (payOpts.lunaTradeFederationTitanium ? titanium * (state?.thisPlayer?.titaniumValue || 3) : 0);
+        // No MC reserve — SP quota handles forced terraforming
         const totalBudget = mc + extraMC;
         const playable = hand
           .filter(c => {
             if (c.isDisabled || bl.has(c.name)) return false;
             const cost = c.calculatedCost ?? c.cost ?? 999;
-            // Account for steel/titanium payment based on card tags
             const cTags = CARD_TAGS[c.name] || [];
             let budget = totalBudget;
             if (cTags.includes('building')) budget += (steel * (state?.thisPlayer?.steelValue || 2));
@@ -289,45 +317,49 @@ function handleInput(wf, state, depth = 0) {
           .map(c => ({ ...c, _score: scoreCard(c, state) }))
           .sort((a, b) => b._score - a._score);
         if (playable.length > 0 && playable[0]._score >= 0) {
-          const card = playable[0];
-          const subWf2 = opts[playCardIdx] || {};
-          return {
-            type: 'or', index: playCardIdx,
-            response: { type: 'projectCard', card: card.name, payment: smartPay(card.calculatedCost ?? card.cost ?? 0, state, subWf2, CARD_TAGS[card.name]) }
-          };
+          bestCard = playable[0];
+          bestCardEV = playable[0]._score;
         }
       }
+    }
+
+    // Pure EV competition: pick whichever is better
+    if (bestCard && bestCardEV >= bestSpEV) {
+      const subWf2 = opts[playCardIdx] || {};
+      return {
+        type: 'or', index: playCardIdx,
+        response: { type: 'projectCard', card: bestCard.name, payment: smartPay(bestCard.calculatedCost ?? bestCard.cost ?? 0, state, subWf2, CARD_TAGS[bestCard.name]) }
+      };
+    }
+    if (spAvailable && bestSpEV > -5) {
+      return pick(stdProjIdx);
+    }
+    // Card is only option (SP not available/affordable)
+    if (bestCard && bestCardEV >= 0) {
+      const subWf2 = opts[playCardIdx] || {};
+      return {
+        type: 'or', index: playCardIdx,
+        response: { type: 'projectCard', card: bestCard.name, payment: smartPay(bestCard.calculatedCost ?? bestCard.cost ?? 0, state, subWf2, CARD_TAGS[bestCard.name]) }
+      };
     }
 
     // Blue card actions (VP accumulators, free resources)
     if (cardActionIdx >= 0) return pick(cardActionIdx);
 
-    // Trade colonies BEFORE SP if trade value is high (> cost of cheapest SP)
+    // Trade colonies (high-value trades first)
     if (tradeIdx >= 0 && (mc >= 9 || energy >= 3 || titanium >= 3)) {
-      // Check if trade would yield more value than an asteroid SP (14 MC)
       const tradeOpt = opts[tradeIdx];
       const colonies = tradeOpt?.coloniesModel || tradeOpt?.colonies || [];
       if (colonies.length > 0) {
         const bestTradeVal = Math.max(...colonies.map(c => scoreColonyTrade(c, state)));
-        if (bestTradeVal >= 10) return pick(tradeIdx); // high-value trade first
+        if (bestTradeVal >= 8) return pick(tradeIdx);
       }
     }
 
-    // Standard projects — terraform (MC >= 14+reds means we can afford cheapest SP)
-    // Also try SP when MC is high and no good cards remain (mc >= 25 = can afford anything)
-    if (stdProjIdx >= 0 && mc >= 14 + redsTax) {
-      const spOpt = opts[stdProjIdx]; const spCards = spOpt?.cards || [];
-      const gm = state?.game || {};
-      const USEFUL = [];
-      if ((gm.temperature ?? -30) < 8) USEFUL.push('asteroid');
-      if ((gm.oceans ?? 0) < 9) USEFUL.push('aquifer');
-      USEFUL.push('air scrapping'); // Venus TR always useful
-      if ((gm.oxygenLevel ?? 0) < 14) USEFUL.push('greenery');
-      if (spCards.some(c => !c.isDisabled && USEFUL.some(kw => c.name.toLowerCase().includes(kw))) || spCards.length === 0)
-        return pick(stdProjIdx);
-    }
+    // SP fallback when globals still far
+    if (spAvailable && steps > 12) return pick(stdProjIdx);
 
-    // Trade colonies (free resources)
+    // Trade colonies (lower threshold)
     if (tradeIdx >= 0 && (mc >= 9 || energy >= 3 || titanium >= 3)) return pick(tradeIdx);
 
     // Build colony (production bonus)
@@ -866,6 +898,7 @@ async function main() {
         genCounter++;
         cardBlacklist.clear();
         cardPlayCounter.clear();
+
         // Print VP scoreboard + remaining steps at start of each action phase
         try {
           const s0 = await fetch(`${BASE}/api/player?id=${PLAYERS[0].id}`);
@@ -1022,6 +1055,7 @@ async function runBatch(n) {
     genCounter = 0;
     cardBlacklist.clear();
     cardPlayCounter.clear();
+    spThisGen = {};
     const scores = await main();
     if (scores) allResults.push({ gameNum: i, id: game.id, scores, gens: genCounter });
   }

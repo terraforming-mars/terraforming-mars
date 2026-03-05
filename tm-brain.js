@@ -38,6 +38,7 @@
     'Research Outpost', 'Martian Rails', 'Interplanetary Trade', 'Business Network',
     'Mars University', 'Olympus Conference', 'Optimal Aerobraking', 'Media Archives',
     'Standard Technology', 'Space Station', 'Toll Station',
+    'Solar Logistics', 'Earth Office', 'Shuttles', 'Sky Docks',
   ]);
 
   var CITY_CARDS = new Set([
@@ -467,7 +468,11 @@
         if (tags.indexOf('animal') >= 0) score += 5;
         if (tags.indexOf('plant') >= 0) score += 3;
       }
-      if (corp === 'Teractor' && tags.indexOf('earth') >= 0) score += 4;
+      if (corp === 'Teractor' && tags.indexOf('earth') >= 0) {
+        score += 4;
+        // Compound discount: earth discount engines stack with Teractor -3 MC
+        if (ENGINE_CARDS.has(name)) score += early ? 6 : 3;
+      }
       if (corp === 'Interplanetary Cinematics' && isEvent) score += 5;
       if (corp === 'Point Luna' && tags.indexOf('earth') >= 0) score += early ? 6 : 3;
       if (corp === 'Manutech' && PROD_CARDS.has(name)) score += early ? 5 : 2;
@@ -481,6 +486,14 @@
       if (corp === 'CrediCor' && cost >= 20) score += 4;
       if (corp === 'Thorgate' && tags.indexOf('power') >= 0) score += 4;
       if (corp === 'Poseidon' && name.toLowerCase().indexOf('colon') >= 0) score += 5;
+    }
+
+    // === TRADE FLEET / COLONY BONUS ===
+    // Cards granting trade fleets are worth ~8-12 MC/gen in colonies games
+    var TRADE_FLEET_CARDS = { 'Space Port Colony': 1, 'Space Port': 1, 'Cryo-Sleep': 1,
+      'Titan Floating Launch-Pad': 1, 'Trade Envoys': 1, 'Rim Freighters': 1 };
+    if (TRADE_FLEET_CARDS[name]) {
+      score += early ? 12 : (mid ? 8 : 4);
     }
 
     // === COST EFFICIENCY ===

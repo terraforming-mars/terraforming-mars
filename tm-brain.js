@@ -793,6 +793,21 @@
     analyzeActions: analyzeActions,
   };
 
+  // Auto-init from TM_CARD_EFFECTS in browser context
+  if (typeof module === 'undefined' && typeof root.TM_CARD_EFFECTS !== 'undefined') {
+    var effects = root.TM_CARD_EFFECTS;
+    var autoVP = {};
+    for (var cardName in effects) {
+      var e = effects[cardName];
+      if (e.vpAcc || e.vpPer) {
+        autoVP[cardName] = { type: 'per_resource', per: e.vpPer || 2 };
+      } else if (typeof e.vp === 'number' && e.vp !== 0) {
+        autoVP[cardName] = { type: 'static', vp: e.vp };
+      }
+    }
+    setCardData(null, autoVP);
+  }
+
   // UMD export
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = TM_BRAIN;

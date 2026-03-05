@@ -468,6 +468,60 @@
 
     // === Awards/Milestones enablers ===
     'Aquifer Pumping':         { perGen: 2 },   // action: 8 MC → ocean (can use steel)
+
+    // === Discount/value modifiers (not cardDiscount) ===
+    'Earth Office':            { perGen: 3 },   // -3 MC on earth cards (high impact, many earth cards)
+    'Space Station':           { perGen: 2 },   // -2 MC on space cards
+    'Sky Docks':               { perGen: 2 },   // -1 MC on all cards (=cardDiscount but parser misses)
+    'Shuttles':                { perGen: 2 },   // -2 MC on space cards + 1 VP
+    'Warp Drive':              { perGen: 2 },   // -4 MC on space cards (big but narrow)
+    'Mass Converter':          { perGen: 2 },   // -5 MC on space cards (huge but narrow)
+    'Rego Plastics':           { perGen: 1.5 }, // +1 steel value
+    'Mercurian Alloys':        { perGen: 2 },   // +2 titanium value
+    'Lunar Steel':             { perGen: 1 },   // +1 steel value on Moon cards
+    'Quantum Extractor':       { perGen: 2 },   // -2 MC on space cards + energy prod
+
+    // === Trigger/passive cards (continued) ===
+    'Rover Construction':      { perGen: 1.5 }, // +2 MC per city placed
+    'Spin-off Department':     { perGen: 2 },   // draw 1 card on card play with prod increase
+    'Meat Industry':           { perGen: 1.5 }, // +2 MC per animal tag played
+    'Topsoil Contract':        { perGen: 1 },   // +1 MC per microbe tag + sell plants
+    'Breeding Farms':          { perGen: 1 },   // +2 plants per animal tag played
+    'Pollinators':             { perGen: 1 },   // +1 animal per plant tag
+    'Bioengineering Enclosure':{ perGen: 1.5 }, // +2 plants per animal tag (trigger)
+    'Event Analysts':          { perGen: 1 },   // +1 influence per event
+    'Floater Technology':      { perGen: 1 },   // +1 floater per science tag
+    'GMO Contract':            { perGen: 1 },   // +2 MC per animal/plant/microbe tag
+    'Agro-Drones':             { perGen: 1 },   // +1 plant per Mars tag
+    'Communication Center':    { perGen: 1 },   // +1 MC per event (3P)
+    'Advertising':             { perGen: 1 },   // +2 MC per card with req fulfilled
+    'Botanical Experience':    { perGen: 1 },   // +1 plant per plant tag (any player)
+    'Floyd Continuum':         { perGen: 1 },   // draw 1 card per event played
+    'Self-replicating Robots': { perGen: 3 },   // -2 MC on space/building cards with no tags, repeats
+    'Homeostasis Bureau':      { perGen: 1.5 }, // +2 plants per city (trigger)
+
+    // === Action: TR/global raises ===
+    'Caretaker Contract':      { perGen: 3 },   // action: 8 heat → 1 TR (great with heat engine)
+    'Symbiotic Fungus':        { perGen: 1 },   // action: add 1 microbe to another card
+    'Predators':               { perGen: 1 },   // action: steal 1 animal from opponent
+    'Extreme-Cold Fungus':     { perGen: 1 },   // action: +1 plant or +1 microbe
+
+    // === Colony / trade modifiers ===
+    'Trading Colony':          { perGen: 1 },   // +1 to colony trade (all)
+    'Colonial Representation': { perGen: 1.5 }, // +1 influence permanent + colony rebate
+    'L1 Trade Terminal':       { perGen: 2 },   // no energy/MC for trade, +1 VP
+    'Cryo-Sleep':              { perGen: 1 },   // +1 trade income
+
+    // === VP accumulators the parser can't score ===
+    'Ocean Sanctuary':         { perGen: 1 },   // action: +1 animal (1 VP/animal, ocean req)
+    'Whales':                  { perGen: 1 },   // +1 animal per ocean placed + action +1
+    'Anthozoa':                { perGen: 0.5 }, // +1 animal per ocean placed, no action
+    'Stratopolis':             { perGen: 1 },   // +1 floater per Venus tag, 1 VP/2 floaters
+
+    // === One-time value adjustments ===
+    'Mohole Lake':             { once: 5 },     // city + ocean + 3 plants, parser misses city/ocean combo
+    'Research Outpost':        { once: 3 },     // city + draw 1, parser misses city
+    'Maxwell Base':            { once: 2 },     // city on Venus, parser misses city value
   };
 
   // ══════════════════════════════════════════════════════════════

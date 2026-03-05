@@ -14,10 +14,12 @@
 
   var _cardTags = {};
   var _cardVP = {};
+  var _cardData = {};  // full structured card data from gen_card_data.js
 
-  function setCardData(cardTags, cardVP) {
+  function setCardData(cardTags, cardVP, cardData) {
     if (cardTags) _cardTags = cardTags;
     if (cardVP) _cardVP = cardVP;
+    if (cardData) _cardData = cardData;
   }
 
   // ══════════════════════════════════════════════════════════════
@@ -373,148 +375,320 @@
   // CARD SCORING (full version from smartbot)
   // ══════════════════════════════════════════════════════════════
 
+  // ══════════════════════════════════════════════════════════════
+  // EV CONSTANTS (MC equivalents from CLAUDE.md tier-list formulas)
+  // ══════════════════════════════════════════════════════════════
+
+  // MC value of 1 unit of production per remaining generation
+  var PROD_MC = {
+    megacredits: 1, steel: 2, titanium: 3, plants: 1.5,
+    energy: 0.8, heat: 0.5
+  };
+
+  // MC value of 1 instant resource
+  var STOCK_MC = {
+    megacredits: 1, steel: 2, titanium: 3, plants: 0.75,
+    energy: 0.5, heat: 0.5
+  };
+
+  // MC value of 1 VP (scales with game phase)
+  function vpMC(gensLeft) {
+    if (gensLeft >= 6) return 3;  // early: VP cheap, MC more useful
+    if (gensLeft >= 3) return 5;  // mid
+    return 7;                     // late: VP = everything
+  }
+
+  // MC value of 1 TR raise (production income + VP at end)
+  function trMC(gensLeft, redsTax) {
+    return gensLeft + vpMC(gensLeft) - redsTax;
+  }
+
+  // Tag intrinsic value (MC equivalent of having the tag)
+  var TAG_VALUE = {
+    jovian: 4, science: 4, earth: 2, venus: 2, space: 1.5,
+    building: 1.5, plant: 2, microbe: 1.5, animal: 2, power: 1,
+    city: 1, moon: 1, mars: 0.5, event: 1, wild: 2
+  };
+
+  // ══════════════════════════════════════════════════════════════
+  // MANUAL EV OVERRIDES — for cards where parser misses effects
+  // perGen: MC-equivalent value generated per generation
+  // once: one-time MC-equivalent bonus
+  // ══════════════════════════════════════════════════════════════
+
+  var MANUAL_EV = {
+    // === Engine / Discount effects NOT captured by parser ===
+    // Cards with cardDiscount in parser data are handled automatically
+    'Advanced Alloys':         { perGen: 3 },   // +1 steel/ti value (not a discount)
+    'Toll Station':            { perGen: 3 },   // +1 MC per opponent space tag
+    'Interplanetary Trade':    { perGen: 4 },   // +1 MC income per 5 played tags
+
+    // === Action cards (draw, MC, TR) ===
+    'AI Central':              { perGen: 7 },   // action: draw 2 cards
+    'Martian Rails':           { perGen: 2 },   // action: 1 MC per city
+    'Business Network':        { perGen: 2 },   // action: buy 1 card (net ~0.5 MC + filtering)
+    'Olympus Conference':      { perGen: 1.5 }, // trigger: draw on science tag
+    'Mars University':         { perGen: 1.5 }, // trigger: discard→draw on science
+    'Media Archives':          { perGen: 1 },   // trigger: +1 MC on event
+    'Optimal Aerobraking':     { perGen: 2 },   // trigger: +3 steel +3 heat on space event
+    'Standard Technology':     { perGen: 3 },   // trigger: +3 MC per std project
+    'Red Ships':               { perGen: 3 },   // action: MC per empty adj (scales)
+    'Directed Impactors':      { perGen: 2 },   // action: 6 MC → +1 asteroid
+    'Power Infrastructure':    { perGen: 2 },   // action: energy→MC
+
+    // === Trigger/passive cards ===
+    'Arctic Algae':            { perGen: 2 },   // +2 plants per ocean
+    'Herbivores':              { perGen: 1 },   // +1 animal per greenery
+    'Pets':                    { perGen: 1 },   // +1 animal per city (any player)
+    'Ecological Survey':       { perGen: 1.5 }, // +1 plant per greenery action
+    'Geological Survey':       { perGen: 1.5 }, // +1 steel per placement bonus
+    'Marketing Experts':       { perGen: 2 },   // +1 MC per event played
+    'Decomposers':             { perGen: 2 },   // +1 microbe per plant/animal/microbe tag
+    'GHG Factories':           { perGen: 1.5 }, // spend 1 heat → +1 heat prod
+    'Viral Enhancers':         { perGen: 2 },   // +1 plant/animal/microbe on tag
+    'Ants':                    { perGen: 1 },   // action: steal 1 microbe → this
+    'Protected Habitats':      { once: 3 },     // defense (plants/animals/microbes protected)
+    'Immigrant City':          { perGen: 1 },   // +1 MC prod per city
+    'Adaptation Technology':   { once: 5 },     // -2 to all req → opens cards
+    'Media Group':             { perGen: 1 },   // +3 MC per event
+    'Inventors Guild':         { perGen: 1.5 }, // action: buy 1 card from deck
+
+    // === Floater actions ===
+    'Dirigibles':              { perGen: 2 },   // action: add 1 floater, 3 floaters = 1 Venus TR
+    'Jovian Lanterns':         { perGen: 1.5 }, // action: spend 1 ti → +2 floaters, 2 = 1 TR
+    'Venusian Animals':        { perGen: 1 },   // trigger: +1 animal per Venus tag
+
+    // === Colony-related ===
+    'Trade Envoys':            { perGen: 1.5 }, // +1 to trade bonus
+    'Rim Freighters':          { perGen: 1.5 }, // trade costs 1 less
+    'Orbital Laboratories':    { perGen: 1.5 }, // draw card when trading
+
+    // === Awards/Milestones enablers ===
+    'Aquifer Pumping':         { perGen: 2 },   // action: 8 MC → ocean (can use steel)
+  };
+
+  // ══════════════════════════════════════════════════════════════
+  // CARD SCORING — EV-based (uses structured card data)
+  // ══════════════════════════════════════════════════════════════
+
   function scoreCard(card, state) {
     var cost = card.calculatedCost != null ? card.calculatedCost : (card.cost || 0);
     var name = card.name || '';
     var gen = (state && state.game && state.game.generation) || 5;
     var steps = remainingSteps(state);
-    var gensLeft = Math.max(1, Math.ceil(steps / 4));
-    var tags = _cardTags[name] || card.tags || [];
+    var ratePerGen = 4;
+    if (state && state.players) {
+      ratePerGen = Math.max(3, Math.min(6, (state.players.length || 3) + 1));
+    }
+    var gensLeft = Math.max(1, Math.ceil(steps / ratePerGen));
     var tp = (state && state.thisPlayer) || {};
     var myTags = tp.tags || {};
-    var score = 0;
+    var redsTax = isRedsRuling(state) ? 3 : 0;
 
-    var early = gen <= 4;
-    var mid = gen >= 5 && gen <= 8;
-    var late = gen >= 9;
+    // Lookup structured data (from card_data.js or TM_CARD_EFFECTS)
+    var cd = _cardData[name] || {};
+    var tags = _cardTags[name] || card.tags || cd.tags || [];
+    var beh = cd.behavior || {};
+    var act = cd.action || {};
+    var vpInfo = cd.vp || _cardVP[name] || null;
+    var discount = cd.cardDiscount || null;
 
-    // === VP SCORING ===
-    var staticVP = STATIC_VP[name] || 0;
-    if (staticVP > 0) {
-      var vpMult = early ? 4 : (mid ? 5 : 7);
-      score += staticVP * vpMult;
-    }
-    if (staticVP < 0) score += staticVP * 3;
+    var ev = 0;
 
-    if (DYNAMIC_VP_CARDS.has(name)) {
-      score += early ? 25 : (mid ? 12 : (gensLeft >= 2 ? 5 : 0));
-    } else if (VP_CARDS.has(name)) {
-      score += early ? 18 : (mid ? 10 : (gensLeft >= 2 ? 4 : 0));
-    }
-
-    // CARD_VP fallback
-    var vpData = _cardVP[name];
-    if (vpData && staticVP === 0 && !DYNAMIC_VP_CARDS.has(name) && !VP_CARDS.has(name)) {
-      if (vpData.type === 'static' && vpData.vp > 0) {
-        score += vpData.vp * (early ? 4 : (mid ? 5 : 7));
-      } else if (vpData.type === 'static' && vpData.vp < 0) {
-        score += vpData.vp * 3;
-      } else if (vpData.type === 'per_resource' && vpData.per === 1) {
-        score += early ? 18 : (mid ? 8 : 3);
-      } else if (vpData.type === 'per_resource') {
-        score += early ? 5 : 2;
-      } else if (vpData.type === 'special') {
-        score += early ? 8 : (mid ? 5 : 3);
+    // ── PRODUCTION VALUE ──
+    // Each +1 prod = gensLeft * MC-per-unit
+    var prod = beh.production;
+    if (prod) {
+      for (var pk in prod) {
+        var pVal = PROD_MC[pk] || 1;
+        ev += prod[pk] * pVal * gensLeft;
       }
     }
 
-    // === PRODUCTION ===
-    if (PROD_CARDS.has(name)) {
-      score += early ? 15 : (mid ? 7 : 2);
+    // ── INSTANT RESOURCES (stock) ──
+    var stock = beh.stock;
+    if (stock) {
+      for (var sk in stock) {
+        var sVal = STOCK_MC[sk] || 1;
+        ev += stock[sk] * sVal;
+      }
     }
 
-    // === ENGINE ===
-    if (ENGINE_CARDS.has(name)) {
-      score += early ? 18 : (mid ? 8 : 2);
+    // ── GLOBAL PARAMETER RAISES ──
+    // Each raise = 1 TR
+    var glob = beh.global;
+    if (glob) {
+      var trRaises = 0;
+      for (var gk in glob) trRaises += glob[gk];
+      ev += trRaises * trMC(gensLeft, redsTax);
+    }
+    if (beh.tr) ev += beh.tr * trMC(gensLeft, redsTax);
+    if (beh.ocean) ev += trMC(gensLeft, redsTax) + 2; // ocean = TR + ~2 MC board bonus
+    if (beh.greenery) ev += trMC(gensLeft, redsTax) + vpMC(gensLeft); // TR + 1 VP
+
+    // ── CITY TILE ──
+    if (beh.city) ev += vpMC(gensLeft) * 1.5; // ~1.5 VP avg from adjacent greeneries
+
+    // ── COLONY ──
+    if (beh.colony) ev += 8; // colony slot ≈ 8 MC (prod bonus + trade target)
+    if (beh.tradeFleet) ev += gensLeft * 6; // extra trade ≈ 6 MC/gen
+
+    // ── DRAW CARDS ──
+    if (beh.drawCard) ev += beh.drawCard * 3.5; // 1 card ≈ 3.5 MC
+
+    // ── VP ──
+    if (vpInfo) {
+      if (vpInfo.type === 'static') {
+        ev += (vpInfo.vp || 0) * vpMC(gensLeft);
+      } else if (vpInfo.type === 'per_resource') {
+        // VP accumulator: gains ~1 resource/gen via action, VP = gensLeft / per
+        var expectedRes = Math.max(1, gensLeft - 1); // gens of accumulation
+        ev += (expectedRes / (vpInfo.per || 1)) * vpMC(gensLeft);
+      } else if (vpInfo.type === 'per_tag') {
+        var tagCount = (myTags[vpInfo.tag] || 0) + 2; // current + ~2 future
+        ev += (tagCount / (vpInfo.per || 1)) * vpMC(gensLeft);
+      } else if (vpInfo.type === 'per_colony' || vpInfo.type === 'per_city') {
+        // Estimate ~4-6 colonies or cities total in 3P game
+        ev += (5 / (vpInfo.per || 1)) * vpMC(gensLeft);
+      } else if (vpInfo.type === 'special') {
+        ev += vpMC(gensLeft) * 2; // conservative estimate: ~2 VP
+      }
     }
 
-    // === CITIES ===
-    if (CITY_CARDS.has(name)) {
-      score += early ? 12 : (mid ? 9 : 6);
+    // ── BLUE CARD ACTIONS (recurring) ──
+    if (act.addResources && vpInfo && vpInfo.type === 'per_resource') {
+      // Already counted in VP accumulator above, don't double count
+    } else if (act.addResources) {
+      ev += gensLeft * 1; // generic resource gain, small value
+    }
+    if (act.drawCard) ev += gensLeft * act.drawCard * 3; // card/gen
+    if (act.stock) {
+      for (var ask in act.stock) {
+        ev += gensLeft * (act.stock[ask] || 0) * (STOCK_MC[ask] || 1) * 0.7; // 0.7 = opportunity cost of action
+      }
+    }
+    if (act.production) {
+      for (var apk in act.production) {
+        ev += gensLeft * (act.production[apk] || 0) * (PROD_MC[apk] || 1) * 0.5;
+      }
+    }
+    if (act.tr) ev += gensLeft * act.tr * trMC(gensLeft, redsTax) * 0.5; // action for TR (slow)
+    if (act.global) {
+      for (var agk in act.global) {
+        ev += gensLeft * (act.global[agk] || 0) * trMC(gensLeft, redsTax) * 0.5;
+      }
     }
 
-    // === TAG-BASED SCORING ===
+    // ── CARD DISCOUNT (engine value) ──
+    if (discount && discount.amount) {
+      var cardsPerGen = 2.5; // avg cards played per gen (universal discount)
+      if (discount.tag) cardsPerGen = 1; // tag-specific: fewer matching cards
+      ev += discount.amount * cardsPerGen * gensLeft;
+    }
+
+    // ── DECREASE ANY PRODUCTION (opponent harm) ──
+    // In 3P: hurting 1 opponent helps the 3rd for free → halve value
+    if (beh.decreaseAnyProduction) {
+      ev += beh.decreaseAnyProduction.count * 1.5; // small bonus, nerfed for 3P
+    }
+    if (beh.removeAnyPlants) {
+      ev += beh.removeAnyPlants * 0.5; // low value in 3P
+    }
+
+    // ── TAG VALUE ──
+    var isEvent = tags.indexOf('event') >= 0;
     var hasBuilding = tags.indexOf('building') >= 0;
     var hasSpace = tags.indexOf('space') >= 0;
+
+    // Steel/titanium payment savings (effective cost reduction)
     if (hasBuilding && (tp.steel || 0) > 0) {
-      var steelSaving = Math.min(tp.steel, Math.ceil(cost / (tp.steelValue || 2))) * (tp.steelValue || 2);
-      score += Math.min(steelSaving, cost) * 0.5;
+      var steelVal = tp.steelValue || 2;
+      var steelSave = Math.min(tp.steel * steelVal, cost);
+      ev += steelSave; // full MC saved
     }
     if (hasSpace && (tp.titanium || 0) > 0) {
-      var titSaving = Math.min(tp.titanium, Math.ceil(cost / (tp.titaniumValue || 3))) * (tp.titaniumValue || 3);
-      score += Math.min(titSaving, cost) * 0.5;
+      var tiVal = tp.titaniumValue || 3;
+      var tiSave = Math.min(tp.titanium * tiVal, cost);
+      ev += tiSave;
     }
 
-    var isEvent = tags.indexOf('event') >= 0;
-
+    // Tag intrinsic value (synergies, milestones, awards)
     if (!isEvent) {
-      for (var ti = 0; ti < tags.length; ti++) {
-        var tag = tags[ti];
-        var count = myTags[tag] || 0;
-        if (count >= 3) score += 3;
-        else if (count >= 1) score += 1;
+      for (var tgi = 0; tgi < tags.length; tgi++) {
+        var tg = tags[tgi];
+        ev += TAG_VALUE[tg] || 0.5;
+        // Extra synergy if we already have tags in this category
+        var existing = myTags[tg] || 0;
+        if (existing >= 3) ev += 3;
+        else if (existing >= 1) ev += 1;
       }
-      if (tags.indexOf('science') >= 0) score += early ? 3 : 1;
-      if (tags.indexOf('jovian') >= 0) score += 2;
-      if (tags.indexOf('venus') >= 0) score += 1;
-      if (tags.indexOf('plant') >= 0) score += early ? 4 : (mid ? 2 : 1);
+    } else {
+      // Events: 1 tag value for event itself
+      ev += 1;
     }
 
-    // === CORPORATION SYNERGY ===
+    // No-tag penalty (loses all synergies)
+    if (tags.length === 0) ev -= 3;
+
+    // ── CORPORATION SYNERGY ──
     var corp = (tp.tableau && tp.tableau[0] && (tp.tableau[0].name || tp.tableau[0])) || '';
     if (corp) {
-      if (corp === 'Saturn Systems' && tags.indexOf('jovian') >= 0) score += early ? 10 : 5;
+      // Saturn Systems: +1 MC prod per jovian tag
+      if (corp === 'Saturn Systems' && tags.indexOf('jovian') >= 0) {
+        ev += gensLeft * 1; // +1 MC prod = gensLeft
+      }
+      // Arklight: +1 VP per animal/plant tag
       if (corp === 'Arklight') {
-        if (tags.indexOf('animal') >= 0) score += 5;
-        if (tags.indexOf('plant') >= 0) score += 3;
+        if (tags.indexOf('animal') >= 0) ev += vpMC(gensLeft);
+        if (tags.indexOf('plant') >= 0) ev += vpMC(gensLeft) * 0.6;
       }
+      // Teractor: -3 MC on earth cards
       if (corp === 'Teractor' && tags.indexOf('earth') >= 0) {
-        score += 4;
-        // Compound discount: earth discount engines stack with Teractor -3 MC
-        if (ENGINE_CARDS.has(name)) score += early ? 6 : 3;
+        ev += 3; // save 3 MC
+        // Compound discount: if card itself gives earth discount
+        if (discount && discount.tag === 'earth') ev += discount.amount * 0.8 * gensLeft;
       }
-      if (corp === 'Interplanetary Cinematics' && isEvent) score += 5;
-      if (corp === 'Point Luna' && tags.indexOf('earth') >= 0) score += early ? 6 : 3;
-      if (corp === 'Manutech' && PROD_CARDS.has(name)) score += early ? 5 : 2;
+      // Interplanetary Cinematics: +2 MC per event
+      if (corp === 'Interplanetary Cinematics' && isEvent) ev += 2;
+      // Point Luna: draw card per earth tag
+      if (corp === 'Point Luna' && tags.indexOf('earth') >= 0) ev += 3.5;
+      // Manutech: production = immediate resource
+      if (corp === 'Manutech' && prod) {
+        for (var mk in prod) {
+          if (prod[mk] > 0) ev += prod[mk] * (STOCK_MC[mk] || 1);
+        }
+      }
+      // Stormcraft: floater synergy
       if (corp === 'Stormcraft Incorporated') {
-        if (tags.indexOf('jovian') >= 0) score += 3;
-        if (FLOATER_VP_CARDS.has(name)) score += 5;
+        if (tags.indexOf('jovian') >= 0) ev += 2;
+        if (cd.resourceType === 'Floater') ev += 3;
       }
-      if (corp === 'Polyphemos' && (DYNAMIC_VP_CARDS.has(name) || VP_CARDS.has(name))) score += 4;
-      if (corp === 'Mining Guild' && hasBuilding) score += 2;
-      if (corp === 'Ecoline' && (name.toLowerCase().indexOf('plant') >= 0 || tags.indexOf('plant') >= 0)) score += 3;
-      if (corp === 'CrediCor' && cost >= 20) score += 4;
-      if (corp === 'Thorgate' && tags.indexOf('power') >= 0) score += 4;
-      if (corp === 'Poseidon' && name.toLowerCase().indexOf('colon') >= 0) score += 5;
+      // Polyphemos: +5 MC per card action → VP accumulators better
+      if (corp === 'Polyphemos' && act.addResources) ev += gensLeft * 1;
+      // Mining Guild: steel production on placement
+      if (corp === 'Mining Guild' && hasBuilding) ev += gensLeft * 0.5;
+      // Ecoline: -1 plant for greenery
+      if (corp === 'Ecoline' && tags.indexOf('plant') >= 0) ev += 2;
+      // CrediCor: -4 MC on 20+ cost cards
+      if (corp === 'CrediCor' && cost >= 20) ev += 4;
+      // Thorgate: -3 MC on power tag
+      if (corp === 'Thorgate' && tags.indexOf('power') >= 0) ev += 3;
+      // Poseidon: +1 MC prod per colony
+      if (corp === 'Poseidon' && beh.colony) ev += gensLeft * 1;
     }
 
-    // === TRADE FLEET / COLONY BONUS ===
-    // Cards granting trade fleets are worth ~8-12 MC/gen in colonies games
-    var TRADE_FLEET_CARDS = { 'Space Port Colony': 1, 'Space Port': 1, 'Cryo-Sleep': 1,
-      'Titan Floating Launch-Pad': 1, 'Trade Envoys': 1, 'Rim Freighters': 1 };
-    if (TRADE_FLEET_CARDS[name]) {
-      score += early ? 12 : (mid ? 8 : 4);
+    // ── MANUAL EV OVERRIDES (effects not captured by parser) ──
+    var manual = MANUAL_EV[name];
+    if (manual) {
+      if (manual.perGen) ev += manual.perGen * gensLeft;
+      if (manual.once) ev += manual.once;
     }
 
-    // === COST EFFICIENCY ===
-    if (cost <= 5) score += 5;
-    else if (cost <= 10) score += 3;
-    else if (cost <= 18) score += 0;
-    else if (cost <= 25) score -= 2;
-    else score -= 5;
+    // ── FINAL: EV minus cost ──
+    // cost already includes server-side discounts via calculatedCost
+    var netEV = ev - cost;
 
-    // Unknown cards fallback
-    var isKnown = !!vpData || staticVP !== 0 || DYNAMIC_VP_CARDS.has(name) || VP_CARDS.has(name)
-      || PROD_CARDS.has(name) || ENGINE_CARDS.has(name) || CITY_CARDS.has(name);
-    if (!isKnown) {
-      if (tags.length === 0) {
-        score += cost <= 8 ? 2 : (cost <= 15 ? 0 : -3);
-      } else {
-        score += cost <= 10 ? 3 : (cost <= 18 ? 1 : -2);
-      }
-    }
-
-    return score;
+    return Math.round(netEV * 10) / 10; // 1 decimal precision
   }
 
   // ══════════════════════════════════════════════════════════════

@@ -1,8 +1,9 @@
 const http = require('http');
 const CARD_TAGS = require('./card_tags');
 const CARD_VP = require('./card_vp');
+const CARD_DATA = require('./card_data');
 const TM_BRAIN = require('./tm-brain');
-TM_BRAIN.setCardData(CARD_TAGS, CARD_VP);
+TM_BRAIN.setCardData(CARD_TAGS, CARD_VP, CARD_DATA);
 
 const {
   VP_CARDS, ENGINE_CARDS, CITY_CARDS, PROD_CARDS, DYNAMIC_VP_CARDS,

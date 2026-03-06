@@ -12,7 +12,7 @@
     "console-stamp": "3.1.2",
     "cross-env": "^7.0.3",
     "dialog-polyfill": "^0.5.1",
-    "dotenv": "^8.2.0",
+    "dotenv": "^17.3.1",
     "html-escaper": "^3.0.3",
     "mnemonist": "^0.40.3",
     "prom-client": "^14.0.1",

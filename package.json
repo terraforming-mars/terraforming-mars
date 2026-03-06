@@ -54,7 +54,7 @@
     "style-loader": "^3.3.0",
     "ts-loader": "^9.5.4",
     "ts-mocha": "^9.0.2",
-    "ts-node": "^10.9.1",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
     "tsconfig-paths-webpack-plugin": "^3.5.1",

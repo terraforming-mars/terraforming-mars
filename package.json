@@ -51,7 +51,7 @@
     "mochapack": "^2.1.5",
     "rimraf": "^3.0.2",
     "spectre.css": "^0.5.8",
-    "style-loader": "^3.3.0",
+    "style-loader": "^4.0.0",
     "ts-loader": "^9.5.4",
     "ts-mocha": "^9.0.2",
     "ts-node": "^10.9.1",

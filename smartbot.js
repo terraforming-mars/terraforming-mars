@@ -314,7 +314,13 @@ function handleInput(wf, state, depth = 0) {
             if (cTags.includes('space')) budget += (titanium * (state?.thisPlayer?.titaniumValue || 3));
             return cost <= budget;
           })
-          .map(c => ({ ...c, _score: scoreCard(c, state) }))
+          .map(c => {
+            let score = scoreCard(c, state);
+            // VP and city cards get priority bonus — production values alone don't capture end-game VP
+            if (VP_CARDS.has(c.name) || DYNAMIC_VP_CARDS.has(c.name)) score += 8;
+            if (CITY_CARDS.has(c.name)) score += 5;
+            return { ...c, _score: score };
+          })
           .sort((a, b) => b._score - a._score);
         if (playable.length > 0 && playable[0]._score >= 0) {
           bestCard = playable[0];
@@ -454,7 +460,16 @@ function handleInput(wf, state, depth = 0) {
       const reserve = gen <= 2 ? 0 : (gen <= 5 ? 5 : 8);
       const spendable = Math.max(0, mc - reserve);
       const canAfford = Math.min(Math.floor(spendable / cardCost), max, cards.length);
-      const sorted = [...cards].sort((a, b) => scoreCard(b, state) - scoreCard(a, state));
+      const sorted = [...cards].sort((a, b) => {
+        let sa = scoreCard(a, state), sb = scoreCard(b, state);
+        if (VP_CARDS.has(a.name) || DYNAMIC_VP_CARDS.has(a.name)) sa += 8;
+        if (VP_CARDS.has(b.name) || DYNAMIC_VP_CARDS.has(b.name)) sb += 8;
+        if (CITY_CARDS.has(a.name)) sa += 8;
+        if (CITY_CARDS.has(b.name)) sb += 8;
+        if (gen <= 4 && ENGINE_CARDS.has(a.name)) sa += 6;
+        if (gen <= 4 && ENGINE_CARDS.has(b.name)) sb += 6;
+        return sb - sa;
+      });
       const threshold = gen <= 4 ? 2 : (gen <= 8 ? 3 : 5);
       const worthBuying = sorted.filter(c => scoreCard(c, state) >= threshold);
       const maxBuy = gen <= 4 ? 4 : (gen <= 8 ? 4 : 3);
@@ -1031,7 +1046,7 @@ async function createGame(firstPlayerIdx = 0) {
   const data = JSON.stringify(payload);
   const result = await new Promise((res, rej) => {
     const req = require('http').request({
-      hostname: 'localhost', port: 8080, path: '/api/creategame',
+      hostname: 'localhost', port: 8081, path: '/api/creategame',
       method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(data) }
     }, (r) => { let b=''; r.on('data', c=>b+=c); r.on('end', ()=>res({status:r.statusCode,body:b})); });
     req.on('error', rej); req.write(data); req.end();

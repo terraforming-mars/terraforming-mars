@@ -518,10 +518,61 @@
     'Anthozoa':                { perGen: 0.5 }, // +1 animal per ocean placed, no action
     'Stratopolis':             { perGen: 1 },   // +1 floater per Venus tag, 1 VP/2 floaters
 
+    // === Action: energy converters (TR/oxygen/ocean) ===
+    'Equatorial Magnetizer':   { perGen: 2.5 }, // action: -1 energy prod → +1 TR
+    'Development Center':      { perGen: 3 },   // action: spend 1 energy → draw 1 card
+    'Water Splitting Plant':   { perGen: 2.5 }, // action: spend 3 energy → place ocean
+    'Steelworks':              { perGen: 2.5 }, // action: spend 4 energy → +2 steel + oxygen
+    'Ironworks':               { perGen: 2 },   // action: spend 4 energy → +1 steel + oxygen
+    'Ore Processor':           { perGen: 2 },   // action: spend 4 energy → +1 titanium + oxygen
+    'Electro Catapult':        { perGen: 4 },   // action: spend 1 plant/steel → +7 MC
+    'Venus Magnetizer':        { perGen: 2 },   // action: -1 energy prod → raise Venus
+
+    // === Action: microbe/floater → TR (free raises) ===
+    'GHG Producing Bacteria':  { perGen: 1.5 }, // action: +1 microbe OR spend 2 → raise temp
+    'Nitrite Reducing Bacteria': { perGen: 1.5 }, // action: +1 microbe OR spend 3 → +1 TR (starts with 3)
+    'Regolith Eaters':         { perGen: 1.5 }, // action: +1 microbe OR spend 2 → raise oxygen
+    'Thermophiles':            { perGen: 2 },   // action: +1 microbe OR spend 2 → raise Venus
+    'Sulphur-Eating Bacteria': { perGen: 1.5 }, // action: +1 microbe OR spend 3 → raise Venus
+    'Forced Precipitation':    { perGen: 1.5 }, // action: 2 MC → +1 floater OR 2 floaters → Venus
+    'Rotator Impacts':         { perGen: 1.5 }, // action: 6 MC(ti) → +1 asteroid OR spend 1 → Venus
+    'Extractor Balloons':      { perGen: 2 },   // action: +1 floater OR 3 → Venus (starts with 3)
+    'Jet Stream Microscrappers': { perGen: 1.5 }, // action: 1 ti → +2 floaters OR 2 → Venus
+
+    // === Action: VP accumulators (free VP/gen) ===
+    'Fish':                    { perGen: 1.5 }, // action: +1 animal (1 VP each)
+    'Birds':                   { perGen: 1.5 }, // action: +1 animal (1 VP each)
+    'Livestock':               { perGen: 1.5 }, // action: +1 animal (1 VP each)
+    'Penguins':                { perGen: 1.5 }, // action: +1 animal (1 VP each)
+    'Stratospheric Birds':     { perGen: 1.5 }, // action: +1 animal (1 VP each, Venus)
+    'Sub-zero Salt Fish':      { perGen: 1.5 }, // action: +1 animal (1 VP each) + colony trigger
+    'Small Animals':           { perGen: 0.75 }, // action: +1 animal (1 VP per 2)
+    'Refugee Camps':           { perGen: 1 },   // action: spend 1 MC → +1 VP counter
+    'Security Fleet':          { perGen: 1 },   // action: spend 1 titanium → +1 fighter (1 VP)
+    'Martian Zoo':             { perGen: 1.5 }, // action: 1 MC → +1 VP + earth tag trigger MC
+    'Physics Complex':         { perGen: 1.5 }, // action: spend 6 energy → +1 science (1 VP)
+    'Tardigrades':             { perGen: 0.5 }, // action: +1 microbe (1 VP per 4)
+    'Extremophiles':           { perGen: 0.5 }, // action: +1 microbe (1 VP per 3)
+    'Venusian Insects':        { perGen: 0.75 }, // action: +1 microbe (1 VP per 2)
+    'Floating Habs':           { perGen: 0.5 }, // action: 2 MC → +1 floater (1 VP per 2)
+
+    // === Action: resource converters ===
+    'Deuterium Export':        { perGen: 1.5 }, // action: +1 floater OR spend 1 → +1 energy prod
+    'Atmo Collectors':         { perGen: 1.5 }, // action: +1 floater OR spend 1 → 2 any resource
+    'Jupiter Floating Station': { perGen: 1 },  // action: +1 floater (VP/3) + MC on Jovian tag
+    'Directed Heat Usage':     { perGen: 1 },   // action: 3 heat → +1 steel or +1 MC prod
+    'Cryptocurrency':          { perGen: 1 },   // action: +1 resource (usable as MC for SP)
+
+    // === Discount: Venus ===
+    'Venus Waystation':        { perGen: 1.5 }, // -2 MC on Venus cards
+
     // === One-time value adjustments ===
     'Mohole Lake':             { once: 5 },     // city + ocean + 3 plants, parser misses city/ocean combo
     'Research Outpost':        { once: 3 },     // city + draw 1, parser misses city
     'Maxwell Base':            { once: 2 },     // city on Venus, parser misses city value
+    'Robotic Workforce':       { once: 5 },     // duplicate production box of 1 building card
+    'Sponsored Academies':     { once: 3 },     // discard 1 bad, draw 3, but opponents draw 1 each
+    'Psychrophiles':           { perGen: 1 },   // action: +1 microbe (usable as 2 MC on plant cards)
   };
 
   // ══════════════════════════════════════════════════════════════
@@ -582,7 +633,7 @@
     // Each raise = 1 TR + tempo bonus (pushing game to end locks in your lead)
     // Tempo bonus: ending the game 1 gen sooner saves opponents ~10 MC of production
     // and locks in VP lead. Scale with gensLeft (more valuable mid-game).
-    var tempoBonus = gensLeft >= 5 ? 7 : (gensLeft >= 3 ? 5 : 3);
+    var tempoBonus = gensLeft >= 5 ? 8 : (gensLeft >= 3 ? 6 : 4);
     var glob = beh.global;
     if (glob) {
       var trRaises = 0;
